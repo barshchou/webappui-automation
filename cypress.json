@@ -1,5 +1,5 @@
 {
-    "baseUrl":"https://bowery-staging.herokuapp.com",
+    "baseUrl":"https://bowery-staging.herokuapp.com/",
     "chromeWebSecurity":false,
     "viewportWidth": 1920,
     "viewportHeight": 1080
