@@ -12,7 +12,8 @@ class Homepage extends BasePage {
     get reportNumberInput() {return cy.get("*[name='reportNumber']")}
     get createReportButton() {return cy.get("*[data-qa='create-report-btn']").last()}
     get reportNumberSearchField() {return cy.get("*[name='number']")}
-    get archiveButton() {return cy.get("*[data-qa='archive-btn']")}
+    getArchiveButton(reportNumber) {return cy.xpath(`//*[text()='${reportNumber}']//following::*[@data-qa='archive-btn']`).first()}
+    get keyInfoBlock() {return cy.get("*[data-qa='keyInfo']")}
 }
 
 export default new Homepage()

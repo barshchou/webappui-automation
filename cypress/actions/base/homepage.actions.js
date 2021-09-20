@@ -40,6 +40,7 @@ class HomepageActions extends BaseActions {
 
     clickCreateReportButton() {
         homepagePage.createReportButton.should("not.be.disabled").click()
+        homepagePage.keyInfoBlock.should("be.visible")
     }
 
     enterReportNumberToSearch(number) {
@@ -47,9 +48,10 @@ class HomepageActions extends BaseActions {
         .type(number).should("have.value", number)
     }
 
-    clickArchiveButton() {
-        homepagePage.archiveButton.invoke("mouseover").should("be.visible").click()
+    clickArchiveButton(reportNumber) {
+        homepagePage.getArchiveButton(reportNumber).should("be.exist").click({force:true})
     }
+
 }
 
 export default new HomepageActions()

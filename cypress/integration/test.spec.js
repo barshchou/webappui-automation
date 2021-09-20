@@ -15,5 +15,8 @@ describe("Test", () => {
         homepageActions.checkIncomeType(testData.incomeType)
         homepageActions.checkConclusionType(testData.conclusionType)
         homepageActions.clickCreateReportButton()
+        homepageActions.returnToHomePageAndSave()
+        homepageActions.enterReportNumberToSearch(testData.reportNumber)
+        homepageActions.clickArchiveButton(testData.reportNumber)
     })
 })
