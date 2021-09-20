@@ -2,6 +2,22 @@ import homepagePage from "../../pages/base/homepage.page"
 import BaseActions from "./base.actions"
 
 class HomepageActions extends BaseActions {
+
+    createReport(address = "462 1st Avenue, New York, USA", reportNumber = "TestAutoReport",
+    templateType = "freddie-mac", incomeType = "multifamily", conclusionType = "AS_IS") {
+        this.clickNewReportButton()
+        this.enterAddressToSearch(address)
+        this.clickFindPropHeader()
+        this.clickSubmitButton()
+        this.clickToSearchResultRow()
+        this.clickSubmitButton()
+        this.enterReportNumber(reportNumber)
+        this.checkTemplateType(templateType)
+        this.checkIncomeType(incomeType)
+        this.checkConclusionType(conclusionType)
+        this.clickCreateReportButton()
+    }
+
     clickNewReportButton() {
         homepagePage.newReportButton.should("be.enabled").click()
     }
@@ -50,6 +66,11 @@ class HomepageActions extends BaseActions {
 
     clickArchiveButton(reportNumber) {
         homepagePage.getArchiveButton(reportNumber).should("be.exist").click({force:true})
+    }
+
+    deleteReport(reportNumber = "TestAutoReport") {
+        this.enterReportNumberToSearch(reportNumber)
+        this.clickArchiveButton(reportNumber)
     }
 
 }

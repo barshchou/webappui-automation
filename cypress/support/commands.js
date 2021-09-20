@@ -13,3 +13,13 @@ Cypress.Commands.add("loginByApi", () => {
         cy.visit("/")
     })
 })
+
+Cypress.Commands.add("loginByUI", () => {
+    cy.log("Loggin in by UI")
+    cy.visit("/")
+    const username = Cypress.env("USERNAME")
+    const password = Cypress.env("PASSWORD")
+    cy.get("*[name='username']").should("be.visible").type(username).should("have.value", username)
+    cy.get("*[name='password']").should("be.visible").type(password).type("{enter}")
+})
+
