@@ -19,14 +19,6 @@ class InPlaceRentRollActions extends BaseActions {
         rentRollPage.rentRollOptionsField.should("be.visible")
     }
 
-    checkDevelopersForecast(check = true) {
-        if (check) {
-            rentRollPage.developersForecastCheckbox.scrollIntoView().should("be.enabled").check()
-        } else {
-            rentRollPage.developersForecastCheckbox.scrollIntoView().should("be.enabled").uncheck()
-        }
-    }
-
     verifyColumnExist(columnName, check = true) {
         if (check) {
             rentRollPage.getColumnHeader(columnName).should("exist")
@@ -45,18 +37,18 @@ class InPlaceRentRollActions extends BaseActions {
         rentRollPage.getPerUnitSFRadio(value).scrollIntoView().should("be.enabled").click()
     }
 
-    checkBathrooms(check = true) {
+    checkCheckboxByLabel(label, check = true) {
         if (check) {
-            rentRollPage.bathroomsCheckbox.scrollIntoView().should("be.enabled").check().should("be.checked")
+            rentRollPage.getCheckboxByLabel(label).scrollIntoView().should("be.enabled").check().should("be.checked")
         } else {
-            rentRollPage.bathroomsCheckbox.scrollIntoView().should("be.enabled").uncheck().should("not.be.checked")
+            rentRollPage.getCheckboxByLabel(label).scrollIntoView().should("be.enabled").uncheck().should("not.be.checked")
         }
     }
 
-    checkUncheckBathrooms(columnName) {
-        this.checkBathrooms()
+    checkUncheckCheckbox(columnName, label) {
+        this.checkCheckboxByLabel(label)
         this.verifyColumnExist(columnName)
-        this.checkBathrooms(false)
+        this.checkCheckboxByLabel(label, false)
         this.verifyColumnExist(columnName, false)
     }
 
@@ -65,13 +57,6 @@ class InPlaceRentRollActions extends BaseActions {
         this.verifyListColumnExist(columnNames)
         this.checkPerUnitSquareFootage("false")
         this.verifyListColumnExist(columnNames, false)
-    }
-
-    checkAndUncheckDevelopersForecast(columnName) {
-        this.checkDevelopersForecast()
-        this.verifyColumnExist(columnName)
-        this.checkDevelopersForecast(false)
-        this.verifyColumnExist(columnName, false)
     }
 
     isOptionalColumnExist() {
