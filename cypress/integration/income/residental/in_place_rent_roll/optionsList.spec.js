@@ -1,4 +1,4 @@
-const testData = require("../../../../fixtures/test.fixtures.json")
+const testData = require("../../../../fixtures/optionsList.fixtures.json")
 import homepageActions from "../../../../actions/base/homepage.actions"
 import navigationSectionActions from "../../../../actions/base/navigationSection.actions"
 import rentRollActions from "../../../../actions/income/residental/rentRoll.actions"
@@ -20,6 +20,10 @@ describe("In-Place Rent Roll options list tests", () => {
 
     it("ID6", () => {
         rentRollActions.verifyThatRentRollOptionsExist()
+    })
+
+    it("ID7", () => {
+        rentRollActions.checkAndUncheckDevelopersForecast()
     })
 
     after("Delete report", () => {

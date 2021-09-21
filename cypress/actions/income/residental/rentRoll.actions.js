@@ -18,6 +18,29 @@ class InPlaceRentRollActions extends BaseActions {
     verifyThatRentRollOptionsExist() {
         rentRollPage.rentRollOptionsField.should("be.visible")
     }
+
+    checkDevelopersForecast(check = true) {
+        if (check) {
+            rentRollPage.developersForecastCheckbox.check()
+        } else {
+            rentRollPage.developersForecastCheckbox.uncheck()
+        }
+    }
+
+    verifyRentForecastExist(check = true) {
+        if (check) {
+            rentRollPage.rentForecastColumnHeader.should("exist")
+        } else {
+            rentRollPage.rentForecastColumnHeader.should("not.exist")
+        }
+    }
+
+    checkAndUncheckDevelopersForecast() {
+        this.checkDevelopersForecast()
+        this.verifyRentForecastExist()
+        this.checkDevelopersForecast(false)
+        this.verifyRentForecastExist(false)
+    }
 }
 
 export default new InPlaceRentRollActions()
