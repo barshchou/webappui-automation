@@ -60,7 +60,7 @@ class HomepageActions extends BaseActions {
     }
 
     enterReportNumberToSearch(number) {
-        homepagePage.reportNumberSearchField.should("be.enabled").should("be.visible")
+        homepagePage.reportNumberSearchField.scrollIntoView().should("be.visible")
         .type(number).should("have.value", number)
     }
 

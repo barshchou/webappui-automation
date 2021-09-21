@@ -1,5 +1,6 @@
 {
     "numberOFUnits": 0,
     "devForecastTestColumn": "Rent Forecast",
-    "unitSquareTestColumns": ["Square Footage", "Rent PSF"]
+    "unitSquareTestColumns": ["Square Footage", "Rent PSF"],
+    "bathTestColumn": "# Bathrooms"
 }

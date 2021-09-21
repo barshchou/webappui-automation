@@ -30,6 +30,14 @@ describe("In-Place Rent Roll options list tests", () => {
         rentRollActions.checkUncheckPerUnitSquareFootage(testData.unitSquareTestColumns)
     })
 
+    it("ID10", () => {
+        rentRollActions.isOptionalColumnExist()
+    })
+
+    it("ID11", () => {
+        rentRollActions.checkUncheckBathrooms(testData.bathTestColumn)
+    })
+
     after("Delete report", () => {
         summaryActions.clickReturnToHomePageButton()
         homepageActions.deleteReport()

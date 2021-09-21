@@ -45,6 +45,21 @@ class InPlaceRentRollActions extends BaseActions {
         rentRollPage.getPerUnitSFRadio(value).scrollIntoView().should("be.enabled").click()
     }
 
+    checkBathrooms(check = true) {
+        if (check) {
+            rentRollPage.bathroomsCheckbox.scrollIntoView().should("be.enabled").check().should("be.checked")
+        } else {
+            rentRollPage.bathroomsCheckbox.scrollIntoView().should("be.enabled").uncheck().should("not.be.checked")
+        }
+    }
+
+    checkUncheckBathrooms(columnName) {
+        this.checkBathrooms()
+        this.verifyColumnExist(columnName)
+        this.checkBathrooms(false)
+        this.verifyColumnExist(columnName, false)
+    }
+
     checkUncheckPerUnitSquareFootage(columnNames) {
         this.checkPerUnitSquareFootage()
         this.verifyListColumnExist(columnNames)
@@ -57,6 +72,10 @@ class InPlaceRentRollActions extends BaseActions {
         this.verifyColumnExist(columnName)
         this.checkDevelopersForecast(false)
         this.verifyColumnExist(columnName, false)
+    }
+
+    isOptionalColumnExist() {
+        rentRollPage.optionalColumnsElement.should("exist")
     }
 }
 

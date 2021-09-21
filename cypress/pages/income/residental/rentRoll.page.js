@@ -7,6 +7,8 @@ class InPlaceRentRollPage extends BasePage {
     get developersForecastCheckbox() {return cy.get(`*[label="Developer's Forecast"] input`)}
     getColumnHeader(columnName) {return cy.xpath(`//*[text()='${columnName}'][@class='colHeader']`)}
     getPerUnitSFRadio(value) {return cy.get(`*[name='perUnitSF'][value='${value}']`)}
+    get optionalColumnsElement() {return cy.contains("Optional Columns")}
+    get bathroomsCheckbox() {return cy.get("*[label='Bathrooms'] input")}
 }
 
 export default new InPlaceRentRollPage()
