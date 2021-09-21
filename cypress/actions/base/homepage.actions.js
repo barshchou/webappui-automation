@@ -65,7 +65,7 @@ class HomepageActions extends BaseActions {
     }
 
     clickArchiveButton(reportNumber) {
-        homepagePage.getArchiveButton(reportNumber).should("be.exist").click({force:true})
+        homepagePage.getArchiveButton(reportNumber).should("exist").click({force:true})
     }
 
     deleteReport(reportNumber = "TestAutoReport") {

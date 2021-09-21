@@ -21,25 +21,42 @@ class InPlaceRentRollActions extends BaseActions {
 
     checkDevelopersForecast(check = true) {
         if (check) {
-            rentRollPage.developersForecastCheckbox.check()
+            rentRollPage.developersForecastCheckbox.scrollIntoView().should("be.enabled").check()
         } else {
-            rentRollPage.developersForecastCheckbox.uncheck()
+            rentRollPage.developersForecastCheckbox.scrollIntoView().should("be.enabled").uncheck()
         }
     }
 
-    verifyRentForecastExist(check = true) {
+    verifyColumnExist(columnName, check = true) {
         if (check) {
-            rentRollPage.rentForecastColumnHeader.should("exist")
+            rentRollPage.getColumnHeader(columnName).should("exist")
         } else {
-            rentRollPage.rentForecastColumnHeader.should("not.exist")
+            rentRollPage.getColumnHeader(columnName).should("not.exist")
         }
     }
 
-    checkAndUncheckDevelopersForecast() {
+    verifyListColumnExist(columnNames, check = true) {
+        for (let i = 0; i < columnNames.length; i++) {
+            this.verifyColumnExist(columnNames[i], check)
+        }
+    }
+
+    checkPerUnitSquareFootage(value = "true") {
+        rentRollPage.getPerUnitSFRadio(value).scrollIntoView().should("be.enabled").click()
+    }
+
+    checkUncheckPerUnitSquareFootage(columnNames) {
+        this.checkPerUnitSquareFootage()
+        this.verifyListColumnExist(columnNames)
+        this.checkPerUnitSquareFootage("false")
+        this.verifyListColumnExist(columnNames, false)
+    }
+
+    checkAndUncheckDevelopersForecast(columnName) {
         this.checkDevelopersForecast()
-        this.verifyRentForecastExist()
+        this.verifyColumnExist(columnName)
         this.checkDevelopersForecast(false)
-        this.verifyRentForecastExist(false)
+        this.verifyColumnExist(columnName, false)
     }
 }
 

@@ -5,7 +5,8 @@ class InPlaceRentRollPage extends BasePage {
     get goToPropSummaryButton() {return cy.get("*[title='Go To Property Summary'] > [href$='/property-summary']")}
     get rentRollOptionsField() {return cy.contains("Rent Roll Options")}
     get developersForecastCheckbox() {return cy.get(`*[label="Developer's Forecast"] input`)}
-    get rentForecastColumnHeader() {return cy.xpath("//*[text()='Rent Forecast'][@class='colHeader']").first()}
+    getColumnHeader(columnName) {return cy.xpath(`//*[text()='${columnName}'][@class='colHeader']`)}
+    getPerUnitSFRadio(value) {return cy.get(`*[name='perUnitSF'][value='${value}']`)}
 }
 
 export default new InPlaceRentRollPage()

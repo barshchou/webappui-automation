@@ -23,7 +23,11 @@ describe("In-Place Rent Roll options list tests", () => {
     })
 
     it("ID7", () => {
-        rentRollActions.checkAndUncheckDevelopersForecast()
+        rentRollActions.checkAndUncheckDevelopersForecast(testData.devForecastTestColumn)
+    })
+
+    it("ID9", () => {
+        rentRollActions.checkUncheckPerUnitSquareFootage(testData.unitSquareTestColumns)
     })
 
     after("Delete report", () => {
