@@ -23,7 +23,6 @@ describe("In-Place Rent Roll options list tests", () => {
     })
 
     it("ID7", () => {
-        // rentRollActions.checkAndUncheckDevelopersForecast(testData.devForecastTestColumn)
         rentRollActions.checkUncheckCheckbox(testData.devForecastTestColumn, testData.forecastLabel)
     })
 
@@ -36,7 +35,6 @@ describe("In-Place Rent Roll options list tests", () => {
     })
 
     it("ID11", () => {
-        // rentRollActions.checkUncheckBathrooms(testData.bathTestColumn)
         rentRollActions.checkUncheckCheckbox(testData.bathTestColumn, testData.bathLabel)
     })
 
