@@ -6,7 +6,7 @@ import summaryActions from "../../../../actions/property/summary.actions"
 
 describe("In-Place Rent Roll options list tests", () => {
     before("Create report and open In-Pace Rent Roll", () => {
-        cy.loginByUI()
+        cy.loginByApi()
         homepageActions.createReport()
         navigationSectionActions.navigateToInPlaceRentRoll()
     })
@@ -16,6 +16,10 @@ describe("In-Place Rent Roll options list tests", () => {
         rentRollActions.goToPropSummaryWithSave()
         summaryActions.verifyThatPageIsOpened()
         summaryActions.goBackWithSave()
+    })
+
+    it("ID6", () => {
+        rentRollActions.verifyThatRentRollOptionsExist()
     })
 
     after("Delete report", () => {

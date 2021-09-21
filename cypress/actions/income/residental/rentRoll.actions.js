@@ -14,6 +14,10 @@ class InPlaceRentRollActions extends BaseActions {
         this.clickGoToPropSummaryButton()
         this.clickYesButton()
     }
+
+    verifyThatRentRollOptionsExist() {
+        rentRollPage.rentRollOptionsField.should("be.visible")
+    }
 }
 
 export default new InPlaceRentRollActions()
