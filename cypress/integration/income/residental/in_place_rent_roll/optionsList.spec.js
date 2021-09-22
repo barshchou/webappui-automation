@@ -11,31 +11,39 @@ describe("In-Place Rent Roll options list tests", () => {
         navigationSectionActions.navigateToInPlaceRentRoll()
     })
 
-    it("ID5", () => {
+    it("ID5: number of residental units and go to property summary", () => {
         rentRollActions.verifyNumberOFResidentalUnits(testData.numberOFUnits)
         rentRollActions.goToPropSummaryWithSave()
         summaryActions.verifyThatPageIsOpened()
         summaryActions.goBackWithSave()
     })
 
-    it("ID6", () => {
+    it("ID6: Static text: Rent Roll Options", () => {
         rentRollActions.verifyThatRentRollOptionsExist()
     })
 
-    it("ID7", () => {
+    it("ID7: Developer's Forecast checkbox", () => {
         rentRollActions.checkUncheckCheckbox(testData.devForecastTestColumn, testData.forecastLabel)
     })
 
-    it("ID9", () => {
+    it("ID9: Do you know per unit square footage? radio button", () => {
         rentRollActions.checkUncheckPerUnitSquareFootage(testData.unitSquareTestColumns)
     })
 
-    it("ID10", () => {
+    it("ID10: Text: Optional Columns", () => {
         rentRollActions.isOptionalColumnExist()
     })
 
-    it("ID11", () => {
+    it("ID11: Bathrooms checkbox", () => {
         rentRollActions.checkUncheckCheckbox(testData.bathTestColumn, testData.bathLabel)
+    })
+
+    it("ID12: Outdoor Space checkbox", () => {
+        rentRollActions.checkUncheckCheckbox(testData.outdoorLabelAndColumn, testData.outdoorLabelAndColumn)
+    })
+
+    it("ID13: Unit Type checkbox", () => {
+        rentRollActions.checkUncheckCheckbox(testData.unitLabelColumn, testData.unitLabelColumn)
     })
 
     after("Delete report", () => {

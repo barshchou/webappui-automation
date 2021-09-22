@@ -4,5 +4,7 @@
     "forecastLabel": "Developer's Forecast",
     "unitSquareTestColumns": ["Square Footage", "Rent PSF"],
     "bathTestColumn": "# Bathrooms",
-    "bathLabel": "Bathrooms"
+    "bathLabel": "Bathrooms",
+    "outdoorLabelAndColumn": "Outdoor Space",
+    "unitLabelColumn": "Unit Type"
 }
