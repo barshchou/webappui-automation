@@ -2,6 +2,15 @@ import rentRollPage from "../../../pages/income/residental/rentRoll.page";
 import BaseActions from "../../base/base.actions"
 
 class InPlaceRentRollActions extends BaseActions {
+    verifyViaCSVExist() {
+        rentRollPage.importViaCSVHeader.scrollIntoView().should("be.visible")
+    }
+
+    verifyUploadCSVRow(linkToCSV) {
+        rentRollPage.skipManualRentEntryRow.scrollIntoView().should("be.visible")
+        rentRollPage.uploadCSVLink.should("be.visible").should("have.attr", "href", linkToCSV)
+    }
+
     verifyNumberOFResidentalUnits(unitsNumber) {
         rentRollPage.numberOfResidentalUnitsField.should("be.disabled").should("have.value", unitsNumber)
     }

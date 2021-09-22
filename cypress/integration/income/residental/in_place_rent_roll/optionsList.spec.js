@@ -11,6 +11,14 @@ describe("In-Place Rent Roll options list tests", () => {
         navigationSectionActions.navigateToInPlaceRentRoll()
     })
 
+    it("ID1: Form: Import Rent Roll via CSV", () => {
+        rentRollActions.verifyViaCSVExist()
+    })
+
+    it("ID2: Text: 'Skip manual rent roll entry. Upload a CSV file.'", () => {
+        rentRollActions.verifyUploadCSVRow(testData.csvLinkToBe)
+    })
+
     it("ID5: number of residental units and go to property summary", () => {
         rentRollActions.verifyNumberOFResidentalUnits(testData.numberOFUnits)
         rentRollActions.goToPropSummaryWithSave()
