@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "cy:open": "npx cypress open",
-    "cy:chrome_headed": "npx cypress run --browser chrome --headed"
+    "cy:chrome_headed": "npx cypress run --browser chrome --headed",
+    "cy:record_run": "npx cypress run --record --key af194831-c708-498f-b4c1-376e72ecb5c3"
   },
   "repository": {
     "type": "git",
