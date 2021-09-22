@@ -47,7 +47,7 @@ describe("In-Place Rent Roll options list tests", () => {
     })
 
     after("Delete report", () => {
-        summaryActions.clickReturnToHomePageButton()
+        rentRollActions.clickReturnToHomePageButton()
         homepageActions.deleteReport()
     })
 })
