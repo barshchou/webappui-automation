@@ -19,7 +19,7 @@ describe("In-Place Rent Roll options list tests", () => {
         rentRollActions.verifyUploadCSVRow(testData.csvLinkToBe)
     })
 
-    it("ID5: number of residental units and go to property summary", () => {
+    it("ID4 and ID5: number of residental units and go to property summary", () => {
         rentRollActions.verifyNumberOFResidentalUnits(testData.numberOFUnits)
         rentRollActions.goToPropSummaryWithSave()
         summaryActions.verifyThatPageIsOpened()

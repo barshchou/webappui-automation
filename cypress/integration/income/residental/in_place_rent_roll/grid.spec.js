@@ -10,7 +10,12 @@ describe("In-Place Rent Roll grid tests", () => {
         navigationSection.navigateToInPlaceRentRoll()
     })
 
-    it("ID19: GRID", () => {
+    it("ID17 and ID18: GRID and #col.", () => {
+        rentRollActions.verifyColumnExist(testData.sharpColumn)
+    })
+
+    it(`ID19: GRID: Inspected col. (checkbox) - copied in the Stabilized Rent Roll grid, 
+    Final->Unit Inspection section, 'Inspected Units Summary' table in the report`, () => {
         
     })
 
