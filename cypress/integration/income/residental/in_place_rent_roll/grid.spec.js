@@ -14,11 +14,6 @@ describe("In-Place Rent Roll grid tests", () => {
         rentRollActions.verifyColumnExist(testData.sharpColumn)
     })
 
-    it(`ID19: GRID: Inspected col. (checkbox) - copied in the Stabilized Rent Roll grid, 
-    Final->Unit Inspection section, 'Inspected Units Summary' table in the report`, () => {
-        
-    })
-
 
     after("Delete report", () => {
         rentRollActions.returnToHomePageAndSave()

@@ -5,6 +5,10 @@ class SummaryActions extends BaseActions {
     verifyThatPageIsOpened() {
         summaryPage.headerSection.should("be.visible")
     }
+
+    enterNumberOfUnits(number) {
+        summaryPage.numberOfUnitsInput.clear().type(number).should("have.value", number)
+    }
 }
 
 export default new SummaryActions()
