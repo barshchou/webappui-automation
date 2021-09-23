@@ -1,4 +1,6 @@
-Cypress.Commands.add("loginByApi", () => {
+import 'cypress-file-upload';
+
+Cypress.Commands.add("loginByApi", (url = "/") => {
     cy.log("Loggin in by api")
     cy.request({
         method: "POST",
@@ -10,7 +12,7 @@ Cypress.Commands.add("loginByApi", () => {
     }).then((response) => {
         const token = response.body.token
         window.localStorage.setItem("jwToken", token)
-        cy.visit("/")
+        cy.visit(url)
     })
 })
 

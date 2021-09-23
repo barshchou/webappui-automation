@@ -71,6 +71,13 @@ class InPlaceRentRollActions extends BaseActions {
     isOptionalColumnExist() {
         rentRollPage.optionalColumnsElement.should("exist")
     }
+
+    uploadFile(fileName, unitsToBe) {
+        rentRollPage.uploadFileButton.should("be.visible")
+        rentRollPage.uploadFileInput.should("exist").attachFile(fileName)
+        rentRollPage.importDataButton.should("exist").should("be.enabled").click()
+        this.verifyNumberOFResidentalUnits(unitsToBe)
+    }
 }
 
 export default new InPlaceRentRollActions()

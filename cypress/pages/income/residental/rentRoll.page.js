@@ -11,6 +11,9 @@ class InPlaceRentRollPage extends BasePage {
     get importViaCSVHeader() {return cy.xpath("//p[text()='Import Rent Roll via CSV']")}
     get skipManualRentEntryRow() {return cy.xpath("//p[text()='Skip manual rent roll entry.']")}
     get uploadCSVLink() {return cy.xpath("//a[text()='Upload a CSV file.']")}
+    get uploadFileButton() {return cy.xpath("//*[@placeholder='Choose a File']//following::*[@role='presentation']")}
+    get uploadFileInput() {return cy.get("*[data-qa='file-input']")}
+    get importDataButton() {return cy.get("*[data-qa='import-data-btn']")}
 }
 
 export default new InPlaceRentRollPage()

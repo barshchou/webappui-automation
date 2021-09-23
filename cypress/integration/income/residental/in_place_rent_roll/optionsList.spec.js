@@ -19,6 +19,19 @@ describe("In-Place Rent Roll options list tests", () => {
         rentRollActions.verifyUploadCSVRow(testData.csvLinkToBe)
     })
 
+    it("ID3: Import manager ('Import Data' button is displayed when .csv file is selected)", () => {
+        rentRollActions.verifyNumberOFResidentalUnits(testData.numberOFUnits)
+        rentRollActions.uploadFile(testData.csvFileName, testData.csvNumberOfUnits)
+        rentRollActions.reloadWithLogin()
+        rentRollActions.uploadFile(testData.xlsxFileName, testData.numberOFUnits)
+        rentRollActions.goToPropSummaryWithSave()
+        summaryActions.verifyThatPageIsOpened()
+        summaryActions.enterNumberOfUnits(testData.numberOfUnitsToChange)
+        summaryActions.goBackWithSave()
+        rentRollActions.uploadFile(testData.csvFileName, testData.csvNumberOfUnits)
+        rentRollActions.reloadWithLogin()
+    })
+
     it("ID4 and ID5: number of residental units and go to property summary", () => {
         rentRollActions.verifyNumberOFResidentalUnits(testData.numberOFUnits)
         rentRollActions.goToPropSummaryWithSave()
