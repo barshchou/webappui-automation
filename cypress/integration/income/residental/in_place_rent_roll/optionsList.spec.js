@@ -30,6 +30,10 @@ describe("In-Place Rent Roll options list tests", () => {
         summaryActions.goBackWithSave()
         rentRollActions.uploadFile(testData.csvFileName, testData.csvNumberOfUnits)
         rentRollActions.reloadWithLogin()
+        rentRollActions.fillRentTypeCells(testData.rentType)
+        rentRollActions.goToPropSummaryWithSave()
+        summaryActions.verifyThatPageIsOpened()
+        summaryActions.enterNumberOfUnits(testData.numberOFUnits)
     })
 
     it("ID4 and ID5: number of residental units and go to property summary", () => {

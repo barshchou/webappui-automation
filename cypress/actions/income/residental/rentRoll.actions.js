@@ -78,6 +78,19 @@ class InPlaceRentRollActions extends BaseActions {
         rentRollPage.importDataButton.should("exist").should("be.enabled").click()
         this.verifyNumberOFResidentalUnits(unitsToBe)
     }
+
+    fillRentTypeCells(value) {
+        rentRollPage.rentTypeCellsWithoutAddColumns.first().click()
+        rentRollPage.rentTypeCellsWithoutAddColumns.each($el => {
+            cy.wrap($el).should("have.class", "highlight").dblclick()
+            rentRollPage.textAreaToInput.type("{del}").type(value).type("{enter}")
+            if (!(($el.text()).includes(value))) {
+                cy.wrap($el).dblclick()
+                rentRollPage.textAreaToInput.type("{del}").type(value).type("{enter}")
+            }
+            cy.wrap($el).should("contain.text", value)
+        })
+    }
 }
 
 export default new InPlaceRentRollActions()
