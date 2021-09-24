@@ -1,0 +1,34 @@
+Unit Number,# Rooms,# Bedrooms,# Bathrooms,Square Footage,Outdoor Space,Rent Type,Monthly Rent ($),Rent/Room,Vacant?,Rent PSF?
+"This can be anything. E.g. GW1, GE1, etc.",Don't edit me. I'm a formula.,Make me a whole integer please! e.g. not 2.5,Make me a whole integer please! e.g. not 2.5,Enter a number great than zero please.,"Must be filled as follows:
+Backyard
+Balcony
+Roof
+Terrace","Must be filled as follows:
+Free Market
+Rent Stabilized
+Rent Controlled
+Section 8
+Employee",Make Sure the Rents have no dollar signs and no commas,Don't edit me. I'm a formula.,Yes or No.,Don't edit me. I'm a formula.
+1,4,2,1,738,None,Free Market,1968.00,492.00,Yes,2.67
+1,3,1,1,510,None,Free Market,1360.00,453.33,Yes,2.67
+2,2,0,1,309,None,Free Market,824.00,412.00,Yes,2.67
+2B,2,0,1,282,None,Free Market,752.00,376.00,Yes,2.67
+2C,3,1,1,483,None,Free Market,1288.00,429.33,Yes,2.67
+2D,3,1,1,455,None,Free Market,1213.00,404.33,Yes,2.67
+2E,4,2,1,692,None,Free Market,1845.00,461.25,Yes,2.67
+2F,4,2,1,678,None,Free Market,1808.00,452.00,Yes,2.67
+3A,2,0,1,309,None,Free Market,824.00,412.00,Yes,2.67
+3B,2,0,1,282,None,Free Market,752.00,376.00,Yes,2.67
+3C,3,1,1,483,None,Free Market,1288.00,429.33,Yes,2.67
+3D,3,1,1,455,None,Free Market,1213.00,404.33,Yes,2.67
+3E,4,2,1,692,None,Free Market,1845.00,461.25,Yes,2.67
+3F,4,2,1,678,None,Free Market,1808.00,452.00,Yes,2.67
+4A,2,0,1,309,None,Free Market,824.00,412.00,Yes,2.67
+4B,2,0,1,282,None,Free Market,752.00,376.00,Yes,2.67
+4C,3,1,1,483,None,Free Market,1288.00,429.33,Yes,2.67
+4D,4,2,1,708,None,Free Market,1888.00,472.00,Yes,2.67
+4E,4,2,1,678,None,Free Market,1808.00,452.00,Yes,2.67
+4F,5,3,1,1087,None,Free Market,2899.00,579.80,Yes,2.67
+5A,2,0,1,340,None,Free Market,907.00,453.50,Yes,2.67
+5B,2,0,1,340,None,Free Market,907.00,453.50,Yes,2.67
+5C,2,0,1,369,None,Free Market,984.00,492.00,Yes,2.67

@@ -1,5 +1,6 @@
 {
     "numberOFUnits": 0,
+    "numberOfUnitsToChange": 1,
     "csvLinkToBe": "https://docs.google.com/spreadsheets/d/1AqdrQtMkJaiZKiaY0S0U-741_QCXeqesHRujlpLTRtA/edit#gid=707609080",
     "devForecastTestColumn": "Rent Forecast",
     "forecastLabel": "Developer's Forecast",
@@ -7,5 +8,9 @@
     "bathTestColumn": "# Bathrooms",
     "bathLabel": "Bathrooms",
     "outdoorLabelAndColumn": "Outdoor Space",
-    "unitLabelColumn": "Unit Type"
+    "unitLabelColumn": "Unit Type",
+    "csvFileName": "Rent_Roll_CSV.csv",
+    "csvNumberOfUnits": 23,
+    "xlsxFileName": "Rent_Roll_XLSX.xlsx",
+    "rentType": "Market Rate"
 }

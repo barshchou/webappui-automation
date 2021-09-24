@@ -21,4 +21,16 @@ export default class BaseActions {
         cy.go('back')
         this.clickYesButton()
     }
+
+    reloadWithLogin(isForDelete = false) {
+        cy.url().then(url => {
+            cy.reload()
+            if (isForDelete) {
+                cy.loginByApi()
+            } else {
+                cy.loginByApi(url)
+                cy.get("*[href='/reports']").should("be.visible")
+            }
+        })
+    }
 }
