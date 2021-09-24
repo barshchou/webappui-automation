@@ -34,6 +34,7 @@ describe("In-Place Rent Roll options list tests", () => {
         rentRollActions.goToPropSummaryWithSave()
         summaryActions.verifyThatPageIsOpened()
         summaryActions.enterNumberOfUnits(testData.numberOFUnits)
+        summaryActions.goBackWithSave()
     })
 
     it("ID4 and ID5: number of residental units and go to property summary", () => {
