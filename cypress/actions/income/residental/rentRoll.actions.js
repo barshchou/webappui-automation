@@ -19,9 +19,19 @@ class InPlaceRentRollActions extends BaseActions {
         rentRollPage.goToPropSummaryButton.should("be.visible").click()
     }
 
-    goToPropSummaryWithSave() {
+    goToPropSummaryWithSaveLeavingFirst() {
         this.clickGoToPropSummaryButton()
         this.clickYesButton()
+    }
+
+    goToPropSummaryWithSaveSaveClickFirst() {
+        this.clickSaveButton()
+        this.clickGoToPropSummaryButton()
+    }
+
+    goToPropSummaryWithoutSave() {
+        this.clickGoToPropSummaryButton()
+        this.clickNoButton()
     }
 
     verifyThatRentRollOptionsExist() {
@@ -51,6 +61,14 @@ class InPlaceRentRollActions extends BaseActions {
             rentRollPage.getCheckboxByLabel(label).scrollIntoView().should("be.enabled").check().should("be.checked")
         } else {
             rentRollPage.getCheckboxByLabel(label).scrollIntoView().should("be.enabled").uncheck().should("not.be.checked")
+        }
+    }
+
+    verifyCheckboxByLabelIsCheckedOrNot(label, check = true) {
+        if (check) {
+            rentRollPage.getCheckboxByLabel(label).should("be.checked")
+        } else {
+            rentRollPage.getCheckboxByLabel(label).should("not.be.checked")
         }
     }
 

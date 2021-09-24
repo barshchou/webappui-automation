@@ -22,6 +22,28 @@ export default class BaseActions {
         this.clickYesButton()
     }
 
+    goBackWithouSave() {
+        cy.go('back')
+        this.clickNoButton()
+    }
+
+    clickSaveButton() {
+        cy.get("*[data-qa='form-save-btn']").should("be.visible").click()
+        this.interceptSave()
+    }
+
+    interceptSave() {
+        cy.intercept({
+            method: "PATCH",
+            url: "/report/**"
+        }).as("saveChanges")
+        cy.wait("@saveChanges", {timeout: 10000})
+    }
+
+    clickSaveContinueButton() {
+        cy.get("*[data-qa='form-submit-btn']").should("be.enabled").click()
+    }
+
     reloadWithLogin(isForDelete = false) {
         cy.url().then(url => {
             cy.reload()
