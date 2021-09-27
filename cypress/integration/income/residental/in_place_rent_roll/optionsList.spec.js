@@ -52,6 +52,11 @@ describe("In-Place Rent Roll options list tests", () => {
         rentRollActions.checkUncheckCheckbox(testData.devForecastTestColumn, testData.forecastLabel);
     });
 
+    it("ID8: Summarize current rent roll checkbox", () => {
+       rentRollActions.checkCheckboxByLabel(testData.summarizeLabel);
+       rentRollActions.checkCheckboxByLabel(testData.summarizeLabel, false);
+    });
+
     it("ID9: Do you know per unit square footage? radio button", () => {
         rentRollActions.checkUncheckPerUnitSquareFootage(testData.unitSquareTestColumns);
     });

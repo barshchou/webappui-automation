@@ -12,5 +12,6 @@
     "csvFileName": "Rent_Roll_CSV.csv",
     "csvNumberOfUnits": 23,
     "xlsxFileName": "Rent_Roll_XLSX.xlsx",
-    "rentType": "Market Rate"
+    "rentType": "Market Rate",
+    "summarizeLabel": "Summarize current rent roll"
 }
