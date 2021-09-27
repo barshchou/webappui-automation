@@ -15,6 +15,10 @@ class InPlaceRentRollActions extends BaseActions {
         rentRollPage.numberOfResidentalUnitsField.should("be.disabled").should("have.value", unitsNumber);
     }
 
+    verifyNumberOfIsInspectedRows(unitsNumber) {
+        rentRollPage.isInspectedColumnCells.should("have.length", unitsNumber);
+    }
+
     clickGoToPropSummaryButton() {
         rentRollPage.goToPropSummaryButton.should("be.visible").click();
     }
@@ -97,6 +101,7 @@ class InPlaceRentRollActions extends BaseActions {
         rentRollPage.uploadFileInput.should("exist").attachFile(fileName);
         rentRollPage.importDataButton.should("exist").should("be.enabled").click();
         this.verifyNumberOFResidentalUnits(unitsToBe);
+        this.verifyNumberOfIsInspectedRows(unitsToBe);
     }
 
     fillRentTypeCells(value) {

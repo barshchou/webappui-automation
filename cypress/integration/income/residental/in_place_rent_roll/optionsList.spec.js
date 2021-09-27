@@ -11,6 +11,10 @@ describe("In-Place Rent Roll options list tests", () => {
         navigationSectionActions.navigateToInPlaceRentRoll();
     });
 
+    beforeEach(() => {
+        cy.restoreLocalStorage();
+    });
+
     it("ID1: Form: Import Rent Roll via CSV", () => {
         rentRollActions.verifyViaCSVExist();
     });
@@ -75,6 +79,10 @@ describe("In-Place Rent Roll options list tests", () => {
 
     it("ID13: Unit Type checkbox", () => {
         rentRollActions.checkUncheckCheckbox(testData.unitLabelColumn, testData.unitLabelColumn);
+    });
+
+    afterEach(() => {
+        cy.saveLocalStorage();
     });
 
     after("Delete report", () => {

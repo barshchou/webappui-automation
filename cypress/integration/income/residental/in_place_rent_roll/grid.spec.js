@@ -12,11 +12,15 @@ describe("In-Place Rent Roll grid tests", () => {
         navigationSection.navigateToInPlaceRentRoll();
     });
 
+    beforeEach(() => {
+        cy.restoreLocalStorage();
+    });
+
     it("ID17 and ID18: GRID and #col.", () => {
         rentRollActions.verifyColumnExist(testData.sharpColumn);
     });
 
-    it.skip(`ID36: Save button, Navigate to other page without saving / with saving the page on the ‘You have unsaved changes.
+    it(`ID36: Save button, Navigate to other page without saving / with saving the page on the ‘You have unsaved changes.
     Would you like to save before continuing?’ modal window`, () => {
         rentRollActions.checkCheckboxByLabel(testData.forecastLabel);
         rentRollActions.goToPropSummaryWithSaveSaveClickFirst();
@@ -31,7 +35,7 @@ describe("In-Place Rent Roll grid tests", () => {
         rentRollActions.checkCheckboxByLabel(testData.forecastLabel, false);
     });
 
-    it.skip("ID37: Save & Continue button", () => {
+    it("ID37: Save & Continue button", () => {
         rentRollActions.checkCheckboxByLabel(testData.forecastLabel);
         rentRollActions.clickSaveContinueButton();
         unitGroupsActions.verifyThatPageIsOpened();
@@ -43,5 +47,9 @@ describe("In-Place Rent Roll grid tests", () => {
     after("Delete report", () => {
         rentRollActions.returnToHomePageAndSave();
         homepageActions.deleteReport();
+    });
+
+    afterEach(() => {
+        cy.saveLocalStorage();
     });
 });

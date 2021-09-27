@@ -69,9 +69,6 @@ class HomepageActions extends BaseActions {
     }
 
     deleteReport(reportNumber = "TestAutoReport") {
-        // cy.reload()
-        // cy.loginByApi()
-        this.reloadWithLogin(true);
         this.enterReportNumberToSearch(reportNumber);
         this.clickArchiveButton(reportNumber);
     }

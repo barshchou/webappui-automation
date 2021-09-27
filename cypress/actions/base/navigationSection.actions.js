@@ -14,10 +14,21 @@ class NavigationSectionActions extends BaseActions {
         navigationSectionPage.inPlaceRentRollButton.click();
     }
 
+    clickRentCompsButton() {
+        navigationSectionPage.rentCompsButton.click();
+    }
+
     navigateToInPlaceRentRoll() {
         this.clickIncomeApproachButton();
         this.clickResidentalIncomeArrow();
         this.clickInPlaceRentRollButton();
+        this.clickYesButton();
+    }
+
+    navigateToRentComps() {
+        this.clickIncomeApproachButton();
+        this.clickResidentalIncomeArrow();
+        this.clickRentCompsButton();
         this.clickYesButton();
     }
 }

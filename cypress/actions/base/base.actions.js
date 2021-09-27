@@ -29,30 +29,15 @@ export default class BaseActions {
 
     clickSaveButton() {
         cy.get("*[data-qa='form-save-btn']").should("be.visible").click();
-        this.interceptSave();
-    }
-
-    interceptSave() {
-        cy.intercept({
-            method: "PATCH",
-            url: "/report/**"
-        }).as("saveChanges");
-        cy.wait("@saveChanges", {timeout: 10000});
     }
 
     clickSaveContinueButton() {
         cy.get("*[data-qa='form-submit-btn']").should("be.enabled").click();
     }
 
-    reloadWithLogin(isForDelete = false) {
-        cy.url().then(url => {
-            cy.reload();
-            if (isForDelete) {
-                cy.loginByApi();
-            } else {
-                cy.loginByApi(url);
-                cy.get("*[href='/reports']").should("be.visible");
-            }
-        });
+    reloadWithLogin() {
+        cy.saveLocalStorage();
+        cy.reload();
+        cy.restoreLocalStorage();
     }
 }
