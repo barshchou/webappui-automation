@@ -16,9 +16,8 @@ describe("In-Place Rent Roll grid tests", () => {
         rentRollActions.verifyColumnExist(testData.sharpColumn);
     });
 
-    it(`ID36: Save button, Navigate to other page without saving / with saving the page on the ‘You have unsaved changes.
+    it.skip(`ID36: Save button, Navigate to other page without saving / with saving the page on the ‘You have unsaved changes.
     Would you like to save before continuing?’ modal window`, () => {
-        cy.wait(10000);
         rentRollActions.checkCheckboxByLabel(testData.forecastLabel);
         rentRollActions.goToPropSummaryWithSaveSaveClickFirst();
         summaryActions.verifyThatPageIsOpened();
@@ -32,7 +31,7 @@ describe("In-Place Rent Roll grid tests", () => {
         rentRollActions.checkCheckboxByLabel(testData.forecastLabel, false);
     });
 
-    it("ID37", () => {
+    it.skip("ID37", () => {
         rentRollActions.checkCheckboxByLabel(testData.forecastLabel);
         rentRollActions.clickSaveContinueButton();
         unitGroupsActions.verifyThatPageIsOpened();
