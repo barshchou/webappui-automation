@@ -1,4 +1,5 @@
 {
     "sharpColumn": "#",
-    "numberOfUnits": 1
+    "numberOfUnits": 1,
+    "forecastLabel": "Developer's Forecast"
 }

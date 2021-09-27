@@ -3,23 +3,23 @@ import BaseActions from "./base.actions";
 
 class NavigationSectionActions extends BaseActions {
     clickIncomeApproachButton() {
-        navigationSectionPage.incomeApproachButton.click()
+        navigationSectionPage.incomeApproachButton.click();
     }
 
     clickResidentalIncomeArrow() {
-        navigationSectionPage.residentalIncomeArrow.click()
+        navigationSectionPage.residentalIncomeArrow.click();
     }
 
     clickInPlaceRentRollButton() {
-        navigationSectionPage.inPlaceRentRollButton.click()
+        navigationSectionPage.inPlaceRentRollButton.click();
     }
 
     navigateToInPlaceRentRoll() {
-        this.clickIncomeApproachButton()
-        this.clickResidentalIncomeArrow()
-        this.clickInPlaceRentRollButton()
-        this.clickYesButton()
+        this.clickIncomeApproachButton();
+        this.clickResidentalIncomeArrow();
+        this.clickInPlaceRentRollButton();
+        this.clickYesButton();
     }
 }
 
-export default new NavigationSectionActions()
+export default new NavigationSectionActions();

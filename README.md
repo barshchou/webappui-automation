@@ -6,7 +6,7 @@
 
 Use node 14.16.1. Install it via nvm (macOS/Linux - https://github.com/nvm-sh/nvm ; Windows -  https://github.com/coreybutler/nvm-windows). IF YOU DONT HAVE NVM BUT HAVE NODE ALREADY INSTALLED - DELETE IT.  
 
-After clonning the repo -  **npm install**. 
+After cloning the repo -  **npm install**. 
 
 ## Getting Started <a name = "getting_started"></a>
 

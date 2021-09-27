@@ -1,96 +1,116 @@
 import rentRollPage from "../../../pages/income/residental/rentRoll.page";
-import BaseActions from "../../base/base.actions"
+import BaseActions from "../../base/base.actions";
 
 class InPlaceRentRollActions extends BaseActions {
     verifyViaCSVExist() {
-        rentRollPage.importViaCSVHeader.scrollIntoView().should("be.visible")
+        rentRollPage.importViaCSVHeader.scrollIntoView().should("be.visible");
     }
 
     verifyUploadCSVRow(linkToCSV) {
-        rentRollPage.skipManualRentEntryRow.scrollIntoView().should("be.visible")
-        rentRollPage.uploadCSVLink.should("be.visible").should("have.attr", "href", linkToCSV)
+        rentRollPage.skipManualRentEntryRow.scrollIntoView().should("be.visible");
+        rentRollPage.uploadCSVLink.should("be.visible").should("have.attr", "href", linkToCSV);
     }
 
     verifyNumberOFResidentalUnits(unitsNumber) {
-        rentRollPage.numberOfResidentalUnitsField.should("be.disabled").should("have.value", unitsNumber)
+        rentRollPage.numberOfResidentalUnitsField.should("be.disabled").should("have.value", unitsNumber);
     }
 
     clickGoToPropSummaryButton() {
-        rentRollPage.goToPropSummaryButton.should("be.visible").click()
+        rentRollPage.goToPropSummaryButton.should("be.visible").click();
     }
 
-    goToPropSummaryWithSave() {
-        this.clickGoToPropSummaryButton()
-        this.clickYesButton()
+    goToPropSummaryWithSaveLeavingFirst() {
+        this.clickGoToPropSummaryButton();
+        this.clickYesButton();
+    }
+
+    goToPropSummaryWithSaveSaveClickFirst() {
+        this.clickSaveButton();
+        this.clickGoToPropSummaryButton();
+    }
+
+    goToPropSummaryWithoutSave() {
+        this.clickGoToPropSummaryButton();
+        this.clickNoButton();
     }
 
     verifyThatRentRollOptionsExist() {
-        rentRollPage.rentRollOptionsField.should("be.visible")
+        rentRollPage.rentRollOptionsField.should("be.visible");
     }
 
     verifyColumnExist(columnName, check = true) {
         if (check) {
-            rentRollPage.getColumnHeader(columnName).should("exist")
+            rentRollPage.getColumnHeader(columnName).should("exist");
         } else {
-            rentRollPage.getColumnHeader(columnName).should("not.exist")
+            rentRollPage.getColumnHeader(columnName).should("not.exist");
         }
     }
 
     verifyListColumnExist(columnNames, check = true) {
         for (let i = 0; i < columnNames.length; i++) {
-            this.verifyColumnExist(columnNames[i], check)
+            this.verifyColumnExist(columnNames[i], check);
         }
     }
 
     checkPerUnitSquareFootage(value = "true") {
-        rentRollPage.getPerUnitSFRadio(value).scrollIntoView().should("be.enabled").click()
+        rentRollPage.getPerUnitSFRadio(value).scrollIntoView().should("be.enabled").click();
     }
 
     checkCheckboxByLabel(label, check = true) {
         if (check) {
-            rentRollPage.getCheckboxByLabel(label).scrollIntoView().should("be.enabled").check().should("be.checked")
+            rentRollPage.getCheckboxByLabel(label).scrollIntoView().should("be.enabled")
+                .check().should("be.checked");
         } else {
-            rentRollPage.getCheckboxByLabel(label).scrollIntoView().should("be.enabled").uncheck().should("not.be.checked")
+            rentRollPage.getCheckboxByLabel(label).scrollIntoView().should("be.enabled")
+                .uncheck().should("not.be.checked");
+        }
+    }
+
+    verifyCheckboxByLabelIsCheckedOrNot(label, check = true) {
+        if (check) {
+            rentRollPage.getCheckboxByLabel(label).should("be.checked");
+        } else {
+            rentRollPage.getCheckboxByLabel(label).should("not.be.checked");
         }
     }
 
     checkUncheckCheckbox(columnName, label) {
-        this.checkCheckboxByLabel(label)
-        this.verifyColumnExist(columnName)
-        this.checkCheckboxByLabel(label, false)
-        this.verifyColumnExist(columnName, false)
+        this.checkCheckboxByLabel(label);
+        this.verifyColumnExist(columnName);
+        this.checkCheckboxByLabel(label, false);
+        this.verifyColumnExist(columnName, false);
     }
 
     checkUncheckPerUnitSquareFootage(columnNames) {
-        this.checkPerUnitSquareFootage()
-        this.verifyListColumnExist(columnNames)
-        this.checkPerUnitSquareFootage("false")
-        this.verifyListColumnExist(columnNames, false)
+        this.checkPerUnitSquareFootage();
+        this.verifyListColumnExist(columnNames);
+        this.checkPerUnitSquareFootage("false");
+        this.verifyListColumnExist(columnNames, false);
     }
 
     isOptionalColumnExist() {
-        rentRollPage.optionalColumnsElement.should("exist")
+        rentRollPage.optionalColumnsElement.should("exist");
     }
 
     uploadFile(fileName, unitsToBe) {
-        rentRollPage.uploadFileButton.should("be.visible")
-        rentRollPage.uploadFileInput.should("exist").attachFile(fileName)
-        rentRollPage.importDataButton.should("exist").should("be.enabled").click()
-        this.verifyNumberOFResidentalUnits(unitsToBe)
+        rentRollPage.uploadFileButton.should("be.visible");
+        rentRollPage.uploadFileInput.should("exist").attachFile(fileName);
+        rentRollPage.importDataButton.should("exist").should("be.enabled").click();
+        this.verifyNumberOFResidentalUnits(unitsToBe);
     }
 
     fillRentTypeCells(value) {
-        rentRollPage.rentTypeCellsWithoutAddColumns.first().click()
+        rentRollPage.rentTypeCellsWithoutAddColumns.first().click();
         rentRollPage.rentTypeCellsWithoutAddColumns.each($el => {
-            cy.wrap($el).should("have.class", "highlight").dblclick()
-            rentRollPage.textAreaToInput.type("{del}").type(value).type("{enter}")
+            cy.wrap($el).should("have.class", "highlight").dblclick();
+            rentRollPage.textAreaToInput.type("{del}").type(value).type("{enter}");
             if (!(($el.text()).includes(value))) {
-                cy.wrap($el).dblclick()
-                rentRollPage.textAreaToInput.type("{del}").type(value).type("{enter}")
+                cy.wrap($el).dblclick();
+                rentRollPage.textAreaToInput.type("{del}").type(value).type("{enter}");
             }
-            cy.wrap($el).should("contain.text", value)
-        })
+            cy.wrap($el).should("contain.text", value);
+        });
     }
 }
 
-export default new InPlaceRentRollActions()
+export default new InPlaceRentRollActions();
