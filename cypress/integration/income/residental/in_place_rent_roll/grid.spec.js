@@ -31,7 +31,7 @@ describe("In-Place Rent Roll grid tests", () => {
         rentRollActions.checkCheckboxByLabel(testData.forecastLabel, false);
     });
 
-    it.skip("ID37", () => {
+    it.skip("ID37: Save & Continue button", () => {
         rentRollActions.checkCheckboxByLabel(testData.forecastLabel);
         rentRollActions.clickSaveContinueButton();
         unitGroupsActions.verifyThatPageIsOpened();
