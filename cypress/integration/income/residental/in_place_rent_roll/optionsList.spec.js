@@ -9,6 +9,7 @@ describe("In-Place Rent Roll options list tests", () => {
         cy.loginByApi();
         homepageActions.createReport();
         navigationSectionActions.navigateToInPlaceRentRoll();
+        cy.saveLocalStorage();
     });
 
     beforeEach(() => {
@@ -26,14 +27,14 @@ describe("In-Place Rent Roll options list tests", () => {
     it("ID3: Import manager ('Import Data' button is displayed when .csv file is selected)", () => {
         rentRollActions.verifyNumberOFResidentalUnits(testData.numberOFUnits);
         rentRollActions.uploadFile(testData.csvFileName, testData.csvNumberOfUnits);
-        rentRollActions.reloadWithLogin();
+        cy.reload();
         rentRollActions.uploadFile(testData.xlsxFileName, testData.numberOFUnits);
         rentRollActions.goToPropSummaryWithSaveLeavingFirst();
         summaryActions.verifyThatPageIsOpened();
         summaryActions.enterNumberOfUnits(testData.numberOfUnitsToChange);
         summaryActions.goBackWithSave();
         rentRollActions.uploadFile(testData.csvFileName, testData.csvNumberOfUnits);
-        rentRollActions.reloadWithLogin();
+        cy.reload();
         rentRollActions.fillRentTypeCells(testData.rentType);
         rentRollActions.goToPropSummaryWithSaveLeavingFirst();
         summaryActions.verifyThatPageIsOpened();
@@ -81,11 +82,8 @@ describe("In-Place Rent Roll options list tests", () => {
         rentRollActions.checkUncheckCheckbox(testData.unitLabelColumn, testData.unitLabelColumn);
     });
 
-    afterEach(() => {
-        cy.saveLocalStorage();
-    });
-
     after("Delete report", () => {
+        cy.restoreLocalStorage();
         rentRollActions.clickReturnToHomePageButton();
         homepageActions.deleteReport();
     });

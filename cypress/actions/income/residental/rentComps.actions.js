@@ -31,7 +31,51 @@ class RentCompsActions extends BaseActions{
     }
 
     clickSwitchConfirmButton() {
-        rentCompsPage.switchSearchConfirmButton.should("be.visible").click()
+        rentCompsPage.switchSearchConfirmButton.should("be.visible").click();
+    }
+
+    clickUnitTypesArrowButton() {
+        rentCompsPage.unitTypesArrowButton.scrollIntoView().should("be.visible").click();
+    }
+    
+    checkUncheckCheckboxByQaAttr(attribute, check = true) {
+        if (check) {
+            rentCompsPage.getCheckboxByDataQaAttr(attribute)
+                .should("have.value", "false").check({force:true}).should("have.value", "true");
+        } else {
+            rentCompsPage.getCheckboxByDataQaAttr(attribute)
+                .should("have.value", "true").uncheck({force:true}).should("have.value", "false");
+        }
+    }
+    
+    checkUncheckListOfCheckboxesByQa(attributes, check = true) {
+        if (check) {
+            attributes.forEach(attr => {
+                this.checkUncheckCheckboxByQaAttr(attr);
+            });
+        } else {
+            attributes.forEach(attr => {
+                this.checkUncheckCheckboxByQaAttr(attr, false);
+            });
+        }
+    }
+
+    verifyPopUpTextExist() {
+        rentCompsPage.changeCompTypePopUpMessage.should("exist");
+    }
+
+    changeToBuildingSearch() {
+        this.clickBuildingSwitchButton();
+        this.verifyPopUpTextExist();
+        this.clickSwitchConfirmButton();
+        this.verifyBuildingSelected();
+    }
+
+    changeToUnitSearch() {
+        this.clickUnitSwitchButton();
+        this.verifyPopUpTextExist();
+        this.clickSwitchConfirmButton();
+        this.verifyUnitSelected();
     }
 }
 

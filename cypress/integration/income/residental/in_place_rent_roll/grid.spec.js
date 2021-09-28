@@ -10,6 +10,7 @@ describe("In-Place Rent Roll grid tests", () => {
         cy.loginByApi();
         homepageActions.createReport();
         navigationSection.navigateToInPlaceRentRoll();
+        cy.saveLocalStorage();
     });
 
     beforeEach(() => {
@@ -45,11 +46,8 @@ describe("In-Place Rent Roll grid tests", () => {
 
 
     after("Delete report", () => {
+        cy.restoreLocalStorage();
         rentRollActions.returnToHomePageAndSave();
         homepageActions.deleteReport();
-    });
-
-    afterEach(() => {
-        cy.saveLocalStorage();
     });
 });

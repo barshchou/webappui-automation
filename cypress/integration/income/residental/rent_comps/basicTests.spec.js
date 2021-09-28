@@ -1,13 +1,13 @@
-const testData = require("../../../../fixtures/basicRentComps.fixtures.json");
 import homepageActions from "../../../../actions/base/homepage.actions";
 import navSectionActions from "../../../../actions/base/navigationSection.actions";
-import rentCompsActions from "../../../../actions/income/residental/rentComps.actions"
+import rentCompsActions from "../../../../actions/income/residental/rentComps.actions";
 
 describe("Basic Rent Comps tests", () => {
     before("Login and navigate to Rent Comps", () => {
        cy.loginByApi();
        homepageActions.createReport();
        navSectionActions.navigateToRentComps();
+       cy.saveLocalStorage();
     });
 
     beforeEach(() => {
@@ -18,20 +18,13 @@ describe("Basic Rent Comps tests", () => {
         rentCompsActions.verifyGCText();
     });
 
-    it("ID46 and ID47: Unit button and Building button", () => {
-        rentCompsActions.clickBuildingSwitchButton();
-        rentCompsActions.clickSwitchConfirmButton();
-        rentCompsActions.verifyBuildingSelected();
-        rentCompsActions.clickUnitSwitchButton();
-        rentCompsActions.clickSwitchConfirmButton();
-        rentCompsActions.verifyUnitSelected();
-    });
-
-    afterEach(() => {
-        cy.saveLocalStorage();
+    it("ID46, ID47 and ID48: Unit button, Building button and PopUp", () => {
+        rentCompsActions.changeToBuildingSearch();
+        rentCompsActions.changeToUnitSearch();
     });
 
     after("Delete report", () => {
+        cy.restoreLocalStorage();
         rentCompsActions.returnToHomePageAndSave();
         homepageActions.deleteReport();
     });

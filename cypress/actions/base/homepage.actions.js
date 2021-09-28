@@ -68,7 +68,13 @@ class HomepageActions extends BaseActions {
         homepagePage.getArchiveButton(reportNumber).should("exist").click({force:true});
     }
 
+    verifyThatPageIsOpened() {
+        homepagePage.createReportButton.should("be.visible");
+    }
+
     deleteReport(reportNumber = "TestAutoReport") {
+        this.verifyThatPageIsOpened();
+        cy.reload();
         this.enterReportNumberToSearch(reportNumber);
         this.clickArchiveButton(reportNumber);
     }
