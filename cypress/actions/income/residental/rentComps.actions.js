@@ -77,6 +77,15 @@ class RentCompsActions extends BaseActions{
         this.clickSwitchConfirmButton();
         this.verifyUnitSelected();
     }
+
+    enterMinRent(value) {
+        rentCompsPage.minRentInput.scrollIntoView().should("be.visible").clear()
+            .should("have.attr", "placeholder", "$0").type(value).should("have.value", value);
+    }
+
+    clearMinRent() {
+        rentCompsPage.minRentInput.clear();
+    }
 }
 
 export default new RentCompsActions();

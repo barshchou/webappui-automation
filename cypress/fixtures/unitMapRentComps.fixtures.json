@@ -1,4 +1,5 @@
 {
   "unitTypesQaAttr": ["typical", "duplex", "triplex", "simplex", "loft",
-    "garden style", "basement", "garage", "penthouse"]
+    "garden style", "basement", "garage", "penthouse"],
+  "minRentValue": "465,524.31"
 }

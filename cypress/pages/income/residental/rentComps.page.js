@@ -9,6 +9,7 @@ class RentCompsPage extends BasePage{
     getCheckboxByDataQaAttr(attribute) {return cy.get(`*[data-qa='${attribute}'] input`);}
     get changeCompTypePopUpMessage() {return cy.xpath("//*[text()='Changing your comp type will cause you " +
         "to lose all currently selected comparables.']");}
+    get minRentInput() {return cy.get("*[name='minRent']");}
 }
 
 export default new RentCompsPage();

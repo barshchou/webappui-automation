@@ -22,6 +22,11 @@ describe("Unit map tests", () => {
         rentCompsActions.clickUnitTypesArrowButton();
     });
 
+    it("ID51: Min Rent text field", () => {
+       rentCompsActions.enterMinRent(testData.minRentValue);
+       rentCompsActions.clearMinRent();
+    });
+
    after("Delete report", () => {
       cy.restoreLocalStorage();
       rentCompsActions.returnToHomePageAndSave();
