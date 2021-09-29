@@ -11,6 +11,7 @@ class RentCompsPage extends BasePage{
         "to lose all currently selected comparables.']");}
     get minRentInput() {return cy.get("*[name='minRent']");}
     get maxRentInput() {return cy.get("*[name='maxRent']");}
+    get minSquareFeet() {return cy.get("*[name='minSqft']");}
 }
 
 export default new RentCompsPage();

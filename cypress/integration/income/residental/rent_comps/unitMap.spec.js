@@ -32,6 +32,11 @@ describe("Unit map tests", () => {
         rentCompsActions.clearMaxRent();
     });
 
+    it("ID53: Min SF text field", () => {
+       rentCompsActions.enterMinSF(testData.minSquareFeet);
+       rentCompsActions.clearMinSF();
+    });
+
    after("Delete report", () => {
       cy.restoreLocalStorage();
       rentCompsActions.returnToHomePageAndSave();

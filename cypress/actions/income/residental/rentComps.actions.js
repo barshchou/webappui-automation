@@ -90,12 +90,22 @@ class RentCompsActions extends BaseActions{
             .should("have.attr", "placeholder", "$5,000").type(value).should("have.value", value);
     }
 
+    enterMinSF(value) {
+        this.clearMinSF();
+        rentCompsPage.minSquareFeet.scrollIntoView().should("be.visible")
+            .should("have.attr", "placeholder", "0").type(value).should("have.value", value);
+    }
+
     clearMaxRent() {
         rentCompsPage.maxRentInput.clear();
     }
 
     clearMinRent() {
         rentCompsPage.minRentInput.clear();
+    }
+
+    clearMinSF() {
+        rentCompsPage.minSquareFeet.clear();
     }
 }
 
