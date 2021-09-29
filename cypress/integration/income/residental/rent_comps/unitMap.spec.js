@@ -60,6 +60,12 @@ describe("Unit map tests", () => {
         rentCompsActions.clickSourceOfInfoButton();
     });
 
+    it("ID57: Date of Value Range", () => {
+        rentCompsActions.enterDatesToInputs(testData.dateInputTypes);
+        rentCompsActions.clearDateInputs(testData.dateInputTypes);
+
+    });
+
    after("Delete report", () => {
       cy.restoreLocalStorage();
       rentCompsActions.returnToHomePageAndSave();

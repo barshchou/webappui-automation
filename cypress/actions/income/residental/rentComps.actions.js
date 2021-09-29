@@ -1,5 +1,6 @@
 import BaseActions from "../../base/base.actions";
 import rentCompsPage from "../../../pages/income/residental/rentComps.page";
+import {getTodayDateString, getTodayDay, isDateHasCorrectFormat} from "../../../../utils/date.utils";
 
 class RentCompsActions extends BaseActions{
     verifyGCText(conclusionType = "AS_IS") {
@@ -125,6 +126,80 @@ class RentCompsActions extends BaseActions{
 
     clickSourceOfInfoButton() {
         rentCompsPage.sourceOfInfoArrow.should("be.enabled").click();
+    }
+
+    clearDateInput(type = "min") {
+        switch (type) {
+            case "max":
+                rentCompsPage.maxDateValueInput.clear();
+                break;
+            default:
+                rentCompsPage.minRentInput.clear();
+        }
+    }
+
+    enterDatesToInputs(types, dates) {
+        dates = dates ?? [getTodayDateString(), getTodayDateString()];
+        for (let i = 0; i < dates.length; i++) {
+            this.enterDateInput(dates[i], types[i]);
+        }
+    }
+
+    clearDateInputs(types) {
+        types.forEach(type => {
+           this.clearDateInput(type);
+        });
+    }
+
+    enterDateInput(date, type = "min") {
+        this.clearDateInput(type);
+        const isDateCorrect = isDateHasCorrectFormat(date);
+        switch (type) {
+            case "max":
+                rentCompsPage.maxDateValueInput.scrollIntoView().should("be.visible").type(date);
+                if (isDateCorrect) {
+                    rentCompsPage.dateMaxInputToCheckValue.should("have.value", date);
+                } else {
+                    rentCompsPage.errorMessage.should("exist");
+                }
+                break;
+            default:
+                rentCompsPage.minDateValueInput.scrollIntoView().should("be.visible").type(date);
+                if (isDateCorrect) {
+                    rentCompsPage.dateMinInputToCheckValue.should("have.value", date);
+                } else {
+                    rentCompsPage.errorMessage.should("exist");
+                }
+        }
+    }
+
+    clickPickerButton(type = "min") {
+        switch (type) {
+            case "max":
+                rentCompsPage.dateMaxPickerButton.should("be.enabled").click();
+                break;
+            default:
+                rentCompsPage.dateMinPickerButton.should("be.enabled").click();
+        }
+    }
+
+    clickDayInPicker(day) {
+        day = day ?? getTodayDay();
+        rentCompsPage.getDayInCurrentMonthPicker(day).scrollIntoView().should("be.visible").click();
+    }
+
+    verifyEnteredDate(type, date) {
+        date = date ?? getTodayDateString();
+        if (type === "min") {
+            rentCompsPage.dateMinInputToCheckValue.should("have.value", date);
+        } else {
+            rentCompsPage.dateMaxInputToCheckValue.should("have.value", date);
+        }
+    }
+
+    selectDayFromPicker(type, day) {
+        this.clickPickerButton();
+        this.clickDayInPicker(day);
     }
 }
 
