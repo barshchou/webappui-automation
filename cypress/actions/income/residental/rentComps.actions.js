@@ -118,6 +118,10 @@ class RentCompsActions extends BaseActions{
                 rentCompsPage.maxSquareFeet.clear();
         }
     }
+
+    clickNumberOfBedroomsArrow() {
+        rentCompsPage.numberOfBedroomsArrowButton.should("be.enabled").click();
+    }
 }
 
 export default new RentCompsActions();

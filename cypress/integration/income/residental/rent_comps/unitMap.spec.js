@@ -46,6 +46,13 @@ describe("Unit map tests", () => {
         rentCompsActions.clearInput(fieldName);
     });
 
+    it("ID55: Bedrooms dropdown", () => {
+       rentCompsActions.clickNumberOfBedroomsArrow();
+       rentCompsActions.checkUncheckListOfCheckboxesByQa(testData.numberOfBedroomsQaAttr);
+       rentCompsActions.checkUncheckListOfCheckboxesByQa(testData.numberOfBedroomsQaAttr, false);
+       rentCompsActions.clickNumberOfBedroomsArrow();
+    });
+
    after("Delete report", () => {
       cy.restoreLocalStorage();
       rentCompsActions.returnToHomePageAndSave();
