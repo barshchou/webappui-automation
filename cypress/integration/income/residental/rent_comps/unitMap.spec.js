@@ -15,38 +15,38 @@ describe("Unit map tests", () => {
        cy.restoreLocalStorage();
    });
 
-    it.skip("ID50: Unit Types dropdown", () => {
+    it("ID50: Unit Types dropdown", () => {
         rentCompsActions.clickUnitTypesArrowButton();
         rentCompsActions.checkUncheckListOfCheckboxesByQa(testData.unitTypesQaAttr);
         rentCompsActions.checkUncheckListOfCheckboxesByQa(testData.unitTypesQaAttr, false);
         rentCompsActions.clickUnitTypesArrowButton();
     });
 
-    it.skip("ID51: Min Rent text field", () => {
+    it("ID51: Min Rent text field", () => {
         const filedName = "minRent";
         rentCompsActions.enterValueToInput(filedName, testData.minRentValue);
         rentCompsActions.clearInput(filedName);
     });
 
-    it.skip("ID52: Max Rent text field", () => {
+    it("ID52: Max Rent text field", () => {
         const fieldName = "maxRent";
         rentCompsActions.enterValueToInput(fieldName, testData.maxRentValue);
         rentCompsActions.clearInput(fieldName);
     });
 
-    it.skip("ID53: Min SF text field", () => {
+    it("ID53: Min SF text field", () => {
         const fieldName = "minSF";
         rentCompsActions.enterValueToInput(fieldName, testData.minSquareFeet);
         rentCompsActions.clearInput(fieldName);
     });
 
-    it.skip("ID54: Max SF text field", () => {
+    it("ID54: Max SF text field", () => {
         const fieldName = "maxSF";
         rentCompsActions.enterValueToInput(fieldName, testData.maxSquareFeet);
         rentCompsActions.clearInput(fieldName);
     });
 
-    it.skip("ID55: Bedrooms dropdown", () => {
+    it("ID55: Bedrooms dropdown", () => {
        rentCompsActions.clickNumberOfBedroomsArrow();
        rentCompsActions.checkUncheckListOfCheckboxesByQa(testData.numberOfBedroomsQaAttr);
        rentCompsActions.checkUncheckListOfCheckboxesByQa(testData.numberOfBedroomsQaAttr, false);
