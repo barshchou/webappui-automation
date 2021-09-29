@@ -37,6 +37,11 @@ describe("Unit map tests", () => {
        rentCompsActions.clearMinSF();
     });
 
+    it("ID54: Max SF text field", () => {
+        rentCompsActions.enterMaxSF(testData.maxSquareFeet);
+        rentCompsActions.clearMaxSF();
+    });
+
    after("Delete report", () => {
       cy.restoreLocalStorage();
       rentCompsActions.returnToHomePageAndSave();

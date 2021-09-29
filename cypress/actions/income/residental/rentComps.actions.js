@@ -96,6 +96,12 @@ class RentCompsActions extends BaseActions{
             .should("have.attr", "placeholder", "0").type(value).should("have.value", value);
     }
 
+    enterMaxSF(value) {
+        this.clearMaxSF();
+        rentCompsPage.maxSquareFeet.scrollIntoView().should("be.visible")
+            .should("have.attr", "placeholder", "5,000").type(value).should("have.value", value);
+    }
+
     clearMaxRent() {
         rentCompsPage.maxRentInput.clear();
     }
@@ -106,6 +112,10 @@ class RentCompsActions extends BaseActions{
 
     clearMinSF() {
         rentCompsPage.minSquareFeet.clear();
+    }
+
+    clearMaxSF() {
+        rentCompsPage.maxSquareFeet.clear();
     }
 }
 
