@@ -78,44 +78,45 @@ class RentCompsActions extends BaseActions{
         this.verifyUnitSelected();
     }
 
-    enterMinRent(value) {
-        this.clearMinRent();
-        rentCompsPage.minRentInput.scrollIntoView().should("be.visible")
-            .should("have.attr", "placeholder", "$0").type(value).should("have.value", value);
+    enterValueToInput(fieldName, value) {
+        this.clearInput(fieldName);
+        let inputField;
+        let placeholder;
+        switch (fieldName) {
+            case "minRent":
+                inputField = rentCompsPage.minRentInput;
+                placeholder = "$0";
+                break;
+            case "maxRent":
+                inputField = rentCompsPage.maxRentInput;
+                placeholder = "$5,000";
+                break;
+            case "minSF":
+                inputField = rentCompsPage.minSquareFeet;
+                placeholder = "0";
+                break;
+            case "maxSF":
+                inputField = rentCompsPage.maxSquareFeet;
+                placeholder = "5,000";
+        }
+        inputField.scrollIntoView().should("be.visible").should("have.attr", "placeholder", placeholder)
+            .type(value).should("have.value", value);
     }
 
-    enterMaxRent(value) {
-        this.clearMaxRent();
-        rentCompsPage.maxRentInput.scrollIntoView().should("be.visible")
-            .should("have.attr", "placeholder", "$5,000").type(value).should("have.value", value);
-    }
-
-    enterMinSF(value) {
-        this.clearMinSF();
-        rentCompsPage.minSquareFeet.scrollIntoView().should("be.visible")
-            .should("have.attr", "placeholder", "0").type(value).should("have.value", value);
-    }
-
-    enterMaxSF(value) {
-        this.clearMaxSF();
-        rentCompsPage.maxSquareFeet.scrollIntoView().should("be.visible")
-            .should("have.attr", "placeholder", "5,000").type(value).should("have.value", value);
-    }
-
-    clearMaxRent() {
-        rentCompsPage.maxRentInput.clear();
-    }
-
-    clearMinRent() {
-        rentCompsPage.minRentInput.clear();
-    }
-
-    clearMinSF() {
-        rentCompsPage.minSquareFeet.clear();
-    }
-
-    clearMaxSF() {
-        rentCompsPage.maxSquareFeet.clear();
+    clearInput(fieldName) {
+        switch (fieldName) {
+            case "minRent":
+                rentCompsPage.minRentInput.clear();
+                break;
+            case "maxRent":
+                rentCompsPage.maxRentInput.clear();
+                break;
+            case "minSF":
+                rentCompsPage.minSquareFeet.clear();
+                break;
+            case "maxSF":
+                rentCompsPage.maxSquareFeet.clear();
+        }
     }
 }
 

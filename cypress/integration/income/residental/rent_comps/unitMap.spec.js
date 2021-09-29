@@ -23,23 +23,27 @@ describe("Unit map tests", () => {
     });
 
     it("ID51: Min Rent text field", () => {
-       rentCompsActions.enterMinRent(testData.minRentValue);
-       rentCompsActions.clearMinRent();
+        const filedName = "minRent";
+        rentCompsActions.enterValueToInput(filedName, testData.minRentValue);
+        rentCompsActions.clearInput(filedName);
     });
 
     it("ID52: Max Rent text field", () => {
-        rentCompsActions.enterMaxRent(testData.maxRentValue);
-        rentCompsActions.clearMaxRent();
+        const fieldName = "maxRent";
+        rentCompsActions.enterValueToInput(fieldName, testData.maxRentValue);
+        rentCompsActions.clearInput(fieldName);
     });
 
     it("ID53: Min SF text field", () => {
-       rentCompsActions.enterMinSF(testData.minSquareFeet);
-       rentCompsActions.clearMinSF();
+        const fieldName = "minSF";
+        rentCompsActions.enterValueToInput(fieldName, testData.minSquareFeet);
+        rentCompsActions.clearInput(fieldName);
     });
 
     it("ID54: Max SF text field", () => {
-        rentCompsActions.enterMaxSF(testData.maxSquareFeet);
-        rentCompsActions.clearMaxSF();
+        const fieldName = "maxSF";
+        rentCompsActions.enterValueToInput(fieldName, testData.maxSquareFeet);
+        rentCompsActions.clearInput(fieldName);
     });
 
    after("Delete report", () => {
