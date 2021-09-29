@@ -14,6 +14,7 @@ class RentCompsPage extends BasePage{
     get minSquareFeet() {return cy.get("*[name='minSqft']");}
     get maxSquareFeet() {return cy.get("*[name='maxSqft']");}
     get numberOfBedroomsArrowButton() {return cy.xpath("//*[text()='Bedrooms']//following-sibling::button");}
+    get sourceOfInfoArrow() {return cy.xpath("//*[text()='Source of Information']//following-sibling::button");}
 }
 
 export default new RentCompsPage();

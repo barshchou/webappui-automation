@@ -122,6 +122,10 @@ class RentCompsActions extends BaseActions{
     clickNumberOfBedroomsArrow() {
         rentCompsPage.numberOfBedroomsArrowButton.should("be.enabled").click();
     }
+
+    clickSourceOfInfoButton() {
+        rentCompsPage.sourceOfInfoArrow.should("be.enabled").click();
+    }
 }
 
 export default new RentCompsActions();
