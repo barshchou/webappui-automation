@@ -27,6 +27,11 @@ describe("Unit map tests", () => {
        rentCompsActions.clearMinRent();
     });
 
+    it("ID52: Max Rent text field", () => {
+        rentCompsActions.enterMaxRent(testData.maxRentValue);
+        rentCompsActions.clearMaxRent();
+    });
+
    after("Delete report", () => {
       cy.restoreLocalStorage();
       rentCompsActions.returnToHomePageAndSave();

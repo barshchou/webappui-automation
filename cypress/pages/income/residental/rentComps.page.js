@@ -10,6 +10,7 @@ class RentCompsPage extends BasePage{
     get changeCompTypePopUpMessage() {return cy.xpath("//*[text()='Changing your comp type will cause you " +
         "to lose all currently selected comparables.']");}
     get minRentInput() {return cy.get("*[name='minRent']");}
+    get maxRentInput() {return cy.get("*[name='maxRent']");}
 }
 
 export default new RentCompsPage();

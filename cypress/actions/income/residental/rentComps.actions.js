@@ -79,8 +79,19 @@ class RentCompsActions extends BaseActions{
     }
 
     enterMinRent(value) {
-        rentCompsPage.minRentInput.scrollIntoView().should("be.visible").clear()
+        this.clearMinRent();
+        rentCompsPage.minRentInput.scrollIntoView().should("be.visible")
             .should("have.attr", "placeholder", "$0").type(value).should("have.value", value);
+    }
+
+    enterMaxRent(value) {
+        this.clearMaxRent();
+        rentCompsPage.maxRentInput.scrollIntoView().should("be.visible")
+            .should("have.attr", "placeholder", "$5,000").type(value).should("have.value", value);
+    }
+
+    clearMaxRent() {
+        rentCompsPage.maxRentInput.clear();
     }
 
     clearMinRent() {
