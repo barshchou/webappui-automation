@@ -101,7 +101,26 @@ class RentCompsActions extends BaseActions{
                 placeholder = "5,000";
         }
         inputField.scrollIntoView().should("be.visible").should("have.attr", "placeholder", placeholder)
-            .type(value).should("have.value", value);
+            .type(value);
+        this.verifyEnteredValueToInput(fieldName, value);
+    }
+
+    verifyEnteredValueToInput(fieldName, value = "") {
+        let inputField;
+        switch (fieldName) {
+            case "minRent":
+                inputField = rentCompsPage.minRentInput;
+                break;
+            case "maxRent":
+                inputField = rentCompsPage.maxRentInput;
+                break;
+            case "minSF":
+                inputField = rentCompsPage.minSquareFeet;
+                break;
+            case "maxSF":
+                inputField = rentCompsPage.maxSquareFeet;
+        }
+        inputField.should("have.value", value);
     }
 
     clearInput(fieldName) {
@@ -219,6 +238,14 @@ class RentCompsActions extends BaseActions{
 
     clickAmenitiesArrow() {
         rentCompsPage.amenitiesArrowButton.should("be.enabled").click();
+    }
+
+    verifyNumberOfFoundResultsExist() {
+        rentCompsPage.numberOfFoundResults.should("exist").should("contain.text", "Results Found");
+    }
+
+    clickResetFiltersButton() {
+        rentCompsPage.resetFiltersButton.click();
     }
 }
 
