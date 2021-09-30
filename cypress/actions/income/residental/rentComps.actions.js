@@ -134,7 +134,7 @@ class RentCompsActions extends BaseActions{
                 rentCompsPage.maxDateValueInput.clear();
                 break;
             default:
-                rentCompsPage.minRentInput.clear();
+                rentCompsPage.minDateValueInput.clear();
         }
     }
 
@@ -158,7 +158,7 @@ class RentCompsActions extends BaseActions{
             case "max":
                 rentCompsPage.maxDateValueInput.scrollIntoView().should("be.visible").type(date);
                 if (isDateCorrect) {
-                    rentCompsPage.dateMaxInputToCheckValue.should("have.value", date);
+                    this.verifyEnteredDate("max", date);
                 } else {
                     rentCompsPage.errorMessage.should("exist");
                 }
@@ -166,7 +166,7 @@ class RentCompsActions extends BaseActions{
             default:
                 rentCompsPage.minDateValueInput.scrollIntoView().should("be.visible").type(date);
                 if (isDateCorrect) {
-                    rentCompsPage.dateMinInputToCheckValue.should("have.value", date);
+                    this.verifyEnteredDate("min", date);
                 } else {
                     rentCompsPage.errorMessage.should("exist");
                 }
@@ -198,8 +198,23 @@ class RentCompsActions extends BaseActions{
     }
 
     selectDayFromPicker(type, day) {
-        this.clickPickerButton();
+        this.clickPickerButton(type);
+        rentCompsPage.pickerCalendar.should("be.visible");
         this.clickDayInPicker(day);
+    }
+
+    selectDaysFromPickerByTypes(types, days) {
+        days = days ?? [getTodayDay(), getTodayDay()];
+        for (let i = 0; i < types.length; i++) {
+            this.selectDayFromPicker(types[i], days[i]);
+        }
+    }
+
+    verifyEnteredDatesByTypes(types, dates) {
+        dates = dates ?? [getTodayDateString(), getTodayDateString()];
+        for (let i = 0; i < types.length; i++) {
+            this.verifyEnteredDate(types[i], dates[i]);
+        }
     }
 }
 

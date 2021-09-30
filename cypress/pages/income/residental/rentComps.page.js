@@ -20,8 +20,13 @@ class RentCompsPage extends BasePage{
     get dateMinInputToCheckValue() {return cy.get("*[data-qa='minDateOfValue-date-picker'] > input");}
     get dateMaxInputToCheckValue() {return cy.get("*[data-qa='maxDateOfValue-date-picker'] > input");}
     get errorMessage() {return cy.get("#component-error-text");}
-    get dateMinPickerButton() {return this.minDateValueInput.xpath("//following::button[1]");}
-    get dateMaxPickerButton() {return this.maxDateValueInput.xpath("//following::button[1]");}
+    get dateMinPickerButton() {
+        return cy.xpath("//*[@data-qa='minDateOfValue-date-picker']//child::button");
+    }
+    get dateMaxPickerButton() {
+        return cy.xpath("//*[@data-qa='maxDateOfValue-date-picker']//child::button");
+    }
+    get pickerCalendar() {return cy.get("*[role='document']");}
     getDayInCurrentMonthPicker(day) {return cy.xpath(`//*[text()='${day}']//parent::button[@tabindex='0']`);}
 }
 

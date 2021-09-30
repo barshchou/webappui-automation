@@ -63,7 +63,9 @@ describe("Unit map tests", () => {
     it("ID57: Date of Value Range", () => {
         rentCompsActions.enterDatesToInputs(testData.dateInputTypes);
         rentCompsActions.clearDateInputs(testData.dateInputTypes);
-
+        rentCompsActions.selectDaysFromPickerByTypes(testData.dateInputTypes);
+        rentCompsActions.verifyEnteredDatesByTypes(testData.dateInputTypes);
+        rentCompsActions.clearDateInputs(testData.dateInputTypes);
     });
 
    after("Delete report", () => {

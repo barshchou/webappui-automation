@@ -16,6 +16,10 @@ class InPlaceRentRollActions extends BaseActions {
     }
 
     verifyNumberOfIsInspectedRows(unitsNumber) {
+        if (unitsNumber !== 0) {
+            rentRollPage.isInspectedColumnCells.first().scrollIntoView({duration:2000});
+            rentRollPage.isInspectedColumnCells.last().scrollIntoView({duration:2000});
+        }
         rentRollPage.isInspectedColumnCells.should("have.length", unitsNumber);
     }
 
