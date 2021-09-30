@@ -28,6 +28,7 @@ class RentCompsPage extends BasePage{
     }
     get pickerCalendar() {return cy.get("*[role='document']");}
     getDayInCurrentMonthPicker(day) {return cy.xpath(`//*[text()='${day}']//parent::button[@tabindex='0']`);}
+    get amenitiesArrowButton() {return cy.xpath("//*[text()='Amenities']//following-sibling::button");}
 }
 
 export default new RentCompsPage();

@@ -216,6 +216,10 @@ class RentCompsActions extends BaseActions{
             this.verifyEnteredDate(types[i], dates[i]);
         }
     }
+
+    clickAmenitiesArrow() {
+        rentCompsPage.amenitiesArrowButton.should("be.enabled").click();
+    }
 }
 
 export default new RentCompsActions();
