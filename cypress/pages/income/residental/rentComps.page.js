@@ -39,6 +39,10 @@ class RentCompsPage extends BasePage{
     get nextPhotoButtons() {return cy.get("button.slick-next");}
     get prevPhotoButtons() {return cy.get("button.slick-prev");}
     get comparableItems() {return cy.get("*[data-qa='rentComp-item']");}
+    get comparableAddressesTexts() {return cy.get("*[data-qa='rentComp-address-text']");}
+    get rentElementsTexts() {return cy.get("*[data-qa='rentComp-address-text'] + p");}
+    get comparablesAmenitiesTexts() {return cy.get("*[data-qa='rentComp-contitions']");}
+    get comparablePropertyTexts() {return cy.get("*[data-qa='rentComp-property']");}
 }
 
 export default new RentCompsPage();

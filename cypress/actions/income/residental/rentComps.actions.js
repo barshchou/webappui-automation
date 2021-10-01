@@ -292,6 +292,35 @@ class RentCompsActions extends BaseActions{
             style = currentStyle;
         }
     }
+
+    verifyCompAddressesExist() {
+        rentCompsPage.comparableAddressesTexts.each($address => {
+            expect($address).not.to.be.empty;
+            let addressArray = $address.text().split(",");
+            expect(addressArray).to.have.length(3);
+        });
+    }
+
+    verifyRentsTexts() {
+        rentCompsPage.rentElementsTexts.each($rentEl => {
+            cy.wrap($rentEl).should("exist").should("contain.text", "/month")
+                .should("contain.text", "/SF");
+        });
+    }
+
+    verifyCompAmenitiesTextsExist() {
+        rentCompsPage.comparablesAmenitiesTexts.each($amenityEl => {
+           cy.wrap($amenityEl).should("exist").should("contain.text", "bed")
+               .should("contain.text", "bath");
+        });
+    }
+
+    verifyComparablePropertyTextsExist() {
+        rentCompsPage.comparablePropertyTexts.each($propertyEl => {
+            cy.wrap($propertyEl).should("exist").should("contain.text", "mi. away")
+                .should("contain.text", "SF").should("contain.text", "Valued:");
+        });
+    }
 }
 
 export default new RentCompsActions();
