@@ -203,7 +203,7 @@ class RentCompsActions extends BaseActions{
     }
 
     clickDayInPicker(day) {
-        day = day ?? getTodayDay();
+        day = day ?? Number(getTodayDay());
         rentCompsPage.getDayInCurrentMonthPicker(day).scrollIntoView().should("be.visible").click();
     }
 
@@ -223,7 +223,7 @@ class RentCompsActions extends BaseActions{
     }
 
     selectDaysFromPickerByTypes(types, days) {
-        days = days ?? [getTodayDay(), getTodayDay()];
+        days = days ?? [Number(getTodayDay()), Number(getTodayDay())];
         for (let i = 0; i < types.length; i++) {
             this.selectDayFromPicker(types[i], days[i]);
         }
