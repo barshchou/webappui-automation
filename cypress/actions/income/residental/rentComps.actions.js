@@ -249,7 +249,7 @@ class RentCompsActions extends BaseActions{
     }
 
     selectSortByOptionByValue(value) {
-        rentCompsPage.loadingModal.should("not.exist");
+        this.verifyLoadingDoesntExist();
         rentCompsPage.sortByDropdown.should("be.visible").click({force:true});
         rentCompsPage.getSortDropdownOptionByValue(value).click();
         rentCompsPage.sortByDropdown.should("have.text", value);
@@ -259,6 +259,38 @@ class RentCompsActions extends BaseActions{
         values.forEach(value => {
            this.selectSortByOptionByValue(value);
         });
+    }
+
+    verifyLoadingDoesntExist() {
+        rentCompsPage.loadingModal.should("not.exist");
+    }
+
+    verifyPhotosExistAndNavigateByPhotos(comparableIndex) {
+        this.verifyLoadingDoesntExist();
+        rentCompsPage.comparableItems.eq(comparableIndex).then($item => {
+            cy.wrap($item).find(rentCompsPage.photoElementLocator).then($photos => {
+                this.navigateThroughAllPhotosInComparable($photos, comparableIndex);
+                this.navigateThroughAllPhotosInComparable($photos, comparableIndex, "back");
+            });
+        });
+    }
+
+    navigateThroughAllPhotosInComparable(jQueryPhotoElements, comparableIndex, direction = "forward") {
+        let numberOfPhotos = jQueryPhotoElements.length;
+        let style = "";
+        for (let i = 0; i < numberOfPhotos; i++) {
+            let currentPhoto = cy.wrap(jQueryPhotoElements).eq(i);
+            currentPhoto.should("exist");
+            let currentStyle = jQueryPhotoElements.eq(i).attr("style");
+            currentPhoto.invoke("attr", "style").should("not.equal", style);
+            if (direction === "forward") {
+                rentCompsPage.nextPhotoButtons.eq(comparableIndex).click();
+            } else {
+                rentCompsPage.prevPhotoButtons.eq(comparableIndex).click();
+            }
+            this.verifyLoadingDoesntExist();
+            style = currentStyle;
+        }
     }
 }
 

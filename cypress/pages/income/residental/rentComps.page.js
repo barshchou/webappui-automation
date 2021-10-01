@@ -34,6 +34,11 @@ class RentCompsPage extends BasePage{
     get sortByDropdown() {return cy.get("*[data-qa='select-value']");}
     getSortDropdownOptionByValue(value) {return cy.get(`*[data-value='${value}']`);}
     get loadingModal() {return cy.get("*[data-qa='loading-modal']");}
+    get photoElementLocator() {return "*[data-qa='photo']";}
+    get photoElements() {return cy.get(this.photoElementLocator);}
+    get nextPhotoButtons() {return cy.get("button.slick-next");}
+    get prevPhotoButtons() {return cy.get("button.slick-prev");}
+    get comparableItems() {return cy.get("*[data-qa='rentComp-item']");}
 }
 
 export default new RentCompsPage();
