@@ -31,6 +31,9 @@ class RentCompsPage extends BasePage{
     get amenitiesArrowButton() {return cy.xpath("//*[text()='Amenities']//following-sibling::button");}
     get numberOfFoundResults() {return cy.get("*[data-qa='rentComps-count']");}
     get resetFiltersButton() {return cy.get("*[data-qa='reset-filters-button']");}
+    get sortByDropdown() {return cy.get("*[data-qa='select-value']");}
+    getSortDropdownOptionByValue(value) {return cy.get(`*[data-value='${value}']`);}
+    get loadingModal() {return cy.get("*[data-qa='loading-modal']");}
 }
 
 export default new RentCompsPage();

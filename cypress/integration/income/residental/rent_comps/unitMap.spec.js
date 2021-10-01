@@ -86,6 +86,10 @@ describe("Unit map tests", () => {
         rentCompsActions.verifyNumberOfFoundResultsExist();
     });
 
+    it("ID61: 'Sort by' dropdown", () => {
+        rentCompsActions.selectSortByOptionsByValues(testData.sortByOptions);
+    });
+
    after("Delete report", () => {
       cy.restoreLocalStorage();
       rentCompsActions.returnToHomePageAndSave();

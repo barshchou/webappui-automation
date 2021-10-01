@@ -247,6 +247,19 @@ class RentCompsActions extends BaseActions{
     clickResetFiltersButton() {
         rentCompsPage.resetFiltersButton.click();
     }
+
+    selectSortByOptionByValue(value) {
+        rentCompsPage.loadingModal.should("not.exist");
+        rentCompsPage.sortByDropdown.should("be.visible").click({force:true});
+        rentCompsPage.getSortDropdownOptionByValue(value).click();
+        rentCompsPage.sortByDropdown.should("have.text", value);
+    }
+
+    selectSortByOptionsByValues(values) {
+        values.forEach(value => {
+           this.selectSortByOptionByValue(value);
+        });
+    }
 }
 
 export default new RentCompsActions();
