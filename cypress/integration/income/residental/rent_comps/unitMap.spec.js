@@ -98,6 +98,18 @@ describe("Unit map tests", () => {
         rentCompsActions.verifyComparablePropertyTextsExist();
     });
 
+    it("ID63: SELECT button - turns to SELECTED", () => {
+        rentCompsActions.verifyLoadingDoesntExist();
+        rentCompsActions.clickAllSelectComparableButtons();
+        rentCompsActions.verifyComparableGroups(testData.numberOfUnits);
+    });
+
+    it("ID64: Unit Map: Zoom in / Zoom out buttons ('+' / '-')", () => {
+       rentCompsActions.verifyLoadingDoesntExist();
+       rentCompsActions.clickZoomOutButton();
+       rentCompsActions.clickZoomInButton();
+    });
+
    after("Delete report", () => {
       cy.restoreLocalStorage();
       rentCompsActions.returnToHomePageAndSave();

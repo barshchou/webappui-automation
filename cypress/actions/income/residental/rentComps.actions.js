@@ -321,6 +321,43 @@ class RentCompsActions extends BaseActions{
                 .should("contain.text", "SF").should("contain.text", "Valued:");
         });
     }
+
+    verifyLoadingModalExist() {
+        rentCompsPage.loadingModal.should("exist");
+    }
+
+    clickZoomInButton() {
+        rentCompsPage.zoomInButton.click();
+        this.verifyLoadingModalExist();
+        this.verifyLoadingDoesntExist();
+    }
+
+    clickZoomOutButton() {
+        rentCompsPage.zoomOutButton.click();
+        this.verifyLoadingModalExist();
+        this.verifyLoadingDoesntExist();
+    }
+
+    clickAllSelectComparableButtons() {
+        rentCompsPage.selectComparableButtons.then(buttons => {
+            const buttonsLength = buttons.length;
+            for (let i = 0; i < buttonsLength; i++) {
+                if (i !== 0) {
+                    rentCompsPage.selectedComparableButtons.eq(i).should("not.exist");
+                }
+                cy.wrap(buttons.eq(i)).should("be.enabled").click({force:true});
+                rentCompsPage.selectedComparableButtons.eq(i).should("exist");
+            }
+        });
+    }
+
+    verifyComparableGroups(numberOfUnits) {
+        if (numberOfUnits === 0) {
+            rentCompsPage.uncategorizedTable.find(rentCompsPage.indexColumnCellsSelector).then(indexCells => {
+                rentCompsPage.selectedComparableButtons.should("have.length", indexCells.length);
+            });
+        }
+    }
 }
 
 export default new RentCompsActions();
