@@ -358,6 +358,22 @@ class RentCompsActions extends BaseActions{
             });
         }
     }
+
+    openAddNewComparableForm(address = "230 Park Avenue, New-York, USA", searchResIndex = 0) {
+        this.verifyLoadingDoesntExist();
+        rentCompsPage.addNewRentCompButton.scrollIntoView().should("be.enabled").click();
+        rentCompsPage.findRenCompSection.should("be.visible");
+        rentCompsPage.searchAddressField.type(`${address}{enter}`).should("have.value", address);
+        rentCompsPage.findRenCompSection.click();
+        rentCompsPage.submitButton.should("not.be.disabled").click();
+        rentCompsPage.searchResultsRows.eq(searchResIndex).click();
+        rentCompsPage.submitButton.should("not.be.disabled").click();
+        rentCompsPage.newUnitForm.should("be.visible");
+    }
+
+    clickCloseButton() {
+        rentCompsPage.closeButton.should("be.enabled").click();
+    }
 }
 
 export default new RentCompsActions();
