@@ -57,6 +57,7 @@ class RentCompsPage extends BasePage{
     get searchResultsRows() {return cy.get("tr[data-qa^='search-results']");}
     get newUnitForm() {return cy.get("*[data-qa='new-unit-modal']");}
     get closeButton() {return cy.get("*[aria-label='close']");}
+    get propAddressField() {return cy.get("*[data-qa='property-address']");}
 }
 
 export default new RentCompsPage();

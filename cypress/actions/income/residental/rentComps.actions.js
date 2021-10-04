@@ -374,6 +374,10 @@ class RentCompsActions extends BaseActions{
     clickCloseButton() {
         rentCompsPage.closeButton.should("be.enabled").click();
     }
+
+    verifyPropAddressExist() {
+        rentCompsPage.propAddressField.should("be.visible").should("not.be.empty");
+    }
 }
 
 export default new RentCompsActions();

@@ -19,6 +19,12 @@ describe("Add new comparable form tests", () => {
         rentCompsActions.clickCloseButton();
     });
 
+    it("ID68: Address, Neighborhood, Block, Lot are at the top of the form", () => {
+        rentCompsActions.openAddNewComparableForm();
+        rentCompsActions.verifyPropAddressExist();
+        rentCompsActions.clickCloseButton();
+    });
+
     after("Delete report", () => {
         cy.restoreLocalStorage();
         rentCompsActions.returnToHomePageAndSave();
