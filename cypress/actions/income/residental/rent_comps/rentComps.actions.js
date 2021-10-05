@@ -1,6 +1,6 @@
-import BaseActions from "../../base/base.actions";
-import rentCompsPage from "../../../pages/income/residental/rentComps.page";
-import {getTodayDateString, getTodayDay, isDateHasCorrectFormat} from "../../../../utils/date.utils";
+import BaseActions from "../../../base/base.actions";
+import rentCompsPage from "../../../../pages/income/residental/rent_comps/rentComps.page";
+import {getTodayDateString, getTodayDay, isDateHasCorrectFormat} from "../../../../../utils/date.utils";
 
 class RentCompsActions extends BaseActions{
     verifyGCText(conclusionType = "AS_IS") {
@@ -369,14 +369,6 @@ class RentCompsActions extends BaseActions{
         rentCompsPage.searchResultsRows.eq(searchResIndex).click();
         rentCompsPage.submitButton.should("not.be.disabled").click();
         rentCompsPage.newUnitForm.should("be.visible");
-    }
-
-    clickCloseButton() {
-        rentCompsPage.closeButton.should("be.enabled").click();
-    }
-
-    verifyPropAddressExist() {
-        rentCompsPage.propAddressField.should("be.visible").should("not.be.empty");
     }
 }
 

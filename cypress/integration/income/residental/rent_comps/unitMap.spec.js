@@ -1,7 +1,7 @@
 const testData = require("../../../../fixtures/unitMapRentComps.fixtures.json");
 import homepageActions from "../../../../actions/base/homepage.actions";
 import navSectionActions from "../../../../actions/base/navigationSection.actions";
-import rentCompsActions from "../../../../actions/income/residental/rentComps.actions";
+import rentCompsActions from "../../../../actions/income/residental/rent_comps/rentComps.actions";
 
 describe("Unit map tests", () => {
    before("Login and open Rent Comps", () => {

@@ -1,6 +1,8 @@
+const testData = require("../../../../fixtures/addNewCompForm.fixtures.json");
 import homepageActions from "../../../../actions/base/homepage.actions";
 import navSectionActions from "../../../../actions/base/navigationSection.actions";
-import rentCompsActions from "../../../../actions/income/residental/rentComps.actions";
+import rentCompsActions from "../../../../actions/income/residental/rent_comps/rentComps.actions";
+import addCompFormActions from "../../../../actions/income/residental/rent_comps/addCompForm.actions";
 
 describe("Add new comparable form tests", () => {
     before("Login and open rent comps page", () => {
@@ -16,13 +18,26 @@ describe("Add new comparable form tests", () => {
 
     it("ID67: Button: Add New Rent Comp > Property Search wizard opened > Select Address", () => {
         rentCompsActions.openAddNewComparableForm();
-        rentCompsActions.clickCloseButton();
+        addCompFormActions.clickCloseButton();
     });
 
     it("ID68: Address, Neighborhood, Block, Lot are at the top of the form", () => {
         rentCompsActions.openAddNewComparableForm();
-        rentCompsActions.verifyPropAddressExist();
-        rentCompsActions.clickCloseButton();
+        addCompFormActions.verifyPropAddressExist();
+        addCompFormActions.clickCloseButton();
+    });
+
+    it("ID69:  Unit Number* text field", () => {
+        rentCompsActions.openAddNewComparableForm();
+        addCompFormActions.verifyUnitNumbFieldName();
+        addCompFormActions.enterUnitNumber(testData.unitNumber);
+        addCompFormActions.clickCloseButton();
+    });
+
+    it("ID70: Unit Type dropdown", () => {
+       rentCompsActions.openAddNewComparableForm();
+       addCompFormActions.selectListUnitTypes(testData.unitTypes);
+       addCompFormActions.clickCloseButton();
     });
 
     after("Delete report", () => {

@@ -1,4 +1,4 @@
-import BasePage from "../../base/base.page";
+import BasePage from "../../../base/base.page";
 
 class RentCompsPage extends BasePage{
     get generatedCommentary() {return cy.get("*[data-qa='rentCompsIntroduction.commentary-generated-text']");}
@@ -56,8 +56,6 @@ class RentCompsPage extends BasePage{
     get submitButton() {return cy.get("*[data-qa='submit-button']");}
     get searchResultsRows() {return cy.get("tr[data-qa^='search-results']");}
     get newUnitForm() {return cy.get("*[data-qa='new-unit-modal']");}
-    get closeButton() {return cy.get("*[aria-label='close']");}
-    get propAddressField() {return cy.get("*[data-qa='property-address']");}
 }
 
 export default new RentCompsPage();
