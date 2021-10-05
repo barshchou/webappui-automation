@@ -1,4 +1,5 @@
 import addCompFormPage from "../../../../pages/income/residental/rent_comps/addCompForm.page";
+import {getTodayDateString, getTodayDay, isDateHasCorrectFormat} from "../../../../../utils/date.utils";
 
 class AddCompFormActions {
     clickCloseButton() {
@@ -47,6 +48,43 @@ class AddCompFormActions {
 
     enterMonthlyRent(rent) {
         addCompFormPage.monthRentInput.clear().type(rent).should("have.value", rent);
+    }
+
+    clearDateInput() {
+        addCompFormPage.dateOfValueInput.clear();
+    }
+
+    enterDate(date) {
+        this.clearDateInput();
+        date = date ?? getTodayDateString();
+        const isDateCorrect = isDateHasCorrectFormat(date);
+        if (isDateCorrect) {
+            addCompFormPage.dateOfValueInput.type(date);
+        } else {
+            addCompFormPage.errorMessage.should("exist");
+        }
+        this.verifyEnteredDate(date);
+    }
+
+    verifyEnteredDate(dateToBe) {
+        dateToBe = dateToBe ?? getTodayDateString();
+        addCompFormPage.dateInputValue.should("have.value", dateToBe);
+    }
+
+    chooseDayOfCurrentMonthInPicker(day) {
+        day = day ?? Number(getTodayDay());
+        let date = getTodayDateString();
+        let dateArr = date.split("-");
+        if (day < 10) {
+            dateArr[1] = `0${day}`;
+        } else {
+            dateArr[1] = day;
+        }
+        date = `${dateArr[0]}-${dateArr[1]}-${dateArr[2]}`;
+        addCompFormPage.datePickerButton.should("be.enabled").click();
+        addCompFormPage.datePickerPopover.should("exist");
+        addCompFormPage.getDayOfCurrentMonthInPicker(day).should("be.visible").click();
+        this.verifyEnteredDate(date);
     }
 }
 

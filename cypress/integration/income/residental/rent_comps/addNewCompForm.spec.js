@@ -47,6 +47,14 @@ describe("Add new comparable form tests", () => {
         addCompFormActions.clickCloseButton();
     });
 
+    it("ID72: Date of Value* date picker in the text field", () => {
+       rentCompsActions.openAddNewComparableForm();
+       addCompFormActions.enterDate();
+       addCompFormActions.clearDateInput();
+       addCompFormActions.chooseDayOfCurrentMonthInPicker();
+       addCompFormActions.clickCloseButton();
+    });
+
     after("Delete report", () => {
         cy.restoreLocalStorage();
         rentCompsActions.returnToHomePageAndSave();

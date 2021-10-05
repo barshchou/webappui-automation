@@ -10,6 +10,12 @@ class AddCompFormPage extends BasePage{
     get unitTypeInputToCheck() {return cy.get("*[data-qa='unitLayout-select-list'] input");}
     get monthRentFieldName() {return cy.get("*[data-qa='unit-rent-input'] > label");}
     get monthRentInput() {return cy.get("*[name='rent']");}
+    get dateOfValueInput() {return cy.get("*[data-qa='dateOfValue-date-picker'] input[placeholder='MM-DD-YYYY']");}
+    get datePickerButton() {return cy.get("*[data-qa='dateOfValue-date-picker'] button");}
+    get datePickerPopover() {return cy.get("#picker-popover");}
+    getDayOfCurrentMonthInPicker(day) {return cy.xpath(`//*[text()='${day}']//parent::button[@tabindex='0']`);}
+    get errorMessage() {return cy.get("#component-error-text");}
+    get dateInputValue() {return cy.get("*[data-qa='dateOfValue-date-picker'] > input");}
 }
 
 export default new AddCompFormPage();
