@@ -95,6 +95,30 @@ class AddCompFormActions {
     enterSquareFootage(footage) {
         addCompFormPage.squareFootageInput.clear().type(footage).should("have.value", footage);
     }
+
+    clickSourceOfInfoDropdown() {
+        addCompFormPage.sourceOfInfoDropdown.should("be.visible").click();
+    }
+
+    selectSourceOfInfoByValue(value) {
+        addCompFormPage.getSourceOfInfoByValue(value).scrollIntoView().should("be.visible").click();
+    }
+
+    verifySelectedSource(valueToBe) {
+        addCompFormPage.sourceOfInfoInputToCheck.should("have.value", valueToBe);
+    }
+
+    selectSourceOfInfoAndVerify(value) {
+        this.clickSourceOfInfoDropdown();
+        this.selectSourceOfInfoByValue(value);
+        this.verifySelectedSource(value);
+    }
+
+    selectListSourceOfInfoAndVerify(values) {
+        values.forEach(value => {
+            this.selectSourceOfInfoAndVerify(value);
+        });
+    }
 }
 
 export default new AddCompFormActions();

@@ -62,6 +62,12 @@ describe("Add new comparable form tests", () => {
        addCompFormActions.clickCloseButton();
     });
 
+    it("ID74: Source of Information dropdown", () => {
+        rentCompsActions.openAddNewComparableForm();
+        addCompFormActions.selectListSourceOfInfoAndVerify(testData.infoSources);
+        addCompFormActions.clickCloseButton();
+    });
+
     after("Delete report", () => {
         cy.restoreLocalStorage();
         rentCompsActions.returnToHomePageAndSave();

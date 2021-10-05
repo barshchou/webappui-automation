@@ -5,7 +5,7 @@ class AddCompFormPage extends BasePage{
     get propAddressField() {return cy.get("*[data-qa='property-address']");}
     get unitNumbFieldName() {return cy.get("*[data-qa='unit-number-input'] > label");}
     get unitNumbInput() {return cy.get("*[name='unitNumber']");}
-    get unitTypeDropdown() {return cy.get("*[data-qa='unitLayout-select-list'] *[data-qa='select-value']");}
+    get unitTypeDropdown() {return cy.get("*[data-qa='unitLayout-select-list'] [data-qa='select-value']");}
     getUnitTypeByValue(value) {return cy.get(`*[data-qa^='unitLayout'][data-value='${value}']`);}
     get unitTypeInputToCheck() {return cy.get("*[data-qa='unitLayout-select-list'] input");}
     get monthRentFieldName() {return cy.get("*[data-qa='unit-rent-input'] > label");}
@@ -18,6 +18,9 @@ class AddCompFormPage extends BasePage{
     get dateInputValue() {return cy.get("*[data-qa='dateOfValue-date-picker'] > input");}
     get squareFootageFieldName() {return cy.get("*[data-qa='unit-sqft-input'] > label");}
     get squareFootageInput() {return cy.get("*[name='sqft']");}
+    get sourceOfInfoDropdown() {return cy.get("*[data-qa='sourceOfInformation-select-list'] [data-qa='select-value']");}
+    getSourceOfInfoByValue(value) {return cy.get(`*[data-qa^='sourceOfInformation'][data-value='${value}']`);}
+    get sourceOfInfoInputToCheck() {return cy.get("*[data-qa='sourceOfInformation-select-list'] input");}
 }
 
 export default new AddCompFormPage();
