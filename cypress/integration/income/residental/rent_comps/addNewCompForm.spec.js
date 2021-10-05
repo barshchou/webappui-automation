@@ -55,6 +55,13 @@ describe("Add new comparable form tests", () => {
        addCompFormActions.clickCloseButton();
     });
 
+    it("ID73: Unit Square Footage text field", () => {
+       rentCompsActions.openAddNewComparableForm();
+       addCompFormActions.verifySquareFootageFieldName();
+       addCompFormActions.enterSquareFootage(testData.squareFootage);
+       addCompFormActions.clickCloseButton();
+    });
+
     after("Delete report", () => {
         cy.restoreLocalStorage();
         rentCompsActions.returnToHomePageAndSave();

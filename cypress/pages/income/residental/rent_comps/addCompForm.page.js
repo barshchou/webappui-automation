@@ -16,6 +16,8 @@ class AddCompFormPage extends BasePage{
     getDayOfCurrentMonthInPicker(day) {return cy.xpath(`//*[text()='${day}']//parent::button[@tabindex='0']`);}
     get errorMessage() {return cy.get("#component-error-text");}
     get dateInputValue() {return cy.get("*[data-qa='dateOfValue-date-picker'] > input");}
+    get squareFootageFieldName() {return cy.get("*[data-qa='unit-sqft-input'] > label");}
+    get squareFootageInput() {return cy.get("*[name='sqft']");}
 }
 
 export default new AddCompFormPage();

@@ -1,5 +1,6 @@
 {
   "unitNumber": "someTest196Numb",
   "unitTypes": ["Typical", "Duplex", "Triplex", "Simplex", "Penthouse", "Loft", "Garden Style", "Basement", "Garage"],
-  "monthlyRent": "3,000"
+  "monthlyRent": "3,000",
+  "squareFootage": "95"
 }

@@ -86,6 +86,15 @@ class AddCompFormActions {
         addCompFormPage.getDayOfCurrentMonthInPicker(day).should("be.visible").click();
         this.verifyEnteredDate(date);
     }
+
+    verifySquareFootageFieldName() {
+        addCompFormPage.squareFootageFieldName.should("exist")
+            .should("have.text", "Unit Square Footage");
+    }
+
+    enterSquareFootage(footage) {
+        addCompFormPage.squareFootageInput.clear().type(footage).should("have.value", footage);
+    }
 }
 
 export default new AddCompFormActions();
