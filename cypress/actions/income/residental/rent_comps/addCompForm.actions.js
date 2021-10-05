@@ -119,6 +119,15 @@ class AddCompFormActions {
             this.selectSourceOfInfoAndVerify(value);
         });
     }
+
+    verifyNumberOfBedroomsFiledName() {
+        addCompFormPage.numberOfBedroomsFieldName.should("exist")
+            .should("contain.text", "Number of Bedrooms");
+    }
+
+    enterNumberOfBedrooms(number) {
+        addCompFormPage.bedroomsInput.clear().type(number).should("have.value", number);
+    }
 }
 
 export default new AddCompFormActions();

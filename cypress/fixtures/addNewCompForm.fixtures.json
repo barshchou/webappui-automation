@@ -3,5 +3,6 @@
   "unitTypes": ["Typical", "Duplex", "Triplex", "Simplex", "Penthouse", "Loft", "Garden Style", "Basement", "Garage"],
   "monthlyRent": "3,000",
   "squareFootage": "95",
-  "infoSources": ["bowerySubject", "externalDatabase", "other"]
+  "infoSources": ["bowerySubject", "externalDatabase", "other"],
+  "numberOfBedrooms": "5"
 }

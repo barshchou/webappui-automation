@@ -68,6 +68,13 @@ describe("Add new comparable form tests", () => {
         addCompFormActions.clickCloseButton();
     });
 
+    it("ID75: Number of Bedrooms* text field", () => {
+        rentCompsActions.openAddNewComparableForm();
+        addCompFormActions.verifyNumberOfBedroomsFiledName();
+        addCompFormActions.enterNumberOfBedrooms(testData.numberOfBedrooms);
+        addCompFormActions.clickCloseButton();
+    });
+
     after("Delete report", () => {
         cy.restoreLocalStorage();
         rentCompsActions.returnToHomePageAndSave();
