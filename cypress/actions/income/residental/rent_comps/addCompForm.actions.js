@@ -40,6 +40,14 @@ class AddCompFormActions {
            this.selectUnitTypeAndVerify(value);
         });
     }
+
+    verifyMonthRentFieldName() {
+        addCompFormPage.monthRentFieldName.should("exist").should("contain.text", "Monthly Rent");
+    }
+
+    enterMonthlyRent(rent) {
+        addCompFormPage.monthRentInput.clear().type(rent).should("have.value", rent);
+    }
 }
 
 export default new AddCompFormActions();

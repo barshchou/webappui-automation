@@ -40,6 +40,13 @@ describe("Add new comparable form tests", () => {
        addCompFormActions.clickCloseButton();
     });
 
+    it("ID71: Monthly Rent* text field", () => {
+        rentCompsActions.openAddNewComparableForm();
+        addCompFormActions.verifyMonthRentFieldName();
+        addCompFormActions.enterMonthlyRent(testData.monthlyRent);
+        addCompFormActions.clickCloseButton();
+    });
+
     after("Delete report", () => {
         cy.restoreLocalStorage();
         rentCompsActions.returnToHomePageAndSave();
