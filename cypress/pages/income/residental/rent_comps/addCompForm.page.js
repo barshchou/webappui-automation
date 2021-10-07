@@ -27,6 +27,9 @@ class AddCompFormPage extends BasePage{
     get sourceUrlInput() {return cy.get("*[name='sourceUrl']");}
     get numberOfRoomsFieldName() {return cy.get("*[data-qa='unit-rooms-input'] > label");}
     get numberOfRoomsInput() {return cy.get("*[name='rooms']");}
+    get numberOfBathFieldName() {return cy.get("*[data-qa='unit-bathrooms-input'] > label");}
+    get numberOfBathInput() {return cy.get("*[name='bathrooms']");}
+    get bathNumbErrorMessage() {return cy.contains("Must be a whole or half number");}
 }
 
 export default new AddCompFormPage();

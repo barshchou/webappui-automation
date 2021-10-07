@@ -153,6 +153,23 @@ class AddCompFormActions {
     enterNumberOfRooms(numberOfRooms) {
         addCompFormPage.numberOfRoomsInput.clear().type(numberOfRooms).should("have.value", numberOfRooms);
     }
+
+    verifyNumberOfBathFieldName() {
+        addCompFormPage.numberOfBathFieldName.should("exist")
+            .should("have.text", "Number of Bathrooms");
+    }
+
+    enterNumberOfBathrooms(number = 0) {
+        number = number.toFixed(1);
+        number = `${number}`;
+        let numberDigits = number.split(".");
+        addCompFormPage.numberOfBathInput.clear().type(number).type("{enter}").should("have.value", number);
+        if (numberDigits[1] !== "5") {
+            addCompFormPage.numberOfRoomsInput.click();
+            addCompFormPage.numberOfBathInput.click();
+            addCompFormPage.bathNumbErrorMessage.should("exist");
+        }
+    }
 }
 
 export default new AddCompFormActions();

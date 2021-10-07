@@ -105,6 +105,14 @@ describe("Add new comparable form tests", () => {
        addCompFormActions.clickCloseButton();
     });
 
+    it("ID79: Number of Bathrooms", () => {
+       rentCompsActions.openAddNewComparableForm();
+       addCompFormActions.verifyNumberOfBathFieldName();
+       addCompFormActions.enterNumberOfBathrooms(testData.numberOfBathOk);
+       addCompFormActions.enterNumberOfBathrooms(testData.numberOfBathWrong);
+       addCompFormActions.clickCloseButton();
+    });
+
     after("Delete report", () => {
         cy.restoreLocalStorage();
         rentCompsActions.returnToHomePageAndSave();

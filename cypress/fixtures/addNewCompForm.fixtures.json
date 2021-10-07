@@ -7,5 +7,7 @@
   "numberOfBedrooms": "5",
   "sourceName": "some source name",
   "sourceUrl": "https://test-url.com",
-  "numberOfRooms": "7"
+  "numberOfRooms": "7",
+  "numberOfBathOk": 3.5,
+  "numberOfBathWrong": 2.1
 }
