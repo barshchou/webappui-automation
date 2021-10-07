@@ -23,6 +23,7 @@ class AddCompFormPage extends BasePage{
     get sourceOfInfoInputToCheck() {return cy.get("*[data-qa='sourceOfInformation-select-list'] input");}
     get numberOfBedroomsFieldName() {return cy.get("*[data-qa='unit-bedrooms-input'] > label");}
     get bedroomsInput() {return cy.get("*[name='bedrooms']");}
+    get sourceNameInput() {return cy.get("*[name='sourceName']");}
 }
 
 export default new AddCompFormPage();

@@ -128,6 +128,14 @@ class AddCompFormActions {
     enterNumberOfBedrooms(number) {
         addCompFormPage.bedroomsInput.clear().type(number).should("have.value", number);
     }
+
+    enterSourceName(name) {
+        addCompFormPage.sourceNameInput.should("exist").clear().type(name).should("have.value", name);
+    }
+
+    verifySourceNameNotExist() {
+        addCompFormPage.sourceNameInput.should("not.exist");
+    }
 }
 
 export default new AddCompFormActions();

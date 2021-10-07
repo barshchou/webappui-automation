@@ -75,6 +75,17 @@ describe("Add new comparable form tests", () => {
         addCompFormActions.clickCloseButton();
     });
 
+    it("ID76: Source Name text field", () => {
+        rentCompsActions.openAddNewComparableForm();
+        addCompFormActions.selectSourceOfInfoAndVerify(testData.infoSources[1]);
+        addCompFormActions.enterSourceName(testData.sourceName);
+        addCompFormActions.selectSourceOfInfoAndVerify(testData.infoSources[0]);
+        addCompFormActions.verifySourceNameNotExist();
+        addCompFormActions.selectSourceOfInfoAndVerify(testData.infoSources[2]);
+        addCompFormActions.enterSourceName(testData.sourceName);
+        addCompFormActions.clickCloseButton();
+    });
+
     after("Delete report", () => {
         cy.restoreLocalStorage();
         rentCompsActions.returnToHomePageAndSave();

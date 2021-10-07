@@ -4,5 +4,6 @@
   "monthlyRent": "3,000",
   "squareFootage": "95",
   "infoSources": ["bowerySubject", "externalDatabase", "other"],
-  "numberOfBedrooms": "5"
+  "numberOfBedrooms": "5",
+  "sourceName": "some source name"
 }
