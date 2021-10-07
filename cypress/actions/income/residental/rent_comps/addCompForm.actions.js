@@ -170,6 +170,11 @@ class AddCompFormActions {
             addCompFormPage.bathNumbErrorMessage.should("exist");
         }
     }
+
+    enterInternalNotes(notes) {
+        addCompFormPage.internalNotesTextField.should("exist").should("have.attr", "placeholder",
+            "Write internal notes that will not be exported.").clear().type(notes).should("have.text", notes);
+    }
 }
 
 export default new AddCompFormActions();

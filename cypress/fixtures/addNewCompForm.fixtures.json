@@ -9,5 +9,6 @@
   "sourceUrl": "https://test-url.com",
   "numberOfRooms": "7",
   "numberOfBathOk": 3.5,
-  "numberOfBathWrong": 2.1
+  "numberOfBathWrong": 2.1,
+  "internalNotes": "This is test notes for internal notes test field"
 }

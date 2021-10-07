@@ -30,6 +30,7 @@ class AddCompFormPage extends BasePage{
     get numberOfBathFieldName() {return cy.get("*[data-qa='unit-bathrooms-input'] > label");}
     get numberOfBathInput() {return cy.get("*[name='bathrooms']");}
     get bathNumbErrorMessage() {return cy.contains("Must be a whole or half number");}
+    get internalNotesTextField() {return cy.get("*[name='internalNotes']");}
 }
 
 export default new AddCompFormPage();

@@ -113,6 +113,12 @@ describe("Add new comparable form tests", () => {
        addCompFormActions.clickCloseButton();
     });
 
+    it("ID80: Internal Notes text field", () => {
+       rentCompsActions.openAddNewComparableForm();
+       addCompFormActions.enterInternalNotes(testData.internalNotes);
+       addCompFormActions.clickCloseButton();
+    });
+
     after("Delete report", () => {
         cy.restoreLocalStorage();
         rentCompsActions.returnToHomePageAndSave();
