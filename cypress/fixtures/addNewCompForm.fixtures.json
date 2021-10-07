@@ -6,5 +6,6 @@
   "infoSources": ["bowerySubject", "externalDatabase", "other"],
   "numberOfBedrooms": "5",
   "sourceName": "some source name",
-  "sourceUrl": "https://test-url.com"
+  "sourceUrl": "https://test-url.com",
+  "numberOfRooms": "7"
 }

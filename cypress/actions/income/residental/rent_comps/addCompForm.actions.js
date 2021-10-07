@@ -144,6 +144,15 @@ class AddCompFormActions {
     enterSourceUrl(url) {
         addCompFormPage.sourceUrlInput.should("exist").clear().type(url).should("have.value", url);
     }
+
+    verifyNumberOfRoomsFieldName() {
+        addCompFormPage.numberOfRoomsFieldName.should("exist")
+            .should("contain.text", "Number of Rooms");
+    }
+
+    enterNumberOfRooms(numberOfRooms) {
+        addCompFormPage.numberOfRoomsInput.clear().type(numberOfRooms).should("have.value", numberOfRooms);
+    }
 }
 
 export default new AddCompFormActions();
