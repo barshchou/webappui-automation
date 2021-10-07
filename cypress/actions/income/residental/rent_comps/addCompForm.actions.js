@@ -136,6 +136,14 @@ class AddCompFormActions {
     verifySourceNameNotExist() {
         addCompFormPage.sourceNameInput.should("not.exist");
     }
+
+    verifySourceUrlNotExist() {
+        addCompFormPage.sourceUrlInput.should("not.exist");
+    }
+
+    enterSourceUrl(url) {
+        addCompFormPage.sourceUrlInput.should("exist").clear().type(url).should("have.value", url);
+    }
 }
 
 export default new AddCompFormActions();

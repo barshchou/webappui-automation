@@ -86,6 +86,18 @@ describe("Add new comparable form tests", () => {
         addCompFormActions.clickCloseButton();
     });
 
+    it("ID77: Source URL text field", () => {
+       rentCompsActions.openAddNewComparableForm();
+       addCompFormActions.verifySourceUrlNotExist();
+       addCompFormActions.selectSourceOfInfoAndVerify(testData.infoSources[1]);
+       addCompFormActions.enterSourceUrl(testData.sourceUrl);
+       addCompFormActions.selectSourceOfInfoAndVerify(testData.infoSources[0]);
+       addCompFormActions.verifySourceUrlNotExist();
+       addCompFormActions.selectSourceOfInfoAndVerify(testData.infoSources[2]);
+       addCompFormActions.verifySourceUrlNotExist();
+       addCompFormActions.clickCloseButton();
+    });
+
     after("Delete report", () => {
         cy.restoreLocalStorage();
         rentCompsActions.returnToHomePageAndSave();
