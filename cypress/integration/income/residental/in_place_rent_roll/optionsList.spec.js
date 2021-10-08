@@ -21,7 +21,7 @@ describe("In-Place Rent Roll options list tests", () => {
     });
 
     it("ID2: Text: 'Skip manual rent roll entry. Upload a CSV file.'", () => {
-        rentRollActions.verifyUploadCSVRow(testData.csvLinkToBe);
+        rentRollActions.verifyUploadCSVRow();
     });
 
     it("ID3: Import manager ('Import Data' button is displayed when .csv file is selected)", () => {

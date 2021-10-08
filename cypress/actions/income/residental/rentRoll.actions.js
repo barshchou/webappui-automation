@@ -6,9 +6,17 @@ class InPlaceRentRollActions extends BaseActions {
         rentRollPage.importViaCSVHeader.scrollIntoView().should("be.visible");
     }
 
-    verifyUploadCSVRow(linkToCSV) {
+    verifyUploadCSVRow() {
+        let linkToCSV;
         rentRollPage.skipManualRentEntryRow.scrollIntoView().should("be.visible");
-        rentRollPage.uploadCSVLink.should("be.visible").should("have.attr", "href", linkToCSV);
+        cy.url().then(url => {
+            if (url.includes("staging")) {
+                linkToCSV = "https://docs.google.com/spreadsheets/d/1AqdrQtMkJaiZKiaY0S0U-741_QCXeqesHRujlpLTRtA/edit#gid=707609080";
+            } else {
+                linkToCSV = "https://docs.google.com/spreadsheets/d/169M9MMz-sKQ1TMjIN1mLM1nvLwDJCNx7KF89Dis2NqM/edit?usp=sharing";
+            }
+            rentRollPage.uploadCSVLink.should("be.visible").should("have.attr", "href", linkToCSV);
+        });
     }
 
     verifyNumberOFResidentalUnits(unitsNumber) {

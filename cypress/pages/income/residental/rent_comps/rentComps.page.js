@@ -56,6 +56,13 @@ class RentCompsPage extends BasePage{
     get submitButton() {return cy.get("*[data-qa='submit-button']");}
     get searchResultsRows() {return cy.get("tr[data-qa^='search-results']");}
     get newUnitForm() {return cy.get("*[data-qa='new-unit-modal']");}
+    getCategoryRowByIndexLocator(index) {return `*[data-qa='row-${index}']`;}
+    getCategoryRowByIndex(index) {return cy.get(this.getCategoryRowByIndexLocator(index));}
+    get categoryRoomsCellsLocator() {return "*[data-qa='col-rooms']";}
+    get categoryBedroomsCellsLocator() {return "*[data-qa='col-bedrooms']";}
+    get categoryRentsCellsLocator() {return "*[data-qa='col-rent']";}
+    get categoryRentPerRoomLocator() {return "*[data-qa='col-rentPerRoom']";}
+    get categorySourceOfInfoLocator() {return "*[data-qa='col-source-of-info']";}
 }
 
 export default new RentCompsPage();

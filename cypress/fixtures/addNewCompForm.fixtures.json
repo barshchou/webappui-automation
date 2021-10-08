@@ -11,5 +11,6 @@
   "numberOfBathOk": 3.5,
   "numberOfBathWrong": 2.1,
   "internalNotes": "This is test notes for internal notes test field",
-  "amenitiesQaAttr": ["none", "backyard", "balcony", "roof", "terrace", "buildingLaundry", "unitLaundry"]
+  "amenitiesQaAttr": ["none", "backyard", "balcony", "roof", "terrace", "buildingLaundry", "unitLaundry"],
+  "sourceOfInfoTexts": ["Bowery Subject", "External Database", "Other"]
 }

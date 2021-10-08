@@ -1,8 +1,9 @@
 import BaseActions from "../../../base/base.actions";
 import rentCompsPage from "../../../../pages/income/residental/rent_comps/rentComps.page";
 import {getTodayDateString, getTodayDay, isDateHasCorrectFormat} from "../../../../../utils/date.utils";
+import addCompFormPage from "../../../../pages/income/residental/rent_comps/addCompForm.page";
 
-class RentCompsActions extends BaseActions{
+class RentCompsActions extends BaseActions {
     verifyGCText(conclusionType = "AS_IS") {
         if (conclusionType === "AS_IS") {
             rentCompsPage.generatedCommentary.should("exist").should("contain.text",
@@ -24,11 +25,11 @@ class RentCompsActions extends BaseActions{
     }
 
     verifyBuildingSelected() {
-        rentCompsPage.buildingSwitchButton.should("have.attr","data-qa-isselected", "true");
+        rentCompsPage.buildingSwitchButton.should("have.attr", "data-qa-isselected", "true");
     }
 
     verifyUnitSelected() {
-        rentCompsPage.unitSwitchButton.should("have.attr","data-qa-isselected", "true");
+        rentCompsPage.unitSwitchButton.should("have.attr", "data-qa-isselected", "true");
     }
 
     clickSwitchConfirmButton() {
@@ -38,17 +39,17 @@ class RentCompsActions extends BaseActions{
     clickUnitTypesArrowButton() {
         rentCompsPage.unitTypesArrowButton.scrollIntoView().should("be.visible").click();
     }
-    
+
     checkUncheckCheckboxByQaAttr(attribute, check = true) {
         if (check) {
             rentCompsPage.getCheckboxByDataQaAttr(attribute)
-                .should("have.value", "false").check({force:true}).should("have.value", "true");
+                .should("have.value", "false").check({force: true}).should("have.value", "true");
         } else {
             rentCompsPage.getCheckboxByDataQaAttr(attribute)
-                .should("have.value", "true").uncheck({force:true}).should("have.value", "false");
+                .should("have.value", "true").uncheck({force: true}).should("have.value", "false");
         }
     }
-    
+
     checkUncheckListOfCheckboxesByQa(attributes, check = true) {
         attributes.forEach(attr => {
             this.checkUncheckCheckboxByQaAttr(attr, check);
@@ -160,7 +161,7 @@ class RentCompsActions extends BaseActions{
 
     clearDateInputs(types) {
         types.forEach(type => {
-           this.clearDateInput(type);
+            this.clearDateInput(type);
         });
     }
 
@@ -244,14 +245,14 @@ class RentCompsActions extends BaseActions{
 
     selectSortByOptionByValue(value) {
         this.verifyLoadingDoesntExist();
-        rentCompsPage.sortByDropdown.should("be.visible").click({force:true});
+        rentCompsPage.sortByDropdown.should("be.visible").click({force: true});
         rentCompsPage.getSortDropdownOptionByValue(value).click();
         rentCompsPage.sortByDropdown.should("have.text", value);
     }
 
     selectSortByOptionsByValues(values) {
         values.forEach(value => {
-           this.selectSortByOptionByValue(value);
+            this.selectSortByOptionByValue(value);
         });
     }
 
@@ -290,8 +291,6 @@ class RentCompsActions extends BaseActions{
     verifyCompAddressesExist() {
         rentCompsPage.comparableAddressesTexts.each($address => {
             expect($address).not.to.be.empty;
-            let addressArray = $address.text().split(",");
-            expect(addressArray).to.have.length(3);
         });
     }
 
@@ -304,8 +303,8 @@ class RentCompsActions extends BaseActions{
 
     verifyCompAmenitiesTextsExist() {
         rentCompsPage.comparablesAmenitiesTexts.each($amenityEl => {
-           cy.wrap($amenityEl).should("exist").should("contain.text", "bed")
-               .should("contain.text", "bath");
+            cy.wrap($amenityEl).should("exist").should("contain.text", "bed")
+                .should("contain.text", "bath");
         });
     }
 
@@ -339,7 +338,7 @@ class RentCompsActions extends BaseActions{
                 if (i !== 0) {
                     rentCompsPage.selectedComparableButtons.eq(i).should("not.exist");
                 }
-                cy.wrap(buttons.eq(i)).should("be.enabled").click({force:true});
+                cy.wrap(buttons.eq(i)).should("be.enabled").click({force: true});
                 rentCompsPage.selectedComparableButtons.eq(i).should("exist");
             }
         });
@@ -367,6 +366,25 @@ class RentCompsActions extends BaseActions{
         rentCompsPage.searchResultsRows.eq(searchResIndex).click();
         rentCompsPage.submitButton.should("not.be.disabled").click();
         rentCompsPage.newUnitForm.should("be.visible");
+    }
+
+    verifyAddedComparable(index, numberOfRooms, numberOfBedrooms, monthlyRent,
+                          sourceOfInfo, numberOfUnits = 0) {
+        if (numberOfUnits === 0) {
+            rentCompsPage.uncategorizedTable.find(rentCompsPage.getCategoryRowByIndexLocator(index)).then(row => {
+                this.verifyCellText(row, rentCompsPage.categoryRoomsCellsLocator, numberOfRooms);
+                this.verifyCellText(row, rentCompsPage.categoryBedroomsCellsLocator, numberOfBedrooms);
+                this.verifyCellText(row, rentCompsPage.categoryRentsCellsLocator, `$${monthlyRent}`);
+                const rentForCalc = monthlyRent.replace(",", "");
+                const perRoom = Math.round(rentForCalc / numberOfRooms);
+                this.verifyCellText(row, rentCompsPage.categoryRentPerRoomLocator, `$${perRoom}`);
+                this.verifyCellText(row, rentCompsPage.categorySourceOfInfoLocator, sourceOfInfo);
+            });
+        }
+    }
+
+    verifyCellText(rowJQueryEl, cellLocator, textToBe) {
+        cy.wrap(rowJQueryEl).find(cellLocator).should("have.text", textToBe);
     }
 }
 

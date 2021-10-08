@@ -205,6 +205,10 @@ class AddCompFormActions {
     clickCancelButton() {
         addCompFormPage.cancelButton.should("be.visible").click();
     }
+
+    clickSubmitCompButton() {
+        addCompFormPage.submitCompButton.should("not.be.disabled").click();
+    }
 }
 
 export default new AddCompFormActions();

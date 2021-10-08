@@ -35,6 +35,7 @@ class AddCompFormPage extends BasePage{
     get unitAmenitiesDropdown() {return cy.get("*[data-qa='amenities-form-control'] button");}
     getCheckboxByDataQaAttr(attribute) {return cy.get(`*[data-qa='${attribute}'] input`);}
     get cancelButton() {return cy.get("*[data-qa='cancel-btn']");}
+    get submitCompButton() {return cy.get("*[data-qa='submit-comp-btn']");}
 }
 
 export default new AddCompFormPage();
