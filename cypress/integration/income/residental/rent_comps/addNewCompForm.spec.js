@@ -129,6 +129,13 @@ describe("Add new comparable form tests", () => {
        addCompFormActions.clickCloseButton();
     });
 
+    it.skip("ID82: Back to Results link", () => {
+       rentCompsActions.openAddNewComparableForm();
+       addCompFormActions.clickCancelButton();
+       rentCompsActions.verifySearchResultIsShown();
+       addCompFormActions.clickCloseButton();
+    });
+
     after("Delete report", () => {
         cy.restoreLocalStorage();
         rentCompsActions.returnToHomePageAndSave();

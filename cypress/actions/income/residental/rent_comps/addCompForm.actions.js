@@ -1,6 +1,5 @@
 import addCompFormPage from "../../../../pages/income/residental/rent_comps/addCompForm.page";
 import {getTodayDateString, getTodayDay, isDateHasCorrectFormat} from "../../../../../utils/date.utils";
-import rentCompsPage from "../../../../pages/income/residental/rent_comps/rentComps.page";
 
 class AddCompFormActions {
     clickCloseButton() {
@@ -201,6 +200,10 @@ class AddCompFormActions {
         attributes.forEach(attr => {
             this.checkUncheckCheckboxByQaAttr(attr, check);
         });
+    }
+
+    clickCancelButton() {
+        addCompFormPage.cancelButton.should("be.visible").click();
     }
 }
 

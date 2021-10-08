@@ -353,6 +353,10 @@ class RentCompsActions extends BaseActions{
         }
     }
 
+    verifySearchResultIsShown(searchResultIndex = 0) {
+        rentCompsPage.searchResultsRows.eq(searchResultIndex).should("be.visible");
+    }
+
     openAddNewComparableForm(address = "230 Park Avenue, New-York, USA", searchResIndex = 0) {
         this.verifyLoadingDoesntExist();
         rentCompsPage.addNewRentCompButton.scrollIntoView().should("be.enabled").click();
