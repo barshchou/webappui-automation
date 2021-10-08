@@ -31,6 +31,9 @@ class AddCompFormPage extends BasePage{
     get numberOfBathInput() {return cy.get("*[name='bathrooms']");}
     get bathNumbErrorMessage() {return cy.contains("Must be a whole or half number");}
     get internalNotesTextField() {return cy.get("*[name='internalNotes']");}
+    get unitAmenitiesFieldName() {return cy.get("*[data-qa='amenities-form-control'] label");}
+    get unitAmenitiesDropdown() {return cy.get("*[data-qa='amenities-form-control'] button");}
+    getCheckboxByDataQaAttr(attribute) {return cy.get(`*[data-qa='${attribute}'] input`);}
 }
 
 export default new AddCompFormPage();

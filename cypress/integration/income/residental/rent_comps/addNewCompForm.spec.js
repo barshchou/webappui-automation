@@ -119,6 +119,16 @@ describe("Add new comparable form tests", () => {
        addCompFormActions.clickCloseButton();
     });
 
+    it("ID81: Unit Amenities dropdown", () => {
+       rentCompsActions.openAddNewComparableForm();
+       addCompFormActions.verifyUnitAmenitiesFieldName();
+       addCompFormActions.clickUnitAmenitiesDropdown();
+       addCompFormActions.checkUncheckListOfCheckboxesByQa(testData.amenitiesQaAttr);
+       addCompFormActions.checkUncheckListOfCheckboxesByQa(testData.amenitiesQaAttr, false);
+       addCompFormActions.clickUnitAmenitiesDropdown();
+       addCompFormActions.clickCloseButton();
+    });
+
     after("Delete report", () => {
         cy.restoreLocalStorage();
         rentCompsActions.returnToHomePageAndSave();

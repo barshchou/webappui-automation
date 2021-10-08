@@ -1,5 +1,6 @@
 import addCompFormPage from "../../../../pages/income/residental/rent_comps/addCompForm.page";
 import {getTodayDateString, getTodayDay, isDateHasCorrectFormat} from "../../../../../utils/date.utils";
+import rentCompsPage from "../../../../pages/income/residental/rent_comps/rentComps.page";
 
 class AddCompFormActions {
     clickCloseButton() {
@@ -174,6 +175,32 @@ class AddCompFormActions {
     enterInternalNotes(notes) {
         addCompFormPage.internalNotesTextField.should("exist").should("have.attr", "placeholder",
             "Write internal notes that will not be exported.").clear().type(notes).should("have.text", notes);
+    }
+
+    verifyUnitAmenitiesFieldName() {
+        addCompFormPage.unitAmenitiesFieldName.should("exist").should("have.text", "Unit Amenities");
+    }
+
+    clickUnitAmenitiesDropdown() {
+        addCompFormPage.unitAmenitiesDropdown.should("be.visible").click();
+    }
+
+    checkUncheckCheckboxByQaAttr(attribute, check = true) {
+        if (check) {
+            addCompFormPage.getCheckboxByDataQaAttr(attribute)
+                .should("have.value", "false")
+                .scrollIntoView().check({force:true}).should("have.value", "true");
+        } else {
+            addCompFormPage.getCheckboxByDataQaAttr(attribute)
+                .should("have.value", "true")
+                .scrollIntoView().uncheck({force:true}).should("have.value", "false");
+        }
+    }
+
+    checkUncheckListOfCheckboxesByQa(attributes, check = true) {
+        attributes.forEach(attr => {
+            this.checkUncheckCheckboxByQaAttr(attr, check);
+        });
     }
 }
 

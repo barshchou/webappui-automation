@@ -50,15 +50,9 @@ class RentCompsActions extends BaseActions{
     }
     
     checkUncheckListOfCheckboxesByQa(attributes, check = true) {
-        if (check) {
-            attributes.forEach(attr => {
-                this.checkUncheckCheckboxByQaAttr(attr);
-            });
-        } else {
-            attributes.forEach(attr => {
-                this.checkUncheckCheckboxByQaAttr(attr, false);
-            });
-        }
+        attributes.forEach(attr => {
+            this.checkUncheckCheckboxByQaAttr(attr, check);
+        });
     }
 
     verifyPopUpTextExist() {

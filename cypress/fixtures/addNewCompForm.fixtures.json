@@ -10,5 +10,6 @@
   "numberOfRooms": "7",
   "numberOfBathOk": 3.5,
   "numberOfBathWrong": 2.1,
-  "internalNotes": "This is test notes for internal notes test field"
+  "internalNotes": "This is test notes for internal notes test field",
+  "amenitiesQaAttr": ["none", "backyard", "balcony", "roof", "terrace", "buildingLaundry", "unitLaundry"]
 }
