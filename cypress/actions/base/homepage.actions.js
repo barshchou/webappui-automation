@@ -3,8 +3,9 @@ import BaseActions from "./base.actions";
 
 class HomepageActions extends BaseActions {
 
-    createReport(address = "462 1st Avenue, New York, USA", reportNumber = "TestAutoReport",
-    templateType = "freddie-mac", incomeType = "multifamily", conclusionType = "AS_IS") {
+    createReport(incomeType = "multifamily", address = "462 1st Avenue, New York, USA",
+                 reportNumber = "TestAutoReport", templateType = "freddie-mac",
+                 conclusionType = "AS_IS") {
         this.clickNewReportButton();
         this.enterAddressToSearch(address);
         this.clickFindPropHeader();

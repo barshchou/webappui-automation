@@ -18,6 +18,14 @@ class NavigationSectionActions extends BaseActions {
         navigationSectionPage.rentCompsButton.click();
     }
 
+    clickCommercialArrow() {
+        navigationSectionPage.commercialIncomeArrow.click();
+    }
+
+    clickCommercialRentRollButton() {
+        navigationSectionPage.commercialRentRollButton.click();
+    }
+
     navigateToInPlaceRentRoll() {
         this.clickIncomeApproachButton();
         this.clickResidentalIncomeArrow();
@@ -29,6 +37,13 @@ class NavigationSectionActions extends BaseActions {
         this.clickIncomeApproachButton();
         this.clickResidentalIncomeArrow();
         this.clickRentCompsButton();
+        this.clickYesButton();
+    }
+
+    navigateToCommercialRentRoll() {
+        this.clickIncomeApproachButton();
+        this.clickCommercialArrow();
+        this.clickCommercialRentRollButton();
         this.clickYesButton();
     }
 }
