@@ -2,6 +2,7 @@ import BaseActions from "../../../base/base.actions";
 import rentCompsPage from "../../../../pages/income/residental/rent_comps/rentComps.page";
 import {getTodayDateString, getTodayDay, isDateHasCorrectFormat} from "../../../../../utils/date.utils";
 import addCompFormPage from "../../../../pages/income/residental/rent_comps/addCompForm.page";
+import {numberWithCommas} from "../../../../../utils/numbers.utils";
 
 class RentCompsActions extends BaseActions {
     verifyGCText(conclusionType = "AS_IS") {
@@ -376,7 +377,7 @@ class RentCompsActions extends BaseActions {
                 this.verifyCellText(row, rentCompsPage.categoryBedroomsCellsLocator, numberOfBedrooms);
                 this.verifyCellText(row, rentCompsPage.categoryRentsCellsLocator, `$${monthlyRent}`);
                 const rentForCalc = monthlyRent.replace(",", "");
-                const perRoom = Math.round(rentForCalc / numberOfRooms);
+                const perRoom = numberWithCommas(Math.round(rentForCalc / numberOfRooms));
                 this.verifyCellText(row, rentCompsPage.categoryRentPerRoomLocator, `$${perRoom}`);
                 this.verifyCellText(row, rentCompsPage.categorySourceOfInfoLocator, sourceOfInfo);
             });
