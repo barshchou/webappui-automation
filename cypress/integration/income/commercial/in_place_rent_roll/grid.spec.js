@@ -30,6 +30,10 @@ describe("Commercial In-Place Rent Roll grid tests", () => {
         rentRollActions.uncheckIsInspectedCheckboxByRowNumber();
     });
 
+    it("ID239: # col. (auto)", () => {
+        rentRollActions.verifyUnitNumberCells();
+    });
+
     after("Delete report", () => {
         cy.restoreLocalStorage();
         rentRollActions.returnToHomePageAndSave();

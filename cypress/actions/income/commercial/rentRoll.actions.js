@@ -53,6 +53,13 @@ class CommercialRentRollActions extends BaseActions {
         rentRollPage.isInspectedCheckboxes.eq(rowNumber).click();
         rentRollPage.elementToVerifyIsInspected.should("not.have.css", "background-color", backColor);
     }
+
+    verifyUnitNumberCells(unitNumber = 1) {
+        rentRollPage.unitNumberCells.each(cell => {
+            cy.wrap(cell).should("exist").should("be.visible");
+        });
+        rentRollPage.unitNumberCells.should("have.length", unitNumber + 1);
+    }
 }
 
 export default new CommercialRentRollActions();

@@ -9,6 +9,7 @@ class CommercialRentRollPage extends BasePage{
     get leaseStatusCells() {return cy.get("*[data-qa*='leaseStatus']");}
     get isInspectedCheckboxes() {return cy.get("*[data-qa*='isInspected']");}
     get elementToVerifyIsInspected() {return cy.get("*[data-qa*='isInspected'] span");}
+    get unitNumberCells() {return cy.get("*[data-qa*='#']");}
 }
 
 export default new CommercialRentRollPage();
