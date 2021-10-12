@@ -8,6 +8,9 @@ class NavigationSection extends BasePage {
     get rentCompsButton() {return cy.get("#residential-rent-comps");}
     get commercialIncomeArrow() {return cy.get("#commercialIncome > svg");}
     get commercialRentRollButton() {return cy.get("#commercial-rent-roll");}
+    get commercialStabRentRollButton() {return cy.get("#commercial-projected-rent-roll");}
+    get finalButton() {return cy.get("#final > svg");}
+    get unitInspectionButton() {return cy.get("#unit-inspection");}
 }
 
 export default new NavigationSection();

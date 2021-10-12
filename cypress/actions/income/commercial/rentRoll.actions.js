@@ -1,7 +1,7 @@
 import rentRollPage from "../../../pages/income/commercial/rentRoll.page";
 import BaseActions from "../../base/base.actions";
 
-class CommercialRentRollActions extends BaseActions{
+class CommercialRentRollActions extends BaseActions {
     verifyBasisOfRentTooltip() {
         rentRollPage.basisOfRentField.should("exist");
         rentRollPage.basisOfRentTooltip.should("exist").trigger("mouseover");
@@ -32,6 +32,26 @@ class CommercialRentRollActions extends BaseActions{
         this.clickMonthlyBasisButton(backColor);
         this.clickAnnuallyBasisButton(backColor);
         this.clickPerSquareFootButton(false, backColor);
+    }
+
+    chooseLeaseStatusByRowNumber(status, rowNumber = 0) {
+        rentRollPage.leaseStatusCells.eq(rowNumber).scrollIntoView().dblclick();
+        cy.contains(status).click();
+        rentRollPage.leaseStatusCells.eq(rowNumber).should("have.text", status);
+    }
+
+    checkIsInspectedCheckboxByRowNumber(rowNumber = 0) {
+        const backColor = "rgb(65, 96, 211)";
+        rentRollPage.elementToVerifyIsInspected.should("not.have.css", "background-color", backColor);
+        rentRollPage.isInspectedCheckboxes.eq(rowNumber).dblclick();
+        rentRollPage.elementToVerifyIsInspected.should("have.css", "background-color", backColor);
+    }
+
+    uncheckIsInspectedCheckboxByRowNumber(rowNumber = 0) {
+        const backColor = "rgb(65, 96, 211)";
+        rentRollPage.elementToVerifyIsInspected.should("have.css", "background-color", backColor);
+        rentRollPage.isInspectedCheckboxes.eq(rowNumber).click();
+        rentRollPage.elementToVerifyIsInspected.should("not.have.css", "background-color", backColor);
     }
 }
 

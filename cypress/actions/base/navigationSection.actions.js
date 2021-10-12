@@ -26,6 +26,26 @@ class NavigationSectionActions extends BaseActions {
         navigationSectionPage.commercialRentRollButton.click();
     }
 
+    clickCommercialStabRentRollButton() {
+        navigationSectionPage.commercialStabRentRollButton.click();
+    }
+
+    clickFinalButton() {
+        navigationSectionPage.finalButton.click();
+    }
+
+    clickUnitInspectionButton() {
+        navigationSectionPage.unitInspectionButton.click();
+    }
+
+    navigateToUnitInspection(isWithChanges = true) {
+        this.clickFinalButton();
+        this.clickUnitInspectionButton();
+        if (isWithChanges) {
+            this.clickYesButton();
+        }
+    }
+
     navigateToInPlaceRentRoll() {
         this.clickIncomeApproachButton();
         this.clickResidentalIncomeArrow();
@@ -40,7 +60,7 @@ class NavigationSectionActions extends BaseActions {
         this.clickYesButton();
     }
 
-    navigateToCommercialRentRoll() {
+    navigateToCommercialInPlaceRentRoll() {
         this.clickIncomeApproachButton();
         this.clickCommercialArrow();
         this.clickCommercialRentRollButton();

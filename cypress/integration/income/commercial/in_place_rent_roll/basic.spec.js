@@ -1,4 +1,4 @@
-const testData = require("../../../../fixtures/commercialRentRoll.fixtures.json");
+const testData = require("../../../../fixtures/basicCommInPlaceRentRoll.fixtures.json");
 import homepageActions from "../../../../actions/base/homepage.actions";
 import navSectionActions from "../../../../actions/base/navigationSection.actions";
 import comRentRollActions from "../../../../actions/income/commercial/rentRoll.actions";
@@ -8,7 +8,7 @@ describe("Basic commercial In-Place Rent Roll tests", () => {
         cy.loginByApi();
         homepageActions.createReport(testData.incomeType, testData.address, testData.reportNumber,
             testData.templateType, testData.conclusionType);
-        navSectionActions.navigateToCommercialRentRoll();
+        navSectionActions.navigateToCommercialInPlaceRentRoll();
         cy.saveLocalStorage();
     });
 
