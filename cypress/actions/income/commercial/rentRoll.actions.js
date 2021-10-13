@@ -38,6 +38,19 @@ class CommercialRentRollActions extends BaseActions {
         rentRollPage.leaseStatusCells.eq(rowNumber).scrollIntoView().dblclick();
         cy.contains(status).click();
         rentRollPage.leaseStatusCells.eq(rowNumber).should("have.text", status);
+        if (status === "Vacant") {
+            rentRollPage.getAllCellsByRowNumber(rowNumber).then(cells => {
+               for (let i = 3; i < cells.length; i++) {
+                   cy.wrap(cells).eq(i).should("have.class", "readOnly");
+               }
+            });
+        }
+    }
+
+    chooseLeaseStatusesByRowNumber(statuses, rowNumber = 0) {
+        statuses.forEach(status => {
+            this.chooseLeaseStatusByRowNumber(status, rowNumber);
+        });
     }
 
     checkIsInspectedCheckboxByRowNumber(rowNumber = 0) {
@@ -59,6 +72,19 @@ class CommercialRentRollActions extends BaseActions {
             cy.wrap(cell).should("exist").should("be.visible");
         });
         rentRollPage.unitNumberCells.should("have.length", unitNumber + 1);
+    }
+
+    enterTenantNameByRowNumber(name, rowNumber = 0) {
+        rentRollPage.tenantNameCells.eq(rowNumber).dblclick();
+        rentRollPage.textareaToInput.clear().type(name).type("{enter}");
+    }
+
+    verifyTenantNameByRowNumber(leaseStatus, nameToBe, rowNumber = 0) {
+        if (leaseStatus === "Vacant") {
+            rentRollPage.tenantNameCells.eq(rowNumber).should("have.text", `Commercial Unit ${rowNumber + 1}`);
+        } else {
+            rentRollPage.tenantNameCells.eq(rowNumber).should("have.text", nameToBe);
+        }
     }
 }
 

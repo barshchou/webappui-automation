@@ -19,7 +19,7 @@ describe("Commercial In-Place Rent Roll grid tests", () => {
     });
 
     it("ID238: Inspected col. (checkbox)", () => {
-        rentRollActions.chooseLeaseStatusByRowNumber(testData.leaseStatus);
+        rentRollActions.chooseLeaseStatusByRowNumber(testData.leaseStatuses[0]);
         rentRollActions.checkIsInspectedCheckboxByRowNumber();
         navSectionActions.clickCommercialStabRentRollButton();
         navSectionActions.clickYesButton();
@@ -32,6 +32,18 @@ describe("Commercial In-Place Rent Roll grid tests", () => {
 
     it("ID239: # col. (auto)", () => {
         rentRollActions.verifyUnitNumberCells();
+    });
+
+    it("ID240: Lease Status col", () => {
+        rentRollActions.chooseLeaseStatusesByRowNumber(testData.leaseStatuses);
+    });
+
+    it("ID241: Tenant Name col", () => {
+        rentRollActions.chooseLeaseStatusByRowNumber(testData.leaseStatuses[0]);
+        rentRollActions.enterTenantNameByRowNumber(testData.tenantName);
+        rentRollActions.verifyTenantNameByRowNumber(testData.leaseStatuses[0], testData.tenantName);
+        rentRollActions.chooseLeaseStatusByRowNumber(testData.leaseStatuses[1]);
+        rentRollActions.verifyTenantNameByRowNumber(testData.leaseStatuses[1]);
     });
 
     after("Delete report", () => {

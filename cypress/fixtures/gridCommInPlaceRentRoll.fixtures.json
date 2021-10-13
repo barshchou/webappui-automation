@@ -4,5 +4,6 @@
   "reportNumber": "TestAutoReport",
   "templateType": "freddie-mac",
   "conclusionType": "AS_IS",
-  "leaseStatus": "Occupied"
+  "leaseStatuses": ["Occupied", "Vacant"],
+  "tenantName": "Test tenant name"
 }

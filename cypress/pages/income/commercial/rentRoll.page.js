@@ -6,10 +6,13 @@ class CommercialRentRollPage extends BasePage{
     get perSquareBasisButton() {return cy.get("button[value='per square foot']");}
     get monthlyBasisButton() {return cy.get("button[value='monthly']");}
     get annuallyBasisButton() {return cy.get("button[value='annually']");}
-    get leaseStatusCells() {return cy.get("*[data-qa*='leaseStatus']");}
-    get isInspectedCheckboxes() {return cy.get("*[data-qa*='isInspected']");}
-    get elementToVerifyIsInspected() {return cy.get("*[data-qa*='isInspected'] span");}
+    get leaseStatusCells() {return cy.get("*[data-qa*='leaseStatus']:not([class*='readOnly'])");}
+    get isInspectedCheckboxes() {return cy.get("*[data-qa*='isInspected']:not([class*='readOnly'])");}
+    get elementToVerifyIsInspected() {return cy.get("*[data-qa*='isInspected']:not([class*='readOnly']) span");}
     get unitNumberCells() {return cy.get("*[data-qa*='#']");}
+    getAllCellsByRowNumber(rowNumber) {return cy.get(`*[data-qa*='${rowNumber}-cell']`);}
+    get tenantNameCells() {return cy.get("*[data-qa*='tenantName']");}
+    get textareaToInput() {return cy.get("div:not([class*='hidden']) > textarea[class='handsontableInput']");}
 }
 
 export default new CommercialRentRollPage();
