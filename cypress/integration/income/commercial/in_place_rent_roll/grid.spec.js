@@ -4,6 +4,7 @@ import navSectionActions from "../../../../actions/base/navigationSection.action
 import rentRollActions from "../../../../actions/income/commercial/rentRoll.actions";
 import stabRentRollActions from "../../../../actions/income/commercial/stabilizedRentRoll.actions";
 import unitInspectionActions from "../../../../actions/final/unitInspection.actions";
+import commercialUnitsActions from "../../../../actions/property/commercialUnits.actions";
 
 describe("Commercial In-Place Rent Roll grid tests", () => {
     before("Login and navigate to commercial In-Place Rent Roll", () => {
@@ -44,6 +45,13 @@ describe("Commercial In-Place Rent Roll grid tests", () => {
         rentRollActions.verifyTenantNameByRowNumber(testData.leaseStatuses[0], testData.tenantName);
         rentRollActions.chooseLeaseStatusByRowNumber(testData.leaseStatuses[1]);
         rentRollActions.verifyTenantNameByRowNumber(testData.leaseStatuses[1]);
+    });
+
+    it("ID242: Use col", () => {
+        navSectionActions.navigateToCommercialUnits();
+        commercialUnitsActions.clickCommercialUnitTabByIndex();
+        commercialUnitsActions.clickRadioButtonByValueAndUnitIndex();
+
     });
 
     after("Delete report", () => {

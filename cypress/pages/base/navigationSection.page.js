@@ -11,6 +11,8 @@ class NavigationSection extends BasePage {
     get commercialStabRentRollButton() {return cy.get("#commercial-projected-rent-roll");}
     get finalButton() {return cy.get("#final > svg");}
     get unitInspectionButton() {return cy.get("#unit-inspection");}
+    get propertyButton() {return cy.get("#property-information > svg");}
+    get commercialUnitsButton() {return cy.get("#commercial-units");}
 }
 
 export default new NavigationSection();

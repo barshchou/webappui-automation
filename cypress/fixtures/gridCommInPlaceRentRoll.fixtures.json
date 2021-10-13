@@ -5,5 +5,6 @@
   "templateType": "freddie-mac",
   "conclusionType": "AS_IS",
   "leaseStatuses": ["Occupied", "Vacant"],
-  "tenantName": "Test tenant name"
+  "tenantName": "Test tenant name",
+  "useRadios": ["retail", "office", "medical", "community", "undetermined"]
 }

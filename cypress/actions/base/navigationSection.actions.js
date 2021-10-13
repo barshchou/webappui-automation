@@ -38,6 +38,20 @@ class NavigationSectionActions extends BaseActions {
         navigationSectionPage.unitInspectionButton.click();
     }
 
+    clickPropertyButton() {
+        navigationSectionPage.propertyButton.click();
+    }
+
+    clickCommercialUnits() {
+        navigationSectionPage.commercialUnitsButton.click();
+    }
+
+    navigateToCommercialUnits() {
+        this.clickPropertyButton();
+        this.clickCommercialUnits();
+        this.clickYesButton();
+    }
+
     navigateToUnitInspection(isWithChanges = true) {
         this.clickFinalButton();
         this.clickUnitInspectionButton();
