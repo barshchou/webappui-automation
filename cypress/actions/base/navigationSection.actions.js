@@ -46,18 +46,18 @@ class NavigationSectionActions extends BaseActions {
         navigationSectionPage.commercialUnitsButton.click();
     }
 
-    navigateToCommercialUnits() {
+    navigateToCommercialUnits(isFirstTime = true) {
         this.clickPropertyButton();
         this.clickCommercialUnits();
-        this.clickYesButton();
-    }
-
-    navigateToUnitInspection(isWithChanges = true) {
-        this.clickFinalButton();
-        this.clickUnitInspectionButton();
-        if (isWithChanges) {
+        if (isFirstTime) {
             this.clickYesButton();
         }
+    }
+
+    navigateToUnitInspection() {
+        this.clickFinalButton();
+        this.clickUnitInspectionButton();
+        this.clickYesButton();
     }
 
     navigateToInPlaceRentRoll() {

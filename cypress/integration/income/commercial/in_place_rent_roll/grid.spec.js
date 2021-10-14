@@ -28,7 +28,7 @@ describe("Commercial In-Place Rent Roll grid tests", () => {
         navSectionActions.clickCommercialStabRentRollButton();
         navSectionActions.clickYesButton();
         stabRentRollActions.verifyIsInspectedChecked();
-        navSectionActions.navigateToUnitInspection(false);
+        navSectionActions.navigateToUnitInspection();
         unitInspectionActions.verifyNumberOfInspectedUnits();
         navSectionActions.navigateToCommercialInPlaceRentRoll();
         rentRollActions.uncheckIsInspectedCheckboxByRowNumber();
@@ -51,13 +51,16 @@ describe("Commercial In-Place Rent Roll grid tests", () => {
     });
 
     it("ID242: Use col", () => {
-        rentRollActions.verifyUseCellTextByRowNumber(testData.useTexts[testData.useTexts.length - 1]);
+        const defaultUseValue = uppercaseFirstLetter(testData.useRadios[testData.useRadios.length - 1]);
+        rentRollActions.verifyUseCellTextByRowNumber(defaultUseValue);
+        let isFirstTime = true;
         testData.useRadios.forEach(useValue => {
-            navSectionActions.navigateToCommercialUnits();
+            navSectionActions.navigateToCommercialUnits(isFirstTime);
             commercialUnitsActions.clickCommercialUnitTabByIndex();
             commercialUnitsActions.clickRadioButtonByValueAndUnitIndex(useValue);
             navSectionActions.navigateToCommercialInPlaceRentRoll();
             rentRollActions.verifyUseCellTextByRowNumber(uppercaseFirstLetter(useValue));
+            // isFirstTime = false;
         });
     });
 
