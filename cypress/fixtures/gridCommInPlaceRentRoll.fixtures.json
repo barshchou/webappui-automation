@@ -6,5 +6,6 @@
   "conclusionType": "AS_IS",
   "leaseStatuses": ["Occupied", "Vacant"],
   "tenantName": "Test tenant name",
-  "useRadios": ["retail", "office", "medical", "community", "undetermined"]
+  "useRadios": ["retail", "office", "medical", "community", "undetermined"],
+  "wrongFormatLeaseDate": "25/45/3000"
 }

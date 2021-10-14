@@ -12,8 +12,9 @@ class CommercialRentRollPage extends BasePage{
     get unitNumberCells() {return cy.get("*[data-qa*='#']");}
     getAllCellsByRowNumber(rowNumber) {return cy.get(`*[data-qa*='${rowNumber}-cell']`);}
     get tenantNameCells() {return cy.get("*[data-qa*='tenantName']");}
-    get textareaToInput() {return cy.get("div:not([class*='hidden']) > textarea[class='handsontableInput']");}
+    get textareaToInput() {return cy.get("div:not([class*='hidden']) > *[class='handsontableInput']");}
     get useCells() {return cy.get("*[data-qa*=use]");}
+    getLeaseDateCellsByName(name) {return cy.get(`*[data-qa*=lease${name}Date]`);}
 }
 
 export default new CommercialRentRollPage();

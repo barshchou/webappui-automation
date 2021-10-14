@@ -7,6 +7,7 @@ import rentRollActions from "../../../../actions/income/commercial/rentRoll.acti
 import stabRentRollActions from "../../../../actions/income/commercial/stabilizedRentRoll.actions";
 import unitInspectionActions from "../../../../actions/final/unitInspection.actions";
 import commercialUnitsActions from "../../../../actions/property/commercialUnits.actions";
+import {getTodayDateString} from "../../../../../utils/date.utils";
 
 describe("Commercial In-Place Rent Roll grid tests", () => {
     before("Login and navigate to commercial In-Place Rent Roll", () => {
@@ -58,6 +59,28 @@ describe("Commercial In-Place Rent Roll grid tests", () => {
             navSectionActions.navigateToCommercialInPlaceRentRoll();
             rentRollActions.verifyUseCellTextByRowNumber(uppercaseFirstLetter(useValue));
         });
+    });
+
+    it("ID243: Lease Start Date col", () => {
+        const cellName = "Start";
+        rentRollActions.enterLeaseStartDateByRowNumber(cellName, getTodayDateString("/"));
+        rentRollActions.verifyLeaseStartDateByRowNumber(cellName, testData.leaseStatuses[0], getTodayDateString("/"));
+        rentRollActions.chooseLeaseStatusByRowNumber(testData.leaseStatuses[1]);
+        rentRollActions.verifyLeaseStartDateByRowNumber(cellName, testData.leaseStatuses[1]);
+        rentRollActions.chooseLeaseStatusByRowNumber(testData.leaseStatuses[0]);
+        rentRollActions.enterLeaseStartDateByRowNumber(cellName, testData.wrongFormatLeaseDate);
+        rentRollActions.verifyLeaseStartDateByRowNumber(cellName, testData.leaseStatuses[0], testData.wrongFormatLeaseDate);
+    });
+
+    it.skip("ID244: Lease Expiration Date col", () => {
+        const cellName = "Expiry";
+        rentRollActions.enterLeaseStartDateByRowNumber(cellName, getTodayDateString("/"));
+        rentRollActions.verifyLeaseStartDateByRowNumber(cellName, testData.leaseStatuses[0], getTodayDateString("/"));
+        rentRollActions.chooseLeaseStatusByRowNumber(testData.leaseStatuses[1]);
+        rentRollActions.verifyLeaseStartDateByRowNumber(cellName, testData.leaseStatuses[1]);
+        rentRollActions.chooseLeaseStatusByRowNumber(testData.leaseStatuses[0]);
+        rentRollActions.enterLeaseStartDateByRowNumber(cellName, testData.wrongFormatLeaseDate);
+        rentRollActions.verifyLeaseStartDateByRowNumber(cellName, testData.leaseStatuses[0], testData.wrongFormatLeaseDate);
     });
 
     after("Delete report", () => {

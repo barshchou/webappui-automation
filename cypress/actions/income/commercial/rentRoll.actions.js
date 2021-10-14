@@ -1,5 +1,6 @@
 import rentRollPage from "../../../pages/income/commercial/rentRoll.page";
 import BaseActions from "../../base/base.actions";
+import {isDateHasCorrectFormat} from "../../../../utils/date.utils";
 
 class CommercialRentRollActions extends BaseActions {
     verifyBasisOfRentTooltip() {
@@ -80,15 +81,26 @@ class CommercialRentRollActions extends BaseActions {
     }
 
     verifyTenantNameByRowNumber(leaseStatus, nameToBe, rowNumber = 0) {
-        if (leaseStatus === "Vacant") {
-            rentRollPage.tenantNameCells.eq(rowNumber).should("have.text", `Commercial Unit ${rowNumber + 1}`);
-        } else {
-            rentRollPage.tenantNameCells.eq(rowNumber).should("have.text", nameToBe);
-        }
+        let textToBe = leaseStatus === "Vacant" ? `Commercial Unit ${rowNumber + 1}` : nameToBe;
+        rentRollPage.tenantNameCells.eq(rowNumber).should("have.text", textToBe);
     }
 
     verifyUseCellTextByRowNumber(textToBe, rowNumber = 0) {
         rentRollPage.useCells.eq(rowNumber).should("have.text", textToBe);
+    }
+
+    enterLeaseStartDateByRowNumber(cellName, date, rowNumber = 0) {
+        rentRollPage.getLeaseDateCellsByName(cellName).eq(rowNumber).dblclick();
+        rentRollPage.textareaToInput.clear().type(date).type("{enter}");
+    }
+
+    verifyLeaseStartDateByRowNumber(cellName, leaseStatus, dateToBe, rowNumber = 0) {
+        dateToBe = dateToBe ?? "";
+        if (!isDateHasCorrectFormat(dateToBe, "/")) {
+            dateToBe = "";
+        }
+        let textToBe = leaseStatus === "Vacant" ? "-" : dateToBe;
+        rentRollPage.getLeaseDateCellsByName(cellName).eq(rowNumber).should("have.text", textToBe);
     }
 }
 
