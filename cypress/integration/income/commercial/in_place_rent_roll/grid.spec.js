@@ -1,3 +1,5 @@
+import {uppercaseFirstLetter} from "../../../../../utils/string.utils";
+
 const testData = require("../../../../fixtures/gridCommInPlaceRentRoll.fixtures.json");
 import homepageActions from "../../../../actions/base/homepage.actions";
 import navSectionActions from "../../../../actions/base/navigationSection.actions";
@@ -48,10 +50,14 @@ describe("Commercial In-Place Rent Roll grid tests", () => {
     });
 
     it("ID242: Use col", () => {
-        navSectionActions.navigateToCommercialUnits();
-        commercialUnitsActions.clickCommercialUnitTabByIndex();
-        commercialUnitsActions.clickRadioButtonByValueAndUnitIndex();
-
+        rentRollActions.verifyUseCellTextByRowNumber(testData.useTexts[testData.useTexts.length - 1]);
+        testData.useRadios.forEach(useValue => {
+            navSectionActions.navigateToCommercialUnits();
+            commercialUnitsActions.clickCommercialUnitTabByIndex();
+            commercialUnitsActions.clickRadioButtonByValueAndUnitIndex(useValue);
+            navSectionActions.navigateToCommercialInPlaceRentRoll();
+            rentRollActions.verifyUseCellTextByRowNumber(uppercaseFirstLetter(useValue));
+        });
     });
 
     after("Delete report", () => {

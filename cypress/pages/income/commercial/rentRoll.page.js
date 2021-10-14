@@ -13,6 +13,7 @@ class CommercialRentRollPage extends BasePage{
     getAllCellsByRowNumber(rowNumber) {return cy.get(`*[data-qa*='${rowNumber}-cell']`);}
     get tenantNameCells() {return cy.get("*[data-qa*='tenantName']");}
     get textareaToInput() {return cy.get("div:not([class*='hidden']) > textarea[class='handsontableInput']");}
+    get useCells() {return cy.get("*[data-qa*=use]");}
 }
 
 export default new CommercialRentRollPage();

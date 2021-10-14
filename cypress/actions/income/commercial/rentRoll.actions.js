@@ -86,6 +86,10 @@ class CommercialRentRollActions extends BaseActions {
             rentRollPage.tenantNameCells.eq(rowNumber).should("have.text", nameToBe);
         }
     }
+
+    verifyUseCellTextByRowNumber(textToBe, rowNumber = 0) {
+        rentRollPage.useCells.eq(rowNumber).should("have.text", textToBe);
+    }
 }
 
 export default new CommercialRentRollActions();
