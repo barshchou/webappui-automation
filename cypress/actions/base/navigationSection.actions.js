@@ -46,18 +46,22 @@ class NavigationSectionActions extends BaseActions {
         navigationSectionPage.commercialUnitsButton.click();
     }
 
-    navigateToCommercialUnits(isFirstTime = true) {
+    verifyProgressBarNotExist() {
+        navigationSectionPage.progressBar.should("not.exist");
+    }
+
+    navigateToCommercialUnits() {
+        this.clickSaveButton();
+        this.verifyProgressBarNotExist();
         this.clickPropertyButton();
         this.clickCommercialUnits();
-        if (isFirstTime) {
-            this.clickYesButton();
-        }
     }
 
     navigateToUnitInspection() {
+        this.clickSaveButton();
         this.clickFinalButton();
         this.clickUnitInspectionButton();
-        this.clickYesButton();
+        this.verifyProgressBarNotExist();
     }
 
     navigateToInPlaceRentRoll() {
@@ -74,11 +78,13 @@ class NavigationSectionActions extends BaseActions {
         this.clickYesButton();
     }
 
-    navigateToCommercialInPlaceRentRoll() {
+    navigateToCommercialInPlaceRentRoll(isWithSave = true) {
         this.clickIncomeApproachButton();
         this.clickCommercialArrow();
         this.clickCommercialRentRollButton();
-        this.clickYesButton();
+        if (isWithSave) {
+            this.clickYesButton();
+        }
     }
 }
 

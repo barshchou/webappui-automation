@@ -13,6 +13,7 @@ class NavigationSection extends BasePage {
     get unitInspectionButton() {return cy.get("#unit-inspection");}
     get propertyButton() {return cy.get("#property-information > svg");}
     get commercialUnitsButton() {return cy.get("#commercial-units");}
+    get progressBar() {return cy.get("*[role='progressbar']");}
 }
 
 export default new NavigationSection();

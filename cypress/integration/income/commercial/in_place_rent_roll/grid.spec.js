@@ -25,12 +25,15 @@ describe("Commercial In-Place Rent Roll grid tests", () => {
     it("ID238: Inspected col. (checkbox)", () => {
         rentRollActions.chooseLeaseStatusByRowNumber(testData.leaseStatuses[0]);
         rentRollActions.checkIsInspectedCheckboxByRowNumber();
+        rentRollActions.clickSaveButton();
+        navSectionActions.verifyProgressBarNotExist();
         navSectionActions.clickCommercialStabRentRollButton();
-        navSectionActions.clickYesButton();
+        navSectionActions.verifyProgressBarNotExist();
         stabRentRollActions.verifyIsInspectedChecked();
         navSectionActions.navigateToUnitInspection();
         unitInspectionActions.verifyNumberOfInspectedUnits();
-        navSectionActions.navigateToCommercialInPlaceRentRoll();
+        unitInspectionActions.clickSaveButton();
+        navSectionActions.navigateToCommercialInPlaceRentRoll(false);
         rentRollActions.uncheckIsInspectedCheckboxByRowNumber();
     });
 
@@ -48,19 +51,18 @@ describe("Commercial In-Place Rent Roll grid tests", () => {
         rentRollActions.verifyTenantNameByRowNumber(testData.leaseStatuses[0], testData.tenantName);
         rentRollActions.chooseLeaseStatusByRowNumber(testData.leaseStatuses[1]);
         rentRollActions.verifyTenantNameByRowNumber(testData.leaseStatuses[1]);
+        rentRollActions.chooseLeaseStatusByRowNumber(testData.leaseStatuses[0]);
     });
 
     it("ID242: Use col", () => {
         const defaultUseValue = uppercaseFirstLetter(testData.useRadios[testData.useRadios.length - 1]);
         rentRollActions.verifyUseCellTextByRowNumber(defaultUseValue);
-        let isFirstTime = true;
         testData.useRadios.forEach(useValue => {
-            navSectionActions.navigateToCommercialUnits(isFirstTime);
+            navSectionActions.navigateToCommercialUnits();
             commercialUnitsActions.clickCommercialUnitTabByIndex();
             commercialUnitsActions.clickRadioButtonByValueAndUnitIndex(useValue);
             navSectionActions.navigateToCommercialInPlaceRentRoll();
             rentRollActions.verifyUseCellTextByRowNumber(uppercaseFirstLetter(useValue));
-            // isFirstTime = false;
         });
     });
 
