@@ -25,7 +25,7 @@ describe("Basic Rent Comps tests", () => {
 
     after("Delete report", () => {
         cy.restoreLocalStorage();
-        rentCompsActions.returnToHomePageAndSave();
+        rentCompsActions.returnToHomePage();
         homepageActions.deleteReport();
     });
 });

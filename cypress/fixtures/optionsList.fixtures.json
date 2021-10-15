@@ -12,5 +12,6 @@
     "csvNumberOfUnits": 23,
     "xlsxFileName": "Rent_Roll_XLSX.xlsx",
     "rentType": "Market Rate",
-    "summarizeLabel": "Summarize current rent roll"
+    "summarizeLabel": "Summarize current rent roll",
+    "linkToCSV": "https://docs.google.com/spreadsheets/d/169M9MMz-sKQ1TMjIN1mLM1nvLwDJCNx7KF89Dis2NqM/edit?usp=sharing"
 }

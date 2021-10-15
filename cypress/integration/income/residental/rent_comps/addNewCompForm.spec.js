@@ -158,7 +158,7 @@ describe("Add new comparable form tests", () => {
 
     after("Delete report", () => {
         cy.restoreLocalStorage();
-        rentCompsActions.returnToHomePageAndSave();
+        rentCompsActions.returnToHomePage();
         homepageActions.deleteReport();
     });
 });

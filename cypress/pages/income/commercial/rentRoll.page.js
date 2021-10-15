@@ -15,6 +15,7 @@ class CommercialRentRollPage extends BasePage{
     get textareaToInput() {return cy.get("div:not([class*='hidden']) > *[class='handsontableInput']");}
     get useCells() {return cy.get("*[data-qa*=use]");}
     getLeaseDateCellsByName(name) {return cy.get(`*[data-qa*=lease${name}Date]`);}
+    get squareFeetCells() {return cy.get("*[data-qa*=squareFeet]");}
 }
 
 export default new CommercialRentRollPage();

@@ -8,13 +8,8 @@ export default class BaseActions {
         cy.get("*[name='form-confirm-reject-btn']").should("be.visible").click();
     }
 
-    clickReturnToHomePageButton() {
-        cy.get("*[href='/reports']").should("be.visible").click();
-    }
-
-    returnToHomePageAndSave() {
-        this.clickReturnToHomePageButton();
-        this.clickYesButton();
+    returnToHomePage() {
+        cy.visit("/reports");
     }
 
     goBackWithSave() {

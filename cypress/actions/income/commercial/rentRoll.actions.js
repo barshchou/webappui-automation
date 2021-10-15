@@ -1,6 +1,7 @@
 import rentRollPage from "../../../pages/income/commercial/rentRoll.page";
 import BaseActions from "../../base/base.actions";
 import {isDateHasCorrectFormat} from "../../../../utils/date.utils";
+import {numberWithCommas} from "../../../../utils/numbers.utils";
 
 class CommercialRentRollActions extends BaseActions {
     verifyBasisOfRentTooltip() {
@@ -37,13 +38,13 @@ class CommercialRentRollActions extends BaseActions {
 
     chooseLeaseStatusByRowNumber(status, rowNumber = 0) {
         rentRollPage.leaseStatusCells.eq(rowNumber).scrollIntoView().dblclick();
-        cy.contains(status).click();
+        cy.contains(status).click({force: true});
         rentRollPage.leaseStatusCells.eq(rowNumber).should("have.text", status);
         if (status === "Vacant") {
             rentRollPage.getAllCellsByRowNumber(rowNumber).then(cells => {
-               for (let i = 3; i < cells.length; i++) {
-                   cy.wrap(cells).eq(i).should("have.class", "readOnly");
-               }
+                for (let i = 3; i < cells.length; i++) {
+                    cy.wrap(cells).eq(i).should("have.class", "readOnly");
+                }
             });
         }
     }
@@ -101,6 +102,11 @@ class CommercialRentRollActions extends BaseActions {
         }
         let textToBe = leaseStatus === "Vacant" ? "-" : dateToBe;
         rentRollPage.getLeaseDateCellsByName(cellName).eq(rowNumber).should("have.text", textToBe);
+    }
+
+    verifySquareFeetByRowNumber(sfToBe, rowNumber = 0) {
+        sfToBe = numberWithCommas(Math.round(sfToBe));
+        rentRollPage.squareFeetCells.eq(rowNumber).should("have.text", sfToBe);
     }
 }
 

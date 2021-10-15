@@ -21,7 +21,7 @@ describe("In-Place Rent Roll options list tests", () => {
     });
 
     it("ID2: Text: 'Skip manual rent roll entry. Upload a CSV file.'", () => {
-        rentRollActions.verifyUploadCSVRow();
+        rentRollActions.verifyUploadCSVRow(testData.linkToCSV);
     });
 
     it("ID3: Import manager ('Import Data' button is displayed when .csv file is selected)", () => {
@@ -35,7 +35,7 @@ describe("In-Place Rent Roll options list tests", () => {
         summaryActions.goBackWithSave();
         rentRollActions.uploadFile(testData.csvFileName, testData.csvNumberOfUnits);
         cy.reload();
-        rentRollActions.fillRentTypeCells(testData.rentType);
+        rentRollActions.fillAllRentTypeCells(testData.rentType);
         rentRollActions.goToPropSummaryWithSaveLeavingFirst();
         summaryActions.verifyThatPageIsOpened();
         summaryActions.enterNumberOfUnits(testData.numberOFUnits);
@@ -84,7 +84,7 @@ describe("In-Place Rent Roll options list tests", () => {
 
     after("Delete report", () => {
         cy.restoreLocalStorage();
-        rentRollActions.clickReturnToHomePageButton();
+        rentRollActions.returnToHomePage();
         homepageActions.deleteReport();
     });
 });

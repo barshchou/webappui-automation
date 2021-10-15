@@ -23,6 +23,7 @@ describe("Commercial In-Place Rent Roll grid tests", () => {
     });
 
     it("ID238: Inspected col. (checkbox)", () => {
+        navSectionActions.verifyProgressBarNotExist();
         rentRollActions.chooseLeaseStatusByRowNumber(testData.leaseStatuses[0]);
         rentRollActions.checkIsInspectedCheckboxByRowNumber();
         rentRollActions.clickSaveButton();
@@ -51,10 +52,10 @@ describe("Commercial In-Place Rent Roll grid tests", () => {
         rentRollActions.verifyTenantNameByRowNumber(testData.leaseStatuses[0], testData.tenantName);
         rentRollActions.chooseLeaseStatusByRowNumber(testData.leaseStatuses[1]);
         rentRollActions.verifyTenantNameByRowNumber(testData.leaseStatuses[1]);
-        rentRollActions.chooseLeaseStatusByRowNumber(testData.leaseStatuses[0]);
     });
 
     it("ID242: Use col", () => {
+        rentRollActions.chooseLeaseStatusByRowNumber(testData.leaseStatuses[0]);
         const defaultUseValue = uppercaseFirstLetter(testData.useRadios[testData.useRadios.length - 1]);
         rentRollActions.verifyUseCellTextByRowNumber(defaultUseValue);
         testData.useRadios.forEach(useValue => {
@@ -67,6 +68,7 @@ describe("Commercial In-Place Rent Roll grid tests", () => {
     });
 
     it("ID243: Lease Start Date col", () => {
+        rentRollActions.chooseLeaseStatusByRowNumber(testData.leaseStatuses[0]);
         const cellName = "Start";
         rentRollActions.enterLeaseStartDateByRowNumber(cellName, getTodayDateString("/"));
         rentRollActions.verifyLeaseStartDateByRowNumber(cellName, testData.leaseStatuses[0], getTodayDateString("/"));
@@ -78,6 +80,7 @@ describe("Commercial In-Place Rent Roll grid tests", () => {
     });
 
     it.skip("ID244: Lease Expiration Date col", () => {
+        rentRollActions.chooseLeaseStatusByRowNumber(testData.leaseStatuses[0]);
         const cellName = "Expiry";
         rentRollActions.enterLeaseStartDateByRowNumber(cellName, getTodayDateString("/"));
         rentRollActions.verifyLeaseStartDateByRowNumber(cellName, testData.leaseStatuses[0], getTodayDateString("/"));
@@ -88,9 +91,17 @@ describe("Commercial In-Place Rent Roll grid tests", () => {
         rentRollActions.verifyLeaseStartDateByRowNumber(cellName, testData.leaseStatuses[0], testData.wrongFormatLeaseDate);
     });
 
+    it("ID245: SF col", () => {
+        rentRollActions.chooseLeaseStatusByRowNumber(testData.leaseStatuses[0]);
+        navSectionActions.navigateToCommercialUnits();
+        commercialUnitsActions.enterUnitSFByUnitIndex(testData.squareFeet);
+        navSectionActions.navigateToCommercialInPlaceRentRoll(true);
+        rentRollActions.verifySquareFeetByRowNumber(testData.squareFeet);
+    });
+
     after("Delete report", () => {
         cy.restoreLocalStorage();
-        rentRollActions.returnToHomePageAndSave();
+        rentRollActions.returnToHomePage();
         homepageActions.deleteReport(testData.reportNumber);
     });
 });

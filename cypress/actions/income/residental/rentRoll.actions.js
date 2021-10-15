@@ -6,17 +6,9 @@ class InPlaceRentRollActions extends BaseActions {
         rentRollPage.importViaCSVHeader.scrollIntoView().should("be.visible");
     }
 
-    verifyUploadCSVRow() {
-        let linkToCSV;
+    verifyUploadCSVRow(linkToBe) {
         rentRollPage.skipManualRentEntryRow.scrollIntoView().should("be.visible");
-        cy.url().then(url => {
-            if (url.includes("staging")) {
-                linkToCSV = "https://docs.google.com/spreadsheets/d/1AqdrQtMkJaiZKiaY0S0U-741_QCXeqesHRujlpLTRtA/edit#gid=707609080";
-            } else {
-                linkToCSV = "https://docs.google.com/spreadsheets/d/169M9MMz-sKQ1TMjIN1mLM1nvLwDJCNx7KF89Dis2NqM/edit?usp=sharing";
-            }
-            rentRollPage.uploadCSVLink.should("be.visible").should("have.attr", "href", linkToCSV);
-        });
+        rentRollPage.uploadCSVLink.should("be.visible").should("have.attr", "href", linkToBe);
     }
 
     verifyNumberOFResidentalUnits(unitsNumber) {
@@ -116,17 +108,23 @@ class InPlaceRentRollActions extends BaseActions {
         this.verifyNumberOfIsInspectedRows(unitsToBe);
     }
 
-    fillRentTypeCells(value) {
-        rentRollPage.rentTypeCellsWithoutAddColumns.first().click();
-        rentRollPage.rentTypeCellsWithoutAddColumns.each($el => {
-            cy.wrap($el).should("have.class", "highlight").dblclick();
-            rentRollPage.textAreaToInput.type("{del}").type(value).type("{enter}");
-            if (!(($el.text()).includes(value))) {
-                cy.wrap($el).dblclick();
-                rentRollPage.textAreaToInput.type("{del}").type(value).type("{enter}");
+    fillAllRentTypeCells(rentType) {
+        rentRollPage.rentTypeCells.then(cells => {
+            const cellsToFill = cells.length - 2;
+            for (let i = 0; i < cellsToFill; i++) {
+                this.enterRentTypeCellByRowNumber(rentType);
+                this.verifyRentTypeCellByRowNumber(rentType);
             }
-            cy.wrap($el).should("contain.text", value);
         });
+    }
+
+    enterRentTypeCellByRowNumber(rentType, rowNumber = 0) {
+        rentRollPage.rentTypeCells.eq(rowNumber).dblclick();
+        rentRollPage.textAreaToInput.clear().type(rentType).type("{enter}");
+    }
+
+    verifyRentTypeCellByRowNumber(rentTypeToBe, rowNumber = 0) {
+        rentRollPage.rentTypeCells.eq(rowNumber).should("contain.text", rentTypeToBe);
     }
 }
 

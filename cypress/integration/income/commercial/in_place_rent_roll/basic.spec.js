@@ -26,7 +26,7 @@ describe("Basic commercial In-Place Rent Roll tests", () => {
 
     after("Delete report", () => {
         cy.restoreLocalStorage();
-        comRentRollActions.returnToHomePageAndSave();
+        comRentRollActions.returnToHomePage();
         homepageActions.deleteReport(testData.reportNumber);
     });
 });

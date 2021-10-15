@@ -47,7 +47,7 @@ describe("In-Place Rent Roll grid tests", () => {
 
     after("Delete report", () => {
         cy.restoreLocalStorage();
-        rentRollActions.returnToHomePageAndSave();
+        rentRollActions.returnToHomePage();
         homepageActions.deleteReport();
     });
 });

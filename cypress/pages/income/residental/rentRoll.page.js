@@ -15,11 +15,8 @@ class InPlaceRentRollPage extends BasePage {
     get uploadFileInput() {return cy.get("*[data-qa='file-input']");}
     get importDataButton() {return cy.get("*[data-qa='import-data-btn']");}
     get isInspectedColumnCells() {return cy.get("*[data-qa^='isInspected']");}
-    // TODO: change cells locators after adding data-qa attributes
-    get rentTypeCellsWithoutAddColumns() {
-        return cy.xpath("//*[contains(@data-qa, 'isInspected')]//following-sibling::td[4]");
-    }
-    get textAreaToInput() {return cy.get("*[class='handsontableInput']").first();}
+    get rentTypeCells() {return cy.get("*[data-qa*=rentType]");}
+    get textAreaToInput() {return cy.get("div:not([class*='hidden']) > *[class='handsontableInput']");}
 }
 
 export default new InPlaceRentRollPage();

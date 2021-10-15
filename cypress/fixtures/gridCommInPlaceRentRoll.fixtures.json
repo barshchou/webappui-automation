@@ -7,5 +7,6 @@
   "leaseStatuses": ["Occupied", "Vacant"],
   "tenantName": "Test tenant name",
   "useRadios": ["retail", "office", "medical", "community", "undetermined"],
-  "wrongFormatLeaseDate": "25/45/3000"
+  "wrongFormatLeaseDate": "25/45/3000",
+  "squareFeet": 1100.53
 }

@@ -112,7 +112,7 @@ describe("Unit map tests", () => {
 
    after("Delete report", () => {
       cy.restoreLocalStorage();
-      rentCompsActions.returnToHomePageAndSave();
+      rentCompsActions.returnToHomePage();
       homepageActions.deleteReport();
    });
 });

@@ -53,6 +53,8 @@ class NavigationSectionActions extends BaseActions {
     navigateToCommercialUnits() {
         this.clickSaveButton();
         this.verifyProgressBarNotExist();
+        this.clickSaveButton();
+        this.verifyProgressBarNotExist();
         this.clickPropertyButton();
         this.clickCommercialUnits();
     }

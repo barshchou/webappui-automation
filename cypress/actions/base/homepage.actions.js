@@ -75,7 +75,6 @@ class HomepageActions extends BaseActions {
 
     deleteReport(reportNumber = "TestAutoReport") {
         this.verifyThatPageIsOpened();
-        cy.reload();
         this.enterReportNumberToSearch(reportNumber);
         this.clickArchiveButton(reportNumber);
     }
