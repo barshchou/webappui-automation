@@ -11,5 +11,7 @@
   "squareFeet": 200,
   "rentPerSF": 100,
   "monthlyRent": 550.5,
-  "annualRent": 20000.156
+  "annualRent": 20000.156,
+  "monthlyTestSquareFoot": 358,
+  "perSfTestSquareFoot": 190.5
 }

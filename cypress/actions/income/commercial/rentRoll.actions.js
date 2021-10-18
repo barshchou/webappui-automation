@@ -155,6 +155,26 @@ class CommercialRentRollActions extends BaseActions {
         rentRollPage.annualRentCells.eq(rowNumber).dblclick();
         rentRollPage.textareaToInput.clear().type("{enter}");
     }
+
+    verifyMonthlyRentPerSFByRowNumber(rentPerSF, squareFoot, rowNumber = 0) {
+        const textToBe = numberWithCommas(((rentPerSF * squareFoot) / 12).toFixed(2));
+        rentRollPage.monthlyRentCells.eq(rowNumber).should("have.text", `$${textToBe}`);
+    }
+
+    verifyMonthlyRentAnnuallyByRowNumber(annuallyRent, rowNumber = 0) {
+        const textToBe = numberWithCommas((annuallyRent / 12).toFixed(2));
+        rentRollPage.monthlyRentCells.eq(rowNumber).should("have.text", `$${textToBe}`);
+    }
+
+    verifyRentPerSFMonthlyByRowNumber(monthlyRent, squareFoot, rowNumber = 0) {
+        const textToBe = numberWithCommas(((monthlyRent * 12) / squareFoot).toFixed(2));
+        rentRollPage.rentPerSFCells.eq(rowNumber).should("have.text", `$${textToBe}`);
+    }
+
+    verifyRentPerSFAnnuallyByRowNumber(annualRent, squareFoot, rowNumber = 0) {
+        const textToBe = numberWithCommas((annualRent / squareFoot).toFixed(2));
+        rentRollPage.rentPerSFCells.eq(rowNumber).should("have.text", `$${textToBe}`);
+    }
 }
 
 export default new CommercialRentRollActions();
