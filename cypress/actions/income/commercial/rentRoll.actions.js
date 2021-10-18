@@ -38,7 +38,7 @@ class CommercialRentRollActions extends BaseActions {
 
     chooseLeaseStatusByRowNumber(status, rowNumber = 0) {
         rentRollPage.leaseStatusCells.eq(rowNumber).scrollIntoView().dblclick();
-        cy.contains(status).click({force: true});
+        rentRollPage.getLeaseStatusToChooseByValue(status).click({force: true});
         rentRollPage.leaseStatusCells.eq(rowNumber).should("have.text", status);
         if (status === "Vacant") {
             rentRollPage.getAllCellsByRowNumber(rowNumber).then(cells => {
@@ -174,6 +174,28 @@ class CommercialRentRollActions extends BaseActions {
     verifyRentPerSFAnnuallyByRowNumber(annualRent, squareFoot, rowNumber = 0) {
         const textToBe = numberWithCommas((annualRent / squareFoot).toFixed(2));
         rentRollPage.rentPerSFCells.eq(rowNumber).should("have.text", `$${textToBe}`);
+    }
+
+    chooseListLeaseStatuses(statuses, numberOfUnits) {
+        for (let i = 0; i < numberOfUnits; i++) {
+            this.chooseLeaseStatusByRowNumber(statuses[i], i);
+        }
+    }
+
+    enterListPerSF(leaseStatuses, perSFList) {
+        for (let i = 0; i < leaseStatuses.length; i++) {
+            if (leaseStatuses[i] === "Vacant") {
+                continue;
+            }
+            this.enterRentPerSFByRowNumber(perSFList[i], i);
+        }
+    }
+
+    verifySFTotal(sfValues) {
+        let sfTotalToBe = 0;
+        sfValues.forEach(value => sfTotalToBe += value);
+        const textToBe = numberWithCommas(Math.round(sfTotalToBe));
+        rentRollPage.squareFeetCells.last().should("have.text", `${textToBe}`);
     }
 }
 

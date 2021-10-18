@@ -13,5 +13,9 @@
   "monthlyRent": 550.5,
   "annualRent": 20000.156,
   "monthlyTestSquareFoot": 358,
-  "perSfTestSquareFoot": 190.5
+  "perSfTestSquareFoot": 190.5,
+  "numberOfUnits": 3,
+  "squareFootList": [200, 358, 190.5],
+  "leaseStatusesThree": ["Occupied", "Vacant", "Occupied"],
+  "perSFList": [100, 95, 1051.9]
 }

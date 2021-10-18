@@ -8,6 +8,7 @@ import stabRentRollActions from "../../../../actions/income/commercial/stabilize
 import unitInspectionActions from "../../../../actions/final/unitInspection.actions";
 import commercialUnitsActions from "../../../../actions/property/commercialUnits.actions";
 import {getTodayDateString} from "../../../../../utils/date.utils";
+import propertySummaryActions from "../../../../actions/property/summary.actions";
 
 describe("Commercial In-Place Rent Roll grid tests", () => {
     before("Login and navigate to commercial In-Place Rent Roll", () => {
@@ -151,6 +152,21 @@ describe("Commercial In-Place Rent Roll grid tests", () => {
         rentRollActions.verifyRentPerSFAnnuallyByRowNumber(testData.annualRent, testData.perSfTestSquareFoot);
         rentRollActions.clearAnnualRentByRowNumber();
         rentRollActions.clickPerSquareFootButton(false);
+    });
+
+    it("ID249: SF Total", () => {
+         rentRollActions.chooseLeaseStatusByRowNumber(testData.leaseStatuses[0]);
+         navSectionActions.navigateToPropertySummary();
+         propertySummaryActions.enterNumberOfCommercialUnits(testData.numberOfUnits);
+         navSectionActions.clickCommercialUnits();
+         navSectionActions.clickYesButton();
+         commercialUnitsActions.enterListOfCommercialUnits(testData.squareFootList, testData.numberOfUnits);
+         navSectionActions.navigateToCommercialInPlaceRentRoll();
+         rentRollActions.chooseListLeaseStatuses(testData.leaseStatusesThree, testData.numberOfUnits);
+         rentRollActions.verifySFTotal(testData.squareFootList);
+         navSectionActions.navigateToPropertySummary();
+         propertySummaryActions.enterNumberOfCommercialUnits();
+         navSectionActions.navigateToCommercialInPlaceRentRoll();
     });
 
     after("Delete report", () => {

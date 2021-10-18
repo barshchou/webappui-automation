@@ -19,6 +19,12 @@ class CommercialUnitsActions extends BaseActions {
         commercialUnitsPage.commercialUnitsSFInputs.eq(index).clear().type(squareFeet)
             .should("have.value", squareFeet);
     }
+
+    enterListOfCommercialUnits(squareFeetList, numberOfUnits) {
+        for (let i = 0; i < numberOfUnits; i++) {
+            this.enterUnitSFByUnitIndex(squareFeetList[i], i);
+        }
+    }
 }
 
 export default new CommercialUnitsActions();

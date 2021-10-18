@@ -9,6 +9,10 @@ class SummaryActions extends BaseActions {
     enterNumberOfUnits(number) {
         summaryPage.numberOfUnitsInput.clear().type(number).should("have.value", number);
     }
+
+    enterNumberOfCommercialUnits(number = 1) {
+        summaryPage.numberOfCommercialUnitsInput.clear().type(number).should("have.value", number);
+    }
 }
 
 export default new SummaryActions();

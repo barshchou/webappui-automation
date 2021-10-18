@@ -50,6 +50,10 @@ class NavigationSectionActions extends BaseActions {
         navigationSectionPage.progressBar.should("not.exist");
     }
 
+    clickSummaryButton() {
+        navigationSectionPage.summaryButton.click();
+    }
+
     navigateToCommercialUnits() {
         this.clickSaveButton();
         this.verifyProgressBarNotExist();
@@ -87,6 +91,12 @@ class NavigationSectionActions extends BaseActions {
         if (isWithSave) {
             this.clickYesButton();
         }
+    }
+
+    navigateToPropertySummary() {
+        this.clickPropertyButton();
+        this.clickSummaryButton();
+        this.clickYesButton();
     }
 }
 
