@@ -13,7 +13,7 @@ export const cutDecimalPartToTwoDigits = (number) => {
 
 export const isHasDecimalPartMoreTwoDigits = (number) => {
     if (!(typeof number === "number") || !(`${number}`.includes("."))) {
-        throw new Error(`Parameter ${number} is not a number or is not decimal`);
+        return false;
     }
     let numberDigits = number.toString().split(".");
     return numberDigits.length > 2;

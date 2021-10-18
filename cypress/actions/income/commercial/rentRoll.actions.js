@@ -108,6 +108,53 @@ class CommercialRentRollActions extends BaseActions {
         sfToBe = numberWithCommas(Math.round(sfToBe));
         rentRollPage.squareFeetCells.eq(rowNumber).should("have.text", sfToBe);
     }
+
+    enterRentPerSFByRowNumber(value, rowNumber = 0) {
+        rentRollPage.rentPerSFCells.eq(rowNumber).should("not.have.class", "readOnly")
+            .should("have.text", "$0.00").dblclick();
+        rentRollPage.textareaToInput.clear().type(value).type("{enter}");
+        const textToBe = numberWithCommas(value.toFixed(2));
+        rentRollPage.rentPerSFCells.eq(rowNumber).should("have.text", `$${textToBe}`);
+    }
+
+    verifyAnnualRentCellSquareFootByRowNumber(rentPerSF, squareFoot, rowNumber = 0) {
+        const textToBe = numberWithCommas((rentPerSF * squareFoot).toFixed(2));
+        rentRollPage.annualRentCells.eq(rowNumber).should("have.text", `$${textToBe}`);
+    }
+
+    clearRentPerSFByRowNumber(rowNumber = 0) {
+        rentRollPage.rentPerSFCells.eq(rowNumber).dblclick();
+        rentRollPage.textareaToInput.clear().type("{enter}");
+    }
+
+    enterMonthlyRentByRowNumber(monthlyRent, rowNumber = 0) {
+        rentRollPage.monthlyRentCells.eq(rowNumber).should("not.have.class", "readOnly").dblclick();
+        rentRollPage.textareaToInput.clear().type(monthlyRent).type("{enter}");
+        const textToBe = numberWithCommas(monthlyRent.toFixed(2));
+        rentRollPage.monthlyRentCells.eq(rowNumber).should("have.text", `$${textToBe}`);
+    }
+
+    verifyAnnualRentMonthlyByRowNumber(monthlyRent, rowNumber = 0) {
+        const textToBe = numberWithCommas((monthlyRent * 12).toFixed(2));
+        rentRollPage.annualRentCells.eq(rowNumber).should("have.text", `$${textToBe}`);
+    }
+
+    clearMonthlyRentByRowNumber(rowNumber = 0) {
+        rentRollPage.monthlyRentCells.eq(rowNumber).dblclick();
+        rentRollPage.textareaToInput.clear().type("{enter}");
+    }
+
+    enterAnnualRentByRowNumber(annualRent, rowNumber = 0) {
+        rentRollPage.annualRentCells.eq(rowNumber).should("not.have.class", "readOnly").dblclick();
+        rentRollPage.textareaToInput.clear().type(annualRent).type("{enter}");
+        const textToBe = numberWithCommas(annualRent.toFixed(2));
+        rentRollPage.annualRentCells.eq(rowNumber).should("have.text", `$${textToBe}`);
+    }
+
+    clearAnnualRentByRowNumber(rowNumber = 0) {
+        rentRollPage.annualRentCells.eq(rowNumber).dblclick();
+        rentRollPage.textareaToInput.clear().type("{enter}");
+    }
 }
 
 export default new CommercialRentRollActions();

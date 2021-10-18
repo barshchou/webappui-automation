@@ -8,5 +8,8 @@
   "tenantName": "Test tenant name",
   "useRadios": ["retail", "office", "medical", "community", "undetermined"],
   "wrongFormatLeaseDate": "25/45/3000",
-  "squareFeet": 1100.53
+  "squareFeet": 200,
+  "rentPerSF": 100,
+  "monthlyRent": 550.5,
+  "annualRent": 20000.156
 }

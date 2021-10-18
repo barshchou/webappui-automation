@@ -95,8 +95,26 @@ describe("Commercial In-Place Rent Roll grid tests", () => {
         rentRollActions.chooseLeaseStatusByRowNumber(testData.leaseStatuses[0]);
         navSectionActions.navigateToCommercialUnits();
         commercialUnitsActions.enterUnitSFByUnitIndex(testData.squareFeet);
-        navSectionActions.navigateToCommercialInPlaceRentRoll(true);
+        navSectionActions.navigateToCommercialInPlaceRentRoll();
         rentRollActions.verifySquareFeetByRowNumber(testData.squareFeet);
+    });
+
+    it("ID246: Annual Rent col", () => {
+        rentRollActions.chooseLeaseStatusByRowNumber(testData.leaseStatuses[0]);
+        navSectionActions.navigateToCommercialUnits();
+        commercialUnitsActions.enterUnitSFByUnitIndex(testData.squareFeet);
+        navSectionActions.navigateToCommercialInPlaceRentRoll();
+        rentRollActions.enterRentPerSFByRowNumber(testData.rentPerSF);
+        rentRollActions.verifyAnnualRentCellSquareFootByRowNumber(testData.rentPerSF, testData.squareFeet);
+        rentRollActions.clearRentPerSFByRowNumber();
+        rentRollActions.clickMonthlyBasisButton();
+        rentRollActions.enterMonthlyRentByRowNumber(testData.monthlyRent);
+        rentRollActions.verifyAnnualRentMonthlyByRowNumber(testData.monthlyRent);
+        rentRollActions.clearMonthlyRentByRowNumber();
+        rentRollActions.clickAnnuallyBasisButton();
+        rentRollActions.enterAnnualRentByRowNumber(testData.annualRent);
+        rentRollActions.clearAnnualRentByRowNumber();
+        rentRollActions.clickPerSquareFootButton(false);
     });
 
     after("Delete report", () => {

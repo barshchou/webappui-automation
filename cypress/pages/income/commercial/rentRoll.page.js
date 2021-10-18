@@ -16,6 +16,9 @@ class CommercialRentRollPage extends BasePage{
     get useCells() {return cy.get("*[data-qa*=use]");}
     getLeaseDateCellsByName(name) {return cy.get(`*[data-qa*=lease${name}Date]`);}
     get squareFeetCells() {return cy.get("*[data-qa*=squareFeet]");}
+    get rentPerSFCells() {return cy.get("*[data-qa*=rentPsf]");}
+    get annualRentCells() {return cy.get("*[data-qa*=annualRent]");}
+    get monthlyRentCells() {return cy.get("*[data-qa*=monthlyRent]");}
 }
 
 export default new CommercialRentRollPage();
