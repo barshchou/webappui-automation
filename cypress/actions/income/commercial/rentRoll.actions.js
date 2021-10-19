@@ -110,8 +110,7 @@ class CommercialRentRollActions extends BaseActions {
     }
 
     enterRentPerSFByRowNumber(value, rowNumber = 0) {
-        rentRollPage.rentPerSFCells.eq(rowNumber).should("not.have.class", "readOnly")
-            .should("have.text", "$0.00").dblclick();
+        rentRollPage.rentPerSFCells.eq(rowNumber).should("not.have.class", "readOnly").dblclick();
         rentRollPage.textareaToInput.clear().type(value).type("{enter}");
         const textToBe = numberWithCommas(value.toFixed(2));
         rentRollPage.rentPerSFCells.eq(rowNumber).should("have.text", `$${textToBe}`);
@@ -238,7 +237,7 @@ class CommercialRentRollActions extends BaseActions {
     }
 
     clearRentCellsByName(leaseStatuses, columnName) {
-        for (let i = 0; leaseStatuses.length; i++) {
+        for (let i = 0; i < leaseStatuses.length; i++) {
             if (leaseStatuses[i] === "Vacant") {
                 continue;
             }
@@ -255,8 +254,17 @@ class CommercialRentRollActions extends BaseActions {
         }
     }
 
-    verifyPerSFTotal(leaseStatuses, perSfRents) {
-        const textToBe = this.getTotalRentTextToBe(leaseStatuses, perSfRents);
+    verifyPerSFTotal(leaseStatuses, perSfRents, squareFootList) {
+        let totalAnnualRent = 0;
+        let totalSF = 0;
+        for (let i = 0; i < leaseStatuses.length; i++) {
+            if (leaseStatuses[i] === "Vacant") {
+                continue;
+            }
+            totalSF += squareFootList[i];
+            totalAnnualRent += perSfRents[i] * squareFootList[i];
+        }
+        const textToBe = numberWithCommas((totalAnnualRent / totalSF).toFixed(2));
         rentRollPage.rentPerSFCells.last().should("have.text", `$${textToBe}`);
     }
 }

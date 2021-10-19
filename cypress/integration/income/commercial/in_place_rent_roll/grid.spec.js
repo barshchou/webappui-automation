@@ -174,7 +174,7 @@ describe("Commercial In-Place Rent Roll grid tests", () => {
     it("ID252: PerSF Rent Total", () => {
         prepareRentRollTableForTotalCells();
         rentRollActions.enterListPerSF(testData.leaseStatusesThree, testData.perSFList);
-        rentRollActions.verifyPerSFTotal(testData.leaseStatuses, testData.perSFList);
+        rentRollActions.verifyPerSFTotal(testData.leaseStatusesThree, testData.perSFList, testData.squareFootList);
         rentRollActions.clearRentCellsByName(testData.leaseStatusesThree, "perSF");
         changeToDefaultTable(false);
     });
