@@ -197,6 +197,27 @@ class CommercialRentRollActions extends BaseActions {
         const textToBe = numberWithCommas(Math.round(sfTotalToBe));
         rentRollPage.squareFeetCells.last().should("have.text", `${textToBe}`);
     }
+
+    enterListMonthlyRent(leaseStatuses, monthlyRentList) {
+        for (let i = 0; i < leaseStatuses.length; i++) {
+            if (leaseStatuses[i] === "Vacant") {
+                continue;
+            }
+            this.enterMonthlyRentByRowNumber(monthlyRentList[i], i);
+        }
+    }
+
+    verifyMonthlyRentTotal(leaseStatuses, monthlyRents) {
+        let rentTotalToBe = 0;
+        for (let i = 0; i < leaseStatuses.length; i++) {
+            if (leaseStatuses[i] === "Vacant") {
+                continue;
+            }
+            rentTotalToBe += monthlyRents[i];
+        }
+        const textToBe = numberWithCommas(rentTotalToBe.toFixed(2));
+        rentRollPage.monthlyRentCells.last().should("have.text", `$${textToBe}`);
+    }
 }
 
 export default new CommercialRentRollActions();

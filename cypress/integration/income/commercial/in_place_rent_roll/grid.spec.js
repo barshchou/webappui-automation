@@ -155,18 +155,32 @@ describe("Commercial In-Place Rent Roll grid tests", () => {
     });
 
     it("ID249: SF Total", () => {
-         rentRollActions.chooseLeaseStatusByRowNumber(testData.leaseStatuses[0]);
-         navSectionActions.navigateToPropertySummary();
-         propertySummaryActions.enterNumberOfCommercialUnits(testData.numberOfUnits);
-         navSectionActions.clickCommercialUnits();
-         navSectionActions.clickYesButton();
-         commercialUnitsActions.enterListOfCommercialUnits(testData.squareFootList, testData.numberOfUnits);
-         navSectionActions.navigateToCommercialInPlaceRentRoll();
-         rentRollActions.chooseListLeaseStatuses(testData.leaseStatusesThree, testData.numberOfUnits);
-         rentRollActions.verifySFTotal(testData.squareFootList);
-         navSectionActions.navigateToPropertySummary();
-         propertySummaryActions.enterNumberOfCommercialUnits();
-         navSectionActions.navigateToCommercialInPlaceRentRoll();
+        rentRollActions.chooseLeaseStatusByRowNumber(testData.leaseStatuses[0]);
+        navSectionActions.navigateToPropertySummary();
+        propertySummaryActions.enterNumberOfCommercialUnits(testData.numberOfUnits);
+        navSectionActions.clickCommercialUnits();
+        navSectionActions.clickYesButton();
+        commercialUnitsActions.enterListOfCommercialUnits(testData.squareFootList, testData.numberOfUnits);
+        navSectionActions.navigateToCommercialInPlaceRentRoll();
+        rentRollActions.chooseListLeaseStatuses(testData.leaseStatusesThree, testData.numberOfUnits);
+        rentRollActions.verifySFTotal(testData.squareFootList);
+        navSectionActions.navigateToPropertySummary();
+        propertySummaryActions.enterNumberOfCommercialUnits();
+        navSectionActions.navigateToCommercialInPlaceRentRoll();
+    });
+
+    it("ID250: Monthly Rent Total", () => {
+        rentRollActions.chooseLeaseStatusByRowNumber(testData.leaseStatuses[0]);
+        navSectionActions.navigateToPropertySummary();
+        propertySummaryActions.enterNumberOfCommercialUnits(testData.numberOfUnits);
+        navSectionActions.clickCommercialUnits();
+        navSectionActions.clickYesButton();
+        commercialUnitsActions.enterListOfCommercialUnits(testData.squareFootList, testData.numberOfUnits);
+        navSectionActions.navigateToCommercialInPlaceRentRoll();
+        rentRollActions.chooseListLeaseStatuses(testData.leaseStatusesThree, testData.numberOfUnits);
+        rentRollActions.clickMonthlyBasisButton();
+        rentRollActions.enterListMonthlyRent(testData.leaseStatusesThree, testData.monthlyRents);
+        rentRollActions.verifyMonthlyRentTotal(testData.leaseStatusesThree, testData.monthlyRents);
     });
 
     after("Delete report", () => {
