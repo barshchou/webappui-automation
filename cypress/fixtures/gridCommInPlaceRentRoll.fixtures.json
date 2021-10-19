@@ -18,5 +18,6 @@
   "squareFootList": [200, 358, 190.5],
   "leaseStatusesThree": ["Occupied", "Vacant", "Occupied"],
   "perSFList": [100, 95, 1051.9],
-  "monthlyRents": [550.5, 100, 999]
+  "monthlyRents": [550.5, 100, 999],
+  "annualRents": [20000.156, 55555, 3825.948]
 }

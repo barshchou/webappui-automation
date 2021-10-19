@@ -208,15 +208,56 @@ class CommercialRentRollActions extends BaseActions {
     }
 
     verifyMonthlyRentTotal(leaseStatuses, monthlyRents) {
+        const textToBe = this.getTotalRentTextToBe(leaseStatuses, monthlyRents);
+        rentRollPage.monthlyRentCells.last().should("have.text", `$${textToBe}`);
+    }
+
+    enterListAnnuallyRent(leaseStatuses, annuallyRents) {
+        for (let i = 0; i < leaseStatuses.length; i++) {
+            if (leaseStatuses[i] === "Vacant") {
+                continue;
+            }
+            this.enterAnnualRentByRowNumber(annuallyRents[i], i);
+        }
+    }
+
+    getTotalRentTextToBe(leaseStatuses, rentsValues) {
         let rentTotalToBe = 0;
         for (let i = 0; i < leaseStatuses.length; i++) {
             if (leaseStatuses[i] === "Vacant") {
                 continue;
             }
-            rentTotalToBe += monthlyRents[i];
+            rentTotalToBe += rentsValues[i];
         }
-        const textToBe = numberWithCommas(rentTotalToBe.toFixed(2));
-        rentRollPage.monthlyRentCells.last().should("have.text", `$${textToBe}`);
+        return numberWithCommas(rentTotalToBe.toFixed(2));
+    }
+
+    verifyAnnuallyRentTotal(leaseStatuses, annualRents) {
+        const textToBe = this.getTotalRentTextToBe(leaseStatuses, annualRents);
+        rentRollPage.annualRentCells.last().should("have.text", `$${textToBe}`);
+    }
+
+    clearRentCellsByName(leaseStatuses, columnName) {
+        for (let i = 0; leaseStatuses.length; i++) {
+            if (leaseStatuses[i] === "Vacant") {
+                continue;
+            }
+            switch (columnName) {
+                case "perSF":
+                    this.clearRentPerSFByRowNumber(i);
+                    break;
+                case "annually":
+                    this.clearAnnualRentByRowNumber(i);
+                    break;
+                default:
+                    this.clearMonthlyRentByRowNumber(i);
+            }
+        }
+    }
+
+    verifyPerSFTotal(leaseStatuses, perSfRents) {
+        const textToBe = this.getTotalRentTextToBe(leaseStatuses, perSfRents);
+        rentRollPage.rentPerSFCells.last().should("have.text", `$${textToBe}`);
     }
 }
 
