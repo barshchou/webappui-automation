@@ -13,5 +13,15 @@
   "dueType": "dueDate",
   "dateOfValuation": "10-13-2021",
   "valuationType": "dateOfValuation",
-  "engagementFileName": "test_engagement.pdf"
+  "engagementFileName": "test_engagement.pdf",
+  "clientName": "Gerardo  Jorge",
+  "censusTract": "4605.00",
+  "buildingDescriptor": "Building",
+  "streetAddressToBe": "8524 S Oglesby Ave.",
+  "streetNameToBe": "S Oglesby Ave.",
+  "yearBuilt": "1933",
+  "siteArea": 6250,
+  "grossArea": 4732,
+  "numberOfUnits": 6,
+  "floorsNumber": 2
 }

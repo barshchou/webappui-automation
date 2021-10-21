@@ -54,6 +54,10 @@ class NavigationSectionActions extends BaseActions {
         navigationSectionPage.summaryButton.click();
     }
 
+    clickClientButton() {
+        navigationSectionPage.clientButton.click();
+    }
+
     navigateToCommercialUnits() {
         this.clickSaveButton();
         this.verifyProgressBarNotExist();
@@ -96,6 +100,11 @@ class NavigationSectionActions extends BaseActions {
     navigateToPropertySummary() {
         this.clickPropertyButton();
         this.clickSummaryButton();
+        this.clickYesButton();
+    }
+
+    openClientPageInReport() {
+        this.clickClientButton();
         this.clickYesButton();
     }
 }
