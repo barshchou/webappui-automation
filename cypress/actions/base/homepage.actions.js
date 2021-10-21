@@ -19,6 +19,24 @@ class HomepageActions extends BaseActions {
         this.clickCreateReportButton();
     }
 
+    createReportAdvancedSearch(state, address, identifierType, identifier, reportNumber, templateValue, incomeValue,
+                               conclusionValue) {
+        this.clickNewReportButton();
+        this.clickAdvancedSearchButton();
+        this.clickSelectStateButton();
+        this.selectStateByName(state);
+        this.enterAddressToSearch(address);
+        this.clickFindPropHeader();
+        this.enterPropertyIdentifierType(identifierType);
+        this.enterPropertyIdentifier(identifier);
+        this.clickSubmitButton();
+        this.enterReportNumber(reportNumber);
+        this.checkTemplateType(templateValue);
+        this.checkIncomeType(incomeValue);
+        this.checkConclusionType(conclusionValue);
+        this.clickCreateReportButton();
+    }
+
     clickNewReportButton() {
         homepagePage.newReportButton.should("be.enabled").click();
     }
@@ -73,10 +91,30 @@ class HomepageActions extends BaseActions {
         homepagePage.createReportButton.should("be.visible");
     }
 
+    clickAdvancedSearchButton() {
+        homepagePage.advancedSearchButton.click();
+    }
+
     deleteReport(reportNumber = "TestAutoReport") {
         this.verifyThatPageIsOpened();
         this.enterReportNumberToSearch(reportNumber);
         this.clickArchiveButton(reportNumber);
+    }
+
+    clickSelectStateButton() {
+        homepagePage.selectStateButton.click();
+    }
+
+    selectStateByName(name) {
+        homepagePage.getStateByName(name).click();
+    }
+
+    enterPropertyIdentifierType(type) {
+        homepagePage.propertyIdentifierTypeInput.type(type).should("have.value", type);
+    }
+
+    enterPropertyIdentifier(value) {
+        homepagePage.propertyIdentifierInput.type(value).should("have.value", value);
     }
 
 }

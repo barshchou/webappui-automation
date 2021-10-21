@@ -123,3 +123,5 @@ cypress.env.json
 cypress/reports/
 cypress/videos/
 cypress/screenshots/
+
+cypress/fixtures/test_engagement.pdf

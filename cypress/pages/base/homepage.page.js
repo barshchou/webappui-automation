@@ -16,6 +16,11 @@ class Homepage extends BasePage {
         return cy.xpath(`//*[text()='${reportNumber}']//following::*[@data-qa='archive-btn']`).first();
     }
     get keyInfoBlock() {return cy.get("*[data-qa='keyInfo']");}
+    get advancedSearchButton() {return cy.get("*[data-qa=advanced-search-link]");}
+    get selectStateButton() {return cy.get("*[data-qa='search.locationIdentifier-select-list'] [role='button']");}
+    getStateByName(name) {return cy.get(`*[data-qa='search.locationIdentifier-${name}-select-option']`);}
+    get propertyIdentifierTypeInput() {return cy.get("*[name='search.propertyIdentifierType']");}
+    get propertyIdentifierInput() {return cy.get("*[name='search.propertyIdentifier']");}
 }
 
 export default new Homepage();

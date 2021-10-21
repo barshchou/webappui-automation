@@ -1,0 +1,17 @@
+{
+  "state": "Other",
+  "address": "8524 South Oglesby Avenue",
+  "propIdentifierType": "PIN",
+  "identifier": "20-36-420-020-0000",
+  "reportNumber": "Full Report Test Automation",
+  "templateType": "bowery-way",
+  "incomeType": "multifamily",
+  "conclusionType":"AS_COMPLETE",
+  "purposeValue": "Loan underwriting",
+  "interestAppraised": ["Leased Fee Interest", "Leased Fee Interest", "Leased Fee Interest"],
+  "dueDate": "10-18-2021",
+  "dueType": "dueDate",
+  "dateOfValuation": "10-13-2021",
+  "valuationType": "dateOfValuation",
+  "engagementFileName": "test_engagement.pdf"
+}
