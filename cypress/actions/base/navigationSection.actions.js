@@ -46,16 +46,16 @@ class NavigationSectionActions extends BaseActions {
         navigationSectionPage.commercialUnitsButton.click();
     }
 
-    verifyProgressBarNotExist() {
-        navigationSectionPage.progressBar.should("not.exist");
-    }
-
     clickSummaryButton() {
         navigationSectionPage.summaryButton.click();
     }
 
     clickClientButton() {
         navigationSectionPage.clientButton.click();
+    }
+
+    clickMarketButton() {
+        navigationSectionPage.propertyMarketButton.click();
     }
 
     navigateToCommercialUnits() {
@@ -105,6 +105,11 @@ class NavigationSectionActions extends BaseActions {
 
     openClientPageInReport() {
         this.clickClientButton();
+        this.clickYesButton();
+    }
+
+    openMarketPageInProperty() {
+        this.clickMarketButton();
         this.clickYesButton();
     }
 }

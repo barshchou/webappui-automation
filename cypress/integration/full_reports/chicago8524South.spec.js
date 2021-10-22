@@ -1,11 +1,12 @@
-const testData = require("../../fixtures/full_reports/testName.fixtures.json");
+const testData = require("../../fixtures/full_reports/chicago8524South.fixtures.json");
 import homepageActions from "../../actions/base/homepage.actions";
 import keyInfoActions from "../../actions/report/keyInfo.actions";
 import navSectionActions from "../../actions/base/navigationSection.actions";
 import clientActions from "../../actions/report/client.actions";
 import summaryActions from "../../actions/property/summary.actions";
+import marketActions from "../../actions/property/market.actions";
 
-describe("Some description", () => {
+describe("Full doesn't Freddie Mac, only residential, multifamily report ", () => {
    it("Test", () => {
       cy.loginByApi();
       homepageActions.createReportAdvancedSearch(testData.state, testData.address, testData.propIdentifierType,
@@ -22,12 +23,15 @@ describe("Some description", () => {
           testData.buildingDescriptor, testData.propIdentifierType, testData.identifier);
       summaryActions.enterYearBuilt(testData.yearBuilt);
       summaryActions.enterSiteArea(testData.siteArea);
-      summaryActions.enterGrossBuildingArea(testData.grossArea);
-      summaryActions.enterNumberOfUnits(testData.numberOfUnits);
-      summaryActions.enterFloorsNumber(testData.floorsNumber);
+      summaryActions.fillAsCompleteBuildingDescription(testData.grossArea, testData.numberOfUnits, testData.floorsNumber);
       summaryActions.clickWalkUpTypeButtons();
-      summaryActions.enterCurrentGrossBuildingArea(testData.grossArea);
-      summaryActions.enterCurrentNumberOfUnits(testData.numberOfUnits);
-      summaryActions.enterCurrentFloorsNumber(testData.floorsNumber);
+      summaryActions.fillCurrentBuildDescription(testData.grossArea, testData.numberOfUnits, testData.floorsNumber);
+      summaryActions.editAsCompleteExport(testData.asCompleteExportText);
+      navSectionActions.openMarketPageInProperty();
+      marketActions.verifyTimeOnMarket(testData.minExposureMonths, testData.maxExposureMonths);
+      marketActions.fillMarketResearch(testData);
+      marketActions.clickPullFromDropbox();
+      marketActions.verifyAnyDocumentInputIsNotEmpty();
+      marketActions.clickSaveButton();
    });
 });

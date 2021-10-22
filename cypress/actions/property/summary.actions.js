@@ -98,8 +98,23 @@ class SummaryActions extends BaseActions {
         summaryPage.currentFloorsNumber.clear().type(number).should("have.value", number);
     }
 
-    editAsCompleteExport() {
+    editAsCompleteExport(newText) {
         summaryPage.editCommentaryButtons.first().click();
+        summaryPage.textBox.clear().type(newText);
+        summaryPage.textBox.should("have.text", newText);
+        summaryPage.saveExportEditButton.click();
+    }
+
+    fillAsCompleteBuildingDescription(grossArea, numberOfUnits, floorsNumber) {
+        this.enterGrossBuildingArea(grossArea);
+        this.enterNumberOfUnits(numberOfUnits);
+        this.enterFloorsNumber(floorsNumber);
+    }
+
+    fillCurrentBuildDescription(grossArea, numberOfUnits, floorsNumber) {
+        this.enterCurrentGrossBuildingArea(grossArea);
+        this.enterCurrentNumberOfUnits(numberOfUnits);
+        this.enterCurrentFloorsNumber(floorsNumber);
     }
 }
 

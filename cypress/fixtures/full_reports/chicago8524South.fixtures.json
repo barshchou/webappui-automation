@@ -23,5 +23,13 @@
   "siteArea": 6250,
   "grossArea": 4732,
   "numberOfUnits": 6,
-  "floorsNumber": 2
+  "floorsNumber": 2,
+  "asCompleteExportText": "The purchaser plans to renovate the property.",
+  "minExposureMonths": 6,
+  "maxExposureMonths": 9,
+  "neighborhoodValue": "Lakeview",
+  "marketArea": "South Chicago",
+  "stateToBe": "IL",
+  "macroMarket": "IL-Chicago",
+  "submarket": "IL-South Chicago"
 }

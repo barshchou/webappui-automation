@@ -19,6 +19,8 @@ class PropertySummaryPage extends BasePage {
     get currentNumberOfUnits() {return cy.get("*[name='current.residentialUnitCount']");}
     get currentFloorsNumber() {return cy.get("*[name='current.floors']");}
     get editCommentaryButtons() {return cy.get("*[data-icon='pencil']");}
+    get textBox() {return cy.get("*[role=textbox]");}
+    get saveExportEditButton() {return cy.xpath("//button[.='Save'][not(@data-qa='form-save-btn')]");}
 }
 
 export default new PropertySummaryPage();

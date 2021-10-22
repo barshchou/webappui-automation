@@ -13,9 +13,9 @@ class NavigationSection extends BasePage {
     get unitInspectionButton() {return cy.get("#unit-inspection");}
     get propertyButton() {return cy.get("#property-information > svg");}
     get commercialUnitsButton() {return cy.get("#commercial-units");}
-    get progressBar() {return cy.get("*[role='progressbar']");}
     get summaryButton() {return cy.get("#property-summary");}
     get clientButton() {return cy.get("#client");}
+    get propertyMarketButton() {return cy.get("#property-market");}
 }
 
 export default new NavigationSection();
