@@ -31,5 +31,9 @@
   "marketArea": "South Chicago",
   "stateToBe": "IL",
   "macroMarket": "IL-Chicago",
-  "submarket": "IL-South Chicago"
+  "submarket": "IL-South Chicago",
+  "currentOwner": "Daniel & Audrey Brown",
+  "buyer": "RW Taylor Group LLC",
+  "contractDate": "09-14-2021",
+  "contractPrice": 300000
 }

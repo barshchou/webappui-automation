@@ -5,6 +5,7 @@ import navSectionActions from "../../actions/base/navigationSection.actions";
 import clientActions from "../../actions/report/client.actions";
 import summaryActions from "../../actions/property/summary.actions";
 import marketActions from "../../actions/property/market.actions";
+import propertyHistoryActions from "../../actions/property/history.actions";
 
 describe("Full doesn't Freddie Mac, only residential, multifamily report ", () => {
    it("Test", () => {
@@ -32,6 +33,9 @@ describe("Full doesn't Freddie Mac, only residential, multifamily report ", () =
       marketActions.fillMarketResearch(testData);
       marketActions.clickPullFromDropbox();
       marketActions.verifyAnyDocumentInputIsNotEmpty();
-      marketActions.clickSaveButton();
+      navSectionActions.openPropertyHistoryInProperty();
+      propertyHistoryActions.enterCurrentOwner(testData.currentOwner);
+      propertyHistoryActions.checkIsUnderContractCheckbox();
+      propertyHistoryActions.enterContractDetails(testData.buyer, testData.contractDate, testData.contractPrice);
    });
 });

@@ -58,6 +58,10 @@ class NavigationSectionActions extends BaseActions {
         navigationSectionPage.propertyMarketButton.click();
     }
 
+    clickPropertyHistory() {
+        navigationSectionPage.propertyHistoryButton.click();
+    }
+
     navigateToCommercialUnits() {
         this.clickSaveButton();
         this.verifyProgressBarNotExist();
@@ -110,6 +114,11 @@ class NavigationSectionActions extends BaseActions {
 
     openMarketPageInProperty() {
         this.clickMarketButton();
+        this.clickYesButton();
+    }
+
+    openPropertyHistoryInProperty() {
+        this.clickPropertyHistory();
         this.clickYesButton();
     }
 }
