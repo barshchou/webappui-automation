@@ -6,6 +6,7 @@ import clientActions from "../../actions/report/client.actions";
 import summaryActions from "../../actions/property/summary.actions";
 import marketActions from "../../actions/property/market.actions";
 import propertyHistoryActions from "../../actions/property/history.actions";
+import descriptionActions from "../../actions/property/description.actions";
 
 describe("Full doesn't Freddie Mac, only residential, multifamily report ", () => {
    it("Test", () => {
@@ -37,5 +38,24 @@ describe("Full doesn't Freddie Mac, only residential, multifamily report ", () =
       propertyHistoryActions.enterCurrentOwner(testData.currentOwner);
       propertyHistoryActions.checkIsUnderContractCheckbox();
       propertyHistoryActions.enterContractDetails(testData.buyer, testData.contractDate, testData.contractPrice);
+      navSectionActions.openDescriptionInProperty();
+      descriptionActions.selectGeneralPropertyCondition(testData.generalPropertyCondition);
+      descriptionActions.selectAsStabilizedPropertyCondition(testData.stabilizedCondition);
+      descriptionActions.checkListCheckboxesByLabels(testData.locationsInspectedLabels);
+      descriptionActions.checkStairConditionByValue(testData.stairCondition);
+      descriptionActions.checkFoundationByValue(testData.foundationValue);
+      descriptionActions.checkStructuralSystemByValue(testData.structuralSystemValue);
+      descriptionActions.checkListCheckboxesByLabels(testData.externalWallsLabels);
+      descriptionActions.checkFramingByValue(testData.framingValue);
+      descriptionActions.checkRoofTypeByValue(testData.roofType);
+      descriptionActions.checkListCheckboxesByLabels(testData.windowsLabels);
+      descriptionActions.checkListCheckboxesByLabels(testData.plumbingLabels);
+      descriptionActions.checkSprinklersByValue(testData.sprinklersValue);
+      descriptionActions.checkListCheckboxesByLabels(testData.securityLabels);
+      descriptionActions.checkContainsBasement();
+      descriptionActions.checkListCheckboxesByLabels(testData.basementAccess);
+      descriptionActions.checkBasementStateByValue(testData.basementState);
+      descriptionActions.verifyTotalEconomicLife(testData.totalEconomicLifeToBe);
+      descriptionActions.enterAgeEffective(testData.ageEffective);
    });
 });
