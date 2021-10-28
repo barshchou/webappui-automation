@@ -7,6 +7,7 @@ import summaryActions from "../../actions/property/summary.actions";
 import marketActions from "../../actions/property/market.actions";
 import propertyHistoryActions from "../../actions/property/history.actions";
 import descriptionActions from "../../actions/property/description.actions";
+import siteDescriptionActions from "../../actions/property/siteDescription.actions";
 
 describe("Full doesn't Freddie Mac, only residential, multifamily report ", () => {
    it("Test", () => {
@@ -57,5 +58,8 @@ describe("Full doesn't Freddie Mac, only residential, multifamily report ", () =
       descriptionActions.checkBasementStateByValue(testData.basementState);
       descriptionActions.verifyTotalEconomicLife(testData.totalEconomicLifeToBe);
       descriptionActions.enterAgeEffective(testData.ageEffective);
+      navSectionActions.openSiteDescriptionInProperty();
+      siteDescriptionActions.editTransportationDiscussionCommentary(testData.transportationCommentary);
+      siteDescriptionActions.checkSurroundingResidental();
    });
 });

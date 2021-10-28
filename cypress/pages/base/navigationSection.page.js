@@ -18,6 +18,7 @@ class NavigationSection extends BasePage {
     get propertyMarketButton() {return cy.get("#property-market");}
     get propertyHistoryButton() {return cy.get("#property-history");}
     get propertyDescriptionButton() {return cy.get("#general-property-description");}
+    get siteDescription() {return cy.get("#site-description");}
 }
 
 export default new NavigationSection();
