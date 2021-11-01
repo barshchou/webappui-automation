@@ -71,5 +71,6 @@ describe("Full doesn't Freddie Mac, only residential, multifamily report ", () =
       siteDescriptionActions.verifySiteDescriptionItems(testData.siteDescriptionItems);
       siteDescriptionActions.editFloodHazardCommentary(testData.floodHazardCommentary);
       siteDescriptionActions.verifyUtilitiesItems(testData.utilitiesItems);
+      siteDescriptionActions.verifyUtilitiesDescriptions(testData.utilitiesDescription);
    });
 });
