@@ -8,6 +8,7 @@ import marketActions from "../../actions/property/market.actions";
 import propertyHistoryActions from "../../actions/property/history.actions";
 import descriptionActions from "../../actions/property/description.actions";
 import siteDescriptionActions from "../../actions/property/siteDescription.actions";
+import propertyMapsActions from "../../actions/property/maps.actions";
 
 describe("Full doesn't Freddie Mac, only residential, multifamily report ", () => {
    it("Test", () => {
@@ -61,5 +62,14 @@ describe("Full doesn't Freddie Mac, only residential, multifamily report ", () =
       navSectionActions.openSiteDescriptionInProperty();
       siteDescriptionActions.editTransportationDiscussionCommentary(testData.transportationCommentary);
       siteDescriptionActions.checkSurroundingResidental();
+      siteDescriptionActions.verifySiteArea(testData.siteArea);
+      siteDescriptionActions.verifyPropertyShape(testData.propertyShape);
+      navSectionActions.openMapsInProperty();
+      propertyMapsActions.enterPropertyFrontage(testData.propertyFrontage);
+      navSectionActions.openSiteDescriptionInProperty();
+      siteDescriptionActions.verifyPropertyFrontage(testData.propertyFrontage);
+      siteDescriptionActions.verifySiteDescriptionItems(testData.siteDescriptionItems);
+      siteDescriptionActions.editFloodHazardCommentary(testData.floodHazardCommentary);
+      siteDescriptionActions.verifyUtilitiesItems(testData.utilitiesItems);
    });
 });
