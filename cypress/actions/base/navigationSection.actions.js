@@ -74,6 +74,10 @@ class NavigationSectionActions extends BaseActions {
         navigationSectionPage.propertyMaps.click();
     }
 
+    clickUtilitiesButton() {
+        navigationSectionPage.utilities.click();
+    }
+
     navigateToCommercialUnits() {
         this.clickSaveButton();
         this.verifyProgressBarNotExist();
@@ -146,6 +150,11 @@ class NavigationSectionActions extends BaseActions {
 
     openMapsInProperty() {
         this.clickMapsButton();
+        this.clickYesButton();
+    }
+
+    openUtilitiesInProperty() {
+        this.clickUtilitiesButton();
         this.clickYesButton();
     }
 }

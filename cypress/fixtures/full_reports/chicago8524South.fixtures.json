@@ -61,5 +61,7 @@
   "Easements, Encroachments, and Restrictions"],
   "floodHazardCommentary": "According to National Flood Insurance Program Rate Map dated August 19, 2008 Community Panel #17031C0655J, the subject is located within a Zone X flood zone. Zone X is an area of minimal flooding. These areas are determined to be outside the 500-year floodplain and are determined to be outside the 1% and 0.2% annual chance floodplains.",
   "utilitiesItems": ["Water/Sewer and Refuse", "Police & Fire Protection", "Gas", "Electricity"],
-  "utilitiesDescription": "Comed"
+  "utilitiesDescription": "Comed",
+  "heatingSystemType": "HVAC system",
+  "heatingSystemLocation": "Basement"
 }
