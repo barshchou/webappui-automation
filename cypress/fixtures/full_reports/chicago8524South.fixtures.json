@@ -62,6 +62,12 @@
   "floodHazardCommentary": "According to National Flood Insurance Program Rate Map dated August 19, 2008 Community Panel #17031C0655J, the subject is located within a Zone X flood zone. Zone X is an area of minimal flooding. These areas are determined to be outside the 500-year floodplain and are determined to be outside the 1% and 0.2% annual chance floodplains.",
   "utilitiesItems": ["Water/Sewer and Refuse", "Police & Fire Protection", "Gas", "Electricity"],
   "utilitiesDescription": "Comed",
-  "heatingSystemType": "HVAC system",
-  "heatingSystemLocation": "Basement"
+  "heatingCoolingSystemType": "HVAC system",
+  "allSystemsLocation": "Basement",
+  "heatingCollingCommentary": "HVAC system located in the basement for heating and cooling.",
+  "gasElectricMetersType": "Individual",
+  "gasMetersCommentary": "Gas meters located in the basement. The residential tenants will be directly metered for gas.",
+  "electricComm": "Electric meters located in the basement. The residential tenants will be directly metered for electricity.",
+  "hotWaterSystemType": "individual tanks",
+  "hotWaterSystemCommentary": "Individual tanks located in the basement."
 }
