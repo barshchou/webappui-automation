@@ -10,6 +10,7 @@ import descriptionActions from "../../actions/property/description.actions";
 import siteDescriptionActions from "../../actions/property/siteDescription.actions";
 import propertyMapsActions from "../../actions/property/maps.actions";
 import propertyUtilitiesActions from "../../actions/property/utilities.actions";
+import propertyAmenitiesActions from "../../actions/property/amenities.actions";
 
 describe("Full doesn't Freddie Mac, only residential, multifamily report ", () => {
    it("Test", () => {
@@ -88,5 +89,9 @@ describe("Full doesn't Freddie Mac, only residential, multifamily report ", () =
       propertyUtilitiesActions.checkHotWaterSystemsCheckbox();
       propertyUtilitiesActions.addHotWaterSystemParameters(testData.hotWaterSystemType, testData.allSystemsLocation);
       propertyUtilitiesActions.verifyHotWaterSystemCommentary(testData.hotWaterSystemCommentary);
+      navSectionActions.openAmenitiesInProperty();
+      propertyAmenitiesActions.addParkingPlaces(testData.numberOfParkingPlaces);
+      propertyAmenitiesActions.checkHasNoUnitAmenities();
+      navSectionActions.openMapsInProperty();
    });
 });

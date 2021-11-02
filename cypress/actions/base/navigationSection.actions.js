@@ -78,6 +78,10 @@ class NavigationSectionActions extends BaseActions {
         navigationSectionPage.utilities.click();
     }
 
+    clickAmenitiesButton() {
+        navigationSectionPage.amenities.click();
+    }
+
     navigateToCommercialUnits() {
         this.clickSaveButton();
         this.verifyProgressBarNotExist();
@@ -155,6 +159,11 @@ class NavigationSectionActions extends BaseActions {
 
     openUtilitiesInProperty() {
         this.clickUtilitiesButton();
+        this.clickYesButton();
+    }
+
+    openAmenitiesInProperty() {
+        this.clickAmenitiesButton();
         this.clickYesButton();
     }
 }

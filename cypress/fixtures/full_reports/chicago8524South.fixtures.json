@@ -69,5 +69,6 @@
   "gasMetersCommentary": "Gas meters located in the basement. The residential tenants will be directly metered for gas.",
   "electricComm": "Electric meters located in the basement. The residential tenants will be directly metered for electricity.",
   "hotWaterSystemType": "individual tanks",
-  "hotWaterSystemCommentary": "Individual tanks located in the basement."
+  "hotWaterSystemCommentary": "Individual tanks located in the basement.",
+  "numberOfParkingPlaces": 6
 }

@@ -21,6 +21,7 @@ class NavigationSection extends BasePage {
     get siteDescription() {return cy.get("#site-description");}
     get propertyMaps() {return cy.get("#property-maps");}
     get utilities() {return cy.get("#utilities");}
+    get amenities() {return cy.get("#amenities");}
 }
 
 export default new NavigationSection();

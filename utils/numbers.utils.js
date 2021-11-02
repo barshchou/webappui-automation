@@ -9,14 +9,21 @@ export const cutDecimalPartToNumberOfDigits = (number, numberToCut = 2) => {
   }
   let numberDigits = number.toString().split(".");
   let decimalPart = "";
+  if (numberToCut === 0) {
+      return Number(numberDigits[0]);
+  }
   for (let i = 0; i < numberToCut; i++) {
       decimalPart += numberDigits[1].charAt(i);
   }
   return Number(`${numberDigits[0]}.${decimalPart}`);
 };
 
+export const isDecimal = (number) => {
+  return number.toString().includes(".");
+};
+
 export const isHasDecimalPartMoreNumberOfDigits = (number, digitsNumber = 2) => {
-    if (!(typeof number === "number") || !(`${number}`.includes("."))) {
+    if (!(typeof number === "number") || !isDecimal(number)) {
         return false;
     }
     let numberDigits = number.toString().split(".");
