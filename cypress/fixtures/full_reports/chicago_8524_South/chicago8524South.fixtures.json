@@ -75,7 +75,13 @@
   "floodMapFileName": "full_reports/chicago_8524_South/flood_map.PNG",
   "cornerValue": "Mid-Block",
   "taxMapFileName": "full_reports/chicago_8524_South/tax_parcel_map.PNG",
-  "facadePhotosFolder": "full_reports/chicago_8524_South/facade_photos/",
-  "facadePhotosFileNames": ["building_facade_1.png", "building_facade_2.png", "building_facade_3.png"]
-
+  "facadePhotosFolder": "full_reports/chicago_8524_South/facade_photos",
+  "facadePhotosFileNames": ["building_facade_1.png", "building_facade_2.png", "building_facade_3.png"],
+  "subjectStreetPhotosFolder": "full_reports/chicago_8524_South/subject_street_photos",
+  "subjectStreetFileNames": ["subject_street_1.png", "subject_street_2.png"],
+  "exteriorEntranceFolder": "full_reports/chicago_8524_South/exterior_entrance_photos",
+  "exteriorEntranceFileNames": ["exterior_entrance_1.png", "exterior_entrance_2.png", "exterior_entrance_3.png"],
+  "typicalStairwayFolder": "full_reports/chicago_8524_South/typical_stairway_photos",
+  "typicalStairwayFiles": ["typical_stairway_1.png", "typical_stairway_2.png", "typical_stairway_3.png",
+  "typical_stairway_4.png", "typical_stairway_5.png"]
 }

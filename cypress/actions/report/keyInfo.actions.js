@@ -1,6 +1,7 @@
 import BaseActions from "../base/base.actions";
 import keyInfoPage from "../../pages/report/keyInfo.page";
 import {isDateHasCorrectFormat} from "../../../utils/date.utils";
+import {getUploadFixture} from "../../../utils/fixtures.utils";
 
 class KeyInfoActions extends BaseActions {
     choosePurpose(purposeValue) {
@@ -39,7 +40,7 @@ class KeyInfoActions extends BaseActions {
     uploadFile(fileName) {
         keyInfoPage.cloudButton.should("exist").click();
         keyInfoPage.clickHereText.should("be.visible");
-        keyInfoPage.uploadFileInput.should("exist").attachFile({filePath: fileName, encoding: "base64"});
+        keyInfoPage.uploadFileInput.should("exist").attachFile(getUploadFixture(fileName));
         keyInfoPage.uploadButton.should("be.visible").click();
         keyInfoPage.insertButton.should("not.be.disabled").click();
         const fileNameSplit = fileName.split("/");

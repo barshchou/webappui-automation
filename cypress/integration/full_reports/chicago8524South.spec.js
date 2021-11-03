@@ -11,6 +11,7 @@ import siteDescriptionActions from "../../actions/property/siteDescription.actio
 import propertyMapsActions from "../../actions/property/maps.actions";
 import propertyUtilitiesActions from "../../actions/property/utilities.actions";
 import propertyAmenitiesActions from "../../actions/property/amenities.actions";
+import propertyPhotosActions from "../../actions/property/photos.actions";
 
 describe("Full doesn't Freddie Mac, only residential, multifamily report ", () => {
    it("Test", () => {
@@ -99,6 +100,9 @@ describe("Full doesn't Freddie Mac, only residential, multifamily report ", () =
       propertyMapsActions.uploadTaxMap(testData.taxMapFileName);
       propertyMapsActions.captureSubjectMap();
       navSectionActions.openPhotosInProperty();
-
+      propertyPhotosActions.uploadBuildingFacadePhotos(testData.facadePhotosFileNames, testData.facadePhotosFolder);
+      propertyPhotosActions.uploadSubjectStreetPhotos(testData.subjectStreetPhotosFolder, testData.subjectStreetFileNames);
+      propertyPhotosActions.uploadExteriorEntrancePhotos(testData.exteriorEntranceFolder, testData.exteriorEntranceFileNames);
+      propertyPhotosActions.uploadTypicalStairwayPhotos(testData.typicalStairwayFolder, testData.typicalStairwayFiles);
    });
 });

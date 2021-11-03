@@ -1,6 +1,7 @@
 import BaseActions from "../base/base.actions";
 import mapsPage from "../../pages/property/maps.page";
 import {cutDecimalPartToNumberOfDigits, isHasDecimalPartMoreNumberOfDigits} from "../../../utils/numbers.utils";
+import {getUploadFixture} from "../../../utils/fixtures.utils";
 
 class MapsActions extends BaseActions{
     enterPropertyFrontage(frontage) {
@@ -11,12 +12,12 @@ class MapsActions extends BaseActions{
     }
 
     uploadZoningMap(fileName) {
-        mapsPage.zoningMapUploadInput.should("exist").attachFile({filePath:fileName, encoding:"base64"});
+        mapsPage.zoningMapUploadInput.should("exist").attachFile(getUploadFixture(fileName));
         mapsPage.zoningMapImageToCheck.should("have.attr", "title");
     }
 
     uploadFloodMap(fileName) {
-        mapsPage.floodMapUploadInput.should("exist").attachFile({filePath:fileName, encoding:"base64"});
+        mapsPage.floodMapUploadInput.should("exist").attachFile(getUploadFixture(fileName));
         mapsPage.floodMapImageToCheck.should("have.attr", "title");
     }
 
@@ -25,7 +26,7 @@ class MapsActions extends BaseActions{
     }
 
     uploadTaxMap(fileName) {
-        mapsPage.taxMapUploadInput.should("exist").attachFile({filePath:fileName, encoding:"base64"});
+        mapsPage.taxMapUploadInput.should("exist").attachFile(getUploadFixture(fileName));
         mapsPage.taxMapImageToCheck.should("have.attr", "title");
     }
 
