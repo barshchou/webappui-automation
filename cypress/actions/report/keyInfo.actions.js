@@ -42,7 +42,9 @@ class KeyInfoActions extends BaseActions {
         keyInfoPage.uploadFileInput.should("exist").attachFile({filePath: fileName, encoding: "base64"});
         keyInfoPage.uploadButton.should("be.visible").click();
         keyInfoPage.insertButton.should("not.be.disabled").click();
-        keyInfoPage.inputToCheckUpload.should("have.value", fileName);
+        const fileNameSplit = fileName.split("/");
+        const fileNameToCheck = fileNameSplit[fileNameSplit.length - 1];
+        keyInfoPage.inputToCheckUpload.should("have.value", fileNameToCheck);
     }
 }
 

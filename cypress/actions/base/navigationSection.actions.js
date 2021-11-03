@@ -82,6 +82,10 @@ class NavigationSectionActions extends BaseActions {
         navigationSectionPage.amenities.click();
     }
 
+    clickPhotosButton() {
+        navigationSectionPage.propertyPhotos.click();
+    }
+
     navigateToCommercialUnits() {
         this.clickSaveButton();
         this.verifyProgressBarNotExist();
@@ -164,6 +168,11 @@ class NavigationSectionActions extends BaseActions {
 
     openAmenitiesInProperty() {
         this.clickAmenitiesButton();
+        this.clickYesButton();
+    }
+
+    openPhotosInProperty() {
+        this.clickPhotosButton();
         this.clickYesButton();
     }
 }

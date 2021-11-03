@@ -13,7 +13,7 @@
   "dueType": "dueDate",
   "dateOfValuation": "10-13-2021",
   "valuationType": "dateOfValuation",
-  "engagementFileName": "test_engagement.pdf",
+  "engagementFileName": "full_reports/chicago_8524_South/test_engagement.pdf",
   "clientName": "Gerardo  Jorge",
   "censusTract": "4605.00",
   "buildingDescriptor": "Building",
@@ -70,5 +70,12 @@
   "electricComm": "Electric meters located in the basement. The residential tenants will be directly metered for electricity.",
   "hotWaterSystemType": "individual tanks",
   "hotWaterSystemCommentary": "Individual tanks located in the basement.",
-  "numberOfParkingPlaces": 6
+  "numberOfParkingPlaces": 6,
+  "zoningMapFileName": "full_reports/chicago_8524_South/zoning_map.PNG",
+  "floodMapFileName": "full_reports/chicago_8524_South/flood_map.PNG",
+  "cornerValue": "Mid-Block",
+  "taxMapFileName": "full_reports/chicago_8524_South/tax_parcel_map.PNG",
+  "facadePhotosFolder": "full_reports/chicago_8524_South/facade_photos/",
+  "facadePhotosFileNames": ["building_facade_1.png", "building_facade_2.png", "building_facade_3.png"]
+
 }

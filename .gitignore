@@ -123,9 +123,3 @@ cypress.env.json
 cypress/reports/
 cypress/videos/
 cypress/screenshots/
-
-#Documents and pictures
-*.pdf
-*.png
-*.PNG
-*.jpg

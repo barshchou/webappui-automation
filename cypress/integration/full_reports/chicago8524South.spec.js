@@ -1,4 +1,4 @@
-const testData = require("../../fixtures/full_reports/chicago8524South.fixtures.json");
+const testData = require("../../fixtures/full_reports/chicago_8524_South/chicago8524South.fixtures.json");
 import homepageActions from "../../actions/base/homepage.actions";
 import keyInfoActions from "../../actions/report/keyInfo.actions";
 import navSectionActions from "../../actions/base/navigationSection.actions";
@@ -93,5 +93,12 @@ describe("Full doesn't Freddie Mac, only residential, multifamily report ", () =
       propertyAmenitiesActions.addParkingPlaces(testData.numberOfParkingPlaces);
       propertyAmenitiesActions.checkHasNoUnitAmenities();
       navSectionActions.openMapsInProperty();
+      propertyMapsActions.uploadZoningMap(testData.zoningMapFileName);
+      propertyMapsActions.uploadFloodMap(testData.floodMapFileName);
+      propertyMapsActions.chooseCornerByValue(testData.cornerValue);
+      propertyMapsActions.uploadTaxMap(testData.taxMapFileName);
+      propertyMapsActions.captureSubjectMap();
+      navSectionActions.openPhotosInProperty();
+
    });
 });
