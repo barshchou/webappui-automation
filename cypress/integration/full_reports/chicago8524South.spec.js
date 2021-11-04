@@ -100,9 +100,34 @@ describe("Full doesn't Freddie Mac, only residential, multifamily report ", () =
       propertyMapsActions.uploadTaxMap(testData.taxMapFileName);
       propertyMapsActions.captureSubjectMap();
       navSectionActions.openPhotosInProperty();
-      propertyPhotosActions.uploadBuildingFacadePhotos(testData.facadePhotosFileNames, testData.facadePhotosFolder);
-      propertyPhotosActions.uploadSubjectStreetPhotos(testData.subjectStreetPhotosFolder, testData.subjectStreetFileNames);
-      propertyPhotosActions.uploadExteriorEntrancePhotos(testData.exteriorEntranceFolder, testData.exteriorEntranceFileNames);
-      propertyPhotosActions.uploadTypicalStairwayPhotos(testData.typicalStairwayFolder, testData.typicalStairwayFiles);
+      propertyPhotosActions.uploadPhotosBySectionName(testData.facadeSection, testData.facadePhotosFolder,
+          testData.facadePhotosFileNames);
+      propertyPhotosActions.uploadPhotosBySectionName(testData.subjectSection, testData.subjectStreetPhotosFolder,
+          testData.subjectStreetFileNames);
+      propertyPhotosActions.uploadPhotosBySectionName(testData.exteriorSection, testData.exteriorEntranceFolder,
+          testData.exteriorEntranceFileNames);
+      propertyPhotosActions.uploadPhotosBySectionName(testData.stairwaySection, testData.typicalStairwayFolder,
+          testData.typicalStairwayFiles);
+      propertyPhotosActions.uploadPhotosBySectionName(testData.hallwaySection, testData.typicalHallwayFolder,
+          testData.typicalHallwayFiles);
+      propertyPhotosActions.uploadPhotosBySectionName(testData.kitchenSection, testData.kitchenFolder, testData.kitchenFiles);
+      propertyPhotosActions.uploadPhotosBySectionName(testData.bathroomSection, testData.bathroomFolder,
+          testData.bathroomFiles);
+      propertyPhotosActions.uploadPhotosBySectionName(testData.bedroomSection, testData.bedroomFolder, testData.bedroomFiles);
+      propertyPhotosActions.uploadPhotosBySectionName(testData.livingRoomSection, testData.livingRoomFolder,
+          testData.livingRoomFiles);
+      propertyPhotosActions.uploadPhotosBySectionName(testData.electricMetersSection, testData.electricMetersFolder,
+          testData.electricMetersFiles);
+      propertyPhotosActions.uploadPhotosBySectionName(testData.gasMetersSection, testData.gasMetersFolder,
+          testData.gasMetersFiles);
+      propertyPhotosActions.editSectionName(testData.heatingSystemSectionOldName, testData.heatingSystemNewName);
+      propertyPhotosActions.clickSaveButton();
+      propertyPhotosActions.verifyProgressBarNotExist();
+      cy.reload();
+      propertyPhotosActions.uploadPhotosBySectionName(testData.heatingSystemNewName, testData.heatingSystemFolder,
+          testData.heatingSystemPhotos);
+      propertyPhotosActions.uploadPhotosBySectionName(testData.hotWaterSection, testData.hotWaterFolder,
+          testData.hotWaterPhotos);
+      navSectionActions.openZoningInProperty();
    });
 });

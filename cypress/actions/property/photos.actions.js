@@ -3,28 +3,18 @@ import photosPage from "../../pages/property/photos.page";
 import {getUploadFixturesArrayFromFolder} from "../../../utils/fixtures.utils";
 
 class PhotosActions extends BaseActions{
-    uploadBuildingFacadePhotos(filesNames, baseFolder) {
-        photosPage.buildingFacadeUploadInput.attachFile(getUploadFixturesArrayFromFolder(baseFolder, filesNames));
+    uploadPhotosBySectionName(sectionName, baseFolder, filesNames) {
+        photosPage.getUploadInputByName(sectionName).attachFile(getUploadFixturesArrayFromFolder(baseFolder, filesNames));
         this.verifyProgressBarNotExist();
-        photosPage.buildingFacadePhotos.should("have.length", filesNames.length);
+        photosPage.getUploadedPhotosByName(sectionName).first().scrollIntoView();
+        photosPage.getUploadedPhotosByName(sectionName).should("have.length", filesNames.length);
     }
 
-    uploadSubjectStreetPhotos(baseFolder, filesNames) {
-        photosPage.subjectStreetUploadInput.attachFile(getUploadFixturesArrayFromFolder(baseFolder, filesNames));
-        this.verifyProgressBarNotExist();
-        photosPage.subjectStreetPhotos.should("have.length", filesNames.length);
-    }
-
-    uploadExteriorEntrancePhotos(baseFolder, filesNames) {
-        photosPage.exteriorEntranceUploadInput.attachFile(getUploadFixturesArrayFromFolder(baseFolder, filesNames));
-        this.verifyProgressBarNotExist();
-        photosPage.exteriorEntrancePhotos.should("have.length", filesNames.length);
-    }
-
-    uploadTypicalStairwayPhotos(baseFolder, filesNames) {
-        photosPage.typicalStairwayUploadInput.attachFile(getUploadFixturesArrayFromFolder(baseFolder, filesNames));
-        this.verifyProgressBarNotExist();
-        photosPage.typicalStairwayPhotos.should("have.length", filesNames.length);
+    editSectionName(oldName, newName) {
+        photosPage.getSectionNameEditButtonByName(oldName).click();
+        photosPage.getCurrentEditInputBySectionName(oldName).clear().type(newName);
+        photosPage.getCurrentEditInputBySectionName(newName).should("exist");
+        photosPage.editSectionSave.click();
     }
 }
 

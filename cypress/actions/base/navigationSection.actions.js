@@ -86,6 +86,10 @@ class NavigationSectionActions extends BaseActions {
         navigationSectionPage.propertyPhotos.click();
     }
 
+    clickZoningButton() {
+        navigationSectionPage.propertyZoning.click();
+    }
+
     navigateToCommercialUnits() {
         this.clickSaveButton();
         this.verifyProgressBarNotExist();
@@ -173,6 +177,11 @@ class NavigationSectionActions extends BaseActions {
 
     openPhotosInProperty() {
         this.clickPhotosButton();
+        this.clickYesButton();
+    }
+
+    openZoningInProperty() {
+        this.clickZoningButton();
         this.clickYesButton();
     }
 }
