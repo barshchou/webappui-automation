@@ -12,6 +12,7 @@ import propertyMapsActions from "../../actions/property/maps.actions";
 import propertyUtilitiesActions from "../../actions/property/utilities.actions";
 import propertyAmenitiesActions from "../../actions/property/amenities.actions";
 import propertyPhotosActions from "../../actions/property/photos.actions";
+import propertyZoningActions from "../../actions/property/zoning.actions";
 
 describe("Full doesn't Freddie Mac, only residential, multifamily report ", () => {
    it("Test", () => {
@@ -129,5 +130,14 @@ describe("Full doesn't Freddie Mac, only residential, multifamily report ", () =
       propertyPhotosActions.uploadPhotosBySectionName(testData.hotWaterSection, testData.hotWaterFolder,
           testData.hotWaterPhotos);
       propertyPhotosActions.clickSaveContinueButton();
+      propertyZoningActions.enterZoneNameByZoneNumber(testData.subjectZoneName);
+      propertyZoningActions.verifyPropertyIdentification(testData.siteArea, testData.cityToBe);
+      propertyZoningActions.verifyPropIdentificationCommentary(testData.siteArea, testData.subjectZoneName,
+          testData.cityToBe, testData.propIdentifierType, testData.identifier);
+      propertyZoningActions.verifyIntroductionCommentary(testData.streetAddressToBe, testData.subjectZoneName);
+      propertyZoningActions.clickUsesTab();
+      propertyZoningActions.choosePermittedPropertyUse(testData.propertyUse);
+      propertyZoningActions.chooseCurrentPropertyUse(testData.propertyUse);
+      propertyZoningActions.chooseIsConformingAllowableUses();
    });
 });

@@ -116,6 +116,8 @@
   "heatingSystemPhotos": ["hvac_system_1.png", "hvac_system_2.png", "hvac_system_3.png"],
   "hotWaterSection": "Hot Water System",
   "hotWaterFolder": "full_reports/chicago_8524_South/hot_water_system_photos",
-  "hotWaterPhotos": ["hot_water_system.png"]
-
+  "hotWaterPhotos": ["hot_water_system.png"],
+  "subjectZoneName": "RS-3",
+  "cityToBe": "Chicago",
+  "propertyUse": "Residential"
 }
