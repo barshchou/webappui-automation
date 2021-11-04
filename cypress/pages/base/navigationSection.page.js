@@ -15,15 +15,8 @@ class NavigationSection extends BasePage {
     get commercialUnitsButton() {return cy.get("#commercial-units");}
     get summaryButton() {return cy.get("#property-summary");}
     get clientButton() {return cy.get("#client");}
-    get propertyMarketButton() {return cy.get("#property-market");}
-    get propertyHistoryButton() {return cy.get("#property-history");}
-    get propertyDescriptionButton() {return cy.get("#general-property-description");}
     get siteDescription() {return cy.get("#site-description");}
     get propertyMaps() {return cy.get("#property-maps");}
-    get utilities() {return cy.get("#utilities");}
-    get amenities() {return cy.get("#amenities");}
-    get propertyPhotos() {return cy.get("#property-photos");}
-    get propertyZoning() {return cy.get("#zoning");}
 }
 
 export default new NavigationSection();

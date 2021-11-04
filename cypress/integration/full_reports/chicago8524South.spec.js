@@ -34,16 +34,16 @@ describe("Full doesn't Freddie Mac, only residential, multifamily report ", () =
       summaryActions.clickWalkUpTypeButtons();
       summaryActions.fillCurrentBuildDescription(testData.grossArea, testData.numberOfUnits, testData.floorsNumber);
       summaryActions.editAsCompleteExport(testData.asCompleteExportText);
-      navSectionActions.openMarketPageInProperty();
+      summaryActions.clickSaveContinueButton();
       marketActions.verifyTimeOnMarket(testData.minExposureMonths, testData.maxExposureMonths);
       marketActions.fillMarketResearch(testData);
       marketActions.clickPullFromDropbox();
       marketActions.verifyAnyDocumentInputIsNotEmpty();
-      navSectionActions.openPropertyHistoryInProperty();
+      marketActions.clickSaveContinueButton();
       propertyHistoryActions.enterCurrentOwner(testData.currentOwner);
       propertyHistoryActions.checkIsUnderContractCheckbox();
       propertyHistoryActions.enterContractDetails(testData.buyer, testData.contractDate, testData.contractPrice);
-      navSectionActions.openDescriptionInProperty();
+      propertyPhotosActions.clickSaveContinueButton();
       descriptionActions.selectGeneralPropertyCondition(testData.generalPropertyCondition);
       descriptionActions.selectAsStabilizedPropertyCondition(testData.stabilizedCondition);
       descriptionActions.checkListCheckboxesByLabels(testData.locationsInspectedLabels);
@@ -62,7 +62,7 @@ describe("Full doesn't Freddie Mac, only residential, multifamily report ", () =
       descriptionActions.checkBasementStateByValue(testData.basementState);
       descriptionActions.verifyTotalEconomicLife(testData.totalEconomicLifeToBe);
       descriptionActions.enterAgeEffective(testData.ageEffective);
-      navSectionActions.openSiteDescriptionInProperty();
+      descriptionActions.clickSaveContinueButton();
       siteDescriptionActions.editTransportationDiscussionCommentary(testData.transportationCommentary);
       siteDescriptionActions.checkSurroundingResidental();
       siteDescriptionActions.verifySiteArea(testData.siteArea);
@@ -75,7 +75,7 @@ describe("Full doesn't Freddie Mac, only residential, multifamily report ", () =
       siteDescriptionActions.editFloodHazardCommentary(testData.floodHazardCommentary);
       siteDescriptionActions.verifyUtilitiesItems(testData.utilitiesItems);
       siteDescriptionActions.verifyUtilitiesDescriptions(testData.utilitiesDescription);
-      navSectionActions.openUtilitiesInProperty();
+      siteDescriptionActions.clickSaveContinueButton();
       propertyUtilitiesActions.checkHeatingSystem();
       propertyUtilitiesActions.addHeatingSystemParameters(testData.heatingCoolingSystemType, testData.allSystemsLocation);
       propertyUtilitiesActions.checkCoolingSystem();
@@ -90,16 +90,16 @@ describe("Full doesn't Freddie Mac, only residential, multifamily report ", () =
       propertyUtilitiesActions.checkHotWaterSystemsCheckbox();
       propertyUtilitiesActions.addHotWaterSystemParameters(testData.hotWaterSystemType, testData.allSystemsLocation);
       propertyUtilitiesActions.verifyHotWaterSystemCommentary(testData.hotWaterSystemCommentary);
-      navSectionActions.openAmenitiesInProperty();
+      propertyUtilitiesActions.clickSaveContinueButton();
       propertyAmenitiesActions.addParkingPlaces(testData.numberOfParkingPlaces);
       propertyAmenitiesActions.checkHasNoUnitAmenities();
-      navSectionActions.openMapsInProperty();
+      propertyAmenitiesActions.clickSaveContinueButton();
       propertyMapsActions.uploadZoningMap(testData.zoningMapFileName);
       propertyMapsActions.uploadFloodMap(testData.floodMapFileName);
       propertyMapsActions.chooseCornerByValue(testData.cornerValue);
       propertyMapsActions.uploadTaxMap(testData.taxMapFileName);
       propertyMapsActions.captureSubjectMap();
-      navSectionActions.openPhotosInProperty();
+      propertyMapsActions.clickSaveContinueButton();
       propertyPhotosActions.uploadPhotosBySectionName(testData.facadeSection, testData.facadePhotosFolder,
           testData.facadePhotosFileNames);
       propertyPhotosActions.uploadPhotosBySectionName(testData.subjectSection, testData.subjectStreetPhotosFolder,
@@ -128,6 +128,6 @@ describe("Full doesn't Freddie Mac, only residential, multifamily report ", () =
           testData.heatingSystemPhotos);
       propertyPhotosActions.uploadPhotosBySectionName(testData.hotWaterSection, testData.hotWaterFolder,
           testData.hotWaterPhotos);
-      navSectionActions.openZoningInProperty();
+      propertyPhotosActions.clickSaveContinueButton();
    });
 });

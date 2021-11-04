@@ -54,40 +54,12 @@ class NavigationSectionActions extends BaseActions {
         navigationSectionPage.clientButton.click();
     }
 
-    clickMarketButton() {
-        navigationSectionPage.propertyMarketButton.click();
-    }
-
-    clickPropertyHistory() {
-        navigationSectionPage.propertyHistoryButton.click();
-    }
-
-    clickPropertyDescription() {
-        navigationSectionPage.propertyDescriptionButton.click();
-    }
-
     clickSiteDescriptionButton() {
         navigationSectionPage.siteDescription.click();
     }
 
     clickMapsButton() {
         navigationSectionPage.propertyMaps.click();
-    }
-
-    clickUtilitiesButton() {
-        navigationSectionPage.utilities.click();
-    }
-
-    clickAmenitiesButton() {
-        navigationSectionPage.amenities.click();
-    }
-
-    clickPhotosButton() {
-        navigationSectionPage.propertyPhotos.click();
-    }
-
-    clickZoningButton() {
-        navigationSectionPage.propertyZoning.click();
     }
 
     navigateToCommercialUnits() {
@@ -140,21 +112,6 @@ class NavigationSectionActions extends BaseActions {
         this.clickYesButton();
     }
 
-    openMarketPageInProperty() {
-        this.clickMarketButton();
-        this.clickYesButton();
-    }
-
-    openPropertyHistoryInProperty() {
-        this.clickPropertyHistory();
-        this.clickYesButton();
-    }
-
-    openDescriptionInProperty() {
-        this.clickPropertyDescription();
-        this.clickYesButton();
-    }
-
     openSiteDescriptionInProperty() {
         this.clickSiteDescriptionButton();
         this.clickYesButton();
@@ -162,26 +119,6 @@ class NavigationSectionActions extends BaseActions {
 
     openMapsInProperty() {
         this.clickMapsButton();
-        this.clickYesButton();
-    }
-
-    openUtilitiesInProperty() {
-        this.clickUtilitiesButton();
-        this.clickYesButton();
-    }
-
-    openAmenitiesInProperty() {
-        this.clickAmenitiesButton();
-        this.clickYesButton();
-    }
-
-    openPhotosInProperty() {
-        this.clickPhotosButton();
-        this.clickYesButton();
-    }
-
-    openZoningInProperty() {
-        this.clickZoningButton();
         this.clickYesButton();
     }
 }
