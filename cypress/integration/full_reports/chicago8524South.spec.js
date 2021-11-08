@@ -14,6 +14,7 @@ import amenitiesActions from "../../actions/property/amenities.actions";
 import photosActions from "../../actions/property/photos.actions";
 import zoningActions from "../../actions/property/zoning.actions";
 import renovationsActions from "../../actions/property/renovations.actions";
+import residentialUnitsActions from "../../actions/property/residentialUnits.actions";
 
 describe("Full doesn't Freddie Mac, only residential, multifamily report ", () => {
    it("Test", () => {
@@ -162,5 +163,21 @@ describe("Full doesn't Freddie Mac, only residential, multifamily report ", () =
       renovationsActions.fillTotalTable(testData.renovationsPeriod, testData.totalAmount);
       renovationsActions.verifyNetTotalRenovationBudget(testData.totalAmount);
       renovationsActions.editCommentary(testData.renovationsCommentary);
+      renovationsActions.clickSaveContinueButton();
+      residentialUnitsActions.fillKitchenDescription(testData.kitchenCondition, testData.kitchenFlooring, testData.counterTops,
+          testData.cabinetry, testData.stovetops, testData.refrigerators);
+      residentialUnitsActions.verifyKitchenConditionCommentary(testData.kitchenCondition, testData.kitchenFlooring, testData.counterTops,
+          testData.cabinetry, testData.stovetops, testData.refrigerators);
+      residentialUnitsActions.fillBathroomDescription(testData.bathroomCondition, testData.bathroomFlooring, testData.bathroomTub,
+          testData.sink, testData.toilet);
+      residentialUnitsActions.verifyBathroomCommentary(testData.bathroomCondition, testData.bathroomFlooring, testData.bathroomTub,
+          testData.sink, testData.toilet);
+      residentialUnitsActions.fillBedroomDescription(testData.bedroomCondition, testData.bedroomFlooring, testData.bedroomWalls);
+      residentialUnitsActions.verifyBedroomCommentary(testData.bedroomCondition, testData.bedroomFlooring, testData.bedroomWalls);
+      residentialUnitsActions.fillLivingRoomDescription(testData.livingCondition, testData.livingFlooring, testData.livingWalls);
+      residentialUnitsActions.verifyLivingRoomCommentary(testData.livingCondition, testData.livingFlooring, testData.livingWalls);
+      residentialUnitsActions.fillStairsDescription(testData.numberOfStairs, testData.stairsStart, testData.stairsEnd);
+      residentialUnitsActions.editStairsCommentary(testData.stairsCommentary);
+      residentialUnitsActions.clickSaveContinueButton();
    });
 });
