@@ -137,5 +137,9 @@
   "regulationExist4": {"name": "Maximum Height", "actualValue": "26.5 ft", "requiredValue":  "30 ft",
     "statusValue": "Complying"},
   "complyingCommentary": "The subject will be complying with regards to bulk regulations.",
-  "requiredParkingPlaces": 6
+  "requiredParkingPlaces": 6,
+  "renovationDropValue": "Renovation",
+  "renovationsPeriod": 12,
+  "totalAmount": 106000,
+  "renovationsCommentary": "The buyer reported a total prospective renovation budget of $106,000.00. Renovations are expected to take 12 months to complete."
 }

@@ -5,14 +5,15 @@ import navSectionActions from "../../actions/base/navigationSection.actions";
 import clientActions from "../../actions/report/client.actions";
 import summaryActions from "../../actions/property/summary.actions";
 import marketActions from "../../actions/property/market.actions";
-import propertyHistoryActions from "../../actions/property/history.actions";
+import historyActions from "../../actions/property/history.actions";
 import descriptionActions from "../../actions/property/description.actions";
 import siteDescriptionActions from "../../actions/property/siteDescription.actions";
-import propertyMapsActions from "../../actions/property/maps.actions";
-import propertyUtilitiesActions from "../../actions/property/utilities.actions";
-import propertyAmenitiesActions from "../../actions/property/amenities.actions";
-import propertyPhotosActions from "../../actions/property/photos.actions";
-import propertyZoningActions from "../../actions/property/zoning.actions";
+import mapsActions from "../../actions/property/maps.actions";
+import utilitiesActions from "../../actions/property/utilities.actions";
+import amenitiesActions from "../../actions/property/amenities.actions";
+import photosActions from "../../actions/property/photos.actions";
+import zoningActions from "../../actions/property/zoning.actions";
+import renovationsActions from "../../actions/property/renovations.actions";
 
 describe("Full doesn't Freddie Mac, only residential, multifamily report ", () => {
    it("Test", () => {
@@ -41,10 +42,10 @@ describe("Full doesn't Freddie Mac, only residential, multifamily report ", () =
       marketActions.clickPullFromDropbox();
       marketActions.verifyAnyDocumentInputIsNotEmpty();
       marketActions.clickSaveContinueButton();
-      propertyHistoryActions.enterCurrentOwner(testData.currentOwner);
-      propertyHistoryActions.checkIsUnderContractCheckbox();
-      propertyHistoryActions.enterContractDetails(testData.buyer, testData.contractDate, testData.contractPrice);
-      propertyPhotosActions.clickSaveContinueButton();
+      historyActions.enterCurrentOwner(testData.currentOwner);
+      historyActions.checkIsUnderContractCheckbox();
+      historyActions.enterContractDetails(testData.buyer, testData.contractDate, testData.contractPrice);
+      photosActions.clickSaveContinueButton();
       descriptionActions.selectGeneralPropertyCondition(testData.generalPropertyCondition);
       descriptionActions.selectAsStabilizedPropertyCondition(testData.stabilizedCondition);
       descriptionActions.checkListCheckboxesByLabels(testData.locationsInspectedLabels);
@@ -69,7 +70,7 @@ describe("Full doesn't Freddie Mac, only residential, multifamily report ", () =
       siteDescriptionActions.verifySiteArea(testData.siteArea);
       siteDescriptionActions.verifyPropertyShape(testData.propertyShape);
       navSectionActions.openMapsInProperty();
-      propertyMapsActions.enterPropertyFrontage(testData.propertyFrontage);
+      mapsActions.enterPropertyFrontage(testData.propertyFrontage);
       navSectionActions.openSiteDescriptionInProperty();
       siteDescriptionActions.verifyPropertyFrontage(testData.propertyFrontage);
       siteDescriptionActions.verifySiteDescriptionItems(testData.siteDescriptionItems);
@@ -77,84 +78,89 @@ describe("Full doesn't Freddie Mac, only residential, multifamily report ", () =
       siteDescriptionActions.verifyUtilitiesItems(testData.utilitiesItems);
       siteDescriptionActions.verifyUtilitiesDescriptions(testData.utilitiesDescription);
       siteDescriptionActions.clickSaveContinueButton();
-      propertyUtilitiesActions.checkHeatingSystem();
-      propertyUtilitiesActions.addHeatingSystemParameters(testData.heatingCoolingSystemType, testData.allSystemsLocation);
-      propertyUtilitiesActions.checkCoolingSystem();
-      propertyUtilitiesActions.addCoolingSystemParameters(testData.heatingCoolingSystemType, testData.allSystemsLocation);
-      propertyUtilitiesActions.verifyHeatingCoolingCommentary(testData.heatingCollingCommentary);
-      propertyUtilitiesActions.checkGasMeters();
-      propertyUtilitiesActions.addGasMetersParameters(testData.gasElectricMetersType, testData.allSystemsLocation);
-      propertyUtilitiesActions.verifyGasMetersCommentary(testData.gasMetersCommentary);
-      propertyUtilitiesActions.checkElectricMetersCheckbox();
-      propertyUtilitiesActions.addElectricMetersParameters(testData.gasElectricMetersType, testData.allSystemsLocation);
-      propertyUtilitiesActions.verifyElectricMetersCommentary(testData.electricComm);
-      propertyUtilitiesActions.checkHotWaterSystemsCheckbox();
-      propertyUtilitiesActions.addHotWaterSystemParameters(testData.hotWaterSystemType, testData.allSystemsLocation);
-      propertyUtilitiesActions.verifyHotWaterSystemCommentary(testData.hotWaterSystemCommentary);
-      propertyUtilitiesActions.clickSaveContinueButton();
-      propertyAmenitiesActions.addParkingPlaces(testData.numberOfParkingPlaces);
-      propertyAmenitiesActions.checkHasNoUnitAmenities();
-      propertyAmenitiesActions.clickSaveContinueButton();
-      propertyMapsActions.uploadZoningMap(testData.zoningMapFileName);
-      propertyMapsActions.uploadFloodMap(testData.floodMapFileName);
-      propertyMapsActions.chooseCornerByValue(testData.cornerValue);
-      propertyMapsActions.uploadTaxMap(testData.taxMapFileName);
-      propertyMapsActions.captureSubjectMap();
-      propertyMapsActions.clickSaveContinueButton();
-      propertyPhotosActions.uploadPhotosBySectionName(testData.facadeSection, testData.facadePhotosFolder,
+      utilitiesActions.checkHeatingSystem();
+      utilitiesActions.addHeatingSystemParameters(testData.heatingCoolingSystemType, testData.allSystemsLocation);
+      utilitiesActions.checkCoolingSystem();
+      utilitiesActions.addCoolingSystemParameters(testData.heatingCoolingSystemType, testData.allSystemsLocation);
+      utilitiesActions.verifyHeatingCoolingCommentary(testData.heatingCollingCommentary);
+      utilitiesActions.checkGasMeters();
+      utilitiesActions.addGasMetersParameters(testData.gasElectricMetersType, testData.allSystemsLocation);
+      utilitiesActions.verifyGasMetersCommentary(testData.gasMetersCommentary);
+      utilitiesActions.checkElectricMetersCheckbox();
+      utilitiesActions.addElectricMetersParameters(testData.gasElectricMetersType, testData.allSystemsLocation);
+      utilitiesActions.verifyElectricMetersCommentary(testData.electricComm);
+      utilitiesActions.checkHotWaterSystemsCheckbox();
+      utilitiesActions.addHotWaterSystemParameters(testData.hotWaterSystemType, testData.allSystemsLocation);
+      utilitiesActions.verifyHotWaterSystemCommentary(testData.hotWaterSystemCommentary);
+      utilitiesActions.clickSaveContinueButton();
+      amenitiesActions.addParkingPlaces(testData.numberOfParkingPlaces);
+      amenitiesActions.checkHasNoUnitAmenities();
+      amenitiesActions.clickSaveContinueButton();
+      mapsActions.uploadZoningMap(testData.zoningMapFileName);
+      mapsActions.uploadFloodMap(testData.floodMapFileName);
+      mapsActions.chooseCornerByValue(testData.cornerValue);
+      mapsActions.uploadTaxMap(testData.taxMapFileName);
+      mapsActions.captureSubjectMap();
+      mapsActions.clickSaveContinueButton();
+      photosActions.uploadPhotosBySectionName(testData.facadeSection, testData.facadePhotosFolder,
           testData.facadePhotosFileNames);
-      propertyPhotosActions.uploadPhotosBySectionName(testData.subjectSection, testData.subjectStreetPhotosFolder,
+      photosActions.uploadPhotosBySectionName(testData.subjectSection, testData.subjectStreetPhotosFolder,
           testData.subjectStreetFileNames);
-      propertyPhotosActions.uploadPhotosBySectionName(testData.exteriorSection, testData.exteriorEntranceFolder,
+      photosActions.uploadPhotosBySectionName(testData.exteriorSection, testData.exteriorEntranceFolder,
           testData.exteriorEntranceFileNames);
-      propertyPhotosActions.uploadPhotosBySectionName(testData.stairwaySection, testData.typicalStairwayFolder,
+      photosActions.uploadPhotosBySectionName(testData.stairwaySection, testData.typicalStairwayFolder,
           testData.typicalStairwayFiles);
-      propertyPhotosActions.uploadPhotosBySectionName(testData.hallwaySection, testData.typicalHallwayFolder,
+      photosActions.uploadPhotosBySectionName(testData.hallwaySection, testData.typicalHallwayFolder,
           testData.typicalHallwayFiles);
-      propertyPhotosActions.uploadPhotosBySectionName(testData.kitchenSection, testData.kitchenFolder, testData.kitchenFiles);
-      propertyPhotosActions.uploadPhotosBySectionName(testData.bathroomSection, testData.bathroomFolder,
+      photosActions.uploadPhotosBySectionName(testData.kitchenSection, testData.kitchenFolder, testData.kitchenFiles);
+      photosActions.uploadPhotosBySectionName(testData.bathroomSection, testData.bathroomFolder,
           testData.bathroomFiles);
-      propertyPhotosActions.uploadPhotosBySectionName(testData.bedroomSection, testData.bedroomFolder, testData.bedroomFiles);
-      propertyPhotosActions.uploadPhotosBySectionName(testData.livingRoomSection, testData.livingRoomFolder,
+      photosActions.uploadPhotosBySectionName(testData.bedroomSection, testData.bedroomFolder, testData.bedroomFiles);
+      photosActions.uploadPhotosBySectionName(testData.livingRoomSection, testData.livingRoomFolder,
           testData.livingRoomFiles);
-      propertyPhotosActions.uploadPhotosBySectionName(testData.electricMetersSection, testData.electricMetersFolder,
+      photosActions.uploadPhotosBySectionName(testData.electricMetersSection, testData.electricMetersFolder,
           testData.electricMetersFiles);
-      propertyPhotosActions.uploadPhotosBySectionName(testData.gasMetersSection, testData.gasMetersFolder,
+      photosActions.uploadPhotosBySectionName(testData.gasMetersSection, testData.gasMetersFolder,
           testData.gasMetersFiles);
-      propertyPhotosActions.editSectionName(testData.heatingSystemSectionOldName, testData.heatingSystemNewName);
-      propertyPhotosActions.clickSaveButton();
-      propertyPhotosActions.verifyProgressBarNotExist();
+      photosActions.editSectionName(testData.heatingSystemSectionOldName, testData.heatingSystemNewName);
+      photosActions.clickSaveButton();
+      photosActions.verifyProgressBarNotExist();
       cy.reload();
-      propertyPhotosActions.uploadPhotosBySectionName(testData.heatingSystemNewName, testData.heatingSystemFolder,
+      photosActions.uploadPhotosBySectionName(testData.heatingSystemNewName, testData.heatingSystemFolder,
           testData.heatingSystemPhotos);
-      propertyPhotosActions.uploadPhotosBySectionName(testData.hotWaterSection, testData.hotWaterFolder,
+      photosActions.uploadPhotosBySectionName(testData.hotWaterSection, testData.hotWaterFolder,
           testData.hotWaterPhotos);
-      propertyPhotosActions.clickSaveContinueButton();
-      propertyZoningActions.enterZoneNames(testData.zonesNames);
-      propertyZoningActions.verifyPropertyIdentification(testData.siteArea, testData.cityToBe);
-      propertyZoningActions.verifyPropIdentificationCommentary(testData.siteArea, testData.zonesNames[0],
+      photosActions.clickSaveContinueButton();
+      zoningActions.enterZoneNames(testData.zonesNames);
+      zoningActions.verifyPropertyIdentification(testData.siteArea, testData.cityToBe);
+      zoningActions.verifyPropIdentificationCommentary(testData.siteArea, testData.zonesNames[0],
           testData.cityToBe, testData.propIdentifierType, testData.identifier);
-      propertyZoningActions.verifyIntroductionCommentary(testData.streetAddressToBe, testData.zonesNames[0]);
-      propertyZoningActions.clickUsesTab();
-      propertyZoningActions.choosePermittedPropertyUse(testData.propertyUse);
-      propertyZoningActions.chooseCurrentPropertyUse(testData.propertyUse);
-      propertyZoningActions.chooseIsConformingAllowableUses();
-      propertyZoningActions.verifyConformingUseCommentary(testData.zonesNames, true, testData.permittedUses,
+      zoningActions.verifyIntroductionCommentary(testData.streetAddressToBe, testData.zonesNames[0]);
+      zoningActions.clickUsesTab();
+      zoningActions.choosePermittedPropertyUse(testData.propertyUse);
+      zoningActions.chooseCurrentPropertyUse(testData.propertyUse);
+      zoningActions.chooseIsConformingAllowableUses();
+      zoningActions.verifyConformingUseCommentary(testData.zonesNames, true, testData.permittedUses,
           testData.streetAddressToBe, testData.currentUses);
-      propertyZoningActions.clickBulkTab();
-      propertyZoningActions.deleteRowsByRegulationValues(testData.regulationValues);
-      propertyZoningActions.addBulkRegulation(testData.regulationNew);
-      propertyZoningActions.editAllDataByRegName(testData.regulationExist1);
-      propertyZoningActions.editAllDataByRegName(testData.regulationExist2);
-      propertyZoningActions.editAllDataByRegName(testData.regulationExist3);
-      propertyZoningActions.editAllDataByRegName(testData.regulationExist4);
-      propertyZoningActions.verifyComplyingCommentary(testData.complyingCommentary);
-      propertyZoningActions.clickParkingTab();
-      propertyZoningActions.verifyParkingResidentalUnits(testData.numberOfUnits);
-      propertyZoningActions.verifyActualParkingSpaces(testData.numberOfParkingPlaces);
-      propertyZoningActions.enterRequiredParkingSpaces(testData.requiredParkingPlaces);
-      propertyZoningActions.chooseIsConformingWithParkingRequirements();
-      propertyZoningActions.verifyParkingConformityCommentary(testData.requiredParkingPlaces, testData.numberOfParkingPlaces);
-      propertyZoningActions.clickSaveContinueButton();
+      zoningActions.clickBulkTab();
+      zoningActions.deleteRowsByRegulationValues(testData.regulationValues);
+      zoningActions.addBulkRegulation(testData.regulationNew);
+      zoningActions.editAllDataByRegName(testData.regulationExist1);
+      zoningActions.editAllDataByRegName(testData.regulationExist2);
+      zoningActions.editAllDataByRegName(testData.regulationExist3);
+      zoningActions.editAllDataByRegName(testData.regulationExist4);
+      zoningActions.verifyComplyingCommentary(testData.complyingCommentary);
+      zoningActions.clickParkingTab();
+      zoningActions.verifyParkingResidentalUnits(testData.numberOfUnits);
+      zoningActions.verifyActualParkingSpaces(testData.numberOfParkingPlaces);
+      zoningActions.enterRequiredParkingSpaces(testData.requiredParkingPlaces);
+      zoningActions.chooseIsConformingWithParkingRequirements();
+      zoningActions.verifyParkingConformityCommentary(testData.requiredParkingPlaces, testData.numberOfParkingPlaces);
+      zoningActions.clickSaveContinueButton();
+      renovationsActions.chooseRenovationByValue(testData.renovationDropValue);
+      renovationsActions.clickTotalButton();
+      renovationsActions.fillTotalTable(testData.renovationsPeriod, testData.totalAmount);
+      renovationsActions.verifyNetTotalRenovationBudget(testData.totalAmount);
+      renovationsActions.editCommentary(testData.renovationsCommentary);
    });
 });
