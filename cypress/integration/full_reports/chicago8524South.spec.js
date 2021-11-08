@@ -130,14 +130,31 @@ describe("Full doesn't Freddie Mac, only residential, multifamily report ", () =
       propertyPhotosActions.uploadPhotosBySectionName(testData.hotWaterSection, testData.hotWaterFolder,
           testData.hotWaterPhotos);
       propertyPhotosActions.clickSaveContinueButton();
-      propertyZoningActions.enterZoneNameByZoneNumber(testData.subjectZoneName);
+      propertyZoningActions.enterZoneNames(testData.zonesNames);
       propertyZoningActions.verifyPropertyIdentification(testData.siteArea, testData.cityToBe);
-      propertyZoningActions.verifyPropIdentificationCommentary(testData.siteArea, testData.subjectZoneName,
+      propertyZoningActions.verifyPropIdentificationCommentary(testData.siteArea, testData.zonesNames[0],
           testData.cityToBe, testData.propIdentifierType, testData.identifier);
-      propertyZoningActions.verifyIntroductionCommentary(testData.streetAddressToBe, testData.subjectZoneName);
+      propertyZoningActions.verifyIntroductionCommentary(testData.streetAddressToBe, testData.zonesNames[0]);
       propertyZoningActions.clickUsesTab();
       propertyZoningActions.choosePermittedPropertyUse(testData.propertyUse);
       propertyZoningActions.chooseCurrentPropertyUse(testData.propertyUse);
       propertyZoningActions.chooseIsConformingAllowableUses();
+      propertyZoningActions.verifyConformingUseCommentary(testData.zonesNames, true, testData.permittedUses,
+          testData.streetAddressToBe, testData.currentUses);
+      propertyZoningActions.clickBulkTab();
+      propertyZoningActions.deleteRowsByRegulationValues(testData.regulationValues);
+      propertyZoningActions.addBulkRegulation(testData.regulationNew);
+      propertyZoningActions.editAllDataByRegName(testData.regulationExist1);
+      propertyZoningActions.editAllDataByRegName(testData.regulationExist2);
+      propertyZoningActions.editAllDataByRegName(testData.regulationExist3);
+      propertyZoningActions.editAllDataByRegName(testData.regulationExist4);
+      propertyZoningActions.verifyComplyingCommentary(testData.complyingCommentary);
+      propertyZoningActions.clickParkingTab();
+      propertyZoningActions.verifyParkingResidentalUnits(testData.numberOfUnits);
+      propertyZoningActions.verifyActualParkingSpaces(testData.numberOfParkingPlaces);
+      propertyZoningActions.enterRequiredParkingSpaces(testData.requiredParkingPlaces);
+      propertyZoningActions.chooseIsConformingWithParkingRequirements();
+      propertyZoningActions.verifyParkingConformityCommentary(testData.requiredParkingPlaces, testData.numberOfParkingPlaces);
+      propertyZoningActions.clickSaveContinueButton();
    });
 });
