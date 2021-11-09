@@ -15,6 +15,7 @@ import photosActions from "../../actions/property/photos.actions";
 import zoningActions from "../../actions/property/zoning.actions";
 import renovationsActions from "../../actions/property/renovations.actions";
 import residentialUnitsActions from "../../actions/property/residentialUnits.actions";
+import inPlaceRentRollActions from "../../actions/income/residential/rentRoll.actions";
 
 describe("Full doesn't Freddie Mac, only residential, multifamily report ", () => {
    it("Test", () => {
@@ -179,5 +180,18 @@ describe("Full doesn't Freddie Mac, only residential, multifamily report ", () =
       residentialUnitsActions.fillStairsDescription(testData.numberOfStairs, testData.stairsStart, testData.stairsEnd);
       residentialUnitsActions.editStairsCommentary(testData.stairsCommentary);
       residentialUnitsActions.clickSaveContinueButton();
+      inPlaceRentRollActions.verifyNumberOFResidentialUnits(testData.numberOfUnits);
+      inPlaceRentRollActions.checkCheckboxByLabelAndVerify(testData.forecastLabel, testData.forecastColumn);
+      inPlaceRentRollActions.checkListIsInspectedByRowNumbers(testData.isInspectedRowsToCheck);
+      inPlaceRentRollActions.enterUnitNumbersByOrderToAll(testData.numberOfUnits);
+      inPlaceRentRollActions.enterAllEqualRoomsNumber(testData.roomsNumber, testData.numberOfUnits);
+      inPlaceRentRollActions.enterAllEqualBedroomsNumber(testData.bedroomsNumber, testData.numberOfUnits);
+      inPlaceRentRollActions.fillAllRentTypeCellsWithEqualValue(testData.rentType);
+      inPlaceRentRollActions.enterAllEqualLeaseStatuses(testData.leaseStatus, testData.numberOfUnits);
+      inPlaceRentRollActions.enterAllEqualForecast(testData.forecastValue, testData.numberOfUnits);
+      inPlaceRentRollActions.verifyMonthlyTotalForecastEqualValue(testData.forecastValue, testData.numberOfUnits);
+      inPlaceRentRollActions.verifyAnnuallyTotalForecastEqualValue(testData.forecastValue, testData.numberOfUnits);
+      inPlaceRentRollActions.verifyRentRollCommentary(testData.inPlaceRentRollCommentary);
+      inPlaceRentRollActions.clickSaveContinueButton();
    });
 });

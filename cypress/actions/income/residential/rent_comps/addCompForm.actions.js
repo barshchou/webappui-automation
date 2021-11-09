@@ -1,4 +1,4 @@
-import addCompFormPage from "../../../../pages/income/residental/rent_comps/addCompForm.page";
+import addCompFormPage from "../../../../pages/income/residential/rent_comps/addCompForm.page";
 import {getTodayDateString, getTodayDay, isDateHasCorrectFormat} from "../../../../../utils/date.utils";
 
 class AddCompFormActions {

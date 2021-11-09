@@ -1,7 +1,7 @@
 const testData = require("../../../../fixtures/optionsList.fixtures.json");
 import homepageActions from "../../../../actions/base/homepage.actions";
 import navigationSectionActions from "../../../../actions/base/navigationSection.actions";
-import rentRollActions from "../../../../actions/income/residental/rentRoll.actions";
+import rentRollActions from "../../../../actions/income/residential/rentRoll.actions";
 import summaryActions from "../../../../actions/property/summary.actions";
 
 describe("In-Place Rent Roll options list tests", () => {
@@ -25,7 +25,7 @@ describe("In-Place Rent Roll options list tests", () => {
     });
 
     it("ID3: Import manager ('Import Data' button is displayed when .csv file is selected)", () => {
-        rentRollActions.verifyNumberOFResidentalUnits(testData.numberOFUnits);
+        rentRollActions.verifyNumberOFResidentialUnits(testData.numberOFUnits);
         rentRollActions.uploadFile(testData.csvFileName, testData.csvNumberOfUnits);
         cy.reload();
         rentRollActions.uploadFile(testData.xlsxFileName, testData.numberOFUnits);
@@ -35,15 +35,15 @@ describe("In-Place Rent Roll options list tests", () => {
         summaryActions.goBackWithSave();
         rentRollActions.uploadFile(testData.csvFileName, testData.csvNumberOfUnits);
         cy.reload();
-        rentRollActions.fillAllRentTypeCells(testData.rentType);
+        rentRollActions.fillAllRentTypeCellsWithEqualValue(testData.rentType);
         rentRollActions.goToPropSummaryWithSaveLeavingFirst();
         summaryActions.verifyThatPageIsOpened();
         summaryActions.enterNumberOfUnits(testData.numberOFUnits);
         summaryActions.goBackWithSave();
     });
 
-    it("ID4 and ID5: number of residental units and go to property summary", () => {
-        rentRollActions.verifyNumberOFResidentalUnits(testData.numberOFUnits);
+    it("ID4 and ID5: number of residential units and go to property summary", () => {
+        rentRollActions.verifyNumberOFResidentialUnits(testData.numberOFUnits);
         rentRollActions.goToPropSummaryWithSaveLeavingFirst();
         summaryActions.verifyThatPageIsOpened();
         summaryActions.goBackWithSave();

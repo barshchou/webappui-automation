@@ -162,5 +162,14 @@
   "numberOfStairs": 2,
   "stairsStart": "Basement",
   "stairsEnd": "2nd floor",
-  "stairsCommentary": "There are 2 staircases that run from the basement to the 2nd floor, one interior and one exterior."
+  "stairsCommentary": "There are 2 staircases that run from the basement to the 2nd floor, one interior and one exterior.",
+  "forecastLabel": "Developer's Forecast",
+  "forecastColumn": "Rent Forecast",
+  "isInspectedRowsToCheck": [0, 1],
+  "roomsNumber": 4,
+  "bedroomsNumber": 2,
+  "rentType": "Market Rate",
+  "leaseStatus": "Vacant",
+  "forecastValue": 1120,
+  "inPlaceRentRollCommentary": "8524 S Oglesby Ave. is expected to contain 6 units upon completion of the construction works; the developer's projected residential rent roll is presented below."
 }

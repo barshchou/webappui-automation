@@ -1,7 +1,6 @@
 import BaseActions from "../../../base/base.actions";
-import rentCompsPage from "../../../../pages/income/residental/rent_comps/rentComps.page";
+import rentCompsPage from "../../../../pages/income/residential/rent_comps/rentComps.page";
 import {getTodayDateString, getTodayDay, isDateHasCorrectFormat} from "../../../../../utils/date.utils";
-import addCompFormPage from "../../../../pages/income/residental/rent_comps/addCompForm.page";
 import {numberWithCommas} from "../../../../../utils/numbers.utils";
 
 class RentCompsActions extends BaseActions {
