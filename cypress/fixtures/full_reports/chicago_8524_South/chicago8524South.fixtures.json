@@ -171,5 +171,7 @@
   "rentType": "Market Rate",
   "leaseStatus": "Vacant",
   "forecastValue": 1120,
-  "inPlaceRentRollCommentary": "8524 S Oglesby Ave. is expected to contain 6 units upon completion of the construction works; the developer's projected residential rent roll is presented below."
+  "inPlaceRentRollCommentary": "8524 S Oglesby Ave. is expected to contain 6 units upon completion of the construction works; the developer's projected residential rent roll is presented below.",
+  "unitType": "2 Bedroom",
+  "averageSF": 700
 }

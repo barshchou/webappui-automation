@@ -16,6 +16,7 @@ import zoningActions from "../../actions/property/zoning.actions";
 import renovationsActions from "../../actions/property/renovations.actions";
 import residentialUnitsActions from "../../actions/property/residentialUnits.actions";
 import inPlaceRentRollActions from "../../actions/income/residential/rentRoll.actions";
+import unitGroupsActions from "../../actions/income/residential/unitGroups.actions";
 
 describe("Full doesn't Freddie Mac, only residential, multifamily report ", () => {
    it("Test", () => {
@@ -193,5 +194,12 @@ describe("Full doesn't Freddie Mac, only residential, multifamily report ", () =
       inPlaceRentRollActions.verifyAnnuallyTotalForecastEqualValue(testData.forecastValue, testData.numberOfUnits);
       inPlaceRentRollActions.verifyRentRollCommentary(testData.inPlaceRentRollCommentary);
       inPlaceRentRollActions.clickSaveContinueButton();
+      unitGroupsActions.verifyRowsNumberEqualBedroomsNonComp(testData.bedroomsNumber, testData.numberOfUnits);
+      unitGroupsActions.verifyGLAPercentage();
+      unitGroupsActions.verifyRoomSize();
+      unitGroupsActions.verifyGLAValue(testData.grossArea);
+      unitGroupsActions.enterAvgSFByUnitTypeValue(testData.unitType, testData.averageSF);
+      unitGroupsActions.verifyGLACellValue(testData.grossArea);
+      unitGroupsActions.verifyTotalAvgSqftEqualUnits(testData.averageSF, testData.numberOfUnits);
    });
 });
