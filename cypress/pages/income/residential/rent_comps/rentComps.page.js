@@ -63,6 +63,10 @@ class RentCompsPage extends BasePage{
     get categoryRentsCellsLocator() {return "*[data-qa='col-rent']";}
     get categoryRentPerRoomLocator() {return "*[data-qa='col-rentPerRoom']";}
     get categorySourceOfInfoLocator() {return "*[data-qa='col-source-of-info']";}
+    get advancedSearchButton() {return cy.get("[data-qa=advanced-search-link]");}
+    get selectStateButton() {return cy.get("[data-qa='search.locationIdentifier-select-list'] [role='button']");}
+    getStateByName(name) {return cy.get(`[data-qa='search.locationIdentifier-${name}-select-option']`);}
+    get propertyIdentifierInput() {return cy.get("*[name='search.propertyIdentifier']");}
 }
 
 export default new RentCompsPage();

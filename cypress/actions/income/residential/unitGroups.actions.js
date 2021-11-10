@@ -30,7 +30,7 @@ class UnitGroupsActions extends BaseActions {
 
     verifyGLACellValue(grossArea, glaPercentage = 90) {
         const valueToBe = numberWithCommas(Math.round(grossArea / 100 * glaPercentage));
-        unitGroupsPage.glaCell.should("have.value", `${valueToBe} sqft`);
+        unitGroupsPage.glaCell.should("have.text", `${valueToBe} sqft`);
     }
 
     verifyTotalAvgSqftEqualUnits(avgSF, unitsNumber) {

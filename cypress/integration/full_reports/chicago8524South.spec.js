@@ -17,6 +17,8 @@ import renovationsActions from "../../actions/property/renovations.actions";
 import residentialUnitsActions from "../../actions/property/residentialUnits.actions";
 import inPlaceRentRollActions from "../../actions/income/residential/rentRoll.actions";
 import unitGroupsActions from "../../actions/income/residential/unitGroups.actions";
+import rentCompsActions from "../../actions/income/residential/rent_comps/rentComps.actions";
+import addCompFormActions from "../../actions/income/residential/rent_comps/addCompForm.actions";
 
 describe("Full doesn't Freddie Mac, only residential, multifamily report ", () => {
    it("Test", () => {
@@ -201,5 +203,16 @@ describe("Full doesn't Freddie Mac, only residential, multifamily report ", () =
       unitGroupsActions.enterAvgSFByUnitTypeValue(testData.unitType, testData.averageSF);
       unitGroupsActions.verifyGLACellValue(testData.grossArea);
       unitGroupsActions.verifyTotalAvgSqftEqualUnits(testData.averageSF, testData.numberOfUnits);
+      unitGroupsActions.clickSaveContinueButton();
+      rentCompsActions.openAddNewComparableFormAdvanced(testData.firstCompData.address, testData.state, testData.compID);
+      addCompFormActions.fillNewRentCompWithoutNumbTypeSourceNameUrlNoteAmenities(testData.firstCompData);
+      rentCompsActions.openAddNewComparableFormAdvanced(testData.secondCompData.address, testData.state, testData.compID);
+      addCompFormActions.fillNewRentCompWithoutNumbTypeSourceNameUrlNoteAmenities(testData.secondCompData);
+      rentCompsActions.openAddNewComparableFormAdvanced(testData.thirdCompData.address, testData.state, testData.compID);
+      addCompFormActions.fillNewRentCompWithoutNumbTypeSourceNameUrlNoteAmenities(testData.thirdCompData);
+      rentCompsActions.openAddNewComparableFormAdvanced(testData.forthCompData.address, testData.state, testData.compID);
+      addCompFormActions.fillNewRentCompWithoutNumbTypeSourceNameUrlNoteAmenities(testData.forthCompData);
+      rentCompsActions.openAddNewComparableFormAdvanced(testData.fifthCompData.address, testData.state, testData.compID);
+      addCompFormActions.fillNewRentCompWithoutNumbTypeSourceNameUrlNoteAmenities(testData.fifthCompData);
    });
 });

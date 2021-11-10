@@ -173,5 +173,16 @@
   "forecastValue": 1120,
   "inPlaceRentRollCommentary": "8524 S Oglesby Ave. is expected to contain 6 units upon completion of the construction works; the developer's projected residential rent roll is presented below.",
   "unitType": "2 Bedroom",
-  "averageSF": 700
+  "averageSF": 700,
+  "compID": "1",
+  "firstCompData": {"address": "8416 S Escanaba Ave., Chicago, IL 60617", "monthly": 1050, "date": "04-09-2021",
+    "footage": 0, "sourceInfo": "externalDatabase", "bedrooms": 2, "rooms": 4, "bathrooms": 0},
+  "secondCompData": {"address": "8349 S Colfax Ave., Chicago, IL 60617","monthly": 1000, "date": "04-09-2021",
+    "footage": 0, "sourceInfo": "externalDatabase", "bedrooms": 2, "rooms": 4, "bathrooms": 0},
+  "thirdCompData": {"address": "2815 E 81st St., Chicago, IL 60617","monthly": 1000, "date": "04-09-2021",
+    "footage": 0, "sourceInfo": "externalDatabase", "bedrooms": 2, "rooms": 4, "bathrooms": 0},
+  "forthCompData": {"address": "8155 S Merrill Ave., Chicago, IL 60617","monthly": 1150, "date": "04-09-2021",
+    "footage": 0, "sourceInfo": "externalDatabase", "bedrooms": 2, "rooms": 4, "bathrooms": 0},
+  "fifthCompData": {"address": "7957 S Marquette Ave., Chicago, IL 60617","monthly": 1200, "date": "04-09-2021",
+    "footage": 0, "sourceInfo": "externalDatabase", "bedrooms": 2, "rooms": 4, "bathrooms": 0}
 }

@@ -368,6 +368,18 @@ class RentCompsActions extends BaseActions {
         rentCompsPage.newUnitForm.should("be.visible");
     }
 
+    openAddNewComparableFormAdvanced(address, state, id) {
+        this.verifyLoadingDoesntExist();
+        rentCompsPage.addNewRentCompButton.scrollIntoView().click();
+        rentCompsPage.advancedSearchButton.click();
+        rentCompsPage.selectStateButton.click();
+        rentCompsPage.getStateByName(state).click();
+        rentCompsPage.searchAddressField.type(`${address}{enter}`).should("have.value", address);
+        rentCompsPage.findRenCompSection.click();
+        rentCompsPage.propertyIdentifierInput.type(id).should("have.value", id);
+        rentCompsPage.submitButton.click();
+    }
+
     verifyAddedComparable(index, numberOfRooms, numberOfBedrooms, monthlyRent,
                           sourceOfInfo, numberOfUnits = 0) {
         if (numberOfUnits === 0) {

@@ -1,5 +1,6 @@
 import addCompFormPage from "../../../../pages/income/residential/rent_comps/addCompForm.page";
 import {getTodayDateString, getTodayDay, isDateHasCorrectFormat} from "../../../../../utils/date.utils";
+import {isDecimal, numberWithCommas} from "../../../../../utils/numbers.utils";
 
 class AddCompFormActions {
     clickCloseButton() {
@@ -47,7 +48,8 @@ class AddCompFormActions {
     }
 
     enterMonthlyRent(rent) {
-        addCompFormPage.monthRentInput.clear().type(rent).should("have.value", rent);
+        const textToBe = typeof rent === "string" ? rent : numberWithCommas(rent);
+        addCompFormPage.monthRentInput.clear().type(rent).should("have.value", textToBe);
     }
 
     clearDateInput() {
@@ -93,7 +95,8 @@ class AddCompFormActions {
     }
 
     enterSquareFootage(footage) {
-        addCompFormPage.squareFootageInput.clear().type(footage).should("have.value", footage);
+        const textToBe = typeof footage === "string" ? footage : numberWithCommas(footage);
+        addCompFormPage.squareFootageInput.clear().type(footage).should("have.value", textToBe);
     }
 
     clickSourceOfInfoDropdown() {
@@ -160,14 +163,18 @@ class AddCompFormActions {
     }
 
     enterNumberOfBathrooms(number = 0) {
-        number = number.toFixed(1);
-        number = `${number}`;
-        let numberDigits = number.split(".");
-        addCompFormPage.numberOfBathInput.clear().type(number).type("{enter}").should("have.value", number);
-        if (numberDigits[1] !== "5") {
-            addCompFormPage.numberOfRoomsInput.click();
-            addCompFormPage.numberOfBathInput.click();
-            addCompFormPage.bathNumbErrorMessage.should("exist");
+        if (isDecimal(number)) {
+            number = number.toFixed(1);
+            number = `${number}`;
+            let numberDigits = number.split(".");
+            addCompFormPage.numberOfBathInput.clear().type(number).type("{enter}").should("have.value", number);
+            if (numberDigits[1] !== "5") {
+                addCompFormPage.numberOfRoomsInput.click();
+                addCompFormPage.numberOfBathInput.click();
+                addCompFormPage.bathNumbErrorMessage.should("exist");
+            }
+        } else {
+            addCompFormPage.numberOfBathInput.clear().type(number).type("{enter}").should("have.value", number);
         }
     }
 
@@ -208,6 +215,17 @@ class AddCompFormActions {
 
     clickSubmitCompButton() {
         addCompFormPage.submitCompButton.should("not.be.disabled").click();
+    }
+
+    fillNewRentCompWithoutNumbTypeSourceNameUrlNoteAmenities(compData) {
+        this.enterMonthlyRent(compData.monthly);
+        this.enterDate(compData.date);
+        this.enterSquareFootage(compData.footage);
+        this.selectSourceOfInfoAndVerify(compData.sourceInfo);
+        this.enterNumberOfBedrooms(compData.bedrooms);
+        this.enterNumberOfRooms(compData.rooms);
+        this.enterNumberOfBathrooms(compData.bathrooms);
+        this.clickSubmitCompButton();
     }
 }
 
