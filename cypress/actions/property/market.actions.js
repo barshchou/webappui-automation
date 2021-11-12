@@ -1,6 +1,6 @@
 import BaseActions from "../base/base.actions";
 import marketPage from "../../pages/property/market.page";
-import {getCurrentQuarter, getCurrentYear} from "../../../utils/date.utils";
+import {getQuarter, getYearFromDate} from "../../../utils/date.utils";
 
 class MarketActions extends BaseActions{
     verifyExposureTimeMin(monthsToBe) {
@@ -61,11 +61,11 @@ class MarketActions extends BaseActions{
         this.enterNeighborhood(testDataGiven.neighborhoodValue);
         this.enterArea(testDataGiven.marketArea);
         this.verifyMarketState(testDataGiven.stateToBe);
-        this.verifyNeighborhoodYear(getCurrentYear());
+        this.verifyNeighborhoodYear(getYearFromDate(testDataGiven.dateOfValuation));
         this.enterMacroMarket(testDataGiven.macroMarket);
         this.enterSubmarket(testDataGiven.submarket);
-        this.verifyMarketQuarter(getCurrentQuarter());
-        this.verifyMarketYear(getCurrentYear());
+        this.verifyMarketQuarter(getQuarter(testDataGiven.dateOfValuation));
+        this.verifyMarketYear(getYearFromDate(testDataGiven.dateOfValuation));
     }
 }
 

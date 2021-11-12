@@ -398,6 +398,19 @@ class RentCompsActions extends BaseActions {
     verifyCellText(rowJQueryEl, cellLocator, textToBe) {
         cy.wrap(rowJQueryEl).find(cellLocator).should("have.text", textToBe);
     }
+
+    verifyComparableBedroomTableByNumber(index, roomsNumber, bedroomsNumber, monthlyRent, sourceOfInfo) {
+        rentCompsPage.getBedroomTableByNumber(bedroomsNumber).find(rentCompsPage.getCategoryRowByIndexLocator(index)).then(row => {
+            this.verifyCellText(row, rentCompsPage.categoryRoomsCellsLocator, roomsNumber);
+            this.verifyCellText(row, rentCompsPage.categoryBedroomsCellsLocator, bedroomsNumber);
+            const monthlyRentText = typeof monthlyRent === "string" ? `$${monthlyRent}` : `$${numberWithCommas(monthlyRent)}`;
+            this.verifyCellText(row, rentCompsPage.categoryRentsCellsLocator, monthlyRentText);
+            const rentForCalc = typeof monthlyRent === "string" ? monthlyRent.replace(",", "") : monthlyRent;
+            const perRoom = numberWithCommas(Math.round(rentForCalc / roomsNumber));
+            this.verifyCellText(row, rentCompsPage.categoryRentPerRoomLocator, `$${perRoom}`);
+            this.verifyCellText(row, rentCompsPage.categorySourceOfInfoLocator, sourceOfInfo);
+        });
+    }
 }
 
 export default new RentCompsActions();

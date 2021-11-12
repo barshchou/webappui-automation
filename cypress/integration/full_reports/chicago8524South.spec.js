@@ -19,6 +19,7 @@ import inPlaceRentRollActions from "../../actions/income/residential/rentRoll.ac
 import unitGroupsActions from "../../actions/income/residential/unitGroups.actions";
 import rentCompsActions from "../../actions/income/residential/rent_comps/rentComps.actions";
 import addCompFormActions from "../../actions/income/residential/rent_comps/addCompForm.actions";
+import rentCompsMapActions from "../../actions/income/residential/rentCompsMap.actions";
 
 describe("Full doesn't Freddie Mac, only residential, multifamily report ", () => {
    it("Test", () => {
@@ -214,5 +215,18 @@ describe("Full doesn't Freddie Mac, only residential, multifamily report ", () =
       addCompFormActions.fillNewRentCompWithoutNumbTypeSourceNameUrlNoteAmenities(testData.forthCompData);
       rentCompsActions.openAddNewComparableFormAdvanced(testData.fifthCompData.address, testData.state, testData.compID);
       addCompFormActions.fillNewRentCompWithoutNumbTypeSourceNameUrlNoteAmenities(testData.fifthCompData);
+      rentCompsActions.verifyComparableBedroomTableByNumber(0, testData.firstCompData.rooms, testData.firstCompData.bedrooms,
+          testData.firstCompData.monthly, testData.sourceOfInfoText);
+      rentCompsActions.verifyComparableBedroomTableByNumber(1, testData.secondCompData.rooms, testData.secondCompData.bedrooms,
+          testData.secondCompData.monthly, testData.sourceOfInfoText);
+      rentCompsActions.verifyComparableBedroomTableByNumber(2, testData.thirdCompData.rooms, testData.thirdCompData.bedrooms,
+          testData.thirdCompData.monthly, testData.sourceOfInfoText);
+      rentCompsActions.verifyComparableBedroomTableByNumber(3, testData.forthCompData.rooms, testData.forthCompData.bedrooms,
+          testData.forthCompData.monthly, testData.sourceOfInfoText);
+      rentCompsActions.verifyComparableBedroomTableByNumber(4, testData.fifthCompData.rooms, testData.fifthCompData.bedrooms,
+          testData.fifthCompData.monthly, testData.sourceOfInfoText);
+      rentCompsActions.clickSaveContinueButton();
+      rentCompsMapActions.uploadCompMap(testData.compMapPath);
+      rentCompsMapActions.clickSaveContinueButton();
    });
 });

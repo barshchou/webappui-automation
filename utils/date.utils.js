@@ -39,21 +39,25 @@ export const isDateHasCorrectFormat = (dateString, delimiter = "-") => {
     return isMonthCorrect && isDayCorrect && isYearCorrect;
 };
 
-export const getCurrentMonth = () => {
-    return getTodayDateString().split("-")[0];
+export const getMonthFromDate = (date) => {
+    date = date ?? getTodayDateString();
+    return date.split("-")[0];
 };
 
-export const getCurrentYear = () => {
-    return getTodayDateString().split("-")[2];
+export const getYearFromDate = (date) => {
+    date = date ?? getTodayDateString();
+    return date.split("-")[2];
 };
 
-export const getCurrentQuarter = () => {
-    const currentMonthNumber = Number(getCurrentMonth());
-    if (currentMonthNumber >= 1 && currentMonthNumber < 5) {
+export const getQuarter = (dateString) => {
+    const currentMonthNumber = Number(getMonthFromDate(dateString));
+    if (currentMonthNumber >= 1 && currentMonthNumber < 4) {
+        return "Q4";
+    } else if (currentMonthNumber >= 4 && currentMonthNumber < 7) {
         return "Q1";
-    } else if (currentMonthNumber >= 5 && currentMonthNumber < 9) {
+    } else if (currentMonthNumber >= 7 && currentMonthNumber < 10) {
         return "Q2";
-    } else if (currentMonthNumber >= 9 && currentMonthNumber <= 12) {
+    } else if (currentMonthNumber >= 10 && currentMonthNumber <= 12) {
         return "Q3";
     }
 };

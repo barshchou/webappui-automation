@@ -184,5 +184,7 @@
   "forthCompData": {"address": "8155 S Merrill Ave., Chicago, IL 60617","monthly": 1150, "date": "04-09-2021",
     "footage": 0, "sourceInfo": "externalDatabase", "bedrooms": 2, "rooms": 4, "bathrooms": 0},
   "fifthCompData": {"address": "7957 S Marquette Ave., Chicago, IL 60617","monthly": 1200, "date": "04-09-2021",
-    "footage": 0, "sourceInfo": "externalDatabase", "bedrooms": 2, "rooms": 4, "bathrooms": 0}
+    "footage": 0, "sourceInfo": "externalDatabase", "bedrooms": 2, "rooms": 4, "bathrooms": 0},
+  "sourceOfInfoText": "External Database",
+  "compMapPath": "full_reports/chicago_8524_South/comp_map.png"
 }

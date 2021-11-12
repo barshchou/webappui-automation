@@ -67,6 +67,7 @@ class RentCompsPage extends BasePage{
     get selectStateButton() {return cy.get("[data-qa='search.locationIdentifier-select-list'] [role='button']");}
     getStateByName(name) {return cy.get(`[data-qa='search.locationIdentifier-${name}-select-option']`);}
     get propertyIdentifierInput() {return cy.get("*[name='search.propertyIdentifier']");}
+    getBedroomTableByNumber(bedroomsNumber) {return cy.get(`[data-qa='bedrooms_${bedroomsNumber}']`);}
 }
 
 export default new RentCompsPage();
