@@ -20,6 +20,7 @@ import unitGroupsActions from "../../actions/income/residential/unitGroups.actio
 import rentCompsActions from "../../actions/income/residential/rent_comps/rentComps.actions";
 import addCompFormActions from "../../actions/income/residential/rent_comps/addCompForm.actions";
 import rentCompsMapActions from "../../actions/income/residential/rentCompsMap.actions";
+import rentReconciliationActions from "../../actions/income/residential/rentReconciliation.actions";
 
 describe("Full doesn't Freddie Mac, only residential, multifamily report ", () => {
    it("Test", () => {
@@ -228,5 +229,17 @@ describe("Full doesn't Freddie Mac, only residential, multifamily report ", () =
       rentCompsActions.clickSaveContinueButton();
       rentCompsMapActions.uploadCompMap(testData.compMapPath);
       rentCompsMapActions.clickSaveContinueButton();
+      rentReconciliationActions.verifyIntroCommentary(testData.reconcilIntroComm);
+      rentReconciliationActions.expandBedroomReconByNumber(testData.bedroomsNumber);
+      rentReconciliationActions.verifyBedroomMinForecastByNumber(testData.bedroomsNumber, testData.forecastValue);
+      rentReconciliationActions.verifyBedroomAvgForecastByNumber(testData.bedroomsNumber, testData.numberOfUnits, testData.forecastValue);
+      rentReconciliationActions.verifyBedroomMaxForecastByNumber(testData.bedroomsNumber, testData.forecastValue);
+      rentReconciliationActions.verifyBedroomMinCompByNumber(testData.bedroomsNumber, [testData.firstCompData.monthly,
+          testData.secondCompData.monthly, testData.thirdCompData.monthly, testData.forthCompData.monthly, testData.fifthCompData.monthly]);
+      rentReconciliationActions.verifyBedroomAvgCompByNumber(testData.bedroomsNumber, [testData.firstCompData.monthly,
+          testData.secondCompData.monthly, testData.thirdCompData.monthly, testData.forthCompData.monthly, testData.fifthCompData.monthly]);
+      rentReconciliationActions.verifyBedroomMaxCompByNumber(testData.bedroomsNumber, [testData.firstCompData.monthly,
+          testData.secondCompData.monthly, testData.thirdCompData.monthly, testData.forthCompData.monthly, testData.fifthCompData.monthly]);
+      rentReconciliationActions.enterBedroomMarketConclusionByNumber(testData.bedroomsNumber, testData.marketConclusion);
    });
 });
