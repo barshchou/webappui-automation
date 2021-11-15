@@ -12,7 +12,7 @@ class RentReconciliationActions extends BaseActions{
     }
 
     verifyBedroomMinForecastByNumber(bedroomNumber, ...forecasts) {
-        const minValue = Math.min(forecasts);
+        const minValue = Math.min(...forecasts);
         const textToBe = `$${numberWithCommas(minValue.toFixed(2))}`;
         rentReconciliationPage.getBedMinForecastByNum(bedroomNumber).should("have.text", textToBe);
     }
@@ -34,13 +34,13 @@ class RentReconciliationActions extends BaseActions{
     }
 
     verifyBedroomMaxForecastByNumber(bedroomNumber, ...forecasts) {
-        const maxValue = Math.max(forecasts);
+        const maxValue = Math.max(...forecasts);
         const textToBe = `$${numberWithCommas(maxValue.toFixed(2))}`;
         rentReconciliationPage.getBedMaxForecastByNum(bedroomNumber).should("have.text", textToBe);
     }
 
     verifyBedroomMinCompByNumber(bedroomNumber, ...comparableRents) {
-        const minValue = Math.min(comparableRents);
+        const minValue = Math.min(...comparableRents);
         const textToBe = `$${numberWithCommas(minValue.toFixed(2))}`;
         rentReconciliationPage.getBedMinCompByNum(bedroomNumber).should("have.text", textToBe);
     }
@@ -54,7 +54,7 @@ class RentReconciliationActions extends BaseActions{
     }
 
     verifyBedroomMaxCompByNumber(bedroomNumber, ...comparableRents) {
-        const maxValue = Math.max(comparableRents);
+        const maxValue = Math.max(...comparableRents);
         const textToBe = `$${numberWithCommas(maxValue.toFixed(2))}`;
         rentReconciliationPage.getBedMaxCompByNum(bedroomNumber).should("have.text", textToBe);
     }
@@ -63,6 +63,18 @@ class RentReconciliationActions extends BaseActions{
         const textToBe = numberWithCommas(conclusionValue);
         rentReconciliationPage.getMarketConclusionBedByNumb(bedroomNumber).clear().type(conclusionValue)
             .should("have.value", textToBe);
+    }
+
+    selectBedroomMarketBreakdownBedByNumber(bedroomsNumber, value) {
+        rentReconciliationPage.getMarketBreakdownDropBedByNum(bedroomsNumber).click();
+        rentReconciliationPage.getDropdownOptionByValue(value).click();
+        rentReconciliationPage.getMarketBreakdownBedInputCheckByNum(bedroomsNumber).should("have.value", value);
+    }
+
+    editBedroomCommentaryByBedNum(bedroomsNumber, newCommentary) {
+        rentReconciliationPage.getBedCommentaryEditButtonByBedNum(bedroomsNumber).click();
+        rentReconciliationPage.getBedCommentaryByBedNum(bedroomsNumber).clear().type(newCommentary)
+            .should("have.text", newCommentary);
     }
 }
 

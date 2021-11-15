@@ -234,12 +234,15 @@ describe("Full doesn't Freddie Mac, only residential, multifamily report ", () =
       rentReconciliationActions.verifyBedroomMinForecastByNumber(testData.bedroomsNumber, testData.forecastValue);
       rentReconciliationActions.verifyBedroomAvgForecastByNumber(testData.bedroomsNumber, testData.numberOfUnits, testData.forecastValue);
       rentReconciliationActions.verifyBedroomMaxForecastByNumber(testData.bedroomsNumber, testData.forecastValue);
-      rentReconciliationActions.verifyBedroomMinCompByNumber(testData.bedroomsNumber, [testData.firstCompData.monthly,
-          testData.secondCompData.monthly, testData.thirdCompData.monthly, testData.forthCompData.monthly, testData.fifthCompData.monthly]);
-      rentReconciliationActions.verifyBedroomAvgCompByNumber(testData.bedroomsNumber, [testData.firstCompData.monthly,
-          testData.secondCompData.monthly, testData.thirdCompData.monthly, testData.forthCompData.monthly, testData.fifthCompData.monthly]);
-      rentReconciliationActions.verifyBedroomMaxCompByNumber(testData.bedroomsNumber, [testData.firstCompData.monthly,
-          testData.secondCompData.monthly, testData.thirdCompData.monthly, testData.forthCompData.monthly, testData.fifthCompData.monthly]);
+      rentReconciliationActions.verifyBedroomMinCompByNumber(testData.bedroomsNumber, testData.firstCompData.monthly,
+          testData.secondCompData.monthly, testData.thirdCompData.monthly, testData.forthCompData.monthly, testData.fifthCompData.monthly);
+      rentReconciliationActions.verifyBedroomAvgCompByNumber(testData.bedroomsNumber, testData.firstCompData.monthly,
+          testData.secondCompData.monthly, testData.thirdCompData.monthly, testData.forthCompData.monthly, testData.fifthCompData.monthly);
+      rentReconciliationActions.verifyBedroomMaxCompByNumber(testData.bedroomsNumber, testData.firstCompData.monthly,
+          testData.secondCompData.monthly, testData.thirdCompData.monthly, testData.forthCompData.monthly, testData.fifthCompData.monthly);
       rentReconciliationActions.enterBedroomMarketConclusionByNumber(testData.bedroomsNumber, testData.marketConclusion);
+      rentReconciliationActions.selectBedroomMarketBreakdownBedByNumber(testData.bedroomsNumber, testData.marketBreakdownDropValue);
+      rentReconciliationActions.editBedroomCommentaryByBedNum(testData.bedroomsNumber, testData.reconcilCommentary);
+      rentReconciliationActions.clickSaveContinueButton();
    });
 });

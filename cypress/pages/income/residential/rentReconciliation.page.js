@@ -11,7 +11,21 @@ class RentReconciliationPage extends BasePage{
     getBedAvgCompByNum(num) {return this.getBedReconByBedNumContainer(num).find("[data-qa$='comparables-avg']");}
     getBedMaxCompByNum(num) {return this.getBedReconByBedNumContainer(num).find("[data-qa$='comparables-max']");}
     getMarketConclusionBedByNumb(num) {return this.getBedReconByBedNumContainer(num).find("[name$=marketConclusion]");}
+    getMarketBreakdownDropBedByNum(num) {
+        return this.getBedReconByBedNumContainer(num)
+            .find("[data-qa$=marketBreakdown-select-list] [data-qa=select-value]");
+    }
 
+    getDropdownOptionByValue(value) {return cy.get(`li[role=option][data-value='${value}']`);}
+    getMarketBreakdownBedInputCheckByNum(num) {
+        return this.getBedReconByBedNumContainer(num).find("[data-qa$=marketBreakdown-select-list] input");
+    }
+
+    getBedCommentaryEditButtonByBedNum(num) {
+        return this.getBedReconByBedNumContainer(num).find("[data-qa=generated-commentary-edit-btn]");
+    }
+
+    getBedCommentaryByBedNum(num) {return this.getBedReconByBedNumContainer(num).find("[name$=commentary]");}
 }
 
 export default new RentReconciliationPage();
