@@ -29,3 +29,7 @@ export const isHasDecimalPartMoreNumberOfDigits = (number, digitsNumber = 2) => 
     let numberDigits = number.toString().split(".");
     return numberDigits[1].length > digitsNumber;
 };
+
+export const getNumberFromDollarNumberWithCommas = (stringNumber) => {
+  return Number(stringNumber.replace("$", "").replace(",", ""));
+};

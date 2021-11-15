@@ -21,6 +21,7 @@ import rentCompsActions from "../../actions/income/residential/rent_comps/rentCo
 import addCompFormActions from "../../actions/income/residential/rent_comps/addCompForm.actions";
 import rentCompsMapActions from "../../actions/income/residential/rentCompsMap.actions";
 import rentReconciliationActions from "../../actions/income/residential/rentReconciliation.actions";
+import stabilizedRentRollActions from "../../actions/income/residential/stabilizedRentRoll.actions";
 
 describe("Full doesn't Freddie Mac, only residential, multifamily report ", () => {
    it("Test", () => {
@@ -244,5 +245,23 @@ describe("Full doesn't Freddie Mac, only residential, multifamily report ", () =
       rentReconciliationActions.selectBedroomMarketBreakdownBedByNumber(testData.bedroomsNumber, testData.marketBreakdownDropValue);
       rentReconciliationActions.editBedroomCommentaryByBedNum(testData.bedroomsNumber, testData.reconcilCommentary);
       rentReconciliationActions.clickSaveContinueButton();
+      stabilizedRentRollActions.verifyUnitTypeAndRentConclusion(testData.unitType, testData.marketConclusion);
+      stabilizedRentRollActions.verifyRowsNumber(testData.numberOfUnits);
+      stabilizedRentRollActions.verifyCheckedIsInspected(testData.isInspectedRowsToCheck);
+      stabilizedRentRollActions.verifyUnitsNumberByOrder();
+      stabilizedRentRollActions.verifyAllRoomsNumbers(testData.roomsNumber);
+      stabilizedRentRollActions.verifyAllBedroomsNumbers(testData.bedroomsNumber);
+      stabilizedRentRollActions.verifyAllRentTypeCells(testData.rentType);
+      stabilizedRentRollActions.enterAllMonthlyRents(testData.monthlyRentStab);
+      stabilizedRentRollActions.verifyTotalMonthlyRent(testData.numberOfUnits, testData.monthlyRentStab);
+      stabilizedRentRollActions.verifyTotalAnnualRent();
+      stabilizedRentRollActions.verifyAllPerRoomCells(testData.roomsNumber, testData.monthlyRentStab);
+      stabilizedRentRollActions.verifyAllLeaseStatusesCells(testData.leaseStatus);
+      stabilizedRentRollActions.verifyAllRentForecasts(testData.forecastValue);
+      stabilizedRentRollActions.verifyTotalMonthlyForecast(testData.numberOfUnits, testData.forecastValue);
+      stabilizedRentRollActions.verifyTotalAnnualForecast();
+      stabilizedRentRollActions.verifyRentRollDiscussionCommentary(testData.rentRollDiscussionComm);
+      stabilizedRentRollActions.editOccupancyRateCommentary(testData.occupancyRateComm);
+      stabilizedRentRollActions.clickSaveContinueButton();
    });
 });
