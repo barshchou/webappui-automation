@@ -193,5 +193,13 @@
   "reconcilCommentary": "The comparable two-bedroom units range from $1,000 to $1,200 per month with an average of $1,080 per month. Based on the subject's market rate rents and the range of the comparables, we forecast a market rent for the subject's two-bedroom units of $1,100 per month. Considering the range of the comparables and our market rent forecasts for the subject units, the subject's market rate units are all currently market oriented.",
   "monthlyRentStab": 1100,
   "rentRollDiscussionComm": "8524 S Oglesby Ave. will contain 6 residential units upon stabilization; the residential rent roll is summarized by unit type and rent regulation status.",
-  "occupancyRateComm": "We note that the subject will contain 6 market rate residential units."
+  "occupancyRateComm": "We note that the subject will contain 6 market rate residential units.",
+  "marketAnnualRent": "$79,200.00",
+  "stabRRSummary": "The average forecasted monthly rent is $1,100.",
+  "grossIncomeDiscussion": "Based on our market rent conclusions, the residential rent roll is projected at 100% of market.",
+  "distributionSummary": "We estimated the total leasable area and resulting average square footage per unit based on a loss factor of 10% applied to the GBA.",
+  "tenantValue": "tenant",
+  "ownerValue": "owner",
+  "tenantObligationsCommentary": "In-unit electricity, cooking gas and heat. ",
+  "ownerObligationsCommentary": "Common area electricity, refuse removal, water/sewer and common area maintenance. "
 }

@@ -22,6 +22,8 @@ import addCompFormActions from "../../actions/income/residential/rent_comps/addC
 import rentCompsMapActions from "../../actions/income/residential/rentCompsMap.actions";
 import rentReconciliationActions from "../../actions/income/residential/rentReconciliation.actions";
 import stabilizedRentRollActions from "../../actions/income/residential/stabilizedRentRoll.actions";
+import stabRentRollSummaryActions from "../../actions/income/residential/stabRentRollSummary.actions";
+import expensesStructureActions from "../../actions/income/residential/expenseStructure.actions";
 
 describe("Full doesn't Freddie Mac, only residential, multifamily report ", () => {
    it("Test", () => {
@@ -263,5 +265,25 @@ describe("Full doesn't Freddie Mac, only residential, multifamily report ", () =
       stabilizedRentRollActions.verifyRentRollDiscussionCommentary(testData.rentRollDiscussionComm);
       stabilizedRentRollActions.editOccupancyRateCommentary(testData.occupancyRateComm);
       stabilizedRentRollActions.clickSaveContinueButton();
+      stabRentRollSummaryActions.verifyAnnualRentByRow(testData.marketAnnualRent);
+      stabRentRollSummaryActions.verifyTotalAnnualRent(testData.marketAnnualRent);
+      stabRentRollSummaryActions.verifyIncreaseValueByRow();
+      stabRentRollSummaryActions.verifyPGICellByRow(testData.marketAnnualRent);
+      stabRentRollSummaryActions.verifyPGITotal(testData.marketAnnualRent);
+      stabRentRollSummaryActions.openDiscussionTab();
+      stabRentRollSummaryActions.verifyStabRRSummaryDiscussion(testData.stabRRSummary);
+      stabRentRollSummaryActions.verifyGrossIncomeDiscussion(testData.grossIncomeDiscussion);
+      stabRentRollSummaryActions.verifyDistributionSummary(testData.distributionSummary);
+      stabRentRollSummaryActions.clickSaveContinueButton();
+      expensesStructureActions.checkHeatExpensesByValue(testData.tenantValue);
+      expensesStructureActions.checkElectricityByValue(testData.tenantValue);
+      expensesStructureActions.checkCommonElectricityByValue(testData.ownerValue);
+      expensesStructureActions.checkGasByValue(testData.tenantValue);
+      expensesStructureActions.checkRefuseRemovalByValue(testData.ownerValue);
+      expensesStructureActions.checkWaterSewerByValue(testData.ownerValue);
+      expensesStructureActions.checkAreaMaintenanceByValue(testData.ownerValue);
+      expensesStructureActions.verifyTenantObligationsCommentary(testData.tenantObligationsCommentary);
+      expensesStructureActions.verifyOwnerObligationsCommentary(testData.ownerObligationsCommentary);
+      expensesStructureActions.clickSaveContinueButton();
    });
 });
