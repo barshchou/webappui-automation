@@ -201,5 +201,9 @@
   "tenantValue": "tenant",
   "ownerValue": "owner",
   "tenantObligationsCommentary": "In-unit electricity, cooking gas and heat. ",
-  "ownerObligationsCommentary": "Common area electricity, refuse removal, water/sewer and common area maintenance. "
+  "ownerObligationsCommentary": "Common area electricity, refuse removal, water/sewer and common area maintenance. ",
+  "parkingCommentary": "The subject property has 6 parking spaces available.",
+  "resVacancyCollLossValue": 5,
+  "coStarRate": 94,
+  "vcLossCommentary": "CoStar reports the submarket rate near 94% and metro area rate near 94%. Based on 8524 South Oglesby Avenue's current and historical operating results, macro market conditions, and investor expectations, a 5.00% residential vacancy and collection loss has been applied. We note that the subject will contain 6 market rate residential units."
 }

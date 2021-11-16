@@ -24,6 +24,11 @@ import rentReconciliationActions from "../../actions/income/residential/rentReco
 import stabilizedRentRollActions from "../../actions/income/residential/stabilizedRentRoll.actions";
 import stabRentRollSummaryActions from "../../actions/income/residential/stabRentRollSummary.actions";
 import expensesStructureActions from "../../actions/income/residential/expenseStructure.actions";
+import laundryActions from "../../actions/income/miscellaneous/laundry.actions";
+import storageActions from "../../actions/income/miscellaneous/storage.actions";
+import parkingActions from "../../actions/income/miscellaneous/parking.actions";
+import otherActions from "../../actions/income/miscellaneous/other.actions";
+import grossIncomeActions from "../../actions/income/potentialGrossIncome.actions";
 
 describe("Full doesn't Freddie Mac, only residential, multifamily report ", () => {
    it("Test", () => {
@@ -285,5 +290,20 @@ describe("Full doesn't Freddie Mac, only residential, multifamily report ", () =
       expensesStructureActions.verifyTenantObligationsCommentary(testData.tenantObligationsCommentary);
       expensesStructureActions.verifyOwnerObligationsCommentary(testData.ownerObligationsCommentary);
       expensesStructureActions.clickSaveContinueButton();
+      laundryActions.verifyNoLaundryButtonExists();
+      laundryActions.clickSaveContinueButton();
+      storageActions.verifyNoStorageButtonExists();
+      storageActions.clickSaveContinueButton();
+      parkingActions.checkIsFreeParkingCheckbox();
+      parkingActions.verifyParkingCommentary(testData.parkingCommentary);
+      parkingActions.clickSaveContinueButton();
+      otherActions.verifyPageIsOpened();
+      otherActions.clickSaveContinueButton();
+      grossIncomeActions.enterResVacancyCollLoss(testData.resVacancyCollLossValue);
+      grossIncomeActions.verifyResidentialVCLoss(testData.resVacancyCollLossValue, testData.marketAnnualRent);
+      grossIncomeActions.enterCoStarSubmarketRate(testData.coStarRate);
+      grossIncomeActions.enterCoStarMetroRate(testData.coStarRate);
+      grossIncomeActions.editCommentary(testData.vcLossCommentary);
+      grossIncomeActions.verifyIncomeTable(testData.marketAnnualRent);
    });
 });
