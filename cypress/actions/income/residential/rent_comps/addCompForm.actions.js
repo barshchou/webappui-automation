@@ -100,7 +100,7 @@ class AddCompFormActions {
     }
 
     clickSourceOfInfoDropdown() {
-        addCompFormPage.sourceOfInfoDropdown.should("be.visible").click();
+        addCompFormPage.sourceOfInfoDropdown.click({force:true});
     }
 
     selectSourceOfInfoByValue(value) {

@@ -29,6 +29,7 @@ import storageActions from "../../actions/income/miscellaneous/storage.actions";
 import parkingActions from "../../actions/income/miscellaneous/parking.actions";
 import otherActions from "../../actions/income/miscellaneous/other.actions";
 import grossIncomeActions from "../../actions/income/potentialGrossIncome.actions";
+import taxInfoActions from "../../actions/income/taxInfo.actions";
 
 describe("Full doesn't Freddie Mac, only residential, multifamily report ", () => {
    it("Test", () => {
@@ -305,5 +306,30 @@ describe("Full doesn't Freddie Mac, only residential, multifamily report ", () =
       grossIncomeActions.enterCoStarMetroRate(testData.coStarRate);
       grossIncomeActions.editCommentary(testData.vcLossCommentary);
       grossIncomeActions.verifyIncomeTable(testData.marketAnnualRent);
+      grossIncomeActions.clickSaveContinueButton();
+      taxInfoActions.checkBasisByValue(testData.concludedLiabilityBasisValue);
+      taxInfoActions.fillTaxableAssessedValues(testData.taxAssessedLandValue, testData.taxAssessedBuildingValue);
+      taxInfoActions.editTaxRatesWithoutAddingNew(testData.taxClassName, testData.taxRateYear, testData.taxRateValue);
+      taxInfoActions.verifyTaxLiabilityInfo(testData.taxClassName, testData.taxRateYear);
+      taxInfoActions.verifyTaxLiabilityTable(testData.taxRateValue, testData.numberOfUnits);
+      taxInfoActions.verifyTaxLiabilityCommentary(testData.taxLiabilityCommentary);
+      taxInfoActions.clickProjectedTab();
+      taxInfoActions.checkProjectedIncludeCheckbox();
+      taxInfoActions.verifyProjectedLiabilityCommentary(testData.projectedLiabilityComm);
+      taxInfoActions.clickComparablesTab();
+      taxInfoActions.addListTaxComparablesWithoutSourceInfoData(testData.firstTaxComp, testData.secondTaxComp,
+          testData.thirdTaxComp, testData.forthTaxComp, testData.fifthTaxComp);
+      taxInfoActions.verifyListAddedComparables(testData.firstTaxComp, testData.secondTaxComp,
+          testData.thirdTaxComp, testData.forthTaxComp, testData.fifthTaxComp);
+      taxInfoActions.verifyTaxCompsCommentary(testData.taxCompsCommentary);
+      taxInfoActions.clickSummaryTab();
+      taxInfoActions.checkConcludedLiabilityTypeByValue(testData.concludedLiabilityType);
+      taxInfoActions.enterConcludedLiabilityPerBasis(testData.concludedLiabilityValue);
+      taxInfoActions.verifyAppraiserOpinionTaxLiabilityTotal(testData.concludedLiabilityValue, testData.numberOfUnits);
+      taxInfoActions.verifyAppraiserOpinionTaxLiabilityPerBasis(testData.concludedLiabilityValue);
+      taxInfoActions.verifyAppraiserOpinionTaxRateCell(testData.taxRateValue);
+      taxInfoActions.verifyAppraiserOpinionTaxableAssessedValueCell(testData.taxRateValue);
+      taxInfoActions.verifyTaxSummaryCommentary(testData.taxSummaryCommentary);
+      taxInfoActions.clickSaveContinueButton();
    });
 });

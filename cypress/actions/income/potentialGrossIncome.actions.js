@@ -46,8 +46,10 @@ class PotentialGrossIncomeActions extends BaseActions {
     }
 
     async verifyLessResidentialVCLoss() {
-        const resVCLossText = await grossIncomePage.residentialVCLoss.then(el => el.text()).promisify();
-        grossIncomePage.lessResidentialVCLoss.should("have.text", `-${resVCLossText}`);
+        const resVCLossText = await grossIncomePage.residentialVCLoss.then(el => el.attr("value")).promisify();
+        const resVCLossNumber = getNumberFromDollarNumberWithCommas(resVCLossText);
+        const textToBe = `-$${numberWithCommas(resVCLossNumber.toFixed(2))}`;
+        grossIncomePage.lessResidentialVCLoss.should("have.text", textToBe);
     }
 
     async verifyEffectiveGrossIncome() {
