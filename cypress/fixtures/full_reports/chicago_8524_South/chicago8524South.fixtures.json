@@ -227,5 +227,15 @@
   "taxCompsCommentary": "In order to support the forecasted real estate tax liability, we surveyed those of comparable buildings in the area.",
   "concludedLiabilityType": "Per Unit",
   "concludedLiabilityValue": 515.52,
-  "taxSummaryCommentary": "The projection for the subject property’s taxes per unit falls within the market range and is considered reasonable. Thus, we apply the projected tax liability of $3,093.12 in our analysis."
+  "taxSummaryCommentary": "The projection for the subject property’s taxes per unit falls within the market range and is considered reasonable. Thus, we apply the projected tax liability of $3,093.12 in our analysis.",
+  "expensePeriod": "Projection",
+  "expenseYear": 2022,
+  "grossRevenue": 84240,
+  "realEstateTaxes": 2402.06,
+  "insuranceExpense": "clear",
+  "electricityExpense": 8268,
+  "fuelExpense": "clear",
+  "payrollBenefitsExpense": 1464,
+  "toeToBe": "$12,134.06",
+  "expenseHistoryCommentary": "We were provided with the owner's pro forma for the subject property. Therefore, we analyzed the subject's operating expense projections, as well as expense reports of comparable properties, in developing our forecast of operating expenses. The data, analyzed in terms of residential units and gross square footage, is presented below."
 }

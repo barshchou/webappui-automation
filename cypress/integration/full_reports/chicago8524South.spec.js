@@ -30,6 +30,7 @@ import parkingActions from "../../actions/income/miscellaneous/parking.actions";
 import otherActions from "../../actions/income/miscellaneous/other.actions";
 import grossIncomeActions from "../../actions/income/potentialGrossIncome.actions";
 import taxInfoActions from "../../actions/income/taxInfo.actions";
+import expenseHistoryActions from "../../actions/income/expenseHistory.actions";
 
 describe("Full doesn't Freddie Mac, only residential, multifamily report ", () => {
    it("Test", () => {
@@ -331,5 +332,22 @@ describe("Full doesn't Freddie Mac, only residential, multifamily report ", () =
       taxInfoActions.verifyAppraiserOpinionTaxableAssessedValueCell(testData.taxRateValue);
       taxInfoActions.verifyTaxSummaryCommentary(testData.taxSummaryCommentary);
       taxInfoActions.clickSaveContinueButton();
+      expenseHistoryActions.selectExpensePeriod(testData.expensePeriod);
+      expenseHistoryActions.verifyExpenseYear(testData.expenseYear);
+      expenseHistoryActions.clickAddExpenseYearButton();
+      expenseHistoryActions.checkGrossRevenueCheckboxByColumnIndex();
+      expenseHistoryActions.enterGrossRevenueByColIndex(testData.grossRevenue);
+      expenseHistoryActions.enterRealEstateTaxesByColIndex(testData.realEstateTaxes);
+      expenseHistoryActions.enterInsuranceByColIndex(testData.insuranceExpense);
+      expenseHistoryActions.enterElectricityByColIndex(testData.electricityExpense);
+      expenseHistoryActions.enterFuelByColIndex(testData.fuelExpense);
+      expenseHistoryActions.uncheckFuelCheckboxByColIndex();
+      expenseHistoryActions.uncheckWaterSewerCheckboxByColIndex();
+      expenseHistoryActions.enterPayrollBenefitsByColIndex(testData.payrollBenefitsExpense);
+      expenseHistoryActions.verifyTotalOpExpensesByColIndex(testData.toeToBe);
+      expenseHistoryActions.verifyTOEExcludingRETByIndex(testData.realEstateTaxes);
+      expenseHistoryActions.verifyNetOpIncomeByIndex(testData.grossRevenue);
+      expenseHistoryActions.verifyAverageTable();
+      expenseHistoryActions.verifyExpenseHistoryCommentary(testData.expenseHistoryCommentary);
    });
 });

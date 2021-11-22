@@ -104,7 +104,7 @@ class AddCompFormActions {
     }
 
     selectSourceOfInfoByValue(value) {
-        addCompFormPage.getSourceOfInfoByValue(value).scrollIntoView().should("be.visible").click();
+        addCompFormPage.getSourceOfInfoByValue(value).click({force:true});
     }
 
     verifySelectedSource(valueToBe) {
