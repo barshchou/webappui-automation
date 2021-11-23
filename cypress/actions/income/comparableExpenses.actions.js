@@ -14,6 +14,15 @@ class ComparableExpensesActions extends BaseActions {
         compExpensesPage.compLocationCells.eq(index).type(location).should("have.value", location);
     }
 
+    chooseExpensePeriodByColumnIndex(periodValue, index = 0) {
+        compExpensesPage.expensePeriodDropdowns.eq(index).click();
+        compExpensesPage.getDropdownOptionByValue(periodValue).click();
+    }
+
+    enterExpenseYearByColumnIndex(year, index = 0) {
+        compExpensesPage.expenseYearCells.eq(index).type(year).should("have.value", year);
+    }
+
 }
 
 export default new ComparableExpensesActions();

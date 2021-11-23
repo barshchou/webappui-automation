@@ -23,7 +23,7 @@ export default class BaseActions {
     }
 
     clickSaveButton() {
-        cy.get("*[data-qa='form-save-btn']").should("be.visible").click();
+        cy.get("*[data-qa='form-save-btn']").click();
     }
 
     clickSaveContinueButton() {

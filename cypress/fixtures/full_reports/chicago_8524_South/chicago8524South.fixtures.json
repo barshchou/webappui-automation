@@ -237,5 +237,6 @@
   "fuelExpense": "clear",
   "payrollBenefitsExpense": 1464,
   "toeToBe": "$12,134.06",
-  "expenseHistoryCommentary": "We were provided with the owner's pro forma for the subject property. Therefore, we analyzed the subject's operating expense projections, as well as expense reports of comparable properties, in developing our forecast of operating expenses. The data, analyzed in terms of residential units and gross square footage, is presented below."
+  "expenseHistoryCommentary": "We were provided with the owner's pro forma for the subject property. Therefore, we analyzed the subject's operating expense projections, as well as expense reports of comparable properties, in developing our forecast of operating expenses. The data, analyzed in terms of residential units and gross square footage, is presented below.",
+  "compExpensesFirstComp": {"address": "6001 S Sacramento Ave", "location": "Chicago", "period": "Annualized Historical"}
 }

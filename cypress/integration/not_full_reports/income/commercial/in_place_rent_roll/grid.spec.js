@@ -29,6 +29,8 @@ describe("Commercial In-Place Rent Roll grid tests", () => {
         rentRollActions.checkIsInspectedCheckboxByRowNumber();
         rentRollActions.clickSaveButton();
         navSectionActions.verifyProgressBarNotExist();
+        rentRollActions.clickSaveButton();
+        navSectionActions.verifyProgressBarNotExist();
         navSectionActions.clickCommercialStabRentRollButton();
         navSectionActions.verifyProgressBarNotExist();
         stabRentRollActions.verifyIsInspectedChecked();
