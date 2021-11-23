@@ -1,11 +1,11 @@
 export default class BaseActions {
 
     clickYesButton() {
-        cy.get("*[name='form-confirm-submit-btn']").should("be.visible").click();
+        cy.get("*[name='form-confirm-submit-btn']").click();
     }
 
     clickNoButton() {
-        cy.get("*[name='form-confirm-reject-btn']").should("be.visible").click();
+        cy.get("*[name='form-confirm-reject-btn']").click();
     }
 
     returnToHomePage() {
@@ -27,7 +27,7 @@ export default class BaseActions {
     }
 
     clickSaveContinueButton() {
-        cy.get("*[data-qa='form-submit-btn']").should("be.enabled").click();
+        cy.get("*[data-qa='form-submit-btn']").click();
     }
 
     verifyProgressBarNotExist() {

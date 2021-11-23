@@ -10,6 +10,8 @@ class ComparableExpensesActions extends BaseActions {
         compExpensesPage.compAddressCells.eq(index).type(address).should("have.value", address);
     }
 
+
+
 }
 
 export default new ComparableExpensesActions();
