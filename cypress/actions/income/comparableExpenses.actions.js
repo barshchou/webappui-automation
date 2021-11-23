@@ -6,6 +6,10 @@ class ComparableExpensesActions extends BaseActions {
         compExpensesPage.addBlankColumnButton.click();
     }
 
+    enterAddressByColumnIndex(address, index = 0) {
+        compExpensesPage.compAddressCells.eq(index).type(address).should("have.value", address);
+    }
+
 }
 
 export default new ComparableExpensesActions();

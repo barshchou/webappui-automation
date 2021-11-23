@@ -349,5 +349,6 @@ describe("Full doesn't Freddie Mac, only residential, multifamily report ", () =
       expenseHistoryActions.verifyNetOpIncomeByIndex(testData.grossRevenue);
       expenseHistoryActions.verifyAverageTable();
       expenseHistoryActions.verifyExpenseHistoryCommentary(testData.expenseHistoryCommentary);
+      expenseHistoryActions.clickSaveContinueButton();
    });
 });
