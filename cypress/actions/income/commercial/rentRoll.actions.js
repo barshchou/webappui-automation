@@ -37,8 +37,10 @@ class CommercialRentRollActions extends BaseActions {
     }
 
     chooseLeaseStatusByRowNumber(status, rowNumber = 0) {
-        rentRollPage.leaseStatusCells.eq(rowNumber).scrollIntoView().dblclick();
-        rentRollPage.getLeaseStatusToChooseByValue(status).click({force: true});
+        rentRollPage.pageHeader.should("be.visible");
+        rentRollPage.leaseStatusArrows.eq(rowNumber).should("be.visible").as("arrow");
+        cy.get("@arrow").click({force:true});
+        rentRollPage.getLeaseStatusToChooseByValue(status).click();
         rentRollPage.leaseStatusCells.eq(rowNumber).should("have.text", status);
         if (status === "Vacant") {
             rentRollPage.getAllCellsByRowNumber(rowNumber).then(cells => {
@@ -56,16 +58,22 @@ class CommercialRentRollActions extends BaseActions {
     }
 
     checkIsInspectedCheckboxByRowNumber(rowNumber = 0) {
+        rentRollPage.pageHeader.should("be.visible");
         const backColor = "rgb(65, 96, 211)";
         rentRollPage.elementToVerifyIsInspected.should("not.have.css", "background-color", backColor);
-        rentRollPage.isInspectedCheckboxes.eq(rowNumber).dblclick();
+        rentRollPage.isInspectedCheckboxes.eq(rowNumber).as("isInspectedCheckbox");
+        cy.get("@isInspectedCheckbox").invoke("show");
+        cy.get("@isInspectedCheckbox").check({force:true});
         rentRollPage.elementToVerifyIsInspected.should("have.css", "background-color", backColor);
     }
 
     uncheckIsInspectedCheckboxByRowNumber(rowNumber = 0) {
+        rentRollPage.pageHeader.should("be.visible");
         const backColor = "rgb(65, 96, 211)";
         rentRollPage.elementToVerifyIsInspected.should("have.css", "background-color", backColor);
-        rentRollPage.isInspectedCheckboxes.eq(rowNumber).click();
+        rentRollPage.isInspectedCheckboxes.eq(rowNumber).as("checkbox");
+        cy.get("@checkbox").invoke("show");
+        cy.get("@checkbox").uncheck({force:true});
         rentRollPage.elementToVerifyIsInspected.should("not.have.css", "background-color", backColor);
     }
 
@@ -110,10 +118,12 @@ class CommercialRentRollActions extends BaseActions {
     }
 
     enterRentPerSFByRowNumber(value, rowNumber = 0) {
-        rentRollPage.rentPerSFCells.eq(rowNumber).should("not.have.class", "readOnly").dblclick();
+        rentRollPage.rentPerSFCells.eq(rowNumber).as("cell");
+        cy.get("@cell").should("not.have.class", "readOnly");
+        cy.get("@cell").dblclick({force:true});
         rentRollPage.textareaToInput.clear().type(value).type("{enter}");
         const textToBe = numberWithCommas(value.toFixed(2));
-        rentRollPage.rentPerSFCells.eq(rowNumber).should("have.text", `$${textToBe}`);
+        cy.get("@cell").should("have.text", `$${textToBe}`);
     }
 
     verifyAnnualRentCellSquareFootByRowNumber(rentPerSF, squareFoot, rowNumber = 0) {
@@ -122,7 +132,8 @@ class CommercialRentRollActions extends BaseActions {
     }
 
     clearRentPerSFByRowNumber(rowNumber = 0) {
-        rentRollPage.rentPerSFCells.eq(rowNumber).dblclick();
+        rentRollPage.rentPerSFCells.eq(rowNumber).as("cell");
+        cy.get("@cell").dblclick({force:true});
         rentRollPage.textareaToInput.clear().type("{enter}");
     }
 

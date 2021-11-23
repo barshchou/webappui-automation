@@ -1,13 +1,17 @@
 import BasePage from "../../base/base.page";
 
 class CommercialRentRollPage extends BasePage{
+    get pageHeader() {return cy.xpath("//h5[text()='In-Place Rent Roll']");}
     get basisOfRentField() {return cy.contains("Basis of Rent");}
     get basisOfRentTooltip() {return cy.get("*[title='Select the unit of the provided rent roll.']");}
     get perSquareBasisButton() {return cy.get("button[value='per square foot']");}
     get monthlyBasisButton() {return cy.get("button[value='monthly']");}
     get annuallyBasisButton() {return cy.get("button[value='annually']");}
+    get leaseStatusArrows() {return cy.get("[data-qa*='leaseStatus']:not([class*='readOnly']) > div[class*=Arrow]");}
+    get leaseStatusArrowsLocator() {return "[data-qa*='leaseStatus']:not([class*='readOnly']) > div[class*=Arrow]";}
     get leaseStatusCells() {return cy.get("*[data-qa*='leaseStatus']:not([class*='readOnly'])");}
-    get isInspectedCheckboxes() {return cy.get("*[data-qa*='isInspected']:not([class*='readOnly'])");}
+    get isInspectedCheckboxesLocator() {return "[data-qa*='isInspected']:not([class*='readOnly']) input";}
+    get isInspectedCheckboxes() {return cy.get("*[data-qa*='isInspected']:not([class*='readOnly']) input");}
     get elementToVerifyIsInspected() {return cy.get("*[data-qa*='isInspected']:not([class*='readOnly']) span");}
     get unitNumberCells() {return cy.get("*[data-qa*='#']");}
     getAllCellsByRowNumber(rowNumber) {return cy.get(`*[data-qa*='${rowNumber}-cell']`);}

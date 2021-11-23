@@ -1,6 +1,6 @@
-import homepageActions from "../../../../actions/base/homepage.actions";
-import navSectionActions from "../../../../actions/base/navigationSection.actions";
-import rentCompsActions from "../../../../actions/income/residential/rent_comps/rentComps.actions";
+import homepageActions from "../../../../../actions/base/homepage.actions";
+import navSectionActions from "../../../../../actions/base/navigationSection.actions";
+import rentCompsActions from "../../../../../actions/income/residential/rent_comps/rentComps.actions";
 
 describe("Basic Rent Comps tests", () => {
     before("Login and navigate to Rent Comps", () => {

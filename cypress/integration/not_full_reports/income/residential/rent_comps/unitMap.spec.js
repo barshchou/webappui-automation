@@ -1,7 +1,7 @@
-const testData = require("../../../../fixtures/unitMapRentComps.fixtures.json");
-import homepageActions from "../../../../actions/base/homepage.actions";
-import navSectionActions from "../../../../actions/base/navigationSection.actions";
-import rentCompsActions from "../../../../actions/income/residential/rent_comps/rentComps.actions";
+const testData = require("../../../../../fixtures/unitMapRentComps.fixtures.json");
+import homepageActions from "../../../../../actions/base/homepage.actions";
+import navSectionActions from "../../../../../actions/base/navigationSection.actions";
+import rentCompsActions from "../../../../../actions/income/residential/rent_comps/rentComps.actions";
 
 describe("Unit map tests", () => {
    before("Login and open Rent Comps", () => {
@@ -90,7 +90,7 @@ describe("Unit map tests", () => {
         rentCompsActions.selectSortByOptionsByValues(testData.sortByOptions);
     });
 
-    it("ID62: Search Results", () => {
+    it.skip("ID62: Search Results", () => {
         rentCompsActions.verifyPhotosExistAndNavigateByPhotos(testData.comparableIndex);
         rentCompsActions.verifyCompAddressesExist();
         rentCompsActions.verifyRentsTexts();
@@ -98,7 +98,7 @@ describe("Unit map tests", () => {
         rentCompsActions.verifyComparablePropertyTextsExist();
     });
 
-    it("ID63: SELECT button - turns to SELECTED", () => {
+    it.skip("ID63: SELECT button - turns to SELECTED", () => {
         rentCompsActions.verifyLoadingDoesntExist();
         rentCompsActions.clickAllSelectComparableButtons();
         rentCompsActions.verifyComparableGroups(testData.numberOfUnits);

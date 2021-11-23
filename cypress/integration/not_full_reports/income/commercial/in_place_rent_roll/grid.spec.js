@@ -1,14 +1,14 @@
-import {uppercaseFirstLetter} from "../../../../../utils/string.utils";
+import {uppercaseFirstLetter} from "../../../../../../utils/string.utils";
 
-const testData = require("../../../../fixtures/gridCommInPlaceRentRoll.fixtures.json");
-import homepageActions from "../../../../actions/base/homepage.actions";
-import navSectionActions from "../../../../actions/base/navigationSection.actions";
-import rentRollActions from "../../../../actions/income/commercial/rentRoll.actions";
-import stabRentRollActions from "../../../../actions/income/commercial/stabilizedRentRoll.actions";
-import unitInspectionActions from "../../../../actions/final/unitInspection.actions";
-import commercialUnitsActions from "../../../../actions/property/commercialUnits.actions";
-import {getTodayDateString} from "../../../../../utils/date.utils";
-import propertySummaryActions from "../../../../actions/property/summary.actions";
+const testData = require("../../../../../fixtures/gridCommInPlaceRentRoll.fixtures.json");
+import homepageActions from "../../../../../actions/base/homepage.actions";
+import navSectionActions from "../../../../../actions/base/navigationSection.actions";
+import rentRollActions from "../../../../../actions/income/commercial/rentRoll.actions";
+import stabRentRollActions from "../../../../../actions/income/commercial/stabilizedRentRoll.actions";
+import unitInspectionActions from "../../../../../actions/final/unitInspection.actions";
+import commercialUnitsActions from "../../../../../actions/property/commercialUnits.actions";
+import {getTodayDateString} from "../../../../../../utils/date.utils";
+import propertySummaryActions from "../../../../../actions/property/summary.actions";
 
 describe("Commercial In-Place Rent Roll grid tests", () => {
     before("Login and navigate to commercial In-Place Rent Roll", () => {

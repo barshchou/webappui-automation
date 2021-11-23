@@ -1,8 +1,8 @@
-const testData = require("../../../../fixtures/addNewCompForm.fixtures.json");
-import homepageActions from "../../../../actions/base/homepage.actions";
-import navSectionActions from "../../../../actions/base/navigationSection.actions";
-import rentCompsActions from "../../../../actions/income/residential/rent_comps/rentComps.actions";
-import addCompFormActions from "../../../../actions/income/residential/rent_comps/addCompForm.actions";
+const testData = require("../../../../../fixtures/addNewCompForm.fixtures.json");
+import homepageActions from "../../../../../actions/base/homepage.actions";
+import navSectionActions from "../../../../../actions/base/navigationSection.actions";
+import rentCompsActions from "../../../../../actions/income/residential/rent_comps/rentComps.actions";
+import addCompFormActions from "../../../../../actions/income/residential/rent_comps/addCompForm.actions";
 
 describe("Add new comparable form tests", () => {
     before("Login and open rent comps page", () => {

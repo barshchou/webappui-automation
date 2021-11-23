@@ -1,9 +1,9 @@
-const testData = require("../../../../fixtures/grid.fixtures.json");
-import homepageActions from "../../../../actions/base/homepage.actions";
-import navigationSection from "../../../../actions/base/navigationSection.actions";
-import rentRollActions from "../../../../actions/income/residential/rentRoll.actions";
-import unitGroupsActions from "../../../../actions/income/residential/unitGroups.actions";
-import summaryActions from "../../../../actions/property/summary.actions";
+const testData = require("../../../../../fixtures/grid.fixtures.json");
+import homepageActions from "../../../../../actions/base/homepage.actions";
+import navigationSection from "../../../../../actions/base/navigationSection.actions";
+import rentRollActions from "../../../../../actions/income/residential/rentRoll.actions";
+import unitGroupsActions from "../../../../../actions/income/residential/unitGroups.actions";
+import summaryActions from "../../../../../actions/property/summary.actions";
 
 describe("In-Place Rent Roll grid tests", () => {
     before("Login and open In-Place Rent Roll", () => {
