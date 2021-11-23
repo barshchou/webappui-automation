@@ -1,4 +1,4 @@
-name: Cypress not full reports tests
+name: Cypress full reports tests
 
 on:
   push:
@@ -18,7 +18,7 @@ jobs:
         with:
           record: true
           browser: chrome
-          spec: cypress/integration/not_full_reports/**
+          spec: cypress/integration/full_reports/**
         env:
           CYPRESS_USERNAME: ${{ secrets.USERNAME }}
           CYPRESS_PASSWORD: ${{ secrets.PASSWORD }}
