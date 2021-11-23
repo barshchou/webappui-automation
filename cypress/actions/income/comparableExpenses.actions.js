@@ -10,7 +10,9 @@ class ComparableExpensesActions extends BaseActions {
         compExpensesPage.compAddressCells.eq(index).type(address).should("have.value", address);
     }
 
-
+    enterLocationByColumnIndex(location, index = 0) {
+        compExpensesPage.compLocationCells.eq(index).type(location).should("have.value", location);
+    }
 
 }
 

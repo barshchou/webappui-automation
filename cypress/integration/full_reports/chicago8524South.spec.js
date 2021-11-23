@@ -33,7 +33,7 @@ import taxInfoActions from "../../actions/income/taxInfo.actions";
 import expenseHistoryActions from "../../actions/income/expenseHistory.actions";
 
 describe("Full doesn't Freddie Mac, only residential, multifamily report ", () => {
-   it("Test", () => {
+   it("Test", async () => {
       cy.loginByApi();
       homepageActions.createReportAdvancedSearch(testData.state, testData.address, testData.propIdentifierType,
           testData.identifier, testData.reportNumber, testData.templateType, testData.incomeType, testData.conclusionType);
@@ -306,13 +306,13 @@ describe("Full doesn't Freddie Mac, only residential, multifamily report ", () =
       grossIncomeActions.enterCoStarSubmarketRate(testData.coStarRate);
       grossIncomeActions.enterCoStarMetroRate(testData.coStarRate);
       grossIncomeActions.editCommentary(testData.vcLossCommentary);
-      grossIncomeActions.verifyIncomeTable(testData.marketAnnualRent);
+      await grossIncomeActions.verifyIncomeTable(testData.marketAnnualRent);
       grossIncomeActions.clickSaveContinueButton();
       taxInfoActions.checkBasisByValue(testData.concludedLiabilityBasisValue);
       taxInfoActions.fillTaxableAssessedValues(testData.taxAssessedLandValue, testData.taxAssessedBuildingValue);
       taxInfoActions.editTaxRatesWithoutAddingNew(testData.taxClassName, testData.taxRateYear, testData.taxRateValue);
       taxInfoActions.verifyTaxLiabilityInfo(testData.taxClassName, testData.taxRateYear);
-      taxInfoActions.verifyTaxLiabilityTable(testData.taxRateValue, testData.numberOfUnits);
+      await taxInfoActions.verifyTaxLiabilityTable(testData.taxRateValue, testData.numberOfUnits);
       taxInfoActions.verifyTaxLiabilityCommentary(testData.taxLiabilityCommentary);
       taxInfoActions.clickProjectedTab();
       taxInfoActions.checkProjectedIncludeCheckbox();
@@ -329,7 +329,7 @@ describe("Full doesn't Freddie Mac, only residential, multifamily report ", () =
       taxInfoActions.verifyAppraiserOpinionTaxLiabilityTotal(testData.concludedLiabilityValue, testData.numberOfUnits);
       taxInfoActions.verifyAppraiserOpinionTaxLiabilityPerBasis(testData.concludedLiabilityValue);
       taxInfoActions.verifyAppraiserOpinionTaxRateCell(testData.taxRateValue);
-      taxInfoActions.verifyAppraiserOpinionTaxableAssessedValueCell(testData.taxRateValue);
+      await taxInfoActions.verifyAppraiserOpinionTaxableAssessedValueCell(testData.taxRateValue);
       taxInfoActions.verifyTaxSummaryCommentary(testData.taxSummaryCommentary);
       taxInfoActions.clickSaveContinueButton();
       expenseHistoryActions.selectExpensePeriod(testData.expensePeriod);
@@ -345,9 +345,9 @@ describe("Full doesn't Freddie Mac, only residential, multifamily report ", () =
       expenseHistoryActions.uncheckWaterSewerCheckboxByColIndex();
       expenseHistoryActions.enterPayrollBenefitsByColIndex(testData.payrollBenefitsExpense);
       expenseHistoryActions.verifyTotalOpExpensesByColIndex(testData.toeToBe);
-      expenseHistoryActions.verifyTOEExcludingRETByIndex(testData.realEstateTaxes);
-      expenseHistoryActions.verifyNetOpIncomeByIndex(testData.grossRevenue);
-      expenseHistoryActions.verifyAverageTable();
+      await expenseHistoryActions.verifyTOEExcludingRETByIndex(testData.realEstateTaxes);
+      await expenseHistoryActions.verifyNetOpIncomeByIndex(testData.grossRevenue);
+      await expenseHistoryActions.verifyAverageTable();
       expenseHistoryActions.verifyExpenseHistoryCommentary(testData.expenseHistoryCommentary);
       expenseHistoryActions.clickSaveContinueButton();
    });

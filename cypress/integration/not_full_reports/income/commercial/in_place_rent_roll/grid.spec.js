@@ -143,7 +143,11 @@ describe("Commercial In-Place Rent Roll grid tests", () => {
         rentRollActions.chooseLeaseStatusByRowNumber(testData.leaseStatuses[0]);
         navSectionActions.navigateToCommercialUnits();
         commercialUnitsActions.enterUnitSFByUnitIndex(squareFoot);
-        navSectionActions.navigateToCommercialInPlaceRentRoll();
+        commercialUnitsActions.clickSaveButton();
+        commercialUnitsActions.verifyProgressBarNotExist();
+        commercialUnitsActions.clickSaveButton();
+        commercialUnitsActions.verifyProgressBarNotExist();
+        navSectionActions.navigateToCommercialInPlaceRentRoll(false);
         rentRollActions.enterRentPerSFByRowNumber(testData.rentPerSF);
     }
 
