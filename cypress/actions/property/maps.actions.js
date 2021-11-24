@@ -32,7 +32,7 @@ class MapsActions extends BaseActions{
 
     captureSubjectMap() {
         mapsPage.subjectMapOpenWizardButton.click();
-        mapsPage.subjectMapImage.should("be.visible");
+        mapsPage.subjectMapImage.should("exist");
         mapsPage.subjectMapCaptureScreenButton.click();
         mapsPage.subjectMapCaptureScreenButton.should("not.exist");
         mapsPage.subjectMapImageToCheck.should("be.visible");

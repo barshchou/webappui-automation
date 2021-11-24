@@ -238,6 +238,19 @@
   "payrollBenefitsExpense": 1464,
   "toeToBe": "$12,134.06",
   "expenseHistoryCommentary": "We were provided with the owner's pro forma for the subject property. Therefore, we analyzed the subject's operating expense projections, as well as expense reports of comparable properties, in developing our forecast of operating expenses. The data, analyzed in terms of residential units and gross square footage, is presented below.",
-  "compExpensesFirstComp": {"address": "6001 S Sacramento Ave", "location": "Chicago", "period": "Annualized Historical",
-  "expenseMonth": "November", "squareFeet": 6608}
+  "compExpensesFirstComp": {"address": "6001 S Sacramento Ave", "location": "Chicago", "period": "Projection",
+  "squareFeet": 6608, "resUnits": 13, "insurance": 3900, "electricity": 12675, "repairs": 5850,
+  "payroll": 3900, "general": 2925, "managementFees": 4899, "toe": "$34,149.00"},
+  "compExpensesSecondComp": {"address": "7955 S Emerald Ave", "location": "Chicago", "period": "Projection",
+    "squareFeet": 9000, "resUnits": 12, "insurance": 4525, "electricity": 6754, "repairs": 6000,
+    "payroll": 3104, "general": 2640, "managementFees": 5383, "toe": "$28,406.00"},
+  "compExpensesThirdComp": {"address": "7613 S Kingston Ave", "location": "Chicago", "period": "Projection",
+    "squareFeet": 9750, "resUnits": 13, "insurance": 4200, "electricity": 15917, "repairs": 5200,
+    "payroll": 3357, "general": 2275, "managementFees": 5902, "toe": "$36,851.00"},
+  "compExpensesForthComp": {"address": "7655 S Coles Ave", "location": "Chicago", "period": "Projection",
+    "squareFeet": 12771, "resUnits": 13, "insurance": 5161, "electricity": 6151, "repairs": 5850,
+    "payroll": 6248, "general": 2300, "managementFees": 6529, "toe": "$32,239.00"},
+  "compExpensesFifthComp": {"address": "2320 E 70th Street", "location": "Chicago", "period": "Projection",
+    "squareFeet": 7250, "resUnits": 8, "insurance": 3200, "electricity": 3800, "repairs": 3200,
+    "payroll": 5000, "general": 1880, "managementFees": 5464.8, "toe": "$22,544.80"}
 }

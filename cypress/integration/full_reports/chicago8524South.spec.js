@@ -31,6 +31,7 @@ import otherActions from "../../actions/income/miscellaneous/other.actions";
 import grossIncomeActions from "../../actions/income/potentialGrossIncome.actions";
 import taxInfoActions from "../../actions/income/taxInfo.actions";
 import expenseHistoryActions from "../../actions/income/expenseHistory.actions";
+import compExpensesActions from "../../actions/income/comparableExpenses.actions";
 
 describe("Full doesn't Freddie Mac, only residential, multifamily report ", () => {
    it("Test", async () => {
@@ -350,5 +351,24 @@ describe("Full doesn't Freddie Mac, only residential, multifamily report ", () =
       await expenseHistoryActions.verifyAverageTable();
       expenseHistoryActions.verifyExpenseHistoryCommentary(testData.expenseHistoryCommentary);
       expenseHistoryActions.clickSaveContinueButton();
+      const compExpensesArray = [testData.compExpensesFirstComp, testData.compExpensesSecondComp, testData.compExpensesThirdComp,
+         testData.compExpensesForthComp, testData.compExpensesFifthComp];
+      compExpensesArray.forEach((comp, i) => {
+         compExpensesActions.clickAddBlankColumnButton();
+         compExpensesActions.enterAddressByColumnIndex(comp.address, i);
+         compExpensesActions.enterLocationByColumnIndex(comp.location, i);
+         compExpensesActions.chooseExpensePeriodByColumnIndex(comp.period, i);
+         compExpensesActions.enterSquareFeetByColumnIndex(comp.squareFeet, i);
+         compExpensesActions.enterResidentialUnitsByColumnIndex(comp.resUnits, i);
+         compExpensesActions.enterInsuranceByColumnIndex(comp.insurance, i);
+         compExpensesActions.enterElectricityByColumnIndex(comp.electricity, i);
+         compExpensesActions.enterRepairsMaintenanceByColumnIndex(comp.repairs, i);
+         compExpensesActions.enterPayrollBenefitsByColumnIndex(comp.payroll, i);
+         compExpensesActions.enterGeneralAdministrativeByColumnIndex(comp.general, i);
+         compExpensesActions.enterManagementFeesByColumnIndex(comp.managementFees, i);
+         compExpensesActions.verifyTOEByColumnIndex(comp.toe, i);
+         compExpensesActions.verifyTOEPerSFByColumnIndex(i);
+         compExpensesActions.verifyToePerUnitByColumnIndex(i);
+      });
    });
 });
