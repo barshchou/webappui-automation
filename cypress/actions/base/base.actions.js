@@ -27,7 +27,7 @@ export default class BaseActions {
     }
 
     clickSaveContinueButton() {
-        cy.get("*[data-qa='form-submit-btn']").click();
+        cy.get("*[data-qa='form-submit-btn']").scrollIntoView().click();
     }
 
     verifyProgressBarNotExist() {

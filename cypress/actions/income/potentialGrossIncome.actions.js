@@ -36,37 +36,42 @@ class PotentialGrossIncomeActions extends BaseActions {
         grossIncomePage.otherIncome.should("have.text", incomeToBe);
     }
 
-    async verifyPotentialGrossIncome() {
-        const potResIncomeText = await grossIncomePage.potentialResidentialIncome.then(el => el.text()).promisify();
-        const potResIncomeNumber = getNumberFromDollarNumberWithCommas(potResIncomeText);
-        const otherIncomeText = await grossIncomePage.otherIncome.then(el => el.text()).promisify();
-        const otherIncomeNumber = getNumberFromDollarNumberWithCommas(otherIncomeText);
-        const grossIncomeTextToBe = `$${numberWithCommas((potResIncomeNumber + otherIncomeNumber).toFixed(2))}`;
-        grossIncomePage.potentialGrossIncome.should("have.text", grossIncomeTextToBe);
+    verifyPotentialGrossIncome() {
+        grossIncomePage.potentialResidentialIncome.then(el => {
+            const potResIncomeNumber = getNumberFromDollarNumberWithCommas(el.text());
+            grossIncomePage.otherIncome.then(otherIncome => {
+                const otherIncomeNumber = getNumberFromDollarNumberWithCommas(otherIncome.text());
+                const textToBe = `$${numberWithCommas((potResIncomeNumber + otherIncomeNumber).toFixed(2))}`;
+                grossIncomePage.potentialGrossIncome.should("have.text", textToBe);
+            });
+        });
     }
 
-    async verifyLessResidentialVCLoss() {
-        const resVCLossText = await grossIncomePage.residentialVCLoss.then(el => el.attr("value")).promisify();
-        const resVCLossNumber = getNumberFromDollarNumberWithCommas(resVCLossText);
-        const textToBe = `-$${numberWithCommas(resVCLossNumber.toFixed(2))}`;
-        grossIncomePage.lessResidentialVCLoss.should("have.text", textToBe);
+    verifyLessResidentialVCLoss() {
+        grossIncomePage.residentialVCLoss.then(vcLoss => {
+           const resVCLossNumber = getNumberFromDollarNumberWithCommas(vcLoss.attr("value"));
+            const textToBe = `-$${numberWithCommas(resVCLossNumber.toFixed(2))}`;
+            grossIncomePage.lessResidentialVCLoss.should("have.text", textToBe);
+        });
     }
 
-    async verifyEffectiveGrossIncome() {
-        const potGrossIncomeText = await grossIncomePage.potentialGrossIncome.then(el => el.text()).promisify();
-        const potGrossIncomeNumber = getNumberFromDollarNumberWithCommas(potGrossIncomeText);
-        const lessResVCLossText = await grossIncomePage.lessResidentialVCLoss.then(el => el.text()).promisify();
-        const lessResVCLossNumber = getNumberFromDollarNumberWithCommas(lessResVCLossText);
-        const textToBe = `$${numberWithCommas((potGrossIncomeNumber + lessResVCLossNumber).toFixed(2))}`;
-        grossIncomePage.effectiveGrossIncome.should("have.text", textToBe);
+    verifyEffectiveGrossIncome() {
+        grossIncomePage.potentialGrossIncome.then(grossIncome => {
+            const potGrossIncomeNumber = getNumberFromDollarNumberWithCommas(grossIncome.text());
+            grossIncomePage.lessResidentialVCLoss.then(lessVCLoss => {
+                const lessResVCLossNumber = getNumberFromDollarNumberWithCommas(lessVCLoss.text());
+                const textToBe = `$${numberWithCommas((potGrossIncomeNumber + lessResVCLossNumber).toFixed(2))}`;
+                grossIncomePage.effectiveGrossIncome.should("have.text", textToBe);
+            });
+        });
     }
 
-    async verifyIncomeTable(potentialResIncomeToBe, otherIncome = "$0.00") {
+    verifyIncomeTable(potentialResIncomeToBe, otherIncome = "$0.00") {
         this.verifyPotentialResidentialIncome(potentialResIncomeToBe);
         this.verifyOtherIncome(otherIncome);
-        await this.verifyPotentialGrossIncome();
-        await this.verifyLessResidentialVCLoss();
-        await this.verifyEffectiveGrossIncome();
+        this.verifyPotentialGrossIncome();
+        this.verifyLessResidentialVCLoss();
+        this.verifyEffectiveGrossIncome();
     }
 }
 

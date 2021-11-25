@@ -307,7 +307,7 @@ describe("Full doesn't Freddie Mac, only residential, multifamily report ", () =
       grossIncomeActions.enterCoStarSubmarketRate(testData.coStarRate);
       grossIncomeActions.enterCoStarMetroRate(testData.coStarRate);
       grossIncomeActions.editCommentary(testData.vcLossCommentary);
-      await grossIncomeActions.verifyIncomeTable(testData.marketAnnualRent);
+      grossIncomeActions.verifyIncomeTable(testData.marketAnnualRent);
       grossIncomeActions.clickSaveContinueButton();
       taxInfoActions.checkBasisByValue(testData.concludedLiabilityBasisValue);
       taxInfoActions.fillTaxableAssessedValues(testData.taxAssessedLandValue, testData.taxAssessedBuildingValue);
@@ -370,5 +370,7 @@ describe("Full doesn't Freddie Mac, only residential, multifamily report ", () =
          compExpensesActions.verifyTOEPerSFByColumnIndex(i);
          compExpensesActions.verifyToePerUnitByColumnIndex(i);
       });
+      compExpensesActions.verifyTableAverageValues();
+      compExpensesActions.clickSaveContinueButton();
    });
 });
