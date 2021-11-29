@@ -264,5 +264,22 @@
   "generalForecast": 200,
   "effectiveGrossIncome": 75240,
   "percentOfEgi": 4,
-  "reservesForecast": 200
+  "reservesForecast": 200,
+  "totalPotentialResIncome": "$79,200",
+  "psfPotentialResIncome": "$16.74",
+  "perUnitPotResIncome": "$13,200",
+  "vcLossRow": {"total": "-$3,960", "perSF": "-$0.84", "perUnit": "-$660"},
+  "effectiveGrossRow": {"total": "$75,240", "perSF": "$15.90", "perUnit": "$12,540"},
+  "reTaxesRow": {"total": "$3,093", "perSF": "$0.65", "perUnit": "$516"},
+  "insuranceRow": {"total": "$2,100", "perSF": "$0.44", "perUnit": "$350"},
+  "electricityRow": {"total": "$8,280", "perSF": "$1.75", "perUnit": "$1,380"},
+  "repairsRow": {"total": "$2,700", "perSF": "$0.57", "perUnit": "$450"},
+  "payrollRow": {"total": "$2,100", "perSF": "$0.44", "perUnit": "$350"},
+  "generalRow": {"total": "$1,200", "perSF": "$0.25", "perUnit": "$200"},
+  "managementRow": {"total": "$3,010", "perSF": "$0.64", "perUnit": "$502"},
+  "reservesRow": {"total": "$1,200", "perSF": "$0.25", "perUnit": "$200"},
+  "toeRow": {"total": "$23,683", "perSF": "$5.00", "perUnit": "$3,947"},
+  "toeNetReRow": {"total": "$20,590", "perSF": "$4.35", "perUnit": "$3,432"},
+  "netOpIncomeRow": {"total": "$51,557", "perSF": "$10.90", "perUnit": "$8,593"},
+  "opExpenseRatio": "31.48%"
 }

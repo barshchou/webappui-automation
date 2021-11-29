@@ -33,6 +33,7 @@ import taxInfoActions from "../../actions/income/taxInfo.actions";
 import expenseHistoryActions from "../../actions/income/expenseHistory.actions";
 import compExpensesActions from "../../actions/income/comparableExpenses.actions";
 import expenseForecastActions from "../../actions/income/expenseForecast.actions";
+import proFormaActions from "../../actions/income/proForma.actions";
 
 describe("Full doesn't Freddie Mac, only residential, multifamily report ", () => {
    it("Test", async () => {
@@ -439,5 +440,22 @@ describe("Full doesn't Freddie Mac, only residential, multifamily report ", () =
       expenseForecastActions.verifyOwnersProFormaValue();
       expenseForecastActions.verifyTotalForecast();
       expenseForecastActions.clickSaveContinueButton();
+      proFormaActions.verifyPotentialResIncomeRow(testData.totalPotentialResIncome, testData.psfPotentialResIncome, testData.perUnitPotResIncome);
+      proFormaActions.verifyPotentialGrossIncomeRow(testData.totalPotentialResIncome, testData.psfPotentialResIncome, testData.perUnitPotResIncome);
+      proFormaActions.verifyResVCLossRow(testData.vcLossRow.total, testData.vcLossRow.perSF, testData.vcLossRow.perUnit);
+      proFormaActions.verifyEffectiveGrossRow(testData.effectiveGrossRow.total, testData.effectiveGrossRow.perSF, testData.effectiveGrossRow.perUnit);
+      proFormaActions.verifyRETaxesRow(testData.reTaxesRow.total, testData.reTaxesRow.perSF, testData.reTaxesRow.perUnit);
+      proFormaActions.verifyInsuranceRow(testData.insuranceRow.total, testData.insuranceRow.perSF, testData.insuranceRow.perUnit);
+      proFormaActions.verifyElectricityRow(testData.electricityRow.total, testData.electricityRow.perSF, testData.electricityRow.perUnit);
+      proFormaActions.verifyRepairsRow(testData.repairsRow.total, testData.repairsRow.perSF, testData.repairsRow.perUnit);
+      proFormaActions.verifyPayrollRow(testData.payrollRow.total, testData.payrollRow.perSF, testData.payrollRow.perUnit);
+      proFormaActions.verifyGeneralRow(testData.generalRow.total, testData.generalRow.perSF, testData.generalRow.perUnit);
+      proFormaActions.verifyManagementRow(testData.managementRow.total, testData.managementRow.perSF, testData.managementRow.perUnit);
+      proFormaActions.verifyReservesRow(testData.reservesRow.total, testData.reservesRow.perSF, testData.reservesRow.perUnit);
+      proFormaActions.verifyToeRow(testData.toeRow.total, testData.toeRow.perSF, testData.toeRow.perUnit);
+      proFormaActions.verifyToeNetReRow(testData.toeNetReRow.total, testData.toeNetReRow.perSF, testData.toeNetReRow.perUnit);
+      proFormaActions.verifyNetOpIncomeRow(testData.netOpIncomeRow.total, testData.netOpIncomeRow.perSF, testData.netOpIncomeRow.perUnit);
+      proFormaActions.verifyOperatingExpenseRatio(testData.opExpenseRatio);
+      proFormaActions.clickSaveContinueButton();
    });
 });
