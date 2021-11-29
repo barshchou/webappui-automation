@@ -3,7 +3,7 @@ import BasePage from "./base.page";
 class NavigationSection extends BasePage {
 
     get incomeApproachButton() {return cy.get("#income-approach > svg");}
-    get residentalIncomeArrow() {return cy.get("#residentialIncome > svg");}
+    get residentialIncomeArrow() {return cy.get("#residentialIncome > svg");}
     get inPlaceRentRollButton() {return cy.get("#residential-rent-roll");}
     get rentCompsButton() {return cy.get("#residential-rent-comps");}
     get commercialIncomeArrow() {return cy.get("#commercialIncome > svg");}
@@ -17,6 +17,7 @@ class NavigationSection extends BasePage {
     get clientButton() {return cy.get("#client");}
     get siteDescription() {return cy.get("#site-description");}
     get propertyMaps() {return cy.get("#property-maps");}
+    get expenseForecastBookmark() {return cy.get("#expense-forecast > svg[data-icon=bookmark]");}
 }
 
 export default new NavigationSection();

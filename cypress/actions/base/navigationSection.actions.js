@@ -6,8 +6,8 @@ class NavigationSectionActions extends BaseActions {
         navigationSectionPage.incomeApproachButton.click();
     }
 
-    clickResidentalIncomeArrow() {
-        navigationSectionPage.residentalIncomeArrow.click();
+    clickResidentialIncomeArrow() {
+        navigationSectionPage.residentialIncomeArrow.click();
     }
 
     clickInPlaceRentRollButton() {
@@ -80,14 +80,14 @@ class NavigationSectionActions extends BaseActions {
 
     navigateToInPlaceRentRoll() {
         this.clickIncomeApproachButton();
-        this.clickResidentalIncomeArrow();
+        this.clickResidentialIncomeArrow();
         this.clickInPlaceRentRollButton();
         this.clickYesButton();
     }
 
     navigateToRentComps() {
         this.clickIncomeApproachButton();
-        this.clickResidentalIncomeArrow();
+        this.clickResidentialIncomeArrow();
         this.clickRentCompsButton();
         this.clickYesButton();
     }
@@ -120,6 +120,10 @@ class NavigationSectionActions extends BaseActions {
     openMapsInProperty() {
         this.clickMapsButton();
         this.clickYesButton();
+    }
+
+    clickExpenseForecastBookmark() {
+        navigationSectionPage.expenseForecastBookmark.click().should("have.attr", "color", "#F68750");
     }
 }
 

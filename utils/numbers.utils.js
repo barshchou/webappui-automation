@@ -31,5 +31,6 @@ export const isHasDecimalPartMoreNumberOfDigits = (number, digitsNumber = 2) => 
 };
 
 export const getNumberFromDollarNumberWithCommas = (stringNumber) => {
-  return Number(stringNumber.replace("$", "").replace(",", ""));
+  return typeof stringNumber === "string" ? Number(stringNumber.replace("$", "")
+      .replace(",", "")) : stringNumber;
 };

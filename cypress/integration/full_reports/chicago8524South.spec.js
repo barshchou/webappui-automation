@@ -32,6 +32,7 @@ import grossIncomeActions from "../../actions/income/potentialGrossIncome.action
 import taxInfoActions from "../../actions/income/taxInfo.actions";
 import expenseHistoryActions from "../../actions/income/expenseHistory.actions";
 import compExpensesActions from "../../actions/income/comparableExpenses.actions";
+import expenseForecastActions from "../../actions/income/expenseForecast.actions";
 
 describe("Full doesn't Freddie Mac, only residential, multifamily report ", () => {
    it("Test", async () => {
@@ -362,15 +363,81 @@ describe("Full doesn't Freddie Mac, only residential, multifamily report ", () =
          compExpensesActions.enterResidentialUnitsByColumnIndex(comp.resUnits, i);
          compExpensesActions.enterInsuranceByColumnIndex(comp.insurance, i);
          compExpensesActions.enterElectricityByColumnIndex(comp.electricity, i);
-         compExpensesActions.enterRepairsMaintenanceByColumnIndex(comp.repairs, i);
-         compExpensesActions.enterPayrollBenefitsByColumnIndex(comp.payroll, i);
-         compExpensesActions.enterGeneralAdministrativeByColumnIndex(comp.general, i);
-         compExpensesActions.enterManagementFeesByColumnIndex(comp.managementFees, i);
+         compExpensesActions.enterRepairsMaintenanceByColumnIndex(comp.repairsAndMaintenance, i);
+         compExpensesActions.enterPayrollBenefitsByColumnIndex(comp.payrollAndBenefits, i);
+         compExpensesActions.enterGeneralAdministrativeByColumnIndex(comp.generalAndAdministrative, i);
+         compExpensesActions.enterManagementFeesByColumnIndex(comp.management, i);
          compExpensesActions.verifyTOEByColumnIndex(comp.toe, i);
          compExpensesActions.verifyTOEPerSFByColumnIndex(i);
          compExpensesActions.verifyToePerUnitByColumnIndex(i);
       });
       compExpensesActions.verifyTableAverageValues();
       compExpensesActions.clickSaveContinueButton();
+      navSectionActions.clickExpenseForecastBookmark();
+      expenseForecastActions.chooseForecastItemBasis(testData.forecastItems[0], testData.perUnit);
+      expenseForecastActions.enterForecastItemForecast(testData.forecastItems[0], testData.insuranceForecast);
+      expenseForecastActions.verifyForecastItemCompMin(testData.forecastItems[0], testData.perUnit, compExpensesArray);
+      expenseForecastActions.verifyForecastItemCompAverage(testData.forecastItems[0], testData.perUnit, compExpensesArray);
+      expenseForecastActions.verifyForecastItemCompMax(testData.forecastItems[0], testData.perUnit, compExpensesArray);
+      expenseForecastActions.verifyForecastItemBasisMoney(testData.forecastItems[0], testData.perUnit, testData.numberOfUnits,
+          testData.grossArea, testData.insuranceForecast);
+      expenseForecastActions.chooseForecastItemBasis(testData.forecastItems[1], testData.perUnit);
+      expenseForecastActions.enterForecastItemForecast(testData.forecastItems[1], testData.electricityForecast);
+      expenseForecastActions.verifyForecastItemCompMin(testData.forecastItems[1], testData.perUnit, compExpensesArray);
+      expenseForecastActions.verifyForecastItemCompAverage(testData.forecastItems[1], testData.perUnit, compExpensesArray);
+      expenseForecastActions.verifyForecastItemCompMax(testData.forecastItems[1], testData.perUnit, compExpensesArray);
+      expenseForecastActions.verifyForecastItemBasisMoney(testData.forecastItems[1], testData.perUnit, testData.numberOfUnits,
+          testData.grossArea, testData.electricityForecast);
+      expenseForecastActions.verifyForecastItemOwnerProjection(testData.forecastItems[1], testData.perUnit, testData.electricityExpense,
+          testData.numberOfUnits, testData.grossArea);
+      expenseForecastActions.chooseForecastItemBasis(testData.forecastItems[2], testData.perUnit);
+      expenseForecastActions.chooseForecastItemBasis(testData.forecastItems[3], testData.perUnit);
+      expenseForecastActions.chooseForecastItemBasis(testData.forecastItems[4], testData.perUnit);
+      expenseForecastActions.enterForecastItemForecast(testData.forecastItems[4], testData.repairsForecast);
+      expenseForecastActions.verifyForecastItemCompMin(testData.forecastItems[4], testData.perUnit, compExpensesArray);
+      expenseForecastActions.verifyForecastItemCompAverage(testData.forecastItems[4], testData.perUnit, compExpensesArray);
+      expenseForecastActions.verifyForecastItemCompMax(testData.forecastItems[4], testData.perUnit, compExpensesArray);
+      expenseForecastActions.verifyForecastItemBasisMoney(testData.forecastItems[4], testData.perUnit, testData.numberOfUnits,
+          testData.grossArea, testData.repairsForecast);
+      expenseForecastActions.chooseForecastItemBasis(testData.forecastItems[5], testData.perUnit);
+      expenseForecastActions.enterForecastItemForecast(testData.forecastItems[5], testData.payrollForecast);
+      expenseForecastActions.verifyForecastItemCompMin(testData.forecastItems[5], testData.perUnit, compExpensesArray);
+      expenseForecastActions.verifyForecastItemCompAverage(testData.forecastItems[5], testData.perUnit, compExpensesArray);
+      expenseForecastActions.verifyForecastItemCompMax(testData.forecastItems[5], testData.perUnit, compExpensesArray);
+      expenseForecastActions.verifyForecastItemBasisMoney(testData.forecastItems[5], testData.perUnit, testData.numberOfUnits,
+          testData.grossArea, testData.payrollForecast);
+      expenseForecastActions.verifyForecastItemOwnerProjection(testData.forecastItems[5], testData.perUnit, testData.payrollBenefitsExpense,
+          testData.numberOfUnits, testData.grossArea);
+      expenseForecastActions.chooseForecastItemBasis(testData.forecastItems[6], testData.perUnit);
+      expenseForecastActions.enterForecastItemForecast(testData.forecastItems[6], testData.generalForecast);
+      expenseForecastActions.verifyForecastItemCompMin(testData.forecastItems[6], testData.perUnit, compExpensesArray);
+      expenseForecastActions.verifyForecastItemCompAverage(testData.forecastItems[6], testData.perUnit, compExpensesArray);
+      expenseForecastActions.verifyForecastItemCompMax(testData.forecastItems[6], testData.perUnit, compExpensesArray);
+      expenseForecastActions.verifyForecastItemBasisMoney(testData.forecastItems[6], testData.perUnit, testData.numberOfUnits,
+          testData.grossArea, testData.generalForecast);
+      expenseForecastActions.chooseForecastItemBasis(testData.forecastItems[7], testData.perUnit);
+      expenseForecastActions.chooseForecastItemBasis(testData.forecastItems[8], testData.perUnit);
+      expenseForecastActions.chooseForecastItemBasis(testData.forecastItems[9], testData.perUnit);
+      expenseForecastActions.checkPercentOfEGICheckbox();
+      expenseForecastActions.enterPercentOfEgi(testData.percentOfEgi);
+      const managementForecastEgi = expenseForecastActions.getManagementForecastEgiPercent(testData.perUnit, testData.percentOfEgi,
+          testData.effectiveGrossIncome, testData.numberOfUnits, testData.grossArea);
+      expenseForecastActions.verifyManagementForecast(managementForecastEgi);
+      expenseForecastActions.verifyForecastItemCompMin(testData.forecastItems[9], testData.perUnit, compExpensesArray);
+      expenseForecastActions.verifyForecastItemCompAverage(testData.forecastItems[9], testData.perUnit, compExpensesArray);
+      expenseForecastActions.verifyForecastItemCompMax(testData.forecastItems[9], testData.perUnit, compExpensesArray);
+      expenseForecastActions.verifyForecastItemBasisMoney(testData.forecastItems[9], testData.perUnit, testData.numberOfUnits,
+          testData.grossArea, managementForecastEgi);
+      expenseForecastActions.chooseForecastItemBasis(testData.forecastItems[10], testData.perUnit);
+      expenseForecastActions.enterForecastItemForecast(testData.forecastItems[10], testData.reservesForecast);
+      expenseForecastActions.verifyForecastItemBasisMoney(testData.forecastItems[10], testData.perUnit, testData.numberOfUnits,
+          testData.grossArea, testData.reservesForecast);
+      expenseForecastActions.chooseForecastItemBasis(testData.forecastItems[11], testData.perUnit);
+      expenseForecastActions.verifyToeCompMinPerBasis(testData.perUnit, compExpensesArray);
+      expenseForecastActions.verifyToeCompAvgPerBasis(testData.perUnit, compExpensesArray);
+      expenseForecastActions.verifyToeCompMaxPerBasis(testData.perUnit, compExpensesArray);
+      expenseForecastActions.verifyOwnersProFormaValue();
+      expenseForecastActions.verifyTotalForecast();
+      expenseForecastActions.clickSaveContinueButton();
    });
 });
