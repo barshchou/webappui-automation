@@ -281,5 +281,9 @@
   "toeRow": {"total": "$23,683", "perSF": "$5.00", "perUnit": "$3,947"},
   "toeNetReRow": {"total": "$20,590", "perSF": "$4.35", "perUnit": "$3,432"},
   "netOpIncomeRow": {"total": "$51,557", "perSF": "$10.90", "perUnit": "$8,593"},
-  "opExpenseRatio": "31.48%"
+  "opExpenseRatio": "31.48%",
+  "incomeCapComm": "In developing an opinion of the overall capitalization rate required by an investor, we will apply several methods of analyses: (1) Band of Investment; (2) Comparable Capitalization Rates; and (3) National Survey Responses.",
+  "mortgageComponentCommentary": "After surveying several commercial mortgage lenders, it is our opinion that a typical creditworthy purchaser could obtain financing from a lending source in an amount equal to 75% of value at an annual interest rate of 4% and a 30-year payout. Therefore, the mortgage constant is 0.0573.",
+  "equityDividendRate": "20",
+  "bandInvestmentCommentary": "We believe an investor in the subject property would accept an initial annual return of 20% in anticipation of a stable income flow and property appreciation over time. It should be emphasized that the equity dividend rate is not necessarily the same as an equity yield rate or true rate of return on equity capital. The equity dividend rate is an equity capitalization that reflects all benefits that can be recognized by the equity investor as of the date of purchase. We selected this rate based on the subject's location in a good residential area, and its good access and visibility. We summarize the mortgage and equity parameters utilized in our derivation of an overall capitalization rate."
 }

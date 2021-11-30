@@ -34,6 +34,7 @@ import expenseHistoryActions from "../../actions/income/expenseHistory.actions";
 import compExpensesActions from "../../actions/income/comparableExpenses.actions";
 import expenseForecastActions from "../../actions/income/expenseForecast.actions";
 import proFormaActions from "../../actions/income/proForma.actions";
+import supportingCapRatesActions from "../../actions/income/supportingCapRates.actions";
 
 describe("Full doesn't Freddie Mac, only residential, multifamily report ", () => {
    it("Test", async () => {
@@ -457,5 +458,14 @@ describe("Full doesn't Freddie Mac, only residential, multifamily report ", () =
       proFormaActions.verifyNetOpIncomeRow(testData.netOpIncomeRow.total, testData.netOpIncomeRow.perSF, testData.netOpIncomeRow.perUnit);
       proFormaActions.verifyOperatingExpenseRatio(testData.opExpenseRatio);
       proFormaActions.clickSaveContinueButton();
+      supportingCapRatesActions.uncheckIncludePersonalSurvey();
+      supportingCapRatesActions.verifyIncomeCapitalizationCommentary(testData.incomeCapComm);
+      supportingCapRatesActions.clickSelectedLoanSectionButton();
+      supportingCapRatesActions.verifySelectedLoanTermsSection(testData.mortgageComponentCommentary);
+      supportingCapRatesActions.clickSelectedLoanSectionButton();
+      supportingCapRatesActions.clickBandOfInvestmentSectionButton();
+      supportingCapRatesActions.enterEquityDividendRate(testData.equityDividendRate);
+      supportingCapRatesActions.verifyBandInvestmentSection(testData.bandInvestmentCommentary, testData.equityDividendRate);
+      supportingCapRatesActions.clickSaveContinueButton();
    });
 });
