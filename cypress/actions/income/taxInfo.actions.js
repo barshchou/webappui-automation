@@ -70,43 +70,47 @@ class TaxInfoActions extends BaseActions {
         this.verifyTaxRateDropdownText(taxRate);
     }
 
-    async verifyTaxableAssessedValue() {
-        const totalAssessedText = await taxInfoPage.totalTaxableAssessedValue.then(el => el.text()).promisify();
-        const totalAssessedNumber = getNumberFromDollarNumberWithCommas(totalAssessedText);
-        const textToBe = `$${numberWithCommas(totalAssessedNumber.toFixed(2))}`;
-        taxInfoPage.taxableAssessedValue.should("have.text", textToBe);
+    verifyTaxableAssessedValue() {
+        taxInfoPage.totalTaxableAssessedValue.invoke("text").then(totalAssessedText => {
+            const totalAssessedNumber = getNumberFromDollarNumberWithCommas(totalAssessedText);
+            const textToBe = `$${numberWithCommas(totalAssessedNumber.toFixed(2))}`;
+            taxInfoPage.taxableAssessedValue.should("have.text", textToBe);
+        });
     }
 
     verifyTaxRateValueCell(rateToBe) {
         taxInfoPage.taxRateValueCell.should("have.text", `${rateToBe}%`);
     }
 
-    async verifyTaxLiabilityTotalCell(taxRate) {
-        const taxableAssessedText = await taxInfoPage.taxableAssessedValue.then(el => el.text()).promisify();
-        const taxableAssessedNumber = getNumberFromDollarNumberWithCommas(taxableAssessedText);
-        const textToBe = `$${numberWithCommas((taxableAssessedNumber / 100 * taxRate).toFixed(2))}`;
-        taxInfoPage.taxLiabilityTotalCell.should("have.text", textToBe);
+    verifyTaxLiabilityTotalCell(taxRate) {
+        taxInfoPage.taxableAssessedValue.invoke("text").then(taxableAssessedText => {
+            const taxableAssessedNumber = getNumberFromDollarNumberWithCommas(taxableAssessedText);
+            const textToBe = `$${numberWithCommas((taxableAssessedNumber / 100 * taxRate).toFixed(2))}`;
+            taxInfoPage.taxLiabilityTotalCell.should("have.text", textToBe);
+        });
     }
 
     verifySFOrUnitsNumberCell(textToBe) {
         taxInfoPage.sfOrUnitsNumberCell.should("have.text", textToBe);
     }
 
-    async verifyPerBasisCell() {
-        const taxLiabilityText = await taxInfoPage.taxLiabilityTotalCell.then(el => el.text()).promisify();
-        const taxLiabilityNumber = getNumberFromDollarNumberWithCommas(taxLiabilityText);
-        const basisText = await taxInfoPage.sfOrUnitsNumberCell.then(el => el.text()).promisify();
-        const basisNumber = getNumberFromDollarNumberWithCommas(basisText);
-        const textToBe = `$${numberWithCommas((taxLiabilityNumber / basisNumber).toFixed(2))}`;
-        taxInfoPage.perBasisCell.should("have.text", textToBe);
+    verifyPerBasisCell() {
+        taxInfoPage.taxLiabilityTotalCell.invoke("text").then(taxLiabilityText => {
+            const taxLiabilityNumber = getNumberFromDollarNumberWithCommas(taxLiabilityText);
+            taxInfoPage.sfOrUnitsNumberCell.invoke("text").then(basisText => {
+                const basisNumber = getNumberFromDollarNumberWithCommas(basisText);
+                const textToBe = `$${numberWithCommas((taxLiabilityNumber / basisNumber).toFixed(2))}`;
+                taxInfoPage.perBasisCell.should("have.text", textToBe);
+            });
+        });
     }
 
-    async verifyTaxLiabilityTable(taxRate, sfOrUnitsNumber) {
-        await this.verifyTaxableAssessedValue();
+    verifyTaxLiabilityTable(taxRate, sfOrUnitsNumber) {
+        this.verifyTaxableAssessedValue();
         this.verifyTaxRateValueCell(taxRate);
-        await this.verifyTaxLiabilityTotalCell(taxRate);
+        this.verifyTaxLiabilityTotalCell(taxRate);
         this.verifySFOrUnitsNumberCell(sfOrUnitsNumber);
-        await this.verifyPerBasisCell();
+        this.verifyPerBasisCell();
     }
 
     verifyTaxLiabilityCommentary(commToBe) {
@@ -240,11 +244,12 @@ class TaxInfoActions extends BaseActions {
         taxInfoPage.appraiserOpTaxLiabTaxRateValueCell.should("have.text", `${taxRate}%`);
     }
 
-    async verifyAppraiserOpinionTaxableAssessedValueCell(taxRate) {
-        const liabilityTotalText = await taxInfoPage.appraiserOpTaxLiabilityTotal.then(el => el.text()).promisify();
-        const liabilityTotalNumber = getNumberFromDollarNumberWithCommas(liabilityTotalText);
-        const textToBe = `$${numberWithCommas((liabilityTotalNumber * 100 / taxRate).toFixed(2))}`;
-        taxInfoPage.appraiserOpTaxAssessedValueCell.should("have.text", textToBe);
+    verifyAppraiserOpinionTaxableAssessedValueCell(taxRate) {
+        taxInfoPage.appraiserOpTaxLiabilityTotal.invoke("text").then(liabilityTotalText => {
+            const liabilityTotalNumber = getNumberFromDollarNumberWithCommas(liabilityTotalText);
+            const textToBe = `$${numberWithCommas((liabilityTotalNumber * 100 / taxRate).toFixed(2))}`;
+            taxInfoPage.appraiserOpTaxAssessedValueCell.should("have.text", textToBe);
+        });
     }
 
     verifyTaxSummaryCommentary(commToBe) {

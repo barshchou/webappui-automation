@@ -71,75 +71,90 @@ class ExpenseHistoryActions extends BaseActions{
         expenseHistoryPage.totalOpExpenseCells.eq(index).should("have.text", textToBe);
     }
 
-    async getToeNumberValueByIndex(index = 0) {
-        const toeTotalText = await expenseHistoryPage.totalOpExpenseCells.eq(index).then(el => el.text()).promisify();
-        return getNumberFromDollarNumberWithCommas(toeTotalText);
+    verifyTOEExcludingRETByIndex(retValue, index = 0) {
+        expenseHistoryPage.totalOpExpenseCells.eq(index).invoke("text").then(toeTotalText => {
+            const toeTotalNumber = getNumberFromDollarNumberWithCommas(toeTotalText);
+            const excludingTextToBe = `$${numberWithCommas((toeTotalNumber - retValue).toFixed(2))}`;
+            expenseHistoryPage.toeExclRealEstTaxesCells.eq(index).should("have.text", excludingTextToBe);
+        });
     }
 
-    async verifyTOEExcludingRETByIndex(retValue, index = 0) {
-        const toeTotalNumber = await this.getToeNumberValueByIndex(index);
-        const excludingTextToBe = `$${numberWithCommas((toeTotalNumber - retValue).toFixed(2))}`;
-        expenseHistoryPage.toeExclRealEstTaxesCells.eq(index).should("have.text", excludingTextToBe);
+    verifyNetOpIncomeByIndex(grossRevenue, index = 0) {
+        expenseHistoryPage.totalOpExpenseCells.eq(index).invoke("text").then(toeTotalText => {
+            const toeTotalNumber = getNumberFromDollarNumberWithCommas(toeTotalText);
+            const noeTextToBe = `$${numberWithCommas((grossRevenue - toeTotalNumber).toFixed(2))}`;
+            expenseHistoryPage.netOpIncomeCells.eq(index).should("have.text", noeTextToBe);
+        });
     }
 
-    async verifyNetOpIncomeByIndex(grossRevenue, index = 0) {
-        const toeTotalNumber = await this.getToeNumberValueByIndex(index);
-        const noeTextToBe = `$${numberWithCommas((grossRevenue - toeTotalNumber).toFixed(2))}`;
-        expenseHistoryPage.netOpIncomeCells.eq(index).should("have.text", noeTextToBe);
+    verifyAverageTable() {
+        expenseHistoryPage.grossRevenueInputs.then(els => {
+            const grossRevAverageToBe = this.getAverageValueFromInputs(els);
+            expenseHistoryPage.averageGrossRevenueCell.should("have.text", grossRevAverageToBe);
+        });
+        expenseHistoryPage.realEstateTaxesInputs.then(els => {
+            const realEstateAverageToBe = this.getAverageValueFromInputs(els);
+            expenseHistoryPage.averageRealEstateCell.should("have.text", realEstateAverageToBe);
+        });
+        expenseHistoryPage.insuranceInputs.then(els => {
+            const insuranceAverageToBe = this.getAverageValueFromInputs(els);
+            expenseHistoryPage.averageInsuranceCell.should("have.text", insuranceAverageToBe);
+        });
+        expenseHistoryPage.electricityInputs.then(els => {
+            const electricityAverageToBe = this.getAverageValueFromInputs(els);
+            expenseHistoryPage.averageElectricity.should("have.text", electricityAverageToBe);
+        });
+        expenseHistoryPage.fuelInputs.then(els => {
+            const fuelAverageToBe = this.getAverageValueFromInputs(els);
+            expenseHistoryPage.averageFuelCell.should("have.text", fuelAverageToBe);
+        });
+        expenseHistoryPage.waterSewerInputs.then(els => {
+            const waterSewerAvrgToBe = this.getAverageValueFromInputs(els);
+            expenseHistoryPage.averageWaterSewerCell.should("have.text", waterSewerAvrgToBe);
+        });
+        expenseHistoryPage.repairsInputs.then(els => {
+            const repairsAvrgToBe = this.getAverageValueFromInputs(els);
+            expenseHistoryPage.averageRepairsCell.should("have.text", repairsAvrgToBe);
+        });
+        expenseHistoryPage.payrollBenefitsInputs.then(els => {
+            const payrollAvrgToBe = this.getAverageValueFromInputs(els);
+            expenseHistoryPage.averagePayrollCell.should("have.text", payrollAvrgToBe);
+        });
+        expenseHistoryPage.administrativeInputs.then(els => {
+            const administrativeAvrgToBe = this.getAverageValueFromInputs(els);
+            expenseHistoryPage.averageAdministrativeCell.should("have.text", administrativeAvrgToBe);
+        });
+        expenseHistoryPage.professionalInputs.then(els => {
+            const professionalAvrgToBe = this.getAverageValueFromInputs(els);
+            expenseHistoryPage.averageProfessionalCell.should("have.text", professionalAvrgToBe);
+        });
+        expenseHistoryPage.miscellaneousInputs.then(els => {
+            const miscellaneousAvrgToBe = this.getAverageValueFromInputs(els);
+            expenseHistoryPage.averageMiscellaneousCell.should("have.text", miscellaneousAvrgToBe);
+        });
+        expenseHistoryPage.managementInputs.then(els => {
+            const managementAvrgToBe = this.getAverageValueFromInputs(els);
+            expenseHistoryPage.averageManagementCell.should("have.text", managementAvrgToBe);
+        });
+        expenseHistoryPage.replacementInputs.then(els => {
+            const reservesAvrgToBe = this.getAverageValueFromInputs(els);
+            expenseHistoryPage.averageReplacementCell.should("have.text", reservesAvrgToBe);
+        });
+        expenseHistoryPage.totalOpExpenseCells.then(els => {
+            const toeAvrgToBe = this.getAverageTextFromCells(els);
+            expenseHistoryPage.toeAverageCell.should("have.text", toeAvrgToBe);
+        });
+        expenseHistoryPage.toeExclRealEstTaxesCells.then(els => {
+            const toeExclRETAvrgToBe = this.getAverageTextFromCells(els);
+            expenseHistoryPage.toeExclRETAverageCell.should("have.text", toeExclRETAvrgToBe);
+        });
+        expenseHistoryPage.netOpIncomeCells.then(els => {
+            const noeAvrgToBe = this.getAverageTextFromCells(els);
+            expenseHistoryPage.noeAverageCell.should("have.text", noeAvrgToBe);
+        });
     }
 
-    async verifyAverageTable() {
-        const grossRevAverageToBe = await expenseHistoryPage.grossRevenueInputs
-            .then(els => this.getAverageValueFromInputs(els)).promisify();
-        expenseHistoryPage.averageGrossRevenueCell.should("have.text", grossRevAverageToBe);
-        const realEstateAverageToBe = await expenseHistoryPage.realEstateTaxesInputs
-            .then(els => this.getAverageValueFromInputs(els)).promisify();
-        expenseHistoryPage.averageRealEstateCell.should("have.text", realEstateAverageToBe);
-        const insuranceAverageToBe = await expenseHistoryPage.insuranceInputs
-            .then(els => this.getAverageValueFromInputs(els)).promisify();
-        expenseHistoryPage.averageInsuranceCell.should("have.text", insuranceAverageToBe);
-        const electricityAverageToBe = await expenseHistoryPage.electricityInputs
-            .then(els => this.getAverageValueFromInputs(els)).promisify();
-        expenseHistoryPage.averageElectricity.should("have.text", electricityAverageToBe);
-        const fuelAverageToBe = await expenseHistoryPage.fuelInputs
-            .then(els => this.getAverageValueFromInputs(els)).promisify();
-        expenseHistoryPage.averageFuelCell.should("have.text", fuelAverageToBe);
-        const waterSewerAvrgToBe = await expenseHistoryPage.waterSewerInputs
-            .then(els => this.getAverageValueFromInputs(els)).promisify();
-        expenseHistoryPage.averageWaterSewerCell.should("have.text", waterSewerAvrgToBe);
-        const repairsAvrgToBe = await expenseHistoryPage.repairsInputs
-            .then(els => this.getAverageValueFromInputs(els)).promisify();
-        expenseHistoryPage.averageRepairsCell.should("have.text", repairsAvrgToBe);
-        const payrollAvrgToBe = await expenseHistoryPage.payrollBenefitsInputs
-            .then(els => this.getAverageValueFromInputs(els)).promisify();
-        expenseHistoryPage.averagePayrollCell.should("have.text", payrollAvrgToBe);
-        const administrativeAvrgToBe = await expenseHistoryPage.administrativeInputs
-            .then(els => this.getAverageValueFromInputs(els)).promisify();
-        expenseHistoryPage.averageAdministrativeCell.should("have.text", administrativeAvrgToBe);
-        const professionalAvrgToBe = await expenseHistoryPage.professionalInputs
-            .then(els => this.getAverageValueFromInputs(els)).promisify();
-        expenseHistoryPage.averageProfessionalCell.should("have.text", professionalAvrgToBe);
-        const miscellaneousAvrgToBe = await expenseHistoryPage.miscellaneousInputs
-            .then(els => this.getAverageValueFromInputs(els)).promisify();
-        expenseHistoryPage.averageMiscellaneousCell.should("have.text", miscellaneousAvrgToBe);
-        const managementAvrgToBe = await expenseHistoryPage.managementInputs
-            .then(els => this.getAverageValueFromInputs(els)).promisify();
-        expenseHistoryPage.averageManagementCell.should("have.text", managementAvrgToBe);
-        const reservesAvrgToBe = await expenseHistoryPage.replacementInputs
-            .then(els => this.getAverageValueFromInputs(els)).promisify();
-        expenseHistoryPage.averageReplacementCell.should("have.text", reservesAvrgToBe);
-        const toeAvrgToBe = await expenseHistoryPage.totalOpExpenseCells
-            .then(async els => await this.getAverageTextFromCells(els)).promisify();
-        expenseHistoryPage.toeAverageCell.should("have.text", toeAvrgToBe);
-        const toeExclRETAvrgToBe = await expenseHistoryPage.toeExclRealEstTaxesCells
-            .then(async els => await this.getAverageTextFromCells(els)).promisify();
-        expenseHistoryPage.toeExclRETAverageCell.should("have.text", toeExclRETAvrgToBe);
-        const noeAvrgToBe = await expenseHistoryPage.netOpIncomeCells
-            .then(async els => await this.getAverageTextFromCells(els)).promisify();
-        expenseHistoryPage.noeAverageCell.should("have.text", noeAvrgToBe);
-    }
-
-    async getAverageTextFromCells(jQueryEls) {
+    getAverageTextFromCells(jQueryEls) {
         let sum = 0;
         for (let i = 0; i < jQueryEls.length; i++) {
             cy.log(`Get text as content ${jQueryEls[i].textContent}`);
