@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "cy:open": "npx cypress open",
     "cy:chrome_headed": "npx cypress run --browser chrome --headed",
-    "cy:record_run": "npx cypress run --record --key af194831-c708-498f-b4c1-376e72ecb5c3"
+    "cy:record_run": "npx cypress run --record --key af194831-c708-498f-b4c1-376e72ecb5c3",
+    "cy:not_full_chrome_headed": "npx cypress run --spec \"cypress/integration/not_full_reports/**\" --browser chrome --headed"
   },
   "repository": {
     "type": "git",
@@ -20,7 +21,7 @@
   },
   "homepage": "https://github.com/Bowery-RES/webapp-ui-automation#readme",
   "devDependencies": {
-    "cypress": "^8.4.1",
+    "cypress": "^9.1.0",
     "cypress-file-upload": "^5.0.8",
     "cypress-iframe": "^1.0.1",
     "cypress-xpath": "^1.6.2",

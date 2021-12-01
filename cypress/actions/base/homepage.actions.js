@@ -3,8 +3,9 @@ import BaseActions from "./base.actions";
 
 class HomepageActions extends BaseActions {
 
-    createReport(address = "462 1st Avenue, New York, USA", reportNumber = "TestAutoReport",
-    templateType = "freddie-mac", incomeType = "multifamily", conclusionType = "AS_IS") {
+    createReport(incomeType = "multifamily", address = "462 1st Avenue, New York, USA",
+                 reportNumber = "TestAutoReport", templateType = "freddie-mac",
+                 conclusionType = "AS_IS") {
         this.clickNewReportButton();
         this.enterAddressToSearch(address);
         this.clickFindPropHeader();
@@ -15,6 +16,24 @@ class HomepageActions extends BaseActions {
         this.checkTemplateType(templateType);
         this.checkIncomeType(incomeType);
         this.checkConclusionType(conclusionType);
+        this.clickCreateReportButton();
+    }
+
+    createReportAdvancedSearch(state, address, identifierType, identifier, reportNumber, templateValue, incomeValue,
+                               conclusionValue) {
+        this.clickNewReportButton();
+        this.clickAdvancedSearchButton();
+        this.clickSelectStateButton();
+        this.selectStateByName(state);
+        this.enterAddressToSearch(address);
+        this.clickFindPropHeader();
+        this.enterPropertyIdentifierType(identifierType);
+        this.enterPropertyIdentifier(identifier);
+        this.clickSubmitButton();
+        this.enterReportNumber(reportNumber);
+        this.checkTemplateType(templateValue);
+        this.checkIncomeType(incomeValue);
+        this.checkConclusionType(conclusionValue);
         this.clickCreateReportButton();
     }
 
@@ -72,11 +91,30 @@ class HomepageActions extends BaseActions {
         homepagePage.createReportButton.should("be.visible");
     }
 
+    clickAdvancedSearchButton() {
+        homepagePage.advancedSearchButton.click();
+    }
+
     deleteReport(reportNumber = "TestAutoReport") {
         this.verifyThatPageIsOpened();
-        cy.reload();
         this.enterReportNumberToSearch(reportNumber);
         this.clickArchiveButton(reportNumber);
+    }
+
+    clickSelectStateButton() {
+        homepagePage.selectStateButton.click();
+    }
+
+    selectStateByName(name) {
+        homepagePage.getStateByName(name).click();
+    }
+
+    enterPropertyIdentifierType(type) {
+        homepagePage.propertyIdentifierTypeInput.type(type).should("have.value", type);
+    }
+
+    enterPropertyIdentifier(value) {
+        homepagePage.propertyIdentifierInput.type(value).should("have.value", value);
     }
 
 }

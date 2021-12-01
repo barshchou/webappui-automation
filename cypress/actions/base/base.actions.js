@@ -1,20 +1,15 @@
 export default class BaseActions {
 
     clickYesButton() {
-        cy.get("*[name='form-confirm-submit-btn']").should("be.visible").click();
+        cy.get("*[name='form-confirm-submit-btn']").click();
     }
 
     clickNoButton() {
-        cy.get("*[name='form-confirm-reject-btn']").should("be.visible").click();
+        cy.get("*[name='form-confirm-reject-btn']").click();
     }
 
-    clickReturnToHomePageButton() {
-        cy.get("*[href='/reports']").should("be.visible").click();
-    }
-
-    returnToHomePageAndSave() {
-        this.clickReturnToHomePageButton();
-        this.clickYesButton();
+    returnToHomePage() {
+        cy.visit("/reports");
     }
 
     goBackWithSave() {
@@ -28,10 +23,14 @@ export default class BaseActions {
     }
 
     clickSaveButton() {
-        cy.get("*[data-qa='form-save-btn']").should("be.visible").click();
+        cy.get("*[data-qa='form-save-btn']").click();
     }
 
     clickSaveContinueButton() {
-        cy.get("*[data-qa='form-submit-btn']").should("be.enabled").click();
+        cy.get("*[data-qa='form-submit-btn']").scrollIntoView().click();
+    }
+
+    verifyProgressBarNotExist() {
+        cy.get("*[role='progressbar']").should("not.exist");
     }
 }

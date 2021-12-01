@@ -1,4 +1,4 @@
-name: Cypress Tests
+name: Cypress not full reports tests
 
 on:
   push:
@@ -9,6 +9,7 @@ on:
 jobs:
   cypress-run:
     runs-on: ubuntu-latest
+    container: cypress/browsers:node16.5.0-chrome94-ff93
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -16,6 +17,8 @@ jobs:
         uses: cypress-io/github-action@v2
         with:
           record: true
+          browser: chrome
+          spec: cypress/integration/not_full_reports/**
         env:
           CYPRESS_USERNAME: ${{ secrets.USERNAME }}
           CYPRESS_PASSWORD: ${{ secrets.PASSWORD }}
