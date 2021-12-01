@@ -35,6 +35,8 @@ import compExpensesActions from "../../actions/income/comparableExpenses.actions
 import expenseForecastActions from "../../actions/income/expenseForecast.actions";
 import proFormaActions from "../../actions/income/proForma.actions";
 import supportingCapRatesActions from "../../actions/income/supportingCapRates.actions";
+import capRateConclusionActions from "../../actions/income/capRateConclusion.actions";
+import capRateCompsActions from "../../actions/final/capRateComps.actions";
 
 describe("Full doesn't Freddie Mac, only residential, multifamily report ", () => {
    it("Test", async () => {
@@ -180,8 +182,8 @@ describe("Full doesn't Freddie Mac, only residential, multifamily report ", () =
       zoningActions.clickSaveContinueButton();
       renovationsActions.chooseRenovationByValue(testData.renovationDropValue);
       renovationsActions.clickTotalButton();
-      renovationsActions.fillTotalTable(testData.renovationsPeriod, testData.totalAmount);
-      renovationsActions.verifyNetTotalRenovationBudget(testData.totalAmount);
+      renovationsActions.fillTotalTable(testData.renovationsPeriod, testData.renovationTotalAmount);
+      renovationsActions.verifyNetTotalRenovationBudget(testData.renovationTotalAmount);
       renovationsActions.editCommentary(testData.renovationsCommentary);
       renovationsActions.clickSaveContinueButton();
       residentialUnitsActions.fillKitchenDescription(testData.kitchenCondition, testData.kitchenFlooring, testData.counterTops,
@@ -467,5 +469,33 @@ describe("Full doesn't Freddie Mac, only residential, multifamily report ", () =
       supportingCapRatesActions.enterEquityDividendRate(testData.equityDividendRate);
       supportingCapRatesActions.verifyBandInvestmentSection(testData.bandInvestmentCommentary, testData.equityDividendRate);
       supportingCapRatesActions.clickSaveContinueButton();
+      capRateConclusionActions.verifyBandOfInvestments(testData.bandOfInvestmentsValue);
+      capRateConclusionActions.verifyPWCCell(testData.pwcValue);
+      capRateConclusionActions.verifySitusCell(testData.situsValue);
+      capRateConclusionActions.navigateToCapRateComps();
+      capRateCompsActions.verifyPageIsOpened();
+      const capRateComps = [testData.firstCapRateComp, testData.secondCapRateComp, testData.thirdCapRateComp, testData.forthCapRateComp,
+      testData.fifthCapRateComp, testData.sixthCapRateComp];
+      capRateComps.forEach((comp, i) => {
+         capRateCompsActions.addComparable(comp.stateValue, comp.address, comp.id, comp.source, comp.sourceName, comp.sourceUrl);
+         capRateCompsActions.fillAddedCompWithInfo(comp.address, comp.gba, comp.type, comp.isElevatored, comp.numberOfUnits,
+             comp.isListing, comp.isInContract, comp.saleDate, comp.yearBuilt, comp.pricePerSF, comp.capRate, comp.sourceName,
+             comp.sourceUrl, i);
+      });
+      const firstCapRate = Number(testData.firstCapRateComp.capRate);
+      const secondCapRate = Number(testData.secondCapRateComp.capRate);
+      const thirdCapRate = Number(testData.thirdCapRateComp.capRate);
+      const forthCapRate = Number(testData.forthCapRateComp.capRate);
+      const fifthCapRate = Number(testData.fifthCapRateComp.capRate);
+      const sixthCapRate = Number(testData.sixthCapRateComp.capRate);
+      const minCapRate = Math.min(firstCapRate, secondCapRate, thirdCapRate, forthCapRate, fifthCapRate, sixthCapRate);
+      const maxCapRate = Math.max(firstCapRate, secondCapRate, thirdCapRate, forthCapRate, fifthCapRate, sixthCapRate);
+      const avgCapRate = ((firstCapRate + secondCapRate + thirdCapRate + forthCapRate + fifthCapRate + sixthCapRate) /
+          capRateComps.length).toFixed(2);
+      capRateCompsActions.verifyCapRateCommentary(minCapRate, maxCapRate, avgCapRate);
+      capRateCompsActions.chooseCompIncomePotential(testData.compIncomePotential);
+      capRateCompsActions.chooseCompPropertyConditions(testData.compPropertyConditions);
+      capRateCompsActions.chooseCompPropertyLocations(testData.compPropertyLocations);
+      navSectionActions.navigateToCapRateConclusion();
    });
 });

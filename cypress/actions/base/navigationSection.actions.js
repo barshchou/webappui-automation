@@ -125,6 +125,18 @@ class NavigationSectionActions extends BaseActions {
     clickExpenseForecastBookmark() {
         navigationSectionPage.expenseForecastBookmark.click().should("have.attr", "color", "#F68750");
     }
+
+    clickCapRateConclusion() {
+        navigationSectionPage.capRateConclusion.click();
+    }
+
+    navigateToCapRateConclusion(isWithSave = true) {
+        this.clickIncomeApproachButton();
+        this.clickCapRateConclusion();
+        if (isWithSave) {
+            this.clickYesButton();
+        }
+    }
 }
 
 export default new NavigationSectionActions();
