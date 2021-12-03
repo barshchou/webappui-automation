@@ -497,5 +497,19 @@ describe("Full doesn't Freddie Mac, only residential, multifamily report ", () =
       capRateCompsActions.chooseCompPropertyConditions(testData.compPropertyConditions);
       capRateCompsActions.chooseCompPropertyLocations(testData.compPropertyLocations);
       navSectionActions.navigateToCapRateConclusion();
+      capRateConclusionActions.verifyCompCapRatesCell(minCapRate, maxCapRate);
+      capRateConclusionActions.enterConclusionSectionConcludedCapRate(testData.concludedCapRate);
+      capRateConclusionActions.enterAsCompleteMonthsOfRentLoss(testData.asCompleteMonthsOfRentLoss);
+      capRateConclusionActions.enterASStabilizedMonthsOfRentLoss(testData.asStabilizedMonthsOfRentLoss);
+      capRateConclusionActions.selectRoundingFactor(testData.roundingFactorValue);
+      capRateConclusionActions.verifyNetOperatingIncome(testData.netOperatingIncome);
+      capRateConclusionActions.verifyConcludedCapRateCell(testData.concludedCapRate);
+      capRateConclusionActions.verifyAsStabilizedTablePart(testData.asStabilizedPeriod, testData.asStabilizedFinalValue);
+      capRateConclusionActions.verifyAsCompleteTablePart(testData.asStabilizedPeriod, testData.asCompleteAmountValue, testData.asStabilizedFinalValue);
+      capRateConclusionActions.enterAsCompleteLessEntrepreneurialProfit(testData.asCompleteLessEntrepreneurialProfit);
+      capRateConclusionActions.verifyAsIsMarketTablePart(testData.asIsMarketPeriod, testData.asIsMarketAmount,
+          testData.asIsMarketFinalValue, testData.asIsMarketPerUnit, testData.asIsMarketPerSF);
+      capRateConclusionActions.clickSaveContinueButton();
+
    });
 });

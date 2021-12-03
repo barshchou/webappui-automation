@@ -315,5 +315,19 @@
     "yearBuilt": 1925, "pricePerSF": "N/A", "capRate": "10.08"},
   "compIncomePotential": "Similar",
   "compPropertyConditions": "Similar",
-  "compPropertyLocations": "Similar"
+  "compPropertyLocations": "Similar",
+  "concludedCapRate": 10,
+  "asCompleteMonthsOfRentLoss": 12,
+  "asStabilizedMonthsOfRentLoss": 0,
+  "roundingFactorValue": "10000",
+  "netOperatingIncome": "$51,557.28",
+  "asStabilizedPeriod": "10/13/2022",
+  "asStabilizedFinalValue": "$520,000",
+  "asCompleteAmountValue": "$515,573",
+  "asCompleteLessEntrepreneurialProfit": 25,
+  "asIsMarketPeriod": "10/13/2021",
+  "asIsMarketAmount": "$383,073",
+  "asIsMarketFinalValue": "$380,000",
+  "asIsMarketPerUnit": "$63,333",
+  "asIsMarketPerSF": "$80.30"
 }
