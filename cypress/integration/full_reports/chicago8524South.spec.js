@@ -37,6 +37,7 @@ import proFormaActions from "../../actions/income/proForma.actions";
 import supportingCapRatesActions from "../../actions/income/supportingCapRates.actions";
 import capRateConclusionActions from "../../actions/income/capRateConclusion.actions";
 import capRateCompsActions from "../../actions/final/capRateComps.actions";
+import findCompsActions from "../../actions/sales/findComps.actions";
 
 describe("Full doesn't Freddie Mac, only residential, multifamily report ", () => {
    it("Test", () => {
@@ -510,6 +511,13 @@ describe("Full doesn't Freddie Mac, only residential, multifamily report ", () =
       capRateConclusionActions.verifyAsIsMarketTablePart(testData.asIsMarketPeriod, testData.asIsMarketAmount,
           testData.asIsMarketFinalValue, testData.asIsMarketPerUnit, testData.asIsMarketPerSF);
       capRateConclusionActions.clickSaveContinueButton();
+      const salesComps = [testData.firstSalesComp, testData.secondSalesComp, testData.thirdSalesComp, testData.forthSalesComp,
+      testData.fifthSalesComp];
+      salesComps.forEach((comp, i) => {
+         findCompsActions.addComparable(comp.address);
+         findCompsActions.verifyAddedCompByIndex(comp.address, i + 1, comp.capRate);
+      });
+      findCompsActions.clickSaveContinueButton();
 
    });
 });

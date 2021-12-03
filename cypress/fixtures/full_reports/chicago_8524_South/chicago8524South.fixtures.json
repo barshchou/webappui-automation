@@ -329,5 +329,10 @@
   "asIsMarketAmount": "$383,073",
   "asIsMarketFinalValue": "$380,000",
   "asIsMarketPerUnit": "$63,333",
-  "asIsMarketPerSF": "$80.30"
+  "asIsMarketPerSF": "$80.30",
+  "firstSalesComp": {"address": "7748 S Colfax Ave.", "capRate": "remove"},
+  "secondSalesComp": {"address": "8138 S Exchange Ave.", "capRate": "remove"},
+  "thirdSalesComp": {"address": "8041 S Manistee Ave.", "capRate": "9.31%"},
+  "forthSalesComp": {"address": "7926 S Luella Ave.", "capRate": "remove"},
+  "fifthSalesComp": {"address": "8103 S Luella Ave.", "capRate": "10.08%"}
 }
