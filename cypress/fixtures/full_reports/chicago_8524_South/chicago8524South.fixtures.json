@@ -334,5 +334,6 @@
   "secondSalesComp": {"address": "8138 S Exchange Ave.", "capRate": "remove"},
   "thirdSalesComp": {"address": "8041 S Manistee Ave.", "capRate": "9.31%"},
   "forthSalesComp": {"address": "7926 S Luella Ave.", "capRate": "remove"},
-  "fifthSalesComp": {"address": "8103 S Luella Ave.", "capRate": "10.08%"}
+  "fifthSalesComp": {"address": "8103 S Luella Ave.", "capRate": "10.08%"},
+  "salesCompMapPath": "full_reports/chicago_8524_South/sales_comp_map.png"
 }

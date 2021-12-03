@@ -38,6 +38,7 @@ import supportingCapRatesActions from "../../actions/income/supportingCapRates.a
 import capRateConclusionActions from "../../actions/income/capRateConclusion.actions";
 import capRateCompsActions from "../../actions/final/capRateComps.actions";
 import findCompsActions from "../../actions/sales/findComps.actions";
+import createSalesCompMap from "../../actions/sales/createCompMap.actions";
 
 describe("Full doesn't Freddie Mac, only residential, multifamily report ", () => {
    it("Test", () => {
@@ -518,6 +519,7 @@ describe("Full doesn't Freddie Mac, only residential, multifamily report ", () =
          findCompsActions.verifyAddedCompByIndex(comp.address, i + 1, comp.capRate);
       });
       findCompsActions.clickSaveContinueButton();
-
+      createSalesCompMap.uploadMap(testData.salesCompMapPath);
+      createSalesCompMap.clickSaveContinueButton();
    });
 });
