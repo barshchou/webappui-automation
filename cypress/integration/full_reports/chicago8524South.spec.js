@@ -39,6 +39,8 @@ import capRateConclusionActions from "../../actions/income/capRateConclusion.act
 import capRateCompsActions from "../../actions/final/capRateComps.actions";
 import findCompsActions from "../../actions/sales/findComps.actions";
 import createSalesCompMap from "../../actions/sales/createCompMap.actions";
+import adjustCompsActions from "../../actions/sales/adjustComps.actions";
+import valueConclusionActions from "../../actions/sales/valueConclusion.actions";
 
 describe("Full doesn't Freddie Mac, only residential, multifamily report ", () => {
    it("Test", () => {
@@ -519,7 +521,33 @@ describe("Full doesn't Freddie Mac, only residential, multifamily report ", () =
          findCompsActions.verifyAddedCompByIndex(comp.address, i + 1, comp.capRate);
       });
       findCompsActions.clickSaveContinueButton();
-      createSalesCompMap.uploadMap(testData.salesCompMapPath);
+      createSalesCompMap.captureScreen();
       createSalesCompMap.clickSaveContinueButton();
+      adjustCompsActions.checkCalculationUnitsRadio(testData.calculationUnitsRadioValue);
+      adjustCompsActions.checkIncomeAdjustmentLevel(testData.incomeAdjustmentType);
+      const adjustComps = [testData.firstAdjustComp, testData.secondAdjustComp, testData.thirdAdjustComp, testData.forthAdjustComp,
+      testData.fifthAdjustComp];
+      adjustComps.forEach((comp, i) => {
+         adjustCompsActions.enterSizeAdjustmentByColumn(comp.size, i);
+         adjustCompsActions.enterConditionAdjustmentByColumn(comp.condition, i);
+         adjustCompsActions.enterOtherAdjustmentByColumn(comp.other, i);
+         adjustCompsActions.verifyTrendedPriceByColumn(comp.trendedPrice, i);
+         adjustCompsActions.verifyAdjustedPriceByColumn(comp.adjustedPrice, i);
+      });
+      adjustCompsActions.editOtherAdjustmentRowName(testData.otherAdjustmentNewName);
+      adjustCompsActions.clickSaveContinueButton();
+      valueConclusionActions.verifyUnadjustedPrices(testData.secondAdjustComp.trendedPrice, testData.unadjustedPriceAvg,
+          testData.thirdAdjustComp.trendedPrice, testData.unadjustedPriceMedian);
+      valueConclusionActions.verifyAdjustedPrices(testData.secondAdjustComp.adjustedPrice, testData.adjustedPriceAvg,
+          testData.thirdAdjustComp.adjustedPrice, testData.adjustedPriceMedian);
+      valueConclusionActions.verifyIncomeApproachConclusion(testData.incomeApproachConclusion);
+      valueConclusionActions.enterSaleValueConclusion(testData.saleValueConclusion);
+      valueConclusionActions.verifyAsStabilizedRow(testData.asStabilizedPeriod, testData.conclusionAsStabilizedAmount,
+          testData.conclusionAsStabilizedAmount);
+      valueConclusionActions.verifyAsCompleteRow(testData.asStabilizedPeriod, testData.conclusionAsCompleteAmount,
+          testData.conclusionAsCompleteAmount);
+      valueConclusionActions.verifyAsIsMarketRow(testData.asIsMarketPeriod, testData.conclusionAsIsMarketAmount,
+          testData.conclusionAsIsMarketFinalValue);
+      valueConclusionActions.clickSaveContinueButton();
    });
 });
