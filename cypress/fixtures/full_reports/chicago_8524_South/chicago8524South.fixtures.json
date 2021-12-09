@@ -352,5 +352,10 @@
   "conclusionAsStabilizedAmount": "$540,000",
   "conclusionAsCompleteAmount": "$540,000",
   "conclusionAsIsMarketAmount": "$407,500",
-  "conclusionAsIsMarketFinalValue": "$410,000"
+  "conclusionAsIsMarketFinalValue": "$410,000",
+  "stabilizedCompleteDate": "October 13, 2022",
+  "marketDate": "October 13, 2021",
+  "finalValueApproach": "Income",
+  "contractDateForPropSale": "9/14/2021",
+  "extraordinaryAssumption": "Some specific assumption about COVID-19"
 }
