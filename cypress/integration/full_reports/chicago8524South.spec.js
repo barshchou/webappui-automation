@@ -46,6 +46,7 @@ import propertySalesConclusionActions from "../../actions/final/propertySaleConc
 import assumptionsConditionsActions from "../../actions/final/assumptionsConditions.actions";
 import swotAnalysisActions from "../../actions/final/swotAnalysis.actions";
 import highestBestUseActions from "../../actions/final/highestBestUse.actions";
+import unitInspectionActions from "../../actions/final/unitInspection.actions";
 
 describe("Full doesn't Freddie Mac, only residential, multifamily report ", () => {
     it("Test", () => {
@@ -596,5 +597,9 @@ describe("Full doesn't Freddie Mac, only residential, multifamily report ", () =
             .clickProbableBuyerTab()
             .checkLocalCheckbox()
             .checkRegionalCheckbox().clickSaveContinueButton();
+        unitInspectionActions.verifyNumberOfInspectedUnitsRows(testData.isInspectedRowsToCheck.length)
+            .chooseListReadyForOccupancyValues(testData.readyForOccupancyValues)
+            .verifyNumberOfInspectedUnitsCommentary(testData.isInspectedRowsToCheck.length).clickSaveContinueButton();
+
     });
 });

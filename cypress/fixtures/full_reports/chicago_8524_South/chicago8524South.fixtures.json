@@ -363,5 +363,6 @@
   "conformingUse": "Conforming",
   "subjectMarketCharacteristicsAndPropTypeValue": "Residential",
   "feasiblePropertyType": "multifamilyApartment",
-  "feasiblePropTypeWord": "Multifamily Apartment"
+  "feasiblePropTypeWord": "Multifamily Apartment",
+  "readyForOccupancyValues": ["N/A", "N/A"]
 }
