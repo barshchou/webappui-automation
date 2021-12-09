@@ -45,6 +45,7 @@ import finalValuesReconciliationActions from "../../actions/final/finalValuesRec
 import propertySalesConclusionActions from "../../actions/final/propertySaleConclusion.actions";
 import assumptionsConditionsActions from "../../actions/final/assumptionsConditions.actions";
 import swotAnalysisActions from "../../actions/final/swotAnalysis.actions";
+import highestBestUseActions from "../../actions/final/highestBestUse.actions";
 
 describe("Full doesn't Freddie Mac, only residential, multifamily report ", () => {
     it("Test", () => {
@@ -570,5 +571,30 @@ describe("Full doesn't Freddie Mac, only residential, multifamily report ", () =
             .verifyContractChangeInValue(testData.asIsMarketFinalValue).clickSaveContinueButton();
         assumptionsConditionsActions.addExtraordinaryAssumption(testData.extraordinaryAssumption).clickSaveContinueButton();
         swotAnalysisActions.uncheckIncludeInReportCheckbox().clickSaveContinueButton();
+        highestBestUseActions.verifyZoneNameByRow(testData.zonesNames[0])
+            .verifyAllowableUsesByRow(testData.propertyUse)
+            .verifySiteAreaByRow(testData.siteArea)
+            .verifyZoningAreaByRow(testData.grossArea)
+            .clickPhysicallyTab()
+            .verifyPropertyFrontage(testData.propertyFrontage)
+            .verifyPropertyCondition(testData.propertyCondition)
+            .verifyComplyingBulk(testData.complyingBulk)
+            .verifyConformingUse(testData.conformingUse)
+            .verifyUnitType(testData.unitType)
+            .verifyUnitsNumber(testData.numberOfUnits)
+            .checkSizeWithinRangeCheckbox()
+            .checkUtilitiesAvailableCheckbox()
+            .clickFinanciallyTab()
+            .checkSubjectMarketRadioValue(testData.subjectMarketCharacteristicsAndPropTypeValue)
+            .checkAsVacantBestUsePropTypeRadioValue(testData.subjectMarketCharacteristicsAndPropTypeValue)
+            .addFinanciallyFeasiblePropertyTypesAsVacant(testData.feasiblePropertyType)
+            .uncheckNewConstructionFeasibleCheckbox()
+            .checkAsImprovedBestUseRadioValue(testData.subjectMarketCharacteristicsAndPropTypeValue)
+            .addFinanciallyFeasiblePropertyTypesAsImproved(testData.feasiblePropertyType)
+            .verifyAsVacantHighestUse(testData.subjectMarketCharacteristicsAndPropTypeValue, testData.feasiblePropTypeWord)
+            .verifyAsImprovedHighestUse(testData.subjectMarketCharacteristicsAndPropTypeValue, testData.feasiblePropTypeWord)
+            .clickProbableBuyerTab()
+            .checkLocalCheckbox()
+            .checkRegionalCheckbox().clickSaveContinueButton();
     });
 });

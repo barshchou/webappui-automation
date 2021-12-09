@@ -357,5 +357,11 @@
   "marketDate": "October 13, 2021",
   "finalValueApproach": "Income",
   "contractDateForPropSale": "9/14/2021",
-  "extraordinaryAssumption": "Some specific assumption about COVID-19"
+  "extraordinaryAssumption": "Some specific assumption about COVID-19",
+  "propertyCondition": "Good",
+  "complyingBulk": "Complying",
+  "conformingUse": "Conforming",
+  "subjectMarketCharacteristicsAndPropTypeValue": "Residential",
+  "feasiblePropertyType": "multifamilyApartment",
+  "feasiblePropTypeWord": "Multifamily Apartment"
 }
