@@ -48,6 +48,7 @@ import swotAnalysisActions from "../../actions/final/swotAnalysis.actions";
 import highestBestUseActions from "../../actions/final/highestBestUse.actions";
 import unitInspectionActions from "../../actions/final/unitInspection.actions";
 import scopeActions from "../../actions/final/scope.actions";
+import sourceInformationActions from "../../actions/final/sourceInformation.actions";
 
 describe("Full doesn't Freddie Mac, only residential, multifamily report ", () => {
     it("Test", () => {
@@ -602,5 +603,20 @@ describe("Full doesn't Freddie Mac, only residential, multifamily report ", () =
             .chooseListReadyForOccupancyValues(testData.readyForOccupancyValues)
             .verifyNumberOfInspectedUnitsCommentary(testData.isInspectedRowsToCheck.length).clickSaveContinueButton();
         scopeActions.verifyNumberOfItems().clickSaveContinueButton();
+        sourceInformationActions.verifySiteSizeSources()
+            .verifyExcessSurplusLandSources()
+            .verifyGrossSizeUnitsSources()
+            .verifyResidentialSFSources()
+            .verifyNumberOfBuildingsSources()
+            .verifyAmenitiesSources()
+            .verifyDeferredMaintenanceSources()
+            .verifyAreaAnalysisSources()
+            .verifyIncomeDataSources()
+            .verifyExpenseDataSources()
+            .verifyArchitecturalPlansSources()
+            .verifyComparableRentalDataSources()
+            .verifyComparableSalesDataSources().clickSaveContinueButton();
+        capRateCompsActions.clickSaveContinueButton();
+
     });
 });
