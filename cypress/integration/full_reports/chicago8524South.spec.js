@@ -50,6 +50,7 @@ import unitInspectionActions from "../../actions/final/unitInspection.actions";
 import scopeActions from "../../actions/final/scope.actions";
 import sourceInformationActions from "../../actions/final/sourceInformation.actions";
 import capRateDiscussionActions from "../../actions/final/capRateDiscussion.actions";
+import insurableReplacementCostActions from "../../actions/final/insurableReplacementCost.actions";
 
 describe("Full doesn't Freddie Mac, only residential, multifamily report ", () => {
     it("Test", () => {
@@ -628,5 +629,8 @@ describe("Full doesn't Freddie Mac, only residential, multifamily report ", () =
             .verifyIncomeSpikesTable(testData.incomeSpikesTable)
             .checkIncomeSpikesRadios(testData.incomeSpikesRadios).clickSaveContinueButton();
         navSectionActions.clickInsurableReplacementCostBookmark();
+        insurableReplacementCostActions.verifySubjectState(testData.subjectState)
+            .verifySubjectLocale(testData.subjectLocale)
+            .verifyLocalMultiplier().clickSaveContinueButton();
     });
 });

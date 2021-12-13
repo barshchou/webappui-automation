@@ -370,5 +370,8 @@
   "situsRow": {"min": "4.00%", "average": "5.20%", "max": "6.00%"},
   "capRateCompsTable": {"income": "Similar", "propConditions": "Similar", "location": "Similar"},
   "incomeSpikesTable": {"capRate": "10.00%", "occupancy": "0.00%", "percentageMarketRate": "100.00%", "condition": "Good"},
-  "incomeSpikesRadios": {"incomePotential": "Limited", "marketConditions": "Moderately Appreciating", "flowRisk": "Moderate Risk"}
+  "incomeSpikesRadios": {"incomePotential": "Limited", "marketConditions": "Moderately Appreciating", "flowRisk": "Moderate Risk"},
+  "subjectState": "Illinois",
+  "subjectLocale": "Chicago"
+
 }
