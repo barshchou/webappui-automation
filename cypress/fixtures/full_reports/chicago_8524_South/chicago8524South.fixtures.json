@@ -364,5 +364,11 @@
   "subjectMarketCharacteristicsAndPropTypeValue": "Residential",
   "feasiblePropertyType": "multifamilyApartment",
   "feasiblePropTypeWord": "Multifamily Apartment",
-  "readyForOccupancyValues": ["N/A", "N/A"]
+  "readyForOccupancyValues": ["N/A", "N/A"],
+  "capRateTable": {"min": "8.69%", "max": "11.44%", "average": "9.61%"},
+  "pwcRow": {"min": "3.50%", "average": "5.03%", "max": "7.00%"},
+  "situsRow": {"min": "4.00%", "average": "5.20%", "max": "6.00%"},
+  "capRateCompsTable": {"income": "Similar", "propConditions": "Similar", "location": "Similar"},
+  "incomeSpikesTable": {"capRate": "10.00%", "occupancy": "0.00%", "percentageMarketRate": "100.00%", "condition": "Good"},
+  "incomeSpikesRadios": {"incomePotential": "Limited", "marketConditions": "Moderately Appreciating", "flowRisk": "Moderate Risk"}
 }

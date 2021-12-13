@@ -19,6 +19,7 @@ class NavigationSection extends BasePage {
     get propertyMaps() {return cy.get("#property-maps");}
     get expenseForecastBookmark() {return cy.get("#expense-forecast > svg[data-icon=bookmark]");}
     get capRateConclusion() {return cy.get("#cap-rate-conclusion");}
+    get insurableReplacementCostBookmark() {return cy.get("#insurable-replacement-cost > svg[data-icon=bookmark]");}
 }
 
 export default new NavigationSection();

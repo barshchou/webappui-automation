@@ -28,11 +28,13 @@ class HighestBestUsePage extends BasePage {
     getDropdownOptionByQaAttr(attribute) {return cy.get(`[data-qa=${attribute}] input`);}
     get financiallyFeasibleHeader() {return cy.xpath("//*[.='Financially Feasible']");}
     get newConstructionFeasibleCheckbox() {return cy.get("[data-qa^=newConstructionFeasible] input");}
+    get newConstructionFeasibleChecked() {return cy.get("[data-qa=newConstructionFeasible-checked]");}
     get asImprovedBestUsePropTypeRadio() {return cy.get("[name=asImprovedBestUsePropertyType]");}
     getAsImprovedBestUseElToCheckRadio(value) {
         return cy.get(`[data-qa^=asImprovedBestUsePropertyType] [data-qa=checked] input[value=${value}]`);
     }
     get asImprovedFeasiblePropTypesDropdown() {return cy.get("[data-qa^=asImprovedFeasiblePropertyTypes] button");}
+    get highestUseTab() {return cy.get("[data-qa=highestUse-tab]");}
     get asVacantBestUseType() {return cy.get("[data-qa=as-vacant-best-use-type]");}
     get asVacantFeasiblePropTypes() {return cy.get("[data-qa=as-vacant-feasible-property-types]");}
     get asImprovedBestUseType() {return cy.get("[data-qa=as-improved-best-use-type]");}

@@ -49,6 +49,7 @@ import highestBestUseActions from "../../actions/final/highestBestUse.actions";
 import unitInspectionActions from "../../actions/final/unitInspection.actions";
 import scopeActions from "../../actions/final/scope.actions";
 import sourceInformationActions from "../../actions/final/sourceInformation.actions";
+import capRateDiscussionActions from "../../actions/final/capRateDiscussion.actions";
 
 describe("Full doesn't Freddie Mac, only residential, multifamily report ", () => {
     it("Test", () => {
@@ -594,6 +595,7 @@ describe("Full doesn't Freddie Mac, only residential, multifamily report ", () =
             .uncheckNewConstructionFeasibleCheckbox()
             .checkAsImprovedBestUseRadioValue(testData.subjectMarketCharacteristicsAndPropTypeValue)
             .addFinanciallyFeasiblePropertyTypesAsImproved(testData.feasiblePropertyType)
+            .clickHighestUseTab()
             .verifyAsVacantHighestUse(testData.subjectMarketCharacteristicsAndPropTypeValue, testData.feasiblePropTypeWord)
             .verifyAsImprovedHighestUse(testData.subjectMarketCharacteristicsAndPropTypeValue, testData.feasiblePropTypeWord)
             .clickProbableBuyerTab()
@@ -617,6 +619,14 @@ describe("Full doesn't Freddie Mac, only residential, multifamily report ", () =
             .verifyComparableRentalDataSources()
             .verifyComparableSalesDataSources().clickSaveContinueButton();
         capRateCompsActions.clickSaveContinueButton();
-
+        capRateDiscussionActions.verifyCapRateTable(testData.capRateTable)
+            .verifyPwCRow(testData.pwcRow)
+            .verifySitusRow(testData.situsRow)
+            .clickCapRateCompsTab()
+            .verifyCapRateCompsTable(testData.capRateCompsTable)
+            .clickIncomeSpikesTab()
+            .verifyIncomeSpikesTable(testData.incomeSpikesTable)
+            .checkIncomeSpikesRadios(testData.incomeSpikesRadios).clickSaveContinueButton();
+        navSectionActions.clickInsurableReplacementCostBookmark();
     });
 });

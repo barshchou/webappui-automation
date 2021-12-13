@@ -137,6 +137,10 @@ class NavigationSectionActions extends BaseActions {
             this.clickYesButton();
         }
     }
+
+    clickInsurableReplacementCostBookmark() {
+        navigationSectionPage.insurableReplacementCostBookmark.click().should("have.attr", "color", "#F68750");
+    }
 }
 
 export default new NavigationSectionActions();

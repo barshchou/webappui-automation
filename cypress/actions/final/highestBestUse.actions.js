@@ -106,7 +106,8 @@ class HighestBestUseActions extends BaseActions {
     }
 
     uncheckNewConstructionFeasibleCheckbox() {
-        highestBestUsePage.newConstructionFeasibleCheckbox.uncheck().should("have.value", "false");
+        highestBestUsePage.newConstructionFeasibleCheckbox.uncheck();
+        highestBestUsePage.newConstructionFeasibleChecked.should("not.exist");
         return this;
     }
 
@@ -126,6 +127,11 @@ class HighestBestUseActions extends BaseActions {
             this.checkDropdownOptionByQaAttribute(types);
         }
         highestBestUsePage.financiallyFeasibleHeader.click();
+        return this;
+    }
+
+    clickHighestUseTab() {
+        highestBestUsePage.highestUseTab.click();
         return this;
     }
 
