@@ -5,8 +5,8 @@ class DescriptionPage extends BasePage{
     getDropdownOptionByValue(value) {return cy.get(`li[role=option][data-value='${value}']`);}
     get selectAsStabilizedConditionButton() {return cy.get("*[data-qa*=generalAsStabilizedCondition] [data-qa='select-value']");}
     getCheckboxByLabel(label) {return cy.get(`*[label='${label}'] input`);}
-    get stairsConditionContainer() {return cy.get("*[data-qa='lobbyAndStairwellsCondition-radio-group']");}
-    get stairsConditionRadios() {return cy.get("*[name='lobbyAndStairwellsCondition']");}
+    get stairsConditionContainer() {return cy.get("[data-qa='lobbyStairwellsCondition-radio-group']");}
+    get stairsConditionRadios() {return cy.get("*[name='lobbyStairwellsCondition']");}
     get foundationRadios() {return cy.get("*[name=foundation]");}
     get structuralSystem() {return cy.get("*[name=structuralSystem]");}
     get framingRadios() {return cy.get("*[name=framing]");}

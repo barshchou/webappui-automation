@@ -32,7 +32,7 @@ describe("Commercial In-Place Rent Roll grid tests", () => {
         navSectionActions.verifyProgressBarNotExist();
         stabRentRollActions.verifyIsInspectedChecked();
         navSectionActions.navigateToUnitInspection();
-        unitInspectionActions.verifyNumberOfInspectedUnits();
+        unitInspectionActions.verifyNumberOfInspectedUnitsCommentary();
         unitInspectionActions.clickSaveButton();
         navSectionActions.navigateToCommercialInPlaceRentRoll(false);
         rentRollActions.uncheckIsInspectedCheckboxByRowNumber();
