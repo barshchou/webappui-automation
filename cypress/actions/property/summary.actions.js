@@ -21,35 +21,51 @@ class SummaryActions extends BaseActions {
 
     verifyCensusTract(value) {
         summaryPage.censusTractField.should("have.value", value);
+        return this;
     }
 
     verifyBuildingDescriptor(value) {
         summaryPage.buildingDescriptor.should("have.value", value);
+        return this;
     }
 
     verifyStreetAddress(value) {
         summaryPage.streetAddress.should("have.value", value);
+        return this;
     }
 
     verifyStreetName(value) {
         summaryPage.streetName.should("have.value", value);
+        return this;
     }
 
     verifyPropertyIdentifierType(value) {
         summaryPage.propertyIdentifierType.should("have.value", value);
+        return this;
     }
 
     verifyPropertyIdentifier(value) {
         summaryPage.propertyIdentifier.should("have.value", value);
+        return this;
     }
 
-    verifySiteDetails(streetAddress, censusTract, streetName, buildingDescriptor, identifierType, identifier) {
-        this.verifyStreetAddress(streetAddress);
-        this.verifyCensusTract(censusTract);
-        this.verifyStreetName(streetName);
-        this.verifyBuildingDescriptor(buildingDescriptor);
-        this.verifyPropertyIdentifierType(identifierType);
-        this.verifyPropertyIdentifier(identifier);
+    /**
+     *
+     * @param {string} siteDetails.streetAddress
+     * @param {string} siteDetails.censusTract
+     * @param {string} siteDetails.streetName
+     * @param {string} siteDetails.buildingDescriptor
+     * @param {string} siteDetails.identifierType
+     * @param {string} siteDetails.identifier
+     */
+    verifySiteDetails(siteDetails) {
+        this.verifyStreetAddress(siteDetails.streetAddress)
+            .verifyCensusTract(siteDetails.censusTract)
+            .verifyStreetName(siteDetails.streetName)
+            .verifyBuildingDescriptor(siteDetails.buildingDescriptor)
+            .verifyPropertyIdentifierType(siteDetails.identifierType)
+            .verifyPropertyIdentifier(siteDetails.identifier);
+        return this;
     }
 
     enterYearBuilt(year) {

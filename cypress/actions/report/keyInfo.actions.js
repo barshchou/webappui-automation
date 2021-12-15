@@ -7,34 +7,51 @@ class KeyInfoActions extends BaseActions {
     choosePurpose(purposeValue) {
         keyInfoPage.purposeDropdown.click();
         keyInfoPage.getPurposeOptionByValue(purposeValue).click();
+        return this;
     }
 
     checkAsIsMarketInterestByValue(value) {
         keyInfoPage.asIsMarketInterests.check(value);
+        return this;
     }
 
     checkAsCompleteInterestByValue(value) {
         keyInfoPage.asCompleteInterests.check(value);
+        return this;
     }
 
 
     checkAsStabilizedInterestByValue(value) {
         keyInfoPage.asStabilizedInterests.check(value);
+        return this;
     }
 
-    checkAllInterestAppraisedByValues(values) {
-        this.checkAsIsMarketInterestByValue(values[0]);
-        this.checkAsCompleteInterestByValue(values[1]);
-        this.checkAsStabilizedInterestByValue(values[2]);
+    /**
+     *
+     * @param {string} interestAppraisedData.asIsMarket
+     * @param {string} interestAppraisedData.asComplete
+     * @param {string} interestAppraisedData.asStabilized
+     */
+    checkAllInterestAppraisedByValues(interestAppraisedData) {
+        this.checkAsIsMarketInterestByValue(interestAppraisedData.asIsMarket)
+            .checkAsCompleteInterestByValue(interestAppraisedData.asComplete)
+            .checkAsStabilizedInterestByValue(interestAppraisedData.asStabilized);
+        return this;
     }
 
-    enterDateByType(date, dateType) {
-        keyInfoPage.getDateInputByQA(dateType).clear();
-        if (isDateHasCorrectFormat(date)) {
-            keyInfoPage.getDateInputByQA(dateType).type(date).should("have.value", date);
+    /**
+     *
+     * @param {string} date.type
+     * @param {string} date.date
+     */
+    enterDateByType(date) {
+        keyInfoPage.getDateInputByQA(date.type).clear();
+        if (isDateHasCorrectFormat(date.date)) {
+            keyInfoPage.getDateInputByQA(date.type).type(date.date).should("have.value", date.date);
         } else {
             keyInfoPage.errorMessage.should("exist");
         }
+        return this;
     }
 
     uploadFile(fileName) {
@@ -46,6 +63,7 @@ class KeyInfoActions extends BaseActions {
         const fileNameSplit = fileName.split("/");
         const fileNameToCheck = fileNameSplit[fileNameSplit.length - 1];
         keyInfoPage.inputToCheckUpload.should("have.value", fileNameToCheck);
+        return this;
     }
 }
 

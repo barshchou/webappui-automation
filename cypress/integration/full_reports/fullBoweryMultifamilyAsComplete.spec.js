@@ -1,4 +1,5 @@
-const testData = require("../../fixtures/full_reports/chicago_8524_South/chicago8524South.fixtures.json");
+const testData = require("../../fixtures/full_reports/chicago_8524_South/fullBoweryMultifamilyAsComplete.fixtures.json");
+import newTestData from "../../fixtures/full_reports/chicago_8524_South/fullBoweryMultifamilyAsComplete.fixtures";
 import homepageActions from "../../actions/base/homepage.actions";
 import keyInfoActions from "../../actions/report/keyInfo.actions";
 import navSectionActions from "../../actions/base/navigationSection.actions";
@@ -52,21 +53,19 @@ import sourceInformationActions from "../../actions/final/sourceInformation.acti
 import capRateDiscussionActions from "../../actions/final/capRateDiscussion.actions";
 import insurableReplacementCostActions from "../../actions/final/insurableReplacementCost.actions";
 
-describe("Full doesn't Freddie Mac, only residential, multifamily report ", () => {
+describe("Full bowery way, multifamily as complete report", () => {
     it("Test", () => {
         cy.loginByApi();
-        homepageActions.createReportAdvancedSearch(testData.state, testData.address, testData.propIdentifierType,
-            testData.identifier, testData.reportNumber, testData.templateType, testData.incomeType, testData.conclusionType);
-        keyInfoActions.choosePurpose(testData.purposeValue);
-        keyInfoActions.checkAllInterestAppraisedByValues(testData.interestAppraised);
-        keyInfoActions.enterDateByType(testData.dueDate, testData.dueType);
-        keyInfoActions.enterDateByType(testData.dateOfValuation, testData.valuationType);
-        keyInfoActions.uploadFile(testData.engagementFileName);
+        homepageActions.createReportAdvancedSearch(newTestData.reportCreationData);
+        keyInfoActions.choosePurpose(newTestData.keyInfoPurposeData.purposeValue)
+            .checkAllInterestAppraisedByValues(newTestData.keyInfoPurposeData.interestAppraised)
+            .enterDateByType(newTestData.keyInfoEngagementData.dueDate)
+            .enterDateByType(newTestData.keyInfoEngagementData.dateOfValuation)
+            .uploadFile(newTestData.keyInfoEngagementData.engagementFileName);
         navSectionActions.openClientPageInReport();
-        clientActions.enterClientName(testData.clientName);
+        clientActions.enterClientName(newTestData.clientData.clientName);
         navSectionActions.navigateToPropertySummary();
-        summaryActions.verifySiteDetails(testData.streetAddressToBe, testData.censusTract, testData.streetNameToBe,
-            testData.buildingDescriptor, testData.propIdentifierType, testData.identifier);
+        summaryActions.verifySiteDetails(newTestData.siteDetails);
         summaryActions.enterYearBuilt(testData.yearBuilt);
         summaryActions.enterSiteArea(testData.siteArea);
         summaryActions.fillAsCompleteBuildingDescription(testData.grossArea, testData.numberOfUnits, testData.floorsNumber);

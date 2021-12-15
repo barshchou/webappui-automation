@@ -19,38 +19,53 @@ class HomepageActions extends BaseActions {
         this.clickCreateReportButton();
     }
 
-    createReportAdvancedSearch(state, address, identifierType, identifier, reportNumber, templateValue, incomeValue,
-                               conclusionValue) {
-        this.clickNewReportButton();
-        this.clickAdvancedSearchButton();
-        this.clickSelectStateButton();
-        this.selectStateByName(state);
-        this.enterAddressToSearch(address);
-        this.clickFindPropHeader();
-        this.enterPropertyIdentifierType(identifierType);
-        this.enterPropertyIdentifier(identifier);
-        this.clickSubmitButton();
-        this.enterReportNumber(reportNumber);
-        this.checkTemplateType(templateValue);
-        this.checkIncomeType(incomeValue);
-        this.checkConclusionType(conclusionValue);
-        this.clickCreateReportButton();
+    /**
+     * @param {Readonly<{templateType: string, identifier: string, propIdentifierType: string, address: string, incomeType: string, reportNumber: string, state: string, conclusionType: string}>} reportCreationData
+     * @param {string} reportCreationData.state
+     * @param {string} reportCreationData.address
+     * @param {string} reportCreationData.identifierType
+     * @param {string} reportCreationData.identifier
+     * @param {string} reportCreationData.reportNumber
+     * @param {string} reportCreationData.templateValue
+     * @param {string} reportCreationData.incomeValue
+     * @param {string} reportCreationData.conclusionValue
+     */
+    createReportAdvancedSearch(reportCreationData) {
+        this.clickNewReportButton()
+            .clickAdvancedSearchButton()
+            .clickSelectStateButton()
+            .selectStateByName(reportCreationData.state)
+            .enterAddressToSearch(reportCreationData.address)
+            .clickFindPropHeader()
+            .enterPropertyIdentifierType(reportCreationData.identifierType)
+            .enterPropertyIdentifier(reportCreationData.identifier)
+            .clickSubmitButton()
+            .enterReportNumber(reportCreationData.reportNumber)
+            .checkTemplateType(reportCreationData.templateValue)
+            .checkIncomeType(reportCreationData.incomeValue)
+            .checkConclusionType(reportCreationData.conclusionValue)
+            .clickCreateReportButton();
+        return this;
     }
 
     clickNewReportButton() {
         homepagePage.newReportButton.should("be.enabled").click();
+        return this;
     }
     
     enterAddressToSearch(address) {
         homepagePage.searchAddressField.type(`${address}{enter}`).should("have.value", address);
+        return this;
     }
 
     clickFindPropHeader() {
         homepagePage.findPropertyHeader.click();
+        return this;
     }
 
     clickSubmitButton() {
         homepagePage.submitButton.should("not.be.disabled").click();
+        return this;
     }
 
     clickToSearchResultRow() {
@@ -59,23 +74,28 @@ class HomepageActions extends BaseActions {
 
     enterReportNumber(reportNumber) {
         homepagePage.reportNumberInput.type(reportNumber).should("have.value", reportNumber);
+        return this;
     }
 
     checkTemplateType(typeValue) {
         homepagePage.templateTypesRadios.check(typeValue);
+        return this;
     }
 
     checkIncomeType(value) {
         homepagePage.incomeTypesRadios.check(value);
+        return this;
     }
 
     checkConclusionType(value) {
         homepagePage.valueConclusionsRadios.check(value);
+        return this;
     }
 
     clickCreateReportButton() {
         homepagePage.createReportButton.should("not.be.disabled").click();
         homepagePage.keyInfoBlock.should("be.visible");
+        return this;
     }
 
     enterReportNumberToSearch(number) {
@@ -93,6 +113,7 @@ class HomepageActions extends BaseActions {
 
     clickAdvancedSearchButton() {
         homepagePage.advancedSearchButton.click();
+        return this;
     }
 
     deleteReport(reportNumber = "TestAutoReport") {
@@ -103,18 +124,22 @@ class HomepageActions extends BaseActions {
 
     clickSelectStateButton() {
         homepagePage.selectStateButton.click();
+        return this;
     }
 
     selectStateByName(name) {
         homepagePage.getStateByName(name).click();
+        return this;
     }
 
     enterPropertyIdentifierType(type) {
         homepagePage.propertyIdentifierTypeInput.type(type).should("have.value", type);
+        return this;
     }
 
     enterPropertyIdentifier(value) {
         homepagePage.propertyIdentifierInput.type(value).should("have.value", value);
+        return this;
     }
 
 }
