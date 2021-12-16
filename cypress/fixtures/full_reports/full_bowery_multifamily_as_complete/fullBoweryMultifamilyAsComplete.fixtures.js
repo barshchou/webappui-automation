@@ -32,7 +32,7 @@ const keyInfoEngagementFixture = () => {
             type: "dateOfValuation",
             date: "10-13-2021"
         },
-        engagementFileName: "full_reports/chicago_8524_South/test_engagement.pdf",
+        engagementFileName: "full_reports/full_bowery_multifamily_as_complete/test_engagement.pdf",
     };
 };
 
@@ -52,6 +52,275 @@ const siteDetailsFixture = () => {
         identifier: reportCreationFixture().identifier,
         yearBuilt: "1933",
         siteArea: 6250
+    };
+};
+
+const asCompleteBuildingDescriptionFixture = () => {
+    return {
+        grossArea: 4732,
+        numberOfUnits: 6,
+        floorsNumber: 2,
+        asCompleteExportText: "The purchaser plans to renovate the property.",
+    };
+};
+
+const currentBuildingDescriptionFixture = () => {
+    return {
+        grossArea: asCompleteBuildingDescriptionFixture().grossArea,
+        numberOfUnits: asCompleteBuildingDescriptionFixture().numberOfUnits,
+        floorsNumber: asCompleteBuildingDescriptionFixture().floorsNumber
+    };
+};
+
+const timeOnMarketFixture = () => {
+    return {
+        minMonths: 6,
+        maxMonths: 9,
+    };
+};
+
+const marketResearchFixture = () => {
+    return {
+        neighborhoodValue: "Lakeview",
+        marketArea: "South Chicago",
+        state: "IL",
+        macroMarket: "IL-Chicago",
+        submarket: "IL-South Chicago",
+        dateOfValuation: keyInfoEngagementFixture().dateOfValuation.date
+    };
+};
+
+const ownerFixture = () => {
+    return {
+        name: "Daniel & Audrey Brown"
+    };
+};
+
+const contractDetailsFixture = () => {
+    return {
+        buyer: "RW Taylor Group LLC",
+        contractDate: "09-14-2021",
+        contractPrice: 300000
+    };
+};
+
+const siteInspectionFixture = () => {
+    return {
+        generalPropertyCondition: "Average",
+        stabilizedCondition: "Good",
+        locationsInspectedLabels: ["Building Facade", "Exterior Entrance", "Interior Hallways", "Common Areas",
+            "Mechanical/electrical systems", "Stairs"],
+        stairCondition: "Average"
+    };
+};
+
+const descriptionOfImprovementsFixture = () => {
+    return {
+        foundationValue: "Poured concrete and fieldstone",
+        structuralSystemValue: "Wood joists and masonry",
+        externalWallsLabels: ["Brick", "Masonry"],
+        framingValue: "Wood post and beam",
+        roofType: "Flat built-up",
+        windowsLabels: ["Double-hung"],
+        plumbingLabels: ["PVC", "Copper", "Iron"],
+        sprinklersValue: "None",
+        securityLabels: ["Door Locks"],
+        basementAccess: ["Interior"],
+        basementState: "Unfinished"
+    };
+};
+
+const remainingEconomicLifeFixture = () => {
+    return {
+        totalEconomicLifeToBe: "50",
+        ageEffective: "15"
+    };
+};
+
+const transportationSiteDescriptionFixture = () => {
+    return {
+        commentary: "The South Chicago & Crandon bus stop is 0.2 miles away, a 3-minute walk. It is served by CTA bus " +
+            "line #30.\nThe 87th St. Metra commuter rail station is 1.1 miles away, a 4-minute drive. It is served by " +
+            "the Metra Electric District Line.\nThe 83rd St. Metra commuter rail station is 1.2 miles away, a 4-minute " +
+            "drive. It is served by the Metra Electric District Line.\nChicago Midway International Airport is 13 miles " +
+            "away, about a 25-minute drive.\nChicago-O'Hare International Airport is 29 miles away, about a 45-minute drive."
+    };
+};
+
+const siteDescriptorsFixture = () => {
+    return {
+        siteArea: siteDetailsFixture().siteArea,
+        propertyShape: "Rectangular",
+        propertyFrontage: 50,
+        siteDescriptionItems: ["Access", "Topography", "Drainage", "Paving", "Street Lighting", "Hazardous Substances",
+            "Easements, Encroachments, and Restrictions"],
+        floodHazardCommentary: "According to National Flood Insurance Program Rate Map dated August 19, 2008 Community " +
+            "Panel #17031C0655J, the subject is located within a Zone X flood zone. Zone X is an area of minimal flooding." +
+            " These areas are determined to be outside the 500-year floodplain and are determined to be outside the 1% " +
+            "and 0.2% annual chance floodplains."
+    };
+};
+
+const utilitiesSiteDescriptionFixture = () => {
+    return {
+        utilitiesItems: ["Water/Sewer and Refuse", "Police & Fire Protection", "Gas", "Electricity"],
+        utilitiesDescription: "Comed"
+    };
+};
+
+const heatingCoolingSystemsUtilitiesFixture = () => {
+    return {
+        type: "HVAC system",
+        location: "Basement",
+        commentary: "HVAC system located in the basement for heating and cooling.",
+        systemNumber: 0
+    };
+};
+
+const gasMetersUtilitiesFixture = () => {
+    return {
+        type: "Individual",
+        location: "Basement",
+        commentary: "Gas meters located in the basement. The residential tenants will be directly metered for gas."
+    };
+};
+
+const electricMetersUtilitiesFixture = () => {
+    return {
+        type: "Individual",
+        location: "Basement",
+        commentary: "Electric meters located in the basement. The residential tenants will be directly metered for electricity."
+    };
+};
+
+const hotWaterSystemsUtilitiesFixture = () => {
+    return {
+        type: "individual tanks",
+        location: "Basement",
+        commentary: "Individual tanks located in the basement.",
+        systemNumber: 0
+    };
+};
+
+const amenitiesFixture = () => {
+    return {
+        numberOfParkingPlaces: 6
+    };
+};
+
+const propertyMapsFixture = () => {
+    return {
+        zoningMapFile: "full_reports/full_bowery_multifamily_as_complete/zoning_map.PNG",
+        floodMapFile: "full_reports/full_bowery_multifamily_as_complete/flood_map.PNG",
+        cornerValue: "Mid-Block",
+        taxMapFile: "full_reports/full_bowery_multifamily_as_complete/tax_parcel_map.PNG"
+    };
+};
+
+const facadePhotosFixture = () => {
+    return {
+        section: "Building Facade",
+        photosFolder: "full_reports/full_bowery_multifamily_as_complete/facade_photos",
+        photosFileNames: ["building_facade_1.png", "building_facade_2.png", "building_facade_3.png"]
+    };
+};
+
+const subjectPhotosFixture = () => {
+    return {
+        section: "Subject Street",
+        photosFolder: "full_reports/full_bowery_multifamily_as_complete/subject_street_photos",
+        photosFileNames: ["subject_street_1.png", "subject_street_2.png"]
+    };
+};
+
+const exteriorEntrancePhotosFixture = () => {
+    return {
+        section: "Exterior Entrance",
+        photosFolder: "full_reports/full_bowery_multifamily_as_complete/exterior_entrance_photos",
+        photosFileNames: ["subject_street_1.png", "subject_street_2.png"]
+    };
+};
+
+const stairwayPhotosFixture = () => {
+    return {
+        section: "Typical Stairway",
+        photosFolder: "full_reports/full_bowery_multifamily_as_complete/typical_stairway_photos",
+        photosFileNames: ["typical_stairway_1.png", "typical_stairway_2.png", "typical_stairway_3.png",
+            "typical_stairway_4.png", "typical_stairway_5.png"]
+    };
+};
+
+const hallwayPhotosFixture = () => {
+    return {
+        section: "Typical Hallway",
+        photosFolder: "full_reports/full_bowery_multifamily_as_complete/typical_hallway_photos",
+        photosFileNames: ["typical_hallway_1.png", "typical_hallway_2.png"]
+    };
+};
+
+const kitchenPhotosFixture = () => {
+    return {
+        section: "Typical Kitchen",
+        photosFolder: "full_reports/full_bowery_multifamily_as_complete/typical_kitchen_photos",
+        photosFileNames: ["typical_kitchen_1.png", "typical_kitchen_2.png", "typical_kitchen_3.png", "typical_kitchen_4.png",
+            "typical_kitchen_5.png"]
+    };
+};
+
+const bathroomPhotosFixture = () => {
+    return {
+        section: "Typical Bathroom",
+        photosFolder: "full_reports/full_bowery_multifamily_as_complete/typical_bathroom_photos",
+        photosFileNames: ["typical_bathroom_1.png", "typical_bathroom_2.png"]
+    };
+};
+
+const bedroomPhotosFixture = () => {
+    return {
+        section: "Typical Bedroom",
+        photosFolder: "full_reports/full_bowery_multifamily_as_complete/typical_bedroom_photos",
+        photosFileNames: ["typical_bedroom_1.png", "typical_bedroom_2.png", "typical_bedroom_3.png", "typical_bedroom_4.png"]
+    };
+};
+
+const livingRoomPhotosFixture = () => {
+    return {
+        section: "Typical Living Room",
+        photosFolder: "full_reports/full_bowery_multifamily_as_complete/typical_living_room_photos",
+        photosFileNames: ["living_room_1.png", "living_room_2.png", "living_room_3.png"]
+    };
+};
+
+const electricMetersPhotosFixture = () => {
+    return {
+        section: "Electric Meters",
+        photosFolder: "full_reports/full_bowery_multifamily_as_complete/electric_meters_photos",
+        photosFileNames: ["electric_meters.png"]
+    };
+};
+
+const gasMetersPhotosFixture = () => {
+    return {
+        section: "Gas Meters",
+        photosFolder: "full_reports/full_bowery_multifamily_as_complete/gas_meters_photos",
+        photosFileNames: ["gas_meters.png"]
+    };
+};
+
+const heatingSystemPhotosFixture = () => {
+    return {
+        sectionOldName: "Heating System",
+        section: "HVAC System",
+        photosFolder: "full_reports/full_bowery_multifamily_as_complete/heating_system_photos",
+        photosFileNames: ["hvac_system_1.png", "hvac_system_2.png", "hvac_system_3.png"]
+    };
+};
+
+const hotWaterPhotosFixture = () => {
+    return {
+        section: "Hot Water System",
+        photosFolder: "full_reports/full_bowery_multifamily_as_complete/hot_water_system_photos",
+        photosFileNames: ["hot_water_system.png"]
     };
 };
 
@@ -76,111 +345,170 @@ export const siteDetailsData = () => {
     return Object.freeze(siteDetailsFixture());
 };
 
+export const asCompleteBuildingDescriptionData = () => {
+    return Object.freeze(asCompleteBuildingDescriptionFixture());
+};
+
+export const currentBuildingDescriptionData = () => {
+    return Object.freeze(currentBuildingDescriptionFixture());
+};
+
+export const timeOnMarketData = () => {
+    return Object.freeze(timeOnMarketFixture());
+};
+
+export const marketResearchData = () => {
+    return Object.freeze(marketResearchFixture());
+};
+
+export const ownerData = () => {
+    return Object.freeze(ownerFixture());
+};
+
+export const contractDetailsData = () => {
+    return Object.freeze(contractDetailsFixture());
+};
+
+export const siteInspectionData = () => {
+    return Object.freeze(siteInspectionFixture());
+};
+
+export const descriptionOfImprovementsData = () => {
+    return Object.freeze(descriptionOfImprovementsFixture());
+};
+
+export const remainingEconomicLifeData = () => {
+    return Object.freeze(remainingEconomicLifeFixture());
+};
+
+export const transportationSiteDescriptionData = () => {
+    return Object.freeze(transportationSiteDescriptionFixture());
+};
+
+export const siteDescriptorsData = () => {
+    return Object.freeze(siteDescriptorsFixture());
+};
+
+export const utilitiesSiteDescriptionData = () => {
+    return Object.freeze(utilitiesSiteDescriptionFixture());
+};
+
+export const heatingCoolingSystemsUtilitiesData = () => {
+    return Object.freeze(heatingCoolingSystemsUtilitiesFixture());
+};
+
+export const gasMetersUtilitiesData = () => {
+    return Object.freeze(gasMetersUtilitiesFixture());
+};
+
+export const electricMetersUtilitiesData = () => {
+    return Object.freeze(electricMetersUtilitiesFixture());
+};
+
+export const hotWaterSystemsUtilitiesData = () => {
+    return Object.freeze(hotWaterSystemsUtilitiesFixture());
+};
+
+export const amenitiesData = () => {
+    return Object.freeze(amenitiesFixture());
+};
+
+export const propertyMapsData = () => {
+    return Object.freeze(propertyMapsFixture());
+};
+
+export const facadePhotosData = () => {
+    return Object.freeze(facadePhotosFixture());
+};
+
+export const subjectPhotosData = () => {
+    return Object.freeze(subjectPhotosFixture());
+};
+
+export const exteriorEntrancePhotosData = () => {
+    return Object.freeze(exteriorEntrancePhotosFixture());
+};
+
+export const stairwayPhotosData = () => {
+    return Object.freeze(stairwayPhotosFixture());
+};
+
+export const hallwayPhotosData = () => {
+    return Object.freeze(hallwayPhotosFixture());
+};
+
+export const kitchenPhotosData = () => {
+    return Object.freeze(kitchenPhotosFixture());
+};
+
+export const bathroomPhotosData = () => {
+    return Object.freeze(bathroomPhotosFixture());
+};
+
+export const bedroomPhotosData = () => {
+    return Object.freeze(bedroomPhotosFixture());
+};
+
+export const livingRoomPhotosData = () => {
+    return Object.freeze(livingRoomPhotosFixture());
+};
+
+export const electricMetersPhotosData = () => {
+    return Object.freeze(electricMetersPhotosFixture());
+};
+
+export const gasMetersPhotosData = () => {
+    return Object.freeze(gasMetersPhotosFixture());
+};
+
+export const heatingSystemPhotosData = () => {
+    return Object.freeze(heatingSystemPhotosFixture());
+};
+
+export  const hotWaterPhotosData = () => {
+    return Object.freeze(hotWaterPhotosFixture());
+};
+
 export default {
     reportCreationData: reportCreationData(),
     keyInfoPurposeData: keyInfoPurposeData(),
     keyInfoEngagementData: keyInfoEngagementData(),
     clientData: clientData(),
-    siteDetails: siteDetailsData()
+    siteDetails: siteDetailsData(),
+    asCompleteBuildingDescription: asCompleteBuildingDescriptionData(),
+    currentBuildingDescription: currentBuildingDescriptionData(),
+    timeOnMarket: timeOnMarketData(),
+    marketResearch: marketResearchData(),
+    owner: ownerData(),
+    contractDetails: contractDetailsData(),
+    siteInspection: siteInspectionData(),
+    descriptionOfImprovements: descriptionOfImprovementsData(),
+    remainingEconomicLife: remainingEconomicLifeData(),
+    transportationSiteDescription: transportationSiteDescriptionData(),
+    siteDescriptors: siteDescriptorsData(),
+    utilitiesSiteDescription: utilitiesSiteDescriptionData(),
+    heatingCoolingSystemsUtilities: heatingCoolingSystemsUtilitiesData(),
+    gasMetersUtilities: gasMetersUtilitiesData(),
+    electricMetersUtilities: electricMetersUtilitiesData(),
+    hotWaterSystemsUtilities: hotWaterSystemsUtilitiesData(),
+    amenities: amenitiesData(),
+    propertyMaps: propertyMapsData(),
+    facadePhotos: facadePhotosData(),
+    subjectPhotos: subjectPhotosData(),
+    exteriorEntrancePhotos: exteriorEntrancePhotosData(),
+    stairwayPhotos: stairwayPhotosData(),
+    hallwayPhotos: hallwayPhotosData(),
+    kitchenPhotos: kitchenPhotosData(),
+    bathroomPhotos: bathroomPhotosData(),
+    bedroomPhotos: bedroomPhotosData(),
+    livingRoomPhotos: livingRoomPhotosData(),
+    electricMetersPhotos: electricMetersPhotosData(),
+    gasMetersPhotos: gasMetersPhotosData(),
+    heatingSystemPhotos: heatingSystemPhotosData(),
+    hotWaterPhotos: hotWaterPhotosData()
 };
 
 const testDataOld = {
-    "grossArea": 4732,
-    "numberOfUnits": 6,
-    "floorsNumber": 2,
-    "asCompleteExportText": "The purchaser plans to renovate the property.",
-    "minExposureMonths": 6,
-    "maxExposureMonths": 9,
-    "neighborhoodValue": "Lakeview",
-    "marketArea": "South Chicago",
-    "stateToBe": "IL",
-    "macroMarket": "IL-Chicago",
-    "submarket": "IL-South Chicago",
-    "currentOwner": "Daniel & Audrey Brown",
-    "buyer": "RW Taylor Group LLC",
-    "contractDate": "09-14-2021",
-    "contractPrice": 300000,
-    "generalPropertyCondition": "Average",
-    "stabilizedCondition": "Good",
-    "locationsInspectedLabels": ["Building Facade", "Exterior Entrance", "Interior Hallways", "Common Areas",
-        "Mechanical/electrical systems", "Stairs"],
-    "stairCondition": "Average",
-    "foundationValue": "Poured concrete and fieldstone",
-    "structuralSystemValue": "Wood joists and masonry",
-    "externalWallsLabels": ["Brick", "Masonry"],
-    "framingValue": "Wood post and beam",
-    "roofType": "Flat built-up",
-    "windowsLabels": ["Double-hung"],
-    "plumbingLabels": ["PVC", "Copper", "Iron"],
-    "sprinklersValue": "None",
-    "securityLabels": ["Door Locks"],
-    "basementAccess": ["Interior"],
-    "basementState": "Unfinished",
-    "totalEconomicLifeToBe": "50",
-    "ageEffective": "15",
-    "transportationCommentary": "The South Chicago & Crandon bus stop is 0.2 miles away, a 3-minute walk. It is served by CTA bus line #30.\nThe 87th St. Metra commuter rail station is 1.1 miles away, a 4-minute drive. It is served by the Metra Electric District Line.\nThe 83rd St. Metra commuter rail station is 1.2 miles away, a 4-minute drive. It is served by the Metra Electric District Line.\nChicago Midway International Airport is 13 miles away, about a 25-minute drive.\nChicago-O'Hare International Airport is 29 miles away, about a 45-minute drive.",
-    "propertyShape": "Rectangular",
-    "propertyFrontage": 50,
-    "siteDescriptionItems": ["Access", "Topography", "Drainage", "Paving", "Street Lighting", "Hazardous Substances",
-        "Easements, Encroachments, and Restrictions"],
-    "floodHazardCommentary": "According to National Flood Insurance Program Rate Map dated August 19, 2008 Community Panel #17031C0655J, the subject is located within a Zone X flood zone. Zone X is an area of minimal flooding. These areas are determined to be outside the 500-year floodplain and are determined to be outside the 1% and 0.2% annual chance floodplains.",
-    "utilitiesItems": ["Water/Sewer and Refuse", "Police & Fire Protection", "Gas", "Electricity"],
-    "utilitiesDescription": "Comed",
-    "heatingCoolingSystemType": "HVAC system",
-    "allSystemsLocation": "Basement",
-    "heatingCollingCommentary": "HVAC system located in the basement for heating and cooling.",
-    "gasElectricMetersType": "Individual",
-    "gasMetersCommentary": "Gas meters located in the basement. The residential tenants will be directly metered for gas.",
-    "electricComm": "Electric meters located in the basement. The residential tenants will be directly metered for electricity.",
-    "hotWaterSystemType": "individual tanks",
-    "hotWaterSystemCommentary": "Individual tanks located in the basement.",
-    "numberOfParkingPlaces": 6,
-    "zoningMapFileName": "full_reports/chicago_8524_South/zoning_map.PNG",
-    "floodMapFileName": "full_reports/chicago_8524_South/flood_map.PNG",
-    "cornerValue": "Mid-Block",
-    "taxMapFileName": "full_reports/chicago_8524_South/tax_parcel_map.PNG",
-    "facadeSection": "Building Facade",
-    "facadePhotosFolder": "full_reports/chicago_8524_South/facade_photos",
-    "facadePhotosFileNames": ["building_facade_1.png", "building_facade_2.png", "building_facade_3.png"],
-    "subjectSection": "Subject Street",
-    "subjectStreetPhotosFolder": "full_reports/chicago_8524_South/subject_street_photos",
-    "subjectStreetFileNames": ["subject_street_1.png", "subject_street_2.png"],
-    "exteriorSection": "Exterior Entrance",
-    "exteriorEntranceFolder": "full_reports/chicago_8524_South/exterior_entrance_photos",
-    "exteriorEntranceFileNames": ["exterior_entrance_1.png", "exterior_entrance_2.png", "exterior_entrance_3.png"],
-    "stairwaySection": "Typical Stairway",
-    "typicalStairwayFolder": "full_reports/chicago_8524_South/typical_stairway_photos",
-    "typicalStairwayFiles": ["typical_stairway_1.png", "typical_stairway_2.png", "typical_stairway_3.png",
-        "typical_stairway_4.png", "typical_stairway_5.png"],
-    "hallwaySection": "Typical Hallway",
-    "typicalHallwayFolder": "full_reports/chicago_8524_South/typical_hallway_photos",
-    "typicalHallwayFiles": ["typical_hallway_1.png", "typical_hallway_2.png"],
-    "kitchenSection": "Typical Kitchen",
-    "kitchenFolder": "full_reports/chicago_8524_South/typical_kitchen_photos",
-    "kitchenFiles": ["typical_kitchen_1.png", "typical_kitchen_2.png", "typical_kitchen_3.png", "typical_kitchen_4.png",
-        "typical_kitchen_5.png"],
-    "bathroomSection": "Typical Bathroom",
-    "bathroomFolder": "full_reports/chicago_8524_South/typical_bathroom_photos",
-    "bathroomFiles": ["typical_bathroom_1.png", "typical_bathroom_2.png"],
-    "bedroomSection": "Typical Bedroom",
-    "bedroomFolder": "full_reports/chicago_8524_South/typical_bedroom_photos",
-    "bedroomFiles": ["typical_bedroom_1.png", "typical_bedroom_2.png", "typical_bedroom_3.png", "typical_bedroom_4.png"],
-    "livingRoomSection": "Typical Living Room",
-    "livingRoomFolder": "full_reports/chicago_8524_South/typical_living_room_photos",
-    "livingRoomFiles": ["living_room_1.png", "living_room_2.png", "living_room_3.png"],
-    "electricMetersSection": "Electric Meters",
-    "electricMetersFolder": "full_reports/chicago_8524_South/electric_meters_photos",
-    "electricMetersFiles": ["electric_meters.png"],
-    "gasMetersSection": "Gas Meters",
-    "gasMetersFolder": "full_reports/chicago_8524_South/gas_meters_photos",
-    "gasMetersFiles": ["gas_meters.png"],
-    "heatingSystemSectionOldName": "Heating System",
-    "heatingSystemNewName": "HVAC System",
-    "heatingSystemFolder": "full_reports/chicago_8524_South/heating_system_photos",
-    "heatingSystemPhotos": ["hvac_system_1.png", "hvac_system_2.png", "hvac_system_3.png"],
-    "hotWaterSection": "Hot Water System",
-    "hotWaterFolder": "full_reports/chicago_8524_South/hot_water_system_photos",
-    "hotWaterPhotos": ["hot_water_system.png"],
     "cityToBe": "Chicago",
     "propertyUse": "Residential",
     "permittedUses": ["residential"],
@@ -273,7 +601,7 @@ const testDataOld = {
         "footage": 0, "sourceInfo": "externalDatabase", "bedrooms": 2, "rooms": 4, "bathrooms": 0
     },
     "sourceOfInfoText": "External Database",
-    "compMapPath": "full_reports/chicago_8524_South/comp_map.png",
+    "compMapPath": "full_reports/full_bowery_multifamily_as_complete/comp_map.png",
     "reconcilIntroComm": "Important considerations in determining potential rental value include location, access to transportation and neighborhood amenities, and building design and condition. The subject is in a desirable section of Lakeview, a neighborhood that has seen significant investment in the past 5 to 10 years. The site has good access to  transportation, and the block is appealing. The comparables are similar in their physical and locational appeal and are good indicators of value. Thus, our analysis of the forecast of market rents is presented:",
     "marketConclusion": 1100,
     "marketBreakdownDropValue": "all market oriented",
@@ -603,4 +931,4 @@ const testDataOld = {
     },
     "subjectState": "Illinois",
     "subjectLocale": "Chicago"
-}
+};

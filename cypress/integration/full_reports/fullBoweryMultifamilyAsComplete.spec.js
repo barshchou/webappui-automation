@@ -1,5 +1,5 @@
-const testData = require("../../fixtures/full_reports/chicago_8524_South/fullBoweryMultifamilyAsComplete.fixtures.json");
-import newTestData from "../../fixtures/full_reports/chicago_8524_South/fullBoweryMultifamilyAsComplete.fixtures";
+const testData = require("../../fixtures/full_reports/full_bowery_multifamily_as_complete/fullBoweryMultifamilyAsComplete.fixtures.json");
+import newTestData from "../../fixtures/full_reports/full_bowery_multifamily_as_complete/fullBoweryMultifamilyAsComplete.fixtures";
 import homepageActions from "../../actions/base/homepage.actions";
 import keyInfoActions from "../../actions/report/keyInfo.actions";
 import navSectionActions from "../../actions/base/navigationSection.actions";
@@ -65,108 +65,97 @@ describe("Full bowery way, multifamily as complete report", () => {
         navSectionActions.openClientPageInReport();
         clientActions.enterClientName(newTestData.clientData.clientName);
         navSectionActions.navigateToPropertySummary();
-        summaryActions.verifySiteDetails(newTestData.siteDetails);
-        summaryActions.enterYearBuilt(testData.yearBuilt);
-        summaryActions.enterSiteArea(testData.siteArea);
-        summaryActions.fillAsCompleteBuildingDescription(testData.grossArea, testData.numberOfUnits, testData.floorsNumber);
-        summaryActions.clickWalkUpTypeButtons();
-        summaryActions.fillCurrentBuildDescription(testData.grossArea, testData.numberOfUnits, testData.floorsNumber);
-        summaryActions.editAsCompleteExport(testData.asCompleteExportText);
-        summaryActions.clickSaveContinueButton();
-        marketActions.verifyTimeOnMarket(testData.minExposureMonths, testData.maxExposureMonths);
-        marketActions.fillMarketResearch(testData);
-        marketActions.clickPullFromDropbox();
-        marketActions.verifyAnyDocumentInputIsNotEmpty();
-        marketActions.clickSaveContinueButton();
-        historyActions.enterCurrentOwner(testData.currentOwner);
-        historyActions.checkIsUnderContractCheckbox();
-        historyActions.enterContractDetails(testData.buyer, testData.contractDate, testData.contractPrice);
-        photosActions.clickSaveContinueButton();
-        descriptionActions.selectGeneralPropertyCondition(testData.generalPropertyCondition);
-        descriptionActions.selectAsStabilizedPropertyCondition(testData.stabilizedCondition);
-        descriptionActions.checkListCheckboxesByLabels(testData.locationsInspectedLabels);
-        descriptionActions.checkStairConditionByValue(testData.stairCondition);
-        descriptionActions.checkFoundationByValue(testData.foundationValue);
-        descriptionActions.checkStructuralSystemByValue(testData.structuralSystemValue);
-        descriptionActions.checkListCheckboxesByLabels(testData.externalWallsLabels);
-        descriptionActions.checkFramingByValue(testData.framingValue);
-        descriptionActions.checkRoofTypeByValue(testData.roofType);
-        descriptionActions.checkListCheckboxesByLabels(testData.windowsLabels);
-        descriptionActions.checkListCheckboxesByLabels(testData.plumbingLabels);
-        descriptionActions.checkSprinklersByValue(testData.sprinklersValue);
-        descriptionActions.checkListCheckboxesByLabels(testData.securityLabels);
-        descriptionActions.checkContainsBasement();
-        descriptionActions.checkListCheckboxesByLabels(testData.basementAccess);
-        descriptionActions.checkBasementStateByValue(testData.basementState);
-        descriptionActions.verifyTotalEconomicLife(testData.totalEconomicLifeToBe);
-        descriptionActions.enterAgeEffective(testData.ageEffective);
-        descriptionActions.clickSaveContinueButton();
-        siteDescriptionActions.editTransportationDiscussionCommentary(testData.transportationCommentary);
-        siteDescriptionActions.checkSurroundingResidental();
-        siteDescriptionActions.verifySiteArea(testData.siteArea);
-        siteDescriptionActions.verifyPropertyShape(testData.propertyShape);
+        summaryActions.verifySiteDetails(newTestData.siteDetails)
+            .enterYearBuilt(newTestData.siteDetails.yearBuilt)
+            .enterSiteArea(newTestData.siteDetails.siteArea)
+            .fillAsCompleteBuildingDescription(newTestData.asCompleteBuildingDescription)
+            .clickWalkUpTypeButtons()
+            .fillCurrentBuildDescription(newTestData.currentBuildingDescription)
+            .editAsCompleteExport(newTestData.asCompleteBuildingDescription.asCompleteExportText)
+            .clickSaveContinueButton();
+        marketActions.verifyTimeOnMarket(newTestData.timeOnMarket)
+            .fillMarketResearch(newTestData.marketResearch)
+            .clickPullFromDropbox()
+            .verifyAnyDocumentInputIsNotEmpty()
+            .clickSaveContinueButton();
+        historyActions.enterCurrentOwner(newTestData.owner.name)
+            .checkIsUnderContractCheckbox()
+            .enterContractDetails(newTestData.contractDetails)
+            .clickSaveContinueButton();
+        descriptionActions.selectGeneralPropertyCondition(newTestData.siteInspection.generalPropertyCondition)
+            .selectAsStabilizedPropertyCondition(newTestData.siteInspection.stabilizedCondition)
+            .checkListCheckboxesByLabels(newTestData.siteInspection.locationsInspectedLabels)
+            .checkStairConditionByValue(newTestData.siteInspection.stairCondition)
+            .checkFoundationByValue(newTestData.descriptionOfImprovements.foundationValue)
+            .checkStructuralSystemByValue(newTestData.descriptionOfImprovements.structuralSystemValue)
+            .checkListCheckboxesByLabels(newTestData.descriptionOfImprovements.externalWallsLabels)
+            .checkFramingByValue(newTestData.descriptionOfImprovements.framingValue)
+            .checkRoofTypeByValue(newTestData.descriptionOfImprovements.roofType)
+            .checkListCheckboxesByLabels(newTestData.descriptionOfImprovements.windowsLabels)
+            .checkListCheckboxesByLabels(newTestData.descriptionOfImprovements.plumbingLabels)
+            .checkSprinklersByValue(newTestData.descriptionOfImprovements.sprinklersValue)
+            .checkListCheckboxesByLabels(newTestData.descriptionOfImprovements.securityLabels)
+            .checkContainsBasement()
+            .checkListCheckboxesByLabels(newTestData.descriptionOfImprovements.basementAccess)
+            .checkBasementStateByValue(newTestData.descriptionOfImprovements.basementState)
+            .verifyTotalEconomicLife(newTestData.remainingEconomicLife.totalEconomicLifeToBe)
+            .enterAgeEffective(newTestData.remainingEconomicLife.ageEffective)
+            .clickSaveContinueButton();
+        siteDescriptionActions.editTransportationDiscussionCommentary(newTestData.transportationSiteDescription.commentary)
+            .checkSurroundingResidential()
+            .verifySiteArea(newTestData.siteDescriptors.siteArea)
+            .verifyPropertyShape(newTestData.siteDescriptors.propertyShape);
         navSectionActions.openMapsInProperty();
-        mapsActions.enterPropertyFrontage(testData.propertyFrontage);
+        mapsActions.enterPropertyFrontage(newTestData.siteDescriptors.propertyFrontage);
         navSectionActions.openSiteDescriptionInProperty();
-        siteDescriptionActions.verifyPropertyFrontage(testData.propertyFrontage);
-        siteDescriptionActions.verifySiteDescriptionItems(testData.siteDescriptionItems);
-        siteDescriptionActions.editFloodHazardCommentary(testData.floodHazardCommentary);
-        siteDescriptionActions.verifyUtilitiesItems(testData.utilitiesItems);
-        siteDescriptionActions.verifyUtilitiesDescriptions(testData.utilitiesDescription);
-        siteDescriptionActions.clickSaveContinueButton();
-        utilitiesActions.checkHeatingSystem();
-        utilitiesActions.addHeatingSystemParameters(testData.heatingCoolingSystemType, testData.allSystemsLocation);
-        utilitiesActions.checkCoolingSystem();
-        utilitiesActions.addCoolingSystemParameters(testData.heatingCoolingSystemType, testData.allSystemsLocation);
-        utilitiesActions.verifyHeatingCoolingCommentary(testData.heatingCollingCommentary);
-        utilitiesActions.checkGasMeters();
-        utilitiesActions.addGasMetersParameters(testData.gasElectricMetersType, testData.allSystemsLocation);
-        utilitiesActions.verifyGasMetersCommentary(testData.gasMetersCommentary);
-        utilitiesActions.checkElectricMetersCheckbox();
-        utilitiesActions.addElectricMetersParameters(testData.gasElectricMetersType, testData.allSystemsLocation);
-        utilitiesActions.verifyElectricMetersCommentary(testData.electricComm);
-        utilitiesActions.checkHotWaterSystemsCheckbox();
-        utilitiesActions.addHotWaterSystemParameters(testData.hotWaterSystemType, testData.allSystemsLocation);
-        utilitiesActions.verifyHotWaterSystemCommentary(testData.hotWaterSystemCommentary);
-        utilitiesActions.clickSaveContinueButton();
-        amenitiesActions.addParkingPlaces(testData.numberOfParkingPlaces);
-        amenitiesActions.checkHasNoUnitAmenities();
-        amenitiesActions.clickSaveContinueButton();
-        mapsActions.uploadZoningMap(testData.zoningMapFileName);
-        mapsActions.uploadFloodMap(testData.floodMapFileName);
-        mapsActions.chooseCornerByValue(testData.cornerValue);
-        mapsActions.uploadTaxMap(testData.taxMapFileName);
-        mapsActions.captureSubjectMap();
-        mapsActions.clickSaveContinueButton();
-        photosActions.uploadPhotosBySectionName(testData.facadeSection, testData.facadePhotosFolder,
-            testData.facadePhotosFileNames);
-        photosActions.uploadPhotosBySectionName(testData.subjectSection, testData.subjectStreetPhotosFolder,
-            testData.subjectStreetFileNames);
-        photosActions.uploadPhotosBySectionName(testData.exteriorSection, testData.exteriorEntranceFolder,
-            testData.exteriorEntranceFileNames);
-        photosActions.uploadPhotosBySectionName(testData.stairwaySection, testData.typicalStairwayFolder,
-            testData.typicalStairwayFiles);
-        photosActions.uploadPhotosBySectionName(testData.hallwaySection, testData.typicalHallwayFolder,
-            testData.typicalHallwayFiles);
-        photosActions.uploadPhotosBySectionName(testData.kitchenSection, testData.kitchenFolder, testData.kitchenFiles);
-        photosActions.uploadPhotosBySectionName(testData.bathroomSection, testData.bathroomFolder,
-            testData.bathroomFiles);
-        photosActions.uploadPhotosBySectionName(testData.bedroomSection, testData.bedroomFolder, testData.bedroomFiles);
-        photosActions.uploadPhotosBySectionName(testData.livingRoomSection, testData.livingRoomFolder,
-            testData.livingRoomFiles);
-        photosActions.uploadPhotosBySectionName(testData.electricMetersSection, testData.electricMetersFolder,
-            testData.electricMetersFiles);
-        photosActions.uploadPhotosBySectionName(testData.gasMetersSection, testData.gasMetersFolder,
-            testData.gasMetersFiles);
-        photosActions.editSectionName(testData.heatingSystemSectionOldName, testData.heatingSystemNewName);
-        photosActions.clickSaveButton();
-        photosActions.verifyProgressBarNotExist();
+        siteDescriptionActions.verifyPropertyFrontage(newTestData.siteDescriptors.propertyFrontage)
+            .verifySiteDescriptionItems(newTestData.siteDescriptors.siteDescriptionItems)
+            .editFloodHazardCommentary(newTestData.siteDescriptors.floodHazardCommentary)
+            .verifyUtilitiesItems(newTestData.utilitiesSiteDescription.utilitiesItems)
+            .verifyUtilitiesDescriptions(newTestData.utilitiesSiteDescription.utilitiesDescription)
+            .clickSaveContinueButton();
+        utilitiesActions.checkHeatingSystem()
+            .addHeatingSystemParameters(newTestData.heatingCoolingSystemsUtilities)
+            .checkCoolingSystem()
+            .addCoolingSystemParameters(newTestData.heatingCoolingSystemsUtilities)
+            .verifyHeatingCoolingCommentary(newTestData.heatingCoolingSystemsUtilities.commentary)
+            .checkGasMeters()
+            .addGasMetersParameters(newTestData.gasMetersUtilities)
+            .verifyGasMetersCommentary(newTestData.gasMetersUtilities.commentary)
+            .checkElectricMetersCheckbox()
+            .addElectricMetersParameters(newTestData.electricMetersUtilities)
+            .verifyElectricMetersCommentary(newTestData.electricMetersUtilities.commentary)
+            .checkHotWaterSystemsCheckbox()
+            .addHotWaterSystemParameters(newTestData.hotWaterSystemsUtilities)
+            .verifyHotWaterSystemCommentary(newTestData.hotWaterSystemsUtilities.commentary)
+            .clickSaveContinueButton();
+        amenitiesActions.addParkingPlaces(newTestData.amenities.numberOfParkingPlaces)
+            .checkHasNoUnitAmenities()
+            .clickSaveContinueButton();
+        mapsActions.uploadZoningMap(newTestData.propertyMaps.zoningMapFile)
+            .uploadFloodMap(newTestData.propertyMaps.floodMapFile)
+            .chooseCornerByValue(newTestData.propertyMaps.cornerValue)
+            .uploadTaxMap(newTestData.propertyMaps.taxMapFile)
+            .captureSubjectMap()
+            .clickSaveContinueButton();
+        photosActions.uploadPhotosBySectionName(newTestData.facadePhotos)
+            .uploadPhotosBySectionName(newTestData.subjectPhotos)
+            .uploadPhotosBySectionName(newTestData.exteriorEntrancePhotos)
+            .uploadPhotosBySectionName(newTestData.stairwayPhotos)
+            .uploadPhotosBySectionName(newTestData.hallwayPhotos)
+            .uploadPhotosBySectionName(newTestData.kitchenPhotos)
+            .uploadPhotosBySectionName(newTestData.bathroomPhotos)
+            .uploadPhotosBySectionName(newTestData.bedroomPhotos)
+            .uploadPhotosBySectionName(newTestData.livingRoomPhotos)
+            .uploadPhotosBySectionName(newTestData.electricMetersPhotos)
+            .uploadPhotosBySectionName(newTestData.gasMetersPhotos)
+            .editSectionName(newTestData.heatingSystemPhotos)
+            .clickSaveButton()
+            .verifyProgressBarNotExist();
         cy.reload();
-        photosActions.uploadPhotosBySectionName(testData.heatingSystemNewName, testData.heatingSystemFolder,
-            testData.heatingSystemPhotos);
-        photosActions.uploadPhotosBySectionName(testData.hotWaterSection, testData.hotWaterFolder,
-            testData.hotWaterPhotos);
-        photosActions.clickSaveContinueButton();
+        photosActions.uploadPhotosBySectionName(newTestData.heatingSystemPhotos)
+            .uploadPhotosBySectionName(newTestData.hotWaterPhotos)
+            .clickSaveContinueButton();
         zoningActions.enterZoneNames(testData.zonesNames);
         zoningActions.verifyPropertyIdentification(testData.siteArea, testData.cityToBe);
         zoningActions.verifyPropIdentificationCommentary(testData.siteArea, testData.zonesNames[0],

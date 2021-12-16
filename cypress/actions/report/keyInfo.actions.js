@@ -4,6 +4,10 @@ import {isDateHasCorrectFormat} from "../../../utils/date.utils";
 import {getUploadFixture} from "../../../utils/fixtures.utils";
 
 class KeyInfoActions extends BaseActions {
+    /**
+     * @param {string} purposeValue
+     * @returns {KeyInfoActions}
+     */
     choosePurpose(purposeValue) {
         keyInfoPage.purposeDropdown.click();
         keyInfoPage.getPurposeOptionByValue(purposeValue).click();
@@ -27,10 +31,8 @@ class KeyInfoActions extends BaseActions {
     }
 
     /**
-     *
-     * @param {string} interestAppraisedData.asIsMarket
-     * @param {string} interestAppraisedData.asComplete
-     * @param {string} interestAppraisedData.asStabilized
+     * @param {Readonly<{asIsMarket: string, asComplete: string, asStabilized: string}>} interestAppraisedData
+     * @returns {KeyInfoActions}
      */
     checkAllInterestAppraisedByValues(interestAppraisedData) {
         this.checkAsIsMarketInterestByValue(interestAppraisedData.asIsMarket)
@@ -41,8 +43,8 @@ class KeyInfoActions extends BaseActions {
 
     /**
      *
-     * @param {string} date.type
-     * @param {string} date.date
+     * @param {Readonly<{type: string, date: string}>} date
+     * @returns {KeyInfoActions}
      */
     enterDateByType(date) {
         keyInfoPage.getDateInputByQA(date.type).clear();
@@ -54,6 +56,10 @@ class KeyInfoActions extends BaseActions {
         return this;
     }
 
+    /**
+     * @param {string} fileName
+     * @returns {KeyInfoActions}
+     */
     uploadFile(fileName) {
         keyInfoPage.cloudButton.should("exist").click();
         keyInfoPage.clickHereText.should("be.visible");
