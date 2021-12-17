@@ -156,32 +156,27 @@ describe("Full bowery way, multifamily as complete report", () => {
         photosActions.uploadPhotosBySectionName(newTestData.heatingSystemPhotos)
             .uploadPhotosBySectionName(newTestData.hotWaterPhotos)
             .clickSaveContinueButton();
-        zoningActions.enterZoneNames(testData.zonesNames);
-        zoningActions.verifyPropertyIdentification(testData.siteArea, testData.cityToBe);
-        zoningActions.verifyPropIdentificationCommentary(testData.siteArea, testData.zonesNames[0],
-            testData.cityToBe, testData.propIdentifierType, testData.identifier);
-        zoningActions.verifyIntroductionCommentary(testData.streetAddressToBe, testData.zonesNames[0]);
-        zoningActions.clickUsesTab();
-        zoningActions.choosePermittedPropertyUse(testData.propertyUse);
-        zoningActions.chooseCurrentPropertyUse(testData.propertyUse);
-        zoningActions.chooseIsConformingAllowableUses();
-        zoningActions.verifyConformingUseCommentary(testData.zonesNames, true, testData.permittedUses,
-            testData.streetAddressToBe, testData.currentUses);
-        zoningActions.clickBulkTab();
-        zoningActions.deleteRowsByRegulationValues(testData.regulationValues);
-        zoningActions.addBulkRegulation(testData.regulationNew);
-        zoningActions.editAllDataByRegName(testData.regulationExist1);
-        zoningActions.editAllDataByRegName(testData.regulationExist2);
-        zoningActions.editAllDataByRegName(testData.regulationExist3);
-        zoningActions.editAllDataByRegName(testData.regulationExist4);
-        zoningActions.verifyComplyingCommentary(testData.complyingCommentary);
-        zoningActions.clickParkingTab();
-        zoningActions.verifyParkingResidentalUnits(testData.numberOfUnits);
-        zoningActions.verifyActualParkingSpaces(testData.numberOfParkingPlaces);
-        zoningActions.enterRequiredParkingSpaces(testData.requiredParkingPlaces);
-        zoningActions.chooseIsConformingWithParkingRequirements();
-        zoningActions.verifyParkingConformityCommentary(testData.requiredParkingPlaces, testData.numberOfParkingPlaces);
-        zoningActions.clickSaveContinueButton();
+        zoningActions.enterZoneNames(newTestData.zoningDescriptionInformation.zonesNames)
+            .verifyPropertyIdentification(newTestData.zoningDescriptionInformation)
+            .verifyPropIdentificationCommentary(newTestData.zoningDescriptionInformation.propertyIdentificationCommentary)
+            .verifyIntroductionCommentary(newTestData.zoningDescriptionInformation.introductionCommentary)
+            .clickUsesTab()
+            .choosePermittedPropertyUse(newTestData.zoningDescriptionUses.permittedPropertyUse)
+            .chooseCurrentPropertyUse(newTestData.zoningDescriptionUses.currentPropertyUse)
+            .chooseIsConformingAllowableUses()
+            .verifyConformingUseCommentary(newTestData.zoningDescriptionUses)
+            .clickBulkTab()
+            .deleteRowsByRegulationValues(newTestData.zoningDescriptionBulk.regulationValuesDelete)
+            .addBulkRegulation(newTestData.zoningDescriptionBulk.regulationNew)
+            .editListRegulationsDataByNames(newTestData.zoningDescriptionBulk.existingRegulations)
+            .verifyComplyingCommentary(newTestData.zoningDescriptionBulk.complyingCommentary)
+            .clickParkingTab()
+            .verifyParkingResidentialUnits(newTestData.zoningDescriptionParking.numberOfUnits)
+            .verifyActualParkingSpaces(newTestData.zoningDescriptionParking.numberOfParkingPlaces)
+            .enterRequiredParkingSpaces(newTestData.zoningDescriptionParking.requiredParkingPlaces)
+            .chooseIsConformingWithParkingRequirements(newTestData.zoningDescriptionParking.isConforming)
+            .verifyParkingConformityCommentary(newTestData.zoningDescriptionParking)
+            .clickSaveContinueButton();
         renovationsActions.chooseRenovationByValue(testData.renovationDropValue);
         renovationsActions.clickTotalButton();
         renovationsActions.fillTotalTable(testData.renovationsPeriod, testData.renovationTotalAmount);

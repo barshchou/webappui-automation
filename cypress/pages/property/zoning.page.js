@@ -39,6 +39,7 @@ class ZoningPage extends BasePage{
     get requiredParkingInput() {return cy.get("[name='requiredParkingSpaces']");}
     get isConformingWithParkingRequirements() {return cy.get("[name='isConformingWithParkingRequirements']");}
     get parkingConformityCommentary() {return cy.get("[data-qa*='parkingDiscussion.commentary']");}
+    getElementToCheckRadio(value) {return cy.get(`[data-qa=checked] input[value='${value}']`);}
 }
 
 export default new ZoningPage();

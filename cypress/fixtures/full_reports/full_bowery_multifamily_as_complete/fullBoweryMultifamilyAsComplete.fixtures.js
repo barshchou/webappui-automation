@@ -237,7 +237,7 @@ const exteriorEntrancePhotosFixture = () => {
     return {
         section: "Exterior Entrance",
         photosFolder: "full_reports/full_bowery_multifamily_as_complete/exterior_entrance_photos",
-        photosFileNames: ["subject_street_1.png", "subject_street_2.png"]
+        photosFileNames: ["exterior_entrance_1.png", "exterior_entrance_2.png", "exterior_entrance_3.png"]
     };
 };
 
@@ -321,6 +321,71 @@ const hotWaterPhotosFixture = () => {
         section: "Hot Water System",
         photosFolder: "full_reports/full_bowery_multifamily_as_complete/hot_water_system_photos",
         photosFileNames: ["hot_water_system.png"]
+    };
+};
+
+const zoningDescriptionInformationFixture = () => {
+    return {
+        zonesNames: ["RS-3"],
+        city: "Chicago",
+        siteArea: siteDetailsFixture().siteArea,
+        propertyIdentificationCommentary: "The subject is situated on a 6,250 square foot parcel in an RS-3 zone. " +
+            "It is identified in the city of Chicago tax maps as PIN 20-36-420-020-0000. ",
+        introductionCommentary: "8524 S Oglesby Ave. is in a RS-3 zone. Below is a summary of the subject property's " +
+            "compliance with regard to use and bulk regulations."
+    };
+};
+
+const zoningDescriptionUsesFixture = () => {
+    return {
+        permittedPropertyUse: "Residential",
+        currentPropertyUse: "Residential",
+        zonesNames: zoningDescriptionInformationFixture().zonesNames,
+        isConformable: true,
+        permittedUses: ["residential"],
+        currentUses: ["residential"],
+        streetAddress: siteDetailsFixture().streetAddress
+    };
+};
+
+const zoningDescriptionBulkFixture = () => {
+    return {
+        regulationValuesDelete: ["Maximum Density", "Permitted Units", "Minimum Lot Width", "Minimum Setback (Both Sides)",
+            "Minimum Rear Yard", "Maximum Building Coverage"],
+        regulationNew: {
+            name: "Maximum FAR",
+            actualValue: "0.76",
+            requiredValue: "0.90",
+            statusValue: "Complying"
+        },
+        existingRegulations: [
+            {
+                name: "Minimum Lot Size", actualValue: "6250 SF", requiredValue: "5000 SF",
+                statusValue: "Complying"
+            },
+            {
+                name: "Minimum Front Setback", actualValue: "25 ft", requiredValue: "19 ft",
+                statusValue: "Complying"
+            },
+            {
+                name: "Minimum Setback (One Side)", actualValue: "8 ft", requiredValue: "5 ft",
+                statusValue: "Complying"
+            },
+            {
+                name: "Maximum Height", actualValue: "26.5 ft", requiredValue: "30 ft",
+                statusValue: "Complying"
+            }
+        ],
+        complyingCommentary: "The subject will be complying with regards to bulk regulations."
+    };
+};
+
+const zoningDescriptionParkingFixture = () => {
+    return {
+        numberOfUnits: asCompleteBuildingDescriptionFixture().numberOfUnits,
+        numberOfParkingPlaces: amenitiesFixture().numberOfParkingPlaces,
+        requiredParkingPlaces: 6,
+        isConforming: "true"
     };
 };
 
@@ -469,6 +534,22 @@ export  const hotWaterPhotosData = () => {
     return Object.freeze(hotWaterPhotosFixture());
 };
 
+export const zoningDescriptionInformationData = () => {
+    return Object.freeze(zoningDescriptionInformationFixture());
+};
+
+export const zoningDescriptionUsesData = () => {
+    return Object.freeze(zoningDescriptionUsesFixture());
+};
+
+export const zoningDescriptionBulkData = () => {
+    return Object.freeze(zoningDescriptionBulkFixture());
+};
+
+export const zoningDescriptionParkingData = () => {
+    return Object.freeze(zoningDescriptionParkingFixture());
+};
+
 export default {
     reportCreationData: reportCreationData(),
     keyInfoPurposeData: keyInfoPurposeData(),
@@ -505,44 +586,14 @@ export default {
     electricMetersPhotos: electricMetersPhotosData(),
     gasMetersPhotos: gasMetersPhotosData(),
     heatingSystemPhotos: heatingSystemPhotosData(),
-    hotWaterPhotos: hotWaterPhotosData()
+    hotWaterPhotos: hotWaterPhotosData(),
+    zoningDescriptionInformation: zoningDescriptionInformationData(),
+    zoningDescriptionUses: zoningDescriptionUsesData(),
+    zoningDescriptionBulk: zoningDescriptionBulkData(),
+    zoningDescriptionParking: zoningDescriptionParkingData()
 };
 
 const testDataOld = {
-    "cityToBe": "Chicago",
-    "propertyUse": "Residential",
-    "permittedUses": ["residential"],
-    "currentUses": ["residential"],
-    "zonesNames": ["RS-3"],
-    "regulationValues": ["Maximum Density", "Permitted Units", "Minimum Lot Width", "Minimum Setback (Both Sides)",
-        "Minimum Rear Yard", "Maximum Building Coverage"],
-    "additionalRegulationName": "Maximum FAR",
-    "actualValue": "0.76",
-    "requiredValue": "0.90",
-    "regulationNew": {
-        "name": "Maximum FAR",
-        "actualValue": "0.76",
-        "requiredValue": "0.90",
-        "statusValue": "Complying"
-    },
-    "regulationExist1": {
-        "name": "Minimum Lot Size", "actualValue": "6250 SF", "requiredValue": "5000 SF",
-        "statusValue": "Complying"
-    },
-    "regulationExist2": {
-        "name": "Minimum Front Setback", "actualValue": "25 ft", "requiredValue": "19 ft",
-        "statusValue": "Complying"
-    },
-    "regulationExist3": {
-        "name": "Minimum Setback (One Side)", "actualValue": "8 ft", "requiredValue": "5 ft",
-        "statusValue": "Complying"
-    },
-    "regulationExist4": {
-        "name": "Maximum Height", "actualValue": "26.5 ft", "requiredValue": "30 ft",
-        "statusValue": "Complying"
-    },
-    "complyingCommentary": "The subject will be complying with regards to bulk regulations.",
-    "requiredParkingPlaces": 6,
     "renovationDropValue": "Renovation",
     "renovationsPeriod": 12,
     "renovationTotalAmount": 106000,
