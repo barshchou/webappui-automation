@@ -177,40 +177,36 @@ describe("Full bowery way, multifamily as complete report", () => {
             .chooseIsConformingWithParkingRequirements(newTestData.zoningDescriptionParking.isConforming)
             .verifyParkingConformityCommentary(newTestData.zoningDescriptionParking)
             .clickSaveContinueButton();
-        renovationsActions.chooseRenovationByValue(testData.renovationDropValue);
-        renovationsActions.clickTotalButton();
-        renovationsActions.fillTotalTable(testData.renovationsPeriod, testData.renovationTotalAmount);
-        renovationsActions.verifyNetTotalRenovationBudget(testData.renovationTotalAmount);
-        renovationsActions.editCommentary(testData.renovationsCommentary);
-        renovationsActions.clickSaveContinueButton();
-        residentialUnitsActions.fillKitchenDescription(testData.kitchenCondition, testData.kitchenFlooring, testData.counterTops,
-            testData.cabinetry, testData.stovetops, testData.refrigerators);
-        residentialUnitsActions.verifyKitchenConditionCommentary(testData.kitchenCondition, testData.kitchenFlooring, testData.counterTops,
-            testData.cabinetry, testData.stovetops, testData.refrigerators);
-        residentialUnitsActions.fillBathroomDescription(testData.bathroomCondition, testData.bathroomFlooring, testData.bathroomTub,
-            testData.sink, testData.toilet);
-        residentialUnitsActions.verifyBathroomCommentary(testData.bathroomCondition, testData.bathroomFlooring, testData.bathroomTub,
-            testData.sink, testData.toilet);
-        residentialUnitsActions.fillBedroomDescription(testData.bedroomCondition, testData.bedroomFlooring, testData.bedroomWalls);
-        residentialUnitsActions.verifyBedroomCommentary(testData.bedroomCondition, testData.bedroomFlooring, testData.bedroomWalls);
-        residentialUnitsActions.fillLivingRoomDescription(testData.livingCondition, testData.livingFlooring, testData.livingWalls);
-        residentialUnitsActions.verifyLivingRoomCommentary(testData.livingCondition, testData.livingFlooring, testData.livingWalls);
-        residentialUnitsActions.fillStairsDescription(testData.numberOfStairs, testData.stairsStart, testData.stairsEnd);
-        residentialUnitsActions.editStairsCommentary(testData.stairsCommentary);
-        residentialUnitsActions.clickSaveContinueButton();
-        inPlaceRentRollActions.verifyNumberOFResidentialUnits(testData.numberOfUnits);
-        inPlaceRentRollActions.checkCheckboxByLabelAndVerify(testData.forecastLabel, testData.forecastColumn);
-        inPlaceRentRollActions.checkListIsInspectedByRowNumbers(testData.isInspectedRowsToCheck);
-        inPlaceRentRollActions.enterUnitNumbersByOrderToAll(testData.numberOfUnits);
-        inPlaceRentRollActions.enterAllEqualRoomsNumber(testData.roomsNumber, testData.numberOfUnits);
-        inPlaceRentRollActions.enterAllEqualBedroomsNumber(testData.bedroomsNumber, testData.numberOfUnits);
-        inPlaceRentRollActions.fillAllRentTypeCellsWithEqualValue(testData.rentType);
-        inPlaceRentRollActions.enterAllEqualLeaseStatuses(testData.leaseStatus, testData.numberOfUnits);
-        inPlaceRentRollActions.enterAllEqualForecast(testData.forecastValue, testData.numberOfUnits);
-        inPlaceRentRollActions.verifyMonthlyTotalForecastEqualValue(testData.forecastValue, testData.numberOfUnits);
-        inPlaceRentRollActions.verifyAnnuallyTotalForecastEqualValue(testData.forecastValue, testData.numberOfUnits);
-        inPlaceRentRollActions.verifyRentRollCommentary(testData.inPlaceRentRollCommentary);
-        inPlaceRentRollActions.clickSaveContinueButton();
+        renovationsActions.chooseRenovationByValue(newTestData.prospectiveRenovations.renovationDropValue)
+            .clickTotalButton()
+            .fillTotalTable(newTestData.prospectiveRenovations.renovationsPeriod, newTestData.prospectiveRenovations.renovationTotalAmount)
+            .verifyNetTotalRenovationBudget(newTestData.prospectiveRenovations.renovationTotalAmount)
+            .editCommentary(newTestData.prospectiveRenovations.renovationsCommentary)
+            .clickSaveContinueButton();
+        residentialUnitsActions.fillKitchenDescription(newTestData.typicalKitchenCondition)
+            .verifyKitchenConditionCommentary(newTestData.typicalKitchenCondition)
+            .fillBathroomDescription(newTestData.typicalBathroomCondition)
+            .verifyBathroomCommentary(newTestData.typicalBathroomCondition)
+            .fillBedroomDescription(newTestData.bedroomCondition)
+            .verifyBedroomCommentary(newTestData.bedroomCondition)
+            .fillLivingRoomDescription(newTestData.livingRoomCondition)
+            .verifyLivingRoomCommentary(newTestData.livingRoomCondition)
+            .fillStairsDescription(newTestData.stairsData)
+            .editStairsCommentary(newTestData.stairsData.commentary)
+            .clickSaveContinueButton();
+        inPlaceRentRollActions.verifyNumberOfResidentialUnits(newTestData.currentBuildingDescription.numberOfUnits)
+            .checkCheckboxByLabelAndVerify(newTestData.inPLaceRentRoll.forecastLabel, newTestData.inPLaceRentRoll.forecastColumn)
+            .checkListIsInspectedByRowNumbers(newTestData.inPLaceRentRoll.isInspectedRowsToCheck)
+            .enterUnitNumbersByOrderToAll(newTestData.currentBuildingDescription.numberOfUnits)
+            .enterAllEqualRoomsNumber(newTestData.inPLaceRentRoll.roomsNumber, newTestData.currentBuildingDescription.numberOfUnits)
+            .enterAllEqualBedroomsNumber(newTestData.inPLaceRentRoll.bedroomsNumber, newTestData.currentBuildingDescription.numberOfUnits)
+            .fillAllRentTypeCellsWithEqualValue(newTestData.inPLaceRentRoll.rentType)
+            .enterAllEqualLeaseStatuses(newTestData.inPLaceRentRoll.leaseStatus, newTestData.currentBuildingDescription.numberOfUnits)
+            .enterAllEqualForecast(newTestData.inPLaceRentRoll.forecastValue, newTestData.currentBuildingDescription.numberOfUnits)
+            .verifyMonthlyTotalForecastEqualValue()
+            .verifyAnnuallyTotalForecastEqualValue()
+            .verifyRentRollCommentary(newTestData.inPLaceRentRoll.commentary)
+            .clickSaveContinueButton();
         unitGroupsActions.verifyRowsNumberEqualBedroomsNonComp(testData.bedroomsNumber, testData.numberOfUnits);
         unitGroupsActions.verifyGLAPercentage();
         unitGroupsActions.verifyRoomSize();

@@ -25,7 +25,7 @@ describe("In-Place Rent Roll options list tests", () => {
     });
 
     it("ID3: Import manager ('Import Data' button is displayed when .csv file is selected)", () => {
-        rentRollActions.verifyNumberOFResidentialUnits(testData.numberOFUnits);
+        rentRollActions.verifyNumberOfResidentialUnits(testData.numberOFUnits);
         rentRollActions.uploadFile(testData.csvFileName, testData.csvNumberOfUnits);
         cy.reload();
         rentRollActions.uploadFile(testData.xlsxFileName, testData.numberOFUnits);
@@ -43,7 +43,7 @@ describe("In-Place Rent Roll options list tests", () => {
     });
 
     it("ID4 and ID5: number of residential units and go to property summary", () => {
-        rentRollActions.verifyNumberOFResidentialUnits(testData.numberOFUnits);
+        rentRollActions.verifyNumberOfResidentialUnits(testData.numberOFUnits);
         rentRollActions.goToPropSummaryWithSaveLeavingFirst();
         summaryActions.verifyThatPageIsOpened();
         summaryActions.goBackWithSave();

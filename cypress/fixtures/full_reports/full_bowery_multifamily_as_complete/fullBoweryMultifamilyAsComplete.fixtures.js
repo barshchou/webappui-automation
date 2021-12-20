@@ -389,6 +389,77 @@ const zoningDescriptionParkingFixture = () => {
     };
 };
 
+const prospectiveRenovationsFixture = () => {
+    return {
+        renovationDropValue: "Renovation",
+        renovationsPeriod: 12,
+        renovationTotalAmount: 106000,
+        renovationsCommentary: "The buyer reported a total prospective renovation budget of $106,000.00. " +
+            "Renovations are expected to take 12 months to complete."
+    };
+};
+
+const typicalKitchenConditionFixture = () => {
+    return {
+        condition: "Good",
+        flooring: "Ceramic Tile",
+        counterTops: "Laminate",
+        cabinetry: "Natural Wood",
+        stovetops: "Standard Oven/Range",
+        refrigerators: "Standard",
+    };
+};
+
+const typicalBathroomConditionFixture = () => {
+    return {
+        condition: "Good",
+        flooring: "Ceramic Tile",
+        tub: "Bathtub/Shower Combo",
+        sink: "Laminate-top set in cabinet",
+        toilet: "Ceramic"
+    };
+};
+
+const bedroomConditionFixture = () => {
+    return {
+        condition: "Good",
+        flooring: "Hardwood",
+        walls: "Plaster"
+    };
+};
+
+const livingRoomConditionFixture = () => {
+    return {
+        condition: "Good",
+        flooring: "Hardwood",
+        walls: "Plaster",
+    };
+};
+
+const stairsFixture = () => {
+    return {
+        numberOfStairs: 2,
+        stairsStart: "Basement",
+        stairsEnd: "2nd floor",
+        commentary: "There are 2 staircases that run from the basement to the 2nd floor, one interior and one exterior.",
+    };
+};
+
+const inPLaceRentRollFixture = () => {
+    return {
+        forecastLabel: "Developer's Forecast",
+        forecastColumn: "Rent Forecast",
+        isInspectedRowsToCheck: [0, 1],
+        roomsNumber: 4,
+        bedroomsNumber: 2,
+        rentType: "Market Rate",
+        leaseStatus: "Vacant",
+        forecastValue: 1120,
+        commentary: "8524 S Oglesby Ave. is expected to contain 6 units upon completion of the construction works; " +
+            "the developer's projected residential rent roll is presented below."
+    };
+};
+
 
 export const reportCreationData = () => {
     return Object.freeze(reportCreationFixture());
@@ -550,6 +621,34 @@ export const zoningDescriptionParkingData = () => {
     return Object.freeze(zoningDescriptionParkingFixture());
 };
 
+export const prospectiveRenovationsData = () => {
+    return Object.freeze(prospectiveRenovationsFixture());
+};
+
+export const typicalKitchenConditionData = () => {
+    return Object.freeze(typicalKitchenConditionFixture());
+};
+
+export const typicalBathroomConditionData = () => {
+    return Object.freeze(typicalBathroomConditionFixture());
+};
+
+export const bedroomConditionData = () => {
+    return Object.freeze(bedroomConditionFixture());
+};
+
+export const livingRoomConditionData = () => {
+    return Object.freeze(livingRoomConditionFixture());
+};
+
+export const stairsData = () => {
+    return Object.freeze(stairsFixture());
+};
+
+export const inPLaceRentRollData = () => {
+    return Object.freeze(inPLaceRentRollFixture());
+};
+
 export default {
     reportCreationData: reportCreationData(),
     keyInfoPurposeData: keyInfoPurposeData(),
@@ -590,44 +689,17 @@ export default {
     zoningDescriptionInformation: zoningDescriptionInformationData(),
     zoningDescriptionUses: zoningDescriptionUsesData(),
     zoningDescriptionBulk: zoningDescriptionBulkData(),
-    zoningDescriptionParking: zoningDescriptionParkingData()
+    zoningDescriptionParking: zoningDescriptionParkingData(),
+    prospectiveRenovations: prospectiveRenovationsData(),
+    typicalKitchenCondition: typicalKitchenConditionData(),
+    typicalBathroomCondition: typicalBathroomConditionData(),
+    bedroomCondition: bedroomConditionData(),
+    livingRoomCondition: livingRoomConditionData(),
+    stairsData: stairsData(),
+    inPLaceRentRoll: inPLaceRentRollData()
 };
 
 const testDataOld = {
-    "renovationDropValue": "Renovation",
-    "renovationsPeriod": 12,
-    "renovationTotalAmount": 106000,
-    "renovationsCommentary": "The buyer reported a total prospective renovation budget of $106,000.00. Renovations are expected to take 12 months to complete.",
-    "kitchenCondition": "Good",
-    "kitchenFlooring": "Ceramic Tile",
-    "counterTops": "Laminate",
-    "cabinetry": "Natural Wood",
-    "stovetops": "Standard Oven/Range",
-    "refrigerators": "Standard",
-    "bathroomCondition": "Good",
-    "bathroomFlooring": "Ceramic Tile",
-    "bathroomTub": "Bathtub/Shower Combo",
-    "sink": "Laminate-top set in cabinet",
-    "toilet": "Ceramic",
-    "bedroomCondition": "Good",
-    "bedroomFlooring": "Hardwood",
-    "bedroomWalls": "Plaster",
-    "livingCondition": "Good",
-    "livingFlooring": "Hardwood",
-    "livingWalls": "Plaster",
-    "numberOfStairs": 2,
-    "stairsStart": "Basement",
-    "stairsEnd": "2nd floor",
-    "stairsCommentary": "There are 2 staircases that run from the basement to the 2nd floor, one interior and one exterior.",
-    "forecastLabel": "Developer's Forecast",
-    "forecastColumn": "Rent Forecast",
-    "isInspectedRowsToCheck": [0, 1],
-    "roomsNumber": 4,
-    "bedroomsNumber": 2,
-    "rentType": "Market Rate",
-    "leaseStatus": "Vacant",
-    "forecastValue": 1120,
-    "inPlaceRentRollCommentary": "8524 S Oglesby Ave. is expected to contain 6 units upon completion of the construction works; the developer's projected residential rent roll is presented below.",
     "unitType": "2 Bedroom",
     "averageSF": 700,
     "compID": "1",
