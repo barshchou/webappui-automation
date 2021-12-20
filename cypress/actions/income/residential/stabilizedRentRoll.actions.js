@@ -8,7 +8,7 @@ class StabilizedRentRollActions extends BaseActions{
     }
 
     verifyUnitTypeRentConclusion(type, rentToBe) {
-        const textToBe = `$${numberWithCommas(rentToBe)} / Unit`;
+        const textToBe = `$${numberWithCommas(rentToBe)} /Unit`;
         stabRentRollPage.getSummaryTableRentConclusionUnit(type).should("have.text", textToBe);
     }
 

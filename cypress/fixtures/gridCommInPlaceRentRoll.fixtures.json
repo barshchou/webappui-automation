@@ -7,6 +7,7 @@
   "leaseStatuses": ["Occupied", "Vacant"],
   "tenantName": "Test tenant name",
   "useRadios": ["retail", "office", "medical", "community", "undetermined"],
+  "useTexts": ["Retail", "Office", "Medical Office", "Community Facility", "Undetermined"],
   "wrongFormatLeaseDate": "25/45/3000",
   "squareFeet": 200,
   "rentPerSF": 100,
