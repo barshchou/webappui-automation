@@ -47,15 +47,26 @@ class AddCompFormActions {
         addCompFormPage.monthRentFieldName.should("exist").should("contain.text", "Monthly Rent");
     }
 
+    /**
+     *
+     * @param {string, number} rent
+     * @returns {AddCompFormActions}
+     */
     enterMonthlyRent(rent) {
         const textToBe = typeof rent === "string" ? rent : numberWithCommas(rent);
         addCompFormPage.monthRentInput.clear().type(rent).should("have.value", textToBe);
+        return  this;
     }
 
     clearDateInput() {
         addCompFormPage.dateOfValueInput.clear();
     }
 
+    /**
+     *
+     * @param {string} date
+     * @returns {AddCompFormActions}
+     */
     enterDate(date) {
         this.clearDateInput();
         date = date ?? getTodayDateString();
@@ -66,11 +77,18 @@ class AddCompFormActions {
             addCompFormPage.errorMessage.should("exist");
         }
         this.verifyEnteredDate(date);
+        return this;
     }
 
+    /**
+     *
+     * @param {string} dateToBe
+     * @returns {AddCompFormActions}
+     */
     verifyEnteredDate(dateToBe) {
         dateToBe = dateToBe ?? getTodayDateString();
         addCompFormPage.dateInputValue.should("have.value", dateToBe);
+        return this;
     }
 
     chooseDayOfCurrentMonthInPicker(day) {
@@ -94,33 +112,68 @@ class AddCompFormActions {
             .should("have.text", "Unit Square Footage");
     }
 
+    /**
+     *
+     * @param {string, number} footage
+     * @returns {AddCompFormActions}
+     */
     enterSquareFootage(footage) {
         const textToBe = typeof footage === "string" ? footage : numberWithCommas(footage);
         addCompFormPage.squareFootageInput.clear().type(footage).should("have.value", textToBe);
+        return this;
     }
 
+    /**
+     *
+     * @returns {AddCompFormActions}
+     */
     clickSourceOfInfoDropdown() {
         addCompFormPage.sourceOfInfoDropdown.click({force:true});
+        return this;
     }
 
+    /**
+     *
+     * @param {string} value
+     * @returns {AddCompFormActions}
+     */
     selectSourceOfInfoByValue(value) {
         addCompFormPage.getSourceOfInfoByValue(value).click({force:true});
+        return this;
     }
 
+    /**
+     *
+     * @param {string} valueToBe
+     * @returns {AddCompFormActions}
+     */
     verifySelectedSource(valueToBe) {
         addCompFormPage.sourceOfInfoInputToCheck.should("have.value", valueToBe);
+        return this;
     }
 
+    /**
+     *
+     * @param {string} value
+     * @returns {AddCompFormActions}
+     */
     selectSourceOfInfoAndVerify(value) {
-        this.clickSourceOfInfoDropdown();
-        this.selectSourceOfInfoByValue(value);
-        this.verifySelectedSource(value);
+        this.clickSourceOfInfoDropdown()
+            .selectSourceOfInfoByValue(value)
+            .verifySelectedSource(value);
+        return this;
     }
 
+    /**
+     *
+     * @param {Array<string>} values
+     * @returns {AddCompFormActions}
+     */
     selectListSourceOfInfoAndVerify(values) {
         values.forEach(value => {
             this.selectSourceOfInfoAndVerify(value);
         });
+        return this;
     }
 
     verifyNumberOfBedroomsFiledName() {
@@ -130,6 +183,7 @@ class AddCompFormActions {
 
     enterNumberOfBedrooms(number) {
         addCompFormPage.bedroomsInput.clear().type(number).should("have.value", number);
+        return this;
     }
 
     enterSourceName(name) {
@@ -153,8 +207,14 @@ class AddCompFormActions {
             .should("contain.text", "Number of Rooms");
     }
 
+    /**
+     *
+     * @param {number} numberOfRooms
+     * @returns {AddCompFormActions}
+     */
     enterNumberOfRooms(numberOfRooms) {
         addCompFormPage.numberOfRoomsInput.clear().type(numberOfRooms).should("have.value", numberOfRooms);
+        return this;
     }
 
     verifyNumberOfBathFieldName() {
@@ -162,6 +222,11 @@ class AddCompFormActions {
             .should("have.text", "Number of Bathrooms");
     }
 
+    /**
+     *
+     * @param {number} number
+     * @returns {AddCompFormActions}
+     */
     enterNumberOfBathrooms(number = 0) {
         if (isDecimal(number)) {
             number = number.toFixed(1);
@@ -176,6 +241,7 @@ class AddCompFormActions {
         } else {
             addCompFormPage.numberOfBathInput.clear().type(number).type("{enter}").should("have.value", number);
         }
+        return this;
     }
 
     enterInternalNotes(notes) {
@@ -217,15 +283,22 @@ class AddCompFormActions {
         addCompFormPage.submitCompButton.should("not.be.disabled").click();
     }
 
+    /**
+     *
+     * @param {Readonly<{monthly: number, date: string, footage: number, sourceInfo: string, bedrooms: number,
+     * rooms: number, bathrooms: number}>} compData
+     * @returns {AddCompFormActions}
+     */
     fillNewRentCompWithoutNumbTypeSourceNameUrlNoteAmenities(compData) {
-        this.enterMonthlyRent(compData.monthly);
-        this.enterDate(compData.date);
-        this.enterSquareFootage(compData.footage);
-        this.selectSourceOfInfoAndVerify(compData.sourceInfo);
-        this.enterNumberOfBedrooms(compData.bedrooms);
-        this.enterNumberOfRooms(compData.rooms);
-        this.enterNumberOfBathrooms(compData.bathrooms);
-        this.clickSubmitCompButton();
+        this.enterMonthlyRent(compData.monthly)
+            .enterDate(compData.date)
+            .enterSquareFootage(compData.footage)
+            .selectSourceOfInfoAndVerify(compData.sourceInfo)
+            .enterNumberOfBedrooms(compData.bedrooms)
+            .enterNumberOfRooms(compData.rooms)
+            .enterNumberOfBathrooms(compData.bathrooms)
+            .clickSubmitCompButton();
+        return this;
     }
 }
 

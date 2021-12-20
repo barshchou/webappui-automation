@@ -207,34 +207,20 @@ describe("Full bowery way, multifamily as complete report", () => {
             .verifyAnnuallyTotalForecastEqualValue()
             .verifyRentRollCommentary(newTestData.inPLaceRentRoll.commentary)
             .clickSaveContinueButton();
-        unitGroupsActions.verifyRowsNumberEqualBedroomsNonComp(testData.bedroomsNumber, testData.numberOfUnits);
-        unitGroupsActions.verifyGLAPercentage();
-        unitGroupsActions.verifyRoomSize();
-        unitGroupsActions.verifyGLAValue(testData.grossArea);
-        unitGroupsActions.enterAvgSFByUnitTypeValue(testData.unitType, testData.averageSF);
-        unitGroupsActions.verifyGLACellValue(testData.grossArea);
-        unitGroupsActions.verifyTotalAvgSqftEqualUnits(testData.averageSF, testData.numberOfUnits);
-        unitGroupsActions.clickSaveContinueButton();
-        rentCompsActions.openAddNewComparableFormAdvanced(testData.firstCompData.address, testData.state, testData.compID);
-        addCompFormActions.fillNewRentCompWithoutNumbTypeSourceNameUrlNoteAmenities(testData.firstCompData);
-        rentCompsActions.openAddNewComparableFormAdvanced(testData.secondCompData.address, testData.state, testData.compID);
-        addCompFormActions.fillNewRentCompWithoutNumbTypeSourceNameUrlNoteAmenities(testData.secondCompData);
-        rentCompsActions.openAddNewComparableFormAdvanced(testData.thirdCompData.address, testData.state, testData.compID);
-        addCompFormActions.fillNewRentCompWithoutNumbTypeSourceNameUrlNoteAmenities(testData.thirdCompData);
-        rentCompsActions.openAddNewComparableFormAdvanced(testData.forthCompData.address, testData.state, testData.compID);
-        addCompFormActions.fillNewRentCompWithoutNumbTypeSourceNameUrlNoteAmenities(testData.forthCompData);
-        rentCompsActions.openAddNewComparableFormAdvanced(testData.fifthCompData.address, testData.state, testData.compID);
-        addCompFormActions.fillNewRentCompWithoutNumbTypeSourceNameUrlNoteAmenities(testData.fifthCompData);
-        rentCompsActions.verifyComparableBedroomTableByNumber(0, testData.firstCompData.rooms, testData.firstCompData.bedrooms,
-            testData.firstCompData.monthly, testData.sourceOfInfoText);
-        rentCompsActions.verifyComparableBedroomTableByNumber(1, testData.secondCompData.rooms, testData.secondCompData.bedrooms,
-            testData.secondCompData.monthly, testData.sourceOfInfoText);
-        rentCompsActions.verifyComparableBedroomTableByNumber(2, testData.thirdCompData.rooms, testData.thirdCompData.bedrooms,
-            testData.thirdCompData.monthly, testData.sourceOfInfoText);
-        rentCompsActions.verifyComparableBedroomTableByNumber(3, testData.forthCompData.rooms, testData.forthCompData.bedrooms,
-            testData.forthCompData.monthly, testData.sourceOfInfoText);
-        rentCompsActions.verifyComparableBedroomTableByNumber(4, testData.fifthCompData.rooms, testData.fifthCompData.bedrooms,
-            testData.fifthCompData.monthly, testData.sourceOfInfoText);
+        unitGroupsActions.verifyRowsNumberEqualBedroomsNonComp(newTestData.inPLaceRentRoll.bedroomsNumber,
+            newTestData.currentBuildingDescription.numberOfUnits)
+            .verifyGLAPercentage()
+            .verifyRoomSize()
+            .verifyGLAValue(newTestData.currentBuildingDescription.grossArea)
+            .enterAvgSFByUnitTypeValue(newTestData.unitGroups.unitType, newTestData.unitGroups.averageSF)
+            .verifyGLACellValue(newTestData.currentBuildingDescription.grossArea)
+            .verifyTotalAvgSqftEqualUnits(newTestData.unitGroups.averageSF, newTestData.currentBuildingDescription.numberOfUnits)
+            .clickSaveContinueButton();
+        newTestData.rentComparables.comparables.forEach((comp, i) => {
+            rentCompsActions.openAddNewComparableFormAdvanced(comp);
+            addCompFormActions.fillNewRentCompWithoutNumbTypeSourceNameUrlNoteAmenities(comp);
+            rentCompsActions.verifyComparableBedroomTableByNumber(i, comp);
+        });
         rentCompsActions.clickSaveContinueButton();
         rentCompsMapActions.uploadCompMap(testData.compMapPath);
         rentCompsMapActions.clickSaveContinueButton();

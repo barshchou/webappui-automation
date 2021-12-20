@@ -460,6 +460,45 @@ const inPLaceRentRollFixture = () => {
     };
 };
 
+const unitGroupsFixture = () => {
+    return {
+        unitType: "2 Bedroom",
+        averageSF: 700
+    };
+};
+
+const rentComparablesFixture = () => {
+    return {
+        comparables: [
+            {
+                state: "Other", address: "8416 S Escanaba Ave., Chicago, IL 60617", monthly: 1050, date: "04-09-2021",
+                footage: 0, sourceInfo: "externalDatabase", bedrooms: 2, rooms: 4, bathrooms: 0, id: "1",
+                sourceInfoCheck: "External Database"
+            },
+            {
+                state: "Other", address: "8349 S Colfax Ave., Chicago, IL 60617", monthly: 1000, date: "04-09-2021",
+                footage: 0, sourceInfo: "externalDatabase", bedrooms: 2, rooms: 4, bathrooms: 0, id: "1",
+                sourceInfoCheck: "External Database"
+            },
+            {
+                state: "Other", address: "2815 E 81st St., Chicago, IL 60617", monthly: 1000, date: "04-09-2021",
+                footage: 0, sourceInfo: "externalDatabase", bedrooms: 2, rooms: 4, bathrooms: 0, id: "1",
+                sourceInfoCheck: "External Database"
+            },
+            {
+                state: "Other", address: "8155 S Merrill Ave., Chicago, IL 60617", monthly: 1150, date: "04-09-2021",
+                footage: 0, sourceInfo: "externalDatabase", bedrooms: 2, rooms: 4, bathrooms: 0, id: "1",
+                sourceInfoCheck: "External Database"
+            },
+            {
+                state: "Other", address: "7957 S Marquette Ave., Chicago, IL 60617", monthly: 1200, date: "04-09-2021",
+                footage: 0, sourceInfo: "externalDatabase", bedrooms: 2, rooms: 4, bathrooms: 0, id: "1",
+                sourceInfoCheck: "External Database"
+            }
+        ],
+        sourceOfInfoText: "External Database"
+    };
+};
 
 export const reportCreationData = () => {
     return Object.freeze(reportCreationFixture());
@@ -601,7 +640,7 @@ export const heatingSystemPhotosData = () => {
     return Object.freeze(heatingSystemPhotosFixture());
 };
 
-export  const hotWaterPhotosData = () => {
+export const hotWaterPhotosData = () => {
     return Object.freeze(hotWaterPhotosFixture());
 };
 
@@ -647,6 +686,14 @@ export const stairsData = () => {
 
 export const inPLaceRentRollData = () => {
     return Object.freeze(inPLaceRentRollFixture());
+};
+
+export const unitGroupsData = () => {
+    return Object.freeze(unitGroupsFixture());
+};
+
+export const rentComparablesData = () => {
+    return Object.freeze(rentComparablesFixture());
 };
 
 export default {
@@ -696,34 +743,12 @@ export default {
     bedroomCondition: bedroomConditionData(),
     livingRoomCondition: livingRoomConditionData(),
     stairsData: stairsData(),
-    inPLaceRentRoll: inPLaceRentRollData()
+    inPLaceRentRoll: inPLaceRentRollData(),
+    unitGroups: unitGroupsData(),
+    rentComparables: rentComparablesData()
 };
 
-const testDataOld = {
-    "unitType": "2 Bedroom",
-    "averageSF": 700,
-    "compID": "1",
-    "firstCompData": {
-        "address": "8416 S Escanaba Ave., Chicago, IL 60617", "monthly": 1050, "date": "04-09-2021",
-        "footage": 0, "sourceInfo": "externalDatabase", "bedrooms": 2, "rooms": 4, "bathrooms": 0
-    },
-    "secondCompData": {
-        "address": "8349 S Colfax Ave., Chicago, IL 60617", "monthly": 1000, "date": "04-09-2021",
-        "footage": 0, "sourceInfo": "externalDatabase", "bedrooms": 2, "rooms": 4, "bathrooms": 0
-    },
-    "thirdCompData": {
-        "address": "2815 E 81st St., Chicago, IL 60617", "monthly": 1000, "date": "04-09-2021",
-        "footage": 0, "sourceInfo": "externalDatabase", "bedrooms": 2, "rooms": 4, "bathrooms": 0
-    },
-    "forthCompData": {
-        "address": "8155 S Merrill Ave., Chicago, IL 60617", "monthly": 1150, "date": "04-09-2021",
-        "footage": 0, "sourceInfo": "externalDatabase", "bedrooms": 2, "rooms": 4, "bathrooms": 0
-    },
-    "fifthCompData": {
-        "address": "7957 S Marquette Ave., Chicago, IL 60617", "monthly": 1200, "date": "04-09-2021",
-        "footage": 0, "sourceInfo": "externalDatabase", "bedrooms": 2, "rooms": 4, "bathrooms": 0
-    },
-    "sourceOfInfoText": "External Database",
+export const testDataOld = {
     "compMapPath": "full_reports/full_bowery_multifamily_as_complete/comp_map.png",
     "reconcilIntroComm": "Important considerations in determining potential rental value include location, access to transportation and neighborhood amenities, and building design and condition. The subject is in a desirable section of Lakeview, a neighborhood that has seen significant investment in the past 5 to 10 years. The site has good access to  transportation, and the block is appealing. The comparables are similar in their physical and locational appeal and are good indicators of value. Thus, our analysis of the forecast of market rents is presented:",
     "marketConclusion": 1100,
