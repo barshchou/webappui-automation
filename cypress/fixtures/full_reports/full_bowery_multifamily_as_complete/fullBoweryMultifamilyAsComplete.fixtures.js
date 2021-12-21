@@ -455,6 +455,7 @@ const inPLaceRentRollFixture = () => {
         rentType: "Market Rate",
         leaseStatus: "Vacant",
         forecastValue: 1120,
+        numberOfUnits: currentBuildingDescriptionFixture().numberOfUnits,
         commentary: "8524 S Oglesby Ave. is expected to contain 6 units upon completion of the construction works; " +
             "the developer's projected residential rent roll is presented below."
     };
@@ -496,7 +497,24 @@ const rentComparablesFixture = () => {
                 sourceInfoCheck: "External Database"
             }
         ],
-        sourceOfInfoText: "External Database"
+        compMapPath: "full_reports/full_bowery_multifamily_as_complete/comp_map.png"
+    };
+};
+
+const resRentReconcilFixture = () => {
+    return {
+        reconcilIntroComm: "Important considerations in determining potential rental value include location, access " +
+            "to transportation and neighborhood amenities, and building design and condition. The subject is in a " +
+            "desirable section of Lakeview, a neighborhood that has seen significant investment in the past 5 to 10 " +
+            "years. The site has good access to  transportation, and the block is appealing. The comparables are similar " +
+            "in their physical and locational appeal and are good indicators of value. Thus, our analysis of the forecast" +
+            " of market rents is presented:",
+        marketConclusion: 1100,
+        marketBreakdown: "all market oriented",
+        reconcilCommentary: "The comparable two-bedroom units range from $1,000 to $1,200 per month with an average of " +
+            "$1,080 per month. Based on the subject's market rate rents and the range of the comparables, we forecast a " +
+            "market rent for the subject's two-bedroom units of $1,100 per month. Considering the range of the comparables " +
+            "and our market rent forecasts for the subject units, the subject's market rate units are all currently market oriented."
     };
 };
 
@@ -696,6 +714,10 @@ export const rentComparablesData = () => {
     return Object.freeze(rentComparablesFixture());
 };
 
+export const resRentReconcilData = () => {
+    return Object.freeze(resRentReconcilFixture());
+};
+
 export default {
     reportCreationData: reportCreationData(),
     keyInfoPurposeData: keyInfoPurposeData(),
@@ -745,15 +767,11 @@ export default {
     stairsData: stairsData(),
     inPLaceRentRoll: inPLaceRentRollData(),
     unitGroups: unitGroupsData(),
-    rentComparables: rentComparablesData()
+    rentComparables: rentComparablesData(),
+    resRentReconcil: resRentReconcilData()
 };
 
 export const testDataOld = {
-    "compMapPath": "full_reports/full_bowery_multifamily_as_complete/comp_map.png",
-    "reconcilIntroComm": "Important considerations in determining potential rental value include location, access to transportation and neighborhood amenities, and building design and condition. The subject is in a desirable section of Lakeview, a neighborhood that has seen significant investment in the past 5 to 10 years. The site has good access to  transportation, and the block is appealing. The comparables are similar in their physical and locational appeal and are good indicators of value. Thus, our analysis of the forecast of market rents is presented:",
-    "marketConclusion": 1100,
-    "marketBreakdownDropValue": "all market oriented",
-    "reconcilCommentary": "The comparable two-bedroom units range from $1,000 to $1,200 per month with an average of $1,080 per month. Based on the subject's market rate rents and the range of the comparables, we forecast a market rent for the subject's two-bedroom units of $1,100 per month. Considering the range of the comparables and our market rent forecasts for the subject units, the subject's market rate units are all currently market oriented.",
     "monthlyRentStab": 1100,
     "rentRollDiscussionComm": "8524 S Oglesby Ave. will contain 6 residential units upon stabilization; the residential rent roll is summarized by unit type and rent regulation status.",
     "occupancyRateComm": "We note that the subject will contain 6 market rate residential units.",

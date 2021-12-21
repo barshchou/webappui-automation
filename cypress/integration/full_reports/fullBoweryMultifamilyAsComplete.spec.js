@@ -222,23 +222,22 @@ describe("Full bowery way, multifamily as complete report", () => {
             rentCompsActions.verifyComparableBedroomTableByNumber(i, comp);
         });
         rentCompsActions.clickSaveContinueButton();
-        rentCompsMapActions.uploadCompMap(testData.compMapPath);
-        rentCompsMapActions.clickSaveContinueButton();
-        rentReconciliationActions.verifyIntroCommentary(testData.reconcilIntroComm);
-        rentReconciliationActions.expandBedroomReconByNumber(testData.bedroomsNumber);
-        rentReconciliationActions.verifyBedroomMinForecastByNumber(testData.bedroomsNumber, testData.forecastValue);
-        rentReconciliationActions.verifyBedroomAvgForecastByNumber(testData.bedroomsNumber, testData.numberOfUnits, testData.forecastValue);
-        rentReconciliationActions.verifyBedroomMaxForecastByNumber(testData.bedroomsNumber, testData.forecastValue);
-        rentReconciliationActions.verifyBedroomMinCompByNumber(testData.bedroomsNumber, testData.firstCompData.monthly,
-            testData.secondCompData.monthly, testData.thirdCompData.monthly, testData.forthCompData.monthly, testData.fifthCompData.monthly);
-        rentReconciliationActions.verifyBedroomAvgCompByNumber(testData.bedroomsNumber, testData.firstCompData.monthly,
-            testData.secondCompData.monthly, testData.thirdCompData.monthly, testData.forthCompData.monthly, testData.fifthCompData.monthly);
-        rentReconciliationActions.verifyBedroomMaxCompByNumber(testData.bedroomsNumber, testData.firstCompData.monthly,
-            testData.secondCompData.monthly, testData.thirdCompData.monthly, testData.forthCompData.monthly, testData.fifthCompData.monthly);
-        rentReconciliationActions.enterBedroomMarketConclusionByNumber(testData.bedroomsNumber, testData.marketConclusion);
-        rentReconciliationActions.selectBedroomMarketBreakdownBedByNumber(testData.bedroomsNumber, testData.marketBreakdownDropValue);
-        rentReconciliationActions.editBedroomCommentaryByBedNum(testData.bedroomsNumber, testData.reconcilCommentary);
-        rentReconciliationActions.clickSaveContinueButton();
+        rentCompsMapActions.uploadCompMap(newTestData.rentComparables.compMapPath)
+            .clickSaveContinueButton();
+        const bedroomsNumber = newTestData.inPLaceRentRoll.bedroomsNumber;
+        const forecastValue = newTestData.inPLaceRentRoll.forecastValue;
+        rentReconciliationActions.verifyIntroCommentary(newTestData.resRentReconcil.reconcilIntroComm)
+            .expandBedroomReconByNumber(bedroomsNumber)
+            .verifyBedroomMinForecastByNumber(bedroomsNumber, forecastValue)
+            .verifyBedroomAvgForecastByNumber(newTestData.inPLaceRentRoll, forecastValue)
+            .verifyBedroomMaxForecastByNumber(bedroomsNumber, forecastValue)
+            .verifyBedroomMinCompByNumber(bedroomsNumber, newTestData.rentComparables.comparables)
+            .verifyBedroomAvgCompByNumber(bedroomsNumber, newTestData.rentComparables.comparables)
+            .verifyBedroomMaxCompByNumber(bedroomsNumber, newTestData.rentComparables.comparables)
+            .enterBedroomMarketConclusionByNumber(bedroomsNumber, newTestData.resRentReconcil.marketConclusion)
+            .selectBedroomMarketBreakdownBedByNumber(bedroomsNumber, newTestData.resRentReconcil.marketBreakdown)
+            .editBedroomCommentaryByBedNum(bedroomsNumber, newTestData.resRentReconcil.reconcilCommentary)
+            .clickSaveContinueButton();
         stabilizedRentRollActions.verifyUnitTypeAndRentConclusion(testData.unitType, testData.marketConclusion);
         stabilizedRentRollActions.verifyRowsNumber(testData.numberOfUnits);
         stabilizedRentRollActions.verifyCheckedIsInspected(testData.isInspectedRowsToCheck);
