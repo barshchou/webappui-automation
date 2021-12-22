@@ -4,17 +4,32 @@ import {getNumberFromDollarNumberWithCommas, numberWithCommas} from "../../../ut
 
 class PropertySaleConclusionActions extends BaseActions {
 
+    /**
+     *
+     * @param {number, string} price
+     * @returns {PropertySaleConclusionActions}
+     */
     verifyContractPrice(price) {
         const textToBe = typeof price === "string" ? price : `$${numberWithCommas(price)}`;
         propertySalePage.contractPrice.should("have.text", textToBe);
         return this;
     }
 
+    /**
+     *
+     * @param {string} date
+     * @returns {PropertySaleConclusionActions}
+     */
     verifyContractDate(date) {
         propertySalePage.contractDate.should("have.text", date);
         return this;
     }
 
+    /**
+     *
+     * @param {string, number} asIsMarketFinalValue
+     * @returns {PropertySaleConclusionActions}
+     */
     verifyContractChangeInValue(asIsMarketFinalValue) {
         asIsMarketFinalValue = typeof asIsMarketFinalValue === "number" ? asIsMarketFinalValue :
             getNumberFromDollarNumberWithCommas(asIsMarketFinalValue);

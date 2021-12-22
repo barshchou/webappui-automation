@@ -3,6 +3,10 @@ import swotAnalysisPage from "../../pages/final/swotAnalysis.page";
 
 class SwotAnalysisActions extends BaseActions {
 
+    /**
+     *
+     * @returns {SwotAnalysisActions}
+     */
     uncheckIncludeInReportCheckbox() {
         swotAnalysisPage.includeInReportCheckbox.uncheck().should("have.value", "false");
         swotAnalysisPage.addThreatsButton.should("be.disabled");

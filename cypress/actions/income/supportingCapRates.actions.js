@@ -2,32 +2,70 @@ import BaseActions from "../base/base.actions";
 import supportingCapRatesPage from "../../pages/income/supportingCapRates.page";
 
 class SupportingCapRatesActions extends BaseActions {
+
+    /**
+     *
+     * @param {string} commToBe
+     * @returns {SupportingCapRatesActions}
+     */
     verifyIncomeCapitalizationCommentary(commToBe) {
         supportingCapRatesPage.incomeCapitalizationCommentary.should("have.text", commToBe);
+        return this;
     }
 
+    /**
+     *
+     * @returns {SupportingCapRatesActions}
+     */
     clickPersonalSurveySectionButton() {
         supportingCapRatesPage.personalSurveysOpenSectionButton.click();
+        return this;
     }
 
+    /**
+     *
+     * @returns {SupportingCapRatesActions}
+     */
     uncheckIncludePersonalSurvey() {
         this.clickPersonalSurveySectionButton();
         supportingCapRatesPage.includePersonalSurveyCheckbox.uncheck().should("have.value", "false");
         this.clickPersonalSurveySectionButton();
+        return this;
     }
 
+    /**
+     *
+     * @returns {SupportingCapRatesActions}
+     */
     clickSelectedLoanSectionButton() {
         supportingCapRatesPage.selectedLoanOpenSectionButton.click();
+        return this;
     }
 
-    verifyAmortizationTerm(termToBe = "30") {
+    /**
+     *
+     * @param {number} termToBe
+     * @returns {SupportingCapRatesActions}
+     */
+    verifyAmortizationTerm(termToBe = 30) {
         supportingCapRatesPage.amortizationTerm.should("not.be.disabled").should("have.value", termToBe);
+        return this;
     }
 
-    verifyNumberOfPaymentsPerYear(number = "12") {
+    /**
+     *
+     * @param {number} number
+     * @returns {SupportingCapRatesActions}
+     */
+    verifyNumberOfPaymentsPerYear(number = 12) {
         supportingCapRatesPage.numberOfPaymentsPerYear.should("be.disabled").should("have.value", number);
+        return this;
     }
 
+    /**
+     *
+     * @returns {SupportingCapRatesActions}
+     */
     verifyNumberOfPayments() {
         supportingCapRatesPage.amortizationTerm.invoke("attr", "value").then(amortValue => {
            supportingCapRatesPage.numberOfPaymentsPerYear.invoke("attr", "value").then(paymentsPerYear => {
@@ -35,60 +73,123 @@ class SupportingCapRatesActions extends BaseActions {
                    .should("have.value", `${amortValue * paymentsPerYear}`);
            });
         });
+        return this;
     }
 
-    verifyLoanToValueConstant(value = "1") {
+    /**
+     *
+     * @param {number} value
+     * @returns {SupportingCapRatesActions}
+     */
+    verifyLoanToValueConstant(value = 1) {
         supportingCapRatesPage.loanToValueConstant.should("be.disabled").should("have.value", value);
+        return this;
     }
 
-    verifySelectedLoanLoanToValueRatio(ratio = "75") {
+    /**
+     *
+     * @param {number} ratio
+     * @returns {SupportingCapRatesActions}
+     */
+    verifySelectedLoanLoanToValueRatio(ratio = 75) {
         supportingCapRatesPage.selectedLoanLoanToValueRatio.should("not.be.disabled").should("have.value", ratio);
+        return this;
     }
 
+    /**
+     *
+     * @returns {SupportingCapRatesActions}
+     */
     verifySelectedLoanEquityRatio() {
         supportingCapRatesPage.loanToValueConstant.invoke("attr", "value").then(loanConst => {
            supportingCapRatesPage.selectedLoanLoanToValueRatio.invoke("attr", "value").then(ratio => {
               supportingCapRatesPage.selectedLoanEquityRatio.should("have.value", `${loanConst * 100 - ratio}`);
            });
         });
+        return this;
     }
 
-    verifyMortgageRate(percent = "4") {
+    /**
+     *
+     * @param {number} percent
+     * @returns {SupportingCapRatesActions}
+     */
+    verifyMortgageRate(percent = 4) {
         supportingCapRatesPage.mortgageRate.should("not.be.disabled").should("have.value", percent);
+        return this;
     }
 
-    verifySelectedLoanMortgageConstant(value = "0.0573") {
+    /**
+     *
+     * @param {number} value
+     * @returns {SupportingCapRatesActions}
+     */
+    verifySelectedLoanMortgageConstant(value = 0.0573) {
         supportingCapRatesPage.selectedLoanMortgageConstant.should("be.disabled").should("have.value", value);
+        return this;
     }
 
+    /**
+     *
+     * @param {string} commToBe
+     * @returns {SupportingCapRatesActions}
+     */
     verifyMortgageComponentCommentary(commToBe) {
         supportingCapRatesPage.mortgageComponentCommentary.should("have.text", commToBe);
+        return this;
     }
 
-    verifySelectedLoanTermsSection(mortgageComm, amortTerm, paymentsPerYear, loanConstant, ratio, mortgageRate, mortgageConst) {
-        this.verifyAmortizationTerm(amortTerm);
-        this.verifyNumberOfPaymentsPerYear(paymentsPerYear);
-        this.verifyNumberOfPayments();
-        this.verifyLoanToValueConstant(loanConstant);
-        this.verifySelectedLoanLoanToValueRatio(ratio);
-        this.verifySelectedLoanEquityRatio();
-        this.verifyMortgageRate(mortgageRate);
-        this.verifySelectedLoanMortgageConstant(mortgageConst);
-        this.verifyMortgageComponentCommentary(mortgageComm);
+    /**
+     * @param {Readonly<{amortizationTerm: number , paymentsPerYear: number , loanToValueConstant: number ,
+     * loanToValueRatio: number , mortgageRate: number , mortgageConstant: number, commentary: string}>} sectionData
+     * @returns {SupportingCapRatesActions}
+     */
+    verifySelectedLoanTermsSection(sectionData) {
+        this.verifyAmortizationTerm(sectionData.amortizationTerm)
+            .verifyNumberOfPaymentsPerYear(sectionData.paymentsPerYear)
+            .verifyNumberOfPayments()
+            .verifyLoanToValueConstant(sectionData.loanToValueConstant)
+            .verifySelectedLoanLoanToValueRatio(sectionData.loanToValueRatio)
+            .verifySelectedLoanEquityRatio()
+            .verifyMortgageRate(sectionData.mortgageRate)
+            .verifySelectedLoanMortgageConstant(sectionData.mortgageConstant)
+            .verifyMortgageComponentCommentary(sectionData.commentary);
+        return this;
     }
 
+    /**
+     *
+     * @returns {SupportingCapRatesActions}
+     */
     clickBandOfInvestmentSectionButton() {
         supportingCapRatesPage.bandOfInvestmentSectionButton.click();
+        return this;
     }
 
-    verifyBandInvestmentLoanRatio(value = "75") {
+    /**
+     *
+     * @param {number} value
+     * @returns {SupportingCapRatesActions}
+     */
+    verifyBandInvestmentLoanRatio(value = 75) {
         supportingCapRatesPage.bandInvestmentLoanRatio.should("be.disabled").should("have.value", value);
+        return this;
     }
 
-    verifyBandInvestmentMortgageConstant(value = "0.0573") {
+    /**
+     *
+     * @param {number} value
+     * @returns {SupportingCapRatesActions}
+     */
+    verifyBandInvestmentMortgageConstant(value = 0.0573) {
         supportingCapRatesPage.bandInvestmentMortgageConstant.should("be.disabled").should("have.value", value);
+        return this;
     }
 
+    /**
+     *
+     * @returns {SupportingCapRatesActions}
+     */
     verifyMortgageComponent() {
         supportingCapRatesPage.bandInvestmentLoanRatio.invoke("attr", "value").then(ratio => {
             supportingCapRatesPage.bandInvestmentMortgageConstant.invoke("attr", "value").then(constant => {
@@ -96,20 +197,43 @@ class SupportingCapRatesActions extends BaseActions {
                     .should("have.value", `${(ratio * constant).toFixed(1)}`);
             });
         });
+        return this;
     }
 
+    /**
+     *
+     * @param {string, number} rate
+     * @returns {SupportingCapRatesActions}
+     */
     enterEquityDividendRate(rate) {
         supportingCapRatesPage.equityDividendRate.clear().type(rate);
+        return this;
     }
 
+    /**
+     *
+     * @param {number} rateToBe
+     * @returns {SupportingCapRatesActions}
+     */
     verifyEquityDividendRate(rateToBe) {
         supportingCapRatesPage.equityDividendRate.should("not.be.disabled").should("have.value", rateToBe);
+        return this;
     }
 
-    verifyBandInvestmentEquityRatio(value = "25") {
+    /**
+     *
+     * @param {number} value
+     * @returns {SupportingCapRatesActions}
+     */
+    verifyBandInvestmentEquityRatio(value = 25) {
         supportingCapRatesPage.bandInvestmentEquityRatio.should("be.disabled").should("have.value", value);
+        return this;
     }
 
+    /**
+     *
+     * @returns {SupportingCapRatesActions}
+     */
     verifyEquityComponent() {
         supportingCapRatesPage.equityDividendRate.invoke("attr", "value").then(rate => {
             supportingCapRatesPage.bandInvestmentEquityRatio.invoke("attr", "value").then(ratio => {
@@ -117,8 +241,13 @@ class SupportingCapRatesActions extends BaseActions {
                     .should("have.value", `${rate * (ratio / 100)}`);
             });
         });
+        return this;
     }
 
+    /**
+     *
+     * @returns {SupportingCapRatesActions}
+     */
     verifyBandInvestmentCapRate() {
         supportingCapRatesPage.mortgageComponent.invoke("attr", "value").then(mortgage => {
             supportingCapRatesPage.equityComponent.invoke("attr", "value").then(equity => {
@@ -126,21 +255,35 @@ class SupportingCapRatesActions extends BaseActions {
                     .should("have.value", `${Number(mortgage) + Number(equity)}`);
             });
         });
+        return this;
     }
 
+    /**
+     *
+     * @param {string} commToBe
+     * @returns {SupportingCapRatesActions}
+     */
     verifyBandInvestmentCommentary(commToBe) {
         supportingCapRatesPage.bandInvestmentCommentary.should("have.text", commToBe);
+        return this;
     }
 
-    verifyBandInvestmentSection(comm, equityDividend, loanRatio, constant, equityRatio) {
-        this.verifyBandInvestmentLoanRatio(loanRatio);
-        this.verifyBandInvestmentMortgageConstant(constant);
-        this.verifyMortgageComponent();
-        this.verifyEquityDividendRate(equityDividend);
-        this.verifyBandInvestmentEquityRatio(equityRatio);
-        this.verifyEquityComponent();
-        this.verifyBandInvestmentCapRate();
-        this.verifyBandInvestmentCommentary(comm);
+    /**
+     *
+     * @param {Readonly<{loanRatio: number, mortgageConstant: number, equityDividendRate: number, equityRatio: number,
+     * commentary: string}>} sectionData
+     * @returns {SupportingCapRatesActions}
+     */
+    verifyBandInvestmentSection(sectionData) {
+        this.verifyBandInvestmentLoanRatio(sectionData.loanRatio)
+            .verifyBandInvestmentMortgageConstant(sectionData.mortgageConstant)
+            .verifyMortgageComponent()
+            .verifyEquityDividendRate(sectionData.equityDividendRate)
+            .verifyBandInvestmentEquityRatio(sectionData.equityRatio)
+            .verifyEquityComponent()
+            .verifyBandInvestmentCapRate()
+            .verifyBandInvestmentCommentary(sectionData.commentary);
+        return this;
     }
 }
 

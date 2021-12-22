@@ -391,10 +391,10 @@ const zoningDescriptionParkingFixture = () => {
 
 const prospectiveRenovationsFixture = () => {
     return {
-        renovationDropValue: "Renovation",
-        renovationsPeriod: 12,
-        renovationTotalAmount: 106000,
-        renovationsCommentary: "The buyer reported a total prospective renovation budget of $106,000.00. " +
+        dropValue: "Renovation",
+        period: 12,
+        totalAmount: 106000,
+        commentary: "The buyer reported a total prospective renovation budget of $106,000.00. " +
             "Renovations are expected to take 12 months to complete."
     };
 };
@@ -715,6 +715,301 @@ const expenseForecastFixture = () => {
     };
 };
 
+const proFormaFixture = () => {
+    return {
+        potentialResIncomeRow: {total: "$79,200", perSF: "$16.74", perUnit: "$13,200"},
+        potentialGrossIncomeRow: {total: "$79,200", perSF: "$16.74", perUnit: "$13,200"},
+        vcLossRow: {total: "-$3,960", perSF: "-$0.84", perUnit: "-$660"},
+        effectiveGrossRow: {total: "$75,240", perSF: "$15.90", perUnit: "$12,540"},
+        reTaxesRow: {total: "$3,093", perSF: "$0.65", perUnit: "$516"},
+        insuranceRow: {total: "$2,100", perSF: "$0.44", perUnit: "$350"},
+        electricityRow: {total: "$8,280", perSF: "$1.75", perUnit: "$1,380"},
+        repairsRow: {total: "$2,700", perSF: "$0.57", perUnit: "$450"},
+        payrollRow: {total: "$2,100", perSF: "$0.44", perUnit: "$350"},
+        generalRow: {total: "$1,200", perSF: "$0.25", perUnit: "$200"},
+        managementRow: {total: "$3,010", perSF: "$0.64", perUnit: "$502"},
+        reservesRow: {total: "$1,200", perSF: "$0.25", perUnit: "$200"},
+        toeRow: {total: "$23,683", perSF: "$5.00", perUnit: "$3,947"},
+        toeNetReRow: {total: "$20,590", perSF: "$4.35", perUnit: "$3,432"},
+        netOpIncomeRow: {total: "$51,557", perSF: "$10.90", perUnit: "$8,593"},
+        opExpenseRatio: "31.48%"
+    };
+};
+
+const supportingCapRatesFixture = () => {
+    return {
+        incomeCapComm: "In developing an opinion of the overall capitalization rate required by an investor, we will " +
+            "apply several methods of analyses: (1) Band of Investment; (2) Comparable Capitalization Rates; and (3) " +
+            "National Survey Responses.",
+        selectedLoanTermsSection: {
+            amortizationTerm: 30, paymentsPerYear: 12, loanToValueConstant: 1, loanToValueRatio: 75, mortgageRate: 4,
+            mortgageConstant: 0.0573,
+            commentary: "After surveying several commercial mortgage lenders, it is our opinion that a " +
+                "typical creditworthy purchaser could obtain financing from a lending source in an amount equal to 75% of " +
+                "value at an annual interest rate of 4% and a 30-year payout. Therefore, the mortgage constant is 0.0573."
+        },
+        bandInvestmentSection: {
+            loanRatio: 75, mortgageConstant: 0.0573, equityDividendRate: 20, equityRatio: 25,
+            commentary: "We believe an investor in the subject property would accept an initial annual return " +
+                "of 20% in anticipation of a stable income flow and property appreciation over time. It should be emphasized " +
+                "that the equity dividend rate is not necessarily the same as an equity yield rate or true rate of return " +
+                "on equity capital. The equity dividend rate is an equity capitalization that reflects all benefits that can " +
+                "be recognized by the equity investor as of the date of purchase. We selected this rate based on the " +
+                "subject's location in a good residential area, and its good access and visibility. We summarize the " +
+                "mortgage and equity parameters utilized in our derivation of an overall capitalization rate."
+        },
+    };
+};
+
+const capRateConclusionFixture = () => {
+    return {
+        bandOfInvestmentsValue: "9.3%",
+        pwcValue: "3-7%",
+        situsValue: "3.8-5%",
+        concludedCapRate: 10,
+        asCompleteMonthsOfRentLoss: 12,
+        asStabilizedMonthsOfRentLoss: 0,
+        roundingFactorValue: 10000,
+        netOperatingIncome: "$51,557.28",
+        asStabilizedPart: {
+            period: "10/13/2022",
+            finalValue: "$520,000"
+        },
+        asCompletePart: {
+            period: "10/13/2022",
+            amount: "$515,573",
+            finalValue: "$520,000",
+            lessEntrepreneurialProfit: 25
+        },
+        asIsMarketPart: {
+            period: "10/13/2021",
+            amount: "$383,073",
+            finalValue: "$380,000",
+            perUnit: "$63,333",
+            perSF: "$80.30"
+        }
+    };
+};
+
+const capRateCompsFixture = () => {
+    return {
+        comparables: [
+            {
+                stateValue: "Other",
+                address: "7900 S Merrill Ave.",
+                id: "1",
+                source: "externalDatabase",
+                sourceName: "CoStar",
+                sourceUrl: "https://product.costar.com/detail/lookup/4101421/sale",
+                gba: 15471,
+                type: "multifamily",
+                isElevatored: false,
+                numberOfUnits: 15,
+                isListing: false,
+                isInContract: false,
+                saleDate: "10-16-2020",
+                yearBuilt: 0,
+                pricePerSF: "N/A",
+                capRate: "8.69"
+            },
+            {
+                stateValue: "Other",
+                address: "8121 S Colfax Ave., Chicago, Illinois 60617",
+                id: "1",
+                source: "externalDatabase",
+                sourceName: "CoStar",
+                sourceUrl: "https://product.costar.com/detail/lookup/10566744/summary",
+                gba: 6300,
+                type: "multifamily",
+                isElevatored: false,
+                numberOfUnits: 6,
+                isListing: false,
+                isInContract: false,
+                saleDate: "04-29-2021",
+                yearBuilt: 1920,
+                pricePerSF: "N/A",
+                capRate: "9.05"
+            },
+            {
+                stateValue: "Other",
+                address: "8109 S Colfax Ave.",
+                id: "1",
+                source: "externalDatabase",
+                sourceName: "CoStar",
+                sourceUrl: "https://product.costar.com/detail/sale-comps/default/Comp/5504232/summary",
+                gba: 6300,
+                type: "multifamily",
+                isElevatored: false,
+                numberOfUnits: 6,
+                isListing: false,
+                isInContract: false,
+                saleDate: "05-17-2021",
+                yearBuilt: 1920,
+                pricePerSF: "N/A",
+                capRate: "9.09"
+            },
+            {
+                stateValue: "Other",
+                address: "7932 S Kingston Ave., Chicago, Illinois 60617",
+                id: "1",
+                source: "externalDatabase",
+                sourceName: "CoStar",
+                sourceUrl: "https://product.costar.com/detail/lookup/8896305/summary",
+                gba: 8700,
+                type: "multifamily",
+                isElevatored: false,
+                numberOfUnits: 6,
+                isListing: false,
+                isInContract: false,
+                saleDate: "08-16-2021",
+                yearBuilt: 1926,
+                pricePerSF: "N/A",
+                capRate: "11.44"
+            },
+            {
+                stateValue: "Other",
+                address: "8041 S Manistee Ave., Chicago, Illinois 60617",
+                id: "1",
+                source: "externalDatabase",
+                sourceName: "CoStar",
+                sourceUrl: "https://product.costar.com/detail/sale-comps/default/Comp/5672762/summary/58557721",
+                gba: 13387,
+                type: "multifamily",
+                isElevatored: false,
+                numberOfUnits: 8,
+                isListing: false,
+                isInContract: false,
+                saleDate: "09-23-2021",
+                yearBuilt: 1930,
+                pricePerSF: "N/A",
+                capRate: "9.31"
+            },
+            {
+                stateValue: "Other",
+                address: "8103 S Luella Ave., Chicago, Illinois 60617",
+                id: "1",
+                source: "externalDatabase",
+                sourceName: "External Database",
+                sourceUrl: "https://traded.co/property/8103-south-luella-avenue/",
+                gba: 6420,
+                type: "multifamily",
+                isElevatored: false,
+                numberOfUnits: 6,
+                isListing: false,
+                isInContract: false,
+                saleDate: "09-24-2021",
+                yearBuilt: 1925,
+                pricePerSF: "N/A",
+                capRate: "10.08"
+            },
+        ],
+        compIncomePotential: "Similar",
+        compPropertyConditions: "Similar",
+        compPropertyLocations: "Similar"
+    };
+};
+
+const findCompsFixture = () => {
+    return {
+        comparables: [
+            {address: "7748 S Colfax Ave.", capRate: "remove"},
+            {address: "8138 S Exchange Ave.", capRate: "remove"},
+            {address: "8041 S Manistee Ave.", capRate: "9.31%"},
+            {address: "7926 S Luella Ave.", capRate: "remove"},
+            {address: "8103 S Luella Ave.", capRate: "10.08%"}
+        ]
+    };
+};
+
+const adjustCompsFixture = () => {
+    return {
+        calculationUnitsRadioValue: "false",
+        incomeAdjustmentType: "None",
+        comparables: [
+            {
+                size: 0,
+                condition: 5,
+                other: -5,
+                trendedPrice: "$90,000.00",
+                adjustedPrice: "$90,000.00"
+            },
+            {
+                size: 5,
+                condition: 5,
+                other: -5,
+                trendedPrice: "$78,125.00",
+                adjustedPrice: "$82,031.25"
+            },
+            {
+                size: 0,
+                condition: 0,
+                other: -5,
+                trendedPrice: "$101,666.67",
+                adjustedPrice: "$96,583.33"
+            },
+            {
+                size: 10,
+                condition: 0,
+                other: -5,
+                trendedPrice: "$91,666.67",
+                adjustedPrice: "$96,250.00"
+            },
+            {
+                size: 0,
+                condition: 5,
+                other: -5,
+                trendedPrice: "$86,666.67",
+                adjustedPrice: "$86,666.67"
+            },
+        ],
+        otherAdjustmentNewName: "Average Unit Size Adjustment"
+    };
+};
+
+const valueConclusionFixture = () => {
+    return {
+        unadjustedPrices: {
+            min: "$78,125.00", avg: "$89,625.00", max: "$101,666.67", median: "$90,000.00"
+        },
+        adjustedPrices: {
+            min: "$82,031.25", avg: "$90,306.25", max: "$96,583.33", median: "$90,000.00"
+        },
+        incomeApproachConclusion: "$85,929 per unit",
+        saleValueConclusion: 90000,
+        asStabilizedRow: {
+            period: capRateConclusionFixture().asStabilizedPart.period,
+            amount: "$540,000",
+            finalValue: "$540,000"
+        },
+        asCompleteRow: {
+            period: capRateConclusionFixture().asCompletePart.period,
+            amount: "$540,000",
+            finalValue: "$540,000"
+        },
+        asIsMarketRow: {
+            period: capRateConclusionFixture().asIsMarketPart.period,
+            amount: "$407,500",
+            finalValue: "$410,000"
+        }
+    };
+};
+
+const finalValuesReconciliationFixture = () => {
+    return {
+        stabilizedCompleteDate: "October 13, 2022",
+        marketDate: "October 13, 2021",
+        finalValueApproach: "Income",
+    };
+};
+
+const propertySalesConclusionFixture = () => {
+    return {
+        contractPrice: contractDetailsFixture().contractPrice,
+        contractDate: "9/14/2021",
+        asIsMarketFinalValue: capRateConclusionFixture().asIsMarketPart.finalValue
+    };
+};
+
 export const reportCreationData = () => {
     return Object.freeze(reportCreationFixture());
 };
@@ -963,6 +1258,42 @@ export const expenseForecastData = () => {
     return Object.freeze(expenseForecastFixture());
 };
 
+export const proFormaData = () => {
+    return Object.freeze(proFormaFixture());
+};
+
+export const supportingCapRatesData = () => {
+    return Object.freeze(supportingCapRatesFixture());
+};
+
+export const capRateConclusionData = () => {
+    return Object.freeze(capRateConclusionFixture());
+};
+
+export const capRateCompsData = () => {
+    return Object.freeze(capRateCompsFixture());
+};
+
+export const findCompsData = () => {
+    return Object.freeze(findCompsFixture());
+};
+
+export const adjustCompsData = () => {
+    return Object.freeze(adjustCompsFixture());
+};
+
+export const valueConclusionData = () => {
+    return Object.freeze(valueConclusionFixture());
+};
+
+export const finalValuesReconciliationData = () => {
+    return Object.freeze(finalValuesReconciliationFixture());
+};
+
+export const propertySalesConclusionData = () => {
+    return Object.freeze(propertySalesConclusionFixture());
+};
+
 export default {
     reportCreationData: reportCreationData(),
     keyInfoPurposeData: keyInfoPurposeData(),
@@ -1025,216 +1356,19 @@ export default {
     summaryTaxInfo: summaryTaxInfoData(),
     expenseHistory: expenseHistoryData(),
     comparableExpenses: comparableExpensesData(),
-    expenseForecast: expenseForecastData()
+    expenseForecast: expenseForecastData(),
+    proForma: proFormaData(),
+    supportingCapRates: supportingCapRatesData(),
+    capRateConclusion: capRateConclusionData(),
+    capRateComps: capRateCompsData(),
+    findComps: findCompsData(),
+    adjustComps: adjustCompsData(),
+    valueConclusion: valueConclusionData(),
+    finalValuesReconciliation: finalValuesReconciliationData(),
+    propertySalesConclusion: propertySalesConclusionData()
 };
 
 export const testDataOld = {
-    "totalPotentialResIncome": "$79,200",
-    "psfPotentialResIncome": "$16.74",
-    "perUnitPotResIncome": "$13,200",
-    "vcLossRow": {"total": "-$3,960", "perSF": "-$0.84", "perUnit": "-$660"},
-    "effectiveGrossRow": {"total": "$75,240", "perSF": "$15.90", "perUnit": "$12,540"},
-    "reTaxesRow": {"total": "$3,093", "perSF": "$0.65", "perUnit": "$516"},
-    "insuranceRow": {"total": "$2,100", "perSF": "$0.44", "perUnit": "$350"},
-    "electricityRow": {"total": "$8,280", "perSF": "$1.75", "perUnit": "$1,380"},
-    "repairsRow": {"total": "$2,700", "perSF": "$0.57", "perUnit": "$450"},
-    "payrollRow": {"total": "$2,100", "perSF": "$0.44", "perUnit": "$350"},
-    "generalRow": {"total": "$1,200", "perSF": "$0.25", "perUnit": "$200"},
-    "managementRow": {"total": "$3,010", "perSF": "$0.64", "perUnit": "$502"},
-    "reservesRow": {"total": "$1,200", "perSF": "$0.25", "perUnit": "$200"},
-    "toeRow": {"total": "$23,683", "perSF": "$5.00", "perUnit": "$3,947"},
-    "toeNetReRow": {"total": "$20,590", "perSF": "$4.35", "perUnit": "$3,432"},
-    "netOpIncomeRow": {"total": "$51,557", "perSF": "$10.90", "perUnit": "$8,593"},
-    "opExpenseRatio": "31.48%",
-    "incomeCapComm": "In developing an opinion of the overall capitalization rate required by an investor, we will apply several methods of analyses: (1) Band of Investment; (2) Comparable Capitalization Rates; and (3) National Survey Responses.",
-    "mortgageComponentCommentary": "After surveying several commercial mortgage lenders, it is our opinion that a typical creditworthy purchaser could obtain financing from a lending source in an amount equal to 75% of value at an annual interest rate of 4% and a 30-year payout. Therefore, the mortgage constant is 0.0573.",
-    "equityDividendRate": "20",
-    "bandInvestmentCommentary": "We believe an investor in the subject property would accept an initial annual return of 20% in anticipation of a stable income flow and property appreciation over time. It should be emphasized that the equity dividend rate is not necessarily the same as an equity yield rate or true rate of return on equity capital. The equity dividend rate is an equity capitalization that reflects all benefits that can be recognized by the equity investor as of the date of purchase. We selected this rate based on the subject's location in a good residential area, and its good access and visibility. We summarize the mortgage and equity parameters utilized in our derivation of an overall capitalization rate.",
-    "bandOfInvestmentsValue": "9.3%",
-    "pwcValue": "3-7%",
-    "situsValue": "3.8-5%",
-    "firstCapRateComp": {
-        "stateValue": "Other",
-        "address": "7900 S Merrill Ave.",
-        "id": "1",
-        "source": "externalDatabase",
-        "sourceName": "CoStar",
-        "sourceUrl": "https://product.costar.com/detail/lookup/4101421/sale",
-        "gba": 15471,
-        "type": "multifamily",
-        "isElevatored": false,
-        "numberOfUnits": 15,
-        "isListing": false,
-        "isInContract": false,
-        "saleDate": "10-16-2020",
-        "yearBuilt": 0,
-        "pricePerSF": "N/A",
-        "capRate": "8.69"
-    },
-    "secondCapRateComp": {
-        "stateValue": "Other",
-        "address": "8121 S Colfax Ave., Chicago, Illinois 60617",
-        "id": "1",
-        "source": "externalDatabase",
-        "sourceName": "CoStar",
-        "sourceUrl": "https://product.costar.com/detail/lookup/10566744/summary",
-        "gba": 6300,
-        "type": "multifamily",
-        "isElevatored": false,
-        "numberOfUnits": 6,
-        "isListing": false,
-        "isInContract": false,
-        "saleDate": "04-29-2021",
-        "yearBuilt": 1920,
-        "pricePerSF": "N/A",
-        "capRate": "9.05"
-    },
-    "thirdCapRateComp": {
-        "stateValue": "Other",
-        "address": "8109 S Colfax Ave.",
-        "id": "1",
-        "source": "externalDatabase",
-        "sourceName": "CoStar",
-        "sourceUrl": "https://product.costar.com/detail/sale-comps/default/Comp/5504232/summary",
-        "gba": 6300,
-        "type": "multifamily",
-        "isElevatored": false,
-        "numberOfUnits": 6,
-        "isListing": false,
-        "isInContract": false,
-        "saleDate": "05-17-2021",
-        "yearBuilt": 1920,
-        "pricePerSF": "N/A",
-        "capRate": "9.09"
-    },
-    "forthCapRateComp": {
-        "stateValue": "Other",
-        "address": "7932 S Kingston Ave., Chicago, Illinois 60617",
-        "id": "1",
-        "source": "externalDatabase",
-        "sourceName": "CoStar",
-        "sourceUrl": "https://product.costar.com/detail/lookup/8896305/summary",
-        "gba": 8700,
-        "type": "multifamily",
-        "isElevatored": false,
-        "numberOfUnits": 6,
-        "isListing": false,
-        "isInContract": false,
-        "saleDate": "08-16-2021",
-        "yearBuilt": 1926,
-        "pricePerSF": "N/A",
-        "capRate": "11.44"
-    },
-    "fifthCapRateComp": {
-        "stateValue": "Other",
-        "address": "8041 S Manistee Ave., Chicago, Illinois 60617",
-        "id": "1",
-        "source": "externalDatabase",
-        "sourceName": "CoStar",
-        "sourceUrl": "https://product.costar.com/detail/sale-comps/default/Comp/5672762/summary/58557721",
-        "gba": 13387,
-        "type": "multifamily",
-        "isElevatored": false,
-        "numberOfUnits": 8,
-        "isListing": false,
-        "isInContract": false,
-        "saleDate": "09-23-2021",
-        "yearBuilt": 1930,
-        "pricePerSF": "N/A",
-        "capRate": "9.31"
-    },
-    "sixthCapRateComp": {
-        "stateValue": "Other",
-        "address": "8103 S Luella Ave., Chicago, Illinois 60617",
-        "id": "1",
-        "source": "externalDatabase",
-        "sourceName": "External Database",
-        "sourceUrl": "https://traded.co/property/8103-south-luella-avenue/",
-        "gba": 6420,
-        "type": "multifamily",
-        "isElevatored": false,
-        "numberOfUnits": 6,
-        "isListing": false,
-        "isInContract": false,
-        "saleDate": "09-24-2021",
-        "yearBuilt": 1925,
-        "pricePerSF": "N/A",
-        "capRate": "10.08"
-    },
-    "compIncomePotential": "Similar",
-    "compPropertyConditions": "Similar",
-    "compPropertyLocations": "Similar",
-    "concludedCapRate": 10,
-    "asCompleteMonthsOfRentLoss": 12,
-    "asStabilizedMonthsOfRentLoss": 0,
-    "roundingFactorValue": 10000,
-    "netOperatingIncome": "$51,557.28",
-    "asStabilizedPeriod": "10/13/2022",
-    "asStabilizedFinalValue": "$520,000",
-    "asCompleteAmountValue": "$515,573",
-    "asCompleteLessEntrepreneurialProfit": 25,
-    "asIsMarketPeriod": "10/13/2021",
-    "asIsMarketAmount": "$383,073",
-    "asIsMarketFinalValue": "$380,000",
-    "asIsMarketPerUnit": "$63,333",
-    "asIsMarketPerSF": "$80.30",
-    "firstSalesComp": {"address": "7748 S Colfax Ave.", "capRate": "remove"},
-    "secondSalesComp": {"address": "8138 S Exchange Ave.", "capRate": "remove"},
-    "thirdSalesComp": {"address": "8041 S Manistee Ave.", "capRate": "9.31%"},
-    "forthSalesComp": {"address": "7926 S Luella Ave.", "capRate": "remove"},
-    "fifthSalesComp": {"address": "8103 S Luella Ave.", "capRate": "10.08%"},
-    "calculationUnitsRadioValue": "false",
-    "incomeAdjustmentType": "None",
-    "firstAdjustComp": {
-        "size": 0,
-        "condition": 5,
-        "other": -5,
-        "trendedPrice": "$90,000.00",
-        "adjustedPrice": "$90,000.00"
-    },
-    "secondAdjustComp": {
-        "size": 5,
-        "condition": 5,
-        "other": -5,
-        "trendedPrice": "$78,125.00",
-        "adjustedPrice": "$82,031.25"
-    },
-    "thirdAdjustComp": {
-        "size": 0,
-        "condition": 0,
-        "other": -5,
-        "trendedPrice": "$101,666.67",
-        "adjustedPrice": "$96,583.33"
-    },
-    "forthAdjustComp": {
-        "size": 10,
-        "condition": 0,
-        "other": -5,
-        "trendedPrice": "$91,666.67",
-        "adjustedPrice": "$96,250.00"
-    },
-    "fifthAdjustComp": {
-        "size": 0,
-        "condition": 5,
-        "other": -5,
-        "trendedPrice": "$86,666.67",
-        "adjustedPrice": "$86,666.67"
-    },
-    "otherAdjustmentNewName": "Average Unit Size Adjustment",
-    "unadjustedPriceAvg": "$89,625.00",
-    "unadjustedPriceMedian": "$90,000.00",
-    "adjustedPriceAvg": "$90,306.25",
-    "adjustedPriceMedian": "$90,000.00",
-    "incomeApproachConclusion": "$85,929 per unit",
-    "saleValueConclusion": 90000,
-    "conclusionAsStabilizedAmount": "$540,000",
-    "conclusionAsCompleteAmount": "$540,000",
-    "conclusionAsIsMarketAmount": "$407,500",
-    "conclusionAsIsMarketFinalValue": "$410,000",
-    "stabilizedCompleteDate": "October 13, 2022",
-    "marketDate": "October 13, 2021",
-    "finalValueApproach": "Income",
-    "contractDateForPropSale": "9/14/2021",
     "extraordinaryAssumption": "Some specific assumption about COVID-19",
     "propertyCondition": "Good",
     "complyingBulk": "Complying",

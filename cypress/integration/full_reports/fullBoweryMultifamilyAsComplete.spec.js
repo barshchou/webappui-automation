@@ -177,11 +177,11 @@ describe("Full bowery way, multifamily as complete report", () => {
             .chooseIsConformingWithParkingRequirements(newTestData.zoningDescriptionParking.isConforming)
             .verifyParkingConformityCommentary(newTestData.zoningDescriptionParking)
             .clickSaveContinueButton();
-        renovationsActions.chooseRenovationByValue(newTestData.prospectiveRenovations.renovationDropValue)
+        renovationsActions.chooseRenovationByValue(newTestData.prospectiveRenovations.dropValue)
             .clickTotalButton()
-            .fillTotalTable(newTestData.prospectiveRenovations.renovationsPeriod, newTestData.prospectiveRenovations.renovationTotalAmount)
-            .verifyNetTotalRenovationBudget(newTestData.prospectiveRenovations.renovationTotalAmount)
-            .editCommentary(newTestData.prospectiveRenovations.renovationsCommentary)
+            .fillTotalTable(newTestData.prospectiveRenovations.period, newTestData.prospectiveRenovations.totalAmount)
+            .verifyNetTotalRenovationBudget(newTestData.prospectiveRenovations.totalAmount)
+            .editCommentary(newTestData.prospectiveRenovations.commentary)
             .clickSaveContinueButton();
         residentialUnitsActions.fillKitchenDescription(newTestData.typicalKitchenCondition)
             .verifyKitchenConditionCommentary(newTestData.typicalKitchenCondition)
@@ -409,125 +409,110 @@ describe("Full bowery way, multifamily as complete report", () => {
             .verifyOwnersProFormaValue()
             .verifyTotalForecast()
             .clickSaveContinueButton();
-        proFormaActions.verifyPotentialResIncomeRow(testData.totalPotentialResIncome, testData.psfPotentialResIncome, testData.perUnitPotResIncome);
-        proFormaActions.verifyPotentialGrossIncomeRow(testData.totalPotentialResIncome, testData.psfPotentialResIncome, testData.perUnitPotResIncome);
-        proFormaActions.verifyResVCLossRow(testData.vcLossRow.total, testData.vcLossRow.perSF, testData.vcLossRow.perUnit);
-        proFormaActions.verifyEffectiveGrossRow(testData.effectiveGrossRow.total, testData.effectiveGrossRow.perSF, testData.effectiveGrossRow.perUnit);
-        proFormaActions.verifyRETaxesRow(testData.reTaxesRow.total, testData.reTaxesRow.perSF, testData.reTaxesRow.perUnit);
-        proFormaActions.verifyInsuranceRow(testData.insuranceRow.total, testData.insuranceRow.perSF, testData.insuranceRow.perUnit);
-        proFormaActions.verifyElectricityRow(testData.electricityRow.total, testData.electricityRow.perSF, testData.electricityRow.perUnit);
-        proFormaActions.verifyRepairsRow(testData.repairsRow.total, testData.repairsRow.perSF, testData.repairsRow.perUnit);
-        proFormaActions.verifyPayrollRow(testData.payrollRow.total, testData.payrollRow.perSF, testData.payrollRow.perUnit);
-        proFormaActions.verifyGeneralRow(testData.generalRow.total, testData.generalRow.perSF, testData.generalRow.perUnit);
-        proFormaActions.verifyManagementRow(testData.managementRow.total, testData.managementRow.perSF, testData.managementRow.perUnit);
-        proFormaActions.verifyReservesRow(testData.reservesRow.total, testData.reservesRow.perSF, testData.reservesRow.perUnit);
-        proFormaActions.verifyToeRow(testData.toeRow.total, testData.toeRow.perSF, testData.toeRow.perUnit);
-        proFormaActions.verifyToeNetReRow(testData.toeNetReRow.total, testData.toeNetReRow.perSF, testData.toeNetReRow.perUnit);
-        proFormaActions.verifyNetOpIncomeRow(testData.netOpIncomeRow.total, testData.netOpIncomeRow.perSF, testData.netOpIncomeRow.perUnit);
-        proFormaActions.verifyOperatingExpenseRatio(testData.opExpenseRatio);
-        proFormaActions.clickSaveContinueButton();
-        supportingCapRatesActions.uncheckIncludePersonalSurvey();
-        supportingCapRatesActions.verifyIncomeCapitalizationCommentary(testData.incomeCapComm);
-        supportingCapRatesActions.clickSelectedLoanSectionButton();
-        supportingCapRatesActions.verifySelectedLoanTermsSection(testData.mortgageComponentCommentary);
-        supportingCapRatesActions.clickSelectedLoanSectionButton();
-        supportingCapRatesActions.clickBandOfInvestmentSectionButton();
-        supportingCapRatesActions.enterEquityDividendRate(testData.equityDividendRate);
-        supportingCapRatesActions.verifyBandInvestmentSection(testData.bandInvestmentCommentary, testData.equityDividendRate);
-        supportingCapRatesActions.clickSaveContinueButton();
-        capRateConclusionActions.verifyBandOfInvestments(testData.bandOfInvestmentsValue);
-        capRateConclusionActions.verifyPWCCell(testData.pwcValue);
-        capRateConclusionActions.verifySitusCell(testData.situsValue);
+        proFormaActions.verifyPotentialResIncomeRow(newTestData.proForma.potentialResIncomeRow)
+            .verifyPotentialGrossIncomeRow(newTestData.proForma.potentialGrossIncomeRow)
+            .verifyResVCLossRow(newTestData.proForma.vcLossRow)
+            .verifyEffectiveGrossRow(newTestData.proForma.effectiveGrossRow)
+            .verifyRETaxesRow(newTestData.proForma.reTaxesRow)
+            .verifyInsuranceRow(newTestData.proForma.insuranceRow)
+            .verifyElectricityRow(newTestData.proForma.electricityRow)
+            .verifyRepairsRow(newTestData.proForma.repairsRow)
+            .verifyPayrollRow(newTestData.proForma.payrollRow)
+            .verifyGeneralRow(newTestData.proForma.generalRow)
+            .verifyManagementRow(newTestData.proForma.managementRow)
+            .verifyReservesRow(newTestData.proForma.reservesRow)
+            .verifyToeRow(newTestData.proForma.toeRow)
+            .verifyToeNetReRow(newTestData.proForma.toeNetReRow)
+            .verifyNetOpIncomeRow(newTestData.proForma.netOpIncomeRow)
+            .verifyOperatingExpenseRatio(newTestData.proForma.opExpenseRatio)
+            .clickSaveContinueButton();
+        supportingCapRatesActions.uncheckIncludePersonalSurvey()
+            .verifyIncomeCapitalizationCommentary(newTestData.supportingCapRates.incomeCapComm)
+            .clickSelectedLoanSectionButton()
+            .verifySelectedLoanTermsSection(newTestData.supportingCapRates.selectedLoanTermsSection)
+            .clickSelectedLoanSectionButton()
+            .clickBandOfInvestmentSectionButton()
+            .enterEquityDividendRate(newTestData.supportingCapRates.bandInvestmentSection.equityDividendRate)
+            .verifyBandInvestmentSection(newTestData.supportingCapRates.bandInvestmentSection)
+            .clickSaveContinueButton();
+        capRateConclusionActions.verifyBandOfInvestments(newTestData.capRateConclusion.bandOfInvestmentsValue)
+            .verifyPWCCell(newTestData.capRateConclusion.pwcValue)
+            .verifySitusCell(newTestData.capRateConclusion.situsValue);
         capRateConclusionActions.navigateToCapRateComps();
         capRateCompsActions.verifyPageIsOpened();
-        const capRateComps = [testData.firstCapRateComp, testData.secondCapRateComp, testData.thirdCapRateComp, testData.forthCapRateComp,
-            testData.fifthCapRateComp, testData.sixthCapRateComp];
-        capRateComps.forEach((comp, i) => {
-            capRateCompsActions.addComparable(comp.stateValue, comp.address, comp.id, comp.source, comp.sourceName, comp.sourceUrl);
-            capRateCompsActions.fillAddedCompWithInfo(comp.address, comp.gba, comp.type, comp.isElevatored, comp.numberOfUnits,
-                comp.isListing, comp.isInContract, comp.saleDate, comp.yearBuilt, comp.pricePerSF, comp.capRate, comp.sourceName,
-                comp.sourceUrl, i);
+        newTestData.capRateComps.comparables.forEach((comp, i) => {
+            capRateCompsActions.addComparable(comp)
+                .fillAddedCompWithInfo(comp, i);
         });
-        const firstCapRate = Number(testData.firstCapRateComp.capRate);
-        const secondCapRate = Number(testData.secondCapRateComp.capRate);
-        const thirdCapRate = Number(testData.thirdCapRateComp.capRate);
-        const forthCapRate = Number(testData.forthCapRateComp.capRate);
-        const fifthCapRate = Number(testData.fifthCapRateComp.capRate);
-        const sixthCapRate = Number(testData.sixthCapRateComp.capRate);
-        const minCapRate = Math.min(firstCapRate, secondCapRate, thirdCapRate, forthCapRate, fifthCapRate, sixthCapRate);
-        const maxCapRate = Math.max(firstCapRate, secondCapRate, thirdCapRate, forthCapRate, fifthCapRate, sixthCapRate);
-        const avgCapRate = ((firstCapRate + secondCapRate + thirdCapRate + forthCapRate + fifthCapRate + sixthCapRate) /
-            capRateComps.length).toFixed(2);
-        capRateCompsActions.verifyCapRateCommentary(minCapRate, maxCapRate, avgCapRate);
-        capRateCompsActions.chooseCompIncomePotential(testData.compIncomePotential);
-        capRateCompsActions.chooseCompPropertyConditions(testData.compPropertyConditions);
-        capRateCompsActions.chooseCompPropertyLocations(testData.compPropertyLocations);
+        const capRatesArray = newTestData.capRateComps.comparables.map(comp => Number(comp.capRate));
+        const minCapRate = Math.min(...capRatesArray);
+        const maxCapRate = Math.max(...capRatesArray);
+        const capRateSum = capRatesArray.reduce((sum, current) => sum + current, 0);
+        const avgCapRate = (capRateSum / capRatesArray.length).toFixed(2);
+        capRateCompsActions.verifyCapRateCommentary(minCapRate, maxCapRate, avgCapRate)
+            .chooseCompIncomePotential(newTestData.capRateComps.compIncomePotential)
+            .chooseCompPropertyConditions(newTestData.capRateComps.compPropertyConditions)
+            .chooseCompPropertyLocations(newTestData.capRateComps.compPropertyLocations);
         navSectionActions.navigateToCapRateConclusion();
-        capRateConclusionActions.verifyCompCapRatesCell(minCapRate, maxCapRate);
-        capRateConclusionActions.enterConclusionSectionConcludedCapRate(testData.concludedCapRate);
-        capRateConclusionActions.enterAsCompleteMonthsOfRentLoss(testData.asCompleteMonthsOfRentLoss);
-        capRateConclusionActions.enterASStabilizedMonthsOfRentLoss(testData.asStabilizedMonthsOfRentLoss);
-        capRateConclusionActions.selectRoundingFactor(testData.roundingFactorValue);
-        capRateConclusionActions.verifyNetOperatingIncome(testData.netOperatingIncome);
-        capRateConclusionActions.verifyConcludedCapRateCell(testData.concludedCapRate);
-        capRateConclusionActions.verifyAsStabilizedTablePart(testData.asStabilizedPeriod, testData.asStabilizedFinalValue);
-        capRateConclusionActions.verifyAsCompleteTablePart(testData.asStabilizedPeriod, testData.asCompleteAmountValue, testData.asStabilizedFinalValue);
-        capRateConclusionActions.enterAsCompleteLessEntrepreneurialProfit(testData.asCompleteLessEntrepreneurialProfit);
-        capRateConclusionActions.verifyAsIsMarketTablePart(testData.asIsMarketPeriod, testData.asIsMarketAmount,
-            testData.asIsMarketFinalValue, testData.asIsMarketPerUnit, testData.asIsMarketPerSF);
-        capRateConclusionActions.clickSaveContinueButton();
-        const salesComps = [testData.firstSalesComp, testData.secondSalesComp, testData.thirdSalesComp, testData.forthSalesComp,
-            testData.fifthSalesComp];
-        salesComps.forEach((comp, i) => {
-            findCompsActions.addComparable(comp.address);
-            findCompsActions.verifyAddedCompByIndex(comp.address, i + 1, comp.capRate);
+        capRateConclusionActions.verifyCompCapRatesCell(minCapRate, maxCapRate)
+            .enterConclusionSectionConcludedCapRate(newTestData.capRateConclusion.concludedCapRate)
+            .enterAsCompleteMonthsOfRentLoss(newTestData.capRateConclusion.asCompleteMonthsOfRentLoss)
+            .enterASStabilizedMonthsOfRentLoss(newTestData.capRateConclusion.asStabilizedMonthsOfRentLoss)
+            .selectRoundingFactor(newTestData.capRateConclusion.roundingFactorValue)
+            .verifyNetOperatingIncome(newTestData.capRateConclusion.netOperatingIncome)
+            .verifyConcludedCapRateCell(newTestData.capRateConclusion.concludedCapRate)
+            .verifyAsStabilizedTablePart(newTestData.capRateConclusion.asStabilizedPart)
+            .verifyAsCompleteTablePart(newTestData.capRateConclusion.asCompletePart)
+            .enterAsCompleteLessEntrepreneurialProfit(newTestData.capRateConclusion.asCompletePart.lessEntrepreneurialProfit)
+            .verifyAsIsMarketTablePart(newTestData.capRateConclusion.asIsMarketPart)
+            .clickSaveContinueButton();
+        newTestData.findComps.comparables.forEach((comp, i) => {
+            findCompsActions.addComparable(comp.address)
+                .verifyAddedCompByIndex(comp.address, i + 1, comp.capRate);
         });
         findCompsActions.clickSaveContinueButton();
-        createSalesCompMap.captureScreen();
-        createSalesCompMap.clickSaveContinueButton();
-        adjustCompsActions.checkCalculationUnitsRadio(testData.calculationUnitsRadioValue);
-        adjustCompsActions.checkIncomeAdjustmentLevel(testData.incomeAdjustmentType);
-        const adjustComps = [testData.firstAdjustComp, testData.secondAdjustComp, testData.thirdAdjustComp, testData.forthAdjustComp,
-            testData.fifthAdjustComp];
-        adjustComps.forEach((comp, i) => {
-            adjustCompsActions.enterSizeAdjustmentByColumn(comp.size, i);
-            adjustCompsActions.enterConditionAdjustmentByColumn(comp.condition, i);
-            adjustCompsActions.enterOtherAdjustmentByColumn(comp.other, i);
-            adjustCompsActions.verifyTrendedPriceByColumn(comp.trendedPrice, i);
-            adjustCompsActions.verifyAdjustedPriceByColumn(comp.adjustedPrice, i);
+        createSalesCompMap.captureScreen()
+            .clickSaveContinueButton();
+        adjustCompsActions.checkCalculationUnitsRadio(newTestData.adjustComps.calculationUnitsRadioValue)
+            .checkIncomeAdjustmentLevel(newTestData.capRateComps.incomeAdjustmentType);
+        newTestData.adjustComps.comparables.forEach((comp, i) => {
+            adjustCompsActions.enterSizeAdjustmentByColumn(comp.size, i)
+                .enterConditionAdjustmentByColumn(comp.condition, i)
+                .enterOtherAdjustmentByColumn(comp.other, i)
+                .verifyTrendedPriceByColumn(comp.trendedPrice, i)
+                .verifyAdjustedPriceByColumn(comp.adjustedPrice, i);
         });
-        adjustCompsActions.editOtherAdjustmentRowName(testData.otherAdjustmentNewName);
-        adjustCompsActions.clickSaveContinueButton();
-        valueConclusionActions.verifyUnadjustedPrices(testData.secondAdjustComp.trendedPrice, testData.unadjustedPriceAvg,
-            testData.thirdAdjustComp.trendedPrice, testData.unadjustedPriceMedian);
-        valueConclusionActions.verifyAdjustedPrices(testData.secondAdjustComp.adjustedPrice, testData.adjustedPriceAvg,
-            testData.thirdAdjustComp.adjustedPrice, testData.adjustedPriceMedian);
-        valueConclusionActions.verifyIncomeApproachConclusion(testData.incomeApproachConclusion);
-        valueConclusionActions.enterSaleValueConclusion(testData.saleValueConclusion);
-        valueConclusionActions.verifyAsStabilizedRow(testData.asStabilizedPeriod, testData.conclusionAsStabilizedAmount,
-            testData.conclusionAsStabilizedAmount);
-        valueConclusionActions.verifyAsCompleteRow(testData.asStabilizedPeriod, testData.conclusionAsCompleteAmount,
-            testData.conclusionAsCompleteAmount);
-        valueConclusionActions.verifyAsIsMarketRow(testData.asIsMarketPeriod, testData.conclusionAsIsMarketAmount,
-            testData.conclusionAsIsMarketFinalValue);
-        valueConclusionActions.clickSaveContinueButton();
+        adjustCompsActions.editOtherAdjustmentRowName(newTestData.adjustComps.otherAdjustmentNewName)
+            .clickSaveContinueButton();
+        valueConclusionActions.verifyUnadjustedPrices(newTestData.valueConclusion.unadjustedPrices)
+            .verifyAdjustedPrices(newTestData.valueConclusion.adjustedPrices)
+            .verifyIncomeApproachConclusion(newTestData.valueConclusion.incomeApproachConclusion)
+            .enterSaleValueConclusion(newTestData.valueConclusion.saleValueConclusion)
+            .verifyAsStabilizedRow(newTestData.valueConclusion.asStabilizedRow)
+            .verifyAsCompleteRow(newTestData.valueConclusion.asCompleteRow)
+            .verifyAsIsMarketRow(newTestData.valueConclusion.asIsMarketRow)
+            .clickSaveContinueButton();
         finalValuesReconciliationActions.closeSatisfactionSurvey()
             .checkPerUnitCheckbox()
-            .verifyIncomeStabDate(testData.stabilizedCompleteDate)
-            .verifyIncomeCompleteDate(testData.stabilizedCompleteDate)
-            .verifyIncomeMarketDate(testData.marketDate)
-            .verifySalesStabilizedDate(testData.stabilizedCompleteDate)
-            .verifySalesCompleteDate(testData.stabilizedCompleteDate)
-            .verifySalesMarketDate(testData.marketDate)
-            .checkFinalValueApproachRadio(testData.finalValueApproach)
-            .verifyFinalValueAsStabDate(testData.stabilizedCompleteDate)
-            .verifyFinalValueAsCompleteDate(testData.stabilizedCompleteDate)
-            .verifyFinalValueAsIsDate(testData.marketDate).clickSaveContinueButton();
-        propertySalesConclusionActions.verifyContractPrice(testData.contractPrice)
-            .verifyContractDate(testData.contractDateForPropSale)
-            .verifyContractChangeInValue(testData.asIsMarketFinalValue).clickSaveContinueButton();
-        assumptionsConditionsActions.addExtraordinaryAssumption(testData.extraordinaryAssumption).clickSaveContinueButton();
-        swotAnalysisActions.uncheckIncludeInReportCheckbox().clickSaveContinueButton();
+            .verifyIncomeStabDate(newTestData.finalValuesReconciliation.stabilizedCompleteDate)
+            .verifyIncomeCompleteDate(newTestData.finalValuesReconciliation.stabilizedCompleteDate)
+            .verifyIncomeMarketDate(newTestData.finalValuesReconciliation.marketDate)
+            .verifySalesStabilizedDate(newTestData.finalValuesReconciliation.stabilizedCompleteDate)
+            .verifySalesCompleteDate(newTestData.finalValuesReconciliation.stabilizedCompleteDate)
+            .verifySalesMarketDate(newTestData.finalValuesReconciliation.marketDate)
+            .checkFinalValueApproachRadio(newTestData.finalValuesReconciliation.finalValueApproach)
+            .verifyFinalValueAsStabDate(newTestData.finalValuesReconciliation.stabilizedCompleteDate)
+            .verifyFinalValueAsCompleteDate(newTestData.finalValuesReconciliation.stabilizedCompleteDate)
+            .verifyFinalValueAsIsDate(newTestData.finalValuesReconciliation.marketDate)
+            .clickSaveContinueButton();
+        propertySalesConclusionActions.verifyContractPrice(newTestData.propertySalesConclusion.contractPrice)
+            .verifyContractDate(newTestData.propertySalesConclusion.contractDate)
+            .verifyContractChangeInValue(newTestData.propertySalesConclusion.asIsMarketFinalValue)
+            .clickSaveContinueButton();
+        assumptionsConditionsActions.addExtraordinaryAssumption(testData.extraordinaryAssumption)
+            .clickSaveContinueButton();
+        swotAnalysisActions.uncheckIncludeInReportCheckbox()
+            .clickSaveContinueButton();
         highestBestUseActions.verifyZoneNameByRow(testData.zonesNames[0])
             .verifyAllowableUsesByRow(testData.propertyUse)
             .verifySiteAreaByRow(testData.siteArea)
