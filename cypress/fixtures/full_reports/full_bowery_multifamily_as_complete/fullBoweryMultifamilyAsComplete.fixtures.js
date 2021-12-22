@@ -518,6 +518,203 @@ const resRentReconcilFixture = () => {
     };
 };
 
+const stabRentRollFixture = () => {
+    return {
+        monthlyRentStab: 1100,
+        rentRollDiscussionComm: "8524 S Oglesby Ave. will contain 6 residential units upon stabilization; the " +
+            "residential rent roll is summarized by unit type and rent regulation status.",
+        occupancyRateComm: "We note that the subject will contain 6 market rate residential units.",
+    };
+};
+
+const stabRentRollSummaryFixture = () => {
+    return {
+        marketAnnualRent: "$79,200.00",
+        stabRRSummary: "The average forecasted monthly rent is $1,100.",
+        grossIncomeDiscussion: "Based on our market rent conclusions, the residential rent roll is projected at 100% of market.",
+        distributionSummary: "We estimated the total leasable area and resulting average square footage per unit " +
+            "based on a loss factor of 10% applied to the GBA."
+    };
+};
+
+const expenseStructureFixture = () => {
+    return {
+        tenantValue: "tenant",
+        ownerValue: "owner",
+        tenantObligationsCommentary: "In-unit electricity, cooking gas and heat. ",
+        ownerObligationsCommentary: "Common area electricity, refuse removal, water/sewer and common area maintenance. "
+    };
+};
+
+const parkingFixture = () => {
+    return {
+        commentary: "The subject property has 6 parking spaces available."
+    };
+};
+
+const grossIncomeFixture = () => {
+    return {
+        resVacancyCollLoss: 5,
+        coStarRate: 94,
+        commentary: "CoStar reports the submarket rate near 94% and metro area rate near 94%. Based on 8524 " +
+            "South Oglesby Avenue's current and historical operating results, macro market conditions, and investor " +
+            "expectations, a 5.00% residential vacancy and collection loss has been applied. We note that the subject " +
+            "will contain 6 market rate residential units."
+    };
+};
+
+const currentTaxInfoFixture = () => {
+    return {
+        liabilityBasis: "Per Unit",
+        landValue: 5625,
+        buildingValue: 8260,
+        className: "Cook County Class 2-11",
+        rateYear: 2020,
+        rateValue: 6.911,
+        liabilityCommentary: "8524 S Oglesby Ave. is located in Chicago, Cook County, IL. It is designated on the tax " +
+            "maps as PIN 20-36-420-020-0000. We have applied the 2020 tax rate of 6.911% to the most recent assessed " +
+            "value of the property to determine its current tax liability."
+    };
+};
+
+const projectedTaxInfoFixture = () => {
+    return {
+        liabilityComm: "In order to determine the projected tax liability, we have applied a tax rate of 6.911% to our " +
+            "projection of the assessed value."
+    };
+};
+
+const comparablesTaxInfoFixture = () => {
+    return {
+        comparables: [
+            {
+                address: "8326 S Brandon Ave", yearBuilt: 1900, basis: 4, taxPerBasis: 556.6,
+                sourceOfInfo: "externalDatabase", taxYear: 2020
+            },
+            {
+                address: "2908 E 91st St", yearBuilt: 1895, basis: 8, taxPerBasis: 437.09,
+                sourceOfInfo: "externalDatabase", taxYear: 2020
+            },
+            {
+                address: "2922 E 90th St", yearBuilt: 1962, basis: 9, taxPerBasis: 378.35,
+                sourceOfInfo: "externalDatabase", taxYear: 2020
+            },
+            {
+                address: "2748 E 83rd St", yearBuilt: 1959, basis: 8, taxPerBasis: 482.16,
+                sourceOfInfo: "externalDatabase", taxYear: 2020
+            },
+            {
+                address: "3004 E 79th Pl", yearBuilt: 1965, basis: 10, taxPerBasis: 585.66,
+                sourceOfInfo: "externalDatabase", taxYear: 2020
+            }
+        ],
+        commentary: "In order to support the forecasted real estate tax liability, we surveyed those of comparable " +
+            "buildings in the area."
+    };
+};
+
+const summaryTaxInfoFixture = () => {
+    return {
+        liabilityType: "Per Unit",
+        liabilityValue: 515.52,
+        commentary: "The projection for the subject property’s taxes per unit falls within the market range " +
+            "and is considered reasonable. Thus, we apply the projected tax liability of $3,093.12 in our analysis."
+    };
+};
+
+const expenseHistoryFixture = () => {
+    return {
+        expensePeriod: "Projection",
+        expenseYear: 2022,
+        grossRevenue: 84240,
+        realEstateTaxes: 2402.06,
+        insuranceExpense: "clear",
+        electricityExpense: 8268,
+        fuelExpense: "clear",
+        payrollBenefitsExpense: 1464,
+        toeToBe: "$12,134.06",
+        commentary: "We were provided with the owner's pro forma for the subject property. Therefore, " +
+            "we analyzed the subject's operating expense projections, as well as expense reports of comparable " +
+            "properties, in developing our forecast of operating expenses. The data, analyzed in terms of residential " +
+            "units and gross square footage, is presented below."
+    };
+};
+
+const comparableExpensesFixture = () => {
+    return {
+        comparables: [
+            {
+                address: "6001 S Sacramento Ave", location: "Chicago", period: "Projection",
+                squareFeet: 6608, resUnits: 13, insurance: 3900, electricity: 12675, repairsAndMaintenance: 5850,
+                payrollAndBenefits: 3900, generalAndAdministrative: 2925, management: 4899, toe: "$34,149.00"
+            },
+            {
+                address: "7955 S Emerald Ave", location: "Chicago", period: "Projection",
+                squareFeet: 9000, resUnits: 12, insurance: 4525, electricity: 6754, repairsAndMaintenance: 6000,
+                payrollAndBenefits: 3104, generalAndAdministrative: 2640, management: 5383, toe: "$28,406.00"
+            },
+            {
+                address: "7613 S Kingston Ave", location: "Chicago", period: "Projection",
+                squareFeet: 9750, resUnits: 13, insurance: 4200, electricity: 15917, repairsAndMaintenance: 5200,
+                payrollAndBenefits: 3357, generalAndAdministrative: 2275, management: 5902, toe: "$36,851.00"
+            },
+            {
+                address: "7655 S Coles Ave", location: "Chicago", period: "Projection",
+                squareFeet: 12771, resUnits: 13, insurance: 5161, electricity: 6151, repairsAndMaintenance: 5850,
+                payrollAndBenefits: 6248, generalAndAdministrative: 2300, management: 6529, toe: "$32,239.00"
+            },
+            {
+                address: "2320 E 70th Street", location: "Chicago", period: "Projection",
+                squareFeet: 7250, "resUnits": 8, insurance: 3200, electricity: 3800, repairsAndMaintenance: 3200,
+                payrollAndBenefits: 5000, generalAndAdministrative: 1880, management: 5464.8, toe: "$22,544.80"
+            },
+        ]
+    };
+};
+
+const expenseForecastFixture = () => {
+    return {
+        insuranceItem: {
+            name: "insurance", basis: "unit", forecast: 350
+        },
+        electricityItem: {
+            name: "electricity", basis: "unit", forecast: 1380, projection: expenseHistoryFixture().electricityExpense
+        },
+        fuelItem: {
+            name: "fuel", basis: "unit"
+        },
+        waterSewerItem: {
+            name: "waterAndSewer", basis: "unit"
+        },
+        repairsMaintenance: {
+            name: "repairsAndMaintenance", basis: "unit", forecast: 450
+        },
+        payrollBenefits: {
+            name: "payrollAndBenefits", basis: "unit", forecast: 350, projection: expenseHistoryFixture().payrollBenefitsExpense
+        },
+        general: {
+            name: "generalAndAdministrative", basis: "unit", forecast: 200
+        },
+        legalProf: {
+            name: "legalAndProfessionalFees", basis: "unit"
+        },
+        miscellaneous: {
+            name: "miscellaneous", basis: "unit"
+        },
+        management: {
+            name: "management", basis: "unit"
+        },
+        reserves: {
+            name: "reserves", basis: "unit", forecast: 200
+        },
+        total: {
+            name: "total", basis: "unit"
+        },
+        effectiveGrossIncome: 75240,
+        percentOfEgi: 4
+    };
+};
+
 export const reportCreationData = () => {
     return Object.freeze(reportCreationFixture());
 };
@@ -718,14 +915,62 @@ export const resRentReconcilData = () => {
     return Object.freeze(resRentReconcilFixture());
 };
 
+export const stabRentRollData = () => {
+    return Object.freeze(stabRentRollFixture());
+};
+
+export const stabRentRollSummaryData = () => {
+    return Object.freeze(stabRentRollSummaryFixture());
+};
+
+export const expenseStructureData = () => {
+    return Object.freeze(expenseStructureFixture());
+};
+
+export const parkingData = () => {
+    return Object.freeze(parkingFixture());
+};
+
+export const grossIncomeData = () => {
+    return Object.freeze(grossIncomeFixture());
+};
+
+export const currentTaxInfoData = () => {
+    return Object.freeze(currentTaxInfoFixture());
+};
+
+export const projectedTaxInfoData = () => {
+    return Object.freeze(projectedTaxInfoFixture());
+};
+
+export const comparablesTaxInfoData = () => {
+    return Object.freeze(comparablesTaxInfoFixture());
+};
+
+export const summaryTaxInfoData = () => {
+    return Object.freeze(summaryTaxInfoFixture());
+};
+
+export const expenseHistoryData = () => {
+    return Object.freeze(expenseHistoryFixture());
+};
+
+export const comparableExpensesData = () => {
+    return Object.freeze(comparableExpensesFixture());
+};
+
+export const expenseForecastData = () => {
+    return Object.freeze(expenseForecastFixture());
+};
+
 export default {
     reportCreationData: reportCreationData(),
     keyInfoPurposeData: keyInfoPurposeData(),
     keyInfoEngagementData: keyInfoEngagementData(),
     clientData: clientData(),
     siteDetails: siteDetailsData(),
-    asCompleteBuildingDescription: asCompleteBuildingDescriptionData(),
-    currentBuildingDescription: currentBuildingDescriptionData(),
+    asCompleteDescription: asCompleteBuildingDescriptionData(),
+    currentDescription: currentBuildingDescriptionData(),
     timeOnMarket: timeOnMarketData(),
     marketResearch: marketResearchData(),
     owner: ownerData(),
@@ -768,104 +1013,22 @@ export default {
     inPLaceRentRoll: inPLaceRentRollData(),
     unitGroups: unitGroupsData(),
     rentComparables: rentComparablesData(),
-    resRentReconcil: resRentReconcilData()
+    resRentReconcil: resRentReconcilData(),
+    stabRentRoll: stabRentRollData(),
+    stabRentRollSummary: stabRentRollSummaryData(),
+    expenseStructure: expenseStructureData(),
+    parking: parkingData(),
+    grossIncome: grossIncomeData(),
+    currentTaxInfo: currentTaxInfoData(),
+    projectedTaxInfo: projectedTaxInfoData(),
+    comparablesTaxInfo: comparablesTaxInfoData(),
+    summaryTaxInfo: summaryTaxInfoData(),
+    expenseHistory: expenseHistoryData(),
+    comparableExpenses: comparableExpensesData(),
+    expenseForecast: expenseForecastData()
 };
 
 export const testDataOld = {
-    "monthlyRentStab": 1100,
-    "rentRollDiscussionComm": "8524 S Oglesby Ave. will contain 6 residential units upon stabilization; the residential rent roll is summarized by unit type and rent regulation status.",
-    "occupancyRateComm": "We note that the subject will contain 6 market rate residential units.",
-    "marketAnnualRent": "$79,200.00",
-    "stabRRSummary": "The average forecasted monthly rent is $1,100.",
-    "grossIncomeDiscussion": "Based on our market rent conclusions, the residential rent roll is projected at 100% of market.",
-    "distributionSummary": "We estimated the total leasable area and resulting average square footage per unit based on a loss factor of 10% applied to the GBA.",
-    "tenantValue": "tenant",
-    "ownerValue": "owner",
-    "tenantObligationsCommentary": "In-unit electricity, cooking gas and heat. ",
-    "ownerObligationsCommentary": "Common area electricity, refuse removal, water/sewer and common area maintenance. ",
-    "parkingCommentary": "The subject property has 6 parking spaces available.",
-    "resVacancyCollLossValue": 5,
-    "coStarRate": 94,
-    "vcLossCommentary": "CoStar reports the submarket rate near 94% and metro area rate near 94%. Based on 8524 South Oglesby Avenue's current and historical operating results, macro market conditions, and investor expectations, a 5.00% residential vacancy and collection loss has been applied. We note that the subject will contain 6 market rate residential units.",
-    "concludedLiabilityBasisValue": "Per Unit",
-    "taxAssessedLandValue": 5625,
-    "taxAssessedBuildingValue": 8260,
-    "taxClassName": "Cook County Class 2-11",
-    "taxRateYear": 2020,
-    "taxRateValue": 6.911,
-    "taxLiabilityCommentary": "8524 S Oglesby Ave. is located in Chicago, Cook County, IL. It is designated on the tax maps as PIN 20-36-420-020-0000. We have applied the 2020 tax rate of 6.911% to the most recent assessed value of the property to determine its current tax liability.",
-    "projectedLiabilityComm": "In order to determine the projected tax liability, we have applied a tax rate of 6.911% to our projection of the assessed value.",
-    "firstTaxComp": {
-        "address": "8326 S Brandon Ave", "yearBuilt": 1900, "basis": 4, "taxPerBasis": 556.6,
-        "sourceOfInfo": "externalDatabase", "taxYear": 2020
-    },
-    "secondTaxComp": {
-        "address": "2908 E 91st St", "yearBuilt": 1895, "basis": 8, "taxPerBasis": 437.09,
-        "sourceOfInfo": "externalDatabase", "taxYear": 2020
-    },
-    "thirdTaxComp": {
-        "address": "2922 E 90th St", "yearBuilt": 1962, "basis": 9, "taxPerBasis": 378.35,
-        "sourceOfInfo": "externalDatabase", "taxYear": 2020
-    },
-    "forthTaxComp": {
-        "address": "2748 E 83rd St", "yearBuilt": 1959, "basis": 8, "taxPerBasis": 482.16,
-        "sourceOfInfo": "externalDatabase", "taxYear": 2020
-    },
-    "fifthTaxComp": {
-        "address": "3004 E 79th Pl", "yearBuilt": 1965, "basis": 10, "taxPerBasis": 585.66,
-        "sourceOfInfo": "externalDatabase", "taxYear": 2020
-    },
-    "taxCompsCommentary": "In order to support the forecasted real estate tax liability, we surveyed those of comparable buildings in the area.",
-    "concludedLiabilityType": "Per Unit",
-    "concludedLiabilityValue": 515.52,
-    "taxSummaryCommentary": "The projection for the subject property’s taxes per unit falls within the market range and is considered reasonable. Thus, we apply the projected tax liability of $3,093.12 in our analysis.",
-    "expensePeriod": "Projection",
-    "expenseYear": 2022,
-    "grossRevenue": 84240,
-    "realEstateTaxes": 2402.06,
-    "insuranceExpense": "clear",
-    "electricityExpense": 8268,
-    "fuelExpense": "clear",
-    "payrollBenefitsExpense": 1464,
-    "toeToBe": "$12,134.06",
-    "expenseHistoryCommentary": "We were provided with the owner's pro forma for the subject property. Therefore, we analyzed the subject's operating expense projections, as well as expense reports of comparable properties, in developing our forecast of operating expenses. The data, analyzed in terms of residential units and gross square footage, is presented below.",
-    "compExpensesFirstComp": {
-        "address": "6001 S Sacramento Ave", "location": "Chicago", "period": "Projection",
-        "squareFeet": 6608, "resUnits": 13, "insurance": 3900, "electricity": 12675, "repairsAndMaintenance": 5850,
-        "payrollAndBenefits": 3900, "generalAndAdministrative": 2925, "management": 4899, "toe": "$34,149.00"
-    },
-    "compExpensesSecondComp": {
-        "address": "7955 S Emerald Ave", "location": "Chicago", "period": "Projection",
-        "squareFeet": 9000, "resUnits": 12, "insurance": 4525, "electricity": 6754, "repairsAndMaintenance": 6000,
-        "payrollAndBenefits": 3104, "generalAndAdministrative": 2640, "management": 5383, "toe": "$28,406.00"
-    },
-    "compExpensesThirdComp": {
-        "address": "7613 S Kingston Ave", "location": "Chicago", "period": "Projection",
-        "squareFeet": 9750, "resUnits": 13, "insurance": 4200, "electricity": 15917, "repairsAndMaintenance": 5200,
-        "payrollAndBenefits": 3357, "generalAndAdministrative": 2275, "management": 5902, "toe": "$36,851.00"
-    },
-    "compExpensesForthComp": {
-        "address": "7655 S Coles Ave", "location": "Chicago", "period": "Projection",
-        "squareFeet": 12771, "resUnits": 13, "insurance": 5161, "electricity": 6151, "repairsAndMaintenance": 5850,
-        "payrollAndBenefits": 6248, "generalAndAdministrative": 2300, "management": 6529, "toe": "$32,239.00"
-    },
-    "compExpensesFifthComp": {
-        "address": "2320 E 70th Street", "location": "Chicago", "period": "Projection",
-        "squareFeet": 7250, "resUnits": 8, "insurance": 3200, "electricity": 3800, "repairsAndMaintenance": 3200,
-        "payrollAndBenefits": 5000, "generalAndAdministrative": 1880, "management": 5464.8, "toe": "$22,544.80"
-    },
-    "perSf": "sf",
-    "perUnit": "unit",
-    "insuranceForecast": 350,
-    "forecastItems": ["insurance", "electricity", "fuel", "waterAndSewer", "repairsAndMaintenance", "payrollAndBenefits",
-        "generalAndAdministrative", "legalAndProfessionalFees", "miscellaneous", "management", "reserves", "total"],
-    "electricityForecast": 1380,
-    "repairsForecast": 450,
-    "payrollForecast": 350,
-    "generalForecast": 200,
-    "effectiveGrossIncome": 75240,
-    "percentOfEgi": 4,
-    "reservesForecast": 200,
     "totalPotentialResIncome": "$79,200",
     "psfPotentialResIncome": "$16.74",
     "perUnitPotResIncome": "$13,200",

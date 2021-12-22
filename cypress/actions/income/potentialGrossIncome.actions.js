@@ -4,39 +4,86 @@ import {getNumberFromDollarNumberWithCommas, numberWithCommas} from "../../../ut
 
 class PotentialGrossIncomeActions extends BaseActions {
 
+    /**
+     *
+     * @param {number} value
+     * @returns {PotentialGrossIncomeActions}
+     */
     enterResVacancyCollLoss(value) {
         grossIncomePage.resVacancyPotentialLossInput.clear().type(value)
             .should("have.value", `${value.toFixed(2)}`);
+        return this;
     }
 
+    /**
+     *
+     * @param {number} vacancyCollLoss
+     * @param {string, number} potentialIncome
+     * @returns {PotentialGrossIncomeActions}
+     */
     verifyResidentialVCLoss(vacancyCollLoss, potentialIncome) {
         const potIncomeNumber = getNumberFromDollarNumberWithCommas(potentialIncome);
         const valueToBe = `$${numberWithCommas(Math.round(potIncomeNumber / 100 * vacancyCollLoss))}`;
         grossIncomePage.residentialVCLoss.should("be.disabled").should("have.value", valueToBe);
+        return this;
     }
 
+    /**
+     *
+     * @param {number} value
+     * @returns {PotentialGrossIncomeActions}
+     */
     enterCoStarSubmarketRate(value) {
         grossIncomePage.coStarSubmarketRateInput.clear().type(value).should("have.value", value);
+        return this;
     }
 
+    /**
+     *
+     * @param {number} value
+     * @returns {PotentialGrossIncomeActions}
+     */
     enterCoStarMetroRate(value) {
         grossIncomePage.coStarMetroRateInput.clear().type(value).should("have.value", value);
+        return this;
     }
 
+    /**
+     *
+     * @param {string} newCommentary
+     * @returns {PotentialGrossIncomeActions}
+     */
     editCommentary(newCommentary) {
         grossIncomePage.commentaryEditButton.click();
         grossIncomePage.commentaryInput.clear().type(newCommentary).should("have.text", newCommentary);
+        return this;
     }
 
+    /**
+     *
+     * @param {string} incomeToBe
+     * @returns {PotentialGrossIncomeActions}
+     */
     verifyPotentialResidentialIncome(incomeToBe) {
         // TODO: return to this row after WEB-3766 bug fix: "grossIncomePage.potentialResidentialIncome.should("have.text", incomeToBe);"
         grossIncomePage.potentialResidentialIncome.should("exist");
+        return this;
     }
 
+    /**
+     *
+     * @param {string} incomeToBe
+     * @returns {PotentialGrossIncomeActions}
+     */
     verifyOtherIncome(incomeToBe = "$0.00") {
         grossIncomePage.otherIncome.should("have.text", incomeToBe);
+        return this;
     }
 
+    /**
+     *
+     * @returns {PotentialGrossIncomeActions}
+     */
     verifyPotentialGrossIncome() {
         grossIncomePage.potentialResidentialIncome.then(el => {
             const potResIncomeNumber = getNumberFromDollarNumberWithCommas(el.text());
@@ -47,16 +94,26 @@ class PotentialGrossIncomeActions extends BaseActions {
                 grossIncomePage.potentialGrossIncome.should("exist");
             });
         });
+        return this;
     }
 
+    /**
+     *
+     * @returns {PotentialGrossIncomeActions}
+     */
     verifyLessResidentialVCLoss() {
         grossIncomePage.residentialVCLoss.then(vcLoss => {
            const resVCLossNumber = getNumberFromDollarNumberWithCommas(vcLoss.attr("value"));
             const textToBe = `-$${numberWithCommas(resVCLossNumber.toFixed(2))}`;
             grossIncomePage.lessResidentialVCLoss.should("have.text", textToBe);
         });
+        return this;
     }
 
+    /**
+     *
+     * @returns {PotentialGrossIncomeActions}
+     */
     verifyEffectiveGrossIncome() {
         grossIncomePage.potentialGrossIncome.then(grossIncome => {
             const potGrossIncomeNumber = getNumberFromDollarNumberWithCommas(grossIncome.text());
@@ -66,14 +123,22 @@ class PotentialGrossIncomeActions extends BaseActions {
                 grossIncomePage.effectiveGrossIncome.should("have.text", textToBe);
             });
         });
+        return this;
     }
 
+    /**
+     *
+     * @param {string} potentialResIncomeToBe
+     * @param {string} otherIncome
+     * @returns {PotentialGrossIncomeActions}
+     */
     verifyIncomeTable(potentialResIncomeToBe, otherIncome = "$0.00") {
-        this.verifyPotentialResidentialIncome(potentialResIncomeToBe);
-        this.verifyOtherIncome(otherIncome);
-        this.verifyPotentialGrossIncome();
-        this.verifyLessResidentialVCLoss();
-        this.verifyEffectiveGrossIncome();
+        this.verifyPotentialResidentialIncome(potentialResIncomeToBe)
+            .verifyOtherIncome(otherIncome)
+            .verifyPotentialGrossIncome()
+            .verifyLessResidentialVCLoss()
+            .verifyEffectiveGrossIncome();
+        return this;
     }
 }
 

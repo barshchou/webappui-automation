@@ -68,10 +68,10 @@ describe("Full bowery way, multifamily as complete report", () => {
         summaryActions.verifySiteDetails(newTestData.siteDetails)
             .enterYearBuilt(newTestData.siteDetails.yearBuilt)
             .enterSiteArea(newTestData.siteDetails.siteArea)
-            .fillAsCompleteBuildingDescription(newTestData.asCompleteBuildingDescription)
+            .fillAsCompleteBuildingDescription(newTestData.asCompleteDescription)
             .clickWalkUpTypeButtons()
-            .fillCurrentBuildDescription(newTestData.currentBuildingDescription)
-            .editAsCompleteExport(newTestData.asCompleteBuildingDescription.asCompleteExportText)
+            .fillCurrentBuildDescription(newTestData.currentDescription)
+            .editAsCompleteExport(newTestData.asCompleteDescription.asCompleteExportText)
             .clickSaveContinueButton();
         marketActions.verifyTimeOnMarket(newTestData.timeOnMarket)
             .fillMarketResearch(newTestData.marketResearch)
@@ -194,27 +194,27 @@ describe("Full bowery way, multifamily as complete report", () => {
             .fillStairsDescription(newTestData.stairsData)
             .editStairsCommentary(newTestData.stairsData.commentary)
             .clickSaveContinueButton();
-        inPlaceRentRollActions.verifyNumberOfResidentialUnits(newTestData.currentBuildingDescription.numberOfUnits)
+        inPlaceRentRollActions.verifyNumberOfResidentialUnits(newTestData.currentDescription.numberOfUnits)
             .checkCheckboxByLabelAndVerify(newTestData.inPLaceRentRoll.forecastLabel, newTestData.inPLaceRentRoll.forecastColumn)
             .checkListIsInspectedByRowNumbers(newTestData.inPLaceRentRoll.isInspectedRowsToCheck)
-            .enterUnitNumbersByOrderToAll(newTestData.currentBuildingDescription.numberOfUnits)
-            .enterAllEqualRoomsNumber(newTestData.inPLaceRentRoll.roomsNumber, newTestData.currentBuildingDescription.numberOfUnits)
-            .enterAllEqualBedroomsNumber(newTestData.inPLaceRentRoll.bedroomsNumber, newTestData.currentBuildingDescription.numberOfUnits)
+            .enterUnitNumbersByOrderToAll(newTestData.currentDescription.numberOfUnits)
+            .enterAllEqualRoomsNumber(newTestData.inPLaceRentRoll.roomsNumber, newTestData.currentDescription.numberOfUnits)
+            .enterAllEqualBedroomsNumber(newTestData.inPLaceRentRoll.bedroomsNumber, newTestData.currentDescription.numberOfUnits)
             .fillAllRentTypeCellsWithEqualValue(newTestData.inPLaceRentRoll.rentType)
-            .enterAllEqualLeaseStatuses(newTestData.inPLaceRentRoll.leaseStatus, newTestData.currentBuildingDescription.numberOfUnits)
-            .enterAllEqualForecast(newTestData.inPLaceRentRoll.forecastValue, newTestData.currentBuildingDescription.numberOfUnits)
+            .enterAllEqualLeaseStatuses(newTestData.inPLaceRentRoll.leaseStatus, newTestData.currentDescription.numberOfUnits)
+            .enterAllEqualForecast(newTestData.inPLaceRentRoll.forecastValue, newTestData.currentDescription.numberOfUnits)
             .verifyMonthlyTotalForecastEqualValue()
             .verifyAnnuallyTotalForecastEqualValue()
             .verifyRentRollCommentary(newTestData.inPLaceRentRoll.commentary)
             .clickSaveContinueButton();
         unitGroupsActions.verifyRowsNumberEqualBedroomsNonComp(newTestData.inPLaceRentRoll.bedroomsNumber,
-            newTestData.currentBuildingDescription.numberOfUnits)
+            newTestData.currentDescription.numberOfUnits)
             .verifyGLAPercentage()
             .verifyRoomSize()
-            .verifyGLAValue(newTestData.currentBuildingDescription.grossArea)
+            .verifyGLAValue(newTestData.currentDescription.grossArea)
             .enterAvgSFByUnitTypeValue(newTestData.unitGroups.unitType, newTestData.unitGroups.averageSF)
-            .verifyGLACellValue(newTestData.currentBuildingDescription.grossArea)
-            .verifyTotalAvgSqftEqualUnits(newTestData.unitGroups.averageSF, newTestData.currentBuildingDescription.numberOfUnits)
+            .verifyGLACellValue(newTestData.currentDescription.grossArea)
+            .verifyTotalAvgSqftEqualUnits(newTestData.unitGroups.averageSF, newTestData.currentDescription.numberOfUnits)
             .clickSaveContinueButton();
         newTestData.rentComparables.comparables.forEach((comp, i) => {
             rentCompsActions.openAddNewComparableFormAdvanced(comp);
@@ -238,189 +238,177 @@ describe("Full bowery way, multifamily as complete report", () => {
             .selectBedroomMarketBreakdownBedByNumber(bedroomsNumber, newTestData.resRentReconcil.marketBreakdown)
             .editBedroomCommentaryByBedNum(bedroomsNumber, newTestData.resRentReconcil.reconcilCommentary)
             .clickSaveContinueButton();
-        stabilizedRentRollActions.verifyUnitTypeAndRentConclusion(testData.unitType, testData.marketConclusion);
-        stabilizedRentRollActions.verifyRowsNumber(testData.numberOfUnits);
-        stabilizedRentRollActions.verifyCheckedIsInspected(testData.isInspectedRowsToCheck);
-        stabilizedRentRollActions.verifyUnitsNumberByOrder();
-        stabilizedRentRollActions.verifyAllRoomsNumbers(testData.roomsNumber);
-        stabilizedRentRollActions.verifyAllBedroomsNumbers(testData.bedroomsNumber);
-        stabilizedRentRollActions.verifyAllRentTypeCells(testData.rentType);
-        stabilizedRentRollActions.enterAllMonthlyRents(testData.monthlyRentStab);
-        stabilizedRentRollActions.verifyTotalMonthlyRent(testData.numberOfUnits, testData.monthlyRentStab);
-        stabilizedRentRollActions.verifyTotalAnnualRent();
-        stabilizedRentRollActions.verifyAllPerRoomCells(testData.roomsNumber, testData.monthlyRentStab);
-        stabilizedRentRollActions.verifyAllLeaseStatusesCells(testData.leaseStatus);
-        stabilizedRentRollActions.verifyAllRentForecasts(testData.forecastValue);
-        stabilizedRentRollActions.verifyTotalMonthlyForecast(testData.numberOfUnits, testData.forecastValue);
-        stabilizedRentRollActions.verifyTotalAnnualForecast();
-        stabilizedRentRollActions.verifyRentRollDiscussionCommentary(testData.rentRollDiscussionComm);
-        stabilizedRentRollActions.editOccupancyRateCommentary(testData.occupancyRateComm);
-        stabilizedRentRollActions.clickSaveContinueButton();
-        stabRentRollSummaryActions.verifyAnnualRentByRow(testData.marketAnnualRent);
-        stabRentRollSummaryActions.verifyTotalAnnualRent(testData.marketAnnualRent);
-        stabRentRollSummaryActions.verifyIncreaseValueByRow();
-        stabRentRollSummaryActions.verifyPGICellByRow(testData.marketAnnualRent);
-        stabRentRollSummaryActions.verifyPGITotal(testData.marketAnnualRent);
-        stabRentRollSummaryActions.openDiscussionTab();
-        stabRentRollSummaryActions.verifyStabRRSummaryDiscussion(testData.stabRRSummary);
-        stabRentRollSummaryActions.verifyGrossIncomeDiscussion(testData.grossIncomeDiscussion);
-        stabRentRollSummaryActions.verifyDistributionSummary(testData.distributionSummary);
-        stabRentRollSummaryActions.clickSaveContinueButton();
-        expensesStructureActions.checkHeatExpensesByValue(testData.tenantValue);
-        expensesStructureActions.checkElectricityByValue(testData.tenantValue);
-        expensesStructureActions.checkCommonElectricityByValue(testData.ownerValue);
-        expensesStructureActions.checkGasByValue(testData.tenantValue);
-        expensesStructureActions.checkRefuseRemovalByValue(testData.ownerValue);
-        expensesStructureActions.checkWaterSewerByValue(testData.ownerValue);
-        expensesStructureActions.checkAreaMaintenanceByValue(testData.ownerValue);
-        expensesStructureActions.verifyTenantObligationsCommentary(testData.tenantObligationsCommentary);
-        expensesStructureActions.verifyOwnerObligationsCommentary(testData.ownerObligationsCommentary);
-        expensesStructureActions.clickSaveContinueButton();
-        laundryActions.verifyNoLaundryButtonExists();
-        laundryActions.clickSaveContinueButton();
-        storageActions.verifyNoStorageButtonExists();
-        storageActions.clickSaveContinueButton();
-        parkingActions.checkIsFreeParkingCheckbox();
-        parkingActions.verifyParkingCommentary(testData.parkingCommentary);
-        parkingActions.clickSaveContinueButton();
-        otherActions.verifyPageIsOpened();
-        otherActions.clickSaveContinueButton();
-        grossIncomeActions.enterResVacancyCollLoss(testData.resVacancyCollLossValue);
-        grossIncomeActions.verifyResidentialVCLoss(testData.resVacancyCollLossValue, testData.marketAnnualRent);
-        grossIncomeActions.enterCoStarSubmarketRate(testData.coStarRate);
-        grossIncomeActions.enterCoStarMetroRate(testData.coStarRate);
-        grossIncomeActions.editCommentary(testData.vcLossCommentary);
-        grossIncomeActions.verifyIncomeTable(testData.marketAnnualRent);
-        grossIncomeActions.clickSaveContinueButton();
-        taxInfoActions.checkBasisByValue(testData.concludedLiabilityBasisValue);
-        taxInfoActions.fillTaxableAssessedValues(testData.taxAssessedLandValue, testData.taxAssessedBuildingValue);
-        taxInfoActions.editTaxRatesWithoutAddingNew(testData.taxClassName, testData.taxRateYear, testData.taxRateValue);
-        taxInfoActions.verifyTaxLiabilityInfo(testData.taxClassName, testData.taxRateYear);
-        taxInfoActions.verifyTaxLiabilityTable(testData.taxRateValue, testData.numberOfUnits);
-        taxInfoActions.verifyTaxLiabilityCommentary(testData.taxLiabilityCommentary);
-        taxInfoActions.clickProjectedTab();
-        taxInfoActions.checkProjectedIncludeCheckbox();
-        taxInfoActions.verifyProjectedLiabilityCommentary(testData.projectedLiabilityComm);
-        taxInfoActions.clickComparablesTab();
-        taxInfoActions.addListTaxComparablesWithoutSourceInfoData(testData.firstTaxComp, testData.secondTaxComp,
-            testData.thirdTaxComp, testData.forthTaxComp, testData.fifthTaxComp);
-        taxInfoActions.verifyListAddedComparables(testData.firstTaxComp, testData.secondTaxComp,
-            testData.thirdTaxComp, testData.forthTaxComp, testData.fifthTaxComp);
-        taxInfoActions.verifyTaxCompsCommentary(testData.taxCompsCommentary);
-        taxInfoActions.clickSummaryTab();
-        taxInfoActions.checkConcludedLiabilityTypeByValue(testData.concludedLiabilityType);
-        taxInfoActions.enterConcludedLiabilityPerBasis(testData.concludedLiabilityValue);
-        taxInfoActions.verifyAppraiserOpinionTaxLiabilityTotal(testData.concludedLiabilityValue, testData.numberOfUnits);
-        taxInfoActions.verifyAppraiserOpinionTaxLiabilityPerBasis(testData.concludedLiabilityValue);
-        taxInfoActions.verifyAppraiserOpinionTaxRateCell(testData.taxRateValue);
-        taxInfoActions.verifyAppraiserOpinionTaxableAssessedValueCell(testData.taxRateValue);
-        taxInfoActions.verifyTaxSummaryCommentary(testData.taxSummaryCommentary);
-        taxInfoActions.clickSaveContinueButton();
-        expenseHistoryActions.selectExpensePeriod(testData.expensePeriod);
-        expenseHistoryActions.verifyExpenseYear(testData.expenseYear);
-        expenseHistoryActions.clickAddExpenseYearButton();
-        expenseHistoryActions.checkGrossRevenueCheckboxByColumnIndex();
-        expenseHistoryActions.enterGrossRevenueByColIndex(testData.grossRevenue);
-        expenseHistoryActions.enterRealEstateTaxesByColIndex(testData.realEstateTaxes);
-        expenseHistoryActions.enterInsuranceByColIndex(testData.insuranceExpense);
-        expenseHistoryActions.enterElectricityByColIndex(testData.electricityExpense);
-        expenseHistoryActions.enterFuelByColIndex(testData.fuelExpense);
-        expenseHistoryActions.uncheckFuelCheckboxByColIndex();
-        expenseHistoryActions.uncheckWaterSewerCheckboxByColIndex();
-        expenseHistoryActions.enterPayrollBenefitsByColIndex(testData.payrollBenefitsExpense);
-        expenseHistoryActions.verifyTotalOpExpensesByColIndex(testData.toeToBe);
-        expenseHistoryActions.verifyTOEExcludingRETByIndex(testData.realEstateTaxes);
-        expenseHistoryActions.verifyNetOpIncomeByIndex(testData.grossRevenue);
-        expenseHistoryActions.verifyAverageTable();
-        expenseHistoryActions.verifyExpenseHistoryCommentary(testData.expenseHistoryCommentary);
-        expenseHistoryActions.clickSaveContinueButton();
-        const compExpensesArray = [testData.compExpensesFirstComp, testData.compExpensesSecondComp, testData.compExpensesThirdComp,
-            testData.compExpensesForthComp, testData.compExpensesFifthComp];
-        compExpensesArray.forEach((comp, i) => {
-            compExpensesActions.clickAddBlankColumnButton();
-            compExpensesActions.enterAddressByColumnIndex(comp.address, i);
-            compExpensesActions.enterLocationByColumnIndex(comp.location, i);
-            compExpensesActions.chooseExpensePeriodByColumnIndex(comp.period, i);
-            compExpensesActions.enterSquareFeetByColumnIndex(comp.squareFeet, i);
-            compExpensesActions.enterResidentialUnitsByColumnIndex(comp.resUnits, i);
-            compExpensesActions.enterInsuranceByColumnIndex(comp.insurance, i);
-            compExpensesActions.enterElectricityByColumnIndex(comp.electricity, i);
-            compExpensesActions.enterRepairsMaintenanceByColumnIndex(comp.repairsAndMaintenance, i);
-            compExpensesActions.enterPayrollBenefitsByColumnIndex(comp.payrollAndBenefits, i);
-            compExpensesActions.enterGeneralAdministrativeByColumnIndex(comp.generalAndAdministrative, i);
-            compExpensesActions.enterManagementFeesByColumnIndex(comp.management, i);
-            compExpensesActions.verifyTOEByColumnIndex(comp.toe, i);
-            compExpensesActions.verifyTOEPerSFByColumnIndex(i);
-            compExpensesActions.verifyToePerUnitByColumnIndex(i);
+        stabilizedRentRollActions.verifyUnitTypeAndRentConclusion(newTestData.unitGroups.unitType,
+            newTestData.resRentReconcil.marketConclusion)
+            .verifyRowsNumber(newTestData.currentDescription.numberOfUnits)
+            .verifyCheckedIsInspected(newTestData.inPLaceRentRoll.isInspectedRowsToCheck)
+            .verifyUnitsNumberByOrder()
+            .verifyAllRoomsNumbers(newTestData.inPLaceRentRoll.roomsNumber)
+            .verifyAllBedroomsNumbers(newTestData.inPLaceRentRoll.bedroomsNumber)
+            .verifyAllRentTypeCells(newTestData.inPLaceRentRoll.rentType)
+            .enterAllMonthlyRents(newTestData.stabRentRoll.monthlyRentStab)
+            .verifyTotalMonthlyRent(newTestData.currentDescription.numberOfUnits, newTestData.stabRentRoll.monthlyRentStab)
+            .verifyTotalAnnualRent()
+            .verifyAllPerRoomCells(newTestData.inPLaceRentRoll.roomsNumber, newTestData.stabRentRoll.monthlyRentStab)
+            .verifyAllLeaseStatusesCells(newTestData.inPLaceRentRoll.leaseStatus)
+            .verifyAllRentForecasts(newTestData.inPLaceRentRoll.forecastValue)
+            .verifyTotalMonthlyForecast(newTestData.currentDescription.numberOfUnits, newTestData.inPLaceRentRoll.forecastValue)
+            .verifyTotalAnnualForecast()
+            .verifyRentRollDiscussionCommentary(newTestData.stabRentRoll.rentRollDiscussionComm)
+            .editOccupancyRateCommentary(newTestData.stabRentRoll.occupancyRateComm)
+            .clickSaveContinueButton();
+        stabRentRollSummaryActions.verifyAnnualRentByRow(newTestData.stabRentRollSummary.marketAnnualRent)
+            .verifyTotalAnnualRent(newTestData.stabRentRollSummary.marketAnnualRent)
+            .verifyIncreaseValueByRow()
+            .verifyPGICellByRow(newTestData.stabRentRollSummary.marketAnnualRent)
+            .verifyPGITotal(newTestData.stabRentRollSummary.marketAnnualRent)
+            .openDiscussionTab()
+            .verifyStabRRSummaryDiscussion(newTestData.stabRentRollSummary.stabRRSummary)
+            .verifyGrossIncomeDiscussion(newTestData.stabRentRollSummary.grossIncomeDiscussion)
+            .verifyDistributionSummary(newTestData.stabRentRollSummary.distributionSummary)
+            .clickSaveContinueButton();
+        expensesStructureActions.checkHeatExpensesByValue(newTestData.expenseStructure.tenantValue)
+            .checkElectricityByValue(newTestData.expenseStructure.tenantValue)
+            .checkCommonElectricityByValue(newTestData.expenseStructure.ownerValue)
+            .checkGasByValue(newTestData.expenseStructure.tenantValue)
+            .checkRefuseRemovalByValue(newTestData.expenseStructure.ownerValue)
+            .checkWaterSewerByValue(newTestData.expenseStructure.ownerValue)
+            .checkAreaMaintenanceByValue(newTestData.expenseStructure.ownerValue)
+            .verifyTenantObligationsCommentary(newTestData.expenseStructure.tenantObligationsCommentary)
+            .verifyOwnerObligationsCommentary(newTestData.expenseStructure.ownerObligationsCommentary)
+            .clickSaveContinueButton();
+        laundryActions.verifyNoLaundryButtonExists()
+            .clickSaveContinueButton();
+        storageActions.verifyNoStorageButtonExists()
+            .clickSaveContinueButton();
+        parkingActions.checkIsFreeParkingCheckbox()
+            .verifyParkingCommentary(newTestData.parking.commentary)
+            .clickSaveContinueButton();
+        otherActions.verifyPageIsOpened()
+            .clickSaveContinueButton();
+        grossIncomeActions.enterResVacancyCollLoss(newTestData.grossIncome.resVacancyCollLoss)
+            .verifyResidentialVCLoss(newTestData.grossIncome.resVacancyCollLoss, newTestData.stabRentRollSummary.marketAnnualRent)
+            .enterCoStarSubmarketRate(newTestData.grossIncome.coStarRate)
+            .enterCoStarMetroRate(newTestData.grossIncome.coStarRate)
+            .editCommentary(newTestData.grossIncome.commentary)
+            .verifyIncomeTable(newTestData.stabRentRollSummary.marketAnnualRent)
+            .clickSaveContinueButton();
+        taxInfoActions.checkBasisByValue(newTestData.currentTaxInfo.liabilityBasis)
+            .fillTaxableAssessedValues(newTestData.currentTaxInfo)
+            .editTaxRatesWithoutAddingNew(newTestData.currentTaxInfo)
+            .verifyTaxLiabilityInfo(newTestData.currentTaxInfo)
+            .verifyTaxLiabilityTable(newTestData.currentTaxInfo.rateValue, newTestData.currentDescription.numberOfUnits)
+            .verifyTaxLiabilityCommentary(newTestData.currentTaxInfo.liabilityCommentary)
+            .clickProjectedTab()
+            .checkProjectedIncludeCheckbox()
+            .verifyProjectedLiabilityCommentary(newTestData.projectedTaxInfo.liabilityComm)
+            .clickComparablesTab()
+            .addListTaxComparablesWithoutSourceInfoData(newTestData.comparablesTaxInfo.comparables)
+            .verifyListAddedComparables(newTestData.comparablesTaxInfo.comparables)
+            .verifyTaxCompsCommentary(newTestData.comparablesTaxInfo.commentary)
+            .clickSummaryTab()
+            .checkConcludedLiabilityTypeByValue(newTestData.summaryTaxInfo.liabilityType)
+            .enterConcludedLiabilityPerBasis(newTestData.summaryTaxInfo.liabilityValue)
+            .verifyAppraiserOpinionLiabilityTotal(newTestData.summaryTaxInfo.liabilityValue, newTestData.currentDescription.numberOfUnits)
+            .verifyAppraiserOpinionTaxLiabilityPerBasis(newTestData.summaryTaxInfo.liabilityValue)
+            .verifyAppraiserOpinionTaxRateCell(newTestData.currentTaxInfo.rateValue)
+            .verifyAppraiserOpinionTaxableAssessedValueCell(newTestData.currentTaxInfo.rateValue)
+            .verifyTaxSummaryCommentary(newTestData.summaryTaxInfo.commentary)
+            .clickSaveContinueButton();
+        expenseHistoryActions.selectExpensePeriod(newTestData.expenseHistory.expensePeriod)
+            .verifyExpenseYear(newTestData.expenseHistory.expenseYear)
+            .clickAddExpenseYearButton()
+            .checkGrossRevenueCheckboxByColumnIndex()
+            .enterGrossRevenueByColIndex(newTestData.expenseHistory.grossRevenue)
+            .enterRealEstateTaxesByColIndex(newTestData.expenseHistory.realEstateTaxes)
+            .enterInsuranceByColIndex(newTestData.expenseHistory.insuranceExpense)
+            .enterElectricityByColIndex(newTestData.expenseHistory.electricityExpense)
+            .enterFuelByColIndex(newTestData.expenseHistory.fuelExpense)
+            .uncheckFuelCheckboxByColIndex()
+            .uncheckWaterSewerCheckboxByColIndex()
+            .enterPayrollBenefitsByColIndex(newTestData.expenseHistory.payrollBenefitsExpense)
+            .verifyTotalOpExpensesByColIndex(newTestData.expenseHistory.toeToBe)
+            .verifyTOEExcludingRETByIndex(newTestData.expenseHistory.realEstateTaxes)
+            .verifyNetOpIncomeByIndex(newTestData.expenseHistory.grossRevenue)
+            .verifyAverageTable()
+            .verifyExpenseHistoryCommentary(newTestData.expenseHistory.commentary)
+            .clickSaveContinueButton();
+        newTestData.comparableExpenses.comparables.forEach((comp, i) => {
+            compExpensesActions.clickAddBlankColumnButton()
+                .enterAddressByColumnIndex(comp.address, i)
+                .enterLocationByColumnIndex(comp.location, i)
+                .chooseExpensePeriodByColumnIndex(comp.period, i)
+                .enterSquareFeetByColumnIndex(comp.squareFeet, i)
+                .enterResidentialUnitsByColumnIndex(comp.resUnits, i)
+                .enterInsuranceByColumnIndex(comp.insurance, i)
+                .enterElectricityByColumnIndex(comp.electricity, i)
+                .enterRepairsMaintenanceByColumnIndex(comp.repairsAndMaintenance, i)
+                .enterPayrollBenefitsByColumnIndex(comp.payrollAndBenefits, i)
+                .enterGeneralAdministrativeByColumnIndex(comp.generalAndAdministrative, i)
+                .enterManagementFeesByColumnIndex(comp.management, i)
+                .verifyTOEByColumnIndex(comp.toe, i)
+                .verifyTOEPerSFByColumnIndex(i)
+                .verifyToePerUnitByColumnIndex(i);
         });
-        compExpensesActions.verifyTableAverageValues();
-        compExpensesActions.clickSaveContinueButton();
+        compExpensesActions.verifyTableAverageValues()
+            .clickSaveContinueButton();
         navSectionActions.clickExpenseForecastBookmark();
-        expenseForecastActions.chooseForecastItemBasis(testData.forecastItems[0], testData.perUnit);
-        expenseForecastActions.enterForecastItemForecast(testData.forecastItems[0], testData.insuranceForecast);
-        expenseForecastActions.verifyForecastItemCompMin(testData.forecastItems[0], testData.perUnit, compExpensesArray);
-        expenseForecastActions.verifyForecastItemCompAverage(testData.forecastItems[0], testData.perUnit, compExpensesArray);
-        expenseForecastActions.verifyForecastItemCompMax(testData.forecastItems[0], testData.perUnit, compExpensesArray);
-        expenseForecastActions.verifyForecastItemBasisMoney(testData.forecastItems[0], testData.perUnit, testData.numberOfUnits,
-            testData.grossArea, testData.insuranceForecast);
-        expenseForecastActions.chooseForecastItemBasis(testData.forecastItems[1], testData.perUnit);
-        expenseForecastActions.enterForecastItemForecast(testData.forecastItems[1], testData.electricityForecast);
-        expenseForecastActions.verifyForecastItemCompMin(testData.forecastItems[1], testData.perUnit, compExpensesArray);
-        expenseForecastActions.verifyForecastItemCompAverage(testData.forecastItems[1], testData.perUnit, compExpensesArray);
-        expenseForecastActions.verifyForecastItemCompMax(testData.forecastItems[1], testData.perUnit, compExpensesArray);
-        expenseForecastActions.verifyForecastItemBasisMoney(testData.forecastItems[1], testData.perUnit, testData.numberOfUnits,
-            testData.grossArea, testData.electricityForecast);
-        expenseForecastActions.verifyForecastItemOwnerProjection(testData.forecastItems[1], testData.perUnit, testData.electricityExpense,
-            testData.numberOfUnits, testData.grossArea);
-        expenseForecastActions.chooseForecastItemBasis(testData.forecastItems[2], testData.perUnit);
-        expenseForecastActions.chooseForecastItemBasis(testData.forecastItems[3], testData.perUnit);
-        expenseForecastActions.chooseForecastItemBasis(testData.forecastItems[4], testData.perUnit);
-        expenseForecastActions.enterForecastItemForecast(testData.forecastItems[4], testData.repairsForecast);
-        expenseForecastActions.verifyForecastItemCompMin(testData.forecastItems[4], testData.perUnit, compExpensesArray);
-        expenseForecastActions.verifyForecastItemCompAverage(testData.forecastItems[4], testData.perUnit, compExpensesArray);
-        expenseForecastActions.verifyForecastItemCompMax(testData.forecastItems[4], testData.perUnit, compExpensesArray);
-        expenseForecastActions.verifyForecastItemBasisMoney(testData.forecastItems[4], testData.perUnit, testData.numberOfUnits,
-            testData.grossArea, testData.repairsForecast);
-        expenseForecastActions.chooseForecastItemBasis(testData.forecastItems[5], testData.perUnit);
-        expenseForecastActions.enterForecastItemForecast(testData.forecastItems[5], testData.payrollForecast);
-        expenseForecastActions.verifyForecastItemCompMin(testData.forecastItems[5], testData.perUnit, compExpensesArray);
-        expenseForecastActions.verifyForecastItemCompAverage(testData.forecastItems[5], testData.perUnit, compExpensesArray);
-        expenseForecastActions.verifyForecastItemCompMax(testData.forecastItems[5], testData.perUnit, compExpensesArray);
-        expenseForecastActions.verifyForecastItemBasisMoney(testData.forecastItems[5], testData.perUnit, testData.numberOfUnits,
-            testData.grossArea, testData.payrollForecast);
-        expenseForecastActions.verifyForecastItemOwnerProjection(testData.forecastItems[5], testData.perUnit, testData.payrollBenefitsExpense,
-            testData.numberOfUnits, testData.grossArea);
-        expenseForecastActions.chooseForecastItemBasis(testData.forecastItems[6], testData.perUnit);
-        expenseForecastActions.enterForecastItemForecast(testData.forecastItems[6], testData.generalForecast);
-        expenseForecastActions.verifyForecastItemCompMin(testData.forecastItems[6], testData.perUnit, compExpensesArray);
-        expenseForecastActions.verifyForecastItemCompAverage(testData.forecastItems[6], testData.perUnit, compExpensesArray);
-        expenseForecastActions.verifyForecastItemCompMax(testData.forecastItems[6], testData.perUnit, compExpensesArray);
-        expenseForecastActions.verifyForecastItemBasisMoney(testData.forecastItems[6], testData.perUnit, testData.numberOfUnits,
-            testData.grossArea, testData.generalForecast);
-        expenseForecastActions.chooseForecastItemBasis(testData.forecastItems[7], testData.perUnit);
-        expenseForecastActions.chooseForecastItemBasis(testData.forecastItems[8], testData.perUnit);
-        expenseForecastActions.chooseForecastItemBasis(testData.forecastItems[9], testData.perUnit);
-        expenseForecastActions.checkPercentOfEGICheckbox();
-        expenseForecastActions.enterPercentOfEgi(testData.percentOfEgi);
-        const managementForecastEgi = expenseForecastActions.getManagementForecastEgiPercent(testData.perUnit, testData.percentOfEgi,
-            testData.effectiveGrossIncome, testData.numberOfUnits, testData.grossArea);
-        expenseForecastActions.verifyManagementForecast(managementForecastEgi);
-        expenseForecastActions.verifyForecastItemCompMin(testData.forecastItems[9], testData.perUnit, compExpensesArray);
-        expenseForecastActions.verifyForecastItemCompAverage(testData.forecastItems[9], testData.perUnit, compExpensesArray);
-        expenseForecastActions.verifyForecastItemCompMax(testData.forecastItems[9], testData.perUnit, compExpensesArray);
-        expenseForecastActions.verifyForecastItemBasisMoney(testData.forecastItems[9], testData.perUnit, testData.numberOfUnits,
-            testData.grossArea, managementForecastEgi);
-        expenseForecastActions.chooseForecastItemBasis(testData.forecastItems[10], testData.perUnit);
-        expenseForecastActions.enterForecastItemForecast(testData.forecastItems[10], testData.reservesForecast);
-        expenseForecastActions.verifyForecastItemBasisMoney(testData.forecastItems[10], testData.perUnit, testData.numberOfUnits,
-            testData.grossArea, testData.reservesForecast);
-        expenseForecastActions.chooseForecastItemBasis(testData.forecastItems[11], testData.perUnit);
-        expenseForecastActions.verifyToeCompMinPerBasis(testData.perUnit, compExpensesArray);
-        expenseForecastActions.verifyToeCompAvgPerBasis(testData.perUnit, compExpensesArray);
-        expenseForecastActions.verifyToeCompMaxPerBasis(testData.perUnit, compExpensesArray);
-        expenseForecastActions.verifyOwnersProFormaValue();
-        expenseForecastActions.verifyTotalForecast();
-        expenseForecastActions.clickSaveContinueButton();
+        expenseForecastActions.chooseForecastItemBasis(newTestData.expenseForecast.insuranceItem)
+            .enterForecastItemForecast(newTestData.expenseForecast.insuranceItem)
+            .verifyForecastItemCompMin(newTestData.expenseForecast.insuranceItem, newTestData.comparableExpenses.comparables)
+            .verifyForecastItemCompAverage(newTestData.expenseForecast.insuranceItem, newTestData.comparableExpenses.comparables)
+            .verifyForecastItemCompMax(newTestData.expenseForecast.insuranceItem, newTestData.comparableExpenses.comparables)
+            .verifyForecastItemBasisMoney(newTestData.expenseForecast.insuranceItem, newTestData.currentDescription)
+            .chooseForecastItemBasis(newTestData.expenseForecast.electricityItem)
+            .enterForecastItemForecast(newTestData.expenseForecast.electricityItem)
+            .verifyForecastItemCompMin(newTestData.expenseForecast.electricityItem, newTestData.comparableExpenses.comparables)
+            .verifyForecastItemCompAverage(newTestData.expenseForecast.electricityItem, newTestData.comparableExpenses.comparables)
+            .verifyForecastItemCompMax(newTestData.expenseForecast.electricityItem, newTestData.comparableExpenses.comparables)
+            .verifyForecastItemBasisMoney(newTestData.expenseForecast.electricityItem, newTestData.currentDescription)
+            .verifyForecastItemOwnerProjection(newTestData.expenseForecast.electricityItem, newTestData.currentDescription)
+            .chooseForecastItemBasis(newTestData.expenseForecast.fuelItem)
+            .chooseForecastItemBasis(newTestData.expenseForecast.waterSewerItem)
+            .chooseForecastItemBasis(newTestData.expenseForecast.repairsMaintenance)
+            .enterForecastItemForecast(newTestData.expenseForecast.repairsMaintenance)
+            .verifyForecastItemCompMin(newTestData.expenseForecast.repairsMaintenance, newTestData.comparableExpenses.comparables)
+            .verifyForecastItemCompAverage(newTestData.expenseForecast.repairsMaintenance, newTestData.comparableExpenses.comparables)
+            .verifyForecastItemCompMax(newTestData.expenseForecast.repairsMaintenance, newTestData.comparableExpenses.comparables)
+            .verifyForecastItemBasisMoney(newTestData.expenseForecast.repairsMaintenance, newTestData.currentDescription)
+            .chooseForecastItemBasis(newTestData.expenseForecast.payrollBenefits)
+            .enterForecastItemForecast(newTestData.expenseForecast.payrollBenefits)
+            .verifyForecastItemCompMin(newTestData.expenseForecast.payrollBenefits, newTestData.comparableExpenses.comparables)
+            .verifyForecastItemCompAverage(newTestData.expenseForecast.payrollBenefits, newTestData.comparableExpenses.comparables)
+            .verifyForecastItemCompMax(newTestData.expenseForecast.payrollBenefits, newTestData.comparableExpenses.comparables)
+            .verifyForecastItemBasisMoney(newTestData.expenseForecast.payrollBenefits, newTestData.currentDescription)
+            .verifyForecastItemOwnerProjection(newTestData.expenseForecast.payrollBenefits, newTestData.currentDescription)
+            .chooseForecastItemBasis(newTestData.expenseForecast.general)
+            .enterForecastItemForecast(newTestData.expenseForecast.general)
+            .verifyForecastItemCompMin(newTestData.expenseForecast.general, newTestData.comparableExpenses.comparables)
+            .verifyForecastItemCompAverage(newTestData.expenseForecast.general, newTestData.comparableExpenses.comparables)
+            .verifyForecastItemCompMax(newTestData.expenseForecast.general, newTestData.comparableExpenses.comparables)
+            .verifyForecastItemBasisMoney(newTestData.expenseForecast.general, newTestData.currentDescription)
+            .chooseForecastItemBasis(newTestData.expenseForecast.legalProf)
+            .chooseForecastItemBasis(newTestData.expenseForecast.miscellaneous)
+            .chooseForecastItemBasis(newTestData.expenseForecast.management)
+            .checkPercentOfEGICheckbox()
+            .enterPercentOfEgi(newTestData.expenseForecast.percentOfEgi);
+        const managementForecastEgi = expenseForecastActions
+            .getManagementForecastEgiPercent(newTestData.expenseForecast, newTestData.currentDescription);
+        expenseForecastActions.verifyManagementForecast(managementForecastEgi)
+            .verifyForecastItemCompMin(newTestData.expenseForecast.management, newTestData.comparableExpenses.comparables)
+            .verifyForecastItemCompAverage(newTestData.expenseForecast.management, newTestData.comparableExpenses.comparables)
+            .verifyForecastItemCompMax(newTestData.expenseForecast.management, newTestData.comparableExpenses.comparables)
+            .verifyForecastItemBasisMoney(newTestData.expenseForecast.management, newTestData.currentDescription, managementForecastEgi)
+            .chooseForecastItemBasis(newTestData.expenseForecast.reserves)
+            .enterForecastItemForecast(newTestData.expenseForecast.reserves)
+            .verifyForecastItemBasisMoney(newTestData.expenseForecast.reserves, newTestData.currentDescription)
+            .chooseForecastItemBasis(newTestData.expenseForecast.total)
+            .verifyToeCompMinPerBasis(newTestData.expenseForecast.total.basis, newTestData.comparableExpenses.comparables)
+            .verifyToeCompAvgPerBasis(newTestData.expenseForecast.total.basis, newTestData.comparableExpenses.comparables)
+            .verifyToeCompMaxPerBasis(newTestData.expenseForecast.total.basis, newTestData.comparableExpenses.comparables)
+            .verifyOwnersProFormaValue()
+            .verifyTotalForecast()
+            .clickSaveContinueButton();
         proFormaActions.verifyPotentialResIncomeRow(testData.totalPotentialResIncome, testData.psfPotentialResIncome, testData.perUnitPotResIncome);
         proFormaActions.verifyPotentialGrossIncomeRow(testData.totalPotentialResIncome, testData.psfPotentialResIncome, testData.perUnitPotResIncome);
         proFormaActions.verifyResVCLossRow(testData.vcLossRow.total, testData.vcLossRow.perSF, testData.vcLossRow.perUnit);
