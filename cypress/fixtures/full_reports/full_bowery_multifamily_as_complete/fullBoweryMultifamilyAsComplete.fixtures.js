@@ -1010,6 +1010,56 @@ const propertySalesConclusionFixture = () => {
     };
 };
 
+const assumptionsFixture = () => {
+    return {
+        extraordinaryAssumption: "Some specific assumption about COVID-19"
+    };
+};
+
+const highestBestUseFixture = () => {
+    return {
+        propertyCondition: "Good",
+        complyingBulk: "Complying",
+        conformingUse: "Conforming",
+        marketCharPropType: "Residential",
+        feasiblePropertyType: "multifamilyApartment",
+        feasiblePropTypeWord: "Multifamily Apartment"
+    };
+};
+
+const unitInspectionFixture = () => {
+    return {
+        readyForOccupancyValues: ["N/A", "N/A"],
+    };
+};
+
+const capRateDiscussionFixture = () => {
+    return {
+        capRateTable: {min: "8.69%", max: "11.44%", average: "9.61%"},
+        pwcRow: {min: "3.50%", average: "5.03%", max: "7.00%"},
+        situsRow: {min: "4.00%", average: "5.20%", max: "6.00%"},
+        capRateCompsTable: {income: "Similar", propConditions: "Similar", location: "Similar"},
+        incomeSpikesTable: {
+            capRate: "10.00%",
+            occupancy: "0.00%",
+            percentageMarketRate: "100.00%",
+            condition: "Good"
+        },
+        incomeSpikesRadios: {
+            incomePotential: "Limited",
+            marketConditions: "Moderately Appreciating",
+            flowRisk: "Moderate Risk"
+        }
+    };
+};
+
+const insurableReplacementCostFixture = () => {
+    return {
+        subjectState: "Illinois",
+        subjectLocale: "Chicago"
+    };
+};
+
 export const reportCreationData = () => {
     return Object.freeze(reportCreationFixture());
 };
@@ -1294,6 +1344,26 @@ export const propertySalesConclusionData = () => {
     return Object.freeze(propertySalesConclusionFixture());
 };
 
+export const assumptionsData = () => {
+    return Object.freeze(assumptionsFixture());
+};
+
+export const highestBestUseData = () => {
+    return Object.freeze(highestBestUseFixture());
+};
+
+export const unitInspectionData = () => {
+    return Object.freeze(unitInspectionFixture());
+};
+
+export const capRateDiscussionData = () => {
+    return Object.freeze(capRateDiscussionFixture());
+};
+
+export const insurableReplacementCostData = () => {
+    return Object.freeze(insurableReplacementCostFixture());
+};
+
 export default {
     reportCreationData: reportCreationData(),
     keyInfoPurposeData: keyInfoPurposeData(),
@@ -1365,33 +1435,10 @@ export default {
     adjustComps: adjustCompsData(),
     valueConclusion: valueConclusionData(),
     finalValuesReconciliation: finalValuesReconciliationData(),
-    propertySalesConclusion: propertySalesConclusionData()
-};
-
-export const testDataOld = {
-    "extraordinaryAssumption": "Some specific assumption about COVID-19",
-    "propertyCondition": "Good",
-    "complyingBulk": "Complying",
-    "conformingUse": "Conforming",
-    "subjectMarketCharacteristicsAndPropTypeValue": "Residential",
-    "feasiblePropertyType": "multifamilyApartment",
-    "feasiblePropTypeWord": "Multifamily Apartment",
-    "readyForOccupancyValues": ["N/A", "N/A"],
-    "capRateTable": {"min": "8.69%", "max": "11.44%", "average": "9.61%"},
-    "pwcRow": {"min": "3.50%", "average": "5.03%", "max": "7.00%"},
-    "situsRow": {"min": "4.00%", "average": "5.20%", "max": "6.00%"},
-    "capRateCompsTable": {"income": "Similar", "propConditions": "Similar", "location": "Similar"},
-    "incomeSpikesTable": {
-        "capRate": "10.00%",
-        "occupancy": "0.00%",
-        "percentageMarketRate": "100.00%",
-        "condition": "Good"
-    },
-    "incomeSpikesRadios": {
-        "incomePotential": "Limited",
-        "marketConditions": "Moderately Appreciating",
-        "flowRisk": "Moderate Risk"
-    },
-    "subjectState": "Illinois",
-    "subjectLocale": "Chicago"
+    propertySalesConclusion: propertySalesConclusionData(),
+    assumptions: assumptionsData(),
+    highestBestUse: highestBestUseData(),
+    unitInspection: unitInspectionData(),
+    capRateDiscussion: capRateDiscussionData(),
+    insurableReplacementCost: insurableReplacementCostData()
 };
