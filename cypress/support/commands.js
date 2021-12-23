@@ -1,10 +1,11 @@
 import "cypress-file-upload";
+import {getEnvUrl} from "../../utils/env.utils";
 
-Cypress.Commands.add("loginByApi", (url = "/") => {
+Cypress.Commands.add("loginByApi", (url ) => {
     cy.log("Logging in by api");
     cy.request({
         method: "POST",
-        url: "https://bowery-staging.herokuapp.com/user/login",
+        url: `${url}/user/login`,
         body: {
             username: Cypress.env("USERNAME"),
             password: Cypress.env("PASSWORD")
@@ -16,13 +17,24 @@ Cypress.Commands.add("loginByApi", (url = "/") => {
     });
 });
 
-Cypress.Commands.add("loginByUI", () => {
+Cypress.Commands.add("loginByUI", (url) => {
     cy.log("Logging in by UI");
-    cy.visit("/");
+    cy.visit(url);
     const username = Cypress.env("USERNAME");
     const password = Cypress.env("PASSWORD");
     cy.get("*[name='username']").should("be.visible").type(username).should("have.value", username);
     cy.get("*[name='password']").should("be.visible").type(password).type("{enter}");
+});
+
+Cypress.Commands.add("login", () => {
+    const envUrl = getEnvUrl();
+    switch (Cypress.env("loginMethod")) {
+        case "ui":
+            cy.loginByUI(envUrl);
+            break;
+        default:
+            cy.loginByApi(envUrl);
+    }
 });
 
 let LOCAL_STORAGE_MEMORY = {};

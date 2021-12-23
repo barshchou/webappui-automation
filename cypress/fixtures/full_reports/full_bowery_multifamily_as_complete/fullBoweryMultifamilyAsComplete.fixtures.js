@@ -912,11 +912,11 @@ const capRateCompsFixture = () => {
 const findCompsFixture = () => {
     return {
         comparables: [
-            {address: "7748 S Colfax Ave.", capRate: "remove"},
-            {address: "8138 S Exchange Ave.", capRate: "remove"},
-            {address: "8041 S Manistee Ave.", capRate: "9.31%"},
-            {address: "7926 S Luella Ave.", capRate: "remove"},
-            {address: "8103 S Luella Ave.", capRate: "10.08%"}
+            {address: "7748 S Colfax Ave."},
+            {address: "8138 S Exchange Ave."},
+            {address: "8041 S Manistee Ave."},
+            {address: "7926 S Luella Ave."},
+            {address: "8103 S Luella Ave."}
         ]
     };
 };

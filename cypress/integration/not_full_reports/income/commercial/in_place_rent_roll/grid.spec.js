@@ -12,7 +12,8 @@ import propertySummaryActions from "../../../../../actions/property/summary.acti
 
 describe("Commercial In-Place Rent Roll grid tests", () => {
     before("Login and navigate to commercial In-Place Rent Roll", () => {
-        cy.loginByApi();
+        cy.login();
+        cy.wait(5000);
         homepageActions.createReport(testData.incomeType, testData.address, testData.reportNumber,
             testData.templateType, testData.conclusionType);
         navSectionActions.navigateToCommercialInPlaceRentRoll();

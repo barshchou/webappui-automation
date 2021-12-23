@@ -54,7 +54,8 @@ import insurableReplacementCostActions from "../../actions/final/insurableReplac
 
 describe("Full bowery way, multifamily as complete report", () => {
     it("Test", () => {
-        cy.loginByApi();
+        cy.login();
+        cy.wait(5000);
         homepageActions.createReportAdvancedSearch(testData.reportCreationData);
         keyInfoActions.choosePurpose(testData.keyInfoPurposeData.purposeValue)
             .checkAllInterestAppraisedByValues(testData.keyInfoPurposeData.interestAppraised)
@@ -435,9 +436,7 @@ describe("Full bowery way, multifamily as complete report", () => {
             .verifyBandInvestmentSection(testData.supportingCapRates.bandInvestmentSection)
             .clickSaveContinueButton();
         capRateConclusionActions.verifyBandOfInvestments(testData.capRateConclusion.bandOfInvestmentsValue)
-            .verifyPWCCell(testData.capRateConclusion.pwcValue)
-            .verifySitusCell(testData.capRateConclusion.situsValue);
-        capRateConclusionActions.navigateToCapRateComps();
+            .navigateToCapRateComps();
         capRateCompsActions.verifyPageIsOpened();
         testData.capRateComps.comparables.forEach((comp, i) => {
             capRateCompsActions.addComparable(comp)
@@ -467,13 +466,13 @@ describe("Full bowery way, multifamily as complete report", () => {
             .clickSaveContinueButton();
         testData.findComps.comparables.forEach((comp, i) => {
             findCompsActions.addComparable(comp.address)
-                .verifyAddedCompByIndex(comp.address, i + 1, comp.capRate);
+                .verifyAddedCompAddressByIndex(comp.address, i + 1);
         });
         findCompsActions.clickSaveContinueButton();
         createSalesCompMap.captureScreen()
             .clickSaveContinueButton();
         adjustCompsActions.checkCalculationUnitsRadio(testData.adjustComps.calculationUnitsRadioValue)
-            .checkIncomeAdjustmentLevel(testData.capRateComps.incomeAdjustmentType);
+            .checkIncomeAdjustmentLevel(testData.adjustComps.incomeAdjustmentType);
         testData.adjustComps.comparables.forEach((comp, i) => {
             adjustCompsActions.enterSizeAdjustmentByColumn(comp.size, i)
                 .enterConditionAdjustmentByColumn(comp.condition, i)

@@ -5,16 +5,23 @@ declare namespace Cypress {
         /**
          * Login to application with api
          * @example
-         * cy.loginByApi()
+         * cy.loginByApi(url)
          */
-        loginByApi(): Chainable<any>
+        loginByApi(url: string): Chainable<any>
 
         /**
          * login to application with UI
          * @example
-         * cy.loginByUI()
+         * cy.loginByUI(url)
          */
-        loginByUI(): Chainable<any>
+        loginByUI(url: string): Chainable<any>
+
+        /**
+         * Login to application by method, passed to LOGGING_METHOD environment variable
+         * @example
+         * cy.login()
+         */
+        login(): Chainable<any>
 
         /**
          * Save application's local storage to LOCAL_STORAGE_MEMORY variable

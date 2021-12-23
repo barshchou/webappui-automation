@@ -1,5 +1,4 @@
 {
-    "baseUrl":"https://bowery-staging.herokuapp.com",
     "chromeWebSecurity":false,
     "defaultCommandTimeout":100000,
     "viewportWidth": 1920,

@@ -21,12 +21,10 @@ class FindCompsActions extends BaseActions {
      *
      * @param {string} address
      * @param {number} index
-     * @param {string} capRate
      * @returns {FindCompsActions}
      */
-    verifyAddedCompByIndex(address, index, capRate) {
+    verifyAddedCompAddressByIndex(address, index) {
         findCompsPage.addressCells.eq(index).should("contain.text", address);
-        findCompsPage.capRateCells.eq(index).should("have.text", capRate);
         return this;
     }
 }

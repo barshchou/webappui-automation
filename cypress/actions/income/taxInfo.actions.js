@@ -301,7 +301,7 @@ class TaxInfoActions extends BaseActions {
 
     /**
      *
-     * @param {number} year
+     * @param {number, string} year
      * @returns {TaxInfoActions}
      */
     enterNewTaxCompYearBuilt(year) {
@@ -311,7 +311,7 @@ class TaxInfoActions extends BaseActions {
 
     /**
      *
-     * @param {number} basisValue
+     * @param {number, string} basisValue
      * @returns {TaxInfoActions}
      */
     enterNewTaxCompBasis(basisValue) {
@@ -321,7 +321,7 @@ class TaxInfoActions extends BaseActions {
 
     /**
      *
-     * @param {number} taxesPerBasis
+     * @param {number, string} taxesPerBasis
      * @returns {TaxInfoActions}
      */
     enterTaxesPerBasis(taxesPerBasis) {
@@ -471,7 +471,7 @@ class TaxInfoActions extends BaseActions {
 
     /**
      *
-     * @param {number} value
+     * @param {number, string} value
      * @returns {TaxInfoActions}
      */
     enterConcludedLiabilityPerBasis(value) {

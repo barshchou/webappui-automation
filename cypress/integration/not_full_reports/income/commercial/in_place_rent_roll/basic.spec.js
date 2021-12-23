@@ -5,7 +5,8 @@ import comRentRollActions from "../../../../../actions/income/commercial/rentRol
 
 describe("Basic commercial In-Place Rent Roll tests", () => {
     before("Create report and navigate to Commercial In-Place Rent Roll", () => {
-        cy.loginByApi();
+        cy.login();
+        cy.wait(5000);
         homepageActions.createReport(testData.incomeType, testData.address, testData.reportNumber,
             testData.templateType, testData.conclusionType);
         navSectionActions.navigateToCommercialInPlaceRentRoll();
