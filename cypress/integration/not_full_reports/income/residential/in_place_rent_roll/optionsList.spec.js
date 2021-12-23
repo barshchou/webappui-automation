@@ -7,7 +7,6 @@ import summaryActions from "../../../../../actions/property/summary.actions";
 describe("In-Place Rent Roll options list tests", () => {
     before("Create report and open In-Pace Rent Roll", () => {
         cy.login();
-        cy.wait(5000);
         homepageActions.createReport();
         navigationSectionActions.navigateToInPlaceRentRoll();
         cy.saveLocalStorage();

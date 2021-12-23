@@ -7,7 +7,6 @@ import addCompFormActions from "../../../../../actions/income/residential/rent_c
 describe("Add new comparable form tests", () => {
     before("Login and open rent comps page", () => {
         cy.login();
-        cy.wait(5000);
         homepageActions.createReport();
         navSectionActions.navigateToRentComps();
         cy.saveLocalStorage();

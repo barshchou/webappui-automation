@@ -55,7 +55,6 @@ import insurableReplacementCostActions from "../../actions/final/insurableReplac
 describe("Full bowery way, multifamily as complete report", () => {
     it("Test", () => {
         cy.login();
-        cy.wait(5000);
         homepageActions.createReportAdvancedSearch(testData.reportCreationData);
         keyInfoActions.choosePurpose(testData.keyInfoPurposeData.purposeValue)
             .checkAllInterestAppraisedByValues(testData.keyInfoPurposeData.interestAppraised)
