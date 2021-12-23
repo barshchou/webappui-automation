@@ -5,7 +5,7 @@ import rentCompsActions from "../../../../../actions/income/residential/rent_com
 
 describe("Unit map tests", () => {
    before("Login and open Rent Comps", () => {
-       cy.loginByApi();
+       cy.login();
        homepageActions.createReport();
        navSectionActions.navigateToRentComps();
        cy.saveLocalStorage();

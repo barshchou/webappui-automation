@@ -6,6 +6,8 @@ class DescriptionPage extends BasePage{
     get selectAsStabilizedConditionButton() {return cy.get("*[data-qa*=generalAsStabilizedCondition] [data-qa='select-value']");}
     getCheckboxByLabel(label) {return cy.get(`*[label='${label}'] input`);}
     get stairsConditionContainer() {return cy.get("[data-qa='lobbyStairwellsCondition-radio-group']");}
+    get interiorHallwaysConditionContainer() {return cy.get("[data-qa=interiorHallwaysCondition-radio-group]");}
+    getElementToCheckRadio(value) {return cy.get(`[data-qa=checked] input[value='${value}']`);}
     get stairsConditionRadios() {return cy.get("*[name='lobbyStairwellsCondition']");}
     get foundationRadios() {return cy.get("*[name=foundation]");}
     get structuralSystem() {return cy.get("*[name=structuralSystem]");}

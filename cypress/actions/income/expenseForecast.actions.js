@@ -4,111 +4,210 @@ import {getNumberFromDollarNumberWithCommas, numberWithCommas} from "../../../ut
 
 class ExpenseForecastActions extends BaseActions {
 
-    chooseForecastItemBasis(item, value) {
-        expenseForecastPage.getForecastItemBasisRadio(item).check(value);
-        expenseForecastPage.getElementToCheckRadio(item, value).should("exist");
+    /**
+     *
+     * @param {Readonly<{name: string, basis: string}>} forecastItem
+     * @returns {ExpenseForecastActions}
+     */
+    chooseForecastItemBasis(forecastItem) {
+        expenseForecastPage.getForecastItemBasisRadio(forecastItem.name).check(forecastItem.basis);
+        expenseForecastPage.getElementToCheckRadio(forecastItem.name, forecastItem.basis).should("exist");
+        return this;
     }
 
-    enterForecastItemForecast(item, forecast) {
-        const valueToBe = `$${numberWithCommas(forecast)}`;
-        expenseForecastPage.getForecastItemForecastInput(item).clear().type(forecast).should("have.value", valueToBe);
+    /**
+     *
+     * @param {Readonly<{name: string, forecast: number | string}>} forecastItem
+     * @returns {ExpenseForecastActions}
+     */
+    enterForecastItemForecast(forecastItem) {
+        const valueToBe = `$${numberWithCommas(forecastItem.forecast)}`;
+        expenseForecastPage.getForecastItemForecastInput(forecastItem.name).clear()
+            .type(forecastItem.forecast).should("have.value", valueToBe);
+        return this;
     }
 
+    /**
+     *
+     * @param {string, number} compsValues
+     * @returns {number}
+     */
     getAverageValue(...compsValues) {
         let arr = Array.from(compsValues);
-        cy.log(arr.toString());
         let sum = 0;
         for (let i = 0; i < arr.length; i++) {
             sum += Number(arr[i]);
-            cy.log(`Current sum value for average: ${sum}`);
         }
         return sum / arr.length;
     }
 
-    getPerUnitValue(numberOfUnits, forecastItem) {
-        return Math.round(forecastItem / numberOfUnits);
+    /**
+     * @private
+     * @param {number} numberOfUnits
+     * @param {number} forecastItemValue
+     * @returns {number}
+     */
+    getPerUnitValue(numberOfUnits, forecastItemValue) {
+        return Math.round(forecastItemValue / numberOfUnits);
     }
 
-    getPerSFValue(squareFeet, forecastItem) {
-        return (forecastItem / squareFeet).toFixed(2);
+    /**
+     * @private
+     * @param {number} squareFeet
+     * @param {number} forecastItemValue
+     * @returns {string}
+     */
+    getPerSFValue(squareFeet, forecastItemValue) {
+        return (forecastItemValue / squareFeet).toFixed(2);
     }
 
-    getPerSFArray(forecastItem, comps) {
+    /**
+     * @private
+     * @param {string} forecastItemName
+     * @param {Array<{address: string, location: string, period: string, squareFeet: number, resUnits: number,
+     * insurance: number, electricity: number, repairsAndMaintenance: number, payrollAndBenefits: number,
+     * generalAndAdministrative: number, management: number, toe: string}>} comps
+     * @returns {Array<string, number>}
+     */
+    getPerSFArray(forecastItemName, comps) {
         let arr = [];
-        comps.forEach(comp => arr.push(this.getPerSFValue(comp.squareFeet, getNumberFromDollarNumberWithCommas(comp[forecastItem]))));
+        comps.forEach(comp => arr.push(this.getPerSFValue(comp.squareFeet, getNumberFromDollarNumberWithCommas(comp[forecastItemName]))));
         return arr;
     }
 
-    getPerUnitArray(forecastItem, comps) {
+    /**
+     * @private
+     * @param {string} forecastItemName
+     * @param {Array<{address: string, location: string, period: string, squareFeet: number, resUnits: number,
+     * insurance: number, electricity: number, repairsAndMaintenance: number, payrollAndBenefits: number,
+     * generalAndAdministrative: number, management: number, toe: string}>} comps
+     * @returns {Array<number>}
+     */
+    getPerUnitArray(forecastItemName, comps) {
         let arr = [];
         comps.forEach(comp => {
             let numberToPush;
-            if (forecastItem === "toe") {
+            if (forecastItemName === "toe") {
                 let toeNumber = getNumberFromDollarNumberWithCommas(comp.toe);
                 numberToPush = (toeNumber / comp.resUnits).toFixed(2);
             } else {
-                numberToPush = this.getPerUnitValue(comp.resUnits, comp[forecastItem]);
+                numberToPush = this.getPerUnitValue(comp.resUnits, comp[forecastItemName]);
             }
             arr.push(numberToPush);
         });
         return arr;
     }
 
-    verifyForecastItemCompMin(item, basisValue, comparables) {
+    /**
+     *
+     * @param {Readonly<{name: string, basis: string}>} forecastItem
+     * @param {Array<{address: string, location: string, period: string, squareFeet: number, resUnits: number,
+     * insurance: number, electricity: number, repairsAndMaintenance: number, payrollAndBenefits: number,
+     * generalAndAdministrative: number, management: number, toe: string}>} comparables
+     * @returns {ExpenseForecastActions}
+     */
+    verifyForecastItemCompMin(forecastItem, comparables) {
         let minValueToBe;
-        if (basisValue === "unit") {
-            minValueToBe = Math.min(...this.getPerUnitArray(item, comparables));
+        if (forecastItem.basis === "unit") {
+            minValueToBe = Math.min(...this.getPerUnitArray(forecastItem.name, comparables));
         } else {
-            minValueToBe = Math.min(...this.getPerSFArray(item, comparables));
+            minValueToBe = Math.min(...this.getPerSFArray(forecastItem.name, comparables));
         }
-        expenseForecastPage.getForecastItemCompMin(this.getItemNameForAverage(item))
+        expenseForecastPage.getForecastItemCompMin(this.getItemNameForAverage(forecastItem.name))
             .should("contain.text", `$${numberWithCommas(minValueToBe)}`);
+        return this;
     }
 
-    verifyForecastItemCompAverage(item, basisValue, comparables) {
+    /**
+     *
+     * @param {Readonly<{name: string, basis: string}>} forecastItem
+     * @param {Array<{address: string, location: string, period: string, squareFeet: number, resUnits: number,
+     * insurance: number, electricity: number, repairsAndMaintenance: number, payrollAndBenefits: number,
+     * generalAndAdministrative: number, management: number, toe: string}>} comparables
+     * @returns {ExpenseForecastActions}
+     */
+    verifyForecastItemCompAverage(forecastItem, comparables) {
         let avgValueToBe;
-        if (basisValue === "unit") {
-            cy.log(`Forecast item ${item.toString()} average function`);
-            avgValueToBe = Math.round(this.getAverageValue(...this.getPerUnitArray(item, comparables)));
+        if (forecastItem.basis === "unit") {
+            avgValueToBe = Math.round(this.getAverageValue(...this.getPerUnitArray(forecastItem.name, comparables)));
         } else {
-            avgValueToBe = (this.getAverageValue(...this.getPerSFArray(item, comparables))).toFixed(2);
+            avgValueToBe = (this.getAverageValue(...this.getPerSFArray(forecastItem.name, comparables))).toFixed(2);
         }
-        expenseForecastPage.getForecastItemCompAvg(this.getItemNameForAverage(item))
+        expenseForecastPage.getForecastItemCompAvg(this.getItemNameForAverage(forecastItem.name))
             .should("contain.text", `$${numberWithCommas(avgValueToBe)}`);
+        return this;
     }
 
-    verifyForecastItemCompMax(item, basisValue, comparables) {
+    /**
+     *
+     * @param {Readonly<{name: string, basis: string}>} forecastItem
+     * @param {Array<{address: string, location: string, period: string, squareFeet: number, resUnits: number,
+     * insurance: number, electricity: number, repairsAndMaintenance: number, payrollAndBenefits: number,
+     * generalAndAdministrative: number, management: number, toe: string}>} comparables
+     * @returns {ExpenseForecastActions}
+     */
+    verifyForecastItemCompMax(forecastItem, comparables) {
         let maxValueToBe;
-        if (basisValue === "unit") {
-            maxValueToBe = Math.max(...this.getPerUnitArray(item, comparables));
+        if (forecastItem.basis === "unit") {
+            maxValueToBe = Math.max(...this.getPerUnitArray(forecastItem.name, comparables));
         } else {
-            maxValueToBe = Math.max(...this.getPerSFArray(item, comparables));
+            maxValueToBe = Math.max(...this.getPerSFArray(forecastItem.name, comparables));
         }
-        expenseForecastPage.getForecastItemCompMax(this.getItemNameForAverage(item))
+        expenseForecastPage.getForecastItemCompMax(this.getItemNameForAverage(forecastItem.name))
             .should("contain.text", `$${numberWithCommas(maxValueToBe)}`);
+        return this;
     }
 
-    verifyForecastItemBasisMoney(item, basisValue, numberOfUnits, grossArea, forecastValue) {
+    /**
+     *
+     * @param {Readonly<{name: string, basis: string, forecast: number | undefined}>} forecastItem
+     * @param {Readonly<{grossArea: number, numberOfUnits: number}>} currentDescription
+     * @param {string} [forecastEgi]
+     * @returns {ExpenseForecastActions}
+     */
+    verifyForecastItemBasisMoney(forecastItem, currentDescription, forecastEgi) {
+        let forecastToBe;
+        if (forecastEgi) {
+            forecastToBe = forecastEgi;
+        } else {
+            forecastToBe = forecastItem.forecast;
+        }
         let textToBe;
-        if (basisValue === "unit") {
-            textToBe = `Per SF: $${numberWithCommas((forecastValue / (grossArea / numberOfUnits)).toFixed(2))}`;
+        if (forecastItem.basis === "unit") {
+            textToBe = `Per SF: $${numberWithCommas((forecastToBe / 
+                (currentDescription.grossArea / currentDescription.numberOfUnits)).toFixed(2))}`;
         } else {
-            textToBe = `Per Unit: $${numberWithCommas(Math.round(forecastValue * grossArea / numberOfUnits))}`;
+            textToBe = `Per Unit: $${numberWithCommas(Math.round(forecastToBe * 
+                currentDescription.grossArea / currentDescription.numberOfUnits))}`;
         }
-        expenseForecastPage.getForecastItemBasisMoneyValue(this.getItemNameForAverage(item)).should("have.text", textToBe);
+        expenseForecastPage.getForecastItemBasisMoneyValue(this.getItemNameForAverage(forecastItem.name))
+            .should("have.text", textToBe);
+        return this;
     }
 
-    verifyForecastItemOwnerProjection(item, basisValue, itemProjection, numberOfUnits, grossArea) {
+    /**
+     *
+     * @param {Readonly<{name: string, basis: string, projection: number}>} forecastItem
+     * @param {Readonly<{grossArea: number, numberOfUnits: number}>} currentDescription
+     * @returns {ExpenseForecastActions}
+     */
+    verifyForecastItemOwnerProjection(forecastItem, currentDescription) {
         let numberToBe;
-        if (basisValue === "unit") {
-            numberToBe = numberWithCommas(Math.round(itemProjection / numberOfUnits));
+        if (forecastItem.basis === "unit") {
+            numberToBe = numberWithCommas(Math.round(forecastItem.projection / currentDescription.numberOfUnits));
         } else {
-            numberToBe = numberWithCommas((itemProjection / grossArea).toFixed(2));
+            numberToBe = numberWithCommas((forecastItem.projection / currentDescription.grossArea).toFixed(2));
         }
-        expenseForecastPage.getForecastItemProjection(this.getItemNameForAverage(item))
+        expenseForecastPage.getForecastItemProjection(this.getItemNameForAverage(forecastItem.name))
             .should("have.text", `Owner's Projection: $${numberToBe}`);
+        return this;
     }
 
+    /**
+     * @private
+     * @param {string} itemOriginal
+     * @returns {string}
+     */
     getItemNameForAverage(itemOriginal) {
         switch (itemOriginal) {
             case "waterAndSewer":
@@ -130,29 +229,60 @@ class ExpenseForecastActions extends BaseActions {
         }
     }
 
+    /**
+     *
+     * @returns {ExpenseForecastActions}
+     */
     checkPercentOfEGICheckbox() {
         expenseForecastPage.inputPercentOfEGICheckbox.check().should("have.value", "true");
+        return this;
     }
 
+    /**
+     *
+     * @param {string, number} value
+     * @returns {ExpenseForecastActions}
+     */
     enterPercentOfEgi(value) {
         expenseForecastPage.percentOfEgiInput.clear().type(value).should("have.value", value);
+        return this;
     }
 
+    /**
+     *
+     * @param {string} forecastNumber
+     * @returns {ExpenseForecastActions}
+     */
     verifyManagementForecast(forecastNumber) {
         const valueToBe = `$${numberWithCommas(forecastNumber)}`;
         expenseForecastPage.getForecastItemForecastInput("management").should("have.value", valueToBe);
+        return this;
     }
 
-    getManagementForecastEgiPercent(basisValue, percentOfEgi, effectiveGrossIncome, numberOfUnits, grossArea) {
+    /**
+     *
+     * @param {Readonly<{effectiveGrossIncome: number, management: {basis: string}, percentOfEgi: number}>} expenseForecastData
+     * @param {Readonly<{grossArea: number, numberOfUnits: number}>} currentDescription
+     * @returns {string}
+     */
+    getManagementForecastEgiPercent(expenseForecastData, currentDescription) {
         let perBasisEgi;
-        if (basisValue === "unit") {
-            perBasisEgi = effectiveGrossIncome / numberOfUnits;
+        if (expenseForecastData.management.basis === "unit") {
+            perBasisEgi = expenseForecastData.effectiveGrossIncome / currentDescription.numberOfUnits;
         } else {
-            perBasisEgi = effectiveGrossIncome / grossArea;
+            perBasisEgi = expenseForecastData.effectiveGrossIncome / currentDescription.grossArea;
         }
-        return  (perBasisEgi / 100 * percentOfEgi).toFixed(2);
+        return (perBasisEgi / 100 * expenseForecastData.percentOfEgi).toFixed(2);
     }
 
+    /**
+     *
+     * @param {string} basisValue
+     * @param {Array<{address: string, location: string, period: string, squareFeet: number, resUnits: number,
+     * insurance: number, electricity: number, repairsAndMaintenance: number, payrollAndBenefits: number,
+     * generalAndAdministrative: number, management: number, toe: string}>} comparables
+     * @returns {ExpenseForecastActions}
+     */
     verifyToeCompMinPerBasis(basisValue, comparables) {
         let numberToBe;
         if (basisValue === "unit") {
@@ -162,8 +292,17 @@ class ExpenseForecastActions extends BaseActions {
         }
         const textToBe = `Comp Min: $${numberWithCommas(numberToBe)}`;
         expenseForecastPage.toeCompMin.should("have.text", textToBe);
+        return this;
     }
 
+    /**
+     *
+     * @param {string} basisValue
+     * @param {Array<{address: string, location: string, period: string, squareFeet: number, resUnits: number,
+     * insurance: number, electricity: number, repairsAndMaintenance: number, payrollAndBenefits: number,
+     * generalAndAdministrative: number, management: number, toe: string}>} comparables
+     * @returns {ExpenseForecastActions}
+     */
     verifyToeCompAvgPerBasis(basisValue, comparables) {
         let numberToBe;
         if (basisValue === "unit") {
@@ -174,8 +313,17 @@ class ExpenseForecastActions extends BaseActions {
         }
         const textToBe = `Comp Avg: $${numberWithCommas(numberToBe)}`;
         expenseForecastPage.toeCompAvg.should("have.text", textToBe);
+        return this;
     }
 
+    /**
+     *
+     * @param {string} basisValue
+     * @param {Array<{address: string, location: string, period: string, squareFeet: number, resUnits: number,
+     * insurance: number, electricity: number, repairsAndMaintenance: number, payrollAndBenefits: number,
+     * generalAndAdministrative: number, management: number, toe: string}>} comparables
+     * @returns {ExpenseForecastActions}
+     */
     verifyToeCompMaxPerBasis(basisValue, comparables) {
         let numberToBe;
         if (basisValue === "unit") {
@@ -185,8 +333,13 @@ class ExpenseForecastActions extends BaseActions {
         }
         const textToBe = `Comp Max: $${numberWithCommas(numberToBe)}`;
         expenseForecastPage.toeCompMax.should("have.text", textToBe);
+        return this;
     }
 
+    /**
+     *
+     * @returns {ExpenseForecastActions}
+     */
     verifyOwnersProFormaValue() {
         expenseForecastPage.allProjections.then(elements => {
             let sum = 0;
@@ -198,8 +351,13 @@ class ExpenseForecastActions extends BaseActions {
             const textToBe = `Owner's Pro Forma: $${numberWithCommas(sum.toFixed(2))}`;
             expenseForecastPage.toeOwnerProjection.should("have.text", textToBe);
         });
+        return this;
     }
 
+    /**
+     *
+     * @returns {ExpenseForecastActions}
+     */
     verifyTotalForecast() {
         expenseForecastPage.allForecastsInputs.then(elements => {
             let sum = 0;
@@ -210,6 +368,7 @@ class ExpenseForecastActions extends BaseActions {
             const textToBe = `Appraiser's Forecast: $${numberWithCommas(sum.toFixed(2))}`;
             expenseForecastPage.appraisersTotalForecast.should("have.text", textToBe);
         });
+        return this;
     }
 }
 

@@ -1,3 +1,5 @@
+import {getEnvUrl} from "../../../utils/env.utils";
+
 export default class BaseActions {
 
     clickYesButton() {
@@ -9,7 +11,7 @@ export default class BaseActions {
     }
 
     returnToHomePage() {
-        cy.visit("/reports");
+        cy.visit(`${getEnvUrl()}/reports`);
     }
 
     goBackWithSave() {
@@ -24,6 +26,7 @@ export default class BaseActions {
 
     clickSaveButton() {
         cy.get("*[data-qa='form-save-btn']").click();
+        return this;
     }
 
     clickSaveContinueButton() {
@@ -32,5 +35,6 @@ export default class BaseActions {
 
     verifyProgressBarNotExist() {
         cy.get("*[role='progressbar']").should("not.exist");
+        return this;
     }
 }

@@ -368,16 +368,23 @@ class RentCompsActions extends BaseActions {
         rentCompsPage.newUnitForm.should("be.visible");
     }
 
-    openAddNewComparableFormAdvanced(address, state, id) {
+    /**
+     *
+     * @param {Readonly<{state: string, address: string, id: string | number}>} comparableData
+     * @returns {RentCompsActions}
+     */
+    openAddNewComparableFormAdvanced(comparableData) {
         this.verifyLoadingDoesntExist();
         rentCompsPage.addNewRentCompButton.scrollIntoView().click();
         rentCompsPage.advancedSearchButton.click();
         rentCompsPage.selectStateButton.click();
-        rentCompsPage.getStateByName(state).click();
-        rentCompsPage.searchAddressField.type(`${address}{enter}`).should("have.value", address);
+        rentCompsPage.getStateByName(comparableData.state).click();
+        rentCompsPage.searchAddressField.type(`${comparableData.address}{enter}`)
+            .should("have.value", comparableData.address);
         rentCompsPage.findRenCompSection.click();
-        rentCompsPage.propertyIdentifierInput.type(id).should("have.value", id);
+        rentCompsPage.propertyIdentifierInput.type(comparableData.id).should("have.value", comparableData.id);
         rentCompsPage.submitButton.click();
+        return this;
     }
 
     verifyAddedComparable(index, numberOfRooms, numberOfBedrooms, monthlyRent,
@@ -395,21 +402,40 @@ class RentCompsActions extends BaseActions {
         }
     }
 
+    /**
+     *
+     * @param {JQuery<HTMLElement>} rowJQueryEl
+     * @param {string} cellLocator
+     * @param {string} textToBe
+     * @returns {RentCompsActions}
+     */
     verifyCellText(rowJQueryEl, cellLocator, textToBe) {
         cy.wrap(rowJQueryEl).find(cellLocator).should("have.text", textToBe);
+        return this;
     }
 
-    verifyComparableBedroomTableByNumber(index, roomsNumber, bedroomsNumber, monthlyRent, sourceOfInfo) {
-        rentCompsPage.getBedroomTableByNumber(bedroomsNumber).find(rentCompsPage.getCategoryRowByIndexLocator(index)).then(row => {
-            this.verifyCellText(row, rentCompsPage.categoryRoomsCellsLocator, roomsNumber);
-            this.verifyCellText(row, rentCompsPage.categoryBedroomsCellsLocator, bedroomsNumber);
-            const monthlyRentText = typeof monthlyRent === "string" ? `$${monthlyRent}` : `$${numberWithCommas(monthlyRent)}`;
-            this.verifyCellText(row, rentCompsPage.categoryRentsCellsLocator, monthlyRentText);
-            const rentForCalc = typeof monthlyRent === "string" ? monthlyRent.replace(",", "") : monthlyRent;
-            const perRoom = numberWithCommas(Math.round(rentForCalc / roomsNumber));
-            this.verifyCellText(row, rentCompsPage.categoryRentPerRoomLocator, `$${perRoom}`);
-            this.verifyCellText(row, rentCompsPage.categorySourceOfInfoLocator, sourceOfInfo);
-        });
+    /**
+     *
+     * @param {number} index
+     * @param {Readonly<{bedrooms: number | string, rooms: number | string, monthly: string | number,
+     * sourceInfoCheck: string}>} rentCompData
+     * @returns {RentCompsActions}
+     */
+    verifyComparableBedroomTableByNumber(index, rentCompData) {
+        rentCompsPage.getBedroomTableByNumber(rentCompData.bedrooms).find(rentCompsPage.getCategoryRowByIndexLocator(index))
+            .then(row => {
+                this.verifyCellText(row, rentCompsPage.categoryRoomsCellsLocator, rentCompData.rooms)
+                    .verifyCellText(row, rentCompsPage.categoryBedroomsCellsLocator, rentCompData.bedrooms);
+                const monthlyRentText = typeof rentCompData.monthly === "string" ? `$${rentCompData.monthly}` :
+                    `$${numberWithCommas(rentCompData.monthly)}`;
+                this.verifyCellText(row, rentCompsPage.categoryRentsCellsLocator, monthlyRentText);
+                const rentForCalc = typeof rentCompData.monthly === "string" ?
+                    rentCompData.monthly.replace(",", "") : rentCompData.monthly;
+                const perRoom = numberWithCommas(Math.round(rentForCalc / rentCompData.rooms));
+                this.verifyCellText(row, rentCompsPage.categoryRentPerRoomLocator, `$${perRoom}`)
+                    .verifyCellText(row, rentCompsPage.categorySourceOfInfoLocator, rentCompData.sourceInfoCheck);
+            });
+        return this;
     }
 }
 

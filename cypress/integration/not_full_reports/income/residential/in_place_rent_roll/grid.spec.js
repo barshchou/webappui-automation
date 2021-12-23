@@ -7,7 +7,7 @@ import summaryActions from "../../../../../actions/property/summary.actions";
 
 describe("In-Place Rent Roll grid tests", () => {
     before("Login and open In-Place Rent Roll", () => {
-        cy.loginByApi();
+        cy.login();
         homepageActions.createReport();
         navigationSection.navigateToInPlaceRentRoll();
         cy.saveLocalStorage();

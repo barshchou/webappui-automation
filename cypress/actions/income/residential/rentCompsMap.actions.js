@@ -3,9 +3,16 @@ import rentCompsMapPage from "../../../pages/income/residential/rentCompsMap.pag
 import {getUploadFixture} from "../../../../utils/fixtures.utils";
 
 class RentCompsMapActions extends BaseActions{
+
+    /**
+     *
+     * @param {string} filePath
+     * @returns {RentCompsMapActions}
+     */
     uploadCompMap(filePath) {
         rentCompsMapPage.mapImageInput.attachFile(getUploadFixture(filePath));
         rentCompsMapPage.mapImage.should("have.attr", "title");
+        return this;
     }
 }
 

@@ -3,18 +3,31 @@ import photosPage from "../../pages/property/photos.page";
 import {getUploadFixturesArrayFromFolder} from "../../../utils/fixtures.utils";
 
 class PhotosActions extends BaseActions{
-    uploadPhotosBySectionName(sectionName, baseFolder, filesNames) {
-        photosPage.getUploadInputByName(sectionName).attachFile(getUploadFixturesArrayFromFolder(baseFolder, filesNames));
+
+    /**
+     *
+     * @param {Readonly<{section: string, photosFolder: string, photosFileNames: Array<string>}>} photosData
+     * @returns {PhotosActions}
+     */
+    uploadPhotosBySectionName(photosData) {
+        photosPage.getUploadInputByName(photosData.section)
+            .attachFile(getUploadFixturesArrayFromFolder(photosData.photosFolder, photosData.photosFileNames));
         this.verifyProgressBarNotExist();
-        photosPage.getUploadedPhotosByName(sectionName).first().scrollIntoView();
-        photosPage.getUploadedPhotosByName(sectionName).should("have.length", filesNames.length);
+        photosPage.getUploadedPhotosByName(photosData.section).first().scrollIntoView();
+        photosPage.getUploadedPhotosByName(photosData.section).should("have.length", photosData.photosFileNames.length);
+        return this;
     }
 
-    editSectionName(oldName, newName) {
-        photosPage.getSectionNameEditButtonByName(oldName).click();
-        photosPage.getCurrentEditInputBySectionName(oldName).clear().type(newName);
-        photosPage.getCurrentEditInputBySectionName(newName).should("exist");
+    /**
+     * @param {Readonly<{sectionOldName: string, section: string}>} photosData
+     * @returns {PhotosActions}
+     */
+    editSectionName(photosData) {
+        photosPage.getSectionNameEditButtonByName(photosData.sectionOldName).click();
+        photosPage.getCurrentEditInputBySectionName(photosData.sectionOldName).clear().type(photosData.section);
+        photosPage.getCurrentEditInputBySectionName(photosData.section).should("exist");
         photosPage.editSectionSave.click();
+        return this;
     }
 }
 

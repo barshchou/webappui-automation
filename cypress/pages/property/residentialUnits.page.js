@@ -27,6 +27,7 @@ class ResidentialUnitsPage extends BasePage{
     get stairsEnd() {return cy.get("[name='stairs.stairsEnd']");}
     get stairsCommentaryEditButton() {return cy.get("[data-qa*='stairs.writeup-generated'] [data-qa*='edit-btn']");}
     get stairsCommentaryInput() {return cy.get("[name='stairs.writeup.commentary']");}
+    getElementToCheckRadio(value) {return cy.get(`[data-qa=checked] input[value='${value}']`);}
 }
 
 export default new ResidentialUnitsPage();
