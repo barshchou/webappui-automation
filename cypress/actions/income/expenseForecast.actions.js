@@ -17,7 +17,7 @@ class ExpenseForecastActions extends BaseActions {
 
     /**
      *
-     * @param {Readonly<{name: string, forecast: number | string}>} forecastItem
+     * @param {Readonly<{name: string, forecast: number | string, [basis]: string}>} forecastItem
      * @returns {ExpenseForecastActions}
      */
     enterForecastItemForecast(forecastItem) {
@@ -100,7 +100,7 @@ class ExpenseForecastActions extends BaseActions {
 
     /**
      *
-     * @param {Readonly<{name: string, basis: string}>} forecastItem
+     * @param {Readonly<{name: string, basis: string, [forecast]: number | string}>} forecastItem
      * @param {Array<{address: string, location: string, period: string, squareFeet: number, resUnits: number,
      * insurance: number, electricity: number, repairsAndMaintenance: number, payrollAndBenefits: number,
      * generalAndAdministrative: number, management: number, toe: string}>} comparables
@@ -120,7 +120,7 @@ class ExpenseForecastActions extends BaseActions {
 
     /**
      *
-     * @param {Readonly<{name: string, basis: string}>} forecastItem
+     * @param {Readonly<{name: string, basis: string, [forecast]: number | string}>} forecastItem
      * @param {Array<{address: string, location: string, period: string, squareFeet: number, resUnits: number,
      * insurance: number, electricity: number, repairsAndMaintenance: number, payrollAndBenefits: number,
      * generalAndAdministrative: number, management: number, toe: string}>} comparables
@@ -140,7 +140,7 @@ class ExpenseForecastActions extends BaseActions {
 
     /**
      *
-     * @param {Readonly<{name: string, basis: string}>} forecastItem
+     * @param {Readonly<{name: string, basis: string, [forecast]: number | string}>} forecastItem
      * @param {Array<{address: string, location: string, period: string, squareFeet: number, resUnits: number,
      * insurance: number, electricity: number, repairsAndMaintenance: number, payrollAndBenefits: number,
      * generalAndAdministrative: number, management: number, toe: string}>} comparables
