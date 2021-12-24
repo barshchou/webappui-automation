@@ -36,35 +36,72 @@ class InPlaceRentRollActions extends BaseActions {
         return this;
     }
 
+    /**
+     *
+     * @returns {InPlaceRentRollActions}
+     */
     clickGoToPropSummaryButton() {
         rentRollPage.goToPropSummaryButton.should("be.visible").click();
+        return this;
     }
 
+    /**
+     *
+     * @returns {InPlaceRentRollActions}
+     */
     goToPropSummaryWithSaveLeavingFirst() {
-        this.clickGoToPropSummaryButton();
-        this.clickYesButton();
+        this.clickGoToPropSummaryButton()
+            .clickYesButton();
+        return this;
     }
 
+    /**
+     *
+     * @returns {InPlaceRentRollActions}
+     */
     goToPropSummaryWithSaveSaveClickFirst() {
         this.clickSaveButton();
         this.clickGoToPropSummaryButton();
+        return this;
     }
 
+    /**
+     *
+     * @returns {InPlaceRentRollActions}
+     */
     goToPropSummaryWithoutSave() {
-        this.clickGoToPropSummaryButton();
-        this.clickNoButton();
+        this.clickGoToPropSummaryButton()
+            .clickNoButton();
+        return this;
     }
 
     verifyThatRentRollOptionsExist() {
         rentRollPage.rentRollOptionsField.should("be.visible");
     }
 
+    /**
+     *
+     * @param {string} columnName
+     * @param {boolean} check
+     * @returns {InPlaceRentRollActions}
+     */
     verifyColumnExist(columnName, check = true) {
         if (check) {
             rentRollPage.getColumnHeader(columnName).should("exist");
         } else {
-            rentRollPage.getColumnHeader(columnName).should("not.exist");
+            this.verifyColumnNotExist(columnName);
         }
+        return this;
+    }
+
+    /**
+     *
+     * @param {string} columnName
+     * @returns {InPlaceRentRollActions}
+     */
+    verifyColumnNotExist(columnName) {
+        rentRollPage.getColumnHeader(columnName).should("not.exist");
+        return this;
     }
 
     verifyListColumnExist(columnNames, check = true) {
@@ -88,18 +125,45 @@ class InPlaceRentRollActions extends BaseActions {
             rentRollPage.getCheckboxByLabel(label).scrollIntoView().should("be.enabled")
                 .check().should("be.checked");
         } else {
-            rentRollPage.getCheckboxByLabel(label).scrollIntoView().should("be.enabled")
-                .uncheck().should("not.be.checked");
+            this.uncheckCheckboxByLabel(label);
         }
         return this;
     }
 
-    verifyCheckboxByLabelIsCheckedOrNot(label, check = true) {
+    /**
+     *
+     * @param {string} label
+     * @returns {InPlaceRentRollActions}
+     */
+    uncheckCheckboxByLabel(label) {
+        rentRollPage.getCheckboxByLabel(label).scrollIntoView().should("be.enabled")
+            .uncheck().should("not.be.checked");
+        return this;
+    }
+
+    /**
+     *
+     * @param {string} label
+     * @param {boolean} check
+     * @returns {InPlaceRentRollActions}
+     */
+    verifyCheckboxIsChecked(label, check = true) {
         if (check) {
             rentRollPage.getCheckboxByLabel(label).should("be.checked");
         } else {
-            rentRollPage.getCheckboxByLabel(label).should("not.be.checked");
+            this.verifyCheckboxIsNotChecked(label);
         }
+        return this;
+    }
+
+    /**
+     *
+     * @param {string} label
+     * @returns {InPlaceRentRollActions}
+     */
+    verifyCheckboxIsNotChecked(label) {
+        rentRollPage.getCheckboxByLabel(label).should("not.be.checked");
+        return this;
     }
 
     checkUncheckCheckbox(columnName, label) {

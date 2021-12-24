@@ -187,10 +187,10 @@ class HomepageActions extends BaseActions {
      * @param {string} reportNumber
      * @returns {HomepageActions}
      */
-    deleteReport(reportNumber = "TestAutoReport") {
-        this.verifyThatPageIsOpened();
-        this.enterReportNumberToSearch(reportNumber);
-        this.clickArchiveButton(reportNumber);
+    deleteReport(reportNumber) {
+        this.verifyThatPageIsOpened()
+            .enterReportNumberToSearch(reportNumber)
+            .clickArchiveButton(reportNumber);
         return this;
     }
 

@@ -11,22 +11,51 @@ export default class BaseActions {
         return this;
     }
 
+    /**
+     *
+     * @returns {BaseActions}
+     */
     clickNoButton() {
         cy.get("*[name='form-confirm-reject-btn']").click();
+        return this;
     }
 
+    /**
+     *
+     * @returns {BaseActions}
+     */
     returnToHomePage() {
         cy.visit(`${getEnvUrl()}/reports`);
+        return this;
     }
 
+    /**
+     *
+     * @returns {BaseActions}
+     */
     goBackWithSave() {
         cy.go("back");
         this.clickYesButton();
+        return this;
     }
 
+    /**
+     *
+     * @returns {BaseActions}
+     */
     goBackWithoutSave() {
         cy.go("back");
         this.clickNoButton();
+        return this;
+    }
+
+    /**
+     *
+     * @returns {BaseActions}
+     */
+    goBack() {
+        cy.go("back");
+        return this;
     }
 
     /**

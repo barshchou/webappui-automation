@@ -7,8 +7,14 @@ import {
 } from "../../../utils/numbers.utils";
 
 class SummaryActions extends BaseActions {
+
+    /**
+     *
+     * @returns {SummaryActions}
+     */
     verifyThatPageIsOpened() {
         summaryPage.headerSection.should("be.visible");
+        return this;
     }
 
     /**
