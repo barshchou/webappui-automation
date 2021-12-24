@@ -3,48 +3,104 @@ import {getTodayDateString, getTodayDay, isDateHasCorrectFormat} from "../../../
 import {isDecimal, numberWithCommas} from "../../../../../utils/numbers.utils";
 
 class AddCompFormActions {
+
+    /**
+     *
+     * @returns {AddCompFormActions}
+     */
     clickCloseButton() {
         addCompFormPage.closeButton.should("be.enabled").click();
+        return this;
     }
 
+    /**
+     *
+     * @returns {AddCompFormActions}
+     */
     verifyPropAddressExist() {
         addCompFormPage.propAddressField.should("be.visible").should("not.be.empty");
+        return this;
     }
 
+    /**
+     *
+     * @returns {AddCompFormActions}
+     */
     verifyUnitNumbFieldName() {
         addCompFormPage.unitNumbFieldName.should("exist").should("have.text", "Unit Number");
+        return this;
     }
 
+    /**
+     *
+     * @param {string} unitNumber
+     * @returns {AddCompFormActions}
+     */
     enterUnitNumber(unitNumber) {
         addCompFormPage.unitNumbInput.clear().type(unitNumber).should("have.value", unitNumber);
+        return this;
     }
 
+    /**
+     *
+     * @returns {AddCompFormActions}
+     */
     clickUnitTypeDropdown() {
         addCompFormPage.unitTypeDropdown.should("be.visible").click();
+        return this;
     }
 
+    /**
+     *
+     * @param {string} value
+     * @returns {AddCompFormActions}
+     */
     selectUnitTypeByValue(value) {
         addCompFormPage.getUnitTypeByValue(value).scrollIntoView().should("be.visible").click();
+        return this;
     }
 
+    /**
+     *
+     * @param {string} valueToBe
+     * @returns {AddCompFormActions}
+     */
     verifyUnitTypeValue(valueToBe) {
         addCompFormPage.unitTypeInputToCheck.should("have.value", valueToBe);
+        return this;
     }
 
+    /**
+     *
+     * @param {string} value
+     * @returns {AddCompFormActions}
+     */
     selectUnitTypeAndVerify(value) {
-        this.clickUnitTypeDropdown();
-        this.selectUnitTypeByValue(value);
-        this.verifyUnitTypeValue(value);
+        this.clickUnitTypeDropdown()
+            .selectUnitTypeByValue(value)
+            .verifyUnitTypeValue(value);
+        return this;
     }
 
+    /**
+     *
+     * @param {Array<string>} values
+     * @returns {AddCompFormActions}
+     */
     selectListUnitTypes(values) {
         values.forEach(value => {
            this.selectUnitTypeAndVerify(value);
         });
+        return this;
     }
 
+    /**
+     *
+     * @returns {AddCompFormActions}
+     */
     verifyMonthRentFieldName() {
         addCompFormPage.monthRentFieldName.should("exist").should("contain.text", "Monthly Rent");
+        return this;
     }
 
     /**
@@ -58,13 +114,18 @@ class AddCompFormActions {
         return  this;
     }
 
+    /**
+     *
+     * @returns {AddCompFormActions}
+     */
     clearDateInput() {
         addCompFormPage.dateOfValueInput.clear();
+        return this;
     }
 
     /**
      *
-     * @param {string} date
+     * @param {string} [date]
      * @returns {AddCompFormActions}
      */
     enterDate(date) {
@@ -91,6 +152,11 @@ class AddCompFormActions {
         return this;
     }
 
+    /**
+     *
+     * @param {string} [day]
+     * @returns {AddCompFormActions}
+     */
     chooseDayOfCurrentMonthInPicker(day) {
         day = day ?? Number(getTodayDay());
         let date = getTodayDateString();
@@ -105,11 +171,17 @@ class AddCompFormActions {
         addCompFormPage.datePickerPopover.should("exist");
         addCompFormPage.getDayOfCurrentMonthInPicker(day).should("be.visible").click();
         this.verifyEnteredDate(date);
+        return this;
     }
 
+    /**
+     *
+     * @returns {AddCompFormActions}
+     */
     verifySquareFootageFieldName() {
         addCompFormPage.squareFootageFieldName.should("exist")
             .should("have.text", "Unit Square Footage");
+        return this;
     }
 
     /**
@@ -176,40 +248,77 @@ class AddCompFormActions {
         return this;
     }
 
+    /**
+     *
+     * @returns {AddCompFormActions}
+     */
     verifyNumberOfBedroomsFiledName() {
         addCompFormPage.numberOfBedroomsFieldName.should("exist")
             .should("contain.text", "Number of Bedrooms");
+        return this;
     }
 
+    /**
+     *
+     * @param {number, string} number
+     * @returns {AddCompFormActions}
+     */
     enterNumberOfBedrooms(number) {
         addCompFormPage.bedroomsInput.clear().type(number).should("have.value", number);
         return this;
     }
 
+    /**
+     *
+     * @param {string} name
+     * @returns {AddCompFormActions}
+     */
     enterSourceName(name) {
         addCompFormPage.sourceNameInput.should("exist").clear().type(name).should("have.value", name);
-    }
-
-    verifySourceNameNotExist() {
-        addCompFormPage.sourceNameInput.should("not.exist");
-    }
-
-    verifySourceUrlNotExist() {
-        addCompFormPage.sourceUrlInput.should("not.exist");
-    }
-
-    enterSourceUrl(url) {
-        addCompFormPage.sourceUrlInput.should("exist").clear().type(url).should("have.value", url);
-    }
-
-    verifyNumberOfRoomsFieldName() {
-        addCompFormPage.numberOfRoomsFieldName.should("exist")
-            .should("contain.text", "Number of Rooms");
+        return this;
     }
 
     /**
      *
-     * @param {number} numberOfRooms
+     * @returns {AddCompFormActions}
+     */
+    verifySourceNameNotExist() {
+        addCompFormPage.sourceNameInput.should("not.exist");
+        return this;
+    }
+
+    /**
+     *
+     * @returns {AddCompFormActions}
+     */
+    verifySourceUrlNotExist() {
+        addCompFormPage.sourceUrlInput.should("not.exist");
+        return this;
+    }
+
+    /**
+     *
+     * @param {string} url
+     * @returns {AddCompFormActions}
+     */
+    enterSourceUrl(url) {
+        addCompFormPage.sourceUrlInput.should("exist").clear().type(url).should("have.value", url);
+        return this;
+    }
+
+    /**
+     *
+     * @returns {AddCompFormActions}
+     */
+    verifyNumberOfRoomsFieldName() {
+        addCompFormPage.numberOfRoomsFieldName.should("exist")
+            .should("contain.text", "Number of Rooms");
+        return this;
+    }
+
+    /**
+     *
+     * @param {number, string} numberOfRooms
      * @returns {AddCompFormActions}
      */
     enterNumberOfRooms(numberOfRooms) {
@@ -217,14 +326,19 @@ class AddCompFormActions {
         return this;
     }
 
+    /**
+     *
+     * @returns {AddCompFormActions}
+     */
     verifyNumberOfBathFieldName() {
         addCompFormPage.numberOfBathFieldName.should("exist")
             .should("have.text", "Number of Bathrooms");
+        return this;
     }
 
     /**
      *
-     * @param {number} number
+     * @param {number, string} number
      * @returns {AddCompFormActions}
      */
     enterNumberOfBathrooms(number = 0) {
@@ -244,48 +358,104 @@ class AddCompFormActions {
         return this;
     }
 
+    /**
+     *
+     * @param {string} notes
+     * @returns {AddCompFormActions}
+     */
     enterInternalNotes(notes) {
         addCompFormPage.internalNotesTextField.should("exist").should("have.attr", "placeholder",
             "Write internal notes that will not be exported.").clear().type(notes).should("have.text", notes);
-    }
-
-    verifyUnitAmenitiesFieldName() {
-        addCompFormPage.unitAmenitiesFieldName.should("exist").should("have.text", "Unit Amenities");
-    }
-
-    clickUnitAmenitiesDropdown() {
-        addCompFormPage.unitAmenitiesDropdown.should("be.visible").click();
-    }
-
-    checkUncheckCheckboxByQaAttr(attribute, check = true) {
-        if (check) {
-            addCompFormPage.getCheckboxByDataQaAttr(attribute)
-                .should("have.value", "false")
-                .scrollIntoView().check({force:true}).should("have.value", "true");
-        } else {
-            addCompFormPage.getCheckboxByDataQaAttr(attribute)
-                .should("have.value", "true")
-                .scrollIntoView().uncheck({force:true}).should("have.value", "false");
-        }
-    }
-
-    checkUncheckListOfCheckboxesByQa(attributes, check = true) {
-        attributes.forEach(attr => {
-            this.checkUncheckCheckboxByQaAttr(attr, check);
-        });
-    }
-
-    clickCancelButton() {
-        addCompFormPage.cancelButton.should("be.visible").click();
-    }
-
-    clickSubmitCompButton() {
-        addCompFormPage.submitCompButton.should("not.be.disabled").click();
+        return this;
     }
 
     /**
      *
-     * @param {Readonly<{monthly: number, date: string, footage: number, sourceInfo: string, bedrooms: number,
+     * @returns {AddCompFormActions}
+     */
+    verifyUnitAmenitiesFieldName() {
+        addCompFormPage.unitAmenitiesFieldName.should("exist").should("have.text", "Unit Amenities");
+        return this;
+    }
+
+    /**
+     *
+     * @returns {AddCompFormActions}
+     */
+    clickUnitAmenitiesDropdown() {
+        addCompFormPage.unitAmenitiesDropdown.should("be.visible").click();
+        return this;
+    }
+
+    /**
+     *
+     * @param {string} attribute
+     * @returns {AddCompFormActions}
+     */
+    checkCheckboxByQaAttr(attribute) {
+        addCompFormPage.getCheckboxByDataQaAttr(attribute)
+            .should("have.value", "false")
+            .scrollIntoView().check({force:true}).should("have.value", "true");
+        return this;
+    }
+
+    /**
+     *
+     * @param {string} attribute
+     * @returns {AddCompFormActions}
+     */
+    uncheckCheckboxByQaAttr(attribute) {
+        addCompFormPage.getCheckboxByDataQaAttr(attribute)
+            .should("have.value", "true")
+            .scrollIntoView().uncheck({force:true}).should("have.value", "false");
+        return this;
+    }
+
+    /**
+     *
+     * @param {Array<string>} attributes
+     * @returns {AddCompFormActions}
+     */
+    checkListOfCheckboxesByQa(attributes) {
+        attributes.forEach(attr => {
+            this.checkCheckboxByQaAttr(attr);
+        });
+        return this;
+    }
+
+    /**
+     *
+     * @param {Array<string>} attributes
+     * @returns {AddCompFormActions}
+     */
+    uncheckListOfCheckboxesByQa(attributes) {
+        attributes.forEach(attr => {
+            this.uncheckCheckboxByQaAttr(attr);
+        });
+        return this;
+    }
+
+    /**
+     *
+     * @returns {AddCompFormActions}
+     */
+    clickCancelButton() {
+        addCompFormPage.cancelButton.should("be.visible").click();
+        return this;
+    }
+
+    /**
+     *
+     * @returns {AddCompFormActions}
+     */
+    clickSubmitCompButton() {
+        addCompFormPage.submitCompButton.should("not.be.disabled").click();
+        return this;
+    }
+
+    /**
+     *
+     * @param {Readonly<{monthly: number | string, date: string, footage: number, sourceInfo: string, bedrooms: number,
      * rooms: number, bathrooms: number}>} compData
      * @returns {AddCompFormActions}
      */

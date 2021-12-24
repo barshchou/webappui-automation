@@ -159,16 +159,11 @@ class InPlaceRentRollActions extends BaseActions {
     /**
      *
      * @param {string} label
-     * @param {boolean} check
      * @returns {InPlaceRentRollActions}
      */
-    checkCheckboxByLabel(label, check = true) {
-        if (check) {
-            rentRollPage.getCheckboxByLabel(label).scrollIntoView().should("be.enabled")
-                .check().should("be.checked");
-        } else {
-            this.uncheckCheckboxByLabel(label);
-        }
+    checkCheckboxByLabel(label) {
+        rentRollPage.getCheckboxByLabel(label).scrollIntoView().should("be.enabled")
+            .check().should("be.checked");
         return this;
     }
 
@@ -186,15 +181,10 @@ class InPlaceRentRollActions extends BaseActions {
     /**
      *
      * @param {string} label
-     * @param {boolean} check
      * @returns {InPlaceRentRollActions}
      */
-    verifyCheckboxIsChecked(label, check = true) {
-        if (check) {
-            rentRollPage.getCheckboxByLabel(label).should("be.checked");
-        } else {
-            this.verifyCheckboxIsNotChecked(label);
-        }
+    verifyCheckboxIsChecked(label) {
+        rentRollPage.getCheckboxByLabel(label).should("be.checked");
         return this;
     }
 
@@ -215,8 +205,7 @@ class InPlaceRentRollActions extends BaseActions {
      * @returns {InPlaceRentRollActions}
      */
     checkUncheckCheckboxForColumn(columnName, label) {
-        this.checkCheckboxByLabel(label)
-            .verifyColumnExist(columnName)
+        this.checkCheckboxByLabelAndVerify(label, columnName)
             .uncheckCheckboxByLabel(label)
             .verifyColumnNotExist(columnName);
         return this;
@@ -229,8 +218,8 @@ class InPlaceRentRollActions extends BaseActions {
      * @returns {InPlaceRentRollActions}
      */
     checkCheckboxByLabelAndVerify(label, columnName) {
-        this.checkCheckboxByLabel(label);
-        this.verifyColumnExist(columnName);
+        this.checkCheckboxByLabel(label)
+            .verifyColumnExist(columnName);
         return this;
     }
 

@@ -256,8 +256,13 @@ class RentCompsActions extends BaseActions {
         });
     }
 
+    /**
+     *
+     * @returns {RentCompsActions}
+     */
     verifyLoadingDoesntExist() {
         rentCompsPage.loadingModal.should("not.exist");
+        return this;
     }
 
     verifyPhotosExistAndNavigateByPhotos(comparableIndex) {
@@ -352,11 +357,23 @@ class RentCompsActions extends BaseActions {
         }
     }
 
+    /**
+     *
+     * @param {number} searchResultIndex
+     * @returns {RentCompsActions}
+     */
     verifySearchResultIsShown(searchResultIndex = 0) {
         rentCompsPage.searchResultsRows.eq(searchResultIndex).should("be.visible");
+        return this;
     }
 
-    openAddNewComparableForm(address = "230 Park Avenue, New-York, USA", searchResIndex = 0) {
+    /**
+     *
+     * @param {string} address
+     * @param {number} searchResIndex
+     * @returns {RentCompsActions}
+     */
+    openAddNewComparableForm(address, searchResIndex = 0) {
         this.verifyLoadingDoesntExist();
         rentCompsPage.addNewRentCompButton.scrollIntoView().should("be.enabled").click();
         rentCompsPage.findRenCompSection.should("be.visible");
@@ -366,6 +383,7 @@ class RentCompsActions extends BaseActions {
         rentCompsPage.searchResultsRows.eq(searchResIndex).click();
         rentCompsPage.submitButton.should("not.be.disabled").click();
         rentCompsPage.newUnitForm.should("be.visible");
+        return this;
     }
 
     /**
@@ -387,19 +405,32 @@ class RentCompsActions extends BaseActions {
         return this;
     }
 
+    /**
+     *
+     * @param {number} index
+     * @param {number, string} numberOfRooms
+     * @param {number, string} numberOfBedrooms
+     * @param {number, string} monthlyRent
+     * @param {string} sourceOfInfo
+     * @param {number, string} numberOfUnits
+     * @returns {RentCompsActions}
+     */
     verifyAddedComparable(index, numberOfRooms, numberOfBedrooms, monthlyRent,
                           sourceOfInfo, numberOfUnits = 0) {
         if (numberOfUnits === 0) {
             rentCompsPage.uncategorizedTable.find(rentCompsPage.getCategoryRowByIndexLocator(index)).then(row => {
                 this.verifyCellText(row, rentCompsPage.categoryRoomsCellsLocator, numberOfRooms);
                 this.verifyCellText(row, rentCompsPage.categoryBedroomsCellsLocator, numberOfBedrooms);
-                this.verifyCellText(row, rentCompsPage.categoryRentsCellsLocator, `$${monthlyRent}`);
-                const rentForCalc = monthlyRent.replace(",", "");
+                const rentTextToBe = typeof monthlyRent === "string" ? `$${monthlyRent}` : `$${numberWithCommas(monthlyRent)}`;
+                this.verifyCellText(row, rentCompsPage.categoryRentsCellsLocator, rentTextToBe);
+                const rentForCalc = typeof monthlyRent === "string" ? monthlyRent.replace(",", "")
+                    : monthlyRent;
                 const perRoom = numberWithCommas(Math.round(rentForCalc / numberOfRooms));
                 this.verifyCellText(row, rentCompsPage.categoryRentPerRoomLocator, `$${perRoom}`);
                 this.verifyCellText(row, rentCompsPage.categorySourceOfInfoLocator, sourceOfInfo);
             });
         }
+        return this;
     }
 
     /**
