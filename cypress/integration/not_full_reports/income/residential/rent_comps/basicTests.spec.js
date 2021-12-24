@@ -1,13 +1,13 @@
 import {reportCreationData} from "../../../../../fixtures/basicRentComps.fixtures";
-import homepageActions from "../../../../../actions/base/homepage.actions";
-import navSectionActions from "../../../../../actions/base/navigationSection.actions";
-import rentCompsActions from "../../../../../actions/income/residential/rent_comps/rentComps.actions";
+import Homepage from "../../../../../actions/base/homepage.actions";
+import NavigationSection from "../../../../../actions/base/navigationSection.actions";
+import RentComps from "../../../../../actions/income/residential/rent_comps/rentComps.manager";
 
 describe("Basic Rent Comps tests", () => {
     before("Login and navigate to Rent Comps", () => {
        cy.login();
-       homepageActions.createReport(reportCreationData());
-       navSectionActions.navigateToRentComps();
+       Homepage.createReport(reportCreationData());
+       NavigationSection.navigateToRentComps();
        cy.saveLocalStorage();
     });
 
@@ -16,17 +16,17 @@ describe("Basic Rent Comps tests", () => {
     });
 
     it("ID45: GC section: Comparable Rentals Introduction", () => {
-        rentCompsActions.verifyGCText(reportCreationData().conclusionValue);
+        RentComps.BaseActions.verifyGCText(reportCreationData().conclusionValue);
     });
 
     it("ID46, ID47 and ID48: Unit button, Building button and PopUp", () => {
-        rentCompsActions.changeToBuildingSearch()
+        RentComps.BaseActions.changeToBuildingSearch()
             .changeToUnitSearch();
     });
 
     after("Delete report", () => {
         cy.restoreLocalStorage();
-        rentCompsActions.returnToHomePage();
-        homepageActions.deleteReport(reportCreationData().reportNumber);
+        RentComps.BaseActions.returnToHomePage();
+        Homepage.deleteReport(reportCreationData().reportNumber);
     });
 });

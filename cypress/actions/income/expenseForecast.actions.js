@@ -6,7 +6,7 @@ class ExpenseForecastActions extends BaseActions {
 
     /**
      *
-     * @param {Readonly<{name: string, basis: string}>} forecastItem
+     * @param {Readonly<{name: string, basis: string, [forecast]: number}>} forecastItem
      * @returns {ExpenseForecastActions}
      */
     chooseForecastItemBasis(forecastItem) {

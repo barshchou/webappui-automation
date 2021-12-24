@@ -1,70 +1,25 @@
 import testData from "../../fixtures/full_reports/full_bowery_multifamily_as_complete/fullBoweryMultifamilyAsComplete.fixtures";
-import homepageActions from "../../actions/base/homepage.actions";
-import keyInfoActions from "../../actions/report/keyInfo.actions";
-import navSectionActions from "../../actions/base/navigationSection.actions";
-import clientActions from "../../actions/report/client.actions";
-import summaryActions from "../../actions/property/summary.actions";
-import marketActions from "../../actions/property/market.actions";
-import historyActions from "../../actions/property/history.actions";
-import descriptionActions from "../../actions/property/description.actions";
-import siteDescriptionActions from "../../actions/property/siteDescription.actions";
-import mapsActions from "../../actions/property/maps.actions";
-import utilitiesActions from "../../actions/property/utilities.actions";
-import amenitiesActions from "../../actions/property/amenities.actions";
-import photosActions from "../../actions/property/photos.actions";
-import zoningActions from "../../actions/property/zoning.actions";
-import renovationsActions from "../../actions/property/renovations.actions";
-import residentialUnitsActions from "../../actions/property/residentialUnits.actions";
-import inPlaceRentRollActions from "../../actions/income/residential/rentRoll.actions";
-import unitGroupsActions from "../../actions/income/residential/unitGroups.actions";
-import rentCompsActions from "../../actions/income/residential/rent_comps/rentComps.actions";
-import addCompFormActions from "../../actions/income/residential/rent_comps/addCompForm.actions";
-import rentCompsMapActions from "../../actions/income/residential/rentCompsMap.actions";
-import rentReconciliationActions from "../../actions/income/residential/rentReconciliation.actions";
-import stabilizedRentRollActions from "../../actions/income/residential/stabilizedRentRoll.actions";
-import stabRentRollSummaryActions from "../../actions/income/residential/stabRentRollSummary.actions";
-import expensesStructureActions from "../../actions/income/residential/expenseStructure.actions";
-import laundryActions from "../../actions/income/miscellaneous/laundry.actions";
-import storageActions from "../../actions/income/miscellaneous/storage.actions";
-import parkingActions from "../../actions/income/miscellaneous/parking.actions";
-import otherActions from "../../actions/income/miscellaneous/other.actions";
-import grossIncomeActions from "../../actions/income/potentialGrossIncome.actions";
-import taxInfoActions from "../../actions/income/taxInfo.actions";
-import expenseHistoryActions from "../../actions/income/expenseHistory.actions";
-import compExpensesActions from "../../actions/income/comparableExpenses.actions";
-import expenseForecastActions from "../../actions/income/expenseForecast.actions";
-import proFormaActions from "../../actions/income/proForma.actions";
-import supportingCapRatesActions from "../../actions/income/supportingCapRates.actions";
-import capRateConclusionActions from "../../actions/income/capRateConclusion.actions";
-import capRateCompsActions from "../../actions/final/capRateComps.actions";
-import findCompsActions from "../../actions/sales/findComps.actions";
-import createSalesCompMap from "../../actions/sales/createCompMap.actions";
-import adjustCompsActions from "../../actions/sales/adjustComps.actions";
-import valueConclusionActions from "../../actions/sales/valueConclusion.actions";
-import finalValuesReconciliationActions from "../../actions/final/finalValuesReconciliation.actions";
-import propertySalesConclusionActions from "../../actions/final/propertySaleConclusion.actions";
-import assumptionsConditionsActions from "../../actions/final/assumptionsConditions.actions";
-import swotAnalysisActions from "../../actions/final/swotAnalysis.actions";
-import highestBestUseActions from "../../actions/final/highestBestUse.actions";
-import unitInspectionActions from "../../actions/final/unitInspection.actions";
-import scopeActions from "../../actions/final/scope.actions";
-import sourceInformationActions from "../../actions/final/sourceInformation.actions";
-import capRateDiscussionActions from "../../actions/final/capRateDiscussion.actions";
-import insurableReplacementCostActions from "../../actions/final/insurableReplacementCost.actions";
+import Homepage from "../../actions/base/homepage.actions";
+import Report from "../../actions/report/report.manager";
+import NavigationSection from "../../actions/base/navigationSection.actions";
+import Property from "../../actions/property/property.manager";
+import Income from "../../actions/income/income.manager";
+import Final from "../../actions/final/final.manager";
+import Sales from "../../actions/sales/sales.manager";
 
 describe("Full bowery way, multifamily as complete report", () => {
     it("Test", () => {
         cy.login();
-        homepageActions.createReportAdvancedSearch(testData.reportCreationData);
-        keyInfoActions.choosePurpose(testData.keyInfoPurposeData.purposeValue)
+        Homepage.createReportAdvancedSearch(testData.reportCreationData);
+        Report.KeyInfo.choosePurpose(testData.keyInfoPurposeData.purposeValue)
             .checkAllInterestAppraisedByValues(testData.keyInfoPurposeData.interestAppraised)
             .enterDateByType(testData.keyInfoEngagementData.dueDate)
             .enterDateByType(testData.keyInfoEngagementData.dateOfValuation)
             .uploadFile(testData.keyInfoEngagementData.engagementFileName);
-        navSectionActions.openClientPageInReport();
-        clientActions.enterClientName(testData.clientData.clientName);
-        navSectionActions.navigateToPropertySummary();
-        summaryActions.verifySiteDetails(testData.siteDetails)
+        NavigationSection.openClientPageInReport();
+        Report.Client.enterClientName(testData.clientData.clientName);
+        NavigationSection.navigateToPropertySummary();
+        Property.Summary.verifySiteDetails(testData.siteDetails)
             .enterYearBuilt(testData.siteDetails.yearBuilt)
             .enterSiteArea(testData.siteDetails.siteArea)
             .fillAsCompleteBuildingDescription(testData.asCompleteDescription)
@@ -72,16 +27,16 @@ describe("Full bowery way, multifamily as complete report", () => {
             .fillCurrentBuildDescription(testData.currentDescription)
             .editAsCompleteExport(testData.asCompleteDescription.asCompleteExportText)
             .clickSaveContinueButton();
-        marketActions.verifyTimeOnMarket(testData.timeOnMarket)
+        Property.Market.verifyTimeOnMarket(testData.timeOnMarket)
             .fillMarketResearch(testData.marketResearch)
             .clickPullFromDropbox()
             .verifyAnyDocumentInputIsNotEmpty()
             .clickSaveContinueButton();
-        historyActions.enterCurrentOwner(testData.owner.name)
+        Property.History.enterCurrentOwner(testData.owner.name)
             .checkIsUnderContractCheckbox()
             .enterContractDetails(testData.contractDetails)
             .clickSaveContinueButton();
-        descriptionActions.selectGeneralPropertyCondition(testData.siteInspection.generalPropertyCondition)
+        Property.Description.selectGeneralPropertyCondition(testData.siteInspection.generalPropertyCondition)
             .selectAsStabilizedPropertyCondition(testData.siteInspection.stabilizedCondition)
             .checkListCheckboxesByLabels(testData.siteInspection.locationsInspectedLabels)
             .checkStairConditionByValue(testData.siteInspection.stairCondition)
@@ -100,20 +55,20 @@ describe("Full bowery way, multifamily as complete report", () => {
             .verifyTotalEconomicLife(testData.remainingEconomicLife.totalEconomicLifeToBe)
             .enterAgeEffective(testData.remainingEconomicLife.ageEffective)
             .clickSaveContinueButton();
-        siteDescriptionActions.editTransportationDiscussionCommentary(testData.transportationSiteDescription.commentary)
+        Property.SiteDescription.editTransportationDiscussionCommentary(testData.transportationSiteDescription.commentary)
             .checkSurroundingResidential()
             .verifySiteArea(testData.siteDescriptors.siteArea)
             .verifyPropertyShape(testData.siteDescriptors.propertyShape);
-        navSectionActions.openMapsInProperty();
-        mapsActions.enterPropertyFrontage(testData.siteDescriptors.propertyFrontage);
-        navSectionActions.openSiteDescriptionInProperty();
-        siteDescriptionActions.verifyPropertyFrontage(testData.siteDescriptors.propertyFrontage)
+        NavigationSection.openMapsInProperty();
+        Property.Maps.enterPropertyFrontage(testData.siteDescriptors.propertyFrontage);
+        NavigationSection.openSiteDescriptionInProperty();
+        Property.SiteDescription.verifyPropertyFrontage(testData.siteDescriptors.propertyFrontage)
             .verifySiteDescriptionItems(testData.siteDescriptors.siteDescriptionItems)
             .editFloodHazardCommentary(testData.siteDescriptors.floodHazardCommentary)
             .verifyUtilitiesItems(testData.utilitiesSiteDescription.utilitiesItems)
             .verifyUtilitiesDescriptions(testData.utilitiesSiteDescription.utilitiesDescription)
             .clickSaveContinueButton();
-        utilitiesActions.checkHeatingSystem()
+        Property.Utilities.checkHeatingSystem()
             .addHeatingSystemParameters(testData.heatingCoolingSystemsUtilities)
             .checkCoolingSystem()
             .addCoolingSystemParameters(testData.heatingCoolingSystemsUtilities)
@@ -128,16 +83,16 @@ describe("Full bowery way, multifamily as complete report", () => {
             .addHotWaterSystemParameters(testData.hotWaterSystemsUtilities)
             .verifyHotWaterSystemCommentary(testData.hotWaterSystemsUtilities.commentary)
             .clickSaveContinueButton();
-        amenitiesActions.addParkingPlaces(testData.amenities.numberOfParkingPlaces)
+        Property.Amenities.addParkingPlaces(testData.amenities.numberOfParkingPlaces)
             .checkHasNoUnitAmenities()
             .clickSaveContinueButton();
-        mapsActions.uploadZoningMap(testData.propertyMaps.zoningMapFile)
+        Property.Maps.uploadZoningMap(testData.propertyMaps.zoningMapFile)
             .uploadFloodMap(testData.propertyMaps.floodMapFile)
             .chooseCornerByValue(testData.propertyMaps.cornerValue)
             .uploadTaxMap(testData.propertyMaps.taxMapFile)
             .captureSubjectMap()
             .clickSaveContinueButton();
-        photosActions.uploadPhotosBySectionName(testData.facadePhotos)
+        Property.Photos.uploadPhotosBySectionName(testData.facadePhotos)
             .uploadPhotosBySectionName(testData.subjectPhotos)
             .uploadPhotosBySectionName(testData.exteriorEntrancePhotos)
             .uploadPhotosBySectionName(testData.stairwayPhotos)
@@ -152,10 +107,10 @@ describe("Full bowery way, multifamily as complete report", () => {
             .clickSaveButton()
             .verifyProgressBarNotExist();
         cy.reload();
-        photosActions.uploadPhotosBySectionName(testData.heatingSystemPhotos)
+        Property.Photos.uploadPhotosBySectionName(testData.heatingSystemPhotos)
             .uploadPhotosBySectionName(testData.hotWaterPhotos)
             .clickSaveContinueButton();
-        zoningActions.enterZoneNames(testData.zoningDescriptionInformation.zonesNames)
+        Property.Zoning.enterZoneNames(testData.zoningDescriptionInformation.zonesNames)
             .verifyPropertyIdentification(testData.zoningDescriptionInformation)
             .verifyPropIdentificationCommentary(testData.zoningDescriptionInformation.propertyIdentificationCommentary)
             .verifyIntroductionCommentary(testData.zoningDescriptionInformation.introductionCommentary)
@@ -176,13 +131,13 @@ describe("Full bowery way, multifamily as complete report", () => {
             .chooseIsConformingWithParkingRequirements(testData.zoningDescriptionParking.isConforming)
             .verifyParkingConformityCommentary(testData.zoningDescriptionParking)
             .clickSaveContinueButton();
-        renovationsActions.chooseRenovationByValue(testData.prospectiveRenovations.dropValue)
+        Property.Renovations.chooseRenovationByValue(testData.prospectiveRenovations.dropValue)
             .clickTotalButton()
             .fillTotalTable(testData.prospectiveRenovations.period, testData.prospectiveRenovations.totalAmount)
             .verifyNetTotalRenovationBudget(testData.prospectiveRenovations.totalAmount)
             .editCommentary(testData.prospectiveRenovations.commentary)
             .clickSaveContinueButton();
-        residentialUnitsActions.fillKitchenDescription(testData.typicalKitchenCondition)
+        Property.ResidentialUnits.fillKitchenDescription(testData.typicalKitchenCondition)
             .verifyKitchenConditionCommentary(testData.typicalKitchenCondition)
             .fillBathroomDescription(testData.typicalBathroomCondition)
             .verifyBathroomCommentary(testData.typicalBathroomCondition)
@@ -193,7 +148,7 @@ describe("Full bowery way, multifamily as complete report", () => {
             .fillStairsDescription(testData.stairsData)
             .editStairsCommentary(testData.stairsData.commentary)
             .clickSaveContinueButton();
-        inPlaceRentRollActions.verifyNumberOfResidentialUnits(testData.currentDescription.numberOfUnits)
+        Income.Residential.InPlaceRentRoll.verifyNumberOfResidentialUnits(testData.currentDescription.numberOfUnits)
             .checkCheckboxByLabelAndVerify(testData.inPLaceRentRoll.forecastLabel, testData.inPLaceRentRoll.forecastColumn)
             .checkListIsInspectedByRowNumbers(testData.inPLaceRentRoll.isInspectedRowsToCheck)
             .enterUnitNumbersByOrderToAll(testData.currentDescription.numberOfUnits)
@@ -206,7 +161,7 @@ describe("Full bowery way, multifamily as complete report", () => {
             .verifyAnnuallyTotalForecastEqualValue()
             .verifyRentRollCommentary(testData.inPLaceRentRoll.commentary)
             .clickSaveContinueButton();
-        unitGroupsActions.verifyRowsNumberEqualBedroomsNonComp(testData.inPLaceRentRoll.bedroomsNumber,
+        Income.Residential.UnitGroups.verifyRowsNumberEqualBedroomsNonComp(testData.inPLaceRentRoll.bedroomsNumber,
             testData.currentDescription.numberOfUnits)
             .verifyGLAPercentage()
             .verifyRoomSize()
@@ -216,16 +171,16 @@ describe("Full bowery way, multifamily as complete report", () => {
             .verifyTotalAvgSqftEqualUnits(testData.unitGroups.averageSF, testData.currentDescription.numberOfUnits)
             .clickSaveContinueButton();
         testData.rentComparables.comparables.forEach((comp, i) => {
-            rentCompsActions.openAddNewComparableFormAdvanced(comp);
-            addCompFormActions.fillNewRentCompWithoutNumbTypeSourceNameUrlNoteAmenities(comp);
-            rentCompsActions.verifyComparableBedroomTableByNumber(i, comp);
+            Income.Residential.RentComps.BaseActions.openAddNewComparableFormAdvanced(comp);
+            Income.Residential.RentComps.AddForm.fillNewRentCompWithoutNumbTypeSourceNameUrlNoteAmenities(comp);
+            Income.Residential.RentComps.BaseActions.verifyComparableBedroomTableByNumber(i, comp);
         });
-        rentCompsActions.clickSaveContinueButton();
-        rentCompsMapActions.uploadCompMap(testData.rentComparables.compMapPath)
+        Income.Residential.RentComps.BaseActions.clickSaveContinueButton();
+        Income.Residential.RentCompsMap.uploadCompMap(testData.rentComparables.compMapPath)
             .clickSaveContinueButton();
         const bedroomsNumber = testData.inPLaceRentRoll.bedroomsNumber;
         const forecastValue = testData.inPLaceRentRoll.forecastValue;
-        rentReconciliationActions.verifyIntroCommentary(testData.resRentReconcil.reconcilIntroComm)
+        Income.Residential.RentReconciliation.verifyIntroCommentary(testData.resRentReconcil.reconcilIntroComm)
             .expandBedroomReconByNumber(bedroomsNumber)
             .verifyBedroomMinForecastByNumber(bedroomsNumber, forecastValue)
             .verifyBedroomAvgForecastByNumber(testData.inPLaceRentRoll, forecastValue)
@@ -237,7 +192,7 @@ describe("Full bowery way, multifamily as complete report", () => {
             .selectBedroomMarketBreakdownBedByNumber(bedroomsNumber, testData.resRentReconcil.marketBreakdown)
             .editBedroomCommentaryByBedNum(bedroomsNumber, testData.resRentReconcil.reconcilCommentary)
             .clickSaveContinueButton();
-        stabilizedRentRollActions.verifyUnitTypeAndRentConclusion(testData.unitGroups.unitType,
+        Income.Residential.StabilizedRentRoll.verifyUnitTypeAndRentConclusion(testData.unitGroups.unitType,
             testData.resRentReconcil.marketConclusion)
             .verifyRowsNumber(testData.currentDescription.numberOfUnits)
             .verifyCheckedIsInspected(testData.inPLaceRentRoll.isInspectedRowsToCheck)
@@ -256,7 +211,7 @@ describe("Full bowery way, multifamily as complete report", () => {
             .verifyRentRollDiscussionCommentary(testData.stabRentRoll.rentRollDiscussionComm)
             .editOccupancyRateCommentary(testData.stabRentRoll.occupancyRateComm)
             .clickSaveContinueButton();
-        stabRentRollSummaryActions.verifyAnnualRentByRow(testData.stabRentRollSummary.marketAnnualRent)
+        Income.Residential.StabRentRollSummary.verifyAnnualRentByRow(testData.stabRentRollSummary.marketAnnualRent)
             .verifyTotalAnnualRent(testData.stabRentRollSummary.marketAnnualRent)
             .verifyIncreaseValueByRow()
             .verifyPGICellByRow(testData.stabRentRollSummary.marketAnnualRent)
@@ -266,7 +221,7 @@ describe("Full bowery way, multifamily as complete report", () => {
             .verifyGrossIncomeDiscussion(testData.stabRentRollSummary.grossIncomeDiscussion)
             .verifyDistributionSummary(testData.stabRentRollSummary.distributionSummary)
             .clickSaveContinueButton();
-        expensesStructureActions.checkHeatExpensesByValue(testData.expenseStructure.tenantValue)
+        Income.Residential.ExpenseStructure.checkHeatExpensesByValue(testData.expenseStructure.tenantValue)
             .checkElectricityByValue(testData.expenseStructure.tenantValue)
             .checkCommonElectricityByValue(testData.expenseStructure.ownerValue)
             .checkGasByValue(testData.expenseStructure.tenantValue)
@@ -276,23 +231,23 @@ describe("Full bowery way, multifamily as complete report", () => {
             .verifyTenantObligationsCommentary(testData.expenseStructure.tenantObligationsCommentary)
             .verifyOwnerObligationsCommentary(testData.expenseStructure.ownerObligationsCommentary)
             .clickSaveContinueButton();
-        laundryActions.verifyNoLaundryButtonExists()
+        Income.Miscellaneous.Laundry.verifyNoLaundryButtonExists()
             .clickSaveContinueButton();
-        storageActions.verifyNoStorageButtonExists()
+        Income.Miscellaneous.Storage.verifyNoStorageButtonExists()
             .clickSaveContinueButton();
-        parkingActions.checkIsFreeParkingCheckbox()
+        Income.Miscellaneous.Parking.checkIsFreeParkingCheckbox()
             .verifyParkingCommentary(testData.parking.commentary)
             .clickSaveContinueButton();
-        otherActions.verifyPageIsOpened()
+        Income.Miscellaneous.Other.verifyPageIsOpened()
             .clickSaveContinueButton();
-        grossIncomeActions.enterResVacancyCollLoss(testData.grossIncome.resVacancyCollLoss)
+        Income.PotentialGrossIncome.enterResVacancyCollLoss(testData.grossIncome.resVacancyCollLoss)
             .verifyResidentialVCLoss(testData.grossIncome.resVacancyCollLoss, testData.stabRentRollSummary.marketAnnualRent)
             .enterCoStarSubmarketRate(testData.grossIncome.coStarRate)
             .enterCoStarMetroRate(testData.grossIncome.coStarRate)
             .editCommentary(testData.grossIncome.commentary)
             .verifyIncomeTable(testData.stabRentRollSummary.marketAnnualRent)
             .clickSaveContinueButton();
-        taxInfoActions.checkBasisByValue(testData.currentTaxInfo.liabilityBasis)
+        Income.TaxInfo.checkBasisByValue(testData.currentTaxInfo.liabilityBasis)
             .fillTaxableAssessedValues(testData.currentTaxInfo)
             .editTaxRatesWithoutAddingNew(testData.currentTaxInfo)
             .verifyTaxLiabilityInfo(testData.currentTaxInfo)
@@ -314,7 +269,7 @@ describe("Full bowery way, multifamily as complete report", () => {
             .verifyAppraiserOpinionTaxableAssessedValueCell(testData.currentTaxInfo.rateValue)
             .verifyTaxSummaryCommentary(testData.summaryTaxInfo.commentary)
             .clickSaveContinueButton();
-        expenseHistoryActions.selectExpensePeriod(testData.expenseHistory.expensePeriod)
+        Income.ExpenseHistory.selectExpensePeriod(testData.expenseHistory.expensePeriod)
             .verifyExpenseYear(testData.expenseHistory.expenseYear)
             .clickAddExpenseYearButton()
             .checkGrossRevenueCheckboxByColumnIndex()
@@ -333,7 +288,7 @@ describe("Full bowery way, multifamily as complete report", () => {
             .verifyExpenseHistoryCommentary(testData.expenseHistory.commentary)
             .clickSaveContinueButton();
         testData.comparableExpenses.comparables.forEach((comp, i) => {
-            compExpensesActions.clickAddBlankColumnButton()
+            Income.ComparableExpenses.clickAddBlankColumnButton()
                 .enterAddressByColumnIndex(comp.address, i)
                 .enterLocationByColumnIndex(comp.location, i)
                 .chooseExpensePeriodByColumnIndex(comp.period, i)
@@ -349,10 +304,10 @@ describe("Full bowery way, multifamily as complete report", () => {
                 .verifyTOEPerSFByColumnIndex(i)
                 .verifyToePerUnitByColumnIndex(i);
         });
-        compExpensesActions.verifyTableAverageValues()
+        Income.ComparableExpenses.verifyTableAverageValues()
             .clickSaveContinueButton();
-        navSectionActions.clickExpenseForecastBookmark();
-        expenseForecastActions.chooseForecastItemBasis(testData.expenseForecast.insuranceItem)
+        NavigationSection.clickExpenseForecastBookmark();
+        Income.ExpenseForecast.chooseForecastItemBasis(testData.expenseForecast.insuranceItem)
             .enterForecastItemForecast(testData.expenseForecast.insuranceItem)
             .verifyForecastItemCompMin(testData.expenseForecast.insuranceItem, testData.comparableExpenses.comparables)
             .verifyForecastItemCompAverage(testData.expenseForecast.insuranceItem, testData.comparableExpenses.comparables)
@@ -391,9 +346,9 @@ describe("Full bowery way, multifamily as complete report", () => {
             .chooseForecastItemBasis(testData.expenseForecast.management)
             .checkPercentOfEGICheckbox()
             .enterPercentOfEgi(testData.expenseForecast.percentOfEgi);
-        const managementForecastEgi = expenseForecastActions
+        const managementForecastEgi = Income.ExpenseForecast
             .getManagementForecastEgiPercent(testData.expenseForecast, testData.currentDescription);
-        expenseForecastActions.verifyManagementForecast(managementForecastEgi)
+        Income.ExpenseForecast.verifyManagementForecast(managementForecastEgi)
             .verifyForecastItemCompMin(testData.expenseForecast.management, testData.comparableExpenses.comparables)
             .verifyForecastItemCompAverage(testData.expenseForecast.management, testData.comparableExpenses.comparables)
             .verifyForecastItemCompMax(testData.expenseForecast.management, testData.comparableExpenses.comparables)
@@ -408,7 +363,7 @@ describe("Full bowery way, multifamily as complete report", () => {
             .verifyOwnersProFormaValue()
             .verifyTotalForecast()
             .clickSaveContinueButton();
-        proFormaActions.verifyPotentialResIncomeRow(testData.proForma.potentialResIncomeRow)
+        Income.ProForma.verifyPotentialResIncomeRow(testData.proForma.potentialResIncomeRow)
             .verifyPotentialGrossIncomeRow(testData.proForma.potentialGrossIncomeRow)
             .verifyResVCLossRow(testData.proForma.vcLossRow)
             .verifyEffectiveGrossRow(testData.proForma.effectiveGrossRow)
@@ -425,7 +380,7 @@ describe("Full bowery way, multifamily as complete report", () => {
             .verifyNetOpIncomeRow(testData.proForma.netOpIncomeRow)
             .verifyOperatingExpenseRatio(testData.proForma.opExpenseRatio)
             .clickSaveContinueButton();
-        supportingCapRatesActions.uncheckIncludePersonalSurvey()
+        Income.SupportingCapRates.uncheckIncludePersonalSurvey()
             .verifyIncomeCapitalizationCommentary(testData.supportingCapRates.incomeCapComm)
             .clickSelectedLoanSectionButton()
             .verifySelectedLoanTermsSection(testData.supportingCapRates.selectedLoanTermsSection)
@@ -434,11 +389,11 @@ describe("Full bowery way, multifamily as complete report", () => {
             .enterEquityDividendRate(testData.supportingCapRates.bandInvestmentSection.equityDividendRate)
             .verifyBandInvestmentSection(testData.supportingCapRates.bandInvestmentSection)
             .clickSaveContinueButton();
-        capRateConclusionActions.verifyBandOfInvestments(testData.capRateConclusion.bandOfInvestmentsValue)
+        Income.CapRateConclusion.verifyBandOfInvestments(testData.capRateConclusion.bandOfInvestmentsValue)
             .navigateToCapRateComps();
-        capRateCompsActions.verifyPageIsOpened();
+        Final.CapRateComps.verifyPageIsOpened();
         testData.capRateComps.comparables.forEach((comp, i) => {
-            capRateCompsActions.addComparable(comp)
+            Final.CapRateComps.addComparable(comp)
                 .fillAddedCompWithInfo(comp, i);
         });
         const capRatesArray = testData.capRateComps.comparables.map(comp => Number(comp.capRate));
@@ -446,12 +401,12 @@ describe("Full bowery way, multifamily as complete report", () => {
         const maxCapRate = Math.max(...capRatesArray);
         const capRateSum = capRatesArray.reduce((sum, current) => sum + current, 0);
         const avgCapRate = (capRateSum / capRatesArray.length).toFixed(2);
-        capRateCompsActions.verifyCapRateCommentary(minCapRate, maxCapRate, avgCapRate)
+        Final.CapRateComps.verifyCapRateCommentary(minCapRate, maxCapRate, avgCapRate)
             .chooseCompIncomePotential(testData.capRateComps.compIncomePotential)
             .chooseCompPropertyConditions(testData.capRateComps.compPropertyConditions)
             .chooseCompPropertyLocations(testData.capRateComps.compPropertyLocations);
-        navSectionActions.navigateToCapRateConclusion();
-        capRateConclusionActions.verifyCompCapRatesCell(minCapRate, maxCapRate)
+        NavigationSection.navigateToCapRateConclusion();
+        Income.CapRateConclusion.verifyCompCapRatesCell(minCapRate, maxCapRate)
             .enterConclusionSectionConcludedCapRate(testData.capRateConclusion.concludedCapRate)
             .enterAsCompleteMonthsOfRentLoss(testData.capRateConclusion.asCompleteMonthsOfRentLoss)
             .enterASStabilizedMonthsOfRentLoss(testData.capRateConclusion.asStabilizedMonthsOfRentLoss)
@@ -464,24 +419,24 @@ describe("Full bowery way, multifamily as complete report", () => {
             .verifyAsIsMarketTablePart(testData.capRateConclusion.asIsMarketPart)
             .clickSaveContinueButton();
         testData.findComps.comparables.forEach((comp, i) => {
-            findCompsActions.addComparable(comp.address)
+            Sales.FindComps.addComparable(comp.address)
                 .verifyAddedCompAddressByIndex(comp.address, i + 1);
         });
-        findCompsActions.clickSaveContinueButton();
-        createSalesCompMap.captureScreen()
+        Sales.FindComps.clickSaveContinueButton();
+        Sales.CreateCompMap.captureScreen()
             .clickSaveContinueButton();
-        adjustCompsActions.checkCalculationUnitsRadio(testData.adjustComps.calculationUnitsRadioValue)
+        Sales.AdjustComps.checkCalculationUnitsRadio(testData.adjustComps.calculationUnitsRadioValue)
             .checkIncomeAdjustmentLevel(testData.adjustComps.incomeAdjustmentType);
         testData.adjustComps.comparables.forEach((comp, i) => {
-            adjustCompsActions.enterSizeAdjustmentByColumn(comp.size, i)
+            Sales.AdjustComps.enterSizeAdjustmentByColumn(comp.size, i)
                 .enterConditionAdjustmentByColumn(comp.condition, i)
                 .enterOtherAdjustmentByColumn(comp.other, i)
                 .verifyTrendedPriceByColumn(comp.trendedPrice, i)
                 .verifyAdjustedPriceByColumn(comp.adjustedPrice, i);
         });
-        adjustCompsActions.editOtherAdjustmentRowName(testData.adjustComps.otherAdjustmentNewName)
+        Sales.AdjustComps.editOtherAdjustmentRowName(testData.adjustComps.otherAdjustmentNewName)
             .clickSaveContinueButton();
-        valueConclusionActions.verifyUnadjustedPrices(testData.valueConclusion.unadjustedPrices)
+        Sales.ValueConclusion.verifyUnadjustedPrices(testData.valueConclusion.unadjustedPrices)
             .verifyAdjustedPrices(testData.valueConclusion.adjustedPrices)
             .verifyIncomeApproachConclusion(testData.valueConclusion.incomeApproachConclusion)
             .enterSaleValueConclusion(testData.valueConclusion.saleValueConclusion)
@@ -489,7 +444,7 @@ describe("Full bowery way, multifamily as complete report", () => {
             .verifyAsCompleteRow(testData.valueConclusion.asCompleteRow)
             .verifyAsIsMarketRow(testData.valueConclusion.asIsMarketRow)
             .clickSaveContinueButton();
-        finalValuesReconciliationActions.closeSatisfactionSurvey()
+        Final.FinalValuesReconciliation.closeSatisfactionSurvey()
             .checkPerUnitCheckbox()
             .verifyIncomeStabDate(testData.finalValuesReconciliation.stabilizedCompleteDate)
             .verifyIncomeCompleteDate(testData.finalValuesReconciliation.stabilizedCompleteDate)
@@ -502,15 +457,15 @@ describe("Full bowery way, multifamily as complete report", () => {
             .verifyFinalValueAsCompleteDate(testData.finalValuesReconciliation.stabilizedCompleteDate)
             .verifyFinalValueAsIsDate(testData.finalValuesReconciliation.marketDate)
             .clickSaveContinueButton();
-        propertySalesConclusionActions.verifyContractPrice(testData.propertySalesConclusion.contractPrice)
+        Final.PropertySalesConclusion.verifyContractPrice(testData.propertySalesConclusion.contractPrice)
             .verifyContractDate(testData.propertySalesConclusion.contractDate)
             .verifyContractChangeInValue(testData.propertySalesConclusion.asIsMarketFinalValue)
             .clickSaveContinueButton();
-        assumptionsConditionsActions.addExtraordinaryAssumption(testData.assumptions.extraordinaryAssumption)
+        Final.AssumptionsConditions.addExtraordinaryAssumption(testData.assumptions.extraordinaryAssumption)
             .clickSaveContinueButton();
-        swotAnalysisActions.uncheckIncludeInReportCheckbox()
+        Final.SWOTAnalysis.uncheckIncludeInReportCheckbox()
             .clickSaveContinueButton();
-        highestBestUseActions.verifyZoneNameByRow(testData.zoningDescriptionInformation.zonesNames[0])
+        Final.HighestBestUse.verifyZoneNameByRow(testData.zoningDescriptionInformation.zonesNames[0])
             .verifyAllowableUsesByRow(testData.zoningDescriptionUses.permittedPropertyUse)
             .verifySiteAreaByRow(testData.siteDetails.siteArea)
             .verifyZoningAreaByRow(testData.currentDescription.grossArea)
@@ -537,13 +492,13 @@ describe("Full bowery way, multifamily as complete report", () => {
             .checkLocalCheckbox()
             .checkRegionalCheckbox()
             .clickSaveContinueButton();
-        unitInspectionActions.verifyNumberOfInspectedUnitsRows(testData.inPLaceRentRoll.isInspectedRowsToCheck.length)
+        Final.UnitInspection.verifyNumberOfInspectedUnitsRows(testData.inPLaceRentRoll.isInspectedRowsToCheck.length)
             .chooseListReadyForOccupancyValues(testData.unitInspection.readyForOccupancyValues)
             .verifyNumberOfInspectedUnitsCommentary(testData.inPLaceRentRoll.isInspectedRowsToCheck.length)
             .clickSaveContinueButton();
-        scopeActions.verifyNumberOfItems()
+        Final.Scope.verifyNumberOfItems()
             .clickSaveContinueButton();
-        sourceInformationActions.verifySiteSizeSources()
+        Final.SourceInformation.verifySiteSizeSources()
             .verifyExcessSurplusLandSources()
             .verifyGrossSizeUnitsSources()
             .verifyResidentialSFSources()
@@ -557,8 +512,8 @@ describe("Full bowery way, multifamily as complete report", () => {
             .verifyComparableRentalDataSources()
             .verifyComparableSalesDataSources()
             .clickSaveContinueButton();
-        capRateCompsActions.clickSaveContinueButton();
-        capRateDiscussionActions.verifyCapRateTable(testData.capRateDiscussion.capRateTable)
+        Final.CapRateComps.clickSaveContinueButton();
+        Final.CapRateDiscussion.verifyCapRateTable(testData.capRateDiscussion.capRateTable)
             .verifyPwCRow(testData.capRateDiscussion.pwcRow)
             .verifySitusRow(testData.capRateDiscussion.situsRow)
             .clickCapRateCompsTab()
@@ -567,8 +522,8 @@ describe("Full bowery way, multifamily as complete report", () => {
             .verifyIncomeSpikesTable(testData.capRateDiscussion.incomeSpikesTable)
             .checkIncomeSpikesRadios(testData.capRateDiscussion.incomeSpikesRadios)
             .clickSaveContinueButton();
-        navSectionActions.clickInsurableReplacementCostBookmark();
-        insurableReplacementCostActions.verifySubjectState(testData.insurableReplacementCost.subjectState)
+        NavigationSection.clickInsurableReplacementCostBookmark();
+        Final.InsurableReplacementCost.verifySubjectState(testData.insurableReplacementCost.subjectState)
             .verifySubjectLocale(testData.insurableReplacementCost.subjectLocale)
             .verifyLocalMultiplier()
             .clickSaveContinueButton();
