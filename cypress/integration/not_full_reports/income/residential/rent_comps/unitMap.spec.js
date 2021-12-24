@@ -1,4 +1,4 @@
-const testData = require("../../../../../fixtures/unitMapRentComps.fixtures.json");
+import testData from "../../../../../fixtures/unitMapRentComps.fixtures";
 import homepageActions from "../../../../../actions/base/homepage.actions";
 import navSectionActions from "../../../../../actions/base/navigationSection.actions";
 import rentCompsActions from "../../../../../actions/income/residential/rent_comps/rentComps.actions";
@@ -6,7 +6,7 @@ import rentCompsActions from "../../../../../actions/income/residential/rent_com
 describe("Unit map tests", () => {
    before("Login and open Rent Comps", () => {
        cy.login();
-       homepageActions.createReport();
+       homepageActions.createReport(testData.reportCreationData);
        navSectionActions.navigateToRentComps();
        cy.saveLocalStorage();
    });
@@ -16,70 +16,70 @@ describe("Unit map tests", () => {
    });
 
     it("ID50: Unit Types dropdown", () => {
-        rentCompsActions.clickUnitTypesArrowButton();
-        rentCompsActions.checkUncheckListOfCheckboxesByQa(testData.unitTypesQaAttr);
-        rentCompsActions.checkUncheckListOfCheckboxesByQa(testData.unitTypesQaAttr, false);
-        rentCompsActions.clickUnitTypesArrowButton();
+        rentCompsActions.clickUnitTypesArrowButton()
+            .checkListOfCheckboxesByQa(testData.data.unitTypesQaAttrs)
+            .uncheckListOfCheckboxesByQa(testData.data.unitTypesQaAttrs)
+            .clickUnitTypesArrowButton();
     });
 
     it("ID51: Min Rent text field", () => {
         const filedName = "minRent";
-        rentCompsActions.enterValueToInput(filedName, testData.minRentValue);
-        rentCompsActions.clearInput(filedName);
+        rentCompsActions.enterValueToInput(filedName, testData.data.minRentValue)
+            .clearInput(filedName);
     });
 
     it("ID52: Max Rent text field", () => {
         const fieldName = "maxRent";
-        rentCompsActions.enterValueToInput(fieldName, testData.maxRentValue);
-        rentCompsActions.clearInput(fieldName);
+        rentCompsActions.enterValueToInput(fieldName, testData.data.maxRentValue)
+            .clearInput(fieldName);
     });
 
     it("ID53: Min SF text field", () => {
         const fieldName = "minSF";
-        rentCompsActions.enterValueToInput(fieldName, testData.minSquareFeet);
-        rentCompsActions.clearInput(fieldName);
+        rentCompsActions.enterValueToInput(fieldName, testData.data.minSquareFeet)
+            .clearInput(fieldName);
     });
 
     it("ID54: Max SF text field", () => {
         const fieldName = "maxSF";
-        rentCompsActions.enterValueToInput(fieldName, testData.maxSquareFeet);
-        rentCompsActions.clearInput(fieldName);
+        rentCompsActions.enterValueToInput(fieldName, testData.data.maxSquareFeet)
+            .clearInput(fieldName);
     });
 
     it("ID55: Bedrooms dropdown", () => {
-       rentCompsActions.clickNumberOfBedroomsArrow();
-       rentCompsActions.checkUncheckListOfCheckboxesByQa(testData.numberOfBedroomsQaAttr);
-       rentCompsActions.checkUncheckListOfCheckboxesByQa(testData.numberOfBedroomsQaAttr, false);
-       rentCompsActions.clickNumberOfBedroomsArrow();
+       rentCompsActions.clickNumberOfBedroomsArrow()
+           .checkListOfCheckboxesByQa(testData.data.numberOfBedroomsQaAttr)
+           .uncheckListOfCheckboxesByQa(testData.data.numberOfBedroomsQaAttr)
+           .clickNumberOfBedroomsArrow();
     });
 
     it("ID56: Source of Information dropdown", () => {
-        rentCompsActions.clickSourceOfInfoButton();
-        rentCompsActions.checkUncheckListOfCheckboxesByQa(testData.sourceOfInfoQaAttr);
-        rentCompsActions.checkUncheckListOfCheckboxesByQa(testData.sourceOfInfoQaAttr, false);
-        rentCompsActions.clickSourceOfInfoButton();
+        rentCompsActions.clickSourceOfInfoButton()
+            .checkListOfCheckboxesByQa(testData.data.sourceOfInfoQaAttr)
+            .uncheckListOfCheckboxesByQa(testData.data.sourceOfInfoQaAttr)
+            .clickSourceOfInfoButton();
     });
 
     it("ID57: Date of Value Range", () => {
-        rentCompsActions.enterDatesToInputs(testData.dateInputTypes);
-        rentCompsActions.clearDateInputs(testData.dateInputTypes);
-        rentCompsActions.selectDaysFromPickerByTypes(testData.dateInputTypes);
-        rentCompsActions.verifyEnteredDatesByTypes(testData.dateInputTypes);
-        rentCompsActions.clearDateInputs(testData.dateInputTypes);
+        rentCompsActions.enterDatesToInputs(testData.data.dateInputTypes)
+            .clearDateInputs(testData.data.dateInputTypes)
+            .selectDaysFromPickerByTypes(testData.data.dateInputTypes)
+            .verifyEnteredDatesByTypes(testData.data.dateInputTypes)
+            .clearDateInputs(testData.data.dateInputTypes);
     });
 
     it("ID58: Amenities dropdown", () => {
-        rentCompsActions.clickAmenitiesArrow();
-        rentCompsActions.checkUncheckListOfCheckboxesByQa(testData.amenitiesQaAttr);
-        rentCompsActions.checkUncheckListOfCheckboxesByQa(testData.amenitiesQaAttr, false);
-        rentCompsActions.clickAmenitiesArrow();
+        rentCompsActions.clickAmenitiesArrow()
+            .checkListOfCheckboxesByQa(testData.data.amenitiesQaAttr)
+            .uncheckListOfCheckboxesByQa(testData.data.amenitiesQaAttr)
+            .clickAmenitiesArrow();
     });
 
     it("ID59: Reset Filters button", () => {
         const fieldName = "minSF";
-        rentCompsActions.enterValueToInput(fieldName, testData.minSquareFeet);
-        rentCompsActions.clickResetFiltersButton();
-        rentCompsActions.verifyEnteredValueToInput(fieldName);
+        rentCompsActions.enterValueToInput(fieldName, testData.data.minSquareFeet)
+            .clickResetFiltersButton()
+            .verifyEnteredValueToInput(fieldName);
     });
 
     it("ID60: # Results Found text", () => {
@@ -87,32 +87,32 @@ describe("Unit map tests", () => {
     });
 
     it("ID61: 'Sort by' dropdown", () => {
-        rentCompsActions.selectSortByOptionsByValues(testData.sortByOptions);
+        rentCompsActions.selectSortByOptionsByValues(testData.data.sortByOptions);
     });
 
     it.skip("ID62: Search Results", () => {
-        rentCompsActions.verifyPhotosExistAndNavigateByPhotos(testData.comparableIndex);
-        rentCompsActions.verifyCompAddressesExist();
-        rentCompsActions.verifyRentsTexts();
-        rentCompsActions.verifyCompAmenitiesTextsExist();
-        rentCompsActions.verifyComparablePropertyTextsExist();
+        rentCompsActions.verifyPhotosExistAndNavigateByPhotos(testData.data.comparableIndex)
+            .verifyCompAddressesExist()
+            .verifyRentsTexts()
+            .verifyCompAmenitiesTextsExist()
+            .verifyComparablePropertyTextsExist();
     });
 
     it.skip("ID63: SELECT button - turns to SELECTED", () => {
-        rentCompsActions.verifyLoadingDoesntExist();
-        rentCompsActions.clickAllSelectComparableButtons();
-        rentCompsActions.verifyComparableGroups(testData.numberOfUnits);
+        rentCompsActions.verifyLoadingDoesntExist()
+            .clickAllSelectComparableButtons()
+            .verifyComparableGroups(testData.data.numberOfUnits);
     });
 
     it("ID64: Unit Map: Zoom in / Zoom out buttons ('+' / '-')", () => {
-       rentCompsActions.verifyLoadingDoesntExist();
-       rentCompsActions.clickZoomOutButton();
-       rentCompsActions.clickZoomInButton();
+       rentCompsActions.verifyLoadingDoesntExist()
+           .clickZoomOutButton()
+           .clickZoomInButton();
     });
 
    after("Delete report", () => {
       cy.restoreLocalStorage();
       rentCompsActions.returnToHomePage();
-      homepageActions.deleteReport();
+      homepageActions.deleteReport(testData.reportCreationData.reportNumber);
    });
 });
