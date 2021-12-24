@@ -1,6 +1,5 @@
-import {uppercaseFirstLetter} from "../../../../../../utils/string.utils";
-
-const testData = require("../../../../../fixtures/gridCommInPlaceRentRoll.fixtures.json");
+import testData from "../../../../../fixtures/gridCommInPlaceRentRoll.fixtures";
+import {commonData} from "../../../../../fixtures/gridCommInPlaceRentRoll.fixtures";
 import homepageActions from "../../../../../actions/base/homepage.actions";
 import navSectionActions from "../../../../../actions/base/navigationSection.actions";
 import rentRollActions from "../../../../../actions/income/commercial/rentRoll.actions";
@@ -13,8 +12,7 @@ import propertySummaryActions from "../../../../../actions/property/summary.acti
 describe("Commercial In-Place Rent Roll grid tests", () => {
     before("Login and navigate to commercial In-Place Rent Roll", () => {
         cy.login();
-        homepageActions.createReport(testData.incomeType, testData.address, testData.reportNumber,
-            testData.templateType, testData.conclusionType);
+        homepageActions.createReport(testData.reportCreationData);
         navSectionActions.navigateToCommercialInPlaceRentRoll();
         cy.saveLocalStorage();
     });
@@ -25,15 +23,15 @@ describe("Commercial In-Place Rent Roll grid tests", () => {
 
     it("ID238: Inspected col. (checkbox)", () => {
         navSectionActions.verifyProgressBarNotExist();
-        rentRollActions.chooseLeaseStatusByRowNumber(testData.leaseStatuses[0]);
-        rentRollActions.checkIsInspectedCheckboxByRowNumber();
-        navSectionActions.clickCommercialStabRentRollButton();
-        navSectionActions.clickYesButton();
-        navSectionActions.verifyProgressBarNotExist();
+        rentRollActions.chooseLeaseStatusByRowNumber(commonData().existLeaseStatuses[0])
+            .checkIsInspectedCheckboxByRowNumber();
+        navSectionActions.clickCommercialStabRentRollButton()
+            .clickYesButton()
+            .verifyProgressBarNotExist();
         stabRentRollActions.verifyIsInspectedChecked();
         navSectionActions.navigateToUnitInspection();
-        unitInspectionActions.verifyNumberOfInspectedUnitsCommentary();
-        unitInspectionActions.clickSaveButton();
+        unitInspectionActions.verifyNumberOfInspectedUnitsCommentary()
+            .clickSaveButton();
         navSectionActions.navigateToCommercialInPlaceRentRoll(false);
         rentRollActions.uncheckIsInspectedCheckboxByRowNumber();
     });
@@ -43,27 +41,27 @@ describe("Commercial In-Place Rent Roll grid tests", () => {
     });
 
     it("ID240: Lease Status col", () => {
-        rentRollActions.chooseLeaseStatusesByRowNumber(testData.leaseStatuses);
+        rentRollActions.chooseLeaseStatusesByRowNumber(commonData().existLeaseStatuses);
     });
 
     it("ID241: Tenant Name col", () => {
-        rentRollActions.chooseLeaseStatusByRowNumber(testData.leaseStatuses[0]);
-        rentRollActions.enterTenantNameByRowNumber(testData.tenantName);
-        rentRollActions.verifyTenantNameByRowNumber(testData.leaseStatuses[0], testData.tenantName);
-        rentRollActions.chooseLeaseStatusByRowNumber(testData.leaseStatuses[1]);
-        rentRollActions.verifyTenantNameByRowNumber(testData.leaseStatuses[1]);
+        rentRollActions.chooseLeaseStatusByRowNumber(commonData().existLeaseStatuses[0])
+            .enterTenantNameByRowNumber(testData.id241.tenantName)
+            .verifyTenantNameByRowNumber(commonData().existLeaseStatuses[0], testData.id241.tenantName)
+            .chooseLeaseStatusByRowNumber(commonData().existLeaseStatuses[1])
+            .verifyTenantNameByRowNumber(commonData().existLeaseStatuses[1]);
     });
 
     it("ID242: Use col", () => {
-        rentRollActions.chooseLeaseStatusByRowNumber(testData.leaseStatuses[0]);
-        const defaultUseValue = uppercaseFirstLetter(testData.useRadios[testData.useRadios.length - 1]);
+        rentRollActions.chooseLeaseStatusByRowNumber(commonData().existLeaseStatuses[0]);
+        const defaultUseValue = testData.id242.useTexts[testData.id242.useTexts.length - 1];
         rentRollActions.verifyUseCellTextByRowNumber(defaultUseValue);
-        testData.useRadios.forEach((useValue, i) => {
+        testData.id242.useRadios.forEach((useValue, i) => {
             navSectionActions.navigateToCommercialUnits();
-            commercialUnitsActions.clickCommercialUnitTabByIndex();
-            commercialUnitsActions.clickRadioButtonByValueAndUnitIndex(useValue);
+            commercialUnitsActions.clickCommercialUnitTabByIndex()
+                .clickRadioButtonByValueAndUnitIndex(useValue);
             navSectionActions.navigateToCommercialInPlaceRentRoll();
-            rentRollActions.verifyUseCellTextByRowNumber(testData.useTexts[i]);
+            rentRollActions.verifyUseCellTextByRowNumber(testData.id242.useTexts[i]);
         });
     });
 
@@ -78,107 +76,107 @@ describe("Commercial In-Place Rent Roll grid tests", () => {
     });
 
     function checkDateColumnByCellName(cellName) {
-        rentRollActions.chooseLeaseStatusByRowNumber(testData.leaseStatuses[0]);
-        rentRollActions.enterLeaseStartDateByRowNumber(cellName, getTodayDateString("/"));
-        rentRollActions.verifyLeaseStartDateByRowNumber(cellName, testData.leaseStatuses[0], getTodayDateString("/"));
-        rentRollActions.chooseLeaseStatusByRowNumber(testData.leaseStatuses[1]);
-        rentRollActions.verifyLeaseStartDateByRowNumber(cellName, testData.leaseStatuses[1]);
-        rentRollActions.chooseLeaseStatusByRowNumber(testData.leaseStatuses[0]);
-        rentRollActions.enterLeaseStartDateByRowNumber(cellName, testData.wrongFormatLeaseDate);
-        rentRollActions.verifyLeaseStartDateByRowNumber(cellName, testData.leaseStatuses[0], testData.wrongFormatLeaseDate);
+        rentRollActions.chooseLeaseStatusByRowNumber(commonData().existLeaseStatuses[0])
+            .enterLeaseStartDateByRowNumber(cellName, getTodayDateString("/"))
+            .verifyLeaseStartDateByRowNumber(cellName, commonData().existLeaseStatuses[0], getTodayDateString("/"))
+            .chooseLeaseStatusByRowNumber(commonData().existLeaseStatuses[1])
+            .verifyLeaseStartDateByRowNumber(cellName, commonData().existLeaseStatuses[1])
+            .chooseLeaseStatusByRowNumber(commonData().existLeaseStatuses[0])
+            .enterLeaseStartDateByRowNumber(cellName, testData.leaseDates.wrongFormatLeaseDate)
+            .verifyLeaseStartDateByRowNumber(cellName, commonData().existLeaseStatuses[0], testData.leaseDates.wrongFormatLeaseDate);
     }
 
     it("ID245: SF col", () => {
-        rentRollActions.chooseLeaseStatusByRowNumber(testData.leaseStatuses[0]);
+        rentRollActions.chooseLeaseStatusByRowNumber(commonData().existLeaseStatuses[0]);
         navSectionActions.navigateToCommercialUnits();
-        commercialUnitsActions.enterUnitSFByUnitIndex(testData.squareFeet);
+        commercialUnitsActions.enterUnitSFByUnitIndex(commonData().squareFeet);
         navSectionActions.navigateToCommercialInPlaceRentRoll();
-        rentRollActions.verifySquareFeetByRowNumber(testData.squareFeet);
+        rentRollActions.verifySquareFeetByRowNumber(commonData().squareFeet);
     });
 
     it("ID246: Annual Rent col", () => {
-        prepareRentRollTableForBasisTest(testData.squareFeet);
-        rentRollActions.verifyAnnualRentCellSquareFootByRowNumber(testData.rentPerSF, testData.squareFeet);
-        rentRollActions.clearRentPerSFByRowNumber();
-        rentRollActions.clickMonthlyBasisButton();
-        rentRollActions.enterMonthlyRentByRowNumber(testData.monthlyRent);
-        rentRollActions.verifyAnnualRentMonthlyByRowNumber(testData.monthlyRent);
-        rentRollActions.clearMonthlyRentByRowNumber();
-        rentRollActions.clickAnnuallyBasisButton();
-        rentRollActions.enterAnnualRentByRowNumber(testData.annualRent);
-        rentRollActions.clearAnnualRentByRowNumber();
-        rentRollActions.clickPerSquareFootButton(false);
+        prepareRentRollTableForBasisTest(commonData().squareFeet);
+        rentRollActions.verifyAnnualRentCellSquareFootByRowNumber(commonData().rentPerSF, commonData().squareFeet)
+            .clearRentPerSFByRowNumber()
+            .clickMonthlyBasisButton()
+            .enterMonthlyRentByRowNumber(commonData().monthlyRent)
+            .verifyAnnualRentMonthlyByRowNumber(commonData().monthlyRent)
+            .clearMonthlyRentByRowNumber()
+            .clickAnnuallyBasisButton()
+            .enterAnnualRentByRowNumber(commonData().annualRent)
+            .clearAnnualRentByRowNumber()
+            .clickPerSquareFootButton(false);
     });
 
     it("ID247: Monthly Rent col", () => {
-        prepareRentRollTableForBasisTest(testData.monthlyTestSquareFoot);
-        rentRollActions.verifyMonthlyRentPerSFByRowNumber(testData.rentPerSF, testData.monthlyTestSquareFoot);
-        rentRollActions.clearRentPerSFByRowNumber();
-        rentRollActions.clickMonthlyBasisButton();
-        rentRollActions.enterMonthlyRentByRowNumber(testData.monthlyRent);
-        rentRollActions.clearMonthlyRentByRowNumber();
-        rentRollActions.clickAnnuallyBasisButton();
-        rentRollActions.enterAnnualRentByRowNumber(testData.annualRent);
-        rentRollActions.verifyMonthlyRentAnnuallyByRowNumber(testData.annualRent);
-        rentRollActions.clearAnnualRentByRowNumber();
-        rentRollActions.clickPerSquareFootButton(false);
+        prepareRentRollTableForBasisTest(testData.id247.squareFeet);
+        rentRollActions.verifyMonthlyRentPerSFByRowNumber(commonData().rentPerSF, testData.id247.squareFeet)
+            .clearRentPerSFByRowNumber()
+            .clickMonthlyBasisButton()
+            .enterMonthlyRentByRowNumber(commonData().monthlyRent)
+            .clearMonthlyRentByRowNumber()
+            .clickAnnuallyBasisButton()
+            .enterAnnualRentByRowNumber(commonData().annualRent)
+            .verifyMonthlyRentAnnuallyByRowNumber(commonData().annualRent)
+            .clearAnnualRentByRowNumber()
+            .clickPerSquareFootButton(false);
     });
 
     it("ID248: Rent PerSF col", () => {
-        prepareRentRollTableForBasisTest(testData.perSfTestSquareFoot);
-        rentRollActions.clearRentPerSFByRowNumber();
-        rentRollActions.clickMonthlyBasisButton();
-        rentRollActions.enterMonthlyRentByRowNumber(testData.monthlyRent);
-        rentRollActions.verifyRentPerSFMonthlyByRowNumber(testData.monthlyRent, testData.perSfTestSquareFoot);
-        rentRollActions.clearMonthlyRentByRowNumber();
-        rentRollActions.clickAnnuallyBasisButton();
-        rentRollActions.enterAnnualRentByRowNumber(testData.annualRent);
-        rentRollActions.verifyRentPerSFAnnuallyByRowNumber(testData.annualRent, testData.perSfTestSquareFoot);
-        rentRollActions.clearAnnualRentByRowNumber();
-        rentRollActions.clickPerSquareFootButton(false);
+        prepareRentRollTableForBasisTest(testData.id248.squareFeet);
+        rentRollActions.clearRentPerSFByRowNumber()
+            .clickMonthlyBasisButton()
+            .enterMonthlyRentByRowNumber(commonData().monthlyRent)
+            .verifyRentPerSFMonthlyByRowNumber(commonData().monthlyRent, testData.id248.squareFeet)
+            .clearMonthlyRentByRowNumber()
+            .clickAnnuallyBasisButton()
+            .enterAnnualRentByRowNumber(commonData().annualRent)
+            .verifyRentPerSFAnnuallyByRowNumber(commonData().annualRent, testData.id248.squareFeet)
+            .clearAnnualRentByRowNumber()
+            .clickPerSquareFootButton(false);
     });
 
-    function prepareRentRollTableForBasisTest(squareFoot) {
-        rentRollActions.chooseLeaseStatusByRowNumber(testData.leaseStatuses[0]);
+    function prepareRentRollTableForBasisTest(squareFeet) {
+        rentRollActions.chooseLeaseStatusByRowNumber(testData.commonData.existLeaseStatuses[0]);
         navSectionActions.navigateToCommercialUnits();
-        commercialUnitsActions.enterUnitSFByUnitIndex(squareFoot);
-        commercialUnitsActions.clickSaveButton();
-        commercialUnitsActions.verifyProgressBarNotExist();
-        commercialUnitsActions.clickSaveButton();
-        commercialUnitsActions.verifyProgressBarNotExist();
+        commercialUnitsActions.enterUnitSFByUnitIndex(squareFeet)
+            .clickSaveButton()
+            .verifyProgressBarNotExist()
+            .clickSaveButton()
+            .verifyProgressBarNotExist();
         navSectionActions.navigateToCommercialInPlaceRentRoll(false);
-        rentRollActions.enterRentPerSFByRowNumber(testData.rentPerSF);
+        rentRollActions.enterRentPerSFByRowNumber(testData.commonData.rentPerSF);
     }
 
     it("ID249: SF Total", () => {
         prepareRentRollTableForTotalCells();
-        rentRollActions.verifySFTotal(testData.squareFootList);
+        rentRollActions.verifySFTotal(commonData().squareFeetList);
         changeToDefaultTable(false);
     });
 
     it("ID250: Annually Rent Total", () => {
         prepareRentRollTableForTotalCells();
-        rentRollActions.clickAnnuallyBasisButton();
-        rentRollActions.enterListAnnuallyRent(testData.leaseStatusesThree, testData.annualRents);
-        rentRollActions.verifyAnnuallyRentTotal(testData.leaseStatusesThree, testData.annualRents);
-        rentRollActions.clearRentCellsByName(testData.leaseStatusesThree, "annually");
+        rentRollActions.clickAnnuallyBasisButton()
+            .enterListAnnuallyRent(commonData().leaseStatusesList, testData.id250.annualRents)
+            .verifyAnnuallyRentTotal(commonData().leaseStatusesList, testData.id250.annualRents)
+            .clearRentCellsByName(commonData().leaseStatusesList, "annually");
         changeToDefaultTable();
     });
 
     it("ID251: Monthly Rent Total", () => {
         prepareRentRollTableForTotalCells();
-        rentRollActions.clickMonthlyBasisButton();
-        rentRollActions.enterListMonthlyRent(testData.leaseStatusesThree, testData.monthlyRents);
-        rentRollActions.verifyMonthlyRentTotal(testData.leaseStatusesThree, testData.monthlyRents);
-        rentRollActions.clearRentCellsByName(testData.leaseStatusesThree, "monthly");
+        rentRollActions.clickMonthlyBasisButton()
+            .enterListMonthlyRent(commonData().leaseStatusesList, testData.id251.monthlyRents)
+            .verifyMonthlyRentTotal(commonData().leaseStatusesList, testData.id251.monthlyRents)
+            .clearRentCellsByName(commonData().leaseStatusesList, "monthly");
         changeToDefaultTable();
     });
 
     it("ID252: PerSF Rent Total", () => {
         prepareRentRollTableForTotalCells();
-        rentRollActions.enterListPerSF(testData.leaseStatusesThree, testData.perSFList);
-        rentRollActions.verifyPerSFTotal(testData.leaseStatusesThree, testData.perSFList, testData.squareFootList);
-        rentRollActions.clearRentCellsByName(testData.leaseStatusesThree, "perSF");
+        rentRollActions.enterListPerSF(commonData().leaseStatusesList, testData.id252.perSFList)
+            .verifyPerSFTotal(commonData().leaseStatusesList, testData.id252.perSFList, commonData().squareFeetList)
+            .clearRentCellsByName(commonData().leaseStatusesList, "perSF");
         changeToDefaultTable(false);
     });
 
@@ -192,19 +190,19 @@ describe("Commercial In-Place Rent Roll grid tests", () => {
     }
 
     function prepareRentRollTableForTotalCells() {
-        rentRollActions.chooseLeaseStatusByRowNumber(testData.leaseStatuses[0]);
+        rentRollActions.chooseLeaseStatusByRowNumber(commonData().existLeaseStatuses[0]);
         navSectionActions.navigateToPropertySummary();
-        propertySummaryActions.enterNumberOfCommercialUnits(testData.numberOfUnits);
-        navSectionActions.clickCommercialUnits();
-        navSectionActions.clickYesButton();
-        commercialUnitsActions.enterListOfCommercialUnits(testData.squareFootList, testData.numberOfUnits);
+        propertySummaryActions.enterNumberOfCommercialUnits(commonData().numberOfUnits);
+        navSectionActions.clickCommercialUnits()
+            .clickYesButton();
+        commercialUnitsActions.enterListOfCommercialUnits(commonData().squareFeetList, commonData().numberOfUnits);
         navSectionActions.navigateToCommercialInPlaceRentRoll();
-        rentRollActions.chooseListLeaseStatuses(testData.leaseStatusesThree, testData.numberOfUnits);
+        rentRollActions.chooseListLeaseStatuses(commonData().leaseStatusesList, commonData().numberOfUnits);
     }
 
     after("Delete report", () => {
         cy.restoreLocalStorage();
         rentRollActions.returnToHomePage();
-        homepageActions.deleteReport(testData.reportNumber);
+        homepageActions.deleteReport(testData.reportCreationData.reportNumber);
     });
 });

@@ -2,8 +2,14 @@ import navigationSectionPage from "../../pages/base/navigationSection.page";
 import BaseActions from "./base.actions";
 
 class NavigationSectionActions extends BaseActions {
+
+    /**
+     *
+     * @returns {NavigationSectionActions}
+     */
     clickIncomeApproachButton() {
         navigationSectionPage.incomeApproachButton.click();
+        return this;
     }
 
     clickResidentialIncomeArrow() {
@@ -18,36 +24,76 @@ class NavigationSectionActions extends BaseActions {
         navigationSectionPage.rentCompsButton.click();
     }
 
+    /**
+     *
+     * @returns {NavigationSectionActions}
+     */
     clickCommercialArrow() {
         navigationSectionPage.commercialIncomeArrow.click();
+        return this;
     }
 
+    /**
+     *
+     * @returns {NavigationSectionActions}
+     */
     clickCommercialRentRollButton() {
         navigationSectionPage.commercialRentRollButton.click();
+        return this;
     }
 
+    /**
+     *
+     * @returns {NavigationSectionActions}
+     */
     clickCommercialStabRentRollButton() {
         navigationSectionPage.commercialStabRentRollButton.click();
+        return this;
     }
 
+    /**
+     *
+     * @returns {NavigationSectionActions}
+     */
     clickFinalButton() {
         navigationSectionPage.finalButton.click();
+        return this;
     }
 
+    /**
+     *
+     * @returns {NavigationSectionActions}
+     */
     clickUnitInspectionButton() {
         navigationSectionPage.unitInspectionButton.click();
+        return this;
     }
 
+    /**
+     *
+     * @returns {NavigationSectionActions}
+     */
     clickPropertyButton() {
         navigationSectionPage.propertyButton.click();
+        return this;
     }
 
+    /**
+     *
+     * @returns {NavigationSectionActions}
+     */
     clickCommercialUnits() {
         navigationSectionPage.commercialUnitsButton.click();
+        return this;
     }
 
+    /**
+     *
+     * @returns {NavigationSectionActions}
+     */
     clickSummaryButton() {
         navigationSectionPage.summaryButton.click();
+        return this;
     }
 
     clickClientButton() {
@@ -62,20 +108,30 @@ class NavigationSectionActions extends BaseActions {
         navigationSectionPage.propertyMaps.click();
     }
 
+    /**
+     *
+     * @returns {NavigationSectionActions}
+     */
     navigateToCommercialUnits() {
-        this.clickSaveButton();
-        this.verifyProgressBarNotExist();
-        this.clickSaveButton();
-        this.verifyProgressBarNotExist();
-        this.clickPropertyButton();
-        this.clickCommercialUnits();
+        this.clickSaveButton()
+            .verifyProgressBarNotExist()
+            .clickSaveButton()
+            .verifyProgressBarNotExist();
+        this.clickPropertyButton()
+            .clickCommercialUnits();
+        return this;
     }
 
+    /**
+     *
+     * @returns {NavigationSectionActions}
+     */
     navigateToUnitInspection() {
-        this.clickSaveButton();
-        this.clickFinalButton();
-        this.clickUnitInspectionButton();
-        this.verifyProgressBarNotExist();
+        this.clickSaveButton()
+            .clickFinalButton()
+            .clickUnitInspectionButton()
+            .verifyProgressBarNotExist();
+        return this;
     }
 
     navigateToInPlaceRentRoll() {
@@ -92,19 +148,30 @@ class NavigationSectionActions extends BaseActions {
         this.clickYesButton();
     }
 
+    /**
+     *
+     * @param {boolean} isWithSave
+     * @returns {NavigationSectionActions}
+     */
     navigateToCommercialInPlaceRentRoll(isWithSave = true) {
-        this.clickIncomeApproachButton();
-        this.clickCommercialArrow();
-        this.clickCommercialRentRollButton();
+        this.clickIncomeApproachButton()
+            .clickCommercialArrow()
+            .clickCommercialRentRollButton();
         if (isWithSave) {
             this.clickYesButton();
         }
+        return this;
     }
 
+    /**
+     *
+     * @returns {NavigationSectionActions}
+     */
     navigateToPropertySummary() {
-        this.clickPropertyButton();
-        this.clickSummaryButton();
-        this.clickYesButton();
+        this.clickPropertyButton()
+            .clickSummaryButton()
+            .clickYesButton();
+        return this;
     }
 
     openClientPageInReport() {

@@ -3,20 +3,24 @@ import BaseActions from "./base.actions";
 
 class HomepageActions extends BaseActions {
 
-    createReport(incomeType = "multifamily", address = "462 1st Avenue, New York, USA",
-                 reportNumber = "TestAutoReport", templateType = "freddie-mac",
-                 conclusionType = "AS_IS") {
-        this.clickNewReportButton();
-        this.enterAddressToSearch(address);
-        this.clickFindPropHeader();
-        this.clickSubmitButton();
-        this.clickToSearchResultRow();
-        this.clickSubmitButton();
-        this.enterReportNumber(reportNumber);
-        this.checkTemplateType(templateType);
-        this.checkIncomeType(incomeType);
-        this.checkConclusionType(conclusionType);
-        this.clickCreateReportButton();
+    /**
+     * @param {Readonly<{incomeValue: string, address: string, reportNumber: string, templateValue: string,
+     * conclusionValue: string}>} reportCreationData
+     * @returns {HomepageActions}
+     */
+    createReport(reportCreationData) {
+        this.clickNewReportButton()
+            .enterAddressToSearch(reportCreationData.address)
+            .clickFindPropHeader()
+            .clickSubmitButton()
+            .clickToSearchResultRow()
+            .clickSubmitButton()
+            .enterReportNumber(reportCreationData.reportNumber)
+            .checkTemplateType(reportCreationData.templateValue)
+            .checkIncomeType(reportCreationData.incomeValue)
+            .checkConclusionType(reportCreationData.conclusionValue)
+            .clickCreateReportButton();
+        return this;
     }
 
     /**

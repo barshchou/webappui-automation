@@ -2,8 +2,13 @@ import {getEnvUrl} from "../../../utils/env.utils";
 
 export default class BaseActions {
 
+    /**
+     *
+     * @returns {BaseActions}
+     */
     clickYesButton() {
         cy.get("*[name='form-confirm-submit-btn']").click();
+        return this;
     }
 
     clickNoButton() {
@@ -24,6 +29,10 @@ export default class BaseActions {
         this.clickNoButton();
     }
 
+    /**
+     *
+     * @returns {BaseActions}
+     */
     clickSaveButton() {
         cy.get("*[data-qa='form-save-btn']").click();
         return this;
@@ -33,6 +42,10 @@ export default class BaseActions {
         cy.get("*[data-qa='form-submit-btn']").scrollIntoView().click();
     }
 
+    /**
+     *
+     * @returns {BaseActions}
+     */
     verifyProgressBarNotExist() {
         cy.get("*[role='progressbar']").should("not.exist");
         return this;

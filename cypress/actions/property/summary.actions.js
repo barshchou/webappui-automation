@@ -21,8 +21,14 @@ class SummaryActions extends BaseActions {
         return this;
     }
 
+    /**
+     *
+     * @param {number} number
+     * @returns {SummaryActions}
+     */
     enterNumberOfCommercialUnits(number = 1) {
         summaryPage.numberOfCommercialUnitsInput.clear().type(number).should("have.value", number);
+        return this;
     }
 
     verifyCensusTract(value) {
