@@ -4,36 +4,76 @@ import {getTodayDateString, getTodayDay, isDateHasCorrectFormat} from "../../../
 import {numberWithCommas} from "../../../../../utils/numbers.utils";
 
 class RentCompsActions extends BaseActions {
-    verifyGCText(conclusionType = "AS_IS") {
+
+    /**
+     *
+     * @param {string} conclusionType
+     * @returns {RentCompsActions}
+     */
+    verifyGCText(conclusionType) {
+        rentCompsPage.generatedCommentary.should("exist")
+            .should("contain.text", this.getCommentary(conclusionType));
+        return this;
+    }
+
+    /**
+     * @private
+     * @param {string} conclusionType
+     * @returns {string}
+     */
+    getCommentary(conclusionType) {
         if (conclusionType === "AS_IS") {
-            rentCompsPage.generatedCommentary.should("exist").should("contain.text",
-                "In order to gauge the reasonableness of the contract rents, " +
-                "we have examined the following rental activity in the submarket:");
+            return "In order to gauge the reasonableness of the contract rents, " +
+                "we have examined the following rental activity in the submarket:";
         } else {
-            rentCompsPage.generatedCommentary.should("exist").should("contain.text",
-                "In order to forecast the market rents, " +
-                "we have examined the following rental activity in the submarket:");
+            return "In order to forecast the market rents, " +
+                "we have examined the following rental activity in the submarket:";
         }
     }
 
+    /**
+     *
+     * @returns {RentCompsActions}
+     */
     clickUnitSwitchButton() {
         rentCompsPage.unitSwitchButton.should("be.enabled").click();
+        return this;
     }
 
+    /**
+     *
+     * @returns {RentCompsActions}
+     */
     clickBuildingSwitchButton() {
         rentCompsPage.buildingSwitchButton.should("be.enabled").click();
+        return this;
     }
 
+    /**
+     *
+     * @returns {RentCompsActions}
+     */
     verifyBuildingSelected() {
         rentCompsPage.buildingSwitchButton.should("have.attr", "data-qa-isselected", "true");
+        return this;
     }
 
+    /**
+     *
+     * @returns {RentCompsActions}
+     */
     verifyUnitSelected() {
         rentCompsPage.unitSwitchButton.should("have.attr", "data-qa-isselected", "true");
+        return this;
     }
 
+    /**
+     *
+     * @returns {RentCompsActions}
+     */
     clickSwitchConfirmButton() {
         rentCompsPage.switchSearchConfirmButton.should("be.visible").click();
+        return this;
     }
 
     clickUnitTypesArrowButton() {
@@ -56,22 +96,37 @@ class RentCompsActions extends BaseActions {
         });
     }
 
+    /**
+     *
+     * @returns {RentCompsActions}
+     */
     verifyPopUpTextExist() {
         rentCompsPage.changeCompTypePopUpMessage.should("exist");
+        return this;
     }
 
+    /**
+     *
+     * @returns {RentCompsActions}
+     */
     changeToBuildingSearch() {
-        this.clickBuildingSwitchButton();
-        this.verifyPopUpTextExist();
-        this.clickSwitchConfirmButton();
-        this.verifyBuildingSelected();
+        this.clickBuildingSwitchButton()
+            .verifyPopUpTextExist()
+            .clickSwitchConfirmButton()
+            .verifyBuildingSelected();
+        return this;
     }
 
+    /**
+     *
+     * @returns {RentCompsActions}
+     */
     changeToUnitSearch() {
-        this.clickUnitSwitchButton();
-        this.verifyPopUpTextExist();
-        this.clickSwitchConfirmButton();
-        this.verifyUnitSelected();
+        this.clickUnitSwitchButton()
+            .verifyPopUpTextExist()
+            .clickSwitchConfirmButton()
+            .verifyUnitSelected();
+        return this;
     }
 
     enterValueToInput(fieldName, value) {
