@@ -12,16 +12,31 @@ class NavigationSectionActions extends BaseActions {
         return this;
     }
 
+    /**
+     *
+     * @returns {NavigationSectionActions}
+     */
     clickResidentialIncomeArrow() {
         navigationSectionPage.residentialIncomeArrow.click();
+        return this;
     }
 
+    /**
+     *
+     * @returns {NavigationSectionActions}
+     */
     clickInPlaceRentRollButton() {
         navigationSectionPage.inPlaceRentRollButton.click();
+        return this;
     }
 
+    /**
+     *
+     * @returns {NavigationSectionActions}
+     */
     clickRentCompsButton() {
         navigationSectionPage.rentCompsButton.click();
+        return this;
     }
 
     /**
@@ -96,16 +111,31 @@ class NavigationSectionActions extends BaseActions {
         return this;
     }
 
+    /**
+     *
+     * @returns {NavigationSectionActions}
+     */
     clickClientButton() {
         navigationSectionPage.clientButton.click();
+        return this;
     }
 
+    /**
+     *
+     * @returns {NavigationSectionActions}
+     */
     clickSiteDescriptionButton() {
         navigationSectionPage.siteDescription.click();
+        return this;
     }
 
+    /**
+     *
+     * @returns {NavigationSectionActions}
+     */
     clickMapsButton() {
         navigationSectionPage.propertyMaps.click();
+        return this;
     }
 
     /**
@@ -127,25 +157,35 @@ class NavigationSectionActions extends BaseActions {
      * @returns {NavigationSectionActions}
      */
     navigateToUnitInspection() {
-        this.clickSaveButton()
-            .clickFinalButton()
+        this.clickSaveButton();
+        this.clickFinalButton()
             .clickUnitInspectionButton()
             .verifyProgressBarNotExist();
         return this;
     }
 
-    navigateToInPlaceRentRoll() {
-        this.clickIncomeApproachButton();
-        this.clickResidentialIncomeArrow();
-        this.clickInPlaceRentRollButton();
-        this.clickYesButton();
+    /**
+     *
+     * @returns {NavigationSectionActions}
+     */
+    navigateToResInPlaceRentRoll() {
+        this.clickIncomeApproachButton()
+            .clickResidentialIncomeArrow()
+            .clickInPlaceRentRollButton()
+            .clickYesButton();
+        return this;
     }
 
+    /**
+     *
+     * @returns {NavigationSectionActions}
+     */
     navigateToRentComps() {
-        this.clickIncomeApproachButton();
-        this.clickResidentialIncomeArrow();
-        this.clickRentCompsButton();
-        this.clickYesButton();
+        this.clickIncomeApproachButton()
+            .clickResidentialIncomeArrow()
+            .clickRentCompsButton()
+            .clickYesButton();
+        return this;
     }
 
     /**
@@ -174,39 +214,75 @@ class NavigationSectionActions extends BaseActions {
         return this;
     }
 
+    /**
+     *
+     * @returns {NavigationSectionActions}
+     */
     openClientPageInReport() {
-        this.clickClientButton();
-        this.clickYesButton();
+        this.clickClientButton()
+            .clickYesButton();
+        return this;
     }
 
+    /**
+     *
+     * @returns {NavigationSectionActions}
+     */
     openSiteDescriptionInProperty() {
-        this.clickSiteDescriptionButton();
-        this.clickYesButton();
+        this.clickSiteDescriptionButton()
+            .clickYesButton();
+        return this;
     }
 
+    /**
+     *
+     * @returns {NavigationSectionActions}
+     */
     openMapsInProperty() {
-        this.clickMapsButton();
-        this.clickYesButton();
+        this.clickMapsButton()
+            .clickYesButton();
+        return this;
     }
 
+    /**
+     *
+     * @returns {NavigationSectionActions}
+     */
     clickExpenseForecastBookmark() {
         navigationSectionPage.expenseForecastBookmark.click().should("have.attr", "color", "#F68750");
+        return this;
     }
 
+    /**
+     *
+     * @returns {NavigationSectionActions}
+     */
     clickCapRateConclusion() {
         navigationSectionPage.capRateConclusion.click();
+        return this;
     }
 
+    /**
+     *
+     * @param isWithSave
+     * @returns {NavigationSectionActions}
+     */
     navigateToCapRateConclusion(isWithSave = true) {
-        this.clickIncomeApproachButton();
-        this.clickCapRateConclusion();
+        this.clickIncomeApproachButton()
+            .clickCapRateConclusion();
         if (isWithSave) {
             this.clickYesButton();
         }
+        return this;
     }
 
+    /**
+     *
+     * @returns {NavigationSectionActions}
+     */
     clickInsurableReplacementCostBookmark() {
         navigationSectionPage.insurableReplacementCostBookmark.click().should("have.attr", "color", "#F68750");
+        return this;
     }
 }
 

@@ -9,7 +9,7 @@ describe("In-Place Rent Roll grid tests", () => {
     before("Login and open In-Place Rent Roll", () => {
         cy.login();
         homepageActions.createReport(testData.reportCreationData);
-        navigationSection.navigateToInPlaceRentRoll();
+        navigationSection.navigateToResInPlaceRentRoll();
         cy.saveLocalStorage();
     });
 
