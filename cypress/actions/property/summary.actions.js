@@ -7,13 +7,19 @@ import {
 } from "../../../utils/numbers.utils";
 
 class SummaryActions extends BaseActions {
+
+    /**
+     *
+     * @returns {SummaryActions}
+     */
     verifyThatPageIsOpened() {
         summaryPage.headerSection.should("be.visible");
+        return this;
     }
 
     /**
      *
-     * @param {number} number
+     * @param {number, string} number
      * @returns {SummaryActions}
      */
     enterNumberOfUnits(number) {
@@ -21,8 +27,14 @@ class SummaryActions extends BaseActions {
         return this;
     }
 
+    /**
+     *
+     * @param {number, string} number
+     * @returns {SummaryActions}
+     */
     enterNumberOfCommercialUnits(number = 1) {
         summaryPage.numberOfCommercialUnitsInput.clear().type(number).should("have.value", number);
+        return this;
     }
 
     verifyCensusTract(value) {
@@ -71,7 +83,7 @@ class SummaryActions extends BaseActions {
     }
 
     /**
-     * @param {string} year
+     * @param {string, number} year
      * @returns {SummaryActions}
      */
     enterYearBuilt(year) {
@@ -81,7 +93,7 @@ class SummaryActions extends BaseActions {
 
     /**
      *
-     * @param {number} area
+     * @param {number, string} area
      * @returns {SummaryActions}
      */
     enterSiteArea(area) {
@@ -95,7 +107,7 @@ class SummaryActions extends BaseActions {
 
     /**
      *
-     * @param {number} area
+     * @param {number, string} area
      * @returns {SummaryActions}
      */
     enterGrossBuildingArea(area) {
@@ -109,7 +121,7 @@ class SummaryActions extends BaseActions {
 
     /**
      *
-     * @param {number} number
+     * @param {number, string} number
      * @returns {SummaryActions}
      */
     enterFloorsNumber(number) {
@@ -130,7 +142,7 @@ class SummaryActions extends BaseActions {
 
     /**
      *
-     * @param {number} area
+     * @param {number, string} area
      * @returns {SummaryActions}
      */
     enterCurrentGrossBuildingArea(area) {
@@ -144,7 +156,7 @@ class SummaryActions extends BaseActions {
 
     /**
      *
-     * @param {number} number
+     * @param {number, string} number
      * @returns {SummaryActions}
      */
     enterCurrentNumberOfUnits(number) {
@@ -154,7 +166,7 @@ class SummaryActions extends BaseActions {
 
     /**
      *
-     * @param {number} number
+     * @param {number, string} number
      * @returns {SummaryActions}
      */
     enterCurrentFloorsNumber(number) {

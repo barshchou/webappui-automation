@@ -1,14 +1,14 @@
-const testData = require("../../../../../fixtures/optionsList.fixtures.json");
-import homepageActions from "../../../../../actions/base/homepage.actions";
-import navigationSectionActions from "../../../../../actions/base/navigationSection.actions";
-import rentRollActions from "../../../../../actions/income/residential/rentRoll.actions";
-import summaryActions from "../../../../../actions/property/summary.actions";
+import testData from "../../../../../fixtures/optionsList.fixtures";
+import Homepage from "../../../../../actions/base/homepage.actions";
+import NavigationSection from "../../../../../actions/base/navigationSection.actions";
+import Income from "../../../../../actions/income/income.manager";
+import Property from "../../../../../actions/property/property.manager";
 
 describe("In-Place Rent Roll options list tests", () => {
     before("Create report and open In-Pace Rent Roll", () => {
         cy.login();
-        homepageActions.createReport();
-        navigationSectionActions.navigateToInPlaceRentRoll();
+        Homepage.createReport(testData.reportCreationData);
+        NavigationSection.navigateToResInPlaceRentRoll();
         cy.saveLocalStorage();
     });
 
@@ -17,74 +17,74 @@ describe("In-Place Rent Roll options list tests", () => {
     });
 
     it("ID1: Form: Import Rent Roll via CSV", () => {
-        rentRollActions.verifyViaCSVExist();
+        Income.Residential.InPlaceRentRoll.verifyViaCSVExist();
     });
 
     it("ID2: Text: 'Skip manual rent roll entry. Upload a CSV file.'", () => {
-        rentRollActions.verifyUploadCSVRow(testData.linkToCSV);
+        Income.Residential.InPlaceRentRoll.verifyUploadCSVRow(testData.csvLinks);
     });
 
     it("ID3: Import manager ('Import Data' button is displayed when .csv file is selected)", () => {
-        rentRollActions.verifyNumberOfResidentialUnits(testData.numberOFUnits);
-        rentRollActions.uploadFile(testData.csvFileName, testData.csvNumberOfUnits);
+        Income.Residential.InPlaceRentRoll.verifyNumberOfResidentialUnits(testData.id3.numberOfUnits)
+            .uploadFile(testData.id3.csvFileName, testData.id3.csvNumberOfUnits);
         cy.reload();
-        rentRollActions.uploadFile(testData.xlsxFileName, testData.numberOFUnits);
-        rentRollActions.goToPropSummaryWithSaveLeavingFirst();
-        summaryActions.verifyThatPageIsOpened();
-        summaryActions.enterNumberOfUnits(testData.numberOfUnitsToChange);
-        summaryActions.goBackWithSave();
-        rentRollActions.uploadFile(testData.csvFileName, testData.csvNumberOfUnits);
+        Income.Residential.InPlaceRentRoll.uploadFile(testData.id3.xlsxFileName, testData.id3.numberOfUnits)
+            .goToPropSummaryWithSaveLeavingFirst();
+        Property.Summary.verifyThatPageIsOpened()
+            .enterNumberOfUnits(testData.id3.numberOfUnitsToChange)
+            .goBackWithSave();
+        Income.Residential.InPlaceRentRoll.uploadFile(testData.id3.csvFileName, testData.id3.csvNumberOfUnits);
         cy.reload();
-        rentRollActions.fillAllRentTypeCellsWithEqualValue(testData.rentType);
-        rentRollActions.goToPropSummaryWithSaveLeavingFirst();
-        summaryActions.verifyThatPageIsOpened();
-        summaryActions.enterNumberOfUnits(testData.numberOFUnits);
-        summaryActions.goBackWithSave();
+        Income.Residential.InPlaceRentRoll.fillAllRentTypeCellsWithEqualValue(testData.id3.rentType)
+            .goToPropSummaryWithSaveLeavingFirst();
+        Property.Summary.verifyThatPageIsOpened()
+            .enterNumberOfUnits(testData.id3.numberOfUnits)
+            .goBackWithSave();
     });
 
     it("ID4 and ID5: number of residential units and go to property summary", () => {
-        rentRollActions.verifyNumberOfResidentialUnits(testData.numberOFUnits);
-        rentRollActions.goToPropSummaryWithSaveLeavingFirst();
-        summaryActions.verifyThatPageIsOpened();
-        summaryActions.goBackWithSave();
+        Income.Residential.InPlaceRentRoll.verifyNumberOfResidentialUnits(testData.id3.numberOfUnits)
+            .goToPropSummaryWithSaveLeavingFirst();
+        Property.Summary.verifyThatPageIsOpened()
+            .goBackWithSave();
     });
 
     it("ID6: Static text: Rent Roll Options", () => {
-        rentRollActions.verifyThatRentRollOptionsExist();
+        Income.Residential.InPlaceRentRoll.verifyThatRentRollOptionsExist();
     });
 
     it("ID7: Developer's Forecast checkbox", () => {
-        rentRollActions.checkUncheckCheckbox(testData.devForecastTestColumn, testData.forecastLabel);
+        Income.Residential.InPlaceRentRoll.checkUncheckCheckboxForColumn(testData.id7.column, testData.id7.forecastLabel);
     });
 
     it("ID8: Summarize current rent roll checkbox", () => {
-       rentRollActions.checkCheckboxByLabel(testData.summarizeLabel);
-       rentRollActions.checkCheckboxByLabel(testData.summarizeLabel, false);
+        Income.Residential.InPlaceRentRoll.checkCheckboxByLabel(testData.id8.summarizeLabel)
+           .uncheckCheckboxByLabel(testData.id8.summarizeLabel);
     });
 
     it("ID9: Do you know per unit square footage? radio button", () => {
-        rentRollActions.checkUncheckPerUnitSquareFootage(testData.unitSquareTestColumns);
+        Income.Residential.InPlaceRentRoll.checkUncheckPerUnitSquareFootage(testData.id9.columns);
     });
 
     it("ID10: Text: Optional Columns", () => {
-        rentRollActions.isOptionalColumnExist();
+        Income.Residential.InPlaceRentRoll.isOptionalColumnExist();
     });
 
     it("ID11: Bathrooms checkbox", () => {
-        rentRollActions.checkUncheckCheckbox(testData.bathTestColumn, testData.bathLabel);
+        Income.Residential.InPlaceRentRoll.checkUncheckCheckboxForColumn(testData.id11.column, testData.id11.label);
     });
 
     it("ID12: Outdoor Space checkbox", () => {
-        rentRollActions.checkUncheckCheckbox(testData.outdoorLabelAndColumn, testData.outdoorLabelAndColumn);
+        Income.Residential.InPlaceRentRoll.checkUncheckCheckboxForColumn(testData.id12.labelAndColumn, testData.id12.labelAndColumn);
     });
 
     it("ID13: Unit Type checkbox", () => {
-        rentRollActions.checkUncheckCheckbox(testData.unitLabelColumn, testData.unitLabelColumn);
+        Income.Residential.InPlaceRentRoll.checkUncheckCheckboxForColumn(testData.id13.labelAndColumn, testData.id13.labelAndColumn);
     });
 
     after("Delete report", () => {
         cy.restoreLocalStorage();
-        rentRollActions.returnToHomePage();
-        homepageActions.deleteReport();
+        Income.Residential.InPlaceRentRoll.returnToHomePage();
+        Homepage.deleteReport(testData.reportCreationData.reportNumber);
     });
 });

@@ -3,13 +3,31 @@ import BaseActions from "../../base/base.actions";
 import {getNumberFromDollarNumberWithCommas, numberWithCommas} from "../../../../utils/numbers.utils";
 
 class InPlaceRentRollActions extends BaseActions {
+
+    /**
+     *
+     * @returns {InPlaceRentRollActions}
+     */
     verifyViaCSVExist() {
         rentRollPage.importViaCSVHeader.scrollIntoView().should("be.visible");
+        return this;
     }
 
-    verifyUploadCSVRow(linkToBe) {
+    /**
+     *
+     * @param {Readonly<{prodLink: string, othersLink: string}>} links
+     * @returns {InPlaceRentRollActions}
+     */
+    verifyUploadCSVRow(links) {
+        let linkToBe;
+        if (Cypress.env("url") === "prod") {
+            linkToBe = links.prodLink;
+        } else {
+            linkToBe = links.othersLink;
+        }
         rentRollPage.skipManualRentEntryRow.scrollIntoView().should("be.visible");
         rentRollPage.uploadCSVLink.should("be.visible").should("have.attr", "href", linkToBe);
+        return this;
     }
 
     /**
@@ -36,77 +54,161 @@ class InPlaceRentRollActions extends BaseActions {
         return this;
     }
 
+    /**
+     *
+     * @returns {InPlaceRentRollActions}
+     */
     clickGoToPropSummaryButton() {
         rentRollPage.goToPropSummaryButton.should("be.visible").click();
+        return this;
     }
 
+    /**
+     *
+     * @returns {InPlaceRentRollActions}
+     */
     goToPropSummaryWithSaveLeavingFirst() {
-        this.clickGoToPropSummaryButton();
-        this.clickYesButton();
+        this.clickGoToPropSummaryButton()
+            .clickYesButton();
+        return this;
     }
 
+    /**
+     *
+     * @returns {InPlaceRentRollActions}
+     */
     goToPropSummaryWithSaveSaveClickFirst() {
         this.clickSaveButton();
         this.clickGoToPropSummaryButton();
+        return this;
     }
 
+    /**
+     *
+     * @returns {InPlaceRentRollActions}
+     */
     goToPropSummaryWithoutSave() {
-        this.clickGoToPropSummaryButton();
-        this.clickNoButton();
+        this.clickGoToPropSummaryButton()
+            .clickNoButton();
+        return this;
     }
 
+    /**
+     *
+     * @returns {InPlaceRentRollActions}
+     */
     verifyThatRentRollOptionsExist() {
         rentRollPage.rentRollOptionsField.should("be.visible");
+        return this;
     }
 
-    verifyColumnExist(columnName, check = true) {
-        if (check) {
-            rentRollPage.getColumnHeader(columnName).should("exist");
-        } else {
-            rentRollPage.getColumnHeader(columnName).should("not.exist");
-        }
+    /**
+     *
+     * @param {string} columnName
+     * @returns {InPlaceRentRollActions}
+     */
+    verifyColumnExist(columnName) {
+        rentRollPage.getColumnHeader(columnName).should("exist");
+        return this;
     }
 
-    verifyListColumnExist(columnNames, check = true) {
-        for (let i = 0; i < columnNames.length; i++) {
-            this.verifyColumnExist(columnNames[i], check);
-        }
+    /**
+     *
+     * @param {string} columnName
+     * @returns {InPlaceRentRollActions}
+     */
+    verifyColumnNotExist(columnName) {
+        rentRollPage.getColumnHeader(columnName).should("not.exist");
+        return this;
     }
 
+    /**
+     *
+     * @param {Array<string>} columnNames
+     * @returns {InPlaceRentRollActions}
+     */
+    verifyListColumnExist(columnNames) {
+        columnNames.forEach(column => {
+            this.verifyColumnExist(column);
+        });
+        return this;
+    }
+
+    /**
+     *
+     * @param {Array<string>} columnNames
+     * @returns {InPlaceRentRollActions}
+     */
+    verifyListColumnNotExist(columnNames) {
+        columnNames.forEach(column => {
+            this.verifyColumnNotExist(column);
+        });
+        return this;
+    }
+
+    /**
+     *
+     * @param {string} value
+     * @returns {InPlaceRentRollActions}
+     */
     checkPerUnitSquareFootage(value = "true") {
         rentRollPage.getPerUnitSFRadio(value).scrollIntoView().should("be.enabled").click();
+        return this;
     }
 
     /**
      *
      * @param {string} label
-     * @param {boolean} check
      * @returns {InPlaceRentRollActions}
      */
-    checkCheckboxByLabel(label, check = true) {
-        if (check) {
-            rentRollPage.getCheckboxByLabel(label).scrollIntoView().should("be.enabled")
-                .check().should("be.checked");
-        } else {
-            rentRollPage.getCheckboxByLabel(label).scrollIntoView().should("be.enabled")
-                .uncheck().should("not.be.checked");
-        }
+    checkCheckboxByLabel(label) {
+        rentRollPage.getCheckboxByLabel(label).scrollIntoView().should("be.enabled")
+            .check().should("be.checked");
         return this;
     }
 
-    verifyCheckboxByLabelIsCheckedOrNot(label, check = true) {
-        if (check) {
-            rentRollPage.getCheckboxByLabel(label).should("be.checked");
-        } else {
-            rentRollPage.getCheckboxByLabel(label).should("not.be.checked");
-        }
+    /**
+     *
+     * @param {string} label
+     * @returns {InPlaceRentRollActions}
+     */
+    uncheckCheckboxByLabel(label) {
+        rentRollPage.getCheckboxByLabel(label).scrollIntoView().should("be.enabled")
+            .uncheck().should("not.be.checked");
+        return this;
     }
 
-    checkUncheckCheckbox(columnName, label) {
-        this.checkCheckboxByLabel(label);
-        this.verifyColumnExist(columnName);
-        this.checkCheckboxByLabel(label, false);
-        this.verifyColumnExist(columnName, false);
+    /**
+     *
+     * @param {string} label
+     * @returns {InPlaceRentRollActions}
+     */
+    verifyCheckboxIsChecked(label) {
+        rentRollPage.getCheckboxByLabel(label).should("be.checked");
+        return this;
+    }
+
+    /**
+     *
+     * @param {string} label
+     * @returns {InPlaceRentRollActions}
+     */
+    verifyCheckboxIsNotChecked(label) {
+        rentRollPage.getCheckboxByLabel(label).should("not.be.checked");
+        return this;
+    }
+
+    /**
+     *
+     * @param {string} columnName
+     * @param {string} label
+     * @returns {InPlaceRentRollActions}
+     */
+    checkUncheckCheckboxForColumn(columnName, label) {
+        this.checkCheckboxByLabelAndVerify(label, columnName)
+            .uncheckCheckboxByLabel(label)
+            .verifyColumnNotExist(columnName);
+        return this;
     }
 
     /**
@@ -116,28 +218,46 @@ class InPlaceRentRollActions extends BaseActions {
      * @returns {InPlaceRentRollActions}
      */
     checkCheckboxByLabelAndVerify(label, columnName) {
-        this.checkCheckboxByLabel(label);
-        this.verifyColumnExist(columnName);
+        this.checkCheckboxByLabel(label)
+            .verifyColumnExist(columnName);
         return this;
     }
 
+    /**
+     *
+     * @param columnNames
+     * @returns {InPlaceRentRollActions}
+     */
     checkUncheckPerUnitSquareFootage(columnNames) {
-        this.checkPerUnitSquareFootage();
-        this.verifyListColumnExist(columnNames);
-        this.checkPerUnitSquareFootage("false");
-        this.verifyListColumnExist(columnNames, false);
+        this.checkPerUnitSquareFootage()
+            .verifyListColumnExist(columnNames)
+            .checkPerUnitSquareFootage("false")
+            .verifyListColumnNotExist(columnNames);
+        return this;
     }
 
+    /**
+     *
+     * @returns {InPlaceRentRollActions}
+     */
     isOptionalColumnExist() {
         rentRollPage.optionalColumnsElement.should("exist");
+        return this;
     }
 
+    /**
+     *
+     * @param {string} fileName
+     * @param {number} unitsToBe
+     * @returns {InPlaceRentRollActions}
+     */
     uploadFile(fileName, unitsToBe) {
         rentRollPage.uploadFileButton.should("be.visible");
         rentRollPage.uploadFileInput.should("exist").attachFile(fileName);
         rentRollPage.importDataButton.should("exist").should("be.enabled").click();
         this.verifyNumberOfResidentialUnits(unitsToBe);
         this.verifyNumberOfIsInspectedRows(unitsToBe);
+        return this;
     }
 
     /**

@@ -4,76 +4,172 @@ import {getTodayDateString, getTodayDay, isDateHasCorrectFormat} from "../../../
 import {numberWithCommas} from "../../../../../utils/numbers.utils";
 
 class RentCompsActions extends BaseActions {
-    verifyGCText(conclusionType = "AS_IS") {
+
+    /**
+     *
+     * @param {string} conclusionType
+     * @returns {RentCompsActions}
+     */
+    verifyGCText(conclusionType) {
+        rentCompsPage.generatedCommentary.should("exist")
+            .should("contain.text", this.getCommentary(conclusionType));
+        return this;
+    }
+
+    /**
+     * @private
+     * @param {string} conclusionType
+     * @returns {string}
+     */
+    getCommentary(conclusionType) {
         if (conclusionType === "AS_IS") {
-            rentCompsPage.generatedCommentary.should("exist").should("contain.text",
-                "In order to gauge the reasonableness of the contract rents, " +
-                "we have examined the following rental activity in the submarket:");
+            return "In order to gauge the reasonableness of the contract rents, " +
+                "we have examined the following rental activity in the submarket:";
         } else {
-            rentCompsPage.generatedCommentary.should("exist").should("contain.text",
-                "In order to forecast the market rents, " +
-                "we have examined the following rental activity in the submarket:");
+            return "In order to forecast the market rents, " +
+                "we have examined the following rental activity in the submarket:";
         }
     }
 
+    /**
+     *
+     * @returns {RentCompsActions}
+     */
     clickUnitSwitchButton() {
         rentCompsPage.unitSwitchButton.should("be.enabled").click();
+        return this;
     }
 
+    /**
+     *
+     * @returns {RentCompsActions}
+     */
     clickBuildingSwitchButton() {
         rentCompsPage.buildingSwitchButton.should("be.enabled").click();
+        return this;
     }
 
+    /**
+     *
+     * @returns {RentCompsActions}
+     */
     verifyBuildingSelected() {
         rentCompsPage.buildingSwitchButton.should("have.attr", "data-qa-isselected", "true");
+        return this;
     }
 
+    /**
+     *
+     * @returns {RentCompsActions}
+     */
     verifyUnitSelected() {
         rentCompsPage.unitSwitchButton.should("have.attr", "data-qa-isselected", "true");
+        return this;
     }
 
+    /**
+     *
+     * @returns {RentCompsActions}
+     */
     clickSwitchConfirmButton() {
         rentCompsPage.switchSearchConfirmButton.should("be.visible").click();
+        return this;
     }
 
+    /**
+     *
+     * @returns {RentCompsActions}
+     */
     clickUnitTypesArrowButton() {
         rentCompsPage.unitTypesArrowButton.scrollIntoView().should("be.visible").click();
+        return this;
     }
 
-    checkUncheckCheckboxByQaAttr(attribute, check = true) {
-        if (check) {
-            rentCompsPage.getCheckboxByDataQaAttr(attribute)
-                .should("have.value", "false").check({force: true}).should("have.value", "true");
-        } else {
-            rentCompsPage.getCheckboxByDataQaAttr(attribute)
-                .should("have.value", "true").uncheck({force: true}).should("have.value", "false");
-        }
+    /**
+     *
+     * @param {string} attribute
+     * @returns {RentCompsActions}
+     */
+    checkCheckboxByQaAttr(attribute) {
+        rentCompsPage.getCheckboxByDataQaAttr(attribute)
+            .should("have.value", "false").check({force: true}).should("have.value", "true");
+        return this;
     }
 
-    checkUncheckListOfCheckboxesByQa(attributes, check = true) {
+    /**
+     *
+     * @param {string} attribute
+     * @returns {RentCompsActions}
+     */
+    uncheckCheckboxByQaAttr(attribute) {
+        rentCompsPage.getCheckboxByDataQaAttr(attribute)
+            .should("have.value", "true").uncheck({force: true}).should("have.value", "false");
+        return this;
+    }
+
+    /**
+     *
+     * @param {Array<string>} attributes
+     * @returns {RentCompsActions}
+     */
+    checkListOfCheckboxesByQa(attributes) {
         attributes.forEach(attr => {
-            this.checkUncheckCheckboxByQaAttr(attr, check);
+            this.checkCheckboxByQaAttr(attr);
         });
+        return this;
     }
 
+    /**
+     *
+     * @param {Array<string>} attributes
+     * @returns {RentCompsActions}
+     */
+    uncheckListOfCheckboxesByQa(attributes) {
+        attributes.forEach(attr => {
+            this.uncheckCheckboxByQaAttr(attr);
+        });
+        return this;
+    }
+
+    /**
+     *
+     * @returns {RentCompsActions}
+     */
     verifyPopUpTextExist() {
         rentCompsPage.changeCompTypePopUpMessage.should("exist");
+        return this;
     }
 
+    /**
+     *
+     * @returns {RentCompsActions}
+     */
     changeToBuildingSearch() {
-        this.clickBuildingSwitchButton();
-        this.verifyPopUpTextExist();
-        this.clickSwitchConfirmButton();
-        this.verifyBuildingSelected();
+        this.clickBuildingSwitchButton()
+            .verifyPopUpTextExist()
+            .clickSwitchConfirmButton()
+            .verifyBuildingSelected();
+        return this;
     }
 
+    /**
+     *
+     * @returns {RentCompsActions}
+     */
     changeToUnitSearch() {
-        this.clickUnitSwitchButton();
-        this.verifyPopUpTextExist();
-        this.clickSwitchConfirmButton();
-        this.verifyUnitSelected();
+        this.clickUnitSwitchButton()
+            .verifyPopUpTextExist()
+            .clickSwitchConfirmButton()
+            .verifyUnitSelected();
+        return this;
     }
 
+    /**
+     *
+     * @param {string} fieldName
+     * @param {string} value
+     * @returns {RentCompsActions}
+     */
     enterValueToInput(fieldName, value) {
         this.clearInput(fieldName);
         let inputField;
@@ -98,8 +194,15 @@ class RentCompsActions extends BaseActions {
         inputField.scrollIntoView().should("be.visible").should("have.attr", "placeholder", placeholder)
             .type(value);
         this.verifyEnteredValueToInput(fieldName, value);
+        return this;
     }
 
+    /**
+     *
+     * @param {string} fieldName
+     * @param {string} value
+     * @returns {RentCompsActions}
+     */
     verifyEnteredValueToInput(fieldName, value = "") {
         let inputField;
         switch (fieldName) {
@@ -116,8 +219,14 @@ class RentCompsActions extends BaseActions {
                 inputField = rentCompsPage.maxSquareFeet;
         }
         inputField.should("have.value", value);
+        return this;
     }
 
+    /**
+     *
+     * @param {string} fieldName
+     * @returns {RentCompsActions}
+     */
     clearInput(fieldName) {
         switch (fieldName) {
             case "minRent":
@@ -132,16 +241,32 @@ class RentCompsActions extends BaseActions {
             case "maxSF":
                 rentCompsPage.maxSquareFeet.clear();
         }
+        return this;
     }
 
+    /**
+     *
+     * @returns {RentCompsActions}
+     */
     clickNumberOfBedroomsArrow() {
         rentCompsPage.numberOfBedroomsArrowButton.should("be.enabled").click();
+        return this;
     }
 
+    /**
+     *
+     * @returns {RentCompsActions}
+     */
     clickSourceOfInfoButton() {
         rentCompsPage.sourceOfInfoArrow.should("be.enabled").click();
+        return this;
     }
 
+    /**
+     *
+     * @param {string} type
+     * @returns {RentCompsActions}
+     */
     clearDateInput(type = "min") {
         switch (type) {
             case "max":
@@ -150,21 +275,41 @@ class RentCompsActions extends BaseActions {
             default:
                 rentCompsPage.minDateValueInput.clear();
         }
+        return this;
     }
 
+    /**
+     *
+     * @param {Array<string>} types
+     * @param {Array<string>} [dates]
+     * @returns {RentCompsActions}
+     */
     enterDatesToInputs(types, dates) {
         dates = dates ?? [getTodayDateString(), getTodayDateString()];
         for (let i = 0; i < dates.length; i++) {
             this.enterDateInput(dates[i], types[i]);
         }
+        return this;
     }
 
+    /**
+     *
+     * @param {Array<string>} types
+     * @returns {RentCompsActions}
+     */
     clearDateInputs(types) {
         types.forEach(type => {
             this.clearDateInput(type);
         });
+        return this;
     }
 
+    /**
+     *
+     * @param {string} date
+     * @param {string} type
+     * @returns {RentCompsActions}
+     */
     enterDateInput(date, type = "min") {
         this.clearDateInput(type);
         const isDateCorrect = isDateHasCorrectFormat(date);
@@ -185,8 +330,14 @@ class RentCompsActions extends BaseActions {
                     rentCompsPage.errorMessage.should("exist");
                 }
         }
+        return this;
     }
 
+    /**
+     *
+     * @param {string} type
+     * @returns {RentCompsActions}
+     */
     clickPickerButton(type = "min") {
         switch (type) {
             case "max":
@@ -195,13 +346,26 @@ class RentCompsActions extends BaseActions {
             default:
                 rentCompsPage.dateMinPickerButton.should("be.enabled").click();
         }
+        return this;
     }
 
+    /**
+     *
+     * @param {string} day
+     * @returns {RentCompsActions}
+     */
     clickDayInPicker(day) {
         day = day ?? Number(getTodayDay());
         rentCompsPage.getDayInCurrentMonthPicker(day).scrollIntoView().should("be.visible").click();
+        return this;
     }
 
+    /**
+     *
+     * @param {string} type
+     * @param {string} date
+     * @returns {RentCompsActions}
+     */
     verifyEnteredDate(type, date) {
         date = date ?? getTodayDateString();
         if (type === "min") {
@@ -209,67 +373,134 @@ class RentCompsActions extends BaseActions {
         } else {
             rentCompsPage.dateMaxInputToCheckValue.should("have.value", date);
         }
+        return this;
     }
 
+    /**
+     *
+     * @param {string} type
+     * @param {string} day
+     * @returns {RentCompsActions}
+     */
     selectDayFromPicker(type, day) {
         this.clickPickerButton(type);
         rentCompsPage.pickerCalendar.should("be.visible");
         this.clickDayInPicker(day);
+        return this;
     }
 
+    /**
+     *
+     * @param {Array<string>} types
+     * @param {Array<string>} [days]
+     * @returns {RentCompsActions}
+     */
     selectDaysFromPickerByTypes(types, days) {
         days = days ?? [Number(getTodayDay()), Number(getTodayDay())];
         for (let i = 0; i < types.length; i++) {
             this.selectDayFromPicker(types[i], days[i]);
         }
+        return this;
     }
 
+    /**
+     *
+     * @param {Array<string>} types
+     * @param {Array<string>} [dates]
+     * @returns {RentCompsActions}
+     */
     verifyEnteredDatesByTypes(types, dates) {
         dates = dates ?? [getTodayDateString(), getTodayDateString()];
         for (let i = 0; i < types.length; i++) {
             this.verifyEnteredDate(types[i], dates[i]);
         }
+        return this;
     }
 
+    /**
+     *
+     * @returns {RentCompsActions}
+     */
     clickAmenitiesArrow() {
         rentCompsPage.amenitiesArrowButton.should("be.enabled").click();
+        return this;
     }
 
+    /**
+     *
+     * @returns {RentCompsActions}
+     */
     verifyNumberOfFoundResultsExist() {
         rentCompsPage.numberOfFoundResults.should("exist").should("contain.text", "Results Found");
+        return this;
     }
 
+    /**
+     *
+     * @returns {RentCompsActions}
+     */
     clickResetFiltersButton() {
         rentCompsPage.resetFiltersButton.click();
+        return this;
     }
 
+    /**
+     *
+     * @param {string} value
+     * @returns {RentCompsActions}
+     */
     selectSortByOptionByValue(value) {
         this.verifyLoadingDoesntExist();
         rentCompsPage.sortByDropdown.should("be.visible").click({force: true});
         rentCompsPage.getSortDropdownOptionByValue(value).click();
         rentCompsPage.sortByDropdown.should("have.text", value);
+        return this;
     }
 
+    /**
+     *
+     * @param {Array<string>} values
+     * @returns {RentCompsActions}
+     */
     selectSortByOptionsByValues(values) {
         values.forEach(value => {
             this.selectSortByOptionByValue(value);
         });
+        return this;
     }
 
+    /**
+     *
+     * @returns {RentCompsActions}
+     */
     verifyLoadingDoesntExist() {
         rentCompsPage.loadingModal.should("not.exist");
+        return this;
     }
 
+    /**
+     *
+     * @param {number} comparableIndex
+     * @returns {RentCompsActions}
+     */
     verifyPhotosExistAndNavigateByPhotos(comparableIndex) {
         this.verifyLoadingDoesntExist();
         rentCompsPage.comparableItems.eq(comparableIndex).then($item => {
             cy.wrap($item).find(rentCompsPage.photoElementLocator).then($photos => {
-                this.navigateThroughAllPhotosInComparable($photos, comparableIndex);
-                this.navigateThroughAllPhotosInComparable($photos, comparableIndex, "back");
+                this.navigateThroughAllPhotosInComparable($photos, comparableIndex)
+                    .navigateThroughAllPhotosInComparable($photos, comparableIndex, "back");
             });
         });
+        return this;
     }
 
+    /**
+     *
+     * @param {JQuery<HTMLElement>} jQueryPhotoElements
+     * @param {number} comparableIndex
+     * @param {string} direction
+     * @returns {RentCompsActions}
+     */
     navigateThroughAllPhotosInComparable(jQueryPhotoElements, comparableIndex, direction = "forward") {
         let numberOfPhotos = jQueryPhotoElements.length;
         let style = "";
@@ -286,51 +517,91 @@ class RentCompsActions extends BaseActions {
             this.verifyLoadingDoesntExist();
             style = currentStyle;
         }
+        return this;
     }
 
+    /**
+     *
+     * @returns {RentCompsActions}
+     */
     verifyCompAddressesExist() {
         rentCompsPage.comparableAddressesTexts.each($address => {
             expect($address).not.to.be.empty;
         });
+        return this;
     }
 
+    /**
+     *
+     * @returns {RentCompsActions}
+     */
     verifyRentsTexts() {
         rentCompsPage.rentElementsTexts.each($rentEl => {
             cy.wrap($rentEl).should("exist").should("contain.text", "/month")
                 .should("contain.text", "/SF");
         });
+        return this;
     }
 
+    /**
+     *
+     * @returns {RentCompsActions}
+     */
     verifyCompAmenitiesTextsExist() {
         rentCompsPage.comparablesAmenitiesTexts.each($amenityEl => {
             cy.wrap($amenityEl).should("exist").should("contain.text", "bed")
                 .should("contain.text", "bath");
         });
+        return this;
     }
 
+    /**
+     *
+     * @returns {RentCompsActions}
+     */
     verifyComparablePropertyTextsExist() {
         rentCompsPage.comparablePropertyTexts.each($propertyEl => {
             cy.wrap($propertyEl).should("exist").should("contain.text", "mi. away")
                 .should("contain.text", "SF").should("contain.text", "Valued:");
         });
+        return this;
     }
 
+    /**
+     *
+     * @returns {RentCompsActions}
+     */
     verifyLoadingModalExist() {
         rentCompsPage.loadingModal.should("exist");
+        return this;
     }
 
+    /**
+     *
+     * @returns {RentCompsActions}
+     */
     clickZoomInButton() {
         rentCompsPage.zoomInButton.click();
-        this.verifyLoadingModalExist();
-        this.verifyLoadingDoesntExist();
+        this.verifyLoadingModalExist()
+            .verifyLoadingDoesntExist();
+        return this;
     }
 
+    /**
+     *
+     * @returns {RentCompsActions}
+     */
     clickZoomOutButton() {
         rentCompsPage.zoomOutButton.click();
-        this.verifyLoadingModalExist();
-        this.verifyLoadingDoesntExist();
+        this.verifyLoadingModalExist()
+            .verifyLoadingDoesntExist();
+        return this;
     }
 
+    /**
+     *
+     * @returns {RentCompsActions}
+     */
     clickAllSelectComparableButtons() {
         rentCompsPage.selectComparableButtons.then(buttons => {
             const buttonsLength = buttons.length;
@@ -342,21 +613,40 @@ class RentCompsActions extends BaseActions {
                 rentCompsPage.selectedComparableButtons.eq(i).should("exist");
             }
         });
+        return this;
     }
 
+    /**
+     *
+     * @param {number} numberOfUnits
+     * @returns {RentCompsActions}
+     */
     verifyComparableGroups(numberOfUnits) {
         if (numberOfUnits === 0) {
             rentCompsPage.uncategorizedTable.find(rentCompsPage.indexColumnCellsSelector).then(indexCells => {
                 rentCompsPage.selectedComparableButtons.should("have.length", indexCells.length);
             });
         }
+        return this;
     }
 
+    /**
+     *
+     * @param {number} searchResultIndex
+     * @returns {RentCompsActions}
+     */
     verifySearchResultIsShown(searchResultIndex = 0) {
         rentCompsPage.searchResultsRows.eq(searchResultIndex).should("be.visible");
+        return this;
     }
 
-    openAddNewComparableForm(address = "230 Park Avenue, New-York, USA", searchResIndex = 0) {
+    /**
+     *
+     * @param {string} address
+     * @param {number} searchResIndex
+     * @returns {RentCompsActions}
+     */
+    openAddNewComparableForm(address, searchResIndex = 0) {
         this.verifyLoadingDoesntExist();
         rentCompsPage.addNewRentCompButton.scrollIntoView().should("be.enabled").click();
         rentCompsPage.findRenCompSection.should("be.visible");
@@ -366,6 +656,7 @@ class RentCompsActions extends BaseActions {
         rentCompsPage.searchResultsRows.eq(searchResIndex).click();
         rentCompsPage.submitButton.should("not.be.disabled").click();
         rentCompsPage.newUnitForm.should("be.visible");
+        return this;
     }
 
     /**
@@ -387,19 +678,32 @@ class RentCompsActions extends BaseActions {
         return this;
     }
 
+    /**
+     *
+     * @param {number} index
+     * @param {number, string} numberOfRooms
+     * @param {number, string} numberOfBedrooms
+     * @param {number, string} monthlyRent
+     * @param {string} sourceOfInfo
+     * @param {number, string} numberOfUnits
+     * @returns {RentCompsActions}
+     */
     verifyAddedComparable(index, numberOfRooms, numberOfBedrooms, monthlyRent,
                           sourceOfInfo, numberOfUnits = 0) {
         if (numberOfUnits === 0) {
             rentCompsPage.uncategorizedTable.find(rentCompsPage.getCategoryRowByIndexLocator(index)).then(row => {
                 this.verifyCellText(row, rentCompsPage.categoryRoomsCellsLocator, numberOfRooms);
                 this.verifyCellText(row, rentCompsPage.categoryBedroomsCellsLocator, numberOfBedrooms);
-                this.verifyCellText(row, rentCompsPage.categoryRentsCellsLocator, `$${monthlyRent}`);
-                const rentForCalc = monthlyRent.replace(",", "");
+                const rentTextToBe = typeof monthlyRent === "string" ? `$${monthlyRent}` : `$${numberWithCommas(monthlyRent)}`;
+                this.verifyCellText(row, rentCompsPage.categoryRentsCellsLocator, rentTextToBe);
+                const rentForCalc = typeof monthlyRent === "string" ? monthlyRent.replace(",", "")
+                    : monthlyRent;
                 const perRoom = numberWithCommas(Math.round(rentForCalc / numberOfRooms));
                 this.verifyCellText(row, rentCompsPage.categoryRentPerRoomLocator, `$${perRoom}`);
                 this.verifyCellText(row, rentCompsPage.categorySourceOfInfoLocator, sourceOfInfo);
             });
         }
+        return this;
     }
 
     /**

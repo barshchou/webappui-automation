@@ -1,14 +1,13 @@
-const testData = require("../../../../../fixtures/basicCommInPlaceRentRoll.fixtures.json");
-import homepageActions from "../../../../../actions/base/homepage.actions";
-import navSectionActions from "../../../../../actions/base/navigationSection.actions";
-import comRentRollActions from "../../../../../actions/income/commercial/rentRoll.actions";
+import testData from "../../../../../fixtures/basicCommInPlaceRentRoll.fixtures";
+import Homepage from "../../../../../actions/base/homepage.actions";
+import NavigationSection from "../../../../../actions/base/navigationSection.actions";
+import Income from "../../../../../actions/income/income.manager";
 
 describe("Basic commercial In-Place Rent Roll tests", () => {
     before("Create report and navigate to Commercial In-Place Rent Roll", () => {
         cy.login();
-        homepageActions.createReport(testData.incomeType, testData.address, testData.reportNumber,
-            testData.templateType, testData.conclusionType);
-        navSectionActions.navigateToCommercialInPlaceRentRoll();
+        Homepage.createReport(testData.reportCreationData);
+        NavigationSection.navigateToCommercialInPlaceRentRoll();
         cy.saveLocalStorage();
     });
 
@@ -17,16 +16,16 @@ describe("Basic commercial In-Place Rent Roll tests", () => {
     });
 
     it("ID236: Basis of Rent tooltip", () => {
-        comRentRollActions.verifyBasisOfRentTooltip();
+        Income.Commercial.InPlaceRentRoll.verifyBasisOfRentTooltip();
     });
 
     it("ID237: Rent Basis buttons", () => {
-       comRentRollActions.verifyAllBasisButtons();
+        Income.Commercial.InPlaceRentRoll.verifyAllBasisButtons();
     });
 
     after("Delete report", () => {
         cy.restoreLocalStorage();
-        comRentRollActions.returnToHomePage();
-        homepageActions.deleteReport(testData.reportNumber);
+        Income.Commercial.InPlaceRentRoll.returnToHomePage();
+        Homepage.deleteReport(testData.reportCreationData.reportNumber);
     });
 });

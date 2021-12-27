@@ -17,7 +17,6 @@ jobs:
           record: true
           browser: chrome
           spec: cypress/integration/not_full_reports/**
-          headless: false
         env:
           CYPRESS_USERNAME: ${{ secrets.USERNAME }}
           CYPRESS_PASSWORD: ${{ secrets.PASSWORD }}

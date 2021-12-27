@@ -1,15 +1,14 @@
-const testData = require("../../../../../fixtures/grid.fixtures.json");
-import homepageActions from "../../../../../actions/base/homepage.actions";
-import navigationSection from "../../../../../actions/base/navigationSection.actions";
-import rentRollActions from "../../../../../actions/income/residential/rentRoll.actions";
-import unitGroupsActions from "../../../../../actions/income/residential/unitGroups.actions";
-import summaryActions from "../../../../../actions/property/summary.actions";
+import testData from "../../../../../fixtures/gridResInPlaceRentRoll.fixtures";
+import Homepage from "../../../../../actions/base/homepage.actions";
+import NavigationSection from "../../../../../actions/base/navigationSection.actions";
+import Income from "../../../../../actions/income/income.manager";
+import Property from "../../../../../actions/property/property.manager";
 
 describe("In-Place Rent Roll grid tests", () => {
     before("Login and open In-Place Rent Roll", () => {
         cy.login();
-        homepageActions.createReport();
-        navigationSection.navigateToInPlaceRentRoll();
+        Homepage.createReport(testData.reportCreationData);
+        NavigationSection.navigateToResInPlaceRentRoll();
         cy.saveLocalStorage();
     });
 
@@ -18,36 +17,36 @@ describe("In-Place Rent Roll grid tests", () => {
     });
 
     it("ID17 and ID18: GRID and #col.", () => {
-        rentRollActions.verifyColumnExist(testData.sharpColumn);
+        Income.Residential.InPlaceRentRoll.verifyColumnExist(testData.commonData.sharpColumn);
     });
 
     it(`ID36: Save button, Navigate to other page without saving / with saving the page on the ‘You have unsaved changes.
     Would you like to save before continuing?’ modal window`, () => {
-        rentRollActions.checkCheckboxByLabel(testData.forecastLabel);
-        rentRollActions.goToPropSummaryWithSaveSaveClickFirst();
-        summaryActions.verifyThatPageIsOpened();
-        summaryActions.goBackWithSave();
-        rentRollActions.verifyCheckboxByLabelIsCheckedOrNot(testData.forecastLabel);
-        rentRollActions.checkCheckboxByLabel(testData.forecastLabel, false);
-        rentRollActions.goToPropSummaryWithoutSave();
-        summaryActions.verifyThatPageIsOpened();
-        summaryActions.goBackWithSave();
-        rentRollActions.verifyCheckboxByLabelIsCheckedOrNot(testData.forecastLabel);
-        rentRollActions.checkCheckboxByLabel(testData.forecastLabel, false);
+        Income.Residential.InPlaceRentRoll.checkCheckboxByLabel(testData.commonData.forecastLabel)
+            .goToPropSummaryWithSaveSaveClickFirst();
+        Property.Summary.verifyThatPageIsOpened()
+            .goBackWithSave();
+        Income.Residential.InPlaceRentRoll.verifyCheckboxIsChecked(testData.commonData.forecastLabel)
+            .uncheckCheckboxByLabel(testData.commonData.forecastLabel)
+            .goToPropSummaryWithoutSave();
+        Property.Summary.verifyThatPageIsOpened()
+            .goBackWithSave();
+        Income.Residential.InPlaceRentRoll.verifyCheckboxIsChecked(testData.commonData.forecastLabel)
+            .uncheckCheckboxByLabel(testData.commonData.forecastLabel);
     });
 
     it("ID37: Save & Continue button", () => {
-        rentRollActions.checkCheckboxByLabel(testData.forecastLabel);
-        rentRollActions.clickSaveContinueButton();
-        unitGroupsActions.verifyThatPageIsOpened();
-        unitGroupsActions.goBackWithSave();
-        rentRollActions.checkCheckboxByLabel(testData.forecastLabel, false);
+        Income.Residential.InPlaceRentRoll.checkCheckboxByLabel(testData.commonData.forecastLabel)
+            .clickSaveContinueButton();
+        Income.Residential.UnitGroups.verifyThatPageIsOpened()
+            .goBack();
+        Income.Residential.InPlaceRentRoll.uncheckCheckboxByLabel(testData.commonData.forecastLabel);
     });
 
 
     after("Delete report", () => {
         cy.restoreLocalStorage();
-        rentRollActions.returnToHomePage();
-        homepageActions.deleteReport();
+        Income.Residential.InPlaceRentRoll.returnToHomePage();
+        Homepage.deleteReport(testData.reportCreationData.reportNumber);
     });
 });

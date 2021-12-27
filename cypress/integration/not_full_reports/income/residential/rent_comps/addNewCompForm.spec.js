@@ -1,14 +1,14 @@
-const testData = require("../../../../../fixtures/addNewCompForm.fixtures.json");
-import homepageActions from "../../../../../actions/base/homepage.actions";
-import navSectionActions from "../../../../../actions/base/navigationSection.actions";
-import rentCompsActions from "../../../../../actions/income/residential/rent_comps/rentComps.actions";
-import addCompFormActions from "../../../../../actions/income/residential/rent_comps/addCompForm.actions";
+import testData from "../../../../../fixtures/addNewCompForm.fixtures";
+import {commonData} from "../../../../../fixtures/addNewCompForm.fixtures";
+import Homepage from "../../../../../actions/base/homepage.actions";
+import NavigationSection from "../../../../../actions/base/navigationSection.actions";
+import RentComps from "../../../../../actions/income/residential/rent_comps/rentComps.manager";
 
 describe("Add new comparable form tests", () => {
     before("Login and open rent comps page", () => {
         cy.login();
-        homepageActions.createReport();
-        navSectionActions.navigateToRentComps();
+        Homepage.createReport(testData.reportCreationData);
+        NavigationSection.navigateToRentComps();
         cy.saveLocalStorage();
     });
 
@@ -17,148 +17,148 @@ describe("Add new comparable form tests", () => {
     });
 
     it("ID67: Button: Add New Rent Comp > Property Search wizard opened > Select Address", () => {
-        rentCompsActions.openAddNewComparableForm();
-        addCompFormActions.clickCloseButton();
+        RentComps.BaseActions.openAddNewComparableForm(commonData().searchAddress);
+        RentComps.AddForm.clickCloseButton();
     });
 
     it("ID68: Address, Neighborhood, Block, Lot are at the top of the form", () => {
-        rentCompsActions.openAddNewComparableForm();
-        addCompFormActions.verifyPropAddressExist();
-        addCompFormActions.clickCloseButton();
+        RentComps.BaseActions.openAddNewComparableForm(commonData().searchAddress);
+        RentComps.AddForm.verifyPropAddressExist()
+            .clickCloseButton();
     });
 
     it("ID69:  Unit Number* text field", () => {
-        rentCompsActions.openAddNewComparableForm();
-        addCompFormActions.verifyUnitNumbFieldName();
-        addCompFormActions.enterUnitNumber(testData.unitNumber);
-        addCompFormActions.clickCloseButton();
+        RentComps.BaseActions.openAddNewComparableForm(commonData().searchAddress);
+        RentComps.AddForm.verifyUnitNumbFieldName()
+            .enterUnitNumber(commonData().unitNumber)
+            .clickCloseButton();
     });
 
     it("ID70: Unit Type dropdown", () => {
-        rentCompsActions.openAddNewComparableForm();
-        addCompFormActions.selectListUnitTypes(testData.unitTypes);
-        addCompFormActions.clickCloseButton();
+        RentComps.BaseActions.openAddNewComparableForm(commonData().searchAddress);
+        RentComps.AddForm.selectListUnitTypes(commonData().unitTypes)
+            .clickCloseButton();
     });
 
     it("ID71: Monthly Rent* text field", () => {
-        rentCompsActions.openAddNewComparableForm();
-        addCompFormActions.verifyMonthRentFieldName();
-        addCompFormActions.enterMonthlyRent(testData.monthlyRent);
-        addCompFormActions.clickCloseButton();
+        RentComps.BaseActions.openAddNewComparableForm(commonData().searchAddress);
+        RentComps.AddForm.verifyMonthRentFieldName()
+            .enterMonthlyRent(commonData().monthlyRent)
+            .clickCloseButton();
     });
 
     it("ID72: Date of Value* date picker in the text field", () => {
-        rentCompsActions.openAddNewComparableForm();
-        addCompFormActions.enterDate();
-        addCompFormActions.clearDateInput();
-        addCompFormActions.chooseDayOfCurrentMonthInPicker();
-        addCompFormActions.clickCloseButton();
+        RentComps.BaseActions.openAddNewComparableForm(commonData().searchAddress);
+        RentComps.AddForm.enterDate()
+            .clearDateInput()
+            .chooseDayOfCurrentMonthInPicker()
+            .clickCloseButton();
     });
 
     it("ID73: Unit Square Footage text field", () => {
-        rentCompsActions.openAddNewComparableForm();
-        addCompFormActions.verifySquareFootageFieldName();
-        addCompFormActions.enterSquareFootage(testData.squareFootage);
-        addCompFormActions.clickCloseButton();
+        RentComps.BaseActions.openAddNewComparableForm(commonData().searchAddress);
+        RentComps.AddForm.verifySquareFootageFieldName()
+            .enterSquareFootage(commonData().squareFootage)
+            .clickCloseButton();
     });
 
     it("ID74: Source of Information dropdown", () => {
-        rentCompsActions.openAddNewComparableForm();
-        addCompFormActions.selectListSourceOfInfoAndVerify(testData.infoSources);
-        addCompFormActions.clickCloseButton();
+        RentComps.BaseActions.openAddNewComparableForm(commonData().searchAddress);
+        RentComps.AddForm.selectListSourceOfInfoAndVerify(commonData().infoSources)
+            .clickCloseButton();
     });
 
     it("ID75: Number of Bedrooms* text field", () => {
-        rentCompsActions.openAddNewComparableForm();
-        addCompFormActions.verifyNumberOfBedroomsFiledName();
-        addCompFormActions.enterNumberOfBedrooms(testData.numberOfBedrooms);
-        addCompFormActions.clickCloseButton();
+        RentComps.BaseActions.openAddNewComparableForm(commonData().searchAddress);
+        RentComps.AddForm.verifyNumberOfBedroomsFiledName()
+            .enterNumberOfBedrooms(commonData().numberOfBedrooms)
+            .clickCloseButton();
     });
 
     it("ID76: Source Name text field", () => {
-        rentCompsActions.openAddNewComparableForm();
-        addCompFormActions.selectSourceOfInfoAndVerify(testData.infoSources[1]);
-        addCompFormActions.enterSourceName(testData.sourceName);
-        addCompFormActions.selectSourceOfInfoAndVerify(testData.infoSources[0]);
-        addCompFormActions.verifySourceNameNotExist();
-        addCompFormActions.selectSourceOfInfoAndVerify(testData.infoSources[2]);
-        addCompFormActions.enterSourceName(testData.sourceName);
-        addCompFormActions.clickCloseButton();
+        RentComps.BaseActions.openAddNewComparableForm(commonData().searchAddress);
+        RentComps.AddForm.selectSourceOfInfoAndVerify(commonData().infoSources[1])
+            .enterSourceName(testData.id76.sourceName)
+            .selectSourceOfInfoAndVerify(commonData().infoSources[0])
+            .verifySourceNameNotExist()
+            .selectSourceOfInfoAndVerify(commonData().infoSources[2])
+            .enterSourceName(testData.id76.sourceName)
+            .clickCloseButton();
     });
 
     it("ID77: Source URL text field", () => {
-        rentCompsActions.openAddNewComparableForm();
-        addCompFormActions.verifySourceUrlNotExist();
-        addCompFormActions.selectSourceOfInfoAndVerify(testData.infoSources[1]);
-        addCompFormActions.enterSourceUrl(testData.sourceUrl);
-        addCompFormActions.selectSourceOfInfoAndVerify(testData.infoSources[0]);
-        addCompFormActions.verifySourceUrlNotExist();
-        addCompFormActions.selectSourceOfInfoAndVerify(testData.infoSources[2]);
-        addCompFormActions.verifySourceUrlNotExist();
-        addCompFormActions.clickCloseButton();
+        RentComps.BaseActions.openAddNewComparableForm(commonData().searchAddress);
+        RentComps.AddForm.verifySourceUrlNotExist()
+            .selectSourceOfInfoAndVerify(commonData().infoSources[1])
+            .enterSourceUrl(testData.id77.sourceUrl)
+            .selectSourceOfInfoAndVerify(commonData().infoSources[0])
+            .verifySourceUrlNotExist()
+            .selectSourceOfInfoAndVerify(commonData().infoSources[2])
+            .verifySourceUrlNotExist()
+            .clickCloseButton();
     });
 
     it("ID78: Number of Rooms* text field", () => {
-        rentCompsActions.openAddNewComparableForm();
-        addCompFormActions.verifyNumberOfRoomsFieldName();
-        addCompFormActions.enterNumberOfRooms(testData.numberOfRooms);
-        addCompFormActions.clickCloseButton();
+        RentComps.BaseActions.openAddNewComparableForm(commonData().searchAddress);
+        RentComps.AddForm.verifyNumberOfRoomsFieldName()
+            .enterNumberOfRooms(commonData().numberOfRooms)
+            .clickCloseButton();
     });
 
     it("ID79: Number of Bathrooms", () => {
-        rentCompsActions.openAddNewComparableForm();
-        addCompFormActions.verifyNumberOfBathFieldName();
-        addCompFormActions.enterNumberOfBathrooms(testData.numberOfBathOk);
-        addCompFormActions.enterNumberOfBathrooms(testData.numberOfBathWrong);
-        addCompFormActions.clickCloseButton();
+        RentComps.BaseActions.openAddNewComparableForm(commonData().searchAddress);
+        RentComps.AddForm.verifyNumberOfBathFieldName()
+            .enterNumberOfBathrooms(testData.id79.numberOfBathOk)
+            .enterNumberOfBathrooms(testData.id79.numberOfBathWrong)
+            .clickCloseButton();
     });
 
     it("ID80: Internal Notes text field", () => {
-        rentCompsActions.openAddNewComparableForm();
-        addCompFormActions.enterInternalNotes(testData.internalNotes);
-        addCompFormActions.clickCloseButton();
+        RentComps.BaseActions.openAddNewComparableForm(commonData().searchAddress);
+        RentComps.AddForm.enterInternalNotes(testData.id80.internalNotes)
+            .clickCloseButton();
     });
 
     it("ID81: Unit Amenities dropdown", () => {
-        rentCompsActions.openAddNewComparableForm();
-        addCompFormActions.verifyUnitAmenitiesFieldName();
-        addCompFormActions.clickUnitAmenitiesDropdown();
-        addCompFormActions.checkUncheckListOfCheckboxesByQa(testData.amenitiesQaAttr);
-        addCompFormActions.checkUncheckListOfCheckboxesByQa(testData.amenitiesQaAttr, false);
-        addCompFormActions.clickUnitAmenitiesDropdown();
-        addCompFormActions.clickCloseButton();
+        RentComps.BaseActions.openAddNewComparableForm(commonData().searchAddress);
+        RentComps.AddForm.verifyUnitAmenitiesFieldName()
+            .clickUnitAmenitiesDropdown()
+            .checkListOfCheckboxesByQa(commonData().amenitiesQaAttr)
+            .uncheckListOfCheckboxesByQa(commonData().amenitiesQaAttr)
+            .clickUnitAmenitiesDropdown()
+            .clickCloseButton();
     });
 
     it.skip("ID82: Back to Results link", () => {
-        rentCompsActions.openAddNewComparableForm();
-        addCompFormActions.clickCancelButton();
-        rentCompsActions.verifySearchResultIsShown();
-        addCompFormActions.clickCloseButton();
+        RentComps.BaseActions.openAddNewComparableForm(commonData().searchAddress);
+        RentComps.AddForm.clickCancelButton();
+        RentComps.BaseActions.verifySearchResultIsShown();
+        RentComps.AddForm.clickCloseButton();
     });
 
     it("ID83:  Add Unit button", () => {
-        rentCompsActions.openAddNewComparableForm();
-        addCompFormActions.enterUnitNumber(testData.unitNumber);
-        addCompFormActions.selectUnitTypeAndVerify(testData.unitTypes[0]);
-        addCompFormActions.enterMonthlyRent(testData.monthlyRent);
-        addCompFormActions.enterDate();
-        addCompFormActions.enterSquareFootage(testData.squareFootage);
-        addCompFormActions.selectSourceOfInfoAndVerify(testData.infoSources[0]);
-        addCompFormActions.enterNumberOfBedrooms(testData.numberOfBedrooms);
-        addCompFormActions.enterNumberOfRooms(testData.numberOfRooms);
-        addCompFormActions.enterNumberOfBathrooms(testData.numberOfBathOk);
-        addCompFormActions.clickUnitAmenitiesDropdown();
-        addCompFormActions.checkUncheckListOfCheckboxesByQa(testData.amenitiesQaAttr);
-        addCompFormActions.clickUnitAmenitiesDropdown();
-        addCompFormActions.clickSubmitCompButton();
-        rentCompsActions.verifyAddedComparable(0, testData.numberOfRooms, testData.numberOfBedrooms,
-            testData.monthlyRent, testData.sourceOfInfoTexts[0]);
+        RentComps.BaseActions.openAddNewComparableForm(commonData().searchAddress);
+        RentComps.AddForm.enterUnitNumber(commonData().unitNumber)
+            .selectUnitTypeAndVerify(commonData().unitTypes[0])
+            .enterMonthlyRent(commonData().monthlyRent)
+            .enterDate()
+            .enterSquareFootage(commonData().squareFootage)
+            .selectSourceOfInfoAndVerify(commonData().infoSources[0])
+            .enterNumberOfBedrooms(commonData().numberOfBedrooms)
+            .enterNumberOfRooms(commonData().numberOfRooms)
+            .enterNumberOfBathrooms(testData.id79.numberOfBathOk)
+            .clickUnitAmenitiesDropdown()
+            .checkListOfCheckboxesByQa(commonData().amenitiesQaAttr)
+            .clickUnitAmenitiesDropdown()
+            .clickSubmitCompButton();
+        RentComps.BaseActions.verifyAddedComparable(0, commonData().numberOfRooms, commonData().numberOfBedrooms,
+            commonData().monthlyRent, commonData().sourceOfInfoSubject);
         cy.reload();
     });
 
     after("Delete report", () => {
         cy.restoreLocalStorage();
-        rentCompsActions.returnToHomePage();
-        homepageActions.deleteReport();
+        RentComps.BaseActions.returnToHomePage();
+        Homepage.deleteReport(testData.reportCreationData.reportNumber);
     });
 });

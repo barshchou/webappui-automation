@@ -3,8 +3,14 @@ import BaseActions from "../../base/base.actions";
 import {numberWithCommas} from "../../../../utils/numbers.utils";
 
 class UnitGroupsActions extends BaseActions {
+
+    /**
+     *
+     * @returns {UnitGroupsActions}
+     */
     verifyThatPageIsOpened() {
         unitGroupsPage.pageHeaderSection.should("be.visible");
+        return this;
     }
 
     /**
