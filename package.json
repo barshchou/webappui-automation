@@ -12,7 +12,6 @@
     "cy:chrome_prod_api": "npx cypress run --browser chrome --env url=prod",
     "cy:full_prod_api": "npx cypress run --spec \"cypress/integration/full_reports/**\" --env url=prod",
     "cy:full_chrome_headed_prod_api": "npx cypress run --spec \"cypress/integration/full_reports/**\" --browser chrome --headed --env url=prod",
-    "cy:record_run": "npx cypress run --record --key af194831-c708-498f-b4c1-376e72ecb5c3",
     "cy:not_full_chrome_headed": "npx cypress run --spec \"cypress/integration/not_full_reports/**\" --browser chrome --headed"
   },
   "repository": {

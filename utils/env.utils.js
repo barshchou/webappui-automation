@@ -1,3 +1,5 @@
+import {cutLastLetter} from "./string.utils";
+
 export const getEnvUrl = () => {
     let envUrl;
     switch (Cypress.env("url")) {
@@ -12,6 +14,13 @@ export const getEnvUrl = () => {
     }
     if (Cypress.env("customEnv")) {
         envUrl = Cypress.env("customEnv");
+        if (!isCorrectLink(envUrl)) {
+            envUrl = cutLastLetter(envUrl);
+        }
     }
     return envUrl;
+};
+
+const isCorrectLink = (link) => {
+    return link.endsWith("/");
 };
