@@ -1,4 +1,5 @@
 import "cypress-file-upload";
+import "cypress-localstorage-commands";
 import {getEnvUrl} from "../../utils/env.utils";
 
 Cypress.Commands.add("loginByApi", (url ) => {
@@ -35,20 +36,6 @@ Cypress.Commands.add("login", () => {
         default:
             cy.loginByApi(envUrl);
     }
-});
-
-let LOCAL_STORAGE_MEMORY = {};
-
-Cypress.Commands.add("saveLocalStorage", () => {
-    Object.keys(localStorage).forEach(key => {
-        LOCAL_STORAGE_MEMORY[key] = localStorage[key];
-    });
-});
-
-Cypress.Commands.add("restoreLocalStorage", () => {
-    Object.keys(LOCAL_STORAGE_MEMORY).forEach(key => {
-        localStorage.setItem(key, LOCAL_STORAGE_MEMORY[key]);
-    });
 });
 
 
