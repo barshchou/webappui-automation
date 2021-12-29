@@ -19,9 +19,9 @@ const id3Fixture = () => {
     return {
         numberOfUnits: 0,
         numberOfUnitsToChange: 1,
-        csvFileName: "Rent_Roll_CSV.csv",
+        csvFileName: "not_full_reports/Rent_Roll_CSV.csv",
         csvNumberOfUnits: 23,
-        xlsxFileName: "Rent_Roll_XLSX.xlsx",
+        xlsxFileName: "not_full_reports/Rent_Roll_XLSX.xlsx",
         rentType: "Market Rate",
     };
 };

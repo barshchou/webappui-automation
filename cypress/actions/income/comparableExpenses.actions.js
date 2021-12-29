@@ -55,7 +55,7 @@ class ComparableExpensesActions extends BaseActions {
 
     /**
      *
-     * @param {string, number} year
+     * @param {string | number} year
      * @param index
      * @returns {ComparableExpensesActions}
      */
@@ -84,7 +84,7 @@ class ComparableExpensesActions extends BaseActions {
 
     /**
      *
-     * @param {number, string} value
+     * @param {number | string} value
      * @param {number} index
      * @returns {ComparableExpensesActions}
      */
@@ -98,7 +98,7 @@ class ComparableExpensesActions extends BaseActions {
 
     /**
      *
-     * @param {number, string} value
+     * @param {number | string} value
      * @param {number} index
      * @returns {ComparableExpensesActions}
      */
@@ -112,7 +112,7 @@ class ComparableExpensesActions extends BaseActions {
 
     /**
      *
-     * @param {number, string} value
+     * @param {number | string} value
      * @param {number} index
      * @returns {ComparableExpensesActions}
      */
@@ -127,7 +127,7 @@ class ComparableExpensesActions extends BaseActions {
 
     /**
      *
-     * @param {number, string} value
+     * @param {number | string} value
      * @param {number} index
      * @returns {ComparableExpensesActions}
      */
@@ -142,7 +142,7 @@ class ComparableExpensesActions extends BaseActions {
 
     /**
      *
-     * @param {number, string} value
+     * @param {number | string} value
      * @param {number} index
      * @returns {ComparableExpensesActions}
      */
@@ -157,7 +157,7 @@ class ComparableExpensesActions extends BaseActions {
 
     /**
      *
-     * @param {number, string} value
+     * @param {number | string} value
      * @param {number} index
      * @returns {ComparableExpensesActions}
      */
@@ -172,7 +172,7 @@ class ComparableExpensesActions extends BaseActions {
 
     /**
      *
-     * @param {string, number} value
+     * @param {string | number} value
      * @param {number} index
      * @returns {ComparableExpensesActions}
      */
@@ -187,7 +187,7 @@ class ComparableExpensesActions extends BaseActions {
 
     /**
      *
-     * @param {string, number} value
+     * @param {string | number} value
      * @param {number} index
      * @returns {ComparableExpensesActions}
      */

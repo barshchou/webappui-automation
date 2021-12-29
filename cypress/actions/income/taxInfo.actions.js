@@ -17,7 +17,7 @@ class TaxInfoActions extends BaseActions {
 
     /**
      *
-     * @param {number, string} value
+     * @param {number | string} value
      * @returns {TaxInfoActions}
      */
     enterTaxableAssessedLandValue(value) {
@@ -28,7 +28,7 @@ class TaxInfoActions extends BaseActions {
 
     /**
      *
-     * @param {string, number} value
+     * @param {string | number} value
      * @returns {TaxInfoActions}
      */
     enterTaxableAssessedBuildingValue(value) {
@@ -81,7 +81,7 @@ class TaxInfoActions extends BaseActions {
 
     /**
      *
-     * @param {string, number} value
+     * @param {string | number} value
      * @param {number} index
      * @returns {TaxInfoActions}
      */
@@ -92,7 +92,7 @@ class TaxInfoActions extends BaseActions {
 
     /**
      *
-     * @param {string, number} value
+     * @param {string | number} value
      * @param {number} index
      * @returns {TaxInfoActions}
      */
@@ -136,7 +136,7 @@ class TaxInfoActions extends BaseActions {
 
     /**
      *
-     * @param {string, number} textToBe
+     * @param {string | number} textToBe
      * @returns {TaxInfoActions}
      */
     verifyTaxRateDropdownText(textToBe) {
@@ -170,7 +170,7 @@ class TaxInfoActions extends BaseActions {
 
     /**
      *
-     * @param {number, string} rateToBe
+     * @param {number | string} rateToBe
      * @returns {TaxInfoActions}
      */
     verifyTaxRateValueCell(rateToBe) {
@@ -180,7 +180,7 @@ class TaxInfoActions extends BaseActions {
 
     /**
      *
-     * @param {number, string} taxRate
+     * @param {number | string} taxRate
      * @returns {TaxInfoActions}
      */
     verifyTaxLiabilityTotalCell(taxRate) {
@@ -194,7 +194,7 @@ class TaxInfoActions extends BaseActions {
 
     /**
      *
-     * @param {string, number} textToBe
+     * @param {string | number} textToBe
      * @returns {TaxInfoActions}
      */
     verifySFOrUnitsNumberCell(textToBe) {
@@ -220,8 +220,8 @@ class TaxInfoActions extends BaseActions {
 
     /**
      *
-     * @param {string, number} taxRate
-     * @param {string, number} sfOrUnitsNumber
+     * @param {string | number} taxRate
+     * @param {string | number} sfOrUnitsNumber
      * @returns {TaxInfoActions}
      */
     verifyTaxLiabilityTable(taxRate, sfOrUnitsNumber) {
@@ -301,7 +301,7 @@ class TaxInfoActions extends BaseActions {
 
     /**
      *
-     * @param {number, string} year
+     * @param {number | string} year
      * @returns {TaxInfoActions}
      */
     enterNewTaxCompYearBuilt(year) {
@@ -311,7 +311,7 @@ class TaxInfoActions extends BaseActions {
 
     /**
      *
-     * @param {number, string} basisValue
+     * @param {number | string} basisValue
      * @returns {TaxInfoActions}
      */
     enterNewTaxCompBasis(basisValue) {
@@ -321,7 +321,7 @@ class TaxInfoActions extends BaseActions {
 
     /**
      *
-     * @param {number, string} taxesPerBasis
+     * @param {number | string} taxesPerBasis
      * @returns {TaxInfoActions}
      */
     enterTaxesPerBasis(taxesPerBasis) {
@@ -471,7 +471,7 @@ class TaxInfoActions extends BaseActions {
 
     /**
      *
-     * @param {number, string} value
+     * @param {number | string} value
      * @returns {TaxInfoActions}
      */
     enterConcludedLiabilityPerBasis(value) {

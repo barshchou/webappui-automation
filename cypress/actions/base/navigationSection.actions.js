@@ -190,6 +190,16 @@ class NavigationSectionActions extends BaseActions {
 
     /**
      *
+     * @returns {NavigationSectionActions}
+     */
+    openRentCompsInResidential() {
+        this.clickRentCompsButton()
+            .clickYesButton();
+        return this;
+    }
+
+    /**
+     *
      * @param {boolean} isWithSave
      * @returns {NavigationSectionActions}
      */

@@ -227,7 +227,7 @@ class ZoningActions extends BaseActions {
     /**
      *
      * @param {string} regulationName
-     * @param {string, number} actualValue
+     * @param {string | number} actualValue
      * @return {ZoningActions}
      */
     enterValueByRegName(regulationName, actualValue) {
@@ -239,7 +239,7 @@ class ZoningActions extends BaseActions {
     /**
      *
      * @param {string} regulationName
-     * @param {string, number} requiredValue
+     * @param {string | number} requiredValue
      * @return {ZoningActions}
      */
     enterRequiredValueByRegName(regulationName, requiredValue) {
@@ -322,7 +322,7 @@ class ZoningActions extends BaseActions {
 
     /**
      *
-     * @param {number, string} unitsNumber
+     * @param {number | string} unitsNumber
      * @return {ZoningActions}
      */
     verifyParkingResidentialUnits(unitsNumber) {
@@ -332,7 +332,7 @@ class ZoningActions extends BaseActions {
 
     /**
      *
-     * @param {number, string} spacesToBe
+     * @param {number | string} spacesToBe
      * @return {ZoningActions}
      */
     verifyActualParkingSpaces(spacesToBe) {
@@ -342,7 +342,7 @@ class ZoningActions extends BaseActions {
 
     /**
      *
-     * @param {string, number} number
+     * @param {string | number} number
      * @return {ZoningActions}
      */
     enterRequiredParkingSpaces(number) {

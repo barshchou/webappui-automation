@@ -32,7 +32,7 @@ class InPlaceRentRollActions extends BaseActions {
 
     /**
      *
-     * @param {number, string} unitsNumber
+     * @param {number | string} unitsNumber
      * @returns {InPlaceRentRollActions}
      */
     verifyNumberOfResidentialUnits(unitsNumber) {
@@ -42,7 +42,7 @@ class InPlaceRentRollActions extends BaseActions {
 
     /**
      *
-     * @param {string, number} unitsNumber
+     * @param {string | number} unitsNumber
      * @returns {InPlaceRentRollActions}
      */
     verifyNumberOfIsInspectedRows(unitsNumber) {
@@ -163,7 +163,7 @@ class InPlaceRentRollActions extends BaseActions {
      */
     checkCheckboxByLabel(label) {
         rentRollPage.getCheckboxByLabel(label).scrollIntoView().should("be.enabled")
-            .check().should("be.checked");
+            .check().should("have.value", "true");
         return this;
     }
 
@@ -174,7 +174,7 @@ class InPlaceRentRollActions extends BaseActions {
      */
     uncheckCheckboxByLabel(label) {
         rentRollPage.getCheckboxByLabel(label).scrollIntoView().should("be.enabled")
-            .uncheck().should("not.be.checked");
+            .uncheck().should("have.value", "false");
         return this;
     }
 
@@ -298,7 +298,7 @@ class InPlaceRentRollActions extends BaseActions {
 
     /**
      *
-     * @param {string, number} number
+     * @param {string | number} number
      * @returns {InPlaceRentRollActions}
      */
     checkIsInspectedByRowNumber(number) {
@@ -320,7 +320,7 @@ class InPlaceRentRollActions extends BaseActions {
 
     /**
      *
-     * @param {string, number} numberOfUnits
+     * @param {string | number} numberOfUnits
      * @returns {InPlaceRentRollActions}
      */
     enterUnitNumbersByOrderToAll(numberOfUnits) {
@@ -334,7 +334,7 @@ class InPlaceRentRollActions extends BaseActions {
 
     /**
      *
-     * @param {string, number} value
+     * @param {string | number} value
      * @param {number} number
      * @returns {InPlaceRentRollActions}
      */
@@ -347,7 +347,7 @@ class InPlaceRentRollActions extends BaseActions {
 
     /**
      *
-     * @param {string, number} roomsNumber
+     * @param {string | number} roomsNumber
      * @param {number} numberOfUnits
      * @returns {InPlaceRentRollActions}
      */
@@ -360,11 +360,11 @@ class InPlaceRentRollActions extends BaseActions {
 
     /**
      *
-     * @param {string, number} bedroomsNumber
+     * @param {string | number} bedroomsNumber
      * @param {number} rowNumber
      * @returns {InPlaceRentRollActions}
      */
-    enterBedroomsNumberByRowNumber(bedroomsNumber, rowNumber) {
+    enterBedroomsNumberByRowNumber(bedroomsNumber, rowNumber = 0) {
         rentRollPage.bedroomsCells.eq(rowNumber).dblclick();
         rentRollPage.textAreaToInput.clear().type(bedroomsNumber).type("{enter}");
         rentRollPage.bedroomsCells.eq(rowNumber).should("have.text", bedroomsNumber);
@@ -373,7 +373,7 @@ class InPlaceRentRollActions extends BaseActions {
 
     /**
      *
-     * @param {string, number} bedroomsNumber
+     * @param {string | number} bedroomsNumber
      * @param {number} numberOfUnits
      * @returns {InPlaceRentRollActions}
      */

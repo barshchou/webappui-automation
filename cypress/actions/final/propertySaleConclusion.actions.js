@@ -6,7 +6,7 @@ class PropertySaleConclusionActions extends BaseActions {
 
     /**
      *
-     * @param {number, string} price
+     * @param {number | string} price
      * @returns {PropertySaleConclusionActions}
      */
     verifyContractPrice(price) {
@@ -27,7 +27,7 @@ class PropertySaleConclusionActions extends BaseActions {
 
     /**
      *
-     * @param {string, number} asIsMarketFinalValue
+     * @param {string | number} asIsMarketFinalValue
      * @returns {PropertySaleConclusionActions}
      */
     verifyContractChangeInValue(asIsMarketFinalValue) {

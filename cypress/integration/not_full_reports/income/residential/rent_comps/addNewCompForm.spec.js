@@ -1,5 +1,5 @@
-import testData from "../../../../../fixtures/addNewCompForm.fixtures";
-import {commonData} from "../../../../../fixtures/addNewCompForm.fixtures";
+import testData from "../../../../../fixtures/not_full_reports/income/residential/rent_comps/addNewCompForm.fixtures";
+import {commonData} from "../../../../../fixtures/not_full_reports/income/residential/rent_comps/addNewCompForm.fixtures";
 import Homepage from "../../../../../actions/base/homepage.actions";
 import NavigationSection from "../../../../../actions/base/navigationSection.actions";
 import RentComps from "../../../../../actions/income/residential/rent_comps/rentComps.manager";

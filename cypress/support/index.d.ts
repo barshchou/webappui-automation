@@ -22,19 +22,5 @@ declare namespace Cypress {
          * cy.login()
          */
         login(): Chainable<any>
-
-        /**
-         * Save application's local storage to LOCAL_STORAGE_MEMORY variable
-         * @example
-         * cy.saveLocalStorage()
-         */
-        saveLocalStorage(): Chainable<any>
-
-        /**
-         * Restore application's local storage from LOCAL_STORAGE_MEMORY variable
-         * @example
-         * cy.restoreLocalStorage()
-         */
-        restoreLocalStorage(): Chainable<any>
     }
 }

@@ -27,7 +27,7 @@ class CommercialUnitsActions extends BaseActions {
 
     /**
      *
-     * @param {number, string} squareFeet
+     * @param {number | string} squareFeet
      * @param {number} index
      * @returns {CommercialUnitsActions}
      */
