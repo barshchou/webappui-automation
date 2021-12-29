@@ -68,6 +68,34 @@ class RentCompsPage extends BasePage{
     getStateByName(name) {return cy.get(`[data-qa='search.locationIdentifier-${name}-select-option']`);}
     get propertyIdentifierInput() {return cy.get("*[name='search.propertyIdentifier']");}
     getBedroomTableByNumber(bedroomsNumber) {return cy.get(`[data-qa='bedrooms_${bedroomsNumber}']`);}
+    getSelectButtonByAddress(address) {return cy.xpath(`//*[text()='${address}']//following-sibling::button`);}
+    getSelectedButtonByAddress(address) {return cy.xpath(`//*[text()='${address}']//following-sibling::button[contains(@data-qa, 'selected-btn')]`);}
+    get editButtonLocator() {return "[data-qa=col-edit] button";}
+    get removeButtonLocator() {return "[data-qa=col-remove] button";}
+    get moveCellLocator() {return "[data-qa=drag-cell] i";}
+    get indexCellLocator() {return "[data-qa=col-index]";}
+    get unitAddressLocator() {return "[data-qa=col-unitAddress]";}
+    get uncategorizedMinCell() {return cy.xpath("//*[@data-qa='uncategorized']//descendant::td[.='Min']//following-sibling::td[1]");}
+    get uncategorizedAverageCell() {return cy.xpath("//*[@data-qa='uncategorized']//descendant::td[.='Average']//following-sibling::td[1]");}
+    get uncategorizedMaxCell() {return cy.xpath("//*[@data-qa='uncategorized']//descendant::td[.='Max']//following-sibling::td[1]");}
+    get rentRollSummary() {return cy.contains("Rent Roll Summary");}
+    get uncategorizedSubjectMin() {return cy.get("[data-qa=rent-comps-type-uncategorized] [data-qa='Min:-cell']");}
+    get uncategorizedSubjectAverage() {return cy.get("[data-qa=rent-comps-type-uncategorized] [data-qa='Avg:-cell']");}
+    get uncategorizedSubjectMax() {return cy.get("[data-qa=rent-comps-type-uncategorized] [data-qa='Max:-cell']");}
+    get uncategorizedSubjectColumn() {return cy.get("[data-qa=rent-comps-type-uncategorized] [data-qa=computed-panel] [data-qa='0-column']");}
+    get displaySquareFootageForCompsCheckbox() {return cy.get("[data-qa=showSFForComps] input");}
+    get squareFootageCellsLocator() {return "[data-qa=col-sqft]";}
+    get rentPerSfCellsLocator() {return "[data-qa=col-rentPerSf]";}
+    get uncategorizedDevForecast() {return cy.get("[data-qa=rent-comps-type-uncategorized] [data-qa=computed-panel] [data-qa='1-column']");}
+    get bathroomsCellsLocator() {return "[data-qa=col-bathrooms]";}
+    getBedroomsTableHeader(bedroomsNumber) {return cy.get(`[data-qa='rent-comps-type-bedrooms_${bedroomsNumber}'] > p`);}
+    get uncategorizedTableHeader() {return cy.get("[data-qa=rent-comps-type-uncategorized] > p");}
+    getBedroomSubjectColumn(bedroomsNumber) {
+        return cy.get(`[data-qa=rent-comps-type-bedrooms_${bedroomsNumber}] [data-qa=computed-panel] [data-qa='0-column']`);
+    }
+    getBedroomMarketRateSummary(bedroomsNumber) {
+        return cy.xpath(`//*[@data-qa='rent-comps-type-bedrooms_${bedroomsNumber}']//descendant::p[.='Rent Roll Market Rate Summary']`);
+    }
 }
 
 export default new RentCompsPage();

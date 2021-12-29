@@ -222,7 +222,7 @@ class CommercialRentRollActions extends BaseActions {
 
     /**
      *
-     * @param {number, string} value
+     * @param {number | string} value
      * @param {number} rowNumber
      * @returns {CommercialRentRollActions}
      */
@@ -263,7 +263,7 @@ class CommercialRentRollActions extends BaseActions {
 
     /**
      *
-     * @param {number, string} monthlyRent
+     * @param {number | string} monthlyRent
      * @param {number} rowNumber
      * @returns {CommercialRentRollActions}
      */
@@ -300,7 +300,7 @@ class CommercialRentRollActions extends BaseActions {
 
     /**
      *
-     * @param {number, string} annualRent
+     * @param {number | string} annualRent
      * @param {number} rowNumber
      * @returns {CommercialRentRollActions}
      */

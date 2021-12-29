@@ -1,5 +1,5 @@
-import testData from "../../../../../fixtures/gridCommInPlaceRentRoll.fixtures";
-import {commonData} from "../../../../../fixtures/gridCommInPlaceRentRoll.fixtures";
+import testData from "../../../../../fixtures/not_full_reports/income/commercial/in_place_rent_roll/gridCommInPlaceRentRoll.fixtures";
+import {commonData} from "../../../../../fixtures/not_full_reports/income/commercial/in_place_rent_roll/gridCommInPlaceRentRoll.fixtures";
 import Homepage from "../../../../../actions/base/homepage.actions";
 import NavigationSection from "../../../../../actions/base/navigationSection.actions";
 import Income from "../../../../../actions/income/income.manager";

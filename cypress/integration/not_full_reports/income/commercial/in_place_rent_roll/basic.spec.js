@@ -1,4 +1,4 @@
-import testData from "../../../../../fixtures/basicCommInPlaceRentRoll.fixtures";
+import testData from "../../../../../fixtures/not_full_reports/income/commercial/in_place_rent_roll/basicCommInPlaceRentRoll.fixtures";
 import Homepage from "../../../../../actions/base/homepage.actions";
 import NavigationSection from "../../../../../actions/base/navigationSection.actions";
 import Income from "../../../../../actions/income/income.manager";

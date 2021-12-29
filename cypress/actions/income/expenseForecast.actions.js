@@ -29,7 +29,7 @@ class ExpenseForecastActions extends BaseActions {
 
     /**
      *
-     * @param {string, number} compsValues
+     * @param {string | number} compsValues
      * @returns {number}
      */
     getAverageValue(...compsValues) {
@@ -240,7 +240,7 @@ class ExpenseForecastActions extends BaseActions {
 
     /**
      *
-     * @param {string, number} value
+     * @param {string | number} value
      * @returns {ExpenseForecastActions}
      */
     enterPercentOfEgi(value) {

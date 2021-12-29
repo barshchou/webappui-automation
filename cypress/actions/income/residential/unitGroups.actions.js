@@ -15,8 +15,8 @@ class UnitGroupsActions extends BaseActions {
 
     /**
      *
-     * @param {number, string} bedroomsNumber
-     * @param {number, string} numberOfUnits
+     * @param {number | string} bedroomsNumber
+     * @param {number | string} numberOfUnits
      * @returns {UnitGroupsActions}
      */
     verifyRowsNumberEqualBedroomsNonComp(bedroomsNumber, numberOfUnits) {
@@ -59,7 +59,7 @@ class UnitGroupsActions extends BaseActions {
     /**
      *
      * @param {string} type
-     * @param {string, number} avgSF
+     * @param {string | number} avgSF
      * @returns {UnitGroupsActions}
      */
     enterAvgSFByUnitTypeValue(type, avgSF) {

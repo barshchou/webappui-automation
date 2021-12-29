@@ -17,7 +17,7 @@ class ExpenseHistoryActions extends BaseActions{
 
     /**
      *
-     * @param {string, number} yearToBe
+     * @param {string | number} yearToBe
      * @returns {ExpenseHistoryActions}
      */
     verifyExpenseYear(yearToBe) {
@@ -46,7 +46,7 @@ class ExpenseHistoryActions extends BaseActions{
 
     /**
      *
-     * @param {number, string} revenue
+     * @param {number | string} revenue
      * @param {number} index
      * @returns {ExpenseHistoryActions}
      */
@@ -58,7 +58,7 @@ class ExpenseHistoryActions extends BaseActions{
 
     /**
      *
-     * @param {number, string} taxes
+     * @param {number | string} taxes
      * @param {number} index
      * @returns {ExpenseHistoryActions}
      */
@@ -70,7 +70,7 @@ class ExpenseHistoryActions extends BaseActions{
 
     /**
      *
-     * @param {string, number} insurance
+     * @param {string | number} insurance
      * @param {number} index
      * @returns {ExpenseHistoryActions}
      */
@@ -86,7 +86,7 @@ class ExpenseHistoryActions extends BaseActions{
 
     /**
      *
-     * @param {number, string} electricity
+     * @param {number | string} electricity
      * @param {number} index
      * @returns {ExpenseHistoryActions}
      */
@@ -98,7 +98,7 @@ class ExpenseHistoryActions extends BaseActions{
 
     /**
      *
-     * @param {string, number} fuel
+     * @param {string | number} fuel
      * @param {number} index
      * @returns {ExpenseHistoryActions}
      */
@@ -134,7 +134,7 @@ class ExpenseHistoryActions extends BaseActions{
 
     /**
      *
-     * @param {number, string} value
+     * @param {number | string} value
      * @param {number} index
      * @returns {ExpenseHistoryActions}
      */

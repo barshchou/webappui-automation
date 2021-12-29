@@ -51,7 +51,7 @@ class CapRateConclusionActions extends BaseActions {
 
     /**
      *
-     * @param {number, string} rate
+     * @param {number | string} rate
      * @returns {CapRateConclusionActions}
      */
     enterConclusionSectionConcludedCapRate(rate) {
@@ -61,7 +61,7 @@ class CapRateConclusionActions extends BaseActions {
 
     /**
      *
-     * @param {number, string} number
+     * @param {number | string} number
      * @returns {CapRateConclusionActions}
      */
     enterAsCompleteMonthsOfRentLoss(number) {
@@ -71,7 +71,7 @@ class CapRateConclusionActions extends BaseActions {
 
     /**
      *
-     * @param {string, number} number
+     * @param {string | number} number
      * @returns {CapRateConclusionActions}
      */
     enterASStabilizedMonthsOfRentLoss(number) {
@@ -81,7 +81,7 @@ class CapRateConclusionActions extends BaseActions {
 
     /**
      *
-     * @param {number, string} value
+     * @param {number | string} value
      * @returns {CapRateConclusionActions}
      */
     selectRoundingFactor(value) {
@@ -104,7 +104,7 @@ class CapRateConclusionActions extends BaseActions {
 
     /**
      *
-     * @param {number, string} rate
+     * @param {number | string} rate
      * @returns {CapRateConclusionActions}
      */
     verifyConcludedCapRateCell(rate) {
@@ -227,7 +227,7 @@ class CapRateConclusionActions extends BaseActions {
 
     /**
      *
-     * @param {string, number} profit
+     * @param {string | number} profit
      * @returns {CapRateConclusionActions}
      */
     enterAsCompleteLessEntrepreneurialProfit(profit) {

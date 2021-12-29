@@ -18,7 +18,7 @@ class PotentialGrossIncomeActions extends BaseActions {
     /**
      *
      * @param {number} vacancyCollLoss
-     * @param {string, number} potentialIncome
+     * @param {string | number} potentialIncome
      * @returns {PotentialGrossIncomeActions}
      */
     verifyResidentialVCLoss(vacancyCollLoss, potentialIncome) {

@@ -50,7 +50,7 @@ class CapRateCompsActions extends BaseActions {
 
     /**
      *
-     * @param {number, string} gba
+     * @param {number | string} gba
      * @param {number} index
      * @returns {CapRateCompsActions}
      */
@@ -86,7 +86,7 @@ class CapRateCompsActions extends BaseActions {
 
     /**
      *
-     * @param {number, string} number
+     * @param {number | string} number
      * @param {number} index
      * @returns {CapRateCompsActions}
      */
@@ -157,7 +157,7 @@ class CapRateCompsActions extends BaseActions {
 
     /**
      *
-     * @param {number, string} year
+     * @param {number | string} year
      * @param {number} index
      * @returns {CapRateCompsActions}
      */
@@ -173,7 +173,7 @@ class CapRateCompsActions extends BaseActions {
 
     /**
      *
-     * @param {number, string} price
+     * @param {number | string} price
      * @param {number} index
      * @returns {CapRateCompsActions}
      */
@@ -184,7 +184,7 @@ class CapRateCompsActions extends BaseActions {
 
     /**
      *
-     * @param {string, number} rate
+     * @param {string | number} rate
      * @param {number} index
      * @returns {CapRateCompsActions}
      */

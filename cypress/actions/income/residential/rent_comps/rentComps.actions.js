@@ -610,9 +610,50 @@ class RentCompsActions extends BaseActions {
                     rentCompsPage.selectedComparableButtons.eq(i).should("not.exist");
                 }
                 cy.wrap(buttons.eq(i)).should("be.enabled").click({force: true});
-                rentCompsPage.selectedComparableButtons.eq(i).should("exist");
+                this.verifyComparableSelectedByIndex(i);
             }
         });
+        return this;
+    }
+
+    /**
+     *
+     * @param {number} index
+     * @returns {RentCompsActions}
+     */
+    selectComparableByIndex(index = 0) {
+        rentCompsPage.selectComparableButtons.eq(index).click();
+        return this;
+    }
+
+    /**
+     *
+     * @param {number} index
+     * @returns {RentCompsActions}
+     */
+    verifyComparableSelectedByIndex(index = 0) {
+        rentCompsPage.selectedComparableButtons.eq(index).should("exist");
+        return this;
+    }
+
+    /**
+     *
+     * @param {string} address
+     * @returns {RentCompsActions}
+     */
+    selectComparableByAddress(address) {
+        rentCompsPage.getSelectButtonByAddress(address).click();
+        this.verifyComparableSelectedByAddress(address);
+        return this;
+    }
+
+    /**
+     *
+     * @param {string} address
+     * @returns {RentCompsActions}
+     */
+    verifyComparableSelectedByAddress(address) {
+        rentCompsPage.getSelectedButtonByAddress(address).should("exist");
         return this;
     }
 
@@ -681,11 +722,11 @@ class RentCompsActions extends BaseActions {
     /**
      *
      * @param {number} index
-     * @param {number, string} numberOfRooms
-     * @param {number, string} numberOfBedrooms
-     * @param {number, string} monthlyRent
+     * @param {number | string} numberOfRooms
+     * @param {number | string} numberOfBedrooms
+     * @param {number | string} monthlyRent
      * @param {string} sourceOfInfo
-     * @param {number, string} numberOfUnits
+     * @param {number | string} numberOfUnits
      * @returns {RentCompsActions}
      */
     verifyAddedComparable(index, numberOfRooms, numberOfBedrooms, monthlyRent,
@@ -707,7 +748,7 @@ class RentCompsActions extends BaseActions {
     }
 
     /**
-     *
+     * @private
      * @param {JQuery<HTMLElement>} rowJQueryEl
      * @param {string} cellLocator
      * @param {string} textToBe
@@ -719,26 +760,262 @@ class RentCompsActions extends BaseActions {
     }
 
     /**
+     * @private
+     * @param {JQuery<HTMLElement>} rowJQueryEl
+     * @param {string} cellLocator
+     * @returns {RentCompsActions}
+     */
+    verifyCellExist(rowJQueryEl, cellLocator) {
+        cy.wrap(rowJQueryEl).find(cellLocator).should("exist");
+        return this;
+    }
+
+    /**
      *
      * @param {number} index
      * @param {Readonly<{bedrooms: number | string, rooms: number | string, monthly: string | number,
-     * sourceInfoCheck: string}>} rentCompData
+     * sourceInfoCheck: string, address: string}>} rentCompData
      * @returns {RentCompsActions}
      */
     verifyComparableBedroomTableByNumber(index, rentCompData) {
         rentCompsPage.getBedroomTableByNumber(rentCompData.bedrooms).find(rentCompsPage.getCategoryRowByIndexLocator(index))
             .then(row => {
-                this.verifyCellText(row, rentCompsPage.categoryRoomsCellsLocator, rentCompData.rooms)
-                    .verifyCellText(row, rentCompsPage.categoryBedroomsCellsLocator, rentCompData.bedrooms);
-                const monthlyRentText = typeof rentCompData.monthly === "string" ? `$${rentCompData.monthly}` :
-                    `$${numberWithCommas(rentCompData.monthly)}`;
-                this.verifyCellText(row, rentCompsPage.categoryRentsCellsLocator, monthlyRentText);
-                const rentForCalc = typeof rentCompData.monthly === "string" ?
-                    rentCompData.monthly.replace(",", "") : rentCompData.monthly;
-                const perRoom = numberWithCommas(Math.round(rentForCalc / rentCompData.rooms));
-                this.verifyCellText(row, rentCompsPage.categoryRentPerRoomLocator, `$${perRoom}`)
-                    .verifyCellText(row, rentCompsPage.categorySourceOfInfoLocator, rentCompData.sourceInfoCheck);
+                this.verifyCompRowDefaultCells(row, rentCompData, index);
             });
+        return this;
+    }
+
+    /**
+     *
+     * @param {number} rowIndex
+     * @param {Readonly<{bedrooms: number | string, rooms: number | string, monthly: string | number,
+     * sourceInfoCheck: string, address: string}>} rentCompData
+     * @returns {RentCompsActions}
+     */
+    verifyComparableUncategorizedDefaultCellsByRow(rowIndex, rentCompData) {
+        rentCompsPage.uncategorizedTable.find(rentCompsPage.getCategoryRowByIndexLocator(rowIndex)).then(row => {
+            this.verifyCompRowDefaultCells(row, rentCompData, rowIndex);
+        });
+        return this;
+    }
+
+    /**
+     *
+     * @param {number | string} minValue
+     * @returns {RentCompsActions}
+     */
+    verifyUncategorizedMinCell(minValue) {
+        const textToBe = typeof minValue === "string" ? minValue : `$${numberWithCommas(minValue)}`;
+        rentCompsPage.uncategorizedMinCell.should("have.text", textToBe);
+        return this;
+    }
+
+    /**
+     *
+     * @param {number | string} averageValue
+     * @returns {RentCompsActions}
+     */
+    verifyUncategorizedAverageCell(averageValue) {
+        const textToBe = typeof averageValue === "string" ? averageValue : `$${numberWithCommas(averageValue)}`;
+        rentCompsPage.uncategorizedAverageCell.should("have.text", textToBe);
+        return this;
+    }
+
+    /**
+     *
+     * @param {number | string} maxValue
+     * @returns {RentCompsActions}
+     */
+    verifyUncategorizedMaxCell(maxValue) {
+        const textToBe = typeof maxValue === "string" ? maxValue : `$${numberWithCommas(maxValue)}`;
+        rentCompsPage.uncategorizedMaxCell.should("have.text", textToBe);
+        return this;
+    }
+
+    /**
+     *
+     * @returns {RentCompsActions}
+     */
+    verifyRentRollSummaryExist() {
+        rentCompsPage.rentRollSummary.should("exist");
+        return this;
+    }
+
+    /**
+     *
+     * @returns {RentCompsActions}
+     */
+    verifyUncategorizedSubjectMinExist() {
+        rentCompsPage.uncategorizedSubjectMin.should("exist");
+        return this;
+    }
+
+    /**
+     *
+     * @returns {RentCompsActions}
+     */
+    verifyUncategorizedSubjectAverageExist() {
+        rentCompsPage.uncategorizedSubjectAverage.should("exist");
+        return this;
+    }
+
+    /**
+     *
+     * @returns {RentCompsActions}
+     */
+    verifyUncategorizedSubjectMaxExist() {
+        rentCompsPage.uncategorizedSubjectMax.should("exist");
+        return this;
+    }
+
+    /**
+     *
+     * @param {string} textToBe
+     * @returns {RentCompsActions}
+     */
+    verifyUncategorizedSubjectColumnText(textToBe) {
+        rentCompsPage.uncategorizedSubjectColumn.should("have.text", textToBe);
+        return this;
+    }
+
+    /**
+     *
+     * @returns {RentCompsActions}
+     */
+    checkDisplaySquareFootageForCompsCheckbox() {
+        rentCompsPage.displaySquareFootageForCompsCheckbox.check().should("have.value", "true");
+        return this;
+    }
+
+    /**
+     *
+     * @param {number} index
+     * @param {Readonly<{squareFootage: number | string, rentPSF: number | string}>} rentCompData
+     * @returns {RentCompsActions}
+     */
+    verifyUncategorizedSquareFootageCells(index, rentCompData) {
+        rentCompsPage.uncategorizedTable.find(rentCompsPage.getCategoryRowByIndexLocator(index)).then(row => {
+            this.verifyRentPsfSfCompRowCells(row, rentCompData);
+        });
+        return this;
+    }
+
+
+    /**
+     * @private
+     * @param {JQuery<HTMLElement>} JQueryRowElement
+     * @param {Readonly<{squareFootage: number | string, rentPSF: number | string}>} rentCompData
+     * @returns {RentCompsActions}
+     */
+    verifyRentPsfSfCompRowCells(JQueryRowElement, rentCompData) {
+        const sfText = typeof rentCompData.squareFootage === "string" ? rentCompData.squareFootage :
+            numberWithCommas(rentCompData.squareFootage);
+        this.verifyCellText(JQueryRowElement, rentCompsPage.squareFootageCellsLocator, sfText);
+        const rentPerSFText = typeof rentCompData.squareFootage === "string" ? rentCompData.rentPSF :
+            `$${numberWithCommas(rentCompData.rentPSF)}`;
+        this.verifyCellText(JQueryRowElement, rentCompsPage.rentPerSfCellsLocator, rentPerSFText);
+        return this;
+    }
+
+    /**
+     * @private
+     * @param {JQuery<HTMLElement>} JQueryRowElement
+     * @param {Readonly<{bedrooms: number | string, rooms: number | string, monthly: string | number,
+     * sourceInfoCheck: string, address: string}>} rentCompData
+     * @param {number} rowIndex
+     * @returns {RentCompsActions}
+     */
+    verifyCompRowDefaultCells(JQueryRowElement, rentCompData, rowIndex) {
+        this.verifyCellExist(JQueryRowElement, rentCompsPage.moveCellLocator);
+        this.verifyCellText(JQueryRowElement, rentCompsPage.indexCellLocator, `${rowIndex + 1}`);
+        this.verifyCellText(JQueryRowElement, rentCompsPage.unitAddressLocator, rentCompData.address);
+        this.verifyCellText(JQueryRowElement, rentCompsPage.categoryRoomsCellsLocator, rentCompData.rooms)
+            .verifyCellText(JQueryRowElement, rentCompsPage.categoryBedroomsCellsLocator, rentCompData.bedrooms);
+        const monthlyRentText = typeof rentCompData.monthly === "string" ? `$${rentCompData.monthly}` :
+            `$${numberWithCommas(rentCompData.monthly)}`;
+        this.verifyCellText(JQueryRowElement, rentCompsPage.categoryRentsCellsLocator, monthlyRentText);
+        const rentForCalc = typeof rentCompData.monthly === "string" ?
+            rentCompData.monthly.replaceAll(",", "") : rentCompData.monthly;
+        const perRoom = numberWithCommas(Math.round(rentForCalc / rentCompData.rooms));
+        this.verifyCellText(JQueryRowElement, rentCompsPage.categoryRentPerRoomLocator, `$${perRoom}`)
+            .verifyCellText(JQueryRowElement, rentCompsPage.categorySourceOfInfoLocator, rentCompData.sourceInfoCheck);
+        cy.wrap(JQueryRowElement).find(rentCompsPage.editButtonLocator).should("exist");
+        cy.wrap(JQueryRowElement).find(rentCompsPage.removeButtonLocator).should("exist");
+        return this;
+    }
+
+    /**
+     *
+     * @param {string} textToBe
+     * @returns {RentCompsActions}
+     */
+    verifyUncategorizedSubjectDevForecast(textToBe) {
+        rentCompsPage.uncategorizedDevForecast.should("have.text", textToBe);
+        return this;
+    }
+
+    /**
+     * @private
+     * @param {JQuery<HTMLElement>} JQueryRowElement
+     * @param {string | number} bathroomsNumber
+     * @returns {RentCompsActions}
+     */
+    verifyBathroomsCompRowCell(JQueryRowElement, bathroomsNumber) {
+        this.verifyCellText(JQueryRowElement, rentCompsPage.bathroomsCellsLocator, bathroomsNumber);
+        return this;
+    }
+
+    /**
+     *
+     * @param {number} rowNumber
+     * @param {number | string} bathroomsNumber
+     * @returns {RentCompsActions}
+     */
+    verifyUncategorizedBathroomsRowCell(rowNumber, bathroomsNumber) {
+        rentCompsPage.uncategorizedTable.find(rentCompsPage.getCategoryRowByIndexLocator(rowNumber)).then(row => {
+            this.verifyBathroomsCompRowCell(row, bathroomsNumber);
+        });
+        return this;
+    }
+
+    /**
+     *
+     * @returns {RentCompsActions}
+     */
+    verifyUncategorizedHeader() {
+        rentCompsPage.uncategorizedTableHeader.should("exist").and("have.text", "Uncategorized");
+        return this;
+    }
+
+    /**
+     *
+     * @param bedroomsNumber
+     * @returns {RentCompsActions}
+     */
+    verifyBedroomTableHeader(bedroomsNumber) {
+        rentCompsPage.getBedroomsTableHeader(bedroomsNumber).should("exist")
+            .and("have.text", `${bedroomsNumber} Bedroom`);
+        return this;
+    }
+
+    /**
+     *
+     * @param {number} bedroomsNumber
+     * @param {string} textToBe
+     * @returns {RentCompsActions}
+     */
+    verifyBedroomSubjectColumnText(bedroomsNumber, textToBe) {
+        rentCompsPage.getBedroomSubjectColumn(bedroomsNumber).should("have.text", textToBe);
+        return this;
+    }
+
+    /**
+     *
+     * @param {number} bedroomsNumber
+     * @returns {RentCompsActions}
+     */
+    verifyBedroomMarketRateSummaryExist(bedroomsNumber) {
+        rentCompsPage.getBedroomMarketRateSummary(bedroomsNumber).should("exist");
         return this;
     }
 }

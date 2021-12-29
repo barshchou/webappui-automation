@@ -202,7 +202,7 @@ class SupportingCapRatesActions extends BaseActions {
 
     /**
      *
-     * @param {string, number} rate
+     * @param {string | number} rate
      * @returns {SupportingCapRatesActions}
      */
     enterEquityDividendRate(rate) {

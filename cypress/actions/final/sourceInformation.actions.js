@@ -27,7 +27,7 @@ class SourceInformationActions extends BaseActions {
 
     /**
      *
-     * @param {string, Array<string>} sources
+     * @param {string | Array<string>} sources
      * @returns {SourceInformationActions}
      */
     verifySiteSizeSources(sources = this.siteSizeDefaultSources) {
@@ -40,7 +40,7 @@ class SourceInformationActions extends BaseActions {
 
     /**
      *
-     * @param {string, Array<string>} sources
+     * @param {string | Array<string>} sources
      * @returns {SourceInformationActions}
      */
     verifyExcessSurplusLandSources(sources = this.excessSurplusLandDefaultSources) {
@@ -53,7 +53,7 @@ class SourceInformationActions extends BaseActions {
 
     /**
      *
-     * @param {string, Array<string>} sources
+     * @param {string | Array<string>} sources
      * @returns {SourceInformationActions}
      */
     verifyGrossSizeUnitsSources(sources = this.grossSizeUnitsDefaultSources) {
@@ -66,7 +66,7 @@ class SourceInformationActions extends BaseActions {
 
     /**
      *
-     * @param {string, Array<string>} sources
+     * @param {string | Array<string>} sources
      * @returns {SourceInformationActions}
      */
     verifyResidentialSFSources(sources = this.residentialSFDefaultSources) {
@@ -79,7 +79,7 @@ class SourceInformationActions extends BaseActions {
 
     /**
      *
-     * @param {string, Array<string>} sources
+     * @param {string | Array<string>} sources
      * @returns {SourceInformationActions}
      */
     verifyNumberOfBuildingsSources(sources = this.numberOfBuildingsDefaultSources) {
@@ -92,7 +92,7 @@ class SourceInformationActions extends BaseActions {
 
     /**
      *
-     * @param {string, Array<string>} sources
+     * @param {string | Array<string>} sources
      * @returns {SourceInformationActions}
      */
     verifyAmenitiesSources(sources = this.amenitiesDefaultSources) {
@@ -105,7 +105,7 @@ class SourceInformationActions extends BaseActions {
 
     /**
      *
-     * @param {string, Array<string>} sources
+     * @param {string | Array<string>} sources
      * @returns {SourceInformationActions}
      */
     verifyDeferredMaintenanceSources(sources = this.deferredMaintenanceDefaultSources) {
@@ -118,7 +118,7 @@ class SourceInformationActions extends BaseActions {
 
     /**
      *
-     * @param {string, Array<string>} sources
+     * @param {string | Array<string>} sources
      * @returns {SourceInformationActions}
      */
     verifyAreaAnalysisSources(sources = this.areaAnalysisDefaultSources) {
@@ -131,7 +131,7 @@ class SourceInformationActions extends BaseActions {
 
     /**
      *
-     * @param {string, Array<string>} sources
+     * @param {string | Array<string>} sources
      * @returns {SourceInformationActions}
      */
     verifyIncomeDataSources(sources = this.incomeDataDefaultSources) {
@@ -144,7 +144,7 @@ class SourceInformationActions extends BaseActions {
 
     /**
      *
-     * @param {string, Array<string>} sources
+     * @param {string | Array<string>} sources
      * @returns {SourceInformationActions}
      */
     verifyExpenseDataSources(sources = this.expenseDataDefaultSources) {
@@ -157,7 +157,7 @@ class SourceInformationActions extends BaseActions {
 
     /**
      *
-     * @param {string, Array<string>} sources
+     * @param {string | Array<string>} sources
      * @returns {SourceInformationActions}
      */
     verifyArchitecturalPlansSources(sources = this.architecturalPlansDefaultSources) {
@@ -170,7 +170,7 @@ class SourceInformationActions extends BaseActions {
 
     /**
      *
-     * @param {string, Array<string>} sources
+     * @param {string | Array<string>} sources
      * @returns {SourceInformationActions}
      */
     verifyComparableRentalDataSources(sources = this.comparableRentalDataDefaultSources) {
@@ -183,7 +183,7 @@ class SourceInformationActions extends BaseActions {
 
     /**
      *
-     * @param {string, Array<string>} sources
+     * @param {string | Array<string>} sources
      * @returns {SourceInformationActions}
      */
     verifyComparableSalesDataSources(sources = this.comparableSalesDataDefaultSources) {

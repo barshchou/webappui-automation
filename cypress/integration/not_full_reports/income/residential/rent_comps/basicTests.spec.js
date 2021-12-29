@@ -1,4 +1,4 @@
-import {reportCreationData} from "../../../../../fixtures/basicRentComps.fixtures";
+import {reportCreationData} from "../../../../../fixtures/not_full_reports/income/residential/rent_comps/basicRentComps.fixtures";
 import Homepage from "../../../../../actions/base/homepage.actions";
 import NavigationSection from "../../../../../actions/base/navigationSection.actions";
 import RentComps from "../../../../../actions/income/residential/rent_comps/rentComps.manager";
