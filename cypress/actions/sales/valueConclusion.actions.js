@@ -122,7 +122,7 @@ class ValueConclusionActions extends BaseActions {
 
     /**
      *
-     * @param {string, number} value
+     * @param {string | number} value
      * @returns {ValueConclusionActions}
      */
     enterSaleValueConclusion(value) {

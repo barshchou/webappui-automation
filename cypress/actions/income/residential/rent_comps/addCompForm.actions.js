@@ -105,7 +105,7 @@ class AddCompFormActions {
 
     /**
      *
-     * @param {string, number} rent
+     * @param {string | number} rent
      * @returns {AddCompFormActions}
      */
     enterMonthlyRent(rent) {
@@ -186,7 +186,7 @@ class AddCompFormActions {
 
     /**
      *
-     * @param {string, number} footage
+     * @param {string | number} footage
      * @returns {AddCompFormActions}
      */
     enterSquareFootage(footage) {
@@ -260,7 +260,7 @@ class AddCompFormActions {
 
     /**
      *
-     * @param {number, string} number
+     * @param {number | string} number
      * @returns {AddCompFormActions}
      */
     enterNumberOfBedrooms(number) {
@@ -318,7 +318,7 @@ class AddCompFormActions {
 
     /**
      *
-     * @param {number, string} numberOfRooms
+     * @param {number | string} numberOfRooms
      * @returns {AddCompFormActions}
      */
     enterNumberOfRooms(numberOfRooms) {
@@ -338,7 +338,7 @@ class AddCompFormActions {
 
     /**
      *
-     * @param {number, string} number
+     * @param {number | string} number
      * @returns {AddCompFormActions}
      */
     enterNumberOfBathrooms(number = 0) {

@@ -61,7 +61,7 @@ class HighestBestUseActions extends BaseActions {
 
     /**
      *
-     * @param {number, string} frontage
+     * @param {number | string} frontage
      * @returns {HighestBestUseActions}
      */
     verifyPropertyFrontage(frontage) {
@@ -111,7 +111,7 @@ class HighestBestUseActions extends BaseActions {
 
     /**
      *
-     * @param {string, number} number
+     * @param {string | number} number
      * @returns {HighestBestUseActions}
      */
     verifyUnitsNumber(number) {
@@ -170,7 +170,7 @@ class HighestBestUseActions extends BaseActions {
 
     /**
      *
-     * @param {string, Array<string>} types
+     * @param {string | Array<string>} types
      * @returns {HighestBestUseActions}
      */
     addFinanciallyFeasiblePropertyTypesAsVacant(types) {
@@ -219,7 +219,7 @@ class HighestBestUseActions extends BaseActions {
 
     /**
      *
-     * @param {string, Array<string>} types
+     * @param {string | Array<string>} types
      * @returns {HighestBestUseActions}
      */
     addFinanciallyFeasiblePropertyTypesAsImproved(types) {
