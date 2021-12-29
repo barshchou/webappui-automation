@@ -11,3 +11,8 @@ const reportCreationFixture = () => {
 export const reportCreationData = () => {
     return Object.freeze(reportCreationFixture());
 };
+
+export default {
+    reportCreationData: reportCreationData(),
+    saleValueConclusion: 90000
+};

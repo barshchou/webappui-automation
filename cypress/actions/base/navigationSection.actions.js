@@ -290,8 +290,33 @@ class NavigationSectionActions extends BaseActions {
      *
      * @returns {NavigationSectionActions}
      */
+    clickSalesButton() {
+        navigationSectionPage.salesApproachButton.click();
+        return this;
+    }
+
+    /**
+     *
+     * @returns {NavigationSectionActions}
+     */
+    clickValueConclusionButton() {
+        navigationSectionPage.valueConclusionButton.click();
+        return this;
+    }
+
+    /**
+     *
+     * @returns {NavigationSectionActions}
+     */
     clickInsurableReplacementCostBookmark() {
         navigationSectionPage.insurableReplacementCostBookmark.click().should("have.attr", "color", "#F68750");
+        return this;
+    }
+
+    navigateToSalesValueConclusion() {
+        this.clickSalesButton()
+            .clickValueConclusionButton()
+            .clickYesButton();
         return this;
     }
 }

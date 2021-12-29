@@ -17,7 +17,7 @@ declare namespace Cypress {
         loginByUI(url: string): Chainable<any>
 
         /**
-         * Login to application by method, passed to LOGGING_METHOD environment variable
+         * Login to application by method, passed to loginMethod environment variable
          * @example
          * cy.login()
          */

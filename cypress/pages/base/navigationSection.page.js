@@ -20,6 +20,8 @@ class NavigationSection extends BasePage {
     get expenseForecastBookmark() {return cy.get("#expense-forecast > svg[data-icon=bookmark]");}
     get capRateConclusion() {return cy.get("#cap-rate-conclusion");}
     get insurableReplacementCostBookmark() {return cy.get("#insurable-replacement-cost > svg[data-icon=bookmark]");}
+    get salesApproachButton() {return cy.get("#sales-approach > svg");}
+    get valueConclusionButton() {return cy.get("#sale-value-conclusion");}
 }
 
 export default new NavigationSection();
