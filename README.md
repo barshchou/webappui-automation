@@ -46,9 +46,9 @@ There are several main folders of these project:
 
 ## Usage <a id="usage"></a>
 
-General way to run all cypress tests to run `npx cypress run` command. This command will run all existing test spec headless in electron browser at staging environment, using Api login method by default. General way to open cypress UI window is to run `npx cypress open` command.
+General way to run all cypress tests to run `npx cypress run` command. This command will run all existing test spec headless in electron browser at staging environment, using Api login method by default. General way to open cypress GUI is to run `npx cypress open` command.
 
-`package.json` file in `"scripts":` property contains ready to use commands for some mostly used cases. Fore example `npm run cy:open` command will open cypress UI window, `npm run cy:chrome_headed_prod_api` will run all tests in chrome headed browser at production environment, using Api login method etc.
+`package.json` file in `"scripts":` property contains ready to use commands for some mostly used cases. For example `npm run cy:open` command will open cypress GUI, `npm run cy:chrome_headed_prod_api` will run all tests in chrome headed browser at production environment, using Api login method etc.
 
 ### CLI flags <a id="cli_flags"></a>
 
