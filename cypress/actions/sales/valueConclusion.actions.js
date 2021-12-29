@@ -133,6 +133,17 @@ class ValueConclusionActions extends BaseActions {
 
     /**
      *
+     * @param {string | number} value
+     * @returns {ValueConclusionActions}
+     */
+    verifySaleValueConclusion(value) {
+        const valueToBe = typeof value === "string" ? value : `$${numberWithCommas(value)}`;
+        valueConclusionPage.saleValueConclusion.should("have.value", valueToBe);
+        return this;
+    }
+
+    /**
+     *
      * @param {string} period
      * @returns {ValueConclusionActions}
      */
@@ -254,6 +265,24 @@ class ValueConclusionActions extends BaseActions {
         this.verifyAsIsMarketPeriod(rowData.period)
             .verifyAsIsMarketAmount(rowData.amount)
             .verifyAsIsMarketFinalValue(rowData.finalValue);
+        return this;
+    }
+
+    /**
+     *
+     * @returns {ValueConclusionActions}
+     */
+    checkMatchIncomeApproachDeductionsCheckbox() {
+        valueConclusionPage.matchIncomeApproachDeductionsCheckbox.check().should("have.value", "true");
+        return this;
+    }
+
+    /**
+     *
+     * @returns {ValueConclusionActions}
+     */
+    verifyMatchIncomeApproachDeductionsChecked() {
+        valueConclusionPage.matchIncomeApproachDeductionsCheckbox.should("have.value", "true");
         return this;
     }
 }

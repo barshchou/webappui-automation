@@ -20,6 +20,7 @@ class ValueConclusionPage extends BasePage {
     get asIsMarketPeriod() {return cy.get("[data-qa=as-is-market-period-cell]");}
     get asIsMarketAmount() {return cy.get("[data-qa=as-is-market-amount-cell]");}
     get asIsMarketFinalValue() {return cy.get("[data-qa=as-is-market-final-value-cell]");}
+    get matchIncomeApproachDeductionsCheckbox() {return cy.get("[data-qa^=matchIncomeApproachDeductions] input");}
 }
 
 export default new ValueConclusionPage();
