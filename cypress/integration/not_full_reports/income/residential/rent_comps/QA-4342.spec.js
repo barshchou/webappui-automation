@@ -53,7 +53,7 @@ describe("[Income -  Residential - Rent Comps] Verify the display of the Unit gr
     it("Bedrooms category, subject market rate test", () => {
         NavigationSection.navigateToResInPlaceRentRoll();
         Income.Residential.InPlaceRentRoll.goToPropSummaryWithSaveSaveClickFirst();
-        Property.Summary.enterNumberOfUnits(tesData.bedroomCategory.numberOfUnits)
+        Property.Summary.enterNumberOfResUnits(tesData.bedroomCategory.numberOfUnits)
             .goBackWithSave();
         Income.Residential.InPlaceRentRoll.enterBedroomsNumberByRowNumber(tesData.bedroomCategory.bedroomsNumber)
             .enterRentTypeCellByRowNumber(tesData.bedroomCategory.rentType);

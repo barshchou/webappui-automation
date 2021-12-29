@@ -31,14 +31,14 @@ describe("In-Place Rent Roll options list tests", () => {
         Income.Residential.InPlaceRentRoll.uploadFile(testData.id3.xlsxFileName, testData.id3.numberOfUnits)
             .goToPropSummaryWithSaveLeavingFirst();
         Property.Summary.verifyThatPageIsOpened()
-            .enterNumberOfUnits(testData.id3.numberOfUnitsToChange)
+            .enterNumberOfResUnits(testData.id3.numberOfUnitsToChange)
             .goBackWithSave();
         Income.Residential.InPlaceRentRoll.uploadFile(testData.id3.csvFileName, testData.id3.csvNumberOfUnits);
         cy.reload();
         Income.Residential.InPlaceRentRoll.fillAllRentTypeCellsWithEqualValue(testData.id3.rentType)
             .goToPropSummaryWithSaveLeavingFirst();
         Property.Summary.verifyThatPageIsOpened()
-            .enterNumberOfUnits(testData.id3.numberOfUnits)
+            .enterNumberOfResUnits(testData.id3.numberOfUnits)
             .goBackWithSave();
     });
 

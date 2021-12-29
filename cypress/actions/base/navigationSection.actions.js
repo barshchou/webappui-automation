@@ -274,7 +274,7 @@ class NavigationSectionActions extends BaseActions {
 
     /**
      *
-     * @param isWithSave
+     * @param {boolean} isWithSave
      * @returns {NavigationSectionActions}
      */
     navigateToCapRateConclusion(isWithSave = true) {
@@ -313,6 +313,10 @@ class NavigationSectionActions extends BaseActions {
         return this;
     }
 
+    /**
+     *
+     * @returns {NavigationSectionActions}
+     */
     navigateToSalesValueConclusion() {
         this.clickSalesButton()
             .clickValueConclusionButton()

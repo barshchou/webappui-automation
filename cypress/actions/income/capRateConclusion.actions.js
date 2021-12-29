@@ -275,6 +275,55 @@ class CapRateConclusionActions extends BaseActions {
         capRateConclusionPage.asIsMarketValuePerSF.should("have.text", value);
         return this;
     }
+
+    /**
+     *
+     * @returns {CapRateConclusionActions}
+     */
+    clickAddResidentialRentLoss() {
+        capRateConclusionPage.addResidentialRentLossButton.should("not.be.disabled").click();
+        return this;
+    }
+
+    /**
+     * @returns {CapRateConclusionActions}
+     */
+    clickAsStabilizedRentLossSwitch() {
+        capRateConclusionPage.asStabilizedRentLossSwitch.click().should("have.attr", "data-qa-isselected", "true");
+        return this;
+    }
+
+    /**
+     *
+     * @param {number} rowNumber
+     * @returns {CapRateConclusionActions}
+     */
+    checkRentLossCheckboxByRow(rowNumber = 0) {
+        capRateConclusionPage.rentLossCheckboxes.eq(rowNumber).check();
+        return this;
+    }
+
+    /**
+     *
+     * @returns {CapRateConclusionActions}
+     */
+    clickAddButton() {
+        capRateConclusionPage.addButton.should("not.be.disabled").click();
+        return this;
+    }
+
+    /**
+     *
+     * @param {number | string} period
+     * @param {number} rowNumber
+     * @returns {CapRateConclusionActions}
+     */
+    enterAsStabResRentLossTimePeriodByRow(period, rowNumber = 0) {
+        capRateConclusionPage.asStabResRentLossTimePeriodCells.eq(rowNumber).type(period)
+            .should("have.value", period);
+        return this;
+    }
+
 }
 
 export default new CapRateConclusionActions();

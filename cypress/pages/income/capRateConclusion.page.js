@@ -25,6 +25,11 @@ class CapRateConclusionPage extends BasePage {
     get asIsMarketFinalValueCell() {return cy.get("[data-qa=as-is-market-final-value-cell]");}
     get asIsMarketValuePerUnit() {return cy.xpath("//*[.='As Is Market Value Per Unit']//following-sibling::td[3]");}
     get asIsMarketValuePerSF() {return cy.xpath("//*[.='As Is Market Value Per SF']//following-sibling::td[3]");}
+    get addResidentialRentLossButton() {return cy.xpath("//*[@data-qa='add-btn'][.='+ New Residential Rent Loss']");}
+    get rentLossCheckboxes() {return cy.get("input[type=checkbox][id]");}
+    get asStabilizedRentLossSwitch() {return cy.get("[data-qa='As Stabilized-switch-button']");}
+    get addButton() {return cy.xpath("//button[.='Add']");}
+    get asStabResRentLossTimePeriodCells() {return cy.get("[name^=asStabilizedResRentLossItems][name$=months]");}
 }
 
 export default new CapRateConclusionPage();

@@ -5,7 +5,7 @@ import Sales from "../../../../actions/sales/sales.manager";
 import Final from "../../../../actions/final/final.manager";
 
 describe("Save and Save & Continue buttons tests", () => {
-    beforeEach("Login action", () => {
+    beforeEach("Login, open sales value conclusion and make changes", () => {
         cy.login();
         Homepage.createReport(testData.reportCreationData);
         NavigationSection.navigateToSalesValueConclusion();
