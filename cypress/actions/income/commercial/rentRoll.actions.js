@@ -184,7 +184,7 @@ class CommercialRentRollActions extends BaseActions {
      * @param {number} rowNumber
      * @returns {CommercialRentRollActions}
      */
-    enterLeaseStartDateByRowNumber(cellName, date, rowNumber = 0) {
+    enterLeaseDateByRowNumber(cellName, date, rowNumber = 0) {
         rentRollPage.getLeaseDateCellsByName(cellName).eq(rowNumber).dblclick();
         rentRollPage.textareaToInput.clear().type(date).type("{enter}");
         return this;
@@ -198,9 +198,9 @@ class CommercialRentRollActions extends BaseActions {
      * @param {number} [rowNumber]
      * @returns {CommercialRentRollActions}
      */
-    verifyLeaseStartDateByRowNumber(cellName, leaseStatus, dateToBe, rowNumber = 0) {
+    verifyLeaseDateByRowNumber(cellName, leaseStatus, dateToBe, rowNumber = 0) {
         dateToBe = dateToBe ?? "";
-        if (!isDateHasCorrectFormat(dateToBe, "/")) {
+        if (!isDateHasCorrectFormat(dateToBe, "/") && cellName !== "Expiry") {
             dateToBe = "";
         }
         let textToBe = leaseStatus === "Vacant" ? "-" : dateToBe;
