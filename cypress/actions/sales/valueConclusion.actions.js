@@ -296,6 +296,27 @@ class ValueConclusionActions extends BaseActions {
         valueConclusionPage.asStabResRentLossTimePeriodCells.eq(rowNumber).should("have.value", period);
         return this;
     }
+
+    /**
+     *
+     * @param {string} commentary
+     * @returns {ValueConclusionActions}
+     */
+    enterAdditionalCommentary(commentary) {
+        valueConclusionPage.additionalCommentaryInput.type(commentary);
+        this.verifyAdditionalCommentaryText(commentary);
+        return this;
+    }
+
+    /**
+     *
+     * @param {string} commToBe
+     * @returns {ValueConclusionActions}
+     */
+    verifyAdditionalCommentaryText(commToBe) {
+        valueConclusionPage.additionalCommentaryInput.should("have.text", commToBe);
+        return this;
+    }
 }
 
 export default new ValueConclusionActions();

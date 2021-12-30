@@ -35,9 +35,6 @@ describe("Prospective Market Value As Stabilized -> " +
         NavigationSection.navigateToSalesValueConclusion()
             .verifyProgressBarNotExist();
         Sales.ValueConclusion.verifyAsStabResRentLossTimePeriodByRow(testData.data.rentLossTimePeriod);
-    });
-
-    after("Delete report", () => {
         Sales.ValueConclusion.returnToHomePage();
         Homepage.deleteReport(testData.reportCreationData.reportNumber);
     });

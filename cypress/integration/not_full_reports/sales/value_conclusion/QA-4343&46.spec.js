@@ -18,6 +18,7 @@ describe("Save and Save & Continue buttons tests", () => {
         cy.reload();
         Sales.ValueConclusion.verifyMatchIncomeApproachDeductionsChecked()
             .verifySaleValueConclusion(testData.saleValueConclusion);
+        deleteReport();
     });
 
     it("QA-4346 Save & Continue button test", () => {
@@ -26,10 +27,11 @@ describe("Save and Save & Continue buttons tests", () => {
             .goBackWithSave();
         Sales.ValueConclusion.verifyMatchIncomeApproachDeductionsChecked()
             .verifySaleValueConclusion(testData.saleValueConclusion);
+        deleteReport();
     });
 
-    afterEach("Delete report action", () => {
+    const deleteReport = () => {
         Sales.ValueConclusion.returnToHomePage();
         Homepage.deleteReport(testData.reportCreationData.reportNumber);
-    });
+    };
 });
