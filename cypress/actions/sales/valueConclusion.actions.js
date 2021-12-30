@@ -232,7 +232,8 @@ class ValueConclusionActions extends BaseActions {
      * @returns {ValueConclusionActions}
      */
     verifyAsIsMarketPeriod(period) {
-        valueConclusionPage.asIsMarketPeriod.should("have.text", period);
+        const textToBe = period.includes("-") ? period.replaceAll("-", "/") : period;
+        valueConclusionPage.asIsMarketPeriod.should("have.text", textToBe);
         return this;
     }
 
