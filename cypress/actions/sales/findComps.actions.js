@@ -1,5 +1,6 @@
 import BaseActions from "../base/base.actions";
 import findCompsPage from "../../pages/sales/findComps.page";
+import {getUploadFixture} from "../../../utils/fixtures.utils";
 
 class FindCompsActions extends BaseActions {
 
@@ -43,6 +44,27 @@ class FindCompsActions extends BaseActions {
      */
     verifyImportCompModalShown() {
         findCompsPage.importCompModal.should("be.visible");
+        return this;
+    }
+
+    /**
+     *
+     * @param {string} filePath
+     * @returns {FindCompsActions}
+     */
+    uploadComps(filePath) {
+        findCompsPage.csvInput.attachFile(getUploadFixture(filePath));
+        return this;
+    }
+
+    /**
+     *
+     * @param {number} number
+     * @returns {FindCompsActions}
+     */
+    verifyComparablesNumber(number) {
+        const numberToBe = number + 1;
+        findCompsPage.addressCells.should("have.length", numberToBe);
         return this;
     }
 }
