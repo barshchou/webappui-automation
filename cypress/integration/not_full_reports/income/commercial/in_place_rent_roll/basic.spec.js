@@ -2,12 +2,10 @@ import testData from "../../../../../fixtures/not_full_reports/income/commercial
 import Homepage from "../../../../../actions/base/homepage.actions";
 import NavigationSection from "../../../../../actions/base/navigationSection.actions";
 import Income from "../../../../../actions/income/income.manager";
-import {waitForTime} from "../../../../../../utils/waiters.utils";
 
 describe("Basic commercial In-Place Rent Roll tests", () => {
     before("Create report and navigate to Commercial In-Place Rent Roll", () => {
         cy.login();
-        waitForTime();
         Homepage.createReport(testData.reportCreationData);
         NavigationSection.navigateToCommercialInPlaceRentRoll();
         cy.saveLocalStorage();

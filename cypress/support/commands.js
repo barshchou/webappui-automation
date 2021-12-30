@@ -1,6 +1,7 @@
 import "cypress-file-upload";
 import "cypress-localstorage-commands";
 import {getEnvUrl} from "../../utils/env.utils";
+import {interceptGoogleScriptsAndWaitLoad} from "../../utils/intercept.utils";
 
 Cypress.Commands.add("loginByApi", (url ) => {
     cy.log("Logging in by api");
@@ -36,6 +37,7 @@ Cypress.Commands.add("login", () => {
         default:
             cy.loginByApi(envUrl);
     }
+    interceptGoogleScriptsAndWaitLoad();
 });
 
 

@@ -6,12 +6,10 @@ import Property from "../../actions/property/property.manager";
 import Income from "../../actions/income/income.manager";
 import Final from "../../actions/final/final.manager";
 import Sales from "../../actions/sales/sales.manager";
-import {waitForTime} from "../../../utils/waiters.utils";
 
 describe("Full bowery way, multifamily as complete report", () => {
     it("Test", () => {
         cy.login();
-        waitForTime();
         Homepage.createReportAdvancedSearch(testData.reportCreationData);
         Report.KeyInfo.choosePurpose(testData.keyInfoPurposeData.purposeValue)
             .checkAllInterestAppraisedByValues(testData.keyInfoPurposeData.interestAppraised)

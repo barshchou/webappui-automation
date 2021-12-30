@@ -2,12 +2,10 @@ import testData from "../../../../../fixtures/not_full_reports/income/residentia
 import Homepage from "../../../../../actions/base/homepage.actions";
 import NavigationSection from "../../../../../actions/base/navigationSection.actions";
 import RentComps from "../../../../../actions/income/residential/rent_comps/rentComps.manager";
-import {waitForTime} from "../../../../../../utils/waiters.utils";
 
 describe("Unit map tests", () => {
    before("Login and open Rent Comps", () => {
        cy.login();
-       waitForTime();
        Homepage.createReport(testData.reportCreationData);
        NavigationSection.navigateToRentComps();
        cy.saveLocalStorage();

@@ -1,6 +1,5 @@
 import navigationSectionPage from "../../pages/base/navigationSection.page";
 import BaseActions from "./base.actions";
-import {waitForTime} from "../../../utils/waiters.utils";
 
 class NavigationSectionActions extends BaseActions {
 
@@ -150,7 +149,8 @@ class NavigationSectionActions extends BaseActions {
             .verifyProgressBarNotExist()
             .clickSaveButton()
             .verifyProgressBarNotExist();
-        waitForTime(3000);
+        // Had to add this wait, because from time to time even after clicking to save button, "Would you like to save changes?" popup may appear
+        cy.wait(3000);
         this.clickPropertyButton()
             .clickCommercialUnits();
         return this;

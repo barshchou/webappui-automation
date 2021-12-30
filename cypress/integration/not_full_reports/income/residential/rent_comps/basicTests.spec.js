@@ -2,12 +2,10 @@ import {reportCreationData} from "../../../../../fixtures/not_full_reports/incom
 import Homepage from "../../../../../actions/base/homepage.actions";
 import NavigationSection from "../../../../../actions/base/navigationSection.actions";
 import RentComps from "../../../../../actions/income/residential/rent_comps/rentComps.manager";
-import {waitForTime} from "../../../../../../utils/waiters.utils";
 
 describe("Basic Rent Comps tests", () => {
     before("Login and navigate to Rent Comps", () => {
        cy.login();
-       waitForTime();
        Homepage.createReport(reportCreationData());
        NavigationSection.navigateToRentComps();
        cy.saveLocalStorage();
