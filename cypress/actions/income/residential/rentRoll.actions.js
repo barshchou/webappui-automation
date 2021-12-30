@@ -390,7 +390,7 @@ class InPlaceRentRollActions extends BaseActions {
      * @param {number} number
      * @returns {InPlaceRentRollActions}
      */
-    enterLeaseStatusByRowNumber(status, number) {
+    enterLeaseStatusByRowNumber(status, number = 0) {
         rentRollPage.leaseStatusCells.eq(number).dblclick();
         rentRollPage.textAreaToInput.clear().type(status).type("{enter}");
         rentRollPage.leaseStatusCells.eq(number).should("contain.text", status);
@@ -412,7 +412,7 @@ class InPlaceRentRollActions extends BaseActions {
 
     /**
      *
-     * @param {number} forecastValue
+     * @param {number | string} forecastValue
      * @param {number} rowNumber
      * @returns {InPlaceRentRollActions}
      */
@@ -421,6 +421,20 @@ class InPlaceRentRollActions extends BaseActions {
         rentRollPage.rentForecastCells.eq(rowNumber).dblclick();
         rentRollPage.textAreaToInput.clear().type(forecastValue).type("{enter}");
         rentRollPage.rentForecastCells.eq(rowNumber).should("have.text", forecastText);
+        return this;
+    }
+
+    /**
+     *
+     * @param {string | number} value
+     * @param {number} rowNumber
+     * @returns {InPlaceRentRollActions}
+     */
+    enterMonthlyRentByRowNumber(value, rowNumber = 0) {
+        const textToBe = typeof value === "string" ? value : `$${numberWithCommas(value.toFixed(2))}`;
+        rentRollPage.monthlyRentCells.eq(rowNumber).dblclick();
+        rentRollPage.textAreaToInput.clear().type(value).type("{enter}");
+        rentRollPage.monthlyRentCells.eq(rowNumber).should("have.text", textToBe);
         return this;
     }
 

@@ -3,11 +3,13 @@ import Homepage from "../../../../../actions/base/homepage.actions";
 import NavigationSection from "../../../../../actions/base/navigationSection.actions";
 import Income from "../../../../../actions/income/income.manager";
 import Property from "../../../../../actions/property/property.manager";
+import {waitForTime} from "../../../../../../utils/waiters.utils";
 
 describe("[Income -  Residential - Rent Comps] Verify the display of the Unit grid with the added comparable unit " +
     "on the '$ Rent Comps' page ", () => {
     beforeEach("Login action", () => {
         cy.login();
+        waitForTime();
         Homepage.createReport(tesData.reportCreationData);
     });
 
@@ -53,7 +55,7 @@ describe("[Income -  Residential - Rent Comps] Verify the display of the Unit gr
     it("Bedrooms category, subject market rate test", () => {
         NavigationSection.navigateToResInPlaceRentRoll();
         Income.Residential.InPlaceRentRoll.goToPropSummaryWithSaveSaveClickFirst();
-        Property.Summary.enterNumberOfUnits(tesData.bedroomCategory.numberOfUnits)
+        Property.Summary.enterNumberOfResUnits(tesData.bedroomCategory.numberOfUnits)
             .goBackWithSave();
         Income.Residential.InPlaceRentRoll.enterBedroomsNumberByRowNumber(tesData.bedroomCategory.bedroomsNumber)
             .enterRentTypeCellByRowNumber(tesData.bedroomCategory.rentType);

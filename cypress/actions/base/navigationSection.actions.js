@@ -1,5 +1,6 @@
 import navigationSectionPage from "../../pages/base/navigationSection.page";
 import BaseActions from "./base.actions";
+import {waitForTime} from "../../../utils/waiters.utils";
 
 class NavigationSectionActions extends BaseActions {
 
@@ -146,7 +147,10 @@ class NavigationSectionActions extends BaseActions {
         this.clickSaveButton()
             .verifyProgressBarNotExist()
             .clickSaveButton()
+            .verifyProgressBarNotExist()
+            .clickSaveButton()
             .verifyProgressBarNotExist();
+        waitForTime(3000);
         this.clickPropertyButton()
             .clickCommercialUnits();
         return this;
@@ -274,7 +278,7 @@ class NavigationSectionActions extends BaseActions {
 
     /**
      *
-     * @param isWithSave
+     * @param {boolean} isWithSave
      * @returns {NavigationSectionActions}
      */
     navigateToCapRateConclusion(isWithSave = true) {
@@ -313,6 +317,10 @@ class NavigationSectionActions extends BaseActions {
         return this;
     }
 
+    /**
+     *
+     * @returns {NavigationSectionActions}
+     */
     navigateToSalesValueConclusion() {
         this.clickSalesButton()
             .clickValueConclusionButton()

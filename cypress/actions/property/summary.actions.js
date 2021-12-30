@@ -22,8 +22,8 @@ class SummaryActions extends BaseActions {
      * @param {number | string} number
      * @returns {SummaryActions}
      */
-    enterNumberOfUnits(number) {
-        summaryPage.numberOfUnitsInput.clear().type(number).should("have.value", number);
+    enterNumberOfResUnits(number) {
+        summaryPage.numberOfResUnitsInput.clear().type(number).should("have.value", number);
         return this;
     }
 
@@ -159,8 +159,8 @@ class SummaryActions extends BaseActions {
      * @param {number | string} number
      * @returns {SummaryActions}
      */
-    enterCurrentNumberOfUnits(number) {
-        summaryPage.currentNumberOfUnits.clear().type(number).should("have.value", number);
+    enterCurrentNumberOfResUnits(number) {
+        summaryPage.currentNumberOfResUnits.clear().type(number).should("have.value", number);
         return this;
     }
 
@@ -193,7 +193,7 @@ class SummaryActions extends BaseActions {
      */
     fillAsCompleteBuildingDescription(description) {
         this.enterGrossBuildingArea(description.grossArea)
-            .enterNumberOfUnits(description.numberOfUnits)
+            .enterNumberOfResUnits(description.numberOfUnits)
             .enterFloorsNumber(description.floorsNumber);
         return this;
     }
@@ -205,7 +205,7 @@ class SummaryActions extends BaseActions {
      */
     fillCurrentBuildDescription(description) {
         this.enterCurrentGrossBuildingArea(description.grossArea)
-            .enterCurrentNumberOfUnits(description.numberOfUnits)
+            .enterCurrentNumberOfResUnits(description.numberOfUnits)
             .enterCurrentFloorsNumber(description.floorsNumber);
         return this;
     }

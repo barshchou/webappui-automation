@@ -2,10 +2,12 @@ import testData from "../../../../../fixtures/not_full_reports/income/residentia
 import Homepage from "../../../../../actions/base/homepage.actions";
 import NavigationSection from "../../../../../actions/base/navigationSection.actions";
 import RentComps from "../../../../../actions/income/residential/rent_comps/rentComps.manager";
+import {waitForTime} from "../../../../../../utils/waiters.utils";
 
 describe("Unit map tests", () => {
    before("Login and open Rent Comps", () => {
        cy.login();
+       waitForTime();
        Homepage.createReport(testData.reportCreationData);
        NavigationSection.navigateToRentComps();
        cy.saveLocalStorage();
@@ -90,7 +92,7 @@ describe("Unit map tests", () => {
         RentComps.BaseActions.selectSortByOptionsByValues(testData.data.sortByOptions);
     });
 
-    it.skip("ID62: Search Results", () => {
+    it("ID62: Search Results", () => {
         RentComps.BaseActions.verifyPhotosExistAndNavigateByPhotos(testData.data.comparableIndex)
             .verifyCompAddressesExist()
             .verifyRentsTexts()
@@ -98,7 +100,7 @@ describe("Unit map tests", () => {
             .verifyComparablePropertyTextsExist();
     });
 
-    it.skip("ID63: SELECT button - turns to SELECTED", () => {
+    it("ID63: SELECT button - turns to SELECTED", () => {
         RentComps.BaseActions.verifyLoadingDoesntExist()
             .clickAllSelectComparableButtons()
             .verifyComparableGroups(testData.data.numberOfUnits);

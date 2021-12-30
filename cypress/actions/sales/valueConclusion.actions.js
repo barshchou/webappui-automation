@@ -285,6 +285,17 @@ class ValueConclusionActions extends BaseActions {
         valueConclusionPage.matchIncomeApproachDeductionsCheckbox.should("have.value", "true");
         return this;
     }
+
+    /**
+     *
+     * @param {string | number} period
+     * @param {number} rowNumber
+     * @returns {ValueConclusionActions}
+     */
+    verifyAsStabResRentLossTimePeriodByRow(period, rowNumber = 0) {
+        valueConclusionPage.asStabResRentLossTimePeriodCells.eq(rowNumber).should("have.value", period);
+        return this;
+    }
 }
 
 export default new ValueConclusionActions();
