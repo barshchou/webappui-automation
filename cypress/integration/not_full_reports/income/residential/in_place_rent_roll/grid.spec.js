@@ -3,10 +3,12 @@ import Homepage from "../../../../../actions/base/homepage.actions";
 import NavigationSection from "../../../../../actions/base/navigationSection.actions";
 import Income from "../../../../../actions/income/income.manager";
 import Property from "../../../../../actions/property/property.manager";
+import {waitForTime} from "../../../../../../utils/waiters.utils";
 
 describe("In-Place Rent Roll grid tests", () => {
     before("Login and open In-Place Rent Roll", () => {
         cy.login();
+        waitForTime();
         Homepage.createReport(testData.reportCreationData);
         NavigationSection.navigateToResInPlaceRentRoll();
         cy.saveLocalStorage();

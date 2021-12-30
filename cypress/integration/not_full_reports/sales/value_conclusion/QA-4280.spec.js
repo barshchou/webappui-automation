@@ -4,11 +4,13 @@ import NavigationSection from "../../../../actions/base/navigationSection.action
 import Income from "../../../../actions/income/income.manager";
 import Property from "../../../../actions/property/property.manager";
 import Sales from "../../../../actions/sales/sales.manager";
+import {waitForTime} from "../../../../../utils/waiters.utils";
 
 describe("Prospective Market Value As Stabilized -> " +
     "Less Residential Rent Loss data is pulled from Cap Rate Conclusion", () => {
     before("Login action", () => {
         cy.login();
+        waitForTime();
         Homepage.createReport(testData.reportCreationData);
     });
 

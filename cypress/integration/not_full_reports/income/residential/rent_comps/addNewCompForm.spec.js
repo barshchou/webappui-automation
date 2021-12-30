@@ -3,10 +3,12 @@ import {commonData} from "../../../../../fixtures/not_full_reports/income/reside
 import Homepage from "../../../../../actions/base/homepage.actions";
 import NavigationSection from "../../../../../actions/base/navigationSection.actions";
 import RentComps from "../../../../../actions/income/residential/rent_comps/rentComps.manager";
+import {waitForTime} from "../../../../../../utils/waiters.utils";
 
 describe("Add new comparable form tests", () => {
     before("Login and open rent comps page", () => {
         cy.login();
+        waitForTime();
         Homepage.createReport(testData.reportCreationData);
         NavigationSection.navigateToRentComps();
         cy.saveLocalStorage();

@@ -3,10 +3,12 @@ import Homepage from "../../../../actions/base/homepage.actions";
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Sales from "../../../../actions/sales/sales.manager";
 import Final from "../../../../actions/final/final.manager";
+import {waitForTime} from "../../../../../utils/waiters.utils";
 
 describe("Save and Save & Continue buttons tests", () => {
     beforeEach("Login, open sales value conclusion and make changes", () => {
         cy.login();
+        waitForTime();
         Homepage.createReport(testData.reportCreationData);
         NavigationSection.navigateToSalesValueConclusion();
         Sales.ValueConclusion.checkMatchIncomeApproachDeductionsCheckbox()
