@@ -327,6 +327,26 @@ class NavigationSectionActions extends BaseActions {
             .clickYesButton();
         return this;
     }
+
+    /**
+     *
+     * @returns {NavigationSectionActions}
+     */
+    clickFindCompsButton() {
+        navigationSectionPage.findCompsButton.click();
+        return this;
+    }
+
+    /**
+     *
+     * @returns {NavigationSectionActions}
+     */
+    navigateToFindComps() {
+        this.clickSalesButton()
+            .clickFindCompsButton()
+            .clickYesButton();
+        return this;
+    }
 }
 
 export default new NavigationSectionActions();

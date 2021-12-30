@@ -27,6 +27,24 @@ class FindCompsActions extends BaseActions {
         findCompsPage.addressCells.eq(index).should("contain.text", address);
         return this;
     }
+
+    /**
+     *
+     * @returns {FindCompsActions}
+     */
+    clickImportComparableButton() {
+        findCompsPage.importCompsButton.click();
+        return this;
+    }
+
+    /**
+     *
+     * @returns {FindCompsActions}
+     */
+    verifyImportCompModalShown() {
+        findCompsPage.importCompModal.should("be.visible");
+        return this;
+    }
 }
 
 

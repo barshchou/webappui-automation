@@ -22,6 +22,7 @@ class NavigationSection extends BasePage {
     get insurableReplacementCostBookmark() {return cy.get("#insurable-replacement-cost > svg[data-icon=bookmark]");}
     get salesApproachButton() {return cy.get("#sales-approach > svg");}
     get valueConclusionButton() {return cy.get("#sale-value-conclusion");}
+    get findCompsButton() {return cy.get("#sales-comps-search");}
 }
 
 export default new NavigationSection();
