@@ -6,6 +6,7 @@ import Property from "../../actions/property/property.manager";
 import Income from "../../actions/income/income.manager";
 import Final from "../../actions/final/final.manager";
 import Sales from "../../actions/sales/sales.manager";
+import {getTodayDateString, getYearFromDate} from "../../../utils/date.utils";
 
 describe("Full bowery way, multifamily as complete report", () => {
     it("Test", () => {
@@ -30,7 +31,7 @@ describe("Full bowery way, multifamily as complete report", () => {
         Property.Market.verifyTimeOnMarket(testData.timeOnMarket)
             .fillMarketResearch(testData.marketResearch)
             .clickPullFromDropbox()
-            .verifyAnyDocumentInputIsNotEmpty()
+            .verifyMultifamilySubmarketAnalysisHasDocument(testData.marketResearch.multifamilySubmarketDocument)
             .clickSaveContinueButton();
         Property.History.enterCurrentOwner(testData.owner.name)
             .checkIsUnderContractCheckbox()
@@ -270,7 +271,7 @@ describe("Full bowery way, multifamily as complete report", () => {
             .verifyTaxSummaryCommentary(testData.summaryTaxInfo.commentary)
             .clickSaveContinueButton();
         Income.ExpenseHistory.selectExpensePeriod(testData.expenseHistory.expensePeriod)
-            .verifyExpenseYear(testData.expenseHistory.expenseYear)
+            .verifyExpenseYear(Number(getYearFromDate(getTodayDateString())) + 1)
             .clickAddExpenseYearButton()
             .checkGrossRevenueCheckboxByColumnIndex()
             .enterGrossRevenueByColIndex(testData.expenseHistory.grossRevenue)

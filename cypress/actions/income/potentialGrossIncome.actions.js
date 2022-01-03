@@ -65,8 +65,7 @@ class PotentialGrossIncomeActions extends BaseActions {
      * @returns {PotentialGrossIncomeActions}
      */
     verifyPotentialResidentialIncome(incomeToBe) {
-        // TODO: return to this row after WEB-3766 bug fix: "grossIncomePage.potentialResidentialIncome.should("have.text", incomeToBe);"
-        grossIncomePage.potentialResidentialIncome.should("exist");
+        grossIncomePage.potentialResidentialIncome.should("have.text", incomeToBe);
         return this;
     }
 
@@ -90,8 +89,7 @@ class PotentialGrossIncomeActions extends BaseActions {
             grossIncomePage.otherIncome.then(otherIncome => {
                 const otherIncomeNumber = getNumberFromDollarNumberWithCommas(otherIncome.text());
                 const textToBe = `$${numberWithCommas((potResIncomeNumber + otherIncomeNumber).toFixed(2))}`;
-                // TODO: return to this row after WEB-3766 bug fix: "grossIncomePage.potentialGrossIncome.should("have.text", textToBe);"
-                grossIncomePage.potentialGrossIncome.should("exist");
+                grossIncomePage.potentialGrossIncome.should("have.text", textToBe);
             });
         });
         return this;

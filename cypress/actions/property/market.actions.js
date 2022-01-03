@@ -135,15 +135,25 @@ class MarketActions extends BaseActions{
 
     /**
      *
+     * @param {string} name
+     * @returns {MarketActions}
+     */
+    verifyMultifamilySubmarketAnalysisHasDocument(name) {
+        marketPage.multifamilySubmarketAnalysisFile.should("have.value", name);
+        return this;
+    }
+
+    /**
+     *
      * @param {Readonly<{neighborhoodValue: string, marketArea: string, state: string, dateOfValuation: string,
-     * macroMarket: string, submarket: string}>} marketResearch
+     * macroMarket: string, submarket: string, marketYear: string}>} marketResearch
      * @returns {MarketActions}
      */
     fillMarketResearch(marketResearch) {
         this.enterNeighborhood(marketResearch.neighborhoodValue)
             .enterArea(marketResearch.marketArea)
             .verifyMarketState(marketResearch.state)
-            .verifyNeighborhoodYear(getYearFromDate(marketResearch.dateOfValuation))
+            .verifyNeighborhoodYear(getYearFromDate(marketResearch.marketYear))
             .enterMacroMarket(marketResearch.macroMarket)
             .enterSubmarket(marketResearch.submarket)
             .verifyMarketQuarter(getQuarter(marketResearch.dateOfValuation))

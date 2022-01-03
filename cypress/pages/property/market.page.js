@@ -12,6 +12,7 @@ class MarketPage extends BasePage{
     get marketQuarter() {return cy.xpath("//label[.='Submarket & Market Quarter']//following::input[1]");}
     get marketYear() {return cy.get("*[name=marketYear]");}
     get pullDropboxButton() {return cy.xpath("//button[.='PULL FROM DROPBOX']");}
+    get multifamilySubmarketAnalysisFile() {return cy.get("[data-qa=file-selection-multifamilySubmarketAnalysis-input] input");}
     get pulledFileConfirmation() {return cy.contains("This file will appear after the Introduction.");}
 }
 

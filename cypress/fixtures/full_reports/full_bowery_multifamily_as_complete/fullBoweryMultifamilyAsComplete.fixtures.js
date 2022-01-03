@@ -1,3 +1,5 @@
+import {getTodayDateString} from "../../../../utils/date.utils";
+
 const reportCreationFixture = () => {
     return {
         state: "Other",
@@ -86,7 +88,9 @@ const marketResearchFixture = () => {
         state: "IL",
         macroMarket: "IL-Chicago",
         submarket: "IL-South Chicago",
-        dateOfValuation: keyInfoEngagementFixture().dateOfValuation.date
+        dateOfValuation: keyInfoEngagementFixture().dateOfValuation.date,
+        marketYear: getTodayDateString(),
+        multifamilySubmarketDocument: "2021 Q3 IL - South Chicago - Multifamily Submarket_FINAL"
     };
 };
 
@@ -923,7 +927,7 @@ const findCompsFixture = () => {
 
 const adjustCompsFixture = () => {
     return {
-        calculationUnitsRadioValue: "false",
+        calculationUnitsRadioValue: "Per Residential Unit",
         incomeAdjustmentType: "None",
         comparables: [
             {
