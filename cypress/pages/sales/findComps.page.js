@@ -9,7 +9,7 @@ class FindCompsPage extends BasePage {
     get addressCells() {return cy.get("[data-qa=address]");}
     get capRateCells() {return cy.get("td[data-qa=cap-rate]");}
     get importCompsButton() {return cy.get("[data-qa=import-btn]");}
-    get importCompModal() {return cy.get("[data-qa=import-modal]");}
+    get importCompModal() {return cy.get("[data-qa*=import][data-qa*=modal]");}
     get csvInput() {return cy.get("[data-qa=file-input]");}
 }
 
