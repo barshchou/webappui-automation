@@ -1,6 +1,7 @@
 name: Cypress not full reports tests
 
 on:
+  workflow_dispatch:
   pull_request:
     branches: [ master ]
 
