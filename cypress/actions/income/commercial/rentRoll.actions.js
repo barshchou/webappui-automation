@@ -81,7 +81,7 @@ class CommercialRentRollActions extends BaseActions {
         rentRollPage.leaseStatusCells.eq(rowNumber).should("have.text", status);
         if (status === "Vacant") {
             rentRollPage.getAllCellsByRowNumber(rowNumber).then(cells => {
-                for (let i = 3; i < cells.length; i++) {
+                for (let i = 3; i < cells.length - 2; i++) {
                     cy.wrap(cells).eq(i).should("have.class", "readOnly");
                 }
             });
@@ -227,12 +227,10 @@ class CommercialRentRollActions extends BaseActions {
      * @returns {CommercialRentRollActions}
      */
     enterRentPerSFByRowNumber(value, rowNumber = 0) {
-        rentRollPage.rentPerSFCells.eq(rowNumber).as("cell");
-        cy.get("@cell").should("not.have.class", "readOnly");
-        cy.get("@cell").dblclick({force:true});
+        rentRollPage.rentPerSFCells.eq(rowNumber).should("not.have.class", "readOnly").dblclick({force:true});
         rentRollPage.textareaToInput.clear().type(value).type("{enter}");
         const textToBe = numberWithCommas(value.toFixed(2));
-        cy.get("@cell").should("have.text", `$${textToBe}`);
+        rentRollPage.rentPerSFCells.eq(rowNumber).should("have.text", `$${textToBe}`);
         return this;
     }
 
