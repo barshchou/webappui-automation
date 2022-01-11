@@ -318,6 +318,36 @@ class ValueConclusionActions extends BaseActions {
         valueConclusionPage.additionalCommentaryInput.should("have.text", commToBe);
         return this;
     }
+
+    /**
+     *
+     * @param {string} commToBe
+     * @returns {ValueConclusionActions}
+     */
+    verifyGeneratedCommentary(commToBe) {
+        valueConclusionPage.valueConclusionDiscussionCommentary.should("have.text", commToBe);
+        return this;
+    }
+
+    /**
+     *
+     * @param {string} commentary
+     * @returns {ValueConclusionActions}
+     */
+    enterNewCommentary(commentary) {
+        valueConclusionPage.editCommentaryButton.click();
+        valueConclusionPage.commentaryInput.clear().type(commentary).should("have.text", commentary);
+        return this;
+    }
+
+    /**
+     *
+     * @returns {ValueConclusionActions}
+     */
+    clickRevertCommentaryButton() {
+        valueConclusionPage.revertCommentaryButton.click();
+        return this;
+    }
 }
 
 export default new ValueConclusionActions();

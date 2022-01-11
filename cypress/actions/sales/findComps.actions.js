@@ -67,6 +67,16 @@ class FindCompsActions extends BaseActions {
         findCompsPage.addressCells.should("have.length", numberToBe);
         return this;
     }
+
+    /**
+     *
+     * @param {string} address
+     * @returns {FindCompsActions}
+     */
+    selectCompFromMapByAddress(address) {
+        findCompsPage.getSelectCompFromMapButtonByAddress(address).scrollIntoView().click({force: true});
+        return this;
+    }
 }
 
 

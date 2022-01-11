@@ -11,6 +11,10 @@ class FindCompsPage extends BasePage {
     get importCompsButton() {return cy.get("[data-qa=import-btn]");}
     get importCompModal() {return cy.get("[data-qa*=import][data-qa*=modal]");}
     get csvInput() {return cy.get("[data-qa=file-input]");}
+    getSelectCompFromMapButtonByAddress(address) {
+        return cy.get("[class*=address]").filter(`:contains('${address}')`).parent()
+            .siblings("[class*=buttonsColumn]").find("span").contains("Select").parent();
+    }
 }
 
 export default new FindCompsPage();

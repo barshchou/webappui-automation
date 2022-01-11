@@ -23,6 +23,10 @@ class ValueConclusionPage extends BasePage {
     get matchIncomeApproachDeductionsCheckbox() {return cy.get("[data-qa^=matchIncomeApproachDeductions] input");}
     get asStabResRentLossTimePeriodCells() {return cy.get("[name^=asStabilizedResRentLossItems][name$=months]");}
     get additionalCommentaryInput() {return cy.get("[name='salesApproachValueConclusionCommentary.additionalCommentary']");}
+    get valueConclusionDiscussionCommentary() {return cy.get("[data-qa*='ConclusionCommentary.commentary']");}
+    get editCommentaryButton() {return cy.get("[data-qa=generated-commentary-edit-btn]");}
+    get commentaryInput() {return cy.get("[name*='ConclusionCommentary.commentary']");}
+    get revertCommentaryButton() {return cy.get("[data-qa=generated-commentary-revert-btn]");}
 }
 
 export default new ValueConclusionPage();
