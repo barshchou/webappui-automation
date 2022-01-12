@@ -527,6 +527,21 @@ class CommercialRentRollActions extends BaseActions {
         rentRollPage.rentPerSFCells.last().should("have.text", `$${textToBe}`);
         return this;
     }
+
+    /**
+     *
+     * @param {string} newCommentary
+     * @returns {CommercialRentRollActions}
+     */
+    editDiscussion(newCommentary) {
+        rentRollPage.modifiedLabel.should("not.exist");
+        rentRollPage.editDiscussionButton.click();
+        rentRollPage.discussionTextInput.clear().type(newCommentary);
+        rentRollPage.saveDiscussionChanges.click();
+        cy.contains(newCommentary).should("exist");
+        rentRollPage.modifiedLabel.should("exist");
+        return this;
+    }
 }
 
 export default new CommercialRentRollActions();

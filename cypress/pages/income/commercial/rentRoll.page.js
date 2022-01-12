@@ -24,6 +24,10 @@ class CommercialRentRollPage extends BasePage{
     get annualRentCells() {return cy.get("*[data-qa*=annualRent]:not([data-qa*=Psf])");}
     get monthlyRentCells() {return cy.get("*[data-qa*=monthlyRent]:not([data-qa*=Psf])");}
     getLeaseStatusToChooseByValue(status) {return cy.xpath(`//li[.='${status}']`);}
+    get editDiscussionButton() {return cy.xpath("//button[.='Edit']");}
+    get discussionTextInput() {return cy.get("[role=textbox]");}
+    get saveDiscussionChanges() {return cy.xpath("//button[.='Save' and not(contains(@data-qa, 'form-save-btn'))]");}
+    get modifiedLabel() {return cy.contains("Modified");}
 }
 
 export default new CommercialRentRollPage();
