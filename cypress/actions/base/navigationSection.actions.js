@@ -347,6 +347,25 @@ class NavigationSectionActions extends BaseActions {
             .clickYesButton();
         return this;
     }
+
+    /**
+     *
+     * @returns {NavigationSectionActions}
+     */
+    clickAdjustCompsButton() {
+        navigationSectionPage.adjustCompsButton.click();
+        return this;
+    }
+
+    /**
+     *
+     * @returns {NavigationSectionActions}
+     */
+    openAdjustCompsInSales() {
+        this.clickAdjustCompsButton()
+            .clickYesButton();
+        return this;
+    }
 }
 
 export default new NavigationSectionActions();

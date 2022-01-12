@@ -13,6 +13,9 @@ class AdjustCompsPage extends BasePage {
     get otherAdjustmentCells() {return cy.get("[name$='adjustments.otherAdjustment']");}
     get trendedPricePerUnitCells() {return cy.xpath("//*[.='Trended Price per Unit']//following-sibling::td");}
     get adjustedPricePerUnitCells() {return cy.xpath("//*[.='Adjusted Price per Unit']//following-sibling::td");}
+    get netPropertyAdjustmentsCells() {return cy.xpath("//td[.='Net Property Adjustments']//following-sibling::td");}
+    getAllAdjustmentCellsByCompIndex(index) {return cy.get(`[name^='salesComps[${index}]']`);}
+
 }
 
 export default new AdjustCompsPage();

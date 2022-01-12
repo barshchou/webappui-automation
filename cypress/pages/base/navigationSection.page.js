@@ -23,6 +23,7 @@ class NavigationSection extends BasePage {
     get salesApproachButton() {return cy.get("#sales-approach > svg");}
     get valueConclusionButton() {return cy.get("#sale-value-conclusion");}
     get findCompsButton() {return cy.get("#sales-comps-search");}
+    get adjustCompsButton() {return cy.get("#sales-adjustment-grid");}
 }
 
 export default new NavigationSection();
