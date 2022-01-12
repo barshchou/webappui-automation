@@ -366,6 +366,27 @@ class NavigationSectionActions extends BaseActions {
             .clickYesButton();
         return this;
     }
+
+    /**
+     *
+     * @returns {NavigationSectionActions}
+     */
+    clickCommercialRentComps() {
+        navigationSectionPage.commercialRentCompsButton.click();
+        return this;
+    }
+
+    /**
+     *
+     * @returns {NavigationSectionActions}
+     */
+    navigateToCommercialRentComps() {
+        this.clickIncomeApproachButton()
+            .clickCommercialArrow()
+            .clickCommercialRentComps()
+            .clickYesButton();
+        return this;
+    }
 }
 
 export default new NavigationSectionActions();
