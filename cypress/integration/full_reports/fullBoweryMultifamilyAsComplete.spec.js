@@ -419,9 +419,9 @@ describe("Full bowery way, multifamily as complete report", () => {
             .enterAsCompleteLessEntrepreneurialProfit(testData.capRateConclusion.asCompletePart.lessEntrepreneurialProfit)
             .verifyAsIsMarketTablePart(testData.capRateConclusion.asIsMarketPart)
             .clickSaveContinueButton();
-        testData.findComps.comparables.forEach((comp, i) => {
+        testData.findComps.comparables.forEach((comp) => {
             Sales.FindComps.addComparable(comp.address)
-                .verifyAddedCompAddressByIndex(comp.address, i + 1);
+                .verifyAddedCompAddressByIndex(comp.address);
         });
         Sales.FindComps.clickSaveContinueButton();
         Sales.CreateCompMap.captureScreen()

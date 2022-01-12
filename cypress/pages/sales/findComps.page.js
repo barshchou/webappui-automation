@@ -15,6 +15,18 @@ class FindCompsPage extends BasePage {
         return cy.get("[class*=address]").filter(`:contains('${address}')`).parent()
             .siblings("[class*=buttonsColumn]").find("span").contains("Select").parent();
     }
+    getRemoveSelectedCompButtonByAddress(address) {
+        return cy.xpath(`//*[contains(text(), '${address}')]//parent::td//following-sibling::td[.='Details']` +
+            "//descendant::button[@aria-label='Remove']");
+    }
+    getRemoveDeletedCompButtonByAddress(address) {
+        return cy.xpath(`//*[contains(text(), '${address}')]//parent::td//following-sibling::td` +
+            "//descendant::*[@title='Add']//following::button[@aria-label='Remove'][1]");
+    }
+    getRemoveCompFromMapButtonByAddress(address) {
+        return cy.get("[class*=address]").filter(`:contains('${address}')`).parent()
+            .siblings("[class*=buttonsColumn]").find("span").contains("Remove").parent();
+    }
 }
 
 export default new FindCompsPage();

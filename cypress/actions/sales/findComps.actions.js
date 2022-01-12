@@ -21,11 +21,11 @@ class FindCompsActions extends BaseActions {
     /**
      *
      * @param {string} address
-     * @param {number} index
      * @returns {FindCompsActions}
      */
-    verifyAddedCompAddressByIndex(address, index) {
-        findCompsPage.addressCells.eq(index).should("contain.text", address);
+    verifyAddedCompAddressByIndex(address) {
+        this.verifyProgressBarNotExist();
+        findCompsPage.getRemoveSelectedCompButtonByAddress(address).should("exist");
         return this;
     }
 
@@ -75,6 +75,47 @@ class FindCompsActions extends BaseActions {
      */
     selectCompFromMapByAddress(address) {
         findCompsPage.getSelectCompFromMapButtonByAddress(address).scrollIntoView().click({force: true});
+        findCompsPage.getRemoveCompFromMapButtonByAddress(address).should("exist");
+        return this;
+    }
+
+    /**
+     *
+     * @param {string} address
+     * @returns {FindCompsActions}
+     */
+    removeCompByAddress(address) {
+        findCompsPage.getRemoveSelectedCompButtonByAddress(address).click();
+        return this;
+    }
+
+    /**
+     *
+     * @param {string} address
+     * @returns {FindCompsActions}
+     */
+    verifyCompIsInRemovedSection(address) {
+        findCompsPage.getRemoveDeletedCompButtonByAddress(address).should("exist");
+        return this;
+    }
+
+    /**
+     *
+     * @param {string} address
+     * @returns {FindCompsActions}
+     */
+    verifyCompIsInMap(address) {
+        findCompsPage.getSelectCompFromMapButtonByAddress(address).should("exist");
+        return this;
+    }
+
+    /**
+     *
+     * @param {string} address
+     * @returns {FindCompsActions}
+     */
+    removeDeletedCompByAddress(address) {
+        findCompsPage.getRemoveDeletedCompButtonByAddress(address).click();
         return this;
     }
 }
