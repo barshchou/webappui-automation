@@ -1,4 +1,5 @@
 import {getTodayDateString} from "../../../../utils/date.utils";
+import Enums from "../../../enums/enums";
 
 const reportCreationFixture = () => {
     return {
@@ -7,9 +8,9 @@ const reportCreationFixture = () => {
         identifierType: "PIN",
         identifier: "20-36-420-020-0000",
         reportNumber: "Full Report Test Automation",
-        templateValue: "bowery-way",
-        incomeValue: "multifamily",
-        conclusionValue: "AS_COMPLETE"
+        templateValue: Enums.TEMPLATE_TYPE.NOT_FREDDIE_MAC,
+        incomeValue: Enums.INCOME_TYPE.RESIDENTIAL,
+        conclusionValue: Enums.VALUE_CONCLUSION_TYPE.AS_COMPLETE
     };
 };
 
