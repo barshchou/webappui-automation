@@ -23,6 +23,10 @@ class CommercialRentCompsActions extends BaseActions {
         return this;
     }
 
+    /**
+     *
+     * @param {string} attribute
+     */
     checkCheckboxByQAAttr(attribute) {
         rentCompsPage.getNotCheckedCheckboxByQAAttr(attribute).should("exist").check();
         this.verifyProgressBarNotExist();
@@ -30,10 +34,30 @@ class CommercialRentCompsActions extends BaseActions {
         return this;
     }
 
+    /**
+     *
+     * @param {string} attribute
+     */
     uncheckCheckboxByQAAttr(attribute) {
         rentCompsPage.getCheckedCheckboxByQAAttr(attribute).should("exist").uncheck();
         this.verifyProgressBarNotExist();
         rentCompsPage.getNotCheckedCheckboxByQAAttr(attribute).should("exist");
+        return this;
+    }
+
+    verifySortBySectionExist() {
+        rentCompsPage.sortBySection.should("exist");
+        return this;
+    }
+
+    /**
+     *
+     * @param {string} option
+     */
+    selectSortByOption(option) {
+        rentCompsPage.sortByDropdown.click();
+        rentCompsPage.getDropdownOptionByValue(option).should("be.visible").click();
+        rentCompsPage.sortByDropdown.should("have.text", option);
         return this;
     }
 }
