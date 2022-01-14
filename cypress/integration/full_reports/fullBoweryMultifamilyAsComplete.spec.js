@@ -433,7 +433,7 @@ describe("Full bowery way, multifamily as complete report", () => {
                 .enterConditionAdjustmentByColumn(comp.condition, i)
                 .enterOtherAdjustmentByColumn(comp.other, i)
                 .verifyTrendedPriceByColumn(comp.trendedPrice, i)
-                .verifyAdjustedPriceByColumn(comp.adjustedPrice, i);
+                .verifyAdjustedPriceByColumn(i);
         });
         Sales.AdjustComps.editOtherAdjustmentRowName(testData.adjustComps.otherAdjustmentNewName)
             .clickSaveContinueButton();

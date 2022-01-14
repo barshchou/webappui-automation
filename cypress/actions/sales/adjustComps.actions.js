@@ -1,5 +1,10 @@
 import BaseActions from "../base/base.actions";
 import adjustCompsPage from "../../pages/sales/adjustComps.page";
+import {
+    getNumberFromDollarNumberWithCommas,
+    getNumberWithDecimalPart,
+    numberWithCommas
+} from "../../../utils/numbers.utils";
 
 class AdjustCompsActions extends BaseActions {
 
@@ -78,29 +83,55 @@ class AdjustCompsActions extends BaseActions {
      * @returns {AdjustCompsActions}
      */
     verifyTrendedPriceByColumn(value, index) {
-        adjustCompsPage.trendedPricePerUnitCells.eq(index).should("have.text", value);
+        adjustCompsPage.trendedPriceCells.eq(index).should("have.text", value);
         return this;
     }
 
     /**
-     *
-     * @param {string} value
      * @param {number} index
      * @returns {AdjustCompsActions}
      */
-    verifyAdjustedPriceByColumn(value, index) {
-        adjustCompsPage.adjustedPricePerUnitCells.eq(index).should("have.text", value);
+    verifyAdjustedPriceByColumn(index = 0) {
+        adjustCompsPage.trendedPriceCells.eq(index).invoke("text").then(trendedText => {
+            const trendedNumber = getNumberFromDollarNumberWithCommas(trendedText);
+            adjustCompsPage.netPropertyAdjustmentsCells.eq(index).invoke("text").then(netAdjText => {
+                const netAdjNumber = Number(netAdjText.replace("%", ""));
+                const adjustedPriceToBe = trendedNumber + (trendedNumber * (netAdjNumber / 100));
+                let adjustedPriceText;
+                if (adjustedPriceToBe < 0) {
+                    adjustedPriceText = `-$${numberWithCommas(getNumberWithDecimalPart(adjustedPriceToBe)
+                        .replace("-", ""))}`;
+                } else {
+                    adjustedPriceText = `$${numberWithCommas(getNumberWithDecimalPart(adjustedPriceToBe))}`;
+                }
+                adjustCompsPage.adjustedPriceCells.eq(index).should("have.text", adjustedPriceText);
+            });
+        });
         return this;
     }
 
+    /**
+     * @param {number} index
+     */
     verifyNetPropertyAdjustmentsByCompIndex(index = 0) {
         adjustCompsPage.getAllAdjustmentCellsByCompIndex(index).then(cells => {
-            const adjustmentsValues = Array.from(cells).map(cell => cell.value).map(cellText => Number(cellText.replace("%", "")));
+            const adjustmentsValues = Array.from(cells).filter((el, index) => index > 3)
+                .map(cell => cell.value).map(cellText => Number(cellText.replace("%", "")));
             const netPropAdjustmentsToBe = adjustmentsValues.reduce((sum, prevValue) => sum + prevValue, 0);
             adjustCompsPage.netPropertyAdjustmentsCells.eq(index).should("have.text", `${netPropAdjustmentsToBe}%`);
         });
+        return this;
     }
 
+    /**
+     * @param {number | string} value
+     * @param {number} index
+     * @returns {AdjustCompsActions}
+     */
+    enterPropertyRightsByColumn(value, index = 0) {
+        adjustCompsPage.propertyRightsCells.eq(index).clear().type(value).should("have.value", `${value}%`);
+        return this;
+    }
 }
 
 export default new AdjustCompsActions();

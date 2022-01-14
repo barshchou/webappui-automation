@@ -936,35 +936,30 @@ const adjustCompsFixture = () => {
                 condition: 5,
                 other: -5,
                 trendedPrice: "$90,000.00",
-                adjustedPrice: "$90,000.00"
             },
             {
                 size: 5,
                 condition: 5,
                 other: -5,
                 trendedPrice: "$78,125.00",
-                adjustedPrice: "$82,031.25"
             },
             {
                 size: 0,
                 condition: 0,
                 other: -5,
                 trendedPrice: "$101,666.67",
-                adjustedPrice: "$96,583.33"
             },
             {
                 size: 10,
                 condition: 0,
                 other: -5,
                 trendedPrice: "$91,666.67",
-                adjustedPrice: "$96,250.00"
             },
             {
                 size: 0,
                 condition: 5,
                 other: -5,
                 trendedPrice: "$86,666.67",
-                adjustedPrice: "$86,666.67"
             },
         ],
         otherAdjustmentNewName: "Average Unit Size Adjustment"

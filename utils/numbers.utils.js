@@ -34,3 +34,23 @@ export const getNumberFromDollarNumberWithCommas = (stringNumber) => {
   return typeof stringNumber === "string" ? Number(stringNumber.replace("$", "")
       .replace(",", "")) : stringNumber;
 };
+
+const getZerosString = (numberOfZeros) => {
+    let stringToReturn = "";
+    for (let i = 0; i < numberOfZeros; i++) {
+        stringToReturn += "0";
+    }
+    return stringToReturn;
+};
+
+export const getNumberWithDecimalPart = (number, digitsToBe = 2) => {
+    let splittedNumber = number.toString().split(".");
+    if (splittedNumber.length === 1) {
+        return `${number.toString()}.${getZerosString(digitsToBe)}`;
+    }
+    let decimalPart = splittedNumber[1];
+    if (decimalPart.length < digitsToBe) {
+        return `${splittedNumber[0]}.${getZerosString(digitsToBe - decimalPart.length)}`;
+    }
+    return `${splittedNumber[0]}.${decimalPart.slice(0, digitsToBe)}`;
+};
