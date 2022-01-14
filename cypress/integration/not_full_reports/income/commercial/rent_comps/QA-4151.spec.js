@@ -13,11 +13,8 @@ describe("Check that Commercial Rent Comps map has Filters dropdown", () => {
         NavigationSection.navigateToCommercialRentComps();
         Income.Commercial.RentComps.openMap()
             .verifyProgressBarNotExist()
-            .verifyFiltersDropdownExist();
-    });
-
-    after("Delete report", () => {
-        Income.Commercial.RentComps.returnToHomePage();
+            .verifyFiltersDropdownExist()
+            .returnToHomePage();
         Homepage.deleteReport(testData.reportCreationData.reportNumber);
     });
 });

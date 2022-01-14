@@ -21,9 +21,6 @@ describe("Dropdown 'Filters'- 'Lease terms' section", () => {
            Income.Commercial.RentComps.checkCheckboxByQAAttr(attr)
                .uncheckCheckboxByQAAttr(attr);
         });
-    });
-
-    after("Delete report", () => {
         Income.Commercial.RentComps.returnToHomePage();
         Homepage.deleteReport(testData.reportCreationData.reportNumber);
     });

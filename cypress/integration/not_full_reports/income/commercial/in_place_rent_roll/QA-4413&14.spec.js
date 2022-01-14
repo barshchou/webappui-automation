@@ -12,11 +12,8 @@ describe("Current Commercial Income Discussion > Modified label and Save button 
     it("Test body", () => {
         NavigationSection.navigateToCommercialInPlaceRentRoll()
             .verifyProgressBarNotExist();
-        Income.Commercial.InPlaceRentRoll.editDiscussion(testData.editedCommentary);
-    });
-
-    after("Delete report", () => {
-        Income.Commercial.InPlaceRentRoll.returnToHomePage();
+        Income.Commercial.InPlaceRentRoll.editDiscussion(testData.editedCommentary)
+            .returnToHomePage();
         Homepage.deleteReport(testData.reportCreationData.reportNumber);
     });
 });

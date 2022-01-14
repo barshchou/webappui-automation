@@ -21,10 +21,6 @@ describe("Dropdown 'Filters'- 'Sort by' section", () => {
         testData.sortByOptions.forEach(option => {
             Income.Commercial.RentComps.selectSortByOption(option);
         });
-
-    });
-
-    after("Delete report", () => {
         Income.Commercial.RentComps.returnToHomePage();
         Homepage.deleteReport(testData.reportCreationData.reportNumber);
     });

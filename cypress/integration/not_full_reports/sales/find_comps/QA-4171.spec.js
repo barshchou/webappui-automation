@@ -17,12 +17,8 @@ describe("Selected Comparables table. Verify the functionality of Remove button"
             .removeCompByAddress(testData.comparable.address)
             .verifyCompIsInRemovedSection(testData.comparable.address)
             .verifyCompIsInMap(testData.comparable.address)
-            .removeDeletedCompByAddress(testData.comparable.address);
-    });
-
-    after("Delete report", () => {
-        Sales.FindComps.returnToHomePage();
+            .removeDeletedCompByAddress(testData.comparable.address)
+            .returnToHomePage();
         Homepage.deleteReport(testData.reportCreationData.reportNumber);
     });
-
 });

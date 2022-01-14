@@ -15,11 +15,8 @@ describe("Sales Value Conclusion Discussion -> Generated Commentary is revertibl
         Sales.ValueConclusion.verifyGeneratedCommentary(testData.commentaryData.generatedCommentary)
             .enterNewCommentary(testData.commentaryData.newCommentary)
             .clickRevertCommentaryButton()
-            .verifyGeneratedCommentary(testData.commentaryData.generatedCommentary);
-    });
-
-    after("Delete report", () => {
-        Sales.ValueConclusion.returnToHomePage();
+            .verifyGeneratedCommentary(testData.commentaryData.generatedCommentary)
+            .returnToHomePage();
         Homepage.deleteReport(testData.reportCreationData.reportNumber);
     });
 });
