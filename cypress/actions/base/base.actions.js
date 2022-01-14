@@ -14,24 +14,20 @@ export default class BaseActions {
 
     returnToHomePage() {
         cy.visit(`${getEnvUrl()}/reports`);
-        return this;
     }
 
     goBackWithSave() {
         cy.go("back");
         this.clickYesButton();
-        return this;
     }
 
     goBackWithoutSave() {
         cy.go("back");
         this.clickNoButton();
-        return this;
     }
 
     goBack() {
         cy.go("back");
-        return this;
     }
 
     clickSaveButton() {

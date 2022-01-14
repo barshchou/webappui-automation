@@ -1,4 +1,4 @@
-import {getTodayDateString} from "../../../../utils/date.utils";
+import {getTodayDateString, getYearFromDate} from "../../../../utils/date.utils";
 import Enums from "../../../enums/enums";
 
 const reportCreationFixture = () => {
@@ -630,7 +630,7 @@ const summaryTaxInfoFixture = () => {
 const expenseHistoryFixture = () => {
     return {
         expensePeriod: "Projection",
-        expenseYear: 2022,
+        expenseYear: Number(getYearFromDate(getTodayDateString())) + 1,
         grossRevenue: 84240,
         realEstateTaxes: 2402.06,
         insuranceExpense: "clear",

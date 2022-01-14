@@ -370,6 +370,26 @@ class ExpenseForecastActions extends BaseActions {
         });
         return this;
     }
+
+    /**
+     * @param {string} textToBe
+     * @returns {ExpenseForecastActions}
+     */
+    verifyTOECommentary(textToBe) {
+        expenseForecastPage.toeCommentary.should("contain.text", textToBe);
+        return this;
+    }
+
+    editTOECommentary(newText, isWithClear = false) {
+        expenseForecastPage.toeCommentaryEditButton.click();
+        if (isWithClear) {
+            expenseForecastPage.toeCommentary.clear();
+        }
+        expenseForecastPage.toeCommentary.type(newText);
+        expenseForecastPage.toeCommentarySaveButton.click();
+        expenseForecastPage.toeCommentaryModified.should("exist");
+        return this;
+    }
 }
 
 export default new ExpenseForecastActions();

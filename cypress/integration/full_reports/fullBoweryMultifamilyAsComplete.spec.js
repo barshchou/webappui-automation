@@ -6,7 +6,6 @@ import Property from "../../actions/property/property.manager";
 import Income from "../../actions/income/income.manager";
 import Final from "../../actions/final/final.manager";
 import Sales from "../../actions/sales/sales.manager";
-import {getTodayDateString, getYearFromDate} from "../../../utils/date.utils";
 
 describe("Full bowery way, multifamily as complete report", () => {
     it("Test", () => {
@@ -271,7 +270,7 @@ describe("Full bowery way, multifamily as complete report", () => {
             .verifyTaxSummaryCommentary(testData.summaryTaxInfo.commentary)
             .clickSaveContinueButton();
         Income.ExpenseHistory.selectExpensePeriod(testData.expenseHistory.expensePeriod)
-            .verifyExpenseYear(Number(getYearFromDate(getTodayDateString())) + 1)
+            .verifyExpenseYear(testData.expenseHistory.expenseYear)
             .clickAddExpenseYearButton()
             .checkGrossRevenueCheckboxByColumnIndex()
             .enterGrossRevenueByColIndex(testData.expenseHistory.grossRevenue)

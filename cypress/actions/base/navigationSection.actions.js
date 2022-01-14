@@ -387,6 +387,18 @@ class NavigationSectionActions extends BaseActions {
             .clickYesButton();
         return this;
     }
+
+    clickComparableExpenses() {
+        navigationSectionPage.comparableExpenses.click();
+        return this;
+    }
+
+    navigateToComparableExpenses() {
+        this.clickIncomeApproachButton()
+            .clickComparableExpenses()
+            .clickYesButton();
+        return this;
+    }
 }
 
 export default new NavigationSectionActions();
