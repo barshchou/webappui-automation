@@ -82,7 +82,7 @@ class AdjustCompsActions extends BaseActions {
      * @param {number} index
      * @returns {AdjustCompsActions}
      */
-    verifyTrendedPriceByColumn(value, index) {
+    verifyTrendedPriceByColumn(value, index= 0) {
         adjustCompsPage.trendedPriceCells.eq(index).should("have.text", value);
         return this;
     }
