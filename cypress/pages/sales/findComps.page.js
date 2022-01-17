@@ -27,6 +27,11 @@ class FindCompsPage extends BasePage {
         return cy.get("[class*=address]").filter(`:contains('${address}')`).parent()
             .siblings("[class*=buttonsColumn]").find("span").contains("Remove").parent();
     }
+    get reportToSearchCompInput() {return cy.get("[name^=report]");}
+    get importReportCompsButton() {return this.importCompModal.find("span").contains("Import")
+        .parent("button");}
+    get searchButton() {return cy.xpath("//button[.='Search']");}
+    get importCompsSelectButtons() {return cy.xpath("//*[.='Selected for report']//following::button[.='Select']");}
 }
 
 export default new FindCompsPage();

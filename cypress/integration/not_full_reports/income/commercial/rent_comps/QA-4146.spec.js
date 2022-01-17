@@ -1,4 +1,4 @@
-import testData from "../../../../../fixtures/not_full_reports/income/commercial/rent_comps/QA-git add.fixture";
+import testData from "../../../../../fixtures/not_full_reports/income/commercial/rent_comps/QA-4146.fixture";
 import Homepage from "../../../../../actions/base/homepage.actions";
 import Income from "../../../../../actions/income/income.manager";
 import NavigationSection from "../../../../../actions/base/navigationSection.actions";

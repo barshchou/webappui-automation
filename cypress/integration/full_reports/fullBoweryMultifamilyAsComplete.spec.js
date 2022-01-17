@@ -420,7 +420,7 @@ describe("Full bowery way, multifamily as complete report", () => {
             .clickSaveContinueButton();
         testData.findComps.comparables.forEach((comp) => {
             Sales.FindComps.addComparable(comp.address)
-                .verifyAddedCompAddressByIndex(comp.address);
+                .verifyAddedCompAddress(comp.address);
         });
         Sales.FindComps.clickSaveContinueButton();
         Sales.CreateCompMap.captureScreen()

@@ -1,16 +1,17 @@
 import {cutLastLetter} from "./string.utils";
+import Enums from "../cypress/enums/enums";
 
 export const getEnvUrl = () => {
     let envUrl;
     switch (Cypress.env("url")) {
         case "dev":
-            envUrl = "https://bowery-development.herokuapp.com";
+            envUrl = Enums.ENV_URLS.DEV;
             break;
         case "prod":
-            envUrl = "https://app.boweryvaluation.com";
+            envUrl = Enums.ENV_URLS.PROD;
             break;
         default:
-            envUrl = "https://bowery-staging.herokuapp.com";
+            envUrl = Enums.ENV_URLS.STAGING;
     }
     if (Cypress.env("customEnv")) {
         envUrl = Cypress.env("customEnv");
@@ -23,4 +24,8 @@ export const getEnvUrl = () => {
 
 const isCorrectLink = (link) => {
     return link.endsWith("/");
+};
+
+export const isProdEnv = () => {
+    return getEnvUrl().includes(Enums.ENV_URLS.PROD);
 };

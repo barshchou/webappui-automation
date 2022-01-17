@@ -13,7 +13,7 @@ describe("Selected Comparables table. Verify the functionality of Remove button"
     it("Test body", () => {
         NavigationSection.navigateToFindComps();
         Sales.FindComps.selectCompFromMapByAddress(testData.comparable.address)
-            .verifyAddedCompAddressByIndex(testData.comparable.address)
+            .verifyAddedCompAddress(testData.comparable.address)
             .removeCompByAddress(testData.comparable.address)
             .verifyCompIsInRemovedSection(testData.comparable.address)
             .verifyCompIsInMap(testData.comparable.address)

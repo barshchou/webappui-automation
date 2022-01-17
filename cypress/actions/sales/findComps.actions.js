@@ -23,7 +23,7 @@ class FindCompsActions extends BaseActions {
      * @param {string} address
      * @returns {FindCompsActions}
      */
-    verifyAddedCompAddressByIndex(address) {
+    verifyAddedCompAddress(address) {
         this.verifyProgressBarNotExist();
         findCompsPage.getRemoveSelectedCompButtonByAddress(address).should("exist");
         return this;
@@ -116,6 +116,32 @@ class FindCompsActions extends BaseActions {
      */
     removeDeletedCompByAddress(address) {
         findCompsPage.getRemoveDeletedCompButtonByAddress(address).click();
+        return this;
+    }
+
+    /**
+     * @param {string} reportID
+     * @returns {FindCompsActions}
+     */
+    enterReportToSearchComp(reportID) {
+        findCompsPage.reportToSearchCompInput.type(reportID).should("have.value", reportID);
+        return this;
+    }
+
+    clickImportCompsFromReportButton() {
+        findCompsPage.importReportCompsButton.click();
+        return this;
+    }
+
+    clickSearchButton() {
+        findCompsPage.searchButton.click();
+        return this;
+    }
+
+    selectAllCompsForImport() {
+        findCompsPage.importCompsSelectButtons.each(el => {
+            cy.wrap(el).click();
+        });
         return this;
     }
 }

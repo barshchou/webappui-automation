@@ -62,7 +62,7 @@ class CommercialRentCompsActions extends BaseActions {
     }
 
     verifyMapClosedByDefault() {
-        rentCompsPage.mapDropdown.should("have.attr", "aria-hidden", "true");
+        rentCompsPage.mapDropdown.should("have.attr", "aria-expanded", "false");
         return this;
     }
 }
