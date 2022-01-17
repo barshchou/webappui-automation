@@ -60,6 +60,11 @@ class CommercialRentCompsActions extends BaseActions {
         rentCompsPage.sortByDropdown.should("have.text", option);
         return this;
     }
+
+    verifyMapClosedByDefault() {
+        rentCompsPage.mapDropdown.should("have.attr", "aria-hidden", "true");
+        return this;
+    }
 }
 
 export default new CommercialRentCompsActions();
