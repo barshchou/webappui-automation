@@ -535,11 +535,78 @@ class CommercialRentRollActions extends BaseActions {
      */
     editDiscussion(newCommentary) {
         rentRollPage.modifiedLabel.should("not.exist");
-        rentRollPage.editDiscussionButton.click();
-        rentRollPage.discussionTextInput.clear().type(newCommentary);
-        rentRollPage.saveDiscussionChanges.click();
-        cy.contains(newCommentary).should("exist");
+        this.clickEditDiscussionButton()
+            .clearAndEnterNewCommentary(newCommentary)
+            .clickSaveDiscussionButton()
+            .verifyCommentarySavedText(newCommentary);
         rentRollPage.modifiedLabel.should("exist");
+        return this;
+    }
+
+    /**
+     * @param {string} commentary
+     * @returns {CommercialRentRollActions}
+     */
+    clearAndEnterNewCommentary(commentary) {
+        rentRollPage.discussionTextInput.clear().type(commentary);
+        return this;
+    }
+
+    clickSaveDiscussionButton() {
+        rentRollPage.saveDiscussionChanges.click();
+        return this;
+    }
+
+    clickEditDiscussionButton() {
+        rentRollPage.editDiscussionButton.click();
+        return this;
+    }
+
+    clickRevertToOriginalButton() {
+        rentRollPage.revertToOriginalButton.click();
+        rentRollPage.changesLostModalHeader.should("exist");
+        return this;
+    }
+
+    /**
+     * @param {string} textToBe
+     * @returns {CommercialRentRollActions}
+     */
+    verifyCommentarySavedText(textToBe) {
+        rentRollPage.commentaryText.should("have.text", textToBe);
+        return this;
+    }
+
+    /**
+     * @param {string} textToBe
+     * @returns {CommercialRentRollActions}
+     */
+    verifyCommentaryTextBoxText(textToBe) {
+        rentRollPage.discussionTextInput.should("have.text", textToBe);
+        return this;
+    }
+
+    /**
+     * @param {string} text
+     * @returns {CommercialRentRollActions}
+     */
+    verifyCommentaryTextBoxNotHaveText(text) {
+        rentRollPage.discussionTextInput.should("not.have.text", text);
+        return this;
+    }
+
+    clickCloseButton() {
+        rentRollPage.closeButton.click();
+        return this;
+    }
+
+    clickCancelRevertButton() {
+        rentRollPage.cancelRevertButton.click();
+        return this;
+    }
+
+    clickYesRevertButton() {
+        rentRollPage.yesRevertButton.click();
         return this;
     }
 }
