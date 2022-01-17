@@ -19,7 +19,7 @@ class CapRateConclusionPage extends BasePage {
     get asCompletePeriodCell() {return cy.get("[data-qa=as-complete-period-cell]");}
     get asCompleteAmountCell() {return cy.get("[data-qa=as-complete-amount-cell]");}
     get asCompleteFinalValueCell() {return cy.get("[data-qa=as-complete-final-value-cell]");}
-    get asCompleteLessEntrepreneurialProfit() {return cy.get("[name='asCompleteLossItems[3].amount']");}
+    get asCompleteLessEntrepreneurialProfit() {return cy.get("[name^=asCompleteLossItems][name$=amount]").last();}
     get asIsMarketPeriodCell() {return cy.get("[data-qa=as-is-market-period-cell]");}
     get asIsMarketAmountCell() {return cy.get("[data-qa=as-is-market-amount-cell]");}
     get asIsMarketFinalValueCell() {return cy.get("[data-qa=as-is-market-final-value-cell]");}
@@ -30,6 +30,7 @@ class CapRateConclusionPage extends BasePage {
     get asStabilizedRentLossSwitch() {return cy.get("[data-qa='As Stabilized-switch-button']");}
     get addButton() {return cy.xpath("//button[.='Add']");}
     get asStabResRentLossTimePeriodCells() {return cy.get("[name^=asStabilizedResRentLossItems][name$=months]");}
+    get asCompleteLessBuyoutCost() {return cy.xpath("(//input[starts-with(@name, 'asCompleteLossItems')])[last() - 1]");}
 }
 
 export default new CapRateConclusionPage();

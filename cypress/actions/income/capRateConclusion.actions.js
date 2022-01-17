@@ -324,6 +324,25 @@ class CapRateConclusionActions extends BaseActions {
         return this;
     }
 
+    /**
+     * @param {string | number} cost
+     * @returns {CapRateConclusionActions}
+     */
+    enterAsCompleteLessBuyoutCost(cost) {
+        const costValue = typeof cost === "string" ? cost : `-$${cost}`;
+        capRateConclusionPage.asCompleteLessBuyoutCost.clear().type(cost).should("have.value", costValue);
+        return this;
+    }
+
+    /**
+     * @param {string} title
+     * @returns {CapRateConclusionActions}
+     */
+    verifyPopUpWithTitleExists(title) {
+        cy.get(`[title='${title}']`).should("exist");
+        return this;
+    }
+
 }
 
 export default new CapRateConclusionActions();

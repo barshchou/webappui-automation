@@ -348,6 +348,25 @@ class ValueConclusionActions extends BaseActions {
         valueConclusionPage.revertCommentaryButton.click();
         return this;
     }
+
+    /**
+     * @param {string | number} profit
+     * @returns {ValueConclusionActions}
+     */
+    verifyAsCompleteLessEntrepreneurialProfit(profit) {
+        const valueToBe = typeof profit === "string" ? profit : `${profit}%`;
+        valueConclusionPage.asCompleteLessEntrepreneurialProfit.should("have.value", valueToBe);
+        return this;
+    }
+
+    /**
+     * @param {string} title
+     * @returns {ValueConclusionActions}
+     */
+    verifyPopUpWithTitleExists(title) {
+        cy.get(`[title='${title}']`).should("exist");
+        return this;
+    }
 }
 
 export default new ValueConclusionActions();
