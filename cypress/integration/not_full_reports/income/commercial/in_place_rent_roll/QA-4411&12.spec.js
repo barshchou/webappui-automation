@@ -3,7 +3,8 @@ import Homepage from "../../../../../actions/base/homepage.actions";
 import Income from "../../../../../actions/income/income.manager";
 import NavigationSection from "../../../../../actions/base/navigationSection.actions";
 
-describe("Current Commercial Income Discussion > Modified label and Save button functionality", () => {
+describe("Current Commercial Income Discussion > Verify the Revert to Original button and 'Changes will be lost' " +
+    "functionality", () => {
     before("Login, create report", () => {
         cy.login();
         Homepage.createReport(testData.reportCreationData);
