@@ -7,9 +7,9 @@ class MarketPage extends BasePage{
     get area() {return cy.xpath("//label[.='Area']//following::input[1]");}
     get marketState() {return cy.xpath("//label[.='State']//following::input[1]");}
     get neighborhoodYear() {return cy.get("*[name=neighborhoodYear]");}
-    get macroMarket() {return cy.xpath("//label[.='Market']//following::input[1]");}
-    get submarket() {return cy.xpath("//label[.='Submarket']//following::input[1]");}
-    get marketQuarter() {return cy.xpath("//label[.='Submarket & Market Quarter']//following::input[1]");}
+    get multifamilyMarket() {return cy.get("[data-qa=multifamilyMarket-form-control] input");}
+    get multifamilySubmarket() {return cy.get("[data-qa=multifamilySubmarket-form-control] input");}
+    get marketQuarter() {return cy.get("[data-qa=marketQuarter-form-control] input");}
     get marketYear() {return cy.get("*[name=marketYear]");}
     get pullDropboxButton() {return cy.xpath("//button[.='PULL FROM DROPBOX']");}
     get multifamilySubmarketAnalysisFile() {return cy.get("[data-qa=file-selection-multifamilySubmarketAnalysis-input] input");}

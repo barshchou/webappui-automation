@@ -79,8 +79,8 @@ class MarketActions extends BaseActions{
      * @param {string} market
      * @returns {MarketActions}
      */
-    enterMacroMarket(market) {
-        marketPage.macroMarket.clear().type(market).type("{enter}").should("have.value", market);
+    enterMultifamilyMarket(market) {
+        marketPage.multifamilyMarket.clear().type(market).type("{enter}").should("have.value", market);
         return this;
     }
 
@@ -89,8 +89,8 @@ class MarketActions extends BaseActions{
      * @param {string} submarket
      * @returns {MarketActions}
      */
-    enterSubmarket(submarket) {
-        marketPage.submarket.clear().type(submarket).type("{enter}").should("have.value", submarket);
+    enterMultifamilySubmarket(submarket) {
+        marketPage.multifamilySubmarket.clear().type(submarket).type("{enter}").should("have.value", submarket);
         return this;
     }
 
@@ -154,8 +154,8 @@ class MarketActions extends BaseActions{
             .enterArea(marketResearch.marketArea)
             .verifyMarketState(marketResearch.state)
             .verifyNeighborhoodYear(getYearFromDate(marketResearch.marketYear))
-            .enterMacroMarket(marketResearch.macroMarket)
-            .enterSubmarket(marketResearch.submarket)
+            .enterMultifamilyMarket(marketResearch.macroMarket)
+            .enterMultifamilySubmarket(marketResearch.submarket)
             .verifyMarketQuarter(getQuarter(marketResearch.dateOfValuation))
             .verifyMarketYear(getYearFromDate(marketResearch.dateOfValuation));
         return this;
