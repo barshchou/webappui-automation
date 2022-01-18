@@ -12,7 +12,7 @@ class CommercialRentRollActions extends BaseActions {
     verifyBasisOfRentTooltip() {
         rentRollPage.basisOfRentField.should("exist");
         rentRollPage.basisOfRentTooltip.should("exist").trigger("mouseover");
-        rentRollPage.basisOfRentTooltip.should("not.exist");
+        rentRollPage.basisOfRentTooltip.should("be.visible");
         return this;
     }
 

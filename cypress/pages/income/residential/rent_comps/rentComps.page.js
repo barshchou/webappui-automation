@@ -9,22 +9,22 @@ class RentCompsPage extends BasePage{
     getCheckboxByDataQaAttr(attribute) {return cy.get(`*[data-qa='${attribute}'] input`);}
     get changeCompTypePopUpMessage() {return cy.xpath("//*[text()='Changing your comp type will cause you " +
         "to lose all currently selected comparables.']");}
-    get minRentInput() {return cy.get("*[name='minRent']");}
-    get maxRentInput() {return cy.get("*[name='maxRent']");}
-    get minSquareFeet() {return cy.get("*[name='minSqft']");}
-    get maxSquareFeet() {return cy.get("*[name='maxSqft']");}
+    get minRentInput() {return cy.get("*[name='filters.minRent']");}
+    get maxRentInput() {return cy.get("*[name='filters.maxRent']");}
+    get minSquareFeet() {return cy.get("*[name='filters.minSqft']");}
+    get maxSquareFeet() {return cy.get("*[name='filters.maxSqft']");}
     get numberOfBedroomsArrowButton() {return cy.xpath("//*[text()='Bedrooms']//following-sibling::button");}
     get sourceOfInfoArrow() {return cy.xpath("//*[text()='Source of Information']//following-sibling::button");}
-    get minDateValueInput() {return cy.get("*[data-qa='minDateOfValue-date-picker'] input[placeholder='MM-DD-YYYY']");}
-    get maxDateValueInput() {return cy.get("*[data-qa='maxDateOfValue-date-picker'] input[placeholder='MM-DD-YYYY']");}
-    get dateMinInputToCheckValue() {return cy.get("*[data-qa='minDateOfValue-date-picker'] > input");}
-    get dateMaxInputToCheckValue() {return cy.get("*[data-qa='maxDateOfValue-date-picker'] > input");}
+    get minDateValueInput() {return cy.get("*[data-qa='filters.minDateOfValue-date-picker'] input[placeholder='MM-DD-YYYY']");}
+    get maxDateValueInput() {return cy.get("*[data-qa='filters.maxDateOfValue-date-picker'] input[placeholder='MM-DD-YYYY']");}
+    get dateMinInputToCheckValue() {return cy.get("*[data-qa='filters.minDateOfValue-date-picker'] > input");}
+    get dateMaxInputToCheckValue() {return cy.get("*[data-qa='filters.maxDateOfValue-date-picker'] > input");}
     get errorMessage() {return cy.get("#component-error-text");}
     get dateMinPickerButton() {
-        return cy.xpath("//*[@data-qa='minDateOfValue-date-picker']//child::button");
+        return cy.xpath("//*[@data-qa='filters.minDateOfValue-date-picker']//child::button");
     }
     get dateMaxPickerButton() {
-        return cy.xpath("//*[@data-qa='maxDateOfValue-date-picker']//child::button");
+        return cy.xpath("//*[@data-qa='filters.maxDateOfValue-date-picker']//child::button");
     }
     get pickerCalendar() {return cy.get("*[role='document']");}
     getDayInCurrentMonthPicker(day) {return cy.xpath(`//*[text()='${day}']//parent::button[@tabindex='0']`);}

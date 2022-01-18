@@ -3,7 +3,6 @@ import testData from "../../../../fixtures/not_full_reports/sales/find_comps/QA-
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Sales from "../../../../actions/sales/sales.manager";
 import {getEnvUrl, isProdEnv} from "../../../../../utils/env.utils";
-import {waitGoogleScriptsToLoad} from "../../../../../utils/intercept.utils";
 
 describe("Verify the Comps can be added by entering the existing Report ID in the modal", () => {
     before("Login, create report", () => {
@@ -20,7 +19,6 @@ describe("Verify the Comps can be added by entering the existing Report ID in th
             const reportID = url.replace("/sales-comps-map", "").replace(`${getEnvUrl()}/report/`, "");
             cy.log(`Current report ID is ${reportID}`);
             Sales.CreateCompMap.returnToHomePage();
-            waitGoogleScriptsToLoad();
             Homepage.verifyThatPageIsOpened()
                 .verifyProgressBarNotExist();
             Homepage.createReport(testData.reportCreationData);

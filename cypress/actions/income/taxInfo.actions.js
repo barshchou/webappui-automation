@@ -86,7 +86,7 @@ class TaxInfoActions extends BaseActions {
      * @returns {TaxInfoActions}
      */
     enterTaxRateYearByIndex(value, index = 0) {
-        taxInfoPage.taxRateYearInputs.eq(index).clear().type(value).should("have.value", value);
+        taxInfoPage.taxRateYearInputs.eq(index).clear().type(value).clear().type(value).should("have.value", value);
         return this;
     }
 

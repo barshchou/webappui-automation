@@ -136,7 +136,7 @@ class CapRateCompsActions extends BaseActions {
      * @returns {CapRateCompsActions}
      */
     enterSaleDateByRow(date, index = 0) {
-        capRateCompsPage.compsSaleDates.eq(index).type(date);
+        capRateCompsPage.compsSaleDates.eq(index).clear().type(date);
         if (isDateHasCorrectFormat(date)) {
             capRateCompsPage.inputsToCheckDate.eq(index).should("have.value", date);
         } else {
