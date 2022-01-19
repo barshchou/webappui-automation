@@ -1,5 +1,5 @@
 import Homepage from "../../../../actions/base/homepage.actions";
-import testData from "../../../../fixtures/not_full_reports/sales/find_comps/QA-4175.fixture";
+import testData from "../../../../fixtures/not_full_reports/sales/find_comps/QA-4248.fixture";
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Sales from "../../../../actions/sales/sales.manager";
 import {getEnvUrl, isProdEnv} from "../../../../../utils/env.utils";
