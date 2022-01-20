@@ -10,7 +10,7 @@ class ValueConclusionPage extends BasePage {
     get adjustedPriceMax() {return cy.get("[data-qa=adjusted-price-max]");}
     get adjustedPriceMedian() {return cy.get("[data-qa=adjusted-price-median]");}
     get incomeApproachConclusion() {return cy.get("[data-qa=income-approach-conclusion]");}
-    get saleValueConclusion() {return cy.get("[name=saleValueConclusion]");}
+    get saleValueConclusion() {return cy.get("[data-qa=saleValueConclusion-amount-input] input");}
     get asStabilizedPeriod() {return cy.get("[data-qa=as-stabilized-period-cell]");}
     get asStabilizedAmount() {return cy.get("[data-qa=as-stabilized-amount-cell]");}
     get asStabilizedFinalValue() {return cy.get("[data-qa=as-stabilized-final-value-cell]");}
