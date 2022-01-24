@@ -578,6 +578,15 @@ class CommercialRentRollActions extends BaseActions {
     }
 
     /**
+     * @param {string} text
+     * @returns {CommercialRentRollActions}
+     */
+    verifyCommentaryTextNotContains(text) {
+        rentRollPage.commentaryText.should("not.contain.text", text);
+        return this;
+    }
+
+    /**
      * @param {string} textToBe
      * @returns {CommercialRentRollActions}
      */
@@ -607,6 +616,19 @@ class CommercialRentRollActions extends BaseActions {
 
     clickYesRevertButton() {
         rentRollPage.yesRevertButton.click();
+        return this;
+    }
+
+    verifyEditDiscussionButtonsDisplayed() {
+        rentRollPage.cancelDiscussionEdit.should("be.visible");
+        rentRollPage.editDiscussionButton.should("not.exist");
+        rentRollPage.revertToOriginalButton.should("be.visible");
+        rentRollPage.saveDiscussionChanges.should("be.visible");
+        return this;
+    }
+
+    clickCancelDiscussionEditButton() {
+        rentRollPage.cancelDiscussionEdit.click();
         return this;
     }
 }

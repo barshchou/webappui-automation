@@ -32,6 +32,7 @@ class CommercialRentRollPage extends BasePage{
     get yesRevertButton() {return cy.contains("Yes, revert");}
     get closeButton() {return cy.get("[aria-label=close]");}
     get cancelRevertButton() {return this.yesRevertButton.prev("button");}
+    get cancelDiscussionEdit() {return cy.xpath("//*[.='Current Commercial Income Discussion']//following::button[.='Cancel'][1]");}
 }
 
 export default new CommercialRentRollPage();

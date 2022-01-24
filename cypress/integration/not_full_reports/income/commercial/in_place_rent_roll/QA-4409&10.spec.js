@@ -12,7 +12,14 @@ describe("Verify the functionality of Edit and Cancel commentary buttons", () =>
     });
 
     it("Test body", () => {
-        NavigationSection.navigateToCommercialInPlaceRentRoll();
-        Income.Commercial.InPlaceRentRoll.clickEditDiscussionButton();
+        NavigationSection.navigateToCommercialInPlaceRentRoll()
+            .verifyProgressBarNotExist();
+        Income.Commercial.InPlaceRentRoll.clickEditDiscussionButton()
+            .verifyEditDiscussionButtonsDisplayed()
+            .clearAndEnterNewCommentary(testData.newCommentary)
+            .clickCancelDiscussionEditButton()
+            .verifyCommentaryTextNotContains(testData.newCommentary)
+            .returnToHomePage();
+        Homepage.deleteReport(testData.reportCreationData.reportNumber);
     });
 });
