@@ -2,11 +2,21 @@ name: Cypress full reports tests
 
 on:
   workflow_dispatch:
+    inputs:
+      choice: 
+        type: choice
+        description: Select the environment
+        options:
+        - dev
+        - staging
+        - prod
+        required: true
+        default: staging
   pull_request:
     branches: [ master ]
 
 jobs:
-  cypress-run:
+  Full_reports_run:
     runs-on: ubuntu-latest
     container: cypress/browsers:node16.5.0-chrome94-ff93
     steps:
@@ -18,7 +28,9 @@ jobs:
           record: true
           browser: chrome
           spec: cypress/integration/full_reports/**
+          tag: ${{github.event.inputs.choice}}
         env:
           CYPRESS_USERNAME: ${{ secrets.USERNAME }}
           CYPRESS_PASSWORD: ${{ secrets.PASSWORD }}
           CYPRESS_RECORD_KEY: ${{ secrets.RECORD_KEY }}
+          CYPRESS_url: ${{ github.event.inputs.choice }}
