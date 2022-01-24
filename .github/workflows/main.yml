@@ -2,6 +2,16 @@ name: Cypress not full reports tests
 
 on:
   workflow_dispatch:
+    inputs:
+      choice: 
+        type: choice
+        description: Select the environment
+        options:
+        - dev
+        - staging
+        - prod
+        required: true
+        default: staging
   pull_request:
     branches: [ master ]
 
@@ -18,6 +28,8 @@ jobs:
           record: true
           browser: chrome
           spec: cypress/integration/not_full_reports/**
+          tag: ${{github.event.inputs.choice}}
+          env: url=${{github.events.inputs.choice}}
         env:
           CYPRESS_USERNAME: ${{ secrets.USERNAME }}
           CYPRESS_PASSWORD: ${{ secrets.PASSWORD }}
