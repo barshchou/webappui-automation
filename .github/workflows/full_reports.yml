@@ -16,7 +16,7 @@ on:
     branches: [ master ]
 
 jobs:
-  Full_reports_run:
+  Full-reports-run:
     runs-on: ubuntu-latest
     container: cypress/browsers:node16.5.0-chrome94-ff93
     steps:
