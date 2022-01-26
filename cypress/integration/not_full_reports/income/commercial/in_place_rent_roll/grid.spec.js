@@ -167,14 +167,6 @@ describe("Commercial In-Place Rent Roll grid tests", () => {
         deleteReport();
     });
 
-    it("ID252: PerSF Rent Total", () => {
-        prepareRentRollTableForTotalCells();
-        Income.Commercial.InPlaceRentRoll.enterListPerSF(commonData().leaseStatusesList, testData.id252.perSFList)
-            .verifyPerSFTotal(commonData().leaseStatusesList, testData.id252.perSFList, commonData().squareFeetList)
-            .clearRentCellsByName(commonData().leaseStatusesList, "perSF");
-        deleteReport();
-    });
-
     function prepareRentRollTableForTotalCells() {
         Income.Commercial.InPlaceRentRoll.chooseLeaseStatusByRowNumber(commonData().existLeaseStatuses[0]);
         NavigationSection.navigateToPropertySummary();

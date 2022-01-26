@@ -5,10 +5,6 @@ import {numberWithCommas} from "../../../../utils/numbers.utils";
 
 class CommercialRentRollActions extends BaseActions {
 
-    /**
-     *
-     * @returns {CommercialRentRollActions}
-     */
     verifyBasisOfRentTooltip() {
         rentRollPage.basisOfRentField.should("exist");
         rentRollPage.basisOfRentTooltip.should("exist").trigger("mouseover");
@@ -17,7 +13,6 @@ class CommercialRentRollActions extends BaseActions {
     }
 
     /**
-     *
      * @param {string} backColor
      * @returns {CommercialRentRollActions}
      */
@@ -28,7 +23,6 @@ class CommercialRentRollActions extends BaseActions {
     }
 
     /**
-     *
      * @param {string} backColor
      * @returns {CommercialRentRollActions}
      */
@@ -39,7 +33,6 @@ class CommercialRentRollActions extends BaseActions {
     }
 
     /**
-     *
      * @param {boolean} isFirstTime
      * @param {string} backColor
      * @returns {CommercialRentRollActions}
@@ -55,7 +48,6 @@ class CommercialRentRollActions extends BaseActions {
     }
 
     /**
-     *
      * @param {string} backColor
      * @returns {CommercialRentRollActions}
      */
@@ -68,7 +60,6 @@ class CommercialRentRollActions extends BaseActions {
     }
 
     /**
-     *
      * @param {string} status
      * @param {number} rowNumber
      * @returns {CommercialRentRollActions}
@@ -90,7 +81,6 @@ class CommercialRentRollActions extends BaseActions {
     }
 
     /**
-     *
      * @param {Array<string>} statuses
      * @param {number} rowNumber
      * @returns {CommercialRentRollActions}
@@ -103,7 +93,6 @@ class CommercialRentRollActions extends BaseActions {
     }
 
     /**
-     *
      * @param {number} rowNumber
      * @returns {CommercialRentRollActions}
      */
@@ -119,23 +108,6 @@ class CommercialRentRollActions extends BaseActions {
     }
 
     /**
-     *
-     * @param {number} rowNumber
-     * @returns {CommercialRentRollActions}
-     */
-    uncheckIsInspectedCheckboxByRowNumber(rowNumber = 0) {
-        rentRollPage.pageHeader.should("be.visible");
-        const backColor = "rgb(65, 96, 211)";
-        rentRollPage.elementToVerifyIsInspected.should("have.css", "background-color", backColor);
-        rentRollPage.isInspectedCheckboxes.eq(rowNumber).as("checkbox");
-        cy.get("@checkbox").invoke("show");
-        cy.get("@checkbox").uncheck({force:true});
-        rentRollPage.elementToVerifyIsInspected.should("not.have.css", "background-color", backColor);
-        return this;
-    }
-
-    /**
-     *
      * @param {number} unitNumber
      * @returns {CommercialRentRollActions}
      */
@@ -148,7 +120,6 @@ class CommercialRentRollActions extends BaseActions {
     }
 
     /**
-     *
      * @param {string} name
      * @param {number} rowNumber
      * @returns {CommercialRentRollActions}
@@ -159,7 +130,12 @@ class CommercialRentRollActions extends BaseActions {
         return this;
     }
 
-
+    /**
+     * @param {string} leaseStatus
+     * @param {string} [nameToBe]
+     * @param {number} [rowNumber]
+     * @returns {CommercialRentRollActions}
+     */
     verifyTenantNameByRowNumber(leaseStatus, nameToBe, rowNumber = 0) {
         let textToBe = leaseStatus === "Vacant" ? `Commercial Unit ${rowNumber + 1}` : nameToBe;
         rentRollPage.tenantNameCells.eq(rowNumber).should("have.text", textToBe);
@@ -167,7 +143,6 @@ class CommercialRentRollActions extends BaseActions {
     }
 
     /**
-     *
      * @param {string} textToBe
      * @param {number} rowNumber
      * @returns {CommercialRentRollActions}
@@ -178,7 +153,6 @@ class CommercialRentRollActions extends BaseActions {
     }
 
     /**
-     *
      * @param {string} cellName
      * @param {string} date
      * @param {number} rowNumber
@@ -191,7 +165,6 @@ class CommercialRentRollActions extends BaseActions {
     }
 
     /**
-     *
      * @param {string} cellName
      * @param {string} leaseStatus
      * @param {string} [dateToBe]
@@ -209,7 +182,6 @@ class CommercialRentRollActions extends BaseActions {
     }
 
     /**
-     *
      * @param {number} sfToBe
      * @param {number} rowNumber
      * @returns {CommercialRentRollActions}
@@ -221,7 +193,6 @@ class CommercialRentRollActions extends BaseActions {
     }
 
     /**
-     *
      * @param {number | string} value
      * @param {number} rowNumber
      * @returns {CommercialRentRollActions}
@@ -235,7 +206,6 @@ class CommercialRentRollActions extends BaseActions {
     }
 
     /**
-     *
      * @param {number} rentPerSF
      * @param {number} squareFoot
      * @param {number} rowNumber
@@ -248,7 +218,6 @@ class CommercialRentRollActions extends BaseActions {
     }
 
     /**
-     *
      * @param {number} rowNumber
      * @returns {CommercialRentRollActions}
      */
@@ -260,7 +229,6 @@ class CommercialRentRollActions extends BaseActions {
     }
 
     /**
-     *
      * @param {number | string} monthlyRent
      * @param {number} rowNumber
      * @returns {CommercialRentRollActions}
@@ -274,7 +242,6 @@ class CommercialRentRollActions extends BaseActions {
     }
 
     /**
-     *
      * @param monthlyRent
      * @param rowNumber
      * @returns {CommercialRentRollActions}
@@ -286,7 +253,6 @@ class CommercialRentRollActions extends BaseActions {
     }
 
     /**
-     *
      * @param {number} rowNumber
      * @returns {CommercialRentRollActions}
      */
@@ -297,7 +263,6 @@ class CommercialRentRollActions extends BaseActions {
     }
 
     /**
-     *
      * @param {number | string} annualRent
      * @param {number} rowNumber
      * @returns {CommercialRentRollActions}
@@ -311,7 +276,6 @@ class CommercialRentRollActions extends BaseActions {
     }
 
     /**
-     *
      * @param {number} rowNumber
      * @returns {CommercialRentRollActions}
      */
@@ -322,7 +286,6 @@ class CommercialRentRollActions extends BaseActions {
     }
 
     /**
-     *
      * @param {number} rentPerSF
      * @param {number} squareFoot
      * @param {number} rowNumber
@@ -335,7 +298,6 @@ class CommercialRentRollActions extends BaseActions {
     }
 
     /**
-     *
      * @param {number} annuallyRent
      * @param {number} rowNumber
      * @returns {CommercialRentRollActions}
@@ -347,7 +309,6 @@ class CommercialRentRollActions extends BaseActions {
     }
 
     /**
-     *
      * @param {number} monthlyRent
      * @param {number} squareFoot
      * @param {number} rowNumber
@@ -360,7 +321,6 @@ class CommercialRentRollActions extends BaseActions {
     }
 
     /**
-     *
      * @param {number} annualRent
      * @param {number} squareFoot
      * @param {number} rowNumber
@@ -373,7 +333,6 @@ class CommercialRentRollActions extends BaseActions {
     }
 
     /**
-     *
      * @param {Array<string>} statuses
      * @param {number} numberOfUnits
      * @returns {CommercialRentRollActions}
@@ -386,7 +345,6 @@ class CommercialRentRollActions extends BaseActions {
     }
 
     /**
-     *
      * @param {Array<string>} leaseStatuses
      * @param {Array<number>} perSFList
      * @returns {CommercialRentRollActions}
@@ -401,15 +359,19 @@ class CommercialRentRollActions extends BaseActions {
         return this;
     }
 
+    /**
+     * @param {Array<number>} sfValues
+     * @returns {CommercialRentRollActions}
+     */
     verifySFTotal(sfValues) {
         let sfTotalToBe = 0;
         sfValues.forEach(value => sfTotalToBe += value);
         const textToBe = numberWithCommas(Math.round(sfTotalToBe));
         rentRollPage.squareFeetCells.last().should("have.text", `${textToBe}`);
+        return this;
     }
 
     /**
-     *
      * @param {Array<string>} leaseStatuses
      * @param {Array<number>} monthlyRentList
      * @returns {CommercialRentRollActions}
@@ -425,7 +387,6 @@ class CommercialRentRollActions extends BaseActions {
     }
 
     /**
-     *
      * @param {Array<string>} leaseStatuses
      * @param {Array<number>} monthlyRents
      * @returns {CommercialRentRollActions}
@@ -437,7 +398,6 @@ class CommercialRentRollActions extends BaseActions {
     }
 
     /**
-     *
      * @param {Array<string>} leaseStatuses
      * @param {Array<number>} annuallyRents
      * @returns {CommercialRentRollActions}
@@ -453,7 +413,6 @@ class CommercialRentRollActions extends BaseActions {
     }
 
     /**
-     *
      * @param {Array<string>} leaseStatuses
      * @param {Array<number>} rentsValues
      * @returns {string}
@@ -470,7 +429,6 @@ class CommercialRentRollActions extends BaseActions {
     }
 
     /**
-     *
      * @param {Array<string>} leaseStatuses
      * @param {Array<number>} annualRents
      * @returns {CommercialRentRollActions}
@@ -482,7 +440,6 @@ class CommercialRentRollActions extends BaseActions {
     }
 
     /**
-     *
      * @param {Array<string>} leaseStatuses
      * @param {string} columnName
      * @returns {CommercialRentRollActions}
@@ -507,7 +464,6 @@ class CommercialRentRollActions extends BaseActions {
     }
 
     /**
-     *
      * @param {Array<string>} leaseStatuses
      * @param {Array<number>} perSfRents
      * @param {Array<number>} squareFootList
@@ -529,7 +485,6 @@ class CommercialRentRollActions extends BaseActions {
     }
 
     /**
-     *
      * @param {string} newCommentary
      * @returns {CommercialRentRollActions}
      */

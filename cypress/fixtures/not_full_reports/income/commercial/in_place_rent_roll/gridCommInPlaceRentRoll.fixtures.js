@@ -66,61 +66,18 @@ const id251Fixture = () => {
     };
 };
 
-const id252Fixture = () => {
-    return {
-        perSFList: [100, 95, 1051.9]
-    };
-};
-
-export const reportCreationData = () => {
-    return Object.freeze(reportCreationFixture());
-};
-
 export const commonData = () => {
     return Object.freeze(commonTestsFixture());
 };
 
-export const id241Data = () => {
-    return Object.freeze(id241Fixture());
-};
-
-export const id242Data = () => {
-    return Object.freeze(id242Fixture());
-};
-
-export const leaseDatesData = () => {
-    return Object.freeze(leaseDatesFixture());
-};
-
-export const id247Data = () => {
-    return Object.freeze(id247Fixture());
-};
-
-export const id248Data = () => {
-    return Object.freeze(id248Fixture());
-};
-
-export const id250Data = () => {
-    return Object.freeze(id250Fixture());
-};
-
-export const id251Data = () => {
-    return Object.freeze(id251Fixture());
-};
-
-export const id252Data = () => {
-    return Object.freeze(id252Fixture());
-};
-
 export default {
-    reportCreationData: reportCreationData(),
-    commonData: commonData(),
-    leaseDates: leaseDatesData(),
-    id241: id241Data(),
-    id242: id242Data(),
-    id247: id247Data(),
-    id248: id248Data(),
-    id250: id250Data(),
-    id251: id251Data(),
-    id252: id252Data()
+    reportCreationData: Object.freeze(reportCreationFixture()),
+    commonData: Object.freeze(commonTestsFixture()),
+    leaseDates: Object.freeze(leaseDatesFixture()),
+    id241: Object.freeze(id241Fixture()),
+    id242: Object.freeze(id242Fixture()),
+    id247: Object.freeze(id247Fixture()),
+    id248: Object.freeze(id248Fixture()),
+    id250: Object.freeze(id250Fixture()),
+    id251: Object.freeze(id251Fixture())
 };
