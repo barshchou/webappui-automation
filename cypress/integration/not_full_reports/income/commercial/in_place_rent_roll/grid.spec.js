@@ -143,23 +143,6 @@ describe("Commercial In-Place Rent Roll grid tests", () => {
         Income.Commercial.InPlaceRentRoll.enterRentPerSFByRowNumber(testData.commonData.rentPerSF);
     }
 
-    it("ID249: SF Total", () => {
-        prepareRentRollTableForTotalCells();
-        Income.Commercial.InPlaceRentRoll.verifySFTotal(commonData().squareFeetList);
-        deleteReport();
-    });
-
-    function prepareRentRollTableForTotalCells() {
-        Income.Commercial.InPlaceRentRoll.chooseLeaseStatusByRowNumber(commonData().existLeaseStatuses[0]);
-        NavigationSection.navigateToPropertySummary();
-        Property.Summary.enterNumberOfCommercialUnits(commonData().numberOfUnits);
-        NavigationSection.clickCommercialUnits()
-            .clickYesButton();
-        Property.CommercialUnits.enterListOfCommercialUnits(commonData().squareFeetList, commonData().numberOfUnits);
-        NavigationSection.navigateToCommercialInPlaceRentRoll();
-        Income.Commercial.InPlaceRentRoll.chooseListLeaseStatuses(commonData().leaseStatusesList, commonData().numberOfUnits);
-    }
-
     function deleteReport() {
         Income.Commercial.InPlaceRentRoll.returnToHomePage();
         Homepage.deleteReport(testData.reportCreationData.reportNumber);
