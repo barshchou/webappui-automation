@@ -399,6 +399,13 @@ class NavigationSectionActions extends BaseActions {
             .clickYesButton();
         return this;
     }
+
+    openCommercialUnits() {
+        this.clickPropertyButton()
+            .clickCommercialUnits()
+            .clickYesButton();
+        return this;
+    }
 }
 
 export default new NavigationSectionActions();

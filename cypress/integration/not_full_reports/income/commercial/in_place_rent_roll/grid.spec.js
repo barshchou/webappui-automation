@@ -122,25 +122,12 @@ describe("Commercial In-Place Rent Roll grid tests", () => {
         deleteReport();
     });
 
-    it("ID248: Rent PerSF col", () => {
-        prepareRentRollTableForBasisTest(testData.id248.squareFeet);
-        Income.Commercial.InPlaceRentRoll.clearRentPerSFByRowNumber()
-            .clickMonthlyBasisButton()
-            .enterMonthlyRentByRowNumber(commonData().monthlyRent)
-            .verifyRentPerSFMonthlyByRowNumber(commonData().monthlyRent, testData.id248.squareFeet)
-            .clearMonthlyRentByRowNumber()
-            .clickAnnuallyBasisButton()
-            .enterAnnualRentByRowNumber(commonData().annualRent)
-            .verifyRentPerSFAnnuallyByRowNumber(commonData().annualRent, testData.id248.squareFeet);
-        deleteReport();
-    });
-
     function prepareRentRollTableForBasisTest(squareFeet) {
         Income.Commercial.InPlaceRentRoll.chooseLeaseStatusByRowNumber(testData.commonData.existLeaseStatuses[0]);
         NavigationSection.navigateToCommercialUnits();
         Property.CommercialUnits.enterUnitSFByUnitIndex(squareFeet);
         NavigationSection.navigateToCommercialInPlaceRentRoll();
-        Income.Commercial.InPlaceRentRoll.enterRentPerSFByRowNumber(testData.commonData.rentPerSF);
+        Income.Commercial.InPlaceRentRoll.enterAnnualRentPerSFByRowNumber(testData.commonData.rentPerSF);
     }
 
     function deleteReport() {
