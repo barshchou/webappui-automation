@@ -60,12 +60,6 @@ const id250Fixture = () => {
     };
 };
 
-const id251Fixture = () => {
-    return {
-        monthlyRents: [550.5, 100, 999]
-    };
-};
-
 export const commonData = () => {
     return Object.freeze(commonTestsFixture());
 };
@@ -78,6 +72,5 @@ export default {
     id242: Object.freeze(id242Fixture()),
     id247: Object.freeze(id247Fixture()),
     id248: Object.freeze(id248Fixture()),
-    id250: Object.freeze(id250Fixture()),
-    id251: Object.freeze(id251Fixture())
+    id250: Object.freeze(id250Fixture())
 };

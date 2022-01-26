@@ -158,15 +158,6 @@ describe("Commercial In-Place Rent Roll grid tests", () => {
         deleteReport();
     });
 
-    it("ID251: Monthly Rent Total", () => {
-        prepareRentRollTableForTotalCells();
-        Income.Commercial.InPlaceRentRoll.clickMonthlyBasisButton()
-            .enterListMonthlyRent(commonData().leaseStatusesList, testData.id251.monthlyRents)
-            .verifyMonthlyRentTotal(commonData().leaseStatusesList, testData.id251.monthlyRents)
-            .clearRentCellsByName(commonData().leaseStatusesList, "monthly");
-        deleteReport();
-    });
-
     function prepareRentRollTableForTotalCells() {
         Income.Commercial.InPlaceRentRoll.chooseLeaseStatusByRowNumber(commonData().existLeaseStatuses[0]);
         NavigationSection.navigateToPropertySummary();
