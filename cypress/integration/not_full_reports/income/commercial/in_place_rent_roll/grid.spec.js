@@ -31,12 +31,6 @@ describe("Commercial In-Place Rent Roll grid tests", () => {
         deleteReport();
     });
 
-    it("ID240: Lease Status col", () => {
-        NavigationSection.verifyProgressBarNotExist();
-        Income.Commercial.InPlaceRentRoll.chooseLeaseStatusesByRowNumber(commonData().existLeaseStatuses);
-        deleteReport();
-    });
-
     function deleteReport() {
         Income.Commercial.InPlaceRentRoll.returnToHomePage();
         Homepage.deleteReport(testData.reportCreationData.reportNumber);

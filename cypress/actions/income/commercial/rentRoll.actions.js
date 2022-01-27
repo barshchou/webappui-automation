@@ -77,7 +77,7 @@ class CommercialRentRollActions extends BaseActions {
         rentRollPage.leaseStatusArrows.eq(rowNumber).should("be.visible").as("arrow");
         cy.get("@arrow").click({force:true});
         rentRollPage.getLeaseStatusToChooseByValue(status).click();
-        rentRollPage.leaseStatusCells.eq(rowNumber).should("have.text", status);
+        this.verifyLeaseStatusCellTextByRow(status, rowNumber);
         if (status === "Vacant") {
             rentRollPage.getAllCellsByRowNumber(rowNumber).then(cells => {
                 for (let i = 3; i < cells.length - 2; i++) {
@@ -85,6 +85,37 @@ class CommercialRentRollActions extends BaseActions {
                 }
             });
         }
+        return this;
+    }
+
+    /**
+     * @param {string} textToBe
+     * @param {number} rowNumber
+     * @returns {CommercialRentRollActions}
+     */
+    verifyLeaseStatusCellTextByRow(textToBe, rowNumber = 0) {
+        rentRollPage.leaseStatusCells.eq(rowNumber).should("have.text", textToBe);
+        return this;
+    }
+
+    /**
+     * @param {string} textToPaste
+     * @param {number} rowNumber
+     * @returns {CommercialRentRollActions}
+     */
+    pasteToLeaseStatusByRow(textToPaste, rowNumber = 0) {
+        rentRollPage.leaseStatusCells.eq(rowNumber).invoke("text", textToPaste).trigger("change")
+            .should("have.text", textToPaste);
+        return this;
+    }
+
+    /**
+     * @param {number} rowNumber
+     * @returns {CommercialRentRollActions}
+     */
+    pressDeleteLeaseStatusByRow(rowNumber = 0) {
+        rentRollPage.leaseStatusCells.eq(rowNumber).trigger("keydown", {keyCode: 46})
+            .should("have.text", "");
         return this;
     }
 
