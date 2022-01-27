@@ -109,19 +109,6 @@ describe("Commercial In-Place Rent Roll grid tests", () => {
         deleteReport();
     });
 
-    it("ID247: Monthly Rent col", () => {
-        prepareRentRollTableForBasisTest(testData.id247.squareFeet);
-        Income.Commercial.InPlaceRentRoll.verifyMonthlyRentPerSFByRowNumber(commonData().rentPerSF, testData.id247.squareFeet)
-            .clearRentPerSFByRowNumber()
-            .clickMonthlyBasisButton()
-            .enterMonthlyRentByRowNumber(commonData().monthlyRent)
-            .clearMonthlyRentByRowNumber()
-            .clickAnnuallyBasisButton()
-            .enterAnnualRentByRowNumber(commonData().annualRent)
-            .verifyMonthlyRentAnnuallyByRowNumber(commonData().annualRent);
-        deleteReport();
-    });
-
     function prepareRentRollTableForBasisTest(squareFeet) {
         Income.Commercial.InPlaceRentRoll.chooseLeaseStatusByRowNumber(testData.commonData.existLeaseStatuses[0]);
         NavigationSection.navigateToCommercialUnits();

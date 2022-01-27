@@ -42,12 +42,6 @@ const leaseDatesFixture = () => {
     };
 };
 
-const id247Fixture = () => {
-    return {
-        squareFeet: 358
-    };
-};
-
 export const commonData = () => {
     return Object.freeze(commonTestsFixture());
 };
@@ -57,6 +51,5 @@ export default {
     commonData: Object.freeze(commonTestsFixture()),
     leaseDates: Object.freeze(leaseDatesFixture()),
     id241: Object.freeze(id241Fixture()),
-    id242: Object.freeze(id242Fixture()),
-    id247: Object.freeze(id247Fixture())
+    id242: Object.freeze(id242Fixture())
 };
