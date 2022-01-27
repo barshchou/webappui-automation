@@ -239,6 +239,25 @@ class CommercialRentRollActions extends BaseActions {
     }
 
     /**
+     * @param {number} rentPerSF
+     * @param {number} squareFoot
+     * @param {string} calcMethod
+     * @param {number} rowNumber
+     * @returns {CommercialRentRollActions}
+     */
+    verifyAnnualRentCellPerSFBasisByRow(rentPerSF, squareFoot, calcMethod, rowNumber = 0) {
+        let numberToBe;
+        if (calcMethod === "annually") {
+            numberToBe = rentPerSF * squareFoot;
+        } else {
+            numberToBe = rentPerSF * squareFoot * 12;
+        }
+        rentRollPage.annualRentCells.eq(rowNumber)
+            .should("have.text", `$${numberWithCommas(numberToBe.toFixed(2))}`);
+        return this;
+    }
+
+    /**
      * @param {number} rowNumber
      * @returns {CommercialRentRollActions}
      */
@@ -302,6 +321,16 @@ class CommercialRentRollActions extends BaseActions {
         rentRollPage.annualRentCells.eq(rowNumber).should("not.have.class", "readOnly").dblclick();
         rentRollPage.textareaToInput.clear().type(annualRent).type("{enter}");
         const textToBe = numberWithCommas(annualRent.toFixed(2));
+        this.verifyAnnualRentCellTextByRow(textToBe, rowNumber);
+        return this;
+    }
+
+    /**
+     * @param {string} textToBe
+     * @param {number} rowNumber
+     * @returns {CommercialRentRollActions}
+     */
+    verifyAnnualRentCellTextByRow(textToBe = "0.00", rowNumber = 0) {
         rentRollPage.annualRentCells.eq(rowNumber).should("have.text", `$${textToBe}`);
         return this;
     }
