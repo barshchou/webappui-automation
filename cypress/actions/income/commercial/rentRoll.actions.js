@@ -152,7 +152,7 @@ class CommercialRentRollActions extends BaseActions {
      */
     verifyUnitNumberCells(unitNumber = 1) {
         rentRollPage.unitNumberCells.each(cell => {
-            cy.wrap(cell).should("exist").should("be.visible");
+            cy.wrap(cell).should("exist").and("be.visible").and("have.class", "readOnly");
         });
         rentRollPage.unitNumberCells.should("have.length", unitNumber + 1);
         return this;

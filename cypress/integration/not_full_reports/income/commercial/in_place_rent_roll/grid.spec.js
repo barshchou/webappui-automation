@@ -25,12 +25,6 @@ describe("Commercial In-Place Rent Roll grid tests", () => {
         deleteReport();
     });
 
-    it("ID239: # col. (auto)", () => {
-        NavigationSection.verifyProgressBarNotExist();
-        Income.Commercial.InPlaceRentRoll.verifyUnitNumberCells();
-        deleteReport();
-    });
-
     function deleteReport() {
         Income.Commercial.InPlaceRentRoll.returnToHomePage();
         Homepage.deleteReport(testData.reportCreationData.reportNumber);
