@@ -4,7 +4,6 @@ import Homepage from "../../../../../actions/base/homepage.actions";
 import NavigationSection from "../../../../../actions/base/navigationSection.actions";
 import Income from "../../../../../actions/income/income.manager";
 import Final from "../../../../../actions/final/final.manager";
-import Property from "../../../../../actions/property/property.manager";
 
 describe("Commercial In-Place Rent Roll grid tests", () => {
     beforeEach("Login and navigate to commercial In-Place Rent Roll", () => {
@@ -45,21 +44,6 @@ describe("Commercial In-Place Rent Roll grid tests", () => {
             .verifyTenantNameByRowNumber(commonData().existLeaseStatuses[0], testData.id241.tenantName)
             .chooseLeaseStatusByRowNumber(commonData().existLeaseStatuses[1])
             .verifyTenantNameByRowNumber(commonData().existLeaseStatuses[1]);
-        deleteReport();
-    });
-
-    it("ID242: Use col", () => {
-        NavigationSection.verifyProgressBarNotExist();
-        Income.Commercial.InPlaceRentRoll.chooseLeaseStatusByRowNumber(commonData().existLeaseStatuses[0]);
-        const defaultUseValue = testData.id242.useTexts[testData.id242.useTexts.length - 1];
-        Income.Commercial.InPlaceRentRoll.verifyUseCellTextByRowNumber(defaultUseValue);
-        testData.id242.useRadios.forEach((useValue, i) => {
-            NavigationSection.navigateToCommercialUnits();
-            Property.CommercialUnits.clickCommercialUnitTabByIndex()
-                .clickRadioButtonByValueAndUnitIndex(useValue);
-            NavigationSection.navigateToCommercialInPlaceRentRoll();
-            Income.Commercial.InPlaceRentRoll.verifyUseCellTextByRowNumber(testData.id242.useTexts[i]);
-        });
         deleteReport();
     });
 

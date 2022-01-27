@@ -142,24 +142,6 @@ class NavigationSectionActions extends BaseActions {
      *
      * @returns {NavigationSectionActions}
      */
-    navigateToCommercialUnits() {
-        this.clickSaveButton()
-            .verifyProgressBarNotExist()
-            .clickSaveButton()
-            .verifyProgressBarNotExist()
-            .clickSaveButton()
-            .verifyProgressBarNotExist();
-        // Had to add this wait, because from time to time even after clicking to save button, "Would you like to save changes?" popup may appear
-        cy.wait(3000);
-        this.clickPropertyButton()
-            .clickCommercialUnits();
-        return this;
-    }
-
-    /**
-     *
-     * @returns {NavigationSectionActions}
-     */
     navigateToUnitInspection() {
         this.clickSaveButton();
         this.clickFinalButton()
@@ -400,7 +382,7 @@ class NavigationSectionActions extends BaseActions {
         return this;
     }
 
-    openCommercialUnits() {
+    navigateToCommercialUnits() {
         this.clickPropertyButton()
             .clickCommercialUnits()
             .clickYesButton();

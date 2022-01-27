@@ -156,7 +156,7 @@ class CommercialRentRollActions extends BaseActions {
      * @returns {CommercialRentRollActions}
      */
     verifyUseCellTextByRowNumber(textToBe, rowNumber = 0) {
-        rentRollPage.useCells.eq(rowNumber).should("have.text", textToBe);
+        rentRollPage.useCells.eq(rowNumber).should("have.text", textToBe).and("have.class", "readOnly");
         return this;
     }
 
@@ -246,17 +246,6 @@ class CommercialRentRollActions extends BaseActions {
     }
 
     /**
-     * @param {number} rowNumber
-     * @returns {CommercialRentRollActions}
-     */
-    clearRentPerSFByRowNumber(rowNumber = 0) {
-        rentRollPage.annualRentPerSFCells.eq(rowNumber).as("cell");
-        cy.get("@cell").dblclick({force:true});
-        rentRollPage.textareaToInput.clear().type("{enter}");
-        return this;
-    }
-
-    /**
      * @param {number | string} monthlyRent
      * @param {number} rowNumber
      * @returns {CommercialRentRollActions}
@@ -291,16 +280,6 @@ class CommercialRentRollActions extends BaseActions {
     }
 
     /**
-     * @param {number} rowNumber
-     * @returns {CommercialRentRollActions}
-     */
-    clearMonthlyRentByRowNumber(rowNumber = 0) {
-        rentRollPage.monthlyRentCells.eq(rowNumber).dblclick();
-        rentRollPage.textareaToInput.clear().type("{enter}");
-        return this;
-    }
-
-    /**
      * @param {number | string} annualRent
      * @param {number} rowNumber
      * @returns {CommercialRentRollActions}
@@ -320,16 +299,6 @@ class CommercialRentRollActions extends BaseActions {
      */
     verifyAnnualRentCellTextByRow(textToBe = "0.00", rowNumber = 0) {
         rentRollPage.annualRentCells.eq(rowNumber).should("have.text", `$${textToBe}`);
-        return this;
-    }
-
-    /**
-     * @param {number} rowNumber
-     * @returns {CommercialRentRollActions}
-     */
-    clearAnnualRentByRowNumber(rowNumber = 0) {
-        rentRollPage.annualRentCells.eq(rowNumber).dblclick();
-        rentRollPage.textareaToInput.clear().type("{enter}");
         return this;
     }
 
@@ -501,30 +470,6 @@ class CommercialRentRollActions extends BaseActions {
     verifyAnnuallyRentTotal(leaseStatuses, annualRents) {
         const textToBe = this.getTotalRentTextToBe(leaseStatuses, annualRents);
         rentRollPage.annualRentCells.last().should("have.text", `$${textToBe}`);
-        return this;
-    }
-
-    /**
-     * @param {Array<string>} leaseStatuses
-     * @param {string} columnName
-     * @returns {CommercialRentRollActions}
-     */
-    clearRentCellsByName(leaseStatuses, columnName) {
-        for (let i = 0; i < leaseStatuses.length; i++) {
-            if (leaseStatuses[i] === "Vacant") {
-                continue;
-            }
-            switch (columnName) {
-                case "perSF":
-                    this.clearRentPerSFByRowNumber(i);
-                    break;
-                case "annually":
-                    this.clearAnnualRentByRowNumber(i);
-                    break;
-                default:
-                    this.clearMonthlyRentByRowNumber(i);
-            }
-        }
         return this;
     }
 

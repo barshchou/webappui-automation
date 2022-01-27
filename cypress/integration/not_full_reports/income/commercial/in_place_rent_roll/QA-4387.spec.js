@@ -15,7 +15,7 @@ describe("Verify the SF column in the grid", () => {
        NavigationSection.navigateToCommercialInPlaceRentRoll();
        Income.Commercial.InPlaceRentRoll.chooseLeaseStatusByRowNumber(testData.leaseStatus)
            .verifySquareFeetByRowNumber();
-       NavigationSection.openCommercialUnits();
+       NavigationSection.navigateToCommercialUnits();
        Property.CommercialUnits.enterUnitSFByUnitIndex(testData.squareFeet);
        NavigationSection.navigateToCommercialInPlaceRentRoll();
        Income.Commercial.InPlaceRentRoll.verifySquareFeetByRowNumber(testData.squareFeet)

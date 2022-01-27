@@ -28,14 +28,6 @@ const id241Fixture = () => {
         tenantName: "Test tenant name"
     };
 };
-
-const id242Fixture = () => {
-    return {
-        useRadios: ["retail", "office", "medical", "community", "undetermined"],
-        useTexts: ["Retail", "Office", "Medical Office", "Community Facility", "Undetermined"]
-    };
-};
-
 export const commonData = () => {
     return Object.freeze(commonTestsFixture());
 };
@@ -43,6 +35,5 @@ export const commonData = () => {
 export default {
     reportCreationData: Object.freeze(reportCreationFixture()),
     commonData: Object.freeze(commonTestsFixture()),
-    id241: Object.freeze(id241Fixture()),
-    id242: Object.freeze(id242Fixture())
+    id241: Object.freeze(id241Fixture())
 };

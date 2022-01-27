@@ -9,7 +9,7 @@ describe("Verify the Annual Rent column in the grid", () => {
     beforeEach("Create report, prepare table", () => {
         cy.login();
         Homepage.createReport(testData.reportCreationData);
-        NavigationSection.openCommercialUnits();
+        NavigationSection.navigateToCommercialUnits();
         Property.CommercialUnits.enterUnitSFByUnitIndex(testData.general.squareFeet);
         NavigationSection.navigateToCommercialInPlaceRentRoll();
     });
