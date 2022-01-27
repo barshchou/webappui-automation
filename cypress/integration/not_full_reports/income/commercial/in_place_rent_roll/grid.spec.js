@@ -5,7 +5,6 @@ import NavigationSection from "../../../../../actions/base/navigationSection.act
 import Income from "../../../../../actions/income/income.manager";
 import Final from "../../../../../actions/final/final.manager";
 import Property from "../../../../../actions/property/property.manager";
-import {getTodayDateString} from "../../../../../../utils/date.utils";
 
 describe("Commercial In-Place Rent Roll grid tests", () => {
     beforeEach("Login and navigate to commercial In-Place Rent Roll", () => {
@@ -63,29 +62,6 @@ describe("Commercial In-Place Rent Roll grid tests", () => {
         });
         deleteReport();
     });
-
-    it("ID243: Lease Start Date col", () => {
-        const cellName = "Start";
-        checkDateColumnByCellName(cellName);
-        deleteReport();
-    });
-
-    it("ID244: Lease Expiration Date col", () => {
-        const cellName = "Expiry";
-        checkDateColumnByCellName(cellName);
-        deleteReport();
-    });
-
-    function checkDateColumnByCellName(cellName) {
-        Income.Commercial.InPlaceRentRoll.chooseLeaseStatusByRowNumber(commonData().existLeaseStatuses[0])
-            .enterLeaseDateByRowNumber(cellName, getTodayDateString("/"))
-            .verifyLeaseDateByRowNumber(cellName, commonData().existLeaseStatuses[0], getTodayDateString("/"))
-            .chooseLeaseStatusByRowNumber(commonData().existLeaseStatuses[1])
-            .verifyLeaseDateByRowNumber(cellName, commonData().existLeaseStatuses[1])
-            .chooseLeaseStatusByRowNumber(commonData().existLeaseStatuses[0])
-            .enterLeaseDateByRowNumber(cellName, testData.leaseDates.wrongFormatLeaseDate)
-            .verifyLeaseDateByRowNumber(cellName, commonData().existLeaseStatuses[0], testData.leaseDates.wrongFormatLeaseDate);
-    }
 
     function deleteReport() {
         Income.Commercial.InPlaceRentRoll.returnToHomePage();

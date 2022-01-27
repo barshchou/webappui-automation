@@ -36,12 +36,6 @@ const id242Fixture = () => {
     };
 };
 
-const leaseDatesFixture = () => {
-    return {
-        wrongFormatLeaseDate: "25/45/3000"
-    };
-};
-
 export const commonData = () => {
     return Object.freeze(commonTestsFixture());
 };
@@ -49,7 +43,6 @@ export const commonData = () => {
 export default {
     reportCreationData: Object.freeze(reportCreationFixture()),
     commonData: Object.freeze(commonTestsFixture()),
-    leaseDates: Object.freeze(leaseDatesFixture()),
     id241: Object.freeze(id241Fixture()),
     id242: Object.freeze(id242Fixture())
 };
