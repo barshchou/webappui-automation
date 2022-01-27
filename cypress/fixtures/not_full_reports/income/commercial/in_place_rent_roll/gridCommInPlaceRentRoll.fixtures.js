@@ -12,28 +12,15 @@ const reportCreationFixture = () => {
 
 const commonTestsFixture = () => {
     return {
-        existLeaseStatuses: ["Occupied", "Vacant"],
-        squareFeet: 200,
-        rentPerSF: 100,
-        monthlyRent: 550.5,
-        annualRent: 20000.156,
-        numberOfUnits: 3,
-        squareFeetList: [200, 358, 190.5],
-        leaseStatusesList: ["Occupied", "Vacant", "Occupied"]
+        existLeaseStatuses: ["Occupied", "Vacant"]
     };
 };
 
-const id241Fixture = () => {
-    return {
-        tenantName: "Test tenant name"
-    };
-};
 export const commonData = () => {
     return Object.freeze(commonTestsFixture());
 };
 
 export default {
     reportCreationData: Object.freeze(reportCreationFixture()),
-    commonData: Object.freeze(commonTestsFixture()),
-    id241: Object.freeze(id241Fixture())
+    commonData: Object.freeze(commonTestsFixture())
 };

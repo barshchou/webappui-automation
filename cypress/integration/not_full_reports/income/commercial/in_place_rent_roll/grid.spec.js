@@ -37,16 +37,6 @@ describe("Commercial In-Place Rent Roll grid tests", () => {
         deleteReport();
     });
 
-    it("ID241: Tenant Name col", () => {
-        NavigationSection.verifyProgressBarNotExist();
-        Income.Commercial.InPlaceRentRoll.chooseLeaseStatusByRowNumber(commonData().existLeaseStatuses[0])
-            .enterTenantNameByRowNumber(testData.id241.tenantName)
-            .verifyTenantNameByRowNumber(commonData().existLeaseStatuses[0], testData.id241.tenantName)
-            .chooseLeaseStatusByRowNumber(commonData().existLeaseStatuses[1])
-            .verifyTenantNameByRowNumber(commonData().existLeaseStatuses[1]);
-        deleteReport();
-    });
-
     function deleteReport() {
         Income.Commercial.InPlaceRentRoll.returnToHomePage();
         Homepage.deleteReport(testData.reportCreationData.reportNumber);
