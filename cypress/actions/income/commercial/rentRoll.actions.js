@@ -194,9 +194,9 @@ class CommercialRentRollActions extends BaseActions {
      * @param {number} rowNumber
      * @returns {CommercialRentRollActions}
      */
-    verifySquareFeetByRowNumber(sfToBe, rowNumber = 0) {
+    verifySquareFeetByRowNumber(sfToBe = 0, rowNumber = 0) {
         let sfTextToBe = numberWithCommas(Math.round(sfToBe));
-        rentRollPage.squareFeetCells.eq(rowNumber).should("have.text", sfTextToBe);
+        rentRollPage.squareFeetCells.eq(rowNumber).should("have.text", sfTextToBe).and("have.class", "readOnly");
         return this;
     }
 
@@ -223,18 +223,6 @@ class CommercialRentRollActions extends BaseActions {
         rentRollPage.textareaToInput.clear().type(value).type("{enter}");
         const textToBe = `$${numberWithCommas(value.toFixed(2))}`;
         rentRollPage.monthlyRentPerSFCells.eq(rowNumber).should("have.text", textToBe);
-        return this;
-    }
-
-    /**
-     * @param {number} rentPerSF
-     * @param {number} squareFoot
-     * @param {number} rowNumber
-     * @returns {CommercialRentRollActions}
-     */
-    verifyAnnualRentCellSquareFootByRowNumber(rentPerSF, squareFoot, rowNumber = 0) {
-        const textToBe = numberWithCommas((rentPerSF * squareFoot).toFixed(2));
-        rentRollPage.annualRentCells.eq(rowNumber).should("have.text", `$${textToBe}`);
         return this;
     }
 

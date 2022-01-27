@@ -87,15 +87,6 @@ describe("Commercial In-Place Rent Roll grid tests", () => {
             .verifyLeaseDateByRowNumber(cellName, commonData().existLeaseStatuses[0], testData.leaseDates.wrongFormatLeaseDate);
     }
 
-    it("ID245: SF col", () => {
-        Income.Commercial.InPlaceRentRoll.chooseLeaseStatusByRowNumber(commonData().existLeaseStatuses[0]);
-        NavigationSection.navigateToCommercialUnits();
-        Property.CommercialUnits.enterUnitSFByUnitIndex(commonData().squareFeet);
-        NavigationSection.navigateToCommercialInPlaceRentRoll();
-        Income.Commercial.InPlaceRentRoll.verifySquareFeetByRowNumber(commonData().squareFeet);
-        deleteReport();
-    });
-
     function deleteReport() {
         Income.Commercial.InPlaceRentRoll.returnToHomePage();
         Homepage.deleteReport(testData.reportCreationData.reportNumber);
