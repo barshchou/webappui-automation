@@ -63,6 +63,7 @@ class CommercialRentRollActions extends BaseActions {
         this.clickPerSquareFootButton(true, backColor)
             .clickMonthlyBasisButton(backColor)
             .clickAnnuallyBasisButton(backColor)
+            .clickPerSquareFootPerMonthButton(backColor)
             .clickPerSquareFootButton(false, backColor);
         return this;
     }
