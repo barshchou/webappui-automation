@@ -13,8 +13,7 @@ const reportCreationFixture = () => {
 const commonData = () => {
     return {
         sharpColumn: "#",
-        numberOfUnits: 1,
-        forecastLabel: "Developer's Forecast"
+        numberOfUnits: 1
     };
 };
 

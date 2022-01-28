@@ -2,43 +2,17 @@ import testData from "../../../../../fixtures/not_full_reports/income/residentia
 import Homepage from "../../../../../actions/base/homepage.actions";
 import NavigationSection from "../../../../../actions/base/navigationSection.actions";
 import Income from "../../../../../actions/income/income.manager";
-import Property from "../../../../../actions/property/property.manager";
 
 describe("In-Place Rent Roll grid tests", () => {
     before("Login and open In-Place Rent Roll", () => {
         cy.login();
         Homepage.createReport(testData.reportCreationData);
-        NavigationSection.navigateToResInPlaceRentRoll();
-        cy.saveLocalStorage();
-    });
-
-    beforeEach(() => {
-        cy.restoreLocalStorage();
     });
 
     it("ID17 and ID18: GRID and #col.", () => {
-        Income.Residential.InPlaceRentRoll.verifyColumnExist(testData.commonData.sharpColumn);
-    });
-
-    it(`ID36: Save button, Navigate to other page without saving / with saving the page on the ‘You have unsaved changes.
-    Would you like to save before continuing?’ modal window`, () => {
-        Income.Residential.InPlaceRentRoll.checkCheckboxByLabel(testData.commonData.forecastLabel)
-            .goToPropSummaryWithSaveSaveClickFirst();
-        Property.Summary.verifyThatPageIsOpened()
-            .goBackWithSave();
-        Income.Residential.InPlaceRentRoll.verifyCheckboxIsChecked(testData.commonData.forecastLabel)
-            .uncheckCheckboxByLabel(testData.commonData.forecastLabel)
-            .goToPropSummaryWithoutSave();
-        Property.Summary.verifyThatPageIsOpened()
-            .goBackWithSave();
-        Income.Residential.InPlaceRentRoll.verifyCheckboxIsChecked(testData.commonData.forecastLabel)
-            .uncheckCheckboxByLabel(testData.commonData.forecastLabel);
-    });
-
-
-    after("Delete report", () => {
-        cy.restoreLocalStorage();
-        Income.Residential.InPlaceRentRoll.returnToHomePage();
+        NavigationSection.navigateToResInPlaceRentRoll();
+        Income.Residential.InPlaceRentRoll.verifyColumnExist(testData.commonData.sharpColumn)
+            .returnToHomePage();
         Homepage.deleteReport(testData.reportCreationData.reportNumber);
     });
 });
