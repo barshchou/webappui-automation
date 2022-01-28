@@ -104,7 +104,7 @@ class CommercialRentRollActions extends BaseActions {
      * @returns {CommercialRentRollActions}
      */
     pasteToLeaseStatusByRow(textToPaste, rowNumber = 0) {
-        rentRollPage.leaseStatusCells.eq(rowNumber).invoke("text", textToPaste).trigger("change")
+        rentRollPage.leaseStatusCells.eq(rowNumber).invoke("text", textToPaste).trigger("paste")
             .should("have.text", textToPaste);
         return this;
     }
