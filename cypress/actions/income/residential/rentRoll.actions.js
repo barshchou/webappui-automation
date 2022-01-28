@@ -162,7 +162,7 @@ class InPlaceRentRollActions extends BaseActions {
      * @returns {InPlaceRentRollActions}
      */
     checkCheckboxByLabel(label) {
-        rentRollPage.getCheckboxByLabel(label).scrollIntoView().should("be.enabled")
+        rentRollPage.getCheckboxByLabel(label).scrollIntoView().should("have.value", "false")
             .check().should("have.value", "true");
         return this;
     }
@@ -173,7 +173,7 @@ class InPlaceRentRollActions extends BaseActions {
      * @returns {InPlaceRentRollActions}
      */
     uncheckCheckboxByLabel(label) {
-        rentRollPage.getCheckboxByLabel(label).scrollIntoView().should("be.enabled")
+        rentRollPage.getCheckboxByLabel(label).scrollIntoView().should("have.value", "true")
             .uncheck().should("have.value", "false");
         return this;
     }
@@ -184,7 +184,7 @@ class InPlaceRentRollActions extends BaseActions {
      * @returns {InPlaceRentRollActions}
      */
     verifyCheckboxIsChecked(label) {
-        rentRollPage.getCheckboxByLabel(label).should("be.checked");
+        rentRollPage.getCheckboxByLabel(label).should("have.value", "true");
         return this;
     }
 

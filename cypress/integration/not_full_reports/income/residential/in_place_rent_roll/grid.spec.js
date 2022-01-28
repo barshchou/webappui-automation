@@ -35,14 +35,6 @@ describe("In-Place Rent Roll grid tests", () => {
             .uncheckCheckboxByLabel(testData.commonData.forecastLabel);
     });
 
-    it("ID37: Save & Continue button", () => {
-        Income.Residential.InPlaceRentRoll.checkCheckboxByLabel(testData.commonData.forecastLabel)
-            .clickSaveContinueButton();
-        Income.Residential.UnitGroups.verifyThatPageIsOpened()
-            .goBack();
-        Income.Residential.InPlaceRentRoll.uncheckCheckboxByLabel(testData.commonData.forecastLabel);
-    });
-
 
     after("Delete report", () => {
         cy.restoreLocalStorage();
