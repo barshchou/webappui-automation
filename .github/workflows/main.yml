@@ -27,10 +27,10 @@ jobs:
         with:
           record: true
           browser: chrome
-          spec: cypress/integration/not_full_reports/**
+          spec: cypress/integration/not_full_reports/income/residential/in_place_rent_roll/QA-4401&04.spec.js
           tag: ${{github.event.inputs.choice}}
         env:
           CYPRESS_USERNAME: ${{ secrets.USERNAME }}
           CYPRESS_PASSWORD: ${{ secrets.PASSWORD }}
-          CYPRESS_RECORD_KEY: ${{ secrets.RECORD_KEY }}
+          CYPRESS_RECORD_KEY: ${{ secrets.TEST_LAUNCHES_RECORD_KEY }}
           CYPRESS_url: ${{ github.event.inputs.choice }}
