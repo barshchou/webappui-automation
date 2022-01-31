@@ -1,13 +1,12 @@
 import testData from "../../../../../fixtures/not_full_reports/income/residential/in_place_rent_roll/optionsList.fixtures";
-import Homepage from "../../../../../actions/base/homepage.actions";
 import NavigationSection from "../../../../../actions/base/navigationSection.actions";
 import Income from "../../../../../actions/income/income.manager";
 import Property from "../../../../../actions/property/property.manager";
+import {createReport, deleteReport} from "../../../../../actions/base/baseTest.actions";
 
 describe("In-Place Rent Roll options list tests", () => {
     before("Create report and open In-Pace Rent Roll", () => {
-        cy.login();
-        Homepage.createReport(testData.reportCreationData);
+        createReport(testData.reportCreationData);
         NavigationSection.navigateToResInPlaceRentRoll();
         cy.saveLocalStorage();
     });
@@ -84,7 +83,6 @@ describe("In-Place Rent Roll options list tests", () => {
 
     after("Delete report", () => {
         cy.restoreLocalStorage();
-        Income.Residential.InPlaceRentRoll.returnToHomePage();
-        Homepage.deleteReport(testData.reportCreationData.reportNumber);
+        deleteReport(testData.reportCreationData.reportNumber);
     });
 });

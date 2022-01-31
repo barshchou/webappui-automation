@@ -1,15 +1,14 @@
 import testData from "../../../../../fixtures/not_full_reports/income/commercial/in_place_rent_roll/QA-4385&86.fixture";
-import Homepage from "../../../../../actions/base/homepage.actions";
 import Income from "../../../../../actions/income/income.manager";
 import {getTodayDateString} from "../../../../../../utils/date.utils";
 import NavigationSection from "../../../../../actions/base/navigationSection.actions";
+import {createReport, deleteReport} from "../../../../../actions/base/baseTest.actions";
 
 describe("Verify the Dates columns in the grid", () => {
     const cellDatesNames = ["Start", "Expiry"];
 
     beforeEach("Login, create report", () => {
-        cy.login();
-        Homepage.createReport(testData.reportCreationData);
+        createReport(testData.reportCreationData);
     });
 
     cellDatesNames.forEach(cellName => {
@@ -22,9 +21,8 @@ describe("Verify the Dates columns in the grid", () => {
                .verifyLeaseDateByRowNumber(cellName, testData.vacantLease)
                .chooseLeaseStatusByRowNumber(testData.occupiedLease)
                .enterLeaseDateByRowNumber(cellName, testData.wrongFormatLeaseDate)
-               .verifyLeaseDateByRowNumber(cellName, testData.occupiedLease, testData.wrongFormatLeaseDate)
-               .returnToHomePage();
-           Homepage.deleteReport(testData.reportCreationData.reportNumber);
+               .verifyLeaseDateByRowNumber(cellName, testData.occupiedLease, testData.wrongFormatLeaseDate);
+           deleteReport(testData.reportCreationData.reportNumber);
        });
     });
 });

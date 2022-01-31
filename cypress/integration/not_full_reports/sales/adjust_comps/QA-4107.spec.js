@@ -1,13 +1,12 @@
 import testData from "../../../../fixtures/not_full_reports/sales/adjust_comps/QA-4107.fixture";
-import Homepage from "../../../../actions/base/homepage.actions";
 import Sales from "../../../../actions/sales/sales.manager";
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
+import {createReport, deleteReport} from "../../../../actions/base/baseTest.actions";
 
 describe("Adjusted Price per Residential Unit in Sales Adjustment Grid is calculated with correct formula", () => {
 
     before("Login, create report", () => {
-        cy.login();
-        Homepage.createReport(testData.reportCreationData);
+        createReport(testData.reportCreationData);
     });
 
     it("Test body", () => {
@@ -19,8 +18,7 @@ describe("Adjusted Price per Residential Unit in Sales Adjustment Grid is calcul
             .enterConditionAdjustmentByColumn(testData.comparable.conditionAdjustment)
             .enterOtherAdjustmentByColumn(testData.comparable.otherAdjustment)
             .enterPropertyRightsByColumn(testData.comparable.propertyRights)
-            .verifyAdjustedPriceByColumn()
-            .returnToHomePage();
-        Homepage.deleteReport(testData.reportCreationData.reportNumber);
+            .verifyAdjustedPriceByColumn();
+        deleteReport(testData.reportCreationData.reportNumber);
     });
 });

@@ -1,5 +1,5 @@
-import Homepage from "../actions/base/homepage.actions";
-import NavigationSection from "../actions/base/navigationSection.actions";
+import Homepage from "./homepage.actions";
+import NavigationSection from "./navigationSection.actions";
 
 export const createReport = (reportCreationData) => {
     cy.login();

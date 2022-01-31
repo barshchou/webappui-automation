@@ -1,13 +1,11 @@
 import Enums from "../../../../../enums/enums";
+import ReportDataCreator from "../../../../data_creator/reportData.creator";
 
 const reportCreationFixture = () => {
-    return {
-        address: "462 1st Avenue, New York, USA",
-        reportNumber: "TestAutoReport-QA-4391",
-        templateValue: Enums.TEMPLATE_TYPE.FREDDIE_MAC,
-        incomeValue: Enums.INCOME_TYPE.BOTH,
-        conclusionValue: Enums.VALUE_CONCLUSION_TYPE.AS_COMPLETE
-    };
+    return ReportDataCreator.setAddress().setReportNumber("4391")
+        .setTemplateValue(Enums.TEMPLATE_TYPE.FREDDIE_MAC)
+        .setIncomeValue(Enums.INCOME_TYPE.BOTH)
+        .setConclusionValue(Enums.VALUE_CONCLUSION_TYPE.AS_COMPLETE);
 };
 
 const generalFixture = () => {
@@ -19,6 +17,6 @@ const generalFixture = () => {
 };
 
 export default {
-    reportCreationData: Object.freeze(reportCreationFixture()),
+    reportCreationData: reportCreationFixture(),
     general: Object.freeze(generalFixture())
 };

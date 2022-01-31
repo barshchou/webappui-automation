@@ -1,14 +1,13 @@
 import tesData from "../../../../../fixtures/not_full_reports/income/residential/rent_comps/QA-4342.fixtures";
-import Homepage from "../../../../../actions/base/homepage.actions";
 import NavigationSection from "../../../../../actions/base/navigationSection.actions";
 import Income from "../../../../../actions/income/income.manager";
 import Property from "../../../../../actions/property/property.manager";
+import {createReport, deleteReport} from "../../../../../actions/base/baseTest.actions";
 
 describe("[Income -  Residential - Rent Comps] Verify the display of the Unit grid with the added comparable unit " +
     "on the '$ Rent Comps' page ", () => {
     beforeEach("Login action", () => {
-        cy.login();
-        Homepage.createReport(tesData.reportCreationData);
+        createReport(tesData.reportCreationData);
     });
 
     it("Uncategorized table with default columns" , () => {
@@ -28,7 +27,7 @@ describe("[Income -  Residential - Rent Comps] Verify the display of the Unit gr
             .verifyUncategorizedSubjectMaxExist()
             .verifyUncategorizedSubjectColumnText(tesData.uncategorizedData.subjectColumnText)
             .verifyUncategorizedSquareFootageCells(0, tesData.uncategorizedData.compData);
-        deleteReport();
+        deleteReport(tesData.reportCreationData.reportNumber);
     });
 
     it("Developers forecast test" , () => {
@@ -39,7 +38,7 @@ describe("[Income -  Residential - Rent Comps] Verify the display of the Unit gr
             .verifyUnitSelected()
             .selectComparableByAddress(tesData.uncategorizedData.compData.address)
             .verifyUncategorizedSubjectDevForecast(tesData.uncategorizedData.devForecastText);
-        deleteReport();
+        deleteReport(tesData.reportCreationData.reportNumber);
     });
 
     it("Bathrooms column test", () => {
@@ -50,7 +49,7 @@ describe("[Income -  Residential - Rent Comps] Verify the display of the Unit gr
             .verifyUnitSelected()
             .selectComparableByAddress(tesData.uncategorizedData.compData.address)
             .verifyUncategorizedBathroomsRowCell(0, tesData.uncategorizedData.compData.bathrooms);
-        deleteReport();
+        deleteReport(tesData.reportCreationData.reportNumber);
     });
 
     it("Bedrooms category, subject market rate test", () => {
@@ -68,11 +67,6 @@ describe("[Income -  Residential - Rent Comps] Verify the display of the Unit gr
             .verifyBedroomMarketRateSummaryExist(tesData.bedroomCategory.bedroomsNumber)
             .verifyBedroomSubjectColumnText(tesData.bedroomCategory.bedroomsNumber, tesData.bedroomCategory.subjectColumnText)
             .verifyComparableBedroomTableByNumber(0, tesData.bedroomCategory.compData);
-        deleteReport();
+        deleteReport(tesData.reportCreationData.reportNumber);
     });
-
-    function deleteReport() {
-        Income.Residential.RentComps.BaseActions.returnToHomePage();
-        Homepage.deleteReport(tesData.reportCreationData.reportNumber);
-    }
 });

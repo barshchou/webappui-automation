@@ -3,6 +3,7 @@ import testData from "../../../../fixtures/not_full_reports/sales/find_comps/QA-
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Sales from "../../../../actions/sales/sales.manager";
 import {isProdEnv} from "../../../../../utils/env.utils";
+import {createReport} from "../../../../actions/base/baseTest.actions";
 
 /**
  * This test can be launched only at PROD environment due to changes of import modal functionality at STAGING and DEV
@@ -11,8 +12,7 @@ const modifiedDescribe = isProdEnv() ? describe : describe.skip;
 
 modifiedDescribe("Verify the Comps can be added by entering the existing Report URL in the modal", () => {
     before("Login, create report", () => {
-        cy.login();
-        Homepage.createReport(testData.reportCreationData);
+        createReport(testData.reportCreationData);
     });
 
     it("Test body", () => {

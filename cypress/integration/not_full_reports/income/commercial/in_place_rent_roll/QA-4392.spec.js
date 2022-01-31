@@ -1,14 +1,13 @@
-import Homepage from "../../../../../actions/base/homepage.actions";
 import testData from "../../../../../fixtures/not_full_reports/income/commercial/in_place_rent_roll/QA-4392.fixture";
 import NavigationSection from "../../../../../actions/base/navigationSection.actions";
 import Property from "../../../../../actions/property/property.manager";
 import Income from "../../../../../actions/income/income.manager";
+import {createReport, deleteReport} from "../../../../../actions/base/baseTest.actions";
 
 describe("Verify the Annual Rent Total is calculated correctly in the grid.", () => {
 
     before("Login, create report", () => {
-        cy.login();
-        Homepage.createReport(testData.reportCreationData);
+        createReport(testData.reportCreationData);
     });
 
     it("Test body", () => {
@@ -21,8 +20,7 @@ describe("Verify the Annual Rent Total is calculated correctly in the grid.", ()
         Income.Commercial.InPlaceRentRoll.chooseListLeaseStatuses(testData.general.leaseStatusesList, testData.general.numberOfUnits)
             .clickAnnuallyBasisButton()
             .enterListAnnuallyRent(testData.general.leaseStatusesList, testData.general.annualRents)
-            .verifyAnnuallyRentTotal(testData.general.leaseStatusesList, testData.general.annualRents)
-            .returnToHomePage();
-        Homepage.deleteReport(testData.reportCreationData.reportNumber);
+            .verifyAnnuallyRentTotal(testData.general.leaseStatusesList, testData.general.annualRents);
+        deleteReport(testData.reportCreationData.reportNumber);
     });
 });

@@ -1,13 +1,8 @@
 import Enums from "../../../../enums/enums";
+import ReportDataCreator from "../../../data_creator/reportData.creator";
 
 const reportCreationFixture = () => {
-    return {
-        address: "462 1st Avenue, New York, USA",
-        reportNumber: "TestAutoReport-QA4150",
-        templateValue: Enums.TEMPLATE_TYPE.FREDDIE_MAC,
-        incomeValue: Enums.INCOME_TYPE.BOTH,
-        conclusionValue: Enums.VALUE_CONCLUSION_TYPE.AS_IS
-    };
+    return ReportDataCreator.getReportSpecificIncomeValue(Enums.INCOME_TYPE.BOTH, "4050");
 };
 
 const comparableFixture = () => {
@@ -36,7 +31,7 @@ const commentariesFixture = () => {
 };
 
 export default {
-    reportCreationData: Object.freeze(reportCreationFixture()),
+    reportCreationData: reportCreationFixture(),
     comparable: Object.freeze(comparableFixture()),
     expenseForecastInsurance: Object.freeze(expenseForecastInsuranceFixture()),
     commentaries: Object.freeze(commentariesFixture())

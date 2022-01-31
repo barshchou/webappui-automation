@@ -14,8 +14,7 @@ class AdjustCompsActions extends BaseActions {
      * @returns {AdjustCompsActions}
      */
     checkCalculationUnitsRadio(value) {
-        adjustCompsPage.calculationUnitsRadio.check(value);
-        adjustCompsPage.getElementToCheckRadio(value).should("exist");
+        adjustCompsPage.calculationUnitsRadio.check(value).should("be.checked");
         return this;
     }
 
@@ -25,8 +24,7 @@ class AdjustCompsActions extends BaseActions {
      * @returns {AdjustCompsActions}
      */
     checkIncomeAdjustmentLevel(value) {
-        adjustCompsPage.incomeAdjustmentLevelRadio.check(value);
-        adjustCompsPage.getElementToCheckRadio(value).should("exist");
+        adjustCompsPage.incomeAdjustmentLevelRadio.check(value).should("be.checked");
         return this;
     }
 

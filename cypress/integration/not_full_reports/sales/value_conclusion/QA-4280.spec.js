@@ -1,15 +1,14 @@
 import testData from "../../../../fixtures/not_full_reports/sales/value_conclusion/QA-4280.fixture";
-import Homepage from "../../../../actions/base/homepage.actions";
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Income from "../../../../actions/income/income.manager";
 import Property from "../../../../actions/property/property.manager";
 import Sales from "../../../../actions/sales/sales.manager";
+import {createReport, deleteReport} from "../../../../actions/base/baseTest.actions";
 
 describe("Prospective Market Value As Stabilized -> " +
     "Less Residential Rent Loss data is pulled from Cap Rate Conclusion", () => {
     before("Login action", () => {
-        cy.login();
-        Homepage.createReport(testData.reportCreationData);
+        createReport(testData.reportCreationData);
     });
 
     it("Test body", () => {
@@ -35,7 +34,6 @@ describe("Prospective Market Value As Stabilized -> " +
         NavigationSection.navigateToSalesValueConclusion()
             .verifyProgressBarNotExist();
         Sales.ValueConclusion.verifyAsStabResRentLossTimePeriodByRow(testData.data.rentLossTimePeriod);
-        Sales.ValueConclusion.returnToHomePage();
-        Homepage.deleteReport(testData.reportCreationData.reportNumber);
+        deleteReport(testData.reportCreationData.reportNumber);
     });
 });

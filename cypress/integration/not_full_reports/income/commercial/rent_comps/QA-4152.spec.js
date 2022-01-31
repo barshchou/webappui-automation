@@ -1,14 +1,13 @@
 import testData from "../../../../../fixtures/not_full_reports/income/commercial/rent_comps/QA-4152.fixture";
-import Homepage from "../../../../../actions/base/homepage.actions";
 import Income from "../../../../../actions/income/income.manager";
 import NavigationSection from "../../../../../actions/base/navigationSection.actions";
+import {createReport, deleteReport} from "../../../../../actions/base/baseTest.actions";
 
 
 describe("Dropdown 'Filters'- 'Sort by' section", () => {
 
     before("Login, create report", () => {
-        cy.login();
-        Homepage.createReport(testData.reportCreationData);
+        createReport(testData.reportCreationData);
     });
 
     it("Test body", () => {
@@ -21,7 +20,6 @@ describe("Dropdown 'Filters'- 'Sort by' section", () => {
         testData.sortByOptions.forEach(option => {
             Income.Commercial.RentComps.selectSortByOption(option);
         });
-        Income.Commercial.RentComps.returnToHomePage();
-        Homepage.deleteReport(testData.reportCreationData.reportNumber);
+        deleteReport(testData.reportCreationData.reportNumber);
     });
 });

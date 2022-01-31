@@ -1,13 +1,12 @@
 import testData from "../../../../fixtures/not_full_reports/sales/value_conclusion/QA-4343&46.fixture";
-import Homepage from "../../../../actions/base/homepage.actions";
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Sales from "../../../../actions/sales/sales.manager";
 import Final from "../../../../actions/final/final.manager";
+import {createReport, deleteReport} from "../../../../actions/base/baseTest.actions";
 
 describe("Save and Save & Continue buttons tests", () => {
     beforeEach("Login, open sales value conclusion and make changes", () => {
-        cy.login();
-        Homepage.createReport(testData.reportCreationData);
+        createReport(testData.reportCreationData);
         NavigationSection.navigateToSalesValueConclusion();
         Sales.ValueConclusion.checkMatchIncomeApproachDeductionsCheckbox()
             .enterSaleValueConclusion(testData.saleValueConclusion);
@@ -18,7 +17,7 @@ describe("Save and Save & Continue buttons tests", () => {
         cy.reload();
         Sales.ValueConclusion.verifyMatchIncomeApproachDeductionsChecked()
             .verifySaleValueConclusion(testData.saleValueConclusion);
-        deleteReport();
+        deleteReport(testData.reportCreationData.reportNumber);
     });
 
     it("QA-4346 Save & Continue button test", () => {
@@ -27,11 +26,6 @@ describe("Save and Save & Continue buttons tests", () => {
             .goBackWithSave();
         Sales.ValueConclusion.verifyMatchIncomeApproachDeductionsChecked()
             .verifySaleValueConclusion(testData.saleValueConclusion);
-        deleteReport();
+        deleteReport(testData.reportCreationData.reportNumber);
     });
-
-    const deleteReport = () => {
-        Sales.ValueConclusion.returnToHomePage();
-        Homepage.deleteReport(testData.reportCreationData.reportNumber);
-    };
 });

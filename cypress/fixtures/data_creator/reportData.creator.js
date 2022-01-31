@@ -45,6 +45,11 @@ class ReportCreator {
             .setConclusionValue(conclusionValue).build();
     }
 
+    getReportSpecificIncomeValue(incomeValue, testNumber) {
+        return this.setReportNumber(testNumber).setAddress().setTemplateValue().setIncomeValue(incomeValue)
+            .setConclusionValue().build();
+    }
+
     getDefaultReportData(testNumber) {
         return this.setReportNumber(testNumber).setAddress().setIncomeValue().setTemplateValue().setConclusionValue().build();
     }

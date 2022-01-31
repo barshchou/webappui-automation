@@ -1,14 +1,13 @@
 import testData from "../../../../fixtures/not_full_reports/income/expense_forecast/QA-4050.fixture";
-import Homepage from "../../../../actions/base/homepage.actions";
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Income from "../../../../actions/income/income.manager";
+import {createReport, deleteReport} from "../../../../actions/base/baseTest.actions";
 
 describe("Verify that Generated Commentary for Total Operating Expenses " +
     "is updated on the Expense Forecast page", () => {
 
     before("Login, create report", () => {
-        cy.login();
-        Homepage.createReport(testData.reportCreationData);
+        createReport(testData.reportCreationData);
     });
 
     it("Test body", () => {
@@ -32,8 +31,7 @@ describe("Verify that Generated Commentary for Total Operating Expenses " +
         Income.ExpenseForecast.enterForecastItemForecast(testData.expenseForecastInsurance)
             .verifyTOECommentary(testData.commentaries.generated)
             .editTOECommentary(testData.commentaries.edited)
-            .verifyTOECommentary(testData.commentaries.edited)
-            .returnToHomePage();
-        Homepage.deleteReport(testData.reportCreationData.reportNumber);
+            .verifyTOECommentary(testData.commentaries.edited);
+        deleteReport(testData.reportCreationData.reportNumber);
     });
 });

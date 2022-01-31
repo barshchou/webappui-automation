@@ -1,21 +1,15 @@
 import Enums from "../../../../enums/enums";
+import ReportDataCreator from "../../../data_creator/reportData.creator";
 
 const reportCreationFixture = () => {
-    return {
-        address: "462 1st Avenue, New York, USA",
-        reportNumber: "TestAutoReport-QA-4174",
-        templateValue: Enums.TEMPLATE_TYPE.FREDDIE_MAC,
-        incomeValue: Enums.INCOME_TYPE.BOTH,
-        conclusionValue: Enums.VALUE_CONCLUSION_TYPE.AS_COMPLETE
-    };
-};
-
-export const reportCreationData = () => {
-    return Object.freeze(reportCreationFixture());
+    return ReportDataCreator.setAddress().setReportNumber("4174")
+        .setTemplateValue(Enums.TEMPLATE_TYPE.FREDDIE_MAC)
+        .setIncomeValue(Enums.INCOME_TYPE.BOTH)
+        .setConclusionValue(Enums.VALUE_CONCLUSION_TYPE.AS_COMPLETE);
 };
 
 export default {
-    reportCreationData: reportCreationData(),
+    reportCreationData: reportCreationFixture(),
     valueConclusion: 750,
     asIsMarket: "$1,593,330,750"
 };
