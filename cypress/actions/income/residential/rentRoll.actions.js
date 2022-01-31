@@ -489,6 +489,37 @@ class InPlaceRentRollActions extends BaseActions {
         rentRollPage.rentRollCommentary.should("have.text", commentaryToBe);
         return this;
     }
+
+    clickCloseIcon() {
+        rentRollPage.closeIcon.click();
+        return this;
+    }
+
+    /**
+     * @param {number} numberOfUnits
+     * @returns {InPlaceRentRollActions}
+     */
+    verifyNumberOfUnitsNumberCells(numberOfUnits = 0) {
+        if (numberOfUnits === 0) {
+            rentRollPage.unitNumberCells.should("not.exist");
+        } else {
+            rentRollPage.unitNumberCells.should("have.length", numberOfUnits);
+        }
+        return this;
+    }
+
+    /**
+     * @param {number} numberOfUnits
+     * @returns {InPlaceRentRollActions}
+     */
+    verifyNumberOfNumberCells(numberOfUnits = 0) {
+        if (numberOfUnits === 0) {
+            rentRollPage.numberCells.should("not.exist");
+        } else {
+            rentRollPage.numberCells.should("have.length", numberOfUnits);
+        }
+        return this;
+    }
 }
 
 export default new InPlaceRentRollActions();

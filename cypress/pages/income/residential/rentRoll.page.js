@@ -27,6 +27,8 @@ class InPlaceRentRollPage extends BasePage {
     get annualTotalForecast() {return cy.get("[data-qa='annualTotal-rentForecast']");}
     get rentRollCommentary() {return cy.get("[data-qa*='currentRentRollDiscussion.commentary']");}
     get monthlyRentCells() {return cy.get("[data-qa^=rent-][data-qa$=cell]");}
+    get closeIcon() {return cy.get("[data-qa=close-icon]");}
+    get numberCells() {return cy.get("[data-qa^='#']");}
 }
 
 export default new InPlaceRentRollPage();
