@@ -152,7 +152,8 @@ class InPlaceRentRollActions extends BaseActions {
      * @returns {InPlaceRentRollActions}
      */
     checkPerUnitSquareFootage(value = "true") {
-        rentRollPage.getPerUnitSFRadio(value).scrollIntoView().should("be.enabled").click();
+        rentRollPage.getPerUnitSFRadio(value).should("not.be.checked").scrollIntoView()
+            .click().should("be.checked");
         return this;
     }
 
@@ -540,6 +541,25 @@ class InPlaceRentRollActions extends BaseActions {
     pressDeleteOutdoorSpaceByRow(rowNumber = 0) {
         rentRollPage.outdoorSpaceCells.eq(rowNumber).trigger("keydown", {keyCode: 46})
             .should("have.text", "▼");
+        return this;
+    }
+
+    /**
+     * @param {string | number} value
+     * @param {number} rowNumber
+     * @returns {InPlaceRentRollActions}
+     */
+    enterSquareFootageByRow(value, rowNumber = 0) {
+        rentRollPage.squareFootageCells.eq(rowNumber).dblclick();
+        rentRollPage.textAreaToInput.clear().type(value).type("{enter}");
+        let number = typeof value === "string" ? getNumberFromDollarNumberWithCommas(value) : value;
+        let textToBe;
+        if (number > (99 * Math.pow(10, 19))) {
+            textToBe = "NaN";
+        } else {
+            textToBe = typeof value === "string" ? value : numberWithCommas(value.toFixed(2));
+        }
+        rentRollPage.squareFootageCells.eq(rowNumber).should("have.text", textToBe);
         return this;
     }
 }

@@ -61,10 +61,6 @@ describe("In-Place Rent Roll options list tests", () => {
            .uncheckCheckboxByLabel(testData.id8.summarizeLabel);
     });
 
-    it("ID9: Do you know per unit square footage? radio button", () => {
-        Income.Residential.InPlaceRentRoll.checkUncheckPerUnitSquareFootage(testData.id9.columns);
-    });
-
     it("ID10: Text: Optional Columns", () => {
         Income.Residential.InPlaceRentRoll.isOptionalColumnExist();
     });
