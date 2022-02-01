@@ -520,6 +520,28 @@ class InPlaceRentRollActions extends BaseActions {
         }
         return this;
     }
+
+    /**
+     * @param {string} space
+     * @param {number} rowNumber
+     * @returns {InPlaceRentRollActions}
+     */
+    enterOutdoorSpaceByOptionByRow(space, rowNumber = 0) {
+        rentRollPage.outdoorSpaceCells.eq(rowNumber).dblclick();
+        rentRollPage.tableListboxOptions.contains(space).click();
+        rentRollPage.outdoorSpaceCells.should("contain.text", space);
+        return this;
+    }
+
+    /**
+     * @param {number} rowNumber
+     * @returns {InPlaceRentRollActions}
+     */
+    pressDeleteOutdoorSpaceByRow(rowNumber = 0) {
+        rentRollPage.outdoorSpaceCells.eq(rowNumber).trigger("keydown", {keyCode: 46})
+            .should("have.text", "▼");
+        return this;
+    }
 }
 
 export default new InPlaceRentRollActions();

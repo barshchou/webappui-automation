@@ -49,12 +49,6 @@ const id11Fixture = () => {
     };
 };
 
-const id12Fixture = () => {
-    return {
-        labelAndColumn: "Outdoor Space"
-    };
-};
-
 const id13Fixture = () => {
     return {
         labelAndColumn: "Unit Type"
@@ -85,10 +79,6 @@ export const id11Data = () => {
     return Object.freeze(id11Fixture());
 };
 
-export const id12Data = () => {
-    return Object.freeze(id12Fixture());
-};
-
 export const id13Data = () => {
     return Object.freeze(id13Fixture());
 };
@@ -101,6 +91,5 @@ export default {
     id8: id8Data(),
     id9: id9Data(),
     id11: id11Data(),
-    id12: id12Data(),
     id13: id13Data()
 };

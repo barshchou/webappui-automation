@@ -29,6 +29,8 @@ class InPlaceRentRollPage extends BasePage {
     get monthlyRentCells() {return cy.get("[data-qa^=rent-][data-qa$=cell]");}
     get closeIcon() {return cy.get("[data-qa=close-icon]");}
     get numberCells() {return cy.get("[data-qa^='#']");}
+    get outdoorSpaceCells() {return cy.get("[data-qa^=outdoor][data-qa$=cell]");}
+    get tableListboxOptions() {return cy.get("td.listbox");}
 }
 
 export default new InPlaceRentRollPage();
