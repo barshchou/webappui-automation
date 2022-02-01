@@ -1,13 +1,8 @@
 import Enums from "../../../../../enums/enums";
+import ReportDataCreator from "../../../../data_creator/reportData.creator";
 
 const reportCreationFixture = () => {
-    return {
-        address: "462 1st Avenue, New York, USA",
-        reportNumber: "TestAutoReport-ResidentialRentRollOptions",
-        templateValue: Enums.TEMPLATE_TYPE.FREDDIE_MAC,
-        incomeValue: Enums.INCOME_TYPE.BOTH,
-        conclusionValue: Enums.VALUE_CONCLUSION_TYPE.AS_IS
-    };
+    return ReportDataCreator.getReportSpecificIncomeValue(Enums.INCOME_TYPE.BOTH, "ResRentRollOptions");
 };
 
 const csvLinksFixture = () => {
@@ -66,10 +61,6 @@ const id13Fixture = () => {
     };
 };
 
-export const reportCreationData = () => {
-    return Object.freeze(reportCreationFixture());
-};
-
 export const csvLinksData = () => {
     return Object.freeze(csvLinksFixture());
 };
@@ -103,7 +94,7 @@ export const id13Data = () => {
 };
 
 export default {
-    reportCreationData: reportCreationData(),
+    reportCreationData: reportCreationFixture(),
     csvLinks: csvLinksData(),
     id3: id3Data(),
     id7: id7Data(),

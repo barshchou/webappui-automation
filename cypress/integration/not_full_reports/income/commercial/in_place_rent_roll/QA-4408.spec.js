@@ -1,15 +1,13 @@
 import testData from "../../../../../fixtures/not_full_reports/income/commercial/in_place_rent_roll/QA-4408.fixture";
-import Homepage from "../../../../../actions/base/homepage.actions";
 import Income from "../../../../../actions/income/income.manager";
 import NavigationSection from "../../../../../actions/base/navigationSection.actions";
 import Property from "../../../../../actions/property/property.manager";
+import {createReport, deleteReport} from "../../../../../actions/base/baseTest.actions";
 
-// TODO: The hole test is skipped for now, until the fix of bug WEB-3953 is deployed from dev env
-describe.skip("Verify the Current Commercial Income Discussion on the In-Place Rent Roll page", () => {
+describe("Verify the Current Commercial Income Discussion on the In-Place Rent Roll page", () => {
 
     beforeEach("Login, create report", () => {
-        cy.login();
-        Homepage.createReport(testData.reportCreationData);
+        createReport(testData.reportCreationData);
     });
 
     it("No Vacant Units", () => {
@@ -18,7 +16,7 @@ describe.skip("Verify the Current Commercial Income Discussion on the In-Place R
         NavigationSection.navigateToCommercialInPlaceRentRoll();
         Income.Commercial.InPlaceRentRoll.chooseListLeaseStatuses(testData.noVacantData.leases, testData.noVacantData.numberOfCommercialUnits)
             .verifyCommentarySavedText(testData.noVacantData.commentaryToBe);
-        deleteReport();
+        deleteReport(testData.reportCreationData.reportNumber);
     });
 
     it("One unit is Vacant", () => {
@@ -27,7 +25,7 @@ describe.skip("Verify the Current Commercial Income Discussion on the In-Place R
         NavigationSection.navigateToCommercialInPlaceRentRoll();
         Income.Commercial.InPlaceRentRoll.chooseListLeaseStatuses(testData.oneVacantData.leases, testData.oneVacantData.numberOfCommercialUnits)
             .verifyCommentarySavedText(testData.oneVacantData.commentaryToBe);
-        deleteReport();
+        deleteReport(testData.reportCreationData.reportNumber);
     });
 
     it("All units are Vacant", () => {
@@ -36,7 +34,7 @@ describe.skip("Verify the Current Commercial Income Discussion on the In-Place R
         NavigationSection.navigateToCommercialInPlaceRentRoll();
         Income.Commercial.InPlaceRentRoll.chooseListLeaseStatuses(testData.allVacantData.leases, testData.allVacantData.numberOfCommercialUnits)
             .verifyCommentarySavedText(testData.allVacantData.commentaryToBe);
-        deleteReport();
+        deleteReport(testData.reportCreationData.reportNumber);
     });
 
     it("One unit test", () => {
@@ -45,7 +43,7 @@ describe.skip("Verify the Current Commercial Income Discussion on the In-Place R
         NavigationSection.navigateToCommercialInPlaceRentRoll();
         Income.Commercial.InPlaceRentRoll.chooseLeaseStatusByRowNumber(testData.oneUnitData.lease)
             .verifyCommentarySavedText(testData.oneUnitData.commentaryToBe);
-        deleteReport();
+        deleteReport(testData.reportCreationData.reportNumber);
     });
 
     it("Few vacant, few occupied test", () => {
@@ -55,11 +53,6 @@ describe.skip("Verify the Current Commercial Income Discussion on the In-Place R
         Income.Commercial.InPlaceRentRoll.chooseListLeaseStatuses(testData.fewVacantFewOccupiedData.leases,
             testData.fewVacantFewOccupiedData.numberOfCommercialUnits)
             .verifyCommentarySavedText(testData.fewVacantFewOccupiedData.commentaryToBe);
-        deleteReport();
+        deleteReport(testData.reportCreationData.reportNumber);
     });
-    
-    const deleteReport = () => {
-        Income.Commercial.InPlaceRentRoll.returnToHomePage();
-        Homepage.deleteReport(testData.reportCreationData.reportNumber);
-    };
 });

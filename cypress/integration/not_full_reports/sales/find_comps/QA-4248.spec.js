@@ -3,11 +3,11 @@ import testData from "../../../../fixtures/not_full_reports/sales/find_comps/QA-
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Sales from "../../../../actions/sales/sales.manager";
 import {getEnvUrl, isProdEnv} from "../../../../../utils/env.utils";
+import {createReport, deleteReport} from "../../../../actions/base/baseTest.actions";
 
 describe("Verify the Comps can be added by entering the existing Report ID in the modal", () => {
     before("Login, create report", () => {
-        cy.login();
-        Homepage.createReport(testData.reportCreationData);
+        createReport(testData.reportCreationData);
     });
 
     it("Test body", () => {
@@ -33,9 +33,8 @@ describe("Verify the Comps can be added by entering the existing Report ID in th
                 .selectAllCompsForImport()
                 .clickImportCompsFromReportButton();
         }
-        Sales.FindComps.verifyAddedCompAddress(testData.comparable.address)
-            .returnToHomePage();
-        Homepage.deleteReport(testData.reportCreationData.reportNumber);
+        Sales.FindComps.verifyAddedCompAddress(testData.comparable.address);
+        deleteReport(testData.reportCreationData.reportNumber);
         cy.reload();
         Homepage.deleteReport(testData.reportCreationData.reportNumber);
     });

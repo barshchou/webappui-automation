@@ -1,12 +1,11 @@
 import testData from "../../../../fixtures/not_full_reports/sales/value_conclusion/QA-4331.fixture";
-import Homepage from "../../../../actions/base/homepage.actions";
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Sales from "../../../../actions/sales/sales.manager";
+import {createReport, deleteReport} from "../../../../actions/base/baseTest.actions";
 
 describe("Sales Value Conclusion Discussion -> Appraiser Commentary", () => {
     before("Login", () => {
-        cy.login();
-        Homepage.createReport(testData.reportCreationData);
+        createReport(testData.reportCreationData);
     });
 
     it("Test body", () => {
@@ -15,7 +14,6 @@ describe("Sales Value Conclusion Discussion -> Appraiser Commentary", () => {
             .clickSaveButton();
         cy.reload();
         Sales.ValueConclusion.verifyAdditionalCommentaryText(testData.commentary);
-        Sales.ValueConclusion.returnToHomePage();
-        Homepage.deleteReport(testData.reportCreationData.reportNumber);
+        deleteReport(testData.reportCreationData.reportNumber);
     });
 });

@@ -1,13 +1,12 @@
 import testData from "../../../../../fixtures/not_full_reports/income/commercial/in_place_rent_roll/QA-4411&12.fixture";
-import Homepage from "../../../../../actions/base/homepage.actions";
 import Income from "../../../../../actions/income/income.manager";
 import NavigationSection from "../../../../../actions/base/navigationSection.actions";
+import {createReport, deleteReport} from "../../../../../actions/base/baseTest.actions";
 
 describe("Current Commercial Income Discussion > Verify the Revert to Original button and 'Changes will be lost' " +
     "functionality", () => {
     before("Login, create report", () => {
-        cy.login();
-        Homepage.createReport(testData.reportCreationData);
+        createReport(testData.reportCreationData);
     });
 
     it("Test body", () => {
@@ -23,8 +22,7 @@ describe("Current Commercial Income Discussion > Verify the Revert to Original b
             .verifyCommentaryTextBoxText(testData.editedCommentary)
             .clickRevertToOriginalButton()
             .clickYesRevertButton()
-            .verifyCommentaryTextBoxNotHaveText(testData.editedCommentary)
-            .returnToHomePage();
-        Homepage.deleteReport(testData.reportCreationData.reportNumber);
+            .verifyCommentaryTextBoxNotHaveText(testData.editedCommentary);
+        deleteReport(testData.reportCreationData.reportNumber);
     });
 });

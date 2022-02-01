@@ -1,14 +1,13 @@
 import testData from "../../../../../fixtures/not_full_reports/income/commercial/in_place_rent_roll/QA-4394.fixture";
-import Homepage from "../../../../../actions/base/homepage.actions";
 import NavigationSection from "../../../../../actions/base/navigationSection.actions";
 import Property from "../../../../../actions/property/property.manager";
 import Income from "../../../../../actions/income/income.manager";
+import {createReport, deleteReport} from "../../../../../actions/base/baseTest.actions";
 
 describe("Verify the Rent PSF Total is calculated correctly in the grid", () => {
 
     before("Login, create report", () => {
-        cy.login();
-        Homepage.createReport(testData.reportCreationData);
+        createReport(testData.reportCreationData);
     });
 
     it("Test body", () => {
@@ -20,8 +19,7 @@ describe("Verify the Rent PSF Total is calculated correctly in the grid", () => 
         NavigationSection.navigateToCommercialInPlaceRentRoll();
         Income.Commercial.InPlaceRentRoll.chooseListLeaseStatuses(testData.general.leaseStatusesList, testData.general.numberOfUnits)
             .enterListPerSF(testData.general.leaseStatusesList, testData.general.perSFList)
-            .verifyPerSFTotal(testData.general.leaseStatusesList, testData.general.perSFList, testData.general.squareFeetList)
-            .returnToHomePage();
-        Homepage.deleteReport(testData.reportCreationData.reportNumber);
+            .verifyPerSFTotal(testData.general.leaseStatusesList, testData.general.perSFList, testData.general.squareFeetList);
+        deleteReport(testData.reportCreationData.reportNumber);
     });
 });

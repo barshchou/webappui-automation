@@ -4,8 +4,8 @@ import BaseActions from "./base.actions";
 class HomepageActions extends BaseActions {
 
     /**
-     * @param {Readonly<{incomeValue: string, address: string, reportNumber: string, templateValue: string,
-     * conclusionValue: string}>} reportCreationData
+     * @param {{incomeValue: string, address: string, reportNumber: string, templateValue: string,
+     * conclusionValue: string}} reportCreationData
      * @returns {HomepageActions}
      */
     createReport(reportCreationData) {

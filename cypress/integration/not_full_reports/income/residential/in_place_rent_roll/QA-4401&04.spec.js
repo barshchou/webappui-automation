@@ -1,12 +1,11 @@
 import testData from "../../../../../fixtures/not_full_reports/income/residential/in_place_rent_roll/QA-4401&04.fixture";
-import Homepage from "../../../../../actions/base/homepage.actions";
 import NavigationSection from "../../../../../actions/base/navigationSection.actions";
 import Income from "../../../../../actions/income/income.manager";
+import {createReport, deleteReport} from "../../../../../actions/base/baseTest.actions";
 
 describe("Verify the Save and Save&Continue buttons functionality", () => {
     beforeEach("Login, create report, check checkbox", () => {
-        cy.login();
-        Homepage.createReport(testData.reportCreationData);
+        createReport(testData.reportCreationData);
         NavigationSection.navigateToResInPlaceRentRoll();
         Income.Residential.InPlaceRentRoll.checkCheckboxByLabel(testData.forecastLabel);
     });
@@ -16,7 +15,7 @@ describe("Verify the Save and Save&Continue buttons functionality", () => {
         cy.reload();
         Income.Residential.InPlaceRentRoll.verifyProgressBarNotExist()
             .verifyCheckboxIsChecked(testData.forecastLabel);
-        deleteReport();
+        deleteReport(testData.reportCreationData.reportNumber);
     });
 
     it("QA-4404 Save&Continue button", () => {
@@ -24,10 +23,6 @@ describe("Verify the Save and Save&Continue buttons functionality", () => {
         Income.Residential.UnitGroups.verifyThatPageIsOpened()
             .goBackWithSave();
         Income.Residential.InPlaceRentRoll.verifyCheckboxIsChecked(testData.forecastLabel);
+        deleteReport(testData.reportCreationData.reportNumber);
     });
-
-    const deleteReport = () => {
-        Income.Residential.InPlaceRentRoll.returnToHomePage();
-        Homepage.deleteReport(testData.reportCreationData.reportNumber);
-    };
 });

@@ -1,14 +1,13 @@
-import Homepage from "../../../../../actions/base/homepage.actions";
 import testData from "../../../../../fixtures/not_full_reports/income/commercial/in_place_rent_roll/QA-4391.fixture";
 import NavigationSection from "../../../../../actions/base/navigationSection.actions";
 import Property from "../../../../../actions/property/property.manager";
 import Income from "../../../../../actions/income/income.manager";
+import {createReport, deleteReport} from "../../../../../actions/base/baseTest.actions";
 
 describe("Verify the SF Total is calculated correctly in the grid.", () => {
 
     before("Login, create report", () => {
-        cy.login();
-        Homepage.createReport(testData.reportCreationData);
+        createReport(testData.reportCreationData);
     });
 
     it("Test body", () => {
@@ -19,8 +18,7 @@ describe("Verify the SF Total is calculated correctly in the grid.", () => {
         Property.CommercialUnits.enterListOfCommercialUnits(testData.general.squareFeetList, testData.general.numberOfUnits);
         NavigationSection.navigateToCommercialInPlaceRentRoll();
         Income.Commercial.InPlaceRentRoll.chooseListLeaseStatuses(testData.general.leaseStatusesList, testData.general.numberOfUnits)
-            .verifySFTotal(testData.general.squareFeetList)
-            .returnToHomePage();
-        Homepage.deleteReport(testData.reportCreationData.reportNumber);
+            .verifySFTotal(testData.general.squareFeetList);
+        deleteReport(testData.reportCreationData.reportNumber);
     });
 });

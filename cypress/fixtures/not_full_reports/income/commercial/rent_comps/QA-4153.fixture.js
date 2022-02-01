@@ -1,13 +1,8 @@
 import Enums from "../../../../../enums/enums";
+import ReportDataCreator from "../../../../data_creator/reportData.creator";
 
 const reportCreationFixture = () => {
-    return {
-        address: "462 1st Avenue, New York, USA",
-        reportNumber: "TestAutoReport-QA4153",
-        templateValue: Enums.TEMPLATE_TYPE.FREDDIE_MAC,
-        incomeValue: Enums.INCOME_TYPE.BOTH,
-        conclusionValue: Enums.VALUE_CONCLUSION_TYPE.AS_IS
-    };
+    return ReportDataCreator.getReportSpecificIncomeValue(Enums.INCOME_TYPE.BOTH, "4153");
 };
 
 const checkboxesAttributesFixture = () => {
@@ -16,6 +11,6 @@ const checkboxesAttributesFixture = () => {
 };
 
 export default {
-    reportCreationData: Object.freeze(reportCreationFixture()),
+    reportCreationData: reportCreationFixture(),
     checkboxesAttributes: Object.freeze(checkboxesAttributesFixture())
 };

@@ -1,13 +1,12 @@
 import testData from "../../../../../fixtures/not_full_reports/income/residential/rent_comps/addNewCompForm.fixtures";
 import {commonData} from "../../../../../fixtures/not_full_reports/income/residential/rent_comps/addNewCompForm.fixtures";
-import Homepage from "../../../../../actions/base/homepage.actions";
 import NavigationSection from "../../../../../actions/base/navigationSection.actions";
 import RentComps from "../../../../../actions/income/residential/rent_comps/rentComps.manager";
+import {createReport, deleteReport} from "../../../../../actions/base/baseTest.actions";
 
 describe("Add new comparable form tests", () => {
     before("Login and open rent comps page", () => {
-        cy.login();
-        Homepage.createReport(testData.reportCreationData);
+        createReport(testData.reportCreationData);
         NavigationSection.navigateToRentComps();
         cy.saveLocalStorage();
     });
@@ -158,7 +157,6 @@ describe("Add new comparable form tests", () => {
 
     after("Delete report", () => {
         cy.restoreLocalStorage();
-        RentComps.BaseActions.returnToHomePage();
-        Homepage.deleteReport(testData.reportCreationData.reportNumber);
+        deleteReport(testData.reportCreationData.reportNumber);
     });
 });

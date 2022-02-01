@@ -1,13 +1,12 @@
 import testData from "../../../../fixtures/not_full_reports/sales/value_conclusion/QA-4326.fixture";
-import Homepage from "../../../../actions/base/homepage.actions";
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Sales from "../../../../actions/sales/sales.manager";
+import {createReport, deleteReport} from "../../../../actions/base/baseTest.actions";
 
 describe("Sales Value Conclusion Discussion -> Generated Commentary is revertible", () => {
 
     before("Login, create report", () => {
-       cy.login();
-       Homepage.createReport(testData.reportCreationData);
+       createReport(testData.reportCreationData);
     });
 
     it("Test body", () => {
@@ -15,8 +14,7 @@ describe("Sales Value Conclusion Discussion -> Generated Commentary is revertibl
         Sales.ValueConclusion.verifyGeneratedCommentary(testData.commentaryData.generatedCommentary)
             .enterNewCommentary(testData.commentaryData.newCommentary)
             .clickRevertCommentaryButton()
-            .verifyGeneratedCommentary(testData.commentaryData.generatedCommentary)
-            .returnToHomePage();
-        Homepage.deleteReport(testData.reportCreationData.reportNumber);
+            .verifyGeneratedCommentary(testData.commentaryData.generatedCommentary);
+        deleteReport(testData.reportCreationData.reportNumber);
     });
 });
