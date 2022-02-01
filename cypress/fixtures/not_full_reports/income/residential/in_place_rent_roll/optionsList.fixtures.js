@@ -36,12 +36,6 @@ const id8Fixture = () => {
     };
 };
 
-const id9Fixture = () => {
-    return {
-        columns: ["Square Footage", "Rent PSF"]
-    };
-};
-
 const id11Fixture = () => {
     return {
         column: "# Bathrooms",
@@ -71,10 +65,6 @@ export const id8Data = () => {
     return Object.freeze(id8Fixture());
 };
 
-export const id9Data = () => {
-    return Object.freeze(id9Fixture());
-};
-
 export const id11Data = () => {
     return Object.freeze(id11Fixture());
 };
@@ -89,7 +79,6 @@ export default {
     id3: id3Data(),
     id7: id7Data(),
     id8: id8Data(),
-    id9: id9Data(),
     id11: id11Data(),
     id13: id13Data()
 };
