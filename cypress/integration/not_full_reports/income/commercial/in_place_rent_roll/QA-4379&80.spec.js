@@ -17,6 +17,6 @@ describe("Verify the Unit column in the grid and grid presence", () => {
         Property.Summary.enterNumberOfCommercialUnits(testData.newUnitsNumber);
         NavigationSection.navigateToCommercialInPlaceRentRoll();
         Income.Commercial.InPlaceRentRoll.verifyUnitNumberCells(testData.newUnitsNumber);
-        deleteReport(testData.reportCreationData);
+        deleteReport(testData.reportCreationData.reportNumber);
     });
 });

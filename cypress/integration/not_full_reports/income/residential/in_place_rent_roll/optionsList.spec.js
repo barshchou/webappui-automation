@@ -73,10 +73,6 @@ describe("In-Place Rent Roll options list tests", () => {
         Income.Residential.InPlaceRentRoll.checkUncheckCheckboxForColumn(testData.id11.column, testData.id11.label);
     });
 
-    it("ID12: Outdoor Space checkbox", () => {
-        Income.Residential.InPlaceRentRoll.checkUncheckCheckboxForColumn(testData.id12.labelAndColumn, testData.id12.labelAndColumn);
-    });
-
     it("ID13: Unit Type checkbox", () => {
         Income.Residential.InPlaceRentRoll.checkUncheckCheckboxForColumn(testData.id13.labelAndColumn, testData.id13.labelAndColumn);
     });
