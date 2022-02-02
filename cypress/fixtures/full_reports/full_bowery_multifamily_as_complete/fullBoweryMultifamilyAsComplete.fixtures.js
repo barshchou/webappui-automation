@@ -928,7 +928,7 @@ const findCompsFixture = () => {
 
 const adjustCompsFixture = () => {
     return {
-        calculationUnitsRadioValue: "Per Residential Unit",
+        calculationUnitsRadioValue: "Per Residential Units",
         incomeAdjustmentType: "None",
         comparables: [
             {

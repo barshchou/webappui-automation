@@ -54,3 +54,7 @@ export const getNumberWithDecimalPart = (number, digitsToBe = 2) => {
     }
     return `${splittedNumber[0]}.${decimalPart.slice(0, digitsToBe)}`;
 };
+
+export const isHalfDecimalPart = (number) => {
+    return Number(number.toString().split(".")[1]) === 5;
+};
