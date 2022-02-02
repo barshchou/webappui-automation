@@ -168,13 +168,14 @@ class StabilizedRentRollActions extends BaseActions{
 
     /**
      *
-     * @param {number} monthlyRent
+     * @param {number | string} monthlyRent
      * @param {number} rowNumber
      * @returns {StabilizedRentRollActions}
      */
     enterMonthlyRentByRow(monthlyRent, rowNumber) {
-        stabRentRollPage.monthlyRentCellsInputs.eq(rowNumber).clear().type(monthlyRent)
-            .should("have.value", `${numberWithCommas(monthlyRent)}`);
+        this.clickSaveButton().verifyProgressBarNotExist();
+        stabRentRollPage.monthlyRentCellsInputs.eq(rowNumber).as("monthlyRent");
+        cy.get("@monthlyRent").clear().type(monthlyRent).should("have.value", `${numberWithCommas(monthlyRent)}`);
         return this;
     }
 

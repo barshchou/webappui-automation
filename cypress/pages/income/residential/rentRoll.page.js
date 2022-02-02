@@ -32,6 +32,7 @@ class InPlaceRentRollPage extends BasePage {
     get outdoorSpaceCells() {return cy.get("[data-qa^=outdoor][data-qa$=cell]");}
     get tableListboxOptions() {return cy.get("td.listbox");}
     get squareFootageCells() {return cy.get("[data-qa^=squareFootage][data-qa$=cell]");}
+    get bathroomsCells() {return cy.get("[data-qa^=bathrooms][data-qa$=cell]");}
 }
 
 export default new InPlaceRentRollPage();
