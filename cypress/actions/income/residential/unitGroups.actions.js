@@ -4,17 +4,12 @@ import {numberWithCommas} from "../../../../utils/numbers.utils";
 
 class UnitGroupsActions extends BaseActions {
 
-    /**
-     *
-     * @returns {UnitGroupsActions}
-     */
     verifyThatPageIsOpened() {
         unitGroupsPage.pageHeaderSection.should("be.visible");
         return this;
     }
 
     /**
-     *
      * @param {number | string} bedroomsNumber
      * @param {number | string} numberOfUnits
      * @returns {UnitGroupsActions}
@@ -25,7 +20,6 @@ class UnitGroupsActions extends BaseActions {
     }
 
     /**
-     *
      * @param {number} percentage
      * @returns {UnitGroupsActions}
      */
@@ -35,7 +29,6 @@ class UnitGroupsActions extends BaseActions {
     }
 
     /**
-     *
      * @param {number} size
      * @returns {UnitGroupsActions}
      */
@@ -45,7 +38,6 @@ class UnitGroupsActions extends BaseActions {
     }
 
     /**
-     *
      * @param {number} grossArea
      * @param {number} glaPercentage
      * @returns {UnitGroupsActions}
@@ -57,7 +49,6 @@ class UnitGroupsActions extends BaseActions {
     }
 
     /**
-     *
      * @param {string} type
      * @param {string | number} avgSF
      * @returns {UnitGroupsActions}
@@ -68,7 +59,6 @@ class UnitGroupsActions extends BaseActions {
     }
 
     /**
-     *
      * @param {number} grossArea
      * @param {number} glaPercentage
      * @returns {UnitGroupsActions}
@@ -80,7 +70,6 @@ class UnitGroupsActions extends BaseActions {
     }
 
     /**
-     *
      * @param {number} avgSF
      * @param {number} unitsNumber
      * @returns {UnitGroupsActions}
@@ -88,6 +77,20 @@ class UnitGroupsActions extends BaseActions {
     verifyTotalAvgSqftEqualUnits(avgSF, unitsNumber) {
         const textToBe = numberWithCommas(Math.round(avgSF * unitsNumber));
         unitGroupsPage.totalAverageSqftCell.should("have.text", `${textToBe} sqft`);
+        return this;
+    }
+
+    clickChangeButton() {
+        unitGroupsPage.changeButton.click();
+        return this;
+    }
+
+    /**
+     * @param {string} value
+     * @returns {UnitGroupsActions}
+     */
+    checkCompGroupRadio(value) {
+        unitGroupsPage.getSelectCompGroupRadio.check(value);
         return this;
     }
 }

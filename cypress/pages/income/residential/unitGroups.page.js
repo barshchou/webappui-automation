@@ -10,6 +10,8 @@ class UnitGroupsPage {
     }
     get glaCell() {return cy.get("[data-qa*=grossLeasableArea-cell]");}
     get totalAverageSqftCell() {return cy.get("[data-qa$='averageSqft-total-cell']");}
+    get getSelectCompGroupRadio() {return cy.get("[data-qa=groupingType-radio-group] input");}
+    get changeButton() {return cy.xpath("//button[.='Change']");}
 }
 
 export default new UnitGroupsPage();
