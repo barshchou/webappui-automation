@@ -388,6 +388,12 @@ class NavigationSectionActions extends BaseActions {
             .clickYesButton();
         return this;
     }
+
+    openInPlaceRentRollInResidential(isWithSave = false) {
+        this.clickInPlaceRentRollButton();
+        if (isWithSave) this.clickYesButton();
+        return this;
+    }
 }
 
 export default new NavigationSectionActions();
