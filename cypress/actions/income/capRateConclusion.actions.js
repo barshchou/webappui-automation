@@ -134,10 +134,6 @@ class CapRateConclusionActions extends BaseActions {
         return this;
     }
 
-    /**
-     *
-     * @returns {CapRateConclusionActions}
-     */
     verifyAsStabilizedAmountCell() {
         capRateConclusionPage.netOperatingIncomeCell.invoke("text").then(noiText => {
             const noiNumber = getNumberFromDollarNumberWithCommas(noiText);
