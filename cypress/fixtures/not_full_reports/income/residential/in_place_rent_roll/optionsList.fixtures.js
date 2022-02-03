@@ -23,26 +23,6 @@ const id3Fixture = () => {
     };
 };
 
-const id7Fixture = () => {
-    return {
-        column: "Rent Forecast",
-        forecastLabel: "Developer's Forecast",
-    };
-};
-
-const id8Fixture = () => {
-    return {
-        summarizeLabel: "Summarize current rent roll"
-    };
-};
-
-const id11Fixture = () => {
-    return {
-        column: "# Bathrooms",
-        label: "Bathrooms"
-    };
-};
-
 export const csvLinksData = () => {
     return Object.freeze(csvLinksFixture());
 };
@@ -50,24 +30,8 @@ export const csvLinksData = () => {
 export const id3Data = () => {
     return Object.freeze(id3Fixture());
 };
-
-export const id7Data = () => {
-    return Object.freeze(id7Fixture());
-};
-
-export const id8Data = () => {
-    return Object.freeze(id8Fixture());
-};
-
-export const id11Data = () => {
-    return Object.freeze(id11Fixture());
-};
-
 export default {
     reportCreationData: reportCreationFixture(),
     csvLinks: csvLinksData(),
-    id3: id3Data(),
-    id7: id7Data(),
-    id8: id8Data(),
-    id11: id11Data()
+    id3: id3Data()
 };
