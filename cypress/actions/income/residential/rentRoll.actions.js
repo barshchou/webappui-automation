@@ -99,16 +99,6 @@ class InPlaceRentRollActions extends BaseActions {
     }
 
     /**
-     *
-     * @returns {InPlaceRentRollActions}
-     */
-    verifyThatRentRollOptionsExist() {
-        rentRollPage.rentRollOptionsField.should("be.visible");
-        return this;
-    }
-
-    /**
-     *
      * @param {string} columnName
      * @returns {InPlaceRentRollActions}
      */
@@ -118,7 +108,6 @@ class InPlaceRentRollActions extends BaseActions {
     }
 
     /**
-     *
      * @param {string} columnName
      * @returns {InPlaceRentRollActions}
      */
@@ -128,7 +117,6 @@ class InPlaceRentRollActions extends BaseActions {
     }
 
     /**
-     *
      * @param {Array<string>} columnNames
      * @returns {InPlaceRentRollActions}
      */
@@ -140,7 +128,6 @@ class InPlaceRentRollActions extends BaseActions {
     }
 
     /**
-     *
      * @param {Array<string>} columnNames
      * @returns {InPlaceRentRollActions}
      */
@@ -152,7 +139,6 @@ class InPlaceRentRollActions extends BaseActions {
     }
 
     /**
-     *
      * @param {string} value
      * @returns {InPlaceRentRollActions}
      */
@@ -174,7 +160,6 @@ class InPlaceRentRollActions extends BaseActions {
     }
 
     /**
-     *
      * @param {string} label
      * @returns {InPlaceRentRollActions}
      */
@@ -185,7 +170,6 @@ class InPlaceRentRollActions extends BaseActions {
     }
 
     /**
-     *
      * @param {string} label
      * @returns {InPlaceRentRollActions}
      */
@@ -195,17 +179,15 @@ class InPlaceRentRollActions extends BaseActions {
     }
 
     /**
-     *
      * @param {string} label
      * @returns {InPlaceRentRollActions}
      */
-    verifyCheckboxIsNotChecked(label) {
-        rentRollPage.getCheckboxByLabel(label).should("not.be.checked");
+    verifyCheckboxNotExist(label) {
+        rentRollPage.getCheckboxByLabel(label).should("not.exist");
         return this;
     }
 
     /**
-     *
      * @param {string} columnName
      * @param {string} label
      * @returns {InPlaceRentRollActions}
@@ -237,14 +219,6 @@ class InPlaceRentRollActions extends BaseActions {
             .verifyListColumnExist(columnNames)
             .checkPerUnitSquareFootage("false")
             .verifyListColumnNotExist(columnNames);
-        return this;
-    }
-
-    /**
-     * @returns {InPlaceRentRollActions}
-     */
-    isOptionalColumnExist() {
-        rentRollPage.optionalColumnsElement.should("exist");
         return this;
     }
 

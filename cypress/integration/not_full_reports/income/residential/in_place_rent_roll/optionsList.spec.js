@@ -48,14 +48,6 @@ describe("In-Place Rent Roll options list tests", () => {
             .goBackWithSave();
     });
 
-    it("ID6: Static text: Rent Roll Options", () => {
-        Income.Residential.InPlaceRentRoll.verifyThatRentRollOptionsExist();
-    });
-
-    it("ID10: Text: Optional Columns", () => {
-        Income.Residential.InPlaceRentRoll.isOptionalColumnExist();
-    });
-
     after("Delete report", () => {
         cy.restoreLocalStorage();
         deleteReport(testData.reportCreationData.reportNumber);
