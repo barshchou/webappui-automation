@@ -52,21 +52,8 @@ describe("In-Place Rent Roll options list tests", () => {
         Income.Residential.InPlaceRentRoll.verifyThatRentRollOptionsExist();
     });
 
-    it("ID7: Developer's Forecast checkbox", () => {
-        Income.Residential.InPlaceRentRoll.checkUncheckCheckboxForColumn(testData.id7.column, testData.id7.forecastLabel);
-    });
-
-    it("ID8: Summarize current rent roll checkbox", () => {
-        Income.Residential.InPlaceRentRoll.checkCheckboxByLabel(testData.id8.summarizeLabel)
-           .uncheckCheckboxByLabel(testData.id8.summarizeLabel);
-    });
-
     it("ID10: Text: Optional Columns", () => {
         Income.Residential.InPlaceRentRoll.isOptionalColumnExist();
-    });
-
-    it("ID11: Bathrooms checkbox", () => {
-        Income.Residential.InPlaceRentRoll.checkUncheckCheckboxForColumn(testData.id11.column, testData.id11.label);
     });
 
     after("Delete report", () => {
