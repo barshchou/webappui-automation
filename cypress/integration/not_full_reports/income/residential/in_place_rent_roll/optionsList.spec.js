@@ -69,10 +69,6 @@ describe("In-Place Rent Roll options list tests", () => {
         Income.Residential.InPlaceRentRoll.checkUncheckCheckboxForColumn(testData.id11.column, testData.id11.label);
     });
 
-    it("ID13: Unit Type checkbox", () => {
-        Income.Residential.InPlaceRentRoll.checkUncheckCheckboxForColumn(testData.id13.labelAndColumn, testData.id13.labelAndColumn);
-    });
-
     after("Delete report", () => {
         cy.restoreLocalStorage();
         deleteReport(testData.reportCreationData.reportNumber);

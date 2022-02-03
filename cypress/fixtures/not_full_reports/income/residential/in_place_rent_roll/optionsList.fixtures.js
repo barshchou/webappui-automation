@@ -43,12 +43,6 @@ const id11Fixture = () => {
     };
 };
 
-const id13Fixture = () => {
-    return {
-        labelAndColumn: "Unit Type"
-    };
-};
-
 export const csvLinksData = () => {
     return Object.freeze(csvLinksFixture());
 };
@@ -69,16 +63,11 @@ export const id11Data = () => {
     return Object.freeze(id11Fixture());
 };
 
-export const id13Data = () => {
-    return Object.freeze(id13Fixture());
-};
-
 export default {
     reportCreationData: reportCreationFixture(),
     csvLinks: csvLinksData(),
     id3: id3Data(),
     id7: id7Data(),
     id8: id8Data(),
-    id11: id11Data(),
-    id13: id13Data()
+    id11: id11Data()
 };
