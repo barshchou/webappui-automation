@@ -6,26 +6,22 @@ import {
     isHalfDecimalPart,
     numberWithCommas
 } from "../../../../utils/numbers.utils";
+import {isProdEnv} from "../../../../utils/env.utils";
 
 class InPlaceRentRollActions extends BaseActions {
 
-    /**
-     *
-     * @returns {InPlaceRentRollActions}
-     */
     verifyViaCSVExist() {
         rentRollPage.importViaCSVHeader.scrollIntoView().should("be.visible");
         return this;
     }
 
     /**
-     *
      * @param {Readonly<{prodLink: string, othersLink: string}>} links
      * @returns {InPlaceRentRollActions}
      */
     verifyUploadCSVRow(links) {
         let linkToBe;
-        if (Cypress.env("url") === "prod") {
+        if (isProdEnv()) {
             linkToBe = links.prodLink;
         } else {
             linkToBe = links.othersLink;
@@ -36,7 +32,6 @@ class InPlaceRentRollActions extends BaseActions {
     }
 
     /**
-     *
      * @param {number | string} unitsNumber
      * @returns {InPlaceRentRollActions}
      */
@@ -46,7 +41,6 @@ class InPlaceRentRollActions extends BaseActions {
     }
 
     /**
-     *
      * @param {string | number} unitsNumber
      * @returns {InPlaceRentRollActions}
      */
@@ -59,10 +53,6 @@ class InPlaceRentRollActions extends BaseActions {
         return this;
     }
 
-    /**
-     *
-     * @returns {InPlaceRentRollActions}
-     */
     clickGoToPropSummaryButton() {
         rentRollPage.goToPropSummaryButton.should("be.visible").click();
         return this;
@@ -137,7 +127,6 @@ class InPlaceRentRollActions extends BaseActions {
     }
 
     /**
-     *
      * @param {string} label
      * @returns {InPlaceRentRollActions}
      */
@@ -211,13 +200,13 @@ class InPlaceRentRollActions extends BaseActions {
     }
 
     /**
-     * @param {string} fileName
+     * @param {string} filePath
      * @param {number} unitsToBe
      * @returns {InPlaceRentRollActions}
      */
-    uploadFile(fileName, unitsToBe) {
+    uploadFile(filePath, unitsToBe) {
         rentRollPage.uploadFileButton.should("be.visible");
-        rentRollPage.uploadFileInput.should("exist").attachFile(fileName);
+        rentRollPage.uploadFileInput.should("exist").attachFile(filePath);
         rentRollPage.importDataButton.should("exist").should("be.enabled").click();
         this.verifyNumberOfResidentialUnits(unitsToBe);
         this.verifyNumberOfIsInspectedRows(unitsToBe);
