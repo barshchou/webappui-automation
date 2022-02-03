@@ -41,13 +41,6 @@ describe("In-Place Rent Roll options list tests", () => {
             .goBackWithSave();
     });
 
-    it("ID4 and ID5: number of residential units and go to property summary", () => {
-        Income.Residential.InPlaceRentRoll.verifyNumberOfResidentialUnits(testData.id3.numberOfUnits)
-            .goToPropSummaryWithSaveLeavingFirst();
-        Property.Summary.verifyThatPageIsOpened()
-            .goBackWithSave();
-    });
-
     after("Delete report", () => {
         cy.restoreLocalStorage();
         deleteReport(testData.reportCreationData.reportNumber);

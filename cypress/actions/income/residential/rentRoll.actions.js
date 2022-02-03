@@ -68,30 +68,18 @@ class InPlaceRentRollActions extends BaseActions {
         return this;
     }
 
-    /**
-     *
-     * @returns {InPlaceRentRollActions}
-     */
     goToPropSummaryWithSaveLeavingFirst() {
         this.clickGoToPropSummaryButton()
             .clickYesButton();
         return this;
     }
 
-    /**
-     *
-     * @returns {InPlaceRentRollActions}
-     */
     goToPropSummaryWithSaveSaveClickFirst() {
         this.clickSaveButton();
         this.clickGoToPropSummaryButton();
         return this;
     }
 
-    /**
-     *
-     * @returns {InPlaceRentRollActions}
-     */
     goToPropSummaryWithoutSave() {
         this.clickGoToPropSummaryButton()
             .clickNoButton();
