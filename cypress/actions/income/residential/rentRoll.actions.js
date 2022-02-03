@@ -507,18 +507,18 @@ class InPlaceRentRollActions extends BaseActions {
      */
     enterOutdoorSpaceByOptionByRow(space, rowNumber = 0) {
         rentRollPage.outdoorSpaceCells.eq(rowNumber).dblclick();
-        rentRollPage.tableListboxOptions.contains(space).click();
+        this.chooseOptionFromTableListbox(space);
         rentRollPage.outdoorSpaceCells.should("contain.text", space);
         return this;
     }
 
     /**
-     * @param {number} rowNumber
+     * @private
+     * @param {string} option
      * @returns {InPlaceRentRollActions}
      */
-    pressDeleteOutdoorSpaceByRow(rowNumber = 0) {
-        rentRollPage.outdoorSpaceCells.eq(rowNumber).trigger("keydown", {keyCode: 46})
-            .should("have.text", "▼");
+    chooseOptionFromTableListbox(option) {
+        rentRollPage.tableListboxOptions.contains(option).click();
         return this;
     }
 
@@ -563,6 +563,18 @@ class InPlaceRentRollActions extends BaseActions {
      */
     enterTextToTextarea(text) {
         rentRollPage.textAreaToInput.clear().type(text).type("{enter}");
+        return this;
+    }
+
+    /**
+     * @param {string} type
+     * @param {number} rowNumber
+     * @returns {InPlaceRentRollActions}
+     */
+    chooseUnitTypeByRow(type, rowNumber = 0) {
+        rentRollPage.unitTypeCells.eq(rowNumber).dblclick();
+        this.chooseOptionFromTableListbox(type);
+        rentRollPage.unitTypeCells.eq(rowNumber).should("contain.text", type);
         return this;
     }
 }
