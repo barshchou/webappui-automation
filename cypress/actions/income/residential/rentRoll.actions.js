@@ -46,8 +46,8 @@ class InPlaceRentRollActions extends BaseActions {
      */
     verifyNumberOfIsInspectedRows(unitsNumber) {
         if (unitsNumber !== 0) {
-            rentRollPage.isInspectedColumnCells.first().scrollIntoView({duration:2000});
-            rentRollPage.isInspectedColumnCells.last().scrollIntoView({duration:2000});
+            rentRollPage.isInspectedColumnCells.first().scrollIntoView({duration: 2000});
+            rentRollPage.isInspectedColumnCells.last().scrollIntoView({duration: 2000});
         }
         rentRollPage.isInspectedColumnCells.should("have.length", unitsNumber);
         return this;
@@ -357,8 +357,17 @@ class InPlaceRentRollActions extends BaseActions {
      * @param {number} rowNumber
      * @returns {InPlaceRentRollActions}
      */
-    enterForecastByRowNumber(forecastValue, rowNumber) {
-        const forecastText = `$${numberWithCommas(forecastValue.toFixed(2))}`;
+    enterForecastByRowNumber(forecastValue, rowNumber = 0) {
+        let forecastText;
+        if (typeof forecastValue === "number") {
+            forecastText = `$${numberWithCommas(forecastValue.toFixed(2))}`;
+        } else {
+            if ((Number(forecastValue)).toFixed && !isNaN(Number(forecastValue))) {
+                forecastText = `$${numberWithCommas((Number(forecastValue)).toFixed(2))}`;
+            } else {
+                forecastText = "$0.00";
+            }
+        }
         rentRollPage.rentForecastCells.eq(rowNumber).dblclick();
         this.enterTextToTextarea(forecastValue);
         rentRollPage.rentForecastCells.eq(rowNumber).should("have.text", forecastText);
