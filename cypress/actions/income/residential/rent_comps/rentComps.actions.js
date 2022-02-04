@@ -881,6 +881,24 @@ class RentCompsActions extends BaseActions {
         rentCompsPage.getBedroomMarketRateSummary(bedroomsNumber).should("exist");
         return this;
     }
+
+    /**
+     * @param {string} columnName
+     * @returns {RentCompsActions}
+     */
+    verifyColumnNotExist(columnName) {
+        rentCompsPage.tablesColumns.contains(columnName).should("not.exist");
+        return this;
+    }
+
+    /**
+     * @param {string} columnName
+     * @returns {RentCompsActions}
+     */
+    verifyColumnExist(columnName) {
+        rentCompsPage.tablesColumns.contains(columnName).should("exist");
+        return this;
+    }
 }
 
 export default new RentCompsActions();
