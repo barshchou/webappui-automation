@@ -6,7 +6,6 @@ import {numberWithCommas} from "../../../../../utils/numbers.utils";
 class RentCompsActions extends BaseActions {
 
     /**
-     *
      * @param {string} conclusionType
      * @returns {RentCompsActions}
      */
@@ -31,62 +30,59 @@ class RentCompsActions extends BaseActions {
         }
     }
 
-    /**
-     *
-     * @returns {RentCompsActions}
-     */
+    verifyUnitSwitchBackground(isChosen = true) {
+        if (isChosen) {
+            rentCompsPage.unitSwitchButton.should("have.css", "background-color", "rgb(42, 67, 112)");
+        } else {
+            rentCompsPage.unitSwitchButton.should("have.css", "background-color", "rgb(255, 255, 255)");
+        }
+        return this;
+    }
+
+    verifyBuildingSwitchBackground(isChosen = true) {
+        if (isChosen) {
+            rentCompsPage.buildingSwitchButton.should("have.css", "background-color", "rgb(42, 67, 112)");
+        } else {
+            rentCompsPage.buildingSwitchButton.should("have.css", "background-color", "rgb(255, 255, 255)");
+        }
+        return this;
+    }
+
     clickUnitSwitchButton() {
+        this.verifyUnitSwitchBackground(false);
         rentCompsPage.unitSwitchButton.should("be.enabled").click();
         return this;
     }
 
-    /**
-     *
-     * @returns {RentCompsActions}
-     */
     clickBuildingSwitchButton() {
+        this.verifyBuildingSwitchBackground(false);
         rentCompsPage.buildingSwitchButton.should("be.enabled").click();
         return this;
     }
 
-    /**
-     *
-     * @returns {RentCompsActions}
-     */
     verifyBuildingSelected() {
         rentCompsPage.buildingSwitchButton.should("have.attr", "data-qa-isselected", "true");
+        this.verifyBuildingSwitchBackground();
         return this;
     }
 
-    /**
-     *
-     * @returns {RentCompsActions}
-     */
     verifyUnitSelected() {
         rentCompsPage.unitSwitchButton.should("have.attr", "data-qa-isselected", "true");
+        this.verifyUnitSwitchBackground();
         return this;
     }
 
-    /**
-     *
-     * @returns {RentCompsActions}
-     */
     clickSwitchConfirmButton() {
         rentCompsPage.switchSearchConfirmButton.should("be.visible").click();
         return this;
     }
 
-    /**
-     *
-     * @returns {RentCompsActions}
-     */
     clickUnitTypesArrowButton() {
         rentCompsPage.unitTypesArrowButton.scrollIntoView().should("be.visible").click();
         return this;
     }
 
     /**
-     *
      * @param {string} attribute
      * @returns {RentCompsActions}
      */
@@ -97,7 +93,6 @@ class RentCompsActions extends BaseActions {
     }
 
     /**
-     *
      * @param {string} attribute
      * @returns {RentCompsActions}
      */
@@ -108,7 +103,6 @@ class RentCompsActions extends BaseActions {
     }
 
     /**
-     *
      * @param {Array<string>} attributes
      * @returns {RentCompsActions}
      */
@@ -120,7 +114,6 @@ class RentCompsActions extends BaseActions {
     }
 
     /**
-     *
      * @param {Array<string>} attributes
      * @returns {RentCompsActions}
      */
@@ -131,19 +124,11 @@ class RentCompsActions extends BaseActions {
         return this;
     }
 
-    /**
-     *
-     * @returns {RentCompsActions}
-     */
     verifyPopUpTextExist() {
         rentCompsPage.changeCompTypePopUpMessage.should("exist");
         return this;
     }
 
-    /**
-     *
-     * @returns {RentCompsActions}
-     */
     changeToBuildingSearch() {
         this.clickBuildingSwitchButton()
             .verifyPopUpTextExist()
@@ -152,10 +137,6 @@ class RentCompsActions extends BaseActions {
         return this;
     }
 
-    /**
-     *
-     * @returns {RentCompsActions}
-     */
     changeToUnitSearch() {
         this.clickUnitSwitchButton()
             .verifyPopUpTextExist()
@@ -165,7 +146,6 @@ class RentCompsActions extends BaseActions {
     }
 
     /**
-     *
      * @param {string} fieldName
      * @param {string} value
      * @returns {RentCompsActions}
@@ -198,7 +178,6 @@ class RentCompsActions extends BaseActions {
     }
 
     /**
-     *
      * @param {string} fieldName
      * @param {string} value
      * @returns {RentCompsActions}
@@ -223,7 +202,6 @@ class RentCompsActions extends BaseActions {
     }
 
     /**
-     *
      * @param {string} fieldName
      * @returns {RentCompsActions}
      */
@@ -244,26 +222,17 @@ class RentCompsActions extends BaseActions {
         return this;
     }
 
-    /**
-     *
-     * @returns {RentCompsActions}
-     */
     clickNumberOfBedroomsArrow() {
         rentCompsPage.numberOfBedroomsArrowButton.should("be.enabled").click();
         return this;
     }
 
-    /**
-     *
-     * @returns {RentCompsActions}
-     */
     clickSourceOfInfoButton() {
         rentCompsPage.sourceOfInfoArrow.should("be.enabled").click();
         return this;
     }
 
     /**
-     *
      * @param {string} type
      * @returns {RentCompsActions}
      */
@@ -279,7 +248,6 @@ class RentCompsActions extends BaseActions {
     }
 
     /**
-     *
      * @param {Array<string>} types
      * @param {Array<string>} [dates]
      * @returns {RentCompsActions}
@@ -293,7 +261,6 @@ class RentCompsActions extends BaseActions {
     }
 
     /**
-     *
      * @param {Array<string>} types
      * @returns {RentCompsActions}
      */
@@ -305,7 +272,6 @@ class RentCompsActions extends BaseActions {
     }
 
     /**
-     *
      * @param {string} date
      * @param {string} type
      * @returns {RentCompsActions}
@@ -334,7 +300,6 @@ class RentCompsActions extends BaseActions {
     }
 
     /**
-     *
      * @param {string} type
      * @returns {RentCompsActions}
      */
@@ -350,7 +315,6 @@ class RentCompsActions extends BaseActions {
     }
 
     /**
-     *
      * @param {string} day
      * @returns {RentCompsActions}
      */
@@ -361,7 +325,6 @@ class RentCompsActions extends BaseActions {
     }
 
     /**
-     *
      * @param {string} type
      * @param {string} date
      * @returns {RentCompsActions}
@@ -377,7 +340,6 @@ class RentCompsActions extends BaseActions {
     }
 
     /**
-     *
      * @param {string} type
      * @param {string} day
      * @returns {RentCompsActions}
@@ -390,7 +352,6 @@ class RentCompsActions extends BaseActions {
     }
 
     /**
-     *
      * @param {Array<string>} types
      * @param {Array<string>} [days]
      * @returns {RentCompsActions}
@@ -404,7 +365,6 @@ class RentCompsActions extends BaseActions {
     }
 
     /**
-     *
      * @param {Array<string>} types
      * @param {Array<string>} [dates]
      * @returns {RentCompsActions}
@@ -417,35 +377,22 @@ class RentCompsActions extends BaseActions {
         return this;
     }
 
-    /**
-     *
-     * @returns {RentCompsActions}
-     */
     clickAmenitiesArrow() {
         rentCompsPage.amenitiesArrowButton.should("be.enabled").click();
         return this;
     }
 
-    /**
-     *
-     * @returns {RentCompsActions}
-     */
     verifyNumberOfFoundResultsExist() {
         rentCompsPage.numberOfFoundResults.should("exist").should("contain.text", "Results Found");
         return this;
     }
 
-    /**
-     *
-     * @returns {RentCompsActions}
-     */
     clickResetFiltersButton() {
         rentCompsPage.resetFiltersButton.click();
         return this;
     }
 
     /**
-     *
      * @param {string} value
      * @returns {RentCompsActions}
      */
@@ -458,7 +405,6 @@ class RentCompsActions extends BaseActions {
     }
 
     /**
-     *
      * @param {Array<string>} values
      * @returns {RentCompsActions}
      */
@@ -469,17 +415,12 @@ class RentCompsActions extends BaseActions {
         return this;
     }
 
-    /**
-     *
-     * @returns {RentCompsActions}
-     */
     verifyLoadingDoesntExist() {
         rentCompsPage.loadingModal.should("not.exist");
         return this;
     }
 
     /**
-     *
      * @param {number} comparableIndex
      * @returns {RentCompsActions}
      */
@@ -495,7 +436,6 @@ class RentCompsActions extends BaseActions {
     }
 
     /**
-     *
      * @param {JQuery<HTMLElement>} jQueryPhotoElements
      * @param {number} comparableIndex
      * @param {string} direction
@@ -520,10 +460,6 @@ class RentCompsActions extends BaseActions {
         return this;
     }
 
-    /**
-     *
-     * @returns {RentCompsActions}
-     */
     verifyCompAddressesExist() {
         rentCompsPage.comparableAddressesTexts.each($address => {
             expect($address).not.to.be.empty;
@@ -531,10 +467,6 @@ class RentCompsActions extends BaseActions {
         return this;
     }
 
-    /**
-     *
-     * @returns {RentCompsActions}
-     */
     verifyRentsTexts() {
         rentCompsPage.rentElementsTexts.each($rentEl => {
             cy.wrap($rentEl).should("exist").should("contain.text", "/month")
@@ -543,10 +475,6 @@ class RentCompsActions extends BaseActions {
         return this;
     }
 
-    /**
-     *
-     * @returns {RentCompsActions}
-     */
     verifyCompAmenitiesTextsExist() {
         rentCompsPage.comparablesAmenitiesTexts.each($amenityEl => {
             cy.wrap($amenityEl).should("exist").should("contain.text", "bed")
@@ -555,10 +483,6 @@ class RentCompsActions extends BaseActions {
         return this;
     }
 
-    /**
-     *
-     * @returns {RentCompsActions}
-     */
     verifyComparablePropertyTextsExist() {
         rentCompsPage.comparablePropertyTexts.each($propertyEl => {
             cy.wrap($propertyEl).should("exist").should("contain.text", "mi. away")
@@ -567,19 +491,11 @@ class RentCompsActions extends BaseActions {
         return this;
     }
 
-    /**
-     *
-     * @returns {RentCompsActions}
-     */
     verifyLoadingModalExist() {
         rentCompsPage.loadingModal.should("exist");
         return this;
     }
 
-    /**
-     *
-     * @returns {RentCompsActions}
-     */
     clickZoomInButton() {
         rentCompsPage.zoomInButton.click();
         this.verifyLoadingModalExist()
@@ -587,10 +503,6 @@ class RentCompsActions extends BaseActions {
         return this;
     }
 
-    /**
-     *
-     * @returns {RentCompsActions}
-     */
     clickZoomOutButton() {
         rentCompsPage.zoomOutButton.click();
         this.verifyLoadingModalExist()
@@ -598,10 +510,6 @@ class RentCompsActions extends BaseActions {
         return this;
     }
 
-    /**
-     *
-     * @returns {RentCompsActions}
-     */
     clickAllSelectComparableButtons() {
         rentCompsPage.selectComparableButtons.then(buttons => {
             const buttonsLength = buttons.length;
@@ -617,7 +525,6 @@ class RentCompsActions extends BaseActions {
     }
 
     /**
-     *
      * @param {number} index
      * @returns {RentCompsActions}
      */
@@ -627,7 +534,6 @@ class RentCompsActions extends BaseActions {
     }
 
     /**
-     *
      * @param {number} index
      * @returns {RentCompsActions}
      */
@@ -637,7 +543,6 @@ class RentCompsActions extends BaseActions {
     }
 
     /**
-     *
      * @param {string} address
      * @returns {RentCompsActions}
      */
@@ -648,7 +553,6 @@ class RentCompsActions extends BaseActions {
     }
 
     /**
-     *
      * @param {string} address
      * @returns {RentCompsActions}
      */
@@ -658,7 +562,6 @@ class RentCompsActions extends BaseActions {
     }
 
     /**
-     *
      * @param {number} numberOfUnits
      * @returns {RentCompsActions}
      */
@@ -672,7 +575,6 @@ class RentCompsActions extends BaseActions {
     }
 
     /**
-     *
      * @param {number} searchResultIndex
      * @returns {RentCompsActions}
      */
@@ -682,7 +584,6 @@ class RentCompsActions extends BaseActions {
     }
 
     /**
-     *
      * @param {string} address
      * @param {number} searchResIndex
      * @returns {RentCompsActions}
@@ -701,7 +602,6 @@ class RentCompsActions extends BaseActions {
     }
 
     /**
-     *
      * @param {Readonly<{state: string, address: string, id: string | number}>} comparableData
      * @returns {RentCompsActions}
      */
@@ -720,7 +620,6 @@ class RentCompsActions extends BaseActions {
     }
 
     /**
-     *
      * @param {number} index
      * @param {number | string} numberOfRooms
      * @param {number | string} numberOfBedrooms
@@ -771,7 +670,6 @@ class RentCompsActions extends BaseActions {
     }
 
     /**
-     *
      * @param {number} index
      * @param {Readonly<{bedrooms: number | string, rooms: number | string, monthly: string | number,
      * sourceInfoCheck: string, address: string}>} rentCompData
@@ -786,7 +684,6 @@ class RentCompsActions extends BaseActions {
     }
 
     /**
-     *
      * @param {number} rowIndex
      * @param {Readonly<{bedrooms: number | string, rooms: number | string, monthly: string | number,
      * sourceInfoCheck: string, address: string}>} rentCompData
@@ -800,7 +697,6 @@ class RentCompsActions extends BaseActions {
     }
 
     /**
-     *
      * @param {number | string} minValue
      * @returns {RentCompsActions}
      */
@@ -811,7 +707,6 @@ class RentCompsActions extends BaseActions {
     }
 
     /**
-     *
      * @param {number | string} averageValue
      * @returns {RentCompsActions}
      */
@@ -822,7 +717,6 @@ class RentCompsActions extends BaseActions {
     }
 
     /**
-     *
      * @param {number | string} maxValue
      * @returns {RentCompsActions}
      */
@@ -832,44 +726,27 @@ class RentCompsActions extends BaseActions {
         return this;
     }
 
-    /**
-     *
-     * @returns {RentCompsActions}
-     */
     verifyRentRollSummaryExist() {
         rentCompsPage.rentRollSummary.should("exist");
         return this;
     }
 
-    /**
-     *
-     * @returns {RentCompsActions}
-     */
     verifyUncategorizedSubjectMinExist() {
         rentCompsPage.uncategorizedSubjectMin.should("exist");
         return this;
     }
 
-    /**
-     *
-     * @returns {RentCompsActions}
-     */
     verifyUncategorizedSubjectAverageExist() {
         rentCompsPage.uncategorizedSubjectAverage.should("exist");
         return this;
     }
 
-    /**
-     *
-     * @returns {RentCompsActions}
-     */
     verifyUncategorizedSubjectMaxExist() {
         rentCompsPage.uncategorizedSubjectMax.should("exist");
         return this;
     }
 
     /**
-     *
      * @param {string} textToBe
      * @returns {RentCompsActions}
      */
@@ -878,17 +755,12 @@ class RentCompsActions extends BaseActions {
         return this;
     }
 
-    /**
-     *
-     * @returns {RentCompsActions}
-     */
     checkDisplaySquareFootageForCompsCheckbox() {
         rentCompsPage.displaySquareFootageForCompsCheckbox.check().should("have.value", "true");
         return this;
     }
 
     /**
-     *
      * @param {number} index
      * @param {Readonly<{squareFootage: number | string, rentPSF: number | string}>} rentCompData
      * @returns {RentCompsActions}
@@ -945,7 +817,6 @@ class RentCompsActions extends BaseActions {
     }
 
     /**
-     *
      * @param {string} textToBe
      * @returns {RentCompsActions}
      */
@@ -966,7 +837,6 @@ class RentCompsActions extends BaseActions {
     }
 
     /**
-     *
      * @param {number} rowNumber
      * @param {number | string} bathroomsNumber
      * @returns {RentCompsActions}
@@ -978,17 +848,12 @@ class RentCompsActions extends BaseActions {
         return this;
     }
 
-    /**
-     *
-     * @returns {RentCompsActions}
-     */
     verifyUncategorizedHeader() {
         rentCompsPage.uncategorizedTableHeader.should("exist").and("have.text", "Uncategorized");
         return this;
     }
 
     /**
-     *
      * @param bedroomsNumber
      * @returns {RentCompsActions}
      */
@@ -999,7 +864,6 @@ class RentCompsActions extends BaseActions {
     }
 
     /**
-     *
      * @param {number} bedroomsNumber
      * @param {string} textToBe
      * @returns {RentCompsActions}
@@ -1010,7 +874,6 @@ class RentCompsActions extends BaseActions {
     }
 
     /**
-     *
      * @param {number} bedroomsNumber
      * @returns {RentCompsActions}
      */
