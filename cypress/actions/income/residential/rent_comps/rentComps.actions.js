@@ -561,16 +561,10 @@ class RentCompsActions extends BaseActions {
         return this;
     }
 
-    /**
-     * @param {number} numberOfUnits
-     * @returns {RentCompsActions}
-     */
-    verifyComparableGroups(numberOfUnits) {
-        if (numberOfUnits === 0) {
-            rentCompsPage.uncategorizedTable.find(rentCompsPage.indexColumnCellsSelector).then(indexCells => {
-                rentCompsPage.selectedComparableButtons.should("have.length", indexCells.length);
-            });
-        }
+    verifyUncategorizedCompsNumberAsSelected() {
+        rentCompsPage.uncategorizedTable.find(rentCompsPage.indexColumnCellsSelector).then(indexCells => {
+            rentCompsPage.selectedComparableButtons.should("have.length", indexCells.length);
+        });
         return this;
     }
 
