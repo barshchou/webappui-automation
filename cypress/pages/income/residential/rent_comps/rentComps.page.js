@@ -97,6 +97,7 @@ class RentCompsPage extends BasePage{
         return cy.xpath(`//*[@data-qa='rent-comps-type-bedrooms_${bedroomsNumber}']//descendant::p[.='Rent Roll Market Rate Summary']`);
     }
     get perBuildingFiltersButton() {return cy.xpath("//button[.='Filters']");}
+    get tablesColumns() {return cy.get("[scope=col]");}
 }
 
 export default new RentCompsPage();
