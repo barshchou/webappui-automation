@@ -97,12 +97,6 @@ describe("Unit map tests", () => {
             .verifyComparablePropertyTextsExist();
     });
 
-    it("ID63: SELECT button - turns to SELECTED", () => {
-        RentComps.BaseActions.verifyLoadingDoesntExist()
-            .clickAllSelectComparableButtons()
-            .verifyComparableGroups(testData.data.numberOfUnits);
-    });
-
     it("ID64: Unit Map: Zoom in / Zoom out buttons ('+' / '-')", () => {
         RentComps.BaseActions.verifyLoadingDoesntExist()
            .clickZoomOutButton()
