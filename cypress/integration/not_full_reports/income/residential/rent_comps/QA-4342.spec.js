@@ -12,8 +12,7 @@ describe("[Income -  Residential - Rent Comps] Verify the display of the Unit gr
 
     it("Uncategorized table with default columns" , () => {
         NavigationSection.navigateToRentComps();
-        Income.Residential.RentComps.BaseActions.clickUnitSwitchButton()
-            .verifyUnitSelected()
+        Income.Residential.RentComps.BaseActions.verifyUnitSelected()
             .selectComparableByAddress(tesData.uncategorizedData.compData.address)
             .checkDisplaySquareFootageForCompsCheckbox()
             .verifyUncategorizedHeader()
@@ -34,8 +33,7 @@ describe("[Income -  Residential - Rent Comps] Verify the display of the Unit gr
         NavigationSection.navigateToResInPlaceRentRoll();
         Income.Residential.InPlaceRentRoll.checkCheckboxByLabel(tesData.uncategorizedData.devForecastLabel);
         NavigationSection.openRentCompsInResidential();
-        Income.Residential.RentComps.BaseActions.clickUnitSwitchButton()
-            .verifyUnitSelected()
+        Income.Residential.RentComps.BaseActions.verifyUnitSelected()
             .selectComparableByAddress(tesData.uncategorizedData.compData.address)
             .verifyUncategorizedSubjectDevForecast(tesData.uncategorizedData.devForecastText);
         deleteReport(tesData.reportCreationData.reportNumber);
@@ -45,8 +43,7 @@ describe("[Income -  Residential - Rent Comps] Verify the display of the Unit gr
         NavigationSection.navigateToResInPlaceRentRoll();
         Income.Residential.InPlaceRentRoll.checkCheckboxByLabel(tesData.uncategorizedData.bathroomsLabel);
         NavigationSection.openRentCompsInResidential();
-        Income.Residential.RentComps.BaseActions.clickUnitSwitchButton()
-            .verifyUnitSelected()
+        Income.Residential.RentComps.BaseActions.verifyUnitSelected()
             .selectComparableByAddress(tesData.uncategorizedData.compData.address)
             .verifyUncategorizedBathroomsRowCell(0, tesData.uncategorizedData.compData.bathrooms);
         deleteReport(tesData.reportCreationData.reportNumber);
@@ -60,8 +57,7 @@ describe("[Income -  Residential - Rent Comps] Verify the display of the Unit gr
         Income.Residential.InPlaceRentRoll.enterBedroomsNumberByRowNumber(tesData.bedroomCategory.bedroomsNumber)
             .enterRentTypeCellByRowNumber(tesData.bedroomCategory.rentType);
         NavigationSection.openRentCompsInResidential();
-        Income.Residential.RentComps.BaseActions.clickUnitSwitchButton()
-            .verifyUnitSelected()
+        Income.Residential.RentComps.BaseActions.verifyUnitSelected()
             .selectComparableByAddress(tesData.bedroomCategory.compData.address)
             .verifyBedroomTableHeader(tesData.bedroomCategory.bedroomsNumber)
             .verifyBedroomMarketRateSummaryExist(tesData.bedroomCategory.bedroomsNumber)
