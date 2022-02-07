@@ -89,14 +89,6 @@ describe("Unit map tests", () => {
         RentComps.BaseActions.selectSortByOptionsByValues(testData.data.sortByOptions);
     });
 
-    it("ID62: Search Results", () => {
-        RentComps.BaseActions.verifyPhotosExistAndNavigateByPhotos(testData.data.comparableIndex)
-            .verifyCompAddressesExist()
-            .verifyRentsTexts()
-            .verifyCompAmenitiesTextsExist()
-            .verifyComparablePropertyTextsExist();
-    });
-
     it("ID64: Unit Map: Zoom in / Zoom out buttons ('+' / '-')", () => {
         RentComps.BaseActions.verifyLoadingDoesntExist()
            .clickZoomOutButton()
