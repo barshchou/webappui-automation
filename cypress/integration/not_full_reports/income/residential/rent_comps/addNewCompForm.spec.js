@@ -135,26 +135,6 @@ describe("Add new comparable form tests", () => {
         RentComps.AddForm.clickCloseButton();
     });
 
-    it("ID83:  Add Unit button", () => {
-        RentComps.BaseActions.openAddNewComparableForm(commonData().searchAddress);
-        RentComps.AddForm.enterUnitNumber(commonData().unitNumber)
-            .selectUnitTypeAndVerify(commonData().unitTypes[0])
-            .enterMonthlyRent(commonData().monthlyRent)
-            .enterDate()
-            .enterSquareFootage(commonData().squareFootage)
-            .selectSourceOfInfoAndVerify(commonData().infoSources[0])
-            .enterNumberOfBedrooms(commonData().numberOfBedrooms)
-            .enterNumberOfRooms(commonData().numberOfRooms)
-            .enterNumberOfBathrooms(testData.id79.numberOfBathOk)
-            .clickUnitAmenitiesDropdown()
-            .checkListOfCheckboxesByQa(commonData().amenitiesQaAttr)
-            .clickUnitAmenitiesDropdown()
-            .clickSubmitCompButton();
-        RentComps.BaseActions.verifyAddedComparable(0, commonData().numberOfRooms, commonData().numberOfBedrooms,
-            commonData().monthlyRent, commonData().sourceOfInfoSubject);
-        cy.reload();
-    });
-
     after("Delete report", () => {
         cy.restoreLocalStorage();
         deleteReport(testData.reportCreationData.reportNumber);

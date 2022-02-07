@@ -614,33 +614,6 @@ class RentCompsActions extends BaseActions {
     }
 
     /**
-     * @param {number} index
-     * @param {number | string} numberOfRooms
-     * @param {number | string} numberOfBedrooms
-     * @param {number | string} monthlyRent
-     * @param {string} sourceOfInfo
-     * @param {number | string} numberOfUnits
-     * @returns {RentCompsActions}
-     */
-    verifyAddedComparable(index, numberOfRooms, numberOfBedrooms, monthlyRent,
-                          sourceOfInfo, numberOfUnits = 0) {
-        if (numberOfUnits === 0) {
-            rentCompsPage.uncategorizedTable.find(rentCompsPage.getCategoryRowByIndexLocator(index)).then(row => {
-                this.verifyCellText(row, rentCompsPage.categoryRoomsCellsLocator, numberOfRooms);
-                this.verifyCellText(row, rentCompsPage.categoryBedroomsCellsLocator, numberOfBedrooms);
-                const rentTextToBe = typeof monthlyRent === "string" ? `$${monthlyRent}` : `$${numberWithCommas(monthlyRent)}`;
-                this.verifyCellText(row, rentCompsPage.categoryRentsCellsLocator, rentTextToBe);
-                const rentForCalc = typeof monthlyRent === "string" ? monthlyRent.replace(",", "")
-                    : monthlyRent;
-                const perRoom = numberWithCommas(Math.round(rentForCalc / numberOfRooms));
-                this.verifyCellText(row, rentCompsPage.categoryRentPerRoomLocator, `$${perRoom}`);
-                this.verifyCellText(row, rentCompsPage.categorySourceOfInfoLocator, sourceOfInfo);
-            });
-        }
-        return this;
-    }
-
-    /**
      * @private
      * @param {JQuery<HTMLElement>} rowJQueryEl
      * @param {string} cellLocator

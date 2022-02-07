@@ -4,35 +4,22 @@ import {isDecimal, numberWithCommas} from "../../../../../utils/numbers.utils";
 
 class AddCompFormActions {
 
-    /**
-     *
-     * @returns {AddCompFormActions}
-     */
     clickCloseButton() {
         addCompFormPage.closeButton.should("be.enabled").click();
         return this;
     }
 
-    /**
-     *
-     * @returns {AddCompFormActions}
-     */
     verifyPropAddressExist() {
         addCompFormPage.propAddressField.should("be.visible").should("not.be.empty");
         return this;
     }
 
-    /**
-     *
-     * @returns {AddCompFormActions}
-     */
     verifyUnitNumbFieldName() {
         addCompFormPage.unitNumbFieldName.should("exist").should("have.text", "Unit Number");
         return this;
     }
 
     /**
-     *
      * @param {string} unitNumber
      * @returns {AddCompFormActions}
      */
@@ -41,17 +28,12 @@ class AddCompFormActions {
         return this;
     }
 
-    /**
-     *
-     * @returns {AddCompFormActions}
-     */
     clickUnitTypeDropdown() {
         addCompFormPage.unitTypeDropdown.should("be.visible").click();
         return this;
     }
 
     /**
-     *
      * @param {string} value
      * @returns {AddCompFormActions}
      */
@@ -61,7 +43,6 @@ class AddCompFormActions {
     }
 
     /**
-     *
      * @param {string} valueToBe
      * @returns {AddCompFormActions}
      */
@@ -71,7 +52,6 @@ class AddCompFormActions {
     }
 
     /**
-     *
      * @param {string} value
      * @returns {AddCompFormActions}
      */
@@ -83,7 +63,6 @@ class AddCompFormActions {
     }
 
     /**
-     *
      * @param {Array<string>} values
      * @returns {AddCompFormActions}
      */
@@ -94,17 +73,12 @@ class AddCompFormActions {
         return this;
     }
 
-    /**
-     *
-     * @returns {AddCompFormActions}
-     */
     verifyMonthRentFieldName() {
         addCompFormPage.monthRentFieldName.should("exist").should("contain.text", "Monthly Rent");
         return this;
     }
 
     /**
-     *
      * @param {string | number} rent
      * @returns {AddCompFormActions}
      */
@@ -114,17 +88,12 @@ class AddCompFormActions {
         return  this;
     }
 
-    /**
-     *
-     * @returns {AddCompFormActions}
-     */
     clearDateInput() {
         addCompFormPage.dateOfValueInput.clear();
         return this;
     }
 
     /**
-     *
      * @param {string} [date]
      * @returns {AddCompFormActions}
      */
@@ -142,7 +111,6 @@ class AddCompFormActions {
     }
 
     /**
-     *
      * @param {string} dateToBe
      * @returns {AddCompFormActions}
      */
@@ -153,7 +121,6 @@ class AddCompFormActions {
     }
 
     /**
-     *
      * @param {string} [day]
      * @returns {AddCompFormActions}
      */
@@ -174,10 +141,6 @@ class AddCompFormActions {
         return this;
     }
 
-    /**
-     *
-     * @returns {AddCompFormActions}
-     */
     verifySquareFootageFieldName() {
         addCompFormPage.squareFootageFieldName.should("exist")
             .should("have.text", "Unit Square Footage");
@@ -185,7 +148,6 @@ class AddCompFormActions {
     }
 
     /**
-     *
      * @param {string | number} footage
      * @returns {AddCompFormActions}
      */
@@ -195,17 +157,12 @@ class AddCompFormActions {
         return this;
     }
 
-    /**
-     *
-     * @returns {AddCompFormActions}
-     */
     clickSourceOfInfoDropdown() {
         addCompFormPage.sourceOfInfoDropdown.click({force:true});
         return this;
     }
 
     /**
-     *
      * @param {string} value
      * @returns {AddCompFormActions}
      */
@@ -215,7 +172,6 @@ class AddCompFormActions {
     }
 
     /**
-     *
      * @param {string} valueToBe
      * @returns {AddCompFormActions}
      */
@@ -225,7 +181,6 @@ class AddCompFormActions {
     }
 
     /**
-     *
      * @param {string} value
      * @returns {AddCompFormActions}
      */
@@ -237,7 +192,6 @@ class AddCompFormActions {
     }
 
     /**
-     *
      * @param {Array<string>} values
      * @returns {AddCompFormActions}
      */
@@ -248,10 +202,6 @@ class AddCompFormActions {
         return this;
     }
 
-    /**
-     *
-     * @returns {AddCompFormActions}
-     */
     verifyNumberOfBedroomsFiledName() {
         addCompFormPage.numberOfBedroomsFieldName.should("exist")
             .should("contain.text", "Number of Bedrooms");
@@ -259,7 +209,6 @@ class AddCompFormActions {
     }
 
     /**
-     *
      * @param {number | string} number
      * @returns {AddCompFormActions}
      */
@@ -269,7 +218,6 @@ class AddCompFormActions {
     }
 
     /**
-     *
      * @param {string} name
      * @returns {AddCompFormActions}
      */
@@ -278,26 +226,17 @@ class AddCompFormActions {
         return this;
     }
 
-    /**
-     *
-     * @returns {AddCompFormActions}
-     */
     verifySourceNameNotExist() {
         addCompFormPage.sourceNameInput.should("not.exist");
         return this;
     }
 
-    /**
-     *
-     * @returns {AddCompFormActions}
-     */
     verifySourceUrlNotExist() {
         addCompFormPage.sourceUrlInput.should("not.exist");
         return this;
     }
 
     /**
-     *
      * @param {string} url
      * @returns {AddCompFormActions}
      */
@@ -306,10 +245,6 @@ class AddCompFormActions {
         return this;
     }
 
-    /**
-     *
-     * @returns {AddCompFormActions}
-     */
     verifyNumberOfRoomsFieldName() {
         addCompFormPage.numberOfRoomsFieldName.should("exist")
             .should("contain.text", "Number of Rooms");
@@ -317,7 +252,6 @@ class AddCompFormActions {
     }
 
     /**
-     *
      * @param {number | string} numberOfRooms
      * @returns {AddCompFormActions}
      */
@@ -326,10 +260,6 @@ class AddCompFormActions {
         return this;
     }
 
-    /**
-     *
-     * @returns {AddCompFormActions}
-     */
     verifyNumberOfBathFieldName() {
         addCompFormPage.numberOfBathFieldName.should("exist")
             .should("have.text", "Number of Bathrooms");
@@ -337,7 +267,6 @@ class AddCompFormActions {
     }
 
     /**
-     *
      * @param {number | string} number
      * @returns {AddCompFormActions}
      */
@@ -359,7 +288,6 @@ class AddCompFormActions {
     }
 
     /**
-     *
      * @param {string} notes
      * @returns {AddCompFormActions}
      */
@@ -369,26 +297,17 @@ class AddCompFormActions {
         return this;
     }
 
-    /**
-     *
-     * @returns {AddCompFormActions}
-     */
     verifyUnitAmenitiesFieldName() {
         addCompFormPage.unitAmenitiesFieldName.should("exist").should("have.text", "Unit Amenities");
         return this;
     }
 
-    /**
-     *
-     * @returns {AddCompFormActions}
-     */
     clickUnitAmenitiesDropdown() {
         addCompFormPage.unitAmenitiesDropdown.should("be.visible").click();
         return this;
     }
 
     /**
-     *
      * @param {string} attribute
      * @returns {AddCompFormActions}
      */
@@ -400,7 +319,6 @@ class AddCompFormActions {
     }
 
     /**
-     *
      * @param {string} attribute
      * @returns {AddCompFormActions}
      */
@@ -412,7 +330,6 @@ class AddCompFormActions {
     }
 
     /**
-     *
      * @param {Array<string>} attributes
      * @returns {AddCompFormActions}
      */
@@ -424,7 +341,6 @@ class AddCompFormActions {
     }
 
     /**
-     *
      * @param {Array<string>} attributes
      * @returns {AddCompFormActions}
      */
@@ -435,26 +351,17 @@ class AddCompFormActions {
         return this;
     }
 
-    /**
-     *
-     * @returns {AddCompFormActions}
-     */
     clickCancelButton() {
         addCompFormPage.cancelButton.should("be.visible").click();
         return this;
     }
 
-    /**
-     *
-     * @returns {AddCompFormActions}
-     */
     clickSubmitCompButton() {
         addCompFormPage.submitCompButton.should("not.be.disabled").click();
         return this;
     }
 
     /**
-     *
      * @param {Readonly<{monthly: number | string, date: string, footage: number, sourceInfo: string, bedrooms: number,
      * rooms: number, bathrooms: number}>} compData
      * @returns {AddCompFormActions}
