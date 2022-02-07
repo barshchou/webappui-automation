@@ -555,8 +555,10 @@ class RentCompsActions extends BaseActions {
         this.verifyLoadingDoesntExist();
         rentCompsPage.addNewRentCompButton.scrollIntoView().should("be.enabled").click();
         rentCompsPage.findRentCompSection.should("be.visible");
+        rentCompsPage.submitButton.should("be.disabled");
         rentCompsPage.searchAddressField.type(`${address}{enter}`).should("have.value", address);
         rentCompsPage.findRentCompSection.click();
+        rentCompsPage.advancedSearchButton.should("be.visible");
         rentCompsPage.submitButton.should("not.be.disabled").click();
         rentCompsPage.searchResultsRows.eq(searchResIndex).click();
         rentCompsPage.submitButton.should("not.be.disabled").click();
