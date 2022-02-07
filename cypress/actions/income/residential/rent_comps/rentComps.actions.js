@@ -404,17 +404,6 @@ class RentCompsActions extends BaseActions {
         return this;
     }
 
-    /**
-     * @param {Array<string>} values
-     * @returns {RentCompsActions}
-     */
-    selectSortByOptionsByValues(values) {
-        values.forEach(value => {
-            this.selectSortByOptionByValue(value);
-        });
-        return this;
-    }
-
     verifyLoadingDoesntExist() {
         rentCompsPage.loadingModal.should("not.exist");
         return this;

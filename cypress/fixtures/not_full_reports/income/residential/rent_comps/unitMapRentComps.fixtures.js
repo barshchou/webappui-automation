@@ -13,7 +13,6 @@ const dataFixture = () => {
         sourceOfInfoQaAttr: ["bowery subject", "external database", "other"],
         dateInputTypes: ["min", "max"],
         amenitiesQaAttr: ["none", "backyard", "balcony", "roof", "terrace", "building laundry", "in-unit laundry"],
-        sortByOptions: ["Oldest", "Smallest", "Largest", "Newest"],
         numberOfUnits: 0
     };
 };

@@ -85,10 +85,6 @@ describe("Unit map tests", () => {
         RentComps.BaseActions.verifyNumberOfFoundResultsExist();
     });
 
-    it("ID61: 'Sort by' dropdown", () => {
-        RentComps.BaseActions.selectSortByOptionsByValues(testData.data.sortByOptions);
-    });
-
     it("ID64: Unit Map: Zoom in / Zoom out buttons ('+' / '-')", () => {
         RentComps.BaseActions.verifyLoadingDoesntExist()
            .clickZoomOutButton()
