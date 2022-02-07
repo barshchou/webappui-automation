@@ -67,13 +67,6 @@ describe("Unit map tests", () => {
             .clearDateInputs(testData.data.dateInputTypes);
     });
 
-    it("ID58: Amenities dropdown", () => {
-        RentComps.BaseActions.clickAmenitiesArrow()
-            .checkListOfCheckboxesByQa(testData.data.amenitiesQaAttr)
-            .uncheckListOfCheckboxesByQa(testData.data.amenitiesQaAttr)
-            .clickAmenitiesArrow();
-    });
-
     it("ID59: Reset Filters button", () => {
         const fieldName = "minSF";
         RentComps.BaseActions.enterValueToInput(fieldName, testData.data.minSquareFeet)
