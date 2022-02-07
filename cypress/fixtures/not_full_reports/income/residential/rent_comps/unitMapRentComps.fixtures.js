@@ -14,7 +14,6 @@ const dataFixture = () => {
         dateInputTypes: ["min", "max"],
         amenitiesQaAttr: ["none", "backyard", "balcony", "roof", "terrace", "building laundry", "in-unit laundry"],
         sortByOptions: ["Oldest", "Smallest", "Largest", "Newest"],
-        comparableIndex: 0,
         numberOfUnits: 0
     };
 };

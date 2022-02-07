@@ -460,37 +460,6 @@ class RentCompsActions extends BaseActions {
         return this;
     }
 
-    verifyCompAddressesExist() {
-        rentCompsPage.comparableAddressesTexts.each($address => {
-            expect($address).not.to.be.empty;
-        });
-        return this;
-    }
-
-    verifyRentsTexts() {
-        rentCompsPage.rentElementsTexts.each($rentEl => {
-            cy.wrap($rentEl).should("exist").should("contain.text", "/month")
-                .should("contain.text", "/SF");
-        });
-        return this;
-    }
-
-    verifyCompAmenitiesTextsExist() {
-        rentCompsPage.comparablesAmenitiesTexts.each($amenityEl => {
-            cy.wrap($amenityEl).should("exist").should("contain.text", "bed")
-                .should("contain.text", "bath");
-        });
-        return this;
-    }
-
-    verifyComparablePropertyTextsExist() {
-        rentCompsPage.comparablePropertyTexts.each($propertyEl => {
-            cy.wrap($propertyEl).should("exist").should("contain.text", "mi. away")
-                .should("contain.text", "SF").should("contain.text", "Valued:");
-        });
-        return this;
-    }
-
     verifyLoadingModalExist() {
         rentCompsPage.loadingModal.should("exist");
         return this;
