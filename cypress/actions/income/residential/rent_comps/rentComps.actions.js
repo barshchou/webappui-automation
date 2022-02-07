@@ -554,9 +554,9 @@ class RentCompsActions extends BaseActions {
     openAddNewComparableForm(address, searchResIndex = 0) {
         this.verifyLoadingDoesntExist();
         rentCompsPage.addNewRentCompButton.scrollIntoView().should("be.enabled").click();
-        rentCompsPage.findRenCompSection.should("be.visible");
+        rentCompsPage.findRentCompSection.should("be.visible");
         rentCompsPage.searchAddressField.type(`${address}{enter}`).should("have.value", address);
-        rentCompsPage.findRenCompSection.click();
+        rentCompsPage.findRentCompSection.click();
         rentCompsPage.submitButton.should("not.be.disabled").click();
         rentCompsPage.searchResultsRows.eq(searchResIndex).click();
         rentCompsPage.submitButton.should("not.be.disabled").click();
@@ -576,7 +576,7 @@ class RentCompsActions extends BaseActions {
         rentCompsPage.getStateByName(comparableData.state).click();
         rentCompsPage.searchAddressField.type(`${comparableData.address}{enter}`)
             .should("have.value", comparableData.address);
-        rentCompsPage.findRenCompSection.click();
+        rentCompsPage.findRentCompSection.click();
         rentCompsPage.propertyIdentifierInput.type(comparableData.id).should("have.value", comparableData.id);
         rentCompsPage.submitButton.click();
         return this;
