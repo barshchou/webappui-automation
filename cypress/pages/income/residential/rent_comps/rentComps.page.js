@@ -51,7 +51,7 @@ class RentCompsPage extends BasePage{
     get indexColumnCellsSelector() {return "*[data-qa='col-index']";}
     get indexColumnCells() {return cy.get(this.indexColumnCellsSelector);}
     get addNewRentCompButton() {return cy.get("*[data-qa='add-new-rent-comp-btn']");}
-    get findRenCompSection() {return cy.contains("Find Rent Comparable");}
+    get findRentCompSection() {return cy.contains("Find Rent Comparable");}
     get searchAddressField() {return cy.get("*[placeholder='Search Address']");}
     get submitButton() {return cy.get("*[data-qa='submit-button']");}
     get searchResultsRows() {return cy.get("tr[data-qa^='search-results']");}

@@ -1,21 +1,11 @@
 import addCompFormPage from "../../../../pages/income/residential/rent_comps/addCompForm.page";
 import {getTodayDateString, getTodayDay, isDateHasCorrectFormat} from "../../../../../utils/date.utils";
-import {isDecimal, numberWithCommas} from "../../../../../utils/numbers.utils";
+import {isDecimal, isHalfDecimalPart, numberWithCommas} from "../../../../../utils/numbers.utils";
 
 class AddCompFormActions {
 
     clickCloseButton() {
         addCompFormPage.closeButton.should("be.enabled").click();
-        return this;
-    }
-
-    verifyPropAddressExist() {
-        addCompFormPage.propAddressField.should("be.visible").should("not.be.empty");
-        return this;
-    }
-
-    verifyUnitNumbFieldName() {
-        addCompFormPage.unitNumbFieldName.should("exist").should("have.text", "Unit Number");
         return this;
     }
 
@@ -73,23 +63,19 @@ class AddCompFormActions {
         return this;
     }
 
-    verifyMonthRentFieldName() {
-        addCompFormPage.monthRentFieldName.should("exist").should("contain.text", "Monthly Rent");
-        return this;
-    }
-
     /**
      * @param {string | number} rent
      * @returns {AddCompFormActions}
      */
     enterMonthlyRent(rent) {
         const textToBe = typeof rent === "string" ? rent : numberWithCommas(rent);
-        addCompFormPage.monthRentInput.clear().type(rent).should("have.value", textToBe);
+        addCompFormPage.monthRentInput.clear().type(rent)
+            .should("have.value", textToBe).should("have.attr", "required");
         return  this;
     }
 
     clearDateInput() {
-        addCompFormPage.dateOfValueInput.clear();
+        addCompFormPage.dateOfValueInput.clear().should("have.attr", "required");
         return this;
     }
 
@@ -100,12 +86,8 @@ class AddCompFormActions {
     enterDate(date) {
         this.clearDateInput();
         date = date ?? getTodayDateString();
-        const isDateCorrect = isDateHasCorrectFormat(date);
-        if (isDateCorrect) {
-            addCompFormPage.dateOfValueInput.type(date);
-        } else {
-            addCompFormPage.errorMessage.should("exist");
-        }
+        addCompFormPage.dateOfValueInput.type(date);
+        if (!isDateHasCorrectFormat(date)) addCompFormPage.errorMessage.should("exist");
         this.verifyEnteredDate(date);
         return this;
     }
@@ -116,6 +98,7 @@ class AddCompFormActions {
      */
     verifyEnteredDate(dateToBe) {
         dateToBe = dateToBe ?? getTodayDateString();
+        if (!isDateHasCorrectFormat(dateToBe)) dateToBe = "";
         addCompFormPage.dateInputValue.should("have.value", dateToBe);
         return this;
     }
@@ -138,12 +121,6 @@ class AddCompFormActions {
         addCompFormPage.datePickerPopover.should("exist");
         addCompFormPage.getDayOfCurrentMonthInPicker(day).should("be.visible").click();
         this.verifyEnteredDate(date);
-        return this;
-    }
-
-    verifySquareFootageFieldName() {
-        addCompFormPage.squareFootageFieldName.should("exist")
-            .should("have.text", "Unit Square Footage");
         return this;
     }
 
@@ -202,18 +179,13 @@ class AddCompFormActions {
         return this;
     }
 
-    verifyNumberOfBedroomsFiledName() {
-        addCompFormPage.numberOfBedroomsFieldName.should("exist")
-            .should("contain.text", "Number of Bedrooms");
-        return this;
-    }
-
     /**
      * @param {number | string} number
      * @returns {AddCompFormActions}
      */
     enterNumberOfBedrooms(number) {
-        addCompFormPage.bedroomsInput.clear().type(number).should("have.value", number);
+        addCompFormPage.bedroomsInput.clear().type(number)
+            .should("have.value", number).should("have.attr", "required");
         return this;
     }
 
@@ -245,24 +217,13 @@ class AddCompFormActions {
         return this;
     }
 
-    verifyNumberOfRoomsFieldName() {
-        addCompFormPage.numberOfRoomsFieldName.should("exist")
-            .should("contain.text", "Number of Rooms");
-        return this;
-    }
-
     /**
      * @param {number | string} numberOfRooms
      * @returns {AddCompFormActions}
      */
     enterNumberOfRooms(numberOfRooms) {
-        addCompFormPage.numberOfRoomsInput.clear().type(numberOfRooms).should("have.value", numberOfRooms);
-        return this;
-    }
-
-    verifyNumberOfBathFieldName() {
-        addCompFormPage.numberOfBathFieldName.should("exist")
-            .should("have.text", "Number of Bathrooms");
+        addCompFormPage.numberOfRoomsInput.clear().type(numberOfRooms)
+            .should("have.value", numberOfRooms).should("have.attr", "required");
         return this;
     }
 
@@ -274,9 +235,8 @@ class AddCompFormActions {
         if (isDecimal(number)) {
             number = number.toFixed(1);
             number = `${number}`;
-            let numberDigits = number.split(".");
             addCompFormPage.numberOfBathInput.clear().type(number).type("{enter}").should("have.value", number);
-            if (numberDigits[1] !== "5") {
+            if (!isHalfDecimalPart(number)) {
                 addCompFormPage.numberOfRoomsInput.click();
                 addCompFormPage.numberOfBathInput.click();
                 addCompFormPage.bathNumbErrorMessage.should("exist");
@@ -294,11 +254,6 @@ class AddCompFormActions {
     enterInternalNotes(notes) {
         addCompFormPage.internalNotesTextField.should("exist").should("have.attr", "placeholder",
             "Write internal notes that will not be exported.").clear().type(notes).should("have.text", notes);
-        return this;
-    }
-
-    verifyUnitAmenitiesFieldName() {
-        addCompFormPage.unitAmenitiesFieldName.should("exist").should("have.text", "Unit Amenities");
         return this;
     }
 
@@ -357,7 +312,7 @@ class AddCompFormActions {
     }
 
     clickSubmitCompButton() {
-        addCompFormPage.submitCompButton.should("not.be.disabled").click();
+        addCompFormPage.submitCompButton.should("exist").should("not.be.disabled").click();
         return this;
     }
 

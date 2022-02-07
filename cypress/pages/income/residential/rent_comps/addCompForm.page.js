@@ -36,6 +36,10 @@ class AddCompFormPage extends BasePage{
     getCheckboxByDataQaAttr(attribute) {return cy.get(`*[data-qa='${attribute}'] input`);}
     get cancelButton() {return cy.get("*[data-qa='cancel-btn']");}
     get submitCompButton() {return cy.get("*[data-qa='submit-comp-btn']");}
+    get formHeader() {return cy.xpath("//h6[.='Add New Rent Comp']");}
+    get unitTypeFieldName() {return cy.get("[data-qa=unitLayout-form-control] label");}
+    get dateOfValueFieldName() {return cy.get("[data-qa=dateOfValue-date-picker] label");}
+    get sourceOfInfoFieldName() {return cy.get("[data-qa=sourceOfInformation-form-control] label");}
 }
 
 export default new AddCompFormPage();
