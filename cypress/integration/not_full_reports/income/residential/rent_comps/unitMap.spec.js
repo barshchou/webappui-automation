@@ -14,13 +14,6 @@ describe("Unit map tests", () => {
        cy.restoreLocalStorage();
    });
 
-    it("ID50: Unit Types dropdown", () => {
-        RentComps.BaseActions.clickUnitTypesArrowButton()
-            .checkListOfCheckboxesByQa(testData.data.unitTypesQaAttrs)
-            .uncheckListOfCheckboxesByQa(testData.data.unitTypesQaAttrs)
-            .clickUnitTypesArrowButton();
-    });
-
     it("ID59: Reset Filters button", () => {
         const fieldName = "minSF";
         RentComps.BaseActions.enterValueToInput(fieldName, testData.data.minSquareFeet)
