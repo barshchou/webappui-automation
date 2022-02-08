@@ -5,8 +5,6 @@ const dataFixture = () => {
     return {
         unitTypesQaAttrs: ["typical", "duplex", "triplex", "simplex", "loft",
             "garden style", "basement", "garage", "penthouse"],
-        minRentValue: "465,524.31",
-        maxRentValue: "700,000.55",
         numberOfUnits: 0
     };
 };

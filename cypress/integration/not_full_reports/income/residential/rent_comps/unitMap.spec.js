@@ -21,18 +21,6 @@ describe("Unit map tests", () => {
             .clickUnitTypesArrowButton();
     });
 
-    it("ID51: Min Rent text field", () => {
-        const filedName = "minRent";
-        RentComps.BaseActions.enterValueToInput(filedName, testData.data.minRentValue)
-            .clearInput(filedName);
-    });
-
-    it("ID52: Max Rent text field", () => {
-        const fieldName = "maxRent";
-        RentComps.BaseActions.enterValueToInput(fieldName, testData.data.maxRentValue)
-            .clearInput(fieldName);
-    });
-
     it("ID59: Reset Filters button", () => {
         const fieldName = "minSF";
         RentComps.BaseActions.enterValueToInput(fieldName, testData.data.minSquareFeet)
