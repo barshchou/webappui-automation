@@ -248,30 +248,6 @@ class RentCompsActions extends BaseActions {
     }
 
     /**
-     * @param {Array<string>} types
-     * @param {Array<string>} [dates]
-     * @returns {RentCompsActions}
-     */
-    enterDatesToInputs(types, dates) {
-        dates = dates ?? [getTodayDateString(), getTodayDateString()];
-        for (let i = 0; i < dates.length; i++) {
-            this.enterDateInput(dates[i], types[i]);
-        }
-        return this;
-    }
-
-    /**
-     * @param {Array<string>} types
-     * @returns {RentCompsActions}
-     */
-    clearDateInputs(types) {
-        types.forEach(type => {
-            this.clearDateInput(type);
-        });
-        return this;
-    }
-
-    /**
      * @param {string} date
      * @param {string} type
      * @returns {RentCompsActions}
@@ -341,39 +317,13 @@ class RentCompsActions extends BaseActions {
 
     /**
      * @param {string} type
-     * @param {string} day
+     * @param {string | number} day
      * @returns {RentCompsActions}
      */
     selectDayFromPicker(type, day) {
         this.clickPickerButton(type);
         rentCompsPage.pickerCalendar.should("be.visible");
         this.clickDayInPicker(day);
-        return this;
-    }
-
-    /**
-     * @param {Array<string>} types
-     * @param {Array<string>} [days]
-     * @returns {RentCompsActions}
-     */
-    selectDaysFromPickerByTypes(types, days) {
-        days = days ?? [Number(getTodayDay()), Number(getTodayDay())];
-        for (let i = 0; i < types.length; i++) {
-            this.selectDayFromPicker(types[i], days[i]);
-        }
-        return this;
-    }
-
-    /**
-     * @param {Array<string>} types
-     * @param {Array<string>} [dates]
-     * @returns {RentCompsActions}
-     */
-    verifyEnteredDatesByTypes(types, dates) {
-        dates = dates ?? [getTodayDateString(), getTodayDateString()];
-        for (let i = 0; i < types.length; i++) {
-            this.verifyEnteredDate(types[i], dates[i]);
-        }
         return this;
     }
 
