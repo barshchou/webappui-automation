@@ -9,7 +9,6 @@ const dataFixture = () => {
         maxRentValue: "700,000.55",
         minSquareFeet: "57.09",
         maxSquareFeet: "200.4",
-        numberOfBedroomsQaAttr: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
         numberOfUnits: 0
     };
 };
