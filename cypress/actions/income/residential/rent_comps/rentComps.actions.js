@@ -76,8 +76,10 @@ class RentCompsActions extends BaseActions {
         return this;
     }
 
-    clickSwitchConfirmButton() {
-        rentCompsPage.switchSearchConfirmButton.should("be.visible").click();
+    clickSwitchConfirmButton(basis) {
+        rentCompsPage.switchSearchConfirmButton.should("contain.text", "Search")
+            .and("contain.text", `Per ${basis}`);
+        rentCompsPage.switchSearchConfirmButton.click();
         return this;
     }
 
@@ -128,23 +130,31 @@ class RentCompsActions extends BaseActions {
         return this;
     }
 
-    verifyPopUpTextExist() {
+    verifyPopUpTextExist(basis) {
         rentCompsPage.changeCompTypePopUpMessage.should("exist");
+        rentCompsPage.getAreYouSurePopUp(basis).should("exist");
+        return this;
+    }
+
+    verifySearchCancelExists() {
+        rentCompsPage.searchCancelButton.should("exist");
         return this;
     }
 
     changeToBuildingSearch() {
         this.clickBuildingSwitchButton()
-            .verifyPopUpTextExist()
-            .clickSwitchConfirmButton()
+            .verifyPopUpTextExist("Building")
+            .verifySearchCancelExists()
+            .clickSwitchConfirmButton("Building")
             .verifyBuildingSelected();
         return this;
     }
 
     changeToUnitSearch() {
         this.clickUnitSwitchButton()
-            .verifyPopUpTextExist()
-            .clickSwitchConfirmButton()
+            .verifyPopUpTextExist("Unit")
+            .verifySearchCancelExists()
+            .clickSwitchConfirmButton("Unit")
             .verifyUnitSelected();
         return this;
     }
