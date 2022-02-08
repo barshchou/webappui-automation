@@ -33,18 +33,6 @@ describe("Unit map tests", () => {
             .clearInput(fieldName);
     });
 
-    it("ID53: Min SF text field", () => {
-        const fieldName = "minSF";
-        RentComps.BaseActions.enterValueToInput(fieldName, testData.data.minSquareFeet)
-            .clearInput(fieldName);
-    });
-
-    it("ID54: Max SF text field", () => {
-        const fieldName = "maxSF";
-        RentComps.BaseActions.enterValueToInput(fieldName, testData.data.maxSquareFeet)
-            .clearInput(fieldName);
-    });
-
     it("ID59: Reset Filters button", () => {
         const fieldName = "minSF";
         RentComps.BaseActions.enterValueToInput(fieldName, testData.data.minSquareFeet)

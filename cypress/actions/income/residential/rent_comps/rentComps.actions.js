@@ -1,7 +1,11 @@
 import BaseActions from "../../../base/base.actions";
 import rentCompsPage from "../../../../pages/income/residential/rent_comps/rentComps.page";
 import {getTodayDateString, getTodayDay, isDateHasCorrectFormat} from "../../../../../utils/date.utils";
-import {numberWithCommas} from "../../../../../utils/numbers.utils";
+import {
+    cutDecimalPartToNumberOfDigits,
+    isHasDecimalPartMoreNumberOfDigits,
+    numberWithCommas
+} from "../../../../../utils/numbers.utils";
 
 class RentCompsActions extends BaseActions {
 
@@ -147,7 +151,7 @@ class RentCompsActions extends BaseActions {
 
     /**
      * @param {string} fieldName
-     * @param {string} value
+     * @param {string | number} value
      * @returns {RentCompsActions}
      */
     enterValueToInput(fieldName, value) {
@@ -179,11 +183,21 @@ class RentCompsActions extends BaseActions {
 
     /**
      * @param {string} fieldName
-     * @param {string} value
+     * @param {string | number} value
      * @returns {RentCompsActions}
      */
     verifyEnteredValueToInput(fieldName, value = "") {
         let inputField;
+        let valueToBe;
+        if (typeof value === "number") {
+            if (isHasDecimalPartMoreNumberOfDigits(value)) {
+                valueToBe = numberWithCommas(cutDecimalPartToNumberOfDigits(value));
+            } else {
+                valueToBe = numberWithCommas(value);
+            }
+        } else {
+            valueToBe = value;
+        }
         switch (fieldName) {
             case "minRent":
                 inputField = rentCompsPage.minRentInput;
@@ -197,7 +211,7 @@ class RentCompsActions extends BaseActions {
             case "maxSF":
                 inputField = rentCompsPage.maxSquareFeet;
         }
-        inputField.should("have.value", value);
+        inputField.should("have.value", valueToBe);
         return this;
     }
 
