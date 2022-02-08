@@ -18,11 +18,6 @@ describe("Basic Rent Comps tests", () => {
         RentComps.BaseActions.verifyGCText(testData.reportCreationData.conclusionValue);
     });
 
-    it("ID46, ID47 and ID48: Unit button, Building button and PopUp", () => {
-        RentComps.BaseActions.changeToBuildingSearch()
-            .changeToUnitSearch();
-    });
-
     after("Delete report", () => {
         cy.restoreLocalStorage();
         deleteReport(testData.reportCreationData.reportNumber);

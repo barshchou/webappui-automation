@@ -99,6 +99,8 @@ class RentCompsPage extends BasePage{
     get perBuildingFiltersButton() {return cy.xpath("//button[.='Filters']");}
     get tablesColumns() {return cy.get("[scope=col]");}
     get unitTypesWrapper() {return cy.get("[data-qa^='filters.selectedUnitTypes'] [data-qa=chips-wrapper]");}
+    getAreYouSurePopUp(basis) {return cy.xpath(`//*[.='Are you sure you want to search Per ${basis}?']`);}
+    get searchCancelButton() {return cy.get("[data-qa=search-cancel]");}
 }
 
 export default new RentCompsPage();
