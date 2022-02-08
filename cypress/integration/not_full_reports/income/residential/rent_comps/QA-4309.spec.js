@@ -1,0 +1,21 @@
+import ReportDataCreator from "../../../../../fixtures/data_creator/reportData.creator";
+import {createReport, deleteReport} from "../../../../../actions/base/baseTest.actions";
+import NavigationSection from "../../../../../actions/base/navigationSection.actions";
+import Income from "../../../../../actions/income/income.manager";
+
+const reportCreationData = ReportDataCreator.getDefaultReportData("4309");
+
+describe("Verify Zoom in and Zoom out buttons for the map on Rent Comps page when Unit search type is selected", () => {
+    before("Login, create report", () => {
+        createReport(reportCreationData);
+    });
+
+    it("Test body", () => {
+        NavigationSection.navigateToRentComps()
+            .verifyProgressBarNotExist();
+        Income.Residential.RentComps.BaseActions.verifyUnitSelected()
+            .clickZoomInButton()
+            .clickZoomOutButton();
+        deleteReport(reportCreationData.reportNumber);
+    });
+});
