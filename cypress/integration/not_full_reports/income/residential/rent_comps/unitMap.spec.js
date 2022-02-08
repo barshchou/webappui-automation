@@ -14,17 +14,6 @@ describe("Unit map tests", () => {
        cy.restoreLocalStorage();
    });
 
-    it("ID59: Reset Filters button", () => {
-        const fieldName = "minSF";
-        RentComps.BaseActions.enterValueToInput(fieldName, testData.data.minSquareFeet)
-            .clickResetFiltersButton()
-            .verifyEnteredValueToInput(fieldName);
-    });
-
-    it("ID60: # Results Found text", () => {
-        RentComps.BaseActions.verifyNumberOfFoundResultsExist();
-    });
-
     it("ID64: Unit Map: Zoom in / Zoom out buttons ('+' / '-')", () => {
         RentComps.BaseActions.verifyLoadingDoesntExist()
            .clickZoomOutButton()
