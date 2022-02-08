@@ -346,11 +346,6 @@ class RentCompsActions extends BaseActions {
         return this;
     }
 
-    verifyNumberOfFoundResultsExist() {
-        rentCompsPage.numberOfFoundResults.should("exist").should("contain.text", "Results Found");
-        return this;
-    }
-
     clickResetFiltersButton() {
         rentCompsPage.resetFiltersButton.click();
         return this;
