@@ -59,14 +59,6 @@ describe("Unit map tests", () => {
             .clickSourceOfInfoButton();
     });
 
-    it("ID57: Date of Value Range", () => {
-        RentComps.BaseActions.enterDatesToInputs(testData.data.dateInputTypes)
-            .clearDateInputs(testData.data.dateInputTypes)
-            .selectDaysFromPickerByTypes(testData.data.dateInputTypes)
-            .verifyEnteredDatesByTypes(testData.data.dateInputTypes)
-            .clearDateInputs(testData.data.dateInputTypes);
-    });
-
     it("ID59: Reset Filters button", () => {
         const fieldName = "minSF";
         RentComps.BaseActions.enterValueToInput(fieldName, testData.data.minSquareFeet)
