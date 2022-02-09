@@ -23,7 +23,7 @@ export const getEnvUrl = () => {
 };
 
 const isCorrectLink = (link) => {
-    return link.endsWith("/");
+    return !link.endsWith("/");
 };
 
 export const isProdEnv = () => {
