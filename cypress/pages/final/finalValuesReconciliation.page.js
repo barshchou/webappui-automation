@@ -13,7 +13,6 @@ class FinalValuesReconciliationPage extends BasePage {
     get finalValueAsStabDate() {return cy.get("[data-qa=asStablilized-date]");}
     get finalValueAsCompleteDate() {return cy.get("[data-qa=asComplete-date]");}
     get finalValueAsIsDate() {return cy.get("[data-qa=asIs-date]");}
-    get satisfactionSurveyCloseButton() {return cy.get("[aria-label=Close]");}
 }
 
 export default new FinalValuesReconciliationPage();

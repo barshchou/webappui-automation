@@ -28,6 +28,7 @@ class ValueConclusionPage extends BasePage {
     get commentaryInput() {return cy.get("[name*='ConclusionCommentary.commentary']");}
     get revertCommentaryButton() {return cy.get("[data-qa=generated-commentary-revert-btn]");}
     get asCompleteLessEntrepreneurialProfit() {return cy.get("[data-qa*='asCompleteLossItems.entrepreneurialProfit'] input[inputmode]");}
+    get gbaAmount() {return cy.get("[data-qa=grossBuildingArea-amount-cell]");}
 }
 
 export default new ValueConclusionPage();

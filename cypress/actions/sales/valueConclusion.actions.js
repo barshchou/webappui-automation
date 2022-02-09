@@ -367,6 +367,16 @@ class ValueConclusionActions extends BaseActions {
         cy.get(`[title='${title}']`).should("exist");
         return this;
     }
+
+    /**
+     * @param {string | number} gbaToBe
+     * @returns {ValueConclusionActions}
+     */
+    verifyGrossBuildingAreaAmount(gbaToBe) {
+        const textToBe = typeof gbaToBe === "string" ? gbaToBe : numberWithCommas(gbaToBe);
+        valueConclusionPage.gbaAmount.should("contain.text", textToBe);
+        return this;
+    }
 }
 
 export default new ValueConclusionActions();

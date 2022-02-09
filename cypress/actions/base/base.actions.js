@@ -43,4 +43,9 @@ export default class BaseActions {
         cy.get("*[role='progressbar']").should("not.exist");
         return this;
     }
+
+    closeSatisfactionSurvey() {
+        cy.get("[aria-label=Close]").click();
+        return this;
+    }
 }

@@ -111,11 +111,18 @@ class SummaryActions extends BaseActions {
      * @returns {SummaryActions}
      */
     enterGrossBuildingArea(area) {
-        if (isHasDecimalPartMoreNumberOfDigits(area, 2)) {
-            area = cutDecimalPartToNumberOfDigits(area, 2);
-        }
-        const textToBe = numberWithCommas(area);
-        summaryPage.grossBuildingArea.clear().type(area).should("have.value", textToBe);
+        const valueToBe = typeof area === "string" ? area : numberWithCommas(area);
+        summaryPage.grossBuildingArea.clear().type(area).should("have.value", valueToBe);
+        return this;
+    }
+
+    /**
+     * @param {string | number} gbaToBe
+     * @returns {SummaryActions}
+     */
+    verifyGrossBuildingArea(gbaToBe) {
+        const valueToBe = typeof gbaToBe === "string" ? gbaToBe : numberWithCommas(gbaToBe);
+        summaryPage.grossBuildingArea.should("have.value", valueToBe);
         return this;
     }
 
