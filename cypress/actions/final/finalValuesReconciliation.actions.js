@@ -113,15 +113,6 @@ class FinalValuesReconciliationActions extends BaseActions {
         return this;
     }
 
-    /**
-     *
-     * @returns {FinalValuesReconciliationActions}
-     */
-    closeSatisfactionSurvey() {
-        finalValuesPage.satisfactionSurveyCloseButton.click();
-        return this;
-    }
-
 }
 
 export default new FinalValuesReconciliationActions();
