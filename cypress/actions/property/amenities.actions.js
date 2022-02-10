@@ -5,7 +5,6 @@ import {cutDecimalPartToNumberOfDigits, isDecimal} from "../../../utils/numbers.
 class AmenitiesActions extends BaseActions{
 
     /**
-     *
      * @param {number} numberOfPlaces
      * @returns {AmenitiesActions}
      */
@@ -22,12 +21,13 @@ class AmenitiesActions extends BaseActions{
         return this;
     }
 
-    /**
-     *
-     * @returns {AmenitiesActions}
-     */
     checkHasNoUnitAmenities() {
         amenitiesPage.hasNoUnitAmenitiesCheckbox.check().should("have.value", "true");
+        return this;
+    }
+
+    checkLaundryRoomCheckbox() {
+        amenitiesPage.laundryCheckbox.should("have.value", "false").check().should("have.value", "true");
         return this;
     }
 }

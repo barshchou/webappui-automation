@@ -31,6 +31,9 @@ class CapRateConclusionPage extends BasePage {
     get addButton() {return cy.xpath("//button[.='Add']");}
     get asStabResRentLossTimePeriodCells() {return cy.get("[name^=asStabilizedResRentLossItems][name$=months]");}
     get asCompleteLessBuyoutCost() {return cy.get("[data-qa*='asCompleteLossItems.buyoutCost'] input[inputmode]");}
+    // TODO: change laundry loss months locators after adding unique attributes
+    get asStabilizedLessLaundryLossMonths() {return cy.get("[name='asStabilizedLossItems[0].months']");}
+    get asCompleteLessLaundryLossMonths() {return cy.get("[name='asCompleteLossItems[0].months']");}
 }
 
 export default new CapRateConclusionPage();

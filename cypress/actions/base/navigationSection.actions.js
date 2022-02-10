@@ -3,145 +3,81 @@ import BaseActions from "./base.actions";
 
 class NavigationSectionActions extends BaseActions {
 
-    /**
-     *
-     * @returns {NavigationSectionActions}
-     */
     clickIncomeApproachButton() {
         navigationSectionPage.incomeApproachButton.click();
         return this;
     }
 
-    /**
-     *
-     * @returns {NavigationSectionActions}
-     */
     clickResidentialIncomeArrow() {
         navigationSectionPage.residentialIncomeArrow.click();
         return this;
     }
 
-    /**
-     *
-     * @returns {NavigationSectionActions}
-     */
     clickInPlaceRentRollButton() {
         navigationSectionPage.inPlaceRentRollButton.click();
         return this;
     }
 
-    /**
-     *
-     * @returns {NavigationSectionActions}
-     */
     clickRentCompsButton() {
         navigationSectionPage.rentCompsButton.click();
         return this;
     }
 
-    /**
-     *
-     * @returns {NavigationSectionActions}
-     */
     clickCommercialArrow() {
         navigationSectionPage.commercialIncomeArrow.click();
         return this;
     }
 
-    /**
-     *
-     * @returns {NavigationSectionActions}
-     */
     clickCommercialRentRollButton() {
         navigationSectionPage.commercialRentRollButton.click();
         return this;
     }
 
-    /**
-     *
-     * @returns {NavigationSectionActions}
-     */
     clickCommercialStabRentRollButton() {
         navigationSectionPage.commercialStabRentRollButton.click();
         return this;
     }
 
-    /**
-     *
-     * @returns {NavigationSectionActions}
-     */
     clickFinalButton() {
         navigationSectionPage.finalButton.click();
         return this;
     }
 
-    /**
-     *
-     * @returns {NavigationSectionActions}
-     */
     clickUnitInspectionButton() {
         navigationSectionPage.unitInspectionButton.click();
         return this;
     }
 
-    /**
-     *
-     * @returns {NavigationSectionActions}
-     */
     clickPropertyButton() {
         navigationSectionPage.propertyButton.click();
         return this;
     }
 
-    /**
-     *
-     * @returns {NavigationSectionActions}
-     */
     clickCommercialUnits() {
         navigationSectionPage.commercialUnitsButton.click();
         return this;
     }
 
-    /**
-     *
-     * @returns {NavigationSectionActions}
-     */
     clickSummaryButton() {
         navigationSectionPage.summaryButton.click();
         return this;
     }
 
-    /**
-     *
-     * @returns {NavigationSectionActions}
-     */
     clickClientButton() {
         navigationSectionPage.clientButton.click();
         return this;
     }
 
-    /**
-     *
-     * @returns {NavigationSectionActions}
-     */
     clickSiteDescriptionButton() {
         navigationSectionPage.siteDescription.click();
         return this;
     }
 
-    /**
-     *
-     * @returns {NavigationSectionActions}
-     */
     clickMapsButton() {
         navigationSectionPage.propertyMaps.click();
         return this;
     }
 
-    /**
-     *
-     * @returns {NavigationSectionActions}
-     */
     navigateToUnitInspection() {
         this.clickSaveButton();
         this.clickFinalButton()
@@ -150,10 +86,6 @@ class NavigationSectionActions extends BaseActions {
         return this;
     }
 
-    /**
-     *
-     * @returns {NavigationSectionActions}
-     */
     navigateToResInPlaceRentRoll() {
         this.clickIncomeApproachButton()
             .clickResidentialIncomeArrow()
@@ -162,10 +94,6 @@ class NavigationSectionActions extends BaseActions {
         return this;
     }
 
-    /**
-     *
-     * @returns {NavigationSectionActions}
-     */
     navigateToRentComps() {
         this.clickIncomeApproachButton()
             .clickResidentialIncomeArrow()
@@ -174,10 +102,6 @@ class NavigationSectionActions extends BaseActions {
         return this;
     }
 
-    /**
-     *
-     * @returns {NavigationSectionActions}
-     */
     openRentCompsInResidential() {
         this.clickRentCompsButton()
             .clickYesButton();
@@ -185,7 +109,6 @@ class NavigationSectionActions extends BaseActions {
     }
 
     /**
-     *
      * @param {boolean} isWithSave
      * @returns {NavigationSectionActions}
      */
@@ -199,10 +122,6 @@ class NavigationSectionActions extends BaseActions {
         return this;
     }
 
-    /**
-     *
-     * @returns {NavigationSectionActions}
-     */
     navigateToPropertySummary() {
         this.clickPropertyButton()
             .clickSummaryButton()
@@ -210,59 +129,34 @@ class NavigationSectionActions extends BaseActions {
         return this;
     }
 
-    /**
-     *
-     * @returns {NavigationSectionActions}
-     */
     openClientPageInReport() {
         this.clickClientButton()
             .clickYesButton();
         return this;
     }
 
-    /**
-     *
-     * @returns {NavigationSectionActions}
-     */
     openSiteDescriptionInProperty() {
         this.clickSiteDescriptionButton()
             .clickYesButton();
         return this;
     }
 
-    /**
-     *
-     * @returns {NavigationSectionActions}
-     */
     openMapsInProperty() {
         this.clickMapsButton()
             .clickYesButton();
         return this;
     }
 
-    /**
-     *
-     * @returns {NavigationSectionActions}
-     */
     clickExpenseForecastBookmark() {
         navigationSectionPage.expenseForecastBookmark.click().should("have.attr", "color", "#F68750");
         return this;
     }
 
-    /**
-     *
-     * @returns {NavigationSectionActions}
-     */
     clickCapRateConclusion() {
         navigationSectionPage.capRateConclusion.click();
         return this;
     }
 
-    /**
-     *
-     * @param {boolean} isWithSave
-     * @returns {NavigationSectionActions}
-     */
     navigateToCapRateConclusion(isWithSave = true) {
         this.clickIncomeApproachButton()
             .clickCapRateConclusion();
@@ -272,37 +166,21 @@ class NavigationSectionActions extends BaseActions {
         return this;
     }
 
-    /**
-     *
-     * @returns {NavigationSectionActions}
-     */
     clickSalesButton() {
         navigationSectionPage.salesApproachButton.click();
         return this;
     }
 
-    /**
-     *
-     * @returns {NavigationSectionActions}
-     */
     clickValueConclusionButton() {
         navigationSectionPage.valueConclusionButton.click();
         return this;
     }
 
-    /**
-     *
-     * @returns {NavigationSectionActions}
-     */
     clickInsurableReplacementCostBookmark() {
         navigationSectionPage.insurableReplacementCostBookmark.click().should("have.attr", "color", "#F68750");
         return this;
     }
 
-    /**
-     *
-     * @returns {NavigationSectionActions}
-     */
     navigateToSalesValueConclusion() {
         this.clickSalesButton()
             .clickValueConclusionButton()
@@ -310,19 +188,11 @@ class NavigationSectionActions extends BaseActions {
         return this;
     }
 
-    /**
-     *
-     * @returns {NavigationSectionActions}
-     */
     clickFindCompsButton() {
         navigationSectionPage.findCompsButton.click();
         return this;
     }
 
-    /**
-     *
-     * @returns {NavigationSectionActions}
-     */
     navigateToFindComps() {
         this.clickSalesButton()
             .clickFindCompsButton()
@@ -330,38 +200,22 @@ class NavigationSectionActions extends BaseActions {
         return this;
     }
 
-    /**
-     *
-     * @returns {NavigationSectionActions}
-     */
     clickAdjustCompsButton() {
         navigationSectionPage.adjustCompsButton.click();
         return this;
     }
 
-    /**
-     *
-     * @returns {NavigationSectionActions}
-     */
     openAdjustCompsInSales() {
         this.clickAdjustCompsButton()
             .clickYesButton();
         return this;
     }
 
-    /**
-     *
-     * @returns {NavigationSectionActions}
-     */
     clickCommercialRentComps() {
         navigationSectionPage.commercialRentCompsButton.click();
         return this;
     }
 
-    /**
-     *
-     * @returns {NavigationSectionActions}
-     */
     navigateToCommercialRentComps() {
         this.clickIncomeApproachButton()
             .clickCommercialArrow()
@@ -392,6 +246,36 @@ class NavigationSectionActions extends BaseActions {
     openInPlaceRentRollInResidential(isWithSave = false) {
         this.clickInPlaceRentRollButton();
         if (isWithSave) this.clickYesButton();
+        return this;
+    }
+
+    clickAmenitiesButton() {
+        navigationSectionPage.amenities.click();
+        return this;
+    }
+
+    navigateToPropertyAmenities() {
+        this.clickPropertyButton()
+            .clickAmenitiesButton()
+            .clickYesButton();
+        return this;
+    }
+
+    clickLaundryButton() {
+        navigationSectionPage.laundry.click();
+        return this;
+    }
+
+    clickMiscellaneousIncome() {
+        navigationSectionPage.miscellaneousIncome.click();
+        return this;
+    }
+
+    navigateToLaundry() {
+        this.clickIncomeApproachButton()
+            .clickMiscellaneousIncome()
+            .clickLaundryButton()
+            .clickYesButton();
         return this;
     }
 }

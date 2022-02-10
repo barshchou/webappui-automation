@@ -5,7 +5,6 @@ import {numberWithCommas} from "../../../utils/numbers.utils";
 class ValueConclusionActions extends BaseActions {
 
     /**
-     *
      * @param {string} price
      * @returns {ValueConclusionActions}
      */
@@ -15,7 +14,6 @@ class ValueConclusionActions extends BaseActions {
     }
 
     /**
-     *
      * @param {string} price
      * @returns {ValueConclusionActions}
      */
@@ -25,7 +23,6 @@ class ValueConclusionActions extends BaseActions {
     }
 
     /**
-     *
      * @param {string} price
      * @returns {ValueConclusionActions}
      */
@@ -35,7 +32,6 @@ class ValueConclusionActions extends BaseActions {
     }
 
     /**
-     *
      * @param {string} price
      * @returns {ValueConclusionActions}
      */
@@ -45,7 +41,6 @@ class ValueConclusionActions extends BaseActions {
     }
 
     /**
-     *
      * @param {Readonly<{min: string, avg: string, max: string, median: string}>} unadjustedPrices
      * @returns {ValueConclusionActions}
      */
@@ -58,7 +53,6 @@ class ValueConclusionActions extends BaseActions {
     }
 
     /**
-     *
      * @param {string} price
      * @returns {ValueConclusionActions}
      */
@@ -68,7 +62,6 @@ class ValueConclusionActions extends BaseActions {
     }
 
     /**
-     *
      * @param {string} price
      * @returns {ValueConclusionActions}
      */
@@ -78,7 +71,6 @@ class ValueConclusionActions extends BaseActions {
     }
 
     /**
-     *
      * @param {string} price
      * @returns {ValueConclusionActions}
      */
@@ -88,7 +80,6 @@ class ValueConclusionActions extends BaseActions {
     }
 
     /**
-     *
      * @param {string} price
      * @returns {ValueConclusionActions}
      */
@@ -98,7 +89,6 @@ class ValueConclusionActions extends BaseActions {
     }
 
     /**
-     *
      * @param {Readonly<{min: string, avg: string, max: string, median: string}>} adjustedPrices
      * @returns {ValueConclusionActions}
      */
@@ -111,7 +101,6 @@ class ValueConclusionActions extends BaseActions {
     }
 
     /**
-     *
      * @param {string} textToBe
      * @returns {ValueConclusionActions}
      */
@@ -121,7 +110,6 @@ class ValueConclusionActions extends BaseActions {
     }
 
     /**
-     *
      * @param {string | number} value
      * @returns {ValueConclusionActions}
      */
@@ -132,7 +120,6 @@ class ValueConclusionActions extends BaseActions {
     }
 
     /**
-     *
      * @param {string | number} value
      * @returns {ValueConclusionActions}
      */
@@ -143,7 +130,6 @@ class ValueConclusionActions extends BaseActions {
     }
 
     /**
-     *
      * @param {string} period
      * @returns {ValueConclusionActions}
      */
@@ -153,7 +139,6 @@ class ValueConclusionActions extends BaseActions {
     }
 
     /**
-     *
      * @param {string} amount
      * @returns {ValueConclusionActions}
      */
@@ -163,7 +148,6 @@ class ValueConclusionActions extends BaseActions {
     }
 
     /**
-     *
      * @param {string} value
      * @returns {ValueConclusionActions}
      */
@@ -173,7 +157,6 @@ class ValueConclusionActions extends BaseActions {
     }
 
     /**
-     *
      * @param {Readonly<{period: string, amount: string, finalValue: string}>} rowData
      * @returns {ValueConclusionActions}
      */
@@ -185,7 +168,6 @@ class ValueConclusionActions extends BaseActions {
     }
 
     /**
-     *
      * @param {string} period
      * @returns {ValueConclusionActions}
      */
@@ -195,7 +177,6 @@ class ValueConclusionActions extends BaseActions {
     }
 
     /**
-     *
      * @param {string} amount
      * @returns {ValueConclusionActions}
      */
@@ -205,7 +186,6 @@ class ValueConclusionActions extends BaseActions {
     }
 
     /**
-     *
      * @param {string} value
      * @returns {ValueConclusionActions}
      */
@@ -215,7 +195,6 @@ class ValueConclusionActions extends BaseActions {
     }
 
     /**
-     *
      * @param {Readonly<{period: string, amount: string, finalValue: string}>} rowData
      * @returns {ValueConclusionActions}
      */
@@ -227,7 +206,6 @@ class ValueConclusionActions extends BaseActions {
     }
 
     /**
-     *
      * @param {string} period
      * @returns {ValueConclusionActions}
      */
@@ -238,7 +216,6 @@ class ValueConclusionActions extends BaseActions {
     }
 
     /**
-     *
      * @param {string} amount
      * @returns {ValueConclusionActions}
      */
@@ -248,7 +225,6 @@ class ValueConclusionActions extends BaseActions {
     }
 
     /**
-     *
      * @param {string} value
      * @returns {ValueConclusionActions}
      */
@@ -258,7 +234,6 @@ class ValueConclusionActions extends BaseActions {
     }
 
     /**
-     *
      * @param {Readonly<{period: string, amount: string, finalValue: string}>} rowData
      * @returns {ValueConclusionActions}
      */
@@ -269,26 +244,17 @@ class ValueConclusionActions extends BaseActions {
         return this;
     }
 
-    /**
-     *
-     * @returns {ValueConclusionActions}
-     */
     checkMatchIncomeApproachDeductionsCheckbox() {
         valueConclusionPage.matchIncomeApproachDeductionsCheckbox.check().should("have.value", "true");
         return this;
     }
 
-    /**
-     *
-     * @returns {ValueConclusionActions}
-     */
     verifyMatchIncomeApproachDeductionsChecked() {
         valueConclusionPage.matchIncomeApproachDeductionsCheckbox.should("have.value", "true");
         return this;
     }
 
     /**
-     *
      * @param {string | number} period
      * @param {number} rowNumber
      * @returns {ValueConclusionActions}
@@ -299,7 +265,6 @@ class ValueConclusionActions extends BaseActions {
     }
 
     /**
-     *
      * @param {string} commentary
      * @returns {ValueConclusionActions}
      */
@@ -310,7 +275,6 @@ class ValueConclusionActions extends BaseActions {
     }
 
     /**
-     *
      * @param {string} commToBe
      * @returns {ValueConclusionActions}
      */
@@ -320,7 +284,6 @@ class ValueConclusionActions extends BaseActions {
     }
 
     /**
-     *
      * @param {string} commToBe
      * @returns {ValueConclusionActions}
      */
@@ -330,7 +293,6 @@ class ValueConclusionActions extends BaseActions {
     }
 
     /**
-     *
      * @param {string} commentary
      * @returns {ValueConclusionActions}
      */
@@ -340,10 +302,6 @@ class ValueConclusionActions extends BaseActions {
         return this;
     }
 
-    /**
-     *
-     * @returns {ValueConclusionActions}
-     */
     clickRevertCommentaryButton() {
         valueConclusionPage.revertCommentaryButton.click();
         return this;
@@ -375,6 +333,42 @@ class ValueConclusionActions extends BaseActions {
     verifyGrossBuildingAreaAmount(gbaToBe) {
         const textToBe = typeof gbaToBe === "string" ? gbaToBe : numberWithCommas(gbaToBe);
         valueConclusionPage.gbaAmount.should("contain.text", textToBe);
+        return this;
+    }
+
+    /**
+     * @param {number} monthsToBe
+     * @returns {ValueConclusionActions}
+     */
+    verifyAsStabilizedLaundryLossMonths(monthsToBe) {
+        valueConclusionPage.asStabilizedLaundryLossMonths.should("have.value", monthsToBe);
+        return this;
+    }
+
+    /**
+     * @param {number} monthsToBe
+     * @returns {ValueConclusionActions}
+     */
+    verifyAsCompleteLaundryLossMonths(monthsToBe) {
+        valueConclusionPage.asCompleteLessLaundryLossMonths.should("have.value", monthsToBe);
+        return this;
+    }
+
+    /**
+     * @param {string} amountToBe
+     * @returns {ValueConclusionActions}
+     */
+    verifyAsStabilizedLaundryLossAmount(amountToBe) {
+        valueConclusionPage.asStabilizedLaundryLossAmount.should("have.value", amountToBe);
+        return this;
+    }
+
+    /**
+     * @param {string} amountToBe
+     * @returns {ValueConclusionActions}
+     */
+    verifyAsCompleteLaundryLossAmount(amountToBe) {
+        valueConclusionPage.asCompleteLaundryLossAmount.should("have.value", amountToBe);
         return this;
     }
 }
