@@ -63,6 +63,11 @@ class NavigationSectionActions extends BaseActions {
         return this;
     }
 
+    clickReportButton() {
+        navigationSectionPage.reportButton.click();
+        return this;
+    }
+
     clickClientButton() {
         navigationSectionPage.clientButton.click();
         return this;
@@ -129,8 +134,9 @@ class NavigationSectionActions extends BaseActions {
         return this;
     }
 
-    openClientPageInReport() {
-        this.clickClientButton()
+    navigateToClientPage() {
+        this.clickReportButton()
+            .clickClientButton()
             .clickYesButton();
         return this;
     }
