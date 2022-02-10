@@ -339,6 +339,24 @@ class CapRateConclusionActions extends BaseActions {
         return this;
     }
 
+    /**
+     * @param {number} months
+     * @returns {CapRateConclusionActions}
+     */
+    enterAsStabilizedLaundryLossMonths(months) {
+        capRateConclusionPage.asStabilizedLessLaundryLossMonths.clear().type(months).should("have.value", months);
+        return this;
+    }
+
+    /**
+     * @param {number} months
+     * @returns {CapRateConclusionActions}
+     */
+    enterAsCompleteLaundryLossMonths(months) {
+        capRateConclusionPage.asCompleteLessLaundryLossMonths.clear().type(months).should("have.value", months);
+        return this;
+    }
+
 }
 
 export default new CapRateConclusionActions();

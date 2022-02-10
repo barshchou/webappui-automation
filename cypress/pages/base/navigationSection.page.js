@@ -26,6 +26,9 @@ class NavigationSection extends BasePage {
     get adjustCompsButton() {return cy.get("#sales-adjustment-grid");}
     get commercialRentCompsButton() {return cy.get("#commercial-rent-comps");}
     get comparableExpenses() {return cy.get("#comparable-expenses");}
+    get amenities() {return cy.get("#amenities");}
+    get laundry() {return cy.get("#laundry-income");}
+    get miscellaneousIncome() {return cy.get("#miscellaneousIncome");}
 }
 
 export default new NavigationSection();
