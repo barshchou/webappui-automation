@@ -48,4 +48,9 @@ export default class BaseActions {
         cy.get("[aria-label=Close]").click();
         return this;
     }
+
+    clickBackButton() {
+        cy.xpath("//button[.='BACK']").click();
+        return this;
+    }
 }
