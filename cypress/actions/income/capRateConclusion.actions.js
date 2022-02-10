@@ -357,6 +357,15 @@ class CapRateConclusionActions extends BaseActions {
         return this;
     }
 
+    /**
+     * @param {string | number} amount
+     * @returns {CapRateConclusionActions}
+     */
+    enterAsStabilizedCommissionFeeAmount(amount) {
+        const valueToBe = typeof amount === "string" ? amount : `-$${numberWithCommas(amount)}`;
+        capRateConclusionPage.asStabilizedCommissionFeeAmount.clear().type(amount).should("have.value", valueToBe);
+        return this;
+    }
 }
 
 export default new CapRateConclusionActions();

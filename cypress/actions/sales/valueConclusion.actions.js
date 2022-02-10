@@ -371,6 +371,16 @@ class ValueConclusionActions extends BaseActions {
         valueConclusionPage.asCompleteLaundryLossAmount.should("have.value", amountToBe);
         return this;
     }
+
+    /**
+     * @param {string | number} amountToBe
+     * @returns {ValueConclusionActions}
+     */
+    verifyAsStabilizedCommissionFeeAmount(amountToBe) {
+        const valueToBe = typeof amountToBe === "string" ? amountToBe : `-$${numberWithCommas(amountToBe)}`;
+        valueConclusionPage.asStabilizedCommissionFeeAmount.should("have.value", valueToBe);
+        return this;
+    }
 }
 
 export default new ValueConclusionActions();
