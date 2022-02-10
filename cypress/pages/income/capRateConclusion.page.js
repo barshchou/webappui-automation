@@ -34,6 +34,7 @@ class CapRateConclusionPage extends BasePage {
     // TODO: change laundry loss months locators after adding unique attributes
     get asStabilizedLessLaundryLossMonths() {return cy.get("[name='asStabilizedLossItems[0].months']");}
     get asCompleteLessLaundryLossMonths() {return cy.get("[name='asCompleteLossItems[0].months']");}
+    get asStabilizedCommissionFeeAmount() {return cy.get("[data-qa^='asStabilizedLossItems.commissionFee.amount'] input:not([type=hidden])");}
 }
 
 export default new CapRateConclusionPage();
