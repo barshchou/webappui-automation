@@ -16,7 +16,7 @@ describe("Full bowery way, multifamily as complete report", () => {
             .enterDateByType(testData.keyInfoEngagementData.dueDate)
             .enterDateByType(testData.keyInfoEngagementData.dateOfValuation)
             .uploadFile(testData.keyInfoEngagementData.engagementFileName);
-        NavigationSection.openClientPageInReport();
+        NavigationSection.navigateToClientPage();
         Report.Client.enterClientName(testData.clientData.clientName);
         NavigationSection.navigateToPropertySummary();
         Property.Summary.verifySiteDetails(testData.siteDetails)
