@@ -11,7 +11,7 @@ export const getEnvUrl = () => {
             envUrl = Enums.ENV_URLS.PROD;
             break;
         default:
-            envUrl = Enums.ENV_URLS.DEV;
+            envUrl = Enums.ENV_URLS.STAGING;
     }
     if (Cypress.env("customEnv")) {
         envUrl = Cypress.env("customEnv");
