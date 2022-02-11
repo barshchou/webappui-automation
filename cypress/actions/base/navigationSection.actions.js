@@ -277,10 +277,27 @@ class NavigationSectionActions extends BaseActions {
         return this;
     }
 
+    clickPreviewEditButton() {
+        navigationSectionPage.previewEditButton.click();
+        return this;
+    }
+
+    clickLetterOfTransmittal() {
+        navigationSectionPage.letterOfTransmittal.click();
+        return this;
+    }
+
     navigateToLaundry() {
         this.clickIncomeApproachButton()
             .clickMiscellaneousIncome()
             .clickLaundryButton()
+            .clickYesButton();
+        return this;
+    }
+
+    navigateToLetterOfTransmittal() {
+        this.clickPreviewEditButton()
+            .clickLetterOfTransmittal()
             .clickYesButton();
         return this;
     }

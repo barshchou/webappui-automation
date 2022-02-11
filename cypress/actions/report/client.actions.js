@@ -1,5 +1,6 @@
 import BaseActions from "../base/base.actions";
 import clientPage from "../../pages/report/client.page";
+import {replaceEntersWithLineBreak} from "../../../utils/string.utils";
 
 class ClientActions extends BaseActions{
     /**
@@ -13,6 +14,15 @@ class ClientActions extends BaseActions{
 
     clickAddClientButton() {
         clientPage.addClientButton.click();
+        return this;
+    }
+
+    /**
+     * @param {string} textToType
+     * @returns {ClientActions}
+     */
+    enterAppraiserCommentary(textToType) {
+        clientPage.appraiserCommentary.clear().type(textToType).should("have.text", replaceEntersWithLineBreak(textToType));
         return this;
     }
 }
