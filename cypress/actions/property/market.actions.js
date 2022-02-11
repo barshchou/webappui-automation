@@ -1,6 +1,6 @@
 import BaseActions from "../base/base.actions";
 import marketPage from "../../pages/property/market.page";
-import {getQuarter, getYearFromDate} from "../../../utils/date.utils";
+import {getQuarter, getYearFromDate, isCorrectQuarter} from "../../../utils/date.utils";
 
 class MarketActions extends BaseActions{
     /**
@@ -158,6 +158,16 @@ class MarketActions extends BaseActions{
             .enterMultifamilySubmarket(marketResearch.submarket)
             .verifyMarketQuarter(getQuarter(marketResearch.dateOfValuation))
             .verifyMarketYear(getYearFromDate(marketResearch.dateOfValuation));
+        return this;
+    }
+
+    enterMarketQuarter(quarter) {
+        if (isCorrectQuarter(quarter)) {
+            marketPage.marketQuarter.clear().type(quarter);
+            this.verifyMarketQuarter(quarter);
+        } else {
+            throw new Error("Incorrect quarter to enter");
+        }
         return this;
     }
 }
