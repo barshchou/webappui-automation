@@ -30,6 +30,8 @@ class NavigationSection extends BasePage {
     get laundry() {return cy.get("#laundry-income");}
     get miscellaneousIncome() {return cy.get("#miscellaneousIncome");}
     get reportButton() {return cy.get("#report > svg");}
+    get previewEditButton() {return cy.get("#preview-and-edit > svg");}
+    get letterOfTransmittal() {return cy.get("#letter-of-transmittal");}
 }
 
 export default new NavigationSection();
