@@ -32,5 +32,5 @@ jobs:
         env:
           CYPRESS_USERNAME: ${{ secrets.USERNAME }}
           CYPRESS_PASSWORD: ${{ secrets.PASSWORD }}
-          CYPRESS_RECORD_KEY: ${{ secrets.TEST_LAUNCHES_RECORD_KEY }}
+          CYPRESS_RECORD_KEY: ${{ secrets.RECORD_KEY }}
           CYPRESS_url: ${{ github.event.inputs.choice }}
