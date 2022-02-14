@@ -47,6 +47,9 @@ class ProFormaPage extends BasePage {
     get perSFNetOpIncome() {return cy.get("[data-qa=netOperatingIncome-psf-cell]");}
     get perUnitNetOpIncome() {return cy.get("[data-qa=netOperatingIncome-perUnit-cell]");}
     get operatingExpenseRatio() {return cy.get("[data-qa=operatingExpenseRatio-value-cell]");}
+    getCommercialUseVCLossRow(useText) {return cy.contains(`${useText} Commercial V/C Loss`);}
+    getCommercialUseVCLossPerUnitCell(useText) {return this.getCommercialUseVCLossRow(useText).siblings("[data-qa*=perUnit]");}
+    getCommercialUseVCLossTotal(useText) {return this.getCommercialUseVCLossRow(useText).siblings("[data-qa*=total]");}
 }
 
 export default new ProFormaPage();

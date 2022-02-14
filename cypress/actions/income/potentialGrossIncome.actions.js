@@ -1,6 +1,7 @@
 import BaseActions from "../base/base.actions";
 import grossIncomePage from "../../pages/income/potentialGrossIncome.page";
 import {getNumberFromDollarNumberWithCommas, numberWithCommas} from "../../../utils/numbers.utils";
+import potentialGrossIncomePage from "../../pages/income/potentialGrossIncome.page";
 
 class PotentialGrossIncomeActions extends BaseActions {
 
@@ -136,6 +137,17 @@ class PotentialGrossIncomeActions extends BaseActions {
             .verifyPotentialGrossIncome()
             .verifyLessResidentialVCLoss()
             .verifyEffectiveGrossIncome();
+        return this;
+    }
+
+    /**
+     * @param {string | number} percentage
+     * @param {string} useValue
+     * @returns {PotentialGrossIncomeActions}
+     */
+    enterCommercialVCLossPercentage(percentage, useValue) {
+        const valueToBe = typeof percentage === "string" ? percentage : percentage.toFixed(2);
+        potentialGrossIncomePage.getCommercialVCLossPercentage(useValue).clear().type(percentage).should("have.value", valueToBe);
         return this;
     }
 }
