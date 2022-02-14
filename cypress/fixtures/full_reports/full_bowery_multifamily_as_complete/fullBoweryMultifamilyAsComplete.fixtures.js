@@ -91,7 +91,8 @@ const marketResearchFixture = () => {
         submarket: "IL-South Chicago",
         dateOfValuation: keyInfoEngagementFixture().dateOfValuation.date,
         marketYear: getTodayDateString(),
-        multifamilySubmarketDocument: "2021 Q3 IL - South Chicago - Multifamily Submarket_FINAL"
+        quarter: "Q4",
+        multifamilySubmarketDocument: "2021 Q4 IL - South Chicago - Multifamily Submarket_FINAL"
     };
 };
 

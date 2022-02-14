@@ -16,7 +16,7 @@ class CommercialRentRollActions extends BaseActions {
      * @param {string} backColor
      * @returns {CommercialRentRollActions}
      */
-    clickMonthlyBasisButton(backColor = "rgb(65, 96, 211)") {
+    clickMonthlyBasisButton(backColor = "rgb(46, 67, 147)") {
         rentRollPage.monthlyBasisButton.should("not.have.css", "background-color", backColor)
             .click().should("have.css", "background-color", backColor);
         return this;
@@ -26,7 +26,7 @@ class CommercialRentRollActions extends BaseActions {
      * @param {string} backColor
      * @returns {CommercialRentRollActions}
      */
-    clickAnnuallyBasisButton(backColor = "rgb(65, 96, 211)") {
+    clickAnnuallyBasisButton(backColor = "rgb(46, 67, 147)") {
         rentRollPage.annuallyBasisButton.should("not.have.css", "background-color", backColor)
             .click().should("have.css", "background-color", backColor);
         return this;
@@ -37,7 +37,7 @@ class CommercialRentRollActions extends BaseActions {
      * @param {string} backColor
      * @returns {CommercialRentRollActions}
      */
-    clickPerSquareFootButton(isFirstTime, backColor = "rgb(65, 96, 211)") {
+    clickPerSquareFootButton(isFirstTime, backColor = "rgb(46, 67, 147)") {
         if (isFirstTime) {
             rentRollPage.perSquareBasisButton.should("have.css", "background-color", backColor).click();
         } else {
@@ -48,7 +48,7 @@ class CommercialRentRollActions extends BaseActions {
     }
 
 
-    clickPerSquareFootPerMonthButton(backColor = "rgb(65, 96, 211)") {
+    clickPerSquareFootPerMonthButton(backColor = "rgb(46, 67, 147)") {
        rentRollPage.perSquareFootPerMonthButton.should("not.have.css", "background-color", backColor)
            .click().should("have.css", "background-color", backColor);
        rentRollPage.rentPerSfPerMonthColumnName.scrollIntoView().should("exist");
@@ -59,7 +59,7 @@ class CommercialRentRollActions extends BaseActions {
      * @param {string} backColor
      * @returns {CommercialRentRollActions}
      */
-    verifyAllBasisButtons(backColor = "rgb(65, 96, 211)") {
+    verifyAllBasisButtons(backColor = "rgb(46, 67, 147)") {
         this.clickPerSquareFootButton(true, backColor)
             .clickMonthlyBasisButton(backColor)
             .clickAnnuallyBasisButton(backColor)

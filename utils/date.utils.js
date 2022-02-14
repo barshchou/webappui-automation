@@ -61,3 +61,7 @@ export const getQuarter = (dateString) => {
         return "Q3";
     }
 };
+
+export const isCorrectQuarter = (quarter) => {
+    return quarter === "Q1" || quarter === "Q2" || quarter === "Q3" || quarter === "Q4";
+};

@@ -29,6 +29,7 @@ describe("Full bowery way, multifamily as complete report", () => {
             .clickSaveContinueButton();
         Property.Market.verifyTimeOnMarket(testData.timeOnMarket)
             .fillMarketResearch(testData.marketResearch)
+            .enterMarketQuarter(testData.marketResearch.quarter)
             .clickPullFromDropbox()
             .verifyMultifamilySubmarketAnalysisHasDocument(testData.marketResearch.multifamilySubmarketDocument)
             .clickSaveContinueButton();
