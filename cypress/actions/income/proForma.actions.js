@@ -1,5 +1,6 @@
 import BaseActions from "../base/base.actions";
-import proFromaPage from "../../pages/income/proForma.page";
+import proFormaPage from "../../pages/income/proForma.page";
+import {getNumberFromDollarNumberWithCommas, numberWithCommas} from "../../../utils/numbers.utils";
 
 class ProFormaActions extends BaseActions {
 
@@ -9,7 +10,7 @@ class ProFormaActions extends BaseActions {
      * @returns {ProFormaActions}
      */
     verifyTotalPotentialResIncome(incomeToBe) {
-        proFromaPage.totalPotentialResIncome.should("have.text", incomeToBe);
+        proFormaPage.totalPotentialResIncome.should("have.text", incomeToBe);
         return this;
     }
 
@@ -19,7 +20,7 @@ class ProFormaActions extends BaseActions {
      * @returns {ProFormaActions}
      */
     verifyPsfPotentialResIncome(incomeToBe) {
-        proFromaPage.psfPotentialResIncome.should("have.text", incomeToBe);
+        proFormaPage.psfPotentialResIncome.should("have.text", incomeToBe);
         return this;
     }
 
@@ -29,7 +30,7 @@ class ProFormaActions extends BaseActions {
      * @returns {ProFormaActions}
      */
     verifyPerUnitPotentialResIncome(incomeToBe) {
-        proFromaPage.perUnitPotentialResIncome.should("have.text", incomeToBe);
+        proFormaPage.perUnitPotentialResIncome.should("have.text", incomeToBe);
         return this;
     }
 
@@ -51,7 +52,7 @@ class ProFormaActions extends BaseActions {
      * @returns {ProFormaActions}
      */
     verifyTotalPotGrossIncome(incomeToBe) {
-        proFromaPage.totalPotGrossIncome.should("have.text", incomeToBe);
+        proFormaPage.totalPotGrossIncome.should("have.text", incomeToBe);
         return this;
     }
 
@@ -61,7 +62,7 @@ class ProFormaActions extends BaseActions {
      * @returns {ProFormaActions}
      */
     verifyPerSFPotGrossIncome(incomeToBe) {
-        proFromaPage.perSFPotGrossIncome.should("have.text", incomeToBe);
+        proFormaPage.perSFPotGrossIncome.should("have.text", incomeToBe);
         return this;
     }
 
@@ -71,7 +72,7 @@ class ProFormaActions extends BaseActions {
      * @returns {ProFormaActions}
      */
     verifyPerUnitPotGrossIncome(incomeToBe) {
-        proFromaPage.perUnitPotGrossIncome.should("have.text", incomeToBe);
+        proFormaPage.perUnitPotGrossIncome.should("have.text", incomeToBe);
         return this;
     }
 
@@ -93,7 +94,7 @@ class ProFormaActions extends BaseActions {
      * @returns {ProFormaActions}
      */
     verifyTotalResVCLoss(lossToBe) {
-        proFromaPage.totalResVCLoss.should("have.text", lossToBe);
+        proFormaPage.totalResVCLoss.should("have.text", lossToBe);
         return this;
     }
 
@@ -103,7 +104,7 @@ class ProFormaActions extends BaseActions {
      * @returns {ProFormaActions}
      */
     verifyPerSFResVCLoss(lossToBe) {
-        proFromaPage.perSfResVCLoss.should("have.text", lossToBe);
+        proFormaPage.perSfResVCLoss.should("have.text", lossToBe);
         return this;
     }
 
@@ -113,7 +114,7 @@ class ProFormaActions extends BaseActions {
      * @returns {ProFormaActions}
      */
     verifyPerUnitResVCLoss(lossToBe) {
-        proFromaPage.perUnitResVCLoss.should("have.text", lossToBe);
+        proFormaPage.perUnitResVCLoss.should("have.text", lossToBe);
         return this;
     }
 
@@ -135,7 +136,7 @@ class ProFormaActions extends BaseActions {
      * @returns {ProFormaActions}
      */
     verifyEffectiveGrossIncomeTotal(incomeToBe) {
-        proFromaPage.totalEffectiveGrossIncome.should("have.text", incomeToBe);
+        proFormaPage.totalEffectiveGrossIncome.should("have.text", incomeToBe);
         return this;
     }
 
@@ -145,7 +146,7 @@ class ProFormaActions extends BaseActions {
      * @returns {ProFormaActions}
      */
     verifyPerSFEffectiveGrossIncome(incomeToBe) {
-        proFromaPage.perSFEffectiveGrossIncome.should("have.text", incomeToBe);
+        proFormaPage.perSFEffectiveGrossIncome.should("have.text", incomeToBe);
         return this;
     }
 
@@ -155,7 +156,7 @@ class ProFormaActions extends BaseActions {
      * @returns {ProFormaActions}
      */
     verifyPerUnitEffectiveGrossIncome(incomeToBe) {
-        proFromaPage.perUnitEffectiveGrossIncome.should("have.text", incomeToBe);
+        proFormaPage.perUnitEffectiveGrossIncome.should("have.text", incomeToBe);
         return this;
     }
 
@@ -177,7 +178,7 @@ class ProFormaActions extends BaseActions {
      * @returns {ProFormaActions}
      */
     verifyTotalRETaxes(taxesToBe) {
-        proFromaPage.totalRETaxes.should("have.text", taxesToBe);
+        proFormaPage.totalRETaxes.should("have.text", taxesToBe);
         return this;
     }
 
@@ -187,7 +188,7 @@ class ProFormaActions extends BaseActions {
      * @returns {ProFormaActions}
      */
     verifyPerSfRETaxes(taxesToBe) {
-        proFromaPage.perSFRETaxes.should("have.text", taxesToBe);
+        proFormaPage.perSFRETaxes.should("have.text", taxesToBe);
         return this;
     }
 
@@ -197,7 +198,7 @@ class ProFormaActions extends BaseActions {
      * @returns {ProFormaActions}
      */
     verifyPerUnitRETaxes(taxesToBe) {
-        proFromaPage.perUnitTaxes.should("have.text", taxesToBe);
+        proFormaPage.perUnitTaxes.should("have.text", taxesToBe);
         return this;
     }
 
@@ -219,7 +220,7 @@ class ProFormaActions extends BaseActions {
      * @returns {ProFormaActions}
      */
     verifyTotalInsurance(textToBe) {
-        proFromaPage.totalInsurance.should("have.text", textToBe);
+        proFormaPage.totalInsurance.should("have.text", textToBe);
         return this;
     }
 
@@ -229,7 +230,7 @@ class ProFormaActions extends BaseActions {
      * @returns {ProFormaActions}
      */
     verifyPerSFInsurance(textToBe) {
-        proFromaPage.perSFInsurance.should("have.text", textToBe);
+        proFormaPage.perSFInsurance.should("have.text", textToBe);
         return this;
     }
 
@@ -239,7 +240,7 @@ class ProFormaActions extends BaseActions {
      * @returns {ProFormaActions}
      */
     verifyPerUnitInsurance(textToBe) {
-        proFromaPage.perUnitInsurance.should("have.text", textToBe);
+        proFormaPage.perUnitInsurance.should("have.text", textToBe);
         return this;
     }
 
@@ -261,7 +262,7 @@ class ProFormaActions extends BaseActions {
      * @returns {ProFormaActions}
      */
     verifyElectricityTotal(textToBe) {
-        proFromaPage.totalElectricity.should("have.text", textToBe);
+        proFormaPage.totalElectricity.should("have.text", textToBe);
         return this;
     }
 
@@ -271,7 +272,7 @@ class ProFormaActions extends BaseActions {
      * @returns {ProFormaActions}
      */
     verifyPerSFElectricity(textToBe) {
-        proFromaPage.perSFElectricity.should("have.text", textToBe);
+        proFormaPage.perSFElectricity.should("have.text", textToBe);
         return this;
     }
 
@@ -281,7 +282,7 @@ class ProFormaActions extends BaseActions {
      * @returns {ProFormaActions}
      */
     verifyPerUnitElectricity(textToBe) {
-        proFromaPage.perUnitElectricity.should("have.text", textToBe);
+        proFormaPage.perUnitElectricity.should("have.text", textToBe);
         return this;
     }
 
@@ -303,7 +304,7 @@ class ProFormaActions extends BaseActions {
      * @returns {ProFormaActions}
      */
     verifyTotalRepairs(textToBe) {
-        proFromaPage.totalRepairs.should("have.text", textToBe);
+        proFormaPage.totalRepairs.should("have.text", textToBe);
         return this;
     }
 
@@ -313,7 +314,7 @@ class ProFormaActions extends BaseActions {
      * @returns {ProFormaActions}
      */
     verifyPerSFRepairs(textToBe) {
-        proFromaPage.perSFRepairs.should("have.text", textToBe);
+        proFormaPage.perSFRepairs.should("have.text", textToBe);
         return this;
     }
 
@@ -323,7 +324,7 @@ class ProFormaActions extends BaseActions {
      * @returns {ProFormaActions}
      */
     verifyPerUnitRepairs(textToBe) {
-        proFromaPage.perUnitRepairs.should("have.text", textToBe);
+        proFormaPage.perUnitRepairs.should("have.text", textToBe);
         return this;
     }
 
@@ -345,7 +346,7 @@ class ProFormaActions extends BaseActions {
      * @returns {ProFormaActions}
      */
     verifyTotalPayroll(textToBe) {
-        proFromaPage.totalPayroll.should("have.text", textToBe);
+        proFormaPage.totalPayroll.should("have.text", textToBe);
         return this;
     }
 
@@ -355,7 +356,7 @@ class ProFormaActions extends BaseActions {
      * @returns {ProFormaActions}
      */
     verifyPerSFPayroll(textToBe) {
-        proFromaPage.perSFPayroll.should("have.text", textToBe);
+        proFormaPage.perSFPayroll.should("have.text", textToBe);
         return this;
     }
 
@@ -365,7 +366,7 @@ class ProFormaActions extends BaseActions {
      * @returns {ProFormaActions}
      */
     verifyPerUnitPayroll(textToBe) {
-        proFromaPage.perUnitPayroll.should("have.text", textToBe);
+        proFormaPage.perUnitPayroll.should("have.text", textToBe);
         return this;
     }
 
@@ -387,7 +388,7 @@ class ProFormaActions extends BaseActions {
      * @returns {ProFormaActions}
      */
     verifyTotalGeneral(textToBe) {
-        proFromaPage.totalGeneral.should("have.text", textToBe);
+        proFormaPage.totalGeneral.should("have.text", textToBe);
         return this;
     }
 
@@ -397,7 +398,7 @@ class ProFormaActions extends BaseActions {
      * @returns {ProFormaActions}
      */
     verifyPerSFGeneral(textToBe) {
-        proFromaPage.perSFGeneral.should("have.text", textToBe);
+        proFormaPage.perSFGeneral.should("have.text", textToBe);
         return this;
     }
 
@@ -407,7 +408,7 @@ class ProFormaActions extends BaseActions {
      * @returns {ProFormaActions}
      */
     verifyPerUnitGeneral(textToBe) {
-        proFromaPage.perUnitGeneral.should("have.text", textToBe);
+        proFormaPage.perUnitGeneral.should("have.text", textToBe);
         return this;
     }
 
@@ -429,7 +430,7 @@ class ProFormaActions extends BaseActions {
      * @returns {ProFormaActions}
      */
     verifyTotalManagement(textToBe) {
-        proFromaPage.totalManagement.should("have.text", textToBe);
+        proFormaPage.totalManagement.should("have.text", textToBe);
         return this;
     }
 
@@ -439,7 +440,7 @@ class ProFormaActions extends BaseActions {
      * @returns {ProFormaActions}
      */
     verifyPerSFManagement(textToBe) {
-        proFromaPage.perSFManagement.should("have.text", textToBe);
+        proFormaPage.perSFManagement.should("have.text", textToBe);
         return this;
     }
 
@@ -449,7 +450,7 @@ class ProFormaActions extends BaseActions {
      * @returns {ProFormaActions}
      */
     verifyPerUnitManagement(textToBe) {
-        proFromaPage.perUnitManagement.should("have.text", textToBe);
+        proFormaPage.perUnitManagement.should("have.text", textToBe);
         return this;
     }
 
@@ -471,7 +472,7 @@ class ProFormaActions extends BaseActions {
      * @returns {ProFormaActions}
      */
     verifyTotalReserves(textToBe) {
-        proFromaPage.totalReserves.should("have.text", textToBe);
+        proFormaPage.totalReserves.should("have.text", textToBe);
         return this;
     }
 
@@ -481,7 +482,7 @@ class ProFormaActions extends BaseActions {
      * @returns {ProFormaActions}
      */
     verifyPerSFReserves(textToBe) {
-        proFromaPage.perSFReserves.should("have.text", textToBe);
+        proFormaPage.perSFReserves.should("have.text", textToBe);
         return this;
     }
 
@@ -491,7 +492,7 @@ class ProFormaActions extends BaseActions {
      * @returns {ProFormaActions}
      */
     verifyPerUnitReserves(textToBe) {
-        proFromaPage.perUnitReserves.should("have.text", textToBe);
+        proFormaPage.perUnitReserves.should("have.text", textToBe);
         return this;
     }
 
@@ -513,7 +514,7 @@ class ProFormaActions extends BaseActions {
      * @returns {ProFormaActions}
      */
     verifyTotalToe(textToBe) {
-        proFromaPage.totalToe.should("have.text", textToBe);
+        proFormaPage.totalToe.should("have.text", textToBe);
         return this;
     }
 
@@ -523,7 +524,7 @@ class ProFormaActions extends BaseActions {
      * @returns {ProFormaActions}
      */
     verifyPerSFToe(textToBe) {
-        proFromaPage.perSFToe.should("have.text", textToBe);
+        proFormaPage.perSFToe.should("have.text", textToBe);
         return this;
     }
 
@@ -533,7 +534,7 @@ class ProFormaActions extends BaseActions {
      * @returns {ProFormaActions}
      */
     verifyPerUnitToe(textToBe) {
-        proFromaPage.perUnitToe.should("have.text", textToBe);
+        proFormaPage.perUnitToe.should("have.text", textToBe);
         return this;
     }
 
@@ -555,7 +556,7 @@ class ProFormaActions extends BaseActions {
      * @returns {ProFormaActions}
      */
     verifyTotalToeNetRe(textToBe) {
-        proFromaPage.totalToeNetRe.should("have.text", textToBe);
+        proFormaPage.totalToeNetRe.should("have.text", textToBe);
         return this;
     }
 
@@ -565,7 +566,7 @@ class ProFormaActions extends BaseActions {
      * @returns {ProFormaActions}
      */
     verifyPerSFToeNetRe(textToBe) {
-        proFromaPage.perSFToeNetRe.should("have.text", textToBe);
+        proFormaPage.perSFToeNetRe.should("have.text", textToBe);
         return this;
     }
 
@@ -575,7 +576,7 @@ class ProFormaActions extends BaseActions {
      * @returns {ProFormaActions}
      */
     verifyPerUnitToeNetRe(textToBe) {
-        proFromaPage.perUnitToeNetRe.should("have.text", textToBe);
+        proFormaPage.perUnitToeNetRe.should("have.text", textToBe);
         return this;
     }
 
@@ -597,7 +598,7 @@ class ProFormaActions extends BaseActions {
      * @returns {ProFormaActions}
      */
     verifyTotalNetOpIncome(textToBe) {
-        proFromaPage.totalNetOpIncome.should("have.text", textToBe);
+        proFormaPage.totalNetOpIncome.should("have.text", textToBe);
         return this;
     }
 
@@ -607,7 +608,7 @@ class ProFormaActions extends BaseActions {
      * @returns {ProFormaActions}
      */
     verifyPerSFNetOpIncome(textToBe) {
-        proFromaPage.perSFNetOpIncome.should("have.text", textToBe);
+        proFormaPage.perSFNetOpIncome.should("have.text", textToBe);
         return this;
     }
 
@@ -617,7 +618,7 @@ class ProFormaActions extends BaseActions {
      * @returns {ProFormaActions}
      */
     verifyPerUnitNetOpIncome(textToBe) {
-        proFromaPage.perUnitNetOpIncome.should("have.text", textToBe);
+        proFormaPage.perUnitNetOpIncome.should("have.text", textToBe);
         return this;
     }
 
@@ -639,7 +640,21 @@ class ProFormaActions extends BaseActions {
      * @returns {ProFormaActions}
      */
     verifyOperatingExpenseRatio(textToBe) {
-        proFromaPage.operatingExpenseRatio.should("have.text", textToBe);
+        proFormaPage.operatingExpenseRatio.should("have.text", textToBe);
+        return this;
+    }
+
+    /**
+     * @param {string} useText
+     * @param {number} numberOfResUnits
+     * @returns {ProFormaActions}
+     */
+    verifyCommercialUseVCLossPerUnit(useText, numberOfResUnits) {
+        proFormaPage.getCommercialUseVCLossTotal(useText).invoke("text").then(totalText => {
+            const totalNumber = getNumberFromDollarNumberWithCommas(totalText);
+            const perUnitTextToBe = `-$${numberWithCommas(totalNumber / numberOfResUnits)}`;
+            proFormaPage.getCommercialUseVCLossPerUnitCell(useText).should("have.text", perUnitTextToBe);
+        });
         return this;
     }
 }

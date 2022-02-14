@@ -13,6 +13,7 @@ class PotentialGrossIncomePage extends BasePage {
     get potentialGrossIncome() {return cy.get("[data-qa=potentialGrossIncome-row] > [data-qa=value-cell]");}
     get lessResidentialVCLoss() {return cy.get("[data-qa^=lessResidentialVCLoss] > [data-qa=value-cell]");}
     get effectiveGrossIncome() {return cy.get("[data-qa=effectiveGrossIncome-row] > [data-qa=value-cell]");}
+    getCommercialVCLossPercentage(useValue) {return cy.get(`[name='commercialVCLossPercentage.${useValue}']`);}
 
 }
 export default new PotentialGrossIncomePage();

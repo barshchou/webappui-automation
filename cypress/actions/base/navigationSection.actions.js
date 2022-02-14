@@ -301,6 +301,30 @@ class NavigationSectionActions extends BaseActions {
             .clickYesButton();
         return this;
     }
+
+    clickPotentialGrossIncome() {
+        navigationSectionPage.potentialGrossIncome.click();
+        return this;
+    }
+
+    navigateToPotentialGrossIncome() {
+        this.clickIncomeApproachButton()
+            .clickPotentialGrossIncome()
+            .clickYesButton();
+        return this;
+    }
+
+    clickProForma() {
+        navigationSectionPage.proForma.click();
+        return this;
+    }
+
+    navigateToProForma() {
+        this.clickIncomeApproachButton()
+            .clickProForma()
+            .clickYesButton();
+        return this;
+    }
 }
 
 export default new NavigationSectionActions();
