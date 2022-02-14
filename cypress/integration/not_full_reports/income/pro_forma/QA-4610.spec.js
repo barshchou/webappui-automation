@@ -4,7 +4,7 @@ import NavigationSection from "../../../../actions/base/navigationSection.action
 import Property from "../../../../actions/property/property.manager";
 import Income from "../../../../actions/income/income.manager";
 
-// TODO: Return this test to test run after bug fixing
+// TODO: Return this test to test run after https://bowery.atlassian.net/browse/WEB-4428 bug fixing
 describe.skip("Less [USE (Property>Commercial Units)] Commercial V/C Loss @ X% -> Per Unit", () => {
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
