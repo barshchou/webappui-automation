@@ -32,7 +32,7 @@ export const isHasDecimalPartMoreNumberOfDigits = (number, digitsNumber = 2) => 
 
 export const getNumberFromDollarNumberWithCommas = (stringNumber) => {
   return typeof stringNumber === "string" ? Number(stringNumber.replace("$", "")
-      .replace(",", "").replace("-", "")) : stringNumber;
+      .replace(",", "")) : stringNumber;
 };
 
 const getZerosString = (numberOfZeros) => {
