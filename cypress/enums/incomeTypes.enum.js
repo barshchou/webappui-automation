@@ -1,5 +1,6 @@
 const types = {
     RESIDENTIAL: "multifamily",
+    COMMERCIAL: "commercial",
     BOTH: "mixed-use"
 };
 
