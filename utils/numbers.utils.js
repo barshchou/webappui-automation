@@ -35,6 +35,10 @@ export const getNumberFromDollarNumberWithCommas = (stringNumber) => {
       .replace(",", "")) : stringNumber;
 };
 
+export const getNumberFromMinusDollarNumberWithCommas = (stringNumber) => {
+    return Number(`${getNumberFromDollarNumberWithCommas(stringNumber)}`.replace("-", ""));
+};
+
 const getZerosString = (numberOfZeros) => {
     let stringToReturn = "";
     for (let i = 0; i < numberOfZeros; i++) {
