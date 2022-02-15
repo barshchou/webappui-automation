@@ -50,6 +50,7 @@ class ProFormaPage extends BasePage {
     getCommercialUseVCLossRow(useText) {return cy.contains(`${useText} Commercial V/C Loss`);}
     getCommercialUseVCLossPerUnitCell(useText) {return this.getCommercialUseVCLossRow(useText).siblings("[data-qa*=perUnit]");}
     getCommercialUseVCLossTotal(useText) {return this.getCommercialUseVCLossRow(useText).siblings("[data-qa*=total]");}
+    getCommercialUseVCLossPerSF(useText) {return this.getCommercialUseVCLossRow(useText).siblings("[data-qa*=psf]");}
 }
 
 export default new ProFormaPage();

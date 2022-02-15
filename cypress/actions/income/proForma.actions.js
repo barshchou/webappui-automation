@@ -1,6 +1,9 @@
 import BaseActions from "../base/base.actions";
 import proFormaPage from "../../pages/income/proForma.page";
-import {getNumberFromDollarNumberWithCommas, numberWithCommas} from "../../../utils/numbers.utils";
+import {
+    getNumberFromMinusDollarNumberWithCommas,
+    numberWithCommas
+} from "../../../utils/numbers.utils";
 
 class ProFormaActions extends BaseActions {
 
@@ -651,9 +654,33 @@ class ProFormaActions extends BaseActions {
      */
     verifyCommercialUseVCLossPerUnit(useText, numberOfResUnits) {
         proFormaPage.getCommercialUseVCLossTotal(useText).invoke("text").then(totalText => {
-            const totalNumber = getNumberFromDollarNumberWithCommas(totalText);
+            const totalNumber = getNumberFromMinusDollarNumberWithCommas(totalText);
             const perUnitTextToBe = `-$${numberWithCommas(totalNumber / numberOfResUnits)}`;
             proFormaPage.getCommercialUseVCLossPerUnitCell(useText).should("have.text", perUnitTextToBe);
+        });
+        return this;
+    }
+
+    /**
+     * @param {string} totalToBe
+     * @param {string} useText
+     * @returns {ProFormaActions}
+     */
+    verifyCommercialUseVCLossTotal(useText, totalToBe) {
+        proFormaPage.getCommercialUseVCLossTotal(useText).should("have.text", totalToBe);
+        return this;
+    }
+
+    /**
+     * @param {string} useText
+     * @param {number} grossBuildingArea
+     * @returns {ProFormaActions}
+     */
+    verifyCommercialUseVCPerSF(useText, grossBuildingArea) {
+        proFormaPage.getCommercialUseVCLossTotal(useText).invoke("text").then(totalText => {
+            const totalNumber = getNumberFromMinusDollarNumberWithCommas(totalText);
+            const perSFTextToBe = `-$${numberWithCommas(totalNumber / grossBuildingArea).toFixed(2)}`;
+            proFormaPage.getCommercialUseVCLossPerSF(useText).should("have.text", perSFTextToBe);
         });
         return this;
     }
