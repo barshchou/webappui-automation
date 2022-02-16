@@ -15,7 +15,7 @@ describe("Verify the Annual Rent Total is calculated correctly in the grid.", ()
         Property.Summary.enterNumberOfCommercialUnits(testData.general.numberOfUnits);
         NavigationSection.clickCommercialUnits()
             .clickYesButton();
-        Property.CommercialUnits.enterListOfCommercialUnits(testData.general.squareFeetList, testData.general.numberOfUnits);
+        Property.CommercialUnits.enterListUnitSF(testData.general.squareFeetList, testData.general.numberOfUnits);
         NavigationSection.navigateToCommercialInPlaceRentRoll();
         Income.Commercial.InPlaceRentRoll.chooseListLeaseStatuses(testData.general.leaseStatusesList, testData.general.numberOfUnits)
             .clickAnnuallyBasisButton()

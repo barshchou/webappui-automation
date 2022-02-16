@@ -43,12 +43,11 @@ class CommercialUnitsActions extends BaseActions {
     }
 
     /**
-     *
-     * @param squareFeetList
-     * @param numberOfUnits
+     * @param {Array<number | string>} squareFeetList
+     * @param {number} numberOfUnits
      * @returns {CommercialUnitsActions}
      */
-    enterListOfCommercialUnits(squareFeetList, numberOfUnits) {
+    enterListUnitSF(squareFeetList, numberOfUnits) {
         for (let i = 0; i < numberOfUnits; i++) {
             this.enterUnitSFByUnitIndex(squareFeetList[i], i);
         }

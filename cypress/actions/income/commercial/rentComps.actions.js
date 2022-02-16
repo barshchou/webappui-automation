@@ -24,8 +24,8 @@ class CommercialRentCompsActions extends BaseActions {
     }
 
     /**
-     *
      * @param {string} attribute
+     * @returns {CommercialRentCompsActions}
      */
     checkCheckboxByQAAttr(attribute) {
         rentCompsPage.getNotCheckedCheckboxByQAAttr(attribute).should("exist").check();
@@ -35,8 +35,8 @@ class CommercialRentCompsActions extends BaseActions {
     }
 
     /**
-     *
      * @param {string} attribute
+     * @returns {CommercialRentCompsActions}
      */
     uncheckCheckboxByQAAttr(attribute) {
         rentCompsPage.getCheckedCheckboxByQAAttr(attribute).should("exist").uncheck();
@@ -51,8 +51,8 @@ class CommercialRentCompsActions extends BaseActions {
     }
 
     /**
-     *
      * @param {string} option
+     * @returns {CommercialRentCompsActions}
      */
     selectSortByOption(option) {
         rentCompsPage.sortByDropdown.click();
@@ -63,6 +63,15 @@ class CommercialRentCompsActions extends BaseActions {
 
     verifyMapClosedByDefault() {
         rentCompsPage.mapDropdown.should("have.attr", "aria-expanded", "false");
+        return this;
+    }
+
+    /**
+     * @param {string} address
+     * @returns {CommercialRentCompsActions}
+     */
+    addCompFromMapByAddress(address) {
+        rentCompsPage.getAddCompButtonByAddress(address).click({force: true});
         return this;
     }
 }
