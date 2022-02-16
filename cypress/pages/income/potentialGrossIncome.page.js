@@ -14,6 +14,9 @@ class PotentialGrossIncomePage extends BasePage {
     get lessResidentialVCLoss() {return cy.get("[data-qa^=lessResidentialVCLoss] > [data-qa=value-cell]");}
     get effectiveGrossIncome() {return cy.get("[data-qa=effectiveGrossIncome-row] > [data-qa=value-cell]");}
     getCommercialVCLossPercentage(useValue) {return cy.get(`[name='commercialVCLossPercentage.${useValue}']`);}
+    getSubjectAreaCommercialVacancy(useValue) {return cy.get(`[name='subjectAreaCommercialVacancy.${useValue}']`);}
+    getCommercialSubjectSuitabilityRadio(useValue) {return cy.get(`[name='commercialSubjectSuitability.${useValue}']`);}
+    get commercialVCLossCommentary() {return cy.get("[data-qa^='commercialVCLossDiscussion.commentary']");}
 
 }
 export default new PotentialGrossIncomePage();

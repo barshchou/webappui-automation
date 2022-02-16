@@ -13,7 +13,7 @@ describe.skip("Less [USE (Property>Commercial Units)] Commercial V/C Loss @ X% r
             .enterNumberOfResUnits(testData.numberOfResidentialUnits)
             .enterNumberOfCommercialUnits(testData.numberOfCommercialUnits);
         NavigationSection.navigateToCommercialUnits();
-        Property.CommercialUnits.enterListOfCommercialUnits(testData.listOfUnitsSF, testData.numberOfCommercialUnits);
+        Property.CommercialUnits.enterListUnitSF(testData.listOfUnitsSF, testData.numberOfCommercialUnits);
         NavigationSection.navigateToCommercialInPlaceRentRoll();
         Income.Commercial.InPlaceRentRoll.chooseListLeaseStatuses(testData.leaseStatuses, testData.numberOfCommercialUnits);
         testData.rentsPsf.forEach((rent, index) => {

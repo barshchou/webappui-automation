@@ -26,7 +26,7 @@
   },
   "homepage": "https://github.com/Bowery-RES/webapp-ui-automation#readme",
   "devDependencies": {
-    "cypress": "^9.2.0",
+    "cypress": "^9.4.1",
     "cypress-file-upload": "^5.0.8",
     "cypress-iframe": "^1.0.1",
     "cypress-localstorage-commands": "^1.6.1",

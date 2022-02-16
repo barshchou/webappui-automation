@@ -6,7 +6,6 @@ import potentialGrossIncomePage from "../../pages/income/potentialGrossIncome.pa
 class PotentialGrossIncomeActions extends BaseActions {
 
     /**
-     *
      * @param {number} value
      * @returns {PotentialGrossIncomeActions}
      */
@@ -17,7 +16,6 @@ class PotentialGrossIncomeActions extends BaseActions {
     }
 
     /**
-     *
      * @param {number} vacancyCollLoss
      * @param {string | number} potentialIncome
      * @returns {PotentialGrossIncomeActions}
@@ -30,7 +28,6 @@ class PotentialGrossIncomeActions extends BaseActions {
     }
 
     /**
-     *
      * @param {number} value
      * @returns {PotentialGrossIncomeActions}
      */
@@ -40,7 +37,6 @@ class PotentialGrossIncomeActions extends BaseActions {
     }
 
     /**
-     *
      * @param {number} value
      * @returns {PotentialGrossIncomeActions}
      */
@@ -50,7 +46,6 @@ class PotentialGrossIncomeActions extends BaseActions {
     }
 
     /**
-     *
      * @param {string} newCommentary
      * @returns {PotentialGrossIncomeActions}
      */
@@ -61,7 +56,6 @@ class PotentialGrossIncomeActions extends BaseActions {
     }
 
     /**
-     *
      * @param {string} incomeToBe
      * @returns {PotentialGrossIncomeActions}
      */
@@ -71,7 +65,6 @@ class PotentialGrossIncomeActions extends BaseActions {
     }
 
     /**
-     *
      * @param {string} incomeToBe
      * @returns {PotentialGrossIncomeActions}
      */
@@ -80,10 +73,6 @@ class PotentialGrossIncomeActions extends BaseActions {
         return this;
     }
 
-    /**
-     *
-     * @returns {PotentialGrossIncomeActions}
-     */
     verifyPotentialGrossIncome() {
         grossIncomePage.potentialResidentialIncome.then(el => {
             const potResIncomeNumber = getNumberFromDollarNumberWithCommas(el.text());
@@ -96,10 +85,6 @@ class PotentialGrossIncomeActions extends BaseActions {
         return this;
     }
 
-    /**
-     *
-     * @returns {PotentialGrossIncomeActions}
-     */
     verifyLessResidentialVCLoss() {
         grossIncomePage.residentialVCLoss.then(vcLoss => {
            const resVCLossNumber = getNumberFromDollarNumberWithCommas(vcLoss.attr("value"));
@@ -109,10 +94,6 @@ class PotentialGrossIncomeActions extends BaseActions {
         return this;
     }
 
-    /**
-     *
-     * @returns {PotentialGrossIncomeActions}
-     */
     verifyEffectiveGrossIncome() {
         grossIncomePage.potentialGrossIncome.then(grossIncome => {
             const potGrossIncomeNumber = getNumberFromDollarNumberWithCommas(grossIncome.text());
@@ -126,7 +107,6 @@ class PotentialGrossIncomeActions extends BaseActions {
     }
 
     /**
-     *
      * @param {string} potentialResIncomeToBe
      * @param {string} otherIncome
      * @returns {PotentialGrossIncomeActions}
@@ -148,6 +128,35 @@ class PotentialGrossIncomeActions extends BaseActions {
     enterCommercialVCLossPercentage(percentage, useValue) {
         const valueToBe = typeof percentage === "string" ? percentage : percentage.toFixed(2);
         potentialGrossIncomePage.getCommercialVCLossPercentage(useValue).clear().type(percentage).should("have.value", valueToBe);
+        return this;
+    }
+
+    /**
+     * @param {number | string} vacancy
+     * @param {string} useValue
+     * @returns {PotentialGrossIncomeActions}
+     */
+    enterSubjectAreaCommercialVacancy(vacancy, useValue) {
+        potentialGrossIncomePage.getSubjectAreaCommercialVacancy(useValue).clear().type(vacancy).should("have.value", vacancy);
+        return this;
+    }
+
+    /**
+     * @param {string} useValue
+     * @param {string} checkValue
+     * @returns {PotentialGrossIncomeActions}
+     */
+    checkCommercialSubjectSuitabilityByValue(useValue, checkValue) {
+        potentialGrossIncomePage.getCommercialSubjectSuitabilityRadio(useValue).check(checkValue).should("be.checked");
+        return this;
+    }
+
+    /**
+     * @param {string | number} elementToContain
+     * @returns {PotentialGrossIncomeActions}
+     */
+    verifyCommercialVCLossCommentaryContain(elementToContain) {
+        potentialGrossIncomePage.commercialVCLossCommentary.should("contain.text", elementToContain);
         return this;
     }
 }

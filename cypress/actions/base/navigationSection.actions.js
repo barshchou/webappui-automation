@@ -325,6 +325,17 @@ class NavigationSectionActions extends BaseActions {
             .clickYesButton();
         return this;
     }
+
+    clickCommercialCompGroups() {
+        navigationSectionPage.commercialCompGroups.click();
+        return this;
+    }
+
+    openCompGroupsInCommercial() {
+        this.clickCommercialCompGroups()
+            .clickYesButton();
+        return this;
+    }
 }
 
 export default new NavigationSectionActions();
