@@ -2,7 +2,7 @@ import ReportDataCreator from "../../../data_creator/reportData.creator";
 import Enums from "../../../../enums/enums";
 
 export default {
-    reportCreationData: ReportDataCreator.getReportSpecificIncomeValue(Enums.INCOME_TYPE.BOTH, "4604"),
+    reportCreationData: ReportDataCreator.getReportSpecificIncomeValue(Enums.INCOME_TYPE.BOTH, "4602&04&05&10"),
     grossBuildingArea: 3150,
     numberOfResidentialUnits: 2,
     numberOfCommercialUnits: 2,
@@ -11,6 +11,6 @@ export default {
     rentsPsf: [100, 120],
     useValue: "undetermined",
     useText: "Undetermined",
-    undeterminedCommercialVCLossPercentage: 3,
+    comUseVCLossPercentage: 3,
     totalCommercialUseVCLoss: "-$10,200.00"
 };
