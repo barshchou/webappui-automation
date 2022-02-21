@@ -161,12 +161,29 @@ class CommercialRentRollActions extends BaseActions {
 
     /**
      * @param {string} name
+     * @param {string} leaseStatus
      * @param {number} rowNumber
      * @returns {CommercialRentRollActions}
      */
-    enterTenantNameByRowNumber(name, rowNumber = 0) {
-        rentRollPage.tenantNameCells.eq(rowNumber).dblclick();
-        rentRollPage.textareaToInput.clear().type(name).type("{enter}");
+    enterTenantNameByRowNumber(name, leaseStatus, rowNumber = 0) {
+        if (leaseStatus === "Vacant") {
+            this.verifyTenantNameByRowNumber(leaseStatus, name, rowNumber);
+        } else {
+            rentRollPage.tenantNameCells.eq(rowNumber).dblclick();
+            rentRollPage.textareaToInput.clear().type(name).type("{enter}");
+        }
+        return this;
+    }
+
+    /**
+     * @param names
+     * @param leaseStatuses
+     * @returns {CommercialRentRollActions}
+     */
+    enterTenantNames(names, leaseStatuses) {
+        names.forEach((name, index) => {
+            this.enterTenantNameByRowNumber(name, leaseStatuses[index], index);
+        });
         return this;
     }
 
@@ -189,6 +206,17 @@ class CommercialRentRollActions extends BaseActions {
      */
     verifyUseCellTextByRowNumber(textToBe, rowNumber = 0) {
         rentRollPage.useCells.eq(rowNumber).should("have.text", textToBe).and("have.class", "readOnly");
+        return this;
+    }
+
+    /**
+     * @param {Array<string>} useTexts
+     * @returns {CommercialRentRollActions}
+     */
+    verifyUseCells(useTexts) {
+        useTexts.forEach((use, index) => {
+            this.verifyUseCellTextByRowNumber(use, index);
+        });
         return this;
     }
 
