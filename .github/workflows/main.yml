@@ -29,6 +29,7 @@ jobs:
           browser: chrome
           spec: cypress/integration/not_full_reports/**
           tag: ${{github.event.inputs.choice}}
+          parallel: true
         env:
           CYPRESS_USERNAME: ${{ secrets.USERNAME }}
           CYPRESS_PASSWORD: ${{ secrets.PASSWORD }}
