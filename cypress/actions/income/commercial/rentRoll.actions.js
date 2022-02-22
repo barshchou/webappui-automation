@@ -176,6 +176,16 @@ class CommercialRentRollActions extends BaseActions {
     }
 
     /**
+     * @param {number} rowNumber
+     * @returns {CommercialRentRollActions}
+     */
+    deleteTenantNameByRowNumber(rowNumber) {
+        rentRollPage.tenantNameCells.eq(rowNumber).dblclick();
+        rentRollPage.textareaToInput.clear();
+        return this;
+    }
+
+    /**
      * @param names
      * @param leaseStatuses
      * @returns {CommercialRentRollActions}

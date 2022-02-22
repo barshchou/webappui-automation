@@ -1,6 +1,6 @@
 import BaseActions from "../../base/base.actions";
 import stabRenRollPage from "../../../pages/income/commercial/stabilizedRentRoll.page";
-import {getNumberFromDollarNumberWithCommas, numberWithCommas} from "../../../../utils/numbers.utils";
+import {numberWithCommas} from "../../../../utils/numbers.utils";
 
 class StabilizedRentRollActions extends BaseActions{
 
@@ -37,7 +37,7 @@ class StabilizedRentRollActions extends BaseActions{
      * @returns {StabilizedRentRollActions}
      */
     verifyTenantNameByRow(name, leaseStatus, rowNumber = 0) {
-        let textToBe = leaseStatus === "Vacant" ? `Commercial Unit ${rowNumber + 1}` : name;
+        let textToBe = leaseStatus === "Vacant" || name === "" ? `Commercial Unit ${rowNumber + 1}` : name;
         stabRenRollPage.tenantNameCells.eq(rowNumber).should("have.text", textToBe);
         return this;
     }
@@ -98,42 +98,28 @@ class StabilizedRentRollActions extends BaseActions{
     }
 
     /**
-     * @param {string} [rentToBe]
+     * @param {string} rentToBe
      * @param {number} rowNumber
-     * @param {string} calcMethod
      * @returns {StabilizedRentRollActions}
      */
-    verifyAnnualRentByRow(calcMethod, rowNumber, rentToBe){
-        if (rentToBe) {
-            this.verifyAnnualRentCellByRowHasText(rentToBe, rowNumber);
-        } else {
-            stabRenRollPage.sfCells.eq(rowNumber).invoke("text").then(sfText => {
-                const sfNumber = getNumberFromDollarNumberWithCommas(sfText);
-                if (calcMethod === "monthly") {
-                    stabRenRollPage.monthlyRentPsfCells.eq(rowNumber).invoke("text").then(psfText => {
-                        const psfNumber = getNumberFromDollarNumberWithCommas(psfText);
-                        const textToBe = `$${numberWithCommas((sfNumber * psfNumber * 12).toFixed(2))}`;
-                        this.verifyAnnualRentCellByRowHasText(textToBe, rowNumber);
-                    });
-                } else {
-                    stabRenRollPage.annualRentPsfCells.eq(rowNumber).invoke("text").then(annualPsfText => {
-                        const annualPsfNumber = getNumberFromDollarNumberWithCommas(annualPsfText);
-                        const textToBe = `$${numberWithCommas((sfNumber * annualPsfNumber).toFixed(2))}`;
-                        this.verifyAnnualRentCellByRowHasText(textToBe, rowNumber);
-                    });
-                }
-            });
-        }
+    verifyAnnualRentByRow(rentToBe, rowNumber){
+        stabRenRollPage.annualRentCells.eq(rowNumber).should("contain.text", rentToBe);
         return this;
     }
 
     /**
-     * @private
-     * @param {string} textToBe
+     * @param {string} rentToBe
      * @param {number} rowNumber
+     * @returns {StabilizedRentRollActions}
      */
-    verifyAnnualRentCellByRowHasText(textToBe, rowNumber) {
-        stabRenRollPage.annualRentCells.eq(rowNumber).should("have.text");
+    verifyMonthlyRentByRow(rentToBe, rowNumber) {
+        stabRenRollPage.monthlyRentCells.eq(rowNumber).should("contain.text", rentToBe);
+        return this;
+    }
+
+    verifyAnnuallyRentPsf(rentToBe, rowNumber) {
+        stabRenRollPage.annualRentPsfCells.eq(rowNumber).should("contain.text", rentToBe);
+        return this;
     }
 }
 

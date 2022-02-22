@@ -32,12 +32,23 @@ describe("Verify the Commercial Stabilized Rent Roll table", () => {
         Income.Commercial.StabilizedRentRoll.verifyLeaseStatuses(testData.leaseStatuses)
             .verifyTenantNames(testData.tenantNames, testData.leaseStatuses)
             .verifyUseCells(testData.useTexts)
-            .verifySFCells(testData.listOfUnitsSF);
-        testData.annualRents.forEach((rent, index) => {
-            if (testData.leaseStatuses[index] === "Occupied") {
-                Income.Commercial.StabilizedRentRoll.verifyAnnualRentByRow("annually", index, rent);
-            }
-        });
+            .verifySFCells(testData.listOfUnitsSF)
+            .verifyAnnualRentByRow(testData.annualRent,1)
+            .verifyMonthlyRentByRow(testData.monthlyRent, 1)
+            // TODO: Change to 1 index after bug fix
+            .verifyAnnuallyRentPsf(testData.rentsPsf[1], 0);
+        NavigationSection.navigateToCommercialInPlaceRentRoll()
+            .verifyProgressBarNotExist();
+        Income.Commercial.InPlaceRentRoll.enterTenantNameByRowNumber(testData.newTenantName, testData.leaseStatuses[1], 1);
+        NavigationSection.openCommercialStabilizedRentRollInCommercial()
+            .verifyProgressBarNotExist();
+        Income.Commercial.StabilizedRentRoll.verifyTenantNameByRow(testData.newTenantName, testData.leaseStatuses[1], 1);
+        NavigationSection.navigateToCommercialInPlaceRentRoll()
+            .verifyProgressBarNotExist();
+        Income.Commercial.InPlaceRentRoll.deleteTenantNameByRowNumber(1);
+        NavigationSection.openCommercialStabilizedRentRollInCommercial()
+            .verifyProgressBarNotExist();
+        Income.Commercial.StabilizedRentRoll.verifyTenantNameByRow("", testData.leaseStatuses[1],1);
         deleteReport(testData.reportCreationData.reportNumber);
     });
 });

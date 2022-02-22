@@ -10,5 +10,7 @@ export default {
     leaseStatuses: ["Vacant", "Occupied"],
     tenantNames: ["vacant name", "test name"],
     rentsPsf: [100, 120],
-    annualRents: ["some placeholder", "$240,000.00"]
+    annualRent: "$240,000.00",
+    monthlyRent: "$20,000.00",
+    newTenantName: "new test name"
 };
