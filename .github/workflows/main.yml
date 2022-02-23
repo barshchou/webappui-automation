@@ -12,9 +12,6 @@ on:
         - prod
         required: true
         default: staging
-  pull_request:
-    branches: [ master ]
-
 jobs:
   Not-full-reports-run:
     runs-on: ubuntu-latest
