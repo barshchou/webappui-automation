@@ -138,7 +138,7 @@ class CapRateConclusionActions extends BaseActions {
         capRateConclusionPage.netOperatingIncomeCell.invoke("text").then(noiText => {
             const noiNumber = getNumberFromDollarNumberWithCommas(noiText);
             capRateConclusionPage.concludedCapRateCellInputToVerify.invoke("attr", "value").then(capRate => {
-               const textToBe = `$${numberWithCommas(Math.round(noiNumber / capRate * 100))}`;
+               const textToBe = `$${numberWithCommas(Math.round(noiNumber / Number.parseInt(capRate) * 100))}`;
                capRateConclusionPage.asStabilizedAmountCell.should("have.text", textToBe);
             });
         });
