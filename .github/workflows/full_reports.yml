@@ -12,8 +12,6 @@ on:
         - prod
         required: true
         default: staging
-  pull_request:
-    branches: [ master ]
 
 jobs:
   Full-reports-run:
