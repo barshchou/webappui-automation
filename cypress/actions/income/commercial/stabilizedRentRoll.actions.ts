@@ -9,115 +9,67 @@ class StabilizedRentRollActions extends BaseActions{
         return this;
     }
 
-    /**
-     * @param {string} leaseStatus
-     * @param {number} rowNumber
-     * @returns {StabilizedRentRollActions}
-     */
-    verifyLeaseStatusByRow(leaseStatus, rowNumber = 0) {
+    verifyLeaseStatusByRow(leaseStatus: string, rowNumber: number = 0): StabilizedRentRollActions {
         stabRenRollPage.leaseStatusCells.eq(rowNumber).should("contain.text", leaseStatus);
         return this;
     }
 
-    /**
-     * @param {Array<string>} statuses
-     * @returns {StabilizedRentRollActions}
-     */
-    verifyLeaseStatuses(statuses) {
+    verifyLeaseStatuses(statuses: Array<string>): StabilizedRentRollActions {
         statuses.forEach((status, index) => {
             this.verifyLeaseStatusByRow(status, index);
         });
         return this;
     }
 
-    /**
-     * @param {string} name
-     * @param {string} leaseStatus
-     * @param {number} rowNumber
-     * @returns {StabilizedRentRollActions}
-     */
-    verifyTenantNameByRow(name, leaseStatus, rowNumber = 0) {
+    verifyTenantNameByRow(name: string, leaseStatus: string, rowNumber: number = 0): StabilizedRentRollActions {
         let textToBe = leaseStatus === "Vacant" || name === "" ? `Commercial Unit ${rowNumber + 1}` : name;
         stabRenRollPage.tenantNameCells.eq(rowNumber).should("have.text", textToBe);
         return this;
     }
 
-    /**
-     * @param {Array<string>} names
-     * @param {Array<string>} leaseStatuses
-     * @returns {StabilizedRentRollActions}
-     */
-    verifyTenantNames(names, leaseStatuses) {
+    verifyTenantNames(names: Array<string>, leaseStatuses: Array<string>): StabilizedRentRollActions {
         names.forEach((name, index) => {
             this.verifyTenantNameByRow(name, leaseStatuses[index], index);
         });
         return this;
     }
 
-    /**
-     * @param {string} useText
-     * @param {number} rowNumber
-     * @returns {StabilizedRentRollActions}
-     */
-    verifyUseCellByRow(useText, rowNumber = 0) {
+    verifyUseCellByRow(useText: string, rowNumber: number = 0): StabilizedRentRollActions {
         stabRenRollPage.useCells.eq(rowNumber).should("have.text", useText);
         return this;
     }
 
-    /**
-     * @param useTexts
-     * @returns {StabilizedRentRollActions}
-     */
-    verifyUseCells(useTexts) {
+    verifyUseCells(useTexts: Array<string>): StabilizedRentRollActions {
         useTexts.forEach((text, index) => {
             this.verifyUseCellByRow(text, index);
         });
         return this;
     }
 
-    /**
-     * @param {string | number} squareFeet
-     * @param rowNumber
-     * @returns {StabilizedRentRollActions}
-     */
-    verifySfCellByRow(squareFeet, rowNumber = 0) {
+    verifySfCellByRow(squareFeet: string | number, rowNumber: number = 0): StabilizedRentRollActions {
         const textToBe = typeof squareFeet === "string" ? squareFeet : numberWithCommas(squareFeet);
         stabRenRollPage.sfCells.eq(rowNumber).should("have.text", textToBe);
         return this;
     }
 
-    /**
-     * @param {Array<string | number>} squareFeetValues
-     * @returns {StabilizedRentRollActions}
-     */
-    verifySFCells(squareFeetValues) {
+    verifySFCells(squareFeetValues: Array<string | number>): StabilizedRentRollActions {
         squareFeetValues.forEach((value, index) => {
             this.verifySfCellByRow(value, index);
         });
         return this;
     }
 
-    /**
-     * @param {string} rentToBe
-     * @param {number} rowNumber
-     * @returns {StabilizedRentRollActions}
-     */
-    verifyAnnualRentByRow(rentToBe, rowNumber){
+    verifyAnnualRentByRow(rentToBe: string, rowNumber: number): StabilizedRentRollActions{
         stabRenRollPage.annualRentCells.eq(rowNumber).should("contain.text", rentToBe);
         return this;
     }
 
-    /**
-     * @param {string} rentToBe
-     * @param {number} rowNumber
-     * @returns {StabilizedRentRollActions}
-     */
-    verifyMonthlyRentByRow(rentToBe, rowNumber) {
+    verifyMonthlyRentByRow(rentToBe: string, rowNumber: number): StabilizedRentRollActions {
         stabRenRollPage.monthlyRentCells.eq(rowNumber).should("contain.text", rentToBe);
         return this;
     }
 
-    verifyAnnuallyRentPsf(rentToBe, rowNumber) {
+    verifyAnnuallyRentPsf(rentToBe: string | number, rowNumber: number): StabilizedRentRollActions {
         stabRenRollPage.annualRentPsfCells.eq(rowNumber).should("contain.text", rentToBe);
         return this;
     }
