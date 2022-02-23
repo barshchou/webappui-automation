@@ -9,8 +9,13 @@ let ReportCreationData = function (address, number, templateValue, incomeValue, 
 };
 
 class ReportCreator {
+    address: any;
+    reportNumber: string;
+    templateValue: any;
+    incomeValue: any;
+    conclusionValue: any;
 
-    setAddress(address) {
+    setAddress(address?) {
         this.address = address ?? "462 1st Avenue, New York, USA";
         return this;
     }
@@ -20,17 +25,17 @@ class ReportCreator {
         return this;
     }
 
-    setTemplateValue(templateValue) {
+    setTemplateValue(templateValue?) {
         this.templateValue = templateValue ?? Enums.TEMPLATE_TYPE.FREDDIE_MAC;
         return this;
     }
 
-    setIncomeValue(incomeValue) {
+    setIncomeValue(incomeValue?) {
         this.incomeValue = incomeValue ?? Enums.INCOME_TYPE.RESIDENTIAL;
         return this;
     }
 
-    setConclusionValue(conclusionValue) {
+    setConclusionValue(conclusionValue?) {
         this.conclusionValue = conclusionValue ?? Enums.VALUE_CONCLUSION_TYPE.AS_IS;
         return this;
     }
