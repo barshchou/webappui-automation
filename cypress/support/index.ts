@@ -30,6 +30,11 @@ declare global {
          * @param value 
          */
         login(): Chainable<Element>
+        /**
+         * 
+         * @param message 
+         */
+        stepInfo(message:string): void
       }
     }
   }

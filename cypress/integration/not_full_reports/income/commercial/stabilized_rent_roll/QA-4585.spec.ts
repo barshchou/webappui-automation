@@ -10,6 +10,10 @@ describe("Verify the Commercial Stabilized Rent Roll table", () => {
     });
 
     it("Test body", () => {
+        cy.stepInfo(`Proceed to the Property > 
+        \n Commercial Units and fill the Commercial Unit # SF field 
+        \n and select the Use* radio button (e.g. Retail), save it.`)
+
         NavigationSection.navigateToPropertySummary();
         Property.Summary.enterNumberOfCommercialUnits(testData.numberOfCommercialUnits);
         NavigationSection.navigateToCommercialUnits();
@@ -27,6 +31,9 @@ describe("Verify the Commercial Stabilized Rent Roll table", () => {
                 Income.Commercial.InPlaceRentRoll.enterAnnualRentPerSFByRowNumber(rent, index);
             }
         });
+        cy.stepInfo(`
+        Proceed to the Income > Commercial > In-Place Rent Roll page and fill the Commercial In-Place Rent Roll Table, save it.
+        `)
         NavigationSection.openCommercialStabilizedRentRollInCommercial()
             .verifyProgressBarNotExist();
         Income.Commercial.StabilizedRentRoll.verifyLeaseStatuses(testData.leaseStatuses)
