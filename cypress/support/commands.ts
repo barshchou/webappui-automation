@@ -2,7 +2,7 @@ import "cypress-file-upload";
 import "cypress-localstorage-commands";
 import {getEnvUrl} from "../../utils/env.utils";
 
-Cypress.Commands.add("loginByApi", (url ) => {
+Cypress.Commands.add("loginByApi", (url) => {
     cy.log("Logging in by api");
     cy.request({
         method: "POST",
