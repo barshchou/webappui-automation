@@ -39,7 +39,7 @@ describe("Verify the Commercial Stabilized Rent Roll table", () => {
             .verifyAnnuallyRentPsf(testData.rentsPsf[1], 0);
         NavigationSection.navigateToCommercialInPlaceRentRoll()
             .verifyProgressBarNotExist();
-        Income.Commercial.InPlaceRentRoll.enterTenantNameByRowNumber(testData.newTenantName, testData.leaseStatuses[1], 1);
+        Income.Commercial.InPlaceRentRoll.enterTenantNameByRowNumber(testData.newTenantName, 1, testData.leaseStatuses[1]);
         NavigationSection.openCommercialStabilizedRentRollInCommercial()
             .verifyProgressBarNotExist();
         Income.Commercial.StabilizedRentRoll.verifyTenantNameByRow(testData.newTenantName, testData.leaseStatuses[1], 1);

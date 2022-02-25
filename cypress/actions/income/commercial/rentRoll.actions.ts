@@ -154,7 +154,7 @@ class CommercialRentRollActions extends BaseActions {
         return this;
     }
 
-    enterTenantNameByRowNumber(name: string, leaseStatus: string, rowNumber: number = 0): CommercialRentRollActions {
+    enterTenantNameByRowNumber(name: string, rowNumber: number = 0, leaseStatus?: string): CommercialRentRollActions {
         if (leaseStatus === "Vacant") {
             this.verifyTenantNameByRowNumber(leaseStatus, name, rowNumber);
         } else {
@@ -172,12 +172,12 @@ class CommercialRentRollActions extends BaseActions {
 
     enterTenantNames(names: Array<string>, leaseStatuses: Array<string>): CommercialRentRollActions {
         names.forEach((name, index) => {
-            this.enterTenantNameByRowNumber(name, leaseStatuses[index], index);
+            this.enterTenantNameByRowNumber(name, index, leaseStatuses[index]);
         });
         return this;
     }
 
-    verifyTenantNameByRowNumber(leaseStatus: string, nameToBe: string, rowNumber: number = 0): CommercialRentRollActions {
+    verifyTenantNameByRowNumber(leaseStatus: string, nameToBe?: string, rowNumber: number = 0): CommercialRentRollActions {
         let textToBe = leaseStatus === "Vacant" ? `Commercial Unit ${rowNumber + 1}` : nameToBe;
         rentRollPage.tenantNameCells.eq(rowNumber).should("have.text", textToBe);
         return this;
