@@ -3,12 +3,8 @@ import stabRenRollPage from "../../../pages/income/commercial/stabilizedRentRoll
 
 class StabilizedRentRollActions extends BaseActions{
 
-    /**
-     *
-     * @returns {StabilizedRentRollActions}
-     */
-    verifyIsInspectedChecked() {
-        stabRenRollPage.elementToVerifyIsInspected.should("have.css", "background-color", "rgb(66, 96, 211)");
+    verifyIsInspectedChecked(): StabilizedRentRollActions {
+        stabRenRollPage.elementToVerifyIsInspected.should("have.css", "background-color", "rgb(65, 96, 211)");
         return this;
     }
 }
