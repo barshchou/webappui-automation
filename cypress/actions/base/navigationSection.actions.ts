@@ -38,6 +38,12 @@ class NavigationSectionActions extends BaseActions {
         return this;
     }
 
+    openCommercialStabilizedRentRollInCommercial() {
+        this.clickCommercialStabRentRollButton()
+            .clickYesButton();
+        return this;
+    }
+
     clickFinalButton() {
         navigationSectionPage.finalButton.click();
         return this;

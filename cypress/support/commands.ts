@@ -38,4 +38,15 @@ Cypress.Commands.add("login", () => {
     }
 });
 
+Cypress.Commands.add("stepInfo", (message:string) => {
+    Cypress.log({
+        displayName:"StepInfo",
+        message:`${message}`,
+        consoleProps: () =>{
+            return {
+                Step: `${message}`
+            }
+        }
+    })
+});
 

@@ -4,40 +4,23 @@ import {cutDecimalPartToNumberOfDigits, isHasDecimalPartMoreNumberOfDigits, numb
 
 class CommercialUnitsActions extends BaseActions {
 
-    /**
-     *
-     * @param {number} index
-     * @returns {CommercialUnitsActions}
-     */
-    clickCommercialUnitTabByIndex(index = 0) {
+    clickCommercialUnitTabByIndex(index: number = 0): CommercialUnitsActions {
         commercialUnitsPage.commercialUnitsTabs.eq(index).click();
         return this;
     }
 
-    /**
-     *
-     * @param {string} value
-     * @param {number} index
-     * @returns {CommercialUnitsActions}
-     */
-    clickRadioButtonByValueAndUnitIndex(value, index = 0) {
+    clickRadioButtonByValueAndUnitIndex(value: string, index: number = 0): CommercialUnitsActions {
         commercialUnitsPage.getRadioButtonByValueAndUnitIndex(value, index).click();
         return this;
     }
 
-    /**
-     *
-     * @param {number | string} squareFeet
-     * @param {number} index
-     * @returns {CommercialUnitsActions}
-     */
-    enterUnitSFByUnitIndex(squareFeet, index = 0) {
-        let squareFeetToBe = squareFeet;
+    enterUnitSFByUnitIndex(squareFeet: number | string, index: number = 0): CommercialUnitsActions {
+        let squareFeetToBe: string | number = squareFeet;
         if (isHasDecimalPartMoreNumberOfDigits(squareFeet)) {
             squareFeetToBe = cutDecimalPartToNumberOfDigits(squareFeet);
         }
         squareFeetToBe = numberWithCommas(squareFeetToBe);
-        commercialUnitsPage.commercialUnitsSFInputs.eq(index).clear().type(squareFeet)
+        commercialUnitsPage.commercialUnitsSFInputs.eq(index).clear().type(`${squareFeet}`)
             .should("have.value", squareFeetToBe);
         return this;
     }
