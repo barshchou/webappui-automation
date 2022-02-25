@@ -679,9 +679,14 @@ class ProFormaActions extends BaseActions {
     verifyCommercialUseVCPerSF(useText, grossBuildingArea) {
         proFormaPage.getCommercialUseVCLossTotal(useText).invoke("text").then(totalText => {
             const totalNumber = getNumberFromMinusDollarNumberWithCommas(totalText);
-            const perSFTextToBe = `-$${numberWithCommas(totalNumber / grossBuildingArea).toFixed(2)}`;
+            const perSFTextToBe = `-$${numberWithCommas((totalNumber / grossBuildingArea).toFixed(2))}`;
             proFormaPage.getCommercialUseVCLossPerSF(useText).should("have.text", perSFTextToBe);
         });
+        return this;
+    }
+
+    verifyResidentialVCLossLabel(vcLossValue: number): ProFormaActions {
+        proFormaPage.residentialVCLossLabelCell.should("contain.text", `${vcLossValue.toFixed(2)}%`);
         return this;
     }
 }

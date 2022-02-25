@@ -8,32 +8,18 @@ import {
 
 class SummaryActions extends BaseActions {
 
-    /**
-     *
-     * @returns {SummaryActions}
-     */
-    verifyThatPageIsOpened() {
+    verifyThatPageIsOpened(): SummaryActions {
         summaryPage.headerSection.should("be.visible");
         return this;
     }
 
-    /**
-     *
-     * @param {number | string} number
-     * @returns {SummaryActions}
-     */
-    enterNumberOfResUnits(number) {
-        summaryPage.numberOfResUnitsInput.clear().type(number).should("have.value", number);
+    enterNumberOfResUnits(number: number): SummaryActions {
+        summaryPage.numberOfResUnitsInput.clear().type(`${number}`).should("have.value", number);
         return this;
     }
 
-    /**
-     *
-     * @param {number | string} number
-     * @returns {SummaryActions}
-     */
-    enterNumberOfCommercialUnits(number = 1) {
-        summaryPage.numberOfCommercialUnitsInput.clear().type(number).should("have.value", number);
+    enterNumberOfCommercialUnits(number:number = 1) {
+        summaryPage.numberOfCommercialUnitsInput.clear().type(`${number}`).should("have.value", number);
         return this;
     }
 
