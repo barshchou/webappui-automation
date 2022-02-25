@@ -31,7 +31,7 @@ declare global {
          */
         login(): Chainable<Element>
         /**
-         * 
+         * Description of step which will desribe code below. 
          * @param message 
          */
         stepInfo(message:string): void
