@@ -207,16 +207,9 @@ class CommercialRentRollActions extends BaseActions {
         return this;
     }
 
-    /**
-     * @param {string} cellName
-     * @param {string} leaseStatus
-     * @param {string} [dateToBe]
-     * @param {number} [rowNumber]
-     * @returns {CommercialRentRollActions}
-     */
-    verifyLeaseDateByRowNumber(cellName, leaseStatus, dateToBe, rowNumber = 0) {
+    verifyLeaseDateByRowNumber(cellName: string, leaseStatus: string, dateToBe?: string, rowNumber: number = 0): CommercialRentRollActions {
         dateToBe = dateToBe ?? "";
-        if (!isDateHasCorrectFormat(dateToBe, "/") && cellName !== "Expiry") {
+        if (!isDateHasCorrectFormat(dateToBe, "/")) {
             dateToBe = "";
         }
         let textToBe = leaseStatus === "Vacant" ? "-" : dateToBe;

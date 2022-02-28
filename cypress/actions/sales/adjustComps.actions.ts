@@ -63,15 +63,16 @@ class AdjustCompsActions extends BaseActions {
         return this;
     }
 
-    /**
-     *
-     * @param {string | number} value
-     * @param {number} index
-     * @returns {AdjustCompsActions}
-     */
-    enterOtherAdjustmentByColumn(value, index= 0) {
-        adjustCompsPage.otherAdjustmentCells.eq(index).clear().type(value).should("have.value", `${value}%`);
+    enterOtherAdjustmentByColumn(value: number, index: number = 0): AdjustCompsActions {
+        this.clickAddOtherAdjustmentButton();
+        adjustCompsPage.otherAdjustmentCells.eq(index).scrollIntoView().clear()
+            .type(`${value}`).should("have.value", `${value}%`);
         return this;
+    }
+
+    clickAddOtherAdjustmentButton(): AdjustCompsActions {
+        adjustCompsPage.addOtherAdjustmentButton.click();
+        return  this;
     }
 
     /**
@@ -108,10 +109,7 @@ class AdjustCompsActions extends BaseActions {
         return this;
     }
 
-    /**
-     * @param {number} index
-     */
-    verifyNetPropertyAdjustmentsByCompIndex(index = 0) {
+    verifyNetPropertyAdjustmentsByCompIndex(index: number = 0): AdjustCompsActions {
         adjustCompsPage.getAllAdjustmentCellsByCompIndex(index).then(cells => {
             const adjustmentsValues = Array.from(cells).filter((el, index) => index > 3)
                 .map(cell => cell.value).map(cellText => Number(cellText.replace("%", "")));

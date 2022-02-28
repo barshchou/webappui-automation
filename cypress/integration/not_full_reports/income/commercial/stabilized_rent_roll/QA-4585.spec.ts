@@ -51,8 +51,7 @@ describe("Verify the Commercial Stabilized Rent Roll table", () => {
             .verifySFCells(testData.listOfUnitsSF)
             .verifyAnnualRentByRow(testData.annualRent,1)
             .verifyMonthlyRentByRow(testData.monthlyRent, 1)
-            // TODO: Change to 1 index after https://bowery.atlassian.net/browse/WEB-4500 bug fix
-            .verifyAnnuallyRentPsf(testData.rentsPsf[1], 0);
+            .verifyAnnuallyRentPsf(testData.rentsPsf[1], 1);
 
         cy.stepInfo(`
         6. Proceed to the  Income > 
