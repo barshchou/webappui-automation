@@ -18,7 +18,7 @@ class SummaryActions extends BaseActions {
         return this;
     }
 
-    enterNumberOfCommercialUnits(number:number = 1) {
+    enterNumberOfCommercialUnits(number: number = 1): SummaryActions {
         summaryPage.numberOfCommercialUnitsInput.clear().type(`${number}`).should("have.value", number);
         return this;
     }
