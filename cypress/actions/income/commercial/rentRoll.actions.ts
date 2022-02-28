@@ -68,12 +68,7 @@ class CommercialRentRollActions extends BaseActions {
         return this;
     }
 
-    /**
-     * @param {string} status
-     * @param {number} rowNumber
-     * @returns {CommercialRentRollActions}
-     */
-    chooseLeaseStatusByRowNumber(status, rowNumber = 0) {
+    chooseLeaseStatusByRowNumber(status: string, rowNumber: number = 0): CommercialRentRollActions {
         rentRollPage.pageHeader.should("be.visible");
         rentRollPage.leaseStatusArrows.eq(rowNumber).should("be.visible").as("arrow");
         cy.get("@arrow").click({force:true});
@@ -159,36 +154,44 @@ class CommercialRentRollActions extends BaseActions {
         return this;
     }
 
-    /**
-     * @param {string} name
-     * @param {number} rowNumber
-     * @returns {CommercialRentRollActions}
-     */
-    enterTenantNameByRowNumber(name, rowNumber = 0) {
-        rentRollPage.tenantNameCells.eq(rowNumber).dblclick({ force: true });
-        rentRollPage.textareaToInput.clear().type(name).type("{enter}");
+    enterTenantNameByRowNumber(name: string, rowNumber: number = 0, leaseStatus?: string): CommercialRentRollActions {
+        if (leaseStatus === "Vacant") {
+            this.verifyTenantNameByRowNumber(leaseStatus, name, rowNumber);
+        } else {
+            rentRollPage.tenantNameCells.eq(rowNumber).dblclick({ force: true });
+            rentRollPage.textareaToInput.clear().type(name).type("{enter}");
+        }
         return this;
     }
 
-    /**
-     * @param {string} leaseStatus
-     * @param {string} [nameToBe]
-     * @param {number} [rowNumber]
-     * @returns {CommercialRentRollActions}
-     */
-    verifyTenantNameByRowNumber(leaseStatus, nameToBe, rowNumber = 0) {
+    deleteTenantNameByRowNumber(rowNumber: number): CommercialRentRollActions {
+        rentRollPage.tenantNameCells.eq(rowNumber).dblclick();
+        rentRollPage.textareaToInput.clear();
+        return this;
+    }
+
+    enterTenantNames(names: Array<string>, leaseStatuses: Array<string>): CommercialRentRollActions {
+        names.forEach((name, index) => {
+            this.enterTenantNameByRowNumber(name, index, leaseStatuses[index]);
+        });
+        return this;
+    }
+
+    verifyTenantNameByRowNumber(leaseStatus: string, nameToBe?: string, rowNumber: number = 0): CommercialRentRollActions {
         let textToBe = leaseStatus === "Vacant" ? `Commercial Unit ${rowNumber + 1}` : nameToBe;
         rentRollPage.tenantNameCells.eq(rowNumber).should("have.text", textToBe);
         return this;
     }
 
-    /**
-     * @param {string} textToBe
-     * @param {number} rowNumber
-     * @returns {CommercialRentRollActions}
-     */
-    verifyUseCellTextByRowNumber(textToBe, rowNumber = 0) {
+    verifyUseCellTextByRowNumber(textToBe: string, rowNumber: number = 0): CommercialRentRollActions {
         rentRollPage.useCells.eq(rowNumber).should("have.text", textToBe).and("have.class", "readOnly");
+        return this;
+    }
+
+    verifyUseCells(useTexts: Array<string>): CommercialRentRollActions {
+        useTexts.forEach((use, index) => {
+            this.verifyUseCellTextByRowNumber(use, index);
+        });
         return this;
     }
 
@@ -232,14 +235,9 @@ class CommercialRentRollActions extends BaseActions {
         return this;
     }
 
-    /**
-     * @param {number | string} value
-     * @param {number} rowNumber
-     * @returns {CommercialRentRollActions}
-     */
-    enterAnnualRentPerSFByRowNumber(value, rowNumber = 0) {
+    enterAnnualRentPerSFByRowNumber(value: number, rowNumber: number = 0): CommercialRentRollActions {
         rentRollPage.annualRentPerSFCells.eq(rowNumber).should("not.have.class", "readOnly").dblclick({force:true});
-        rentRollPage.textareaToInput.clear().type(value).type("{enter}");
+        rentRollPage.textareaToInput.clear().type(`${value}`).type("{enter}");
         const textToBe = `$${numberWithCommas(value.toFixed(2))}`;
         this.verifyRentPerSFAnnuallyByRowNumberCellText(textToBe, rowNumber);
         return this;
@@ -398,12 +396,7 @@ class CommercialRentRollActions extends BaseActions {
         return this;
     }
 
-    /**
-     * @param {Array<string>} statuses
-     * @param {number} numberOfUnits
-     * @returns {CommercialRentRollActions}
-     */
-    chooseListLeaseStatuses(statuses, numberOfUnits) {
+    chooseListLeaseStatuses(statuses: Array<string>, numberOfUnits: number): CommercialRentRollActions {
         for (let i = 0; i < numberOfUnits; i++) {
             this.chooseLeaseStatusByRowNumber(statuses[i], i);
         }

@@ -13,8 +13,7 @@ describe("Verify the Inspected checkbox functionality", () => {
        NavigationSection.navigateToCommercialInPlaceRentRoll();
         Income.Commercial.InPlaceRentRoll.chooseLeaseStatusByRowNumber(testData.leaseStatus)
             .checkIsInspectedCheckboxByRowNumber();
-        NavigationSection.clickCommercialStabRentRollButton()
-            .clickYesButton()
+        NavigationSection.openCommercialStabilizedRentRollInCommercial()
             .verifyProgressBarNotExist();
         Income.Commercial.StabilizedRentRoll.verifyIsInspectedChecked();
         NavigationSection.navigateToUnitInspection();
