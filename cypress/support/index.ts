@@ -10,8 +10,6 @@ Cypress.on("uncaught:exception", (err, runnable) => {
     return false;
 });
 
-
-
 declare global {
     namespace Cypress {
       interface Chainable {

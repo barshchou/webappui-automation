@@ -4,7 +4,7 @@ import {numberWithCommas} from "../../../../utils/numbers.utils";
 
 class StabilizedRentRollActions extends BaseActions{
 
-    verifyIsInspectedChecked() {
+    verifyIsInspectedChecked(): StabilizedRentRollActions {
         stabRenRollPage.elementToVerifyIsInspected.should("have.css", "background-color", "rgb(65, 96, 211)");
         return this;
     }

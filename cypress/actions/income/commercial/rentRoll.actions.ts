@@ -158,7 +158,7 @@ class CommercialRentRollActions extends BaseActions {
         if (leaseStatus === "Vacant") {
             this.verifyTenantNameByRowNumber(leaseStatus, name, rowNumber);
         } else {
-            rentRollPage.tenantNameCells.eq(rowNumber).dblclick();
+            rentRollPage.tenantNameCells.eq(rowNumber).dblclick({ force: true });
             rentRollPage.textareaToInput.clear().type(name).type("{enter}");
         }
         return this;
@@ -202,7 +202,7 @@ class CommercialRentRollActions extends BaseActions {
      * @returns {CommercialRentRollActions}
      */
     enterLeaseDateByRowNumber(cellName, date, rowNumber = 0) {
-        rentRollPage.getLeaseDateCellsByName(cellName).eq(rowNumber).dblclick();
+        rentRollPage.getLeaseDateCellsByName(cellName).eq(rowNumber).dblclick({ force: true });
         rentRollPage.textareaToInput.clear().type(date).type("{enter}");
         return this;
     }
@@ -281,7 +281,7 @@ class CommercialRentRollActions extends BaseActions {
      * @returns {CommercialRentRollActions}
      */
     enterMonthlyRentByRowNumber(monthlyRent, rowNumber = 0) {
-        rentRollPage.monthlyRentCells.eq(rowNumber).should("not.have.class", "readOnly").dblclick();
+        rentRollPage.monthlyRentCells.eq(rowNumber).should("not.have.class", "readOnly").dblclick({ force: true });
         rentRollPage.textareaToInput.clear().type(monthlyRent).type("{enter}");
         const textToBe = numberWithCommas(monthlyRent.toFixed(2));
         this.verifyMonthlyRentByRowCellText(textToBe, rowNumber);
@@ -315,7 +315,7 @@ class CommercialRentRollActions extends BaseActions {
      * @returns {CommercialRentRollActions}
      */
     enterAnnualRentByRowNumber(annualRent, rowNumber = 0) {
-        rentRollPage.annualRentCells.eq(rowNumber).should("not.have.class", "readOnly").dblclick();
+        rentRollPage.annualRentCells.eq(rowNumber).should("not.have.class", "readOnly").dblclick({ force: true });
         rentRollPage.textareaToInput.clear().type(annualRent).type("{enter}");
         const textToBe = numberWithCommas(annualRent.toFixed(2));
         this.verifyAnnualRentCellTextByRow(textToBe, rowNumber);
