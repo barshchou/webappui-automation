@@ -213,7 +213,7 @@ class InPlaceRentRollActions extends BaseActions {
         return this;
     }
 
-    fillAllRentTypeCellsWithEqualValue(rentType: string): InPlaceRentRollActions {
+    fillAllRentTypeCellsWithEqualValue(rentType: string): this {
         rentRollPage.rentTypeCells.each((cell, i) => {
             this.enterRentTypeCellByRowNumber(rentType, i)
                 .verifyRentTypeCellByRowNumber(rentType, i);
@@ -221,13 +221,13 @@ class InPlaceRentRollActions extends BaseActions {
         return this;
     }
 
-    enterRentTypeCellByRowNumber(rentType: string, rowNumber: number = 0): InPlaceRentRollActions {
+    enterRentTypeCellByRowNumber(rentType: string, rowNumber: number = 0): this {
         rentRollPage.rentTypeCells.eq(rowNumber).dblclick();
         this.enterTextToTextarea(rentType);
         return this;
     }
 
-    verifyRentTypeCellByRowNumber(rentTypeToBe: string, rowNumber: number = 0): InPlaceRentRollActions {
+    verifyRentTypeCellByRowNumber(rentTypeToBe: string, rowNumber: number = 0): this {
         rentRollPage.rentTypeCells.eq(rowNumber).should("contain.text", rentTypeToBe);
         return this;
     }
@@ -313,14 +313,14 @@ class InPlaceRentRollActions extends BaseActions {
         return this;
     }
 
-    enterLeaseStatusByRowNumber(status: string, number: number = 0): InPlaceRentRollActions {
+    enterLeaseStatusByRowNumber(status: string, number: number = 0): this {
         rentRollPage.leaseStatusCells.eq(number).dblclick();
         this.enterTextToTextarea(status);
         rentRollPage.leaseStatusCells.eq(number).should("contain.text", status);
         return this;
     }
 
-    enterAllEqualLeaseStatuses(leaseStatus: string, numberOfUnits: number): InPlaceRentRollActions {
+    enterAllEqualLeaseStatuses(leaseStatus: string, numberOfUnits: number): this {
         for (let i = 0; i < numberOfUnits; i++) {
             this.enterLeaseStatusByRowNumber(leaseStatus, i);
         }
@@ -349,7 +349,7 @@ class InPlaceRentRollActions extends BaseActions {
         return this;
     }
 
-    enterMonthlyRentByRowNumber(value: string | number, rowNumber: number = 0): InPlaceRentRollActions {
+    enterMonthlyRentByRowNumber(value: string | number, rowNumber: number = 0): this {
         const textToBe = typeof value === "string" ? value : `$${numberWithCommas(value.toFixed(2))}`;
         rentRollPage.monthlyRentCells.eq(rowNumber).dblclick();
         this.enterTextToTextarea(`${value}`);
@@ -357,7 +357,7 @@ class InPlaceRentRollActions extends BaseActions {
         return this;
     }
 
-    enterAllEqualMonthlyRents(monthlyRent: string | number, numberOfUnits: number): InPlaceRentRollActions {
+    enterAllEqualMonthlyRents(monthlyRent: string | number, numberOfUnits: number): this {
         for (let i = 0; i < numberOfUnits; i++) {
             this.enterMonthlyRentByRowNumber(monthlyRent, i);
         }
@@ -493,7 +493,7 @@ class InPlaceRentRollActions extends BaseActions {
         return this;
     }
 
-    private enterTextToTextarea(text: string): InPlaceRentRollActions {
+    private enterTextToTextarea(text: string): this {
         rentRollPage.textAreaToInput.clear().type(text).type("{enter}");
         return this;
     }

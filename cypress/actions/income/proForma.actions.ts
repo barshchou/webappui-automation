@@ -12,7 +12,7 @@ class ProFormaActions extends BaseActions {
      * @param {string} incomeToBe
      * @returns {ProFormaActions}
      */
-    verifyTotalPotentialResIncome(incomeToBe) {
+    verifyTotalPotentialResIncome(incomeToBe: string): this {
         proFormaPage.totalPotentialResIncome.should("have.text", incomeToBe);
         return this;
     }
@@ -22,7 +22,7 @@ class ProFormaActions extends BaseActions {
      * @param {string} incomeToBe
      * @returns {ProFormaActions}
      */
-    verifyPsfPotentialResIncome(incomeToBe) {
+    verifyPsfPotentialResIncome(incomeToBe: string): this {
         proFormaPage.psfPotentialResIncome.should("have.text", incomeToBe);
         return this;
     }
@@ -32,7 +32,7 @@ class ProFormaActions extends BaseActions {
      * @param {string} incomeToBe
      * @returns {ProFormaActions}
      */
-    verifyPerUnitPotentialResIncome(incomeToBe) {
+    verifyPerUnitPotentialResIncome(incomeToBe: string): this {
         proFormaPage.perUnitPotentialResIncome.should("have.text", incomeToBe);
         return this;
     }
@@ -42,7 +42,7 @@ class ProFormaActions extends BaseActions {
      * @param {Readonly<{total: string, perSF: string, perUnit: string}>} rowData
      * @returns {ProFormaActions}
      */
-    verifyPotentialResIncomeRow(rowData) {
+    verifyPotentialResIncomeRow(rowData: Readonly<{ total: string; perSF: string; perUnit: string; }>): this {
         this.verifyTotalPotentialResIncome(rowData.total)
             .verifyPsfPotentialResIncome(rowData.perSF)
             .verifyPerUnitPotentialResIncome(rowData.perUnit);
@@ -54,7 +54,7 @@ class ProFormaActions extends BaseActions {
      * @param {string} incomeToBe
      * @returns {ProFormaActions}
      */
-    verifyTotalPotGrossIncome(incomeToBe) {
+    verifyTotalPotGrossIncome(incomeToBe: string): this {
         proFormaPage.totalPotGrossIncome.should("have.text", incomeToBe);
         return this;
     }
@@ -64,7 +64,7 @@ class ProFormaActions extends BaseActions {
      * @param {string} incomeToBe
      * @returns {ProFormaActions}
      */
-    verifyPerSFPotGrossIncome(incomeToBe) {
+    verifyPerSFPotGrossIncome(incomeToBe: string): this {
         proFormaPage.perSFPotGrossIncome.should("have.text", incomeToBe);
         return this;
     }
@@ -74,7 +74,7 @@ class ProFormaActions extends BaseActions {
      * @param {string} incomeToBe
      * @returns {ProFormaActions}
      */
-    verifyPerUnitPotGrossIncome(incomeToBe) {
+    verifyPerUnitPotGrossIncome(incomeToBe: string): this {
         proFormaPage.perUnitPotGrossIncome.should("have.text", incomeToBe);
         return this;
     }
@@ -84,7 +84,7 @@ class ProFormaActions extends BaseActions {
      * @param {Readonly<{total: string, perSF: string, perUnit: string}>} rowData
      * @returns {ProFormaActions}
      */
-    verifyPotentialGrossIncomeRow(rowData) {
+    verifyPotentialGrossIncomeRow(rowData: Readonly<{ total: string; perSF: string; perUnit: string; }>): this {
         this.verifyTotalPotGrossIncome(rowData.total)
             .verifyPerSFPotGrossIncome(rowData.perSF)
             .verifyPerUnitPotGrossIncome(rowData.perUnit);
@@ -96,7 +96,7 @@ class ProFormaActions extends BaseActions {
      * @param {string} lossToBe
      * @returns {ProFormaActions}
      */
-    verifyTotalResVCLoss(lossToBe) {
+    verifyTotalResVCLoss(lossToBe: string): this {
         proFormaPage.totalResVCLoss.should("have.text", lossToBe);
         return this;
     }
@@ -106,7 +106,7 @@ class ProFormaActions extends BaseActions {
      * @param {string} lossToBe
      * @returns {ProFormaActions}
      */
-    verifyPerSFResVCLoss(lossToBe) {
+    verifyPerSFResVCLoss(lossToBe: string): this {
         proFormaPage.perSfResVCLoss.should("have.text", lossToBe);
         return this;
     }
@@ -116,7 +116,7 @@ class ProFormaActions extends BaseActions {
      * @param {string} lossToBe
      * @returns {ProFormaActions}
      */
-    verifyPerUnitResVCLoss(lossToBe) {
+    verifyPerUnitResVCLoss(lossToBe: string): this {
         proFormaPage.perUnitResVCLoss.should("have.text", lossToBe);
         return this;
     }
@@ -126,7 +126,7 @@ class ProFormaActions extends BaseActions {
      * @param {Readonly<{total: string, perSF: string, perUnit: string}>} rowData
      * @returns {ProFormaActions}
      */
-    verifyResVCLossRow(rowData) {
+    verifyResVCLossRow(rowData: Readonly<{ total: string; perSF: string; perUnit: string; }>): this {
         this.verifyTotalResVCLoss(rowData.total)
             .verifyPerSFResVCLoss(rowData.perSF)
             .verifyPerUnitResVCLoss(rowData.perUnit);
@@ -138,7 +138,7 @@ class ProFormaActions extends BaseActions {
      * @param {string} incomeToBe
      * @returns {ProFormaActions}
      */
-    verifyEffectiveGrossIncomeTotal(incomeToBe) {
+    verifyEffectiveGrossIncomeTotal(incomeToBe: string): this {
         proFormaPage.totalEffectiveGrossIncome.should("have.text", incomeToBe);
         return this;
     }
@@ -148,7 +148,7 @@ class ProFormaActions extends BaseActions {
      * @param {string} incomeToBe
      * @returns {ProFormaActions}
      */
-    verifyPerSFEffectiveGrossIncome(incomeToBe) {
+    verifyPerSFEffectiveGrossIncome(incomeToBe: string): this {
         proFormaPage.perSFEffectiveGrossIncome.should("have.text", incomeToBe);
         return this;
     }
@@ -158,7 +158,7 @@ class ProFormaActions extends BaseActions {
      * @param {string} incomeToBe
      * @returns {ProFormaActions}
      */
-    verifyPerUnitEffectiveGrossIncome(incomeToBe) {
+    verifyPerUnitEffectiveGrossIncome(incomeToBe: string): this {
         proFormaPage.perUnitEffectiveGrossIncome.should("have.text", incomeToBe);
         return this;
     }
@@ -168,7 +168,7 @@ class ProFormaActions extends BaseActions {
      * @param {Readonly<{total: string, perSF: string, perUnit: string}>} rowData
      * @returns {ProFormaActions}
      */
-    verifyEffectiveGrossRow(rowData) {
+    verifyEffectiveGrossRow(rowData: Readonly<{ total: string; perSF: string; perUnit: string; }>): this {
         this.verifyEffectiveGrossIncomeTotal(rowData.total)
             .verifyPerSFEffectiveGrossIncome(rowData.perSF)
             .verifyPerUnitEffectiveGrossIncome(rowData.perUnit);
@@ -180,7 +180,7 @@ class ProFormaActions extends BaseActions {
      * @param taxesToBe
      * @returns {ProFormaActions}
      */
-    verifyTotalRETaxes(taxesToBe) {
+    verifyTotalRETaxes(taxesToBe): this {
         proFormaPage.totalRETaxes.should("have.text", taxesToBe);
         return this;
     }
@@ -190,7 +190,7 @@ class ProFormaActions extends BaseActions {
      * @param {string} taxesToBe
      * @returns {ProFormaActions}
      */
-    verifyPerSfRETaxes(taxesToBe) {
+    verifyPerSfRETaxes(taxesToBe: string): this {
         proFormaPage.perSFRETaxes.should("have.text", taxesToBe);
         return this;
     }
@@ -200,7 +200,7 @@ class ProFormaActions extends BaseActions {
      * @param {string} taxesToBe
      * @returns {ProFormaActions}
      */
-    verifyPerUnitRETaxes(taxesToBe) {
+    verifyPerUnitRETaxes(taxesToBe: string): this {
         proFormaPage.perUnitTaxes.should("have.text", taxesToBe);
         return this;
     }
@@ -210,7 +210,7 @@ class ProFormaActions extends BaseActions {
      * @param {Readonly<{total: string, perSF: string, perUnit: string}>} rowData
      * @returns {ProFormaActions}
      */
-    verifyRETaxesRow(rowData) {
+    verifyRETaxesRow(rowData: Readonly<{ total: string; perSF: string; perUnit: string; }>): this {
         this.verifyTotalRETaxes(rowData.total)
             .verifyPerSfRETaxes(rowData.perSF)
             .verifyPerUnitRETaxes(rowData.perUnit);
@@ -222,7 +222,7 @@ class ProFormaActions extends BaseActions {
      * @param {string} textToBe
      * @returns {ProFormaActions}
      */
-    verifyTotalInsurance(textToBe) {
+    verifyTotalInsurance(textToBe: string): this {
         proFormaPage.totalInsurance.should("have.text", textToBe);
         return this;
     }
@@ -232,7 +232,7 @@ class ProFormaActions extends BaseActions {
      * @param {string} textToBe
      * @returns {ProFormaActions}
      */
-    verifyPerSFInsurance(textToBe) {
+    verifyPerSFInsurance(textToBe: string): this {
         proFormaPage.perSFInsurance.should("have.text", textToBe);
         return this;
     }
@@ -242,7 +242,7 @@ class ProFormaActions extends BaseActions {
      * @param {string} textToBe
      * @returns {ProFormaActions}
      */
-    verifyPerUnitInsurance(textToBe) {
+    verifyPerUnitInsurance(textToBe: string): this {
         proFormaPage.perUnitInsurance.should("have.text", textToBe);
         return this;
     }
@@ -252,7 +252,7 @@ class ProFormaActions extends BaseActions {
      * @param {Readonly<{total: string, perSF: string, perUnit: string}>} rowData
      * @returns {ProFormaActions}
      */
-    verifyInsuranceRow(rowData) {
+    verifyInsuranceRow(rowData: Readonly<{ total: string; perSF: string; perUnit: string; }>): this {
         this.verifyTotalInsurance(rowData.total)
             .verifyPerSFInsurance(rowData.perSF)
             .verifyPerUnitInsurance(rowData.perUnit);
@@ -264,7 +264,7 @@ class ProFormaActions extends BaseActions {
      * @param {string} textToBe
      * @returns {ProFormaActions}
      */
-    verifyElectricityTotal(textToBe) {
+    verifyElectricityTotal(textToBe: string): this {
         proFormaPage.totalElectricity.should("have.text", textToBe);
         return this;
     }
@@ -274,7 +274,7 @@ class ProFormaActions extends BaseActions {
      * @param {string} textToBe
      * @returns {ProFormaActions}
      */
-    verifyPerSFElectricity(textToBe) {
+    verifyPerSFElectricity(textToBe: string): this {
         proFormaPage.perSFElectricity.should("have.text", textToBe);
         return this;
     }
@@ -284,7 +284,7 @@ class ProFormaActions extends BaseActions {
      * @param {string} textToBe
      * @returns {ProFormaActions}
      */
-    verifyPerUnitElectricity(textToBe) {
+    verifyPerUnitElectricity(textToBe: string): this {
         proFormaPage.perUnitElectricity.should("have.text", textToBe);
         return this;
     }
@@ -294,7 +294,7 @@ class ProFormaActions extends BaseActions {
      * @param {Readonly<{total: string, perSF: string, perUnit: string}>} rowData
      * @returns {ProFormaActions}
      */
-    verifyElectricityRow(rowData) {
+    verifyElectricityRow(rowData: Readonly<{ total: string; perSF: string; perUnit: string; }>): this {
         this.verifyElectricityTotal(rowData.total)
             .verifyPerSFElectricity(rowData.perSF)
             .verifyPerUnitElectricity(rowData.perUnit);
@@ -306,7 +306,7 @@ class ProFormaActions extends BaseActions {
      * @param {string} textToBe
      * @returns {ProFormaActions}
      */
-    verifyTotalRepairs(textToBe) {
+    verifyTotalRepairs(textToBe: string): this {
         proFormaPage.totalRepairs.should("have.text", textToBe);
         return this;
     }
@@ -316,7 +316,7 @@ class ProFormaActions extends BaseActions {
      * @param {string} textToBe
      * @returns {ProFormaActions}
      */
-    verifyPerSFRepairs(textToBe) {
+    verifyPerSFRepairs(textToBe: string): this {
         proFormaPage.perSFRepairs.should("have.text", textToBe);
         return this;
     }
@@ -326,7 +326,7 @@ class ProFormaActions extends BaseActions {
      * @param {string} textToBe
      * @returns {ProFormaActions}
      */
-    verifyPerUnitRepairs(textToBe) {
+    verifyPerUnitRepairs(textToBe: string): this {
         proFormaPage.perUnitRepairs.should("have.text", textToBe);
         return this;
     }
@@ -336,7 +336,7 @@ class ProFormaActions extends BaseActions {
      * @param {Readonly<{total: string, perSF: string, perUnit: string}>} rowData
      * @returns {ProFormaActions}
      */
-    verifyRepairsRow(rowData) {
+    verifyRepairsRow(rowData: Readonly<{ total: string; perSF: string; perUnit: string; }>): this {
         this.verifyTotalRepairs(rowData.total)
             .verifyPerSFRepairs(rowData.perSF)
             .verifyPerUnitRepairs(rowData.perUnit);
@@ -348,7 +348,7 @@ class ProFormaActions extends BaseActions {
      * @param {string} textToBe
      * @returns {ProFormaActions}
      */
-    verifyTotalPayroll(textToBe) {
+    verifyTotalPayroll(textToBe: string): this {
         proFormaPage.totalPayroll.should("have.text", textToBe);
         return this;
     }
@@ -358,7 +358,7 @@ class ProFormaActions extends BaseActions {
      * @param {string} textToBe
      * @returns {ProFormaActions}
      */
-    verifyPerSFPayroll(textToBe) {
+    verifyPerSFPayroll(textToBe: string): this {
         proFormaPage.perSFPayroll.should("have.text", textToBe);
         return this;
     }
@@ -368,7 +368,7 @@ class ProFormaActions extends BaseActions {
      * @param {string} textToBe
      * @returns {ProFormaActions}
      */
-    verifyPerUnitPayroll(textToBe) {
+    verifyPerUnitPayroll(textToBe: string): this {
         proFormaPage.perUnitPayroll.should("have.text", textToBe);
         return this;
     }
@@ -378,7 +378,7 @@ class ProFormaActions extends BaseActions {
      * @param {Readonly<{total: string, perSF: string, perUnit: string}>} rowData
      * @returns {ProFormaActions}
      */
-    verifyPayrollRow(rowData) {
+    verifyPayrollRow(rowData: Readonly<{ total: string; perSF: string; perUnit: string; }>): this {
         this.verifyTotalPayroll(rowData.total)
             .verifyPerSFPayroll(rowData.perSF)
             .verifyPerUnitPayroll(rowData.perUnit);
@@ -390,7 +390,7 @@ class ProFormaActions extends BaseActions {
      * @param {string} textToBe
      * @returns {ProFormaActions}
      */
-    verifyTotalGeneral(textToBe) {
+    verifyTotalGeneral(textToBe: string): this {
         proFormaPage.totalGeneral.should("have.text", textToBe);
         return this;
     }
@@ -400,7 +400,7 @@ class ProFormaActions extends BaseActions {
      * @param {string} textToBe
      * @returns {ProFormaActions}
      */
-    verifyPerSFGeneral(textToBe) {
+    verifyPerSFGeneral(textToBe: string): this {
         proFormaPage.perSFGeneral.should("have.text", textToBe);
         return this;
     }
@@ -410,7 +410,7 @@ class ProFormaActions extends BaseActions {
      * @param {string} textToBe
      * @returns {ProFormaActions}
      */
-    verifyPerUnitGeneral(textToBe) {
+    verifyPerUnitGeneral(textToBe: string): this {
         proFormaPage.perUnitGeneral.should("have.text", textToBe);
         return this;
     }
@@ -420,7 +420,7 @@ class ProFormaActions extends BaseActions {
      * @param {Readonly<{total: string, perSF: string, perUnit: string}>} rowData
      * @returns {ProFormaActions}
      */
-    verifyGeneralRow(rowData) {
+    verifyGeneralRow(rowData: Readonly<{ total: string; perSF: string; perUnit: string; }>): this {
         this.verifyTotalGeneral(rowData.total)
             .verifyPerSFGeneral(rowData.perSF)
             .verifyPerUnitGeneral(rowData.perUnit);
@@ -432,7 +432,7 @@ class ProFormaActions extends BaseActions {
      * @param {string} textToBe
      * @returns {ProFormaActions}
      */
-    verifyTotalManagement(textToBe) {
+    verifyTotalManagement(textToBe: string): this {
         proFormaPage.totalManagement.should("have.text", textToBe);
         return this;
     }
@@ -442,7 +442,7 @@ class ProFormaActions extends BaseActions {
      * @param {string} textToBe
      * @returns {ProFormaActions}
      */
-    verifyPerSFManagement(textToBe) {
+    verifyPerSFManagement(textToBe: string): this {
         proFormaPage.perSFManagement.should("have.text", textToBe);
         return this;
     }
@@ -452,7 +452,7 @@ class ProFormaActions extends BaseActions {
      * @param {string} textToBe
      * @returns {ProFormaActions}
      */
-    verifyPerUnitManagement(textToBe) {
+    verifyPerUnitManagement(textToBe: string): this {
         proFormaPage.perUnitManagement.should("have.text", textToBe);
         return this;
     }
@@ -462,7 +462,7 @@ class ProFormaActions extends BaseActions {
      * @param {Readonly<{total: string, perSF: string, perUnit: string}>} rowData
      * @returns {ProFormaActions}
      */
-    verifyManagementRow(rowData) {
+    verifyManagementRow(rowData: Readonly<{ total: string; perSF: string; perUnit: string; }>): this {
         this.verifyTotalManagement(rowData.total)
             .verifyPerSFManagement(rowData.perSF)
             .verifyPerUnitManagement(rowData.perUnit);
@@ -474,7 +474,7 @@ class ProFormaActions extends BaseActions {
      * @param {string} textToBe
      * @returns {ProFormaActions}
      */
-    verifyTotalReserves(textToBe) {
+    verifyTotalReserves(textToBe: string): this {
         proFormaPage.totalReserves.should("have.text", textToBe);
         return this;
     }
@@ -484,7 +484,7 @@ class ProFormaActions extends BaseActions {
      * @param {string} textToBe
      * @returns {ProFormaActions}
      */
-    verifyPerSFReserves(textToBe) {
+    verifyPerSFReserves(textToBe: string): this {
         proFormaPage.perSFReserves.should("have.text", textToBe);
         return this;
     }
@@ -494,7 +494,7 @@ class ProFormaActions extends BaseActions {
      * @param {string} textToBe
      * @returns {ProFormaActions}
      */
-    verifyPerUnitReserves(textToBe) {
+    verifyPerUnitReserves(textToBe: string): this {
         proFormaPage.perUnitReserves.should("have.text", textToBe);
         return this;
     }
@@ -504,7 +504,7 @@ class ProFormaActions extends BaseActions {
      * @param {Readonly<{total: string, perSF: string, perUnit: string}>} rowData
      * @returns {ProFormaActions}
      */
-    verifyReservesRow(rowData) {
+    verifyReservesRow(rowData: Readonly<{ total: string; perSF: string; perUnit: string; }>): this {
         this.verifyTotalReserves(rowData.total)
             .verifyPerSFReserves(rowData.perSF)
             .verifyPerUnitReserves(rowData.perUnit);
@@ -516,7 +516,7 @@ class ProFormaActions extends BaseActions {
      * @param {string} textToBe
      * @returns {ProFormaActions}
      */
-    verifyTotalToe(textToBe) {
+    verifyTotalToe(textToBe: string): this {
         proFormaPage.totalToe.should("have.text", textToBe);
         return this;
     }
@@ -526,7 +526,7 @@ class ProFormaActions extends BaseActions {
      * @param {string} textToBe
      * @returns {ProFormaActions}
      */
-    verifyPerSFToe(textToBe) {
+    verifyPerSFToe(textToBe: string): this {
         proFormaPage.perSFToe.should("have.text", textToBe);
         return this;
     }
@@ -536,7 +536,7 @@ class ProFormaActions extends BaseActions {
      * @param {string} textToBe
      * @returns {ProFormaActions}
      */
-    verifyPerUnitToe(textToBe) {
+    verifyPerUnitToe(textToBe: string): this {
         proFormaPage.perUnitToe.should("have.text", textToBe);
         return this;
     }
@@ -546,7 +546,7 @@ class ProFormaActions extends BaseActions {
      * @param {Readonly<{total: string, perSF: string, perUnit: string}>} rowData
      * @returns {ProFormaActions}
      */
-    verifyToeRow(rowData) {
+    verifyToeRow(rowData: Readonly<{ total: string; perSF: string; perUnit: string; }>): this {
         this.verifyTotalToe(rowData.total)
             .verifyPerSFToe(rowData.perSF)
             .verifyPerUnitToe(rowData.perUnit);
@@ -558,7 +558,7 @@ class ProFormaActions extends BaseActions {
      * @param {string} textToBe
      * @returns {ProFormaActions}
      */
-    verifyTotalToeNetRe(textToBe) {
+    verifyTotalToeNetRe(textToBe: string): this {
         proFormaPage.totalToeNetRe.should("have.text", textToBe);
         return this;
     }
@@ -568,7 +568,7 @@ class ProFormaActions extends BaseActions {
      * @param {string} textToBe
      * @returns {ProFormaActions}
      */
-    verifyPerSFToeNetRe(textToBe) {
+    verifyPerSFToeNetRe(textToBe: string): this {
         proFormaPage.perSFToeNetRe.should("have.text", textToBe);
         return this;
     }
@@ -578,7 +578,7 @@ class ProFormaActions extends BaseActions {
      * @param {string} textToBe
      * @returns {ProFormaActions}
      */
-    verifyPerUnitToeNetRe(textToBe) {
+    verifyPerUnitToeNetRe(textToBe: string): this {
         proFormaPage.perUnitToeNetRe.should("have.text", textToBe);
         return this;
     }
@@ -588,7 +588,7 @@ class ProFormaActions extends BaseActions {
      * @param {Readonly<{total: string, perSF: string, perUnit: string}>} rowData
      * @returns {ProFormaActions}
      */
-    verifyToeNetReRow(rowData) {
+    verifyToeNetReRow(rowData: Readonly<{ total: string; perSF: string; perUnit: string; }>): this {
         this.verifyTotalToeNetRe(rowData.total)
             .verifyPerSFToeNetRe(rowData.perSF)
             .verifyPerUnitToeNetRe(rowData.perUnit);
@@ -600,7 +600,7 @@ class ProFormaActions extends BaseActions {
      * @param {string} textToBe
      * @returns {ProFormaActions}
      */
-    verifyTotalNetOpIncome(textToBe) {
+    verifyTotalNetOpIncome(textToBe: string): this {
         proFormaPage.totalNetOpIncome.should("have.text", textToBe);
         return this;
     }
@@ -610,7 +610,7 @@ class ProFormaActions extends BaseActions {
      * @param {string} textToBe
      * @returns {ProFormaActions}
      */
-    verifyPerSFNetOpIncome(textToBe) {
+    verifyPerSFNetOpIncome(textToBe: string): this {
         proFormaPage.perSFNetOpIncome.should("have.text", textToBe);
         return this;
     }
@@ -620,7 +620,7 @@ class ProFormaActions extends BaseActions {
      * @param {string} textToBe
      * @returns {ProFormaActions}
      */
-    verifyPerUnitNetOpIncome(textToBe) {
+    verifyPerUnitNetOpIncome(textToBe: string): this {
         proFormaPage.perUnitNetOpIncome.should("have.text", textToBe);
         return this;
     }
@@ -630,7 +630,7 @@ class ProFormaActions extends BaseActions {
      * @param {Readonly<{total: string, perSF: string, perUnit: string}>} rowData
      * @returns {ProFormaActions}
      */
-    verifyNetOpIncomeRow(rowData) {
+    verifyNetOpIncomeRow(rowData: Readonly<{ total: string; perSF: string; perUnit: string; }>): this {
         this.verifyTotalNetOpIncome(rowData.total)
             .verifyPerSFNetOpIncome(rowData.perSF)
             .verifyPerUnitNetOpIncome(rowData.perUnit);
@@ -642,7 +642,7 @@ class ProFormaActions extends BaseActions {
      * @param {string} textToBe
      * @returns {ProFormaActions}
      */
-    verifyOperatingExpenseRatio(textToBe) {
+    verifyOperatingExpenseRatio(textToBe: string): this {
         proFormaPage.operatingExpenseRatio.should("have.text", textToBe);
         return this;
     }
@@ -652,7 +652,7 @@ class ProFormaActions extends BaseActions {
      * @param {number} numberOfResUnits
      * @returns {ProFormaActions}
      */
-    verifyCommercialUseVCLossPerUnit(useText, numberOfResUnits) {
+    verifyCommercialUseVCLossPerUnit(useText: string, numberOfResUnits: number): this {
         proFormaPage.getCommercialUseVCLossTotal(useText).invoke("text").then(totalText => {
             const totalNumber = getNumberFromMinusDollarNumberWithCommas(totalText);
             const perUnitTextToBe = `-$${numberWithCommas(totalNumber / numberOfResUnits)}`;
@@ -661,22 +661,12 @@ class ProFormaActions extends BaseActions {
         return this;
     }
 
-    /**
-     * @param {string} totalToBe
-     * @param {string} useText
-     * @returns {ProFormaActions}
-     */
-    verifyCommercialUseVCLossTotal(useText, totalToBe) {
+    verifyCommercialUseVCLossTotal(useText: string, totalToBe: string): this {
         proFormaPage.getCommercialUseVCLossTotal(useText).should("have.text", totalToBe);
         return this;
     }
 
-    /**
-     * @param {string} useText
-     * @param {number} grossBuildingArea
-     * @returns {ProFormaActions}
-     */
-    verifyCommercialUseVCPerSF(useText, grossBuildingArea) {
+    verifyCommercialUseVCPerSF(useText: string, grossBuildingArea: number): this {
         proFormaPage.getCommercialUseVCLossTotal(useText).invoke("text").then(totalText => {
             const totalNumber = getNumberFromMinusDollarNumberWithCommas(totalText);
             const perSFTextToBe = `-$${numberWithCommas((totalNumber / grossBuildingArea).toFixed(2))}`;
@@ -685,7 +675,7 @@ class ProFormaActions extends BaseActions {
         return this;
     }
 
-    verifyResidentialVCLossLabel(vcLossValue: number): ProFormaActions {
+    verifyResidentialVCLossLabel(vcLossValue: number): this {
         proFormaPage.residentialVCLossLabelCell.should("contain.text", `${vcLossValue.toFixed(2)}%`);
         return this;
     }
