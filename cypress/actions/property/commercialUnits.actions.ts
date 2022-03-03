@@ -9,8 +9,17 @@ class CommercialUnitsActions extends BaseActions {
         return this;
     }
 
-    clickRadioButtonByValueAndUnitIndex(value: string, index: number = 0): CommercialUnitsActions {
-        commercialUnitsPage.getRadioButtonByValueAndUnitIndex(value, index).click();
+    clickRadioButtonByValueAndUnitIndex(group: string, value: string, index: number = 0): CommercialUnitsActions {
+        commercialUnitsPage.getRadioButtonByValueAndUnitIndex(group, value, index).click();
+        this.verifyRadioIsChecked(group, value, index);
+        if (value === "other"){
+            commercialUnitsPage.getOtherFrontageByUnit(index).should("exist").should("have.attr", "required");
+        }
+        return this;
+    }
+
+    verifyRadioIsChecked(group: string, value: string, index: number = 0): CommercialUnitsActions {
+        commercialUnitsPage.getRadioButtonByValueAndUnitIndex(group, value, index).parent().should("have.class", "Mui-checked");
         return this;
     }
 
