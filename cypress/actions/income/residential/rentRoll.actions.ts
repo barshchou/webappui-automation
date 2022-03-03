@@ -213,11 +213,7 @@ class InPlaceRentRollActions extends BaseActions {
         return this;
     }
 
-    /**
-     * @param {string} rentType
-     * @returns {InPlaceRentRollActions}
-     */
-    fillAllRentTypeCellsWithEqualValue(rentType) {
+    fillAllRentTypeCellsWithEqualValue(rentType: string): this {
         rentRollPage.rentTypeCells.each((cell, i) => {
             this.enterRentTypeCellByRowNumber(rentType, i)
                 .verifyRentTypeCellByRowNumber(rentType, i);
@@ -225,23 +221,13 @@ class InPlaceRentRollActions extends BaseActions {
         return this;
     }
 
-    /**
-     * @param {string} rentType
-     * @param {number} rowNumber
-     * @returns {InPlaceRentRollActions}
-     */
-    enterRentTypeCellByRowNumber(rentType, rowNumber = 0) {
+    enterRentTypeCellByRowNumber(rentType: string, rowNumber: number = 0): this {
         rentRollPage.rentTypeCells.eq(rowNumber).dblclick();
         this.enterTextToTextarea(rentType);
         return this;
     }
 
-    /**
-     * @param {string} rentTypeToBe
-     * @param {number} rowNumber
-     * @returns {InPlaceRentRollActions}
-     */
-    verifyRentTypeCellByRowNumber(rentTypeToBe, rowNumber = 0) {
+    verifyRentTypeCellByRowNumber(rentTypeToBe: string, rowNumber: number = 0): this {
         rentRollPage.rentTypeCells.eq(rowNumber).should("contain.text", rentTypeToBe);
         return this;
     }
@@ -327,25 +313,14 @@ class InPlaceRentRollActions extends BaseActions {
         return this;
     }
 
-    /**
-     *
-     * @param {string} status
-     * @param {number} number
-     * @returns {InPlaceRentRollActions}
-     */
-    enterLeaseStatusByRowNumber(status, number = 0) {
+    enterLeaseStatusByRowNumber(status: string, number: number = 0): this {
         rentRollPage.leaseStatusCells.eq(number).dblclick();
         this.enterTextToTextarea(status);
         rentRollPage.leaseStatusCells.eq(number).should("contain.text", status);
         return this;
     }
 
-    /**
-     * @param {string} leaseStatus
-     * @param {number} numberOfUnits
-     * @returns {InPlaceRentRollActions}
-     */
-    enterAllEqualLeaseStatuses(leaseStatus, numberOfUnits) {
+    enterAllEqualLeaseStatuses(leaseStatus: string, numberOfUnits: number): this {
         for (let i = 0; i < numberOfUnits; i++) {
             this.enterLeaseStatusByRowNumber(leaseStatus, i);
         }
@@ -374,16 +349,18 @@ class InPlaceRentRollActions extends BaseActions {
         return this;
     }
 
-    /**
-     * @param {string | number} value
-     * @param {number} rowNumber
-     * @returns {InPlaceRentRollActions}
-     */
-    enterMonthlyRentByRowNumber(value, rowNumber = 0) {
+    enterMonthlyRentByRowNumber(value: string | number, rowNumber: number = 0): this {
         const textToBe = typeof value === "string" ? value : `$${numberWithCommas(value.toFixed(2))}`;
         rentRollPage.monthlyRentCells.eq(rowNumber).dblclick();
-        this.enterTextToTextarea(value);
+        this.enterTextToTextarea(`${value}`);
         rentRollPage.monthlyRentCells.eq(rowNumber).should("have.text", textToBe);
+        return this;
+    }
+
+    enterAllEqualMonthlyRents(monthlyRent: string | number, numberOfUnits: number): this {
+        for (let i = 0; i < numberOfUnits; i++) {
+            this.enterMonthlyRentByRowNumber(monthlyRent, i);
+        }
         return this;
     }
 
@@ -516,12 +493,7 @@ class InPlaceRentRollActions extends BaseActions {
         return this;
     }
 
-    /**
-     * @private
-     * @param {string} text
-     * @returns {InPlaceRentRollActions}
-     */
-    enterTextToTextarea(text) {
+    private enterTextToTextarea(text: string): this {
         rentRollPage.textAreaToInput.clear().type(text).type("{enter}");
         return this;
     }

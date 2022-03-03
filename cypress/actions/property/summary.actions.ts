@@ -8,26 +8,17 @@ import {
 
 class SummaryActions extends BaseActions {
 
-    /**
-     *
-     * @returns {SummaryActions}
-     */
-    verifyThatPageIsOpened() {
+    verifyThatPageIsOpened(): this {
         summaryPage.headerSection.should("be.visible");
         return this;
     }
 
-    /**
-     *
-     * @param {number | string} number
-     * @returns {SummaryActions}
-     */
-    enterNumberOfResUnits(number) {
-        summaryPage.numberOfResUnitsInput.clear().type(number).should("have.value", number);
+    enterNumberOfResUnits(number: number): this {
+        summaryPage.numberOfResUnitsInput.clear().type(`${number}`).should("have.value", number);
         return this;
     }
 
-    enterNumberOfCommercialUnits(number: number = 1): SummaryActions {
+    enterNumberOfCommercialUnits(number: number = 1): this {
         summaryPage.numberOfCommercialUnitsInput.clear().type(`${number}`).should("have.value", number);
         return this;
     }
@@ -67,7 +58,10 @@ class SummaryActions extends BaseActions {
      * identifierType: string, identifier: string}>} siteDetails
      * @returns {SummaryActions}
      */
-    verifySiteDetails(siteDetails) {
+    verifySiteDetails(siteDetails: Readonly<{
+            streetAddress: string; censusTract: string; streetName: string; buildingDescriptor: string;
+            identifierType: string; identifier: string;
+        }>): this {
         this.verifyStreetAddress(siteDetails.streetAddress)
             .verifyCensusTract(siteDetails.censusTract)
             .verifyStreetName(siteDetails.streetName)
@@ -81,7 +75,7 @@ class SummaryActions extends BaseActions {
      * @param {string | number} year
      * @returns {SummaryActions}
      */
-    enterYearBuilt(year) {
+    enterYearBuilt(year: string | number): this {
         summaryPage.yearBuilt.clear().type(year).should("have.value", year);
         return this;
     }
@@ -91,7 +85,7 @@ class SummaryActions extends BaseActions {
      * @param {number | string} area
      * @returns {SummaryActions}
      */
-    enterSiteArea(area) {
+    enterSiteArea(area: number | string): this {
         if (isHasDecimalPartMoreNumberOfDigits(area, 4)) {
             area = cutDecimalPartToNumberOfDigits(area, 4);
         }
@@ -105,7 +99,7 @@ class SummaryActions extends BaseActions {
      * @param {number | string} area
      * @returns {SummaryActions}
      */
-    enterGrossBuildingArea(area) {
+    enterGrossBuildingArea(area: number | string): this {
         const valueToBe = typeof area === "string" ? area : numberWithCommas(area);
         summaryPage.grossBuildingArea.clear().type(area).should("have.value", valueToBe);
         return this;
@@ -115,7 +109,7 @@ class SummaryActions extends BaseActions {
      * @param {string | number} gbaToBe
      * @returns {SummaryActions}
      */
-    verifyGrossBuildingArea(gbaToBe) {
+    verifyGrossBuildingArea(gbaToBe: string | number): this {
         const valueToBe = typeof gbaToBe === "string" ? gbaToBe : numberWithCommas(gbaToBe);
         summaryPage.grossBuildingArea.should("have.value", valueToBe);
         return this;
@@ -126,7 +120,7 @@ class SummaryActions extends BaseActions {
      * @param {number | string} number
      * @returns {SummaryActions}
      */
-    enterFloorsNumber(number) {
+    enterFloorsNumber(number: number | string): this {
         summaryPage.floorsNumber.clear().type(number).should("have.value", number);
         return this;
     }
@@ -135,7 +129,7 @@ class SummaryActions extends BaseActions {
      *
      * @returns {SummaryActions}
      */
-    clickWalkUpTypeButtons() {
+    clickWalkUpTypeButtons(): this {
         summaryPage.walkUpTypeButtons.each(button => {
             cy.wrap(button).click();
         });
@@ -147,7 +141,7 @@ class SummaryActions extends BaseActions {
      * @param {number | string} area
      * @returns {SummaryActions}
      */
-    enterCurrentGrossBuildingArea(area) {
+    enterCurrentGrossBuildingArea(area: number | string): this {
         if (isHasDecimalPartMoreNumberOfDigits(area, 2)) {
             area = cutDecimalPartToNumberOfDigits(area, 2);
         }
@@ -161,7 +155,7 @@ class SummaryActions extends BaseActions {
      * @param {number | string} number
      * @returns {SummaryActions}
      */
-    enterCurrentNumberOfResUnits(number) {
+    enterCurrentNumberOfResUnits(number: number | string): this {
         summaryPage.currentNumberOfResUnits.clear().type(number).should("have.value", number);
         return this;
     }
@@ -171,7 +165,7 @@ class SummaryActions extends BaseActions {
      * @param {number | string} number
      * @returns {SummaryActions}
      */
-    enterCurrentFloorsNumber(number) {
+    enterCurrentFloorsNumber(number: number | string): this {
         summaryPage.currentFloorsNumber.clear().type(number).should("have.value", number);
         return this;
     }
@@ -181,7 +175,7 @@ class SummaryActions extends BaseActions {
      * @param {string} newText
      * @returns {SummaryActions}
      */
-    editAsCompleteExport(newText) {
+    editAsCompleteExport(newText: string): this {
         summaryPage.editCommentaryButtons.first().click();
         summaryPage.textBox.clear().type(newText);
         summaryPage.textBox.should("have.text", newText);
@@ -193,7 +187,7 @@ class SummaryActions extends BaseActions {
      * @param {Readonly<{grossArea: number, numberOfUnits: number, floorsNumber: number}>} description
      * @returns {SummaryActions}
      */
-    fillAsCompleteBuildingDescription(description) {
+    fillAsCompleteBuildingDescription(description: Readonly<{ grossArea: number; numberOfUnits: number; floorsNumber: number; }>): this {
         this.enterGrossBuildingArea(description.grossArea)
             .enterNumberOfResUnits(description.numberOfUnits)
             .enterFloorsNumber(description.floorsNumber);
@@ -205,7 +199,7 @@ class SummaryActions extends BaseActions {
      * @param {Readonly<{grossArea: number, numberOfUnits: number, floorsNumber: number}>} description
      * @returns {SummaryActions}
      */
-    fillCurrentBuildDescription(description) {
+    fillCurrentBuildDescription(description: Readonly<{ grossArea: number; numberOfUnits: number; floorsNumber: number; }>): this {
         this.enterCurrentGrossBuildingArea(description.grossArea)
             .enterCurrentNumberOfResUnits(description.numberOfUnits)
             .enterCurrentFloorsNumber(description.floorsNumber);
