@@ -29,10 +29,8 @@ class ValueConclusionPage extends BasePage {
     get revertCommentaryButton() {return cy.get("[data-qa=generated-commentary-revert-btn]");}
     get asCompleteLessEntrepreneurialProfit() {return cy.get("[data-qa*='asCompleteLossItems.entrepreneurialProfit'] input[inputmode]");}
     get gbaAmount() {return cy.get("[data-qa=grossBuildingArea-amount-cell]");}
-    // TODO: change locators of laundry loss months after adding unique attributes
-    get asStabilizedLaundryLossMonths() {return cy.get("[name='asStabilizedLossItems[0].months']");}
-    get asCompleteLessLaundryLossMonths() {return cy.get("[name='asCompleteLossItems[0].months']");}
-
+    get asStabilizedLaundryLossMonths() {return cy.get("[data-qa='asStabilizedLossItems.laundryRentLoss.renovation-period-cell'] input[type=text]");}
+    get asCompleteLessLaundryLossMonths() {return cy.get("[data-qa='asCompleteLossItems.laundryRentLoss.renovation-period-cell'] input[type=text]");}
     get asStabilizedLaundryLossAmount() {return cy.get("[data-qa*='asStabilizedLossItems.laundryRentLoss.amount'] input:not([type=hidden])");}
     get asCompleteLaundryLossAmount() {return cy.get("[data-qa*='asCompleteLossItems.laundryRentLoss.amount'] input:not([type=hidden])");}
     get asStabilizedCommissionFeeAmount() {return cy.get("[data-qa^='asStabilizedLossItems.commissionFee.amount'] input:not([type=hidden])");}
