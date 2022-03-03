@@ -5,12 +5,8 @@ import potentialGrossIncomePage from "../../pages/income/potentialGrossIncome.pa
 
 class PotentialGrossIncomeActions extends BaseActions {
 
-    /**
-     * @param {number} value
-     * @returns {PotentialGrossIncomeActions}
-     */
-    enterResVacancyCollLoss(value) {
-        grossIncomePage.resVacancyPotentialLossInput.clear().type(value)
+    enterResVacancyCollLoss(value: number): PotentialGrossIncomeActions {
+        grossIncomePage.resVacancyPotentialLossInput.clear().type(`${value}`)
             .should("have.value", `${value.toFixed(2)}`);
         return this;
     }

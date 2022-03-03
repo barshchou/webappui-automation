@@ -51,6 +51,7 @@ class ProFormaPage extends BasePage {
     getCommercialUseVCLossPerUnitCell(useText) {return this.getCommercialUseVCLossRow(useText).siblings("[data-qa*=perUnit]");}
     getCommercialUseVCLossTotal(useText) {return this.getCommercialUseVCLossRow(useText).siblings("[data-qa*=total]");}
     getCommercialUseVCLossPerSF(useText) {return this.getCommercialUseVCLossRow(useText).siblings("[data-qa*=psf]");}
+    get residentialVCLossLabelCell() {return cy.get("[data-qa=residentialVCLossAmount-label-cell]");}
 }
 
 export default new ProFormaPage();
