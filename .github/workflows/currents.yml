@@ -25,9 +25,13 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Install currents
-        run: npm i @currents/cli
+        run: npm i @currents/cli -g
 
       - name: Run Cypress on Currents.dev
         uses: cypress-io/github-action@v2
         with:
-          command: npx currents run --record --parallel --key ${{ secrets.CURRENTS_RECORD_KEY }} --ci-build-id "${{ github.repository }}-${{ github.run_id }}-${{ github.run_attempt}}"
+          command: currents run --record --parallel --key ${{ secrets.CURRENTS_RECORD_KEY }} --ci-build-id "${{ github.repository }}-${{ github.run_id }}-${{ github.run_attempt}}"
+        env:
+          CYPRESS_USERNAME: ${{ secrets.USERNAME }}
+          CYPRESS_PASSWORD: ${{ secrets.PASSWORD }}
+          CYPRESS_url: ${{ github.event.inputs.choice }}
