@@ -29,7 +29,8 @@ jobs:
 
       - name: Run Cypress on Currents.dev
         uses: cypress-io/github-action@v2
-        run: currents run --record --parallel --key $CURRENTS_RECORD_KEY --ci-build-id $CI_BUILD_ID
+        with:
+          command: currents run --record --parallel --key $CURRENTS_RECORD_KEY --ci-build-id $CI_BUILD_ID
         env:
           CURRENTS_RECORD_KEY: ${{ secrets.CURRENTS_RECORD_KEY }}
           CI_BUILD_ID: "${{ github.repository }}-${{ github.run_id }}-${{ github.run_attempt}}"
