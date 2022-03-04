@@ -32,7 +32,7 @@ jobs:
         with:
           build: npm i
           browser: chrome
-          command: currents run --record --parallel --key ${{ secrets.CURRENTS_RECORD_KEY }} --ci-build-id "${{ github.repository }}-${{ github.run_id }}-${{ github.run_attempt}}"
+          command: npm run currents -- --record --parallel --key ${{ secrets.CURRENTS_RECORD_KEY }} --ci-build-id "${{ github.repository }}-${{ github.run_id }}-${{ github.run_attempt}}"
         env:
           CYPRESS_USERNAME: ${{ secrets.USERNAME }}
           CYPRESS_PASSWORD: ${{ secrets.PASSWORD }}
