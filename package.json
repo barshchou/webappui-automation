@@ -4,7 +4,6 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "currents:ci":"currents run --spec cypress/integration/not_full_reports/** --browser chrome --record --parallel",
     "cy:open": "npx cypress open",
     "cy:chrome_headed_stage_api": "npx cypress run --browser chrome --headed",
     "cy:chrome_headed_prod_api": "npx cypress run --browser chrome --headed --env url=prod",
