@@ -30,6 +30,8 @@ jobs:
       - name: Run Cypress on Currents.dev
         uses: cypress-io/github-action@v2
         with:
+          build: npm i
+          browser: chrome
           command: currents run --record --parallel --key ${{ secrets.CURRENTS_RECORD_KEY }} --ci-build-id "${{ github.repository }}-${{ github.run_id }}-${{ github.run_attempt}}"
         env:
           CYPRESS_USERNAME: ${{ secrets.USERNAME }}
