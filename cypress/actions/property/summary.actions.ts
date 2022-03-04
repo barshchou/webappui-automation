@@ -178,7 +178,7 @@ class SummaryActions extends BaseActions {
     editAsCompleteExport(newText: string): this {
         summaryPage.editCommentaryButtons.first().click();
         summaryPage.textBox.clear().type(newText);
-        summaryPage.textBox.should("have.text", newText);
+        summaryPage.textBox.should("contain.text", newText);
         summaryPage.saveExportEditButton.click();
         return this;
     }
