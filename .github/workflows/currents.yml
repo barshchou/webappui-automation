@@ -37,11 +37,17 @@ jobs:
             ${{ runner.os }}-build-
             ${{ runner.os }}-
       
+      - name: Install Cypress globally
+        run: npm i cypress@9.4.1 -g
+
+      - name: Install Currents globally
+        run: npm i @currents/cli -g
+
       - name: Install Dependencies
         run: npm install
 
       - name: Run Cypress on Currents.dev
-        run: npm run currents -- --record --parallel --key ${{ secrets.CURRENTS_RECORD_KEY }} --ci-build-id "${{ github.repository }}-${{ github.run_id }}-${{ github.run_attempt}}"
+        run: currents run --browser chrome --record --parallel --key ${{ secrets.CURRENTS_RECORD_KEY }} --ci-build-id "${{ github.repository }}-${{ github.run_id }}-${{ github.run_attempt}}"
         env:
           CYPRESS_USERNAME: ${{ secrets.USERNAME }}
           CYPRESS_PASSWORD: ${{ secrets.PASSWORD }}
