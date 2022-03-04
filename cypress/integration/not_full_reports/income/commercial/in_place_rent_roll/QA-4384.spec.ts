@@ -8,6 +8,7 @@ describe("Verify the Use column in the grid", () => {
 
     const useRadios = ["retail", "office", "medical", "community", "undetermined"];
     const useTexts = ["Retail", "Office", "Medical Office", "Community Facility", "Undetermined"];
+    const groupName = "Use";
     const defaultUseValue = "Undetermined";
 
     beforeEach("Login, create report", () => {
@@ -22,7 +23,7 @@ describe("Verify the Use column in the grid", () => {
                 .verifyUseCellTextByRowNumber(defaultUseValue);
             NavigationSection.navigateToCommercialUnits();
             Property.CommercialUnits.clickCommercialUnitTabByIndex()
-                .clickRadioButtonByValueAndUnitIndex(useRadios[index]);
+                .clickRadioButtonByValueAndUnitIndex(groupName, useRadios[index]);
             NavigationSection.navigateToCommercialInPlaceRentRoll();
             Income.Commercial.InPlaceRentRoll.verifyUseCellTextByRowNumber(useText);
             deleteReport(testData.reportCreationData.reportNumber);

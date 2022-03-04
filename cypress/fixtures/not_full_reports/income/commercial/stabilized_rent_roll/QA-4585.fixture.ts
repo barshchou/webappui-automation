@@ -5,6 +5,7 @@ export default {
     reportCreationData: ReportDataCreator.getReportSpecificIncomeValue(Enums.INCOME_TYPE.BOTH, "4585"),
     numberOfCommercialUnits: 2,
     listOfUnitsSF: [1000, 2000],
+    groupName: "Use",
     useRadios: ["retail", "office"],
     useTexts: ["Retail", "Office"],
     leaseStatuses: ["Vacant", "Occupied"],

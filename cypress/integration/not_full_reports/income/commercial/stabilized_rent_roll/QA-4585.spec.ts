@@ -20,7 +20,7 @@ describe("Verify the Commercial Stabilized Rent Roll table", () => {
         Property.CommercialUnits.enterListUnitSF(testData.listOfUnitsSF, testData.numberOfCommercialUnits);
         for (let i = 0; i < testData.numberOfCommercialUnits; i++) {
             Property.CommercialUnits.clickCommercialUnitTabByIndex(i)
-                .clickRadioButtonByValueAndUnitIndex(testData.useRadios[i], i);
+                .clickRadioButtonByValueAndUnitIndex(testData.groupName, testData.useRadios[i], i);
         }
 
         cy.stepInfo(`
