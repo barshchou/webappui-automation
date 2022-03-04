@@ -25,7 +25,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Install currents
-        run: npm i @currents/cli -g
+        run: npm i @currents/cli
 
       - name: Run Cypress on Currents.dev
         uses: cypress-io/github-action@v2
