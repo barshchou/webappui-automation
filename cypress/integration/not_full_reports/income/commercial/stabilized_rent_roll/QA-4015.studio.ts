@@ -1,14 +1,14 @@
-import testData from "../../../../../fixtures/not_full_reports/income/commercial/stabilized_rent_roll/QA-4585.fixture";
-import {createReport, deleteReport} from "../../../../../actions/base/baseTest.actions";
-import NavigationSection from "../../../../../actions/base/navigationSection.actions";
-import Property from "../../../../../actions/property/property.manager";
-import Income from "../../../../../actions/income/income.manager";
+const reportIdAlias = "report_id";
 
 describe(" Verify that changes are displayed for Annual and Monthly Rent columns, # column in the export.", () => {
     before("Login, create report", () => {
         cy.stepInfo(`1. Proceed to the Income Approach > 
         Commercial Stabilized Rent Roll and fill all fields on the WebApp.`)
         cy.login();
+        /**
+         * ernst: We can intercept report_id in before hook and memorize it with "as" command.
+         * And then access it in test body
+         */
         // createReport(testData.reportCreationData);
     });
 
@@ -25,6 +25,7 @@ describe(" Verify that changes are displayed for Annual and Monthly Rent columns
         /**
          * Before refactor (raw generated test body)
          */
+        /* ==== Generated with Cypress Studio ==== */
         //  cy.get('.jss16 > .jss52 > .jss27').click();
         //  cy.get('.jss364 > .jss362 > .jss331 > .jss341').clear();
         //  cy.get('.jss364 > .jss362 > .jss331 > .jss341').type('462 1st Avenue, New York, USA{enter}');
@@ -44,11 +45,11 @@ describe(" Verify that changes are displayed for Annual and Monthly Rent columns
         //  cy.get('.jss845 > .jss1216').click();
         //  cy.get('a > :nth-child(1) > div > .injected-svg').click();
         //  cy.get('[aria-describedby="mui-tooltip-37036"] > .svg-inline--fa').click();
+        /* ==== End Cypress Studio ==== */
 
         /**
          * After refactor (we need to change some selectors due to their flakiness)
          */
-        /* ==== Generated with Cypress Studio ==== */
         cy.get('.jss16 > .jss52 > .jss27').click();
         cy.get('.jss364 > .jss362 > .jss331 > .jss341').clear();
         cy.get('.jss364 > .jss362 > .jss331 > .jss341').type('462 1st Avenue, New York, USA{enter}');
@@ -64,14 +65,22 @@ describe(" Verify that changes are displayed for Annual and Monthly Rent columns
         cy.get('[value="AS_IS"]').click();
         cy.get('[data-qa="create-report-settings-modal"] [data-qa="create-report-btn"]').click();
         cy.get('[data-qa="form-save-btn"]').click();
-        // cy.get('[align="right"] > .jss52 > .jss27').click();
+        //#region NOT GENERATED PART
+        cy.url().then(val=>{
+            let url = new URL(val);
+            let routes = url.pathname.replace(/\//g, " ").split(" ");
+            cy.wrap(routes[routes.length-2]).as(reportIdAlias);
+        })
+        //#endregion        
         cy.get('[href="/reports"]').click();
         /**
          * ernst: we can try to look for generated report not by xpath (as we do now),
          * but with [href=`/report/${report_id}`] [data-qa="archive-btn"], where report_id can be intercepted during the test
          */
-        cy.get('a > :nth-child(1) > div > .injected-svg').click();
-        cy.get('[aria-describedby="mui-tooltip-37036"] > .svg-inline--fa').click();
-        /* ==== End Cypress Studio ==== */
+        cy.get(`@${reportIdAlias}`).then(val=>{
+            // @ts-ignore
+            cy.log(val);
+            cy.get(`[href="/report/${val}"] [data-qa="archive-btn"]`).click({force:true});
+        })
     });
 });
