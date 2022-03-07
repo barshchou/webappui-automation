@@ -6,5 +6,6 @@
     "watchForFileChanges": false,
     "videoCompression": 15,
     "videoUploadOnPasses": false,
-    "projectId": "88VCE4"
+    "projectId": "88VCE4",
+    "experimentalStudio": true
 }
