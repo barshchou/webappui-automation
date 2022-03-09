@@ -55,4 +55,9 @@ export default class BaseActions {
         cy.xpath("//button[.='BACK']").click();
         return this;
     }
+
+    pause(){
+        cy.pause();
+        return this;
+    }
 }
