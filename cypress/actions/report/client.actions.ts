@@ -3,12 +3,18 @@ import clientPage from "../../pages/report/client.page";
 import {replaceEntersWithLineBreak} from "../../../utils/string.utils";
 
 class ClientActions extends BaseActions{
-    /**
-     * @param {string} name
-     * @returns {ClientActions}
-     */
-    enterClientName(name) {
+    verifyInputChangesToBeUnsaved(clientFileNumber: string): ClientActions {
+        clientPage.clientFileNumberField.should("have.value",clientFileNumber);
+        return this;
+    }
+
+    enterClientName(name: string): ClientActions {
         clientPage.clientNameField.type(name).type("{enter}").should("have.value", name);
+        return this;
+    }
+    
+    enterClientFileNumber(name:string): ClientActions{
+        clientPage.clientFileNumberField.clear().type(name).should("have.value", name);
         return this;
     }
 
@@ -21,7 +27,7 @@ class ClientActions extends BaseActions{
      * @param {string} textToType
      * @returns {ClientActions}
      */
-    enterAppraiserCommentary(textToType) {
+    enterAppraiserCommentary(textToType: string): ClientActions {
         clientPage.appraiserCommentary.clear().type(textToType).should("have.text", replaceEntersWithLineBreak(textToType));
         return this;
     }
@@ -37,7 +43,7 @@ class ClientActions extends BaseActions{
      * @param {string} commentary
      * @returns {ClientActions}
      */
-    verifyClientGuidelinesCommentary(commentary) {
+    verifyClientGuidelinesCommentary(commentary: string): ClientActions {
         clientPage.clientGuidelinesCommentary.should("have.text", commentary);
         return this;
     }
@@ -51,7 +57,7 @@ class ClientActions extends BaseActions{
      * @param {string} commentary
      * @returns {ClientActions}
      */
-    enterNewCommentary(commentary) {
+    enterNewCommentary(commentary: string): ClientActions {
         clientPage.guidelinesCommentaryInput.clear().type(commentary).should("have.text", commentary);
         return this;
     }
