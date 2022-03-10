@@ -9,16 +9,27 @@ describe("Verify the Client Guidelines Discussion on the page", () => {
     });
 
     it("Test body", () => {
+        cy.stepInfo(`1. Fill in the editable fields with values and do NOT click on the Save button.`)
         NavigationSection.navigateToClientPage();
         Report.Client.enterClientName(testData.clientName).
         enterClientFileNumber(testData.clientFileNumber);
-        NavigationSection.navigateToReportInformation().verifyUnsavedChangesModal().clickYesButton()
-        .navigateToClientPage();
+
+        cy.stepInfo(`2. Try to proceed on any other page and verify that the Unsaved changes modal is displayed.`)
+        NavigationSection.navigateToReportInformation().verifyUnsavedChangesModal();
+
+        cy.stepInfo(`3. Click on the Yes button and verify that the changes are saved on the Client page.`)
+        NavigationSection.clickYesButton().navigateToClientPage();
+
+        cy.stepInfo(`4. Repeat step 1, try to proceed on any other page from the Client page 
+        and verify that the Unsaved changes modal is displayed.`);
         Report.Client.enterClientName(testData.clientName).
         enterClientFileNumber(testData.clientFileNumber+"_UNSAVED");
-        NavigationSection.navigateToReportInformation().verifyUnsavedChangesModal().clickNoButton()
-        .navigateToClientPage();
+        NavigationSection.navigateToReportInformation().verifyUnsavedChangesModal();
+
+        cy.stepInfo(`5. Click on the No button and verify that the changes are NOT saved on the Client page.`)
+        NavigationSection.clickNoButton().navigateToClientPage();
         Report.Client.verifyInputChangesToBeUnsaved(testData.clientFileNumber);
+        
         deleteReport(testData.reportCreationData.reportNumber);
     });
 });
