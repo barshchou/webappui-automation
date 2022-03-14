@@ -137,6 +137,12 @@ class NavigationSectionActions extends BaseActions {
         return this;
     }
 
+    openInPlaceRentRollInCommercial(isWithSave: boolean = true): NavigationSectionActions {
+        this.clickCommercialRentRollButton();
+        if (isWithSave) this.clickYesButton();
+        return this;
+    }
+
     navigateToPropertySummary() {
         this.clickPropertyButton()
             .clickSummaryButton()
