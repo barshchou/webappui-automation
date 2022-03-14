@@ -541,7 +541,7 @@ class CommercialRentRollActions extends BaseActions {
     }
 
     clickEditDiscussionButton() {
-        rentRollPage.editDiscussionButton.click();
+        rentRollPage.editDiscussionButton.click({ force: true });
         return this;
     }
 
