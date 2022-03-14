@@ -51,13 +51,15 @@ describe("Verify the Commercial Stabilized Rent Roll table", () => {
             .verifySFCells(testData.listOfUnitsSF)
             .verifyAnnualRentByRow(testData.annualRent,1)
             .verifyMonthlyRentByRow(testData.monthlyRent, 1)
-            .verifyAnnuallyRentPsf(testData.rentsPsf[1], 1);
+            .verifyAnnuallyRentPsf(testData.rentsPsf[1], 1)
+            .clickSaveButton()
+            .verifyProgressBarNotExist();
 
         cy.stepInfo(`
         6. Proceed to the  Income > 
         Commercial > In-Place Rent Roll page, change any data (e.g. Tenant), save it
         `)
-        NavigationSection.navigateToCommercialInPlaceRentRoll()
+        NavigationSection.openInPlaceRentRollInCommercial(false)
             .verifyProgressBarNotExist();
         Income.Commercial.InPlaceRentRoll.enterTenantNameByRowNumber(testData.newTenantName, 1, testData.leaseStatuses[1]);
         
@@ -68,13 +70,15 @@ describe("Verify the Commercial Stabilized Rent Roll table", () => {
         cy.stepInfo(`
         8. Verify that the data from step 5 is also changed.
         `)
-        Income.Commercial.StabilizedRentRoll.verifyTenantNameByRow(testData.newTenantName, testData.leaseStatuses[1], 1);
+        Income.Commercial.StabilizedRentRoll.verifyTenantNameByRow(testData.newTenantName, testData.leaseStatuses[1], 1)
+            .clickSaveButton()
+            .verifyProgressBarNotExist();
         
         cy.stepInfo(`
         9. Proceed to the  Income > 
         Commercial > In-Place Rent Roll page, remove any data (e.g. Lease Start Date), save it.
         `)
-        NavigationSection.navigateToCommercialInPlaceRentRoll()
+        NavigationSection.openInPlaceRentRollInCommercial(false)
             .verifyProgressBarNotExist();
         Income.Commercial.InPlaceRentRoll.deleteTenantNameByRowNumber(1);
         
