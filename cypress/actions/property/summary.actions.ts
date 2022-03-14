@@ -10,6 +10,11 @@ class SummaryActions extends BaseActions {
 
     verifyThatPageIsOpened(): this {
         summaryPage.headerSection.should("be.visible");
+        cy.url().then(url=>{
+            let orlObj = new URL(url);
+            cy.log("Check whether current URL ends with '/property-summary'");
+            cy.wrap(orlObj.pathname.endsWith("/property-summary")).should("be.true");
+        });
         return this;
     }
 

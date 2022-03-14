@@ -2,6 +2,7 @@ import BasePage from "../base/base.page";
 
 class ClientPage extends BasePage{
     get clientNameField() {return cy.get("*[name=client]");}
+    get clientFileNumberField() {return cy.get('[name="clientFileNumber"]');}
     get addClientButton() {return cy.xpath("//a[.='Add']");}
     get appraiserCommentary() {return cy.get("[name='clientGuidelinesDiscussion.additionalCommentary']");}
     get guidelinesTooltip() {return cy.get("[title='The following generated commentary will appear in the Letter " +
