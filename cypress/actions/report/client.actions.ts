@@ -3,6 +3,7 @@ import clientPage from "../../pages/report/client.page";
 import {replaceEntersWithLineBreak} from "../../../utils/string.utils";
 
 class ClientActions extends BaseActions{
+    get Page() { return clientPage; }
     verifyInputChangesToBeUnsaved(clientFileNumber: string): ClientActions {
         clientPage.clientFileNumberField.should("have.value",clientFileNumber);
         return this;
