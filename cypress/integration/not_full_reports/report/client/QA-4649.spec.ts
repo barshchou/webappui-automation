@@ -2,6 +2,7 @@ import testData from "../../../../fixtures/not_full_reports/report/client/QA-464
 import {createReport, deleteReport} from "../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Report from "../../../../actions/report/report.manager";
+import Summary from "../../../../actions/property/summary.actions"
 
 describe("Verify the Save & Continue button functionality on the Report > Client page", () => {
     before("Login, create report", () => {
@@ -17,16 +18,10 @@ describe("Verify the Save & Continue button functionality on the Report > Client
         Report.Client.enterClientName(testData.clientName).
         enterClientFileNumber(testData.clientFileNumber)
         .clickSaveContinueButton();
-        /**
-         * test body
-         */
-        cy.stepInfo(`Verify that the changes are saved and the user is redirected to the next page (Property > Summary).`);
-        cy.get('[data-qa="summary"]').should("exist");
-        cy.url().then(url=>{
-            let orlObj = new URL(url);
-            cy.log("Check whether current URL ends with '/property-summary'");
-            cy.wrap(orlObj.pathname.endsWith("/property-summary")).should("be.true");
-        })
+  
+        cy.stepInfo(`3. Verify that the changes are saved and the user is redirected to the next page (Property > Summary).`);
+        Summary.verifyThatPageIsOpened();
+
         deleteReport(testData.reportCreationData.reportNumber);
     });
 });
