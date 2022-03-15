@@ -122,7 +122,7 @@ const siteInspectionFixture = () => {
 
 const descriptionOfImprovementsFixture = () => {
     return {
-        foundationValue: "Poured concrete and fieldstone",
+        foundationValue: "Poured concrete",
         structuralSystemValue: "Wood joists and masonry",
         externalWallsLabels: ["Brick", "Masonry"],
         framingValue: "Wood post and beam",
@@ -187,7 +187,7 @@ const gasMetersUtilitiesFixture = () => {
     return {
         type: "Individual",
         location: "Basement",
-        commentary: "Gas meters located in the basement. The residential tenants will be directly metered for gas."
+        commentary: "Individual gas meters are located in the basement."
     };
 };
 
@@ -195,7 +195,7 @@ const electricMetersUtilitiesFixture = () => {
     return {
         type: "Individual",
         location: "Basement",
-        commentary: "Electric meters located in the basement. The residential tenants will be directly metered for electricity."
+        commentary: "Individual electric meters are located in the basement."
     };
 };
 
