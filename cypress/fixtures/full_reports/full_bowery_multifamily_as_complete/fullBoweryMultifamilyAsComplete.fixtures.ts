@@ -335,8 +335,8 @@ const zoningDescriptionInformationFixture = () => {
         zonesNames: ["RS-3"],
         city: "Chicago",
         siteArea: siteDetailsFixture().siteArea,
-        propertyIdentificationCommentary: "The subject is situated on a 6,250 square foot parcel in an RS-3 zone. " +
-            "It is identified in the city of Chicago tax maps as PIN 20-36-420-020-0000. ",
+        propertyIdentificationCommentary: "The subject is situated on a 6,250 square foot parcel in an RS-3 zone " +
+            "and is identified in the city of Chicago tax maps as PIN 20-36-420-020-0000.",
         introductionCommentary: "8524 S Oglesby Ave. is in a RS-3 zone. Below is a summary of the subject property's " +
             "compliance with regard to use and bulk regulations."
     };
@@ -838,24 +838,6 @@ const capRateCompsFixture = () => {
             },
             {
                 stateValue: "Other",
-                address: "8109 S Colfax Ave.",
-                id: "1",
-                source: "externalDatabase",
-                sourceName: "CoStar",
-                sourceUrl: "https://product.costar.com/detail/sale-comps/default/Comp/5504232/summary",
-                gba: 6300,
-                type: "multifamily",
-                isElevatored: false,
-                numberOfUnits: 6,
-                isListing: false,
-                isInContract: false,
-                saleDate: "05-17-2021",
-                yearBuilt: 1920,
-                pricePerSF: "N/A",
-                capRate: "9.09"
-            },
-            {
-                stateValue: "Other",
                 address: "7932 S Kingston Ave., Chicago, Illinois 60617",
                 id: "1",
                 source: "externalDatabase",
@@ -918,10 +900,8 @@ const capRateCompsFixture = () => {
 const findCompsFixture = () => {
     return {
         comparables: [
-            {address: "7748 S Colfax Ave."},
             {address: "8138 S Exchange Ave."},
             {address: "8041 S Manistee Ave."},
-            {address: "7926 S Luella Ave."},
             {address: "8103 S Luella Ave."}
         ]
     };
@@ -946,21 +926,9 @@ const adjustCompsFixture = () => {
             },
             {
                 size: 0,
-                condition: 0,
-                other: -5,
-                trendedPrice: "$101,666.67",
-            },
-            {
-                size: 10,
-                condition: 0,
-                other: -5,
-                trendedPrice: "$91,666.67",
-            },
-            {
-                size: 0,
                 condition: 5,
                 other: -5,
-                trendedPrice: "$86,666.67",
+                trendedPrice: "$101,666.67",
             },
         ],
         otherAdjustmentNewName: "Average Unit Size Adjustment"
@@ -970,10 +938,10 @@ const adjustCompsFixture = () => {
 const valueConclusionFixture = () => {
     return {
         unadjustedPrices: {
-            min: "$78,125.00", avg: "$89,625.00", max: "$101,666.67", median: "$90,000.00"
+            min: "$78,125.00", avg: "$89,930.56", max: "$101,666.67", median: "$90,000.00"
         },
         adjustedPrices: {
-            min: "$82,031.25", avg: "$90,306.25", max: "$96,583.33", median: "$90,000.00"
+            min: "$82,031.25", avg: "$91,232.64", max: "$101,666.67", median: "$90,000.00"
         },
         incomeApproachConclusion: "$85,929 per unit",
         saleValueConclusion: 90000,
@@ -1036,7 +1004,7 @@ const unitInspectionFixture = () => {
 
 const capRateDiscussionFixture = () => {
     return {
-        capRateTable: {min: "8.69%", max: "11.44%", average: "9.61%"},
+        capRateTable: {min: "8.69%", max: "11.44%", average: "9.71%"},
         pwcRow: {min: "3.50%", average: "5.03%", max: "7.00%"},
         situsRow: {min: "4.00%", average: "5.20%", max: "6.00%"},
         capRateCompsTable: {income: "Similar", propConditions: "Similar", location: "Similar"},

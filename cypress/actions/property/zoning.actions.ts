@@ -65,7 +65,7 @@ class ZoningActions extends BaseActions {
      * @returns {ZoningActions}
      */
     verifyPropIdentificationCommentary(commentary) {
-        zoningPage.propIdentificationCommentary.should("have.text", commentary);
+        zoningPage.propIdentificationCommentary.should("contain.text", commentary);
         return this;
     }
 

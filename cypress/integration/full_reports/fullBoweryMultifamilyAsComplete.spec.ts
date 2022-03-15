@@ -430,8 +430,11 @@ describe("Full bowery way, multifamily as complete report", () => {
             .checkIncomeAdjustmentLevel(testData.adjustComps.incomeAdjustmentType);
         testData.adjustComps.comparables.forEach((comp, i) => {
             Sales.AdjustComps.enterSizeAdjustmentByColumn(comp.size, i)
-                .enterConditionAdjustmentByColumn(comp.condition, i)
-                .enterOtherAdjustmentByColumn(comp.other, i)
+                .enterConditionAdjustmentByColumn(comp.condition, i);
+            if (i === 0) {
+                Sales.AdjustComps.clickAddOtherAdjustmentButton();
+            }
+            Sales.AdjustComps.enterOtherAdjustmentByColumn(comp.other, i)
                 .verifyTrendedPriceByColumn(comp.trendedPrice, i)
                 .verifyAdjustedPriceByColumn(i);
         });
