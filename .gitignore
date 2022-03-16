@@ -120,6 +120,8 @@ dist
 auth.json
 cypress.env.json
 
+# cypress artifacts
 cypress/reports/
 cypress/videos/
 cypress/screenshots/
+cypress/downloads
