@@ -37,6 +37,11 @@ export default class BaseActions {
         return this;
     }
 
+    clickSubmitBtn(){
+        cy.get('[type="submit"][data-qa="save-btn"]').click();
+        return this;
+    }
+
     clickSaveContinueButton() {
         cy.get("*[data-qa='form-submit-btn']").scrollIntoView().click();
     }
