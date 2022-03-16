@@ -352,8 +352,21 @@ class NavigationSectionActions extends BaseActions {
             .clickYesButton();
         return this;
     }
+
     navigateToReportInformation(){
         navigationSectionPage.reportInfoButton.click();
+        return this;
+    }
+
+    clickExpenseHistoryButton(): NavigationSectionActions {
+        navigationSectionPage.expenseHistory.click();
+        return this;
+    }
+
+    navigateToExpenseHistory(): NavigationSectionActions {
+        this.clickIncomeApproachButton()
+            .clickExpenseHistoryButton()
+            .clickYesButton();
         return this;
     }
 }

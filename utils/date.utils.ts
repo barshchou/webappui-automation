@@ -44,8 +44,7 @@ export const getMonthFromDate = (date) => {
     return date.split("-")[0];
 };
 
-export const getYearFromDate = (date) => {
-    date = date ?? getTodayDateString();
+export const getYearFromDate = (date: string = getTodayDateString()): string => {
     return date.split("-")[2];
 };
 
@@ -61,6 +60,11 @@ export const getQuarter = (dateString) => {
         return "Q3";
     }
 };
+
+export const getCurrentMonthName = (): string => {
+    const date = new Date();
+    return date.toLocaleDateString(undefined, {month: "long"});
+}
 
 export const isCorrectQuarter = (quarter) => {
     return quarter === "Q1" || quarter === "Q2" || quarter === "Q3" || quarter === "Q4";

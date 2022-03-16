@@ -4,31 +4,23 @@ import {getNumberFromDollarNumberWithCommas, numberWithCommas} from "../../../ut
 
 class ExpenseHistoryActions extends BaseActions{
 
-    /**
-     *
-     * @param {string} value
-     * @returns {ExpenseHistoryActions}
-     */
     selectExpensePeriod(value: string): ExpenseHistoryActions {
         expenseHistoryPage.expensePeriodDropdown.click();
         expenseHistoryPage.getDropdownOptionByValue(value).click();
         return this;
     }
 
-    /**
-     *
-     * @param {string | number} yearToBe
-     * @returns {ExpenseHistoryActions}
-     */
-    verifyExpenseYear(yearToBe: string | number): ExpenseHistoryActions {
+    verifyExpenseYear(yearToBe: number | string): ExpenseHistoryActions {
         expenseHistoryPage.expenseYearInput.should("have.value", yearToBe);
         return this;
     }
 
-    /**
-     *
-     * @returns {ExpenseHistoryActions}
-     */
+    enterExpenseYear(year: number | string): ExpenseHistoryActions {
+        expenseHistoryPage.expenseYearInput.clear().type(`${year}`);
+        this.verifyExpenseYear(year);
+        return this;
+    }
+
     clickAddExpenseYearButton(): ExpenseHistoryActions {
         expenseHistoryPage.addExpenseYearButton.click();
         return this;
@@ -131,14 +123,8 @@ class ExpenseHistoryActions extends BaseActions{
         return this;
     }
 
-    /**
-     *
-     * @param {number | string} value
-     * @param {number} index
-     * @returns {ExpenseHistoryActions}
-     */
     enterPayrollBenefitsByColIndex(value: number | string, index: number = 0): ExpenseHistoryActions {
-        expenseHistoryPage.payrollBenefitsInputs.eq(index).clear().type(value)
+        expenseHistoryPage.payrollBenefitsInputs.eq(index).clear().type(`${value}`)
             .should("have.value", `$${numberWithCommas(value)}`);
         return this;
     }
@@ -299,6 +285,21 @@ class ExpenseHistoryActions extends BaseActions{
      */
     verifyExpenseHistoryCommentary(commToBe: string): ExpenseHistoryActions {
         expenseHistoryPage.expenseHistoryCommentary.should("have.text", commToBe);
+        return this;
+    }
+
+    enterExpenseMonth(month: string): ExpenseHistoryActions {
+        expenseHistoryPage.expenseMonth.clear().type(month);
+        this.verifyExpenseMonth(month);
+        return this;
+    }
+
+    verifyExpenseMonth(monthToBe: string, expensePeriodValue?: string): ExpenseHistoryActions {
+        if (expensePeriodValue === "Projection") {
+            expenseHistoryPage.expenseMonthProjection.should("be.disabled").and("have.value", monthToBe);
+        } else {
+            expenseHistoryPage.expenseMonth.should("have.value", monthToBe);
+        }
         return this;
     }
 }

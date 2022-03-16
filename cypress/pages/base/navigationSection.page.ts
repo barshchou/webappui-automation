@@ -36,6 +36,7 @@ class NavigationSection extends BasePage {
     get potentialGrossIncome() {return cy.get("#potential-gross-income");}
     get proForma() {return cy.get("#pro-forma");}
     get commercialCompGroups() {return cy.get("#commercial-comp-groups");}
+    get expenseHistory() {return cy.get("#expense-history");}
 }
 
 export default new NavigationSection();

@@ -42,6 +42,8 @@ class ExpenseHistoryPage extends BasePage{
     get toeAverageCell() {return cy.get("[data-qa='Total Operating Expenses-average']");}
     get toeExclRETAverageCell() {return cy.get("[data-qa$='(Excl. RE Taxes)-average']");}
     get noeAverageCell() {return cy.get("[data-qa='Net Operating Income-average']");}
+    get expenseMonth() {return cy.get("[data-qa=expenseMonth-form-control] input");}
+    get expenseMonthProjection() {return cy.get("[name=expenseMonth]");}
 }
 
 export default new ExpenseHistoryPage();
