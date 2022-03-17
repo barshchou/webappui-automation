@@ -42,6 +42,7 @@ describe("Historical expense Electricity Per SF is correctly calculated and disp
         NavigationSection.navigateToExpenseForecast();
 
         cy.stepInfo("4. Go to Expense Forecast and make sure that Per SF radiobutton is selected for Insurance card");
+        Income.ExpenseForecast.verifyForecastItemBasis(testData.electricityItem);
         deleteReport(testData.reportCreationData.reportNumber);
     })
 })

@@ -27,5 +27,9 @@ export default {
         month: "December",
         expenseYear: Number(getYearFromDate()) + 1,
         electricityExpense: 15000
+    },
+    electricityItem: {
+        name: "electricity",
+        basis: "sf"
     }
 }

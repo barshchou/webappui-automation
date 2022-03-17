@@ -2,22 +2,22 @@ import BaseActions from "../base/base.actions";
 import expenseForecastPage from "../../pages/income/expenseForecast.page";
 import {getNumberFromDollarNumberWithCommas, numberWithCommas} from "../../../utils/numbers.utils";
 
-type forecastItem = Readonly<{ name: string, basis: string, forecast?: number, projection?: number }>;
+type ForecastItem = Readonly<{ name: string, basis: string, forecast?: number, projection?: number }>;
 
 class ExpenseForecastActions extends BaseActions {
 
-    chooseForecastItemBasis(forecastItem: forecastItem): ExpenseForecastActions {
+    chooseForecastItemBasis(forecastItem: ForecastItem): ExpenseForecastActions {
         expenseForecastPage.getForecastItemBasisRadio(forecastItem.name).check(forecastItem.basis);
         this.verifyForecastItemBasis(forecastItem);
         return this;
     }
 
-    verifyForecastItemBasis(forecastItem: forecastItem): ExpenseForecastActions {
+    verifyForecastItemBasis(forecastItem: ForecastItem): ExpenseForecastActions {
         expenseForecastPage.getElementToCheckRadio(forecastItem.name, forecastItem.basis).should("exist");
         return this;
     }
 
-    enterForecastItemForecast(forecastItem: forecastItem): ExpenseForecastActions {
+    enterForecastItemForecast(forecastItem: ForecastItem): ExpenseForecastActions {
         const valueToBe = `$${numberWithCommas(forecastItem.forecast)}`;
         expenseForecastPage.getForecastItemForecastInput(forecastItem.name).clear()
             .type(`${forecastItem.forecast}`).should("have.value", valueToBe);
