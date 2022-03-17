@@ -2,6 +2,10 @@ import navigationSectionPage from "../../pages/base/navigationSection.page";
 import BaseActions from "./base.actions";
 
 class NavigationSectionActions extends BaseActions {
+    verifyUnsavedChangesModal() {
+        cy.get('[data-qa="form-confirm-dialog"]').should("be.visible");
+        return this;
+    }
 
     clickIncomeApproachButton() {
         navigationSectionPage.incomeApproachButton.click();
@@ -130,6 +134,12 @@ class NavigationSectionActions extends BaseActions {
         if (isWithSave) {
             this.clickYesButton();
         }
+        return this;
+    }
+
+    openInPlaceRentRollInCommercial(isWithSave: boolean = true): NavigationSectionActions {
+        this.clickCommercialRentRollButton();
+        if (isWithSave) this.clickYesButton();
         return this;
     }
 
@@ -340,6 +350,10 @@ class NavigationSectionActions extends BaseActions {
     openCompGroupsInCommercial() {
         this.clickCommercialCompGroups()
             .clickYesButton();
+        return this;
+    }
+    navigateToReportInformation(){
+        navigationSectionPage.reportInfoButton.click();
         return this;
     }
 }

@@ -1,6 +1,7 @@
 import BasePage from "./base.page";
 
 class NavigationSection extends BasePage {
+    get reportInfoButton() { return cy.get('[id="report-information"]')};
 
     get incomeApproachButton() {return cy.get("#income-approach > svg");}
     get residentialIncomeArrow() {return cy.get("#residentialIncome > svg");}

@@ -133,7 +133,7 @@ class CommercialRentRollActions extends BaseActions {
      */
     checkIsInspectedCheckboxByRowNumber(rowNumber = 0) {
         rentRollPage.pageHeader.should("be.visible");
-        const backColor = "rgb(65, 96, 211)";
+        const backColor = "rgb(66, 96, 211)";
         rentRollPage.elementToVerifyIsInspected.should("not.have.css", "background-color", backColor);
         rentRollPage.isInspectedCheckboxes.eq(rowNumber).as("isInspectedCheckbox");
         cy.get("@isInspectedCheckbox").invoke("show");
@@ -541,7 +541,7 @@ class CommercialRentRollActions extends BaseActions {
     }
 
     clickEditDiscussionButton() {
-        rentRollPage.editDiscussionButton.click();
+        rentRollPage.editDiscussionButton.click({ force: true });
         return this;
     }
 
