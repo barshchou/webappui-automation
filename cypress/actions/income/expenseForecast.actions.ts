@@ -195,8 +195,8 @@ class ExpenseForecastActions extends BaseActions {
         } else {
             numberToBe = numberWithCommas((forecastItem.projection / currentDescription.grossArea).toFixed(2));
         }
-        expenseForecastPage.getForecastItemProjection(this.getItemNameForAverage(forecastItem.name))
-            .should("have.text", `Owner's Projection: $${numberToBe}`);
+        expenseForecastPage.getForecastItemProjectionByType(this.getItemNameForAverage(forecastItem.name), "Owner's Projection")
+            .should("contain.text", `$${numberToBe}`);
         return this;
     }
 

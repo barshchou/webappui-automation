@@ -8,7 +8,7 @@ class ExpenseForecastPage extends BasePage {
     getForecastItemCompAvg(item) {return cy.get(`[data-qa=${item}-forecast-item] [data-qa=comp-avg]`);}
     getForecastItemCompMax(item) {return cy.get(`[data-qa=${item}-forecast-item] [data-qa=comp-max]`);}
     getForecastItemBasisMoneyValue(item) {return cy.get(`[data-qa=${item}-forecast-item] [data-qa=basis]`);}
-    getForecastItemProjection(item) {return cy.get(`[data-qa=${item}-forecast-item] [data-qa$=historical]`);}
+    getForecastItemProjectionByType(item, type) {return cy.contains(`[data-qa=${item}-forecast-item] [data-qa$=historical]`, type);}
     get inputPercentOfEGICheckbox() {return cy.get("[label='Input % of EGI'] input");}
     get percentOfEgiInput() {return cy.get("[name='management.percentOfEgi']");}
     get toeCompMin() {return cy.get("[data-qa=comp-min]").last();}
