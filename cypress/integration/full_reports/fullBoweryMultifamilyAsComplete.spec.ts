@@ -286,8 +286,8 @@ describe("Full bowery way, multifamily as complete report", () => {
             .verifyTOEExcludingRETByIndex(testData.expenseHistory.realEstateTaxes)
             .verifyNetOpIncomeByIndex(testData.expenseHistory.grossRevenue)
             .verifyAverageTable()
-            .verifyExpenseHistoryCommentary(testData.expenseHistory.commentary)
-            .clickSaveContinueButton();
+            .verifyExpenseHistoryCommentary(testData.expenseHistory.commentary);
+        NavigationSection.navigateToComparableExpenses();
         testData.comparableExpenses.comparables.forEach((comp, i) => {
             Income.ComparableExpenses.clickAddBlankColumnButton()
                 .enterAddressByColumnIndex(comp.address, i)
