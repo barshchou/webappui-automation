@@ -286,8 +286,8 @@ describe("Full bowery way, multifamily as complete report", () => {
             .verifyTOEExcludingRETByIndex(testData.expenseHistory.realEstateTaxes)
             .verifyNetOpIncomeByIndex(testData.expenseHistory.grossRevenue)
             .verifyAverageTable()
-            .verifyExpenseHistoryCommentary(testData.expenseHistory.commentary)
-            .clickSaveContinueButton();
+            .verifyExpenseHistoryCommentary(testData.expenseHistory.commentary);
+        NavigationSection.navigateToComparableExpenses();
         testData.comparableExpenses.comparables.forEach((comp, i) => {
             Income.ComparableExpenses.clickAddBlankColumnButton()
                 .enterAddressByColumnIndex(comp.address, i)
@@ -430,8 +430,11 @@ describe("Full bowery way, multifamily as complete report", () => {
             .checkIncomeAdjustmentLevel(testData.adjustComps.incomeAdjustmentType);
         testData.adjustComps.comparables.forEach((comp, i) => {
             Sales.AdjustComps.enterSizeAdjustmentByColumn(comp.size, i)
-                .enterConditionAdjustmentByColumn(comp.condition, i)
-                .enterOtherAdjustmentByColumn(comp.other, i)
+                .enterConditionAdjustmentByColumn(comp.condition, i);
+            if (i === 0) {
+                Sales.AdjustComps.clickAddOtherAdjustmentButton();
+            }
+            Sales.AdjustComps.enterOtherAdjustmentByColumn(comp.other, i)
                 .verifyTrendedPriceByColumn(comp.trendedPrice, i)
                 .verifyAdjustedPriceByColumn(i);
         });

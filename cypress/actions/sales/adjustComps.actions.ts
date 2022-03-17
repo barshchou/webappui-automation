@@ -50,21 +50,15 @@ class AdjustCompsActions extends BaseActions {
         return this;
     }
 
-    /**
-     *
-     * @param {string} newName
-     * @returns {AdjustCompsActions}
-     */
-    editOtherAdjustmentRowName(newName) {
+    editOtherAdjustmentRowName(newName: string, index: number = 0): AdjustCompsActions {
         adjustCompsPage.otherAdjustmentsEditButton.click();
-        adjustCompsPage.otherAdjustmentNameInputField.clear().type(newName).should("have.value", newName);
-        adjustCompsPage.otherAdjustmentNameSaveButton.click();
-        adjustCompsPage.getRowNameTitleElement(newName).should("exist");
+        adjustCompsPage.otherAdjustmentNameInputFields.eq(index).clear().type(newName).should("have.value", newName);
+        adjustCompsPage.getOtherAdjustmentNameSaveButton(index).click();
+        cy.contains("td", newName).should("exist");
         return this;
     }
 
     enterOtherAdjustmentByColumn(value: number, index: number = 0): AdjustCompsActions {
-        this.clickAddOtherAdjustmentButton();
         adjustCompsPage.otherAdjustmentCells.eq(index).scrollIntoView().clear()
             .type(`${value}`).should("have.value", `${value}%`);
         return this;
@@ -72,7 +66,7 @@ class AdjustCompsActions extends BaseActions {
 
     clickAddOtherAdjustmentButton(): AdjustCompsActions {
         adjustCompsPage.addOtherAdjustmentButton.click();
-        return  this;
+        return this;
     }
 
     /**
