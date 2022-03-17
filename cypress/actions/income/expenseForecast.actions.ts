@@ -2,7 +2,7 @@ import BaseActions from "../base/base.actions";
 import expenseForecastPage from "../../pages/income/expenseForecast.page";
 import {getNumberFromDollarNumberWithCommas, numberWithCommas} from "../../../utils/numbers.utils";
 
-type ForecastItem = Readonly<{ name: string, basis: string, forecast?: number, projection?: number }>;
+type ForecastItem = Readonly<{ name: string, basis: string, forecast?: number | undefined, projection?: number }>;
 type BuildingDescription = Readonly<{grossArea: number, numberOfUnits: number}>;
 
 class ExpenseForecastActions extends BaseActions {
@@ -39,13 +39,7 @@ class ExpenseForecastActions extends BaseActions {
         return sum / arr.length;
     }
 
-    /**
-     * @private
-     * @param {number} numberOfUnits
-     * @param {number} forecastItemValue
-     * @returns {number}
-     */
-    getPerUnitValue(numberOfUnits, forecastItemValue) {
+    private getPerUnitValue(numberOfUnits: number, forecastItemValue: number): number {
         return Math.round(forecastItemValue / numberOfUnits);
     }
 
@@ -156,14 +150,8 @@ class ExpenseForecastActions extends BaseActions {
         return this;
     }
 
-    /**
-     *
-     * @param {Readonly<{name: string, basis: string, forecast: number | undefined}>} forecastItem
-     * @param {Readonly<{grossArea: number, numberOfUnits: number}>} currentDescription
-     * @param {string} [forecastEgi]
-     * @returns {ExpenseForecastActions}
-     */
-    verifyForecastItemBasisMoney(forecastItem, currentDescription, forecastEgi?) {
+    verifyForecastItemBasisMoney(forecastItem: ForecastItem, currentDescription: BuildingDescription,
+                                 forecastEgi?: string): ExpenseForecastActions {
         let forecastToBe;
         if (forecastEgi) {
             forecastToBe = forecastEgi;
