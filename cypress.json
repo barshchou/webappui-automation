@@ -6,5 +6,6 @@
     "watchForFileChanges": false,
     "videoCompression": 15,
     "videoUploadOnPasses": false,
+    "experimentalStudio": true,
     "projectId": "jo2gwn"
 }
