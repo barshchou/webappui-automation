@@ -12,7 +12,8 @@ describe("Historical expense Electricity Per SF is correctly calculated and disp
     it("Test body", () => {
         cy.stepInfo("1. Navigate to Property -> Summary and enter gross building area");
         NavigationSection.navigateToPropertySummary();
-        Property.Summary.enterGrossBuildingArea(testData.grossBuildingArea);
+        Property.Summary.enterGrossBuildingArea(testData.buildingDescription.grossArea)
+            .enterNumberOfResUnits(testData.buildingDescription.numberOfUnits);
 
         cy.stepInfo(
             "2. Add columns for all types of Expense Period: Actual, Actual T12, Annualized Historical and Projection");
@@ -42,7 +43,11 @@ describe("Historical expense Electricity Per SF is correctly calculated and disp
         NavigationSection.navigateToExpenseForecast();
 
         cy.stepInfo("4. Go to Expense Forecast and make sure that Per SF radiobutton is selected for Insurance card");
-        Income.ExpenseForecast.verifyForecastItemBasis(testData.electricityItem);
+        Income.ExpenseForecast.verifyForecastItemBasis(testData.actualElectricityItem)
+            .verifyForecastItemByExpensePeriodType(testData.actualElectricityItem, testData.buildingDescription, "Actual")
+            .verifyForecastItemByExpensePeriodType(testData.t12ElectricityItem, testData.buildingDescription, "Actual T12")
+            .verifyForecastItemByExpensePeriodType(testData.historicalElectricityItem, testData.buildingDescription, "Annualized Historical")
+            .verifyForecastItemByExpensePeriodType(testData.ownerProjectionElectricityItem, testData.buildingDescription, "Owner's Projection");
         deleteReport(testData.reportCreationData.reportNumber);
     })
 })

@@ -3,6 +3,7 @@ import expenseForecastPage from "../../pages/income/expenseForecast.page";
 import {getNumberFromDollarNumberWithCommas, numberWithCommas} from "../../../utils/numbers.utils";
 
 type ForecastItem = Readonly<{ name: string, basis: string, forecast?: number, projection?: number }>;
+type BuildingDescription = Readonly<{grossArea: number, numberOfUnits: number}>;
 
 class ExpenseForecastActions extends BaseActions {
 
@@ -162,7 +163,7 @@ class ExpenseForecastActions extends BaseActions {
      * @param {string} [forecastEgi]
      * @returns {ExpenseForecastActions}
      */
-    verifyForecastItemBasisMoney(forecastItem, currentDescription, forecastEgi) {
+    verifyForecastItemBasisMoney(forecastItem, currentDescription, forecastEgi?) {
         let forecastToBe;
         if (forecastEgi) {
             forecastToBe = forecastEgi;
@@ -182,20 +183,15 @@ class ExpenseForecastActions extends BaseActions {
         return this;
     }
 
-    /**
-     *
-     * @param {Readonly<{name: string, basis: string, projection: number}>} forecastItem
-     * @param {Readonly<{grossArea: number, numberOfUnits: number}>} currentDescription
-     * @returns {ExpenseForecastActions}
-     */
-    verifyForecastItemOwnerProjection(forecastItem, currentDescription) {
+    verifyForecastItemByExpensePeriodType(forecastItem: ForecastItem, buildingDescription: BuildingDescription,
+                                          expensePeriodType: string): ExpenseForecastActions {
         let numberToBe;
         if (forecastItem.basis === "unit") {
-            numberToBe = numberWithCommas(Math.round(forecastItem.projection / currentDescription.numberOfUnits));
+            numberToBe = numberWithCommas(Math.round(forecastItem.projection / buildingDescription.numberOfUnits));
         } else {
-            numberToBe = numberWithCommas((forecastItem.projection / currentDescription.grossArea).toFixed(2));
+            numberToBe = numberWithCommas((forecastItem.projection / buildingDescription.grossArea).toFixed(2));
         }
-        expenseForecastPage.getForecastItemProjectionByType(this.getItemNameForAverage(forecastItem.name), "Owner's Projection")
+        expenseForecastPage.getForecastItemProjectionByType(this.getItemNameForAverage(forecastItem.name), expensePeriodType)
             .should("contain.text", `$${numberToBe}`);
         return this;
     }

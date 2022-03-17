@@ -3,7 +3,10 @@ import {getCurrentMonthName, getYearFromDate} from "../../../../../utils/date.ut
 
 export default {
     reportCreationData: ReportDataCreator.getDefaultReportData("4876"),
-    grossBuildingArea: 5000,
+    buildingDescription: {
+        grossArea: 5000,
+        numberOfUnits: 1
+    },
     actual: {
         periodValue: "Actual",
         month: "December",
@@ -28,8 +31,24 @@ export default {
         expenseYear: Number(getYearFromDate()) + 1,
         electricityExpense: 15000
     },
-    electricityItem: {
+    actualElectricityItem: {
         name: "electricity",
-        basis: "sf"
+        basis: "sf",
+        projection: 12000
+    },
+    t12ElectricityItem: {
+        name: "electricity",
+        basis: "sf",
+        projection: 13000
+    },
+    historicalElectricityItem: {
+        name: "electricity",
+        basis: "sf",
+        projection: 14000
+    },
+    ownerProjectionElectricityItem: {
+        name: "electricity",
+        basis: "sf",
+        projection: 15000
     }
 }
