@@ -37,6 +37,7 @@ class NavigationSection extends BasePage {
     get proForma() {return cy.get("#pro-forma");}
     get commercialCompGroups() {return cy.get("#commercial-comp-groups");}
     get expenseHistory() {return cy.get("#expense-history");}
+    get expenseForecast() {return cy.get("#expense-forecast");}
 }
 
 export default new NavigationSection();

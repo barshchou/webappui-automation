@@ -369,6 +369,18 @@ class NavigationSectionActions extends BaseActions {
             .clickYesButton();
         return this;
     }
+
+    clickExpenseForecastButton(): NavigationSectionActions {
+        navigationSectionPage.expenseForecast.click();
+        return this;
+    }
+
+    navigateToExpenseForecast(): NavigationSectionActions {
+        this.clickIncomeApproachButton()
+            .clickExpenseForecastButton()
+            .clickYesButton();
+        return this;
+    }
 }
 
 export default new NavigationSectionActions();

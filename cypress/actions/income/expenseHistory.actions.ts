@@ -82,7 +82,7 @@ class ExpenseHistoryActions extends BaseActions{
      * @returns {ExpenseHistoryActions}
      */
     enterElectricityByColIndex(electricity: number | string, index: number = 0): ExpenseHistoryActions {
-        expenseHistoryPage.electricityInputs.eq(index).clear().type(electricity)
+        expenseHistoryPage.electricityInputs.eq(index).clear().type(`${electricity}`)
             .should("have.value", `$${numberWithCommas(electricity)}`);
         return this;
     }
@@ -295,7 +295,7 @@ class ExpenseHistoryActions extends BaseActions{
     }
 
     verifyExpenseMonth(monthToBe: string, expensePeriodValue?: string): ExpenseHistoryActions {
-        if (expensePeriodValue === "Projection") {
+        if (expensePeriodValue === "Projection" || expensePeriodValue === "Actual") {
             expenseHistoryPage.expenseMonthProjection.should("be.disabled").and("have.value", monthToBe);
         } else {
             expenseHistoryPage.expenseMonth.should("have.value", monthToBe);

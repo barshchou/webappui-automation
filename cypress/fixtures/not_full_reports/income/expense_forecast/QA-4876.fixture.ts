@@ -6,21 +6,26 @@ export default {
     grossBuildingArea: 5000,
     actual: {
         periodValue: "Actual",
-        expenseYear: Number(getYearFromDate()) - 1
+        month: "December",
+        expenseYear: Number(getYearFromDate()) - 1,
+        electricityExpense: 12000
     },
     t12: {
         periodValue: "Actual T12",
         month: getCurrentMonthName(),
-        expenseYear: getYearFromDate()
+        expenseYear: getYearFromDate(),
+        electricityExpense: 13000
     },
     historical: {
         periodValue: "Annualized Historical",
         month: getCurrentMonthName(),
-        expenseYear: getYearFromDate()
+        expenseYear: getYearFromDate(),
+        electricityExpense: 14000
     },
     projection: {
         periodValue: "Projection",
         month: "December",
-        expenseYear: Number(getYearFromDate()) + 1
+        expenseYear: Number(getYearFromDate()) + 1,
+        electricityExpense: 15000
     }
 }

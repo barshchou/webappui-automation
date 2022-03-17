@@ -18,6 +18,7 @@ describe("Historical expense Electricity Per SF is correctly calculated and disp
             "2. Add columns for all types of Expense Period: Actual, Actual T12, Annualized Historical and Projection");
         NavigationSection.navigateToExpenseHistory();
         Income.ExpenseHistory.selectExpensePeriod(testData.actual.periodValue)
+            .verifyExpenseMonth(testData.actual.month, testData.actual.periodValue)
             .enterExpenseYear(testData.actual.expenseYear)
             .clickAddExpenseYearButton()
             .selectExpensePeriod(testData.t12.periodValue)
@@ -33,6 +34,14 @@ describe("Historical expense Electricity Per SF is correctly calculated and disp
             .verifyExpenseYear(testData.projection.expenseYear)
             .clickAddExpenseYearButton();
 
+        cy.stepInfo("3. Fill in Electricity field for all added columns and save changes");
+        Income.ExpenseHistory.enterElectricityByColIndex(testData.actual.electricityExpense, 0)
+            .enterElectricityByColIndex(testData.t12.electricityExpense, 1)
+            .enterElectricityByColIndex(testData.historical.electricityExpense, 2)
+            .enterElectricityByColIndex(testData.projection.electricityExpense, 3);
+        NavigationSection.navigateToExpenseForecast();
+
+        cy.stepInfo("4. Go to Expense Forecast and make sure that Per SF radiobutton is selected for Insurance card");
         deleteReport(testData.reportCreationData.reportNumber);
     })
 })
