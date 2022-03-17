@@ -43,7 +43,7 @@ describe("Verify the Commercial Stabilized Rent Roll table", () => {
         `);
         NavigationSection.openReviewAndExport();
         ReviewExport.generateDocxReport().clickSubmitBtn()
-        .waitForReportGenerated().downloadDocxReport();
+        .waitForReportGenerated();
         /**
          * Below - should be interaction with docx file. 
          * Since we're not figure out yet how to properly do such verifications in Cypress
