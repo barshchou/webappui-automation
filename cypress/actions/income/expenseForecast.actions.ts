@@ -9,7 +9,7 @@ class ExpenseForecastActions extends BaseActions {
     get Page(){
         return expenseForecastPage;
     }
-
+    
     chooseForecastItemBasis(forecastItem: ForecastItem): ExpenseForecastActions {
         expenseForecastPage.getForecastItemBasisRadio(forecastItem.name).check(forecastItem.basis);
         this.verifyForecastItemBasis(forecastItem);

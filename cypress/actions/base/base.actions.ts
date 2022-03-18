@@ -7,6 +7,10 @@ import {getEnvUrl} from "../../../utils/env.utils";
 
 export default class BaseActions {
 
+    get Actions(){
+        return this;
+    }
+
     clickYesButton() {
         cy.get("*[name='form-confirm-submit-btn']").click();
         return this;

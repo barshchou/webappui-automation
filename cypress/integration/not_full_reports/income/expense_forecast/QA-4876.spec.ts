@@ -44,7 +44,7 @@ describe("Historical expense Electricity Per SF is correctly calculated and disp
         NavigationSection.navigateToExpenseForecast();
 
         cy.stepInfo("4. Go to Expense Forecast and make sure that Per SF radiobutton is selected for Insurance card");
-        Income.ExpenseForecast.verifyForecastItemBasis(testData.actualElectricityItem)
+        Income.ExpenseForecast.Actions.verifyForecastItemBasis(testData.actualElectricityItem)
             .verifyForecastItemByExpensePeriodType(testData.actualElectricityItem, testData.buildingDescription, "Actual")
             .verifyForecastItemByExpensePeriodType(testData.t12ElectricityItem, testData.buildingDescription, "Actual T12")
             .verifyForecastItemByExpensePeriodType(testData.historicalElectricityItem, testData.buildingDescription, "Annualized Historical")
@@ -55,7 +55,7 @@ describe("Historical expense Electricity Per SF is correctly calculated and disp
             5.1 calculated for each expense type as: [Expense Period type]Electricity / GBA
             5.2 correctly displayed on slidebars
         `)
-        Income.ExpenseForecast.matchElementSnapshot(
+        Income.ExpenseForecast.Actions.matchElementSnapshot(
             Income.ExpenseForecast.Page.ElectricityCard.parent().parent(),
             "Electricity_Forecast_Item_Component"
         );
