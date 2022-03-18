@@ -1,5 +1,8 @@
 /// <reference types="cypress-xpath" />
+/// <reference types="cypress-image-snapshot" />
 
+
+import { Options } from "cypress-image-snapshot";
 import {getEnvUrl} from "../../../utils/env.utils";
 
 export default class BaseActions {
@@ -53,6 +56,11 @@ export default class BaseActions {
 
     clickBackButton() {
         cy.xpath("//button[.='BACK']").click();
+        return this;
+    }
+
+    matchElementSnapshot(element:Cypress.Chainable, snapshotName: string, options?: Options){
+        element.matchImageSnapshot(snapshotName,options);
         return this;
     }
 

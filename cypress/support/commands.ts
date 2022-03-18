@@ -1,7 +1,17 @@
+import { addMatchImageSnapshotCommand } from 'cypress-image-snapshot/command';
 import "cypress-file-upload";
 import "cypress-localstorage-commands";
 import {getEnvUrl} from "../../utils/env.utils";
 
+//#region plugin commands initialization
+addMatchImageSnapshotCommand({
+    failureThreshold: 0.05, // threshold for entire image
+    failureThresholdType: 'percent', // percent of image or number of pixels
+});
+
+//#endregion
+
+//#region custom commands definition
 Cypress.Commands.add("loginByApi", (url) => {
     cy.log("Logging in by api");
     cy.request({
@@ -49,4 +59,4 @@ Cypress.Commands.add("stepInfo", (message:string) => {
         }
     })
 });
-
+//#endregion
