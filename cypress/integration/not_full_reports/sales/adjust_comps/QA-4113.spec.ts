@@ -15,6 +15,7 @@ describe("Net Property Adjustments in Sales Adjustment Grid is calculated with c
         NavigationSection.openAdjustCompsInSales();
         Sales.AdjustComps.enterSizeAdjustmentByColumn(testData.comparable.sizeAdjustment)
             .enterConditionAdjustmentByColumn(testData.comparable.conditionAdjustment)
+            .clickAddOtherAdjustmentButton()
             .enterOtherAdjustmentByColumn(testData.comparable.otherAdjustment)
             .verifyNetPropertyAdjustmentsByCompIndex();
         deleteReport(testData.reportCreationData.reportNumber);
