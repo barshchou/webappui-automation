@@ -6,5 +6,7 @@
     "watchForFileChanges": false,
     "videoCompression": 15,
     "videoUploadOnPasses": false,
-    "projectId": "jo2gwn"
+    "experimentalStudio": true,
+    "projectId": "jo2gwn",
+    "ignoreTestFiles":"*.studio.*"
 }
