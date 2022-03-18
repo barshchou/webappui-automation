@@ -7,6 +7,7 @@ import {getEnvUrl} from "../../utils/env.utils";
 addMatchImageSnapshotCommand({
     failureThreshold: 0.05, // threshold for entire image
     failureThresholdType: 'percent', // percent of image or number of pixels
+    scale: false
 });
 
 //#endregion

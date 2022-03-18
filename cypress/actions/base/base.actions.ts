@@ -68,6 +68,12 @@ export default class BaseActions {
         return this;
     }
 
+    /**
+     * Retrive DOM-element screenshot and compares it with baseline.
+     * @param element - PageElement to be snapshoted. 
+     * @param snapshotName - 
+     * @see https://github.com/jaredpalmer/cypress-image-snapshot
+     */
     matchElementSnapshot(element:Cypress.Chainable, snapshotName: string, options?: Options){
         element.matchImageSnapshot(snapshotName,options);
         return this;
