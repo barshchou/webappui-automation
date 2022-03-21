@@ -50,5 +50,6 @@ export default {
         name: "electricity",
         basis: "sf",
         projection: 15000
-    }
+    },
+    electricityCardSnapshotName: "Electricity_Forecast_Item_Component"
 }
