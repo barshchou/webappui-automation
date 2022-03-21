@@ -1,6 +1,5 @@
 import testData from "../../../../fixtures/not_full_reports/income/expense_forecast/QA-4876.fixture";
 import {createReport, deleteReport} from "../../../../actions/base/baseTest.actions";
-import BaseActions from "../../../../actions/base//base.actions";
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Property from "../../../../actions/property/property.manager";
 import Income from "../../../../actions/income/income.manager";
@@ -55,6 +54,15 @@ describe("Historical expense Electricity Per SF is correctly calculated and disp
             5.1 calculated for each expense type as: [Expense Period type]Electricity / GBA
             5.2 correctly displayed on slidebars
         `)
+        // ernst: A few hacks to get clear Insurance_Forecast_Item component without overlayed headers
+        if(Cypress.browser.isHeadless == true){
+            Income.ExpenseForecast.Page.Header.then(elem=>{
+                elem.hide();
+            });
+            Income.ExpenseForecast.Page.ExpenseForecastHeader.then(elem=>{
+                elem.hide();
+            });
+        }
         Income.ExpenseForecast.Actions.matchElementSnapshot(
             Income.ExpenseForecast.Page.ElectricityCard.parent(),
             testData.electricityCardSnapshotName
