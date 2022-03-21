@@ -3,6 +3,10 @@ export default class BasePage {
         cy.visit(url);
     }
     
+    get Header(){
+        return cy.xpath("//header");
+    }
+
     get SaveAndContinueBtn(){
         return cy.get("[data-qa='form-submit-btn']");
     }

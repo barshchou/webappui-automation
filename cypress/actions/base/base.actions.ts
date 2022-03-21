@@ -75,8 +75,10 @@ export default class BaseActions {
      * @see https://github.com/jaredpalmer/cypress-image-snapshot
      */
     matchElementSnapshot(element:Cypress.Chainable, snapshotName: string, options?: Options){
-        element.matchImageSnapshot(snapshotName,options);
-        return this;
+        if(Cypress.browser.isHeadless == true) {
+            element.matchImageSnapshot(snapshotName,options);
+            return this; 
+        } 
     }
 
     pause(){
