@@ -1,9 +1,15 @@
 import BasePage from "../base/base.page";
 
 class ExpenseForecastPage extends BasePage {
+    get ExpenseForecastHeader(){
+        return cy.get('[data-qa="expenseForecast"]');
+    }
     get ElectricityCard(){
-        return cy.get('[data-qa="electricity-forecast-item"]').should("be.visible");
+        return cy.get('[data-qa="electricity-forecast-item"]');
     };
+    get InsuranceCard(){
+        return cy.get('[data-qa="insurance-forecast-item"]');
+    }
     getForecastItemBasisRadio(item) {return cy.get(`[name='${item}.basis']`);}
     getElementToCheckRadio(forecastItem, radioValue) {return cy.get(`[data-qa=checked] [name='${forecastItem}.basis'][value='${radioValue}']`);}
     getForecastItemForecastInput(item) {return cy.get(`[name='${item}.concludedValue']`);}
