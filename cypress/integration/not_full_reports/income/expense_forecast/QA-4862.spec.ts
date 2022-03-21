@@ -24,18 +24,6 @@ describe("Per Unit Appraiser's Forecast value for Insurance is correctly convert
 
         cy.stepInfo("4. Verify that Per SF value below this field is calculated as: Per Unit Appraiser’s Forecast * # of Resi Units / GBA");
         Income.ExpenseForecast.Actions.verifyForecastItemBasisMoney(testData.insuranceItem, testData.buildingDescription);
-        
-        // ernst: A few hacks to get clear Insurance_Forecast_Item component without overlayed headers
-        if(Cypress.browser.isHeadless == true){
-            Income.ExpenseForecast.Page.Header.then(elem=>{
-                elem.hide();
-            });
-            Income.ExpenseForecast.Page.ExpenseForecastHeader.then(elem=>{
-                elem.hide();
-            });
-        }
-        Income.ExpenseForecast.Actions.matchElementSnapshot(
-            Income.ExpenseForecast.Page.InsuranceCard.parent(),"Insurance_Forecast_Item_Component");
         deleteReport(testData.reportCreationData.reportNumber);
     });
 })
