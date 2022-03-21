@@ -362,8 +362,33 @@ class NavigationSectionActions extends BaseActions {
             .clickYesButton();
         return this;
     }
+
     navigateToReportInformation(){
         navigationSectionPage.reportInfoButton.click();
+        return this;
+    }
+
+    clickExpenseHistoryButton(): NavigationSectionActions {
+        navigationSectionPage.expenseHistory.click();
+        return this;
+    }
+
+    navigateToExpenseHistory(): NavigationSectionActions {
+        this.clickIncomeApproachButton()
+            .clickExpenseHistoryButton()
+            .clickYesButton();
+        return this;
+    }
+
+    clickExpenseForecastButton(): NavigationSectionActions {
+        navigationSectionPage.expenseForecast.click();
+        return this;
+    }
+
+    navigateToExpenseForecast(): NavigationSectionActions {
+        this.clickIncomeApproachButton()
+            .clickExpenseForecastButton()
+            .clickYesButton();
         return this;
     }
 }

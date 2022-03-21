@@ -2,28 +2,29 @@ import BaseActions from "../base/base.actions";
 import expenseForecastPage from "../../pages/income/expenseForecast.page";
 import {getNumberFromDollarNumberWithCommas, numberWithCommas} from "../../../utils/numbers.utils";
 
-class ExpenseForecastActions extends BaseActions {
+type ForecastItem = Readonly<{ name: string, basis: string, forecast?: number, projection?: number }>;
+type BuildingDescription = Readonly<{grossArea: number, numberOfUnits: number}>;
 
-    /**
-     *
-     * @param {Readonly<{name: string, basis: string, [forecast]: number}>} forecastItem
-     * @returns {ExpenseForecastActions}
-     */
-    chooseForecastItemBasis(forecastItem) {
+class ExpenseForecastActions extends BaseActions {
+    get Page(){
+        return expenseForecastPage;
+    }
+    
+    chooseForecastItemBasis(forecastItem: ForecastItem): ExpenseForecastActions {
         expenseForecastPage.getForecastItemBasisRadio(forecastItem.name).check(forecastItem.basis);
+        this.verifyForecastItemBasis(forecastItem);
+        return this;
+    }
+
+    verifyForecastItemBasis(forecastItem: ForecastItem): ExpenseForecastActions {
         expenseForecastPage.getElementToCheckRadio(forecastItem.name, forecastItem.basis).should("exist");
         return this;
     }
 
-    /**
-     *
-     * @param {Readonly<{name: string, forecast: number | string, [basis]: string}>} forecastItem
-     * @returns {ExpenseForecastActions}
-     */
-    enterForecastItemForecast(forecastItem) {
+    enterForecastItemForecast(forecastItem: ForecastItem): ExpenseForecastActions {
         const valueToBe = `$${numberWithCommas(forecastItem.forecast)}`;
         expenseForecastPage.getForecastItemForecastInput(forecastItem.name).clear()
-            .type(forecastItem.forecast).should("have.value", valueToBe);
+            .type(`${forecastItem.forecast}`).should("have.value", valueToBe);
         return this;
     }
 
@@ -165,7 +166,7 @@ class ExpenseForecastActions extends BaseActions {
      * @param {string} [forecastEgi]
      * @returns {ExpenseForecastActions}
      */
-    verifyForecastItemBasisMoney(forecastItem, currentDescription, forecastEgi) {
+    verifyForecastItemBasisMoney(forecastItem, currentDescription, forecastEgi?) {
         let forecastToBe;
         if (forecastEgi) {
             forecastToBe = forecastEgi;
@@ -185,21 +186,16 @@ class ExpenseForecastActions extends BaseActions {
         return this;
     }
 
-    /**
-     *
-     * @param {Readonly<{name: string, basis: string, projection: number}>} forecastItem
-     * @param {Readonly<{grossArea: number, numberOfUnits: number}>} currentDescription
-     * @returns {ExpenseForecastActions}
-     */
-    verifyForecastItemOwnerProjection(forecastItem, currentDescription) {
+    verifyForecastItemByExpensePeriodType(forecastItem: ForecastItem, buildingDescription: BuildingDescription,
+                                          expensePeriodType: string): ExpenseForecastActions {
         let numberToBe;
         if (forecastItem.basis === "unit") {
-            numberToBe = numberWithCommas(Math.round(forecastItem.projection / currentDescription.numberOfUnits));
+            numberToBe = numberWithCommas(Math.round(forecastItem.projection / buildingDescription.numberOfUnits));
         } else {
-            numberToBe = numberWithCommas((forecastItem.projection / currentDescription.grossArea).toFixed(2));
+            numberToBe = numberWithCommas((forecastItem.projection / buildingDescription.grossArea).toFixed(2));
         }
-        expenseForecastPage.getForecastItemProjection(this.getItemNameForAverage(forecastItem.name))
-            .should("have.text", `Owner's Projection: $${numberToBe}`);
+        expenseForecastPage.getForecastItemProjectionByType(this.getItemNameForAverage(forecastItem.name), expensePeriodType)
+            .should("contain.text", `$${numberToBe}`);
         return this;
     }
 

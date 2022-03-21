@@ -53,7 +53,7 @@ const siteDetailsFixture = () => {
         streetName: "S Oglesby Ave.",
         identifierType: reportCreationFixture().identifierType,
         identifier: reportCreationFixture().identifier,
-        yearBuilt: "1933",
+        yearBuilt: 1933,
         siteArea: 6250
     };
 };

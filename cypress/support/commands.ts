@@ -1,7 +1,19 @@
+import { addMatchImageSnapshotCommand } from 'cypress-image-snapshot/command';
 import "cypress-file-upload";
 import "cypress-localstorage-commands";
 import {getEnvUrl} from "../../utils/env.utils";
 
+//#region plugin commands initialization
+addMatchImageSnapshotCommand({
+    failureThreshold: 0.05, // threshold for entire image
+    failureThresholdType: 'percent', // percent of image or number of pixels
+    scale: true,
+    comparisonMethod:"ssim"
+});
+
+//#endregion
+
+//#region custom commands definition
 /**
  * If we set env variable CYPRESS_DEBUG=1 - pageLoadTimeout will be 3 minutes instead of 1.
  * Useful when some environments loads really slow.
@@ -55,4 +67,4 @@ Cypress.Commands.add("stepInfo", (message:string) => {
         }
     })
 });
-
+//#endregion

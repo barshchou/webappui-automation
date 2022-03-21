@@ -76,37 +76,23 @@ class SummaryActions extends BaseActions {
         return this;
     }
 
-    /**
-     * @param {string | number} year
-     * @returns {SummaryActions}
-     */
-    enterYearBuilt(year: string | number): this {
-        summaryPage.yearBuilt.clear().type(year).should("have.value", year);
+    enterYearBuilt(year: number): SummaryActions {
+        summaryPage.yearBuilt.clear().type(`${year}`).should("have.value", year);
         return this;
     }
 
-    /**
-     *
-     * @param {number | string} area
-     * @returns {SummaryActions}
-     */
-    enterSiteArea(area: number | string): this {
+    enterSiteArea(area: number | string): SummaryActions {
         if (isHasDecimalPartMoreNumberOfDigits(area, 4)) {
             area = cutDecimalPartToNumberOfDigits(area, 4);
         }
         const textToBe = numberWithCommas(area);
-        summaryPage.siteArea.clear().type(area).should("have.value", textToBe);
+        summaryPage.siteArea.clear().type(`${area}`).should("have.value", textToBe);
         return this;
     }
 
-    /**
-     *
-     * @param {number | string} area
-     * @returns {SummaryActions}
-     */
-    enterGrossBuildingArea(area: number | string): this {
+    enterGrossBuildingArea(area: number | string): SummaryActions {
         const valueToBe = typeof area === "string" ? area : numberWithCommas(area);
-        summaryPage.grossBuildingArea.clear().type(area).should("have.value", valueToBe);
+        summaryPage.grossBuildingArea.clear().type(`${area}`).should("have.value", valueToBe);
         return this;
     }
 
