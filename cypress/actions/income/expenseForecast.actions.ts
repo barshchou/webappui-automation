@@ -6,7 +6,10 @@ type ForecastItem = Readonly<{ name: string, basis: string, forecast?: number | 
 type BuildingDescription = Readonly<{grossArea: number, numberOfUnits: number}>;
 
 class ExpenseForecastActions extends BaseActions {
-
+    get Page(){
+        return expenseForecastPage;
+    }
+    
     chooseForecastItemBasis(forecastItem: ForecastItem): ExpenseForecastActions {
         expenseForecastPage.getForecastItemBasisRadio(forecastItem.name).check(forecastItem.basis);
         this.verifyForecastItemBasis(forecastItem);

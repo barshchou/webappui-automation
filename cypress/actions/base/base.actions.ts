@@ -1,8 +1,15 @@
 /// <reference types="cypress-xpath" />
+/// <reference types="cypress-image-snapshot" />
 
+
+import { Options } from "cypress-image-snapshot";
 import {getEnvUrl} from "../../../utils/env.utils";
 
 export default class BaseActions {
+
+    get Actions(){
+        return this;
+    }
 
     clickYesButton() {
         cy.get("*[name='form-confirm-submit-btn']").click();
@@ -37,6 +44,11 @@ export default class BaseActions {
         return this;
     }
 
+    clickSubmitBtn(){
+        cy.get('[type="submit"][data-qa="save-btn"]').click();
+        return this;
+    }
+
     clickSaveContinueButton() {
         cy.get("*[data-qa='form-submit-btn']").scrollIntoView().click();
     }
@@ -53,6 +65,17 @@ export default class BaseActions {
 
     clickBackButton() {
         cy.xpath("//button[.='BACK']").click();
+        return this;
+    }
+
+    /**
+     * Retrive DOM-element screenshot and compares it with baseline.
+     * @param element - PageElement to be snapshoted. 
+     * @param snapshotName - 
+     * @see https://github.com/jaredpalmer/cypress-image-snapshot
+     */
+    matchElementSnapshot(element:Cypress.Chainable, snapshotName: string, options?: Options){
+        element.matchImageSnapshot(snapshotName,options);
         return this;
     }
 

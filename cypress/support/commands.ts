@@ -1,6 +1,24 @@
+import { addMatchImageSnapshotCommand } from 'cypress-image-snapshot/command';
 import "cypress-file-upload";
 import "cypress-localstorage-commands";
 import {getEnvUrl} from "../../utils/env.utils";
+
+//#region plugin commands initialization
+addMatchImageSnapshotCommand({
+    failureThreshold: 0.05, // threshold for entire image
+    failureThresholdType: 'percent', // percent of image or number of pixels
+    scale: true,
+    comparisonMethod:"ssim"
+});
+
+//#endregion
+
+//#region custom commands definition
+/**
+ * If we set env variable CYPRESS_DEBUG=1 - pageLoadTimeout will be 3 minutes instead of 1.
+ * Useful when some environments loads really slow.
+ */
+const _cyVisit = (url: string) => cy.visit(url, { timeout: Cypress.env("DEBUG") == 1 ? 180000 : 60000 });
 
 Cypress.Commands.add("loginByApi", (url) => {
     cy.log("Logging in by api");
@@ -14,13 +32,13 @@ Cypress.Commands.add("loginByApi", (url) => {
     }).then((response) => {
         const token = response.body.token;
         window.localStorage.setItem("jwToken", token);
-        cy.visit(url);
+        _cyVisit(url);
     });
 });
 
 Cypress.Commands.add("loginByUI", (url) => {
     cy.log("Logging in by UI");
-    cy.visit(url);
+    _cyVisit(url);
     const username = Cypress.env("USERNAME");
     const password = Cypress.env("PASSWORD");
     cy.get("*[name='username']").should("be.visible").type(username).should("have.value", username);
@@ -49,4 +67,4 @@ Cypress.Commands.add("stepInfo", (message:string) => {
         }
     })
 });
-
+//#endregion

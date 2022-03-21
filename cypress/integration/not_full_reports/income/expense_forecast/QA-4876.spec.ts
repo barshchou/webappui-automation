@@ -1,5 +1,6 @@
 import testData from "../../../../fixtures/not_full_reports/income/expense_forecast/QA-4876.fixture";
 import {createReport, deleteReport} from "../../../../actions/base/baseTest.actions";
+import BaseActions from "../../../../actions/base//base.actions";
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Property from "../../../../actions/property/property.manager";
 import Income from "../../../../actions/income/income.manager";
@@ -43,11 +44,22 @@ describe("Historical expense Electricity Per SF is correctly calculated and disp
         NavigationSection.navigateToExpenseForecast();
 
         cy.stepInfo("4. Go to Expense Forecast and make sure that Per SF radiobutton is selected for Insurance card");
-        Income.ExpenseForecast.verifyForecastItemBasis(testData.actualElectricityItem)
+        Income.ExpenseForecast.Actions.verifyForecastItemBasis(testData.actualElectricityItem)
             .verifyForecastItemByExpensePeriodType(testData.actualElectricityItem, testData.buildingDescription, "Actual")
             .verifyForecastItemByExpensePeriodType(testData.t12ElectricityItem, testData.buildingDescription, "Actual T12")
             .verifyForecastItemByExpensePeriodType(testData.historicalElectricityItem, testData.buildingDescription, "Annualized Historical")
             .verifyForecastItemByExpensePeriodType(testData.ownerProjectionElectricityItem, testData.buildingDescription, "Owner's Projection");
+
+        cy.stepInfo(`
+        5. Check historical expenses values for Electricity card. They should be:
+            5.1 calculated for each expense type as: [Expense Period type]Electricity / GBA
+            5.2 correctly displayed on slidebars
+        `)
+        Income.ExpenseForecast.Actions.matchElementSnapshot(
+            Income.ExpenseForecast.Page.ElectricityCard.parent(),
+            testData.electricityCardSnapshotName
+        );
+       
         deleteReport(testData.reportCreationData.reportNumber);
     })
 })
