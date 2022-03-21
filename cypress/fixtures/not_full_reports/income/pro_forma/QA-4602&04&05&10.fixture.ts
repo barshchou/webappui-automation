@@ -12,5 +12,5 @@ export default {
     useValue: "undetermined",
     useText: "Undetermined",
     comUseVCLossPercentage: 3,
-    totalCommercialUseVCLoss: "-$10,200.00"
+    totalCommercialUseVCLoss: "-$10,200"
 };
