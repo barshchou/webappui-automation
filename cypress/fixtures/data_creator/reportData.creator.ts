@@ -58,6 +58,16 @@ class ReportCreator {
     getDefaultReportData(testNumber) {
         return this.setReportNumber(testNumber).setAddress().setIncomeValue().setTemplateValue().setConclusionValue().build();
     }
+
+    getReportData(testNumber: string, options?: BoweryReports.ReportCreationOptions){
+        if(options?.incomeValue){
+            this.setIncomeValue(options.incomeValue)
+        }
+        if(options?.conclusionValue){
+            this.conclusionValue(options.conclusionValue)
+        }
+        return this.setReportNumber(testNumber).setAddress().setTemplateValue().build();
+    }
 }
 
 export default new ReportCreator();

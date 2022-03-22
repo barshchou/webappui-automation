@@ -1,5 +1,9 @@
 namespace BoweryReports {
     export type ConclusionValue = "AS_IS" | "AS_STABILIZED" | "AS_COMPLETE" 
+    export type ReportCreationOptions = {
+        incomeValue?: string,
+        conclusionValue?: string
+    }
 }
 
 namespace BoweryAutomation {
