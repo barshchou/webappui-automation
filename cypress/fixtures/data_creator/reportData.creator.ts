@@ -64,7 +64,7 @@ class ReportCreator {
             this.setIncomeValue(options.incomeValue)
         }
         if(options?.conclusionValue){
-            this.conclusionValue(options.conclusionValue)
+            this.setConclusionValue(options.conclusionValue)
         }
         return this.setReportNumber(testNumber).setAddress().setTemplateValue().build();
     }
