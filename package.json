@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "cy:open": "npx cypress open",
+    "cy:chrome:snapshot_tests": "npx cypress run --env grepTags=@snapshot_tests,grepFilterSpecs=true --headless --browser=chrome",
     "cy:chrome:update_snapshots":"npx cypress run --env updateSnapshots=true --headless --browser=chrome",
     "cy:chrome_headed_stage_api": "npx cypress run --browser chrome --headed",
     "cy:chrome_headed_prod_api": "npx cypress run --browser chrome --headed --env url=prod",
@@ -31,6 +32,7 @@
     "@types/cypress-image-snapshot": "^3.1.6",
     "cypress": "^9.4.1",
     "cypress-file-upload": "^5.0.8",
+    "cypress-grep": "^2.13.1",
     "cypress-iframe": "^1.0.1",
     "cypress-image-snapshot": "^4.0.1",
     "cypress-localstorage-commands": "^1.6.1",

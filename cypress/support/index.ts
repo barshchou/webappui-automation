@@ -3,6 +3,8 @@ import "./commands";
 
 require("cypress-xpath");
 require("cypress-iframe");
+const registerCypressGrep = require('cypress-grep')
+registerCypressGrep()
 
 Cypress.on("uncaught:exception", (err, runnable) => {
     // returning false here prevents Cypress from

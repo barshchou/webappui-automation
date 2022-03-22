@@ -4,8 +4,9 @@ import NavigationSection from "../../../../../actions/base/navigationSection.act
 import Income from "../../../../../actions/income/income.manager";
 import Property from "../../../../../actions/property/property.manager";
 
-describe("Verify clicking Add Unit button on Add New Rent Comp overlay is adding the unit to the appropriate " +
-    "group of comparable units on the Rent Comps page (Unit type of search is selected)", () => {
+describe(`Verify clicking Add Unit button on Add New Rent Comp overlay is adding the unit to the appropriate group 
+                of comparable units on the Rent Comps page (Unit type of search is selected)`, () => {
+
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
     });

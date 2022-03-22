@@ -5,8 +5,8 @@ import Property from "../../../../actions/property/property.manager";
 import Sales from "../../../../actions/sales/sales.manager";
 import {createReport, deleteReport} from "../../../../actions/base/baseTest.actions";
 
-describe("Prospective Market Value As Stabilized -> " +
-    "Less Residential Rent Loss data is pulled from Cap Rate Conclusion", () => {
+describe(`Prospective Market Value As Stabilized -> Less Residential Rent Loss 
+                data is pulled from Cap Rate Conclusion`, () => {
     before("Login action", () => {
         createReport(testData.reportCreationData);
     });

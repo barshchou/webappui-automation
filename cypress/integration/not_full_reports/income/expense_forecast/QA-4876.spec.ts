@@ -1,3 +1,4 @@
+/// <reference types="cypress-grep" />
 import testData from "../../../../fixtures/not_full_reports/income/expense_forecast/QA-4876.fixture";
 import {createReport, deleteReport} from "../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
@@ -9,7 +10,7 @@ describe("Historical expense Electricity Per SF is correctly calculated and disp
         createReport(testData.reportCreationData);
     });
 
-    it("Test body", () => {
+    it("Test body", { tags: '@snapshot_tests' },() => {
         cy.stepInfo("1. Navigate to Property -> Summary and enter gross building area");
         NavigationSection.navigateToPropertySummary();
         Property.Summary.enterGrossBuildingArea(testData.buildingDescription.grossArea)

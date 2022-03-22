@@ -4,8 +4,9 @@ import NavigationSection from "../../../../actions/base/navigationSection.action
 import Sales from "../../../../actions/sales/sales.manager";
 import {createReport, deleteReport} from "../../../../actions/base/baseTest.actions";
 
-describe("As Is Market Value -> Time Period date is pulled from Report -> Key Info " +
-    "-> Date of validation (As is)", () => {
+describe(`As Is Market Value -> Time Period date is pulled from Report -> Key Info -> 
+                Date of validation (As is)`, () => {
+
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
     });
