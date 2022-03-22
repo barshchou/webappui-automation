@@ -1,11 +1,27 @@
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 
+const _linkedChipsDropdownOptions: [string, string][] = [
+    ["Bui", "Building Name"],
+    ["Gro", "Gross Building Area"],
+    ["Year", "Year Built"],
+    ["As", "As Complete Residential Unit Count"],
+    ["As","As Complete Commercial Unit Count"],
+    ["Buil","Building Name"],
+    ["Prop","Property Type"],
+    ["Curr","Current Residential Unit Count"],
+    ["Curr","Current Commercial Unit Count"],
+    ["Stree","Street Address"],
+    ["Stree","Street Name"],
+    ["Site","Site Area"],
+    ["Bloc","Block"],
+    ["Lo","Lot"],
+    ["Conclu","Concluded Cap Rate"],
+    ["Zon","Zone(s)"],
+    ["Curre","Current Condition"],
+    ["As","As Stabilized Condition"]
+];
+
 export default {
-    reportCreationData: ReportDataCreator.getReportData("4645"),
-    generatedCommentary: "Our analyses, opinions and conclusions were developed, and this report has been prepared, " +
-        "in conformance with the Standards of Professional Practice and Code of Professional Ethics of the Appraisal " +
-        "Institute, the Uniform Standard of Professional Appraisal Practice (USPAP), [Client Company]'s appraisal " +
-        "guidelines, and applicable state appraisal regulations. To report the assignment results, we use " +
-        "the Appraisal Report option of Standards Rule 2-2(a) of USPAP.",
-    newCommentary: "some test commentary"
+    reportCreationData: ReportDataCreator.getReportData("4645", { conclusionValue: "AS_COMPLETE" }),
+    linkedChipsDropdownOptions: _linkedChipsDropdownOptions
 };
