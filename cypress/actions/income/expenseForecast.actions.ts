@@ -2,8 +2,12 @@ import BaseActions from "../base/base.actions";
 import expenseForecastPage from "../../pages/income/expenseForecast.page";
 import {getNumberFromDollarNumberWithCommas, numberWithCommas} from "../../../utils/numbers.utils";
 
-type ForecastItem = Readonly<{ name: string, basis: string, forecast?: number | undefined, projection?: number }>;
+type ForecastItem = Readonly<{ name: string, basis?: string, forecast?: number | undefined, projection?: number }>;
 type BuildingDescription = Readonly<{grossArea: number, numberOfUnits: number}>;
+type Comparable = {address: string, location?: string, period?: string, squareFeet: number, resUnits?: number,
+    insurance?: number, electricity?: number, repairsAndMaintenance?: number, payrollAndBenefits?: number,
+    generalAndAdministrative?: number, management?: number, toe?: string};
+type ExpenseForecastData = {effectiveGrossIncome: number, management: {basis: string}, percentOfEgi: number}
 
 class ExpenseForecastActions extends BaseActions {
     get Page(){
@@ -28,12 +32,7 @@ class ExpenseForecastActions extends BaseActions {
         return this;
     }
 
-    /**
-     *
-     * @param {string | number} compsValues
-     * @returns {number}
-     */
-    getAverageValue(...compsValues) {
+    getAverageValue(...compsValues: Array<string | number>): number {
         let arr = Array.from(compsValues);
         let sum = 0;
         for (let i = 0; i < arr.length; i++) {
@@ -46,39 +45,17 @@ class ExpenseForecastActions extends BaseActions {
         return Math.round(forecastItemValue / numberOfUnits);
     }
 
-    /**
-     * @private
-     * @param {number} squareFeet
-     * @param {number} forecastItemValue
-     * @returns {string}
-     */
-    getPerSFValue(squareFeet, forecastItemValue) {
+    private getPerSFValue(squareFeet: number, forecastItemValue: number): string {
         return (forecastItemValue / squareFeet).toFixed(2);
     }
 
-    /**
-     * @private
-     * @param {string} forecastItemName
-     * @param {Array<{address: string, location: string, period: string, squareFeet: number, resUnits: number,
-     * insurance: number, electricity: number, repairsAndMaintenance: number, payrollAndBenefits: number,
-     * generalAndAdministrative: number, management: number, toe: string}>} comps
-     * @returns {Array<string, number>}
-     */
-    getPerSFArray(forecastItemName, comps) {
+    private getPerSFArray(forecastItemName: string, comps: Array<Comparable>): Array<number> {
         let arr = [];
         comps.forEach(comp => arr.push(this.getPerSFValue(comp.squareFeet, getNumberFromDollarNumberWithCommas(comp[forecastItemName]))));
         return arr;
     }
 
-    /**
-     * @private
-     * @param {string} forecastItemName
-     * @param {Array<{address: string, location: string, period: string, squareFeet: number, resUnits: number,
-     * insurance: number, electricity: number, repairsAndMaintenance: number, payrollAndBenefits: number,
-     * generalAndAdministrative: number, management: number, toe: string}>} comps
-     * @returns {Array<number>}
-     */
-    getPerUnitArray(forecastItemName, comps) {
+    private getPerUnitArray(forecastItemName: string, comps: Array<Comparable>): Array<number> {
         let arr = [];
         comps.forEach(comp => {
             let numberToPush;
@@ -93,15 +70,7 @@ class ExpenseForecastActions extends BaseActions {
         return arr;
     }
 
-    /**
-     *
-     * @param {Readonly<{name: string, basis: string, [forecast]: number | string}>} forecastItem
-     * @param {Array<{address: string, location: string, period: string, squareFeet: number, resUnits: number,
-     * insurance: number, electricity: number, repairsAndMaintenance: number, payrollAndBenefits: number,
-     * generalAndAdministrative: number, management: number, toe: string}>} comparables
-     * @returns {ExpenseForecastActions}
-     */
-    verifyForecastItemCompMin(forecastItem, comparables) {
+    verifyForecastItemCompMin(forecastItem: ForecastItem, comparables: Array<Comparable>): ExpenseForecastActions {
         let minValueToBe;
         if (forecastItem.basis === "unit") {
             minValueToBe = Math.min(...this.getPerUnitArray(forecastItem.name, comparables));
@@ -113,15 +82,7 @@ class ExpenseForecastActions extends BaseActions {
         return this;
     }
 
-    /**
-     *
-     * @param {Readonly<{name: string, basis: string, [forecast]: number | string}>} forecastItem
-     * @param {Array<{address: string, location: string, period: string, squareFeet: number, resUnits: number,
-     * insurance: number, electricity: number, repairsAndMaintenance: number, payrollAndBenefits: number,
-     * generalAndAdministrative: number, management: number, toe: string}>} comparables
-     * @returns {ExpenseForecastActions}
-     */
-    verifyForecastItemCompAverage(forecastItem, comparables) {
+    verifyForecastItemCompAverage(forecastItem: ForecastItem, comparables: Array<Comparable>): ExpenseForecastActions {
         let avgValueToBe;
         if (forecastItem.basis === "unit") {
             avgValueToBe = Math.round(this.getAverageValue(...this.getPerUnitArray(forecastItem.name, comparables)));
@@ -133,15 +94,7 @@ class ExpenseForecastActions extends BaseActions {
         return this;
     }
 
-    /**
-     *
-     * @param {Readonly<{name: string, basis: string, [forecast]: number | string}>} forecastItem
-     * @param {Array<{address: string, location: string, period: string, squareFeet: number, resUnits: number,
-     * insurance: number, electricity: number, repairsAndMaintenance: number, payrollAndBenefits: number,
-     * generalAndAdministrative: number, management: number, toe: string}>} comparables
-     * @returns {ExpenseForecastActions}
-     */
-    verifyForecastItemCompMax(forecastItem, comparables) {
+    verifyForecastItemCompMax(forecastItem: ForecastItem, comparables: Array<Comparable>): ExpenseForecastActions {
         let maxValueToBe;
         if (forecastItem.basis === "unit") {
             maxValueToBe = Math.max(...this.getPerUnitArray(forecastItem.name, comparables));
@@ -187,12 +140,7 @@ class ExpenseForecastActions extends BaseActions {
         return this;
     }
 
-    /**
-     * @private
-     * @param {string} itemOriginal
-     * @returns {string}
-     */
-    getItemNameForAverage(itemOriginal) {
+    private getItemNameForAverage(itemOriginal: string): string {
         switch (itemOriginal) {
             case "waterAndSewer":
                 return "waterSewer";
@@ -213,43 +161,23 @@ class ExpenseForecastActions extends BaseActions {
         }
     }
 
-    /**
-     *
-     * @returns {ExpenseForecastActions}
-     */
-    checkPercentOfEGICheckbox() {
+    checkPercentOfEGICheckbox(): ExpenseForecastActions {
         expenseForecastPage.inputPercentOfEGICheckbox.check().should("have.value", "true");
         return this;
     }
 
-    /**
-     *
-     * @param {string | number} value
-     * @returns {ExpenseForecastActions}
-     */
-    enterPercentOfEgi(value) {
-        expenseForecastPage.percentOfEgiInput.clear().type(value).should("have.value", value);
+    enterPercentOfEgi(value: number): ExpenseForecastActions {
+        expenseForecastPage.percentOfEgiInput.clear().type(`${value}`).should("have.value", value);
         return this;
     }
 
-    /**
-     *
-     * @param {string} forecastNumber
-     * @returns {ExpenseForecastActions}
-     */
-    verifyManagementForecast(forecastNumber) {
+    verifyManagementForecast(forecastNumber: string): ExpenseForecastActions {
         const valueToBe = `$${numberWithCommas(forecastNumber)}`;
         expenseForecastPage.getForecastItemForecastInput("management").should("have.value", valueToBe);
         return this;
     }
 
-    /**
-     *
-     * @param {Readonly<{effectiveGrossIncome: number, management: {basis: string}, percentOfEgi: number}>} expenseForecastData
-     * @param {Readonly<{grossArea: number, numberOfUnits: number}>} currentDescription
-     * @returns {string}
-     */
-    getManagementForecastEgiPercent(expenseForecastData, currentDescription) {
+    getManagementForecastEgiPercent(expenseForecastData: ExpenseForecastData, currentDescription: BuildingDescription): string {
         let perBasisEgi;
         if (expenseForecastData.management.basis === "unit") {
             perBasisEgi = expenseForecastData.effectiveGrossIncome / currentDescription.numberOfUnits;
@@ -259,15 +187,7 @@ class ExpenseForecastActions extends BaseActions {
         return (perBasisEgi / 100 * expenseForecastData.percentOfEgi).toFixed(2);
     }
 
-    /**
-     *
-     * @param {string} basisValue
-     * @param {Array<{address: string, location: string, period: string, squareFeet: number, resUnits: number,
-     * insurance: number, electricity: number, repairsAndMaintenance: number, payrollAndBenefits: number,
-     * generalAndAdministrative: number, management: number, toe: string}>} comparables
-     * @returns {ExpenseForecastActions}
-     */
-    verifyToeCompMinPerBasis(basisValue, comparables) {
+    verifyToeCompMinPerBasis(basisValue: string, comparables: Array<Comparable>): ExpenseForecastActions {
         let numberToBe;
         if (basisValue === "unit") {
             numberToBe = Math.min(...this.getPerUnitArray("toe", comparables));
@@ -279,15 +199,7 @@ class ExpenseForecastActions extends BaseActions {
         return this;
     }
 
-    /**
-     *
-     * @param {string} basisValue
-     * @param {Array<{address: string, location: string, period: string, squareFeet: number, resUnits: number,
-     * insurance: number, electricity: number, repairsAndMaintenance: number, payrollAndBenefits: number,
-     * generalAndAdministrative: number, management: number, toe: string}>} comparables
-     * @returns {ExpenseForecastActions}
-     */
-    verifyToeCompAvgPerBasis(basisValue, comparables) {
+    verifyToeCompAvgPerBasis(basisValue: string, comparables: Array<Comparable>): ExpenseForecastActions {
         let numberToBe;
         if (basisValue === "unit") {
             cy.log("Toe average function");
@@ -300,15 +212,7 @@ class ExpenseForecastActions extends BaseActions {
         return this;
     }
 
-    /**
-     *
-     * @param {string} basisValue
-     * @param {Array<{address: string, location: string, period: string, squareFeet: number, resUnits: number,
-     * insurance: number, electricity: number, repairsAndMaintenance: number, payrollAndBenefits: number,
-     * generalAndAdministrative: number, management: number, toe: string}>} comparables
-     * @returns {ExpenseForecastActions}
-     */
-    verifyToeCompMaxPerBasis(basisValue, comparables) {
+    verifyToeCompMaxPerBasis(basisValue: string, comparables: Array<Comparable>): ExpenseForecastActions {
         let numberToBe;
         if (basisValue === "unit") {
             numberToBe = Math.max(...this.getPerUnitArray("toe", comparables));
@@ -320,11 +224,7 @@ class ExpenseForecastActions extends BaseActions {
         return this;
     }
 
-    /**
-     *
-     * @returns {ExpenseForecastActions}
-     */
-    verifyOwnersProFormaValue() {
+    verifyOwnersProFormaValue(): ExpenseForecastActions {
         expenseForecastPage.allProjections.then(elements => {
             let sum = 0;
             for (let i = 0; i < elements.length; i++) {
@@ -338,11 +238,7 @@ class ExpenseForecastActions extends BaseActions {
         return this;
     }
 
-    /**
-     *
-     * @returns {ExpenseForecastActions}
-     */
-    verifyTotalForecast() {
+    verifyTotalForecast(): ExpenseForecastActions {
         expenseForecastPage.allForecastsInputs.then(elements => {
             let sum = 0;
             for (let i = 0; i < elements.length; i++) {
@@ -355,16 +251,12 @@ class ExpenseForecastActions extends BaseActions {
         return this;
     }
 
-    /**
-     * @param {string} textToBe
-     * @returns {ExpenseForecastActions}
-     */
-    verifyTOECommentary(textToBe) {
+    verifyTOECommentary(textToBe: string): ExpenseForecastActions {
         expenseForecastPage.toeCommentary.should("contain.text", textToBe);
         return this;
     }
 
-    editTOECommentary(newText, isWithClear = false) {
+    editTOECommentary(newText: string, isWithClear: boolean = false): ExpenseForecastActions {
         expenseForecastPage.toeCommentaryEditButton.click();
         if (isWithClear) {
             expenseForecastPage.toeCommentary.clear();
@@ -372,6 +264,19 @@ class ExpenseForecastActions extends BaseActions {
         expenseForecastPage.toeCommentary.type(newText);
         expenseForecastPage.toeCommentarySaveButton.click();
         expenseForecastPage.toeCommentaryModified.should("exist");
+        return this;
+    }
+
+    hideExpenseForecastHeader(): ExpenseForecastActions {
+        // ernst: A few hacks to get clear Insurance_Forecast_Item component without overlayed headers
+        if(Cypress.browser.isHeadless == true){
+            expenseForecastPage.Header.then(elem=>{
+                elem.hide();
+            });
+            expenseForecastPage.ExpenseForecastHeader.then(elem=>{
+                elem.hide();
+            });
+        }
         return this;
     }
 }
