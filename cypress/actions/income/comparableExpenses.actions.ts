@@ -4,22 +4,16 @@ import {getNumberFromDollarNumberWithCommas, numberWithCommas} from "../../../ut
 
 class ComparableExpensesActions extends BaseActions {
 
-    /**
-     *
-     * @returns {ComparableExpensesActions}
-     */
-    clickAddBlankColumnButton() {
+    get Page() {
+        return compExpensesPage;
+    }
+
+    clickAddBlankColumnButton(): ComparableExpensesActions {
         compExpensesPage.addBlankColumnButton.click();
         return this;
     }
 
-    /**
-     *
-     * @param {string} address
-     * @param {number} index
-     * @returns {ComparableExpensesActions}
-     */
-    enterAddressByColumnIndex(address, index = 0) {
+    enterAddressByColumnIndex(address: string, index: number = 0): ComparableExpensesActions {
         compExpensesPage.compAddressCells.eq(index).as("address");
         cy.get("@address").scrollIntoView();
         cy.get("@address").type(address, {force:true}).should("have.value", address);
@@ -82,17 +76,11 @@ class ComparableExpensesActions extends BaseActions {
         return this;
     }
 
-    /**
-     *
-     * @param {number | string} value
-     * @param {number} index
-     * @returns {ComparableExpensesActions}
-     */
-    enterSquareFeetByColumnIndex(value, index = 0) {
+    enterSquareFeetByColumnIndex(value: number, index: number = 0): ComparableExpensesActions {
         compExpensesPage.squareFeetCells.eq(index).as("squareFeet");
         cy.get("@squareFeet").scrollIntoView();
         cy.get("@squareFeet").clear({force:true});
-        cy.get("@squareFeet").type(value, {force:true}).should("have.value", `${numberWithCommas(value)}`);
+        cy.get("@squareFeet").type(`${value}`, {force:true}).should("have.value", `${numberWithCommas(value)}`);
         return this;
     }
 
@@ -125,18 +113,12 @@ class ComparableExpensesActions extends BaseActions {
         return this;
     }
 
-    /**
-     *
-     * @param {number | string} value
-     * @param {number} index
-     * @returns {ComparableExpensesActions}
-     */
-    enterElectricityByColumnIndex(value, index = 0) {
+    enterElectricityByColumnIndex(value: number, index: number = 0): ComparableExpensesActions {
         const valueToBe = `$${numberWithCommas(value)}`;
         compExpensesPage.electricityCells.eq(index).as("electricity");
         cy.get("@electricity").scrollIntoView();
         cy.get("@electricity").clear({force:true});
-        cy.get("@electricity").type(value, {force:true}).should("have.value", valueToBe);
+        cy.get("@electricity").type(`${value}`, {force:true}).should("have.value", valueToBe);
         return this;
     }
 
