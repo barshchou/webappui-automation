@@ -635,7 +635,7 @@ const expenseHistoryFixture = () => {
         grossRevenue: 84240,
         realEstateTaxes: 2402.06,
         insuranceExpense: "clear",
-        electricityExpense: 8268,
+        fuelExpense: 8268,
         fuelExpense: "clear",
         payrollBenefitsExpense: 1464,
         toeToBe: "$12,134.06",
