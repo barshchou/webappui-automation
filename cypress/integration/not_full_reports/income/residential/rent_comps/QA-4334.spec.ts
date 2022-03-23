@@ -4,8 +4,9 @@ import NavigationSection from "../../../../../actions/base/navigationSection.act
 import Income from "../../../../../actions/income/income.manager";
 
 // TODO: Return this test to tests run after https://bowery.atlassian.net/browse/WEB-3321 bug fix
-describe.skip("Verify Search Results overlay with found results is displayed on clicking Back to Search " +
-    "button on the Add New Rent Comp overlay on Rent Comps page when Unit type of search is selected", () => {
+describe.skip(`Verify Search Results overlay with found results is displayed on clicking Back to Search button 
+                    on the Add New Rent Comp overlay on Rent Comps page when Unit type of search is selected`, () => {
+
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
     });

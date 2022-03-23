@@ -4,8 +4,9 @@ import NavigationSection from "../../../../../actions/base/navigationSection.act
 import Income from "../../../../../actions/income/income.manager";
 import AddCompFormPage from "../../../../../pages/income/residential/rent_comps/addCompForm.page";
 
-describe("Verify the UI elements of Add New Rent Comp overlay on Rent Comps page when Unit type " +
-    "of search is selected", () => {
+describe(`Verify the UI elements of Add New Rent Comp overlay on Rent Comps page 
+                when Unit type of search is selected`, () => {
+
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
     });

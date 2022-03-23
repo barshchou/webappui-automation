@@ -15,6 +15,7 @@ const {
   addMatchImageSnapshotPlugin,
 } = require("cypress-image-snapshot/plugin");
 
+const grepFilterPlugin = require("cypress-grep/src/plugin");
 
 /**
  * @type {Cypress.PluginConfig}
@@ -22,6 +23,7 @@ const {
 // eslint-disable-next-line no-unused-vars
 module.exports = (on, config) => {
   addMatchImageSnapshotPlugin(on, config);
+  grepFilterPlugin(config);
   // `on` is used to hook into various events Cypress emits
   // `config` is the resolved Cypress config
 
@@ -31,4 +33,5 @@ module.exports = (on, config) => {
         return launchOptions;
       }
   });
+  return config;
 };

@@ -3,8 +3,8 @@ import NavigationSection from "../../../../actions/base/navigationSection.action
 import Income from "../../../../actions/income/income.manager";
 import {createReport, deleteReport} from "../../../../actions/base/baseTest.actions";
 
-describe("Verify that Generated Commentary for Total Operating Expenses " +
-    "is updated on the Expense Forecast page", () => {
+describe(`Verify that Generated Commentary for Total Operating Expenses 
+                is updated on the Expense Forecast page`, () => {
 
     before("Login, create report", () => {
         createReport(testData.reportCreationData);

@@ -3,8 +3,9 @@ import {createReport, deleteReport} from "../../../../../actions/base/baseTest.a
 import NavigationSection from "../../../../../actions/base/navigationSection.actions";
 import Income from "../../../../../actions/income/income.manager";
 
-describe("Verify Sort By drop-down field for results sorting on Map filter section on Rent Comps page when Unit " +
-    "search type is selected", () => {
+describe(`Verify Sort By drop-down field for results sorting on Map filter section on Rent Comps page 
+                when Unit search type is selected`, () => {
+
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
     });

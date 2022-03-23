@@ -6,8 +6,9 @@ import ReportDataCreator from "../../../../../fixtures/data_creator/reportData.c
 
 const reportCreationData = ReportDataCreator.getDefaultReportData("4355");
 
-describe("Verify the user can switch to 'Building' type of search on clicking 'Search Per Building' " +
-    "button on 'Are you sure you want to search Per Building?' waring overlay", () => {
+describe(`Verify the user can switch to 'Building' type of search on clicking 'Search Per Building' button on 
+                'Are you sure you want to search Per Building?' waring overlay`, () => {
+
     before("Login, create report", () => {
         createReport(reportCreationData);
     });

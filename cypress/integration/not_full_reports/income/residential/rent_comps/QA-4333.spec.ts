@@ -5,8 +5,9 @@ import Income from "../../../../../actions/income/income.manager";
 
 const reportCreationData = ReportDataCreator.getDefaultReportData("4333");
 
-describe("Verify Select button for the results displayed in the Map section is transferring to Selected on " +
-    "clicking when the Unit type of search is selected on the Rent Comps page", () => {
+describe(`Verify Select button for the results displayed in the Map section is transferring to Selected on clicking 
+                when the Unit type of search is selected on the Rent Comps page`, () => {
+
     before("Login, create report", () => {
         createReport(reportCreationData);
     });

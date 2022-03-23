@@ -6,8 +6,9 @@ import RentCompsPage from "../../../../../pages/income/residential/rent_comps/re
 
 const reportCreationData = ReportDataCreator.getDefaultReportData("4332");
 
-describe("Verify that display of results in the Map section on Rent Comps page when the Unit type " +
-    "of search is selected", () => {
+describe(`Verify that display of results in the Map section on Rent Comps page 
+                when the Unit type of search is selected`, () => {
+
     before("Login, create report", () => {
         createReport(reportCreationData);
     });
