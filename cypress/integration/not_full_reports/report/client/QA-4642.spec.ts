@@ -32,12 +32,11 @@ describe("Verify the Client Guidelines Discussion on the page", () => {
         Report.Client.Page.EditIntendedUserBtn.click();
         Report.Client.Page.EditIdentificationOfClientBtn.click();
 
-
-        for(let [suggestion, option] of testData.linkedChipsDropdownOptions){
-            checkChipsOptions(suggestion,option,"IdentificationOfClientTextBox");
-        }
         for(let [suggestion, option] of testData.linkedChipsDropdownOptions){
             checkChipsOptions(suggestion,option,"IntendedUserTextBox");
+        }
+        for(let [suggestion, option] of testData.linkedChipsDropdownOptions){
+            checkChipsOptions(suggestion,option,"IdentificationOfClientTextBox");
         }
 
         deleteReport(testData.reportCreationData.reportNumber);
