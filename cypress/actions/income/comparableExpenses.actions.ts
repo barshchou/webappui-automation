@@ -122,6 +122,15 @@ class ComparableExpensesActions extends BaseActions {
         return this;
     }
 
+    enterCellDollarValueByColumnIndex(cellsElements: Cypress.Chainable, value: number, index: number = 0): ComparableExpensesActions {
+        const valueToBe = `$${numberWithCommas(value)}`;
+        cellsElements.eq(index).as("cellToEnter");
+        cy.get("@cellToEnter").scrollIntoView();
+        cy.get("@cellToEnter").clear({force: true});
+        cy.get("@cellToEnter").type(`${value}`, {force: true}).should("have.value", valueToBe);
+        return this;
+    }
+
     /**
      *
      * @param {number | string} value
