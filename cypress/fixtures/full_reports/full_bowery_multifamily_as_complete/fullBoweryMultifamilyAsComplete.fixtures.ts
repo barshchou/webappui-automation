@@ -635,7 +635,7 @@ const expenseHistoryFixture = () => {
         grossRevenue: 84240,
         realEstateTaxes: 2402.06,
         insuranceExpense: "clear",
-        fuelExpense: 8268,
+        electricityExpense: 8268,
         fuelExpense: "clear",
         payrollBenefitsExpense: 1464,
         toeToBe: "$12,134.06",
@@ -683,7 +683,7 @@ const expenseForecastFixture = () => {
         insuranceItem: {
             name: "insurance", basis: "unit", forecast: 350
         },
-        fuelItem: {
+        electricityItem: {
             name: "electricity", basis: "unit", forecast: 1380, projection: expenseHistoryFixture().electricityExpense
         },
         fuelItem: {
