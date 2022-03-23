@@ -3,12 +3,22 @@ import {createReport, deleteReport} from "../../../../actions/base/baseTest.acti
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Report from "../../../../actions/report/report.manager";
 
-const checkChipsOptions = (suggestion: string,optionName: string) => {
-    return Report.Client.Page.IntendedUserTextBox.click().focus().type(`{enter}{enter}=${suggestion}`)
+const checkChipsOptions = (suggestion: string,optionName: string, textBoxName: "IntendedUserTextBox" | "IdentificationOfClientTextBox") => {
+    const interactWithText = (textBox: Cypress.Chainable, indexForElement: number) => {
+        return textBox.click().type(`{enter}{enter}=${suggestion}`).focus()
         .xpath(`//li[contains(text(),"${optionName}")]`).eq(0)
         .should("be.visible").click()
-        .xpath("//button[contains(text(),'Revert to Original')]").eq(0).click()
-        .get('[role="dialog"] button').eq(2).click()
+        .xpath("//button[contains(text(),'Revert to Original')]").eq(indexForElement).click({force:true})
+        .get('[role="dialog"] button').eq(2).click();
+    }
+
+    if(textBoxName == "IntendedUserTextBox"){
+        return interactWithText(Report.Client.Page.IntendedUserTextBox, 0);
+    }
+    else if(textBoxName == "IdentificationOfClientTextBox"){
+        return interactWithText(Report.Client.Page.IdentificationOfClientTextBox,1);
+    }
+    
 }
 
 describe("Verify the Client Guidelines Discussion on the page", () => {
@@ -17,13 +27,17 @@ describe("Verify the Client Guidelines Discussion on the page", () => {
     });
 
     it("Test body", () => {
-        NavigationSection.navigateToClientPage().pause();
+        NavigationSection.navigateToClientPage().verifyProgressBarNotExist();
 
         Report.Client.Page.EditIntendedUserBtn.click();
-        Report.Client.Page.EditIdentificationOfClientBtn.click().pause();
+        Report.Client.Page.EditIdentificationOfClientBtn.click();
+
 
         for(let [suggestion, option] of testData.linkedChipsDropdownOptions){
-            checkChipsOptions(suggestion,option);
+            checkChipsOptions(suggestion,option,"IdentificationOfClientTextBox");
+        }
+        for(let [suggestion, option] of testData.linkedChipsDropdownOptions){
+            checkChipsOptions(suggestion,option,"IntendedUserTextBox");
         }
 
         deleteReport(testData.reportCreationData.reportNumber);
