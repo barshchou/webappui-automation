@@ -20,6 +20,10 @@ on:
           - cypress-main-config.json
         required: true
         default: cypress-main-config.json
+      custom_env:
+        type: string
+        description: Add custom environment url if needed
+        required: false
 
 jobs:
   Not-full-reports-run:
