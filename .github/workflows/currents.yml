@@ -10,8 +10,14 @@ on:
         - dev
         - staging
         - prod
+        - custom
         required: true
         default: staging
+      custom_env:
+        type: string
+        description: Add custom environment url if needed
+        required: false
+
 jobs:
   Not-full-reports-run:
     runs-on: ubuntu-latest
@@ -22,6 +28,11 @@ jobs:
         containers: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
     steps:
+      - name: Set custom env url
+        if: ${{ github.event.inputs.env == 'custom' }}
+        run: |
+            echo "CYPRESS_customEnv=${{ github.event.inputs.custom_env }}" >> $GITHUB_ENV
+
       - name: Checkout
         uses: actions/checkout@v2
 
@@ -48,7 +59,7 @@ jobs:
         run: npm install
 
       - name: Run Cypress not snapshot tests on Currents.dev
-        run: currents run --tag ${{ github.event.inputs.env }} --spec "./cypress/integration/not_full_reports/**/*.spec.ts" --browser chrome --record --parallel --key ${{ secrets.CURRENTS_RECORD_KEY }} --ci-build-id "${{ github.repository }}-${{ github.run_id }}-${{ github.run_attempt}}"
+        run: currents run --config-file cypress-currents-config.json --tag ${{ github.event.inputs.env }} --spec "./cypress/integration/not_full_reports/**/*.spec.ts" --browser chrome --record --parallel --key ${{ secrets.CURRENTS_RECORD_KEY }} --ci-build-id "${{ github.repository }}-${{ github.run_id }}-${{ github.run_attempt}}"
         env:
           CYPRESS_USERNAME: ${{ secrets.USERNAME }}
           CYPRESS_PASSWORD: ${{ secrets.PASSWORD }}
@@ -57,7 +68,7 @@ jobs:
           CYPRESS_grepFilterSpecs: true
 
       - name: Run Cypress snapshot tests on Currents.dev
-        run: currents run --tag ${{ github.event.inputs.env }} --spec "./cypress/integration/not_full_reports/**/*.spec.ts" --browser chrome --record --parallel --key ${{ secrets.CURRENTS_RECORD_KEY }} --ci-build-id "${{ github.repository }}-${{ github.run_id }}-${{ github.run_attempt}}"
+        run: currents run --config-file cypress-currents-config.json --tag ${{ github.event.inputs.env }} --spec "./cypress/integration/not_full_reports/**/*.spec.ts" --browser chrome --record --parallel --key ${{ secrets.CURRENTS_RECORD_KEY }} --ci-build-id "${{ github.repository }}-${{ github.run_id }}-${{ github.run_attempt}}"
         env:
           CYPRESS_USERNAME: ${{ secrets.USERNAME }}
           CYPRESS_PASSWORD: ${{ secrets.PASSWORD }}
