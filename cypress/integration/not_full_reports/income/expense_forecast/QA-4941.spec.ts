@@ -1,16 +1,16 @@
-/// <reference types="cypress-grep" />
-import testData from "../../../../fixtures/not_full_reports/income/expense_forecast/QA-4876.fixture";
+/// < reference types="cypress-grep" />
+import testData from "../../../../fixtures/not_full_reports/income/expense_forecast/QA-4941.fixture";
 import {createReport, deleteReport} from "../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Property from "../../../../actions/property/property.manager";
 import Income from "../../../../actions/income/income.manager";
 
-describe("Historical expense Electricity Per SF is correctly calculated and displayed", () => {
+describe("Historical expense Fuel Per SF is correctly calculated and displayed", () => {
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
     });
 
-    it("Test body", { tags: '@snapshot_tests' },() => {
+    it("Test body", { tags: "@snapshot_tests" }, () => {
         cy.stepInfo("1. Navigate to Property -> Summary and enter gross building area");
         NavigationSection.navigateToPropertySummary();
         Property.Summary.enterGrossBuildingArea(testData.buildingDescription.grossArea)
@@ -36,31 +36,28 @@ describe("Historical expense Electricity Per SF is correctly calculated and disp
             .verifyExpenseYear(testData.projection.expenseYear)
             .clickAddExpenseYearButton();
 
-        cy.stepInfo("3. Fill in Electricity field for all added columns and save changes");
-        Income.ExpenseHistory.enterElectricityByColIndex(testData.actual.electricityExpense, 0)
-            .enterElectricityByColIndex(testData.t12.electricityExpense, 1)
-            .enterElectricityByColIndex(testData.historical.electricityExpense, 2)
-            .enterElectricityByColIndex(testData.projection.electricityExpense, 3);
+        cy.stepInfo("3. Fill in Fuel field for all added columns and save changes");
+        Income.ExpenseHistory.enterFuelByColIndex(testData.actual.fuelExpense, 0)
+            .enterFuelByColIndex(testData.t12.fuelExpense, 1)
+            .enterFuelByColIndex(testData.historical.fuelExpense, 2)
+            .enterFuelByColIndex(testData.projection.fuelExpense, 3);
         NavigationSection.navigateToExpenseForecast();
 
-        cy.stepInfo("4. Go to Expense Forecast and make sure that Per SF radiobutton is selected for Electricity card");
-        Income.ExpenseForecast.Actions.verifyForecastItemBasis(testData.actualElectricityItem)
-            .verifyForecastItemByExpensePeriodType(testData.actualElectricityItem, testData.buildingDescription, "Actual")
-            .verifyForecastItemByExpensePeriodType(testData.t12ElectricityItem, testData.buildingDescription, "Actual T12")
-            .verifyForecastItemByExpensePeriodType(testData.historicalElectricityItem, testData.buildingDescription, "Annualized Historical")
-            .verifyForecastItemByExpensePeriodType(testData.ownerProjectionElectricityItem, testData.buildingDescription, "Owner's Projection");
+        cy.stepInfo("4. Go to Expense Forecast and make sure that Per SF radiobutton is selected for Fuel card");
+        Income.ExpenseForecast.Actions.verifyForecastItemBasis(testData.actualFuelItem);
 
-        cy.stepInfo(`
-        5. Check historical expenses values for Electricity card. They should be:
-            5.1 calculated for each expense type as: [Expense Period type]Electricity / GBA
-            5.2 correctly displayed on slidebars
-        `)
-        Income.ExpenseForecast.Actions.hideExpenseForecastHeader()
-            .matchElementSnapshot(
-            Income.ExpenseForecast.Page.ElectricityCard.parent(),
-            testData.electricityCardSnapshotName
-        );
-       
+        cy.stepInfo(`5. Check historical expenses values for Fuel card. They should be calculated 
+        for each expense type as: [Expense Period type]Electricity / GBA`);
+        Income.ExpenseForecast.Actions.verifyForecastItemByExpensePeriodType(testData.actualFuelItem, testData.buildingDescription, "Actual")
+            .verifyForecastItemByExpensePeriodType(testData.t12FuelItem, testData.buildingDescription, "Actual T12")
+            .verifyForecastItemByExpensePeriodType(testData.historicalFuelItem, testData.buildingDescription, "Annualized Historical")
+            .verifyForecastItemByExpensePeriodType(testData.ownerProjectionFuelItem, testData.buildingDescription, "Owner's Projection")
+            .hideExpenseForecastHeader();
+
+        cy.stepInfo("6. Check historical expenses values for Fuel card. They should be correctly displayed on slidebars");
+        Income.ExpenseForecast.Actions.matchElementSnapshot(
+            Income.ExpenseForecast.Page.FuelCard, testData.fuelCardSnapshotName);
+
         deleteReport(testData.reportCreationData.reportNumber);
     })
 })

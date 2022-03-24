@@ -6,7 +6,7 @@
   "scripts": {
     "cy:open": "npx cypress open",
     "cy:chrome:snapshot_tests": "npx cypress run --env grepTags=@snapshot_tests,grepFilterSpecs=true --headless --browser=chrome",
-    "cy:chrome:update_snapshots":"npx cypress run --env updateSnapshots=true --headless --browser=chrome",
+    "cy:chrome:update_snapshots":"npx cypress run --env grepTags=@snapshot_tests,grepFilterSpecs=true,updateSnapshots=true --headless --browser=chrome",
     "cy:chrome_headed_stage_api": "npx cypress run --browser chrome --headed",
     "cy:chrome_headed_prod_api": "npx cypress run --browser chrome --headed --env url=prod",
     "cy:chrome_headed_dev_api": "npx cypress run --browser chrome --headed --env url=dev",

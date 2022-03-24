@@ -36,68 +36,39 @@ class ExpenseHistoryActions extends BaseActions{
         return this;
     }
 
-    /**
-     *
-     * @param {number | string} revenue
-     * @param {number} index
-     * @returns {ExpenseHistoryActions}
-     */
     enterGrossRevenueByColIndex(revenue: number | string, index: number = 0): ExpenseHistoryActions {
         const valueToBe = `$${numberWithCommas(revenue)}`;
-        expenseHistoryPage.grossRevenueInputs.eq(index).clear().type(revenue).should("have.value", valueToBe);
+        expenseHistoryPage.grossRevenueInputs.eq(index).clear().type(`${revenue}`).should("have.value", valueToBe);
         return this;
     }
 
-    /**
-     *
-     * @param {number | string} taxes
-     * @param {number} index
-     * @returns {ExpenseHistoryActions}
-     */
     enterRealEstateTaxesByColIndex(taxes: number | string, index: number = 0): ExpenseHistoryActions {
-        expenseHistoryPage.realEstateTaxesInputs.eq(index).clear().type(taxes)
+        expenseHistoryPage.realEstateTaxesInputs.eq(index).clear().type(`${taxes}`)
             .should("have.value", `$${numberWithCommas(taxes)}`);
         return this;
     }
 
-    /**
-     * @returns {ExpenseHistoryActions}
-     */
     enterInsuranceByColIndex(insurance: string | number = 0, index: number = 0): ExpenseHistoryActions {
-        //@ts-ignore
         if (insurance === "clear") {
             expenseHistoryPage.insuranceInputs.eq(index).clear();
         } else {
-            //@ts-ignore
-            expenseHistoryPage.insuranceInputs.eq(index).clear().type(insurance)
+            expenseHistoryPage.insuranceInputs.eq(index).clear().type(`${insurance}`)
                 .should("have.value", `$${numberWithCommas(insurance)}`);
         }
         return this;
     }
 
-    /**
-     *
-     * @param {number | string} electricity
-     * @param {number} index
-     * @returns {ExpenseHistoryActions}
-     */
     enterElectricityByColIndex(electricity: number | string, index: number = 0): ExpenseHistoryActions {
         expenseHistoryPage.electricityInputs.eq(index).clear().type(`${electricity}`)
             .should("have.value", `$${numberWithCommas(electricity)}`);
         return this;
     }
 
-    /**
-     *
-     * @param {string | number} fuel
-     * @param {number} index
-     * @returns {ExpenseHistoryActions}
-     */
     enterFuelByColIndex(fuel: string | number = 0, index: number = 0): ExpenseHistoryActions {
         if (fuel === "clear") {
             expenseHistoryPage.fuelInputs.eq(index).clear();
         } else {
-            expenseHistoryPage.fuelInputs.eq(index).clear().type(fuel)
+            expenseHistoryPage.fuelInputs.eq(index).clear().type(`${fuel}`)
                 .should("have.value", `$${numberWithCommas(fuel)}`);
         }
         return this;

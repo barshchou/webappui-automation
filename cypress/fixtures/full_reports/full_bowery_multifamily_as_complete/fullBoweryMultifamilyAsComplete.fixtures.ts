@@ -683,7 +683,7 @@ const expenseForecastFixture = () => {
         insuranceItem: {
             name: "insurance", basis: "unit", forecast: 350
         },
-        fuelItem: {
+        electricityItem: {
             name: "electricity", basis: "unit", forecast: 1380, projection: expenseHistoryFixture().electricityExpense
         },
         fuelItem: {
