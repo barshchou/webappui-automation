@@ -40,6 +40,7 @@ jobs:
           spec: cypress/integration/not_full_reports/**
           tag: ${{github.event.inputs.env}}
           parallel: true
+          config-file: ${{ github.event.inputs.config }}
         env:
           CYPRESS_USERNAME: ${{ secrets.USERNAME }}
           CYPRESS_PASSWORD: ${{ secrets.PASSWORD }}
@@ -56,6 +57,7 @@ jobs:
           tag: ${{ github.event.inputs.env }}
           parallel: true
           headless: true
+          config-file: ${{ github.event.inputs.config }}
         env:
           CYPRESS_USERNAME: ${{ secrets.USERNAME }}
           CYPRESS_PASSWORD: ${{ secrets.PASSWORD }}
