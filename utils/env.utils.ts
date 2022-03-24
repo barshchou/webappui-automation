@@ -31,7 +31,11 @@ const isCorrectLink = (link) => {
 };
 
 const isCorrectCustomEnv = (customEnvUrl) => {
-    return !(customEnvUrl === "") && customEnvUrl.startsWith("https://");
+    if (customEnvUrl === "" || customEnvUrl === undefined || customEnvUrl === null) {
+        return false;
+    } else {
+        return customEnvUrl.startsWith("https://");
+    }
 }
 
 export const isProdEnv = () => {
