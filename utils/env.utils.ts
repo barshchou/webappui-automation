@@ -11,7 +11,7 @@ export const getEnvUrl = () => {
             envUrl = Enums.ENV_URLS.PROD;
             break;
         case "custom":
-            if (Cypress.env("customEnv")) {
+            if (isCorrectCustomEnv(Cypress.env("customEnv"))) {
                 envUrl = Cypress.env("customEnv");
                 if (!isCorrectLink(envUrl)) {
                     envUrl = cutLastLetter(envUrl);
@@ -29,6 +29,10 @@ export const getEnvUrl = () => {
 const isCorrectLink = (link) => {
     return !link.endsWith("/");
 };
+
+const isCorrectCustomEnv = (customEnvUrl) => {
+    return !(customEnvUrl === "") && customEnvUrl.startsWith("https://");
+}
 
 export const isProdEnv = () => {
     return getEnvUrl().includes(Enums.ENV_URLS.PROD);
