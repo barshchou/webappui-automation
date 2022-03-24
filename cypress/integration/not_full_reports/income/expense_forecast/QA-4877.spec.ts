@@ -1,3 +1,4 @@
+/// <reference types="cypress-grep" />
 import testData from "../../../../fixtures/not_full_reports/income/expense_forecast/QA-4877.fixture";
 import {createReport, deleteReport} from "../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
@@ -8,7 +9,7 @@ describe("Comparable Min, Max, Avg values for Electricity Per SF are correctly c
         createReport(testData.reportCreationData);
     });
 
-    it("Test body", () => {
+    it("Test body", { tags: '@snapshot_tests' }, () => {
         cy.stepInfo("1. Go to Income > Comparable Expenses");
         NavigationSection.Actions.navigateToComparableExpenses();
 
@@ -20,7 +21,7 @@ describe("Comparable Min, Max, Avg values for Electricity Per SF are correctly c
                 .enterElectricityByColumnIndex(comp.electricity, index)
                 .enterSquareFeetByColumnIndex(comp.squareFeet, index)
         });
-        Income.ComparableExpenses.Actions.clickSaveContinueButton();
+        NavigationSection.Actions.navigateToExpenseForecast();
 
         cy.stepInfo("3. Go to Expense Forecast and make sure that Per SF radiobutton is selected for Electricity card");
         Income.ExpenseForecast.Actions.verifyForecastItemBasis(testData.electricityItem);

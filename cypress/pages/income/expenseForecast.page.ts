@@ -10,6 +10,9 @@ class ExpenseForecastPage extends BasePage {
     get InsuranceCard(){
         return cy.get('[data-qa="insurance-forecast-item"]');
     }
+    get FuelCard() {
+        return cy.get("[data-qa=fuel-forecast-item]");
+    }
     getForecastItemBasisRadio(item) {return cy.get(`[name='${item}.basis']`);}
     getElementToCheckRadio(forecastItem, radioValue) {return cy.get(`[data-qa=checked] [name='${forecastItem}.basis'][value='${radioValue}']`);}
     getForecastItemForecastInput(item) {return cy.get(`[name='${item}.concludedValue']`);}
