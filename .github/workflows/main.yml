@@ -36,7 +36,7 @@ jobs:
           CYPRESS_PASSWORD: ${{ secrets.PASSWORD }}
           CYPRESS_RECORD_KEY: ${{ secrets.TEST_LAUNCHES_RECORD_KEY }}
           CYPRESS_url: ${{ github.event.inputs.env }}
-          СYPRESS_grepTags: -@snapshot_tests
+          СYPRESS_grepTags: "-@snapshot_tests"
           CYPRESS_grepFilterSpecs: true
       - name: Cypress run snapshot tests
         uses: cypress-io/github-action@v2
@@ -52,5 +52,5 @@ jobs:
           CYPRESS_PASSWORD: ${{ secrets.PASSWORD }}
           CYPRESS_RECORD_KEY: ${{ secrets.TEST_LAUNCHES_RECORD_KEY }}
           CYPRESS_url: ${{ github.event.inputs.env }}
-          СYPRESS_grepTags: @snapshot_tests
+          СYPRESS_grepTags: "@snapshot_tests"
           CYPRESS_grepFilterSpecs: true
