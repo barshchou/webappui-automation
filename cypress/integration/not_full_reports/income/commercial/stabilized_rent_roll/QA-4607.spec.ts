@@ -2,6 +2,8 @@ import testData from "./../../../../../fixtures/not_full_reports/property/summar
 import {createReport, deleteReport} from "../../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../../actions/base/navigationSection.actions";
 import Property from "../../../../../actions/property/property.manager";
+import Income from "../../../../../actions/income/income.manager";
+
 
 
 describe("Verify the Commercial Stabilized Rent Roll table", () => {
@@ -20,12 +22,18 @@ describe("Verify the Commercial Stabilized Rent Roll table", () => {
         .verifyProgressBarNotExist()
         .clickCommercialUnits()
         .clickYesButton().verifyProgressBarNotExist();
-        Property.CommercialUnits.enterUnitSFByUnitIndex(1000)
+        Property.CommercialUnits.enterUnitSFByUnitIndex(testData.squareFeet)
         .clickSaveButton();
         NavigationSection.Actions.clickIncomeApproachButton()
-        .clickCommercialArrow().openInPlaceRentRollInCommercial()
-        // .clickYesButton().verifyProgressBarNotExist()
-        ;
+        .clickCommercialArrow().clickCommercialRentRollButton()
+        .pause();
+        Income.Commercial.InPlaceRentRoll.chooseLeaseStatusByRowNumber("Vacant").pause();
+
+        NavigationSection.Actions.clickIncomeApproachButton()
+        .clickCommercialArrow().clickCommercialCompGroups()
+        .clickYesButton().verifyProgressBarNotExist().pause();
+
+        Income.Commercial.CompGroups.Actions.addCompGroup("QA_4607_Comp_Group").pause();
     });
 
     it("Test body", () => {  
