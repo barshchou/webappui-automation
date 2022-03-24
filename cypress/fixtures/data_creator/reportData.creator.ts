@@ -35,7 +35,7 @@ class ReportCreator {
         return this;
     }
 
-    setConclusionValue(conclusionValue?: BoweryReports.ConclusionValue) {
+    setConclusionValue(conclusionValue?: BoweryReports.ConclusionValue | string) {
         this.conclusionValue = conclusionValue ?? Enums.VALUE_CONCLUSION_TYPE.AS_IS;
         return this;
     }

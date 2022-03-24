@@ -4,6 +4,7 @@ namespace BoweryReports {
         incomeValue?: string,
         conclusionValue?: BoweryReports.ConclusionValue
     }
+    export type LeaseStatus = "Occupied" | "Vacant"
 }
 
 namespace BoweryAutomation {

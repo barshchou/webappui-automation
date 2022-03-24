@@ -68,7 +68,7 @@ class CommercialRentRollActions extends BaseActions {
         return this;
     }
 
-    chooseLeaseStatusByRowNumber(status: string, rowNumber: number = 0): CommercialRentRollActions {
+    chooseLeaseStatusByRowNumber(status: BoweryReports.LeaseStatus, rowNumber: number = 0): CommercialRentRollActions {
         rentRollPage.pageHeader.should("be.visible");
         rentRollPage.leaseStatusArrows.eq(rowNumber).should("be.visible").as("arrow");
         cy.get("@arrow").click({force:true});
@@ -391,7 +391,8 @@ class CommercialRentRollActions extends BaseActions {
 
     chooseListLeaseStatuses(statuses: Array<string>, numberOfUnits: number): CommercialRentRollActions {
         for (let i = 0; i < numberOfUnits; i++) {
-            this.chooseLeaseStatusByRowNumber(statuses[i], i);
+            // ernst: excuse me for this cast
+            this.chooseLeaseStatusByRowNumber(<any>statuses[i], i);
         }
         return this;
     }
