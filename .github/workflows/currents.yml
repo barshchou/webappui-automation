@@ -3,7 +3,7 @@ name: Cypress not full reports tests in Currents.dev
 on:
   workflow_dispatch:
     inputs:
-      choice: 
+      env:
         type: choice
         description: Select the environment
         options:
@@ -47,9 +47,20 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
-      - name: Run Cypress on Currents.dev
-        run: currents run --spec "./cypress/integration/not_full_reports/**/*.spec.ts" --browser chrome --record --parallel --key ${{ secrets.CURRENTS_RECORD_KEY }} --ci-build-id "${{ github.repository }}-${{ github.run_id }}-${{ github.run_attempt}}"
+      - name: Run Cypress not snapshot tests on Currents.dev
+        run: currents run --tag ${{ github.event.inputs.env }} --spec "./cypress/integration/not_full_reports/**/*.spec.ts" --browser chrome --record --parallel --key ${{ secrets.CURRENTS_RECORD_KEY }} --ci-build-id "${{ github.repository }}-${{ github.run_id }}-${{ github.run_attempt}}"
         env:
           CYPRESS_USERNAME: ${{ secrets.USERNAME }}
           CYPRESS_PASSWORD: ${{ secrets.PASSWORD }}
-          CYPRESS_url: ${{ github.event.inputs.choice }}
+          CYPRESS_url: ${{ github.event.inputs.env }}
+          СYPRESS_grepTags: "-@snapshot_tests"
+          CYPRESS_grepFilterSpecs: true
+
+      - name: Run Cypress snapshot tests on Currents.dev
+        run: currents run --tag ${{ github.event.inputs.env }} --spec "./cypress/integration/not_full_reports/**/*.spec.ts" --browser chrome --record --parallel --key ${{ secrets.CURRENTS_RECORD_KEY }} --ci-build-id "${{ github.repository }}-${{ github.run_id }}-${{ github.run_attempt}}"
+        env:
+          CYPRESS_USERNAME: ${{ secrets.USERNAME }}
+          CYPRESS_PASSWORD: ${{ secrets.PASSWORD }}
+          CYPRESS_url: ${{ github.event.inputs.env }}
+          СYPRESS_grepTags: "@snapshot_tests"
+          CYPRESS_grepFilterSpecs: true
