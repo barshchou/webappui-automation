@@ -3,7 +3,7 @@ name: Cypress not full reports tests
 on:
   workflow_dispatch:
     inputs:
-      choice: 
+      env:
         type: choice
         description: Select the environment
         options:
@@ -23,16 +23,34 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Cypress run
+      - name: Cypress run not snapshot tests
         uses: cypress-io/github-action@v2
         with:
           record: true
           browser: chrome
           spec: cypress/integration/not_full_reports/**
-          tag: ${{github.event.inputs.choice}}
+          tag: ${{github.event.inputs.env}}
           parallel: true
         env:
           CYPRESS_USERNAME: ${{ secrets.USERNAME }}
           CYPRESS_PASSWORD: ${{ secrets.PASSWORD }}
-          CYPRESS_RECORD_KEY: ${{ secrets.RECORD_KEY }}
-          CYPRESS_url: ${{ github.event.inputs.choice }}
+          CYPRESS_RECORD_KEY: ${{ secrets.TEST_LAUNCHES_RECORD_KEY }}
+          CYPRESS_url: ${{ github.event.inputs.env }}
+          СYPRESS_grepTags: -@snapshot_tests
+          CYPRESS_grepFilterSpecs: true
+      - name: Cypress run snapshot tests
+        uses: cypress-io/github-action@v2
+        with:
+          record: true
+          browser: chrome
+          spec: cypress/integration/not_full_reports/**
+          tag: ${{ github.event.inputs.env }}
+          parallel: true
+          headless: true
+        env:
+          CYPRESS_USERNAME: ${{ secrets.USERNAME }}
+          CYPRESS_PASSWORD: ${{ secrets.PASSWORD }}
+          CYPRESS_RECORD_KEY: ${{ secrets.TEST_LAUNCHES_RECORD_KEY }}
+          CYPRESS_url: ${{ github.event.inputs.env }}
+          СYPRESS_grepTags: @snapshot_tests
+          CYPRESS_grepFilterSpecs: true
