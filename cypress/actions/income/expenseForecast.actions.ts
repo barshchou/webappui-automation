@@ -10,6 +10,10 @@ type Comparable = {address: string, location?: string, period?: string, squareFe
 type ExpenseForecastData = {effectiveGrossIncome: number, management: {basis: string}, percentOfEgi: number}
 
 class ExpenseForecastActions extends BaseActions {
+    checkPerUnitPerSF(value: BoweryReports.ForecastItem, radioValue: BoweryReports.UnitSF) {
+        expenseForecastPage.getElementToCheckRadio(value, radioValue).check();
+        return this;
+    }
     get Page(){
         return expenseForecastPage;
     }
@@ -20,8 +24,8 @@ class ExpenseForecastActions extends BaseActions {
         return this;
     }
 
-    verifyForecastItemBasis(forecastItem: ForecastItem): ExpenseForecastActions {
-        expenseForecastPage.getElementToCheckRadio(forecastItem.name, forecastItem.basis).should("exist");
+    verifyForecastItemBasis(forecastItem): ExpenseForecastActions {
+        expenseForecastPage.getElementToCheckRadio(forecastItem, forecastItem.basis).should("exist");
         return this;
     }
 
