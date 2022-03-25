@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "cy:open": "npx cypress open",
+    "cy:open": "npx cypress open --config-file cypress-main-config.json",
     "cy:chrome:snapshot_tests": "npx cypress run --env grepTags=@snapshot_tests,grepFilterSpecs=true --headless --browser=chrome",
     "cy:chrome:update_snapshots":"npx cypress run --env grepTags=@snapshot_tests,grepFilterSpecs=true,updateSnapshots=true --headless --browser=chrome",
     "cy:chrome_headed_stage_api": "npx cypress run --browser chrome --headed",
