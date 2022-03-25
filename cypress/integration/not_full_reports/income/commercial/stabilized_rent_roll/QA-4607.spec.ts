@@ -6,7 +6,15 @@ import Income from "../../../../../actions/income/income.manager";
 
 
 
-describe("Verify the Commercial Stabilized Rent Roll table", () => {
+/**
+ * ernst: This test needs to be skipped due to drag and drop issues,
+ * since we could not interact with draggable components in Cypress
+ * with all the possible hacks.
+ * + we have "drag_and_drop" lable for this kind of tests
+ * TODO: Make draggable components accessible to Cypress
+*/
+
+describe.skip("Verify the Commercial Stabilized Rent Roll table", () => {
     before("Login, create report", () => {
         cy.stepInfo(`
         Preconditions: 
@@ -32,7 +40,7 @@ describe("Verify the Commercial Stabilized Rent Roll table", () => {
         NavigationSection.Actions.clickIncomeApproachButton()
         .clickCommercialArrow().clickCommercialCompGroups()
         .clickYesButton().verifyProgressBarNotExist().pause();
-
+        
         Income.Commercial.CompGroups.Actions.addCompGroup("QA_4607_Comp_Group").pause();
     });
 
