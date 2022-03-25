@@ -5,6 +5,10 @@ namespace BoweryReports {
         conclusionValue?: BoweryReports.ConclusionValue
     }
     export type LeaseStatus = "Occupied" | "Vacant"
+    export type PerUnitPerSF = "Per Unit" | "Per SF"
+    export type ForecastItem = "repairsAndMaintenance" | "insurance" | "electricity" 
+    | "fuel" | "waterAndSewer" | "repairsAndMaintenance" | "payrollAndBenefits" | "generalAndAdministrative" 
+    | "legalAndProfessionalFees" | "miscellaneous" | "management" | "reserves" | "total"
 }
 
 namespace BoweryAutomation {
