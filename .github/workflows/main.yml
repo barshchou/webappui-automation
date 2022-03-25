@@ -40,7 +40,7 @@ jobs:
       - name: Set custom env url
         if: ${{ github.event.inputs.env == 'custom' }}
         run: |
-        echo "CYPRESS_customEnv=${{ github.event.inputs.custom_env }}" >> $GITHUB_ENV
+              echo "CYPRESS_customEnv=${{ github.event.inputs.custom_env }}" >> $GITHUB_ENV
       - name: Cypress run not snapshot tests
         uses: cypress-io/github-action@v2
         with:
