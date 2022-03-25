@@ -4,7 +4,7 @@ import {getCurrentMonthName, getYearFromDate} from "../../../../../utils/date.ut
 export default {
     reportCreationData: ReportDataCreator.getDefaultReportData("4941"),
     buildingDescription: {
-        grossArea: 2367,
+        grossArea: 5000,
         numberOfUnits: 2
     },
     actual: {
