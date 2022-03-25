@@ -28,11 +28,6 @@ jobs:
         containers: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
     steps:
-      - name: Set custom env url
-        if: ${{ github.event.inputs.env == 'custom' }}
-        run: |
-            echo "CYPRESS_customEnv=${{ github.event.inputs.custom_env }}" >> $GITHUB_ENV
-
       - name: Checkout
         uses: actions/checkout@v2
 
@@ -64,6 +59,7 @@ jobs:
           CYPRESS_USERNAME: ${{ secrets.USERNAME }}
           CYPRESS_PASSWORD: ${{ secrets.PASSWORD }}
           CYPRESS_url: ${{ github.event.inputs.env }}
+          CYPRESS_customEnv: ${{ github.event.inputs.customEnv }}
           СYPRESS_grepTags: "-@snapshot_tests"
           CYPRESS_grepFilterSpecs: true
 
@@ -73,5 +69,6 @@ jobs:
           CYPRESS_USERNAME: ${{ secrets.USERNAME }}
           CYPRESS_PASSWORD: ${{ secrets.PASSWORD }}
           CYPRESS_url: ${{ github.event.inputs.env }}
+          CYPRESS_customEnv: ${{ github.event.inputs.customEnv }}
           СYPRESS_grepTags: "@snapshot_tests"
           CYPRESS_grepFilterSpecs: true
