@@ -17,16 +17,19 @@ describe("Historical expense Fuel Per SF is correctly calculated and displayed",
         cy.stepInfo(`1. Go to Expense Forecast 
         and make sure that Per Unit radiobutton is selected for Repairs & Maintenance card`);
         NavigationSection.navigateToExpenseForecast();
-        Income.ExpenseForecast.Actions.enterForecastItemForecast(
-            {name: "repairsAndMaintenance", basis: "unit", forecast: 27460})
-            .checkPerUnitPerSF("repairsAndMaintenance", "unit");
+        Income.ExpenseForecast.Actions
+        .chooseForecastItemBasis(testData.forecastItem);
 
         cy.stepInfo("2.  Fill in Appraiser's Forecast field for Repairs & Maintenance card");
+        Income.ExpenseForecast.Actions.enterForecastItemForecast(testData.forecastItem);
 
 
         cy.stepInfo(`3. Verify that Per SF value below this field is calculated as: 
         Per Unit Appraiser’s Forecast * # of Resi Units / GBA`);
-
+        Income.ExpenseForecast.Actions.verifyForecastItemBasisMoney(
+            testData.forecastItem,
+            testData.buildingDescription
+        );
 
         deleteReport(testData.reportCreationData.reportNumber);
     })
