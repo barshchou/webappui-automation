@@ -13,7 +13,7 @@ describe("Historical expense Fuel Per SF is correctly calculated and displayed",
             .enterNumberOfResUnits(testData.buildingDescription.numberOfUnits);
     });
 
-    it("Test body", { tags: "@snapshot_tests" }, () => {
+    it("Test body", () => {
         cy.stepInfo(`1. Go to Expense Forecast 
         and make sure that Per Unit radiobutton is selected for Repairs & Maintenance card`);
         NavigationSection.navigateToExpenseForecast();
