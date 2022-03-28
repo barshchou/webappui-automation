@@ -453,6 +453,7 @@ const stairsFixture = () => {
 
 const inPLaceRentRollFixture = () => {
     return {
+        includePerRoom: "Include Per Room Analysis in Report",
         forecastLabel: "Developer's Forecast",
         forecastColumn: "Rent Forecast",
         isInspectedRowsToCheck: [0, 1],

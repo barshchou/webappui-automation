@@ -38,6 +38,7 @@ class NavigationSection extends BasePage {
     get commercialCompGroups() {return cy.get("#commercial-comp-groups");}
     get expenseHistory() {return cy.get("#expense-history");}
     get expenseForecast() {return cy.get("#expense-forecast");}
+    get supportingCapRates() {return cy.get("#supporting-cap-rates");}
 }
 
 export default new NavigationSection();

@@ -61,6 +61,7 @@ describe("Verify the display of the Unit grid with the added comparable unit on 
             .checkCheckboxByLabel(tesData.includePerRoomCheckbox);
         NavigationSection.openRentCompsInResidential();
         Income.Residential.RentComps.BaseActions.verifyUnitSelected()
+            .verifyProgressBarNotExist()
             .selectComparableByAddress(tesData.bedroomCategory.compData.address)
             .verifyBedroomTableHeader(tesData.bedroomCategory.bedroomsNumber)
             .verifyBedroomMarketRateSummaryExist(tesData.bedroomCategory.bedroomsNumber)

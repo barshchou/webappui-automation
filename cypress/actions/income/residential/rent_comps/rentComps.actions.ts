@@ -474,7 +474,7 @@ class RentCompsActions extends BaseActions {
      * @returns {RentCompsActions}
      */
     selectComparableByAddress(address) {
-        rentCompsPage.getSelectButtonByAddress(address).click();
+        rentCompsPage.getSelectButtonByAddress(address).click({force: true});
         this.verifyComparableSelectedByAddress(address);
         return this;
     }
