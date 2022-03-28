@@ -1,8 +1,9 @@
 import addCompFormPage from "../../../../pages/income/residential/rent_comps/addCompForm.page";
 import {getTodayDateString, getTodayDay, isDateHasCorrectFormat} from "../../../../../utils/date.utils";
 import {isDecimal, isHalfDecimalPart, numberWithCommas} from "../../../../../utils/numbers.utils";
+import BaseActions from "../../../base/base.actions";
 
-class AddCompFormActions {
+class AddCompFormActions extends BaseActions {
 
     clickCloseButton() {
         addCompFormPage.closeButton.should("be.enabled").click();
@@ -79,11 +80,7 @@ class AddCompFormActions {
         return this;
     }
 
-    /**
-     * @param {string} [date]
-     * @returns {AddCompFormActions}
-     */
-    enterDate(date) {
+    enterDate(date?: string): this {
         this.clearDateInput();
         date = date ?? getTodayDateString();
         addCompFormPage.dateOfValueInput.type(date);

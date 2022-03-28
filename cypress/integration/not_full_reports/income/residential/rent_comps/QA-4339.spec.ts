@@ -16,7 +16,8 @@ describe(`Verify clicking Add Unit button on Add New Rent Comp overlay is adding
         Property.Summary.enterNumberOfResUnits(testData.numberOfUnits);
         NavigationSection.navigateToResInPlaceRentRoll();
         Income.Residential.InPlaceRentRoll.fillAllRentTypeCellsWithEqualValue(testData.rentType)
-            .enterBedroomsNumberByRowNumber(testData.numberOfBedrooms);
+            .enterBedroomsNumberByRowNumber(testData.numberOfBedrooms)
+            .checkCheckboxByLabel(testData.includePerRoomCheckbox);
         NavigationSection.openRentCompsInResidential();
         Income.Residential.RentComps.BaseActions.verifyUnitSelected()
             .openAddNewComparableForm(testData.formData.address);

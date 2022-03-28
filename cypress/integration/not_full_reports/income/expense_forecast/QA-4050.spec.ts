@@ -26,8 +26,8 @@ describe(`Verify that Generated Commentary for Total Operating Expenses
             .enterManagementFeesByColumnIndex(testData.comparable.management)
             .verifyTOEByColumnIndex(testData.comparable.toe)
             .verifyTOEPerSFByColumnIndex()
-            .verifyToePerUnitByColumnIndex()
-            .clickSaveContinueButton();
+            .verifyToePerUnitByColumnIndex();
+        NavigationSection.navigateToExpenseForecast();
         Income.ExpenseForecast.enterForecastItemForecast(testData.expenseForecastInsurance)
             .verifyTOECommentary(testData.commentaries.generated)
             .editTOECommentary(testData.commentaries.edited)
