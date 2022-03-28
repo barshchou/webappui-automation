@@ -42,8 +42,7 @@ describe("Verify the Commercial Stabilized Rent Roll table", () => {
             removed the decimal place for Monthly Rent, represent as a whole number.
         `);
         NavigationSection.openReviewAndExport();
-        ReviewExport.generateDocxReport().clickSubmitBtn()
-        .waitForReportGenerated();
+        ReviewExport.generateDocxReport().waitForReportGenerated();
         /**
          * Below - should be interaction with docx file. 
          * Since we're not figure out yet how to properly do such verifications in Cypress
