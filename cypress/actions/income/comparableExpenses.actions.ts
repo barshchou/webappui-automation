@@ -20,13 +20,7 @@ class ComparableExpensesActions extends BaseActions {
         return this;
     }
 
-    /**
-     *
-     * @param {string} location
-     * @param {number} index
-     * @returns {ComparableExpensesActions}
-     */
-    enterLocationByColumnIndex(location, index = 0) {
+    enterLocationByColumnIndex(location: string, index: number = 0): ComparableExpensesActions {
         compExpensesPage.compLocationCells.eq(index).as("location");
         cy.get("@location").scrollIntoView();
         cy.get("@location").clear({force:true});
@@ -34,45 +28,10 @@ class ComparableExpensesActions extends BaseActions {
         return this;
     }
 
-    /**
-     *
-     * @param {string} periodValue
-     * @param {number} index
-     * @returns {ComparableExpensesActions}
-     */
-    chooseExpensePeriodByColumnIndex(periodValue, index = 0) {
+    chooseExpensePeriodByColumnIndex(periodValue: string, index: number = 0): ComparableExpensesActions {
         compExpensesPage.expensePeriodDropdowns.eq(index).as("period");
         cy.get("@period").scrollIntoView().click();
         compExpensesPage.getDropdownOptionByValue(periodValue).scrollIntoView().click();
-        return this;
-    }
-
-    /**
-     *
-     * @param {string | number} year
-     * @param index
-     * @returns {ComparableExpensesActions}
-     */
-    enterExpenseYearByColumnIndex(year, index = 0) {
-        compExpensesPage.expenseYearCells.eq(index).as("year");
-        cy.get("@year").scrollIntoView();
-        cy.get("@year").clear({force:true});
-        cy.get("@year").type(year, {force:true}).should("have.value", year);
-        return this;
-    }
-
-    /**
-     *
-     * @param {string} month
-     * @param {number} index
-     * @returns {ComparableExpensesActions}
-     */
-    enterExpenseMonthByColumnIndex(month, index = 0) {
-        compExpensesPage.expenseMonthCells.eq(index).as("month");
-        cy.get("@month").scrollIntoView();
-        cy.get("@month").clear({force:true});
-        cy.get("@month").type(month, {force:true}).type("{enter}", {force:true})
-            .should("have.value", month);
         return this;
     }
 
@@ -84,41 +43,11 @@ class ComparableExpensesActions extends BaseActions {
         return this;
     }
 
-    /**
-     *
-     * @param {number | string} value
-     * @param {number} index
-     * @returns {ComparableExpensesActions}
-     */
-    enterResidentialUnitsByColumnIndex(value, index = 0) {
+    enterResidentialUnitsByColumnIndex(value: number, index: number = 0): ComparableExpensesActions {
         compExpensesPage.residentialUnitsCells.eq(index).as("units");
         cy.get("@units").scrollIntoView();
         cy.get("@units").clear({force:true});
-        cy.get("@units").type(value, {force:true}).should("have.value", value);
-        return this;
-    }
-
-    /**
-     *
-     * @param {number | string} value
-     * @param {number} index
-     * @returns {ComparableExpensesActions}
-     */
-    enterInsuranceByColumnIndex(value, index = 0) {
-        const valueToBe = `$${numberWithCommas(value)}`;
-        compExpensesPage.insuranceCells.eq(index).as("insurance");
-        cy.get("@insurance").scrollIntoView();
-        cy.get("@insurance").clear({force:true});
-        cy.get("@insurance").type(value, {force:true}).should("have.value", valueToBe);
-        return this;
-    }
-
-    enterElectricityByColumnIndex(value: number, index: number = 0): ComparableExpensesActions {
-        const valueToBe = `$${numberWithCommas(value)}`;
-        compExpensesPage.electricityCells.eq(index).as("electricity");
-        cy.get("@electricity").scrollIntoView();
-        cy.get("@electricity").clear({force:true});
-        cy.get("@electricity").type(`${value}`, {force:true}).should("have.value", valueToBe);
+        cy.get("@units").type(`${value}`, {force:true}).should("have.value", value);
         return this;
     }
 
@@ -131,83 +60,12 @@ class ComparableExpensesActions extends BaseActions {
         return this;
     }
 
-    /**
-     *
-     * @param {number | string} value
-     * @param {number} index
-     * @returns {ComparableExpensesActions}
-     */
-    enterRepairsMaintenanceByColumnIndex(value, index = 0) {
-        const valueToBe = `$${numberWithCommas(value)}`;
-        compExpensesPage.repairsCells.eq(index).as("repairs");
-        cy.get("@repairs").scrollIntoView();
-        cy.get("@repairs").clear({force:true});
-        cy.get("@repairs").type(value, {force:true}).should("have.value", valueToBe);
-        return this;
-    }
-
-    /**
-     *
-     * @param {number | string} value
-     * @param {number} index
-     * @returns {ComparableExpensesActions}
-     */
-    enterPayrollBenefitsByColumnIndex(value, index = 0) {
-        const valueToBe = `$${numberWithCommas(value)}`;
-        compExpensesPage.payrollCells.eq(index).as("payroll");
-        cy.get("@payroll").scrollIntoView();
-        cy.get("@payroll").clear({force:true});
-        cy.get("@payroll").type(value, {force:true}).should("have.value", valueToBe);
-        return this;
-    }
-
-    /**
-     *
-     * @param {string | number} value
-     * @param {number} index
-     * @returns {ComparableExpensesActions}
-     */
-    enterGeneralAdministrativeByColumnIndex(value, index = 0) {
-        const valueToBe = `$${numberWithCommas(value)}`;
-        compExpensesPage.generalCells.eq(index).as("general");
-        cy.get("@general").scrollIntoView();
-        cy.get("@general").clear({force:true});
-        cy.get("@general").type(value, {force:true}).should("have.value", valueToBe);
-        return this;
-    }
-
-    /**
-     *
-     * @param {string | number} value
-     * @param {number} index
-     * @returns {ComparableExpensesActions}
-     */
-    enterManagementFeesByColumnIndex(value, index = 0) {
-        const valueToBe = `$${numberWithCommas(value)}`;
-        compExpensesPage.managementFeesCells.eq(index).as("management");
-        cy.get("@management").scrollIntoView();
-        cy.get("@management").clear({force:true});
-        cy.get("@management").type(value, {force:true}).should("have.value", valueToBe);
-        return this;
-    }
-
-    /**
-     *
-     * @param {string} textToBe
-     * @param {number} index
-     * @returns {ComparableExpensesActions}
-     */
-    verifyTOEByColumnIndex(textToBe, index = 0) {
+    verifyTOEByColumnIndex(textToBe: string, index: number = 0): ComparableExpensesActions {
         compExpensesPage.totalOpExpensesCells.eq(index).should("have.text", textToBe);
         return this;
     }
 
-    /**
-     *
-     * @param {number} index
-     * @returns {ComparableExpensesActions}
-     */
-    verifyTOEPerSFByColumnIndex(index = 0) {
+    verifyTOEPerSFByColumnIndex(index: number = 0): ComparableExpensesActions {
         compExpensesPage.totalOpExpensesCells.eq(index).then(el => {
            const toeNumber = getNumberFromDollarNumberWithCommas(el.text());
            compExpensesPage.squareFeetCells.eq(index).invoke("attr", "value").then(sfVal => {
@@ -219,12 +77,7 @@ class ComparableExpensesActions extends BaseActions {
         return this;
     }
 
-    /**
-     *
-     * @param {number} index
-     * @returns {ComparableExpensesActions}
-     */
-    verifyToePerUnitByColumnIndex(index = 0) {
+    verifyToePerUnitByColumnIndex(index: number = 0): ComparableExpensesActions {
         compExpensesPage.totalOpExpensesCells.eq(index).invoke("text").then(toe => {
             const toeNumber = getNumberFromDollarNumberWithCommas(toe);
             compExpensesPage.residentialUnitsCells.eq(index).invoke("attr", "value").then(units => {
@@ -236,11 +89,7 @@ class ComparableExpensesActions extends BaseActions {
         return this;
     }
 
-    /**
-     *
-     * @returns {ComparableExpensesActions}
-     */
-    verifySquareFeetAverage() {
+    verifySquareFeetAverage(): ComparableExpensesActions {
         compExpensesPage.squareFeetCells.then(elements => {
            const averageTextToBe = numberWithCommas(Math.round(this.getAverageValueFromInputs(elements)));
            compExpensesPage.squareFeetAverage.should("have.text", averageTextToBe);
@@ -248,11 +97,7 @@ class ComparableExpensesActions extends BaseActions {
         return this;
     }
 
-    /**
-     *
-     * @returns {ComparableExpensesActions}
-     */
-    verifyUnitsNumberAverage() {
+    verifyUnitsNumberAverage(): ComparableExpensesActions {
         compExpensesPage.residentialUnitsCells.then(elements => {
             const averageTextToBe = numberWithCommas(Math.round(this.getAverageValueFromInputs(elements)));
             compExpensesPage.residentialUnitsAverage.should("have.text", averageTextToBe);
@@ -283,11 +128,7 @@ class ComparableExpensesActions extends BaseActions {
         return sum / counterOfElements;
     }
 
-    /**
-     *
-     * @returns {ComparableExpensesActions}
-     */
-    verifyEGIAverage() {
+    verifyEGIAverage(): ComparableExpensesActions {
         compExpensesPage.egiCells.then(elements => {
             const averageNumber = this.getAverageValueFromInputs(elements);
             const textToBe = averageNumber === 0 ? "-" : `$${numberWithCommas(averageNumber.toFixed(2))}`;
@@ -296,11 +137,7 @@ class ComparableExpensesActions extends BaseActions {
         return this;
     }
 
-    /**
-     *
-     * @returns {ComparableExpensesActions}
-     */
-    verifyInsuranceAverage() {
+    verifyInsuranceAverage(): ComparableExpensesActions {
         compExpensesPage.insuranceCells.then(elements => {
             const averageNumber = this.getAverageValueFromInputs(elements);
             const textToBe = this.getCellTextForNumberCells(averageNumber);
@@ -309,20 +146,11 @@ class ComparableExpensesActions extends BaseActions {
         return this;
     }
 
-    /**
-     * @private
-     * @param {number} averageNumber
-     * @returns {string}
-     */
-    getCellTextForNumberCells(averageNumber) {
+    private getCellTextForNumberCells(averageNumber: number): string {
         return averageNumber === 0 ? "$0.00" : `$${numberWithCommas(averageNumber.toFixed(2))}`;
     }
 
-    /**
-     *
-     * @returns {ComparableExpensesActions}
-     */
-    verifyElectricityAverage() {
+    verifyElectricityAverage(): ComparableExpensesActions {
         compExpensesPage.electricityCells.then(elements => {
             const averageNumber = this.getAverageValueFromInputs(elements);
             const textToBe = this.getCellTextForNumberCells(averageNumber);
@@ -331,11 +159,7 @@ class ComparableExpensesActions extends BaseActions {
         return this;
     }
 
-    /**
-     *
-     * @returns {ComparableExpensesActions}
-     */
-    verifyFuelAverage() {
+    verifyFuelAverage(): ComparableExpensesActions {
         compExpensesPage.fuelCells.then(elements => {
             const averageNumber = this.getAverageValueFromInputs(elements);
             const textToBe = this.getCellTextForNumberCells(averageNumber);
@@ -344,11 +168,7 @@ class ComparableExpensesActions extends BaseActions {
         return this;
     }
 
-    /**
-     *
-     * @returns {ComparableExpensesActions}
-     */
-    verifyWaterSewerAverage() {
+    verifyWaterSewerAverage(): ComparableExpensesActions {
         compExpensesPage.waterSewerCells.then(elements => {
             const averageNumber = this.getAverageValueFromInputs(elements);
             const textToBe = this.getCellTextForNumberCells(averageNumber);
@@ -357,11 +177,7 @@ class ComparableExpensesActions extends BaseActions {
         return this;
     }
 
-    /**
-     *
-     * @returns {ComparableExpensesActions}
-     */
-    verifyRepairsMaintenanceAverage() {
+    verifyRepairsMaintenanceAverage(): ComparableExpensesActions {
         compExpensesPage.repairsCells.then(elements => {
             const averageNumber = this.getAverageValueFromInputs(elements);
             const textToBe = this.getCellTextForNumberCells(averageNumber);
@@ -370,11 +186,7 @@ class ComparableExpensesActions extends BaseActions {
         return this;
     }
 
-    /**
-     *
-     * @returns {ComparableExpensesActions}
-     */
-    verifyPayrollBenefitsAverage() {
+    verifyPayrollBenefitsAverage(): ComparableExpensesActions {
         compExpensesPage.payrollCells.then(elements => {
             const averageNumber = this.getAverageValueFromInputs(elements);
             const textToBe = this.getCellTextForNumberCells(averageNumber);
@@ -383,11 +195,7 @@ class ComparableExpensesActions extends BaseActions {
         return this;
     }
 
-    /**
-     *
-     * @returns {ComparableExpensesActions}
-     */
-    verifyGeneralAdministrativeAverage() {
+    verifyGeneralAdministrativeAverage(): ComparableExpensesActions {
         compExpensesPage.generalCells.then(elements => {
             const averageNumber = this.getAverageValueFromInputs(elements);
             const textToBe = this.getCellTextForNumberCells(averageNumber);
@@ -396,11 +204,7 @@ class ComparableExpensesActions extends BaseActions {
         return this;
     }
 
-    /**
-     *
-     * @returns {ComparableExpensesActions}
-     */
-    verifyLegalProFeesAverage() {
+    verifyLegalProFeesAverage(): ComparableExpensesActions {
         compExpensesPage.legalProFeesCells.then(elements => {
             const averageNumber = this.getAverageValueFromInputs(elements);
             const textToBe = this.getCellTextForNumberCells(averageNumber);
@@ -409,11 +213,7 @@ class ComparableExpensesActions extends BaseActions {
         return this;
     }
 
-    /**
-     *
-     * @returns {ComparableExpensesActions}
-     */
-    verifyMiscellaneousAverage() {
+    verifyMiscellaneousAverage(): ComparableExpensesActions {
         compExpensesPage.miscellaneousCells.then(elements => {
             const averageNumber = this.getAverageValueFromInputs(elements);
             const textToBe = this.getCellTextForNumberCells(averageNumber);
@@ -422,11 +222,7 @@ class ComparableExpensesActions extends BaseActions {
         return this;
     }
 
-    /**
-     *
-     * @returns {ComparableExpensesActions}
-     */
-    verifyManagementAverage() {
+    verifyManagementAverage(): ComparableExpensesActions {
         compExpensesPage.managementFeesCells.then(elements => {
             const averageNumber = this.getAverageValueFromInputs(elements);
             const textToBe = this.getCellTextForNumberCells(averageNumber);
@@ -435,11 +231,7 @@ class ComparableExpensesActions extends BaseActions {
         return this;
     }
 
-    /**
-     *
-     * @returns {ComparableExpensesActions}
-     */
-    verifyReservesAverage() {
+    verifyReservesAverage(): ComparableExpensesActions {
         compExpensesPage.reservesCells.then(elements => {
            const averageNumber = this.getAverageValueFromInputs(elements);
            const textToBe = this.getCellTextForNumberCells(averageNumber);
@@ -448,14 +240,30 @@ class ComparableExpensesActions extends BaseActions {
         return this;
     }
 
-    /**
-     *
-     * @returns {ComparableExpensesActions}
-     */
-    verifyTableAverageValues() {
+    verifyDollarCellsAverage(cellsElements: Cypress.Chainable, averageCell: Cypress.Chainable): ComparableExpensesActions {
+        cellsElements.then(elements => {
+            const averageNumber = this.getAverageValueFromInputs(elements);
+            const textToBe = this.getCellTextForNumberCells(averageNumber);
+            averageCell.should("have.text", textToBe);
+        });
+        return this;
+    }
+
+    verifyTableAverageValues(): ComparableExpensesActions {
         this.verifySquareFeetAverage()
             .verifyUnitsNumberAverage()
             .verifyEGIAverage()
+            // .verifyDollarCellsAverage(compExpensesPage.insuranceCells, compExpensesPage.insuranceAverage)
+            // .verifyDollarCellsAverage(compExpensesPage.electricityCells, compExpensesPage.electricityAverage)
+            // .verifyDollarCellsAverage(compExpensesPage.fuelCells, compExpensesPage.fuelAverage)
+            // .verifyDollarCellsAverage(compExpensesPage.waterSewerCells, compExpensesPage.waterSewerAverage)
+            // .verifyDollarCellsAverage(compExpensesPage.repairsCells, compExpensesPage.repairsAverage)
+            // .verifyDollarCellsAverage(compExpensesPage.payrollCells, compExpensesPage.payrollBenefitsAverage)
+            // .verifyDollarCellsAverage(compExpensesPage.generalCells, compExpensesPage.generalAdministrativeAverage)
+            // .verifyDollarCellsAverage(compExpensesPage.legalProFeesCells, compExpensesPage.legalProFeesAverage)
+            // .verifyDollarCellsAverage(compExpensesPage.miscellaneousCells, compExpensesPage.miscellaneousAverage)
+            // .verifyDollarCellsAverage(compExpensesPage.managementFeesCells, compExpensesPage.managementAverage)
+            // .verifyDollarCellsAverage(compExpensesPage.reservesCells, compExpensesPage.repairsAverage);
             .verifyInsuranceAverage()
             .verifyElectricityAverage()
             .verifyFuelAverage()
