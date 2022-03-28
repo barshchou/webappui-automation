@@ -22,7 +22,7 @@ class StabilizedRentRollActions extends BaseActions{
     }
 
     verifyTenantNameByRow(name: string, leaseStatus: string, rowNumber: number = 0): StabilizedRentRollActions {
-        let textToBe = leaseStatus === "Vacant" || name === "" ? `Commercial Unit ${rowNumber + 1}` : name;
+        let textToBe = leaseStatus === "Vacant" ? `Commercial Unit ${rowNumber + 1}` : name;
         stabRenRollPage.tenantNameCells.eq(rowNumber).should("have.text", textToBe);
         return this;
     }
