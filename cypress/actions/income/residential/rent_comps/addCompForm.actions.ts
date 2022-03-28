@@ -4,7 +4,6 @@ import {isDecimal, isHalfDecimalPart, numberWithCommas} from "../../../../../uti
 import BaseActions from "../../../base/base.actions";
 
 class AddCompFormActions extends BaseActions {
-    get Actions(): this { return this;}
 
     clickCloseButton() {
         addCompFormPage.closeButton.should("be.enabled").click();
