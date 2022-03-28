@@ -14,7 +14,7 @@ class ExpenseForecastPage extends BasePage {
         return cy.get("[data-qa=fuel-forecast-item]");
     }
     getForecastItemBasisRadio(item) {return cy.get(`[name='${item}.basis']`);}
-    getElementToCheckRadio(forecastItem, radioValue) {return cy.get(`[data-qa=checked] [name='${forecastItem}.basis'][value='${radioValue}']`);}
+    getElementToCheckRadio(forecastItem: BoweryReports.ForecastItemBasis, radioValue: BoweryReports.UnitSF) {return cy.get(`[name='${forecastItem}.basis'][value='${radioValue}']`);}
     getForecastItemForecastInput(item) {return cy.get(`[name='${item}.concludedValue']`);}
     getForecastItemCompMin(item) {return cy.get(`[data-qa=${item}-forecast-item] [data-qa=comp-min]`);}
     getForecastItemCompAvg(item) {return cy.get(`[data-qa=${item}-forecast-item] [data-qa=comp-avg]`);}
