@@ -1,0 +1,22 @@
+{
+    "root": true,
+    "parser": "@typescript-eslint/parser",
+    "plugins": [
+      "@typescript-eslint"
+    ],
+    "extends": [
+      "eslint:recommended",
+      "plugin:@typescript-eslint/eslint-recommended",
+      "plugin:@typescript-eslint/recommended"
+    ],
+    "rules": {
+      "prefer-const":"off",
+      "no-console":"error",
+      "semi":"error",
+      "lines-between-class-members":["warn","always"],
+      "array-callback-return":"warn",
+      "func-call-spacing":["warn","never"],
+      "require-await":"error",
+      "arrow-spacing": ["warn", { "before": true, "after": true }]
+    }
+}
