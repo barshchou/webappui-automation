@@ -17,6 +17,16 @@ on:
         type: string
         description: Add custom environment url if needed
         required: false
+      username:
+        type: string
+        description: sets username for tests
+        required: false
+        default: ${{ secrets.USERNAME }}
+      password:
+        type: string
+        description: sets password for tests
+        required: false
+        default: ${{ secrets.PASSWORD }}
 
 jobs:
   Not-full-reports-run:
@@ -56,8 +66,8 @@ jobs:
       - name: Run Cypress not snapshot tests on Currents.dev
         run: currents run --config-file cypress-currents-config.json --tag ${{ github.event.inputs.env }} --spec "./cypress/integration/not_full_reports/**/*.spec.ts" --browser chrome --record --parallel --key ${{ secrets.CURRENTS_RECORD_KEY }} --ci-build-id "${{ github.repository }}-${{ github.run_id }}-${{ github.run_attempt}}"
         env:
-          CYPRESS_USERNAME: ${{ secrets.USERNAME }}
-          CYPRESS_PASSWORD: ${{ secrets.PASSWORD }}
+          CYPRESS_USERNAME: ${{ github.event.inputs.username }}
+          CYPRESS_PASSWORD: ${{ github.event.inputs.password }}
           CYPRESS_url: ${{ github.event.inputs.env }}
           CYPRESS_customEnv: ${{ github.event.inputs.customEnv }}
           СYPRESS_grepTags: "-@snapshot_tests"
@@ -66,8 +76,8 @@ jobs:
       - name: Run Cypress snapshot tests on Currents.dev
         run: currents run --config-file cypress-currents-config.json --tag ${{ github.event.inputs.env }} --spec "./cypress/integration/not_full_reports/**/*.spec.ts" --browser chrome --record --parallel --key ${{ secrets.CURRENTS_RECORD_KEY }} --ci-build-id "${{ github.repository }}-${{ github.run_id }}-${{ github.run_attempt}}"
         env:
-          CYPRESS_USERNAME: ${{ secrets.USERNAME }}
-          CYPRESS_PASSWORD: ${{ secrets.PASSWORD }}
+          CYPRESS_USERNAME: ${{ github.event.inputs.username }}
+          CYPRESS_PASSWORD: ${{ github.event.inputs.password }}
           CYPRESS_url: ${{ github.event.inputs.env }}
           CYPRESS_customEnv: ${{ github.event.inputs.customEnv }}
           СYPRESS_grepTags: "@snapshot_tests"
