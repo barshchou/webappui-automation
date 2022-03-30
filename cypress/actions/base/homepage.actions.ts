@@ -123,12 +123,7 @@ class HomepageActions extends BaseActions {
         return this;
     }
 
-    /**
-     *
-     * @param {string} reportNumber
-     * @returns {HomepageActions}
-     */
-    clickArchiveButton(reportNumber: any) {
+    clickArchiveButton(reportNumber: string): this {
         homepagePage.getArchiveButton(reportNumber).should("exist").click({force:true});
         return this;
     }
@@ -151,12 +146,7 @@ class HomepageActions extends BaseActions {
         return this;
     }
 
-    /**
-     *
-     * @param {string} reportNumber
-     * @returns {HomepageActions}
-     */
-    deleteReport(reportNumber: any) {
+    deleteReport(reportNumber: string): this {
         this.verifyThatPageIsOpened()
             .enterReportNumberToSearch(reportNumber)
             .clickArchiveButton(reportNumber);
