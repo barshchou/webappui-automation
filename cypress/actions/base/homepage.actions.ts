@@ -11,7 +11,7 @@ class HomepageActions extends BaseActions {
     createReport(reportCreationData) {
         this.clickNewReportButton()
             .enterAddressToSearch(reportCreationData.address)
-            .clickFindPropHeader()
+            // .clickFindPropHeader()
             .clickSubmitButton()
             .clickToSearchResultRow()
             .clickSubmitButton()
@@ -62,6 +62,7 @@ class HomepageActions extends BaseActions {
      */
     enterAddressToSearch(address) {
         homepagePage.searchAddressField.type(`${address}{enter}`).should("have.value", address);
+        cy.get('[data-suggestion-index="0"]').should("be.visible");
         return this;
     }
 
