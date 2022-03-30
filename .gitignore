@@ -125,3 +125,6 @@ cypress/reports/
 cypress/videos/
 cypress/screenshots/
 cypress/downloads
+
+# act (local gh action run, https://github.com/nektos/act) files
+.act/.secrets

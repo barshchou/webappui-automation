@@ -1,0 +1,6 @@
+We can run and "debug" Gh Actions on localhost 
+using next library: https://github.com/nektos/act .
+
+How to install (you will need to install Golang on your machine):
+    1. Golang: https://go.dev/doc/install
+    2. Install 'act' via golang: https://github.com/nektos/act#go-linuxwindowsmacosany-other-platform-supported-by-go
