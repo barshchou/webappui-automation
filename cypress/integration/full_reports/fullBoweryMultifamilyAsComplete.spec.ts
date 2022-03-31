@@ -53,7 +53,6 @@ describe("Full bowery way, multifamily as complete report", () => {
             .checkContainsBasement()
             .checkListCheckboxesByLabels(testData.descriptionOfImprovements.basementAccess)
             .checkBasementStateByValue(testData.descriptionOfImprovements.basementState)
-            .verifyTotalEconomicLife(testData.remainingEconomicLife.totalEconomicLifeToBe)
             .enterAgeEffective(testData.remainingEconomicLife.ageEffective)
             .clickSaveContinueButton();
         Property.SiteDescription.editTransportationDiscussionCommentary(testData.transportationSiteDescription.commentary)
