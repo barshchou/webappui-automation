@@ -1,6 +1,30 @@
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 import {getCurrentMonthName, getYearFromDate} from "../../../../../utils/date.utils";
 
+const _actualFuelItem: BoweryReports.ForecastItem = {
+    name: "fuel",
+    basis: "sf",
+    projection: 12000
+}
+
+const _t12FuelItem: BoweryReports.ForecastItem = {
+    name: "fuel",
+    basis: "sf",
+    projection: 13000
+}
+
+const _historicalFuelItem: BoweryReports.ForecastItem = {
+    name: "fuel",
+    basis: "sf",
+    projection: 14000
+}
+
+const _ownerProjectionFuelItem: BoweryReports.ForecastItem = {
+    name: "fuel",
+    basis: "sf",
+    projection: 15000
+}
+
 export default {
     reportCreationData: ReportDataCreator.getDefaultReportData("4941"),
     buildingDescription: {
@@ -31,25 +55,9 @@ export default {
         expenseYear: Number(getYearFromDate()) + 1,
         fuelExpense: 15000
     },
-    actualFuelItem: {
-        name: "fuel",
-        basis: "sf",
-        projection: 12000
-    },
-    t12FuelItem: {
-        name: "fuel",
-        basis: "sf",
-        projection: 13000
-    },
-    historicalFuelItem: {
-        name: "fuel",
-        basis: "sf",
-        projection: 14000
-    },
-    ownerProjectionFuelItem: {
-        name: "fuel",
-        basis: "sf",
-        projection: 15000
-    },
+    actualFuelItem: _actualFuelItem,
+    t12FuelItem: _t12FuelItem,
+    historicalFuelItem: _historicalFuelItem,
+    ownerProjectionFuelItem: _ownerProjectionFuelItem,
     fuelCardSnapshotName: "Fuel_Forecast_Item_Component"
 }
