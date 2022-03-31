@@ -14,6 +14,7 @@ class ComparableExpensesPage extends BasePage {
     get payrollCells() {return cy.get("[name$='payrollAndBenefits.total']");}
     get generalCells() {return cy.get("[name$='generalAndAdministrative.total']");}
     get managementFeesCells() {return cy.get("[name$='management.total']");}
+    getUnifiedDollarCells(cellName: string) {return cy.get(`[name$='${cellName}.total']`)}
     get totalOpExpensesCells() {return cy.get("[data-qa^=total-operation-expenses-cell]");}
     get toePerSFCells() {return cy.get("[data-qa^=total-operation-expenses-per-sf-cell]");}
     get toePerUnitCells() {return cy.get("[data-qa^=total-operation-expenses-per-unit-cell]");}
@@ -37,6 +38,7 @@ class ComparableExpensesPage extends BasePage {
     get managementAverage() {return cy.get("[data-qa=management-row] > td:last-child");}
     get reservesCells() {return cy.get("[name$='reserves.total']");}
     get reservesAverage() {return cy.get("[data-qa=reserves-row] > td:last-child");}
+    getUnifiedDollarAverageCell(cellName: string) {return cy.get(`[data-qa=${cellName}-row] > td:last-child`)}
 }
 
 export default new ComparableExpensesPage();

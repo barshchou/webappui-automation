@@ -7,7 +7,7 @@ namespace BoweryReports {
     export type LeaseStatus = "Occupied" | "Vacant"
     export type UnitSF = "unit" | "sf"
     export type PerUnitPerSF = "Per Unit" | "Per SF"
-    export type ForecastItemBasis = "repairsAndMaintenance" | "insurance" | "electricity" 
+    export type ForecastItemBasis = "insurance" | "electricity"
     | "fuel" | "waterAndSewer" | "repairsAndMaintenance" | "payrollAndBenefits" | "generalAndAdministrative" 
     | "legalAndProfessionalFees" | "miscellaneous" | "management" | "reserves" | "total"
 

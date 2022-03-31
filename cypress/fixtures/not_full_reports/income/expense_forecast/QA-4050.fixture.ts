@@ -33,6 +33,6 @@ const commentariesFixture = () => {
 export default {
     reportCreationData: reportCreationFixture(),
     comparable: Object.freeze(comparableFixture()),
-    expenseForecastInsurance: Object.freeze(expenseForecastInsuranceFixture()),
+    expenseForecastInsurance: expenseForecastInsuranceFixture(),
     commentaries: Object.freeze(commentariesFixture())
 };

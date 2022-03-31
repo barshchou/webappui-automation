@@ -105,12 +105,7 @@ class ComparableExpensesActions extends BaseActions {
         return this;
     }
 
-    /**
-     * @private
-     * @param {JQuery<HTMLElement>} elements
-     * @returns {number}
-     */
-    getAverageValueFromInputs(elements) {
+    private getAverageValueFromInputs(elements: JQuery<HTMLElement>): number {
         let sum = 0;
         let counterOfElements = 0;
         for (let i = 0; i < elements.length; i++) {
@@ -137,114 +132,15 @@ class ComparableExpensesActions extends BaseActions {
         return this;
     }
 
-    verifyInsuranceAverage(): ComparableExpensesActions {
-        compExpensesPage.insuranceCells.then(elements => {
-            const averageNumber = this.getAverageValueFromInputs(elements);
-            const textToBe = this.getCellTextForNumberCells(averageNumber);
-            compExpensesPage.insuranceAverage.should("have.text", textToBe);
-        });
-        return this;
-    }
-
     private getCellTextForNumberCells(averageNumber: number): string {
         return averageNumber === 0 ? "$0.00" : `$${numberWithCommas(averageNumber.toFixed(2))}`;
     }
 
-    verifyElectricityAverage(): ComparableExpensesActions {
-        compExpensesPage.electricityCells.then(elements => {
+    verifyDollarCellsAverage(cellsName: string): ComparableExpensesActions {
+        compExpensesPage.getUnifiedDollarCells(cellsName).then(elements => {
             const averageNumber = this.getAverageValueFromInputs(elements);
             const textToBe = this.getCellTextForNumberCells(averageNumber);
-            compExpensesPage.electricityAverage.should("have.text", textToBe);
-        });
-        return this;
-    }
-
-    verifyFuelAverage(): ComparableExpensesActions {
-        compExpensesPage.fuelCells.then(elements => {
-            const averageNumber = this.getAverageValueFromInputs(elements);
-            const textToBe = this.getCellTextForNumberCells(averageNumber);
-            compExpensesPage.fuelAverage.should("have.text", textToBe);
-        });
-        return this;
-    }
-
-    verifyWaterSewerAverage(): ComparableExpensesActions {
-        compExpensesPage.waterSewerCells.then(elements => {
-            const averageNumber = this.getAverageValueFromInputs(elements);
-            const textToBe = this.getCellTextForNumberCells(averageNumber);
-            compExpensesPage.waterSewerAverage.should("have.text", textToBe);
-        });
-        return this;
-    }
-
-    verifyRepairsMaintenanceAverage(): ComparableExpensesActions {
-        compExpensesPage.repairsCells.then(elements => {
-            const averageNumber = this.getAverageValueFromInputs(elements);
-            const textToBe = this.getCellTextForNumberCells(averageNumber);
-            compExpensesPage.repairsAverage.should("have.text", textToBe);
-        });
-        return this;
-    }
-
-    verifyPayrollBenefitsAverage(): ComparableExpensesActions {
-        compExpensesPage.payrollCells.then(elements => {
-            const averageNumber = this.getAverageValueFromInputs(elements);
-            const textToBe = this.getCellTextForNumberCells(averageNumber);
-            compExpensesPage.payrollBenefitsAverage.should("have.text", textToBe);
-        });
-        return this;
-    }
-
-    verifyGeneralAdministrativeAverage(): ComparableExpensesActions {
-        compExpensesPage.generalCells.then(elements => {
-            const averageNumber = this.getAverageValueFromInputs(elements);
-            const textToBe = this.getCellTextForNumberCells(averageNumber);
-            compExpensesPage.generalAdministrativeAverage.should("have.text", textToBe);
-        });
-        return this;
-    }
-
-    verifyLegalProFeesAverage(): ComparableExpensesActions {
-        compExpensesPage.legalProFeesCells.then(elements => {
-            const averageNumber = this.getAverageValueFromInputs(elements);
-            const textToBe = this.getCellTextForNumberCells(averageNumber);
-            compExpensesPage.legalProFeesAverage.should("have.text", textToBe);
-        });
-        return this;
-    }
-
-    verifyMiscellaneousAverage(): ComparableExpensesActions {
-        compExpensesPage.miscellaneousCells.then(elements => {
-            const averageNumber = this.getAverageValueFromInputs(elements);
-            const textToBe = this.getCellTextForNumberCells(averageNumber);
-            compExpensesPage.miscellaneousAverage.should("have.text", textToBe);
-        });
-        return this;
-    }
-
-    verifyManagementAverage(): ComparableExpensesActions {
-        compExpensesPage.managementFeesCells.then(elements => {
-            const averageNumber = this.getAverageValueFromInputs(elements);
-            const textToBe = this.getCellTextForNumberCells(averageNumber);
-            compExpensesPage.managementAverage.should("have.text", textToBe);
-        });
-        return this;
-    }
-
-    verifyReservesAverage(): ComparableExpensesActions {
-        compExpensesPage.reservesCells.then(elements => {
-           const averageNumber = this.getAverageValueFromInputs(elements);
-           const textToBe = this.getCellTextForNumberCells(averageNumber);
-           compExpensesPage.reservesAverage.should("have.text", textToBe);
-        });
-        return this;
-    }
-
-    verifyDollarCellsAverage(cellsElements: Cypress.Chainable, averageCell: Cypress.Chainable): ComparableExpensesActions {
-        cellsElements.then(elements => {
-            const averageNumber = this.getAverageValueFromInputs(elements);
-            const textToBe = this.getCellTextForNumberCells(averageNumber);
-            averageCell.should("have.text", textToBe);
+            compExpensesPage.getUnifiedDollarAverageCell(cellsName).should("have.text", textToBe);
         });
         return this;
     }
@@ -253,28 +149,17 @@ class ComparableExpensesActions extends BaseActions {
         this.verifySquareFeetAverage()
             .verifyUnitsNumberAverage()
             .verifyEGIAverage()
-            // .verifyDollarCellsAverage(compExpensesPage.insuranceCells, compExpensesPage.insuranceAverage)
-            // .verifyDollarCellsAverage(compExpensesPage.electricityCells, compExpensesPage.electricityAverage)
-            // .verifyDollarCellsAverage(compExpensesPage.fuelCells, compExpensesPage.fuelAverage)
-            // .verifyDollarCellsAverage(compExpensesPage.waterSewerCells, compExpensesPage.waterSewerAverage)
-            // .verifyDollarCellsAverage(compExpensesPage.repairsCells, compExpensesPage.repairsAverage)
-            // .verifyDollarCellsAverage(compExpensesPage.payrollCells, compExpensesPage.payrollBenefitsAverage)
-            // .verifyDollarCellsAverage(compExpensesPage.generalCells, compExpensesPage.generalAdministrativeAverage)
-            // .verifyDollarCellsAverage(compExpensesPage.legalProFeesCells, compExpensesPage.legalProFeesAverage)
-            // .verifyDollarCellsAverage(compExpensesPage.miscellaneousCells, compExpensesPage.miscellaneousAverage)
-            // .verifyDollarCellsAverage(compExpensesPage.managementFeesCells, compExpensesPage.managementAverage)
-            // .verifyDollarCellsAverage(compExpensesPage.reservesCells, compExpensesPage.repairsAverage);
-            .verifyInsuranceAverage()
-            .verifyElectricityAverage()
-            .verifyFuelAverage()
-            .verifyWaterSewerAverage()
-            .verifyRepairsMaintenanceAverage()
-            .verifyPayrollBenefitsAverage()
-            .verifyGeneralAdministrativeAverage()
-            .verifyLegalProFeesAverage()
-            .verifyMiscellaneousAverage()
-            .verifyManagementAverage()
-            .verifyReservesAverage();
+            .verifyDollarCellsAverage("insurance")
+            .verifyDollarCellsAverage("electricity")
+            .verifyDollarCellsAverage("fuel")
+            .verifyDollarCellsAverage("waterAndSewer")
+            .verifyDollarCellsAverage("repairsAndMaintenance")
+            .verifyDollarCellsAverage("payrollAndBenefits")
+            .verifyDollarCellsAverage("generalAndAdministrative")
+            .verifyDollarCellsAverage("legalAndProfessionalFees")
+            .verifyDollarCellsAverage("miscellaneous")
+            .verifyDollarCellsAverage("management")
+            .verifyDollarCellsAverage("reserves");
         return this;
     }
 }
