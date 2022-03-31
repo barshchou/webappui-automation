@@ -20,5 +20,6 @@ export default {
     numberOfUnits: 2,
     rentType: "Market Rate",
     numberOfBedrooms: 5,
+    includePerRoomCheckbox: "Include Per Room Analysis in Report",
     formData: Object.freeze(formDataFixture())
 };

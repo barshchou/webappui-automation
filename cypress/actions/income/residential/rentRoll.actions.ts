@@ -126,11 +126,7 @@ class InPlaceRentRollActions extends BaseActions {
         return this;
     }
 
-    /**
-     * @param {string} label
-     * @returns {InPlaceRentRollActions}
-     */
-    checkCheckboxByLabel(label) {
+    checkCheckboxByLabel(label: string): InPlaceRentRollActions {
         rentRollPage.getCheckboxByLabel(label).scrollIntoView().should("have.value", "false")
             .check().should("have.value", "true");
         return this;

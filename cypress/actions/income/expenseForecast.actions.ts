@@ -2,8 +2,8 @@ import BaseActions from "../base/base.actions";
 import expenseForecastPage from "../../pages/income/expenseForecast.page";
 import {getNumberFromDollarNumberWithCommas, numberWithCommas} from "../../../utils/numbers.utils";
 
-type ForecastItem = Readonly<{ name: string, basis?: string, forecast?: number | undefined, projection?: number }>;
-type BuildingDescription = Readonly<{grossArea: number, numberOfUnits: number}>;
+type ForecastItem = BoweryReports.ForecastItem;
+type BuildingDescription = BoweryReports.BuildingDescription;
 type Comparable = {address: string, location?: string, period?: string, squareFeet: number, resUnits?: number,
     insurance?: number, electricity?: number, repairsAndMaintenance?: number, payrollAndBenefits?: number,
     generalAndAdministrative?: number, management?: number, toe?: string};

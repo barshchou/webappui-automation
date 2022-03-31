@@ -391,6 +391,20 @@ class NavigationSectionActions extends BaseActions {
             .clickYesButton();
         return this;
     }
+
+    clickSupportingCapRates(): NavigationSectionActions {
+        navigationSectionPage.supportingCapRates.click()
+        return this;
+    }
+
+    navigateToSupportingCapRates(isWithYes: boolean = false): NavigationSectionActions {
+        this.clickIncomeApproachButton()
+            .clickSupportingCapRates();
+        if(isWithYes) {
+            this.clickYesButton();
+        }
+        return this;
+    }
 }
 
 export default new NavigationSectionActions();

@@ -39,6 +39,7 @@ export const bedroomCategoryData = () => {
 
 export default {
     reportCreationData: ReportDataCreator.getDefaultReportData("4342"),
+    includePerRoomCheckbox: "Include Per Room Analysis in Report",
     uncategorizedData: uncategorizedData(),
     bedroomCategory: bedroomCategoryData()
 };

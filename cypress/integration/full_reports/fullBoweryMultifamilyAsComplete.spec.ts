@@ -10,7 +10,7 @@ import Sales from "../../actions/sales/sales.manager";
 describe("Full bowery way, multifamily as complete report", () => {
     it("Test", () => {
         cy.login();
-        Homepage.createReportAdvancedSearch(testData.reportCreationData);
+        Homepage.createReport(testData.reportCreationData);
         Report.KeyInfo.choosePurpose(testData.keyInfoPurposeData.purposeValue)
             .checkAllInterestAppraisedByValues(testData.keyInfoPurposeData.interestAppraised)
             .enterDateByType(testData.keyInfoEngagementData.dueDate)
@@ -150,6 +150,7 @@ describe("Full bowery way, multifamily as complete report", () => {
             .editStairsCommentary(testData.stairsData.commentary)
             .clickSaveContinueButton();
         Income.Residential.InPlaceRentRoll.verifyNumberOfResidentialUnits(testData.currentDescription.numberOfUnits)
+            .checkCheckboxByLabel(testData.inPLaceRentRoll.includePerRoom)
             .checkCheckboxByLabelAndVerify(testData.inPLaceRentRoll.forecastLabel, testData.inPLaceRentRoll.forecastColumn)
             .checkListIsInspectedByRowNumbers(testData.inPLaceRentRoll.isInspectedRowsToCheck)
             .enterUnitNumbersByOrderToAll(testData.currentDescription.numberOfUnits)
@@ -305,9 +306,9 @@ describe("Full bowery way, multifamily as complete report", () => {
                 .verifyTOEPerSFByColumnIndex(i)
                 .verifyToePerUnitByColumnIndex(i);
         });
-        Income.ComparableExpenses.verifyTableAverageValues()
-            .clickSaveContinueButton();
-        NavigationSection.clickExpenseForecastBookmark();
+        Income.ComparableExpenses.verifyTableAverageValues();
+        NavigationSection.navigateToExpenseForecast()
+            .clickExpenseForecastBookmark();
         Income.ExpenseForecast.chooseForecastItemBasis(testData.expenseForecast.insuranceItem)
             .enterForecastItemForecast(testData.expenseForecast.insuranceItem)
             .verifyForecastItemCompMin(testData.expenseForecast.insuranceItem, testData.comparableExpenses.comparables)
@@ -362,8 +363,8 @@ describe("Full bowery way, multifamily as complete report", () => {
             .verifyToeCompAvgPerBasis(testData.expenseForecast.total.basis, testData.comparableExpenses.comparables)
             .verifyToeCompMaxPerBasis(testData.expenseForecast.total.basis, testData.comparableExpenses.comparables)
             .verifyOwnersProFormaValue()
-            .verifyTotalForecast()
-            .clickSaveContinueButton();
+            .verifyTotalForecast();
+        NavigationSection.navigateToProForma()
         Income.ProForma.verifyPotentialResIncomeRow(testData.proForma.potentialResIncomeRow)
             .verifyPotentialGrossIncomeRow(testData.proForma.potentialGrossIncomeRow)
             .verifyResVCLossRow(testData.proForma.vcLossRow)
@@ -379,8 +380,8 @@ describe("Full bowery way, multifamily as complete report", () => {
             .verifyToeRow(testData.proForma.toeRow)
             .verifyToeNetReRow(testData.proForma.toeNetReRow)
             .verifyNetOpIncomeRow(testData.proForma.netOpIncomeRow)
-            .verifyOperatingExpenseRatio(testData.proForma.opExpenseRatio)
-            .clickSaveContinueButton();
+            .verifyOperatingExpenseRatio(testData.proForma.opExpenseRatio);
+        NavigationSection.navigateToSupportingCapRates();
         Income.SupportingCapRates.uncheckIncludePersonalSurvey()
             .verifyIncomeCapitalizationCommentary(testData.supportingCapRates.incomeCapComm)
             .clickSelectedLoanSectionButton()
