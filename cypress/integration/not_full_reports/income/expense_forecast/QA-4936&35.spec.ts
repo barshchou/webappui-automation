@@ -14,18 +14,32 @@ describe("Historical expense Fuel Per SF is correctly calculated and displayed",
     });
 
     it("Test body", () => {
-        cy.stepInfo(`1. Go to Expense Forecast 
+        cy.stepInfo(`QA-4936 => 1. Go to Expense Forecast 
         and make sure that Per Unit radiobutton is selected for Repairs & Maintenance card`);
         NavigationSection.navigateToExpenseForecast();
         Income.ExpenseForecast.Actions
         .chooseForecastItemBasis(testData.forecastItem);
 
-        cy.stepInfo("2.  Fill in Appraiser's Forecast field for Repairs & Maintenance card");
+        cy.stepInfo("QA-4936 => 2. Fill in Appraiser's Forecast field for Repairs & Maintenance card");
         Income.ExpenseForecast.Actions.enterForecastItemForecast(testData.forecastItem);
 
 
-        cy.stepInfo(`3. Verify that Per SF value below this field is calculated as: 
+        cy.stepInfo(`
+        QA-4936 => 3. Verify that Per SF value below this field is calculated as: 
         Per Unit Appraiser’s Forecast * # of Resi Units / GBA`);
+        Income.ExpenseForecast.Actions.verifyForecastItemBasisMoney(
+            testData.forecastItem,
+            testData.buildingDescription
+        );
+
+        cy.stepInfo(`
+        QA-4935 => 3. Verify that Per Unit value below this field is calculated as: 
+        PSF Appraiser’s Forecast * GBA / # of Resi Units`);
+        testData.forecastItem.forecast = 23;
+        testData.forecastItem.basis = "sf";
+        Income.ExpenseForecast.Actions.enterForecastItemForecast(testData.forecastItem);
+        Income.ExpenseForecast.Actions
+        .chooseForecastItemBasis(testData.forecastItem);
         Income.ExpenseForecast.Actions.verifyForecastItemBasisMoney(
             testData.forecastItem,
             testData.buildingDescription
