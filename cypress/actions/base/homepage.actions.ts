@@ -48,7 +48,7 @@ class HomepageActions extends BaseActions {
     }
 
     clickFindPropHeader(): this {
-        homepagePage.findPropertyHeader.click();
+        // homepagePage.findPropertyHeader.click();
         return this;
     }
 
