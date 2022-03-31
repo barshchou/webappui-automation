@@ -1,7 +1,7 @@
 import {cutLastLetter} from "./string.utils";
 import Enums from "../cypress/enums/enums";
 
-export const getEnvUrl = () => {
+export const getEnvUrl = (): string => {
     let envUrl;
     switch (Cypress.env("url")) {
         case "dev":
@@ -11,14 +11,15 @@ export const getEnvUrl = () => {
             envUrl = Enums.ENV_URLS.PROD;
             break;
         case "custom":
-            if (isCorrectCustomEnv(Cypress.env("customEnv"))) {
-                envUrl = Cypress.env("customEnv");
-                if (!isCorrectLink(envUrl)) {
-                    envUrl = cutLastLetter(envUrl);
-                }
-            } else {
-                throw new Error("You haven't entered custom environment url!");
-            }
+            // if (isCorrectCustomEnv(Cypress.env("customEnv"))) {
+            //     envUrl = Cypress.env("customEnv");
+            //     if (!isCorrectLink(envUrl)) {
+            //         envUrl = cutLastLetter(envUrl);
+            //     }
+            // } else {
+            //     throw new Error("You haven't entered custom environment url!");
+            // }
+            envUrl = Cypress.env("customEnv");
             break;
         default:
             envUrl = Enums.ENV_URLS.STAGING;
@@ -30,7 +31,7 @@ const isCorrectLink = (link) => {
     return !link.endsWith("/");
 };
 
-const isCorrectCustomEnv = (customEnvUrl) => {
+const isCorrectCustomEnv = (customEnvUrl: string) => {
     if (customEnvUrl === "" || customEnvUrl === undefined || customEnvUrl === null) {
         return false;
     } else {
