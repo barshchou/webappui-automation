@@ -2,7 +2,7 @@ import BasePage from "../../base/base.page";
 
 class InPlaceRentRollPage extends BasePage {
     get numberOfResidentialUnitsField() {return cy.get("*[data-qa='number-of-items-input'] input");}
-    get goToPropSummaryButton() {return cy.get("*[title='Go To Property Summary'] > [href$='/property-summary']");}
+    get goToPropSummaryButton() {return cy.get("*[aria-label='Go To Property Summary'][href$='/property-summary']");}
     getColumnHeader(columnName) {return cy.xpath(`//*[text()='${columnName}'][@class='colHeader']`);}
     getPerUnitSFRadio(value) {return cy.get(`*[name='perUnitSF'][value='${value}']`);}
     getCheckboxByLabel(label) {return cy.get(`*[label="${label}"] input`);}
