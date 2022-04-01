@@ -36,7 +36,7 @@ class RentCompsActions extends BaseActions {
 
     verifyUnitSwitchBackground(isChosen = true) {
         if (isChosen) {
-            rentCompsPage.unitSwitchButton.should("have.css", "background-color", "rgb(42, 67, 112)");
+            rentCompsPage.unitSwitchButton.should("have.css", "background-color", "rgb(46, 67, 147)");
         } else {
             rentCompsPage.unitSwitchButton.should("have.css", "background-color", "rgb(255, 255, 255)");
         }
