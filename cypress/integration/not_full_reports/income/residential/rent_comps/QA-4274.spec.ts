@@ -12,8 +12,7 @@ describe("Verify Amenities drop-down field in the Map filter section on Rent Com
         NavigationSection.navigateToRentComps();
         Income.Residential.RentComps.BaseActions.clickAmenitiesArrow()
             .checkListOfCheckboxesByQa(testData.amenitiesQaAttr)
-            .clickUnitTypesArrowButton()
-            .clickUnitTypesArrowButton()
+            .clickAmenitiesArrow()
             .clickAmenitiesArrow()
             .uncheckListOfCheckboxesByQa(testData.amenitiesQaAttr)
             .clickAmenitiesArrow();
