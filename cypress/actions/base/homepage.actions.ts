@@ -50,7 +50,7 @@ class HomepageActions extends BaseActions {
      * @returns {HomepageActions}
      */
     clickSubmitButton() {
-        homepagePage.submitButton.should("not.be.disabled").click();
+        homepagePage.submitButton.should("not.be.disabled").click({ force: true});
         return this;
     }
 
