@@ -15,8 +15,8 @@ class RentCompsPage extends BasePage{
     get maxSquareFeet() {return cy.get("*[name='filters.maxSqft']");}
     get numberOfBedroomsArrowButton() {return cy.xpath("//*[text()='Bedrooms']//following-sibling::button");}
     get sourceOfInfoArrow() {return cy.xpath("//*[text()='Source of Information']//following-sibling::button");}
-    get minDateValueInput() {return cy.get("*[data-qa='filters.minDateOfValue-date-picker'] input[placeholder='MM-DD-YYYY']");}
-    get maxDateValueInput() {return cy.get("*[data-qa='filters.maxDateOfValue-date-picker'] input[placeholder='MM-DD-YYYY']");}
+    get minDateValueInput() {return cy.get("*[data-qa='filters.minDateOfValue-date-picker'] input[placeholder='mm-dd-yyyy']");}
+    get maxDateValueInput() {return cy.get("*[data-qa='filters.maxDateOfValue-date-picker'] input[placeholder='mm-dd-yyyy']");}
     get dateMinInputToCheckValue() {return cy.get("*[data-qa='filters.minDateOfValue-date-picker'] > input");}
     get dateMaxInputToCheckValue() {return cy.get("*[data-qa='filters.maxDateOfValue-date-picker'] > input");}
     get errorMessage() {return cy.get("#component-error-text");}
