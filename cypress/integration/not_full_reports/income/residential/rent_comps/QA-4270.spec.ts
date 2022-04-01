@@ -13,7 +13,7 @@ describe(" Verify Bedrooms drop-down field in the Map filter section", () => {
             .verifyProgressBarNotExist();
         Income.Residential.RentComps.BaseActions.clickNumberOfBedroomsArrow()
             .checkListOfCheckboxesByQa(testData.numberOfBedroomsQaAttr)
-            .clickSourceOfInfoButton()
+            .clickNumberOfBedroomsArrow()
             .clickNumberOfBedroomsArrow()
             .uncheckListOfCheckboxesByQa(testData.numberOfBedroomsQaAttr);
         deleteReport(testData.reportCreationData.reportNumber);
