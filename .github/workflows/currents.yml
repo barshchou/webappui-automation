@@ -21,7 +21,7 @@ on:
 jobs:
   Not-full-reports-run:
     runs-on: ubuntu-latest
-    container: cypress/browsers:node16.14.0-slim-chrome99-ff97
+    container: cypress/browsers:node16.13.2-chrome100-ff98
     strategy:
       fail-fast: false
       matrix:
