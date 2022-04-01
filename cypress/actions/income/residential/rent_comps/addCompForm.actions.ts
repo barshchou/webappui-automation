@@ -84,7 +84,7 @@ class AddCompFormActions extends BaseActions {
         this.clearDateInput();
         date = date ?? getTodayDateString();
         addCompFormPage.dateOfValueInput.type(date);
-        if (!isDateHasCorrectFormat(date)) addCompFormPage.errorMessage.should("exist");
+        if (!isDateHasCorrectFormat(date)) addCompFormPage.dateOfValueInput.parent().should("have.class", "Mui-error");
         this.verifyEnteredDate(date);
         return this;
     }
@@ -95,8 +95,7 @@ class AddCompFormActions extends BaseActions {
      */
     verifyEnteredDate(dateToBe) {
         dateToBe = dateToBe ?? getTodayDateString();
-        if (!isDateHasCorrectFormat(dateToBe)) dateToBe = "";
-        addCompFormPage.dateInputValue.should("have.value", dateToBe);
+        addCompFormPage.dateOfValueInput.should("have.value", dateToBe);
         return this;
     }
 
@@ -104,7 +103,7 @@ class AddCompFormActions extends BaseActions {
      * @param {string} [day]
      * @returns {AddCompFormActions}
      */
-    chooseDayOfCurrentMonthInPicker(day) {
+    chooseDayOfCurrentMonthInPicker(day?) {
         day = day ?? Number(getTodayDay());
         let date = getTodayDateString();
         let dateArr = date.split("-");
