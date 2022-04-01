@@ -10,7 +10,6 @@ class HomepageActions extends BaseActions {
             .clickSelectStateButton()
             .selectStateByName(data.state)
             .enterAddressToSearch(data.address)
-            .clickFindPropHeader()
             .enterPropertyIdentifierType(data.identifierType)
             .enterPropertyIdentifier(data.identifier)
             .clickSubmitButton()
@@ -24,7 +23,6 @@ class HomepageActions extends BaseActions {
         else {
             this.clickNewReportButton()
             .enterAddressToSearch(data.address)
-            .clickFindPropHeader()
             .clickSubmitButton()
             .clickToSearchResultRow()
             .clickSubmitButton()
@@ -47,17 +45,12 @@ class HomepageActions extends BaseActions {
         return this;
     }
 
-    clickFindPropHeader(): this {
-        homepagePage.findPropertyHeader.click();
-        return this;
-    }
-
     /**
      *
      * @returns {HomepageActions}
      */
     clickSubmitButton() {
-        homepagePage.submitButton.should("not.be.disabled").click();
+        homepagePage.submitButton.should("not.be.disabled").click({ force: true});
         return this;
     }
 
