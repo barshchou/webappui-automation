@@ -88,8 +88,8 @@ class RentCompsPage extends BasePage{
     get rentPerSfCellsLocator() {return "[data-qa=col-rentPerSf]";}
     get uncategorizedDevForecast() {return cy.get("[data-qa=rent-comps-type-uncategorized] [data-qa=computed-panel] [data-qa='1-column']");}
     get bathroomsCellsLocator() {return "[data-qa=col-bathrooms]";}
-    getBedroomsTableHeader(bedroomsNumber) {return cy.get(`[data-qa='rent-comps-type-bedrooms_${bedroomsNumber}'] > p`);}
-    get uncategorizedTableHeader() {return cy.get("[data-qa=rent-comps-type-uncategorized] > p");}
+    getBedroomsTableHeader(bedroomsNumber) {return cy.get(`[data-qa='rent-comps-type-bedrooms_${bedroomsNumber}'] h5`);}
+    get uncategorizedTableHeader() {return cy.get("[data-qa=rent-comps-type-uncategorized] h5");}
     getBedroomSubjectColumn(bedroomsNumber) {
         return cy.get(`[data-qa=rent-comps-type-bedrooms_${bedroomsNumber}] [data-qa=computed-panel] [data-qa='0-column']`);
     }

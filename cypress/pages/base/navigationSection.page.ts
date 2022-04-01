@@ -21,7 +21,7 @@ class NavigationSection extends BasePage {
     get expenseForecastBookmark() {return cy.get("#expense-forecast > svg[data-icon=bookmark]");}
     get capRateConclusion() {return cy.get("#cap-rate-conclusion");}
     get insurableReplacementCostBookmark() {return cy.get("#insurable-replacement-cost > svg[data-icon=bookmark]");}
-    get salesApproachButton() {return cy.get("#sales-approach > svg");}
+    get salesApproachButton() {return cy.get("#sales-approach svg");}
     get valueConclusionButton() {return cy.get("#sale-value-conclusion");}
     get findCompsButton() {return cy.get("#sales-comps-search");}
     get adjustCompsButton() {return cy.get("#sales-adjustment-grid");}
