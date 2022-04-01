@@ -7,7 +7,7 @@ class CommercialRentCompsPage extends BasePage {
     getNotCheckedCheckboxByQAAttr(attribute) {return cy.get(`[data-qa='${attribute}'] input`);}
     getCheckedCheckboxByQAAttr(attribute) {return cy.get(`[data-qa='${attribute}-checked'] input`);}
     get sortBySection() {return cy.contains("Sort By");}
-    get sortByDropdown() {return cy.get("#select-sortType");}
+    get sortByDropdown() {return cy.get('[variant="standard"]');}
     getDropdownOptionByValue(value) {return cy.get(`[role=option][data-value='${value}']`);}
     get addCompButtonsLocator() {return "[data-qa=add-comp-btn]";}
     getAddCompButtonByAddress(address) {return cy.contains(address).siblings(this.addCompButtonsLocator);}
