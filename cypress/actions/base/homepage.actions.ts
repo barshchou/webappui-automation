@@ -10,7 +10,6 @@ class HomepageActions extends BaseActions {
             .clickSelectStateButton()
             .selectStateByName(data.state)
             .enterAddressToSearch(data.address)
-            .clickFindPropHeader()
             .enterPropertyIdentifierType(data.identifierType)
             .enterPropertyIdentifier(data.identifier)
             .clickSubmitButton()
@@ -24,7 +23,6 @@ class HomepageActions extends BaseActions {
         else {
             this.clickNewReportButton()
             .enterAddressToSearch(data.address)
-            .clickFindPropHeader()
             .clickSubmitButton()
             .clickToSearchResultRow()
             .clickSubmitButton()
@@ -44,11 +42,6 @@ class HomepageActions extends BaseActions {
 
     enterAddressToSearch(address: string): this {
         homepagePage.searchAddressField.type(`${address}{enter}`).should("have.value", address);
-        return this;
-    }
-
-    clickFindPropHeader(): this {
-        // homepagePage.findPropertyHeader.click();
         return this;
     }
 
