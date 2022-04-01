@@ -285,7 +285,7 @@ class RentCompsActions extends BaseActions {
                 if (isDateCorrect) {
                     this.verifyEnteredDate("max", date);
                 } else {
-                    rentCompsPage.errorMessage.should("exist");
+                    rentCompsPage.maxDateValueInput.parent().should("have.class", "Mui-error");
                 }
                 break;
             default:
@@ -293,7 +293,7 @@ class RentCompsActions extends BaseActions {
                 if (isDateCorrect) {
                     this.verifyEnteredDate("min", date);
                 } else {
-                    rentCompsPage.errorMessage.should("exist");
+                    rentCompsPage.minDateValueInput.parent().should("have.class", "Mui-error");
                 }
         }
         return this;
@@ -332,9 +332,9 @@ class RentCompsActions extends BaseActions {
     verifyEnteredDate(type, date) {
         date = date ?? getTodayDateString();
         if (type === "min") {
-            rentCompsPage.dateMinInputToCheckValue.should("have.value", date);
+            rentCompsPage.minDateValueInput.should("have.value", date);
         } else {
-            rentCompsPage.dateMaxInputToCheckValue.should("have.value", date);
+            rentCompsPage.maxDateValueInput.should("have.value", date);
         }
         return this;
     }

@@ -15,19 +15,12 @@ class RentCompsPage extends BasePage{
     get maxSquareFeet() {return cy.get("*[name='filters.maxSqft']");}
     get numberOfBedroomsArrowButton() {return cy.xpath("//*[text()='Bedrooms']//following-sibling::button");}
     get sourceOfInfoArrow() {return cy.xpath("//*[text()='Source of Information']//following-sibling::button");}
-    get minDateValueInput() {return cy.get("*[data-qa='filters.minDateOfValue-date-picker'] input[placeholder='mm-dd-yyyy']");}
-    get maxDateValueInput() {return cy.get("*[data-qa='filters.maxDateOfValue-date-picker'] input[placeholder='mm-dd-yyyy']");}
-    get dateMinInputToCheckValue() {return cy.get("*[data-qa='filters.minDateOfValue-date-picker'] > input");}
-    get dateMaxInputToCheckValue() {return cy.get("*[data-qa='filters.maxDateOfValue-date-picker'] > input");}
-    get errorMessage() {return cy.get("#component-error-text");}
-    get dateMinPickerButton() {
-        return cy.xpath("//*[@data-qa='filters.minDateOfValue-date-picker']//child::button");
-    }
-    get dateMaxPickerButton() {
-        return cy.xpath("//*[@data-qa='filters.maxDateOfValue-date-picker']//child::button");
-    }
-    get pickerCalendar() {return cy.get("*[role='document']");}
-    getDayInCurrentMonthPicker(day) {return cy.xpath(`//*[text()='${day}']//parent::button[@tabindex='0']`);}
+    get minDateValueInput() {return cy.get("[data-qa='filters.minDateOfValue-date-picker'] input");}
+    get maxDateValueInput() {return cy.get("[data-qa='filters.maxDateOfValue-date-picker'] input");}
+    get dateMinPickerButton() {return cy.get("[data-qa='filters.minDateOfValue-date-picker'] button");}
+    get dateMaxPickerButton() {return cy.get("[data-qa='filters.maxDateOfValue-date-picker'] button");}
+    get pickerCalendar() {return cy.get(".MuiCalendarPicker-root");}
+    getDayInCurrentMonthPicker(day) {return cy.xpath(`//button[text()='${day}']`);}
     get amenitiesArrowButton() {return cy.xpath("//*[text()='Amenities']//following-sibling::button");}
     get numberOfFoundResults() {return cy.get("*[data-qa='rentComps-count']");}
     get resetFiltersButton() {return cy.get("*[data-qa='reset-filters-button']");}
