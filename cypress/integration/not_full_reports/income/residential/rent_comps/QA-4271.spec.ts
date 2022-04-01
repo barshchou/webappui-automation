@@ -13,7 +13,7 @@ describe("Verify the Source of Information drop-down field in the when Unit type
             .verifyProgressBarNotExist();
         Income.Residential.RentComps.BaseActions.clickSourceOfInfoButton()
             .checkListOfCheckboxesByQa(testData.sourceOfInfoQaAttr)
-            .clickUnitTypesArrowButton()
+            .clickSourceOfInfoButton()
             .clickSourceOfInfoButton()
             .uncheckListOfCheckboxesByQa(testData.sourceOfInfoQaAttr);
         deleteReport(testData.reportCreationData.reportNumber);
