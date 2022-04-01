@@ -38,16 +38,16 @@ class RentCompsActions extends BaseActions {
         if (isChosen) {
             rentCompsPage.unitSwitchButton.should("have.css", "background-color", "rgb(46, 67, 147)");
         } else {
-            rentCompsPage.unitSwitchButton.should("have.css", "background-color", "rgb(255, 255, 255)");
+            rentCompsPage.unitSwitchButton.should("have.css", "background-color", "rgb(66, 96, 211)");
         }
         return this;
     }
 
     verifyBuildingSwitchBackground(isChosen = true) {
         if (isChosen) {
-            rentCompsPage.buildingSwitchButton.should("have.css", "background-color", "rgb(42, 67, 112)");
+            rentCompsPage.buildingSwitchButton.should("have.css", "background-color", "rgb(46, 67, 147)");
         } else {
-            rentCompsPage.buildingSwitchButton.should("have.css", "background-color", "rgb(255, 255, 255)");
+            rentCompsPage.buildingSwitchButton.should("have.css", "background-color", "rgb(66, 96, 211)");
         }
         return this;
     }

@@ -14,6 +14,7 @@ describe("Verify the popups with appropriate wording appears on switching from U
         NavigationSection.navigateToRentComps();
         Income.Residential.RentComps.BaseActions.verifyUnitSelected()
             .changeToBuildingSearch()
+            .verifyProgressBarNotExist()
             .changeToUnitSearch();
         deleteReport(reportCreationData.reportNumber);
     });
