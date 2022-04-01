@@ -3,64 +3,44 @@ import BaseActions from "./base.actions";
 
 class HomepageActions extends BaseActions {
 
-    /**
-     * @param {{incomeValue: string, address: string, reportNumber: string, templateValue: string,
-     * conclusionValue: string}} reportCreationData
-     * @returns {HomepageActions}
-     */
-    createReport(reportCreationData) {
-        this.clickNewReportButton()
-            .enterAddressToSearch(reportCreationData.address)
-            // .clickFindPropHeader()
+    createReport(data: BoweryAutomation.ReportCreationData): this {
+        if(data?.state) {
+            this.clickNewReportButton()
+            .clickAdvancedSearchButton()
+            .clickSelectStateButton()
+            .selectStateByName(data.state)
+            .enterAddressToSearch(data.address)
+            .enterPropertyIdentifierType(data.identifierType)
+            .enterPropertyIdentifier(data.identifier)
+            .clickSubmitButton()
+            .enterReportNumber(data.reportNumber)
+            .checkTemplateType(data.templateValue)
+            .checkIncomeType(data.incomeValue)
+            .checkConclusionType(data.conclusionValue)
+            .clickCreateReportButton();
+            return this;
+        }
+        else {
+            this.clickNewReportButton()
+            .enterAddressToSearch(data.address)
             .clickSubmitButton()
             .clickToSearchResultRow()
             .clickSubmitButton()
-            .enterReportNumber(reportCreationData.reportNumber)
-            .checkTemplateType(reportCreationData.templateValue)
-            .checkIncomeType(reportCreationData.incomeValue)
-            .checkConclusionType(reportCreationData.conclusionValue)
+            .enterReportNumber(data.reportNumber)
+            .checkTemplateType(data.templateValue)
+            .checkIncomeType(data.incomeValue)
+            .checkConclusionType(data.conclusionValue)
             .clickCreateReportButton();
-        return this;
+            return this;
+        }
     }
 
-    /**
-     * @param {Readonly<{identifier: string, address: string, reportNumber: string, incomeValue: string,
-     * templateValue: string, state: string, identifierType: string, conclusionValue: string}>} reportCreationData
-     * @returns {HomepageActions}
-     */
-    createReportAdvancedSearch(reportCreationData) {
-        this.clickNewReportButton()
-            .clickAdvancedSearchButton()
-            .clickSelectStateButton()
-            .selectStateByName(reportCreationData.state)
-            .enterAddressToSearch(reportCreationData.address)
-            .clickFindPropHeader()
-            .enterPropertyIdentifierType(reportCreationData.identifierType)
-            .enterPropertyIdentifier(reportCreationData.identifier)
-            .clickSubmitButton()
-            .enterReportNumber(reportCreationData.reportNumber)
-            .checkTemplateType(reportCreationData.templateValue)
-            .checkIncomeType(reportCreationData.incomeValue)
-            .checkConclusionType(reportCreationData.conclusionValue)
-            .clickCreateReportButton();
-        return this;
-    }
-
-    /**
-     *
-     * @returns {HomepageActions}
-     */
-    clickNewReportButton() {
+    clickNewReportButton(): this {
         homepagePage.newReportButton.should("be.enabled").click();
         return this;
     }
 
-    /**
-     *
-     * @param {string} address
-     * @returns {HomepageActions}
-     */
-    enterAddressToSearch(address) {
+    enterAddressToSearch(address: string): this {
         homepagePage.searchAddressField.type(`${address}{enter}`).should("have.value", address);
         cy.get('[data-suggestion-index="0"]').should("be.visible");
         return this;
@@ -70,17 +50,8 @@ class HomepageActions extends BaseActions {
      *
      * @returns {HomepageActions}
      */
-    clickFindPropHeader() {
-        homepagePage.findPropertyHeader.click();
-        return this;
-    }
-
-    /**
-     *
-     * @returns {HomepageActions}
-     */
     clickSubmitButton() {
-        homepagePage.submitButton.should("not.be.disabled").click();
+        homepagePage.submitButton.should("not.be.disabled").click({ force: true});
         return this;
     }
 
@@ -98,7 +69,7 @@ class HomepageActions extends BaseActions {
      * @param {string} reportNumber
      * @returns {HomepageActions}
      */
-    enterReportNumber(reportNumber) {
+    enterReportNumber(reportNumber: string) {
         homepagePage.reportNumberInput.type(reportNumber).should("have.value", reportNumber);
         return this;
     }
@@ -108,27 +79,18 @@ class HomepageActions extends BaseActions {
      * @param {string} typeValue
      * @returns {HomepageActions}
      */
-    checkTemplateType(typeValue) {
+    checkTemplateType(typeValue: string) {
         homepagePage.templateTypesRadios.check(typeValue);
         return this;
     }
 
-    /**
-     *
-     * @param {string} value
-     * @returns {HomepageActions}
-     */
-    checkIncomeType(value) {
+    checkIncomeType(value: string) {
         homepagePage.incomeTypesRadios.check(value);
         return this;
     }
 
-    /**
-     *
-     * @param {string} value
-     * @returns {HomepageActions}
-     */
-    checkConclusionType(value) {
+
+    checkConclusionType(value: string) {
         homepagePage.valueConclusionsRadios.check(value);
         return this;
     }
@@ -149,18 +111,13 @@ class HomepageActions extends BaseActions {
      * @param {string} number
      * @returns {HomepageActions}
      */
-    enterReportNumberToSearch(number) {
+    enterReportNumberToSearch(number: string) {
         homepagePage.reportNumberSearchField.scrollIntoView().should("be.visible")
         .type(number).should("have.value", number);
         return this;
     }
 
-    /**
-     *
-     * @param {string} reportNumber
-     * @returns {HomepageActions}
-     */
-    clickArchiveButton(reportNumber) {
+    clickArchiveButton(reportNumber: string): this {
         homepagePage.getArchiveButton(reportNumber).should("exist").click({force:true});
         return this;
     }
@@ -183,12 +140,7 @@ class HomepageActions extends BaseActions {
         return this;
     }
 
-    /**
-     *
-     * @param {string} reportNumber
-     * @returns {HomepageActions}
-     */
-    deleteReport(reportNumber) {
+    deleteReport(reportNumber: string): this {
         this.verifyThatPageIsOpened()
             .enterReportNumberToSearch(reportNumber)
             .clickArchiveButton(reportNumber);
@@ -209,7 +161,7 @@ class HomepageActions extends BaseActions {
      * @param {string} name
      * @returns {HomepageActions}
      */
-    selectStateByName(name) {
+    selectStateByName(name: string) {
         homepagePage.getStateByName(name).click();
         return this;
     }
@@ -219,7 +171,7 @@ class HomepageActions extends BaseActions {
      * @param {string} type
      * @returns {HomepageActions}
      */
-    enterPropertyIdentifierType(type) {
+    enterPropertyIdentifierType(type: string) {
         homepagePage.propertyIdentifierTypeInput.type(type).should("have.value", type);
         return this;
     }
@@ -229,7 +181,7 @@ class HomepageActions extends BaseActions {
      * @param {string} value
      * @returns {HomepageActions}
      */
-    enterPropertyIdentifier(value) {
+    enterPropertyIdentifier(value: string) {
         homepagePage.propertyIdentifierInput.type(value).should("have.value", value);
         return this;
     }

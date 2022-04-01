@@ -10,7 +10,7 @@ import Sales from "../../actions/sales/sales.manager";
 describe("Full bowery way, multifamily as complete report", () => {
     it("Test", () => {
         cy.login();
-        Homepage.createReportAdvancedSearch(testData.reportCreationData);
+        Homepage.createReport(testData.reportCreationData);
         Report.KeyInfo.choosePurpose(testData.keyInfoPurposeData.purposeValue)
             .checkAllInterestAppraisedByValues(testData.keyInfoPurposeData.interestAppraised)
             .enterDateByType(testData.keyInfoEngagementData.dueDate)
@@ -53,7 +53,6 @@ describe("Full bowery way, multifamily as complete report", () => {
             .checkContainsBasement()
             .checkListCheckboxesByLabels(testData.descriptionOfImprovements.basementAccess)
             .checkBasementStateByValue(testData.descriptionOfImprovements.basementState)
-            .verifyTotalEconomicLife(testData.remainingEconomicLife.totalEconomicLifeToBe)
             .enterAgeEffective(testData.remainingEconomicLife.ageEffective)
             .clickSaveContinueButton();
         Property.SiteDescription.editTransportationDiscussionCommentary(testData.transportationSiteDescription.commentary)

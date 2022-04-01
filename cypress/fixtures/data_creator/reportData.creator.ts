@@ -35,7 +35,7 @@ class ReportCreator {
         return this;
     }
 
-    setConclusionValue(conclusionValue?) {
+    setConclusionValue(conclusionValue?: BoweryReports.ConclusionValue | string) {
         this.conclusionValue = conclusionValue ?? Enums.VALUE_CONCLUSION_TYPE.AS_IS;
         return this;
     }
@@ -57,6 +57,16 @@ class ReportCreator {
 
     getDefaultReportData(testNumber) {
         return this.setReportNumber(testNumber).setAddress().setIncomeValue().setTemplateValue().setConclusionValue().build();
+    }
+
+    getReportData(testNumber: string, options?: BoweryReports.ReportCreationOptions){
+        if(options?.incomeValue){
+            this.setIncomeValue(options.incomeValue)
+        }
+        if(options?.conclusionValue){
+            this.setConclusionValue(options.conclusionValue)
+        }
+        return this.setReportNumber(testNumber).setAddress().setTemplateValue().build();
     }
 }
 
