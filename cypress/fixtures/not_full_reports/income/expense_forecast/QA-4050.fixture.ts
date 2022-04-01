@@ -13,7 +13,7 @@ const comparableFixture = () => {
     };
 };
 
-const expenseForecastInsuranceFixture = () => {
+const expenseForecastInsuranceFixture = (): BoweryReports.ForecastItem => {
     return {
         name: "insurance", forecast: 50
     };

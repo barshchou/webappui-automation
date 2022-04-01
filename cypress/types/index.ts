@@ -1,3 +1,10 @@
+/**
+ * ernst:
+ * maybe we should separate namespaces for specific domain?
+ * for example, we could have specific BoweryReports.ExpenseForecast
+ * where we can have ForecastItem type.
+ */
+
 namespace BoweryReports {
     export type ConclusionValue = "AS_IS" | "AS_STABILIZED" | "AS_COMPLETE" 
     export type ReportCreationOptions = {
@@ -11,12 +18,6 @@ namespace BoweryReports {
     | "fuel" | "waterAndSewer" | "repairsAndMaintenance" | "payrollAndBenefits" | "generalAndAdministrative" 
     | "legalAndProfessionalFees" | "miscellaneous" | "management" | "reserves" | "total"
 
-    /**
-     * ernst: 
-     * maybe we should separate namespaces for specific domain? 
-     * for example, we could have specific BoweryReports.ExpenseForecast 
-     * where we can have ForecastItem type.
-     */
     export type ForecastItem = { 
         name: BoweryReports.ForecastItemBasis, 
         basis?: BoweryReports.UnitSF, 
