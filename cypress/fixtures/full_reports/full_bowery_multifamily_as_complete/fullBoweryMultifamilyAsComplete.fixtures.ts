@@ -1,3 +1,8 @@
+/**
+ * These comments will be useful when we start refactor fullReportSpec
+ * ernst: refactor type for "expenseForecastFixture" function param. If necessary, refactor whole function.
+ */
+
 import {getTodayDateString, getYearFromDate} from "../../../../utils/date.utils";
 import Enums from "../../../enums/enums";
 

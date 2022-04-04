@@ -2,6 +2,20 @@ import BaseActions from "../base/base.actions";
 import compExpensesPage from "../../pages/income/comparableExpenses.page";
 import {getNumberFromDollarNumberWithCommas, numberWithCommas} from "../../../utils/numbers.utils";
 
+const enum ComparableExpensesData {
+    insurance = "insurance",
+    electricity = "electricity",
+    fuel=  "fuel",
+    waterAndSewer = "waterAndSewer",
+    repairsAndMaintenance = "repairsAndMaintenance", 
+    payrollAndBenefits = "payrollAndBenefits",
+    generalAndAdministrative =  "generalAndAdministrative",
+    legalAndProfessionalFees = "legalAndProfessionalFees",
+    miscellaneous = "miscellaneous",
+    management = "management",
+    reserves = "reserves"
+};
+
 class ComparableExpensesActions extends BaseActions {
 
     get Page() {
@@ -149,17 +163,17 @@ class ComparableExpensesActions extends BaseActions {
         this.verifySquareFeetAverage()
             .verifyUnitsNumberAverage()
             .verifyEGIAverage()
-            .verifyDollarCellsAverage("insurance")
-            .verifyDollarCellsAverage("electricity")
-            .verifyDollarCellsAverage("fuel")
-            .verifyDollarCellsAverage("waterAndSewer")
-            .verifyDollarCellsAverage("repairsAndMaintenance")
-            .verifyDollarCellsAverage("payrollAndBenefits")
-            .verifyDollarCellsAverage("generalAndAdministrative")
-            .verifyDollarCellsAverage("legalAndProfessionalFees")
-            .verifyDollarCellsAverage("miscellaneous")
-            .verifyDollarCellsAverage("management")
-            .verifyDollarCellsAverage("reserves");
+            .verifyDollarCellsAverage(ComparableExpensesData["insurance"])
+            .verifyDollarCellsAverage(ComparableExpensesData["electricity"])
+            .verifyDollarCellsAverage(ComparableExpensesData["fuel"])
+            .verifyDollarCellsAverage(ComparableExpensesData["waterAndSewer"])
+            .verifyDollarCellsAverage(ComparableExpensesData["repairsAndMaintenance"])
+            .verifyDollarCellsAverage(ComparableExpensesData["payrollAndBenefits"])
+            .verifyDollarCellsAverage(ComparableExpensesData["generalAndAdministrative"])
+            .verifyDollarCellsAverage(ComparableExpensesData["legalAndProfessionalFees"])
+            .verifyDollarCellsAverage(ComparableExpensesData["miscellaneous"])
+            .verifyDollarCellsAverage(ComparableExpensesData["management"])
+            .verifyDollarCellsAverage(ComparableExpensesData["reserves"]);
         return this;
     }
 }
