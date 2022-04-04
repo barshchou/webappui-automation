@@ -26,10 +26,6 @@ namespace BoweryReports {
     }
 
     export type BuildingDescription = {grossArea: number, numberOfUnits: number}
-
-    export type ComparableExpensesData = "insurance" | "electricity" | "fuel" | "waterAndSewer" | "repairsAndMaintenance" 
-    | "payrollAndBenefits" | "generalAndAdministrative" | "legalAndProfessionalFees" | "miscellaneous"
-    | "management" | "reserves"
 }
 
 namespace BoweryAutomation {
