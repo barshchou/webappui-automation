@@ -1,0 +1,7 @@
+{
+    "inputs":{
+        "config":"cypress.json",
+        "env":"dev",
+        "spec_file":"cypress/integration/not_full_reports/income/commercial/in_place_rent_roll/QA-4323.spec.ts"
+    }
+}

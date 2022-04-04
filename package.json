@@ -5,6 +5,7 @@
   "main": "index.js",
   "types": "./types/index.d.ts",
   "scripts": {
+    "act:debug":"act -e ./.act/debug.json --secret-file ./.act/.secrets -j Not-full-reports-run-DEBUG",
     "cy:open": "npx cypress open",
     "cy:chrome:snapshot_tests": "npx cypress run --env grepTags=@snapshot_tests,grepFilterSpecs=true --headless --browser=chrome",
     "cy:chrome:update_snapshots":"npx cypress run --env grepTags=@snapshot_tests,grepFilterSpecs=true,updateSnapshots=true --headless --browser=chrome",
@@ -16,7 +17,9 @@
     "cy:full_prod_api": "npx cypress run --spec cypress/integration/full_reports/** --env url=prod",
     "cy:full_chrome_headed_prod_api": "npx cypress run --spec cypress/integration/full_reports/** --browser chrome --headed --env url=prod",
     "cy:not_full_chrome_headed": "npx cypress run --spec cypress/integration/not_full_reports/** --browser chrome --headed",
-    "cy:not_full_dev_chrome_headed": "npx cypress run --spec cypress/integration/not_full_reports/** --browser chrome --headed --env url=dev"
+    "cy:not_full_dev_chrome_headed": "npx cypress run --spec cypress/integration/not_full_reports/** --browser chrome --headed --env url=dev",
+    "currents:run":"currents run --spec './cypress/integration/not_full_reports/**/*.spec.ts' --browser chrome --record --parallel",
+    "currents:run:debug":"currents run --browser chrome"
   },
   "repository": {
     "type": "git",

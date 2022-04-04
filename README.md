@@ -8,6 +8,7 @@
   - [Setup](#setup)
 - [Usage](#usage)
   - [CLI_flags](#cli_flags)
+  - [GH Actions debug](#gh_actions_debug)
 ## About <a id="about"></a>
 This repository contains the code of end-to-end tests, written in  Cypress framework (https://docs.cypress.io/guides/getting-started/writing-your-first-test). Main pattern used for this project - is Page Object. We describe elements of pages and the way they can behave (*pages* folder). We describe actions, which we use to interact with pages (*actions* folder). And describe test specs (*integration* folder) - things/flows we want to test and verify on our pages, using actions to put the app in a required state.
 
@@ -59,3 +60,9 @@ Project's specific environment variables for `--env` flag:
 2. `loginMethod=` - accepts values `ui` or `api` for login by UI or Api. Example of usage: `npx cypress run --env loginMethod=ui` will launch tests with login by UI. If this variable was not passed, uses `api` by default.
 Example of combining previous variables: `npx cypress run --env url=dev,loginMethod=ui` will launch tests at development environment with login by UI.
 3. `customEnv=` - accepts url to specific branch environment. Example of usage: `npx cypress run --env customEnv=https://someUrl/to/env` will launch tests at this environment.
+
+### GH Actions debug <a id="gh_actions_debug"></a>
+
+If your task will be connected with GH Actions changes or you would like to check how your newly implemnted test can behave in GH Actions - you should use [act](https://github.com/nektos/act), rather then commit a lot of times into the repo and trigger the real pipeline.
+
+Main flow of how we use act for this repo - described in txt file in [these notes](./.act/install_notes.txt).
