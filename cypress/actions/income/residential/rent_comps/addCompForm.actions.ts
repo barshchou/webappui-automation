@@ -76,14 +76,14 @@ class AddCompFormActions extends BaseActions {
     }
 
     clearDateInput() {
-        addCompFormPage.dateOfValueInput.clear().should("have.attr", "required");
+        addCompFormPage.dateOfValueInput.clear({force: true}).should("have.attr", "required");
         return this;
     }
 
     enterDate(date?: string): this {
         this.clearDateInput();
         date = date ?? getTodayDateString();
-        addCompFormPage.dateOfValueInput.type(date);
+        addCompFormPage.dateOfValueInput.type(date, {force: true});
         if (!isDateHasCorrectFormat(date)) addCompFormPage.dateOfValueInput.parent().should("have.class", "Mui-error");
         this.verifyEnteredDate(date);
         return this;

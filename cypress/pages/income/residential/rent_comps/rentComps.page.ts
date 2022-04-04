@@ -15,8 +15,8 @@ class RentCompsPage extends BasePage{
     get maxSquareFeet() {return cy.get("*[name='filters.maxSqft']");}
     get numberOfBedroomsArrowButton() {return cy.xpath("//*[text()='Bedrooms']//following-sibling::button");}
     get sourceOfInfoArrow() {return cy.xpath("//*[text()='Source of Information']//following-sibling::button");}
-    get minDateValueInput() {return cy.get("[data-qa='filters.minDateOfValue-date-picker'] input[type=tel]");}
-    get maxDateValueInput() {return cy.get("[data-qa='filters.maxDateOfValue-date-picker'] input[type=tel]");}
+    get minDateValueInput() {return cy.get("[data-qa='filters.minDateOfValue-date-picker'] input");}
+    get maxDateValueInput() {return cy.get("[data-qa='filters.maxDateOfValue-date-picker'] input");}
     get dateMinPickerButton() {return cy.get("[data-qa='filters.minDateOfValue-date-picker'] button");}
     get dateMaxPickerButton() {return cy.get("[data-qa='filters.maxDateOfValue-date-picker'] button");}
     get pickerCalendar() {return cy.get(".MuiCalendarPicker-root");}

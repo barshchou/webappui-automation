@@ -263,10 +263,10 @@ class RentCompsActions extends BaseActions {
     clearDateInput(type = "min") {
         switch (type) {
             case "max":
-                rentCompsPage.maxDateValueInput.clear();
+                rentCompsPage.maxDateValueInput.clear({force: true});
                 break;
             default:
-                rentCompsPage.minDateValueInput.clear();
+                rentCompsPage.minDateValueInput.clear({force: true});
         }
         return this;
     }
@@ -281,7 +281,7 @@ class RentCompsActions extends BaseActions {
         const isDateCorrect = isDateHasCorrectFormat(date);
         switch (type) {
             case "max":
-                rentCompsPage.maxDateValueInput.scrollIntoView().should("be.visible").type(date);
+                rentCompsPage.maxDateValueInput.scrollIntoView().should("be.visible").type(date, {force: true});
                 if (isDateCorrect) {
                     this.verifyEnteredDate("max", date);
                 } else {
@@ -289,7 +289,7 @@ class RentCompsActions extends BaseActions {
                 }
                 break;
             default:
-                rentCompsPage.minDateValueInput.scrollIntoView().should("be.visible").type(date);
+                rentCompsPage.minDateValueInput.scrollIntoView().should("be.visible").type(date, {force: true});
                 if (isDateCorrect) {
                     this.verifyEnteredDate("min", date);
                 } else {
