@@ -38,16 +38,16 @@ class RentCompsActions extends BaseActions {
         if (isChosen) {
             rentCompsPage.unitSwitchButton.should("have.css", "background-color", "rgb(46, 67, 147)");
         } else {
-            rentCompsPage.unitSwitchButton.should("have.css", "background-color", "rgb(255, 255, 255)");
+            rentCompsPage.unitSwitchButton.should("have.css", "background-color", "rgb(66, 96, 211)");
         }
         return this;
     }
 
     verifyBuildingSwitchBackground(isChosen = true) {
         if (isChosen) {
-            rentCompsPage.buildingSwitchButton.should("have.css", "background-color", "rgb(42, 67, 112)");
+            rentCompsPage.buildingSwitchButton.should("have.css", "background-color", "rgb(46, 67, 147)");
         } else {
-            rentCompsPage.buildingSwitchButton.should("have.css", "background-color", "rgb(255, 255, 255)");
+            rentCompsPage.buildingSwitchButton.should("have.css", "background-color", "rgb(66, 96, 211)");
         }
         return this;
     }
@@ -285,7 +285,7 @@ class RentCompsActions extends BaseActions {
                 if (isDateCorrect) {
                     this.verifyEnteredDate("max", date);
                 } else {
-                    rentCompsPage.errorMessage.should("exist");
+                    rentCompsPage.maxDateValueInput.parent().should("have.class", "Mui-error");
                 }
                 break;
             default:
@@ -293,7 +293,7 @@ class RentCompsActions extends BaseActions {
                 if (isDateCorrect) {
                     this.verifyEnteredDate("min", date);
                 } else {
-                    rentCompsPage.errorMessage.should("exist");
+                    rentCompsPage.minDateValueInput.parent().should("have.class", "Mui-error");
                 }
         }
         return this;
@@ -332,9 +332,9 @@ class RentCompsActions extends BaseActions {
     verifyEnteredDate(type, date) {
         date = date ?? getTodayDateString();
         if (type === "min") {
-            rentCompsPage.dateMinInputToCheckValue.should("have.value", date);
+            rentCompsPage.minDateValueInput.should("have.value", date);
         } else {
-            rentCompsPage.dateMaxInputToCheckValue.should("have.value", date);
+            rentCompsPage.maxDateValueInput.should("have.value", date);
         }
         return this;
     }
@@ -515,7 +515,6 @@ class RentCompsActions extends BaseActions {
         rentCompsPage.findRentCompSection.should("be.visible");
         rentCompsPage.submitButton.should("be.disabled");
         rentCompsPage.searchAddressField.type(`${address}{enter}`).should("have.value", address);
-        rentCompsPage.findRentCompSection.click();
         rentCompsPage.advancedSearchButton.should("be.visible");
         rentCompsPage.submitButton.should("not.be.disabled").click();
         rentCompsPage.searchResultsRows.eq(searchResIndex).click();

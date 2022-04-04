@@ -15,19 +15,12 @@ class RentCompsPage extends BasePage{
     get maxSquareFeet() {return cy.get("*[name='filters.maxSqft']");}
     get numberOfBedroomsArrowButton() {return cy.xpath("//*[text()='Bedrooms']//following-sibling::button");}
     get sourceOfInfoArrow() {return cy.xpath("//*[text()='Source of Information']//following-sibling::button");}
-    get minDateValueInput() {return cy.get("*[data-qa='filters.minDateOfValue-date-picker'] input[placeholder='MM-DD-YYYY']");}
-    get maxDateValueInput() {return cy.get("*[data-qa='filters.maxDateOfValue-date-picker'] input[placeholder='MM-DD-YYYY']");}
-    get dateMinInputToCheckValue() {return cy.get("*[data-qa='filters.minDateOfValue-date-picker'] > input");}
-    get dateMaxInputToCheckValue() {return cy.get("*[data-qa='filters.maxDateOfValue-date-picker'] > input");}
-    get errorMessage() {return cy.get("#component-error-text");}
-    get dateMinPickerButton() {
-        return cy.xpath("//*[@data-qa='filters.minDateOfValue-date-picker']//child::button");
-    }
-    get dateMaxPickerButton() {
-        return cy.xpath("//*[@data-qa='filters.maxDateOfValue-date-picker']//child::button");
-    }
-    get pickerCalendar() {return cy.get("*[role='document']");}
-    getDayInCurrentMonthPicker(day) {return cy.xpath(`//*[text()='${day}']//parent::button[@tabindex='0']`);}
+    get minDateValueInput() {return cy.get("[data-qa='filters.minDateOfValue-date-picker'] input:not([readonly])");}
+    get maxDateValueInput() {return cy.get("[data-qa='filters.maxDateOfValue-date-picker'] input:not([readonly])");}
+    get dateMinPickerButton() {return cy.get("[data-qa='filters.minDateOfValue-date-picker'] button");}
+    get dateMaxPickerButton() {return cy.get("[data-qa='filters.maxDateOfValue-date-picker'] button");}
+    get pickerCalendar() {return cy.get(".MuiCalendarPicker-root");}
+    getDayInCurrentMonthPicker(day) {return cy.xpath(`//button[text()='${day}']`);}
     get amenitiesArrowButton() {return cy.xpath("//*[text()='Amenities']//following-sibling::button");}
     get numberOfFoundResults() {return cy.get("*[data-qa='rentComps-count']");}
     get resetFiltersButton() {return cy.get("*[data-qa='reset-filters-button']");}
@@ -40,7 +33,7 @@ class RentCompsPage extends BasePage{
     get prevPhotoButtons() {return cy.get("button.slick-prev");}
     get comparableItems() {return cy.get("*[data-qa='rentComp-item']");}
     get comparableAddressesTexts() {return cy.get("*[data-qa='rentComp-address-text']");}
-    get rentElementsTexts() {return cy.get("*[data-qa='rentComp-address-text'] + p");}
+    get rentElementsTexts() {return cy.get("*[data-qa='rentComp-address-text'] + h6");}
     get comparablesAmenitiesTexts() {return cy.get("*[data-qa='rentComp-contitions']");}
     get comparablePropertyTexts() {return cy.get("*[data-qa='rentComp-property']");}
     get selectComparableButtons() {return cy.get("*[data-qa='rentComp-select-btn']");}

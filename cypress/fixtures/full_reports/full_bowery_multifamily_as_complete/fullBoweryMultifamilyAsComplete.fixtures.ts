@@ -1,3 +1,8 @@
+/**
+ * These comments will be useful when we start refactor fullReportSpec
+ * ernst: refactor type for "expenseForecastFixture" function param. If necessary, refactor whole function.
+ */
+
 import {getTodayDateString, getYearFromDate} from "../../../../utils/date.utils";
 import Enums from "../../../enums/enums";
 
@@ -679,7 +684,20 @@ const comparableExpensesFixture = () => {
     };
 };
 
-const expenseForecastFixture = () => {
+const expenseForecastFixture = (): {insuranceItem: BoweryReports.ForecastItem,
+                                    electricityItem: BoweryReports.ForecastItem,
+                                    fuelItem: BoweryReports.ForecastItem,
+                                    waterSewerItem: BoweryReports.ForecastItem,
+                                    repairsMaintenance: BoweryReports.ForecastItem,
+                                    payrollBenefits: BoweryReports.ForecastItem
+                                    general: BoweryReports.ForecastItem,
+                                    legalProf: BoweryReports.ForecastItem,
+                                    miscellaneous: BoweryReports.ForecastItem,
+                                    management: BoweryReports.ForecastItem,
+                                    reserves: BoweryReports.ForecastItem,
+                                    total: BoweryReports.ForecastItem,
+                                    effectiveGrossIncome: number,
+                                    percentOfEgi: number} => {
     return {
         insuranceItem: {
             name: "insurance", basis: "unit", forecast: 350
