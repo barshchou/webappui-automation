@@ -209,7 +209,7 @@ class InPlaceRentRollActions extends BaseActions {
         return this;
     }
 
-    fillAllRentTypeCellsWithEqualValue(rentType: string): this {
+    enterAllEqualRentTypeCells(rentType: string): this {
         rentRollPage.rentTypeCells.each((cell, i) => {
             this.enterRentTypeCellByRowNumber(rentType, i)
                 .verifyRentTypeCellByRowNumber(rentType, i);
@@ -316,10 +316,10 @@ class InPlaceRentRollActions extends BaseActions {
         return this;
     }
 
-    enterAllEqualLeaseStatuses(leaseStatus: string, numberOfUnits: number): this {
-        for (let i = 0; i < numberOfUnits; i++) {
+    enterAllEqualLeaseStatuses(leaseStatus: string): this {
+        rentRollPage.leaseStatusCells.each((cell, i) => {
             this.enterLeaseStatusByRowNumber(leaseStatus, i);
-        }
+        });
         return this;
     }
 
@@ -353,10 +353,10 @@ class InPlaceRentRollActions extends BaseActions {
         return this;
     }
 
-    enterAllEqualMonthlyRents(monthlyRent: string | number, numberOfUnits: number): this {
-        for (let i = 0; i < numberOfUnits; i++) {
+    enterAllEqualMonthlyRents(monthlyRent: string | number): this {
+        rentRollPage.monthlyRentCells.each((cell, i) => {
             this.enterMonthlyRentByRowNumber(monthlyRent, i);
-        }
+        });
         return this;
     }
 
