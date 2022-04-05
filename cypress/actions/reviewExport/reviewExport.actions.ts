@@ -12,9 +12,10 @@ class ReviewExportActions extends BaseActions {
     }
 
     generateDocxReport(): this {
-        reviewExportPage.generateReportBtn.click()
+        reviewExportPage.generateReportBtn.click();
         return this;
     }
+
     downloadDocxReport(): this {
         reviewExportPage.downloadBtn.click();
         return this;
