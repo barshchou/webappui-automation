@@ -10,7 +10,7 @@ const checkChipsOptions = (suggestion: string,optionName: string, textBoxName: "
         .should("be.visible").click()
         .xpath("//button[contains(text(),'Revert to Original')]").eq(indexForElement).click({force:true})
         .get('[role="dialog"] button').eq(2).click();
-    }
+    };
 
     if(textBoxName == "IntendedUserTextBox"){
         return interactWithText(Report.Client.Page.IntendedUserTextBox, 0);
@@ -19,7 +19,7 @@ const checkChipsOptions = (suggestion: string,optionName: string, textBoxName: "
         return interactWithText(Report.Client.Page.IdentificationOfClientTextBox,1);
     }
     
-}
+};
 
 /**
  * ernst: WARN: remove skip after fixing this test

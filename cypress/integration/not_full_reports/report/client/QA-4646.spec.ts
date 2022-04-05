@@ -1,8 +1,7 @@
 import testData from "../../../../fixtures/not_full_reports/report/client/QA-4646.fixture";
 import {createReport, deleteReport} from "../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
-import Report from "../../../../actions/report/report.manager";
-import PreviewEdit from "../../../../actions/preview_edit/previewEdit.manager";
+import {Report, PreviewEdit, Base} from "../../../../actions";
 import {replaceEntersWithSpaces} from "../../../../../utils/string.utils";
 
 describe("Verify the Appraiser Commentary field", () => {
@@ -13,7 +12,7 @@ describe("Verify the Appraiser Commentary field", () => {
     it("Test body", () => {
         NavigationSection.navigateToClientPage();
         Report.Client.enterAppraiserCommentary(testData.textToType);
-        NavigationSection.navigateToLetterOfTransmittal();
+        Base._NavigationSection.navigateToLetterOfTransmittal();
         PreviewEdit.LetterOfTransmittal.verifyPreviewButtonSelected();
         cy.contains(replaceEntersWithSpaces(testData.textToType)).should("exist");
         deleteReport(testData.reportCreationData.reportNumber);
