@@ -1,7 +1,7 @@
 import {getTodayDateString, getYearFromDate} from "../../../../utils/date.utils";
 import Enums from "../../../enums/enums";
 
-const reportCreationFixture = () => {
+const reportCreationFixture = (): BoweryAutomation.ReportCreationData => {
     return {
         state: "Other",
         address: "8524 South Oglesby Avenue",
@@ -10,7 +10,7 @@ const reportCreationFixture = () => {
         reportNumber: "Full Report Test Automation",
         templateValue: Enums.TEMPLATE_TYPE.NOT_FREDDIE_MAC,
         incomeValue: Enums.INCOME_TYPE.RESIDENTIAL,
-        conclusionValue: Enums.VALUE_CONCLUSION_TYPE.AS_COMPLETE
+        conclusionValue: "AS_COMPLETE"
     };
 };
 
@@ -41,7 +41,7 @@ const keyInfoEngagementFixture = () => {
 
 const clientFixture = () => {
     return {
-        clientName: "Gerardo  Jorge"
+        clientName: "Gerardo Jorge"
     };
 };
 
@@ -679,7 +679,20 @@ const comparableExpensesFixture = () => {
     };
 };
 
-const expenseForecastFixture = () => {
+const expenseForecastFixture = (): {insuranceItem: BoweryReports.ForecastItem,
+                                    electricityItem: BoweryReports.ForecastItem,
+                                    fuelItem: BoweryReports.ForecastItem,
+                                    waterSewerItem: BoweryReports.ForecastItem,
+                                    repairsMaintenance: BoweryReports.ForecastItem,
+                                    payrollBenefits: BoweryReports.ForecastItem
+                                    general: BoweryReports.ForecastItem,
+                                    legalProf: BoweryReports.ForecastItem,
+                                    miscellaneous: BoweryReports.ForecastItem,
+                                    management: BoweryReports.ForecastItem,
+                                    reserves: BoweryReports.ForecastItem,
+                                    total: BoweryReports.ForecastItem,
+                                    effectiveGrossIncome: number,
+                                    percentOfEgi: number} => {
     return {
         insuranceItem: {
             name: "insurance", basis: "unit", forecast: 350

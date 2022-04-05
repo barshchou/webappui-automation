@@ -13,7 +13,7 @@ describe("Verify the display of the Unit grid with the added comparable unit on 
     it("Uncategorized table with default columns" , () => {
         NavigationSection.navigateToResInPlaceRentRoll();
         Income.Residential.InPlaceRentRoll.checkCheckboxByLabel(tesData.includePerRoomCheckbox);
-        NavigationSection.navigateToRentComps();
+        NavigationSection.openRentCompsInResidential();
         Income.Residential.RentComps.BaseActions.verifyUnitSelected()
             .selectComparableByAddress(tesData.uncategorizedData.compData.address)
             .checkDisplaySquareFootageForCompsCheckbox()

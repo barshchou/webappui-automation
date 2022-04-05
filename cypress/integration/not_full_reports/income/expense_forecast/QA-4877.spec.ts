@@ -18,7 +18,7 @@ describe("Comparable Min, Max, Avg values for Electricity Per SF are correctly c
         testData.comparables.forEach((comp, index) => {
             Income.ComparableExpenses.Actions.clickAddBlankColumnButton()
                 .enterAddressByColumnIndex(comp.address, index)
-                .enterElectricityByColumnIndex(comp.electricity, index)
+                .enterCellDollarValueByColumnIndex(Income.ComparableExpenses.Page.electricityCells, comp.electricity, index)
                 .enterSquareFeetByColumnIndex(comp.squareFeet, index)
         });
         NavigationSection.Actions.navigateToExpenseForecast();

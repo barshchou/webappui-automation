@@ -10,7 +10,7 @@ import Sales from "../../actions/sales/sales.manager";
 describe("Full bowery way, multifamily as complete report", () => {
     it("Test", () => {
         cy.login();
-        Homepage.createReportAdvancedSearch(testData.reportCreationData);
+        Homepage.createReport(testData.reportCreationData);
         Report.KeyInfo.choosePurpose(testData.keyInfoPurposeData.purposeValue)
             .checkAllInterestAppraisedByValues(testData.keyInfoPurposeData.interestAppraised)
             .enterDateByType(testData.keyInfoEngagementData.dueDate)
@@ -53,7 +53,6 @@ describe("Full bowery way, multifamily as complete report", () => {
             .checkContainsBasement()
             .checkListCheckboxesByLabels(testData.descriptionOfImprovements.basementAccess)
             .checkBasementStateByValue(testData.descriptionOfImprovements.basementState)
-            .verifyTotalEconomicLife(testData.remainingEconomicLife.totalEconomicLifeToBe)
             .enterAgeEffective(testData.remainingEconomicLife.ageEffective)
             .clickSaveContinueButton();
         Property.SiteDescription.editTransportationDiscussionCommentary(testData.transportationSiteDescription.commentary)
@@ -296,12 +295,12 @@ describe("Full bowery way, multifamily as complete report", () => {
                 .chooseExpensePeriodByColumnIndex(comp.period, i)
                 .enterSquareFeetByColumnIndex(comp.squareFeet, i)
                 .enterResidentialUnitsByColumnIndex(comp.resUnits, i)
-                .enterInsuranceByColumnIndex(comp.insurance, i)
-                .enterElectricityByColumnIndex(comp.electricity, i)
-                .enterRepairsMaintenanceByColumnIndex(comp.repairsAndMaintenance, i)
-                .enterPayrollBenefitsByColumnIndex(comp.payrollAndBenefits, i)
-                .enterGeneralAdministrativeByColumnIndex(comp.generalAndAdministrative, i)
-                .enterManagementFeesByColumnIndex(comp.management, i)
+                .enterCellDollarValueByColumnIndex(Income.ComparableExpenses.Page.insuranceCells, comp.insurance, i)
+                .enterCellDollarValueByColumnIndex(Income.ComparableExpenses.Page.electricityCells, comp.electricity, i)
+                .enterCellDollarValueByColumnIndex(Income.ComparableExpenses.Page.repairsCells, comp.repairsAndMaintenance, i)
+                .enterCellDollarValueByColumnIndex(Income.ComparableExpenses.Page.payrollCells, comp.payrollAndBenefits, i)
+                .enterCellDollarValueByColumnIndex(Income.ComparableExpenses.Page.generalCells, comp.generalAndAdministrative, i)
+                .enterCellDollarValueByColumnIndex(Income.ComparableExpenses.Page.managementFeesCells, comp.management, i)
                 .verifyTOEByColumnIndex(comp.toe, i)
                 .verifyTOEPerSFByColumnIndex(i)
                 .verifyToePerUnitByColumnIndex(i);
