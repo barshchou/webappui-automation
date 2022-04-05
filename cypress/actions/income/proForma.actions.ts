@@ -679,6 +679,29 @@ class ProFormaActions extends BaseActions {
         proFormaPage.residentialVCLossLabelCell.should("contain.text", `${vcLossValue.toFixed(2)}%`);
         return this;
     }
+
+    verifyResidentialVCLossTotal(totalToBe: string): ProFormaActions {
+        proFormaPage.residentialVCLossTotal.should("have.text", totalToBe);
+        return this;
+    }
+
+    verifyResidentialVCLossPerSF(grossBuildingArea: number): ProFormaActions {
+        proFormaPage.residentialVCLossTotal.invoke("text").then(totalText => {
+            const totalNumber = getNumberFromMinusDollarNumberWithCommas(totalText);
+            const perSFTextToBe = `-$${numberWithCommas((totalNumber / grossBuildingArea).toFixed(2))}`;
+            proFormaPage.residentialVCLossPerSF.should("have.text", perSFTextToBe);
+        });
+        return this;
+    }
+
+    verifyResidentialVCLossPerUnit(numberOfUnits: number): ProFormaActions {
+        proFormaPage.residentialVCLossTotal.invoke("text").then(totalText => {
+            const totalNumber = getNumberFromMinusDollarNumberWithCommas(totalText);
+            const perUnitTextToBe = `-$${numberWithCommas(totalNumber / numberOfUnits)}`;
+            proFormaPage.residentialVCLossPerUnit.should("have.text", perUnitTextToBe);
+        });
+        return this;
+    }
 }
 
 export default new ProFormaActions();
