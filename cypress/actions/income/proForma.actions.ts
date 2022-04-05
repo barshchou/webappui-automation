@@ -679,6 +679,15 @@ class ProFormaActions extends BaseActions {
         proFormaPage.residentialVCLossLabelCell.should("contain.text", `${vcLossValue.toFixed(2)}%`);
         return this;
     }
+
+    verifyResidentialVCLossPerUnit(numberOfUnits: number): ProFormaActions {
+        proFormaPage.residentialVCLossTotal.invoke("text").then(totalText => {
+            const totalNumber = getNumberFromMinusDollarNumberWithCommas(totalText);
+            const perUnitTextToBe = `-$${numberWithCommas(totalNumber / numberOfUnits)}`;
+            proFormaPage.residentialVCLossPerUnit.should("have.text", perUnitTextToBe);
+        });
+        return this;
+    }
 }
 
 export default new ProFormaActions();

@@ -1,10 +1,10 @@
-import testData from "../../../../fixtures/not_full_reports/income/pro_forma/QA-4528.fixture";
+import testData from "../../../../fixtures/not_full_reports/income/pro_forma/QA-4532.fixture";
 import {createReport, deleteReport} from "../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Property from "../../../../actions/property/property.manager";
 import Income from "../../../../actions/income/income.manager";
 
-describe("Residential V/C Loss @ X%", () => {
+describe("Residential V/C Loss @ X% -> Per Unit", () => {
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
     });
@@ -17,9 +17,12 @@ describe("Residential V/C Loss @ X%", () => {
             .enterAllEqualLeaseStatuses(testData.leaseStatus)
             .enterAllEqualMonthlyRents(testData.monthlyRent);
         NavigationSection.navigateToPotentialGrossIncome();
-        Income.PotentialGrossIncome.enterResVacancyCollLoss(testData.resVacancyCollectionLoss);
-        NavigationSection.navigateToProForma();
-        Income.ProForma.verifyResidentialVCLossLabel(testData.resVacancyCollectionLoss);
+        Income.PotentialGrossIncome.enterResVacancyCollLoss(testData.resVacancyCollectionLoss)
+            .clickSaveButton()
+            .verifyProgressBarNotExist();
+        // TODO: Change to navigation with saving, after https://bowery.atlassian.net/browse/WEB-4956 bug fix
+        NavigationSection.navigateToProForma(false);
+        Income.ProForma.verifyResidentialVCLossPerUnit(testData.numberOfUnits);
         deleteReport(testData.reportCreationData.reportNumber);
     });
-})
+});

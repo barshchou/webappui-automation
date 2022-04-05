@@ -13,7 +13,7 @@ describe(" Verify the Number of Residential Units section on the In-Place Rent R
         NavigationSection.navigateToPropertySummary();
         Property.Summary.enterNumberOfResUnits(testData.numberOfUnits);
         NavigationSection.navigateToResInPlaceRentRoll();
-        Income.Residential.InPlaceRentRoll.fillAllRentTypeCellsWithEqualValue(testData.rentType)
+        Income.Residential.InPlaceRentRoll.enterAllEqualRentTypeCells(testData.rentType)
             .verifyNumberOfResidentialUnits(testData.numberOfUnits)
             .goToPropSummaryWithSaveLeavingFirst();
         Property.Summary.verifyThatPageIsOpened();
