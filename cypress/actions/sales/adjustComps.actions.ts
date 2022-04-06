@@ -1,90 +1,79 @@
 import BaseActions from "../base/base.actions";
 import adjustCompsPage from "../../pages/sales/adjustComps.page";
 import {
-    getNumberFromDollarNumberWithCommas,
-    getNumberWithDecimalPart,
+    cutDecimalPartToNumberOfDigits,
+    getNumberFromDollarNumberWithCommas, isDecimal,
     numberWithCommas
 } from "../../../utils/numbers.utils";
 
 class AdjustCompsActions extends BaseActions {
 
-    /**
-     *
-     * @param {string} value
-     * @returns {AdjustCompsActions}
-     */
-    checkCalculationUnitsRadio(value) {
+    checkCalculationUnitsRadio(value: string): AdjustCompsActions {
         adjustCompsPage.calculationUnitsRadio.check(value).should("be.checked");
         return this;
     }
 
-    /**
-     *
-     * @param {string} value
-     * @returns {AdjustCompsActions}
-     */
-    checkIncomeAdjustmentLevel(value) {
+    checkIncomeAdjustmentLevel(value: string): AdjustCompsActions {
         adjustCompsPage.incomeAdjustmentLevelRadio.check(value).should("be.checked");
         return this;
     }
 
-    /**
-     *
-     * @param {number | string} value
-     * @param {number} index
-     * @returns {AdjustCompsActions}
-     */
-    enterSizeAdjustmentByColumn(value, index= 0) {
-        adjustCompsPage.sizeAdjustmentCells.eq(index).clear().type(value).should("have.value", `${value}%`);
+    enterSizeAdjustmentByColumn(value: number, index: number = 0): AdjustCompsActions {
+        adjustCompsPage.sizeAdjustmentCells.eq(index).clear().type(`${value}`).should("have.value", `${value}%`);
         return this;
     }
 
-    /**
-     *
-     * @param {number | string} value
-     * @param {number} index
-     * @returns {AdjustCompsActions}
-     */
-    enterConditionAdjustmentByColumn(value, index= 0) {
-        adjustCompsPage.conditionAdjustmentCells.eq(index).clear().type(value).should("have.value", `${value}%`);
+    enterConditionAdjustmentByColumn(value: number, index: number = 0): AdjustCompsActions {
+        adjustCompsPage.conditionAdjustmentCells.eq(index).clear().type(`${value}`).should("have.value", `${value}%`);
         return this;
     }
 
-    editOtherAdjustmentRowName(newName: string, index: number = 0): AdjustCompsActions {
-        adjustCompsPage.otherAdjustmentsEditButton.click();
-        adjustCompsPage.otherAdjustmentNameInputFields.eq(index).clear().type(newName).should("have.value", newName);
+    editOtherAdjustmentRowName(prevName: string, newName: string, index: number = 0): AdjustCompsActions {
+        adjustCompsPage.getAdjustmentEditNameButton(prevName).click();
+        adjustCompsPage.getOtherAdjustmentNameInputField(index).clear().type(newName).should("have.value", newName);
         adjustCompsPage.getOtherAdjustmentNameSaveButton(index).click();
-        cy.contains("td", newName).should("exist");
+        this.verifyRowWithNameExists(newName);
         return this;
     }
 
-    enterOtherAdjustmentByColumn(value: number, index: number = 0): AdjustCompsActions {
-        adjustCompsPage.otherAdjustmentCells.eq(index).scrollIntoView().clear()
-            .type(`${value}`).should("have.value", `${value}%`);
+    verifyRowWithNameExists(name: string): AdjustCompsActions {
+        cy.contains("td", name).should("exist");
+        return this;
+    }
+
+    verifyRowWithNameNotExists(name: string): AdjustCompsActions {
+        cy.contains("td", name).should("not.exist");
+        return this;
+    }
+
+    deleteOtherAdjustmentRow(name: string, index: number = 0): AdjustCompsActions {
+        adjustCompsPage.getAdjustmentDeleteButton(name).eq(index).click();
+        this.verifyRowWithNameNotExists(name);
+        return this;
+    }
+
+    enterOtherAdjustmentByColumn(value: number | string, rowNumber: number = 0, index: number = 0): AdjustCompsActions {
+        adjustCompsPage.getOtherAdjustmentRowCells(rowNumber).eq(index).scrollIntoView().clear()
+            .type(`${value}{del}`).should("have.value", `${value}%`);
+        return this;
+    }
+
+    clearOtherAdjustmentByColumn(rowNumber: number = 0, index: number = 0): AdjustCompsActions {
+        adjustCompsPage.getOtherAdjustmentRowCells(rowNumber).eq(index).clear();
         return this;
     }
 
     clickAddOtherAdjustmentButton(): AdjustCompsActions {
-        adjustCompsPage.addOtherAdjustmentButton.click();
+        adjustCompsPage.addOtherAdjustmentButton.click({force: true});
         return this;
     }
 
-    /**
-     *
-     * @param {string} value
-     * @param {number} index
-     * @returns {AdjustCompsActions}
-     */
-    verifyTrendedPriceByColumn(value, index= 0) {
+    verifyTrendedPriceByColumn(value: string, index: number= 0): AdjustCompsActions {
         adjustCompsPage.trendedPriceCells.eq(index).should("have.text", value);
         return this;
     }
 
-    /**
-     * @param {number} index
-     * @returns {AdjustCompsActions}
-     */
-    verifyAdjustedPriceByColumn(index = 0) {
+    verifyAdjustedPriceByColumn(index: number = 0): AdjustCompsActions {
         adjustCompsPage.trendedPriceCells.eq(index).invoke("text").then(trendedText => {
             const trendedNumber = getNumberFromDollarNumberWithCommas(trendedText);
             adjustCompsPage.netPropertyAdjustmentsCells.eq(index).invoke("text").then(netAdjText => {
@@ -92,10 +81,10 @@ class AdjustCompsActions extends BaseActions {
                 const adjustedPriceToBe = trendedNumber + (trendedNumber * (netAdjNumber / 100));
                 let adjustedPriceText;
                 if (adjustedPriceToBe < 0) {
-                    adjustedPriceText = `-$${numberWithCommas(getNumberWithDecimalPart(adjustedPriceToBe)
+                    adjustedPriceText = `-$${numberWithCommas(adjustedPriceToBe.toFixed(2)
                         .replace("-", ""))}`;
                 } else {
-                    adjustedPriceText = `$${numberWithCommas(getNumberWithDecimalPart(adjustedPriceToBe))}`;
+                    adjustedPriceText = `$${numberWithCommas(adjustedPriceToBe.toFixed(2))}`;
                 }
                 adjustCompsPage.adjustedPriceCells.eq(index).should("have.text", adjustedPriceText);
             });
@@ -113,13 +102,8 @@ class AdjustCompsActions extends BaseActions {
         return this;
     }
 
-    /**
-     * @param {number | string} value
-     * @param {number} index
-     * @returns {AdjustCompsActions}
-     */
-    enterPropertyRightsByColumn(value, index = 0) {
-        adjustCompsPage.propertyRightsCells.eq(index).clear().type(value).should("have.value", `${value}%`);
+    enterPropertyRightsByColumn(value: number, index: number = 0): AdjustCompsActions {
+        adjustCompsPage.propertyRightsCells.eq(index).clear().type(`${value}`).should("have.value", `${value}%`);
         return this;
     }
 }
