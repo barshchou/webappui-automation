@@ -1,8 +1,7 @@
 import BaseActions from "../base/base.actions";
 import adjustCompsPage from "../../pages/sales/adjustComps.page";
 import {
-    cutDecimalPartToNumberOfDigits,
-    getNumberFromDollarNumberWithCommas, isDecimal,
+    getNumberFromDollarNumberWithCommas,
     numberWithCommas
 } from "../../../utils/numbers.utils";
 
