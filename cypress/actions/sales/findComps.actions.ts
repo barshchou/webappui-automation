@@ -1,8 +1,13 @@
 import BaseActions from "../base/base.actions";
 import findCompsPage from "../../pages/sales/findComps.page";
 import {getUploadFixture} from "../../../utils/fixtures.utils";
+import {isNumber, numberWithCommas} from "../../../utils/numbers.utils";
 
 class FindCompsActions extends BaseActions {
+
+    get Page() {
+        return findCompsPage;
+    }
 
     addExistingComparable(address: string): FindCompsActions {
         this.clickCreateCompButton()
@@ -110,6 +115,30 @@ class FindCompsActions extends BaseActions {
         findCompsPage.importCompsSelectButtons.each(el => {
             cy.wrap(el).click();
         });
+        return this;
+    }
+
+    selectConditionNewComp(title: string): FindCompsActions {
+        findCompsPage.conditionDropdown.should("have.length", 1).click();
+        findCompsPage.getConditionOption(title).click();
+        return this;
+    }
+
+    clearNumberResidentialUnitsNewComp(): FindCompsActions {
+        findCompsPage.createCompNumberResidentialUnits.clear();
+        return this;
+    }
+
+    enterNumberResidentialUnitsNewComp(numberOfUnits: number | string): FindCompsActions {
+        this.clearNumberResidentialUnitsNewComp();
+        findCompsPage.createCompNumberResidentialUnits.type(`${numberOfUnits}`);
+        this.verifyNumberResidentialUnitsNewComp(numberOfUnits);
+        return this;
+    }
+
+    verifyNumberResidentialUnitsNewComp(numberOfUnits: number | string): FindCompsActions {
+        const valueToBe = isNumber(numberOfUnits) ? numberWithCommas(`${numberOfUnits}`.replace("-", "")) : "";
+        findCompsPage.createCompNumberResidentialUnits.should("have.value", valueToBe);
         return this;
     }
 }
