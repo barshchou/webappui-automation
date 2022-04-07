@@ -4,17 +4,17 @@ import {getUploadFixture} from "../../../utils/fixtures.utils";
 
 class FindCompsActions extends BaseActions {
 
-    /**
-     *
-     * @param {string} address
-     * @returns {FindCompsActions}
-     */
-    addComparable(address) {
-        findCompsPage.createCompButton.click();
+    addComparable(address: string): FindCompsActions {
+        this.clickCreateCompButton();
         findCompsPage.searchCompAddressInput.type(address).type("{enter}");
         findCompsPage.findCompField.click();
         findCompsPage.submitButton.click();
         findCompsPage.getSelectCompButtonByAddress(address).click();
+        return this;
+    }
+
+    clickCreateCompButton(): FindCompsActions {
+        findCompsPage.createCompButton.click();
         return this;
     }
 

@@ -1,3 +1,5 @@
+/// <reference types="cypress" />
+
 export const interceptGoogleScriptsLoad = () => {
     cy.intercept({
         url: "https://maps.googleapis.com/**",
