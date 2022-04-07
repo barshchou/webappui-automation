@@ -37,127 +37,76 @@ class FindCompsActions extends BaseActions {
         return this;
     }
 
-    /**
-     *
-     * @param {string} address
-     * @returns {FindCompsActions}
-     */
-    verifyAddedCompAddress(address) {
+    verifyAddedCompAddress(address: string): FindCompsActions {
         this.verifyProgressBarNotExist();
         findCompsPage.getRemoveSelectedCompButtonByAddress(address).should("exist");
         return this;
     }
 
-    /**
-     *
-     * @returns {FindCompsActions}
-     */
-    clickImportComparableButton() {
+
+    clickImportComparableButton(): FindCompsActions {
         findCompsPage.importCompsButton.click();
         return this;
     }
 
-    /**
-     *
-     * @returns {FindCompsActions}
-     */
-    verifyImportCompModalShown() {
+    verifyImportCompModalShown(): FindCompsActions {
         findCompsPage.importCompModal.should("be.visible");
         return this;
     }
 
-    /**
-     *
-     * @param {string} filePath
-     * @returns {FindCompsActions}
-     */
-    uploadComps(filePath) {
+    uploadComps(filePath: string): FindCompsActions {
         findCompsPage.csvInput.attachFile(getUploadFixture(filePath));
         return this;
     }
 
-    /**
-     *
-     * @param {number} number
-     * @returns {FindCompsActions}
-     */
-    verifyComparablesNumber(number) {
+    verifyComparablesNumber(number: number): FindCompsActions {
         const numberToBe = number + 1;
         findCompsPage.addressCells.should("have.length", numberToBe);
         return this;
     }
 
-    /**
-     *
-     * @param {string} address
-     * @returns {FindCompsActions}
-     */
-    selectCompFromMapByAddress(address) {
+    selectCompFromMapByAddress(address: string): FindCompsActions {
         findCompsPage.getSelectCompFromMapButtonByAddress(address).scrollIntoView().click({force: true});
         findCompsPage.getRemoveCompFromMapButtonByAddress(address).should("exist");
         return this;
     }
 
-    /**
-     *
-     * @param {string} address
-     * @returns {FindCompsActions}
-     */
-    removeCompByAddress(address) {
+    removeCompByAddress(address: string): FindCompsActions {
         findCompsPage.getRemoveSelectedCompButtonByAddress(address).click();
         return this;
     }
 
-    /**
-     *
-     * @param {string} address
-     * @returns {FindCompsActions}
-     */
-    verifyCompIsInRemovedSection(address) {
+    verifyCompIsInRemovedSection(address: string): FindCompsActions {
         findCompsPage.getRemoveDeletedCompButtonByAddress(address).should("exist");
         return this;
     }
 
-    /**
-     *
-     * @param {string} address
-     * @returns {FindCompsActions}
-     */
-    verifyCompIsInMap(address) {
+    verifyCompIsInMap(address: string): FindCompsActions {
         findCompsPage.getSelectCompFromMapButtonByAddress(address).should("exist");
         return this;
     }
 
-    /**
-     *
-     * @param {string} address
-     * @returns {FindCompsActions}
-     */
-    removeDeletedCompByAddress(address) {
+    removeDeletedCompByAddress(address: string): FindCompsActions {
         findCompsPage.getRemoveDeletedCompButtonByAddress(address).click();
         return this;
     }
 
-    /**
-     * @param {string} reportID
-     * @returns {FindCompsActions}
-     */
-    enterReportToSearchComp(reportID) {
+    enterReportToSearchComp(reportID: string): FindCompsActions {
         findCompsPage.reportToSearchCompInput.type(reportID).should("have.value", reportID);
         return this;
     }
 
-    clickImportCompsFromReportButton() {
+    clickImportCompsFromReportButton(): FindCompsActions {
         findCompsPage.importReportCompsButton.click();
         return this;
     }
 
-    clickSearchButton() {
+    clickSearchButton(): FindCompsActions {
         findCompsPage.searchButton.click();
         return this;
     }
 
-    selectAllCompsForImport() {
+    selectAllCompsForImport(): FindCompsActions {
         findCompsPage.importCompsSelectButtons.each(el => {
             cy.wrap(el).click();
         });

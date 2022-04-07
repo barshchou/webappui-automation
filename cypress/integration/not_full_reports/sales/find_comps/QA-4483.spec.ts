@@ -4,13 +4,14 @@ import {_NavigationSection} from "../../../../actions/base";
 import {Sales} from "../../../../actions";
 
 describe("Group of tests for numeric inputs at create comp modal", () => {
-    before("Login, create report", () => {
+    beforeEach("Login, create report", () => {
         createReport(testData.reportCreationData);
-    });
-
-    it("Test body", () => {
         _NavigationSection.navigateToFindComps();
         Sales._FindComps.clickCreateCompButton()
             .openAddNewComparableFormSearchResult(testData.compAddress);
+    });
+
+    it("QA-4139: Verify the # Residential Units* field", () => {
+
     });
 });
