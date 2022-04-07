@@ -11,9 +11,9 @@ describe("Adjusted Price per Residential Unit in Sales Adjustment Grid is calcul
 
     it("Test body", () => {
         NavigationSection.navigateToFindComps();
-        Sales.FindComps.selectCompFromMapByAddress(testData.comparable.address);
+        Sales._FindComps.selectCompFromMapByAddress(testData.comparable.address);
         NavigationSection.openAdjustCompsInSales();
-        Sales.AdjustComps.checkCalculationUnitsRadio(testData.calculationUnits)
+        Sales._AdjustComps.checkCalculationUnitsRadio(testData.calculationUnits)
             .enterSizeAdjustmentByColumn(testData.comparable.sizeAdjustment)
             .enterConditionAdjustmentByColumn(testData.comparable.conditionAdjustment)
             .clickAddOtherAdjustmentButton()

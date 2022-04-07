@@ -3,6 +3,6 @@ import keyInfoActions from "./keyInfo.actions";
 import appraiserActions from "./appraiser.actions";
 
 
-export const KeyInfo = keyInfoActions;
-export const Client = clientActions;
-export const Appraiser = appraiserActions;
+export const _KeyInfo = keyInfoActions;
+export const _Client = clientActions;
+export const _Appraiser = appraiserActions;

@@ -11,9 +11,9 @@ describe("Verify the Appraiser Commentary field", () => {
 
     it("Test body", () => {
         NavigationSection.navigateToClientPage();
-        Report.Client.enterAppraiserCommentary(testData.textToType);
+        Report._Client.enterAppraiserCommentary(testData.textToType);
         Base._NavigationSection.navigateToLetterOfTransmittal();
-        PreviewEdit.LetterOfTransmittal.verifyPreviewButtonSelected();
+        PreviewEdit._LetterOfTransmittal.verifyPreviewButtonSelected();
         cy.contains(replaceEntersWithSpaces(testData.textToType)).should("exist");
         deleteReport(testData.reportCreationData.reportNumber);
     });

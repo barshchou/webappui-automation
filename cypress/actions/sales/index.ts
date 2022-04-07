@@ -4,7 +4,7 @@ import adjustCompsActions from "./adjustComps.actions";
 import valueConclusionActions from "./valueConclusion.actions";
 
 
-export const FindComps = findCompsActions;
-export const CreateCompMap = createCompMapActions;
-export const AdjustComps = adjustCompsActions;
-export const ValueConclusion = valueConclusionActions;
+export const _FindComps = findCompsActions;
+export const _CreateCompMap = createCompMapActions;
+export const _AdjustComps = adjustCompsActions;
+export const _ValueConclusion = valueConclusionActions;
