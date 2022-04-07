@@ -1,7 +1,7 @@
 import testData from "../../../../fixtures/not_full_reports/sales/value_conclusion/QA-4343&46.fixture";
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Sales from "../../../../actions/sales/sales.manager";
-import Final from "../../../../actions/final/final.manager";
+import {Final} from "../../../../actions";
 import {createReport, deleteReport} from "../../../../actions/base/baseTest.actions";
 
 describe("Save and Save & Continue buttons tests", () => {
@@ -22,7 +22,7 @@ describe("Save and Save & Continue buttons tests", () => {
 
     it("QA-4346 Save & Continue button test", () => {
         Sales.ValueConclusion.clickSaveContinueButton();
-        Final.FinalValuesReconciliation.closeSatisfactionSurvey()
+        Final._FinalValuesReconciliation.closeSatisfactionSurvey()
             .goBackWithSave();
         Sales.ValueConclusion.verifyMatchIncomeApproachDeductionsChecked()
             .verifySaleValueConclusion(testData.saleValueConclusion);

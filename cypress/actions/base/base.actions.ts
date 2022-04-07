@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/triple-slash-reference */
 /// <reference types="cypress-xpath" />
 /// <reference types="cypress-image-snapshot" />
 

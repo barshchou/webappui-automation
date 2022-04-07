@@ -1,0 +1,23 @@
+import capRateCompsActions from "./capRateComps.actions";
+import finalValuesReconciliationActions from "./finalValuesReconciliation.actions";
+import propertySaleConclusionActions from "./propertySaleConclusion.actions";
+import assumptionsConditionsActions from "./assumptionsConditions.actions";
+import swotAnalysisActions from "./swotAnalysis.actions";
+import highestBestUseActions from "./highestBestUse.actions";
+import unitInspectionActions from "./unitInspection.actions";
+import scopeActions from "./scope.actions";
+import sourceInformationActions from "./sourceInformation.actions";
+import capRateDiscussionActions from "./capRateDiscussion.actions";
+import insurableReplacementCostActions from "./insurableReplacementCost.actions";
+
+export const _CapRateComps = capRateCompsActions;
+export const _FinalValuesReconciliation = finalValuesReconciliationActions;
+export const _PropertySalesConclusion = propertySaleConclusionActions;
+export const _AssumptionsConditions = assumptionsConditionsActions;
+export const _SWOTAnalysis = swotAnalysisActions;
+export const _HighestBestUse = highestBestUseActions;
+export const _UnitInspection = unitInspectionActions;
+export const _Scope = scopeActions;
+export const _SourceInformation = sourceInformationActions;
+export const _CapRateDiscussion = capRateDiscussionActions;
+export const _InsurableReplacementCost = insurableReplacementCostActions;
