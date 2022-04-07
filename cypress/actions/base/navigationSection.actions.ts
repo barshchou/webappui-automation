@@ -2,13 +2,14 @@ import navigationSectionPage from "../../pages/base/navigationSection.page";
 import BaseActions from "./base.actions";
 
 class NavigationSectionActions extends BaseActions {
-    openReviewAndExport() {
+    openReviewAndExport(isWithSave = false) {
         let reportAlias = "docxReportAsync";
         cy.intercept({
             method: 'GET',
             url: '/api/docx-report-async/get-report-hierarchy*'
         }).as(reportAlias);
         cy.get('[id="review-and-export"]').click();
+        if (isWithSave) this.clickYesButton();
         cy.wait(`@${reportAlias}`);
         return this;
     }
