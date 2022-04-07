@@ -4,17 +4,36 @@ import {getUploadFixture} from "../../../utils/fixtures.utils";
 
 class FindCompsActions extends BaseActions {
 
-    addComparable(address: string): FindCompsActions {
-        this.clickCreateCompButton();
-        findCompsPage.searchCompAddressInput.type(address).type("{enter}");
-        findCompsPage.findCompField.click();
-        findCompsPage.submitButton.click();
+    addExistingComparable(address: string): FindCompsActions {
+        this.clickCreateCompButton()
+            .enterCompAddressToSearch(address)
+            .clickSearchCompButton();
         findCompsPage.getSelectCompButtonByAddress(address).click();
         return this;
     }
 
     clickCreateCompButton(): FindCompsActions {
         findCompsPage.createCompButton.click();
+        return this;
+    }
+
+    enterCompAddressToSearch(address: string): FindCompsActions {
+        findCompsPage.searchCompAddressInput.type(address).type("{enter}");
+        findCompsPage.findCompField.click();
+        return this;
+    }
+
+    clickSearchCompButton(): FindCompsActions {
+        findCompsPage.submitButton.click();
+        return this;
+    }
+
+    openAddNewComparableFormSearchResult(address: string, searchResultIndex = 0): FindCompsActions {
+        this.clickCreateCompButton()
+            .enterCompAddressToSearch(address)
+            .clickSearchCompButton();
+        findCompsPage.createCompSearchResults.eq(searchResultIndex).click();
+        findCompsPage.createNewCompButton.click();
         return this;
     }
 

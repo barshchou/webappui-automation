@@ -363,7 +363,7 @@ describe("Full bowery way, multifamily as complete report", () => {
             .verifyToeCompMaxPerBasis(testData.expenseForecast.total.basis, testData.comparableExpenses.comparables)
             .verifyOwnersProFormaValue()
             .verifyTotalForecast();
-        NavigationSection.navigateToProForma()
+        NavigationSection.navigateToProForma();
         Income.ProForma.verifyPotentialResIncomeRow(testData.proForma.potentialResIncomeRow)
             .verifyPotentialGrossIncomeRow(testData.proForma.potentialGrossIncomeRow)
             .verifyResVCLossRow(testData.proForma.vcLossRow)
@@ -420,7 +420,7 @@ describe("Full bowery way, multifamily as complete report", () => {
             .verifyAsIsMarketTablePart(testData.capRateConclusion.asIsMarketPart)
             .clickSaveContinueButton();
         testData.findComps.comparables.forEach((comp) => {
-            Sales.FindComps.addComparable(comp.address)
+            Sales.FindComps.addExistingComparable(comp.address)
                 .verifyAddedCompAddress(comp.address);
         });
         Sales.FindComps.clickSaveContinueButton();

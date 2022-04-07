@@ -49,6 +49,12 @@ class FindCompsPage extends BasePage {
     get searchButton() {return cy.xpath("//button[.='Search']");}
 
     get importCompsSelectButtons() {return cy.xpath("//*[.='Selected for report']//following::button[.='Select']");}
+
+    get createCompSearchResults() {return cy.get("[data-qa=search-result-form] tbody tr");}
+
+    get createNewCompButton() {return cy.xpath("//button[.='Create New']");}
+
+    get createCompNumberResidentialUnits() {return cy.xpath("//*[.='# Residential Units*']//child::input");}
 }
 
 export default new FindCompsPage();
