@@ -46,4 +46,19 @@ conditionalDescribe("Group of tests for numeric inputs at create comp modal", ()
         Sales._FindComps.Page.newCompContinueButton.should("be.disabled");
         deleteReport(testData.reportCreationData.reportNumber);
     });
+
+    it("QA-4144: Verify the Commercial Area* field", () => {
+        Sales._FindComps.Page.commercialAreaNewComp.should("not.exist");
+        Sales._FindComps.selectDropdownOptionNewComp(Sales._FindComps.Page.comparableTypeDropdown, testData.comparableType)
+            .enterNumericInputNewComp(Sales._FindComps.Page.commercialAreaNewComp, testData.spec4144.regularNumber)
+            .enterNumericInputNewComp(Sales._FindComps.Page.commercialAreaNewComp, testData.spec4144.regularNumOverThousand)
+            .enterNumericInputNewComp(Sales._FindComps.Page.commercialAreaNewComp, testData.spec4144.decimalNum)
+            .enterNumericInputNewComp(Sales._FindComps.Page.commercialAreaNewComp, testData.spec4144.nonNumberValue)
+            .enterNumericInputNewComp(Sales._FindComps.Page.commercialAreaNewComp, testData.spec4144.longValue)
+            .clearNumericInputNewComp(Sales._FindComps.Page.commercialAreaNewComp)
+            .selectDropdownOptionNewComp(Sales._FindComps.Page.conditionDropdown, testData.condition)
+            .Page.errorMessageNewComp.should("exist");
+        Sales._FindComps.Page.newCompContinueButton.should("be.disabled");
+        deleteReport(testData.reportCreationData.reportNumber);
+    });
 });
