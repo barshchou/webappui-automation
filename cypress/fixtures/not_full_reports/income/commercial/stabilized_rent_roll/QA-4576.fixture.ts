@@ -1,6 +1,11 @@
 import ReportDataCreator from "../../../../data_creator/reportData.creator";
 
 export default {
+    snapshotNames:{
+        stabilizedRRPanel:"StabilizedRentRoll_Panel",
+        stabilizedRRPanel_severalUnits:"StabilizedRentRoll_Panel_Several_Units",
+        stabilizedRRPanel_severalUnits_compGroups:"stabilizedRRPanel_severalUnits_compGroups"
+    },
     reportCreationData: ReportDataCreator.getReportData("4576"),
     numberOfCommercialUnits: 2,
     listOfUnitsSF: [1000, 2000],
@@ -27,4 +32,7 @@ export default {
         otherAdjustment: -50,
         otherNewAdjustment: 0
     },
+    wrongFormatLeaseDate: "25/45/3000",
+    occupiedLease: "Occupied",
+    vacantLease: "Vacant",
 };
