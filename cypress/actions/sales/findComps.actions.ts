@@ -118,27 +118,27 @@ class FindCompsActions extends BaseActions {
         return this;
     }
 
-    selectConditionNewComp(title: string): FindCompsActions {
-        findCompsPage.conditionDropdown.should("have.length", 1).click();
-        findCompsPage.getConditionOption(title).click();
+    selectDropdownOptionNewComp(dropdownElement: Cypress.Chainable, title: string): FindCompsActions {
+        dropdownElement.click();
+        findCompsPage.getDropdownOption(title).click();
         return this;
     }
 
-    clearNumberResidentialUnitsNewComp(): FindCompsActions {
-        findCompsPage.createCompNumberResidentialUnits.clear();
+    clearNumericInputNewComp(inputElement: Cypress.Chainable): FindCompsActions {
+        inputElement.clear();
         return this;
     }
 
-    enterNumberResidentialUnitsNewComp(numberOfUnits: number | string): FindCompsActions {
-        this.clearNumberResidentialUnitsNewComp();
-        findCompsPage.createCompNumberResidentialUnits.type(`${numberOfUnits}`);
-        this.verifyNumberResidentialUnitsNewComp(numberOfUnits);
+    enterNumericInputNewComp(inputElement: Cypress.Chainable, numberOfUnits: number | string): FindCompsActions {
+        this.clearNumericInputNewComp(inputElement);
+        inputElement.type(`${numberOfUnits}`);
+        this.verifyNumericInputNewComp(inputElement, numberOfUnits);
         return this;
     }
 
-    verifyNumberResidentialUnitsNewComp(numberOfUnits: number | string): FindCompsActions {
+    verifyNumericInputNewComp(inputElement: Cypress.Chainable, numberOfUnits: number | string): FindCompsActions {
         const valueToBe = isNumber(numberOfUnits) ? numberWithCommas(`${numberOfUnits}`.replace("-", "")) : "";
-        findCompsPage.createCompNumberResidentialUnits.should("have.value", valueToBe);
+        inputElement.should("have.value", valueToBe);
         return this;
     }
 }
