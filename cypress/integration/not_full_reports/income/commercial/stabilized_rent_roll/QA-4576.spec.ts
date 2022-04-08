@@ -29,9 +29,9 @@ describe("Verify the display of the Stabilized Rent Roll page", () => {
         );
 
 
-        cy.stepInfo(`
-        2. Verify the display of the Stabilized Rent Roll page 
+        cy.stepInfo(`2. Verify the display of the Stabilized Rent Roll page 
         if there are > 0 Commercial Units without Comp Groups.`);
+        
         Base._NavigationSection.navigateToPropertySummary();
         Property._Summary.enterNumberOfCommercialUnits(testData.numberOfCommercialUnits);
         Base._NavigationSection.navigateToCommercialUnits();
@@ -62,14 +62,26 @@ describe("Verify the display of the Stabilized Rent Roll page", () => {
             {capture:"fullPage", scale: true}
         );
         
-        cy.stepInfo(`
-        3. Verify the display of the Stabilized Rent Roll page 
+        cy.stepInfo(`3. Verify the display of the Stabilized Rent Roll page 
         if there are > 0 Commercial Units with Comp Groups.`);
-        cy.pause();
-        /**
-         * Automate behavior desribed by Alesia
-         */
 
+        cy.log("next section includes drag-and-drop interaction, so we can't go further for now.");
+        /**
+         * Automate behavior desribed by Alesia.
+         * ernst: next section includes drag-and-drop interaction, so we can't go further for now.
+         */
+        // _NavigationSection.openCompGroupsInCommercial();
+        // testData.compGroupName.forEach(groupName => {
+        //     Income._CommercialManager.CompGroups.Actions.addCompGroup(groupName);
+        // });
+        // _NavigationSection.clickCommercialRentComps().clickYesButton().verifyProgressBarNotExist();
+        // [testData.comparableFirst.address, testData.comparableSecond.address].forEach(address => {
+        //     Income._CommercialManager.RentComps.addCompFromMapByAddress(address);
+        // });
+        // Income._CommercialManager.RentComps.clickSaveButton().verifyProgressBarNotExist();
+        // _NavigationSection.clickCommercialStabRentRollButton().verifyProgressBarNotExist();
+        // cy.pause();
+        
         deleteReport(testData.reportCreationData.reportNumber);
     });
 });

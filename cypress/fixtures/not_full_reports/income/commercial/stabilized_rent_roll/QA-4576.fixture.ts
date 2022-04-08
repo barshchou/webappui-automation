@@ -35,4 +35,5 @@ export default {
     wrongFormatLeaseDate: "25/45/3000",
     occupiedLease: "Occupied",
     vacantLease: "Vacant",
+    compGroupName: ["Group1", "Group2"]
 };
