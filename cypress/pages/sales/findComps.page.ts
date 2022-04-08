@@ -69,6 +69,8 @@ class FindCompsPage extends BasePage {
     get createCompNumberCommercialUnits() {return cy.xpath("//*[text()='# Commercial Units*']//following::input[1]");}
 
     get commercialAreaNewComp() {return cy.xpath("//*[text()='Commercial Area*']//following::input[1]");}
+
+    get netRentableAreaNewComp() {return cy.xpath("//*[.='Net Rentable Area']//child::input");}
 }
 
 export default new FindCompsPage();
