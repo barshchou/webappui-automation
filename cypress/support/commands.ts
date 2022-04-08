@@ -8,7 +8,8 @@ addMatchImageSnapshotCommand({
     failureThreshold: 0.05, // threshold for entire image
     failureThresholdType: 'percent', // percent of image or number of pixels
     scale: false,
-    comparisonMethod:"ssim"
+    comparisonMethod:"ssim",
+    allowSizeMismatch: true
 });
 
 //#endregion
@@ -60,11 +61,11 @@ Cypress.Commands.add("stepInfo", (message:string) => {
     Cypress.log({
         displayName:"StepInfo",
         message:`${message}`,
-        consoleProps: () =>{
+        consoleProps: () => {
             return {
                 Step: `${message}`
-            }
+            };
         }
-    })
+    });
 });
 //#endregion
