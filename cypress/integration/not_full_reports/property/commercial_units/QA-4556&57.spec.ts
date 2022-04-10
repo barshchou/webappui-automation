@@ -18,19 +18,21 @@ describe("Verify the functionality of the Frontage radio button", () => {
         cy.stepInfo(`1. Proceed to the Property > Commercial Units page.`);
         _NavigationSection.navigateToCommercialUnits().verifyProgressBarNotExist();
 
-        
-        cy.stepInfo(`2. Verify the image can be uploaded by drag and drop.`);
-        cy.contains('Interior Images').next().find('input[type="file"]')
-        .attachFile("/full_reports/full_bowery_multifamily_as_complete/exterior_entrance_photos/exterior_entrance_1.png",
-        {subjectType:"drag-n-drop"}
-        );
-        Property._CommercialUnits.Actions.verifyProgressBarNotExist();
-        cy.contains('Interior Images').next().find('input[type="file"]')
-        .attachFile("/full_reports/full_bowery_multifamily_as_complete/exterior_entrance_photos/exterior_entrance_2.png",
-        {subjectType:"input"}
-        );
-        Property._CommercialUnits.Actions.verifyProgressBarNotExist();
-        cy.pause();
+        // let images = ["Interior Images", "Exterior Images"];
+        ["Interior Images", "Exterior Images"].forEach(images => {
+            cy.stepInfo(`2. Verify the image can be uploaded by drag and drop in ${images}.`);
+            cy.contains(images).next().find('input[type="file"]')
+            .attachFile("/full_reports/full_bowery_multifamily_as_complete/exterior_entrance_photos/exterior_entrance_1.png",
+            {subjectType:"drag-n-drop"}
+            );
+            Property._CommercialUnits.Actions.verifyProgressBarNotExist();
+            cy.contains(images).next().find('input[type="file"]')
+            .attachFile("/full_reports/full_bowery_multifamily_as_complete/exterior_entrance_photos/exterior_entrance_2.png",
+            {subjectType:"input"}
+            );
+            Property._CommercialUnits.Actions.verifyProgressBarNotExist();
+            cy.pause();
+        });
         deleteReport(testData.reportCreationData.reportNumber);
     });
 });
