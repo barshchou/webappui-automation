@@ -1,3 +1,5 @@
+/// <reference types="cypress-grep" />
+
 import testData from "../../../../../fixtures/not_full_reports/income/commercial/stabilized_rent_roll/QA-4576.fixture";
 import {createReport, deleteReport} from "../../../../../actions/base/baseTest.actions";
 import { Base, Property, Income } from "../../../../../actions";
@@ -11,7 +13,7 @@ describe("Verify the display of the Stabilized Rent Roll page", () => {
         createReport(testData.reportCreationData);
     });
 
-    it("Test body", () => {  
+    it("Test body", { tags: '@snapshot_tests' },  () => {  
         cy.stepInfo(`
         1. Verify the display of the Stabilized Rent Roll page if there are > 0 Commercial Units with Comp Groups.
         `);
