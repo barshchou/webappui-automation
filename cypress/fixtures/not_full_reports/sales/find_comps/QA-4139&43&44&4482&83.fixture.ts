@@ -37,5 +37,12 @@ export default {
         decimalNum: -38.54,
         nonNumberValue: "Some not number",
         longValue: 55555555555555528
+    },
+    spec4483: {
+        regularNumber: 999,
+        regularNumOverThousand: 9999,
+        decimalNum: -1258.54,
+        nonNumberValue: "Some not number",
+        longValue: 55555555555555528
     }
 };
