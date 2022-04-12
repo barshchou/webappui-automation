@@ -59,7 +59,7 @@ class NavigationSection extends BasePage {
 
     get reportButton() {return cy.get("#report svg");}
 
-    get previewEditButton() {return cy.get("#preview-and-edit > svg");}
+    get previewEditButton() {return cy.get("#preview-and-edit svg");}
 
     get letterOfTransmittal() {return cy.get("#letter-of-transmittal");}
 
