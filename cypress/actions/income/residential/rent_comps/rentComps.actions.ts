@@ -36,7 +36,7 @@ class RentCompsActions extends BaseActions {
 
     verifyUnitSwitchBackground(isChosen = true) {
         if (isChosen) {
-            rentCompsPage.unitSwitchButton.should("have.css", "background-color", "rgb(42, 67, 112)");
+            rentCompsPage.unitSwitchButton.should("have.css", "background-color", "rgb(66, 96, 211)");
         } else {
             rentCompsPage.unitSwitchButton.should("have.css", "background-color", "rgb(255, 255, 255)");
         }
@@ -45,7 +45,7 @@ class RentCompsActions extends BaseActions {
 
     verifyBuildingSwitchBackground(isChosen = true) {
         if (isChosen) {
-            rentCompsPage.buildingSwitchButton.should("have.css", "background-color", "rgb(42, 67, 112)");
+            rentCompsPage.buildingSwitchButton.should("have.css", "background-color", "rgb(66, 96, 211)");
         } else {
             rentCompsPage.buildingSwitchButton.should("have.css", "background-color", "rgb(255, 255, 255)");
         }
@@ -65,13 +65,13 @@ class RentCompsActions extends BaseActions {
     }
 
     verifyBuildingSelected() {
-        rentCompsPage.buildingSwitchButton.should("have.attr", "data-qa-isselected", "true");
+        rentCompsPage.buildingSwitchButton.should("have.attr", "aria-pressed", "true");
         this.verifyBuildingSwitchBackground();
         return this;
     }
 
     verifyUnitSelected() {
-        rentCompsPage.unitSwitchButton.should("have.attr", "data-qa-isselected", "true");
+        rentCompsPage.unitSwitchButton.should("have.attr", "aria-pressed", "true");
         this.verifyUnitSwitchBackground();
         return this;
     }

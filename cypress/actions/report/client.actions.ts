@@ -4,6 +4,7 @@ import {replaceEntersWithLineBreak} from "../../../utils/string.utils";
 
 class ClientActions extends BaseActions{
     get Page() { return clientPage; }
+
     verifyInputChangesToBeUnsaved(clientFileNumber: string): ClientActions {
         clientPage.clientFileNumberField.should("have.value",clientFileNumber);
         return this;
@@ -35,8 +36,9 @@ class ClientActions extends BaseActions{
 
     verifyGuidelineTooltip() {
         clientPage.guidelinesTooltip.should("exist");
+        clientPage.toCheckTooltipExist.should("not.exist");
         clientPage.guidelinesTooltip.trigger("mouseover");
-        clientPage.guidelinesTooltip.should("not.exist");
+        clientPage.toCheckTooltipExist.should("exist");
         return this;
     }
 

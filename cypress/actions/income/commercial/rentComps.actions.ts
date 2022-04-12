@@ -55,9 +55,15 @@ class CommercialRentCompsActions extends BaseActions {
      * @returns {CommercialRentCompsActions}
      */
     selectSortByOption(option) {
-        rentCompsPage.sortByDropdown.click();
-        rentCompsPage.getDropdownOptionByValue(option).should("be.visible").click();
-        rentCompsPage.sortByDropdown.should("have.text", option);
+        if(option == "Newest"){
+            rentCompsPage.sortByDropdown.should("contain.text", option);
+        }
+        else{
+            rentCompsPage.sortByDropdown.click();
+            rentCompsPage.getDropdownOptionByValue(option).should("be.visible").click();
+            rentCompsPage.sortByDropdown.should("contain.text", option);
+        }
+        
         return this;
     }
 
