@@ -335,7 +335,7 @@ class CapRateConclusionActions extends BaseActions {
      * @returns {CapRateConclusionActions}
      */
     verifyPopUpWithTitleExists(title) {
-        cy.get(`[title='${title}']`).should("exist");
+        cy.get(`[aria-label='${title}']`).should("exist");
         return this;
     }
 
