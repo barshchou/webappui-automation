@@ -1,9 +1,27 @@
-import BaseActions from "../base/base.actions";
 import keyInfoPage from "../../pages/report/keyInfo.page";
 import {isDateHasCorrectFormat} from "../../../utils/date.utils";
 import {getUploadFixture} from "../../../utils/fixtures.utils";
+import BaseActionsExt from "../base/base.actions.ext";
 
-class KeyInfoActions extends BaseActions {
+class KeyInfoActions extends BaseActionsExt<typeof keyInfoPage> {
+    constructor(){
+        super(keyInfoPage);
+    }
+
+    /**
+     * ernst: REFACTOR: add form data (index of save and edit btn) as param.
+     */
+    enterPropertyRightsAppraisedComment(textToType: string = null) {
+        cy.intercept("PATCH","/report/*").as("aliasPATCHReport");
+        keyInfoPage.formEditBtn(0).click();
+        keyInfoPage.textBoxPropertyRightsAppraised.invoke("text")
+        .then(text => {
+            keyInfoPage.textBoxPropertyRightsAppraised.click().clear().type(textToType ?? text);
+        });
+        keyInfoPage.formSaveBtn(0).click();
+        return keyInfoPage.textBoxPropertyRightsAppraised.invoke("text");
+    }
+
     /**
      * @param {string} purposeValue
      * @returns {KeyInfoActions}

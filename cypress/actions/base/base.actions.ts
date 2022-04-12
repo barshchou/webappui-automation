@@ -14,6 +14,9 @@ export default class BaseActions {
 
     clickYesButton() {
         cy.get("*[name='form-confirm-submit-btn']").click();
+        cy.wait(`@aliasPATCHReport`).should(({response}) => {
+            expect(response.statusCode).to.equal(200);
+        });
         return this;
     }
 

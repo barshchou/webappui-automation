@@ -1,9 +1,11 @@
+import { getReportId, interceptReportId, setReportId } from "../../../utils/intercept.utils";
 import homepagePage from "../../pages/base/homepage.page";
 import BaseActions from "./base.actions";
 
 class HomepageActions extends BaseActions {
 
     createReport(data: BoweryAutomation.ReportCreationData): this {
+        interceptReportId();
         if(data?.state) {
             this.clickNewReportButton()
             .clickAdvancedSearchButton()
@@ -18,7 +20,6 @@ class HomepageActions extends BaseActions {
             .checkIncomeType(data.incomeValue)
             .checkConclusionType(data.conclusionValue)
             .clickCreateReportButton();
-            return this;
         }
         else {
             this.clickNewReportButton()
@@ -31,8 +32,9 @@ class HomepageActions extends BaseActions {
             .checkIncomeType(data.incomeValue)
             .checkConclusionType(data.conclusionValue)
             .clickCreateReportButton();
-            return this;
         }
+        setReportId();
+        return this;
     }
 
     clickNewReportButton(): this {
@@ -102,6 +104,7 @@ class HomepageActions extends BaseActions {
     clickCreateReportButton() {
         homepagePage.createReportButton.should("not.be.disabled").click();
         homepagePage.keyInfoBlock.should("be.visible");
+
         return this;
     }
 
