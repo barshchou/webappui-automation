@@ -4,7 +4,7 @@ import letterOfTransmittalPage from "../../pages/preview_edit/letterOfTransmitta
 class LetterOfTransmittalActions extends BaseActions {
 
     verifyPreviewButtonSelected() {
-        letterOfTransmittalPage.previewButton.should("have.attr", "data-qa-isselected", "true");
+        letterOfTransmittalPage.previewButton.should("have.attr", "aria-pressed", "true");
         return this;
     }
 }

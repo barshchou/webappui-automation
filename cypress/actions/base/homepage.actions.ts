@@ -1,16 +1,17 @@
+import { getReportId, interceptReportId, setReportId } from "../../../utils/intercept.utils";
 import homepagePage from "../../pages/base/homepage.page";
 import BaseActions from "./base.actions";
 
 class HomepageActions extends BaseActions {
 
     createReport(data: BoweryAutomation.ReportCreationData): this {
+        interceptReportId();
         if(data?.state) {
             this.clickNewReportButton()
             .clickAdvancedSearchButton()
             .clickSelectStateButton()
             .selectStateByName(data.state)
             .enterAddressToSearch(data.address)
-            .clickFindPropHeader()
             .enterPropertyIdentifierType(data.identifierType)
             .enterPropertyIdentifier(data.identifier)
             .clickSubmitButton()
@@ -19,12 +20,10 @@ class HomepageActions extends BaseActions {
             .checkIncomeType(data.incomeValue)
             .checkConclusionType(data.conclusionValue)
             .clickCreateReportButton();
-            return this;
         }
         else {
             this.clickNewReportButton()
             .enterAddressToSearch(data.address)
-            .clickFindPropHeader()
             .clickSubmitButton()
             .clickToSearchResultRow()
             .clickSubmitButton()
@@ -33,8 +32,9 @@ class HomepageActions extends BaseActions {
             .checkIncomeType(data.incomeValue)
             .checkConclusionType(data.conclusionValue)
             .clickCreateReportButton();
-            return this;
         }
+        setReportId();
+        return this;
     }
 
     clickNewReportButton(): this {
@@ -47,17 +47,12 @@ class HomepageActions extends BaseActions {
         return this;
     }
 
-    clickFindPropHeader(): this {
-        homepagePage.findPropertyHeader.click();
-        return this;
-    }
-
     /**
      *
      * @returns {HomepageActions}
      */
     clickSubmitButton() {
-        homepagePage.submitButton.should("not.be.disabled").click();
+        homepagePage.submitButton.should("not.be.disabled").click({ force: true});
         return this;
     }
 
@@ -109,6 +104,7 @@ class HomepageActions extends BaseActions {
     clickCreateReportButton() {
         homepagePage.createReportButton.should("not.be.disabled").click();
         homepagePage.keyInfoBlock.should("be.visible");
+
         return this;
     }
 

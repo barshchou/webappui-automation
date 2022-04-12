@@ -125,3 +125,6 @@ cypress/reports/
 cypress/videos/
 cypress/screenshots/
 cypress/downloads
+
+# act (tool for local GH Actions)
+.act/.secrets

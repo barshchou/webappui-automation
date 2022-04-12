@@ -1,0 +1,22 @@
+We can run and "debug" Gh Actions on localhost 
+using next library: https://github.com/nektos/act .
+
+How to install (you will need to install Golang on your machine):
+    1. Golang: https://go.dev/doc/install
+    2. Install 'act' via golang: https://github.com/nektos/act#go-linuxwindowsmacosany-other-platform-supported-by-go
+
+How to use:
+    1. Verify that you installed act globally: run "act --help" in terminal
+    2. Pull the image, which use for our tests 
+    (check "container" section in currents.yml or full_reports.yml in workflows).
+    3. Create '.secrets' file '.act' dir. Purpose of this file is to emulate secrets we use in GH Actions.
+    Structure of file is the same as '.env'. Copy USERNAME and PASSWORD that you have in 'cypress.env.json'.
+    More about this: https://github.com/nektos/act#secrets
+    4. Use 'debug.json' to emulate events from GH Actions. 
+    You can set there anything that should be set from UI, or triggered by 'github.event'
+    More about this: https://github.com/nektos/act#events
+    5. !!! USE ONLY JOB WHICH IS DESCRIBED IN 'debug.yml'. You wouldn't like to have 10 containers as we use in currents / full_reports yml.
+    So please, use 'debug.yml' for all debug 
+    6. Run 'act' via 'npm run act:debug'. 
+    You can of course run this as it is by calling 'act' with the rest of the args,
+    but npm script is a bit convinient. Change args in npm script if you wish so.

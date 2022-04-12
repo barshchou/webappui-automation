@@ -27,13 +27,13 @@ class FindCompsPage extends BasePage {
     }
 
     getRemoveSelectedCompButtonByAddress(address) {
-        return cy.xpath(`//*[contains(text(), '${address}')]//parent::td//following-sibling::td[.='Details']` +
+        return cy.xpath(`//*[contains(text(), '${address}')]//parent::td//following-sibling::td` +
             "//descendant::button[@aria-label='Remove']");
     }
 
     getRemoveDeletedCompButtonByAddress(address) {
         return cy.xpath(`//*[contains(text(), '${address}')]//parent::td//following-sibling::td` +
-            "//descendant::*[@title='Add']//following::button[@aria-label='Remove'][1]");
+            "//descendant::button[@aria-label='Add']//following::button[@aria-label='Remove'][1]");
     }
 
     getRemoveCompFromMapButtonByAddress(address) {

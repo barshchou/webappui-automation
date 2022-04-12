@@ -322,7 +322,7 @@ class ValueConclusionActions extends BaseActions {
      * @returns {ValueConclusionActions}
      */
     verifyPopUpWithTitleExists(title) {
-        cy.get(`[title='${title}']`).should("exist");
+        cy.get(`[aria-label='${title}']`).should("exist");
         return this;
     }
 
