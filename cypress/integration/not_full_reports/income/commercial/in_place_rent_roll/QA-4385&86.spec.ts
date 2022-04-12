@@ -5,7 +5,7 @@ import NavigationSection from "../../../../../actions/base/navigationSection.act
 import {createReport, deleteReport} from "../../../../../actions/base/baseTest.actions";
 
 describe("Verify the Dates columns in the grid", () => {
-    const cellDatesNames = ["Start", "Expiry"];
+    const cellDatesNames: BoweryReports.LeaseDateName[] = ["Start", "Expiry"];
 
     beforeEach("Login, create report", () => {
         createReport(testData.reportCreationData);

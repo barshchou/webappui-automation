@@ -12,7 +12,6 @@ class KeyInfoActions extends BaseActionsExt<typeof keyInfoPage> {
      * ernst: REFACTOR: add form data (index of save and edit btn) as param.
      */
     enterPropertyRightsAppraisedComment(textToType: string = null) {
-        cy.intercept("PATCH","/report/*").as("aliasPATCHReport");
         keyInfoPage.formEditBtn(0).click();
         keyInfoPage.textBoxPropertyRightsAppraised.invoke("text")
         .then(text => {
