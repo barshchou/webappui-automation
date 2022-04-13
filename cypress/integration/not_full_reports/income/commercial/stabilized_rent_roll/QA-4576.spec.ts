@@ -61,7 +61,6 @@ describe("Verify the display of the Stabilized Rent Roll page", () => {
         Income._CommercialManager.StabilizedRentRoll.Actions.matchElementSnapshot(
             stabilizedRentRollPage.stabelizedRRPanel,
             testData.snapshotNames.stabilizedRRPanel_severalUnits,
-            {capture:"runner"}
         );
         
         cy.stepInfo(`3. Verify the display of the Stabilized Rent Roll page 
