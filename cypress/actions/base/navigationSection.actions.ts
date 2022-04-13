@@ -2,6 +2,10 @@ import navigationSectionPage from "../../pages/base/navigationSection.page";
 import BaseActions from "./base.actions";
 
 class NavigationSectionActions extends BaseActions {
+    get Page() {
+        return navigationSectionPage;
+    }
+
     openReviewAndExport(isWithSave = false) {
         let reportAlias = "docxReportAsync";
         cy.intercept({
@@ -13,6 +17,7 @@ class NavigationSectionActions extends BaseActions {
         cy.wait(`@${reportAlias}`);
         return this;
     }
+    
     verifyUnsavedChangesModal() {
         cy.get('[data-qa="form-confirm-dialog"]').should("be.visible");
         return this;
