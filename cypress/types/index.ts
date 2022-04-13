@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-namespace */
 /**
  * ernst:
  * maybe we should separate namespaces for specific domain?
@@ -11,6 +12,7 @@ namespace BoweryReports {
         incomeValue?: string,
         conclusionValue?: BoweryReports.ConclusionValue
     }
+    export type LeaseDateName = "Start" | "Expiry"
     export type LeaseStatus = "Occupied" | "Vacant"
     export type UnitSF = "unit" | "sf"
     export type PerUnitPerSF = "Per Unit" | "Per SF"

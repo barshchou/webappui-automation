@@ -68,7 +68,7 @@ class CommercialRentRollActions extends BaseActions {
         return this;
     }
 
-    chooseLeaseStatusByRowNumber(status: BoweryReports.LeaseStatus, rowNumber: number = 0): CommercialRentRollActions {
+    chooseLeaseStatusByRowNumber(status: BoweryReports.LeaseStatus, rowNumber = 0): CommercialRentRollActions {
         rentRollPage.pageHeader.should("be.visible");
         rentRollPage.leaseStatusArrows.eq(rowNumber).should("be.visible").as("arrow");
         cy.get("@arrow").click({force:true});
@@ -201,13 +201,13 @@ class CommercialRentRollActions extends BaseActions {
      * @param {number} rowNumber
      * @returns {CommercialRentRollActions}
      */
-    enterLeaseDateByRowNumber(cellName, date, rowNumber = 0) {
+    enterLeaseDateByRowNumber(cellName: BoweryReports.LeaseDateName , date, rowNumber = 0) {
         rentRollPage.getLeaseDateCellsByName(cellName).eq(rowNumber).dblclick({ force: true });
         rentRollPage.textareaToInput.clear().type(date).type("{enter}");
         return this;
     }
 
-    verifyLeaseDateByRowNumber(cellName: string, leaseStatus: string, dateToBe?: string, rowNumber: number = 0): CommercialRentRollActions {
+    verifyLeaseDateByRowNumber(cellName: BoweryReports.LeaseDateName, leaseStatus: string, dateToBe?: string, rowNumber = 0): CommercialRentRollActions {
         dateToBe = dateToBe ?? "";
         if (!isDateHasCorrectFormat(dateToBe, "/")) {
             dateToBe = "";

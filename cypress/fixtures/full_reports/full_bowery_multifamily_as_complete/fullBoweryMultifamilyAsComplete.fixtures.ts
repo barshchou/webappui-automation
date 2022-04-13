@@ -41,7 +41,7 @@ const keyInfoEngagementFixture = () => {
 
 const clientFixture = () => {
     return {
-        clientName: "Gerardo Jorge"
+        clientName: "Gerardo  Jorge"
     };
 };
 

@@ -285,7 +285,7 @@ class CapRateConclusionActions extends BaseActions {
      * @returns {CapRateConclusionActions}
      */
     clickAsStabilizedRentLossSwitch() {
-        capRateConclusionPage.asStabilizedRentLossSwitch.click().should("have.attr", "data-qa-isselected", "true");
+        capRateConclusionPage.asStabilizedRentLossSwitch.click().should("have.attr", "aria-pressed", "true");
         return this;
     }
 
@@ -335,7 +335,7 @@ class CapRateConclusionActions extends BaseActions {
      * @returns {CapRateConclusionActions}
      */
     verifyPopUpWithTitleExists(title) {
-        cy.get(`[title='${title}']`).should("exist");
+        cy.get(`[aria-label='${title}']`).should("exist");
         return this;
     }
 
