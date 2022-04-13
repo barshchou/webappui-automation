@@ -18,20 +18,33 @@ describe("Verify the functionality of the Frontage radio button", () => {
         cy.stepInfo(`1. Proceed to the Property > Commercial Units page.`);
         _NavigationSection.navigateToCommercialUnits().verifyProgressBarNotExist();
 
-        // let images = ["Interior Images", "Exterior Images"];
-        ["Interior Images", "Exterior Images"].forEach(images => {
-            cy.stepInfo(`2. Verify the image can be uploaded by drag and drop in ${images}.`);
-            cy.contains(images).next().find('input[type="file"]')
-            .attachFile("/full_reports/full_bowery_multifamily_as_complete/exterior_entrance_photos/exterior_entrance_1.png",
-            {subjectType:"drag-n-drop"}
-            );
-            Property._CommercialUnits.Actions.verifyProgressBarNotExist();
-            cy.contains(images).next().find('input[type="file"]')
-            .attachFile("/full_reports/full_bowery_multifamily_as_complete/exterior_entrance_photos/exterior_entrance_2.png",
-            {subjectType:"input"}
-            );
-            Property._CommercialUnits.Actions.verifyProgressBarNotExist();
-            cy.pause();
+        cy.stepInfo(`
+            # Verify the image can be uploaded by drag and drop.
+            # Verify the image can be uploaded by clicking on the Exterior Images and selecting it.
+            # Verify that several images can be uploaded to the Exterior Images.
+            # Verify the uploaded image can be rotated.
+        `);
+
+        ["Interior Images", "Exterior Images"].forEach((images,index) => {
+            cy.stepInfo(`# Verify that several images can be uploaded to the ${images}.`);
+            ["drag-n-drop","input"].forEach(inputMethod => {
+                cy.stepInfo(`2. Verify the image can be uploaded by ${inputMethod} in ${images}.`);
+                cy.contains(images).next().find('input[type="file"]')
+                .attachFile(
+                "/full_reports/full_bowery_multifamily_as_complete/exterior_entrance_photos/exterior_entrance_1.png",
+                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                // @ts-ignore
+                {subjectType:inputMethod});
+                Property._CommercialUnits.Actions.verifyProgressBarNotExist();
+
+                cy.stepInfo(`# Verify the uploaded image can be rotated.`);
+                cy.get('[data-icon="retweet"]').last().click({force:true});
+                cy.get('h6 + div > [role="img"]').last().invoke("attr","style").then(style => {
+                    expect(style).includes("w_256,a_90");
+                });
+            });
+            cy.get('[data-icon="trash-alt"]').last().click({force:true});
+            cy.get('h6 + div > [role="img"]').should("have.length",index+1);
         });
         deleteReport(testData.reportCreationData.reportNumber);
     });
