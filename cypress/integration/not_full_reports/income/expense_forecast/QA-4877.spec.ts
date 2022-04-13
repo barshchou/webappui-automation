@@ -39,7 +39,8 @@ describe("Comparable Min, Max, Avg values for Electricity Per SF are correctly c
             5.2 correctly displayed on a slidebar
         `);
         Income.ExpenseForecast.Actions.matchElementSnapshot(
-            Income.ExpenseForecast.Page.ElectricityCard,testData.electricityCardSnapshotName);
+            Income.ExpenseForecast.Page.ElectricityCard,testData.electricityCardSnapshotName,
+        );
 
         deleteReport(testData.reportCreationData.reportNumber);
     });
