@@ -24,27 +24,24 @@ describe("Verify the functionality of the Frontage radio button", () => {
             # Verify that several images can be uploaded to the Exterior Images.
             # Verify the uploaded image can be rotated.
         `);
-
-        ["Interior Images", "Exterior Images"].forEach((images,index) => {
+        testData.imagesType.forEach((images,index) => {
             cy.stepInfo(`# Verify that several images can be uploaded to the ${images}.`);
-            ["drag-n-drop","input"].forEach(inputMethod => {
+            testData.inputType.forEach(inputMethod => {
+                Property._CommercialUnits.Actions
+                .uploadImages(<any>images,testData.imageFile,<any>inputMethod);
+
                 cy.stepInfo(`2. Verify the image can be uploaded by ${inputMethod} in ${images}.`);
-                cy.contains(images).next().find('input[type="file"]')
-                .attachFile(
-                "/full_reports/full_bowery_multifamily_as_complete/exterior_entrance_photos/exterior_entrance_1.png",
-                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                // @ts-ignore
-                {subjectType:inputMethod});
-                Property._CommercialUnits.Actions.verifyProgressBarNotExist();
+                Property._CommercialUnits
+                .Actions.verifyProgressBarNotExist();
 
                 cy.stepInfo(`# Verify the uploaded image can be rotated.`);
-                cy.get('[data-icon="retweet"]').last().click({force:true});
-                cy.get('h6 + div > [role="img"]').last().invoke("attr","style").then(style => {
-                    expect(style).includes("w_256,a_90");
-                });
+                Property._CommercialUnits
+                .Actions.rotateImage().verifyImageHasRotated();
             });
-            cy.get('[data-icon="trash-alt"]').last().click({force:true});
-            cy.get('h6 + div > [role="img"]').should("have.length",index+1);
+            Property._CommercialUnits
+            .Page.iconDeleteImage.last().click({force:true});
+            Property._CommercialUnits
+            .Page.commercialUnitImage.should("have.length",index+1);
         });
         deleteReport(testData.reportCreationData.reportNumber);
     });
