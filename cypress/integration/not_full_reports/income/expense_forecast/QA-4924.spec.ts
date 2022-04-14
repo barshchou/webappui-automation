@@ -14,7 +14,7 @@ describe("User selects Per SF radiobutton for Repairs & Maintenance on Expense F
             .enterNumberOfResUnits(testData.buildingDescription.numberOfUnits);
     });
 
-    it("Test body", () => {
+    it("Test body", { tags: '@snapshot_issue' },  () => {
 
         cy.stepInfo(`QA-4924 =>1. Go to Income > Expense History`);
         NavigationSection.navigateToExpenseHistory();
