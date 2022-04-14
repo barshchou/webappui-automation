@@ -74,6 +74,16 @@ class ExpenseHistoryActions extends BaseActions{
         return this;
     }
 
+    enterRepairsAndMaintenanceByColIndex(repairsAndMaintenance: string | number = 0, index: number = 0): ExpenseHistoryActions {
+        if (repairsAndMaintenance === "clear") {
+            expenseHistoryPage.repairsAndMaintenanceInputs.eq(index).clear();
+        } else {
+            expenseHistoryPage.repairsAndMaintenanceInputs.eq(index).clear().type(`${repairsAndMaintenance}`)
+                .should("have.value", `$${numberWithCommas(repairsAndMaintenance)}`);
+        }
+        return this;
+    }
+
     /**
      *
      * @param {number} index

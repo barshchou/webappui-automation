@@ -12,6 +12,7 @@ class ExpenseHistoryPage extends BasePage{
     get insuranceInputs() {return cy.get("[name$='expenses.insurance.total']");}
     get electricityInputs() {return cy.get("[name$='expenses.electricity.total']");}
     get fuelInputs() {return cy.get("[name$='expenses.fuel.total']");}
+    get repairsAndMaintenanceInputs() {return cy.get("[name$='expenses.repairsAndMaintenance.total']");}           //!!!!!
     get fuelCheckboxes() {return cy.get("[data-qa*='expenses.fuel.reported'] input");}
     get waterSewerCheckboxes() {return cy.get("[data-qa*='expenses.waterAndSewer.reported'] input");}
     get payrollBenefitsInputs() {return cy.get("[name$='expenses.payrollAndBenefits.total']");}

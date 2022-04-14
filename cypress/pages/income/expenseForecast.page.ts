@@ -12,6 +12,9 @@ class ExpenseForecastPage extends BasePage {
     }
     get FuelCard() {
         return cy.get("[data-qa=fuel-forecast-item]");
+    }    
+    get RepairsAndMaintenanceCard() {
+            return cy.get("[data-qa=repairsMaintenance-forecast-item]");    
     }
     getForecastItemBasisRadio(item) {return cy.get(`[name='${item}.basis']`);}
     getElementToCheckRadio(forecastItem: BoweryReports.ForecastItemBasis, radioValue: BoweryReports.UnitSF) {return cy.get(`[data-qa=checked] [name='${forecastItem}.basis'][value='${radioValue}']`);}
