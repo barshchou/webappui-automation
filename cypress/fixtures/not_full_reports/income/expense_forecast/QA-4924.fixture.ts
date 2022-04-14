@@ -1,14 +1,10 @@
 import ReportDataCreator from "../../../data_creator/reportData.creator";
-import {getCurrentMonthName, getYearFromDate} from "../../../../../utils/date.utils";
+import { getCurrentMonthName, getYearFromDate } from "../../../../../utils/date.utils";
 
 const _buildingDescription: BoweryReports.BuildingDescription = {
     grossArea: 200,
     numberOfUnits: 2
 };
-
-//const _forecasItem: BoweryReports.ForecastItem = {
-  //  name: "repairsAndMaintenance", basis: "sf", forecast: 27460
-//}
 
 const _actualRepairsAndMaintenanceItem: BoweryReports.ForecastItem = {
     name: "repairsAndMaintenance",
@@ -70,6 +66,6 @@ export default {
         repairsAndMaintenanceExpense: 15000
     }
 
-    // forecastItem: _forecasItem
+
 }
 

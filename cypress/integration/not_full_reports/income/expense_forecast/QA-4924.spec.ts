@@ -50,7 +50,7 @@ describe("User selects Per SF radiobutton for Repairs & Maintenance on Expense F
         Income.ExpenseForecast.Actions.verifyForecastItemBasis(testData.actualRepairsAndMaintenanceItem);
 
 
-        cy.stepInfo('QA-4936 =>5.1 Check historical expenses values for Repairs & Maintenance card. They should be calculated for each expense type as: [Expense Period type]Repairs & Maintenance / GBA');
+        cy.stepInfo('QA-4924 =>5.1 Check historical expenses values for Repairs & Maintenance card. They should be calculated for each expense type as: [Expense Period type]Repairs & Maintenance / GBA');
         Income.ExpenseForecast.Actions.verifyForecastItemByExpensePeriodType(testData.actualRepairsAndMaintenanceItem, testData.buildingDescription, "Actual")
             .verifyForecastItemByExpensePeriodType(testData.t12RepairsAndMaintenanceItem, testData.buildingDescription, "Actual T12")
             .verifyForecastItemByExpensePeriodType(testData.historicalRepairsAndMaintenanceItem, testData.buildingDescription, "Annualized Historical")
@@ -58,9 +58,6 @@ describe("User selects Per SF radiobutton for Repairs & Maintenance on Expense F
             .hideExpenseForecastHeader();
 
         cy.stepInfo(`QA-4924 =>5.2 Check historical expenses values for Repairs & Maintenance card. They should be correctly displayed on slidebars`)
-
-        // Income.ExpenseForecast.Page.RepairsAndMaintenanceCard
-        // cy.get("[data-qa=repairsMaintenance-forecast-item]").screenshot("RepairsAndMaintenance_Forecast_Item_Component");    поменять screenshot - snapshot 
 
         Income.ExpenseForecast.Actions.matchElementSnapshot(
             Income.ExpenseForecast.Page.RepairsAndMaintenanceCard, testData.repairsAndMaintenanceCardSnapshotName);
