@@ -1,6 +1,6 @@
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 
-export default {
+const _repairsItem: BoweryReports.ForecastItem = {
   reportCreationData: ReportDataCreator.getDefaultReportData("4932"),
   comparables: [
     {
@@ -26,3 +26,5 @@ export default {
 
   repairsCardSnapshotName: "Repairs_Forecast_Item_Component",
 };
+
+export default _repairsItem;
