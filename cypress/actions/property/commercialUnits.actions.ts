@@ -1,13 +1,12 @@
-import BaseActions from "../base/base.actions";
 import commercialUnitsPage from "../../pages/property/commercialUnits.page";
 import {cutDecimalPartToNumberOfDigits, isHasDecimalPartMoreNumberOfDigits, numberWithCommas} from "../../../utils/numbers.utils";
 import BaseActionsExt from "../base/base.actions.ext";
 
 class CommercialUnitsActions extends BaseActionsExt<typeof commercialUnitsPage> {
-    verifyImageHasRotated(){
+    verifyImageHasRotated(rotateIndex: number){
         commercialUnitsPage.commercialUnitImage
         .last().invoke("attr","style").then(style => {
-            expect(style).includes("w_256,a_90");
+            expect(style).includes(`w_256,a_${90*rotateIndex}`);
         });
         return this;
     }

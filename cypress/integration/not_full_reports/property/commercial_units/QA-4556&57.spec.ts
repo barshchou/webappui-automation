@@ -35,8 +35,11 @@ describe("Verify the functionality of the Frontage radio button", () => {
                 .Actions.verifyProgressBarNotExist();
 
                 cy.stepInfo(`# Verify the uploaded image can be rotated.`);
-                Property._CommercialUnits
-                .Actions.rotateImage().verifyImageHasRotated();
+                testData.imageRotations.forEach(rotateIndex => {
+                    Property._CommercialUnits
+                    .Actions.rotateImage().verifyImageHasRotated(rotateIndex);
+                });
+                
             });
             Property._CommercialUnits
             .Page.iconDeleteImage.last().click({force:true});
