@@ -22,9 +22,7 @@ describe("Historical expense Repairs & Maintenance Per Unit is correctly calcula
     cy.stepInfo("1. Go to Income > Expense History");
     NavigationSection.Actions.navigateToExpenseHistory();
 
-    cy.stepInfo(
-      "2. Add columns for all types of Expense Period: Actual, Actual T12, Annualized Historical and Projection"
-    );
+    cy.stepInfo("2. Add columns for all types of Expense Period: Actual, Actual T12, Annualized Historical and Projection");
     testData.periods.forEach((per, index) => {
       Income.ExpenseHistory.Actions.selectExpensePeriod(per.expensePeriodType)
         .enterExpenseYear(per.year)
@@ -40,19 +38,13 @@ describe("Historical expense Repairs & Maintenance Per Unit is correctly calcula
         .enterRepairsAndMaintenanceByColIndex(per.repairsAndMaintenance, index + testData.periods.length);
     });
 
-    cy.stepInfo(
-      "3. Fill in Repairs & Maintenance field for all added columns and save changes"
-    );
+    cy.stepInfo("3. Fill in Repairs & Maintenance field for all added columns and save changes");
     Income.ExpenseHistory.Actions.verifyAverageTable();
 
-    cy.stepInfo(
-      "4. Go to Expense Forecast and make sure that Per Unit radiobutton is selected for Repairs & Maintenance card"
-    );
+    cy.stepInfo("4. Go to Expense Forecast and make sure that Per Unit radiobutton is selected for Repairs & Maintenance card");
     NavigationSection.Actions.navigateToExpenseForecast();
     Income.ExpenseForecast.chooseForecastItemBasis(testData.actualRepairsItem);
-    Income.ExpenseForecast.Actions.verifyForecastItemBasis(
-      testData.actualRepairsItem
-    );
+    Income.ExpenseForecast.Actions.verifyForecastItemBasis(testData.actualRepairsItem);
 
     cy.stepInfo(`5. Check historical expenses values for Repairs & Maintenance card. They should be
       5.1 calculated for each expense type as: [Expense Period type]Repairs & Maintenance / # of Residential Units

@@ -1,8 +1,37 @@
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 import {getCurrentMonthName, getYearFromDate} from "../../../../../utils/date.utils";
 
-const _repairsHistoryItem: BoweryReports.ForecastItem = {
+const _actualRepairsItem: BoweryReports.ForecastItem =  {
+  name: "repairsAndMaintenance",
+  basis: "unit",
+  projection: 12000
+}; 
+
+const _t12RepairsItem: BoweryReports.ForecastItem = {
+  name: "repairsAndMaintenance",
+  basis: "unit",
+  projection: 13000
+};
+
+const _historicalRepairsItem: BoweryReports.ForecastItem = {
+  name: "repairsAndMaintenance",
+  basis: "unit",
+  projection: 14000
+};
+
+const _ownerProjectionRepairsItem: BoweryReports.ForecastItem = {
+  name: "repairsAndMaintenance",
+  basis: "unit",
+  projection: 15000
+};
+
+export default {
   reportCreationData: ReportDataCreator.getDefaultReportData("4931"),
+  actualRepairsItem: _actualRepairsItem,
+  t12RepairsItem: _t12RepairsItem,
+  historicalRepairsItem: _historicalRepairsItem,
+  ownerProjectionRepairsItem: _ownerProjectionRepairsItem,
+  
   buildingDescription: {
     grossArea: 2000,
     numberOfUnits: 5,
@@ -33,28 +62,6 @@ const _repairsHistoryItem: BoweryReports.ForecastItem = {
       repairsAndMaintenance: 14000,
     },
   ],
-  actualRepairsItem: {
-    name: "repairsAndMaintenance",
-    basis: "unit",
-    projection: 12000
-},
-  t12RepairsItem: {
-    name: "repairsAndMaintenance",
-    basis: "unit",
-    projection: 13000
-},
-  historicalRepairsItem: {
-  name: "repairsAndMaintenance",
-  basis: "unit",
-  projection: 14000
-},
-  ownerProjectionRepairsItem: {
-  name: "repairsAndMaintenance",
-  basis: "unit",
-  projection: 15000
-},
 
   repairsCardSnapshotName: "Repairs_Forecast_Item_Component",
 };
-
-export default _repairsHistoryItem;
