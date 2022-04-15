@@ -1,4 +1,4 @@
-/// <reference types="cypress-grep" />
+/// <reference types="cypress-grep" /> 
 import testData from "../../../../fixtures/not_full_reports/income/expense_forecast/QA-4924.fixture";
 import Property from "../../../../actions/property/property.manager";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
