@@ -70,5 +70,5 @@ describe("Historical expense Repairs & Maintenance Per Unit is correctly calcula
   
       deleteReport(testData.reportCreationData.reportNumber);
   
-  });
+  }); 
 });
