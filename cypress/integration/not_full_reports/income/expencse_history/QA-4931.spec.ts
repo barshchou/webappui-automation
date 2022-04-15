@@ -16,7 +16,7 @@ describe("Historical expense Repairs & Maintenance Per Unit is correctly calcula
   it("Test body", { tags: "@snapshot_tests" }, () => {
     cy.stepInfo("Pre-condition: Residential Units should be filled in on Property > Summary form");
     NavigationSection.navigateToPropertySummary();
-    Property.Summary.enterNumberOfResUnits(testData.numberOfUnits);
+    Property.Summary.enterNumberOfResUnits(Object.values(testData.buildingDescription)[1]);
 
 
     cy.stepInfo("1. Go to Income > Expense History");
@@ -49,17 +49,26 @@ describe("Historical expense Repairs & Maintenance Per Unit is correctly calcula
       "4. Go to Expense Forecast and make sure that Per Unit radiobutton is selected for Repairs & Maintenance card"
     );
     NavigationSection.Actions.navigateToExpenseForecast();
-    Income.ExpenseForecast.chooseForecastItemBasis(testData.repairsItem);
+    Income.ExpenseForecast.chooseForecastItemBasis(testData.actualRepairsItem);
     Income.ExpenseForecast.Actions.verifyForecastItemBasis(
-      testData.repairsItem
+      testData.actualRepairsItem
     );
 
     cy.stepInfo(`5. Check historical expenses values for Repairs & Maintenance card. They should be
       5.1 calculated for each expense type as: [Expense Period type]Repairs & Maintenance / # of Residential Units
       5.2 correctly displayed on slidebars`);
-    testData.periods.forEach((per, index) => {
-      Income.ExpenseForecast.Actions.verifyForecastItemByExpensePeriodType(testData.repairsItem, testData.numberOfUnits, per.expensePeriodType)
+      Income.ExpenseForecast.Actions.verifyForecastItemByExpensePeriodType(testData.actualRepairsItem, testData.buildingDescription, "Actual")
+      .verifyForecastItemByExpensePeriodType(testData.t12RepairsItem, testData.buildingDescription, "Actual T12")
+      .verifyForecastItemByExpensePeriodType(testData.historicalRepairsItem, testData.buildingDescription,"Annualized Historical")
+      .verifyForecastItemByExpensePeriodType(testData.ownerProjectionRepairsItem, testData.buildingDescription, "Owner's Projection")
       .hideExpenseForecastHeader();
-    });
+
+      Income.ExpenseForecast.Actions.matchElementSnapshot(
+        Income.ExpenseForecast.Page.RepairsCard,
+        testData.repairsCardSnapshotName
+      );
+  
+      deleteReport(testData.reportCreationData.reportNumber);
+  
   });
 });
