@@ -6,6 +6,7 @@ import {
 } from "../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Income from "../../../../actions/income/income.manager";
+import Property from "../../../../actions/property/property.manager";
 
 describe("Historical expense Repairs & Maintenance Per Unit is correctly calculated and displayed", () => {
   before("Login, create report", () => {
@@ -13,6 +14,11 @@ describe("Historical expense Repairs & Maintenance Per Unit is correctly calcula
   });
 
   it("Test body", { tags: "@snapshot_tests" }, () => {
+    cy.stepInfo("Pre-condition: Residential Units should be filled in on Property > Summary form");
+    NavigationSection.navigateToPropertySummary();
+    Property.Summary.enterNumberOfResUnits(testData.resUnits);
+
+
     cy.stepInfo("1. Go to Income > Expense History");
     NavigationSection.Actions.navigateToExpenseHistory();
 
@@ -31,7 +37,7 @@ describe("Historical expense Repairs & Maintenance Per Unit is correctly calcula
         .enterExpenseMonth(per.month)
         .enterExpenseYear(per.year)
         .clickAddExpenseYearButton()
-        .enterRepairsAndMaintenanceByColIndex(per.repairsAndMaintenance, index);
+        .enterRepairsAndMaintenanceByColIndex(per.repairsAndMaintenance, index + testData.periods.length);
     });
 
     cy.stepInfo(
@@ -42,9 +48,10 @@ describe("Historical expense Repairs & Maintenance Per Unit is correctly calcula
     cy.stepInfo(
       "4. Go to Expense Forecast and make sure that Per Unit radiobutton is selected for Repairs & Maintenance card"
     );
-    // Income.ExpenseForecast.Actions.verifyForecastItemBasis(
-    //   testData.repairsItem
-    // ); // before need to navigate
+    NavigationSection.Actions.navigateToExpenseForecast();
+    Income.ExpenseForecast.Actions.verifyForecastItemBasis(
+      testData.repairsItem
+    );
 
     // cy.stepInfo(`5. Check historical expenses values for Repairs & Maintenance card. They should be
     //   5.1 calculated for each expense type as: [Expense Period type]Repairs & Maintenance / # of Residential Units
