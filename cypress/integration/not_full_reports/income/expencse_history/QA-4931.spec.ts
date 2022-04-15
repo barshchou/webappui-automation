@@ -16,7 +16,7 @@ describe("Historical expense Repairs & Maintenance Per Unit is correctly calcula
   it("Test body", { tags: "@snapshot_tests" }, () => {
     cy.stepInfo("Pre-condition: Residential Units should be filled in on Property > Summary form");
     NavigationSection.navigateToPropertySummary();
-    Property.Summary.enterNumberOfResUnits(testData.resUnits);
+    Property.Summary.enterNumberOfResUnits(testData.numberOfUnits);
 
 
     cy.stepInfo("1. Go to Income > Expense History");
@@ -57,7 +57,9 @@ describe("Historical expense Repairs & Maintenance Per Unit is correctly calcula
     cy.stepInfo(`5. Check historical expenses values for Repairs & Maintenance card. They should be
       5.1 calculated for each expense type as: [Expense Period type]Repairs & Maintenance / # of Residential Units
       5.2 correctly displayed on slidebars`);
-    Income.ExpenseForecast.Actions.verifyForecastItemByExpensePeriodType(testData.repairsItem, testData.resUnits, testData.periods)
+    testData.periods.forEach((per, index) => {
+      Income.ExpenseForecast.Actions.verifyForecastItemByExpensePeriodType(testData.repairsItem, testData.numberOfUnits, per.expensePeriodType)
       .hideExpenseForecastHeader();
+    });
   });
 });

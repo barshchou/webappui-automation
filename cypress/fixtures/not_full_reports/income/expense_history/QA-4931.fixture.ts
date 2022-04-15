@@ -2,7 +2,7 @@ import ReportDataCreator from "../../../data_creator/reportData.creator";
 
 export default {
   reportCreationData: ReportDataCreator.getDefaultReportData("4931"),
-  resUnits: 5,
+  numberOfUnits: 5,
   periods: [
     {
       expensePeriodType: "Actual",
@@ -32,6 +32,7 @@ export default {
   repairsItem: {
     name: "repairsAndMaintenance",
     basis: "unit",
+    projection: 6754
   },
 
   repairsCardSnapshotName: "Repairs_Forecast_Item_Component",
