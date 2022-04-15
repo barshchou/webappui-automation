@@ -6,6 +6,5 @@ export default {
         incomeValue: Enums.INCOME_TYPE.BOTH,
         conclusionValue: Enums.VALUE_CONCLUSION_TYPE.AS_IS
     }),
-
-
+    numberOfCommercialUnits: 3
 };
