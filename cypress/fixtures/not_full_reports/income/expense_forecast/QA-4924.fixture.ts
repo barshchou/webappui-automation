@@ -10,7 +10,7 @@ const _actualRepairsAndMaintenanceItem: BoweryReports.ForecastItem = {
     name: "repairsAndMaintenance",
     basis: "sf",
     projection: 12000
-};
+}; 
 
 const _t12RepairsAndMaintenanceItem: BoweryReports.ForecastItem = {
     name: "repairsAndMaintenance",

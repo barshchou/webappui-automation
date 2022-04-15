@@ -12,7 +12,7 @@ describe("User selects Per SF radiobutton for Repairs & Maintenance on Expense F
         createReport(testData.reportCreationData);
         NavigationSection.navigateToPropertySummary();
         Property.Summary.enterGrossBuildingArea(testData.buildingDescription.grossArea)
-            .enterNumberOfResUnits(testData.buildingDescription.numberOfUnits);
+            .enterNumberOfResUnits(testData.buildingDescription.numberOfUnits); 
     });
 
     it("Test body", { tags: '@snapshot_issue' },  () => {
