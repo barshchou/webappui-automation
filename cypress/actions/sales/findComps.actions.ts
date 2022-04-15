@@ -1,13 +1,9 @@
-import BaseActions from "../base/base.actions";
 import findCompsPage from "../../pages/sales/findComps.page";
 import {getUploadFixture} from "../../../utils/fixtures.utils";
 import {isNumber, numberWithCommas} from "../../../utils/numbers.utils";
+import BaseActionsExt from "../base/base.actions.ext";
 
-class FindCompsActions extends BaseActions {
-
-    get Page() {
-        return findCompsPage;
-    }
+class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
 
     addExistingComparable(address: string): FindCompsActions {
         this.clickCreateCompButton()
@@ -144,4 +140,4 @@ class FindCompsActions extends BaseActions {
 }
 
 
-export default new FindCompsActions();
+export default new FindCompsActions(findCompsPage);
