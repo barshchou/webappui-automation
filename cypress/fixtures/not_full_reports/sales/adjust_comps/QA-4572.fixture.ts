@@ -10,7 +10,7 @@ export default {
         otherNewAdjustment: -20
     },
     comparableSecond: {
-        address: "146-34 45 Avenue",
+        address: "295 Ridgewood Avenue",
         sizeAdjustment: 40,
         conditionAdjustment: -10,
         otherAdjustment: -50,
@@ -18,4 +18,4 @@ export default {
     },
     otherAdjustmentName: "Other Adjustment",
     otherAdjustmentNewName: "test other adj name"
-}
+};
