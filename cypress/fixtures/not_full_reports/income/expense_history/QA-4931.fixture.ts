@@ -1,7 +1,7 @@
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 import {getCurrentMonthName, getYearFromDate} from "../../../../../utils/date.utils";
 
-export default {
+const _repairsHistoryItem: BoweryReports.ForecastItem = {
   reportCreationData: ReportDataCreator.getDefaultReportData("4931"),
   buildingDescription: {
     grossArea: 2000,
@@ -56,3 +56,5 @@ export default {
 
   repairsCardSnapshotName: "Repairs_Forecast_Item_Component",
 };
+
+export default _repairsHistoryItem;
