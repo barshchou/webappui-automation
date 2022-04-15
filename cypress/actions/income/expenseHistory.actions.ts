@@ -1,8 +1,8 @@
-import BaseActions from "../base/base.actions";
 import expenseHistoryPage from "../../pages/income/expenseHistory.page";
 import {getNumberFromDollarNumberWithCommas, numberWithCommas} from "../../../utils/numbers.utils";
+import BaseActionsExt from "../base/base.actions.ext";
 
-class ExpenseHistoryActions extends BaseActions{
+class ExpenseHistoryActions extends BaseActionsExt<typeof expenseHistoryPage>{
 
     selectExpensePeriod(value: string): ExpenseHistoryActions {
         expenseHistoryPage.expensePeriodDropdown.click();
@@ -31,24 +31,24 @@ class ExpenseHistoryActions extends BaseActions{
      * @param {number} index
      * @returns {ExpenseHistoryActions}
      */
-    checkGrossRevenueCheckboxByColumnIndex(index: number = 0): ExpenseHistoryActions {
+    checkGrossRevenueCheckboxByColumnIndex(index = 0): ExpenseHistoryActions {
         expenseHistoryPage.grossRevenueCheckboxes.eq(index).check().should("have.value", "true");
         return this;
     }
 
-    enterGrossRevenueByColIndex(revenue: number | string, index: number = 0): ExpenseHistoryActions {
+    enterGrossRevenueByColIndex(revenue: number | string, index = 0): ExpenseHistoryActions {
         const valueToBe = `$${numberWithCommas(revenue)}`;
         expenseHistoryPage.grossRevenueInputs.eq(index).clear().type(`${revenue}`).should("have.value", valueToBe);
         return this;
     }
 
-    enterRealEstateTaxesByColIndex(taxes: number | string, index: number = 0): ExpenseHistoryActions {
+    enterRealEstateTaxesByColIndex(taxes: number | string, index = 0): ExpenseHistoryActions {
         expenseHistoryPage.realEstateTaxesInputs.eq(index).clear().type(`${taxes}`)
             .should("have.value", `$${numberWithCommas(taxes)}`);
         return this;
     }
 
-    enterInsuranceByColIndex(insurance: string | number = 0, index: number = 0): ExpenseHistoryActions {
+    enterInsuranceByColIndex(insurance: string | number = 0, index = 0): ExpenseHistoryActions {
         if (insurance === "clear") {
             expenseHistoryPage.insuranceInputs.eq(index).clear();
         } else {
@@ -58,13 +58,13 @@ class ExpenseHistoryActions extends BaseActions{
         return this;
     }
 
-    enterElectricityByColIndex(electricity: number | string, index: number = 0): ExpenseHistoryActions {
+    enterElectricityByColIndex(electricity: number | string, index = 0): ExpenseHistoryActions {
         expenseHistoryPage.electricityInputs.eq(index).clear().type(`${electricity}`)
             .should("have.value", `$${numberWithCommas(electricity)}`);
         return this;
     }
 
-    enterFuelByColIndex(fuel: string | number = 0, index: number = 0): ExpenseHistoryActions {
+    enterFuelByColIndex(fuel: string | number = 0, index = 0): ExpenseHistoryActions {
         if (fuel === "clear") {
             expenseHistoryPage.fuelInputs.eq(index).clear();
         } else {
@@ -74,7 +74,7 @@ class ExpenseHistoryActions extends BaseActions{
         return this;
     }
 
-    enterRepairsAndMaintenanceByColIndex(repairsAndMaintenance: string | number = 0, index: number = 0): ExpenseHistoryActions {
+    enterRepairsAndMaintenanceByColIndex(repairsAndMaintenance: string | number = 0, index = 0): ExpenseHistoryActions {
         if (repairsAndMaintenance === "clear") {
             expenseHistoryPage.repairsAndMaintenanceInputs.eq(index).clear();
         } else {
@@ -89,7 +89,7 @@ class ExpenseHistoryActions extends BaseActions{
      * @param {number} index
      * @returns {ExpenseHistoryActions}
      */
-    uncheckFuelCheckboxByColIndex(index: number = 0): ExpenseHistoryActions {
+    uncheckFuelCheckboxByColIndex(index = 0): ExpenseHistoryActions {
         expenseHistoryPage.fuelCheckboxes.eq(index).uncheck().should("have.value", "false");
         return this;
     }
@@ -99,12 +99,12 @@ class ExpenseHistoryActions extends BaseActions{
      * @param {number} index
      * @returns {ExpenseHistoryActions}
      */
-    uncheckWaterSewerCheckboxByColIndex(index: number = 0): ExpenseHistoryActions {
+    uncheckWaterSewerCheckboxByColIndex(index = 0): ExpenseHistoryActions {
         expenseHistoryPage.waterSewerCheckboxes.eq(index).uncheck().should("have.value", "false");
         return this;
     }
 
-    enterPayrollBenefitsByColIndex(value: number | string, index: number = 0): ExpenseHistoryActions {
+    enterPayrollBenefitsByColIndex(value: number | string, index = 0): ExpenseHistoryActions {
         expenseHistoryPage.payrollBenefitsInputs.eq(index).clear().type(`${value}`)
             .should("have.value", `$${numberWithCommas(value)}`);
         return this;
@@ -116,7 +116,7 @@ class ExpenseHistoryActions extends BaseActions{
      * @param {number} index
      * @returns {ExpenseHistoryActions}
      */
-    verifyTotalOpExpensesByColIndex(textToBe: string, index: number = 0): ExpenseHistoryActions {
+    verifyTotalOpExpensesByColIndex(textToBe: string, index = 0): ExpenseHistoryActions {
         expenseHistoryPage.totalOpExpenseCells.eq(index).should("have.text", textToBe);
         return this;
     }
@@ -127,7 +127,7 @@ class ExpenseHistoryActions extends BaseActions{
      * @param {number} index
      * @returns {ExpenseHistoryActions}
      */
-    verifyTOEExcludingRETByIndex(retValue: number, index: number = 0): ExpenseHistoryActions {
+    verifyTOEExcludingRETByIndex(retValue: number, index = 0): ExpenseHistoryActions {
         expenseHistoryPage.totalOpExpenseCells.eq(index).invoke("text").then(toeTotalText => {
             const toeTotalNumber = getNumberFromDollarNumberWithCommas(toeTotalText);
             const excludingTextToBe = `$${numberWithCommas((toeTotalNumber - retValue).toFixed(2))}`;
@@ -142,7 +142,7 @@ class ExpenseHistoryActions extends BaseActions{
      * @param {number} index
      * @returns {ExpenseHistoryActions}
      */
-    verifyNetOpIncomeByIndex(grossRevenue: number, index: number = 0): ExpenseHistoryActions {
+    verifyNetOpIncomeByIndex(grossRevenue: number, index = 0): ExpenseHistoryActions {
         expenseHistoryPage.totalOpExpenseCells.eq(index).invoke("text").then(toeTotalText => {
             const toeTotalNumber = getNumberFromDollarNumberWithCommas(toeTotalText);
             const noeTextToBe = `$${numberWithCommas((grossRevenue - toeTotalNumber).toFixed(2))}`;
@@ -285,4 +285,4 @@ class ExpenseHistoryActions extends BaseActions{
     }
 }
 
-export default new ExpenseHistoryActions();
+export default new ExpenseHistoryActions(expenseHistoryPage);

@@ -10,25 +10,25 @@ const _actualRepairsAndMaintenanceItem: BoweryReports.ForecastItem = {
     name: "repairsAndMaintenance",
     basis: "sf",
     projection: 12000
-}
+};
 
 const _t12RepairsAndMaintenanceItem: BoweryReports.ForecastItem = {
     name: "repairsAndMaintenance",
     basis: "sf",
     projection: 13000
-}
+};
 
 const _historicalRepairsAndMaintenanceItem: BoweryReports.ForecastItem = {
     name: "repairsAndMaintenance",
     basis: "sf",
     projection: 14000
-}
+};
 
 const _ownerProjectionRepairsAndMaintenanceItem: BoweryReports.ForecastItem = {
     name: "repairsAndMaintenance",
     basis: "sf",
     projection: 15000
-}
+};
 
 
 
@@ -67,5 +67,5 @@ export default {
     }
 
 
-}
+};
 
