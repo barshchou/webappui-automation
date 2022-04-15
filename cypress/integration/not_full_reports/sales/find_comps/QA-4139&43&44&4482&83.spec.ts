@@ -80,14 +80,12 @@ conditionalDescribe("Group of tests for numeric inputs at create comp modal", ()
     });
 
     it("QA-4483: Verify the Average Unit Size field", () => {
-        Sales._FindComps.enterNumericInputNewComp(Sales._FindComps.Page.netRentableAreaNewComp, testData.spec4483.regularNumber)
-            .enterNumericInputNewComp(Sales._FindComps.Page.netRentableAreaNewComp, testData.spec4483.regularNumOverThousand)
-            .enterNumericInputNewComp(Sales._FindComps.Page.netRentableAreaNewComp, testData.spec4483.decimalNum)
-            .enterNumericInputNewComp(Sales._FindComps.Page.netRentableAreaNewComp, testData.spec4483.nonNumberValue)
-            .enterNumericInputNewComp(Sales._FindComps.Page.netRentableAreaNewComp, testData.spec4483.longValue)
-            .enterNumericInputNewComp(Sales._FindComps.Page.createCompNumberCommercialUnits, testData.spec4143.regularNumOverThousand)
-            .enterNumericInputNewComp(Sales._FindComps.Page.commercialAreaNewComp, testData.spec4144.regularNumOverThousand)
-            .clearNumericInputNewComp(Sales._FindComps.Page.netRentableAreaNewComp)
+        Sales._FindComps.enterNumericInputNewComp(Sales._FindComps.Page.averageUnitSizeNewComp, testData.spec4483.regularNumber)
+            .enterNumericInputNewComp(Sales._FindComps.Page.averageUnitSizeNewComp, testData.spec4483.regularNumOverThousand)
+            .enterNumericInputNewComp(Sales._FindComps.Page.averageUnitSizeNewComp, testData.spec4483.decimalNum)
+            .enterNumericInputNewComp(Sales._FindComps.Page.averageUnitSizeNewComp, testData.spec4483.nonNumberValue)
+            .enterNumericInputNewComp(Sales._FindComps.Page.averageUnitSizeNewComp, testData.spec4483.longValue)
+            .clearNumericInputNewComp(Sales._FindComps.Page.averageUnitSizeNewComp)
             .selectDropdownOptionNewComp(Sales._FindComps.Page.conditionDropdown, testData.condition)
             .Page.errorMessageNewComp.should("not.exist");
         Sales._FindComps.Page.newCompContinueButton.should("not.be.disabled");
