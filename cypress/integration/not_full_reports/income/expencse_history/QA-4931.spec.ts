@@ -26,14 +26,14 @@ describe("Historical expense Repairs & Maintenance Per Unit is correctly calcula
       "2. Add columns for all types of Expense Period: Actual, Actual T12, Annualized Historical and Projection"
     );
     testData.periods.forEach((per, index) => {
-      Income.ExpenseHistory.Actions.selectExpensePeriod(per.expensePeriod)
+      Income.ExpenseHistory.Actions.selectExpensePeriod(per.expensePeriodType)
         .enterExpenseYear(per.year)
         .clickAddExpenseYearButton()
         .enterRepairsAndMaintenanceByColIndex(per.repairsAndMaintenance, index);
     });
 
     testData.periodsMonth.forEach((per, index) => {
-      Income.ExpenseHistory.Actions.selectExpensePeriod(per.expensePeriod)
+      Income.ExpenseHistory.Actions.selectExpensePeriod(per.expensePeriodType)
         .enterExpenseMonth(per.month)
         .enterExpenseYear(per.year)
         .clickAddExpenseYearButton()
@@ -49,12 +49,15 @@ describe("Historical expense Repairs & Maintenance Per Unit is correctly calcula
       "4. Go to Expense Forecast and make sure that Per Unit radiobutton is selected for Repairs & Maintenance card"
     );
     NavigationSection.Actions.navigateToExpenseForecast();
+    Income.ExpenseForecast.chooseForecastItemBasis(testData.repairsItem);
     Income.ExpenseForecast.Actions.verifyForecastItemBasis(
       testData.repairsItem
     );
 
-    // cy.stepInfo(`5. Check historical expenses values for Repairs & Maintenance card. They should be
-    //   5.1 calculated for each expense type as: [Expense Period type]Repairs & Maintenance / # of Residential Units
-    //   5.2 correctly displayed on slidebars`);
+    cy.stepInfo(`5. Check historical expenses values for Repairs & Maintenance card. They should be
+      5.1 calculated for each expense type as: [Expense Period type]Repairs & Maintenance / # of Residential Units
+      5.2 correctly displayed on slidebars`);
+    Income.ExpenseForecast.Actions.verifyForecastItemByExpensePeriodType(testData.repairsItem, testData.resUnits, testData.periods)
+      .hideExpenseForecastHeader();
   });
 });

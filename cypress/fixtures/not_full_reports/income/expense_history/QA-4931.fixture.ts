@@ -5,25 +5,25 @@ export default {
   resUnits: 5,
   periods: [
     {
-      expensePeriod: "Actual",
+      expensePeriodType: "Actual",
       year: 2021,
       repairsAndMaintenance: 12675,
     },
     {
-      expensePeriod: "Projection",
+      expensePeriodType: "Projection",
       year: 2023,
       repairsAndMaintenance: 6754,
     },
   ],
   periodsMonth: [
     {
-      expensePeriod: "Actual T12",
+      expensePeriodType: "Actual T12",
       month: "January",
       year: 2021,
       repairsAndMaintenance: 15917,
     },
     {
-      expensePeriod: "Annualized Historical",
+      expensePeriodType: "Annualized Historical",
       month: "September",
       year: 2020,
       repairsAndMaintenance: 9342,
