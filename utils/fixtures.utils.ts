@@ -1,4 +1,4 @@
-export const getUploadFixturesArrayFromFolder = (baseFolderPath, fixturesNames) => {
+export const getUploadFixturesArrayFromFolder = (baseFolderPath: string, fixturesNames: Array<string>): Cypress.FixtureData[] => {
     let fixturesArray = [];
     fixturesNames.forEach(name => {
         fixturesArray.push(getUploadFixture(`${baseFolderPath}/${name}`));
@@ -6,6 +6,6 @@ export const getUploadFixturesArrayFromFolder = (baseFolderPath, fixturesNames) 
     return fixturesArray;
 };
 
-export const getUploadFixture = (filePath) => {
+export const getUploadFixture = (filePath: string): Cypress.FixtureData => {
   return {filePath: filePath, encoding: "base64"};
 };

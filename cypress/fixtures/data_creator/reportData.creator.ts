@@ -9,11 +9,15 @@ let ReportCreationData = function (address, number, templateValue, incomeValue, 
 };
 
 class ReportCreator {
-    address: any;
+    address: string;
+
     reportNumber: string;
-    templateValue: any;
-    incomeValue: any;
-    conclusionValue: any;
+
+    templateValue: string;
+
+    incomeValue: string;
+
+    conclusionValue: string;
 
     setAddress(address?) {
         this.address = address ?? "462 1st Avenue, New York, USA";
@@ -61,10 +65,10 @@ class ReportCreator {
 
     getReportData(testNumber: string, options?: BoweryReports.ReportCreationOptions){
         if(options?.incomeValue){
-            this.setIncomeValue(options.incomeValue)
+            this.setIncomeValue(options.incomeValue);
         }
         if(options?.conclusionValue){
-            this.setConclusionValue(options.conclusionValue)
+            this.setConclusionValue(options.conclusionValue);
         }
         return this.setReportNumber(testNumber).setAddress().setTemplateValue().build();
     }
