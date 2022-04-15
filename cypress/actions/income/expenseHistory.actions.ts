@@ -1,8 +1,8 @@
-import BaseActions from "../base/base.actions";
 import expenseHistoryPage from "../../pages/income/expenseHistory.page";
 import {getNumberFromDollarNumberWithCommas, numberWithCommas} from "../../../utils/numbers.utils";
+import BaseActionsExt from "../base/base.actions.ext";
 
-class ExpenseHistoryActions extends BaseActions{
+class ExpenseHistoryActions extends BaseActionsExt<typeof expenseHistoryPage>{
 
     selectExpensePeriod(value: string): ExpenseHistoryActions {
         expenseHistoryPage.expensePeriodDropdown.click();
@@ -285,4 +285,4 @@ class ExpenseHistoryActions extends BaseActions{
     }
 }
 
-export default new ExpenseHistoryActions();
+export default new ExpenseHistoryActions(expenseHistoryPage);
