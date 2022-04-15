@@ -6,6 +6,7 @@ import {
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Income from "../../../../actions/income/income.manager";
 
+
 describe("Comparable Min, Max, Avg values for Repairs & Maintenance Per Unit are correctly calculated and displayed", () => {
   before("Login, create report", () => {
     createReport(testData.reportCreationData);
