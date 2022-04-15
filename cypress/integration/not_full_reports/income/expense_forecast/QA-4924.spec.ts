@@ -57,12 +57,12 @@ describe("User selects Per SF radiobutton for Repairs & Maintenance on Expense F
             .verifyForecastItemByExpensePeriodType(testData.ownerProjectionRepairsAndMaintenanceItem, testData.buildingDescription, "Owner's Projection")
             .hideExpenseForecastHeader();
 
-        cy.stepInfo(`QA-4924 =>5.2 Check historical expenses values for Repairs & Maintenance card. They should be correctly displayed on slidebars`)
+        cy.stepInfo(`QA-4924 =>5.2 Check historical expenses values for Repairs & Maintenance card. They should be correctly displayed on slidebars`);
 
         Income.ExpenseForecast.Actions.matchElementSnapshot(
             Income.ExpenseForecast.Page.RepairsAndMaintenanceCard, testData.repairsAndMaintenanceCardSnapshotName);
 
         deleteReport(testData.reportCreationData.reportNumber);
-    })
+    });
 
-})
+});
