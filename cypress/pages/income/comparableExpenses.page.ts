@@ -29,6 +29,7 @@ class ComparableExpensesPage extends BasePage {
     get waterSewerCells() {return cy.get("[name$='waterAndSewer.total']");}
     get waterSewerAverage() {return cy.get("[data-qa=waterAndSewer-row] > td:last-child");}
     get repairsAverage() {return cy.get("[data-qa=repairsAndMaintenance-row] > td:last-child");}
+    get repairsAndMaintenanceCells() {return cy.get("[name$='repairsAndMaintenance.total']");}
     get payrollBenefitsAverage() {return cy.get("[data-qa=payrollAndBenefits-row] > td:last-child");}
     get generalAdministrativeAverage() {return cy.get("[data-qa=generalAndAdministrative-row] > td:last-child");}
     get legalProFeesCells() {return cy.get("[name$='legalAndProfessionalFees.total']");}
