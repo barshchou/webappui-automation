@@ -27,19 +27,15 @@ describe("Verify the functionality of the Frontage radio button", () => {
         testData.imagesType.forEach((images,index) => {
             cy.stepInfo(`# Verify that several images can be uploaded to the ${images}.`);
             testData.inputType.forEach(inputMethod => {
+                cy.stepInfo(`2. Verify the image can be uploaded by ${inputMethod} in ${images}.`);
                 Property._CommercialUnits.Actions
                 .uploadImages(<any>images,testData.imageFile,<any>inputMethod);
-
-                cy.stepInfo(`2. Verify the image can be uploaded by ${inputMethod} in ${images}.`);
-                Property._CommercialUnits
-                .Actions.verifyProgressBarNotExist();
 
                 cy.stepInfo(`# Verify the uploaded image can be rotated.`);
                 testData.imageRotations.forEach(rotateIndex => {
                     Property._CommercialUnits
                     .Actions.rotateImage().verifyImageHasRotated(rotateIndex);
                 });
-                
             });
             Property._CommercialUnits
             .Page.iconDeleteImage.last().click({force:true});
