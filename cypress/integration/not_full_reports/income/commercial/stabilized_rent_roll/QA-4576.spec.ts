@@ -25,7 +25,7 @@ describe("Verify the display of the Stabilized Rent Roll page", () => {
         .verifyProgressBarNotExist();
 
         Income._CommercialManager.StabilizedRentRoll.Actions.matchElementSnapshot(
-            stabilizedRentRollPage.stabelizedRRPanel,
+            stabilizedRentRollPage.stabilizedRRPanel,
             testData.snapshotNames.stabilizedRRPanel,
             {capture:"fullPage", scale: true}
         );
@@ -59,7 +59,7 @@ describe("Verify the display of the Stabilized Rent Roll page", () => {
         .clickCommercialStabRentRollButton()
         .verifyProgressBarNotExist();
         Income._CommercialManager.StabilizedRentRoll.Actions.matchElementSnapshot(
-            stabilizedRentRollPage.stabelizedRRPanel,
+            stabilizedRentRollPage.stabilizedRRPanel,
             testData.snapshotNames.stabilizedRRPanel_severalUnits,
         );
         

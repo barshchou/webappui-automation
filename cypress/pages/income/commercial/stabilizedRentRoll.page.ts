@@ -3,7 +3,7 @@ import BasePage from "../../base/base.page";
 class StabilizedRentRollPage extends BasePage{
     get elementToVerifyIsInspected() {return cy.get("*[data-qa*='isInspected'] span");}
 
-    get stabelizedRRPanel(){
+    get stabilizedRRPanel(){
         return cy.get('[id="STICKY_FORM_PANEL_WRAPPER_ID"] + div');
     }
 
@@ -22,6 +22,8 @@ class StabilizedRentRollPage extends BasePage{
     get annualRentPsfCells() {return cy.xpath("//*[contains(@class, 'htNumeric')]|(//*[contains(@data-qa, 'annualRentPsf')])[position() < last()]");}
 
     get monthlyRentPsfCells() {return cy.xpath("//*[contains(@class, 'htNumeric')]|(//*[contains(@data-qa, 'monthlyRentPsf')])[position() < last()]");}
+
+    get editDiscussionButton() {return cy.xpath("//button[.='Edit']");}
 }
 
 export default new StabilizedRentRollPage();
