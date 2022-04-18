@@ -73,6 +73,16 @@ class StabilizedRentRollActions extends BaseActions{
         stabRenRollPage.annualRentPsfCells.eq(rowNumber).should("contain.text", rentToBe);
         return this;
     }
+
+    clickEditButton(): StabilizedRentRollActions {
+        stabRenRollPage.editButton.click();
+        return this;
+    }
+
+    typeTextArea(value: string): StabilizedRentRollActions {
+        stabRenRollPage.textArea.type(value);
+        return this;
+    }
 }
 
 export default new StabilizedRentRollActions();
