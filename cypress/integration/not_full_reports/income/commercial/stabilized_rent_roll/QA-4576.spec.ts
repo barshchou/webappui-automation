@@ -27,7 +27,6 @@ describe("Verify the display of the Stabilized Rent Roll page", () => {
         Income._CommercialManager.StabilizedRentRoll.Actions.matchElementSnapshot(
             stabilizedRentRollPage.stabilizedRRPanel,
             testData.snapshotNames.stabilizedRRPanel,
-            {capture:"fullPage", scale: true}
         );
 
 

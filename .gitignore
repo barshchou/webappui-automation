@@ -125,6 +125,7 @@ cypress/reports/
 cypress/videos/
 cypress/screenshots/
 cypress/downloads
+cypress/snapshots/**/__diff_output__
 
 # act (tool for local GH Actions)
 .act/.secrets
