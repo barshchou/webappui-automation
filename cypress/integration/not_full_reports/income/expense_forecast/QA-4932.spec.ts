@@ -41,7 +41,7 @@ describe("Comparable Min, Max, Avg values for Repairs & Maintenance Per Unit are
       .hideExpenseForecastHeader();
 
     Income.ExpenseForecast.Actions.matchElementSnapshot(
-      Income.ExpenseForecast.Page.RepairsCard,
+      Income.ExpenseForecast.Page.RepairsAndMaintenanceCard,
       testData.repairsCardSnapshotName
     );
 
