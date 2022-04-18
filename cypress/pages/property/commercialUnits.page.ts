@@ -12,6 +12,10 @@ class CommercialUnitsPage extends BasePage {
     getOtherFieldByGroup(groupName: string, unitIndex: number) {
         return cy.get(`[name='units[${unitIndex}].other${groupName.replaceAll(" ", "")}']`);
     }
+
+    get commercialUnitSFDiscussionTextArea() {
+        return cy.xpath("//*[.='Commercial Unit SF Discussion']//following-sibling::div//child::*[@data-slate-editor]");
+    }
 }
 
 export default new CommercialUnitsPage();
