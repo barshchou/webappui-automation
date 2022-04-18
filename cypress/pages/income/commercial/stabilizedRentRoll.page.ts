@@ -26,6 +26,8 @@ class StabilizedRentRollPage extends BasePage{
     get editButton() {return cy.xpath("//button[contains(text(), 'Edit')]");}
 
     get textArea() {return cy.get("[data-gramm]");}
+
+    get narrativeSuggestionsList() {return cy.get("[data-qa='narrative-suggestions-list']");}
 }
 
 export default new StabilizedRentRollPage();

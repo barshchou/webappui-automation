@@ -83,6 +83,11 @@ class StabilizedRentRollActions extends BaseActions{
         stabRenRollPage.textArea.type(value);
         return this;
     }
+
+    verifyNarrativeSuggestionsList(verifyValue: string): StabilizedRentRollActions {
+        stabRenRollPage.narrativeSuggestionsList.should("contain.text", verifyValue);
+        return this;
+    }
 }
 
 export default new StabilizedRentRollActions();

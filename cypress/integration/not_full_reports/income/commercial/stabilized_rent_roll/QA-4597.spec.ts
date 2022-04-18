@@ -23,6 +23,9 @@ describe(`Verify the suggested text dropdown in the new narrative component adde
         Income._CommercialManager.StabilizedRentRoll.clickEditButton();
 
         cy.stepInfo("3. Enter the “=Un“ and select the 'Unchanged Renovation' option.");
-        Income._CommercialManager.StabilizedRentRoll.typeTextArea(testData.value);
+        Income._CommercialManager.StabilizedRentRoll.typeTextArea(testData.value)
+          .verifyNarrativeSuggestionsList(testData.verifyValue);
+
+        deleteReport(testData.reportCreationData.reportNumber);
     });
 });
