@@ -6,5 +6,9 @@ export default {
         incomeValue: Enums.INCOME_TYPE.BOTH,
         conclusionValue: Enums.VALUE_CONCLUSION_TYPE.AS_IS
     }),
-    numberOfCommercialUnits: 3
+    numberOfCommercialUnits: 1,
+    groupName: "Use",
+    defaultUse: "undetermined",
+    useRadios: ["retail", "office", "medical", "community", "industrial", "other", "undetermined"],
+    otherValue: "Jeronimo"
 };
