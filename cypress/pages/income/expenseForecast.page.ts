@@ -19,12 +19,11 @@ class ExpenseForecastPage extends BasePage {
 
     get RepairsAndMaintenanceCard() {
         return cy.get("[data-qa=repairsMaintenance-forecast-item] > div").last();
-    }
 
     getForecastItemBasisRadio(item) {return cy.get(`[name='${item}.basis']`);}
 
     getElementToCheckRadio(forecastItem: BoweryReports.ForecastItemBasis, radioValue: BoweryReports.UnitSF) {return cy.get(`[data-qa=checked] [name='${forecastItem}.basis'][value='${radioValue}']`);}
-    
+
     getForecastItemForecastInput(item) {return cy.get(`[name='${item}.concludedValue']`);}
 
     getForecastItemCompMin(item) {return cy.get(`[data-qa=${item}-forecast-item] [data-qa=comp-min]`);}
@@ -60,7 +59,7 @@ class ExpenseForecastPage extends BasePage {
     get toeCommentaryEditButton() {return cy.xpath("//*[.='TOTAL OPERATING EXPENSES']//following::button[.='Edit']");}
 
     get toeCommentarySaveButton() {return cy.xpath("//*[.='TOTAL OPERATING EXPENSES']//following::button[.='Save'][1]");}
-    
+
     get toeCommentaryModified() {return cy.xpath("//*[.='TOTAL OPERATING EXPENSES']//following::*[.='Modified']");}
 }
 
