@@ -21,7 +21,8 @@ namespace BoweryReports {
     | "legalAndProfessionalFees" | "miscellaneous" | "management" | "reserves" | "total";
 
     export type CommercialUnitsUseValues = "retail" | "office" | "medical" | "community" | "industrial" | "other" | "undetermined";
-    export type CommercialUnitsUseTexts = "Retail" | "Office" | "Medical Office" | "Community Facility" | "Industrial" | string;
+    export type CommercialUnitsUseTexts = "Retail" | "Office" | "Medical Office" | "Community Facility" | "Industrial" |
+        "Undetermined" | string;
     export type CommercialUnitsGroups = "Use" | "State" | "Location" | "Street Type" | "Floor" | "Grade" | "Facade"
     | "Ceiling Height" | "Frontage";
 

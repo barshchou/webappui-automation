@@ -73,6 +73,16 @@ class StabilizedRentRollActions extends BaseActionsExt<typeof stabRenRollPage>{
         stabRenRollPage.annualRentPsfCells.eq(rowNumber).should("contain.text", rentToBe);
         return this;
     }
+
+    clickEditDiscussionButton(): this {
+        stabRenRollPage.editDiscussionButton.scrollIntoView().click();
+        return this;
+    }
+
+    clickCancelEditDiscussionButton(): this {
+        stabRenRollPage.cancelEditDiscussionButton.scrollIntoView().click();
+        return this;
+    }
 }
 
 export default new StabilizedRentRollActions(stabRenRollPage);
