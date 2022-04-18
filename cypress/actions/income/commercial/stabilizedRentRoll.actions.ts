@@ -84,10 +84,16 @@ class StabilizedRentRollActions extends BaseActions{
         return this;
     }
 
-    verifyNarrativeSuggestionsList(verifyValue: string): StabilizedRentRollActions {
-        stabRenRollPage.narrativeSuggestionsList.should("contain.text", verifyValue);
+    clickNarrativeSuggestions(verifyListValue: string): StabilizedRentRollActions {
+        stabRenRollPage.narrativeSuggestionsList.contains(verifyListValue).should("contain.text", verifyListValue).click();
         return this;
     }
+
+    verifyTextArea(verifyAreaValue: string): StabilizedRentRollActions {
+        stabRenRollPage.textArea.should("contain.text", verifyAreaValue);
+        return this;
+    }
+
 }
 
 export default new StabilizedRentRollActions();

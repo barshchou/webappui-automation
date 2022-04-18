@@ -5,5 +5,6 @@ export default {
     reportCreationData: reportDataCreator.getReportSpecificIncomeValue(enums.INCOME_TYPE.BOTH, "4597"),
     numberOfCommercialUnits: 2,
     value:"=Un",
-    verifyValue: "Unchanged Renovations"
+    verifyListValue: "Unchanged Renovations",
+    verifyAreaValue: "Upon renovation, the subject unit count and gross building area will remain unchanged."
 };

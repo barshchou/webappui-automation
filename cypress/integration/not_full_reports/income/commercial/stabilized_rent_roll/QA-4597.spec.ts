@@ -24,7 +24,11 @@ describe(`Verify the suggested text dropdown in the new narrative component adde
 
         cy.stepInfo("3. Enter the “=Un“ and select the 'Unchanged Renovation' option.");
         Income._CommercialManager.StabilizedRentRoll.typeTextArea(testData.value)
-          .verifyNarrativeSuggestionsList(testData.verifyValue);
+          .clickNarrativeSuggestions(testData.verifyListValue);
+
+        cy.stepInfo(`4. Verify that the following text appears: Upon renovation, the subject unit 
+          count and gross building area will remain unchanged.`);
+        Income._CommercialManager.StabilizedRentRoll.verifyTextArea(testData.verifyAreaValue);
 
         deleteReport(testData.reportCreationData.reportNumber);
     });

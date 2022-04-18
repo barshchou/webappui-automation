@@ -27,7 +27,7 @@ class StabilizedRentRollPage extends BasePage{
 
     get textArea() {return cy.get("[data-gramm]");}
 
-    get narrativeSuggestionsList() {return cy.get("[data-qa='narrative-suggestions-list']");}
+    get narrativeSuggestionsList() {return cy.get("[data-qa='narrative-suggestions-list'] li");}
 }
 
 export default new StabilizedRentRollPage();
