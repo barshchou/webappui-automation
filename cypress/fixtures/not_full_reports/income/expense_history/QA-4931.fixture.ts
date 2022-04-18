@@ -25,17 +25,18 @@ const _ownerProjectionRepairsItem: BoweryReports.ForecastItem = {
   projection: 15000
 };
 
+const _buildingDescription: BoweryReports.BuildingDescription = {
+  grossArea: 2000,
+  numberOfUnits: 5,
+};
+
 export default {
   reportCreationData: ReportDataCreator.getDefaultReportData("4931"),
   actualRepairsItem: _actualRepairsItem,
   t12RepairsItem: _t12RepairsItem,
   historicalRepairsItem: _historicalRepairsItem,
   ownerProjectionRepairsItem: _ownerProjectionRepairsItem,
-  
-  buildingDescription: {
-    grossArea: 2000,
-    numberOfUnits: 5,
-  },
+  buildingDescription: _buildingDescription,
   periods: [
     {
       expensePeriodType: "Actual",
