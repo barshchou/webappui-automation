@@ -18,9 +18,9 @@ class ExpenseForecastPage extends BasePage {
     }
 
     get RepairsAndMaintenanceCard() {
-        return cy.get("[data-qa=repairsMaintenance-forecast-item]");
+        return cy.get("[data-qa=repairsMaintenance-forecast-item] > div").last();
     }
-    
+
     getForecastItemBasisRadio(item) {return cy.get(`[name='${item}.basis']`);}
 
     getElementToCheckRadio(forecastItem: BoweryReports.ForecastItemBasis, radioValue: BoweryReports.UnitSF) {return cy.get(`[data-qa=checked] [name='${forecastItem}.basis'][value='${radioValue}']`);}
