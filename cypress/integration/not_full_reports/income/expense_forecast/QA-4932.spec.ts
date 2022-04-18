@@ -13,7 +13,7 @@ describe("Comparable Min, Max, Avg values for Repairs & Maintenance Per Unit are
     createReport(testData.reportCreationData);
   });
 
-  it("Test body", { tags: "@snapshot_test" }, () => {
+  it("Test body", { tags: "@snapshot_tests" }, () => {
     cy.stepInfo("1. Go to Income > Comparable Expenses");
     NavigationSection.Actions.navigateToComparableExpenses();
 
