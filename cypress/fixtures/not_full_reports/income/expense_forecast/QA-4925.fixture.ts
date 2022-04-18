@@ -1,5 +1,10 @@
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 
+const _repairsAndMaintenanceItem: BoweryReports.ForecastItem = {
+    name: "repairsAndMaintenance",
+    basis: "sf"
+};
+
 export default {
     reportCreationData: ReportDataCreator.getDefaultReportData("4925"),
     repairsAndMaintenanceCardSnapshotName: "RepairsAndMaintenance_Forecast_Item_Component",
@@ -22,8 +27,5 @@ export default {
         }
     ],
 
-    repairsAndMaintenanceItem: {
-        name: "repairsAndMaintenance",
-        basis: "sf"
-    }
+    repairsAndMaintenanceItem: _repairsAndMaintenanceItem
 };
