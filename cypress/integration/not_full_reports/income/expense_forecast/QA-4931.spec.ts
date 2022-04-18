@@ -53,6 +53,7 @@ describe("Historical expense Repairs & Maintenance Per Unit is correctly calcula
       .verifyForecastItemByExpensePeriodType(testData.t12RepairsItem, testData.buildingDescription, "Actual T12")
       .verifyForecastItemByExpensePeriodType(testData.historicalRepairsItem, testData.buildingDescription,"Annualized Historical")
       .verifyForecastItemByExpensePeriodType(testData.ownerProjectionRepairsItem, testData.buildingDescription, "Owner's Projection")
+      .addPaddingStyle()
       .hideExpenseForecastHeader();
 
       Income.ExpenseForecast.Actions.matchElementSnapshot(
