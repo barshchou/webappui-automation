@@ -281,8 +281,8 @@ class ExpenseForecastActions extends BaseActions {
     }
 
     addPaddingStyle(): ExpenseForecastActions {
-        expenseForecastPage.RepairsAndMaintenanceCard.invoke('attr', 'style', 'padding-right: 100px;')
-        .should('have.attr', 'style', 'padding-right: 100px;');
+        expenseForecastPage.RepairsAndMaintenanceCard.invoke('attr', 'style', 'padding: 0px 100px;')
+        .should('have.attr', 'style', 'padding: 0px 100px;');
         return this;
     }
 }
