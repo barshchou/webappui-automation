@@ -75,12 +75,12 @@ class StabilizedRentRollActions extends BaseActions{
     }
 
     clickEditButton(): StabilizedRentRollActions {
-        stabRenRollPage.editButton.click();
+        stabRenRollPage.editStabilizedCommercialIncomeDiscussion.click();
         return this;
     }
 
     typeTextArea(value: string): StabilizedRentRollActions {
-        stabRenRollPage.textArea.type(value);
+        stabRenRollPage.stabilizedCommercialIncomeTextArea.type(value);
         return this;
     }
 
@@ -90,7 +90,7 @@ class StabilizedRentRollActions extends BaseActions{
     }
 
     verifyTextArea(verifyAreaValue: string): StabilizedRentRollActions {
-        stabRenRollPage.textArea.should("contain.text", verifyAreaValue);
+        stabRenRollPage.stabilizedCommercialIncomeTextArea.should("contain.text", verifyAreaValue);
         return this;
     }
 
