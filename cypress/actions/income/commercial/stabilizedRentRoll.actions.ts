@@ -74,12 +74,12 @@ class StabilizedRentRollActions extends BaseActions{
         return this;
     }
 
-    clickEditButton(): StabilizedRentRollActions {
+    clickEditStabilizedCommercialIncomeDiscussion(): StabilizedRentRollActions {
         stabRenRollPage.editStabilizedCommercialIncomeDiscussion.click();
         return this;
     }
 
-    typeTextArea(value: string): StabilizedRentRollActions {
+    typeStabilizedCommercialIncomeTextArea(value: string): StabilizedRentRollActions {
         stabRenRollPage.stabilizedCommercialIncomeTextArea.type(value);
         return this;
     }
