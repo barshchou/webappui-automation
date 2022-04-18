@@ -1,3 +1,4 @@
+/// <reference types="cypress-grep" />
 import testData from "../../../../fixtures/not_full_reports/income/expense_forecast/QA-4932.fixture";
 import {
   createReport,
@@ -38,6 +39,7 @@ describe("Comparable Min, Max, Avg values for Repairs & Maintenance Per Unit are
     Income.ExpenseForecast.Actions.verifyForecastItemCompMin(testData.repairsItem,testData.comparables)
       .verifyForecastItemCompAverage(testData.repairsItem, testData.comparables)
       .verifyForecastItemCompMax(testData.repairsItem, testData.comparables)
+      .addPaddingStyle()
       .hideExpenseForecastHeader();
 
     Income.ExpenseForecast.Actions.matchElementSnapshot(
