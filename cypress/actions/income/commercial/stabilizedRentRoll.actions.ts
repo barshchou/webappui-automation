@@ -1,8 +1,8 @@
-import BaseActions from "../../base/base.actions";
 import stabRenRollPage from "../../../pages/income/commercial/stabilizedRentRoll.page";
 import {numberWithCommas} from "../../../../utils/numbers.utils";
+import BaseActionsExt from "../../base/base.actions.ext";
 
-class StabilizedRentRollActions extends BaseActions{
+class StabilizedRentRollActions extends BaseActionsExt<typeof stabRenRollPage>{
 
     verifyIsInspectedChecked(): StabilizedRentRollActions {
         stabRenRollPage.elementToVerifyIsInspected.should("have.css", "background-color", "rgb(66, 96, 211)");
@@ -75,4 +75,4 @@ class StabilizedRentRollActions extends BaseActions{
     }
 }
 
-export default new StabilizedRentRollActions();
+export default new StabilizedRentRollActions(stabRenRollPage);
