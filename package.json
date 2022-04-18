@@ -14,7 +14,7 @@
     "cy:chrome_headed_dev_api": "npx cypress run --browser chrome --headed --env url=dev",
     "cy:chrome_stage_api": "npx cypress run --browser chrome",
     "cy:chrome_prod_api": "npx cypress run --browser chrome --env url=prod",
-    "cy:full_prod_apgi": "npx cypress run --spec cypress/integration/full_reports/** --env url=prod",
+    "cy:full_prod_api": "npx cypress run --spec cypress/integration/full_reports/** --env url=prod",
     "cy:full_chrome_headed_prod_api": "npx cypress run --spec cypress/integration/full_reports/** --browser chrome --headed --env url=prod",
     "cy:not_full_chrome_headed": "npx cypress run --spec cypress/integration/not_full_reports/** --browser chrome --headed",
     "cy:not_full_dev_chrome_headed": "npx cypress run --spec cypress/integration/not_full_reports/** --browser chrome --headed --env url=dev",
