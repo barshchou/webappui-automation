@@ -13,7 +13,8 @@ class CommercialUnitsActions extends BaseActionsExt<typeof commercialUnitsPage> 
         commercialUnitsPage.getRadioButtonByValueAndUnitIndex(group, value, index).click();
         this.verifyRadioIsChecked(group, value, index);
         if (value === "other"){
-            commercialUnitsPage.getOtherFrontageByUnit(index).should("exist").should("have.attr", "required");
+            commercialUnitsPage.getOtherFieldByGroup(group, index).should("exist")
+                .should("have.attr", "required");
         }
         return this;
     }
