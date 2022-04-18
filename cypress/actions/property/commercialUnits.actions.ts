@@ -9,7 +9,8 @@ class CommercialUnitsActions extends BaseActionsExt<typeof commercialUnitsPage> 
         return this;
     }
 
-    clickRadioButtonByValueAndUnitIndex(group: string, value: string, index = 0): this {
+    clickRadioButtonByValueAndUnitIndex(group: BoweryReports.CommercialUnitsGroups,
+                                        value: BoweryReports.CommercialUnitsUseValues, index = 0): this {
         commercialUnitsPage.getRadioButtonByValueAndUnitIndex(group, value, index).click();
         this.verifyRadioIsChecked(group, value, index);
         if (value === "other"){
@@ -19,7 +20,7 @@ class CommercialUnitsActions extends BaseActionsExt<typeof commercialUnitsPage> 
         return this;
     }
 
-    verifyRadioIsChecked(group: string, value: string, index = 0): this {
+    verifyRadioIsChecked(group: BoweryReports.CommercialUnitsGroups, value: BoweryReports.CommercialUnitsUseValues, index = 0): this {
         commercialUnitsPage.getRadioButtonByValueAndUnitIndex(group, value, index).parent().should("have.class", "Mui-checked");
         return this;
     }
@@ -47,12 +48,12 @@ class CommercialUnitsActions extends BaseActionsExt<typeof commercialUnitsPage> 
         return this;
     }
 
-    verifyCommercialUnitSFDiscussionTextAreaNotContains(text: string): this {
+    verifyCommercialUnitSFDiscussionTextAreaNotContains(text: BoweryReports.CommercialUnitsUseValues): this {
         commercialUnitsPage.commercialUnitSFDiscussionTextArea.should("not.contain.text", text);
         return this;
     }
 
-    enterOtherValueByGroupName(groupName: string, value: string, index = 0): this {
+    enterOtherValueByGroupName(groupName: BoweryReports.CommercialUnitsGroups, value: string, index = 0): this {
         commercialUnitsPage.getOtherFieldByGroup(groupName, index).clear().type(value).should("have.value", value);
         return this;
     }
