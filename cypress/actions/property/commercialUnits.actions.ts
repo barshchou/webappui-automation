@@ -51,6 +51,11 @@ class CommercialUnitsActions extends BaseActionsExt<typeof commercialUnitsPage> 
         commercialUnitsPage.commercialUnitSFDiscussionTextArea.should("not.contain.text", text);
         return this;
     }
+
+    enterOtherValueByGroupName(groupName: string, value: string, index = 0): this {
+        commercialUnitsPage.getOtherFieldByGroup(groupName, index).clear().type(value).should("have.value", value);
+        return this;
+    }
 }
 
 export default new CommercialUnitsActions(commercialUnitsPage);
