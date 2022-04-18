@@ -41,6 +41,16 @@ class CommercialUnitsActions extends BaseActionsExt<typeof commercialUnitsPage> 
         }
         return this;
     }
+
+    verifyCommercialUnitSFDiscussionTextAreaContains(text: string): this {
+        commercialUnitsPage.commercialUnitSFDiscussionTextArea.should("contain.text", text);
+        return this;
+    }
+
+    verifyCommercialUnitSFDiscussionTextAreaNotContains(text: string): this {
+        commercialUnitsPage.commercialUnitSFDiscussionTextArea.should("not.contain.text", text);
+        return this;
+    }
 }
 
 export default new CommercialUnitsActions(commercialUnitsPage);
