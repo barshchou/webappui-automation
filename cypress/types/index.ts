@@ -32,6 +32,8 @@ namespace BoweryReports {
         perUnit: string
     };
 
+    export type CommercialGradeValues = "atGrade" | "partiallyBelowGrade" | "belowGrade" | "other";
+
 
     export type ForecastItem = { 
         name: BoweryReports.ForecastItemBasis, 
