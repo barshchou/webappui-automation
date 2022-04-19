@@ -19,6 +19,7 @@ class ExpenseForecastPage extends BasePage {
 
     get RepairsAndMaintenanceCard() {
         return cy.get("[data-qa=repairsMaintenance-forecast-item] > div").last();
+    }
 
     getForecastItemBasisRadio(item) {return cy.get(`[name='${item}.basis']`);}
 
