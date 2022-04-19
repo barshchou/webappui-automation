@@ -1,11 +1,7 @@
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 
 const _repairsItem: BoweryReports.ForecastItem = {name: "repairsAndMaintenance", basis: "unit",};
-
-export default {
-  reportCreationData: ReportDataCreator.getDefaultReportData("4932"),
-  repairsItem: _repairsItem,
-  comparables: [
+const _comparables: BoweryReports.Comparable[] = [
     {
       address: "6001 S Sacramento Ave",
       resUnits: 3,
@@ -21,6 +17,11 @@ export default {
       resUnits: 5,
       repairsAndMaintenance: 15917,
     },
-  ],
+];
+
+export default {
+  reportCreationData: ReportDataCreator.getDefaultReportData("4932"),
+  repairsItem: _repairsItem,
+  comparables: _comparables,
   repairsCardSnapshotName: "Repairs_Forecast_Item_Component",
 };
