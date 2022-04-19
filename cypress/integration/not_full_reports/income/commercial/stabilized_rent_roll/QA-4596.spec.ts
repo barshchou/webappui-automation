@@ -1,7 +1,7 @@
 import { Income, Property } from "../../../../../actions";
 import { _NavigationSection } from "../../../../../actions/base";
 import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
-import testData from "../../../../../fixtures/not_full_reports/income/commercial/stabilized_rent_roll/QA-5118.fixture";
+import testData from "../../../../../fixtures/not_full_reports/income/commercial/stabilized_rent_roll/QA-4596.fixture";
 
 
 describe(`Verify the suggested text dropdown in the new narrative component added through "=" for the 'Unchanged Renovation' 
