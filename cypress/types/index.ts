@@ -26,6 +26,12 @@ namespace BoweryReports {
     export type CommercialUnitsGroups = "Use" | "State" | "Location" | "Street Type" | "Floor" | "Grade" | "Facade"
     | "Ceiling Height" | "Frontage";
 
+    export type ProFormaAnyIncome = {
+        total: string,
+        perSF: string,
+        perUnit: string
+    };
+
 
     export type ForecastItem = { 
         name: BoweryReports.ForecastItemBasis, 
