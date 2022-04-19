@@ -14,7 +14,7 @@ class ExpenseForecastPage extends BasePage {
     }
 
     get FuelCard() {
-        return cy.get("[data-qa=fuel-forecast-item]");
+        return cy.get("[data-qa=fuel-forecast-item] > div").last();
     }
 
     get RepairsAndMaintenanceCard() {
