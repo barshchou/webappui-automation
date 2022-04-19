@@ -89,7 +89,7 @@ class StabilizedRentRollActions extends BaseActions{
         return this;
     }
 
-    verifyTextArea(verifyAreaValue: string): StabilizedRentRollActions {
+    verifyStabilizedCommercialIncomeTextArea(verifyAreaValue: string): StabilizedRentRollActions {
         stabRenRollPage.stabilizedCommercialIncomeTextArea.should("contain.text", verifyAreaValue);
         return this;
     }
