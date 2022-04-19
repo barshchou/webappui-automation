@@ -41,7 +41,7 @@ describe("Verify the functionality of the Use* radio button", () => {
 
     it(`Verify radio buttons affect Income > Commercial > In Place RR page and 
     Income > Commercial > Stabilized Rent Roll pages`, () => {
-        cy.stepInfo(`Verify radio buttons affect Income > Commercial > In Place RR page and 
+        cy.stepInfo(`3. Verify radio buttons affect Income > Commercial > In Place RR page and 
     Income > Commercial > Stabilized Rent Roll pages`);
         testData.useRadios.forEach((radio, index) => {
             Property._CommercialUnits.clickRadioButtonByValueAndUnitIndex(testData.groupName, radio);
@@ -54,6 +54,29 @@ describe("Verify the functionality of the Use* radio button", () => {
                 .verifyProgressBarNotExist()
                 .clickEditDiscussionButton()
                 .clickCancelEditDiscussionButton();
+            _NavigationSection.navigateToCommercialUnits();
+        });
+        deleteReport(testData.reportCreationData.reportNumber);
+    });
+
+    it("Verify that the radio button selection affects the Income > Potential Gross Income page", () => {
+        testData.useRadios.forEach((radio, index) => {
+            Property._CommercialUnits.clickRadioButtonByValueAndUnitIndex(testData.groupName, radio);
+            if (radio === "other") Property._CommercialUnits.enterOtherValueByGroupName(testData.groupName, testData.otherValue);
+            _NavigationSection.navigateToPotentialGrossIncome();
+            if (radio === "other") {
+                cy.contains(`${testData.otherValue} vacancy and collection loss`).should("exist");
+                Income._PotentialGrossIncome.Page.getCommercialVCLossPercentage(testData.otherValue).should("exist");
+                Income._PotentialGrossIncome.Page.getCommercialSubjectSuitabilityRadio(testData.otherValue).should("exist");
+                Income._PotentialGrossIncome.Page.getSubjectAreaCommercialVacancy(testData.otherValue).should("exist");
+                Income._PotentialGrossIncome.enterCommercialVCLossPercentage(testData.vcLossPercentages[index], testData.otherValue);
+            } else {
+                cy.contains(`${testData.useTexts[index]} vacancy and collection loss`).should("exist");
+                Income._PotentialGrossIncome.Page.getCommercialVCLossPercentage(testData.useRadios[index]).should("exist");
+                Income._PotentialGrossIncome.Page.getCommercialSubjectSuitabilityRadio(testData.useRadios[index]).should("exist");
+                Income._PotentialGrossIncome.Page.getSubjectAreaCommercialVacancy(testData.useRadios[index]).should("exist");
+                Income._PotentialGrossIncome.enterCommercialVCLossPercentage(testData.vcLossPercentages[index], testData.useRadios[index]);
+            }
             _NavigationSection.navigateToCommercialUnits();
         });
         deleteReport(testData.reportCreationData.reportNumber);

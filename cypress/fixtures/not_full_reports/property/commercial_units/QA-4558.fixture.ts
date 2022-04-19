@@ -25,5 +25,6 @@ export default {
     defaultUse: _defaultUse,
     useRadios: _useRadios,
     otherValue: _otherValue,
-    useTexts: _useTexts
+    useTexts: _useTexts,
+    vcLossPercentages: [5, 2, 15, 24, 11, 49, 7]
 };
