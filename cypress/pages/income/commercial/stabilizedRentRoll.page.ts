@@ -22,6 +22,12 @@ class StabilizedRentRollPage extends BasePage{
     get annualRentPsfCells() {return cy.xpath("//*[contains(@class, 'htNumeric')]|(//*[contains(@data-qa, 'annualRentPsf')])[position() < last()]");}
 
     get monthlyRentPsfCells() {return cy.xpath("//*[contains(@class, 'htNumeric')]|(//*[contains(@data-qa, 'monthlyRentPsf')])[position() < last()]");}
+
+    get editStabilizedCommercialIncomeDiscussion() {return cy.contains("Edit");}
+
+    get stabilizedCommercialIncomeTextArea() {return cy.get("[autocorrect]");}
+
+    get narrativeSuggestionsList() {return cy.get("[data-qa='narrative-suggestions-list'] li");}
 }
 
 export default new StabilizedRentRollPage();

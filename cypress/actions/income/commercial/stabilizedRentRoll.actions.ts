@@ -73,6 +73,26 @@ class StabilizedRentRollActions extends BaseActions{
         stabRenRollPage.annualRentPsfCells.eq(rowNumber).should("contain.text", rentToBe);
         return this;
     }
+
+    clickEditStabilizedCommercialIncomeDiscussion(): StabilizedRentRollActions {
+        stabRenRollPage.editStabilizedCommercialIncomeDiscussion.click();
+        return this;
+    }
+
+    typeStabilizedCommercialIncomeTextArea(value: string): StabilizedRentRollActions {
+        stabRenRollPage.stabilizedCommercialIncomeTextArea.type(value);
+        return this;
+    }
+
+    clickNarrativeSuggestions(verifyListValue: string): StabilizedRentRollActions {
+        stabRenRollPage.narrativeSuggestionsList.contains(verifyListValue).click();
+        return this;
+    }
+
+    verifyStabilizedCommercialIncomeTextArea(verifyAreaValue: string): StabilizedRentRollActions {
+        stabRenRollPage.stabilizedCommercialIncomeTextArea.should("contain.text", verifyAreaValue);
+        return this;
+    }
 }
 
 export default new StabilizedRentRollActions();
