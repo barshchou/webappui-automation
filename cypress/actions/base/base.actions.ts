@@ -54,6 +54,10 @@ export default class BaseActions {
         cy.get("*[data-qa='form-submit-btn']").scrollIntoView().click();
     }
 
+    verifySaveContinueButtonExist() {
+        cy.get("*[data-qa='form-submit-btn']").should("exist");
+    }
+
     verifyProgressBarNotExist() {
         cy.get("*[role='progressbar']").should("not.exist");
         return this;
