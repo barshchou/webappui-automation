@@ -74,6 +74,7 @@ Main flow of how we use act for this repo - described in txt file in [these note
 WARN: if you use Prettier - **make sure to disable it**, since it has conflicts with ESLint.
 
 List of useful extensions:
+  - ESLint
   - GitGraph
   - LiveShare
   - GitLens
