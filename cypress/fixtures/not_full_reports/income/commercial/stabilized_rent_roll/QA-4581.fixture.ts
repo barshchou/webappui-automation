@@ -25,7 +25,7 @@ buildingDescription: _buildingDescription,
     rentsPsf: [100, 120],
     annualRent: "$240,000.00",
     monthlyRent: "$20,000.00",
-    newTenantName: "new test name"
-
-
+    newTenantName: "new test name",
+    rentToBe: [100, 120],
+    perSFList: [100, 120]
 };

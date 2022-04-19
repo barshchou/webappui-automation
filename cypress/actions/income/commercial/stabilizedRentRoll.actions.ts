@@ -69,10 +69,38 @@ class StabilizedRentRollActions extends BaseActions{
         return this;
     }
 
+
+    enterAnnualRentPerSFByRowNumber(rentToBe: string | number, rowNumber: number ): StabilizedRentRollActions {
+      
+       // stabRenRollPage.annualRentPsfCells2.eq(rowNumber).should("not.have.class", "readOnly").dblclick({ force: true });
+       stabRenRollPage.annualRentPsfCells2.eq(rowNumber).should("not.have.class", "readOnly").click({ force: true }).dblclick({ force: true }).clear().type(`${rentToBe}`).type("{enter}");
+      //  stabRenRollPage.annualRentPsfCells.type(`${rentToBe}`).type("{enter}");      //clear() { force: true }
+        //const textToBe = `$${numberWithCommas(value.toFixed(2))}`;
+     //   this.verifyAnnuallyRentPsf(rentToBe, rowNumber);
+        return this;
+    }
+
+    /**
+     * @param {Array<string>} leaseStatuses
+     * @param {Array<number>} perSFList
+     * @returns {CommercialRentRollActions}
+     */
+     enterListPerSF(leaseStatuses, perSFList) {
+        for (let i = 0; i < leaseStatuses.length; i++) {
+            if (leaseStatuses[i] === "Vacant") {
+                continue;
+            }
+            this.enterAnnualRentPerSFByRowNumber(perSFList[i], i);
+        }
+        return this;
+    }
+
     verifyAnnuallyRentPsf(rentToBe: string | number, rowNumber: number): StabilizedRentRollActions {
         stabRenRollPage.annualRentPsfCells.eq(rowNumber).should("contain.text", rentToBe);
         return this;
     }
+
+
 }
 
 export default new StabilizedRentRollActions();

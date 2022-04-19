@@ -42,12 +42,13 @@ describe("Verify the Save & Continue button functionality on the Stabilized Rent
 
        cy.stepInfo(` 1. Verify the Save & Continue button is displayed on the Stabilized Rent Roll page `);
       
-       Income.Commercial.StabilizedRentRoll
+       Income.Commercial.StabilizedRentRoll.enterListPerSF(testData.leaseStatuses, testData.perSFList)
        //.verifyIsInspectedChecked()
-       .verifyProgressBarNotExist();
+     //  .verifyProgressBarNotExist();
 
-       Income.Commercial.StabilizedRentRoll.verifySaveContinueButtonExist();
-        Income.Commercial.StabilizedRentRoll.clickSaveContinueButton();
+   //    Income.Commercial.StabilizedRentRoll.verifySaveContinueButtonExist();
+      // cy.log();
+  //      Income.Commercial.StabilizedRentRoll.clickSaveContinueButton();
       
     //        .goBackWithSave();
    //     Income.Residential.InPlaceRentRoll.verifyCheckboxIsChecked(testData.forecastLabel);
