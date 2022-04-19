@@ -3,6 +3,7 @@ import testData from "../../../../fixtures/not_full_reports/income/expense_forec
 import {createReport, deleteReport} from "../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Income from "../../../../actions/income/income.manager";
+import expenseForecastPage from "../../../../pages/income/expenseForecast.page";
 
 describe("Comparable Min, Max, Avg values for Fuel Per SF are correctly calculated and displayed", () => {
 
@@ -20,7 +21,7 @@ describe("Comparable Min, Max, Avg values for Fuel Per SF are correctly calculat
             Income.ComparableExpenses.Actions.clickAddBlankColumnButton()
                 .enterAddressByColumnIndex(comp.address, index)
                 .enterCellDollarValueByColumnIndex(Income.ComparableExpenses.Page.fuelCells, comp.fuel, index)
-                .enterSquareFeetByColumnIndex(comp.squareFeet, index)
+                .enterSquareFeetByColumnIndex(comp.squareFeet, index);
         });
 
         cy.stepInfo("3. Go to Expense Forecast and make sure that Per SF radiobutton is selected for Fuel card");
@@ -32,11 +33,12 @@ describe("Comparable Min, Max, Avg values for Fuel Per SF are correctly calculat
         Income.ExpenseForecast.Actions.verifyForecastItemCompMin(testData.fuelItem, testData.comparables)
             .verifyForecastItemCompAverage(testData.fuelItem, testData.comparables)
             .verifyForecastItemCompMax(testData.fuelItem, testData.comparables)
+            .addPaddingStyle(expenseForecastPage.FuelCard)
             .hideExpenseForecastHeader();
 
         cy.stepInfo("4. Check Comp Min, Comp Max and Comp Avg values for Fuel card. They should be correctly displayed on a slidebar");
         Income.ExpenseForecast.Actions.matchElementSnapshot(
             Income.ExpenseForecast.Page.FuelCard, testData.fuelCardSnapshotName);
-        deleteReport(testData.reportCreationData.reportNumber)
-    })
-})
+        deleteReport(testData.reportCreationData.reportNumber);
+    });
+});

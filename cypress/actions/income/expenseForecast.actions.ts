@@ -279,6 +279,12 @@ class ExpenseForecastActions extends BaseActions {
         }
         return this;
     }
+
+    addPaddingStyle(element: Cypress.Chainable<JQuery<HTMLElement>>): ExpenseForecastActions {
+        element.invoke('attr', 'style', 'padding: 0px 100px;')
+        .should('have.attr', 'style', 'padding: 0px 100px;');
+        return this;
+    }
 }
 
 export default new ExpenseForecastActions();
