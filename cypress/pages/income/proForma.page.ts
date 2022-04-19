@@ -93,7 +93,10 @@ class ProFormaPage extends BasePage {
 
     get operatingExpenseRatio() {return cy.get("[data-qa=operatingExpenseRatio-value-cell]");}
 
-    getCommercialUseVCLossRow(useText) {return cy.contains(`${useText} Commercial V/C Loss`);}
+    getCommercialUseVCLossRow(useText) {
+        const firstPart = useText === "Undetermined" || useText === "Industrial" ? `${useText} Commercial` : useText;
+        return cy.contains(`Less ${firstPart} V/C Loss`);
+    }
 
     getCommercialUseVCLossPerUnitCell(useText) {return this.getCommercialUseVCLossRow(useText).siblings("[data-qa*=perUnit]");}
 
@@ -110,8 +113,12 @@ class ProFormaPage extends BasePage {
     get residentialVCLossPerUnit() {return cy.get("[data-qa=residentialVCLossAmount-perUnit-cell]");}
 
     getCommercialUseVCLossLabel(useText: string) {
-        return cy.get(`[data-qa='less${useText.replaceAll(" ", "")}VCLoss-label-cell']`);
+        const attributeToBe = useText === "Undetermined" || useText === "Industrial" ?
+            `${useText}Commercial` : useText.replaceAll(" ", "");
+        return cy.get(`[data-qa='less${attributeToBe}VCLoss-label-cell']`);
     }
+
+    get includeNOIComparisonCheckbox() {return cy.get("[data-qa^=includeNOIComparison] input");}
 }
 
 export default new ProFormaPage();

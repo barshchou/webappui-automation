@@ -23,8 +23,6 @@ class StabilizedRentRollPage extends BasePage{
 
     get monthlyRentPsfCells() {return cy.xpath("//*[contains(@class, 'htNumeric')]|(//*[contains(@data-qa, 'monthlyRentPsf')])[position() < last()]");}
 
-    get editDiscussionButton() {return cy.xpath("//button[.='Edit']");}
-
     get cancelEditDiscussionButton() {return cy.xpath("//button[.='Cancel']");}
 }
 

@@ -392,6 +392,11 @@ class ProFormaActions extends BaseActionsExt<typeof proFormaPage> {
         });
         return this;
     }
+
+    clickIncludeNOIComparisonCheckbox(): this {
+        proFormaPage.includeNOIComparisonCheckbox.click();
+        return this;
+    }
 }
 
 export default new ProFormaActions(proFormaPage);

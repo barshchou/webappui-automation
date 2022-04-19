@@ -81,4 +81,17 @@ describe("Verify the functionality of the Use* radio button", () => {
         });
         deleteReport(testData.reportCreationData.reportNumber);
     });
+
+    it("Verify that the radio button selection affects the Income > Pro Forma page", () => {
+        testData.useRadios.forEach((radio, index) => {
+            Property._CommercialUnits.clickRadioButtonByValueAndUnitIndex(testData.groupName, radio);
+            if (radio === "other") Property._CommercialUnits.enterOtherValueByGroupName(testData.groupName, testData.otherValue);
+            _NavigationSection.navigateToProForma();
+            Income._ProFormaActions.Page.getCommercialUseVCLossLabel(testData.useTexts[index]).should("exist");
+            Income._ProFormaActions.Page.getCommercialUseVCLossRow(testData.useTexts[index]).should("exist");
+            Income._ProFormaActions.clickIncludeNOIComparisonCheckbox();
+            _NavigationSection.navigateToCommercialUnits();
+        });
+        deleteReport(testData.reportCreationData.reportNumber);
+    });
 });

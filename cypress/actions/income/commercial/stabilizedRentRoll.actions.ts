@@ -75,7 +75,7 @@ class StabilizedRentRollActions extends BaseActionsExt<typeof stabRenRollPage>{
     }
 
     clickEditDiscussionButton(): this {
-        stabRenRollPage.editDiscussionButton.scrollIntoView().click();
+        stabRenRollPage.formEditBtn(0).scrollIntoView().click();
         return this;
     }
 
