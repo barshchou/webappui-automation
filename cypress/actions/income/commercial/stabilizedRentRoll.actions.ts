@@ -75,7 +75,7 @@ class StabilizedRentRollActions extends BaseActionsExt<typeof stabRenRollPage>{
     }
 
     clickEditStabilizedCommercialIncomeDiscussion(): StabilizedRentRollActions {
-        stabRenRollPage.editStabilizedCommercialIncomeDiscussion.click();
+        stabRenRollPage.formEditBtn(0).click();
         return this;
     }
 
