@@ -1,9 +1,9 @@
-import BaseActions from "../base/base.actions";
 import clientPage from "../../pages/report/client.page";
 import {replaceEntersWithLineBreak} from "../../../utils/string.utils";
+import BaseActionsExt from "../base/base.actions.ext";
+import expenseForecastPage from '../../pages/income/expenseForecast.page';
 
-class ClientActions extends BaseActions{
-    get Page() { return clientPage; }
+class ClientActions extends BaseActionsExt<typeof expenseForecastPage>{
 
     verifyInputChangesToBeUnsaved(clientFileNumber: string): ClientActions {
         clientPage.clientFileNumberField.should("have.value",clientFileNumber);
@@ -67,6 +67,38 @@ class ClientActions extends BaseActions{
 
     clickRevertToGeneratedButton() {
         clientPage.revertToGeneratedButton.click();
+        return this;
+    }
+
+    clickEditIntendedUserButton() {
+        clientPage.EditIntendedUserBtn.click();
+        return this;
+    }
+
+    /**
+     * @param {string} textToType
+     * @returns {ClientActions}
+     */
+    enterIntendedUserTextBox(textToType: string): ClientActions {
+        clientPage.IntendedUserTextBox.type(textToType);
+        return this;
+    }
+
+     /**
+     * @param {string} verifyListValue
+     * @returns {ClientActions}
+     */
+      clickNarrativeSuggestions(verifyListValue: string): ClientActions {
+        clientPage.narrativeSuggestionsList.contains(verifyListValue).click();
+        return this;
+    }
+
+    /**
+     * @param {string} verifyAreaValue
+     * @returns {ClientActions}
+     */
+    verifyIntendedUserTextBox(verifyAreaValue: string): ClientActions {
+        clientPage.IntendedUserTextBox.should("contain.text", verifyAreaValue);
         return this;
     }
 }

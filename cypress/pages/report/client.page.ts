@@ -27,7 +27,7 @@ class ClientPage extends BasePage{
     }
 
     get EditIdentificationOfClientBtn(){
-        return cy.xpath('//*[contains(text(),"Edit")]').eq(0);
+        return cy.xpath('//*[contains(text(),"Edit")]').eq(1);
     }
 
     get IntendedUserTextBox(){
@@ -36,7 +36,9 @@ class ClientPage extends BasePage{
 
     get IdentificationOfClientTextBox(){
         return cy.get('[data-slate-editor="true"]').eq(1);
-    } 
+    }
+    
+    get narrativeSuggestionsList() {return cy.get("[data-qa='narrative-suggestions-list'] li");}
 }
 
 export default new ClientPage();
