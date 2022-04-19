@@ -4,9 +4,7 @@ import {getNumberFromDollarNumberWithCommas, numberWithCommas} from "../../../ut
 
 type ForecastItem = BoweryReports.ForecastItem;
 type BuildingDescription = BoweryReports.BuildingDescription;
-type Comparable = {address: string, location?: string, period?: string, squareFeet: number, resUnits?: number,
-    insurance?: number, electricity?: number, repairsAndMaintenance?: number, payrollAndBenefits?: number,
-    generalAndAdministrative?: number, management?: number, toe?: string};
+type Comparable = BoweryReports.Comparable;
 type ExpenseForecastData = {effectiveGrossIncome: number, management: {basis: string}, percentOfEgi: number}
 
 class ExpenseForecastActions extends BaseActions {
@@ -277,6 +275,12 @@ class ExpenseForecastActions extends BaseActions {
                 elem.hide();
             });
         }
+        return this;
+    }
+
+    addPaddingStyle(): ExpenseForecastActions {
+        expenseForecastPage.RepairsAndMaintenanceCard.invoke('attr', 'style', 'padding: 0px 100px;')
+        .should('have.attr', 'style', 'padding: 0px 100px;');
         return this;
     }
 }
