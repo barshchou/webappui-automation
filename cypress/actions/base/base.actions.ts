@@ -75,7 +75,7 @@ export default class BaseActions {
      * @param snapshotName - 
      * @see https://github.com/jaredpalmer/cypress-image-snapshot
      */
-    matchElementSnapshot(element:Cypress.Chainable, snapshotName: string, options?: Options){
+    matchElementSnapshot(element:Cypress.Chainable, snapshotName: string, options: Options = { allowSizeMismatch: true} ){
         if(Cypress.browser.isHeadless == true) {
             element.matchImageSnapshot(snapshotName,options);
             return this; 
@@ -84,6 +84,12 @@ export default class BaseActions {
 
     pause(){
         cy.pause();
+        return this;
+    }
+
+    addPaddingStyle(element: Cypress.Chainable<JQuery<HTMLElement>>): BaseActions {
+        element.invoke('attr', 'style', 'padding: 0px 100px;')
+        .should('have.attr', 'style', 'padding: 0px 100px;');
         return this;
     }
 }

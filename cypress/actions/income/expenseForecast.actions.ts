@@ -1,6 +1,6 @@
-import BaseActions from "../base/base.actions";
 import expenseForecastPage from "../../pages/income/expenseForecast.page";
 import {getNumberFromDollarNumberWithCommas, numberWithCommas} from "../../../utils/numbers.utils";
+import BaseActionsExt from "../base/base.actions.ext";
 
 type ForecastItem = BoweryReports.ForecastItem;
 type BuildingDescription = BoweryReports.BuildingDescription;
@@ -9,10 +9,7 @@ type Comparable = {address: string, location?: string, period?: string, squareFe
     generalAndAdministrative?: number, management?: number, toe?: string};
 type ExpenseForecastData = {effectiveGrossIncome: number, management: {basis: string}, percentOfEgi: number}
 
-class ExpenseForecastActions extends BaseActions {
-    get Page(){
-        return expenseForecastPage;
-    }
+class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> {
     
     chooseForecastItemBasis(forecastItem: ForecastItem): ExpenseForecastActions {
         expenseForecastPage.getForecastItemBasisRadio(forecastItem.name).check(forecastItem.basis);
@@ -280,11 +277,6 @@ class ExpenseForecastActions extends BaseActions {
         return this;
     }
 
-    addPaddingStyle(element: Cypress.Chainable<JQuery<HTMLElement>>): ExpenseForecastActions {
-        element.invoke('attr', 'style', 'padding: 0px 100px;')
-        .should('have.attr', 'style', 'padding: 0px 100px;');
-        return this;
-    }
 }
 
 export default new ExpenseForecastActions();
