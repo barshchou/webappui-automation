@@ -64,6 +64,11 @@ class NavigationSectionActions extends BaseActions {
         return this;
     }
 
+    openCommercialStabilizedRentRollInCommercialWhenThereIsNoSaveNotification() {
+        this.clickCommercialStabRentRollButton();
+        return this;
+    }
+
     clickFinalButton() {
         navigationSectionPage.finalButton.click();
         return this;
