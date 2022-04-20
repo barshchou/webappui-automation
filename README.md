@@ -9,6 +9,8 @@
 - [Usage](#usage)
   - [CLI_flags](#cli_flags)
   - [GH Actions debug](#gh_actions_debug)
+- [Useful VS Code extensions](#vs_code_extensions)
+
 ## About <a id="about"></a>
 This repository contains the code of end-to-end tests, written in  Cypress framework (https://docs.cypress.io/guides/getting-started/writing-your-first-test). Main pattern used for this project - is Page Object. We describe elements of pages and the way they can behave (*pages* folder). We describe actions, which we use to interact with pages (*actions* folder). And describe test specs (*integration* folder) - things/flows we want to test and verify on our pages, using actions to put the app in a required state.
 
@@ -66,3 +68,15 @@ Example of combining previous variables: `npx cypress run --env url=dev,loginMet
 If your task will be connected with GH Actions changes or you would like to check how your newly implemnted test can behave in GH Actions - you should use [act](https://github.com/nektos/act), rather then commit a lot of times into the repo and trigger the real pipeline.
 
 Main flow of how we use act for this repo - described in txt file in [these notes](./.act/install_notes.txt).
+
+## Useful VS Code extensions <a id="vs_code_extensions"></a>
+
+WARN: if you use Prettier - **make sure to disable it**, since it has conflicts with ESLint.
+
+List of useful extensions:
+  - ESLint
+  - GitGraph
+  - LiveShare
+  - GitLens
+  - GitHub Pull Requests
+  - Jira and Bitbucket (you will use only Jira integration)

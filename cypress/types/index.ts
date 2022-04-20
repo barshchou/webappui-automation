@@ -39,6 +39,9 @@ namespace BoweryReports {
         forecast?: number | undefined, 
         projection?: number 
     }
+    export type Comparable = {address: string, location?: string, period?: string, squareFeet?: number, resUnits?: number,
+        insurance?: number, electricity?: number, repairsAndMaintenance?: number, payrollAndBenefits?: number,
+        generalAndAdministrative?: number, management?: number, toe?: string};
 
     export type BuildingDescription = {grossArea: number, numberOfUnits: number}
 }
