@@ -28,6 +28,10 @@ class CommercialUnitsPage extends BasePage {
     get commercialUnitSFDiscussionTextArea() {
         return cy.xpath("//*[.='Commercial Unit SF Discussion']//following-sibling::div//child::*[@data-slate-editor]");
     }
+
+    getGradeCheckbox(value: string, index = 0) {
+        return cy.xpath(`//*[text()='Grade']/..//descendant::input[@value='${value}']`).eq(index);
+    }
 }
 
 export default new CommercialUnitsPage();
