@@ -1,13 +1,28 @@
 import BaseActions from "../../base/base.actions";
 import stabRenRollPage from "../../../pages/income/commercial/stabilizedRentRoll.page";
-import {numberWithCommas} from "../../../../utils/numbers.utils";
+import { numberWithCommas } from "../../../../utils/numbers.utils";
 
-class StabilizedRentRollActions extends BaseActions{
+class StabilizedRentRollActions extends BaseActions {
 
     verifyIsInspectedChecked(): StabilizedRentRollActions {
         stabRenRollPage.elementToVerifyIsInspected.should("have.css", "background-color", "rgb(66, 96, 211)");
         return this;
     }
+
+    verifyIsInspectedCheckedByRow(rowNumber: number): StabilizedRentRollActions {
+        stabRenRollPage.elementToVerifyIsInspected.eq(rowNumber).should("have.css", "background-color", "rgb(66, 96, 211)");
+        return this;
+    }
+
+    verifyIsInspectedCheckedAll(isInspected): StabilizedRentRollActions {
+        for (let i = 0; i < isInspected.length; i++) {
+            if (isInspected[i] === "Inspected") {
+                this.verifyIsInspectedCheckedByRow(i);
+            }
+        }
+        return this;
+    }
+
 
     verifyLeaseStatusByRow(leaseStatus: string, rowNumber: number = 0): StabilizedRentRollActions {
         stabRenRollPage.leaseStatusCells.eq(rowNumber).should("contain.text", leaseStatus);
@@ -59,7 +74,7 @@ class StabilizedRentRollActions extends BaseActions{
         return this;
     }
 
-    verifyAnnualRentByRow(rentToBe: string, rowNumber: number): StabilizedRentRollActions{
+    verifyAnnualRentByRow(rentToBe: string, rowNumber: number): StabilizedRentRollActions {
         stabRenRollPage.annualRentCells.eq(rowNumber).should("contain.text", rentToBe);
         return this;
     }
@@ -70,36 +85,38 @@ class StabilizedRentRollActions extends BaseActions{
     }
 
 
-    enterAnnualRentPerSFByRowNumber(rentToBe: string | number, rowNumber: number ): StabilizedRentRollActions {
-      
-       // stabRenRollPage.annualRentPsfCells2.eq(rowNumber).should("not.have.class", "readOnly").dblclick({ force: true });
-       stabRenRollPage.annualRentPsfCells2.eq(rowNumber).should("not.have.class", "readOnly").click({ force: true }).dblclick({ force: true }).clear().type(`${rentToBe}`).type("{enter}");
-      //  stabRenRollPage.annualRentPsfCells.type(`${rentToBe}`).type("{enter}");      //clear() { force: true }
-        //const textToBe = `$${numberWithCommas(value.toFixed(2))}`;
-     //   this.verifyAnnuallyRentPsf(rentToBe, rowNumber);
+    enterAnnualRentPerSFByRowNumber(rentToBe: string | number, rowNumber: number): StabilizedRentRollActions {
+        stabRenRollPage.annualRentPsfCellsScroll;
+        stabRenRollPage.annualRentPsfCells.eq(rowNumber).dblclick({ force: true });
+        stabRenRollPage.annualRentPsfCellsInputField.clear().type(`${rentToBe}`).type("{enter}");
+        this.verifyAnnuallyRentPsf(rentToBe, rowNumber);
         return this;
     }
 
-    /**
-     * @param {Array<string>} leaseStatuses
-     * @param {Array<number>} perSFList
-     * @returns {CommercialRentRollActions}
-     */
-     enterListPerSF(leaseStatuses, perSFList) {
+    enterListPerSF(leaseStatuses, rentToBe) {
         for (let i = 0; i < leaseStatuses.length; i++) {
             if (leaseStatuses[i] === "Vacant") {
-                continue;
+                this.enterAnnualRentPerSFByRowNumber(rentToBe[i], i);
             }
-            this.enterAnnualRentPerSFByRowNumber(perSFList[i], i);
         }
         return this;
     }
 
     verifyAnnuallyRentPsf(rentToBe: string | number, rowNumber: number): StabilizedRentRollActions {
+        stabRenRollPage.annualRentPsfCellsScroll;   
         stabRenRollPage.annualRentPsfCells.eq(rowNumber).should("contain.text", rentToBe);
         return this;
     }
 
+    verifyAnnuallyRentPsfByRowNumber(leaseStatuses, rentToBe): StabilizedRentRollActions {
+        stabRenRollPage.annualRentPsfCellsScroll;
+        for (let i = 0; i < rentToBe.length; i++) {
+            if (leaseStatuses[i] === "Vacant") {
+                this.verifyAnnuallyRentPsf(rentToBe[i], i);
+            }
+        }
+        return this;
+    }
 
 }
 
