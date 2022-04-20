@@ -39,7 +39,7 @@ describe("Comparable Min, Max, Avg values for Fuel Per SF are correctly calculat
 
         cy.stepInfo("4. Check Comp Min, Comp Max and Comp Avg values for Fuel card. They should be correctly displayed on a slidebar");
         Income.ExpenseForecast.Actions.matchElementSnapshot(
-            Income.ExpenseForecast.Page.FuelCard, testData.fuelCardSnapshotName);
+            expenseForecastPage.FuelCard, testData.fuelCardSnapshotName);
         deleteReport(testData.reportCreationData.reportNumber);
     });
 });

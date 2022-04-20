@@ -75,12 +75,13 @@ export default class BaseActions {
      * @param snapshotName - 
      * @see https://github.com/jaredpalmer/cypress-image-snapshot
      */
-    matchElementSnapshot(element:Cypress.Chainable, snapshotName: string, options: Options = { allowSizeMismatch: true} ){
+     matchElementSnapshot(element:Cypress.Chainable, snapshotName: string, options?: Options){
         if(Cypress.browser.isHeadless == true) {
             element.matchImageSnapshot(snapshotName,options);
             return this; 
         } 
     }
+
 
     pause(){
         cy.pause();

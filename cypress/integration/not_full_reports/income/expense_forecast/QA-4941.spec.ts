@@ -4,6 +4,7 @@ import {createReport, deleteReport} from "../../../../actions/base/baseTest.acti
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Property from "../../../../actions/property/property.manager";
 import Income from "../../../../actions/income/income.manager";
+import expenseForecastPage from "../../../../pages/income/expenseForecast.page";
 
 describe("Historical expense Fuel Per SF is correctly calculated and displayed", () => {
     before("Login, create report", () => {
@@ -52,12 +53,14 @@ describe("Historical expense Fuel Per SF is correctly calculated and displayed",
             .verifyForecastItemByExpensePeriodType(testData.t12FuelItem, testData.buildingDescription, "Actual T12")
             .verifyForecastItemByExpensePeriodType(testData.historicalFuelItem, testData.buildingDescription, "Annualized Historical")
             .verifyForecastItemByExpensePeriodType(testData.ownerProjectionFuelItem, testData.buildingDescription, "Owner's Projection")
-            .hideExpenseForecastHeader();
+            .addPaddingStyle(expenseForecastPage.FuelCard);
+
+        Income.ExpenseForecast.Actions.hideExpenseForecastHeader();
 
         cy.stepInfo("6. Check historical expenses values for Fuel card. They should be correctly displayed on slidebars");
         Income.ExpenseForecast.Actions.matchElementSnapshot(
-            Income.ExpenseForecast.Page.FuelCard, testData.fuelCardSnapshotName);
+            expenseForecastPage.FuelCard, testData.fuelCardSnapshotName);
 
         deleteReport(testData.reportCreationData.reportNumber);
-    })
-})
+    });
+});
