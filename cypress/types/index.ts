@@ -12,13 +12,26 @@ namespace BoweryReports {
         incomeValue?: string,
         conclusionValue?: BoweryReports.ConclusionValue
     }
-    export type LeaseDateName = "Start" | "Expiry"
-    export type LeaseStatus = "Occupied" | "Vacant"
-    export type UnitSF = "unit" | "sf"
-    export type PerUnitPerSF = "Per Unit" | "Per SF"
+    export type LeaseDateName = "Start" | "Expiry";
+    export type LeaseStatus = "Occupied" | "Vacant";
+    export type UnitSF = "unit" | "sf";
+    export type PerUnitPerSF = "Per Unit" | "Per SF";
     export type ForecastItemBasis = "insurance" | "electricity"
     | "fuel" | "waterAndSewer" | "repairsAndMaintenance" | "payrollAndBenefits" | "generalAndAdministrative" 
-    | "legalAndProfessionalFees" | "miscellaneous" | "management" | "reserves" | "total"
+    | "legalAndProfessionalFees" | "miscellaneous" | "management" | "reserves" | "total";
+
+    export type CommercialUnitsUseValues = "retail" | "office" | "medical" | "community" | "industrial" | "other" | "undetermined";
+    export type CommercialUnitsUseTexts = "Retail" | "Office" | "Medical Office" | "Community Facility" | "Industrial" |
+        "Undetermined" | string;
+    export type CommercialUnitsGroups = "Use" | "State" | "Location" | "Street Type" | "Floor" | "Grade" | "Facade"
+    | "Ceiling Height" | "Frontage";
+
+    export type ProFormaAnyIncome = {
+        total: string,
+        perSF: string,
+        perUnit: string
+    };
+
 
     export type ForecastItem = { 
         name: BoweryReports.ForecastItemBasis, 
@@ -26,6 +39,9 @@ namespace BoweryReports {
         forecast?: number | undefined, 
         projection?: number 
     }
+    export type Comparable = {address: string, location?: string, period?: string, squareFeet?: number, resUnits?: number,
+        insurance?: number, electricity?: number, repairsAndMaintenance?: number, payrollAndBenefits?: number,
+        generalAndAdministrative?: number, management?: number, toe?: string};
 
     export type BuildingDescription = {grossArea: number, numberOfUnits: number}
 }

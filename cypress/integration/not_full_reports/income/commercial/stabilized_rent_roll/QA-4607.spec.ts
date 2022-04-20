@@ -1,4 +1,4 @@
-import testData from "./../../../../../fixtures/not_full_reports/property/summary/QA-4607.fixture";
+import testData from "../../../../../fixtures/not_full_reports/income/commercial/stabilized_rent_roll/QA-4607.fixture";
 import {createReport, deleteReport} from "../../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../../actions/base/navigationSection.actions";
 import Property from "../../../../../actions/property/property.manager";
@@ -64,7 +64,7 @@ describe.skip("Verify the Commercial Stabilized Rent Roll table", () => {
 
         cy.stepInfo(`
         5. Verify the Monthly Rent is calculated correctly per formula: (Rent PSF col.* SF col.)/12.
-        `)
+        `);
 
         deleteReport(testData.reportCreationData.reportNumber);
     });

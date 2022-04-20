@@ -62,3 +62,7 @@ export const getNumberWithDecimalPart = (number, digitsToBe = 2) => {
 export const isHalfDecimalPart = (number) => {
     return Number(number.toString().split(".")[1]) === 5;
 };
+
+export const isNumber = (value) => {
+    return typeof value === "number";
+};

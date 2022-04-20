@@ -1,150 +1,143 @@
-import BaseActions from "../base/base.actions";
 import findCompsPage from "../../pages/sales/findComps.page";
 import {getUploadFixture} from "../../../utils/fixtures.utils";
+import {isNumber, numberWithCommas} from "../../../utils/numbers.utils";
+import BaseActionsExt from "../base/base.actions.ext";
 
-class FindCompsActions extends BaseActions {
+class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
 
-    /**
-     *
-     * @param {string} address
-     * @returns {FindCompsActions}
-     */
-    addComparable(address) {
-        findCompsPage.createCompButton.click();
-        findCompsPage.searchCompAddressInput.type(address).type("{enter}");
-        findCompsPage.findCompField.click();
-        findCompsPage.submitButton.click();
+    addExistingComparable(address: string): FindCompsActions {
+        this.clickCreateCompButton()
+            .enterCompAddressToSearch(address)
+            .clickSearchCompButton();
         findCompsPage.getSelectCompButtonByAddress(address).click();
         return this;
     }
 
-    /**
-     *
-     * @param {string} address
-     * @returns {FindCompsActions}
-     */
-    verifyAddedCompAddress(address) {
+    clickCreateCompButton(): FindCompsActions {
+        findCompsPage.createCompButton.click();
+        return this;
+    }
+
+    enterCompAddressToSearch(address: string): FindCompsActions {
+        findCompsPage.searchCompAddressInput.type(address).type("{enter}");
+        findCompsPage.findCompField.click();
+        return this;
+    }
+
+    clickSearchCompButton(): FindCompsActions {
+        findCompsPage.submitButton.click();
+        return this;
+    }
+
+    openAddNewComparableFormSearchResult(address: string, searchResultIndex = 0): FindCompsActions {
+        this.clickCreateCompButton()
+            .enterCompAddressToSearch(address)
+            .clickSearchCompButton();
+        findCompsPage.createCompSearchResults.eq(searchResultIndex).click();
+        findCompsPage.createNewCompButton.click();
+        return this;
+    }
+
+    verifyAddedCompAddress(address: string): FindCompsActions {
         this.verifyProgressBarNotExist();
         findCompsPage.getRemoveSelectedCompButtonByAddress(address).should("exist");
         return this;
     }
 
-    /**
-     *
-     * @returns {FindCompsActions}
-     */
-    clickImportComparableButton() {
+
+    clickImportComparableButton(): FindCompsActions {
         findCompsPage.importCompsButton.click();
         return this;
     }
 
-    /**
-     *
-     * @returns {FindCompsActions}
-     */
-    verifyImportCompModalShown() {
+    verifyImportCompModalShown(): FindCompsActions {
         findCompsPage.importCompModal.should("be.visible");
         return this;
     }
 
-    /**
-     *
-     * @param {string} filePath
-     * @returns {FindCompsActions}
-     */
-    uploadComps(filePath) {
+    uploadComps(filePath: string): FindCompsActions {
         findCompsPage.csvInput.attachFile(getUploadFixture(filePath));
         return this;
     }
 
-    /**
-     *
-     * @param {number} number
-     * @returns {FindCompsActions}
-     */
-    verifyComparablesNumber(number) {
+    verifyComparablesNumber(number: number): FindCompsActions {
         const numberToBe = number + 1;
         findCompsPage.addressCells.should("have.length", numberToBe);
         return this;
     }
 
-    /**
-     *
-     * @param {string} address
-     * @returns {FindCompsActions}
-     */
-    selectCompFromMapByAddress(address) {
+    selectCompFromMapByAddress(address: string): FindCompsActions {
         findCompsPage.getSelectCompFromMapButtonByAddress(address).scrollIntoView().click({force: true});
         findCompsPage.getRemoveCompFromMapButtonByAddress(address).should("exist");
         return this;
     }
 
-    /**
-     *
-     * @param {string} address
-     * @returns {FindCompsActions}
-     */
-    removeCompByAddress(address) {
+    removeCompByAddress(address: string): FindCompsActions {
         findCompsPage.getRemoveSelectedCompButtonByAddress(address).click();
         return this;
     }
 
-    /**
-     *
-     * @param {string} address
-     * @returns {FindCompsActions}
-     */
-    verifyCompIsInRemovedSection(address) {
+    verifyCompIsInRemovedSection(address: string): FindCompsActions {
         findCompsPage.getRemoveDeletedCompButtonByAddress(address).should("exist");
         return this;
     }
 
-    /**
-     *
-     * @param {string} address
-     * @returns {FindCompsActions}
-     */
-    verifyCompIsInMap(address) {
+    verifyCompIsInMap(address: string): FindCompsActions {
         findCompsPage.getSelectCompFromMapButtonByAddress(address).should("exist");
         return this;
     }
 
-    /**
-     *
-     * @param {string} address
-     * @returns {FindCompsActions}
-     */
-    removeDeletedCompByAddress(address) {
+    removeDeletedCompByAddress(address: string): FindCompsActions {
         findCompsPage.getRemoveDeletedCompButtonByAddress(address).click();
         return this;
     }
 
-    /**
-     * @param {string} reportID
-     * @returns {FindCompsActions}
-     */
-    enterReportToSearchComp(reportID) {
+    enterReportToSearchComp(reportID: string): FindCompsActions {
         findCompsPage.reportToSearchCompInput.type(reportID).should("have.value", reportID);
         return this;
     }
 
-    clickImportCompsFromReportButton() {
+    clickImportCompsFromReportButton(): FindCompsActions {
         findCompsPage.importReportCompsButton.click();
         return this;
     }
 
-    clickSearchButton() {
+    clickSearchButton(): FindCompsActions {
         findCompsPage.searchButton.click();
         return this;
     }
 
-    selectAllCompsForImport() {
+    selectAllCompsForImport(): FindCompsActions {
         findCompsPage.importCompsSelectButtons.each(el => {
             cy.wrap(el).click();
         });
         return this;
     }
+
+    selectDropdownOptionNewComp(dropdownElement: Cypress.Chainable, title: string): FindCompsActions {
+        dropdownElement.click();
+        findCompsPage.getDropdownOption(title).click();
+        return this;
+    }
+
+    clearNumericInputNewComp(inputElement: Cypress.Chainable): FindCompsActions {
+        inputElement.clear();
+        return this;
+    }
+
+    enterNumericInputNewComp(inputElement: Cypress.Chainable, numberOfUnits: number | string): FindCompsActions {
+        this.clearNumericInputNewComp(inputElement);
+        inputElement.type(`${numberOfUnits}`);
+        this.verifyNumericInputNewComp(inputElement, numberOfUnits);
+        return this;
+    }
+
+    verifyNumericInputNewComp(inputElement: Cypress.Chainable, numberOfUnits: number | string): FindCompsActions {
+        const valueToBe = isNumber(numberOfUnits) ? numberWithCommas(`${numberOfUnits}`.replace("-", "")) : "";
+        inputElement.should("have.value", valueToBe);
+        return this;
+    }
 }
 
 
-export default new FindCompsActions();
+export default new FindCompsActions(findCompsPage);
