@@ -75,30 +75,35 @@ class ClientActions extends BaseActionsExt<typeof expenseForecastPage> {
         return this;
     }
 
-    /**
-     * @param {string} textToType
-     * @returns {ClientActions}
-     */
+    clickEditIdentificationOfTheClientButton() {
+        clientPage.EditIdentificationOfClientBtn.click();
+        return this;
+    }
+
     enterIntendedUserTextBox(textToType: string): ClientActions {
         clientPage.IntendedUserTextBox.type(textToType);
         return this;
     }
 
-     /**
-     * @param {string} verifyListValue
-     * @returns {ClientActions}
-     */
-      clickNarrativeSuggestions(verifyListValue: string): ClientActions {
-        clientPage.narrativeSuggestionsList.contains(verifyListValue).click();
+    enterIdentificationOfTheClientTextBox(textToType: string): ClientActions {
+        clientPage.IdentificationOfClientTextBox.type(textToType);
         return this;
     }
 
-    /**
-     * @param {string} verifyAreaValue
-     * @returns {ClientActions}
-     */
+  
+    clickNarrativeSuggestions(verifyListValue: string, numberLists = 0): ClientActions {
+        clientPage.narrativeSuggestionsList.eq(numberLists).contains(verifyListValue).click();
+        return this;
+    }
+
+    
     verifyIntendedUserTextBox(verifyAreaValue: string): ClientActions {
         clientPage.IntendedUserTextBox.should("contain.text", verifyAreaValue);
+        return this;
+    }
+
+    verifyIdentificationOfTheClientTextBox(verifyAreaValue: string): ClientActions {
+        clientPage.IdentificationOfClientTextBox.should("contain.text", verifyAreaValue);
         return this;
     }
 }
