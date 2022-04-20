@@ -1,7 +1,7 @@
 import rentRollPage from "../../../pages/income/commercial/rentRoll.page";
 import BaseActions from "../../base/base.actions";
-import {isDateHasCorrectFormat} from "../../../../utils/date.utils";
-import {numberWithCommas} from "../../../../utils/numbers.utils";
+import { isDateHasCorrectFormat } from "../../../../utils/date.utils";
+import { numberWithCommas } from "../../../../utils/numbers.utils";
 
 class CommercialRentRollActions extends BaseActions {
 
@@ -49,10 +49,10 @@ class CommercialRentRollActions extends BaseActions {
 
 
     clickPerSquareFootPerMonthButton(backColor = "rgb(46, 67, 147)") {
-       rentRollPage.perSquareFootPerMonthButton.should("not.have.css", "background-color", backColor)
-           .click().should("have.css", "background-color", backColor);
-       rentRollPage.rentPerSfPerMonthColumnName.scrollIntoView().should("exist");
-       return this;
+        rentRollPage.perSquareFootPerMonthButton.should("not.have.css", "background-color", backColor)
+            .click().should("have.css", "background-color", backColor);
+        rentRollPage.rentPerSfPerMonthColumnName.scrollIntoView().should("exist");
+        return this;
     }
 
     /**
@@ -71,7 +71,7 @@ class CommercialRentRollActions extends BaseActions {
     chooseLeaseStatusByRowNumber(status: BoweryReports.LeaseStatus, rowNumber = 0): CommercialRentRollActions {
         rentRollPage.pageHeader.should("be.visible");
         rentRollPage.leaseStatusArrows.eq(rowNumber).should("be.visible").as("arrow");
-        cy.get("@arrow").click({force:true});
+        cy.get("@arrow").click({ force: true });
         rentRollPage.getLeaseStatusToChooseByValue(status).click();
         this.verifyLeaseStatusCellTextByRow(status, rowNumber);
         if (status === "Vacant") {
@@ -110,7 +110,7 @@ class CommercialRentRollActions extends BaseActions {
      * @returns {CommercialRentRollActions}
      */
     pressDeleteLeaseStatusByRow(rowNumber = 0) {
-        rentRollPage.leaseStatusCells.eq(rowNumber).trigger("keydown", {keyCode: 46})
+        rentRollPage.leaseStatusCells.eq(rowNumber).trigger("keydown", { keyCode: 46 })
             .should("have.text", "");
         return this;
     }
@@ -137,10 +137,28 @@ class CommercialRentRollActions extends BaseActions {
         rentRollPage.elementToVerifyIsInspected.should("not.have.css", "background-color", backColor);
         rentRollPage.isInspectedCheckboxes.eq(rowNumber).as("isInspectedCheckbox");
         cy.get("@isInspectedCheckbox").invoke("show");
-        cy.get("@isInspectedCheckbox").check({force:true});
+        cy.get("@isInspectedCheckbox").check({ force: true });
         rentRollPage.elementToVerifyIsInspected.should("have.css", "background-color", backColor);
         return this;
     }
+
+    chooseCheckBoxesIsInspectedFromList(isInspected) {
+        for (let i = 0; i < isInspected.length; i++) {
+            if (isInspected[i] === "Inspected") {
+                this.chooseCheckBoxesIsInspectedByRowNumber(i);
+            }
+        }
+        return this;
+    }
+
+    chooseCheckBoxesIsInspectedByRowNumber(rowNumber: number) {
+        rentRollPage.isInspectedCheckboxes.eq(rowNumber).check({ force: true });
+        const backColor = "rgb(66, 96, 211)";
+        rentRollPage.elementToVerifyIsInspected.should("have.css", "background-color", backColor);
+        return this;
+    }
+
+
 
     /**
      * @param {number} unitNumber
@@ -201,7 +219,7 @@ class CommercialRentRollActions extends BaseActions {
      * @param {number} rowNumber
      * @returns {CommercialRentRollActions}
      */
-    enterLeaseDateByRowNumber(cellName: BoweryReports.LeaseDateName , date, rowNumber = 0) {
+    enterLeaseDateByRowNumber(cellName: BoweryReports.LeaseDateName, date, rowNumber = 0) {
         rentRollPage.getLeaseDateCellsByName(cellName).eq(rowNumber).dblclick({ force: true });
         rentRollPage.textareaToInput.clear().type(date).type("{enter}");
         return this;
@@ -229,7 +247,7 @@ class CommercialRentRollActions extends BaseActions {
     }
 
     enterAnnualRentPerSFByRowNumber(value: number, rowNumber: number = 0): CommercialRentRollActions {
-        rentRollPage.annualRentPerSFCells.eq(rowNumber).should("not.have.class", "readOnly").dblclick({force:true});
+        rentRollPage.annualRentPerSFCells.eq(rowNumber).should("not.have.class", "readOnly").dblclick({ force: true });
         rentRollPage.textareaToInput.clear().type(`${value}`).type("{enter}");
         const textToBe = `$${numberWithCommas(value.toFixed(2))}`;
         this.verifyRentPerSFAnnuallyByRowNumberCellText(textToBe, rowNumber);
@@ -242,7 +260,7 @@ class CommercialRentRollActions extends BaseActions {
      * @returns {CommercialRentRollActions}
      */
     enterMonthlyRentPerSFByRowNumber(value, rowNumber = 0) {
-        rentRollPage.monthlyRentPerSFCells.eq(rowNumber).should("not.have.class", "readOnly").dblclick({force:true});
+        rentRollPage.monthlyRentPerSFCells.eq(rowNumber).should("not.have.class", "readOnly").dblclick({ force: true });
         rentRollPage.textareaToInput.clear().type(value).type("{enter}");
         const textToBe = `$${numberWithCommas(value.toFixed(2))}`;
         rentRollPage.monthlyRentPerSFCells.eq(rowNumber).should("have.text", textToBe);
