@@ -2,7 +2,7 @@ import BasePage from "../base/base.page";
 
 class ExpenseForecastPage extends BasePage {
     get ExpenseForecastHeader(){
-        return cy.get('[data-qa="expenseForecast"] > div').last();
+        return cy.get('[data-qa="expenseForecast"]');
     }
 
     get ElectricityCard(){
@@ -16,7 +16,7 @@ class ExpenseForecastPage extends BasePage {
     get FuelCard() {
         return cy.get("[data-qa=fuel-forecast-item] > div").last();
     }
-    
+
     get RepairsAndMaintenanceCard() {
         return cy.get("[data-qa=repairsMaintenance-forecast-item] > div").last();    
     }

@@ -4,7 +4,6 @@ import Property from "../../../../actions/property/property.manager";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Income from "../../../../actions/income/income.manager";
-import expenseForecastPage from "../../../../pages/income/expenseForecast.page";
 
 
 describe("User selects Per SF radiobutton for Repairs & Maintenance on Expense Forecast form and historical expenses per SF are correctly calculated and displayed", () => {
@@ -57,14 +56,13 @@ describe("User selects Per SF radiobutton for Repairs & Maintenance on Expense F
             .verifyForecastItemByExpensePeriodType(testData.t12RepairsAndMaintenanceItem, testData.buildingDescription, "Actual T12")
             .verifyForecastItemByExpensePeriodType(testData.historicalRepairsAndMaintenanceItem, testData.buildingDescription, "Annualized Historical")
             .verifyForecastItemByExpensePeriodType(testData.ownerProjectionRepairsAndMaintenanceItem, testData.buildingDescription, "Owner's Projection")
-            .addPaddingStyle(expenseForecastPage.RepairsAndMaintenanceCard);
-
-        Income.ExpenseForecast.Actions.hideExpenseForecastHeader();
+            .hideExpenseForecastHeader();
 
         cy.stepInfo(`QA-4924 =>5.2 Check historical expenses values for Repairs & Maintenance card. They should be correctly displayed on slidebars`);
 
         Income.ExpenseForecast.Actions.matchElementSnapshot(
-            expenseForecastPage.RepairsAndMaintenanceCard, testData.repairsAndMaintenanceCardSnapshotName);
+            Income.ExpenseForecast.Page.RepairsAndMaintenanceCard, testData.repairsAndMaintenanceCardSnapshotName,
+            {padding: [0, 100]});
 
         deleteReport(testData.reportCreationData.reportNumber);
     });

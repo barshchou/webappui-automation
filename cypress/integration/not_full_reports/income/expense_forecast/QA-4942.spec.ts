@@ -3,7 +3,6 @@ import testData from "../../../../fixtures/not_full_reports/income/expense_forec
 import {createReport, deleteReport} from "../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Income from "../../../../actions/income/income.manager";
-import expenseForecastPage from "../../../../pages/income/expenseForecast.page";
 
 describe("Comparable Min, Max, Avg values for Fuel Per SF are correctly calculated and displayed", () => {
 
@@ -33,13 +32,11 @@ describe("Comparable Min, Max, Avg values for Fuel Per SF are correctly calculat
         Income.ExpenseForecast.Actions.verifyForecastItemCompMin(testData.fuelItem, testData.comparables)
             .verifyForecastItemCompAverage(testData.fuelItem, testData.comparables)
             .verifyForecastItemCompMax(testData.fuelItem, testData.comparables)
-            .addPaddingStyle(expenseForecastPage.FuelCard);
-            
-        Income.ExpenseForecast.Actions.hideExpenseForecastHeader();
+            .hideExpenseForecastHeader();
 
         cy.stepInfo("4. Check Comp Min, Comp Max and Comp Avg values for Fuel card. They should be correctly displayed on a slidebar");
         Income.ExpenseForecast.Actions.matchElementSnapshot(
-            expenseForecastPage.FuelCard, testData.fuelCardSnapshotName);
+            Income.ExpenseForecast.Page.FuelCard, testData.fuelCardSnapshotName, {padding: [0, 100]});
         deleteReport(testData.reportCreationData.reportNumber);
     });
 });
