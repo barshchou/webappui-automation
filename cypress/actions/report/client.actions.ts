@@ -3,7 +3,7 @@ import {replaceEntersWithLineBreak} from "../../../utils/string.utils";
 import BaseActionsExt from "../base/base.actions.ext";
 import expenseForecastPage from '../../pages/income/expenseForecast.page';
 
-class ClientActions extends BaseActionsExt<typeof expenseForecastPage>{
+class ClientActions extends BaseActionsExt<typeof expenseForecastPage> {
 
     verifyInputChangesToBeUnsaved(clientFileNumber: string): ClientActions {
         clientPage.clientFileNumberField.should("have.value",clientFileNumber);
@@ -103,4 +103,4 @@ class ClientActions extends BaseActionsExt<typeof expenseForecastPage>{
     }
 }
 
-export default new ClientActions();
+export default new ClientActions(expenseForecastPage);
