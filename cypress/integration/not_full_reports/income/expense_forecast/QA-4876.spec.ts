@@ -58,7 +58,7 @@ describe("Historical expense Electricity Per SF is correctly calculated and disp
             5.2 correctly displayed on slidebars
         `);
         Income.ExpenseForecast.Actions.matchElementSnapshot(
-            Income.ExpenseForecast.Page.ElectricityCard, testData.electricityCardSnapshotName, {padding: [0, 100]}
+            Income.ExpenseForecast.Page.ElectricityCard, testData.electricityCardSnapshotName, {padding: [10, 100]}
         );
        
         deleteReport(testData.reportCreationData.reportNumber);

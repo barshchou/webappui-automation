@@ -39,7 +39,7 @@ describe("Comparable Min, Max, Avg values for Electricity Per SF are correctly c
             5.2 correctly displayed on a slidebar
         `);
         Income.ExpenseForecast.Actions.matchElementSnapshot(
-            Income.ExpenseForecast.Page.ElectricityCard, testData.electricityCardSnapshotName, {padding: [0, 100]}
+            Income.ExpenseForecast.Page.ElectricityCard, testData.electricityCardSnapshotName, {padding: [10, 100]}
         );
 
         deleteReport(testData.reportCreationData.reportNumber);
