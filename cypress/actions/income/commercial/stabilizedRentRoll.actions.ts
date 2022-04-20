@@ -85,7 +85,7 @@ class StabilizedRentRollActions extends BaseActionsExt<typeof stabRenRollPage>{
     }
 
     clickNarrativeSuggestions(verifyListValue: string): StabilizedRentRollActions {
-        stabRenRollPage.narrativeSuggestionsList.contains(verifyListValue).click();
+        stabRenRollPage.narrativeSuggestionsListItems.contains(verifyListValue).click();
         return this;
     }
 
