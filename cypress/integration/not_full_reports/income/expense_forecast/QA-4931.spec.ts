@@ -53,13 +53,10 @@ describe("Historical expense Repairs & Maintenance Per Unit is correctly calcula
       .verifyForecastItemByExpensePeriodType(testData.t12RepairsItem, testData.buildingDescription, "Actual T12")
       .verifyForecastItemByExpensePeriodType(testData.historicalRepairsItem, testData.buildingDescription,"Annualized Historical")
       .verifyForecastItemByExpensePeriodType(testData.ownerProjectionRepairsItem, testData.buildingDescription, "Owner's Projection")
-      .addPaddingStyle()
       .hideExpenseForecastHeader();
 
       Income.ExpenseForecast.Actions.matchElementSnapshot(
-        Income.ExpenseForecast.Page.RepairsAndMaintenanceCard,
-        testData.repairsCardSnapshotName
-      );
+        Income.ExpenseForecast.Page.RepairsAndMaintenanceCard, testData.repairsCardSnapshotName, {padding: [10, 100]});
   
       deleteReport(testData.reportCreationData.reportNumber);
   

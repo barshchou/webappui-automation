@@ -48,19 +48,19 @@ describe("Historical expense Electricity Per SF is correctly calculated and disp
             .verifyForecastItemByExpensePeriodType(testData.actualElectricityItem, testData.buildingDescription, "Actual")
             .verifyForecastItemByExpensePeriodType(testData.t12ElectricityItem, testData.buildingDescription, "Actual T12")
             .verifyForecastItemByExpensePeriodType(testData.historicalElectricityItem, testData.buildingDescription, "Annualized Historical")
-            .verifyForecastItemByExpensePeriodType(testData.ownerProjectionElectricityItem, testData.buildingDescription, "Owner's Projection");
+            .verifyForecastItemByExpensePeriodType(testData.ownerProjectionElectricityItem, testData.buildingDescription, "Owner's Projection")
+            .hideExpenseForecastHeader();
+            
 
         cy.stepInfo(`
         5. Check historical expenses values for Electricity card. They should be:
             5.1 calculated for each expense type as: [Expense Period type]Electricity / GBA
             5.2 correctly displayed on slidebars
-        `)
-        Income.ExpenseForecast.Actions.hideExpenseForecastHeader()
-            .matchElementSnapshot(
-            Income.ExpenseForecast.Page.ElectricityCard.parent(),
-            testData.electricityCardSnapshotName
+        `);
+        Income.ExpenseForecast.Actions.matchElementSnapshot(
+            Income.ExpenseForecast.Page.ElectricityCard, testData.electricityCardSnapshotName, {padding: [10, 100]}
         );
        
         deleteReport(testData.reportCreationData.reportNumber);
-    })
-})
+    });
+});
