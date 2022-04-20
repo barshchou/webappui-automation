@@ -4,10 +4,10 @@ import NavigationSection from "../../../../actions/base/navigationSection.action
 import Report from "../../../../actions/report/report.manager";
 import testData from '../../../../fixtures/not_full_reports/report/client/QA-4638.fixture';
 
-const reportCreationData = ReportDataCreator.getDefaultReportData("4654");
+const reportCreationData = ReportDataCreator.getDefaultReportData("4637");
 
-describe(`Verify the suggested text dropdown in the new narrative component added through "=" for the 'Sheriff's sale' option 
-    on the Report > Client page for Intended User and Identification of the Client sections.`, () => {
+describe(`Verify the suggested text dropdown in the new narrative component added through "=" for the 'Foreclosure sale' 
+    option on the Report > Client page for Intended User and Identification of the Client sections.`, () => {
     before("Login, create report", () => {
         createReport(reportCreationData);
     });
