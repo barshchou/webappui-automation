@@ -6,4 +6,4 @@ export default {
     numberOfCommercialUnits: 1,
     groupName: "Frontage",
     useRadios: ["small", "medium", "large", "other"]
-}
+};

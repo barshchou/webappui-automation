@@ -1,75 +1,50 @@
-import BaseActions from "../base/base.actions";
 import grossIncomePage from "../../pages/income/potentialGrossIncome.page";
 import {getNumberFromDollarNumberWithCommas, numberWithCommas} from "../../../utils/numbers.utils";
 import potentialGrossIncomePage from "../../pages/income/potentialGrossIncome.page";
+import BaseActionsExt from "../base/base.actions.ext";
 
-class PotentialGrossIncomeActions extends BaseActions {
+class PotentialGrossIncomeActions extends BaseActionsExt<typeof potentialGrossIncomePage> {
 
-    enterResVacancyCollLoss(value: number): PotentialGrossIncomeActions {
+    enterResVacancyCollLoss(value: number): this {
         grossIncomePage.resVacancyPotentialLossInput.clear().type(`${value}`)
             .should("have.value", `${value.toFixed(2)}`);
         return this;
     }
 
-    /**
-     * @param {number} vacancyCollLoss
-     * @param {string | number} potentialIncome
-     * @returns {PotentialGrossIncomeActions}
-     */
-    verifyResidentialVCLoss(vacancyCollLoss, potentialIncome) {
+    verifyResidentialVCLoss(vacancyCollLoss: number, potentialIncome: string | number): this {
         const potIncomeNumber = getNumberFromDollarNumberWithCommas(potentialIncome);
         const valueToBe = `$${numberWithCommas(Math.round(potIncomeNumber / 100 * vacancyCollLoss))}`;
         grossIncomePage.residentialVCLoss.should("be.disabled").should("have.value", valueToBe);
         return this;
     }
 
-    /**
-     * @param {number} value
-     * @returns {PotentialGrossIncomeActions}
-     */
-    enterCoStarSubmarketRate(value) {
-        grossIncomePage.coStarSubmarketRateInput.clear().type(value).should("have.value", value);
+    enterCoStarSubmarketRate(value: number): this {
+        grossIncomePage.coStarSubmarketRateInput.clear().type(`${value}`).should("have.value", value);
         return this;
     }
 
-    /**
-     * @param {number} value
-     * @returns {PotentialGrossIncomeActions}
-     */
-    enterCoStarMetroRate(value) {
-        grossIncomePage.coStarMetroRateInput.clear().type(value).should("have.value", value);
+    enterCoStarMetroRate(value: number): this {
+        grossIncomePage.coStarMetroRateInput.clear().type(`${value}`).should("have.value", value);
         return this;
     }
 
-    /**
-     * @param {string} newCommentary
-     * @returns {PotentialGrossIncomeActions}
-     */
-    editCommentary(newCommentary) {
+    editCommentary(newCommentary: string): this {
         grossIncomePage.commentaryEditButton.click();
         grossIncomePage.commentaryInput.clear().type(newCommentary).should("have.text", newCommentary);
         return this;
     }
 
-    /**
-     * @param {string} incomeToBe
-     * @returns {PotentialGrossIncomeActions}
-     */
-    verifyPotentialResidentialIncome(incomeToBe) {
+    verifyPotentialResidentialIncome(incomeToBe: string): this {
         grossIncomePage.potentialResidentialIncome.should("have.text", incomeToBe);
         return this;
     }
 
-    /**
-     * @param {string} incomeToBe
-     * @returns {PotentialGrossIncomeActions}
-     */
-    verifyOtherIncome(incomeToBe = "$0.00") {
+    verifyOtherIncome(incomeToBe = "$0.00"): this {
         grossIncomePage.otherIncome.should("have.text", incomeToBe);
         return this;
     }
 
-    verifyPotentialGrossIncome() {
+    verifyPotentialGrossIncome(): this {
         grossIncomePage.potentialResidentialIncome.then(el => {
             const potResIncomeNumber = getNumberFromDollarNumberWithCommas(el.text());
             grossIncomePage.otherIncome.then(otherIncome => {
@@ -81,7 +56,7 @@ class PotentialGrossIncomeActions extends BaseActions {
         return this;
     }
 
-    verifyLessResidentialVCLoss() {
+    verifyLessResidentialVCLoss(): this {
         grossIncomePage.residentialVCLoss.then(vcLoss => {
            const resVCLossNumber = getNumberFromDollarNumberWithCommas(vcLoss.attr("value"));
             const textToBe = `-$${numberWithCommas(resVCLossNumber.toFixed(2))}`;
@@ -90,7 +65,7 @@ class PotentialGrossIncomeActions extends BaseActions {
         return this;
     }
 
-    verifyEffectiveGrossIncome() {
+    verifyEffectiveGrossIncome(): this {
         grossIncomePage.potentialGrossIncome.then(grossIncome => {
             const potGrossIncomeNumber = getNumberFromDollarNumberWithCommas(grossIncome.text());
             grossIncomePage.lessResidentialVCLoss.then(lessVCLoss => {
@@ -102,12 +77,7 @@ class PotentialGrossIncomeActions extends BaseActions {
         return this;
     }
 
-    /**
-     * @param {string} potentialResIncomeToBe
-     * @param {string} otherIncome
-     * @returns {PotentialGrossIncomeActions}
-     */
-    verifyIncomeTable(potentialResIncomeToBe, otherIncome = "$0.00") {
+    verifyIncomeTable(potentialResIncomeToBe: string, otherIncome = "$0.00"): this {
         this.verifyPotentialResidentialIncome(potentialResIncomeToBe)
             .verifyOtherIncome(otherIncome)
             .verifyPotentialGrossIncome()
@@ -116,45 +86,28 @@ class PotentialGrossIncomeActions extends BaseActions {
         return this;
     }
 
-    /**
-     * @param {string | number} percentage
-     * @param {string} useValue
-     * @returns {PotentialGrossIncomeActions}
-     */
-    enterCommercialVCLossPercentage(percentage, useValue) {
+    enterCommercialVCLossPercentage(percentage: string | number, useValue: string): this {
         const valueToBe = typeof percentage === "string" ? percentage : percentage.toFixed(2);
-        potentialGrossIncomePage.getCommercialVCLossPercentage(useValue).clear().type(percentage).should("have.value", valueToBe);
+        potentialGrossIncomePage.getCommercialVCLossPercentage(useValue).clear().type(`${percentage}`)
+            .should("have.value", valueToBe);
         return this;
     }
 
-    /**
-     * @param {number | string} vacancy
-     * @param {string} useValue
-     * @returns {PotentialGrossIncomeActions}
-     */
-    enterSubjectAreaCommercialVacancy(vacancy, useValue) {
-        potentialGrossIncomePage.getSubjectAreaCommercialVacancy(useValue).clear().type(vacancy).should("have.value", vacancy);
+    enterSubjectAreaCommercialVacancy(vacancy: number | string, useValue: string): this {
+        potentialGrossIncomePage.getSubjectAreaCommercialVacancy(useValue).clear().type(`${vacancy}`)
+            .should("have.value", vacancy);
         return this;
     }
 
-    /**
-     * @param {string} useValue
-     * @param {string} checkValue
-     * @returns {PotentialGrossIncomeActions}
-     */
-    checkCommercialSubjectSuitabilityByValue(useValue, checkValue) {
+    checkCommercialSubjectSuitabilityByValue(useValue: string, checkValue: string): this {
         potentialGrossIncomePage.getCommercialSubjectSuitabilityRadio(useValue).check(checkValue).should("be.checked");
         return this;
     }
 
-    /**
-     * @param {string | number} elementToContain
-     * @returns {PotentialGrossIncomeActions}
-     */
-    verifyCommercialVCLossCommentaryContain(elementToContain) {
+    verifyCommercialVCLossCommentaryContain(elementToContain: string | number): this {
         potentialGrossIncomePage.commercialVCLossCommentary.should("contain.text", elementToContain);
         return this;
     }
 }
 
-export default new PotentialGrossIncomeActions();
+export default new PotentialGrossIncomeActions(potentialGrossIncomePage);
