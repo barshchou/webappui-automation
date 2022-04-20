@@ -20,8 +20,13 @@ class StabilizedRentRollPage extends BasePage{
     get monthlyRentCells() {return cy.xpath("(//*[contains(@data-qa, 'monthlyRent-')])[position() < last()]");}
 
     get annualRentPsfCells() {return cy.xpath("//*[contains(@class, 'htNumeric')]|(//*[contains(@data-qa, 'annualRentPsf')])[position() < last()]");}
+   
+    get annualRentPsfCellsScroll() {return cy.contains("Rent/SF").scrollIntoView();}     
+
+    get annualRentPsfCellsInputField() {return cy.get('textarea.handsontableInput').scrollIntoView();}
 
     get monthlyRentPsfCells() {return cy.xpath("//*[contains(@class, 'htNumeric')]|(//*[contains(@data-qa, 'monthlyRentPsf')])[position() < last()]");}
+  
 }
 
 export default new StabilizedRentRollPage();
