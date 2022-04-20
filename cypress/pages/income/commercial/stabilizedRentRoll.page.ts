@@ -23,6 +23,10 @@ class StabilizedRentRollPage extends BasePage{
 
     get monthlyRentPsfCells() {return cy.xpath("//*[contains(@class, 'htNumeric')]|(//*[contains(@data-qa, 'monthlyRentPsf')])[position() < last()]");}
 
+    get stabilizedCommercialIncomeTextArea() {return cy.get('[role="textbox"]');}
+
+    get narrativeSuggestionsListItems() {return cy.xpath("//*[@data-qa='narrative-suggestions-list']//li");}
+
     get cancelEditDiscussionButton() {return cy.xpath("//button[.='Cancel']");}
 }
 

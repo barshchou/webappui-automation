@@ -74,6 +74,26 @@ class StabilizedRentRollActions extends BaseActionsExt<typeof stabRenRollPage>{
         return this;
     }
 
+    clickEditStabilizedCommercialIncomeDiscussion(): StabilizedRentRollActions {
+        stabRenRollPage.formEditBtn(0).click();
+        return this;
+    }
+
+    typeStabilizedCommercialIncomeTextArea(value: string): StabilizedRentRollActions {
+        stabRenRollPage.stabilizedCommercialIncomeTextArea.type(value);
+        return this;
+    }
+
+    clickNarrativeSuggestions(verifyListValue: string): StabilizedRentRollActions {
+        stabRenRollPage.narrativeSuggestionsListItems.contains(verifyListValue).click();
+        return this;
+    }
+
+    verifyStabilizedCommercialIncomeTextArea(verifyAreaValue: string): StabilizedRentRollActions {
+        stabRenRollPage.stabilizedCommercialIncomeTextArea.should("contain.text", verifyAreaValue);
+        return this;
+    }
+
     clickEditDiscussionButton(): this {
         stabRenRollPage.formEditBtn(0).scrollIntoView().click();
         return this;
