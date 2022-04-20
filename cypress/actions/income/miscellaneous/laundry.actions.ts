@@ -4,6 +4,17 @@ import {numberWithCommas} from "../../../../utils/numbers.utils";
 
 class LaundryActions extends BaseActions{
 
+
+    verifyThatPageIsOpened(): this {
+        laundryPage.laundryheaderSection.should("be.visible");
+        cy.url().then(url=>{
+            let orlObj = new URL(url);
+            cy.log("Check whether current URL ends with '/laundry-income'");
+            cy.wrap(orlObj.pathname.endsWith("/laundry-income")).should("be.true");
+        });
+        return this;
+    }
+
     verifyNoLaundryButtonExists() {
         laundryPage.noLaundryButton.should("exist");
         return this;
