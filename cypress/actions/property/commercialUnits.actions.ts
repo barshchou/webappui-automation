@@ -3,6 +3,33 @@ import {cutDecimalPartToNumberOfDigits, isHasDecimalPartMoreNumberOfDigits, numb
 import BaseActionsExt from "../base/base.actions.ext";
 
 class CommercialUnitsActions extends BaseActionsExt<typeof commercialUnitsPage> {
+    verifyImageHasRotated(rotateIndex: number){
+        commercialUnitsPage.commercialUnitImage
+        .last().invoke("attr","style").then(style => {
+            expect(style).includes(`w_256,a_${90*rotateIndex}`);
+        });
+        return this;
+    }
+
+    /**
+     *NOTE: Rotates last image
+     */
+    rotateImage(){
+        commercialUnitsPage.iconRotateImage.last().click({force:true});
+        return this;
+    }
+
+    uploadImages(imageType: "Interior Images" | "Exterior Images", pathToFile: string, inputMethod: "drag-n-drop" | "input") {
+        let aliasImageUpload = "aliasImageUpload";
+        cy.intercept("POST","/imageUpload").as(aliasImageUpload);
+        cy.contains(imageType).next().find('input[type="file"]')
+        .attachFile(pathToFile,{subjectType:inputMethod});
+        cy.wait(`@${aliasImageUpload}`).then(({response}) => {
+            expect(response.statusCode).equal(200);
+            cy.log("imageUpload resolved");
+        });
+        return this;
+    }
 
     clickCommercialUnitTabByIndex(index = 0): this {
         commercialUnitsPage.commercialUnitsTabs.eq(index).click();

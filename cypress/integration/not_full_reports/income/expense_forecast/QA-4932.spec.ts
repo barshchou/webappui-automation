@@ -39,13 +39,10 @@ describe("Comparable Min, Max, Avg values for Repairs & Maintenance Per Unit are
     Income.ExpenseForecast.Actions.verifyForecastItemCompMin(testData.repairsItem,testData.comparables)
       .verifyForecastItemCompAverage(testData.repairsItem, testData.comparables)
       .verifyForecastItemCompMax(testData.repairsItem, testData.comparables)
-      .addPaddingStyle()
       .hideExpenseForecastHeader();
 
     Income.ExpenseForecast.Actions.matchElementSnapshot(
-      Income.ExpenseForecast.Page.RepairsAndMaintenanceCard,
-      testData.repairsCardSnapshotName
-    );
+      Income.ExpenseForecast.Page.RepairsAndMaintenanceCard, testData.repairsCardSnapshotName, {padding: [10, 100]});
 
     deleteReport(testData.reportCreationData.reportNumber);
   });

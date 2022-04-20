@@ -8,7 +8,7 @@ import { getTodayDateString } from "../../../../../../utils/date.utils";
 import stabilizedRentRollPage from "../../../../../pages/income/commercial/stabilizedRentRoll.page";
 
 
-describe("Verify the display of the Stabilized Rent Roll page", () => {
+describe.skip("Verify the display of the Stabilized Rent Roll page", () => {
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
     });
