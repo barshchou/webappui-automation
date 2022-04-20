@@ -4,6 +4,7 @@
 
 - [About](#about)
 - [Getting Started](#getting_started)
+  - [System requirements](#system_requirements)
   - [General prerequisites](#general_prerequisites)
   - [Setup](#setup)
 - [Usage](#usage)
@@ -30,6 +31,10 @@ There are several main folders of these project:
 * utils - folder for helper functions. Contains useful functions validating format of data, working with uploading fixtures, acquiring baseUrl for current environment of test run.
 
 ## Getting started <a id="getting_started"></a>
+
+### System requirements <a id="system_requirements"></a>
+- (Windows users) [WSL2](https://docs.microsoft.com/en-us/windows/wsl/install) (Windows Subsystem for Linux). We use *Ubuntu 20.04* and you need to [use version 2 of WSL](https://docs.microsoft.com/en-us/windows/wsl/install#upgrade-version-from-wsl-1-to-wsl-2).
+- Docker. Get it for your system from [here](https://docs.docker.com/get-docker/).If you use Windows - please, [use WSL 2 based engine](https://docs.docker.com/desktop/windows/wsl/) for Docker.
 
 ### General prerequisites <a id="general_prerequisites"></a>
 1. Install `nvm`([macOS/Linux](https://github.com/nvm-sh/nvm), [Windows](https://github.com/coreybutler/nvm-windows)).
