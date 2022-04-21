@@ -29,11 +29,11 @@ describe("Verify the 'Changes will be lost' modal functionality for Intended Use
             .verifyIdentificationOfTheClientTextBox(testData.verifyAreaValue);
 
 
-        cy.stepInfo("4. Click on the X icon and verify that the modal is closed and no changes are applied.");
-        cy.stepInfo("5. Click on the Revert to Original button again.");
-        cy.stepInfo("6. Click on the Cancel button in the modal and verify that the modal is closed and no changes are applied.");
-        cy.stepInfo("7. Click on the Revert to Original button again.");
-        cy.stepInfo("8. Click on the Revert to Original button again.");
+        // cy.stepInfo("4. Click on the X icon and verify that the modal is closed and no changes are applied.");
+        // cy.stepInfo("5. Click on the Revert to Original button again.");
+        // cy.stepInfo("6. Click on the Cancel button in the modal and verify that the modal is closed and no changes are applied.");
+        // cy.stepInfo("7. Click on the Revert to Original button again.");
+        // cy.stepInfo("8. Click on the Revert to Original button again.");
 
         deleteReport(testData.reportCreationData.reportNumber);
     });

@@ -24,4 +24,9 @@ export default class BasePage {
         return cy.xpath("//button[.='Save']")
         .eq((index !== 0) ? index : 0);
     }
+
+    formRevertToOriginalBtn(index?: number) {
+        return cy.xpath("//button[.='Revert to Original']")
+        .eq((index !== 0) ? index : 0);
+    }
 }
