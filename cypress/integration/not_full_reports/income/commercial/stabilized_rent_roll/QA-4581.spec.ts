@@ -40,7 +40,7 @@ describe("Verify the Save & Continue button functionality on the Stabilized Rent
         cy.stepInfo(` 4. Verify that the changes are saved and the user is redirected to the next page (Income > Miscellaneous > Laundry). `);
         Income.Miscellaneous.Laundry.verifyThatPageIsOpened();
         NavigationSection.clickIncomeApproachButton()
-            .clickCommercialArrow().openCommercialStabilizedRentRollInCommercialWhenThereIsNoSaveNotification();
+            .clickCommercialArrow().clickCommercialStabRentRollButton();
         Income.Commercial.StabilizedRentRoll.verifyAnnuallyRentPsfByRowNumber(testData.leaseStatuses, testData.rentToBe);
 
         cy.stepInfo(` 4. Delete report`);
