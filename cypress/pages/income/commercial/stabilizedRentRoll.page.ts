@@ -23,9 +23,7 @@ class StabilizedRentRollPage extends BasePage{
 
     get annualRentPsfCells() {return cy.xpath("//*[contains(@class, 'htNumeric')]|(//*[contains(@data-qa, 'annualRentPsf')])[position() < last()]");}
    
-    get annualRentPsfCellsScroll() {return cy.contains("Rent/SF").scrollIntoView();}     
-
-    get annualRentPsfCellsInputField() {return cy.get('textarea.handsontableInput').scrollIntoView();}
+    get annualRentPsfCellsInputField() {return cy.get('textarea.handsontableInput');}
 
     get monthlyRentPsfCells() {return cy.xpath("//*[contains(@class, 'htNumeric')]|(//*[contains(@data-qa, 'monthlyRentPsf')])[position() < last()]");}
   

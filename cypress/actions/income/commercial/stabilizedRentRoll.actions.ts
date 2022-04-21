@@ -6,7 +6,7 @@ class StabilizedRentRollActions extends BaseActions {
 
     verifyThatPageIsOpened(): this {
         stabRenRollPage.stabilizedRentRollheaderSection.should("be.visible");
-        cy.url().then(url=>{
+        cy.url().then(url => {
             let urlObj = new URL(url);
             cy.log("Check whether current URL ends with '/commercial-projected-rent-roll'");
             cy.wrap(urlObj.pathname.endsWith("/commercial-projected-rent-roll")).should("be.true");
@@ -90,9 +90,13 @@ class StabilizedRentRollActions extends BaseActions {
         return this;
     }
 
+    annualRentPsfCellsScroll() {
+        cy.contains("Rent/SF").scrollIntoView();
+        return this;
+    }
 
     enterAnnualRentPerSFByRowNumber(rentToBe: string | number, rowNumber: number): StabilizedRentRollActions {
-        stabRenRollPage.annualRentPsfCellsScroll;
+        this.annualRentPsfCellsScroll();
         stabRenRollPage.annualRentPsfCells.eq(rowNumber).dblclick({ force: true });
         stabRenRollPage.annualRentPsfCellsInputField.clear().type(`${rentToBe}`).type("{enter}");
         this.verifyAnnuallyRentPsf(rentToBe, rowNumber);
@@ -109,7 +113,7 @@ class StabilizedRentRollActions extends BaseActions {
     }
 
     verifyAnnuallyRentPsf(rentToBe: string | number, rowNumber: number): StabilizedRentRollActions {
-        stabRenRollPage.annualRentPsfCellsScroll;   
+        stabRenRollPage.annualRentPsfCellsScroll;
         stabRenRollPage.annualRentPsfCells.eq(rowNumber).should("contain.text", rentToBe);
         return this;
     }
