@@ -15,20 +15,15 @@ class StabilizedRentRollActions extends BaseActions {
     }
 
 
-    verifyIsInspectedChecked(): StabilizedRentRollActions {
-        stabRenRollPage.elementToVerifyIsInspected.should("have.css", "background-color", "rgb(66, 96, 211)");
-        return this;
-    }
-
-    verifyIsInspectedCheckedByRow(rowNumber: number): StabilizedRentRollActions {
+    verifyIsInspectedChecked(rowNumber?: number = 0): StabilizedRentRollActions {
         stabRenRollPage.elementToVerifyIsInspected.eq(rowNumber).should("have.css", "background-color", "rgb(66, 96, 211)");
         return this;
     }
 
-    verifyIsInspectedCheckedAll(isInspected): StabilizedRentRollActions {
+    verifyIsInspectedCheckedAll(isInspected: string): StabilizedRentRollActions {
         for (let i = 0; i < isInspected.length; i++) {
             if (isInspected[i] === "Inspected") {
-                this.verifyIsInspectedCheckedByRow(i);
+                this.verifyIsInspectedChecked(i);
             }
         }
         return this;
