@@ -4,6 +4,17 @@ import { numberWithCommas } from "../../../../utils/numbers.utils";
 
 class StabilizedRentRollActions extends BaseActions {
 
+    verifyThatPageIsOpened(): this {
+        stabRenRollPage.stabilizedRentRollheaderSection.should("be.visible");
+        cy.url().then(url=>{
+            let urlObj = new URL(url);
+            cy.log("Check whether current URL ends with '/commercial-projected-rent-roll'");
+            cy.wrap(urlObj.pathname.endsWith("/commercial-projected-rent-roll")).should("be.true");
+        });
+        return this;
+    }
+
+
     verifyIsInspectedChecked(): StabilizedRentRollActions {
         stabRenRollPage.elementToVerifyIsInspected.should("have.css", "background-color", "rgb(66, 96, 211)");
         return this;
