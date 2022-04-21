@@ -57,8 +57,8 @@ class ClientActions extends BaseActionsExt<typeof clientPage> {
         return this;
     }
 
-    clickEditIntendedUserButton() {
-        clientPage.EditIntendedUserBtn.click();
+    clickEditIntendedUserButton(index = 0) {
+        clientPage.formEditBtn(index).click();
         return this;
     }
 
@@ -67,13 +67,23 @@ class ClientActions extends BaseActionsExt<typeof clientPage> {
         return this;
     }
 
-      clickNarrativeSuggestions(verifyListValue: string): ClientActions {
-        clientPage.narrativeSuggestionsList.contains(verifyListValue).click();
+    enterIdentificationOfTheClientTextBox(textToType: string): ClientActions {
+        clientPage.IdentificationOfClientTextBox.type(textToType);
+        return this;
+    }
+
+    clickNarrativeSuggestions(verifyListValue: string, numberLists = 0): ClientActions {
+        clientPage.narrativeSuggestionsList.eq(numberLists).contains(verifyListValue).click();
         return this;
     }
 
     verifyIntendedUserTextBox(verifyAreaValue: string): ClientActions {
         clientPage.IntendedUserTextBox.should("contain.text", verifyAreaValue);
+        return this;
+    }
+
+    verifyIdentificationOfTheClientTextBox(verifyAreaValue: string): ClientActions {
+        clientPage.IdentificationOfClientTextBox.should("contain.text", verifyAreaValue);
         return this;
     }
 }

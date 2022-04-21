@@ -15,14 +15,18 @@ describe(`Verify the suggested text dropdown in the new narrative component adde
 
         cy.stepInfo('2. Click on the Edit button for Intended User and Identification of the Client sections.');
         Report.Client.verifyProgressBarNotExist()
+            .clickEditIntendedUserButton()
             .clickEditIntendedUserButton();
 
         cy.stepInfo('3. Enter the “=S“ and select the \'Sheriff\'s sale\' option for both sections.');
         Report.Client.enterIntendedUserTextBox(testData.textToType)
-            .clickNarrativeSuggestions(testData.verifyListValue);
+            .clickNarrativeSuggestions(testData.verifyListValue)
+            .enterIdentificationOfTheClientTextBox(testData.textToType)
+            .clickNarrativeSuggestions(testData.verifyListValue, 1);
 
         cy.stepInfo('4.Verify that the following text appears for both sections.');
-        Report.Client.verifyIntendedUserTextBox(testData.verifyAreaValue);
+        Report.Client.verifyIntendedUserTextBox(testData.verifyAreaValue)
+            .verifyIdentificationOfTheClientTextBox(testData.verifyAreaValue);
 
         deleteReport(testData.reportCreationData.reportNumber);
     });
