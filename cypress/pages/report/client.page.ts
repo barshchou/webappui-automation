@@ -22,25 +22,15 @@ class ClientPage extends BasePage{
 
     get revertToGeneratedButton() {return cy.get("[data-qa=generated-commentary-revert-btn]");}
 
-    get EditIntendedUserBtn(){ 
-        return cy.xpath('//*[contains(text(),"Edit")]').eq(0);
-    }
-
-    get EditIdentificationOfClientBtn(){
-        return cy.xpath('//*[contains(text(),"Edit")]').eq(0);
-    }
-
     get IntendedUserTextBox(){
-        return cy.get('[data-slate-editor="true"]').eq(0);
+        return cy.get('[role="textbox"]').eq(0);
     }
 
     get IdentificationOfClientTextBox(){
-        return cy.get('[data-slate-editor="true"]').eq(1);
+        return cy.get('[role="textbox"]').eq(1);
     }
     
     get narrativeSuggestionsList() {return cy.get("[data-qa='narrative-suggestions-list'] > ul");}
-
-    get test() {return cy.xpath("//button[contains(@class, 'css-10ijbxr') and contains(@type, 'button')] ");}
 }
 
 export default new ClientPage();
