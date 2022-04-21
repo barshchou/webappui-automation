@@ -7,7 +7,6 @@ import testData from "../../../../../fixtures/not_full_reports/income/commercial
 describe(`Verify the suggested text dropdown in the new narrative component added through "=" for the 'Unchanged Renovation' 
   option in the Generated Commentary on the Stabilized Rent Roll page.`, () => {
     before("Login, create report", () => {
-        cy.stepInfo(`Preconditions: The mixed report is created and several commercial units are added.`);
         createReport(testData.reportCreationData);
         _NavigationSection.navigateToPropertySummary();
         Property._Summary.enterNumberOfCommercialUnits(testData.numberOfCommercialUnits);
@@ -22,12 +21,11 @@ describe(`Verify the suggested text dropdown in the new narrative component adde
         cy.stepInfo("2. Click on the Edit button in the Stabilized Commercial Income Discussion section.");
         Income._CommercialManager.StabilizedRentRoll.clickEditStabilizedCommercialIncomeDiscussion();
 
-        cy.stepInfo("3. Enter the “=Un“ and select the 'Unchanged Renovation' option.");
+        cy.stepInfo("3. Enter the “=S“ and select the 'Sheriff's sale' option.");
         Income._CommercialManager.StabilizedRentRoll.typeStabilizedCommercialIncomeTextArea(testData.value)
           .clickNarrativeSuggestions(testData.verifyListValue);
 
-        cy.stepInfo(`4. Verify that the following text appears: Upon renovation, the subject unit 
-          count and gross building area will remain unchanged.`);
+        cy.stepInfo("4. Verify that the following text appears.");
         Income._CommercialManager.StabilizedRentRoll.verifyStabilizedCommercialIncomeTextArea(testData.verifyAreaValue);
 
         deleteReport(testData.reportCreationData.reportNumber);
