@@ -28,7 +28,8 @@ describe("Verify the Save & Continue button functionality on the Stabilized Rent
 
         cy.stepInfo(` 2. Verify the Save & Continue button is displayed on the Stabilized Rent Roll page `);
         NavigationSection.clickIncomeApproachButton().openCommercialStabilizedRentRollInCommercial();
-        cy.wait(3000);
+       Income.Commercial.StabilizedRentRoll.verifyThatPageIsOpened();
+
         Income.Commercial.StabilizedRentRoll.verifySaveContinueButtonExist();
 
         cy.stepInfo(` 3. Fill in the editable fields with values or/and check check-boxes or/and click the radio button and click on the Save & Continue button. `);
