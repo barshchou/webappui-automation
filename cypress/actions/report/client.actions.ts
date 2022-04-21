@@ -57,7 +57,7 @@ class ClientActions extends BaseActionsExt<typeof clientPage> {
         return this;
     }
 
-    clickEditIntendedUserButton(index = 0) {
+    clickTextBoxEditButton(index = 0) {
         clientPage.formEditBtn(index).click();
         return this;
     }

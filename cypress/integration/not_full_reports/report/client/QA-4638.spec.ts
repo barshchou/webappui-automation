@@ -15,8 +15,8 @@ describe(`Verify the suggested text dropdown in the new narrative component adde
 
         cy.stepInfo('2. Click on the Edit button for Intended User and Identification of the Client sections.');
         Report.Client.verifyProgressBarNotExist()
-            .clickEditIntendedUserButton()
-            .clickEditIntendedUserButton();
+            .clickTextBoxEditButton()
+            .clickTextBoxEditButton();
 
         cy.stepInfo('3. Enter the “=S“ and select the \'Sheriff\'s sale\' option for both sections.');
         Report.Client.enterIntendedUserTextBox(testData.textToType)
