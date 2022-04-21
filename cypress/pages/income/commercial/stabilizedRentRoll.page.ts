@@ -3,9 +3,7 @@ import BasePage from "../../base/base.page";
 class StabilizedRentRollPage extends BasePage{
     get elementToVerifyIsInspected() {return cy.get("*[data-qa*='isInspected'] span");}
 
-    get stabilizedRRPanel(){
-        return cy.get('[id="STICKY_FORM_PANEL_WRAPPER_ID"] + div');
-    }
+    get stabilizedRRPanel(){return cy.get('[id="STICKY_FORM_PANEL_WRAPPER_ID"] + div');}
 
     get leaseStatusCells() {return cy.get("[data-qa^=leaseStatus].htAutocomplete");}
 
@@ -23,7 +21,7 @@ class StabilizedRentRollPage extends BasePage{
 
     get monthlyRentPsfCells() {return cy.xpath("//*[contains(@class, 'htNumeric')]|(//*[contains(@data-qa, 'monthlyRentPsf')])[position() < last()]");}
 
-    get stabilizedCommercialIncomeTextArea() {return cy.xpath("//*[contains(@role, 'textbox')]");}
+    get stabilizedCommercialIncomeTextArea() {return cy.xpath("//*[contains(text(), 'Stabilized Commercial Income Discussion')]/../../div[3]/*[contains(@role, 'textbox')]");}
 
     get narrativeSuggestionsList() {return cy.get("[data-qa='narrative-suggestions-list'] > ul");}
 
