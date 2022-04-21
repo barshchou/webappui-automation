@@ -23,11 +23,11 @@ class ClientPage extends BasePage{
     get revertToGeneratedButton() {return cy.get("[data-qa=generated-commentary-revert-btn]");}
 
     get IntendedUserTextBox(){
-        return cy.get('data-slate-editor="true"]').eq(0);
+        return cy.get('[data-slate-editor="true"]').eq(0);
     }
 
     get IdentificationOfClientTextBox(){
-        return cy.get('data-slate-editor="true"]').eq(1);
+        return cy.get('[data-slate-editor="true"]').eq(1);
     }
     
     get narrativeSuggestionsList() {return cy.get("[data-qa='narrative-suggestions-list'] > ul");}
