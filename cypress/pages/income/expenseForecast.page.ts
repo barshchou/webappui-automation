@@ -62,6 +62,14 @@ class ExpenseForecastPage extends BasePage {
     get toeCommentarySaveButton() {return cy.xpath("//*[.='TOTAL OPERATING EXPENSES']//following::button[.='Save'][1]");}
 
     get toeCommentaryModified() {return cy.xpath("//*[.='TOTAL OPERATING EXPENSES']//following::*[.='Modified']");}
+
+    get waterAndSewerCommentary() {return cy.xpath("//div[.='WATER & SEWER']//following::div[@data-slate-editor][1]");}
+
+    get waterAndSewerCommentaryEditButton() {return cy.xpath("//div[.='WATER & SEWER']//following::button[.='Edit'][1]");}
+
+    get waterAndSewerCommentarySaveButton() {return cy.xpath("//div[.='WATER & SEWER']//following::button[.='Save'][1]");}
+
+    get waterAndSewerCommentaryModified() {return cy.xpath("//*[.='WATER & SEWER']//following::*[.='Modified'][2]");}
 }
 
 export default new ExpenseForecastPage();

@@ -251,6 +251,11 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
         return this;
     }
 
+    verifyWaterAndSewerCommentary(textToBe: string): ExpenseForecastActions {
+        expenseForecastPage.waterAndSewerCommentary.should("contain.text", textToBe);
+        return this;
+    }
+
     editTOECommentary(newText: string, isWithClear = false): ExpenseForecastActions {
         expenseForecastPage.toeCommentaryEditButton.click();
         if (isWithClear) {
@@ -259,6 +264,17 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
         expenseForecastPage.toeCommentary.type(newText);
         expenseForecastPage.toeCommentarySaveButton.click();
         expenseForecastPage.toeCommentaryModified.should("exist");
+        return this;
+    }
+
+    editWaterAndSewerCommentary(newText: string, isWithClear = false): ExpenseForecastActions {
+        expenseForecastPage.waterAndSewerCommentaryEditButton.click();
+        if (isWithClear) {
+            expenseForecastPage.waterAndSewerCommentary.clear();
+        }
+        expenseForecastPage.waterAndSewerCommentary.type(newText);
+        expenseForecastPage.waterAndSewerCommentarySaveButton.click();
+        expenseForecastPage.waterAndSewerCommentaryModified.should("exist");
         return this;
     }
 
