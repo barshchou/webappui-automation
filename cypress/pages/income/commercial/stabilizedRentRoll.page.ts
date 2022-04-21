@@ -3,7 +3,7 @@ import BasePage from "../../base/base.page";
 class StabilizedRentRollPage extends BasePage{
     get elementToVerifyIsInspected() {return cy.get("*[data-qa*='isInspected'] span");}
 
-    get stabelizedRRPanel(){
+    get stabilizedRRPanel(){
         return cy.get('[id="STICKY_FORM_PANEL_WRAPPER_ID"] + div');
     }
 
@@ -26,6 +26,7 @@ class StabilizedRentRollPage extends BasePage{
     get stabilizedCommercialIncomeTextArea() {return cy.get("[role='textbox']");}
 
     get narrativeSuggestionsList() {return cy.get("[data-qa='narrative-suggestions-list'] > ul");}
+
 }
 
 export default new StabilizedRentRollPage();

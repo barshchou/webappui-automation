@@ -20,31 +20,39 @@ class CommercialUnitsActions extends BaseActionsExt<typeof commercialUnitsPage> 
     }
 
     uploadImages(imageType: "Interior Images" | "Exterior Images", pathToFile: string, inputMethod: "drag-n-drop" | "input") {
+        let aliasImageUpload = "aliasImageUpload";
+        cy.intercept("POST","/imageUpload").as(aliasImageUpload);
         cy.contains(imageType).next().find('input[type="file"]')
         .attachFile(pathToFile,{subjectType:inputMethod});
+        cy.wait(`@${aliasImageUpload}`).then(({response}) => {
+            expect(response.statusCode).equal(200);
+            cy.log("imageUpload resolved");
+        });
         return this;
     }
 
-    clickCommercialUnitTabByIndex(index: number = 0): this {
+    clickCommercialUnitTabByIndex(index = 0): this {
         commercialUnitsPage.commercialUnitsTabs.eq(index).click();
         return this;
     }
 
-    clickRadioButtonByValueAndUnitIndex(group: string, value: string, index: number = 0): this {
+    clickRadioButtonByValueAndUnitIndex(group: BoweryReports.CommercialUnitsGroups,
+                                        value: BoweryReports.CommercialUnitsUseValues, index = 0): this {
         commercialUnitsPage.getRadioButtonByValueAndUnitIndex(group, value, index).click();
         this.verifyRadioIsChecked(group, value, index);
         if (value === "other"){
-            commercialUnitsPage.getOtherFrontageByUnit(index).should("exist").should("have.attr", "required");
+            commercialUnitsPage.getOtherFieldByGroup(group, index).should("exist")
+                .should("have.attr", "required");
         }
         return this;
     }
 
-    verifyRadioIsChecked(group: string, value: string, index: number = 0): this {
+    verifyRadioIsChecked(group: BoweryReports.CommercialUnitsGroups, value: BoweryReports.CommercialUnitsUseValues, index = 0): this {
         commercialUnitsPage.getRadioButtonByValueAndUnitIndex(group, value, index).parent().should("have.class", "Mui-checked");
         return this;
     }
 
-    enterUnitSFByUnitIndex(squareFeet: number | string, index: number = 0): this {
+    enterUnitSFByUnitIndex(squareFeet: number | string, index = 0): this {
         let squareFeetToBe: string | number = squareFeet;
         if (isHasDecimalPartMoreNumberOfDigits(squareFeet)) {
             squareFeetToBe = cutDecimalPartToNumberOfDigits(squareFeet);
@@ -59,6 +67,21 @@ class CommercialUnitsActions extends BaseActionsExt<typeof commercialUnitsPage> 
         for (let i = 0; i < numberOfUnits; i++) {
             this.enterUnitSFByUnitIndex(squareFeetList[i], i);
         }
+        return this;
+    }
+
+    verifyCommercialUnitSFDiscussionTextAreaContains(text: string): this {
+        commercialUnitsPage.commercialUnitSFDiscussionTextArea.should("contain.text", text);
+        return this;
+    }
+
+    verifyCommercialUnitSFDiscussionTextAreaNotContains(text: BoweryReports.CommercialUnitsUseValues): this {
+        commercialUnitsPage.commercialUnitSFDiscussionTextArea.should("not.contain.text", text);
+        return this;
+    }
+
+    enterOtherValueByGroupName(groupName: BoweryReports.CommercialUnitsGroups, value: string, index = 0): this {
+        commercialUnitsPage.getOtherFieldByGroup(groupName, index).clear().type(value).should("have.value", value);
         return this;
     }
 }

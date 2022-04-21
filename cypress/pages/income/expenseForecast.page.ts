@@ -6,19 +6,19 @@ class ExpenseForecastPage extends BasePage {
     }
 
     get ElectricityCard(){
-        return cy.get('[data-qa="electricity-forecast-item"]');
+        return cy.get("[data-qa='electricity-forecast-item'] > div").last();
     }
 
     get InsuranceCard(){
-        return cy.get('[data-qa="insurance-forecast-item"]');
+        return cy.get('[data-qa="insurance-forecast-item"] > div').last();
     }
 
     get FuelCard() {
-        return cy.get("[data-qa=fuel-forecast-item]");
+        return cy.get("[data-qa=fuel-forecast-item] > div").last();
     }
-    
+
     get RepairsAndMaintenanceCard() {
-            return cy.get("[data-qa=repairsMaintenance-forecast-item]");    
+        return cy.get("[data-qa=repairsMaintenance-forecast-item] > div").last();    
     }
 
     getForecastItemBasisRadio(item) {return cy.get(`[name='${item}.basis']`);}
