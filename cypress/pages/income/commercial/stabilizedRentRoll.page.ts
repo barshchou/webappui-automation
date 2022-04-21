@@ -7,6 +7,8 @@ class StabilizedRentRollPage extends BasePage{
         return cy.get('[id="STICKY_FORM_PANEL_WRAPPER_ID"] + div');
     }
 
+    get stabilizedRentRollheaderSection() {return cy.get("*[data-qa='stabilizedRentRoll']");}
+
     get leaseStatusCells() {return cy.get("[data-qa^=leaseStatus].htAutocomplete");}
 
     get tenantNameCells() {return cy.xpath("(//*[contains(@data-qa, 'tenantName')])[position() < last()]");}
