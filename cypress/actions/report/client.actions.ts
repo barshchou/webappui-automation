@@ -25,10 +25,6 @@ class ClientActions extends BaseActionsExt<typeof expenseForecastPage> {
         return this;
     }
 
-    /**
-     * @param {string} textToType
-     * @returns {ClientActions}
-     */
     enterAppraiserCommentary(textToType: string): ClientActions {
         clientPage.appraiserCommentary.clear().type(textToType).should("have.text", replaceEntersWithLineBreak(textToType));
         return this;
@@ -42,10 +38,6 @@ class ClientActions extends BaseActionsExt<typeof expenseForecastPage> {
         return this;
     }
 
-    /**
-     * @param {string} commentary
-     * @returns {ClientActions}
-     */
     verifyClientGuidelinesCommentary(commentary: string): ClientActions {
         clientPage.clientGuidelinesCommentary.should("have.text", commentary);
         return this;
@@ -56,10 +48,6 @@ class ClientActions extends BaseActionsExt<typeof expenseForecastPage> {
         return this;
     }
 
-    /**
-     * @param {string} commentary
-     * @returns {ClientActions}
-     */
     enterNewCommentary(commentary: string): ClientActions {
         clientPage.guidelinesCommentaryInput.clear().type(commentary).should("have.text", commentary);
         return this;
@@ -75,28 +63,16 @@ class ClientActions extends BaseActionsExt<typeof expenseForecastPage> {
         return this;
     }
 
-    /**
-     * @param {string} textToType
-     * @returns {ClientActions}
-     */
     enterIntendedUserTextBox(textToType: string): ClientActions {
         clientPage.IntendedUserTextBox.type(textToType);
         return this;
     }
 
-     /**
-     * @param {string} verifyListValue
-     * @returns {ClientActions}
-     */
       clickNarrativeSuggestions(verifyListValue: string): ClientActions {
         clientPage.narrativeSuggestionsList.contains(verifyListValue).click();
         return this;
     }
 
-    /**
-     * @param {string} verifyAreaValue
-     * @returns {ClientActions}
-     */
     verifyIntendedUserTextBox(verifyAreaValue: string): ClientActions {
         clientPage.IntendedUserTextBox.should("contain.text", verifyAreaValue);
         return this;
