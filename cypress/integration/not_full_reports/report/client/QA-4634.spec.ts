@@ -1,7 +1,7 @@
 import {createReport, deleteReport} from "../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Report from "../../../../actions/report/report.manager";
-import testData from '../../../../fixtures/not_full_reports/report/client/QA-4635.fixture';
+import testData from '../../../../fixtures/not_full_reports/report/client/QA-4634.fixture';
 
 describe("Verify the Save button functionality for Intended User and Identification of the Client sections.", () => {
     before("Login, create report", () => {
