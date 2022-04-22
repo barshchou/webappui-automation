@@ -15,6 +15,10 @@ export default class BasePage {
         return cy.get("[data-qa='form-save-btn']");
     }
 
+    get Close() {
+        return cy.get("[aria-label=close]");
+    }
+
     get formCancelBtn() {
         return cy.xpath("//*[contains(@role, 'dialog')]/descendant::*[contains(text(), 'Cancel')]");
     }

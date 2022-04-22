@@ -82,6 +82,11 @@ class ClientActions extends BaseActionsExt<typeof clientPage> {
         return this;
     }
 
+    clickCloseIcon() {
+        clientPage.Close.click();
+        return this;
+    }
+
     enterIntendedUserTextBox(textToType: string): ClientActions {
         clientPage.IntendedUserTextBox.type(textToType);
         return this;
@@ -112,9 +117,13 @@ class ClientActions extends BaseActionsExt<typeof clientPage> {
         return this;
     }
 
-    // Error method 
     verifyNotContainIdentificationOfTheClientTextBox(verifyAreaValue: string): ClientActions {
         clientPage.IdentificationOfClientTextBox.should("not.contain.text", verifyAreaValue);
+        return this;
+    }
+
+    verifyVisibleModalWindow() {
+        clientPage.modalWindow.should('be.visible');
         return this;
     }
 
