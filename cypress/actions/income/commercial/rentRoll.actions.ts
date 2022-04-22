@@ -16,7 +16,7 @@ class CommercialRentRollActions extends BaseActions {
      * @param {string} backColor
      * @returns {CommercialRentRollActions}
      */
-    clickMonthlyBasisButton(backColor = "rgb(46, 67, 147)") {
+    clickMonthlyBasisButton(backColor: string = "rgb(46, 67, 147)") {
         rentRollPage.monthlyBasisButton.should("not.have.css", "background-color", backColor)
             .click().should("have.css", "background-color", backColor);
         return this;
@@ -26,7 +26,7 @@ class CommercialRentRollActions extends BaseActions {
      * @param {string} backColor
      * @returns {CommercialRentRollActions}
      */
-    clickAnnuallyBasisButton(backColor = "rgb(46, 67, 147)") {
+    clickAnnuallyBasisButton(backColor: string = "rgb(46, 67, 147)") {
         rentRollPage.annuallyBasisButton.should("not.have.css", "background-color", backColor)
             .click().should("have.css", "background-color", backColor);
         return this;
@@ -37,7 +37,7 @@ class CommercialRentRollActions extends BaseActions {
      * @param {string} backColor
      * @returns {CommercialRentRollActions}
      */
-    clickPerSquareFootButton(isFirstTime, backColor = "rgb(46, 67, 147)") {
+    clickPerSquareFootButton(isFirstTime: boolean, backColor: string = "rgb(46, 67, 147)") {
         if (isFirstTime) {
             rentRollPage.perSquareBasisButton.should("have.css", "background-color", backColor).click();
         } else {
@@ -48,7 +48,7 @@ class CommercialRentRollActions extends BaseActions {
     }
 
 
-    clickPerSquareFootPerMonthButton(backColor = "rgb(46, 67, 147)") {
+    clickPerSquareFootPerMonthButton(backColor: string = "rgb(46, 67, 147)") {
         rentRollPage.perSquareFootPerMonthButton.should("not.have.css", "background-color", backColor)
             .click().should("have.css", "background-color", backColor);
         rentRollPage.rentPerSfPerMonthColumnName.scrollIntoView().should("exist");
@@ -59,7 +59,7 @@ class CommercialRentRollActions extends BaseActions {
      * @param {string} backColor
      * @returns {CommercialRentRollActions}
      */
-    verifyAllBasisButtons(backColor = "rgb(46, 67, 147)") {
+    verifyAllBasisButtons(backColor: string = "rgb(46, 67, 147)") {
         this.clickPerSquareFootButton(true, backColor)
             .clickMonthlyBasisButton(backColor)
             .clickAnnuallyBasisButton(backColor)
@@ -89,7 +89,7 @@ class CommercialRentRollActions extends BaseActions {
      * @param {number} rowNumber
      * @returns {CommercialRentRollActions}
      */
-    verifyLeaseStatusCellTextByRow(textToBe, rowNumber = 0) {
+    verifyLeaseStatusCellTextByRow(textToBe: string, rowNumber: number = 0) {
         rentRollPage.leaseStatusCells.eq(rowNumber).should("have.text", textToBe);
         return this;
     }
@@ -99,7 +99,7 @@ class CommercialRentRollActions extends BaseActions {
      * @param {number} rowNumber
      * @returns {CommercialRentRollActions}
      */
-    pasteToLeaseStatusByRow(textToPaste, rowNumber = 0) {
+    pasteToLeaseStatusByRow(textToPaste: string, rowNumber: number = 0) {
         rentRollPage.leaseStatusCells.eq(rowNumber).invoke("text", textToPaste)
             .should("have.text", textToPaste);
         return this;
@@ -109,7 +109,7 @@ class CommercialRentRollActions extends BaseActions {
      * @param {number} rowNumber
      * @returns {CommercialRentRollActions}
      */
-    pressDeleteLeaseStatusByRow(rowNumber = 0) {
+    pressDeleteLeaseStatusByRow(rowNumber: number = 0) {
         rentRollPage.leaseStatusCells.eq(rowNumber).trigger("keydown", { keyCode: 46 })
             .should("have.text", "");
         return this;
@@ -120,7 +120,7 @@ class CommercialRentRollActions extends BaseActions {
      * @param {number} rowNumber
      * @returns {CommercialRentRollActions}
      */
-    chooseLeaseStatusesByRowNumber(statuses, rowNumber = 0) {
+    chooseLeaseStatusesByRowNumber(statuses: string, rowNumber: number = 0) {
         statuses.forEach(status => {
             this.chooseLeaseStatusByRowNumber(status, rowNumber);
         });
@@ -164,7 +164,7 @@ class CommercialRentRollActions extends BaseActions {
      * @param {number} unitNumber
      * @returns {CommercialRentRollActions}
      */
-    verifyUnitNumberCells(unitNumber = 1) {
+    verifyUnitNumberCells(unitNumber: number = 1) {
         rentRollPage.unitNumberCells.each(cell => {
             cy.wrap(cell).should("exist").and("be.visible").and("have.class", "readOnly");
         });
@@ -219,13 +219,13 @@ class CommercialRentRollActions extends BaseActions {
      * @param {number} rowNumber
      * @returns {CommercialRentRollActions}
      */
-    enterLeaseDateByRowNumber(cellName: BoweryReports.LeaseDateName, date, rowNumber = 0) {
+    enterLeaseDateByRowNumber(cellName: BoweryReports.LeaseDateName, date: string, rowNumber: number = 0) {
         rentRollPage.getLeaseDateCellsByName(cellName).eq(rowNumber).dblclick({ force: true });
         rentRollPage.textareaToInput.clear().type(date).type("{enter}");
         return this;
     }
 
-    verifyLeaseDateByRowNumber(cellName: BoweryReports.LeaseDateName, leaseStatus: string, dateToBe?: string, rowNumber = 0): CommercialRentRollActions {
+    verifyLeaseDateByRowNumber(cellName: BoweryReports.LeaseDateName, leaseStatus: string, dateToBe?: string, rowNumber: number = 0): CommercialRentRollActions {
         dateToBe = dateToBe ?? "";
         if (!isDateHasCorrectFormat(dateToBe, "/")) {
             dateToBe = "";
@@ -240,7 +240,7 @@ class CommercialRentRollActions extends BaseActions {
      * @param {number} rowNumber
      * @returns {CommercialRentRollActions}
      */
-    verifySquareFeetByRowNumber(sfToBe = 0, rowNumber = 0) {
+    verifySquareFeetByRowNumber(sfToBe: number = 0, rowNumber: number = 0) {
         let sfTextToBe = numberWithCommas(Math.round(sfToBe));
         rentRollPage.squareFeetCells.eq(rowNumber).should("have.text", sfTextToBe).and("have.class", "readOnly");
         return this;
@@ -259,7 +259,7 @@ class CommercialRentRollActions extends BaseActions {
      * @param {number} rowNumber
      * @returns {CommercialRentRollActions}
      */
-    enterMonthlyRentPerSFByRowNumber(value, rowNumber = 0) {
+    enterMonthlyRentPerSFByRowNumber(value: number | string, rowNumber: number = 0) {
         rentRollPage.monthlyRentPerSFCells.eq(rowNumber).should("not.have.class", "readOnly").dblclick({ force: true });
         rentRollPage.textareaToInput.clear().type(value).type("{enter}");
         const textToBe = `$${numberWithCommas(value.toFixed(2))}`;
@@ -274,7 +274,7 @@ class CommercialRentRollActions extends BaseActions {
      * @param {number} rowNumber
      * @returns {CommercialRentRollActions}
      */
-    verifyAnnualRentCellPerSFBasisByRow(rentPerSF, squareFoot, calcMethod, rowNumber = 0) {
+    verifyAnnualRentCellPerSFBasisByRow(rentPerSF: number, squareFoot: number, calcMethod: string, rowNumber: number = 0) {
         let numberToBe;
         if (calcMethod === "annually") {
             numberToBe = rentPerSF * squareFoot;
@@ -291,7 +291,7 @@ class CommercialRentRollActions extends BaseActions {
      * @param {number} rowNumber
      * @returns {CommercialRentRollActions}
      */
-    enterMonthlyRentByRowNumber(monthlyRent, rowNumber = 0) {
+    enterMonthlyRentByRowNumber(monthlyRent: number | string, rowNumber: number = 0) {
         rentRollPage.monthlyRentCells.eq(rowNumber).should("not.have.class", "readOnly").dblclick({ force: true });
         rentRollPage.textareaToInput.clear().type(monthlyRent).type("{enter}");
         const textToBe = numberWithCommas(monthlyRent.toFixed(2));
@@ -304,7 +304,7 @@ class CommercialRentRollActions extends BaseActions {
      * @param {number} rowNumber
      * @returns {CommercialRentRollActions}
      */
-    verifyMonthlyRentByRowCellText(textToBe = "0.00", rowNumber = 0) {
+    verifyMonthlyRentByRowCellText(textToBe: string = "0.00", rowNumber: number = 0) {
         rentRollPage.monthlyRentCells.eq(rowNumber).should("have.text", `$${textToBe}`);
         return this;
     }
@@ -314,7 +314,7 @@ class CommercialRentRollActions extends BaseActions {
      * @param rowNumber
      * @returns {CommercialRentRollActions}
      */
-    verifyAnnualRentMonthlyByRowNumber(monthlyRent, rowNumber = 0) {
+    verifyAnnualRentMonthlyByRowNumber(monthlyRent, rowNumber: number = 0) {
         const textToBe = numberWithCommas((monthlyRent * 12).toFixed(2));
         rentRollPage.annualRentCells.eq(rowNumber).should("have.text", `$${textToBe}`);
         return this;
@@ -325,7 +325,7 @@ class CommercialRentRollActions extends BaseActions {
      * @param {number} rowNumber
      * @returns {CommercialRentRollActions}
      */
-    enterAnnualRentByRowNumber(annualRent, rowNumber = 0) {
+    enterAnnualRentByRowNumber(annualRent: number | string, rowNumber: number = 0) {
         rentRollPage.annualRentCells.eq(rowNumber).should("not.have.class", "readOnly").dblclick({ force: true });
         rentRollPage.textareaToInput.clear().type(annualRent).type("{enter}");
         const textToBe = numberWithCommas(annualRent.toFixed(2));
@@ -338,7 +338,7 @@ class CommercialRentRollActions extends BaseActions {
      * @param {number} rowNumber
      * @returns {CommercialRentRollActions}
      */
-    verifyAnnualRentCellTextByRow(textToBe = "0.00", rowNumber = 0) {
+    verifyAnnualRentCellTextByRow(textToBe: string = "0.00", rowNumber: number = 0) {
         rentRollPage.annualRentCells.eq(rowNumber).should("have.text", `$${textToBe}`);
         return this;
     }
@@ -350,7 +350,7 @@ class CommercialRentRollActions extends BaseActions {
      * @param {number} rowNumber
      * @returns {CommercialRentRollActions}
      */
-    verifyMonthlyRentPerSFByRow(rentPerSF, squareFoot, calcMethod, rowNumber = 0) {
+    verifyMonthlyRentPerSFByRow(rentPerSF: number, squareFoot: number, calcMethod: string, rowNumber: number = 0) {
         let numberToBe;
         if (calcMethod === "annually") {
             numberToBe = (rentPerSF * squareFoot) / 12;
@@ -367,7 +367,7 @@ class CommercialRentRollActions extends BaseActions {
      * @param {number} rowNumber
      * @returns {CommercialRentRollActions}
      */
-    verifyMonthlyRentAnnuallyByRowNumber(annuallyRent, rowNumber = 0) {
+    verifyMonthlyRentAnnuallyByRowNumber(annuallyRent: number, rowNumber: number = 0) {
         const textToBe = numberWithCommas((annuallyRent / 12).toFixed(2));
         rentRollPage.monthlyRentCells.eq(rowNumber).should("have.text", `$${textToBe}`);
         return this;
@@ -379,7 +379,7 @@ class CommercialRentRollActions extends BaseActions {
      * @param {number} rowNumber
      * @returns {CommercialRentRollActions}
      */
-    verifyRentPerSFMonthlyByRowNumber(monthlyRent, squareFoot, rowNumber = 0) {
+    verifyRentPerSFMonthlyByRowNumber(monthlyRent: number, squareFoot: number, rowNumber: number = 0) {
         const textToBe = `$${numberWithCommas(((monthlyRent * 12) / squareFoot).toFixed(2))}`;
         this.verifyRentPerSFAnnuallyByRowNumberCellText(textToBe, rowNumber);
         return this;
@@ -390,7 +390,7 @@ class CommercialRentRollActions extends BaseActions {
      * @param {number} rowNumber
      * @returns {CommercialRentRollActions}
      */
-    verifyRentPerSFAnnuallyByRowNumberCellText(textToBe = "$0.00", rowNumber = 0) {
+    verifyRentPerSFAnnuallyByRowNumberCellText(textToBe: string = "$0.00", rowNumber: number = 0) {
         rentRollPage.annualRentPerSFCells.eq(rowNumber).should("have.text", textToBe);
         return this;
     }
@@ -401,7 +401,7 @@ class CommercialRentRollActions extends BaseActions {
      * @param {number} rowNumber
      * @returns {CommercialRentRollActions}
      */
-    verifyRentPerSFAnnuallyByRowNumber(annualRent, squareFoot, rowNumber = 0) {
+    verifyRentPerSFAnnuallyByRowNumber(annualRent: number, squareFoot: number, rowNumber: number = 0) {
         const textToBe = `$${numberWithCommas((annualRent / squareFoot).toFixed(2))}`;
         this.verifyRentPerSFAnnuallyByRowNumberCellText(textToBe, rowNumber);
         return this;
@@ -420,7 +420,7 @@ class CommercialRentRollActions extends BaseActions {
      * @param {Array<number>} perSFList
      * @returns {CommercialRentRollActions}
      */
-    enterListPerSF(leaseStatuses, perSFList) {
+    enterListPerSF(leaseStatuses: string, perSFList: number) {
         for (let i = 0; i < leaseStatuses.length; i++) {
             if (leaseStatuses[i] === "Vacant") {
                 continue;
@@ -434,7 +434,7 @@ class CommercialRentRollActions extends BaseActions {
      * @param {Array<number>} sfValues
      * @returns {CommercialRentRollActions}
      */
-    verifySFTotal(sfValues) {
+    verifySFTotal(sfValues: number) {
         let sfTotalToBe = 0;
         sfValues.forEach(value => sfTotalToBe += value);
         const textToBe = numberWithCommas(Math.round(sfTotalToBe));
@@ -447,7 +447,7 @@ class CommercialRentRollActions extends BaseActions {
      * @param {Array<number>} monthlyRentList
      * @returns {CommercialRentRollActions}
      */
-    enterListMonthlyRent(leaseStatuses, monthlyRentList) {
+    enterListMonthlyRent(leaseStatuses: string, monthlyRentList: number) {
         for (let i = 0; i < leaseStatuses.length; i++) {
             if (leaseStatuses[i] === "Vacant") {
                 continue;
@@ -462,7 +462,7 @@ class CommercialRentRollActions extends BaseActions {
      * @param {Array<number>} monthlyRents
      * @returns {CommercialRentRollActions}
      */
-    verifyMonthlyRentTotal(leaseStatuses, monthlyRents) {
+    verifyMonthlyRentTotal(leaseStatuses: string, monthlyRents: number) {
         const textToBe = this.getTotalRentTextToBe(leaseStatuses, monthlyRents);
         rentRollPage.monthlyRentCells.last().should("have.text", `$${textToBe}`);
         return this;
@@ -473,7 +473,7 @@ class CommercialRentRollActions extends BaseActions {
      * @param {Array<number>} annuallyRents
      * @returns {CommercialRentRollActions}
      */
-    enterListAnnuallyRent(leaseStatuses, annuallyRents) {
+    enterListAnnuallyRent(leaseStatuses: string, annuallyRents: number) {
         for (let i = 0; i < leaseStatuses.length; i++) {
             if (leaseStatuses[i] === "Vacant") {
                 continue;
@@ -488,7 +488,7 @@ class CommercialRentRollActions extends BaseActions {
      * @param {Array<number>} rentsValues
      * @returns {string}
      */
-    getTotalRentTextToBe(leaseStatuses, rentsValues) {
+    getTotalRentTextToBe(leaseStatuses: string, rentsValues: number) {
         let rentTotalToBe = 0;
         for (let i = 0; i < leaseStatuses.length; i++) {
             if (leaseStatuses[i] === "Vacant") {
@@ -504,7 +504,7 @@ class CommercialRentRollActions extends BaseActions {
      * @param {Array<number>} annualRents
      * @returns {CommercialRentRollActions}
      */
-    verifyAnnuallyRentTotal(leaseStatuses, annualRents) {
+    verifyAnnuallyRentTotal(leaseStatuses: string, annualRents: number) {
         const textToBe = this.getTotalRentTextToBe(leaseStatuses, annualRents);
         rentRollPage.annualRentCells.last().should("have.text", `$${textToBe}`);
         return this;
@@ -516,7 +516,7 @@ class CommercialRentRollActions extends BaseActions {
      * @param {Array<number>} squareFootList
      * @returns {CommercialRentRollActions}
      */
-    verifyPerSFTotal(leaseStatuses, perSfRents, squareFootList) {
+    verifyPerSFTotal(leaseStatuses: string, perSfRents: number, squareFootList: number) {
         let totalAnnualRent = 0;
         let totalSF = 0;
         for (let i = 0; i < leaseStatuses.length; i++) {
@@ -535,7 +535,7 @@ class CommercialRentRollActions extends BaseActions {
      * @param {string} newCommentary
      * @returns {CommercialRentRollActions}
      */
-    editDiscussion(newCommentary) {
+    editDiscussion(newCommentary: string) {
         rentRollPage.modifiedLabel.should("not.exist");
         this.clickEditDiscussionButton()
             .clearAndEnterNewCommentary(newCommentary)
@@ -549,7 +549,7 @@ class CommercialRentRollActions extends BaseActions {
      * @param {string} commentary
      * @returns {CommercialRentRollActions}
      */
-    clearAndEnterNewCommentary(commentary) {
+    clearAndEnterNewCommentary(commentary: string) {
         rentRollPage.discussionTextInput.clear().type(commentary);
         return this;
     }
@@ -574,7 +574,7 @@ class CommercialRentRollActions extends BaseActions {
      * @param {string} textToBe
      * @returns {CommercialRentRollActions}
      */
-    verifyCommentarySavedText(textToBe) {
+    verifyCommentarySavedText(textToBe: string) {
         rentRollPage.commentaryText.should("have.text", textToBe);
         return this;
     }
@@ -583,7 +583,7 @@ class CommercialRentRollActions extends BaseActions {
      * @param {string} text
      * @returns {CommercialRentRollActions}
      */
-    verifyCommentaryTextNotContains(text) {
+    verifyCommentaryTextNotContains(text: string) {
         rentRollPage.commentaryText.should("not.contain.text", text);
         return this;
     }
@@ -592,7 +592,7 @@ class CommercialRentRollActions extends BaseActions {
      * @param {string} textToBe
      * @returns {CommercialRentRollActions}
      */
-    verifyCommentaryTextBoxText(textToBe) {
+    verifyCommentaryTextBoxText(textToBe: string) {
         rentRollPage.discussionTextInput.should("have.text", textToBe);
         return this;
     }
@@ -601,7 +601,7 @@ class CommercialRentRollActions extends BaseActions {
      * @param {string} text
      * @returns {CommercialRentRollActions}
      */
-    verifyCommentaryTextBoxNotHaveText(text) {
+    verifyCommentaryTextBoxNotHaveText(text: string) {
         rentRollPage.discussionTextInput.should("not.have.text", text);
         return this;
     }
