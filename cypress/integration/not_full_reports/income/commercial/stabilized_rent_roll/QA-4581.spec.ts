@@ -1,7 +1,7 @@
 /// <reference types="cypress-grep" />
 
 import testData from "../../../../../fixtures/not_full_reports/income/commercial/stabilized_rent_roll/QA-4581.fixture";
-import {Base, Property, Income} from "../../../../../actions";
+import { Base, Property, Income } from "../../../../../actions";
 import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
 
 
@@ -14,17 +14,17 @@ describe("Verify the Save & Continue button functionality on the Stabilized Rent
 
 
     it("Test body", () => {
+
         cy.stepInfo(` 1. Report creation and several commercial units addition `);
-       Base._NavigationSection.navigateToPropertySummary();
+        Base._NavigationSection.navigateToPropertySummary();
         Property._Summary.enterNumberOfCommercialUnits(testData.buildingDescription.numberOfUnits);
 
-       Base._NavigationSection.navigateToCommercialInPlaceRentRoll();
+        Base._NavigationSection.navigateToCommercialInPlaceRentRoll();
         Income._CommercialManager.InPlaceRentRoll.chooseListLeaseStatuses(testData.leaseStatuses, testData.numberOfCommercialUnits)
             .chooseCheckBoxesIsInspectedFromList(testData.isInspected);
 
-
         cy.stepInfo(` 2. Verify the Save & Continue button is displayed on the Stabilized Rent Roll page `);
-       Base._NavigationSection.clickIncomeApproachButton().openCommercialStabilizedRentRollInCommercial();
+        Base._NavigationSection.clickIncomeApproachButton().openCommercialStabilizedRentRollInCommercial();
         Income._CommercialManager.StabilizedRentRoll.verifyThatPageIsOpened();
         Income._CommercialManager.StabilizedRentRoll.Page.SaveAndContinueBtn.scrollIntoView().should('exist');
 
@@ -35,7 +35,7 @@ describe("Verify the Save & Continue button functionality on the Stabilized Rent
 
         cy.stepInfo(` 4. Verify that the changes are saved and the user is redirected to the next page (Income > Miscellaneous > Laundry). `);
         Income._MiscellaneousManager.Laundry.verifyThatPageIsOpened();
-       Base._NavigationSection.clickIncomeApproachButton()
+        Base._NavigationSection.clickIncomeApproachButton()
             .clickCommercialArrow().clickCommercialStabRentRollButton();
         Income._CommercialManager.StabilizedRentRoll.verifyAnnuallyRentPsfByRowNumber(testData.leaseStatuses, testData.rentToBe);
 
