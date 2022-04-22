@@ -401,7 +401,7 @@ class NavigationSectionActions extends BaseActions {
     }
 
     clickSupportingCapRates(): NavigationSectionActions {
-        navigationSectionPage.supportingCapRates.click()
+        navigationSectionPage.supportingCapRates.click();
         return this;
     }
 
