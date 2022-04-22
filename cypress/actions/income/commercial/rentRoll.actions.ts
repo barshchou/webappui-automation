@@ -3,7 +3,14 @@ import {isDateHasCorrectFormat} from "../../../../utils/date.utils";
 import {numberWithCommas} from "../../../../utils/numbers.utils";
 import BaseActionsExt from "../../base/base.actions.ext";
 
-class CommercialRentRollActions extends BaseActionsExt<typeof rentRollPage> {
+/**
+ * TODO: [BW-51] Implement SharedRentRoll actions with interfaces
+ */
+interface ISharedRentRoll {
+    chooseCheckBoxesIsInspectedFromList(isInspected: boolean[]): this
+}
+
+class CommercialRentRollActions extends BaseActionsExt<typeof rentRollPage> implements ISharedRentRoll {
 
     verifyBasisOfRentTooltip() {
         rentRollPage.basisOfRentField.should("exist");
@@ -101,9 +108,9 @@ class CommercialRentRollActions extends BaseActionsExt<typeof rentRollPage> {
         return this;
     }
 
-    chooseCheckBoxesIsInspectedFromList(isInspected: string) {
+    chooseCheckBoxesIsInspectedFromList(isInspected: boolean[]) {
         for (let i = 0; i < isInspected.length; i++) {
-            if (isInspected[i] === "Inspected") {
+            if (isInspected[i]) {
                 this.chooseCheckBoxesIsInspectedByRowNumber(i);
             }
         }

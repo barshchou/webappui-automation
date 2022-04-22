@@ -10,7 +10,7 @@ export default {
     reportCreationData: ReportDataCreator.getReportSpecificIncomeValue(enums.INCOME_TYPE.BOTH, "4581"),
     buildingDescription: _buildingDescription,
     numberOfCommercialUnits: 3,
-    isInspected: ["Inspected", "NotInspected", "Inspected"],
+    isInspected: [true, false, true],
     leaseStatuses: ["Vacant", "Occupied", "Vacant"],
     rentToBe: [100, 0, 150]
 };

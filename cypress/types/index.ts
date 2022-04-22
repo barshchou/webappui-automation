@@ -14,7 +14,6 @@ namespace BoweryReports {
     }
     export type LeaseDateName = "Start" | "Expiry"
     export type LeaseStatus = "Occupied" | "Vacant"
-    export type isInspected = "Inspected" | "NotInspected"
     export type UnitSF = "unit" | "sf"
     export type PerUnitPerSF = "Per Unit" | "Per SF"
     export type ForecastItemBasis = "insurance" | "electricity"

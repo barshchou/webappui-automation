@@ -9,9 +9,9 @@ class StabilizedRentRollActions extends BaseActionsExt<typeof stabRenRollPage>{
         return this;
     }
 
-    verifyIsInspectedCheckedAll(isInspected: BoweryReports.isInspected): this {
+    verifyIsInspectedCheckedAll(isInspected: boolean[]): this {
         for (let i = 0; i < isInspected.length; i++) {
-            if (isInspected[i] === "Inspected") {
+            if (isInspected[i]) {
                 this.verifyIsInspectedChecked(i);
             }
         }
