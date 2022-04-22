@@ -85,7 +85,7 @@ class StabilizedRentRollActions extends BaseActionsExt<typeof stabRenRollPage>{
     }
 
     clickNarrativeSuggestions(verifyListValue: string): StabilizedRentRollActions {
-        stabRenRollPage.narrativeSuggestionsListItems.contains(verifyListValue).click();
+        stabRenRollPage.narrativeSuggestionsList.contains(verifyListValue).click();
         return this;
     }
 
@@ -94,15 +94,6 @@ class StabilizedRentRollActions extends BaseActionsExt<typeof stabRenRollPage>{
         return this;
     }
 
-    clickEditDiscussionButton(): this {
-        stabRenRollPage.formEditBtn(0).scrollIntoView().click();
-        return this;
-    }
-
-    clickCancelEditDiscussionButton(): this {
-        stabRenRollPage.cancelEditDiscussionButton.scrollIntoView().click();
-        return this;
-    }
 }
 
 export default new StabilizedRentRollActions(stabRenRollPage);
