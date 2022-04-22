@@ -26,6 +26,12 @@ class ExpenseHistoryActions extends BaseActionsExt<typeof expenseHistoryPage>{
         return this;
     }
 
+    enterRepairsAndMaintenanceByColIndex(repairsAndMaintenance: number | string, index: number = 0): ExpenseHistoryActions {
+        expenseHistoryPage.repairsInputs.eq(index).clear().type(`${repairsAndMaintenance}`)
+        .should("have.value", `$${numberWithCommas(repairsAndMaintenance)}`);
+        return this;
+    }
+
     /**
      *
      * @param {number} index
@@ -234,7 +240,11 @@ class ExpenseHistoryActions extends BaseActionsExt<typeof expenseHistoryPage>{
             let elNumber = getNumberFromDollarNumberWithCommas(jQueryEls[i].textContent);
             sum += elNumber;
         }
-        return `$${numberWithCommas((sum / jQueryEls.length).toFixed(2))}`;
+        const firstChar = numberWithCommas((sum / jQueryEls.length).toFixed(2)).charAt(0);
+          if (firstChar === "-") {
+            return `-$${numberWithCommas((sum / jQueryEls.length).toFixed(2)).substring(1)}`;
+          }
+          return `$${numberWithCommas((sum / jQueryEls.length).toFixed(2))}`;
     }
 
 

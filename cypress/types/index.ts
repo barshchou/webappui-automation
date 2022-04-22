@@ -12,13 +12,34 @@ namespace BoweryReports {
         incomeValue?: string,
         conclusionValue?: BoweryReports.ConclusionValue
     }
-    export type LeaseDateName = "Start" | "Expiry"
-    export type LeaseStatus = "Occupied" | "Vacant"
-    export type UnitSF = "unit" | "sf"
-    export type PerUnitPerSF = "Per Unit" | "Per SF"
+    export type LeaseDateName = "Start" | "Expiry";
+    export type LeaseStatus = "Occupied" | "Vacant";
+    export type UnitSF = "unit" | "sf";
+    export type PerUnitPerSF = "Per Unit" | "Per SF";
     export type ForecastItemBasis = "insurance" | "electricity"
     | "fuel" | "waterAndSewer" | "repairsAndMaintenance" | "payrollAndBenefits" | "generalAndAdministrative" 
-    | "legalAndProfessionalFees" | "miscellaneous" | "management" | "reserves" | "total"
+    | "legalAndProfessionalFees" | "miscellaneous" | "management" | "reserves" | "total";
+
+    export type CommercialUnitsUseValues = "retail" | "office" | "medical" | "community" | "industrial" | "other" | "undetermined";
+    export type CommercialUnitsUseTexts = "Retail" | "Office" | "Medical Office" | "Community Facility" | "Industrial" |
+        "Undetermined" | string;
+    export type CommercialUnitsGroups = "Use" | "State" | "Location" | "Street Type" | "Floor" | "Grade" | "Facade"
+    | "Ceiling Height" | "Frontage";
+
+    export type ProFormaAnyIncome = {
+        total: string,
+        perSF: string,
+        perUnit: string
+    };
+
+    export type CommercialUnitsGradeValues = "atGrade" | "partiallyBelowGrade" | "belowGrade" | "other";
+    export type CommercialUnitsFacadeValues = "plate glass" | "other";
+
+    /*
+    More Unit Groups Values will be added after other values types added
+     */
+    export type CommercialUnitGroupsValues = CommercialUnitsUseValues | CommercialUnitsGradeValues | CommercialUnitsFacadeValues;
+
 
     export type ForecastItem = { 
         name: BoweryReports.ForecastItemBasis, 

@@ -31,6 +31,7 @@ class ClientPage extends BasePage{
     }
     
     get narrativeSuggestionsList() {return cy.get("[data-qa='narrative-suggestions-list'] > ul");}
+
 }
 
 export default new ClientPage();

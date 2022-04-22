@@ -1,5 +1,10 @@
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 
+const _fuelItem: BoweryReports.ForecastItem = {
+    name: "fuel",
+    basis: "sf"
+};
+
 export default {
     reportCreationData: ReportDataCreator.getDefaultReportData("4942"),
     comparables: [
@@ -19,9 +24,6 @@ export default {
             fuel: 15917
         }
     ],
-    fuelItem: {
-        name: "fuel",
-        basis: "sf"
-    },
+    fuelItem: _fuelItem,
     fuelCardSnapshotName: "Fuel_Forecast_Item_Component"
-}
+};
