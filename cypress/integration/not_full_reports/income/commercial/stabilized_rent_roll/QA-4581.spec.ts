@@ -22,20 +22,19 @@ describe("Verify the Save & Continue button functionality on the Stabilized Rent
         Property.Summary.enterNumberOfCommercialUnits(testData.buildingDescription.numberOfUnits);
 
         NavigationSection.navigateToCommercialInPlaceRentRoll();
-        Income.Commercial.InPlaceRentRoll.chooseListLeaseStatuses(testData.leaseStatuses, testData.numberOfCommercialUnits);
-        Income.Commercial.InPlaceRentRoll.chooseCheckBoxesIsInspectedFromList(testData.isInspected);
+        Income.Commercial.InPlaceRentRoll.chooseListLeaseStatuses(testData.leaseStatuses, testData.numberOfCommercialUnits)
+            .chooseCheckBoxesIsInspectedFromList(testData.isInspected);
 
 
         cy.stepInfo(` 2. Verify the Save & Continue button is displayed on the Stabilized Rent Roll page `);
         NavigationSection.clickIncomeApproachButton().openCommercialStabilizedRentRollInCommercial();
-       Income.Commercial.StabilizedRentRoll.verifyThatPageIsOpened();
-
-        Income.Commercial.StabilizedRentRoll.verifySaveContinueButtonExist();
+        Income.Commercial.StabilizedRentRoll.verifyThatPageIsOpened()
+            .verifySaveContinueButtonExist();
 
         cy.stepInfo(` 3. Fill in the editable fields with values or/and check check-boxes or/and click the radio button and click on the Save & Continue button. `);
-        Income.Commercial.StabilizedRentRoll.verifyIsInspectedCheckedAll(testData.isInspected);
-        Income.Commercial.StabilizedRentRoll.enterListPerSF(testData.leaseStatuses, testData.rentToBe);
-        Income.Commercial.StabilizedRentRoll.clickSaveContinueButton();
+        Income.Commercial.StabilizedRentRoll.verifyIsInspectedCheckedAll(testData.isInspected)
+            .enterListPerSF(testData.leaseStatuses, testData.rentToBe)
+            .clickSaveContinueButton();
 
         cy.stepInfo(` 4. Verify that the changes are saved and the user is redirected to the next page (Income > Miscellaneous > Laundry). `);
         Income.Miscellaneous.Laundry.verifyThatPageIsOpened();
