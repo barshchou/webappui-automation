@@ -2,6 +2,8 @@ import testData from "../../../../../fixtures/not_full_reports/income/commercial
 import NavigationSection from "../../../../../actions/base/navigationSection.actions";
 import Income from "../../../../../actions/income/income.manager";
 import {createReport, deleteReport} from "../../../../../actions/base/baseTest.actions";
+import { recordProxiedRequests } from "../../../../../../utils/intercept.utils";
+import { recordDOM_Snapshot } from "../../../../../utils/snapshot.utils";
 
 describe("Verify the Rent Basis buttons", () => {
     before("Login, create report", () => {
@@ -12,5 +14,10 @@ describe("Verify the Rent Basis buttons", () => {
         NavigationSection.navigateToCommercialInPlaceRentRoll();
         Income.Commercial.InPlaceRentRoll.verifyAllBasisButtons();
         deleteReport(testData.reportCreationData.reportNumber);
+    });
+
+    after(() => {
+        recordDOM_Snapshot();
+        recordProxiedRequests();
     });
 });
