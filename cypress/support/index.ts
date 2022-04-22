@@ -1,4 +1,5 @@
 /// <reference types="cypress" />
+import { recordDOM_Snapshot } from "../utils/snapshot.utils";
 import "./commands";
 
 require("cypress-xpath");
@@ -10,6 +11,11 @@ Cypress.on("uncaught:exception", (err, runnable) => {
     // returning false here prevents Cypress from
     // failing the test
     return false;
+});
+
+Cypress.on("fail",(err,test)=>{
+  recordDOM_Snapshot();
+  throw err;
 });
 
 declare global {
