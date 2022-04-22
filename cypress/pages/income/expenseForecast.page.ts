@@ -25,6 +25,8 @@ class ExpenseForecastPage extends BasePage {
 
     getElementToCheckRadio(forecastItem: BoweryReports.ForecastItemBasis, radioValue: BoweryReports.UnitSF) {return cy.get(`[data-qa=checked] [name='${forecastItem}.basis'][value='${radioValue}']`);}
 
+    getElementBasisToSwitch(forecastItem: BoweryReports.ForecastItemBasis, radioValue: BoweryReports.UnitSF) {return cy.get(`[name='${forecastItem}.basis'][value='${radioValue}']`);}
+
     getForecastItemForecastInput(item) {return cy.get(`[name='${item}.concludedValue']`);}
 
     getForecastItemCompMin(item) {return cy.get(`[data-qa=${item}-forecast-item] [data-qa=comp-min]`);}
@@ -63,13 +65,28 @@ class ExpenseForecastPage extends BasePage {
 
     get toeCommentaryModified() {return cy.xpath("//*[.='TOTAL OPERATING EXPENSES']//following::*[.='Modified']");}
 
-    get waterAndSewerCommentary() {return cy.xpath("//div[.='WATER & SEWER']//following::div[@data-slate-editor][1]");}
+    get waterAndSewerCommentary() {return cy.xpath("//*[.='WATER & SEWER']//following::div[@data-slate-editor][1]");}
 
-    get waterAndSewerCommentaryEditButton() {return cy.xpath("//div[.='WATER & SEWER']//following::button[.='Edit'][1]");}
+    get waterAndSewerCommentaryEditButton() {return cy.xpath("//*[.='WATER & SEWER']//following::button[.='Edit'][1]");}
 
-    get waterAndSewerCommentarySaveButton() {return cy.xpath("//div[.='WATER & SEWER']//following::button[.='Save'][1]");}
+    get waterAndSewerCommentarySaveButton() {return cy.xpath("//*[.='WATER & SEWER']//following::button[.='Save'][1]");}
 
     get waterAndSewerCommentaryModified() {return cy.xpath("//*[.='WATER & SEWER']//following::*[.='Modified'][2]");}
+
+    get waterAndSewerCommentaryRevertToOriginal() {return cy.xpath("//*[.='WATER & SEWER']//following::button[.='Revert to Original'][1]");}
+
+    get replacementReservesCommentary() {return cy.xpath("//*[.='REPLACEMENT RESERVES']//following::div[@data-slate-editor][1]");}
+
+    get replacementReservesCommentaryEditButton() {return cy.xpath("//*[.='REPLACEMENT RESERVES']//following::button[.='Edit'][1]");}
+
+    get replacementReservesCommentarySaveButton() {return cy.xpath("//*[.='REPLACEMENT RESERVES']//following::button[.='Save'][1]");}
+
+    get replacementReservesCommentaryModified() {return cy.xpath("//*[.='REPLACEMENT RESERVES']//following::*[.='Modified'][2]");}
+
+    get replacementReservesCommentaryRevertToOriginal() {return cy.xpath("//*[.='REPLACEMENT RESERVES']//following::button[.='Revert to Original'][1]");}
+
+    get expenseConfirmRevertButton() {return cy.xpath("//*[.='Yes, revert']");}
+
 }
 
 export default new ExpenseForecastPage();

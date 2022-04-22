@@ -139,10 +139,6 @@ class NavigationSectionActions extends BaseActions {
         return this;
     }
 
-    /**
-     * @param {boolean} isWithSave
-     * @returns {NavigationSectionActions}
-     */
     navigateToCommercialInPlaceRentRoll(isWithSave = true) {
         this.clickIncomeApproachButton()
             .clickCommercialArrow()
@@ -153,7 +149,7 @@ class NavigationSectionActions extends BaseActions {
         return this;
     }
 
-    openInPlaceRentRollInCommercial(isWithSave: boolean = true): NavigationSectionActions {
+    openInPlaceRentRollInCommercial(isWithSave: true): NavigationSectionActions {
         this.clickCommercialRentRollButton();
         if (isWithSave) this.clickYesButton();
         return this;
@@ -351,7 +347,7 @@ class NavigationSectionActions extends BaseActions {
         return this;
     }
 
-    navigateToProForma(isWithSave: boolean = true): NavigationSectionActions {
+    navigateToProForma(isWithSave: true): NavigationSectionActions {
         this.clickIncomeApproachButton()
             .clickProForma();
         if (isWithSave) {
@@ -401,11 +397,11 @@ class NavigationSectionActions extends BaseActions {
     }
 
     clickSupportingCapRates(): NavigationSectionActions {
-        navigationSectionPage.supportingCapRates.click()
+        navigationSectionPage.supportingCapRates.click();
         return this;
     }
 
-    navigateToSupportingCapRates(isWithYes: boolean = false): NavigationSectionActions {
+    navigateToSupportingCapRates(isWithYes: false): NavigationSectionActions {
         this.clickIncomeApproachButton()
             .clickSupportingCapRates();
         if(isWithYes) {

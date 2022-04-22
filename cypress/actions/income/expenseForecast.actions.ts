@@ -251,9 +251,20 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
         return this;
     }
 
-    verifyWaterAndSewerCommentary(textToBe: string): ExpenseForecastActions {
-        expenseForecastPage.waterAndSewerCommentary.should("contain.text", textToBe);
-        return this;
+    verifyForecastCommentary(textToBe: string, forecastItem: BoweryReports.ForecastItemBasis): ExpenseForecastActions {
+        switch (forecastItem) {
+            case "waterAndSewer":
+                expenseForecastPage.waterAndSewerCommentary.should("contain.text", textToBe);
+                return this;
+            case "reserves":
+                expenseForecastPage.replacementReservesCommentary.should("contain.text", textToBe);
+                return this;
+            case "total":
+                expenseForecastPage.toeCommentary.should("contain.text", textToBe);
+                return this;
+            default:
+                throw new Error('Not Implemented');
+        }
     }
 
     editTOECommentary(newText: string, isWithClear = false): ExpenseForecastActions {
@@ -275,6 +286,40 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
         expenseForecastPage.waterAndSewerCommentary.type(newText);
         expenseForecastPage.waterAndSewerCommentarySaveButton.click();
         expenseForecastPage.waterAndSewerCommentaryModified.should("exist");
+        return this;
+    }
+
+    editReplacementReservesCommentary(newText: string, isWithClear = false): ExpenseForecastActions {
+        expenseForecastPage.replacementReservesCommentaryEditButton.click();
+        if (isWithClear) {
+            expenseForecastPage.replacementReservesCommentary.clear();
+        }
+        expenseForecastPage.replacementReservesCommentary.type(newText);
+        expenseForecastPage.replacementReservesCommentarySaveButton.click();
+        expenseForecastPage.replacementReservesCommentaryModified.should("exist");
+        return this;
+    }
+
+    revertToOriginalWaterAndSewerCommentary(): ExpenseForecastActions {
+        expenseForecastPage.waterAndSewerCommentaryEditButton.click();
+        expenseForecastPage.waterAndSewerCommentaryRevertToOriginal.click();
+        this.verifyProgressBarNotExist();
+        expenseForecastPage.expenseConfirmRevertButton.click();
+        expenseForecastPage.waterAndSewerCommentarySaveButton.click();
+        return this;
+    }
+
+    revertToOriginalReplacementReservesCommentary(): ExpenseForecastActions {
+        expenseForecastPage.replacementReservesCommentaryEditButton.click();
+        expenseForecastPage.replacementReservesCommentaryRevertToOriginal.click();
+        this.verifyProgressBarNotExist();
+        expenseForecastPage.expenseConfirmRevertButton.click();
+        expenseForecastPage.replacementReservesCommentarySaveButton.click();
+        return this;
+    }
+
+    switchExpenseForecastBasis(forecastItem: ForecastItem): ExpenseForecastActions {
+        expenseForecastPage.getElementBasisToSwitch(forecastItem.name, forecastItem.basis).click();
         return this;
     }
 
