@@ -57,15 +57,30 @@ class ClientActions extends BaseActionsExt<typeof clientPage> {
         return this;
     }
 
-    clickTextBoxEditButton(index = 0) {
+    clickTextBoxEditButton(index = 0): ClientActions {
         clientPage.formEditBtn(index).click();
         return this;
     }
 
-    clickTextBoxSaveButton(index = 0) {
+    clickTextBoxSaveButton(index = 0): ClientActions {
         clientPage.formSaveBtn(index).click();
         return this;
-    } 
+    }
+    
+    clickTextBoxFormRevertToOriginalBtn(index = 0): ClientActions {
+        clientPage.formRevertToOriginalBtn(index).click();
+        return this;
+    }
+
+    clickDialogCancelBtn() {
+        clientPage.formCancelBtn.click();
+        return this;
+    }
+
+    clickDialogYesRevertBtn() {
+        clientPage.formYesRevertBtn.click();
+        return this;
+    }
 
     enterIntendedUserTextBox(textToType: string): ClientActions {
         clientPage.IntendedUserTextBox.type(textToType);
@@ -91,6 +106,18 @@ class ClientActions extends BaseActionsExt<typeof clientPage> {
         clientPage.IdentificationOfClientTextBox.should("contain.text", verifyAreaValue);
         return this;
     }
+
+    verifyNotContainIntendedUserTextBox(verifyAreaValue: string): ClientActions {
+        clientPage.IntendedUserTextBox.should("not.contain.text", verifyAreaValue);
+        return this;
+    }
+
+    // Error method 
+    verifyNotContainIdentificationOfTheClientTextBox(verifyAreaValue: string): ClientActions {
+        clientPage.IdentificationOfClientTextBox.should("not.contain.text", verifyAreaValue);
+        return this;
+    }
+
 }
 
 export default new ClientActions(clientPage);

@@ -15,6 +15,14 @@ export default class BasePage {
         return cy.get("[data-qa='form-save-btn']");
     }
 
+    get formCancelBtn() {
+        return cy.xpath("//*[contains(@role, 'dialog')]/descendant::*[contains(text(), 'Cancel')]");
+    }
+
+    get formYesRevertBtn() {
+        return cy.xpath("//*[contains(@role, 'dialog')]/descendant::*[contains(text(), 'Yes, revert')]");
+    }
+
     formEditBtn(index?: number){
         return cy.xpath('//*[@data-icon="pencil"]//ancestor::button')
         .eq((index !== 0) ? index : 0);
