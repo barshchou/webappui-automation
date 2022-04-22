@@ -5,6 +5,7 @@ import NavigationSection from "../../../../../actions/base/navigationSection.act
 import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
 import Property from "../../../../../actions/property/property.manager";
 import Income from "../../../../../actions/income/income.manager";
+import stabilizedRentRollPage from "../../../../../pages/income/commercial/stabilizedRentRoll.page";
 
 
 
@@ -28,8 +29,8 @@ describe("Verify the Save & Continue button functionality on the Stabilized Rent
 
         cy.stepInfo(` 2. Verify the Save & Continue button is displayed on the Stabilized Rent Roll page `);
         NavigationSection.clickIncomeApproachButton().openCommercialStabilizedRentRollInCommercial();
-        Income.Commercial.StabilizedRentRoll.verifyThatPageIsOpened()
-            .verifySaveContinueButtonExist();
+        Income.Commercial.StabilizedRentRoll.verifyThatPageIsOpened();
+        stabilizedRentRollPage.SaveAndContinueBtn.scrollIntoView().should('exist');
 
         cy.stepInfo(` 3. Fill in the editable fields with values or/and check check-boxes or/and click the radio button and click on the Save & Continue button. `);
         Income.Commercial.StabilizedRentRoll.verifyIsInspectedCheckedAll(testData.isInspected)
