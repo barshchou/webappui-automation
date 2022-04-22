@@ -39,6 +39,16 @@ class ExpenseForecastPage extends BasePage {
 
     getForecastItemProjectionByType(item, type) {return cy.contains(`[data-qa=${item}-forecast-item] [data-qa$=historical]`, type);}
 
+    getExpenseCommentary(forecastItem: string) {return cy.xpath(`//*[@data-qa="${forecastItem}-forecast-item"]//following::div[@data-slate-editor][1]`);}
+
+    getExpenseCommentaryEditButton(forecastItem: string) {return cy.xpath(`//*[@data-qa="${forecastItem}-forecast-item"]//following::button[.='Edit'][1]`);}
+
+    getExpenseCommentarySaveButton(forecastItem: string) {return cy.xpath(`//*[@data-qa="${forecastItem}-forecast-item"]//following::button[.='Save'][1]`);}
+
+    getExpenseCommentaryModified(forecastItem: string) {return cy.xpath(`//*[@data-qa="${forecastItem}-forecast-item"]//following::*[.='Modified'][2]`);}
+
+    getExpenseCommentaryRevertToOriginal(forecastItem: string) {return cy.xpath(`//*[@data-qa="${forecastItem}-forecast-item"]//following::button[.='Revert to Original'][1]`);}
+
     get inputPercentOfEGICheckbox() {return cy.get("[label='Input % of EGI'] input");}
 
     get percentOfEgiInput() {return cy.get("[name='management.percentOfEgi']");}
@@ -64,26 +74,6 @@ class ExpenseForecastPage extends BasePage {
     get toeCommentarySaveButton() {return cy.xpath("//*[.='TOTAL OPERATING EXPENSES']//following::button[.='Save'][1]");}
 
     get toeCommentaryModified() {return cy.xpath("//*[.='TOTAL OPERATING EXPENSES']//following::*[.='Modified']");}
-
-    get waterAndSewerCommentary() {return cy.xpath("//*[.='WATER & SEWER']//following::div[@data-slate-editor][1]");}
-
-    get waterAndSewerCommentaryEditButton() {return cy.xpath("//*[.='WATER & SEWER']//following::button[.='Edit'][1]");}
-
-    get waterAndSewerCommentarySaveButton() {return cy.xpath("//*[.='WATER & SEWER']//following::button[.='Save'][1]");}
-
-    get waterAndSewerCommentaryModified() {return cy.xpath("//*[.='WATER & SEWER']//following::*[.='Modified'][2]");}
-
-    get waterAndSewerCommentaryRevertToOriginal() {return cy.xpath("//*[.='WATER & SEWER']//following::button[.='Revert to Original'][1]");}
-
-    get replacementReservesCommentary() {return cy.xpath("//*[.='REPLACEMENT RESERVES']//following::div[@data-slate-editor][1]");}
-
-    get replacementReservesCommentaryEditButton() {return cy.xpath("//*[.='REPLACEMENT RESERVES']//following::button[.='Edit'][1]");}
-
-    get replacementReservesCommentarySaveButton() {return cy.xpath("//*[.='REPLACEMENT RESERVES']//following::button[.='Save'][1]");}
-
-    get replacementReservesCommentaryModified() {return cy.xpath("//*[.='REPLACEMENT RESERVES']//following::*[.='Modified'][2]");}
-
-    get replacementReservesCommentaryRevertToOriginal() {return cy.xpath("//*[.='REPLACEMENT RESERVES']//following::button[.='Revert to Original'][1]");}
 
     get expenseConfirmRevertButton() {return cy.xpath("//*[.='Yes, revert']");}
 

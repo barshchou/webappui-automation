@@ -251,20 +251,9 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
         return this;
     }
 
-    verifyForecastCommentary(textToBe: string, forecastItem: BoweryReports.ForecastItemBasis): ExpenseForecastActions {
-        switch (forecastItem) {
-            case "waterAndSewer":
-                expenseForecastPage.waterAndSewerCommentary.should("contain.text", textToBe);
-                return this;
-            case "reserves":
-                expenseForecastPage.replacementReservesCommentary.should("contain.text", textToBe);
-                return this;
-            case "total":
-                expenseForecastPage.toeCommentary.should("contain.text", textToBe);
-                return this;
-            default:
-                throw new Error('Not Implemented');
-        }
+    verifyForecastCommentary(textToBe: string, forecastItem: BoweryReports.ForecastItem): ExpenseForecastActions {
+        expenseForecastPage.getExpenseCommentary(this.getItemNameForAverage(forecastItem.name)).should("contain.text", textToBe);
+        return this;
     }
 
     editTOECommentary(newText: string, isWithClear = false): ExpenseForecastActions {
@@ -278,43 +267,25 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
         return this;
     }
 
-    editWaterAndSewerCommentary(newText: string, isWithClear = false): ExpenseForecastActions {
-        expenseForecastPage.waterAndSewerCommentaryEditButton.click();
+    editExpenseForecastCommentary(newText: string, forecastItem: BoweryReports.ForecastItem, isWithClear = false, ): ExpenseForecastActions {
+        let item = this.getItemNameForAverage(forecastItem.name);
+        expenseForecastPage.getExpenseCommentaryEditButton(item).click();
         if (isWithClear) {
-            expenseForecastPage.waterAndSewerCommentary.clear();
+            expenseForecastPage.getExpenseCommentary(item).clear();
         }
-        expenseForecastPage.waterAndSewerCommentary.type(newText);
-        expenseForecastPage.waterAndSewerCommentarySaveButton.click();
-        expenseForecastPage.waterAndSewerCommentaryModified.should("exist");
+        expenseForecastPage.getExpenseCommentary(item).type(newText);
+        expenseForecastPage.getExpenseCommentarySaveButton(item).click();
+        expenseForecastPage.getExpenseCommentaryModified(item).should("exist");
         return this;
     }
 
-    editReplacementReservesCommentary(newText: string, isWithClear = false): ExpenseForecastActions {
-        expenseForecastPage.replacementReservesCommentaryEditButton.click();
-        if (isWithClear) {
-            expenseForecastPage.replacementReservesCommentary.clear();
-        }
-        expenseForecastPage.replacementReservesCommentary.type(newText);
-        expenseForecastPage.replacementReservesCommentarySaveButton.click();
-        expenseForecastPage.replacementReservesCommentaryModified.should("exist");
-        return this;
-    }
-
-    revertToOriginalWaterAndSewerCommentary(): ExpenseForecastActions {
-        expenseForecastPage.waterAndSewerCommentaryEditButton.click();
-        expenseForecastPage.waterAndSewerCommentaryRevertToOriginal.click();
+    revertToOriginalExpenseForecastCommentary(forecastItem: BoweryReports.ForecastItem): ExpenseForecastActions {
+        let item = this.getItemNameForAverage(forecastItem.name);
+        expenseForecastPage.getExpenseCommentaryEditButton(item).click();
+        expenseForecastPage.getExpenseCommentaryRevertToOriginal(item).click();
         this.verifyProgressBarNotExist();
         expenseForecastPage.expenseConfirmRevertButton.click();
-        expenseForecastPage.waterAndSewerCommentarySaveButton.click();
-        return this;
-    }
-
-    revertToOriginalReplacementReservesCommentary(): ExpenseForecastActions {
-        expenseForecastPage.replacementReservesCommentaryEditButton.click();
-        expenseForecastPage.replacementReservesCommentaryRevertToOriginal.click();
-        this.verifyProgressBarNotExist();
-        expenseForecastPage.expenseConfirmRevertButton.click();
-        expenseForecastPage.replacementReservesCommentarySaveButton.click();
+        expenseForecastPage.getExpenseCommentarySaveButton(item).click();
         return this;
     }
 
