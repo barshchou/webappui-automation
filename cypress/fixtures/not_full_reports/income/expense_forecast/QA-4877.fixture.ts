@@ -24,4 +24,4 @@ export default {
         basis: "sf"
     },
     electricityCardSnapshotName: "Electricity_Forecast_Item_Component"
-}
+};

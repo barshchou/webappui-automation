@@ -1,18 +1,13 @@
-import BaseActions from "../base/base.actions";
 import expenseForecastPage from "../../pages/income/expenseForecast.page";
 import {getNumberFromDollarNumberWithCommas, numberWithCommas} from "../../../utils/numbers.utils";
+import BaseActionsExt from "../base/base.actions.ext";
 
 type ForecastItem = BoweryReports.ForecastItem;
 type BuildingDescription = BoweryReports.BuildingDescription;
-type Comparable = {address: string, location?: string, period?: string, squareFeet: number, resUnits?: number,
-    insurance?: number, electricity?: number, repairsAndMaintenance?: number, payrollAndBenefits?: number,
-    generalAndAdministrative?: number, management?: number, toe?: string};
+type Comparable = BoweryReports.Comparable;
 type ExpenseForecastData = {effectiveGrossIncome: number, management: {basis: string}, percentOfEgi: number}
 
-class ExpenseForecastActions extends BaseActions {
-    get Page(){
-        return expenseForecastPage;
-    }
+class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> {
     
     chooseForecastItemBasis(forecastItem: ForecastItem): ExpenseForecastActions {
         expenseForecastPage.getForecastItemBasisRadio(forecastItem.name).check(forecastItem.basis);
@@ -256,7 +251,7 @@ class ExpenseForecastActions extends BaseActions {
         return this;
     }
 
-    editTOECommentary(newText: string, isWithClear: boolean = false): ExpenseForecastActions {
+    editTOECommentary(newText: string, isWithClear = false): ExpenseForecastActions {
         expenseForecastPage.toeCommentaryEditButton.click();
         if (isWithClear) {
             expenseForecastPage.toeCommentary.clear();
@@ -269,11 +264,12 @@ class ExpenseForecastActions extends BaseActions {
 
     hideExpenseForecastHeader(): ExpenseForecastActions {
         // ernst: A few hacks to get clear Insurance_Forecast_Item component without overlayed headers
+        cy.log('hide');
         if(Cypress.browser.isHeadless == true){
-            expenseForecastPage.Header.then(elem=>{
+            expenseForecastPage.Header.then(elem => {
                 elem.hide();
             });
-            expenseForecastPage.ExpenseForecastHeader.then(elem=>{
+            expenseForecastPage.ExpenseForecastHeader.then(elem => {
                 elem.hide();
             });
         }
@@ -281,4 +277,4 @@ class ExpenseForecastActions extends BaseActions {
     }
 }
 
-export default new ExpenseForecastActions();
+export default new ExpenseForecastActions(expenseForecastPage);

@@ -1,4 +1,4 @@
-import { getReportId, interceptReportId, setReportId } from "../../../utils/intercept.utils";
+import { interceptReportId, setReportId } from "../../../utils/intercept.utils";
 import homepagePage from "../../pages/base/homepage.page";
 import BaseActions from "./base.actions";
 

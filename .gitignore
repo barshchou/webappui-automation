@@ -129,3 +129,4 @@ cypress/snapshots/**/__diff_output__
 
 # act (tool for local GH Actions)
 .act/.secrets
+.act/debug.json
