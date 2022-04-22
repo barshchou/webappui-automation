@@ -1,6 +1,6 @@
+import { Report } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
 import {createReport, deleteReport} from "../../../../actions/base/baseTest.actions";
-import { _Client } from "../../../../actions/report";
 import testData from '../../../../fixtures/not_full_reports/report/client/QA-4634.fixture';
 
 describe("Verify the 'Changes will be lost' modal functionality for Intended User and Identification of the Client sections", () => {
@@ -12,12 +12,12 @@ describe("Verify the 'Changes will be lost' modal functionality for Intended Use
         cy.stepInfo("1. Click on the Edit button on the Report > Client page for Intended User and Identification of the Client sections.");
         _NavigationSection.navigateToClientPage();
 
-        _Client.verifyProgressBarNotExist()
+        Report._Client.verifyProgressBarNotExist()
             .clickTextBoxEditButton()
             .clickTextBoxEditButton();
 
         cy.stepInfo("2. Edit comment and click on the Revert to Original button for both sections.");
-        _Client.enterIntendedUserTextBox(testData.textToType)
+        Report._Client.enterIntendedUserTextBox(testData.textToType)
             .clickNarrativeSuggestions(testData.verifyListValue)
             .enterIdentificationOfTheClientTextBox(testData.textToType)
             .clickNarrativeSuggestions(testData.verifyListValue, 1)
@@ -27,7 +27,7 @@ describe("Verify the 'Changes will be lost' modal functionality for Intended Use
             .clickDialogYesRevertBtn();
 
         cy.stepInfo("3. Verify the ‘Changes will be lost modal’ is displayed for both sections.");
-        _Client.verifyNotContainIntendedUserTextBox(testData.verifyAreaValue)
+        Report._Client.verifyNotContainIntendedUserTextBox(testData.verifyAreaValue)
             .verifyNotContainIdentificationOfTheClientTextBox(testData.verifyAreaValue);
 
 
