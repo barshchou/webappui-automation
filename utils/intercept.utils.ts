@@ -34,3 +34,15 @@ export const setReportId = () => {
 export const getReportId = () => {
     return cy.get(`@${aliasReportId}`);
 };
+export const recordProxiedRequests = () => {
+    if(Cypress.state()?.error != undefined){
+        let networkActivity = Cypress.ProxyLogging.proxyRequests.map(proxReq => {
+            return proxReq.consoleProps;
+    });
+        cy.log(networkActivity);
+        cy.writeFile(
+            `./cypress/network_activity_records/${Cypress.spec.name}.txt`,
+            networkActivity
+        );
+    }
+};
