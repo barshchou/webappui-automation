@@ -101,7 +101,7 @@ class StabilizedRentRollActions extends BaseActionsExt<typeof stabRenRollPage>{
         return this;
     }
 
-    enterListPerSF(leaseStatuses: BoweryReports.LeaseStatus, rentToBe: string | number): this {
+    enterListPerSF(leaseStatuses: Array<BoweryReports.LeaseStatus>, rentToBe: Array<string | number>): this {
         for (let i = 0; i < leaseStatuses.length; i++) {
             if (leaseStatuses[i] === "Vacant") {
                 this.enterAnnualRentPerSFByRowNumber(rentToBe[i], i);
@@ -116,7 +116,7 @@ class StabilizedRentRollActions extends BaseActionsExt<typeof stabRenRollPage>{
         return this;
     }
 
-    verifyAnnuallyRentPsfByRowNumber(leaseStatuses: BoweryReports.LeaseStatus, rentToBe: Array<string | number>): this {
+    verifyAnnuallyRentPsfByRowNumber(leaseStatuses: Array<BoweryReports.LeaseStatus>, rentToBe: Array<string | number>): this {
         this.annualRentPsfCellsScroll;
         for (let i = 0; i < rentToBe.length; i++) {
             if (leaseStatuses[i] === "Vacant") {

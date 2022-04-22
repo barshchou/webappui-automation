@@ -3,14 +3,7 @@ import {isDateHasCorrectFormat} from "../../../../utils/date.utils";
 import {numberWithCommas} from "../../../../utils/numbers.utils";
 import BaseActionsExt from "../../base/base.actions.ext";
 
-/**
- * TODO: [BW-51] Implement SharedRentRoll actions with interfaces
- */
-interface ISharedRentRoll {
-    chooseCheckBoxesIsInspectedFromList(isInspected: boolean[]): this
-}
-
-class CommercialRentRollActions extends BaseActionsExt<typeof rentRollPage> implements ISharedRentRoll {
+class CommercialRentRollActions extends BaseActionsExt<typeof rentRollPage> {
 
     verifyBasisOfRentTooltip() {
         rentRollPage.basisOfRentField.should("exist");
