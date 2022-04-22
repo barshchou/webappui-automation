@@ -1,7 +1,6 @@
 import { _NavigationSection } from "../../../../actions/base";
 import {createReport, deleteReport} from "../../../../actions/base/baseTest.actions";
 import { _Client } from "../../../../actions/report";
-import Report from "../../../../actions/report/report.manager";
 import testData from '../../../../fixtures/not_full_reports/report/client/QA-4637.fixture';
 
 describe(`Verify the suggested text dropdown in the new narrative component added through "=" for the 'Foreclosure sale' 
