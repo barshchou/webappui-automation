@@ -35,7 +35,7 @@ export const getReportId = () => {
     return cy.get(`@${aliasReportId}`);
 };
 
-const pathToNetworkActivity = "./cypress/network_activity_records";
+const pathToNetworkActivity = "./cypress/gh_artifacts/network_activity_records";
 export const recordProxiedRequests = () => {
     if(Cypress.state()?.error != undefined){
         let networkActivity = Cypress.ProxyLogging.proxyRequests.map(proxReq => {

@@ -1,4 +1,4 @@
-const pathToSnapshots = "./cypress/dom_snapshots";
+const pathToSnapshots = "./cypress/gh_artifacts/dom_snapshots";
 
 function _replaceStyle ($head, existingStyle, style) {
     const styleTag = _styleTag(style);
