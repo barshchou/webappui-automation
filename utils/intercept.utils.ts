@@ -36,6 +36,14 @@ export const getReportId = () => {
 };
 
 const pathToNetworkActivity = "./cypress/gh_artifacts/network_activity_records";
+
+/**
+ * Recording network requests which Cypress listen to.
+ * Cypress has a module which listen and proxies all the network request
+ * which was made by web application.
+ * Using hidden internal commands - we retrieve them 
+ * and then by explicit commands call - record them into file.
+ */
 export const recordProxiedRequests = () => {
     if(Cypress.state()?.error != undefined){
         let networkActivity = Cypress.ProxyLogging.proxyRequests.map(proxReq => {
