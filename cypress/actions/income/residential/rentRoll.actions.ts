@@ -129,11 +129,7 @@ class InPlaceRentRollActions extends BaseActionsExt<typeof rentRollPage> {
         return this;
     }
 
-    /**
-     * @param columnNames
-     * @returns {InPlaceRentRollActions}
-     */
-    checkUncheckPerUnitSquareFootage(columnNames): InPlaceRentRollActions {
+    checkUncheckPerUnitSquareFootage(columnNames: Array<string>): InPlaceRentRollActions {
         this.checkPerUnitSquareFootage()
             .verifyListColumnExist(columnNames)
             .checkPerUnitSquareFootage("false")
@@ -204,14 +200,9 @@ class InPlaceRentRollActions extends BaseActionsExt<typeof rentRollPage> {
         return this;
     }
 
-    /**
-     * @param {string | number} bedroomsNumber
-     * @param {number} rowNumber
-     * @returns {InPlaceRentRollActions}
-     */
-    enterBedroomsNumberByRowNumber(bedroomsNumber, rowNumber = 0) {
+    enterBedroomsNumberByRowNumber(bedroomsNumber: string | number, rowNumber = 0) {
         rentRollPage.bedroomsCells.eq(rowNumber).dblclick();
-        this.enterTextToTextarea(bedroomsNumber);
+        this.enterTextToTextarea(`${bedroomsNumber}`);
         rentRollPage.bedroomsCells.eq(rowNumber).should("have.text", bedroomsNumber);
         return this;
     }
@@ -237,12 +228,7 @@ class InPlaceRentRollActions extends BaseActionsExt<typeof rentRollPage> {
         return this;
     }
 
-    /**
-     * @param {number | string} forecastValue
-     * @param {number} rowNumber
-     * @returns {InPlaceRentRollActions}
-     */
-    enterForecastByRowNumber(forecastValue, rowNumber = 0): InPlaceRentRollActions {
+    enterForecastByRowNumber(forecastValue: number | string, rowNumber = 0): InPlaceRentRollActions {
         let forecastText;
         if (typeof forecastValue === "number") {
             forecastText = `$${numberWithCommas(forecastValue.toFixed(2))}`;
@@ -254,7 +240,7 @@ class InPlaceRentRollActions extends BaseActionsExt<typeof rentRollPage> {
             }
         }
         rentRollPage.rentForecastCells.eq(rowNumber).dblclick();
-        this.enterTextToTextarea(forecastValue);
+        this.enterTextToTextarea(`${forecastValue}`);
         rentRollPage.rentForecastCells.eq(rowNumber).should("have.text", forecastText);
         return this;
     }
@@ -343,14 +329,9 @@ class InPlaceRentRollActions extends BaseActionsExt<typeof rentRollPage> {
         return this;
     }
 
-    /**
-     * @param {string | number} value
-     * @param {number} rowNumber
-     * @returns {InPlaceRentRollActions}
-     */
-    enterSquareFootageByRow(value, rowNumber = 0): InPlaceRentRollActions {
+    enterSquareFootageByRow(value: string | number, rowNumber = 0): InPlaceRentRollActions {
         rentRollPage.squareFootageCells.eq(rowNumber).dblclick();
-        this.enterTextToTextarea(value);
+        this.enterTextToTextarea(`${value}`);
         let number = typeof value === "string" ? getNumberFromDollarNumberWithCommas(value) : value;
         let textToBe;
         if (number > (99 * Math.pow(10, 19))) {
@@ -362,14 +343,9 @@ class InPlaceRentRollActions extends BaseActionsExt<typeof rentRollPage> {
         return this;
     }
 
-    /**
-     * @param {number | string} value
-     * @param rowNumber
-     * @returns {InPlaceRentRollActions}
-     */
-    enterNumberBathroomsByRow(value, rowNumber = 0): InPlaceRentRollActions {
+    enterNumberBathroomsByRow(value:number | string, rowNumber = 0): InPlaceRentRollActions {
         rentRollPage.bathroomsCells.eq(rowNumber).dblclick();
-        this.enterTextToTextarea(value);
+        this.enterTextToTextarea(`${value}`);
         rentRollPage.bathroomsCells.eq(rowNumber).should("have.text", value).as("checkedTextBathroom");
         if ((isDecimal(value) && !isHalfDecimalPart(value)) || Number(value) < 0) {
             cy.get("@checkedTextBathroom").should("have.class", "invalid");
