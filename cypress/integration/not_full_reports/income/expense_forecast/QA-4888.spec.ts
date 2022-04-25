@@ -2,7 +2,8 @@
 
 import testData from "../../../../fixtures/not_full_reports/income/expense_forecast/QA-4888.fixture";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
-import { Base, Property, Income } from "../../../../actions";
+import { Property, Income } from "../../../../actions";
+import {_NavigationSection} from "../../../../actions/base";
 
 
 describe("Historical expense Electricity Per Unit is correctly calculated and displayed", () => {
@@ -16,11 +17,11 @@ describe("Historical expense Electricity Per Unit is correctly calculated and di
     it("Test body", { tags: "@snapshot_tests" }, () => {
 
         cy.stepInfo("1. Pre-condition: Residential Units should be filled in on Property > Summary form");
-        Base._NavigationSection.navigateToPropertySummary();
+        _NavigationSection.navigateToPropertySummary();
         Property._Summary.enterNumberOfResUnits(testData.buildingDescription.numberOfUnits);
 
         cy.stepInfo("2. Go to Income > Expense History");
-        Base._NavigationSection.Actions.navigateToExpenseHistory();
+        _NavigationSection.Actions.navigateToExpenseHistory();
 
         cy.stepInfo("3. Add columns for all types of Expense Period: Actual, Actual T12, Annualized Historical and Projection");
         testData.periods.forEach((per, index) => {
@@ -41,7 +42,7 @@ describe("Historical expense Electricity Per Unit is correctly calculated and di
         Income._ExpenseHistory.Actions.verifyAverageTable();
 
         cy.stepInfo("5. Go to Expense Forecast and make sure that Per Unit radiobutton is selected for Electricity  card");
-        Base._NavigationSection.Actions.navigateToExpenseForecast();
+        _NavigationSection.Actions.navigateToExpenseForecast();
         Income._ExpenseForecastActions.chooseForecastItemBasis(testData.actualElectricityItem);
         Income._ExpenseForecastActions.Actions.verifyForecastItemBasis(testData.actualElectricityItem);
 
