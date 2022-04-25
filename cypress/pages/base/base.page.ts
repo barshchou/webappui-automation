@@ -15,7 +15,7 @@ export default class BasePage {
         return cy.get("[data-qa='form-save-btn']");
     }
 
-    get Close() {
+    get CloseIcon() {
         return cy.get("[aria-label=close]");
     }
 

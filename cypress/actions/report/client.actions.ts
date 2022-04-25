@@ -66,26 +66,6 @@ class ClientActions extends BaseActionsExt<typeof clientPage> {
         clientPage.formSaveBtn(index).click();
         return this;
     }
-    
-    clickTextBoxFormRevertToOriginalBtn(index = 0): ClientActions {
-        clientPage.formRevertToOriginalBtn(index).click();
-        return this;
-    }
-
-    clickDialogCancelBtn() {
-        clientPage.formCancelBtn.click();
-        return this;
-    }
-
-    clickDialogYesRevertBtn() {
-        clientPage.formYesRevertBtn.click();
-        return this;
-    }
-
-    clickCloseIcon() {
-        clientPage.Close.click();
-        return this;
-    }
 
     enterIntendedUserTextBox(textToType: string): ClientActions {
         clientPage.IntendedUserTextBox.type(textToType);
@@ -119,11 +99,6 @@ class ClientActions extends BaseActionsExt<typeof clientPage> {
 
     verifyNotContainIdentificationOfTheClientTextBox(verifyAreaValue: string): ClientActions {
         clientPage.IdentificationOfClientTextBox.should("not.contain.text", verifyAreaValue);
-        return this;
-    }
-
-    verifyVisibleModalWindow() {
-        clientPage.modalWindow.should('be.visible');
         return this;
     }
 
