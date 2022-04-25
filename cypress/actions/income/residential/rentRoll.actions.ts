@@ -200,7 +200,7 @@ class InPlaceRentRollActions extends BaseActionsExt<typeof rentRollPage> {
         return this;
     }
 
-    enterBedroomsNumberByRowNumber(bedroomsNumber: string | number, rowNumber = 0) {
+    enterBedroomsNumberByRowNumber(bedroomsNumber: string | number, rowNumber = 0): InPlaceRentRollActions {
         rentRollPage.bedroomsCells.eq(rowNumber).dblclick();
         this.enterTextToTextarea(`${bedroomsNumber}`);
         rentRollPage.bedroomsCells.eq(rowNumber).should("have.text", bedroomsNumber);
@@ -260,7 +260,7 @@ class InPlaceRentRollActions extends BaseActionsExt<typeof rentRollPage> {
         return this;
     }
 
-    enterAllEqualForecast(forecastValue: string, numberOfUnits: number) {
+    enterAllEqualForecast(forecastValue: string | number, numberOfUnits: number): InPlaceRentRollActions {
         for (let i = 0; i < numberOfUnits; i++) {
             this.enterForecastByRowNumber(forecastValue, i);
         }
@@ -288,6 +288,14 @@ class InPlaceRentRollActions extends BaseActionsExt<typeof rentRollPage> {
         });
         return this;
     }
+
+    // verifyRentSFValue(value: string | number, rowNumber = 0) {
+    //     const textToBe = typeof value === "string" ? value : `$${numberWithCommas(value.toFixed(2))}`;
+    //     rentRollPage.monthlyRentCells.eq(rowNumber).dblclick();
+    //     this.enterTextToTextarea(`${value}`);
+    //     rentRollPage.monthlyRentCells.eq(rowNumber).should("have.text", textToBe);
+    //     return this;
+    // }
 
     verifyRentRollCommentary(commentaryToBe: string): InPlaceRentRollActions {
         rentRollPage.rentRollCommentary.should("have.text", commentaryToBe);
