@@ -27,9 +27,10 @@ describe("[QA-4053] The Concluded Value Per Unit is calculated correctly and inc
         _NavigationSection.navigateToSalesValueConclusion();
 
         cy.stepInfo('4. Verify that the Concluded Value Per Unit is calculated correctly');
+        let totalValue = '$' + ((testData.general.commercialUnits + testData.general.residentialUnits) * testData.general.valueConclusion).toLocaleString();
         Sales._ValueConclusion.enterSaleValueConclusion(testData.general.valueConclusion)
             .verifySaleValueConclusion(testData.general.valueConclusion)
-            .verifyAsStabilizedAmount(testData.general.totalValue);
+            .verifyAsStabilizedAmount(totalValue);
 
         // TODO: Add export verify
         // Proceed to the Sales Comparison Approach > Value Opinion via the Sales Comparison Approach and verify the value.

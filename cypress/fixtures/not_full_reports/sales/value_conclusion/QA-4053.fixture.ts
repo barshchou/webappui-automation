@@ -13,7 +13,6 @@ const generalFixture = () => {
         residentialUnits: 12,
         commercialUnits: 3,
         valueConclusion: 750,
-        totalValue: '$11,250'
     };
 };
 
