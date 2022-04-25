@@ -2,8 +2,8 @@
 
 import testData from "../../../../fixtures/not_full_reports/income/expense_forecast/QA-4889.fixture";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
-import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Income from "../../../../actions/income/income.manager";
+import {_NavigationSection} from "../../../../actions/base";
 
 
 describe("Comparable Min, Max, Avg values for Electricity Per Unit are correctly calculated and displayed", () => {
@@ -16,7 +16,7 @@ describe("Comparable Min, Max, Avg values for Electricity Per Unit are correctly
 
   it("Test body", { tags: "@snapshot_tests" }, () => {
     cy.stepInfo("1. Go to Income > Comparable Expenses");
-    NavigationSection.Actions.navigateToComparableExpenses();
+    _NavigationSection.Actions.navigateToComparableExpenses();
 
     cy.stepInfo("2. Add several comps (via Search, Filter or Add blank column)");
     testData.comparables.forEach((comp, index) => {
@@ -27,7 +27,7 @@ describe("Comparable Min, Max, Avg values for Electricity Per Unit are correctly
     });
 
     cy.stepInfo("3. Make sure that Electricity and Residential Units fields are filled in for all added columns and save changes");
-    NavigationSection.Actions.navigateToExpenseForecast();
+    _NavigationSection.Actions.navigateToExpenseForecast();
 
     cy.stepInfo("4. Go to Expense Forecast and make sure that Per Unit radiobutton is selected for Electricity card");
     Income.ExpenseForecast.chooseForecastItemBasis(testData.electricityItem);
