@@ -1,8 +1,7 @@
 import testData from "../../../../../fixtures/not_full_reports/income/residential/in_place_rent_roll/QA-4200-02.fixture";
 import {createReport, deleteReport} from "../../../../../actions/base/baseTest.actions";
-import NavigationSection from "../../../../../actions/base/navigationSection.actions";
-import Income from "../../../../../actions/income/income.manager";
-import Property from "../../../../../actions/property/property.manager";
+import { _NavigationSection } from "../../../../../actions/base";
+import { Income, Property } from "../../../../../actions";
 
 describe(`Verify if "Per Year" time period PSF Rent based on is selected - > 
     the calculation of "Rent PSF" should be Monthly Rent *12/Square Footage/`, () => {
@@ -11,18 +10,18 @@ describe(`Verify if "Per Year" time period PSF Rent based on is selected - >
     });
 
     it("Test body", () => {
-        NavigationSection.navigateToResInPlaceRentRoll();
-        // Income.Residential.InPlaceRentRoll.verifyViaCSVExist();
-        // Income.Residential.InPlaceRentRoll.verifyUploadCSVRow(testData.links);
-        // Income.Residential.InPlaceRentRoll.verifyNumberOfResidentialUnits(testData.numberOfUnits)
-        //     .uploadFile(testData.csvFileName, testData.csvNumberOfUnits);
-        // cy.reload();
-        // Income.Residential.InPlaceRentRoll.uploadFile(testData.xlsxFileName, testData.numberOfUnits)
-        //     .goToPropSummaryWithSaveLeavingFirst();
-        // Property.Summary.verifyThatPageIsOpened()
-        //     .enterNumberOfResUnits(testData.numberOfUnitsToChange)
-        //     .goBackWithSave();
-        // Income.Residential.InPlaceRentRoll.uploadFile(testData.csvFileName, testData.csvNumberOfUnits);
-        // deleteReport(testData.reportCreationData.reportNumber);
+        _NavigationSection.navigateToResInPlaceRentRoll();
+        Income._Residential.InPlaceRentRoll.verifyViaCSVExist();
+        Income._Residential.InPlaceRentRoll.verifyUploadCSVRow(testData.links);
+        Income._Residential.InPlaceRentRoll.verifyNumberOfResidentialUnits(testData.numberOfUnits)
+            .uploadFile(testData.csvFileName, testData.csvNumberOfUnits);
+        cy.reload();
+        Income._Residential.InPlaceRentRoll.uploadFile(testData.xlsxFileName, testData.numberOfUnits)
+            .goToPropSummaryWithSaveLeavingFirst();
+        Property._Summary.verifyThatPageIsOpened()
+            .enterNumberOfResUnits(testData.numberOfUnitsToChange)
+            .goBackWithSave();
+        Income._Residential.InPlaceRentRoll.uploadFile(testData.csvFileName, testData.csvNumberOfUnits);
+        deleteReport(testData.reportCreationData.reportNumber);
     });
 });
