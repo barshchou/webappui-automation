@@ -43,7 +43,5 @@ describe("Verify the functionality of the Ceiling Height radio button", () => {
 
         cy.stepInfo("5. Delete report");
         deleteReport(testData.reportCreationData.reportNumber);
-
-
     });
 });
