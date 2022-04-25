@@ -34,6 +34,7 @@ class ValueConclusionPage extends BasePage {
     get asStabilizedLaundryLossAmount() {return cy.get("[data-qa*='asStabilizedLossItems.laundryRentLoss.amount'] input:not([type=hidden])");}
     get asCompleteLaundryLossAmount() {return cy.get("[data-qa*='asCompleteLossItems.laundryRentLoss.amount'] input:not([type=hidden])");}
     get asStabilizedCommissionFeeAmount() {return cy.get("[data-qa^='asStabilizedLossItems.commissionFee.amount'] input:not([type=hidden])");}
+    get numberOfUnitsAmount() {return cy.get("td[data-qa='unitsNumber-amount-cell']");}
 }
 
 export default new ValueConclusionPage();

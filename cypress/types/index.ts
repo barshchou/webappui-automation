@@ -12,10 +12,10 @@ namespace BoweryReports {
         incomeValue?: string,
         conclusionValue?: BoweryReports.ConclusionValue
     }
-    export type LeaseDateName = "Start" | "Expiry";
-    export type LeaseStatus = "Occupied" | "Vacant";
-    export type UnitSF = "unit" | "sf";
-    export type PerUnitPerSF = "Per Unit" | "Per SF";
+    export type LeaseDateName = "Start" | "Expiry"
+    export type LeaseStatus = "Occupied" | "Vacant"
+    export type UnitSF = "unit" | "sf"
+    export type PerUnitPerSF = "Per Unit" | "Per SF"
     export type ForecastItemBasis = "insurance" | "electricity"
     | "fuel" | "waterAndSewer" | "repairsAndMaintenance" | "payrollAndBenefits" | "generalAndAdministrative" 
     | "legalAndProfessionalFees" | "miscellaneous" | "management" | "reserves" | "total";
@@ -32,12 +32,13 @@ namespace BoweryReports {
         perUnit: string
     };
 
-    export type CommercialGradeValues = "atGrade" | "partiallyBelowGrade" | "belowGrade" | "other";
+    export type CommercialUnitsGradeValues = "atGrade" | "partiallyBelowGrade" | "belowGrade" | "other";
+    export type CommercialUnitsFacadeValues = "plate glass" | "other";
 
     /*
     More Unit Groups Values will be added after other values types added
      */
-    export type CommercialUnitGroupsValues = CommercialUnitsUseValues | CommercialGradeValues;
+    export type CommercialUnitGroupsValues = CommercialUnitsUseValues | CommercialUnitsGradeValues | CommercialUnitsFacadeValues;
 
 
     export type ForecastItem = { 

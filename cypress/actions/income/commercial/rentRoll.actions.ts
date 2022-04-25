@@ -53,7 +53,7 @@ class CommercialRentRollActions extends BaseActionsExt<typeof rentRollPage> {
     chooseLeaseStatusByRowNumber(status: BoweryReports.LeaseStatus, rowNumber = 0): this {
         rentRollPage.pageHeader.should("be.visible");
         rentRollPage.leaseStatusArrows.eq(rowNumber).should("be.visible").as("arrow");
-        cy.get("@arrow").click({force:true});
+        cy.get("@arrow").click({ force: true });
         rentRollPage.getLeaseStatusToChooseByValue(status).click();
         this.verifyLeaseStatusCellTextByRow(status, rowNumber);
         if (status === "Vacant") {
@@ -96,12 +96,29 @@ class CommercialRentRollActions extends BaseActionsExt<typeof rentRollPage> {
         rentRollPage.elementToVerifyIsInspected.should("not.have.css", "background-color", backColor);
         rentRollPage.isInspectedCheckboxes.eq(rowNumber).as("isInspectedCheckbox");
         cy.get("@isInspectedCheckbox").invoke("show");
-        cy.get("@isInspectedCheckbox").check({force:true});
+        cy.get("@isInspectedCheckbox").check({ force: true });
         rentRollPage.elementToVerifyIsInspected.should("have.css", "background-color", backColor);
         return this;
     }
 
-    verifyUnitNumberCells(unitNumber = 1): this {
+    chooseCheckBoxesIsInspectedFromList(isInspected: boolean[]): this {
+        for (let i = 0; i < isInspected.length; i++) {
+            if (isInspected[i]) {
+                this.chooseCheckBoxesIsInspectedByRowNumber(i);
+            }
+        }
+        return this;
+    }
+
+    chooseCheckBoxesIsInspectedByRowNumber(rowNumber: number): this {
+        rentRollPage.isInspectedCheckboxes.eq(rowNumber).check({ force: true });
+        const backColor = "rgb(66, 96, 211)";
+        rentRollPage.elementToVerifyIsInspected.should("have.css", "background-color", backColor);
+        return this;
+    }
+
+
+     verifyUnitNumberCells(unitNumber = 1): this {
         rentRollPage.unitNumberCells.each(cell => {
             cy.wrap(cell).should("exist").and("be.visible").and("have.class", "readOnly");
         });

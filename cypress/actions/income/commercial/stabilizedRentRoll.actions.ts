@@ -4,8 +4,27 @@ import BaseActionsExt from "../../base/base.actions.ext";
 
 class StabilizedRentRollActions extends BaseActionsExt<typeof stabRenRollPage>{
 
-    verifyIsInspectedChecked(): this {
-        stabRenRollPage.elementToVerifyIsInspected.should("have.css", "background-color", "rgb(66, 96, 211)");
+    verifyIsInspectedChecked(rowNumber= 0): this {
+        stabRenRollPage.elementToVerifyIsInspected.eq(rowNumber).should("have.css", "background-color", "rgb(66, 96, 211)");
+        return this;
+    }
+
+    verifyIsInspectedCheckedAll(isInspected: boolean[]): this {
+        for (let i = 0; i < isInspected.length; i++) {
+            if (isInspected[i]) {
+                this.verifyIsInspectedChecked(i);
+            }
+        }
+        return this;
+    }
+
+    verifyThatPageIsOpened(): this {
+        stabRenRollPage.stabilizedRentRollheaderSection.should("be.visible");
+        cy.url().then(url => {
+            let urlObj = new URL(url);
+            cy.log("Check whether current URL ends with '/commercial-projected-rent-roll'");
+            cy.wrap(urlObj.pathname.endsWith("/commercial-projected-rent-roll")).should("be.true");
+        });
         return this;
     }
 
@@ -69,8 +88,41 @@ class StabilizedRentRollActions extends BaseActionsExt<typeof stabRenRollPage>{
         return this;
     }
 
+    annualRentPsfCellsScroll() {
+        cy.contains("Rent/SF").scrollIntoView();
+        return this;
+    }
+
+    enterAnnualRentPerSFByRowNumber(rentToBe: string | number, rowNumber: number): this {
+        this.annualRentPsfCellsScroll();
+        stabRenRollPage.annualRentPsfCells.eq(rowNumber).dblclick({ force: true });
+        stabRenRollPage.textareaToInput.clear().type(`${rentToBe}`).type("{enter}");
+        this.verifyAnnuallyRentPsf(rentToBe, rowNumber);
+        return this;
+    }
+
+    enterListPerSF(leaseStatuses: Array<BoweryReports.LeaseStatus>, rentToBe: Array<string | number>): this {
+        for (let i = 0; i < leaseStatuses.length; i++) {
+            if (leaseStatuses[i] === "Vacant") {
+                this.enterAnnualRentPerSFByRowNumber(rentToBe[i], i);
+            }
+        }
+        return this;
+    }
+
     verifyAnnuallyRentPsf(rentToBe: string | number, rowNumber: number): this {
+        this.annualRentPsfCellsScroll;
         stabRenRollPage.annualRentPsfCells.eq(rowNumber).should("contain.text", rentToBe);
+        return this;
+    }
+
+    verifyAnnuallyRentPsfByRowNumber(leaseStatuses: Array<BoweryReports.LeaseStatus>, rentToBe: Array<string | number>): this {
+        this.annualRentPsfCellsScroll;
+        for (let i = 0; i < rentToBe.length; i++) {
+            if (leaseStatuses[i] === "Vacant") {
+                this.verifyAnnuallyRentPsf(rentToBe[i], i);
+            }
+        }
         return this;
     }
 
@@ -85,7 +137,7 @@ class StabilizedRentRollActions extends BaseActionsExt<typeof stabRenRollPage>{
     }
 
     clickNarrativeSuggestions(verifyListValue: string): StabilizedRentRollActions {
-        stabRenRollPage.narrativeSuggestionsListItems.contains(verifyListValue).click();
+        stabRenRollPage.narrativeSuggestionsList.contains(verifyListValue).click();
         return this;
     }
 
@@ -94,15 +146,6 @@ class StabilizedRentRollActions extends BaseActionsExt<typeof stabRenRollPage>{
         return this;
     }
 
-    clickEditDiscussionButton(): this {
-        stabRenRollPage.formEditBtn(0).scrollIntoView().click();
-        return this;
-    }
-
-    clickCancelEditDiscussionButton(): this {
-        stabRenRollPage.cancelEditDiscussionButton.scrollIntoView().click();
-        return this;
-    }
 }
 
 export default new StabilizedRentRollActions(stabRenRollPage);

@@ -25,6 +25,8 @@ class ExpenseForecastPage extends BasePage {
 
     getElementToCheckRadio(forecastItem: BoweryReports.ForecastItemBasis, radioValue: BoweryReports.UnitSF) {return cy.get(`[data-qa=checked] [name='${forecastItem}.basis'][value='${radioValue}']`);}
 
+    getElementBasisToSwitch(forecastItem: BoweryReports.ForecastItemBasis, radioValue: BoweryReports.UnitSF) {return cy.get(`[name='${forecastItem}.basis'][value='${radioValue}']`);}
+
     getForecastItemForecastInput(item) {return cy.get(`[name='${item}.concludedValue']`);}
 
     getForecastItemCompMin(item) {return cy.get(`[data-qa=${item}-forecast-item] [data-qa=comp-min]`);}
@@ -36,6 +38,16 @@ class ExpenseForecastPage extends BasePage {
     getForecastItemBasisMoneyValue(item) {return cy.get(`[data-qa=${item}-forecast-item] [data-qa=basis]`);}
 
     getForecastItemProjectionByType(item, type) {return cy.contains(`[data-qa=${item}-forecast-item] [data-qa$=historical]`, type);}
+
+    getExpenseCommentary(forecastItem: string) {return cy.xpath(`//*[@data-qa="${forecastItem}-forecast-item"]//following::div[@data-slate-editor][1]`);}
+
+    getExpenseCommentaryEditButton(forecastItem: string) {return cy.xpath(`//*[@data-qa="${forecastItem}-forecast-item"]//following::button[.='Edit'][1]`);}
+
+    getExpenseCommentarySaveButton(forecastItem: string) {return cy.xpath(`//*[@data-qa="${forecastItem}-forecast-item"]//following::button[.='Save'][1]`);}
+
+    getExpenseCommentaryModified(forecastItem: string) {return cy.xpath(`//*[@data-qa="${forecastItem}-forecast-item"]//following::*[.='Modified'][2]`);}
+
+    getExpenseCommentaryRevertToOriginal(forecastItem: string) {return cy.xpath(`//*[@data-qa="${forecastItem}-forecast-item"]//following::button[.='Revert to Original'][1]`);}
 
     get inputPercentOfEGICheckbox() {return cy.get("[label='Input % of EGI'] input");}
 
@@ -62,6 +74,9 @@ class ExpenseForecastPage extends BasePage {
     get toeCommentarySaveButton() {return cy.xpath("//*[.='TOTAL OPERATING EXPENSES']//following::button[.='Save'][1]");}
 
     get toeCommentaryModified() {return cy.xpath("//*[.='TOTAL OPERATING EXPENSES']//following::*[.='Modified']");}
+
+    get expenseConfirmRevertButton() {return cy.xpath("//*[.='Yes, revert']");}
+
 }
 
 export default new ExpenseForecastPage();

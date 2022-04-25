@@ -381,6 +381,16 @@ class ValueConclusionActions extends BaseActions {
         valueConclusionPage.asStabilizedCommissionFeeAmount.should("have.value", valueToBe);
         return this;
     }
+    
+    /**
+     * @param {string | number} amountToBe
+     * @returns {ValueConclusionActions}
+     */
+    verifyNumberOfUnitsAmount(amountToBe) {
+        const valueToBe = typeof amountToBe === "string" ? amountToBe : `-$${numberWithCommas(amountToBe)}`;
+        valueConclusionPage.numberOfUnitsAmount.should("have.text", valueToBe);
+        return this;
+    }
 }
 
 export default new ValueConclusionActions();

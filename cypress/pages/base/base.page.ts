@@ -41,4 +41,9 @@ export default class BasePage {
         return cy.xpath("//button[.='Revert to Original']")
         .eq((index !== 0) ? index : 0);
     }
+
+    formCancelButton(index?: number) {
+        return cy.xpath("//button[.='Cancel']")
+            .eq((index !== 0) ? index : 0);
+    }
 }

@@ -52,11 +52,6 @@ class ClientActions extends BaseActionsExt<typeof clientPage> {
         return this;
     }
 
-    clickRevertToGeneratedButton() {
-        clientPage.revertToGeneratedButton.click();
-        return this;
-    }
-
     clickTextBoxEditButton(index = 0): ClientActions {
         clientPage.formEditBtn(index).click();
         return this;

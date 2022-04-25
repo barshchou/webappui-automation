@@ -251,6 +251,11 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
         return this;
     }
 
+    verifyForecastCommentary(textToBe: string, forecastItem: BoweryReports.ForecastItem): ExpenseForecastActions {
+        expenseForecastPage.getExpenseCommentary(this.getItemNameForAverage(forecastItem.name)).should("contain.text", textToBe);
+        return this;
+    }
+
     editTOECommentary(newText: string, isWithClear = false): ExpenseForecastActions {
         expenseForecastPage.toeCommentaryEditButton.click();
         if (isWithClear) {
@@ -259,6 +264,33 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
         expenseForecastPage.toeCommentary.type(newText);
         expenseForecastPage.toeCommentarySaveButton.click();
         expenseForecastPage.toeCommentaryModified.should("exist");
+        return this;
+    }
+
+    editExpenseForecastCommentary(newText: string, forecastItem: BoweryReports.ForecastItem, isWithClear = false, ): ExpenseForecastActions {
+        let item = this.getItemNameForAverage(forecastItem.name);
+        expenseForecastPage.getExpenseCommentaryEditButton(item).click();
+        if (isWithClear) {
+            expenseForecastPage.getExpenseCommentary(item).clear();
+        }
+        expenseForecastPage.getExpenseCommentary(item).type(newText);
+        expenseForecastPage.getExpenseCommentarySaveButton(item).click();
+        expenseForecastPage.getExpenseCommentaryModified(item).should("exist");
+        return this;
+    }
+
+    revertToOriginalExpenseForecastCommentary(forecastItem: BoweryReports.ForecastItem): ExpenseForecastActions {
+        let item = this.getItemNameForAverage(forecastItem.name);
+        expenseForecastPage.getExpenseCommentaryEditButton(item).click();
+        expenseForecastPage.getExpenseCommentaryRevertToOriginal(item).click();
+        this.verifyProgressBarNotExist();
+        expenseForecastPage.expenseConfirmRevertButton.click();
+        expenseForecastPage.getExpenseCommentarySaveButton(item).click();
+        return this;
+    }
+
+    switchExpenseForecastBasis(forecastItem: ForecastItem): ExpenseForecastActions {
+        expenseForecastPage.getElementBasisToSwitch(forecastItem.name, forecastItem.basis).click();
         return this;
     }
 

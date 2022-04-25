@@ -1,11 +1,11 @@
 /// <reference types="cypress-file-upload" />
 
-import testData from "../../../../fixtures/not_full_reports/property/summary/QA-4556.fixture";
+import testData from "../../../../fixtures/not_full_reports/property/commercial_units/QA-4556&57.fixture";
 import {createReport, deleteReport} from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { Property } from "../../../../actions";
 
-describe("Verify the functionality of the Frontage radio button", () => {
+describe("Verify the functionality of the Image upload to the Interior and Exterior Images sections", () => {
     before("Login, create report", () => {
         cy.stepInfo(`Preconditions: The mixed report is created and several commercial units are added.`);
         createReport(testData.reportCreationData);
@@ -29,12 +29,15 @@ describe("Verify the functionality of the Frontage radio button", () => {
             testData.inputType.forEach(inputMethod => {
                 cy.stepInfo(`2. Verify the image can be uploaded by ${inputMethod} in ${images}.`);
                 Property._CommercialUnits.Actions
-                .uploadImages(<any>images,testData.imageFile,<any>inputMethod);
+                .uploadImages(<any>images,testData.imageFile,<any>inputMethod)
+                    .verifyProgressBarNotExist();
 
                 cy.stepInfo(`# Verify the uploaded image can be rotated.`);
                 testData.imageRotations.forEach(rotateIndex => {
                     Property._CommercialUnits
-                    .Actions.rotateImage().verifyImageHasRotated(rotateIndex);
+                    .Actions.rotateImage()
+                        .verifyProgressBarNotExist()
+                        .verifyImageHasRotated(rotateIndex);
                 });
             });
             Property._CommercialUnits
