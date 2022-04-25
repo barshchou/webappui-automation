@@ -17,6 +17,11 @@ on:
         type: string
         description: Add custom environment url if needed
         required: false
+      spec_file:
+        type: string
+        description: Spec(s) to be executed
+        required: false
+        default: cypress/integration/not_full_reports/income/commercial/in_place_rent_roll/QA-4323.spec.ts
 
 jobs:
   Not-full-reports-run:
@@ -53,25 +58,25 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
-      # - name: Run Cypress not snapshot tests on Currents.dev
-      #   run: currents run --tag ${{ github.event.inputs.env }} --spec "./cypress/integration/not_full_reports/**/*.spec.ts" --browser chrome --record --parallel --key ${{ secrets.CURRENTS_RECORD_KEY }} --ci-build-id "${{ github.repository }}-${{ github.run_id }}-${{ github.run_attempt}}"
-      #   env:
-      #     CYPRESS_USERNAME: ${{ github.event.inputs.env == 'custom' && secrets.CESAR_USERNAME || secrets.USERNAME }}
-      #     CYPRESS_PASSWORD: ${{ github.event.inputs.env == 'custom' && secrets.CESAR_PASSWORD || secrets.PASSWORD }}
-      #     CYPRESS_url: ${{ github.event.inputs.env }}
-      #     CYPRESS_customEnv: ${{ github.event.inputs.customEnv }}
-      #     СYPRESS_grepTags: "-@snapshot_tests"
-      #     CYPRESS_grepFilterSpecs: true
-
-      - name: Run Cypress snapshot tests on Currents.dev
-        run: currents run --headless --tag ${{ github.event.inputs.env }} --spec "./cypress/integration/not_full_reports/**/*.spec.ts" --browser chrome --record --parallel --key ${{ secrets.CURRENTS_RECORD_KEY }} --ci-build-id "${{ github.repository }}-${{ github.run_id }}-${{ github.run_attempt}}"
+      - name: Run Cypress not snapshot tests on Currents.dev
+        run: currents run --tag ${{ github.event.inputs.env }} --spec ${{ github.event.inputs.spec_file }} --browser chrome --record --parallel --key ${{ secrets.CURRENTS_RECORD_KEY }} --ci-build-id "${{ github.repository }}-${{ github.run_id }}-${{ github.run_attempt}}"
         env:
           CYPRESS_USERNAME: ${{ github.event.inputs.env == 'custom' && secrets.CESAR_USERNAME || secrets.USERNAME }}
           CYPRESS_PASSWORD: ${{ github.event.inputs.env == 'custom' && secrets.CESAR_PASSWORD || secrets.PASSWORD }}
           CYPRESS_url: ${{ github.event.inputs.env }}
           CYPRESS_customEnv: ${{ github.event.inputs.customEnv }}
-          СYPRESS_grepTags: "@snapshot_tests"
+          # СYPRESS_grepTags: "-@snapshot_tests"
           CYPRESS_grepFilterSpecs: true
+
+      # - name: Run Cypress snapshot tests on Currents.dev
+      #   run: currents run --headless --tag ${{ github.event.inputs.env }} --spec "./cypress/integration/not_full_reports/**/*.spec.ts" --browser chrome --record --parallel --key ${{ secrets.CURRENTS_RECORD_KEY }} --ci-build-id "${{ github.repository }}-${{ github.run_id }}-${{ github.run_attempt}}"
+      #   env:
+      #     CYPRESS_USERNAME: ${{ github.event.inputs.env == 'custom' && secrets.CESAR_USERNAME || secrets.USERNAME }}
+      #     CYPRESS_PASSWORD: ${{ github.event.inputs.env == 'custom' && secrets.CESAR_PASSWORD || secrets.PASSWORD }}
+      #     CYPRESS_url: ${{ github.event.inputs.env }}
+      #     CYPRESS_customEnv: ${{ github.event.inputs.customEnv }}
+      #     СYPRESS_grepTags: "@snapshot_tests"
+      #     CYPRESS_grepFilterSpecs: true
 
       - name: Archive DOM snapshots from failed tests
         uses: actions/upload-artifact@v3

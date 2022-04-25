@@ -10,6 +10,7 @@ describe("Verify the Rent Basis buttons", () => {
 
     it("Test body", () => {
         NavigationSection.navigateToCommercialInPlaceRentRoll();
+        cy.get("[somehow]").should("exist");
         Income.Commercial.InPlaceRentRoll.verifyAllBasisButtons();
         deleteReport(testData.reportCreationData.reportNumber);
     });
