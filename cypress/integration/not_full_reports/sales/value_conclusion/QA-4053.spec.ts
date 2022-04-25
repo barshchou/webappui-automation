@@ -5,27 +5,34 @@ import {createReport, deleteReport} from "../../../../actions/base/baseTest.acti
 import { _Summary } from "../../../../actions/property";
 
 
-describe("The Concluded Value Per Unit is calculated correctly and includes both commercial and residential units.", () => {
+describe("[QA-4053] The Concluded Value Per Unit is calculated correctly and includes both commercial and residential units.", () => {
 
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
     });
 
-    it("Test body", () => {
-        cy.stepInfo('Navigate to report summary and specify amount of residential and commercial units');
+    it("Test body", { tags: '@to_check_export' }, () => {
+        cy.stepInfo('Precondition: Navigate to report summary and specify amount of residential and commercial units');
         _NavigationSection.navigateToPropertySummary();
         _Summary.enterNumberOfResUnits(testData.general.residentialUnits).
             enterNumberOfCommercialUnits(testData.general.commercialUnits);
         
-        cy.stepInfo('Set comparison units to "Per Units"');
+        cy.stepInfo('1. Proceed to the Sales > Adjust Comps page.');
         _NavigationSection.navigateToSalesValueConclusion().clickAdjustCompsButton();
+
+        cy.stepInfo('2. Select the Per Total Units radio button in the Sale Comparables Setup and save it.');
         Sales._AdjustComps.clickComparisonPerUnitRadioButton();
 
-        cy.stepInfo('Navigate to Sales page, set conclusion value and verify that total amount is calcualted correctly');
+        cy.stepInfo('3. Proceed to the Sales > Value Conclusions > Sales Value Conclusion Table.');
         _NavigationSection.navigateToSalesValueConclusion();
+
+        cy.stepInfo('4. Verify that the Concluded Value Per Unit is calculated correctly');
         Sales._ValueConclusion.enterSaleValueConclusion(testData.general.valueConclusion)
             .verifySaleValueConclusion(testData.general.valueConclusion)
             .verifyAsStabilizedAmount(testData.general.totalValue);
+
+        // TODO: Add export verify
+        // Proceed to the Sales Comparison Approach > Value Opinion via the Sales Comparison Approach and verify the value.
         
         cy.stepInfo('Delete report');
         deleteReport(testData.reportCreationData.reportNumber);
