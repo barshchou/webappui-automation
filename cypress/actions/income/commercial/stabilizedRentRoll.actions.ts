@@ -4,7 +4,7 @@ import BaseActionsExt from "../../base/base.actions.ext";
 
 class StabilizedRentRollActions extends BaseActionsExt<typeof stabRenRollPage>{
 
-    verifyIsInspectedChecked(rowNumber?: number = 0): this {
+    verifyIsInspectedChecked(rowNumber= 0): this {
         stabRenRollPage.elementToVerifyIsInspected.eq(rowNumber).should("have.css", "background-color", "rgb(66, 96, 211)");
         return this;
     }
