@@ -1,11 +1,15 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
+/* eslint-disable @typescript-eslint/no-namespace */
+
 /// <reference types="cypress" />
+import { recordProxiedRequests } from "../../utils/intercept.utils";
 import { recordDOM_Snapshot } from "../utils/snapshot.utils";
 import "./commands";
 
 require("cypress-xpath");
 require("cypress-iframe");
 const registerCypressGrep = require('cypress-grep')
-registerCypressGrep()
+registerCypressGrep();
 
 Cypress.on("uncaught:exception", (err, runnable) => {
     // returning false here prevents Cypress from
@@ -15,6 +19,7 @@ Cypress.on("uncaught:exception", (err, runnable) => {
 
 Cypress.on("fail",(err,test)=>{
   recordDOM_Snapshot();
+  recordProxiedRequests();
   throw err;
 });
 

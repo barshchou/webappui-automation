@@ -1,3 +1,5 @@
+const pathToSnapshots = "./cypress/dom_snapshots";
+
 function _replaceStyle ($head, existingStyle, style) {
     const styleTag = _styleTag(style);
 
@@ -109,6 +111,7 @@ function _styleTag (style) {
 
 
 export const recordDOM_Snapshot = () => {
+    Cypress.Commands._commands.log.fn("Recording DOM snapshot to file");
     const snap = Cypress.cy.createSnapshot("snap");
     const { headStyles } = Cypress.cy.getStyles(snap);
     const $head = Cypress.$autIframe.contents().find("head");
@@ -131,5 +134,5 @@ export const recordDOM_Snapshot = () => {
     // Cypress.Commands._commands.writeFile.fn(`${Cypress.spec.name}.html`,s);
 
     // second way
-    Cypress.backend('write:file', `${Cypress.spec.name}.html`, s);
+    Cypress.backend('write:file', `${pathToSnapshots}/${Cypress.spec.name}.html`, s);
 };
