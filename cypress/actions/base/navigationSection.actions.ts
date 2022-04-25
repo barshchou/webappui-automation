@@ -64,7 +64,6 @@ class NavigationSectionActions extends BaseActions {
         return this;
     }
 
-
     clickFinalButton() {
         navigationSectionPage.finalButton.click();
         return this;
