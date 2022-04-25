@@ -29,12 +29,15 @@ describe("Verify the functionality of the Image upload to the Interior and Exter
             testData.inputType.forEach(inputMethod => {
                 cy.stepInfo(`2. Verify the image can be uploaded by ${inputMethod} in ${images}.`);
                 Property._CommercialUnits.Actions
-                .uploadImages(<any>images,testData.imageFile,<any>inputMethod);
+                .uploadImages(<any>images,testData.imageFile,<any>inputMethod)
+                    .verifyProgressBarNotExist();
 
                 cy.stepInfo(`# Verify the uploaded image can be rotated.`);
                 testData.imageRotations.forEach(rotateIndex => {
                     Property._CommercialUnits
-                    .Actions.rotateImage().verifyImageHasRotated(rotateIndex);
+                    .Actions.rotateImage()
+                        .verifyProgressBarNotExist()
+                        .verifyImageHasRotated(rotateIndex);
                 });
             });
             Property._CommercialUnits
