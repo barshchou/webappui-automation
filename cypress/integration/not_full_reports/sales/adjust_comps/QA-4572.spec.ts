@@ -9,6 +9,7 @@ describe("Check custom adjustment", () => {
         createReport(testData.reportCreationData);
     });
 
+    //TODO: Find out about values round in this test
     it("Test body", () => {
         cy.stepInfo("1. Navigate to Find comps page and add a couple of sales comps");
         NavigationSection.navigateToFindComps();

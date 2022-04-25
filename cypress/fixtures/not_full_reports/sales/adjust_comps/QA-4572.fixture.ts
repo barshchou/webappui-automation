@@ -10,7 +10,7 @@ export default {
         otherNewAdjustment: -20
     },
     comparableSecond: {
-        address: "295 Ridgewood Avenue",
+        address: "1522 Myrtle Avenue",
         sizeAdjustment: 40,
         conditionAdjustment: -10,
         otherAdjustment: -50,
