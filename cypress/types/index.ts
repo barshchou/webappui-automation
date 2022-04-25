@@ -34,6 +34,7 @@ namespace BoweryReports {
 
     export type CommercialUnitsGradeValues = "atGrade" | "partiallyBelowGrade" | "belowGrade" | "other";
     export type CommercialUnitsFacadeValues = "plate glass" | "other";
+    export type CommercialUnitsCeilingHeightValues = "Low" | "Normal" | "High" | "Other";
 
     /*
     More Unit Groups Values will be added after other values types added
