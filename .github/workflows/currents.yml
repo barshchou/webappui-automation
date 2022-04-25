@@ -30,7 +30,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        containers: ${{ github.event.inputs.spec_file == 'cypress/integration/not_full_reports/**/*.spec.ts' && [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] || [1] }}
+        containers: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
     steps:
       - name: Checkout
