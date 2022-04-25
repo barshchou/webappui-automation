@@ -7,9 +7,13 @@ describe(`Verify that Generated Commentary are updated on the Expense Forecast p
 
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
+        cy.saveLocalStorage();
+    });
+    beforeEach(() => {
+        cy.restoreLocalStorage();
     });
 
-    it("[QA-4042]", () => {
+    it("[QA-4042] Verify the generated commentary and inputs", () => {
         cy.stepInfo(`[QA-4042] => 1. Go to Expense Forecast`);
         _NavigationSection.navigateToExpenseForecast();
         cy.stepInfo(`[QA-4042] => 2. Fill Forecast value for SF basis and verify commentary`);
@@ -28,7 +32,7 @@ describe(`Verify that Generated Commentary are updated on the Expense Forecast p
         Income._ExpenseForecastActions.clickSaveButton();
     });
 
-    it("[QA-4046]", () => {
+    it("[QA-4046] Verify the generated commentary and inputs", () => {
         cy.stepInfo(`[QA-4046] => 1. Go to Expense Forecast`);
         _NavigationSection.navigateToExpenseForecast();
         cy.stepInfo(`[QA-4046] => 2. Fill Forecast value for SF basis and verify commentary`);
@@ -44,7 +48,6 @@ describe(`Verify that Generated Commentary are updated on the Expense Forecast p
             .verifyForecastCommentary(testData.commentariesReplacementReserve.generatedPerUnit, testData.expenseForecastReplacementReserve)
             .editExpenseForecastCommentary(testData.commentariesReplacementReserve.edited, testData.expenseForecastReplacementReserve)
             .verifyForecastCommentary(testData.commentariesReplacementReserve.edited, testData.expenseForecastReplacementReserve);
-        cy.login();
         deleteReport(testData.reportCreationData.reportNumber);
     });
 });
