@@ -53,15 +53,15 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
-      - name: Run Cypress not snapshot tests on Currents.dev
-        run: currents run --tag ${{ github.event.inputs.env }} --spec "./cypress/integration/not_full_reports/**/*.spec.ts" --browser chrome --record --parallel --key ${{ secrets.CURRENTS_RECORD_KEY }} --ci-build-id "${{ github.repository }}-${{ github.run_id }}-${{ github.run_attempt}}"
-        env:
-          CYPRESS_USERNAME: ${{ github.event.inputs.env == 'custom' && secrets.CESAR_USERNAME || secrets.USERNAME }}
-          CYPRESS_PASSWORD: ${{ github.event.inputs.env == 'custom' && secrets.CESAR_PASSWORD || secrets.PASSWORD }}
-          CYPRESS_url: ${{ github.event.inputs.env }}
-          CYPRESS_customEnv: ${{ github.event.inputs.customEnv }}
-          СYPRESS_grepTags: "-@snapshot_tests"
-          CYPRESS_grepFilterSpecs: true
+      # - name: Run Cypress not snapshot tests on Currents.dev
+      #   run: currents run --tag ${{ github.event.inputs.env }} --spec "./cypress/integration/not_full_reports/**/*.spec.ts" --browser chrome --record --parallel --key ${{ secrets.CURRENTS_RECORD_KEY }} --ci-build-id "${{ github.repository }}-${{ github.run_id }}-${{ github.run_attempt}}"
+      #   env:
+      #     CYPRESS_USERNAME: ${{ github.event.inputs.env == 'custom' && secrets.CESAR_USERNAME || secrets.USERNAME }}
+      #     CYPRESS_PASSWORD: ${{ github.event.inputs.env == 'custom' && secrets.CESAR_PASSWORD || secrets.PASSWORD }}
+      #     CYPRESS_url: ${{ github.event.inputs.env }}
+      #     CYPRESS_customEnv: ${{ github.event.inputs.customEnv }}
+      #     СYPRESS_grepTags: "-@snapshot_tests"
+      #     CYPRESS_grepFilterSpecs: true
 
       - name: Run Cypress snapshot tests on Currents.dev
         run: currents run --headless --tag ${{ github.event.inputs.env }} --spec "./cypress/integration/not_full_reports/**/*.spec.ts" --browser chrome --record --parallel --key ${{ secrets.CURRENTS_RECORD_KEY }} --ci-build-id "${{ github.repository }}-${{ github.run_id }}-${{ github.run_attempt}}"
@@ -72,3 +72,16 @@ jobs:
           CYPRESS_customEnv: ${{ github.event.inputs.customEnv }}
           СYPRESS_grepTags: "@snapshot_tests"
           CYPRESS_grepFilterSpecs: true
+
+      - name: Archive DOM snapshots from failed tests
+        uses: actions/upload-artifact@v3
+        with:
+          name: failed-tests-DOM-snapshots
+          path: cypress/dom_snapshots
+          retention-days: 2
+      - name: Archive network activity from failed tests
+        uses: actions/upload-artifact@v3
+        with:
+          name: failed-tests-network-activity
+          path: cypress/network_activity_records
+          retention-days: 2
