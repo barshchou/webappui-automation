@@ -5,6 +5,8 @@ class StabilizedRentRollPage extends BasePage{
 
     get stabilizedRRPanel(){return cy.get('[id="STICKY_FORM_PANEL_WRAPPER_ID"] + div');}
 
+    get stabilizedRentRollheaderSection() {return cy.get("*[data-qa='stabilizedRentRoll']");}
+
     get leaseStatusCells() {return cy.get("[data-qa^=leaseStatus].htAutocomplete");}
 
     get tenantNameCells() {return cy.xpath("(//*[contains(@data-qa, 'tenantName')])[position() < last()]");}
@@ -18,6 +20,8 @@ class StabilizedRentRollPage extends BasePage{
     get monthlyRentCells() {return cy.xpath("(//*[contains(@data-qa, 'monthlyRent-')])[position() < last()]");}
 
     get annualRentPsfCells() {return cy.xpath("//*[contains(@class, 'htNumeric')]|(//*[contains(@data-qa, 'annualRentPsf')])[position() < last()]");}
+   
+    get textareaToInput() {return cy.get("div:not([class*='hidden']) > *[class='handsontableInput']");}
 
     get monthlyRentPsfCells() {return cy.xpath("//*[contains(@class, 'htNumeric')]|(//*[contains(@data-qa, 'monthlyRentPsf')])[position() < last()]");}
 
