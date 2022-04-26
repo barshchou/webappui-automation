@@ -8,7 +8,7 @@ describe("Verify the Basis of Rent tooltip", () => {
         createReport(testData.reportCreationData);
     });
 
-    it("Test body", () => {
+    it("Test body", {tags:"@fix"}, () => {
         NavigationSection.navigateToCommercialInPlaceRentRoll();
         Income.Commercial.InPlaceRentRoll.verifyBasisOfRentTooltip();
         deleteReport(testData.reportCreationData.reportNumber);

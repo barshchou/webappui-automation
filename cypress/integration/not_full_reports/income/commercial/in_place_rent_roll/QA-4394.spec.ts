@@ -6,7 +6,7 @@ import {createReport, deleteReport} from "../../../../../actions/base/baseTest.a
 
 describe("Verify the Rent PSF Total is calculated correctly in the grid", () => {
 
-    before("Login, create report", () => {
+    before("Login, create report",{tags: "@fix"}, () => {
         createReport(testData.reportCreationData);
     });
 

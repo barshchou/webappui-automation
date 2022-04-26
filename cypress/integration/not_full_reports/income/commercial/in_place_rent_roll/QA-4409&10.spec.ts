@@ -4,7 +4,7 @@ import Income from "../../../../../actions/income/income.manager";
 import {createReport, deleteReport} from "../../../../../actions/base/baseTest.actions";
 
 
-describe("Verify the functionality of Edit and Cancel commentary buttons", () => {
+describe("Verify the functionality of Edit and Cancel commentary buttons",{tags:"@fix"}, () => {
 
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
