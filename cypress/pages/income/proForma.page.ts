@@ -119,6 +119,12 @@ class ProFormaPage extends BasePage {
     }
 
     get includeNOIComparisonCheckbox() {return cy.get("[data-qa^=includeNOIComparison] input");}
+
+    customTotal(customCategoryName: string) {return cy.get(`[data-qa=${customCategoryName}-total-cell]`);}
+
+    get getFuelTotal() {return cy.get("[data-qa=fuel-total-cell]");}
+
+    get getWaterAndSewerTotal() {return cy.get("[data-qa=waterAndSewer-total-cell]");}
 }
 
 export default new ProFormaPage();

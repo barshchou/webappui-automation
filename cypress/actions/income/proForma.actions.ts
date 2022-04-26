@@ -397,6 +397,22 @@ class ProFormaActions extends BaseActionsExt<typeof proFormaPage> {
         proFormaPage.includeNOIComparisonCheckbox.click();
         return this;
     }
+
+    verifyCustomTotal(totalToBe: string, categoryName: string): this{
+        proFormaPage.customTotal(categoryName).should("have.text", totalToBe);
+        return this;
+    }
+    
+    verifyFuelTotal(totalToBe: string): this{
+        proFormaPage.getFuelTotal.should("have.text", totalToBe);
+        return this;
+    }
+
+    verifyWaterAndSewerTotal(totalToBe: string): this{
+        proFormaPage.getWaterAndSewerTotal.should("have.text", totalToBe);
+        return this;
+    }
+
 }
 
 export default new ProFormaActions(proFormaPage);
