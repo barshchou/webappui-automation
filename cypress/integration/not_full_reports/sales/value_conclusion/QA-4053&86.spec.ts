@@ -1,5 +1,5 @@
 import { Sales } from './../../../../actions/index';
-import testData from "../../../../fixtures/not_full_reports/sales/value_conclusion/QA-4053.fixture";
+import testData from "../../../../fixtures/not_full_reports/sales/value_conclusion/QA-4053&86..fixture";
 import { _NavigationSection } from "../../../../actions/base/index";
 import {createReport, deleteReport} from "../../../../actions/base/baseTest.actions";
 import { _Summary } from "../../../../actions/property";
