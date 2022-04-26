@@ -1,11 +1,11 @@
 import { Sales } from './../../../../actions/index';
-import testData from "../../../../fixtures/not_full_reports/sales/value_conclusion/QA-4053.fixture";
+import testData from "../../../../fixtures/not_full_reports/sales/value_conclusion/QA-4053&86..fixture";
 import { _NavigationSection } from "../../../../actions/base/index";
 import {createReport, deleteReport} from "../../../../actions/base/baseTest.actions";
 import { _Summary } from "../../../../actions/property";
 
 
-describe("[QA-4053] The Concluded Value Per Unit is calculated correctly and includes both commercial and residential units.", () => {
+describe("[QA-4053] [QA-4086] The Concluded Value Per Unit is calculated correctly and includes both commercial and residential units.", () => {
 
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
@@ -30,7 +30,9 @@ describe("[QA-4053] The Concluded Value Per Unit is calculated correctly and inc
         let totalValue = '$' + ((testData.general.commercialUnits + testData.general.residentialUnits) * testData.general.valueConclusion).toLocaleString();
         Sales._ValueConclusion.enterSaleValueConclusion(testData.general.valueConclusion)
             .verifySaleValueConclusion(testData.general.valueConclusion)
-            .verifyAsStabilizedAmount(totalValue);
+            .verifyAsStabilizedAmount(totalValue)
+            .verifyAsIsMarketAmount(totalValue)
+            .verifyAsCompleteAmount(totalValue);
 
         // TODO: Add export verify
         // Proceed to the Sales Comparison Approach > Value Opinion via the Sales Comparison Approach and verify the value.
