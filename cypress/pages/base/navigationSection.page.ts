@@ -63,7 +63,7 @@ class NavigationSection extends BasePage {
 
     get letterOfTransmittal() {return cy.get("#letter-of-transmittal");}
 
-    get potentialGrossIncome() {return cy.get("potential-gross-income-v-2");}
+    get potentialGrossIncome() {return cy.get("#potential-gross-income-v-2");}
 
     get proForma() {return cy.get("#pro-forma-v-2");}
 
