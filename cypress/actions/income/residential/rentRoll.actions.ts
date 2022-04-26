@@ -289,13 +289,21 @@ class InPlaceRentRollActions extends BaseActionsExt<typeof rentRollPage> {
         return this;
     }
 
-    // verifyRentSFValue(value: string | number, rowNumber = 0) {
-    //     const textToBe = typeof value === "string" ? value : `$${numberWithCommas(value.toFixed(2))}`;
-    //     rentRollPage.monthlyRentCells.eq(rowNumber).dblclick();
-    //     this.enterTextToTextarea(`${value}`);
-    //     rentRollPage.monthlyRentCells.eq(rowNumber).should("have.text", textToBe);
-    //     return this;
-    // }
+    verifyRentSFValue() {
+        rentRollPage.monthlyTotalForecast.then(monthly => {
+            const monthlyNumber = getNumberFromDollarNumberWithCommas(monthly.text());
+            rentRollPage.squareFootageCells.then(square => {
+                const squareNumber = getNumberFromDollarNumberWithCommas(square.text());
+                const rentSFNumber = (monthlyNumber * 12 / squareNumber).toFixed(2);
+                if (squareNumber === 0) {
+                    rentRollPage.rentSF.should("have.text", `$NaN`);
+                } else {
+                    rentRollPage.rentSF.should("have.text", `$${rentSFNumber}`);
+                }
+            });
+        });
+        return this;
+    }
 
     verifyRentRollCommentary(commentaryToBe: string): InPlaceRentRollActions {
         rentRollPage.rentRollCommentary.should("have.text", commentaryToBe);
@@ -344,6 +352,8 @@ class InPlaceRentRollActions extends BaseActionsExt<typeof rentRollPage> {
         let textToBe;
         if (number > (99 * Math.pow(10, 19))) {
             textToBe = "NaN";
+        } else if (number === 0) {
+            textToBe = "";
         } else {
             textToBe = typeof value === "string" ? value : numberWithCommas(value.toFixed(2));
         }

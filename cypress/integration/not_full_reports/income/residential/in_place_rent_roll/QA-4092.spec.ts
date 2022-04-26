@@ -13,15 +13,14 @@ describe(`Verify if "Per Year" time period PSF Rent based on is selected - >
         _NavigationSection.navigateToPropertySummary();
         Property._Summary.enterNumberOfResUnits(testData.resUnit);
         _NavigationSection.navigateToResInPlaceRentRoll();
-        Income._Residential.InPlaceRentRoll.checkPerUnitSquareFootage();
 
         testData.cases.forEach(el => {
-            Income._Residential.InPlaceRentRoll.enterSquareFootageByRow(el.squareFootage)
-                .enterMonthlyRentByRowNumber(el.monthlyRent)
-                .verifyMonthlyTotalForecastEqualValue()
-                .verifyAnnuallyTotalForecastEqualValue();
+            Income._Residential.InPlaceRentRoll.checkPerUnitSquareFootage()
+            .enterSquareFootageByRow(el.squareFootage)
+            .enterMonthlyRentByRowNumber(el.monthlyRent)
+            .verifyRentSFValue();
+            cy.reload();
         });
-        // cy.reload();
-        // deleteReport(testData.reportCreationData.reportNumber);
+        deleteReport(testData.reportCreationData.reportNumber);
     });
 });
