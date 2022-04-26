@@ -11,12 +11,25 @@
 
 // This function is called when a project is opened or re-opened (e.g. due to
 // the project's config changing)
+const { existsSync } = require("fs");
 const {
   addMatchImageSnapshotPlugin,
 } = require("cypress-image-snapshot/plugin");
 
 const grepFilterPlugin = require("cypress-grep/src/plugin");
 
+const _waitForFileExists = async (filePath, currentTime = 0, timeout = 5000) => {
+  if (existsSync(filePath)) {
+    return true;  
+  }
+  if (currentTime === timeout){
+     return false; 
+  }
+  await new Promise((resolve, reject) =>{
+    setTimeout(() => resolve(true), 1000)
+  });
+  return _waitForFileExists(filePath, currentTime + 1000, timeout);
+}
 /**
  * @type {Cypress.PluginConfig}
  */
@@ -33,5 +46,11 @@ module.exports = (on, config) => {
         return launchOptions;
       }
   });
+  on("task",{
+    async waitForFileExists(filePath, currentTime = 0, timeout = 5000){
+      // TODO: add renameFile function from ${reportId}.docx to ${Cypress.spec.name}.docx
+      return await _waitForFileExists(filePath, currentTime = 0, timeout = 5000);
+    }
+  })
   return config;
 };
