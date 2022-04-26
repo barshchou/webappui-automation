@@ -35,7 +35,6 @@ describe("[QA-4053] The Concluded Value Per Unit is calculated correctly and inc
         // TODO: Add export verify
         // Proceed to the Sales Comparison Approach > Value Opinion via the Sales Comparison Approach and verify the value.
         
-        cy.stepInfo('Delete report');
         deleteReport(testData.reportCreationData.reportNumber);
     });
 });
