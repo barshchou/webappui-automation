@@ -57,6 +57,21 @@ class ClientActions extends BaseActionsExt<typeof clientPage> {
         return this;
     }
 
+    clickTextBoxEditButton(index = 0) {
+        clientPage.formEditBtn(index).click();
+        return this;
+    }
+
+    clickTextBoxSaveButton(index = 0) {
+        clientPage.formSaveBtn(index).click();
+        return this;
+    } 
+
+    enterIntendedUserTextBox(textToType: string): ClientActions {
+        clientPage.IntendedUserTextBox.type(textToType);
+        return this;
+    }
+
     enterIdentificationOfTheClientTextBox(textToType: string): ClientActions {
         clientPage.IdentificationOfClientTextBox.type(textToType);
         return this;
@@ -86,7 +101,6 @@ class ClientActions extends BaseActionsExt<typeof clientPage> {
         clientPage.IdentificationOfClientTextBox.should("not.contain.text", verifyAreaValue);
         return this;
     }
-
 }
 
 export default new ClientActions(clientPage);
