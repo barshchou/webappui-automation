@@ -2,7 +2,6 @@ import { Report } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
 import {createReport, deleteReport} from "../../../../actions/base/baseTest.actions";
 import testData from '../../../../fixtures/not_full_reports/report/client/QA-4637.fixture';
-import clientPage from "../../../../pages/report/client.page";
 
 describe(`Verify the suggested text dropdown in the new narrative component added through "=" for the 'Foreclosure sale' 
     option on the Report > Client page for Intended User and Identification of the Client sections.`, () => {
@@ -15,9 +14,9 @@ describe(`Verify the suggested text dropdown in the new narrative component adde
         _NavigationSection.navigateToClientPage();
 
         cy.stepInfo('2. Click on the Edit button for Intended User and Identification of the Client sections.');
-        Report._Client.verifyProgressBarNotExist();
-            clientPage.formEditBtn(0).click();
-            clientPage.formEditBtn(0).click();
+        Report._Client.verifyProgressBarNotExist()
+       .Page.formEditBtn(0).click();
+       Report._Client.Page.formEditBtn(0).click();
 
         cy.stepInfo('3. Enter the “=F“ and select the \'Foreclosure sale\' option for both sections.');
         Report._Client.enterIntendedUserTextBox(testData.textToType)
