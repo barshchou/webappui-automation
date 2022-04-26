@@ -1,12 +1,10 @@
 import Enums from "../../../../enums/enums";
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 
-const reportCreationFixture = () => {
-    return ReportDataCreator.setAddress().setReportNumber("4053")
-        .setTemplateValue(Enums.TEMPLATE_TYPE.FREDDIE_MAC)
-        .setIncomeValue(Enums.INCOME_TYPE.BOTH)
-        .setConclusionValue(Enums.VALUE_CONCLUSION_TYPE.AS_COMPLETE);
-};
+const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("4053", {
+    incomeValue: Enums.INCOME_TYPE.BOTH,
+    conclusionValue: Enums.VALUE_CONCLUSION_TYPE.AS_COMPLETE
+});
 
 const generalFixture = () => {
     return {
@@ -17,6 +15,6 @@ const generalFixture = () => {
 };
 
 export default {
-    reportCreationData: reportCreationFixture(),
+    reportCreationData: _reportCreationData,
     general: Object.freeze(generalFixture())
 };
