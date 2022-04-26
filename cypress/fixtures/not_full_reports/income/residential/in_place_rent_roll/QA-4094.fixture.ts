@@ -5,6 +5,7 @@ export default {
     resUnit: 1,
     squareFootage: 235,
     monthlyRent: 5758,
+    psfRadioValue: 'monthly',
     cases: [
         {
             squareFootage: 235,

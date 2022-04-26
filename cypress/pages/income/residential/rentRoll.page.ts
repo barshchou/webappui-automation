@@ -9,6 +9,8 @@ class InPlaceRentRollPage extends BasePage {
 
     getPerUnitSFRadio(value) {return cy.get(`*[name='perUnitSF'][value='${value}']`);}
 
+    getPSFRadio(value) {return cy.get(`*[name='unitRentPSFTimePeriod'][value='${value}']`);}
+
     getCheckboxByLabel(label) {return cy.get(`*[label="${label}"] input`);}
 
     get importViaCSVHeader() {return cy.xpath("//p[text()='Import Rent Roll via CSV']");}

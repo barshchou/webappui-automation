@@ -305,6 +305,22 @@ class InPlaceRentRollActions extends BaseActionsExt<typeof rentRollPage> {
         return this;
     }
 
+    verifyRentPSFMonthValue() {
+        rentRollPage.monthlyTotalForecast.then(monthly => {
+            const monthlyNumber = getNumberFromDollarNumberWithCommas(monthly.text());
+            rentRollPage.squareFootageCells.then(square => {
+                const squareNumber = getNumberFromDollarNumberWithCommas(square.text());
+                const rentPSFNumber = (monthlyNumber / squareNumber).toFixed(2);
+                if (squareNumber === 0) {
+                    rentRollPage.rentSF.should("have.text", `$NaN`);
+                } else {
+                    rentRollPage.rentSF.should("have.text", `$${rentPSFNumber}`);
+                }
+            });
+        });
+        return this;
+    }
+
     verifyRentRollCommentary(commentaryToBe: string): InPlaceRentRollActions {
         rentRollPage.rentRollCommentary.should("have.text", commentaryToBe);
         return this;
