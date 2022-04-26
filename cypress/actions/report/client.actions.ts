@@ -52,16 +52,6 @@ class ClientActions extends BaseActionsExt<typeof clientPage> {
         return this;
     }
 
-    clickTextBoxEditButton(index = 0): ClientActions {
-        clientPage.formEditBtn(index).click();
-        return this;
-    }
-
-    clickTextBoxSaveButton(index = 0): ClientActions {
-        clientPage.formSaveBtn(index).click();
-        return this;
-    }
-
     enterIntendedUserTextBox(textToType: string): ClientActions {
         clientPage.IntendedUserTextBox.type(textToType);
         return this;

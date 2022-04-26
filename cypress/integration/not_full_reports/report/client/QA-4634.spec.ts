@@ -13,9 +13,9 @@ describe("Verify the 'Changes will be lost' modal functionality for Intended Use
         cy.stepInfo("1. Click on the Edit button on the Report > Client page for Intended User and Identification of the Client sections.");
         _NavigationSection.navigateToClientPage();
 
-        Report._Client.verifyProgressBarNotExist()
-            .clickTextBoxEditButton()
-            .clickTextBoxEditButton();
+        Report._Client.verifyProgressBarNotExist();
+            clientPage.formEditBtn(0).click();
+            clientPage.formEditBtn(0).click();
 
         cy.stepInfo("2. Edit comment and click on the Revert to Original button for both sections.");
         Report._Client.enterIntendedUserTextBox(testData.textToType)
