@@ -24,8 +24,9 @@ describe("Verify the 'Changes will be lost' modal functionality for Intended Use
             .clickNarrativeSuggestions(testData.verifyListValue, 1);
 
         cy.stepInfo("3. Verify the ‘Changes will be lost modal’ is displayed for both sections.");
-            clientPage.formRevertToOriginalBtn().click();
+            clientPage.formRevertToOriginalBtn(0).click();
             clientPage.modalWindow.should('be.visible');
+            clientPage.formYesRevertBtn.click();
             clientPage.formRevertToOriginalBtn(1).click();
             clientPage.modalWindow.should('be.visible');
             clientPage.formYesRevertBtn.click();
@@ -35,7 +36,7 @@ describe("Verify the 'Changes will be lost' modal functionality for Intended Use
             .clickNarrativeSuggestions(testData.verifyListValue)
             .enterIdentificationOfTheClientTextBox(testData.textToType)
             .clickNarrativeSuggestions(testData.verifyListValue, 1);
-            clientPage.formRevertToOriginalBtn().click();
+            clientPage.formRevertToOriginalBtn(0).click();
             clientPage.CloseIcon.click();
             clientPage.formRevertToOriginalBtn(1).click();
             clientPage.CloseIcon.click();
@@ -50,7 +51,7 @@ describe("Verify the 'Changes will be lost' modal functionality for Intended Use
             .clickNarrativeSuggestions(testData.verifyListValue)
             .enterIdentificationOfTheClientTextBox(testData.textToType)
             .clickNarrativeSuggestions(testData.verifyListValue, 1);
-            clientPage.formRevertToOriginalBtn().click();
+            clientPage.formRevertToOriginalBtn(0).click();
             clientPage.CloseIcon.click();
             clientPage.formRevertToOriginalBtn(1).click();
             clientPage.CloseIcon.click();
@@ -64,7 +65,7 @@ describe("Verify the 'Changes will be lost' modal functionality for Intended Use
             .clickNarrativeSuggestions(testData.verifyListValue)
             .enterIdentificationOfTheClientTextBox(testData.textToType)
             .clickNarrativeSuggestions(testData.verifyListValue, 1);
-            clientPage.formRevertToOriginalBtn().click();
+            clientPage.formRevertToOriginalBtn(0).click();
             clientPage.formYesRevertBtn.click();
             clientPage.formRevertToOriginalBtn(1).click();
             clientPage.formYesRevertBtn.click();
