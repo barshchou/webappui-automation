@@ -347,7 +347,7 @@ class NavigationSectionActions extends BaseActions {
         return this;
     }
   
-    navigateToProForma(isWithSave: true): NavigationSectionActions {
+    navigateToProForma(isWithSave = true): NavigationSectionActions {
         this.clickIncomeApproachButton()
             .clickProForma();
         if (isWithSave) {
