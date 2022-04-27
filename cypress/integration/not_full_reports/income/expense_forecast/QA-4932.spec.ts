@@ -18,11 +18,11 @@ describe("Comparable Min, Max, Avg values for Repairs & Maintenance Per Unit are
     NavigationSection.Actions.navigateToComparableExpenses();
 
     cy.stepInfo("2. Add several comps (via Search, Filter or Add blank column)");
-    testData.comparables.forEach((comp, index) => {
+    testData.comparables.forEach((comp) => {
       Income.ComparableExpenses.Actions.clickAddBlankColumnButton()
-        .enterAddressByColumnIndex(comp.address, index)
-        .enterResidentialUnitsByColumnIndex(comp.resUnits, index)
-        .enterCellDollarValueByColumnIndex(Income.ComparableExpenses.Page.repairsCells, comp.repairsAndMaintenance, index);
+        .enterAddressByColumnIndex(comp.address)
+        .enterResidentialUnitsByColumnIndex(comp.resUnits)
+        .enterCellDollarValueByColumnIndex(Income.ComparableExpenses.Page.repairsCells, comp.repairsAndMaintenance);
     });
 
     cy.stepInfo("3. Make sure that Repairs & Maintenance and Residential Units fields are filled in for all added columns and save changes");
