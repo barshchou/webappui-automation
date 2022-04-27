@@ -28,14 +28,14 @@ describe("Historical expense Electricity Per Unit is correctly calculated and di
             Income._ExpenseHistory.Actions.selectExpensePeriod(per.expensePeriodType)
                 .enterExpenseYear(per.year)
                 .clickAddExpenseYearButton()
-                .enterElectricityByColIndex(per.electricity, index);
+                .enterElectricityByColIndex(per.electricity, 0);
         });
         testData.periodsMonth.forEach((per, index) => {
             Income._ExpenseHistory.Actions.selectExpensePeriod(per.expensePeriodType)
                 .enterExpenseMonth(per.month)
                 .enterExpenseYear(per.year)
                 .clickAddExpenseYearButton()
-                .enterElectricityByColIndex(per.electricity, index + testData.periods.length);
+                .enterElectricityByColIndex(per.electricity, 0);
         });
 
         cy.stepInfo("4. Fill in Electricity field for all added columns and save changes");

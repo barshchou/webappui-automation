@@ -257,8 +257,8 @@ class ExpenseHistoryActions extends BaseActionsExt<typeof expenseHistoryPage>{
         let cellsCounter = 0;
         let sum = 0;
         for (let i = 0; i < jQueryElements.length; i++) {
-            let elValue = jQueryElements[i].getAttribute("value");
-            if (jQueryElements[i].hasAttribute("disabled") || elValue === "") {
+            let elValue = jQueryElements[i].getAttribute("text");
+            if (elValue === "") {
                 continue;
             }
             let elNumber = getNumberFromDollarNumberWithCommas(elValue);
