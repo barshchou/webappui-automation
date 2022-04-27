@@ -3,7 +3,7 @@ import {createReport, deleteReport} from "../../../../actions/base/baseTest.acti
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Property from "../../../../actions/property/property.manager";
 
-describe("Verify the functionality of the Frontage radio button", () => {
+describe("Verify the functionality of the Frontage radio button", {tags:"@fix"} ,() => {
     before("Login, create report", () => {
         cy.stepInfo(`Preconditions: The mixed report is created and several commercial units are added.`);
         createReport(testData.reportCreationData);

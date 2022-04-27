@@ -6,7 +6,7 @@ import { Property, Income } from "../../../../actions";
 import {_NavigationSection} from "../../../../actions/base";
 
 
-describe("Historical expense Electricity Per Unit is correctly calculated and displayed", () => {
+describe("Historical expense Electricity Per Unit is correctly calculated and displayed", {tags: "@fix"}, () => {
 
 
     before("Login, create report", () => {

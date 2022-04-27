@@ -5,7 +5,7 @@ import NavigationSection from "../../../../actions/base/navigationSection.action
 import Property from "../../../../actions/property/property.manager";
 import Income from "../../../../actions/income/income.manager";
 
-describe("Historical expense Fuel Per SF is correctly calculated and displayed", () => {
+describe("Historical expense Fuel Per SF is correctly calculated and displayed", {tags:"@fix"},() => {
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
     });

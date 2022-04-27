@@ -6,7 +6,8 @@ import NavigationSection from "../../../../actions/base/navigationSection.action
 import Income from "../../../../actions/income/income.manager";
 
 
-describe("User selects Per SF radiobutton for Repairs & Maintenance on Expense Forecast form and historical expenses per SF are correctly calculated and displayed", () => {
+describe("User selects Per SF radiobutton for Repairs & Maintenance on Expense Forecast form and historical expenses per SF are correctly calculated and displayed",
+{tags: "@fix"},() => {
 
     before("Login, create report", () => {
         createReport(testData.reportCreationData);

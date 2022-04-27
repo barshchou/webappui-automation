@@ -5,7 +5,7 @@ import Property from "../../../../actions/property/property.manager";
 import Income from "../../../../actions/income/income.manager";
 import ProFormaPage from "../../../../pages/income/proForma.page";
 
-describe("Less [USE (Property>Commercial Units)] Commercial V/C Loss @ X% row", () => {
+describe("Less [USE (Property>Commercial Units)] Commercial V/C Loss @ X% row", {tags:"@fix"} ,() => {
     beforeEach("Login, create report", () => {
         createReport(testData.reportCreationData);
         NavigationSection.navigateToPropertySummary();

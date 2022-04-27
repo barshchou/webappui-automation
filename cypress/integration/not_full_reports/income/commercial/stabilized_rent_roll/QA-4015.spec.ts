@@ -5,7 +5,7 @@ import Property from "../../../../../actions/property/property.manager";
 import Income from "../../../../../actions/income/income.manager";
 import ReviewExport from "../../../../../actions/reviewExport/reviewExport.actions";
 
-describe("Verify the Commercial Stabilized Rent Roll table", () => {
+describe("Verify the Commercial Stabilized Rent Roll table", {tags: "@fix"} ,() => {
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
     });

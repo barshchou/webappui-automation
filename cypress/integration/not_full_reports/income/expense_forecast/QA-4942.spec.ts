@@ -4,7 +4,7 @@ import {createReport, deleteReport} from "../../../../actions/base/baseTest.acti
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Income from "../../../../actions/income/income.manager";
 
-describe("Comparable Min, Max, Avg values for Fuel Per SF are correctly calculated and displayed", () => {
+describe("Comparable Min, Max, Avg values for Fuel Per SF are correctly calculated and displayed", {tags:"@fix"},() => {
 
     before("Login, create report",  () => {
         createReport(testData.reportCreationData);

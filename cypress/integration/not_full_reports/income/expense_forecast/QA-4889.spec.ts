@@ -6,7 +6,7 @@ import Income from "../../../../actions/income/income.manager";
 import {_NavigationSection} from "../../../../actions/base";
 
 
-describe("Comparable Min, Max, Avg values for Electricity Per Unit are correctly calculated and displayed", () => {
+describe("Comparable Min, Max, Avg values for Electricity Per Unit are correctly calculated and displayed", {tags:"@fix"},() => {
 
 
   before("Login, create report", () => {

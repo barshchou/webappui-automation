@@ -8,7 +8,7 @@ import NavigationSection from "../../../../actions/base/navigationSection.action
 import Income from "../../../../actions/income/income.manager";
 import Property from "../../../../actions/property/property.manager";
 
-describe("Historical expense Repairs & Maintenance Per Unit is correctly calculated and displayed", () => {
+describe("Historical expense Repairs & Maintenance Per Unit is correctly calculated and displayed", {tags:"@fix"} ,() => {
   before("Login, create report", () => {
     createReport(testData.reportCreationData);
   });

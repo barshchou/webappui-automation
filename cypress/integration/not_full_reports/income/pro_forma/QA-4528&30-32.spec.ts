@@ -4,7 +4,7 @@ import NavigationSection from "../../../../actions/base/navigationSection.action
 import Property from "../../../../actions/property/property.manager";
 import Income from "../../../../actions/income/income.manager";
 
-describe("Residential V/C Loss @ X% row", () => {
+describe("Residential V/C Loss @ X% row", {tags:"@fix"},() => {
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
     });
