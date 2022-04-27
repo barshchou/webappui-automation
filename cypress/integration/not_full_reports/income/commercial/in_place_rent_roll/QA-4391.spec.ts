@@ -4,7 +4,7 @@ import Property from "../../../../../actions/property/property.manager";
 import Income from "../../../../../actions/income/income.manager";
 import {createReport, deleteReport} from "../../../../../actions/base/baseTest.actions";
 
-describe("Verify the SF Total is calculated correctly in the grid.", {tags:"@fix"},() => {
+describe("Verify the SF Total is calculated correctly in the grid.", () => {
 
     before("Login, create report", () => {
         createReport(testData.reportCreationData);

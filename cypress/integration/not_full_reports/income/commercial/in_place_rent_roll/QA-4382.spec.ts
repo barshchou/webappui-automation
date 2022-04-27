@@ -3,7 +3,7 @@ import NavigationSection from "../../../../../actions/base/navigationSection.act
 import Income from "../../../../../actions/income/income.manager";
 import {createReport, deleteReport} from "../../../../../actions/base/baseTest.actions";
 
-describe("Verify the Lease Status column in the grid",{ tags : "@fix"}, () => {
+describe("Verify the Lease Status column in the grid", () => {
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
     });
