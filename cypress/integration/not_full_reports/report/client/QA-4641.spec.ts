@@ -1,7 +1,7 @@
 import { Report } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
 import {createReport, deleteReport} from "../../../../actions/base/baseTest.actions";
-import testData from '../../../../fixtures/not_full_reports/report/client/QA-4640.fixture';
+import testData from '../../../../fixtures/not_full_reports/report/client/QA-4641.fixture';
 
 describe(`Verify the "Linked" chips dropdown in the new narrative component for As Is and As Stabilized 
     report for Intended User and Identification of the Client sections`, () => {
