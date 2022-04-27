@@ -16,11 +16,11 @@ describe("Comparable Min, Max, Avg values for Fuel Per SF are correctly calculat
 
         cy.stepInfo(`2. Add several comps (via Search, Filter or Add blank column) and make sure that Fuel  
         and Square Feet fields are filled in for all added columns and save changes`);
-        testData.comparables.forEach((comp, index) => {
+        testData.comparables.forEach((comp) => {
             Income.ComparableExpenses.Actions.clickAddBlankColumnButton()
-                .enterAddressByColumnIndex(comp.address, index)
-                .enterCellDollarValueByColumnIndex(Income.ComparableExpenses.Page.fuelCells, comp.fuel, index)
-                .enterSquareFeetByColumnIndex(comp.squareFeet, index);
+                .enterAddressByColumnIndex(comp.address)
+                .enterCellDollarValueByColumnIndex(Income.ComparableExpenses.Page.fuelCells, comp.fuel)
+                .enterSquareFeetByColumnIndex(comp.squareFeet);
         });
 
         cy.stepInfo("3. Go to Expense Forecast and make sure that Per SF radiobutton is selected for Fuel card");
