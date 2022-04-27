@@ -1,3 +1,4 @@
+import { _CommercialUnits } from './index';
 import commercialUnitsPage from "../../pages/property/commercialUnits.page";
 import {cutDecimalPartToNumberOfDigits, isHasDecimalPartMoreNumberOfDigits, numberWithCommas} from "../../../utils/numbers.utils";
 import BaseActionsExt from "../base/base.actions.ext";
@@ -92,8 +93,83 @@ class CommercialUnitsActions extends BaseActionsExt<typeof commercialUnitsPage> 
         return this;
     }
 
-    verifyCommercialUnitSFDiscussionTextAreaContains(text: string): this {
-        commercialUnitsPage.commercialUnitSFDiscussionTextArea.should("contain.text", text);
+    verifyCommercialGrossLeasableAreaFieldIsDisabled (): this {
+        commercialUnitsPage.commercialGrossLeasableAreaTextArea.should('have.attr', 'disabled');
+        return this;
+    }
+
+
+
+
+/*
+
+    readatrr( index = 0): this {
+        cy.log( commercialUnitsPage.commercialUnitsSFInputs.eq(index).invoke('prop', 'defaultValue'))
+      //  .then(defaultValue => cy.log(defaultValue));
+           
+        return this;
+    }
+*/
+/*
+   verifyCommercialUnitsSquareEquelToGrossLeasableAreaField (numberOfUnits: number, squareFeetList: Array<number>): this {
+   this.sumAllUnitSFByUnitIndex(squareFeetList: Array<number>)
+
+
+   
+   }
+
+*/
+
+   sumAllUnitSFByUnitIndex(squareFeetList: Array<number>) {
+  
+    let sumOfUnitsSF = 0;
+        for (let i = 0; i < squareFeetList.length; i++) {
+            sumOfUnitsSF += squareFeetList[i];
+        }
+        return sumOfUnitsSF;
+        }
+
+  //  };
+/*
+
+        commercialUnitsPage.commercialUnitsSFInputs.invoke('value')
+
+        commercialUnitsPage.commercialUnitsSFInputs.find('value');
+
+invoke('val')
+      .then(sometext => cy.log(sometext)));
+        
+    }}
+
+*/
+
+    sumCommercialGrossLeasableArea(squareFeetList: Array<number>): this {
+        commercialUnitsPage.commercialGrossLeasableAreaTextArea.invoke('prop', 'defaultValue').should('be.equal', this.sumAllUnitSFByUnitIndex(squareFeetList))
+   //   commercialUnitsPage.commercialGrossLeasableAreaTextArea.invoke('prop', 'defaultValue').then(dV => {
+      //   const a= parseInt(dV)
+     //    _CommercialUnits.sumAllUnitSFByUnitIndex(squareFeetList).should('be.equal', a)
+    //    })
+    
+     // commercialUnitsPage.commercialGrossLeasableAreaTextArea.invoke('text')
+      //.then(defaultValue => {defaultValue.parseInt()
+ //   })
+      //cy.log(@sss)
+      //invoke('prop', 'defaultValue')//.then(defaultValue => return (defaultValue));
+      
+      return this
+    //  .then(defaultValue => return (defaultValue));    parseInt('defaultValue').should('be.equal', this.sumAllUnitSFByUnitIndex(squareFeetList))
+    //   return parseInt(sumCommercialGrossLeasableArea(squareFeetList));  
+    }
+
+    sumCommercialGrossLeasableArea1(): this {
+      //  this.sumCommercialGrossLeasableArea()
+        let a = parseInt(this.sumCommercialGrossLeasableArea())
+        return this.sumCommercialGrossLeasableArea()
+    }
+
+
+    verifyCommercialUnitSFDiscussionTextAreaContains (): this {
+        commercialUnitsPage.commercialGrossLeasableAreaTextArea.should("contain.text", text);
         return this;
     }
 
