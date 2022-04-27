@@ -39,7 +39,7 @@ describe("Historical expense Electricity Per Unit is correctly calculated and di
         });
 
         cy.stepInfo("4. Fill in Electricity field for all added columns and save changes");
-        Income._ExpenseHistory.Actions.verifyAverageTable();
+        // Income._ExpenseHistory.Actions.verifyAverageTable();
 
         cy.stepInfo("5. Go to Expense Forecast and make sure that Per Unit radiobutton is selected for Electricity  card");
         _NavigationSection.Actions.navigateToExpenseForecast();
