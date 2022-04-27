@@ -30,6 +30,8 @@ class AdjustCompsPage extends BasePage {
     get propertyRightsCells() {return cy.get("[name$=propertyRights]");}
 
     get addOtherAdjustmentButton() {return cy.get("[data-qa=otherAdjustmentLabel]");}
+
+    get getComparisonPerUnitRadio() {return cy.xpath("//input[@value='Per Total Units']");}
 }
 
 export default new AdjustCompsPage();
