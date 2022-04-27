@@ -21,7 +21,7 @@ export const getEnvUrl = () => {
             }
             break;
         default:
-            envUrl = Enums.ENV_URLS.DEV;
+            envUrl = Enums.ENV_URLS.STAGING;
     }
     return envUrl;
 };
