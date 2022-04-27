@@ -18,7 +18,7 @@ class ExpenseHistoryPage extends BasePage{
 
     get insuranceInputs() {return cy.get("[name$='expenses.insurance.total']");}
 
-    get electricityInputs() {return cy.get("[name$='expenses.electricity.total']");}
+    get electricityInputs() {return cy.get("[row-id='electricity'] div.right-aligned-cell");}
 
     get fuelInputs() {return cy.get("[name$='expenses.fuel.total']");}
 
@@ -86,7 +86,7 @@ class ExpenseHistoryPage extends BasePage{
 
     get expenseMonth() {return cy.get("[data-qa=expenseMonth-form-control] input");}
 
-    get expenseMonthProjection() {return cy.get("[name=expenseMonth]");}
+    get expenseMonthProjection() {return cy.get("[data-qa='autosuggest-text-input-field'] input");}
 }
 
 export default new ExpenseHistoryPage();

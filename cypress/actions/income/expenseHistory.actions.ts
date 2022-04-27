@@ -65,8 +65,8 @@ class ExpenseHistoryActions extends BaseActionsExt<typeof expenseHistoryPage>{
     }
 
     enterElectricityByColIndex(electricity: number | string, index = 0): ExpenseHistoryActions {
-        expenseHistoryPage.electricityInputs.eq(index).clear().type(`${electricity}`)
-            .should("have.value", `$${numberWithCommas(electricity)}`);
+        expenseHistoryPage.electricityInputs.eq(index).click().type(`${electricity}`).type('{enter}')
+            .should("have.text", `$${numberWithCommas(electricity)}.00`);
         return this;
     }
 
