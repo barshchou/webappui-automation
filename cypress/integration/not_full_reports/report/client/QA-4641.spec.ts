@@ -23,32 +23,37 @@ describe(`Verify the "Linked" chips dropdown in the new narrative component for 
             'Building Name', 'Property Type', 'Residential Unit Count', 'Commercial Unit Count', 'Street Address', 'Street Name', 
             'Site Area', 'Year Built', 'Block', 'Lot', 'Concluded Cap Rate', 'Zones', 'Condition'.`);
         Report._Client.enterIntendedUserTextBox(testData.textToType);
-        testData.verifyListValues.forEach(el => {
-            Report._Client.verifyNarrativeSuggestions(el)
+        testData.suggestions.forEach(el => {
+            Report._Client.verifyNarrativeSuggestions(el.suggestionName)
             .Page.IntendedUserTextBox.type("{downarrow}");
         });
 
         Report._Client.Page.IdentificationOfClientTextBox.click();
         Report._Client.enterIdentificationOfTheClientTextBox(testData.textToType);
-        testData.verifyListValues.forEach(el => {
-            Report._Client.verifyNarrativeSuggestions(el, 1)
+        testData.suggestions.forEach(el => {
+            Report._Client.verifyNarrativeSuggestions(el.suggestionName, 1)
             .Page.IdentificationOfClientTextBox.type("{downarrow}");
         });
 
         cy.stepInfo("4. Verify that each option can be selected for both sections.");
         Report._Client.Page.IntendedUserTextBox.click();
-        testData.typeListValues.forEach(el => {
-            Report._Client.enterIntendedUserTextBox(`=${el}`)
-            .clickNarrativeSuggestions(el);
+        testData.suggestions.forEach(el => {
+            Report._Client.enterIntendedUserTextBox(`=${el.typeSuggestValue}`)
+            .clickNarrativeSuggestions(el.suggestionName)
+            .verifyIntendedUserTextBox(el.verifySuggest);
         });
 
         Report._Client.Page.IdentificationOfClientTextBox.click();
-        testData.typeListValues.forEach(el => {
-            Report._Client.enterIdentificationOfTheClientTextBox(`=${el}`)
-            .clickNarrativeSuggestions(el, 1);
+        testData.suggestions.forEach(el => {
+            Report._Client.enterIdentificationOfTheClientTextBox(`=${el.typeSuggestValue}`)
+            .clickNarrativeSuggestions(el.suggestionName, 1)
+            .verifyIdentificationOfTheClientTextBox(el.verifySuggest);
+
         });
 
-        // cy.stepInfo("5. Verify that the form displays updated chips values for both sections.");
+        cy.stepInfo("5. Verify that the form displays updated chips values for both sections.");
+        // Report._Client.verifyIntendedUserTextBox(testData.verifyAreaValue)
+        //     .verifyIdentificationOfTheClientTextBox(testData.verifyAreaValue);
         // cy.stepInfo("6. Verify the linked chips on export for both sections:");
         
         // deleteReport(testData.reportCreationData.reportNumber);
