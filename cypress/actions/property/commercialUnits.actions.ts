@@ -1,31 +1,31 @@
 import { _CommercialUnits } from './index';
 import commercialUnitsPage from "../../pages/property/commercialUnits.page";
-import {cutDecimalPartToNumberOfDigits, isHasDecimalPartMoreNumberOfDigits, numberWithCommas} from "../../../utils/numbers.utils";
+import { cutDecimalPartToNumberOfDigits, isHasDecimalPartMoreNumberOfDigits, numberWithCommas } from "../../../utils/numbers.utils";
 import BaseActionsExt from "../base/base.actions.ext";
 
 class CommercialUnitsActions extends BaseActionsExt<typeof commercialUnitsPage> {
-    verifyImageHasRotated(rotateIndex: number){
+    verifyImageHasRotated(rotateIndex: number) {
         commercialUnitsPage.commercialUnitImage
-        .last().invoke("attr","style").then(style => {
-            expect(style).includes(`w_256,a_${90*rotateIndex}`);
-        });
+            .last().invoke("attr", "style").then(style => {
+                expect(style).includes(`w_256,a_${90 * rotateIndex}`);
+            });
         return this;
     }
 
     /**
      *NOTE: Rotates last image
      */
-    rotateImage(){
-        commercialUnitsPage.iconRotateImage.last().click({force:true});
+    rotateImage() {
+        commercialUnitsPage.iconRotateImage.last().click({ force: true });
         return this;
     }
 
     uploadImages(imageType: "Interior Images" | "Exterior Images", pathToFile: string, inputMethod: "drag-n-drop" | "input") {
         let aliasImageUpload = "aliasImageUpload";
-        cy.intercept("POST","/imageUpload").as(aliasImageUpload);
+        cy.intercept("POST", "/imageUpload").as(aliasImageUpload);
         cy.contains(imageType).next().find('input[type="file"]')
-        .attachFile(pathToFile,{subjectType:inputMethod});
-        cy.wait(`@${aliasImageUpload}`).then(({response}) => {
+            .attachFile(pathToFile, { subjectType: inputMethod });
+        cy.wait(`@${aliasImageUpload}`).then(({ response }) => {
             expect(response.statusCode).equal(200);
             cy.log("imageUpload resolved");
         });
@@ -38,13 +38,13 @@ class CommercialUnitsActions extends BaseActionsExt<typeof commercialUnitsPage> 
     }
 
     private clickRadioOrCheckbox(group: BoweryReports.CommercialUnitsGroups,
-                                 value: BoweryReports.CommercialUnitGroupsValues, index = 0): this {
+        value: BoweryReports.CommercialUnitGroupsValues, index = 0): this {
         commercialUnitsPage.getRadioButtonByValueAndUnitIndex(group, value, index).click();
         return this;
     }
 
     clickRadioButtonByValueAndUnitIndex(group: BoweryReports.CommercialUnitsGroups,
-                                        value: BoweryReports.CommercialUnitGroupsValues, index = 0): this {
+        value: BoweryReports.CommercialUnitGroupsValues, index = 0): this {
         this.clickRadioOrCheckbox(group, value, index)
             .verifyRadioIsChecked(group, value, index);
         if (value === "other") {
@@ -55,7 +55,7 @@ class CommercialUnitsActions extends BaseActionsExt<typeof commercialUnitsPage> 
     }
 
     clickCheckboxToUncheck(group: BoweryReports.CommercialUnitsGroups, value: BoweryReports.CommercialUnitGroupsValues,
-                           index = 0): this {
+        index = 0): this {
         this.clickRadioOrCheckbox(group, value, index)
             .verifyRadioIsNotChecked(group, value, index);
         if (value === "other") {
@@ -93,82 +93,28 @@ class CommercialUnitsActions extends BaseActionsExt<typeof commercialUnitsPage> 
         return this;
     }
 
-    verifyCommercialGrossLeasableAreaFieldIsDisabled (): this {
+    verifyCommercialGrossLeasableAreaFieldIsDisabled(): this {
         commercialUnitsPage.commercialGrossLeasableAreaTextArea.should('have.attr', 'disabled');
         return this;
     }
 
-
-
-
-/*
-
-    readatrr( index = 0): this {
-        cy.log( commercialUnitsPage.commercialUnitsSFInputs.eq(index).invoke('prop', 'defaultValue'))
-      //  .then(defaultValue => cy.log(defaultValue));
-           
-        return this;
-    }
-*/
-/*
-   verifyCommercialUnitsSquareEquelToGrossLeasableAreaField (numberOfUnits: number, squareFeetList: Array<number>): this {
-   this.sumAllUnitSFByUnitIndex(squareFeetList: Array<number>)
-
-
-   
-   }
-
-*/
-
-   sumAllUnitSFByUnitIndex(squareFeetList: Array<number>) {
-  
-    let sumOfUnitsSF = 0;
+    sumAllUnitSFByUnitIndex(squareFeetList: Array<number>) {
+        let sumOfUnitsSF = 0;
         for (let i = 0; i < squareFeetList.length; i++) {
             sumOfUnitsSF += squareFeetList[i];
         }
         return sumOfUnitsSF;
-        }
-
-  //  };
-/*
-
-        commercialUnitsPage.commercialUnitsSFInputs.invoke('value')
-
-        commercialUnitsPage.commercialUnitsSFInputs.find('value');
-
-invoke('val')
-      .then(sometext => cy.log(sometext)));
-        
-    }}
-
-*/
-
-    sumCommercialGrossLeasableArea(squareFeetList: Array<number>): this {
-        commercialUnitsPage.commercialGrossLeasableAreaTextArea.invoke('prop', 'defaultValue').should('be.equal', this.sumAllUnitSFByUnitIndex(squareFeetList))
-   //   commercialUnitsPage.commercialGrossLeasableAreaTextArea.invoke('prop', 'defaultValue').then(dV => {
-      //   const a= parseInt(dV)
-     //    _CommercialUnits.sumAllUnitSFByUnitIndex(squareFeetList).should('be.equal', a)
-    //    })
-    
-     // commercialUnitsPage.commercialGrossLeasableAreaTextArea.invoke('text')
-      //.then(defaultValue => {defaultValue.parseInt()
- //   })
-      //cy.log(@sss)
-      //invoke('prop', 'defaultValue')//.then(defaultValue => return (defaultValue));
-      
-      return this
-    //  .then(defaultValue => return (defaultValue));    parseInt('defaultValue').should('be.equal', this.sumAllUnitSFByUnitIndex(squareFeetList))
-    //   return parseInt(sumCommercialGrossLeasableArea(squareFeetList));  
     }
 
-    sumCommercialGrossLeasableArea1(): this {
-      //  this.sumCommercialGrossLeasableArea()
-        let a = parseInt(this.sumCommercialGrossLeasableArea())
-        return this.sumCommercialGrossLeasableArea()
+    verifyCommercialGrossLeasableAreaEqualSumUnitSF(squareFeetList: Array<number>): this {
+        commercialUnitsPage.commercialGrossLeasableAreaTextArea.invoke('prop', 'defaultValue').then(defaultValue => {
+            const valueOfGrossLeasableAreaTextArea = parseInt(defaultValue);
+            expect(valueOfGrossLeasableAreaTextArea).to.be.equal(this.sumAllUnitSFByUnitIndex(squareFeetList));
+        });
+        return this;
     }
 
-
-    verifyCommercialUnitSFDiscussionTextAreaContains (): this {
+    verifyCommercialUnitSFDiscussionTextAreaContains(): this {
         commercialUnitsPage.commercialGrossLeasableAreaTextArea.should("contain.text", text);
         return this;
     }
