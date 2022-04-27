@@ -82,6 +82,11 @@ class ClientActions extends BaseActionsExt<typeof clientPage> {
         return this;
     }
 
+    verifyNarrativeSuggestions(verifyListValue: string, numberLists = 0) {
+        clientPage.narrativeSuggestionsList.eq(numberLists).contains(verifyListValue).should("have.text", verifyListValue);
+        return this;
+    }
+
     verifyIntendedUserTextBox(verifyAreaValue: string): ClientActions {
         clientPage.IntendedUserTextBox.should("contain.text", verifyAreaValue);
         return this;
