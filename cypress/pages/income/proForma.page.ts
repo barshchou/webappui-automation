@@ -114,9 +114,13 @@ class ProFormaPage extends BasePage {
         return this.residentialVCLossLabelCell.children('[col-id="total"]');
     }
 
-    get residentialVCLossPerSF() {return cy.get("[data-qa=residentialVCLossAmount-psf-cell]");}
+    get residentialVCLossPerSF() {
+        return this.residentialVCLossLabelCell.children('[col-id="psf"]');
+    }
 
-    get residentialVCLossPerUnit() {return cy.get("[data-qa=residentialVCLossAmount-perUnit-cell]");}
+    get residentialVCLossPerUnit() {
+        return this.residentialVCLossLabelCell.children('[col-id="perUnit"]');
+    }
 
     getCommercialUseVCLossLabel(useText: string) {
         const attributeToBe = useText === "Undetermined" || useText === "Industrial" ?
