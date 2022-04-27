@@ -40,7 +40,6 @@ describe("Verify the functionality of the Ceiling Height radio button", () => {
             if (value === "other") Property._CommercialUnits.verifyOtherValueByGroupName(testData.groupName, testData.otherValue);
         });
 
-        cy.stepInfo("5. Delete report");
         deleteReport(testData.reportCreationData.reportNumber);
     });
 });
