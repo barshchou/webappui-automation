@@ -98,11 +98,11 @@ class ProFormaPage extends BasePage {
         return cy.contains(`Less ${firstPart} V/C Loss`);
     }
 
-    getCommercialUseVCLossPerUnitCell(useText) {return this.getCommercialUseVCLossRow(useText).siblings("[data-qa*=perUnit]");}
+    getCommercialUseVCLossPerUnitCell(useText) {return this.getCommercialUseVCLossRow(useText).siblings('[col-id="perUnit"]');}
 
-    getCommercialUseVCLossTotal(useText) {return this.getCommercialUseVCLossRow(useText).siblings("[data-qa*=total]");}
+    getCommercialUseVCLossTotal(useText) {return this.getCommercialUseVCLossRow(useText).siblings('[col-id="total"]');}
 
-    getCommercialUseVCLossPerSF(useText) {return this.getCommercialUseVCLossRow(useText).siblings("[data-qa*=psf]");}
+    getCommercialUseVCLossPerSF(useText) {return this.getCommercialUseVCLossRow(useText).siblings('[col-id="psf"]');}
 
     get residentialVCLossLabelCell() {
         return cy
