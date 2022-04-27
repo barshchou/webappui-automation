@@ -15,8 +15,13 @@ class ComparableExpensesActions extends BaseActions {
 
     enterAddressByColumnIndex(address: string, index: number = 0): ComparableExpensesActions {
         compExpensesPage.compAddressCells.eq(index).as("address");
-        cy.get("@address").scrollIntoView();
-        cy.get("@address").type(address, {force:true}).should("have.value", address);
+
+        cy.get("@address").dblclick().scrollIntoView()
+        .realType(`${address}{enter}`);
+        
+        cy.get("@address")
+        .children('[class="ag-react-container"]')
+        .should("have.text", address);
         return this;
     }
 
