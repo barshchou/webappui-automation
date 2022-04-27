@@ -1,6 +1,6 @@
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 
-const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("4053");
+const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("5054");
 
 const _customCategory: BoweryReports.ForecastItem = {
     name: "custom",

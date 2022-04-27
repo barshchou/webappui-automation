@@ -81,8 +81,6 @@ class ExpenseForecastPage extends BasePage {
 
     get newCategoryExpenseName() { return cy.get('[name="expense"]');}
 
-    get saveNewExpenseCategory() {return cy.get('button').contains('Save');}
-
 }
 
 export default new ExpenseForecastPage();
