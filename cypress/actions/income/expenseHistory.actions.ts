@@ -78,8 +78,8 @@ class ExpenseHistoryActions extends BaseActionsExt<typeof expenseHistoryPage>{
         if (fuel === "clear") {
             expenseHistoryPage.fuelInputs.eq(index).clear();
         } else {
-            expenseHistoryPage.fuelInputs.eq(index).clear().type(`${fuel}`)
-                .should("have.value", `$${numberWithCommas(fuel)}`);
+            expenseHistoryPage.fuelInputs.eq(index).dblclick().scrollIntoView().clear().realType(`${fuel}{enter}`);
+            expenseHistoryPage.fuelInputs.eq(index).should("have.text", `$${numberWithCommas(fuel)}.00`);
         }
         return this;
     }
