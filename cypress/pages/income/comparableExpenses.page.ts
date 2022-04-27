@@ -5,79 +5,53 @@ class ComparableExpensesPage extends BasePage {
 
     get compAddressCells() {return cy.get("[row-id='address'] [aria-colindex='3']");}
 
-    get compLocationCells() {return cy.get("[name^=comparableExpenses][name$=location]");}
+    get compLocationCells() {return cy.get("[row-id=location] [aria-colindex='3']");}
 
-    get expensePeriodDropdowns() {return cy.get("[data-qa$=expensePeriod-form-control] [data-qa=select-value]");}
+    get expensePeriodDropdowns() {return cy.get("[row-id=expensePeriod] [aria-colindex='3']");}
 
     getDropdownOptionByValue(value) {return cy.get(`li[data-value='${value}']`);}
 
-    get squareFeetCells() {return cy.get("[name$=squareFeet]");}
+    get squareFeetCells() {return cy.get("[row-id=squareFeet] [aria-colindex='3']");}
 
-    get residentialUnitsCells() {return cy.get("[name$=residentialUnits]");}
+    get residentialUnitsCells() {return cy.get("[row-id=residentialUnits] [aria-colindex='3']");}
 
-    get insuranceCells() {return cy.get("[name$='insurance.total']");}
+    get insuranceCells() {return cy.get("[row-id=insurance] [aria-colindex='3']");}
 
-    get electricityCells() {return cy.get("[name$='electricity.total']");}
+    get electricityCells() {return cy.get("[row-id=electricity] [aria-colindex='3']");}
 
-    get repairsCells() {return cy.get("[name$='repairsAndMaintenance.total']");}
+    get repairsCells() {return cy.get("[row-id=repairsAndMaintenance] [aria-colindex='3']");}
 
-    get payrollCells() {return cy.get("[name$='payrollAndBenefits.total']");}
+    get payrollCells() {return cy.get("[row-id=payrollAndBenefits] [aria-colindex='3']");}
 
-    get generalCells() {return cy.get("[name$='generalAndAdministrative.total']");}
+    get generalCells() {return cy.get("[row-id=generalAndAdministrative] [aria-colindex='3']");}
 
-    get managementFeesCells() {return cy.get("[name$='management.total']");}
+    get managementFeesCells() {return cy.get("[row-id=management] [aria-colindex='3']");}
 
-    getUnifiedDollarCells(cellName: string) {return cy.get(`[name$='${cellName}.total']`);}
+    getUnifiedDollarCells(cellName: string) {return cy.get(`[row-id=${cellName}] [aria-colindex='3']`);}
 
-    get totalOpExpensesCells() {return cy.get("[data-qa^=total-operation-expenses-cell]");}
+    get totalOpExpensesCells() {return cy.get("[row-id=total] [aria-colindex='3']");}
 
-    get toePerSFCells() {return cy.get("[data-qa^=total-operation-expenses-per-sf-cell]");}
+    get toePerSFCells() {return cy.get("[row-id=totalPerSF] [aria-colindex='3']");}
 
-    get toePerUnitCells() {return cy.get("[data-qa^=total-operation-expenses-per-unit-cell]");}
+    get toePerUnitCells() {return cy.get("[row-id=totalPerUnit] [aria-colindex='3']");}
 
-    get squareFeetAverage() {return cy.get("[data-qa=squareFeet-row] > td:last-child");}
+    get squareFeetAverage() {return cy.get("[row-id=squareFeet] [col-id=average]");}
 
-    get residentialUnitsAverage() {return cy.get("[data-qa=residentialUnits-row] > td:last-child");}
+    get residentialUnitsAverage() {return cy.get("[row-id=residentialUnits] [col-id=average]");}
 
-    get egiCells() {return cy.get("[name$=egi]");}
+    get egiCells() {return cy.get("[row-id=egi] [aria-colindex='3']");}
 
-    get egiAverage() {return cy.get("[data-qa=egi-row] > td:last-child");}
+    get egiAverage() {return cy.get("[row-id=egi] [col-id=average]");}
 
-    get insuranceAverage() {return cy.get("[data-qa=insurance-row] > td:last-child");}
+    get fuelCells() {return cy.get("[row-id=fuel] [aria-colindex='3']");}
 
-    get electricityAverage() {return cy.get("[data-qa=electricity-row] > td:last-child");}
+    get waterSewerCells() {return cy.get("[row-id=waterAndSewer] [aria-colindex='3']");}
 
-    get fuelCells() {return cy.get("[name$='fuel.total']");}
+    get repairsAndMaintenanceCells() {return cy.get("[row-id=repairsAndMaintenance] [aria-colindex='3']");}
 
-    get fuelAverage() {return cy.get("[data-qa=fuel-row] > td:last-child");}
+    getUnifiedDollarAverageCell(cellName: string) {return cy.get(`[row-id=${cellName}] [col-id=average]`);}
 
-    get waterSewerCells() {return cy.get("[name$='waterAndSewer.total']");}
-
-    get waterSewerAverage() {return cy.get("[data-qa=waterAndSewer-row] > td:last-child");}
-
-    get repairsAverage() {return cy.get("[data-qa=repairsAndMaintenance-row] > td:last-child");}
-
-    get repairsAndMaintenanceCells() {return cy.get("[name$='repairsAndMaintenance.total']");}
-
-    get payrollBenefitsAverage() {return cy.get("[data-qa=payrollAndBenefits-row] > td:last-child");}
-
-    get generalAdministrativeAverage() {return cy.get("[data-qa=generalAndAdministrative-row] > td:last-child");}
-
-    get legalProFeesCells() {return cy.get("[name$='legalAndProfessionalFees.total']");}
-
-    get legalProFeesAverage() {return cy.get("[data-qa=legalAndProfessionalFees-row] > td:last-child");}
-
-    get miscellaneousCells() {return cy.get("[name$='miscellaneous.total']");}
-
-    get miscellaneousAverage() {return cy.get("[data-qa=miscellaneous-row] > td:last-child");}
-
-    get managementAverage() {return cy.get("[data-qa=management-row] > td:last-child");}
-
-    get reservesCells() {return cy.get("[name$='reserves.total']");}
-
-    get reservesAverage() {return cy.get("[data-qa=reserves-row] > td:last-child");}
-
-    getUnifiedDollarAverageCell(cellName: string) {return cy.get(`[data-qa=${cellName}-row] > td:last-child`);}
+    get elementToCheckCellTextSelector() {return "[class=ag-react-container]";}
 }
 
 export default new ComparableExpensesPage();
