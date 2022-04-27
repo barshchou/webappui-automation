@@ -2,8 +2,16 @@ import rentRollPage from "../../../pages/income/commercial/rentRoll.page";
 import {isDateHasCorrectFormat} from "../../../../utils/date.utils";
 import {numberWithCommas} from "../../../../utils/numbers.utils";
 import BaseActionsExt from "../../base/base.actions.ext";
+import commercialRentRollShared from "../../../shared_components/commercialRentRoll.shared";
 
 class CommercialRentRollActions extends BaseActionsExt<typeof rentRollPage> {
+
+    SharedComponent: typeof commercialRentRollShared;
+
+    constructor(page: typeof rentRollPage, sharedComponent: typeof commercialRentRollShared) {
+        super(page);
+        this.SharedComponent = sharedComponent;
+    }
 
     verifyBasisOfRentTooltip() {
         rentRollPage.basisOfRentField.should("exist");
@@ -448,4 +456,4 @@ class CommercialRentRollActions extends BaseActionsExt<typeof rentRollPage> {
     }
 }
 
-export default new CommercialRentRollActions(rentRollPage);
+export default new CommercialRentRollActions(rentRollPage, commercialRentRollShared);
