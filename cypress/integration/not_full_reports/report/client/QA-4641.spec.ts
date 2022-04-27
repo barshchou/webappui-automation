@@ -9,7 +9,7 @@ describe(`Verify the "Linked" chips dropdown in the new narrative component for 
         createReport(testData.reportCreationData);
     });
 
-    it("Test body", () => {
+    it("Test body", {tags: "@to_check_export"}, () => {
         cy.stepInfo("1. Proceed to the Report > Client page.");
         _NavigationSection.navigateToClientPage()
             .verifyProgressBarNotExist();
@@ -35,7 +35,8 @@ describe(`Verify the "Linked" chips dropdown in the new narrative component for 
             .Page.IdentificationOfClientTextBox.type("{downarrow}");
         });
 
-        cy.stepInfo("4. Verify that each option can be selected for both sections.");
+        cy.stepInfo(`4. Verify that each option can be selected for both sections.
+            5. Verify that the form displays updated chips values for both sections.`);
         Report._Client.Page.IntendedUserTextBox.click();
         testData.suggestions.forEach(el => {
             Report._Client.enterIntendedUserTextBox(`=${el.typeSuggestValue}`)
@@ -51,11 +52,10 @@ describe(`Verify the "Linked" chips dropdown in the new narrative component for 
 
         });
 
-        cy.stepInfo("5. Verify that the form displays updated chips values for both sections.");
-        // Report._Client.verifyIntendedUserTextBox(testData.verifyAreaValue)
-        //     .verifyIdentificationOfTheClientTextBox(testData.verifyAreaValue);
-        // cy.stepInfo("6. Verify the linked chips on export for both sections:");
+        cy.stepInfo("6. Verify the linked chips on export for both sections:");
+        // TODO: Add export verify
+        // Proceed to the Sales Comparison Approach > Value Opinion via the Sales Comparison Approach and verify the value.
         
-        // deleteReport(testData.reportCreationData.reportNumber);
+        deleteReport(testData.reportCreationData.reportNumber);
     });
 });
