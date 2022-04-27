@@ -123,9 +123,11 @@ class ProFormaPage extends BasePage {
     }
 
     getCommercialUseVCLossLabel(useText: string) {
-        const attributeToBe = useText === "Undetermined" || useText === "Industrial" ?
-            `${useText}Commercial` : useText.replaceAll(" ", "");
-        return cy.get(`[data-qa='less${attributeToBe}VCLoss-label-cell']`);
+        // const attributeToBe = useText === "Undetermined" || useText === "Industrial" ?
+        //     `${useText}Commercial` : useText.replaceAll(" ", "");
+        // return cy.get(`[data-qa='less${attributeToBe}VCLoss-label-cell']`);
+        // TODO: add more robust method later
+        return this.residentialVCLossLabelCell;
     }
 
     get includeNOIComparisonCheckbox() {return cy.get("[data-qa^=includeNOIComparison] input");}
