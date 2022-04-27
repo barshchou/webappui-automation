@@ -104,9 +104,15 @@ class ProFormaPage extends BasePage {
 
     getCommercialUseVCLossPerSF(useText) {return this.getCommercialUseVCLossRow(useText).siblings("[data-qa*=psf]");}
 
-    get residentialVCLossLabelCell() {return cy.get("[data-qa=residentialVCLossAmount-label-cell]");}
+    get residentialVCLossLabelCell() {
+        return cy
+        .xpath('(//div[@row-id="Potential Gross Income_2"])[2]//following-sibling::div[@role="row"]')
+        .eq(0);
+    }
 
-    get residentialVCLossTotal() {return cy.get("[data-qa=residentialVCLossAmount-total-cell]");}
+    get residentialVCLossTotal() {
+        return this.residentialVCLossLabelCell.children('[col-id="total"]');
+    }
 
     get residentialVCLossPerSF() {return cy.get("[data-qa=residentialVCLossAmount-psf-cell]");}
 
