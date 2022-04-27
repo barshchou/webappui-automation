@@ -540,7 +540,7 @@ const stabRentRollSummaryFixture = () => {
         stabRRSummary: "The average forecasted monthly rent is $1,100.",
         grossIncomeDiscussion: "Based on our market rent conclusions, the residential rent roll is projected at 100% of market.",
         distributionSummary: "We estimated the total leasable area and resulting average square footage per unit " +
-            "based on a loss factor of 10% applied to the GBA."
+            "based on a loss factor of 5% applied to the GBA."
     };
 };
 
@@ -555,7 +555,7 @@ const expenseStructureFixture = () => {
 
 const parkingFixture = () => {
     return {
-        commentary: "The subject property has 6 parking spaces available."
+        commentary: "The subject property has 6 parking spaces available. Parking is a free amenity."
     };
 };
 

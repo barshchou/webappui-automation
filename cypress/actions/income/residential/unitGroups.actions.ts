@@ -23,7 +23,7 @@ class UnitGroupsActions extends BaseActions {
      * @param {number} percentage
      * @returns {UnitGroupsActions}
      */
-    verifyGLAPercentage(percentage = 90) {
+    verifyGLAPercentage(percentage = 95) {
         unitGroupsPage.glaPercentage.should("have.value", percentage);
         return this;
     }
@@ -42,7 +42,7 @@ class UnitGroupsActions extends BaseActions {
      * @param {number} glaPercentage
      * @returns {UnitGroupsActions}
      */
-    verifyGLAValue(grossArea, glaPercentage = 90) {
+    verifyGLAValue(grossArea, glaPercentage = 95) {
         const valueToBe = numberWithCommas(Math.round(grossArea / 100 * glaPercentage));
         unitGroupsPage.glaValue.should("be.disabled").should("have.value", `${valueToBe} sqft`);
         return this;
@@ -63,7 +63,7 @@ class UnitGroupsActions extends BaseActions {
      * @param {number} glaPercentage
      * @returns {UnitGroupsActions}
      */
-    verifyGLACellValue(grossArea, glaPercentage = 90) {
+    verifyGLACellValue(grossArea, glaPercentage = 95) {
         const valueToBe = numberWithCommas(Math.round(grossArea / 100 * glaPercentage));
         unitGroupsPage.glaCell.should("have.text", `${valueToBe} sqft`);
         return this;
