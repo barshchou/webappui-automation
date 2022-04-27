@@ -1,25 +1,17 @@
 import BasePage from "../base/base.page";
 
 class ExpenseForecastPage extends BasePage {
-    get ExpenseForecastHeader(){
-        return cy.get('[data-qa="expenseForecast"]');
-    }
+    get expenseForecastHeader(){ return cy.get('[data-qa="expenseForecast"]'); }
 
-    get ElectricityCard(){
-        return cy.get("[data-qa='electricity-forecast-item'] > div").last();
-    }
+    get electricityCard(){ return cy.get("[data-qa='electricity-forecast-item'] > div").last(); }
 
-    get InsuranceCard(){
-        return cy.get('[data-qa="insurance-forecast-item"] > div').last();
-    }
+    get insuranceCard(){ return cy.get('[data-qa="insurance-forecast-item"] > div').last(); }
 
-    get FuelCard() {
-        return cy.get("[data-qa=fuel-forecast-item] > div").last();
-    }
+    get fuelCard() { return cy.get("[data-qa=fuel-forecast-item] > div").last(); }
 
-    get RepairsAndMaintenanceCard() {
-        return cy.get("[data-qa=repairsMaintenance-forecast-item] > div").last();    
-    }
+    get repairsAndMaintenanceCard() { return cy.get("[data-qa=repairsMaintenance-forecast-item] > div").last(); }
+
+    get toeCard() {return cy.xpath("//*[.='TOTAL OPERATING EXPENSES']/../..");}
 
     getForecastItemBasisRadio(item) {return cy.get(`[name='${item}.basis']`);}
 

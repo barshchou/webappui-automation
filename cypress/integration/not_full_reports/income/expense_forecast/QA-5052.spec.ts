@@ -18,7 +18,6 @@ describe(`[QA-5052] Appraiser's Forecast of Custom Expense Forecast is included 
         _NavigationSection.navigateToExpenseForecast();
 
         cy.stepInfo(`[QA-5052] => 2. Add new custom categories`);
-        _NavigationSection.navigateToExpenseForecast();
         Income._ExpenseForecastActions.addCustomExpenseCategory(testData.firstCustomCategory.name);
         Income._ExpenseForecastActions.addCustomExpenseCategory(testData.secondCustomCategory.name);
 
@@ -29,8 +28,12 @@ describe(`[QA-5052] Appraiser's Forecast of Custom Expense Forecast is included 
         Income._ExpenseForecastActions.enterForecastItemForecast(testData.firstCustomCategory, true);
         Income._ExpenseForecastActions.enterForecastItemForecast(testData.secondCustomCategory, true);
         
-        cy.stepInfo(`[QA-5052] => 4. Verify total expenses calcualtion and commentary`);
-        Income._ExpenseForecastActions.verifyForecastCommentary(testData.commentaryTotalExpenses.generatedPerSF, testData.expensesItems.find(itemName => itemName.name=="total"));
+        cy.stepInfo(`[QA-5052] => 4. Verify total expenses calculation and commentary`);
+        Income._ExpenseForecastActions.verifyForecastCommentary(testData.commentaryTotalExpenses.generatedPerSF, testData.expensesItems.find(itemName => itemName.name=="total"))
+            .verifyTotalForecast();
+        Income._ExpenseForecastActions.Actions.matchElementSnapshot(
+            Income._ExpenseForecastActions.Page.toeCard, testData.totalExpensesSnapshotName, {padding: [10, 100]}
+        );
 
         deleteReport(testData.reportCreationData.reportNumber);
     });

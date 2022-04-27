@@ -301,7 +301,7 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
             expenseForecastPage.Header.then(elem => {
                 elem.hide();
             });
-            expenseForecastPage.ExpenseForecastHeader.then(elem => {
+            expenseForecastPage.expenseForecastHeader.then(elem => {
                 elem.hide();
             });
         }

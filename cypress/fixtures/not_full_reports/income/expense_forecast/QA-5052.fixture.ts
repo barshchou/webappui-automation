@@ -77,18 +77,17 @@ const expensesItemsFixture = (): BoweryReports.ForecastItem[] => {
         {
             name: "total",
             basis: "sf",
-            forecast: 0.24
+            forecast: 2.01
         },
     ];
 };
 
 const totalExpensesCommentariesFixture = () => {
     return {
-        generatedPerSF: "Operating expenses, exclusive of real estate taxes, were forecasted at $10.00 per square foot and ﻿ per unit. " +
-        "Excluding real estate taxes, the comparables ranged from Comp totals map psf min to Comp totals map psf max per square foot and " +
-        "Comp totals map unit min to Comp totals map unit max per unit. Our forecast is near the comparable range on both a per square " +
-        "foot and per unit basis, as well as logically placed in relation to the historical performance of the asset. Thus, this forecast " +
-        "is reasonable and will be applied in our valuation analysis.",
+        generatedPerSF: "Operating expenses, exclusive of real estate taxes, were forecasted at $2.01 per square foot and $NaN per unit. " +
+        "Excluding real estate taxes, the comparables ranged from $3.99 to $5.63 per square foot and $3,621 to $3,905 per unit. "+ 
+        "Our forecast is near the comparable range on both a per square foot and per unit basis, as well as logically placed in " +
+        "relation to the historical performance of the asset. Thus, this forecast is reasonable and will be applied in our valuation analysis."
     };
 };
 
@@ -99,4 +98,5 @@ export default {
     secondCustomCategory: _secondCustomCategory,
     expensesItems: expensesItemsFixture(),
     commentaryTotalExpenses: Object.freeze(totalExpensesCommentariesFixture()),
+    totalExpensesSnapshotName: "Total_Expenses_Forecast_Item_Component"
 };

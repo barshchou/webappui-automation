@@ -43,7 +43,7 @@ describe("Comparable Min, Max, Avg values for Electricity Per Unit are correctly
       .hideExpenseForecastHeader();
 
     Income.ExpenseForecast.Actions.matchElementSnapshot(
-      Income.ExpenseForecast.Page.ElectricityCard, testData.electricityCardSnapshotName, { padding: [10, 100] });
+      Income.ExpenseForecast.Page.electricityCard, testData.electricityCardSnapshotName, { padding: [10, 100] });
 
     cy.stepInfo("6. Delete report");
     deleteReport(testData.reportCreationData.reportNumber);
