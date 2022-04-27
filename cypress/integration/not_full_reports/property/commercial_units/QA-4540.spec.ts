@@ -3,8 +3,7 @@
 import testData from "../../../../fixtures/not_full_reports/property/commercial_units/QA-4540.fixture";
 import { Base, Property } from "../../../../actions";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
-import commercialUnitsPage from "../../../../pages/property/commercialUnits.page";
-import {_NavigationSection} from "../../../../actions/base";
+import { _NavigationSection } from "../../../../actions/base";
 
 
 describe("Verify the functionality of the Ceiling Height radio button", () => {
@@ -23,22 +22,14 @@ describe("Verify the functionality of the Ceiling Height radio button", () => {
         cy.stepInfo("2.  Proceed to the Property > Commercial Units page.");
         _NavigationSection.navigateToCommercialUnits();
 
-
         cy.stepInfo("3.  Verify that the Commercial Gross Leasable Area field is disabled.");
         Property._CommercialUnits.verifyCommercialGrossLeasableAreaFieldIsDisabled();
-  
 
         cy.stepInfo("4.  Verify that the Commercial Gross Leasable Area field is the calculated sum of the Commercial Unit SF above it.");
-        Property._CommercialUnits.enterListUnitSF(testData.squareFeetList, testData.numberOfCommercialUnits);
+        Property._CommercialUnits.enterListUnitSF(testData.squareFeetList, testData.numberOfCommercialUnits)
+            .verifyCommercialGrossLeasableAreaEqualSumUnitSF(testData.squareFeetList);
 
-  //     cy.log(Property._CommercialUnits.sumAllUnitSFByUnitIndex(testData.squareFeetList));
-
-     // Property._CommercialUnits.sumCommercialGrossLeasableArea(testData.squareFeetList);
-  //   cy.log(Property._CommercialUnits.sumCommercialGrossLeasableArea(testData.squareFeetList)); 
-
-  cy.log( Property._CommercialUnits.sumCommercialGrossLeasableArea(testData.squareFeetList))
-   //   cy.stepInfo(` 4. Delete report`);
-    //    deleteReport(testData.reportCreationData.reportNumber);
+        deleteReport(testData.reportCreationData.reportNumber);
 
     });
 });
