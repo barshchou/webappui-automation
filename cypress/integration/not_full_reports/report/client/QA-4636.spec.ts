@@ -8,7 +8,7 @@ describe(`Verify the Modified label functionality for Intended User and Identifi
         createReport(testData.reportCreationData);
     });
 
-    it("Test body", () => {
+    it.only("Test body", () => {
         cy.stepInfo('1. Click on the Edit button on the Report > Client page for Intended User and Identification of the Client sections.');
         _NavigationSection.navigateToClientPage();
         Report._Client.verifyProgressBarNotExist()
