@@ -42,7 +42,7 @@ namespace BoweryReports {
 
 
     export type ForecastItem = { 
-        name: BoweryReports.ForecastItemBasis, 
+        name: BoweryReports.ForecastItemBasis | string, 
         basis?: BoweryReports.UnitSF, 
         forecast?: number | undefined, 
         projection?: number 
