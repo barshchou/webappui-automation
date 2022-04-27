@@ -22,7 +22,7 @@ class ExpenseHistoryPage extends BasePage{
 
     get fuelInputs() {return cy.get("[row-id='fuel'] div.right-aligned-cell");}
 
-    get repairsAndMaintenanceInputs() {return cy.get("[name$='expenses.repairsAndMaintenance.total']");}           //!!!!!
+    get repairsAndMaintenanceInputs() {return cy.get("[row-id='repairsAndMaintenance'] div.right-aligned-cell");}           //!!!!!
 
     get fuelCheckboxes() {return cy.get("[data-qa*='expenses.fuel.reported'] input");}
 
