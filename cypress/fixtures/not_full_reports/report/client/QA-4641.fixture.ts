@@ -1,8 +1,43 @@
+import Enums from "../../../../enums/enums";
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 
 export default {
-    reportCreationData: ReportDataCreator.getDefaultReportData("4641"),
-    textToType: "=F",
-    verifyListValue: "Foreclosure Sale",
-    verifyAreaValue: "The above transaction reflects a foreclosure sale of the property. Typically in a foreclosure sale, the buyer assumes all encumbrances on the site, including any outstanding mortgage amount and legal fees (\"upset costs\"), delinquent taxes and water and sewer charges, foreclosure sale fee, and realty transfer taxes. This information was requested from the owner; however, not provided."
+    reportCreationData: ReportDataCreator.getReportSpecificConclusionValue(Enums.VALUE_CONCLUSION_TYPE.AS_STABILIZED, "4641"),
+    textToType: "=",
+    verifyListValues: [
+        'Block', 
+        'Building Name', 
+        'Concluded Cap Rate', 
+        'Condition', 
+        'Foreclosure Sale', 
+        'Gross Building Area', 
+        'Lot', 
+        'Property Type', 
+        'Residential Unit Count', 
+        'Sherrif\'s Sale', 
+        'Site Area', 
+        'Street Address', 
+        'Street Name', 
+        'Unchanged Renovations', 
+        'Year Built', 
+        'Zone(s)'
+    ],
+    typeListValues: [
+        'Bloc', 
+        'Buildin', 
+        'Conclude', 
+        'Conditio', 
+        'Foreclosur', 
+        'Gros', 
+        'Lo', 
+        'Propert', 
+        'Residentia', 
+        'Sherri', 
+        'Sit', 
+        'Stree', 
+        'Stree', 
+        'Unchange', 
+        'Yea', 
+        'Zone'
+    ]
 };
