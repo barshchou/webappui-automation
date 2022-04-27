@@ -3,7 +3,6 @@
 import testData from "../../../../fixtures/not_full_reports/property/commercial_units/QA-4565.fixture";
 import { Base, Property } from "../../../../actions";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
-import commercialUnitsPage from "../../../../pages/property/commercialUnits.page";
 import {_NavigationSection} from "../../../../actions/base";
 
 
@@ -26,7 +25,7 @@ describe("Verify the functionality of the Ceiling Height radio button", () => {
 
         cy.stepInfo("3. Verify the Ceiling Height contains the following radio buttons: Low, Normal, High, Other and no value is selected");
         testData.ceilingHeightValues.forEach(value => {
-            commercialUnitsPage.getRadioButtonByValueAndUnitIndex(testData.groupName, value).should('exist');
+            Property._CommercialUnits.Page.getRadioButtonByValueAndUnitIndex(testData.groupName, value).should('exist');
             Property._CommercialUnits.verifyRadioIsNotChecked(testData.groupName, value);
         });
 
