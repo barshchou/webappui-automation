@@ -251,16 +251,21 @@ class ExpenseHistoryActions extends BaseActionsExt<typeof expenseHistoryPage>{
         let cellsCounter = 0;
         let sum = 0;
         for (let i = 0; i < jQueryElements.length; i++) {
-            let elValue = jQueryElements[i].getAttribute("text");
-            if (elValue === "") {
+            let elValue = jQueryElements[i].textContent;
+            cy.log(`Element value ${i} = ${elValue}`);
+            if (elValue === null || elValue === "") {
                 continue;
             }
             let elNumber = getNumberFromDollarNumberWithCommas(elValue);
             sum += elNumber;
             cellsCounter++;
         }
-        if (cellsCounter === 0) cellsCounter = 1;
-        return `$${numberWithCommas((sum / cellsCounter).toFixed(2))}`;
+        cy.log(`Cells counter = ${cellsCounter}`);
+        if (cellsCounter === 0) {
+            return "";
+        } else {
+            return `$${numberWithCommas((sum / cellsCounter).toFixed(2))}`;
+        }
     }
 
     /**
