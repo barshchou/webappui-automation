@@ -22,7 +22,12 @@ on:
         type: string
         description: Spec(s) to be executed
         required: false
-        default: cypress/integration/not_full_reports/income/commercial/in_place_rent_roll/QA-4322.spec.ts
+        default: cypress/integration/not_full_reports/**/*.spec.ts
+      tags:
+        type: string
+        description: Run tests with specific tags
+        required: false
+        default: grep=,grepTags=,burn=
         
 jobs:
   Not-full-reports-run-DEBUG:
@@ -60,9 +65,10 @@ jobs:
         run: npm install
 
       - name: Run Cypress not snapshot tests on Currents.dev
-        run: npm run currents:run:debug -- --spec ${{ github.event.inputs.spec_file }}
+        run: npm run currents:run:debug -- --spec ${{ github.event.inputs.spec_file }} --env ${{ github.event.inputs.tags }}
         env:
           CYPRESS_USERNAME: ${{ github.event.inputs.env == 'custom' && secrets.CESAR_USERNAME || secrets.USERNAME }}
           CYPRESS_PASSWORD: ${{ github.event.inputs.env == 'custom' && secrets.CESAR_PASSWORD || secrets.PASSWORD }}
           CYPRESS_url: ${{ github.event.inputs.env }}
           CYPRESS_customEnv: ${{ github.event.inputs.customEnv }}
+          CYPRESS_grepFilterSpecs: true

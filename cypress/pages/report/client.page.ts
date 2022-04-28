@@ -32,6 +32,7 @@ class ClientPage extends BasePage{
     
     get narrativeSuggestionsList() {return cy.get("[data-qa='narrative-suggestions-list'] > ul");}
 
+    get modalWindow() {return cy.get("[role='dialog']");}
 }
 
 export default new ClientPage();
