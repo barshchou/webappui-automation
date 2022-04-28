@@ -505,6 +505,26 @@ class InPlaceRentRollActions extends BaseActions {
         rentRollPage.unitTypeCells.eq(rowNumber).should("contain.text", type);
         return this;
     }
+
+    /**
+     * @returns {InPlaceRentRollActions}
+     */
+    verifyMonthlyTotalRentValue() {
+        rentRollPage.monthlyRentCells.then(rentCells => {
+            rentRollPage.leaseStatusCells.then(leaseStatusCells => {
+                let totalToBe = 0;
+                for (let i = 0; i < rentCells.length; i++) {
+                    if(leaseStatusCells.eq(i).text() != "▼Vacant") {
+                        let cellNumber = getNumberFromDollarNumberWithCommas(rentCells.eq(i).text());
+                        totalToBe += cellNumber;
+                    }
+                }
+                const textToBe = `$${numberWithCommas(totalToBe.toFixed(2))}`;
+                rentRollPage.monthlyTotalRentValue.should("have.text", textToBe);    
+            });
+        });
+        return this;
+    }
 }
 
 export default new InPlaceRentRollActions();
