@@ -195,6 +195,12 @@ class InPlaceRentRollActions extends BaseActions {
         return this;
     }
 
+     verifyCheckPerUnitSquareFootageColumns(columnNames: string[]): InPlaceRentRollActions {
+        this.checkPerUnitSquareFootage()
+            .verifyListColumnExist(columnNames);
+        return this;
+    }
+
     /**
      * @param {string} filePath
      * @param {number} unitsToBe
@@ -217,13 +223,13 @@ class InPlaceRentRollActions extends BaseActions {
         return this;
     }
 
-    enterRentTypeCellByRowNumber(rentType: string, rowNumber: number = 0): this {
+    enterRentTypeCellByRowNumber(rentType: string, rowNumber = 0): this {
         rentRollPage.rentTypeCells.eq(rowNumber).dblclick();
         this.enterTextToTextarea(rentType);
         return this;
     }
 
-    verifyRentTypeCellByRowNumber(rentTypeToBe: string, rowNumber: number = 0): this {
+    verifyRentTypeCellByRowNumber(rentTypeToBe: string, rowNumber = 0): this {
         rentRollPage.rentTypeCells.eq(rowNumber).should("contain.text", rentTypeToBe);
         return this;
     }
@@ -309,7 +315,7 @@ class InPlaceRentRollActions extends BaseActions {
         return this;
     }
 
-    enterLeaseStatusByRowNumber(status: string, number: number = 0): this {
+    enterLeaseStatusByRowNumber(status: string, number = 0): this {
         rentRollPage.leaseStatusCells.eq(number).dblclick();
         this.enterTextToTextarea(status);
         rentRollPage.leaseStatusCells.eq(number).should("contain.text", status);
@@ -345,7 +351,7 @@ class InPlaceRentRollActions extends BaseActions {
         return this;
     }
 
-    enterMonthlyRentByRowNumber(value: string | number, rowNumber: number = 0): this {
+    enterMonthlyRentByRowNumber(value: string | number, rowNumber = 0): this {
         const textToBe = typeof value === "string" ? value : `$${numberWithCommas(value.toFixed(2))}`;
         rentRollPage.monthlyRentCells.eq(rowNumber).dblclick();
         this.enterTextToTextarea(`${value}`);
@@ -505,6 +511,23 @@ class InPlaceRentRollActions extends BaseActions {
         rentRollPage.unitTypeCells.eq(rowNumber).should("contain.text", type);
         return this;
     }
+
+    verifyRentSFValue(): InPlaceRentRollActions{
+        rentRollPage.monthlyRentCells.then(el => {
+            const monthlyRent = getNumberFromDollarNumberWithCommas(el.text());
+            rentRollPage.squareFootageCells.then(sf => {
+                const squareFootage = getNumberFromDollarNumberWithCommas(sf.text());
+                const rentSFNumber = (monthlyRent * 12 / squareFootage).toFixed(2);
+                if (squareFootage === 0) {
+                    rentRollPage.rentSFCell.should("have.text", `$NaN`);
+                } else {
+                    rentRollPage.rentSFCell.should("have.text", `$${rentSFNumber}`);
+                }
+            });
+        });
+        return this;
+    }
+    
 }
 
 export default new InPlaceRentRollActions();
