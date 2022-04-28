@@ -34,11 +34,12 @@ namespace BoweryReports {
 
     export type CommercialUnitsGradeValues = "atGrade" | "partiallyBelowGrade" | "belowGrade" | "other";
     export type CommercialUnitsFacadeValues = "plate glass" | "other";
+    export type CommercialUnitsStreetTypeValues = "side street" | "avenue";
 
     /*
     More Unit Groups Values will be added after other values types added
      */
-    export type CommercialUnitGroupsValues = CommercialUnitsUseValues | CommercialUnitsGradeValues | CommercialUnitsFacadeValues;
+    export type CommercialUnitGroupsValues = CommercialUnitsUseValues | CommercialUnitsGradeValues | CommercialUnitsFacadeValues | CommercialUnitsStreetTypeValues;
 
 
     export type ForecastItem = { 
