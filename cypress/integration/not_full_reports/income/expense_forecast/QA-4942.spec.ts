@@ -19,7 +19,8 @@ describe("Comparable Min, Max, Avg values for Fuel Per SF are correctly calculat
         testData.comparables.forEach((comp) => {
             Income.ComparableExpenses.Actions.clickAddBlankColumnButton()
                 .enterAddressByColumnIndex(comp.address)
-                .enterCellDollarValueByColumnIndex(Income.ComparableExpenses.Page.fuelCells, comp.fuel)
+                .enterCellDollarValueByColumnIndex(Income.ComparableExpenses.Page.getUnifiedEditableAndTotalCells("fuel"),
+                    comp.fuel)
                 .enterSquareFeetByColumnIndex(comp.squareFeet);
         });
 
