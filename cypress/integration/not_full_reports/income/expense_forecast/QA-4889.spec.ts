@@ -23,7 +23,8 @@ describe("Comparable Min, Max, Avg values for Electricity Per Unit are correctly
       Income.ComparableExpenses.Actions.clickAddBlankColumnButton()
         .enterAddressByColumnIndex(comp.address)
         .enterResidentialUnitsByColumnIndex(comp.resUnits)
-        .enterCellDollarValueByColumnIndex(Income.ComparableExpenses.Page.electricityCells, comp.electricity);
+        .enterCellDollarValueByColumnIndex(Income.ComparableExpenses.Page.getUnifiedEditableAndTotalCells("electricity"),
+            comp.electricity);
     });
 
     cy.stepInfo("3. Make sure that Electricity and Residential Units fields are filled in for all added columns and save changes");
