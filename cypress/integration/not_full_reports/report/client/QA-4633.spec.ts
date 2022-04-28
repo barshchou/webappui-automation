@@ -16,6 +16,12 @@ describe(`Verify the Revert to Original button functionality for Intended User a
         Report._Client.Page.formEditBtn(0).click();
 
         cy.stepInfo("2. Verify that the Revert to Original button is displayed instead of the Edit button for both sections.");
+        Report._Client.Page.formEditBtn(0).should("be.hidden");
+        Report._Client.Page.formEditBtn(1).should("be.hidden");
+        Report._Client.Page.formRevertToOriginalBtn(0).should("be.visible");
+        Report._Client.Page.formRevertToOriginalBtn(1).should("be.visible");
+
+        cy.stepInfo("3. Edit comment and verify that the Revert to Original button becomes enabled for both sections.");
         Report._Client.enterIntendedUserTextBox(testData.textToType)
             .clickNarrativeSuggestions(testData.verifySuggestion)
             .enterIdentificationOfTheClientTextBox(testData.textToType)
@@ -23,11 +29,16 @@ describe(`Verify the Revert to Original button functionality for Intended User a
             .Page.formSaveBtn(0).click;
             Report._Client.Page.formSaveBtn(0).click();
 
-        cy.stepInfo("3. Edit comment and verify that the Revert to Original button becomes enabled for both sections.");
-        Report._Client.Page.chipModified(0).should("be.visible");
-        Report._Client.Page.chipModified(1).should("be.visible");
+        Report._Client.Page.formRevertToOriginalBtn(0).should("be.enabled");
+        Report._Client.Page.formRevertToOriginalBtn(1).should("be.enabled");
 
         cy.stepInfo("4. Click on the Revert to Original button and verify the ‘Changes will be lost modal’ is displayed for both sections.");
+        Report._Client.Page.formRevertToOriginalBtn(0).click();
+        Report._Client.Page.formYesRevertBtn.click();
+        Report._Client.Page.formRevertToOriginalBtn(1).click();
+        Report._Client.Page.formYesRevertBtn.click();
+        Report._Client.verifyIntendedUserTextBox(testData.verifyIntendedUserTextArea)
+            .verifyIdentificationOfTheClientTextBox(testData.verifyIdentificationOfTheClientTextArea);
 
         deleteReport(testData.reportCreationData.reportNumber);
     });
