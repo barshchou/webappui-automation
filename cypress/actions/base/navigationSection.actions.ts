@@ -315,10 +315,22 @@ class NavigationSectionActions extends BaseActions {
         return this;
     }
 
+    clickCoverPage() {
+        navigationSectionPage.coverPage.click();
+        return this;
+    }
+
     navigateToLaundry() {
         this.clickIncomeApproachButton()
             .clickMiscellaneousIncome()
             .clickLaundryButton()
+            .clickYesButton();
+        return this;
+    }
+
+    navigateToCoverPage() {
+        this.clickPreviewEditButton()
+            .clickCoverPage()
             .clickYesButton();
         return this;
     }
