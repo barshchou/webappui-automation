@@ -13,10 +13,10 @@ const checkChipsOptions = (suggestion: string,optionName: string, textBoxName: "
     };
 
     if(textBoxName == "IntendedUserTextBox"){
-        return interactWithText(Report.Client.Page.IntendedUserTextBox, 0);
+        return interactWithText(Report.Client.Page.intendedUserTextBox, 0);
     }
     else if(textBoxName == "IdentificationOfClientTextBox"){
-        return interactWithText(Report.Client.Page.IdentificationOfClientTextBox,1);
+        return interactWithText(Report.Client.Page.identificationOfClientTextBox,1);
     }
     
 };
@@ -32,8 +32,8 @@ describe.skip("Verify the Client Guidelines Discussion on the page", () => {
     it("Test body", () => {
         NavigationSection.navigateToClientPage().verifyProgressBarNotExist();
 
-        Report.Client.Page.EditIntendedUserBtn.click();
-        Report.Client.Page.EditIdentificationOfClientBtn.click();
+        Report.Client.Page.formEditBtn(0).click();
+        Report.Client.Page.formEditBtn(0).click();
 
         for(let [suggestion, option] of testData.linkedChipsDropdownOptions){
             checkChipsOptions(suggestion,option,"IntendedUserTextBox");

@@ -25,26 +25,26 @@ describe(`Verify the "Linked" chips dropdown in the new narrative component for 
         Report._Client.enterIntendedUserTextBox(testData.textToType);
         testData.suggestions.forEach(el => {
             Report._Client.verifyNarrativeSuggestions(el.suggestionName)
-            .Page.IntendedUserTextBox.type("{downarrow}");
+            .Page.intendedUserTextBox.type("{downarrow}");
         });
 
-        Report._Client.Page.IdentificationOfClientTextBox.click();
+        Report._Client.Page.identificationOfClientTextBox.click();
         Report._Client.enterIdentificationOfTheClientTextBox(testData.textToType);
         testData.suggestions.forEach(el => {
             Report._Client.verifyNarrativeSuggestions(el.suggestionName, 1)
-            .Page.IdentificationOfClientTextBox.type("{downarrow}");
+            .Page.identificationOfClientTextBox.type("{downarrow}");
         });
 
         cy.stepInfo(`4. Verify that each option can be selected for both sections.
             5. Verify that the form displays updated chips values for both sections.`);
-        Report._Client.Page.IntendedUserTextBox.click();
+        Report._Client.Page.intendedUserTextBox.click();
         testData.suggestions.forEach(el => {
             Report._Client.enterIntendedUserTextBox(`=${el.typeSuggestValue}`)
             .clickNarrativeSuggestions(el.suggestionName)
             .verifyIntendedUserTextBox(el.verifySuggest);
         });
 
-        Report._Client.Page.IdentificationOfClientTextBox.click();
+        Report._Client.Page.identificationOfClientTextBox.click();
         testData.suggestions.forEach(el => {
             Report._Client.enterIdentificationOfTheClientTextBox(`=${el.typeSuggestValue}`)
             .clickNarrativeSuggestions(el.suggestionName, 1)
