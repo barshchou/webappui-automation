@@ -80,15 +80,15 @@ class ExpenseHistoryActions extends BaseActionsExt<typeof expenseHistoryPage>{
         return this;
     }
 
-    enterRepairsAndMaintenanceByColIndex(repairsAndMaintenance: string | number = 0, index = 0): ExpenseHistoryActions {
-        if (repairsAndMaintenance === "clear") {
-            expenseHistoryPage.repairsAndMaintenanceInputs.eq(index).clear();
-        } else {
-            expenseHistoryPage.repairsAndMaintenanceInputs.eq(index).clear().type(`${repairsAndMaintenance}`)
-                .should("have.value", `$${numberWithCommas(repairsAndMaintenance)}`);
-        }
-        return this;
-    }
+    // enterRepairsAndMaintenanceByColIndex(repairsAndMaintenance: string | number = 0, index = 0): ExpenseHistoryActions {
+    //     if (repairsAndMaintenance === "clear") {
+    //         expenseHistoryPage.repairsAndMaintenanceInputs.eq(index).clear();
+    //     } else {
+    //         expenseHistoryPage.repairsAndMaintenanceInputs.eq(index).clear().type(`${repairsAndMaintenance}`)
+    //             .should("have.value", `$${numberWithCommas(repairsAndMaintenance)}`);
+    //     }
+    //     return this;
+    // }
 
     /**
      *

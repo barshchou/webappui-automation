@@ -3,7 +3,7 @@ import BasePage from "../base/base.page";
 class ComparableExpensesPage extends BasePage {
     get addBlankColumnButton() {return cy.get("[data-qa=comparable-exp-add-blank-btn]");}
 
-    get compAddressCells() {return cy.get("[name^=comparableExpenses][name$=address]");}
+    get compAddressCells() {return cy.get("[row-id='address'] [aria-colindex='3']");}
 
     get compLocationCells() {return cy.get("[row-id=location] [aria-colindex='3']");}
 
