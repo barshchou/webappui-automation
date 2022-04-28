@@ -62,6 +62,8 @@ class InPlaceRentRollPage extends BasePage {
     get bathroomsCells() {return cy.get("[data-qa^=bathrooms][data-qa$=cell]");}
 
     get unitTypeCells() {return cy.get("[data-qa^=unitLayout][data-qa$=cell]");}
+
+    get monthlyTotalRentValue() {return cy.get("[data-qa='monthlyTotal-rent']");}
 }
 
 export default new InPlaceRentRollPage();
