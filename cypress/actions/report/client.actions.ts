@@ -19,6 +19,11 @@ class ClientActions extends BaseActionsExt<typeof clientPage> {
         return this;
     }
 
+    enterNycbApplicationNumber(name:string): ClientActions{
+        clientPage.nycbApplicationField.clear().type(name).should("have.value", name);
+        return this;
+    }
+
     clickAddClientButton() {
         clientPage.addClientButton.click();
         return this;

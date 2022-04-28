@@ -5,6 +5,8 @@ class ClientPage extends BasePage{
 
     get clientFileNumberField() {return cy.get('[name="clientFileNumber"]');}
 
+    get nycbApplicationField() {return cy.get("[name=applicationNumber]");}
+
     get addClientButton() {return cy.xpath("//a[.='Add']");}
 
     get appraiserCommentary() {return cy.get("[name='clientGuidelinesDiscussion.additionalCommentary']");}
