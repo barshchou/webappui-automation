@@ -12,77 +12,77 @@ class ExpenseHistoryPage extends BasePage{
 
     get grossRevenueCheckboxes() {return cy.get("[data-qa*='grossRevenue.reported'] input");}
 
-    get grossRevenueInputs() {return cy.get("[name$='grossRevenue.total']");}
+    get grossRevenueInputs() {return cy.get("[row-id='grossRevenue'] div.right-aligned-cell:not([col-id=average])");}
+    
+    get realEstateTaxesInputs() {return cy.get("[row-id='realEstateTaxes'] div.right-aligned-cell:not([col-id=average])");}
 
-    get realEstateTaxesInputs() {return cy.get("[name$='expenses.realEstateTaxes.total']");}
+    get insuranceInputs() {return cy.get("[row-id='insurance'] div.right-aligned-cell:not([col-id=average])");}
 
-    get insuranceInputs() {return cy.get("[name$='expenses.insurance.total']");}
+    get electricityInputs() {return cy.get("[row-id='electricity'] div.right-aligned-cell:not([col-id=average])");}
 
-    get electricityInputs() {return cy.get("[row-id='electricity'] div.right-aligned-cell");}
+    get fuelInputs() {return cy.get("[row-id='fuel'] div.right-aligned-cell:not([col-id=average])");}
 
-    get fuelInputs() {return cy.get("[name$='expenses.fuel.total']");}
-
-    get repairsAndMaintenanceInputs() {return cy.get("[name$='expenses.repairsAndMaintenance.total']");}           //!!!!!
+    get repairsAndMaintenanceInputs() {return cy.get("[row-id='repairsAndMaintenance'] div.right-aligned-cell");}           //!!!!!
 
     get fuelCheckboxes() {return cy.get("[data-qa*='expenses.fuel.reported'] input");}
 
     get waterSewerCheckboxes() {return cy.get("[data-qa*='expenses.waterAndSewer.reported'] input");}
 
-    get payrollBenefitsInputs() {return cy.get("[name$='expenses.payrollAndBenefits.total']");}
+    get payrollBenefitsInputs() {return cy.get("[row-id='payrollAndBenefits'] div.right-aligned-cell:not([col-id=average])");}
 
-    get totalOpExpenseCells() {return cy.get("[data-qa='Total Operating Expenses-undefined']");}
+    get totalOpExpenseCells() {return cy.get("[row-id=total] div.right-aligned-cell:not([col-id=average])");}
 
-    get toeExclRealEstTaxesCells() {return cy.get("[data-qa$='(Excl. RE Taxes)-undefined']");}
+    get toeExclRealEstTaxesCells() {return cy.get("[row-id=totalExcludingTaxes] div.right-aligned-cell:not([col-id=average])");}
 
-    get netOpIncomeCells() {return cy.get("[data-qa='Net Operating Income-undefined']");}
+    get netOpIncomeCells() {return cy.get("[row-id=noi] div.right-aligned-cell:not([col-id=average])");}
 
     get expenseHistoryCommentary() {return cy.get("[data-qa^='expenseHistoryDiscussion.commentary']");}
 
-    get averageGrossRevenueCell() {return cy.get("[data-qa='grossRevenue-row'] > td").last();}
+    get averageGrossRevenueCell() {return cy.get("[row-id=grossRevenue] [col-id=average]");}
 
-    get averageRealEstateCell() {return cy.get("[data-qa=realEstateTaxes-row] > td").last();}
+    get averageRealEstateCell() {return cy.get("[row-id='realEstateTaxes'] [col-id=average]");}
 
-    get averageInsuranceCell() {return cy.get("[data-qa=insurance-row] > td").last();}
+    get averageInsuranceCell() {return cy.get("[row-id='insurance'] [col-id=average]");}
 
-    get averageElectricity() {return cy.get("[data-qa=electricity-row] > td").last();}
+    get averageElectricity() {return cy.get("[row-id='electricity'] [col-id=average]");}
 
-    get averageFuelCell() {return cy.get("[data-qa=fuel-row] > td").last();}
+    get averageFuelCell() {return cy.get("[row-id='fuel'] [col-id=average]");}
 
-    get averageWaterSewerCell() {return cy.get("[data-qa=waterAndSewer-row] > td").last();}
+    get averageWaterSewerCell() {return cy.get("[row-id='waterAndSewer'] [col-id=average]");}
 
-    get waterSewerInputs() {return cy.get("[name$='expenses.waterAndSewer.total']");}
+    get waterSewerInputs() {return cy.get("[row-id='waterAndSewer'] div.right-aligned-cell:not([col-id=average])");}
 
-    get averageRepairsCell() {return cy.get("[data-qa=repairsAndMaintenance-row] > td").last();}
+    get averageRepairsCell() {return cy.get("[row-id='repairsAndMaintenance'] [col-id=average]");}
 
-    get repairsInputs() {return cy.get("[name$='expenses.repairsAndMaintenance.total']");}
+    get repairsInputs() {return cy.get("[row-id='repairsAndMaintenance'] div.right-aligned-cell:not([col-id=average])");}
 
-    get averagePayrollCell() {return cy.get("[data-qa=payrollAndBenefits-row] > td").last();}
+    get averagePayrollCell() {return cy.get("[row-id='payrollAndBenefits'] [col-id=average]");}
 
-    get averageAdministrativeCell() {return cy.get("[data-qa=generalAndAdministrative-row] > td").last();}
+    get averageAdministrativeCell() {return cy.get("[row-id='generalAndAdministrative'] [col-id=average]");}
 
-    get administrativeInputs() {return cy.get("[name$='expenses.generalAndAdministrative.total']");}
+    get administrativeInputs() {return cy.get("[row-id='generalAndAdministrative'] div.right-aligned-cell:not([col-id=average])");}
 
-    get averageProfessionalCell() {return cy.get("[data-qa=legalAndProfessionalFees-row] > td").last();}
+    get averageProfessionalCell() {return cy.get("[row-id='legalAndProfessionalFees'] [col-id=average]");}
 
-    get professionalInputs() {return cy.get("[name$='expenses.legalAndProfessionalFees.total']");}
+    get professionalInputs() {return cy.get("[row-id='legalAndProfessionalFees'] div.right-aligned-cell:not([col-id=average])");}
 
-    get averageMiscellaneousCell() {return cy.get("[data-qa=miscellaneous-row] > td").last();}
+    get averageMiscellaneousCell() {return cy.get("[row-id='miscellaneous'] [col-id=average]");}
 
-    get miscellaneousInputs() {return cy.get("[name$='expenses.miscellaneous.total']");}
+    get miscellaneousInputs() {return cy.get("[row-id='miscellaneous'] div.right-aligned-cell:not([col-id=average])");}
 
-    get averageManagementCell() {return cy.get("[data-qa=management-row] > td").last();}
+    get averageManagementCell() {return cy.get("[row-id='management'] [col-id=average]");}
 
-    get managementInputs() {return cy.get("[name$='expenses.management.total']");}
+    get managementInputs() {return cy.get("[row-id='management'] div.right-aligned-cell:not([col-id=average])");}
 
-    get averageReplacementCell() {return cy.get("[data-qa=reserves-row] > td").last();}
+    get averageReplacementCell() {return cy.get("[row-id='reserves'] [col-id=average]");}
 
-    get replacementInputs() {return cy.get("[name$='expenses.reserves.total']");}
+    get replacementInputs() {return cy.get("[row-id='reserves'] div.right-aligned-cell:not([col-id=average])");}
 
-    get toeAverageCell() {return cy.get("[data-qa='Total Operating Expenses-average']");}
+    get toeAverageCell() {return cy.get("[row-id='total'] [col-id=average]");}
 
-    get toeExclRETAverageCell() {return cy.get("[data-qa$='(Excl. RE Taxes)-average']");}
+    get toeExclRETAverageCell() {return cy.get("[row-id='totalExcludingTaxes'] [col-id=average]");}
 
-    get noeAverageCell() {return cy.get("[data-qa='Net Operating Income-average']");}
+    get noeAverageCell() {return cy.get("[row-id='noi'] [col-id=average]");}
 
     get expenseMonth() {return cy.get("[data-qa=expenseMonth-form-control] input");}
 
