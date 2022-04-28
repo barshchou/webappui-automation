@@ -152,7 +152,7 @@ class ExpenseHistoryActions extends BaseActionsExt<typeof expenseHistoryPage>{
     }
 
     /**
-     *
+     * NOTE: please see QA-5202 for more details
      * @returns {ExpenseHistoryActions}
      */
     verifyAverageTable(): ExpenseHistoryActions {

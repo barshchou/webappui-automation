@@ -38,6 +38,7 @@ class ExpenseHistoryPage extends BasePage{
 
     get expenseHistoryCommentary() {return cy.get("[data-qa^='expenseHistoryDiscussion.commentary']");}
 
+    // TODO: see QA-5202 for more details
     get averageGrossRevenueCell() {return cy.get("[row-id=grossRevenue] [col-id=average]");}
 
     get averageRealEstateCell() {return cy.get("[row-id='realEstateTaxes'] [col-id=average]");}
