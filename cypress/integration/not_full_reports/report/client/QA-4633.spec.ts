@@ -16,8 +16,8 @@ describe(`Verify the Revert to Original button functionality for Intended User a
         Report._Client.Page.formEditBtn(0).click();
 
         cy.stepInfo("2. Verify that the Revert to Original button is displayed instead of the Edit button for both sections.");
-        Report._Client.Page.formEditBtn(0).should("be.hidden");
-        Report._Client.Page.formEditBtn(1).should("be.hidden");
+        Report._Client.Page.formCancelButton(0).should("be.visible");
+        Report._Client.Page.formCancelButton(1).should("be.visible");
         Report._Client.Page.formRevertToOriginalBtn(0).should("be.visible");
         Report._Client.Page.formRevertToOriginalBtn(1).should("be.visible");
 
@@ -25,9 +25,7 @@ describe(`Verify the Revert to Original button functionality for Intended User a
         Report._Client.enterIntendedUserTextBox(testData.textToType)
             .clickNarrativeSuggestions(testData.verifySuggestion)
             .enterIdentificationOfTheClientTextBox(testData.textToType)
-            .clickNarrativeSuggestions(testData.verifySuggestion, 1)
-            .Page.formSaveBtn(0).click;
-            Report._Client.Page.formSaveBtn(0).click();
+            .clickNarrativeSuggestions(testData.verifySuggestion, 1);
 
         Report._Client.Page.formRevertToOriginalBtn(0).should("be.enabled");
         Report._Client.Page.formRevertToOriginalBtn(1).should("be.enabled");
