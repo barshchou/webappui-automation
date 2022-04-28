@@ -19,7 +19,8 @@ describe("Comparable Min, Max, Avg values for Repairs & Maintenance Per SF are c
         testData.comparables.forEach((comp) => {
             Income.ComparableExpenses.Actions.clickAddBlankColumnButton()
                 .enterAddressByColumnIndex(comp.address)
-                .enterCellDollarValueByColumnIndex(Income.ComparableExpenses.Page.repairsAndMaintenanceCells, comp.repairsAndMaintenance)
+                .enterCellDollarValueByColumnIndex(Income.ComparableExpenses.Page.getUnifiedEditableAndTotalCells("repairsAndMaintenance"),
+                    comp.repairsAndMaintenance)
                 .enterSquareFeetByColumnIndex(comp.squareFeet);
         });
 
