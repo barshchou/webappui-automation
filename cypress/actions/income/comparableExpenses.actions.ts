@@ -28,9 +28,7 @@ class ComparableExpensesActions extends BaseActions {
     }
 
     chooseExpensePeriodByColumnIndex(periodValue: string, index = 0): this {
-        compExpensesPage.expensePeriodDropdowns.eq(index).focus().dblclick().scrollIntoView().clear()
-            .realType(`${periodValue}{enter}`);
-        // compExpensesPage.getDropdownOptionByValue(periodValue).scrollIntoView().click();
+        compExpensesPage.expensePeriodDropdowns.eq(index).focus().type(`${periodValue}{enter}`);
         compExpensesPage.expensePeriodDropdowns.eq(index).children(compExpensesPage.elementToCheckCellTextSelector)
             .should("have.text", periodValue);
         return this;
