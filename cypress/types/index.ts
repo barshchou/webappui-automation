@@ -39,7 +39,7 @@ namespace BoweryReports {
     /*
     More Unit Groups Values will be added after other values types added
      */
-    export type CommercialUnitGroupsValues = CommercialUnitsUseValues | CommercialUnitsGradeValues | CommercialUnitsFacadeValues;
+    export type CommercialUnitGroupsValues = CommercialUnitsUseValues | CommercialUnitsGradeValues | CommercialUnitsFacadeValues | CommercialUnitsStateValues;
 
 
     export type ForecastItem = { 
