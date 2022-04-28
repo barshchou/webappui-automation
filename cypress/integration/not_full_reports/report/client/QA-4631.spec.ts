@@ -16,14 +16,14 @@ describe("Verify the Cancel button functionality for Intended User and Identific
         Report._Client.Page.formEditBtn(1).should("be.visible");
 
         cy.stepInfo("2. Click on the Edit button for both sections.");
-        Report._Client.Page.formCancelButton(0).click();
-        Report._Client.Page.formCancelButton(0).click();
+        Report._Client.Page.formEditBtn(0).click();
+        Report._Client.Page.formEditBtn(0).click();
 
         cy.stepInfo("3. Verify that the commentary form opens and buttons Cancel, Revert to Original and Save are displayed for both sections.");
-        Report._Client.Page.formCancelButton(0).click();
-        Report._Client.Page.formCancelButton(0).click();
-        Report._Client.verifyIntendedUserTextBox(testData.verifyIntendedUserTextArea)
-            .verifyIdentificationOfTheClientTextBox(testData.verifyIdentificationOfTheClientTextArea);
+        Report._Client.Page.formCancelButton(0).should("be.visible");
+        Report._Client.Page.formCancelButton(1).should("be.visible");
+        Report._Client.Page.formRevertToOriginalBtn(0).should("be.visible");
+        Report._Client.Page.formRevertToOriginalBtn(1).should("be.visible");
 
         deleteReport(testData.reportCreationData.reportNumber);
     });
