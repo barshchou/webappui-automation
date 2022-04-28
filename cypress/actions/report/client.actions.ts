@@ -52,8 +52,8 @@ class ClientActions extends BaseActionsExt<typeof clientPage> {
         return this;
     }
 
-    clickRevertToGeneratedButton() {
-        clientPage.revertToGeneratedButton.click();
+    enterIntendedUserTextBox(textToType: string): ClientActions {
+        clientPage.intendedUserTextBox.type(textToType);
         return this;
     }
 
@@ -67,13 +67,8 @@ class ClientActions extends BaseActionsExt<typeof clientPage> {
         return this;
     } 
 
-    enterIntendedUserTextBox(textToType: string): ClientActions {
-        clientPage.IntendedUserTextBox.type(textToType);
-        return this;
-    }
-
     enterIdentificationOfTheClientTextBox(textToType: string): ClientActions {
-        clientPage.IdentificationOfClientTextBox.type(textToType);
+        clientPage.identificationOfClientTextBox.type(textToType);
         return this;
     }
 
@@ -83,12 +78,22 @@ class ClientActions extends BaseActionsExt<typeof clientPage> {
     }
 
     verifyIntendedUserTextBox(verifyAreaValue: string): ClientActions {
-        clientPage.IntendedUserTextBox.should("contain.text", verifyAreaValue);
+        clientPage.intendedUserTextBox.should("contain.text", verifyAreaValue);
         return this;
     }
 
     verifyIdentificationOfTheClientTextBox(verifyAreaValue: string): ClientActions {
-        clientPage.IdentificationOfClientTextBox.should("contain.text", verifyAreaValue);
+        clientPage.identificationOfClientTextBox.should("contain.text", verifyAreaValue);
+        return this;
+    }
+
+    verifyNotContainIntendedUserTextBox(verifyAreaValue: string): ClientActions {
+        clientPage.intendedUserTextBox.should("not.contain.text", verifyAreaValue);
+        return this;
+    }
+
+    verifyNotContainIdentificationOfTheClientTextBox(verifyAreaValue: string): ClientActions {
+        clientPage.identificationOfClientTextBox.should("not.contain.text", verifyAreaValue);
         return this;
     }
 }
