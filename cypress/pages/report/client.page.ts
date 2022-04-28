@@ -22,11 +22,11 @@ class ClientPage extends BasePage{
 
     get revertToGeneratedButton() {return cy.get("[data-qa=generated-commentary-revert-btn]");}
 
-    get IntendedUserTextBox(){
+    get intendedUserTextBox(){
         return cy.xpath("//*[.='Intended User']//following::*[@data-slate-editor][1]");
     }
 
-    get IdentificationOfClientTextBox(){
+    get identificationOfClientTextBox(){
         return cy.xpath("//*[.='Identification of the Client']//following::*[@data-slate-editor][1]");
     }
     
