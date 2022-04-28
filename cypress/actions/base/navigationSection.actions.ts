@@ -1,11 +1,8 @@
 import navigationSectionPage from "../../pages/base/navigationSection.page";
-import BaseActions from "./base.actions";
+import BaseActionsExt from "./base.actions.ext";
 
-class NavigationSectionActions extends BaseActions {
-    get Page() {
-        return navigationSectionPage;
-    }
-
+class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPage> {
+    
     openReviewAndExport(isWithSave = false) {
         let reportAlias = "docxReportAsync";
         cy.intercept({
@@ -411,4 +408,4 @@ class NavigationSectionActions extends BaseActions {
     }
 }
 
-export default new NavigationSectionActions();
+export default new NavigationSectionActions(navigationSectionPage);
