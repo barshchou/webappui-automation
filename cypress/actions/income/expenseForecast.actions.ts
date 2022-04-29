@@ -20,9 +20,9 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
         return this;
     }
 
-    enterForecastItemForecast(forecastItem: ForecastItem): ExpenseForecastActions {
+    enterForecastItemForecast(forecastItem: ForecastItem, customCategory = false, index = 0): ExpenseForecastActions {
         const valueToBe = `$${numberWithCommas(forecastItem.forecast)}`;
-        expenseForecastPage.getForecastItemForecastInput(forecastItem.name).clear()
+        expenseForecastPage.getForecastItemForecastInput(forecastItem.name, customCategory, index).clear()
             .type(`${forecastItem.forecast}`).should("have.value", valueToBe);
         return this;
     }
@@ -305,6 +305,14 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
                 elem.hide();
             });
         }
+        return this;
+    }
+
+    addCustomExpenseCategory(categoryName): ExpenseForecastActions {
+        expenseForecastPage.createNewCategoryButton.click();
+        expenseForecastPage.newCategoryExpenseName.clear().type(categoryName);
+        this.Page.formSaveBtn(1).click();
+        this.verifyProgressBarNotExist();
         return this;
     }
 }

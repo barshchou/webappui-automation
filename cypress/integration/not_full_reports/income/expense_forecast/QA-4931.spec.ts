@@ -23,19 +23,19 @@ describe("Historical expense Repairs & Maintenance Per Unit is correctly calcula
     NavigationSection.Actions.navigateToExpenseHistory();
 
     cy.stepInfo("2. Add columns for all types of Expense Period: Actual, Actual T12, Annualized Historical and Projection");
-    testData.periods.forEach((per, index) => {
+    testData.periods.forEach((per) => {
       Income.ExpenseHistory.Actions.selectExpensePeriod(per.expensePeriodType)
         .enterExpenseYear(per.year)
         .clickAddExpenseYearButton()
-        .enterRepairsAndMaintenanceByColIndex(per.repairsAndMaintenance, index);
+        .enterRepairsAndMaintenanceByColIndex(per.repairsAndMaintenance);
     });
 
-    testData.periodsMonth.forEach((per, index) => {
+    testData.periodsMonth.forEach((per) => {
       Income.ExpenseHistory.Actions.selectExpensePeriod(per.expensePeriodType)
         .enterExpenseMonth(per.month)
         .enterExpenseYear(per.year)
         .clickAddExpenseYearButton()
-        .enterRepairsAndMaintenanceByColIndex(per.repairsAndMaintenance, index + testData.periods.length);
+        .enterRepairsAndMaintenanceByColIndex(per.repairsAndMaintenance);
     });
 
     cy.stepInfo("3. Fill in Repairs & Maintenance field for all added columns and save changes");

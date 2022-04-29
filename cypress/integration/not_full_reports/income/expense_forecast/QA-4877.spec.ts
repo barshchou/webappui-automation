@@ -15,11 +15,12 @@ describe("Comparable Min, Max, Avg values for Electricity Per SF are correctly c
 
         cy.stepInfo(`2. Add several comps (via Search, Filter or Add blank column) and make sure that Electricity 
         and Square Feet fields are filled in for all added columns and save changes`);
-        testData.comparables.forEach((comp, index) => {
+        testData.comparables.forEach((comp) => {
             Income.ComparableExpenses.Actions.clickAddBlankColumnButton()
-                .enterAddressByColumnIndex(comp.address, index)
-                .enterCellDollarValueByColumnIndex(Income.ComparableExpenses.Page.electricityCells, comp.electricity, index)
-                .enterSquareFeetByColumnIndex(comp.squareFeet, index)
+                .enterAddressByColumnIndex(comp.address)
+                .enterCellDollarValueByColumnIndex(Income.ComparableExpenses.Page.getUnifiedEditableAndTotalCells("electricity"),
+                    comp.electricity)
+                .enterSquareFeetByColumnIndex(comp.squareFeet);
         });
         NavigationSection.Actions.navigateToExpenseForecast();
 
