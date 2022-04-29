@@ -7,6 +7,13 @@
  */
 
 namespace BoweryReports {
+    export type ReportFile = {
+        name: string
+        path: string
+        extension: "docx" | "html",
+        fullPath?: string
+    }
+    
     export type ConclusionValue = "AS_IS" | "AS_STABILIZED" | "AS_COMPLETE" 
     export type ReportCreationOptions = {
         incomeValue?: string,
