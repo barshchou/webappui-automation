@@ -1,17 +1,12 @@
-import { Sales } from './../../../../actions/index';
+import { Sales, ReviewExport } from './../../../../actions/index';
 import testData from "../../../../fixtures/not_full_reports/sales/value_conclusion/QA-4053.fixture";
 import { _NavigationSection } from "../../../../actions/base/index";
 import {createReport, deleteReport} from "../../../../actions/base/baseTest.actions";
 import { _Summary } from "../../../../actions/property";
 
-
 describe("[QA-4053] The Concluded Value Per Unit is calculated correctly and includes both commercial and residential units.", () => {
-
-    before("Login, create report", () => {
-        createReport(testData.reportCreationData);
-    });
-
     it("Test body", { tags: '@to_check_export' }, () => {
+        createReport(testData.reportCreationData);
         cy.stepInfo('Precondition: Navigate to report summary and specify amount of residential and commercial units');
         _NavigationSection.navigateToPropertySummary();
         _Summary.enterNumberOfResUnits(testData.general.residentialUnits).
@@ -32,9 +27,28 @@ describe("[QA-4053] The Concluded Value Per Unit is calculated correctly and inc
             .verifySaleValueConclusion(testData.general.valueConclusion)
             .verifyAsStabilizedAmount(totalValue);
 
-        // TODO: Add export verify
-        // Proceed to the Sales Comparison Approach > Value Opinion via the Sales Comparison Approach and verify the value.
-        
+        _NavigationSection.Actions.openReviewAndExport(true).closeSatisfactionSurvey();
+        ReviewExport.generateDocxReport()
+        .downloadAndConvertDocxReport();
         deleteReport(testData.reportCreationData.reportNumber);
+    });
+    
+    it("Check html report",() => {
+        cy.stepInfo(`
+        Verify the export of the report
+        `);
+        cy.visit(`./cypress/downloads/QA-${Cypress.spec.specFilter}.html`);
+
+        cy.stepInfo(`
+        Proceed to the Sales Comparison Approach > Value Opinion via the Sales Comparison Approach and verify the value.
+        `);
+        cy.contains("Value Opinion via the Sales Comparison Approach").next("table")
+        .scrollIntoView()
+        .within(() => {
+            cy.contains("Concluded Value Per Unit").should("exist")
+            .parents("tr").within(() => {
+                cy.contains(`${testData.general.valueConclusion}`).should("exist");
+            });
+        });
     });
 });
