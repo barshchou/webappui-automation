@@ -398,8 +398,8 @@ class ProFormaActions extends BaseActionsExt<typeof proFormaPage> {
         return this;
     }
 
-    verifyCustomTotal(totalToBe: string, categoryName: string): this{
-        proFormaPage.customTotal(categoryName).should("have.text", totalToBe);
+    verifyCategoryTotal(totalToBe: string, categoryName: string): this{
+        proFormaPage.categoryCellTotal(categoryName).should("have.text", totalToBe);
         return this;
     }
     

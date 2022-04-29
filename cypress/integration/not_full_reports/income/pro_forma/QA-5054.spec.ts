@@ -2,6 +2,8 @@ import testData from "../../../../fixtures/not_full_reports/income/pro_forma/QA-
 import {createReport, deleteReport} from "../../../../actions/base/baseTest.actions";
 import { Income } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
+import enums from "../../../../enums/enums";
+
 
 describe("[QA-5054] Appraiser's Forecast of Custom Expense Forecast is included in calculation", () => {
     before("Login, create report", () => {
@@ -20,13 +22,13 @@ describe("[QA-5054] Appraiser's Forecast of Custom Expense Forecast is included 
         
         cy.stepInfo("2. Navigate to Proform page and validate Custom Expense Forecast is included in calculation");
         _NavigationSection.navigateToProForma();
-        Income._ProFormaActions.verifyCustomTotal(testData.customTotal, testData.customCategory.name)
-            .verifyTotalReserves(testData.reserverstotal)
-            .verifyFuelTotal(testData.fuelTotal)
-            .verifyWaterAndSewerTotal(testData.waterAndSewerTotal)
-            .verifyTotalToe(testData.totalToe)
-            .verifyTotalToeNetRe(testData.totalToeNetRe)
-            .verifyTotalNetOpIncome(testData.netOperationIncome);
+        Income._ProFormaActions.verifyCategoryTotal(testData.customTotal, testData.customCategory.name)
+            .verifyCategoryTotal(testData.reserverstotal, enums.PRO_FORMA_TYPES.replacementsAndReserves)
+            .verifyCategoryTotal(testData.waterAndSewerTotal, enums.PRO_FORMA_TYPES.waterAndSewer)
+            .verifyCategoryTotal(testData.fuelTotal, enums.PRO_FORMA_TYPES.fuel)
+            .verifyCategoryTotal(testData.totalToe, enums.PRO_FORMA_TYPES.totalOperatingExpenses)
+            .verifyCategoryTotal(testData.totalToeNetRe, enums.PRO_FORMA_TYPES.totalOperatingExpensesExTaxes)
+            .verifyCategoryTotal(testData.netOperationIncome, enums.PRO_FORMA_TYPES.netOperatingIncome);
 
         deleteReport(testData.reportCreationData.reportNumber);
     });
