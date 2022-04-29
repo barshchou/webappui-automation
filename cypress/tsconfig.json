@@ -2,7 +2,7 @@
     "compilerOptions": {
       "target": "es5",
       "lib": ["esnext", "dom"],
-      "types": ["cypress", "cypress-grep"]
+      "types": ["cypress", "cypress-real-events", "cypress-grep"]
     },
     "include": ["**/*.ts"]
 }
