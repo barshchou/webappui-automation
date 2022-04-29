@@ -11,7 +11,7 @@
 
 // This function is called when a project is opened or re-opened (e.g. due to
 // the project's config changing)
-const { existsSync, writeFileSync } = require("fs");
+const { existsSync, writeFileSync, renameSync } = require("fs");
 const mammoth = require("mammoth");
 const {
   addMatchImageSnapshotPlugin,
@@ -63,6 +63,11 @@ const _convertDocxToHtml = async (report) => {
   return null;
 }
 
+const _renameHtmlReportFile = (path,oldName,newName) =>{
+  renameSync(`./${path}/${oldName}.html`,`./${path}/${newName}.html`)
+  return null;
+}
+
 //#endregion
 
 /**
@@ -93,6 +98,12 @@ module.exports = (on, config) => {
   on("task",{
     async convertDocxToHtml(report){
       return await _convertDocxToHtml(report);
+    }
+  });
+
+  on("task",{
+    async renameHtmlReportFile({path,oldName,newName}){
+      return _renameHtmlReportFile(path,oldName,newName);
     }
   });
 

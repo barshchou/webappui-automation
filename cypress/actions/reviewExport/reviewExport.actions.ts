@@ -34,6 +34,8 @@ class ReviewExportActions extends BaseActions {
             cy.task("convertDocxToHtml",reportFile).then(value => {
                 cy.log(<any>value);
             });
+            cy.task("renameHtmlReportFile",
+            {path: reportFile.path,oldName: reportFile.name,newName: `QA-${Cypress.spec.specFilter}`});
         });
         return this;
     }
