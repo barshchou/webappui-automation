@@ -18,12 +18,18 @@ describe(`Verify that Generated Commentary for Total Operating Expenses
             .chooseExpensePeriodByColumnIndex(testData.comparable.period)
             .enterSquareFeetByColumnIndex(testData.comparable.squareFeet)
             .enterResidentialUnitsByColumnIndex(testData.comparable.resUnits)
-            .enterCellDollarValueByColumnIndex(Income.ComparableExpenses.Page.insuranceCells, testData.comparable.insurance)
-            .enterCellDollarValueByColumnIndex(Income.ComparableExpenses.Page.electricityCells, testData.comparable.electricity)
-            .enterCellDollarValueByColumnIndex(Income.ComparableExpenses.Page.repairsCells, testData.comparable.repairsAndMaintenance)
-            .enterCellDollarValueByColumnIndex(Income.ComparableExpenses.Page.payrollCells, testData.comparable.payrollAndBenefits)
-            .enterCellDollarValueByColumnIndex(Income.ComparableExpenses.Page.generalCells, testData.comparable.generalAndAdministrative)
-            .enterCellDollarValueByColumnIndex(Income.ComparableExpenses.Page.managementFeesCells, testData.comparable.management)
+            .enterCellDollarValueByColumnIndex(Income.ComparableExpenses.Page.getUnifiedEditableAndTotalCells("insurance"),
+                testData.comparable.insurance)
+            .enterCellDollarValueByColumnIndex(Income.ComparableExpenses.Page.getUnifiedEditableAndTotalCells("electricity"),
+                testData.comparable.electricity)
+            .enterCellDollarValueByColumnIndex(Income.ComparableExpenses.Page.getUnifiedEditableAndTotalCells("repairsAndMaintenance"),
+                testData.comparable.repairsAndMaintenance)
+            .enterCellDollarValueByColumnIndex(Income.ComparableExpenses.Page.getUnifiedEditableAndTotalCells("payrollAndBenefits"),
+                testData.comparable.payrollAndBenefits)
+            .enterCellDollarValueByColumnIndex(Income.ComparableExpenses.Page.getUnifiedEditableAndTotalCells("generalAndAdministrative"),
+                testData.comparable.generalAndAdministrative)
+            .enterCellDollarValueByColumnIndex(Income.ComparableExpenses.Page.getUnifiedEditableAndTotalCells("management"),
+                testData.comparable.management)
             .verifyTOEByColumnIndex(testData.comparable.toe)
             .verifyTOEPerSFByColumnIndex()
             .verifyToePerUnitByColumnIndex();
