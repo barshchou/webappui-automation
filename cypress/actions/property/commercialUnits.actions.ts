@@ -98,18 +98,13 @@ class CommercialUnitsActions extends BaseActionsExt<typeof commercialUnitsPage> 
         return this;
     }
 
-    sumAllUnitSFByUnitIndex(squareFeetList: Array<number>) {
-        let sumOfUnitsSF = 0;
-        for (let i = 0; i < squareFeetList.length; i++) {
-            sumOfUnitsSF += squareFeetList[i];
-        }
-        return sumOfUnitsSF;
-    }
-
     verifyCommercialGrossLeasableAreaEqualSumUnitSF(squareFeetList: Array<number>): this {
+        const sumAllUnitSFInArray = squareFeetList.reduce(
+            (previousValue, currentValue) => previousValue + currentValue
+        );
         commercialUnitsPage.commercialGrossLeasableAreaTextArea.invoke('prop', 'defaultValue').then(defaultValue => {
             const valueOfGrossLeasableAreaTextArea = parseInt(defaultValue);
-            expect(valueOfGrossLeasableAreaTextArea).to.be.equal(this.sumAllUnitSFByUnitIndex(squareFeetList));
+            expect(valueOfGrossLeasableAreaTextArea).to.be.equal(sumAllUnitSFInArray);
         });
         return this;
     }
