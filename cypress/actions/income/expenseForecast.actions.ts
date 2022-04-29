@@ -22,8 +22,10 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
 
     enterForecastItemForecast(forecastItem: ForecastItem, customCategory = false, index = 0): ExpenseForecastActions {
         const valueToBe = `$${numberWithCommas(forecastItem.forecast)}`;
-        expenseForecastPage.getForecastItemForecastInput(forecastItem.name, customCategory, index).clear()
+        if (forecastItem.name != "total") {
+            expenseForecastPage.getForecastItemForecastInput(forecastItem.name, customCategory, index).clear()
             .type(`${forecastItem.forecast}`).should("have.value", valueToBe);
+        }
         return this;
     }
 

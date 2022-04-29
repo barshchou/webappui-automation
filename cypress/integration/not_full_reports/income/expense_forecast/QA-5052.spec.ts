@@ -25,12 +25,14 @@ describe(`[QA-5052] Appraiser's Forecast of Custom Expense Forecast is included 
         testData.expensesItems.forEach(foreCastItem => {
             Income._ExpenseForecastActions.enterForecastItemForecast(foreCastItem);
         });
-        Income._ExpenseForecastActions.enterForecastItemForecast(testData.firstCustomCategory, true);
-        Income._ExpenseForecastActions.enterForecastItemForecast(testData.secondCustomCategory, true);
+        Income._ExpenseForecastActions.enterForecastItemForecast(testData.firstCustomCategory, true, 0);
+        Income._ExpenseForecastActions.enterForecastItemForecast(testData.secondCustomCategory, true, 1);
         
         cy.stepInfo(`[QA-5052] => 4. Verify total expenses calculation and commentary`);
-        Income._ExpenseForecastActions.verifyForecastCommentary(testData.commentaryTotalExpenses.generatedPerSF, testData.expensesItems.find(itemName => itemName.name=="total"))
+        Income._ExpenseForecastActions.verifyTOECommentary(testData.commentaryTotalExpenses.generatedPerSF)
             .verifyTotalForecast();
+
+        cy.stepInfo(`[QA-5052] => 5. Verify if Sliding bar graphic on Total Operating Expenses card is displayed correctly`);
         Income._ExpenseForecastActions.Actions.matchElementSnapshot(
             Income._ExpenseForecastActions.Page.toeCard, testData.totalExpensesSnapshotName, {padding: [10, 100]}
         );

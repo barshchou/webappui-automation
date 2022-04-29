@@ -11,7 +11,7 @@ class ExpenseForecastPage extends BasePage {
 
     get repairsAndMaintenanceCard() { return cy.get("[data-qa=repairsMaintenance-forecast-item] > div").last(); }
 
-    get toeCard() {return cy.xpath("//*[.='TOTAL OPERATING EXPENSES']/../..");}
+    get toeCard() {return cy.xpath("//*[.='TOTAL OPERATING EXPENSES ($/SF)']/parent::div").first();}
 
     getForecastItemBasisRadio(item) {return cy.get(`[name='${item}.basis']`);}
 
@@ -19,7 +19,7 @@ class ExpenseForecastPage extends BasePage {
 
     getElementBasisToSwitch(forecastItem: BoweryReports.ForecastItemBasis, radioValue: BoweryReports.UnitSF) {return cy.get(`[name='${forecastItem}.basis'][value='${radioValue}']`);}
 
-    getForecastItemForecastInput(item, custom = false, index = 0) {return !custom ? cy.get(`[name='${item}.concludedValue']`) : cy.get(`[name='${item}Expenses[${index}].concludedValue']`);}
+    getForecastItemForecastInput(item: string, custom = false, index = 0) {return !custom ? cy.get(`[name='${item}.concludedValue']`) : cy.get(`[name='customExpenses[${index}].concludedValue']`);}
 
     getForecastItemCompMin(item) {return cy.get(`[data-qa=${item}-forecast-item] [data-qa=comp-min]`);}
 
