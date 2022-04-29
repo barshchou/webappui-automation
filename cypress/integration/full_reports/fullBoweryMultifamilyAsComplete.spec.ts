@@ -295,12 +295,18 @@ describe("Full bowery way, multifamily as complete report", () => {
                 .chooseExpensePeriodByColumnIndex(comp.period, i)
                 .enterSquareFeetByColumnIndex(comp.squareFeet, i)
                 .enterResidentialUnitsByColumnIndex(comp.resUnits, i)
-                .enterCellDollarValueByColumnIndex(Income.ComparableExpenses.Page.insuranceCells, comp.insurance, i)
-                .enterCellDollarValueByColumnIndex(Income.ComparableExpenses.Page.electricityCells, comp.electricity, i)
-                .enterCellDollarValueByColumnIndex(Income.ComparableExpenses.Page.repairsCells, comp.repairsAndMaintenance, i)
-                .enterCellDollarValueByColumnIndex(Income.ComparableExpenses.Page.payrollCells, comp.payrollAndBenefits, i)
-                .enterCellDollarValueByColumnIndex(Income.ComparableExpenses.Page.generalCells, comp.generalAndAdministrative, i)
-                .enterCellDollarValueByColumnIndex(Income.ComparableExpenses.Page.managementFeesCells, comp.management, i)
+                .enterCellDollarValueByColumnIndex(Income.ComparableExpenses.Page.getUnifiedEditableAndTotalCells("insurance"),
+                    comp.insurance, i)
+                .enterCellDollarValueByColumnIndex(Income.ComparableExpenses.Page.getUnifiedEditableAndTotalCells("electricity"),
+                    comp.electricity, i)
+                .enterCellDollarValueByColumnIndex(Income.ComparableExpenses.Page.getUnifiedEditableAndTotalCells("repairsAndMaintenance"),
+                    comp.repairsAndMaintenance, i)
+                .enterCellDollarValueByColumnIndex(Income.ComparableExpenses.Page.getUnifiedEditableAndTotalCells("payrollAndBenefits"),
+                    comp.payrollAndBenefits, i)
+                .enterCellDollarValueByColumnIndex(Income.ComparableExpenses.Page.getUnifiedEditableAndTotalCells("generalAndAdministrative"),
+                    comp.generalAndAdministrative, i)
+                .enterCellDollarValueByColumnIndex(Income.ComparableExpenses.Page.getUnifiedEditableAndTotalCells("management"),
+                    comp.management, i)
                 .verifyTOEByColumnIndex(comp.toe, i)
                 .verifyTOEPerSFByColumnIndex(i)
                 .verifyToePerUnitByColumnIndex(i);

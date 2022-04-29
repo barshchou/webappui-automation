@@ -63,7 +63,7 @@ export const getQuarter = (dateString) => {
 
 export const getCurrentMonthName = (): string => {
     const date = new Date();
-    return date.toLocaleDateString(undefined, {month: "long"});
+    return date.toDateString();
 }
 
 export const isCorrectQuarter = (quarter) => {
