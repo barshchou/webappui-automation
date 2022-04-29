@@ -51,7 +51,7 @@ const _waitForFileExists = async (filePath, currentTime = 0, timeout = 60000) =>
  */
 const _convertDocxToHtml = async (report) => {
   let result = await mammoth.convertToHtml({path: `${report.path}/${report.name}.${report.extension}`});
-  writeFileSync(`./${report.path}/${report.name}.html`,result.value);
+  writeFileSync(`${report.path}/${report.name}.html`,result.value);
   /**
    * ernst: returning null in order to avoid error:
    * `
@@ -63,8 +63,8 @@ const _convertDocxToHtml = async (report) => {
   return null;
 }
 
-const _renameHtmlReportFile = (path,oldName,newName) =>{
-  renameSync(`./${path}/${oldName}.html`,`./${path}/${newName}.html`)
+const _renameFile = (oldPath,newPath) =>{
+  renameSync(`./${oldPath}`,`./${newPath}`)
   return null;
 }
 
@@ -101,8 +101,8 @@ module.exports = (on, config) => {
   });
 
   on("task",{
-    async renameHtmlReportFile({path,oldName,newName}){
-      return _renameHtmlReportFile(path,oldName,newName);
+    async renameFile({oldPath,newPath}){
+      return _renameFile(oldPath,newPath);
     }
   });
 

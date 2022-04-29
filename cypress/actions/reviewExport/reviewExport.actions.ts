@@ -37,10 +37,17 @@ class ReviewExportActions extends BaseActions {
             /**
              * ernst: if you wish to see "tasks" code - go to cypress/plugins/index.js to the section Cypress Tasks
              */
+            const testIdReportName = `QA-${Cypress.spec.specFilter}`;
             cy.task("waitForFileExists",`${reportFile.path}/${reportFile.name}.${reportFile.extension}`);
-            cy.task("convertDocxToHtml",reportFile);
-            cy.task("renameHtmlReportFile",
-            {path: reportFile.path,oldName: reportFile.name,newName: `QA-${Cypress.spec.specFilter}`});
+            cy.task("convertDocxToHtml",reportFile);            
+            cy.task("renameFile",{
+                oldPath:`${reportFile.path}/${reportFile.name}.docx`,
+                newPath:`${reportFile.path}/${testIdReportName}.docx`
+            });
+            cy.task("renameFile",{
+                oldPath:`${reportFile.path}/${reportFile.name}.html`,
+                newPath:`${reportFile.path}/${testIdReportName}.html`
+            });
         });
         return this;
     }
