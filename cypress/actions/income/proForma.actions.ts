@@ -402,17 +402,17 @@ class ProFormaActions extends BaseActionsExt<typeof proFormaPage> {
         proFormaPage.categoryCellTotal(categoryName).should("have.text", totalToBe);
         return this;
     }
+
+    verifyCategoryPSFTotal(totalToBe: string, categoryName: string): this{
+        proFormaPage.categoryPSFTotal(categoryName).should("have.text", totalToBe);
+        return this;
+    }
+
+    verifyCategoryPerUnitTotal(totalToBe: string, categoryName: string): this{
+        proFormaPage.categoryPerUnitTotal(categoryName).should("have.text", totalToBe);
+        return this;
+    }
     
-    verifyFuelTotal(totalToBe: string): this{
-        proFormaPage.getFuelTotal.should("have.text", totalToBe);
-        return this;
-    }
-
-    verifyWaterAndSewerTotal(totalToBe: string): this{
-        proFormaPage.getWaterAndSewerTotal.should("have.text", totalToBe);
-        return this;
-    }
-
 }
 
 export default new ProFormaActions(proFormaPage);

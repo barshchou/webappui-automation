@@ -140,9 +140,19 @@ class ProFormaPage extends BasePage {
         return cy.get(`[row-id^='${this.capitalizeFirstLetter(customCategoryName)}'] [role=gridcell][col-id=total]`);
     }
 
-    get getFuelTotal() {return cy.get("[data-qa=fuel-total-cell]");}
+    categoryPSFTotal(customCategoryName: string) {
+        if (customCategoryName == enums.PRO_FORMA_TYPES.totalOperatingExpenses){
+            return cy.get(`[row-id^='${this.capitalizeFirstLetter(customCategoryName)}'] [role=gridcell][col-id=psf]`).first();
+        }
+        return cy.get(`[row-id^='${this.capitalizeFirstLetter(customCategoryName)}'] [role=gridcell][col-id=psf]`);
+    }
 
-    get getWaterAndSewerTotal() {return cy.get("[data-qa=waterAndSewer-total-cell]");}
+    categoryPerUnitTotal(customCategoryName: string) {
+        if (customCategoryName == enums.PRO_FORMA_TYPES.totalOperatingExpenses){
+            return cy.get(`[row-id^='${this.capitalizeFirstLetter(customCategoryName)}'] [role=gridcell][col-id=perUnit]`).first();
+        }
+        return cy.get(`[row-id^='${this.capitalizeFirstLetter(customCategoryName)}'] [role=gridcell][col-id=perUnit]`);
+    }
 
     private capitalizeFirstLetter(string: string) {
         return string.charAt(0).toUpperCase() + string.slice(1);
