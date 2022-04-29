@@ -1,3 +1,4 @@
+import enums from "../../enums/enums";
 import BasePage from "../base/base.page";
 
 class ProFormaPage extends BasePage {
@@ -98,27 +99,55 @@ class ProFormaPage extends BasePage {
         return cy.contains(`Less ${firstPart} V/C Loss`);
     }
 
-    getCommercialUseVCLossPerUnitCell(useText) {return this.getCommercialUseVCLossRow(useText).siblings("[data-qa*=perUnit]");}
+    getCommercialUseVCLossPerUnitCell(useText) {return this.getCommercialUseVCLossRow(useText).siblings('[col-id="perUnit"]');}
 
-    getCommercialUseVCLossTotal(useText) {return this.getCommercialUseVCLossRow(useText).siblings("[data-qa*=total]");}
+    getCommercialUseVCLossTotal(useText) {return this.getCommercialUseVCLossRow(useText).siblings('[col-id="total"]');}
 
-    getCommercialUseVCLossPerSF(useText) {return this.getCommercialUseVCLossRow(useText).siblings("[data-qa*=psf]");}
+    getCommercialUseVCLossPerSF(useText) {return this.getCommercialUseVCLossRow(useText).siblings('[col-id="psf"]');}
 
-    get residentialVCLossLabelCell() {return cy.get("[data-qa=residentialVCLossAmount-label-cell]");}
+    get residentialVCLossLabelCell() {
+        return cy
+        .xpath('(//div[@row-id="Potential Gross Income_2"])[2]//following-sibling::div[@role="row"]')
+        .eq(0);
+    }
 
-    get residentialVCLossTotal() {return cy.get("[data-qa=residentialVCLossAmount-total-cell]");}
+    get residentialVCLossTotal() {
+        return this.residentialVCLossLabelCell.children('[col-id="total"]');
+    }
 
-    get residentialVCLossPerSF() {return cy.get("[data-qa=residentialVCLossAmount-psf-cell]");}
+    get residentialVCLossPerSF() {
+        return this.residentialVCLossLabelCell.children('[col-id="psf"]');
+    }
 
-    get residentialVCLossPerUnit() {return cy.get("[data-qa=residentialVCLossAmount-perUnit-cell]");}
+    get residentialVCLossPerUnit() {
+        return this.residentialVCLossLabelCell.children('[col-id="perUnit"]');
+    }
 
     getCommercialUseVCLossLabel(useText: string) {
-        const attributeToBe = useText === "Undetermined" || useText === "Industrial" ?
-            `${useText}Commercial` : useText.replaceAll(" ", "");
-        return cy.get(`[data-qa='less${attributeToBe}VCLoss-label-cell']`);
+        // const attributeToBe = useText === "Undetermined" || useText === "Industrial" ?
+        //     `${useText}Commercial` : useText.replaceAll(" ", "");
+        // return cy.get(`[data-qa='less${attributeToBe}VCLoss-label-cell']`);
+        // TODO: add more robust method later
+        return this.residentialVCLossLabelCell;
     }
 
     get includeNOIComparisonCheckbox() {return cy.get("[data-qa^=includeNOIComparison] input");}
+
+    categoryCellTotal(customCategoryName: string) {
+        if (customCategoryName == enums.PRO_FORMA_TYPES.totalOperatingExpenses){
+            return cy.get(`[row-id^='${this.capitalizeFirstLetter(customCategoryName)}'] [role=gridcell][col-id=total]`).first();
+        }
+        return cy.get(`[row-id^='${this.capitalizeFirstLetter(customCategoryName)}'] [role=gridcell][col-id=total]`);
+    }
+
+    get getFuelTotal() {return cy.get("[data-qa=fuel-total-cell]");}
+
+    get getWaterAndSewerTotal() {return cy.get("[data-qa=waterAndSewer-total-cell]");}
+
+    private capitalizeFirstLetter(string: string) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+      }
+    
 }
 
 export default new ProFormaPage();
