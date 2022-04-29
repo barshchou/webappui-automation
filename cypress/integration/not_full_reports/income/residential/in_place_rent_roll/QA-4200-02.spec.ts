@@ -9,7 +9,7 @@ describe("Verify the Import manager functionality", () => {
         createReport(testData.reportCreationData);
     });
 
-    it("Test body", () => {
+    it("Test body", { tags: '@fix' }, () => {
         NavigationSection.navigateToResInPlaceRentRoll();
         Income.Residential.InPlaceRentRoll.verifyViaCSVExist();
         Income.Residential.InPlaceRentRoll.verifyUploadCSVRow(testData.links);
@@ -18,7 +18,7 @@ describe("Verify the Import manager functionality", () => {
         cy.reload();
         Income.Residential.InPlaceRentRoll.uploadFile(testData.xlsxFileName, testData.numberOfUnits)
             .goToPropSummaryWithSaveLeavingFirst();
-        Property.Summary.verifyThatPageIsOpened()
+        Property.Summary.verifyThatPageIsOpened(Property.Summary.Page.headerSection, testData.verifyUrl)
             .enterNumberOfResUnits(testData.numberOfUnitsToChange)
             .goBackWithSave();
         Income.Residential.InPlaceRentRoll.uploadFile(testData.csvFileName, testData.csvNumberOfUnits);

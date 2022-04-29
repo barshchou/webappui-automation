@@ -18,16 +18,6 @@ class StabilizedRentRollActions extends BaseActionsExt<typeof stabRenRollPage>{
         return this;
     }
 
-    verifyThatPageIsOpened(): this {
-        stabRenRollPage.stabilizedRentRollheaderSection.should("be.visible");
-        cy.url().then(url => {
-            let urlObj = new URL(url);
-            cy.log("Check whether current URL ends with '/commercial-projected-rent-roll'");
-            cy.wrap(urlObj.pathname.endsWith("/commercial-projected-rent-roll")).should("be.true");
-        });
-        return this;
-    }
-
     verifyLeaseStatusByRow(leaseStatus: BoweryReports.LeaseStatus, rowNumber = 0): this {
         stabRenRollPage.leaseStatusCells.eq(rowNumber).should("contain.text", leaseStatus);
         return this;

@@ -9,14 +9,14 @@ describe(" Verify the Number of Residential Units section on the In-Place Rent R
         createReport(testData.reportCreationData);
     });
 
-    it("Test body", () => {
+    it("Test body", { tags: '@fix' }, () => {
         NavigationSection.navigateToPropertySummary();
         Property.Summary.enterNumberOfResUnits(testData.numberOfUnits);
         NavigationSection.navigateToResInPlaceRentRoll();
         Income.Residential.InPlaceRentRoll.enterAllEqualRentTypeCells(testData.rentType)
             .verifyNumberOfResidentialUnits(testData.numberOfUnits)
             .goToPropSummaryWithSaveLeavingFirst();
-        Property.Summary.verifyThatPageIsOpened();
+        Property.Summary.verifyThatPageIsOpened(Property.Summary.Page.headerSection, testData.verifyUrl);
         deleteReport(testData.reportCreationData.reportNumber);
     });
 });

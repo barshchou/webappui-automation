@@ -69,6 +69,16 @@ export default class BaseActions {
         return this;
     }
 
+    verifyThatPageIsOpened(section: Cypress.Chainable, endsWith: string ): this {
+        section.should("be.visible");
+        cy.url().then(url => {
+            let urlObj = new URL(url);
+            cy.log(`Check whether current URL ends with ${endsWith}`);
+            cy.wrap(urlObj.pathname.endsWith(`${endsWith}`)).should("be.true");
+        });
+        return this;
+    }
+
     /**
      * Retrive DOM-element screenshot and compares it with baseline.
      * @param element - PageElement to be snapshoted. 

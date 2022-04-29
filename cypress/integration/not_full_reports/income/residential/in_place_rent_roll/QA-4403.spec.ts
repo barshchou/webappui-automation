@@ -9,16 +9,16 @@ describe("Verify the Unsaved changes modal functionality", () => {
         createReport(testData.reportCreationData);
     });
 
-    it("Test body", () => {
+    it("Test body", { tags: '@fix' }, () => {
         NavigationSection.navigateToResInPlaceRentRoll();
         Income.Residential.InPlaceRentRoll.checkCheckboxByLabel(testData.forecastLabel)
             .goToPropSummaryWithSaveSaveClickFirst();
-        Property.Summary.verifyThatPageIsOpened()
+        Property.Summary.verifyThatPageIsOpened(Property.Summary.Page.headerSection, testData.verifyUrl)
             .goBackWithSave();
         Income.Residential.InPlaceRentRoll.verifyCheckboxIsChecked(testData.forecastLabel)
             .uncheckCheckboxByLabel(testData.forecastLabel)
             .goToPropSummaryWithoutSave();
-        Property.Summary.verifyThatPageIsOpened()
+        Property.Summary.verifyThatPageIsOpened(Property.Summary.Page.headerSection, testData.verifyUrl)
             .goBackWithSave();
         Income.Residential.InPlaceRentRoll.verifyCheckboxIsChecked(testData.forecastLabel);
         deleteReport(testData.reportCreationData.reportNumber);

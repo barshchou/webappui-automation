@@ -10,5 +10,6 @@ export default {
     numberOfUnitsToChange: 1,
     csvFileName: "not_full_reports/Rent_Roll_CSV.csv",
     csvNumberOfUnits: 23,
-    xlsxFileName: "not_full_reports/Rent_Roll_XLSX.xlsx"
+    xlsxFileName: "not_full_reports/Rent_Roll_XLSX.xlsx",
+    verifyUrl: "/property-summary"
 };

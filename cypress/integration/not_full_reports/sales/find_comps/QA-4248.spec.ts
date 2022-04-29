@@ -10,7 +10,7 @@ describe("Verify the Comps can be added by entering the existing Report ID in th
         createReport(testData.reportCreationData);
     });
 
-    it("Test body", () => {
+    it("Test body", { tags: '@fix' }, () => {
         NavigationSection.navigateToFindComps();
         Sales.FindComps.selectCompFromMapByAddress(testData.comparable.address)
             .clickSaveContinueButton();
@@ -19,7 +19,8 @@ describe("Verify the Comps can be added by entering the existing Report ID in th
             const reportID = url.replace("/sales-comps-map", "").replace(`${getEnvUrl()}/report/`, "");
             cy.log(`Current report ID is ${reportID}`);
             Sales.CreateCompMap.returnToHomePage();
-            Homepage.verifyThatPageIsOpened()
+            Sales.CreateCompMap.verifyProgressBarNotExist();
+            Homepage.verifyThatPageIsOpened(Homepage.Page.createReportButton, testData.verifyUrl)
                 .verifyProgressBarNotExist();
             Homepage.createReport(testData.reportCreationData);
             NavigationSection.navigateToFindComps();

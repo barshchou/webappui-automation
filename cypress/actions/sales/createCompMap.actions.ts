@@ -1,12 +1,9 @@
-import BaseActions from "../base/base.actions";
 import createCompMapPage from "../../pages/sales/createCompMap.page";
+import BaseActionsExt from "../base/base.actions.ext";
 
-class CreateCompMapActions extends BaseActions {
+class CreateCompMapActions extends BaseActionsExt<typeof createCompMapPage> {
 
-    /**
-     * @returns {CreateCompMapActions}
-     */
-    captureScreen() {
+    captureScreen(): CreateCompMapActions {
         createCompMapPage.openWizardButton.click();
         createCompMapPage.zoomInButton.click();
         createCompMapPage.captureScreenButton.click();
@@ -20,4 +17,4 @@ class CreateCompMapActions extends BaseActions {
     }
 }
 
-export default new CreateCompMapActions();
+export default new CreateCompMapActions(createCompMapPage);

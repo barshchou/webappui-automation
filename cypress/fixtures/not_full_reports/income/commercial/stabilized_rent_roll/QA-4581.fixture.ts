@@ -12,5 +12,7 @@ export default {
     numberOfCommercialUnits: 3,
     isInspected: [true, false, true],
     leaseStatuses: ["Vacant", "Occupied", "Vacant"] as Array<BoweryReports.LeaseStatus>,
-    rentToBe: [100, 0, 150]
+    rentToBe: [100, 0, 150],
+    firstVerifyUrl: "/commercial-projected-rent-roll",
+    secondVerifyUrl: "/laundry-income"
 };

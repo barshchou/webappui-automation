@@ -1,8 +1,8 @@
 import { interceptReportId, setReportId } from "../../../utils/intercept.utils";
 import homepagePage from "../../pages/base/homepage.page";
-import BaseActions from "./base.actions";
+import BaseActionsExt from "./base.actions.ext";
 
-class HomepageActions extends BaseActions {
+class HomepageActions extends BaseActionsExt<typeof homepagePage> {
 
     createReport(data: BoweryAutomation.ReportCreationData): this {
         interceptReportId();
@@ -47,40 +47,22 @@ class HomepageActions extends BaseActions {
         return this;
     }
 
-    /**
-     *
-     * @returns {HomepageActions}
-     */
-    clickSubmitButton() {
+    clickSubmitButton(): HomepageActions {
         homepagePage.submitButton.should("not.be.disabled").click({ force: true});
         return this;
     }
 
-    /**
-     *
-     * @returns {HomepageActions}
-     */
-    clickToSearchResultRow() {
+    clickToSearchResultRow(): HomepageActions {
         homepagePage.searchResultsRows.should("be.visible").click();
         return this;
     }
 
-    /**
-     *
-     * @param {string} reportNumber
-     * @returns {HomepageActions}
-     */
-    enterReportNumber(reportNumber: string) {
+    enterReportNumber(reportNumber: string): HomepageActions {
         homepagePage.reportNumberInput.type(reportNumber).should("have.value", reportNumber);
         return this;
     }
 
-    /**
-     *
-     * @param {string} typeValue
-     * @returns {HomepageActions}
-     */
-    checkTemplateType(typeValue: string) {
+    checkTemplateType(typeValue: string): HomepageActions {
         homepagePage.templateTypesRadios.check(typeValue);
         return this;
     }
@@ -90,30 +72,19 @@ class HomepageActions extends BaseActions {
         return this;
     }
 
-
     checkConclusionType(value: string) {
         homepagePage.valueConclusionsRadios.check(value);
         return this;
     }
 
-    /**
-     *
-     * @returns {HomepageActions}
-     *
-     */
-    clickCreateReportButton() {
+    clickCreateReportButton(): HomepageActions {
         homepagePage.createReportButton.should("not.be.disabled").click();
         homepagePage.keyInfoBlock.should("be.visible");
 
         return this;
     }
 
-    /**
-     *
-     * @param {string} number
-     * @returns {HomepageActions}
-     */
-    enterReportNumberToSearch(number: string) {
+    enterReportNumberToSearch(number: string): HomepageActions {
         homepagePage.reportNumberSearchField.scrollIntoView().should("be.visible")
         .type(number).should("have.value", number);
         return this;
@@ -124,70 +95,38 @@ class HomepageActions extends BaseActions {
         return this;
     }
 
-    /**
-     *
-     * @returns {HomepageActions}
-     */
-    verifyThatPageIsOpened() {
-        homepagePage.createReportButton.should("be.visible");
-        return this;
-    }
-
-    /**
-     *
-     * @returns {HomepageActions}
-     */
-    clickAdvancedSearchButton() {
+    clickAdvancedSearchButton(): HomepageActions {
         homepagePage.advancedSearchButton.click();
         return this;
     }
 
     deleteReport(reportNumber: string): this {
-        this.verifyThatPageIsOpened()
-            .enterReportNumberToSearch(reportNumber)
+        homepagePage.createReportButton.should("be.visible");
+        this.enterReportNumberToSearch(reportNumber)
             .clickArchiveButton(reportNumber);
         return this;
     }
 
-    /**
-     *
-     * @returns {HomepageActions}
-     */
-    clickSelectStateButton() {
+    clickSelectStateButton(): HomepageActions {
         homepagePage.selectStateButton.click();
         return this;
     }
 
-    /**
-     *
-     * @param {string} name
-     * @returns {HomepageActions}
-     */
-    selectStateByName(name: string) {
+    selectStateByName(name: string): HomepageActions {
         homepagePage.getStateByName(name).click();
         return this;
     }
 
-    /**
-     *
-     * @param {string} type
-     * @returns {HomepageActions}
-     */
-    enterPropertyIdentifierType(type: string) {
+    enterPropertyIdentifierType(type: string): HomepageActions {
         homepagePage.propertyIdentifierTypeInput.type(type).should("have.value", type);
         return this;
     }
 
-    /**
-     *
-     * @param {string} value
-     * @returns {HomepageActions}
-     */
-    enterPropertyIdentifier(value: string) {
+    enterPropertyIdentifier(value: string): HomepageActions {
         homepagePage.propertyIdentifierInput.type(value).should("have.value", value);
         return this;
     }
 
 }
 
-export default new HomepageActions();
+export default new HomepageActions(homepagePage);
