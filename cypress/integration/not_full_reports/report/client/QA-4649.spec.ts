@@ -9,7 +9,7 @@ describe("Verify the Save & Continue button functionality on the Report > Client
         createReport(testData.reportCreationData);
     });
 
-    it("Test body", { tags: '@fix' }, () => {
+    it("Test body", () => {
         cy.stepInfo(`1. The Save & Continue button is displayed on the Client page.`);
         NavigationSection.navigateToClientPage();
         Report.Client.Page.SaveAndContinueBtn.should("be.visible");

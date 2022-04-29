@@ -18,7 +18,7 @@ describe("Verify the Save and Save&Continue buttons functionality", () => {
         deleteReport(testData.reportCreationData.reportNumber);
     });
 
-    it("QA-4404 Save&Continue button", { tags: '@fix' }, () => {
+    it("QA-4404 Save&Continue button", () => {
         Income.Residential.InPlaceRentRoll.clickSaveContinueButton();
         Income.Residential.UnitGroups.verifyThatPageIsOpened(Income.Residential.UnitGroups.Page.pageHeaderSection, testData.verifyUrl)
             .goBackWithSave();

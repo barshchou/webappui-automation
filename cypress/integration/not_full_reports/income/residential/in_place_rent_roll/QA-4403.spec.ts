@@ -9,7 +9,7 @@ describe("Verify the Unsaved changes modal functionality", () => {
         createReport(testData.reportCreationData);
     });
 
-    it("Test body", { tags: '@fix' }, () => {
+    it("Test body", () => {
         NavigationSection.navigateToResInPlaceRentRoll();
         Income.Residential.InPlaceRentRoll.checkCheckboxByLabel(testData.forecastLabel)
             .goToPropSummaryWithSaveSaveClickFirst();

@@ -9,7 +9,7 @@ describe(" Verify the Number of Residential Units section on the In-Place Rent R
         createReport(testData.reportCreationData);
     });
 
-    it("Test body", { tags: '@fix' }, () => {
+    it("Test body", () => {
         NavigationSection.navigateToPropertySummary();
         Property.Summary.enterNumberOfResUnits(testData.numberOfUnits);
         NavigationSection.navigateToResInPlaceRentRoll();

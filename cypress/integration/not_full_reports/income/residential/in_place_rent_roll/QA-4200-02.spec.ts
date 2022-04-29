@@ -9,7 +9,7 @@ describe("Verify the Import manager functionality", () => {
         createReport(testData.reportCreationData);
     });
 
-    it("Test body", { tags: '@fix' }, () => {
+    it("Test body", () => {
         NavigationSection.navigateToResInPlaceRentRoll();
         Income.Residential.InPlaceRentRoll.verifyViaCSVExist();
         Income.Residential.InPlaceRentRoll.verifyUploadCSVRow(testData.links);

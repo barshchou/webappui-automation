@@ -10,7 +10,7 @@ describe("Verify the Comps can be added by entering the existing Report ID in th
         createReport(testData.reportCreationData);
     });
 
-    it("Test body", { tags: '@fix' }, () => {
+    it("Test body", () => {
         NavigationSection.navigateToFindComps();
         Sales.FindComps.selectCompFromMapByAddress(testData.comparable.address)
             .clickSaveContinueButton();
