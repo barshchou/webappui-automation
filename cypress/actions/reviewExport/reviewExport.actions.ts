@@ -20,7 +20,11 @@ class ReviewExportActions extends BaseActions {
         return this;
     }
 
-    downloadDocxReport(): this {
+    /**
+     * Downloads and converts *.docx report into html
+     * and renames it to *current_spec_name*.html
+     */
+    downloadAndConvertDocxReport(): this {
         reviewExportPage.downloadBtn.click();
         cy.get(`@${ALIASE.reportId}`).then(val => {
             reportFile = {
@@ -30,24 +34,14 @@ class ReviewExportActions extends BaseActions {
                 extension:"docx"
             };
             cy.log(<any>val);
+            /**
+             * ernst: if you wish to see "tasks" code - go to cypress/plugins/index.js to the section Cypress Tasks
+             */
             cy.task("waitForFileExists",`${reportFile.path}/${reportFile.name}.${reportFile.extension}`);
-            cy.task("convertDocxToHtml",reportFile).then(value => {
-                cy.log(<any>value);
-            });
+            cy.task("convertDocxToHtml",reportFile);
             cy.task("renameHtmlReportFile",
             {path: reportFile.path,oldName: reportFile.name,newName: `QA-${Cypress.spec.specFilter}`});
         });
-        return this;
-    }
-
-    convertReportToHtml(): this {
-        /**
-         * ernst: if we set reportFile obejct into SharedStore, 
-         * we can extract it from there and pass to this task.
-         */
-        // cy.task("convertDocxToHtml",reportFile).then(value => {
-        //     cy.log(<any>value);
-        // });
         return this;
     }
 }

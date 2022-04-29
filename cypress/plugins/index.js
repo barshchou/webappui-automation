@@ -87,10 +87,9 @@ module.exports = (on, config) => {
       }
   });
 
-  //#region Cypress Tasks section (more  about tasks: https://docs.cypress.io/api/commands/task)
+  //#region Cypress Tasks (more about tasks: https://docs.cypress.io/api/commands/task)
   on("task",{
     async waitForFileExists(filePath, currentTime = 0, timeout = 5000){
-      // TODO: add renameFile function from ${reportId}.docx to ${Cypress.spec.name}.docx
       return await _waitForFileExists(filePath, currentTime = 0, timeout = 5000);
     }
   });
