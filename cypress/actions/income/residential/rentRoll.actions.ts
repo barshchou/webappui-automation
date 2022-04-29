@@ -1,5 +1,5 @@
 import rentRollPage from "../../../pages/income/residential/rentRoll.page";
-import BaseActions from "../../base/base.actions";
+import BaseActionsExt from "../../base/base.actions.ext";
 import {
     getNumberFromDollarNumberWithCommas,
     isDecimal,
@@ -8,9 +8,9 @@ import {
 } from "../../../../utils/numbers.utils";
 import {isProdEnv} from "../../../../utils/env.utils";
 
-class InPlaceRentRollActions extends BaseActions {
+class InPlaceRentRollActions extends BaseActionsExt<typeof rentRollPage> {
 
-    verifyViaCSVExist() {
+    verifyViaCSVExist(): InPlaceRentRollActions {
         rentRollPage.importViaCSVHeader.scrollIntoView().should("be.visible");
         return this;
     }
@@ -19,7 +19,7 @@ class InPlaceRentRollActions extends BaseActions {
      * @param {Readonly<{prodLink: string, othersLink: string}>} links
      * @returns {InPlaceRentRollActions}
      */
-    verifyUploadCSVRow(links) {
+    verifyUploadCSVRow(links): InPlaceRentRollActions {
         let linkToBe;
         if (isProdEnv()) {
             linkToBe = links.prodLink;
@@ -35,7 +35,7 @@ class InPlaceRentRollActions extends BaseActions {
      * @param {number | string} unitsNumber
      * @returns {InPlaceRentRollActions}
      */
-    verifyNumberOfResidentialUnits(unitsNumber) {
+    verifyNumberOfResidentialUnits(unitsNumber): InPlaceRentRollActions {
         rentRollPage.numberOfResidentialUnitsField.should("be.disabled").should("have.value", unitsNumber);
         return this;
     }
@@ -44,7 +44,7 @@ class InPlaceRentRollActions extends BaseActions {
      * @param {string | number} unitsNumber
      * @returns {InPlaceRentRollActions}
      */
-    verifyNumberOfIsInspectedRows(unitsNumber) {
+    verifyNumberOfIsInspectedRows(unitsNumber): InPlaceRentRollActions {
         if (unitsNumber !== 0) {
             rentRollPage.isInspectedColumnCells.first().scrollIntoView({duration: 2000});
             rentRollPage.isInspectedColumnCells.last().scrollIntoView({duration: 2000});
@@ -53,24 +53,24 @@ class InPlaceRentRollActions extends BaseActions {
         return this;
     }
 
-    clickGoToPropSummaryButton() {
+    clickGoToPropSummaryButton(): InPlaceRentRollActions {
         rentRollPage.goToPropSummaryButton.should("be.visible").click();
         return this;
     }
 
-    goToPropSummaryWithSaveLeavingFirst() {
+    goToPropSummaryWithSaveLeavingFirst(): InPlaceRentRollActions {
         this.clickGoToPropSummaryButton()
             .clickYesButton();
         return this;
     }
 
-    goToPropSummaryWithSaveSaveClickFirst() {
+    goToPropSummaryWithSaveSaveClickFirst(): InPlaceRentRollActions {
         this.clickSaveButton();
         this.clickGoToPropSummaryButton();
         return this;
     }
 
-    goToPropSummaryWithoutSave() {
+    goToPropSummaryWithoutSave(): InPlaceRentRollActions {
         this.clickGoToPropSummaryButton()
             .clickNoButton();
         return this;
@@ -80,7 +80,7 @@ class InPlaceRentRollActions extends BaseActions {
      * @param {string} columnName
      * @returns {InPlaceRentRollActions}
      */
-    verifyColumnExist(columnName) {
+    verifyColumnExist(columnName): InPlaceRentRollActions {
         rentRollPage.getColumnHeader(columnName).should("exist");
         return this;
     }
@@ -89,7 +89,7 @@ class InPlaceRentRollActions extends BaseActions {
      * @param {string} columnName
      * @returns {InPlaceRentRollActions}
      */
-    verifyColumnNotExist(columnName) {
+    verifyColumnNotExist(columnName): InPlaceRentRollActions {
         rentRollPage.getColumnHeader(columnName).should("not.exist");
         return this;
     }
@@ -98,7 +98,7 @@ class InPlaceRentRollActions extends BaseActions {
      * @param {Array<string>} columnNames
      * @returns {InPlaceRentRollActions}
      */
-    verifyListColumnExist(columnNames) {
+    verifyListColumnExist(columnNames): InPlaceRentRollActions {
         columnNames.forEach(column => {
             this.verifyColumnExist(column);
         });
@@ -109,7 +109,7 @@ class InPlaceRentRollActions extends BaseActions {
      * @param {Array<string>} columnNames
      * @returns {InPlaceRentRollActions}
      */
-    verifyListColumnNotExist(columnNames) {
+    verifyListColumnNotExist(columnNames): InPlaceRentRollActions {
         columnNames.forEach(column => {
             this.verifyColumnNotExist(column);
         });
@@ -120,7 +120,7 @@ class InPlaceRentRollActions extends BaseActions {
      * @param {string} value
      * @returns {InPlaceRentRollActions}
      */
-    checkPerUnitSquareFootage(value = "true") {
+    checkPerUnitSquareFootage(value = "true"): InPlaceRentRollActions {
         rentRollPage.getPerUnitSFRadio(value).should("not.be.checked").scrollIntoView()
             .click().should("be.checked");
         return this;
@@ -136,7 +136,7 @@ class InPlaceRentRollActions extends BaseActions {
      * @param {string} label
      * @returns {InPlaceRentRollActions}
      */
-    uncheckCheckboxByLabel(label) {
+    uncheckCheckboxByLabel(label): InPlaceRentRollActions {
         rentRollPage.getCheckboxByLabel(label).scrollIntoView().should("have.value", "true")
             .uncheck().should("have.value", "false");
         return this;
@@ -146,7 +146,7 @@ class InPlaceRentRollActions extends BaseActions {
      * @param {string} label
      * @returns {InPlaceRentRollActions}
      */
-    verifyCheckboxIsChecked(label) {
+    verifyCheckboxIsChecked(label): InPlaceRentRollActions {
         rentRollPage.getCheckboxByLabel(label).should("have.value", "true");
         return this;
     }
@@ -155,7 +155,7 @@ class InPlaceRentRollActions extends BaseActions {
      * @param {string} label
      * @returns {InPlaceRentRollActions}
      */
-    verifyCheckboxNotExist(label) {
+    verifyCheckboxNotExist(label): InPlaceRentRollActions {
         rentRollPage.getCheckboxByLabel(label).should("not.exist");
         return this;
     }
@@ -165,7 +165,7 @@ class InPlaceRentRollActions extends BaseActions {
      * @param {string} label
      * @returns {InPlaceRentRollActions}
      */
-    checkUncheckCheckboxForColumn(columnName, label) {
+    checkUncheckCheckboxForColumn(columnName, label): InPlaceRentRollActions {
         this.checkCheckboxByLabelAndVerify(label, columnName)
             .uncheckCheckboxByLabel(label)
             .verifyColumnNotExist(columnName);
@@ -177,7 +177,7 @@ class InPlaceRentRollActions extends BaseActions {
      * @param {string} columnName
      * @returns {InPlaceRentRollActions}
      */
-    checkCheckboxByLabelAndVerify(label, columnName) {
+    checkCheckboxByLabelAndVerify(label, columnName): InPlaceRentRollActions {
         this.checkCheckboxByLabel(label)
             .verifyColumnExist(columnName);
         return this;
@@ -187,7 +187,7 @@ class InPlaceRentRollActions extends BaseActions {
      * @param columnNames
      * @returns {InPlaceRentRollActions}
      */
-    checkUncheckPerUnitSquareFootage(columnNames) {
+    checkUncheckPerUnitSquareFootage(columnNames): InPlaceRentRollActions {
         this.checkPerUnitSquareFootage()
             .verifyListColumnExist(columnNames)
             .checkPerUnitSquareFootage("false")
@@ -200,7 +200,7 @@ class InPlaceRentRollActions extends BaseActions {
      * @param {number} unitsToBe
      * @returns {InPlaceRentRollActions}
      */
-    uploadFile(filePath, unitsToBe) {
+    uploadFile(filePath, unitsToBe): InPlaceRentRollActions {
         rentRollPage.uploadFileButton.should("be.visible");
         rentRollPage.uploadFileInput.should("exist").attachFile(filePath);
         rentRollPage.importDataButton.should("exist").should("be.enabled").click();
@@ -209,7 +209,7 @@ class InPlaceRentRollActions extends BaseActions {
         return this;
     }
 
-    enterAllEqualRentTypeCells(rentType: string): this {
+    enterAllEqualRentTypeCells(rentType: string): InPlaceRentRollActions {
         rentRollPage.rentTypeCells.each((cell, i) => {
             this.enterRentTypeCellByRowNumber(rentType, i)
                 .verifyRentTypeCellByRowNumber(rentType, i);
@@ -217,13 +217,13 @@ class InPlaceRentRollActions extends BaseActions {
         return this;
     }
 
-    enterRentTypeCellByRowNumber(rentType: string, rowNumber: number = 0): this {
+    enterRentTypeCellByRowNumber(rentType: string, rowNumber: number = 0): InPlaceRentRollActions {
         rentRollPage.rentTypeCells.eq(rowNumber).dblclick();
         this.enterTextToTextarea(rentType);
         return this;
     }
 
-    verifyRentTypeCellByRowNumber(rentTypeToBe: string, rowNumber: number = 0): this {
+    verifyRentTypeCellByRowNumber(rentTypeToBe: string, rowNumber: number = 0): InPlaceRentRollActions {
         rentRollPage.rentTypeCells.eq(rowNumber).should("contain.text", rentTypeToBe);
         return this;
     }
@@ -232,7 +232,7 @@ class InPlaceRentRollActions extends BaseActions {
      * @param {string | number} number
      * @returns {InPlaceRentRollActions}
      */
-    checkIsInspectedByRowNumber(number) {
+    checkIsInspectedByRowNumber(number): InPlaceRentRollActions {
         rentRollPage.getIsInspectedCheckboxByRowNumber(number).check();
         return this;
     }
@@ -241,7 +241,7 @@ class InPlaceRentRollActions extends BaseActions {
      * @param {Array<string | number>} numbers
      * @returns {InPlaceRentRollActions}
      */
-    checkListIsInspectedByRowNumbers(numbers) {
+    checkListIsInspectedByRowNumbers(numbers): InPlaceRentRollActions {
         numbers.forEach(number => {
             this.checkIsInspectedByRowNumber(number);
         });
@@ -252,7 +252,7 @@ class InPlaceRentRollActions extends BaseActions {
      * @param {string | number} numberOfUnits
      * @returns {InPlaceRentRollActions}
      */
-    enterUnitNumbersByOrderToAll(numberOfUnits) {
+    enterUnitNumbersByOrderToAll(numberOfUnits): InPlaceRentRollActions {
         for (let i = 0; i < numberOfUnits; i++) {
             rentRollPage.unitNumberCells.eq(i).dblclick();
             this.enterTextToTextarea(`${i + 1}`);
@@ -266,7 +266,7 @@ class InPlaceRentRollActions extends BaseActions {
      * @param {number} number
      * @returns {InPlaceRentRollActions}
      */
-    enterRoomsNumberByRowNumber(value, number) {
+    enterRoomsNumberByRowNumber(value, number): InPlaceRentRollActions {
         rentRollPage.roomsCells.eq(number).dblclick();
         this.enterTextToTextarea(value);
         rentRollPage.roomsCells.eq(number).should("have.text", value);
@@ -278,7 +278,7 @@ class InPlaceRentRollActions extends BaseActions {
      * @param {number} numberOfUnits
      * @returns {InPlaceRentRollActions}
      */
-    enterAllEqualRoomsNumber(roomsNumber, numberOfUnits) {
+    enterAllEqualRoomsNumber(roomsNumber, numberOfUnits): InPlaceRentRollActions {
         for (let i = 0; i < numberOfUnits; i++) {
             this.enterRoomsNumberByRowNumber(roomsNumber, i);
         }
@@ -290,7 +290,7 @@ class InPlaceRentRollActions extends BaseActions {
      * @param {number} rowNumber
      * @returns {InPlaceRentRollActions}
      */
-    enterBedroomsNumberByRowNumber(bedroomsNumber, rowNumber = 0) {
+    enterBedroomsNumberByRowNumber(bedroomsNumber, rowNumber = 0): InPlaceRentRollActions {
         rentRollPage.bedroomsCells.eq(rowNumber).dblclick();
         this.enterTextToTextarea(bedroomsNumber);
         rentRollPage.bedroomsCells.eq(rowNumber).should("have.text", bedroomsNumber);
@@ -302,21 +302,21 @@ class InPlaceRentRollActions extends BaseActions {
      * @param {number} numberOfUnits
      * @returns {InPlaceRentRollActions}
      */
-    enterAllEqualBedroomsNumber(bedroomsNumber, numberOfUnits) {
+    enterAllEqualBedroomsNumber(bedroomsNumber, numberOfUnits): InPlaceRentRollActions {
         for (let i = 0; i < numberOfUnits; i++) {
             this.enterBedroomsNumberByRowNumber(bedroomsNumber, i);
         }
         return this;
     }
 
-    enterLeaseStatusByRowNumber(status: string, number: number = 0): this {
+    enterLeaseStatusByRowNumber(status: string, number: number = 0): InPlaceRentRollActions {
         rentRollPage.leaseStatusCells.eq(number).dblclick();
         this.enterTextToTextarea(status);
         rentRollPage.leaseStatusCells.eq(number).should("contain.text", status);
         return this;
     }
 
-    enterAllEqualLeaseStatuses(leaseStatus: string): this {
+    enterAllEqualLeaseStatuses(leaseStatus: string): InPlaceRentRollActions {
         rentRollPage.leaseStatusCells.each((cell, i) => {
             this.enterLeaseStatusByRowNumber(leaseStatus, i);
         });
@@ -328,7 +328,7 @@ class InPlaceRentRollActions extends BaseActions {
      * @param {number} rowNumber
      * @returns {InPlaceRentRollActions}
      */
-    enterForecastByRowNumber(forecastValue, rowNumber = 0) {
+    enterForecastByRowNumber(forecastValue, rowNumber = 0): InPlaceRentRollActions {
         let forecastText;
         if (typeof forecastValue === "number") {
             forecastText = `$${numberWithCommas(forecastValue.toFixed(2))}`;
@@ -345,7 +345,7 @@ class InPlaceRentRollActions extends BaseActions {
         return this;
     }
 
-    enterMonthlyRentByRowNumber(value: string | number, rowNumber: number = 0): this {
+    enterMonthlyRentByRowNumber(value: string | number, rowNumber: number = 0): InPlaceRentRollActions {
         const textToBe = typeof value === "string" ? value : `$${numberWithCommas(value.toFixed(2))}`;
         rentRollPage.monthlyRentCells.eq(rowNumber).dblclick();
         this.enterTextToTextarea(`${value}`);
@@ -353,7 +353,7 @@ class InPlaceRentRollActions extends BaseActions {
         return this;
     }
 
-    enterAllEqualMonthlyRents(monthlyRent: string | number): this {
+    enterAllEqualMonthlyRents(monthlyRent: string | number): InPlaceRentRollActions {
         rentRollPage.monthlyRentCells.each((cell, i) => {
             this.enterMonthlyRentByRowNumber(monthlyRent, i);
         });
@@ -364,14 +364,14 @@ class InPlaceRentRollActions extends BaseActions {
      * @param {string} forecastValue
      * @param {number} numberOfUnits
      */
-    enterAllEqualForecast(forecastValue, numberOfUnits) {
+    enterAllEqualForecast(forecastValue, numberOfUnits): InPlaceRentRollActions {
         for (let i = 0; i < numberOfUnits; i++) {
             this.enterForecastByRowNumber(forecastValue, i);
         }
         return this;
     }
 
-    verifyMonthlyTotalForecastEqualValue() {
+    verifyMonthlyTotalForecastEqualValue(): InPlaceRentRollActions {
         rentRollPage.rentForecastCells.then(cells => {
             let totalToBe = 0;
             for (let i = 0; i < cells.length; i++) {
@@ -384,7 +384,7 @@ class InPlaceRentRollActions extends BaseActions {
         return this;
     }
 
-    verifyAnnuallyTotalForecastEqualValue() {
+    verifyAnnuallyTotalForecastEqualValue(): InPlaceRentRollActions {
         rentRollPage.monthlyTotalForecast.then(monthly => {
             const monthlyNumber = getNumberFromDollarNumberWithCommas(monthly.text());
             const textToBe = `$${numberWithCommas((monthlyNumber * 12).toFixed(2))}`;
@@ -397,12 +397,12 @@ class InPlaceRentRollActions extends BaseActions {
      * @param {string} commentaryToBe
      * @returns {InPlaceRentRollActions}
      */
-    verifyRentRollCommentary(commentaryToBe) {
+    verifyRentRollCommentary(commentaryToBe): InPlaceRentRollActions {
         rentRollPage.rentRollCommentary.should("have.text", commentaryToBe);
         return this;
     }
 
-    clickCloseIcon() {
+    clickCloseIcon(): InPlaceRentRollActions {
         rentRollPage.closeIcon.click();
         return this;
     }
@@ -411,7 +411,7 @@ class InPlaceRentRollActions extends BaseActions {
      * @param {number} numberOfUnits
      * @returns {InPlaceRentRollActions}
      */
-    verifyNumberOfUnitsNumberCells(numberOfUnits = 0) {
+    verifyNumberOfUnitsNumberCells(numberOfUnits = 0): InPlaceRentRollActions {
         if (numberOfUnits === 0) {
             rentRollPage.unitNumberCells.should("not.exist");
         } else {
@@ -424,7 +424,7 @@ class InPlaceRentRollActions extends BaseActions {
      * @param {number} numberOfUnits
      * @returns {InPlaceRentRollActions}
      */
-    verifyNumberOfNumberCells(numberOfUnits = 0) {
+    verifyNumberOfNumberCells(numberOfUnits = 0): InPlaceRentRollActions {
         if (numberOfUnits === 0) {
             rentRollPage.numberCells.should("not.exist");
         } else {
@@ -438,7 +438,7 @@ class InPlaceRentRollActions extends BaseActions {
      * @param {number} rowNumber
      * @returns {InPlaceRentRollActions}
      */
-    enterOutdoorSpaceByOptionByRow(space, rowNumber = 0) {
+    enterOutdoorSpaceByOptionByRow(space, rowNumber = 0): InPlaceRentRollActions {
         rentRollPage.outdoorSpaceCells.eq(rowNumber).dblclick();
         this.chooseOptionFromTableListbox(space);
         rentRollPage.outdoorSpaceCells.should("contain.text", space);
@@ -450,7 +450,7 @@ class InPlaceRentRollActions extends BaseActions {
      * @param {string} option
      * @returns {InPlaceRentRollActions}
      */
-    chooseOptionFromTableListbox(option) {
+    chooseOptionFromTableListbox(option): InPlaceRentRollActions {
         rentRollPage.tableListboxOptions.contains(option).click();
         return this;
     }
@@ -460,7 +460,7 @@ class InPlaceRentRollActions extends BaseActions {
      * @param {number} rowNumber
      * @returns {InPlaceRentRollActions}
      */
-    enterSquareFootageByRow(value, rowNumber = 0) {
+    enterSquareFootageByRow(value, rowNumber = 0): InPlaceRentRollActions {
         rentRollPage.squareFootageCells.eq(rowNumber).dblclick();
         this.enterTextToTextarea(value);
         let number = typeof value === "string" ? getNumberFromDollarNumberWithCommas(value) : value;
@@ -479,7 +479,7 @@ class InPlaceRentRollActions extends BaseActions {
      * @param rowNumber
      * @returns {InPlaceRentRollActions}
      */
-    enterNumberBathroomsByRow(value, rowNumber = 0) {
+    enterNumberBathroomsByRow(value, rowNumber = 0): InPlaceRentRollActions {
         rentRollPage.bathroomsCells.eq(rowNumber).dblclick();
         this.enterTextToTextarea(value);
         rentRollPage.bathroomsCells.eq(rowNumber).should("have.text", value).as("checkedTextBathroom");
@@ -489,7 +489,7 @@ class InPlaceRentRollActions extends BaseActions {
         return this;
     }
 
-    private enterTextToTextarea(text: string): this {
+    private enterTextToTextarea(text: string): InPlaceRentRollActions {
         rentRollPage.textAreaToInput.clear().type(text).type("{enter}");
         return this;
     }
@@ -499,17 +499,14 @@ class InPlaceRentRollActions extends BaseActions {
      * @param {number} rowNumber
      * @returns {InPlaceRentRollActions}
      */
-    chooseUnitTypeByRow(type, rowNumber = 0) {
+    chooseUnitTypeByRow(type, rowNumber = 0): InPlaceRentRollActions {
         rentRollPage.unitTypeCells.eq(rowNumber).dblclick();
         this.chooseOptionFromTableListbox(type);
         rentRollPage.unitTypeCells.eq(rowNumber).should("contain.text", type);
         return this;
     }
 
-    /**
-     * @returns {InPlaceRentRollActions}
-     */
-    verifyMonthlyTotalRentValue() {
+    verifyMonthlyTotalRentValue(): InPlaceRentRollActions {
         rentRollPage.monthlyRentCells.then(rentCells => {
             rentRollPage.leaseStatusCells.then(leaseStatusCells => {
                 let totalToBe = 0;
@@ -527,4 +524,4 @@ class InPlaceRentRollActions extends BaseActions {
     }
 }
 
-export default new InPlaceRentRollActions();
+export default new InPlaceRentRollActions(rentRollPage);
