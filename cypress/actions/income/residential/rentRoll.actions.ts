@@ -289,32 +289,25 @@ class InPlaceRentRollActions extends BaseActionsExt<typeof rentRollPage> {
         return this;
     }
 
-    verifyRentSFValue() {
+    verifyRentSFValue(isPerMonth?: "perMonth") {
         rentRollPage.monthlyTotalForecast.then(monthly => {
             const monthlyNumber = getNumberFromDollarNumberWithCommas(monthly.text());
             rentRollPage.squareFootageCells.then(square => {
                 const squareNumber = getNumberFromDollarNumberWithCommas(square.text());
                 const rentSFNumber = (monthlyNumber * 12 / squareNumber).toFixed(2);
-                if (squareNumber === 0) {
-                    rentRollPage.rentSF.should("have.text", `$NaN`);
-                } else {
-                    rentRollPage.rentSF.should("have.text", `$${rentSFNumber}`);
-                }
-            });
-        });
-        return this;
-    }
-
-    verifyRentPSFMonthValue() {
-        rentRollPage.monthlyTotalForecast.then(monthly => {
-            const monthlyNumber = getNumberFromDollarNumberWithCommas(monthly.text());
-            rentRollPage.squareFootageCells.then(square => {
-                const squareNumber = getNumberFromDollarNumberWithCommas(square.text());
                 const rentPSFNumber = (monthlyNumber / squareNumber).toFixed(2);
-                if (squareNumber === 0) {
-                    rentRollPage.rentSF.should("have.text", `$NaN`);
+                if (isPerMonth === "perMonth") {
+                    if (squareNumber === 0) {
+                        rentRollPage.rentSF.should("have.text", `$NaN`);
+                    } else {
+                        rentRollPage.rentSF.should("have.text", `$${rentPSFNumber}`);
+                    }
                 } else {
-                    rentRollPage.rentSF.should("have.text", `$${rentPSFNumber}`);
+                    if (squareNumber === 0) {
+                        rentRollPage.rentSF.should("have.text", `$NaN`);
+                    } else {
+                        rentRollPage.rentSF.should("have.text", `$${rentSFNumber}`);
+                    }
                 }
             });
         });

@@ -27,7 +27,7 @@ describe(`[QA-4094]Verify if "Per Month" time period PSF Rent based on is select
             .Page.getPSFRadio(testData.psfRadioValue).click();
             Income._Residential.InPlaceRentRoll.enterSquareFootageByRow(el.squareFootage)
             .enterMonthlyRentByRowNumber(el.monthlyRent)
-            .verifyRentPSFMonthValue();
+            .verifyRentSFValue("perMonth");
             cy.reload();
         });
         
