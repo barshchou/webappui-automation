@@ -34,7 +34,7 @@ export default {
     reportCreationData: ReportDataCreator.getDefaultReportData("4245"),
     numberOfUnits: 5,
     columnName: "Monthly Total",
-    resUnitData: [
+    resUnitsData: [
         _firstItem,
         _secondItem,
         _thirdItem,

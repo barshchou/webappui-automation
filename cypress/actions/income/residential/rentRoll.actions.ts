@@ -387,8 +387,9 @@ class InPlaceRentRollActions extends BaseActionsExt<typeof rentRollPage> {
         rentRollPage.monthlyRentCells.then(rentCells => {
             rentRollPage.leaseStatusCells.then(leaseStatusCells => {
                 let totalToBe = 0;
+                const vacantLeaseStatusText: BoweryReports.LeaseStatus = "Vacant";
                 for (let i = 0; i < rentCells.length; i++) {
-                    if(leaseStatusCells.eq(i).text() != "▼Vacant") {
+                    if(!leaseStatusCells.eq(i).text().includes(vacantLeaseStatusText)) {
                         let cellNumber = getNumberFromDollarNumberWithCommas(rentCells.eq(i).text());
                         totalToBe += cellNumber;
                     }
