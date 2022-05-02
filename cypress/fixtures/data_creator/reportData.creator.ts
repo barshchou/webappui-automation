@@ -1,7 +1,8 @@
 import Enums from "../../enums/enums";
 
-let ReportCreationData = function (address, number, templateValue, incomeValue, conclusionValue) {
+let ReportCreationData = function (address, isSalesForcePull, number, templateValue, incomeValue, conclusionValue) {
     this.address = address;
+    this.isSalesForcePull = isSalesForcePull,
     this.reportNumber = number;
     this.templateValue = templateValue;
     this.incomeValue = incomeValue;
@@ -10,6 +11,8 @@ let ReportCreationData = function (address, number, templateValue, incomeValue, 
 
 class ReportCreator {
     address: string;
+
+    isSalesForcePull: boolean;
 
     reportNumber: string;
 
@@ -24,8 +27,8 @@ class ReportCreator {
         return this;
     }
 
-    setReportNumber(testNumber) {
-        this.reportNumber = `TestAutoReport-QA-${testNumber}`;
+    setReportNumber(testNumber: string, isSaleForcePull: BoweryReports.isSalesForcePull) {
+        this.reportNumber = isSaleForcePull ? `${testNumber}` : `TestAutoReport-QA-${testNumber}`;
         return this;
     }
 
@@ -46,31 +49,35 @@ class ReportCreator {
 
     build() {
         return new
-        ReportCreationData(this.address, this.reportNumber, this.templateValue, this.incomeValue, this.conclusionValue);
+        ReportCreationData(this.address, this.isSalesForcePull, this.reportNumber, this.templateValue, this.incomeValue, this.conclusionValue);
     }
 
-    getReportSpecificConclusionValue(conclusionValue, testNumber) {
-        return this.setReportNumber(testNumber).setAddress().setTemplateValue().setIncomeValue()
+    getReportSpecificConclusionValue(conclusionValue, testNumber, isSaleForcePull = false) {
+        this.isSalesForcePull = isSaleForcePull;
+        return this.setReportNumber(testNumber, isSaleForcePull).setAddress().setTemplateValue().setIncomeValue()
             .setConclusionValue(conclusionValue).build();
     }
 
-    getReportSpecificIncomeValue(incomeValue, testNumber) {
-        return this.setReportNumber(testNumber).setAddress().setTemplateValue().setIncomeValue(incomeValue)
+    getReportSpecificIncomeValue(incomeValue, testNumber, isSaleForcePull = false) {
+        this.isSalesForcePull = isSaleForcePull;
+        return this.setReportNumber(testNumber, isSaleForcePull).setAddress().setTemplateValue().setIncomeValue(incomeValue)
             .setConclusionValue().build();
     }
 
-    getDefaultReportData(testNumber) {
-        return this.setReportNumber(testNumber).setAddress().setIncomeValue().setTemplateValue().setConclusionValue().build();
+    getDefaultReportData(testNumber, isSaleForcePull = false) {
+        this.isSalesForcePull = isSaleForcePull;
+        return this.setReportNumber(testNumber, isSaleForcePull).setAddress().setIncomeValue().setTemplateValue().setConclusionValue().build();
     }
 
-    getReportData(testNumber: string, options?: BoweryReports.ReportCreationOptions){
+    getReportData(testNumber: string, isSaleForcePull = false, options?: BoweryReports.ReportCreationOptions){
+        this.isSalesForcePull = isSaleForcePull;
         if(options?.incomeValue){
             this.setIncomeValue(options.incomeValue);
         }
         if(options?.conclusionValue){
             this.setConclusionValue(options.conclusionValue);
         }
-        return this.setReportNumber(testNumber).setAddress().setTemplateValue().build();
+        return this.setReportNumber(testNumber, isSaleForcePull).setAddress().setTemplateValue().build();
     }
 }
 
