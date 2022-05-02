@@ -2,7 +2,9 @@ import ReportDataCreator from "../../../data_creator/reportData.creator";
 import Enums from "../../../../enums/enums";
 
 const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreator
-    .getReportSpecificIncomeValue(Enums.INCOME_TYPE.BOTH, "4602&04&05&10");
+    .getReportData("4602&04&05&10", {
+        incomeValue: Enums.INCOME_TYPE.BOTH,
+    });
 
 const _leaseStatuses: Array<BoweryReports.LeaseStatus> = ["Occupied", "Occupied"];
 

@@ -2,7 +2,9 @@ import Enums from "../../../../../enums/enums";
 import ReportDataCreator from "../../../../data_creator/reportData.creator";
 
 const reportCreationFixture = () => {
-    return ReportDataCreator.getReportSpecificIncomeValue(Enums.INCOME_TYPE.BOTH, "4411&12");
+    return ReportDataCreator.getReportData("4411&12", {
+        incomeValue: Enums.INCOME_TYPE.BOTH,
+    });
 };
 
 export default {

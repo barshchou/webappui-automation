@@ -49,11 +49,6 @@ class ReportCreator {
         ReportCreationData(this.address, this.reportNumber, this.templateValue, this.incomeValue, this.conclusionValue);
     }
 
-    getReportSpecificConclusionValue(conclusionValue, testNumber) {
-        return this.setReportNumber(testNumber).setAddress().setTemplateValue().setIncomeValue()
-            .setConclusionValue(conclusionValue).build();
-    }
-
     getReportSpecificIncomeValue(incomeValue, testNumber) {
         return this.setReportNumber(testNumber).setAddress().setTemplateValue().setIncomeValue(incomeValue)
             .setConclusionValue().build();
@@ -64,13 +59,12 @@ class ReportCreator {
     }
 
     getReportData(testNumber: string, options?: BoweryReports.ReportCreationOptions){
-        if(options?.incomeValue){
-            this.setIncomeValue(options.incomeValue);
-        }
-        if(options?.conclusionValue){
-            this.setConclusionValue(options.conclusionValue);
-        }
-        return this.setReportNumber(testNumber).setAddress().setTemplateValue().build();
+        return this.setReportNumber(testNumber)
+        .setAddress()
+        .setTemplateValue()
+        .setIncomeValue(options?.incomeValue ? options.incomeValue : null)
+        .setConclusionValue(options?.conclusionValue ? options.conclusionValue : null)
+        .build();
     }
 }
 
