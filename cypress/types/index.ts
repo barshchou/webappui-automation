@@ -40,6 +40,27 @@ namespace BoweryReports {
      */
     export type CommercialUnitGroupsValues = CommercialUnitsUseValues | CommercialUnitsGradeValues | CommercialUnitsFacadeValues;
 
+    export type OrganizationAddresseePrefix = "Mr." | "Mrs." | "Ms." | "Dr.";
+    export type OrganizationState = "New York" | "Alabama" | "Alaska" | "Arizona" | "Arkansas" | "California" | "Colorado" | "Connecticut"
+    | "Delaware" | "District Of Columbia" | "Florida" | "Georgia" | "Hawaii" | "Idaho" | "Illinois" | "Indiana" | "Iowa" | "Kansas"
+    | "Kentucky" | "Louisiana" | "Maine" | "Maryland" | "Massachusetts"| "Michigan" | "Minnesota" | "Mississippi" | "Missouri" | "Montana"
+    | "Nebraska" | "Nevada" | "New Hampshire" | "New Jersey" | "New Mexico" | "North Carolina" | "North Dakota" | "Ohio" | "Oklahoma"
+    | "Oregon" | "Pennsylvania" | "Puerto Rico" | "Rhode Island" | "South Carolina" | "South Dakota" | "Tennessee" | "Texas" | "Utah"
+    | "Vermont" | "Virginia" | "Washington" | "Wisconsin" | "West Virginia" | "Wyoming";
+    export type OrganizationCreateNewClient = {
+        prefix: BoweryReports.OrganizationAddresseePrefix,
+        title: string,
+        firstName: string,
+        middleInitial: string,
+        lastName: string,
+        clientSuffix: string,
+        clientCompanyName: string,
+        streetAddress: string,
+        city: string,
+        state: BoweryReports.OrganizationState,
+        zipCode: string | number
+    };
+
 
     export type ForecastItem = { 
         name: BoweryReports.ForecastItemBasis, 

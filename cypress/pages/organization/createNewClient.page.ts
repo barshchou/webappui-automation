@@ -22,6 +22,10 @@ class OrganizationCreateNewClientPage extends BasePage{
     get stateField() {return cy.xpath("//label[contains(text(), 'State')]//following::*[@data-qa='select-value'][1]");}
 
     get zipCodeField() {return cy.xpath("//label[contains(text(), 'Zip Code')]//following::*[@type='text'][1]");}
+
+    prefixSelectOption(prefix: string) {return cy.get(`[data-qa=prefix-${prefix}-select-option]`);}
+
+    stateSelectOption(state: string) {return cy.get(`[data-qa=state.name-${state}-select-option]`);}
 }
 
 export default new OrganizationCreateNewClientPage();
