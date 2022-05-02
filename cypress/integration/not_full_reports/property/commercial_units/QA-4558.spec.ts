@@ -3,7 +3,7 @@ import {createReport, deleteReport} from "../../../../actions/base/baseTest.acti
 import {_NavigationSection} from "../../../../actions/base";
 import {Income, Property} from "../../../../actions";
 
-describe("Verify the functionality of the Use* radio button", () => {
+describe("Verify the functionality of the Use* radio button", {tags:"@fix"},() => {
 
     beforeEach("Login, create report", () => {
         createReport(testData.reportCreationData);

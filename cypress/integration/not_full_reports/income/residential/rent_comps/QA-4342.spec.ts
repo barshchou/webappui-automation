@@ -4,7 +4,7 @@ import Income from "../../../../../actions/income/income.manager";
 import Property from "../../../../../actions/property/property.manager";
 import {createReport, deleteReport} from "../../../../../actions/base/baseTest.actions";
 
-describe("Verify the display of the Unit grid with the added comparable unit on the '$ Rent Comps' page", () => {
+describe("Verify the display of the Unit grid with the added comparable unit on the '$ Rent Comps' page", {tags:"@fix"},() => {
 
     beforeEach("Login action", () => {
         createReport(tesData.reportCreationData);

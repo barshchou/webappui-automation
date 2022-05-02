@@ -3,7 +3,7 @@ import { _NavigationSection } from "../../../../actions/base";
 import {createReport, deleteReport} from "../../../../actions/base/baseTest.actions";
 import testData from '../../../../fixtures/not_full_reports/report/client/QA-4627.fixture';
 
-describe("Verify the functionality of the Client field", () => {
+describe("Verify the functionality of the Client field", {tags:"@fix"},() => {
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
     });
