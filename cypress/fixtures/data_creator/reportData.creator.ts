@@ -71,9 +71,11 @@ class ReportCreator {
 
     getReportData(testNumber: string, isSaleForcePull = false, options?: BoweryReports.ReportCreationOptions){
         this.isSalesForcePull = isSaleForcePull;
+
         if(options?.incomeValue){
             this.setIncomeValue(options.incomeValue);
         }
+        
         if(options?.conclusionValue){
             this.setConclusionValue(options.conclusionValue);
         }

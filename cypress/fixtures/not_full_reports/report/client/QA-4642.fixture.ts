@@ -22,6 +22,6 @@ const _linkedChipsDropdownOptions: [string, string][] = [
 ];
 
 export default {
-    reportCreationData: ReportDataCreator.getReportData("4645", { conclusionValue: "AS_COMPLETE" }),
+    reportCreationData: ReportDataCreator.getReportData("4645", false, { conclusionValue: "AS_COMPLETE" }),
     linkedChipsDropdownOptions: _linkedChipsDropdownOptions
 };
