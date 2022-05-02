@@ -275,16 +275,16 @@ class InPlaceRentRollActions extends BaseActionsExt<typeof rentRollPage> {
                 totalToBe += cellNumber;
             }
             const textToBe = `$${numberWithCommas(totalToBe.toFixed(2))}`;
-            rentRollPage.monthlyTotalForecast.should("have.text", textToBe);
+            rentRollPage.monthlyTotalRent.should("have.text", textToBe);
         });
         return this;
     }
 
     verifyAnnuallyTotalForecastEqualValue() {
-        rentRollPage.monthlyTotalForecast.then(monthly => {
+        rentRollPage.monthlyTotalRent.then(monthly => {
             const monthlyNumber = getNumberFromDollarNumberWithCommas(monthly.text());
             const textToBe = `$${numberWithCommas((monthlyNumber * 12).toFixed(2))}`;
-            rentRollPage.annualTotalForecast.should("have.text", textToBe);
+            rentRollPage.annualTotalRent.should("have.text", textToBe);
         });
         return this;
     }
@@ -320,7 +320,7 @@ class InPlaceRentRollActions extends BaseActionsExt<typeof rentRollPage> {
         });
         return this;
     }
-
+      
     verifyRentRollCommentary(commentaryToBe: string): InPlaceRentRollActions {
         rentRollPage.rentRollCommentary.should("have.text", commentaryToBe);
         return this;

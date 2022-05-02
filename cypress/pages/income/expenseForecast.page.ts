@@ -27,7 +27,7 @@ class ExpenseForecastPage extends BasePage {
 
     getElementBasisToSwitch(forecastItem: BoweryReports.ForecastItemBasis, radioValue: BoweryReports.UnitSF) {return cy.get(`[name='${forecastItem}.basis'][value='${radioValue}']`);}
 
-    getForecastItemForecastInput(item) {return cy.get(`[name='${item}.concludedValue']`);}
+    getForecastItemForecastInput(item, custom = false, index = 0) {return !custom ? cy.get(`[name='${item}.concludedValue']`) : cy.get(`[name='${item}Expenses[${index}].concludedValue']`);}
 
     getForecastItemCompMin(item) {return cy.get(`[data-qa=${item}-forecast-item] [data-qa=comp-min]`);}
 
@@ -76,6 +76,10 @@ class ExpenseForecastPage extends BasePage {
     get toeCommentaryModified() {return cy.xpath("//*[.='TOTAL OPERATING EXPENSES']//following::*[.='Modified']");}
 
     get expenseConfirmRevertButton() {return cy.xpath("//*[.='Yes, revert']");}
+
+    get createNewCategoryButton() {return cy.contains('+ Add Expense Category');}
+
+    get newCategoryExpenseName() { return cy.get('[name="expense"]');}
 
 }
 

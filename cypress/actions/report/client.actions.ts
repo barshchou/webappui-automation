@@ -52,8 +52,8 @@ class ClientActions extends BaseActionsExt<typeof clientPage> {
         return this;
     }
 
-    clickRevertToGeneratedButton() {
-        clientPage.revertToGeneratedButton.click();
+    enterIntendedUserTextBox(textToType: string): ClientActions {
+        clientPage.intendedUserTextBox.type(textToType);
         return this;
     }
 
@@ -89,6 +89,16 @@ class ClientActions extends BaseActionsExt<typeof clientPage> {
 
     verifyIdentificationOfTheClientTextBox(verifyAreaValue: string): ClientActions {
         clientPage.identificationOfClientTextBox.should("contain.text", verifyAreaValue);
+        return this;
+    }
+
+    verifyNotContainIntendedUserTextBox(verifyAreaValue: string): ClientActions {
+        clientPage.intendedUserTextBox.should("not.contain.text", verifyAreaValue);
+        return this;
+    }
+
+    verifyNotContainIdentificationOfTheClientTextBox(verifyAreaValue: string): ClientActions {
+        clientPage.identificationOfClientTextBox.should("not.contain.text", verifyAreaValue);
         return this;
     }
 }

@@ -7,6 +7,7 @@ export const createReport = (reportCreationData: BoweryAutomation.ReportCreation
 };
 
 export const deleteReport = (reportNumber) => {
+    cy.stepInfo('Delete report');
     NavigationSection.returnToHomePage();
     Homepage.deleteReport(reportNumber);
 };
