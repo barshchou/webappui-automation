@@ -1,3 +1,4 @@
+import { Organization } from './../../../../actions/index';
 import { Report } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
 import {createReport, deleteReport} from "../../../../actions/base/baseTest.actions";
@@ -24,6 +25,7 @@ describe("[QA-4627] Verify the functionality of the Client field.", () => {
 
         cy.stepInfo("3. Proceed to the Organization > Create New Client page and create a new client, save it.");
         Report._Client.Page.addNewClient.click();
+        Organization._CreateNewClient.createNewClient();
         // Report._Client.verifyIntendedUserTextBox(testData.verifyAreaValue)
         //     .verifyIdentificationOfTheClientTextBox(testData.verifyAreaValue);
 

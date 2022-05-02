@@ -23,9 +23,12 @@ class OrganizationCreateNewClientPage extends BasePage{
 
     get zipCodeField() {return cy.xpath("//label[contains(text(), 'Zip Code')]//following::*[@type='text'][1]");}
 
+    get saveFormButton() {return cy.get("[type='submit']")}
+
     prefixSelectOption(prefix: string) {return cy.get(`[data-qa=prefix-${prefix}-select-option]`);}
 
     stateSelectOption(state: string) {return cy.get(`[data-qa=state.name-${state}-select-option]`);}
+
 }
 
 export default new OrganizationCreateNewClientPage();
