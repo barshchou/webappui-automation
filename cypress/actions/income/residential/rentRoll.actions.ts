@@ -188,7 +188,7 @@ class InPlaceRentRollActions extends BaseActionsExt<typeof rentRollPage> {
 
     enterRoomsNumberByRowNumber(value: string | number, number: number): InPlaceRentRollActions {
         rentRollPage.roomsCells.eq(number).dblclick();
-        this.enterTextToTextarea(value);
+        this.enterTextToTextarea(`${value}`);
         rentRollPage.roomsCells.eq(number).should("have.text", value);
         return this;
     }

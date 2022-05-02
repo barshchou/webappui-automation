@@ -67,11 +67,6 @@ class ClientActions extends BaseActionsExt<typeof clientPage> {
         return this;
     } 
 
-    enterIntendedUserTextBox(textToType: string): ClientActions {
-        clientPage.intendedUserTextBox.type(textToType);
-        return this;
-    }
-
     enterIdentificationOfTheClientTextBox(textToType: string): ClientActions {
         clientPage.identificationOfClientTextBox.type(textToType);
         return this;
