@@ -13,7 +13,7 @@ describe("[QA-4212] [QA-4243] Verify the Do you know per unit square footage? se
         _NavigationSection.navigateToPropertySummary();
         Property._Summary.enterNumberOfResUnits(testData.numberOfUnits);
 
-        cy.stepInfo('1. Navigate to Residential -> In-Place Rent Roll and verify Rent/SF value with filled monthly rent and'+
+        cy.stepInfo('2. Navigate to Residential -> In-Place Rent Roll and verify Rent/SF value with filled monthly rent and'+
         'square footage values by formula: [Monthly Rent] * 12 / [Square Footage]');
         _NavigationSection.navigateToResInPlaceRentRoll();
         Income._Residential.InPlaceRentRoll.verifyCheckPerUnitSquareFootageColumns(testData.columns)
