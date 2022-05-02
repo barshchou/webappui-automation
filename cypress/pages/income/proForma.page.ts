@@ -1,3 +1,4 @@
+import enums from "../../enums/enums";
 import BasePage from "../base/base.page";
 
 class ProFormaPage extends BasePage {
@@ -131,6 +132,22 @@ class ProFormaPage extends BasePage {
     }
 
     get includeNOIComparisonCheckbox() {return cy.get("[data-qa^=includeNOIComparison] input");}
+
+    categoryCellTotal(customCategoryName: string) {
+        if (customCategoryName == enums.PRO_FORMA_TYPES.totalOperatingExpenses){
+            return cy.get(`[row-id^='${this.capitalizeFirstLetter(customCategoryName)}'] [role=gridcell][col-id=total]`).first();
+        }
+        return cy.get(`[row-id^='${this.capitalizeFirstLetter(customCategoryName)}'] [role=gridcell][col-id=total]`);
+    }
+
+    get getFuelTotal() {return cy.get("[data-qa=fuel-total-cell]");}
+
+    get getWaterAndSewerTotal() {return cy.get("[data-qa=waterAndSewer-total-cell]");}
+
+    private capitalizeFirstLetter(string: string) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+      }
+    
 }
 
 export default new ProFormaPage();
