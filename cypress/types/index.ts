@@ -36,11 +36,15 @@ namespace BoweryReports {
     export type CommercialUnitsFacadeValues = "plate glass" | "other";
     export type CommercialUnitsStateValues = "finished" | "unfinished" | "vanilla box" | "other";
 
-    /*
-    More Unit Groups Values will be added after other values types added
+    /**
+     * TODO: (ernst) move types related to CommercialUnits into this namespace
      */
-    export type CommercialUnitGroupsValues = CommercialUnitsUseValues | CommercialUnitsGradeValues | CommercialUnitsFacadeValues | CommercialUnitsStateValues;
-
+    export namespace CommercialUnits {
+        /*
+        More Unit Groups Values will be added after other values types added
+        */
+        export type GroupsValues = CommercialUnitsUseValues | CommercialUnitsGradeValues | CommercialUnitsFacadeValues | CommercialUnitsStateValues;
+    }
 
     export type ForecastItem = { 
         name: BoweryReports.ForecastItemBasis, 
