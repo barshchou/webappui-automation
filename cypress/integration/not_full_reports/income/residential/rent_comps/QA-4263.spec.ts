@@ -4,11 +4,8 @@ import {createReport, deleteReport} from "../../../../../actions/base/baseTest.a
 import NavigationSection from "../../../../../actions/base/navigationSection.actions";
 import Income from "../../../../../actions/income/income.manager";
 
-const reportDatas = [
-    ReportDataCreator.getReportData("4263"),
-    ReportDataCreator.getReportData("4218", {
-        conclusionValue: Enums.VALUE_CONCLUSION_TYPE.AS_COMPLETE
-    })];
+const reportDatas = [ReportDataCreator.getDefaultReportData("4263"),
+    ReportDataCreator.getReportSpecificConclusionValue(Enums.VALUE_CONCLUSION_TYPE.AS_COMPLETE, "4263")];
 
 describe("Verify the wording of Generated Commentary section on Rent Comps page for different report types", () => {
     reportDatas.forEach(data => {

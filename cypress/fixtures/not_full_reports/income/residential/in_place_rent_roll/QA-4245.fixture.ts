@@ -31,7 +31,7 @@ const _fifthItem: ResUnitDataItem = {
 };
 
 export default {
-    reportCreationData: ReportDataCreator.getReportData("4245"),
+    reportCreationData: ReportDataCreator.getDefaultReportData("4245"),
     numberOfUnits: 5,
     columnName: "Monthly Total",
     resUnitsData: [

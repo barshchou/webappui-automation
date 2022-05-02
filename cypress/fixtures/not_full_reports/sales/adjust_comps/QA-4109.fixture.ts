@@ -10,10 +10,7 @@ const comparableFixture = () => {
 };
 
 export default {
-    
-    reportCreationData: ReportDataCreator.getReportData("4109", {
-        conclusionValue: Enums.VALUE_CONCLUSION_TYPE.AS_STABILIZED
-    }),
+    reportCreationData: ReportDataCreator.getReportSpecificConclusionValue(Enums.VALUE_CONCLUSION_TYPE.AS_STABILIZED, "4109"),
     calculationUnits: "PSF",
     comparable: Object.freeze(comparableFixture())
 };

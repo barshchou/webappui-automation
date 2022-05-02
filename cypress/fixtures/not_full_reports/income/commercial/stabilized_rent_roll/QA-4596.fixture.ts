@@ -2,9 +2,7 @@ import enums from "../../../../../enums/enums";
 import reportDataCreator from "../../../../data_creator/reportData.creator";
 
 export default {
-    reportCreationData: reportDataCreator.getReportData("4596", {
-        incomeValue: enums.INCOME_TYPE.BOTH,
-    }),
+    reportCreationData: reportDataCreator.getReportSpecificIncomeValue(enums.INCOME_TYPE.BOTH, "4596"),
     numberOfCommercialUnits: 2,
     value:"=S",
     verifyListValue: "Sherrif's Sale",
