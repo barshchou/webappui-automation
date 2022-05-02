@@ -12,15 +12,18 @@ describe("Verify the Monthly Total row in the grid", () => {
         cy.stepInfo("1. Navigate to Property -> Summary and enter number of residential units");
         _NavigationSection.navigateToPropertySummary();
         Property._Summary.enterNumberOfResUnits(testData.numberOfUnits);
+
         cy.stepInfo("2. Navigate to Income -> Residential -> In-Place Rent Roll and make sure that the Monthly Total row is displayed in the grid (not editable, default = 0.00$).");
         _NavigationSection.navigateToResInPlaceRentRoll();
         Income._Residential.InPlaceRentRoll.verifyMonthlyTotalRentValue();
+        
         cy.stepInfo("3. Verify the Monthly Total row is calculated per formula = Monthly Rent ($) sum - vacant units' rents");
         testData.resUnitsData.forEach((unit, index) => {
             Income._Residential.InPlaceRentRoll.enterMonthlyRentByRowNumber(unit.rent, index);
             Income._Residential.InPlaceRentRoll.enterLeaseStatusByRowNumber(unit.leaseStatus, index);
         });
         Income._Residential.InPlaceRentRoll.verifyMonthlyTotalRentValue();
+        
         deleteReport(testData.reportCreationData.reportNumber);
     });
 });
