@@ -1,5 +1,5 @@
 import expenseHistoryPage from "../../pages/income/expenseHistory.page";
-import {getNumberFromDollarNumberWithCommas, numberWithCommas} from "../../../utils/numbers.utils";
+import { getNumberFromDollarNumberWithCommas, numberWithCommas } from "../../../utils/numbers.utils";
 import BaseActionsExt from "../base/base.actions.ext";
 
 class ExpenseHistoryActions extends BaseActionsExt<typeof expenseHistoryPage>{
@@ -151,76 +151,41 @@ class ExpenseHistoryActions extends BaseActionsExt<typeof expenseHistoryPage>{
         return this;
     }
 
-    /**
-     * NOTE: please see QA-5202 for more details
-     * @returns {ExpenseHistoryActions}
-     */
-    verifyAverageTable(): ExpenseHistoryActions {
-        expenseHistoryPage.grossRevenueInputs.then(els => {
-            const grossRevAverageToBe = this.getAverageValueFromInputs(els);
-            expenseHistoryPage.averageGrossRevenueCell.should("have.text", grossRevAverageToBe);
-        });
-        expenseHistoryPage.realEstateTaxesInputs.then(els => {
-            const realEstateAverageToBe = this.getAverageValueFromInputs(els);
-            expenseHistoryPage.averageRealEstateCell.should("have.text", realEstateAverageToBe);
-        });
-        expenseHistoryPage.insuranceInputs.then(els => {
-            const insuranceAverageToBe = this.getAverageValueFromInputs(els);
-            expenseHistoryPage.averageInsuranceCell.should("have.text", insuranceAverageToBe);
-        });
-        expenseHistoryPage.electricityInputs.then(els => {
-            const electricityAverageToBe = this.getAverageValueFromInputs(els);
-            expenseHistoryPage.averageElectricity.should("have.text", electricityAverageToBe);
-        });
-        expenseHistoryPage.fuelInputs.then(els => {
-            const fuelAverageToBe = this.getAverageValueFromInputs(els);
-            expenseHistoryPage.averageFuelCell.should("have.text", fuelAverageToBe);
-        });
-        expenseHistoryPage.waterSewerInputs.then(els => {
-            const waterSewerAvrgToBe = this.getAverageValueFromInputs(els);
-            expenseHistoryPage.averageWaterSewerCell.should("have.text", waterSewerAvrgToBe);
-        });
-        expenseHistoryPage.repairsInputs.then(els => {
-            const repairsAvrgToBe = this.getAverageValueFromInputs(els);
-            expenseHistoryPage.averageRepairsCell.should("have.text", repairsAvrgToBe);
-        });
-        expenseHistoryPage.payrollBenefitsInputs.then(els => {
-            const payrollAvrgToBe = this.getAverageValueFromInputs(els);
-            expenseHistoryPage.averagePayrollCell.should("have.text", payrollAvrgToBe);
-        });
-        expenseHistoryPage.administrativeInputs.then(els => {
-            const administrativeAvrgToBe = this.getAverageValueFromInputs(els);
-            expenseHistoryPage.averageAdministrativeCell.should("have.text", administrativeAvrgToBe);
-        });
-        expenseHistoryPage.professionalInputs.then(els => {
-            const professionalAvrgToBe = this.getAverageValueFromInputs(els);
-            expenseHistoryPage.averageProfessionalCell.should("have.text", professionalAvrgToBe);
-        });
-        expenseHistoryPage.miscellaneousInputs.then(els => {
-            const miscellaneousAvrgToBe = this.getAverageValueFromInputs(els);
-            expenseHistoryPage.averageMiscellaneousCell.should("have.text", miscellaneousAvrgToBe);
-        });
-        expenseHistoryPage.managementInputs.then(els => {
-            const managementAvrgToBe = this.getAverageValueFromInputs(els);
-            expenseHistoryPage.averageManagementCell.should("have.text", managementAvrgToBe);
-        });
-        expenseHistoryPage.replacementInputs.then(els => {
-            const reservesAvrgToBe = this.getAverageValueFromInputs(els);
-            expenseHistoryPage.averageReplacementCell.should("have.text", reservesAvrgToBe);
-        });
-        expenseHistoryPage.totalOpExpenseCells.then(els => {
-            const toeAvrgToBe = this.getAverageTextFromCells(els);
-            expenseHistoryPage.toeAverageCell.should("have.text", toeAvrgToBe);
-        });
-        expenseHistoryPage.toeExclRealEstTaxesCells.then(els => {
-            const toeExclRETAvrgToBe = this.getAverageTextFromCells(els);
-            expenseHistoryPage.toeExclRETAverageCell.should("have.text", toeExclRETAvrgToBe);
-        });
-        expenseHistoryPage.netOpIncomeCells.then(els => {
-            const noeAvrgToBe = this.getAverageTextFromCells(els);
-            expenseHistoryPage.noeAverageCell.should("have.text", noeAvrgToBe);
+    verifyAverageByCell(cellsName: string): ExpenseHistoryActions {
+        expenseHistoryPage.getUnifiedEditableAndTotalCells(cellsName).then(elements => {
+            const averageNumber = this.getAverageValueFromInputs(elements);
+            expenseHistoryPage.getUnifiedAverageCell(cellsName).should("have.text", averageNumber);
         });
         return this;
+    }
+
+    verifyAverageByCellTotal(cellsName: string): ExpenseHistoryActions {
+        expenseHistoryPage.getUnifiedEditableAndTotalCells(cellsName).then(elements => {
+            const toeAvrgToBe = this.getAverageTextFromCells(elements);
+            expenseHistoryPage.getUnifiedAverageCell(cellsName).should("have.text", toeAvrgToBe);
+        });
+        return this;
+    }
+
+    verifyAverageTable(): ExpenseHistoryActions {
+          this
+              .verifyAverageByCell("grossRevenue")
+              .verifyAverageByCell("realEstateTaxes")
+              .verifyAverageByCell("insurance")
+              .verifyAverageByCell("electricity")
+              .verifyAverageByCell("fuel")
+              .verifyAverageByCell("waterAndSewer")
+              .verifyAverageByCell("repairsAndMaintenance")
+              .verifyAverageByCell("payrollAndBenefits")
+              .verifyAverageByCell("generalAndAdministrative")
+              .verifyAverageByCell("legalAndProfessionalFees")
+              .verifyAverageByCell("miscellaneous")
+              .verifyAverageByCell("management")
+              .verifyAverageByCell("reserves")
+              .verifyAverageByCellTotal("total")
+              .verifyAverageByCellTotal("totalExcludingTaxes")
+              .verifyAverageByCellTotal("noi");  
+          return this;
     }
 
     /**
@@ -235,10 +200,10 @@ class ExpenseHistoryActions extends BaseActionsExt<typeof expenseHistoryPage>{
             sum += elNumber;
         }
         const firstChar = numberWithCommas((sum / jQueryEls.length).toFixed(2)).charAt(0);
-          if (firstChar === "-") {
+        if (firstChar === "-") {
             return `-$${numberWithCommas((sum / jQueryEls.length).toFixed(2)).substring(1)}`;
-          }
-          return `$${numberWithCommas((sum / jQueryEls.length).toFixed(2))}`;
+        }
+        return `$${numberWithCommas((sum / jQueryEls.length).toFixed(2))}`;
     }
 
 
