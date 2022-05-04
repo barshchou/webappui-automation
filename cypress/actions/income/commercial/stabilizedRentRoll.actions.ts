@@ -1,8 +1,16 @@
 import stabRenRollPage from "../../../pages/income/commercial/stabilizedRentRoll.page";
 import {numberWithCommas} from "../../../../utils/numbers.utils";
 import BaseActionsExt from "../../base/base.actions.ext";
+import CommercialRentRollSharedComponent from "../../../shared_components/commercialRentRoll.shared";
 
 class StabilizedRentRollActions extends BaseActionsExt<typeof stabRenRollPage>{
+
+    Shared: CommercialRentRollSharedComponent;
+
+    constructor(page: typeof stabRenRollPage, sharedComponent: CommercialRentRollSharedComponent) {
+        super(page);
+        this.Shared = sharedComponent;
+    }
 
     verifyIsInspectedChecked(rowNumber= 0): this {
         stabRenRollPage.elementToVerifyIsInspected.eq(rowNumber).should("have.css", "background-color", "rgb(66, 96, 211)");
@@ -19,7 +27,7 @@ class StabilizedRentRollActions extends BaseActionsExt<typeof stabRenRollPage>{
     }
 
     verifyThatPageIsOpened(): this {
-        stabRenRollPage.stabilizedRentRollheaderSection.should("be.visible");
+        stabRenRollPage.stabilizedRentRollHeaderSection.should("be.visible");
         cy.url().then(url => {
             let urlObj = new URL(url);
             cy.log("Check whether current URL ends with '/commercial-projected-rent-roll'");
@@ -29,7 +37,7 @@ class StabilizedRentRollActions extends BaseActionsExt<typeof stabRenRollPage>{
     }
 
     verifyLeaseStatusByRow(leaseStatus: BoweryReports.LeaseStatus, rowNumber = 0): this {
-        stabRenRollPage.leaseStatusCells.eq(rowNumber).should("contain.text", leaseStatus);
+        this.Shared.leaseStatusCells.eq(rowNumber).should("contain.text", leaseStatus);
         return this;
     }
 
@@ -148,4 +156,4 @@ class StabilizedRentRollActions extends BaseActionsExt<typeof stabRenRollPage>{
 
 }
 
-export default new StabilizedRentRollActions(stabRenRollPage);
+export default new StabilizedRentRollActions(stabRenRollPage, new CommercialRentRollSharedComponent());
