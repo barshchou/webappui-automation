@@ -67,7 +67,7 @@ class InPlaceRentRollPage extends BasePage {
 
     get unitTypeCells() {return cy.get("[data-qa^=unitLayout][data-qa$=cell]");}
 
-    get rentSF() {return cy.xpath("//*[contains(@class, 'readOnly') and not(contains(@data-qa, 'cell'))]");}
+    get rentSFCell() {return cy.xpath("//*[contains(@class, 'readOnly') and not(contains(@data-qa, 'cell'))]");}
 }
 
 export default new InPlaceRentRollPage();
