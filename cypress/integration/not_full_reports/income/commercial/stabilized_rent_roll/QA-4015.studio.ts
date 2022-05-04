@@ -78,8 +78,7 @@ describe(" Verify that changes are displayed for Annual and Monthly Rent columns
          * but with [href=`/report/${report_id}`] [data-qa="archive-btn"], where report_id can be intercepted during the test
          */
         cy.get(`@${reportIdAlias}`).then(val => {
-            // @ts-ignore
-            cy.log(val);
+            cy.log(`${val}`);
             cy.get(`[href="/report/${val}"] [data-qa="archive-btn"]`).click({force:true});
         });
     });

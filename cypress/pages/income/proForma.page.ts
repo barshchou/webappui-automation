@@ -123,7 +123,7 @@ class ProFormaPage extends BasePage {
         return this.residentialVCLossLabelCell.children('[col-id="perUnit"]');
     }
 
-    getCommercialUseVCLossLabel(useText: string) {
+    getCommercialUseVCLossLabel() {
         // const attributeToBe = useText === "Undetermined" || useText === "Industrial" ?
         //     `${useText}Commercial` : useText.replaceAll(" ", "");
         // return cy.get(`[data-qa='less${attributeToBe}VCLoss-label-cell']`);

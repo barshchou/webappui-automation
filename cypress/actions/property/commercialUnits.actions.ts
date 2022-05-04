@@ -1,4 +1,3 @@
-import { _CommercialUnits } from './index';
 import commercialUnitsPage from "../../pages/property/commercialUnits.page";
 import { cutDecimalPartToNumberOfDigits, isHasDecimalPartMoreNumberOfDigits, numberWithCommas } from "../../../utils/numbers.utils";
 import BaseActionsExt from "../base/base.actions.ext";
@@ -20,7 +19,7 @@ class CommercialUnitsActions extends BaseActionsExt<typeof commercialUnitsPage> 
         return this;
     }
 
-    uploadImages(imageType: "Interior Images" | "Exterior Images", pathToFile: string, inputMethod: "drag-n-drop" | "input") {
+    uploadImages(imageType: BoweryReports.ImageType, pathToFile: string, inputMethod: "drag-n-drop" | "input") {
         let aliasImageUpload = "aliasImageUpload";
         cy.intercept("POST", "/imageUpload").as(aliasImageUpload);
         cy.contains(imageType).next().find('input[type="file"]')

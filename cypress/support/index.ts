@@ -9,16 +9,16 @@ import "cypress-real-events/support";
 
 require("cypress-xpath");
 require("cypress-iframe");
-const registerCypressGrep = require('cypress-grep')
+const registerCypressGrep = require('cypress-grep');
 registerCypressGrep();
 
-Cypress.on("uncaught:exception", (err, runnable) => {
+Cypress.on("uncaught:exception", () => {
     // returning false here prevents Cypress from
     // failing the test
     return false;
 });
 
-Cypress.on("fail",(err,test)=>{
+Cypress.on("fail",(err) => {
   recordDOM_Snapshot();
   recordProxiedRequests();
   throw err;
