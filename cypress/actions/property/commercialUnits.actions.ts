@@ -1,4 +1,3 @@
-import { _CommercialUnits } from './index';
 import commercialUnitsPage from "../../pages/property/commercialUnits.page";
 import { cutDecimalPartToNumberOfDigits, isHasDecimalPartMoreNumberOfDigits, numberWithCommas } from "../../../utils/numbers.utils";
 import BaseActionsExt from "../base/base.actions.ext";
@@ -109,8 +108,8 @@ class CommercialUnitsActions extends BaseActionsExt<typeof commercialUnitsPage> 
         return this;
     }
 
-    verifyCommercialUnitSFDiscussionTextAreaContains(): this {
-        commercialUnitsPage.commercialGrossLeasableAreaTextArea.should("contain.text", text);
+    verifyCommercialUnitSFDiscussionTextAreaContains(text: string): this {
+        commercialUnitsPage.commercialUnitSFDiscussionTextArea.should("contain.text", text);
         return this;
     }
 
