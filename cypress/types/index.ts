@@ -53,6 +53,12 @@ namespace BoweryReports {
         generalAndAdministrative?: number, management?: number, toe?: string};
 
     export type BuildingDescription = {grossArea: number, numberOfUnits: number}
+
+    export type ResidentialUnit = {
+        footage: number,
+        monthlyRent: number,
+        leaseStatus: BoweryReports.LeaseStatus
+    }
 }
 
 namespace BoweryAutomation {

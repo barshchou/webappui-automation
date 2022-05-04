@@ -373,16 +373,16 @@ class InPlaceRentRollActions extends BaseActionsExt<typeof rentRollPage> {
         return this;
     }
 
-    verifyRentSFValue(): InPlaceRentRollActions{
-        rentRollPage.monthlyRentCells.then(el => {
+    verifyRentSFValue(rowNumber = 0): InPlaceRentRollActions{
+        rentRollPage.monthlyRentCells.eq(rowNumber).then(el => {
             const monthlyRent = getNumberFromDollarNumberWithCommas(el.text());
-            rentRollPage.squareFootageCells.then(sf => {
+            rentRollPage.squareFootageCells.eq(rowNumber).then(sf => {
                 const squareFootage = getNumberFromDollarNumberWithCommas(sf.text());
                 const rentSFNumber = (monthlyRent * 12 / squareFootage).toFixed(2);
                 if (squareFootage === 0) {
-                    rentRollPage.rentSFCell.should("have.text", `$NaN`);
+                    rentRollPage.rentSFCell.eq(rowNumber).should("have.text", `$NaN`);
                 } else {
-                    rentRollPage.rentSFCell.should("have.text", `$${rentSFNumber}`);
+                    rentRollPage.rentSFCell.eq(rowNumber).should("have.text", `$${rentSFNumber}`);
                 }
             });
         });
