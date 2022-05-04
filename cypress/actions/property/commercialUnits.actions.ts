@@ -1,30 +1,30 @@
 import commercialUnitsPage from "../../pages/property/commercialUnits.page";
-import {cutDecimalPartToNumberOfDigits, isHasDecimalPartMoreNumberOfDigits, numberWithCommas} from "../../../utils/numbers.utils";
+import { cutDecimalPartToNumberOfDigits, isHasDecimalPartMoreNumberOfDigits, numberWithCommas } from "../../../utils/numbers.utils";
 import BaseActionsExt from "../base/base.actions.ext";
 
 class CommercialUnitsActions extends BaseActionsExt<typeof commercialUnitsPage> {
-    verifyImageHasRotated(rotateIndex: number){
+    verifyImageHasRotated(rotateIndex: number) {
         commercialUnitsPage.commercialUnitImage
-        .last().invoke("attr","style").then(style => {
-            expect(style).includes(`w_256,a_${90*rotateIndex}`);
-        });
+            .last().invoke("attr", "style").then(style => {
+                expect(style).includes(`w_256,a_${90 * rotateIndex}`);
+            });
         return this;
     }
 
     /**
      *NOTE: Rotates last image
      */
-    rotateImage(){
-        commercialUnitsPage.iconRotateImage.last().click({force:true});
+    rotateImage() {
+        commercialUnitsPage.iconRotateImage.last().click({ force: true });
         return this;
     }
 
     uploadImages(imageType: "Interior Images" | "Exterior Images", pathToFile: string, inputMethod: "drag-n-drop" | "input") {
         let aliasImageUpload = "aliasImageUpload";
-        cy.intercept("POST","/imageUpload").as(aliasImageUpload);
+        cy.intercept("POST", "/imageUpload").as(aliasImageUpload);
         cy.contains(imageType).next().find('input[type="file"]')
-        .attachFile(pathToFile,{subjectType:inputMethod});
-        cy.wait(`@${aliasImageUpload}`).then(({response}) => {
+            .attachFile(pathToFile, { subjectType: inputMethod });
+        cy.wait(`@${aliasImageUpload}`).then(({ response }) => {
             expect(response.statusCode).equal(200);
             cy.log("imageUpload resolved");
         });
@@ -92,8 +92,24 @@ class CommercialUnitsActions extends BaseActionsExt<typeof commercialUnitsPage> 
         return this;
     }
 
-    verifyCommercialUnitSFDiscussionTextAreaContains(text: string): this {
-        commercialUnitsPage.commercialUnitSFDiscussionTextArea.should("contain.text", text);
+    verifyCommercialGrossLeasableAreaFieldIsDisabled(): this {
+        commercialUnitsPage.commercialGrossLeasableAreaTextArea.should('have.attr', 'disabled');
+        return this;
+    }
+
+    verifyCommercialGrossLeasableAreaEqualSumUnitSF(squareFeetList: Array<number>): this {
+        const sumAllUnitSFInArray = squareFeetList.reduce(
+            (previousValue, currentValue) => previousValue + currentValue
+        );
+        commercialUnitsPage.commercialGrossLeasableAreaTextArea.invoke('prop', 'defaultValue').then(defaultValue => {
+            const valueOfGrossLeasableAreaTextArea = parseInt(defaultValue);
+            expect(valueOfGrossLeasableAreaTextArea).to.be.equal(sumAllUnitSFInArray);
+        });
+        return this;
+    }
+
+    verifyCommercialUnitSFDiscussionTextAreaContains(): this {
+        commercialUnitsPage.commercialGrossLeasableAreaTextArea.should("contain.text", text);
         return this;
     }
 

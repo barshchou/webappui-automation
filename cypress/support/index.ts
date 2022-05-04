@@ -5,6 +5,7 @@
 import { recordProxiedRequests } from "../../utils/intercept.utils";
 import { recordDOM_Snapshot } from "../utils/snapshot.utils";
 import "./commands";
+import "cypress-real-events/support";
 
 require("cypress-xpath");
 require("cypress-iframe");

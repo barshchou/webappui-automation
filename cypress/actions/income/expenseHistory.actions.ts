@@ -26,9 +26,13 @@ class ExpenseHistoryActions extends BaseActionsExt<typeof expenseHistoryPage>{
         return this;
     }
 
-    enterRepairsAndMaintenanceByColIndex(repairsAndMaintenance: number | string, index: number = 0): ExpenseHistoryActions {
-        expenseHistoryPage.repairsInputs.eq(index).clear().type(`${repairsAndMaintenance}`)
-        .should("have.value", `$${numberWithCommas(repairsAndMaintenance)}`);
+    enterRepairsAndMaintenanceByColIndex(repairsAndMaintenance: number | string, index = 0): ExpenseHistoryActions {
+        if (repairsAndMaintenance === "clear") {
+            expenseHistoryPage.repairsInputs.eq(index).clear();
+        } else {
+            expenseHistoryPage.repairsInputs.eq(index).dblclick().scrollIntoView().clear().realType(`${repairsAndMaintenance}{enter}`);
+            expenseHistoryPage.repairsInputs.eq(index).should("have.text", `$${numberWithCommas(repairsAndMaintenance)}.00`);
+        }
         return this;
     }
 
@@ -65,8 +69,8 @@ class ExpenseHistoryActions extends BaseActionsExt<typeof expenseHistoryPage>{
     }
 
     enterElectricityByColIndex(electricity: number | string, index = 0): ExpenseHistoryActions {
-        expenseHistoryPage.electricityInputs.eq(index).clear().type(`${electricity}`)
-            .should("have.value", `$${numberWithCommas(electricity)}`);
+        expenseHistoryPage.electricityInputs.eq(index).dblclick().scrollIntoView().clear().realType(`${electricity}{enter}`);
+        expenseHistoryPage.electricityInputs.eq(index).should("have.text", `$${numberWithCommas(electricity)}.00`);
         return this;
     }
 
@@ -74,18 +78,8 @@ class ExpenseHistoryActions extends BaseActionsExt<typeof expenseHistoryPage>{
         if (fuel === "clear") {
             expenseHistoryPage.fuelInputs.eq(index).clear();
         } else {
-            expenseHistoryPage.fuelInputs.eq(index).clear().type(`${fuel}`)
-                .should("have.value", `$${numberWithCommas(fuel)}`);
-        }
-        return this;
-    }
-
-    enterRepairsAndMaintenanceByColIndex(repairsAndMaintenance: string | number = 0, index = 0): ExpenseHistoryActions {
-        if (repairsAndMaintenance === "clear") {
-            expenseHistoryPage.repairsAndMaintenanceInputs.eq(index).clear();
-        } else {
-            expenseHistoryPage.repairsAndMaintenanceInputs.eq(index).clear().type(`${repairsAndMaintenance}`)
-                .should("have.value", `$${numberWithCommas(repairsAndMaintenance)}`);
+            expenseHistoryPage.fuelInputs.eq(index).dblclick().scrollIntoView().clear().realType(`${fuel}{enter}`);
+            expenseHistoryPage.fuelInputs.eq(index).should("have.text", `$${numberWithCommas(fuel)}.00`);
         }
         return this;
     }
@@ -158,7 +152,7 @@ class ExpenseHistoryActions extends BaseActionsExt<typeof expenseHistoryPage>{
     }
 
     /**
-     *
+     * NOTE: please see QA-5202 for more details
      * @returns {ExpenseHistoryActions}
      */
     verifyAverageTable(): ExpenseHistoryActions {
@@ -257,16 +251,21 @@ class ExpenseHistoryActions extends BaseActionsExt<typeof expenseHistoryPage>{
         let cellsCounter = 0;
         let sum = 0;
         for (let i = 0; i < jQueryElements.length; i++) {
-            let elValue = jQueryElements[i].getAttribute("value");
-            if (jQueryElements[i].hasAttribute("disabled") || elValue === "") {
+            let elValue = jQueryElements[i].textContent;
+            cy.log(`Element value ${i} = ${elValue}`);
+            if (elValue === null || elValue === "") {
                 continue;
             }
             let elNumber = getNumberFromDollarNumberWithCommas(elValue);
             sum += elNumber;
             cellsCounter++;
         }
-        if (cellsCounter === 0) cellsCounter = 1;
-        return `$${numberWithCommas((sum / cellsCounter).toFixed(2))}`;
+        cy.log(`Cells counter = ${cellsCounter}`);
+        if (cellsCounter === 0) {
+            return "";
+        } else {
+            return `$${numberWithCommas((sum / cellsCounter).toFixed(2))}`;
+        }
     }
 
     /**
