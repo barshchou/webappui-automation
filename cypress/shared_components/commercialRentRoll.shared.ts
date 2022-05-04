@@ -1,8 +1,7 @@
 class CommercialRentRollSharedComponent {
 
-    testMethod() {
-        return this;
-    }
+    get leaseStatusCells() {return cy.get("[data-qa^=leaseStatus].htAutocomplete");}
+
 }
 
 export default CommercialRentRollSharedComponent;

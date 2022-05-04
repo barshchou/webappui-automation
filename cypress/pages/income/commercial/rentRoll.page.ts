@@ -17,8 +17,6 @@ class CommercialRentRollPage extends BasePage{
 
     get leaseStatusArrows() {return cy.get("[data-qa*='leaseStatus']:not([class*='readOnly']) > div[class*=Arrow]");}
 
-    get leaseStatusCells() {return cy.get("*[data-qa*='leaseStatus']:not([class*='readOnly'])");}
-
     get isInspectedCheckboxes() {return cy.get("[data-qa*='isInspected']:not([class*='readOnly']) input");}
 
     get elementToVerifyIsInspected() {return cy.get("[data-qa*='isInspected']:not([class*='readOnly']) span");}

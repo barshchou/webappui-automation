@@ -2,15 +2,15 @@ import rentRollPage from "../../../pages/income/commercial/rentRoll.page";
 import {isDateHasCorrectFormat} from "../../../../utils/date.utils";
 import {numberWithCommas} from "../../../../utils/numbers.utils";
 import BaseActionsExt from "../../base/base.actions.ext";
-import commercialRentRollShared from "../../../shared_components/commercialRentRoll.shared";
+import CommercialRentRollSharedComponent from "../../../shared_components/commercialRentRoll.shared";
 
 class CommercialRentRollActions extends BaseActionsExt<typeof rentRollPage> {
 
-    SharedComponent: typeof commercialRentRollShared;
+    Shared: CommercialRentRollSharedComponent;
 
-    constructor(page: typeof rentRollPage, sharedComponent: typeof commercialRentRollShared) {
+    constructor(page: typeof rentRollPage, sharedComponent: CommercialRentRollSharedComponent) {
         super(page);
-        this.SharedComponent = sharedComponent;
+        this.Shared = sharedComponent;
     }
 
     verifyBasisOfRentTooltip() {
@@ -75,18 +75,18 @@ class CommercialRentRollActions extends BaseActionsExt<typeof rentRollPage> {
     }
 
     verifyLeaseStatusCellTextByRow(textToBe: string, rowNumber = 0): this {
-        rentRollPage.leaseStatusCells.eq(rowNumber).should("have.text", textToBe);
+        this.Shared.leaseStatusCells.eq(rowNumber).should("have.text", textToBe);
         return this;
     }
 
     pasteToLeaseStatusByRow(textToPaste: string, rowNumber = 0): this {
-        rentRollPage.leaseStatusCells.eq(rowNumber).invoke("text", textToPaste)
+        this.Shared.leaseStatusCells.eq(rowNumber).invoke("text", textToPaste)
             .should("have.text", textToPaste);
         return this;
     }
 
     pressDeleteLeaseStatusByRow(rowNumber = 0): this {
-        rentRollPage.leaseStatusCells.eq(rowNumber).trigger("keydown", {keyCode: 46})
+        this.Shared.leaseStatusCells.eq(rowNumber).trigger("keydown", {keyCode: 46})
             .should("have.text", "");
         return this;
     }
@@ -456,4 +456,4 @@ class CommercialRentRollActions extends BaseActionsExt<typeof rentRollPage> {
     }
 }
 
-export default new CommercialRentRollActions(rentRollPage, commercialRentRollShared);
+export default new CommercialRentRollActions(rentRollPage, new CommercialRentRollSharedComponent());
