@@ -11,7 +11,8 @@ namespace BoweryReports {
     export type isSalesForcePull = boolean
     export type ReportCreationOptions = {
         incomeValue?: string,
-        conclusionValue?: BoweryReports.ConclusionValue
+        conclusionValue?: BoweryReports.ConclusionValue,
+        isSalesForcePull?: isSalesForcePull
     }
     export type LeaseDateName = "Start" | "Expiry"
     export type LeaseStatus = "Occupied" | "Vacant"

@@ -69,8 +69,8 @@ class ReportCreator {
         return this.setReportNumber(testNumber, isSaleForcePull).setAddress().setIncomeValue().setTemplateValue().setConclusionValue().build();
     }
 
-    getReportData(testNumber: string, isSaleForcePull = false, options?: BoweryReports.ReportCreationOptions){
-        this.isSalesForcePull = isSaleForcePull;
+    getReportData(testNumber: string, options?: BoweryReports.ReportCreationOptions){
+        this.isSalesForcePull = false;
 
         if(options?.incomeValue){
             this.setIncomeValue(options.incomeValue);
@@ -79,7 +79,10 @@ class ReportCreator {
         if(options?.conclusionValue){
             this.setConclusionValue(options.conclusionValue);
         }
-        return this.setReportNumber(testNumber, isSaleForcePull).setAddress().setTemplateValue().build();
+        if(options?.isSalesForcePull){
+            this.isSalesForcePull = options.isSalesForcePull;
+        }
+        return this.setReportNumber(testNumber, this.isSalesForcePull).setAddress().setTemplateValue().build();
     }
 }
 
