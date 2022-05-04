@@ -10,7 +10,7 @@ class SummaryActions extends BaseActions {
 
     verifyThatPageIsOpened(): this {
         summaryPage.headerSection.should("be.visible");
-        cy.url().then(url=>{
+        cy.url().then(url => {
             let orlObj = new URL(url);
             cy.log("Check whether current URL ends with '/property-summary'");
             cy.wrap(orlObj.pathname.endsWith("/property-summary")).should("be.true");
@@ -23,7 +23,7 @@ class SummaryActions extends BaseActions {
         return this;
     }
 
-    enterNumberOfCommercialUnits(number: number = 1): this {
+    enterNumberOfCommercialUnits(number = 1): this {
         summaryPage.numberOfCommercialUnitsInput.clear().type(`${number}`).should("have.value", number);
         return this;
     }

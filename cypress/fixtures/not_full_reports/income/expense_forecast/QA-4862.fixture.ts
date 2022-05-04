@@ -11,4 +11,4 @@ export default {
         basis: "unit",
         forecast: 4000
     }
-}
+};

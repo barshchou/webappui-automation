@@ -11,4 +11,4 @@ export default {
         basis: "sf",
         forecast: 5
     }
-}
+};
