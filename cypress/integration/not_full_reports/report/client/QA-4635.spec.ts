@@ -13,17 +13,17 @@ describe("Verify the Save button functionality for Intended User and Identificat
         _NavigationSection.navigateToClientPage();
 
         Report._Client.verifyProgressBarNotExist()
-            .clickTextBoxEditButton()
-            .clickTextBoxEditButton();
+            .Page.formEditBtn(0).click();
+            Report._Client.Page.formEditBtn(0).click();
 
         cy.stepInfo("2. Edit comment and click on the Save button for both sections.");
         Report._Client.enterIntendedUserTextBox(testData.textToType)
             .clickNarrativeSuggestions(testData.verifyListValue)
             .enterIdentificationOfTheClientTextBox(testData.textToType)
             .clickNarrativeSuggestions(testData.verifyListValue, 1)
-            .clickTextBoxSaveButton()
-            .clickTextBoxSaveButton();
-
+            .Page.formSaveBtn(0).click();
+            Report._Client.Page.formSaveBtn(0).click();
+            
         cy.stepInfo("3. Verify that the changes from step 2 are saved.");
         Report._Client.verifyIntendedUserTextBox(testData.verifyAreaValue)
             .verifyIdentificationOfTheClientTextBox(testData.verifyAreaValue);
