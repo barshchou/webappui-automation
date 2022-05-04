@@ -10,6 +10,9 @@ export const getEnvUrl = () => {
         case "prod":
             envUrl = Enums.ENV_URLS.PROD;
             break;
+        case "local":
+            envUrl = Enums.ENV_URLS.LOCAL;
+            break;
         case "custom":
             if (isCorrectCustomEnv(Cypress.env("customEnv"))) {
                 envUrl = Cypress.env("customEnv");
