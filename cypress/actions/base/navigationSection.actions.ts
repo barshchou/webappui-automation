@@ -315,12 +315,52 @@ class NavigationSectionActions extends BaseActions {
         return this;
     }
 
+    clickCoverPage() {
+        navigationSectionPage.coverPage.click();
+        return this;
+    }
+
+    clickIntroduction() {
+        navigationSectionPage.introduction.click();
+        return this;
+    }
+
+    clickProfileOrganization() {
+        navigationSectionPage.profileOrganization.click();
+        return this;
+    }
+
+    selectLink(nameLink: string) {
+        navigationSectionPage.menuItemsProfileOrganization.contains(nameLink).click();
+        return this;
+    }
+
+    navigateToProfileOrganization(nameLink: string) {
+        this.clickProfileOrganization()
+            .selectLink(nameLink);
+        return this;
+    }
+
     navigateToLaundry() {
         this.clickIncomeApproachButton()
             .clickMiscellaneousIncome()
             .clickLaundryButton()
             .clickYesButton();
         return this;
+    }
+
+    navigateToCoverPage() {
+        this.clickPreviewEditButton()
+        .clickCoverPage()
+        .clickYesButton();
+    return this;
+    }
+
+    navigateToIntroduction() {
+        this.clickPreviewEditButton()
+        .clickIntroduction()
+        .clickYesButton();
+    return this;
     }
 
     navigateToLetterOfTransmittal() {

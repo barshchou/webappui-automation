@@ -69,6 +69,11 @@ export default class BaseActions {
         return this;
     }
 
+    verifyValueContainsInCard(verifyContainsValue: string) {
+        cy.contains(verifyContainsValue).should("be.visible");
+        return this;
+    }
+
     /**
      * Retrive DOM-element screenshot and compares it with baseline.
      * @param element - PageElement to be snapshoted. 

@@ -10,7 +10,7 @@ class ClientActions extends BaseActionsExt<typeof clientPage> {
     }
 
     enterClientName(name: string): ClientActions {
-        clientPage.clientNameField.type(name).type("{enter}").should("have.value", name);
+        clientPage.clientNameField.clear().type(name).type("{enter}");
         return this;
     }
     
