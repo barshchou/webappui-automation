@@ -143,7 +143,7 @@ class InPlaceRentRollActions extends BaseActionsExt<typeof rentRollPage> {
         return this;
     }
 
-    uploadFile(filePath, unitsToBe) {
+    uploadFile(filePath: string, unitsToBe: number): InPlaceRentRollActions{
         rentRollPage.uploadFileButton.should("be.visible");
         rentRollPage.uploadFileInput.should("exist").attachFile(filePath);
         rentRollPage.importDataButton.should("exist").should("be.enabled").click();
