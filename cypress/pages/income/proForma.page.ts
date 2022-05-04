@@ -32,23 +32,28 @@ class ProFormaPage extends BasePage {
         return this.residentialVCLossLabelCell;
     }
     
-    categoryCellTotal(customCategoryName: string) {
+    categoryCellTotal(categoryName: string) {
 
-        return customCategoryName == enums.PRO_FORMA_TYPES.totalOperatingExpenses 
-            ? cy.get(`[row-id^='${(customCategoryName)}'] [role=gridcell][col-id=total]`).first() 
-            : cy.get(`[row-id^='${(customCategoryName)}'] [role=gridcell][col-id=total]`);
+        return categoryName == enums.PRO_FORMA_TYPES.totalOperatingExpenses 
+            ? cy.get(`[row-id^='${this.capitalizeFirstLetter(categoryName)}'] [role=gridcell][col-id=total]`).first() 
+            : cy.get(`[row-id^='${this.capitalizeFirstLetter(categoryName)}'] [role=gridcell][col-id=total]`);
     }
 
-    categoryPSFTotal(customCategoryName: string) {
-        return customCategoryName == enums.PRO_FORMA_TYPES.totalOperatingExpenses 
-            ? cy.get(`[row-id^='${(customCategoryName)}'] [role=gridcell][col-id=psf]`).first() 
-            : cy.get(`[row-id^='${(customCategoryName)}'] [role=gridcell][col-id=psf]`);
+    categoryPSFTotal(categoryName: string) {
+        return categoryName == enums.PRO_FORMA_TYPES.totalOperatingExpenses 
+            ? cy.get(`[row-id^='${this.capitalizeFirstLetter(categoryName)}'] [role=gridcell][col-id=psf]`).first() 
+            : cy.get(`[row-id^='${this.capitalizeFirstLetter(categoryName)}'] [role=gridcell][col-id=psf]`);
     }
 
-    categoryPerUnitTotal(customCategoryName: string) {
-        return customCategoryName == enums.PRO_FORMA_TYPES.totalOperatingExpenses 
-            ? cy.get(`[row-id^='${(customCategoryName)}'] [role=gridcell][col-id=perUnit]`).first() 
-            : cy.get(`[row-id^='${(customCategoryName)}'] [role=gridcell][col-id=perUnit]`);
+    categoryPerUnitTotal(categoryName: string) {
+        return categoryName == enums.PRO_FORMA_TYPES.totalOperatingExpenses 
+            ? cy.get(`[row-id^='${this.capitalizeFirstLetter(categoryName)}'] [role=gridcell][col-id=perUnit]`).first() 
+            : cy.get(`[row-id^='${this.capitalizeFirstLetter(categoryName)}'] [role=gridcell][col-id=perUnit]`);
+    }
+
+    private capitalizeFirstLetter(string: string) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+
     }
 }
 
