@@ -2,11 +2,17 @@ import Enums from "../../../../../enums/enums";
 import ReportDataCreator from "../../../../data_creator/reportData.creator";
 
 const reportCreationFixture = () => {
-    return ReportDataCreator.setAddress().setReportNumber("4408")
+    return ReportDataCreator.setAddress().getReportData("4408")
         .setTemplateValue(Enums.TEMPLATE_TYPE.NOT_FREDDIE_MAC)
         .setIncomeValue(Enums.INCOME_TYPE.BOTH)
         .setConclusionValue(Enums.VALUE_CONCLUSION_TYPE.AS_COMPLETE);
 };
+
+const leaseNoVacantFixture: BoweryReports.LeaseStatus[] = ["Occupied", "Occupied"];
+const leaseOneVacantFixture: BoweryReports.LeaseStatus[] = ["Occupied", "Vacant"];
+const leaseAllVacantFixture: BoweryReports.LeaseStatus[] = ["Vacant", "Vacant"];
+const leaseOneOccupiedFixture: BoweryReports.LeaseStatus = "Occupied";
+const leaseFewVacantFewOccupiedFixture: BoweryReports.LeaseStatus[] = ["Occupied", "Vacant", "Vacant", "Occupied", "Occupied"];
 
 const noVacantFewUnitsFixture = () => {
     return {
@@ -55,6 +61,11 @@ const fewVacantFewOccupiedFixture = () => {
 export default {
     reportCreationData: reportCreationFixture(),
     noVacantData: noVacantFewUnitsFixture(),
+    leaseNoVacant: leaseNoVacantFixture,
+    leaseOneVacant: leaseOneVacantFixture,
+    leaseAllVacant: leaseAllVacantFixture,
+    leaseOneOccupied: leaseOneOccupiedFixture,
+    leaseFewVacantFewOccupied: leaseFewVacantFewOccupiedFixture,
     oneVacantData: Object.freeze(oneVacantFixture()),
     allVacantData: Object.freeze(allVacantFixture()),
     oneUnitData: Object.freeze(oneUnitFixture()),

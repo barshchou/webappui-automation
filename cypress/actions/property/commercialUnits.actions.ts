@@ -108,7 +108,7 @@ class CommercialUnitsActions extends BaseActionsExt<typeof commercialUnitsPage> 
         return this;
     }
 
-    verifyCommercialUnitSFDiscussionTextAreaContains(): this {
+    verifyCommercialUnitSFDiscussionTextAreaContains(text: string): this {
         commercialUnitsPage.commercialGrossLeasableAreaTextArea.should("contain.text", text);
         return this;
     }

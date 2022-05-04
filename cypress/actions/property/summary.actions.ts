@@ -111,8 +111,8 @@ class SummaryActions extends BaseActions {
      * @param {number | string} number
      * @returns {SummaryActions}
      */
-    enterFloorsNumber(number: number | string): this {
-        summaryPage.floorsNumber.clear().type(number).should("have.value", number);
+    enterFloorsNumber(number: number): this {
+        summaryPage.floorsNumber.clear().type(number.toString()).should("have.value", number);
         return this;
     }
 
@@ -132,12 +132,12 @@ class SummaryActions extends BaseActions {
      * @param {number | string} area
      * @returns {SummaryActions}
      */
-    enterCurrentGrossBuildingArea(area: number | string): this {
+    enterCurrentGrossBuildingArea(area: number): this {
         if (isHasDecimalPartMoreNumberOfDigits(area, 2)) {
             area = cutDecimalPartToNumberOfDigits(area, 2);
         }
         const textToBe = numberWithCommas(area);
-        summaryPage.currentGrossBuildingArea.clear().type(area).should("have.value", textToBe);
+        summaryPage.currentGrossBuildingArea.clear().type(area.toString()).should("have.value", textToBe);
         return this;
     }
 
@@ -146,8 +146,8 @@ class SummaryActions extends BaseActions {
      * @param {number | string} number
      * @returns {SummaryActions}
      */
-    enterCurrentNumberOfResUnits(number: number | string): this {
-        summaryPage.currentNumberOfResUnits.clear().type(number).should("have.value", number);
+    enterCurrentNumberOfResUnits(number: number): this {
+        summaryPage.currentNumberOfResUnits.clear().type(number.toString()).should("have.value", number);
         return this;
     }
 
@@ -156,8 +156,8 @@ class SummaryActions extends BaseActions {
      * @param {number | string} number
      * @returns {SummaryActions}
      */
-    enterCurrentFloorsNumber(number: number | string): this {
-        summaryPage.currentFloorsNumber.clear().type(number).should("have.value", number);
+    enterCurrentFloorsNumber(number: number): this {
+        summaryPage.currentFloorsNumber.clear().type(number.toString()).should("have.value", number);
         return this;
     }
 

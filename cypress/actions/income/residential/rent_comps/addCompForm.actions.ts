@@ -104,7 +104,7 @@ class AddCompFormActions extends BaseActions {
      * @param {string} [day]
      * @returns {AddCompFormActions}
      */
-    chooseDayOfCurrentMonthInPicker(day) {
+    chooseDayOfCurrentMonthInPicker(day?) {
         day = day ?? Number(getTodayDay());
         let date = getTodayDateString();
         let dateArr = date.split("-");

@@ -37,11 +37,12 @@ namespace BoweryReports {
     export type CommercialUnitsGradeValues = "atGrade" | "partiallyBelowGrade" | "belowGrade" | "other";
     export type CommercialUnitsFacadeValues = "plate glass" | "other";
     export type CommercialUnitsCeilingHeightValues = "low" | "normal" | "high" | "other"; 
+    export type CommercialUnitsFrontageValues = "small" | "medium" | "large" | "other"; 
 
     /*
     More Unit Groups Values will be added after other values types added
      */
-    export type CommercialUnitGroupsValues = CommercialUnitsUseValues | CommercialUnitsGradeValues | CommercialUnitsFacadeValues | CommercialUnitsCeilingHeightValues;
+    export type CommercialUnitGroupsValues = CommercialUnitsUseValues | CommercialUnitsGradeValues | CommercialUnitsFacadeValues | CommercialUnitsCeilingHeightValues | CommercialUnitsFrontageValues;
 
 
     export type ForecastItem = { 
