@@ -22,10 +22,14 @@ addMatchImageSnapshotCommand({
 const _cyVisit = (url: string) => cy.visit(url, { timeout: Cypress.env("DEBUG") == 1 ? 180000 : 60000 });
 
 Cypress.Commands.add("loginByApi", (url) => {
+    let apiUrl = null;
+    if(Cypress.env("url") == "local"){
+        apiUrl = "http://localhost:8080";
+    }
     cy.log("Logging in by api");
     cy.request({
         method: "POST",
-        url: `${url}/user/login`,
+        url: `${(apiUrl != null) ? apiUrl : url}/user/login`,
         body: {
             username: Cypress.env("USERNAME"),
             password: Cypress.env("PASSWORD")
