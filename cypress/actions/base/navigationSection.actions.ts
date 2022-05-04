@@ -149,7 +149,7 @@ class NavigationSectionActions extends BaseActions {
         return this;
     }
 
-    openInPlaceRentRollInCommercial(isWithSave: true): NavigationSectionActions {
+    openInPlaceRentRollInCommercial(isWithSave = true): NavigationSectionActions {
         this.clickCommercialRentRollButton();
         if (isWithSave) this.clickYesButton();
         return this;
