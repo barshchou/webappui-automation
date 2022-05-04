@@ -137,7 +137,13 @@ class InPlaceRentRollActions extends BaseActionsExt<typeof rentRollPage> {
         return this;
     }
 
-    uploadFile(filePath: string, unitsToBe: number): InPlaceRentRollActions {
+     verifyCheckPerUnitSquareFootageColumns(columnNames: string[]): InPlaceRentRollActions {
+        this.checkPerUnitSquareFootage()
+            .verifyListColumnExist(columnNames);
+        return this;
+    }
+
+    uploadFile(filePath: string, unitsToBe: number): InPlaceRentRollActions{
         rentRollPage.uploadFileButton.should("be.visible");
         rentRollPage.uploadFileInput.should("exist").attachFile(filePath);
         rentRollPage.importDataButton.should("exist").should("be.enabled").click();
@@ -298,15 +304,15 @@ class InPlaceRentRollActions extends BaseActionsExt<typeof rentRollPage> {
                 const rentPSFNumber = (monthlyNumber / squareNumber).toFixed(2);
                 if (isPerMonth === "perMonth") {
                     if (squareNumber === 0) {
-                        rentRollPage.rentSF.should("have.text", `$NaN`);
+                        rentRollPage.rentSFCell.should("have.text", `$NaN`);
                     } else {
-                        rentRollPage.rentSF.should("have.text", `$${rentPSFNumber}`);
+                        rentRollPage.rentSFCell.should("have.text", `$${rentPSFNumber}`);
                     }
                 } else {
                     if (squareNumber === 0) {
-                        rentRollPage.rentSF.should("have.text", `$NaN`);
+                        rentRollPage.rentSFCell.should("have.text", `$NaN`);
                     } else {
-                        rentRollPage.rentSF.should("have.text", `$${rentSFNumber}`);
+                        rentRollPage.rentSFCell.should("have.text", `$${rentSFNumber}`);
                     }
                 }
             });
