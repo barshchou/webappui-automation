@@ -1,6 +1,6 @@
 import Enums from "../../enums/enums";
 
-let ReportCreationData = function (address, isSalesForcePull, number, templateValue, incomeValue, conclusionValue) {
+let ReportCreationData = function (address, isSalesForcePull = false, number, templateValue, incomeValue, conclusionValue) {
     this.address = address;
     this.isSalesForcePull = isSalesForcePull,
     this.reportNumber = number;
@@ -10,6 +10,7 @@ let ReportCreationData = function (address, isSalesForcePull, number, templateVa
 };
 
 class ReportCreator {
+
     address: string;
 
     isSalesForcePull: boolean;
@@ -22,13 +23,19 @@ class ReportCreator {
 
     conclusionValue: string;
 
+    setSalesForcePull(isSalesForcePull: BoweryReports.isSalesForcePull) {
+        this.isSalesForcePull = isSalesForcePull;
+        return this;
+    }
+
     setAddress(address?) {
         this.address = address ?? "462 1st Avenue, New York, USA";
         return this;
     }
 
-    setReportNumber(testNumber: string, isSaleForcePull: BoweryReports.isSalesForcePull) {
-        this.reportNumber = isSaleForcePull ? `${testNumber}` : `TestAutoReport-QA-${testNumber}`;
+    setReportNumber(testNumber: string, isSaleForcePull?: BoweryReports.isSalesForcePull) {
+        this.isSalesForcePull = (isSaleForcePull == undefined ? false : isSaleForcePull);
+        this.reportNumber = this.isSalesForcePull ? `${testNumber}` : `TestAutoReport-QA-${testNumber}`;
         return this;
     }
 
