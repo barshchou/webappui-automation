@@ -5,28 +5,31 @@ type ResUnitDataItem = {
     rent: number
 };
 
+const occupied: BoweryReports.LeaseStatus = "Occupied";
+const vacant: BoweryReports.LeaseStatus = "Vacant";
+
 const _firstItem: ResUnitDataItem = {
-    leaseStatus: "Occupied",
+    leaseStatus: occupied,
     rent: 20
 };
 
 const _secondItem: ResUnitDataItem = {
-    leaseStatus: "Occupied",
+    leaseStatus: occupied,
     rent: 60
 };
 
 const _thirdItem: ResUnitDataItem = {
-    leaseStatus: "Vacant",
+    leaseStatus: vacant,
     rent: 100
 };
 
 const _fourthItem: ResUnitDataItem = {
-    leaseStatus: "Occupied",
+    leaseStatus: occupied,
     rent: 50
 };
 
 const _fifthItem: ResUnitDataItem = {
-    leaseStatus: "Vacant",
+    leaseStatus: vacant,
     rent: 70
 };
 
