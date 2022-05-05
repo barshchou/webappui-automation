@@ -194,7 +194,7 @@ class CommercialRentRollActions extends BaseActionsExt<typeof rentRollPage> {
 
     verifySquareFeetByRowNumber(sfToBe = 0, rowNumber = 0): this {
         let sfTextToBe = numberWithCommas(Math.round(sfToBe));
-        rentRollPage.squareFeetCells.eq(rowNumber).should("have.text", sfTextToBe).and("have.class", "readOnly");
+        this.Shared.squareFeetCells.eq(rowNumber).should("have.text", sfTextToBe).and("have.class", "readOnly");
         return this;
     }
 
@@ -314,7 +314,7 @@ class CommercialRentRollActions extends BaseActionsExt<typeof rentRollPage> {
         let sfTotalToBe = 0;
         sfValues.forEach(value => sfTotalToBe += value);
         const textToBe = numberWithCommas(Math.round(sfTotalToBe));
-        rentRollPage.squareFeetCells.last().should("have.text", `${textToBe}`);
+        this.Shared.squareFeetTotal.should("have.text", `${textToBe}`);
         return this;
     }
 
