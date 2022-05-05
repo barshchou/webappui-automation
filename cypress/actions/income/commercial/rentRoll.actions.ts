@@ -199,7 +199,7 @@ class CommercialRentRollActions extends BaseActionsExt<typeof rentRollPage> {
     }
 
     enterAnnualRentPerSFByRowNumber(value: number, rowNumber = 0): this {
-        rentRollPage.annualRentPerSFCells.eq(rowNumber).should("not.have.class", "readOnly").dblclick({force:true});
+        this.Shared.annualRentPerSFCells.eq(rowNumber).should("not.have.class", "readOnly").dblclick({force:true});
         this.Shared.textareaToInput.clear().type(`${value}`).type("{enter}");
         const textToBe = `$${numberWithCommas(value.toFixed(2))}`;
         this.verifyRentPerSFAnnuallyByRowNumberCellText(textToBe, rowNumber);
@@ -283,7 +283,7 @@ class CommercialRentRollActions extends BaseActionsExt<typeof rentRollPage> {
     }
 
     verifyRentPerSFAnnuallyByRowNumberCellText(textToBe = "$0.00", rowNumber = 0): this {
-        rentRollPage.annualRentPerSFCells.eq(rowNumber).should("have.text", textToBe);
+        this.Shared.annualRentPerSFCells.eq(rowNumber).should("have.text", textToBe);
         return this;
     }
 
@@ -372,7 +372,7 @@ class CommercialRentRollActions extends BaseActionsExt<typeof rentRollPage> {
             totalAnnualRent += perSfRents[i] * squareFootList[i];
         }
         const textToBe = numberWithCommas((totalAnnualRent / totalSF).toFixed(2));
-        rentRollPage.annualRentPerSFCells.last().should("have.text", `$${textToBe}`);
+        this.Shared.annualRentPerSFTotal.should("have.text", `$${textToBe}`);
         return this;
     }
 
