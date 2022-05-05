@@ -1,7 +1,7 @@
 import expenseHistoryPage from "../../pages/income/expenseHistory.page";
 import { getNumberFromDollarNumberWithCommas, numberWithCommas } from "../../../utils/numbers.utils";
 import BaseActionsExt from "../base/base.actions.ext";
-import x from "../../../cypress/enums/expenseHistoryTableRows.enum"
+import tableExpenseHistory from "../../../cypress/enums/expenseHistoryTableRows.enum"
 
 class ExpenseHistoryActions extends BaseActionsExt<typeof expenseHistoryPage>{
 
@@ -169,26 +169,32 @@ class ExpenseHistoryActions extends BaseActionsExt<typeof expenseHistoryPage>{
     }
 
     verifyAverageTable(): ExpenseHistoryActions {
-          this
-              .verifyAverageByCell("grossRevenue")
-              .verifyAverageByCell("realEstateTaxes")
-              .verifyAverageByCell("insurance")
-              .verifyAverageByCell("electricity")
-              .verifyAverageByCell("fuel")
-              .verifyAverageByCell("waterAndSewer")
-              .verifyAverageByCell("repairsAndMaintenance")
-              .verifyAverageByCell("payrollAndBenefits")
-              .verifyAverageByCell("generalAndAdministrative")
-              .verifyAverageByCell("legalAndProfessionalFees")
-              .verifyAverageByCell("miscellaneous")
-              .verifyAverageByCell("management")
-              .verifyAverageByCell("reserves")
-              .verifyAverageByCellTotal("total")
-              .verifyAverageByCellTotal("totalExcludingTaxes")
-              .verifyAverageByCellTotal("noi");  
-          return this;
-x.cell1.forEach()
-
+        /* this
+             .verifyAverageByCell("grossRevenue")
+             .verifyAverageByCell("realEstateTaxes")
+             .verifyAverageByCell("insurance")
+             .verifyAverageByCell("electricity")
+             .verifyAverageByCell("fuel")
+             .verifyAverageByCell("waterAndSewer")
+             .verifyAverageByCell("repairsAndMaintenance")
+             .verifyAverageByCell("payrollAndBenefits")
+             .verifyAverageByCell("generalAndAdministrative")
+             .verifyAverageByCell("legalAndProfessionalFees")
+             .verifyAverageByCell("miscellaneous")
+             .verifyAverageByCell("management")
+             .verifyAverageByCell("reserves")
+             .verifyAverageByCellTotal("total")
+             .verifyAverageByCellTotal("totalExcludingTaxes")
+             .verifyAverageByCellTotal("noi");  
+         return this;*/
+         
+        tableExpenseHistory.operatingExpensesCell.forEach(cellsName => {
+            this.verifyAverageByCell(cellsName);
+        });
+        tableExpenseHistory.totalOperatingExpensesCell.forEach(cellsName => {
+            this.verifyAverageByCellTotal(cellsName);
+        });
+        return this;
     }
 
     /**
