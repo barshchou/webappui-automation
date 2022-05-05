@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 /// <reference types="cypress" />
 
 import { getEnvUrl } from "./env.utils";
@@ -45,13 +46,17 @@ const pathToNetworkActivity = "./cypress/gh_artifacts/network_activity_records";
  * and then by explicit commands call - record them into file.
  */
 export const recordProxiedRequests = () => {
+    // @ts-ignore
     if(Cypress.state()?.error != undefined){
+        // @ts-ignore
         let networkActivity = Cypress.ProxyLogging.proxyRequests.map(proxReq => {
             return proxReq.consoleProps;
         });
-        
+        // @ts-ignore
         Cypress.Commands._commands.log.fn("Recording network activity");
+        // @ts-ignore
         Cypress.Commands._commands.log.fn(networkActivity);
+        // @ts-ignore
         Cypress.Commands._commands.writeFile.fn(
             `${pathToNetworkActivity}/${Cypress.spec.name}.txt`,
             networkActivity
