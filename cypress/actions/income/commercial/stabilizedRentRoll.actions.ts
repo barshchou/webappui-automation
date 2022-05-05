@@ -92,7 +92,7 @@ class StabilizedRentRollActions extends BaseActionsExt<typeof stabRenRollPage>{
     }
 
     verifyMonthlyRentByRow(rentToBe: string, rowNumber: number): this {
-        stabRenRollPage.monthlyRentCells.eq(rowNumber).should("contain.text", rentToBe);
+        this.Shared.monthlyRentCells.eq(rowNumber).should("contain.text", rentToBe);
         return this;
     }
 
@@ -119,13 +119,13 @@ class StabilizedRentRollActions extends BaseActionsExt<typeof stabRenRollPage>{
     }
 
     verifyAnnuallyRentPsf(rentToBe: string | number, rowNumber: number): this {
-        this.annualRentPsfCellsScroll;
+        this.annualRentPsfCellsScroll();
         stabRenRollPage.annualRentPsfCells.eq(rowNumber).should("contain.text", rentToBe);
         return this;
     }
 
     verifyAnnuallyRentPsfByRowNumber(leaseStatuses: Array<BoweryReports.LeaseStatus>, rentToBe: Array<string | number>): this {
-        this.annualRentPsfCellsScroll;
+        this.annualRentPsfCellsScroll();
         for (let i = 0; i < rentToBe.length; i++) {
             if (leaseStatuses[i] === "Vacant") {
                 this.verifyAnnuallyRentPsf(rentToBe[i], i);

@@ -7,8 +7,6 @@ class StabilizedRentRollPage extends BasePage{
 
     get stabilizedRentRollHeaderSection() {return cy.get("*[data-qa='stabilizedRentRoll']");}
 
-    get monthlyRentCells() {return cy.xpath("(//*[contains(@data-qa, 'monthlyRent-')])[position() < last()]");}
-
     get annualRentPsfCells() {return cy.xpath("//*[contains(@class, 'htNumeric')]|(//*[contains(@data-qa, 'annualRentPsf')])[position() < last()]");}
 
     get monthlyRentPsfCells() {return cy.xpath("//*[contains(@class, 'htNumeric')]|(//*[contains(@data-qa, 'monthlyRentPsf')])[position() < last()]");}
