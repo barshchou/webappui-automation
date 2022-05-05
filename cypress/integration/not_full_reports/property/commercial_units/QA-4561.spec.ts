@@ -27,7 +27,7 @@ describe("Verify the functionality of the Street Type radio button", () => {
             Property._CommercialUnits.verifyRadioIsNotChecked(testData.groupName, value);
         });
 
-        cy.stepInfo("4. Verify that each radio button can be selected and saved and verify text field appears with other value");
+        cy.stepInfo("4. Verify that each radio button can be selected and saved");
         testData.streetTypeValues.forEach(value => {
             Property._CommercialUnits.clickRadioButtonByValueAndUnitIndex(testData.groupName, value);
             Property._CommercialUnits.clickSaveButton()
