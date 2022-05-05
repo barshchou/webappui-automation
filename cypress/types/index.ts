@@ -18,7 +18,7 @@ namespace BoweryReports {
     export type PerUnitPerSF = "Per Unit" | "Per SF"
     export type ForecastItemBasis = "insurance" | "electricity"
     | "fuel" | "waterAndSewer" | "repairsAndMaintenance" | "payrollAndBenefits" | "generalAndAdministrative" 
-    | "legalAndProfessionalFees" | "miscellaneous" | "management" | "reserves" | "total";
+    | "legalAndProfessionalFees" | "miscellaneous" | "management" | "reserves" | "total" | "custom";
 
     export type CommercialUnitsUseValues = "retail" | "office" | "medical" | "community" | "industrial" | "other" | "undetermined";
     export type CommercialUnitsUseTexts = "Retail" | "Office" | "Medical Office" | "Community Facility" | "Industrial" |
@@ -34,16 +34,19 @@ namespace BoweryReports {
 
     export type CommercialUnitsGradeValues = "atGrade" | "partiallyBelowGrade" | "belowGrade" | "other";
     export type CommercialUnitsFacadeValues = "plate glass" | "other";
+    export type CommercialUnitsStateValues = "finished" | "unfinished" | "vanilla box" | "other";
+    export type CommercialUnitsCeilingHeightValues = "low" | "normal" | "high" | "other"; 
     export type CommercialUnitsStreetTypeValues = "side street" | "avenue";
 
-    /*
-    More Unit Groups Values will be added after other values types added
-     */
-    export type CommercialUnitGroupsValues = CommercialUnitsUseValues | CommercialUnitsGradeValues | CommercialUnitsFacadeValues | CommercialUnitsStreetTypeValues;
-
+    export namespace CommercialUnits {
+        /*
+        More Unit Groups Values will be added after other values types added
+        */
+        export type GroupsValues = CommercialUnitsUseValues | CommercialUnitsGradeValues | CommercialUnitsFacadeValues | CommercialUnitsStateValues | CommercialUnitsCeilingHeightValues | CommercialUnitsStreetTypeValues;;
+    }
 
     export type ForecastItem = { 
-        name: BoweryReports.ForecastItemBasis, 
+        name: BoweryReports.ForecastItemBasis | string, 
         basis?: BoweryReports.UnitSF, 
         forecast?: number | undefined, 
         projection?: number 

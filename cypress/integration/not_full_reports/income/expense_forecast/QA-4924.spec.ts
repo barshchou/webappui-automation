@@ -40,10 +40,10 @@ describe("User selects Per SF radiobutton for Repairs & Maintenance on Expense F
 
 
         cy.stepInfo(`QA-4924 => 3. Fill in Repairs & Maintenance field for all added columns and save changes`);
-        Income.ExpenseHistory.enterRepairsAndMaintenanceByColIndex(testData.actual.repairsAndMaintenanceExpense, 0)
-            .enterRepairsAndMaintenanceByColIndex(testData.t12.repairsAndMaintenanceExpense, 1)
-            .enterRepairsAndMaintenanceByColIndex(testData.historical.repairsAndMaintenanceExpense, 2)
-            .enterRepairsAndMaintenanceByColIndex(testData.projection.repairsAndMaintenanceExpense, 3);
+        Income.ExpenseHistory.enterRepairsAndMaintenanceByColIndex(testData.actual.repairsAndMaintenanceExpense, 3)
+            .enterRepairsAndMaintenanceByColIndex(testData.t12.repairsAndMaintenanceExpense, 2)
+            .enterRepairsAndMaintenanceByColIndex(testData.historical.repairsAndMaintenanceExpense, 1)
+            .enterRepairsAndMaintenanceByColIndex(testData.projection.repairsAndMaintenanceExpense, 0);
         NavigationSection.navigateToExpenseForecast();
 
 
@@ -61,7 +61,7 @@ describe("User selects Per SF radiobutton for Repairs & Maintenance on Expense F
         cy.stepInfo(`QA-4924 =>5.2 Check historical expenses values for Repairs & Maintenance card. They should be correctly displayed on slidebars`);
 
         Income.ExpenseForecast.Actions.matchElementSnapshot(
-            Income.ExpenseForecast.Page.RepairsAndMaintenanceCard, testData.repairsAndMaintenanceCardSnapshotName,
+            Income.ExpenseForecast.Page.repairsAndMaintenanceCard, testData.repairsAndMaintenanceCardSnapshotName,
             {padding: [10, 100]});
 
         deleteReport(testData.reportCreationData.reportNumber);
