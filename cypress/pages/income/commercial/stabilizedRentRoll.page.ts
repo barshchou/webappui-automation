@@ -7,7 +7,7 @@ class StabilizedRentRollPage extends BasePage{
 
     get stabilizedRentRollHeaderSection() {return cy.get("*[data-qa='stabilizedRentRoll']");}
 
-    get sfCells() {return cy.xpath("(//*[contains(@data-qa, 'squareFeet')])[position() < last()]");}
+    // get squareFeetCells() {return cy.xpath("(//*[contains(@data-qa, 'squareFeet')])[position() < last()]");}
 
     get annualRentCells() {return cy.xpath("(//*[contains(@data-qa, 'annualRent-')])[position() < last()]");}
 

@@ -75,7 +75,7 @@ class StabilizedRentRollActions extends BaseActionsExt<typeof stabRenRollPage>{
 
     verifySfCellByRow(squareFeet: string | number, rowNumber = 0): this {
         const textToBe = typeof squareFeet === "string" ? squareFeet : numberWithCommas(squareFeet);
-        stabRenRollPage.sfCells.eq(rowNumber).should("have.text", textToBe);
+        this.Shared.squareFeetCells.eq(rowNumber).should("have.text", textToBe);
         return this;
     }
 
