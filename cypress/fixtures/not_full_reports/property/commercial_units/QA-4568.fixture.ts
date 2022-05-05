@@ -52,6 +52,7 @@ const _arrayValuesAndGroup: Array<groupValue> = [
 
 export default {
     reportCreationData: _reportCreationData,
+    titleValue: "Utilities Description",
     numberOfCommercialUnits: 1,
     arrayValuesAndGroup: _arrayValuesAndGroup
 };
