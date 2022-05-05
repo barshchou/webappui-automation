@@ -104,7 +104,7 @@ class StabilizedRentRollActions extends BaseActionsExt<typeof stabRenRollPage>{
     enterAnnualRentPerSFByRowNumber(rentToBe: string | number, rowNumber: number): this {
         this.annualRentPsfCellsScroll();
         stabRenRollPage.annualRentPsfCells.eq(rowNumber).dblclick({ force: true });
-        stabRenRollPage.textareaToInput.clear().type(`${rentToBe}`).type("{enter}");
+        this.Shared.textareaToInput.clear().type(`${rentToBe}`).type("{enter}");
         this.verifyAnnuallyRentPsf(rentToBe, rowNumber);
         return this;
     }
