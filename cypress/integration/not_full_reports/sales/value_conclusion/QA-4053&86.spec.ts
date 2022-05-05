@@ -32,7 +32,7 @@ describe("[QA-4053] [QA-4086] The Concluded Value Per Unit is calculated correct
 
         _NavigationSection.Actions.openReviewAndExport(true).closeSatisfactionSurvey();
         ReviewExport.generateDocxReport()
-        .downloadAndConvertDocxReport();
+        .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
         deleteReport(testData.reportCreationData.reportNumber);
     });
     
@@ -40,18 +40,23 @@ describe("[QA-4053] [QA-4086] The Concluded Value Per Unit is calculated correct
         cy.stepInfo(`
         Verify the export of the report
         `);
-        cy.visit(`./cypress/downloads/QA-${Cypress.spec.specFilter}.html`);
+        cy.task("getFilePath",
+        {_reportName: testData.reportCreationData.reportNumber, _docx_html: "html"}
+        ).then(file => {
+            cy.log(<string>file);
+            cy.visit(<string>file);
 
-        cy.stepInfo(`
-        Proceed to the Sales Comparison Approach > Value Opinion via the Sales Comparison Approach and verify the value.
-        `);
-        cy.contains("Value Opinion via the Sales Comparison Approach").next("table")
-        .scrollIntoView()
-        .within(() => {
-            cy.contains("Concluded Value Per Unit").should("exist")
-            .parents("tr").within(() => {
-                cy.contains(`${testData.general.valueConclusion}`).should("exist");
-            });
+            cy.stepInfo(`
+            Proceed to the Sales Comparison Approach > Value Opinion via the Sales Comparison Approach and verify the value.
+            `);
+            cy.contains("Value Opinion via the Sales Comparison Approach").next("table")
+            .scrollIntoView()
+            .within(() => {
+                cy.contains("Concluded Value Per Unit").should("exist")
+                .parents("tr").within(() => {
+                    cy.contains(`${testData.general.valueConclusion}`).should("exist");
+                });
+            }); 
         });
     });
 });

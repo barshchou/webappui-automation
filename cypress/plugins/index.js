@@ -6,8 +6,11 @@
 // https://on.cypress.io/plugins-guide
 // ***********************************************************
 /// <reference types="cypress" />
+
 const { existsSync, writeFileSync, renameSync } = require("fs");
 const mammoth = require("mammoth");
+const glob = require("glob");
+
 const {
   addMatchImageSnapshotPlugin,
 } = require("cypress-image-snapshot/plugin");
@@ -68,20 +71,21 @@ const _waitForFileExists = async (filePath, currentTime = 0, timeout = 60000) =>
  * @returns {null} for tasks' return type - please check notes above
  */
 const _convertDocxToHtml = async (report) => {
-  let result = await mammoth.convertToHtml({path: `${report.path}/${report.name}.${report.extension}`});
-  writeFileSync(`${report.path}/${report.name}.html`,result.value);
+  let result = await mammoth.convertToHtml({path: report});
+  writeFileSync(`${report}.html`,result.value);
   return null;
 }
 
 /**
- * Renames file via fs.renameSync
- * @param {string} oldPath 
- * @param {string} newPath 
- * @returns {null} - for tasks' return type - please check notes above
+ * Get relative path to the file (report docx file or converted html in our case)
+ * @param {reportName} _reportName - generated `testData.reportCreationData.reportNumber` in test fixture
+ * @param {"docx" | "html"} _docx_html - look for file which ends with "docx" or "html" extension
+ * @returns first relative path from array of matches 
+ * @see https://www.npmjs.com/package/glob
  */
-const _renameFile = (oldPath,newPath) =>{
-  renameSync(`./${oldPath}`,`./${newPath}`)
-  return null;
+ const _getFilePath = (_reportName, _docx_html) =>{
+  let file = glob.sync(`cypress/downloads/${_reportName}**.${_docx_html}`)[0];
+  return file;
 }
 
 //#endregion
@@ -123,8 +127,8 @@ module.exports = (on, config) => {
   });
 
   on("task",{
-    async renameFile({oldPath,newPath}){
-      return _renameFile(oldPath,newPath);
+    async getFilePath({_reportName, _docx_html}){
+      return _getFilePath(_reportName, _docx_html);
     }
   });
 

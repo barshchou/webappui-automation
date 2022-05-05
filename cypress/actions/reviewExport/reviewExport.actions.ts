@@ -24,30 +24,12 @@ class ReviewExportActions extends BaseActions {
      * Downloads and converts *.docx report into html
      * and renames it to *current_spec_name*.html
      */
-    downloadAndConvertDocxReport(): this {
+    downloadAndConvertDocxReport(reportName:string): this {
         reviewExportPage.downloadBtn.click();
-        cy.get(`@${ALIASE.reportId}`).then(val => {
-            reportFile = {
-                //@ts-ignore
-                name: val,
-                path: "cypress/downloads",
-                extension:"docx"
-            };
-            cy.log(<any>val);
-            /**
-             * ernst: if you wish to see "tasks" code - go to cypress/plugins/index.js to the section Cypress Tasks
-             */
-            const testIdReportName = `QA-${Cypress.spec.specFilter}`;
-            cy.task("waitForFileExists",`${reportFile.path}/${reportFile.name}.${reportFile.extension}`);
-            cy.task("convertDocxToHtml",reportFile);            
-            cy.task("renameFile",{
-                oldPath:`${reportFile.path}/${reportFile.name}.docx`,
-                newPath:`${reportFile.path}/${testIdReportName}.docx`
-            });
-            cy.task("renameFile",{
-                oldPath:`${reportFile.path}/${reportFile.name}.html`,
-                newPath:`${reportFile.path}/${testIdReportName}.html`
-            });
+        cy.task("getFilePath",{_reportName: reportName, _docx_html: "docx"}).then(file => {
+            cy.log(<string>file);
+            cy.task("waitForFileExists",file);
+            cy.task("convertDocxToHtml",file); 
         });
         return this;
     }
