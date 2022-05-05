@@ -9,6 +9,10 @@ class CommercialRentRollSharedComponent {
     get squareFeetCells() {return cy.xpath("(//*[contains(@data-qa, 'squareFeet')])[position() < last()]");}
 
     get squareFeetTotal() {return cy.get("[data-qa^=squareFeet]").last();}
+
+    get annualRentCells() {return cy.xpath("(//*[contains(@data-qa, 'annualRent-')])[position() < last()]");}
+
+    get annualRentTotal() {return cy.get("[data-qa^=annualRent-]").last();}
 }
 
 export default CommercialRentRollSharedComponent;
