@@ -62,7 +62,7 @@ class StabilizedRentRollActions extends BaseActionsExt<typeof stabRenRollPage>{
     }
 
     verifyUseCellByRow(useText: BoweryReports.CommercialUnitsUseTexts, rowNumber = 0): this {
-        stabRenRollPage.useCells.eq(rowNumber).should("have.text", useText);
+        this.Shared.useCells.eq(rowNumber).should("have.text", useText);
         return this;
     }
 
