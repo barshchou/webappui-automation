@@ -164,7 +164,7 @@ class CommercialRentRollActions extends BaseActionsExt<typeof rentRollPage> {
     }
 
     verifyUseCellTextByRowNumber(textToBe: BoweryReports.CommercialUnitsUseTexts, rowNumber = 0): this {
-        rentRollPage.useCells.eq(rowNumber).should("have.text", textToBe).and("have.class", "readOnly");
+        this.Shared.useCells.eq(rowNumber).should("have.text", textToBe).and("have.class", "readOnly");
         return this;
     }
 
