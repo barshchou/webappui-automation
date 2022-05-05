@@ -25,8 +25,6 @@ class CommercialRentRollPage extends BasePage{
 
     getAllCellsByRowNumber(rowNumber) {return cy.get(`*[data-qa*='${rowNumber}-cell']`);}
 
-    get textareaToInput() {return cy.get("div:not([class*='hidden']) > *[class='handsontableInput']");}
-
     getLeaseDateCellsByName(name) {return cy.get(`*[data-qa*=lease${name}Date]`);}
 
     get annualRentPerSFCells() {return cy.get("*[data-qa*=annualRentPsf]");}

@@ -139,14 +139,14 @@ class CommercialRentRollActions extends BaseActionsExt<typeof rentRollPage> {
             this.verifyTenantNameByRowNumber(leaseStatus, name, rowNumber);
         } else {
             this.Shared.tenantNameCells.eq(rowNumber).dblclick({ force: true });
-            rentRollPage.textareaToInput.clear().type(name).type("{enter}");
+            this.Shared.textareaToInput.clear().type(name).type("{enter}");
         }
         return this;
     }
 
     deleteTenantNameByRowNumber(rowNumber: number): this {
         this.Shared.tenantNameCells.eq(rowNumber).dblclick();
-        rentRollPage.textareaToInput.clear();
+        this.Shared.textareaToInput.clear();
         return this;
     }
 
@@ -177,7 +177,7 @@ class CommercialRentRollActions extends BaseActionsExt<typeof rentRollPage> {
 
     enterLeaseDateByRowNumber(cellName: BoweryReports.LeaseDateName , date: string, rowNumber = 0): this {
         rentRollPage.getLeaseDateCellsByName(cellName).eq(rowNumber).dblclick({ force: true });
-        rentRollPage.textareaToInput.clear().type(date).type("{enter}");
+        this.Shared.textareaToInput.clear().type(date).type("{enter}");
         return this;
     }
 
@@ -200,7 +200,7 @@ class CommercialRentRollActions extends BaseActionsExt<typeof rentRollPage> {
 
     enterAnnualRentPerSFByRowNumber(value: number, rowNumber = 0): this {
         rentRollPage.annualRentPerSFCells.eq(rowNumber).should("not.have.class", "readOnly").dblclick({force:true});
-        rentRollPage.textareaToInput.clear().type(`${value}`).type("{enter}");
+        this.Shared.textareaToInput.clear().type(`${value}`).type("{enter}");
         const textToBe = `$${numberWithCommas(value.toFixed(2))}`;
         this.verifyRentPerSFAnnuallyByRowNumberCellText(textToBe, rowNumber);
         return this;
@@ -208,7 +208,7 @@ class CommercialRentRollActions extends BaseActionsExt<typeof rentRollPage> {
 
     enterMonthlyRentPerSFByRowNumber(value: number, rowNumber = 0): this {
         rentRollPage.monthlyRentPerSFCells.eq(rowNumber).should("not.have.class", "readOnly").dblclick({force:true});
-        rentRollPage.textareaToInput.clear().type(`${value}`).type("{enter}");
+        this.Shared.textareaToInput.clear().type(`${value}`).type("{enter}");
         const textToBe = `$${numberWithCommas(value.toFixed(2))}`;
         rentRollPage.monthlyRentPerSFCells.eq(rowNumber).should("have.text", textToBe);
         return this;
@@ -228,7 +228,7 @@ class CommercialRentRollActions extends BaseActionsExt<typeof rentRollPage> {
 
     enterMonthlyRentByRowNumber(monthlyRent: number, rowNumber = 0): this {
         rentRollPage.monthlyRentCells.eq(rowNumber).should("not.have.class", "readOnly").dblclick({ force: true });
-        rentRollPage.textareaToInput.clear().type(`${monthlyRent}`).type("{enter}");
+        this.Shared.textareaToInput.clear().type(`${monthlyRent}`).type("{enter}");
         const textToBe = numberWithCommas(monthlyRent.toFixed(2));
         this.verifyMonthlyRentByRowCellText(textToBe, rowNumber);
         return this;
@@ -247,7 +247,7 @@ class CommercialRentRollActions extends BaseActionsExt<typeof rentRollPage> {
 
     enterAnnualRentByRowNumber(annualRent: number, rowNumber = 0): this {
         this.Shared.annualRentCells.eq(rowNumber).should("not.have.class", "readOnly").dblclick({ force: true });
-        rentRollPage.textareaToInput.clear().type(`${annualRent}`).type("{enter}");
+        this.Shared.textareaToInput.clear().type(`${annualRent}`).type("{enter}");
         const textToBe = numberWithCommas(annualRent.toFixed(2));
         this.verifyAnnualRentCellTextByRow(textToBe, rowNumber);
         return this;

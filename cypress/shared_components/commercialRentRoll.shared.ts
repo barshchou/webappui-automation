@@ -13,6 +13,8 @@ class CommercialRentRollSharedComponent {
     get annualRentCells() {return cy.xpath("(//*[contains(@data-qa, 'annualRent-')])[position() < last()]");}
 
     get annualRentTotal() {return cy.get("[data-qa^=annualRent-]").last();}
+
+    get textareaToInput() {return cy.get("div:not([class*='hidden']) > *[class='handsontableInput']");}
 }
 
 export default CommercialRentRollSharedComponent;
