@@ -50,7 +50,7 @@ class StabilizedRentRollActions extends BaseActionsExt<typeof stabRenRollPage>{
 
     verifyTenantNameByRow(name: string, leaseStatus: BoweryReports.LeaseStatus, rowNumber = 0): this {
         let textToBe = leaseStatus === "Vacant" ? `Commercial Unit ${rowNumber + 1}` : name;
-        stabRenRollPage.tenantNameCells.eq(rowNumber).should("have.text", textToBe);
+        this.Shared.tenantNameCells.eq(rowNumber).should("have.text", textToBe);
         return this;
     }
 
