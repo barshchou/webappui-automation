@@ -33,28 +33,27 @@ class ProFormaPage extends BasePage {
     }
     
     categoryCellTotal(categoryName: string) {
-
         return categoryName == enums.PRO_FORMA_TYPES.totalOperatingExpenses 
-            ? cy.get(`[row-id^='${this.capitalizeFirstLetter(categoryName)}'] [role=gridcell][col-id=total]`).first() 
-            : cy.get(`[row-id^='${this.capitalizeFirstLetter(categoryName)}'] [role=gridcell][col-id=total]`);
+            ? this.getCategoryElementByType(categoryName, "total").first() : this.getCategoryElementByType(categoryName, "total");
     }
 
     categoryPSFTotal(categoryName: string) {
         return categoryName == enums.PRO_FORMA_TYPES.totalOperatingExpenses 
-            ? cy.get(`[row-id^='${this.capitalizeFirstLetter(categoryName)}'] [role=gridcell][col-id=psf]`).first() 
-            : cy.get(`[row-id^='${this.capitalizeFirstLetter(categoryName)}'] [role=gridcell][col-id=psf]`);
+            ? this.getCategoryElementByType(categoryName, "psf").first() : this.getCategoryElementByType(categoryName, "psf");
     }
 
     categoryPerUnitTotal(categoryName: string) {
         return categoryName == enums.PRO_FORMA_TYPES.totalOperatingExpenses 
-            ? cy.get(`[row-id^='${this.capitalizeFirstLetter(categoryName)}'] [role=gridcell][col-id=perUnit]`).first() 
-            : cy.get(`[row-id^='${this.capitalizeFirstLetter(categoryName)}'] [role=gridcell][col-id=perUnit]`);
+            ? this.getCategoryElementByType(categoryName, "perUnit").first() : this.getCategoryElementByType(categoryName, "perUnit");
     }
 
     private capitalizeFirstLetter(string: string) {
         return string.charAt(0).toUpperCase() + string.slice(1);
-
     }
+
+    private getCategoryElementByType(categoryName: string, colId: string) {
+        return cy.get(`[row-id^='${this.capitalizeFirstLetter(categoryName)}'] [role=gridcell][col-id=${colId}]`);
+    } 
 }
 
 export default new ProFormaPage();
