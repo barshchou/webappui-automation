@@ -1,7 +1,7 @@
 import Enums from "../../../../enums/enums";
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 
-const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("4053", false, {
+const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("4053&86", false, {
     incomeValue: Enums.INCOME_TYPE.BOTH,
     conclusionValue: Enums.VALUE_CONCLUSION_TYPE.AS_COMPLETE
 });

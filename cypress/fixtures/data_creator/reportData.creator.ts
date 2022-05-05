@@ -76,8 +76,8 @@ class ReportCreator {
         return this.setReportNumber(testNumber, isSaleForcePull).setAddress().setIncomeValue().setTemplateValue().setConclusionValue().build();
     }
 
-    getReportData(testNumber: string, options?: BoweryReports.ReportCreationOptions){
-        this.isSalesForcePull = false;
+    getReportData(testNumber: string, isSaleForcePull = false, options?: BoweryReports.ReportCreationOptions){
+        this.isSalesForcePull = isSaleForcePull;
 
         if(options?.incomeValue){
             this.setIncomeValue(options.incomeValue);
