@@ -10,7 +10,7 @@ import BaseActionsExt from "../../base/base.actions.ext";
 
 class InPlaceRentRollActions extends BaseActionsExt<typeof rentRollPage> {
 
-    verifyViaCSVExist() {
+    verifyViaCSVExist(): InPlaceRentRollActions {
         rentRollPage.importViaCSVHeader.scrollIntoView().should("be.visible");
         return this;
     }
@@ -41,24 +41,24 @@ class InPlaceRentRollActions extends BaseActionsExt<typeof rentRollPage> {
         return this;
     }
 
-    clickGoToPropSummaryButton() {
+    clickGoToPropSummaryButton(): InPlaceRentRollActions {
         rentRollPage.goToPropSummaryButton.should("be.visible").click();
         return this;
     }
 
-    goToPropSummaryWithSaveLeavingFirst() {
+    goToPropSummaryWithSaveLeavingFirst(): InPlaceRentRollActions {
         this.clickGoToPropSummaryButton()
             .clickYesButton();
         return this;
     }
 
-    goToPropSummaryWithSaveSaveClickFirst() {
+    goToPropSummaryWithSaveSaveClickFirst(): InPlaceRentRollActions {
         this.clickSaveButton();
         this.clickGoToPropSummaryButton();
         return this;
     }
 
-    goToPropSummaryWithoutSave() {
+    goToPropSummaryWithoutSave(): InPlaceRentRollActions {
         this.clickGoToPropSummaryButton()
             .clickNoButton();
         return this;
@@ -152,7 +152,7 @@ class InPlaceRentRollActions extends BaseActionsExt<typeof rentRollPage> {
         return this;
     }
 
-    enterAllEqualRentTypeCells(rentType: string): this {
+    enterAllEqualRentTypeCells(rentType: string): InPlaceRentRollActions {
         rentRollPage.rentTypeCells.each((cell, i) => {
             this.enterRentTypeCellByRowNumber(rentType, i)
                 .verifyRentTypeCellByRowNumber(rentType, i);
@@ -227,7 +227,7 @@ class InPlaceRentRollActions extends BaseActionsExt<typeof rentRollPage> {
         return this;
     }
 
-    enterAllEqualLeaseStatuses(leaseStatus: string): this {
+    enterAllEqualLeaseStatuses(leaseStatus: string): InPlaceRentRollActions {
         rentRollPage.leaseStatusCells.each((cell, i) => {
             this.enterLeaseStatusByRowNumber(leaseStatus, i);
         });
@@ -259,7 +259,7 @@ class InPlaceRentRollActions extends BaseActionsExt<typeof rentRollPage> {
         return this;
     }
 
-    enterAllEqualMonthlyRents(monthlyRent: string | number): this {
+    enterAllEqualMonthlyRents(monthlyRent: string | number): InPlaceRentRollActions {
         rentRollPage.monthlyRentCells.each((cell, i) => {
             this.enterMonthlyRentByRowNumber(monthlyRent, i);
         });
@@ -273,7 +273,7 @@ class InPlaceRentRollActions extends BaseActionsExt<typeof rentRollPage> {
         return this;
     }
 
-    verifyMonthlyTotalForecastEqualValue() {
+    verifyMonthlyTotalForecastEqualValue(): InPlaceRentRollActions {
         rentRollPage.rentForecastCells.then(cells => {
             let totalToBe = 0;
             for (let i = 0; i < cells.length; i++) {
@@ -295,7 +295,7 @@ class InPlaceRentRollActions extends BaseActionsExt<typeof rentRollPage> {
         return this;
     }
 
-    verifyRentSFValue(isPerMonth?: "perMonth") {
+    verifyRentPSFMounthValue(isPerMonth?: "perMonth") {
         rentRollPage.monthlyTotalForecast.then(monthly => {
             const monthlyNumber = getNumberFromDollarNumberWithCommas(monthly.text());
             rentRollPage.squareFootageCells.then(square => {
@@ -325,7 +325,7 @@ class InPlaceRentRollActions extends BaseActionsExt<typeof rentRollPage> {
         return this;
     }
 
-    clickCloseIcon() {
+    clickCloseIcon(): InPlaceRentRollActions {
         rentRollPage.closeIcon.click();
         return this;
     }
@@ -386,7 +386,7 @@ class InPlaceRentRollActions extends BaseActionsExt<typeof rentRollPage> {
         return this;
     }
 
-    private enterTextToTextarea(text: string): this {
+    private enterTextToTextarea(text: string): InPlaceRentRollActions {
         rentRollPage.textAreaToInput.clear().type(text).type("{enter}");
         return this;
     }
@@ -395,6 +395,40 @@ class InPlaceRentRollActions extends BaseActionsExt<typeof rentRollPage> {
         rentRollPage.unitTypeCells.eq(rowNumber).dblclick();
         this.chooseOptionFromTableListbox(type);
         rentRollPage.unitTypeCells.eq(rowNumber).should("contain.text", type);
+        return this;
+    }
+
+    verifyMonthlyTotalRentValue(): InPlaceRentRollActions {
+        rentRollPage.monthlyRentCells.then(rentCells => {
+            rentRollPage.leaseStatusCells.then(leaseStatusCells => {
+                let totalToBe = 0;
+                const vacantLeaseStatusText: BoweryReports.LeaseStatus = "Vacant";
+                for (let i = 0; i < rentCells.length; i++) {
+                    if(!leaseStatusCells.eq(i).text().includes(vacantLeaseStatusText)) {
+                        let cellNumber = getNumberFromDollarNumberWithCommas(rentCells.eq(i).text());
+                        totalToBe += cellNumber;
+                    }
+                }
+                const textToBe = `$${numberWithCommas(totalToBe.toFixed(2))}`;
+                rentRollPage.monthlyTotalRent.should("have.text", textToBe);    
+            });
+        });
+        return this;
+    }
+    
+    verifyRentSFValue(rowNumber = 0): InPlaceRentRollActions{
+        rentRollPage.monthlyRentCells.eq(rowNumber).then(el => {
+            const monthlyRent = getNumberFromDollarNumberWithCommas(el.text());
+            rentRollPage.squareFootageCells.eq(rowNumber).then(sf => {
+                const squareFootage = getNumberFromDollarNumberWithCommas(sf.text());
+                const rentSFNumber = (monthlyRent * 12 / squareFootage).toFixed(2);
+                if (squareFootage === 0) {
+                    rentRollPage.rentSFCell.eq(rowNumber).should("have.text", `$NaN`);
+                } else {
+                    rentRollPage.rentSFCell.eq(rowNumber).should("have.text", `$${rentSFNumber}`);
+                }
+            });
+        });
         return this;
     }
 }
