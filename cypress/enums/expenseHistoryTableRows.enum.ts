@@ -1,9 +1,9 @@
-const x = {
-    
-    cell1: ["grossRevenue", "realEstateTaxes", "insurance", "electricity", "fuel", "waterAndSewer", "repairsAndMaintenance", "payrollAndBenefits",
-     "generalAndAdministrative", "legalAndProfessionalFees", "miscellaneous", "management", "reserves"],
+const tableExpenseHistory = {
 
-     cell2: ["total", "totalExcludingTaxes", "noi"]
+    operatingExpensesCell: ["grossRevenue", "realEstateTaxes", "insurance", "electricity", "fuel", "waterAndSewer", "repairsAndMaintenance", "payrollAndBenefits",
+        "generalAndAdministrative", "legalAndProfessionalFees", "miscellaneous", "management", "reserves"],
+
+    totalOperatingExpensesCell: ["total", "totalExcludingTaxes", "noi"]
 };
 
-export default Object.freeze(x);
+export default Object.freeze(tableExpenseHistory);
