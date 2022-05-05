@@ -29,8 +29,6 @@ class CommercialRentRollPage extends BasePage{
 
     get annualRentPerSFCells() {return cy.get("*[data-qa*=annualRentPsf]");}
 
-    get monthlyRentCells() {return cy.get("*[data-qa*=monthlyRent]:not([data-qa*=Psf])");}
-
     get monthlyRentPerSFCells() {return cy.get("[data-qa^=monthlyRentPsf]");}
 
     getLeaseStatusToChooseByValue(status) {return cy.xpath(`//li[.='${status}']`);}

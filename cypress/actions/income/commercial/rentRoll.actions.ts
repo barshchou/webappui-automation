@@ -227,7 +227,7 @@ class CommercialRentRollActions extends BaseActionsExt<typeof rentRollPage> {
     }
 
     enterMonthlyRentByRowNumber(monthlyRent: number, rowNumber = 0): this {
-        rentRollPage.monthlyRentCells.eq(rowNumber).should("not.have.class", "readOnly").dblclick({ force: true });
+        this.Shared.monthlyRentCells.eq(rowNumber).should("not.have.class", "readOnly").dblclick({ force: true });
         this.Shared.textareaToInput.clear().type(`${monthlyRent}`).type("{enter}");
         const textToBe = numberWithCommas(monthlyRent.toFixed(2));
         this.verifyMonthlyRentByRowCellText(textToBe, rowNumber);
@@ -235,7 +235,7 @@ class CommercialRentRollActions extends BaseActionsExt<typeof rentRollPage> {
     }
 
     verifyMonthlyRentByRowCellText(textToBe = "0.00", rowNumber = 0): this {
-        rentRollPage.monthlyRentCells.eq(rowNumber).should("have.text", `$${textToBe}`);
+        this.Shared.monthlyRentCells.eq(rowNumber).should("have.text", `$${textToBe}`);
         return this;
     }
 
@@ -265,14 +265,14 @@ class CommercialRentRollActions extends BaseActionsExt<typeof rentRollPage> {
         } else {
             numberToBe = rentPerSF * squareFoot;
         }
-        rentRollPage.monthlyRentCells.eq(rowNumber)
+        this.Shared.monthlyRentCells.eq(rowNumber)
             .should("have.text", `$${numberWithCommas(numberToBe.toFixed(2))}`);
         return this;
     }
 
     verifyMonthlyRentAnnuallyByRowNumber(annuallyRent: number, rowNumber = 0): this {
         const textToBe = numberWithCommas((annuallyRent / 12).toFixed(2));
-        rentRollPage.monthlyRentCells.eq(rowNumber).should("have.text", `$${textToBe}`);
+        this.Shared.monthlyRentCells.eq(rowNumber).should("have.text", `$${textToBe}`);
         return this;
     }
 
@@ -330,7 +330,7 @@ class CommercialRentRollActions extends BaseActionsExt<typeof rentRollPage> {
 
     verifyMonthlyRentTotal(leaseStatuses: Array<BoweryReports.LeaseStatus>, monthlyRents: Array<number>): this {
         const textToBe = this.getTotalRentTextToBe(leaseStatuses, monthlyRents);
-        rentRollPage.monthlyRentCells.last().should("have.text", `$${textToBe}`);
+        this.Shared.monthlyRentTotal.should("have.text", `$${textToBe}`);
         return this;
     }
 
