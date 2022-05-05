@@ -32,6 +32,8 @@ class ClientPage extends BasePage{
     
     get narrativeSuggestionsList() {return cy.get("[data-qa='narrative-suggestions-list'] > ul");}
 
+    chipModified(index?: number) {return cy.get('[ui="indicator"]').eq((index !== 0) ? index : 0);}
+    
     get modalWindow() {return cy.get("[role='dialog']");}
 }
 
