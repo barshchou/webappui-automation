@@ -1,6 +1,8 @@
 const proFormaType = {
+    potentialResIncome: "Potential Residential Income",
     otherIncome: "Other Income",
     potentialGrossIncome: "Potential Gross Income",
+    residentialVCLoss: "Less Residential V/C Loss",
     effectiveGrossIncome: "Effective Gross Income",
     operatingExpenses: "Operating Expenses",
     realEstateTaxes: "Real Estate Taxes",
