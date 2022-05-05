@@ -12,10 +12,6 @@ describe("Verify the display of the Client page.", () => {
         cy.stepInfo("1. Proceed to the Report > Client page.");
         _NavigationSection.navigateToClientPage();
 
-        // Report._Client.verifyProgressBarNotExist()
-        //     .Page.formEditBtn(0).click();
-        //     Report._Client.Page.formEditBtn(0).click();
-
         cy.stepInfo(`2. Verify the following elements are displayed on the page:
             Title of the page - Client
             Warning message: “Add new clients on the Organization Settings page.“
@@ -25,16 +21,19 @@ describe("Verify the display of the Client page.", () => {
             Intended User section with the Edit button
             Identification of the Client section with the Edit button
             Client Guidelines Discussion section`);
-        // Report._Client.enterIntendedUserTextBox(testData.textToType)
-        //     .clickNarrativeSuggestions(testData.verifyListValue)
-        //     .enterIdentificationOfTheClientTextBox(testData.textToType)
-        //     .clickNarrativeSuggestions(testData.verifyListValue, 1)
-        //     .Page.formSaveBtn(0).click();
-        //     Report._Client.Page.formSaveBtn(0).click();
+            Report._Client.verifyProgressBarNotExist()
+                .Page.clientTitle.should("be.visible");
+
+            Report._Client.Page.warningMessage.should("be.visible");
+            Report._Client.Page.clientNameField.should("be.visible");
+            Report._Client.Page.clientFileNumberField.should("be.visible");
+            Report._Client.Page.nycbApplicationNumber.should("be.visible");
+            Report._Client.Page.intendedUserTextBox.should("be.visible");
+            Report._Client.Page.formEditBtn(0).should("be.visible");
+            Report._Client.Page.identificationOfClientTextBox.should("be.visible");
+            Report._Client.Page.formEditBtn(0).should("be.visible");
+            Report._Client.Page.clientGuidelinesCommentary.should("be.visible");
             
-        // cy.stepInfo("3. Verify that the changes from step 2 are saved.");
-        // Report._Client.verifyIntendedUserTextBox(testData.verifyAreaValue)
-        //     .verifyIdentificationOfTheClientTextBox(testData.verifyAreaValue);
 
         deleteReport(testData.reportCreationData.reportNumber);
     });
