@@ -70,6 +70,7 @@ We don't have strict rules for our development flow. Everything is pretty standa
   5. When you got approvals - merge branch by yourself or ping someone who was a reviewer.
 
   **NOTE**: 
+  - **please, while developing anything** - run `npm run tsc:watch` command in separate terminal instance (or split terminal into two). This will make TypeScript compilier keep an eye on your files changes and alert you when you forget, for example, update methods names after merge.
   - please, when writing commit message - add something meaningful, rather than "added some code". Good commit message: "[QA-something] added new actions into module_name" / "[misc] linter fixes". Bad commit message: "upd" / "fix" 
   - (ernst): I do not force to use small commits instead of big ones, but when commit something - think what you would do with the big one if you have to revert / reset or cherry-pick it. 
      

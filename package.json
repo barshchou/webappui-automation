@@ -21,6 +21,7 @@
     "currents:run": "currents run --spec './cypress/integration/not_full_reports/**/*.spec.ts' --browser chrome --record --parallel",
     "currents:run:debug": "currents run --browser chrome",
     "tsc:check": "npx tsc --project ./cypress/tsconfig.json --noEmit",
+    "tsc:watch":"npm run tsc:check -- --watch",
     "lint:run": "eslint \"./**\"",
     "lint:fix": "eslint \"./**\" --fix"
 
