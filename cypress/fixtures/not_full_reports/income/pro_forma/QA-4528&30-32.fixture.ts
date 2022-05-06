@@ -9,4 +9,4 @@ export default {
     resVacancyCollectionLoss: 5,
     resVCLossTotal: "-$2,700",
     grossBuildingArea: 950
-}
+};

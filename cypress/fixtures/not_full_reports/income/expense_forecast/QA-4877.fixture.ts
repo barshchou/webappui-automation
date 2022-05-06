@@ -1,5 +1,10 @@
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 
+const electricityItemFixture: BoweryReports.ForecastItem = {
+    name: "electricity",
+    basis: "sf"
+};
+
 export default {
     reportCreationData: ReportDataCreator.getDefaultReportData("4877"),
     comparables: [
@@ -19,9 +24,6 @@ export default {
             electricity: 15917
         }
     ],
-    electricityItem: {
-        name: "electricity",
-        basis: "sf"
-    },
+    electricityItem: electricityItemFixture,
     electricityCardSnapshotName: "Electricity_Forecast_Item_Component"
 };
