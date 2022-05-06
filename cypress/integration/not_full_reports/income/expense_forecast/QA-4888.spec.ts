@@ -54,7 +54,7 @@ describe("Historical expense Electricity Per Unit is correctly calculated and di
         cy.stepInfo("4.2 Check historical expenses values for Electricity card. They should be correctly displayed on slidebars");
 
         Income._ExpenseForecastActions.Actions.matchElementSnapshot(
-            Income._ExpenseForecastActions.Page.ElectricityCard, testData.electricityCardSnapshotName, { padding: [10, 100] });
+            Income._ExpenseForecastActions.Page.electricityCard, testData.electricityCardSnapshotName, { padding: [10, 100] });
 
         deleteReport(testData.reportCreationData.reportNumber);
 
