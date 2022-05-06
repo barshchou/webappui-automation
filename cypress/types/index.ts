@@ -15,9 +15,11 @@ namespace BoweryReports {
     }
     
     export type ConclusionValue = "AS_IS" | "AS_STABILIZED" | "AS_COMPLETE" 
+    export type isSalesForcePull = boolean
     export type ReportCreationOptions = {
         incomeValue?: string,
-        conclusionValue?: BoweryReports.ConclusionValue
+        conclusionValue?: BoweryReports.ConclusionValue,
+        isSalesForcePull?: isSalesForcePull
     }
     export type LeaseDateName = "Start" | "Expiry"
     export type LeaseStatus = "Occupied" | "Vacant"
@@ -43,11 +45,14 @@ namespace BoweryReports {
     export type CommercialUnitsFacadeValues = "plate glass" | "other";
     export type CommercialUnitsStateValues = "finished" | "unfinished" | "vanilla box" | "other";
     export type CommercialUnitsCeilingHeightValues = "low" | "normal" | "high" | "other"; 
+    export type CommercialUnitsStreetTypeValues = "side street" | "avenue";
+    export type CommercialUnitsLocationValues = "corner" | "mid-block" | "through-lot" ;
     export namespace CommercialUnits {
         /*
         More Unit Groups Values will be added after other values types added
         */
-        export type GroupsValues = CommercialUnitsUseValues | CommercialUnitsGradeValues | CommercialUnitsFacadeValues | CommercialUnitsStateValues | CommercialUnitsCeilingHeightValues;
+        export type GroupsValues = CommercialUnitsUseValues | CommercialUnitsGradeValues | CommercialUnitsFacadeValues | CommercialUnitsStateValues 
+        | CommercialUnitsCeilingHeightValues | CommercialUnitsLocationValues | CommercialUnitsStreetTypeValues;
     }
 
     export type ForecastItem = { 
@@ -61,6 +66,12 @@ namespace BoweryReports {
         generalAndAdministrative?: number, management?: number, toe?: string};
 
     export type BuildingDescription = {grossArea: number, numberOfUnits: number}
+
+    export type ResidentialUnit = {
+        footage: number,
+        monthlyRent: number,
+        leaseStatus: BoweryReports.LeaseStatus
+    }
 }
 
 namespace BoweryAutomation {
@@ -70,6 +81,7 @@ namespace BoweryAutomation {
     export type BaseReportCreationData = {
         incomeValue: string, 
         address: string, 
+        isSalesForcePull: boolean,
         reportNumber: string, 
         templateValue: string,
         conclusionValue: BoweryReports.ConclusionValue
