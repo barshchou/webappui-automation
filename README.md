@@ -39,7 +39,7 @@ There are several main folders of these project:
 
 ### General prerequisites <a id="general_prerequisites"></a>
 1. Install `nvm`([macOS/Linux](https://github.com/nvm-sh/nvm), [Windows](https://github.com/coreybutler/nvm-windows)).
-2. Install lts node version. Run `nvm install lts`.
+2. **WARN: please, use lts version of node 16. , currently (05.05.22) - lts/gallium*** Install lts node version. Run `nvm install lts`.
 3. Run `nvm use lts` to use it.
 
 ### Setup <a id="setup"></a>
