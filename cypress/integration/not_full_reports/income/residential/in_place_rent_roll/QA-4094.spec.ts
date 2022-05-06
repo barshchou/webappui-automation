@@ -22,7 +22,7 @@ describe(`[QA-4094]Verify if "Per Month" time period PSF Rent based on is select
                 -Square Footage is not filled
                 -Monthly rent is 0
                 -Monthly rent is not filled`);
-        testData.cases.forEach(el => {
+        testData.rentRollResidentialUnits.forEach(el => {
             Income._Residential.InPlaceRentRoll.checkPerUnitSquareFootage()
             .Page.getPSFRadio(testData.psfRadioValue).click();
             Income._Residential.InPlaceRentRoll.enterSquareFootageByRow(el.squareFootage)
