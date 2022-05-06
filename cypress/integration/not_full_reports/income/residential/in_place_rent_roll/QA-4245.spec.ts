@@ -18,8 +18,8 @@ describe("Verify the Monthly Total row in the grid", () => {
         Income._Residential.InPlaceRentRoll.verifyMonthlyTotalRentValue();
         
         cy.stepInfo("3. Verify the Monthly Total row is calculated per formula = Monthly Rent ($) sum - vacant units' rents");
-        testData.resUnitsData.forEach((unit, index) => {
-            Income._Residential.InPlaceRentRoll.enterMonthlyRentByRowNumber(unit.rent, index);
+        testData.residentialUnits.forEach((unit, index) => {
+            Income._Residential.InPlaceRentRoll.enterMonthlyRentByRowNumber(unit.monthlyRent, index);
             Income._Residential.InPlaceRentRoll.enterLeaseStatusByRowNumber(unit.leaseStatus, index);
         });
         Income._Residential.InPlaceRentRoll.verifyMonthlyTotalRentValue();

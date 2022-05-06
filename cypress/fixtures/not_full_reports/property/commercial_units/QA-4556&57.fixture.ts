@@ -3,9 +3,7 @@ import reportDataCreator from "../../../data_creator/reportData.creator";
 
 
 export default {
-    reportCreationData: reportDataCreator.getReportData("4556&57", {
-        incomeValue: enums.INCOME_TYPE.BOTH
-    }),
+    reportCreationData: reportDataCreator.getReportSpecificIncomeValue(enums.INCOME_TYPE.BOTH, "4556&57"),
     numberOfCommercialUnits: 2,
     imagesType: ["Interior Images", "Exterior Images"],
     inputType:["drag-n-drop","input"],

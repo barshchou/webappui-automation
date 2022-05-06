@@ -50,12 +50,13 @@ class ReportCreator {
     }
 
     getReportData(testNumber: string, options?: BoweryReports.ReportCreationOptions){
-        return this.setReportNumber(testNumber)
-        .setAddress()
-        .setTemplateValue()
-        .setIncomeValue(options?.incomeValue ? options.incomeValue : null)
-        .setConclusionValue(options?.conclusionValue ? options.conclusionValue : null)
-        .build();
+        if(options?.incomeValue){
+            this.setIncomeValue(options.incomeValue);
+        }
+        if(options?.conclusionValue){
+            this.setConclusionValue(options.conclusionValue);
+        }
+        return this.setReportNumber(testNumber).setAddress().setTemplateValue().build();
     }
 }
 
