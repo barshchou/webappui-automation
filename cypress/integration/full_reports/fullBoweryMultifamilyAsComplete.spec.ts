@@ -154,7 +154,7 @@ describe("Full bowery way, multifamily as complete report", () => {
             .checkCheckboxByLabelAndVerify(testData.inPLaceRentRoll.forecastLabel, testData.inPLaceRentRoll.forecastColumn)
             .checkListIsInspectedByRowNumbers(testData.inPLaceRentRoll.isInspectedRowsToCheck)
             .enterUnitNumbersByOrderToAll(testData.currentDescription.numberOfUnits)
-            .enterAllEqualRoomsNumber(testData.inPLaceRentRoll.roomsNumber.toString(), testData.currentDescription.numberOfUnits)
+            .enterAllEqualRoomsNumber(testData.inPLaceRentRoll.roomsNumber, testData.currentDescription.numberOfUnits)
             .enterAllEqualBedroomsNumber(testData.inPLaceRentRoll.bedroomsNumber, testData.currentDescription.numberOfUnits)
             .enterAllEqualRentTypeCells(testData.inPLaceRentRoll.rentType)
             .enterAllEqualLeaseStatuses(testData.inPLaceRentRoll.leaseStatus)

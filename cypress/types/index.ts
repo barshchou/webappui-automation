@@ -46,7 +46,7 @@ namespace BoweryReports {
         More Unit Groups Values will be added after other values types added
         */
         export type GroupsValues = CommercialUnitsUseValues | CommercialUnitsGradeValues | CommercialUnitsFacadeValues | CommercialUnitsStateValues 
-        | CommercialUnitsCeilingHeightValues | CommercialUnitsLocationValues;
+        | CommercialUnitsCeilingHeightValues | CommercialUnitsLocationValues | CommercialUnitsFrontageValues;
     }
     export type CommercialUnitsFrontageValues = "small" | "medium" | "large" | "other"; 
 
@@ -75,6 +75,7 @@ namespace BoweryReports {
     }
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 namespace BoweryAutomation {
     /**
      * Base data for report setup

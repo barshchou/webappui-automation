@@ -192,14 +192,14 @@ class InPlaceRentRollActions extends BaseActionsExt<typeof rentRollPage> {
         return this;
     }
 
-    enterRoomsNumberByRowNumber(value: string, number: number): InPlaceRentRollActions {
+    enterRoomsNumberByRowNumber(value: string | number, number: number): InPlaceRentRollActions {
         rentRollPage.roomsCells.eq(number).dblclick();
-        this.enterTextToTextarea(value);
-        rentRollPage.roomsCells.eq(number).should("have.text", value);
+        this.enterTextToTextarea(value.toString());
+        rentRollPage.roomsCells.eq(number).should("have.text", value.toString());
         return this;
     }
 
-    enterAllEqualRoomsNumber(roomsNumber: string, numberOfUnits: number): InPlaceRentRollActions {
+    enterAllEqualRoomsNumber(roomsNumber: number, numberOfUnits: number): InPlaceRentRollActions {
         for (let i = 0; i < numberOfUnits; i++) {
             this.enterRoomsNumberByRowNumber(roomsNumber, i);
         }

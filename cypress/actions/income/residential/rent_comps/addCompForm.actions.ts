@@ -10,7 +10,7 @@ class AddCompFormActions extends BaseActions {
         return this;
     }
 
-    enterUnitNumber(unitNumber): AddCompFormActions {
+    enterUnitNumber(unitNumber: string): AddCompFormActions {
         addCompFormPage.unitNumbInput.clear().type(unitNumber).should("have.value", unitNumber);
         return this;
     }
@@ -20,33 +20,33 @@ class AddCompFormActions extends BaseActions {
         return this;
     }
 
-    selectUnitTypeByValue(value): AddCompFormActions {
+    selectUnitTypeByValue(value: string): AddCompFormActions {
         addCompFormPage.getUnitTypeByValue(value).scrollIntoView().should("be.visible").click();
         return this;
     }
 
-    verifyUnitTypeValue(valueToBe): AddCompFormActions {
+    verifyUnitTypeValue(valueToBe: string): AddCompFormActions {
         addCompFormPage.unitTypeInputToCheck.should("have.value", valueToBe);
         return this;
     }
 
-    selectUnitTypeAndVerify(value): AddCompFormActions {
+    selectUnitTypeAndVerify(value: string): AddCompFormActions {
         this.clickUnitTypeDropdown()
             .selectUnitTypeByValue(value)
             .verifyUnitTypeValue(value);
         return this;
     }
 
-    selectListUnitTypes(values): AddCompFormActions {
+    selectListUnitTypes(values: string[]): AddCompFormActions {
         values.forEach(value => {
            this.selectUnitTypeAndVerify(value);
         });
         return this;
     }
 
-    enterMonthlyRent(rent): AddCompFormActions {
-        const textToBe = typeof rent === "string" ? rent : numberWithCommas(rent);
-        addCompFormPage.monthRentInput.clear().type(rent)
+    enterMonthlyRent(rent: number): AddCompFormActions {
+        const textToBe = numberWithCommas(rent);
+        addCompFormPage.monthRentInput.clear().type(rent.toString())
             .should("have.value", textToBe).should("have.attr", "required");
         return  this;
     }
@@ -65,21 +65,21 @@ class AddCompFormActions extends BaseActions {
         return this;
     }
 
-    verifyEnteredDate(dateToBe): AddCompFormActions {
+    verifyEnteredDate(dateToBe?: string): AddCompFormActions {
         dateToBe = dateToBe ?? getTodayDateString();
         if (!isDateHasCorrectFormat(dateToBe)) dateToBe = "";
         addCompFormPage.dateInputValue.should("have.value", dateToBe);
         return this;
     }
 
-    chooseDayOfCurrentMonthInPicker(day?): AddCompFormActions {
+    chooseDayOfCurrentMonthInPicker(day?: string | number): AddCompFormActions {
         day = day ?? Number(getTodayDay());
         let date = getTodayDateString();
         let dateArr = date.split("-");
         if (day < 10) {
             dateArr[1] = `0${day}`;
         } else {
-            dateArr[1] = day;
+            dateArr[1] = day.toString();
         }
         date = `${dateArr[0]}-${dateArr[1]}-${dateArr[2]}`;
         addCompFormPage.datePickerButton.should("be.enabled").click();
@@ -89,9 +89,9 @@ class AddCompFormActions extends BaseActions {
         return this;
     }
 
-    enterSquareFootage(footage): AddCompFormActions {
-        const textToBe = typeof footage === "string" ? footage : numberWithCommas(footage);
-        addCompFormPage.squareFootageInput.clear().type(footage).should("have.value", textToBe);
+    enterSquareFootage(footage: number): AddCompFormActions {
+        const textToBe = numberWithCommas(footage);
+        addCompFormPage.squareFootageInput.clear().type(footage.toString()).should("have.value", textToBe);
         return this;
     }
 
@@ -100,37 +100,37 @@ class AddCompFormActions extends BaseActions {
         return this;
     }
 
-    selectSourceOfInfoByValue(value): AddCompFormActions {
+    selectSourceOfInfoByValue(value: string): AddCompFormActions {
         addCompFormPage.getSourceOfInfoByValue(value).click({force:true});
         return this;
     }
 
-    verifySelectedSource(valueToBe): AddCompFormActions {
+    verifySelectedSource(valueToBe: string): AddCompFormActions {
         addCompFormPage.sourceOfInfoInputToCheck.should("have.value", valueToBe);
         return this;
     }
 
-    selectSourceOfInfoAndVerify(value): AddCompFormActions {
+    selectSourceOfInfoAndVerify(value: string): AddCompFormActions {
         this.clickSourceOfInfoDropdown()
             .selectSourceOfInfoByValue(value)
             .verifySelectedSource(value);
         return this;
     }
 
-    selectListSourceOfInfoAndVerify(values): AddCompFormActions {
+    selectListSourceOfInfoAndVerify(values: string[]): AddCompFormActions {
         values.forEach(value => {
             this.selectSourceOfInfoAndVerify(value);
         });
         return this;
     }
 
-    enterNumberOfBedrooms(number): AddCompFormActions {
-        addCompFormPage.bedroomsInput.clear().type(number)
+    enterNumberOfBedrooms(number: number): AddCompFormActions {
+        addCompFormPage.bedroomsInput.clear().type(number.toString())
             .should("have.value", number).should("have.attr", "required");
         return this;
     }
 
-    enterSourceName(name): AddCompFormActions {
+    enterSourceName(name: string): AddCompFormActions {
         addCompFormPage.sourceNameInput.should("exist").clear().type(name).should("have.value", name);
         return this;
     }
@@ -145,13 +145,13 @@ class AddCompFormActions extends BaseActions {
         return this;
     }
 
-    enterSourceUrl(url): AddCompFormActions {
+    enterSourceUrl(url: string): AddCompFormActions {
         addCompFormPage.sourceUrlInput.should("exist").clear().type(url).should("have.value", url);
         return this;
     }
 
-    enterNumberOfRooms(numberOfRooms): AddCompFormActions {
-        addCompFormPage.numberOfRoomsInput.clear().type(numberOfRooms)
+    enterNumberOfRooms(numberOfRooms: number): AddCompFormActions {
+        addCompFormPage.numberOfRoomsInput.clear().type(numberOfRooms.toString())
             .should("have.value", numberOfRooms).should("have.attr", "required");
         return this;
     }
@@ -173,7 +173,7 @@ class AddCompFormActions extends BaseActions {
         return this;
     }
 
-    enterInternalNotes(notes): AddCompFormActions {
+    enterInternalNotes(notes: string): AddCompFormActions {
         addCompFormPage.internalNotesTextField.should("exist").should("have.attr", "placeholder",
             "Write internal notes that will not be exported.").clear().type(notes).should("have.text", notes);
         return this;
@@ -184,28 +184,28 @@ class AddCompFormActions extends BaseActions {
         return this;
     }
 
-    checkCheckboxByQaAttr(attribute): AddCompFormActions {
+    checkCheckboxByQaAttr(attribute: string): AddCompFormActions {
         addCompFormPage.getCheckboxByDataQaAttr(attribute)
             .should("have.value", "false")
             .scrollIntoView().check({force:true}).should("have.value", "true");
         return this;
     }
 
-    uncheckCheckboxByQaAttr(attribute): AddCompFormActions {
+    uncheckCheckboxByQaAttr(attribute: string): AddCompFormActions {
         addCompFormPage.getCheckboxByDataQaAttr(attribute)
             .should("have.value", "true")
             .scrollIntoView().uncheck({force:true}).should("have.value", "false");
         return this;
     }
 
-    checkListOfCheckboxesByQa(attributes): AddCompFormActions {
+    checkListOfCheckboxesByQa(attributes: string[]): AddCompFormActions {
         attributes.forEach(attr => {
             this.checkCheckboxByQaAttr(attr);
         });
         return this;
     }
 
-    uncheckListOfCheckboxesByQa(attributes): AddCompFormActions {
+    uncheckListOfCheckboxesByQa(attributes: string[]): AddCompFormActions {
         attributes.forEach(attr => {
             this.uncheckCheckboxByQaAttr(attr);
         });
@@ -222,7 +222,19 @@ class AddCompFormActions extends BaseActions {
         return this;
     }
 
-    fillNewRentCompWithoutNumbTypeSourceNameUrlNoteAmenities(compData): AddCompFormActions {
+    fillNewRentCompWithoutNumbTypeSourceNameUrlNoteAmenities(compData: {
+        state?: string;
+        address?: string; 
+        monthly: number; 
+        date: string; 
+        footage: number; 
+        sourceInfo: string; 
+        bedrooms: number;
+        rooms: number; 
+        bathrooms: number; 
+        id?: string; 
+        sourceInfoCheck?: string;
+     }): AddCompFormActions {
         this.enterMonthlyRent(compData.monthly)
             .enterDate(compData.date)
             .enterSquareFootage(compData.footage)
