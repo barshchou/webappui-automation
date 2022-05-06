@@ -4,7 +4,7 @@ import Income from "../../../../../actions/income/income.manager";
 import Final from "../../../../../actions/final/final.manager";
 import {createReport, deleteReport} from "../../../../../actions/base/baseTest.actions";
 
-describe("Verify the Inspected checkbox functionality", () => {
+describe("Verify the Inspected checkbox functionality",{ tags:["@income", "@in_place_rent_roll"] }, () => {
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
     });
