@@ -29,10 +29,10 @@ class ExpenseHistoryActions extends BaseActionsExt<typeof expenseHistoryPage>{
 
     enterRepairsAndMaintenanceByColIndex(repairsAndMaintenance: number | string, index = 0): ExpenseHistoryActions {
         if (repairsAndMaintenance === "clear") {
-            expenseHistoryPage.getUnifiedEditableAndTotalCells("repairsAndMaintenance").eq(index).clear();
+            expenseHistoryPage.getUnifiedEditableAndTotalCells(tableExpenseHistory.repairsAndMaintenance).eq(index).clear();
         } else {
-            expenseHistoryPage.getUnifiedEditableAndTotalCells("repairsAndMaintenance").eq(index).dblclick().scrollIntoView().clear().realType(`${repairsAndMaintenance}{enter}`);
-            expenseHistoryPage.getUnifiedEditableAndTotalCells("repairsAndMaintenance").eq(index).should("have.text", `$${numberWithCommas(repairsAndMaintenance)}.00`);
+            expenseHistoryPage.getUnifiedEditableAndTotalCells(tableExpenseHistory.repairsAndMaintenance).eq(index).dblclick().scrollIntoView().clear().realType(`${repairsAndMaintenance}{enter}`);
+            expenseHistoryPage.getUnifiedEditableAndTotalCells(tableExpenseHistory.repairsAndMaintenance).eq(index).should("have.text", `$${numberWithCommas(repairsAndMaintenance)}.00`);
         }
         return this;
     }

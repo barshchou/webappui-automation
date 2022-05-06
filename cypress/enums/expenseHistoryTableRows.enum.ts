@@ -1,7 +1,7 @@
 const tableExpenseHistory = {
 
- /*   operatingExpensesCell: ["grossRevenue", "realEstateTaxes", "insurance", "electricity", "fuel", "waterAndSewer", "repairsAndMaintenance", "payrollAndBenefits",
-        "generalAndAdministrative", "legalAndProfessionalFees", "miscellaneous", "management", "reserves"],*/
+    operatingExpensesCell: ["grossRevenue", "realEstateTaxes", "insurance", "electricity", "fuel", "waterAndSewer", "repairsAndMaintenance", "payrollAndBenefits",
+        "generalAndAdministrative", "legalAndProfessionalFees", "miscellaneous", "management", "reserves"],
      //   operatingExpensesCell: [
             grossRevenue: "grossRevenue", 
             realEstateTaxes: "realEstateTaxes", 
