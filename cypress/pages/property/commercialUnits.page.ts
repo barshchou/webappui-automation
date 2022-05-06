@@ -1,6 +1,8 @@
 import BasePage from "../base/base.page";
 
 class CommercialUnitsPage extends BasePage {
+    get numberCommercialUnitsField() {return cy.xpath("//*[.='No. of Commercial Units']//following::*[@inputmode][1]");}
+
     get iconDeleteImage(){
         return cy.get('[data-icon="trash-alt"]');
     }
