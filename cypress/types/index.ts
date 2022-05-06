@@ -8,9 +8,11 @@
 
 namespace BoweryReports {
     export type ConclusionValue = "AS_IS" | "AS_STABILIZED" | "AS_COMPLETE" 
+    export type isSalesForcePull = boolean
     export type ReportCreationOptions = {
         incomeValue?: string,
-        conclusionValue?: BoweryReports.ConclusionValue
+        conclusionValue?: BoweryReports.ConclusionValue,
+        isSalesForcePull?: isSalesForcePull
     }
     export type LeaseDateName = "Start" | "Expiry"
     export type LeaseStatus = "Occupied" | "Vacant"
@@ -72,6 +74,7 @@ namespace BoweryAutomation {
     export type BaseReportCreationData = {
         incomeValue: string, 
         address: string, 
+        isSalesForcePull: boolean,
         reportNumber: string, 
         templateValue: string,
         conclusionValue: BoweryReports.ConclusionValue
