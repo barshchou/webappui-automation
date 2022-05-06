@@ -194,8 +194,8 @@ class InPlaceRentRollActions extends BaseActionsExt<typeof rentRollPage> {
 
     enterRoomsNumberByRowNumber(value: string | number, number: number): InPlaceRentRollActions {
         rentRollPage.roomsCells.eq(number).dblclick();
-        this.enterTextToTextarea(value);
-        rentRollPage.roomsCells.eq(number).should("have.text", value);
+        this.enterTextToTextarea(value.toString());
+        rentRollPage.roomsCells.eq(number).should("have.text", value.toString());
         return this;
     }
 
@@ -404,6 +404,13 @@ class InPlaceRentRollActions extends BaseActionsExt<typeof rentRollPage> {
                 }
             });
         });
+        return this;
+    }
+
+    verifyRentRoomCellValues(monthlyRent = 0, rooms = 0, row = 0): InPlaceRentRollActions{
+        let defaultValues = "$0";
+        let textToBe = monthlyRent == 0 ? defaultValues : `$${numberWithCommas((monthlyRent / rooms).toFixed(0))}`; 
+        rentRollPage.rentRoomCell.eq(row).should('have.text', textToBe);
         return this;
     }
     

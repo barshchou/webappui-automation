@@ -23,15 +23,12 @@ describe("[QA-4212] [QA-4243] [QA-4246] In-Place Rent Roll table tests", () => {
         cy.stepInfo('3. [QA-4243] Verify Rent/SF value with filled monthly rent and square footage values by formula: [Monthly Rent] * 12 / [Square Footage]');
         Income._Residential.InPlaceRentRoll.checkPerUnitSquareFootage();
         for(let row = 0; row < testData.residentialUnits.length; row++){
-            Income._Residential.InPlaceRentRoll.enterLeaseStatusByRowNumber(testData.residentialUnits[row].leaseStatus, row)
-                .enterSquareFootageByRow(testData.residentialUnits[row].footage, row);
-
-            if (testData.residentialUnits[row].leaseStatus == 'Occupied'){
-                Income._Residential.InPlaceRentRoll.enterMonthlyRentByRowNumber(testData.residentialUnits[row].monthlyRent, row)
+            Income._Residential.InPlaceRentRoll.enterMonthlyRentByRowNumber(testData.residentialUnits[row].monthlyRent, row)
+                .enterSquareFootageByRow(testData.residentialUnits[row].footage, row)
+                .enterLeaseStatusByRowNumber(testData.residentialUnits[row].leaseStatus, row)
                 .verifyRentSFValue(row);
-            }
         }
-
+        
         cy.stepInfo('4. [QA-4246] Verify the Annual Total row is calculated per formula = (Monthly Rent ($) sum - vacant units\' rent) * 12');
         Income._Residential.InPlaceRentRoll.verifyAnnuallyTotalForecastEqualValue();
 
