@@ -1,6 +1,8 @@
 import BasePage from "../base/base.page";
 
 class CommercialUnitsPage extends BasePage {
+    get commercialUnitField() {return cy.get("[name$='.squareFeet']");} 
+
     get iconDeleteImage(){
         return cy.get('[data-icon="trash-alt"]');
     }
