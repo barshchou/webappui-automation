@@ -2,7 +2,7 @@ import ReportDataCreator from "../../../../data_creator/reportData.creator";
 import Enums from "../../../../../enums/enums";
 
 export default {
-    reportCreationData: ReportDataCreator.getReportSpecificIncomeValue(Enums.INCOME_TYPE.BOTH, "4827"),
+    reportCreationData: ReportDataCreator.getReportSpecificIncomeValue(Enums.INCOME_TYPE.BOTH, "4015"),
     numberOfCommercialUnits: 2,
     listOfUnitsSF: [1000, 2000],
     groupName: "Use",
