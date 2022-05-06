@@ -1,7 +1,7 @@
 import expenseHistoryPage from "../../pages/income/expenseHistory.page";
 import { getNumberFromDollarNumberWithCommas, numberWithCommas } from "../../../utils/numbers.utils";
 import BaseActionsExt from "../base/base.actions.ext";
-import tableExpenseHistory from "../../../cypress/enums/expenseHistoryTableRows.enum"
+import tableExpenseHistory from "../../../cypress/enums/expenseHistoryTableRows.enum";
 
 class ExpenseHistoryActions extends BaseActionsExt<typeof expenseHistoryPage>{
 
@@ -187,7 +187,7 @@ class ExpenseHistoryActions extends BaseActionsExt<typeof expenseHistoryPage>{
              .verifyAverageByCellTotal("totalExcludingTaxes")
              .verifyAverageByCellTotal("noi");  
          return this;*/
-         
+
         tableExpenseHistory.operatingExpensesCell.forEach(cellsName => {
             this.verifyAverageByCell(cellsName);
         });
