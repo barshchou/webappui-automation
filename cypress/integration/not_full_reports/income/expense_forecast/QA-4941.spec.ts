@@ -37,10 +37,10 @@ describe("Historical expense Fuel Per SF is correctly calculated and displayed",
             .clickAddExpenseYearButton();
 
         cy.stepInfo("3. Fill in Fuel field for all added columns and save changes");
-        Income.ExpenseHistory.enterFuelByColIndex(testData.actual.fuelExpense, 0)
-            .enterFuelByColIndex(testData.t12.fuelExpense, 1)
-            .enterFuelByColIndex(testData.historical.fuelExpense, 2)
-            .enterFuelByColIndex(testData.projection.fuelExpense, 3);
+        Income.ExpenseHistory.enterFuelByColIndex(testData.actual.fuelExpense, 3)
+            .enterFuelByColIndex(testData.t12.fuelExpense, 2)
+            .enterFuelByColIndex(testData.historical.fuelExpense, 1)
+            .enterFuelByColIndex(testData.projection.fuelExpense, 0);
         NavigationSection.navigateToExpenseForecast();
 
         cy.stepInfo("4. Go to Expense Forecast and make sure that Per SF radiobutton is selected for Fuel card");
@@ -56,7 +56,7 @@ describe("Historical expense Fuel Per SF is correctly calculated and displayed",
 
         cy.stepInfo("6. Check historical expenses values for Fuel card. They should be correctly displayed on slidebars");
         Income.ExpenseForecast.Actions.matchElementSnapshot(
-            Income.ExpenseForecast.Page.FuelCard, testData.fuelCardSnapshotName, {padding: [10, 100]});
+            Income.ExpenseForecast.Page.fuelCard, testData.fuelCardSnapshotName, {padding: [10, 100]});
 
         deleteReport(testData.reportCreationData.reportNumber);
     });

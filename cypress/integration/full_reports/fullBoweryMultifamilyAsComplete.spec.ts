@@ -6,6 +6,7 @@ import Property from "../../actions/property/property.manager";
 import Income from "../../actions/income/income.manager";
 import Final from "../../actions/final/final.manager";
 import Sales from "../../actions/sales/sales.manager";
+import proFormaTypesEnum from "../../enums/proFormaTypes.enum";
 
 describe("Full bowery way, multifamily as complete report", () => {
     it("Test", () => {
@@ -295,12 +296,18 @@ describe("Full bowery way, multifamily as complete report", () => {
                 .chooseExpensePeriodByColumnIndex(comp.period, i)
                 .enterSquareFeetByColumnIndex(comp.squareFeet, i)
                 .enterResidentialUnitsByColumnIndex(comp.resUnits, i)
-                .enterCellDollarValueByColumnIndex(Income.ComparableExpenses.Page.insuranceCells, comp.insurance, i)
-                .enterCellDollarValueByColumnIndex(Income.ComparableExpenses.Page.electricityCells, comp.electricity, i)
-                .enterCellDollarValueByColumnIndex(Income.ComparableExpenses.Page.repairsCells, comp.repairsAndMaintenance, i)
-                .enterCellDollarValueByColumnIndex(Income.ComparableExpenses.Page.payrollCells, comp.payrollAndBenefits, i)
-                .enterCellDollarValueByColumnIndex(Income.ComparableExpenses.Page.generalCells, comp.generalAndAdministrative, i)
-                .enterCellDollarValueByColumnIndex(Income.ComparableExpenses.Page.managementFeesCells, comp.management, i)
+                .enterCellDollarValueByColumnIndex(Income.ComparableExpenses.Page.getUnifiedEditableAndTotalCells("insurance"),
+                    comp.insurance, i)
+                .enterCellDollarValueByColumnIndex(Income.ComparableExpenses.Page.getUnifiedEditableAndTotalCells("electricity"),
+                    comp.electricity, i)
+                .enterCellDollarValueByColumnIndex(Income.ComparableExpenses.Page.getUnifiedEditableAndTotalCells("repairsAndMaintenance"),
+                    comp.repairsAndMaintenance, i)
+                .enterCellDollarValueByColumnIndex(Income.ComparableExpenses.Page.getUnifiedEditableAndTotalCells("payrollAndBenefits"),
+                    comp.payrollAndBenefits, i)
+                .enterCellDollarValueByColumnIndex(Income.ComparableExpenses.Page.getUnifiedEditableAndTotalCells("generalAndAdministrative"),
+                    comp.generalAndAdministrative, i)
+                .enterCellDollarValueByColumnIndex(Income.ComparableExpenses.Page.getUnifiedEditableAndTotalCells("management"),
+                    comp.management, i)
                 .verifyTOEByColumnIndex(comp.toe, i)
                 .verifyTOEPerSFByColumnIndex(i)
                 .verifyToePerUnitByColumnIndex(i);
@@ -364,22 +371,22 @@ describe("Full bowery way, multifamily as complete report", () => {
             .verifyOwnersProFormaValue()
             .verifyTotalForecast();
         NavigationSection.navigateToProForma();
-        Income.ProForma.verifyPotentialResIncomeRow(testData.proForma.potentialResIncomeRow)
-            .verifyPotentialGrossIncomeRow(testData.proForma.potentialGrossIncomeRow)
-            .verifyResVCLossRow(testData.proForma.vcLossRow)
-            .verifyEffectiveGrossRow(testData.proForma.effectiveGrossRow)
-            .verifyRETaxesRow(testData.proForma.reTaxesRow)
-            .verifyInsuranceRow(testData.proForma.insuranceRow)
-            .verifyElectricityRow(testData.proForma.electricityRow)
-            .verifyRepairsRow(testData.proForma.repairsRow)
-            .verifyPayrollRow(testData.proForma.payrollRow)
-            .verifyGeneralRow(testData.proForma.generalRow)
-            .verifyManagementRow(testData.proForma.managementRow)
-            .verifyReservesRow(testData.proForma.reservesRow)
-            .verifyToeRow(testData.proForma.toeRow)
-            .verifyToeNetReRow(testData.proForma.toeNetReRow)
-            .verifyNetOpIncomeRow(testData.proForma.netOpIncomeRow)
-            .verifyOperatingExpenseRatio(testData.proForma.opExpenseRatio);
+        Income.ProForma.verifyCategoryRow(testData.proForma.potentialResIncomeRow, proFormaTypesEnum.potentialResIncome)
+            .verifyCategoryRow(testData.proForma.potentialGrossIncomeRow, proFormaTypesEnum.potentialGrossIncome)
+            .verifyCategoryRow(testData.proForma.vcLossRow, proFormaTypesEnum.residentialVCLoss)
+            .verifyCategoryRow(testData.proForma.effectiveGrossRow, proFormaTypesEnum.effectiveGrossIncome)
+            .verifyCategoryRow(testData.proForma.reTaxesRow, proFormaTypesEnum.realEstateTaxes)
+            .verifyCategoryRow(testData.proForma.insuranceRow, proFormaTypesEnum.insurace)
+            .verifyCategoryRow(testData.proForma.electricityRow, proFormaTypesEnum.electricity)
+            .verifyCategoryRow(testData.proForma.repairsRow, proFormaTypesEnum.repairAndMaintenance)
+            .verifyCategoryRow(testData.proForma.payrollRow, proFormaTypesEnum.payrollBenefits)
+            .verifyCategoryRow(testData.proForma.generalRow, proFormaTypesEnum.generalAndAdministrative)
+            .verifyCategoryRow(testData.proForma.managementRow, proFormaTypesEnum.managementFees)
+            .verifyCategoryRow(testData.proForma.reservesRow, proFormaTypesEnum.replacementsAndReserves)
+            .verifyCategoryRow(testData.proForma.toeRow, proFormaTypesEnum.totalOperatingExpenses)
+            .verifyCategoryRow(testData.proForma.toeNetReRow, proFormaTypesEnum.totalOperatingExpensesExTaxes)
+            .verifyCategoryRow(testData.proForma.netOpIncomeRow, proFormaTypesEnum.netOperatingIncome)
+            .verifyOperatingExpenseRatio(testData.proForma.opExpenseRatio, proFormaTypesEnum.operatingExpenseRatio);
         NavigationSection.navigateToSupportingCapRates();
         Income.SupportingCapRates.uncheckIncludePersonalSurvey()
             .verifyIncomeCapitalizationCommentary(testData.supportingCapRates.incomeCapComm)
