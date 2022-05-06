@@ -1,7 +1,13 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// ernst: remove ts-ignore when you start refactor this fixture
+
+
+
 import {getTodayDateString, getYearFromDate} from "../../../../utils/date.utils";
 import Enums from "../../../enums/enums";
 
 const reportCreationFixture = (): BoweryAutomation.ReportCreationData => {
+// @ts-ignore    
     return {
         state: "Other",
         address: "8524 South Oglesby Avenue",
