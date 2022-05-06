@@ -13,7 +13,7 @@ const _otherValue: BoweryReports.CommercialUnitsUseTexts = "Jeronimo";
 
 const _groupName: BoweryReports.CommercialUnitsGroups = "Use";
 
-const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("4558", {
+const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("4558", false, {
     incomeValue: Enums.INCOME_TYPE.BOTH,
     conclusionValue: Enums.VALUE_CONCLUSION_TYPE.AS_IS
 });
