@@ -106,7 +106,7 @@ class ExpenseHistoryActions extends BaseActionsExt<typeof expenseHistoryPage>{
     }
 
     enterPayrollBenefitsByColIndex(value: number | string, index = 0): ExpenseHistoryActions {
-        expenseHistoryPage.payrollBenefitsInputs.eq(index).clear().type(`${value}`)
+        expenseHistoryPage.getUnifiedEditableAndTotalCells(tableExpenseHistoryCellNames.payrollAndBenefits).eq(index).clear().type(`${value}`)
             .should("have.value", `$${numberWithCommas(value)}`);
         return this;
     }
