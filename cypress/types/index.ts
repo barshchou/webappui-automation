@@ -13,7 +13,7 @@ namespace BoweryReports {
         incomeValue?: string,
         conclusionValue?: BoweryReports.ConclusionValue,
         templateValue?: string,
-        address?: stringm,
+        address?: string,
         isSalesForcePull?: isSalesForcePull
     }
     export type LeaseDateName = "Start" | "Expiry"
