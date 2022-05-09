@@ -17,6 +17,8 @@ class Homepage extends BasePage {
 
     get valueConclusionsRadios() {return cy.get("*[name='settings.valueConclusionType']");}
 
+    get pullExternalDataRadios() {return cy.get("[name='settings.pullExternalData']");}
+
     get reportNumberInput() {return cy.get("*[name='reportNumber']");}
 
     get createReportButton() {return cy.get("*[data-qa='create-report-btn']").last();}
