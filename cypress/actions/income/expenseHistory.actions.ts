@@ -144,10 +144,10 @@ class ExpenseHistoryActions extends BaseActionsExt<typeof expenseHistoryPage>{
      * @returns {ExpenseHistoryActions}
      */
     verifyNetOpIncomeByIndex(grossRevenue: number, index = 0): ExpenseHistoryActions {
-        expenseHistoryPage.totalOpExpenseCells.eq(index).invoke("text").then(toeTotalText => {
+        expenseHistoryPage.getUnifiedEditableAndTotalCells(tableExpenseHistoryCellNames.total).eq(index).invoke("text").then(toeTotalText => {
             const toeTotalNumber = getNumberFromDollarNumberWithCommas(toeTotalText);
             const noeTextToBe = `$${numberWithCommas((grossRevenue - toeTotalNumber).toFixed(2))}`;
-            expenseHistoryPage.netOpIncomeCells.eq(index).should("have.text", noeTextToBe);
+            expenseHistoryPage.getUnifiedEditableAndTotalCells(tableExpenseHistoryCellNames.noi).eq(index).should("have.text", noeTextToBe);
         });
         return this;
     }
