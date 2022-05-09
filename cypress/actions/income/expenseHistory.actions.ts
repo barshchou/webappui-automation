@@ -1,7 +1,7 @@
 import expenseHistoryPage from "../../pages/income/expenseHistory.page";
 import { getNumberFromDollarNumberWithCommas, numberWithCommas } from "../../../utils/numbers.utils";
 import BaseActionsExt from "../base/base.actions.ext";
-import tableExpenseHistory from "../../../cypress/enums/expenseHistoryTableRows.enum";
+import tableExpenseHistoryCells from "../../../cypress/enums/expenseHistoryTableRows.enum";
 
 class ExpenseHistoryActions extends BaseActionsExt<typeof expenseHistoryPage>{
 
@@ -29,10 +29,10 @@ class ExpenseHistoryActions extends BaseActionsExt<typeof expenseHistoryPage>{
 
     enterRepairsAndMaintenanceByColIndex(repairsAndMaintenance: number | string, index = 0): ExpenseHistoryActions {
         if (repairsAndMaintenance === "clear") {
-            expenseHistoryPage.getUnifiedEditableAndTotalCells(tableExpenseHistory.repairsAndMaintenance).eq(index).clear();
+            expenseHistoryPage.getUnifiedEditableAndTotalCells(tableExpenseHistoryCells.repairsAndMaintenance).eq(index).clear();
         } else {
-            expenseHistoryPage.getUnifiedEditableAndTotalCells(tableExpenseHistory.repairsAndMaintenance).eq(index).dblclick().scrollIntoView().clear().realType(`${repairsAndMaintenance}{enter}`);
-            expenseHistoryPage.getUnifiedEditableAndTotalCells(tableExpenseHistory.repairsAndMaintenance).eq(index).should("have.text", `$${numberWithCommas(repairsAndMaintenance)}.00`);
+            expenseHistoryPage.getUnifiedEditableAndTotalCells(tableExpenseHistoryCells.repairsAndMaintenance).eq(index).dblclick().scrollIntoView().clear().realType(`${repairsAndMaintenance}{enter}`);
+            expenseHistoryPage.getUnifiedEditableAndTotalCells(tableExpenseHistoryCells.repairsAndMaintenance).eq(index).should("have.text", `$${numberWithCommas(repairsAndMaintenance)}.00`);
         }
         return this;
     }
@@ -169,29 +169,10 @@ class ExpenseHistoryActions extends BaseActionsExt<typeof expenseHistoryPage>{
     }
 
     verifyAverageTable(): ExpenseHistoryActions {
-        /* this
-             .verifyAverageByCell("grossRevenue")
-             .verifyAverageByCell("realEstateTaxes")
-             .verifyAverageByCell("insurance")
-             .verifyAverageByCell("electricity")
-             .verifyAverageByCell("fuel")
-             .verifyAverageByCell("waterAndSewer")
-             .verifyAverageByCell("repairsAndMaintenance")
-             .verifyAverageByCell("payrollAndBenefits")
-             .verifyAverageByCell("generalAndAdministrative")
-             .verifyAverageByCell("legalAndProfessionalFees")
-             .verifyAverageByCell("miscellaneous")
-             .verifyAverageByCell("management")
-             .verifyAverageByCell("reserves")
-             .verifyAverageByCellTotal("total")
-             .verifyAverageByCellTotal("totalExcludingTaxes")
-             .verifyAverageByCellTotal("noi");  
-         return this;*/
-
-        tableExpenseHistory.operatingExpensesCell.forEach(cellsName => {
+         tableExpenseHistoryCells.operatingExpensesCellArray.forEach(cellsName => {
             this.verifyAverageByCell(cellsName);
         });
-        tableExpenseHistory.totalOperatingExpensesCell.forEach(cellsName => {
+        tableExpenseHistoryCells.totalOperatingExpensesCellArray.forEach(cellsName => {
             this.verifyAverageByCellTotal(cellsName);
         });
         return this;
