@@ -1,9 +1,9 @@
-const tableExpenseHistoryCells = {
+const tableExpenseHistoryCellNames = {
 
-   operatingExpensesCellArray: ["grossRevenue", "realEstateTaxes", "insurance", "electricity", "fuel",
+   operatingExpensesCellsNamesArray: ["grossRevenue", "realEstateTaxes", "insurance", "electricity", "fuel",
       "waterAndSewer", "repairsAndMaintenance", "payrollAndBenefits",
       "generalAndAdministrative", "legalAndProfessionalFees", "miscellaneous", "management", "reserves"],
-   totalOperatingExpensesCellArray: ["total", "totalExcludingTaxes", "noi"],
+   totalOperatingExpensesCellsNamesArray: ["total", "totalExcludingTaxes", "noi"],
 
    grossRevenue: "grossRevenue",
    realEstateTaxes: "realEstateTaxes",
@@ -24,4 +24,4 @@ const tableExpenseHistoryCells = {
 
 };
 
-export default Object.freeze(tableExpenseHistoryCells);
+export default Object.freeze(tableExpenseHistoryCellNames);

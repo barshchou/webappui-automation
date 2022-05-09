@@ -1,7 +1,7 @@
 import expenseHistoryPage from "../../pages/income/expenseHistory.page";
 import { getNumberFromDollarNumberWithCommas, numberWithCommas } from "../../../utils/numbers.utils";
 import BaseActionsExt from "../base/base.actions.ext";
-import tableExpenseHistoryCells from "../../../cypress/enums/expenseHistoryTableRows.enum";
+import tableExpenseHistoryCellNames from "../../../cypress/enums/expenseHistoryTableRows.enum";
 
 class ExpenseHistoryActions extends BaseActionsExt<typeof expenseHistoryPage>{
 
@@ -29,10 +29,10 @@ class ExpenseHistoryActions extends BaseActionsExt<typeof expenseHistoryPage>{
 
     enterRepairsAndMaintenanceByColIndex(repairsAndMaintenance: number | string, index = 0): ExpenseHistoryActions {
         if (repairsAndMaintenance === "clear") {
-            expenseHistoryPage.getUnifiedEditableAndTotalCells(tableExpenseHistoryCells.repairsAndMaintenance).eq(index).clear();
+            expenseHistoryPage.getUnifiedEditableAndTotalCells(tableExpenseHistoryCellNames.repairsAndMaintenance).eq(index).clear();
         } else {
-            expenseHistoryPage.getUnifiedEditableAndTotalCells(tableExpenseHistoryCells.repairsAndMaintenance).eq(index).dblclick().scrollIntoView().clear().realType(`${repairsAndMaintenance}{enter}`);
-            expenseHistoryPage.getUnifiedEditableAndTotalCells(tableExpenseHistoryCells.repairsAndMaintenance).eq(index).should("have.text", `$${numberWithCommas(repairsAndMaintenance)}.00`);
+            expenseHistoryPage.getUnifiedEditableAndTotalCells(tableExpenseHistoryCellNames.repairsAndMaintenance).eq(index).dblclick().scrollIntoView().clear().realType(`${repairsAndMaintenance}{enter}`);
+            expenseHistoryPage.getUnifiedEditableAndTotalCells(tableExpenseHistoryCellNames.repairsAndMaintenance).eq(index).should("have.text", `$${numberWithCommas(repairsAndMaintenance)}.00`);
         }
         return this;
     }
@@ -169,10 +169,10 @@ class ExpenseHistoryActions extends BaseActionsExt<typeof expenseHistoryPage>{
     }
 
     verifyAverageTable(): ExpenseHistoryActions {
-         tableExpenseHistoryCells.operatingExpensesCellArray.forEach(cellsName => {
+        tableExpenseHistoryCellNames.operatingExpensesCellsNamesArray.forEach(cellsName => {
             this.verifyAverageByCell(cellsName);
         });
-        tableExpenseHistoryCells.totalOperatingExpensesCellArray.forEach(cellsName => {
+        tableExpenseHistoryCellNames.totalOperatingExpensesCellsNamesArray.forEach(cellsName => {
             this.verifyAverageByCellTotal(cellsName);
         });
         return this;
