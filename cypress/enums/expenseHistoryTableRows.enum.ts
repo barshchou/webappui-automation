@@ -1,27 +1,27 @@
-const tableExpenseHistory = {
+const tableExpenseHistoryCells = {
 
-    operatingExpensesCell: ["grossRevenue", "realEstateTaxes", "insurance", "electricity", "fuel", "waterAndSewer", "repairsAndMaintenance", "payrollAndBenefits",
-        "generalAndAdministrative", "legalAndProfessionalFees", "miscellaneous", "management", "reserves"],
-     //   operatingExpensesCell: [
-            grossRevenue: "grossRevenue", 
-            realEstateTaxes: "realEstateTaxes", 
-            insurance:  "insurance", 
-            electricity: "electricity", 
-            fuel:  "fuel", 
-            waterAndSewer: "waterAndSewer", 
-            repairsAndMaintenance:  "repairsAndMaintenance", 
-            payrollAndBenefits:  "payrollAndBenefits",
-            generalAndAdministrative:  "generalAndAdministrative", 
-            legalAndProfessionalFees : "legalAndProfessionalFees", 
-            miscellaneous :   "miscellaneous", 
-            management : "management", 
-            reserves:   "reserves",
- //   ]
+   operatingExpensesCellArray: ["grossRevenue", "realEstateTaxes", "insurance", "electricity", "fuel",
+      "waterAndSewer", "repairsAndMaintenance", "payrollAndBenefits",
+      "generalAndAdministrative", "legalAndProfessionalFees", "miscellaneous", "management", "reserves"],
+   totalOperatingExpensesCellArray: ["total", "totalExcludingTaxes", "noi"],
 
+   grossRevenue: "grossRevenue",
+   realEstateTaxes: "realEstateTaxes",
+   insurance: "insurance",
+   electricity: "electricity",
+   fuel: "fuel",
+   waterAndSewer: "waterAndSewer",
+   repairsAndMaintenance: "repairsAndMaintenance",
+   payrollAndBenefits: "payrollAndBenefits",
+   generalAndAdministrative: "generalAndAdministrative",
+   legalAndProfessionalFees: "legalAndProfessionalFees",
+   miscellaneous: "miscellaneous",
+   management: "management",
+   reserves: "reserves",
+   total: "total",
+   totalExcludingTaxes: "totalExcludingTaxes",
+   noi: "noi"
 
-
-
-    totalOperatingExpensesCell: ["total", "totalExcludingTaxes", "noi"]
 };
 
-export default Object.freeze(tableExpenseHistory);
+export default Object.freeze(tableExpenseHistoryCells);
