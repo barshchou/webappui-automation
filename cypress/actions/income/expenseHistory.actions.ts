@@ -118,7 +118,7 @@ class ExpenseHistoryActions extends BaseActionsExt<typeof expenseHistoryPage>{
      * @returns {ExpenseHistoryActions}
      */
     verifyTotalOpExpensesByColIndex(textToBe: string, index = 0): ExpenseHistoryActions {
-        expenseHistoryPage.totalOpExpenseCells.eq(index).should("have.text", textToBe);
+        expenseHistoryPage.getUnifiedEditableAndTotalCells(tableExpenseHistoryCellNames.total).eq(index).should("have.text", textToBe);
         return this;
     }
 
