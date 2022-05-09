@@ -49,38 +49,38 @@ class ExpenseHistoryActions extends BaseActionsExt<typeof expenseHistoryPage>{
 
     enterGrossRevenueByColIndex(revenue: number | string, index = 0): ExpenseHistoryActions {
         const valueToBe = `$${numberWithCommas(revenue)}`;
-        expenseHistoryPage.grossRevenueInputs.eq(index).clear().type(`${revenue}`).should("have.value", valueToBe);
+        expenseHistoryPage.getUnifiedEditableAndTotalCells(tableExpenseHistoryCellNames.grossRevenue).eq(index).clear().type(`${revenue}`).should("have.value", valueToBe);
         return this;
     }
 
     enterRealEstateTaxesByColIndex(taxes: number | string, index = 0): ExpenseHistoryActions {
-        expenseHistoryPage.realEstateTaxesInputs.eq(index).clear().type(`${taxes}`)
+        expenseHistoryPage.getUnifiedEditableAndTotalCells(tableExpenseHistoryCellNames.realEstateTaxes).eq(index).clear().type(`${taxes}`)
             .should("have.value", `$${numberWithCommas(taxes)}`);
         return this;
     }
 
     enterInsuranceByColIndex(insurance: string | number = 0, index = 0): ExpenseHistoryActions {
         if (insurance === "clear") {
-            expenseHistoryPage.insuranceInputs.eq(index).clear();
+            expenseHistoryPage.getUnifiedEditableAndTotalCells(tableExpenseHistoryCellNames.insurance).eq(index).clear();
         } else {
-            expenseHistoryPage.insuranceInputs.eq(index).clear().type(`${insurance}`)
+            expenseHistoryPage.getUnifiedEditableAndTotalCells(tableExpenseHistoryCellNames.insurance).eq(index).clear().type(`${insurance}`)
                 .should("have.value", `$${numberWithCommas(insurance)}`);
         }
         return this;
     }
 
     enterElectricityByColIndex(electricity: number | string, index = 0): ExpenseHistoryActions {
-        expenseHistoryPage.electricityInputs.eq(index).dblclick().scrollIntoView().clear().realType(`${electricity}{enter}`);
-        expenseHistoryPage.electricityInputs.eq(index).should("have.text", `$${numberWithCommas(electricity)}.00`);
+        expenseHistoryPage.getUnifiedEditableAndTotalCells(tableExpenseHistoryCellNames.electricity).eq(index).dblclick().scrollIntoView().clear().realType(`${electricity}{enter}`);
+        expenseHistoryPage.getUnifiedEditableAndTotalCells(tableExpenseHistoryCellNames.electricity).eq(index).should("have.text", `$${numberWithCommas(electricity)}.00`);
         return this;
     }
 
     enterFuelByColIndex(fuel: string | number = 0, index = 0): ExpenseHistoryActions {
         if (fuel === "clear") {
-            expenseHistoryPage.fuelInputs.eq(index).clear();
+            expenseHistoryPage.getUnifiedEditableAndTotalCells(tableExpenseHistoryCellNames.fuel).eq(index).clear();
         } else {
-            expenseHistoryPage.fuelInputs.eq(index).dblclick().scrollIntoView().clear().realType(`${fuel}{enter}`);
-            expenseHistoryPage.fuelInputs.eq(index).should("have.text", `$${numberWithCommas(fuel)}.00`);
+            expenseHistoryPage.getUnifiedEditableAndTotalCells(tableExpenseHistoryCellNames.fuel).eq(index).dblclick().scrollIntoView().clear().realType(`${fuel}{enter}`);
+            expenseHistoryPage.getUnifiedEditableAndTotalCells(tableExpenseHistoryCellNames.fuel).eq(index).should("have.text", `$${numberWithCommas(fuel)}.00`);
         }
         return this;
     }
