@@ -129,10 +129,10 @@ class ExpenseHistoryActions extends BaseActionsExt<typeof expenseHistoryPage>{
      * @returns {ExpenseHistoryActions}
      */
     verifyTOEExcludingRETByIndex(retValue: number, index = 0): ExpenseHistoryActions {
-        expenseHistoryPage.totalOpExpenseCells.eq(index).invoke("text").then(toeTotalText => {
+        expenseHistoryPage.getUnifiedEditableAndTotalCells(tableExpenseHistoryCellNames.total).eq(index).invoke("text").then(toeTotalText => {
             const toeTotalNumber = getNumberFromDollarNumberWithCommas(toeTotalText);
             const excludingTextToBe = `$${numberWithCommas((toeTotalNumber - retValue).toFixed(2))}`;
-            expenseHistoryPage.toeExclRealEstTaxesCells.eq(index).should("have.text", excludingTextToBe);
+            expenseHistoryPage.getUnifiedEditableAndTotalCells(tableExpenseHistoryCellNames.totalExcludingTaxes).eq(index).should("have.text", excludingTextToBe);
         });
         return this;
     }
