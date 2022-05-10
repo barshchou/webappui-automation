@@ -3,7 +3,7 @@ import {createReport, deleteReport} from "../../../../../actions/base/baseTest.a
 import { _NavigationSection } from "../../../../../actions/base";
 import { Income, Property } from "../../../../../actions";
 
-describe(`[QA-4094]Verify if "Per Month" time period PSF Rent based on is selected - > the calculation 
+describe(`[QA-4094] Verify if "Per Month" time period PSF Rent based on is selected - > the calculation 
     of "Rent PSF/month" should be Monthly Rent/Square Footage`, () => {
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
