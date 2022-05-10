@@ -24,14 +24,23 @@ class UtilitiesPage extends BasePage{
     }
 
     get heatingCoolingCommentary() {return cy.get("*[data-qa='heatingAndCoolingSystemsDiscussion.commentary-generated-text']");}
+
     get gasMetersCheckbox() {return cy.get("*[data-qa*='gasMeters.inspected'] input");}
+
     get gasMetersTypeDropdown() {return cy.get("*[data-qa='gasMeters.type-select-list'] [data-qa='select-value']");}
+
     get gasMetersLocationDropdown() {return cy.get("*[data-qa='gasMeters.location-select-list'] [data-qa='select-value']");}
+
     get gasMetersCommentary() {return cy.get("*[data-qa='gasMetersDiscussion.commentary-generated-text']");}
+
     get electricMetersCheckbox() {return cy.get("*[data-qa*='electricMeters.inspected'] input");}
+
     get electricMetersTypeDrop() {return cy.get("*[data-qa='electricMeters.type-select-list'] [data-qa='select-value']");}
+
     get electricMetersLocationDrop() {return cy.get("*[data-qa='electricMeters.location-select-list'] [data-qa='select-value']");}
+
     get electricMetersCommentary() {return cy.get("*[data-qa='electricMetersDiscussion.commentary-generated-text']");}
+
     get hotWaterSystemsCheckbox() {return cy.get("*[data-qa='hotWaterSystems.inspected'] input");}
 
     getHotWaterSystemTypeDropBySystemNumber(number) {

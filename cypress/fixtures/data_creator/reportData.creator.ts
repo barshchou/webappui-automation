@@ -61,18 +61,13 @@ class ReportCreator {
 
     getReportData(testNumber: string, options?: BoweryReports.ReportCreationOptions, isSaleForcePull = false){
         this.isSalesForcePull = isSaleForcePull;
-
-        if(options?.incomeValue){
-            this.setIncomeValue(options.incomeValue);
-        }
         
-        if(options?.conclusionValue){
-            this.setConclusionValue(options.conclusionValue);
-        }
-        if(options?.isSalesForcePull){
-            this.isSalesForcePull = options.isSalesForcePull;
-        }
-        return this.setReportNumber(testNumber, this.isSalesForcePull).setAddress().setTemplateValue().build();
+        options?.address == undefined ? this.setAddress() : this.setAddress(options.address);
+        options?.templateValue == undefined ? this.setTemplateValue() : this.setTemplateValue(options.templateValue);
+        options?.incomeValue == undefined ? this.setIncomeValue() : this.setIncomeValue(options.incomeValue);
+        options?.conclusionValue == undefined ? this.setConclusionValue() : this.setConclusionValue(options.conclusionValue);
+        
+        return this.setReportNumber(testNumber, this.isSalesForcePull).build();
     }
 }
 
