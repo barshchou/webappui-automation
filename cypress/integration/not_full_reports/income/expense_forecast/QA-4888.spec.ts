@@ -4,9 +4,11 @@ import testData from "../../../../fixtures/not_full_reports/income/expense_forec
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import { Property, Income } from "../../../../actions";
 import {_NavigationSection} from "../../../../actions/base";
+import { Tag } from "../../../../utils/tags.utils";
 
 
-describe("Historical expense Electricity Per Unit is correctly calculated and displayed", () => {
+describe("Historical expense Electricity Per Unit is correctly calculated and displayed",
+{tags:[Tag.snapshot_tests,Tag.income,Tag.expense_forecast]}, () => {
 
 
     before("Login, create report", () => {

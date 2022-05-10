@@ -7,8 +7,10 @@ import {
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Income from "../../../../actions/income/income.manager";
 import Property from "../../../../actions/property/property.manager";
+import { Tag } from "../../../../utils/tags.utils";
 
-describe("Historical expense Repairs & Maintenance Per Unit is correctly calculated and displayed", () => {
+describe("Historical expense Repairs & Maintenance Per Unit is correctly calculated and displayed", 
+{tags:[Tag.expense_forecast,Tag.income,Tag.snapshot_tests]},() => {
   before("Login, create report", () => {
     createReport(testData.reportCreationData);
   });

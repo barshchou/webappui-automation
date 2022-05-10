@@ -6,9 +6,11 @@ import {
 } from "../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Income from "../../../../actions/income/income.manager";
+import { Tag } from "../../../../utils/tags.utils";
 
 
-describe("Comparable Min, Max, Avg values for Repairs & Maintenance Per Unit are correctly calculated and displayed", () => {
+describe("Comparable Min, Max, Avg values for Repairs & Maintenance Per Unit are correctly calculated and displayed",
+{tags:[Tag.expense_forecast,Tag.income,Tag.snapshot_tests]}, () => {
   before("Login, create report", () => {
     createReport(testData.reportCreationData);
   });

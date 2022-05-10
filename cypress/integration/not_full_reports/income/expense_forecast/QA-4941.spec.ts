@@ -4,13 +4,15 @@ import {createReport, deleteReport} from "../../../../actions/base/baseTest.acti
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Property from "../../../../actions/property/property.manager";
 import Income from "../../../../actions/income/income.manager";
+import { Tag } from "../../../../utils/tags.utils";
 
-describe("Historical expense Fuel Per SF is correctly calculated and displayed", () => {
+describe("Historical expense Fuel Per SF is correctly calculated and displayed",
+{ tags: [Tag.snapshot_tests,Tag.income,Tag.expense_forecast] }, () => {
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
     });
 
-    it("Test body", { tags: "@snapshot_tests" }, () => {
+    it("Test body", () => {
         cy.stepInfo("1. Navigate to Property -> Summary and enter gross building area");
         NavigationSection.navigateToPropertySummary();
         Property.Summary.enterGrossBuildingArea(testData.buildingDescription.grossArea)
