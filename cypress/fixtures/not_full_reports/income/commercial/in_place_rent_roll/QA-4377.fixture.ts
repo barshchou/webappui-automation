@@ -1,7 +1,7 @@
 import Enums from "../../../../../enums/enums";
 import ReportDataCreator from "../../../../data_creator/reportData.creator";
 
-const _leaseStatus: BoweryReports.LeaseStatus = "Occupied"
+const _leaseStatus: BoweryReports.LeaseStatus = "Occupied";
 
 const reportCreationFixture = () => {
     return ReportDataCreator.setReportNumber("4377")

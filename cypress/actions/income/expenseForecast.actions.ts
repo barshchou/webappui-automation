@@ -5,7 +5,6 @@ import BaseActionsExt from "../base/base.actions.ext";
 type ForecastItem = BoweryReports.ForecastItem;
 type BuildingDescription = BoweryReports.BuildingDescription;
 type Comparable = BoweryReports.Comparable;
-type ExpenseForecastData = {effectiveGrossIncome: number, management: {basis: string}, percentOfEgi: number}
 
 class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> {
     
@@ -22,8 +21,10 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
 
     enterForecastItemForecast(forecastItem: ForecastItem, customCategory = false, index = 0): ExpenseForecastActions {
         const valueToBe = `$${numberWithCommas(forecastItem.forecast)}`;
-        expenseForecastPage.getForecastItemForecastInput(forecastItem.name, customCategory, index).clear()
+        if (forecastItem.name != "total") {
+            expenseForecastPage.getForecastItemForecastInput(forecastItem.name, customCategory, index).clear()
             .type(`${forecastItem.forecast}`).should("have.value", valueToBe);
+        }
         return this;
     }
 
@@ -172,14 +173,14 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
         return this;
     }
 
-    getManagementForecastEgiPercent(expenseForecastData: ExpenseForecastData, currentDescription: BuildingDescription): string {
+    getManagementForecastEgiPercent(expenseForecastData: ForecastItem, effectiveGrossIncomeData: number, percentOfEgi: number, currentDescription: BuildingDescription): string {
         let perBasisEgi;
-        if (expenseForecastData.management.basis === "unit") {
-            perBasisEgi = expenseForecastData.effectiveGrossIncome / currentDescription.numberOfUnits;
+        if (expenseForecastData.basis === "unit") {
+            perBasisEgi = effectiveGrossIncomeData / currentDescription.numberOfUnits;
         } else {
-            perBasisEgi = expenseForecastData.effectiveGrossIncome / currentDescription.grossArea;
+            perBasisEgi = effectiveGrossIncomeData / currentDescription.grossArea;
         }
-        return (perBasisEgi / 100 * expenseForecastData.percentOfEgi).toFixed(2);
+        return (perBasisEgi / 100 * percentOfEgi).toFixed(2);
     }
 
     verifyToeCompMinPerBasis(basisValue: string, comparables: Array<Comparable>): ExpenseForecastActions {
@@ -301,7 +302,7 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
             expenseForecastPage.Header.then(elem => {
                 elem.hide();
             });
-            expenseForecastPage.ExpenseForecastHeader.then(elem => {
+            expenseForecastPage.expenseForecastHeader.then(elem => {
                 elem.hide();
             });
         }

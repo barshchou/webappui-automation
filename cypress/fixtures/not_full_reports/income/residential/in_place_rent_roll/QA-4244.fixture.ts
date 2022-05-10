@@ -1,7 +1,7 @@
 import ReportDataCreator from "../../../../data_creator/reportData.creator";
 
 export default {
-    reportCreationData: ReportDataCreator.getDefaultReportData("4244"),
+    reportCreationData: ReportDataCreator.getReportData("4244"),
     numberOfUnits: 1,
     label: "Developer's Forecast",
     column: "Rent Forecast",

@@ -51,7 +51,7 @@ describe("Verify the Commercial Stabilized Rent Roll table", () => {
         
         cy.stepInfo(`
         3. Verify that Totals text at the bottom of the new first column are displayed.
-        `)
+        `);
         /**
          * See comments above.
          */

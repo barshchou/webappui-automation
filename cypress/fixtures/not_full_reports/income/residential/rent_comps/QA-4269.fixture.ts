@@ -1,7 +1,7 @@
 import ReportDataCreator from "../../../../data_creator/reportData.creator";
 
 export default {
-    reportCreationData: ReportDataCreator.getDefaultReportData("4269"),
+    reportCreationData: ReportDataCreator.getReportData("4269"),
     minSquareFeetOk: 5757.09,
     minSquareFeetMore2Digits: 5897.555,
     maxSquareFeetOk: 10200.4,

@@ -15,6 +15,7 @@ class HomepageActions extends BaseActions {
             .enterPropertyIdentifierType(data.identifierType)
             .enterPropertyIdentifier(data.identifier)
             .clickSubmitButton()
+            .pullExternalData(data.isSalesForcePull)
             .enterReportNumber(data.reportNumber)
             .checkTemplateType(data.templateValue)
             .checkIncomeType(data.incomeValue)
@@ -27,6 +28,7 @@ class HomepageActions extends BaseActions {
             .clickSubmitButton()
             .clickToSearchResultRow()
             .clickSubmitButton()
+            .pullExternalData(data.isSalesForcePull)
             .enterReportNumber(data.reportNumber)
             .checkTemplateType(data.templateValue)
             .checkIncomeType(data.incomeValue)
@@ -62,6 +64,11 @@ class HomepageActions extends BaseActions {
      */
     clickToSearchResultRow() {
         homepagePage.searchResultsRows.should("be.visible").click();
+        return this;
+    }
+
+    pullExternalData(value: boolean) {
+        homepagePage.pullExternalDataRadios.check(`${value.toString()}`);
         return this;
     }
 

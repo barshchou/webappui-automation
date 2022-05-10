@@ -6,7 +6,7 @@ const _repairsAndMaintenanceItem: BoweryReports.ForecastItem = {
 };
 
 export default {
-    reportCreationData: ReportDataCreator.getDefaultReportData("4925"),
+    reportCreationData: ReportDataCreator.getReportData("4925"),
     repairsAndMaintenanceCardSnapshotName: "RepairsAndMaintenance_Forecast_Item_Component",
 
     comparables: [
