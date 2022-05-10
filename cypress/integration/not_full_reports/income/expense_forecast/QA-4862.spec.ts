@@ -26,4 +26,4 @@ describe("Per Unit Appraiser's Forecast value for Insurance is correctly convert
         Income.ExpenseForecast.Actions.verifyForecastItemBasisMoney(testData.insuranceItem, testData.buildingDescription);
         deleteReport(testData.reportCreationData.reportNumber);
     });
-})
+});

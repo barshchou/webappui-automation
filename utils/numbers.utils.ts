@@ -18,7 +18,7 @@ export const cutDecimalPartToNumberOfDigits = (number, numberToCut = 2) => {
   return Number(`${numberDigits[0]}.${decimalPart}`);
 };
 
-export const isDecimal = (number) => {
+export const isDecimal = (number): boolean => {
   return number.toString().includes(".");
 };
 

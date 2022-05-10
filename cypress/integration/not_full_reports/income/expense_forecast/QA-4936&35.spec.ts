@@ -46,5 +46,5 @@ describe("Historical expense Fuel Per SF is correctly calculated and displayed",
         );
 
         deleteReport(testData.reportCreationData.reportNumber);
-    })
-})
+    });
+});
