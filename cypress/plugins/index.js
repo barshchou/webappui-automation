@@ -83,15 +83,9 @@ const _convertDocxToHtml = async (report) => {
  * @returns first relative path from array of matches 
  * @see https://www.npmjs.com/package/glob
  */
- const _getFilePath = async (_reportName, _docx_html, currentTime = 0, timeout = 60000) =>{
+ const _getFilePath = (_reportName, _docx_html) =>{
   let file = glob.sync(`cypress/downloads/${_reportName}**.${_docx_html}`)[0];
-  if (file != undefined) {
-    return file;  
-  }
-  await new Promise((resolve, reject) =>{
-    setTimeout(() => resolve(true), 1000)
-  });
-  return _getFilePath(_reportName, _docx_html, currentTime + 1000, timeout);
+  return file;
 }
 
 //#endregion
@@ -120,8 +114,8 @@ module.exports = (on, config) => {
   //#region Cypress Tasks (more about tasks: https://docs.cypress.io/api/commands/task)
   
   on("task",{
-    async waitForFileExists(filePath){
-      return await _waitForFileExists(filePath);
+    async waitForFileExists(filePath, currentTime = 0, timeout = 60000){
+      return await _waitForFileExists(filePath, currentTime, timeout);
     }
   });
 
@@ -134,7 +128,7 @@ module.exports = (on, config) => {
 
   on("task",{
     async getFilePath({_reportName, _docx_html}){
-      return await _getFilePath(_reportName, _docx_html);
+      return _getFilePath(_reportName, _docx_html);
     }
   });
 

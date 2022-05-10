@@ -22,32 +22,8 @@ describe("Assessed Value & RE Taxes] Verify the 'Tax Calculation Discussion' gen
 
         cy.stepInfo("4. Export the report");
         _NavigationSection.Actions.openReviewAndExport(true);
-        ReviewExport.generateDocxReport()
-        .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
+        ReviewExport.generateDocxReport().waitForReportGenerated();
 
         deleteReport(testData.reportCreationData.reportNumber);
     });
-    // it("Check html report",() => {
-    //     cy.stepInfo(`
-    //     Verify the export of the report
-    //     `);
-    //     cy.task("getFilePath",
-    //     {_reportName: testData.reportCreationData.reportNumber, _docx_html: "html"}
-    //     ).then(file => {
-    //         cy.log(<string>file);
-    //         cy.visit(<string>file);
-
-    //         cy.stepInfo(`
-    //         Proceed to the Sales Comparison Approach > Value Opinion via the Sales Comparison Approach and verify the value.
-    //         `);
-    //         cy.contains("Value Opinion via the Sales Comparison Approach").next("table")
-    //         .scrollIntoView()
-    //         .within(() => {
-    //             cy.contains("Concluded Value Per Unit").should("exist")
-    //             .parents("tr").within(() => {
-    //                 cy.contains(`${testData.general.valueConclusion}`).should("exist");
-    //             });
-    //         }); 
-    //     });
-    // });
 });
