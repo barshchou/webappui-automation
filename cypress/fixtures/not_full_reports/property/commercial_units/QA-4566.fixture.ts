@@ -5,7 +5,9 @@ const groupNameFixture: BoweryReports.CommercialUnitsGroups = "Frontage";
 const useRadiosFixture: BoweryReports.CommercialUnitGroupsValues[] = ["small", "medium", "large", "other"];
 
 export default {
-    reportCreationData: ReportDataCreator.getReportSpecificIncomeValue(Enums.INCOME_TYPE.BOTH, "4566"),
+    reportCreationData: ReportDataCreator.getReportData("4566", {
+        incomeValue: Enums.INCOME_TYPE.BOTH
+    }),
     numberOfCommercialUnits: 1,
     groupName: groupNameFixture,
     useRadios: useRadiosFixture

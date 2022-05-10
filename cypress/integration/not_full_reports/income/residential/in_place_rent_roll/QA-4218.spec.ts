@@ -11,7 +11,9 @@ describe("Verify the grid is present", () => {
         Enums.VALUE_CONCLUSION_TYPE.AS_COMPLETE];
 
     conclusionValues.forEach(type => {
-        const reportCreationData = ReportDataCreator.getReportSpecificConclusionValue(type, "4218");
+        const reportCreationData = ReportDataCreator.getReportData("4218", {
+            conclusionValue: type
+        });
 
         it(`Test for ${type} type of report`, () => {
             createReport(reportCreationData);

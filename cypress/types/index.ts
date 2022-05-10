@@ -7,6 +7,13 @@
  */
 
 namespace BoweryReports {
+    export type ReportFile = {
+        name: string
+        path: string
+        extension: "docx" | "html",
+        fullPath?: string
+    }
+    
     export type ConclusionValue = "AS_IS" | "AS_STABILIZED" | "AS_COMPLETE" 
     export type isSalesForcePull = boolean
     export type ReportCreationOptions = {
@@ -49,7 +56,7 @@ namespace BoweryReports {
         More Unit Groups Values will be added after other values types added
         */
         export type GroupsValues = CommercialUnitsUseValues | CommercialUnitsGradeValues | CommercialUnitsFacadeValues | CommercialUnitsStateValues 
-        | CommercialUnitsCeilingHeightValues | CommercialUnitsLocationValues | CommercialUnitsFrontageValues | CommercialUnitsStreetTypeValues;
+        | CommercialUnitsCeilingHeightValues | CommercialUnitsLocationValues | CommercialUnitsStreetTypeValues | CommercialUnitsFrontageValues;
     }
     export type CommercialUnitsFrontageValues = "small" | "medium" | "large" | "other"; 
 
@@ -74,7 +81,7 @@ namespace BoweryReports {
     export type ResidentialUnit = {
         footage: number,
         monthlyRent: number,
-        leaseStatus: BoweryReports.LeaseStatus
+        leaseStatus?: BoweryReports.LeaseStatus
     }
 }
 

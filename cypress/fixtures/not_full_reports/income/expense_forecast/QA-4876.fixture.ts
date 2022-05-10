@@ -26,7 +26,7 @@ const ownerProjectionElectricityItemFixture: BoweryReports.ForecastItem = {
 };
 
 export default {
-    reportCreationData: ReportDataCreator.getDefaultReportData("4876"),
+    reportCreationData: ReportDataCreator.getReportData("4876"),
     buildingDescription: {
         grossArea: 5000,
         numberOfUnits: 1

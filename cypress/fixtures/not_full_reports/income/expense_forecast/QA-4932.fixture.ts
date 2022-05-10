@@ -20,7 +20,7 @@ const _comparables: BoweryReports.Comparable[] = [
 ];
 
 export default {
-  reportCreationData: ReportDataCreator.getDefaultReportData("4932"),
+  reportCreationData: ReportDataCreator.getReportData("4932"),
   repairsItem: _repairsItem,
   comparables: _comparables,
   repairsCardSnapshotName: "Repairs_Forecast_Item_Component",
