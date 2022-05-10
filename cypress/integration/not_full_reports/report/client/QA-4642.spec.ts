@@ -16,7 +16,11 @@ const checkChipsOptions = (suggestion: string,optionName: string, textBoxName: "
         return interactWithText(Report.Client.Page.intendedUserTextBox, 0);
     }
     else if(textBoxName == "IdentificationOfClientTextBox"){
+<<<<<<< HEAD
         return interactWithText(Report.Client.Page.identificationOfClientTextBox,1);
+=======
+        return interactWithText(Report.Client.Page.identificationOfClientTextBox, 1);
+>>>>>>> f48310e0e5ea748307075733e54d931e3ade7d66
     }
     
 };

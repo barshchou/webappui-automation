@@ -3,7 +3,7 @@ const reportIdAlias = "report_id";
 describe(" Verify that changes are displayed for Annual and Monthly Rent columns, # column in the export.", () => {
     before("Login, create report", () => {
         cy.stepInfo(`1. Proceed to the Income Approach > 
-        Commercial Stabilized Rent Roll and fill all fields on the WebApp.`)
+        Commercial Stabilized Rent Roll and fill all fields on the WebApp.`);
         cy.login();
         /**
          * ernst: We can intercept report_id in before hook and memorize it with "as" command.
@@ -66,21 +66,20 @@ describe(" Verify that changes are displayed for Annual and Monthly Rent columns
         cy.get('[data-qa="create-report-settings-modal"] [data-qa="create-report-btn"]').click();
         cy.get('[data-qa="form-save-btn"]').click();
         //#region NOT GENERATED PART
-        cy.url().then(val=>{
+        cy.url().then(val => {
             let url = new URL(val);
             let routes = url.pathname.replace(/\//g, " ").split(" ");
             cy.wrap(routes[routes.length-2]).as(reportIdAlias);
-        })
+        });
         //#endregion        
         cy.get('[href="/reports"]').click();
         /**
          * ernst: we can try to look for generated report not by xpath (as we do now),
          * but with [href=`/report/${report_id}`] [data-qa="archive-btn"], where report_id can be intercepted during the test
          */
-        cy.get(`@${reportIdAlias}`).then(val=>{
-            // @ts-ignore
-            cy.log(val);
+        cy.get(`@${reportIdAlias}`).then(val => {
+            cy.log(`${val}`);
             cy.get(`[href="/report/${val}"] [data-qa="archive-btn"]`).click({force:true});
-        })
+        });
     });
 });

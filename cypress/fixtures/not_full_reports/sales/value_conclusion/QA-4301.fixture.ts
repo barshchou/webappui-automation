@@ -2,7 +2,9 @@ import ReportDataCreator from "../../../data_creator/reportData.creator";
 import Enums from "../../../../enums/enums";
 
 export default {
-    reportCreationData: ReportDataCreator.getReportSpecificConclusionValue(Enums.VALUE_CONCLUSION_TYPE.AS_COMPLETE, "4301"),
+    reportCreationData: ReportDataCreator.getReportData("4301", {
+        conclusionValue: Enums.VALUE_CONCLUSION_TYPE.AS_COMPLETE
+    }),
     numberOfUnits: 1,
     bedrooms: 1,
     rentType: "Market Rate",
