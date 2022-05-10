@@ -15,14 +15,14 @@ describe("[QA-4087] Verify validation of the Residential Units and Commercial Un
         cy.stepInfo(`2. Verify validation of the Residential Units and Commercial Units fields. The Numbers in these fields 
             should be limited to 5000 units. 
             Check with:
-                empty fields
-                0 (users can enter 0 as a valid number)
-                any value. from 1 to 4998
-                4999
-                5000
-                5001
-                1000000
-                copy-paste`);
+                - empty fields
+                - 0 (users can enter 0 as a valid number)
+                - any value. from 1 to 4998
+                - 4999
+                - 5000
+                - 5001
+                - 1000000
+                - copy-paste`);
         testData.verifyValues.forEach(value => {
             Property._Summary.enterNumberOfResUnits(value);
             Property._Summary.enterNumberOfCommercialUnits(value);
