@@ -4,7 +4,9 @@ import Enums from "../../../../enums/enums";
 const leaseStatusesFixture: BoweryReports.LeaseStatus[] = ["Occupied", "Occupied"];
 
 export default {
-    reportCreationData: ReportDataCreator.getReportSpecificIncomeValue(Enums.INCOME_TYPE.BOTH, "4603"),
+    reportCreationData: ReportDataCreator.getReportData("4603", {
+        incomeValue: Enums.INCOME_TYPE.BOTH
+    }),
     numberOfCommercialUnits: 2,
     listOfUnitsSF: [1000, 2000],
     leaseStatuses: leaseStatusesFixture,
