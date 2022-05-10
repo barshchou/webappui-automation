@@ -59,37 +59,15 @@ class ReportCreator {
         ReportCreationData(this.address, this.isSalesForcePull, this.reportNumber, this.templateValue, this.incomeValue, this.conclusionValue);
     }
 
-    getReportSpecificConclusionValue(conclusionValue, testNumber, isSaleForcePull = false) {
+    getReportData(testNumber: string, options?: BoweryReports.ReportCreationOptions, isSaleForcePull = false){
         this.isSalesForcePull = isSaleForcePull;
-        return this.setReportNumber(testNumber, isSaleForcePull).setAddress().setTemplateValue().setIncomeValue()
-            .setConclusionValue(conclusionValue).build();
-    }
-
-    getReportSpecificIncomeValue(incomeValue, testNumber, isSaleForcePull = false) {
-        this.isSalesForcePull = isSaleForcePull;
-        return this.setReportNumber(testNumber, isSaleForcePull).setAddress().setTemplateValue().setIncomeValue(incomeValue)
-            .setConclusionValue().build();
-    }
-
-    getDefaultReportData(testNumber, isSaleForcePull = false) {
-        this.isSalesForcePull = isSaleForcePull;
-        return this.setReportNumber(testNumber, isSaleForcePull).setAddress().setIncomeValue().setTemplateValue().setConclusionValue().build();
-    }
-
-    getReportData(testNumber: string, isSaleForcePull = false, options?: BoweryReports.ReportCreationOptions){
-        this.isSalesForcePull = isSaleForcePull;
-
-        if(options?.incomeValue){
-            this.setIncomeValue(options.incomeValue);
-        }
         
-        if(options?.conclusionValue){
-            this.setConclusionValue(options.conclusionValue);
-        }
-        if(options?.isSalesForcePull){
-            this.isSalesForcePull = options.isSalesForcePull;
-        }
-        return this.setReportNumber(testNumber, this.isSalesForcePull).setAddress().setTemplateValue().build();
+        options?.address == undefined ? this.setAddress() : this.setAddress(options.address);
+        options?.templateValue == undefined ? this.setTemplateValue() : this.setTemplateValue(options.templateValue);
+        options?.incomeValue == undefined ? this.setIncomeValue() : this.setIncomeValue(options.incomeValue);
+        options?.conclusionValue == undefined ? this.setConclusionValue() : this.setConclusionValue(options.conclusionValue);
+        
+        return this.setReportNumber(testNumber, this.isSalesForcePull).build();
     }
 }
 

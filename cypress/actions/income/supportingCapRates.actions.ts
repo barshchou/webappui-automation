@@ -70,7 +70,7 @@ class SupportingCapRatesActions extends BaseActions {
         supportingCapRatesPage.amortizationTerm.invoke("attr", "value").then(amortValue => {
            supportingCapRatesPage.numberOfPaymentsPerYear.invoke("attr", "value").then(paymentsPerYear => {
                supportingCapRatesPage.numberOfPayments.should("be.disabled")
-                   .should("have.value", `${amortValue * paymentsPerYear}`);
+                   .should("have.value", `${parseInt(amortValue) * parseInt(paymentsPerYear)}`);
            });
         });
         return this;
@@ -103,7 +103,7 @@ class SupportingCapRatesActions extends BaseActions {
     verifySelectedLoanEquityRatio() {
         supportingCapRatesPage.loanToValueConstant.invoke("attr", "value").then(loanConst => {
            supportingCapRatesPage.selectedLoanLoanToValueRatio.invoke("attr", "value").then(ratio => {
-              supportingCapRatesPage.selectedLoanEquityRatio.should("have.value", `${loanConst * 100 - ratio}`);
+              supportingCapRatesPage.selectedLoanEquityRatio.should("have.value", `${parseInt(loanConst) * 100 - parseInt(ratio)}`);
            });
         });
         return this;
@@ -194,7 +194,7 @@ class SupportingCapRatesActions extends BaseActions {
         supportingCapRatesPage.bandInvestmentLoanRatio.invoke("attr", "value").then(ratio => {
             supportingCapRatesPage.bandInvestmentMortgageConstant.invoke("attr", "value").then(constant => {
                 supportingCapRatesPage.mortgageComponent.should("be.disabled")
-                    .should("have.value", `${(ratio * constant).toFixed(1)}`);
+                    .should("have.value", `${(parseInt(ratio) * parseInt(constant)).toFixed(1)}`);
             });
         });
         return this;
@@ -238,7 +238,7 @@ class SupportingCapRatesActions extends BaseActions {
         supportingCapRatesPage.equityDividendRate.invoke("attr", "value").then(rate => {
             supportingCapRatesPage.bandInvestmentEquityRatio.invoke("attr", "value").then(ratio => {
                 supportingCapRatesPage.equityComponent.should("be.disabled")
-                    .should("have.value", `${rate * (ratio / 100)}`);
+                    .should("have.value", `${parseInt(rate) * (parseInt(ratio) / 100)}`);
             });
         });
         return this;

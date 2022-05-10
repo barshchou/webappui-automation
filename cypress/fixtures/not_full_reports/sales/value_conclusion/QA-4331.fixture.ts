@@ -1,14 +1,13 @@
 import Enums from "../../../../enums/enums";
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 
-const reportCreationFixture = () => {
-    return ReportDataCreator.setAddress().setReportNumber("4331")
-        .setTemplateValue(Enums.TEMPLATE_TYPE.FREDDIE_MAC)
-        .setIncomeValue(Enums.INCOME_TYPE.BOTH)
-        .setConclusionValue(Enums.VALUE_CONCLUSION_TYPE.AS_COMPLETE);
-};
+const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("4331", {
+    templateValue: Enums.TEMPLATE_TYPE.FREDDIE_MAC,
+    incomeValue: Enums.INCOME_TYPE.BOTH,
+    conclusionValue: Enums.VALUE_CONCLUSION_TYPE.AS_COMPLETE
+});
 
 export default {
-    reportCreationData: reportCreationFixture(),
+    reportCreationData: _reportCreationData,//reportCreationFixture(),
     commentary: "Test characters, 123. !@#"
 };

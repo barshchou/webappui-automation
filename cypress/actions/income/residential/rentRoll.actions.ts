@@ -194,12 +194,12 @@ class InPlaceRentRollActions extends BaseActionsExt<typeof rentRollPage> {
 
     enterRoomsNumberByRowNumber(value: string | number, number: number): InPlaceRentRollActions {
         rentRollPage.roomsCells.eq(number).dblclick();
-        this.enterTextToTextarea(value);
-        rentRollPage.roomsCells.eq(number).should("have.text", value);
+        this.enterTextToTextarea(value.toString());
+        rentRollPage.roomsCells.eq(number).should("have.text", value.toString());
         return this;
     }
 
-    enterAllEqualRoomsNumber(roomsNumber: string | number, numberOfUnits: number): InPlaceRentRollActions {
+    enterAllEqualRoomsNumber(roomsNumber: number, numberOfUnits: number): InPlaceRentRollActions {
         for (let i = 0; i < numberOfUnits; i++) {
             this.enterRoomsNumberByRowNumber(roomsNumber, i);
         }
@@ -295,6 +295,31 @@ class InPlaceRentRollActions extends BaseActionsExt<typeof rentRollPage> {
         return this;
     }
 
+    verifyRentPSFMounthValue(isPerMonth?: "perMonth") {
+        rentRollPage.monthlyTotalForecast.then(monthly => {
+            const monthlyNumber = getNumberFromDollarNumberWithCommas(monthly.text());
+            rentRollPage.squareFootageCells.then(square => {
+                const squareNumber = getNumberFromDollarNumberWithCommas(square.text());
+                const rentSFNumber = (monthlyNumber * 12 / squareNumber).toFixed(2);
+                const rentPSFNumber = (monthlyNumber / squareNumber).toFixed(2);
+                if (isPerMonth === "perMonth") {
+                    if (squareNumber === 0) {
+                        rentRollPage.rentSFCell.should("have.text", `$NaN`);
+                    } else {
+                        rentRollPage.rentSFCell.should("have.text", `$${rentPSFNumber}`);
+                    }
+                } else {
+                    if (squareNumber === 0) {
+                        rentRollPage.rentSFCell.should("have.text", `$NaN`);
+                    } else {
+                        rentRollPage.rentSFCell.should("have.text", `$${rentSFNumber}`);
+                    }
+                }
+            });
+        });
+        return this;
+    }
+      
     verifyRentRollCommentary(commentaryToBe: string): InPlaceRentRollActions {
         rentRollPage.rentRollCommentary.should("have.text", commentaryToBe);
         return this;
@@ -385,7 +410,7 @@ class InPlaceRentRollActions extends BaseActionsExt<typeof rentRollPage> {
                     }
                 }
                 const textToBe = `$${numberWithCommas(totalToBe.toFixed(2))}`;
-                rentRollPage.monthlyTotalRent.should("have.text", textToBe);    
+                rentRollPage.monthlyTotalRent.should("have.text", textToBe);
             });
         });
         return this;
@@ -406,7 +431,6 @@ class InPlaceRentRollActions extends BaseActionsExt<typeof rentRollPage> {
         });
         return this;
     }
-    
 }
 
 export default new InPlaceRentRollActions(rentRollPage);
