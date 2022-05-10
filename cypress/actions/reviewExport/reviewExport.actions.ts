@@ -1,5 +1,9 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+import { ALIASE } from "../../../utils/const.utils";
 import reviewExportPage from "../../pages/reviewExport/reviewExport.page";
 import BaseActions from "../base/base.actions";
+
+let reportFile: BoweryReports.ReportFile;
 
 class ReviewExportActions extends BaseActions {
     get Page() {
@@ -16,8 +20,17 @@ class ReviewExportActions extends BaseActions {
         return this;
     }
 
-    downloadDocxReport(): this {
+    /**
+     * Downloads and converts *.docx report into html
+     * and renames it to *current_spec_name*.html
+     */
+    downloadAndConvertDocxReport(reportName:string): this {
         reviewExportPage.downloadBtn.click();
+        cy.task("getFilePath",{_reportName: reportName, _docx_html: "docx"}).then(file => {
+            cy.log(<string>file);
+            cy.task("waitForFileExists",file);
+            cy.task("convertDocxToHtml",file); 
+        });
         return this;
     }
 }
