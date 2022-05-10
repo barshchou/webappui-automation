@@ -16,11 +16,12 @@ describe("Comparable Min, Max, Avg values for Repairs & Maintenance Per SF are c
 
         cy.stepInfo(`2. Add several comps (via Search, Filter or Add blank column) and make sure that Repairs & Maintenance  
         and Square Feet fields are filled in for all added columns and save changes`);
-        testData.comparables.forEach((comp, index) => {
+        testData.comparables.forEach((comp) => {
             Income.ComparableExpenses.Actions.clickAddBlankColumnButton()
-                .enterAddressByColumnIndex(comp.address, index)
-                .enterCellDollarValueByColumnIndex(Income.ComparableExpenses.Page.repairsAndMaintenanceCells, comp.repairsAndMaintenance, index)
-                .enterSquareFeetByColumnIndex(comp.squareFeet, index);
+                .enterAddressByColumnIndex(comp.address)
+                .enterCellDollarValueByColumnIndex(Income.ComparableExpenses.Page.getUnifiedEditableAndTotalCells("repairsAndMaintenance"),
+                    comp.repairsAndMaintenance)
+                .enterSquareFeetByColumnIndex(comp.squareFeet);
         });
 
         cy.stepInfo("3. Go to Expense Forecast and make sure that Per SF radiobutton is selected for Repairs & Maintenance card");
@@ -36,7 +37,7 @@ describe("Comparable Min, Max, Avg values for Repairs & Maintenance Per SF are c
 
         cy.stepInfo("4.2 Check Comp Min, Comp Max and Comp Avg values for Repairs & Maintenance card. They should be correctly displayed on a slidebar");
         Income.ExpenseForecast.Actions.matchElementSnapshot(
-            Income.ExpenseForecast.Page.RepairsAndMaintenanceCard, testData.repairsAndMaintenanceCardSnapshotName, {padding: [10, 100]});
+            Income.ExpenseForecast.Page.repairsAndMaintenanceCard, testData.repairsAndMaintenanceCardSnapshotName, {padding: [10, 100]});
 
         cy.stepInfo("5. Delete report");
         deleteReport(testData.reportCreationData.reportNumber);

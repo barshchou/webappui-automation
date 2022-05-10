@@ -27,6 +27,10 @@ class CommercialUnitsPage extends BasePage {
         return cy.get(`[name='units[${unitIndex}].other${groupName.replaceAll(" ", "")}']`);
     }
 
+    get commercialGrossLeasableAreaTextArea() {
+        return cy.get(`input[name="commercialSquareFootage"]`);
+    }
+
     get commercialUnitSFDiscussionTextArea() {
         return cy.xpath("//*[.='Commercial Unit SF Discussion']//following-sibling::div//child::*[@data-slate-editor]");
     }

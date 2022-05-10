@@ -24,18 +24,18 @@ describe("Historical expense Electricity Per Unit is correctly calculated and di
         _NavigationSection.Actions.navigateToExpenseHistory();
 
         cy.stepInfo("3. Add columns for all types of Expense Period: Actual, Actual T12, Annualized Historical and Projection");
-        testData.periods.forEach((per, index) => {
+        testData.periods.forEach((per) => {
             Income._ExpenseHistory.Actions.selectExpensePeriod(per.expensePeriodType)
                 .enterExpenseYear(per.year)
                 .clickAddExpenseYearButton()
-                .enterElectricityByColIndex(per.electricity, index);
+                .enterElectricityByColIndex(per.electricity, 0);
         });
-        testData.periodsMonth.forEach((per, index) => {
+        testData.periodsMonth.forEach((per) => {
             Income._ExpenseHistory.Actions.selectExpensePeriod(per.expensePeriodType)
                 .enterExpenseMonth(per.month)
                 .enterExpenseYear(per.year)
                 .clickAddExpenseYearButton()
-                .enterElectricityByColIndex(per.electricity, index + testData.periods.length);
+                .enterElectricityByColIndex(per.electricity, 0);
         });
 
         cy.stepInfo("4. Fill in Electricity field for all added columns and save changes");
@@ -56,7 +56,7 @@ describe("Historical expense Electricity Per Unit is correctly calculated and di
         cy.stepInfo("5.2 Check historical expenses values for Electricity card. They should be correctly displayed on slidebars");
 
         Income._ExpenseForecastActions.Actions.matchElementSnapshot(
-            Income._ExpenseForecastActions.Page.ElectricityCard, testData.electricityCardSnapshotName, { padding: [10, 100] });
+            Income._ExpenseForecastActions.Page.electricityCard, testData.electricityCardSnapshotName, { padding: [10, 100] });
 
 
         cy.stepInfo("6. Delete report");

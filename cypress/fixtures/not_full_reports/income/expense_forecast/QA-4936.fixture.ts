@@ -9,7 +9,7 @@ const _buildingDescription: BoweryReports.BuildingDescription = {
 };
 
 export default {
-    reportCreationData: ReportDataCreator.getDefaultReportData("4936"),
+    reportCreationData: ReportDataCreator.getReportData("4936"),
     buildingDescription: _buildingDescription,
     forecastItem: _forecasItem,
-}
+};

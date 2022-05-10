@@ -195,6 +195,7 @@ class ResidentialUnitsActions extends BaseActions{
             .chooseToilet(bathroomConditionData.toilet);
         return this;
     }
+
     /**
      * @param {Readonly<{condition: string, flooring: string, tub: string, sink: string, toilet: string}>} bathroomConditionData
      * @returns {ResidentialUnitsActions}

@@ -8,6 +8,8 @@ const comparableFixture = () => {
 };
 
 export default {
-    reportCreationData: ReportDataCreator.getReportSpecificIncomeValue(Enums.INCOME_TYPE.BOTH, "4171"),
+    reportCreationData: ReportDataCreator.getReportData("4171", {
+        incomeValue: Enums.INCOME_TYPE.BOTH
+    }),
     comparable: Object.freeze(comparableFixture())
 };
