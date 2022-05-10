@@ -22,7 +22,7 @@ describe("Residential V/C Loss @ X% row", () => {
             .enterAllEqualMonthlyRents(testData.monthlyRent);
 
         cy.stepInfo(`3. Go to Income → Potential Gross Income → Residential Vacancy and Collection Loss table 
-        and fill in the value into the Residential Vacancy and Collection Loss cell`)
+        and fill in the value into the Residential Vacancy and Collection Loss cell`);
         NavigationSection.navigateToPotentialGrossIncome();
         Income.PotentialGrossIncome.enterResVacancyCollLoss(testData.resVacancyCollectionLoss)
             .clickSaveButton()
@@ -33,7 +33,7 @@ describe("Residential V/C Loss @ X% row", () => {
         Verify that label has format Less Residential V/C Loss @ X%.
         Verify that Total value is taken from Potential Gross Income → table → Less Residential V/C Loss @ X% → $
         Verify that PSF value is calculated by the formula: Total / GBA
-        Verify that Per Unit value is calculated by the formula: Total / # of Residential Units`)
+        Verify that Per Unit value is calculated by the formula: Total / # of Residential Units`);
         NavigationSection.navigateToProForma(false);
         Income.ProForma.verifyResidentialVCLossLabel(testData.resVacancyCollectionLoss)
             .verifyResidentialVCLossTotal(testData.resVCLossTotal)
@@ -41,4 +41,4 @@ describe("Residential V/C Loss @ X% row", () => {
             .verifyResidentialVCLossPerUnit(testData.numberOfUnits);
         deleteReport(testData.reportCreationData.reportNumber);
     });
-})
+});

@@ -6,7 +6,7 @@ import {createReport, deleteReport} from "../../../../../actions/base/baseTest.a
 
 describe("Verify the Use column in the grid", () => {
 
-    const useRadios = ["retail", "office", "medical", "community", "undetermined"];
+    const useRadios: BoweryReports.CommercialUnitGroupsValues[] = ["retail", "office", "medical", "community", "undetermined"];
     const useTexts = ["Retail", "Office", "Medical Office", "Community Facility", "Undetermined"];
     const groupName = "Use";
     const defaultUseValue = "Undetermined";

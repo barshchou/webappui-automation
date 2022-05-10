@@ -24,6 +24,7 @@ class ProFormaPage extends BasePage {
 
     getCommercialUseVCLossPerSF(useText) {return this.getCommercialUseVCLossRow(useText).siblings('[col-id="psf"]');}
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     getCommercialUseVCLossLabel(useText: string) {
         // const attributeToBe = useText === "Undetermined" || useText === "Industrial" ?
         //     `${useText}Commercial` : useText.replaceAll(" ", "");

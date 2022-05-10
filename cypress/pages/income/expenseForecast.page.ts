@@ -15,9 +15,9 @@ class ExpenseForecastPage extends BasePage {
 
     getForecastItemBasisRadio(item) {return cy.get(`[name='${item}.basis']`);}
 
-    getElementToCheckRadio(forecastItem: BoweryReports.ForecastItemBasis, radioValue: BoweryReports.UnitSF) {return cy.get(`[data-qa=checked] [name='${forecastItem}.basis'][value='${radioValue}']`);}
+    getElementToCheckRadio(forecastItem: string, radioValue: BoweryReports.UnitSF) {return cy.get(`[data-qa=checked] [name='${forecastItem}.basis'][value='${radioValue}']`);}
 
-    getElementBasisToSwitch(forecastItem: BoweryReports.ForecastItemBasis, radioValue: BoweryReports.UnitSF) {return cy.get(`[name='${forecastItem}.basis'][value='${radioValue}']`);}
+    getElementBasisToSwitch(forecastItem: string, radioValue: BoweryReports.UnitSF) {return cy.get(`[name='${forecastItem}.basis'][value='${radioValue}']`);}
 
     getForecastItemForecastInput(item: string, custom = false, index = 0) {return !custom ? cy.get(`[name='${item}.concludedValue']`) : cy.get(`[name='customExpenses[${index}].concludedValue']`);}
 

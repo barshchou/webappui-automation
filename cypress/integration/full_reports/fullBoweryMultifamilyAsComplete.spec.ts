@@ -356,7 +356,7 @@ describe("Full bowery way, multifamily as complete report", () => {
             .checkPercentOfEGICheckbox()
             .enterPercentOfEgi(testData.expenseForecast.percentOfEgi);
         const managementForecastEgi = Income.ExpenseForecast
-            .getManagementForecastEgiPercent(testData.expenseForecast, testData.currentDescription);
+            .getManagementForecastEgiPercent(testData.expenseForecast.management, testData.expenseForecast.effectiveGrossIncome, testData.expenseForecast.percentOfEgi, testData.currentDescription);
         Income.ExpenseForecast.verifyManagementForecast(managementForecastEgi)
             .verifyForecastItemCompMin(testData.expenseForecast.management, testData.comparableExpenses.comparables)
             .verifyForecastItemCompAverage(testData.expenseForecast.management, testData.comparableExpenses.comparables)

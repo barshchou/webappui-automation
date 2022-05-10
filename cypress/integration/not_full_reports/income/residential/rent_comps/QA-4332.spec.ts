@@ -4,7 +4,7 @@ import NavigationSection from "../../../../../actions/base/navigationSection.act
 import Income from "../../../../../actions/income/income.manager";
 import RentCompsPage from "../../../../../pages/income/residential/rent_comps/rentComps.page";
 
-const reportCreationData = ReportDataCreator.getDefaultReportData("4332");
+const reportCreationData = ReportDataCreator.getReportData("4332");
 
 describe(`Verify that display of results in the Map section on Rent Comps page 
                 when the Unit type of search is selected`, () => {
