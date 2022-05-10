@@ -29,10 +29,9 @@ class ExpenseHistoryActions extends BaseActionsExt<typeof expenseHistoryPage>{
 
     enterIssueByColIndex(issueValue: number | string, tableExpenseHistoryCellNames: string, index = 0,): ExpenseHistoryActions {  
         if (issueValue === "clear") {
-            expenseHistoryPage.getUnifiedEditableAndTotalCells(tableExpenseHistoryCellNames).eq(index).clear();
+            expenseHistoryPage.getUnifiedEditableAndTotalCells(tableExpenseHistoryCellNames).eq(index).scrollIntoView({ duration: 500 }).click().dblclick({ force: true }).clear();
         } else {
-            expenseHistoryPage.getUnifiedEditableAndTotalCells(tableExpenseHistoryCellNames).eq(index).scrollIntoView();
-            expenseHistoryPage.getUnifiedEditableAndTotalCells(tableExpenseHistoryCellNames).eq(index).dblclick({ force: true }).clear().realType(`${issueValue}{enter}`);
+            expenseHistoryPage.getUnifiedEditableAndTotalCells(tableExpenseHistoryCellNames).eq(index).scrollIntoView({ duration: 500 }).dblclick({ force: true }).clear().realType(`${issueValue}{enter}`);
             expenseHistoryPage.getUnifiedEditableAndTotalCells(tableExpenseHistoryCellNames).eq(index).should("have.text", `$${numberWithCommas(issueValue)}.00`);
         }
         return this;
