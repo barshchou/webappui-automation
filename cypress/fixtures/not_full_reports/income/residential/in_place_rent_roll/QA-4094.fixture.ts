@@ -20,7 +20,7 @@ const _rentRollResidentialUnitsFixture: BoweryReports.ResidentialUnit[] = [
     ];
 
 export default {
-    reportCreationData: ReportDataCreator.getDefaultReportData("4094"),
+    reportCreationData: ReportDataCreator.getReportData("4094"),
     resUnit: 1,
     squareFootage: 235,
     monthlyRent: 5758,
