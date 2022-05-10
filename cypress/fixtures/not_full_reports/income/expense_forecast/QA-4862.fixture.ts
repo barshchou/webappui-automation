@@ -1,7 +1,7 @@
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 
 export default {
-    reportCreationData: ReportDataCreator.getDefaultReportData("4862"),
+    reportCreationData: ReportDataCreator.getReportData("4862"),
     buildingDescription: {
         grossArea: 5000,
         numberOfUnits: 2

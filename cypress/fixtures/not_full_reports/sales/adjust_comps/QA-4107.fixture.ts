@@ -11,7 +11,7 @@ const comparableFixture = () => {
 };
 
 export default {
-    reportCreationData: ReportDataCreator.getDefaultReportData("4107"),
+    reportCreationData: ReportDataCreator.getReportData("4107"),
     calculationUnits: "Per Residential Units",
     comparable: Object.freeze(comparableFixture())
 };
