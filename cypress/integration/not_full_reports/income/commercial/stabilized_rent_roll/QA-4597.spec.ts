@@ -17,7 +17,7 @@ describe(`Verify the suggested text dropdown in the new narrative component adde
     it("Test body", () => {
         cy.stepInfo("1. Proceed to the Income > Commercial > Stabilized Rent Roll page.");
         _NavigationSection.clickIncomeApproachButton()
-        .clickCommercialArrow().openCommercialStabilizedRentRollInCommercial().verifyProgressBarNotExist();
+        .clickCommercialArrow().navigateToStabilizedRentRollInCommercial().verifyProgressBarNotExist();
 
         cy.stepInfo("2. Click on the Edit button in the Stabilized Commercial Income Discussion section.");
         Income._CommercialManager.StabilizedRentRoll.clickEditStabilizedCommercialIncomeDiscussion();

@@ -146,6 +146,15 @@ class StabilizedRentRollActions extends BaseActionsExt<typeof stabRenRollPage>{
         return this;
     }
 
+    revertToOriginalStabilizedRentRollCommentary(): StabilizedRentRollActions {
+
+        this.clickEditStabilizedCommercialIncomeDiscussion();
+        stabRenRollPage.revertToOriginalButton.click();
+        this.verifyProgressBarNotExist();
+        stabRenRollPage.confirmRevertButton.click();
+        this.Page.formSaveBtn(1).click();
+        return this;
+    }
 }
 
 export default new StabilizedRentRollActions(stabRenRollPage);

@@ -29,6 +29,9 @@ class StabilizedRentRollPage extends BasePage{
 
     get narrativeSuggestionsList() {return cy.get("[data-qa='narrative-suggestions-list'] > ul");}
 
+    get revertToOriginalButton() {return cy.xpath("//button[.='Revert to Original']");}
+
+    get confirmRevertButton() {return cy.xpath("//*[.='Yes, revert']");}
 }
 
 export default new StabilizedRentRollPage();
