@@ -1,6 +1,7 @@
 /// <reference types="cypress" />
 
 import { getEnvUrl } from "./env.utils";
+import { ALIASE } from "./const.utils";
 
 export const interceptGoogleScriptsLoad = () => {
     cy.intercept({
@@ -23,16 +24,15 @@ export const interceptReportId = () => {
     return cy.intercept("GET","/report/*").as(aliasInterceptedReportId);
 };
 
-const aliasReportId = "aliasReportId";
 export const setReportId = () => {
     cy.url().then(url => {
         const reportID = url.replace("/report-information", "").replace(`${getEnvUrl()}/report/`, "");
         cy.log(`Current report ID is ${reportID}`);
-        cy.wrap(reportID).as(aliasReportId);
+        cy.wrap(reportID).as(ALIASE.reportId);
     });
 };
 export const getReportId = () => {
-    return cy.get(`@${aliasReportId}`);
+    return cy.get(`@${ALIASE.reportId}`);
 };
 
 const pathToNetworkActivity = "./cypress/gh_artifacts/network_activity_records";

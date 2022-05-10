@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "types": "./types/index.d.ts",
+  "types": "./cypress/types",
   "scripts": {
     "act:debug": "act -e ./.act/debug.json --secret-file ./.act/.secrets -j Not-full-reports-run-DEBUG",
     "cy:open": "npx cypress open",
@@ -46,6 +46,8 @@
     "cypress-xpath": "^1.6.2",
     "eslint": "^7.32.0",
     "eslint-plugin-cypress": "^2.12.1",
+    "glob": "^8.0.1",
+    "mammoth": "^1.4.21",
     "typescript": "^4.5.5"
   }
 }
