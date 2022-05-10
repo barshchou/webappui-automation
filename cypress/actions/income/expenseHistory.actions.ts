@@ -27,17 +27,6 @@ class ExpenseHistoryActions extends BaseActionsExt<typeof expenseHistoryPage>{
         return this;
     }
 
-    /*  enterRepairsAndMaintenanceByColIndex(repairsAndMaintenance: number | string, index = 0): ExpenseHistoryActions {
-          if (repairsAndMaintenance === "clear") {
-              expenseHistoryPage.getUnifiedEditableAndTotalCells(tableExpenseHistoryCellNames.repairsAndMaintenance).eq(index).clear();
-          } else {
-              expenseHistoryPage.getUnifiedEditableAndTotalCells(tableExpenseHistoryCellNames.repairsAndMaintenance).eq(index).dblclick().scrollIntoView().clear().realType(`${repairsAndMaintenance}{enter}`);
-              expenseHistoryPage.getUnifiedEditableAndTotalCells(tableExpenseHistoryCellNames.repairsAndMaintenance).eq(index).should("have.text", `$${numberWithCommas(repairsAndMaintenance)}.00`);
-          }
-          return this;
-      }*/
-
-
     enterIssueByColIndex(issueValue: number | string, tableExpenseHistoryCellNames: string, index = 0,): ExpenseHistoryActions {  // ths
         if (issueValue === "clear") {
             expenseHistoryPage.getUnifiedEditableAndTotalCells(tableExpenseHistoryCellNames).eq(index).clear();
@@ -48,7 +37,6 @@ class ExpenseHistoryActions extends BaseActionsExt<typeof expenseHistoryPage>{
         return this;
     }
 
-
     /**
      *
      * @param {number} index
@@ -58,44 +46,6 @@ class ExpenseHistoryActions extends BaseActionsExt<typeof expenseHistoryPage>{
         expenseHistoryPage.grossRevenueCheckboxes.eq(index).check().should("have.value", "true");
         return this;
     }
-
-    /*  enterGrossRevenueByColIndex(revenue: number | string, index = 0): ExpenseHistoryActions {
-          const valueToBe = `$${numberWithCommas(revenue)}`;
-          expenseHistoryPage.getUnifiedEditableAndTotalCells(tableExpenseHistoryCellNames.grossRevenue).eq(index).clear().type(`${revenue}`).should("have.value", valueToBe);
-          return this;
-      }*/
-
-    /*  enterRealEstateTaxesByColIndex(taxes: number | string, index = 0): ExpenseHistoryActions {
-          expenseHistoryPage.getUnifiedEditableAndTotalCells(tableExpenseHistoryCellNames.realEstateTaxes).eq(index).clear().type(`${taxes}`)
-              .should("have.value", `$${numberWithCommas(taxes)}`);
-          return this;
-      }*/
-
-    /*  enterInsuranceByColIndex(insurance: string | number = 0, index = 0): ExpenseHistoryActions {
-          if (insurance === "clear") {
-              expenseHistoryPage.getUnifiedEditableAndTotalCells(tableExpenseHistoryCellNames.insurance).eq(index).clear();
-          } else {
-              expenseHistoryPage.getUnifiedEditableAndTotalCells(tableExpenseHistoryCellNames.insurance).eq(index).clear().type(`${insurance}`)
-                  .should("have.value", `$${numberWithCommas(insurance)}`);
-          }
-          return this;
-      }*/
-
-    /*  enterElectricityByColIndex(electricity: number | string, index = 0): ExpenseHistoryActions {
-          expenseHistoryPage.getUnifiedEditableAndTotalCells(tableExpenseHistoryCellNames.electricity).eq(index).dblclick().scrollIntoView().clear().realType(`${electricity}{enter}`);
-          expenseHistoryPage.getUnifiedEditableAndTotalCells(tableExpenseHistoryCellNames.electricity).eq(index).should("have.text", `$${numberWithCommas(electricity)}.00`);
-          return this;
-      }*/
-
-    /* enterFuelByColIndex(fuel: string | number = 0, index = 0): ExpenseHistoryActions {
-         if (fuel === "clear") {
-             expenseHistoryPage.getUnifiedEditableAndTotalCells(tableExpenseHistoryCellNames.fuel).eq(index).clear();
-         } else {
-             expenseHistoryPage.getUnifiedEditableAndTotalCells(tableExpenseHistoryCellNames.fuel).eq(index).dblclick().scrollIntoView().clear().realType(`${fuel}{enter}`);
-             expenseHistoryPage.getUnifiedEditableAndTotalCells(tableExpenseHistoryCellNames.fuel).eq(index).should("have.text", `$${numberWithCommas(fuel)}.00`);
-         }
-         return this;
-     }*/
 
     /**
      *
@@ -116,12 +66,6 @@ class ExpenseHistoryActions extends BaseActionsExt<typeof expenseHistoryPage>{
         expenseHistoryPage.waterSewerCheckboxes.eq(index).uncheck().should("have.value", "false");
         return this;
     }
-
-    /* enterPayrollBenefitsByColIndex(value: number | string, index = 0): ExpenseHistoryActions {
-         expenseHistoryPage.getUnifiedEditableAndTotalCells(tableExpenseHistoryCellNames.payrollAndBenefits).eq(index).clear().type(`${value}`)
-             .should("have.value", `$${numberWithCommas(value)}`);
-         return this;
-     }*/
 
     /**
      *
