@@ -1,10 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import { ALIASE } from "../../../utils/const.utils";
 import reviewExportPage from "../../pages/reviewExport/reviewExport.page";
 import BaseActions from "../base/base.actions";
-
-let reportFile: BoweryReports.ReportFile;
-
 class ReviewExportActions extends BaseActions {
     get Page() {
         return reviewExportPage;
