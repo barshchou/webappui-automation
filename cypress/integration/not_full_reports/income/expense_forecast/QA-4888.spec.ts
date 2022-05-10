@@ -4,6 +4,7 @@ import testData from "../../../../fixtures/not_full_reports/income/expense_forec
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import { Property, Income } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
+import tableExpenseHistoryCellNames from "../../../../../cypress/enums/expenseHistoryTableRows.enum";
 
 
 describe("Historical expense Electricity Per Unit is correctly calculated and displayed", () => {
@@ -28,14 +29,14 @@ describe("Historical expense Electricity Per Unit is correctly calculated and di
             Income._ExpenseHistory.Actions.selectExpensePeriod(per.expensePeriodType)
                 .enterExpenseYear(per.year)
                 .clickAddExpenseYearButton()
-                .enterElectricityByColIndex(per.electricity, 0);
+                .enterIssueByColIndex(per.electricity, 0, tableExpenseHistoryCellNames.electricity);
         });
         testData.periodsMonth.forEach((per) => {
             Income._ExpenseHistory.Actions.selectExpensePeriod(per.expensePeriodType)
                 .enterExpenseMonth(per.month)
                 .enterExpenseYear(per.year)
                 .clickAddExpenseYearButton()
-                .enterElectricityByColIndex(per.electricity, 0);
+                .enterIssueByColIndex(per.electricity, 0, tableExpenseHistoryCellNames.electricity);
         });
         Income._ExpenseHistory.Actions.verifyAverageTable();
 
