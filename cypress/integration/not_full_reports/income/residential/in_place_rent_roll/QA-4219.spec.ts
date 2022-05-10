@@ -5,7 +5,7 @@ import NavigationSection from "../../../../../actions/base/navigationSection.act
 import Income from "../../../../../actions/income/income.manager";
 import Property from "../../../../../actions/property/property.manager";
 
-const reportCreationData = ReportDataCreator.getDefaultReportData("4219");
+const reportCreationData = ReportDataCreator.getReportData("4219");
 
 describe("Verify the # column in the grid", () => {
     before("Login, create report", () => {

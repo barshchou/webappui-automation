@@ -20,7 +20,7 @@ const _comparables: BoweryReports.Comparable[] = [
 ];
 
 export default {
-    reportCreationData: ReportDataCreator.getDefaultReportData("4889"),
+    reportCreationData: ReportDataCreator.getReportData("4889"),
     electricityItem: _electricityItem,
     comparables: _comparables,
     electricityCardSnapshotName: "Electricity_Forecast_Item_Component",

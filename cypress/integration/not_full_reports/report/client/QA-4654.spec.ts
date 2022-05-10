@@ -4,7 +4,7 @@ import NavigationSection from "../../../../actions/base/navigationSection.action
 import Report from "../../../../actions/report/report.manager";
 import Organization from "../../../../actions/organization/organization.manager";
 
-const reportCreationData = ReportDataCreator.getDefaultReportData("4654");
+const reportCreationData = ReportDataCreator.getReportData("4654");
 
 describe("Verify the functionality of the ADD button on the Client page", () => {
     before("Login, create report", () => {

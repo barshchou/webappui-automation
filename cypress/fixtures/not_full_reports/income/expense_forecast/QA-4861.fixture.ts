@@ -7,7 +7,7 @@ const forecastItemFixture: BoweryReports.ForecastItem = {
 };
 
 export default {
-    reportCreationData: ReportDataCreator.getDefaultReportData("4861"),
+    reportCreationData: ReportDataCreator.getReportData("4861"),
     buildingDescription: {
         grossArea: 5000,
         numberOfUnits: 11

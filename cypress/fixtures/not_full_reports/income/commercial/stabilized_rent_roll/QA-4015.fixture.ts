@@ -7,7 +7,9 @@ const useTextFixture: BoweryReports.CommercialUnitsUseTexts[] = ["Retail", "Offi
 const leaseStatusesFixture: BoweryReports.LeaseStatus[] = ["Vacant", "Occupied"];
 
 export default {
-    reportCreationData: ReportDataCreator.getReportSpecificIncomeValue(Enums.INCOME_TYPE.BOTH, "4827"),
+    reportCreationData: ReportDataCreator.getReportData("4015", {
+        incomeValue: Enums.INCOME_TYPE.BOTH,
+    }),
     numberOfCommercialUnits: 2,
     listOfUnitsSF: [1000, 2000],
     groupName: groupNameFixture,

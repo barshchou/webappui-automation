@@ -4,7 +4,7 @@ import Income from "../../../../../actions/income/income.manager";
 import RentCompsPage from "../../../../../pages/income/residential/rent_comps/rentComps.page";
 import ReportDataCreator from "../../../../../fixtures/data_creator/reportData.creator";
 
-const reportCreationData = ReportDataCreator.getDefaultReportData("4355");
+const reportCreationData = ReportDataCreator.getReportData("4355");
 
 describe(`Verify the user can switch to 'Building' type of search on clicking 'Search Per Building' button on 
                 'Are you sure you want to search Per Building?' waring overlay`, () => {

@@ -6,7 +6,7 @@ const electricityItemFixture: BoweryReports.ForecastItem = {
 };
 
 export default {
-    reportCreationData: ReportDataCreator.getDefaultReportData("4877"),
+    reportCreationData: ReportDataCreator.getReportData("4877"),
     comparables: [
         {
             address: "6001 S Sacramento Ave",
