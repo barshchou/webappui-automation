@@ -16,4 +16,4 @@ export default {
     annualRent: "$240,000.00",
     monthlyRent: "$20,000.00",
     newTenantName: "new test name"
-}
+};
