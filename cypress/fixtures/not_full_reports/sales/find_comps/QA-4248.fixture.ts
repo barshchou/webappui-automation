@@ -7,6 +7,6 @@ const comparableFixture = () => {
 };
 
 export default {
-    reportCreationData: ReportDataCreator.getDefaultReportData("4248"),
+    reportCreationData: ReportDataCreator.getReportData("4248"),
     comparable: Object.freeze(comparableFixture())
 };

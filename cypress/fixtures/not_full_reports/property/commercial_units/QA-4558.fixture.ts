@@ -1,10 +1,10 @@
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 import Enums from "../../../../enums/enums";
 
-const _useRadios: Array<BoweryReports.CommercialUnitsUseValues> = ["retail", "office", "medical", "community", "industrial",
+const _useRadios: BoweryReports.CommercialUnitsUseValues[] = ["retail", "office", "medical", "community", "industrial",
     "other", "undetermined"];
 
-const _useTexts: Array<BoweryReports.CommercialUnitsUseTexts> = ["Retail", "Office", "Medical Office",
+const _useTexts: BoweryReports.CommercialUnitsUseTexts[] = ["Retail", "Office", "Medical Office",
     "Community Facility", "Industrial", "Jeronimo", "Undetermined"];
 
 const _defaultUse: BoweryReports.CommercialUnitsUseValues = "undetermined";
@@ -13,7 +13,7 @@ const _otherValue: BoweryReports.CommercialUnitsUseTexts = "Jeronimo";
 
 const _groupName: BoweryReports.CommercialUnitsGroups = "Use";
 
-const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("4558", false, {
+const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("4558", {
     incomeValue: Enums.INCOME_TYPE.BOTH,
     conclusionValue: Enums.VALUE_CONCLUSION_TYPE.AS_IS
 });

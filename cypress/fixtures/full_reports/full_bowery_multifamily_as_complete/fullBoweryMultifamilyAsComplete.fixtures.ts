@@ -8,9 +8,10 @@ const reportCreationFixture = (): BoweryAutomation.ReportCreationData => {
         identifierType: "PIN",
         identifier: "20-36-420-020-0000",
         reportNumber: "Full Report Test Automation",
+        isSalesForcePull: false,
         templateValue: Enums.TEMPLATE_TYPE.NOT_FREDDIE_MAC,
         incomeValue: Enums.INCOME_TYPE.RESIDENTIAL,
-        conclusionValue: "AS_COMPLETE"
+        conclusionValue: Enums.VALUE_CONCLUSION_TYPE.AS_COMPLETE
     };
 };
 

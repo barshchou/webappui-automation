@@ -8,7 +8,9 @@ const reportCreationFixture = () => {
         .setConclusionValue(Enums.VALUE_CONCLUSION_TYPE.AS_STABILIZED).build();
 };
 
+const leaseStatusFixture: BoweryReports.LeaseStatus = "Occupied";
+
 export default {
     reportCreationData: reportCreationFixture(),
-    leaseStatus: "Occupied"
+    leaseStatus: leaseStatusFixture
 };
