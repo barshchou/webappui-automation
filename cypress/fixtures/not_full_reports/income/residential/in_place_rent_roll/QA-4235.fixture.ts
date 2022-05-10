@@ -1,7 +1,7 @@
 import ReportDataCreator from "../../../../data_creator/reportData.creator";
 
 export default {
-    reportCreationData: ReportDataCreator.getDefaultReportData("4235"),
+    reportCreationData: ReportDataCreator.getReportData("4235"),
     numberOfUnits: 1,
     column: "# Bathrooms",
     label: "Bathrooms",

@@ -31,7 +31,7 @@ const _buildingDescription: BoweryReports.BuildingDescription = {
 };
 
 export default {
-  reportCreationData: ReportDataCreator.getDefaultReportData("4888"),
+  reportCreationData: ReportDataCreator.getReportData("4888"),
   actualElectricityItem: _actualElectricityItem,
   t12ElectricityItem: _t12ElectricityItem,
   historicalElectricityItem: _historicalElectricityItem,

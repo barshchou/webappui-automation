@@ -17,10 +17,10 @@ describe("Verify the Monthly Rent Total is calculated correctly in the grid.", (
             .clickYesButton();
         Property.CommercialUnits.enterListUnitSF(testData.general.squareFeetList, testData.general.numberOfUnits);
         NavigationSection.navigateToCommercialInPlaceRentRoll();
-        Income.Commercial.InPlaceRentRoll.chooseListLeaseStatuses(testData.general.leaseStatusesList, testData.general.numberOfUnits)
+        Income.Commercial.InPlaceRentRoll.chooseListLeaseStatuses(testData.leaseStatusesList, testData.general.numberOfUnits)
             .clickMonthlyBasisButton()
-            .enterListMonthlyRent(testData.general.leaseStatusesList, testData.general.monthlyRents)
-            .verifyMonthlyRentTotal(testData.general.leaseStatusesList, testData.general.monthlyRents);
+            .enterListMonthlyRent(testData.leaseStatusesList, testData.general.monthlyRents)
+            .verifyMonthlyRentTotal(testData.leaseStatusesList, testData.general.monthlyRents);
         deleteReport(testData.reportCreationData.reportNumber);
     });
 });

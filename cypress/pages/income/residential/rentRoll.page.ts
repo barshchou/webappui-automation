@@ -9,6 +9,8 @@ class InPlaceRentRollPage extends BasePage {
 
     getPerUnitSFRadio(value) {return cy.get(`*[name='perUnitSF'][value='${value}']`);}
 
+    getPSFRadio(value) {return cy.get(`*[name='unitRentPSFTimePeriod'][value='${value}']`);}
+
     getCheckboxByLabel(label) {return cy.get(`*[label="${label}"] input`);}
 
     get importViaCSVHeader() {return cy.xpath("//p[text()='Import Rent Roll via CSV']");}
@@ -41,9 +43,13 @@ class InPlaceRentRollPage extends BasePage {
 
     get rentForecastCells() {return cy.get("[data-qa^=rentForecast]");}
 
-    get monthlyTotalForecast() {return cy.get("[data-qa='monthlyTotal-rentForecast']");}
+    get monthlyTotalForecast() {return cy.get("[data-qa='monthlyTotal-rent']");}
 
-    get annualTotalForecast() {return cy.get("[data-qa='annualTotal-rentForecast']");}
+    get annualTotalForecast() {return cy.get("[data-qa='annualTotal-rent']");}
+
+    get monthlyTotalRent() {return cy.get("[data-qa='monthlyTotal-rent']");}
+
+    get annualTotalRent() {return cy.get("[data-qa='annualTotal-rent']");}
 
     get rentRollCommentary() {return cy.get("[data-qa*='currentRentRollDiscussion.commentary']");}
 
@@ -62,6 +68,8 @@ class InPlaceRentRollPage extends BasePage {
     get bathroomsCells() {return cy.get("[data-qa^=bathrooms][data-qa$=cell]");}
 
     get unitTypeCells() {return cy.get("[data-qa^=unitLayout][data-qa$=cell]");}
+
+    get rentSFCell() {return cy.xpath("//*[contains(@class, 'readOnly') and not(contains(@data-qa, 'cell'))]");}
 }
 
 export default new InPlaceRentRollPage();

@@ -3,7 +3,7 @@ import {createReport, deleteReport} from "../../../../../actions/base/baseTest.a
 import NavigationSection from "../../../../../actions/base/navigationSection.actions";
 import Income from "../../../../../actions/income/income.manager";
 
-const reportCreationData = ReportDataCreator.getDefaultReportData("4309");
+const reportCreationData = ReportDataCreator.getReportData("4309");
 
 describe("Verify Zoom in and Zoom out buttons for the map on Rent Comps page when Unit search type is selected", () => {
     before("Login, create report", () => {
