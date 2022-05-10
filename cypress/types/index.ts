@@ -70,7 +70,7 @@ namespace BoweryReports {
     export type ResidentialUnit = {
         footage: number,
         monthlyRent: number,
-        leaseStatus: BoweryReports.LeaseStatus
+        leaseStatus?: BoweryReports.LeaseStatus
     }
 }
 
