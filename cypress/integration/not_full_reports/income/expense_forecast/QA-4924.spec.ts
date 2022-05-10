@@ -4,6 +4,7 @@ import Property from "../../../../actions/property/property.manager";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Income from "../../../../actions/income/income.manager";
+import tableExpenseHistoryCellNames from "../../../../../cypress/enums/expenseHistoryTableRows.enum";
 
 
 describe("User selects Per SF radiobutton for Repairs & Maintenance on Expense Forecast form and historical expenses per SF are correctly calculated and displayed", () => {
@@ -40,10 +41,10 @@ describe("User selects Per SF radiobutton for Repairs & Maintenance on Expense F
 
 
         cy.stepInfo(`QA-4924 => 3. Fill in Repairs & Maintenance field for all added columns and save changes`);
-        Income.ExpenseHistory.enterRepairsAndMaintenanceByColIndex(testData.actual.repairsAndMaintenanceExpense, 3)
-            .enterRepairsAndMaintenanceByColIndex(testData.t12.repairsAndMaintenanceExpense, 2)
-            .enterRepairsAndMaintenanceByColIndex(testData.historical.repairsAndMaintenanceExpense, 1)
-            .enterRepairsAndMaintenanceByColIndex(testData.projection.repairsAndMaintenanceExpense, 0);
+        Income.ExpenseHistory.enterIssueByColIndex(testData.actual.repairsAndMaintenanceExpense, 3, tableExpenseHistoryCellNames.repairsAndMaintenance)
+            .enterIssueByColIndex(testData.t12.repairsAndMaintenanceExpense, 2, tableExpenseHistoryCellNames.repairsAndMaintenance)
+            .enterIssueByColIndex(testData.historical.repairsAndMaintenanceExpense, 1, tableExpenseHistoryCellNames.repairsAndMaintenance)
+            .enterIssueByColIndex(testData.projection.repairsAndMaintenanceExpense, 0, tableExpenseHistoryCellNames.repairsAndMaintenance);
         NavigationSection.navigateToExpenseForecast();
 
 
