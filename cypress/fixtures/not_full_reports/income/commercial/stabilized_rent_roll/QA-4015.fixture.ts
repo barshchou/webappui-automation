@@ -2,7 +2,9 @@ import ReportDataCreator from "../../../../data_creator/reportData.creator";
 import Enums from "../../../../../enums/enums";
 
 export default {
-    reportCreationData: ReportDataCreator.getReportSpecificIncomeValue(Enums.INCOME_TYPE.BOTH, "4827"),
+    reportCreationData: ReportDataCreator.getReportData("4015", {
+        incomeValue: Enums.INCOME_TYPE.BOTH,
+    }),
     numberOfCommercialUnits: 2,
     listOfUnitsSF: [1000, 2000],
     groupName: "Use",
@@ -14,4 +16,4 @@ export default {
     annualRent: "$240,000.00",
     monthlyRent: "$20,000.00",
     newTenantName: "new test name"
-}
+};
