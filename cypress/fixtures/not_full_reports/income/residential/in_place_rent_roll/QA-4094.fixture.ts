@@ -1,20 +1,20 @@
 import ReportDataCreator from "../../../../data_creator/reportData.creator";
 
-const _rentRollResidentialUnitsFixture: BoweryReports.ResidentialRentRollUnit[] = [
+const _rentRollResidentialUnitsFixture: BoweryReports.ResidentialUnit[] = [
         {
-            squareFootage: 235,
+            footage: 235,
             monthlyRent: 5758
         },
         {
-            squareFootage: 0,
+            footage: 0,
             monthlyRent: 5758
         },
         {
-            squareFootage: 235,
+            footage: 235,
             monthlyRent: 0
         },
         {
-            squareFootage: 0,
+            footage: 0,
             monthlyRent: 0
         },
     ];
