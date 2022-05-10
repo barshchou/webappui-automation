@@ -67,14 +67,6 @@ class ClientActions extends BaseActionsExt<typeof clientPage> {
         return this;
     } 
 
-<<<<<<< HEAD
-    enterIntendedUserTextBox(textToType: string): ClientActions {
-        clientPage.intendedUserTextBox.type(textToType);
-        return this;
-    }
-
-=======
->>>>>>> f48310e0e5ea748307075733e54d931e3ade7d66
     enterIdentificationOfTheClientTextBox(textToType: string): ClientActions {
         clientPage.identificationOfClientTextBox.type(textToType);
         return this;
@@ -92,8 +84,6 @@ class ClientActions extends BaseActionsExt<typeof clientPage> {
 
     verifyIdentificationOfTheClientTextBox(verifyAreaValue: string): ClientActions {
         clientPage.identificationOfClientTextBox.should("contain.text", verifyAreaValue);
-<<<<<<< HEAD
-=======
         return this;
     }
 
@@ -104,7 +94,6 @@ class ClientActions extends BaseActionsExt<typeof clientPage> {
 
     verifyNotContainIdentificationOfTheClientTextBox(verifyAreaValue: string): ClientActions {
         clientPage.identificationOfClientTextBox.should("not.contain.text", verifyAreaValue);
->>>>>>> f48310e0e5ea748307075733e54d931e3ade7d66
         return this;
     }
 }
