@@ -5,7 +5,7 @@ import Property from "../../../../actions/property/property.manager";
 import Income from "../../../../actions/income/income.manager";
 import Sales from "../../../../actions/sales/sales.manager";
 
-describe("Prospective Market Value As Stabilized -> Less Laundry Rent Loss data is pulled from Cap Rate Conclusion",{tags:"@fix"}, () => {
+describe("Prospective Market Value As Stabilized -> Less Laundry Rent Loss data is pulled from Cap Rate Conclusion",{}, () => {
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
     });

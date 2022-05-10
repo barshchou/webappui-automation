@@ -6,7 +6,7 @@ import Sales from "../../../../actions/sales/sales.manager";
 import {createReport, deleteReport} from "../../../../actions/base/baseTest.actions";
 
 describe(`Prospective Market Value As Stabilized -> Less Residential Rent Loss 
-                data is pulled from Cap Rate Conclusion`, {tags:"@fix"},() => {
+                data is pulled from Cap Rate Conclusion`, {},() => {
     before("Login action", () => {
         createReport(testData.reportCreationData);
     });
