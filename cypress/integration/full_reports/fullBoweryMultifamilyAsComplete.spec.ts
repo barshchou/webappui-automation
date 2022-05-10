@@ -7,6 +7,7 @@ import Income from "../../actions/income/income.manager";
 import Final from "../../actions/final/final.manager";
 import Sales from "../../actions/sales/sales.manager";
 import proFormaTypesEnum from "../../enums/proFormaTypes.enum";
+import tableExpenseHistoryCellNames from "../../../cypress/enums/expenseHistoryTableRows.enum";
 
 describe("Full bowery way, multifamily as complete report", () => {
     it("Test", () => {
