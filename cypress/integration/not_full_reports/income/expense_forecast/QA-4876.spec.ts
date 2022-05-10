@@ -4,6 +4,7 @@ import {createReport, deleteReport} from "../../../../actions/base/baseTest.acti
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Property from "../../../../actions/property/property.manager";
 import Income from "../../../../actions/income/income.manager";
+import tableExpenseHistoryCellNames from "../../../../../cypress/enums/expenseHistoryTableRows.enum";
 
 describe("Historical expense Electricity Per SF is correctly calculated and displayed", () => {
     before("Login, create report", () => {
@@ -37,10 +38,10 @@ describe("Historical expense Electricity Per SF is correctly calculated and disp
             .clickAddExpenseYearButton();
 
         cy.stepInfo("3. Fill in Electricity field for all added columns and save changes");
-        Income.ExpenseHistory.enterElectricityByColIndex(testData.actual.electricityExpense, 3)
-            .enterElectricityByColIndex(testData.t12.electricityExpense, 2)
-            .enterElectricityByColIndex(testData.historical.electricityExpense, 1)
-            .enterElectricityByColIndex(testData.projection.electricityExpense, 0);
+        Income.ExpenseHistory.enterIssueByColIndex(testData.actual.electricityExpense, 3, tableExpenseHistoryCellNames.electricity)
+            .enterIssueByColIndex(testData.t12.electricityExpense, 2, tableExpenseHistoryCellNames.electricity)
+            .enterIssueByColIndex(testData.historical.electricityExpense, 1, tableExpenseHistoryCellNames.electricity)
+            .enterIssueByColIndex(testData.projection.electricityExpense, 0, tableExpenseHistoryCellNames.electricity);
         NavigationSection.navigateToExpenseForecast();
 
         cy.stepInfo("4. Go to Expense Forecast and make sure that Per SF radiobutton is selected for Electricity card");
