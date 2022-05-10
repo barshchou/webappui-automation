@@ -12,4 +12,4 @@ export default {
     reportCreationData: ReportDataCreator.getReportData("4936"),
     buildingDescription: _buildingDescription,
     forecastItem: _forecasItem,
-}
+};

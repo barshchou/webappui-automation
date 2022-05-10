@@ -7,7 +7,11 @@ const reportCreationFixture = () => {
     });
 };
 
+const leaseStatusesFixture = (): BoweryReports.LeaseStatus[] => {
+    return ["Occupied", "Vacant"];
+};
+
 export default {
     reportCreationData: reportCreationFixture(),
-    leaseStatuses: ["Occupied", "Vacant"]
+    leaseStatuses: leaseStatusesFixture()
 };

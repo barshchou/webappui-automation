@@ -25,5 +25,5 @@ describe("Per SF Appraiser's Forecast value for Insurance is correctly converted
         cy.stepInfo("4. Verify that Per Unit value below this field is calculated as: PSF Appraiser’s Forecast * GBA / # of Resi Units");
         Income.ExpenseForecast.Actions.verifyForecastItemBasisMoney(testData.insuranceItem, testData.buildingDescription);
         deleteReport(testData.reportCreationData.reportNumber);
-    })
-})
+    });
+});

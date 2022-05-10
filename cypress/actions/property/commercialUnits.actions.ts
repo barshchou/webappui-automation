@@ -19,7 +19,7 @@ class CommercialUnitsActions extends BaseActionsExt<typeof commercialUnitsPage> 
         return this;
     }
 
-    uploadImages(imageType: "Interior Images" | "Exterior Images", pathToFile: string, inputMethod: "drag-n-drop" | "input") {
+    uploadImages(imageType: BoweryReports.ImageType, pathToFile: string, inputMethod: "drag-n-drop" | "input") {
         let aliasImageUpload = "aliasImageUpload";
         cy.intercept("POST", "/imageUpload").as(aliasImageUpload);
         cy.contains(imageType).next().find('input[type="file"]')
