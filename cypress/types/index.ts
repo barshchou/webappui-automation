@@ -57,11 +57,6 @@ namespace BoweryReports {
 
     export type BuildingDescription = {grossArea: number, numberOfUnits: number}
 
-    export type ResidentialRentRollUnit = {
-        squareFootage: number,
-        monthlyRent: number
-    }
-
     export type ResidentialUnit = {
         footage: number,
         monthlyRent: number,
