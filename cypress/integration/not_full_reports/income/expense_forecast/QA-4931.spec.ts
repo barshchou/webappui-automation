@@ -1,4 +1,3 @@
-/// <reference types="cypress-grep" />
 import testData from "../../../../fixtures/not_full_reports/income/expense_forecast/QA-4931.fixture";
 import {
   createReport,
@@ -7,6 +6,8 @@ import {
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Income from "../../../../actions/income/income.manager";
 import Property from "../../../../actions/property/property.manager";
+import tableExpenseHistoryCellNames from "../../../../../cypress/enums/expenseHistoryTableRows.enum";
+
 
 describe("Historical expense Repairs & Maintenance Per Unit is correctly calculated and displayed", () => {
   before("Login, create report", () => {
@@ -27,7 +28,7 @@ describe("Historical expense Repairs & Maintenance Per Unit is correctly calcula
       Income.ExpenseHistory.Actions.selectExpensePeriod(per.expensePeriodType)
         .enterExpenseYear(per.year)
         .clickAddExpenseYearButton()
-        .enterRepairsAndMaintenanceByColIndex(per.repairsAndMaintenance);
+        .enterIssueByColIndex(per.repairsAndMaintenance, tableExpenseHistoryCellNames.repairsAndMaintenance);
     });
 
     testData.periodsMonth.forEach((per) => {
@@ -35,7 +36,7 @@ describe("Historical expense Repairs & Maintenance Per Unit is correctly calcula
         .enterExpenseMonth(per.month)
         .enterExpenseYear(per.year)
         .clickAddExpenseYearButton()
-        .enterRepairsAndMaintenanceByColIndex(per.repairsAndMaintenance);
+        .enterIssueByColIndex(per.repairsAndMaintenance, tableExpenseHistoryCellNames.repairsAndMaintenance);
     });
 
     cy.stepInfo("3. Fill in Repairs & Maintenance field for all added columns and save changes");

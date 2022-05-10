@@ -29,14 +29,14 @@ describe("Historical expense Electricity Per Unit is correctly calculated and di
             Income._ExpenseHistory.Actions.selectExpensePeriod(per.expensePeriodType)
                 .enterExpenseYear(per.year)
                 .clickAddExpenseYearButton()
-                .enterIssueByColIndex(per.electricity, 0, tableExpenseHistoryCellNames.electricity);
+                .enterIssueByColIndex(per.electricity, tableExpenseHistoryCellNames.electricity, 0);
         });
         testData.periodsMonth.forEach((per) => {
             Income._ExpenseHistory.Actions.selectExpensePeriod(per.expensePeriodType)
                 .enterExpenseMonth(per.month)
                 .enterExpenseYear(per.year)
                 .clickAddExpenseYearButton()
-                .enterIssueByColIndex(per.electricity, 0, tableExpenseHistoryCellNames.electricity);
+                .enterIssueByColIndex(per.electricity, tableExpenseHistoryCellNames.electricity, 0);
         });
         Income._ExpenseHistory.Actions.verifyAverageTable();
 

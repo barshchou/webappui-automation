@@ -41,10 +41,10 @@ describe("User selects Per SF radiobutton for Repairs & Maintenance on Expense F
 
 
         cy.stepInfo(`QA-4924 => 3. Fill in Repairs & Maintenance field for all added columns and save changes`);
-        Income.ExpenseHistory.enterIssueByColIndex(testData.actual.repairsAndMaintenanceExpense, 3, tableExpenseHistoryCellNames.repairsAndMaintenance)
-            .enterIssueByColIndex(testData.t12.repairsAndMaintenanceExpense, 2, tableExpenseHistoryCellNames.repairsAndMaintenance)
-            .enterIssueByColIndex(testData.historical.repairsAndMaintenanceExpense, 1, tableExpenseHistoryCellNames.repairsAndMaintenance)
-            .enterIssueByColIndex(testData.projection.repairsAndMaintenanceExpense, 0, tableExpenseHistoryCellNames.repairsAndMaintenance);
+        Income.ExpenseHistory.enterIssueByColIndex(testData.actual.repairsAndMaintenanceExpense, tableExpenseHistoryCellNames.repairsAndMaintenance, 3)
+            .enterIssueByColIndex(testData.t12.repairsAndMaintenanceExpense, tableExpenseHistoryCellNames.repairsAndMaintenance, 2)
+            .enterIssueByColIndex(testData.historical.repairsAndMaintenanceExpense, tableExpenseHistoryCellNames.repairsAndMaintenance, 1)
+            .enterIssueByColIndex(testData.projection.repairsAndMaintenanceExpense, tableExpenseHistoryCellNames.repairsAndMaintenance, 0);
         NavigationSection.navigateToExpenseForecast();
 
 

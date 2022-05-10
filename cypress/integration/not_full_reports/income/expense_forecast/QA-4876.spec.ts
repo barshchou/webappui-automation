@@ -38,10 +38,10 @@ describe("Historical expense Electricity Per SF is correctly calculated and disp
             .clickAddExpenseYearButton();
 
         cy.stepInfo("3. Fill in Electricity field for all added columns and save changes");
-        Income.ExpenseHistory.enterIssueByColIndex(testData.actual.electricityExpense, 3, tableExpenseHistoryCellNames.electricity)
-            .enterIssueByColIndex(testData.t12.electricityExpense, 2, tableExpenseHistoryCellNames.electricity)
-            .enterIssueByColIndex(testData.historical.electricityExpense, 1, tableExpenseHistoryCellNames.electricity)
-            .enterIssueByColIndex(testData.projection.electricityExpense, 0, tableExpenseHistoryCellNames.electricity);
+        Income.ExpenseHistory.enterIssueByColIndex(testData.actual.electricityExpense, tableExpenseHistoryCellNames.electricity, 3)
+            .enterIssueByColIndex(testData.t12.electricityExpense, tableExpenseHistoryCellNames.electricity, 2)
+            .enterIssueByColIndex(testData.historical.electricityExpense, tableExpenseHistoryCellNames.electricity, 1)
+            .enterIssueByColIndex(testData.projection.electricityExpense, tableExpenseHistoryCellNames.electricity, 0);
         NavigationSection.navigateToExpenseForecast();
 
         cy.stepInfo("4. Go to Expense Forecast and make sure that Per SF radiobutton is selected for Electricity card");
