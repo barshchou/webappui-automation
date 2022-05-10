@@ -1,12 +1,12 @@
 import summaryPage from "../../pages/property/summary.page";
-import BaseActions from "../base/base.actions";
 import {
     cutDecimalPartToNumberOfDigits,
     isHasDecimalPartMoreNumberOfDigits,
     numberWithCommas
 } from "../../../utils/numbers.utils";
+import BaseActionsExt from "../base/base.actions.ext";
 
-class SummaryActions extends BaseActions {
+class SummaryActions extends BaseActionsExt<typeof summaryPage> {
 
     verifyThatPageIsOpened(): this {
         summaryPage.headerSection.should("be.visible");
@@ -198,4 +198,4 @@ class SummaryActions extends BaseActions {
     }
 }
 
-export default new SummaryActions();
+export default new SummaryActions(summaryPage);
