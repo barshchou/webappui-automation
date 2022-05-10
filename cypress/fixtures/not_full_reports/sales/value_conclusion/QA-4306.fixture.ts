@@ -22,7 +22,9 @@ const generalDataFixture = () => {
 };
 
 export default {
-    reportCreationData: ReportDataCreator.getReportSpecificConclusionValue(Enums.VALUE_CONCLUSION_TYPE.AS_COMPLETE, "4306"),
+    reportCreationData: ReportDataCreator.getReportData("4306", {
+        conclusionValue: Enums.VALUE_CONCLUSION_TYPE.AS_COMPLETE
+    }),
     rentRollData: Object.freeze(rentRollFixture()),
     generalData: Object.freeze(generalDataFixture())
 };
