@@ -25,7 +25,7 @@ describe(`[QA-4094] Verify if "Per Month" time period PSF Rent based on is selec
         testData.rentRollResidentialUnits.forEach(el => {
             Income._Residential.InPlaceRentRoll.checkPerUnitSquareFootage()
             .Page.getPSFRadio(testData.psfRadioValue).click();
-            Income._Residential.InPlaceRentRoll.enterSquareFootageByRow(el.squareFootage)
+            Income._Residential.InPlaceRentRoll.enterSquareFootageByRow(el.footage)
             .enterMonthlyRentByRowNumber(el.monthlyRent)
             .verifyRentPSFMounthValue("perMonth");
             cy.reload();
