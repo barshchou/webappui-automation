@@ -31,7 +31,8 @@ class ExpenseHistoryActions extends BaseActionsExt<typeof expenseHistoryPage>{
         if (issueValue === "clear") {
             expenseHistoryPage.getUnifiedEditableAndTotalCells(tableExpenseHistoryCellNames).eq(index).clear();
         } else {
-            expenseHistoryPage.getUnifiedEditableAndTotalCells(tableExpenseHistoryCellNames).eq(index).scrollIntoView().dblclick({ force: true }).clear().realType(`${issueValue}{enter}`);
+            expenseHistoryPage.getUnifiedEditableAndTotalCells(tableExpenseHistoryCellNames).eq(index).scrollIntoView();
+            expenseHistoryPage.getUnifiedEditableAndTotalCells(tableExpenseHistoryCellNames).eq(index).dblclick({ force: true }).clear().realType(`${issueValue}{enter}`);
             expenseHistoryPage.getUnifiedEditableAndTotalCells(tableExpenseHistoryCellNames).eq(index).should("have.text", `$${numberWithCommas(issueValue)}.00`);
         }
         return this;
