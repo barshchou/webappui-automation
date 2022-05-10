@@ -9,6 +9,8 @@ class PropertySummaryPage extends BasePage {
 
     get censusTractField() {return cy.get("*[name=censusTract]");}
 
+    censusTractFieldValidationText(text: string) {return cy.xpath(`//*[contains(@name, 'censusTract')]//following::*[contains(text(), '${text}')][1]`);}
+
     get buildingDescriptor() {return cy.get("*[name=buildingDescriptor]");}
 
     get streetAddress() {return cy.get("*[name=streetAddress]");}
