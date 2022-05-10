@@ -2,7 +2,7 @@ import ReportDataCreator from "../../../data_creator/reportData.creator";
 import {getCurrentMonthName, getYearFromDate} from "../../../../../utils/date.utils";
 
 export default {
-    reportCreationData: ReportDataCreator.getDefaultReportData("4876"),
+    reportCreationData: ReportDataCreator.getReportData("4876"),
     buildingDescription: {
         grossArea: 5000,
         numberOfUnits: 1

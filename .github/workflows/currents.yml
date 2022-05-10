@@ -55,7 +55,7 @@ jobs:
             ${{ runner.os }}-
       
       - name: Install Cypress globally
-        run: npm i cypress@9.4.1 -g
+        run: npm i cypress@9.6.0 -g
 
       - name: Install Currents globally
         run: npm i @currents/cli -g
@@ -78,4 +78,12 @@ jobs:
         with:
           name: failed-tests-DOM-snapshots
           path: cypress/gh_artifacts
+          retention-days: 2
+      
+      - name: Archive downloaded Reports (html and docx)
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: downloaded-reports
+          path: cypress/downloads
           retention-days: 2

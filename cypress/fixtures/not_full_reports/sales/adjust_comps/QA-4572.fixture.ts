@@ -1,7 +1,7 @@
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 
 export default {
-    reportCreationData: ReportDataCreator.getDefaultReportData("4572"),
+    reportCreationData: ReportDataCreator.getReportData("4572"),
     comparableFirst: {
         address: "200 West 78 Street",
         sizeAdjustment: 20,

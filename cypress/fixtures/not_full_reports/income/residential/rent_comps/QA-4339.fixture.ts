@@ -16,7 +16,7 @@ const formDataFixture = () => {
 };
 
 export default {
-    reportCreationData: ReportDataCreator.getDefaultReportData("4339"),
+    reportCreationData: ReportDataCreator.getReportData("4339"),
     numberOfUnits: 2,
     rentType: "Market Rate",
     numberOfBedrooms: 5,

@@ -385,7 +385,7 @@ class InPlaceRentRollActions extends BaseActionsExt<typeof rentRollPage> {
                     }
                 }
                 const textToBe = `$${numberWithCommas(totalToBe.toFixed(2))}`;
-                rentRollPage.monthlyTotalRent.should("have.text", textToBe);    
+                rentRollPage.monthlyTotalRent.should("have.text", textToBe);
             });
         });
         return this;
