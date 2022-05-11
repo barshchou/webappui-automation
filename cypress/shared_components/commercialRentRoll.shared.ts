@@ -25,6 +25,8 @@ class CommercialRentRollSharedComponent {
     get annualRentPerSFTotal() {return cy.get("[data-qa^=annualRentPsf-]").last();}
 
     get monthlyRentPerSFCells() {return cy.xpath("//*[contains(@class, 'htNumeric')]|(//*[contains(@data-qa, 'monthlyRentPsf')])[position() < last()]");}
+
+    get elementToVerifyIsInspected() {return cy.xpath("(//*[contains(@data-qa, 'isInspected')])[position() < last()]//child::span");}
 }
 
 export default CommercialRentRollSharedComponent;

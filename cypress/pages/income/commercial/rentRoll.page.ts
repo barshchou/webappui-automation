@@ -19,8 +19,6 @@ class CommercialRentRollPage extends BasePage{
 
     get isInspectedCheckboxes() {return cy.get("[data-qa*='isInspected']:not([class*='readOnly']) input");}
 
-    get elementToVerifyIsInspected() {return cy.get("[data-qa*='isInspected']:not([class*='readOnly']) span");}
-
     get unitNumberCells() {return cy.get("*[data-qa*='#']");}
 
     getAllCellsByRowNumber(rowNumber) {return cy.get(`*[data-qa*='${rowNumber}-cell']`);}
