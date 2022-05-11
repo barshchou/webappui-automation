@@ -1,14 +1,14 @@
 import testData from "../../../../../fixtures/not_full_reports/income/residential/in_place_rent_roll/QA-4218.fixture";
-import {createReport, deleteReport} from "../../../../../actions/base/baseTest.actions";
+import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../../actions/base/navigationSection.actions";
 import Enums from "../../../../../enums/enums";
-import {Income} from "../../../../../actions";
+import { Income } from "../../../../../actions";
 import Property from "../../../../../actions/property/property.manager";
 import ReportDataCreator from "../../../../../fixtures/data_creator/reportData.creator";
 
 describe("Verify the grid is present", () => {
-    const conclusionValues = [Enums.VALUE_CONCLUSION_TYPE.AS_IS, Enums.VALUE_CONCLUSION_TYPE.AS_STABILIZED,
-        Enums.VALUE_CONCLUSION_TYPE.AS_COMPLETE];
+    const conclusionValues = [ Enums.VALUE_CONCLUSION_TYPE.AS_IS, Enums.VALUE_CONCLUSION_TYPE.AS_STABILIZED,
+        Enums.VALUE_CONCLUSION_TYPE.AS_COMPLETE ];
 
     conclusionValues.forEach(type => {
         const reportCreationData = ReportDataCreator.getReportData("4218", {

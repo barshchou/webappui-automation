@@ -1,5 +1,5 @@
 import expenseHistoryPage from "../../pages/income/expenseHistory.page";
-import {getNumberFromDollarNumberWithCommas, numberWithCommas} from "../../../utils/numbers.utils";
+import { getNumberFromDollarNumberWithCommas, numberWithCommas } from "../../../utils/numbers.utils";
 import BaseActionsExt from "../base/base.actions.ext";
 
 class ExpenseHistoryActions extends BaseActionsExt<typeof expenseHistoryPage>{

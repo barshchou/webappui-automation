@@ -9,7 +9,7 @@ const _backlinkName = "Property Rights Appraised";
 
 export default {
     reportCreationData: ReportDataCreator.getReportData("4465", { conclusionValue: "AS_IS" }),
-    textToVerify: ["It's over, Anakin, I have the high ground","You underestimate my power"],
+    textToVerify: [ "It's over, Anakin, I have the high ground", "You underestimate my power" ],
     aliases:_aliases,
     backlinkName: _backlinkName
 };

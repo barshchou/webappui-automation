@@ -1,18 +1,18 @@
 /// <reference types="cypress-grep" />
 import testData from "../../../../fixtures/not_full_reports/income/expense_forecast/QA-4876.fixture";
-import {createReport, deleteReport} from "../../../../actions/base/baseTest.actions";
+import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Property from "../../../../actions/property/property.manager";
 import Income from "../../../../actions/income/income.manager";
 import { Tag } from "../../../../utils/tags.utils";
 
 describe("Historical expense Electricity Per SF is correctly calculated and displayed",
-{tags:[Tag.snapshot_tests, Tag.expense_forecast,Tag.income]} ,() => {
+{ tags:[ Tag.snapshot_tests, Tag.expense_forecast, Tag.income ] }, () => {
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
     });
 
-    it("Test body", { tags: '@snapshot_tests' },() => {
+    it("Test body", { tags: '@snapshot_tests' }, () => {
         cy.stepInfo("1. Navigate to Property -> Summary and enter gross building area");
         NavigationSection.navigateToPropertySummary();
         Property.Summary.enterGrossBuildingArea(testData.buildingDescription.grossArea)
@@ -60,7 +60,7 @@ describe("Historical expense Electricity Per SF is correctly calculated and disp
             5.2 correctly displayed on slidebars
         `);
         Income.ExpenseForecast.Actions.matchElementSnapshot(
-            Income.ExpenseForecast.Page.electricityCard, testData.electricityCardSnapshotName, {padding: [10, 100]}
+            Income.ExpenseForecast.Page.electricityCard, testData.electricityCardSnapshotName, { padding: [ 10, 100 ] }
         );
        
         deleteReport(testData.reportCreationData.reportNumber);
