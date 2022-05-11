@@ -24,9 +24,9 @@ describe("[QA-4648] Verify the Save button functionality on the Report > Client 
             .enterIdentificationOfTheClientTextBox(testData.textToType)
             .clickNarrativeSuggestions(testData.verifyListValue, 1)
             .Page.formSaveBtn(0).click();
-            Report._Client.Page.formSaveBtn(0).click();
-            Report._Client.verifyIntendedUserTextBox(testData.verifyAreaValue)
-                .verifyIdentificationOfTheClientTextBox(testData.verifyAreaValue);
+        Report._Client.Page.formSaveBtn(0).click();
+        Report._Client.verifyIntendedUserTextBox(testData.verifyAreaValue)
+            .verifyIdentificationOfTheClientTextBox(testData.verifyAreaValue);
 
         cy.stepInfo("3. Refresh the page / or re-enter the page and verify that the changes from step 2 are still applied.");
         Report._Client.clickSaveButton()
