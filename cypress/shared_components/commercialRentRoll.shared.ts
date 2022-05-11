@@ -27,6 +27,8 @@ class CommercialRentRollSharedComponent {
     get monthlyRentPerSFCells() {return cy.xpath("//*[contains(@class, 'htNumeric')]|(//*[contains(@data-qa, 'monthlyRentPsf')])[position() < last()]");}
 
     get elementToVerifyIsInspected() {return cy.xpath("(//*[contains(@data-qa, 'isInspected')])[position() < last()]//child::span");}
+
+    get unitNumberCells() {return cy.xpath("(//*[contains(@data-qa, '#')])[position() < last()]");}
 }
 
 export default CommercialRentRollSharedComponent;

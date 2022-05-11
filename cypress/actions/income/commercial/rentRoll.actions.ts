@@ -127,10 +127,14 @@ class CommercialRentRollActions extends BaseActionsExt<typeof rentRollPage> {
 
 
      verifyUnitNumberCells(unitNumber = 1): this {
-        rentRollPage.unitNumberCells.each(cell => {
-            cy.wrap(cell).should("exist").and("be.visible").and("have.class", "readOnly");
-        });
-        rentRollPage.unitNumberCells.should("have.length", unitNumber + 1);
+        if (unitNumber === 0) {
+            this.Shared.unitNumberCells.should("not.exist");
+        } else {
+            this.Shared.unitNumberCells.each(cell => {
+                cy.wrap(cell).should("exist").and("be.visible").and("have.class", "readOnly");
+            });
+            this.Shared.unitNumberCells.should("have.length", unitNumber);
+        }
         return this;
     }
 
