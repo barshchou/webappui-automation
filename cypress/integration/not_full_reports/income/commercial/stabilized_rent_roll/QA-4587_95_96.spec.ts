@@ -1,7 +1,7 @@
 import { Income, Property } from "../../../../../actions";
 import { _NavigationSection } from "../../../../../actions/base";
 import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
-import testData from "../../../../../fixtures/not_full_reports/income/commercial/stabilized_rent_roll/QA-4595_96.fixture";
+import testData from "../../../../../fixtures/not_full_reports/income/commercial/stabilized_rent_roll/QA-4587_95_96.fixture";
 import { Tag } from "../../../../../utils/tags.utils";
 
 
@@ -21,6 +21,16 @@ describe(`Verify the suggested text dropdown in the new narrative component adde
         cy.stepInfo("1. Proceed to the Income > Commercial > Stabilized Rent Roll page.");
         _NavigationSection.clickIncomeApproachButton()
             .clickCommercialArrow().navigateToStabilizedRentRollInCommercial().verifyProgressBarNotExist();
+
+        cy.stepInfo(`2. Hover the arrows.`);
+        Income._CommercialManager.StabilizedRentRoll.Page.stabilizedCommercialIncomeDiscussionTooltip
+            .trigger("mouseover").invoke("show");
+    
+        cy.stepInfo(`3. [QA-4587] Verify the following text is displayed: "The following generated text will appear in the Income Approach section of your report.".`);
+        cy.get('[role="tooltip"]').invoke("text").then(text => {
+            cy.log(text);
+            expect(text).to.be.equal(testData.tooltipText);
+            });
 
         cy.stepInfo("2. [QA-4596] Click Edit and enter the “=S“ and select the 'Sheriff's sale' option. Verify text");
         Income._CommercialManager.StabilizedRentRoll.clickEditStabilizedCommercialIncomeDiscussion()

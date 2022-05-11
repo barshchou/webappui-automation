@@ -2,7 +2,7 @@ import enums from "../../../../../enums/enums";
 import reportDataCreator from "../../../../data_creator/reportData.creator";
 
 export default {
-    reportCreationData: reportDataCreator.getReportData("4595_96", {
+    reportCreationData: reportDataCreator.getReportData("4587_95_96", {
         incomeValue: enums.INCOME_TYPE.BOTH
     }),
     numberOfCommercialUnits: 2,
@@ -17,5 +17,6 @@ export default {
     verifyForeclosureAreaValue: "The above transaction reflects a foreclosure sale of the property. Typically in a foreclosure sale, "+
     "the buyer assumes all encumbrances on the site, including any outstanding mortgage amount and legal fees (\"upset costs\"), "+
     "delinquent taxes and water and sewer charges, foreclosure sale fee, and realty transfer taxes. This information was requested "+
-    "from the owner; however, not provided."
+    "from the owner; however, not provided.",
+    tooltipText: "The following generated text will appear in the Income Approach section of your report."
 };

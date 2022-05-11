@@ -31,6 +31,8 @@ class StabilizedRentRollPage extends BasePage{
     
     get stabilizedRentRollModifiedLabel() {return cy.xpath("//*[@ui='indicator']/span[.='Modified']");}
 
+    get stabilizedCommercialIncomeDiscussionTooltip() {return cy.get("[data-icon=info-circle]");}
+
 }
 
 export default new StabilizedRentRollPage();
