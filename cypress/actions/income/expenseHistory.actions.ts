@@ -29,62 +29,34 @@ class ExpenseHistoryActions extends BaseActionsExt<typeof expenseHistoryPage>{
 
     enterIssueByColIndex(issueValue: number | string, tableExpenseHistoryCellNames: string, index = 0,): ExpenseHistoryActions {  
         if (issueValue === "clear") {
-            expenseHistoryPage.getUnifiedEditableAndTotalCells(tableExpenseHistoryCellNames).eq(index).scrollIntoView({ duration: 500 }).click().dblclick({ force: true }).clear();
+            expenseHistoryPage.getUnifiedEditableAndTotalCells(tableExpenseHistoryCellNames).eq(index).scrollIntoView().dblclick().clear();
         } else {
-            expenseHistoryPage.getUnifiedEditableAndTotalCells(tableExpenseHistoryCellNames).eq(index).scrollIntoView({ duration: 500 }).should('be.visible')
-            expenseHistoryPage.getUnifiedEditableAndTotalCells(tableExpenseHistoryCellNames).eq(index).click().dblclick({ force: true }).clear().realType(`${issueValue}{enter}`);
+            expenseHistoryPage.getUnifiedEditableAndTotalCells(tableExpenseHistoryCellNames).eq(index).scrollIntoView().dblclick().clear().realType(`${issueValue}{enter}`);
             expenseHistoryPage.getUnifiedEditableAndTotalCells(tableExpenseHistoryCellNames).eq(index).should("have.text", `$${numberWithCommas(issueValue)}.00`);
         }
         return this;
     }
 
-    /**
-     *
-     * @param {number} index
-     * @returns {ExpenseHistoryActions}
-     */
     checkGrossRevenueCheckboxByColumnIndex(index = 0): ExpenseHistoryActions {
         expenseHistoryPage.grossRevenueCheckboxes.eq(index).check().should("have.value", "true");
         return this;
     }
 
-    /**
-     *
-     * @param {number} index
-     * @returns {ExpenseHistoryActions}
-     */
     uncheckFuelCheckboxByColIndex(index = 0): ExpenseHistoryActions {
         expenseHistoryPage.fuelCheckboxes.eq(index).uncheck().should("have.value", "false");
         return this;
     }
 
-    /**
-     *
-     * @param {number} index
-     * @returns {ExpenseHistoryActions}
-     */
     uncheckWaterSewerCheckboxByColIndex(index = 0): ExpenseHistoryActions {
         expenseHistoryPage.waterSewerCheckboxes.eq(index).uncheck().should("have.value", "false");
         return this;
     }
 
-    /**
-     *
-     * @param {string} textToBe
-     * @param {number} index
-     * @returns {ExpenseHistoryActions}
-     */
     verifyTotalOpExpensesByColIndex(textToBe: string, index = 0): ExpenseHistoryActions {
         expenseHistoryPage.getUnifiedEditableAndTotalCells(tableExpenseHistoryCellNames.total).eq(index).should("have.text", textToBe);
         return this;
     }
 
-    /**
-     *
-     * @param {number} retValue
-     * @param {number} index
-     * @returns {ExpenseHistoryActions}
-     */
     verifyTOEExcludingRETByIndex(retValue: number, index = 0): ExpenseHistoryActions {
         expenseHistoryPage.getUnifiedEditableAndTotalCells(tableExpenseHistoryCellNames.total).eq(index).invoke("text").then(toeTotalText => {
             const toeTotalNumber = getNumberFromDollarNumberWithCommas(toeTotalText);
@@ -94,12 +66,6 @@ class ExpenseHistoryActions extends BaseActionsExt<typeof expenseHistoryPage>{
         return this;
     }
 
-    /**
-     *
-     * @param {number} grossRevenue
-     * @param {number} index
-     * @returns {ExpenseHistoryActions}
-     */
     verifyNetOpIncomeByIndex(grossRevenue: number, index = 0): ExpenseHistoryActions {
         expenseHistoryPage.getUnifiedEditableAndTotalCells(tableExpenseHistoryCellNames.total).eq(index).invoke("text").then(toeTotalText => {
             const toeTotalNumber = getNumberFromDollarNumberWithCommas(toeTotalText);
@@ -135,12 +101,7 @@ class ExpenseHistoryActions extends BaseActionsExt<typeof expenseHistoryPage>{
         return this;
     }
 
-    /**
-     * @private
-     * @param {JQuery<HTMLElement>} jQueryEls
-     * @returns {string}
-     */
-    getAverageTextFromCells(jQueryEls: JQuery<HTMLElement>): string {
+     private getAverageTextFromCells(jQueryEls: JQuery<HTMLElement>): string {
         let sum = 0;
         for (let i = 0; i < jQueryEls.length; i++) {
             let elNumber = getNumberFromDollarNumberWithCommas(jQueryEls[i].textContent);
@@ -153,13 +114,7 @@ class ExpenseHistoryActions extends BaseActionsExt<typeof expenseHistoryPage>{
         return `$${numberWithCommas((sum / jQueryEls.length).toFixed(2))}`;
     }
 
-
-    /**
-     * @private
-     * @param {JQuery<HTMLElement>} jQueryElements
-     * @returns {string}
-     */
-    getAverageValueFromInputs(jQueryElements: JQuery<HTMLElement>): string {
+     private getAverageValueFromInputs(jQueryElements: JQuery<HTMLElement>): string {
         let cellsCounter = 0;
         let sum = 0;
         for (let i = 0; i < jQueryElements.length; i++) {
@@ -180,11 +135,6 @@ class ExpenseHistoryActions extends BaseActionsExt<typeof expenseHistoryPage>{
         }
     }
 
-    /**
-     *
-     * @param {string} commToBe
-     * @returns {ExpenseHistoryActions}
-     */
     verifyExpenseHistoryCommentary(commToBe: string): ExpenseHistoryActions {
         expenseHistoryPage.expenseHistoryCommentary.should("have.text", commToBe);
         return this;
