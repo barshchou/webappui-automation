@@ -6,9 +6,11 @@ import {
 } from "../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Income from "../../../../actions/income/income.manager";
+import { Tag } from "../../../../utils/tags.utils";
 
 
-describe("Comparable Min, Max, Avg values for Repairs & Maintenance Per Unit are correctly calculated and displayed", () => {
+describe("Comparable Min, Max, Avg values for Repairs & Maintenance Per Unit are correctly calculated and displayed",
+{ tags:[ Tag.expense_forecast, Tag.income, Tag.snapshot_tests ] }, () => {
   before("Login, create report", () => {
     createReport(testData.reportCreationData);
   });
@@ -37,13 +39,13 @@ describe("Comparable Min, Max, Avg values for Repairs & Maintenance Per Unit are
       5. Check Comp Min, Comp Max and Comp Avg values for Repairs & Maintenance card. They should be
         5.1 calculated as: Min, Max and Avg of range of values [Comp_Repairs & Maintenance / Residential Units]
         5.2 correctly displayed on slidebar`);
-    Income.ExpenseForecast.Actions.verifyForecastItemCompMin(testData.repairsItem,testData.comparables)
+    Income.ExpenseForecast.Actions.verifyForecastItemCompMin(testData.repairsItem, testData.comparables)
       .verifyForecastItemCompAverage(testData.repairsItem, testData.comparables)
       .verifyForecastItemCompMax(testData.repairsItem, testData.comparables)
       .hideExpenseForecastHeader();
 
     Income.ExpenseForecast.Actions.matchElementSnapshot(
-      Income.ExpenseForecast.Page.repairsAndMaintenanceCard, testData.repairsCardSnapshotName, {padding: [10, 100]});
+      Income.ExpenseForecast.Page.repairsAndMaintenanceCard, testData.repairsCardSnapshotName, { padding: [ 10, 100 ] });
 
     deleteReport(testData.reportCreationData.reportNumber);
   });

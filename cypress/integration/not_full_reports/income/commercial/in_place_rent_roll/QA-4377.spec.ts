@@ -3,8 +3,9 @@ import NavigationSection from "../../../../../actions/base/navigationSection.act
 import Income from "../../../../../actions/income/income.manager";
 import Final from "../../../../../actions/final/final.manager";
 import {createReport, deleteReport} from "../../../../../actions/base/baseTest.actions";
+import { Tag } from "../../../../../utils/tags.utils";
 
-describe("Verify the Inspected checkbox functionality", () => {
+describe("Verify the Inspected checkbox functionality",{ tags:[ Tag.income,Tag.in_place_rent_roll ] }, () => {
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
     });
