@@ -16,7 +16,7 @@ describe("Verify the functionality of the Frontage radio button", () => {
     it("Test body", () => {
         cy.stepInfo(`1. Proceed to the Property > Commercial Units page.`);
         _NavigationSection.clickIncomeApproachButton()
-        .clickCommercialArrow().openCommercialStabilizedRentRollInCommercial().verifyProgressBarNotExist();
+        .clickCommercialArrow().navigateToStabilizedRentRollInCommercial().verifyProgressBarNotExist();
         
         cy.stepInfo(`2. Hover the arrows.`);
         Income._CommercialManager.RentReconciliation.Page.arrowCommercialRentReconciliation

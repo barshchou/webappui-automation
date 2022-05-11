@@ -30,7 +30,7 @@ describe("Verify the Commercial Stabilized Rent Roll table", () => {
                 Income.Commercial.InPlaceRentRoll.enterAnnualRentPerSFByRowNumber(rent, index);
             }
         });
-        NavigationSection.openCommercialStabilizedRentRollInCommercial()
+        NavigationSection.navigateToStabilizedRentRollInCommercial()
             .verifyProgressBarNotExist();
         Income.Commercial.StabilizedRentRoll.clickSaveButton()
             .verifyProgressBarNotExist();
