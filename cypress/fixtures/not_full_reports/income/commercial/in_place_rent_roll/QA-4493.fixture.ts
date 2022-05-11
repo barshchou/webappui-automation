@@ -9,11 +9,11 @@ const reportCreationFixture = () => {
     });
 };
 
-const _occupiedleaseStatus: BoweryReports.LeaseStatus = "Occupied";
-const _vacantLeaseStatus: BoweryReports.LeaseStatus = "Vacant";
+const _occupiedleaseStatus = "Occupied";
+const _vacantLeaseStatus = "Vacant";
 
 export default {
     reportCreationData: reportCreationFixture(),
-    occupiedLeaseStatus: _occupiedleaseStatus,
-    vacantLeaseStatus: _vacantLeaseStatus,
+    occupiedLeaseStatus: _occupiedleaseStatus as BoweryReports.LeaseStatus,
+    vacantLeaseStatus: _vacantLeaseStatus as BoweryReports.LeaseStatus
 };
