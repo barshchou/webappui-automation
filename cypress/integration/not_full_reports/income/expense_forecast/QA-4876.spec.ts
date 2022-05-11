@@ -4,8 +4,10 @@ import {createReport, deleteReport} from "../../../../actions/base/baseTest.acti
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Property from "../../../../actions/property/property.manager";
 import Income from "../../../../actions/income/income.manager";
+import { Tag } from "../../../../utils/tags.utils";
 
-describe("Historical expense Electricity Per SF is correctly calculated and displayed", () => {
+describe("Historical expense Electricity Per SF is correctly calculated and displayed",
+{tags:[Tag.snapshot_tests, Tag.expense_forecast,Tag.income]} ,() => {
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
     });
