@@ -401,7 +401,7 @@ class CommercialRentRollActions extends BaseActionsExt<typeof rentRollPage> {
     }
 
     clickEditDiscussionButton(): this {
-        rentRollPage.editDiscussionButton.click({ force: true });
+        this.Shared.editDiscussionButton.click({ force: true });
         return this;
     }
 
@@ -448,7 +448,7 @@ class CommercialRentRollActions extends BaseActionsExt<typeof rentRollPage> {
 
     verifyEditDiscussionButtonsDisplayed(): this {
         rentRollPage.cancelDiscussionEdit.should("be.visible");
-        rentRollPage.editDiscussionButton.should("not.exist");
+        this.Shared.editDiscussionButton.should("not.exist");
         rentRollPage.revertToOriginalButton.should("be.visible");
         rentRollPage.saveDiscussionChanges.should("be.visible");
         return this;

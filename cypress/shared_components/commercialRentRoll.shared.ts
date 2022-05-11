@@ -33,6 +33,8 @@ class CommercialRentRollSharedComponent {
     getAllCellsByRowNumber(rowNumber) {return cy.get(`*[data-qa*='${rowNumber}-cell']`);}
 
     getLeaseDateCellsByName(name) {return cy.xpath(`(//*[contains(@data-qa, 'lease${name}Date')])[position() < last()]`);}
+
+    get editDiscussionButton() {return cy.xpath("//button[.='Edit']");}
 }
 
 export default CommercialRentRollSharedComponent;
