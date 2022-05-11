@@ -24,7 +24,7 @@ describe("[QA-4104] Verify the Market Value generated commentary", () => {
         Report._KeyInfo.Page.iconDefinitionOfMarketValue.trigger("mouseover");
         Report._KeyInfo.Page.tooltipDefinitionOfMarketValue.should("include.text", testData.tooltipText);
 
-        // Need add logic to virify export
+        // Need add logic to verify export
 
         deleteReport(testData.reportCreationData.reportNumber);
     });
