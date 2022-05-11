@@ -381,12 +381,12 @@ class CommercialRentRollActions extends BaseActionsExt<typeof rentRollPage> {
     }
 
     editDiscussion(newCommentary: string): this {
-        rentRollPage.modifiedLabel.should("not.exist");
+        this.Shared.modifiedLabel.should("not.exist");
         this.clickEditDiscussionButton()
             .clearAndEnterNewCommentary(newCommentary)
             .clickSaveDiscussionButton()
             .verifyCommentarySavedText(newCommentary);
-        rentRollPage.modifiedLabel.should("exist");
+        this.Shared.modifiedLabel.should("exist");
         return this;
     }
 
@@ -396,7 +396,7 @@ class CommercialRentRollActions extends BaseActionsExt<typeof rentRollPage> {
     }
 
     clickSaveDiscussionButton(): this {
-        rentRollPage.saveDiscussionChanges.click();
+        this.Shared.saveDiscussionChanges.click();
         return this;
     }
 
@@ -406,18 +406,18 @@ class CommercialRentRollActions extends BaseActionsExt<typeof rentRollPage> {
     }
 
     clickRevertToOriginalButton(): this {
-        rentRollPage.revertToOriginalButton.click();
-        rentRollPage.changesLostModalHeader.should("exist");
+        this.Shared.revertToOriginalButton.click();
+        this.Shared.changesLostModalHeader.should("exist");
         return this;
     }
 
     verifyCommentarySavedText(textToBe: string): this {
-        rentRollPage.commentaryText.should("have.text", textToBe);
+        this.Shared.commentaryText.should("have.text", textToBe);
         return this;
     }
 
     verifyCommentaryTextNotContains(text: string): this {
-        rentRollPage.commentaryText.should("not.contain.text", text);
+        this.Shared.commentaryText.should("not.contain.text", text);
         return this;
     }
 
@@ -432,25 +432,25 @@ class CommercialRentRollActions extends BaseActionsExt<typeof rentRollPage> {
     }
 
     clickCloseButton(): this {
-        rentRollPage.closeButton.click();
+        this.Shared.closeButton.click();
         return this;
     }
 
     clickCancelRevertButton(): this {
-        rentRollPage.cancelRevertButton.click();
+        this.Shared.cancelRevertButton.click();
         return this;
     }
 
     clickYesRevertButton(): this {
-        rentRollPage.yesRevertButton.click();
+        this.Shared.yesRevertButton.click();
         return this;
     }
 
     verifyEditDiscussionButtonsDisplayed(): this {
         rentRollPage.cancelDiscussionEdit.should("be.visible");
         this.Shared.editDiscussionButton.should("not.exist");
-        rentRollPage.revertToOriginalButton.should("be.visible");
-        rentRollPage.saveDiscussionChanges.should("be.visible");
+        this.Shared.revertToOriginalButton.should("be.visible");
+        this.Shared.saveDiscussionChanges.should("be.visible");
         return this;
     }
 

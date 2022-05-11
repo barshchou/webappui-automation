@@ -21,22 +21,6 @@ class CommercialRentRollPage extends BasePage{
 
     getLeaseStatusToChooseByValue(status) {return cy.xpath(`//li[.='${status}']`);}
 
-    get saveDiscussionChanges() {return cy.xpath("//button[.='Save' and not(contains(@data-qa, 'form-save-btn'))]");}
-
-    get modifiedLabel() {return cy.contains("Modified");}
-
-    get revertToOriginalButton() {return cy.xpath("//button[.='Revert to Original']");}
-
-    get changesLostModalHeader() {return cy.contains("Changes will be lost");}
-
-    get commentaryText() {return cy.get("div[data-slate-editor]");}
-
-    get yesRevertButton() {return cy.contains("Yes, revert");}
-
-    get closeButton() {return cy.get("[aria-label=close]");}
-
-    get cancelRevertButton() {return this.yesRevertButton.prev("button");}
-
     get cancelDiscussionEdit() {return cy.xpath("//*[.='Current Commercial Income Discussion']//following::button[.='Cancel'][1]");}
 
     get rentPerSfPerMonthColumnName() {return cy.contains("Rent PSF/Month");}

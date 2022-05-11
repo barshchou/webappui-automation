@@ -38,6 +38,21 @@ class CommercialRentRollSharedComponent {
 
     get discussionTextInput() {return cy.get("[role=textbox]");}
 
+    get saveDiscussionChanges() {return cy.xpath("//button[.='Save' and not(contains(@data-qa, 'form-save-btn'))]");}
+
+    get modifiedLabel() {return cy.contains("Modified");}
+
+    get revertToOriginalButton() {return cy.xpath("//button[.='Revert to Original']");}
+
+    get changesLostModalHeader() {return cy.contains("Changes will be lost");}
+
+    get commentaryText() {return cy.get("div[data-slate-editor]");}
+
+    get yesRevertButton() {return cy.contains("Yes, revert");}
+
+    get closeButton() {return cy.get("[aria-label=close]");}
+
+    get cancelRevertButton() {return this.yesRevertButton.prev("button");}
 }
 
 export default CommercialRentRollSharedComponent;
