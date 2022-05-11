@@ -1,6 +1,7 @@
 import expenseHistoryPage from "../../pages/income/expenseHistory.page";
 import { getNumberFromDollarNumberWithCommas, numberWithCommas } from "../../../utils/numbers.utils";
 import BaseActionsExt from "../base/base.actions.ext";
+import tableExpenseHistoryCellNames from "../../../cypress/enums/expenseHistoryTableRows.enum";
 
 class ExpenseHistoryActions extends BaseActionsExt<typeof expenseHistoryPage>{
 
@@ -26,228 +27,94 @@ class ExpenseHistoryActions extends BaseActionsExt<typeof expenseHistoryPage>{
         return this;
     }
 
-    enterRepairsAndMaintenanceByColIndex(repairsAndMaintenance: number | string, index = 0): ExpenseHistoryActions {
-        if (repairsAndMaintenance === "clear") {
-            expenseHistoryPage.repairsInputs.eq(index).clear();
+    enterIssueByColIndex(issueValue: number | string, tableExpenseHistoryCellNames: string, index = 0,): ExpenseHistoryActions {
+        if (issueValue === "clear") {
+            expenseHistoryPage.getUnifiedEditableAndTotalCells(tableExpenseHistoryCellNames).eq(index).scrollIntoView().dblclick().clear();
         } else {
-            expenseHistoryPage.repairsInputs.eq(index).dblclick().scrollIntoView().clear().realType(`${repairsAndMaintenance}{enter}`);
-            expenseHistoryPage.repairsInputs.eq(index).should("have.text", `$${numberWithCommas(repairsAndMaintenance)}.00`);
+            expenseHistoryPage.getUnifiedEditableAndTotalCells(tableExpenseHistoryCellNames).eq(index).scrollIntoView().dblclick().clear().realType(`${issueValue}{enter}`);
+            expenseHistoryPage.getUnifiedEditableAndTotalCells(tableExpenseHistoryCellNames).eq(index).should("have.text", `$${numberWithCommas(issueValue)}.00`);
         }
         return this;
     }
 
-    /**
-     *
-     * @param {number} index
-     * @returns {ExpenseHistoryActions}
-     */
     checkGrossRevenueCheckboxByColumnIndex(index = 0): ExpenseHistoryActions {
         expenseHistoryPage.grossRevenueCheckboxes.eq(index).check().should("have.value", "true");
         return this;
     }
 
-    enterGrossRevenueByColIndex(revenue: number | string, index = 0): ExpenseHistoryActions {
-        const valueToBe = `$${numberWithCommas(revenue)}`;
-        expenseHistoryPage.grossRevenueInputs.eq(index).clear().type(`${revenue}`).should("have.value", valueToBe);
-        return this;
-    }
-
-    enterRealEstateTaxesByColIndex(taxes: number | string, index = 0): ExpenseHistoryActions {
-        expenseHistoryPage.realEstateTaxesInputs.eq(index).clear().type(`${taxes}`)
-            .should("have.value", `$${numberWithCommas(taxes)}`);
-        return this;
-    }
-
-    enterInsuranceByColIndex(insurance: string | number = 0, index = 0): ExpenseHistoryActions {
-        if (insurance === "clear") {
-            expenseHistoryPage.insuranceInputs.eq(index).clear();
-        } else {
-            expenseHistoryPage.insuranceInputs.eq(index).clear().type(`${insurance}`)
-                .should("have.value", `$${numberWithCommas(insurance)}`);
-        }
-        return this;
-    }
-
-    enterElectricityByColIndex(electricity: number | string, index = 0): ExpenseHistoryActions {
-        expenseHistoryPage.electricityInputs.eq(index).dblclick().scrollIntoView().clear().realType(`${electricity}{enter}`);
-        expenseHistoryPage.electricityInputs.eq(index).should("have.text", `$${numberWithCommas(electricity)}.00`);
-        return this;
-    }
-
-    enterFuelByColIndex(fuel: string | number = 0, index = 0): ExpenseHistoryActions {
-        if (fuel === "clear") {
-            expenseHistoryPage.fuelInputs.eq(index).clear();
-        } else {
-            expenseHistoryPage.fuelInputs.eq(index).dblclick().scrollIntoView().clear().realType(`${fuel}{enter}`);
-            expenseHistoryPage.fuelInputs.eq(index).should("have.text", `$${numberWithCommas(fuel)}.00`);
-        }
-        return this;
-    }
-
-    /**
-     *
-     * @param {number} index
-     * @returns {ExpenseHistoryActions}
-     */
     uncheckFuelCheckboxByColIndex(index = 0): ExpenseHistoryActions {
         expenseHistoryPage.fuelCheckboxes.eq(index).uncheck().should("have.value", "false");
         return this;
     }
 
-    /**
-     *
-     * @param {number} index
-     * @returns {ExpenseHistoryActions}
-     */
     uncheckWaterSewerCheckboxByColIndex(index = 0): ExpenseHistoryActions {
         expenseHistoryPage.waterSewerCheckboxes.eq(index).uncheck().should("have.value", "false");
         return this;
     }
 
-    enterPayrollBenefitsByColIndex(value: number | string, index = 0): ExpenseHistoryActions {
-        expenseHistoryPage.payrollBenefitsInputs.eq(index).clear().type(`${value}`)
-            .should("have.value", `$${numberWithCommas(value)}`);
-        return this;
-    }
-
-    /**
-     *
-     * @param {string} textToBe
-     * @param {number} index
-     * @returns {ExpenseHistoryActions}
-     */
     verifyTotalOpExpensesByColIndex(textToBe: string, index = 0): ExpenseHistoryActions {
-        expenseHistoryPage.totalOpExpenseCells.eq(index).should("have.text", textToBe);
+        expenseHistoryPage.getUnifiedEditableAndTotalCells(tableExpenseHistoryCellNames.total).eq(index).should("have.text", textToBe);
         return this;
     }
 
-    /**
-     *
-     * @param {number} retValue
-     * @param {number} index
-     * @returns {ExpenseHistoryActions}
-     */
     verifyTOEExcludingRETByIndex(retValue: number, index = 0): ExpenseHistoryActions {
-        expenseHistoryPage.totalOpExpenseCells.eq(index).invoke("text").then(toeTotalText => {
+        expenseHistoryPage.getUnifiedEditableAndTotalCells(tableExpenseHistoryCellNames.total).eq(index).invoke("text").then(toeTotalText => {
             const toeTotalNumber = getNumberFromDollarNumberWithCommas(toeTotalText);
             const excludingTextToBe = `$${numberWithCommas((toeTotalNumber - retValue).toFixed(2))}`;
-            expenseHistoryPage.toeExclRealEstTaxesCells.eq(index).should("have.text", excludingTextToBe);
+            expenseHistoryPage.getUnifiedEditableAndTotalCells(tableExpenseHistoryCellNames.totalExcludingTaxes).eq(index).should("have.text", excludingTextToBe);
         });
         return this;
     }
 
-    /**
-     *
-     * @param {number} grossRevenue
-     * @param {number} index
-     * @returns {ExpenseHistoryActions}
-     */
     verifyNetOpIncomeByIndex(grossRevenue: number, index = 0): ExpenseHistoryActions {
-        expenseHistoryPage.totalOpExpenseCells.eq(index).invoke("text").then(toeTotalText => {
+        expenseHistoryPage.getUnifiedEditableAndTotalCells(tableExpenseHistoryCellNames.total).eq(index).invoke("text").then(toeTotalText => {
             const toeTotalNumber = getNumberFromDollarNumberWithCommas(toeTotalText);
             const noeTextToBe = `$${numberWithCommas((grossRevenue - toeTotalNumber).toFixed(2))}`;
-            expenseHistoryPage.netOpIncomeCells.eq(index).should("have.text", noeTextToBe);
+            expenseHistoryPage.getUnifiedEditableAndTotalCells(tableExpenseHistoryCellNames.noi).eq(index).should("have.text", noeTextToBe);
         });
         return this;
     }
 
-    /**
-     * NOTE: please see QA-5202 for more details
-     * @returns {ExpenseHistoryActions}
-     */
+    verifyAverageByCell(cellsName: string): ExpenseHistoryActions {
+        expenseHistoryPage.getUnifiedEditableAndTotalCells(cellsName).then(elements => {
+            const averageNumber = this.getAverageValueFromInputs(elements);
+            expenseHistoryPage.getUnifiedAverageCell(cellsName).should("have.text", averageNumber);
+        });
+        return this;
+    }
+
+    verifyAverageByCellTotal(cellsName: string): ExpenseHistoryActions {
+        expenseHistoryPage.getUnifiedEditableAndTotalCells(cellsName).then(elements => {
+            const toeAvrgToBe = this.getAverageTextFromCells(elements);
+            expenseHistoryPage.getUnifiedAverageCell(cellsName).should("have.text", toeAvrgToBe);
+        });
+        return this;
+    }
+
     verifyAverageTable(): ExpenseHistoryActions {
-        expenseHistoryPage.grossRevenueInputs.then(els => {
-            const grossRevAverageToBe = this.getAverageValueFromInputs(els);
-            expenseHistoryPage.averageGrossRevenueCell.should("have.text", grossRevAverageToBe);
+        tableExpenseHistoryCellNames.operatingExpensesCellsNamesArray.forEach(cellsName => {
+            this.verifyAverageByCell(cellsName);
         });
-        expenseHistoryPage.realEstateTaxesInputs.then(els => {
-            const realEstateAverageToBe = this.getAverageValueFromInputs(els);
-            expenseHistoryPage.averageRealEstateCell.should("have.text", realEstateAverageToBe);
-        });
-        expenseHistoryPage.insuranceInputs.then(els => {
-            const insuranceAverageToBe = this.getAverageValueFromInputs(els);
-            expenseHistoryPage.averageInsuranceCell.should("have.text", insuranceAverageToBe);
-        });
-        expenseHistoryPage.electricityInputs.then(els => {
-            const electricityAverageToBe = this.getAverageValueFromInputs(els);
-            expenseHistoryPage.averageElectricity.should("have.text", electricityAverageToBe);
-        });
-        expenseHistoryPage.fuelInputs.then(els => {
-            const fuelAverageToBe = this.getAverageValueFromInputs(els);
-            expenseHistoryPage.averageFuelCell.should("have.text", fuelAverageToBe);
-        });
-        expenseHistoryPage.waterSewerInputs.then(els => {
-            const waterSewerAvrgToBe = this.getAverageValueFromInputs(els);
-            expenseHistoryPage.averageWaterSewerCell.should("have.text", waterSewerAvrgToBe);
-        });
-        expenseHistoryPage.repairsInputs.then(els => {
-            const repairsAvrgToBe = this.getAverageValueFromInputs(els);
-            expenseHistoryPage.averageRepairsCell.should("have.text", repairsAvrgToBe);
-        });
-        expenseHistoryPage.payrollBenefitsInputs.then(els => {
-            const payrollAvrgToBe = this.getAverageValueFromInputs(els);
-            expenseHistoryPage.averagePayrollCell.should("have.text", payrollAvrgToBe);
-        });
-        expenseHistoryPage.administrativeInputs.then(els => {
-            const administrativeAvrgToBe = this.getAverageValueFromInputs(els);
-            expenseHistoryPage.averageAdministrativeCell.should("have.text", administrativeAvrgToBe);
-        });
-        expenseHistoryPage.professionalInputs.then(els => {
-            const professionalAvrgToBe = this.getAverageValueFromInputs(els);
-            expenseHistoryPage.averageProfessionalCell.should("have.text", professionalAvrgToBe);
-        });
-        expenseHistoryPage.miscellaneousInputs.then(els => {
-            const miscellaneousAvrgToBe = this.getAverageValueFromInputs(els);
-            expenseHistoryPage.averageMiscellaneousCell.should("have.text", miscellaneousAvrgToBe);
-        });
-        expenseHistoryPage.managementInputs.then(els => {
-            const managementAvrgToBe = this.getAverageValueFromInputs(els);
-            expenseHistoryPage.averageManagementCell.should("have.text", managementAvrgToBe);
-        });
-        expenseHistoryPage.replacementInputs.then(els => {
-            const reservesAvrgToBe = this.getAverageValueFromInputs(els);
-            expenseHistoryPage.averageReplacementCell.should("have.text", reservesAvrgToBe);
-        });
-        expenseHistoryPage.totalOpExpenseCells.then(els => {
-            const toeAvrgToBe = this.getAverageTextFromCells(els);
-            expenseHistoryPage.toeAverageCell.should("have.text", toeAvrgToBe);
-        });
-        expenseHistoryPage.toeExclRealEstTaxesCells.then(els => {
-            const toeExclRETAvrgToBe = this.getAverageTextFromCells(els);
-            expenseHistoryPage.toeExclRETAverageCell.should("have.text", toeExclRETAvrgToBe);
-        });
-        expenseHistoryPage.netOpIncomeCells.then(els => {
-            const noeAvrgToBe = this.getAverageTextFromCells(els);
-            expenseHistoryPage.noeAverageCell.should("have.text", noeAvrgToBe);
+        tableExpenseHistoryCellNames.totalOperatingExpensesCellsNamesArray.forEach(cellsName => {
+            this.verifyAverageByCellTotal(cellsName);
         });
         return this;
     }
 
-    /**
-     * @private
-     * @param {JQuery<HTMLElement>} jQueryEls
-     * @returns {string}
-     */
-    getAverageTextFromCells(jQueryEls: JQuery<HTMLElement>): string {
+    private getAverageTextFromCells(jQueryEls: JQuery<HTMLElement>): string {
         let sum = 0;
         for (let i = 0; i < jQueryEls.length; i++) {
             let elNumber = getNumberFromDollarNumberWithCommas(jQueryEls[i].textContent);
             sum += elNumber;
         }
         const firstChar = numberWithCommas((sum / jQueryEls.length).toFixed(2)).charAt(0);
-          if (firstChar === "-") {
+        if (firstChar === "-") {
             return `-$${numberWithCommas((sum / jQueryEls.length).toFixed(2)).substring(1)}`;
-          }
-          return `$${numberWithCommas((sum / jQueryEls.length).toFixed(2))}`;
+        }
+        return `$${numberWithCommas((sum / jQueryEls.length).toFixed(2))}`;
     }
 
-
-    /**
-     * @private
-     * @param {JQuery<HTMLElement>} jQueryElements
-     * @returns {string}
-     */
-    getAverageValueFromInputs(jQueryElements: JQuery<HTMLElement>): string {
+    private getAverageValueFromInputs(jQueryElements: JQuery<HTMLElement>): string {
         let cellsCounter = 0;
         let sum = 0;
         for (let i = 0; i < jQueryElements.length; i++) {
@@ -268,11 +135,6 @@ class ExpenseHistoryActions extends BaseActionsExt<typeof expenseHistoryPage>{
         }
     }
 
-    /**
-     *
-     * @param {string} commToBe
-     * @returns {ExpenseHistoryActions}
-     */
     verifyExpenseHistoryCommentary(commToBe: string): ExpenseHistoryActions {
         expenseHistoryPage.expenseHistoryCommentary.should("have.text", commToBe);
         return this;

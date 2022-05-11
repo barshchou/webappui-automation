@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import reviewExportPage from "../../pages/reviewExport/reviewExport.page";
 import BaseActions from "../base/base.actions";
-
 class ReviewExportActions extends BaseActions {
     get Page() {
         return reviewExportPage;
