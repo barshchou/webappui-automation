@@ -1,9 +1,9 @@
 const tableExpenseHistoryCellNames = {
 
-   operatingExpensesCellsNamesArray: ["grossRevenue", "realEstateTaxes", "insurance", "electricity", "fuel",
+   operatingExpensesCellsNamesArray: [ "grossRevenue", "realEstateTaxes", "insurance", "electricity", "fuel",
       "waterAndSewer", "repairsAndMaintenance", "payrollAndBenefits",
-      "generalAndAdministrative", "legalAndProfessionalFees", "miscellaneous", "management", "reserves"],
-   totalOperatingExpensesCellsNamesArray: ["total", "totalExcludingTaxes", "noi"],
+      "generalAndAdministrative", "legalAndProfessionalFees", "miscellaneous", "management", "reserves" ],
+   totalOperatingExpensesCellsNamesArray: [ "total", "totalExcludingTaxes", "noi" ],
 
    grossRevenue: "grossRevenue",
    realEstateTaxes: "realEstateTaxes",
