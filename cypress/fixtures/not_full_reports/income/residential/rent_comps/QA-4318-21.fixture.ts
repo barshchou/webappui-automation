@@ -23,6 +23,6 @@ const formDataFixture = () => {
 };
 
 export default {
-    reportCreationData: ReportDataCreator.getDefaultReportData("4318-21"),
+    reportCreationData: ReportDataCreator.getReportData("4318-21"),
     formData: Object.freeze(formDataFixture())
 };

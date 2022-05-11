@@ -35,7 +35,7 @@ const rentRollResidentialUnitsFixture = () : BoweryReports.ResidentialUnit[] => 
 };
 
 export default {
-    reportCreationData: ReportDataCreator.getDefaultReportData("4245"),
+    reportCreationData: ReportDataCreator.getReportData("4245"),
     numberOfUnits: 5,
     columnName: "Monthly Total",
     residentialUnits: rentRollResidentialUnitsFixture()

@@ -14,7 +14,7 @@ class NavigationSectionActions extends BaseActions {
         }).as(reportAlias);
         cy.get('[id="review-and-export"]').click();
         if (isWithSave) this.clickYesButton();
-        cy.wait(`@${reportAlias}`);
+        cy.wait(`@${reportAlias}`, {timeout:20000});
         return this;
     }
     
@@ -401,7 +401,7 @@ class NavigationSectionActions extends BaseActions {
         return this;
     }
 
-    navigateToSupportingCapRates(isWithYes: false): NavigationSectionActions {
+    navigateToSupportingCapRates(isWithYes = false): NavigationSectionActions {
         this.clickIncomeApproachButton()
             .clickSupportingCapRates();
         if(isWithYes) {

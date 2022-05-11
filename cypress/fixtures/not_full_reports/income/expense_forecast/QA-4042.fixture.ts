@@ -1,7 +1,7 @@
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 
 const reportCreationFixture = () => {
-    return ReportDataCreator.getDefaultReportData("4042");
+    return ReportDataCreator.getReportData("4042");
 };
 
 const expenseForecastWaterAndSewerFixture = (): BoweryReports.ForecastItem => {
