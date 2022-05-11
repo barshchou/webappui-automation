@@ -19,10 +19,14 @@ namespace BoweryReports {
     export type ReportCreationOptions = {
         incomeValue?: string,
         conclusionValue?: BoweryReports.ConclusionValue,
+        templateValue?: string,
+        address?: string,
         isSalesForcePull?: isSalesForcePull
     }
     export type LeaseDateName = "Start" | "Expiry"
-    export type LeaseStatus = "Occupied" | "Vacant"
+    export type LeaseStatus = "Occupied" | "Vacant" | "Employee"
+    export type ImageType = "Interior Images" | "Exterior Images";
+    export type InputType = "drag-n-drop" | "input";
     export type UnitSF = "unit" | "sf"
     export type PerUnitPerSF = "Per Unit" | "Per SF"
     export type ForecastItemBasis = "insurance" | "electricity"
@@ -52,8 +56,15 @@ namespace BoweryReports {
         More Unit Groups Values will be added after other values types added
         */
         export type GroupsValues = CommercialUnitsUseValues | CommercialUnitsGradeValues | CommercialUnitsFacadeValues | CommercialUnitsStateValues 
-        | CommercialUnitsCeilingHeightValues | CommercialUnitsLocationValues | CommercialUnitsStreetTypeValues;
+        | CommercialUnitsCeilingHeightValues | CommercialUnitsLocationValues | CommercialUnitsStreetTypeValues | CommercialUnitsFrontageValues;
     }
+    export type CommercialUnitsFrontageValues = "small" | "medium" | "large" | "other"; 
+
+    /*
+    More Unit Groups Values will be added after other values types added
+     */
+    export type CommercialUnitGroupsValues = CommercialUnitsUseValues | CommercialUnitsGradeValues | CommercialUnitsFacadeValues | CommercialUnitsCeilingHeightValues | CommercialUnitsFrontageValues;
+
 
     export type ForecastItem = { 
         name: BoweryReports.ForecastItemBasis | string, 
@@ -68,12 +79,14 @@ namespace BoweryReports {
     export type BuildingDescription = {grossArea: number, numberOfUnits: number}
 
     export type ResidentialUnit = {
-        footage: number,
+        footage?: number,
+        rooms?: number,
         monthlyRent: number,
-        leaseStatus: BoweryReports.LeaseStatus
+        leaseStatus?: BoweryReports.LeaseStatus
     }
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 namespace BoweryAutomation {
     /**
      * Base data for report setup
