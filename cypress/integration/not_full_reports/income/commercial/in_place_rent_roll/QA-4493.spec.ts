@@ -2,8 +2,10 @@ import testData from "../../../../../fixtures/not_full_reports/income/commercial
 import { _NavigationSection } from "../../../../../actions/base";
 import { Income } from "../../../../../actions";
 import {createReport, deleteReport} from "../../../../../actions/base/baseTest.actions";
+import { Tag } from "../../../../../utils/tags.utils";
 
-describe("Verify the Unsaved changes modal functionality on the In-Place Rent Roll page", () => {
+describe("Verify the Unsaved changes modal functionality on the In-Place Rent Roll page",
+    {tags:[ Tag.income, Tag.commercial, Tag.in_place_rent_roll ]}, () => {
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
     });
