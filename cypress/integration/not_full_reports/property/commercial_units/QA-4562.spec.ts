@@ -2,9 +2,10 @@ import testData from "../../../../fixtures/not_full_reports/property/commercial_
 import { Property } from "../../../../actions";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
+import { Tag } from "../../../../utils/tags.utils";
 
-describe("Verify the functionality of the Floor checkbox", () => {
-
+describe("Verify the functionality of the Floor checkbox", 
+{ tags:[ Tag.property, Tag.commercial_unit ] }, () => {
     before("Login, create report", () => {
 
         cy.stepInfo(` 1. Report creation and several commercial units addition`);
