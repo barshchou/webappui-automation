@@ -1,6 +1,6 @@
 import rentRollPage from "../../../pages/income/commercial/rentRoll.page";
-import {isDateHasCorrectFormat} from "../../../../utils/date.utils";
-import {numberWithCommas} from "../../../../utils/numbers.utils";
+import { isDateHasCorrectFormat } from "../../../../utils/date.utils";
+import { numberWithCommas } from "../../../../utils/numbers.utils";
 import BaseActionsExt from "../../base/base.actions.ext";
 import CommercialRentRollSharedComponent from "../../../shared_components/commercialRentRoll.shared";
 
@@ -86,7 +86,7 @@ class CommercialRentRollActions extends BaseActionsExt<typeof rentRollPage> {
     }
 
     pressDeleteLeaseStatusByRow(rowNumber = 0): this {
-        this.Shared.leaseStatusCells.eq(rowNumber).trigger("keydown", {keyCode: 46})
+        this.Shared.leaseStatusCells.eq(rowNumber).trigger("keydown", { keyCode: 46 })
             .should("have.text", "");
         return this;
     }
@@ -179,7 +179,7 @@ class CommercialRentRollActions extends BaseActionsExt<typeof rentRollPage> {
         return this;
     }
 
-    enterLeaseDateByRowNumber(cellName: BoweryReports.LeaseDateName , date: string, rowNumber = 0): this {
+    enterLeaseDateByRowNumber(cellName: BoweryReports.LeaseDateName, date: string, rowNumber = 0): this {
         this.Shared.getLeaseDateCellsByName(cellName).eq(rowNumber).dblclick({ force: true });
         this.Shared.textareaToInput.clear().type(date).type("{enter}");
         return this;
@@ -203,7 +203,7 @@ class CommercialRentRollActions extends BaseActionsExt<typeof rentRollPage> {
     }
 
     enterAnnualRentPerSFByRowNumber(value: number, rowNumber = 0): this {
-        this.Shared.annualRentPerSFCells.eq(rowNumber).should("not.have.class", "readOnly").dblclick({force:true});
+        this.Shared.annualRentPerSFCells.eq(rowNumber).should("not.have.class", "readOnly").dblclick({ force:true });
         this.Shared.textareaToInput.clear().type(`${value}`).type("{enter}");
         const textToBe = `$${numberWithCommas(value.toFixed(2))}`;
         this.verifyRentPerSFAnnuallyByRowNumberCellText(textToBe, rowNumber);
@@ -211,7 +211,7 @@ class CommercialRentRollActions extends BaseActionsExt<typeof rentRollPage> {
     }
 
     enterMonthlyRentPerSFByRowNumber(value: number, rowNumber = 0): this {
-        this.Shared.monthlyRentPerSFCells.eq(rowNumber).should("not.have.class", "readOnly").dblclick({force:true});
+        this.Shared.monthlyRentPerSFCells.eq(rowNumber).should("not.have.class", "readOnly").dblclick({ force:true });
         this.Shared.textareaToInput.clear().type(`${value}`).type("{enter}");
         const textToBe = `$${numberWithCommas(value.toFixed(2))}`;
         this.Shared.monthlyRentPerSFCells.eq(rowNumber).should("have.text", textToBe);
@@ -333,7 +333,7 @@ class CommercialRentRollActions extends BaseActionsExt<typeof rentRollPage> {
     }
 
     verifyMonthlyRentTotal(leaseStatuses: Array<BoweryReports.LeaseStatus>, monthlyRents: Array<number>): this {
-        const textToBe = this.getTotalRentTextToBe(leaseStatuses, monthlyRents);
+        const textToBe = CommercialRentRollActions.getTotalRentTextToBe(leaseStatuses, monthlyRents);
         this.Shared.monthlyRentTotal.should("have.text", `$${textToBe}`);
         return this;
     }
@@ -348,7 +348,7 @@ class CommercialRentRollActions extends BaseActionsExt<typeof rentRollPage> {
         return this;
     }
 
-    private getTotalRentTextToBe(leaseStatuses: Array<BoweryReports.LeaseStatus>, rentsValues: Array<number>): string {
+    private static getTotalRentTextToBe(leaseStatuses: Array<BoweryReports.LeaseStatus>, rentsValues: Array<number>): string {
         let rentTotalToBe = 0;
         for (let i = 0; i < leaseStatuses.length; i++) {
             if (leaseStatuses[i] === "Vacant") {
@@ -360,7 +360,7 @@ class CommercialRentRollActions extends BaseActionsExt<typeof rentRollPage> {
     }
 
     verifyAnnuallyRentTotal(leaseStatuses: Array<BoweryReports.LeaseStatus>, annualRents: Array<number>): this {
-        const textToBe = this.getTotalRentTextToBe(leaseStatuses, annualRents);
+        const textToBe = CommercialRentRollActions.getTotalRentTextToBe(leaseStatuses, annualRents);
         this.Shared.annualRentTotal.should("have.text", `$${textToBe}`);
         return this;
     }

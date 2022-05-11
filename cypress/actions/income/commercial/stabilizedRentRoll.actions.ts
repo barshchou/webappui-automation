@@ -1,5 +1,5 @@
 import stabRenRollPage from "../../../pages/income/commercial/stabilizedRentRoll.page";
-import {numberWithCommas} from "../../../../utils/numbers.utils";
+import { numberWithCommas } from "../../../../utils/numbers.utils";
 import BaseActionsExt from "../../base/base.actions.ext";
 import CommercialRentRollSharedComponent from "../../../shared_components/commercialRentRoll.shared";
 
