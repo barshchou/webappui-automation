@@ -1,6 +1,6 @@
 import BaseActions from "../base/base.actions";
 import highestBestUsePage from "../../pages/final/highestBestUse.page";
-import { numberWithCommas } from "../../../utils/numbers.utils";
+import {numberWithCommas} from "../../../utils/numbers.utils";
 
 class HighestBestUseActions extends BaseActions {
 

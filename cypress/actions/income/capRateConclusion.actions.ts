@@ -1,6 +1,6 @@
 import BaseActions from "../base/base.actions";
 import capRateConclusionPage from "../../pages/income/capRateConclusion.page";
-import { getNumberFromDollarNumberWithCommas, numberWithCommas } from "../../../utils/numbers.utils";
+import {getNumberFromDollarNumberWithCommas, numberWithCommas} from "../../../utils/numbers.utils";
 
 class CapRateConclusionActions extends BaseActions {
 

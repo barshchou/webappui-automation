@@ -1,6 +1,6 @@
 import BaseActions from "../base/base.actions";
 import marketPage from "../../pages/property/market.page";
-import { getQuarter, getYearFromDate, isCorrectQuarter } from "../../../utils/date.utils";
+import {getQuarter, getYearFromDate, isCorrectQuarter} from "../../../utils/date.utils";
 
 class MarketActions extends BaseActions{
     /**

@@ -1,5 +1,5 @@
 import testData from "../../../../../fixtures/not_full_reports/income/residential/rent_comps/QA-4268.fixture";
-import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
+import {createReport, deleteReport} from "../../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../../actions/base/navigationSection.actions";
 import Income from "../../../../../actions/income/income.manager";
 

@@ -5,7 +5,7 @@ import {
     isHalfDecimalPart,
     numberWithCommas
 } from "../../../../utils/numbers.utils";
-import { isProdEnv } from "../../../../utils/env.utils";
+import {isProdEnv} from "../../../../utils/env.utils";
 import BaseActionsExt from "../../base/base.actions.ext";
 
 class InPlaceRentRollActions extends BaseActionsExt<typeof rentRollPage> {
@@ -34,8 +34,8 @@ class InPlaceRentRollActions extends BaseActionsExt<typeof rentRollPage> {
 
     verifyNumberOfIsInspectedRows(unitsNumber: string | number): InPlaceRentRollActions {
         if (unitsNumber !== 0) {
-            rentRollPage.isInspectedColumnCells.first().scrollIntoView({ duration: 2000 });
-            rentRollPage.isInspectedColumnCells.last().scrollIntoView({ duration: 2000 });
+            rentRollPage.isInspectedColumnCells.first().scrollIntoView({duration: 2000});
+            rentRollPage.isInspectedColumnCells.last().scrollIntoView({duration: 2000});
         }
         rentRollPage.isInspectedColumnCells.should("have.length", unitsNumber);
         return this;

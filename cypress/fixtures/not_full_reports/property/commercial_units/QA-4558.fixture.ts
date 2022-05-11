@@ -1,11 +1,11 @@
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 import Enums from "../../../../enums/enums";
 
-const _useRadios: BoweryReports.CommercialUnitsUseValues[] = [ "retail", "office", "medical", "community", "industrial",
-    "other", "undetermined" ];
+const _useRadios: BoweryReports.CommercialUnitsUseValues[] = ["retail", "office", "medical", "community", "industrial",
+    "other", "undetermined"];
 
-const _useTexts: BoweryReports.CommercialUnitsUseTexts[] = [ "Retail", "Office", "Medical Office",
-    "Community Facility", "Industrial", "Jeronimo", "Undetermined" ];
+const _useTexts: BoweryReports.CommercialUnitsUseTexts[] = ["Retail", "Office", "Medical Office",
+    "Community Facility", "Industrial", "Jeronimo", "Undetermined"];
 
 const _defaultUse: BoweryReports.CommercialUnitsUseValues = "undetermined";
 
@@ -26,5 +26,5 @@ export default {
     useRadios: _useRadios,
     otherValue: _otherValue,
     useTexts: _useTexts,
-    vcLossPercentages: [ 5, 2, 15, 24, 11, 49, 7 ]
+    vcLossPercentages: [5, 2, 15, 24, 11, 49, 7]
 };

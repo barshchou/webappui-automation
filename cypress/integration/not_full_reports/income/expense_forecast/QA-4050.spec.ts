@@ -1,7 +1,7 @@
 import testData from "../../../../fixtures/not_full_reports/income/expense_forecast/QA-4050.fixture";
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Income from "../../../../actions/income/income.manager";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import {createReport, deleteReport} from "../../../../actions/base/baseTest.actions";
 
 describe(`Verify that Generated Commentary for Total Operating Expenses 
                 is updated on the Expense Forecast page`, () => {

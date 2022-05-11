@@ -14,7 +14,7 @@ class NavigationSectionActions extends BaseActions {
         }).as(reportAlias);
         cy.get('[id="review-and-export"]').click();
         if (isWithSave) this.clickYesButton();
-        cy.wait(`@${reportAlias}`, { timeout:20000 });
+        cy.wait(`@${reportAlias}`, {timeout:20000});
         return this;
     }
     

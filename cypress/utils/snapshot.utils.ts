@@ -43,12 +43,12 @@ export const recordDOM_Snapshot = () => {
     $head.find("script").empty();
     const existingStyles = $head.find('link[rel="stylesheet"],style');
 
-    headStyles.forEach((style, index) => {
+    headStyles.forEach((style,index) => {
         if(style.href){
             //
         }
         else{
-            _replaceStyle($head, existingStyles[index], style);
+            _replaceStyle($head,existingStyles[index],style);
         }
     });
     

@@ -1,5 +1,5 @@
 import testData from "../../../../fixtures/not_full_reports/income/pro_forma/QA-5054.fixture";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import {createReport, deleteReport} from "../../../../actions/base/baseTest.actions";
 import { Income } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
 import enums from "../../../../enums/enums";

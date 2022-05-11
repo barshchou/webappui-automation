@@ -1,9 +1,9 @@
 import testData from "../../../../../fixtures/not_full_reports/income/residential/rent_comps/QA-4267.fixture";
-import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
+import {createReport, deleteReport} from "../../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../../actions/base/navigationSection.actions";
 import Income from "../../../../../actions/income/income.manager";
 import RentCompsPage from "../../../../../pages/income/residential/rent_comps/rentComps.page";
-import { uppercaseFirstLetterEachWord } from "../../../../../../utils/string.utils";
+import {uppercaseFirstLetterEachWord} from "../../../../../../utils/string.utils";
 
 describe("Verify the Unit Type drop-down field", () => {
     before("login, create report", () => {

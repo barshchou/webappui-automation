@@ -1,6 +1,6 @@
 import BaseActions from "../base/base.actions";
 import siteDescriptionPage from "../../pages/property/siteDescription.page";
-import { numberWithCommas } from "../../../utils/numbers.utils";
+import {numberWithCommas} from "../../../utils/numbers.utils";
 
 class SiteDescriptionActions extends BaseActions{
 

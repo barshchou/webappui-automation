@@ -1,6 +1,6 @@
 import BaseActions from "../base/base.actions";
 import capRateCompsPage from "../../pages/final/capRateComps.page";
-import { isDateHasCorrectFormat } from "../../../utils/date.utils";
+import {isDateHasCorrectFormat} from "../../../utils/date.utils";
 
 class CapRateCompsActions extends BaseActions {
 

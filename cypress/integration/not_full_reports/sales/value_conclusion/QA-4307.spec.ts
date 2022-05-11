@@ -2,7 +2,7 @@ import testData from "../../../../fixtures/not_full_reports/sales/value_conclusi
 import Report from "../../../../actions/report/report.manager";
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Sales from "../../../../actions/sales/sales.manager";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import {createReport, deleteReport} from "../../../../actions/base/baseTest.actions";
 
 describe(`As Is Market Value -> Time Period date is pulled from Report -> Key Info -> 
                 Date of validation (As is)`, () => {

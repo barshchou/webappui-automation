@@ -1,7 +1,7 @@
 import testData from "../../../../fixtures/not_full_reports/sales/adjust_comps/QA-4109.fixture";
 import Sales from "../../../../actions/sales/sales.manager";
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import {createReport, deleteReport} from "../../../../actions/base/baseTest.actions";
 
 describe("Adjusted Price per Residential Unit in Sales Adjustment Grid is calculated with correct formula", () => {
 

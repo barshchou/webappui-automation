@@ -1,6 +1,6 @@
 import BaseActions from "../base/base.actions";
 import zoningPage from "../../pages/property/zoning.page";
-import { numberWithCommas } from "../../../utils/numbers.utils";
+import {numberWithCommas} from "../../../utils/numbers.utils";
 
 class ZoningActions extends BaseActions {
 
@@ -177,8 +177,8 @@ class ZoningActions extends BaseActions {
         const permittedUsesText = this.getTextForCommentaryFromNamesArray(zoningUsesData.permittedUses, "use");
         const currentUsesText = this.getTextForCommentaryFromNamesArray(zoningUsesData.currentUses, "property");
         const conformingText = zoningUsesData.isConformable ? "conforming" : "non-conforming";
-        const commentaryObject = { zones: zonesTextToBe, conformable: conformableText, permittedUses: permittedUsesText,
-            currentUses: currentUsesText, conforming: conformingText, address: zoningUsesData.streetAddress };
+        const commentaryObject = {zones: zonesTextToBe, conformable: conformableText, permittedUses: permittedUsesText,
+            currentUses: currentUsesText, conforming: conformingText, address: zoningUsesData.streetAddress};
         zoningPage.conformingUseCommentary.should("have.text", this.getConformingUseCommentary(commentaryObject));
         return this;
     }

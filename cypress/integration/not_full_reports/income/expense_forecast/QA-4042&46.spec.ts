@@ -1,7 +1,7 @@
 import testData from "../../../../fixtures/not_full_reports/income/expense_forecast/QA-4042.fixture";
-import { _NavigationSection } from "../../../../actions/base";
+import { _NavigationSection} from "../../../../actions/base";
 import { Income } from "../../../../actions";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import {createReport, deleteReport} from "../../../../actions/base/baseTest.actions";
 
 describe(`Verify that Generated Commentary are updated on the Expense Forecast page`, () => {
 

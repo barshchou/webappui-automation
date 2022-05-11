@@ -1,6 +1,6 @@
 import BaseActions from "../base/base.actions";
 import historyPage from "../../pages/property/history.page";
-import { isDateHasCorrectFormat } from "../../../utils/date.utils";
+import {isDateHasCorrectFormat} from "../../../utils/date.utils";
 import {
     cutDecimalPartToNumberOfDigits,
     isHasDecimalPartMoreNumberOfDigits,

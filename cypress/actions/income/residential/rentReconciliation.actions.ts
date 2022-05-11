@@ -1,6 +1,6 @@
 import BaseActions from "../../base/base.actions";
 import rentReconciliationPage from "../../../pages/income/residential/rentReconciliation.page";
-import { numberWithCommas } from "../../../../utils/numbers.utils";
+import {numberWithCommas} from "../../../../utils/numbers.utils";
 
 class RentReconciliationActions extends BaseActions{
 

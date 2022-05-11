@@ -1,11 +1,11 @@
 import testData from "../../../../../fixtures/not_full_reports/income/commercial/in_place_rent_roll/QA-4385&86.fixture";
 import Income from "../../../../../actions/income/income.manager";
-import { getTodayDateString } from "../../../../../../utils/date.utils";
+import {getTodayDateString} from "../../../../../../utils/date.utils";
 import NavigationSection from "../../../../../actions/base/navigationSection.actions";
-import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
+import {createReport, deleteReport} from "../../../../../actions/base/baseTest.actions";
 
 describe("Verify the Dates columns in the grid", () => {
-    const cellDatesNames: BoweryReports.LeaseDateName[] = [ "Start", "Expiry" ];
+    const cellDatesNames: BoweryReports.LeaseDateName[] = ["Start", "Expiry"];
 
     beforeEach("Login, create report", () => {
         createReport(testData.reportCreationData);

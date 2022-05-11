@@ -9,7 +9,7 @@ const reportCreationFixture = () => {
 
 const sortByOptions = () => {
     return [
-        "Newest", "Oldest", "Largest", "Smallest" ];
+        "Newest", "Oldest", "Largest", "Smallest"];
 };
 
 export default {

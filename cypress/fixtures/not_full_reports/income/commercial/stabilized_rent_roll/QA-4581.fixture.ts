@@ -12,7 +12,7 @@ export default {
     }),
     buildingDescription: _buildingDescription,
     numberOfCommercialUnits: 3,
-    isInspected: [ true, false, true ],
-    leaseStatuses: [ "Vacant", "Occupied", "Vacant" ] as Array<BoweryReports.LeaseStatus>,
-    rentToBe: [ 100, 0, 150 ]
+    isInspected: [true, false, true],
+    leaseStatuses: ["Vacant", "Occupied", "Vacant"] as Array<BoweryReports.LeaseStatus>,
+    rentToBe: [100, 0, 150]
 };

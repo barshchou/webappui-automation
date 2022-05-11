@@ -1,6 +1,6 @@
 import unitGroupsPage from "../../../pages/income/residential/unitGroups.page";
 import BaseActions from "../../base/base.actions";
-import { numberWithCommas } from "../../../../utils/numbers.utils";
+import {numberWithCommas} from "../../../../utils/numbers.utils";
 
 class UnitGroupsActions extends BaseActions {
 

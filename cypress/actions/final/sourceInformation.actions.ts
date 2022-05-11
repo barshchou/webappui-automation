@@ -3,31 +3,31 @@ import sourceInformationPage from "../../pages/final/sourceInformation.page";
 
 class SourceInformationActions extends BaseActions {
 
-    get siteSizeDefaultSources() {return [ "Public Record" ];}
+    get siteSizeDefaultSources() {return ["Public Record"];}
 
-    get excessSurplusLandDefaultSources() {return [ "Tax Map" ];}
+    get excessSurplusLandDefaultSources() {return ["Tax Map"];}
 
-    get grossSizeUnitsDefaultSources() {return [ "Public Record" ];}
+    get grossSizeUnitsDefaultSources() {return ["Public Record"];}
 
-    get residentialSFDefaultSources() {return [ "Appraiser's Estimate", "Inspection" ];}
+    get residentialSFDefaultSources() {return ["Appraiser's Estimate", "Inspection"];}
 
-    get numberOfBuildingsDefaultSources() {return [ "Inspection" ];}
+    get numberOfBuildingsDefaultSources() {return ["Inspection"];}
 
-    get amenitiesDefaultSources() {return [ "Inspection" ];}
+    get amenitiesDefaultSources() {return ["Inspection"];}
 
-    get deferredMaintenanceDefaultSources() {return [ "Inspection" ];}
+    get deferredMaintenanceDefaultSources() {return ["Inspection"];}
 
-    get areaAnalysisDefaultSources() {return [ "Bureau of Labor Statistics" ];}
+    get areaAnalysisDefaultSources() {return ["Bureau of Labor Statistics"];}
 
-    get incomeDataDefaultSources() {return [ "Owner", "Market Forecast" ];}
+    get incomeDataDefaultSources() {return ["Owner", "Market Forecast"];}
 
-    get expenseDataDefaultSources() {return [ "Owner", "Expense Comparables" ];}
+    get expenseDataDefaultSources() {return ["Owner", "Expense Comparables"];}
 
-    get architecturalPlansDefaultSources() {return [ "Owner" ];}
+    get architecturalPlansDefaultSources() {return ["Owner"];}
 
-    get comparableRentalDataDefaultSources() {return [ "CoStar", "Primary Source" ];}
+    get comparableRentalDataDefaultSources() {return ["CoStar", "Primary Source"];}
 
-    get comparableSalesDataDefaultSources() {return [ "CoStar", "Public Record", "Primary Source" ];}
+    get comparableSalesDataDefaultSources() {return ["CoStar", "Public Record", "Primary Source"];}
 
     verifySourceLabelText(sourceLabel, textToBe) {
         expect(sourceLabel.text()).to.eq(textToBe);

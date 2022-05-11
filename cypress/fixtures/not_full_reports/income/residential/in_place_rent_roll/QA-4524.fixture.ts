@@ -5,6 +5,6 @@ export default {
     numberOfUnits: 1,
     labelAndColumn: "Outdoor Space",
     rentType: "Market Rate",
-    spaceOptions: [ "None", "Backyard", "Balcony", "Roof", "Terrace" ],
+    spaceOptions: ["None", "Backyard", "Balcony", "Roof", "Terrace"],
     radioValue: "bedroomAndOutdoorSpace"
 };

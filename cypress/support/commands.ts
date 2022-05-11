@@ -1,7 +1,7 @@
 import { addMatchImageSnapshotCommand } from 'cypress-image-snapshot/command';
 import "cypress-file-upload";
 import "cypress-localstorage-commands";
-import { getEnvUrl } from "../../utils/env.utils";
+import {getEnvUrl} from "../../utils/env.utils";
 
 //#region plugin commands initialization
 addMatchImageSnapshotCommand({

@@ -1,6 +1,6 @@
 import BaseActions from "../../base/base.actions";
 import laundryPage from "../../../pages/income/miscellaneous/laundry.page";
-import { numberWithCommas } from "../../../../utils/numbers.utils";
+import {numberWithCommas} from "../../../../utils/numbers.utils";
 
 class LaundryActions extends BaseActions{
 

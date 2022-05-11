@@ -1,6 +1,6 @@
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 
-const _repairsItem: BoweryReports.ForecastItem = { name: "repairsAndMaintenance", basis: "unit", };
+const _repairsItem: BoweryReports.ForecastItem = {name: "repairsAndMaintenance", basis: "unit",};
 const _comparables: BoweryReports.Comparable[] = [
     {
       address: "6001 S Sacramento Ave",

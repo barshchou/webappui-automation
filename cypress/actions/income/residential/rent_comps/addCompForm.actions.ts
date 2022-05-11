@@ -1,6 +1,6 @@
 import addCompFormPage from "../../../../pages/income/residential/rent_comps/addCompForm.page";
-import { getTodayDateString, getTodayDay, isDateHasCorrectFormat } from "../../../../../utils/date.utils";
-import { isDecimal, isHalfDecimalPart, numberWithCommas } from "../../../../../utils/numbers.utils";
+import {getTodayDateString, getTodayDay, isDateHasCorrectFormat} from "../../../../../utils/date.utils";
+import {isDecimal, isHalfDecimalPart, numberWithCommas} from "../../../../../utils/numbers.utils";
 import BaseActions from "../../../base/base.actions";
 
 class AddCompFormActions extends BaseActions {
@@ -96,12 +96,12 @@ class AddCompFormActions extends BaseActions {
     }
 
     clickSourceOfInfoDropdown(): AddCompFormActions {
-        addCompFormPage.sourceOfInfoDropdown.click({ force:true });
+        addCompFormPage.sourceOfInfoDropdown.click({force:true});
         return this;
     }
 
     selectSourceOfInfoByValue(value: string): AddCompFormActions {
-        addCompFormPage.getSourceOfInfoByValue(value).click({ force:true });
+        addCompFormPage.getSourceOfInfoByValue(value).click({force:true});
         return this;
     }
 
@@ -187,14 +187,14 @@ class AddCompFormActions extends BaseActions {
     checkCheckboxByQaAttr(attribute: string): AddCompFormActions {
         addCompFormPage.getCheckboxByDataQaAttr(attribute)
             .should("have.value", "false")
-            .scrollIntoView().check({ force:true }).should("have.value", "true");
+            .scrollIntoView().check({force:true}).should("have.value", "true");
         return this;
     }
 
     uncheckCheckboxByQaAttr(attribute: string): AddCompFormActions {
         addCompFormPage.getCheckboxByDataQaAttr(attribute)
             .should("have.value", "true")
-            .scrollIntoView().uncheck({ force:true }).should("have.value", "false");
+            .scrollIntoView().uncheck({force:true}).should("have.value", "false");
         return this;
     }
 

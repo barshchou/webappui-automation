@@ -1,7 +1,7 @@
 import BaseActions from "../base/base.actions";
 import mapsPage from "../../pages/property/maps.page";
-import { cutDecimalPartToNumberOfDigits, isHasDecimalPartMoreNumberOfDigits } from "../../../utils/numbers.utils";
-import { getUploadFixture } from "../../../utils/fixtures.utils";
+import {cutDecimalPartToNumberOfDigits, isHasDecimalPartMoreNumberOfDigits} from "../../../utils/numbers.utils";
+import {getUploadFixture} from "../../../utils/fixtures.utils";
 
 class MapsActions extends BaseActions{
 

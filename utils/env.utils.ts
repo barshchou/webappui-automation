@@ -1,4 +1,4 @@
-import { cutLastLetter } from "./string.utils";
+import {cutLastLetter} from "./string.utils";
 import Enums from "../cypress/enums/enums";
 
 export const getEnvUrl = () => {

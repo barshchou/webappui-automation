@@ -6,7 +6,7 @@ const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreat
     conclusionValue: Enums.VALUE_CONCLUSION_TYPE.AS_COMPLETE
 });
 
-const _stateValues: Array<BoweryReports.CommercialUnitsStateValues> = [ "finished", "unfinished", "vanilla box", "other" ];
+const _stateValues: Array<BoweryReports.CommercialUnitsStateValues> = ["finished", "unfinished", "vanilla box", "other"];
 const _groupName: BoweryReports.CommercialUnitsGroups = "State";
 
 export default {

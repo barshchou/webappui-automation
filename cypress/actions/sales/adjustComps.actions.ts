@@ -63,7 +63,7 @@ class AdjustCompsActions extends BaseActions {
     }
 
     clickAddOtherAdjustmentButton(): AdjustCompsActions {
-        adjustCompsPage.addOtherAdjustmentButton.click({ force: true });
+        adjustCompsPage.addOtherAdjustmentButton.click({force: true});
         return this;
     }
 

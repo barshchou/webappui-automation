@@ -5,16 +5,16 @@ const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreat
         incomeValue: Enums.INCOME_TYPE.BOTH
     });
 
-const _leaseStatuses: Array<BoweryReports.LeaseStatus> = [ "Occupied", "Occupied" ];
+const _leaseStatuses: Array<BoweryReports.LeaseStatus> = ["Occupied", "Occupied"];
 
 export default {
     reportCreationData: _reportCreationData,
     grossBuildingArea: 3150,
     numberOfResidentialUnits: 2,
     numberOfCommercialUnits: 2,
-    listOfUnitsSF: [ 1000, 2000 ],
+    listOfUnitsSF: [1000, 2000],
     leaseStatuses: _leaseStatuses,
-    rentsPsf: [ 100, 120 ],
+    rentsPsf: [100, 120],
     useValue: "undetermined",
     useText: "Undetermined",
     comUseVCLossPercentage: 3,
