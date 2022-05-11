@@ -1,11 +1,11 @@
-import stabRenRollPage from "../../../pages/income/commercial/stabilizedRentRoll.page";
+import stabRentRollPage from "../../../pages/income/commercial/stabilizedRentRoll.page";
 import {numberWithCommas} from "../../../../utils/numbers.utils";
 import BaseActionsExt from "../../base/base.actions.ext";
 
-class StabilizedRentRollActions extends BaseActionsExt<typeof stabRenRollPage>{
+class StabilizedRentRollActions extends BaseActionsExt<typeof stabRentRollPage>{
 
     verifyIsInspectedChecked(rowNumber= 0): this {
-        stabRenRollPage.elementToVerifyIsInspected.eq(rowNumber).should("have.css", "background-color", "rgb(66, 96, 211)");
+        stabRentRollPage.elementToVerifyIsInspected.eq(rowNumber).should("have.css", "background-color", "rgb(66, 96, 211)");
         return this;
     }
 
@@ -19,7 +19,7 @@ class StabilizedRentRollActions extends BaseActionsExt<typeof stabRenRollPage>{
     }
 
     verifyThatPageIsOpened(): this {
-        stabRenRollPage.stabilizedRentRollheaderSection.should("be.visible");
+        stabRentRollPage.stabilizedRentRollheaderSection.should("be.visible");
         cy.url().then(url => {
             let urlObj = new URL(url);
             cy.log("Check whether current URL ends with '/commercial-projected-rent-roll'");
@@ -29,7 +29,7 @@ class StabilizedRentRollActions extends BaseActionsExt<typeof stabRenRollPage>{
     }
 
     verifyLeaseStatusByRow(leaseStatus: BoweryReports.LeaseStatus, rowNumber = 0): this {
-        stabRenRollPage.leaseStatusCells.eq(rowNumber).should("contain.text", leaseStatus);
+        stabRentRollPage.leaseStatusCells.eq(rowNumber).should("contain.text", leaseStatus);
         return this;
     }
 
@@ -42,7 +42,7 @@ class StabilizedRentRollActions extends BaseActionsExt<typeof stabRenRollPage>{
 
     verifyTenantNameByRow(name: string, leaseStatus: BoweryReports.LeaseStatus, rowNumber = 0): this {
         let textToBe = leaseStatus === "Vacant" ? `Commercial Unit ${rowNumber + 1}` : name;
-        stabRenRollPage.tenantNameCells.eq(rowNumber).should("have.text", textToBe);
+        stabRentRollPage.tenantNameCells.eq(rowNumber).should("have.text", textToBe);
         return this;
     }
 
@@ -54,7 +54,7 @@ class StabilizedRentRollActions extends BaseActionsExt<typeof stabRenRollPage>{
     }
 
     verifyUseCellByRow(useText: BoweryReports.CommercialUnitsUseTexts, rowNumber = 0): this {
-        stabRenRollPage.useCells.eq(rowNumber).should("have.text", useText);
+        stabRentRollPage.useCells.eq(rowNumber).should("have.text", useText);
         return this;
     }
 
@@ -67,7 +67,7 @@ class StabilizedRentRollActions extends BaseActionsExt<typeof stabRenRollPage>{
 
     verifySfCellByRow(squareFeet: string | number, rowNumber = 0): this {
         const textToBe = typeof squareFeet === "string" ? squareFeet : numberWithCommas(squareFeet);
-        stabRenRollPage.sfCells.eq(rowNumber).should("have.text", textToBe);
+        stabRentRollPage.sfCells.eq(rowNumber).should("have.text", textToBe);
         return this;
     }
 
@@ -79,12 +79,12 @@ class StabilizedRentRollActions extends BaseActionsExt<typeof stabRenRollPage>{
     }
 
     verifyAnnualRentByRow(rentToBe: string, rowNumber: number): this{
-        stabRenRollPage.annualRentCells.eq(rowNumber).should("contain.text", rentToBe);
+        stabRentRollPage.annualRentCells.eq(rowNumber).should("contain.text", rentToBe);
         return this;
     }
 
     verifyMonthlyRentByRow(rentToBe: string, rowNumber: number): this {
-        stabRenRollPage.monthlyRentCells.eq(rowNumber).should("contain.text", rentToBe);
+        stabRentRollPage.monthlyRentCells.eq(rowNumber).should("contain.text", rentToBe);
         return this;
     }
 
@@ -95,8 +95,8 @@ class StabilizedRentRollActions extends BaseActionsExt<typeof stabRenRollPage>{
 
     enterAnnualRentPerSFByRowNumber(rentToBe: string | number, rowNumber: number): this {
         this.annualRentPsfCellsScroll();
-        stabRenRollPage.annualRentPsfCells.eq(rowNumber).dblclick({ force: true });
-        stabRenRollPage.textareaToInput.clear().type(`${rentToBe}`).type("{enter}");
+        stabRentRollPage.annualRentPsfCells.eq(rowNumber).dblclick({ force: true });
+        stabRentRollPage.textareaToInput.clear().type(`${rentToBe}`).type("{enter}");
         this.verifyAnnuallyRentPsf(rentToBe, rowNumber);
         return this;
     }
@@ -112,7 +112,7 @@ class StabilizedRentRollActions extends BaseActionsExt<typeof stabRenRollPage>{
 
     verifyAnnuallyRentPsf(rentToBe: string | number, rowNumber: number): this {
         this.annualRentPsfCellsScroll;
-        stabRenRollPage.annualRentPsfCells.eq(rowNumber).should("contain.text", rentToBe);
+        stabRentRollPage.annualRentPsfCells.eq(rowNumber).should("contain.text", rentToBe);
         return this;
     }
 
@@ -127,25 +127,35 @@ class StabilizedRentRollActions extends BaseActionsExt<typeof stabRenRollPage>{
     }
 
     clickEditStabilizedCommercialIncomeDiscussion(): StabilizedRentRollActions {
-        stabRenRollPage.formEditBtn(0).click();
+        stabRentRollPage.formEditBtn(0).click();
         return this;
     }
 
     typeStabilizedCommercialIncomeTextArea(value: string): StabilizedRentRollActions {
-        stabRenRollPage.stabilizedCommercialIncomeTextArea.type(value);
+        stabRentRollPage.stabilizedCommercialIncomeTextArea.type(value);
         return this;
     }
 
     clickNarrativeSuggestions(verifyListValue: string): StabilizedRentRollActions {
-        stabRenRollPage.narrativeSuggestionsList.contains(verifyListValue).click();
+        stabRentRollPage.narrativeSuggestionsList.contains(verifyListValue).click();
         return this;
     }
 
     verifyStabilizedCommercialIncomeTextArea(verifyAreaValue: string): StabilizedRentRollActions {
-        stabRenRollPage.stabilizedCommercialIncomeTextArea.should("contain.text", verifyAreaValue);
+        stabRentRollPage.stabilizedCommercialIncomeTextArea.should("contain.text", verifyAreaValue);
+        return this;
+    }
+
+    saveStabilizedRentRollCommentary(): StabilizedRentRollActions {
+        this.Page.formSaveBtn(1);
+        return this;
+    }
+
+    verifyModifiedLabelExist(): StabilizedRentRollActions {
+        stabRentRollPage.stabilizedRentRollModifiedLabel.should('exist');
         return this;
     }
 
 }
 
-export default new StabilizedRentRollActions(stabRenRollPage);
+export default new StabilizedRentRollActions(stabRentRollPage);

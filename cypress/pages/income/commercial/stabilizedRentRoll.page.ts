@@ -29,6 +29,8 @@ class StabilizedRentRollPage extends BasePage{
 
     get narrativeSuggestionsList() {return cy.get("[data-qa='narrative-suggestions-list'] > ul");}
 
+    get stabilizedRentRollModifiedLabel() {return cy.xpath("//*[@ui='indicator']/span[.='Modified']");}
+
 }
 
 export default new StabilizedRentRollPage();

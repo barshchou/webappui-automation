@@ -1,0 +1,10 @@
+import enums from "../../../../../enums/enums";
+import reportDataCreator from "../../../../data_creator/reportData.creator";
+
+export default {
+    reportCreationData: reportDataCreator.getReportData("4594", {
+        incomeValue: enums.INCOME_TYPE.BOTH
+    }),
+    numberOfCommercialUnits: 2,
+    value:"Some text update"
+};
