@@ -139,6 +139,7 @@ class StabilizedRentRollActions extends BaseActionsExt<typeof stabRentRollPage>{
 
     clickNarrativeSuggestions(verifyListValue: string): StabilizedRentRollActions {
         stabRentRollPage.narrativeSuggestionsList.contains(verifyListValue).click();
+        stabRentRollPage.stabilizedCommercialIncomeTextArea.click();
         return this;
     }
 
@@ -158,11 +159,10 @@ class StabilizedRentRollActions extends BaseActionsExt<typeof stabRentRollPage>{
     }
 
     revertToOriginalStabilizedRentRollCommentary(): StabilizedRentRollActions {
-
         this.clickEditStabilizedCommercialIncomeDiscussion();
-        stabRentRollPage.revertToOriginalButton.click();
+        stabRentRollPage.formRevertToOriginalBtn(0).click();
         this.verifyProgressBarNotExist();
-        stabRentRollPage.confirmRevertButton.click();
+        stabRentRollPage.formYesRevertBtn.click();
         this.saveStabilizedRentRollCommentary();
         return this;
     }
