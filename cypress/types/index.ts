@@ -24,7 +24,7 @@ namespace BoweryReports {
         isSalesForcePull?: isSalesForcePull
     }
     export type LeaseDateName = "Start" | "Expiry"
-    export type LeaseStatus = "Occupied" | "Vacant"
+    export type LeaseStatus = "Occupied" | "Vacant" | "Employee"
     export type ImageType = "Interior Images" | "Exterior Images";
     export type InputType = "drag-n-drop" | "input";
     export type UnitSF = "unit" | "sf"
@@ -80,7 +80,8 @@ namespace BoweryReports {
     export type BuildingDescription = {grossArea: number, numberOfUnits: number}
 
     export type ResidentialUnit = {
-        footage: number,
+        footage?: number,
+        rooms?: number,
         monthlyRent: number,
         leaseStatus?: BoweryReports.LeaseStatus
     }
