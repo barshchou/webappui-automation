@@ -28,10 +28,6 @@ class StabilizedRentRollPage extends BasePage{
     get stabilizedCommercialIncomeTextArea() {return cy.xpath("//*[.='Stabilized Commercial Income Discussion']//following::*[@data-slate-editor][1]");}
 
     get narrativeSuggestionsList() {return cy.get("[data-qa='narrative-suggestions-list'] > ul");}
-
-    get revertToOriginalButton() {return cy.xpath("//button[.='Revert to Original']");}
-
-    get confirmRevertButton() {return cy.xpath("//*[.='Yes, revert']");}
     
     get stabilizedRentRollModifiedLabel() {return cy.xpath("//*[@ui='indicator']/span[.='Modified']");}
 
