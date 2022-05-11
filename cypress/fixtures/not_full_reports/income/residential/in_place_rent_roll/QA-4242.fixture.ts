@@ -16,7 +16,7 @@ const rentRollResidentialUnitsFixture = () : BoweryReports.ResidentialUnit[] => 
         {
             rooms: 3,
             monthlyRent: 12345,
-            leaseStatus: "Empoyee",
+            leaseStatus: "Employee",
         },
     ];
 };

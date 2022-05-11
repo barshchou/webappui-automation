@@ -13,7 +13,7 @@ namespace BoweryReports {
         conclusionValue?: BoweryReports.ConclusionValue
     }
     export type LeaseDateName = "Start" | "Expiry"
-    export type LeaseStatus = "Occupied" | "Vacant" | "Empoyee"
+    export type LeaseStatus = "Occupied" | "Vacant" | "Employee"
     export type UnitSF = "unit" | "sf"
     export type PerUnitPerSF = "Per Unit" | "Per SF"
     export type ForecastItemBasis = "insurance" | "electricity"
