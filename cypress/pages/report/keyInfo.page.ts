@@ -30,6 +30,8 @@ class KeyInfoPage extends BasePage{
     get textBoxPropertyRightsAppraised() {
         return cy.xpath('//*[@data-qa="letterOfTransmittalPurpose-generated-comment-wrapper"]/preceding-sibling::div//p');
     }
+
+    get inputToCheckMyDateIsDifferent() {return cy.get("*[data-qa='isDifferentDateOfValuation']");}
 }
 
 export default new KeyInfoPage();
