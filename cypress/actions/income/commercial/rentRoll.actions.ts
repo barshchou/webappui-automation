@@ -45,7 +45,7 @@ class CommercialRentRollActions extends BaseActionsExt<typeof rentRollPage> {
     clickPerSquareFootPerMonthButton(backColor = "rgb(46, 67, 147)"): this {
        rentRollPage.perSquareFootPerMonthButton.should("not.have.css", "background-color", backColor)
            .click().should("have.css", "background-color", backColor);
-       rentRollPage.rentPerSfPerMonthColumnName.scrollIntoView().should("exist");
+       this.Shared.rentPerSfPerMonthColumnName.scrollIntoView().should("exist");
        return this;
     }
 

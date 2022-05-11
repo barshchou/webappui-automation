@@ -53,6 +53,8 @@ class CommercialRentRollSharedComponent {
     get closeButton() {return cy.get("[aria-label=close]");}
 
     get cancelRevertButton() {return this.yesRevertButton.prev("button");}
+
+    get rentPerSfPerMonthColumnName() {return cy.contains("Rent PSF/Month");}
 }
 
 export default CommercialRentRollSharedComponent;

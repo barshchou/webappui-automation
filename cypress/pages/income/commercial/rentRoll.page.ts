@@ -22,8 +22,6 @@ class CommercialRentRollPage extends BasePage{
     getLeaseStatusToChooseByValue(status) {return cy.xpath(`//li[.='${status}']`);}
 
     get cancelDiscussionEdit() {return cy.xpath("//*[.='Current Commercial Income Discussion']//following::button[.='Cancel'][1]");}
-
-    get rentPerSfPerMonthColumnName() {return cy.contains("Rent PSF/Month");}
 }
 
 export default new CommercialRentRollPage();
