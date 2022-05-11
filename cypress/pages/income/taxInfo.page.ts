@@ -47,7 +47,9 @@ class TaxInfoPage extends BasePage {
     get appraiserOpTaxLiabilityPerBasis() {return cy.get(`[data-qa="Appraiser's Opinion-taxLiabilityPerBasis-value-cell"]`);}
     get appraiserOpTaxLiabTaxRateValueCell() {return cy.get(`[data-qa="Appraiser's Opinion-taxRate-value-cell"]`);}
     get appraiserOpTaxAssessedValueCell() {return cy.get(`[data-qa="Appraiser's Opinion-taxableAssessedValue-value-cell"]`);}
-    get taxSummaryDiscussionCommentary() {return cy.get("[data-qa^='taxSummaryDiscussion.commentary']");}
+    get taxSummaryDiscussionCommentary() {return cy.get("span[data-slate-string=true]");}
+    get taxSummaryDiscussionTooltip() {return cy.get("svg[data-icon=info-circle]");}
+    get taxSummaryDiscussionTitle() {return cy.get(".MuiTypography-subtitle1");}
 }
 
 export default new TaxInfoPage();

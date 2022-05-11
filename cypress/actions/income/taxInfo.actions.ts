@@ -536,6 +536,16 @@ class TaxInfoActions extends BaseActions {
         taxInfoPage.taxSummaryDiscussionCommentary.should("have.text", commToBe);
         return this;
     }
+
+    verifyTaxSummaryTooltip(tooltipToBe) {
+        taxInfoPage.taxSummaryDiscussionTooltip.should("have.attr", "aria-label", tooltipToBe);
+        return this;
+    }
+
+    verifyTaxSummaryDiscussionTitle(titleToBe) {
+        taxInfoPage.taxSummaryDiscussionTitle.should("have.text", titleToBe);
+        return this;
+    }
 }
 
 export default new TaxInfoActions();

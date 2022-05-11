@@ -15,10 +15,10 @@ describe("Assessed Value & RE Taxes] Verify the 'Tax Calculation Discussion' gen
 
         cy.stepInfo("2. Verify  Tax Calculation discussion title and commentary is diplayed");
         cy.get(".MuiTypography-subtitle1").should("have.text", testData.title);
-        cy.get("[data-slate-string=true]").should("have.text", testData.comment);
+        _TaxInfo.verifyTaxSummaryCommentary(testData.commentary);
 
         cy.stepInfo("3. Verify Tax Calculation discussion's tooltip content");
-        cy.get("svg[data-icon=info-circle]").should("have.attr", "aria-label" , testData.hintText);
+        _TaxInfo.verifyTaxSummaryTooltip(testData.tooltip);
 
         cy.stepInfo("4. Export the report");
         _NavigationSection.Actions.openReviewAndExport(true);
