@@ -1,6 +1,6 @@
 import BaseActions from "../base/base.actions";
 import photosPage from "../../pages/property/photos.page";
-import {getUploadFixturesArrayFromFolder} from "../../../utils/fixtures.utils";
+import { getUploadFixturesArrayFromFolder } from "../../../utils/fixtures.utils";
 
 class PhotosActions extends BaseActions{
 

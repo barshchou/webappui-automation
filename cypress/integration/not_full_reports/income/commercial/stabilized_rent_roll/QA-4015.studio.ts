@@ -79,7 +79,7 @@ describe(" Verify that changes are displayed for Annual and Monthly Rent columns
          */
         cy.get(`@${reportIdAlias}`).then(val => {
             cy.log(`${val}`);
-            cy.get(`[href="/report/${val}"] [data-qa="archive-btn"]`).click({force:true});
+            cy.get(`[href="/report/${val}"] [data-qa="archive-btn"]`).click({ force:true });
         });
     });
 });

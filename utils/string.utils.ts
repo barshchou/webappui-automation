@@ -1,5 +1,5 @@
 export const cutLastLetter = (stringToChange) => {
-  return stringToChange.replace(/.$/,"");
+  return stringToChange.replace(/.$/, "");
 };
 
 export const uppercaseFirstLetterEachWord = (string) => {
