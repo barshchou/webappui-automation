@@ -171,6 +171,13 @@ class StabilizedRentRollActions extends BaseActionsExt<typeof stabRentRollPage>{
         stabRentRollPage.formCancelButton(0).click();
         return this;
     }
+
+    verifyStabRentRollCommentaryButtons(): StabilizedRentRollActions {
+        stabRentRollPage.formRevertToOriginalBtn(0).should('exist');
+        stabRentRollPage.formCancelButton(0).should('exist');
+        stabRentRollPage.formSaveBtn(0).should('exist');
+        return this;
+    }
 }
 
 export default new StabilizedRentRollActions(stabRentRollPage);

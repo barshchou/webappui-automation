@@ -4,7 +4,7 @@ import reportDataCreator from "../../../../data_creator/reportData.creator";
 const _numberOfCommercialUnits = 2;
 
 export default {
-    reportCreationData: reportDataCreator.getReportData("4590_91_94", {
+    reportCreationData: reportDataCreator.getReportData("4589-91_94", {
         incomeValue: enums.INCOME_TYPE.BOTH
     }),
     numberOfCommercialUnits: _numberOfCommercialUnits,

@@ -1,7 +1,7 @@
 import { Income, Property } from "../../../../../actions";
 import { _NavigationSection } from "../../../../../actions/base";
 import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
-import testData from "../../../../../fixtures/not_full_reports/income/commercial/stabilized_rent_roll/QA-4590_91_94.fixture";
+import testData from "../../../../../fixtures/not_full_reports/income/commercial/stabilized_rent_roll/QA-4589-91_94.fixture";
 
 
 describe(`Verify the commentary functionality`, () => {
@@ -22,9 +22,10 @@ describe(`Verify the commentary functionality`, () => {
             .navigateToStabilizedRentRollInCommercial()
             .verifyProgressBarNotExist();
 
-        cy.stepInfo("2. Click on the Edit button and modify commentary and save changes.");
+        cy.stepInfo("[QA-4589] 2. Click on the Edit button and modify commentary and save changes.");
         Income._CommercialManager.StabilizedRentRoll.clickEditStabilizedCommercialIncomeDiscussion()
             .typeStabilizedCommercialIncomeTextArea(testData.value, true)
+            .verifyStabRentRollCommentaryButtons()
             .saveStabilizedRentRollCommentary();
 
         cy.stepInfo("[QA-4594] 3. Verify that commentary 'Modified' label appears");
