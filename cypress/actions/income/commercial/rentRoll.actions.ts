@@ -391,7 +391,7 @@ class CommercialRentRollActions extends BaseActionsExt<typeof rentRollPage> {
     }
 
     clearAndEnterNewCommentary(commentary: string): this {
-        rentRollPage.discussionTextInput.clear().type(commentary);
+        this.Shared.discussionTextInput.clear().type(commentary);
         return this;
     }
 
@@ -422,12 +422,12 @@ class CommercialRentRollActions extends BaseActionsExt<typeof rentRollPage> {
     }
 
     verifyCommentaryTextBoxText(textToBe: string): this {
-        rentRollPage.discussionTextInput.should("have.text", textToBe);
+        this.Shared.discussionTextInput.should("have.text", textToBe);
         return this;
     }
 
     verifyCommentaryTextBoxNotHaveText(text: string): this {
-        rentRollPage.discussionTextInput.should("not.have.text", text);
+        this.Shared.discussionTextInput.should("not.have.text", text);
         return this;
     }
 

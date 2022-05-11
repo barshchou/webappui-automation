@@ -35,6 +35,9 @@ class CommercialRentRollSharedComponent {
     getLeaseDateCellsByName(name) {return cy.xpath(`(//*[contains(@data-qa, 'lease${name}Date')])[position() < last()]`);}
 
     get editDiscussionButton() {return cy.xpath("//button[.='Edit']");}
+
+    get discussionTextInput() {return cy.get("[role=textbox]");}
+
 }
 
 export default CommercialRentRollSharedComponent;

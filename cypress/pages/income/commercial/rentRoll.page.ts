@@ -21,8 +21,6 @@ class CommercialRentRollPage extends BasePage{
 
     getLeaseStatusToChooseByValue(status) {return cy.xpath(`//li[.='${status}']`);}
 
-    get discussionTextInput() {return cy.get("[role=textbox]");}
-
     get saveDiscussionChanges() {return cy.xpath("//button[.='Save' and not(contains(@data-qa, 'form-save-btn'))]");}
 
     get modifiedLabel() {return cy.contains("Modified");}
