@@ -11,7 +11,7 @@ const _groupName: BoweryReports.CommercialUnitsGroups = "Floor";
 
 export default {
     reportCreationData: _reportCreationData,
-    numberOfCommercialUnits: 1,
+    numberOfCommercialUnits: 5,
     floorValues: _floorValues,
     groupName: _groupName,
     otherValue: "Other choice"
