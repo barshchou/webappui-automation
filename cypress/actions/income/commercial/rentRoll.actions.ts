@@ -180,7 +180,7 @@ class CommercialRentRollActions extends BaseActionsExt<typeof rentRollPage> {
     }
 
     enterLeaseDateByRowNumber(cellName: BoweryReports.LeaseDateName , date: string, rowNumber = 0): this {
-        rentRollPage.getLeaseDateCellsByName(cellName).eq(rowNumber).dblclick({ force: true });
+        this.Shared.getLeaseDateCellsByName(cellName).eq(rowNumber).dblclick({ force: true });
         this.Shared.textareaToInput.clear().type(date).type("{enter}");
         return this;
     }
@@ -192,7 +192,7 @@ class CommercialRentRollActions extends BaseActionsExt<typeof rentRollPage> {
             dateToBe = "";
         }
         let textToBe = leaseStatus === "Vacant" ? "-" : dateToBe;
-        rentRollPage.getLeaseDateCellsByName(cellName).eq(rowNumber).should("have.text", textToBe);
+        this.Shared.getLeaseDateCellsByName(cellName).eq(rowNumber).should("have.text", textToBe);
         return this;
     }
 

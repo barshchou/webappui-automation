@@ -31,6 +31,8 @@ class CommercialRentRollSharedComponent {
     get unitNumberCells() {return cy.xpath("(//*[contains(@data-qa, '#')])[position() < last()]");}
 
     getAllCellsByRowNumber(rowNumber) {return cy.get(`*[data-qa*='${rowNumber}-cell']`);}
+
+    getLeaseDateCellsByName(name) {return cy.xpath(`(//*[contains(@data-qa, 'lease${name}Date')])[position() < last()]`);}
 }
 
 export default CommercialRentRollSharedComponent;
