@@ -1,13 +1,14 @@
-/// <reference types="cypress-grep" /> 
 import testData from "../../../../fixtures/not_full_reports/income/expense_forecast/QA-4924.fixture";
 import Property from "../../../../actions/property/property.manager";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Income from "../../../../actions/income/income.manager";
 import tableExpenseHistoryCellNames from "../../../../../cypress/enums/expenseHistoryTableRows.enum";
+import { Tag } from "../../../../utils/tags.utils";
 
 
-describe("User selects Per SF radiobutton for Repairs & Maintenance on Expense Forecast form and historical expenses per SF are correctly calculated and displayed", () => {
+describe("User selects Per SF radiobutton for Repairs & Maintenance on Expense Forecast form and historical expenses per SF are correctly calculated and displayed", 
+{ tags:[ Tag.income, Tag.expense_forecast, Tag.snapshot_tests ] }, () => {
 
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
@@ -63,7 +64,7 @@ describe("User selects Per SF radiobutton for Repairs & Maintenance on Expense F
 
         Income.ExpenseForecast.Actions.matchElementSnapshot(
             Income.ExpenseForecast.Page.repairsAndMaintenanceCard, testData.repairsAndMaintenanceCardSnapshotName,
-            {padding: [10, 100]});
+            { padding: [ 10, 100 ] });
 
         deleteReport(testData.reportCreationData.reportNumber);
     });
