@@ -6,6 +6,9 @@ import CommercialRentRollSharedComponent from "../../../shared_components/commer
 
 class CommercialRentRollActions extends BaseActionsExt<typeof rentRollPage> {
 
+    /**
+     * @description Contains elements and actions, identical for In-Place Rent Roll and Stabilized Rent Roll pages
+     */
     Shared: CommercialRentRollSharedComponent;
 
     constructor(page: typeof rentRollPage, sharedComponent: CommercialRentRollSharedComponent) {
