@@ -27,7 +27,7 @@ class ExpenseHistoryActions extends BaseActionsExt<typeof expenseHistoryPage>{
         return this;
     }
 
-    enterIssueByColIndex(issueValue: number | string, tableExpenseHistoryCellNames: string, index = 0,): ExpenseHistoryActions {  
+    enterIssueByColIndex(issueValue: number | string, tableExpenseHistoryCellNames: string, index = 0,): ExpenseHistoryActions {
         if (issueValue === "clear") {
             expenseHistoryPage.getUnifiedEditableAndTotalCells(tableExpenseHistoryCellNames).eq(index).scrollIntoView().dblclick().clear();
         } else {
@@ -101,7 +101,7 @@ class ExpenseHistoryActions extends BaseActionsExt<typeof expenseHistoryPage>{
         return this;
     }
 
-     private getAverageTextFromCells(jQueryEls: JQuery<HTMLElement>): string {
+    private getAverageTextFromCells(jQueryEls: JQuery<HTMLElement>): string {
         let sum = 0;
         for (let i = 0; i < jQueryEls.length; i++) {
             let elNumber = getNumberFromDollarNumberWithCommas(jQueryEls[i].textContent);
@@ -114,7 +114,7 @@ class ExpenseHistoryActions extends BaseActionsExt<typeof expenseHistoryPage>{
         return `$${numberWithCommas((sum / jQueryEls.length).toFixed(2))}`;
     }
 
-     private getAverageValueFromInputs(jQueryElements: JQuery<HTMLElement>): string {
+    private getAverageValueFromInputs(jQueryElements: JQuery<HTMLElement>): string {
         let cellsCounter = 0;
         let sum = 0;
         for (let i = 0; i < jQueryElements.length; i++) {
