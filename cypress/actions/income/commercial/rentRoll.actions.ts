@@ -65,7 +65,7 @@ class CommercialRentRollActions extends BaseActionsExt<typeof rentRollPage> {
         rentRollPage.getLeaseStatusToChooseByValue(status).click();
         this.verifyLeaseStatusCellTextByRow(status, rowNumber);
         if (status === "Vacant") {
-            rentRollPage.getAllCellsByRowNumber(rowNumber).then(cells => {
+            this.Shared.getAllCellsByRowNumber(rowNumber).then(cells => {
                 for (let i = 3; i < cells.length - 2; i++) {
                     cy.wrap(cells).eq(i).should("have.class", "readOnly");
                 }

@@ -29,6 +29,8 @@ class CommercialRentRollSharedComponent {
     get elementToVerifyIsInspected() {return cy.xpath("(//*[contains(@data-qa, 'isInspected')])[position() < last()]//child::span");}
 
     get unitNumberCells() {return cy.xpath("(//*[contains(@data-qa, '#')])[position() < last()]");}
+
+    getAllCellsByRowNumber(rowNumber) {return cy.get(`*[data-qa*='${rowNumber}-cell']`);}
 }
 
 export default CommercialRentRollSharedComponent;
