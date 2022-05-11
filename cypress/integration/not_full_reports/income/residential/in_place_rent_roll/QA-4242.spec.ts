@@ -2,7 +2,6 @@ import testData from "../../../../../fixtures/not_full_reports/income/residentia
 import {createReport, deleteReport} from "../../../../../actions/base/baseTest.actions";
 import { _NavigationSection} from "../../../../../actions/base";
 import { Income, Property } from "../../../../../actions";
-import { indexOf } from "cypress/types/lodash";
 
 describe("In-Place Rent Roll table tests", () => {
     before("Login, create report", () => {

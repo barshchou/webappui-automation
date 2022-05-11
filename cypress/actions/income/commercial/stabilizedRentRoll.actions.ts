@@ -166,6 +166,11 @@ class StabilizedRentRollActions extends BaseActionsExt<typeof stabRentRollPage>{
         this.saveStabilizedRentRollCommentary();
         return this;
     }
+
+    cancelStabilizedRentRollCommentary(): StabilizedRentRollActions {
+        stabRentRollPage.formCancelButton(0).click();
+        return this;
+    }
 }
 
 export default new StabilizedRentRollActions(stabRentRollPage);
