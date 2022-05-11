@@ -131,7 +131,8 @@ class StabilizedRentRollActions extends BaseActionsExt<typeof stabRentRollPage>{
         return this;
     }
 
-    typeStabilizedCommercialIncomeTextArea(value: string): StabilizedRentRollActions {
+    typeStabilizedCommercialIncomeTextArea(value: string, clearText = false): StabilizedRentRollActions {
+        clearText ? stabRentRollPage.stabilizedCommercialIncomeTextArea.clear().type(value) : 
         stabRentRollPage.stabilizedCommercialIncomeTextArea.type(value);
         return this;
     }
@@ -147,7 +148,7 @@ class StabilizedRentRollActions extends BaseActionsExt<typeof stabRentRollPage>{
     }
 
     saveStabilizedRentRollCommentary(): StabilizedRentRollActions {
-        this.Page.formSaveBtn(1);
+        stabRentRollPage.formSaveBtn(0).click();
         return this;
     }
 
@@ -159,10 +160,10 @@ class StabilizedRentRollActions extends BaseActionsExt<typeof stabRentRollPage>{
     revertToOriginalStabilizedRentRollCommentary(): StabilizedRentRollActions {
 
         this.clickEditStabilizedCommercialIncomeDiscussion();
-        stabRenRollPage.revertToOriginalButton.click();
+        stabRentRollPage.revertToOriginalButton.click();
         this.verifyProgressBarNotExist();
-        stabRenRollPage.confirmRevertButton.click();
-        this.Page.formSaveBtn(1).click();
+        stabRentRollPage.confirmRevertButton.click();
+        this.saveStabilizedRentRollCommentary();
         return this;
     }
 }

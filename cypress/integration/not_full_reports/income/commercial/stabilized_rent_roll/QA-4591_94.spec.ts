@@ -4,7 +4,7 @@ import { createReport, deleteReport } from "../../../../../actions/base/baseTest
 import testData from "../../../../../fixtures/not_full_reports/income/commercial/stabilized_rent_roll/QA-4591_94.fixture";
 
 
-describe(`Verify the Modified label functionality`, () => {
+describe(`Verify the commentary functionality`, () => {
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
         
@@ -19,18 +19,22 @@ describe(`Verify the Modified label functionality`, () => {
         _NavigationSection.navigateToCommercialUnits()
             .clickIncomeApproachButton()
             .clickCommercialArrow()
-            .openCommercialStabilizedRentRollInCommercial()
+            .navigateToStabilizedRentRollInCommercial()
             .verifyProgressBarNotExist();
 
         cy.stepInfo("2. Click on the Edit button in the Stabilized Commercial Income Discussion section.");
         Income._CommercialManager.StabilizedRentRoll.clickEditStabilizedCommercialIncomeDiscussion();
 
         cy.stepInfo("3. Modify commentary and save changes.");
-        Income._CommercialManager.StabilizedRentRoll.typeStabilizedCommercialIncomeTextArea(testData.value)
+        Income._CommercialManager.StabilizedRentRoll.typeStabilizedCommercialIncomeTextArea(testData.value, true)
           .saveStabilizedRentRollCommentary();
 
-        cy.stepInfo("4. Verify that commentary 'Modified' label appears");
+        cy.stepInfo("[QA-4594] 4. Verify that commentary 'Modified' label appears");
         Income._CommercialManager.StabilizedRentRoll.verifyModifiedLabelExist();
+
+        cy.stepInfo("[QA-4591] 5. Verify commentary revert to original");
+        Income._CommercialManager.StabilizedRentRoll.revertToOriginalStabilizedRentRollCommentary()
+            .verifyStabilizedCommercialIncomeTextArea(testData.defaultText);
 
         deleteReport(testData.reportCreationData.reportNumber);
     });

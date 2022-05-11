@@ -38,7 +38,7 @@ describe(`Verify the suggested text dropdown in the new narrative component adde
             .clickNarrativeSuggestions(testData.verifyForeclosureListValue);
     
         cy.stepInfo("8. [QA-4595] Verify that the following text appears.");
-            Income._CommercialManager.StabilizedRentRoll.verifyStabilizedCommercialIncomeTextArea(testData.verifyForeclosureAreaValue);
+        Income._CommercialManager.StabilizedRentRoll.verifyStabilizedCommercialIncomeTextArea(testData.verifyForeclosureAreaValue);
 
         deleteReport(testData.reportCreationData.reportNumber);
     });
