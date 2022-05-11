@@ -7,6 +7,7 @@ class IntroductionPage extends BasePage {
 
     get TextPropertyRightsAppraised(){
         return cy.xpath('//*[@id="previewAndEdit.introduction-final-form"]//h6')
+        .parent()
         .contains("Property Rights Appraised").next();
     }
 
