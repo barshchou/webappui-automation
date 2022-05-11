@@ -3,12 +3,12 @@
 import testData from "../../../../fixtures/not_full_reports/income/expense_forecast/QA-4888.fixture";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import { Property, Income } from "../../../../actions";
-import {_NavigationSection} from "../../../../actions/base";
+import { _NavigationSection } from "../../../../actions/base";
 import { Tag } from "../../../../utils/tags.utils";
 
 
 describe("Historical expense Electricity Per Unit is correctly calculated and displayed",
-{tags:[Tag.snapshot_tests,Tag.income,Tag.expense_forecast]}, () => {
+{ tags:[ Tag.snapshot_tests, Tag.income, Tag.expense_forecast ] }, () => {
 
 
     before("Login, create report", () => {
@@ -58,7 +58,7 @@ describe("Historical expense Electricity Per Unit is correctly calculated and di
         cy.stepInfo("5.2 Check historical expenses values for Electricity card. They should be correctly displayed on slidebars");
 
         Income._ExpenseForecastActions.Actions.matchElementSnapshot(
-            Income._ExpenseForecastActions.Page.electricityCard, testData.electricityCardSnapshotName, { padding: [10, 100] });
+            Income._ExpenseForecastActions.Page.electricityCard, testData.electricityCardSnapshotName, { padding: [ 10, 100 ] });
 
 
         cy.stepInfo("6. Delete report");
