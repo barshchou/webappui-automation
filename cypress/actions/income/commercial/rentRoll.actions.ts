@@ -83,7 +83,7 @@ class CommercialRentRollActions extends BaseActionsExt<typeof rentRollPage> {
         return this;
     }
 
-    chooseLeaseStatusesByRowNumber(statuses: Array<BoweryReports.LeaseStatus>, rowNumber = 0): this {
+    chooseLeaseStatusesByRowNumber(statuses: BoweryReports.LeaseStatus[], rowNumber = 0): this {
         statuses.forEach(status => {
             this.chooseLeaseStatusByRowNumber(status, rowNumber);
         });
@@ -285,7 +285,7 @@ class CommercialRentRollActions extends BaseActionsExt<typeof rentRollPage> {
         return this;
     }
 
-    chooseListLeaseStatuses(statuses: Array<BoweryReports.LeaseStatus>, numberOfUnits: number): this {
+    chooseListLeaseStatuses(statuses: BoweryReports.LeaseStatus[], numberOfUnits: number): this {
         for (let i = 0; i < numberOfUnits; i++) {
             this.chooseLeaseStatusByRowNumber(statuses[i], i);
         }

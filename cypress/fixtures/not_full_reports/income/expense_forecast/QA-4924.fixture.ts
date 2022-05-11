@@ -34,7 +34,7 @@ const _ownerProjectionRepairsAndMaintenanceItem: BoweryReports.ForecastItem = {
 
 
 export default {
-    reportCreationData: ReportDataCreator.getDefaultReportData("4924"),
+    reportCreationData: ReportDataCreator.getReportData("4924"),
     buildingDescription: _buildingDescription,
     actualRepairsAndMaintenanceItem: _actualRepairsAndMaintenanceItem,
     t12RepairsAndMaintenanceItem: _t12RepairsAndMaintenanceItem,

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 const pathToSnapshots = "./cypress/gh_artifacts/dom_snapshots";
 
 /**
@@ -31,9 +32,13 @@ function _styleTag (style) {
  * TODO: Describe Cypress hacks in Readme in "Hacks" section
  */
 export const recordDOM_Snapshot = () => {
+    // @ts-ignore
     Cypress.Commands._commands.log.fn("Recording DOM snapshot to file");
+    // @ts-ignore
     const snap = Cypress.cy.createSnapshot("snap");
+    // @ts-ignore
     const { headStyles } = Cypress.cy.getStyles(snap);
+    // @ts-ignore
     const $head = Cypress.$autIframe.contents().find("head");
     $head.find("script").empty();
     const existingStyles = $head.find('link[rel="stylesheet"],style');
@@ -48,6 +53,7 @@ export const recordDOM_Snapshot = () => {
     });
     
     const XMLS = new XMLSerializer();
+    // @ts-ignore
     let s ='<html>\n' + XMLS.serializeToString(Cypress.$autIframe.contents().find('head')[0]);
     s += XMLS.serializeToString(snap.body.get()[0]) + '\n</html>\n';
    
@@ -55,5 +61,6 @@ export const recordDOM_Snapshot = () => {
     // Cypress.Commands._commands.writeFile.fn(`${Cypress.spec.name}.html`,s);
 
     // second way
+    // @ts-ignore
     Cypress.backend('write:file', `${pathToSnapshots}/${Cypress.spec.name}.html`, s);
 };
