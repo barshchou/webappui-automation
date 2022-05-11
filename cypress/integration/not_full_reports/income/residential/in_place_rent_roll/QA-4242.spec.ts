@@ -2,6 +2,7 @@ import testData from "../../../../../fixtures/not_full_reports/income/residentia
 import {createReport, deleteReport} from "../../../../../actions/base/baseTest.actions";
 import { _NavigationSection} from "../../../../../actions/base";
 import { Income, Property } from "../../../../../actions";
+import { indexOf } from "cypress/types/lodash";
 
 describe("In-Place Rent Roll table tests", () => {
     before("Login, create report", () => {
@@ -18,18 +19,17 @@ describe("In-Place Rent Roll table tests", () => {
         _NavigationSection.navigateToResInPlaceRentRoll();
         Income._Residential.InPlaceRentRoll.checkCheckboxByLabel(testData.perRoomAnalysis)
             .verifyColumnExist(testData.columnName);
-        
-        for(let row = 0; row < testData.residentialUnits.length; row++){
-            Income._Residential.InPlaceRentRoll.verifyRentRoomCellValues();
-        }
+        testData.residentialUnits.forEach((unit, index) => {
+            Income._Residential.InPlaceRentRoll.verifyRentRoomCellValues(0, unit.rooms, index);
+        });
         
         cy.stepInfo('2. Fill residential units and verify Rent room cells values per formula = [Monthly Rent] / [Rooms]');
-        for(let row = 0; row < testData.residentialUnits.length; row++){
-            Income._Residential.InPlaceRentRoll.enterRoomsNumberByRowNumber(testData.residentialUnits[row].rooms, row)
-                .enterMonthlyRentByRowNumber(testData.residentialUnits[row].monthlyRent, row)
-                .enterLeaseStatusByRowNumber(testData.residentialUnits[row].leaseStatus, row)
-                .verifyRentRoomCellValues(testData.residentialUnits[row].monthlyRent, testData.residentialUnits[row].rooms, row);
-        }
+        testData.residentialUnits.forEach((unit, index) => {
+            Income._Residential.InPlaceRentRoll.enterRoomsNumberByRowNumber(unit.rooms, index)
+                .enterMonthlyRentByRowNumber(unit.monthlyRent, index)
+                .enterLeaseStatusByRowNumber(unit.leaseStatus, index)
+                .verifyRentRoomCellValues(unit.monthlyRent, unit.rooms, index);
+        });
 
         deleteReport(testData.reportCreationData.reportNumber);
     });
