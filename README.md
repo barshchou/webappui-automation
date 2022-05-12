@@ -11,6 +11,7 @@
   - [Development flow](#development_flow)
   - [CLI_flags](#cli_flags)
   - [GH Actions debug](#gh_actions_debug)
+  - [Validation of export](#export_validation)
 - [Useful VS Code extensions](#vs_code_extensions)
 
 ## About <a id="about"></a>
@@ -39,7 +40,7 @@ There are several main folders of these project:
 
 ### General prerequisites <a id="general_prerequisites"></a>
 1. Install `nvm`([macOS/Linux](https://github.com/nvm-sh/nvm), [Windows](https://github.com/coreybutler/nvm-windows)).
-2. Install lts node version. Run `nvm install lts`.
+2. **WARN: please, use lts version of node 16. , currently (05.05.22) - lts/gallium*** Install lts node version. Run `nvm install lts`.
 3. Run `nvm use lts` to use it.
 
 ### Setup <a id="setup"></a>
@@ -70,6 +71,7 @@ We don't have strict rules for our development flow. Everything is pretty standa
   5. When you got approvals - merge branch by yourself or ping someone who was a reviewer.
 
   **NOTE**: 
+  - **please, while developing anything** - run `npm run tsc:watch` command in separate terminal instance (or split terminal into two). This will make TypeScript compilier keep an eye on your files changes and alert you when you forget, for example, update methods names after merge.
   - please, when writing commit message - add something meaningful, rather than "added some code". Good commit message: "[QA-something] added new actions into module_name" / "[misc] linter fixes". Bad commit message: "upd" / "fix" 
   - (ernst): I do not force to use small commits instead of big ones, but when commit something - think what you would do with the big one if you have to revert / reset or cherry-pick it. 
      
@@ -89,6 +91,21 @@ Example of combining previous variables: `npx cypress run --env url=dev,loginMet
 If your task will be connected with GH Actions changes or you would like to check how your newly implemnted test can behave in GH Actions - you should use [act](https://github.com/nektos/act), rather then commit a lot of times into the repo and trigger the real pipeline.
 
 Main flow of how we use act for this repo - described in txt file in [these notes](./.act/install_notes.txt).
+
+### Validation of export <a id="export_validation"></a>
+
+Since we have a lot of test cases which has validation of Report Export (it will `*.docx` file) - we had to find the way we could automate these checks somehow. 
+
+We found a way we can somehow automate it - **we convert `docx` file into html and then open it in Cypress**. 
+
+You can refer to [QA-4053 spec](./cypress/integration/not_full_reports/sales/value_conclusion/QA-4053.spec.ts) to see the code of such tests.
+
+**Flow for ReportExport checks**
+
+1. (1st `it` in `describe`) Your test creates report.
+2. (1st `it` in `describe`) Your test downloads report. Report has `job_id.docx` name and stored in `cypress/download`. Inside method `downloadAndConvertDocxReport()` we call several tasks (code which executes in nodejs): wait until file showed up in filesystem -> we convert docx into html -> we rename docx file from `job_id.docx` to `QA-test_case_number.docx` -> we rename html file from `job_id.html` to `QA-test_case_number.html`
+3. (2nd `it` in `describe`) Your test opens generated html report in Cypress (Cypress *can't* (well, until [release 9.6.0](https://github.com/cypress-io/cypress/releases/tag/v9.6.0)) [visit other origin url](https://docs.cypress.io/guides/guides/web-security#Same-superdomain-per-test))
+4. (2nd `it` in `describe`) Your test makes traverse and assert on generated html report. 
 
 ## Useful VS Code extensions <a id="vs_code_extensions"></a>
 

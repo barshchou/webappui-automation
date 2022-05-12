@@ -1,7 +1,7 @@
 /// <reference types="cypress-file-upload" />
 
 import testData from "../../../../fixtures/not_full_reports/property/commercial_units/QA-4556&57.fixture";
-import {createReport, deleteReport} from "../../../../actions/base/baseTest.actions";
+import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { Property } from "../../../../actions";
 
@@ -24,12 +24,12 @@ describe("Verify the functionality of the Image upload to the Interior and Exter
             # Verify that several images can be uploaded to the Exterior Images.
             # Verify the uploaded image can be rotated.
         `);
-        testData.imagesType.forEach((images,index) => {
+        testData.imagesType.forEach((images, index) => {
             cy.stepInfo(`# Verify that several images can be uploaded to the ${images}.`);
             testData.inputType.forEach(inputMethod => {
                 cy.stepInfo(`2. Verify the image can be uploaded by ${inputMethod} in ${images}.`);
                 Property._CommercialUnits.Actions
-                .uploadImages(<any>images,testData.imageFile,<any>inputMethod)
+                .uploadImages(images, testData.imageFile, inputMethod)
                     .verifyProgressBarNotExist();
 
                 cy.stepInfo(`# Verify the uploaded image can be rotated.`);
@@ -41,9 +41,9 @@ describe("Verify the functionality of the Image upload to the Interior and Exter
                 });
             });
             Property._CommercialUnits
-            .Page.iconDeleteImage.last().click({force:true});
+            .Page.iconDeleteImage.last().click({ force:true });
             Property._CommercialUnits
-            .Page.commercialUnitImage.should("have.length",index+1);
+            .Page.commercialUnitImage.should("have.length", index + 1);
         });
         deleteReport(testData.reportCreationData.reportNumber);
     });

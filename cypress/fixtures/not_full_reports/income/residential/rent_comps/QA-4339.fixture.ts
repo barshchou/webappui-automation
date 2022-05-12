@@ -10,13 +10,13 @@ const formDataFixture = () => {
         infoSource: "bowerySubject",
         bedrooms: 5,
         rooms: 7,
-        amenitiesQaAttr: ["none", "backyard", "balcony", "roof", "terrace", "buildingLaundry", "unitLaundry"],
+        amenitiesQaAttr: [ "none", "backyard", "balcony", "roof", "terrace", "buildingLaundry", "unitLaundry" ],
         sourceInfoCheck: "Bowery Subject"
     };
 };
 
 export default {
-    reportCreationData: ReportDataCreator.getDefaultReportData("4339"),
+    reportCreationData: ReportDataCreator.getReportData("4339"),
     numberOfUnits: 2,
     rentType: "Market Rate",
     numberOfBedrooms: 5,

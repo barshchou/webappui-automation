@@ -138,7 +138,7 @@ class RentCompsPage extends BasePage{
 
     get removeButtonLocator() {return "[data-qa=col-remove] button";}
 
-    get moveCellLocator() {return "[data-qa=drag-cell] i";}
+    get moveCellLocator() {return "[data-qa=drag-cell] svg";}
 
     get indexCellLocator() {return "[data-qa=col-index]";}
 

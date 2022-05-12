@@ -1,33 +1,25 @@
 import BasePage from "../base/base.page";
 
 class ExpenseForecastPage extends BasePage {
-    get ExpenseForecastHeader(){
-        return cy.get('[data-qa="expenseForecast"]');
-    }
+    get expenseForecastHeader(){ return cy.get('[data-qa="expenseForecast"]'); }
 
-    get ElectricityCard(){
-        return cy.get("[data-qa='electricity-forecast-item'] > div").last();
-    }
+    get electricityCard(){ return cy.get("[data-qa='electricity-forecast-item'] > div").last(); }
 
-    get InsuranceCard(){
-        return cy.get('[data-qa="insurance-forecast-item"] > div').last();
-    }
+    get insuranceCard(){ return cy.get('[data-qa="insurance-forecast-item"] > div').last(); }
 
-    get FuelCard() {
-        return cy.get("[data-qa=fuel-forecast-item] > div").last();
-    }
+    get fuelCard() { return cy.get("[data-qa=fuel-forecast-item] > div").last(); }
 
-    get RepairsAndMaintenanceCard() {
-        return cy.get("[data-qa=repairsMaintenance-forecast-item] > div").last();    
-    }
+    get repairsAndMaintenanceCard() { return cy.get("[data-qa=repairsMaintenance-forecast-item] > div").last(); }
+
+    get toeCard() {return cy.xpath("//*[.='TOTAL OPERATING EXPENSES ($/SF)']/parent::div").first();}
 
     getForecastItemBasisRadio(item) {return cy.get(`[name='${item}.basis']`);}
 
-    getElementToCheckRadio(forecastItem: BoweryReports.ForecastItemBasis, radioValue: BoweryReports.UnitSF) {return cy.get(`[data-qa=checked] [name='${forecastItem}.basis'][value='${radioValue}']`);}
+    getElementToCheckRadio(forecastItem: string, radioValue: BoweryReports.UnitSF) {return cy.get(`[data-qa=checked] [name='${forecastItem}.basis'][value='${radioValue}']`);}
 
-    getElementBasisToSwitch(forecastItem: BoweryReports.ForecastItemBasis, radioValue: BoweryReports.UnitSF) {return cy.get(`[name='${forecastItem}.basis'][value='${radioValue}']`);}
+    getElementBasisToSwitch(forecastItem: string, radioValue: BoweryReports.UnitSF) {return cy.get(`[name='${forecastItem}.basis'][value='${radioValue}']`);}
 
-    getForecastItemForecastInput(item) {return cy.get(`[name='${item}.concludedValue']`);}
+    getForecastItemForecastInput(item: string, custom = false, index = 0) {return !custom ? cy.get(`[name='${item}.concludedValue']`) : cy.get(`[name='customExpenses[${index}].concludedValue']`);}
 
     getForecastItemCompMin(item) {return cy.get(`[data-qa=${item}-forecast-item] [data-qa=comp-min]`);}
 
@@ -76,6 +68,10 @@ class ExpenseForecastPage extends BasePage {
     get toeCommentaryModified() {return cy.xpath("//*[.='TOTAL OPERATING EXPENSES']//following::*[.='Modified']");}
 
     get expenseConfirmRevertButton() {return cy.xpath("//*[.='Yes, revert']");}
+
+    get createNewCategoryButton() {return cy.contains('Add Expense Category +');}
+
+    get newCategoryExpenseName() { return cy.get('[data-qa="expenseName-form-control"] input');}
 
 }
 

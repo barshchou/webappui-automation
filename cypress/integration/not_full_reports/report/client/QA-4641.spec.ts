@@ -1,6 +1,6 @@
 import { Report } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
-import {createReport, deleteReport} from "../../../../actions/base/baseTest.actions";
+import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import testData from '../../../../fixtures/not_full_reports/report/client/QA-4641.fixture';
 
 describe(`Verify the "Linked" chips dropdown in the new narrative component for As Is and As Stabilized 
@@ -9,7 +9,7 @@ describe(`Verify the "Linked" chips dropdown in the new narrative component for 
         createReport(testData.reportCreationData);
     });
 
-    it("Test body", {tags: "@to_check_export"}, () => {
+    it("Test body", { tags: "@to_check_export" }, () => {
         cy.stepInfo("1. Proceed to the Report > Client page.");
         _NavigationSection.navigateToClientPage()
             .verifyProgressBarNotExist();

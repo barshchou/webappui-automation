@@ -22,6 +22,11 @@ on:
         description: Spec(s) to be executed
         required: false
         default: cypress/integration/not_full_reports/**/*.spec.ts
+      tags:
+        type: string
+        description: Run test with specific tags (via grep,grepTags,burn)  
+        required: false
+        default: grep=,grepTags=,burn=
 
 jobs:
   Not-full-reports-run:
@@ -50,7 +55,7 @@ jobs:
             ${{ runner.os }}-
       
       - name: Install Cypress globally
-        run: npm i cypress@9.4.1 -g
+        run: npm i cypress@9.6.0 -g
 
       - name: Install Currents globally
         run: npm i @currents/cli -g
@@ -59,7 +64,7 @@ jobs:
         run: npm install
 
       - name: Run Cypress not snapshot tests on Currents.dev
-        run: currents run --tag ${{ github.event.inputs.env }} --spec ${{ github.event.inputs.spec_file }} --browser chrome --record --parallel --key ${{ secrets.CURRENTS_RECORD_KEY }} --ci-build-id "${{ github.repository }}-${{ github.run_id }}-${{ github.run_attempt}}"
+        run: currents run --tag ${{ github.event.inputs.env }} --spec ${{ github.event.inputs.spec_file }} --env ${{ github.event.inputs.tags }} --browser chrome --record --parallel --key ${{ secrets.CURRENTS_RECORD_KEY }} --ci-build-id "${{ github.repository }}-${{ github.run_id }}-${{ github.run_attempt}}"
         env:
           CYPRESS_USERNAME: ${{ github.event.inputs.env == 'custom' && secrets.CESAR_USERNAME || secrets.USERNAME }}
           CYPRESS_PASSWORD: ${{ github.event.inputs.env == 'custom' && secrets.CESAR_PASSWORD || secrets.PASSWORD }}
@@ -73,4 +78,12 @@ jobs:
         with:
           name: failed-tests-DOM-snapshots
           path: cypress/gh_artifacts
+          retention-days: 2
+      
+      - name: Archive downloaded Reports (html and docx)
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: downloaded-reports
+          path: cypress/downloads
           retention-days: 2

@@ -2,12 +2,14 @@ import Enums from "../../../../../enums/enums";
 import ReportDataCreator from "../../../../data_creator/reportData.creator";
 
 const reportCreationFixture = () => {
-    return ReportDataCreator.getReportSpecificIncomeValue(Enums.INCOME_TYPE.BOTH, "4153");
+    return ReportDataCreator.getReportData("4153", {
+        incomeValue: Enums.INCOME_TYPE.BOTH
+    });
 };
 
 const checkboxesAttributesFixture = () => {
     return [
-        "gross", "modified gross", "tiple-net"];
+        "gross", "modified gross", "tiple-net" ];
 };
 
 export default {

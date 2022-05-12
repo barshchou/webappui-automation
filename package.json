@@ -3,12 +3,12 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "types": "./types/index.d.ts",
+  "types": "./cypress/types",
   "scripts": {
-    "act:debug":"act -e ./.act/debug.json --secret-file ./.act/.secrets -j Not-full-reports-run-DEBUG",
+    "act:debug": "act -e ./.act/debug.json --secret-file ./.act/.secrets -j Not-full-reports-run-DEBUG",
     "cy:open": "npx cypress open",
     "cy:chrome:snapshot_tests": "npx cypress run --env grepTags=@snapshot_tests,grepFilterSpecs=true --headless --browser=chrome",
-    "cy:chrome:update_snapshots":"npx cypress run --env grepTags=@snapshot_tests,grepFilterSpecs=true,updateSnapshots=true --headless --browser=chrome",
+    "cy:chrome:update_snapshots": "npx cypress run --env grepTags=@snapshot_tests,grepFilterSpecs=true,updateSnapshots=true --headless --browser=chrome",
     "cy:chrome_headed_stage_api": "npx cypress run --browser chrome --headed",
     "cy:chrome_headed_prod_api": "npx cypress run --browser chrome --headed --env url=prod",
     "cy:chrome_headed_dev_api": "npx cypress run --browser chrome --headed --env url=dev",
@@ -18,8 +18,13 @@
     "cy:full_chrome_headed_prod_api": "npx cypress run --spec cypress/integration/full_reports/** --browser chrome --headed --env url=prod",
     "cy:not_full_chrome_headed": "npx cypress run --spec cypress/integration/not_full_reports/** --browser chrome --headed",
     "cy:not_full_dev_chrome_headed": "npx cypress run --spec cypress/integration/not_full_reports/** --browser chrome --headed --env url=dev",
-    "currents:run":"currents run --spec './cypress/integration/not_full_reports/**/*.spec.ts' --browser chrome --record --parallel",
-    "currents:run:debug":"currents run --browser chrome"
+    "currents:run": "currents run --spec './cypress/integration/not_full_reports/**/*.spec.ts' --browser chrome --record --parallel",
+    "currents:run:debug": "currents run --browser chrome",
+    "tsc:check": "npx tsc --project ./cypress/tsconfig.json --noEmit",
+    "tsc:watch":"npm run tsc:check -- --watch",
+    "lint:run": "eslint \"./**\"",
+    "lint:fix": "eslint \"./**\" --fix"
+
   },
   "repository": {
     "type": "git",
@@ -36,15 +41,18 @@
     "@types/cypress-image-snapshot": "^3.1.6",
     "@typescript-eslint/eslint-plugin": "^5.17.0",
     "@typescript-eslint/parser": "^5.17.0",
-    "cypress": "^9.4.1",
+    "cypress": "^9.6.0",
     "cypress-file-upload": "^5.0.8",
     "cypress-grep": "^2.13.1",
     "cypress-iframe": "^1.0.1",
     "cypress-image-snapshot": "^4.0.1",
     "cypress-localstorage-commands": "^1.6.1",
+    "cypress-real-events": "^1.7.0",
     "cypress-xpath": "^1.6.2",
     "eslint": "^7.32.0",
     "eslint-plugin-cypress": "^2.12.1",
+    "glob": "^8.0.1",
+    "mammoth": "^1.4.21",
     "typescript": "^4.5.5"
   }
 }

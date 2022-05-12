@@ -1,11 +1,11 @@
 import clientPage from "../../pages/report/client.page";
-import {replaceEntersWithLineBreak} from "../../../utils/string.utils";
+import { replaceEntersWithLineBreak } from "../../../utils/string.utils";
 import BaseActionsExt from "../base/base.actions.ext";
 
 class ClientActions extends BaseActionsExt<typeof clientPage> {
 
     verifyInputChangesToBeUnsaved(clientFileNumber: string): ClientActions {
-        clientPage.clientFileNumberField.should("have.value",clientFileNumber);
+        clientPage.clientFileNumberField.should("have.value", clientFileNumber);
         return this;
     }
 
@@ -52,8 +52,8 @@ class ClientActions extends BaseActionsExt<typeof clientPage> {
         return this;
     }
 
-    clickRevertToGeneratedButton() {
-        clientPage.revertToGeneratedButton.click();
+    enterIntendedUserTextBox(textToType: string): ClientActions {
+        clientPage.intendedUserTextBox.type(textToType);
         return this;
     }
 
@@ -66,11 +66,6 @@ class ClientActions extends BaseActionsExt<typeof clientPage> {
         clientPage.formSaveBtn(index).click();
         return this;
     } 
-
-    enterIntendedUserTextBox(textToType: string): ClientActions {
-        clientPage.intendedUserTextBox.type(textToType);
-        return this;
-    }
 
     enterIdentificationOfTheClientTextBox(textToType: string): ClientActions {
         clientPage.identificationOfClientTextBox.type(textToType);
@@ -94,6 +89,16 @@ class ClientActions extends BaseActionsExt<typeof clientPage> {
 
     verifyIdentificationOfTheClientTextBox(verifyAreaValue: string): ClientActions {
         clientPage.identificationOfClientTextBox.should("contain.text", verifyAreaValue);
+        return this;
+    }
+
+    verifyNotContainIntendedUserTextBox(verifyAreaValue: string): ClientActions {
+        clientPage.intendedUserTextBox.should("not.contain.text", verifyAreaValue);
+        return this;
+    }
+
+    verifyNotContainIdentificationOfTheClientTextBox(verifyAreaValue: string): ClientActions {
+        clientPage.identificationOfClientTextBox.should("not.contain.text", verifyAreaValue);
         return this;
     }
 }

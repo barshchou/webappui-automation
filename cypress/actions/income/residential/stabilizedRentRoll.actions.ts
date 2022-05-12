@@ -1,6 +1,6 @@
 import BaseActions from "../../base/base.actions";
 import stabRentRollPage from "../../../pages/income/residential/stabilizedRentRoll.page";
-import {getNumberFromDollarNumberWithCommas, numberWithCommas} from "../../../../utils/numbers.utils";
+import { getNumberFromDollarNumberWithCommas, numberWithCommas } from "../../../../utils/numbers.utils";
 
 class StabilizedRentRollActions extends BaseActions{
 

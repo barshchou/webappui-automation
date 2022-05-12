@@ -3,10 +3,12 @@
 import testData from "../../../../fixtures/not_full_reports/income/expense_forecast/QA-4889.fixture";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import Income from "../../../../actions/income/income.manager";
-import {_NavigationSection} from "../../../../actions/base";
+import { _NavigationSection } from "../../../../actions/base";
+import { Tag } from "../../../../utils/tags.utils";
 
 
-describe("Comparable Min, Max, Avg values for Electricity Per Unit are correctly calculated and displayed", () => {
+describe("Comparable Min, Max, Avg values for Electricity Per Unit are correctly calculated and displayed", 
+{ tags:[ Tag.snapshot_tests, Tag.expense_forecast, Tag.income ] }, () => {
 
 
   before("Login, create report", () => {
@@ -19,11 +21,12 @@ describe("Comparable Min, Max, Avg values for Electricity Per Unit are correctly
     _NavigationSection.Actions.navigateToComparableExpenses();
 
     cy.stepInfo("2. Add several comps (via Search, Filter or Add blank column)");
-    testData.comparables.forEach((comp, index) => {
+    testData.comparables.forEach((comp) => {
       Income.ComparableExpenses.Actions.clickAddBlankColumnButton()
-        .enterAddressByColumnIndex(comp.address, index)
-        .enterResidentialUnitsByColumnIndex(comp.resUnits, index)
-        .enterCellDollarValueByColumnIndex(Income.ComparableExpenses.Page.electricityCells, comp.electricity, index);
+        .enterAddressByColumnIndex(comp.address)
+        .enterResidentialUnitsByColumnIndex(comp.resUnits)
+        .enterCellDollarValueByColumnIndex(Income.ComparableExpenses.Page.getUnifiedEditableAndTotalCells("electricity"),
+            comp.electricity);
     });
 
     cy.stepInfo("3. Make sure that Electricity and Residential Units fields are filled in for all added columns and save changes");
@@ -43,7 +46,7 @@ describe("Comparable Min, Max, Avg values for Electricity Per Unit are correctly
       .hideExpenseForecastHeader();
 
     Income.ExpenseForecast.Actions.matchElementSnapshot(
-      Income.ExpenseForecast.Page.ElectricityCard, testData.electricityCardSnapshotName, { padding: [10, 100] });
+      Income.ExpenseForecast.Page.electricityCard, testData.electricityCardSnapshotName, { padding: [ 10, 100 ] });
 
     cy.stepInfo("6. Delete report");
     deleteReport(testData.reportCreationData.reportNumber);

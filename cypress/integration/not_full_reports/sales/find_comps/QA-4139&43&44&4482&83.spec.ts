@@ -1,16 +1,18 @@
 import testData from "../../../../fixtures/not_full_reports/sales/find_comps/QA-4139&43&44&4482&83.fixture";
-import {createReport, deleteReport} from "../../../../actions/base/baseTest.actions";
-import {_NavigationSection} from "../../../../actions/base";
-import {Sales} from "../../../../actions";
-import {isProdEnv} from "../../../../../utils/env.utils";
-
+import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { _NavigationSection } from "../../../../actions/base";
+import { Sales } from "../../../../actions";
+import { isProdEnv } from "../../../../../utils/env.utils";
+import { Tag } from "../../../../utils/tags.utils";
 /*
     # Uladzislau.Samykou
     This spec is conditional, because tests for Create Sales Comp feature should NOT be tested on PROD environment
  */
 const conditionalDescribe = isProdEnv() ? describe.skip : describe;
 
-conditionalDescribe("Group of tests for numeric inputs at create comp modal", () => {
+conditionalDescribe("Group of tests for numeric inputs at create comp modal", 
+{ tags:[ Tag.find_comps, Tag.sales ] }, () => {
+
     beforeEach("Login, create report", () => {
         createReport(testData.reportCreationData);
         cy.stepInfo("Navigate to FindComps page and create new comp");
@@ -79,7 +81,7 @@ conditionalDescribe("Group of tests for numeric inputs at create comp modal", ()
         deleteReport(testData.reportCreationData.reportNumber);
     });
 
-    it("QA-4483: Verify the Average Unit Size field", () => {
+    it("QA-4483: Verify the Average Unit Size field", { tags:[ Tag.comp_plex ] }, () => {
         Sales._FindComps.enterNumericInputNewComp(Sales._FindComps.Page.averageUnitSizeNewComp, testData.spec4483.regularNumber)
             .enterNumericInputNewComp(Sales._FindComps.Page.averageUnitSizeNewComp, testData.spec4483.regularNumOverThousand)
             .enterNumericInputNewComp(Sales._FindComps.Page.averageUnitSizeNewComp, testData.spec4483.decimalNum)

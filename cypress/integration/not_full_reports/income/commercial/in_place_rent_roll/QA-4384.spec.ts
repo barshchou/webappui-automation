@@ -2,12 +2,12 @@ import testData from "../../../../../fixtures/not_full_reports/income/commercial
 import NavigationSection from "../../../../../actions/base/navigationSection.actions";
 import Income from "../../../../../actions/income/income.manager";
 import Property from "../../../../../actions/property/property.manager";
-import {createReport, deleteReport} from "../../../../../actions/base/baseTest.actions";
+import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
 
 describe("Verify the Use column in the grid", () => {
 
-    const useRadios = ["retail", "office", "medical", "community", "undetermined"];
-    const useTexts = ["Retail", "Office", "Medical Office", "Community Facility", "Undetermined"];
+    const useRadios: BoweryReports.CommercialUnitGroupsValues[] = [ "retail", "office", "medical", "community", "undetermined" ];
+    const useTexts = [ "Retail", "Office", "Medical Office", "Community Facility", "Undetermined" ];
     const groupName = "Use";
     const defaultUseValue = "Undetermined";
 
