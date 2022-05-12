@@ -150,6 +150,18 @@ class CommercialRentRollSharedComponent {
         }
         return this;
     }
+
+    verifyAnnualRentCellPerSFBasisByRow(rentPerSF: number, squareFoot: number, calcMethod: string, rowNumber = 0): this {
+        let numberToBe;
+        if (calcMethod === "annually") {
+            numberToBe = rentPerSF * squareFoot;
+        } else {
+            numberToBe = rentPerSF * squareFoot * 12;
+        }
+        this.annualRentCells.eq(rowNumber)
+            .should("have.text", `$${numberWithCommas(numberToBe.toFixed(2))}`);
+        return this;
+    }
 }
 
 export default CommercialRentRollSharedComponent;

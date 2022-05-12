@@ -28,14 +28,14 @@ describe("Verify the Annual Rent column in the grid", () => {
     });
 
     it("Per square foot", () => {
-        Income.Commercial.InPlaceRentRoll.enterAnnualRentPerSFByRowNumber(testData.general.rentPerSF)
+        Income.Commercial.InPlaceRentRoll.enterAnnualRentPerSFByRowNumber(testData.general.rentPerSF).Shared
             .verifyAnnualRentCellPerSFBasisByRow(testData.general.rentPerSF, testData.general.squareFeet, "annually");
         deleteReport(testData.reportCreationData.reportNumber);
     });
 
     it("Per square foot per month", () => {
         Income.Commercial.InPlaceRentRoll.clickPerSquareFootPerMonthButton()
-            .enterMonthlyRentPerSFByRowNumber(testData.general.rentPerSF)
+            .enterMonthlyRentPerSFByRowNumber(testData.general.rentPerSF).Shared
             .verifyAnnualRentCellPerSFBasisByRow(testData.general.rentPerSF, testData.general.squareFeet, "monthly");
         deleteReport(testData.reportCreationData.reportNumber);
     });
