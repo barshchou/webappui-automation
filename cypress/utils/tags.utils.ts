@@ -6,6 +6,7 @@ export enum Tag {
     snapshot_tests = "@snapshot_tests",
     expense_forecast = "@expense_forecast",
     fix = "@fix",
+    find_comps = "@find_comps",
     rent_comps = "@rent_comps",
     residential = "@residential",
     property = "@property",
