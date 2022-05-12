@@ -25,19 +25,6 @@ class StabilizedRentRollActions extends BaseActionsExt<typeof stabRentRollPage>{
         return this;
     }
 
-    verifyTenantNameByRow(name: string, leaseStatus: BoweryReports.LeaseStatus, rowNumber = 0): this {
-        let textToBe = leaseStatus === "Vacant" ? `Commercial Unit ${rowNumber + 1}` : name;
-        this.Shared.tenantNameCells.eq(rowNumber).should("have.text", textToBe);
-        return this;
-    }
-
-    verifyTenantNames(names: Array<string>, leaseStatuses: Array<BoweryReports.LeaseStatus>): this {
-        names.forEach((name, index) => {
-            this.verifyTenantNameByRow(name, leaseStatuses[index], index);
-        });
-        return this;
-    }
-
     verifyUseCellByRow(useText: BoweryReports.CommercialUnitsUseTexts, rowNumber = 0): this {
         this.Shared.useCells.eq(rowNumber).should("have.text", useText);
         return this;

@@ -25,7 +25,8 @@ describe("Verify the Commercial Stabilized Rent Roll table",
         }    
         NavigationSection.navigateToCommercialInPlaceRentRoll();
         Income.Commercial.InPlaceRentRoll.chooseListLeaseStatuses(testData.leaseStatuses, testData.numberOfCommercialUnits)
-            .enterTenantNames(testData.tenantNames, testData.leaseStatuses);
+            .enterTenantNames(testData.tenantNames, testData.leaseStatuses)
+            .Shared.verifyTenantNames(testData.tenantNames, testData.leaseStatuses);
         testData.rentsPsf.forEach((rent, index) => {
             if (testData.leaseStatuses[index] !== "Vacant") {
                 Income.Commercial.InPlaceRentRoll.enterAnnualRentPerSFByRowNumber(rent, index);

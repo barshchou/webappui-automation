@@ -86,6 +86,19 @@ class CommercialRentRollSharedComponent {
         });
         return this;
     }
+
+    verifyTenantNameByRow(leaseStatus: BoweryReports.LeaseStatus, name?: string, rowNumber = 0): this {
+        let textToBe = leaseStatus === "Vacant" ? `Commercial Unit ${rowNumber + 1}` : name;
+        this.tenantNameCells.eq(rowNumber).should("have.text", textToBe);
+        return this;
+    }
+
+    verifyTenantNames(names: Array<string>, leaseStatuses: Array<BoweryReports.LeaseStatus>): this {
+        names.forEach((name, index) => {
+            this.verifyTenantNameByRow(leaseStatuses[index], name, index);
+        });
+        return this;
+    }
 }
 
 export default CommercialRentRollSharedComponent;

@@ -128,7 +128,7 @@ class CommercialRentRollActions extends BaseActionsExt<typeof rentRollPage> {
 
     enterTenantNameByRowNumber(name: string, rowNumber = 0, leaseStatus?: BoweryReports.LeaseStatus): this {
         if (leaseStatus === "Vacant") {
-            this.verifyTenantNameByRowNumber(leaseStatus, name, rowNumber);
+            this.Shared.verifyTenantNameByRow(leaseStatus, name, rowNumber);
         } else {
             this.Shared.tenantNameCells.eq(rowNumber).dblclick({ force: true });
             this.Shared.textareaToInput.clear().type(name).type("{enter}");
@@ -146,12 +146,6 @@ class CommercialRentRollActions extends BaseActionsExt<typeof rentRollPage> {
         names.forEach((name, index) => {
             this.enterTenantNameByRowNumber(name, index, leaseStatuses[index]);
         });
-        return this;
-    }
-
-    verifyTenantNameByRowNumber(leaseStatus: BoweryReports.LeaseStatus, nameToBe?: string, rowNumber = 0): this {
-        let textToBe = leaseStatus === "Vacant" ? `Commercial Unit ${rowNumber + 1}` : nameToBe;
-        this.Shared.tenantNameCells.eq(rowNumber).should("have.text", textToBe);
         return this;
     }
 

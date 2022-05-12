@@ -11,10 +11,10 @@ describe("Verify the Tenant column in the grid", () => {
     it("Test body", () => {
         NavigationSection.navigateToCommercialInPlaceRentRoll();
         Income.Commercial.InPlaceRentRoll.chooseLeaseStatusByRowNumber(testData.leaseOccupied)
-            .enterTenantNameByRowNumber(testData.tenantName)
-            .verifyTenantNameByRowNumber(testData.leaseOccupied, testData.tenantName)
-            .chooseLeaseStatusByRowNumber(testData.leaseVacant)
-            .verifyTenantNameByRowNumber(testData.leaseVacant);
+            .enterTenantNameByRowNumber(testData.tenantName).Shared
+            .verifyTenantNameByRow(testData.leaseOccupied, testData.tenantName);
+        Income.Commercial.InPlaceRentRoll.chooseLeaseStatusByRowNumber(testData.leaseVacant).Shared
+            .verifyTenantNameByRow(testData.leaseVacant);
         deleteReport(testData.reportCreationData.reportNumber);
     });
 });

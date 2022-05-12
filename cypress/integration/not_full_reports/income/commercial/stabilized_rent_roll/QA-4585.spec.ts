@@ -45,9 +45,9 @@ describe("Verify the Commercial Stabilized Rent Roll table", () => {
         5. Verify that the data in the Commercial Stabilized Rent Roll 
         are correctly pulled from the In-Place Rent Roll page.
         `);
-        Income.Commercial.StabilizedRentRoll.Shared.verifyLeaseStatuses(testData.leaseStatuses);
-        Income.Commercial.StabilizedRentRoll.verifyTenantNames(testData.tenantNames, testData.leaseStatuses)
-            .verifyUseCells(testData.useTexts)
+        Income.Commercial.StabilizedRentRoll.Shared.verifyLeaseStatuses(testData.leaseStatuses)
+            .verifyTenantNames(testData.tenantNames, testData.leaseStatuses);
+        Income.Commercial.StabilizedRentRoll.verifyUseCells(testData.useTexts)
             .verifySFCells(testData.listOfUnitsSF)
             .verifyAnnualRentByRow(testData.annualRent, 1)
             .verifyMonthlyRentByRow(testData.monthlyRent, 1)
@@ -70,8 +70,8 @@ describe("Verify the Commercial Stabilized Rent Roll table", () => {
         cy.stepInfo(`
         8. Verify that the data from step 5 is also changed.
         `);
-        Income.Commercial.StabilizedRentRoll.verifyTenantNameByRow(testData.newTenantName, testData.leaseStatuses[1], 1)
-            .clickSaveButton()
+        Income.Commercial.StabilizedRentRoll.Shared.verifyTenantNameByRow(testData.leaseStatuses[1], testData.newTenantName, 1);
+        Income.Commercial.StabilizedRentRoll.clickSaveButton()
             .verifyProgressBarNotExist();
         
         cy.stepInfo(`
@@ -87,7 +87,7 @@ describe("Verify the Commercial Stabilized Rent Roll table", () => {
         `);
         NavigationSection.openCommercialStabilizedRentRollInCommercial()
             .verifyProgressBarNotExist();
-        Income.Commercial.StabilizedRentRoll.verifyTenantNameByRow("", testData.leaseStatuses[1], 1);
+        Income.Commercial.StabilizedRentRoll.Shared.verifyTenantNameByRow(testData.leaseStatuses[1], "", 1);
         
         cy.stepInfo(`
         11. Proceed to the Income > Commercial > Stabilized Rent Roll page.
