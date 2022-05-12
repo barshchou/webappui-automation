@@ -180,6 +180,12 @@ class CommercialRentRollSharedComponent {
         this.monthlyRentCells.eq(rowNumber).should("have.text", `$${textToBe}`);
         return this;
     }
+
+    verifyAnnualRentMonthlyByRowNumber(monthlyRent: number, rowNumber = 0): this {
+        const textToBe = numberWithCommas((monthlyRent * 12).toFixed(2));
+        this.verifyAnnualRentCellTextByRow(textToBe, rowNumber);
+        return this;
+    }
 }
 
 export default CommercialRentRollSharedComponent;

@@ -22,7 +22,7 @@ describe("Verify the Annual Rent column in the grid", () => {
 
     it("Monthly", () => {
         Income._CommercialManager.InPlaceRentRoll.clickMonthlyBasisButton()
-            .enterMonthlyRentByRowNumber(testData.general.monthlyRent)
+            .enterMonthlyRentByRowNumber(testData.general.monthlyRent).Shared
             .verifyAnnualRentMonthlyByRowNumber(testData.general.monthlyRent);
         deleteReport(testData.reportCreationData.reportNumber);
     });

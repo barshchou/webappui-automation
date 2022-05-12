@@ -165,12 +165,6 @@ class CommercialRentRollActions extends BaseActionsExt<typeof rentRollPage> {
         return this;
     }
 
-    verifyAnnualRentMonthlyByRowNumber(monthlyRent: number, rowNumber = 0): this {
-        const textToBe = numberWithCommas((monthlyRent * 12).toFixed(2));
-        this.Shared.annualRentCells.eq(rowNumber).should("have.text", `$${textToBe}`);
-        return this;
-    }
-
     enterAnnualRentByRowNumber(annualRent: number, rowNumber = 0): this {
         this.Shared.annualRentCells.eq(rowNumber).should("not.have.class", "readOnly").dblclick({ force: true });
         this.Shared.textareaToInput.clear().type(`${annualRent}`).type("{enter}");
