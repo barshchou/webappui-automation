@@ -23,7 +23,7 @@ describe(`Verify the suggested text dropdown in the new narrative component adde
         Income._CommercialManager.StabilizedRentRoll.clickEditStabilizedCommercialIncomeDiscussion();
 
         cy.stepInfo("3. Enter the “=Un“ and select the 'Unchanged Renovation' option.");
-        Income._CommercialManager.StabilizedRentRoll.typeStabilizedCommercialIncomeTextArea(testData.value)
+        Income._CommercialManager.StabilizedRentRoll.typeStabilizedCommercialIncomeTextArea(testData.value).Shared
           .clickNarrativeSuggestions(testData.verifyListValue);
 
         cy.stepInfo(`4. Verify that the following text appears: Upon renovation, the subject unit 

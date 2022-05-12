@@ -23,8 +23,6 @@ class CommercialRentRollPage extends BasePage{
 
     get cancelDiscussionEdit() {return cy.xpath("//*[.='Current Commercial Income Discussion']//following::button[.='Cancel'][1]");}
 
-    get narrativeSuggestionsList() {return cy.get("[data-qa='narrative-suggestions-list'] > ul");}
-
     get inPlaceCommercialIncomeTextArea() {return cy.xpath("//*[.='Current Commercial Income Discussion']//following::*[@data-slate-editor][1]");}
 }
 

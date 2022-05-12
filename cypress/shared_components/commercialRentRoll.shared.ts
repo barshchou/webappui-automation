@@ -59,6 +59,8 @@ class CommercialRentRollSharedComponent {
 
     get rentPerSfPerMonthColumnName() {return cy.contains("Rent PSF/Month");}
 
+    get narrativeSuggestionsList() {return cy.get("[data-qa='narrative-suggestions-list'] > ul");}
+
     verifyIsInspectedChecked(rowNumber = 0): this {
         this.elementToVerifyIsInspected.eq(rowNumber).should("have.css", "background-color", "rgb(66, 96, 211)");
         return this;
@@ -160,6 +162,11 @@ class CommercialRentRollSharedComponent {
         }
         this.annualRentCells.eq(rowNumber)
             .should("have.text", `$${numberWithCommas(numberToBe.toFixed(2))}`);
+        return this;
+    }
+
+    clickNarrativeSuggestions(verifyListValue: string): this {
+        this.narrativeSuggestionsList.contains(verifyListValue).click();
         return this;
     }
 }
