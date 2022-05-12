@@ -8,6 +8,6 @@ const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreat
 });
 
 export default {
-    reportCreationData: _reportCreationData,//reportCreationFixture(),
+    reportCreationData: _reportCreationData, //reportCreationFixture(),
     commentary: "Test characters, 123. !@#"
 };

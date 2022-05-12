@@ -9,7 +9,7 @@ const reportCreationFixture = () => {
 
 const checkboxesAttributesFixture = () => {
     return [
-        "gross", "modified gross", "tiple-net"];
+        "gross", "modified gross", "tiple-net" ];
 };
 
 export default {

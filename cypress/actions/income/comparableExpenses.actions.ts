@@ -1,6 +1,6 @@
 import BaseActions from "../base/base.actions";
 import compExpensesPage from "../../pages/income/comparableExpenses.page";
-import {getNumberFromDollarNumberWithCommas, numberWithCommas} from "../../../utils/numbers.utils";
+import { getNumberFromDollarNumberWithCommas, numberWithCommas } from "../../../utils/numbers.utils";
 
 class ComparableExpensesActions extends BaseActions {
 

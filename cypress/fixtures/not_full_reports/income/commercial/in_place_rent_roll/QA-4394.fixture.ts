@@ -9,13 +9,13 @@ const reportCreationFixture = () => {
     });
 };
 
-const leaseStatusesFixture: BoweryReports.LeaseStatus[] = ["Occupied", "Vacant", "Occupied"];
+const leaseStatusesFixture: BoweryReports.LeaseStatus[] = [ "Occupied", "Vacant", "Occupied" ];
 
 const generalFixture = () => {
     return {
         numberOfUnits: 3,
-        squareFeetList: [200, 358, 190.5],
-        perSFList: [100, 95, 1051.9]
+        squareFeetList: [ 200, 358, 190.5 ],
+        perSFList: [ 100, 95, 1051.9 ]
     };
 };
 

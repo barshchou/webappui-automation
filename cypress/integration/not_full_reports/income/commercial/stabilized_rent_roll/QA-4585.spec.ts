@@ -1,5 +1,5 @@
 import testData from "../../../../../fixtures/not_full_reports/income/commercial/stabilized_rent_roll/QA-4585.fixture";
-import {createReport, deleteReport} from "../../../../../actions/base/baseTest.actions";
+import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../../actions/base/navigationSection.actions";
 import Property from "../../../../../actions/property/property.manager";
 import Income from "../../../../../actions/income/income.manager";
@@ -49,7 +49,7 @@ describe("Verify the Commercial Stabilized Rent Roll table", () => {
             .verifyTenantNames(testData.tenantNames, testData.leaseStatuses)
             .verifyUseCells(testData.useTexts)
             .verifySFCells(testData.listOfUnitsSF)
-            .verifyAnnualRentByRow(testData.annualRent,1)
+            .verifyAnnualRentByRow(testData.annualRent, 1)
             .verifyMonthlyRentByRow(testData.monthlyRent, 1)
             .verifyAnnuallyRentPsf(testData.rentsPsf[1], 1)
             .clickSaveButton()
@@ -87,7 +87,7 @@ describe("Verify the Commercial Stabilized Rent Roll table", () => {
         `);
         NavigationSection.openCommercialStabilizedRentRollInCommercial()
             .verifyProgressBarNotExist();
-        Income.Commercial.StabilizedRentRoll.verifyTenantNameByRow("", testData.leaseStatuses[1],1);
+        Income.Commercial.StabilizedRentRoll.verifyTenantNameByRow("", testData.leaseStatuses[1], 1);
         
         cy.stepInfo(`
         11. Proceed to the Income > Commercial > Stabilized Rent Roll page.

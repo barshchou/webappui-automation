@@ -12,7 +12,7 @@ export const interceptGoogleScriptsLoad = () => {
 };
 
 export const waitGoogleScriptsToLoad = () => {
-    cy.wait("@googleScripts", {timeout: 10000}).its("response.statusCode").should("eq", 200);
+    cy.wait("@googleScripts", { timeout: 10000 }).its("response.statusCode").should("eq", 200);
 };
 
 export const interceptGoogleScriptsAndWaitLoad = () => {
@@ -22,7 +22,7 @@ export const interceptGoogleScriptsAndWaitLoad = () => {
 
 const aliasInterceptedReportId = "aliasInterceptedReportId";
 export const interceptReportId = () => {
-    return cy.intercept("GET","/report/*").as(aliasInterceptedReportId);
+    return cy.intercept("GET", "/report/*").as(aliasInterceptedReportId);
 };
 
 export const setReportId = () => {

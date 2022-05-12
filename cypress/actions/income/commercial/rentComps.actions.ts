@@ -77,7 +77,7 @@ class CommercialRentCompsActions extends BaseActions {
      * @returns {CommercialRentCompsActions}
      */
     addCompFromMapByAddress(address) {
-        rentCompsPage.getAddCompButtonByAddress(address).click({force: true});
+        rentCompsPage.getAddCompButtonByAddress(address).click({ force: true });
         return this;
     }
 }

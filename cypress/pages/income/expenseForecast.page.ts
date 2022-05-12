@@ -69,9 +69,9 @@ class ExpenseForecastPage extends BasePage {
 
     get expenseConfirmRevertButton() {return cy.xpath("//*[.='Yes, revert']");}
 
-    get createNewCategoryButton() {return cy.contains('+ Add Expense Category');}
+    get createNewCategoryButton() {return cy.contains('Add Expense Category +');}
 
-    get newCategoryExpenseName() { return cy.get('[name="expense"]');}
+    get newCategoryExpenseName() { return cy.get('[data-qa="expenseName-form-control"] input');}
 
 }
 
