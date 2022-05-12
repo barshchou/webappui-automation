@@ -66,7 +66,7 @@ class CommercialRentRollActions extends BaseActionsExt<typeof rentRollPage> {
         rentRollPage.leaseStatusArrows.eq(rowNumber).should("be.visible").as("arrow");
         cy.get("@arrow").click({ force: true });
         rentRollPage.getLeaseStatusToChooseByValue(status).click();
-        this.verifyLeaseStatusCellTextByRow(status, rowNumber);
+        this.Shared.verifyLeaseStatusByRow(status, rowNumber);
         if (status === "Vacant") {
             this.Shared.getAllCellsByRowNumber(rowNumber).then(cells => {
                 for (let i = 3; i < cells.length - 2; i++) {
@@ -74,11 +74,6 @@ class CommercialRentRollActions extends BaseActionsExt<typeof rentRollPage> {
                 }
             });
         }
-        return this;
-    }
-
-    verifyLeaseStatusCellTextByRow(textToBe: string, rowNumber = 0): this {
-        this.Shared.leaseStatusCells.eq(rowNumber).should("have.text", textToBe);
         return this;
     }
 

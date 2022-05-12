@@ -74,6 +74,18 @@ class CommercialRentRollSharedComponent {
         }
         return this;
     }
+
+    verifyLeaseStatusByRow(leaseStatus: BoweryReports.LeaseStatus, rowNumber = 0): this {
+        this.leaseStatusCells.eq(rowNumber).should("contain.text", leaseStatus);
+        return this;
+    }
+
+    verifyLeaseStatuses(statuses: Array<BoweryReports.LeaseStatus>): this {
+        statuses.forEach((status, index) => {
+            this.verifyLeaseStatusByRow(status, index);
+        });
+        return this;
+    }
 }
 
 export default CommercialRentRollSharedComponent;

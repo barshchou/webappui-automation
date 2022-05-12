@@ -45,8 +45,8 @@ describe("Verify the Commercial Stabilized Rent Roll table", () => {
         5. Verify that the data in the Commercial Stabilized Rent Roll 
         are correctly pulled from the In-Place Rent Roll page.
         `);
-        Income.Commercial.StabilizedRentRoll.verifyLeaseStatuses(testData.leaseStatuses)
-            .verifyTenantNames(testData.tenantNames, testData.leaseStatuses)
+        Income.Commercial.StabilizedRentRoll.Shared.verifyLeaseStatuses(testData.leaseStatuses);
+        Income.Commercial.StabilizedRentRoll.verifyTenantNames(testData.tenantNames, testData.leaseStatuses)
             .verifyUseCells(testData.useTexts)
             .verifySFCells(testData.listOfUnitsSF)
             .verifyAnnualRentByRow(testData.annualRent, 1)
