@@ -1,11 +1,11 @@
-import BaseActions from "../base/base.actions";
 import adjustCompsPage from "../../pages/sales/adjustComps.page";
 import {
     getNumberFromDollarNumberWithCommas,
     numberWithCommas
 } from "../../../utils/numbers.utils";
+import BaseActionsExt from "../base/base.actions.ext";
 
-class AdjustCompsActions extends BaseActions {
+class AdjustCompsActions extends BaseActionsExt<typeof adjustCompsPage> {
 
     checkCalculationUnitsRadio(value: string): AdjustCompsActions {
         adjustCompsPage.calculationUnitsRadio.check(value).should("be.checked");
@@ -112,4 +112,4 @@ class AdjustCompsActions extends BaseActions {
     }
 }
 
-export default new AdjustCompsActions();
+export default new AdjustCompsActions(adjustCompsPage);
