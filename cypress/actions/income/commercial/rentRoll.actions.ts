@@ -161,12 +161,7 @@ class CommercialRentRollActions extends BaseActionsExt<typeof rentRollPage> {
         this.Shared.monthlyRentCells.eq(rowNumber).should("not.have.class", "readOnly").dblclick({ force: true });
         this.Shared.textareaToInput.clear().type(`${monthlyRent}`).type("{enter}");
         const textToBe = numberWithCommas(monthlyRent.toFixed(2));
-        this.verifyMonthlyRentByRowCellText(textToBe, rowNumber);
-        return this;
-    }
-
-    verifyMonthlyRentByRowCellText(textToBe = "0.00", rowNumber = 0): this {
-        this.Shared.monthlyRentCells.eq(rowNumber).should("have.text", `$${textToBe}`);
+        this.Shared.verifyMonthlyRentByRowCellText(textToBe, rowNumber);
         return this;
     }
 

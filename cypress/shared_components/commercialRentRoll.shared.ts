@@ -175,6 +175,11 @@ class CommercialRentRollSharedComponent {
         this.annualRentCells.eq(rowNumber).should("have.text", `$${textToBe}`);
         return this;
     }
+
+    verifyMonthlyRentByRowCellText(textToBe = "0.00", rowNumber = 0): this {
+        this.monthlyRentCells.eq(rowNumber).should("have.text", `$${textToBe}`);
+        return this;
+    }
 }
 
 export default CommercialRentRollSharedComponent;

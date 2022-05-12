@@ -18,6 +18,6 @@ export default {
     leaseStatuses: leaseStatusesFixture,
     tenantNames: [ "vacant name", "test name" ],
     rentsPsf: [ 100, 120 ],
-    monthlyRent: "$20,000.00",
+    monthlyRent: "20,000.00",
     newTenantName: "new test name"
 };

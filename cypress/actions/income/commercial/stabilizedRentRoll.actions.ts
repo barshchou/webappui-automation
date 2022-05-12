@@ -24,11 +24,6 @@ class StabilizedRentRollActions extends BaseActionsExt<typeof stabRentRollPage>{
         return this;
     }
 
-    verifyMonthlyRentByRow(rentToBe: string, rowNumber: number): this {
-        this.Shared.monthlyRentCells.eq(rowNumber).should("contain.text", rentToBe);
-        return this;
-    }
-
     annualRentPsfCellsScroll() {
         cy.contains("Rent/SF").scrollIntoView();
         return this;
