@@ -2,8 +2,10 @@ import testData from "../../../../fixtures/not_full_reports/property/commercial_
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { Income, Property } from "../../../../actions";
+import { Tag } from "../../../../utils/tags.utils";
 
-describe("Verify the functionality of the Use* radio button", () => {
+describe("Verify the functionality of the Use* radio button", 
+{ tags:[ Tag.property, Tag.commercial_units ] }, () => {
 
     beforeEach("Login, create report", () => {
         createReport(testData.reportCreationData);

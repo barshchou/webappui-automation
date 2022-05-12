@@ -6,6 +6,14 @@ export enum Tag {
     snapshot_tests = "@snapshot_tests",
     expense_forecast = "@expense_forecast",
     fix = "@fix",
+    find_comps = "@find_comps",
+    rent_comps = "@rent_comps",
+    residential = "@residential",
+    property = "@property",
+    commercial_units = "@commercial_units",
+    sales = "@sales",
+    value_conclusion = "@value_conclusion",
+    check_export = "@check_export",
     report = "@report",
     client = "@client"
 }
