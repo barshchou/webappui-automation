@@ -3,13 +3,14 @@ import {createReport, deleteReport} from "../../../../actions/base/baseTest.acti
 import { _NavigationSection } from "../../../../actions/base";
 import { _TaxInfo } from "../../../../actions/income";
 import { ReviewExport} from './../../../../actions/index';
+import { Tag } from "../../../../utils/tags.utils";
 
 describe("Assessed Value & RE Taxes] Verify the 'Tax Calculation Discussion' generated commentary is displayed on the Tax Info page.", () => {
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
     });
 
-    it("Test body", {tags: '@to_check_export'} ,() => {
+    it("Test body", {tags: [ Tag.check_export, Tag.income, Tag.tax_info ]}, () => {
         cy.stepInfo("1. Navigate to Income -> Tax Info");
         _NavigationSection.navigateToTaxInfo();
 
