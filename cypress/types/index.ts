@@ -52,6 +52,8 @@ namespace BoweryReports {
     export type CommercialUnitsFloorValues = "belowGrade" | "groundFloor" | "upperFloor" | "other";
     export type CommercialUnitsStreetTypeValues = "side street" | "avenue";
     export type CommercialUnitsLocationValues = "corner" | "mid-block" | "through-lot" ;
+    export type CommercialUnitsFrontageValues = "small" | "medium" | "large" | "other"; 
+
     export namespace CommercialUnits {
         /*
         More Unit Groups Values will be added after other values types added
@@ -59,7 +61,7 @@ namespace BoweryReports {
         export type GroupsValues = CommercialUnitsUseValues | CommercialUnitsGradeValues | CommercialUnitsFacadeValues | CommercialUnitsStateValues 
         | CommercialUnitsCeilingHeightValues | CommercialUnitsLocationValues | CommercialUnitsStreetTypeValues | CommercialUnitsFrontageValues | CommercialUnitsFloorValues;
     }
-    export type CommercialUnitsFrontageValues = "small" | "medium" | "large" | "other"; 
+    
 
     /*
     More Unit Groups Values will be added after other values types added
