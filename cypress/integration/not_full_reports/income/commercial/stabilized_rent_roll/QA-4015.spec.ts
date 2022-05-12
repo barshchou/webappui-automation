@@ -5,8 +5,10 @@ import Property from "../../../../../actions/property/property.manager";
 import Income from "../../../../../actions/income/income.manager";
 import ReviewExport from "../../../../../actions/reviewExport/reviewExport.actions";
 import { isEndsWithDecimal } from "../../../../../utils/html.utils";
+import { Tag } from "../../../../../utils/tags.utils";
 
-describe("Verify the Commercial Stabilized Rent Roll table", { tags: '@to_check_export' }, () => {
+describe("Verify the Commercial Stabilized Rent Roll table", 
+{ tags: [Tag.check_export, Tag.income,Tag.commercial] }, () => {
     it("Test body", () => {  
         createReport(testData.reportCreationData);
         

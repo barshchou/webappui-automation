@@ -11,5 +11,6 @@ export enum Tag {
     property = "@property",
     commercial_units = "@commercial_units",
     sales = "@sales",
-    value_conclusion = "@value_conclusion"
+    value_conclusion = "@value_conclusion",
+    check_export = "@check_export"
 }

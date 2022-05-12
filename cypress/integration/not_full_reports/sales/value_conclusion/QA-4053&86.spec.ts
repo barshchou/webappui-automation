@@ -3,10 +3,11 @@ import testData from "../../../../fixtures/not_full_reports/sales/value_conclusi
 import { _NavigationSection } from "../../../../actions/base/index";
 import {createReport, deleteReport} from "../../../../actions/base/baseTest.actions";
 import { _Summary } from "../../../../actions/property";
+import { Tag } from '../../../../utils/tags.utils';
 
 
 describe("[QA-4053] [QA-4086] The Concluded Value Per Unit is calculated correctly and includes both commercial and residential units.", () => {
-    it("Test body", { tags: '@to_check_export' }, () => {
+    it("Test body", { tags: [Tag.check_export, Tag.sales,Tag.value_conclusion] }, () => {
         createReport(testData.reportCreationData);
         cy.stepInfo('Precondition: Navigate to report summary and specify amount of residential and commercial units');
         _NavigationSection.navigateToPropertySummary();
