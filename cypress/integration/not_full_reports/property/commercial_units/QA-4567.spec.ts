@@ -5,8 +5,7 @@ import { _NavigationSection } from "../../../../actions/base";
 import { Tag } from "../../../../utils/tags.utils";
 
 describe("Verify the Save button functionality on the Commercial Units page",
-    { tags: [ Tag.property, Tag.commercial_units ] },
-    () => {
+    { tags: [ Tag.property, Tag.commercial_units ] }, () => {
 
         before("Report creation and several commercial units addition", () => {
             createReport(testData.reportCreationData);
