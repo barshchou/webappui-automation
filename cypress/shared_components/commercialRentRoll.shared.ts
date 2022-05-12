@@ -55,6 +55,25 @@ class CommercialRentRollSharedComponent {
     get cancelRevertButton() {return this.yesRevertButton.prev("button");}
 
     get rentPerSfPerMonthColumnName() {return cy.contains("Rent PSF/Month");}
+
+    verifyIsInspectedChecked(rowNumber = 0): this {
+        this.elementToVerifyIsInspected.eq(rowNumber).should("have.css", "background-color", "rgb(66, 96, 211)");
+        return this;
+    }
+
+    verifyIsInspectedNotChecked(rowNumber = 0): this {
+        this.elementToVerifyIsInspected.eq(rowNumber).should("not.have.css", "background-color", "rgb(66, 96, 211)");
+        return this;
+    }
+
+    verifyIsInspectedCheckedAll(isInspected: boolean[]): this {
+        for (let i = 0; i < isInspected.length; i++) {
+            if (isInspected[i]) {
+                this.verifyIsInspectedChecked(i);
+            }
+        }
+        return this;
+    }
 }
 
 export default CommercialRentRollSharedComponent;

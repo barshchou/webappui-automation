@@ -103,28 +103,18 @@ class CommercialRentRollActions extends BaseActionsExt<typeof rentRollPage> {
 
     checkIsInspectedCheckboxByRowNumber(rowNumber = 0): this {
         rentRollPage.pageHeader.should("be.visible");
-        const backColor = "rgb(66, 96, 211)";
-        this.Shared.elementToVerifyIsInspected.should("not.have.css", "background-color", backColor);
-        rentRollPage.isInspectedCheckboxes.eq(rowNumber).as("isInspectedCheckbox");
-        cy.get("@isInspectedCheckbox").invoke("show");
-        cy.get("@isInspectedCheckbox").check({ force: true });
-        this.Shared.elementToVerifyIsInspected.should("have.css", "background-color", backColor);
+        this.Shared.verifyIsInspectedNotChecked(rowNumber);
+        rentRollPage.isInspectedCheckboxes.eq(rowNumber).check({ force: true });
+        this.Shared.verifyIsInspectedChecked(rowNumber);
         return this;
     }
 
     chooseCheckBoxesIsInspectedFromList(isInspected: boolean[]): this {
         for (let i = 0; i < isInspected.length; i++) {
             if (isInspected[i]) {
-                this.chooseCheckBoxesIsInspectedByRowNumber(i);
+                this.checkIsInspectedCheckboxByRowNumber(i);
             }
         }
-        return this;
-    }
-
-    chooseCheckBoxesIsInspectedByRowNumber(rowNumber: number): this {
-        rentRollPage.isInspectedCheckboxes.eq(rowNumber).check({ force: true });
-        const backColor = "rgb(66, 96, 211)";
-        this.Shared.elementToVerifyIsInspected.should("have.css", "background-color", backColor);
         return this;
     }
 

@@ -1,36 +1,22 @@
-import stabRenRollPage from "../../../pages/income/commercial/stabilizedRentRoll.page";
+import stabRentRollPage from "../../../pages/income/commercial/stabilizedRentRoll.page";
 import { numberWithCommas } from "../../../../utils/numbers.utils";
 import BaseActionsExt from "../../base/base.actions.ext";
 import CommercialRentRollSharedComponent from "../../../shared_components/commercialRentRoll.shared";
 
-class StabilizedRentRollActions extends BaseActionsExt<typeof stabRenRollPage>{
+class StabilizedRentRollActions extends BaseActionsExt<typeof stabRentRollPage>{
 
     /**
      * @description Contains elements and actions, identical for In-Place Rent Roll and Stabilized Rent Roll pages
      */
     Shared: CommercialRentRollSharedComponent;
 
-    constructor(page: typeof stabRenRollPage, sharedComponent: CommercialRentRollSharedComponent) {
+    constructor(page: typeof stabRentRollPage, sharedComponent: CommercialRentRollSharedComponent) {
         super(page);
         this.Shared = sharedComponent;
     }
 
-    verifyIsInspectedChecked(rowNumber= 0): this {
-        this.Shared.elementToVerifyIsInspected.eq(rowNumber).should("have.css", "background-color", "rgb(66, 96, 211)");
-        return this;
-    }
-
-    verifyIsInspectedCheckedAll(isInspected: boolean[]): this {
-        for (let i = 0; i < isInspected.length; i++) {
-            if (isInspected[i]) {
-                this.verifyIsInspectedChecked(i);
-            }
-        }
-        return this;
-    }
-
     verifyThatPageIsOpened(): this {
-        stabRenRollPage.stabilizedRentRollHeaderSection.should("be.visible");
+        stabRentRollPage.stabilizedRentRollHeaderSection.should("be.visible");
         cy.url().then(url => {
             let urlObj = new URL(url);
             cy.log("Check whether current URL ends with '/commercial-projected-rent-roll'");
@@ -138,25 +124,25 @@ class StabilizedRentRollActions extends BaseActionsExt<typeof stabRenRollPage>{
     }
 
     clickEditStabilizedCommercialIncomeDiscussion(): StabilizedRentRollActions {
-        stabRenRollPage.formEditBtn(0).click();
+        stabRentRollPage.formEditBtn(0).click();
         return this;
     }
 
     typeStabilizedCommercialIncomeTextArea(value: string): StabilizedRentRollActions {
-        stabRenRollPage.stabilizedCommercialIncomeTextArea.type(value);
+        stabRentRollPage.stabilizedCommercialIncomeTextArea.type(value);
         return this;
     }
 
     clickNarrativeSuggestions(verifyListValue: string): StabilizedRentRollActions {
-        stabRenRollPage.narrativeSuggestionsList.contains(verifyListValue).click();
+        stabRentRollPage.narrativeSuggestionsList.contains(verifyListValue).click();
         return this;
     }
 
     verifyStabilizedCommercialIncomeTextArea(verifyAreaValue: string): StabilizedRentRollActions {
-        stabRenRollPage.stabilizedCommercialIncomeTextArea.should("contain.text", verifyAreaValue);
+        stabRentRollPage.stabilizedCommercialIncomeTextArea.should("contain.text", verifyAreaValue);
         return this;
     }
 
 }
 
-export default new StabilizedRentRollActions(stabRenRollPage, new CommercialRentRollSharedComponent());
+export default new StabilizedRentRollActions(stabRentRollPage, new CommercialRentRollSharedComponent());
