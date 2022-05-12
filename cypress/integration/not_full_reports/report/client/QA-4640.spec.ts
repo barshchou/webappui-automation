@@ -1,4 +1,4 @@
-import { Report } from "../../../../actions";
+import { Report, ReviewExport } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import testData from '../../../../fixtures/not_full_reports/report/client/QA-4640.fixture';
@@ -51,6 +51,11 @@ describe(`[QA-4640] Verify the "Linked" chips dropdown in the new narrative comp
             .verifyIdentificationOfTheClientTextBox(el.verifySuggest);
 
         });
+
+        cy.stepInfo("5. Download report");
+        _NavigationSection.openReviewAndExport(true);
+        ReviewExport.generateDocxReport().waitForReportGenerated()
+        .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
         deleteReport(testData.reportCreationData.reportNumber);
     });
 
@@ -59,6 +64,11 @@ describe(`[QA-4640] Verify the "Linked" chips dropdown in the new narrative comp
             cy.log(<string>file);
             cy.stepInfo("6. Verify the linked chips on export for both sections:");
             cy.visit(<string>file);
+
+            testData.suggestions.forEach(item => {
+                cy.contains("Identification of the Client").next().scrollIntoView().should("include.text", item.verifyExport);
+                cy.contains("Intended Use & User").next().scrollIntoView().should("include.text", item.verifyExport);
+            });
         }); 
     });
 });
