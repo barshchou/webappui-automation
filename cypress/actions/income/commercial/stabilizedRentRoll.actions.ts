@@ -1,4 +1,4 @@
-import stabRenRollPage from "../../../pages/income/commercial/stabilizedRentRoll.page";
+import stabRentRollPage from "../../../pages/income/commercial/stabilizedRentRoll.page";
 import { numberWithCommas } from "../../../../utils/numbers.utils";
 import BaseActionsExt from "../../base/base.actions.ext";
 
