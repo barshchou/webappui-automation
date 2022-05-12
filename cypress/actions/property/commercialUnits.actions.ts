@@ -3,7 +3,7 @@ import { cutDecimalPartToNumberOfDigits, isHasDecimalPartMoreNumberOfDigits, num
 import BaseActionsExt from "../base/base.actions.ext";
 
 class CommercialUnitsActions extends BaseActionsExt<typeof commercialUnitsPage> {
-    
+
     verifyThatPageIsOpened(): this {
         commercialUnitsPage.commercialUnitHeaderSection.should("be.visible");
         cy.url().then(url => {
@@ -48,13 +48,13 @@ class CommercialUnitsActions extends BaseActionsExt<typeof commercialUnitsPage> 
     }
 
     private clickRadioOrCheckbox(group: BoweryReports.CommercialUnitsGroups,
-                                 value: BoweryReports.CommercialUnits.GroupsValues, index = 0): this {
+        value: BoweryReports.CommercialUnits.GroupsValues, index = 0): this {
         commercialUnitsPage.getRadioButtonByValueAndUnitIndex(group, value, index).click();
         return this;
     }
 
     clickRadioButtonByValueAndUnitIndex(group: BoweryReports.CommercialUnitsGroups,
-                                        value: BoweryReports.CommercialUnits.GroupsValues, index = 0): this {
+        value: BoweryReports.CommercialUnits.GroupsValues, index = 0): this {
         this.clickRadioOrCheckbox(group, value, index)
             .verifyRadioIsChecked(group, value, index);
         if (value === "other") {
@@ -65,7 +65,7 @@ class CommercialUnitsActions extends BaseActionsExt<typeof commercialUnitsPage> 
     }
 
     clickCheckboxToUncheck(group: BoweryReports.CommercialUnitsGroups, value: BoweryReports.CommercialUnits.GroupsValues,
-                           index = 0): this {
+        index = 0): this {
         this.clickRadioOrCheckbox(group, value, index)
             .verifyRadioIsNotChecked(group, value, index);
         if (value === "other") {
@@ -99,6 +99,13 @@ class CommercialUnitsActions extends BaseActionsExt<typeof commercialUnitsPage> 
     enterListUnitSF(squareFeetList: Array<number | string>, numberOfUnits: number): this {
         for (let i = 0; i < numberOfUnits; i++) {
             this.enterUnitSFByUnitIndex(squareFeetList[i], i);
+        }
+        return this;
+    }
+
+    verifyUnitSFInscribedByUnitIndex(squareFeetList: Array<number | string>, numberOfUnits: number): this {
+        for (let i = 0; i < numberOfUnits; i++) {
+            commercialUnitsPage.commercialUnitsSFInputs.eq(i).should("have.value", squareFeetList[i]);
         }
         return this;
     }
