@@ -1,5 +1,5 @@
 import testData from "../../../../../fixtures/not_full_reports/income/commercial/stabilized_rent_roll/QA-4015.fixture";
-import {createReport, deleteReport} from "../../../../../actions/base/baseTest.actions";
+import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../../actions/base/navigationSection.actions";
 import Property from "../../../../../actions/property/property.manager";
 import Income from "../../../../../actions/income/income.manager";
@@ -8,7 +8,7 @@ import { isEndsWithDecimal } from "../../../../../utils/html.utils";
 import { Tag } from "../../../../../utils/tags.utils";
 
 describe("Verify the Commercial Stabilized Rent Roll table", 
-{ tags: [Tag.check_export, Tag.income,Tag.commercial] }, () => {
+{ tags: [ Tag.check_export, Tag.income, Tag.commercial ] }, () => {
     it("Test body", () => {  
         createReport(testData.reportCreationData);
         
@@ -42,9 +42,9 @@ describe("Verify the Commercial Stabilized Rent Roll table",
         deleteReport(testData.reportCreationData.reportNumber);
     });
 
-    it("Check export",() => {
+    it("Check export", () => {
         cy.task("getFilePath",
-        {_reportName: testData.reportCreationData.reportNumber, _docx_html: "html"}
+        { _reportName: testData.reportCreationData.reportNumber, _docx_html: "html" }
         ).then(file => {
             cy.log(<string>file);
             cy.stepInfo(`
@@ -56,16 +56,16 @@ describe("Verify the Commercial Stabilized Rent Roll table",
             cy.visit(<string>file);
             
             cy.contains("Lease Structure").prev().scrollIntoView().within(() => {
-                cy.get("tr").eq(0).find("p").eq(0).should("not.have.text","#");
+                cy.get("tr").eq(0).find("p").eq(0).should("not.have.text", "#");
                 
-                cy.get("tr").eq(1).find("p").eq(0).invoke("attr","text").then(value => {
+                cy.get("tr").eq(1).find("p").eq(0).invoke("attr", "text").then(value => {
                     expect(Number.isInteger(Number.parseInt(value)),
                     "The value in cell is not Number"
                     ).to.be.equal(false);
                 });
 
                 cy.get("tr").eq(1).find("p").filter(':contains("$0")').then(value => {
-                    value.toArray().slice(0,1).forEach(elem => {
+                    value.toArray().slice(0, 1).forEach(elem => {
                         expect(
                             (elem.textContent.endsWith(".00")),
                             "Not ends with decimal part"
@@ -73,15 +73,15 @@ describe("Verify the Commercial Stabilized Rent Roll table",
                     });
                 });
 
-                isEndsWithDecimal(2,(testData.annualRent.replace(".00","")));
-                isEndsWithDecimal(2,(testData.monthlyRent.replace(".00","")));
-                isEndsWithDecimal(3,(testData.annualRent.replace(".00","")));
-                isEndsWithDecimal(3,testData.monthlyRent.replace(".00",""));
+                isEndsWithDecimal(2, (testData.annualRent.replace(".00", "")));
+                isEndsWithDecimal(2, (testData.monthlyRent.replace(".00", "")));
+                isEndsWithDecimal(3, (testData.annualRent.replace(".00", "")));
+                isEndsWithDecimal(3, testData.monthlyRent.replace(".00", ""));
 
                 cy.stepInfo(`
                 3. Verify that Totals text at the bottom of the new first column are displayed.
                 `);
-                cy.get("tr").last().find("p").filter(':contains("Totals")').should("have.length",1);
+                cy.get("tr").last().find("p").filter(':contains("Totals")').should("have.length", 1);
             });
         });
     });
