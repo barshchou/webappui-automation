@@ -1,9 +1,9 @@
-/// <reference types="cypress-grep" /> 
 import testData from "../../../../fixtures/not_full_reports/income/expense_forecast/QA-4924.fixture";
 import Property from "../../../../actions/property/property.manager";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Income from "../../../../actions/income/income.manager";
+import tableExpenseHistoryCellNames from "../../../../../cypress/enums/expenseHistoryTableRows.enum";
 import { Tag } from "../../../../utils/tags.utils";
 
 
@@ -42,10 +42,10 @@ describe("User selects Per SF radiobutton for Repairs & Maintenance on Expense F
 
 
         cy.stepInfo(`QA-4924 => 3. Fill in Repairs & Maintenance field for all added columns and save changes`);
-        Income.ExpenseHistory.enterRepairsAndMaintenanceByColIndex(testData.actual.repairsAndMaintenanceExpense, 3)
-            .enterRepairsAndMaintenanceByColIndex(testData.t12.repairsAndMaintenanceExpense, 2)
-            .enterRepairsAndMaintenanceByColIndex(testData.historical.repairsAndMaintenanceExpense, 1)
-            .enterRepairsAndMaintenanceByColIndex(testData.projection.repairsAndMaintenanceExpense, 0);
+        Income.ExpenseHistory.enterIssueByColIndex(testData.actual.repairsAndMaintenanceExpense, tableExpenseHistoryCellNames.repairsAndMaintenance, 3)
+            .enterIssueByColIndex(testData.t12.repairsAndMaintenanceExpense, tableExpenseHistoryCellNames.repairsAndMaintenance, 2)
+            .enterIssueByColIndex(testData.historical.repairsAndMaintenanceExpense, tableExpenseHistoryCellNames.repairsAndMaintenance, 1)
+            .enterIssueByColIndex(testData.projection.repairsAndMaintenanceExpense, tableExpenseHistoryCellNames.repairsAndMaintenance, 0);
         NavigationSection.navigateToExpenseForecast();
 
 
