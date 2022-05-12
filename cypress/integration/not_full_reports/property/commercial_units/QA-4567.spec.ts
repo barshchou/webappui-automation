@@ -4,44 +4,50 @@ import { createReport, deleteReport } from "../../../../actions/base/baseTest.ac
 import { _NavigationSection } from "../../../../actions/base";
 import { Tag } from "../../../../utils/tags.utils";
 
-describe("Verify the Save button functionality on the Commercial Units page", 
-// { tags:[ Tag.property, Tag. ] }, 
-() => {
+describe("Verify the Save button functionality on the Commercial Units page",
+    { tags: [ Tag.property, Tag.commercial_units ] },
+    () => {
 
-    before("Report creation and several commercial units addition", () => {
-        createReport(testData.reportCreationData);
-        _NavigationSection.navigateToPropertySummary();
-        Property._Summary.enterNumberOfCommercialUnits(testData.numberOfCommercialUnits);
-    });
-
-
-    it("Test body", () => {
-
-        cy.stepInfo("1.  Proceed to the Property > Commercial Units page.");
-        _NavigationSection.navigateToCommercialUnits();
-        
-
-        cy.stepInfo("2.  Verify the Save button is displayed on the Commercial Units page");
-        Property._CommercialUnits.verifyThatPageIsOpened();
-        Property._CommercialUnits.Page.SaveBtn.should('exist');
-
-        cy.stepInfo("4.  Fill in the editable fields with values or/and check check-boxes or/and click the radio button and click on the Save button.");
-        Property._CommercialUnits.enterListUnitSF(testData.squareFeetList, testData.numberOfCommercialUnits);
-        testData.groupsNamesAndValues.forEach(groupNameElement => {
-            let groupName = groupNameElement.groupName ;
-            let value = groupNameElement.value ;
-        Property._CommercialUnits.clickRadioButtonByValueAndUnitIndex(groupName, value);
-
+        before("Report creation and several commercial units addition", () => {
+            createReport(testData.reportCreationData);
+            _NavigationSection.navigateToPropertySummary();
+            Property._Summary.enterNumberOfCommercialUnits(testData.numberOfCommercialUnits);
         });
 
+        it("Test body", () => {
 
+            cy.stepInfo(" Proceed to the Property > Commercial Units page.");
+            _NavigationSection.navigateToCommercialUnits();
 
+            cy.stepInfo("1.  Verify the Save button is displayed on the Commercial Units page");
+            Property._CommercialUnits.verifyThatPageIsOpened();
+            Property._CommercialUnits.Page.SaveBtn.should('exist');
 
+            cy.stepInfo("2.  Fill in the editable fields with values or/and check check-boxes or/and click the radio button and click on the Save button.");
+            Property._CommercialUnits.enterListUnitSF(testData.squareFeetList, testData.numberOfCommercialUnits);
+            testData.groupsNamesAndValues.forEach(groupNameElement => {
+                let groupName = groupNameElement.groupName;
+                let value = groupNameElement.value;
+                Property._CommercialUnits.clickRadioButtonByValueAndUnitIndex(groupName, value);
+                if (value === "other") {
+                    Property._CommercialUnits.enterOtherValueByGroupName(groupName, testData.otherValue);
+                }
+            });
+            Property._CommercialUnits.clickSaveButton()
+                .verifyProgressBarNotExist();
 
+            cy.stepInfo("3.  Refresh the page / or re-enter the page and verify that the changes from step 2 are still applied.");
+            cy.reload();
+            Property._CommercialUnits.verifyUnitSFInscribedByUnitIndex(testData.squareFeetList, testData.numberOfCommercialUnits);
+            testData.groupsNamesAndValues.forEach(groupNameElement => {
+                let groupName = groupNameElement.groupName;
+                let value = groupNameElement.value;
+                Property._CommercialUnits.verifyRadioIsChecked(groupName, value);
+                if (value === "other") {
+                    Property._CommercialUnits.verifyOtherValueByGroupName(groupName, testData.otherValue);
+                }
+            });
 
-        cy.stepInfo("5.  Refresh the page / or re-enter the page and verify that the changes from step 2 are still applied.");
-        
-
-       // deleteReport(testData.reportCreationData.reportNumber);
+            deleteReport(testData.reportCreationData.reportNumber);
+        });
     });
-});
