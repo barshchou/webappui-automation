@@ -29,7 +29,7 @@ describe("Verify the Commercial Stabilized Rent Roll table",
             .Shared.verifyTenantNames(testData.tenantNames, testData.leaseStatuses);
         testData.rentsPsf.forEach((rent, index) => {
             if (testData.leaseStatuses[index] !== "Vacant") {
-                Income.Commercial.InPlaceRentRoll.enterAnnualRentPerSFByRowNumber(rent, index);
+                Income.Commercial.InPlaceRentRoll.enterRentPerSFAnnuallyByRowNumber(rent, index);
             }
         });
         NavigationSection.openCommercialStabilizedRentRollInCommercial()

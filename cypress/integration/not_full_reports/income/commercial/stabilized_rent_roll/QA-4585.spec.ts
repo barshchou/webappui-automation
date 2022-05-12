@@ -33,7 +33,7 @@ describe("Verify the Commercial Stabilized Rent Roll table", () => {
             .verifyUseCells(testData.useTexts);
         testData.rentsPsf.forEach((rent, index) => {
             if (testData.leaseStatuses[index] !== "Vacant") {
-                Income._CommercialManager.InPlaceRentRoll.enterAnnualRentPerSFByRowNumber(rent, index);
+                Income._CommercialManager.InPlaceRentRoll.enterRentPerSFAnnuallyByRowNumber(rent, index);
             }
         });
 
@@ -51,7 +51,7 @@ describe("Verify the Commercial Stabilized Rent Roll table", () => {
             .verifySFCells(testData.listOfUnitsSF)
             .verifyAnnualRentCellPerSFBasisByRow(testData.rentsPsf[1], testData.listOfUnitsSF[1], "annually", 1);
         Income._CommercialManager.StabilizedRentRoll.Shared.verifyMonthlyRentByRowCellText(testData.monthlyRent, 1);
-        Income._CommercialManager.StabilizedRentRoll.verifyAnnuallyRentPsf(testData.rentsPsf[1], 1)
+        Income._CommercialManager.StabilizedRentRoll.verifyRentPsfAnnuallyByRow(testData.rentsPsf[1], 1)
             .clickSaveButton()
             .verifyProgressBarNotExist();
 

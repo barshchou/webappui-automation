@@ -23,11 +23,11 @@ class CommercialRentRollSharedComponent {
 
     get monthlyRentTotal() {return cy.get("[data-qa^=monthlyRent-]").last();}
 
-    get annualRentPerSFCells() {return cy.xpath("(//*[contains(@data-qa, 'annualRentPsf')])[position() < last()]");}
+    get rentPerSFAnnuallyCells() {return cy.xpath("(//*[contains(@data-qa, 'annualRentPsf')])[position() < last()]");}
 
-    get annualRentPerSFTotal() {return cy.get("[data-qa^=annualRentPsf-]").last();}
+    get rentPerSFAnnuallyTotal() {return cy.get("[data-qa^=annualRentPsf-]").last();}
 
-    get monthlyRentPerSFCells() {return cy.xpath("//*[contains(@class, 'htNumeric')]|(//*[contains(@data-qa, 'monthlyRentPsf')])[position() < last()]");}
+    get rentPerSFMonthlyCells() {return cy.xpath("//*[contains(@class, 'htNumeric')]|(//*[contains(@data-qa, 'monthlyRentPsf')])[position() < last()]");}
 
     get elementToVerifyIsInspected() {return cy.xpath("(//*[contains(@data-qa, 'isInspected')])[position() < last()]//child::span");}
 

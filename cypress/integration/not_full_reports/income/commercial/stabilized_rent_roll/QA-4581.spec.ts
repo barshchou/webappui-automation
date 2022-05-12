@@ -30,14 +30,14 @@ describe("Verify the Save & Continue button functionality on the Stabilized Rent
 
         cy.stepInfo(` 3. Fill in the editable fields with values or/and check check-boxes or/and click the radio button and click on the Save & Continue button. `);
         Income._CommercialManager.StabilizedRentRoll.Shared.verifyIsInspectedCheckedAll(testData.isInspected);
-        Income._CommercialManager.StabilizedRentRoll.enterListPerSF(testData.leaseStatuses, testData.rentToBe)
+        Income._CommercialManager.StabilizedRentRoll.enterListPerSFAnnually(testData.leaseStatuses, testData.rentToBe)
             .clickSaveContinueButton();
 
         cy.stepInfo(` 4. Verify that the changes are saved and the user is redirected to the next page (Income > Miscellaneous > Laundry). `);
         Income._MiscellaneousManager.Laundry.verifyThatPageIsOpened();
         Base._NavigationSection.clickIncomeApproachButton()
             .clickCommercialArrow().clickCommercialStabRentRollButton();
-        Income._CommercialManager.StabilizedRentRoll.verifyAnnuallyRentPsfByRowNumber(testData.leaseStatuses, testData.rentToBe);
+        Income._CommercialManager.StabilizedRentRoll.verifyListRentPsfAnnually(testData.leaseStatuses, testData.rentToBe);
 
         cy.stepInfo(` 4. Delete report`);
         deleteReport(testData.reportCreationData.reportNumber);

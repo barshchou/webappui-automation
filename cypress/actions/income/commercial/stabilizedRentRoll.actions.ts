@@ -29,34 +29,34 @@ class StabilizedRentRollActions extends BaseActionsExt<typeof stabRentRollPage>{
         return this;
     }
 
-    enterAnnualRentPerSFByRowNumber(rentToBe: string | number, rowNumber: number): this {
+    enterRentPerSFAnnuallyByRowNumber(rentToBe: string | number, rowNumber: number): this {
         this.annualRentPsfCellsScroll();
-        this.Shared.annualRentPerSFCells.eq(rowNumber).dblclick({ force: true });
+        this.Shared.rentPerSFAnnuallyCells.eq(rowNumber).dblclick({ force: true });
         this.Shared.textareaToInput.clear().type(`${rentToBe}`).type("{enter}");
-        this.verifyAnnuallyRentPsf(rentToBe, rowNumber);
+        this.verifyRentPsfAnnuallyByRow(rentToBe, rowNumber);
         return this;
     }
 
-    enterListPerSF(leaseStatuses: Array<BoweryReports.LeaseStatus>, rentToBe: Array<string | number>): this {
+    enterListPerSFAnnually(leaseStatuses: Array<BoweryReports.LeaseStatus>, rentToBe: Array<string | number>): this {
         for (let i = 0; i < leaseStatuses.length; i++) {
             if (leaseStatuses[i] === "Vacant") {
-                this.enterAnnualRentPerSFByRowNumber(rentToBe[i], i);
+                this.enterRentPerSFAnnuallyByRowNumber(rentToBe[i], i);
             }
         }
         return this;
     }
 
-    verifyAnnuallyRentPsf(rentToBe: string | number, rowNumber: number): this {
+    verifyRentPsfAnnuallyByRow(rentToBe: string | number, rowNumber: number): this {
         this.annualRentPsfCellsScroll();
-        this.Shared.annualRentPerSFCells.eq(rowNumber).should("contain.text", rentToBe);
+        this.Shared.rentPerSFAnnuallyCells.eq(rowNumber).should("contain.text", rentToBe);
         return this;
     }
 
-    verifyAnnuallyRentPsfByRowNumber(leaseStatuses: Array<BoweryReports.LeaseStatus>, rentToBe: Array<string | number>): this {
+    verifyListRentPsfAnnually(leaseStatuses: Array<BoweryReports.LeaseStatus>, rentToBe: Array<string | number>): this {
         this.annualRentPsfCellsScroll();
         for (let i = 0; i < rentToBe.length; i++) {
             if (leaseStatuses[i] === "Vacant") {
-                this.verifyAnnuallyRentPsf(rentToBe[i], i);
+                this.verifyRentPsfAnnuallyByRow(rentToBe[i], i);
             }
         }
         return this;
