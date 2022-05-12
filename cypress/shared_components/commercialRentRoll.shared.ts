@@ -99,6 +99,18 @@ class CommercialRentRollSharedComponent {
         });
         return this;
     }
+
+    verifyUseCellByRow(useText: BoweryReports.CommercialUnitsUseTexts, rowNumber = 0): this {
+        this.useCells.eq(rowNumber).should("have.text", useText).and("have.class", "readOnly");
+        return this;
+    }
+
+    verifyUseCells(useTexts: Array<BoweryReports.CommercialUnitsUseTexts>): this {
+        useTexts.forEach((text, index) => {
+            this.verifyUseCellByRow(text, index);
+        });
+        return this;
+    }
 }
 
 export default CommercialRentRollSharedComponent;

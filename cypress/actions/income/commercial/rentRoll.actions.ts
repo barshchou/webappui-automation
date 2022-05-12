@@ -149,18 +149,6 @@ class CommercialRentRollActions extends BaseActionsExt<typeof rentRollPage> {
         return this;
     }
 
-    verifyUseCellTextByRowNumber(textToBe: BoweryReports.CommercialUnitsUseTexts, rowNumber = 0): this {
-        this.Shared.useCells.eq(rowNumber).should("have.text", textToBe).and("have.class", "readOnly");
-        return this;
-    }
-
-    verifyUseCells(useTexts: Array<string>): this {
-        useTexts.forEach((use, index) => {
-            this.verifyUseCellTextByRowNumber(use, index);
-        });
-        return this;
-    }
-
     enterLeaseDateByRowNumber(cellName: BoweryReports.LeaseDateName, date: string, rowNumber = 0): this {
         this.Shared.getLeaseDateCellsByName(cellName).eq(rowNumber).dblclick({ force: true });
         this.Shared.textareaToInput.clear().type(date).type("{enter}");

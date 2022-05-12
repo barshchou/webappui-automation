@@ -25,18 +25,6 @@ class StabilizedRentRollActions extends BaseActionsExt<typeof stabRentRollPage>{
         return this;
     }
 
-    verifyUseCellByRow(useText: BoweryReports.CommercialUnitsUseTexts, rowNumber = 0): this {
-        this.Shared.useCells.eq(rowNumber).should("have.text", useText);
-        return this;
-    }
-
-    verifyUseCells(useTexts: Array<BoweryReports.CommercialUnitsUseTexts>): this {
-        useTexts.forEach((text, index) => {
-            this.verifyUseCellByRow(text, index);
-        });
-        return this;
-    }
-
     verifySfCellByRow(squareFeet: string | number, rowNumber = 0): this {
         const textToBe = typeof squareFeet === "string" ? squareFeet : numberWithCommas(squareFeet);
         this.Shared.squareFeetCells.eq(rowNumber).should("have.text", textToBe);

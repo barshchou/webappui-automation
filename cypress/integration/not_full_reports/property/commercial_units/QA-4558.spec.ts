@@ -49,11 +49,11 @@ describe("Verify the functionality of the Use* radio button",
             Property._CommercialUnits.clickRadioButtonByValueAndUnitIndex(testData.groupName, radio);
             if (radio === "other") Property._CommercialUnits.enterOtherValueByGroupName(testData.groupName, testData.otherValue);
             _NavigationSection.navigateToCommercialInPlaceRentRoll();
-            Income._CommercialManager.InPlaceRentRoll.verifyUseCellTextByRowNumber(testData.useTexts[index])
-                .chooseLeaseStatusByRowNumber("Occupied");
+            Income._CommercialManager.InPlaceRentRoll.Shared.verifyUseCellByRow(testData.useTexts[index]);
+            Income._CommercialManager.InPlaceRentRoll.chooseLeaseStatusByRowNumber("Occupied");
             _NavigationSection.openCommercialStabilizedRentRollInCommercial();
-            Income._CommercialManager.StabilizedRentRoll.verifyUseCellByRow(testData.useTexts[index])
-                .verifyProgressBarNotExist()
+            Income._CommercialManager.StabilizedRentRoll.Shared.verifyUseCellByRow(testData.useTexts[index]);
+            Income._CommercialManager.StabilizedRentRoll.verifyProgressBarNotExist()
                 .Page.formEditBtn(0).click();
             Income._CommercialManager.StabilizedRentRoll.Page.formCancelButton(0).click();
             _NavigationSection.navigateToCommercialUnits();
