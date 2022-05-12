@@ -1,11 +1,11 @@
 import clientPage from "../../pages/report/client.page";
-import {replaceEntersWithLineBreak} from "../../../utils/string.utils";
+import { replaceEntersWithLineBreak } from "../../../utils/string.utils";
 import BaseActionsExt from "../base/base.actions.ext";
 
 class ClientActions extends BaseActionsExt<typeof clientPage> {
 
     verifyInputChangesToBeUnsaved(clientFileNumber: string): ClientActions {
-        clientPage.clientFileNumberField.should("have.value",clientFileNumber);
+        clientPage.clientFileNumberField.should("have.value", clientFileNumber);
         return this;
     }
 

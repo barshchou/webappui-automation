@@ -17,7 +17,7 @@ Cypress.on("uncaught:exception", () => {
     return false;
 });
 
-Cypress.on("fail",(err) => {
+Cypress.on("fail", (err) => {
   recordDOM_Snapshot();
   recordProxiedRequests();
   throw err;

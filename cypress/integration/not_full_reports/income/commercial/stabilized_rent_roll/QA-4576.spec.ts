@@ -1,7 +1,7 @@
 /// <reference types="cypress-grep" />
 
 import testData from "../../../../../fixtures/not_full_reports/income/commercial/stabilized_rent_roll/QA-4576.fixture";
-import {createReport, deleteReport} from "../../../../../actions/base/baseTest.actions";
+import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
 import { Base, Property, Income } from "../../../../../actions";
 import { _NavigationSection } from "../../../../../actions/base";
 import { getTodayDateString } from "../../../../../../utils/date.utils";
@@ -44,7 +44,7 @@ describe.skip("Verify the display of the Stabilized Rent Roll page", () => {
         _NavigationSection.navigateToCommercialInPlaceRentRoll();
         for (let index = 0; index < testData.numberOfCommercialUnits; index++) {
             Income._CommercialManager.InPlaceRentRoll
-            .enterTenantNameByRowNumber(testData.newTenantName,index)
+            .enterTenantNameByRowNumber(testData.newTenantName, index)
             .chooseLeaseStatusByRowNumber("Occupied", index)
             .enterLeaseDateByRowNumber("Start", getTodayDateString("/"), index)
             .verifyLeaseDateByRowNumber("Start", testData.occupiedLease, getTodayDateString("/"), index)

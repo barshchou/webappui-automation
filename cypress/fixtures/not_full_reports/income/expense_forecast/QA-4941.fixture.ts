@@ -1,5 +1,5 @@
 import ReportDataCreator from "../../../data_creator/reportData.creator";
-import {getCurrentMonthName, getYearFromDate} from "../../../../../utils/date.utils";
+import { getCurrentMonthName, getYearFromDate } from "../../../../../utils/date.utils";
 
 const _actualFuelItem: BoweryReports.ForecastItem = {
     name: "fuel",
