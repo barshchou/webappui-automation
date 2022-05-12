@@ -1,14 +1,13 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import reviewExportPage from "../../pages/reviewExport/reviewExport.page";
 import BaseActions from "../base/base.actions";
-
 class ReviewExportActions extends BaseActions {
     get Page() {
         return reviewExportPage;
     }    
     
     waitForReportGenerated(): this {
-        cy.get('[data-qa="download-btn"]', {timeout: 120000}).should("be.visible");
+        cy.get('[data-qa="download-btn"]', { timeout: 120000 }).should("be.visible");
         return this;
     }
 
@@ -23,10 +22,10 @@ class ReviewExportActions extends BaseActions {
      */
     downloadAndConvertDocxReport(reportName:string): this {
         reviewExportPage.downloadBtn.click();
-        cy.task("getFilePath",{_reportName: reportName, _docx_html: "docx"}).then(file => {
+        cy.task("getFilePath", { _reportName: reportName, _docx_html: "docx" }).then(file => {
             cy.log(<string>file);
-            cy.task("waitForFileExists",file);
-            cy.task("convertDocxToHtml",file); 
+            cy.task("waitForFileExists", file);
+            cy.task("convertDocxToHtml", file); 
         });
         return this;
     }

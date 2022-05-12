@@ -431,6 +431,14 @@ class InPlaceRentRollActions extends BaseActionsExt<typeof rentRollPage> {
         });
         return this;
     }
+
+    verifyRentRoomCellValues(monthlyRent = 0, rooms = 0, row = 0): InPlaceRentRollActions{
+        let defaultValues = "$0";
+        let textToBe = monthlyRent == 0 ? defaultValues : `$${numberWithCommas((monthlyRent / rooms).toFixed(0))}`; 
+        rentRollPage.rentRoomCell.eq(row).should('have.text', textToBe);
+        return this;
+    }
+    
 }
 
 export default new InPlaceRentRollActions(rentRollPage);

@@ -1,12 +1,11 @@
 import testData from "../../../../fixtures/not_full_reports/income/expense_forecast/QA-5052.fixture";
-import { _NavigationSection} from "../../../../actions/base";
+import { _NavigationSection } from "../../../../actions/base";
 import { Income } from "../../../../actions";
-import {createReport, deleteReport} from "../../../../actions/base/baseTest.actions";
+import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import { Tag } from "../../../../utils/tags.utils";
 
 describe(`[QA-5052] Appraiser's Forecast of Custom Expense Forecast is included in Total Operating Expenses calculation`,
-//ernst: remove Tag.fix when it will be fixed on hotfix/mui5-migration
-{tags:[Tag.fix,Tag.income,Tag.expense_forecast, Tag.snapshot_tests]},() => {
+{ tags:[ Tag.fix, Tag.income, Tag.expense_forecast, Tag.snapshot_tests ] }, () => {
 
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
@@ -37,7 +36,7 @@ describe(`[QA-5052] Appraiser's Forecast of Custom Expense Forecast is included 
 
         cy.stepInfo(`[QA-5052] => 5. Verify if Sliding bar graphic on Total Operating Expenses card is displayed correctly`);
         Income._ExpenseForecastActions.Actions.matchElementSnapshot(
-            Income._ExpenseForecastActions.Page.toeCard, testData.totalExpensesSnapshotName, {padding: [10, 100]}
+            Income._ExpenseForecastActions.Page.toeCard, testData.totalExpensesSnapshotName, { padding: [ 10, 100 ] }
         );
 
         deleteReport(testData.reportCreationData.reportNumber);
