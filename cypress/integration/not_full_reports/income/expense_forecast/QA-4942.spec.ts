@@ -1,6 +1,6 @@
 /// <reference types="cypress-grep" />
 import testData from "../../../../fixtures/not_full_reports/income/expense_forecast/QA-4942.fixture";
-import {createReport, deleteReport} from "../../../../actions/base/baseTest.actions";
+import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Income from "../../../../actions/income/income.manager";
 
@@ -16,11 +16,12 @@ describe("Comparable Min, Max, Avg values for Fuel Per SF are correctly calculat
 
         cy.stepInfo(`2. Add several comps (via Search, Filter or Add blank column) and make sure that Fuel  
         and Square Feet fields are filled in for all added columns and save changes`);
-        testData.comparables.forEach((comp, index) => {
+        testData.comparables.forEach((comp) => {
             Income.ComparableExpenses.Actions.clickAddBlankColumnButton()
-                .enterAddressByColumnIndex(comp.address, index)
-                .enterCellDollarValueByColumnIndex(Income.ComparableExpenses.Page.fuelCells, comp.fuel, index)
-                .enterSquareFeetByColumnIndex(comp.squareFeet, index);
+                .enterAddressByColumnIndex(comp.address)
+                .enterCellDollarValueByColumnIndex(Income.ComparableExpenses.Page.getUnifiedEditableAndTotalCells("fuel"),
+                    comp.fuel)
+                .enterSquareFeetByColumnIndex(comp.squareFeet);
         });
 
         cy.stepInfo("3. Go to Expense Forecast and make sure that Per SF radiobutton is selected for Fuel card");
@@ -36,7 +37,7 @@ describe("Comparable Min, Max, Avg values for Fuel Per SF are correctly calculat
 
         cy.stepInfo("4. Check Comp Min, Comp Max and Comp Avg values for Fuel card. They should be correctly displayed on a slidebar");
         Income.ExpenseForecast.Actions.matchElementSnapshot(
-            Income.ExpenseForecast.Page.FuelCard, testData.fuelCardSnapshotName, {padding: [10, 100]});
+            Income.ExpenseForecast.Page.fuelCard, testData.fuelCardSnapshotName, { padding: [ 10, 100 ] });
         deleteReport(testData.reportCreationData.reportNumber);
     });
 });

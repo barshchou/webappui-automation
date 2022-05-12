@@ -1,7 +1,8 @@
 import Enums from "../../enums/enums";
 
-let ReportCreationData = function (address, number, templateValue, incomeValue, conclusionValue) {
+let ReportCreationData = function (address, isSalesForcePull = false, number, templateValue, incomeValue, conclusionValue) {
     this.address = address;
+    this.isSalesForcePull = isSalesForcePull,
     this.reportNumber = number;
     this.templateValue = templateValue;
     this.incomeValue = incomeValue;
@@ -9,7 +10,10 @@ let ReportCreationData = function (address, number, templateValue, incomeValue, 
 };
 
 class ReportCreator {
+
     address: string;
+
+    isSalesForcePull: boolean;
 
     reportNumber: string;
 
@@ -19,13 +23,19 @@ class ReportCreator {
 
     conclusionValue: string;
 
+    setSalesForcePull(isSalesForcePull: BoweryReports.isSalesForcePull) {
+        this.isSalesForcePull = isSalesForcePull;
+        return this;
+    }
+
     setAddress(address?) {
         this.address = address ?? "462 1st Avenue, New York, USA";
         return this;
     }
 
-    setReportNumber(testNumber) {
-        this.reportNumber = `TestAutoReport-QA-${testNumber}`;
+    setReportNumber(testNumber: string, isSaleForcePull?: BoweryReports.isSalesForcePull) {
+        this.isSalesForcePull = (isSaleForcePull == undefined ? false : isSaleForcePull);
+        this.reportNumber = this.isSalesForcePull ? `${testNumber}` : `TestAutoReport-QA-${testNumber}`;
         return this;
     }
 
@@ -46,31 +56,18 @@ class ReportCreator {
 
     build() {
         return new
-        ReportCreationData(this.address, this.reportNumber, this.templateValue, this.incomeValue, this.conclusionValue);
+        ReportCreationData(this.address, this.isSalesForcePull, this.reportNumber, this.templateValue, this.incomeValue, this.conclusionValue);
     }
 
-    getReportSpecificConclusionValue(conclusionValue, testNumber) {
-        return this.setReportNumber(testNumber).setAddress().setTemplateValue().setIncomeValue()
-            .setConclusionValue(conclusionValue).build();
-    }
-
-    getReportSpecificIncomeValue(incomeValue, testNumber) {
-        return this.setReportNumber(testNumber).setAddress().setTemplateValue().setIncomeValue(incomeValue)
-            .setConclusionValue().build();
-    }
-
-    getDefaultReportData(testNumber) {
-        return this.setReportNumber(testNumber).setAddress().setIncomeValue().setTemplateValue().setConclusionValue().build();
-    }
-
-    getReportData(testNumber: string, options?: BoweryReports.ReportCreationOptions){
-        if(options?.incomeValue){
-            this.setIncomeValue(options.incomeValue);
-        }
-        if(options?.conclusionValue){
-            this.setConclusionValue(options.conclusionValue);
-        }
-        return this.setReportNumber(testNumber).setAddress().setTemplateValue().build();
+    getReportData(testNumber: string, options?: BoweryReports.ReportCreationOptions, isSaleForcePull = false){
+        this.isSalesForcePull = isSaleForcePull;
+        
+        options?.address == undefined ? this.setAddress() : this.setAddress(options.address);
+        options?.templateValue == undefined ? this.setTemplateValue() : this.setTemplateValue(options.templateValue);
+        options?.incomeValue == undefined ? this.setIncomeValue() : this.setIncomeValue(options.incomeValue);
+        options?.conclusionValue == undefined ? this.setConclusionValue() : this.setConclusionValue(options.conclusionValue);
+        
+        return this.setReportNumber(testNumber, this.isSalesForcePull).build();
     }
 }
 

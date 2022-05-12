@@ -15,6 +15,7 @@ class HomepageActions extends BaseActions {
             .enterPropertyIdentifierType(data.identifierType)
             .enterPropertyIdentifier(data.identifier)
             .clickSubmitButton()
+            .pullExternalData(data.isSalesForcePull)
             .enterReportNumber(data.reportNumber)
             .checkTemplateType(data.templateValue)
             .checkIncomeType(data.incomeValue)
@@ -27,6 +28,7 @@ class HomepageActions extends BaseActions {
             .clickSubmitButton()
             .clickToSearchResultRow()
             .clickSubmitButton()
+            .pullExternalData(data.isSalesForcePull)
             .enterReportNumber(data.reportNumber)
             .checkTemplateType(data.templateValue)
             .checkIncomeType(data.incomeValue)
@@ -52,7 +54,7 @@ class HomepageActions extends BaseActions {
      * @returns {HomepageActions}
      */
     clickSubmitButton() {
-        homepagePage.submitButton.should("not.be.disabled").click({ force: true});
+        homepagePage.submitButton.should("not.be.disabled").click({ force: true });
         return this;
     }
 
@@ -62,6 +64,11 @@ class HomepageActions extends BaseActions {
      */
     clickToSearchResultRow() {
         homepagePage.searchResultsRows.should("be.visible").click();
+        return this;
+    }
+
+    pullExternalData(value: boolean) {
+        homepagePage.pullExternalDataRadios.check(`${value.toString()}`);
         return this;
     }
 
@@ -120,7 +127,7 @@ class HomepageActions extends BaseActions {
     }
 
     clickArchiveButton(reportNumber: string): this {
-        homepagePage.getArchiveButton(reportNumber).should("exist").click({force:true});
+        homepagePage.getArchiveButton(reportNumber).should("exist").click({ force:true });
         return this;
     }
 

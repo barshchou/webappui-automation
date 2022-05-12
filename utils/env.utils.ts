@@ -1,4 +1,4 @@
-import {cutLastLetter} from "./string.utils";
+import { cutLastLetter } from "./string.utils";
 import Enums from "../cypress/enums/enums";
 
 export const getEnvUrl = () => {
@@ -36,7 +36,7 @@ const isCorrectCustomEnv = (customEnvUrl) => {
     } else {
         return customEnvUrl.startsWith("https://");
     }
-}
+};
 
 export const isProdEnv = () => {
     return getEnvUrl().includes(Enums.ENV_URLS.PROD);

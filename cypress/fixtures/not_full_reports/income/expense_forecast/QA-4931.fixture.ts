@@ -1,5 +1,5 @@
 import ReportDataCreator from "../../../data_creator/reportData.creator";
-import {getCurrentMonthName, getYearFromDate} from "../../../../../utils/date.utils";
+import { getCurrentMonthName, getYearFromDate } from "../../../../../utils/date.utils";
 
 const _actualRepairsItem: BoweryReports.ForecastItem =  {
   name: "repairsAndMaintenance",
@@ -31,7 +31,7 @@ const _buildingDescription: BoweryReports.BuildingDescription = {
 };
 
 export default {
-  reportCreationData: ReportDataCreator.getDefaultReportData("4931"),
+  reportCreationData: ReportDataCreator.getReportData("4931"),
   actualRepairsItem: _actualRepairsItem,
   t12RepairsItem: _t12RepairsItem,
   historicalRepairsItem: _historicalRepairsItem,

@@ -1,6 +1,6 @@
 import BaseActions from "../../../base/base.actions";
 import rentCompsPage from "../../../../pages/income/residential/rent_comps/rentComps.page";
-import {getTodayDateString, getTodayDay, isDateHasCorrectFormat} from "../../../../../utils/date.utils";
+import { getTodayDateString, getTodayDay, isDateHasCorrectFormat } from "../../../../../utils/date.utils";
 import {
     cutDecimalPartToNumberOfDigits,
     isHasDecimalPartMoreNumberOfDigits,
@@ -94,7 +94,7 @@ class RentCompsActions extends BaseActions {
      */
     checkCheckboxByQaAttr(attribute) {
         rentCompsPage.getCheckboxByDataQaAttr(attribute)
-            .should("have.value", "false").check({force: true}).should("have.value", "true");
+            .should("have.value", "false").check({ force: true }).should("have.value", "true");
         return this;
     }
 
@@ -104,7 +104,7 @@ class RentCompsActions extends BaseActions {
      */
     uncheckCheckboxByQaAttr(attribute) {
         rentCompsPage.getCheckboxByDataQaAttr(attribute)
-            .should("have.value", "true").uncheck({force: true}).should("have.value", "false");
+            .should("have.value", "true").uncheck({ force: true }).should("have.value", "false");
         return this;
     }
 
@@ -367,7 +367,7 @@ class RentCompsActions extends BaseActions {
      */
     selectSortByOptionByValue(value) {
         this.verifyLoadingDoesntExist();
-        rentCompsPage.sortByDropdown.should("be.visible").click({force: true});
+        rentCompsPage.sortByDropdown.should("be.visible").click({ force: true });
         rentCompsPage.getSortDropdownOptionByValue(value).click();
         rentCompsPage.sortByDropdown.should("have.text", value);
         return this;
@@ -444,7 +444,7 @@ class RentCompsActions extends BaseActions {
                 if (i !== 0) {
                     rentCompsPage.selectedComparableButtons.eq(i).should("not.exist");
                 }
-                cy.wrap(buttons.eq(i)).should("be.enabled").click({force: true});
+                cy.wrap(buttons.eq(i)).should("be.enabled").click({ force: true });
                 this.verifyComparableSelectedByIndex(i);
             }
         });
@@ -474,7 +474,7 @@ class RentCompsActions extends BaseActions {
      * @returns {RentCompsActions}
      */
     selectComparableByAddress(address) {
-        rentCompsPage.getSelectButtonByAddress(address).click({force: true});
+        rentCompsPage.getSelectButtonByAddress(address).click({ force: true });
         this.verifyComparableSelectedByAddress(address);
         return this;
     }

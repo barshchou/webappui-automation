@@ -63,7 +63,7 @@ class AdjustCompsActions extends BaseActions {
     }
 
     clickAddOtherAdjustmentButton(): AdjustCompsActions {
-        adjustCompsPage.addOtherAdjustmentButton.click({force: true});
+        adjustCompsPage.addOtherAdjustmentButton.click({ force: true });
         return this;
     }
 
@@ -94,7 +94,7 @@ class AdjustCompsActions extends BaseActions {
     verifyNetPropertyAdjustmentsByCompIndex(index = 0): AdjustCompsActions {
         adjustCompsPage.getAllAdjustmentCellsByCompIndex(index).then(cells => {
             const adjustmentsValues = Array.from(cells).filter((el, index) => index > 3)
-                .map(cell => cell.value).map(cellText => Number(cellText.replace("%", "")));
+                .map(cell => cell.getAttribute("value")).map(cellText => Number(cellText.replace("%", "")));
             const netPropAdjustmentsToBe = adjustmentsValues.reduce((sum, prevValue) => sum + prevValue, 0);
             adjustCompsPage.netPropertyAdjustmentsCells.eq(index).should("have.text", `${netPropAdjustmentsToBe}%`);
         });

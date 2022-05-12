@@ -1,15 +1,15 @@
 import { Report } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
-import {createReport, deleteReport} from "../../../../actions/base/baseTest.actions";
+import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import testData from '../../../../fixtures/not_full_reports/report/client/QA-4640.fixture';
 
-describe(`Verify the "Linked" chips dropdown in the new narrative component for As Is and As Stabilized 
+describe(`[QA-4640] Verify the "Linked" chips dropdown in the new narrative component for As Is and As Stabilized 
     report for Intended User and Identification of the Client sections`, () => {
-    before("Login, create report", () => {
-        createReport(testData.reportCreationData);
-    });
 
-    it("Test body", {tags: "@to_check_export"}, () => {
+    it("Test body", { tags: "@to_check_export" }, () => {
+        cy.stepInfo("Login, create report");
+        createReport(testData.reportCreationData);
+
         cy.stepInfo("1. Proceed to the Report > Client page.");
         _NavigationSection.navigateToClientPage()
             .verifyProgressBarNotExist();
@@ -51,11 +51,14 @@ describe(`Verify the "Linked" chips dropdown in the new narrative component for 
             .verifyIdentificationOfTheClientTextBox(el.verifySuggest);
 
         });
-
-        cy.stepInfo("6. Verify the linked chips on export for both sections:");
-        // TODO: Add export verify
-        // Proceed to the Sales Comparison Approach > Value Opinion via the Sales Comparison Approach and verify the value.
-        
         deleteReport(testData.reportCreationData.reportNumber);
+    });
+
+    it("Check export", () => {
+        cy.task("getFilePath", { _reportName: testData.reportCreationData.reportNumber, _docx_html: "html" }).then(file => {
+            cy.log(<string>file);
+            cy.stepInfo("6. Verify the linked chips on export for both sections:");
+            cy.visit(<string>file);
+        }); 
     });
 });

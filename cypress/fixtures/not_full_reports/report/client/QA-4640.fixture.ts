@@ -1,7 +1,7 @@
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 
 export default {
-    reportCreationData: ReportDataCreator.getDefaultReportData("4640"),
+    reportCreationData: ReportDataCreator.getReportData("4640"),
     textToType: "=",
     suggestions: [
         {

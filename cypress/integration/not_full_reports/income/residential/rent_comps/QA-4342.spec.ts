@@ -2,7 +2,7 @@ import tesData from "../../../../../fixtures/not_full_reports/income/residential
 import NavigationSection from "../../../../../actions/base/navigationSection.actions";
 import Income from "../../../../../actions/income/income.manager";
 import Property from "../../../../../actions/property/property.manager";
-import {createReport, deleteReport} from "../../../../../actions/base/baseTest.actions";
+import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
 
 describe("Verify the display of the Unit grid with the added comparable unit on the '$ Rent Comps' page", () => {
 
@@ -10,7 +10,7 @@ describe("Verify the display of the Unit grid with the added comparable unit on 
         createReport(tesData.reportCreationData);
     });
 
-    it("Uncategorized table with default columns" , () => {
+    it("Uncategorized table with default columns", () => {
         NavigationSection.navigateToResInPlaceRentRoll();
         Income.Residential.InPlaceRentRoll.checkCheckboxByLabel(tesData.includePerRoomCheckbox);
         NavigationSection.openRentCompsInResidential();
@@ -31,7 +31,7 @@ describe("Verify the display of the Unit grid with the added comparable unit on 
         deleteReport(tesData.reportCreationData.reportNumber);
     });
 
-    it("Developers forecast test" , () => {
+    it("Developers forecast test", () => {
         NavigationSection.navigateToResInPlaceRentRoll();
         Income.Residential.InPlaceRentRoll.checkCheckboxByLabel(tesData.uncategorizedData.devForecastLabel);
         NavigationSection.openRentCompsInResidential();

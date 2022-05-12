@@ -1,5 +1,5 @@
 import testData from "../../../../../fixtures/not_full_reports/income/commercial/stabilized_rent_roll/QA-4015.fixture";
-import {createReport, deleteReport} from "../../../../../actions/base/baseTest.actions";
+import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../../actions/base/navigationSection.actions";
 import Property from "../../../../../actions/property/property.manager";
 import Income from "../../../../../actions/income/income.manager";
@@ -51,7 +51,7 @@ describe("Verify the Commercial Stabilized Rent Roll table", () => {
         
         cy.stepInfo(`
         3. Verify that Totals text at the bottom of the new first column are displayed.
-        `)
+        `);
         /**
          * See comments above.
          */

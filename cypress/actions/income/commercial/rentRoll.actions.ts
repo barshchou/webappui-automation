@@ -1,6 +1,6 @@
 import rentRollPage from "../../../pages/income/commercial/rentRoll.page";
-import {isDateHasCorrectFormat} from "../../../../utils/date.utils";
-import {numberWithCommas} from "../../../../utils/numbers.utils";
+import { isDateHasCorrectFormat } from "../../../../utils/date.utils";
+import { numberWithCommas } from "../../../../utils/numbers.utils";
 import BaseActionsExt from "../../base/base.actions.ext";
 
 class CommercialRentRollActions extends BaseActionsExt<typeof rentRollPage> {
@@ -78,12 +78,12 @@ class CommercialRentRollActions extends BaseActionsExt<typeof rentRollPage> {
     }
 
     pressDeleteLeaseStatusByRow(rowNumber = 0): this {
-        rentRollPage.leaseStatusCells.eq(rowNumber).trigger("keydown", {keyCode: 46})
+        rentRollPage.leaseStatusCells.eq(rowNumber).trigger("keydown", { keyCode: 46 })
             .should("have.text", "");
         return this;
     }
 
-    chooseLeaseStatusesByRowNumber(statuses: Array<BoweryReports.LeaseStatus>, rowNumber = 0): this {
+    chooseLeaseStatusesByRowNumber(statuses: BoweryReports.LeaseStatus[], rowNumber = 0): this {
         statuses.forEach(status => {
             this.chooseLeaseStatusByRowNumber(status, rowNumber);
         });
@@ -167,7 +167,7 @@ class CommercialRentRollActions extends BaseActionsExt<typeof rentRollPage> {
         return this;
     }
 
-    enterLeaseDateByRowNumber(cellName: BoweryReports.LeaseDateName , date: string, rowNumber = 0): this {
+    enterLeaseDateByRowNumber(cellName: BoweryReports.LeaseDateName, date: string, rowNumber = 0): this {
         rentRollPage.getLeaseDateCellsByName(cellName).eq(rowNumber).dblclick({ force: true });
         rentRollPage.textareaToInput.clear().type(date).type("{enter}");
         return this;
@@ -191,7 +191,7 @@ class CommercialRentRollActions extends BaseActionsExt<typeof rentRollPage> {
     }
 
     enterAnnualRentPerSFByRowNumber(value: number, rowNumber = 0): this {
-        rentRollPage.annualRentPerSFCells.eq(rowNumber).should("not.have.class", "readOnly").dblclick({force:true});
+        rentRollPage.annualRentPerSFCells.eq(rowNumber).should("not.have.class", "readOnly").dblclick({ force:true });
         rentRollPage.textareaToInput.clear().type(`${value}`).type("{enter}");
         const textToBe = `$${numberWithCommas(value.toFixed(2))}`;
         this.verifyRentPerSFAnnuallyByRowNumberCellText(textToBe, rowNumber);
@@ -199,7 +199,7 @@ class CommercialRentRollActions extends BaseActionsExt<typeof rentRollPage> {
     }
 
     enterMonthlyRentPerSFByRowNumber(value: number, rowNumber = 0): this {
-        rentRollPage.monthlyRentPerSFCells.eq(rowNumber).should("not.have.class", "readOnly").dblclick({force:true});
+        rentRollPage.monthlyRentPerSFCells.eq(rowNumber).should("not.have.class", "readOnly").dblclick({ force:true });
         rentRollPage.textareaToInput.clear().type(`${value}`).type("{enter}");
         const textToBe = `$${numberWithCommas(value.toFixed(2))}`;
         rentRollPage.monthlyRentPerSFCells.eq(rowNumber).should("have.text", textToBe);
@@ -285,7 +285,7 @@ class CommercialRentRollActions extends BaseActionsExt<typeof rentRollPage> {
         return this;
     }
 
-    chooseListLeaseStatuses(statuses: Array<BoweryReports.LeaseStatus>, numberOfUnits: number): this {
+    chooseListLeaseStatuses(statuses: BoweryReports.LeaseStatus[], numberOfUnits: number): this {
         for (let i = 0; i < numberOfUnits; i++) {
             this.chooseLeaseStatusByRowNumber(statuses[i], i);
         }

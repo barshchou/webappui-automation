@@ -7,10 +7,12 @@ const _buildingDescription: BoweryReports.BuildingDescription = {
 };
 
 export default {
-    reportCreationData: ReportDataCreator.getReportSpecificIncomeValue(enums.INCOME_TYPE.BOTH, "4581"),
+    reportCreationData: ReportDataCreator.getReportData("4581", {
+        incomeValue: enums.INCOME_TYPE.BOTH
+    }),
     buildingDescription: _buildingDescription,
     numberOfCommercialUnits: 3,
-    isInspected: [true, false, true],
-    leaseStatuses: ["Vacant", "Occupied", "Vacant"] as Array<BoweryReports.LeaseStatus>,
-    rentToBe: [100, 0, 150]
+    isInspected: [ true, false, true ],
+    leaseStatuses: [ "Vacant", "Occupied", "Vacant" ] as Array<BoweryReports.LeaseStatus>,
+    rentToBe: [ 100, 0, 150 ]
 };

@@ -1,10 +1,12 @@
 /// <reference types="cypress-grep" />
 import testData from "../../../../fixtures/not_full_reports/income/expense_forecast/QA-4877.fixture";
-import {createReport, deleteReport} from "../../../../actions/base/baseTest.actions";
+import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Income from "../../../../actions/income/income.manager";
+import { Tag } from "../../../../utils/tags.utils";
 
-describe("Comparable Min, Max, Avg values for Electricity Per SF are correctly calculated and displayed", () => {
+describe("Comparable Min, Max, Avg values for Electricity Per SF are correctly calculated and displayed",
+{ tags:[ Tag.snapshot_tests, Tag.income, Tag.expense_forecast ] }, () => {
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
     });
@@ -15,11 +17,12 @@ describe("Comparable Min, Max, Avg values for Electricity Per SF are correctly c
 
         cy.stepInfo(`2. Add several comps (via Search, Filter or Add blank column) and make sure that Electricity 
         and Square Feet fields are filled in for all added columns and save changes`);
-        testData.comparables.forEach((comp, index) => {
+        testData.comparables.forEach((comp) => {
             Income.ComparableExpenses.Actions.clickAddBlankColumnButton()
-                .enterAddressByColumnIndex(comp.address, index)
-                .enterCellDollarValueByColumnIndex(Income.ComparableExpenses.Page.electricityCells, comp.electricity, index)
-                .enterSquareFeetByColumnIndex(comp.squareFeet, index)
+                .enterAddressByColumnIndex(comp.address)
+                .enterCellDollarValueByColumnIndex(Income.ComparableExpenses.Page.getUnifiedEditableAndTotalCells("electricity"),
+                    comp.electricity)
+                .enterSquareFeetByColumnIndex(comp.squareFeet);
         });
         NavigationSection.Actions.navigateToExpenseForecast();
 
@@ -39,7 +42,7 @@ describe("Comparable Min, Max, Avg values for Electricity Per SF are correctly c
             5.2 correctly displayed on a slidebar
         `);
         Income.ExpenseForecast.Actions.matchElementSnapshot(
-            Income.ExpenseForecast.Page.ElectricityCard, testData.electricityCardSnapshotName, {padding: [10, 100]}
+            Income.ExpenseForecast.Page.electricityCard, testData.electricityCardSnapshotName, { padding: [ 10, 100 ] }
         );
 
         deleteReport(testData.reportCreationData.reportNumber);

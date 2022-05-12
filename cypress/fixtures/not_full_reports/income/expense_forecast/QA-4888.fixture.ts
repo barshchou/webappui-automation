@@ -1,5 +1,5 @@
 import ReportDataCreator from "../../../data_creator/reportData.creator";
-import {getCurrentMonthName, getYearFromDate} from "../../../../../utils/date.utils";
+import { getCurrentMonthName, getYearFromDate } from "../../../../../utils/date.utils";
 
 const _actualElectricityItem: BoweryReports.ForecastItem =  {
   name: "electricity",
@@ -31,7 +31,7 @@ const _buildingDescription: BoweryReports.BuildingDescription = {
 };
 
 export default {
-  reportCreationData: ReportDataCreator.getDefaultReportData("4888"),
+  reportCreationData: ReportDataCreator.getReportData("4888"),
   actualElectricityItem: _actualElectricityItem,
   t12ElectricityItem: _t12ElectricityItem,
   historicalElectricityItem: _historicalElectricityItem,
