@@ -1,15 +1,15 @@
-import { Report } from "../../../../actions";
+import { Report, ReviewExport } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import testData from '../../../../fixtures/not_full_reports/report/client/QA-4641.fixture';
 
-describe(`Verify the "Linked" chips dropdown in the new narrative component for As Is and As Stabilized 
+describe(`[QA-4641] Verify the "Linked" chips dropdown in the new narrative component for As Is and As Stabilized 
     report for Intended User and Identification of the Client sections`, () => {
-    before("Login, create report", () => {
-        createReport(testData.reportCreationData);
-    });
 
     it("Test body", { tags: "@to_check_export" }, () => {
+        cy.stepInfo("Login, create report");
+        createReport(testData.reportCreationData);
+
         cy.stepInfo("1. Proceed to the Report > Client page.");
         _NavigationSection.navigateToClientPage()
             .verifyProgressBarNotExist();
@@ -52,10 +52,23 @@ describe(`Verify the "Linked" chips dropdown in the new narrative component for 
 
         });
 
-        cy.stepInfo("6. Verify the linked chips on export for both sections:");
-        // TODO: Add export verify
-        // Proceed to the Sales Comparison Approach > Value Opinion via the Sales Comparison Approach and verify the value.
-        
+        cy.stepInfo("6. Download report");
+        _NavigationSection.openReviewAndExport(true);
+        ReviewExport.generateDocxReport().waitForReportGenerated()
+            .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
         deleteReport(testData.reportCreationData.reportNumber);
+    });
+
+    it("Verify export report", () => {
+        cy.task("getFilePath", { _reportName: testData.reportCreationData.reportNumber, _docx_html: "html" }).then(file => {
+            cy.log(<string>file);
+            cy.stepInfo("7. Verify the linked chips on export for both sections:");
+            cy.visit(<string>file);
+
+            testData.suggestions.forEach(item => {
+                cy.contains("Identification of the Client").next().scrollIntoView().should("include.text", item.verifyExport);
+                cy.contains("Intended Use & User").next().scrollIntoView().should("include.text", item.verifyExport);
+            });
+        });
     });
 });
