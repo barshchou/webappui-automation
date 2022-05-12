@@ -186,6 +186,19 @@ class CommercialRentRollSharedComponent {
         this.verifyAnnualRentCellTextByRow(textToBe, rowNumber);
         return this;
     }
+
+    verifyMonthlyRentPerSFByRow(rentPerSF: number, squareFoot: number, calcMethod: "annually" | "monthly",
+                                rowNumber = 0): this {
+        let numberToBe;
+        if (calcMethod === "annually") {
+            numberToBe = (rentPerSF * squareFoot) / 12;
+        } else {
+            numberToBe = rentPerSF * squareFoot;
+        }
+        const textToBe = `${numberWithCommas(numberToBe.toFixed(2))}`;
+        this.verifyMonthlyRentByRowCellText(textToBe, rowNumber);
+        return this;
+    }
 }
 
 export default CommercialRentRollSharedComponent;
