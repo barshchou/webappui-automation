@@ -199,6 +199,12 @@ class CommercialRentRollSharedComponent {
         this.verifyMonthlyRentByRowCellText(textToBe, rowNumber);
         return this;
     }
+
+    verifyMonthlyRentAnnuallyByRowNumber(annuallyRent: number, rowNumber = 0): this {
+        const textToBe = numberWithCommas((annuallyRent / 12).toFixed(2));
+        this.verifyMonthlyRentByRowCellText(textToBe, rowNumber);
+        return this;
+    }
 }
 
 export default CommercialRentRollSharedComponent;

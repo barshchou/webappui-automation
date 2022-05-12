@@ -15,7 +15,7 @@ describe("Verify the Monthly Rent column in the grid", () => {
 
     it("Annually", () => {
         Income._CommercialManager.InPlaceRentRoll.clickAnnuallyBasisButton()
-            .enterAnnualRentByRowNumber(testData.general.annualRent)
+            .enterAnnualRentByRowNumber(testData.general.annualRent).Shared
             .verifyMonthlyRentAnnuallyByRowNumber(testData.general.annualRent);
         deleteReport(testData.reportCreationData.reportNumber);
     });

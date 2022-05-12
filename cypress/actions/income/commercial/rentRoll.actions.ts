@@ -173,12 +173,6 @@ class CommercialRentRollActions extends BaseActionsExt<typeof rentRollPage> {
         return this;
     }
 
-    verifyMonthlyRentAnnuallyByRowNumber(annuallyRent: number, rowNumber = 0): this {
-        const textToBe = numberWithCommas((annuallyRent / 12).toFixed(2));
-        this.Shared.monthlyRentCells.eq(rowNumber).should("have.text", `$${textToBe}`);
-        return this;
-    }
-
     verifyRentPerSFMonthlyByRowNumber(monthlyRent: number, squareFoot: number, rowNumber = 0): this {
         const textToBe = `$${numberWithCommas(((monthlyRent * 12) / squareFoot).toFixed(2))}`;
         this.verifyRentPerSFAnnuallyByRowNumberCellText(textToBe, rowNumber);
