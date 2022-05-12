@@ -6,7 +6,7 @@ const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreat
     conclusionValue: Enums.VALUE_CONCLUSION_TYPE.AS_COMPLETE
 });
 
-const _streetTypeValues: Array<BoweryReports.CommercialUnitsStreetTypeValues> = ["side street", "avenue"];
+const _streetTypeValues: Array<BoweryReports.CommercialUnitsStreetTypeValues> = [ "side street", "avenue" ];
 const _groupName: BoweryReports.CommercialUnitsGroups = "Street Type";
 
 export default {

@@ -1,7 +1,7 @@
 /// <reference types="cypress-file-upload" />
 
 import testData from "../../../../fixtures/not_full_reports/property/commercial_units/QA-4556&57.fixture";
-import {createReport, deleteReport} from "../../../../actions/base/baseTest.actions";
+import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { Property } from "../../../../actions";
 
@@ -41,7 +41,7 @@ describe("Verify the functionality of the Image upload to the Interior and Exter
                 });
             });
             Property._CommercialUnits
-            .Page.iconDeleteImage.last().click({force:true});
+            .Page.iconDeleteImage.last().click({ force:true });
             Property._CommercialUnits
             .Page.commercialUnitImage.should("have.length", index + 1);
         });
