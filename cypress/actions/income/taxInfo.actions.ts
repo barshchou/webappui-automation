@@ -533,17 +533,17 @@ class TaxInfoActions extends BaseActions {
      * @returns {TaxInfoActions}
      */
     verifyTaxSummaryCommentary(commToBe) {
-        taxInfoPage.taxSummaryDiscussionCommentary.should("have.text", commToBe);
+        taxInfoPage.taxSummaryDiscussionCommentary.should("exist").should("have.text", commToBe);
         return this;
     }
 
     verifyTaxSummaryTooltip(tooltipToBe) {
-        taxInfoPage.taxSummaryDiscussionTooltip.should("have.attr", "aria-label", tooltipToBe);
+        taxInfoPage.taxSummaryDiscussionTooltip.should("exist").should("have.attr", "aria-label", tooltipToBe);
         return this;
     }
 
     verifyTaxSummaryDiscussionTitle(titleToBe) {
-        taxInfoPage.taxSummaryDiscussionTitle.should("have.text", titleToBe);
+        taxInfoPage.taxSummaryDiscussionTitle.should("exist").should("have.text", titleToBe);
         return this;
     }
 }

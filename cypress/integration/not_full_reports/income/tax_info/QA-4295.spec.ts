@@ -14,7 +14,7 @@ describe("Assessed Value & RE Taxes] Verify the 'Tax Calculation Discussion' gen
         _NavigationSection.navigateToTaxInfo();
 
         cy.stepInfo("2. Verify  Tax Calculation discussion title and commentary is diplayed");
-        cy.get(".MuiTypography-subtitle1").should("have.text", testData.title);
+        _TaxInfo.verifyTaxSummaryDiscussionTitle(testData.title);
         _TaxInfo.verifyTaxSummaryCommentary(testData.commentary);
 
         cy.stepInfo("3. Verify Tax Calculation discussion's tooltip content");
