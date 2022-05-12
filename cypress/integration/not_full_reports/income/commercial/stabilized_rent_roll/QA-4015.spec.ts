@@ -4,6 +4,7 @@ import NavigationSection from "../../../../../actions/base/navigationSection.act
 import Property from "../../../../../actions/property/property.manager";
 import Income from "../../../../../actions/income/income.manager";
 import ReviewExport from "../../../../../actions/reviewExport/reviewExport.actions";
+import { isEndsWithDecimal } from "../../../../../utils/html.utils";
 
 describe("Verify the Commercial Stabilized Rent Roll table", { tags: '@to_check_export' }, () => {
     it("Test body", () => {  
@@ -83,12 +84,3 @@ describe("Verify the Commercial Stabilized Rent Roll table", { tags: '@to_check_
         });
     });
 });
-
-const isEndsWithDecimal = (columnIndex:number,valueToContain:string) => {
-    cy.get("tr").eq(columnIndex).find("p")
-    .contains(valueToContain).then(elem => {
-        expect((elem.text().endsWith(".00")),
-        "Not ends with decimal part"
-        ).to.be.equal(false);
-    });
-};
