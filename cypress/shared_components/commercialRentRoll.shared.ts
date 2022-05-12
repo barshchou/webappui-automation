@@ -153,7 +153,8 @@ class CommercialRentRollSharedComponent {
         return this;
     }
 
-    verifyAnnualRentCellPerSFBasisByRow(rentPerSF: number, squareFoot: number, calcMethod: string, rowNumber = 0): this {
+    verifyAnnualRentCellPerSFBasisByRow(rentPerSF: number, squareFoot: number, calcMethod: "annually" | "monthly",
+                                        rowNumber = 0): this {
         let numberToBe;
         if (calcMethod === "annually") {
             numberToBe = rentPerSF * squareFoot;
