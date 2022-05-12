@@ -2,12 +2,13 @@ import testData from "../../../../fixtures/not_full_reports/property/commercial_
 import { Property } from "../../../../actions";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
+import { Tag } from "../../../../utils/tags.utils";
 
-describe("Verify the Save button functionality on the Commercial Units page", () => {
+describe("Verify the Save button functionality on the Commercial Units page", 
+// { tags:[ Tag.property, Tag. ] }, 
+() => {
 
-    before("Login, create report", () => {
-
-        cy.stepInfo(` 1. Report creation and several commercial units addition`);
+    before("Report creation and several commercial units addition", () => {
         createReport(testData.reportCreationData);
         _NavigationSection.navigateToPropertySummary();
         Property._Summary.enterNumberOfCommercialUnits(testData.numberOfCommercialUnits);
@@ -16,19 +17,22 @@ describe("Verify the Save button functionality on the Commercial Units page", ()
 
     it("Test body", () => {
 
-        cy.stepInfo("2.  Proceed to the Property > Commercial Units page.");
+        cy.stepInfo("1.  Proceed to the Property > Commercial Units page.");
         _NavigationSection.navigateToCommercialUnits();
         
 
-        cy.stepInfo("3.  Verify the Save button is displayed on the Commercial Units page");
+        cy.stepInfo("2.  Verify the Save button is displayed on the Commercial Units page");
         Property._CommercialUnits.verifyThatPageIsOpened();
         Property._CommercialUnits.Page.SaveBtn.should('exist');
 
         cy.stepInfo("4.  Fill in the editable fields with values or/and check check-boxes or/and click the radio button and click on the Save button.");
-       
+        Property._CommercialUnits.enterListUnitSF(testData.squareFeetList, testData.numberOfCommercialUnits);
+        testData.groupsNamesAndValues.forEach(groupNameElement => {
+            let groupName = groupNameElement.groupName ;
+            let value = groupNameElement.value ;
+        Property._CommercialUnits.clickRadioButtonByValueAndUnitIndex(groupName, value);
 
-
-
+        });
 
 
 
