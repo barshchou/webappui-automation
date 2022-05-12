@@ -1,5 +1,4 @@
 import rentRollPage from "../../../pages/income/commercial/rentRoll.page";
-import { isDateHasCorrectFormat } from "../../../../utils/date.utils";
 import { numberWithCommas } from "../../../../utils/numbers.utils";
 import BaseActionsExt from "../../base/base.actions.ext";
 import CommercialRentRollSharedComponent from "../../../shared_components/commercialRentRoll.shared";
@@ -152,17 +151,6 @@ class CommercialRentRollActions extends BaseActionsExt<typeof rentRollPage> {
     enterLeaseDateByRowNumber(cellName: BoweryReports.LeaseDateName, date: string, rowNumber = 0): this {
         this.Shared.getLeaseDateCellsByName(cellName).eq(rowNumber).dblclick({ force: true });
         this.Shared.textareaToInput.clear().type(date).type("{enter}");
-        return this;
-    }
-
-    verifyLeaseDateByRowNumber(cellName: BoweryReports.LeaseDateName, leaseStatus: BoweryReports.LeaseStatus,
-                               dateToBe?: string, rowNumber = 0): this {
-        dateToBe = dateToBe ?? "";
-        if (!isDateHasCorrectFormat(dateToBe, "/")) {
-            dateToBe = "";
-        }
-        let textToBe = leaseStatus === "Vacant" ? "-" : dateToBe;
-        this.Shared.getLeaseDateCellsByName(cellName).eq(rowNumber).should("have.text", textToBe);
         return this;
     }
 

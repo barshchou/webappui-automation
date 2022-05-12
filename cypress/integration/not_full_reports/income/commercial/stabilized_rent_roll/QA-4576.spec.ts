@@ -46,10 +46,10 @@ describe.skip("Verify the display of the Stabilized Rent Roll page", () => {
             Income._CommercialManager.InPlaceRentRoll
             .enterTenantNameByRowNumber(testData.newTenantName, index)
             .chooseLeaseStatusByRowNumber("Occupied", index)
-            .enterLeaseDateByRowNumber("Start", getTodayDateString("/"), index)
-            .verifyLeaseDateByRowNumber("Start", testData.occupiedLease, getTodayDateString("/"), index)
-            .enterLeaseDateByRowNumber("Expiry", getTodayDateString("/"), index)
-            .verifyLeaseDateByRowNumber("Expiry", testData.occupiedLease, getTodayDateString("/"), index);
+            .enterLeaseDateByRowNumber("Start", getTodayDateString("/"), index).Shared
+            .verifyLeaseDateByRowNumber("Start", testData.occupiedLease, "in-place", getTodayDateString("/"), index);
+            Income._CommercialManager.InPlaceRentRoll.enterLeaseDateByRowNumber("Expiry", getTodayDateString("/"), index)
+                .Shared.verifyLeaseDateByRowNumber("Expiry", testData.occupiedLease, "in-place", getTodayDateString("/"), index);
         }
         Income._CommercialManager.InPlaceRentRoll
         .clickSaveButton();  

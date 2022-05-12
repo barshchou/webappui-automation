@@ -1,4 +1,5 @@
 import { numberWithCommas } from "../../utils/numbers.utils";
+import { isDateHasCorrectFormat } from "../../utils/date.utils";
 
 class CommercialRentRollSharedComponent {
 
@@ -124,6 +125,17 @@ class CommercialRentRollSharedComponent {
         squareFeetValues.forEach((value, index) => {
             this.verifySfCellByRow(value, index);
         });
+        return this;
+    }
+
+    verifyLeaseDateByRowNumber(cellName: BoweryReports.LeaseDateName, leaseStatus: BoweryReports.LeaseStatus,
+                               rentRoll: "stabilized" | "in-place", dateToBe?: string, rowNumber = 0): this {
+        dateToBe = dateToBe ?? "";
+        if (!isDateHasCorrectFormat(dateToBe, "/")) {
+            dateToBe = "";
+        }
+        let textToBe = leaseStatus === "Vacant" ? rentRoll === "stabilized" ? "" : "-" : dateToBe;
+        this.getLeaseDateCellsByName(cellName).eq(rowNumber).should("have.text", textToBe);
         return this;
     }
 }
