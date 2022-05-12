@@ -13,7 +13,7 @@ class NavigationSectionActions extends BaseActions {
             url: '/api/docx-report-async/get-report-hierarchy*'
         }).as(reportAlias);
         cy.get('[id="review-and-export"]').click();
-        if (isWithSave) this.clickYesButton();
+        if (isWithSave) this.clickYesButton(); 
         cy.wait(`@${reportAlias}`, { timeout:20000 });
         return this;
     }
