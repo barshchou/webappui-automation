@@ -166,12 +166,6 @@ class CommercialRentRollActions extends BaseActionsExt<typeof rentRollPage> {
         return this;
     }
 
-    verifySquareFeetByRowNumber(sfToBe = 0, rowNumber = 0): this {
-        let sfTextToBe = numberWithCommas(Math.round(sfToBe));
-        this.Shared.squareFeetCells.eq(rowNumber).should("have.text", sfTextToBe).and("have.class", "readOnly");
-        return this;
-    }
-
     enterAnnualRentPerSFByRowNumber(value: number, rowNumber = 0): this {
         this.Shared.annualRentPerSFCells.eq(rowNumber).should("not.have.class", "readOnly").dblclick({ force:true });
         this.Shared.textareaToInput.clear().type(`${value}`).type("{enter}");

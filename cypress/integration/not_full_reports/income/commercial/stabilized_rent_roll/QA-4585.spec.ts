@@ -47,9 +47,9 @@ describe("Verify the Commercial Stabilized Rent Roll table", () => {
         `);
         Income.Commercial.StabilizedRentRoll.Shared.verifyLeaseStatuses(testData.leaseStatuses)
             .verifyTenantNames(testData.tenantNames, testData.leaseStatuses)
-            .verifyUseCells(testData.useTexts);
-        Income.Commercial.StabilizedRentRoll.verifySFCells(testData.listOfUnitsSF)
-            .verifyAnnualRentByRow(testData.annualRent, 1)
+            .verifyUseCells(testData.useTexts)
+            .verifySFCells(testData.listOfUnitsSF);
+        Income.Commercial.StabilizedRentRoll.verifyAnnualRentByRow(testData.annualRent, 1)
             .verifyMonthlyRentByRow(testData.monthlyRent, 1)
             .verifyAnnuallyRentPsf(testData.rentsPsf[1], 1)
             .clickSaveButton()

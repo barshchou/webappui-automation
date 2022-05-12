@@ -1,3 +1,5 @@
+import { numberWithCommas } from "../../utils/numbers.utils";
+
 class CommercialRentRollSharedComponent {
 
     get leaseStatusCells() {return cy.get("[data-qa^=leaseStatus].htAutocomplete");}
@@ -108,6 +110,19 @@ class CommercialRentRollSharedComponent {
     verifyUseCells(useTexts: Array<BoweryReports.CommercialUnitsUseTexts>): this {
         useTexts.forEach((text, index) => {
             this.verifyUseCellByRow(text, index);
+        });
+        return this;
+    }
+
+    verifySfCellByRow(squareFeet: string | number = 0, rowNumber = 0): this {
+        const textToBe = typeof squareFeet === "string" ? squareFeet : numberWithCommas(Math.round(squareFeet));
+        this.squareFeetCells.eq(rowNumber).should("have.text", textToBe).and("have.class", "readOnly");
+        return this;
+    }
+
+    verifySFCells(squareFeetValues: Array<string | number>): this {
+        squareFeetValues.forEach((value, index) => {
+            this.verifySfCellByRow(value, index);
         });
         return this;
     }

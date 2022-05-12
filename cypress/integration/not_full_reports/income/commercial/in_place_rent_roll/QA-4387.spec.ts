@@ -12,12 +12,12 @@ describe("Verify the SF column in the grid", () => {
 
     it("Test body", () => {
        NavigationSection.navigateToCommercialInPlaceRentRoll();
-       Income.Commercial.InPlaceRentRoll.chooseLeaseStatusByRowNumber(testData.leaseStatus)
-           .verifySquareFeetByRowNumber();
+       Income.Commercial.InPlaceRentRoll.chooseLeaseStatusByRowNumber(testData.leaseStatus).Shared
+           .verifySfCellByRow();
        NavigationSection.navigateToCommercialUnits();
        Property.CommercialUnits.enterUnitSFByUnitIndex(testData.squareFeet);
        NavigationSection.navigateToCommercialInPlaceRentRoll();
-       Income.Commercial.InPlaceRentRoll.verifySquareFeetByRowNumber(testData.squareFeet);
+       Income.Commercial.InPlaceRentRoll.Shared.verifySfCellByRow(testData.squareFeet);
        deleteReport(testData.reportCreationData.reportNumber);
     });
 });

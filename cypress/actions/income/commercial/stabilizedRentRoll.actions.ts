@@ -1,5 +1,4 @@
 import stabRentRollPage from "../../../pages/income/commercial/stabilizedRentRoll.page";
-import { numberWithCommas } from "../../../../utils/numbers.utils";
 import BaseActionsExt from "../../base/base.actions.ext";
 import CommercialRentRollSharedComponent from "../../../shared_components/commercialRentRoll.shared";
 
@@ -21,19 +20,6 @@ class StabilizedRentRollActions extends BaseActionsExt<typeof stabRentRollPage>{
             let urlObj = new URL(url);
             cy.log("Check whether current URL ends with '/commercial-projected-rent-roll'");
             cy.wrap(urlObj.pathname.endsWith("/commercial-projected-rent-roll")).should("be.true");
-        });
-        return this;
-    }
-
-    verifySfCellByRow(squareFeet: string | number, rowNumber = 0): this {
-        const textToBe = typeof squareFeet === "string" ? squareFeet : numberWithCommas(squareFeet);
-        this.Shared.squareFeetCells.eq(rowNumber).should("have.text", textToBe);
-        return this;
-    }
-
-    verifySFCells(squareFeetValues: Array<string | number>): this {
-        squareFeetValues.forEach((value, index) => {
-            this.verifySfCellByRow(value, index);
         });
         return this;
     }
