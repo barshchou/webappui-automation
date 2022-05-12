@@ -1,6 +1,6 @@
 import testData from "../../../../../fixtures/not_full_reports/income/residential/in_place_rent_roll/QA-4212&43&46.fixture";
-import {createReport, deleteReport} from "../../../../../actions/base/baseTest.actions";
-import { _NavigationSection} from "../../../../../actions/base";
+import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
+import { _NavigationSection } from "../../../../../actions/base";
 import { Income, Property } from "../../../../../actions";
 
 describe("[QA-4212] [QA-4243] [QA-4246] In-Place Rent Roll table tests", () => {

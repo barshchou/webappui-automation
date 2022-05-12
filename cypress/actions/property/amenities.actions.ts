@@ -1,6 +1,6 @@
 import BaseActions from "../base/base.actions";
 import amenitiesPage from "../../pages/property/amenities.page";
-import {cutDecimalPartToNumberOfDigits, isDecimal} from "../../../utils/numbers.utils";
+import { cutDecimalPartToNumberOfDigits, isDecimal } from "../../../utils/numbers.utils";
 
 class AmenitiesActions extends BaseActions{
 

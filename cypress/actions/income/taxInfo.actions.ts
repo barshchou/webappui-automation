@@ -1,6 +1,6 @@
 import BaseActions from "../base/base.actions";
 import taxInfoPage from "../../pages/income/taxInfo.page";
-import {getNumberFromDollarNumberWithCommas, numberWithCommas} from "../../../utils/numbers.utils";
+import { getNumberFromDollarNumberWithCommas, numberWithCommas } from "../../../utils/numbers.utils";
 
 class TaxInfoActions extends BaseActions {
 

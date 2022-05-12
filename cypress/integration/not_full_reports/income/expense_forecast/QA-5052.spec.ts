@@ -5,7 +5,6 @@ import { createReport, deleteReport } from "../../../../actions/base/baseTest.ac
 import { Tag } from "../../../../utils/tags.utils";
 
 describe(`[QA-5052] Appraiser's Forecast of Custom Expense Forecast is included in Total Operating Expenses calculation`,
-//ernst: remove Tag.fix when it will be fixed on hotfix/mui5-migration
 { tags:[ Tag.fix, Tag.income, Tag.expense_forecast, Tag.snapshot_tests ] }, () => {
 
     before("Login, create report", () => {
