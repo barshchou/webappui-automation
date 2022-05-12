@@ -47,9 +47,6 @@ describe("Verify the functionality of the Floor checkbox",
                     Property._CommercialUnits.enterOtherValueByGroupName(testData.groupName, testData.otherValue);
                 }
             });
-            testData.floorValues.forEach(value => {
-                Property._CommercialUnits.verifyRadioIsChecked(testData.groupName, value);
-            });
             Property._CommercialUnits.clickSaveButton()
                 .verifyProgressBarNotExist();
             cy.reload();
