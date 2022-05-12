@@ -5,5 +5,11 @@ export enum Tag {
     comp_plex = "@comp_plex",
     snapshot_tests = "@snapshot_tests",
     expense_forecast = "@expense_forecast",
-    fix = "@fix"
+    fix = "@fix",
+    rent_comps = "@rent_comps",
+    residential = "@residential",
+    property = "@property",
+    commercial_units = "@commercial_units",
+    sales = "@sales",
+    value_conclusion = "@value_conclusion"
 }
