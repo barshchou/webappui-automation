@@ -1,6 +1,4 @@
 export enum Tag {
-    property = "@property",
-    commercial_unit = "@commercial_unit",
     income = "@income",
     commercial = "@commercial",
     in_place_rent_roll = "@in_place_rent_roll",
