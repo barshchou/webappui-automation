@@ -112,19 +112,6 @@ class CommercialRentRollActions extends BaseActionsExt<typeof rentRollPage> {
         return this;
     }
 
-
-     verifyUnitNumberCells(unitNumber = 1): this {
-        if (unitNumber === 0) {
-            this.Shared.unitNumberCells.should("not.exist");
-        } else {
-            this.Shared.unitNumberCells.each(cell => {
-                cy.wrap(cell).should("exist").and("be.visible").and("have.class", "readOnly");
-            });
-            this.Shared.unitNumberCells.should("have.length", unitNumber);
-        }
-        return this;
-    }
-
     enterTenantNameByRowNumber(name: string, rowNumber = 0, leaseStatus?: BoweryReports.LeaseStatus): this {
         if (leaseStatus === "Vacant") {
             this.Shared.verifyTenantNameByRow(leaseStatus, name, rowNumber);

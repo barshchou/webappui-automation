@@ -138,6 +138,18 @@ class CommercialRentRollSharedComponent {
         this.getLeaseDateCellsByName(cellName).eq(rowNumber).should("have.text", textToBe);
         return this;
     }
+
+    verifyUnitNumberCells(unitNumber = 1): this {
+        if (unitNumber === 0) {
+            this.unitNumberCells.should("not.exist");
+        } else {
+            this.unitNumberCells.each(cell => {
+                cy.wrap(cell).should("exist").and("be.visible").and("have.class", "readOnly");
+            });
+            this.unitNumberCells.should("have.length", unitNumber);
+        }
+        return this;
+    }
 }
 
 export default CommercialRentRollSharedComponent;
