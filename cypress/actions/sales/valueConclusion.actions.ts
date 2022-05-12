@@ -1,6 +1,6 @@
 import BaseActions from "../base/base.actions";
 import valueConclusionPage from "../../pages/sales/valueConclusion.page";
-import {numberWithCommas} from "../../../utils/numbers.utils";
+import { numberWithCommas } from "../../../utils/numbers.utils";
 
 class ValueConclusionActions extends BaseActions {
 

@@ -54,7 +54,7 @@ class HomepageActions extends BaseActions {
      * @returns {HomepageActions}
      */
     clickSubmitButton() {
-        homepagePage.submitButton.should("not.be.disabled").click({ force: true});
+        homepagePage.submitButton.should("not.be.disabled").click({ force: true });
         return this;
     }
 
@@ -127,7 +127,7 @@ class HomepageActions extends BaseActions {
     }
 
     clickArchiveButton(reportNumber: string): this {
-        homepagePage.getArchiveButton(reportNumber).should("exist").click({force:true});
+        homepagePage.getArchiveButton(reportNumber).should("exist").click({ force:true });
         return this;
     }
 

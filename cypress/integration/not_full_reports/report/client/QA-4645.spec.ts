@@ -1,5 +1,5 @@
 import testData from "../../../../fixtures/not_full_reports/report/client/QA-4645.fixture";
-import {createReport, deleteReport} from "../../../../actions/base/baseTest.actions";
+import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import { Report } from '../../../../actions';
 

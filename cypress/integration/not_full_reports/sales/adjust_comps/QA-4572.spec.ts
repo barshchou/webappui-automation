@@ -1,5 +1,5 @@
 import testData from "../../../../fixtures/not_full_reports/sales/adjust_comps/QA-4572.fixture";
-import {createReport} from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Sales from "../../../../actions/sales/sales.manager";
 import ReviewExport from "../../../../actions/reviewExport/reviewExport.actions";
