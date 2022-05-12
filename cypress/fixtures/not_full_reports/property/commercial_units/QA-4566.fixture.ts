@@ -2,7 +2,7 @@ import ReportDataCreator from "../../../data_creator/reportData.creator";
 import Enums from "../../../../enums/enums";
 
 const groupNameFixture: BoweryReports.CommercialUnitsGroups = "Frontage";
-const useRadiosFixture: BoweryReports.CommercialUnitGroupsValues[] = ["small", "medium", "large", "other"];
+const useRadiosFixture: BoweryReports.CommercialUnitGroupsValues[] = [ "small", "medium", "large", "other" ];
 
 export default {
     reportCreationData: ReportDataCreator.getReportData("4566", {

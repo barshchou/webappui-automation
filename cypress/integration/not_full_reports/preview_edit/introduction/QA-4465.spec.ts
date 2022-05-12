@@ -48,7 +48,7 @@ describe('Verify the "Property Rights Appraised" commentary on the Introduction 
             PreviewEdit._Introduction.Page.ChipModified.should("be.visible");
             PreviewEdit._Introduction.Page.getBacklink(testData.backlinkName)
             .should("be.visible")
-            .invoke("attr","href")
+            .invoke("attr", "href")
             .then(href => {
                 getReportId().then(val => {
                     expect(href).includes(val);

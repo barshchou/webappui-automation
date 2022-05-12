@@ -1,7 +1,7 @@
 import testData from "../../../../fixtures/not_full_reports/sales/find_comps/QA-4172.fixture";
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Sales from "../../../../actions/sales/sales.manager";
-import {createReport, deleteReport} from "../../../../actions/base/baseTest.actions";
+import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 
 describe("Verify the functionality of the Upload Comps button", () => {
     before("Login and create report", () => {
