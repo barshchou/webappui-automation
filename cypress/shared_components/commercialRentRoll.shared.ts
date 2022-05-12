@@ -161,13 +161,18 @@ class CommercialRentRollSharedComponent {
         } else {
             numberToBe = rentPerSF * squareFoot * 12;
         }
-        this.annualRentCells.eq(rowNumber)
-            .should("have.text", `$${numberWithCommas(numberToBe.toFixed(2))}`);
+        const textToBe = `${numberWithCommas(numberToBe.toFixed(2))}`;
+        this.verifyAnnualRentCellTextByRow(textToBe, rowNumber);
         return this;
     }
 
     clickNarrativeSuggestions(verifyListValue: string): this {
         this.narrativeSuggestionsList.contains(verifyListValue).click();
+        return this;
+    }
+
+    verifyAnnualRentCellTextByRow(textToBe = "0.00", rowNumber = 0): this {
+        this.annualRentCells.eq(rowNumber).should("have.text", `$${textToBe}`);
         return this;
     }
 }

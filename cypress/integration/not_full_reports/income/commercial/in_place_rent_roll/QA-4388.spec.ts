@@ -14,9 +14,9 @@ describe("Verify the Annual Rent column in the grid", () => {
     });
 
     it("Annually", () => {
-        Income.Commercial.InPlaceRentRoll.clickAnnuallyBasisButton()
-            .verifyAnnualRentCellTextByRow()
-            .enterAnnualRentByRowNumber(testData.general.annualRent);
+        Income.Commercial.InPlaceRentRoll.clickAnnuallyBasisButton().Shared
+            .verifyAnnualRentCellTextByRow();
+        Income.Commercial.InPlaceRentRoll.enterAnnualRentByRowNumber(testData.general.annualRent);
         deleteReport(testData.reportCreationData.reportNumber);
     });
 

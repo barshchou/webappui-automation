@@ -180,12 +180,7 @@ class CommercialRentRollActions extends BaseActionsExt<typeof rentRollPage> {
         this.Shared.annualRentCells.eq(rowNumber).should("not.have.class", "readOnly").dblclick({ force: true });
         this.Shared.textareaToInput.clear().type(`${annualRent}`).type("{enter}");
         const textToBe = numberWithCommas(annualRent.toFixed(2));
-        this.verifyAnnualRentCellTextByRow(textToBe, rowNumber);
-        return this;
-    }
-
-    verifyAnnualRentCellTextByRow(textToBe = "0.00", rowNumber = 0): this {
-        this.Shared.annualRentCells.eq(rowNumber).should("have.text", `$${textToBe}`);
+        this.Shared.verifyAnnualRentCellTextByRow(textToBe, rowNumber);
         return this;
     }
 
