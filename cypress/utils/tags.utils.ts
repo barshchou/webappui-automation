@@ -5,5 +5,7 @@ export enum Tag {
     comp_plex = "@comp_plex",
     snapshot_tests = "@snapshot_tests",
     expense_forecast = "@expense_forecast",
-    fix = "@fix"
+    fix = "@fix",
+    report = "@report",
+    client = "@client"
 }
