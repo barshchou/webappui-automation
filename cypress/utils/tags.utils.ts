@@ -12,7 +12,6 @@ export enum Tag {
     find_comps = "@find_comps",
     rent_comps = "@rent_comps",
     residential = "@residential",
-    property = "@property",
     commercial_units = "@commercial_units",
     sales = "@sales",
     value_conclusion = "@value_conclusion",
