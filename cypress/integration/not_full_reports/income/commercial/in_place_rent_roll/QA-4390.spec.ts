@@ -34,7 +34,7 @@ describe("Verify the Rent PSF column in the grid", () => {
     });
 
     it("Per square foot per month", () => {
-        Income.Commercial.InPlaceRentRoll.clickPerSquareFootPerMonthButton()
+        Income.Commercial.InPlaceRentRoll.clickPerSquareFootPerMonthButton().Shared
             .enterRentPerSFMonthlyByRowNumber(testData.general.rentPerSF);
         deleteReport(testData.reportCreationData.reportNumber);
     });

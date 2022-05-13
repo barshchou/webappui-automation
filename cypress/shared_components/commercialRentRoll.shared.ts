@@ -243,6 +243,24 @@ class CommercialRentRollSharedComponent {
         this.verifyRentPsfAnnuallyByRow(rentToBe, rowNumber);
         return this;
     }
+
+    verifyRentPerSFMonthlyCellTextByRow(textToBe = "$0.00", rowNumber = 0): this {
+        this.rentPerSFMonthlyCells.eq(rowNumber).should("have.text", textToBe);
+        return this;
+    }
+
+    verifyRentPsfMonthlyByRow(rentToBe: number, rowNumber: number): this {
+        const textToBe = `$${numberWithCommas(rentToBe.toFixed(2))}`;
+        this.verifyRentPerSFMonthlyCellTextByRow(textToBe, rowNumber);
+        return this;
+    }
+
+    enterRentPerSFMonthlyByRowNumber(value: number, rowNumber = 0): this {
+        this.rentPerSFMonthlyCells.eq(rowNumber).should("not.have.class", "readOnly").dblclick({ force:true });
+        this.textareaToInput.clear().type(`${value}`).type("{enter}");
+        this.verifyRentPsfMonthlyByRow(value, rowNumber);
+        return this;
+    }
 }
 
 export default CommercialRentRollSharedComponent;
