@@ -1,3 +1,4 @@
+import { Tag } from './../../../../../utils/tags.utils';
 import testData from "../../../../../fixtures/not_full_reports/income/commercial/stabilized_rent_roll/QA-4015.fixture";
 import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../../actions/base/navigationSection.actions";
@@ -5,7 +6,7 @@ import Property from "../../../../../actions/property/property.manager";
 import Income from "../../../../../actions/income/income.manager";
 import ReviewExport from "../../../../../actions/reviewExport/reviewExport.actions";
 
-describe("Verify the Commercial Stabilized Rent Roll table", () => {
+describe("Verify the Commercial Stabilized Rent Roll table", { tags: [ Tag.income, Tag.commercial, Tag.stabilized_rent_roll ] }, () => {
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
     });
