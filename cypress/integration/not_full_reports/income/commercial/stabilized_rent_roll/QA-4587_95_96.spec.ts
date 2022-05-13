@@ -32,14 +32,14 @@ describe(`Verify the suggested text dropdown in the new narrative component adde
             expect(text).to.be.equal(testData.tooltipText);
             });
 
-        cy.stepInfo("2. [QA-4596] Click Edit and enter the “=S“ and select the 'Sheriff's sale' option. Verify text");
+        cy.stepInfo("4. [QA-4596] Click Edit and enter the “=S“ and select the 'Sheriff's sale' option. Verify text");
         Income._CommercialManager.StabilizedRentRoll.clickEditStabilizedCommercialIncomeDiscussion()
             .typeStabilizedCommercialIncomeTextArea(testData.sherifsTypeValue)
             .clickNarrativeSuggestions(testData.verifySherifsListValue)
             .saveStabilizedRentRollCommentary()
             .verifyStabilizedCommercialIncomeTextArea(testData.verifySherifsAreaValue);
 
-        cy.stepInfo("3. Revert to original");
+        cy.stepInfo("5. Revert to original");
         Income._CommercialManager.StabilizedRentRoll.revertToOriginalStabilizedRentRollCommentary();
 
         cy.stepInfo("6. [QA-4595] Click the Edit and enter the “=F“ and select the 'Foreclosure Sale' option.");
