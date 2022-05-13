@@ -446,6 +446,16 @@ class CommercialRentRollActions extends BaseActionsExt<typeof rentRollPage> {
         rentRollPage.cancelDiscussionEdit.click();
         return this;
     }
+
+    clickNarrativeSuggestions(verifyListValue: string): CommercialRentRollActions {
+        rentRollPage.narrativeSuggestionsList.contains(verifyListValue).click();
+        return this;
+    }
+
+    verifyInPlaceCommercialIncomeTextArea(verifyAreaValue: string): CommercialRentRollActions {
+        rentRollPage.inPlaceCommercialIncomeTextArea.should("contain.text", verifyAreaValue);
+        return this;
+    }
 }
 
 export default new CommercialRentRollActions(rentRollPage);
