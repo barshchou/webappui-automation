@@ -5,7 +5,7 @@ import { _NavigationSection } from "../../../../actions/base";
 import { Tag } from "../../../../utils/tags.utils";
 
 describe("Verify the functionality of the Floor checkbox",
-    { tags: [Tag.property, Tag.commercial_unit] }, () => {
+    { tags: [ Tag.property, Tag.commercial_unit ] }, () => {
 
         before("Preconditions: The mixed report is created and several commercial units are added", () => {
             createReport(testData.reportCreationData);
