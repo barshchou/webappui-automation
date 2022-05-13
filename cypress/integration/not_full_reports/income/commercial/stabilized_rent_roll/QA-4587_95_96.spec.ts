@@ -34,9 +34,9 @@ describe(`Verify the suggested text dropdown in the new narrative component adde
 
         cy.stepInfo("4. [QA-4596] Click Edit and enter the “=S“ and select the 'Sheriff's sale' option. Verify text");
         Income._CommercialManager.StabilizedRentRoll.clickEditStabilizedCommercialIncomeDiscussion()
-            .typeStabilizedCommercialIncomeTextArea(testData.sherifsTypeValue)
-            .clickNarrativeSuggestions(testData.verifySherifsListValue)
-            .saveStabilizedRentRollCommentary()
+            .typeStabilizedCommercialIncomeTextArea(testData.sherifsTypeValue).Shared
+            .clickNarrativeSuggestions(testData.verifySherifsListValue);
+        Income._CommercialManager.StabilizedRentRoll.saveStabilizedRentRollCommentary()
             .verifyStabilizedCommercialIncomeTextArea(testData.verifySherifsAreaValue);
 
         cy.stepInfo("5. Revert to original");
@@ -44,9 +44,9 @@ describe(`Verify the suggested text dropdown in the new narrative component adde
 
         cy.stepInfo("6. [QA-4595] Click the Edit and enter the “=F“ and select the 'Foreclosure Sale' option.");
         Income._CommercialManager.StabilizedRentRoll.clickEditStabilizedCommercialIncomeDiscussion()
-            .typeStabilizedCommercialIncomeTextArea(testData.foreclosureTypeValue)
-            .clickNarrativeSuggestions(testData.verifyForeclosureListValue)
-            .saveStabilizedRentRollCommentary()
+            .typeStabilizedCommercialIncomeTextArea(testData.foreclosureTypeValue).Shared
+            .clickNarrativeSuggestions(testData.verifyForeclosureListValue);
+        Income._CommercialManager.StabilizedRentRoll.saveStabilizedRentRollCommentary()
             .verifyStabilizedCommercialIncomeTextArea(testData.verifyForeclosureAreaValue);
 
         deleteReport(testData.reportCreationData.reportNumber);

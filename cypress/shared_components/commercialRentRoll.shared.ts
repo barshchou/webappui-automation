@@ -168,6 +168,7 @@ class CommercialRentRollSharedComponent {
 
     clickNarrativeSuggestions(verifyListValue: string): this {
         this.narrativeSuggestionsList.contains(verifyListValue).click();
+        this.commentaryText.click();
         return this;
     }
 

@@ -53,12 +53,6 @@ class StabilizedRentRollActions extends BaseActionsExt<typeof stabRentRollPage> 
         return this;
     }
 
-    clickNarrativeSuggestions(verifyListValue: string): StabilizedRentRollActions {
-        this.Shared.narrativeSuggestionsList.contains(verifyListValue).click();
-        stabRentRollPage.stabilizedCommercialIncomeTextArea.click();
-        return this;
-    }
-
     verifyStabilizedCommercialIncomeTextArea(verifyAreaValue: string): StabilizedRentRollActions {
         stabRentRollPage.stabilizedCommercialIncomeTextArea.should("contain.text", verifyAreaValue);
         return this;
