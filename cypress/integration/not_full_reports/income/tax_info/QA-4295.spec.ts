@@ -1,8 +1,8 @@
 import testData from "../../../../fixtures/not_full_reports/income/tax_info/QA-4295.fixture";
-import {createReport, deleteReport} from "../../../../actions/base/baseTest.actions";
+import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { _TaxInfo } from "../../../../actions/income";
-import { ReviewExport} from './../../../../actions/index';
+import { ReviewExport } from './../../../../actions/index';
 import { Tag } from "../../../../utils/tags.utils";
 
 describe("[Assessed Value & RE Taxes] Verify the 'Tax Calculation Discussion' generated commentary is displayed on the Tax Info page.", () => {
