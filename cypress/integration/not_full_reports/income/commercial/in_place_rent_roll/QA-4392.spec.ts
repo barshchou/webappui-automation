@@ -19,7 +19,7 @@ describe("Verify the Annual Rent Total is calculated correctly in the grid.", ()
         NavigationSection.navigateToCommercialInPlaceRentRoll();
         Income.Commercial.InPlaceRentRoll.chooseListLeaseStatuses(testData.leaseStatusesList, testData.general.numberOfUnits)
             .clickAnnuallyBasisButton()
-            .enterListAnnuallyRent(testData.leaseStatusesList, testData.general.annualRents)
+            .enterListAnnuallyRent(testData.leaseStatusesList, testData.general.annualRents).Shared
             .verifyAnnuallyRentTotal(testData.leaseStatusesList, testData.general.annualRents);
         deleteReport(testData.reportCreationData.reportNumber);
     });

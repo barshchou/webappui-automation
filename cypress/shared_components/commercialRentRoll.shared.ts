@@ -269,6 +269,29 @@ class CommercialRentRollSharedComponent {
         this.squareFeetTotal.should("have.text", `${textToBe}`);
         return this;
     }
+
+    private static getTotalRentTextToBe(leaseStatuses: Array<BoweryReports.LeaseStatus>, rentsValues: Array<number>): string {
+        let rentTotalToBe = 0;
+        for (let i = 0; i < leaseStatuses.length; i++) {
+            if (leaseStatuses[i] === "Vacant") {
+                continue;
+            }
+            rentTotalToBe += rentsValues[i];
+        }
+        return numberWithCommas(rentTotalToBe.toFixed(2));
+    }
+
+    verifyMonthlyRentTotal(leaseStatuses: Array<BoweryReports.LeaseStatus>, monthlyRents: Array<number>): this {
+        const textToBe = CommercialRentRollSharedComponent.getTotalRentTextToBe(leaseStatuses, monthlyRents);
+        this.monthlyRentTotal.should("have.text", `$${textToBe}`);
+        return this;
+    }
+
+    verifyAnnuallyRentTotal(leaseStatuses: Array<BoweryReports.LeaseStatus>, annualRents: Array<number>): this {
+        const textToBe = CommercialRentRollSharedComponent.getTotalRentTextToBe(leaseStatuses, annualRents);
+        this.annualRentTotal.should("have.text", `$${textToBe}`);
+        return this;
+    }
 }
 
 export default CommercialRentRollSharedComponent;
