@@ -28,12 +28,11 @@ describe("Verify the Comps can be added by entering the existing Report ID in th
                 .enterReportToSearchComp(<any>reportId);
         });
         Sales.FindComps.clickSearchButton()
+            .checkSingleSalesCompsByEventId()
             .selectAllCompsForImport()
+            .checkSelectedSingleSalesComps()
             .clickImportCompsFromReportButton();
         Sales.FindComps.verifyAddedCompAddress(testData.comparable.address);
-        // cy.get("@salesEventId").then(val => {
-        //     cy.log(<any>val);
-        // });
         cy.pause();
         deleteReport(testData.reportCreationData.reportNumber);
         cy.reload();
