@@ -210,6 +210,12 @@ class CommercialRentRollSharedComponent {
         this.rentPerSFAnnuallyCells.eq(rowNumber).should("have.text", textToBe);
         return this;
     }
+
+    verifyRentPerSFAnnuallyMonthlyCalcByRowNumber(monthlyRent: number, squareFoot: number, rowNumber = 0): this {
+        const textToBe = `$${numberWithCommas(((monthlyRent * 12) / squareFoot).toFixed(2))}`;
+        this.verifyRentPerSFAnnuallyCellTextByRow(textToBe, rowNumber);
+        return this;
+    }
 }
 
 export default CommercialRentRollSharedComponent;

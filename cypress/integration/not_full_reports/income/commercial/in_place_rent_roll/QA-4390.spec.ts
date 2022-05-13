@@ -22,7 +22,7 @@ describe("Verify the Rent PSF column in the grid", () => {
 
     it("Monthly", () => {
         Income.Commercial.InPlaceRentRoll.clickMonthlyBasisButton()
-            .enterMonthlyRentByRowNumber(testData.general.monthlyRent)
+            .enterMonthlyRentByRowNumber(testData.general.monthlyRent).Shared
             .verifyRentPerSFAnnuallyMonthlyCalcByRowNumber(testData.general.monthlyRent, testData.general.squareFeet);
         deleteReport(testData.reportCreationData.reportNumber);
     });
