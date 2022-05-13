@@ -261,6 +261,14 @@ class CommercialRentRollSharedComponent {
         this.verifyRentPsfMonthlyByRow(value, rowNumber);
         return this;
     }
+
+    verifySFTotal(sfValues: Array<number>): this {
+        let sfTotalToBe = 0;
+        sfValues.forEach(value => sfTotalToBe += value);
+        const textToBe = numberWithCommas(Math.round(sfTotalToBe));
+        this.squareFeetTotal.should("have.text", `${textToBe}`);
+        return this;
+    }
 }
 
 export default CommercialRentRollSharedComponent;

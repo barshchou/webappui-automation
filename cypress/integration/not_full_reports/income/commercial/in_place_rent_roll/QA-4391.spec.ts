@@ -18,7 +18,7 @@ describe("Verify the SF Total is calculated correctly in the grid.", () => {
         Property.CommercialUnits.enterListUnitSF(testData.general.squareFeetList, testData.general.numberOfUnits);
         NavigationSection.navigateToCommercialInPlaceRentRoll();
         Income.Commercial.InPlaceRentRoll.chooseListLeaseStatuses(testData.leaseStatusesList, testData.general.numberOfUnits)
-            .verifySFTotal(testData.general.squareFeetList);
+            .Shared.verifySFTotal(testData.general.squareFeetList);
         deleteReport(testData.reportCreationData.reportNumber);
     });
 });

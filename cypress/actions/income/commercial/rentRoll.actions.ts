@@ -174,14 +174,6 @@ class CommercialRentRollActions extends BaseActionsExt<typeof rentRollPage> {
         return this;
     }
 
-    verifySFTotal(sfValues: Array<number>): this {
-        let sfTotalToBe = 0;
-        sfValues.forEach(value => sfTotalToBe += value);
-        const textToBe = numberWithCommas(Math.round(sfTotalToBe));
-        this.Shared.squareFeetTotal.should("have.text", `${textToBe}`);
-        return this;
-    }
-
     enterListMonthlyRent(leaseStatuses: Array<BoweryReports.LeaseStatus>, monthlyRentList: Array<number>): this {
         for (let i = 0; i < leaseStatuses.length; i++) {
             if (leaseStatuses[i] === "Vacant") {
