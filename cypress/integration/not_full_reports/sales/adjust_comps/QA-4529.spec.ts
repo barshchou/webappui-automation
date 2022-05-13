@@ -1,15 +1,14 @@
 import { Tag } from './../../../../utils/tags.utils';
 import testData from "../../../../fixtures/not_full_reports/sales/adjust_comps/QA-4529.fixture";
-import { createReport } from "../../../../actions/base/baseTest.actions";
+import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { Sales, ReviewExport } from "../../../../actions/index";
 
 describe("Check custom Utilities adjustment", { tags:[ Tag.sales, Tag.adjust_comps, Tag.check_export ] }, () => {
-    before("Login, create report", () => {
+    
+    it("Verify custom utilities adjustments on UI and prepare report for export", () => {
         createReport(testData.reportCreationData);
-    });
 
-    it("Test body", () => {
         cy.stepInfo("1. Navigate to Find comps page and add a couple of sales comps");
         _NavigationSection.navigateToFindComps();
         Sales._FindComps.selectCompFromMapByAddress(testData.comparableFirst.address)
@@ -56,11 +55,40 @@ describe("Check custom Utilities adjustment", { tags:[ Tag.sales, Tag.adjust_com
             .verifyTotalUtilitiesAdjustmentsByCompIndex()
             .verifyTotalUtilitiesAdjustmentsByCompIndex(1)
             .verifyAdjustedPriceByColumn()
-            .verifyAdjustedPriceByColumn(1);
+            .verifyAdjustedPriceByColumn(1)
+            .enterOtherUtilitiesAdjustmentByColumn(testData.comparableFirst.otherUtilityAdjustment, 0, 0)
+            .enterOtherUtilitiesAdjustmentByColumn(testData.comparableSecond.otherUtilityAdjustment, 0, 1)
+            .clickSaveButton;
 
         cy.stepInfo("5. Prepare report for export validation");
         _NavigationSection.openReviewAndExport(true);
         ReviewExport.generateDocxReport()
-            .waitForReportGenerated();
+            .waitForReportGenerated()
+            .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
+        deleteReport(testData.reportCreationData.reportNumber);
+    });
+
+    it("Check exported document other utilities values and commentaries", () => {
+        cy.task("getFilePath",
+        { _reportName: testData.reportCreationData.reportNumber, _docx_html: "html" }
+        ).then(file => {
+            cy.log(<string>file);
+            cy.stepInfo(`6. Verify that other utilities adjustments are added to
+                            Comparable Sales Adjustment Grid `);
+            cy.visit(<string>file);
+
+            cy.contains("Comparable Sales Adjustment Grid").next().scrollIntoView()
+                .find("tr").contains("Utility").parent().parent().within((element) => {
+                    cy.wrap(element).find("td").eq(2).find("p").should("have.text", `${testData.comparableFirst.otherUtilityAdjustment}%`);
+                    cy.wrap(element).find("td").eq(3).find("p").should("have.text", `${testData.comparableSecond.otherUtilityAdjustment}%`);
+                });
+
+            cy.contains("Comparable Sales Adjustment Grid").next().next().next().scrollIntoView()
+                .find("tr").contains("Utility").parent().parent().within((element) => {
+                    cy.wrap(element).find("td").eq(1).find("p").eq(2).should("have.text", `${testData.otherUtilitiesCommentaries}`);
+                    
+                });
+
+        });
     });
 });
