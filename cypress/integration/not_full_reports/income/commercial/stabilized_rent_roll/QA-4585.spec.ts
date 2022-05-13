@@ -51,8 +51,8 @@ describe("Verify the Commercial Stabilized Rent Roll table", () => {
             .verifySFCells(testData.listOfUnitsSF)
             .verifyAnnualRentCellPerSFBasisByRow(testData.rentsPsf[1], testData.listOfUnitsSF[1], "annually", 1)
             .verifyMonthlyRentPerSFByRow(testData.rentsPsf[1], testData.listOfUnitsSF[1], "annually", 1);
-        Income._CommercialManager.StabilizedRentRoll.verifyRentPsfAnnuallyByRow(testData.rentsPsf[1], 1)
-            .clickSaveButton()
+        Income._CommercialManager.StabilizedRentRoll.Shared.verifyRentPsfAnnuallyByRow(testData.rentsPsf[1], 1);
+        Income._CommercialManager.StabilizedRentRoll.clickSaveButton()
             .verifyProgressBarNotExist();
 
         cy.stepInfo(`

@@ -222,6 +222,18 @@ class CommercialRentRollSharedComponent {
         this.verifyRentPerSFAnnuallyCellTextByRow(textToBe, rowNumber);
         return this;
     }
+
+    annualRentPsfCellsScroll() {
+        cy.contains("Rent/SF").scrollIntoView();
+        return this;
+    }
+
+    verifyRentPsfAnnuallyByRow(rentToBe: number, rowNumber: number): this {
+        this.annualRentPsfCellsScroll();
+        const textToBe = `$${numberWithCommas(rentToBe.toFixed(2))}`;
+        this.verifyRentPerSFAnnuallyCellTextByRow(textToBe, rowNumber);
+        return this;
+    }
 }
 
 export default CommercialRentRollSharedComponent;

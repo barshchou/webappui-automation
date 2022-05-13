@@ -144,8 +144,7 @@ class CommercialRentRollActions extends BaseActionsExt<typeof rentRollPage> {
     enterRentPerSFAnnuallyByRowNumber(value: number, rowNumber = 0): this {
         this.Shared.rentPerSFAnnuallyCells.eq(rowNumber).should("not.have.class", "readOnly").dblclick({ force:true });
         this.Shared.textareaToInput.clear().type(`${value}`).type("{enter}");
-        const textToBe = `$${numberWithCommas(value.toFixed(2))}`;
-        this.Shared.verifyRentPerSFAnnuallyCellTextByRow(textToBe, rowNumber);
+        this.Shared.verifyRentPsfAnnuallyByRow(value, rowNumber);
         return this;
     }
 
