@@ -15,8 +15,8 @@ describe("Verify the Rent PSF column in the grid", () => {
 
     it("Annually", () => {
         Income.Commercial.InPlaceRentRoll.clickAnnuallyBasisButton()
-            .enterAnnualRentByRowNumber(testData.general.annualRent)
-            .verifyRentPerSFAnnuallyByRowNumber(testData.general.annualRent, testData.general.squareFeet);
+            .enterAnnualRentByRowNumber(testData.general.annualRent).Shared
+            .verifyRentPerSFAnnuallyAnnuallyCalcByRow(testData.general.annualRent, testData.general.squareFeet);
         deleteReport(testData.reportCreationData.reportNumber);
     });
 

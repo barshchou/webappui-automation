@@ -216,6 +216,12 @@ class CommercialRentRollSharedComponent {
         this.verifyRentPerSFAnnuallyCellTextByRow(textToBe, rowNumber);
         return this;
     }
+
+    verifyRentPerSFAnnuallyAnnuallyCalcByRow(annualRent: number, squareFoot: number, rowNumber = 0): this {
+        const textToBe = `$${numberWithCommas((annualRent / squareFoot).toFixed(2))}`;
+        this.verifyRentPerSFAnnuallyCellTextByRow(textToBe, rowNumber);
+        return this;
+    }
 }
 
 export default CommercialRentRollSharedComponent;

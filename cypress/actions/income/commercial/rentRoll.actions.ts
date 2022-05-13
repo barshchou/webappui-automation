@@ -173,12 +173,6 @@ class CommercialRentRollActions extends BaseActionsExt<typeof rentRollPage> {
         return this;
     }
 
-    verifyRentPerSFAnnuallyByRowNumber(annualRent: number, squareFoot: number, rowNumber = 0): this {
-        const textToBe = `$${numberWithCommas((annualRent / squareFoot).toFixed(2))}`;
-        this.Shared.verifyRentPerSFAnnuallyCellTextByRow(textToBe, rowNumber);
-        return this;
-    }
-
     chooseListLeaseStatuses(statuses: BoweryReports.LeaseStatus[], numberOfUnits: number): this {
         for (let i = 0; i < numberOfUnits; i++) {
             this.chooseLeaseStatusByRowNumber(statuses[i], i);
