@@ -6,7 +6,7 @@ const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreat
     conclusionValue: Enums.VALUE_CONCLUSION_TYPE.AS_COMPLETE
 });
 
-const _floorValues: Array<BoweryReports.CommercialUnitsFloorValues> = ["belowGrade", "groundFloor", "upperFloor", "other"];
+const _floorValues: Array<BoweryReports.CommercialUnitsFloorValues> = [ "belowGrade", "groundFloor", "upperFloor", "other" ];
 const _groupName: BoweryReports.CommercialUnitsGroups = "Floor";
 
 export default {
