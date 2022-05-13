@@ -15,6 +15,7 @@ class CreateCompMapActions extends BaseActions {
     }
 
     verifyPageOpened() {
+        cy.wait("@gqlRequest", { timeout:60000 });
         createCompMapPage.pageHeader.should("exist");
         return this;
     }

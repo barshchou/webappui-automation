@@ -228,9 +228,13 @@ class NavigationSectionActions extends BaseActions {
     }
 
     navigateToFindComps() {
+        cy.intercept('POST', '/graphql').as("gqlRequest");
+
         this.clickSalesButton()
             .clickFindCompsButton()
-            .clickYesButton();
+            .clickYesButton();        
+        cy.wait("@gqlRequest", { timeout:70000 });
+
         return this;
     }
 
