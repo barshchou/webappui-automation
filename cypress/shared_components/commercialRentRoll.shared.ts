@@ -234,6 +234,14 @@ class CommercialRentRollSharedComponent {
         this.verifyRentPerSFAnnuallyCellTextByRow(textToBe, rowNumber);
         return this;
     }
+
+    enterRentPerSFAnnuallyByRowNumber(rentToBe: number, rowNumber = 0): this {
+        this.annualRentPsfCellsScroll();
+        this.rentPerSFAnnuallyCells.eq(rowNumber).should("not.have.class", "readOnly").dblclick({ force: true });
+        this.textareaToInput.clear().type(`${rentToBe}`).type("{enter}");
+        this.verifyRentPsfAnnuallyByRow(rentToBe, rowNumber);
+        return this;
+    }
 }
 
 export default CommercialRentRollSharedComponent;

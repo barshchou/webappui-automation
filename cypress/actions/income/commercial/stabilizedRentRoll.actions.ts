@@ -23,18 +23,10 @@ class StabilizedRentRollActions extends BaseActionsExt<typeof stabRentRollPage>{
         return this;
     }
 
-    enterRentPerSFAnnuallyByRowNumber(rentToBe: number, rowNumber: number): this {
-        this.Shared.annualRentPsfCellsScroll();
-        this.Shared.rentPerSFAnnuallyCells.eq(rowNumber).should("not.have.class", "readOnly").dblclick({ force: true });
-        this.Shared.textareaToInput.clear().type(`${rentToBe}`).type("{enter}");
-        this.Shared.verifyRentPsfAnnuallyByRow(rentToBe, rowNumber);
-        return this;
-    }
-
     enterListPerSFAnnually(leaseStatuses: Array<BoweryReports.LeaseStatus>, rentToBe: Array<number>): this {
         for (let i = 0; i < leaseStatuses.length; i++) {
             if (leaseStatuses[i] === "Vacant") {
-                this.enterRentPerSFAnnuallyByRowNumber(rentToBe[i], i);
+                this.Shared.enterRentPerSFAnnuallyByRowNumber(rentToBe[i], i);
             }
         }
         return this;

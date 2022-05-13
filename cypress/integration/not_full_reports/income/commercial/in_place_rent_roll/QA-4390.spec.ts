@@ -28,8 +28,8 @@ describe("Verify the Rent PSF column in the grid", () => {
     });
 
     it("Per square foot", () => {
-        Income.Commercial.InPlaceRentRoll.Shared.verifyRentPerSFAnnuallyCellTextByRow();
-        Income.Commercial.InPlaceRentRoll.enterRentPerSFAnnuallyByRowNumber(testData.general.rentPerSF);
+        Income.Commercial.InPlaceRentRoll.Shared.verifyRentPerSFAnnuallyCellTextByRow()
+            .enterRentPerSFAnnuallyByRowNumber(testData.general.rentPerSF);
         deleteReport(testData.reportCreationData.reportNumber);
     });
 

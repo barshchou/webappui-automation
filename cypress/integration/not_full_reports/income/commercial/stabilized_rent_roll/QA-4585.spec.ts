@@ -33,7 +33,7 @@ describe("Verify the Commercial Stabilized Rent Roll table", () => {
             .verifyUseCells(testData.useTexts);
         testData.rentsPsf.forEach((rent, index) => {
             if (testData.leaseStatuses[index] !== "Vacant") {
-                Income._CommercialManager.InPlaceRentRoll.enterRentPerSFAnnuallyByRowNumber(rent, index);
+                Income._CommercialManager.InPlaceRentRoll.Shared.enterRentPerSFAnnuallyByRowNumber(rent, index);
             }
         });
 

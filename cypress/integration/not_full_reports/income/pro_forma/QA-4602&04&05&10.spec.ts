@@ -17,7 +17,7 @@ describe("Less [USE (Property>Commercial Units)] Commercial V/C Loss @ X% row", 
         NavigationSection.navigateToCommercialInPlaceRentRoll();
         Income.Commercial.InPlaceRentRoll.chooseListLeaseStatuses(testData.leaseStatuses, testData.numberOfCommercialUnits);
         testData.rentsPsf.forEach((rent, index) => {
-            Income.Commercial.InPlaceRentRoll.enterRentPerSFAnnuallyByRowNumber(rent, index);
+            Income.Commercial.InPlaceRentRoll.Shared.enterRentPerSFAnnuallyByRowNumber(rent, index);
         });
         NavigationSection.navigateToPotentialGrossIncome();
         Income.PotentialGrossIncome.enterCommercialVCLossPercentage(testData.comUseVCLossPercentage, testData.useValue);

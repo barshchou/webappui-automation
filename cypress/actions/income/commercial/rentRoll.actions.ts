@@ -141,13 +141,6 @@ class CommercialRentRollActions extends BaseActionsExt<typeof rentRollPage> {
         return this;
     }
 
-    enterRentPerSFAnnuallyByRowNumber(value: number, rowNumber = 0): this {
-        this.Shared.rentPerSFAnnuallyCells.eq(rowNumber).should("not.have.class", "readOnly").dblclick({ force:true });
-        this.Shared.textareaToInput.clear().type(`${value}`).type("{enter}");
-        this.Shared.verifyRentPsfAnnuallyByRow(value, rowNumber);
-        return this;
-    }
-
     enterRentPerSFMonthlyByRowNumber(value: number, rowNumber = 0): this {
         this.Shared.rentPerSFMonthlyCells.eq(rowNumber).should("not.have.class", "readOnly").dblclick({ force:true });
         this.Shared.textareaToInput.clear().type(`${value}`).type("{enter}");
@@ -184,7 +177,7 @@ class CommercialRentRollActions extends BaseActionsExt<typeof rentRollPage> {
             if (leaseStatuses[i] === "Vacant") {
                 continue;
             }
-            this.enterRentPerSFAnnuallyByRowNumber(perSFList[i], i);
+            this.Shared.enterRentPerSFAnnuallyByRowNumber(perSFList[i], i);
         }
         return this;
     }

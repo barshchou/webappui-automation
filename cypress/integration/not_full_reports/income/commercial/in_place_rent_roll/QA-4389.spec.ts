@@ -28,7 +28,7 @@ describe("Verify the Monthly Rent column in the grid", () => {
     });
 
     it("Per square foot", () => {
-        Income._CommercialManager.InPlaceRentRoll.enterRentPerSFAnnuallyByRowNumber(testData.general.rentPerSF).Shared
+        Income._CommercialManager.InPlaceRentRoll.Shared.enterRentPerSFAnnuallyByRowNumber(testData.general.rentPerSF)
             .verifyMonthlyRentPerSFByRow(testData.general.rentPerSF, testData.general.squareFeet, "annually");
         deleteReport(testData.reportCreationData.reportNumber);
     });
