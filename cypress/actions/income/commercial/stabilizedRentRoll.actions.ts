@@ -7,11 +7,15 @@ class StabilizedRentRollActions extends BaseActionsExt<typeof stabRentRollPage> 
     /**
      * @description Contains elements and actions, identical for In-Place Rent Roll and Stabilized Rent Roll pages
      */
-    Shared: CommercialRentRollSharedComponent;
+    readonly _Shared: CommercialRentRollSharedComponent;
 
     constructor(page: typeof stabRentRollPage, sharedComponent: CommercialRentRollSharedComponent) {
         super(page);
-        this.Shared = sharedComponent;
+        this._Shared = sharedComponent;
+    }
+
+    get Shared() {
+        return this._Shared;
     }
 
     verifyThatPageIsOpened(): this {

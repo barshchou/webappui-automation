@@ -8,11 +8,15 @@ class CommercialRentRollActions extends BaseActionsExt<typeof rentRollPage> {
     /**
      * @description Contains elements and actions, identical for In-Place Rent Roll and Stabilized Rent Roll pages
      */
-    Shared: CommercialRentRollSharedComponent;
+    readonly _Shared: CommercialRentRollSharedComponent;
 
     constructor(page: typeof rentRollPage, sharedComponent: CommercialRentRollSharedComponent) {
         super(page);
-        this.Shared = sharedComponent;
+        this._Shared = sharedComponent;
+    }
+
+    get Shared() {
+        return this._Shared;
     }
 
     verifyBasisOfRentTooltip() {
