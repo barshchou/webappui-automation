@@ -67,6 +67,11 @@ class KeyInfoActions extends BaseActionsExt<typeof keyInfoPage> {
         keyInfoPage.inputToCheckUpload.should("have.value", fileNameToCheck);
         return this;
     }
+
+    verifyElementIsVisible(element:  Cypress.Chainable<JQuery<HTMLElement>>): KeyInfoActions {
+        element.should("be.visible");
+        return this;
+    }
 }
 
 export default new KeyInfoActions(keyInfoPage);
