@@ -58,7 +58,7 @@ class NavigationSectionActions extends BaseActions {
         return this;
     }
 
-    openCommercialStabilizedRentRollInCommercial() {
+    navigateToStabilizedRentRollInCommercial() {
         this.clickCommercialStabRentRollButton()
             .clickYesButton();
         return this;
