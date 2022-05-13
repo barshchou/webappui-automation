@@ -2,10 +2,10 @@ import { Income, Property } from "../../../../../actions";
 import { _NavigationSection } from "../../../../../actions/base";
 import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
 import testData from "../../../../../fixtures/not_full_reports/income/commercial/stabilized_rent_roll/QA-4597.fixture";
-
+import { Tag } from "../../../../../utils/tags.utils";
 
 describe(`Verify the suggested text dropdown in the new narrative component added through "=" for the 'Unchanged Renovation' 
-  option in the Generated Commentary on the Stabilized Rent Roll page.`, () => {
+  option in the Generated Commentary on the Stabilized Rent Roll page.`, { tags: [ Tag.income, Tag.commercial, Tag.stabilized_rent_roll ] }, () => {
     before("Login, create report", () => {
         cy.stepInfo(`Preconditions: The mixed report is created and several commercial units are added.`);
         createReport(testData.reportCreationData);
@@ -17,7 +17,7 @@ describe(`Verify the suggested text dropdown in the new narrative component adde
     it("Test body", () => {
         cy.stepInfo("1. Proceed to the Income > Commercial > Stabilized Rent Roll page.");
         _NavigationSection.clickIncomeApproachButton()
-        .clickCommercialArrow().openCommercialStabilizedRentRollInCommercial().verifyProgressBarNotExist();
+        .clickCommercialArrow().navigateToStabilizedRentRollInCommercial().verifyProgressBarNotExist();
 
         cy.stepInfo("2. Click on the Edit button in the Stabilized Commercial Income Discussion section.");
         Income._CommercialManager.StabilizedRentRoll.clickEditStabilizedCommercialIncomeDiscussion();

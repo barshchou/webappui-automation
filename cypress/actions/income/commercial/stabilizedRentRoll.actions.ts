@@ -1,7 +1,8 @@
 import stabRentRollPage from "../../../pages/income/commercial/stabilizedRentRoll.page";
 import BaseActionsExt from "../../base/base.actions.ext";
 import CommercialRentRollSharedComponent from "../../../shared_components/commercialRentRoll.shared";
-class StabilizedRentRollActions extends BaseActionsExt<typeof stabRentRollPage>{
+
+class StabilizedRentRollActions extends BaseActionsExt<typeof stabRentRollPage> {
 
     /**
      * @description Contains elements and actions, identical for In-Place Rent Roll and Stabilized Rent Roll pages
@@ -46,8 +47,15 @@ class StabilizedRentRollActions extends BaseActionsExt<typeof stabRentRollPage>{
         return this;
     }
 
-    typeStabilizedCommercialIncomeTextArea(value: string): StabilizedRentRollActions {
-        stabRentRollPage.stabilizedCommercialIncomeTextArea.type(value);
+    typeStabilizedCommercialIncomeTextArea(value: string, clearText = false): StabilizedRentRollActions {
+        clearText ? stabRentRollPage.stabilizedCommercialIncomeTextArea.clear().type(value) :
+            stabRentRollPage.stabilizedCommercialIncomeTextArea.type(value);
+        return this;
+    }
+
+    clickNarrativeSuggestions(verifyListValue: string): StabilizedRentRollActions {
+        this.Shared.narrativeSuggestionsList.contains(verifyListValue).click();
+        stabRentRollPage.stabilizedCommercialIncomeTextArea.click();
         return this;
     }
 
@@ -56,6 +64,36 @@ class StabilizedRentRollActions extends BaseActionsExt<typeof stabRentRollPage>{
         return this;
     }
 
+    saveStabilizedRentRollCommentary(): StabilizedRentRollActions {
+        stabRentRollPage.formSaveBtn(0).click();
+        return this;
+    }
+
+    verifyModifiedLabelExist(): StabilizedRentRollActions {
+        stabRentRollPage.stabilizedRentRollModifiedLabel.should('exist');
+        return this;
+    }
+
+    revertToOriginalStabilizedRentRollCommentary(): StabilizedRentRollActions {
+        this.clickEditStabilizedCommercialIncomeDiscussion();
+        stabRentRollPage.formRevertToOriginalBtn(0).click();
+        this.verifyProgressBarNotExist();
+        stabRentRollPage.formYesRevertBtn.click();
+        this.saveStabilizedRentRollCommentary();
+        return this;
+    }
+
+    cancelStabilizedRentRollCommentary(): StabilizedRentRollActions {
+        stabRentRollPage.formCancelButton(0).click();
+        return this;
+    }
+
+    verifyStabRentRollCommentaryButtons(): StabilizedRentRollActions {
+        stabRentRollPage.formRevertToOriginalBtn(0).should('exist');
+        stabRentRollPage.formCancelButton(0).should('exist');
+        stabRentRollPage.formSaveBtn(0).should('exist');
+        return this;
+    }
 }
 
 export default new StabilizedRentRollActions(stabRentRollPage, new CommercialRentRollSharedComponent());
