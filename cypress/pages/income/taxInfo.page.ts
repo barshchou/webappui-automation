@@ -93,11 +93,11 @@ class TaxInfoPage extends BasePage {
 
     get appraiserOpTaxAssessedValueCell() {return cy.get(`[data-qa="Appraiser's Opinion-taxableAssessedValue-value-cell"]`);}
     
-    get taxSummaryDiscussionCommentary() {return cy.xpath("//h6[contains(@class, 'MuiTypography-subtitle1')]/../..//p/span");}
+    get taxSummaryDiscussionCommentary() {return cy.xpath("//h6[contains(text(),'Tax Calculation Discussion')]/../..//p/span");}
     
     get taxSummaryDiscussionTooltip() {return cy.get("svg[data-icon=info-circle]");}
     
-    get taxSummaryDiscussionTitle() {return cy.xpath("//h6[contains(@class, 'MuiTypography-subtitle1')]");}
+    get taxSummaryDiscussionTitle() {return cy.xpath("//h6[contains(text(),'Tax Calculation Discussion')]");}
 }
 
 export default new TaxInfoPage();
