@@ -23,13 +23,13 @@ describe("Verify the Rent PSF column in the grid", () => {
     it("Monthly", () => {
         Income.Commercial.InPlaceRentRoll.clickMonthlyBasisButton()
             .enterMonthlyRentByRowNumber(testData.general.monthlyRent)
-            .verifyRentPerSFMonthlyByRowNumber(testData.general.monthlyRent, testData.general.squareFeet);
+            .verifyRentPerSFAnnuallyMonthlyCalcByRowNumber(testData.general.monthlyRent, testData.general.squareFeet);
         deleteReport(testData.reportCreationData.reportNumber);
     });
 
     it("Per square foot", () => {
-        Income.Commercial.InPlaceRentRoll.verifyRentPerSFAnnuallyByRowNumberCellText()
-            .enterRentPerSFAnnuallyByRowNumber(testData.general.rentPerSF);
+        Income.Commercial.InPlaceRentRoll.Shared.verifyRentPerSFAnnuallyCellTextByRow();
+        Income.Commercial.InPlaceRentRoll.enterRentPerSFAnnuallyByRowNumber(testData.general.rentPerSF);
         deleteReport(testData.reportCreationData.reportNumber);
     });
 

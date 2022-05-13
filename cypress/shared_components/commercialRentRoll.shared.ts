@@ -205,6 +205,11 @@ class CommercialRentRollSharedComponent {
         this.verifyMonthlyRentByRowCellText(textToBe, rowNumber);
         return this;
     }
+
+    verifyRentPerSFAnnuallyCellTextByRow(textToBe = "$0.00", rowNumber = 0): this {
+        this.rentPerSFAnnuallyCells.eq(rowNumber).should("have.text", textToBe);
+        return this;
+    }
 }
 
 export default CommercialRentRollSharedComponent;
