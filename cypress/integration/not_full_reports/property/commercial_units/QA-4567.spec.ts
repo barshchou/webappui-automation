@@ -15,10 +15,8 @@ describe("Verify the Save button functionality on the Commercial Units page",
 
         it("Test body", () => {
 
-            cy.stepInfo(" Proceed to the Property > Commercial Units page.");
-            _NavigationSection.navigateToCommercialUnits();
-
             cy.stepInfo("1.  Verify the Save button is displayed on the Commercial Units page");
+            _NavigationSection.navigateToCommercialUnits();
             Property._CommercialUnits.verifyThatPageIsOpened();
             Property._CommercialUnits.Page.SaveBtn.should('exist');
 
