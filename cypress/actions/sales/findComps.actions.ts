@@ -2,6 +2,7 @@ import findCompsPage from "../../pages/sales/findComps.page";
 import { getUploadFixture } from "../../../utils/fixtures.utils";
 import { isNumber, numberWithCommas } from "../../../utils/numbers.utils";
 import BaseActionsExt from "../base/base.actions.ext";
+import { Alias } from "../../utils/alias.utils";
 
 class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
 
@@ -68,10 +69,10 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
 
     selectCompFromMapByAddress(address: string): FindCompsActions {
         findCompsPage.getSelectCompFromMapButtonByAddress(address).scrollIntoView().click({ force: true });
-        cy.wait("@gqlRequest", { timeout:70000 }).then((interception) => {
+        cy.wait(`@${Alias.gqlRequest}`, { timeout:70000 }).then((interception) => {
             cy.log(interception.response.body.data.findSingleSalesComp.salesEventId);
             cy.wrap(interception.response.body.data.findSingleSalesComp.salesEventId)
-            .as("salesEventId");
+            .as(Alias.salesEventId);
             //data.findSingleSalesComp.salesEventId
             //data.findSingleSalesComp
         });
@@ -100,6 +101,8 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
     }
 
     enterReportToSearchComp(reportID: string): FindCompsActions {
+        cy.intercept("GET", `/salesComps/eventIds/${reportID}`)
+        .as(Alias.salesComps_eventIds);
         findCompsPage.reportToSearchCompInput.type(reportID).should("have.value", reportID);
         return this;
     }
@@ -111,6 +114,40 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
 
     clickSearchButton(): FindCompsActions {
         findCompsPage.searchButton.click();
+        return this;
+    }
+
+    /**
+     * TODO: add description of this method
+     * ernst: we're probably gonna need to adapt this check for several salesComps later
+     */
+    checkSingleSalesCompsByEventId(): this{
+        cy.wait(`@${Alias.salesComps_eventIds}`).then(({ response }) => {
+            cy.get(`@${Alias.salesEventId}`).then(_salesEventId => {
+                let arr: Array<any>  = response.body.selectedEventIds;
+                expect(arr.find(val => val.salesEventId == _salesEventId))
+                .not.to.be.undefined;
+            });
+        });
+        return this;
+    }
+
+    checkSelectedSingleSalesComps() {
+        cy.wait(`@${Alias.gqlRequest}`).then(({ request }) => {
+            let req: Utils.GraphQLRequest = request.body;
+            expect(req.operationName).to.equal("findSalesCompsByEventIds");
+            /**
+             * ernst: we need to intercept the one findSalesCompsByEventIds, which will have 
+             * variables.input.eventIds in its request.body
+             * use this guide 
+             * @see https://docs.cypress.io/api/commands/intercept#Aliasing-individual-requests
+             */
+            // cy.get(`@${Alias.salesEventId}`).then(_salesEventId => {
+            //     expect(_salesEventId).to.be.equal(
+            //         req.variables.input.eventIds.salesEventId.map(val => val.salesEventId)
+            //     );
+            // });
+        });
         return this;
     }
 

@@ -1,4 +1,5 @@
 import navigationSectionPage from "../../pages/base/navigationSection.page";
+import { Alias } from "../../utils/alias.utils";
 import BaseActions from "./base.actions";
 
 class NavigationSectionActions extends BaseActions {
@@ -228,12 +229,12 @@ class NavigationSectionActions extends BaseActions {
     }
 
     navigateToFindComps() {
-        cy.intercept('POST', '/graphql').as("gqlRequest");
+        cy.intercept('POST', '/graphql').as(Alias.gqlRequest);
 
         this.clickSalesButton()
             .clickFindCompsButton()
             .clickYesButton();        
-        cy.wait("@gqlRequest", { timeout:70000 });
+        cy.wait(`@${Alias.gqlRequest}`, { timeout:70000 });
 
         return this;
     }
