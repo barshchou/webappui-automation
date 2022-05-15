@@ -3,8 +3,9 @@ import { createReport, deleteReport } from "../../../../../actions/base/baseTest
 import NavigationSection from "../../../../../actions/base/navigationSection.actions";
 import Property from "../../../../../actions/property/property.manager";
 import Income from "../../../../../actions/income/income.manager";
+import { Tag } from "../../../../../utils/tags.utils";
 
-describe("Verify the Commercial Stabilized Rent Roll table", () => {
+describe("Verify the Commercial Stabilized Rent Roll table", { tags: [ Tag.income, Tag.commercial, Tag.stabilized_rent_roll ] }, () => {
     before("Login, create report", () => {
         cy.stepInfo(`1. Create a mixed report with several Commercial Units (e.g. 2).`);
         createReport(testData.reportCreationData);
@@ -38,7 +39,7 @@ describe("Verify the Commercial Stabilized Rent Roll table", () => {
         });
 
         cy.stepInfo(`4. Proceed to the Income > Commercial > Stabilized Rent Roll page.`);
-        NavigationSection.openCommercialStabilizedRentRollInCommercial()
+        NavigationSection.navigateToStabilizedRentRollInCommercial()
             .verifyProgressBarNotExist();
 
         cy.stepInfo(`
@@ -64,7 +65,7 @@ describe("Verify the Commercial Stabilized Rent Roll table", () => {
         Income.Commercial.InPlaceRentRoll.enterTenantNameByRowNumber(testData.newTenantName, 1, testData.leaseStatuses[1]);
         
         cy.stepInfo(`7. Proceed to the Income > Commercial > Stabilized Rent Roll page.`);
-        NavigationSection.openCommercialStabilizedRentRollInCommercial()
+        NavigationSection.navigateToStabilizedRentRollInCommercial()
             .verifyProgressBarNotExist();
 
         cy.stepInfo(`
@@ -85,7 +86,7 @@ describe("Verify the Commercial Stabilized Rent Roll table", () => {
         cy.stepInfo(`
         10. Proceed to the Income > Commercial > Stabilized Rent Roll page.
         `);
-        NavigationSection.openCommercialStabilizedRentRollInCommercial()
+        NavigationSection.navigateToStabilizedRentRollInCommercial()
             .verifyProgressBarNotExist();
         Income.Commercial.StabilizedRentRoll.verifyTenantNameByRow("", testData.leaseStatuses[1], 1);
         
