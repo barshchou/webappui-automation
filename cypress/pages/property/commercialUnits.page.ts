@@ -36,7 +36,8 @@ class CommercialUnitsPage extends BasePage {
     }
 
     get commercialUnitSFDiscussionText(text: string) {
-        return cy.xpath(`//span[@data-slate-string="true"][contains(text(), "${text}")]`); 
+        return cy.xpath(`//span[@data-slate-string="true"][contains(text(), "${text}")]`);
+    } 
         
     get editButton() {
         return cy.xpath("//button[contains(text(), 'Edit')]");
