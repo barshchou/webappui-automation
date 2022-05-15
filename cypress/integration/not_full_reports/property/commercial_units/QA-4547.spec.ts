@@ -25,7 +25,7 @@ describe("Verify the Save button functionality on the Commercial Units page",
             Property._CommercialUnits.Page.SaveBtnUnderDiscussionTextArea.first().click();
 
             cy.stepInfo("3.  Verify that the changes from step 2 are saved.");
-            Property._CommercialUnits.Page.;
+            Property._CommercialUnits.Page.commercialUnitSFDiscussionText(testData.text).should('exist');
 
             deleteReport(testData.reportCreationData.reportNumber);
         });
