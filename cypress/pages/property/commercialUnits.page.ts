@@ -15,6 +15,10 @@ class CommercialUnitsPage extends BasePage {
 
     get commercialUnitsTabs() {return cy.get("button[role='tab']");}
 
+    get propertyCommercialUnitDescriptionheaderSection() {
+        return cy.get("*[data-qa='propertyCommercialUnitDescription']");
+    }
+
     getRadioButtonByValueAndUnitIndex(group: string, value: string, index = 0): Cypress.Chainable<JQuery<HTMLElement>> {
         return cy.xpath(`//*[contains(text(), '${group}')]//parent::span//child::input[@value='${value}'][1]`).eq(index);
     }
@@ -37,8 +41,12 @@ class CommercialUnitsPage extends BasePage {
         return cy.xpath("//button[contains(text(), 'Edit')]");
     }
 
+    get modifiedButton() {
+        return cy.xpath("//span[contains(text(), 'Modified')]");
+    }
+
     get SaveBtnUnderDiscussionTextArea() {
-        return cy.xpath("//button[contains(text(), 'Save')]:not([data-qa=form-save-btn])");
+        return cy.xpath("//button[contains(text(), 'Save')][not(contains(@data-qa, 'form-save-btn'))]");
     }
 
     getGradeCheckbox(value: string, index = 0) {
