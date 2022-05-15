@@ -5,6 +5,8 @@ class CommercialUnitsPage extends BasePage {
         return cy.get('[data-icon="trash-alt"]');
     }
 
+    get commercialUnitHeaderSection() {return cy.get("*[data-qa='propertyCommercialUnitDescription']");}
+
     get iconRotateImage(){
         return cy.get('[data-icon="retweet"]');
     }
