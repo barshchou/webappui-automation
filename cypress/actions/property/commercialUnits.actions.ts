@@ -3,6 +3,17 @@ import { cutDecimalPartToNumberOfDigits, isHasDecimalPartMoreNumberOfDigits, num
 import BaseActionsExt from "../base/base.actions.ext";
 
 class CommercialUnitsActions extends BaseActionsExt<typeof commercialUnitsPage> {
+  
+    verifyThatPageIsOpened(): this {
+        commercialUnitsPage.propertyCommercialUnitDescriptionheaderSection.should("be.visible");
+        cy.url().then(url => {
+            let urlObj = new URL(url);
+            cy.log("Check whether current URL ends with '/commercial-units'");
+            cy.wrap(urlObj.pathname.endsWith("/commercial-units")).should("be.true");
+        });
+        return this;
+    }
+    
     verifyImageHasRotated(rotateIndex: number) {
         commercialUnitsPage.commercialUnitImage
             .last().invoke("attr", "style").then(style => {
