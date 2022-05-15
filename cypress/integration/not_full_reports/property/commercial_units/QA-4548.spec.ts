@@ -17,19 +17,17 @@ describe("Verify the Save button functionality on the Commercial Units page",
 
             cy.stepInfo("1. Click on the Edit button on the Property > Commercial Units.");
             _NavigationSection.navigateToCommercialUnits();
-       //     Property._CommercialUnits.verifyThatPageIsOpened();
-       cy.wait(3000)               /////////
-       Property._CommercialUnits.Page.editButton.scrollIntoView().click();
-
+            Property._CommercialUnits.verifyThatPageIsOpened();
+            Property._CommercialUnits.Page.modifiedButton.should('not.exist');
+            Property._CommercialUnits.Page.editButton.scrollIntoView().click();
 
             cy.stepInfo("2. Edit comment and click on the Save button.");
             Property._CommercialUnits.Page.commercialUnitSFDiscussionTextArea.clear().type(testData.text);
-            Property._CommercialUnits.Page.SaveBtnUnderDiscussionTextArea.click()
+            Property._CommercialUnits.Page.SaveBtnUnderDiscussionTextArea.first().click();
 
             cy.stepInfo("3.  Verify that the Modified label appears after saving changes made to commentary.");
-           
-            
+            Property._CommercialUnits.Page.modifiedButton.should('exist');
 
-          //  deleteReport(testData.reportCreationData.reportNumber);
+            deleteReport(testData.reportCreationData.reportNumber);
         });
     });
