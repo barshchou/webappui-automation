@@ -5,6 +5,8 @@ class CommercialUnitsPage extends BasePage {
         return cy.get('[data-icon="trash-alt"]');
     }
 
+    get commercialUnitHeaderSection() {return cy.get("*[data-qa='propertyCommercialUnitDescription']");}
+
     get iconRotateImage(){
         return cy.get('[data-icon="retweet"]');
     }
@@ -14,10 +16,6 @@ class CommercialUnitsPage extends BasePage {
     }
 
     get commercialUnitsTabs() {return cy.get("button[role='tab']");}
-
-    get propertyCommercialUnitDescriptionheaderSection() {
-        return cy.get("*[data-qa='propertyCommercialUnitDescription']");
-    }
 
     getRadioButtonByValueAndUnitIndex(group: string, value: string, index = 0): Cypress.Chainable<JQuery<HTMLElement>> {
         return cy.xpath(`//*[contains(text(), '${group}')]//parent::span//child::input[@value='${value}'][1]`).eq(index);
