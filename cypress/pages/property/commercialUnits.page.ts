@@ -37,6 +37,17 @@ class CommercialUnitsPage extends BasePage {
 
     get commercialUnitSFDiscussionText(text: string) {
         return cy.xpath(`//span[@data-slate-string="true"][contains(text(), "${text}")]`); 
+        
+    get editButton() {
+        return cy.xpath("//button[contains(text(), 'Edit')]");
+    }
+
+    get modifiedButton() {
+        return cy.xpath("//span[contains(text(), 'Modified')]");
+    }
+
+    get SaveBtnUnderDiscussionTextArea() {
+        return cy.xpath("//button[contains(text(), 'Save')][not(contains(@data-qa, 'form-save-btn'))]");
     }
 
     getGradeCheckbox(value: string, index = 0) {
