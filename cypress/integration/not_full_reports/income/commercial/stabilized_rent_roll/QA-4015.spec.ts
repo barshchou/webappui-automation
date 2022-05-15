@@ -7,8 +7,11 @@ import ReviewExport from "../../../../../actions/reviewExport/reviewExport.actio
 import { isEndsWithDecimal } from "../../../../../utils/html.utils";
 import { Tag } from "../../../../../utils/tags.utils";
 
-describe("Verify the Commercial Stabilized Rent Roll table", 
-{ tags: [ Tag.check_export, Tag.income, Tag.commercial ] }, () => {
+describe("Verify the Commercial Stabilized Rent Roll table", { tags: [ Tag.income, Tag.commercial, Tag.stabilized_rent_roll ] }, () => {
+    before("Login, create report", () => {
+        createReport(testData.reportCreationData);
+    });
+
     it("Test body", () => {  
         createReport(testData.reportCreationData);
         
@@ -31,7 +34,7 @@ describe("Verify the Commercial Stabilized Rent Roll table",
                 Income.Commercial.InPlaceRentRoll.enterAnnualRentPerSFByRowNumber(rent, index);
             }
         });
-        NavigationSection.openCommercialStabilizedRentRollInCommercial()
+        NavigationSection.navigateToStabilizedRentRollInCommercial()
             .verifyProgressBarNotExist();
         Income.Commercial.StabilizedRentRoll.clickSaveButton()
             .verifyProgressBarNotExist();
