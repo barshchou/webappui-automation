@@ -17,5 +17,6 @@ export enum Tag {
     check_export = "@check_export",
     report = "@report",
     client = "@client",
-    full_report = "@full_report"
+    full_report = "@full_report",
+    potential_gross_income = "@potential_gross_income"
 }
