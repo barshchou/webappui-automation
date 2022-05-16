@@ -1,17 +1,14 @@
 import testData from "../../../../fixtures/not_full_reports/income/expense_forecast/QA-4931.fixture";
-import {
-  createReport,
-  deleteReport,
-} from "../../../../actions/base/baseTest.actions";
+import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Income from "../../../../actions/income/income.manager";
 import Property from "../../../../actions/property/property.manager";
 import tableExpenseHistoryCellNames from "../../../../../cypress/enums/expenseHistoryTableRows.enum";
-
 import { Tag } from "../../../../utils/tags.utils";
 
 describe("Historical expense Repairs & Maintenance Per Unit is correctly calculated and displayed", 
-{ tags:[ Tag.expense_forecast, Tag.income, Tag.snapshot_tests ] }, () => {
+  { tags:[ Tag.expense_forecast, Tag.income, Tag.snapshot_tests ] }, () => {
+    
   before("Login, create report", () => {
     createReport(testData.reportCreationData);
   });
