@@ -17,7 +17,7 @@ describe("Verify the suggested text dropdown in the new narrative component adde
             .verifyProgressBarNotExist();
 
         cy.stepInfo("2. Edit discussion and enter '=un' value; click 'Unchanged Rennovation' suggested value");
-        Income._CommercialManager.InPlaceRentRoll.Shared.clickEditDiscussionButton()
+        Income._CommercialManager.InPlaceRentRoll.clickEditDiscussionButton()
             .editDiscussionTextArea(testData.value)
             .clickNarrativeSuggestions(testData.unchangeRennovation);
 

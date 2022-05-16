@@ -14,27 +14,27 @@ describe("Verify the Annual Rent column in the grid", () => {
     });
 
     it("Annually", () => {
-        Income._CommercialManager.InPlaceRentRoll.clickAnnuallyBasisButton().Shared
-            .verifyAnnualRentCellTextByRow();
-        Income._CommercialManager.InPlaceRentRoll.enterAnnualRentByRowNumber(testData.general.annualRent);
+        Income._CommercialManager.InPlaceRentRoll.clickAnnuallyBasisButton()
+            .verifyAnnualRentCellTextByRow()
+            .enterAnnualRentByRowNumber(testData.general.annualRent);
         deleteReport(testData.reportCreationData.reportNumber);
     });
 
     it("Monthly", () => {
         Income._CommercialManager.InPlaceRentRoll.clickMonthlyBasisButton()
-            .enterMonthlyRentByRowNumber(testData.general.monthlyRent).Shared
+            .enterMonthlyRentByRowNumber(testData.general.monthlyRent)
             .verifyAnnualRentMonthlyByRowNumber(testData.general.monthlyRent);
         deleteReport(testData.reportCreationData.reportNumber);
     });
 
     it("Per square foot", () => {
-        Income._CommercialManager.InPlaceRentRoll.Shared.enterRentPerSFAnnuallyByRowNumber(testData.general.rentPerSF)
+        Income._CommercialManager.InPlaceRentRoll.enterRentPerSFAnnuallyByRowNumber(testData.general.rentPerSF)
             .verifyAnnualRentCellPerSFBasisByRow(testData.general.rentPerSF, testData.general.squareFeet, "annually");
         deleteReport(testData.reportCreationData.reportNumber);
     });
 
     it("Per square foot per month", () => {
-        Income._CommercialManager.InPlaceRentRoll.clickPerSquareFootPerMonthButton().Shared
+        Income._CommercialManager.InPlaceRentRoll.clickPerSquareFootPerMonthButton()
             .enterRentPerSFMonthlyByRowNumber(testData.general.rentPerSF)
             .verifyAnnualRentCellPerSFBasisByRow(testData.general.rentPerSF, testData.general.squareFeet, "monthly");
         deleteReport(testData.reportCreationData.reportNumber);

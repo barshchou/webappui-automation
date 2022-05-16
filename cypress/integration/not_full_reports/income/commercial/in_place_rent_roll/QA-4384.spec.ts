@@ -19,13 +19,13 @@ describe("Verify the Use column in the grid", () => {
         it(`Use column with ${useText} value`, () => {
             NavigationSection.navigateToCommercialInPlaceRentRoll()
                 .verifyProgressBarNotExist();
-            Income.Commercial.InPlaceRentRoll.chooseLeaseStatusByRowNumber(testData.leaseStatus).Shared
+            Income.Commercial.InPlaceRentRoll.chooseLeaseStatusByRowNumber(testData.leaseStatus)
                 .verifyUseCellByRow(defaultUseValue);
             NavigationSection.navigateToCommercialUnits();
             Property.CommercialUnits.clickCommercialUnitTabByIndex()
                 .clickRadioButtonByValueAndUnitIndex(groupName, useRadios[index]);
             NavigationSection.navigateToCommercialInPlaceRentRoll();
-            Income.Commercial.InPlaceRentRoll.Shared.verifyUseCellByRow(useText);
+            Income.Commercial.InPlaceRentRoll.verifyUseCellByRow(useText);
             deleteReport(testData.reportCreationData.reportNumber);
         });
     });

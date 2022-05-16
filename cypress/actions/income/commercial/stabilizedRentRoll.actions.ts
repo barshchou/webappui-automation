@@ -3,20 +3,6 @@ import CommercialRentRollSharedComponent from "../../shared_components/commercia
 
 class StabilizedRentRollActions extends CommercialRentRollSharedComponent<typeof stabRentRollPage> {
 
-    /**
-     * @description Contains elements and actions, identical for In-Place Rent Roll and Stabilized Rent Roll pages
-     */
-    readonly _Shared: CommercialRentRollSharedComponent<typeof stabRentRollPage>;
-
-    constructor(page: typeof stabRentRollPage, sharedComponent: CommercialRentRollSharedComponent<typeof stabRentRollPage>) {
-        super(page);
-        this._Shared = sharedComponent;
-    }
-
-    get Shared() {
-        return this._Shared;
-    }
-
     verifyThatPageIsOpened(): this {
         stabRentRollPage.stabilizedRentRollHeaderSection.should("be.visible");
         cy.url().then(url => {
@@ -30,7 +16,7 @@ class StabilizedRentRollActions extends CommercialRentRollSharedComponent<typeof
     enterListPerSFAnnually(leaseStatuses: Array<BoweryReports.LeaseStatus>, rentToBe: Array<number>): this {
         for (let i = 0; i < leaseStatuses.length; i++) {
             if (leaseStatuses[i] === "Vacant") {
-                this.Shared.enterRentPerSFAnnuallyByRowNumber(rentToBe[i], i);
+                this.enterRentPerSFAnnuallyByRowNumber(rentToBe[i], i);
             }
         }
         return this;
@@ -39,7 +25,7 @@ class StabilizedRentRollActions extends CommercialRentRollSharedComponent<typeof
     verifyListRentPsfAnnually(leaseStatuses: Array<BoweryReports.LeaseStatus>, rentToBe: Array<number>): this {
         for (let i = 0; i < rentToBe.length; i++) {
             if (leaseStatuses[i] === "Vacant") {
-                this.Shared.verifyRentPsfAnnuallyByRow(rentToBe[i], i);
+                this.verifyRentPsfAnnuallyByRow(rentToBe[i], i);
             }
         }
         return this;
@@ -61,7 +47,7 @@ class StabilizedRentRollActions extends CommercialRentRollSharedComponent<typeof
     }
 
     revertToOriginalStabilizedRentRollCommentary(): StabilizedRentRollActions {
-        this.Shared.clickEditDiscussionButton();
+        this.clickEditDiscussionButton();
         stabRentRollPage.formRevertToOriginalBtn(0).click();
         this.verifyProgressBarNotExist();
         stabRentRollPage.formYesRevertBtn.click();
@@ -82,4 +68,4 @@ class StabilizedRentRollActions extends CommercialRentRollSharedComponent<typeof
     }
 }
 
-export default new StabilizedRentRollActions(stabRentRollPage, new CommercialRentRollSharedComponent(stabRentRollPage));
+export default new StabilizedRentRollActions(stabRentRollPage);

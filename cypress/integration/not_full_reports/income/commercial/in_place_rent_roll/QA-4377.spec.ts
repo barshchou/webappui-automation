@@ -16,7 +16,7 @@ describe("Verify the Inspected checkbox functionality", { tags:[ Tag.income, Tag
             .checkIsInspectedCheckboxByRowNumber();
         NavigationSection.navigateToStabilizedRentRollInCommercial()
             .verifyProgressBarNotExist();
-        Income.Commercial.StabilizedRentRoll.Shared.verifyIsInspectedChecked();
+        Income.Commercial.StabilizedRentRoll.verifyIsInspectedChecked();
         NavigationSection.navigateToUnitInspection();
         Final.UnitInspection.verifyNumberOfInspectedUnitsCommentary();
         deleteReport(testData.reportCreationData.reportNumber);

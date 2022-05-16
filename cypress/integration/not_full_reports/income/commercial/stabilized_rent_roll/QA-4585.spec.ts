@@ -30,11 +30,11 @@ describe("Verify the Commercial Stabilized Rent Roll table", { tags: [ Tag.incom
         `);        
         _NavigationSection.navigateToCommercialInPlaceRentRoll();
         Income._CommercialManager.InPlaceRentRoll.chooseListLeaseStatuses(testData.leaseStatuses, testData.numberOfCommercialUnits)
-            .enterTenantNames(testData.tenantNames, testData.leaseStatuses).Shared
+            .enterTenantNames(testData.tenantNames, testData.leaseStatuses)
             .verifyUseCells(testData.useTexts);
         testData.rentsPsf.forEach((rent, index) => {
             if (testData.leaseStatuses[index] !== "Vacant") {
-                Income._CommercialManager.InPlaceRentRoll.Shared.enterRentPerSFAnnuallyByRowNumber(rent, index);
+                Income._CommercialManager.InPlaceRentRoll.enterRentPerSFAnnuallyByRowNumber(rent, index);
             }
         });
 
@@ -46,14 +46,14 @@ describe("Verify the Commercial Stabilized Rent Roll table", { tags: [ Tag.incom
         5. Verify that the data in the Commercial Stabilized Rent Roll 
         are correctly pulled from the In-Place Rent Roll page.
         `);
-        Income._CommercialManager.StabilizedRentRoll.Shared.verifyLeaseStatuses(testData.leaseStatuses)
+        Income._CommercialManager.StabilizedRentRoll.verifyLeaseStatuses(testData.leaseStatuses)
             .verifyTenantNames(testData.tenantNames, testData.leaseStatuses)
             .verifyUseCells(testData.useTexts)
             .verifySFCells(testData.listOfUnitsSF)
             .verifyAnnualRentCellPerSFBasisByRow(testData.rentsPsf[1], testData.listOfUnitsSF[1], "annually", 1)
-            .verifyMonthlyRentPerSFByRow(testData.rentsPsf[1], testData.listOfUnitsSF[1], "annually", 1);
-        Income._CommercialManager.StabilizedRentRoll.Shared.verifyRentPsfAnnuallyByRow(testData.rentsPsf[1], 1);
-        Income._CommercialManager.StabilizedRentRoll.clickSaveButton()
+            .verifyMonthlyRentPerSFByRow(testData.rentsPsf[1], testData.listOfUnitsSF[1], "annually", 1)
+            .verifyRentPsfAnnuallyByRow(testData.rentsPsf[1], 1)
+            .clickSaveButton()
             .verifyProgressBarNotExist();
 
         cy.stepInfo(`
@@ -71,8 +71,8 @@ describe("Verify the Commercial Stabilized Rent Roll table", { tags: [ Tag.incom
         cy.stepInfo(`
         8. Verify that the data from step 5 is also changed.
         `);
-        Income._CommercialManager.StabilizedRentRoll.Shared.verifyTenantNameByRow(testData.leaseStatuses[1], testData.newTenantName, 1);
-        Income._CommercialManager.StabilizedRentRoll.clickSaveButton()
+        Income._CommercialManager.StabilizedRentRoll.verifyTenantNameByRow(testData.leaseStatuses[1], testData.newTenantName, 1)
+            .clickSaveButton()
             .verifyProgressBarNotExist();
         
         cy.stepInfo(`
@@ -88,7 +88,7 @@ describe("Verify the Commercial Stabilized Rent Roll table", { tags: [ Tag.incom
         `);
         _NavigationSection.navigateToStabilizedRentRollInCommercial()
             .verifyProgressBarNotExist();
-        Income._CommercialManager.StabilizedRentRoll.Shared.verifyTenantNameByRow(testData.leaseStatuses[1], "", 1);
+        Income._CommercialManager.StabilizedRentRoll.verifyTenantNameByRow(testData.leaseStatuses[1], "", 1);
         
         cy.stepInfo(`
         11. Proceed to the Income > Commercial > Stabilized Rent Roll page.

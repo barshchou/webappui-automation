@@ -4,20 +4,6 @@ import CommercialRentRollSharedComponent from "../../shared_components/commercia
 
 class CommercialRentRollActions extends CommercialRentRollSharedComponent<typeof rentRollPage> {
 
-    /**
-     * @description Contains elements and actions, identical for In-Place Rent Roll and Stabilized Rent Roll pages
-     */
-    readonly _Shared: CommercialRentRollSharedComponent<typeof rentRollPage>;
-
-    constructor(page: typeof rentRollPage, sharedComponent: CommercialRentRollSharedComponent<typeof rentRollPage>) {
-        super(page);
-        this._Shared = sharedComponent;
-    }
-
-    get Shared() {
-        return this._Shared;
-    }
-
     verifyBasisOfRentTooltip() {
         rentRollPage.basisOfRentField.should("exist");
         rentRollPage.basisOfRentTooltip.should("exist").trigger("mouseover");
@@ -68,7 +54,7 @@ class CommercialRentRollActions extends CommercialRentRollSharedComponent<typeof
         rentRollPage.leaseStatusArrows.eq(rowNumber).should("be.visible").as("arrow");
         cy.get("@arrow").click({ force: true });
         rentRollPage.getLeaseStatusToChooseByValue(status).click();
-        this.Shared.verifyLeaseStatusByRow(status, rowNumber);
+        this.verifyLeaseStatusByRow(status, rowNumber);
         if (status === "Vacant") {
             this.Page.getAllCellsByRowNumber(rowNumber).then(cells => {
                 for (let i = 3; i < cells.length - 2; i++) {
@@ -100,9 +86,9 @@ class CommercialRentRollActions extends CommercialRentRollSharedComponent<typeof
 
     checkIsInspectedCheckboxByRowNumber(rowNumber = 0): this {
         rentRollPage.pageHeader.should("be.visible");
-        this.Shared.verifyIsInspectedNotChecked(rowNumber);
+        this.verifyIsInspectedNotChecked(rowNumber);
         rentRollPage.isInspectedCheckboxes.eq(rowNumber).check({ force: true });
-        this.Shared.verifyIsInspectedChecked(rowNumber);
+        this.verifyIsInspectedChecked(rowNumber);
         return this;
     }
 
@@ -117,7 +103,7 @@ class CommercialRentRollActions extends CommercialRentRollSharedComponent<typeof
 
     enterTenantNameByRowNumber(name: string, rowNumber = 0, leaseStatus?: BoweryReports.LeaseStatus): this {
         if (leaseStatus === "Vacant") {
-            this.Shared.verifyTenantNameByRow(leaseStatus, name, rowNumber);
+            this.verifyTenantNameByRow(leaseStatus, name, rowNumber);
         } else {
             this.Page.tenantNameCells.eq(rowNumber).dblclick({ force: true });
             this.Page.textareaToInput.clear().type(name).type("{enter}");
@@ -148,7 +134,7 @@ class CommercialRentRollActions extends CommercialRentRollSharedComponent<typeof
         this.Page.monthlyRentCells.eq(rowNumber).should("not.have.class", "readOnly").dblclick({ force: true });
         this.Page.textareaToInput.clear().type(`${monthlyRent}`).type("{enter}");
         const textToBe = numberWithCommas(monthlyRent.toFixed(2));
-        this.Shared.verifyMonthlyRentByRowCellText(textToBe, rowNumber);
+        this.verifyMonthlyRentByRowCellText(textToBe, rowNumber);
         return this;
     }
 
@@ -156,7 +142,7 @@ class CommercialRentRollActions extends CommercialRentRollSharedComponent<typeof
         this.Page.annualRentCells.eq(rowNumber).should("not.have.class", "readOnly").dblclick({ force: true });
         this.Page.textareaToInput.clear().type(`${annualRent}`).type("{enter}");
         const textToBe = numberWithCommas(annualRent.toFixed(2));
-        this.Shared.verifyAnnualRentCellTextByRow(textToBe, rowNumber);
+        this.verifyAnnualRentCellTextByRow(textToBe, rowNumber);
         return this;
     }
 
@@ -172,7 +158,7 @@ class CommercialRentRollActions extends CommercialRentRollSharedComponent<typeof
             if (leaseStatuses[i] === "Vacant") {
                 continue;
             }
-            this.Shared.enterRentPerSFAnnuallyByRowNumber(perSFList[i], i);
+            this.enterRentPerSFAnnuallyByRowNumber(perSFList[i], i);
         }
         return this;
     }
@@ -237,9 +223,9 @@ class CommercialRentRollActions extends CommercialRentRollSharedComponent<typeof
 
     editDiscussion(newCommentary: string, clearText = true): this {
         this.Page.modifiedLabel.should("not.exist");
-        this.Shared.clickEditDiscussionButton()
-            .editDiscussionTextArea(newCommentary, clearText);
-        this.clickSaveDiscussionButton()
+        this.clickEditDiscussionButton()
+            .editDiscussionTextArea(newCommentary, clearText)
+            .clickSaveDiscussionButton()
             .verifyCommentarySavedText(newCommentary);
         this.Page.modifiedLabel.should("exist");
         return this;
@@ -310,4 +296,4 @@ class CommercialRentRollActions extends CommercialRentRollSharedComponent<typeof
     }
 }
 
-export default new CommercialRentRollActions(rentRollPage, new CommercialRentRollSharedComponent(rentRollPage));
+export default new CommercialRentRollActions(rentRollPage);

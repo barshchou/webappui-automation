@@ -15,12 +15,12 @@ describe("Verify the Dates columns in the grid", () => {
        it(`Verify ${cellName} date cell`, () => {
            _NavigationSection.navigateToCommercialInPlaceRentRoll();
            Income._CommercialManager.InPlaceRentRoll.chooseLeaseStatusByRowNumber(testData.occupiedLease)
-               .enterLeaseDateByRowNumber(cellName, getTodayDateString("/")).Shared
-               .verifyLeaseDateByRowNumber(cellName, testData.occupiedLease, "in-place", getTodayDateString("/"));
-           Income._CommercialManager.InPlaceRentRoll.chooseLeaseStatusByRowNumber(testData.vacantLease).Shared
-               .verifyLeaseDateByRowNumber(cellName, testData.vacantLease, "in-place",);
-           Income._CommercialManager.InPlaceRentRoll.chooseLeaseStatusByRowNumber(testData.occupiedLease)
-               .enterLeaseDateByRowNumber(cellName, testData.wrongFormatLeaseDate).Shared
+               .enterLeaseDateByRowNumber(cellName, getTodayDateString("/"))
+               .verifyLeaseDateByRowNumber(cellName, testData.occupiedLease, "in-place", getTodayDateString("/"))
+               .chooseLeaseStatusByRowNumber(testData.vacantLease)
+               .verifyLeaseDateByRowNumber(cellName, testData.vacantLease, "in-place",)
+               .chooseLeaseStatusByRowNumber(testData.occupiedLease)
+               .enterLeaseDateByRowNumber(cellName, testData.wrongFormatLeaseDate)
                .verifyLeaseDateByRowNumber(cellName, testData.occupiedLease, "in-place", testData.wrongFormatLeaseDate);
            deleteReport(testData.reportCreationData.reportNumber);
        });
