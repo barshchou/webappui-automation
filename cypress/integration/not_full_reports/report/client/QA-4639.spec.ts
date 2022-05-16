@@ -4,7 +4,7 @@ import { createReport, deleteReport } from "../../../../actions/base/baseTest.ac
 import testData from '../../../../fixtures/not_full_reports/report/client/QA-4639.fixture';
 import { Tag } from "../../../../utils/tags.utils";
 
-describe(`Verify the Modified label functionality for Intended User and Identification of the Client sections`, { tags:[ Tag.report, Tag.client, "test_client" ] }, () => {
+describe(`Verify the Modified label functionality for Intended User and Identification of the Client sections`, { tags:[ Tag.report, Tag.client ] }, () => {
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
     });

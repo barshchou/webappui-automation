@@ -4,7 +4,7 @@ import { _NavigationSection } from "../../../../actions/base";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import testData from '../../../../fixtures/not_full_reports/report/client/QA-4628.fixture';
 
-describe("Verify the functionality of the Client File Number field", { tags:[ Tag.report, Tag.client, "test_client" ] }, () => {
+describe("Verify the functionality of the Client File Number field", { tags:[ Tag.report, Tag.client ] }, () => {
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
     });

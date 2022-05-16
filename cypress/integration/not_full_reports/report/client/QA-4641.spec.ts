@@ -5,7 +5,7 @@ import { createReport, deleteReport } from "../../../../actions/base/baseTest.ac
 import testData from '../../../../fixtures/not_full_reports/report/client/QA-4641.fixture';
 
 describe(`[QA-4641] Verify the "Linked" chips dropdown in the new narrative component for As Is and As Stabilized 
-    report for Intended User and Identification of the Client sections`, { tags:[ Tag.report, Tag.client, "test_client" ] }, () => {
+    report for Intended User and Identification of the Client sections`, { tags:[ Tag.report, Tag.client ] }, () => {
 
     it("Test body", { tags: "@to_check_export" }, () => {
         cy.stepInfo("Login, create report");

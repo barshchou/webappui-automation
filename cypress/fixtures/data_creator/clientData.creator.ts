@@ -113,22 +113,6 @@ class ClientCreator {
         .setZipCode()
         .build();
     }
-
-    // createNewClient(data: BoweryAutomation.OrganizationCreateNewClientData) {
-    //     return this.setAddresseePrefix(data.prefix)
-    //     .setAddresseeTitle(data.title)
-    //     .setAddresseeFirstName(data.firstName)
-    //     .setAddresseeMiddleInitial(data.middleInitial)
-    //     .setAddresseeLastName(data.lastName)
-    //     .setClientSuffix(data.clientSuffix)
-    //     .setClientCompanyName(data.clientCompanyName)
-    //     .setStreetAddress(data.streetAddress)
-    //     .setCity(data.city)
-    //     .setState(data.state)
-    //     .setZipCode(data.zipCode)
-    //     .build()
-    //     .clickSaveFormButton();
-    // }
 }
 
 export default new ClientCreator();

@@ -9,7 +9,7 @@ describe("Verify the display of the Client page.", () => {
         createReport(testData.reportCreationData);
     });
 
-    it("Test body", { tags:[ Tag.report, Tag.client, "test_client" ] }, () => {
+    it("Test body", { tags:[ Tag.report, Tag.client ] }, () => {
         cy.stepInfo("1. Proceed to the Report > Client page.");
         _NavigationSection.navigateToClientPage();
 

@@ -8,7 +8,7 @@ import testData from '../../../../fixtures/not_full_reports/report/client/QA-462
 
 const conditionalDescribe = isProdEnv() ? describe.skip : describe;
 
-conditionalDescribe("[QA-4627] Verify the functionality of the Client field.", { tags:[ Tag.report, Tag.client, "test_client" ] }, () => {
+conditionalDescribe("[QA-4627] Verify the functionality of the Client field.", { tags:[ Tag.report, Tag.client ] }, () => {
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
     });

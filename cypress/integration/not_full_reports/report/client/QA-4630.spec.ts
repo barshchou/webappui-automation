@@ -4,7 +4,7 @@ import { _NavigationSection } from "../../../../actions/base";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import testData from '../../../../fixtures/not_full_reports/report/client/QA-4630.fixture';
 
-describe("Verify the functionality of the NYCB Application No. (optional) field", { tags:[ Tag.report, Tag.client, "test_client" ] }, () => {
+describe("Verify the functionality of the NYCB Application No. (optional) field", { tags:[ Tag.report, Tag.client ] }, () => {
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
     });
