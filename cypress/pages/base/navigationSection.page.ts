@@ -65,6 +65,8 @@ class NavigationSection extends BasePage {
 
     get potentialGrossIncome() {return cy.get("#potential-gross-income-v-2");}
 
+    get taxInfo() {return cy.get("#tax-information");}
+
     get proForma() {return cy.get("#pro-forma-v-2");}
 
     get commercialCompGroups() {return cy.get("#commercial-comp-groups");}

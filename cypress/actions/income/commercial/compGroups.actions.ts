@@ -42,6 +42,16 @@ class CompGroupsActions extends BaseActions {
             .verifyCompGroupExists(groupName);
         return this;
     }
+
+    verifyThatPageIsOpened(): CompGroupsActions {
+        compGroupsPage.compGroupsPageHeaderSection.should("be.visible");
+        cy.url().then(url => {
+            let urlObj = new URL(url);
+            cy.log("Check whether current URL ends with '/commercial-comp-groups-discussion'");
+            cy.wrap(urlObj.pathname.endsWith("/commercial-comp-groups-discussion")).should("be.true");
+        });
+        return this;
+    }
 }
 
 export default new CompGroupsActions();
