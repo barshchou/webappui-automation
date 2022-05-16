@@ -1,7 +1,7 @@
 import { Report } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
 import {createReport, deleteReport} from "../../../../actions/base/baseTest.actions";
-import testData from '../../../../fixtures/not_full_reports/report/client/QA-4635.fixture';
+import testData from '../../../../fixtures/not_full_reports/report/client/QA-4626.fixture';
 
 describe("Verify the display of the Client page.", () => {
     before("Login, create report", () => {
