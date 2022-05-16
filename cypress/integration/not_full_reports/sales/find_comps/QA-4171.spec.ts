@@ -11,6 +11,7 @@ describe("Selected Comparables table. Verify the functionality of Remove button"
 
     it("Test body", () => {
         NavigationSection.navigateToFindComps();
+        cy.pause();
         Sales.FindComps.selectCompFromMapByAddress(testData.comparable.address)
             .verifyAddedCompAddress(testData.comparable.address)
             .removeCompByAddress(testData.comparable.address)

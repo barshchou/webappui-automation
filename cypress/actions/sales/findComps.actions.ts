@@ -73,8 +73,6 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
             cy.log(interception.response.body.data.findSingleSalesComp.salesEventId);
             cy.wrap(interception.response.body.data.findSingleSalesComp.salesEventId)
             .as(Alias.salesEventId);
-            //data.findSingleSalesComp.salesEventId
-            //data.findSingleSalesComp
         });
         findCompsPage.getRemoveCompFromMapButtonByAddress(address).should("exist");
         return this;
@@ -118,8 +116,8 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
     }
 
     /**
-     * TODO: add description of this method
-     * ernst: we're probably gonna need to adapt this check for several salesComps later
+     * Checks WebApp REST request /salesComps/eventIds/:report_id
+     * which returns salesEventId which in its turn will be passed to DRM's GraphQL API
      */
     checkSingleSalesCompsByEventId(): this{
         cy.wait(`@${Alias.salesComps_eventIds}`).then(({ response }) => {
@@ -132,6 +130,9 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
         return this;
     }
 
+    /**
+     * Checks `findSalesCompsByEventIds` gql operation whether its response has correct salesEventId ("salesCompId")
+     */
     checkSelectedSingleSalesComps() {
         cy.wait(`@${Alias.gql.FindSalesCompsByEventIds}`).then(({ request, response }) => {
             let req: Utils.GraphQLRequest = request.body;
