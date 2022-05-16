@@ -4,8 +4,8 @@ import { createReport, deleteReport } from "../../../../actions/base/baseTest.ac
 import { _NavigationSection } from "../../../../actions/base";
 import { Tag } from "../../../../utils/tags.utils";
 
-describe("Verify the Save button functionality on the Commercial Units page",
-    { tags: [Tag.property, Tag.commercial_units] }, () => {
+describe("Verify the Save button functionality for Commercial Unit SF Discussion",
+    { tags: [ Tag.property, Tag.commercial_units ] }, () => {
 
         before("Report creation and several commercial units addition", () => {
             createReport(testData.reportCreationData);
@@ -25,7 +25,7 @@ describe("Verify the Save button functionality on the Commercial Units page",
             Property._CommercialUnits.Page.commercialUnitSFDiscussionTextArea.clear().type(testData.text);
             Property._CommercialUnits.Page.SaveBtnUnderDiscussionTextArea.first().click();
 
-            cy.stepInfo("3.  Verify that the changes from step 2 are saved.");
+            cy.stepInfo("3. Verify that the changes from step 2 are saved.");
             Property._CommercialUnits.Page.commercialUnitSFDiscussionText(testData.text).should('exist');
 
             deleteReport(testData.reportCreationData.reportNumber);
