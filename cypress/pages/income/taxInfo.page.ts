@@ -93,7 +93,7 @@ class TaxInfoPage extends BasePage {
 
     get appraiserOpTaxAssessedValueCell() {return cy.get(`[data-qa="Appraiser's Opinion-taxableAssessedValue-value-cell"]`);}
     
-    get taxSummaryDiscussionCommentary() {return cy.xpath("//h6[contains(text(),'Tax Calculation Discussion')]/../..//p/span");}
+    get taxSummaryDiscussionCommentary() {return cy.xpath("//*[.='Tax Calculation Discussion']//following::*[@data-slate-editor][1]");}
     
     get taxSummaryDiscussionTooltip() {return cy.get("svg[data-icon=info-circle]");}
     
