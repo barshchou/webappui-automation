@@ -4,7 +4,8 @@ import { createReport, deleteReport } from "../../../../actions/base/baseTest.ac
 import testData from '../../../../fixtures/not_full_reports/report/client/QA-4636.fixture';
 import { Tag } from "../../../../utils/tags.utils";
 
-describe(`Verify the Modified label functionality for Intended User and Identification of the Client sections`, { tags:[ Tag.report, Tag.client ] }, () => {
+describe(`Verify the Modified label functionality for Intended User and Identification of the Client sections`,
+    { tags:[ Tag.report, Tag.client ] }, () => {
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
     });
@@ -13,7 +14,7 @@ describe(`Verify the Modified label functionality for Intended User and Identifi
         cy.stepInfo('1. Click on the Edit button on the Report > Client page for Intended User and Identification of the Client sections.');
         _NavigationSection.navigateToClientPage();
         Report._Client.verifyProgressBarNotExist()
-        .Page.formEditBtn(0).click();
+            .Page.formEditBtn(0).click();
         Report._Client.Page.formEditBtn(0).click();
 
         cy.stepInfo('2. Edit comment and click on the Save button for both sections.');

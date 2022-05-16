@@ -4,7 +4,8 @@ import { _NavigationSection } from "../../../../actions/base";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import testData from '../../../../fixtures/not_full_reports/report/client/QA-4633.fixture';
 
-describe(`Verify the Revert to Original button functionality for Intended User and Identification of the Client sections`, { tags:[ Tag.report, Tag.client ] }, () => {
+describe(`Verify the Revert to Original button functionality for Intended User and Identification of the Client sections`,
+    { tags:[ Tag.report, Tag.client ] }, () => {
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
     });
@@ -13,7 +14,7 @@ describe(`Verify the Revert to Original button functionality for Intended User a
         cy.stepInfo("1. Click on the Edit button on the Report > Client page for Intended User and Identification of the Client sections.");
         _NavigationSection.navigateToClientPage();
         Report._Client.verifyProgressBarNotExist()
-        .Page.formEditBtn(0).click();
+            .Page.formEditBtn(0).click();
         Report._Client.Page.formEditBtn(0).click();
 
         cy.stepInfo("2. Verify that the Revert to Original button is displayed instead of the Edit button for both sections.");

@@ -4,7 +4,8 @@ import { _NavigationSection } from "../../../../actions/base";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import testData from '../../../../fixtures/not_full_reports/report/client/QA-4628.fixture';
 
-describe("Verify the functionality of the Client File Number field", { tags:[ Tag.report, Tag.client ] }, () => {
+describe("Verify the functionality of the Client File Number field", 
+    { tags:[ Tag.report, Tag.client ] }, () => {
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
     });
@@ -13,7 +14,7 @@ describe("Verify the functionality of the Client File Number field", { tags:[ Ta
         cy.stepInfo("1. Proceed to the Report > Client page.");
         _NavigationSection.navigateToClientPage();
         Report._Client.verifyProgressBarNotExist()
-        .Page.formEditBtn(0).click();
+            .Page.formEditBtn(0).click();
         Report._Client.Page.formEditBtn(0).click();
 
         cy.stepInfo("2. Try to enter any num. value / non-integer / non-num. / long value in the Client File Number field (NO validation).");

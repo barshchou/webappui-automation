@@ -82,7 +82,7 @@ class ClientActions extends BaseActionsExt<typeof clientPage> {
         return this;
     }
 
-    verifyNarrativeSuggestions(verifyListValue: string, numberLists = 0) {
+    verifyNarrativeSuggestions(verifyListValue: string, numberLists = 0): ClientActions {
         clientPage.narrativeSuggestionsList.eq(numberLists).contains(verifyListValue).should("have.text", verifyListValue);
         return this;
     }

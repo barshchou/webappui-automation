@@ -8,10 +8,11 @@ import testData from '../../../../fixtures/not_full_reports/report/client/QA-462
 
 const conditionalDescribe = isProdEnv() ? describe.skip : describe;
 
-conditionalDescribe("[QA-4627] Verify the functionality of the Client field.", { tags:[ Tag.report, Tag.client ] }, () => {
+conditionalDescribe("[QA-4627] Verify the functionality of the Client field.", 
+    { tags:[ Tag.report, Tag.client ] }, () => {
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
-    });
+     });
 
     it("Test body", () => {
         cy.stepInfo("1. Proceed to the Report > Client page.");
@@ -24,7 +25,6 @@ conditionalDescribe("[QA-4627] Verify the functionality of the Client field.", {
         cy.stepInfo("3. Proceed to the Organization > Create New Client page and create a new client, save it.");
         Report._Client.Page.addNewClient.click();
         Organization._CreateNewClient.createNewClient(testData.clientCreationData);
-        
 
         cy.stepInfo(`4. Proceed to the Report > Client page and verify that a newly created client is 
             added to the list by entering the first letter and can be selected.`);
@@ -47,10 +47,10 @@ conditionalDescribe("[QA-4627] Verify the functionality of the Client field.", {
 
         cy.stepInfo("8. Proceed to the Preview & Edit > Letter of Transmittal page and verify that the Client from the previous step is displayed.");
         _NavigationSection.clickLetterOfTransmittal();
-        PreviewEdit._LetterOfTransmittal.verifyValueContainsInCard(testData.textToType);
+        PreviewEdit._LetterOfTransmittal.expectedValue(testData.textToType);
 
         cy.stepInfo(`9. Proceed to the Preview & Edit > Introduction page and verify that the Client Company is displayed in the IDENTIFICATION 
-        OF THE CLIENT and INTENDED USE & USER sections (if the Client has Company added on the Organization > Clients page).`);
+            OF THE CLIENT and INTENDED USE & USER sections (if the Client has Company added on the Organization > Clients page).`);
         _NavigationSection.navigateToProfileOrganization(testData.profileOrganizationName);
         cy.contains("Organization Clients").click();
         Organization._OrganizationClientsActions.deleteClient(testData.textToType);
