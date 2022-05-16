@@ -82,7 +82,7 @@ class RentCompsPage extends BasePage{
 
     get selectComparableButtons() {return cy.get("*[data-qa='rentComp-select-btn']");}
 
-    get selectedComparableButtons() {return cy.get("*[data-qa='rentComp-selected-btn']");}
+    get selectedMapComparableRemoveButtons() {return cy.get("*[data-qa='rentComp-remove-btn']");}
 
     get zoomInButton() {return cy.get("*[title='Zoom in']");}
 

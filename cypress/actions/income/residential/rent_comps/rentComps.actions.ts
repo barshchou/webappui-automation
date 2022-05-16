@@ -363,7 +363,7 @@ class RentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
             const buttonsLength = buttons.length;
             for (let i = 0; i < buttonsLength; i++) {
                 if (i !== 0) {
-                    rentCompsPage.selectedComparableButtons.eq(i).should("not.exist");
+                    rentCompsPage.selectedMapComparableRemoveButtons.eq(i).should("not.exist");
                 }
                 cy.wrap(buttons.eq(i)).should("be.enabled").click({ force: true });
                 this.verifyComparableSelectedByIndex(i);
@@ -378,7 +378,7 @@ class RentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
     }
 
     verifyComparableSelectedByIndex(index = 0): this {
-        rentCompsPage.selectedComparableButtons.eq(index).should("exist");
+        rentCompsPage.selectedMapComparableRemoveButtons.eq(index).should("exist");
         return this;
     }
 
@@ -395,7 +395,7 @@ class RentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
 
     verifyUncategorizedCompsNumberAsSelected(): this {
         rentCompsPage.uncategorizedTable.find(rentCompsPage.indexColumnCellsSelector).then(indexCells => {
-            rentCompsPage.selectedComparableButtons.should("have.length", indexCells.length);
+            rentCompsPage.selectedMapComparableRemoveButtons.should("have.length", indexCells.length);
         });
         return this;
     }
