@@ -1,5 +1,6 @@
 import navigationSectionPage from "../../pages/base/navigationSection.page";
 import { Alias } from "../../utils/alias.utils";
+import { aliasQuery, hasOperationName } from "../../utils/graphql.utils";
 import BaseActions from "./base.actions";
 
 class NavigationSectionActions extends BaseActions {
@@ -229,12 +230,17 @@ class NavigationSectionActions extends BaseActions {
     }
 
     navigateToFindComps() {
-        cy.intercept('POST', '/graphql').as(Alias.gqlRequest);
+        cy.intercept('POST', '/graphql', req => {
+            aliasQuery(req, "findSalesComps");
+            aliasQuery(req, "findSingleSalesComp");
+            aliasQuery(req, "updateAppraisal");
+            aliasQuery(req, "findSalesCompsByEventIds");
+        });
 
         this.clickSalesButton()
             .clickFindCompsButton()
             .clickYesButton();        
-        cy.wait(`@${Alias.gqlRequest}`, { timeout:70000 });
+        cy.wait(`@${Alias.gql.FindSalesComps}`, { timeout:70000 });
 
         return this;
     }

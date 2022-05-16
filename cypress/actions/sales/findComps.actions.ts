@@ -69,7 +69,7 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
 
     selectCompFromMapByAddress(address: string): FindCompsActions {
         findCompsPage.getSelectCompFromMapButtonByAddress(address).scrollIntoView().click({ force: true });
-        cy.wait(`@${Alias.gqlRequest}`, { timeout:70000 }).then((interception) => {
+        cy.wait(`@${Alias.gql.FindSingleSalesComp}`, { timeout:70000 }).then((interception) => {
             cy.log(interception.response.body.data.findSingleSalesComp.salesEventId);
             cy.wrap(interception.response.body.data.findSingleSalesComp.salesEventId)
             .as(Alias.salesEventId);
@@ -77,6 +77,7 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
             //data.findSingleSalesComp
         });
         findCompsPage.getRemoveCompFromMapButtonByAddress(address).should("exist");
+        cy.pause();
         return this;
     }
 
@@ -133,20 +134,14 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
     }
 
     checkSelectedSingleSalesComps() {
-        cy.wait(`@${Alias.gqlRequest}`).then(({ request }) => {
+        cy.wait(`@${Alias.gql.FindSalesCompsByEventIds}`).then(({ request, response }) => {
             let req: Utils.GraphQLRequest = request.body;
             expect(req.operationName).to.equal("findSalesCompsByEventIds");
-            /**
-             * ernst: we need to intercept the one findSalesCompsByEventIds, which will have 
-             * variables.input.eventIds in its request.body
-             * use this guide 
-             * @see https://docs.cypress.io/api/commands/intercept#Aliasing-individual-requests
-             */
-            // cy.get(`@${Alias.salesEventId}`).then(_salesEventId => {
-            //     expect(_salesEventId).to.be.equal(
-            //         req.variables.input.eventIds.salesEventId.map(val => val.salesEventId)
-            //     );
-            // });
+            cy.get(`@${Alias.salesEventId}`).then(_salesEventId => {
+                expect(_salesEventId).to.be.oneOf(
+                    response.body.data.findSalesCompsByEventIds.map(val => val.salesEventId)
+                );
+            });
         });
         return this;
     }
