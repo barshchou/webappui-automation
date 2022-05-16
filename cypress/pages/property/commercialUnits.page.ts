@@ -35,16 +35,8 @@ class CommercialUnitsPage extends BasePage {
         return cy.xpath("//*[.='Commercial Unit SF Discussion']//following-sibling::div//child::*[@data-slate-editor]");
     }
 
-    get editButton() {
-        return cy.xpath("//button[contains(text(), 'Edit')]");
-    }
-
     get modifiedButton() {
         return cy.xpath("//span[contains(text(), 'Modified')]");
-    }
-
-    get SaveBtnUnderDiscussionTextArea() {
-        return cy.xpath("//button[contains(text(), 'Save')][not(contains(@data-qa, 'form-save-btn'))]");
     }
 
     getGradeCheckbox(value: string, index = 0) {
