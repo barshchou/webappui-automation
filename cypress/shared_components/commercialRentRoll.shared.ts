@@ -1,7 +1,16 @@
 import { numberWithCommas } from "../../utils/numbers.utils";
 import { isDateHasCorrectFormat } from "../../utils/date.utils";
+import BasePage from "../pages/base/base.page";
+import BaseActions from "../actions/base/base.actions";
 
-class CommercialRentRollSharedComponent {
+class CommercialRentRollSharedComponent<T extends BasePage> extends BaseActions {
+
+    Page: T;
+
+    constructor(page: T) {
+        super();
+        this.Page = page;
+    }
 
     get leaseStatusCells() {return cy.get("[data-qa^=leaseStatus].htAutocomplete");}
 
@@ -267,6 +276,11 @@ class CommercialRentRollSharedComponent {
         sfValues.forEach(value => sfTotalToBe += value);
         const textToBe = numberWithCommas(Math.round(sfTotalToBe));
         this.squareFeetTotal.should("have.text", `${textToBe}`);
+        return this;
+    }
+
+    clickEditDiscussionButton(): this {
+        this.Page.formEditBtn(0).click({ force: true });
         return this;
     }
 }

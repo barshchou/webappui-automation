@@ -1,15 +1,14 @@
 import stabRentRollPage from "../../../pages/income/commercial/stabilizedRentRoll.page";
-import BaseActionsExt from "../../base/base.actions.ext";
 import CommercialRentRollSharedComponent from "../../../shared_components/commercialRentRoll.shared";
 
-class StabilizedRentRollActions extends BaseActionsExt<typeof stabRentRollPage> {
+class StabilizedRentRollActions extends CommercialRentRollSharedComponent<typeof stabRentRollPage> {
 
     /**
      * @description Contains elements and actions, identical for In-Place Rent Roll and Stabilized Rent Roll pages
      */
-    readonly _Shared: CommercialRentRollSharedComponent;
+    readonly _Shared: CommercialRentRollSharedComponent<typeof stabRentRollPage>;
 
-    constructor(page: typeof stabRentRollPage, sharedComponent: CommercialRentRollSharedComponent) {
+    constructor(page: typeof stabRentRollPage, sharedComponent: CommercialRentRollSharedComponent<typeof stabRentRollPage>) {
         super(page);
         this._Shared = sharedComponent;
     }
@@ -46,11 +45,6 @@ class StabilizedRentRollActions extends BaseActionsExt<typeof stabRentRollPage> 
         return this;
     }
 
-    clickEditStabilizedCommercialIncomeDiscussion(): StabilizedRentRollActions {
-        stabRentRollPage.formEditBtn(0).click();
-        return this;
-    }
-
     typeStabilizedCommercialIncomeTextArea(value: string, clearText = false): StabilizedRentRollActions {
         clearText ? stabRentRollPage.stabilizedCommercialIncomeTextArea.clear().type(value) :
             stabRentRollPage.stabilizedCommercialIncomeTextArea.type(value);
@@ -73,7 +67,7 @@ class StabilizedRentRollActions extends BaseActionsExt<typeof stabRentRollPage> 
     }
 
     revertToOriginalStabilizedRentRollCommentary(): StabilizedRentRollActions {
-        this.clickEditStabilizedCommercialIncomeDiscussion();
+        this.Shared.clickEditDiscussionButton();
         stabRentRollPage.formRevertToOriginalBtn(0).click();
         this.verifyProgressBarNotExist();
         stabRentRollPage.formYesRevertBtn.click();
@@ -94,4 +88,4 @@ class StabilizedRentRollActions extends BaseActionsExt<typeof stabRentRollPage> 
     }
 }
 
-export default new StabilizedRentRollActions(stabRentRollPage, new CommercialRentRollSharedComponent());
+export default new StabilizedRentRollActions(stabRentRollPage, new CommercialRentRollSharedComponent(stabRentRollPage));

@@ -13,9 +13,9 @@ describe(`Current Commercial Income Discussion > Verify the Revert to Original b
     it("Test body", () => {
         NavigationSection.navigateToCommercialInPlaceRentRoll()
             .verifyProgressBarNotExist();
-        Income.Commercial.InPlaceRentRoll.editDiscussion(testData.editedCommentary)
-            .clickEditDiscussionButton()
-            .clickRevertToOriginalButton()
+        Income.Commercial.InPlaceRentRoll.editDiscussion(testData.editedCommentary).Shared
+            .clickEditDiscussionButton();
+        Income.Commercial.InPlaceRentRoll.clickRevertToOriginalButton()
             .clickCloseButton()
             .verifyCommentaryTextBoxText(testData.editedCommentary)
             .clickRevertToOriginalButton()

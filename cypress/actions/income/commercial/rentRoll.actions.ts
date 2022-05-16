@@ -8,9 +8,9 @@ class CommercialRentRollActions extends BaseActionsExt<typeof rentRollPage> {
     /**
      * @description Contains elements and actions, identical for In-Place Rent Roll and Stabilized Rent Roll pages
      */
-    readonly _Shared: CommercialRentRollSharedComponent;
+    readonly _Shared: CommercialRentRollSharedComponent<typeof rentRollPage>;
 
-    constructor(page: typeof rentRollPage, sharedComponent: CommercialRentRollSharedComponent) {
+    constructor(page: typeof rentRollPage, sharedComponent: CommercialRentRollSharedComponent<typeof rentRollPage>) {
         super(page);
         this._Shared = sharedComponent;
     }
@@ -238,8 +238,8 @@ class CommercialRentRollActions extends BaseActionsExt<typeof rentRollPage> {
 
     editDiscussion(newCommentary: string): this {
         this.Shared.modifiedLabel.should("not.exist");
-        this.clickEditDiscussionButton()
-            .clearAndEnterNewCommentary(newCommentary)
+        this.Shared.clickEditDiscussionButton();
+        this.clearAndEnterNewCommentary(newCommentary)
             .clickSaveDiscussionButton()
             .verifyCommentarySavedText(newCommentary);
         this.Shared.modifiedLabel.should("exist");
@@ -253,11 +253,6 @@ class CommercialRentRollActions extends BaseActionsExt<typeof rentRollPage> {
 
     clickSaveDiscussionButton(): this {
         this.Shared.saveDiscussionChanges.click();
-        return this;
-    }
-
-    clickEditDiscussionButton(): this {
-        this.Shared.editDiscussionButton.click({ force: true });
         return this;
     }
 
@@ -321,4 +316,4 @@ class CommercialRentRollActions extends BaseActionsExt<typeof rentRollPage> {
     }
 }
 
-export default new CommercialRentRollActions(rentRollPage, new CommercialRentRollSharedComponent());
+export default new CommercialRentRollActions(rentRollPage, new CommercialRentRollSharedComponent(rentRollPage));

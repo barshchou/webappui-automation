@@ -13,8 +13,8 @@ describe("Verify the functionality of Edit and Cancel commentary buttons", () =>
     it("Test body", () => {
         NavigationSection.navigateToCommercialInPlaceRentRoll()
             .verifyProgressBarNotExist();
-        Income.Commercial.InPlaceRentRoll.clickEditDiscussionButton()
-            .verifyEditDiscussionButtonsDisplayed()
+        Income.Commercial.InPlaceRentRoll.Shared.clickEditDiscussionButton();
+        Income.Commercial.InPlaceRentRoll.verifyEditDiscussionButtonsDisplayed()
             .clearAndEnterNewCommentary(testData.newCommentary)
             .clickCancelDiscussionEditButton()
             .verifyCommentaryTextNotContains(testData.newCommentary);
