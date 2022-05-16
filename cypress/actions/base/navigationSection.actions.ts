@@ -1,6 +1,5 @@
 import navigationSectionPage from "../../pages/base/navigationSection.page";
 import { Alias } from "../../utils/alias.utils";
-import { aliasQuery, hasOperationName } from "../../utils/graphql.utils";
 import BaseActions from "./base.actions";
 
 class NavigationSectionActions extends BaseActions {
