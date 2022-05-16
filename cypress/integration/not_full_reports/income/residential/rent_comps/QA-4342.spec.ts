@@ -6,7 +6,7 @@ import { createReport, deleteReport } from "../../../../../actions/base/baseTest
 import { Tag } from "../../../../../utils/tags.utils";
 
 describe("Verify the display of the Unit grid with the added comparable unit on the '$ Rent Comps' page", 
-{ tags:[ Tag.income, Tag.residential, Tag.rent_comps, Tag.fix ] }, () => {
+{ tags:[ Tag.income, Tag.residential, Tag.rent_comps ] }, () => {
 
     beforeEach("Login action", () => {
         createReport(tesData.reportCreationData);

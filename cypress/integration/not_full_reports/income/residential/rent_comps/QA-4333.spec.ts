@@ -2,12 +2,11 @@ import { createReport, deleteReport } from "../../../../../actions/base/baseTest
 import ReportDataCreator from "../../../../../fixtures/data_creator/reportData.creator";
 import NavigationSection from "../../../../../actions/base/navigationSection.actions";
 import Income from "../../../../../actions/income/income.manager";
-import { Tag } from "../../../../../utils/tags.utils";
 
 const reportCreationData = ReportDataCreator.getReportData("4333");
 
 describe(`Verify Select button for the results displayed in the Map section is transferring to Selected on clicking 
-                when the Unit type of search is selected on the Rent Comps page`, { tags:[ Tag.fix ] }, () => {
+                when the Unit type of search is selected on the Rent Comps page`, () => {
 
     before("Login, create report", () => {
         createReport(reportCreationData);
