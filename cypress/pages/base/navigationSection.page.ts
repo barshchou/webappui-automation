@@ -75,9 +75,13 @@ class NavigationSection extends BasePage {
 
     get supportingCapRates() {return cy.get("#supporting-cap-rates");}
 
-    get introduction() {return cy.get('[id="introduction"]');}
+    get introduction() {return cy.get("#introduction");}
 
     get coverPage() {return cy.get("#cover-page");}
+
+    get profileOrganization() {return cy.get("[aria-label='Profile & Organization']");}
+
+    get menuItemsProfileOrganization() {return cy.get("[role=menu] > li");}
 }
 
 export default new NavigationSection();

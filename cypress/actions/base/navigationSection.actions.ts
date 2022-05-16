@@ -317,6 +317,27 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         return this;
     }
 
+    clickIntroduction() {
+        navigationSectionPage.introduction.click();
+        return this;
+    }
+
+    clickProfileOrganization() {
+        navigationSectionPage.profileOrganization.click();
+        return this;
+    }
+
+    selectLink(nameLink: string) {
+        navigationSectionPage.menuItemsProfileOrganization.contains(nameLink).click();
+        return this;
+    }
+
+    navigateToProfileOrganization(nameLink: string) {
+        this.clickProfileOrganization()
+            .selectLink(nameLink);
+        return this;
+    }
+
     navigateToLaundry() {
         this.clickIncomeApproachButton()
             .clickMiscellaneousIncome()
@@ -327,9 +348,16 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
 
     navigateToCoverPage() {
         this.clickPreviewEditButton()
-            .clickCoverPage()
-            .clickYesButton();
-        return this;
+        .clickCoverPage()
+        .clickYesButton();
+    return this;
+    }
+
+    navigateToIntroduction() {
+        this.clickPreviewEditButton()
+        .clickIntroduction()
+        .clickYesButton();
+    return this;
     }
 
     navigateToLetterOfTransmittal() {
