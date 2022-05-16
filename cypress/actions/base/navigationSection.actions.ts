@@ -335,6 +335,11 @@ class NavigationSectionActions extends BaseActions {
         return this;
     }
 
+    clickTaxInfo() {
+        navigationSectionPage.taxInfo.click();
+        return this;
+    }
+
     navigateToPotentialGrossIncome() {
         this.clickIncomeApproachButton()
             .clickPotentialGrossIncome()
@@ -407,6 +412,14 @@ class NavigationSectionActions extends BaseActions {
         if(isWithYes) {
             this.clickYesButton();
         }
+        return this;
+    }
+
+    navigateToTaxInfo(isWithSave = true): NavigationSectionActions {
+        this.clickIncomeApproachButton().clickTaxInfo();
+        if (isWithSave) {
+            this.clickYesButton();
+        } 
         return this;
     }
 }
