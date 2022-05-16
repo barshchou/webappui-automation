@@ -1,6 +1,5 @@
 export enum Tag {
     property = "@property",
-    commercial_unit = "@commercial_unit",
     income = "@income",
     commercial = "@commercial",
     stabilized_rent_roll = "@stabilized_rent_roll",
@@ -10,12 +9,14 @@ export enum Tag {
     expense_forecast = "@expense_forecast",
     fix = "@fix",
     find_comps = "@find_comps",
+    adjust_comps = "@adjust_comps",
     rent_comps = "@rent_comps",
     residential = "@residential",
     commercial_units = "@commercial_units",
     sales = "@sales",
     value_conclusion = "@value_conclusion",
     check_export = "@check_export",
+    tax_info = "@tax_info",
     report = "@report",
     client ="@client"
 }
