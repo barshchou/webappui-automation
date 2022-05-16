@@ -76,6 +76,8 @@ class NavigationSection extends BasePage {
     get supportingCapRates() {return cy.get("#supporting-cap-rates");}
 
     get introduction() {return cy.get('[id="introduction"]');}
+
+    get coverPage() {return cy.get("#cover-page");}
 }
 
 export default new NavigationSection();
