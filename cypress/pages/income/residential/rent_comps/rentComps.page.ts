@@ -132,7 +132,7 @@ class RentCompsPage extends BasePage{
 
     getSelectButtonByAddress(address) {return cy.xpath(`//*[text()='${address}']//following-sibling::button`);}
 
-    getSelectedButtonByAddress(address) {return cy.xpath(`//*[text()='${address}']//following-sibling::button[contains(@data-qa, 'selected-btn')]`);}
+    getRemoveButtonByAddress(address) {return cy.xpath(`//*[text()='${address}']//following-sibling::button[contains(@data-qa, 'remove-btn')]`);}
 
     get editButtonLocator() {return "[data-qa=col-edit] button";}
 
