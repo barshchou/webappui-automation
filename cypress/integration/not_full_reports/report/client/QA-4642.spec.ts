@@ -1,47 +1,49 @@
+import { Tag } from './../../../../utils/tags.utils';
+import { Report, ReviewExport } from './../../../../actions/index';
 import testData from "../../../../fixtures/not_full_reports/report/client/QA-4642.fixture";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
-import NavigationSection from "../../../../actions/base/navigationSection.actions";
-import Report from "../../../../actions/report/report.manager";
+import { _NavigationSection } from '../../../../actions/base';
 
-const checkChipsOptions = (suggestion: string, optionName: string, textBoxName: "IntendedUserTextBox" | "IdentificationOfClientTextBox") => {
-    const interactWithText = (textBox: Cypress.Chainable, indexForElement: number) => {
-        return textBox.click().type(`{enter}{enter}=${suggestion}`).focus()
-        .xpath(`//li[contains(text(),"${optionName}")]`).eq(0)
-        .should("be.visible").click()
-        .xpath("//button[contains(text(),'Revert to Original')]").eq(indexForElement).click({ force:true })
-        .get('[role="dialog"] button').eq(2).click();
-    };
-
-    if(textBoxName == "IntendedUserTextBox"){
-        return interactWithText(Report.Client.Page.intendedUserTextBox, 0);
-    }
-    else if(textBoxName == "IdentificationOfClientTextBox"){
-        return interactWithText(Report.Client.Page.identificationOfClientTextBox, 1);
-    }
-    
-};
-
-/**
- * ernst: WARN: remove skip after fixing this test
- */
 describe("Verify the Client Guidelines Discussion on the page", () => {
-    before("Login, create report", () => {
+    it("Test body", { tags: [ Tag.report, Tag.client, Tag.check_export ] }, () => {
+        cy.stepInfo("1. Proceed to the Report > Client page");
         createReport(testData.reportCreationData);
+        _NavigationSection.navigateToClientPage().verifyProgressBarNotExist();
+
+        cy.stepInfo("2. Click on the Edit button for Intended User and Identification of the Client sections");
+        Report._Client.Page.formEditBtn(0).click();
+        Report._Client.Page.formEditBtn(0).click();
+
+        cy.stepInfo(`3. Enter the “=“ and verify the "Linked" chips dropdown for both sections: options 'Gross Building Area', 'Building Name', 'Property Type', 
+            'Current Residential Unit Count', 'As Complete Residential Unit Count', 'Current Commercial Unit Count', 'As Complete Commercial Unit Count', 'Street Address', 
+            'Street Name', 'Site Area', 'Year Built', 'Block', 'Lot', 'Concluded Cap Rate', 'Zones', 'CurrentCondition', 'As Stabilized Condition'`);
+        testData.linkedChipsDropdownOptions.forEach(chip => {
+            Report._Client.enterIntendedUserTextBox(`=${chip.typeSuggestValue}`)
+                .clickNarrativeSuggestions(chip.suggestionName)
+                .verifyIntendedUserTextBox(chip.verifySuggest);
+
+            Report._Client.enterIdentificationOfTheClientTextBox(`=${chip.typeSuggestValue}`)
+                .clickNarrativeSuggestions(chip.suggestionName, 1)
+                .verifyIdentificationOfTheClientTextBox(chip.verifySuggest);
+        });
+
+        cy.stepInfo("4. Download report");
+        _NavigationSection.openReviewAndExport(true);
+        ReviewExport.generateDocxReport().waitForReportGenerated()
+        .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
+        deleteReport(testData.reportCreationData.reportNumber);
     });
 
-    it("Test body", () => {
-        NavigationSection.navigateToClientPage().verifyProgressBarNotExist();
+    it("Check export", () => {
+        cy.task("getFilePath", { _reportName: testData.reportCreationData.reportNumber, _docx_html: "html" }).then(file => {
+            cy.log(<string>file);
+            cy.stepInfo("5. Verify the linked chips on export for both sections");
+            cy.visit(<string>file);
 
-        Report.Client.Page.formEditBtn(0).click();
-        Report.Client.Page.formEditBtn(0).click();
-
-        for(let [ suggestion, option ] of testData.linkedChipsDropdownOptions){
-            checkChipsOptions(suggestion, option, "IntendedUserTextBox");
-        }
-        for(let [ suggestion, option ] of testData.linkedChipsDropdownOptions){
-            checkChipsOptions(suggestion, option, "IdentificationOfClientTextBox");
-        }
-
-        deleteReport(testData.reportCreationData.reportNumber);
+            testData.linkedChipsDropdownOptions.forEach(item => {
+                cy.contains("Identification of the Client").next().scrollIntoView().should("include.text", item.verifyExport);
+                cy.contains("Intended Use & User").next().scrollIntoView().should("include.text", item.verifyExport);
+            });
+        }); 
     });
 });
