@@ -9,6 +9,7 @@ export enum Tag {
     expense_forecast = "@expense_forecast",
     fix = "@fix",
     find_comps = "@find_comps",
+    adjust_comps = "@adjust_comps",
     rent_comps = "@rent_comps",
     residential = "@residential",
     commercial_units = "@commercial_units",
