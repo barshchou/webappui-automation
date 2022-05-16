@@ -1,6 +1,7 @@
-import BasePage from "../../base/base.page";
+import CommercialRentRollSharedComponentPage from "../../shared_components/commercialRentRoll.shared.page";
 
-class CommercialRentRollPage extends BasePage{
+class CommercialRentRollPage extends CommercialRentRollSharedComponentPage {
+
     get pageHeader() {return cy.xpath("//h5[text()='In-Place Rent Roll']");}
 
     get basisOfRentField() {return cy.contains("Basis of Rent");}

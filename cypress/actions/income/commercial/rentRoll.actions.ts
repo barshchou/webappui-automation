@@ -1,6 +1,6 @@
 import rentRollPage from "../../../pages/income/commercial/rentRoll.page";
 import { numberWithCommas } from "../../../../utils/numbers.utils";
-import CommercialRentRollSharedComponent from "../../../shared_components/commercialRentRoll.shared";
+import CommercialRentRollSharedComponent from "../../shared_components/commercialRentRoll.shared.actions";
 
 class CommercialRentRollActions extends CommercialRentRollSharedComponent<typeof rentRollPage> {
 
@@ -50,7 +50,7 @@ class CommercialRentRollActions extends CommercialRentRollSharedComponent<typeof
     clickPerSquareFootPerMonthButton(backColor = "rgb(46, 67, 147)"): this {
        rentRollPage.perSquareFootPerMonthButton.should("not.have.css", "background-color", backColor)
            .click().should("have.css", "background-color", backColor);
-       this.Shared.rentPerSfPerMonthColumnName.scrollIntoView().should("exist");
+       this.Page.rentPerSfPerMonthColumnName.scrollIntoView().should("exist");
        return this;
     }
 
@@ -70,7 +70,7 @@ class CommercialRentRollActions extends CommercialRentRollSharedComponent<typeof
         rentRollPage.getLeaseStatusToChooseByValue(status).click();
         this.Shared.verifyLeaseStatusByRow(status, rowNumber);
         if (status === "Vacant") {
-            this.Shared.getAllCellsByRowNumber(rowNumber).then(cells => {
+            this.Page.getAllCellsByRowNumber(rowNumber).then(cells => {
                 for (let i = 3; i < cells.length - 2; i++) {
                     cy.wrap(cells).eq(i).should("have.class", "readOnly");
                 }
@@ -80,13 +80,13 @@ class CommercialRentRollActions extends CommercialRentRollSharedComponent<typeof
     }
 
     pasteToLeaseStatusByRow(textToPaste: string, rowNumber = 0): this {
-        this.Shared.leaseStatusCells.eq(rowNumber).invoke("text", textToPaste)
+        this.Page.leaseStatusCells.eq(rowNumber).invoke("text", textToPaste)
             .should("have.text", textToPaste);
         return this;
     }
 
     pressDeleteLeaseStatusByRow(rowNumber = 0): this {
-        this.Shared.leaseStatusCells.eq(rowNumber).trigger("keydown", { keyCode: 46 })
+        this.Page.leaseStatusCells.eq(rowNumber).trigger("keydown", { keyCode: 46 })
             .should("have.text", "");
         return this;
     }
@@ -119,15 +119,15 @@ class CommercialRentRollActions extends CommercialRentRollSharedComponent<typeof
         if (leaseStatus === "Vacant") {
             this.Shared.verifyTenantNameByRow(leaseStatus, name, rowNumber);
         } else {
-            this.Shared.tenantNameCells.eq(rowNumber).dblclick({ force: true });
-            this.Shared.textareaToInput.clear().type(name).type("{enter}");
+            this.Page.tenantNameCells.eq(rowNumber).dblclick({ force: true });
+            this.Page.textareaToInput.clear().type(name).type("{enter}");
         }
         return this;
     }
 
     deleteTenantNameByRowNumber(rowNumber: number): this {
-        this.Shared.tenantNameCells.eq(rowNumber).dblclick();
-        this.Shared.textareaToInput.clear();
+        this.Page.tenantNameCells.eq(rowNumber).dblclick();
+        this.Page.textareaToInput.clear();
         return this;
     }
 
@@ -139,22 +139,22 @@ class CommercialRentRollActions extends CommercialRentRollSharedComponent<typeof
     }
 
     enterLeaseDateByRowNumber(cellName: BoweryReports.LeaseDateName, date: string, rowNumber = 0): this {
-        this.Shared.getLeaseDateCellsByName(cellName).eq(rowNumber).dblclick({ force: true });
-        this.Shared.textareaToInput.clear().type(date).type("{enter}");
+        this.Page.getLeaseDateCellsByName(cellName).eq(rowNumber).dblclick({ force: true });
+        this.Page.textareaToInput.clear().type(date).type("{enter}");
         return this;
     }
 
     enterMonthlyRentByRowNumber(monthlyRent: number, rowNumber = 0): this {
-        this.Shared.monthlyRentCells.eq(rowNumber).should("not.have.class", "readOnly").dblclick({ force: true });
-        this.Shared.textareaToInput.clear().type(`${monthlyRent}`).type("{enter}");
+        this.Page.monthlyRentCells.eq(rowNumber).should("not.have.class", "readOnly").dblclick({ force: true });
+        this.Page.textareaToInput.clear().type(`${monthlyRent}`).type("{enter}");
         const textToBe = numberWithCommas(monthlyRent.toFixed(2));
         this.Shared.verifyMonthlyRentByRowCellText(textToBe, rowNumber);
         return this;
     }
 
     enterAnnualRentByRowNumber(annualRent: number, rowNumber = 0): this {
-        this.Shared.annualRentCells.eq(rowNumber).should("not.have.class", "readOnly").dblclick({ force: true });
-        this.Shared.textareaToInput.clear().type(`${annualRent}`).type("{enter}");
+        this.Page.annualRentCells.eq(rowNumber).should("not.have.class", "readOnly").dblclick({ force: true });
+        this.Page.textareaToInput.clear().type(`${annualRent}`).type("{enter}");
         const textToBe = numberWithCommas(annualRent.toFixed(2));
         this.Shared.verifyAnnualRentCellTextByRow(textToBe, rowNumber);
         return this;
@@ -189,7 +189,7 @@ class CommercialRentRollActions extends CommercialRentRollSharedComponent<typeof
 
     verifyMonthlyRentTotal(leaseStatuses: Array<BoweryReports.LeaseStatus>, monthlyRents: Array<number>): this {
         const textToBe = CommercialRentRollActions.getTotalRentTextToBe(leaseStatuses, monthlyRents);
-        this.Shared.monthlyRentTotal.should("have.text", `$${textToBe}`);
+        this.Page.monthlyRentTotal.should("have.text", `$${textToBe}`);
         return this;
     }
 
@@ -216,7 +216,7 @@ class CommercialRentRollActions extends CommercialRentRollSharedComponent<typeof
 
     verifyAnnuallyRentTotal(leaseStatuses: Array<BoweryReports.LeaseStatus>, annualRents: Array<number>): this {
         const textToBe = CommercialRentRollActions.getTotalRentTextToBe(leaseStatuses, annualRents);
-        this.Shared.annualRentTotal.should("have.text", `$${textToBe}`);
+        this.Page.annualRentTotal.should("have.text", `$${textToBe}`);
         return this;
     }
 
@@ -231,71 +231,71 @@ class CommercialRentRollActions extends CommercialRentRollSharedComponent<typeof
             totalAnnualRent += perSfRents[i] * squareFootList[i];
         }
         const textToBe = numberWithCommas((totalAnnualRent / totalSF).toFixed(2));
-        this.Shared.rentPerSFAnnuallyTotal.should("have.text", `$${textToBe}`);
+        this.Page.rentPerSFAnnuallyTotal.should("have.text", `$${textToBe}`);
         return this;
     }
 
     editDiscussion(newCommentary: string, clearText = true): this {
-        this.Shared.modifiedLabel.should("not.exist");
+        this.Page.modifiedLabel.should("not.exist");
         this.Shared.clickEditDiscussionButton()
             .editDiscussionTextArea(newCommentary, clearText);
         this.clickSaveDiscussionButton()
             .verifyCommentarySavedText(newCommentary);
-        this.Shared.modifiedLabel.should("exist");
+        this.Page.modifiedLabel.should("exist");
         return this;
     }
 
     clickSaveDiscussionButton(): this {
-        this.Shared.saveDiscussionChanges.click();
+        this.Page.saveDiscussionChanges.click();
         return this;
     }
 
     clickRevertToOriginalButton(): this {
-        this.Shared.revertToOriginalButton.click();
-        this.Shared.changesLostModalHeader.should("exist");
+        this.Page.revertToOriginalButton.click();
+        this.Page.changesLostModalHeader.should("exist");
         return this;
     }
 
     verifyCommentarySavedText(textToBe: string): this {
-        this.Shared.commentaryText.should("have.text", textToBe);
+        this.Page.commentaryText.should("have.text", textToBe);
         return this;
     }
 
     verifyCommentaryTextNotContains(text: string): this {
-        this.Shared.commentaryText.should("not.contain.text", text);
+        this.Page.commentaryText.should("not.contain.text", text);
         return this;
     }
 
     verifyCommentaryTextBoxText(textToBe: string): this {
-        this.Shared.discussionTextInput.should("have.text", textToBe);
+        this.Page.discussionTextInput.should("have.text", textToBe);
         return this;
     }
 
     verifyCommentaryTextBoxNotHaveText(text: string): this {
-        this.Shared.discussionTextInput.should("not.have.text", text);
+        this.Page.discussionTextInput.should("not.have.text", text);
         return this;
     }
 
     clickCloseButton(): this {
-        this.Shared.closeButton.click();
+        this.Page.closeButton.click();
         return this;
     }
 
     clickCancelRevertButton(): this {
-        this.Shared.cancelRevertButton.click();
+        this.Page.cancelRevertButton.click();
         return this;
     }
 
     clickYesRevertButton(): this {
-        this.Shared.yesRevertButton.click();
+        this.Page.yesRevertButton.click();
         return this;
     }
 
     verifyEditDiscussionButtonsDisplayed(): this {
         rentRollPage.cancelDiscussionEdit.should("be.visible");
-        this.Shared.editDiscussionButton.should("not.exist");
-        this.Shared.revertToOriginalButton.should("be.visible");
-        this.Shared.saveDiscussionChanges.should("be.visible");
+        this.Page.editDiscussionButton.should("not.exist");
+        this.Page.revertToOriginalButton.should("be.visible");
+        this.Page.saveDiscussionChanges.should("be.visible");
         return this;
     }
 

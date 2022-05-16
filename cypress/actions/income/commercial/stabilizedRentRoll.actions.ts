@@ -1,5 +1,5 @@
 import stabRentRollPage from "../../../pages/income/commercial/stabilizedRentRoll.page";
-import CommercialRentRollSharedComponent from "../../../shared_components/commercialRentRoll.shared";
+import CommercialRentRollSharedComponent from "../../shared_components/commercialRentRoll.shared.actions";
 
 class StabilizedRentRollActions extends CommercialRentRollSharedComponent<typeof stabRentRollPage> {
 
