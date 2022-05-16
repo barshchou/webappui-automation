@@ -1,6 +1,7 @@
+import { Tag } from './../../../../utils/tags.utils';
 import { Report } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
-import {createReport, deleteReport} from "../../../../actions/base/baseTest.actions";
+import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import testData from '../../../../fixtures/not_full_reports/report/client/QA-4626.fixture';
 
 describe("Verify the display of the Client page.", () => {
@@ -8,7 +9,7 @@ describe("Verify the display of the Client page.", () => {
         createReport(testData.reportCreationData);
     });
 
-    it("Test body", () => {
+    it("Test body", { tags:[ Tag.report, Tag.client, "test_client" ] }, () => {
         cy.stepInfo("1. Proceed to the Report > Client page.");
         _NavigationSection.navigateToClientPage();
 

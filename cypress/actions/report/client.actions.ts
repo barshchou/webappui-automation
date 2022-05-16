@@ -20,7 +20,7 @@ class ClientActions extends BaseActionsExt<typeof clientPage> {
     }
 
     enterNycbApplicationNumber(name:string): ClientActions{
-        clientPage.nycbApplicationField.clear().type(name).should("have.value", name);
+        clientPage.nycbApplicationNumber.clear().type(name).should("have.value", name);
         return this;
     }
 

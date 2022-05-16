@@ -1,9 +1,10 @@
+import { Tag } from './../../../../utils/tags.utils';
 import { PreviewEdit, Report } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
-import {createReport, deleteReport} from "../../../../actions/base/baseTest.actions";
+import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import testData from '../../../../fixtures/not_full_reports/report/client/QA-4630.fixture';
 
-describe("Verify the functionality of the NYCB Application No. (optional) field", () => {
+describe("Verify the functionality of the NYCB Application No. (optional) field", { tags:[ Tag.report, Tag.client, "test_client" ] }, () => {
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
     });
@@ -19,7 +20,7 @@ describe("Verify the functionality of the NYCB Application No. (optional) field"
         Report._Client.enterNycbApplicationNumber(testData.clientFileNumber);
 
         cy.stepInfo("3. Try to copy-paste any value into the Client File Number field, save it.");
-        Report._Client.Page.nycbApplicationField.invoke("val", testData.clientFileNumber);
+        Report._Client.Page.nycbApplicationNumber.invoke("val", testData.clientFileNumber);
 
         cy.stepInfo("4. Proceed to the Preview & Edit > Cover page and verify that the Client from the previous step is displayed in the APPRAISAL REPORT section.");
         _NavigationSection.navigateToCoverPage();

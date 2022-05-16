@@ -1,9 +1,10 @@
+import { Tag } from './../../../../utils/tags.utils';
 import { Report } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
-import {createReport, deleteReport} from "../../../../actions/base/baseTest.actions";
+import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import testData from '../../../../fixtures/not_full_reports/report/client/QA-4632.fixture';
 
-describe("Verify the Cancel button functionality for Intended User and Identification of the Client sections", () => {
+describe("Verify the Cancel button functionality for Intended User and Identification of the Client sections", { tags:[ Tag.report, Tag.client, "test_client" ] }, () => {
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
     });

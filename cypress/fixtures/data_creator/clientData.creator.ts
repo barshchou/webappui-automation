@@ -94,7 +94,7 @@ class ClientCreator {
         return new
         ClientCreationData( this.prefix, this.title, 
             this.firstName, this.middleInitial, 
-            this.lastName,this.clientSuffix,
+            this.lastName, this.clientSuffix,
             this.clientCompanyName, this.streetAddress,
             this.city, this.state, this.zipCode);
     }

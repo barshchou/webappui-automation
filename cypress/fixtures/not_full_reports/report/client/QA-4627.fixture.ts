@@ -3,7 +3,7 @@ import ClientCreationData from "../../../data_creator/clientData.creator";
 
 
 export default {
-    reportCreationData: ReportDataCreator.getDefaultReportData("4627"),
+    reportCreationData: ReportDataCreator.getReportData("4627"),
     clientCreationData: ClientCreationData.getDefaultClientData(),
     shortTextToType: "Harl",
     textToType: "Harley Young",

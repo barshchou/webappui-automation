@@ -1,13 +1,14 @@
+import { Tag } from './../../../../utils/tags.utils';
 import { isProdEnv } from './../../../../../utils/env.utils';
 import { Organization, PreviewEdit } from './../../../../actions/index';
 import { Report } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
-import {createReport, deleteReport} from "../../../../actions/base/baseTest.actions";
+import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import testData from '../../../../fixtures/not_full_reports/report/client/QA-4627.fixture';
 
 const conditionalDescribe = isProdEnv() ? describe.skip : describe;
 
-conditionalDescribe("[QA-4627] Verify the functionality of the Client field.", () => {
+conditionalDescribe("[QA-4627] Verify the functionality of the Client field.", { tags:[ Tag.report, Tag.client, "test_client" ] }, () => {
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
     });
