@@ -1,9 +1,8 @@
 import rentRollPage from "../../../pages/income/commercial/rentRoll.page";
 import { numberWithCommas } from "../../../../utils/numbers.utils";
-import BaseActionsExt from "../../base/base.actions.ext";
 import CommercialRentRollSharedComponent from "../../../shared_components/commercialRentRoll.shared";
 
-class CommercialRentRollActions extends BaseActionsExt<typeof rentRollPage> {
+class CommercialRentRollActions extends CommercialRentRollSharedComponent<typeof rentRollPage> {
 
     /**
      * @description Contains elements and actions, identical for In-Place Rent Roll and Stabilized Rent Roll pages
@@ -236,18 +235,13 @@ class CommercialRentRollActions extends BaseActionsExt<typeof rentRollPage> {
         return this;
     }
 
-    editDiscussion(newCommentary: string): this {
+    editDiscussion(newCommentary: string, clearText = true): this {
         this.Shared.modifiedLabel.should("not.exist");
-        this.Shared.clickEditDiscussionButton();
-        this.clearAndEnterNewCommentary(newCommentary)
-            .clickSaveDiscussionButton()
+        this.Shared.clickEditDiscussionButton()
+            .editDiscussionTextArea(newCommentary, clearText);
+        this.clickSaveDiscussionButton()
             .verifyCommentarySavedText(newCommentary);
         this.Shared.modifiedLabel.should("exist");
-        return this;
-    }
-
-    clearAndEnterNewCommentary(commentary: string): this {
-        this.Shared.discussionTextInput.clear().type(commentary);
         return this;
     }
 

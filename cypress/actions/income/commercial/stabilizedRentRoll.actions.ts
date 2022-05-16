@@ -45,12 +45,6 @@ class StabilizedRentRollActions extends CommercialRentRollSharedComponent<typeof
         return this;
     }
 
-    typeStabilizedCommercialIncomeTextArea(value: string, clearText = false): StabilizedRentRollActions {
-        clearText ? stabRentRollPage.stabilizedCommercialIncomeTextArea.clear().type(value) :
-            stabRentRollPage.stabilizedCommercialIncomeTextArea.type(value);
-        return this;
-    }
-
     verifyStabilizedCommercialIncomeTextArea(verifyAreaValue: string): StabilizedRentRollActions {
         stabRentRollPage.stabilizedCommercialIncomeTextArea.should("contain.text", verifyAreaValue);
         return this;

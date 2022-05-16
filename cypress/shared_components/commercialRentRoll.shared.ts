@@ -283,6 +283,12 @@ class CommercialRentRollSharedComponent<T extends BasePage> extends BaseActions 
         this.Page.formEditBtn(0).click({ force: true });
         return this;
     }
+
+    editDiscussionTextArea(value: string, clearText = true): this {
+        clearText ? this.commentaryText.clear().type(value) :
+            this.commentaryText.type(value);
+        return this;
+    }
 }
 
 export default CommercialRentRollSharedComponent;
