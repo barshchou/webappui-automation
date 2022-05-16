@@ -24,7 +24,7 @@ const checkChipsOptions = (suggestion: string,optionName: string, textBoxName: "
 /**
  * ernst: WARN: remove skip after fixing this test
  */
-describe.skip("Verify the Client Guidelines Discussion on the page", () => {
+describe("Verify the Client Guidelines Discussion on the page", () => {
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
     });
