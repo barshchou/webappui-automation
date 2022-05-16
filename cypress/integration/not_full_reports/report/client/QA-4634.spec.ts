@@ -2,8 +2,11 @@ import { Report } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import testData from '../../../../fixtures/not_full_reports/report/client/QA-4634.fixture';
+import { Tag } from "../../../../utils/tags.utils";
 
-describe("Verify the 'Changes will be lost' modal functionality for Intended User and Identification of the Client sections", () => {
+describe("Verify the 'Changes will be lost' modal functionality for Intended User and Identification of the Client sections", 
+    { tags: [ Tag.report, Tag.client ] }, () => {
+        
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
     });
@@ -43,7 +46,6 @@ describe("Verify the 'Changes will be lost' modal functionality for Intended Use
         cy.stepInfo("5. Click on the X icon and verify that the modal is closed and no changes are applied.");
         Report._Client.verifyIntendedUserTextBox(testData.verifyAreaValue)
             .verifyIdentificationOfTheClientTextBox(testData.verifyAreaValue);
-            
 
         cy.stepInfo("6. Click on the Revert to Original button again.");
         Report._Client.enterIntendedUserTextBox(testData.textToType)
