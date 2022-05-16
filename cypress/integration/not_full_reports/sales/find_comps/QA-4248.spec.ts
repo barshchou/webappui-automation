@@ -1,5 +1,5 @@
 import Homepage from "../../../../actions/base/homepage.actions";
-import testData from "../../../../fixtures/not_full_reports/sales/find_comps/QA-4248.fixture";
+import fixture from "../../../../fixtures/not_full_reports/sales/find_comps/QA-4248.fixture";
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Sales from "../../../../actions/sales/sales.manager";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
@@ -9,12 +9,13 @@ import { Alias } from "../../../../utils/alias.utils";
 describe("Verify the Comps can be added by entering the existing Report ID in the modal", 
 { tags:[ Tag.comp_plex, Tag.sales, Tag.find_comps ] }, () => {
     before("Login, create report", () => {
-        createReport(testData.reportCreationData);
+        fixture.setupInterceptions();
+        createReport(fixture.reportCreationData);
     });
 
     it("Test body", () => {
         NavigationSection.navigateToFindComps();
-        Sales.FindComps.selectCompFromMapByAddress(testData.comparable.address)
+        Sales.FindComps.selectCompFromMapByAddress(fixture.comparable.address)
             .clickSaveContinueButton();
         Sales.CreateCompMap.verifyPageOpened();
         cy.get(`@${Alias.reportId}`).then(reportId => {
@@ -22,7 +23,7 @@ describe("Verify the Comps can be added by entering the existing Report ID in th
             Sales.CreateCompMap.returnToHomePage();
             Homepage.verifyThatPageIsOpened()
                 .verifyProgressBarNotExist();
-            Homepage.createReport(testData.reportCreationData);
+            Homepage.createReport(fixture.reportCreationData);
             NavigationSection.navigateToFindComps();
             Sales.FindComps.clickImportComparableButton()
                 .enterReportToSearchComp(<any>reportId);
@@ -32,10 +33,10 @@ describe("Verify the Comps can be added by entering the existing Report ID in th
             .selectAllCompsForImport()
             .checkSelectedSingleSalesComps()
             .clickImportCompsFromReportButton();
-        Sales.FindComps.verifyAddedCompAddress(testData.comparable.address);
+        Sales.FindComps.verifyAddedCompAddress(fixture.comparable.address);
         cy.pause();
-        deleteReport(testData.reportCreationData.reportNumber);
+        deleteReport(fixture.reportCreationData.reportNumber);
         cy.reload();
-        Homepage.deleteReport(testData.reportCreationData.reportNumber);
+        Homepage.deleteReport(fixture.reportCreationData.reportNumber);
     });
 });

@@ -77,7 +77,6 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
             //data.findSingleSalesComp
         });
         findCompsPage.getRemoveCompFromMapButtonByAddress(address).should("exist");
-        cy.pause();
         return this;
     }
 

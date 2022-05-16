@@ -230,13 +230,6 @@ class NavigationSectionActions extends BaseActions {
     }
 
     navigateToFindComps() {
-        cy.intercept('POST', '/graphql', req => {
-            aliasQuery(req, "findSalesComps");
-            aliasQuery(req, "findSingleSalesComp");
-            aliasQuery(req, "updateAppraisal");
-            aliasQuery(req, "findSalesCompsByEventIds");
-        });
-
         this.clickSalesButton()
             .clickFindCompsButton()
             .clickYesButton();        
