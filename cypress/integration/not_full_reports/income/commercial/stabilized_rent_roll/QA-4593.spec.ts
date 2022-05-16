@@ -4,7 +4,9 @@ import { createReport, deleteReport } from "../../../../../actions/base/baseTest
 import testData from "../../../../../fixtures/not_full_reports/income/commercial/stabilized_rent_roll/QA-4593.fixture";
 import { Tag } from "../../../../../utils/tags.utils";
 
-describe(`Verify the Save button functionality on the Stabilized Rent Roll page`, { tags:[ Tag.income, Tag.commercial, Tag.stabilized_rent_roll ] }, () => {
+describe(`Verify the Save button functionality on the Stabilized Rent Roll page`, 
+    { tags:[ Tag.income, Tag.commercial, Tag.stabilized_rent_roll ] }, () => {
+        
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
     });
