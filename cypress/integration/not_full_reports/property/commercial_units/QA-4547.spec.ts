@@ -19,11 +19,11 @@ describe("Verify the Save button functionality for Commercial Unit SF Discussion
             _NavigationSection.navigateToCommercialUnits();
             Property._CommercialUnits.verifyThatPageIsOpened();
             Property._CommercialUnits.Page.commercialUnitSFDiscussionText(testData.text).should('not.exist');
-            Property._CommercialUnits.Page.editButton.scrollIntoView().click();
+            Property._CommercialUnits.Page.formEditBtn(0).scrollIntoView().click();
 
             cy.stepInfo("2. Edit comment and click on the Save button.");
             Property._CommercialUnits.Page.commercialUnitSFDiscussionTextArea.clear().type(testData.text);
-            Property._CommercialUnits.Page.SaveBtnUnderDiscussionTextArea.first().click();
+            Property._CommercialUnits.Page.formSaveBtn(0).first().click();
 
             cy.stepInfo("3. Verify that the changes from step 2 are saved.");
             Property._CommercialUnits.Page.commercialUnitSFDiscussionText(testData.text).should('exist');
