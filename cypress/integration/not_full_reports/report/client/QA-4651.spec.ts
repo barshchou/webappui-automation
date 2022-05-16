@@ -1,9 +1,9 @@
-import {createReport, deleteReport} from "../../../../actions/base/baseTest.actions";
+import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import ReportDataCreator from "../../../../fixtures/data_creator/reportData.creator";
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Report from "../../../../actions/report/report.manager";
 
-const reportCreationData = ReportDataCreator.getDefaultReportData("4651");
+const reportCreationData = ReportDataCreator.getReportData("4651");
 
 describe("Verify the Back button functionality on the Client page", () => {
     before("Login, create report", () => {

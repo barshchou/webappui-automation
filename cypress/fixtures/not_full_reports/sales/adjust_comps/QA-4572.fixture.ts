@@ -1,7 +1,7 @@
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 
 export default {
-    reportCreationData: ReportDataCreator.getDefaultReportData("4572"),
+    reportCreationData: ReportDataCreator.getReportData("4572"),
     comparableFirst: {
         address: "200 West 78 Street",
         sizeAdjustment: 20,
@@ -10,7 +10,7 @@ export default {
         otherNewAdjustment: -20
     },
     comparableSecond: {
-        address: "146-34 45 Avenue",
+        address: "1522 Myrtle Avenue",
         sizeAdjustment: 40,
         conditionAdjustment: -10,
         otherAdjustment: -50,
@@ -18,4 +18,4 @@ export default {
     },
     otherAdjustmentName: "Other Adjustment",
     otherAdjustmentNewName: "test other adj name"
-}
+};

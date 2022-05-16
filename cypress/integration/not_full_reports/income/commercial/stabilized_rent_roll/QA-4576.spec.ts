@@ -1,14 +1,14 @@
 /// <reference types="cypress-grep" />
 
 import testData from "../../../../../fixtures/not_full_reports/income/commercial/stabilized_rent_roll/QA-4576.fixture";
-import {createReport, deleteReport} from "../../../../../actions/base/baseTest.actions";
+import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
 import { Base, Property, Income } from "../../../../../actions";
 import { _NavigationSection } from "../../../../../actions/base";
 import { getTodayDateString } from "../../../../../../utils/date.utils";
 import stabilizedRentRollPage from "../../../../../pages/income/commercial/stabilizedRentRoll.page";
 
 
-describe("Verify the display of the Stabilized Rent Roll page", () => {
+describe.skip("Verify the display of the Stabilized Rent Roll page", () => {
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
     });
@@ -25,9 +25,8 @@ describe("Verify the display of the Stabilized Rent Roll page", () => {
         .verifyProgressBarNotExist();
 
         Income._CommercialManager.StabilizedRentRoll.Actions.matchElementSnapshot(
-            stabilizedRentRollPage.stabelizedRRPanel,
+            stabilizedRentRollPage.stabilizedRRPanel,
             testData.snapshotNames.stabilizedRRPanel,
-            {capture:"fullPage", scale: true}
         );
 
 
@@ -45,7 +44,7 @@ describe("Verify the display of the Stabilized Rent Roll page", () => {
         _NavigationSection.navigateToCommercialInPlaceRentRoll();
         for (let index = 0; index < testData.numberOfCommercialUnits; index++) {
             Income._CommercialManager.InPlaceRentRoll
-            .enterTenantNameByRowNumber(testData.newTenantName,index)
+            .enterTenantNameByRowNumber(testData.newTenantName, index)
             .chooseLeaseStatusByRowNumber("Occupied", index)
             .enterLeaseDateByRowNumber("Start", getTodayDateString("/"), index)
             .verifyLeaseDateByRowNumber("Start", testData.occupiedLease, getTodayDateString("/"), index)
@@ -59,7 +58,7 @@ describe("Verify the display of the Stabilized Rent Roll page", () => {
         .clickCommercialStabRentRollButton()
         .verifyProgressBarNotExist();
         Income._CommercialManager.StabilizedRentRoll.Actions.matchElementSnapshot(
-            stabilizedRentRollPage.stabelizedRRPanel,
+            stabilizedRentRollPage.stabilizedRRPanel,
             testData.snapshotNames.stabilizedRRPanel_severalUnits,
         );
         

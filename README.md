@@ -4,11 +4,16 @@
 
 - [About](#about)
 - [Getting Started](#getting_started)
+  - [System requirements](#system_requirements)
   - [General prerequisites](#general_prerequisites)
   - [Setup](#setup)
 - [Usage](#usage)
+  - [Development flow](#development_flow)
   - [CLI_flags](#cli_flags)
   - [GH Actions debug](#gh_actions_debug)
+  - [Validation of export](#export_validation)
+- [Useful VS Code extensions](#vs_code_extensions)
+
 ## About <a id="about"></a>
 This repository contains the code of end-to-end tests, written in  Cypress framework (https://docs.cypress.io/guides/getting-started/writing-your-first-test). Main pattern used for this project - is Page Object. We describe elements of pages and the way they can behave (*pages* folder). We describe actions, which we use to interact with pages (*actions* folder). And describe test specs (*integration* folder) - things/flows we want to test and verify on our pages, using actions to put the app in a required state.
 
@@ -29,9 +34,13 @@ There are several main folders of these project:
 
 ## Getting started <a id="getting_started"></a>
 
+### System requirements <a id="system_requirements"></a>
+- (Windows users) [WSL2](https://docs.microsoft.com/en-us/windows/wsl/install) (Windows Subsystem for Linux). We use *Ubuntu 20.04* and you need to [use version 2 of WSL](https://docs.microsoft.com/en-us/windows/wsl/install#upgrade-version-from-wsl-1-to-wsl-2).
+- Docker. Get it for your system from [here](https://docs.docker.com/get-docker/).If you use Windows - please, [use WSL 2 based engine](https://docs.docker.com/desktop/windows/wsl/) for Docker.
+
 ### General prerequisites <a id="general_prerequisites"></a>
 1. Install `nvm`([macOS/Linux](https://github.com/nvm-sh/nvm), [Windows](https://github.com/coreybutler/nvm-windows)).
-2. Install lts node version. Run `nvm install lts`.
+2. **WARN: please, use lts version of node 16. , currently (05.05.22) - lts/gallium*** Install lts node version. Run `nvm install lts`.
 3. Run `nvm use lts` to use it.
 
 ### Setup <a id="setup"></a>
@@ -51,6 +60,22 @@ General way to run all cypress tests to run `npx cypress run` command. This comm
 
 `package.json` file in `"scripts":` property contains ready to use commands for some mostly used cases. For example `npm run cy:open` command will open cypress GUI, `npm run cy:chrome_headed_prod_api` will run all tests in chrome headed browser at production environment, using Api login method etc.
 
+### Development flow <a id="development_flow"></a>
+
+We don't have strict rules for our development flow. Everything is pretty standard: 
+  1. You branching from master (**always push empty branch after its creation, it will be a signal that you at least started work on a ticket**)
+  2. If you develop test / framework feature - name branch in next notation **feature/your_name/jira_ticket_id** (for example, feature/Ernst/QA-666)
+  - If you developing hotfix -> **hotfix/your_name/ticket_name_OR_hotfix_name**
+  3. Assign Ernst and Vlad as a reviewers (for now, later review can do anyone else). **Get all approvals.** (for the start, it is important for us to check all new code since we want to follow already declared codestyle rules and structure). 
+  4. If you want to add improvements into someone's PR - branch from feature branch, make changes and create to PR into parents branch (naming: **feature/your_name/ticket_id__pr_changes**). *You can commit into someones branch*, **but you are allowed to do that in exceptional cases** (for example, PR almost merged and you need to run and apply ESLint changes) 
+  5. When you got approvals - merge branch by yourself or ping someone who was a reviewer.
+
+  **NOTE**: 
+  - **please, while developing anything** - run `npm run tsc:watch` command in separate terminal instance (or split terminal into two). This will make TypeScript compilier keep an eye on your files changes and alert you when you forget, for example, update methods names after merge.
+  - please, when writing commit message - add something meaningful, rather than "added some code". Good commit message: "[QA-something] added new actions into module_name" / "[misc] linter fixes". Bad commit message: "upd" / "fix" 
+  - (ernst): I do not force to use small commits instead of big ones, but when commit something - think what you would do with the big one if you have to revert / reset or cherry-pick it. 
+     
+
 ### CLI flags <a id="cli_flags"></a>
 
 About cypress command line and it's general flags can be read [here](https://docs.cypress.io/guides/guides/command-line).
@@ -66,3 +91,30 @@ Example of combining previous variables: `npx cypress run --env url=dev,loginMet
 If your task will be connected with GH Actions changes or you would like to check how your newly implemnted test can behave in GH Actions - you should use [act](https://github.com/nektos/act), rather then commit a lot of times into the repo and trigger the real pipeline.
 
 Main flow of how we use act for this repo - described in txt file in [these notes](./.act/install_notes.txt).
+
+### Validation of export <a id="export_validation"></a>
+
+Since we have a lot of test cases which has validation of Report Export (it will `*.docx` file) - we had to find the way we could automate these checks somehow. 
+
+We found a way we can somehow automate it - **we convert `docx` file into html and then open it in Cypress**. 
+
+You can refer to [QA-4053 spec](./cypress/integration/not_full_reports/sales/value_conclusion/QA-4053.spec.ts) to see the code of such tests.
+
+**Flow for ReportExport checks**
+
+1. (1st `it` in `describe`) Your test creates report.
+2. (1st `it` in `describe`) Your test downloads report. Report has `job_id.docx` name and stored in `cypress/download`. Inside method `downloadAndConvertDocxReport()` we call several tasks (code which executes in nodejs): wait until file showed up in filesystem -> we convert docx into html -> we rename docx file from `job_id.docx` to `QA-test_case_number.docx` -> we rename html file from `job_id.html` to `QA-test_case_number.html`
+3. (2nd `it` in `describe`) Your test opens generated html report in Cypress (Cypress *can't* (well, until [release 9.6.0](https://github.com/cypress-io/cypress/releases/tag/v9.6.0)) [visit other origin url](https://docs.cypress.io/guides/guides/web-security#Same-superdomain-per-test))
+4. (2nd `it` in `describe`) Your test makes traverse and assert on generated html report. 
+
+## Useful VS Code extensions <a id="vs_code_extensions"></a>
+
+WARN: if you use Prettier - **make sure to disable it**, since it has conflicts with ESLint.
+
+List of useful extensions:
+  - ESLint
+  - GitGraph
+  - LiveShare
+  - GitLens
+  - GitHub Pull Requests
+  - Jira and Bitbucket (you will use only Jira integration)

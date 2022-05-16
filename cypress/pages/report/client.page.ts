@@ -22,21 +22,19 @@ class ClientPage extends BasePage{
 
     get revertToGeneratedButton() {return cy.get("[data-qa=generated-commentary-revert-btn]");}
 
-    get EditIntendedUserBtn(){ 
-        return cy.xpath('//*[contains(text(),"Edit")]').eq(0);
+    get intendedUserTextBox(){
+        return cy.xpath("//*[.='Intended User']//following::*[@data-slate-editor][1]");
     }
 
-    get EditIdentificationOfClientBtn(){
-        return cy.xpath('//*[contains(text(),"Edit")]').eq(0);
+    get identificationOfClientTextBox(){
+        return cy.xpath("//*[.='Identification of the Client']//following::*[@data-slate-editor][1]");
     }
+    
+    get narrativeSuggestionsList() {return cy.get("[data-qa='narrative-suggestions-list'] > ul");}
 
-    get IntendedUserTextBox(){
-        return cy.get('[data-slate-editor="true"]').eq(0);
-    }
-
-    get IdentificationOfClientTextBox(){
-        return cy.get('[data-slate-editor="true"]').eq(1);
-    } 
+    chipModified(index?: number) {return cy.get('[ui="indicator"]').eq((index !== 0) ? index : 0);}
+    
+    get modalWindow() {return cy.get("[role='dialog']");}
 }
 
 export default new ClientPage();

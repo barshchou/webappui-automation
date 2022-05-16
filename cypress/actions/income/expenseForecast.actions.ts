@@ -1,18 +1,12 @@
-import BaseActions from "../base/base.actions";
 import expenseForecastPage from "../../pages/income/expenseForecast.page";
-import {getNumberFromDollarNumberWithCommas, numberWithCommas} from "../../../utils/numbers.utils";
+import { getNumberFromDollarNumberWithCommas, numberWithCommas } from "../../../utils/numbers.utils";
+import BaseActionsExt from "../base/base.actions.ext";
 
 type ForecastItem = BoweryReports.ForecastItem;
 type BuildingDescription = BoweryReports.BuildingDescription;
-type Comparable = {address: string, location?: string, period?: string, squareFeet: number, resUnits?: number,
-    insurance?: number, electricity?: number, repairsAndMaintenance?: number, payrollAndBenefits?: number,
-    generalAndAdministrative?: number, management?: number, toe?: string};
-type ExpenseForecastData = {effectiveGrossIncome: number, management: {basis: string}, percentOfEgi: number}
+type Comparable = BoweryReports.Comparable;
 
-class ExpenseForecastActions extends BaseActions {
-    get Page(){
-        return expenseForecastPage;
-    }
+class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> {
     
     chooseForecastItemBasis(forecastItem: ForecastItem): ExpenseForecastActions {
         expenseForecastPage.getForecastItemBasisRadio(forecastItem.name).check(forecastItem.basis);
@@ -25,10 +19,12 @@ class ExpenseForecastActions extends BaseActions {
         return this;
     }
 
-    enterForecastItemForecast(forecastItem: ForecastItem): ExpenseForecastActions {
+    enterForecastItemForecast(forecastItem: ForecastItem, customCategory = false, index = 0): ExpenseForecastActions {
         const valueToBe = `$${numberWithCommas(forecastItem.forecast)}`;
-        expenseForecastPage.getForecastItemForecastInput(forecastItem.name).clear()
+        if (forecastItem.name != "total") {
+            expenseForecastPage.getForecastItemForecastInput(forecastItem.name, customCategory, index).clear()
             .type(`${forecastItem.forecast}`).should("have.value", valueToBe);
+        }
         return this;
     }
 
@@ -177,14 +173,14 @@ class ExpenseForecastActions extends BaseActions {
         return this;
     }
 
-    getManagementForecastEgiPercent(expenseForecastData: ExpenseForecastData, currentDescription: BuildingDescription): string {
+    getManagementForecastEgiPercent(expenseForecastData: ForecastItem, effectiveGrossIncomeData: number, percentOfEgi: number, currentDescription: BuildingDescription): string {
         let perBasisEgi;
-        if (expenseForecastData.management.basis === "unit") {
-            perBasisEgi = expenseForecastData.effectiveGrossIncome / currentDescription.numberOfUnits;
+        if (expenseForecastData.basis === "unit") {
+            perBasisEgi = effectiveGrossIncomeData / currentDescription.numberOfUnits;
         } else {
-            perBasisEgi = expenseForecastData.effectiveGrossIncome / currentDescription.grossArea;
+            perBasisEgi = effectiveGrossIncomeData / currentDescription.grossArea;
         }
-        return (perBasisEgi / 100 * expenseForecastData.percentOfEgi).toFixed(2);
+        return (perBasisEgi / 100 * percentOfEgi).toFixed(2);
     }
 
     verifyToeCompMinPerBasis(basisValue: string, comparables: Array<Comparable>): ExpenseForecastActions {
@@ -256,7 +252,12 @@ class ExpenseForecastActions extends BaseActions {
         return this;
     }
 
-    editTOECommentary(newText: string, isWithClear: boolean = false): ExpenseForecastActions {
+    verifyForecastCommentary(textToBe: string, forecastItem: BoweryReports.ForecastItem): ExpenseForecastActions {
+        expenseForecastPage.getExpenseCommentary(this.getItemNameForAverage(forecastItem.name)).should("contain.text", textToBe);
+        return this;
+    }
+
+    editTOECommentary(newText: string, isWithClear = false): ExpenseForecastActions {
         expenseForecastPage.toeCommentaryEditButton.click();
         if (isWithClear) {
             expenseForecastPage.toeCommentary.clear();
@@ -267,18 +268,54 @@ class ExpenseForecastActions extends BaseActions {
         return this;
     }
 
+    editExpenseForecastCommentary(newText: string, forecastItem: BoweryReports.ForecastItem, isWithClear = false, ): ExpenseForecastActions {
+        let item = this.getItemNameForAverage(forecastItem.name);
+        expenseForecastPage.getExpenseCommentaryEditButton(item).click();
+        if (isWithClear) {
+            expenseForecastPage.getExpenseCommentary(item).clear();
+        }
+        expenseForecastPage.getExpenseCommentary(item).type(newText);
+        expenseForecastPage.getExpenseCommentarySaveButton(item).click();
+        expenseForecastPage.getExpenseCommentaryModified(item).should("exist");
+        return this;
+    }
+
+    revertToOriginalExpenseForecastCommentary(forecastItem: BoweryReports.ForecastItem): ExpenseForecastActions {
+        let item = this.getItemNameForAverage(forecastItem.name);
+        expenseForecastPage.getExpenseCommentaryEditButton(item).click();
+        expenseForecastPage.getExpenseCommentaryRevertToOriginal(item).click();
+        this.verifyProgressBarNotExist();
+        expenseForecastPage.expenseConfirmRevertButton.click();
+        expenseForecastPage.getExpenseCommentarySaveButton(item).click();
+        return this;
+    }
+
+    switchExpenseForecastBasis(forecastItem: ForecastItem): ExpenseForecastActions {
+        expenseForecastPage.getElementBasisToSwitch(forecastItem.name, forecastItem.basis).click();
+        return this;
+    }
+
     hideExpenseForecastHeader(): ExpenseForecastActions {
         // ernst: A few hacks to get clear Insurance_Forecast_Item component without overlayed headers
+        cy.log('hide');
         if(Cypress.browser.isHeadless == true){
-            expenseForecastPage.Header.then(elem=>{
+            expenseForecastPage.Header.then(elem => {
                 elem.hide();
             });
-            expenseForecastPage.ExpenseForecastHeader.then(elem=>{
+            expenseForecastPage.expenseForecastHeader.then(elem => {
                 elem.hide();
             });
         }
         return this;
     }
+
+    addCustomExpenseCategory(categoryName): ExpenseForecastActions {
+        expenseForecastPage.createNewCategoryButton.click();
+        expenseForecastPage.newCategoryExpenseName.clear().type(categoryName);
+        this.Page.formSaveBtn(1).click();
+        this.verifyProgressBarNotExist();
+        return this;
+    }
 }
 
-export default new ExpenseForecastActions();
+export default new ExpenseForecastActions(expenseForecastPage);

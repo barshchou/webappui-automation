@@ -1,6 +1,6 @@
 import BaseActions from "../base/base.actions";
 import valueConclusionPage from "../../pages/sales/valueConclusion.page";
-import {numberWithCommas} from "../../../utils/numbers.utils";
+import { numberWithCommas } from "../../../utils/numbers.utils";
 
 class ValueConclusionActions extends BaseActions {
 
@@ -379,6 +379,16 @@ class ValueConclusionActions extends BaseActions {
     verifyAsStabilizedCommissionFeeAmount(amountToBe) {
         const valueToBe = typeof amountToBe === "string" ? amountToBe : `-$${numberWithCommas(amountToBe)}`;
         valueConclusionPage.asStabilizedCommissionFeeAmount.should("have.value", valueToBe);
+        return this;
+    }
+    
+    /**
+     * @param {string | number} amountToBe
+     * @returns {ValueConclusionActions}
+     */
+    verifyNumberOfUnitsAmount(amountToBe) {
+        const valueToBe = typeof amountToBe === "string" ? amountToBe : `-$${numberWithCommas(amountToBe)}`;
+        valueConclusionPage.numberOfUnitsAmount.should("have.text", valueToBe);
         return this;
     }
 }

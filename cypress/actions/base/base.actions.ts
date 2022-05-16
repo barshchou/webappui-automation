@@ -4,7 +4,7 @@
 
 
 import { Options } from "cypress-image-snapshot";
-import {getEnvUrl} from "../../../utils/env.utils";
+import { getEnvUrl } from "../../../utils/env.utils";
 
 export default class BaseActions {
 
@@ -75,9 +75,10 @@ export default class BaseActions {
      * @param snapshotName - 
      * @see https://github.com/jaredpalmer/cypress-image-snapshot
      */
-    matchElementSnapshot(element:Cypress.Chainable, snapshotName: string, options?: Options){
+
+    matchElementSnapshot(element:Cypress.Chainable, snapshotName: string, options: Options = { allowSizeMismatch: true } ){
         if(Cypress.browser.isHeadless == true) {
-            element.matchImageSnapshot(snapshotName,options);
+            element.matchImageSnapshot(snapshotName, options);
             return this; 
         } 
     }

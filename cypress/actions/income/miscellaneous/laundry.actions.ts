@@ -1,8 +1,19 @@
 import BaseActions from "../../base/base.actions";
 import laundryPage from "../../../pages/income/miscellaneous/laundry.page";
-import {numberWithCommas} from "../../../../utils/numbers.utils";
+import { numberWithCommas } from "../../../../utils/numbers.utils";
 
 class LaundryActions extends BaseActions{
+
+
+    verifyThatPageIsOpened(): this {
+        laundryPage.laundryheaderSection.should("be.visible");
+        cy.url().then(url => {
+            let urlObj = new URL(url);
+            cy.log("Check whether current URL ends with '/laundry-income'");
+            cy.wrap(urlObj.pathname.endsWith("/laundry-income")).should("be.true");
+        });
+        return this;
+    }
 
     verifyNoLaundryButtonExists() {
         laundryPage.noLaundryButton.should("exist");

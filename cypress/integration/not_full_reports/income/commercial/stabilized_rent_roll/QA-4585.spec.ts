@@ -1,12 +1,13 @@
 import testData from "../../../../../fixtures/not_full_reports/income/commercial/stabilized_rent_roll/QA-4585.fixture";
-import {createReport, deleteReport} from "../../../../../actions/base/baseTest.actions";
+import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../../actions/base/navigationSection.actions";
 import Property from "../../../../../actions/property/property.manager";
 import Income from "../../../../../actions/income/income.manager";
+import { Tag } from "../../../../../utils/tags.utils";
 
-describe("Verify the Commercial Stabilized Rent Roll table", () => {
+describe("Verify the Commercial Stabilized Rent Roll table", { tags: [ Tag.income, Tag.commercial, Tag.stabilized_rent_roll ] }, () => {
     before("Login, create report", () => {
-        cy.stepInfo(`1. Create a mixed report with several Commercial Units (e.g. 2).`)
+        cy.stepInfo(`1. Create a mixed report with several Commercial Units (e.g. 2).`);
         createReport(testData.reportCreationData);
     });
 
@@ -37,8 +38,8 @@ describe("Verify the Commercial Stabilized Rent Roll table", () => {
             }
         });
 
-        cy.stepInfo(`4. Proceed to the Income > Commercial > Stabilized Rent Roll page.`)
-        NavigationSection.openCommercialStabilizedRentRollInCommercial()
+        cy.stepInfo(`4. Proceed to the Income > Commercial > Stabilized Rent Roll page.`);
+        NavigationSection.navigateToStabilizedRentRollInCommercial()
             .verifyProgressBarNotExist();
 
         cy.stepInfo(`
@@ -49,7 +50,7 @@ describe("Verify the Commercial Stabilized Rent Roll table", () => {
             .verifyTenantNames(testData.tenantNames, testData.leaseStatuses)
             .verifyUseCells(testData.useTexts)
             .verifySFCells(testData.listOfUnitsSF)
-            .verifyAnnualRentByRow(testData.annualRent,1)
+            .verifyAnnualRentByRow(testData.annualRent, 1)
             .verifyMonthlyRentByRow(testData.monthlyRent, 1)
             .verifyAnnuallyRentPsf(testData.rentsPsf[1], 1)
             .clickSaveButton()
@@ -58,18 +59,18 @@ describe("Verify the Commercial Stabilized Rent Roll table", () => {
         cy.stepInfo(`
         6. Proceed to the  Income > 
         Commercial > In-Place Rent Roll page, change any data (e.g. Tenant), save it
-        `)
+        `);
         NavigationSection.openInPlaceRentRollInCommercial(false)
             .verifyProgressBarNotExist();
         Income.Commercial.InPlaceRentRoll.enterTenantNameByRowNumber(testData.newTenantName, 1, testData.leaseStatuses[1]);
         
         cy.stepInfo(`7. Proceed to the Income > Commercial > Stabilized Rent Roll page.`);
-        NavigationSection.openCommercialStabilizedRentRollInCommercial()
+        NavigationSection.navigateToStabilizedRentRollInCommercial()
             .verifyProgressBarNotExist();
 
         cy.stepInfo(`
         8. Verify that the data from step 5 is also changed.
-        `)
+        `);
         Income.Commercial.StabilizedRentRoll.verifyTenantNameByRow(testData.newTenantName, testData.leaseStatuses[1], 1)
             .clickSaveButton()
             .verifyProgressBarNotExist();
@@ -77,21 +78,21 @@ describe("Verify the Commercial Stabilized Rent Roll table", () => {
         cy.stepInfo(`
         9. Proceed to the  Income > 
         Commercial > In-Place Rent Roll page, remove any data (e.g. Lease Start Date), save it.
-        `)
+        `);
         NavigationSection.openInPlaceRentRollInCommercial(false)
             .verifyProgressBarNotExist();
         Income.Commercial.InPlaceRentRoll.deleteTenantNameByRowNumber(1);
         
         cy.stepInfo(`
         10. Proceed to the Income > Commercial > Stabilized Rent Roll page.
-        `)
-        NavigationSection.openCommercialStabilizedRentRollInCommercial()
+        `);
+        NavigationSection.navigateToStabilizedRentRollInCommercial()
             .verifyProgressBarNotExist();
-        Income.Commercial.StabilizedRentRoll.verifyTenantNameByRow("", testData.leaseStatuses[1],1);
+        Income.Commercial.StabilizedRentRoll.verifyTenantNameByRow("", testData.leaseStatuses[1], 1);
         
         cy.stepInfo(`
         11. Proceed to the Income > Commercial > Stabilized Rent Roll page.
-        `)
+        `);
         deleteReport(testData.reportCreationData.reportNumber);
     });
 });

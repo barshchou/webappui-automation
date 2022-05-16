@@ -1,6 +1,6 @@
 import BaseActions from "../base/base.actions";
 import propertySalePage from "../../pages/final/propertySaleConclusion.page";
-import {getNumberFromDollarNumberWithCommas, numberWithCommas} from "../../../utils/numbers.utils";
+import { getNumberFromDollarNumberWithCommas, numberWithCommas } from "../../../utils/numbers.utils";
 
 class PropertySaleConclusionActions extends BaseActions {
 
