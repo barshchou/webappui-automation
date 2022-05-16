@@ -92,8 +92,12 @@ class TaxInfoPage extends BasePage {
     get appraiserOpTaxLiabTaxRateValueCell() {return cy.get(`[data-qa="Appraiser's Opinion-taxRate-value-cell"]`);}
 
     get appraiserOpTaxAssessedValueCell() {return cy.get(`[data-qa="Appraiser's Opinion-taxableAssessedValue-value-cell"]`);}
-
-    get taxSummaryDiscussionCommentary() {return cy.get("[data-qa^='taxSummaryDiscussion.commentary']");}
+    
+    get taxSummaryDiscussionCommentary() {return cy.xpath("//*[.='Tax Calculation Discussion']//following::*[@data-slate-editor][1]");}
+    
+    get taxSummaryDiscussionTooltip() {return cy.get("svg[data-icon=info-circle]");}
+    
+    get taxSummaryDiscussionTitle() {return cy.xpath("//h6[contains(text(),'Tax Calculation Discussion')]");}
 }
 
 export default new TaxInfoPage();
