@@ -5,7 +5,7 @@ import { Income, Property } from "../../../../actions";
 import { Tag } from "../../../../utils/tags.utils";
 
 describe("Verify the functionality of the Use* radio button", 
-{ tags:[ Tag.property, Tag.commercial_units ] }, () => {
+    { tags:[ Tag.property, Tag.commercial_units ] }, () => {
 
     beforeEach("Login, create report", () => {
         createReport(testData.reportCreationData);
