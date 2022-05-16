@@ -24,5 +24,4 @@ export enum Tag {
     pro_forma = "@pro_forma",
     preview_edit = "@preview_edit",
     introduction = "@introduction",
-    adjust_comps = "@adjust_comps"
 }

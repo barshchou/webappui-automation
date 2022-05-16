@@ -8,7 +8,7 @@ import { isEndsWithDecimal } from "../../../../../utils/html.utils";
 import { Tag } from "../../../../../utils/tags.utils";
 
 describe("Verify the Commercial Stabilized Rent Roll table", 
-    { tags: [ Tag.income, Tag.commercial, Tag.stabilized_rent_roll ] }, () => {
+    { tags: [ Tag.income, Tag.commercial, Tag.stabilized_rent_roll, Tag.check_export ] }, () => {
         
     it("Test body", () => {  
         createReport(testData.reportCreationData);
