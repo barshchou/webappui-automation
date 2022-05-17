@@ -46,4 +46,8 @@ export default class BasePage {
         return cy.xpath("//button[.='Cancel']")
             .eq((index !== 0) ? index : 0);
     }
+
+    get modifiedLabel() {
+        return cy.xpath("//span[contains(text(), 'Modified')]");
+    }
 }
