@@ -22,7 +22,7 @@ describe("Verify the suggested text dropdown in the new narrative component adde
             .clickNarrativeSuggestions(testData.unchangeRennovation);
 
         cy.stepInfo("3. Verify that the following text appears.");
-        Income._CommercialManager.InPlaceRentRoll.verifyInPlaceCommercialIncomeTextArea(testData.verifyAreaValue);
+        Income._CommercialManager.InPlaceRentRoll.verifyCommentaryContainsText(testData.verifyAreaValue);
 
         deleteReport(testData.reportCreationData.reportNumber);
     });

@@ -38,27 +38,19 @@ class CommercialRentRollSharedComponentPage extends BasePage {
 
     get editDiscussionButton() {return cy.xpath("//button[.='Edit']");}
 
-    get discussionTextInput() {return cy.get("[role=textbox]");}
-
-    get saveDiscussionChanges() {return cy.xpath("//button[.='Save' and not(contains(@data-qa, 'form-save-btn'))]");}
-
     get modifiedLabel() {return cy.contains("Modified");}
-
-    get revertToOriginalButton() {return cy.xpath("//button[.='Revert to Original']");}
 
     get changesLostModalHeader() {return cy.contains("Changes will be lost");}
 
     get commentaryText() {return cy.get("div[data-slate-editor]");}
 
-    get yesRevertButton() {return cy.contains("Yes, revert");}
-
-    get closeButton() {return cy.get("[aria-label=close]");}
-
-    get cancelRevertButton() {return this.yesRevertButton.prev("button");}
+    get cancelRevertButton() {return this.formYesRevertBtn.prev("button");}
 
     get rentPerSfPerMonthColumnName() {return cy.contains("Rent PSF/Month");}
 
     get narrativeSuggestionsList() {return cy.get("[data-qa='narrative-suggestions-list'] > ul");}
+
+    get discussionTooltip() {return cy.get("[data-icon=info-circle]");}
 
 }
 

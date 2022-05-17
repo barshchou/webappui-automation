@@ -231,6 +231,93 @@ class CommercialRentRollSharedComponent<T extends CommercialRentRollSharedCompon
             this.Page.commentaryText.type(value);
         return this;
     }
+
+    clickSaveDiscussionButton(): this {
+        this.Page.formSaveBtn(0).click();
+        return this;
+    }
+
+    verifyCommentaryFullText(textToBe: string): this {
+        this.Page.commentaryText.should("have.text", textToBe);
+        return this;
+    }
+
+    verifyCommentaryContainsText(verifyAreaValue: string): this {
+        this.Page.commentaryText.should("contain.text", verifyAreaValue);
+        return this;
+    }
+
+    editDiscussion(newCommentary: string, clearText = true, isFullTextVerification = true): this {
+        this.Page.modifiedLabel.should("not.exist");
+        this.clickEditDiscussionButton()
+            .editDiscussionTextArea(newCommentary, clearText)
+            .clickSaveDiscussionButton();
+        if (isFullTextVerification) {
+            this.verifyCommentaryFullText(newCommentary);
+        } else {
+            this.verifyCommentaryContainsText(newCommentary);
+        }
+        this.Page.modifiedLabel.should("exist");
+        return this;
+    }
+
+    clickRevertToOriginalButton(): this {
+        this.Page.formRevertToOriginalBtn(0).click();
+        this.Page.changesLostModalHeader.should("exist");
+        return this;
+    }
+
+    verifyCommentaryTextNotContains(text: string): this {
+        this.Page.commentaryText.should("not.contain.text", text);
+        return this;
+    }
+
+    verifyCommentaryTextBoxNotHaveText(text: string): this {
+        this.Page.commentaryText.should("not.have.text", text);
+        return this;
+    }
+
+    clickYesRevertButton(): this {
+        this.Page.formYesRevertBtn.click();
+        return this;
+    }
+
+    clickCloseButton(): this {
+        this.Page.CloseIcon.click();
+        return this;
+    }
+
+    clickCancelRevertButton(): this {
+        this.Page.cancelRevertButton.click();
+        return this;
+    }
+
+    verifyEditDiscussionButtonsDisplayed(): this {
+        this.Page.formCancelButton(0).should("be.visible");
+        this.Page.editDiscussionButton.should("not.exist");
+        this.Page.formRevertToOriginalBtn(0).should("be.visible");
+        this.Page.formSaveBtn(0).should("be.visible");
+        return this;
+    }
+
+    clickCancelDiscussionEditButton(): this {
+        this.Page.formCancelButton(0).click();
+        return this;
+    }
+
+    revertToOriginalCommentary(): this {
+        this.clickEditDiscussionButton()
+            .clickRevertToOriginalButton()
+            .verifyProgressBarNotExist()
+            .clickYesRevertButton()
+            .clickSaveDiscussionButton();
+        return this;
+    }
+
+    verifyModifiedLabelExist(): this {
+        this.Page.modifiedLabel.should('exist');
+        return this;
+    }
 }
 
 export default CommercialRentRollSharedComponent;

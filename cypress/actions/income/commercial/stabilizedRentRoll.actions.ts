@@ -31,41 +31,6 @@ class StabilizedRentRollActions extends CommercialRentRollSharedComponent<typeof
         return this;
     }
 
-    verifyStabilizedCommercialIncomeTextArea(verifyAreaValue: string): StabilizedRentRollActions {
-        stabRentRollPage.stabilizedCommercialIncomeTextArea.should("contain.text", verifyAreaValue);
-        return this;
-    }
-
-    saveStabilizedRentRollCommentary(): StabilizedRentRollActions {
-        stabRentRollPage.formSaveBtn(0).click();
-        return this;
-    }
-
-    verifyModifiedLabelExist(): StabilizedRentRollActions {
-        stabRentRollPage.stabilizedRentRollModifiedLabel.should('exist');
-        return this;
-    }
-
-    revertToOriginalStabilizedRentRollCommentary(): StabilizedRentRollActions {
-        this.clickEditDiscussionButton();
-        stabRentRollPage.formRevertToOriginalBtn(0).click();
-        this.verifyProgressBarNotExist();
-        stabRentRollPage.formYesRevertBtn.click();
-        this.saveStabilizedRentRollCommentary();
-        return this;
-    }
-
-    cancelStabilizedRentRollCommentary(): StabilizedRentRollActions {
-        stabRentRollPage.formCancelButton(0).click();
-        return this;
-    }
-
-    verifyStabRentRollCommentaryButtons(): StabilizedRentRollActions {
-        stabRentRollPage.formRevertToOriginalBtn(0).should('exist');
-        stabRentRollPage.formCancelButton(0).should('exist');
-        stabRentRollPage.formSaveBtn(0).should('exist');
-        return this;
-    }
 }
 
 export default new StabilizedRentRollActions(stabRentRollPage);

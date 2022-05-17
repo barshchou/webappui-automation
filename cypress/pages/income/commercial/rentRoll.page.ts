@@ -22,9 +22,6 @@ class CommercialRentRollPage extends CommercialRentRollSharedComponentPage {
 
     getLeaseStatusToChooseByValue(status) {return cy.xpath(`//li[.='${status}']`);}
 
-    get cancelDiscussionEdit() {return cy.xpath("//*[.='Current Commercial Income Discussion']//following::button[.='Cancel'][1]");}
-
-    get inPlaceCommercialIncomeTextArea() {return cy.xpath("//*[.='Current Commercial Income Discussion']//following::*[@data-slate-editor][1]");}
 }
 
 export default new CommercialRentRollPage();

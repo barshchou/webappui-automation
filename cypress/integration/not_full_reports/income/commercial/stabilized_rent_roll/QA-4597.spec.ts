@@ -28,7 +28,7 @@ describe(`Verify the suggested text dropdown in the new narrative component adde
 
         cy.stepInfo(`4. Verify that the following text appears: Upon renovation, the subject unit 
           count and gross building area will remain unchanged.`);
-        Income._CommercialManager.StabilizedRentRoll.verifyStabilizedCommercialIncomeTextArea(testData.verifyAreaValue);
+        Income._CommercialManager.StabilizedRentRoll.verifyCommentaryContainsText(testData.verifyAreaValue);
 
         deleteReport(testData.reportCreationData.reportNumber);
     });
