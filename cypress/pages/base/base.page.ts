@@ -47,7 +47,8 @@ export default class BasePage {
             .eq((index !== 0) ? index : 0);
     }
 
-    get modifiedLabel() {
-        return cy.xpath("//span[contains(text(), 'Modified')]");
+    modifiedLabel(index?: number) {
+        return cy.xpath("//span[contains(text(), 'Modified')]")
+        .eq((index !== 0) ? index : 0);
     }
 }
