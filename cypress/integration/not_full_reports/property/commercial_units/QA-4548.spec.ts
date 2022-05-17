@@ -18,7 +18,7 @@ describe("Verify the Modified label functionality",
             cy.stepInfo("1. Click on the Edit button on the Property > Commercial Units.");
             _NavigationSection.navigateToCommercialUnits();
             Property._CommercialUnits.verifyThatPageIsOpened();
-            Property._CommercialUnits.Page.modifiedButton.should('not.exist');
+            Property._CommercialUnits.Page.modifiedLabel.should('not.exist');
             Property._CommercialUnits.Page.formEditBtn(0).scrollIntoView().click();
 
             cy.stepInfo("2. Edit comment and click on the Save button.");
@@ -26,7 +26,7 @@ describe("Verify the Modified label functionality",
             Property._CommercialUnits.Page.formSaveBtn(0).first().click();
 
             cy.stepInfo("3.  Verify that the Modified label appears after saving changes made to commentary.");
-            Property._CommercialUnits.Page.modifiedButton.should('exist');
+            Property._CommercialUnits.Page.modifiedLabel.should('exist');
 
             deleteReport(testData.reportCreationData.reportNumber);
         });
