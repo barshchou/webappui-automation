@@ -35,6 +35,10 @@ class CommercialUnitsPage extends BasePage {
         return cy.xpath("//*[.='Commercial Unit SF Discussion']//following-sibling::div//child::*[@data-slate-editor]");
     }
 
+    get commercialUnitSFDiscussionTextAreaOpened() {
+        return cy.xpath("//*[.='Commercial Unit SF Discussion']//following-sibling::div//child::*[@data-slate-editor][@contenteditable='true']");
+    }
+
     commercialUnitSFDiscussionText(text: string) {
         return cy.xpath(`//span[@data-slate-string="true"][contains(text(), "${text}")]`);
     } 
