@@ -69,13 +69,17 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
 
     selectCompFromMapByAddress(address: string): FindCompsActions {
         findCompsPage.getSelectCompFromMapButtonByAddress(address).scrollIntoView().click({ force: true });
+        this.checkFindSingleSalesComp();
+        return this;
+    }
+
+    checkFindSingleSalesComp(){
         cy.wait(`@${Alias.gql.FindSingleSalesComp}`, { timeout:70000 }).then((interception) => {
             cy.log(interception.response.body.data.findSingleSalesComp.salesEventId);
             cy.wrap(interception.response.body.data.findSingleSalesComp.salesEventId)
             .as(Alias.salesEventId);
         });
-        findCompsPage.getRemoveCompFromMapButtonByAddress(address).should("exist");
-        return this;
+        return this; 
     }
 
     removeCompByAddress(address: string): FindCompsActions {
