@@ -1,4 +1,4 @@
-import findCompsPage from "../../pages/sales/findComps.page";
+import { findCompsPage } from "../../pages/sales/findComps.page";
 import { getUploadFixture } from "../../../utils/fixtures.utils";
 import { isNumber, numberWithCommas } from "../../../utils/numbers.utils";
 import BaseActionsExt from "../base/base.actions.ext";

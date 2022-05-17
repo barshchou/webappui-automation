@@ -1,4 +1,6 @@
+import { applyMixins } from "../../utils/object.utils";
 import BasePage from "../base/base.page";
+import PropertyInformationForm from "./drm/propertyInfo";
 
 class FindCompsPage extends BasePage {
     get createCompButton() {return cy.get("[data-qa=create-sales-comps-btn]");}
@@ -53,26 +55,14 @@ class FindCompsPage extends BasePage {
     get createCompSearchResults() {return cy.get("[data-qa=search-result-form] tbody tr");}
 
     get createNewCompButton() {return cy.xpath("//button[.='Create New']");}
-
-    get createCompNumberResidentialUnits() {return cy.xpath("//*[.='# Residential Units*']//child::input");}
-
-    get conditionDropdown() {return cy.xpath("//*[text()='Condition*']//following::*[@class='ant-select-selector'][1]");}
-
-    getDropdownOption(title: string) {return cy.get(`.ant-select-item-option[title='${title}']`);}
-
-    get errorMessageNewComp() {return cy.xpath("//*[text()='Required'][contains(@class, 'errorText')]");}
-
-    get newCompContinueButton() {return cy.xpath("//button[.='Continue']");}
-
-    get comparableTypeDropdown() {return cy.xpath("//*[text()='Comparable Type*']//following::*[@class='ant-select-selector'][1]");}
-
-    get createCompNumberCommercialUnits() {return cy.xpath("//*[text()='# Commercial Units*']//following::input[1]");}
-
-    get commercialAreaNewComp() {return cy.xpath("//*[text()='Commercial Area*']//following::input[1]");}
-
-    get netRentableAreaNewComp() {return cy.xpath("//*[.='Net Rentable Area']//child::input");}
-
-    get averageUnitSizeNewComp() {return cy.xpath("//*[.='Average Unit Size']//child::input");}
 }
 
-export default new FindCompsPage();
+/**
+ * ernst: We create an interface which merges
+ * the expected mixins with the same name as your base
+ */
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
+interface FindCompsPage extends PropertyInformationForm {}
+applyMixins(FindCompsPage, [ PropertyInformationForm ]);
+
+export const findCompsPage = new FindCompsPage();
