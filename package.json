@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "types": "./types/index.d.ts",
+  "types": "./cypress/types",
   "scripts": {
     "act:debug": "act -e ./.act/debug.json --secret-file ./.act/.secrets -j Not-full-reports-run-DEBUG",
     "cy:open": "npx cypress open",
@@ -19,7 +19,12 @@
     "cy:not_full_chrome_headed": "npx cypress run --spec cypress/integration/not_full_reports/** --browser chrome --headed",
     "cy:not_full_dev_chrome_headed": "npx cypress run --spec cypress/integration/not_full_reports/** --browser chrome --headed --env url=dev",
     "currents:run": "currents run --spec './cypress/integration/not_full_reports/**/*.spec.ts' --browser chrome --record --parallel",
-    "currents:run:debug": "currents run --browser chrome"
+    "currents:run:debug": "currents run --browser chrome",
+    "tsc:check": "npx tsc --project ./cypress/tsconfig.json --noEmit",
+    "tsc:watch":"npm run tsc:check -- --watch",
+    "lint:run": "eslint \"./**\"",
+    "lint:fix": "eslint \"./**\" --fix"
+
   },
   "repository": {
     "type": "git",
@@ -46,6 +51,8 @@
     "cypress-xpath": "^1.6.2",
     "eslint": "^7.32.0",
     "eslint-plugin-cypress": "^2.12.1",
+    "glob": "^8.0.1",
+    "mammoth": "^1.4.21",
     "typescript": "^4.5.5"
   }
 }

@@ -1,8 +1,32 @@
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 import {getCurrentMonthName, getYearFromDate} from "../../../../../utils/date.utils";
 
+const actualElectricityFixture: BoweryReports.ForecastItem = {
+    name: "electricity",
+    basis: "sf",
+    projection: 12000
+};
+
+const t12ElectricityItemFixture: BoweryReports.ForecastItem = {
+    name: "electricity",
+    basis: "sf",
+    projection: 13000
+};
+
+const historicalElectricityItemFixture: BoweryReports.ForecastItem = {
+    name: "electricity",
+    basis: "sf",
+    projection: 14000
+};
+
+const ownerProjectionElectricityItemFixture: BoweryReports.ForecastItem = {
+    name: "electricity",
+    basis: "sf",
+    projection: 15000
+};
+
 export default {
-    reportCreationData: ReportDataCreator.getDefaultReportData("4876"),
+    reportCreationData: ReportDataCreator.getReportData("4876"),
     buildingDescription: {
         grossArea: 5000,
         numberOfUnits: 1
@@ -31,25 +55,9 @@ export default {
         expenseYear: Number(getYearFromDate()) + 1,
         electricityExpense: 15000
     },
-    actualElectricityItem: {
-        name: "electricity",
-        basis: "sf",
-        projection: 12000
-    },
-    t12ElectricityItem: {
-        name: "electricity",
-        basis: "sf",
-        projection: 13000
-    },
-    historicalElectricityItem: {
-        name: "electricity",
-        basis: "sf",
-        projection: 14000
-    },
-    ownerProjectionElectricityItem: {
-        name: "electricity",
-        basis: "sf",
-        projection: 15000
-    },
+    actualElectricityItem: actualElectricityFixture,
+    t12ElectricityItem: t12ElectricityItemFixture,
+    historicalElectricityItem: historicalElectricityItemFixture,
+    ownerProjectionElectricityItem: ownerProjectionElectricityItemFixture,
     electricityCardSnapshotName: "Electricity_Forecast_Item_Component"
-}
+};

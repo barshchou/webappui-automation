@@ -79,3 +79,11 @@ jobs:
           name: failed-tests-DOM-snapshots
           path: cypress/gh_artifacts
           retention-days: 2
+      
+      - name: Archive downloaded Reports (html and docx)
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: downloaded-reports
+          path: cypress/downloads
+          retention-days: 2

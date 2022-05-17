@@ -6,7 +6,7 @@ const _fuelItem: BoweryReports.ForecastItem = {
 };
 
 export default {
-    reportCreationData: ReportDataCreator.getDefaultReportData("4942"),
+    reportCreationData: ReportDataCreator.getReportData("4942"),
     comparables: [
         {
             address: "6001 S Sacramento Ave",
