@@ -1,6 +1,7 @@
 import { applyMixins } from "../../utils/object.utils";
 import BasePage from "../base/base.page";
-import PropertyInformationForm from "./drm/propertyInfo";
+import PropertyInformationForm from "./drm/propertyInfo.page";
+import SaleInformationForm from "./drm/salesInfo.page";
 
 class FindCompsPage extends BasePage {
     get createCompButton() {return cy.get("[data-qa=create-sales-comps-btn]");}
@@ -62,7 +63,7 @@ class FindCompsPage extends BasePage {
  * the expected mixins with the same name as your base
  */
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
-interface FindCompsPage extends PropertyInformationForm {}
-applyMixins(FindCompsPage, [ PropertyInformationForm ]);
+interface FindCompsPage extends PropertyInformationForm, SaleInformationForm {}
+applyMixins(FindCompsPage, [ PropertyInformationForm, SaleInformationForm ]);
 
 export const findCompsPage = new FindCompsPage();
