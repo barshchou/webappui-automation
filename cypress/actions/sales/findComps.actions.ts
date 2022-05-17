@@ -4,6 +4,12 @@ import { isNumber, numberWithCommas } from "../../../utils/numbers.utils";
 import BaseActionsExt from "../base/base.actions.ext";
 
 class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
+    selectSource() {
+        this.Page.SourceInput.click();
+        this.Page.SourceList.should("be.visible");
+        this.Page.getSourceListOption().click();
+        return this;
+    }
 
     addExistingComparable(address: string): FindCompsActions {
         this.clickCreateCompButton()

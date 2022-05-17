@@ -21,10 +21,10 @@ conditionalDescribe("Verify the New Comp is created after clicking on 'Save&Clos
             .selectDropdownOptionNewComp(Sales._FindComps.Page.conditionDropdown, testData.condition);
 
         Sales._FindComps
-            .enterNumericInputNewComp(Sales._FindComps.Page.createCompNumberResidentialUnits, testData.spec4139.regularNum)
             .selectDropdownOptionNewComp(Sales._FindComps.Page.conditionDropdown, testData.condition);
 
         Sales._FindComps.Page.newCompContinueButton.should("be.enabled").click();
+        Sales._FindComps.selectSource();
 
         cy.pause();
 
