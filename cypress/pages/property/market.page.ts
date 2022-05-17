@@ -26,6 +26,8 @@ class MarketPage extends BasePage{
     get multifamilySubmarketAnalysisFile() {return cy.get("[data-qa=file-selection-multifamilySubmarketAnalysis-input] input");}
 
     get pulledFileConfirmation() {return cy.contains("This file will appear after the Introduction.");}
+
+    get exposureTimeDescription() {return cy.xpath("//*[.='Exposure Time Description']//following::div[@data-slate-editor]");}
 }
 
 export default new MarketPage();

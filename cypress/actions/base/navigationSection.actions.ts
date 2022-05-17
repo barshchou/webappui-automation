@@ -86,6 +86,11 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         return this;
     }
 
+    clickMarketButton() {
+        navigationSectionPage.marketButton.click();
+        return this;
+    }
+
     clickReportButton() {
         navigationSectionPage.reportButton.click();
         return this;
@@ -155,6 +160,13 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
     navigateToPropertySummary() {
         this.clickPropertyButton()
             .clickSummaryButton()
+            .clickYesButton();
+        return this;
+    }
+
+    navigateToPropertyMarket(): NavigationSectionActions {
+        this.clickPropertyButton()
+            .clickMarketButton()
             .clickYesButton();
         return this;
     }
