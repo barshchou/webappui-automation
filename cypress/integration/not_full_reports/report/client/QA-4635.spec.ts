@@ -1,3 +1,4 @@
+import { Tag } from './../../../../utils/tags.utils';
 import { Report } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
@@ -17,7 +18,7 @@ describe("Verify the Save button functionality for Intended User and Identificat
 
         Report._Client.verifyProgressBarNotExist()
             .Page.formEditBtn(0).click();
-            Report._Client.Page.formEditBtn(0).click();
+        Report._Client.Page.formEditBtn(0).click();
 
         cy.stepInfo("2. Edit comment and click on the Save button for both sections.");
         Report._Client.enterIntendedUserTextBox(testData.textToType)
@@ -25,7 +26,7 @@ describe("Verify the Save button functionality for Intended User and Identificat
             .enterIdentificationOfTheClientTextBox(testData.textToType)
             .clickNarrativeSuggestions(testData.verifyListValue, 1)
             .Page.formSaveBtn(0).click();
-            Report._Client.Page.formSaveBtn(0).click();
+        Report._Client.Page.formSaveBtn(0).click();
             
         cy.stepInfo("3. Verify that the changes from step 2 are saved.");
         Report._Client.verifyIntendedUserTextBox(testData.verifyAreaValue)

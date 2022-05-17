@@ -1,3 +1,4 @@
+import { Tag } from './../../../../utils/tags.utils';
 import { Report } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
@@ -18,7 +19,7 @@ describe(`Verify the suggested text dropdown in the new narrative component adde
 
         cy.stepInfo('2. Click on the Edit button for Intended User and Identification of the Client sections.');
         Report._Client.verifyProgressBarNotExist()
-       .Page.formEditBtn(0).click();
+            .Page.formEditBtn(0).click();
        Report._Client.Page.formEditBtn(0).click();
 
         cy.stepInfo('3. Enter the “=F“ and select the \'Foreclosure sale\' option for both sections.');
