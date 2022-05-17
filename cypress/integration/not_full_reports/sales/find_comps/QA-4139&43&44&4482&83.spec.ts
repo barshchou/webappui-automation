@@ -17,7 +17,7 @@ conditionalDescribe("Group of tests for numeric inputs at create comp modal",
         createReport(testData.reportCreationData);
         cy.stepInfo("Navigate to FindComps page and create new comp");
         _NavigationSection.navigateToFindComps();
-        Sales._FindComps.openAddNewComparableFormSearchResult(testData.compAddress)
+        Sales._FindComps.openAddNewComparableFormSearchResult(testData.compAddress, 1)
             .selectDropdownOptionNewComp(Sales._FindComps.Page.conditionDropdown, testData.condition);
     });
 
