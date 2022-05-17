@@ -17,8 +17,8 @@ describe("Verify the functionality of Edit and Cancel commentary buttons",
             .verifyProgressBarNotExist();
         Income.Commercial.InPlaceRentRoll.clickEditDiscussionButton()
             .verifyEditDiscussionButtonsDisplayed()
-            .clearAndEnterNewCommentary(testData.newCommentary)
-            .clickCancelDiscussionEditButton()
+            .editDiscussionTextArea(testData.newCommentary);
+        Income.Commercial.InPlaceRentRoll.clickCancelDiscussionEditButton()
             .verifyCommentaryTextNotContains(testData.newCommentary);
         deleteReport(testData.reportCreationData.reportNumber);
     });
