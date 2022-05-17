@@ -1,6 +1,6 @@
 import BaseActions from "../base/base.actions";
 import taxInfoPage from "../../pages/income/taxInfo.page";
-import {getNumberFromDollarNumberWithCommas, numberWithCommas} from "../../../utils/numbers.utils";
+import { getNumberFromDollarNumberWithCommas, numberWithCommas } from "../../../utils/numbers.utils";
 
 class TaxInfoActions extends BaseActions {
 
@@ -533,7 +533,17 @@ class TaxInfoActions extends BaseActions {
      * @returns {TaxInfoActions}
      */
     verifyTaxSummaryCommentary(commToBe) {
-        taxInfoPage.taxSummaryDiscussionCommentary.should("have.text", commToBe);
+        taxInfoPage.taxSummaryDiscussionCommentary.should("exist").should("have.text", commToBe);
+        return this;
+    }
+
+    verifyTaxSummaryTooltip(tooltipToBe) {
+        taxInfoPage.taxSummaryDiscussionTooltip.should("exist").should("have.attr", "aria-label", tooltipToBe);
+        return this;
+    }
+
+    verifyTaxSummaryDiscussionTitle(titleToBe) {
+        taxInfoPage.taxSummaryDiscussionTitle.should("exist").should("have.text", titleToBe);
         return this;
     }
 }

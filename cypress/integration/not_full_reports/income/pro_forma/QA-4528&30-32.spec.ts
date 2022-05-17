@@ -1,10 +1,13 @@
 import testData from "../../../../fixtures/not_full_reports/income/pro_forma/QA-4528&30-32.fixture";
-import {createReport, deleteReport} from "../../../../actions/base/baseTest.actions";
+import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Property from "../../../../actions/property/property.manager";
 import Income from "../../../../actions/income/income.manager";
+import { Tag } from "../../../../utils/tags.utils";
 
-describe("Residential V/C Loss @ X% row", () => {
+describe("Residential V/C Loss @ X% row", 
+    { tags:[ Tag.income, Tag.pro_forma ] }, () => {
+        
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
     });

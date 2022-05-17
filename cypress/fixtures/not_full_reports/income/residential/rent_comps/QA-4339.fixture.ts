@@ -10,7 +10,7 @@ const formDataFixture = () => {
         infoSource: "bowerySubject",
         bedrooms: 5,
         rooms: 7,
-        amenitiesQaAttr: ["none", "backyard", "balcony", "roof", "terrace", "buildingLaundry", "unitLaundry"],
+        amenitiesQaAttr: [ "none", "backyard", "balcony", "roof", "terrace", "buildingLaundry", "unitLaundry" ],
         sourceInfoCheck: "Bowery Subject"
     };
 };

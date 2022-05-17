@@ -3,11 +3,12 @@
 import testData from "../../../../fixtures/not_full_reports/income/expense_forecast/QA-4889.fixture";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import Income from "../../../../actions/income/income.manager";
-import {_NavigationSection} from "../../../../actions/base";
+import { _NavigationSection } from "../../../../actions/base";
+import { Tag } from "../../../../utils/tags.utils";
 
 
-describe("Comparable Min, Max, Avg values for Electricity Per Unit are correctly calculated and displayed", () => {
-
+describe("Comparable Min, Max, Avg values for Electricity Per Unit are correctly calculated and displayed", 
+  { tags:[ Tag.snapshot_tests, Tag.expense_forecast, Tag.income ] }, () => {
 
   before("Login, create report", () => {
     createReport(testData.reportCreationData);
@@ -44,7 +45,7 @@ describe("Comparable Min, Max, Avg values for Electricity Per Unit are correctly
       .hideExpenseForecastHeader();
 
     Income.ExpenseForecast.Actions.matchElementSnapshot(
-      Income.ExpenseForecast.Page.electricityCard, testData.electricityCardSnapshotName, { padding: [10, 100] });
+      Income.ExpenseForecast.Page.electricityCard, testData.electricityCardSnapshotName, { padding: [ 10, 100 ] });
 
     cy.stepInfo("6. Delete report");
     deleteReport(testData.reportCreationData.reportNumber);

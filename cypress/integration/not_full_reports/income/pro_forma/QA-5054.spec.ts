@@ -1,11 +1,13 @@
 import testData from "../../../../fixtures/not_full_reports/income/pro_forma/QA-5054.fixture";
-import {createReport, deleteReport} from "../../../../actions/base/baseTest.actions";
+import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import { Income } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
 import enums from "../../../../enums/enums";
+import { Tag } from "../../../../utils/tags.utils";
 
+describe("[QA-5054] Appraiser's Forecast of Custom Expense Forecast is included in calculation", 
+    { tags:[ Tag.income, Tag.pro_forma ] }, () => {
 
-describe("[QA-5054] Appraiser's Forecast of Custom Expense Forecast is included in calculation", () => {
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
     });

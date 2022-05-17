@@ -1,10 +1,13 @@
 import testData from "../../../../../fixtures/not_full_reports/income/residential/in_place_rent_roll/QA-4205.fixture";
-import {createReport, deleteReport} from "../../../../../actions/base/baseTest.actions";
+import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../../actions/base/navigationSection.actions";
 import Income from "../../../../../actions/income/income.manager";
 import Enums from "../../../../../enums/enums";
+import { Tag } from "../../../../../utils/tags.utils";
 
-describe("Verify the Rent Roll Options are present on the In-Place Rent Roll page", () => {
+describe("Verify the Rent Roll Options are present on the In-Place Rent Roll page", 
+    { tags:[ Tag.income, Tag.residential, Tag.in_place_rent_roll ] }, () => {
+        
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
     });

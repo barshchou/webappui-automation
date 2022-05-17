@@ -1,11 +1,14 @@
 import testData from "../../../../fixtures/not_full_reports/income/pro_forma/QA-4602&04&05&10.fixture";
-import {createReport, deleteReport} from "../../../../actions/base/baseTest.actions";
+import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Property from "../../../../actions/property/property.manager";
 import Income from "../../../../actions/income/income.manager";
 import ProFormaPage from "../../../../pages/income/proForma.page";
+import { Tag } from "../../../../utils/tags.utils";
 
-describe("Less [USE (Property>Commercial Units)] Commercial V/C Loss @ X% row", () => {
+describe("Less [USE (Property>Commercial Units)] Commercial V/C Loss @ X% row", 
+    { tags:[ Tag.income, Tag.pro_forma ] }, () => {
+        
     beforeEach("Login, create report", () => {
         createReport(testData.reportCreationData);
         NavigationSection.navigateToPropertySummary();

@@ -15,9 +15,17 @@ class AdjustCompsPage extends BasePage {
 
     getOtherAdjustmentNameInputField(index: number) {return cy.get(`[name='otherAdjustmentLabel[${index}]']`);}
 
-    getOtherAdjustmentNameSaveButton(index) {return cy.xpath(`//*[@name='otherAdjustmentLabel[${index}]']//following::button[1]`);}
+    getOtherUtilitiesAdjustmentNameInputField(index: number) {return cy.get(`[name='utilityAdjustmentLabel[${index}]']`);}
+
+    getOtherAdjustmentNameSaveButton(index: number) {return cy.xpath(`//*[@name='otherAdjustmentLabel[${index}]']//following::button[1]`);}
+
+    getOtherUtilitiesAdjustmentNameSaveButton(index: number) {return cy.xpath(`//*[@name='utilityAdjustmentLabel[${index}]']//following::button[1]`);}
 
     getOtherAdjustmentRowCells(rowNumber: number) {return cy.get(`[name*='adjustments.otherAdjustment[${rowNumber}]']`);}
+
+    getOtherUtilitiesAdjustmentRowCells(rowNumber: number) {return cy.get(`[name*='utilityAdjustment.otherAdjustment[${rowNumber}]']`);}
+
+    getUtilitiesAdjustmentsRowCells(utilityName: string) {return cy.get(`[name*='utilityAdjustment.${utilityName}']`);}
 
     get trendedPriceCells() {return cy.xpath("//*[starts-with(., 'Trended Price')]//following-sibling::td");}
 
@@ -25,13 +33,19 @@ class AdjustCompsPage extends BasePage {
 
     get netPropertyAdjustmentsCells() {return cy.xpath("//td[.='Net Property Adjustments']//following-sibling::td");}
 
-    getAllAdjustmentCellsByCompIndex(index) {return cy.get(`[name^='salesComps[${index}]']`);}
+    get totalUtilityAdjustmentsCells() {return cy.xpath("//td[.='Total Utility Adjustments']//following-sibling::td");}
+
+    getAllAdjustmentCellsByCompIndex(index: number) {return cy.get(`[name^='salesComps[${index}]']`);}
+
+    getAllUtilitiesAdjustmentCellsByCompIndex(index: number) {return cy.get(`[name^='salesComps[${index}].adjustments.utilityAdjustment']`);}
 
     get propertyRightsCells() {return cy.get("[name$=propertyRights]");}
 
     get addOtherAdjustmentButton() {return cy.get("[data-qa=otherAdjustmentLabel]");}
 
     get getComparisonPerUnitRadio() {return cy.xpath("//input[@value='Per Total Units']");}
+
+    get addCustomUtilitiesAdjustmentButton() {return cy.get("[data-qa=utilityAdjustmentLabel]");}
 }
 
 export default new AdjustCompsPage();

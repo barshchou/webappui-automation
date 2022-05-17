@@ -35,6 +35,14 @@ class AdjustCompsActions extends BaseActions {
         return this;
     }
 
+    editOtherUtilitiesAdjustmentRowName(prevName: string, newName: string, index = 0): AdjustCompsActions {
+        adjustCompsPage.getAdjustmentEditNameButton(prevName).click();
+        adjustCompsPage.getOtherUtilitiesAdjustmentNameInputField(index).clear().type(newName).should("have.value", newName);
+        adjustCompsPage.getOtherUtilitiesAdjustmentNameSaveButton(index).click();
+        this.verifyRowWithNameExists(newName);
+        return this;
+    }
+
     verifyRowWithNameExists(name: string): AdjustCompsActions {
         cy.contains("td", name).should("exist");
         return this;
@@ -57,13 +65,33 @@ class AdjustCompsActions extends BaseActions {
         return this;
     }
 
+    enterOtherUtilitiesAdjustmentByColumn(value: number | string, rowNumber = 0, index = 0): AdjustCompsActions {
+        adjustCompsPage.getOtherUtilitiesAdjustmentRowCells(rowNumber).eq(index).scrollIntoView().clear()
+            .type(`${value}{del}`).should("have.value", `${value}%`);
+        return this;
+    }
+
+    enterUtilitiesAdjustmentByColumn(adjustmentName: string[], value: number[], index = 0): AdjustCompsActions {
+        adjustmentName.forEach((adjustment, i) => {
+            adjustCompsPage.getUtilitiesAdjustmentsRowCells(adjustment).eq(index).scrollIntoView().clear()
+            .type(`${value[i]}{del}`).should("have.value", `${value[i]}%`);
+        });
+        
+        return this;
+    }
+
     clearOtherAdjustmentByColumn(rowNumber = 0, index = 0): AdjustCompsActions {
         adjustCompsPage.getOtherAdjustmentRowCells(rowNumber).eq(index).clear();
         return this;
     }
 
+    clearOtherUtilitiesAdjustmentByColumn(rowNumber = 0, index = 0): AdjustCompsActions {
+        adjustCompsPage.getOtherUtilitiesAdjustmentRowCells(rowNumber).eq(index).clear();
+        return this;
+    }
+
     clickAddOtherAdjustmentButton(): AdjustCompsActions {
-        adjustCompsPage.addOtherAdjustmentButton.click({force: true});
+        adjustCompsPage.addOtherAdjustmentButton.click({ force: true });
         return this;
     }
 
@@ -93,10 +121,20 @@ class AdjustCompsActions extends BaseActions {
 
     verifyNetPropertyAdjustmentsByCompIndex(index = 0): AdjustCompsActions {
         adjustCompsPage.getAllAdjustmentCellsByCompIndex(index).then(cells => {
-            const adjustmentsValues = Array.from(cells).filter((el, index) => index > 3)
-                .map(cell => cell.getAttribute("value")).map(cellText => Number(cellText.replace("%", "")));
+            const adjustmentsValues = Array.from(cells).map(cell => cell.getAttribute("value"))
+                .map(cellText => Number(cellText.replace("%", "")));
             const netPropAdjustmentsToBe = adjustmentsValues.reduce((sum, prevValue) => sum + prevValue, 0);
             adjustCompsPage.netPropertyAdjustmentsCells.eq(index).should("have.text", `${netPropAdjustmentsToBe}%`);
+        });
+        return this;
+    }
+
+    verifyTotalUtilitiesAdjustmentsByCompIndex(index = 0): AdjustCompsActions {
+        adjustCompsPage.getAllUtilitiesAdjustmentCellsByCompIndex(index).then(cells => {
+            const adjustmentsValues = Array.from(cells).map(cell => cell.getAttribute("value"))
+                .map(cellText => Number(cellText.replace("%", "")));
+            const netPropAdjustmentsToBe = adjustmentsValues.reduce((sum, prevValue) => sum + prevValue, 0);
+            adjustCompsPage.totalUtilityAdjustmentsCells.eq(index).should("have.text", `${netPropAdjustmentsToBe}%`);
         });
         return this;
     }
@@ -106,10 +144,17 @@ class AdjustCompsActions extends BaseActions {
         return this;
     }
 
-    clickComparisonPerUnitRadioButton(): AdjustCompsActions{
+    clickComparisonPerUnitRadioButton(): AdjustCompsActions {
         adjustCompsPage.getComparisonPerUnitRadio.click();
         return this;
     }
+
+    clickAddCustomUtilitiesAdjustment(): AdjustCompsActions {
+        adjustCompsPage.addCustomUtilitiesAdjustmentButton.click();
+        return this;
+    }
+
+
 }
 
 export default new AdjustCompsActions();

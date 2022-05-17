@@ -1,5 +1,5 @@
 import expenseForecastPage from "../../pages/income/expenseForecast.page";
-import {getNumberFromDollarNumberWithCommas, numberWithCommas} from "../../../utils/numbers.utils";
+import { getNumberFromDollarNumberWithCommas, numberWithCommas } from "../../../utils/numbers.utils";
 import BaseActionsExt from "../base/base.actions.ext";
 
 type ForecastItem = BoweryReports.ForecastItem;

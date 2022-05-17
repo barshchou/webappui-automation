@@ -5,7 +5,7 @@ import {
     isHalfDecimalPart,
     numberWithCommas
 } from "../../../../utils/numbers.utils";
-import {isProdEnv} from "../../../../utils/env.utils";
+import { isProdEnv } from "../../../../utils/env.utils";
 import BaseActionsExt from "../../base/base.actions.ext";
 
 class InPlaceRentRollActions extends BaseActionsExt<typeof rentRollPage> {
@@ -34,8 +34,8 @@ class InPlaceRentRollActions extends BaseActionsExt<typeof rentRollPage> {
 
     verifyNumberOfIsInspectedRows(unitsNumber: string | number): InPlaceRentRollActions {
         if (unitsNumber !== 0) {
-            rentRollPage.isInspectedColumnCells.first().scrollIntoView({duration: 2000});
-            rentRollPage.isInspectedColumnCells.last().scrollIntoView({duration: 2000});
+            rentRollPage.isInspectedColumnCells.first().scrollIntoView({ duration: 2000 });
+            rentRollPage.isInspectedColumnCells.last().scrollIntoView({ duration: 2000 });
         }
         rentRollPage.isInspectedColumnCells.should("have.length", unitsNumber);
         return this;
@@ -431,6 +431,14 @@ class InPlaceRentRollActions extends BaseActionsExt<typeof rentRollPage> {
         });
         return this;
     }
+
+    verifyRentRoomCellValues(monthlyRent = 0, rooms = 0, row = 0): InPlaceRentRollActions{
+        let defaultValues = "$0";
+        let textToBe = monthlyRent == 0 ? defaultValues : `$${numberWithCommas((monthlyRent / rooms).toFixed(0))}`; 
+        rentRollPage.rentRoomCell.eq(row).should('have.text', textToBe);
+        return this;
+    }
+    
 }
 
 export default new InPlaceRentRollActions(rentRollPage);

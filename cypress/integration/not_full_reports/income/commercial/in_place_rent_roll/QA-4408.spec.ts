@@ -2,9 +2,11 @@ import testData from "../../../../../fixtures/not_full_reports/income/commercial
 import Income from "../../../../../actions/income/income.manager";
 import NavigationSection from "../../../../../actions/base/navigationSection.actions";
 import Property from "../../../../../actions/property/property.manager";
-import {createReport, deleteReport} from "../../../../../actions/base/baseTest.actions";
+import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
+import { Tag } from "../../../../../utils/tags.utils";
 
-describe("Verify the Current Commercial Income Discussion on the In-Place Rent Roll page", () => {
+describe("Verify the Current Commercial Income Discussion on the In-Place Rent Roll page", 
+    { tags:[ Tag.income, Tag.commercial, Tag.in_place_rent_roll ] }, () => {
 
     beforeEach("Login, create report", () => {
         createReport(testData.reportCreationData);

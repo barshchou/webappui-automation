@@ -1,10 +1,13 @@
 import testData from "../../../../fixtures/not_full_reports/income/expense_forecast/QA-4862.fixture";
-import {createReport, deleteReport} from "../../../../actions/base/baseTest.actions";
+import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Property from "../../../../actions/property/property.manager";
 import Income from "../../../../actions/income/income.manager";
+import { Tag } from "../../../../utils/tags.utils";
 
-describe("Per Unit Appraiser's Forecast value for Insurance is correctly converted to Per SF value", () => {
+describe("Per Unit Appraiser's Forecast value for Insurance is correctly converted to Per SF value",
+    { tags: [ Tag.income, Tag.expense_forecast ] }, () => {
+        
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
     });

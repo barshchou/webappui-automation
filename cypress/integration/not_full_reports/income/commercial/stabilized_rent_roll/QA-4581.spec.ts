@@ -3,15 +3,15 @@
 import testData from "../../../../../fixtures/not_full_reports/income/commercial/stabilized_rent_roll/QA-4581.fixture";
 import { Base, Property, Income } from "../../../../../actions";
 import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
+import { Tag } from "../../../../../utils/tags.utils";
 
 
-describe("Verify the Save & Continue button functionality on the Stabilized Rent Roll page:", () => {
-
-
+describe("Verify the Save & Continue button functionality on the Stabilized Rent Roll page:", 
+    { tags: [ Tag.income, Tag.commercial, Tag.stabilized_rent_roll ] }, () => {
+        
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
     });
-
 
     it("Test body", () => {
 
@@ -24,7 +24,7 @@ describe("Verify the Save & Continue button functionality on the Stabilized Rent
             .chooseCheckBoxesIsInspectedFromList(testData.isInspected);
 
         cy.stepInfo(` 2. Verify the Save & Continue button is displayed on the Stabilized Rent Roll page `);
-        Base._NavigationSection.clickIncomeApproachButton().openCommercialStabilizedRentRollInCommercial();
+        Base._NavigationSection.clickIncomeApproachButton().navigateToStabilizedRentRollInCommercial();
         Income._CommercialManager.StabilizedRentRoll.verifyThatPageIsOpened()
         .Page.SaveAndContinueBtn.scrollIntoView().should('exist');
 

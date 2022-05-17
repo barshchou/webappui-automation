@@ -1,10 +1,13 @@
 import testData from "../../../../fixtures/not_full_reports/income/potential_gross_income/QA-4603.fixture";
-import {createReport, deleteReport} from "../../../../actions/base/baseTest.actions";
+import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Property from "../../../../actions/property/property.manager";
 import Income from "../../../../actions/income/income.manager";
+import { Tag } from "../../../../utils/tags.utils";
 
-describe("Commercial V/C Loss Discussion Generated Commentary", () => {
+describe("Commercial V/C Loss Discussion Generated Commentary", 
+    { tags:[ Tag.income, Tag.potential_gross_income ] }, () => {
+        
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
     });

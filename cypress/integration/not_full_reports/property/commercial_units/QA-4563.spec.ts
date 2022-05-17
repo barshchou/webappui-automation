@@ -1,9 +1,11 @@
 import testData from "../../../../fixtures/not_full_reports/property/commercial_units/QA-4563.fixture";
-import {createReport, deleteReport} from "../../../../actions/base/baseTest.actions";
-import {_NavigationSection} from "../../../../actions/base";
-import {Property} from "../../../../actions";
+import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { _NavigationSection } from "../../../../actions/base";
+import { Property } from "../../../../actions";
+import { Tag } from "../../../../utils/tags.utils";
 
-describe("Verify the functionality of the Grade checkbox", () => {
+describe("Verify the functionality of the Grade checkbox", 
+    { tags: [ Tag.property, Tag.commercial_units ] }, () => {
 
     before("Login, create report", () => {
         createReport(testData.reportCreationData);

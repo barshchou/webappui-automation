@@ -12,7 +12,7 @@ const getRandomInt = (min: number, max: number): number => {
     return Math.floor(Math.random() * (max - min)) + min; // Maximum not included, minimum included
 };
 
-const _verifyValues: Array<number> = [0, getRandomInt(1, 4999), 4999, 5000, 5001, 1000000];
+const _verifyValues: Array<number> = [ 0, getRandomInt(1, 4999), 4999, 5000, 5001, 1000000 ];
 
 export default {
     reportCreationData: _reportCreationData,

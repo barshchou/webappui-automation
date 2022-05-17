@@ -1,9 +1,11 @@
+import { Tag } from './../../../../utils/tags.utils';
 import testData from "../../../../fixtures/not_full_reports/property/commercial_units/QA-4569.fixture";
-import {createReport, deleteReport} from "../../../../actions/base/baseTest.actions";
-import {_NavigationSection} from "../../../../actions/base";
-import {Property} from "../../../../actions";
+import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { _NavigationSection } from "../../../../actions/base";
+import { Property } from "../../../../actions";
 
-describe("[QA-4569] Verify the Unsaved changes modal functionality on the Commercial Units page", () => {
+describe("[QA-4569] Verify the Unsaved changes modal functionality on the Commercial Units page",
+    { tags:[ Tag.property, Tag.commercial_units ] }, () => {
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
     });

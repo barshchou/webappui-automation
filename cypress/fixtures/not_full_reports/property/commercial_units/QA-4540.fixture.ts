@@ -10,6 +10,6 @@ const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreat
 export default {
     reportCreationData: _reportCreationData,
     numberOfCommercialUnits: 5,
-    squareFeetList: [200, 150, 305, 110, 75]
+    squareFeetList: [ 200, 150, 305, 110, 75 ]
 
 };

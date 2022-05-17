@@ -7,8 +7,10 @@ import Income from "../../actions/income/income.manager";
 import Final from "../../actions/final/final.manager";
 import Sales from "../../actions/sales/sales.manager";
 import proFormaTypesEnum from "../../enums/proFormaTypes.enum";
+import tableExpenseHistoryCellNames from "../../../cypress/enums/expenseHistoryTableRows.enum";
+import { Tag } from "../../utils/tags.utils";
 
-describe("Full bowery way, multifamily as complete report", () => {
+describe("Full bowery way, multifamily as complete report", { tags: [ Tag.full_report ] }, () => {
     it("Test", () => {
         cy.login();
         Homepage.createReport(testData.reportCreationData);
@@ -275,14 +277,14 @@ describe("Full bowery way, multifamily as complete report", () => {
             .verifyExpenseYear(testData.expenseHistory.expenseYear)
             .clickAddExpenseYearButton()
             .checkGrossRevenueCheckboxByColumnIndex()
-            .enterGrossRevenueByColIndex(testData.expenseHistory.grossRevenue)
-            .enterRealEstateTaxesByColIndex(testData.expenseHistory.realEstateTaxes)
-            .enterInsuranceByColIndex(testData.expenseHistory.insuranceExpense)
-            .enterElectricityByColIndex(testData.expenseHistory.electricityExpense)
-            .enterFuelByColIndex(testData.expenseHistory.fuelExpense)
+            .enterIssueByColIndex(testData.expenseHistory.grossRevenue, tableExpenseHistoryCellNames.grossRevenue)
+            .enterIssueByColIndex(testData.expenseHistory.realEstateTaxes, tableExpenseHistoryCellNames.realEstateTaxes)
+            .enterIssueByColIndex(testData.expenseHistory.insuranceExpense, tableExpenseHistoryCellNames.insurance)
+            .enterIssueByColIndex(testData.expenseHistory.electricityExpense, tableExpenseHistoryCellNames.electricity)
+            .enterIssueByColIndex(testData.expenseHistory.fuelExpense, tableExpenseHistoryCellNames.fuel)
             .uncheckFuelCheckboxByColIndex()
             .uncheckWaterSewerCheckboxByColIndex()
-            .enterPayrollBenefitsByColIndex(testData.expenseHistory.payrollBenefitsExpense)
+            .enterIssueByColIndex(testData.expenseHistory.payrollBenefitsExpense, tableExpenseHistoryCellNames.payrollAndBenefits)
             .verifyTotalOpExpensesByColIndex(testData.expenseHistory.toeToBe)
             .verifyTOEExcludingRETByIndex(testData.expenseHistory.realEstateTaxes)
             .verifyNetOpIncomeByIndex(testData.expenseHistory.grossRevenue)

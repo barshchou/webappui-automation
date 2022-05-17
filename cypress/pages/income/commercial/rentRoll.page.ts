@@ -70,6 +70,10 @@ class CommercialRentRollPage extends BasePage{
     get cancelDiscussionEdit() {return cy.xpath("//*[.='Current Commercial Income Discussion']//following::button[.='Cancel'][1]");}
 
     get rentPerSfPerMonthColumnName() {return cy.contains("Rent PSF/Month");}
+
+    get narrativeSuggestionsList() {return cy.get("[data-qa='narrative-suggestions-list'] > ul");}
+
+    get inPlaceCommercialIncomeTextArea() {return cy.xpath("//*[.='Current Commercial Income Discussion']//following::*[@data-slate-editor][1]");}
 }
 
 export default new CommercialRentRollPage();

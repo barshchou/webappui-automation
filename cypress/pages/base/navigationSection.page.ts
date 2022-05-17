@@ -65,6 +65,8 @@ class NavigationSection extends BasePage {
 
     get potentialGrossIncome() {return cy.get("#potential-gross-income-v-2");}
 
+    get taxInfo() {return cy.get("#tax-information");}
+
     get proForma() {return cy.get("#pro-forma-v-2");}
 
     get commercialCompGroups() {return cy.get("#commercial-comp-groups");}
@@ -75,7 +77,13 @@ class NavigationSection extends BasePage {
 
     get supportingCapRates() {return cy.get("#supporting-cap-rates");}
 
-    get introduction() {return cy.get('[id="introduction"]');}
+    get introduction() {return cy.get("#introduction");}
+
+    get coverPage() {return cy.get("#cover-page");}
+
+    get profileOrganization() {return cy.get("[aria-label='Profile & Organization']");}
+
+    get menuItemsProfileOrganization() {return cy.get("[role=menu] > li");}
 }
 
 export default new NavigationSection();

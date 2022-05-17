@@ -2,9 +2,11 @@ import testData from "../../../../../fixtures/not_full_reports/income/commercial
 import NavigationSection from "../../../../../actions/base/navigationSection.actions";
 import Property from "../../../../../actions/property/property.manager";
 import Income from "../../../../../actions/income/income.manager";
-import {createReport, deleteReport} from "../../../../../actions/base/baseTest.actions";
+import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
+import { Tag } from "../../../../../utils/tags.utils";
 
-describe("Verify the Monthly Rent column in the grid", () => {
+describe("Verify the Monthly Rent column in the grid", 
+    { tags:[ Tag.income, Tag.commercial, Tag.in_place_rent_roll ] }, () => {
 
     beforeEach("Create report, prepare table", () => {
         createReport(testData.reportCreationData);

@@ -1,7 +1,7 @@
 import testData from "../../../../fixtures/not_full_reports/property/summary/QA-4087.fixture";
-import {createReport, deleteReport} from "../../../../actions/base/baseTest.actions";
-import {_NavigationSection} from "../../../../actions/base";
-import {Property} from "../../../../actions";
+import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { _NavigationSection } from "../../../../actions/base";
+import { Property } from "../../../../actions";
 
 describe("[QA-4087] Verify validation of the Residential Units and Commercial Units fields.", () => {
     before("Login, create report", () => {

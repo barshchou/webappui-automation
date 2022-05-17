@@ -1,11 +1,8 @@
 import navigationSectionPage from "../../pages/base/navigationSection.page";
-import BaseActions from "./base.actions";
+import BaseActionsExt from "./base.actions.ext";
 
-class NavigationSectionActions extends BaseActions {
-    get Page() {
-        return navigationSectionPage;
-    }
-
+class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPage> {
+    
     openReviewAndExport(isWithSave = false) {
         let reportAlias = "docxReportAsync";
         cy.intercept({
@@ -14,7 +11,7 @@ class NavigationSectionActions extends BaseActions {
         }).as(reportAlias);
         cy.get('[id="review-and-export"]').click();
         if (isWithSave) this.clickYesButton();
-        cy.wait(`@${reportAlias}`, {timeout:20000});
+        cy.wait(`@${reportAlias}`, { timeout:20000 });
         return this;
     }
     
@@ -58,7 +55,7 @@ class NavigationSectionActions extends BaseActions {
         return this;
     }
 
-    openCommercialStabilizedRentRollInCommercial() {
+    navigateToStabilizedRentRollInCommercial() {
         this.clickCommercialStabRentRollButton()
             .clickYesButton();
         return this;
@@ -315,12 +312,52 @@ class NavigationSectionActions extends BaseActions {
         return this;
     }
 
+    clickCoverPage() {
+        navigationSectionPage.coverPage.click();
+        return this;
+    }
+
+    clickIntroduction() {
+        navigationSectionPage.introduction.click();
+        return this;
+    }
+
+    clickProfileOrganization() {
+        navigationSectionPage.profileOrganization.click();
+        return this;
+    }
+
+    selectLink(nameLink: string) {
+        navigationSectionPage.menuItemsProfileOrganization.contains(nameLink).click();
+        return this;
+    }
+
+    navigateToProfileOrganization(nameLink: string) {
+        this.clickProfileOrganization()
+            .selectLink(nameLink);
+        return this;
+    }
+
     navigateToLaundry() {
         this.clickIncomeApproachButton()
             .clickMiscellaneousIncome()
             .clickLaundryButton()
             .clickYesButton();
         return this;
+    }
+
+    navigateToCoverPage() {
+        this.clickPreviewEditButton()
+        .clickCoverPage()
+        .clickYesButton();
+    return this;
+    }
+
+    navigateToIntroduction() {
+        this.clickPreviewEditButton()
+        .clickIntroduction()
+        .clickYesButton();
+    return this;
     }
 
     navigateToLetterOfTransmittal() {
@@ -332,6 +369,11 @@ class NavigationSectionActions extends BaseActions {
 
     clickPotentialGrossIncome() {
         navigationSectionPage.potentialGrossIncome.click();
+        return this;
+    }
+
+    clickTaxInfo() {
+        navigationSectionPage.taxInfo.click();
         return this;
     }
 
@@ -409,6 +451,20 @@ class NavigationSectionActions extends BaseActions {
         }
         return this;
     }
+
+    navigateToTaxInfo(isWithSave = true): NavigationSectionActions {
+        this.clickIncomeApproachButton().clickTaxInfo();
+        if (isWithSave) {
+            this.clickYesButton();
+        } 
+        return this;
+    }
+
+    openCommercialStabilizedRentRollInCommercial() {
+        this.clickCommercialStabRentRollButton()
+            .clickYesButton();
+        return this;
+    }
 }
 
-export default new NavigationSectionActions();
+export default new NavigationSectionActions(navigationSectionPage);

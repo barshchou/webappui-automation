@@ -1,12 +1,12 @@
 import testData from "../../../../fixtures/not_full_reports/property/commercial_units/QA-4559.fixture";
 import { Base, Property } from "../../../../actions";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
-import {_NavigationSection} from "../../../../actions/base";
+import { _NavigationSection } from "../../../../actions/base";
+import { Tag } from "../../../../utils/tags.utils";
 
-
-describe("Verify the functionality of the State radio button", () => {
-
-
+describe("Verify the functionality of the State radio button", 
+    { tags:[ Tag.property, Tag.commercial_units ] }, () => {
+    
     before("Login, create report", () => {
 
         cy.stepInfo(` 1. Report creation and several commercial units addition`);
@@ -14,7 +14,6 @@ describe("Verify the functionality of the State radio button", () => {
         Base._NavigationSection.navigateToPropertySummary();
         Property._Summary.enterNumberOfCommercialUnits(testData.numberOfCommercialUnits);
     });
-
 
     it("Test body", () => {
 
