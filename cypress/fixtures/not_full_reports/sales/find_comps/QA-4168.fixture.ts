@@ -2,46 +2,22 @@ import ReportDataCreator from "../../../data_creator/reportData.creator";
 import Enums from "../../../../enums/enums";
 
 export default {
-    reportCreationData: ReportDataCreator.getReportData("4139&43&44&4482&83", {
+    reportCreationData: ReportDataCreator.getReportData("4168", {
             incomeValue: Enums.INCOME_TYPE.BOTH,
             conclusionValue: Enums.VALUE_CONCLUSION_TYPE.AS_IS
         }),
-    compAddress: "140 East 13 Street",
-    condition: "Shell",
-    comparableType: "Mixed-Use",
-    spec4139: {
-        numberOfUnitsDefault: 4,
-        regularNum: 10000,
-        decimalNum: -38.54,
-        nonNumberValue: "Some not number",
-        longValue: 55555555555555528
+    compAddress: "601 West 26th Street, New York, USA",
+    selectItems: { condition: "Shell", source: "CoStar" },
+    units:  { grossArea: 25645, numberOfUnits: 2 } as BoweryReports.BuildingDescription,
+    saleInfo: {
+        saleDate: "05-17-2022",
+        buyer: "Test and CO",
+        seller: "Test inc"
     },
-    spec4143: {
-        regularNumber: 8,
-        regularNumOverThousand: 10000,
-        decimalNum: -38.54,
-        nonNumberValue: "Some not number",
-        longValue: 55555555555555528
-    },
-    spec4144: {
-        regularNumber: 850,
-        regularNumOverThousand: 10000,
-        decimalNum: -38.54,
-        nonNumberValue: "Some not number",
-        longValue: 55555555555555528
-    },
-    spec4482: {
-        regularNumber: 850,
-        regularNumOverThousand: 10000,
-        decimalNum: -38.54,
-        nonNumberValue: "Some not number",
-        longValue: 55555555555555528
-    },
-    spec4483: {
-        regularNumber: 999,
-        regularNumOverThousand: 9999,
-        decimalNum: -1258.54,
-        nonNumberValue: "Some not number",
-        longValue: 55555555555555528
-    }
+    verifyTextValue: "$#!@%^1234orem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been" +
+        "the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to" + 
+         "make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially" + 
+         "unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with" +
+         "desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.`,",
+    verifyTextUnderTextArea: "This commentary is for internal use only and will not export"
 };
