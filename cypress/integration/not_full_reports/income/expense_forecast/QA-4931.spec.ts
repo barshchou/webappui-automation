@@ -13,7 +13,7 @@ describe("Historical expense Repairs & Maintenance Per Unit is correctly calcula
     createReport(testData.reportCreationData);
   });
 
-  it("Test body", { tags: "@snapshot_tests" }, () => {
+  it("Test body", () => {
     cy.stepInfo("Pre-condition: Residential Units should be filled in on Property > Summary form");
     NavigationSection.navigateToPropertySummary();
     Property.Summary.enterNumberOfResUnits(Object.values(testData.buildingDescription)[1]);
