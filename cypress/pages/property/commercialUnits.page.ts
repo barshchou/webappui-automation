@@ -39,7 +39,7 @@ class CommercialUnitsPage extends BasePage {
         return cy.xpath(`//span[@data-slate-string="true"][contains(text(), "${text}")]`);
     } 
 
-    get modifiedButton() {
+    get modifiedLabel() {
         return cy.xpath("//span[contains(text(), 'Modified')]");
     }
 
