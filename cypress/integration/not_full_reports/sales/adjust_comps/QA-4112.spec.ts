@@ -16,10 +16,10 @@ describe("Total Utility Adjustments in Sales Adjustment Grid is calculated with 
         _NavigationSection.navigateToFindComps();
         Sales._FindComps.selectCompFromMapByAddress(testData.comparableFirst.address);
 
-        cy.stepInfo("2. Open Adjust comps page, add all types of utilities adjustment and " + 
-                    "Verify Total Utility Adjustments in Total Footer = " +
-                    "Commercial Space Adjustment + Corner Adjustment + Finishes Adjustment + " + 
-                    "Elevator Adjustment + Amenities Adjustment + Air Rights Adjustment + Other Utility Adjustment)");
+        cy.stepInfo(`2. Open Adjust comps page, add all types of utilities adjustment and  
+                    Verify Total Utility Adjustments in Total Footer = 
+                    Commercial Space Adjustment + Corner Adjustment + Finishes Adjustment + 
+                    Elevator Adjustment + Amenities Adjustment + Air Rights Adjustment + Other Utility Adjustment)`);
         _NavigationSection.openAdjustCompsInSales();
         Sales._AdjustComps.clickAddCustomUtilitiesAdjustment()
             .editOtherUtilitiesAdjustmentRowName(testData.customUtilitiesAdjustmentDefaultName, testData.newCustomUtilitiesAdjustmentName)
