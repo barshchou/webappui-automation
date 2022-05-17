@@ -25,6 +25,8 @@ class AdjustCompsPage extends BasePage {
 
     getOtherUtilitiesAdjustmentRowCells(rowNumber: number) {return cy.get(`[name*='utilityAdjustment.otherAdjustment[${rowNumber}]']`);}
 
+    getUtilitiesAdjustmentsRowCells(utilityName: string) {return cy.get(`[name*='utilityAdjustment.${utilityName}']`);}
+
     get trendedPriceCells() {return cy.xpath("//*[starts-with(., 'Trended Price')]//following-sibling::td");}
 
     get adjustedPriceCells() {return cy.xpath("//*[starts-with(., 'Adjusted Price')]//following-sibling::td");}

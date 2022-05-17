@@ -7,7 +7,8 @@ import { Tag } from "../../../../../utils/tags.utils";
 
 describe(`Verify the suggested text dropdown in the new narrative component added through "=" for the 'Unchanged Renovation' 
   option in the Generated Commentary on the Stabilized Rent Roll page.`, 
-  { tags:[ Tag.income, Tag.commercial, Tag.stabilized_rent_roll ] }, () => {
+    { tags:[ Tag.income, Tag.commercial, Tag.stabilized_rent_roll ] }, () => {
+        
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
     });

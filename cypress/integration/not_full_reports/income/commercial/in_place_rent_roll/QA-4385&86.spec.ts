@@ -3,8 +3,10 @@ import Income from "../../../../../actions/income/income.manager";
 import { getTodayDateString } from "../../../../../../utils/date.utils";
 import NavigationSection from "../../../../../actions/base/navigationSection.actions";
 import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
+import { Tag } from "../../../../../utils/tags.utils";
 
-describe("Verify the Dates columns in the grid", () => {
+describe("Verify the Dates columns in the grid", 
+    { tags:[ Tag.income, Tag.commercial, Tag.in_place_rent_roll ] }, () => {
     const cellDatesNames: BoweryReports.LeaseDateName[] = [ "Start", "Expiry" ];
 
     beforeEach("Login, create report", () => {

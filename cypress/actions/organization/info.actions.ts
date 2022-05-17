@@ -1,7 +1,7 @@
-import BaseActions from "../base/base.actions";
 import infoPage from "../../pages/organization/info.page";
+import BaseActionsExt from "../base/base.actions.ext";
 
-class OrganizationInfoActions extends BaseActions{
+class OrganizationInfoActions extends BaseActionsExt<typeof infoPage>{
 
     verifyPageOpened() {
         infoPage.pageHeader.should("exist");
@@ -9,4 +9,4 @@ class OrganizationInfoActions extends BaseActions{
     }
 }
 
-export default new OrganizationInfoActions();
+export default new OrganizationInfoActions(infoPage);

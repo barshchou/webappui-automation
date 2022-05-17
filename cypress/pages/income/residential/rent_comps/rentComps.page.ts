@@ -82,7 +82,7 @@ class RentCompsPage extends BasePage{
 
     get selectComparableButtons() {return cy.get("*[data-qa='rentComp-select-btn']");}
 
-    get selectedComparableButtons() {return cy.get("*[data-qa='rentComp-selected-btn']");}
+    get selectedMapComparableRemoveButtons() {return cy.get("*[data-qa='rentComp-remove-btn']");}
 
     get zoomInButton() {return cy.get("*[title='Zoom in']");}
 
@@ -132,7 +132,7 @@ class RentCompsPage extends BasePage{
 
     getSelectButtonByAddress(address) {return cy.xpath(`//*[text()='${address}']//following-sibling::button`);}
 
-    getSelectedButtonByAddress(address) {return cy.xpath(`//*[text()='${address}']//following-sibling::button[contains(@data-qa, 'selected-btn')]`);}
+    getRemoveButtonByAddress(address) {return cy.xpath(`//*[text()='${address}']//following-sibling::button[contains(@data-qa, 'remove-btn')]`);}
 
     get editButtonLocator() {return "[data-qa=col-edit] button";}
 

@@ -71,6 +71,15 @@ class AdjustCompsActions extends BaseActions {
         return this;
     }
 
+    enterUtilitiesAdjustmentByColumn(adjustmentName: string[], value: number[], index = 0): AdjustCompsActions {
+        adjustmentName.forEach((adjustment, i) => {
+            adjustCompsPage.getUtilitiesAdjustmentsRowCells(adjustment).eq(index).scrollIntoView().clear()
+            .type(`${value[i]}{del}`).should("have.value", `${value[i]}%`);
+        });
+        
+        return this;
+    }
+
     clearOtherAdjustmentByColumn(rowNumber = 0, index = 0): AdjustCompsActions {
         adjustCompsPage.getOtherAdjustmentRowCells(rowNumber).eq(index).clear();
         return this;
@@ -112,8 +121,8 @@ class AdjustCompsActions extends BaseActions {
 
     verifyNetPropertyAdjustmentsByCompIndex(index = 0): AdjustCompsActions {
         adjustCompsPage.getAllAdjustmentCellsByCompIndex(index).then(cells => {
-            const adjustmentsValues = Array.from(cells).filter((el, index) => index > 3)
-                .map(cell => cell.getAttribute("value")).map(cellText => Number(cellText.replace("%", "")));
+            const adjustmentsValues = Array.from(cells).map(cell => cell.getAttribute("value"))
+                .map(cellText => Number(cellText.replace("%", "")));
             const netPropAdjustmentsToBe = adjustmentsValues.reduce((sum, prevValue) => sum + prevValue, 0);
             adjustCompsPage.netPropertyAdjustmentsCells.eq(index).should("have.text", `${netPropAdjustmentsToBe}%`);
         });
@@ -122,8 +131,8 @@ class AdjustCompsActions extends BaseActions {
 
     verifyTotalUtilitiesAdjustmentsByCompIndex(index = 0): AdjustCompsActions {
         adjustCompsPage.getAllUtilitiesAdjustmentCellsByCompIndex(index).then(cells => {
-            const adjustmentsValues = Array.from(cells).filter((el, index) => index > 3)
-                .map(cell => cell.getAttribute("value")).map(cellText => Number(cellText.replace("%", "")));
+            const adjustmentsValues = Array.from(cells).map(cell => cell.getAttribute("value"))
+                .map(cellText => Number(cellText.replace("%", "")));
             const netPropAdjustmentsToBe = adjustmentsValues.reduce((sum, prevValue) => sum + prevValue, 0);
             adjustCompsPage.totalUtilityAdjustmentsCells.eq(index).should("have.text", `${netPropAdjustmentsToBe}%`);
         });

@@ -3,8 +3,11 @@ import { _NavigationSection } from "../../../../actions/base";
 import { Property } from "../../../../actions";
 import { Sales } from "../../../../actions";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { Tag } from "../../../../utils/tags.utils";
 
-describe("The amount column of the # of Units shows the correct number of units", () => {
+describe("The amount column of the # of Units shows the correct number of units", 
+    { tags: [ Tag.sales, Tag.value_conclusion ] }, () => {
+        
     before("Login action", () => {
         createReport(testData.reportCreationData);
     });

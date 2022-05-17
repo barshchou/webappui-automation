@@ -3,10 +3,13 @@ import ReportDataCreator from "../../../../fixtures/data_creator/reportData.crea
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Report from "../../../../actions/report/report.manager";
 import Organization from "../../../../actions/organization/organization.manager";
+import { Tag } from "../../../../utils/tags.utils";
 
 const reportCreationData = ReportDataCreator.getReportData("4654");
 
-describe("Verify the functionality of the ADD button on the Client page", () => {
+describe("Verify the functionality of the ADD button on the Client page", 
+    { tags: [ Tag.report, Tag.client ] }, () => {
+        
     before("Login, create report", () => {
         createReport(reportCreationData);
     });
