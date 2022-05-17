@@ -1,4 +1,3 @@
-import { Tag } from './../../../../utils/tags.utils';
 import { Report } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
