@@ -65,7 +65,7 @@ export default class BaseActions {
     }
 
     clickBackButton() {
-        cy.xpath("//button[.='BACK']").click();
+        cy.xpath("//button[.='Back']").click();
         return this;
     }
 
