@@ -4,6 +4,8 @@ class CommercialUnitsPage extends BasePage {
     get iconExchangeComUnits() {return cy.get("[data-icon=exchange]");}
 
     get iconExchangeTooltip() {return cy.get(".MuiTooltip-tooltip");}
+    
+    get numberCommercialUnitsField() {return cy.xpath("//*[.='No. of Commercial Units']//following::*[@inputmode][1]");}
 
     get iconDeleteImage(){
         return cy.get('[data-icon="trash-alt"]');
