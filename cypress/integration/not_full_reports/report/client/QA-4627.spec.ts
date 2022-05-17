@@ -47,7 +47,7 @@ conditionalDescribe("[QA-4627] Verify the functionality of the Client field.",
 
         cy.stepInfo("8. Proceed to the Preview & Edit > Letter of Transmittal page and verify that the Client from the previous step is displayed.");
         _NavigationSection.clickLetterOfTransmittal();
-        PreviewEdit._LetterOfTransmittal.expectedValue(testData.textToType);
+        PreviewEdit._LetterOfTransmittal.verifyContainsValue(testData.textToType);
 
         cy.stepInfo(`9. Proceed to the Preview & Edit > Introduction page and verify that the Client Company is displayed in the IDENTIFICATION 
             OF THE CLIENT and INTENDED USE & USER sections (if the Client has Company added on the Organization > Clients page).`);

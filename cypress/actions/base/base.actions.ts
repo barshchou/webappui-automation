@@ -69,8 +69,8 @@ export default class BaseActions {
         return this;
     }
 
-    expectedValue(verifyContainsValue: string) {
-        cy.contains(verifyContainsValue).should("be.visible");
+    verifyContainsValue(expectedValue: string) {
+        cy.contains(expectedValue).should("be.visible");
         return this;
     }
 
