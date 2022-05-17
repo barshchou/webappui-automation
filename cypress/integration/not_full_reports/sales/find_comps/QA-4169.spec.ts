@@ -1,21 +1,33 @@
-import testData from "../../../../fixtures/not_full_reports/sales/find_comps/QA-4171.fixture";
+import testData from "../../../../fixtures/not_full_reports/sales/find_comps/QA-4169.fixture";
 import { _NavigationSection } from "../../../../actions/base";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { Sales } from "../../../../actions";
+import { isProdEnv } from "../../../../../utils/env.utils";
+import { Tag } from "../../../../utils/tags.utils";
 
-describe("Selected Comparables table. Verify the functionality of Remove button", () => {
+const conditionalDescribe = isProdEnv() ? describe.skip : describe;
+
+conditionalDescribe("Verify the New Comp is created after clicking on 'Save&Close' button on Property Description form", 
+{ tags:[ Tag.comp_plex ] }, () => {
 
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
     });
 
     it("Test body", () => {
+        cy.stepInfo("Navigate to FindComps page and create new comp");
         _NavigationSection.navigateToFindComps();
-        // Sales.FindComps.selectCompFromMapByAddress(testData.comparable.address)
-        //     .verifyAddedCompAddress(testData.comparable.address)
-        //     .removeCompByAddress(testData.comparable.address)
-        //     .verifyCompIsInRemovedSection(testData.comparable.address)
-        //     .verifyCompIsInMap(testData.comparable.address)
-        //     .removeDeletedCompByAddress(testData.comparable.address);
+        Sales._FindComps.openAddNewComparableFormSearchResult(testData.compAddress, 1)
+            .selectDropdownOptionNewComp(Sales._FindComps.Page.conditionDropdown, testData.condition);
+
+        Sales._FindComps
+            .enterNumericInputNewComp(Sales._FindComps.Page.createCompNumberResidentialUnits, testData.spec4139.regularNum)
+            .selectDropdownOptionNewComp(Sales._FindComps.Page.conditionDropdown, testData.condition);
+
+        Sales._FindComps.Page.newCompContinueButton.should("be.enabled").click();
+
+        cy.pause();
+
         deleteReport(testData.reportCreationData.reportNumber);
     });
 });
