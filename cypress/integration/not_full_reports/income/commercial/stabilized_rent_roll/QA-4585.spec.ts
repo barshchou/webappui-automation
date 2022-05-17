@@ -5,7 +5,9 @@ import { Property } from "../../../../../actions";
 import { Income } from "../../../../../actions";
 import { Tag } from "../../../../../utils/tags.utils";
 
-describe("Verify the Commercial Stabilized Rent Roll table", { tags: [ Tag.income, Tag.commercial, Tag.stabilized_rent_roll ] }, () => {
+describe("Verify the Commercial Stabilized Rent Roll table", 
+    { tags: [ Tag.income, Tag.commercial, Tag.stabilized_rent_roll ] }, () => {
+        
     before("Login, create report", () => {
         cy.stepInfo(`1. Create a mixed report with several Commercial Units (e.g. 2).`);
         createReport(testData.reportCreationData);

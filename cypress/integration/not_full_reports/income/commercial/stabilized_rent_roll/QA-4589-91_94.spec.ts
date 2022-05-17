@@ -4,10 +4,11 @@ import { createReport, deleteReport } from "../../../../../actions/base/baseTest
 import testData from "../../../../../fixtures/not_full_reports/income/commercial/stabilized_rent_roll/QA-4589-91_94.fixture";
 import { Tag } from "../../../../../utils/tags.utils";
 
-describe(`Verify the commentary functionality`, { tags:[ Tag.income, Tag.commercial, Tag.stabilized_rent_roll ] }, () => {
+describe(`Verify the commentary functionality`, 
+    { tags:[ Tag.income, Tag.commercial, Tag.stabilized_rent_roll ] }, () => {
+
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
-        
     });
 
     it("Test body", () => {

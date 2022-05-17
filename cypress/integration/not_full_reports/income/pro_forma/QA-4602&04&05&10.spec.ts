@@ -4,8 +4,11 @@ import NavigationSection from "../../../../actions/base/navigationSection.action
 import Property from "../../../../actions/property/property.manager";
 import Income from "../../../../actions/income/income.manager";
 import ProFormaPage from "../../../../pages/income/proForma.page";
+import { Tag } from "../../../../utils/tags.utils";
 
-describe("Less [USE (Property>Commercial Units)] Commercial V/C Loss @ X% row", () => {
+describe("Less [USE (Property>Commercial Units)] Commercial V/C Loss @ X% row", 
+    { tags:[ Tag.income, Tag.pro_forma ] }, () => {
+        
     beforeEach("Login, create report", () => {
         createReport(testData.reportCreationData);
         NavigationSection.navigateToPropertySummary();

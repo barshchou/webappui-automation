@@ -10,12 +10,17 @@ class ClientActions extends BaseActionsExt<typeof clientPage> {
     }
 
     enterClientName(name: string): ClientActions {
-        clientPage.clientNameField.type(name).type("{enter}").should("have.value", name);
+        clientPage.clientNameField.clear().type(name).type("{enter}");
         return this;
     }
     
     enterClientFileNumber(name:string): ClientActions{
         clientPage.clientFileNumberField.clear().type(name).should("have.value", name);
+        return this;
+    }
+
+    enterNycbApplicationNumber(name:string): ClientActions{
+        clientPage.nycbApplicationNumber.clear().type(name).should("have.value", name);
         return this;
     }
 
@@ -52,11 +57,6 @@ class ClientActions extends BaseActionsExt<typeof clientPage> {
         return this;
     }
 
-    enterIntendedUserTextBox(textToType: string): ClientActions {
-        clientPage.intendedUserTextBox.type(textToType);
-        return this;
-    }
-
     clickTextBoxEditButton(index = 0) {
         clientPage.formEditBtn(index).click();
         return this;
@@ -67,6 +67,11 @@ class ClientActions extends BaseActionsExt<typeof clientPage> {
         return this;
     } 
 
+    enterIntendedUserTextBox(textToType: string): ClientActions {
+        clientPage.intendedUserTextBox.type(textToType);
+        return this;
+    }
+
     enterIdentificationOfTheClientTextBox(textToType: string): ClientActions {
         clientPage.identificationOfClientTextBox.type(textToType);
         return this;
@@ -74,6 +79,11 @@ class ClientActions extends BaseActionsExt<typeof clientPage> {
 
     clickNarrativeSuggestions(verifyListValue: string, numberLists = 0): ClientActions {
         clientPage.narrativeSuggestionsList.eq(numberLists).contains(verifyListValue).click();
+        return this;
+    }
+
+    verifyNarrativeSuggestions(verifyListValue: string, numberLists = 0): ClientActions {
+        clientPage.narrativeSuggestionsList.eq(numberLists).contains(verifyListValue).should("have.text", verifyListValue);
         return this;
     }
 

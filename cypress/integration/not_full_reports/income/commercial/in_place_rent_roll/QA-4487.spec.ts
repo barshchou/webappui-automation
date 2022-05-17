@@ -7,6 +7,7 @@ import { Tag } from "../../../../../utils/tags.utils";
 describe("Verify the suggested text dropdown in the new narrative component added through '=' "+
         "for the 'Unchanged Renovation' option", 
         { tags:[ Tag.income, Tag.commercial, Tag.in_place_rent_roll ] }, () => {
+            
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
     });

@@ -3,8 +3,10 @@ import { _NavigationSection } from "../../../../../actions/base";
 import { Property } from "../../../../../actions";
 import { Income } from "../../../../../actions";
 import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
+import { Tag } from "../../../../../utils/tags.utils";
 
-describe("Verify the Monthly Rent column in the grid", () => {
+describe("Verify the Monthly Rent column in the grid", 
+    { tags:[ Tag.income, Tag.commercial, Tag.in_place_rent_roll ] }, () => {
 
     beforeEach("Create report, prepare table", () => {
         createReport(testData.reportCreationData);
