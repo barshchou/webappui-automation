@@ -80,6 +80,15 @@ class AdjustCompsActions extends BaseActions {
         return this;
     }
 
+    enterMarketAdjustmentByColumn(adjustmentName: string[], value: number[], index = 0): AdjustCompsActions {
+        adjustmentName.forEach((adjustment, i) => {
+            adjustCompsPage.getMarketAdjustmentsRowCells(adjustment).eq(index).scrollIntoView().clear()
+            .type(`${value[i]}{del}`).should("have.value", `${value[i]}%`);
+        });
+        
+        return this;
+    }
+
     clearOtherAdjustmentByColumn(rowNumber = 0, index = 0): AdjustCompsActions {
         adjustCompsPage.getOtherAdjustmentRowCells(rowNumber).eq(index).clear();
         return this;
@@ -106,7 +115,7 @@ class AdjustCompsActions extends BaseActions {
             adjustCompsPage.netPropertyAdjustmentsCells.eq(index).invoke("text").then(netAdjText => {
                 const netAdjNumber = Number(netAdjText.replace("%", ""));
                 const adjustedPriceToBe = trendedNumber + (trendedNumber * (netAdjNumber / 100));
-                let adjustedPriceText;
+                let adjustedPriceText: string;
                 if (adjustedPriceToBe < 0) {
                     adjustedPriceText = `-$${numberWithCommas(adjustedPriceToBe.toFixed(2)
                         .replace("-", ""))}`;
@@ -116,6 +125,32 @@ class AdjustCompsActions extends BaseActions {
                 adjustCompsPage.adjustedPriceCells.eq(index).should("have.text", adjustedPriceText);
             });
         });
+        return this;
+    }
+
+    /*
+    Verify that Trended Price Per Total units is adjusted based on
+    Net Market adjustment total value
+    */
+    verifyTrendedPricePerTotalUnits(index = 0): AdjustCompsActions {
+        adjustCompsPage.viewMarketDetails.click();
+        adjustCompsPage.pricePerUnit.should("be.visible");
+        adjustCompsPage.pricePerUnit.invoke("text").then(pricePerUnitText => {
+            const pricePerUnitNumber = getNumberFromDollarNumberWithCommas(pricePerUnitText);
+            adjustCompsPage.marketAdjustmentsCells.eq(index).invoke("text").then(marketAdjText => {
+                const marketAdjNumber = Number(marketAdjText.replace("%", ""));
+                const adjustedTrendedPriceToBe = Math.ceil((pricePerUnitNumber + pricePerUnitNumber * (marketAdjNumber / 100)) * 100) / 100;
+                let adjustedTrendedPriceText: string;
+                if (adjustedTrendedPriceToBe < 0) {
+                    adjustedTrendedPriceText = `-$${numberWithCommas(adjustedTrendedPriceToBe.toFixed(2)
+                        .replace("-", ""))}`;
+                } else {
+                    adjustedTrendedPriceText = `$${numberWithCommas(adjustedTrendedPriceToBe.toFixed(2))}`;
+                }
+                adjustCompsPage.trendedPriceCells.eq(index).should("have.text", adjustedTrendedPriceText);
+            });
+        });
+            
         return this;
     }
 
@@ -153,8 +188,6 @@ class AdjustCompsActions extends BaseActions {
         adjustCompsPage.addCustomUtilitiesAdjustmentButton.click();
         return this;
     }
-
-
 }
 
 export default new AdjustCompsActions();
