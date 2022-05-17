@@ -8,6 +8,7 @@ import { Tag } from "../../../../../utils/tags.utils";
 
 describe("Verify the Save & Continue button functionality on the Stabilized Rent Roll page:", 
     { tags: [ Tag.income, Tag.commercial, Tag.stabilized_rent_roll ] }, () => {
+        
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
     });

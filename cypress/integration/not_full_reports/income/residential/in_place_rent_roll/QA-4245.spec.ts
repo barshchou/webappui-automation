@@ -2,8 +2,11 @@ import testData from "../../../../../fixtures/not_full_reports/income/residentia
 import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../../actions/base";
 import { Property, Income } from "../../../../../actions";
+import { Tag } from "../../../../../utils/tags.utils";
 
-describe("Verify the Monthly Total row in the grid", () => {
+describe("Verify the Monthly Total row in the grid", 
+    { tags:[ Tag.income, Tag.residential, Tag.in_place_rent_roll ] }, () => {
+        
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
     });

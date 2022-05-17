@@ -3,6 +3,7 @@ import { createReport, deleteReport } from "../../../../../actions/base/baseTest
 import NavigationSection from "../../../../../actions/base/navigationSection.actions";
 import Property from "../../../../../actions/property/property.manager";
 import Income from "../../../../../actions/income/income.manager";
+import { Tag } from "../../../../../utils/tags.utils";
 
 
 
@@ -14,7 +15,9 @@ import Income from "../../../../../actions/income/income.manager";
  * TODO: Make draggable components accessible to Cypress
 */
 
-describe.skip("Verify the Commercial Stabilized Rent Roll table", () => {
+describe.skip("Verify the Commercial Stabilized Rent Roll table", 
+    { tags: [ Tag.income, Tag.commercial, Tag.stabilized_rent_roll ] }, () => {
+        
     before("Login, create report", () => {
         cy.stepInfo(`
         Preconditions: 

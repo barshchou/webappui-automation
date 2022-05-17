@@ -4,8 +4,11 @@ import NavigationSection from "../../../../actions/base/navigationSection.action
 import Sales from "../../../../actions/sales/sales.manager";
 import { getEnvUrl } from "../../../../../utils/env.utils";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { Tag } from "../../../../utils/tags.utils";
 
-describe("Verify the Comps can be added by entering the existing Report ID in the modal", () => {
+describe("Verify the Comps can be added by entering the existing Report ID in the modal", 
+    { tags:[ Tag.find_comps, Tag.sales ] }, () => {
+        
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
     });
