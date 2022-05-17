@@ -9,7 +9,6 @@ import { Alias } from "../../../../utils/alias.utils";
 describe("Verify the Comps can be added by entering the existing Report ID in the modal", 
 { tags:[ Tag.comp_plex, Tag.sales, Tag.find_comps ] }, () => {
     before("Login, create report", () => {
-        fixture.setupInterceptions();
         createReport(fixture.reportCreationData);
     });
 
@@ -26,6 +25,7 @@ describe("Verify the Comps can be added by entering the existing Report ID in th
             Homepage.createReport(fixture.reportCreationData);
             NavigationSection.navigateToFindComps();
             Sales.FindComps.clickImportComparableButton()
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 .enterReportToSearchComp(<any>reportId);
         });
         Sales.FindComps.clickSearchButton()
@@ -34,7 +34,6 @@ describe("Verify the Comps can be added by entering the existing Report ID in th
             .checkSelectedSingleSalesComps()
             .clickImportCompsFromReportButton();
         Sales.FindComps.verifyAddedCompAddress(fixture.comparable.address);
-        cy.pause();
         deleteReport(fixture.reportCreationData.reportNumber);
         cy.reload();
         Homepage.deleteReport(fixture.reportCreationData.reportNumber);
