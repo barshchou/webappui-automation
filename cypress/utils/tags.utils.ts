@@ -24,5 +24,6 @@ export enum Tag {
     pro_forma = "@pro_forma",
     preview_edit = "@preview_edit",
     introduction = "@introduction",
-    key_info = "@key_info"
+    key_info = "@key_info",
+    salesforce = "@salesforce"
 }
