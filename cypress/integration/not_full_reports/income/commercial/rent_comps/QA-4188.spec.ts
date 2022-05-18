@@ -3,39 +3,69 @@ import { Income } from "../../../../../actions";
 import { _NavigationSection } from "../../../../../actions/base";
 import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
 
-describe("Dropdown 'Filters'- 'Lease terms' section", () => {
+describe("[Income>Commercial>Rent Comps] Rent/SF/Month is calculated with correct formula", () => {
 
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
     });
 
     it("Test body", () => {
-        const address = "462 1st Avenue, New York, USA";
-
         cy.stepInfo("1. Navigate to Income -> Commercial -> In-Place Rent Roll and choose 'Per Square Foot Per Month' as Basis of Rent");
         _NavigationSection.navigateToCommercialInPlaceRentRoll();
-        Income._CommercialManager.InPlaceRentRoll.clickPerSquareFootPerMonthButton();
-        Income._CommercialManager.InPlaceRentRoll.chooseLeaseStatusByRowNumber("Occupied");
+        Income._CommercialManager.InPlaceRentRoll.clickPerSquareFootPerMonthButton().
+            chooseLeaseStatusByRowNumber("Occupied");
 
         cy.stepInfo("2. Navigate to Income -> Commercial -> Rent Comps and add new comp manually");
         _NavigationSection.navigateToCommercialRentComps();
-        cy.get("[data-qa=manually-add-a-new-comp-btn]").click();
-        cy.get("[data-qa='google-autocomplete-search.location-input'] input").type(`${address}{enter}`).should("have.value", address);
-        cy.get("[data-qa=submit-button]").should("not.be.disabled").click({ force: true });
-        cy.get("tr[data-qa^='search-results']").should("be.visible").click();
-        cy.get("[data-qa=submit-button]").should("not.be.disabled").click({ force: true });
+        Income._CommercialManager.RentComps.
+            clickManuallyAddANewCompButton().
+            searchNewCompByAddress(testData.address).
+            fillInRentCompFieldInput(testData.rentCompFields[0].name, testData.rentCompFields[0].value).
+            fillInRentCompFieldInput(testData.rentCompFields[1].name, testData.rentCompFields[1].value).
+            fillInRentCompFieldInput(testData.rentCompFields[2].name, testData.rentCompFields[2].value).
+            chooseRentCompFieldDropdownOption(testData.rentCompFields[3].name, testData.rentCompFields[3].value).
+            chooseRentCompFieldDropdownOption(testData.rentCompFields[4].name, testData.rentCompFields[4].value).
+            enterLeaseDate(testData.leaseDate).
+            clickSubmitButton();
 
-        cy.stepInfo("3. Add neccessary info for new rent comp and choose 'Per Square Foot Per Month' as Unit of Measure");
-        // cy.xpath("//table[@data-qa='unsorted_group']//button[.='Edit']").click();   // Edit button for rent comp
-        cy.get("input[name=baseRent]").clear().type(`150`);
-        cy.get("input[name=squareFeet]").clear().type(`1000`);
-        cy.get("input[name=tenantName]").clear().type(`Test`);
-        cy.get("[data-qa=use-select-list]").click().get("li[data-value=office]").click();
-        cy.get("[data-qa=dateSigned-date-picker] div input").type("01012022");
-        cy.get("[data-qa=sourceOfInformation-select-list]").click().get("li[data-value=bowerySubject]").click();
-        cy.get("div[data-qa=rentType-radio-group] [role=radiogroup]").eq(1).find("input[value='per square foot per month']").click();
-        cy.get("[data-qa=submit-button]").click();
-        cy.get("[data-qa=rentPerSF-cell]").should("have.text", "$" + 150*12*1000/12/1000 +".00");
+        cy.stepInfo("4. Verify if Per Square Foot Per Month is selected on In-Place RR page " +
+            "and as Unit of Measure on Commercial Unit Details modal -> Rent/SF/Month in " +
+            "selected rent comps table = Rent/12/SF, where Rent = base rent*12*SF");
+        const rentPerSFValue1 = testData.rentCompFields[0].value * 12 * testData.rentCompFields[1].value / 12 / testData.rentCompFields[1].value;
+        Income._CommercialManager.RentComps.clickEditButtonByRowNumber().
+            checkUnitOfMeasureRadioButton(testData.unitsOfMeasure[1]).
+            clickSubmitButton().
+            verifyRentPerSFCellValue(rentPerSFValue1);
+
+        cy.stepInfo("5. Verify if Per Square Foot Per Month is selected on In-Place RR page and " +
+        "Per Square Foot is selected as Unit of Measure on Commercial Unit Details modal -> Rent/SF/Month " +
+        "in selected rent comps table = Rent/12/SF, where Rent = base rent*SF");
+        const rentPerSFValue2 = testData.rentCompFields[0].value * testData.rentCompFields[1].value / 12 / testData.rentCompFields[1].value;
+        Income._CommercialManager.RentComps.clickEditButtonByRowNumber().
+            checkUnitOfMeasureRadioButton(testData.unitsOfMeasure[0]).
+            clickSubmitButton().
+            verifyRentPerSFCellValue(rentPerSFValue2);
+
+        cy.stepInfo("6. Verify if  Per Square Foot is selected on In-Place RR page and " +
+        "Per Square Foot Per Month is selected as Unit of Measure on Commercial Unit Details modal -> Rent/SF " +
+        "in selected rent comps table = Rent/SF, where Rent = base rent*12*SF");
+        const rentPerSFValue3 = testData.rentCompFields[0].value * 12 * testData.rentCompFields[1].value / testData.rentCompFields[1].value;
+        _NavigationSection.clickCommercialRentRollButton().clickYesButton();
+        Income._CommercialManager.InPlaceRentRoll.clickPerSquareFootButton(false);
+        _NavigationSection.navigateToCommercialRentComps();
+        Income._CommercialManager.RentComps.clickEditButtonByRowNumber().
+            checkUnitOfMeasureRadioButton(testData.unitsOfMeasure[1]).
+            clickSubmitButton().
+            verifyRentPerSFCellValue(rentPerSFValue3);
+
+        cy.stepInfo("7. Verify if  Per Square Foot is selected on In-Place RR page and " +
+        "as Unit of Measure on Commercial Unit Details modal -> Rent/SF " +
+        "in selected rent comps table = Rent/SF, where Rent = base rent*SF");
+        const rentPerSFValue4 = testData.rentCompFields[0].value * testData.rentCompFields[1].value / testData.rentCompFields[1].value;
+        Income._CommercialManager.RentComps.clickEditButtonByRowNumber().
+            checkUnitOfMeasureRadioButton(testData.unitsOfMeasure[0]).
+            clickSubmitButton().
+            verifyRentPerSFCellValue(rentPerSFValue4);
 
         deleteReport(testData.reportCreationData.reportNumber);
     });

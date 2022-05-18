@@ -80,6 +80,65 @@ class CommercialRentCompsActions extends BaseActions {
         rentCompsPage.getAddCompButtonByAddress(address).click({ force: true });
         return this;
     }
+
+    clickManuallyAddANewCompButton() {
+        rentCompsPage.manuallyAddANewCompButton.click();
+        return this;
+    }
+
+    enterAddressToSearch(address) {
+        rentCompsPage.addressSearchInput.type(`${address}{enter}`).should("have.value", address);
+        return this;
+    }
+
+    clickSubmitButton() {
+        rentCompsPage.submitButton.should("not.be.disabled").click({ force: true });
+        return this;
+    }
+
+    clickToSearchResultsRow() {
+        rentCompsPage.searchResultsRow.should("be.visible").click();
+        return this;
+    }
+
+    searchNewCompByAddress(address) {
+        this.enterAddressToSearch(address).
+            clickSubmitButton().
+            clickToSearchResultsRow().
+            clickSubmitButton();
+        return this;
+    }
+
+    fillInRentCompFieldInput(fieldName, value) {
+        rentCompsPage.getRentCompInputField(fieldName).clear().type(`${value}{enter}`);
+        return this;
+    }
+
+    chooseRentCompFieldDropdownOption(fieldName, option) {
+        rentCompsPage.getRentCompDropdownField(fieldName).click();
+        rentCompsPage.getRentCompDropdownOption(option).click();
+        return this;
+    }
+
+    enterLeaseDate(leaseDate) {
+        rentCompsPage.leaseDatePicker.type(leaseDate);
+        return this;
+    }
+
+    clickEditButtonByRowNumber(rowNumber = 0) {
+        rentCompsPage.getEditButtonByRowNubmer(rowNumber).click();
+        return this;
+    }
+
+    checkUnitOfMeasureRadioButton(name) {
+        rentCompsPage.getUnitOfMeasureRadioButton(name).click();
+        return this;
+    }
+
+    verifyRentPerSFCellValue(value, rowNumber = 0) {
+        rentCompsPage.getRentPerSFCellByRowNumber(rowNumber).should("have.text", `$${value}.00`);
+        return this;
+    }
 }
 
 export default new CommercialRentCompsActions();

@@ -30,6 +30,32 @@ class CommercialRentCompsPage extends BasePage {
     getCompGroupTableLocator(groupName) {return `[data-qa='${groupName}-group-panel']`;}
 
     getCompGroupTable(groupName) {return cy.get(this.getCompGroupTableLocator(groupName));}
+
+    get manuallyAddANewCompButton() {return cy.get("[data-qa=manually-add-a-new-comp-btn]");}
+
+    get addressSearchInput() {return cy.get("[data-qa='google-autocomplete-search.location-input'] input");}
+
+    get submitButton() {return cy.get("[data-qa=submit-button]");}
+
+    get searchResultsRow() {return cy.get("tr[data-qa^='search-results']");}
+
+    getRentCompInputField(fieldName) {return cy.get(`input[name='${fieldName}']`);}
+
+    getRentCompDropdownField(fieldName) {return cy.get(`[data-qa=${fieldName}-select-list]`);}
+
+    getRentCompDropdownOption(option) {return cy.get(`li[data-value=${option}]`);}
+
+    get leaseDatePicker() {return cy.get("[data-qa=dateSigned-date-picker] div input");}
+
+    getEditButtonByRowNubmer(rowNumber = 0) {return cy.xpath(`//tr[@data-qa='row-${rowNumber}']//button[.='Edit']`);}
+
+    getUnitOfMeasureRadioButton(name) {
+        return cy.get("div[data-qa=rentType-radio-group] [role=radiogroup]").
+            eq(1).
+            find(`input[value='${name}']`);
+    }
+
+    getRentPerSFCellByRowNumber(rowNumber = 0) {return cy.xpath(`//tr[@data-qa='row-${rowNumber}']/td[@data-qa='rentPerSF-cell']`);}
 }
 
 export default new CommercialRentCompsPage();
