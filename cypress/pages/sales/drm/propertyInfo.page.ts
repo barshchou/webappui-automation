@@ -18,4 +18,8 @@ export default class PropertyInformationForm {
     get netRentableAreaNewComp() {return cy.xpath("//*[.='Net Rentable Area']//child::input");}
 
     get averageUnitSizeNewComp() {return cy.xpath("//*[.='Average Unit Size']//child::input");}
+
+    get internalNotesTextArea() {return cy.xpath("//*[text()='Internal Notes']//following::*[@class='ant-input'][1]");}
+
+    get appraiserCommentaryTextArea() {return cy.xpath("//*[text()='Appraiser Commentary']//following::*[contains(@class, 'ant-input')][1]");}
 }

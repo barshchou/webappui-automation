@@ -2,8 +2,19 @@ import { findCompsPage } from "../../pages/sales/findComps.page";
 import { getUploadFixture } from "../../../utils/fixtures.utils";
 import { isNumber, numberWithCommas } from "../../../utils/numbers.utils";
 import BaseActionsExt from "../base/base.actions.ext";
+import saleInfoActions from "./drm/saleInfo.actions";
+import propertyDescriptionActions from "./drm/propertyDescription.actions";
 
 class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
+
+    get SaleInfo(){
+        return saleInfoActions;
+    }
+
+    get PropertyDescription(){
+        return propertyDescriptionActions;
+    }
+
     addExistingComparable(address: string): FindCompsActions {
         this.clickCreateCompButton()
             .enterCompAddressToSearch(address)
@@ -134,16 +145,6 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
     verifyNumericInputNewComp(inputElement: Cypress.Chainable, numberOfUnits: number | string): FindCompsActions {
         const valueToBe = isNumber(numberOfUnits) ? numberWithCommas(`${numberOfUnits}`.replace("-", "")) : "";
         inputElement.should("have.value", valueToBe);
-        return this;
-    }
-
-    enterInternalNotes(value: string): FindCompsActions {
-        findCompsPage.internalNotesTextArea.clear().type(value).should("have.text", value);
-        return this;
-    }
-
-    enterAppraiserCommentary(value: string): FindCompsActions {
-        findCompsPage.appraiserCommentaryTextArea.clear().type(value).should("have.text", value);
         return this;
     }
 }

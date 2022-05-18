@@ -23,10 +23,11 @@ describe("[QA-4168] Verify the Internal Notes field", { tags: [ Tag.sales, Tag.f
         Sales._FindComps.Page.createCompNumberCommercialUnits.type(`${testData.units.numberOfUnits}`);
         Sales._FindComps.Page.commercialAreaNewComp.type(`${testData.units.numberOfUnits}`);
         Sales._FindComps.Page.newCompContinueButton.click();
-        Sales._FindComps.Page.saleDateCalendarNewComp.click().type(`${testData.saleInfo.saleDate}{enter}`);
-        Sales._FindComps.Page.buyerGranteeNewComp.type(testData.saleInfo.buyer);
-        Sales._FindComps.Page.sellerGrantor.type(testData.saleInfo.seller);
-        Sales._FindComps.selectDropdownOptionNewComp(Sales._FindComps.Page.sourceDropdown, testData.selectItems.source);
+        Sales._FindComps.Page.SaleDateCalendarNewComp.click().type(`${testData.saleInfo.saleDate}{enter}`);
+        Sales._FindComps.Page.BuyerGranteeNewComp.type(testData.saleInfo.buyer);
+        Sales._FindComps.Page.SellerGrantor.type(testData.saleInfo.seller);
+        Sales._FindComps.selectDropdownOptionNewComp(
+            Sales._FindComps.Page.SourceInput, testData.selectItems.source);
         Sales._FindComps.Page.newCompContinueButton.click();
 
         cy.stepInfo(` 1.Verify the Internal Notes is free text input type;
@@ -36,7 +37,7 @@ describe("[QA-4168] Verify the Internal Notes field", { tags: [ Tag.sales, Tag.f
             -The field is optional;
             -The text: ”This commentary is for internal use only and will not export” is displayed below the field.`);
         Sales._FindComps.Page.newCompSaveAndCloseButton.should("be.enabled");
-        Sales._FindComps.enterInternalNotes(testData.verifyTextValue);
+        Sales._FindComps.Actions.PropertyDescription.enterInternalNotes(testData.verifyTextValue);
         Sales._FindComps.Page.internalNotesTextArea.clear().invoke("val", testData.verifyTextValue);
         cy.contains(testData.verifyTextUnderTextArea).should("be.visible");
 
