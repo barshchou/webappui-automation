@@ -22,12 +22,12 @@ describe("Verify the Use column in the grid",
             NavigationSection.navigateToCommercialInPlaceRentRoll()
                 .verifyProgressBarNotExist();
             Income.Commercial.InPlaceRentRoll.chooseLeaseStatusByRowNumber(testData.leaseStatus)
-                .verifyUseCellTextByRowNumber(defaultUseValue);
+                .verifyUseCellByRow(defaultUseValue);
             NavigationSection.navigateToCommercialUnits();
             Property.CommercialUnits.clickCommercialUnitTabByIndex()
                 .clickRadioButtonByValueAndUnitIndex(groupName, useRadios[index]);
             NavigationSection.navigateToCommercialInPlaceRentRoll();
-            Income.Commercial.InPlaceRentRoll.verifyUseCellTextByRowNumber(useText);
+            Income.Commercial.InPlaceRentRoll.verifyUseCellByRow(useText);
             deleteReport(testData.reportCreationData.reportNumber);
         });
     });

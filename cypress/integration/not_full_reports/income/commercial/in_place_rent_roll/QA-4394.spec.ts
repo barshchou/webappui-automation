@@ -21,7 +21,7 @@ describe("Verify the Rent PSF Total is calculated correctly in the grid",
         NavigationSection.navigateToCommercialInPlaceRentRoll();
         Income.Commercial.InPlaceRentRoll.chooseListLeaseStatuses(testData.leaseStatusesList, testData.general.numberOfUnits)
             .enterListPerSF(testData.leaseStatusesList, testData.general.perSFList)
-            .verifyPerSFTotal(testData.leaseStatusesList, testData.general.perSFList, testData.general.squareFeetList);
+            .verifyPerSFAnnuallyTotal(testData.leaseStatusesList, testData.general.perSFList, testData.general.squareFeetList);
         deleteReport(testData.reportCreationData.reportNumber);
     });
 });

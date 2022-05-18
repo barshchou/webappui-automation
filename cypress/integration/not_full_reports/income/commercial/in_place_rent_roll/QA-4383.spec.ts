@@ -15,9 +15,9 @@ describe("Verify the Tenant column in the grid",
         NavigationSection.navigateToCommercialInPlaceRentRoll();
         Income.Commercial.InPlaceRentRoll.chooseLeaseStatusByRowNumber(testData.leaseOccupied)
             .enterTenantNameByRowNumber(testData.tenantName)
-            .verifyTenantNameByRowNumber(testData.leaseOccupied, testData.tenantName)
+            .verifyTenantNameByRow(testData.leaseOccupied, testData.tenantName)
             .chooseLeaseStatusByRowNumber(testData.leaseVacant)
-            .verifyTenantNameByRowNumber(testData.leaseVacant);
+            .verifyTenantNameByRow(testData.leaseVacant);
         deleteReport(testData.reportCreationData.reportNumber);
     });
 });

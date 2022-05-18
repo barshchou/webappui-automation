@@ -20,10 +20,12 @@ describe(`Verify the Back button functionality on the Stabilized Rent Roll page`
         _NavigationSection.clickIncomeApproachButton()
             .clickCommercialArrow()
             .navigateToStabilizedRentRollInCommercial()
+            .verifyProgressBarNotExist()
+            .clickSaveButton()
             .verifyProgressBarNotExist();
 
         cy.stepInfo(` 2. Click on the Back button and verify the user is redirected to the previous page (Income > Commercial > Comp Groups Discussion).`);
-        Income._CommercialManager.InPlaceRentRoll.Actions.clickBackButton();
+        Income._CommercialManager.StabilizedRentRoll.Actions.clickBackButton();
         Income._CommercialManager.CompGroups.verifyThatPageIsOpened();
 
         deleteReport(testData.reportCreationData.reportNumber);
