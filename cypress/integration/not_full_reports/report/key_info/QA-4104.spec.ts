@@ -1,10 +1,12 @@
+import { Tag } from './../../../../utils/tags.utils';
 import testData from "../../../../fixtures/not_full_reports/report/key_info/QA-4104.fixture";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { Report, ReviewExport } from "../../../../actions";
 
 
-describe("[QA-4104] Verify the Market Value generated commentary", { tags: '@to_check_export' }, () => {
+describe("[QA-4104] Verify the Market Value generated commentary",
+    { tags: [ Tag.report, Tag.key_info, Tag.check_export ] }, () => {
 
     it("Test body", () => {
         cy.stepInfo(`1. Create report while creating set the same Job number as report from SalesForce has (e.g. JOB-1764459005) 

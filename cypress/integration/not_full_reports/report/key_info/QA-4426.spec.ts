@@ -6,7 +6,8 @@ import { reportCreationFixture } from "../../../../fixtures/not_full_reports/rep
 import { Report, ReviewExport } from '../../../../actions';
 
 
-describe("[QA-4426] Check the generated commentary for Property Rights Appraised Discussion", { tags:[ Tag.report, Tag.key_info, Tag.check_export ] }, () => {
+describe("[QA-4426] Check the generated commentary for Property Rights Appraised Discussion", 
+    { tags:[ Tag.report, Tag.key_info, Tag.check_export ] }, () => {
     it("Test body", () => {
         testData.reportConclusionAndTextValues.forEach((item, index) => {
             cy.stepInfo(`${index + 1}. Login, create report`);
