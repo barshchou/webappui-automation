@@ -1,6 +1,5 @@
 import { applyMixins } from "../../utils/object.utils";
 import BasePage from "../base/base.page";
-import PropertyDescriptionForm from "./drm/propertyDescription.page";
 import PropertyInformationForm from "./drm/propertyInfo.page";
 import SaleInformationForm from "./drm/salesInfo.page";
 
@@ -66,19 +65,19 @@ class FindCompsPage extends BasePage {
 
     get errorMessageNewComp() {return cy.xpath("//*[text()='Required'][contains(@class, 'errorText')]");}
 
-    // get newCompContinueButton() {return cy.xpath("//button[.='Continue']");}
+    get newCompContinueButton() {return cy.xpath("//button[.='Continue']");}
 
-    // get comparableTypeDropdown() {return cy.xpath("//*[text()='Comparable Type*']//following::*[@class='ant-select-selector'][1]");}
+    get comparableTypeDropdown() {return cy.xpath("//*[text()='Comparable Type*']//following::*[@class='ant-select-selector'][1]");}
 
-    // get createCompNumberCommercialUnits() {return cy.xpath("//*[text()='# Commercial Units*']//following::input[1]");}
+    get createCompNumberCommercialUnits() {return cy.xpath("//*[text()='# Commercial Units*']//following::input[1]");}
 
-    // get commercialAreaNewComp() {return cy.xpath("//*[text()='Commercial Area*']//following::input[1]");}
+    get commercialAreaNewComp() {return cy.xpath("//*[text()='Commercial Area*']//following::input[1]");}
 
-    // get netRentableAreaNewComp() {return cy.xpath("//*[.='Net Rentable Area']//child::input");}
+    get netRentableAreaNewComp() {return cy.xpath("//*[.='Net Rentable Area']//child::input");}
 
-    // get averageUnitSizeNewComp() {return cy.xpath("//*[.='Average Unit Size']//child::input");}
+    get averageUnitSizeNewComp() {return cy.xpath("//*[.='Average Unit Size']//child::input");}
 
-    // get newCompSaveAndCloseButton() {return cy.xpath("//button[.='Save & Close']");}
+    get newCompSaveAndCloseButton() {return cy.xpath("//button[.='Save & Close']");}
 }
 
 /**
@@ -86,8 +85,7 @@ class FindCompsPage extends BasePage {
  * the expected mixins with the same name as your base
  */
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
-interface FindCompsPage extends PropertyInformationForm, 
-SaleInformationForm, PropertyDescriptionForm {}
-applyMixins(FindCompsPage, [ PropertyInformationForm, SaleInformationForm, PropertyInformationForm ]);
+interface FindCompsPage extends PropertyInformationForm, SaleInformationForm {}
+applyMixins(FindCompsPage, [ PropertyInformationForm, SaleInformationForm ]);
 
 export const findCompsPage = new FindCompsPage();

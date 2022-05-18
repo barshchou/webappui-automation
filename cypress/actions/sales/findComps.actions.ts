@@ -2,23 +2,17 @@ import { findCompsPage } from "../../pages/sales/findComps.page";
 import { getUploadFixture } from "../../../utils/fixtures.utils";
 import { isNumber, numberWithCommas } from "../../../utils/numbers.utils";
 import BaseActionsExt from "../base/base.actions.ext";
-import saleInfoAction from "./drm/saleInfo.actions";
-import propertyDecriptionAction from "./drm/propertyDesc.actions";
-import propertyInfoActions from "./drm/propertyInfo.actions";
-
+import saleInfoActions from "./drm/saleInfo.actions";
+import propertyDescriptionActions from "./drm/propertyDescription.actions";
 
 class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
 
     get SaleInfo(){
-        return saleInfoAction;
+        return saleInfoActions;
     }
 
     get PropertyDescription(){
-        return propertyDecriptionAction;
-    }
-
-    get PropertyInfo(){
-        return propertyInfoActions;
+        return propertyDescriptionActions;
     }
 
     addExistingComparable(address: string): FindCompsActions {
