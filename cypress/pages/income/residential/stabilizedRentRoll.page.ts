@@ -1,14 +1,13 @@
-import BasePage from "../../base/base.page";
+import ResidentialRentRollSharedPage from "../../shared_components/residentialRentRoll.shared.page";
 
-class StabilizedRentRollPage extends BasePage{
+class StabilizedRentRollPage extends ResidentialRentRollSharedPage{
+
     getSummaryTableUnitByType(type) {return cy.xpath(`//*[@data-qa='unit-group-name'][.='${type}']`);}
 
     getSummaryTableRentConclusionUnit(unitType) {
         return cy.xpath(`//*[@data-qa='unit-group-name'][.='${unitType}']` +
             "//following-sibling::td[@data-qa='unit-group-market-rent-conclusion']");
     }
-
-    get isInspectedInputs() {return cy.get("[data-qa=isInspected-cell] input");}
 
     get unitNumberCells() {return cy.get("[data-qa=unitNumber-cell]");}
 

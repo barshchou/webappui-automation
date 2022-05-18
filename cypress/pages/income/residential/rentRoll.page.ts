@@ -1,6 +1,7 @@
-import BasePage from "../../base/base.page";
+import ResidentialRentRollSharedPage from "../../shared_components/residentialRentRoll.shared.page";
 
-class InPlaceRentRollPage extends BasePage {
+class InPlaceRentRollPage extends ResidentialRentRollSharedPage {
+
     get numberOfResidentialUnitsField() {return cy.get("*[data-qa='number-of-items-input'] input");}
 
     get goToPropSummaryButton() {return cy.get("[aria-label='Go To Property Summary'] [href$='/property-summary']");}
@@ -25,13 +26,9 @@ class InPlaceRentRollPage extends BasePage {
 
     get importDataButton() {return cy.get("*[data-qa='import-data-btn']");}
 
-    get isInspectedColumnCells() {return cy.get("*[data-qa^='isInspected']");}
-
     get rentTypeCells() {return cy.get("[data-qa^=rentType]");}
 
     get textAreaToInput() {return cy.get("div:not([class*='hidden']) > *[class='handsontableInput']");}
-
-    getIsInspectedCheckboxByRowNumber(number) {return cy.get(`[data-qa^=isInspected-${number}] input`);}
 
     get unitNumberCells() {return cy.get("[data-qa^='number'][data-qa$=cell]");}
 

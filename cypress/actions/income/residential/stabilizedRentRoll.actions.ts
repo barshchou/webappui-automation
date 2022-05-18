@@ -21,18 +21,6 @@ class StabilizedRentRollActions extends ResidentialRentRollSharedActions<typeof 
         return this;
     }
 
-    verifyRowsNumber(numberOfUnits: number): this {
-        stabRentRollPage.isInspectedInputs.should("have.length", numberOfUnits);
-        return this;
-    }
-
-    verifyCheckedIsInspected(rowsToBeChecked: Array<number>): this {
-        rowsToBeChecked.forEach(index => {
-            stabRentRollPage.isInspectedInputs.eq(index).should("be.checked");
-        });
-        return this;
-    }
-
     verifyUnitsNumberByOrder(): this {
         let i = 1;
         stabRentRollPage.unitNumberCells.each(cell => {

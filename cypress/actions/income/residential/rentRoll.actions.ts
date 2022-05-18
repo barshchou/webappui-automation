@@ -32,15 +32,6 @@ class InPlaceRentRollActions extends ResidentialRentRollSharedActions<typeof ren
         return this;
     }
 
-    verifyNumberOfIsInspectedRows(unitsNumber: string | number): InPlaceRentRollActions {
-        if (unitsNumber !== 0) {
-            rentRollPage.isInspectedColumnCells.first().scrollIntoView({ duration: 2000 });
-            rentRollPage.isInspectedColumnCells.last().scrollIntoView({ duration: 2000 });
-        }
-        rentRollPage.isInspectedColumnCells.should("have.length", unitsNumber);
-        return this;
-    }
-
     clickGoToPropSummaryButton(): InPlaceRentRollActions {
         rentRollPage.goToPropSummaryButton.should("be.visible").click();
         return this;
@@ -171,12 +162,12 @@ class InPlaceRentRollActions extends ResidentialRentRollSharedActions<typeof ren
         return this;
     }
 
-    checkIsInspectedByRowNumber(number: string | number): InPlaceRentRollActions {
-        rentRollPage.getIsInspectedCheckboxByRowNumber(number).check();
+    checkIsInspectedByRowNumber(number: number): InPlaceRentRollActions {
+        rentRollPage.isInspectedInputs.eq(number).check();
         return this;
     }
 
-    checkListIsInspectedByRowNumbers(numbers: Array<string | number>): InPlaceRentRollActions {
+    checkListIsInspectedByRowNumbers(numbers: Array<number>): InPlaceRentRollActions {
         numbers.forEach(number => {
             this.checkIsInspectedByRowNumber(number);
         });

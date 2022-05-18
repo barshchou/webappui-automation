@@ -34,7 +34,7 @@ describe("Full bowery way, multifamily as complete report", { tags: [ Tag.full_r
             .fillMarketResearch(testData.marketResearch)
             .enterMarketQuarter(testData.marketResearch.quarter)
             .clickPullFromDropbox()
-            .verifyMultifamilySubmarketAnalysisHasDocument(testData.marketResearch.multifamilySubmarketDocument)
+            // .verifyMultifamilySubmarketAnalysisHasDocument(testData.marketResearch.multifamilySubmarketDocument)
             .clickSaveContinueButton();
         Property.History.enterCurrentOwner(testData.owner.name)
             .checkIsUnderContractCheckbox()
