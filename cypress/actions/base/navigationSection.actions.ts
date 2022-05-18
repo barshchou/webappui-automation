@@ -1,11 +1,8 @@
 import navigationSectionPage from "../../pages/base/navigationSection.page";
-import BaseActions from "./base.actions";
+import BaseActionsExt from "./base.actions.ext";
 
-class NavigationSectionActions extends BaseActions {
-    get Page() {
-        return navigationSectionPage;
-    }
-
+class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPage> {
+    
     openReviewAndExport(isWithSave = false) {
         let reportAlias = "docxReportAsync";
         cy.intercept({
@@ -89,6 +86,11 @@ class NavigationSectionActions extends BaseActions {
         return this;
     }
 
+    clickMarketButton() {
+        navigationSectionPage.marketButton.click();
+        return this;
+    }
+
     clickReportButton() {
         navigationSectionPage.reportButton.click();
         return this;
@@ -158,6 +160,13 @@ class NavigationSectionActions extends BaseActions {
     navigateToPropertySummary() {
         this.clickPropertyButton()
             .clickSummaryButton()
+            .clickYesButton();
+        return this;
+    }
+
+    navigateToPropertyMarket(): NavigationSectionActions {
+        this.clickPropertyButton()
+            .clickMarketButton()
             .clickYesButton();
         return this;
     }
@@ -315,12 +324,52 @@ class NavigationSectionActions extends BaseActions {
         return this;
     }
 
+    clickCoverPage() {
+        navigationSectionPage.coverPage.click();
+        return this;
+    }
+
+    clickIntroduction() {
+        navigationSectionPage.introduction.click();
+        return this;
+    }
+
+    clickProfileOrganization() {
+        navigationSectionPage.profileOrganization.click();
+        return this;
+    }
+
+    selectLink(nameLink: string) {
+        navigationSectionPage.menuItemsProfileOrganization.contains(nameLink).click();
+        return this;
+    }
+
+    navigateToProfileOrganization(nameLink: string) {
+        this.clickProfileOrganization()
+            .selectLink(nameLink);
+        return this;
+    }
+
     navigateToLaundry() {
         this.clickIncomeApproachButton()
             .clickMiscellaneousIncome()
             .clickLaundryButton()
             .clickYesButton();
         return this;
+    }
+
+    navigateToCoverPage() {
+        this.clickPreviewEditButton()
+        .clickCoverPage()
+        .clickYesButton();
+    return this;
+    }
+
+    navigateToIntroduction() {
+        this.clickPreviewEditButton()
+        .clickIntroduction()
+        .clickYesButton();
+    return this;
     }
 
     navigateToLetterOfTransmittal() {
@@ -424,4 +473,4 @@ class NavigationSectionActions extends BaseActions {
     }
 }
 
-export default new NavigationSectionActions();
+export default new NavigationSectionActions(navigationSectionPage);

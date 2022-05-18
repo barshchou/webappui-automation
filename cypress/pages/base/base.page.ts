@@ -19,10 +19,6 @@ export default class BasePage {
         return cy.get("[aria-label=close]");
     }
 
-    get formCancelBtn() {
-        return cy.xpath("//*[contains(@role, 'dialog')]/descendant::*[contains(text(), 'Cancel')]");
-    }
-
     get formYesRevertBtn() {
         return cy.xpath("//*[contains(@role, 'dialog')]/descendant::*[contains(text(), 'Yes, revert')]");
     }

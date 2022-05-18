@@ -8,8 +8,9 @@ import Final from "../../actions/final/final.manager";
 import Sales from "../../actions/sales/sales.manager";
 import proFormaTypesEnum from "../../enums/proFormaTypes.enum";
 import tableExpenseHistoryCellNames from "../../../cypress/enums/expenseHistoryTableRows.enum";
+import { Tag } from "../../utils/tags.utils";
 
-describe("Full bowery way, multifamily as complete report", () => {
+describe("Full bowery way, multifamily as complete report", { tags: [ Tag.full_report ] }, () => {
     it("Test", () => {
         cy.login();
         Homepage.createReport(testData.reportCreationData);

@@ -3,8 +3,11 @@ import { createReport, deleteReport } from "../../../../actions/base/baseTest.ac
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import { Report, PreviewEdit, Base } from "../../../../actions";
 import { replaceEntersWithSpaces } from "../../../../../utils/string.utils";
+import { Tag } from "../../../../utils/tags.utils";
 
-describe("Verify the Appraiser Commentary field", () => {
+describe("Verify the Appraiser Commentary field", 
+    { tags: [ Tag.report, Tag.client ] }, () => {
+        
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
     });

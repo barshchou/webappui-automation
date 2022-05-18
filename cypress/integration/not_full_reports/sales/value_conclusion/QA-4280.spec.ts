@@ -8,7 +8,8 @@ import { Tag } from "../../../../utils/tags.utils";
 
 describe(`Prospective Market Value As Stabilized -> Less Residential Rent Loss 
                 data is pulled from Cap Rate Conclusion`, 
-{ tags:[ Tag.sales, Tag.value_conclusion ] }, () => {
+    { tags:[ Tag.sales, Tag.value_conclusion ] }, () => {
+        
     before("Login action", () => {
         createReport(testData.reportCreationData);
     });

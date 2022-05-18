@@ -3,8 +3,11 @@ import { createReport } from "../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Sales from "../../../../actions/sales/sales.manager";
 import ReviewExport from "../../../../actions/reviewExport/reviewExport.actions";
+import { Tag } from "../../../../utils/tags.utils";
 
-describe("Check custom adjustment", () => {
+describe("Check custom adjustment", 
+    { tags: [ Tag.adjust_comps, Tag.sales ] }, () => {
+        
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
     });

@@ -9,6 +9,7 @@ export enum Tag {
     expense_forecast = "@expense_forecast",
     fix = "@fix",
     find_comps = "@find_comps",
+    adjust_comps = "@adjust_comps",
     rent_comps = "@rent_comps",
     residential = "@residential",
     commercial_units = "@commercial_units",
@@ -17,5 +18,11 @@ export enum Tag {
     check_export = "@check_export",
     tax_info = "@tax_info",
     report = "@report",
-    client ="@client"
+    client = "@client",
+    full_report = "@full_report",
+    potential_gross_income = "@potential_gross_income",
+    pro_forma = "@pro_forma",
+    preview_edit = "@preview_edit",
+    introduction = "@introduction",
+    market = "@market"
 }

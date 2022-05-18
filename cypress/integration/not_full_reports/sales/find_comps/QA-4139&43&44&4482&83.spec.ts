@@ -11,13 +11,13 @@ import { Tag } from "../../../../utils/tags.utils";
 const conditionalDescribe = isProdEnv() ? describe.skip : describe;
 
 conditionalDescribe("Group of tests for numeric inputs at create comp modal", 
-{ tags:[ Tag.find_comps, Tag.sales ] }, () => {
+    { tags:[ Tag.find_comps, Tag.sales ] }, () => {
 
     beforeEach("Login, create report", () => {
         createReport(testData.reportCreationData);
         cy.stepInfo("Navigate to FindComps page and create new comp");
         _NavigationSection.navigateToFindComps();
-        Sales._FindComps.openAddNewComparableFormSearchResult(testData.compAddress)
+        Sales._FindComps.openAddNewComparableFormSearchResult(testData.compAddress, 1)
             .selectDropdownOptionNewComp(Sales._FindComps.Page.conditionDropdown, testData.condition);
     });
 

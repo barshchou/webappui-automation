@@ -9,8 +9,7 @@ import { Tag } from "../../../../utils/tags.utils";
 
 
 describe("Historical expense Electricity Per Unit is correctly calculated and displayed",
-{ tags:[ Tag.snapshot_tests, Tag.income, Tag.expense_forecast ] }, () => {
-
+    { tags:[ Tag.snapshot_tests, Tag.income, Tag.expense_forecast ] }, () => {
 
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
