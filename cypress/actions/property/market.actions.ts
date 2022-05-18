@@ -104,15 +104,38 @@ class MarketActions extends BaseActions{
         return this;
     }
 
-    updateExposureTimeMin(exposureTime: number ): MarketActions {
+    updateExposureTimeMin(exposureTime: number): MarketActions {
         marketPage.exposureTimeMin.clear().type(exposureTime.toString())
             .should("have.value", exposureTime);
         return this;
     }
 
-    updateExposureTimeMax(exposureTime: number ): MarketActions {
+    updateExposureTimeMax(exposureTime: number): MarketActions {
         marketPage.exposureTimeMax.clear().type(exposureTime.toString())
             .should("have.value", exposureTime);
+        return this;
+    }
+
+    updateMarketingTimeMin(exposureTime: number): MarketActions {
+        marketPage.marketingTimeMin.clear().type(exposureTime.toString())
+            .should("have.value", exposureTime);
+        return this;
+    }
+
+    updateMarketingTimeMax(exposureTime: number): MarketActions {
+        marketPage.marketingTimeMax.clear().type(exposureTime.toString())
+            .should("have.value", exposureTime);
+        return this;
+    }
+
+    checkIncludeMarketingTimeDescription(): MarketActions {
+        marketPage.includeMarketTimeCheckbox.click();
+        marketPage.marketTimeDescription.should("be.visible");
+        return this;
+    }
+
+    verifyMarketTimeDescription(expectedComment: string): MarketActions {
+        marketPage.marketTimeDescription.should("have.text", expectedComment);
         return this;
     }
 }

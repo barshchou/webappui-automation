@@ -5,6 +5,10 @@ class MarketPage extends BasePage{
 
     get exposureTimeMax() {return cy.get("*[name='exposureTime.max']");}
 
+    get marketingTimeMin() {return cy.get("*[name='marketingTime.min']");}
+    
+    get marketingTimeMax() {return cy.get("*[name='marketingTime.max']");}
+
     get neighborhood() {return cy.xpath("//label[.='Neighborhood']//following::input[1]");}
 
     get area() {return cy.xpath("//label[.='Area']//following::input[1]");}
@@ -28,6 +32,10 @@ class MarketPage extends BasePage{
     get pulledFileConfirmation() {return cy.contains("This file will appear after the Introduction.");}
 
     get exposureTimeDescription() {return cy.xpath("//*[.='Exposure Time Description']//following::div[@data-slate-editor]");}
+
+    get marketTimeDescription() {return cy.xpath("//*[.='Marketing Time Description']//following::div[@data-slate-editor]");}
+
+    get includeMarketTimeCheckbox() {return cy.get("[data-qa^='includeMarketingTime']");}
 }
 
 export default new MarketPage();
