@@ -71,21 +71,29 @@ class AdjustCompsActions extends BaseActions {
         return this;
     }
 
-    enterUtilitiesAdjustmentByColumn(adjustmentName: string[], value: number[], index = 0): AdjustCompsActions {
+    enterUtilitiesAdjustmentGroup(adjustmentName: string[], value: number[], index = 0): AdjustCompsActions {
         adjustmentName.forEach((adjustment, i) => {
-            adjustCompsPage.getUtilitiesAdjustmentsRowCells(adjustment).eq(index).scrollIntoView().clear()
-            .type(`${value[i]}{del}`).should("have.value", `${value[i]}%`);
+            this.enterUtilitiesAdjustmentByName(adjustment, value[i], index);
         });
-        
         return this;
     }
 
-    enterMarketAdjustmentByColumn(adjustmentName: string[], value: number[], index = 0): AdjustCompsActions {
+    enterUtilitiesAdjustmentByName(adjustmentName: string, value: number, index = 0): AdjustCompsActions {
+        adjustCompsPage.getUtilitiesAdjustmentsRowCells(adjustmentName).eq(index).scrollIntoView().clear()
+            .type(`${value}{del}`).should("have.value", `${value}%`);
+        return this;
+    }
+
+    enterMarketAdjustmentsGroup(adjustmentName: string[], value: number[], index = 0): AdjustCompsActions {
         adjustmentName.forEach((adjustment, i) => {
-            adjustCompsPage.getMarketAdjustmentsRowCells(adjustment).eq(index).scrollIntoView().clear()
-            .type(`${value[i]}{del}`).should("have.value", `${value[i]}%`);
+            this.enterMarketAdjustmentByName(adjustment, value[i], index);
         });
-        
+        return this;
+    }
+
+    enterMarketAdjustmentByName(adjustmentName: string, value: number, index = 0): AdjustCompsActions {
+        adjustCompsPage.getMarketAdjustmentsRowCells(adjustmentName).eq(index).scrollIntoView().clear()
+            .type(`${value}{del}`).should("have.value", `${value}%`);
         return this;
     }
 
@@ -128,18 +136,18 @@ class AdjustCompsActions extends BaseActions {
         return this;
     }
 
-    /*
-    Verify that Trended Price Per Total units is adjusted based on
+    /**
+    * Verify that Trended Price per selected @param {string} basis adjusted based on
     Net Market adjustment total value
     */
-    verifyTrendedPricePerTotalUnits(index = 0): AdjustCompsActions {
+    verifyTrendedPricePerBasis(basis: string, index = 0): AdjustCompsActions {
         adjustCompsPage.viewMarketDetails.click();
-        adjustCompsPage.pricePerUnit.should("be.visible");
-        adjustCompsPage.pricePerUnit.invoke("text").then(pricePerUnitText => {
-            const pricePerUnitNumber = getNumberFromDollarNumberWithCommas(pricePerUnitText);
+        adjustCompsPage.getPricePerBasisValue(basis).should("be.visible");
+        adjustCompsPage.getPricePerBasisValue(basis).invoke("text").then(pricePerUnitText => {
+            const pricePerBasisNumber = getNumberFromDollarNumberWithCommas(pricePerUnitText);
             adjustCompsPage.marketAdjustmentsCells.eq(index).invoke("text").then(marketAdjText => {
                 const marketAdjNumber = Number(marketAdjText.replace("%", ""));
-                const adjustedTrendedPriceToBe = Math.ceil((pricePerUnitNumber + pricePerUnitNumber * (marketAdjNumber / 100)) * 100) / 100;
+                const adjustedTrendedPriceToBe = Math.ceil((pricePerBasisNumber + pricePerBasisNumber * (marketAdjNumber / 100)) * 100) / 100;
                 let adjustedTrendedPriceText: string;
                 if (adjustedTrendedPriceToBe < 0) {
                     adjustedTrendedPriceText = `-$${numberWithCommas(adjustedTrendedPriceToBe.toFixed(2)

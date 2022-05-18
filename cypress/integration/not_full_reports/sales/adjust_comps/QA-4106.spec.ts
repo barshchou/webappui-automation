@@ -23,8 +23,8 @@ describe("Total Utility Adjustments in Sales Adjustment Grid is calculated with 
                     Trended Price per Unit = [Unadjusted Price] * (1 + (SUM[Unadjusted Adjustments]))/ # of total units`);
         _NavigationSection.openAdjustCompsInSales();
         Sales._AdjustComps.checkCalculationUnitsRadio(testData.calculationUnits)
-            .enterMarketAdjustmentByColumn(Object.keys(testData.comparablesAdjustments), Object.values(testData.comparablesAdjustments))
-            .verifyTrendedPricePerTotalUnits();
+            .enterMarketAdjustmentsGroup(Object.keys(testData.comparablesAdjustments), Object.values(testData.comparablesAdjustments))
+            .verifyTrendedPricePerBasis(testData.basis);
 
         deleteReport(testData.reportCreationData.reportNumber);
     });

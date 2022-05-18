@@ -23,4 +23,5 @@ export default {
     comparablesAdjustments: _compAdjustments,
     comparable: Object.freeze(comparableFixture()),
     calculationUnits: "Per Total Units",
+    basis: "Price per Unit"
 };

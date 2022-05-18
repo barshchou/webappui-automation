@@ -53,6 +53,8 @@ class AdjustCompsPage extends BasePage {
 
     get pricePerUnit() {return cy.xpath("//*[starts-with(., 'Price per Unit')]//following-sibling::td");}
 
+    getPricePerBasisValue(basisName: string) {return cy.xpath(`//*[starts-with(., '${basisName}')]//following-sibling::td`);}
+
     get viewMarketDetails() { return cy.xpath("//div[text() = 'Market Adjustment']");}
 }
 

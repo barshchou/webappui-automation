@@ -23,4 +23,5 @@ export default {
     comparablesAdjustments: _compAdjustments,
     comparable: Object.freeze(comparableFixture()),
     calculationUnits: "Per Residential Units",
+    basis: "Price per Unit"
 };
