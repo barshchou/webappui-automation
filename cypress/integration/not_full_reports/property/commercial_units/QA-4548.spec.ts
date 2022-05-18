@@ -18,7 +18,7 @@ describe("Verify the Modified label functionality",
             cy.stepInfo("1. Click on the Edit button on the Property > Commercial Units.");
             _NavigationSection.navigateToCommercialUnits();
             Property._CommercialUnits.verifyThatPageIsOpened();
-            cy.xpath("//span[contains(text(), 'Modified')]").should('not.exist');
+            Property._CommercialUnits.Page.modifiedLabel(0, false).should('not.exist');
             Property._CommercialUnits.Page.formEditBtn(0).scrollIntoView().click();
 
             cy.stepInfo("2. Edit comment and click on the Save button.");
