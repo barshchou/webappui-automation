@@ -24,7 +24,10 @@ conditionalDescribe("Verify the New Comp is created after clicking on 'Save&Clos
             .selectDropdownOptionNewComp(Sales._FindComps.Page.conditionDropdown, testData.condition);
 
         Sales._FindComps.Page.newCompContinueButton.should("be.enabled").click();
-        Sales._FindComps.selectSource();
+        Sales._FindComps.selectDropdownOptionNewComp(
+            Sales._FindComps.Page.SourceInput, "Bowery Subject"
+        );
+        Sales._FindComps.Page.newCompContinueButton.should("be.enabled").click();
 
         cy.pause();
 
