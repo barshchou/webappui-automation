@@ -4,7 +4,7 @@ import { _NavigationSection } from './../../../../actions/base/index';
 import testData from "../../../../fixtures/not_full_reports/sales/find_comps/QA-4167.fixture";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 
-describe("[QA-4168] Verify the Appraiser Commentary field", { tags: [ Tag.sales, Tag.find_comps, Tag.comp_plex ] }, () => {
+describe("[QA-4167] Verify the Appraiser Commentary field", { tags: [ Tag.sales, Tag.find_comps, Tag.comp_plex ] }, () => {
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
     });
