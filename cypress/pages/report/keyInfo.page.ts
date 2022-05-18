@@ -32,6 +32,15 @@ class KeyInfoPage extends BasePage{
     }
 
     get inputToCheckMyDateIsDifferent() {return cy.get("*[data-qa='isDifferentDateOfValuation']");}
+    
+    get textBoxDefinitionOfMarketValue() {return cy.xpath("//*[contains(@data-qa, 'definition-of-market-value-tile')]//following::*[@data-slate-editor][1]");}
+
+    get tooltipDefinitionOfMarketValue() {return cy.get("*[role='tooltip']");}
+
+    get test() {return cy.xpath("//*[@id='mui-184']");}
+
+    get iconDefinitionOfMarketValue() {return cy.xpath("//*[contains(@data-qa, 'definition-of-market-value-tile')]//following::*[@data-icon='info-circle'][1]");}
+
 }
 
 export default new KeyInfoPage();
