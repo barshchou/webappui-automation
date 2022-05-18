@@ -14,7 +14,6 @@ const reportCreationData = conclusionValue => {
         .setConclusionValue(conclusionValue).build();
 };
 
-
 describe("[QA-4028] Verify that the Due Date field is pre-filled on the WebApp with the date corresponding to the Current Due Date value for that job in SalesForce",
     { tags: [ Tag.report, Tag.key_info, Tag.salesforce ] }, () => {
     it("Test body", () => {
