@@ -6,4 +6,6 @@ export default class ResidentialRentRollSharedPage extends BasePage {
 
     get isInspectedColumnCells() {return cy.get("*[data-qa^='isInspected']");}
 
+    get unitNumberCells() {return cy.get("[data-qa^='number'][data-qa$=cell]");}
+
 }

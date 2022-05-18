@@ -30,8 +30,6 @@ class InPlaceRentRollPage extends ResidentialRentRollSharedPage {
 
     get textAreaToInput() {return cy.get("div:not([class*='hidden']) > *[class='handsontableInput']");}
 
-    get unitNumberCells() {return cy.get("[data-qa^='number'][data-qa$=cell]");}
-
     get roomsCells() {return cy.get("[data-qa^=rooms]");}
 
     get bedroomsCells() {return cy.get("[data-qa^=bedrooms]");}

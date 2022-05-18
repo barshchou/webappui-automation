@@ -21,15 +21,6 @@ class StabilizedRentRollActions extends ResidentialRentRollSharedActions<typeof 
         return this;
     }
 
-    verifyUnitsNumberByOrder(): this {
-        let i = 1;
-        stabRentRollPage.unitNumberCells.each(cell => {
-           expect(cell.text()).to.eq(`${i}`);
-           i++;
-        });
-        return this;
-    }
-
     verifyRoomsNumberByRow(roomsNumber: number, rowNumber: number): this {
         stabRentRollPage.roomsCells.eq(rowNumber).should("have.text", roomsNumber);
         return this;

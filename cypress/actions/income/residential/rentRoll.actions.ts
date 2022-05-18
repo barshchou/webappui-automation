@@ -321,15 +321,6 @@ class InPlaceRentRollActions extends ResidentialRentRollSharedActions<typeof ren
         return this;
     }
 
-    verifyNumberOfUnitsNumberCells(numberOfUnits = 0): InPlaceRentRollActions {
-        if (numberOfUnits === 0) {
-            rentRollPage.unitNumberCells.should("not.exist");
-        } else {
-            rentRollPage.unitNumberCells.should("have.length", numberOfUnits);
-        }
-        return this;
-    }
-
     verifyNumberOfNumberCells(numberOfUnits = 0): InPlaceRentRollActions {
         if (numberOfUnits === 0) {
             rentRollPage.numberCells.should("not.exist");
