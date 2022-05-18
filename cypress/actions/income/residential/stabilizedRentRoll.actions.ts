@@ -1,8 +1,8 @@
-import BaseActions from "../../base/base.actions";
 import stabRentRollPage from "../../../pages/income/residential/stabilizedRentRoll.page";
 import { getNumberFromDollarNumberWithCommas, numberWithCommas } from "../../../../utils/numbers.utils";
+import ResidentialRentRollSharedActions from "../../shared_components/residentialRentRoll.shared.actions";
 
-class StabilizedRentRollActions extends BaseActions{
+class StabilizedRentRollActions extends ResidentialRentRollSharedActions<typeof stabRentRollPage> {
 
     verifyTableUnitTypeExist(type: string): this {
         stabRentRollPage.getSummaryTableUnitByType(type).should("exist");
@@ -250,4 +250,4 @@ class StabilizedRentRollActions extends BaseActions{
     }
 }
 
-export default new StabilizedRentRollActions();
+export default new StabilizedRentRollActions(stabRentRollPage);

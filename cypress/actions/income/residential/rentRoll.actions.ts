@@ -6,9 +6,9 @@ import {
     numberWithCommas
 } from "../../../../utils/numbers.utils";
 import { isProdEnv } from "../../../../utils/env.utils";
-import BaseActionsExt from "../../base/base.actions.ext";
+import ResidentialRentRollSharedActions from "../../shared_components/residentialRentRoll.shared.actions";
 
-class InPlaceRentRollActions extends BaseActionsExt<typeof rentRollPage> {
+class InPlaceRentRollActions extends ResidentialRentRollSharedActions<typeof rentRollPage> {
 
     verifyViaCSVExist(): InPlaceRentRollActions {
         rentRollPage.importViaCSVHeader.scrollIntoView().should("be.visible");
