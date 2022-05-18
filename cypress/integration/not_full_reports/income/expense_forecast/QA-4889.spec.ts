@@ -8,8 +8,7 @@ import { Tag } from "../../../../utils/tags.utils";
 
 
 describe("Comparable Min, Max, Avg values for Electricity Per Unit are correctly calculated and displayed", 
-{ tags:[ Tag.snapshot_tests, Tag.expense_forecast, Tag.income ] }, () => {
-
+  { tags:[ Tag.snapshot_tests, Tag.expense_forecast, Tag.income ] }, () => {
 
   before("Login, create report", () => {
     createReport(testData.reportCreationData);

@@ -3,8 +3,11 @@ import NavigationSection from "../../../../actions/base/navigationSection.action
 import Sales from "../../../../actions/sales/sales.manager";
 import { Final } from "../../../../actions";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { Tag } from "../../../../utils/tags.utils";
 
-describe("Save and Save & Continue buttons tests", () => {
+describe("Save and Save & Continue buttons tests", 
+    { tags: [ Tag.sales, Tag.value_conclusion ] }, () => {
+        
     beforeEach("Login, open sales value conclusion and make changes", () => {
         createReport(testData.reportCreationData);
         NavigationSection.navigateToSalesValueConclusion();

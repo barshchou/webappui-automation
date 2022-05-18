@@ -7,6 +7,7 @@ import { Tag } from "../../../../../utils/tags.utils";
 describe("Verify the suggested text dropdown in the new narrative component added through '=' "+
         "for the 'Unchanged Renovation' option", 
         { tags:[ Tag.income, Tag.commercial, Tag.in_place_rent_roll ] }, () => {
+            
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
     });
@@ -18,11 +19,11 @@ describe("Verify the suggested text dropdown in the new narrative component adde
 
         cy.stepInfo("2. Edit discussion and enter '=un' value; click 'Unchanged Rennovation' suggested value");
         Income._CommercialManager.InPlaceRentRoll.clickEditDiscussionButton()
-            .clearAndEnterNewCommentary(testData.value)
+            .editDiscussionTextArea(testData.value)
             .clickNarrativeSuggestions(testData.unchangeRennovation);
 
         cy.stepInfo("3. Verify that the following text appears.");
-        Income._CommercialManager.InPlaceRentRoll.verifyInPlaceCommercialIncomeTextArea(testData.verifyAreaValue);
+        Income._CommercialManager.InPlaceRentRoll.verifyCommentaryContainsText(testData.verifyAreaValue);
 
         deleteReport(testData.reportCreationData.reportNumber);
     });

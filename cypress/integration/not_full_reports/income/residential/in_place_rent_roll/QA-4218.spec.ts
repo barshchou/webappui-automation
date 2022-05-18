@@ -5,8 +5,11 @@ import Enums from "../../../../../enums/enums";
 import { Income } from "../../../../../actions";
 import Property from "../../../../../actions/property/property.manager";
 import ReportDataCreator from "../../../../../fixtures/data_creator/reportData.creator";
+import { Tag } from "../../../../../utils/tags.utils";
 
-describe("Verify the grid is present", () => {
+describe("Verify the grid is present", 
+    { tags:[ Tag.income, Tag.residential, Tag.in_place_rent_roll ] }, () => {
+        
     const conclusionValues = [ Enums.VALUE_CONCLUSION_TYPE.AS_IS, Enums.VALUE_CONCLUSION_TYPE.AS_STABILIZED,
         Enums.VALUE_CONCLUSION_TYPE.AS_COMPLETE ];
 

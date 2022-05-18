@@ -3,8 +3,11 @@ import { createReport, deleteReport } from "../../../../actions/base/baseTest.ac
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Sales from "../../../../actions/sales/sales.manager";
 import Property from "../../../../actions/property/property.manager";
+import { Tag } from "../../../../utils/tags.utils";
 
-describe("Gross Building Area value pulled from Property -> Summary -> As Is Building Description", () => {
+describe("Gross Building Area value pulled from Property -> Summary -> As Is Building Description", 
+    { tags: [ Tag.sales, Tag.value_conclusion ] }, () => {
+        
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
     });

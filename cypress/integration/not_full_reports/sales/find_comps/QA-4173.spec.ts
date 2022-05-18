@@ -2,8 +2,11 @@ import testData from "../../../../fixtures/not_full_reports/sales/find_comps/QA-
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Sales from "../../../../actions/sales/sales.manager";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { Tag } from "../../../../utils/tags.utils";
 
-describe("Verify the Enter Report Unique ID modal is displayed on clicking the Import Comps button", () => {
+describe("Verify the Enter Report Unique ID modal is displayed on clicking the Import Comps button", 
+    { tags:[ Tag.find_comps, Tag.sales ] }, () => {
+        
     before("Login and create report", () => {
         createReport(testData.reportCreationData);
     });
