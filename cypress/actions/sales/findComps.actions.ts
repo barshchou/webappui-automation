@@ -142,6 +142,11 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
         findCompsPage.internalNotesTextArea.clear().type(value).should("have.text", value);
         return this;
     }
+
+    enterAppraiserCommentary(value: string): FindCompsActions {
+        findCompsPage.appraiserCommentaryTextArea.clear().type(value).should("have.text", value);
+        return this;
+    }
 }
 
 
