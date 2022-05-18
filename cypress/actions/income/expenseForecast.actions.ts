@@ -136,7 +136,7 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
         return this;
     }
 
-    private getItemNameForAverage(itemOriginal: string): string {
+    getItemNameForAverage(itemOriginal: string): string {
         switch (itemOriginal) {
             case "waterAndSewer":
                 return "waterSewer";

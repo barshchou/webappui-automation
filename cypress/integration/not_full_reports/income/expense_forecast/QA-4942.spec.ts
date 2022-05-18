@@ -12,7 +12,7 @@ describe("Comparable Min, Max, Avg values for Fuel Per SF are correctly calculat
         createReport(testData.reportCreationData);
     });
 
-    it("Test body", { tags: '@snapshot_tests' }, () => {
+    it("Test body", () => {
         cy.stepInfo("1. Go to Income > Comparable Expenses");
         NavigationSection.Actions.navigateToComparableExpenses();
 
