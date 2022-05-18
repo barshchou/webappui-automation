@@ -140,7 +140,6 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
     selectSaleDate(): this {
         this.Page.SaleDateCalendarNewComp.click();
         this.Page.SaleDateToday.click();
-        cy.pause();
         return this;
     }
 
@@ -150,7 +149,7 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
     }
 
     enterAppraiserCommentary(value: string): this {
-        this.Page.appraiserCommentaryTextArea.clear().type(value).should("have.text", value);
+        this.Page.appraiserCommentaryTextArea.clear().realType(value).should("have.text", value);
         return this;
     }
 }
