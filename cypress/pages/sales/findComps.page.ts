@@ -73,6 +73,18 @@ class FindCompsPage extends BasePage {
     get netRentableAreaNewComp() {return cy.xpath("//*[.='Net Rentable Area']//child::input");}
 
     get averageUnitSizeNewComp() {return cy.xpath("//*[.='Average Unit Size']//child::input");}
+
+    get saleDateCalendarNewComp() {return cy.xpath("//*[text()='Sale Date*']//following::input[1]");}
+
+    get buyerGranteeNewComp() {return cy.xpath("//*[text()='Buyer (Grantee)*']//following::input[1]");}
+
+    get sellerGrantor() {return cy.xpath("//*[text()='Seller (Grantor)*']//following::input[1]");}
+
+    get sourceDropdown() {return cy.xpath("//*[text()='Source*']//following::*[@class='ant-select-selector'][1]");}
+
+    get newCompSaveAndCloseButton() {return cy.xpath("//button[.='Save & Close']");}
+
+    get internalNotesTextArea() {return cy.xpath("//*[text()='Internal Notes']//following::*[@class='ant-input'][1]");}
 }
 
 export default new FindCompsPage();
