@@ -24,23 +24,23 @@ describe(`Verify the commentary functionality`,
             .verifyProgressBarNotExist();
 
         cy.stepInfo("[QA-4589] 2. Click on the Edit button and modify commentary and save changes.");
-        Income._CommercialManager.StabilizedRentRoll.clickEditStabilizedCommercialIncomeDiscussion()
-            .typeStabilizedCommercialIncomeTextArea(testData.value, true)
-            .verifyStabRentRollCommentaryButtons()
-            .saveStabilizedRentRollCommentary();
+        Income._CommercialManager.StabilizedRentRoll.clickEditDiscussionButton()
+            .editDiscussionTextArea(testData.value)
+            .verifyEditDiscussionButtonsDisplayed()
+            .clickSaveDiscussionButton();
 
         cy.stepInfo("[QA-4594] 3. Verify that commentary 'Modified' label appears");
         Income._CommercialManager.StabilizedRentRoll.verifyModifiedLabelExist();
         
         cy.stepInfo("[QA-4591] 4. Verify commentary revert to original");
-        Income._CommercialManager.StabilizedRentRoll.revertToOriginalStabilizedRentRollCommentary()
-            .verifyStabilizedCommercialIncomeTextArea(testData.defaultText);
+        Income._CommercialManager.StabilizedRentRoll.revertToOriginalCommentary()
+            .verifyCommentaryContainsText(testData.defaultText);
 
         cy.stepInfo("[QA-4590] 5. Modify commentary and check 'Cancel' button functionality");
-        Income._CommercialManager.StabilizedRentRoll.clickEditStabilizedCommercialIncomeDiscussion()
-            .typeStabilizedCommercialIncomeTextArea(testData.value, true)
-            .cancelStabilizedRentRollCommentary()
-            .verifyStabilizedCommercialIncomeTextArea(testData.defaultText);
+        Income._CommercialManager.StabilizedRentRoll.clickEditDiscussionButton()
+            .editDiscussionTextArea(testData.value)
+            .clickCancelDiscussionEditButton()
+            .verifyCommentaryContainsText(testData.defaultText);
 
         deleteReport(testData.reportCreationData.reportNumber);
     });

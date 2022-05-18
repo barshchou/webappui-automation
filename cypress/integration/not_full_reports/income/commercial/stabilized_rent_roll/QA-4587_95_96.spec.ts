@@ -24,7 +24,7 @@ describe(`Verify the suggested text dropdown in the new narrative component adde
             .clickCommercialArrow().navigateToStabilizedRentRollInCommercial().verifyProgressBarNotExist();
 
         cy.stepInfo(`2. Hover the arrows.`);
-        Income._CommercialManager.StabilizedRentRoll.Page.stabilizedCommercialIncomeDiscussionTooltip
+        Income._CommercialManager.StabilizedRentRoll.Page.discussionTooltip
             .trigger("mouseover").invoke("show");
     
         cy.stepInfo(`3. [QA-4587] Verify the following text is displayed: "The following generated text will appear in the Income Approach section of your report.".`);
@@ -34,21 +34,21 @@ describe(`Verify the suggested text dropdown in the new narrative component adde
             });
 
         cy.stepInfo("4. [QA-4596] Click Edit and enter the “=S“ and select the 'Sheriff's sale' option. Verify text");
-        Income._CommercialManager.StabilizedRentRoll.clickEditStabilizedCommercialIncomeDiscussion()
-            .typeStabilizedCommercialIncomeTextArea(testData.sherifsTypeValue)
+        Income._CommercialManager.StabilizedRentRoll.clickEditDiscussionButton()
+            .editDiscussionTextArea(testData.sherifsTypeValue, false)
             .clickNarrativeSuggestions(testData.verifySherifsListValue)
-            .saveStabilizedRentRollCommentary()
-            .verifyStabilizedCommercialIncomeTextArea(testData.verifySherifsAreaValue);
+            .clickSaveDiscussionButton()
+            .verifyCommentaryContainsText(testData.verifySherifsAreaValue);
 
         cy.stepInfo("5. Revert to original");
-        Income._CommercialManager.StabilizedRentRoll.revertToOriginalStabilizedRentRollCommentary();
+        Income._CommercialManager.StabilizedRentRoll.revertToOriginalCommentary();
 
         cy.stepInfo("6. [QA-4595] Click the Edit and enter the “=F“ and select the 'Foreclosure Sale' option.");
-        Income._CommercialManager.StabilizedRentRoll.clickEditStabilizedCommercialIncomeDiscussion()
-            .typeStabilizedCommercialIncomeTextArea(testData.foreclosureTypeValue)
+        Income._CommercialManager.StabilizedRentRoll.clickEditDiscussionButton()
+            .editDiscussionTextArea(testData.foreclosureTypeValue, false)
             .clickNarrativeSuggestions(testData.verifyForeclosureListValue)
-            .saveStabilizedRentRollCommentary()
-            .verifyStabilizedCommercialIncomeTextArea(testData.verifyForeclosureAreaValue);
+            .clickSaveDiscussionButton()
+            .verifyCommentaryContainsText(testData.verifyForeclosureAreaValue);
 
         deleteReport(testData.reportCreationData.reportNumber);
     });

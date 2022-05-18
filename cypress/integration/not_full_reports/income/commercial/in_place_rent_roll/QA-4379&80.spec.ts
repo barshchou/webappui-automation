@@ -18,7 +18,8 @@ describe("Verify the Unit column in the grid and grid presence",
             .chooseLeaseStatusByRowNumber(testData.leaseStatus);
         NavigationSection.navigateToPropertySummary();
         Property.Summary.enterNumberOfCommercialUnits(testData.newUnitsNumber);
-        NavigationSection.navigateToCommercialInPlaceRentRoll();
+        NavigationSection.navigateToCommercialInPlaceRentRoll()
+            .verifyProgressBarNotExist();
         Income.Commercial.InPlaceRentRoll.verifyUnitNumberCells(testData.newUnitsNumber);
         deleteReport(testData.reportCreationData.reportNumber);
     });

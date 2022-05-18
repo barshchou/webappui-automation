@@ -27,11 +27,15 @@ class AdjustCompsPage extends BasePage {
 
     getUtilitiesAdjustmentsRowCells(utilityName: string) {return cy.get(`[name*='utilityAdjustment.${utilityName}']`);}
 
+    getMarketAdjustmentsRowCells(marketAdjName: string) {return cy.get(`[name*='adjustments.${marketAdjName}']`);}
+
     get trendedPriceCells() {return cy.xpath("//*[starts-with(., 'Trended Price')]//following-sibling::td");}
 
     get adjustedPriceCells() {return cy.xpath("//*[starts-with(., 'Adjusted Price')]//following-sibling::td");}
 
     get netPropertyAdjustmentsCells() {return cy.xpath("//td[.='Net Property Adjustments']//following-sibling::td");}
+
+    get marketAdjustmentsCells() {return cy.xpath("//td[.='Net Market Adjustments']//following-sibling::td");}
 
     get totalUtilityAdjustmentsCells() {return cy.xpath("//td[.='Total Utility Adjustments']//following-sibling::td");}
 
@@ -46,6 +50,12 @@ class AdjustCompsPage extends BasePage {
     get getComparisonPerUnitRadio() {return cy.xpath("//input[@value='Per Total Units']");}
 
     get addCustomUtilitiesAdjustmentButton() {return cy.get("[data-qa=utilityAdjustmentLabel]");}
+
+    get pricePerUnit() {return cy.xpath("//*[starts-with(., 'Price per Unit')]//following-sibling::td");}
+
+    getPricePerBasisValue(basisName: string) {return cy.xpath(`//*[starts-with(., '${basisName}')]//following-sibling::td`);}
+
+    get viewMarketDetails() { return cy.xpath("//div[text() = 'Market Adjustment']");}
 }
 
 export default new AdjustCompsPage();

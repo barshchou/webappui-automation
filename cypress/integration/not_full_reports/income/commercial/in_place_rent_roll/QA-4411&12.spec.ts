@@ -18,10 +18,10 @@ describe(`Current Commercial Income Discussion > Verify the Revert to Original b
             .clickEditDiscussionButton()
             .clickRevertToOriginalButton()
             .clickCloseButton()
-            .verifyCommentaryTextBoxText(testData.editedCommentary)
+            .verifyCommentaryFullText(testData.editedCommentary)
             .clickRevertToOriginalButton()
             .clickCancelRevertButton()
-            .verifyCommentaryTextBoxText(testData.editedCommentary)
+            .verifyCommentaryFullText(testData.editedCommentary)
             .clickRevertToOriginalButton()
             .clickYesRevertButton()
             .verifyCommentaryTextBoxNotHaveText(testData.editedCommentary);
