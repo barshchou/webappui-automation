@@ -5,7 +5,9 @@ import Final from "../../../../../actions/final/final.manager";
 import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
 import { Tag } from "../../../../../utils/tags.utils";
 
-describe("Verify the Inspected checkbox functionality", { tags:[ Tag.income, Tag.in_place_rent_roll ] }, () => {
+describe("Verify the Inspected checkbox functionality", 
+    { tags:[ Tag.income, Tag.commercial, Tag.in_place_rent_roll ] }, () => {
+        
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
     });
@@ -14,7 +16,7 @@ describe("Verify the Inspected checkbox functionality", { tags:[ Tag.income, Tag
        NavigationSection.navigateToCommercialInPlaceRentRoll();
         Income.Commercial.InPlaceRentRoll.chooseLeaseStatusByRowNumber(testData.leaseStatus)
             .checkIsInspectedCheckboxByRowNumber();
-        NavigationSection.openCommercialStabilizedRentRollInCommercial()
+        NavigationSection.navigateToStabilizedRentRollInCommercial()
             .verifyProgressBarNotExist();
         Income.Commercial.StabilizedRentRoll.verifyIsInspectedChecked();
         NavigationSection.navigateToUnitInspection();

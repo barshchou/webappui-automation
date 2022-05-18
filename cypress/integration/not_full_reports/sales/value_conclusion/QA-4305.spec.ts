@@ -7,7 +7,8 @@ import Sales from "../../../../actions/sales/sales.manager";
 import { Tag } from "../../../../utils/tags.utils";
 
 describe("Prospective Market Value As Stabilized -> Less Commission Fee data is pulled from Cap Rate Conclusion",
-{ tags:[ Tag.sales, Tag.value_conclusion ] }, () => {
+    { tags:[ Tag.sales, Tag.value_conclusion ] }, () => {
+        
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
     });

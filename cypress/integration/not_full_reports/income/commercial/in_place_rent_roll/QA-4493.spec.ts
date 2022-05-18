@@ -6,6 +6,7 @@ import { Tag } from "../../../../../utils/tags.utils";
 
 describe("Verify the Unsaved changes modal functionality on the In-Place Rent Roll page",
     { tags:[ Tag.income, Tag.commercial, Tag.in_place_rent_roll ] }, () => {
+        
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
     });
@@ -21,9 +22,9 @@ describe("Verify the Unsaved changes modal functionality on the In-Place Rent Ro
 
         cy.stepInfo('3. Navigate back to Commercial In Place Rent Roll, verify set data and set again any field');
         _NavigationSection.navigateToCommercialInPlaceRentRoll();
-        Income._CommercialManager.InPlaceRentRoll.verifyLeaseStatusCellTextByRow(testData.occupiedLeaseStatus);
-        Income._CommercialManager.InPlaceRentRoll.chooseLeaseStatusByRowNumber(testData.vacantLeaseStatus)
-            .verifyLeaseStatusCellTextByRow(testData.vacantLeaseStatus);
+        Income._CommercialManager.InPlaceRentRoll.verifyLeaseStatusByRow(testData.occupiedLeaseStatus)
+            .chooseLeaseStatusByRowNumber(testData.vacantLeaseStatus)
+            .verifyLeaseStatusByRow(testData.vacantLeaseStatus);
 
         cy.stepInfo('4. Navigate to another page without saving data');
         _NavigationSection.clickPropertyButton().clickSummaryButton().verifyUnsavedChangesModal();
@@ -31,7 +32,7 @@ describe("Verify the Unsaved changes modal functionality on the In-Place Rent Ro
 
         cy.stepInfo('5. Navigate back to Commercial In Place Rent Roll and verify data');
         _NavigationSection.navigateToCommercialInPlaceRentRoll();
-        Income._CommercialManager.InPlaceRentRoll.verifyLeaseStatusCellTextByRow(testData.occupiedLeaseStatus);
+        Income._CommercialManager.InPlaceRentRoll.verifyLeaseStatusByRow(testData.occupiedLeaseStatus);
         
         deleteReport(testData.reportCreationData.reportNumber);
     });

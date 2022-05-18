@@ -52,6 +52,8 @@ namespace BoweryReports {
     export type CommercialUnitsFloorValues = "belowGrade" | "groundFloor" | "upperFloor" | "other";
     export type CommercialUnitsStreetTypeValues = "side street" | "avenue";
     export type CommercialUnitsLocationValues = "corner" | "mid-block" | "through-lot" ;
+    export type CommercialUnitsFrontageValues = "small" | "medium" | "large" | "other"; 
+
     export namespace CommercialUnits {
         /*
         More Unit Groups Values will be added after other values types added
@@ -59,13 +61,20 @@ namespace BoweryReports {
         export type GroupsValues = CommercialUnitsUseValues | CommercialUnitsGradeValues | CommercialUnitsFacadeValues | CommercialUnitsStateValues 
         | CommercialUnitsCeilingHeightValues | CommercialUnitsLocationValues | CommercialUnitsStreetTypeValues | CommercialUnitsFrontageValues | CommercialUnitsFloorValues;
     }
-    export type CommercialUnitsFrontageValues = "small" | "medium" | "large" | "other"; 
+    
 
     /*
     More Unit Groups Values will be added after other values types added
      */
     export type CommercialUnitGroupsValues = CommercialUnitsUseValues | CommercialUnitsGradeValues | CommercialUnitsFacadeValues | CommercialUnitsCeilingHeightValues | CommercialUnitsFrontageValues;
 
+    export type OrganizationAddresseePrefix = "Mr." | "Mrs." | "Ms." | "Dr.";
+    export type OrganizationState = "New York" | "Alabama" | "Alaska" | "Arizona" | "Arkansas" | "California" | "Colorado" | "Connecticut"
+    | "Delaware" | "District Of Columbia" | "Florida" | "Georgia" | "Hawaii" | "Idaho" | "Illinois" | "Indiana" | "Iowa" | "Kansas"
+    | "Kentucky" | "Louisiana" | "Maine" | "Maryland" | "Massachusetts"| "Michigan" | "Minnesota" | "Mississippi" | "Missouri" | "Montana"
+    | "Nebraska" | "Nevada" | "New Hampshire" | "New Jersey" | "New Mexico" | "North Carolina" | "North Dakota" | "Ohio" | "Oklahoma"
+    | "Oregon" | "Pennsylvania" | "Puerto Rico" | "Rhode Island" | "South Carolina" | "South Dakota" | "Tennessee" | "Texas" | "Utah"
+    | "Vermont" | "Virginia" | "Washington" | "Wisconsin" | "West Virginia" | "Wyoming";
 
     export type ForecastItem = { 
         name: BoweryReports.ForecastItemBasis | string, 
@@ -119,4 +128,18 @@ namespace BoweryAutomation {
         identifierType: string,
         identifier: string
     } & BaseReportCreationData
+
+    export type OrganizationCreateNewClientData = {
+        prefix?: BoweryReports.OrganizationAddresseePrefix,
+        title?: string,
+        firstName: string,
+        middleInitial?: string,
+        lastName: string,
+        clientSuffix?: string,
+        clientCompanyName: string,
+        streetAddress: string,
+        city: string,
+        state?: BoweryReports.OrganizationState,
+        zipCode?: string | number
+    };
 }
