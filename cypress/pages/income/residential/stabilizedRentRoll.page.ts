@@ -9,8 +9,6 @@ class StabilizedRentRollPage extends ResidentialRentRollSharedPage{
             "//following-sibling::td[@data-qa='unit-group-market-rent-conclusion']");
     }
 
-    get roomsCells() {return cy.get("[data-qa=rooms-cell]");}
-
     get bedroomsCells() {return cy.get("[data-qa=bedrooms-cell]");}
 
     get rentTypeCells() {return cy.get("[data-qa=rentType-cell]");}

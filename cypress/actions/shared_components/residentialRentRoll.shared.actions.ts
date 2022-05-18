@@ -49,4 +49,29 @@ export default class ResidentialRentRollSharedActions<T extends ResidentialRentR
         return this;
     }
 
+    verifyUnitNumberByRow(number: number, rowNumber = 0): this {
+        this.Page.unitNumberCells.eq(rowNumber).should("have.text", number);
+        return this;
+    }
+
+    verifyRoomsNumberByRow(roomsNumber: number, rowNumber = 0): this {
+        stabRentRollPage.roomsCells.eq(rowNumber).should("have.text", roomsNumber);
+        return this;
+    }
+
+    verifyAllRoomsNumbers(...roomsNumbersToBe: Array<number>): this {
+        if (roomsNumbersToBe.length === 1) {
+            stabRentRollPage.roomsCells.then(cells => {
+                for (let i = 0; i < cells.length; i++) {
+                    this.verifyRoomsNumberByRow(roomsNumbersToBe[0], i);
+                }
+            });
+        } else {
+            for (let i = 0; i < roomsNumbersToBe.length; i++) {
+                this.verifyRoomsNumberByRow(roomsNumbersToBe[i], i);
+            }
+        }
+        return this;
+    }
+
 }
