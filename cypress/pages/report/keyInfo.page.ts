@@ -39,7 +39,6 @@ class KeyInfoPage extends BasePage{
         return cy.xpath('//*[@data-qa="letterOfTransmittalPurpose-generated-comment-wrapper"]/preceding-sibling::div//p');
     }
 
-<<<<<<< HEAD
     get inputToCheckMyDateIsDifferent() {return cy.get("*[data-qa='isDifferentDateOfValuation']");}
     
     get textBoxDefinitionOfMarketValue() {return cy.xpath("//*[contains(@data-qa, 'definition-of-market-value-tile')]//following::*[@data-slate-editor][1]");}
@@ -50,7 +49,6 @@ class KeyInfoPage extends BasePage{
 
     get iconDefinitionOfMarketValue() {return cy.xpath("//*[contains(@data-qa, 'definition-of-market-value-tile')]//following::*[@data-icon='info-circle'][1]");}
 
-=======
     get wrapperLetterOfTransmittalPurpose() {return cy.get("*[data-qa='letterOfTransmittalPurpose-generated-comment-wrapper']");}
 
     get jobNumberTextInput() {return cy.get("*[data-qa='job-number-text-input']");}
@@ -60,7 +58,6 @@ class KeyInfoPage extends BasePage{
     get addWordDocumentButton() {return cy.get("*[data-qa='add-word-btn']");}
 
     get wrapperDefinitionOfMarketValue() {return cy.get("*[data-qa='definition-of-market-value-tile']");}
->>>>>>> 52c13d4942f47f637fbcf28fb9c7d8348cd8ad83
 }
 
 export default new KeyInfoPage();

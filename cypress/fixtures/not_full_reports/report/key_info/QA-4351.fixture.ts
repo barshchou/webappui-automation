@@ -11,6 +11,6 @@ const reportCreationFixture = () => {
 
 export default {
     reportCreationData: reportCreationFixture(),
-    namesInputByQA: ["dateOfValuation", "inspectionDate"] as Array<string>,
+    namesInputByQA: [ "dateOfValuation", "inspectionDate" ] as Array<string>,
     verifyDate: "03-02-2021"
 };
