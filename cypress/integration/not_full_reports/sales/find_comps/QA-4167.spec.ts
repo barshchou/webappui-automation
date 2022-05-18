@@ -37,7 +37,7 @@ describe("[QA-4168] Verify the Appraiser Commentary field", { tags: [ Tag.sales,
             -The field is optional;
             -The text: ”This commentary is for internal use only and will not export” is displayed below the field.`);
         Sales._FindComps.Page.newCompSaveAndCloseButton.should("be.enabled");
-        Sales._FindComps.Actions.PropertyDescription.enterAppraiserCommentary(testData.verifyTextValue);
+        Sales._FindComps.Actions.enterAppraiserCommentary(testData.verifyTextValue);
         Sales._FindComps.Page.appraiserCommentaryTextArea.clear().invoke("val", testData.verifyTextValue);
 
         deleteReport(testData.reportCreationData.reportNumber);
