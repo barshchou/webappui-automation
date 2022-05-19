@@ -7,10 +7,8 @@ import ReviewExport from "../../../../../actions/reviewExport/reviewExport.actio
 import { isEndsWithDecimal } from "../../../../../utils/html.utils";
 import { Tag } from "../../../../../utils/tags.utils";
 
-describe("Verify the Commercial Stabilized Rent Roll table", { tags: [ Tag.income, Tag.commercial, Tag.stabilized_rent_roll ] }, () => {
-    before("Login, create report", () => {
-        createReport(testData.reportCreationData);
-    });
+describe("Verify the Commercial Stabilized Rent Roll table",
+    { tags: [ Tag.income, Tag.commercial, Tag.stabilized_rent_roll, Tag.check_export ] }, () => {
 
     it("Test body", () => {  
         createReport(testData.reportCreationData);
@@ -28,10 +26,11 @@ describe("Verify the Commercial Stabilized Rent Roll table", { tags: [ Tag.incom
         }    
         NavigationSection.navigateToCommercialInPlaceRentRoll();
         Income.Commercial.InPlaceRentRoll.chooseListLeaseStatuses(testData.leaseStatuses, testData.numberOfCommercialUnits)
-            .enterTenantNames(testData.tenantNames, testData.leaseStatuses);
+            .enterTenantNames(testData.tenantNames, testData.leaseStatuses)
+            .verifyTenantNames(testData.tenantNames, testData.leaseStatuses);
         testData.rentsPsf.forEach((rent, index) => {
             if (testData.leaseStatuses[index] !== "Vacant") {
-                Income.Commercial.InPlaceRentRoll.enterAnnualRentPerSFByRowNumber(rent, index);
+                Income.Commercial.InPlaceRentRoll.enterRentPerSFAnnuallyByRowNumber(rent, index);
             }
         });
         NavigationSection.navigateToStabilizedRentRollInCommercial()

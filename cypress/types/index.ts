@@ -68,6 +68,13 @@ namespace BoweryReports {
      */
     export type CommercialUnitGroupsValues = CommercialUnitsUseValues | CommercialUnitsGradeValues | CommercialUnitsFacadeValues | CommercialUnitsCeilingHeightValues | CommercialUnitsFrontageValues;
 
+    export type OrganizationAddresseePrefix = "Mr." | "Mrs." | "Ms." | "Dr.";
+    export type OrganizationState = "New York" | "Alabama" | "Alaska" | "Arizona" | "Arkansas" | "California" | "Colorado" | "Connecticut"
+    | "Delaware" | "District Of Columbia" | "Florida" | "Georgia" | "Hawaii" | "Idaho" | "Illinois" | "Indiana" | "Iowa" | "Kansas"
+    | "Kentucky" | "Louisiana" | "Maine" | "Maryland" | "Massachusetts"| "Michigan" | "Minnesota" | "Mississippi" | "Missouri" | "Montana"
+    | "Nebraska" | "Nevada" | "New Hampshire" | "New Jersey" | "New Mexico" | "North Carolina" | "North Dakota" | "Ohio" | "Oklahoma"
+    | "Oregon" | "Pennsylvania" | "Puerto Rico" | "Rhode Island" | "South Carolina" | "South Dakota" | "Tennessee" | "Texas" | "Utah"
+    | "Vermont" | "Virginia" | "Washington" | "Wisconsin" | "West Virginia" | "Wyoming";
 
     export type ForecastItem = { 
         name: BoweryReports.ForecastItemBasis | string, 
@@ -87,6 +94,16 @@ namespace BoweryReports {
         monthlyRent: number,
         leaseStatus?: BoweryReports.LeaseStatus
     }
+}
+
+namespace Utils {
+    type _GraphQLRequest = {
+        operationName: string,
+        query: string,
+        variables: object | any
+    }
+    
+    export type GraphQLRequest = Partial<_GraphQLRequest>;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -111,4 +128,18 @@ namespace BoweryAutomation {
         identifierType: string,
         identifier: string
     } & BaseReportCreationData
+
+    export type OrganizationCreateNewClientData = {
+        prefix?: BoweryReports.OrganizationAddresseePrefix,
+        title?: string,
+        firstName: string,
+        middleInitial?: string,
+        lastName: string,
+        clientSuffix?: string,
+        clientCompanyName: string,
+        streetAddress: string,
+        city: string,
+        state?: BoweryReports.OrganizationState,
+        zipCode?: string | number
+    };
 }

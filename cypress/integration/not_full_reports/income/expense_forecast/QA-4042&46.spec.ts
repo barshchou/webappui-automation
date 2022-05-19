@@ -2,8 +2,10 @@ import testData from "../../../../fixtures/not_full_reports/income/expense_forec
 import { _NavigationSection } from "../../../../actions/base";
 import { Income } from "../../../../actions";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { Tag } from "../../../../utils/tags.utils";
 
-describe(`Verify that Generated Commentary are updated on the Expense Forecast page`, () => {
+describe(`Verify that Generated Commentary are updated on the Expense Forecast page`,
+    { tags: [ Tag.income, Tag.expense_forecast ] }, () => {
 
     before("Login, create report", () => {
         createReport(testData.reportCreationData);

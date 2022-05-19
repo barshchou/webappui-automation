@@ -5,7 +5,9 @@ import testData from "../../../../../fixtures/not_full_reports/income/commercial
 import { Tag } from "../../../../../utils/tags.utils";
 
 describe(`Verify the suggested text dropdown in the new narrative component added through "=" for the 'Unchanged Renovation' 
-  option in the Generated Commentary on the Stabilized Rent Roll page.`, { tags: [ Tag.income, Tag.commercial, Tag.stabilized_rent_roll ] }, () => {
+  option in the Generated Commentary on the Stabilized Rent Roll page.`, 
+    { tags: [ Tag.income, Tag.commercial, Tag.stabilized_rent_roll ] }, () => {
+      
     before("Login, create report", () => {
         cy.stepInfo(`Preconditions: The mixed report is created and several commercial units are added.`);
         createReport(testData.reportCreationData);
@@ -20,15 +22,15 @@ describe(`Verify the suggested text dropdown in the new narrative component adde
         .clickCommercialArrow().navigateToStabilizedRentRollInCommercial().verifyProgressBarNotExist();
 
         cy.stepInfo("2. Click on the Edit button in the Stabilized Commercial Income Discussion section.");
-        Income._CommercialManager.StabilizedRentRoll.clickEditStabilizedCommercialIncomeDiscussion();
+        Income._CommercialManager.StabilizedRentRoll.clickEditDiscussionButton();
 
         cy.stepInfo("3. Enter the “=Un“ and select the 'Unchanged Renovation' option.");
-        Income._CommercialManager.StabilizedRentRoll.typeStabilizedCommercialIncomeTextArea(testData.value)
+        Income._CommercialManager.StabilizedRentRoll.editDiscussionTextArea(testData.value, false)
           .clickNarrativeSuggestions(testData.verifyListValue);
 
         cy.stepInfo(`4. Verify that the following text appears: Upon renovation, the subject unit 
           count and gross building area will remain unchanged.`);
-        Income._CommercialManager.StabilizedRentRoll.verifyStabilizedCommercialIncomeTextArea(testData.verifyAreaValue);
+        Income._CommercialManager.StabilizedRentRoll.verifyCommentaryContainsText(testData.verifyAreaValue);
 
         deleteReport(testData.reportCreationData.reportNumber);
     });

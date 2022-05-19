@@ -3,8 +3,11 @@ import { createReport, deleteReport } from "../../../../actions/base/baseTest.ac
 import { _NavigationSection } from "../../../../actions/base";
 import { Property } from "../../../../actions";
 import { Income } from "../../../../actions";
+import { Tag } from "../../../../utils/tags.utils";
 
-describe("Per Unit Appraiser's Forecast value for Water & Sewer is correctly converted to Per SF value", () => {
+describe("Per Unit Appraiser's Forecast value for Water & Sewer is correctly converted to Per SF value", 
+    { tags: [ Tag.income, Tag.expense_forecast ] }, () => {
+        
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
     });
