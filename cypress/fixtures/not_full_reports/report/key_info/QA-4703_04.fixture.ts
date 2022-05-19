@@ -1,5 +1,5 @@
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 
 export default {
-    reportCreationData: ReportDataCreator.getReportData("4703"),
+    reportCreationData: ReportDataCreator.getReportData("4703_04"),
 };
