@@ -126,6 +126,7 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
     checkSingleSalesCompsByEventId(): this{
         cy.wait(`@${Alias.salesComps_eventIds}`).then(({ response }) => {
             cy.get(`@${Alias.salesEventId}`).then(_salesEventId => {
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 let arr: Array<any>  = response.body.selectedEventIds;
                 expect(arr.find(val => val.salesEventId == _salesEventId))
                 .not.to.be.undefined;
