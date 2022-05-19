@@ -33,44 +33,48 @@ describe("[Income>Commercial>Rent Comps] Rent/SF/Month is calculated with correc
 
         cy.stepInfo(`4. Verify if Per Square Foot Per Month is selected on In-Place RR page 
             and as Unit of Measure on Commercial Unit Details modal -> Rent/SF/Month in 
-            selected rent comps table = Rent/12/SF, where Rent = base rent*12*SF`);
+            selected rent comps table = Rent/12/SF, where Rent = base rent*12*SF and 12 = number of months in year`);
         
         const baseRent: number = +testData.rentCompFields[0].value;
         const squareFeet: number = +testData.rentCompFields[1].value;
+        const numberOfMonthsInYear = 12;
 
-        const rentPerSFValue1 = baseRent * 12 * squareFeet / 12 / squareFeet;
+        const perYear: BoweryReports.UnitsOfMeasure = "per square foot per year";
+        const perMonth: BoweryReports.UnitsOfMeasure = "per square foot per month";
+
+        const rentPerSFValue1 = baseRent * numberOfMonthsInYear * squareFeet / numberOfMonthsInYear / squareFeet;
         Income._CommercialManager.RentComps.clickEditButtonByRowNumber().
-            checkUnitOfMeasureRadioButton(testData.unitsOfMeasure[1]).
+            checkUnitOfMeasureRadioButton(perMonth).
             clickSubmitButton().
             verifyRentPerSFCellValue(rentPerSFValue1);
 
         cy.stepInfo(`5. Verify if Per Square Foot Per Month is selected on In-Place RR page and 
         Per Square Foot is selected as Unit of Measure on Commercial Unit Details modal -> Rent/SF/Month 
-        in selected rent comps table = Rent/12/SF, where Rent = base rent*SF`);
-        const rentPerSFValue2 = baseRent * squareFeet / 12 / squareFeet;
+        in selected rent comps table = Rent/12/SF, where Rent = base rent*SF and 12 = number of months in year`);
+        const rentPerSFValue2 = baseRent * squareFeet / numberOfMonthsInYear / squareFeet;
         Income._CommercialManager.RentComps.clickEditButtonByRowNumber().
-            checkUnitOfMeasureRadioButton(testData.unitsOfMeasure[0]).
+            checkUnitOfMeasureRadioButton(perYear).
             clickSubmitButton().
             verifyRentPerSFCellValue(rentPerSFValue2);
 
         cy.stepInfo(`6. Verify if  Per Square Foot is selected on In-Place RR page and 
         Per Square Foot Per Month is selected as Unit of Measure on Commercial Unit Details modal -> Rent/SF 
-        in selected rent comps table = Rent/SF, where Rent = base rent*12*SF`);
-        const rentPerSFValue3 = baseRent * 12 * squareFeet / squareFeet;
+        in selected rent comps table = Rent/SF, where Rent = base rent*12*SF and 12 = number of months in year`);
+        const rentPerSFValue3 = baseRent * numberOfMonthsInYear * squareFeet / squareFeet;
         _NavigationSection.clickCommercialRentRollButton().clickYesButton();
         Income._CommercialManager.InPlaceRentRoll.clickPerSquareFootButton(false);
         _NavigationSection.navigateToCommercialRentComps();
         Income._CommercialManager.RentComps.clickEditButtonByRowNumber().
-            checkUnitOfMeasureRadioButton(testData.unitsOfMeasure[1]).
+            checkUnitOfMeasureRadioButton(perMonth).
             clickSubmitButton().
             verifyRentPerSFCellValue(rentPerSFValue3);
 
         cy.stepInfo(`7. Verify if  Per Square Foot is selected on In-Place RR page and 
         as Unit of Measure on Commercial Unit Details modal -> Rent/SF 
-        in selected rent comps table = Rent/SF, where Rent = base rent*SF`);
+        in selected rent comps table = Rent/SF, where Rent = base rent*SF and 12 = number of months in year`);
         const rentPerSFValue4 = baseRent * squareFeet / squareFeet;
         Income._CommercialManager.RentComps.clickEditButtonByRowNumber().
-            checkUnitOfMeasureRadioButton(testData.unitsOfMeasure[0]).
+            checkUnitOfMeasureRadioButton(perYear).
             clickSubmitButton().
             verifyRentPerSFCellValue(rentPerSFValue4);
 

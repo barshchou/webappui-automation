@@ -96,6 +96,14 @@ namespace BoweryReports {
         monthlyRent: number,
         leaseStatus?: BoweryReports.LeaseStatus
     }
+
+    export type RentCompField = {
+        name: string,
+        value: string,
+        type: "input" | "dropdown"
+    };
+
+    export type UnitsOfMeasure = "annually" | "monthly" | "per square foot per year" | "per square foot per month";
 }
 
 namespace Utils {
