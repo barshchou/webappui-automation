@@ -1,4 +1,5 @@
 import navigationSectionPage from "../../pages/base/navigationSection.page";
+import { Alias } from "../../utils/alias.utils";
 import BaseActionsExt from "./base.actions.ext";
 
 class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPage> {
@@ -86,6 +87,11 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         return this;
     }
 
+    clickMarketButton() {
+        navigationSectionPage.marketButton.click();
+        return this;
+    }
+
     clickReportButton() {
         navigationSectionPage.reportButton.click();
         return this;
@@ -159,6 +165,13 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         return this;
     }
 
+    navigateToPropertyMarket(): NavigationSectionActions {
+        this.clickPropertyButton()
+            .clickMarketButton()
+            .clickYesButton();
+        return this;
+    }
+
     navigateToClientPage() {
         this.clickReportButton()
             .clickClientButton()
@@ -227,7 +240,9 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
     navigateToFindComps() {
         this.clickSalesButton()
             .clickFindCompsButton()
-            .clickYesButton();
+            .clickYesButton();        
+        cy.wait(`@${Alias.gql.FindSalesComps}`, { timeout:70000 });
+
         return this;
     }
 
