@@ -15,6 +15,6 @@ export default {
     reportCreationData: _reportCreationData(),
     newTenantName: "Test",
     rentPerSF: 100,
-    newCommentary: 'some data',
+    newCommentary: 'some text for discussion',
     leaseStatus: _leaseStatus
 };

@@ -15,8 +15,8 @@ describe("Verify the Save button functionality on the In-Place Rent Roll page",
         it("Test body", () => {
             cy.stepInfo('1. The Save button is displayed on the In-Place Rent Roll page.');
             _NavigationSection.navigateToCommercialInPlaceRentRoll();
-            Income._CommercialManager.InPlaceRentRoll.verifyThatPageIsOpened().
-                Page.SaveBtn.scrollIntoView().should('exist');
+            Income._CommercialManager.InPlaceRentRoll.verifyThatPageIsOpened()
+                .Page.SaveBtn.scrollIntoView().should('exist');
 
             cy.stepInfo('2. Fill in the editable fields with values or/and check check-boxes or/and click the radio button and click on the Save button.');
             Income._CommercialManager.InPlaceRentRoll.chooseLeaseStatusByRowNumber(testData.leaseStatus)
@@ -33,7 +33,6 @@ describe("Verify the Save button functionality on the In-Place Rent Roll page",
                 .enterRentPerSFAnnuallyByRowNumber(testData.rentPerSF)
                 .verifyRentPsfAnnuallyByRow(testData.rentPerSF, 0);
             Income._CommercialManager.InPlaceRentRoll.clickSaveButton().verifyProgressBarNotExist();
-
 
             cy.stepInfo('3. Refresh the page / or re-enter the page and verify that the changes from step 2 are still applied.');
             cy.reload();
