@@ -1,7 +1,7 @@
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 
 const reportCreationFixture = () => {
-    return ReportDataCreator.getReportData("4040_42_43_46");
+    return ReportDataCreator.getReportData("4040_42_43_46_51");
 };
 
 const expenseForecastWaterAndSewerFixture = (): BoweryReports.ForecastItem => {
@@ -36,6 +36,14 @@ const expenseForecastPayrollAndBenefitsFixture = (): BoweryReports.ForecastItem 
     };
 };
 
+const expenseForecastRepairAndMaintenanceFixture = (): BoweryReports.ForecastItem => {
+    return {
+        name: "repairsAndMaintenance",
+        basis: "sf",
+        forecast: 2.1
+    };
+};
+
 const waterAndSewerCommentariesFixture = () => {
     return {
         generatedPerSF: "Based on the information above, we have projected this expense at $2.00 per square foot, or $4,248,882 annually.",
@@ -45,12 +53,12 @@ const waterAndSewerCommentariesFixture = () => {
 
 const replacementReserveCommentariesFixture = () => {
     return {
-        generatedPerSF: "This expense provides for the periodic replacement of building components that wear out more rapidly than the "+
-                        "building itself and that must be replaced periodically during the building's economic life. We note the owner did not indicate "+
-                        "this expense. We have projected this expense at $2.00 per square foot, or $4,248,882 annually.",
-        generatedPerUnit: "This expense provides for the periodic replacement of building components that wear out more rapidly than the " +
-                        "building itself and that must be replaced periodically during the building's economic life. We note the owner did not indicate this " +
-                        "expense. We have projected this expense at $2 per unit, or $10 annually.",
+        generatedPerSF: "This expense provides for the periodic replacement of building components that wear out more rapidly than the building "+
+                        "itself and that must be replaced periodically during the building's economic life. We note the owner did not indicate this expense. "+
+                        "We have projected this expense at $2.00 per square foot, or $4,248,882 annually.",
+        generatedPerUnit: "This expense provides for the periodic replacement of building components that wear out more rapidly than "+
+                        "the building itself and that must be replaced periodically during the building's economic life. We note the "+
+                        "owner did not indicate this expense. We have projected this expense at $2 per unit, or $10 annually.",
     };
 };
 
@@ -76,16 +84,31 @@ const payrollAndBenefitsCommentariesFixture = () => {
     };
 };
 
+const repairAndMaintenanceCommentariesFixture = () => {
+    return {
+        generatedPerSF: "This expense varies depending on building age, management philosophy, services provided, and accounting methodology. "+
+                        "Some management companies expense items that are normally included as capital costs. In addition, repair and maintenance "+
+                        "costs may change from year to year; in some cases, repairs that require attention may be postponed due to cash flow "+
+                        "considerations. Based on the information above, we have projected this expense at $2.10 per square foot, or $4,461,326 annually.",
+        generatedPerUnit: "This expense varies depending on building age, management philosophy, services provided, and accounting methodology. "+
+                        "Some management companies expense items that are normally included as capital costs. In addition, repair and maintenance "+
+                        "costs may change from year to year; in some cases, repairs that require attention may be postponed due to cash flow "+
+                        "considerations. Based on the information above, we have projected this expense at $2 per unit, or $11 annually.",
+    };
+};
+
 export default {
     reportCreationData: reportCreationFixture(),
     expenseForecastWaterAndSewer: expenseForecastWaterAndSewerFixture(),
     expenseForecastReplacementReserve: expenseForecastReplacmentReserveFixture(),
     expenseForecastInsurance: expenseForecastInsuranceFixture(),
     expenseForecastPayrollAndBenefits: expenseForecastPayrollAndBenefitsFixture(),
+    expenseForecastRepairAndMaintenance: expenseForecastRepairAndMaintenanceFixture(),
     commentariesWaterAndSewer: Object.freeze(waterAndSewerCommentariesFixture()),
     commentariesReplacementReserve: Object.freeze(replacementReserveCommentariesFixture()),
     commentariesInsurance: Object.freeze(insuranceCommentariesFixture()),
     commentariesPayrollAndBenefits: Object.freeze(payrollAndBenefitsCommentariesFixture()),
+    commentariesRepairAndMaintenance: Object.freeze(repairAndMaintenanceCommentariesFixture()),
     residentialUnits: 5,
     editedCommentary: "some new adding to commentary"
 };
