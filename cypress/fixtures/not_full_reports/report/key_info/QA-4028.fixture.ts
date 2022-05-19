@@ -7,5 +7,5 @@ export default {
         Enums.VALUE_CONCLUSION_TYPE.AS_IS,
         Enums.VALUE_CONCLUSION_TYPE.AS_STABILIZED,
         Enums.VALUE_CONCLUSION_TYPE.AS_COMPLETE
-    ] as Array <BoweryReports.ConclusionValue>
+    ] as Array<BoweryReports.ConclusionValue>
 };
