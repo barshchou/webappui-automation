@@ -2,6 +2,7 @@ import findCompsPage from "../../pages/sales/findComps.page";
 import { getUploadFixture } from "../../../utils/fixtures.utils";
 import { isNumber, numberWithCommas } from "../../../utils/numbers.utils";
 import BaseActionsExt from "../base/base.actions.ext";
+import { Alias } from "../../utils/alias.utils";
 
 class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
 
@@ -68,8 +69,17 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
 
     selectCompFromMapByAddress(address: string): FindCompsActions {
         findCompsPage.getSelectCompFromMapButtonByAddress(address).scrollIntoView().click({ force: true });
-        findCompsPage.getRemoveCompFromMapButtonByAddress(address).should("exist");
+        this.checkFindSingleSalesComp();
         return this;
+    }
+
+    checkFindSingleSalesComp(){
+        cy.wait(`@${Alias.gql.FindSingleSalesComp}`, { timeout:70000 }).then((interception) => {
+            cy.log(interception.response.body.data.findSingleSalesComp.salesEventId);
+            cy.wrap(interception.response.body.data.findSingleSalesComp.salesEventId)
+            .as(Alias.salesEventId);
+        });
+        return this; 
     }
 
     removeCompByAddress(address: string): FindCompsActions {
@@ -93,6 +103,8 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
     }
 
     enterReportToSearchComp(reportID: string): FindCompsActions {
+        cy.intercept("GET", `/salesComps/eventIds/${reportID}`)
+        .as(Alias.salesComps_eventIds);
         findCompsPage.reportToSearchCompInput.type(reportID).should("have.value", reportID);
         return this;
     }
@@ -104,6 +116,37 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
 
     clickSearchButton(): FindCompsActions {
         findCompsPage.searchButton.click();
+        return this;
+    }
+
+    /**
+     * Checks WebApp REST request /salesComps/eventIds/:report_id
+     * which returns salesEventId which in its turn will be passed to DRM's GraphQL API
+     */
+    checkSingleSalesCompsByEventId(): this{
+        cy.wait(`@${Alias.salesComps_eventIds}`).then(({ response }) => {
+            cy.get(`@${Alias.salesEventId}`).then(_salesEventId => {
+                let arr: Array<any>  = response.body.selectedEventIds;
+                expect(arr.find(val => val.salesEventId == _salesEventId))
+                .not.to.be.undefined;
+            });
+        });
+        return this;
+    }
+
+    /**
+     * Checks `findSalesCompsByEventIds` gql operation whether its response has correct salesEventId ("salesCompId")
+     */
+    checkSelectedSingleSalesComps() {
+        cy.wait(`@${Alias.gql.FindSalesCompsByEventIds}`).then(({ request, response }) => {
+            let req: Utils.GraphQLRequest = request.body;
+            expect(req.operationName).to.equal("findSalesCompsByEventIds");
+            cy.get(`@${Alias.salesEventId}`).then(_salesEventId => {
+                expect(_salesEventId).to.be.oneOf(
+                    response.body.data.findSalesCompsByEventIds.map(val => val.salesEventId)
+                );
+            });
+        });
         return this;
     }
 
