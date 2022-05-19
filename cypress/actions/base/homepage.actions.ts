@@ -78,7 +78,7 @@ class HomepageActions extends BaseActions {
      * @returns {HomepageActions}
      */
     enterReportNumber(reportNumber: string) {
-        homepagePage.reportNumberInput.type(reportNumber).should("have.value", reportNumber);
+        homepagePage.reportNumberInput.type(reportNumber).blur().should("have.value", reportNumber);
         return this;
     }
 
