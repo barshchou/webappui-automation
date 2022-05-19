@@ -34,7 +34,7 @@ describe("[QA-4426] Check the generated commentary for Property Rights Appraised
     
     it("Check export", () => {
         testData.reportConclusionAndTextValues.forEach((item, index) => {
-            cy.task("getFilePath", { _reportName:reportCreationFixture(item.reportConclusion, `_${index + 1}`).reportNumber, _docx_html: "html" }).then(file => {;
+            cy.task("getFilePath", { _reportName:reportCreationFixture(item.reportConclusion, `_${index + 1}`).reportNumber, _docx_html: "html" }).then(file => {
                 cy.log(<string>file);
                 cy.visit(<string>file);
                 cy.contains("Property Rights Appraised").next().scrollIntoView().should("include.text", item.check);
