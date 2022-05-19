@@ -213,8 +213,8 @@ class InPlaceRentRollActions extends ResidentialRentRollSharedActions<typeof ren
 
     enterLeaseStatusByRowNumber(status: string, number = 0): this {
         rentRollPage.leaseStatusCells.eq(number).dblclick();
-        this.enterTextToTextarea(status);
-        rentRollPage.leaseStatusCells.eq(number).should("contain.text", status);
+        this.enterTextToTextarea(status)
+            .verifyLeaseStatusByRow(status, number);
         return this;
     }
 

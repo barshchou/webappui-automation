@@ -169,4 +169,22 @@ export default class ResidentialRentRollSharedActions<T extends ResidentialRentR
         return this;
     }
 
+    verifyLeaseStatusByRow(leaseStatus: string, rowNumber: number): this {
+        this.Page.leaseStatusCells.eq(rowNumber).should("contain.text", leaseStatus);
+        return this;
+    }
+
+    verifyAllLeaseStatusesCells(...leaseStatuses: Array<string>): this {
+        if (leaseStatuses.length === 1) {
+            this.Page.leaseStatusCells.each((cell, i) => {
+                this.verifyLeaseStatusByRow(leaseStatuses[0], i);
+            });
+        } else {
+            this.Page.leaseStatusCells.each((cell, i) => {
+                this.verifyLeaseStatusByRow(leaseStatuses[i], i);
+            });
+        }
+        return this;
+    }
+
 }

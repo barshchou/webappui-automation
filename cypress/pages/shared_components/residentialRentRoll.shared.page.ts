@@ -20,4 +20,6 @@ export default class ResidentialRentRollSharedPage extends BasePage {
 
     get bedroomsCells() {return cy.get("[data-qa^=bedrooms]");}
 
+    get leaseStatusCells() {return cy.get("[data-qa^=leaseStatus]");}
+
 }

@@ -94,26 +94,6 @@ class StabilizedRentRollActions extends ResidentialRentRollSharedActions<typeof 
         return this;
     }
 
-    verifyLeaseStatusByRow(leaseStatus: string, rowNumber: number): this {
-        stabRentRollPage.leaseStatusCells.eq(rowNumber).should("have.text", leaseStatus);
-        return this;
-    }
-
-    verifyAllLeaseStatusesCells(...leaseStatuses: Array<string>): this {
-        if (leaseStatuses.length === 1) {
-            stabRentRollPage.leaseStatusCells.then(cells => {
-                for (let i = 0; i < cells.length; i++) {
-                    this.verifyLeaseStatusByRow(leaseStatuses[0], i);
-                }
-            });
-        } else {
-            for (let i = 0; i < leaseStatuses.length; i++) {
-                this.verifyLeaseStatusByRow(leaseStatuses[i], i);
-            }
-        }
-        return this;
-    }
-
     verifyRentRollDiscussionCommentary(commToBe: string): this {
         stabRentRollPage.rentRollDiscussionCommentary.should("have.text", commToBe);
         return this;

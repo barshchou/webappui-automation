@@ -17,8 +17,6 @@ class StabilizedRentRollPage extends ResidentialRentRollSharedPage{
 
     get rentPerRoomCells() {return cy.get("[data-qa=rentPerRoom-cell]");}
 
-    get leaseStatusCells() {return cy.get("[data-qa=leaseStatus-cell]");}
-
     get rentRollDiscussionCommentary() {return cy.get("[data-qa^='rentRollDiscussion.commentary']");}
 
     get occupancyRateEditButton() {return cy.get("[data-qa^=occupancyRateDiscussion] [data-qa$=edit-btn]");}
