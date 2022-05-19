@@ -465,7 +465,7 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         return this;
     }
 
-    navigateToTaxInfo(isWithSave = true): NavigationSectionActions {
+    navigateToTaxInfo(): NavigationSectionActions {
         this.clickIncomeApproachButton()
             .clickTaxInfo()
             .clickYesIfExist();
