@@ -137,24 +137,19 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
     }
 
     getItemNameForAverage(itemOriginal: string): string {
-        switch (itemOriginal) {
-            case "waterAndSewer":
-                return "waterSewer";
-            case "repairsAndMaintenance":
-                return "repairsMaintenance";
-            case "payrollAndBenefits":
-                return "payrollBenefits";
-            case "generalAndAdministrative":
-                return "generalAdministrative";
-            case "legalAndProfessionalFees":
-                return "legalProfessionalFees";
-            case "management":
-                return "managementFees";
-            case "reserves":
-                return "replacementReserves";
-            default:
-                return itemOriginal;
-        }
+        return this.itemOriginalObj[`${itemOriginal}`] == undefined 
+            ? itemOriginal 
+            : this.itemOriginalObj[`${itemOriginal}`];
+    }
+
+    itemOriginalObj = {
+        waterAndSewer: "waterSewer",
+        repairsAndMaintenance: "repairsMaintenance",
+            payrollAndBenefits: "payrollBenefits",
+            generalAndAdministrative: "generalAdministrative",
+            legalAndProfessionalFees: "legalProfessionalFees",
+            management: "managementFees",
+            reserves: "replacementReserves"
     }
 
     checkPercentOfEGICheckbox(): ExpenseForecastActions {

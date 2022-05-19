@@ -6,7 +6,7 @@ import Income from "../../../../actions/income/income.manager";
 import { Tag } from "../../../../utils/tags.utils";
 
 describe("Comparable Min, Max, Avg values for Fuel Per SF are correctly calculated and displayed", 
-    { tags: [ Tag.income, Tag.expense_forecast ] }, () => {
+    { tags: [ Tag.income, Tag.expense_forecast, Tag.snapshot_tests ] }, () => {
 
     before("Login, create report",  () => {
         createReport(testData.reportCreationData);
