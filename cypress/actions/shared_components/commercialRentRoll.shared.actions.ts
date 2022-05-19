@@ -248,7 +248,7 @@ class CommercialRentRollSharedComponent<T extends CommercialRentRollSharedCompon
     }
 
     editDiscussion(newCommentary: string, clearText = true, isFullTextVerification = true): this {
-        this.Page.modifiedLabel().should("not.exist");
+        this.Page.modifiedLabel(0, false).should("not.exist");
         this.clickEditDiscussionButton()
             .editDiscussionTextArea(newCommentary, clearText)
             .clickSaveDiscussionButton();
@@ -257,7 +257,7 @@ class CommercialRentRollSharedComponent<T extends CommercialRentRollSharedCompon
         } else {
             this.verifyCommentaryContainsText(newCommentary);
         }
-        this.Page.modifiedLabel().should("exist");
+        this.Page.modifiedLabel(0).should("exist");
         return this;
     }
 
