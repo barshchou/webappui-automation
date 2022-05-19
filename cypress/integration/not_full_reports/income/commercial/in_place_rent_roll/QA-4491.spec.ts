@@ -18,8 +18,6 @@ describe("Verify the Save button functionality on the In-Place Rent Roll page",
             Income._CommercialManager.InPlaceRentRoll.verifyThatPageIsOpened().
                 Page.SaveBtn.scrollIntoView().should('exist');
 
-
-
             cy.stepInfo('2. Fill in the editable fields with values or/and check check-boxes or/and click the radio button and click on the Save button.');
             Income._CommercialManager.InPlaceRentRoll.chooseLeaseStatusByRowNumber(testData.leaseStatus)
                 .verifyLeaseStatusByRow(testData.leaseStatus)
@@ -29,25 +27,17 @@ describe("Verify the Save button functionality on the In-Place Rent Roll page",
                 .verifyLeaseDateByRowNumber("Start", testData.leaseStatus, "in-place", getTodayDateString("/"))
                 .enterLeaseDateByRowNumber("Expiry", getTodayDateString("/"),)
                 .verifyLeaseDateByRowNumber("Expiry", testData.leaseStatus, "in-place", getTodayDateString("/"))
-                .enterRentPerSFAnnuallyByRowNumber(testData.rentPerSF)
-                .verifyRentPsfAnnuallyByRow(testData.rentPerSF, 0)
-
                 .editDiscussion(testData.newCommentary)
-              .verifyCommentaryContainsText(testData.newCommentary)
-           //     .verifyProgressBarNotExist()
-           //     cy.wait(3000)
-             //   Income._CommercialManager.InPlaceRentRoll.verifyCommentaryFullText(testData.newCommentary)
-               // .verifyModifiedLabelExist()
-               
-               .verifyModifiedLabelExist()
-               cy.wait(300)
-                Income._CommercialManager.InPlaceRentRoll.clickSaveButton().verifyProgressBarNotExist();
+                .verifyCommentaryContainsText(testData.newCommentary)
+                .verifyModifiedLabelExist()
+                .enterRentPerSFAnnuallyByRowNumber(testData.rentPerSF)
+                .verifyRentPsfAnnuallyByRow(testData.rentPerSF, 0);
+            Income._CommercialManager.InPlaceRentRoll.clickSaveButton().verifyProgressBarNotExist();
 
 
             cy.stepInfo('3. Refresh the page / or re-enter the page and verify that the changes from step 2 are still applied.');
-           cy.reload();
-          
-             Income._CommercialManager.InPlaceRentRoll.verifyLeaseStatusByRow(testData.leaseStatus)
+            cy.reload();
+            Income._CommercialManager.InPlaceRentRoll.verifyLeaseStatusByRow(testData.leaseStatus)
                 .verifyLeaseStatusByRow(testData.leaseStatus)
                 .verifyIsInspectedChecked()
                 .verifyTenantNameByRow(testData.leaseStatus, testData.newTenantName)
@@ -56,6 +46,6 @@ describe("Verify the Save button functionality on the In-Place Rent Roll page",
                 .verifyRentPsfAnnuallyByRow(testData.rentPerSF, 0)
                 .verifyCommentaryFullText(testData.newCommentary);
 
-            // deleteReport(testData.reportCreationData.reportNumber); 
+            deleteReport(testData.reportCreationData.reportNumber);
         });
     });
