@@ -3,7 +3,8 @@ import ReportDataCreator from "../../../../data_creator/reportData.creator";
 
 type RentCompField = {
     name: string,
-    value: string | number
+    value: string,
+    type: "input" | "dropdown"
 };
 
 type unitOfMeasure = "per square foot per year" | "per square foot per month";
@@ -17,23 +18,28 @@ const reportCreationFixture = () => {
 const _rentCompFields: RentCompField[] = [
     {
         name: "baseRent",
-        value: 12
+        value: "12",
+        type: "input"
     },
     {
         name: "squareFeet",
-        value: 100
+        value: "100",
+        type: "input"
     },
     {
         name: "tenantName",
-        value: "Test"
+        value: "Test",
+        type: "input"
     },
     {
         name: "use",
-        value: "office"
+        value: "office",
+        type: "dropdown"
     },
     {
         name: "sourceOfInformation",
-        value: "bowerySubject"
+        value: "bowerySubject",
+        type: "dropdown"
     }
 ];
 
