@@ -1,5 +1,6 @@
 import BaseActions from "../base/base.actions";
 import createCompMapPage from "../../pages/sales/createCompMap.page";
+import { Alias } from "../../utils/alias.utils";
 
 class CreateCompMapActions extends BaseActions {
 
@@ -15,6 +16,7 @@ class CreateCompMapActions extends BaseActions {
     }
 
     verifyPageOpened() {
+        cy.wait(`@${Alias.gql.UpdateAppraisal}`, { timeout:60000 });
         createCompMapPage.pageHeader.should("exist");
         return this;
     }

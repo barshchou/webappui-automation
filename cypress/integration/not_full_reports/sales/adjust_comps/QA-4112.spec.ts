@@ -24,7 +24,7 @@ describe("Total Utility Adjustments in Sales Adjustment Grid is calculated with 
         Sales._AdjustComps.clickAddCustomUtilitiesAdjustment()
             .editOtherUtilitiesAdjustmentRowName(testData.customUtilitiesAdjustmentDefaultName, testData.newCustomUtilitiesAdjustmentName)
             .enterOtherUtilitiesAdjustmentByColumn(testData.comparableFirst.otherUtilityAdjustment, 0, 0)
-            .enterUtilitiesAdjustmentByColumn(Object.keys(testData.compsAdj), Object.values(testData.compsAdj))
+            .enterUtilitiesAdjustmentGroup(Object.keys(testData.compsAdj), Object.values(testData.compsAdj))
             .verifyTotalUtilitiesAdjustmentsByCompIndex();
 
         deleteReport(testData.reportCreationData.reportNumber);
