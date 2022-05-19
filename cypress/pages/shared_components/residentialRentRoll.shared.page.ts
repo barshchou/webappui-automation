@@ -18,4 +18,6 @@ export default class ResidentialRentRollSharedPage extends BasePage {
 
     get totalAnnualForecast() {return cy.get("[data-qa=total-annual-forecast-cell],[data-qa=annualTotal-rentForecast]");}
 
+    get bedroomsCells() {return cy.get("[data-qa^=bedrooms]");}
+
 }

@@ -197,14 +197,14 @@ class InPlaceRentRollActions extends ResidentialRentRollSharedActions<typeof ren
         return this;
     }
 
-    enterBedroomsNumberByRowNumber(bedroomsNumber: string | number, rowNumber = 0): InPlaceRentRollActions {
+    enterBedroomsNumberByRowNumber(bedroomsNumber: number, rowNumber = 0): InPlaceRentRollActions {
         rentRollPage.bedroomsCells.eq(rowNumber).dblclick();
-        this.enterTextToTextarea(`${bedroomsNumber}`);
-        rentRollPage.bedroomsCells.eq(rowNumber).should("have.text", bedroomsNumber);
+        this.enterTextToTextarea(`${bedroomsNumber}`)
+            .verifyBedroomsNumberByRow(bedroomsNumber, rowNumber);
         return this;
     }
 
-    enterAllEqualBedroomsNumber(bedroomsNumber: string | number, numberOfUnits: number): InPlaceRentRollActions {
+    enterAllEqualBedroomsNumber(bedroomsNumber: number, numberOfUnits: number): InPlaceRentRollActions {
         for (let i = 0; i < numberOfUnits; i++) {
             this.enterBedroomsNumberByRowNumber(bedroomsNumber, i);
         }

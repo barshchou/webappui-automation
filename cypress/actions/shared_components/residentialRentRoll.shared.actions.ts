@@ -151,4 +151,22 @@ export default class ResidentialRentRollSharedActions<T extends ResidentialRentR
         return this;
     }
 
+    verifyBedroomsNumberByRow(bedroomsNumber: number, rowNumber: number): this {
+        this.Page.bedroomsCells.eq(rowNumber).should("have.text", bedroomsNumber);
+        return this;
+    }
+
+    verifyAllBedroomsNumbers(...bedroomsNumbersToBe: Array<number>): this {
+        if (bedroomsNumbersToBe.length === 1) {
+            this.Page.bedroomsCells.each((cell, index) => {
+                this.verifyBedroomsNumberByRow(bedroomsNumbersToBe[0], index);
+            });
+        } else {
+            this.Page.bedroomsCells.each((cell, i) => {
+                this.verifyBedroomsNumberByRow(bedroomsNumbersToBe[i], i);
+            });
+        }
+        return this;
+    }
+
 }
