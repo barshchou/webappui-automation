@@ -50,8 +50,7 @@ export default class BasePage {
     modifiedLabel(index?: number, isExist = true) {
         if (isExist === true) {
             return cy.xpath("//span[contains(text(), 'Modified')]").eq((index !== 0) ? index : 0);
-        } 
-            return cy.xpath("//span[contains(text(), 'Modified')]");
-        
+        }
+        return cy.xpath("//span[contains(text(), 'Modified')]");
     }
 }
