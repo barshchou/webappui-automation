@@ -41,26 +41,6 @@ class StabilizedRentRollActions extends ResidentialRentRollSharedActions<typeof 
         return this;
     }
 
-    verifyRentTypeByRow(rentType: string, rowNumber: number): this {
-        stabRentRollPage.rentTypeCells.eq(rowNumber).should("have.text", rentType);
-        return this;
-    }
-
-    verifyAllRentTypeCells(...rentTypesToBe: Array<string>): this {
-        if (rentTypesToBe.length === 1) {
-            stabRentRollPage.rentTypeCells.then(cells => {
-                for (let i = 0; i < cells.length; i++) {
-                    this.verifyRentTypeByRow(rentTypesToBe[0], i);
-                }
-            });
-        } else {
-            for (let i = 0; i < rentTypesToBe.length; i++) {
-                this.verifyRentTypeByRow(rentTypesToBe[i], i);
-            }
-        }
-        return this;
-    }
-
     enterMonthlyRentByRow(monthlyRent: number, rowNumber: number): this {
         this.clickSaveButton().verifyProgressBarNotExist();
         stabRentRollPage.monthlyRentCellsInputs.eq(rowNumber).as("monthlyRent");
@@ -151,49 +131,6 @@ class StabilizedRentRollActions extends ResidentialRentRollSharedActions<typeof 
                 this.verifyLeaseStatusByRow(leaseStatuses[i], i);
             }
         }
-        return this;
-    }
-
-    verifyRentForecastByRow(forecastValue: number, rowNumber: number): this {
-        const textToBe = `$${numberWithCommas(forecastValue.toFixed(2))}`;
-        stabRentRollPage.rentForecastCells.eq(rowNumber).should("have.text", textToBe);
-        return this;
-    }
-
-    verifyAllRentForecasts(...forecastsValues: Array<number>): this {
-        if (forecastsValues.length === 1) {
-            stabRentRollPage.rentForecastCells.then(cells => {
-                for (let i = 0; i < cells.length; i++) {
-                    this.verifyRentForecastByRow(forecastsValues[0], i);
-                }
-            });
-        } else {
-            for (let i = 0; i < forecastsValues.length; i++) {
-                this.verifyRentForecastByRow(forecastsValues[i], i);
-            }
-        }
-        return this;
-    }
-
-    verifyTotalMonthlyForecast(numberOfUnits: number, ...forecastValues: Array<number>): this {
-        let textToBe;
-        if (forecastValues.length === 1) {
-            textToBe = `$${numberWithCommas((forecastValues[0] * numberOfUnits).toFixed(2))}`;
-        } else {
-            let sum;
-            forecastValues.forEach(el => sum += el);
-            textToBe = `$${numberWithCommas(sum.toFixed(2))}`;
-        }
-        stabRentRollPage.totalMonthlyForecast.should("have.text", textToBe);
-        return this;
-    }
-
-    verifyTotalAnnualForecast(): this {
-        stabRentRollPage.totalMonthlyForecast.then(el => {
-            const numberTotalMonthly = getNumberFromDollarNumberWithCommas(el.text());
-            const totalAnnualText = `$${numberWithCommas((numberTotalMonthly * 12).toFixed(2))}`;
-            stabRentRollPage.totalAnnualForecast.should("have.text", totalAnnualText);
-        });
         return this;
     }
 

@@ -30,7 +30,7 @@ describe("[QA-4212] [QA-4243] [QA-4246] In-Place Rent Roll table tests",
             Income._Residential.InPlaceRentRoll.enterMonthlyRentByRowNumber(unit.monthlyRent, index)
                 .enterSquareFootageByRow(unit.footage, index)
                 .enterLeaseStatusByRowNumber(unit.leaseStatus, index)
-                .verifyRentSFValue(index);
+                .verifyRentPSFValueByRow(false, index);
         });
 
         cy.stepInfo('4. [QA-4246] Verify the Annual Total row is calculated per formula = (Monthly Rent ($) sum - vacant units\' rent) * 12');

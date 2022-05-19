@@ -1,6 +1,6 @@
 import BaseActions from "../base/base.actions";
 import ResidentialRentRollSharedPage from "../../pages/shared_components/residentialRentRoll.shared.page";
-import stabRentRollPage from "../../pages/income/residential/stabilizedRentRoll.page";
+import { getNumberFromDollarNumberWithCommas, numberWithCommas } from "../../../utils/numbers.utils";
 
 export default class ResidentialRentRollSharedActions<T extends ResidentialRentRollSharedPage> extends BaseActions {
     Page: T;
@@ -42,7 +42,7 @@ export default class ResidentialRentRollSharedActions<T extends ResidentialRentR
 
     verifyUnitsNumberByOrder(): this {
         let i = 1;
-        stabRentRollPage.unitNumberCells.each(cell => {
+        this.Page.unitNumberCells.each(cell => {
             expect(cell.text()).to.eq(`${i}`);
             i++;
         });
@@ -55,13 +55,13 @@ export default class ResidentialRentRollSharedActions<T extends ResidentialRentR
     }
 
     verifyRoomsNumberByRow(roomsNumber: number, rowNumber = 0): this {
-        stabRentRollPage.roomsCells.eq(rowNumber).should("have.text", roomsNumber);
+        this.Page.roomsCells.eq(rowNumber).should("have.text", roomsNumber);
         return this;
     }
 
     verifyAllRoomsNumbers(...roomsNumbersToBe: Array<number>): this {
         if (roomsNumbersToBe.length === 1) {
-            stabRentRollPage.roomsCells.then(cells => {
+            this.Page.roomsCells.then(cells => {
                 for (let i = 0; i < cells.length; i++) {
                     this.verifyRoomsNumberByRow(roomsNumbersToBe[0], i);
                 }
@@ -71,6 +71,83 @@ export default class ResidentialRentRollSharedActions<T extends ResidentialRentR
                 this.verifyRoomsNumberByRow(roomsNumbersToBe[i], i);
             }
         }
+        return this;
+    }
+
+    verifyRentTypeCellByRowNumber(rentTypeToBe: string, rowNumber = 0): this {
+        this.Page.rentTypeCells.eq(rowNumber).should("contain.text", rentTypeToBe);
+        return this;
+    }
+
+    verifyAllRentTypeCells(...rentTypesToBe: Array<string>): this {
+        if (rentTypesToBe.length === 1) {
+            this.Page.rentTypeCells.each((cell, index) => {
+                this.verifyRentTypeCellByRowNumber(rentTypesToBe[0], index);
+            });
+        } else {
+            rentTypesToBe.forEach((type, index) => {
+                this.verifyRentTypeCellByRowNumber(type, index);
+            });
+        }
+        return this;
+    }
+
+    verifyMonthlyTotalForecastEqualValue(): this {
+        this.Page.rentForecastCells.then(cells => {
+            let totalToBe = 0;
+            for (let i = 0; i < cells.length; i++) {
+                let cellNumber = getNumberFromDollarNumberWithCommas(cells.eq(i).text());
+                totalToBe += cellNumber;
+            }
+            const textToBe = `$${numberWithCommas(totalToBe.toFixed(2))}`;
+            this.Page.monthlyTotalForecast.should("have.text", textToBe);
+        });
+        return this;
+    }
+
+    verifyTotalMonthlyForecast(numberOfUnits: number, ...forecastValues: Array<number>): this {
+        let textToBe;
+        if (forecastValues.length === 1) {
+            textToBe = `$${numberWithCommas((forecastValues[0] * numberOfUnits).toFixed(2))}`;
+        } else {
+            let sum;
+            forecastValues.forEach(el => sum += el);
+            textToBe = `$${numberWithCommas(sum.toFixed(2))}`;
+        }
+        this.Page.monthlyTotalForecast.should("have.text", textToBe);
+        return this;
+    }
+
+    verifyRentForecastByRow(forecastValue: number | string, rowNumber: number): this {
+        let textToBe;
+        if (typeof forecastValue === "string") {
+            textToBe = forecastValue;
+        } else {
+            textToBe = `$${numberWithCommas((<number>forecastValue).toFixed(2))}`;
+        }
+        this.Page.rentForecastCells.eq(rowNumber).should("have.text", textToBe);
+        return this;
+    }
+
+    verifyAllRentForecasts(...forecastsValues: Array<number>): this {
+        if (forecastsValues.length === 1) {
+            this.Page.rentForecastCells.each((cells, index) => {
+                this.verifyRentForecastByRow(forecastsValues[0], index);
+            });
+        } else {
+            for (let i = 0; i < forecastsValues.length; i++) {
+                this.verifyRentForecastByRow(forecastsValues[i], i);
+            }
+        }
+        return this;
+    }
+
+    verifyTotalAnnualForecast(): this {
+        this.Page.monthlyTotalForecast.then(el => {
+            const numberTotalMonthly = getNumberFromDollarNumberWithCommas(el.text());
+            const totalAnnualText = `$${numberWithCommas((numberTotalMonthly * 12).toFixed(2))}`;
+            this.Page.totalAnnualForecast.should("have.text", totalAnnualText);
+        });
         return this;
     }
 

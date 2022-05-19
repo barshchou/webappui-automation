@@ -27,7 +27,7 @@ describe(`[QA-4092] Verify if "Per Year" time period PSF Rent based on is select
             Income._Residential.InPlaceRentRoll.checkPerUnitSquareFootage()
             .enterSquareFootageByRow(el.squareFootage)
             .enterMonthlyRentByRowNumber(el.monthlyRent)
-            .verifyRentSFValue();
+            .verifyRentPSFValueByRow(false);
             cy.reload();
         });
         deleteReport(testData.reportCreationData.reportNumber);

@@ -26,19 +26,11 @@ class InPlaceRentRollPage extends ResidentialRentRollSharedPage {
 
     get importDataButton() {return cy.get("*[data-qa='import-data-btn']");}
 
-    get rentTypeCells() {return cy.get("[data-qa^=rentType]");}
-
     get textAreaToInput() {return cy.get("div:not([class*='hidden']) > *[class='handsontableInput']");}
 
     get bedroomsCells() {return cy.get("[data-qa^=bedrooms]");}
 
     get leaseStatusCells() {return cy.get("[data-qa^=leaseStatus]");}
-
-    get rentForecastCells() {return cy.get("[data-qa^=rentForecast]");}
-
-    get monthlyTotalForecast() {return cy.get("[data-qa='monthlyTotal-rent']");}
-
-    get annualTotalForecast() {return cy.get("[data-qa='annualTotal-rent']");}
 
     get monthlyTotalRent() {return cy.get("[data-qa='monthlyTotal-rent']");}
 
@@ -62,6 +54,7 @@ class InPlaceRentRollPage extends ResidentialRentRollSharedPage {
 
     get unitTypeCells() {return cy.get("[data-qa^=unitLayout][data-qa$=cell]");}
 
+    // TODO: Fix locator for this cells after https://bowery.atlassian.net/browse/WEB-5364 bug fix and move methods and elements, related to it to shared components
     get rentSFCell() {return cy.xpath("//*[contains(@class, 'readOnly') and not(contains(@data-qa, 'cell'))]");}
 
     get rentRoomCell() {return cy.get("[data-qa^='rent/room']");}
