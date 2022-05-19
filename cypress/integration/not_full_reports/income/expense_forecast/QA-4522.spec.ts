@@ -45,7 +45,6 @@ describe(`Comparable Min, Max, Avg values for Water & Sewer Per Unit are correct
                     testData.insuranceCardSnapshotName, { padding: [ 10, 100 ] }
         );
 
-        cy.stepInfo("5. Delete report");
         deleteReport(testData.reportCreationData.reportNumber);
     });
 });
