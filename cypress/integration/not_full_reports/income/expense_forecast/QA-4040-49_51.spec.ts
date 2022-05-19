@@ -1,5 +1,5 @@
 import { Property } from '../../../../actions/index';
-import testData from "../../../../fixtures/not_full_reports/income/expense_forecast/QA-4040_41_42_43_46_51.fixture";
+import testData from "../../../../fixtures/not_full_reports/income/expense_forecast/QA-4040-49_51.fixture";
 import { _NavigationSection } from "../../../../actions/base";
 import { Income } from "../../../../actions";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
@@ -92,6 +92,109 @@ describe(`Verify that Generated Commentary are updated on the Expense Forecast p
             .verifyForecastCommentary(testData.commentariesPayrollAndBenefits.generatedPerUnit, testData.expenseForecastPayrollAndBenefits)
             .editExpenseForecastCommentary(testData.editedCommentary, testData.expenseForecastPayrollAndBenefits)
             .verifyForecastCommentary(testData.editedCommentary, testData.expenseForecastPayrollAndBenefits);
+        Income._ExpenseForecastActions.clickSaveButton();
+    });
+
+    it("[QA-4044] Verify the generated commentary and inputs for General & Administrative", () => {
+        cy.stepInfo(`[QA-4044] => 1. Go to Expense Forecast`);
+        _NavigationSection.navigateToExpenseForecast();
+        cy.stepInfo(`[QA-4044] => 2. Fill Forecast value for SF basis and verify commentary`);
+        Income._ExpenseForecastActions.enterForecastItemForecast(testData.expenseForecastGeneralAndAdministrative)
+            .verifyForecastCommentary(testData.commentariesGeneralAndAdministrative.generatedPerSF, testData.expenseForecastGeneralAndAdministrative)
+            .editExpenseForecastCommentary(testData.editedCommentary, testData.expenseForecastGeneralAndAdministrative)
+            .verifyForecastCommentary(testData.editedCommentary, testData.expenseForecastGeneralAndAdministrative);
+        cy.stepInfo(`[QA-4044] => 3. Revert commentary value, switch to unit basis and fill Forecast value and verify commentary`);
+        Income._ExpenseForecastActions.revertToOriginalExpenseForecastCommentary(testData.expenseForecastGeneralAndAdministrative);
+        testData.expenseForecastGeneralAndAdministrative.basis = "unit";
+        Income._ExpenseForecastActions.switchExpenseForecastBasis(testData.expenseForecastGeneralAndAdministrative);
+        Income._ExpenseForecastActions.enterForecastItemForecast(testData.expenseForecastGeneralAndAdministrative)
+            .verifyForecastCommentary(testData.commentariesGeneralAndAdministrative.generatedPerUnit, testData.expenseForecastGeneralAndAdministrative)
+            .editExpenseForecastCommentary(testData.editedCommentary, testData.expenseForecastGeneralAndAdministrative)
+            .verifyForecastCommentary(testData.editedCommentary, testData.expenseForecastGeneralAndAdministrative);
+        Income._ExpenseForecastActions.clickSaveButton();
+    });
+
+    it("[QA-4045] Verify the generated commentary and inputs for Miscellaneous", () => {
+        cy.stepInfo(`[QA-4045] => 1. Go to Expense Forecast`);
+        _NavigationSection.navigateToExpenseForecast();
+        cy.stepInfo(`[QA-4045] => 2. Fill Forecast value for SF basis and verify commentary`);
+        Income._ExpenseForecastActions.enterForecastItemForecast(testData.expenseForecastMiscellaneous)
+            .verifyForecastCommentary(testData.commentariesMiscellaneous.generatedPerSF, testData.expenseForecastMiscellaneous)
+            .editExpenseForecastCommentary(testData.editedCommentary, testData.expenseForecastMiscellaneous)
+            .verifyForecastCommentary(testData.editedCommentary, testData.expenseForecastMiscellaneous);
+        cy.stepInfo(`[QA-4045] => 3. Revert commentary value, switch to unit basis and fill Forecast value and verify commentary`);
+        Income._ExpenseForecastActions.revertToOriginalExpenseForecastCommentary(testData.expenseForecastMiscellaneous);
+        testData.expenseForecastMiscellaneous.basis = "unit";
+        Income._ExpenseForecastActions.switchExpenseForecastBasis(testData.expenseForecastMiscellaneous);
+        Income._ExpenseForecastActions.enterForecastItemForecast(testData.expenseForecastMiscellaneous)
+            .verifyForecastCommentary(testData.commentariesMiscellaneous.generatedPerUnit, testData.expenseForecastMiscellaneous)
+            .editExpenseForecastCommentary(testData.editedCommentary, testData.expenseForecastMiscellaneous)
+            .verifyForecastCommentary(testData.editedCommentary, testData.expenseForecastMiscellaneous);
+        Income._ExpenseForecastActions.clickSaveButton();
+    });
+
+    it("[QA-4047] Verify the generated commentary and inputs for Fuel", () => {
+        cy.stepInfo(`[QA-4047] => 1. Go to Expense Forecast`);
+        _NavigationSection.navigateToExpenseForecast();
+        cy.stepInfo(`[QA-4047] => 2. Fill Forecast value for SF basis and verify commentary`);
+        Income._ExpenseForecastActions.enterForecastItemForecast(testData.expenseForecastFuel)
+            .verifyForecastCommentary(testData.commentariesFuel.generatedPerSF, testData.expenseForecastFuel)
+            .editExpenseForecastCommentary(testData.editedCommentary, testData.expenseForecastFuel)
+            .verifyForecastCommentary(testData.editedCommentary, testData.expenseForecastFuel);
+        cy.stepInfo(`[QA-4047] => 3. Revert commentary value, switch to unit basis and fill Forecast value and verify commentary`);
+        Income._ExpenseForecastActions.revertToOriginalExpenseForecastCommentary(testData.expenseForecastFuel);
+        testData.expenseForecastFuel.basis = "unit";
+        Income._ExpenseForecastActions.switchExpenseForecastBasis(testData.expenseForecastFuel);
+        Income._ExpenseForecastActions.enterForecastItemForecast(testData.expenseForecastFuel)
+            .verifyForecastCommentary(testData.commentariesFuel.generatedPerUnit, testData.expenseForecastFuel)
+            .editExpenseForecastCommentary(testData.editedCommentary, testData.expenseForecastFuel)
+            .verifyForecastCommentary(testData.editedCommentary, testData.expenseForecastFuel);
+        Income._ExpenseForecastActions.revertToOriginalExpenseForecastCommentary(testData.expenseForecastFuel);
+        cy.stepInfo(`[QA-4047] => 4. Revert commentary value, switch to room basis and fill Forecast value and verify commentary`);
+        testData.expenseForecastFuel.basis = "room";
+        Income._ExpenseForecastActions.switchExpenseForecastBasis(testData.expenseForecastFuel);
+        Income._ExpenseForecastActions.enterForecastItemForecast(testData.expenseForecastFuel)
+            .verifyForecastCommentary(testData.commentariesFuel.generatedPerRoom, testData.expenseForecastFuel)
+            .editExpenseForecastCommentary(testData.editedCommentary, testData.expenseForecastFuel)
+            .verifyForecastCommentary(testData.editedCommentary, testData.expenseForecastFuel);
+        Income._ExpenseForecastActions.clickSaveButton();
+    });
+
+    it("[QA-4048] Verify the generated commentary and inputs for Legal & Professional fees", () => {
+        cy.stepInfo(`[QA-4048] => 1. Go to Expense Forecast`);
+        _NavigationSection.navigateToExpenseForecast();
+        cy.stepInfo(`[QA-4048] => 2. Fill Forecast value for SF basis and verify commentary`);
+        Income._ExpenseForecastActions.enterForecastItemForecast(testData.expenseForecastLegalAndProfessional)
+            .verifyForecastCommentary(testData.commentariesLegalAndProfessional.generatedPerSF, testData.expenseForecastLegalAndProfessional)
+            .editExpenseForecastCommentary(testData.editedCommentary, testData.expenseForecastLegalAndProfessional)
+            .verifyForecastCommentary(testData.editedCommentary, testData.expenseForecastLegalAndProfessional);
+        cy.stepInfo(`[QA-4048] => 3. Revert commentary value, switch to unit basis and fill Forecast value and verify commentary`);
+        Income._ExpenseForecastActions.revertToOriginalExpenseForecastCommentary(testData.expenseForecastLegalAndProfessional);
+        testData.expenseForecastLegalAndProfessional.basis = "unit";
+        Income._ExpenseForecastActions.switchExpenseForecastBasis(testData.expenseForecastLegalAndProfessional);
+        Income._ExpenseForecastActions.enterForecastItemForecast(testData.expenseForecastLegalAndProfessional)
+            .verifyForecastCommentary(testData.commentariesLegalAndProfessional.generatedPerUnit, testData.expenseForecastLegalAndProfessional)
+            .editExpenseForecastCommentary(testData.editedCommentary, testData.expenseForecastLegalAndProfessional)
+            .verifyForecastCommentary(testData.editedCommentary, testData.expenseForecastLegalAndProfessional);
+        Income._ExpenseForecastActions.clickSaveButton();
+    });
+
+    it("[QA-4049] Verify the generated commentary and inputs for Management & Fees", () => {
+        cy.stepInfo(`[QA-4049] => 1. Go to Expense Forecast`);
+        _NavigationSection.navigateToExpenseForecast();
+        cy.stepInfo(`[QA-4049] => 2. Fill Forecast value for SF basis and verify commentary`);
+        Income._ExpenseForecastActions.enterForecastItemForecast(testData.expenseForecastManagement)
+            .verifyForecastCommentary(testData.commentariesManagement.generatedPerSF, testData.expenseForecastManagement)
+            .editExpenseForecastCommentary(testData.editedCommentary, testData.expenseForecastManagement)
+            .verifyForecastCommentary(testData.editedCommentary, testData.expenseForecastManagement);
+        cy.stepInfo(`[QA-4049] => 3. Revert commentary value, switch to unit basis and fill Forecast value and verify commentary`);
+        Income._ExpenseForecastActions.revertToOriginalExpenseForecastCommentary(testData.expenseForecastManagement);
+        testData.expenseForecastManagement.basis = "unit";
+        Income._ExpenseForecastActions.switchExpenseForecastBasis(testData.expenseForecastManagement);
+        Income._ExpenseForecastActions.enterForecastItemForecast(testData.expenseForecastManagement)
+            .verifyForecastCommentary(testData.commentariesManagement.generatedPerUnit, testData.expenseForecastManagement)
+            .editExpenseForecastCommentary(testData.editedCommentary, testData.expenseForecastManagement)
+            .verifyForecastCommentary(testData.editedCommentary, testData.expenseForecastManagement);
         Income._ExpenseForecastActions.clickSaveButton();
     });
 
