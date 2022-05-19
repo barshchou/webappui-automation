@@ -44,6 +44,14 @@ const expenseForecastRepairAndMaintenanceFixture = (): BoweryReports.ForecastIte
     };
 };
 
+const expenseForecastElectricityFixture = (): BoweryReports.ForecastItem => {
+    return {
+        name: "electricity",
+        basis: "sf",
+        forecast: 5
+    };
+};
+
 const waterAndSewerCommentariesFixture = () => {
     return {
         generatedPerSF: "Based on the information above, we have projected this expense at $2.00 per square foot, or $4,248,882 annually.",
@@ -97,6 +105,13 @@ const repairAndMaintenanceCommentariesFixture = () => {
     };
 };
 
+const electricityCommentariesFixture = () => {
+    return {
+        generatedPerSF: "Based on the information above, we have projected this expense at $5.00 per square foot, or $10,622,205 annually.",
+        generatedPerUnit: "Based on the information above, we have projected this expense at $5 per unit, or $25 annually.",
+    };
+};
+
 export default {
     reportCreationData: reportCreationFixture(),
     expenseForecastWaterAndSewer: expenseForecastWaterAndSewerFixture(),
@@ -104,11 +119,13 @@ export default {
     expenseForecastInsurance: expenseForecastInsuranceFixture(),
     expenseForecastPayrollAndBenefits: expenseForecastPayrollAndBenefitsFixture(),
     expenseForecastRepairAndMaintenance: expenseForecastRepairAndMaintenanceFixture(),
+    expenseForecastElectricity: expenseForecastElectricityFixture(),
     commentariesWaterAndSewer: Object.freeze(waterAndSewerCommentariesFixture()),
     commentariesReplacementReserve: Object.freeze(replacementReserveCommentariesFixture()),
     commentariesInsurance: Object.freeze(insuranceCommentariesFixture()),
     commentariesPayrollAndBenefits: Object.freeze(payrollAndBenefitsCommentariesFixture()),
     commentariesRepairAndMaintenance: Object.freeze(repairAndMaintenanceCommentariesFixture()),
+    commentariesElectricity: Object.freeze(electricityCommentariesFixture()),
     residentialUnits: 5,
     editedCommentary: "some new adding to commentary"
 };

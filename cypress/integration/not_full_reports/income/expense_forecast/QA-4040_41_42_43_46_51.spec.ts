@@ -1,5 +1,5 @@
 import { Property } from '../../../../actions/index';
-import testData from "../../../../fixtures/not_full_reports/income/expense_forecast/QA-4040_42_43_46_51.fixture";
+import testData from "../../../../fixtures/not_full_reports/income/expense_forecast/QA-4040_41_42_43_46_51.fixture";
 import { _NavigationSection } from "../../../../actions/base";
 import { Income } from "../../../../actions";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
@@ -54,6 +54,25 @@ describe(`Verify that Generated Commentary are updated on the Expense Forecast p
             .verifyForecastCommentary(testData.commentariesInsurance.generatedPerUnit, testData.expenseForecastInsurance)
             .editExpenseForecastCommentary(testData.editedCommentary, testData.expenseForecastInsurance)
             .verifyForecastCommentary(testData.editedCommentary, testData.expenseForecastInsurance);
+        Income._ExpenseForecastActions.clickSaveButton();
+    });
+
+    it("[QA-4041] Verify the generated commentary and inputs for Electricity", () => {
+        cy.stepInfo(`[QA-4041] => 1. Go to Expense Forecast`);
+        _NavigationSection.navigateToExpenseForecast();
+        cy.stepInfo(`[QA-4041] => 2. Fill Forecast value for SF basis and verify commentary`);
+        Income._ExpenseForecastActions.enterForecastItemForecast(testData.expenseForecastElectricity)
+            .verifyForecastCommentary(testData.commentariesElectricity.generatedPerSF, testData.expenseForecastElectricity)
+            .editExpenseForecastCommentary(testData.editedCommentary, testData.expenseForecastElectricity)
+            .verifyForecastCommentary(testData.editedCommentary, testData.expenseForecastElectricity);
+        cy.stepInfo(`[QA-4041] => 3. Revert commentary value, switch to unit basis and fill Forecast value and verify commentary`);
+        Income._ExpenseForecastActions.revertToOriginalExpenseForecastCommentary(testData.expenseForecastElectricity);
+        testData.expenseForecastElectricity.basis = "unit";
+        Income._ExpenseForecastActions.switchExpenseForecastBasis(testData.expenseForecastElectricity);
+        Income._ExpenseForecastActions.enterForecastItemForecast(testData.expenseForecastElectricity)
+            .verifyForecastCommentary(testData.commentariesElectricity.generatedPerUnit, testData.expenseForecastElectricity)
+            .editExpenseForecastCommentary(testData.editedCommentary, testData.expenseForecastElectricity)
+            .verifyForecastCommentary(testData.editedCommentary, testData.expenseForecastElectricity);
         Income._ExpenseForecastActions.clickSaveButton();
     });
 
