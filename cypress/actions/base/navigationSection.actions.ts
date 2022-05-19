@@ -1,4 +1,5 @@
 import navigationSectionPage from "../../pages/base/navigationSection.page";
+import { Alias } from "../../utils/alias.utils";
 import BaseActionsExt from "./base.actions.ext";
 
 class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPage> {
@@ -239,7 +240,9 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
     navigateToFindComps() {
         this.clickSalesButton()
             .clickFindCompsButton()
-            .clickYesButton();
+            .clickYesButton();        
+        cy.wait(`@${Alias.gql.FindSalesComps}`, { timeout:70000 });
+
         return this;
     }
 

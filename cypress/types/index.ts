@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-namespace */
 /**
  * ernst:
@@ -94,6 +96,16 @@ namespace BoweryReports {
         monthlyRent: number,
         leaseStatus?: BoweryReports.LeaseStatus
     }
+}
+
+namespace Utils {
+    type _GraphQLRequest = {
+        operationName: string,
+        query: string,
+        variables: object | any
+    }
+    
+    export type GraphQLRequest = Partial<_GraphQLRequest>;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
