@@ -31,9 +31,16 @@ describe("Verify the Save button functionality on the In-Place Rent Roll page",
                 .verifyLeaseDateByRowNumber("Expiry", testData.leaseStatus, "in-place", getTodayDateString("/"))
                 .enterRentPerSFAnnuallyByRowNumber(testData.rentPerSF)
                 .verifyRentPsfAnnuallyByRow(testData.rentPerSF, 0)
+
                 .editDiscussion(testData.newCommentary)
-                .verifyCommentaryFullText(testData.newCommentary);
-              //  cy.wait(3000)
+              .verifyCommentaryContainsText(testData.newCommentary)
+           //     .verifyProgressBarNotExist()
+           //     cy.wait(3000)
+             //   Income._CommercialManager.InPlaceRentRoll.verifyCommentaryFullText(testData.newCommentary)
+               // .verifyModifiedLabelExist()
+               
+               .verifyModifiedLabelExist()
+               cy.wait(300)
                 Income._CommercialManager.InPlaceRentRoll.clickSaveButton().verifyProgressBarNotExist();
 
 
