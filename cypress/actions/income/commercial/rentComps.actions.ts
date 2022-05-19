@@ -1,60 +1,48 @@
-import BaseActions from "../../base/base.actions";
+import BaseActionsExt from "../../base/base.actions.ext";
 import rentCompsPage from "../../../pages/income/commercial/rentComps.page";
 
-class CommercialRentCompsActions extends BaseActions {
+class CommercialRentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
 
-    openMap() {
+    openMap(): CommercialRentCompsActions {
         rentCompsPage.mapDropdown.click();
         return this;
     }
 
-    verifyFiltersDropdownExist() {
+    verifyFiltersDropdownExist(): CommercialRentCompsActions {
         rentCompsPage.filtersDropdown.should("exist");
         return this;
     }
 
-    clickFiltersDropdown() {
+    clickFiltersDropdown(): CommercialRentCompsActions {
         rentCompsPage.filtersDropdown.click();
         return this;
     }
 
-    verifyLeaseTermsSectionExist() {
+    verifyLeaseTermsSectionExist(): CommercialRentCompsActions {
         rentCompsPage.leaseTermsSection.should("exist");
         return this;
     }
 
-    /**
-     * @param {string} attribute
-     * @returns {CommercialRentCompsActions}
-     */
-    checkCheckboxByQAAttr(attribute) {
+    checkCheckboxByQAAttr(attribute: string): CommercialRentCompsActions {
         rentCompsPage.getNotCheckedCheckboxByQAAttr(attribute).should("exist").check();
         this.verifyProgressBarNotExist();
         rentCompsPage.getCheckedCheckboxByQAAttr(attribute).should("exist");
         return this;
     }
 
-    /**
-     * @param {string} attribute
-     * @returns {CommercialRentCompsActions}
-     */
-    uncheckCheckboxByQAAttr(attribute) {
+    uncheckCheckboxByQAAttr(attribute: string): CommercialRentCompsActions {
         rentCompsPage.getCheckedCheckboxByQAAttr(attribute).should("exist").uncheck();
         this.verifyProgressBarNotExist();
         rentCompsPage.getNotCheckedCheckboxByQAAttr(attribute).should("exist");
         return this;
     }
 
-    verifySortBySectionExist() {
+    verifySortBySectionExist(): CommercialRentCompsActions {
         rentCompsPage.sortBySection.should("exist");
         return this;
     }
 
-    /**
-     * @param {string} option
-     * @returns {CommercialRentCompsActions}
-     */
-    selectSortByOption(option) {
+    selectSortByOption(option: string): CommercialRentCompsActions {
         if(option == "Newest"){
             rentCompsPage.sortByDropdown.should("contain.text", option);
         }
@@ -67,41 +55,37 @@ class CommercialRentCompsActions extends BaseActions {
         return this;
     }
 
-    verifyMapClosedByDefault() {
+    verifyMapClosedByDefault(): CommercialRentCompsActions {
         rentCompsPage.mapDropdown.should("have.attr", "aria-expanded", "false");
         return this;
     }
 
-    /**
-     * @param {string} address
-     * @returns {CommercialRentCompsActions}
-     */
-    addCompFromMapByAddress(address) {
+    addCompFromMapByAddress(address: string): CommercialRentCompsActions {
         rentCompsPage.getAddCompButtonByAddress(address).click({ force: true });
         return this;
     }
 
-    clickManuallyAddANewCompButton() {
+    clickManuallyAddANewCompButton(): CommercialRentCompsActions {
         rentCompsPage.manuallyAddANewCompButton.click();
         return this;
     }
 
-    enterAddressToSearch(address) {
+    enterAddressToSearch(address: string): CommercialRentCompsActions {
         rentCompsPage.addressSearchInput.type(`${address}{enter}`).should("have.value", address);
         return this;
     }
 
-    clickSubmitButton() {
+    clickSubmitButton(): CommercialRentCompsActions {
         rentCompsPage.submitButton.should("not.be.disabled").click({ force: true });
         return this;
     }
 
-    clickToSearchResultsRow() {
+    clickToSearchResultsRow(): CommercialRentCompsActions {
         rentCompsPage.searchResultsRow.should("be.visible").click();
         return this;
     }
 
-    searchNewCompByAddress(address) {
+    searchNewCompByAddress(address: string): CommercialRentCompsActions {
         this.enterAddressToSearch(address).
             clickSubmitButton().
             clickToSearchResultsRow().
@@ -109,36 +93,36 @@ class CommercialRentCompsActions extends BaseActions {
         return this;
     }
 
-    fillInRentCompFieldInput(fieldName, value) {
+    fillInRentCompFieldInput(fieldName: string, value: string): CommercialRentCompsActions {
         rentCompsPage.getRentCompInputField(fieldName).clear().type(`${value}{enter}`);
         return this;
     }
 
-    chooseRentCompFieldDropdownOption(fieldName, option) {
+    chooseRentCompFieldDropdownOption(fieldName, option): CommercialRentCompsActions {
         rentCompsPage.getRentCompDropdownField(fieldName).click();
         rentCompsPage.getRentCompDropdownOption(option).click();
         return this;
     }
 
-    enterLeaseDate(leaseDate) {
+    enterLeaseDate(leaseDate): CommercialRentCompsActions {
         rentCompsPage.leaseDatePicker.type(leaseDate);
         return this;
     }
 
-    clickEditButtonByRowNumber(rowNumber = 0) {
+    clickEditButtonByRowNumber(rowNumber = 0): CommercialRentCompsActions {
         rentCompsPage.getEditButtonByRowNubmer(rowNumber).click();
         return this;
     }
 
-    checkUnitOfMeasureRadioButton(name) {
+    checkUnitOfMeasureRadioButton(name): CommercialRentCompsActions {
         rentCompsPage.getUnitOfMeasureRadioButton(name).click();
         return this;
     }
 
-    verifyRentPerSFCellValue(value, rowNumber = 0) {
+    verifyRentPerSFCellValue(value, rowNumber = 0): CommercialRentCompsActions {
         rentCompsPage.getRentPerSFCellByRowNumber(rowNumber).should("have.text", `$${value}.00`);
         return this;
     }
 }
 
-export default new CommercialRentCompsActions();
+export default new CommercialRentCompsActions(rentCompsPage);
