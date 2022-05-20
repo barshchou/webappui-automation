@@ -215,4 +215,8 @@ export default class ResidentialRentRollSharedActions<T extends ResidentialRentR
         return this;
     }
 
+    verifySquareFootageCellByRow(textToBe: string, rowNumber = 0): this {
+        this.Page.squareFootageCells.eq(rowNumber).should("have.text", textToBe);
+        return this;
+    }
 }

@@ -314,7 +314,7 @@ class InPlaceRentRollActions extends ResidentialRentRollSharedActions<typeof ren
         } else {
             textToBe = typeof value === "string" ? value : numberWithCommas(value.toFixed(2));
         }
-        rentRollPage.squareFootageCells.eq(rowNumber).should("have.text", textToBe);
+        this.verifySquareFootageCellByRow(textToBe, rowNumber);
         return this;
     }
 
