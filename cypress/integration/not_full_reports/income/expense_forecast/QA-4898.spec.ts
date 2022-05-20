@@ -51,7 +51,8 @@ describe("Historical expense Water & Sewer Per SF is correctly calculated and di
             .verifyForecastItemByExpensePeriodType(testData.t12WaterAndSewerItem, testData.buildingDescription, "Actual T12")
             .verifyForecastItemByExpensePeriodType(testData.historicalWaterAndSewerItem, testData.buildingDescription, "Annualized Historical")
             .verifyForecastItemByExpensePeriodType(testData.ownerProjectionWaterAndSewerItem, testData.buildingDescription, "Owner's Projection")
-            .hideExpenseForecastHeader();
+            .hideExpenseForecastHeader()
+            .clickSaveButton();
 
         cy.stepInfo("4.2 Check historical expenses values for Electricity card. They should be correctly displayed on slidebars");
 
@@ -59,7 +60,7 @@ describe("Historical expense Water & Sewer Per SF is correctly calculated and di
             Income._ExpenseForecastActions.Page.forecastItemCard(
                 Income._ExpenseForecastActions.getItemNameForAverage(
                     testData.actualWaterAndSewerItem.name)), testData.waterAndSewerCardSnapshotName, { padding: [ 10, 100 ] });
-
+        
         deleteReport(testData.reportCreationData.reportNumber);
 
     });

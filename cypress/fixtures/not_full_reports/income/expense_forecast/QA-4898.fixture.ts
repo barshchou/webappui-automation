@@ -64,5 +64,5 @@ export default {
     },
   ],
 
-  waterAndSewerCardSnapshotName: "WaterAndSewer_Forecast_Item_Component",
+  waterAndSewerCardSnapshotName: "WaterAndSewer_PerSF_Forecast_Item_Component",
 };
