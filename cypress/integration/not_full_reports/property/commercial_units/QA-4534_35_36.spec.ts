@@ -6,8 +6,13 @@ import { Property } from "../../../../actions";
 
 describe("[Verify the functionality of the link to the Property > Summary page",
     { tags:[ Tag.property, Tag.commercial_units ] }, () => {
-    beforeEach("Login, create report", () => {
+    before("Login, create report", () => {
         createReport(testData.reportCreationData);
+        cy.saveLocalStorage();
+    });
+
+    beforeEach(() => {
+        cy.restoreLocalStorage();
     });
 
     it("[QA-4534] Test body", () => {
@@ -28,8 +33,6 @@ describe("[Verify the functionality of the link to the Property > Summary page",
 
         cy.stepInfo("5. Verify that the Property > Summary page is displayed.");
         Property._Summary.Page.headerSection.should("be.visible");
-
-        deleteReport(testData.reportCreationData.reportNumber);
     });
 
     it("[QA-4535] Test body", () => {
@@ -52,8 +55,6 @@ describe("[Verify the functionality of the link to the Property > Summary page",
 
         cy.stepInfo("5.Verify that the correct Number of Commercial Units is displayed inside the No. of Commercial Units field.");
         Property._CommercialUnits.Page.numberCommercialUnitsField.should("have.value", 4);
-
-        deleteReport(testData.reportCreationData.reportNumber);
     });
 
     it("[QA-4536] Test body", () => {
