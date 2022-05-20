@@ -35,16 +35,7 @@ describe("[QA-4537] Verify the Commercial Unit # SF field functionality",
         Income._CommercialManager.StabilizedRentRoll.verifySFCells(testData.sfValues);
 
         cy.stepInfo("5. Move back to the Property > Commercial Units page, remove the value from the Commercial Unit # SF field, save the changes.");
-        _NavigationSection.clickPropertyButton()
-            .clickCommercialUnits();
-
-        // Need remove and navigate metgod
-        cy.get("body").then($body => {
-            if ($body.text().includes("You have unsaved changes")) {
-                _NavigationSection.clickYesButton();
-            }
-        });
-        
+        _NavigationSection.navigateToCommercialUnits();
         Property._CommercialUnits.verifyUnitSFInscribedByUnitIndex(testData.verifySFValues, testData.numberOfCommercialUnits);
     
         cy.stepInfo("6. Proceed again to the Income > Commercial > In-Place Rent Roll page and verify that the value in the SF column is removed too.");
@@ -52,8 +43,7 @@ describe("[QA-4537] Verify the Commercial Unit # SF field functionality",
         Income._CommercialManager.StabilizedRentRoll.verifySFCells([]);
 
         cy.stepInfo("7. Proceed to the Income > Commercial > Stabilized Rent Roll and verify that the value in the SF column is removed too.");
-        _NavigationSection.clickPropertyButton()
-            .clickCommercialUnits();
+        _NavigationSection.navigateToCommercialUnits();
         Income._CommercialManager.StabilizedRentRoll.verifySFCells([]);
 
         deleteReport(testData.reportCreationData.reportNumber);

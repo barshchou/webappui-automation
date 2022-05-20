@@ -46,8 +46,8 @@ describe("[QA-4569] Verify the Unsaved changes modal functionality on the Commer
         _NavigationSection.clickAmenitiesButton()
             .clickNoButton();
 
-        cy.stepInfo("5. Click on the No button and verify that the changes are NOT saved on the Commercial Units page.");
-        _NavigationSection.clickCommercialUnits();
+        cy.stepInfo("5. Click on the No button and verify that the changes are NOT saved on the Commercial Units page");
+        _NavigationSection.navigateToCommercialUnits();
 
         testData.arrayValuesAndGroup.forEach(item => {
             Property._CommercialUnits.verifyRadioIsNotChecked(item.group, item.value);
