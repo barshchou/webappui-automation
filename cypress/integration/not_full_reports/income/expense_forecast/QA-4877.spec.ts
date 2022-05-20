@@ -6,12 +6,13 @@ import Income from "../../../../actions/income/income.manager";
 import { Tag } from "../../../../utils/tags.utils";
 
 describe("Comparable Min, Max, Avg values for Electricity Per SF are correctly calculated and displayed",
-{ tags:[ Tag.snapshot_tests, Tag.income, Tag.expense_forecast ] }, () => {
+    { tags:[ Tag.snapshot_tests, Tag.income, Tag.expense_forecast ] }, () => {
+        
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
     });
 
-    it("Test body", { tags: '@snapshot_tests' }, () => {
+    it("Test body", () => {
         cy.stepInfo("1. Go to Income > Comparable Expenses");
         NavigationSection.Actions.navigateToComparableExpenses();
 

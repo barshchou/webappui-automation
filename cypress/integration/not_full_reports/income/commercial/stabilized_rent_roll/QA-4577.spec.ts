@@ -5,7 +5,9 @@ import testData from "../../../../../fixtures/not_full_reports/income/commercial
 import { Tag } from "../../../../../utils/tags.utils";
 
 
-describe("Verify the functionality of the Frontage radio button", { tags: [ Tag.income, Tag.commercial, Tag.stabilized_rent_roll ] }, () => {
+describe("Verify the functionality of the Frontage radio button", 
+    { tags: [ Tag.income, Tag.commercial, Tag.stabilized_rent_roll ] }, () => {
+        
     before("Login, create report", () => {
         cy.stepInfo(`Preconditions: The mixed report is created and several commercial units are added.`);
         createReport(testData.reportCreationData);

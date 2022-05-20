@@ -2,6 +2,7 @@ import testData from "../../../../fixtures/not_full_reports/report/client/QA-464
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Report from "../../../../actions/report/report.manager";
+import { Tag } from "../../../../utils/tags.utils";
 
 const checkChipsOptions = (suggestion: string, optionName: string, textBoxName: "IntendedUserTextBox" | "IdentificationOfClientTextBox") => {
     const interactWithText = (textBox: Cypress.Chainable, indexForElement: number) => {
@@ -18,13 +19,14 @@ const checkChipsOptions = (suggestion: string, optionName: string, textBoxName: 
     else if(textBoxName == "IdentificationOfClientTextBox"){
         return interactWithText(Report.Client.Page.identificationOfClientTextBox, 1);
     }
-    
 };
 
 /**
  * ernst: WARN: remove skip after fixing this test
  */
-describe.skip("Verify the Client Guidelines Discussion on the page", () => {
+describe.skip("Verify the Client Guidelines Discussion on the page", 
+    { tags: [ Tag.report, Tag.client ] }, () => {
+
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
     });

@@ -61,7 +61,7 @@ describe("Check custom Utilities adjustment", { tags:[ Tag.sales, Tag.adjust_com
             .clickSaveButton;
 
         cy.stepInfo("5. Prepare report for export validation");
-        _NavigationSection.openReviewAndExport(true);
+        _NavigationSection.openReviewAndExport();
         ReviewExport.generateDocxReport()
             .waitForReportGenerated()
             .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);

@@ -11,6 +11,8 @@ class ExpenseForecastPage extends BasePage {
 
     get repairsAndMaintenanceCard() { return cy.get("[data-qa=repairsMaintenance-forecast-item] > div").last(); }
 
+    forecastItemCard(forecastItem: string) { return cy.get(`[data-qa=${forecastItem}-forecast-item] > div`).last(); }
+
     get toeCard() {return cy.xpath("//*[.='TOTAL OPERATING EXPENSES ($/SF)']/parent::div").first();}
 
     getForecastItemBasisRadio(item) {return cy.get(`[name='${item}.basis']`);}

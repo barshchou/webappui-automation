@@ -3,14 +3,16 @@ import testData from "../../../../fixtures/not_full_reports/income/expense_forec
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Income from "../../../../actions/income/income.manager";
+import { Tag } from "../../../../utils/tags.utils";
 
-describe("Comparable Min, Max, Avg values for Fuel Per SF are correctly calculated and displayed", () => {
+describe("Comparable Min, Max, Avg values for Fuel Per SF are correctly calculated and displayed", 
+    { tags: [ Tag.income, Tag.expense_forecast, Tag.snapshot_tests ] }, () => {
 
     before("Login, create report",  () => {
         createReport(testData.reportCreationData);
     });
 
-    it("Test body", { tags: '@snapshot_tests' }, () => {
+    it("Test body", () => {
         cy.stepInfo("1. Go to Income > Comparable Expenses");
         NavigationSection.Actions.navigateToComparableExpenses();
 
