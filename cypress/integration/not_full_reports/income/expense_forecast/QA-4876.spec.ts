@@ -13,7 +13,7 @@ describe("Historical expense Electricity Per SF is correctly calculated and disp
             createReport(testData.reportCreationData);
         });
 
-        it("Test body", { tags: '@snapshot_tests' }, () => {
+        it("Test body", () => {
             cy.stepInfo("1. Navigate to Property -> Summary and enter gross building area");
             NavigationSection.navigateToPropertySummary();
             Property.Summary.enterGrossBuildingArea(testData.buildingDescription.grossArea)
