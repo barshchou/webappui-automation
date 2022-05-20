@@ -15,7 +15,7 @@ describe("Comparable Min, Max, Avg values for Electricity Per Unit are correctly
   });
 
 
-  it("Test body", { tags: "@snapshot_tests" }, () => {
+  it("Test body", () => {
     cy.stepInfo("1. Go to Income > Comparable Expenses");
     _NavigationSection.Actions.navigateToComparableExpenses();
 

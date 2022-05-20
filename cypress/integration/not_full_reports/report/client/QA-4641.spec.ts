@@ -54,7 +54,7 @@ describe(`[QA-4641] Verify the "Linked" chips dropdown in the new narrative comp
         });
 
         cy.stepInfo("6. Download report");
-        _NavigationSection.openReviewAndExport(true);
+        _NavigationSection.openReviewAndExport();
         ReviewExport.generateDocxReport().waitForReportGenerated()
             .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
         deleteReport(testData.reportCreationData.reportNumber);
