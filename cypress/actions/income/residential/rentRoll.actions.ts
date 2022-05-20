@@ -290,15 +290,6 @@ class InPlaceRentRollActions extends ResidentialRentRollSharedActions<typeof ren
         return this;
     }
 
-    verifyNumberOfNumberCells(numberOfUnits = 0): InPlaceRentRollActions {
-        if (numberOfUnits === 0) {
-            rentRollPage.numberCells.should("not.exist");
-        } else {
-            rentRollPage.numberCells.should("have.length", numberOfUnits);
-        }
-        return this;
-    }
-
     enterOutdoorSpaceByOptionByRow(space: string, rowNumber = 0): InPlaceRentRollActions {
         rentRollPage.outdoorSpaceCells.eq(rowNumber).dblclick();
         this.chooseOptionFromTableListbox(space);

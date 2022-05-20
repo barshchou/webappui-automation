@@ -201,4 +201,13 @@ export default class ResidentialRentRollSharedActions<T extends ResidentialRentR
         return this;
     }
 
+    verifyNumberOfNumberCells(numberOfUnits = 0): this {
+        if (numberOfUnits === 0) {
+            this.Page.numberCells.should("not.exist");
+        } else {
+            this.Page.numberCells.should("have.length", numberOfUnits);
+        }
+        return this;
+    }
+
 }

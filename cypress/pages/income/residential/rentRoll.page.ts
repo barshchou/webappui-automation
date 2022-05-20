@@ -32,8 +32,6 @@ class InPlaceRentRollPage extends ResidentialRentRollSharedPage {
 
     get monthlyRentCells() {return cy.get("[data-qa^=rent-][data-qa$=cell]");}
 
-    get numberCells() {return cy.get("[data-qa^='#']");}
-
     get outdoorSpaceCells() {return cy.get("[data-qa^=outdoor][data-qa$=cell]");}
 
     get tableListboxOptions() {return cy.get("td.listbox");}

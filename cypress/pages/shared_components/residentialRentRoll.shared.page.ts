@@ -28,4 +28,6 @@ export default class ResidentialRentRollSharedPage extends BasePage {
 
     get closeIcon() {return cy.get("[data-qa=close-icon]");}
 
+    get numberCells() {return cy.get("[data-qa^='#'],[data-qa=order-cell]");}
+
 }
