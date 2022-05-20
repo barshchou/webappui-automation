@@ -12,7 +12,7 @@ describe("Historical expense Insurance Per Unit is correctly calculated and disp
             createReport(testData.reportCreationData);
         });
 
-        it("Test body", { tags: "@snapshot_tests" }, () => {
+        it("Test body", () => {
 
             cy.stepInfo("Pre-condition: Residential Units should be filled in on Property > Summary form");
             _NavigationSection.navigateToPropertySummary();
@@ -49,7 +49,7 @@ describe("Historical expense Insurance Per Unit is correctly calculated and disp
                 .verifyForecastItemByExpensePeriodType(testData.ownerProjectionInsuranceIItem, testData.buildingDescription, "Owner's Projection")
                 .hideExpenseForecastHeader();
 
-            cy.stepInfo("4.2 Check historical expenses values for Electricity card. They should be correctly displayed on slidebars");
+            cy.stepInfo("4.2 Check historical expenses values for Insurance card. They should be correctly displayed on slidebars");
             Income._ExpenseForecastActions.Actions.matchElementSnapshot(
                 Income._ExpenseForecastActions.Page.insuranceCard, testData.insuranceICardSnapshotName, { padding: [ 10, 100 ] });
 
