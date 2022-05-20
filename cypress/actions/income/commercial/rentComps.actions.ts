@@ -98,13 +98,13 @@ class CommercialRentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
         return this;
     }
 
-    chooseRentCompFieldDropdownOption(fieldName, option): CommercialRentCompsActions {
+    chooseRentCompFieldDropdownOption(fieldName: string, option: string): CommercialRentCompsActions {
         rentCompsPage.getRentCompDropdownField(fieldName).click();
         rentCompsPage.getRentCompDropdownOption(option).click();
         return this;
     }
 
-    enterLeaseDate(leaseDate): CommercialRentCompsActions {
+    enterLeaseDate(leaseDate: string): CommercialRentCompsActions {
         rentCompsPage.leaseDatePicker.type(leaseDate);
         return this;
     }
@@ -114,12 +114,12 @@ class CommercialRentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
         return this;
     }
 
-    checkUnitOfMeasureRadioButton(name): CommercialRentCompsActions {
+    checkUnitOfMeasureRadioButton(name: string): CommercialRentCompsActions {
         rentCompsPage.getUnitOfMeasureRadioButton(name).click();
         return this;
     }
 
-    verifyRentPerSFCellValue(value, rowNumber = 0): CommercialRentCompsActions {
+    verifyRentPerSFCellValue(value: string, rowNumber = 0): CommercialRentCompsActions {
         rentCompsPage.getRentPerSFCellByRowNumber(rowNumber).should("have.text", `$${value}.00`);
         return this;
     }
