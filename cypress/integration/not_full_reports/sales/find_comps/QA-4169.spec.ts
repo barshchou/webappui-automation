@@ -32,7 +32,7 @@ describe.skip("Verify the New Comp is created after clicking on 'Save&Close' but
         Sales._FindComps.Actions.selectDropdownOptionNewComp(
             Sales._FindComps.Page.SourceInput, "Bowery Subject"
         );
-        Sales._FindComps.Actions.selectSaleDate();
+        Sales._FindComps.Actions.SaleInfo.selectSaleDate();
         Sales._FindComps.Page.newCompContinueButton.should("be.enabled").click();
     });
 

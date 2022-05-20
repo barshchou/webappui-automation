@@ -2,8 +2,14 @@ import { findCompsPage } from "../../../pages/sales/findComps.page";
 import { getUploadFixture } from "../../../../utils/fixtures.utils";
 import { isNumber, numberWithCommas } from "../../../../utils/numbers.utils";
 import BaseActionsExt from "../../base/base.actions.ext";
+import saleInfoFormActions from "./saleInfoForm.actions";
 
 class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
+
+    get SaleInfo(){
+        return saleInfoFormActions;
+    }
+
     addExistingComparable(address: string): FindCompsActions {
         this.clickCreateCompButton()
             .enterCompAddressToSearch(address)
@@ -137,12 +143,12 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
         return this;
     }
 
-    selectSaleDate(): this {
-        this.Page.SaleDateCalendarNewComp.click();
-        this.Page.SaleDateToday.click();
-        cy.pause();
-        return this;
-    }
+    // selectSaleDate(): this {
+    //     this.Page.SaleDateCalendarNewComp.click();
+    //     this.Page.SaleDateToday.click();
+    //     cy.pause();
+    //     return this;
+    // }
 
     enterInternalNotes(value: string): this {
         this.Page.internalNotesTextArea.clear().type(value).should("have.text", value);

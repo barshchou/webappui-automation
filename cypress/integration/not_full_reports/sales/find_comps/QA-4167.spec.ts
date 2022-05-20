@@ -18,13 +18,14 @@ describe("[QA-4167] Verify the Appraiser Commentary field", { tags: [ Tag.sales,
 
         _NavigationSection.navigateToFindComps();
 
-        Sales._FindComps.openAddNewComparableFormSearchResult(testData.compAddress)
-            .selectDropdownOptionNewComp(Sales._FindComps.Page.conditionDropdown, testData.selectItems.condition);
+        Sales._FindComps.Actions
+        .openAddNewComparableFormSearchResult(testData.compAddress)
+        .selectDropdownOptionNewComp(Sales._FindComps.Page.conditionDropdown, testData.selectItems.condition);
         Sales._FindComps.Page.createCompNumberCommercialUnits.type(`${testData.units.numberOfUnits}`);
         Sales._FindComps.Page.commercialAreaNewComp.type(`${testData.units.numberOfUnits}`);
         Sales._FindComps.Page.newCompContinueButton.click();
-        Sales._FindComps.Actions.selectSaleDate();
-        Sales._FindComps.Page.BuyerGranteeNewComp.type(testData.saleInfo.buyer);
+        Sales._FindComps.Actions.SaleInfo
+        .selectSaleDate().setBuyerGrantee(testData.saleInfo.buyer);
         Sales._FindComps.Page.SellerGrantor.type(testData.saleInfo.seller);
         Sales._FindComps.selectDropdownOptionNewComp(Sales._FindComps.Page.SourceInput, testData.selectItems.source);
         Sales._FindComps.Page.newCompContinueButton.click();
