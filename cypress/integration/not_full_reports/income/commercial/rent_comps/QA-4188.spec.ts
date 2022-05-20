@@ -34,49 +34,43 @@ describe("[Income>Commercial>Rent Comps] Rent/SF/Month is calculated with correc
         cy.stepInfo(`4. Verify if Per Square Foot Per Month is selected on In-Place RR page 
             and as Unit of Measure on Commercial Unit Details modal -> Rent/SF/Month in 
             selected rent comps table = Rent/12/SF, where Rent = base rent*12*SF and 12 = number of months in year`);
-        
-        const baseRent: number = +testData.rentCompFields[0].value;
-        const squareFeet: number = +testData.rentCompFields[1].value;
-        const numberOfMonthsInYear = 12;
 
-        const perYear: BoweryReports.UnitsOfMeasure = "per square foot per year";
-        const perMonth: BoweryReports.UnitsOfMeasure = "per square foot per month";
-
-        const rentPerSFValue1 = baseRent * numberOfMonthsInYear * squareFeet / numberOfMonthsInYear / squareFeet;
+        let rentPerSFValue = testData.baseRent * testData.numberOfMonthsInYear
+         * testData.squareFeet / testData.numberOfMonthsInYear / testData.squareFeet;
         Income._CommercialManager.RentComps.clickEditButtonByRowNumber().
-            checkUnitOfMeasureRadioButton(perMonth).
+            checkUnitOfMeasureRadioButton(testData.perMonth).
             clickSubmitButton().
-            verifyRentPerSFCellValue(rentPerSFValue1);
+            verifyRentPerSFCellValue(rentPerSFValue);
 
         cy.stepInfo(`5. Verify if Per Square Foot Per Month is selected on In-Place RR page and 
         Per Square Foot is selected as Unit of Measure on Commercial Unit Details modal -> Rent/SF/Month 
         in selected rent comps table = Rent/12/SF, where Rent = base rent*SF and 12 = number of months in year`);
-        const rentPerSFValue2 = baseRent * squareFeet / numberOfMonthsInYear / squareFeet;
+        rentPerSFValue = testData.baseRent * testData.squareFeet / testData.numberOfMonthsInYear / testData.squareFeet;
         Income._CommercialManager.RentComps.clickEditButtonByRowNumber().
-            checkUnitOfMeasureRadioButton(perYear).
+            checkUnitOfMeasureRadioButton(testData.perYear).
             clickSubmitButton().
-            verifyRentPerSFCellValue(rentPerSFValue2);
+            verifyRentPerSFCellValue(rentPerSFValue);
 
         cy.stepInfo(`6. Verify if  Per Square Foot is selected on In-Place RR page and 
         Per Square Foot Per Month is selected as Unit of Measure on Commercial Unit Details modal -> Rent/SF 
         in selected rent comps table = Rent/SF, where Rent = base rent*12*SF and 12 = number of months in year`);
-        const rentPerSFValue3 = baseRent * numberOfMonthsInYear * squareFeet / squareFeet;
+        rentPerSFValue = testData.baseRent * testData.numberOfMonthsInYear * testData.squareFeet / testData.squareFeet;
         _NavigationSection.clickCommercialRentRollButton().clickYesButton();
         Income._CommercialManager.InPlaceRentRoll.clickPerSquareFootButton(false);
         _NavigationSection.navigateToCommercialRentComps();
         Income._CommercialManager.RentComps.clickEditButtonByRowNumber().
-            checkUnitOfMeasureRadioButton(perMonth).
+            checkUnitOfMeasureRadioButton(testData.perMonth).
             clickSubmitButton().
-            verifyRentPerSFCellValue(rentPerSFValue3);
+            verifyRentPerSFCellValue(rentPerSFValue);
 
         cy.stepInfo(`7. Verify if  Per Square Foot is selected on In-Place RR page and 
         as Unit of Measure on Commercial Unit Details modal -> Rent/SF 
         in selected rent comps table = Rent/SF, where Rent = base rent*SF and 12 = number of months in year`);
-        const rentPerSFValue4 = baseRent * squareFeet / squareFeet;
+        rentPerSFValue = testData.baseRent * testData.squareFeet / testData.squareFeet;
         Income._CommercialManager.RentComps.clickEditButtonByRowNumber().
-            checkUnitOfMeasureRadioButton(perYear).
+            checkUnitOfMeasureRadioButton(testData.perYear).
             clickSubmitButton().
-            verifyRentPerSFCellValue(rentPerSFValue4);
+            verifyRentPerSFCellValue(rentPerSFValue);
 
         deleteReport(testData.reportCreationData.reportNumber);
     });

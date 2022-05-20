@@ -35,9 +35,17 @@ const _rentCompFields: BoweryReports.RentCompField[] = [
     }
 ];
 
+const _perYear: BoweryReports.UnitsOfMeasure = "per square foot per year";
+const _perMonth: BoweryReports.UnitsOfMeasure = "per square foot per month";
+
 export default {
     reportCreationData: reportCreationFixture(),
     address: "462 1st Avenue, New York, USA",
     rentCompFields: _rentCompFields,
-    leaseDate: "01012022"
+    leaseDate: "01012022",
+    baseRent: 12,
+    squareFeet: 100,
+    numberOfMonthsInYear: 12,
+    perYear: _perYear,
+    perMonth: _perMonth
 };
