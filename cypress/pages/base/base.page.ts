@@ -43,11 +43,12 @@ export default class BasePage {
             .eq((index !== 0) ? index : 0);
     }
 
-    modifiedLabel(index?: number, isExist = true) {
+    modifiedLabel(isExist = true, index = 0 ) {
         if (isExist) {
             return cy.xpath("//span[contains(text(), 'Modified')]").eq((index !== 0) ? index : 0);
         } else {
             return cy.xpath("//span[contains(text(), 'Modified')]");
         }
     }
+    
 }
