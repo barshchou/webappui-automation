@@ -25,9 +25,9 @@ describe("[QA-4537] Verify the Commercial Unit # SF field functionality",
             is displayed in the SF column of the Commercial In-Place Rent Roll Table.`);
         _NavigationSection.navigateToCommercialInPlaceRentRoll();
         Income._CommercialManager.InPlaceRentRoll.verifySFTotal(testData.sfValues);
-        for(let i = 0; i < testData.sfValues.length; i++) {
-            Income._CommercialManager.InPlaceRentRoll.chooseLeaseStatusByRowNumber(testData.leaseStatus, i);
-        }
+        testData.sfValues.forEach((value, index) => {
+            Income._CommercialManager.InPlaceRentRoll.chooseLeaseStatusByRowNumber(testData.leaseStatus, index);
+        });
 
         cy.stepInfo(`4. Proceed to the Income > Commercial > Stabilized Rent Roll and verify that the value from step 2 
             is displayed in the SF column of the Commercial Stabilized Rent Roll Table.`);
@@ -38,15 +38,14 @@ describe("[QA-4537] Verify the Commercial Unit # SF field functionality",
         _NavigationSection.clickPropertyButton()
             .clickCommercialUnits();
 
+        // Need remove and navigate metgod
         cy.get("body").then($body => {
             if ($body.text().includes("You have unsaved changes")) {
                 _NavigationSection.clickYesButton();
             }
         });
         
-        testData.sfValues.forEach((value, index) => {
-            Property._CommercialUnits.Page.commercialUnitsSFInputs.eq(index).clear().should("have.value", "");
-        });
+        Property._CommercialUnits.verifyUnitSFInscribedByUnitIndex(testData.verifySFValues, testData.numberOfCommercialUnits);
     
         cy.stepInfo("6. Proceed again to the Income > Commercial > In-Place Rent Roll page and verify that the value in the SF column is removed too.");
         _NavigationSection.navigateToCommercialInPlaceRentRoll();
