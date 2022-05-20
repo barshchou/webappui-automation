@@ -6,7 +6,7 @@ import Income from "../../../../actions/income/income.manager";
 import { Tag } from "../../../../utils/tags.utils";
 
 describe("Comparable Min, Max, Avg values for Electricity Per SF are correctly calculated and displayed",
-    { tags:[ Tag.snapshot_tests, Tag.income, Tag.expense_forecast ] }, () => {
+    { tags:[ Tag.snapshot_tests, Tag.income, Tag.expense_forecast, "@fix_snapshot" ] }, () => {
         
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
