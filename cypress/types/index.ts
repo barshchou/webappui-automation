@@ -29,7 +29,7 @@ namespace BoweryReports {
     export type LeaseStatus = "Occupied" | "Vacant" | "Employee"
     export type ImageType = "Interior Images" | "Exterior Images";
     export type InputType = "drag-n-drop" | "input";
-    export type UnitSF = "unit" | "sf"
+    export type UnitSF = "unit" | "sf" | "room"
     export type PerUnitPerSF = "Per Unit" | "Per SF"
     export type ForecastItemBasis = "insurance" | "electricity"
     | "fuel" | "waterAndSewer" | "repairsAndMaintenance" | "payrollAndBenefits" | "generalAndAdministrative" 
@@ -97,6 +97,14 @@ namespace BoweryReports {
         monthlyRent: number,
         leaseStatus?: BoweryReports.LeaseStatus
     }
+
+    export type RentCompField = {
+        name: string,
+        value: string,
+        type: "input" | "dropdown"
+    };
+
+    export type UnitsOfMeasure = "annually" | "monthly" | "per square foot per year" | "per square foot per month";
 }
 
 namespace Utils {

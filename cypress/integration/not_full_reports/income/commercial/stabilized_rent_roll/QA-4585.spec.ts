@@ -62,7 +62,7 @@ describe("Verify the Commercial Stabilized Rent Roll table",
         6. Proceed to the  Income > 
         Commercial > In-Place Rent Roll page, change any data (e.g. Tenant), save it
         `);
-        _NavigationSection.openInPlaceRentRollInCommercial(false)
+        _NavigationSection.openInPlaceRentRollInCommercial()
             .verifyProgressBarNotExist();
         Income._CommercialManager.InPlaceRentRoll.enterTenantNameByRowNumber(testData.newTenantName, 1, testData.leaseStatuses[1]);
         
@@ -81,7 +81,7 @@ describe("Verify the Commercial Stabilized Rent Roll table",
         9. Proceed to the  Income > 
         Commercial > In-Place Rent Roll page, remove any data (e.g. Lease Start Date), save it.
         `);
-        _NavigationSection.openInPlaceRentRollInCommercial(false)
+        _NavigationSection.openInPlaceRentRollInCommercial()
             .verifyProgressBarNotExist();
         Income._CommercialManager.InPlaceRentRoll.deleteTenantNameByRowNumber(1);
         

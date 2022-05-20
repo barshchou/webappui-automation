@@ -20,7 +20,7 @@ describe("[Assessed Value & RE Taxes] Verify the 'Tax Calculation Discussion' ge
         _TaxInfo.verifyTaxSummaryTooltip(testData.tooltip);
 
         cy.stepInfo("4. Export the report");
-        _NavigationSection.Actions.openReviewAndExport(true);
+        _NavigationSection.Actions.openReviewAndExport();
         ReviewExport.generateDocxReport().waitForReportGenerated()
             .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
 
