@@ -1,11 +1,11 @@
 import { Tag } from '../../../../utils/tags.utils';
-import testData from "../../../../fixtures/not_full_reports/report/key_info/QA-4703_04.fixture";
+import testData from "../../../../fixtures/not_full_reports/report/key_info/QA-4703_04_05.fixture";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { Report } from "../../../../actions";
 
 
-describe("[QA-4703_04] Verify the Edit button functionality for Property Rights Appraised and Definition of Market Value sections",
+describe("[QA-4703_04_05] Verify the Edit button functionality for Property Rights Appraised and Definition of Market Value sections",
     { tags: [ Tag.report, Tag.key_info ] }, () => {
         
     before("Login, create report", () => {
@@ -36,6 +36,15 @@ describe("[QA-4703_04] Verify the Edit button functionality for Property Rights 
         cy.stepInfo("5. Verify that the commentary form opens and buttons Cancel, Revert to Original and Save are displayed for both sections");
         Report._KeyInfo.Page.formSaveBtn(0).click();
         Report._KeyInfo.Page.formSaveBtn(0).click();
+
+        cy.stepInfo("6. Edit comment and verify that the Revert to Original button becomes enabled for both sections");
+        Report._KeyInfo.enterPropertyRightsAppraisedComment(testData.enterValue, false, false, true);
+        Report._KeyInfo.Page.formCancelButton(0).click();
+        Report._KeyInfo.enterDefinitionMarketValue(testData.enterValue, false, false, true);
+
+        cy.stepInfo("7. Click on the Revert to Original button and verify the ‘Changes will be lost modal’ is displayed for both sections");
+        Report._KeyInfo.Page.textBoxPropertyRightsAppraised.should("not.include.text", testData.enterValue);
+        Report._KeyInfo.Page.textBoxDefinitionOfMarketValue.should("not.include.text", testData.enterValue);
 
         deleteReport(testData.reportCreationData.reportNumber);
     });
