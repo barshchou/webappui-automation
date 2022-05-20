@@ -18,7 +18,7 @@ describe("[Income>Commercial>Rent Comps] Rent/SF/Month is calculated with correc
             chooseLeaseStatusByRowNumber("Occupied");
 
         cy.stepInfo("2. Navigate to Income -> Commercial -> Rent Comps and add new comp manually");
-        _NavigationSection.navigateToCommercialRentComps();
+        _NavigationSection.clickCommercialRentComps().clickYesButton();
         Income._CommercialManager.RentComps.
             clickManuallyAddANewCompButton().
             searchNewCompByAddress(testData.address);
@@ -57,7 +57,7 @@ describe("[Income>Commercial>Rent Comps] Rent/SF/Month is calculated with correc
         rentPerSFValue = testData.baseRent * testData.numberOfMonthsInYear * testData.squareFeet / testData.squareFeet;
         _NavigationSection.clickCommercialRentRollButton().clickYesButton();
         Income._CommercialManager.InPlaceRentRoll.clickPerSquareFootButton(false);
-        _NavigationSection.navigateToCommercialRentComps();
+        _NavigationSection.clickCommercialRentComps().clickYesButton();
         Income._CommercialManager.RentComps.clickEditButtonByRowNumber().
             checkUnitOfMeasureRadioButton(testData.perMonth).
             clickSubmitButton().

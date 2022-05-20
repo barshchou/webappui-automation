@@ -119,7 +119,7 @@ class CommercialRentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
         return this;
     }
 
-    verifyRentPerSFCellValue(value: string, rowNumber = 0): CommercialRentCompsActions {
+    verifyRentPerSFCellValue(value: number, rowNumber = 0): CommercialRentCompsActions {
         rentCompsPage.getRentPerSFCellByRowNumber(rowNumber).should("have.text", `$${value}.00`);
         return this;
     }
