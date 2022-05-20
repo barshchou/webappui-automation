@@ -37,7 +37,7 @@ describe("Residential V/C Loss @ X% row",
         Verify that Total value is taken from Potential Gross Income → table → Less Residential V/C Loss @ X% → $
         Verify that PSF value is calculated by the formula: Total / GBA
         Verify that Per Unit value is calculated by the formula: Total / # of Residential Units`);
-        NavigationSection.navigateToProForma(false);
+        NavigationSection.navigateToProForma();
         Income.ProForma.verifyResidentialVCLossLabel(testData.resVacancyCollectionLoss)
             .verifyResidentialVCLossTotal(testData.resVCLossTotal)
             .verifyResidentialVCLossPerSF(testData.grossBuildingArea)

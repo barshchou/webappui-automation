@@ -28,9 +28,8 @@ describe('Verify the "Property Rights Appraised" commentary on the Introduction 
             Report._KeyInfo.enterPropertyRightsAppraisedComment(value).then(text => {
                 cy.wrap(text).as(testData.aliases.PropertyRightsAppraised);
             });
-            _NavigationSection.clickPreviewEditButton();
-            _NavigationSection.Page.introduction.click();
-            _NavigationSection.clickYesButton().verifyProgressBarNotExist();
+            _NavigationSection.navigateToIntroduction()
+                .verifyProgressBarNotExist();
     
             PreviewEdit._Introduction.Page.TextPropertyRightsAppraised
             .invoke("text")
