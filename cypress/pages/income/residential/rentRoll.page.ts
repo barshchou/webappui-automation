@@ -34,8 +34,6 @@ class InPlaceRentRollPage extends ResidentialRentRollSharedPage {
 
     get tableListboxOptions() {return cy.get("td.listbox");}
 
-    get unitTypeCells() {return cy.get("[data-qa^=unitLayout][data-qa$=cell]");}
-
     // TODO: Fix locator for this cells after https://bowery.atlassian.net/browse/WEB-5364 bug fix and move methods and elements, related to it to shared components
     get rentSFCell() {return cy.xpath("//*[contains(@class, 'readOnly') and not(contains(@data-qa, 'cell'))]");}
 

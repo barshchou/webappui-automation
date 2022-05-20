@@ -336,8 +336,8 @@ class InPlaceRentRollActions extends ResidentialRentRollSharedActions<typeof ren
 
     chooseUnitTypeByRow(type: string, rowNumber = 0): InPlaceRentRollActions {
         rentRollPage.unitTypeCells.eq(rowNumber).dblclick();
-        this.chooseOptionFromTableListbox(type);
-        rentRollPage.unitTypeCells.eq(rowNumber).should("contain.text", type);
+        this.chooseOptionFromTableListbox(type)
+            .verifyUnitTypeCellByRow(type, rowNumber);
         return this;
     }
 

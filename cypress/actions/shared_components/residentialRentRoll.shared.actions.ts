@@ -224,4 +224,9 @@ export default class ResidentialRentRollSharedActions<T extends ResidentialRentR
         this.Page.bathroomsCells.eq(rowNumber).should("have.text", textToBe);
         return this;
     }
+
+    verifyUnitTypeCellByRow(textToBe: string, rowNumber = 0): this {
+        this.Page.unitTypeCells.eq(rowNumber).should("contain.text", textToBe);
+        return this;
+    }
 }
