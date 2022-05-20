@@ -319,11 +319,12 @@ class InPlaceRentRollActions extends ResidentialRentRollSharedActions<typeof ren
     }
 
     enterNumberBathroomsByRow(value:number | string, rowNumber = 0): InPlaceRentRollActions {
-        rentRollPage.bathroomsCells.eq(rowNumber).dblclick();
-        this.enterTextToTextarea(`${value}`);
-        rentRollPage.bathroomsCells.eq(rowNumber).should("have.text", value).as("checkedTextBathroom");
+        rentRollPage.bathroomsCells.eq(rowNumber).as("bathroomCell");
+        cy.get("@bathroomCell").dblclick();
+        this.enterTextToTextarea(`${value}`)
+            .verifyBathroomCellByRow(value, rowNumber);
         if ((isDecimal(value) && !isHalfDecimalPart(value)) || Number(value) < 0) {
-            cy.get("@checkedTextBathroom").should("have.class", "invalid");
+            cy.get("@bathroomCell").should("have.class", "invalid");
         }
         return this;
     }

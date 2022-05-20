@@ -34,4 +34,6 @@ export default class ResidentialRentRollSharedPage extends BasePage {
 
     get squareFootageCells() {return cy.get("[data-qa^=squareFootage][data-qa$=cell]");}
 
+    get bathroomsCells() {return cy.get("[data-qa^=bathrooms][data-qa$=cell]");}
+
 }
