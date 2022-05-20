@@ -1,11 +1,11 @@
 import { Tag } from '../../../../utils/tags.utils';
-import testData from "../../../../fixtures/not_full_reports/report/key_info/QA-4703_04_05.fixture";
+import testData from "../../../../fixtures/not_full_reports/report/key_info/QA-4703_04_05_06.fixture";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { Report } from "../../../../actions";
 
 
-describe("[QA-4703_04_05] Verify the Edit button functionality for Property Rights Appraised and Definition of Market Value sections",
+describe("[QA-4703_04_05_06] Verify the Edit button functionality for Property Rights Appraised and Definition of Market Value sections",
     { tags: [ Tag.report, Tag.key_info ] }, () => {
         
     before("Login, create report", () => {
@@ -45,6 +45,17 @@ describe("[QA-4703_04_05] Verify the Edit button functionality for Property Righ
         cy.stepInfo("7. Click on the Revert to Original button and verify the ‘Changes will be lost modal’ is displayed for both sections");
         Report._KeyInfo.Page.textBoxPropertyRightsAppraised.should("not.include.text", testData.enterValue);
         Report._KeyInfo.Page.textBoxDefinitionOfMarketValue.should("not.include.text", testData.enterValue);
+        cy.reload();
+
+        cy.stepInfo("8. CLick on the Revert ot Original button and Click on the X icon and verify that the modal is closed and no changes are applied");
+        Report._KeyInfo.enterPropertyRightsAppraisedComment(testData.enterValue, true, false);
+        Report._KeyInfo.Page.formRevertToOriginalBtn(0).click();
+        Report._KeyInfo.Page.CloseIcon.click();
+        Report._KeyInfo.enterDefinitionMarketValue(testData.enterValue, true, false);
+        Report._KeyInfo.Page.formRevertToOriginalBtn(1).click();
+        Report._KeyInfo.Page.CloseIcon.click();
+        Report._KeyInfo.Page.textBoxPropertyRightsAppraised.should("include.text", testData.enterValue);
+        Report._KeyInfo.Page.textBoxDefinitionOfMarketValue.should("include.text", testData.enterValue);
 
         deleteReport(testData.reportCreationData.reportNumber);
     });
