@@ -15,8 +15,7 @@ describe("Verify the Monthly Rent Total is calculated correctly in the grid.",
     it("Test body", () => {
         NavigationSection.navigateToPropertySummary();
         Property.Summary.enterNumberOfCommercialUnits(testData.general.numberOfUnits);
-        NavigationSection.clickCommercialUnits()
-            .clickYesButton();
+        NavigationSection.navigateToCommercialUnits();
         Property.CommercialUnits.enterListUnitSF(testData.general.squareFeetList, testData.general.numberOfUnits);
         NavigationSection.navigateToCommercialInPlaceRentRoll();
         Income.Commercial.InPlaceRentRoll.chooseListLeaseStatuses(testData.leaseStatusesList, testData.general.numberOfUnits)
