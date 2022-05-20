@@ -229,4 +229,34 @@ export default class ResidentialRentRollSharedActions<T extends ResidentialRentR
         this.Page.unitTypeCells.eq(rowNumber).should("contain.text", textToBe);
         return this;
     }
+
+    verifyRentRoomCellValues(monthlyRent = 0, rooms = 0, row = 0): this{
+        let defaultValues = "$0";
+        let textToBe = monthlyRent == 0 ? defaultValues : `$${numberWithCommas((monthlyRent / rooms).toFixed(0))}`;
+        this.Page.rentPerRoomCells.eq(row).should('have.text', textToBe);
+        return this;
+    }
+
+    verifyAllPerRoomCells(numbersOfRooms: Array<number> | number, monthlyRents: Array<number> | number): this {
+        if (typeof numbersOfRooms === "number" && typeof monthlyRents === "number") {
+            this.Page.rentPerRoomCells.then(cells => {
+                for (let i = 0; i < cells.length; i++) {
+                    this.verifyRentRoomCellValues(monthlyRents, numbersOfRooms, i);
+                }
+            });
+        } else if (Array.isArray(numbersOfRooms) && typeof monthlyRents === "number") {
+            for (let i = 0; i < numbersOfRooms.length; i++) {
+                this.verifyRentRoomCellValues(monthlyRents, numbersOfRooms[i], i );
+            }
+        } else if (typeof numbersOfRooms === "number" && Array.isArray(monthlyRents)) {
+            for (let i = 0; i < monthlyRents.length; i++) {
+                this.verifyRentRoomCellValues(monthlyRents[i], numbersOfRooms, i);
+            }
+        } else if (Array.isArray(numbersOfRooms) && Array.isArray(monthlyRents)) {
+            for (let i = 0; i < monthlyRents.length; i++) {
+                this.verifyRentRoomCellValues(monthlyRents[i], numbersOfRooms[i], i);
+            }
+        }
+        return this;
+    }
 }

@@ -56,35 +56,6 @@ class StabilizedRentRollActions extends ResidentialRentRollSharedActions<typeof 
         return this;
     }
 
-    verifyRentPerRoomByRow(rowNumber: number, numberOfRooms: number, monthlyRent: number): this {
-        const textToBe = `$${numberWithCommas(Math.round(monthlyRent / numberOfRooms))}`;
-        stabRentRollPage.rentPerRoomCells.eq(rowNumber).should("have.text", textToBe);
-        return this;
-    }
-
-    verifyAllPerRoomCells(numbersOfRooms: Array<number> | number, monthlyRents: Array<number> | number): this {
-        if (typeof numbersOfRooms === "number" && typeof monthlyRents === "number") {
-            stabRentRollPage.rentPerRoomCells.then(cells => {
-                for (let i = 0; i < cells.length; i++) {
-                    this.verifyRentPerRoomByRow(i, numbersOfRooms, monthlyRents);
-                }
-            });
-        } else if (Array.isArray(numbersOfRooms) && typeof monthlyRents === "number") {
-            for (let i = 0; i < numbersOfRooms.length; i++) {
-                this.verifyRentPerRoomByRow(i, numbersOfRooms[i], monthlyRents);
-            }
-        } else if (typeof numbersOfRooms === "number" && Array.isArray(monthlyRents)) {
-            for (let i = 0; i < monthlyRents.length; i++) {
-                this.verifyRentPerRoomByRow(i, numbersOfRooms, monthlyRents[i]);
-            }
-        } else if (Array.isArray(numbersOfRooms) && Array.isArray(monthlyRents)) {
-            for (let i = 0; i < monthlyRents.length; i++) {
-                this.verifyRentPerRoomByRow(i, numbersOfRooms[i], monthlyRents[i]);
-            }
-        }
-        return this;
-    }
-
     verifyRentRollDiscussionCommentary(commToBe: string): this {
         stabRentRollPage.rentRollDiscussionCommentary.should("have.text", commToBe);
         return this;

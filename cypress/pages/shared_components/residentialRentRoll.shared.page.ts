@@ -38,4 +38,6 @@ export default class ResidentialRentRollSharedPage extends BasePage {
 
     get unitTypeCells() {return cy.get("[data-qa^=unitLayout][data-qa$=cell]");}
 
+    get rentPerRoomCells() {return cy.get("[data-qa^='rent/room'],[data-qa=rentPerRoom-cell]");}
+
 }

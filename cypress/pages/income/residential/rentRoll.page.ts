@@ -37,7 +37,6 @@ class InPlaceRentRollPage extends ResidentialRentRollSharedPage {
     // TODO: Fix locator for this cells after https://bowery.atlassian.net/browse/WEB-5364 bug fix and move methods and elements, related to it to shared components
     get rentSFCell() {return cy.xpath("//*[contains(@class, 'readOnly') and not(contains(@data-qa, 'cell'))]");}
 
-    get rentRoomCell() {return cy.get("[data-qa^='rent/room']");}
 }
 
 export default new InPlaceRentRollPage();
