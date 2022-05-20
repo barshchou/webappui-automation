@@ -39,10 +39,6 @@ class CommercialUnitsPage extends BasePage {
         return cy.xpath(`//span[@data-slate-string="true"][contains(text(), "${text}")]`);
     } 
 
-    get modifiedLabel() {
-        return cy.xpath("//span[contains(text(), 'Modified')]");
-    }
-
     getGradeCheckbox(value: string, index = 0) {
         return cy.xpath(`//*[text()='Grade']/..//descendant::input[@value='${value}']`).eq(index);
     }

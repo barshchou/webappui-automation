@@ -3,8 +3,11 @@ import NavigationSection from "../../../../../actions/base/navigationSection.act
 import Income from "../../../../../actions/income/income.manager";
 import Property from "../../../../../actions/property/property.manager";
 import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
+import { Tag } from "../../../../../utils/tags.utils";
 
-describe("Verify the Unit column in the grid and grid presence", () => {
+describe("Verify the Unit column in the grid and grid presence", 
+    { tags:[ Tag.income, Tag.commercial, Tag.in_place_rent_roll ] }, () => {
+        
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
     });
@@ -15,7 +18,8 @@ describe("Verify the Unit column in the grid and grid presence", () => {
             .chooseLeaseStatusByRowNumber(testData.leaseStatus);
         NavigationSection.navigateToPropertySummary();
         Property.Summary.enterNumberOfCommercialUnits(testData.newUnitsNumber);
-        NavigationSection.navigateToCommercialInPlaceRentRoll();
+        NavigationSection.navigateToCommercialInPlaceRentRoll()
+            .verifyProgressBarNotExist();
         Income.Commercial.InPlaceRentRoll.verifyUnitNumberCells(testData.newUnitsNumber);
         deleteReport(testData.reportCreationData.reportNumber);
     });

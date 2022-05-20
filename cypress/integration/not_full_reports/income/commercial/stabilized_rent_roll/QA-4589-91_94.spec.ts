@@ -4,10 +4,11 @@ import { createReport, deleteReport } from "../../../../../actions/base/baseTest
 import testData from "../../../../../fixtures/not_full_reports/income/commercial/stabilized_rent_roll/QA-4589-91_94.fixture";
 import { Tag } from "../../../../../utils/tags.utils";
 
-describe(`Verify the commentary functionality`, { tags:[ Tag.income, Tag.commercial, Tag.stabilized_rent_roll ] }, () => {
+describe(`Verify the commentary functionality`, 
+    { tags:[ Tag.income, Tag.commercial, Tag.stabilized_rent_roll ] }, () => {
+
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
-        
     });
 
     it("Test body", () => {
@@ -23,23 +24,23 @@ describe(`Verify the commentary functionality`, { tags:[ Tag.income, Tag.commerc
             .verifyProgressBarNotExist();
 
         cy.stepInfo("[QA-4589] 2. Click on the Edit button and modify commentary and save changes.");
-        Income._CommercialManager.StabilizedRentRoll.clickEditStabilizedCommercialIncomeDiscussion()
-            .typeStabilizedCommercialIncomeTextArea(testData.value, true)
-            .verifyStabRentRollCommentaryButtons()
-            .saveStabilizedRentRollCommentary();
+        Income._CommercialManager.StabilizedRentRoll.clickEditDiscussionButton()
+            .editDiscussionTextArea(testData.value)
+            .verifyEditDiscussionButtonsDisplayed()
+            .clickSaveDiscussionButton();
 
         cy.stepInfo("[QA-4594] 3. Verify that commentary 'Modified' label appears");
         Income._CommercialManager.StabilizedRentRoll.verifyModifiedLabelExist();
         
         cy.stepInfo("[QA-4591] 4. Verify commentary revert to original");
-        Income._CommercialManager.StabilizedRentRoll.revertToOriginalStabilizedRentRollCommentary()
-            .verifyStabilizedCommercialIncomeTextArea(testData.defaultText);
+        Income._CommercialManager.StabilizedRentRoll.revertToOriginalCommentary()
+            .verifyCommentaryContainsText(testData.defaultText);
 
         cy.stepInfo("[QA-4590] 5. Modify commentary and check 'Cancel' button functionality");
-        Income._CommercialManager.StabilizedRentRoll.clickEditStabilizedCommercialIncomeDiscussion()
-            .typeStabilizedCommercialIncomeTextArea(testData.value, true)
-            .cancelStabilizedRentRollCommentary()
-            .verifyStabilizedCommercialIncomeTextArea(testData.defaultText);
+        Income._CommercialManager.StabilizedRentRoll.clickEditDiscussionButton()
+            .editDiscussionTextArea(testData.value)
+            .clickCancelDiscussionEditButton()
+            .verifyCommentaryContainsText(testData.defaultText);
 
         deleteReport(testData.reportCreationData.reportNumber);
     });

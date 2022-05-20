@@ -3,8 +3,11 @@ import { createReport, deleteReport } from "../../../../actions/base/baseTest.ac
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Property from "../../../../actions/property/property.manager";
 import Income from "../../../../actions/income/income.manager";
+import { Tag } from "../../../../utils/tags.utils";
 
-describe("Residential V/C Loss @ X% row", () => {
+describe("Residential V/C Loss @ X% row", 
+    { tags:[ Tag.income, Tag.pro_forma ] }, () => {
+        
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
     });
@@ -34,7 +37,7 @@ describe("Residential V/C Loss @ X% row", () => {
         Verify that Total value is taken from Potential Gross Income → table → Less Residential V/C Loss @ X% → $
         Verify that PSF value is calculated by the formula: Total / GBA
         Verify that Per Unit value is calculated by the formula: Total / # of Residential Units`);
-        NavigationSection.navigateToProForma(false);
+        NavigationSection.navigateToProForma();
         Income.ProForma.verifyResidentialVCLossLabel(testData.resVacancyCollectionLoss)
             .verifyResidentialVCLossTotal(testData.resVCLossTotal)
             .verifyResidentialVCLossPerSF(testData.grossBuildingArea)

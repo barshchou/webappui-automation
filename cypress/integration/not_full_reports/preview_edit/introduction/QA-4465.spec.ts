@@ -4,10 +4,13 @@ import { _BaseTest } from "../../../../actions/base";
 import { Report, PreviewEdit } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { getReportId } from "../../../../../utils/intercept.utils";
+import { Tag } from "../../../../utils/tags.utils";
 
 const { createReport, deleteReport } = _BaseTest;
 
-describe('Verify the "Property Rights Appraised" commentary on the Introduction page', () => {
+describe('Verify the "Property Rights Appraised" commentary on the Introduction page', 
+    { tags:[ Tag.preview_edit, Tag.introduction ] }, () => {
+        
     before("Login, create report", () => {
         cy.stepInfo(`1. Create a report`);
         createReport(testData.reportCreationData);
@@ -25,9 +28,8 @@ describe('Verify the "Property Rights Appraised" commentary on the Introduction 
             Report._KeyInfo.enterPropertyRightsAppraisedComment(value).then(text => {
                 cy.wrap(text).as(testData.aliases.PropertyRightsAppraised);
             });
-            _NavigationSection.clickPreviewEditButton();
-            _NavigationSection.Page.introduction.click();
-            _NavigationSection.clickYesButton().verifyProgressBarNotExist();
+            _NavigationSection.navigateToIntroduction()
+                .verifyProgressBarNotExist();
     
             PreviewEdit._Introduction.Page.TextPropertyRightsAppraised
             .invoke("text")
