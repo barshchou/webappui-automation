@@ -292,8 +292,8 @@ class InPlaceRentRollActions extends ResidentialRentRollSharedActions<typeof ren
 
     enterOutdoorSpaceByOptionByRow(space: string, rowNumber = 0): InPlaceRentRollActions {
         rentRollPage.outdoorSpaceCells.eq(rowNumber).dblclick();
-        this.chooseOptionFromTableListbox(space);
-        rentRollPage.outdoorSpaceCells.should("contain.text", space);
+        this.chooseOptionFromTableListbox(space)
+            .verifyOutdoorSpaceByRow(space, rowNumber);
         return this;
     }
 

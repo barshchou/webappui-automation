@@ -210,4 +210,9 @@ export default class ResidentialRentRollSharedActions<T extends ResidentialRentR
         return this;
     }
 
+    verifyOutdoorSpaceByRow(spaceToBe: string, rowNumber = 0): this {
+        this.Page.outdoorSpaceCells.eq(rowNumber).should("contain.text", spaceToBe);
+        return this;
+    }
+
 }

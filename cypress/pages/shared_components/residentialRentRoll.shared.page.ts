@@ -30,4 +30,7 @@ export default class ResidentialRentRollSharedPage extends BasePage {
 
     get numberCells() {return cy.get("[data-qa^='#'],[data-qa=order-cell]");}
 
+    get outdoorSpaceCells() {return cy.get("[data-qa^=outdoor][data-qa$=cell]");}
+
+
 }
