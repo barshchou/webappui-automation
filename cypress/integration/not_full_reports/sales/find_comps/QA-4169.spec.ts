@@ -24,16 +24,18 @@ describe.skip("Verify the New Comp is created after clicking on 'Save&Close' but
         
         createReport(testData.reportCreationData);
         _NavigationSection.navigateToFindComps();
-        Sales._FindComps.openAddNewComparableFormSearchResult(testData.compAddress, 1)
-            .selectDropdownOptionNewComp(Sales._FindComps.Page.conditionDropdown, testData.condition);
+
         Sales._FindComps
-            .selectDropdownOptionNewComp(Sales._FindComps.Page.conditionDropdown, testData.condition);
-        Sales._FindComps.Page.newCompContinueButton.should("be.enabled").click();
-        Sales._FindComps.Actions.selectDropdownOptionNewComp(
-            Sales._FindComps.Page.SourceInput, "Bowery Subject"
-        );
-        Sales._FindComps.Actions.SaleInfo.selectSaleDate();
-        Sales._FindComps.Page.newCompContinueButton.should("be.enabled").click();
+        .Actions.openAddNewComparableFormSearchResult(testData.compAddress, 1)
+        .selectDropdownOptionNewComp(Sales._FindComps.Page.conditionDropdown, testData.condition)
+        .Page.newCompContinueButton.click();
+        Sales._FindComps
+        .Actions.selectDropdownOptionNewComp(
+            Sales._FindComps.Page.SourceInput, testData.source
+        ).
+        SaleInfo.selectSaleDate();
+        Sales._FindComps
+        .Page.newCompContinueButton.click();
     });
 
     it("Test body", () => {
