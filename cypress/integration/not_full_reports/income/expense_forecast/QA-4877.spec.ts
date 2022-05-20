@@ -6,7 +6,7 @@ import Income from "../../../../actions/income/income.manager";
 import { Tag } from "../../../../utils/tags.utils";
 
 describe("Comparable Min, Max, Avg values for Electricity Per SF are correctly calculated and displayed",
-    { tags:[ Tag.snapshot_tests, Tag.income, Tag.expense_forecast, "@fix_snapshot" ] }, () => {
+    { tags:[ Tag.snapshot_tests, Tag.income, Tag.expense_forecast, Tag.fix ] }, () => {
         
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
@@ -44,7 +44,7 @@ describe("Comparable Min, Max, Avg values for Electricity Per SF are correctly c
             5.2 correctly displayed on a slidebar
         `);
         Income.ExpenseForecast.Actions.matchElementSnapshot(
-            Income.ExpenseForecast.Page.electricityCard, testData.electricityCardSnapshotName, { padding: [ 10, 100 ] }
+            Income.ExpenseForecast.Page.electricityCard.scrollIntoView(), testData.electricityCardSnapshotName, { padding: [ 10, 100 ], updatePassedSnapshot: true }
         );
 
         deleteReport(testData.reportCreationData.reportNumber);

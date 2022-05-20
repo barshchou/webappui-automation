@@ -6,7 +6,7 @@ import Income from "../../../../actions/income/income.manager";
 import { Tag } from "../../../../utils/tags.utils";
 
 describe("Comparable Min, Max, Avg values for Fuel Per SF are correctly calculated and displayed", 
-    { tags: [ Tag.income, Tag.expense_forecast, Tag.snapshot_tests, "@fix_snapshot" ] }, () => {
+    { tags: [ Tag.income, Tag.expense_forecast, Tag.snapshot_tests, Tag.fix ] }, () => {
 
     before("Login, create report",  () => {
         createReport(testData.reportCreationData);
@@ -39,7 +39,7 @@ describe("Comparable Min, Max, Avg values for Fuel Per SF are correctly calculat
 
         cy.stepInfo("4. Check Comp Min, Comp Max and Comp Avg values for Fuel card. They should be correctly displayed on a slidebar");
         Income.ExpenseForecast.Actions.matchElementSnapshot(
-            Income.ExpenseForecast.Page.fuelCard, testData.fuelCardSnapshotName, { padding: [ 10, 100 ] });
+            Income.ExpenseForecast.Page.fuelCard.scrollIntoView(), testData.fuelCardSnapshotName, { padding: [ 10, 100 ], updatePassedSnapshot: true });
         deleteReport(testData.reportCreationData.reportNumber);
     });
 });

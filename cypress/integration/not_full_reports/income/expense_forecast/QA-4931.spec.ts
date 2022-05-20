@@ -56,7 +56,9 @@ describe("Historical expense Repairs & Maintenance Per Unit is correctly calcula
       .hideExpenseForecastHeader();
 
       Income.ExpenseForecast.Actions.matchElementSnapshot(
-        Income.ExpenseForecast.Page.repairsAndMaintenanceCard, testData.repairsCardSnapshotName, { padding: [ 10, 100 ] });
+        Income.ExpenseForecast.Page.repairsAndMaintenanceCard.scrollIntoView(), 
+        testData.repairsCardSnapshotName, 
+        { padding: [ 10, 100 ], updatePassedSnapshot: true });
   
       deleteReport(testData.reportCreationData.reportNumber);
   

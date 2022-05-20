@@ -36,7 +36,9 @@ describe(`[QA-5052] Appraiser's Forecast of Custom Expense Forecast is included 
 
         cy.stepInfo(`[QA-5052] => 5. Verify if Sliding bar graphic on Total Operating Expenses card is displayed correctly`);
         Income._ExpenseForecastActions.Actions.matchElementSnapshot(
-            Income._ExpenseForecastActions.Page.toeCard, testData.totalExpensesSnapshotName, { padding: [ 10, 100 ] }
+            Income._ExpenseForecastActions.Page.toeCard.scrollIntoView(), 
+            testData.totalExpensesSnapshotName, 
+            { padding: [ 10, 100 ], updatePassedSnapshot: true }
         );
 
         deleteReport(testData.reportCreationData.reportNumber);

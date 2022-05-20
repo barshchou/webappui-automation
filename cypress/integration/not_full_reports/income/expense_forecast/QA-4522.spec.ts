@@ -41,8 +41,8 @@ describe(`Comparable Min, Max, Avg values for Water & Sewer Per Unit are correct
         Income._ExpenseForecastActions.matchElementSnapshot(
             Income._ExpenseForecastActions.Page.forecastItemCard(
                 Income._ExpenseForecastActions.getItemNameForAverage(
-                    testData.insuranceItem.name)), 
-                    testData.insuranceCardSnapshotName, { padding: [ 10, 100 ] }
+                    testData.insuranceItem.name)).scrollIntoView(), 
+                    testData.insuranceCardSnapshotName, { padding: [ 10, 100 ], updatePassedSnapshot: true }
         );
 
         deleteReport(testData.reportCreationData.reportNumber);
