@@ -3,8 +3,11 @@ import { createReport, deleteReport } from "../../../../actions/base/baseTest.ac
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Property from "../../../../actions/property/property.manager";
 import Income from "../../../../actions/income/income.manager";
+import { Tag } from "../../../../utils/tags.utils";
 
-describe("Commercial V/C Loss Discussion Generated Commentary", () => {
+describe("Commercial V/C Loss Discussion Generated Commentary", 
+    { tags:[ Tag.income, Tag.potential_gross_income ] }, () => {
+        
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
     });

@@ -7,12 +7,13 @@ import tableExpenseHistoryCellNames from "../../../../../cypress/enums/expenseHi
 import { Tag } from "../../../../utils/tags.utils";
 
 describe("Historical expense Electricity Per SF is correctly calculated and displayed",
-    { tags: [ Tag.snapshot_tests, Tag.expense_forecast, Tag.income ] }, () => {
+        { tags: [ Tag.snapshot_tests, Tag.expense_forecast, Tag.income ] }, () => {
+
         before("Login, create report", () => {
             createReport(testData.reportCreationData);
         });
 
-        it("Test body", { tags: '@snapshot_tests' }, () => {
+        it("Test body", () => {
             cy.stepInfo("1. Navigate to Property -> Summary and enter gross building area");
             NavigationSection.navigateToPropertySummary();
             Property.Summary.enterGrossBuildingArea(testData.buildingDescription.grossArea)

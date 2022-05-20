@@ -4,7 +4,9 @@ import { createReport, deleteReport } from "../../../../../actions/base/baseTest
 import testData from "../../../../../fixtures/not_full_reports/income/commercial/stabilized_rent_roll/QA-4593.fixture";
 import { Tag } from "../../../../../utils/tags.utils";
 
-describe(`Verify the Save button functionality on the Stabilized Rent Roll page`, { tags:[ Tag.income, Tag.commercial, Tag.stabilized_rent_roll ] }, () => {
+describe(`Verify the Save button functionality on the Stabilized Rent Roll page`, 
+    { tags:[ Tag.income, Tag.commercial, Tag.stabilized_rent_roll ] }, () => {
+        
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
     });
@@ -24,12 +26,12 @@ describe(`Verify the Save button functionality on the Stabilized Rent Roll page`
             .Page.SaveBtn.scrollIntoView().should('exist');
 
         cy.stepInfo(` 2. Fill in the editable fields with values or/and check check-boxes or/and click the radio button and click on the Save button. `);
-        Income._CommercialManager.StabilizedRentRoll.enterListPerSF(testData.leaseStatuses, testData.rentToBe)
+        Income._CommercialManager.StabilizedRentRoll.enterListPerSFAnnually(testData.leaseStatuses, testData.rentToBe)
             .clickSaveButton();
 
         cy.stepInfo(` 3. Reload page verify that the changes are saved and the user isn't redirected to the next page.`);
         cy.reload();
-        Income._CommercialManager.StabilizedRentRoll.verifyAnnuallyRentPsfByRowNumber(testData.leaseStatuses, testData.rentToBe);
+        Income._CommercialManager.StabilizedRentRoll.verifyListRentPsfAnnually(testData.leaseStatuses, testData.rentToBe);
 
         deleteReport(testData.reportCreationData.reportNumber);
     });

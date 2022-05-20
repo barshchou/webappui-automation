@@ -1,3 +1,4 @@
+import { salesInterceptions } from "../../../../actions/base/baseTest.actions";
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 
 const comparableFixture = () => {
@@ -7,6 +8,7 @@ const comparableFixture = () => {
 };
 
 export default {
+    setupInterceptions:salesInterceptions,
     reportCreationData: ReportDataCreator.getReportData("4248"),
     comparable: Object.freeze(comparableFixture())
 };
