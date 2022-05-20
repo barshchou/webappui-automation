@@ -1,7 +1,7 @@
-import { findCompsPage } from "../../pages/sales/findComps.page";
-import { getUploadFixture } from "../../../utils/fixtures.utils";
-import { isNumber, numberWithCommas } from "../../../utils/numbers.utils";
-import BaseActionsExt from "../base/base.actions.ext";
+import { findCompsPage } from "../../../pages/sales/findComps.page";
+import { getUploadFixture } from "../../../../utils/fixtures.utils";
+import { isNumber, numberWithCommas } from "../../../../utils/numbers.utils";
+import BaseActionsExt from "../../base/base.actions.ext";
 
 class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
     addExistingComparable(address: string): FindCompsActions {

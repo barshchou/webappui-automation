@@ -23,8 +23,7 @@ describe("[QA-4167] Verify the Appraiser Commentary field", { tags: [ Tag.sales,
         Sales._FindComps.Page.createCompNumberCommercialUnits.type(`${testData.units.numberOfUnits}`);
         Sales._FindComps.Page.commercialAreaNewComp.type(`${testData.units.numberOfUnits}`);
         Sales._FindComps.Page.newCompContinueButton.click();
-        Sales._FindComps.Page.SaleDateCalendarNewComp.click();
-        Sales._FindComps.Page.SaleDateToday.click();
+        Sales._FindComps.Actions.selectSaleDate();
         Sales._FindComps.Page.BuyerGranteeNewComp.type(testData.saleInfo.buyer);
         Sales._FindComps.Page.SellerGrantor.type(testData.saleInfo.seller);
         Sales._FindComps.selectDropdownOptionNewComp(Sales._FindComps.Page.SourceInput, testData.selectItems.source);
