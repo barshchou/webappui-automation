@@ -1,19 +1,16 @@
-import testData from "../../../../fixtures/not_full_reports/income/expense_forecast/QA-4898.fixture";
+import testData from "../../../../fixtures/not_full_reports/income/expense_forecast/QA-4898_4902.fixture";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import { Property, Income } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
-import tableExpenseHistoryCellNames from "../../../../../cypress/enums/expenseHistoryTableRows.enum";
+import tableExpenseHistoryCellNames from "../../../../enums/expenseHistoryTableRows.enum";
 import { Tag } from "../../../../utils/tags.utils";
 
 
-describe("Historical expense Water & Sewer Per SF is correctly calculated and displayed",
+describe("Historical expense Water & Sewer Per SF/Unit is correctly calculated and displayed",
     { tags:[ Tag.snapshot_tests, Tag.income, Tag.expense_forecast ] }, () => {
 
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
-    });
-
-    it("Test body", () => {
 
         cy.stepInfo("1. Pre-condition: Residential Units should be filled in on Property > Summary form");
         _NavigationSection.navigateToPropertySummary();
@@ -40,7 +37,43 @@ describe("Historical expense Water & Sewer Per SF is correctly calculated and di
         });
         Income._ExpenseHistory.Actions.verifyAverageTable();
 
+        cy.saveLocalStorage();
+    });
+
+    beforeEach("RestoreLocalStorage", () => {
+        cy.restoreLocalStorage();
+    });
+
+    it("[QA-4898]", () => {
+
         cy.stepInfo("4. Go to Expense Forecast and make sure that Per SF radiobutton is selected for Electricity  card");
+        testData.basis = "sf";
+        _NavigationSection.Actions.navigateToExpenseForecast();
+        Income._ExpenseForecastActions.chooseForecastItemBasis(testData.actualWaterAndSewerItem)
+            .verifyForecastItemBasis(testData.actualWaterAndSewerItem);
+
+        cy.stepInfo(`4.1 Check historical expenses values for Water & Sewer card. They should be calculated 
+                    for each expense type as: [Expense Period type]Water & Sewer / GBA`);
+        Income._ExpenseForecastActions.Actions.verifyForecastItemByExpensePeriodType(testData.actualWaterAndSewerItem, testData.buildingDescription, "Actual")
+            .verifyForecastItemByExpensePeriodType(testData.t12WaterAndSewerItem, testData.buildingDescription, "Actual T12")
+            .verifyForecastItemByExpensePeriodType(testData.historicalWaterAndSewerItem, testData.buildingDescription, "Annualized Historical")
+            .verifyForecastItemByExpensePeriodType(testData.ownerProjectionWaterAndSewerItem, testData.buildingDescription, "Owner's Projection")
+            .hideExpenseForecastHeader()
+            .clickSaveButton();
+
+        cy.stepInfo("4.2 Check historical expenses values for Water & Sewer card. They should be correctly displayed on slidebars");
+
+        Income._ExpenseForecastActions.Actions.matchElementSnapshot(
+            Income._ExpenseForecastActions.Page.forecastItemCard(
+                Income._ExpenseForecastActions.getItemNameForAverage(
+                    testData.actualWaterAndSewerItem.name)), testData.waterAndSewerPerSfCardSnapshotName, { padding: [ 10, 100 ] });
+        
+    });
+
+    it("[QA-4902]", () => {
+
+        cy.stepInfo("4. Go to Expense Forecast and make sure that Per Unit radiobutton is selected for Electricity  card");
+        testData.basis = "unit";
         _NavigationSection.Actions.navigateToExpenseForecast();
         Income._ExpenseForecastActions.chooseForecastItemBasis(testData.actualWaterAndSewerItem)
             .verifyForecastItemBasis(testData.actualWaterAndSewerItem);
@@ -59,7 +92,7 @@ describe("Historical expense Water & Sewer Per SF is correctly calculated and di
         Income._ExpenseForecastActions.Actions.matchElementSnapshot(
             Income._ExpenseForecastActions.Page.forecastItemCard(
                 Income._ExpenseForecastActions.getItemNameForAverage(
-                    testData.actualWaterAndSewerItem.name)), testData.waterAndSewerCardSnapshotName, { padding: [ 10, 100 ] });
+                    testData.actualWaterAndSewerItem.name)), testData.waterAndSewerPerUnitCardSnapshotName, { padding: [ 10, 100 ] });
         
         deleteReport(testData.reportCreationData.reportNumber);
 
