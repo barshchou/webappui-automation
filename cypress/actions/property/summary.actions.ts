@@ -76,7 +76,7 @@ class SummaryActions extends BaseActionsExt<typeof summaryPage> {
         return this;
     }
 
-    enterSiteArea(area: number | string): SummaryActions {
+    enterSiteArea(area: number): SummaryActions {
         if (isHasDecimalPartMoreNumberOfDigits(area, 4)) {
             area = cutDecimalPartToNumberOfDigits(area, 4);
         }
@@ -97,8 +97,8 @@ class SummaryActions extends BaseActionsExt<typeof summaryPage> {
         return this;
     }
 
-    enterFloorsNumber(number: number | string): this {
-        summaryPage.floorsNumber.clear().type(number.toString()).should("have.value", number);
+    enterFloorsNumber(number: number): this {
+        summaryPage.floorsNumber.clear().type(`${number}`).should("have.value", number);
         return this;
     }
 
@@ -109,22 +109,22 @@ class SummaryActions extends BaseActionsExt<typeof summaryPage> {
         return this;
     }
 
-    enterCurrentGrossBuildingArea(area: number | string): this {
+    enterCurrentGrossBuildingArea(area: number): this {
         if (isHasDecimalPartMoreNumberOfDigits(area, 2)) {
             area = cutDecimalPartToNumberOfDigits(area, 2);
         }
         const textToBe = numberWithCommas(area);
-        summaryPage.currentGrossBuildingArea.clear().type(area.toString()).should("have.value", textToBe);
+        summaryPage.currentGrossBuildingArea.clear().type(`${area}`).should("have.value", textToBe);
         return this;
     }
 
-    enterCurrentNumberOfResUnits(number: number | string): this {
-        summaryPage.currentNumberOfResUnits.clear().type(number.toString()).should("have.value", number);
+    enterCurrentNumberOfResUnits(number: number): this {
+        summaryPage.currentNumberOfResUnits.clear().type(`${number}`).should("have.value", number);
         return this;
     }
 
-    enterCurrentFloorsNumber(number: number | string): this {
-        summaryPage.currentFloorsNumber.clear().type(number.toString()).should("have.value", number);
+    enterCurrentFloorsNumber(number: number): this {
+        summaryPage.currentFloorsNumber.clear().type(`${number}`).should("have.value", number);
         return this;
     }
 
