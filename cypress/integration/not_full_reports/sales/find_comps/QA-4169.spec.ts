@@ -6,6 +6,7 @@ import { Tag } from "../../../../utils/tags.utils";
 
 /**
  * ernst: when we will be able to delete SalesComps - use this instead of `describe`
+ * TODO: Add actions to QA-4169 test after functionality for SalesComp removal will be added.
  */
 // const conditionalDescribe = isProdEnv() ? describe.skip : describe;
 
@@ -36,9 +37,6 @@ describe.skip("Verify the New Comp is created after clicking on 'Save&Close' but
     });
 
     it("Test body", () => {
-        /**
-         * ernst: add steps only after
-         */
         cy.stepInfo(`
         1. Verify New Comp is created after clicking on the "Save&Close" button on the Property description modal during creating a new comp 
         > The "Creating a new comp" modal is closed after the user clicks on the "Save&Close" button;
