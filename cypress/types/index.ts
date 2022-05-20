@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-namespace */
 /**
  * ernst:
@@ -82,8 +84,9 @@ namespace BoweryReports {
         projection?: number 
     }
     export type Comparable = {address: string, location?: string, period?: string, squareFeet?: number, resUnits?: number,
-        insurance?: number, electricity?: number, repairsAndMaintenance?: number, payrollAndBenefits?: number,
-        generalAndAdministrative?: number, management?: number, toe?: string};
+        insurance?: number, electricity?: number, fuel?: number, waterAndSewer?: number, repairsAndMaintenance?: number, 
+        payrollAndBenefits?: number, generalAndAdministrative?: number, legalAndProfessionalFees?: number, miscellaneous?: number, 
+        management?: number, replacementReserves?: number, toe?: string};
 
     export type BuildingDescription = {grossArea: number, numberOfUnits: number}
 
@@ -93,6 +96,16 @@ namespace BoweryReports {
         monthlyRent: number,
         leaseStatus?: BoweryReports.LeaseStatus
     }
+}
+
+namespace Utils {
+    type _GraphQLRequest = {
+        operationName: string,
+        query: string,
+        variables: object | any
+    }
+    
+    export type GraphQLRequest = Partial<_GraphQLRequest>;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
