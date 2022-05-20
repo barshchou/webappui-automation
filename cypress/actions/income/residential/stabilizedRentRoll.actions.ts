@@ -52,12 +52,12 @@ class StabilizedRentRollActions extends ResidentialRentRollSharedActions<typeof 
             rents.forEach(rent => rentsSum += rent);
             textToBe = `$${numberWithCommas(rentsSum.toFixed(2))}`;
         }
-        stabRentRollPage.totalMonthlyRent.should("have.text", textToBe);
+        stabRentRollPage.monthlyTotalRent.should("have.text", textToBe);
         return this;
     }
 
     verifyTotalAnnualRent(): this {
-        stabRentRollPage.totalMonthlyRent.then(cell => {
+        stabRentRollPage.monthlyTotalRent.then(cell => {
            const numberTotalMonthly = getNumberFromDollarNumberWithCommas(cell.text());
            const totalAnnualText = `$${numberWithCommas((numberTotalMonthly * 12).toFixed(2))}`;
            stabRentRollPage.totalAnnualRent.should("have.text", totalAnnualText);

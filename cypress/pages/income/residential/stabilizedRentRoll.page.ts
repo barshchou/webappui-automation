@@ -11,8 +11,6 @@ class StabilizedRentRollPage extends ResidentialRentRollSharedPage{
 
     get monthlyRentCellsInputs() {return cy.get("[data-qa=rent-cell] input:not([type=hidden])");}
 
-    get totalMonthlyRent() {return cy.get("[data-qa=total-monthly-cell]");}
-
     get totalAnnualRent() {return cy.get("[data-qa=total-annual-cell]");}
 
     get rentPerRoomCells() {return cy.get("[data-qa=rentPerRoom-cell]");}
