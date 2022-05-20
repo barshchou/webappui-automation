@@ -196,4 +196,9 @@ export default class ResidentialRentRollSharedActions<T extends ResidentialRentR
         return this;
     }
 
+    clickCloseIcon(): this {
+        this.Page.closeIcon.click();
+        return this;
+    }
+
 }

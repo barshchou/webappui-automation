@@ -290,11 +290,6 @@ class InPlaceRentRollActions extends ResidentialRentRollSharedActions<typeof ren
         return this;
     }
 
-    clickCloseIcon(): InPlaceRentRollActions {
-        rentRollPage.closeIcon.click();
-        return this;
-    }
-
     verifyNumberOfNumberCells(numberOfUnits = 0): InPlaceRentRollActions {
         if (numberOfUnits === 0) {
             rentRollPage.numberCells.should("not.exist");
