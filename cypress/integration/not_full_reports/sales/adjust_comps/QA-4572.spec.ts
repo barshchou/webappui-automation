@@ -69,7 +69,7 @@ describe("Check custom adjustment",
             .verifyNetPropertyAdjustmentsByCompIndex(1)
             .verifyAdjustedPriceByColumn()
             .verifyAdjustedPriceByColumn(1);
-        NavigationSection.openReviewAndExport(true);
+        NavigationSection.openReviewAndExport();
         ReviewExport.generateDocxReport()
             .waitForReportGenerated();
     });
