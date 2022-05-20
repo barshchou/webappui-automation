@@ -152,13 +152,6 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
         inputElement.should("have.value", valueToBe);
         return this;
     }
-
-    // selectSaleDate(): this {
-    //     this.Page.SaleDateCalendarNewComp.click();
-    //     this.Page.SaleDateToday.click();
-    //     cy.pause();
-    //     return this;
-    // }
 }
 
 
