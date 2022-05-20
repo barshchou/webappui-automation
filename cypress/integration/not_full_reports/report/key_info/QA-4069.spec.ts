@@ -17,7 +17,7 @@ describe("[QA-4069] Check the helper text for Provided Documents)",
         Report._KeyInfo.clickYesButton()
             .uploadFile(testData.pdfFileName);
 
-        _NavigationSection.openReviewAndExport(true);
+        _NavigationSection.openReviewAndExport();
         ReviewExport.generateDocxReport().waitForReportGenerated()
         .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
         deleteReport(testData.reportCreationData.reportNumber);

@@ -58,6 +58,8 @@ class KeyInfoPage extends BasePage{
     get addWordDocumentButton() {return cy.get("*[data-qa='add-word-btn']");}
 
     get wrapperDefinitionOfMarketValue() {return cy.get("*[data-qa='definition-of-market-value-tile']");}
+
+    get narrativeSuggestionsList() {return cy.get("[data-qa='narrative-suggestions-list'] > ul");}
 }
 
 export default new KeyInfoPage();

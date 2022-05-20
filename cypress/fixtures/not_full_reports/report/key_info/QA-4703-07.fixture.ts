@@ -1,6 +1,6 @@
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 
 export default {
-    reportCreationData: ReportDataCreator.getReportData("4703_04_05_06"),
+    reportCreationData: ReportDataCreator.getReportData("4703-07"),
     enterValue: "Test"
 };

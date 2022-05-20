@@ -1,11 +1,11 @@
 import { Tag } from '../../../../utils/tags.utils';
-import testData from "../../../../fixtures/not_full_reports/report/key_info/QA-4703_04_05_06.fixture";
+import testData from "../../../../fixtures/not_full_reports/report/key_info/QA-4703-07.fixture";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { Report } from "../../../../actions";
 
 
-describe("[QA-4703_04_05_06] Verify the Edit button functionality for Property Rights Appraised and Definition of Market Value sections",
+describe("[QA-4703-07] Verify the Edit button functionality for Property Rights Appraised and Definition of Market Value sections",
     { tags: [ Tag.report, Tag.key_info ] }, () => {
         
     before("Login, create report", () => {
@@ -56,6 +56,10 @@ describe("[QA-4703_04_05_06] Verify the Edit button functionality for Property R
         Report._KeyInfo.Page.CloseIcon.click();
         Report._KeyInfo.Page.textBoxPropertyRightsAppraised.should("include.text", testData.enterValue);
         Report._KeyInfo.Page.textBoxDefinitionOfMarketValue.should("include.text", testData.enterValue);
+
+        cy.stepInfo("9 Edit comment and click on the Save button for both sections. Verify that the changes from step 2 are saved");
+        Report._KeyInfo.enterPropertyRightsAppraisedComment(testData.enterValue, false, true);
+        Report._KeyInfo.enterDefinitionMarketValue(testData.enterValue, false, true);
 
         deleteReport(testData.reportCreationData.reportNumber);
     });

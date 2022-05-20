@@ -8,7 +8,7 @@ class KeyInfoActions extends BaseActionsExt<typeof keyInfoPage> {
         if (edit === true) keyInfoPage.formEditBtn(0).click();
         keyInfoPage.textBoxPropertyRightsAppraised.invoke("text")
         .then(text => {
-            keyInfoPage.textBoxPropertyRightsAppraised.click().clear().type(textToType ?? text);
+            keyInfoPage.textBoxPropertyRightsAppraised.type(textToType ?? text);
         });
         if(save === true) keyInfoPage.formSaveBtn(0).click();
         if (revert === true) {
@@ -22,7 +22,7 @@ class KeyInfoActions extends BaseActionsExt<typeof keyInfoPage> {
         if (edit === true) keyInfoPage.formEditBtn(0).click();
         keyInfoPage.textBoxDefinitionOfMarketValue.invoke("text")
         .then(text => {
-            keyInfoPage.textBoxDefinitionOfMarketValue.click().clear().type(textToType ?? text);
+            keyInfoPage.textBoxDefinitionOfMarketValue.type(textToType ?? text);
         });
         if(save === true) keyInfoPage.formSaveBtn(0).click();
         if (revert === true) {
@@ -85,6 +85,11 @@ class KeyInfoActions extends BaseActionsExt<typeof keyInfoPage> {
 
     verifyElementIsVisible(element:  Cypress.Chainable<JQuery<HTMLElement>>): KeyInfoActions {
         element.should("be.visible");
+        return this;
+    }
+
+    clickNarrativeSuggestions(verifyListValue: string, numberLists = 0): KeyInfoActions {
+        keyInfoPage.narrativeSuggestionsList.eq(numberLists).contains(verifyListValue).should("have.text", verifyListValue).click();
         return this;
     }
 }
