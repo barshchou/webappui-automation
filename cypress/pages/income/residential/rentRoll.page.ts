@@ -28,8 +28,6 @@ class InPlaceRentRollPage extends ResidentialRentRollSharedPage {
 
     get textAreaToInput() {return cy.get("div:not([class*='hidden']) > *[class='handsontableInput']");}
 
-    get annualTotalRent() {return cy.get("[data-qa='annualTotal-rent']");}
-
     get rentRollCommentary() {return cy.get("[data-qa*='currentRentRollDiscussion.commentary']");}
 
     get monthlyRentCells() {return cy.get("[data-qa^=rent-][data-qa$=cell]");}

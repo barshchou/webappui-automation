@@ -187,4 +187,13 @@ export default class ResidentialRentRollSharedActions<T extends ResidentialRentR
         return this;
     }
 
+    verifyTotalAnnualRent(): this {
+        this.Page.monthlyTotalRent.invoke("text").then(cell => {
+            const numberTotalMonthly = getNumberFromDollarNumberWithCommas(cell);
+            const totalAnnualText = `$${numberWithCommas((numberTotalMonthly * 12).toFixed(2))}`;
+            this.Page.annualTotalRent.should("have.text", totalAnnualText);
+        });
+        return this;
+    }
+
 }

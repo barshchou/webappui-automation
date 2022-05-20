@@ -1,5 +1,5 @@
 import stabRentRollPage from "../../../pages/income/residential/stabilizedRentRoll.page";
-import { getNumberFromDollarNumberWithCommas, numberWithCommas } from "../../../../utils/numbers.utils";
+import { numberWithCommas } from "../../../../utils/numbers.utils";
 import ResidentialRentRollSharedActions from "../../shared_components/residentialRentRoll.shared.actions";
 
 class StabilizedRentRollActions extends ResidentialRentRollSharedActions<typeof stabRentRollPage> {
@@ -53,15 +53,6 @@ class StabilizedRentRollActions extends ResidentialRentRollSharedActions<typeof 
             textToBe = `$${numberWithCommas(rentsSum.toFixed(2))}`;
         }
         stabRentRollPage.monthlyTotalRent.should("have.text", textToBe);
-        return this;
-    }
-
-    verifyTotalAnnualRent(): this {
-        stabRentRollPage.monthlyTotalRent.then(cell => {
-           const numberTotalMonthly = getNumberFromDollarNumberWithCommas(cell.text());
-           const totalAnnualText = `$${numberWithCommas((numberTotalMonthly * 12).toFixed(2))}`;
-           stabRentRollPage.totalAnnualRent.should("have.text", totalAnnualText);
-        });
         return this;
     }
 

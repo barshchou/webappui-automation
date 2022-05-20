@@ -24,4 +24,6 @@ export default class ResidentialRentRollSharedPage extends BasePage {
 
     get monthlyTotalRent() {return cy.get("[data-qa='monthlyTotal-rent'],[data-qa=total-monthly-cell]");}
 
+    get annualTotalRent() {return cy.get("[data-qa=annualTotal-rent],[data-qa=total-annual-cell]");}
+
 }

@@ -264,15 +264,6 @@ class InPlaceRentRollActions extends ResidentialRentRollSharedActions<typeof ren
         return this;
     }
 
-    verifyAnnuallyTotalForecastEqualValue() {
-        rentRollPage.monthlyTotalRent.then(monthly => {
-            const monthlyNumber = getNumberFromDollarNumberWithCommas(monthly.text());
-            const textToBe = `$${numberWithCommas((monthlyNumber * 12).toFixed(2))}`;
-            rentRollPage.annualTotalRent.should("have.text", textToBe);
-        });
-        return this;
-    }
-
     verifyRentPSFValueByRow(isPerMonth = true, rowNumber = 0) {
         this.Page.monthlyRentCells.eq(rowNumber).invoke("text").then(monthlyRentText => {
             const rentValue = getNumberFromDollarNumberWithCommas(monthlyRentText);
