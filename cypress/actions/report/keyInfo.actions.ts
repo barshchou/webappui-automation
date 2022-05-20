@@ -4,17 +4,32 @@ import { getUploadFixture } from "../../../utils/fixtures.utils";
 import BaseActionsExt from "../base/base.actions.ext";
 
 class KeyInfoActions extends BaseActionsExt<typeof keyInfoPage> {
-    /**
-     * ernst: REFACTOR: add form data (index of save and edit btn) as param.
-     */
-    enterPropertyRightsAppraisedComment(textToType: string = null) {
-        keyInfoPage.formEditBtn(0).click();
+    enterPropertyRightsAppraisedComment(textToType: string = null, edit = true, save = true, revert = false) {
+        if (edit === true) keyInfoPage.formEditBtn(0).click();
         keyInfoPage.textBoxPropertyRightsAppraised.invoke("text")
         .then(text => {
             keyInfoPage.textBoxPropertyRightsAppraised.click().clear().type(textToType ?? text);
         });
-        keyInfoPage.formSaveBtn(0).click();
+        if(save === true) keyInfoPage.formSaveBtn(0).click();
+        if (revert === true) {
+            keyInfoPage.formRevertToOriginalBtn(0).click();
+            keyInfoPage.formYesRevertBtn.click();
+        }
         return keyInfoPage.textBoxPropertyRightsAppraised.invoke("text");
+    }
+
+    enterDefinitionMarketValue(textToType: string = null, edit = true, save = true, revert = false) {
+        if (edit === true) keyInfoPage.formEditBtn(0).click();
+        keyInfoPage.textBoxDefinitionOfMarketValue.invoke("text")
+        .then(text => {
+            keyInfoPage.textBoxDefinitionOfMarketValue.click().clear().type(textToType ?? text);
+        });
+        if(save === true) keyInfoPage.formSaveBtn(0).click();
+        if (revert === true) {
+            keyInfoPage.formRevertToOriginalBtn(0).click();
+            keyInfoPage.formYesRevertBtn.click();
+        }
+        return keyInfoPage.textBoxDefinitionOfMarketValue.invoke("text");
     }
 
     choosePurpose(purposeValue: string): KeyInfoActions {
