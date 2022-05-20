@@ -10,13 +10,13 @@ import { Tag } from "../../../../../utils/tags.utils";
 
 
 describe.skip("Verify the display of the Stabilized Rent Roll page", 
-    { tags: [ Tag.income, Tag.commercial, Tag.stabilized_rent_roll ] }, () => {
+    { tags: [ Tag.income, Tag.commercial, Tag.stabilized_rent_roll, Tag.snapshot_tests ] }, () => {
         
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
     });
 
-    it("Test body", { tags: '@snapshot_tests' },  () => {  
+    it("Test body",  () => {  
         cy.stepInfo(`
         1. Verify the display of the Stabilized Rent Roll page if there are > 0 Commercial Units with Comp Groups.
         `);

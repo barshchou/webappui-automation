@@ -29,7 +29,7 @@ namespace BoweryReports {
     export type LeaseStatus = "Occupied" | "Vacant" | "Employee"
     export type ImageType = "Interior Images" | "Exterior Images";
     export type InputType = "drag-n-drop" | "input";
-    export type UnitSF = "unit" | "sf"
+    export type UnitSF = "unit" | "sf" | "room"
     export type PerUnitPerSF = "Per Unit" | "Per SF"
     export type ForecastItemBasis = "insurance" | "electricity"
     | "fuel" | "waterAndSewer" | "repairsAndMaintenance" | "payrollAndBenefits" | "generalAndAdministrative" 
@@ -85,8 +85,9 @@ namespace BoweryReports {
         projection?: number 
     }
     export type Comparable = {address: string, location?: string, period?: string, squareFeet?: number, resUnits?: number,
-        insurance?: number, electricity?: number, repairsAndMaintenance?: number, payrollAndBenefits?: number,
-        generalAndAdministrative?: number, management?: number, toe?: string};
+        insurance?: number, electricity?: number, fuel?: number, waterAndSewer?: number, repairsAndMaintenance?: number, 
+        payrollAndBenefits?: number, generalAndAdministrative?: number, legalAndProfessionalFees?: number, miscellaneous?: number, 
+        management?: number, replacementReserves?: number, toe?: string};
 
     export type BuildingDescription = {grossArea: number, numberOfUnits: number}
 
