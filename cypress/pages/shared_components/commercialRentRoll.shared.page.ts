@@ -38,8 +38,6 @@ class CommercialRentRollSharedComponentPage extends BasePage {
 
     get editDiscussionButton() {return cy.xpath("//button[.='Edit']");}
 
-    get modifiedLabel() {return cy.contains("Modified");}
-
     get changesLostModalHeader() {return cy.contains("Changes will be lost");}
 
     get commentaryText() {return cy.get("div[data-slate-editor]");}
