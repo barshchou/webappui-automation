@@ -1,4 +1,4 @@
-import { findCompsPage } from "../../../pages/sales/findComps.page";
+import { findCompsPage } from "../../../../pages/sales/findComps.page";
 
 class SaleInfoFromActions {
 

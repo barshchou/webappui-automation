@@ -1,4 +1,4 @@
-import { findCompsPage } from "../../../pages/sales/findComps.page";
+import { findCompsPage } from "../../../../pages/sales/findComps.page";
 
 class PropertyDescriptionFormActions {
     Page: typeof findCompsPage;
