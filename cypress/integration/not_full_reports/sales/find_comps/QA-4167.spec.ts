@@ -21,24 +21,25 @@ describe("[QA-4167] Verify the Appraiser Commentary field", { tags: [ Tag.sales,
         Sales._FindComps.Actions
         .openAddNewComparableFormSearchResult(testData.compAddress)
         .selectDropdownOptionNewComp(Sales._FindComps.Page.conditionDropdown, testData.selectItems.condition);
-        Sales._FindComps.Page.createCompNumberCommercialUnits.type(`${testData.units.numberOfUnits}`);
-        Sales._FindComps.Page.commercialAreaNewComp.type(`${testData.units.numberOfUnits}`);
-        Sales._FindComps.Page.newCompContinueButton.click();
-        Sales._FindComps.Actions.SaleInfo
-        .selectSaleDate().setBuyerGrantee(testData.saleInfo.buyer);
-        Sales._FindComps.Page.SellerGrantor.type(testData.saleInfo.seller);
-        Sales._FindComps.selectDropdownOptionNewComp(Sales._FindComps.Page.SourceInput, testData.selectItems.source);
-        Sales._FindComps.Page.newCompContinueButton.click();
+        Sales._FindComps.Actions.
+        PropertyInfo.setCommercialUnits(`${testData.units.numberOfUnits}`).setCommercialArea(`${testData.units.grossArea}`)
+        .Page.newCompContinueButton.click();
+        Sales._FindComps.Actions.
+        SaleInfo.selectSaleDate().setBuyerGrantee(testData.saleInfo.buyer).setSellerGarantor(testData.saleInfo.seller);
+        Sales._FindComps
+        .Actions.selectDropdownOptionNewComp(Sales._FindComps.Page.SourceInput, testData.selectItems.source)
+        .Page.newCompContinueButton.click();
 
         cy.stepInfo(` 1. Verify the Appraiser Commentary is free text input type;
             -Try to enter any numerical / non-integer / text value;
             -Try to copy-paste;
             -Verify a long value;
-            -The field is optional;
-            -The text: ”This commentary is for internal use only and will not export” is displayed below the field.`);
+            -The field is optional;`);
         Sales._FindComps.Page.newCompSaveAndCloseButton.should("be.enabled");
-        Sales._FindComps.Actions.enterAppraiserCommentary(testData.verifyTextValue);
-        Sales._FindComps.Page.appraiserCommentaryTextArea.clear().invoke("val", testData.verifyTextValue);
+        Sales._FindComps.Actions.PropertyDesc.enterAppraiserCommentary(testData.verifyTextValue);
+        Sales._FindComps.Actions.emulateCopyPaste(
+            Sales._FindComps.Page.appraiserCommentaryTextArea, testData.verifyTextValue
+        );
 
         deleteReport(testData.reportCreationData.reportNumber);
     });

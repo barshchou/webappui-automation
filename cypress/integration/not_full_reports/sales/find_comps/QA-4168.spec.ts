@@ -18,17 +18,17 @@ describe("[QA-4168] Verify the Internal Notes field", { tags: [ Tag.sales, Tag.f
 
         _NavigationSection.navigateToFindComps();
 
-        Sales._FindComps.openAddNewComparableFormSearchResult(testData.compAddress)
-            .selectDropdownOptionNewComp(Sales._FindComps.Page.conditionDropdown, testData.selectItems.condition);
-        Sales._FindComps.Page.createCompNumberCommercialUnits.type(`${testData.units.numberOfUnits}`);
-        Sales._FindComps.Page.commercialAreaNewComp.type(`${testData.units.numberOfUnits}`);
-        Sales._FindComps.Page.newCompContinueButton.click();
         Sales._FindComps.Actions
-        .SaleInfo.selectSaleDate().setBuyerGrantee(testData.saleInfo.buyer);
-        Sales._FindComps.Page.SellerGrantor.type(testData.saleInfo.seller);
-        Sales._FindComps.selectDropdownOptionNewComp(
-            Sales._FindComps.Page.SourceInput, testData.selectItems.source);
-        Sales._FindComps.Page.newCompContinueButton.click();
+        .openAddNewComparableFormSearchResult(testData.compAddress)
+        .selectDropdownOptionNewComp(Sales._FindComps.Page.conditionDropdown, testData.selectItems.condition);
+        Sales._FindComps.Actions.
+        PropertyInfo.setCommercialUnits(`${testData.units.numberOfUnits}`).setCommercialArea(`${testData.units.grossArea}`)
+        .Page.newCompContinueButton.click();
+        Sales._FindComps.Actions.
+        SaleInfo.selectSaleDate().setBuyerGrantee(testData.saleInfo.buyer).setSellerGarantor(testData.saleInfo.seller);
+        Sales._FindComps
+        .Actions.selectDropdownOptionNewComp(Sales._FindComps.Page.SourceInput, testData.selectItems.source)
+        .Page.newCompContinueButton.click();
 
         cy.stepInfo(` 1.Verify the Internal Notes is free text input type;
             -Try to enter any numerical / non-integer / text value;
@@ -37,8 +37,10 @@ describe("[QA-4168] Verify the Internal Notes field", { tags: [ Tag.sales, Tag.f
             -The field is optional;
             -The text: ”This commentary is for internal use only and will not export” is displayed below the field.`);
         Sales._FindComps.Page.newCompSaveAndCloseButton.should("be.enabled");
-        Sales._FindComps.Actions.enterInternalNotes(testData.verifyTextValue);
-        Sales._FindComps.Page.internalNotesTextArea.clear().invoke("val", testData.verifyTextValue);
+        Sales._FindComps.Actions.PropertyDesc.enterInternalNotes(testData.verifyTextValue);
+        Sales._FindComps.Actions.emulateCopyPaste(
+            Sales._FindComps.Page.internalNotesTextArea, testData.verifyTextValue
+        );        
         cy.contains(testData.verifyTextUnderTextArea).should("be.visible");
 
         deleteReport(testData.reportCreationData.reportNumber);

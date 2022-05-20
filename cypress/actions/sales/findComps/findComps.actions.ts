@@ -3,11 +3,21 @@ import { getUploadFixture } from "../../../../utils/fixtures.utils";
 import { isNumber, numberWithCommas } from "../../../../utils/numbers.utils";
 import BaseActionsExt from "../../base/base.actions.ext";
 import saleInfoFormActions from "./saleInfoForm.actions";
+import propertDescActions from "./propertyDescForm.actions";
+import propertyInfoFormActions from "./propertyInfoForm.actions";
 
 class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
 
     get SaleInfo(){
         return saleInfoFormActions;
+    }
+
+    get PropertyDesc(){
+        return propertDescActions;
+    }
+
+    get PropertyInfo(){
+        return propertyInfoFormActions;
     }
 
     addExistingComparable(address: string): FindCompsActions {
@@ -149,17 +159,6 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
     //     cy.pause();
     //     return this;
     // }
-
-    enterInternalNotes(value: string): this {
-        this.Page.internalNotesTextArea.clear().type(value).should("have.text", value);
-        return this;
-    }
-
-    enterAppraiserCommentary(value: string): this {
-        this.Page.appraiserCommentaryTextArea.click().realType(value);
-        this.Page.appraiserCommentaryTextArea.should("have.text", value);
-        return this;
-    }
 }
 
 
