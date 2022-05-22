@@ -17,7 +17,7 @@ describe('Verify if "Per Year" radiobutton is selected by default',
 
             cy.stepInfo(`2. Verify if "What time period should PSF rent be based on?" question appears + 
          "Per Year" radiobutton is selected by default, 
-         when checkbox "Yes" is selected under question line "Do you know per unit square footage?"`);
+         when checkbox "Yes" is selected under question field "Do you know per unit square footage?"`);
             Income._Residential.InPlaceRentRoll.Page.getPerUnitSFRadio('false').should("be.checked");
             Income._Residential.InPlaceRentRoll.checkPerUnitSquareFootage('true');
             Income._Residential.InPlaceRentRoll.Page.radioButtonLabelByText(testData.labelText).should("exist");
