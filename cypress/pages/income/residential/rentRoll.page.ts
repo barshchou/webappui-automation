@@ -13,6 +13,8 @@ class InPlaceRentRollPage extends BasePage {
 
     getCheckboxByLabel(label) {return cy.get(`*[label="${label}"] input`);}
 
+    radioButtonLabelByText(labelText) {return cy.xpath(`//label[text()="${labelText}"]`);}
+
     get importViaCSVHeader() {return cy.xpath("//p[text()='Import Rent Roll via CSV']");}
 
     get skipManualRentEntryRow() {return cy.xpath("//p[text()='Skip manual rent roll entry.']");}
