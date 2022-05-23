@@ -1,6 +1,8 @@
 import BasePage from "../base/base.page";
 
 class UtilitiesPage extends BasePage{
+    get utilitiesPageTitle() {return cy.get("[data-qa=utilitiesDescription]");}
+
     get heatingSystemCheckbox() {return cy.get("*[data-qa*='heatingSystems.inspected'] input");}
 
     getHeatingSystemTypeDropdownBySystemNumber(number) {
