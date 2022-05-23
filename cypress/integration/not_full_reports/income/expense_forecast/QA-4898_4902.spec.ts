@@ -46,7 +46,7 @@ describe("Historical expense Water & Sewer Per SF/Unit is correctly calculated a
 
     it("[QA-4898]", () => {
 
-        cy.stepInfo("4. Go to Expense Forecast and make sure that Per SF radiobutton is selected for Electricity  card");
+        cy.stepInfo("4. Go to Expense Forecast and make sure that Per SF radiobutton is selected for Water & Sewer  card");
         testData.basis = "sf";
         _NavigationSection.Actions.navigateToExpenseForecast();
         Income._ExpenseForecastActions.chooseForecastItemBasis(testData.actualWaterAndSewerItem)
@@ -72,7 +72,7 @@ describe("Historical expense Water & Sewer Per SF/Unit is correctly calculated a
 
     it("[QA-4902]", () => {
 
-        cy.stepInfo("4. Go to Expense Forecast and make sure that Per Unit radiobutton is selected for Electricity  card");
+        cy.stepInfo("4. Go to Expense Forecast and make sure that Per Unit radiobutton is selected for Water & Sewer  card");
         testData.basis = "unit";
         _NavigationSection.Actions.navigateToExpenseForecast();
         Income._ExpenseForecastActions.chooseForecastItemBasis(testData.actualWaterAndSewerItem)
@@ -87,7 +87,7 @@ describe("Historical expense Water & Sewer Per SF/Unit is correctly calculated a
             .hideExpenseForecastHeader()
             .clickSaveButton();
 
-        cy.stepInfo("4.2 Check historical expenses values for Electricity card. They should be correctly displayed on slidebars");
+        cy.stepInfo("4.2 Check historical expenses values for Water & Sewer card. They should be correctly displayed on slidebars");
 
         Income._ExpenseForecastActions.Actions.matchElementSnapshot(
             Income._ExpenseForecastActions.Page.forecastItemCard(
