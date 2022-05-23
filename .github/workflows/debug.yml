@@ -65,7 +65,7 @@ jobs:
         run: npm install
 
       - name: Run Cypress not snapshot tests on Currents.dev
-        run: npm run currents:run:debug -- --spec ${{ github.event.inputs.spec_file }} --env ${{ github.event.inputs.tags }}
+        run: npm run currents:run:debug -- --spec ${{ github.event.inputs.spec_file }} --env ${{ github.event.inputs.tags }},updateSnapshots=true
         env:
           CYPRESS_USERNAME: ${{ github.event.inputs.env == 'custom' && secrets.CESAR_USERNAME || secrets.USERNAME }}
           CYPRESS_PASSWORD: ${{ github.event.inputs.env == 'custom' && secrets.CESAR_PASSWORD || secrets.PASSWORD }}
