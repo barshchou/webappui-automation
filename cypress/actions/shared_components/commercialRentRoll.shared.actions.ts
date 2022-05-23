@@ -248,7 +248,7 @@ class CommercialRentRollSharedComponent<T extends CommercialRentRollSharedCompon
     }
 
     editDiscussion(newCommentary: string, clearText = true, isFullTextVerification = true): this {
-        this.Page.modifiedLabel.should("not.exist");
+        this.Page.modifiedLabel(false).should("not.exist");
         this.clickEditDiscussionButton()
             .editDiscussionTextArea(newCommentary, clearText)
             .clickSaveDiscussionButton();
@@ -257,7 +257,7 @@ class CommercialRentRollSharedComponent<T extends CommercialRentRollSharedCompon
         } else {
             this.verifyCommentaryContainsText(newCommentary);
         }
-        this.Page.modifiedLabel.should("exist");
+        this.Page.modifiedLabel().should("exist");
         return this;
     }
 
@@ -315,7 +315,7 @@ class CommercialRentRollSharedComponent<T extends CommercialRentRollSharedCompon
     }
 
     verifyModifiedLabelExist(): this {
-        this.Page.modifiedLabel.should('exist');
+        this.Page.modifiedLabel().should('exist');
         return this;
     }
 }
