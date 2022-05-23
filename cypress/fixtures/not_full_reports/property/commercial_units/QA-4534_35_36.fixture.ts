@@ -8,5 +8,9 @@ const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreat
 
 export default {
     reportCreationData: _reportCreationData,
-    numberOfCommercialUnits: 2,
+    numberOfCommercialUnits: {
+        first: 2,
+        second: 4,
+        third: 0 
+    },
 };
