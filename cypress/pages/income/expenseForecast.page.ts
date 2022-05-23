@@ -13,7 +13,9 @@ class ExpenseForecastPage extends BasePage {
 
     forecastItemCard(forecastItem: string) { return cy.get(`[data-qa=${forecastItem}-forecast-item] > div`).last(); }
 
-    get toeCard() {return cy.xpath("//*[.='TOTAL OPERATING EXPENSES ($/SF)']/parent::div").first();}
+    get toeCard() { return cy.xpath("//*[.='TOTAL OPERATING EXPENSES ($/SF)']/parent::div").first(); }
+
+    get utilitiesCard() { return cy.get("[data-qa=utilities-forecast-item] > div").last();}
 
     getForecastItemBasisRadio(item) {return cy.get(`[name='${item}.basis']`);}
 
@@ -74,6 +76,10 @@ class ExpenseForecastPage extends BasePage {
     get createNewCategoryButton() {return cy.contains('Add Expense Category +');}
 
     get newCategoryExpenseName() { return cy.get('[data-qa="expenseName-form-control"] input');}
+
+    getAppraisersForecastInput(forecastItem: string) {
+        return cy.get(`[data-qa=${forecastItem}-forecast-item]`).find("[name$=concludedValue]");
+    }
 
 }
 

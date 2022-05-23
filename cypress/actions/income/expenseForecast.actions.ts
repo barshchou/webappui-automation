@@ -263,7 +263,7 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
         return this;
     }
 
-    editExpenseForecastCommentary(newText: string, forecastItem: BoweryReports.ForecastItem, isWithClear = false, ): ExpenseForecastActions {
+    editExpenseForecastCommentary(newText: string, forecastItem: BoweryReports.ForecastItem, isWithClear = false): ExpenseForecastActions {
         let item = this.getItemNameForAverage(forecastItem.name);
         expenseForecastPage.getExpenseCommentaryEditButton(item).click();
         if (isWithClear) {
@@ -304,11 +304,16 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
         return this;
     }
 
-    addCustomExpenseCategory(categoryName): ExpenseForecastActions {
+    addCustomExpenseCategory(categoryName: string): ExpenseForecastActions {
         expenseForecastPage.createNewCategoryButton.click();
         expenseForecastPage.newCategoryExpenseName.clear().type(categoryName);
         this.Page.formSaveBtn(1).click();
         this.verifyProgressBarNotExist();
+        return this;
+    }
+
+    enterAppraisersForecast(forecastItem: string, value: number): ExpenseForecastActions {
+        expenseForecastPage.getAppraisersForecastInput(forecastItem).clear().type(`${value}{enter}`).should('have.value', `$${value}`);
         return this;
     }
 }

@@ -471,6 +471,19 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
             .clickYesIfExist();
         return this;
     }
+
+    clickCommercialReimbursementSummaryButton(): NavigationSectionActions {
+        navigationSectionPage.commercialReimbursementSummaryButton.click();
+        return this;
+    }
+
+    navigateToCommercialReimburcementSummary(): NavigationSectionActions {
+        this.clickIncomeApproachButton().
+            clickCommercialArrow().
+            clickCommercialReimbursementSummaryButton().
+            clickYesIfExist();
+        return this;
+    }
 }
 
 export default new NavigationSectionActions(navigationSectionPage);
