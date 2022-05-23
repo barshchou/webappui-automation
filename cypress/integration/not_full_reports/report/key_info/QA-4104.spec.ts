@@ -1,6 +1,6 @@
 import testData from "../../../../fixtures/not_full_reports/report/key_info/QA-4104.fixture";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
-import {_NavigationSection} from "../../../../actions/base";
+import { _NavigationSection } from "../../../../actions/base";
 import { Report, ReviewExport } from "../../../../actions";
 
 
@@ -30,7 +30,7 @@ describe("[QA-4104] Verify the Market Value generated commentary", { tags: '@to_
     });
 
     it("Check export", () => {
-        cy.task("getFilePath", {_reportName: testData.reportCreationData.reportNumber, _docx_html: "html"}).then(file => {
+        cy.task("getFilePath", { _reportName: testData.reportCreationData.reportNumber, _docx_html: "html" }).then(file => {
             cy.log(<string>file);
             cy.stepInfo("5. Check that this sentence exports in the Introduction, replacing the boilerplate sentence currently exported there");
             cy.visit(<string>file);
