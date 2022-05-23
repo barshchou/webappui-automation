@@ -162,7 +162,7 @@ describe("Full bowery way, multifamily as complete report", { tags: [ Tag.full_r
             .enterAllEqualLeaseStatuses(testData.inPLaceRentRoll.leaseStatus)
             .enterAllEqualForecast(testData.inPLaceRentRoll.forecastValue, testData.currentDescription.numberOfUnits)
             .verifyMonthlyTotalForecastEqualValue()
-            .verifyAnnuallyTotalForecastEqualValue()
+            .verifyTotalAnnualForecast()
             .verifyRentRollCommentary(testData.inPLaceRentRoll.commentary)
             .clickSaveContinueButton();
         Income.Residential.UnitGroups.verifyRowsNumberEqualBedroomsNonComp(testData.inPLaceRentRoll.bedroomsNumber,
