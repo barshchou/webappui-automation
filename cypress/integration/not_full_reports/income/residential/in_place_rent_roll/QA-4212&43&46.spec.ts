@@ -18,7 +18,7 @@ describe("[QA-4212] [QA-4243] [QA-4246] In-Place Rent Roll table tests",
 
         cy.stepInfo('1. [QA-4246] Navigate to Residential -> Verify the Annual Total row is displayed in the grid (not editable, default = 0.00$)');
         _NavigationSection.navigateToResInPlaceRentRoll();
-        Income._Residential.InPlaceRentRoll.verifyAnnuallyTotalForecastEqualValue();
+        Income._Residential.InPlaceRentRoll.verifyTotalAnnualRent();
 
         cy.stepInfo('2. [QA-4212] Verify the Do you know per unit square footage? section');
         Income._Residential.InPlaceRentRoll.checkUncheckPerUnitSquareFootage(testData.columns);
@@ -30,11 +30,11 @@ describe("[QA-4212] [QA-4243] [QA-4246] In-Place Rent Roll table tests",
             Income._Residential.InPlaceRentRoll.enterMonthlyRentByRowNumber(unit.monthlyRent, index)
                 .enterSquareFootageByRow(unit.footage, index)
                 .enterLeaseStatusByRowNumber(unit.leaseStatus, index)
-                .verifyRentSFValue(index);
+                .verifyRentPSFValueByRow(false, index);
         });
 
         cy.stepInfo('4. [QA-4246] Verify the Annual Total row is calculated per formula = (Monthly Rent ($) sum - vacant units\' rent) * 12');
-        Income._Residential.InPlaceRentRoll.verifyAnnuallyTotalForecastEqualValue();
+        Income._Residential.InPlaceRentRoll.verifyTotalAnnualRent();
 
         deleteReport(testData.reportCreationData.reportNumber);
     });
