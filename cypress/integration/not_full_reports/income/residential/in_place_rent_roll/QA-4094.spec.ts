@@ -20,7 +20,7 @@ describe(`[QA-4094] Verify if "Per Month" time period PSF Rent based on is selec
 
         cy.stepInfo(`2. Verify if "Per Month" time period PSF Rent based on is selected - > the calculation 
         of "Rent PSF/month" should be Monthly Rent/Square Footage
-            Also verify if calculationif correct if:
+            Also verify if calculation is correct if:
                 -Square Footage is 0
                 -Square Footage is not filled
                 -Monthly rent is 0
@@ -30,7 +30,7 @@ describe(`[QA-4094] Verify if "Per Month" time period PSF Rent based on is selec
             .Page.getPSFRadio(testData.psfRadioValue).click();
             Income._Residential.InPlaceRentRoll.enterSquareFootageByRow(el.footage)
             .enterMonthlyRentByRowNumber(el.monthlyRent)
-            .verifyRentPSFMounthValue("perMonth");
+            .verifyRentPSFValueByRow();
             cy.reload();
         });
         
