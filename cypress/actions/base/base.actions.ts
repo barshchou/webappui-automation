@@ -65,7 +65,12 @@ export default class BaseActions {
     }
 
     clickBackButton() {
-        cy.xpath("//button[.='BACK']").click();
+        cy.xpath("//button[.='Back']").click();
+        return this;
+    }
+
+    verifyContainsValue(expectedValue: string) {
+        cy.contains(expectedValue).should("be.visible");
         return this;
     }
 
@@ -86,6 +91,15 @@ export default class BaseActions {
             element.matchImageSnapshot(snapshotName, options);
             return this; 
         } 
+    }
+
+    /**
+     * Emulates paste of text by invoking function `val` of JQuery element.
+     * Does not related to functionality of Clipboard API of browser.
+     */
+    emulateCopyPaste(elem: Cypress.Chainable<JQuery<HTMLElement>>, text: string): this {
+        elem.click().invoke("val", text);
+        return this;
     }
 
     pause(){

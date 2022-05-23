@@ -2,9 +2,10 @@ import testData from "../../../../../fixtures/not_full_reports/income/commercial
 import Income from "../../../../../actions/income/income.manager";
 import NavigationSection from "../../../../../actions/base/navigationSection.actions";
 import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
+import { Tag } from "../../../../../utils/tags.utils";
 
-
-describe("Dropdown 'Filters'- 'Sort by' section", () => {
+describe("Dropdown 'Filters'- 'Sort by' section", 
+    { tags:[ Tag.income, Tag.commercial, Tag.rent_comps ] }, () => {
 
     before("Login, create report", () => {
         createReport(testData.reportCreationData);

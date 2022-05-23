@@ -6,13 +6,13 @@ import Income from "../../../../actions/income/income.manager";
 import { Tag } from "../../../../utils/tags.utils";
 
 describe("Comparable Min, Max, Avg values for Repairs & Maintenance Per SF are correctly calculated and displayed", 
-{ tags:[ Tag.income, Tag.snapshot_tests, Tag.expense_forecast ] }, () => {
+    { tags:[ Tag.income, Tag.snapshot_tests, Tag.expense_forecast ] }, () => {
 
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
     });
 
-    it("Test body", { tags: '@snapshot_tests' }, () => {
+    it("Test body", () => {
         cy.stepInfo("1. Go to Income > Comparable Expenses");
         NavigationSection.Actions.navigateToComparableExpenses();
 

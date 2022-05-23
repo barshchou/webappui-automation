@@ -2,8 +2,10 @@ import testData from "../../../../fixtures/not_full_reports/sales/find_comps/QA-
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Sales from "../../../../actions/sales/sales.manager";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { Tag } from "../../../../utils/tags.utils";
 
-describe("Selected Comparables table. Verify the functionality of Remove button", () => {
+describe("Selected Comparables table. Verify the functionality of Remove button", 
+    { tags:[ Tag.find_comps, Tag.sales ] }, () => {
 
     before("Login, create report", () => {
         createReport(testData.reportCreationData);

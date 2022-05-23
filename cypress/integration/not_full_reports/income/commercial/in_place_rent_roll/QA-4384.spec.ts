@@ -3,8 +3,10 @@ import NavigationSection from "../../../../../actions/base/navigationSection.act
 import Income from "../../../../../actions/income/income.manager";
 import Property from "../../../../../actions/property/property.manager";
 import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
+import { Tag } from "../../../../../utils/tags.utils";
 
-describe("Verify the Use column in the grid", () => {
+describe("Verify the Use column in the grid", 
+    { tags:[ Tag.income, Tag.commercial, Tag.in_place_rent_roll ] }, () => {
 
     const useRadios: BoweryReports.CommercialUnitGroupsValues[] = [ "retail", "office", "medical", "community", "undetermined" ];
     const useTexts = [ "Retail", "Office", "Medical Office", "Community Facility", "Undetermined" ];
@@ -20,12 +22,12 @@ describe("Verify the Use column in the grid", () => {
             NavigationSection.navigateToCommercialInPlaceRentRoll()
                 .verifyProgressBarNotExist();
             Income.Commercial.InPlaceRentRoll.chooseLeaseStatusByRowNumber(testData.leaseStatus)
-                .verifyUseCellTextByRowNumber(defaultUseValue);
+                .verifyUseCellByRow(defaultUseValue);
             NavigationSection.navigateToCommercialUnits();
             Property.CommercialUnits.clickCommercialUnitTabByIndex()
                 .clickRadioButtonByValueAndUnitIndex(groupName, useRadios[index]);
             NavigationSection.navigateToCommercialInPlaceRentRoll();
-            Income.Commercial.InPlaceRentRoll.verifyUseCellTextByRowNumber(useText);
+            Income.Commercial.InPlaceRentRoll.verifyUseCellByRow(useText);
             deleteReport(testData.reportCreationData.reportNumber);
         });
     });

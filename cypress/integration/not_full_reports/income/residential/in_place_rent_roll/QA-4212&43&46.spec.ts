@@ -2,8 +2,11 @@ import testData from "../../../../../fixtures/not_full_reports/income/residentia
 import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../../actions/base";
 import { Income, Property } from "../../../../../actions";
+import { Tag } from "../../../../../utils/tags.utils";
 
-describe("[QA-4212] [QA-4243] [QA-4246] In-Place Rent Roll table tests", () => {
+describe("[QA-4212] [QA-4243] [QA-4246] In-Place Rent Roll table tests", 
+    { tags:[ Tag.income, Tag.residential, Tag.in_place_rent_roll ] }, () => {
+
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
     });
@@ -15,7 +18,7 @@ describe("[QA-4212] [QA-4243] [QA-4246] In-Place Rent Roll table tests", () => {
 
         cy.stepInfo('1. [QA-4246] Navigate to Residential -> Verify the Annual Total row is displayed in the grid (not editable, default = 0.00$)');
         _NavigationSection.navigateToResInPlaceRentRoll();
-        Income._Residential.InPlaceRentRoll.verifyAnnuallyTotalForecastEqualValue();
+        Income._Residential.InPlaceRentRoll.verifyTotalAnnualRent();
 
         cy.stepInfo('2. [QA-4212] Verify the Do you know per unit square footage? section');
         Income._Residential.InPlaceRentRoll.checkUncheckPerUnitSquareFootage(testData.columns);
@@ -27,11 +30,11 @@ describe("[QA-4212] [QA-4243] [QA-4246] In-Place Rent Roll table tests", () => {
             Income._Residential.InPlaceRentRoll.enterMonthlyRentByRowNumber(unit.monthlyRent, index)
                 .enterSquareFootageByRow(unit.footage, index)
                 .enterLeaseStatusByRowNumber(unit.leaseStatus, index)
-                .verifyRentSFValue(index);
+                .verifyRentPSFValueByRow(false, index);
         });
 
         cy.stepInfo('4. [QA-4246] Verify the Annual Total row is calculated per formula = (Monthly Rent ($) sum - vacant units\' rent) * 12');
-        Income._Residential.InPlaceRentRoll.verifyAnnuallyTotalForecastEqualValue();
+        Income._Residential.InPlaceRentRoll.verifyTotalAnnualRent();
 
         deleteReport(testData.reportCreationData.reportNumber);
     });
