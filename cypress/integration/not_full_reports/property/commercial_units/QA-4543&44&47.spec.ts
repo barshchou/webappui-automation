@@ -23,7 +23,7 @@ describe("[QA-4543], [QA-4544], [QA-4547] Verify the buttons functionality on Pr
             Property._CommercialUnits.Page.formEditBtn(0).scrollIntoView().click();
 
             cy.stepInfo("3. Verify that the commentary form opens and buttons Cancel, Revert to Original and Save are displayed.");
-            Property._CommercialUnits.Page.commercialUnitSFDiscussionTextAreaOpened.should('exist');
+            Property._CommercialUnits.Page.commercialUnitSFDiscussionTextArea.should('have.attr', 'contenteditable');   
             Property._CommercialUnits.Page.formCancelButton(0).should('exist');
             Property._CommercialUnits.Page.formRevertToOriginalBtn(0).should('exist');
             Property._CommercialUnits.Page.formSaveBtn(0).should('exist');
