@@ -16,5 +16,6 @@ export enum Tag {
     value_conclusion = "@value_conclusion",
     check_export = "@check_export",
     report = "@report",
-    client ="@client"
+    client ="@client",
+    key_info = "@key_info"
 }
