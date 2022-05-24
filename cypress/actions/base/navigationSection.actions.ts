@@ -484,6 +484,12 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
             clickYesIfExist();
         return this;
     }
+    
+    openCommercialStabilizedRentRollInCommercial() {
+        this.clickCommercialStabRentRollButton()
+            .clickYesButton();
+        return this;
+    }
 }
 
 export default new NavigationSectionActions(navigationSectionPage);
