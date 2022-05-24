@@ -85,9 +85,9 @@ class NavigationSection extends BasePage {
 
     get profileOrganization() { return cy.get("[aria-label='Profile & Organization']"); }
 
-    get menuItemsProfileOrganization() { return cy.get("[role=menu] > li"); }
+    get menuItemsProfileOrganization() {return cy.get("[role=menu] > li");}
 
-    get commercialReimbursementSummaryButton() { return cy.get("#commercial-reimbursement-summary-v-2"); }
+    get comercialReimbursementButton() {return cy.get("#commercial-reimbursement-summary-v-2");}
 }
 
 export default new NavigationSection();

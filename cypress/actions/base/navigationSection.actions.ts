@@ -472,22 +472,22 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         return this;
     }
 
-    clickCommercialReimbursementSummaryButton(): NavigationSectionActions {
-        navigationSectionPage.commercialReimbursementSummaryButton.click();
+    openCommercialStabilizedRentRollInCommercial(): NavigationSectionActions {
+        this.clickCommercialStabRentRollButton()
+            .clickYesButton();
         return this;
     }
 
-    navigateToCommercialReimburcementSummary(): NavigationSectionActions {
-        this.clickIncomeApproachButton().
-            clickCommercialArrow().
-            clickCommercialReimbursementSummaryButton().
-            clickYesIfExist();
+    navigateCommercialToReimbursementSummary(): NavigationSectionActions {
+        this.clickIncomeApproachButton()
+            .clickCommercialArrow()
+            .clickCommercialReimbursementSummaryButton()
+            .clickYesIfExist();
         return this;
     }
-    
-    openCommercialStabilizedRentRollInCommercial() {
-        this.clickCommercialStabRentRollButton()
-            .clickYesButton();
+
+    clickCommercialReimbursementSummaryButton(): NavigationSectionActions {
+        navigationSectionPage.comercialReimbursementButton.click();
         return this;
     }
 }

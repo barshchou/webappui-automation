@@ -9,6 +9,7 @@ export default {
     InPlaceRentRoll: rentRollActions,
     StabilizedRentRoll: stabilizedRentRollActions,
     RentComps: commercialRentCompsActions,
+    ReimbursementSummary: reimbursementSummaryActions,
     CompGroups: compGroupsActions,
     RentReconciliation: rentReconciliationActions,
     ReimbursementSummary: reimbursementSummaryActions
