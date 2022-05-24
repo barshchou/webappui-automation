@@ -30,7 +30,7 @@ describe("[Income > Potential Gross Income]Support combined utility expense reim
         Income._ExpenseForecastActions.enterAppraisersForecast(testData.forecastItemBasis, testData.utilitiesExpenseForecast);
 
         cy.stepInfo("4. Navigate to Income -> Commercial -> Reimbursement Summary, create new expense reimburcement for Utilities and verify that all needed info is filled");
-        _NavigationSection.navigateToCommercialReimburcementSummary();
+        _NavigationSection.navigateToCommercialReimbursementSummary();
 
 
         cy.stepInfo("5. Navigate to Income -> Potential Gross Income and verify Combined Utilities expense reimburcement info");

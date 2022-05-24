@@ -478,7 +478,7 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         return this;
     }
 
-    navigateCommercialToReimbursementSummary(): NavigationSectionActions {
+    navigateToCommercialReimbursementSummary(): NavigationSectionActions {
         this.clickIncomeApproachButton()
             .clickCommercialArrow()
             .clickCommercialReimbursementSummaryButton()
