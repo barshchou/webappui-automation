@@ -6,7 +6,7 @@ import Property from "../../../../actions/property/property.manager";
 import Income from "../../../../actions/income/income.manager";
 import { Tag } from "../../../../utils/tags.utils";
 
-describe("Historical expense Fuel Per SF is correctly calculated and displayed", 
+describe("Historical expense Repairs & Maintenance Per SF is correctly calculated and displayed", 
     { tags: [ Tag.income, Tag.expense_forecast ] }, () => {
         
     before("Login, create report", () => {
