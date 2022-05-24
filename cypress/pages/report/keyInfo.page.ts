@@ -45,13 +45,11 @@ class KeyInfoPage extends BasePage{
 
     get wrapperDefinitionOfMarketValue() {return cy.get("*[data-qa='definition-of-market-value-tile']");}
     
-    get textBoxDefinitionOfMarketValue() {return cy.xpath("//*[contains(@data-qa, 'definition-of-market-value-tile')]//following::*[@data-slate-editor][1]");}
+    textBoxDefinitionOfMarketValue(index = 1) {return cy.xpath(`//*[contains(@data-qa, 'definition-of-market-value-tile')]//following::*[@data-slate-editor][${index}]`);}
 
     get tooltipDefinitionOfMarketValue() {return cy.get("*[role='tooltip']");}
 
-    get test() {return cy.xpath("//*[@id='mui-184']");}
-
-    get iconDefinitionOfMarketValue() {return cy.xpath("//*[contains(@data-qa, 'definition-of-market-value-tile')]//following::*[@data-icon='info-circle'][1]");}
+    iconDefinitionOfMarketValue(index = 1) {return cy.xpath(`//*[contains(@data-qa, 'definition-of-market-value-tile')]//following::*[@data-icon='info-circle'][${index}]`);}
 
     get inputToCheckMyDateIsDifferent() {return cy.get("*[data-qa='isDifferentDateOfValuation']");}
 }
