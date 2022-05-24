@@ -6,24 +6,29 @@ const _numberOfCommercialUnits = 3;
 const _numberOfResidentialUnits = 5;
 const _unitSf = [ 100000, 120000, 145000 ];
 const _rentSf = [ 499, 1256.12, 777.99 ];
+const _expenseType = Enums.PRO_FORMA_TYPES.realEstateTaxes;
+const _reimbursmentType = "Dollar Amount";
+const _knownInformation = "Monthly";
+const _monthlyReimbursement = [ 20, 30, 46.07 ];
 
-const total = () => {
+const _annualReimbursement = () => {
+    let annual = [];
+    _monthlyReimbursement.forEach(element => {
+        annual.push(element * 12);
+    });
+    return annual;
+};
+
+const _annualReimbursementTotal = () => {
     let total = 0;
-    for (let i = 0; i < _unitSf.length; i++){
-        total += _unitSf[i] * _rentSf[i];
-    }
+    _annualReimbursement().forEach(reimbursement => {
+        total = total + reimbursement;
+    });
     return total;
 };
 
-const totalRentPerSf = () => {
-
-    return total() / _grossBuildingArea;
-};
-
-const totalRentPerUnit = () => {
-
-    return total() / _numberOfResidentialUnits;
-};
+const _reimbursementPerSf = _annualReimbursementTotal() / _grossBuildingArea;
+const _reimbursementPerUnit = _annualReimbursementTotal() / _numberOfResidentialUnits;
 
 const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("4501-03", {
         incomeValue: Enums.INCOME_TYPE.BOTH
@@ -39,6 +44,11 @@ export default {
     listOfUnitsSF: _unitSf,
     leaseStatuses: _leaseStatuses,
     rentsPsf: _rentSf,
-    perSfCommercialIncome: totalRentPerSf(),
-    perUnitCommercialIncome: totalRentPerUnit()
+    expenseType: _expenseType,
+    reimbursmentType: _reimbursmentType,
+    knownInformation: _knownInformation,
+    monthlyReimbursement: _monthlyReimbursement,
+    annualReimbursement: _annualReimbursementTotal(),
+    reimbursmentPerSf: _reimbursementPerSf,
+    reimbursmentPerUnit: _reimbursementPerUnit,
 };
