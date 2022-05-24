@@ -1,6 +1,6 @@
 import BasePage from "../../base/base.page";
 
-class CommercialReimbursementSummary extends BasePage {
+class CommercialReimbursementSummaryPage extends BasePage {
 
     get addReimbursementButton() {return cy.get("[data-qa='create-reimbursement_btn']");}
 
@@ -22,4 +22,4 @@ class CommercialReimbursementSummary extends BasePage {
 
 }
 
-export default new CommercialReimbursementSummary();
+export default new CommercialReimbursementSummaryPage();
