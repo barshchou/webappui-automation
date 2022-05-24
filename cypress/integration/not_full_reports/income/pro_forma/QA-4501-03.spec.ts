@@ -41,27 +41,39 @@ describe("Potential Real Estate Tax Reimbursement",
             testData.expenseType, expenseCellNames.realEstateTaxes, reimbursementTypes.dollarAmount, testData.knownInformation)
             .fillReimbursements(testData.monthlyReimbursement);
 
-        _NavigationSection.navigateToProForma()
-            .verifyProgressBarNotExist();
-
         cy.saveLocalStorage();
     });
     
     beforeEach("Restore local storeage", () => {
         cy.restoreLocalStorage();
+        _NavigationSection.navigateToProForma()
+            .verifyProgressBarNotExist();
     });
 
     it(`[QA-4501]: `, () => {
-        cy.stepInfo(`5. Verify that Pro Forma table contains Taxes Reimbursement Total value`);
-        const valueToValidate = `$${numberWithCommas(Math.round(testData.annualReimbursement))}`;
+        cy.stepInfo(`5 Verify that Pro Forma table contains Taxes Reimbursement Total value`);
         Income._ProFormaActions.verifyCategoryTotal(
-            valueToValidate, 
+            `$${numberWithCommas(Math.round(testData.annualReimbursement))}`, 
             proFormaTypes.potentialRealEstateTaxesReimbursement);
 
-        cy.stepInfo(`5.1. Verify that Total is taken from Income → Potential Gross Income 
+        cy.stepInfo(`5.1 Verify that Total is taken from Income → Potential Gross Income 
                     → table → Potential Real Estate Taxes Reimbursement`);
         _NavigationSection.navigateToPotentialGrossIncome();
         Income._PotentialGrossIncome.verifyPotentialRealEstateTaxesReimbursement(`$${numberWithCommas(testData.annualReimbursement.toFixed(2))}`);
+    });
+
+    it(`[QA-4502]: `, () => {
+        cy.stepInfo(`5. Verify that Pro Forma table contains Taxes Reimbursement PSF value`);
+        Income._ProFormaActions.verifyCategoryPSFTotal(
+            `$${numberWithCommas(testData.reimbursmentPerSf.toFixed(2))}`, 
+            proFormaTypes.potentialRealEstateTaxesReimbursement);
+    });
+
+    it(`[QA-4503]: `, () => {
+        cy.stepInfo(`5. Verify that Pro Forma table contains Taxes Reimbursement Per Unit value`);
+        Income._ProFormaActions.verifyCategoryPerUnitTotal(
+            `$${numberWithCommas(Math.round(testData.reimbursmentPerUnit))}`, 
+            proFormaTypes.potentialRealEstateTaxesReimbursement);
 
         deleteReport(testData.reportCreationData.reportNumber);
     });
