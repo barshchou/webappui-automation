@@ -1,16 +1,16 @@
 import Enums from "../../../../enums/enums";
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 
-export const reportCreationFixture = (conclusionValue: BoweryReports.ConclusionValue, reportNumber: string) => {
+export const reportCreationFixture = () => {
     return ReportDataCreator.setAddress()
-        .setReportNumber(`4718-19${reportNumber}`)
+        .setReportNumber("4719")
         .setTemplateValue(Enums.TEMPLATE_TYPE.NOT_FREDDIE_MAC)
         .setIncomeValue(Enums.INCOME_TYPE.BOTH)
-        .setConclusionValue(conclusionValue).build();
+        .setConclusionValue(Enums.VALUE_CONCLUSION_TYPE.AS_STABILIZED).build();
 };
 
 export default {
-    typesReport: [ "AS_IS", "AS_STABILIZED" ] as Array<BoweryReports.ConclusionValue>,
+    reportCreationData: reportCreationFixture(),
     chips: [
         {
             suggestionName: 'Block',
@@ -57,8 +57,8 @@ export default {
         {
             suggestionName: 'Property Type',
             typeSuggestValue: 'Propert',
-            verifySuggest: 'mixed-use' || 'multifamily',
-            verifyExport: 'multifamily'
+            verifySuggest: 'mixed-use',
+            verifyExport: 'mixed-use'
         }, 
         {
             suggestionName: 'Residential Unit Count',
