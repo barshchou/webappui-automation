@@ -30,7 +30,7 @@ declare global {
          * Custom command to select DOM element by data-cy attribute.
          * @example cy.dataCy('greeting')
          */
-        loginByApi(url: string): Chainable<Element>
+        loginByApi(url: string): Cypress.Chainable
         /**
          * 
          * @param value 
@@ -46,6 +46,13 @@ declare global {
          * @param message 
          */
         stepInfo(message:string): void
+
+        /**
+         * Create report through API
+         * @param reportCreationData Data of a report to pass to testData
+         * @param payload Function, that returns payload object
+         */
+        createApiReport(reportCreationData: BoweryAutomation.ReportCreationData, payload: any): void
       }
     }
   }
