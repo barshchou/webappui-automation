@@ -6,5 +6,6 @@ describe("Check if user can login", { tags: [ Tag.smoke ] }, () => {
 
     it("Test body", () => {
         cy.loginByUI(getEnvUrl());
+        HomepageActions.Page.createReportButton.should("exist").and("be.visible");
     });
 });
