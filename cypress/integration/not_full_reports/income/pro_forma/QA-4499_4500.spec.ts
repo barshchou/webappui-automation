@@ -41,15 +41,15 @@ describe("Potential [USE(Property -> Commercial Units] Income -> PSF / Per Unit"
 
     it(`[QA-4500]: 4. Go to Income → Pro Forma page.Verify that value in the
         Potential Commercial Income → Per Unit is calculated by the formula: Total / # of ResidentialUnits`, () => {
-        Income._ProFormaActions.verifyCategoryPSFTotal(
+        Income._ProFormaActions.verifyCategoryPerUnitTotal(
             `$${numberWithCommas(testData.perUnitCommercialIncome)}`, 
             proFormaTypes.potentialUnderterminedCommercialIncome);
     });
 
     it(`[QA-4499]: 4. Go to Income → Pro Forma page.Verify that value in the 
         Potential Commercial Income → PSF is calculated by the formula: Total / GBA`, () => {
-        Income._ProFormaActions.verifyCategoryPerUnitTotal(
-            `$${numberWithCommas(testData.perSfCommercialIncome)}`, 
+        Income._ProFormaActions.verifyCategoryPSFTotal(
+            `$${numberWithCommas(testData.perSfCommercialIncome.toFixed(2))}`,
             proFormaTypes.potentialUnderterminedCommercialIncome);
     });
 

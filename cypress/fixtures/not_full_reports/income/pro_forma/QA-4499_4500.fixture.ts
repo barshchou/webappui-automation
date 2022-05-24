@@ -15,15 +15,8 @@ const total = () => {
     return total;
 };
 
-const totalRentPerSf = () => {
-
-    return total() / _grossBuildingArea;
-};
-
-const totalRentPerUnit = () => {
-
-    return total() / _numberOfResidentialUnits;
-};
+const totalRentPerSf = total() / _grossBuildingArea;
+const totalRentPerUnit = total() / _numberOfResidentialUnits;
 
 const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("4499_4500", {
         incomeValue: Enums.INCOME_TYPE.BOTH
@@ -39,6 +32,6 @@ export default {
     listOfUnitsSF: _unitSf,
     leaseStatuses: _leaseStatuses,
     rentsPsf: _rentSf,
-    perSfCommercialIncome: totalRentPerSf(),
-    perUnitCommercialIncome: totalRentPerUnit()
+    perSfCommercialIncome: totalRentPerSf,
+    perUnitCommercialIncome: totalRentPerUnit
 };
