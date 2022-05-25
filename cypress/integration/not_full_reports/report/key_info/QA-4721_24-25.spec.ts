@@ -5,26 +5,30 @@ import { createReport, deleteReport } from "../../../../actions/base/baseTest.ac
 import testData from '../../../../fixtures/not_full_reports/report/key_info/QA-4721_24-25.fixture';
 
 // Remove skip after fix bug
-describe.skip(`Verify the Save and Save & Continue button functionality on the Report > Key Info page:`,
+describe(`Verify the Save and Save & Continue button functionality on the Report > Key Info page:`,
     { tags:[ Tag.report, Tag.key_info ] }, () => {
     beforeEach("Login, create report", () => {
         createReport(testData.reportCreationData);
     });
 
-    it("[QA-4721]", () => {
+    it.only("[QA-4721]", () => {
         cy.stepInfo("1. Proceed to the Report > Key Info page");
         _NavigationSection.navigateToReportInformation()
             .clickYesButton();
 
         cy.stepInfo("2. Fill in the editable fields with values and click on the Save button then reload page");
-        Report._KeyInfo.enterPropertyRightsAppraisedComment(testData.enterValue, true, false, false)
+        Report._KeyInfo.enterPropertyRightsAppraisedComment(testData.enterValue, true, false, false);
         Report._KeyInfo.clickNarrativeSuggestions(testData.listValue);
         Report._KeyInfo.Page.textBoxPropertyRightsAppraised.should("include.text", testData.verifyTexValue);
         Report._KeyInfo.enterDefinitionMarketValue(testData.enterValue, true, false, false);
         Report._KeyInfo.clickNarrativeSuggestions(testData.listValue, 1);
         Report._KeyInfo.Page.textBoxDefinitionOfMarketValue.should("include.text", testData.verifyTexValue);
-        Report._KeyInfo.clickSaveContinueButton();
+        // cy.wait(500);
+        Report._KeyInfo.clickSaveButton();
+        cy.intercept("PATCH", "/report/**").as("save")
+        cy.wait("@save")
         cy.reload();
+       
 
         cy.stepInfo("3. Verify that the changes are saved");
         Report._KeyInfo.Page.textBoxPropertyRightsAppraised.should("include.text", testData.verifyTexValue);
