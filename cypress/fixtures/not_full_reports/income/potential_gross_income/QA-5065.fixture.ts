@@ -16,5 +16,9 @@ export default {
     utiliesExpenseOption: "combinedAll" as BoweryReports.UtilityExpenses,
     forecastItemBasis: "utilities" as BoweryReports.ForecastItemBasis,
     utilitiesExpenseForecast: 25,
+    expenseType: Enums.PRO_FORMA_TYPES.utilities,
+    expenseCellName: Enums.EXPENSE_CELL_NAMES.utilities,
+    reimbursementType: "% of Appraiser Forecast",
+    knownInformation: "Annually",
     vcLossPercentage: 10
 };

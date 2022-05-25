@@ -15,9 +15,9 @@ describe("[Income > Potential Gross Income]Support combined utility expense reim
         cy.stepInfo("1. Navigate to Property -> Summary and Property -> Commercial Units and verify that all needed info about commercial units is filled");
         
         _NavigationSection.navigateToPropertySummary();
-        Property._Summary.
-            enterGrossBuildingArea(testData.buildingDescription.grossArea).
-            enterNumberOfCommercialUnits(testData.buildingDescription.numberOfUnits);
+        Property._Summary
+            .enterGrossBuildingArea(testData.buildingDescription.grossArea)
+            .enterNumberOfCommercialUnits(testData.buildingDescription.numberOfUnits);
         _NavigationSection.navigateToCommercialUnits();
         Property._CommercialUnits.enterUnitSFByUnitIndex(testData.squareFeet);
 
@@ -25,15 +25,16 @@ describe("[Income > Potential Gross Income]Support combined utility expense reim
         _NavigationSection.navigateToExpenseHistory();
         Income._ExpenseHistory.checkUtilitiesExpensesOption(testData.utiliesExpenseOption);
 
-        cy.stepInfo("3. Navigate to Income -> Expence Forecast and verify value for Appraiser's Forecast field for Utilities section");
-        _NavigationSection.navigateToExpenseForecast();
-        Income._ExpenseForecastActions.enterAppraisersForecast(testData.forecastItemBasis, testData.utilitiesExpenseForecast);
-
-        cy.stepInfo("4. Navigate to Income -> Commercial -> Reimbursement Summary, create new expense reimburcement for Utilities and verify that all needed info is filled");
+        cy.stepInfo("3. Navigate to Income -> Commercial -> Reimbursement Summary, create new expense reimburcement for Utilities and verify that all needed info is filled");
         _NavigationSection.navigateToCommercialReimbursementSummary();
+        Income._CommercialManager.ReimbursementSummary
+            .addNewCommercialReimbursement(
+                testData.expenseType,
+                testData.expenseCellName,
+                testData.reimbursementType,
+                testData.knownInformation);
 
-
-        cy.stepInfo("5. Navigate to Income -> Potential Gross Income and verify Combined Utilities expense reimburcement info");
+        cy.stepInfo("4. Navigate to Income -> Potential Gross Income and verify Combined Utilities expense reimburcement info");
         
         _NavigationSection.navigateToPotentialGrossIncome();
             

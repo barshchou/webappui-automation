@@ -13,6 +13,7 @@ const proFormaType = {
     electricity: "Electricity",
     fuel: "Fuel",
     waterAndSewer: "Water & Sewer",
+    utilities: "​Utilities",
     repairAndMaintenance: "Repairs & Maintenance",
     payrollBenefits: "Payroll & Benefits",
     generalAndAdministrative: "General & Administrative",
