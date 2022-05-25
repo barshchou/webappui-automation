@@ -14,7 +14,7 @@ const expenseForecastElectricityFixture = (): BoweryReports.ForecastItem => {
 };
 
 export default {
-    reportCreationData: ReportDataCreator.getReportData("4914"),
+    reportCreationData: ReportDataCreator.getReportData("4913_14"),
     buildingDescription: _buildingDescription,
     expenseForecastWaterAndSewer: expenseForecastElectricityFixture(),
     grossBuildingArea: _grossBuildingArea,
