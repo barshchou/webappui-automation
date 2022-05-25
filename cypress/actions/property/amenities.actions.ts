@@ -1,16 +1,12 @@
-import BaseActions from "../base/base.actions";
 import amenitiesPage from "../../pages/property/amenities.page";
 import { cutDecimalPartToNumberOfDigits, isDecimal } from "../../../utils/numbers.utils";
+import BaseActionsExt from "../base/base.actions.ext";
 
-class AmenitiesActions extends BaseActions{
+class AmenitiesActions extends BaseActionsExt<typeof amenitiesPage>{
 
-    /**
-     * @param {number} numberOfPlaces
-     * @returns {AmenitiesActions}
-     */
-    addParkingPlaces(numberOfPlaces) {
+    addParkingPlaces(numberOfPlaces: number): AmenitiesActions {
         amenitiesPage.hasParkingCheckbox.check().should("have.value", "true");
-        amenitiesPage.parkingSpacesNumberField.clear().type(numberOfPlaces);
+        amenitiesPage.parkingSpacesNumberField.clear().type(numberOfPlaces.toString());
         if(isDecimal(numberOfPlaces)) {
             numberOfPlaces = cutDecimalPartToNumberOfDigits(numberOfPlaces, 0);
         }
@@ -21,15 +17,27 @@ class AmenitiesActions extends BaseActions{
         return this;
     }
 
-    checkHasNoUnitAmenities() {
+    checkHasNoUnitAmenities(): AmenitiesActions {
         amenitiesPage.hasNoUnitAmenitiesCheckbox.check().should("have.value", "true");
         return this;
     }
 
-    checkLaundryRoomCheckbox() {
+    checkLaundryRoomCheckbox(): AmenitiesActions {
         amenitiesPage.laundryCheckbox.should("have.value", "false").check().should("have.value", "true");
+        return this;
+    }
+
+    checkStorageCheckbox(): AmenitiesActions {
+        amenitiesPage.storageCheckbox.should("have.value", "false").check().should("have.value", "true");
+        return this;
+    }
+
+    addStorageUnits(units: number): AmenitiesActions {
+        this.checkStorageCheckbox();
+        amenitiesPage.storageUnitsTextField.clear().type(units.toString());
+        amenitiesPage.storageUnitsTextField.should("have.value", units);
         return this;
     }
 }
 
-export default new AmenitiesActions();
+export default new AmenitiesActions(amenitiesPage);

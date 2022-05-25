@@ -10,6 +10,10 @@ class AmenitiesPage extends BasePage{
     get hasNoUnitAmenitiesCheckbox() {return cy.get("*[data-qa='hasNoUnitAmenities'] input");}
 
     get laundryCheckbox() {return cy.get("[data-qa^='building.hasLaundryRoom'] input");}
+
+    get storageCheckbox() {return cy.get("[data-qa^='building.hasStorageUnits'] input");}
+
+    get storageUnitsTextField() {return cy.get("[name='building.storageUnitCount']");}
 }
 
 export default new AmenitiesPage();
