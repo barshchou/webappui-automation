@@ -2,11 +2,10 @@ import Enums from "../../../../enums/enums";
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 
 export const reportCreationFixture = (conclusionValue: BoweryReports.ConclusionValue, reportNumber: string) => {
-    return ReportDataCreator.setAddress()
-        .setReportNumber(`4426${reportNumber}`)
-        .setTemplateValue(Enums.TEMPLATE_TYPE.NOT_FREDDIE_MAC)
-        .setIncomeValue(Enums.INCOME_TYPE.BOTH)
-        .setConclusionValue(conclusionValue).build();
+    return ReportDataCreator.getReportData(`4426${reportNumber}`, { 
+        templateValue: Enums.TEMPLATE_TYPE.NOT_FREDDIE_MAC, 
+        incomeValue: Enums.INCOME_TYPE.BOTH, 
+        conclusionValue: conclusionValue });
 };
 
 type reportConclusionAndTextValues = {

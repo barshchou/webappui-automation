@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-namespace */
 /**
  * ernst:
@@ -27,7 +29,7 @@ namespace BoweryReports {
     export type LeaseStatus = "Occupied" | "Vacant" | "Employee"
     export type ImageType = "Interior Images" | "Exterior Images";
     export type InputType = "drag-n-drop" | "input";
-    export type UnitSF = "unit" | "sf"
+    export type UnitSF = "unit" | "sf" | "room"
     export type PerUnitPerSF = "Per Unit" | "Per SF"
     export type ForecastItemBasis = "insurance" | "electricity"
     | "fuel" | "waterAndSewer" | "repairsAndMaintenance" | "payrollAndBenefits" | "generalAndAdministrative" 
@@ -49,11 +51,10 @@ namespace BoweryReports {
     export type CommercialUnitsFacadeValues = "plate glass" | "other";
     export type CommercialUnitsStateValues = "finished" | "unfinished" | "vanilla box" | "other";
     export type CommercialUnitsCeilingHeightValues = "low" | "normal" | "high" | "other"; 
-    export type CommercialUnitsFloorValues = "belowGrade" | "groundFloor" | "upperFloor" | "other";
+    export type CommercialUnitsLocationValues = "corner" | "mid-block" | "through-lot";
     export type CommercialUnitsStreetTypeValues = "side street" | "avenue";
-    export type CommercialUnitsLocationValues = "corner" | "mid-block" | "through-lot" ;
-    export type CommercialUnitsFrontageValues = "small" | "medium" | "large" | "other"; 
-
+    export type CommercialUnitsFloorValues = "belowGrade" | "groundFloor" | "upperFloor" | "other";
+    export type CommercialUnitsFrontageValues = "small" | "medium"| "large" | "other";
     export namespace CommercialUnits {
         /*
         More Unit Groups Values will be added after other values types added
@@ -83,8 +84,9 @@ namespace BoweryReports {
         projection?: number 
     }
     export type Comparable = {address: string, location?: string, period?: string, squareFeet?: number, resUnits?: number,
-        insurance?: number, electricity?: number, repairsAndMaintenance?: number, payrollAndBenefits?: number,
-        generalAndAdministrative?: number, management?: number, toe?: string};
+        insurance?: number, electricity?: number, fuel?: number, waterAndSewer?: number, repairsAndMaintenance?: number, 
+        payrollAndBenefits?: number, generalAndAdministrative?: number, legalAndProfessionalFees?: number, miscellaneous?: number, 
+        management?: number, replacementReserves?: number, toe?: string};
 
     export type BuildingDescription = {grossArea: number, numberOfUnits: number}
 
@@ -94,6 +96,24 @@ namespace BoweryReports {
         monthlyRent: number,
         leaseStatus?: BoweryReports.LeaseStatus
     }
+
+    export type RentCompField = {
+        name: string,
+        value: string,
+        type: "input" | "dropdown"
+    };
+
+    export type UnitsOfMeasure = "annually" | "monthly" | "per square foot per year" | "per square foot per month";
+}
+
+namespace Utils {
+    type _GraphQLRequest = {
+        operationName: string,
+        query: string,
+        variables: object | any
+    }
+    
+    export type GraphQLRequest = Partial<_GraphQLRequest>;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars

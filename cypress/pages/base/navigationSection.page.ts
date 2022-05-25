@@ -27,6 +27,8 @@ class NavigationSection extends BasePage {
 
     get summaryButton() {return cy.get("#property-summary");}
 
+    get marketButton() {return cy.get("#property-market");}
+
     get clientButton() {return cy.get("#client");}
 
     get siteDescription() {return cy.get("#site-description");}
@@ -84,6 +86,8 @@ class NavigationSection extends BasePage {
     get profileOrganization() {return cy.get("[aria-label='Profile & Organization']");}
 
     get menuItemsProfileOrganization() {return cy.get("[role=menu] > li");}
+
+    get comercialReimbursementButton() {return cy.get("#commercial-reimbursement-summary-v-2");}
 }
 
 export default new NavigationSection();

@@ -41,7 +41,6 @@ describe("Comparable Min, Max, Avg values for Repairs & Maintenance Per SF are c
         Income.ExpenseForecast.Actions.matchElementSnapshot(
             Income.ExpenseForecast.Page.repairsAndMaintenanceCard, testData.repairsAndMaintenanceCardSnapshotName, { padding: [ 10, 100 ] });
 
-        cy.stepInfo("5. Delete report");
         deleteReport(testData.reportCreationData.reportNumber);
     });
 });

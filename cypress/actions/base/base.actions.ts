@@ -93,6 +93,15 @@ export default class BaseActions {
         } 
     }
 
+    /**
+     * Emulates paste of text by invoking function `val` of JQuery element.
+     * Does not related to functionality of Clipboard API of browser.
+     */
+    emulateCopyPaste(elem: Cypress.Chainable<JQuery<HTMLElement>>, text: string): this {
+        elem.click().invoke("val", text);
+        return this;
+    }
+
     pause(){
         cy.pause();
         return this;

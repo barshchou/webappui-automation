@@ -25,7 +25,7 @@ class KeyInfoPage extends BasePage{
 
     get uploadFileInput() {return cy.get("*[data-qa='dropzone-container'] input");}
 
-    get uploadButton() {return cy.get("*[data-qa='upload-btn']");}
+    get uploadButton() {return cy.xpath("//*[contains(text(), 'Drag and drop or browse files below')]//following::button[1]");}
 
     get insertButton() {return cy.get("*[data-qa='insert-btn']");}
 
@@ -39,25 +39,19 @@ class KeyInfoPage extends BasePage{
         return cy.xpath('//*[@data-qa="letterOfTransmittalPurpose-generated-comment-wrapper"]/preceding-sibling::div//p');
     }
 
-    get inputToCheckMyDateIsDifferent() {return cy.get("*[data-qa='isDifferentDateOfValuation']");}
-    
-    get textBoxDefinitionOfMarketValue() {return cy.xpath("//*[contains(@data-qa, 'definition-of-market-value-tile')]//following::*[@data-slate-editor][1]");}
-
-    get tooltipDefinitionOfMarketValue() {return cy.get("*[role='tooltip']");}
-
-    get test() {return cy.xpath("//*[@id='mui-184']");}
-
-    get iconDefinitionOfMarketValue() {return cy.xpath("//*[contains(@data-qa, 'definition-of-market-value-tile')]//following::*[@data-icon='info-circle'][1]");}
-
     get wrapperLetterOfTransmittalPurpose() {return cy.get("*[data-qa='letterOfTransmittalPurpose-generated-comment-wrapper']");}
 
     get jobNumberTextInput() {return cy.get("*[data-qa='job-number-text-input']");}
 
-    get addPdfDocumentButton() {return cy.get("*[data-qa='add-pdf-btn']");}
-
-    get addWordDocumentButton() {return cy.get("*[data-qa='add-word-btn']");}
-
     get wrapperDefinitionOfMarketValue() {return cy.get("*[data-qa='definition-of-market-value-tile']");}
+    
+    textBoxDefinitionOfMarketValue(index = 1) {return cy.xpath(`//*[contains(@data-qa, 'definition-of-market-value-tile')]//following::*[@data-slate-editor][${index}]`);}
+
+    get tooltipDefinitionOfMarketValue() {return cy.get("*[role='tooltip']");}
+
+    iconDefinitionOfMarketValue(index = 1) {return cy.xpath(`//*[contains(@data-qa, 'definition-of-market-value-tile')]//following::*[@data-icon='info-circle'][${index}]`);}
+
+    get inputToCheckMyDateIsDifferent() {return cy.get("*[data-qa='isDifferentDateOfValuation']");}
 }
 
 export default new KeyInfoPage();
