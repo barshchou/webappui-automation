@@ -1,9 +1,7 @@
-import { Tag } from './../../../../utils/tags.utils';
 import testData from "../../../../fixtures/not_full_reports/report/key_info/QA-4104.fixture";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { Report, ReviewExport } from "../../../../actions";
-
 
 describe("[QA-4104] Verify the Market Value generated commentary", 
     { tags: [ "@report", "@key_info", "@check_export" ] }, () => {

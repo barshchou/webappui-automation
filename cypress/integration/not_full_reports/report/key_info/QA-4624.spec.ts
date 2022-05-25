@@ -1,9 +1,7 @@
-import { Tag } from './../../../../utils/tags.utils';
 import testData from "../../../../fixtures/not_full_reports/report/key_info/QA-4624.fixture";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { Report } from "../../../../actions";
-
 
 describe("[QA-4624] The Letter of Engagement prefill from Dropbox to LoE filed in WebApp - Multiple LoEs PDF files",
     { tags: [ "@report", "@key_info", "@salesforce" ] }, () => {

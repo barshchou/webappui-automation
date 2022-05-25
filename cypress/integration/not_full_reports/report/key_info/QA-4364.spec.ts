@@ -1,9 +1,7 @@
-import { Tag } from './../../../../utils/tags.utils';
 import testData from "../../../../fixtures/not_full_reports/report/key_info/QA-4364.fixture";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { Report } from "../../../../actions";
-
 
 describe("[QA-4364] Prefill Inspection Date from Salesforce - deletion of the Date of Valuation",
     { tags: [ "@report", "@key_info", "@salesforce" ] }, () => {

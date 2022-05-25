@@ -1,9 +1,7 @@
-import { Tag } from './../../../../utils/tags.utils';
 import testData from "../../../../fixtures/not_full_reports/report/key_info/QA-4622.fixture";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { Report } from "../../../../actions";
-
 
 describe("[QA-4622] Verify the Letter of Engagement is NOT pre-filled in the Key Info > LoE field on WebApp if the folder in Dropbox is empty",
     { tags: [ "@report", "@key_info", "@salesforce" ] }, () => {

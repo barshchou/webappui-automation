@@ -1,6 +1,5 @@
 import testData from "../../../../fixtures/not_full_reports/report/key_info/QA-4426.fixture";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
-import { Tag } from "../../../../utils/tags.utils";
 import { _NavigationSection } from "../../../../actions/base";
 import { reportCreationFixture } from "../../../../fixtures/not_full_reports/report/key_info/QA-4426.fixture";
 import { Report, ReviewExport } from '../../../../actions';
