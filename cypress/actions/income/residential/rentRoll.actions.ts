@@ -6,9 +6,9 @@ import {
     numberWithCommas
 } from "../../../../utils/numbers.utils";
 import { isProdEnv } from "../../../../utils/env.utils";
-import BaseActionsExt from "../../base/base.actions.ext";
+import ResidentialRentRollSharedActions from "../../shared_components/residentialRentRoll.shared.actions";
 
-class InPlaceRentRollActions extends BaseActionsExt<typeof rentRollPage> {
+class InPlaceRentRollActions extends ResidentialRentRollSharedActions<typeof rentRollPage> {
 
     verifyViaCSVExist(): InPlaceRentRollActions {
         rentRollPage.importViaCSVHeader.scrollIntoView().should("be.visible");
@@ -29,15 +29,6 @@ class InPlaceRentRollActions extends BaseActionsExt<typeof rentRollPage> {
 
     verifyNumberOfResidentialUnits(unitsNumber: number | string): InPlaceRentRollActions {
         rentRollPage.numberOfResidentialUnitsField.should("be.disabled").should("have.value", unitsNumber);
-        return this;
-    }
-
-    verifyNumberOfIsInspectedRows(unitsNumber: string | number): InPlaceRentRollActions {
-        if (unitsNumber !== 0) {
-            rentRollPage.isInspectedColumnCells.first().scrollIntoView({ duration: 2000 });
-            rentRollPage.isInspectedColumnCells.last().scrollIntoView({ duration: 2000 });
-        }
-        rentRollPage.isInspectedColumnCells.should("have.length", unitsNumber);
         return this;
     }
 
@@ -166,36 +157,36 @@ class InPlaceRentRollActions extends BaseActionsExt<typeof rentRollPage> {
         return this;
     }
 
-    verifyRentTypeCellByRowNumber(rentTypeToBe: string, rowNumber = 0): this {
-        rentRollPage.rentTypeCells.eq(rowNumber).should("contain.text", rentTypeToBe);
+    checkIsInspectedByRowNumber(number: number): InPlaceRentRollActions {
+        rentRollPage.isInspectedInputs.eq(number).check();
         return this;
     }
 
-    checkIsInspectedByRowNumber(number: string | number): InPlaceRentRollActions {
-        rentRollPage.getIsInspectedCheckboxByRowNumber(number).check();
-        return this;
-    }
-
-    checkListIsInspectedByRowNumbers(numbers: Array<string | number>): InPlaceRentRollActions {
+    checkListIsInspectedByRowNumbers(numbers: Array<number>): InPlaceRentRollActions {
         numbers.forEach(number => {
             this.checkIsInspectedByRowNumber(number);
         });
         return this;
     }
 
-    enterUnitNumbersByOrderToAll(numberOfUnits: string | number): InPlaceRentRollActions {
+    enterUnitNumbersByOrderToAll(numberOfUnits: number): InPlaceRentRollActions {
         for (let i = 0; i < numberOfUnits; i++) {
-            rentRollPage.unitNumberCells.eq(i).dblclick();
-            this.enterTextToTextarea(`${i + 1}`);
-            rentRollPage.unitNumberCells.eq(i).should("have.text", `${i + 1}`);
+            this.enterUnitNumberByRow(i + 1, i);
         }
         return this;
     }
 
-    enterRoomsNumberByRowNumber(value: string | number, number: number): InPlaceRentRollActions {
+    enterUnitNumberByRow(numberToEnter: number, rowNumber = 0): this {
+        rentRollPage.unitNumberCells.eq(rowNumber).dblclick();
+        this.enterTextToTextarea(`${numberToEnter}`)
+            .verifyUnitNumberByRow(numberToEnter, rowNumber);
+        return this;
+    }
+
+    enterRoomsNumberByRowNumber(value: number, number: number): InPlaceRentRollActions {
         rentRollPage.roomsCells.eq(number).dblclick();
-        this.enterTextToTextarea(value.toString());
-        rentRollPage.roomsCells.eq(number).should("have.text", value.toString());
+        this.enterTextToTextarea(`${value}`)
+            .verifyRoomsNumberByRow(value, number);
         return this;
     }
 
@@ -206,14 +197,14 @@ class InPlaceRentRollActions extends BaseActionsExt<typeof rentRollPage> {
         return this;
     }
 
-    enterBedroomsNumberByRowNumber(bedroomsNumber: string | number, rowNumber = 0): InPlaceRentRollActions {
+    enterBedroomsNumberByRowNumber(bedroomsNumber: number, rowNumber = 0): InPlaceRentRollActions {
         rentRollPage.bedroomsCells.eq(rowNumber).dblclick();
-        this.enterTextToTextarea(`${bedroomsNumber}`);
-        rentRollPage.bedroomsCells.eq(rowNumber).should("have.text", bedroomsNumber);
+        this.enterTextToTextarea(`${bedroomsNumber}`)
+            .verifyBedroomsNumberByRow(bedroomsNumber, rowNumber);
         return this;
     }
 
-    enterAllEqualBedroomsNumber(bedroomsNumber: string | number, numberOfUnits: number): InPlaceRentRollActions {
+    enterAllEqualBedroomsNumber(bedroomsNumber: number, numberOfUnits: number): InPlaceRentRollActions {
         for (let i = 0; i < numberOfUnits; i++) {
             this.enterBedroomsNumberByRowNumber(bedroomsNumber, i);
         }
@@ -222,8 +213,8 @@ class InPlaceRentRollActions extends BaseActionsExt<typeof rentRollPage> {
 
     enterLeaseStatusByRowNumber(status: string, number = 0): this {
         rentRollPage.leaseStatusCells.eq(number).dblclick();
-        this.enterTextToTextarea(status);
-        rentRollPage.leaseStatusCells.eq(number).should("contain.text", status);
+        this.enterTextToTextarea(status)
+            .verifyLeaseStatusByRow(status, number);
         return this;
     }
 
@@ -246,8 +237,8 @@ class InPlaceRentRollActions extends BaseActionsExt<typeof rentRollPage> {
             }
         }
         rentRollPage.rentForecastCells.eq(rowNumber).dblclick();
-        this.enterTextToTextarea(`${forecastValue}`);
-        rentRollPage.rentForecastCells.eq(rowNumber).should("have.text", forecastText);
+        this.enterTextToTextarea(`${forecastValue}`)
+            .verifyRentForecastByRow(forecastText, rowNumber);
         return this;
     }
 
@@ -273,46 +264,20 @@ class InPlaceRentRollActions extends BaseActionsExt<typeof rentRollPage> {
         return this;
     }
 
-    verifyMonthlyTotalForecastEqualValue(): InPlaceRentRollActions {
-        rentRollPage.rentForecastCells.then(cells => {
-            let totalToBe = 0;
-            for (let i = 0; i < cells.length; i++) {
-                let cellNumber = getNumberFromDollarNumberWithCommas(cells.eq(i).text());
-                totalToBe += cellNumber;
-            }
-            const textToBe = `$${numberWithCommas(totalToBe.toFixed(2))}`;
-            rentRollPage.monthlyTotalRent.should("have.text", textToBe);
-        });
-        return this;
-    }
-
-    verifyAnnuallyTotalForecastEqualValue() {
-        rentRollPage.monthlyTotalRent.then(monthly => {
-            const monthlyNumber = getNumberFromDollarNumberWithCommas(monthly.text());
-            const textToBe = `$${numberWithCommas((monthlyNumber * 12).toFixed(2))}`;
-            rentRollPage.annualTotalRent.should("have.text", textToBe);
-        });
-        return this;
-    }
-
-    verifyRentPSFMounthValue(isPerMonth?: "perMonth") {
-        rentRollPage.monthlyTotalForecast.then(monthly => {
-            const monthlyNumber = getNumberFromDollarNumberWithCommas(monthly.text());
-            rentRollPage.squareFootageCells.then(square => {
-                const squareNumber = getNumberFromDollarNumberWithCommas(square.text());
-                const rentSFNumber = (monthlyNumber * 12 / squareNumber).toFixed(2);
-                const rentPSFNumber = (monthlyNumber / squareNumber).toFixed(2);
-                if (isPerMonth === "perMonth") {
-                    if (squareNumber === 0) {
-                        rentRollPage.rentSFCell.should("have.text", `$NaN`);
-                    } else {
-                        rentRollPage.rentSFCell.should("have.text", `$${rentPSFNumber}`);
-                    }
+    verifyRentPSFValueByRow(isPerMonth = true, rowNumber = 0) {
+        this.Page.monthlyRentCells.eq(rowNumber).invoke("text").then(monthlyRentText => {
+            const rentValue = getNumberFromDollarNumberWithCommas(monthlyRentText);
+            this.Page.squareFootageCells.eq(rowNumber).invoke("text").then(sfText => {
+                const footageValue = getNumberFromDollarNumberWithCommas(sfText);
+                const rentPSFMonthly = `$${(rentValue / footageValue).toFixed(2)}`;
+                const rentPSFAnnually = `$${((rentValue / footageValue) * 12).toFixed(2)}`;
+                if (footageValue === 0) {
+                    this.Page.rentSFCell.eq(rowNumber).should("have.text", "$NaN");
                 } else {
-                    if (squareNumber === 0) {
-                        rentRollPage.rentSFCell.should("have.text", `$NaN`);
+                    if (isPerMonth) {
+                        this.Page.rentSFCell.eq(rowNumber).should("have.text", rentPSFMonthly);
                     } else {
-                        rentRollPage.rentSFCell.should("have.text", `$${rentSFNumber}`);
+                        this.Page.rentSFCell.eq(rowNumber).should("have.text", rentPSFAnnually);
                     }
                 }
             });
@@ -325,33 +290,10 @@ class InPlaceRentRollActions extends BaseActionsExt<typeof rentRollPage> {
         return this;
     }
 
-    clickCloseIcon(): InPlaceRentRollActions {
-        rentRollPage.closeIcon.click();
-        return this;
-    }
-
-    verifyNumberOfUnitsNumberCells(numberOfUnits = 0): InPlaceRentRollActions {
-        if (numberOfUnits === 0) {
-            rentRollPage.unitNumberCells.should("not.exist");
-        } else {
-            rentRollPage.unitNumberCells.should("have.length", numberOfUnits);
-        }
-        return this;
-    }
-
-    verifyNumberOfNumberCells(numberOfUnits = 0): InPlaceRentRollActions {
-        if (numberOfUnits === 0) {
-            rentRollPage.numberCells.should("not.exist");
-        } else {
-            rentRollPage.numberCells.should("have.length", numberOfUnits);
-        }
-        return this;
-    }
-
     enterOutdoorSpaceByOptionByRow(space: string, rowNumber = 0): InPlaceRentRollActions {
         rentRollPage.outdoorSpaceCells.eq(rowNumber).dblclick();
-        this.chooseOptionFromTableListbox(space);
-        rentRollPage.outdoorSpaceCells.should("contain.text", space);
+        this.chooseOptionFromTableListbox(space)
+            .verifyOutdoorSpaceByRow(space, rowNumber);
         return this;
     }
 
@@ -372,16 +314,17 @@ class InPlaceRentRollActions extends BaseActionsExt<typeof rentRollPage> {
         } else {
             textToBe = typeof value === "string" ? value : numberWithCommas(value.toFixed(2));
         }
-        rentRollPage.squareFootageCells.eq(rowNumber).should("have.text", textToBe);
+        this.verifySquareFootageCellByRow(textToBe, rowNumber);
         return this;
     }
 
     enterNumberBathroomsByRow(value:number | string, rowNumber = 0): InPlaceRentRollActions {
-        rentRollPage.bathroomsCells.eq(rowNumber).dblclick();
-        this.enterTextToTextarea(`${value}`);
-        rentRollPage.bathroomsCells.eq(rowNumber).should("have.text", value).as("checkedTextBathroom");
+        rentRollPage.bathroomsCells.eq(rowNumber).as("bathroomCell");
+        cy.get("@bathroomCell").dblclick();
+        this.enterTextToTextarea(`${value}`)
+            .verifyBathroomCellByRow(value, rowNumber);
         if ((isDecimal(value) && !isHalfDecimalPart(value)) || Number(value) < 0) {
-            cy.get("@checkedTextBathroom").should("have.class", "invalid");
+            cy.get("@bathroomCell").should("have.class", "invalid");
         }
         return this;
     }
@@ -393,8 +336,8 @@ class InPlaceRentRollActions extends BaseActionsExt<typeof rentRollPage> {
 
     chooseUnitTypeByRow(type: string, rowNumber = 0): InPlaceRentRollActions {
         rentRollPage.unitTypeCells.eq(rowNumber).dblclick();
-        this.chooseOptionFromTableListbox(type);
-        rentRollPage.unitTypeCells.eq(rowNumber).should("contain.text", type);
+        this.chooseOptionFromTableListbox(type)
+            .verifyUnitTypeCellByRow(type, rowNumber);
         return this;
     }
 
@@ -413,29 +356,6 @@ class InPlaceRentRollActions extends BaseActionsExt<typeof rentRollPage> {
                 rentRollPage.monthlyTotalRent.should("have.text", textToBe);
             });
         });
-        return this;
-    }
-    
-    verifyRentSFValue(rowNumber = 0): InPlaceRentRollActions{
-        rentRollPage.monthlyRentCells.eq(rowNumber).then(el => {
-            const monthlyRent = getNumberFromDollarNumberWithCommas(el.text());
-            rentRollPage.squareFootageCells.eq(rowNumber).then(sf => {
-                const squareFootage = getNumberFromDollarNumberWithCommas(sf.text());
-                const rentSFNumber = (monthlyRent * 12 / squareFootage).toFixed(2);
-                if (squareFootage === 0) {
-                    rentRollPage.rentSFCell.eq(rowNumber).should("have.text", `$NaN`);
-                } else {
-                    rentRollPage.rentSFCell.eq(rowNumber).should("have.text", `$${rentSFNumber}`);
-                }
-            });
-        });
-        return this;
-    }
-
-    verifyRentRoomCellValues(monthlyRent = 0, rooms = 0, row = 0): InPlaceRentRollActions{
-        let defaultValues = "$0";
-        let textToBe = monthlyRent == 0 ? defaultValues : `$${numberWithCommas((monthlyRent / rooms).toFixed(0))}`; 
-        rentRollPage.rentRoomCell.eq(row).should('have.text', textToBe);
         return this;
     }
     
