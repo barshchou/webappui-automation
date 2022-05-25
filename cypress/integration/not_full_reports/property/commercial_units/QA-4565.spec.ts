@@ -1,12 +1,10 @@
-/// <reference types="cypress-grep" />
 import testData from "../../../../fixtures/not_full_reports/property/commercial_units/QA-4565.fixture";
 import { Base, Property } from "../../../../actions";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
-import { Tag } from "../../../../utils/tags.utils";
 
 describe("Verify the functionality of the Ceiling Height radio button", 
-    { tags: [ Tag.property, Tag.commercial_units ] }, () => {
+    { tags: [ "@property", "@commercial_units" ] }, () => {
 
     before("Login, create report", () => {
 

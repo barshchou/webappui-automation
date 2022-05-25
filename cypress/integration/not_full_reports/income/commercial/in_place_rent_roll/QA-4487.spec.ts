@@ -2,11 +2,10 @@ import testData from "../../../../../fixtures/not_full_reports/income/commercial
 import { Income } from "../../../../../actions";
 import { _NavigationSection } from "../../../../../actions/base";
 import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
-import { Tag } from "../../../../../utils/tags.utils";
 
 describe("Verify the suggested text dropdown in the new narrative component added through '=' "+
         "for the 'Unchanged Renovation' option", 
-        { tags:[ Tag.income, Tag.commercial, Tag.in_place_rent_roll ] }, () => {
+        { tags:[ "@income", "@commercial", "@in_place_rent_roll" ] }, () => {
             
     before("Login, create report", () => {
         createReport(testData.reportCreationData);

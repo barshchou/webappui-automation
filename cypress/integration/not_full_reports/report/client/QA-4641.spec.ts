@@ -1,4 +1,3 @@
-import { Tag } from './../../../../utils/tags.utils';
 import { Report, ReviewExport } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
@@ -6,7 +5,7 @@ import testData from '../../../../fixtures/not_full_reports/report/client/QA-464
 
 describe(`[QA-4641] Verify the "Linked" chips dropdown in the new narrative component for As Is and As Stabilized 
     report for Intended User and Identification of the Client sections`,
-    { tags:[ Tag.report, Tag.client ] }, () => {
+    { tags:[ "@report", "@client" ] }, () => {
 
     it("Test body", { tags: "@to_check_export" }, () => {
         cy.stepInfo("Login, create report");
