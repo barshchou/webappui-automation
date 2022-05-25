@@ -23,7 +23,7 @@ export default class BasePage {
         return cy.xpath("//*[contains(@role, 'dialog')]/descendant::*[contains(text(), 'Yes, revert')]");
     }
 
-    formEditBtn(index?: number) {
+    formEditBtn(index = 0) {
         return cy.xpath('//*[@data-icon="pencil"]//ancestor::button')
             .eq((index !== 0) ? index : 0);
     }

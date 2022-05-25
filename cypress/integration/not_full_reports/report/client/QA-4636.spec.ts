@@ -14,8 +14,8 @@ describe(`Verify the Modified label functionality for Intended User and Identifi
         cy.stepInfo('1. Click on the Edit button on the Report > Client page for Intended User and Identification of the Client sections.');
         _NavigationSection.navigateToClientPage();
         Report._Client.verifyProgressBarNotExist()
-            .Page.formEditBtn(0).click();
-        Report._Client.Page.formEditBtn(0).click();
+            .Page.formEditBtn().click();
+        Report._Client.Page.formEditBtn().click();
 
         cy.stepInfo('2. Edit comment and click on the Save button for both sections.');
         Report._Client.enterIntendedUserTextBox(testData.textToType)

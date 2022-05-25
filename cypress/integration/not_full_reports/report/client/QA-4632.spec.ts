@@ -14,8 +14,8 @@ describe("Verify the Cancel button functionality for Intended User and Identific
         cy.stepInfo("1. Click on the Edit button on the Report > Client page for Intended User and Identification of the Client sections.");
         _NavigationSection.navigateToClientPage();
         Report._Client.verifyProgressBarNotExist()
-            .Page.formEditBtn(0).click();
-        Report._Client.Page.formEditBtn(0).click();
+            .Page.formEditBtn().click();
+        Report._Client.Page.formEditBtn().click();
 
         cy.stepInfo("2. Verify that the Cancel button is displayed instead of the Edit button for both sections.");
         Report._Client.Page.formCancelButton(0).should("be.visible");

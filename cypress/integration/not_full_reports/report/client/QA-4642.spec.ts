@@ -34,8 +34,8 @@ describe.skip("Verify the Client Guidelines Discussion on the page",
     it("Test body", () => {
         NavigationSection.navigateToClientPage().verifyProgressBarNotExist();
 
-        Report.Client.Page.formEditBtn(0).click();
-        Report.Client.Page.formEditBtn(0).click();
+        Report.Client.Page.formEditBtn().click();
+        Report.Client.Page.formEditBtn().click();
 
         for(let [ suggestion, option ] of testData.linkedChipsDropdownOptions){
             checkChipsOptions(suggestion, option, "IntendedUserTextBox");

@@ -222,7 +222,7 @@ class CommercialRentRollSharedComponent<T extends CommercialRentRollSharedCompon
     }
 
     clickEditDiscussionButton(): this {
-        this.Page.formEditBtn(0).click({ force: true });
+        this.Page.formEditBtn().click({ force: true });
         return this;
     }
 

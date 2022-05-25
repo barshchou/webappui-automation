@@ -16,8 +16,8 @@ describe("[QA-4648] Verify the Save button functionality on the Report > Client 
         _NavigationSection.navigateToClientPage();
 
         Report._Client.verifyProgressBarNotExist()
-            .Page.formEditBtn(0).click().should('be.visible');
-        Report._Client.Page.formEditBtn(0).click().should('be.visible');
+            .Page.formEditBtn().click().should('be.visible');
+        Report._Client.Page.formEditBtn().click().should('be.visible');
         Report._Client.Page.formSaveBtn(0).should('be.visible');
         Report._Client.Page.formSaveBtn(1).should('be.visible');
 

@@ -17,8 +17,8 @@ describe(`[QA-4640] Verify the "Linked" chips dropdown in the new narrative comp
             .verifyProgressBarNotExist();
         
         cy.stepInfo("2. Click on the Edit button for Intended User and Identification of the Client sections.");
-        Report._Client.Page.formEditBtn(0).click();
-        Report._Client.Page.formEditBtn(0).click();
+        Report._Client.Page.formEditBtn().click();
+        Report._Client.Page.formEditBtn().click();
 
         cy.stepInfo(`3. Enter the “=“ and verify the "Linked" chips dropdown for both sections: options 'Gross Building Area', 
             'Building Name', 'Property Type', 'Residential Unit Count', 'Commercial Unit Count', 'Street Address', 'Street Name', 

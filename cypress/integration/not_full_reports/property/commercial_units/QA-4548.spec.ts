@@ -19,7 +19,7 @@ describe("Verify the Modified label functionality",
             _NavigationSection.navigateToCommercialUnits();
             Property._CommercialUnits.verifyThatPageIsOpened();
             Property._CommercialUnits.Page.modifiedLabel(false).should('not.exist');
-            Property._CommercialUnits.Page.formEditBtn(0).scrollIntoView().click();
+            Property._CommercialUnits.Page.formEditBtn().scrollIntoView().click();
 
             cy.stepInfo("2. Edit comment and click on the Save button.");
             Property._CommercialUnits.Page.commercialUnitSFDiscussionTextArea.clear().type(testData.text);

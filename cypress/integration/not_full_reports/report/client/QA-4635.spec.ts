@@ -16,8 +16,8 @@ describe("Verify the Save button functionality for Intended User and Identificat
         _NavigationSection.navigateToClientPage();
 
         Report._Client.verifyProgressBarNotExist()
-            .Page.formEditBtn(0).click();
-        Report._Client.Page.formEditBtn(0).click();
+            .Page.formEditBtn().click();
+        Report._Client.Page.formEditBtn().click();
 
         cy.stepInfo("2. Edit comment and click on the Save button for both sections.");
         Report._Client.enterIntendedUserTextBox(testData.textToType)
