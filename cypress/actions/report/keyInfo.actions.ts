@@ -17,7 +17,7 @@ class KeyInfoActions extends BaseActionsExt<typeof keyInfoPage> {
         .then(text => {
             keyInfoPage.textBoxPropertyRightsAppraised.click().clear().type(textToType ?? text);
         });
-        keyInfoPage.formSaveBtn(0).click();
+        keyInfoPage.formSaveBtn().click();
         return keyInfoPage.textBoxPropertyRightsAppraised.invoke("text");
     }
 

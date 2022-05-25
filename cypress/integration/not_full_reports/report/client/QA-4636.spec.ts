@@ -22,8 +22,8 @@ describe(`Verify the Modified label functionality for Intended User and Identifi
             .clickNarrativeSuggestions(testData.verifySuggestion)
             .enterIdentificationOfTheClientTextBox(testData.textToType)
             .clickNarrativeSuggestions(testData.verifySuggestion, 1)
-            .Page.formSaveBtn(0).click;
-            Report._Client.Page.formSaveBtn(0).click();
+            .Page.formSaveBtn().click;
+            Report._Client.Page.formSaveBtn().click();
 
         cy.stepInfo('3. Verify that the Modified label appears after saving changes made to commentary.');
         Report._Client.Page.chipModified(0).should("be.visible");

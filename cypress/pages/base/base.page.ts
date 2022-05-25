@@ -28,7 +28,7 @@ export default class BasePage {
             .eq((index !== 0) ? index : 0);
     }
 
-    formSaveBtn(index?: number) {
+    formSaveBtn(index = 0) {
         return cy.xpath("//button[.='Save']")
             .eq((index !== 0) ? index : 0);
     }

@@ -23,7 +23,7 @@ describe("Verify the Modified label functionality",
 
             cy.stepInfo("2. Edit comment and click on the Save button.");
             Property._CommercialUnits.Page.commercialUnitSFDiscussionTextArea.clear().type(testData.text);
-            Property._CommercialUnits.Page.formSaveBtn(0).first().click();
+            Property._CommercialUnits.Page.formSaveBtn().click();
 
             cy.stepInfo("3.  Verify that the Modified label appears after saving changes made to commentary.");
             Property._CommercialUnits.Page.modifiedLabel().should('exist');

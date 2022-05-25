@@ -233,7 +233,7 @@ class CommercialRentRollSharedComponent<T extends CommercialRentRollSharedCompon
     }
 
     clickSaveDiscussionButton(): this {
-        this.Page.formSaveBtn(0).click();
+        this.Page.formSaveBtn().click();
         return this;
     }
 
@@ -296,7 +296,7 @@ class CommercialRentRollSharedComponent<T extends CommercialRentRollSharedCompon
         this.Page.formCancelButton(0).should("be.visible");
         this.Page.editDiscussionButton.should("not.exist");
         this.Page.formRevertToOriginalBtn(0).should("be.visible");
-        this.Page.formSaveBtn(0).should("be.visible");
+        this.Page.formSaveBtn().should("be.visible");
         return this;
     }
 

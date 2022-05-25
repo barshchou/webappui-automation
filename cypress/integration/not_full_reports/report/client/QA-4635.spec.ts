@@ -24,8 +24,8 @@ describe("Verify the Save button functionality for Intended User and Identificat
             .clickNarrativeSuggestions(testData.verifyListValue)
             .enterIdentificationOfTheClientTextBox(testData.textToType)
             .clickNarrativeSuggestions(testData.verifyListValue, 1)
-            .Page.formSaveBtn(0).click();
-        Report._Client.Page.formSaveBtn(0).click();
+            .Page.formSaveBtn().click();
+        Report._Client.Page.formSaveBtn().click();
             
         cy.stepInfo("3. Verify that the changes from step 2 are saved.");
         Report._Client.verifyIntendedUserTextBox(testData.verifyAreaValue)
