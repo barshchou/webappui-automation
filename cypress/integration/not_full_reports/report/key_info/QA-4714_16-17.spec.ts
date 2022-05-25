@@ -2,9 +2,9 @@ import { Tag } from '../../../../utils/tags.utils';
 import { Report } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
-import testData from '../../../../fixtures/not_full_reports/report/key_info/QA-4714_16-17_21.fixture';
+import testData from '../../../../fixtures/not_full_reports/report/key_info/QA-4714_16-17.fixture';
 
-describe(`[QA-4714_16-17_21] Verify the suggested text dropdown in the new narrative component added through "=" for the 'Foreclosure sale'
+describe(`[QA-4714_16-17] Verify the suggested text dropdown in the new narrative component added through "=" for the 'Foreclosure sale'
     then “=Sh“ and select the 'Sheriff's sale'  option on the Report > Key Info page for Property Rights Appraised and Definition of Market Value sections`,
     { tags:[ Tag.report, Tag.key_info ] }, () => {
     before("Login, create report", () => {
@@ -31,13 +31,6 @@ describe(`[QA-4714_16-17_21] Verify the suggested text dropdown in the new narra
             Report._KeyInfo.clickSaveButton();
             cy.reload();
         });
-
-        // Need resolve bug in QA-4721
-        // cy.stepInfo("3. Verify value after save and reload");
-        // testData.chips.forEach(chip => {
-        //     Report._KeyInfo.Page.textBoxPropertyRightsAppraised.should("include.text", chip.verifyTexValue);
-        //     Report._KeyInfo.Page.textBoxDefinitionOfMarketValue.should("include.text", chip.verifyTexValue);
-        // });
 
         deleteReport(testData.reportCreationData.reportNumber);
     });
