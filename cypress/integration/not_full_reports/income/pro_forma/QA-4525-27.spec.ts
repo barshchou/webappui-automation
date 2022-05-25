@@ -1,4 +1,3 @@
-import { _ResidentialUnits } from './../../../../actions/property/index';
 import { numberWithCommas } from './../../../../../utils/numbers.utils';
 import testData from "../../../../fixtures/not_full_reports/income/pro_forma/QA-4525-27.fixture";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
