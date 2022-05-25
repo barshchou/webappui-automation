@@ -3,8 +3,8 @@ import { Income } from "../../../../../actions";
 import { _NavigationSection } from "../../../../../actions/base";
 import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
 
-describe("Verify the suggested text dropdown in the new narrative component added through '=' "+
-        "for the 'Unchanged Renovation' option", 
+describe(`Verify the suggested text dropdown in the new narrative component added through '=' 
+                for the 'Unchanged Renovation' option`,
         { tags:[ "@income", "@commercial", "@in_place_rent_roll" ] }, () => {
             
     before("Login, create report", () => {
