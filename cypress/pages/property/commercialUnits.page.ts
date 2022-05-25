@@ -41,6 +41,10 @@ class CommercialUnitsPage extends BasePage {
         return cy.xpath("//*[.='Commercial Unit SF Discussion']//following-sibling::div//child::*[@data-slate-editor]");
     }
 
+    commercialUnitSFDiscussionText(text: string) {
+        return cy.xpath(`//span[@data-slate-string="true"][contains(text(), "${text}")]`);
+    } 
+
     getGradeCheckbox(value: string, index = 0) {
         return cy.xpath(`//*[text()='Grade']/..//descendant::input[@value='${value}']`).eq(index);
     }
