@@ -2,6 +2,7 @@ import grossIncomePage from "../../pages/income/potentialGrossIncome.page";
 import { getNumberFromDollarNumberWithCommas, numberWithCommas } from "../../../utils/numbers.utils";
 import potentialGrossIncomePage from "../../pages/income/potentialGrossIncome.page";
 import BaseActionsExt from "../base/base.actions.ext";
+import Enums from "../../enums/incomeTypesCellNames.enum";
 
 class PotentialGrossIncomeActions extends BaseActionsExt<typeof potentialGrossIncomePage> {
 
@@ -34,33 +35,18 @@ class PotentialGrossIncomeActions extends BaseActionsExt<typeof potentialGrossIn
         return this;
     }
 
-    verifyPotentialResidentialIncome(incomeToBe: string): this {
-        grossIncomePage.potentialResidentialIncome.should("have.text", incomeToBe);
-        return this;
-    }
-
-    verifyPotentialRealEstateTaxesReimbursement(incomeToBe: string): this {
-        grossIncomePage.potentialRealEstateTaxesReimbursement.should("have.text", incomeToBe);
-        return this;
-    }
-
-    verifyPotentialGrossIncomeValue(incomeToBe: string): this {
-        grossIncomePage.potentialGrossIncome.should("have.text", incomeToBe);
-        return this;
-    }
-
-    verifyOtherIncome(incomeToBe = "$0.00"): this {
-        grossIncomePage.otherIncome.should("have.text", incomeToBe);
+    verifyOtherIncome(incomeType: string, incomeToBe = "$0.00"): this {
+        grossIncomePage.getIncomeTypeUnified(incomeType).should("have.text", incomeToBe);
         return this;
     }
 
     verifyPotentialGrossIncome(): this {
-        grossIncomePage.potentialResidentialIncome.then(el => {
+        grossIncomePage.getIncomeTypeUnified(Enums.potentialResidentialIncome).then(el => {
             const potResIncomeNumber = getNumberFromDollarNumberWithCommas(el.text());
-            grossIncomePage.otherIncome.then(otherIncome => {
+            grossIncomePage.getIncomeTypeUnified(Enums.otherIncome).then(otherIncome => {
                 const otherIncomeNumber = getNumberFromDollarNumberWithCommas(otherIncome.text());
                 const textToBe = `$${numberWithCommas((potResIncomeNumber + otherIncomeNumber).toFixed(2))}`;
-                grossIncomePage.potentialGrossIncome.should("have.text", textToBe);
+                grossIncomePage.getIncomeTypeUnified(Enums.potentialGrossIncome).should("have.text", textToBe);
             });
         });
         return this;
@@ -76,19 +62,24 @@ class PotentialGrossIncomeActions extends BaseActionsExt<typeof potentialGrossIn
     }
 
     verifyEffectiveGrossIncome(): this {
-        grossIncomePage.potentialGrossIncome.then(grossIncome => {
+        grossIncomePage.getIncomeTypeUnified(Enums.potentialGrossIncome).then(grossIncome => {
             const potGrossIncomeNumber = getNumberFromDollarNumberWithCommas(grossIncome.text());
             grossIncomePage.lessResidentialVCLoss.then(lessVCLoss => {
                 const lessResVCLossNumber = getNumberFromDollarNumberWithCommas(lessVCLoss.text());
                 const textToBe = `$${numberWithCommas((potGrossIncomeNumber + lessResVCLossNumber).toFixed(2))}`;
-                grossIncomePage.effectiveGrossIncome.should("have.text", textToBe);
+                grossIncomePage.getIncomeTypeUnified(Enums.effectiveGrossIncome).should("have.text", textToBe);
             });
         });
         return this;
     }
 
+    verifyIncomeTypeUnified(incomeType: string, incomeToBe: string): PotentialGrossIncomeActions {
+        grossIncomePage.getIncomeTypeUnified(incomeType).should("have.text", incomeToBe);
+        return this;
+    }
+
     verifyIncomeTable(potentialResIncomeToBe: string, otherIncome = "$0.00"): this {
-        this.verifyPotentialResidentialIncome(potentialResIncomeToBe)
+        this.verifyIncomeTypeUnified(Enums.potentialResidentialIncome, potentialResIncomeToBe)
             .verifyOtherIncome(otherIncome)
             .verifyPotentialGrossIncome()
             .verifyLessResidentialVCLoss()

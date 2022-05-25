@@ -14,17 +14,9 @@ class PotentialGrossIncomePage extends BasePage {
 
     get commentaryInput() {return cy.get("[name='residentialVCLossDiscussion.commentary']");}
 
-    get potentialResidentialIncome() {return cy.get("[data-qa=potentialResidentialIncome-row] > [data-qa=value-cell]");}
-
-    get otherIncome() {return cy.get("[data-qa=otherIncome-row] > [data-qa=value-cell]");}
-
-    get potentialGrossIncome() {return cy.get("[data-qa=potentialGrossIncome-row] > [data-qa=value-cell]");}
-
     get lessResidentialVCLoss() {return cy.get("[data-qa^=lessResidentialVCLoss] > [data-qa=value-cell]");}
 
-    get effectiveGrossIncome() {return cy.get("[data-qa=effectiveGrossIncome-row] > [data-qa=value-cell]");}
-
-    get potentialRealEstateTaxesReimbursement() {return cy.get("[data-qa=potentialRealEstateTaxesReimbursement-row] > [data-qa=value-cell]");}
+    getIncomeTypeUnified(incomeType: string) {return cy.get(`[data-qa=${incomeType}-row] > [data-qa=value-cell]`);}
 
     getCommercialVCLossPercentage(useValue) {return cy.get(`[name='commercialVCLossPercentage.${useValue}']`);}
 
