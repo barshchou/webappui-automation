@@ -4,5 +4,6 @@ const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreat
 
 export default {
     reportCreationData: _reportCreationData,
-  
+    resUnit: 3,
+    monthlyRent: [ 60, 500, 450 ]
 };
