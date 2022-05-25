@@ -36,7 +36,7 @@ describe("Potential Parking Income",
             .verifyProgressBarNotExist();
     });
 
-    it(`[QA-4507]: `, () => {
+    it(`[QA-4507]`, () => {
         cy.stepInfo(`5 Verify that Pro Forma table contains Laundry Income Total value`);
         Income._ProFormaActions.verifyCategoryTotal(
             `$${numberWithCommas(Math.round(testData.laundryIncome))}`, 
@@ -50,14 +50,14 @@ describe("Potential Parking Income",
             `$${numberWithCommas(testData.laundryIncome.toFixed(2))}`);
     });
 
-    it(`[QA-4508]: `, () => {
+    it(`[QA-4508]`, () => {
         cy.stepInfo(`5. Verify that Pro Forma table contains Laundry Income PSF value`);
         Income._ProFormaActions.verifyCategoryPSFTotal(
             `$${numberWithCommas(testData.laundryIncomePerSf.toFixed(2))}`, 
             proFormaTypes.laundryIncome);
     });
 
-    it(`[QA-4509]: `, () => {
+    it(`[QA-4509]`, () => {
         cy.stepInfo(`5. Verify that Pro Forma table contains Laundry Income Per Unit value`);
         Income._ProFormaActions.verifyCategoryPerUnitTotal(
             `$${numberWithCommas(Math.round(testData.laundryIncomePerUnit))}`, 

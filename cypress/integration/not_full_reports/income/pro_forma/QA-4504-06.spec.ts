@@ -36,7 +36,7 @@ describe("Potential Parking Income",
             .verifyProgressBarNotExist();
     });
 
-    it(`[QA-4504]: `, () => {
+    it(`[QA-4504]`, () => {
         cy.stepInfo(`5 Verify that Pro Forma table contains Parking Income Total value`);
         Income._ProFormaActions.verifyCategoryTotal(
             `$${numberWithCommas(Math.round(testData.annualRentTotal))}`, 
@@ -49,14 +49,14 @@ describe("Potential Parking Income",
             `$${numberWithCommas(testData.annualRentTotal.toFixed(2))}`);
     });
 
-    it(`[QA-4505]: `, () => {
+    it(`[QA-4505]`, () => {
         cy.stepInfo(`5. Verify that Pro Forma table contains Parking Income PSF value`);
         Income._ProFormaActions.verifyCategoryPSFTotal(
             `$${numberWithCommas(testData.parkingincomePerSf.toFixed(2))}`, 
             proFormaTypes.parkingIncome);
     });
 
-    it(`[QA-4506]: `, () => {
+    it(`[QA-4506]`, () => {
         cy.stepInfo(`5. Verify that Pro Forma table contains Parking Income Per Unit value`);
         Income._ProFormaActions.verifyCategoryPerUnitTotal(
             `$${numberWithCommas(Math.round(testData.parkingincomePerUnit))}`, 
