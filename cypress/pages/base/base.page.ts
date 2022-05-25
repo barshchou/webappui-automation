@@ -33,7 +33,7 @@ export default class BasePage {
             .eq((index !== 0) ? index : 0);
     }
 
-    formRevertToOriginalBtn(index?: number) {
+    formRevertToOriginalBtn(index = 0) {
         return cy.xpath("//button[.='Revert to Original']")
             .eq((index !== 0) ? index : 0);
     }

@@ -262,7 +262,7 @@ class CommercialRentRollSharedComponent<T extends CommercialRentRollSharedCompon
     }
 
     clickRevertToOriginalButton(): this {
-        this.Page.formRevertToOriginalBtn(0).click();
+        this.Page.formRevertToOriginalBtn().click();
         this.Page.changesLostModalHeader.should("exist");
         return this;
     }
@@ -295,7 +295,7 @@ class CommercialRentRollSharedComponent<T extends CommercialRentRollSharedCompon
     verifyEditDiscussionButtonsDisplayed(): this {
         this.Page.formCancelButton(0).should("be.visible");
         this.Page.editDiscussionButton.should("not.exist");
-        this.Page.formRevertToOriginalBtn(0).should("be.visible");
+        this.Page.formRevertToOriginalBtn().should("be.visible");
         this.Page.formSaveBtn().should("be.visible");
         return this;
     }

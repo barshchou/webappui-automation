@@ -20,7 +20,7 @@ describe(`Verify the Revert to Original button functionality for Intended User a
         cy.stepInfo("2. Verify that the Revert to Original button is displayed instead of the Edit button for both sections.");
         Report._Client.Page.formCancelButton(0).should("be.visible");
         Report._Client.Page.formCancelButton(1).should("be.visible");
-        Report._Client.Page.formRevertToOriginalBtn(0).should("be.visible");
+        Report._Client.Page.formRevertToOriginalBtn().should("be.visible");
         Report._Client.Page.formRevertToOriginalBtn(1).should("be.visible");
 
         cy.stepInfo("3. Edit comment and verify that the Revert to Original button becomes enabled for both sections.");
@@ -29,11 +29,11 @@ describe(`Verify the Revert to Original button functionality for Intended User a
             .enterIdentificationOfTheClientTextBox(testData.textToType)
             .clickNarrativeSuggestions(testData.verifySuggestion, 1);
 
-        Report._Client.Page.formRevertToOriginalBtn(0).should("be.enabled");
+        Report._Client.Page.formRevertToOriginalBtn().should("be.enabled");
         Report._Client.Page.formRevertToOriginalBtn(1).should("be.enabled");
 
         cy.stepInfo("4. Click on the Revert to Original button and verify the ‘Changes will be lost modal’ is displayed for both sections.");
-        Report._Client.Page.formRevertToOriginalBtn(0).click();
+        Report._Client.Page.formRevertToOriginalBtn().click();
         Report._Client.Page.formYesRevertBtn.click();
         Report._Client.Page.formRevertToOriginalBtn(1).click();
         Report._Client.Page.formYesRevertBtn.click();
