@@ -5,7 +5,7 @@ import envUrlsEnum from "./envUrls.enum";
 import proFormaTypesEnum from "./proFormaTypes.enum";
 import expenseCellNames from "./expenseCellNames";
 import expenseHistoryTableRowsEnum from "./expenseHistoryTableRows.enum";
-import reimbursementTypes from "./reimbursementTypes";
+import reimbursementTypes from "./reimbursementTypes.enum";
 
 export default {
     TEMPLATE_TYPE: templateTypesEnum,

@@ -6,8 +6,6 @@ import { Property } from '../../../../actions/index';
 import { Income } from "../../../../actions";
 import { Tag } from "../../../../utils/tags.utils";
 import proFormaTypes from "../../../../enums/proFormaTypes.enum";
-import expenseCellNames from "../../../../enums/expenseCellNames";
-import reimbursementTypes from '../../../../enums/reimbursementTypes';
 
 describe("Potential Real Estate Tax Reimbursement", 
     { tags:[ Tag.income, Tag.pro_forma ] }, () => {
@@ -38,7 +36,7 @@ describe("Potential Real Estate Tax Reimbursement",
         
         cy.stepInfo("4. Go to Income → Reimbursement Summary and add Real Estate Taxes Reimbursement for commercial units"); 
         Income._CommercialManager.ReimbursementSummary.addNewCommercialReimbursement(
-            testData.expenseType, expenseCellNames.realEstateTaxes, reimbursementTypes.dollarAmount, testData.knownInformation)
+            testData.expenseType, testData.expenceTypeCellName, testData.reimbursementType, testData.knownInformation)
             .fillReimbursements(testData.monthlyReimbursement);
 
         cy.saveLocalStorage();
