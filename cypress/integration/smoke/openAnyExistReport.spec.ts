@@ -12,6 +12,6 @@ describe("Open any existing report and open any page", { tags: [ "@smoke" ] }, (
        Base._NavigationSection.navigateToFindComps()
            .verifyProgressBarNotExist();
        Sales._FindComps.Page.pageTitle.should("have.text", "Find Sales Comparables");
-       Sales._FindComps.Page.createNewCompButton.should("exist");
+       Sales._FindComps.Page.createCompButton.should("exist");
     });
 });
