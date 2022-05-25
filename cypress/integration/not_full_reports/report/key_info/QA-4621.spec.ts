@@ -6,7 +6,7 @@ import { Report } from "../../../../actions";
 
 
 describe("[QA-4621] The Letter of Engagement prefill from Dropbox to LoE filed in WebApp - 1 LoE PDF file",
-    { tags: [ Tag.report, Tag.key_info, Tag.salesforce ] }, () => {
+    { tags: [ "@report", "@key_info", "@salesforce" ] }, () => {
         
     before("Login, create report", () => {
         cy.stepInfo(" 1. Create a new report on the WebApp (Note: the JOB # of that report corresponds with the JOB # of an open job on SalesForce)");

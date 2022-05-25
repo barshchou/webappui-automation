@@ -7,7 +7,7 @@ import { Report } from "../../../../actions";
 
 describe(`[QA-4623] Verify the Letter of Engagement is NOT pre-filled in the Key Info > LoE field on WebApp 
     if the folder in Dropbox contains files, but NOT in PDF format`,
-    { tags: [ Tag.report, Tag.key_info, Tag.salesforce ] }, () => {
+    { tags: [ "@report", "@key_info", "@salesforce" ] }, () => {
         
     before("Login, create report", () => {
         cy.stepInfo(" 1. Create a new report on the WebApp (Note: the JOB # of that report corresponds with the JOB # of an open job on SalesForce)");

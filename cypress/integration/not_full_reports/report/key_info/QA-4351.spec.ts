@@ -6,7 +6,7 @@ import { Report } from "../../../../actions";
 
 
 describe("[QA-4351] Prefill Inspection Date from Salesforce (Inspection Date is the same as Date of Valuation)",
-    { tags: [ Tag.report, Tag.key_info, Tag.salesforce ] }, () => {
+    { tags: [ "@report", "@key_info", "@salesforce" ] }, () => {
 
     before("Login, create report", () => {
         cy.stepInfo(`1. Create report while creating set the same Job number as report from SalesForce has (e.g. JOB-1764459005).

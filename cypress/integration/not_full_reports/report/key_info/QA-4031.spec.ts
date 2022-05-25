@@ -15,7 +15,7 @@ const reportCreationData = (reportNumber: string) => {
 };
 
 describe("[QA-4031] Verify the export of the report with the Pre-filled Report Due Date from SalesForce",
-    { tags: [ Tag.report, Tag.key_info, Tag.salesforce ] }, () => {
+    { tags: [ "@report", "@key_info", "@salesforce" ] }, () => {
     it("Test body", () => { 
         testData.jobNumbersAndValues.forEach((value, index) => {
             cy.stepInfo(`[REPORT №${index + 1}] 1. Create a new report on the WebApp (Note: the JOB # of that report 

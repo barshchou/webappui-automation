@@ -1,4 +1,3 @@
-import { Tag } from './../../../../utils/tags.utils';
 import testData from "../../../../fixtures/not_full_reports/report/key_info/QA-4028.fixture";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
@@ -15,7 +14,7 @@ const reportCreationData = conclusionValue => {
 };
 
 describe("[QA-4028] Verify that the Due Date field is pre-filled on the WebApp with the date corresponding to the Current Due Date value for that job in SalesForce",
-    { tags: [ Tag.report, Tag.key_info, Tag.salesforce ] }, () => {
+    { tags: [ "@report", "@key_info", "@salesforce" ] }, () => {
     it("Test body", () => {
         
     testData.conclusionValues.forEach(value => {
