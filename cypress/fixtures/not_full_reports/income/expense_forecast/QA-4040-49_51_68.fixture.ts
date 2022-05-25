@@ -1,7 +1,7 @@
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 
 const reportCreationFixture = () => {
-    return ReportDataCreator.getReportData("4040-49_51");
+    return ReportDataCreator.getReportData("4040-49_51_68");
 };
 
 const expenseForecastWaterAndSewerFixture = (): BoweryReports.ForecastItem => {
@@ -148,7 +148,7 @@ const repairAndMaintenanceCommentariesFixture = () => {
 const electricityCommentariesFixture = () => {
     return {
         generatedPerSF: "Based on the information above, we have projected this expense at $5.00 per square foot, or $10,622,205 annually.",
-        generatedPerUnit: "Based on the information above, we have projected this expense at $5 per unit, or $25 annually.",
+        generatedPerUnit: "Based on the information above, we have projected this expense at $5 per unit, or $25 annually."
     };
 };
 
@@ -184,6 +184,12 @@ const fuelCommentariesFixture = () => {
         generatedPerSF: "Based on the information above, our forecast of heating fuel expense is $5.00 per square foot which reflects investor expectations.",
         generatedPerUnit: "Based on the information above, our forecast of heating fuel expense is $5 per unit which reflects investor expectations.",
         generatedPerRoom: "Based on the information above, our forecast of heating fuel expense is $5.00 per room which reflects investor expectations.",
+        generatedElecetricityAndFuelPerSf: "The tenant is responsible for in-unit electricity and cooking gas. The owner is responsible for common area "+
+                                           "electricity and heat. Based on the information above, we have projected this expense at $10,622,230 annually.",
+        generatedElecetricityAndFuelPerUnit: "The tenant is responsible for in-unit electricity and cooking gas. The owner is responsible for common area "+
+                                             "electricity and heat. Based on the information above, we have projected this expense at $50 annually.",
+        generatedElecetricityAndFuelPerRoom: "The tenant is responsible for in-unit electricity and cooking gas. The owner is responsible for common "+
+                                             "area electricity and heat. Based on the information above, we have projected this expense at $25 annually."
     };
 };
 
