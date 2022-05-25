@@ -42,10 +42,11 @@ describe("Potential Parking Income",
             `$${numberWithCommas(Math.round(testData.annualRentTotal))}`, 
             proFormaTypes.parkingIncome);
 
-        cy.stepInfo(`5.1 Verify that Total is taken from Income → Potential Gross Income 
-                    → table → Potential Real Estate Taxes Reimbursement`);
+        cy.stepInfo(`5.1 Verify that Total is taken from Income → Potential Gross Income → table → Parking Income`);
         _NavigationSection.navigateToPotentialGrossIncome();
-        Income._PotentialGrossIncome.verifyIncomeTypeUnified(Enums.parkingIncome, `$${numberWithCommas(testData.annualRentTotal.toFixed(2))}`);
+        Income._PotentialGrossIncome.verifyIncomeTypeUnified(
+            Enums.parkingIncome, 
+            `$${numberWithCommas(testData.annualRentTotal.toFixed(2))}`);
     });
 
     it(`[QA-4505]: `, () => {
