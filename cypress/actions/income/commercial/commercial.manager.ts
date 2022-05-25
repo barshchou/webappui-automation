@@ -11,6 +11,5 @@ export default {
     RentComps: commercialRentCompsActions,
     ReimbursementSummary: reimbursementSummaryActions,
     CompGroups: compGroupsActions,
-    RentReconciliation: rentReconciliationActions,
-    ReimbursementSummary: reimbursementSummaryActions
+    RentReconciliation: rentReconciliationActions
 };

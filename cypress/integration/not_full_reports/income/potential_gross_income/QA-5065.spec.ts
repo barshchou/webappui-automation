@@ -1,11 +1,11 @@
+import { numberWithCommas } from '../../../../../utils/numbers.utils';
 import testData from "../../../../fixtures/not_full_reports/income/potential_gross_income/QA-5065.fixture";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { Property, Income } from "../../../../actions";
-import { Tag } from "../../../../utils/tags.utils";
 
 describe("[Income > Potential Gross Income]Support combined utility expense reimbursements", 
-    { tags:[ Tag.income, Tag.potential_gross_income ] }, () => {
+    { tags:[ "@income", "@potential_gross_income" ] }, () => {
         
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
@@ -32,12 +32,24 @@ describe("[Income > Potential Gross Income]Support combined utility expense reim
                 testData.expenseType,
                 testData.expenseCellName,
                 testData.reimbursementType,
-                testData.knownInformation);
+                testData.knownInformation)
+            .fillReimbursementsByRow(
+                testData.reimbursementValue,
+                0,
+                testData.knownInformation.toLowerCase())
+            .fillVCLossByRow(testData.vcLossPercentage);
 
         cy.stepInfo("4. Navigate to Income -> Potential Gross Income and verify Combined Utilities expense reimburcement info");
         
+        const lessVCLossValue = testData.reimbursementValue * (testData.vcLossPercentage / 100);
+
         _NavigationSection.navigateToPotentialGrossIncome();
-            
+        Income._PotentialGrossIncome
+            .verifyCommercialVCLossCommentaryContain(testData.vcLossDiscussionCommentary)
+            .verifyPotentialReimbursementValue(testData.expenseType, `$${numberWithCommas(testData.reimbursementValue.toFixed(2))}`)
+            .verifyPotentialGrossIncomeValue(`$${numberWithCommas(testData.reimbursementValue.toFixed(2))}`)
+            .verifyLessReimbursementVCLossValue(testData.expenseType, `-$${numberWithCommas(lessVCLossValue.toFixed(2))}`);
+
         deleteReport(testData.reportCreationData.reportNumber);
     });
 });

@@ -17,8 +17,10 @@ export default {
     forecastItemBasis: "utilities" as BoweryReports.ForecastItemBasis,
     utilitiesExpenseForecast: 25,
     expenseType: Enums.PRO_FORMA_TYPES.utilities,
-    expenseCellName: Enums.EXPENSE_CELL_NAMES.utilities,
-    reimbursementType: "% of Appraiser Forecast",
-    knownInformation: "Annually",
-    vcLossPercentage: 10
+    expenseCellName: Enums.EXPENSE_CELL.utilities,
+    reimbursementType: Enums.REIMBURSEMENT_TYPES.dollarAmount,
+    knownInformation: "Annual",
+    reimbursementValue: 500,
+    vcLossPercentage: 10,
+    vcLossDiscussionCommentary: "We have applied a vacancy and collection loss of 10% to the utilities reimbursement, which has been added to our Pro Forma."
 };

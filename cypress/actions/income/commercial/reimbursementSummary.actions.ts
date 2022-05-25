@@ -17,7 +17,8 @@ class ReimbursementSummaryActions extends BaseActionsExt<typeof reimbursementSum
     selectExpenseType(expense: string, expenseCellName: string): ReimbursementSummaryActions {
         reimbursementSummary.expenseTypeDropdown.click();
         reimbursementSummary.getDropdownOptionByValue(expenseCellName).click();
-        reimbursementSummary.expenseTypeSelected.should("have.text", expense);
+        // eslint-disable-next-line no-irregular-whitespace
+        reimbursementSummary.expenseTypeSelected.should("have.text", `​${expense}`);
         return this;
     }
 
@@ -32,21 +33,21 @@ class ReimbursementSummaryActions extends BaseActionsExt<typeof reimbursementSum
     }
 
     enterCommercialReimbursement(expense: string, expenseCellName: string, expenseType: string, knownType: string): ReimbursementSummaryActions {
-        this.selectExpenseType(expense, expenseCellName);
-        this.selectReimbursmentType(expenseType);
-        this.selectKnownInformationType(knownType);
+        this.selectExpenseType(expense, expenseCellName)
+            .selectReimbursmentType(expenseType)
+            .selectKnownInformationType(knownType);
         return this;
     }
 
     addNewCommercialReimbursement(expense: string, expenseCellName: string, expenseType: string, knownType: string): ReimbursementSummaryActions {
-        this.openAddCommercialReimbursementModal();
-        this.enterCommercialReimbursement(expense, expenseCellName, expenseType, knownType);
-        this.clickSubmitBtn();
+        this.openAddCommercialReimbursementModal()
+            .enterCommercialReimbursement(expense, expenseCellName, expenseType, knownType)
+            .clickSubmitBtn();
         return this;
     }
 
-    fillReimbursementsByRow(value: number, index = 0): ReimbursementSummaryActions {
-        reimbursementSummary.getReimbursementByRow(index).click().clear().type(value.toString())
+    fillReimbursementsByRow(value: number, index = 0, knownInformation = "monthly"): ReimbursementSummaryActions {
+        reimbursementSummary.getReimbursementByRow(index, knownInformation).click().clear().type(value.toString())
             .should('have.value', `$${value}`);
         return this;
     }
@@ -55,6 +56,15 @@ class ReimbursementSummaryActions extends BaseActionsExt<typeof reimbursementSum
         values.forEach((reimbursement, index) => {
             this.fillReimbursementsByRow(reimbursement, index);
         });
+        return this;
+    }
+
+    fillVCLossByRow(value: number, index = 0): ReimbursementSummaryActions {
+        reimbursementSummary
+            .getVCLossInputByRow(index)
+            .click().clear()
+            .type(value.toString())
+            .should('have.value', value);
         return this;
     }
 }
