@@ -7,7 +7,7 @@ import { Income } from "../../../../actions";
 import proFormaTypes from "../../../../enums/proFormaTypes.enum";
 import Enums from "../../../../enums/incomeTypesCellNames.enum";
 
-describe("Potential Parking Income", 
+describe("Potential Laundry Income", 
     { tags:[ "@income", "@pro_forma" ] }, () => { 
     
     before("Login, create report, prepare data", () => {
