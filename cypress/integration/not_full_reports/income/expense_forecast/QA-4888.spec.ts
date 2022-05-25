@@ -16,7 +16,7 @@ describe("Historical expense Electricity Per Unit is correctly calculated and di
     });
 
 
-    it("Test body", { tags: "@snapshot_tests" }, () => {
+    it("Test body", () => {
 
         cy.stepInfo("1. Pre-condition: Residential Units should be filled in on Property > Summary form");
         _NavigationSection.navigateToPropertySummary();

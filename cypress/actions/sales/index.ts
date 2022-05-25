@@ -1,4 +1,4 @@
-import findCompsActions from "./findComps.actions";
+import findCompsActions from "./findComps/findComps.actions";
 import createCompMapActions from "./createCompMap.actions";
 import adjustCompsActions from "./adjustComps.actions";
 import valueConclusionActions from "./valueConclusion.actions";

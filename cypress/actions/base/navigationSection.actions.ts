@@ -3,19 +3,25 @@ import { Alias } from "../../utils/alias.utils";
 import BaseActionsExt from "./base.actions.ext";
 
 class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPage> {
-    
-    openReviewAndExport(isWithSave = false) {
+    private clickYesIfExist() {
+        cy.get("body").then($body => {
+            if ($body.text().includes("You have unsaved changes")) this.clickYesButton();
+        });
+        return this;
+    }
+
+    openReviewAndExport() {
         let reportAlias = "docxReportAsync";
         cy.intercept({
             method: 'GET',
             url: '/api/docx-report-async/get-report-hierarchy*'
         }).as(reportAlias);
         cy.get('[id="review-and-export"]').click();
-        if (isWithSave) this.clickYesButton();
+        this.clickYesIfExist();
         cy.wait(`@${reportAlias}`, { timeout:20000 });
         return this;
     }
-    
+
     verifyUnsavedChangesModal() {
         cy.get('[data-qa="form-confirm-dialog"]').should("be.visible");
         return this;
@@ -58,7 +64,7 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
 
     navigateToStabilizedRentRollInCommercial() {
         this.clickCommercialStabRentRollButton()
-            .clickYesButton();
+            .clickYesIfExist();
         return this;
     }
 
@@ -124,7 +130,7 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         this.clickIncomeApproachButton()
             .clickResidentialIncomeArrow()
             .clickInPlaceRentRollButton()
-            .clickYesButton();
+            .clickYesIfExist();
         return this;
     }
 
@@ -132,62 +138,60 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         this.clickIncomeApproachButton()
             .clickResidentialIncomeArrow()
             .clickRentCompsButton()
-            .clickYesButton();
+            .clickYesIfExist();
         return this;
     }
 
     openRentCompsInResidential() {
         this.clickRentCompsButton()
-            .clickYesButton();
+            .clickYesIfExist();
         return this;
     }
 
-    navigateToCommercialInPlaceRentRoll(isWithSave = true) {
+    navigateToCommercialInPlaceRentRoll() {
         this.clickIncomeApproachButton()
             .clickCommercialArrow()
-            .clickCommercialRentRollButton();
-        if (isWithSave) {
-            this.clickYesButton();
-        }
+            .clickCommercialRentRollButton()
+            .clickYesIfExist();
         return this;
     }
 
-    openInPlaceRentRollInCommercial(isWithSave = true): NavigationSectionActions {
-        this.clickCommercialRentRollButton();
-        if (isWithSave) this.clickYesButton();
+    openInPlaceRentRollInCommercial(): NavigationSectionActions {
+        this.clickCommercialRentRollButton()
+            .clickYesIfExist();
         return this;
     }
 
     navigateToPropertySummary() {
         this.clickPropertyButton()
             .clickSummaryButton()
-            .clickYesButton();
+            .clickYesIfExist();
         return this;
     }
 
     navigateToPropertyMarket(): NavigationSectionActions {
         this.clickPropertyButton()
             .clickMarketButton()
-            .clickYesButton();
+            .clickYesIfExist();
         return this;
     }
 
     navigateToClientPage() {
         this.clickReportButton()
             .clickClientButton()
-            .clickYesButton();
+            .clickYesIfExist();
         return this;
     }
 
     openSiteDescriptionInProperty() {
         this.clickSiteDescriptionButton()
-            .clickYesButton();
+            .clickYesIfExist();
         return this;
     }
 
     openMapsInProperty() {
         this.clickMapsButton()
-            .clickYesButton();
+            .clickYesIfExist();
         return this;
     }
 
@@ -201,12 +205,10 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         return this;
     }
 
-    navigateToCapRateConclusion(isWithSave = true) {
+    navigateToCapRateConclusion() {
         this.clickIncomeApproachButton()
-            .clickCapRateConclusion();
-        if (isWithSave) {
-            this.clickYesButton();
-        }
+            .clickCapRateConclusion()
+            .clickYesIfExist();
         return this;
     }
 
@@ -228,7 +230,7 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
     navigateToSalesValueConclusion() {
         this.clickSalesButton()
             .clickValueConclusionButton()
-            .clickYesButton();
+            .clickYesIfExist();
         return this;
     }
 
@@ -240,7 +242,7 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
     navigateToFindComps() {
         this.clickSalesButton()
             .clickFindCompsButton()
-            .clickYesButton();        
+            .clickYesIfExist();        
         cy.wait(`@${Alias.gql.FindSalesComps}`, { timeout:70000 });
 
         return this;
@@ -253,7 +255,7 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
 
     openAdjustCompsInSales() {
         this.clickAdjustCompsButton()
-            .clickYesButton();
+            .clickYesIfExist();
         return this;
     }
 
@@ -266,7 +268,7 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         this.clickIncomeApproachButton()
             .clickCommercialArrow()
             .clickCommercialRentComps()
-            .clickYesButton();
+            .clickYesIfExist();
         return this;
     }
 
@@ -278,20 +280,20 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
     navigateToComparableExpenses() {
         this.clickIncomeApproachButton()
             .clickComparableExpenses()
-            .clickYesButton();
+            .clickYesIfExist();
         return this;
     }
 
     navigateToCommercialUnits() {
         this.clickPropertyButton()
             .clickCommercialUnits()
-            .clickYesButton();
+            .clickYesIfExist();
         return this;
     }
 
-    openInPlaceRentRollInResidential(isWithSave = false) {
-        this.clickInPlaceRentRollButton();
-        if (isWithSave) this.clickYesButton();
+    openInPlaceRentRollInResidential() {
+        this.clickInPlaceRentRollButton()
+            .clickYesIfExist();
         return this;
     }
 
@@ -303,7 +305,7 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
     navigateToPropertyAmenities() {
         this.clickPropertyButton()
             .clickAmenitiesButton()
-            .clickYesButton();
+            .clickYesIfExist();
         return this;
     }
 
@@ -357,28 +359,28 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         this.clickIncomeApproachButton()
             .clickMiscellaneousIncome()
             .clickLaundryButton()
-            .clickYesButton();
+            .clickYesIfExist();
         return this;
     }
 
     navigateToCoverPage() {
         this.clickPreviewEditButton()
         .clickCoverPage()
-        .clickYesButton();
+        .clickYesIfExist();
     return this;
     }
 
     navigateToIntroduction() {
         this.clickPreviewEditButton()
         .clickIntroduction()
-        .clickYesButton();
+        .clickYesIfExist();
     return this;
     }
 
     navigateToLetterOfTransmittal() {
         this.clickPreviewEditButton()
             .clickLetterOfTransmittal()
-            .clickYesButton();
+            .clickYesIfExist();
         return this;
     }
 
@@ -395,7 +397,7 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
     navigateToPotentialGrossIncome() {
         this.clickIncomeApproachButton()
             .clickPotentialGrossIncome()
-            .clickYesButton();
+            .clickYesIfExist();
         return this;
     }
 
@@ -404,12 +406,10 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         return this;
     }
   
-    navigateToProForma(isWithSave = true): NavigationSectionActions {
+    navigateToProForma(): NavigationSectionActions {
         this.clickIncomeApproachButton()
             .clickProForma();
-        if (isWithSave) {
-            this.clickYesButton();
-        }
+            this.clickYesIfExist();
         return this;
     }
 
@@ -420,7 +420,7 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
 
     openCompGroupsInCommercial() {
         this.clickCommercialCompGroups()
-            .clickYesButton();
+            .clickYesIfExist();
         return this;
     }
 
@@ -437,7 +437,7 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
     navigateToExpenseHistory(): NavigationSectionActions {
         this.clickIncomeApproachButton()
             .clickExpenseHistoryButton()
-            .clickYesButton();
+            .clickYesIfExist();
         return this;
     }
 
@@ -449,7 +449,7 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
     navigateToExpenseForecast(): NavigationSectionActions {
         this.clickIncomeApproachButton()
             .clickExpenseForecastButton()
-            .clickYesButton();
+            .clickYesIfExist();
         return this;
     }
 
@@ -458,20 +458,23 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         return this;
     }
 
-    navigateToSupportingCapRates(isWithYes = false): NavigationSectionActions {
+    navigateToSupportingCapRates(): NavigationSectionActions {
         this.clickIncomeApproachButton()
-            .clickSupportingCapRates();
-        if(isWithYes) {
-            this.clickYesButton();
-        }
+            .clickSupportingCapRates()
+            .clickYesIfExist();
         return this;
     }
 
-    navigateToTaxInfo(isWithSave = true): NavigationSectionActions {
-        this.clickIncomeApproachButton().clickTaxInfo();
-        if (isWithSave) {
-            this.clickYesButton();
-        } 
+    navigateToTaxInfo(): NavigationSectionActions {
+        this.clickIncomeApproachButton()
+            .clickTaxInfo()
+            .clickYesIfExist();
+        return this;
+    }
+
+    openCommercialStabilizedRentRollInCommercial() {
+        this.clickCommercialStabRentRollButton()
+            .clickYesButton();
         return this;
     }
 }
