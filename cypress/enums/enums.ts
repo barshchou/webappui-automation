@@ -4,6 +4,8 @@ import valueConclusionTypesEnum from "./valueConclusionTypes.enum";
 import envUrlsEnum from "./envUrls.enum";
 import proFormaTypesEnum from "./proFormaTypes.enum";
 import expenseCellNames from "./expenseCellNames";
+import expenseHistoryTableRowsEnum from "./expenseHistoryTableRows.enum";
+import reimbursementTypes from "./reimbursementTypes.enum";
 
 export default {
     TEMPLATE_TYPE: templateTypesEnum,
@@ -11,5 +13,7 @@ export default {
     VALUE_CONCLUSION_TYPE: valueConclusionTypesEnum,
     ENV_URLS: envUrlsEnum,
     PRO_FORMA_TYPES: proFormaTypesEnum,
-    EXPENSE_CELL_NAMES: expenseCellNames
+    EXPENSE_CELL: expenseCellNames,
+    EXPENSE_HISTORY_TABLE_ROWS: expenseHistoryTableRowsEnum,
+    REIMBURSEMENT_TYPES: reimbursementTypes
 };

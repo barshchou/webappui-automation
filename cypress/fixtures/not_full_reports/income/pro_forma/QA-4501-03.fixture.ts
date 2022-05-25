@@ -7,6 +7,8 @@ const _numberOfResidentialUnits = 5;
 const _unitSf = [ 100000, 120000, 145000 ];
 const _rentSf = [ 499, 1256.12, 777.99 ];
 const _expenseType = Enums.PRO_FORMA_TYPES.realEstateTaxes;
+const _expenseTypeCellName = Enums.EXPENSE_CELL.realEstateTaxes;
+const _reimbursementType = Enums.REIMBURSEMENT_TYPES.dollarAmount;
 const _reimbursmentType = "Dollar Amount";
 const _knownInformation = "Monthly";
 const _monthlyReimbursement = [ 20, 30, 46.07 ];
@@ -51,4 +53,6 @@ export default {
     annualReimbursement: _annualReimbursementTotal(),
     reimbursmentPerSf: _reimbursementPerSf,
     reimbursmentPerUnit: _reimbursementPerUnit,
+    expenceTypeCellName: _expenseTypeCellName,
+    reimbursementType: _reimbursementType
 };

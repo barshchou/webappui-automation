@@ -44,6 +44,11 @@ class PotentialGrossIncomeActions extends BaseActionsExt<typeof potentialGrossIn
         return this;
     }
 
+    verifyPotentialGrossIncomeValue(incomeToBe: string): this {
+        grossIncomePage.potentialGrossIncome.should("have.text", incomeToBe);
+        return this;
+    }
+
     verifyOtherIncome(incomeToBe = "$0.00"): this {
         grossIncomePage.otherIncome.should("have.text", incomeToBe);
         return this;
