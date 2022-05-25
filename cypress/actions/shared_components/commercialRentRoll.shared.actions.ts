@@ -293,7 +293,7 @@ class CommercialRentRollSharedComponent<T extends CommercialRentRollSharedCompon
     }
 
     verifyEditDiscussionButtonsDisplayed(): this {
-        this.Page.formCancelButton(0).should("be.visible");
+        this.Page.formCancelButton().should("be.visible");
         this.Page.editDiscussionButton.should("not.exist");
         this.Page.formRevertToOriginalBtn().should("be.visible");
         this.Page.formSaveBtn().should("be.visible");
@@ -301,7 +301,7 @@ class CommercialRentRollSharedComponent<T extends CommercialRentRollSharedCompon
     }
 
     clickCancelDiscussionEditButton(): this {
-        this.Page.formCancelButton(0).click();
+        this.Page.formCancelButton().click();
         return this;
     }
 

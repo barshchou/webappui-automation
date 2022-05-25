@@ -38,7 +38,7 @@ export default class BasePage {
             .eq((index !== 0) ? index : 0);
     }
 
-    formCancelButton(index?: number) {
+    formCancelButton(index = 0) {
         return cy.xpath("//button[.='Cancel']")
             .eq((index !== 0) ? index : 0);
     }

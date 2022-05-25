@@ -18,12 +18,12 @@ describe("Verify the Cancel button functionality for Intended User and Identific
         Report._Client.Page.formEditBtn().click();
 
         cy.stepInfo("2. Verify that the Cancel button is displayed instead of the Edit button for both sections.");
-        Report._Client.Page.formCancelButton(0).should("be.visible");
+        Report._Client.Page.formCancelButton().should("be.visible");
         Report._Client.Page.formCancelButton(1).should("be.visible");
 
         cy.stepInfo("3. Click on the Cancel button and verify that the form closes form without saving changes with no warning message for both sections.");
-        Report._Client.Page.formCancelButton(0).click();
-        Report._Client.Page.formCancelButton(0).click();
+        Report._Client.Page.formCancelButton().click();
+        Report._Client.Page.formCancelButton().click();
         Report._Client.verifyIntendedUserTextBox(testData.verifyIntendedUserTextArea)
             .verifyIdentificationOfTheClientTextBox(testData.verifyIdentificationOfTheClientTextArea);
 

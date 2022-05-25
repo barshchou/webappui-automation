@@ -18,7 +18,7 @@ describe(`Verify the Revert to Original button functionality for Intended User a
         Report._Client.Page.formEditBtn().click();
 
         cy.stepInfo("2. Verify that the Revert to Original button is displayed instead of the Edit button for both sections.");
-        Report._Client.Page.formCancelButton(0).should("be.visible");
+        Report._Client.Page.formCancelButton().should("be.visible");
         Report._Client.Page.formCancelButton(1).should("be.visible");
         Report._Client.Page.formRevertToOriginalBtn().should("be.visible");
         Report._Client.Page.formRevertToOriginalBtn(1).should("be.visible");
