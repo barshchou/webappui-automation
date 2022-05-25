@@ -2,12 +2,11 @@ import { Tag } from '../../../../utils/tags.utils';
 import { Report } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
-import testData from '../../../../fixtures/not_full_reports/report/key_info/QA-4714_16-17.fixture';
+import testData from '../../../../fixtures/not_full_reports/report/key_info/QA-4714_16-17_21.fixture';
 
-describe(`[QA-4714_16-17] Verify the suggested text dropdown in the new narrative component added through "=" for the 'Foreclosure sale'
+describe(`[QA-4714_16-17_21] Verify the suggested text dropdown in the new narrative component added through "=" for the 'Foreclosure sale'
     then “=Sh“ and select the 'Sheriff's sale'  option on the Report > Key Info page for Property Rights Appraised and Definition of Market Value sections`,
     { tags:[ Tag.report, Tag.key_info ] }, () => {
-        
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
     });
@@ -19,16 +18,26 @@ describe(`[QA-4714_16-17] Verify the suggested text dropdown in the new narrativ
 
         cy.stepInfo(`2. Enter the “=F“ and select the 'Foreclosure sale' then “=Sh“ and select the 'Sheriff's sale' then “=Unc“ and select the 'Unchanged Renovation' 
             option for both sections.`);
+        Report._KeyInfo.Page.formEditBtn(0).click();
+        Report._KeyInfo.Page.formEditBtn(0).click();
         testData.chips.forEach(chip => {
-            Report._KeyInfo.enterPropertyRightsAppraisedComment(chip.enterValue, true, false, false);
+            Report._KeyInfo.enterPropertyRightsAppraisedComment(chip.enterValue, false, false, false);
             Report._KeyInfo.clickNarrativeSuggestions(chip.listValue);
             Report._KeyInfo.Page.textBoxPropertyRightsAppraised.should("include.text", chip.verifyTexValue);
 
-            Report._KeyInfo.enterDefinitionMarketValue(chip.enterValue, true, false, false);
+            Report._KeyInfo.enterDefinitionMarketValue(chip.enterValue, false, false, false);
             Report._KeyInfo.clickNarrativeSuggestions(chip.listValue, 1);
-            Report._KeyInfo.Page.textBoxPropertyRightsAppraised.should("include.text", chip.verifyTexValue);
+            Report._KeyInfo.Page.textBoxDefinitionOfMarketValue.should("include.text", chip.verifyTexValue);
+            Report._KeyInfo.clickSaveButton();
             cy.reload();
         });
+
+        // Need resolve bug in QA-4721
+        // cy.stepInfo("3. Verify value after save and reload");
+        // testData.chips.forEach(chip => {
+        //     Report._KeyInfo.Page.textBoxPropertyRightsAppraised.should("include.text", chip.verifyTexValue);
+        //     Report._KeyInfo.Page.textBoxDefinitionOfMarketValue.should("include.text", chip.verifyTexValue);
+        // });
 
         deleteReport(testData.reportCreationData.reportNumber);
     });
