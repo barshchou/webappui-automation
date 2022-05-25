@@ -6,7 +6,6 @@ const _numberOfCommercialUnits = 3;
 const _numberOfResidentialUnits = 5;
 const _numberOfParkingPlaces = 2;
 const _monthlyRents = [ 450, 231 ];
-const _expenseType = Enums.PRO_FORMA_TYPES.parkingIncome;
 
 const _annualRentPerSpace = () => {
     let annual = [];
@@ -39,7 +38,6 @@ export default {
     numberOfResidentialUnits: _numberOfResidentialUnits,
     numberOfCommercialUnits: _numberOfCommercialUnits,
     leaseStatuses: _leaseStatuses,
-    expenseType: _expenseType,
     annualRentTotal: _annualRentTotal(),
     parkingincomePerSf: _parkingincomePerSf,
     parkingincomePerUnit: _parkingincomePerUnit,

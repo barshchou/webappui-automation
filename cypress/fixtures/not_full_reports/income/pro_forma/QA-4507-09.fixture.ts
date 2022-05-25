@@ -5,7 +5,6 @@ const _grossBuildingArea = 5000;
 const _numberOfCommercialUnits = 3;
 const _numberOfResidentialUnits = 5;
 const _laundryIncome = 4567.99;
-const _expenseType = Enums.PRO_FORMA_TYPES.parkingIncome;
 
 const _laundryIncomePerSf = _laundryIncome / _grossBuildingArea;
 const _laundryIncomePerUnit = _laundryIncome / _numberOfResidentialUnits;
@@ -22,7 +21,6 @@ export default {
     numberOfResidentialUnits: _numberOfResidentialUnits,
     numberOfCommercialUnits: _numberOfCommercialUnits,
     leaseStatuses: _leaseStatuses,
-    expenseType: _expenseType,
     laundryIncome: _laundryIncome,
     laundryIncomePerSf: _laundryIncomePerSf,
     laundryIncomePerUnit: _laundryIncomePerUnit,
