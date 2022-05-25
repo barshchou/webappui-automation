@@ -34,14 +34,31 @@ describe("Potential Gross Income",
             Income._CommercialManager.InPlaceRentRoll.enterRentPerSFAnnuallyByRowNumber(rent, index);
         });
         
-        cy.stepInfo("3. Go to Income → Commercial → In-Place Rent Role and fill in all necessary values to the table"); 
+        cy.stepInfo("5. Go to Income → Reimbursement Summary and add Real Estate Taxes Reimbursement for commercial units"); 
         _NavigationSection.navigateToCommercialInPlaceRentRoll()
             .navigateToCommercialReimbursementSummary();
-        
-        cy.stepInfo("4. Go to Income → Reimbursement Summary and add Real Estate Taxes Reimbursement for commercial units"); 
         Income._CommercialManager.ReimbursementSummary.addNewCommercialReimbursement(
             testData.expenseType, testData.expenceTypeCellName, testData.reimbursementType, testData.knownInformation)
             .fillReimbursements(testData.monthlyReimbursement);
+
+        cy.stepInfo(`6. Go to Property → Amenities, check Parking checkbox and fill in the number of Parking Spaces, 
+                    check Laundry checkbox, check Storage Units checkbox and fill in the number of Storage Units`);
+        _NavigationSection.navigateToPropertyAmenities();
+        Property._Amenities.addParkingPlaces(testData.numberOfParkingPlaces)
+            .addStorageUnits(testData.storageUnits)
+            .checkLaundryRoomCheckbox();
+        
+        cy.stepInfo("7. Go to Income → Miscellaneous → Parking and fill in all necessary values");
+        _NavigationSection.navigateToParking();
+        Income._MiscellaneousManager.Parking.addMonthlyRents(testData.monthlyRents);
+
+        cy.stepInfo("8. Go to Income → Miscellaneous → Laundry and fill in all necessary values"); 
+        _NavigationSection.navigateToLaundry();
+        Income._MiscellaneousManager.Laundry.enterLaundryIncome(testData.laundryIncome);
+
+        cy.stepInfo("9. Go to Income → Miscellaneous → Storage and fill in all necessary values"); 
+        _NavigationSection.navigateToStorage();
+        Income._MiscellaneousManager.Storage.addStorageIncome(testData.storageIncome);
 
         cy.saveLocalStorage();
     });
@@ -53,14 +70,14 @@ describe("Potential Gross Income",
     });
 
     it(`[QA-4525]`, () => {
-        cy.stepInfo(`5 Total = [Total_PotentialResidentialIncome] + [Total_Potential[USE]Income](up to 5 uses) + 
+        cy.stepInfo(`11. Total = [Total_PotentialResidentialIncome] + [Total_Potential[USE]Income](up to 5 uses) + 
                     [Total_RealEstateTaxReimbursement] + [Total_ParkingIncome] + [Total_LaundryIncome] + 
                     [Total_StorageIncome] + [Total_OtherIncome]`);
         Income._ProFormaActions.verifyCategoryTotal(
             `$${numberWithCommas(Math.round(testData.potentialGrossIncomeTotal))}`, 
             proFormaTypes.potentialGrossIncome);
 
-        cy.stepInfo(`5.1 Verify that Total is taken from Income → Potential Gross Income 
+        cy.stepInfo(`11.1 Verify that Total is taken from Income → Potential Gross Income 
                     → table → Potential Gross Income`);
         _NavigationSection.navigateToPotentialGrossIncome();
         Income._PotentialGrossIncome.verifyIncomeTypeUnified(
@@ -68,14 +85,14 @@ describe("Potential Gross Income",
     });
 
     it(`[QA-4526]`, () => {
-        cy.stepInfo(`5. Verify that Pro Forma table contains Taxes Reimbursement PSF value`);
+        cy.stepInfo(`11. Verify that Pro Forma table contains Potential Gross Income PSF value`);
         Income._ProFormaActions.verifyCategoryPSFTotal(
             `$${numberWithCommas(testData.potentialGrossIncomePerSf.toFixed(2))}`, 
             proFormaTypes.potentialGrossIncome);
     });
 
     it(`[QA-4527]`, () => {
-        cy.stepInfo(`5. Verify that Pro Forma table contains Taxes Reimbursement Per Unit value`);
+        cy.stepInfo(`11. Verify that Pro Forma table contains Potential Gross Income Per Unit value`);
         Income._ProFormaActions.verifyCategoryPerUnitTotal(
             `$${numberWithCommas(Math.round(testData.potentialGrossIncomePerUnit))}`, 
             proFormaTypes.potentialGrossIncome);

@@ -13,6 +13,11 @@ const _reimbursementType = Enums.REIMBURSEMENT_TYPES.dollarAmount;
 const _reimbursmentType = "Dollar Amount";
 const _knownInformation = "Monthly";
 const _monthlyReimbursement = [ 20, 30, 46.07 ];
+const _storageUnits = 2;
+const _numberOfParkingPlaces = 2;
+const _monthlyRents = [ 450, 231 ];
+const _laundryIncome = 4567.99;
+const _storageIncome = 4321.98;
 
 const _totalCommercialIncome = () => {
     let total = 0;
@@ -73,5 +78,11 @@ export default {
     residentialMonthlyRent: _residentialMonthlyRent,
     potentialGrossIncomeTotal: _potentialGrossIncomeTotal,
     potentialGrossIncomePerSf: _potentialGrossIncomePerSf,
-    potentialGrossIncomePerUnit: _potentialGrossIncomePerUnit
+    potentialGrossIncomePerUnit: _potentialGrossIncomePerUnit,
+    storageUnits: _storageUnits,
+    numberOfParkingPlaces: _numberOfParkingPlaces,
+    monthlyRents: _monthlyRents,
+    laundryIncome: _laundryIncome,
+    storageIncome: _storageIncome
+    
 };
