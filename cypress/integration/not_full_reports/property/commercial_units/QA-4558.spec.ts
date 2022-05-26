@@ -55,7 +55,7 @@ describe("Verify the functionality of the Use* radio button",
             Income._CommercialManager.StabilizedRentRoll.verifyUseCellByRow(testData.useTexts[index])
                 .verifyProgressBarNotExist()
                 .clickEditDiscussionButton()
-                .Page.formCancelButton(0).click();
+                .Page.formCancelButton().click();
             _NavigationSection.navigateToCommercialUnits();
         });
         deleteReport(testData.reportCreationData.reportNumber);

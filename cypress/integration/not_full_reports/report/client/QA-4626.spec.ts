@@ -30,9 +30,9 @@ describe("Verify the display of the Client page.", { tags:[ Tag.report, Tag.clie
             Report._Client.Page.clientFileNumberField.should("be.visible");
             Report._Client.Page.nycbApplicationNumber.should("be.visible");
             Report._Client.Page.intendedUserTextBox.should("be.visible");
-            Report._Client.Page.formEditBtn(0).should("be.visible");
+            Report._Client.Page.formEditBtn().should("be.visible");
             Report._Client.Page.identificationOfClientTextBox.should("be.visible");
-            Report._Client.Page.formEditBtn(0).should("be.visible");
+            Report._Client.Page.formEditBtn().should("be.visible");
             Report._Client.Page.clientGuidelinesCommentary.should("be.visible");
             
 

@@ -23,22 +23,22 @@ export default class BasePage {
         return cy.xpath("//*[contains(@role, 'dialog')]/descendant::*[contains(text(), 'Yes, revert')]");
     }
 
-    formEditBtn(index?: number) {
+    formEditBtn(index = 0) {
         return cy.xpath('//*[@data-icon="pencil"]//ancestor::button')
             .eq((index !== 0) ? index : 0);
     }
 
-    formSaveBtn(index?: number) {
+    formSaveBtn(index = 0) {
         return cy.xpath("//button[.='Save']")
             .eq((index !== 0) ? index : 0);
     }
 
-    formRevertToOriginalBtn(index?: number) {
+    formRevertToOriginalBtn(index = 0) {
         return cy.xpath("//button[.='Revert to Original']")
             .eq((index !== 0) ? index : 0);
     }
 
-    formCancelButton(index?: number) {
+    formCancelButton(index = 0) {
         return cy.xpath("//button[.='Cancel']")
             .eq((index !== 0) ? index : 0);
     }
