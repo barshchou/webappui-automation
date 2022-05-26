@@ -4,10 +4,9 @@ import NavigationSection from "../../../../actions/base/navigationSection.action
 import Property from "../../../../actions/property/property.manager";
 import Income from "../../../../actions/income/income.manager";
 import tableExpenseHistoryCellNames from "../../../../../cypress/enums/expenseHistoryTableRows.enum";
-import { Tag } from "../../../../utils/tags.utils";
 
 describe("Historical expense Electricity Per SF is correctly calculated and displayed",
-        { tags: [ Tag.snapshot_tests, Tag.expense_forecast, Tag.income ] }, () => {
+        { tags: [ "@snapshot_tests", "@expense_forecast", "@income" ] }, () => {
 
         before("Login, create report", () => {
             createReport(testData.reportCreationData);

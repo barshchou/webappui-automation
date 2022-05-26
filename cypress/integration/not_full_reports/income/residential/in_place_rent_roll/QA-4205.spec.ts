@@ -3,10 +3,9 @@ import { createReport, deleteReport } from "../../../../../actions/base/baseTest
 import NavigationSection from "../../../../../actions/base/navigationSection.actions";
 import Income from "../../../../../actions/income/income.manager";
 import Enums from "../../../../../enums/enums";
-import { Tag } from "../../../../../utils/tags.utils";
 
 describe("Verify the Rent Roll Options are present on the In-Place Rent Roll page", 
-    { tags:[ Tag.income, Tag.residential, Tag.in_place_rent_roll ] }, () => {
+    { tags:[ "@income", "@residential", "@in_place_rent_roll" ] }, () => {
         
     before("Login, create report", () => {
         createReport(testData.reportCreationData);

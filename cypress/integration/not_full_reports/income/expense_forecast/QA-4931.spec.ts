@@ -4,10 +4,9 @@ import NavigationSection from "../../../../actions/base/navigationSection.action
 import Income from "../../../../actions/income/income.manager";
 import Property from "../../../../actions/property/property.manager";
 import tableExpenseHistoryCellNames from "../../../../../cypress/enums/expenseHistoryTableRows.enum";
-import { Tag } from "../../../../utils/tags.utils";
 
 describe("Historical expense Repairs & Maintenance Per Unit is correctly calculated and displayed", 
-  { tags:[ Tag.expense_forecast, Tag.income, Tag.snapshot_tests ] }, () => {
+  { tags:[ "@expense_forecast", "@income", "@snapshot_tests" ] }, () => {
     
   before("Login, create report", () => {
     createReport(testData.reportCreationData);

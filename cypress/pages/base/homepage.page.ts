@@ -40,6 +40,10 @@ class Homepage extends BasePage {
     get propertyIdentifierTypeInput() {return cy.get("*[name='search.propertyIdentifierType']");}
 
     get propertyIdentifierInput() {return cy.get("*[name='search.propertyIdentifier']");}
+
+    get reportNumberCells() {return cy.get("[aria-colindex='2']");}
+
+    get allReportsTab() {return cy.xpath("//button[.='ALL REPORTS']");}
 }
 
 export default new Homepage();
