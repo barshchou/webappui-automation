@@ -76,7 +76,7 @@ describe("Potential Gross Income",
             .verifyProgressBarNotExist();
     });
 
-    it(`[QA-4525]`, () => {
+    it("[QA-4525]", () => {
         cy.stepInfo(`11. Total = [Total_PotentialResidentialIncome] + [Total_Potential[USE]Income](up to 5 uses) + 
                     [Total_RealEstateTaxReimbursement] + [Total_ParkingIncome] + [Total_LaundryIncome] + 
                     [Total_StorageIncome] + [Total_OtherIncome]`);
@@ -91,14 +91,14 @@ describe("Potential Gross Income",
             Enums.potentialGrossIncome, `$${numberWithCommas(testData.potentialGrossIncomeTotal.toFixed(2))}`);
     });
 
-    it(`[QA-4526]`, () => {
+    it("[QA-4526]", () => {
         cy.stepInfo(`11. Verify that Pro Forma table contains Potential Gross Income PSF value`);
         Income._ProFormaActions.verifyCategoryPSFTotal(
             `$${numberWithCommas(testData.potentialGrossIncomePerSf.toFixed(2))}`, 
             proFormaTypes.potentialGrossIncome);
     });
 
-    it(`[QA-4527]`, () => {
+    it("[QA-4527]", () => {
         cy.stepInfo(`11. Verify that Pro Forma table contains Potential Gross Income Per Unit value`);
         Income._ProFormaActions.verifyCategoryPerUnitTotal(
             `$${numberWithCommas(Math.round(testData.potentialGrossIncomePerUnit))}`, 

@@ -30,7 +30,7 @@ describe("Potential Other Income",
             .verifyProgressBarNotExist();
     });
 
-    it(`[QA-4513]`, () => {
+    it("[QA-4513]", () => {
         cy.stepInfo(`5 Verify that Pro Forma table contains Other Income Total value`);
         Income._ProFormaActions.verifyCategoryTotal(
             `$${numberWithCommas(Math.round(testData.otherIncomeItem.annualAmount))}`, 
@@ -44,14 +44,14 @@ describe("Potential Other Income",
             `$${numberWithCommas(testData.otherIncomeItem.annualAmount.toFixed(2))}`);
     });
 
-    it(`[QA-4514]`, () => {
+    it("[QA-4514]", () => {
         cy.stepInfo(`5. Verify that Pro Forma table contains Other Income PSF value`);
         Income._ProFormaActions.verifyCategoryPSFTotal(
             `$${numberWithCommas(testData.annualIncomePerSf.toFixed(2))}`, 
             testData.otherIncomeItem.incomeCategory);
     });
 
-    it(`[QA-4515]`, () => {
+    it("[QA-4515]", () => {
         cy.stepInfo(`5. Verify that Pro Forma table contains Other Income Per Unit value`);
         Income._ProFormaActions.verifyCategoryPerUnitTotal(
             `$${numberWithCommas(Math.round(testData.annualIncomePerUnit))}`, 
