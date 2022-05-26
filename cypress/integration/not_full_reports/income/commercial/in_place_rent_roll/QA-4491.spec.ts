@@ -2,7 +2,6 @@ import testData from "../../../../../fixtures/not_full_reports/income/commercial
 import { _NavigationSection } from "../../../../../actions/base";
 import { Income } from "../../../../../actions";
 import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
-import { Tag } from "../../../../../utils/tags.utils";
 import { getTodayDateString } from "../../../../../../utils/date.utils";
 
 describe("Verify the Save button functionality on the In-Place Rent Roll page",
