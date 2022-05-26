@@ -4,6 +4,8 @@ class ParkingPage extends BasePage {
     get isParkingFreeCheckbox() {return cy.get("[data-qa=isParkingFree] input");}
 
     get parkingCommentary() {return cy.get("[data-qa^='parkingIncomeDiscussion.commentary']");}
+
+    parkingMonthlyRent(index = 0) {return cy.get(`[name='spaces[${index}].monthlyRent']`);}
 }
 
 export default new ParkingPage();

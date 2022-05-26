@@ -26,6 +26,8 @@ class PotentialGrossIncomePage extends BasePage {
 
     get potentialRealEstateTaxesReimbursement() { return cy.get("[data-qa=potentialRealEstateTaxesReimbursement-row] > [data-qa=value-cell]"); }
 
+    getIncomeTypeUnified(incomeType: string) {return cy.get(`[data-qa=${incomeType}-row] > [data-qa=value-cell]`);}
+
     getCommercialVCLossPercentage(useValue: string) { return cy.get(`[name='commercialVCLossPercentage.${useValue}']`); }
 
     getSubjectAreaCommercialVacancy(useValue: string) { return cy.get(`[name='subjectAreaCommercialVacancy.${useValue}']`); }
