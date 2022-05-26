@@ -157,6 +157,11 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
         return this;
     }
 
+    checkincludeInProFormaCheckbox(forecastItem: string): ExpenseForecastActions {
+        expenseForecastPage.getCheckboxIncludeInProForma(forecastItem).check().should("have.value", "true");
+        return this;
+    }
+
     enterPercentOfEgi(value: number): ExpenseForecastActions {
         expenseForecastPage.percentOfEgiInput.clear().type(`${value}`).should("have.value", value);
         return this;
