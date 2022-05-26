@@ -31,7 +31,8 @@ class LaundryActions extends BaseActionsExt<typeof laundryPage>{
         return this;
     }
 
-    enterLaundryVCLossPercentage(percentage: number): LaundryActions {
+    enterLaundryVCLossPercentage(percentage: number, type: string): LaundryActions {
+        this.checkLaundryVCLossRadio(type);
         laundryPage.laundryVCLossPercentage.clear().type(percentage.toString()).should("have.value", percentage);
         if (percentage > 100) {
             cy.contains("Max value is 100").should("exist");

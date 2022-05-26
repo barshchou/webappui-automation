@@ -14,6 +14,20 @@ class StorageActions extends BaseActionsExt<typeof storagePage> {
         storagePage.storageIncomeTextField.should("have.value", `$${numberWithCommas(income)}`);
         return this;
     }
+
+    checkStorageVCLossRadio(value: string): StorageActions {
+        storagePage.storageVCLossRadio.check(value).should("be.checked");
+        return this;
+    }
+
+    enterStorageVCLossPercentage(percentage: number, type: string): StorageActions {
+        this.checkStorageVCLossRadio(type);
+        storagePage.storageVCLossPercentage.clear().type(percentage.toString()).should("have.value", percentage);
+        if (percentage > 100) {
+            cy.contains("Max value is 100").should("exist");
+        }
+        return this;
+    }
 }
 
 export default new StorageActions(storagePage);

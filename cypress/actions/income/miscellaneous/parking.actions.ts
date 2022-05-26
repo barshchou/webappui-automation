@@ -8,6 +8,22 @@ class ParkingActions extends BaseActionsExt<typeof parkingPage> {
         return this;
     }
 
+    checkVCLossTypeCheckbox(type: string): ParkingActions {
+        parkingPage.vcLossTypeCheckbox(type).check().should("have.value", type);
+        return this;
+    }
+
+    addParkingVCLossPercentage(type: string, percent: number): ParkingActions {
+        this.checkVCLossTypeCheckbox(type)
+            .fillVCLossPercentage(percent);
+        return this;
+    }
+
+    fillVCLossPercentage(value: number): ParkingActions {
+        parkingPage.parkingVCLossPercentage.clear().type(`${value}`).should('have.value', value);
+        return this;
+    }
+
     verifyParkingCommentary(commToBe: string): ParkingActions {
         parkingPage.parkingCommentary.should("have.text", commToBe);
         return this;
