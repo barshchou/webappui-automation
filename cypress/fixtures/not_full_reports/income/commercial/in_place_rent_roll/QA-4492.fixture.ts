@@ -10,11 +10,15 @@ const _reportCreationData = () => {
 };
 
 const _leaseStatus: BoweryReports.LeaseStatus = "Occupied";
+const _cellNameStart: BoweryReports.LeaseDateName = "Start";
+const _cellNameExpiry: BoweryReports.LeaseDateName = "Expiry";
 
 export default {
     reportCreationData: _reportCreationData(),
     newTenantName: "Test",
     rentPerSF: 100,
     newCommentary: 'some text for discussion',
-    leaseStatus: _leaseStatus
+    leaseStatus: _leaseStatus,
+    cellNameStart: _cellNameStart,
+    cellNameExpiry: _cellNameExpiry 
 };
