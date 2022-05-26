@@ -1,17 +1,15 @@
-import { Tag } from '../../../../utils/tags.utils';
 import { Report } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import testData from '../../../../fixtures/not_full_reports/report/key_info/QA-4721_24-25.fixture';
 
-// Remove skip after fix bug
 describe(`Verify the Save and Save & Continue button functionality on the Report > Key Info page:`,
-    { tags:[ Tag.report, Tag.key_info ] }, () => {
+    { tags:[ "@report", "@key_info" ] }, () => {
     beforeEach("Login, create report", () => {
         createReport(testData.reportCreationData);
     });
 
-    it.only("[QA-4721]", () => {
+    it("[QA-4721]", () => {
         cy.stepInfo("1. Proceed to the Report > Key Info page");
         _NavigationSection.navigateToReportInformation()
             .clickYesButton();
@@ -23,10 +21,8 @@ describe(`Verify the Save and Save & Continue button functionality on the Report
         Report._KeyInfo.enterDefinitionMarketValue(testData.enterValue, true, false, false);
         Report._KeyInfo.clickNarrativeSuggestions(testData.listValue, 1);
         Report._KeyInfo.Page.textBoxDefinitionOfMarketValue.should("include.text", testData.verifyTexValue);
-        // cy.wait(500);
+        cy.wait(500);
         Report._KeyInfo.clickSaveButton();
-        cy.intercept("PATCH", "/report/**").as("save")
-        cy.wait("@save")
         cy.reload();
        
 
@@ -49,6 +45,7 @@ describe(`Verify the Save and Save & Continue button functionality on the Report
         Report._KeyInfo.enterDefinitionMarketValue(testData.enterValue, true, false, false);
         Report._KeyInfo.clickNarrativeSuggestions(testData.listValue, 1);
         Report._KeyInfo.Page.textBoxDefinitionOfMarketValue.should("include.text", testData.verifyTexValue);
+        cy.wait(500);
         Report._KeyInfo.clickSaveContinueButton();
 
         cy.stepInfo("3. Verify that the changes are saved and the user is redirected to the next page (Report > Appraiser)");
