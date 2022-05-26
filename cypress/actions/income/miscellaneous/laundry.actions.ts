@@ -31,7 +31,7 @@ class LaundryActions extends BaseActionsExt<typeof laundryPage>{
         return this;
     }
 
-    enterLaundryVCLossPercentage(percentage: number, type: string): LaundryActions {
+    enterLaundryVCLossPercentage(percentage: number, type: BoweryReports.LaundryVcLossType): LaundryActions {
         this.checkLaundryVCLossRadio(type);
         laundryPage.laundryVCLossPercentage.clear().type(percentage.toString()).should("have.value", percentage);
         if (percentage > 100) {

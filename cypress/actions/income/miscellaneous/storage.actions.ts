@@ -20,7 +20,7 @@ class StorageActions extends BaseActionsExt<typeof storagePage> {
         return this;
     }
 
-    enterStorageVCLossPercentage(percentage: number, type: string): StorageActions {
+    enterStorageVCLossPercentage(percentage: number, type: BoweryReports.StorageVcLossType): StorageActions {
         this.checkStorageVCLossRadio(type);
         storagePage.storageVCLossPercentage.clear().type(percentage.toString()).should("have.value", percentage);
         if (percentage > 100) {

@@ -13,7 +13,7 @@ class ParkingActions extends BaseActionsExt<typeof parkingPage> {
         return this;
     }
 
-    addParkingVCLossPercentage(type: string, percent: number): ParkingActions {
+    addParkingVCLossPercentage(type: BoweryReports.ParkingVcLossType, percent: number): ParkingActions {
         this.checkVCLossTypeCheckbox(type)
             .fillVCLossPercentage(percent);
         return this;
