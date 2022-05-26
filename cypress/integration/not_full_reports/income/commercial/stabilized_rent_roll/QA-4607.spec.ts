@@ -3,9 +3,6 @@ import { createReport, deleteReport } from "../../../../../actions/base/baseTest
 import NavigationSection from "../../../../../actions/base/navigationSection.actions";
 import Property from "../../../../../actions/property/property.manager";
 import Income from "../../../../../actions/income/income.manager";
-import { Tag } from "../../../../../utils/tags.utils";
-
-
 
 /**
  * ernst: This test needs to be skipped due to drag and drop issues,
@@ -16,7 +13,7 @@ import { Tag } from "../../../../../utils/tags.utils";
 */
 
 describe.skip("Verify the Commercial Stabilized Rent Roll table", 
-    { tags: [ Tag.income, Tag.commercial, Tag.stabilized_rent_roll ] }, () => {
+    { tags: [ "@income", "@commercial", "@stabilized_rent_roll" ] }, () => {
         
     before("Login, create report", () => {
         cy.stepInfo(`

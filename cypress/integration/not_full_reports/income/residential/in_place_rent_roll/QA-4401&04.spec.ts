@@ -2,10 +2,9 @@ import testData from "../../../../../fixtures/not_full_reports/income/residentia
 import NavigationSection from "../../../../../actions/base/navigationSection.actions";
 import Income from "../../../../../actions/income/income.manager";
 import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
-import { Tag } from "../../../../../utils/tags.utils";
 
 describe("Verify the Save and Save&Continue buttons functionality", 
-    { tags:[ Tag.income, Tag.residential, Tag.in_place_rent_roll ] }, () => {
+    { tags:[ "@income", "@residential", "@in_place_rent_roll" ] }, () => {
         
     beforeEach("Login, create report, check checkbox", () => {
         createReport(testData.reportCreationData);

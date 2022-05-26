@@ -2,10 +2,9 @@ import { Report } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import testData from '../../../../fixtures/not_full_reports/report/client/QA-4635.fixture';
-import { Tag } from "../../../../utils/tags.utils";
 
 describe("Verify the Save button functionality for Intended User and Identification of the Client sections.", 
-    { tags: [ Tag.report, Tag.client ] }, () => {
+    { tags: [ "@report", "@client" ] }, () => {
         
     before("Login, create report", () => {
         createReport(testData.reportCreationData);

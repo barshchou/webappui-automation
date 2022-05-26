@@ -10,7 +10,7 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         return this;
     }
 
-    openReviewAndExport() {
+    openReviewAndExport(isNewReport = true) {
         let reportAlias = "docxReportAsync";
         cy.intercept({
             method: 'GET',
@@ -18,7 +18,7 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         }).as(reportAlias);
         cy.get('[id="review-and-export"]').click();
         this.clickYesIfExist();
-        cy.wait(`@${reportAlias}`, { timeout:20000 });
+        if (isNewReport) cy.wait(`@${reportAlias}`, { timeout:20000 });
         return this;
     }
 

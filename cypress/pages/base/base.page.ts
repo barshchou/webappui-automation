@@ -7,6 +7,10 @@ export default class BasePage {
         return cy.xpath("//header");
     }
 
+    get pageTitle() {
+        return cy.get("h5");
+    }
+
     get SaveAndContinueBtn() {
         return cy.get("[data-qa='form-submit-btn']");
     }
