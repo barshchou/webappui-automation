@@ -1,7 +1,8 @@
+import { ReviewExport } from './../../../../actions/index';
 import { Report } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
-import testData from '../../../../fixtures/not_full_reports/report/key_info/QA-4721_24-25.fixture';
+import testData from '../../../../fixtures/not_full_reports/report/key_info/QA-4721_24-26.fixture';
 
 describe(`Verify the Save and Save & Continue button functionality on the Report > Key Info page:`,
     { tags:[ "@report", "@key_info" ] }, () => {
@@ -97,6 +98,18 @@ describe(`Verify the Save and Save & Continue button functionality on the Report
         cy.go("back");
         Report._KeyInfo.Page.textBoxPropertyRightsAppraised.should("not.include.text", testData.verifySecondTexValue);
         Report._KeyInfo.Page.textBoxDefinitionOfMarketValue.should("not.include.text", testData.verifySecondTexValue);
+
+        deleteReport(testData.reportCreationData.reportNumber);
+    });
+
+    it.only("[QA-4726]", () => {
+        cy.stepInfo("1. Proceed to the Report > Key Info page");
+        _NavigationSection.navigateToReportInformation()
+            .clickYesButton();
+       
+        cy.stepInfo("3. Click on the Back button and verify the user is redirected to another page (Settings & Export > Review and Export).");
+        Report._KeyInfo.clickBackButton();
+        ReviewExport.verifyPageIsOpened();
 
         deleteReport(testData.reportCreationData.reportNumber);
     });

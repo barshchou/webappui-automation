@@ -1,10 +1,12 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import reviewExportPage from "../../pages/reviewExport/reviewExport.page";
-import BaseActions from "../base/base.actions";
-class ReviewExportActions extends BaseActions {
-    get Page() {
-        return reviewExportPage;
-    }    
+import BaseActionsExt from "../base/base.actions.ext";
+class ReviewExportActions extends BaseActionsExt<typeof reviewExportPage> {
+
+    verifyPageIsOpened() {
+        reviewExportPage.headerTitle.should("exist");
+        return this;
+    }
     
     waitForReportGenerated(): this {
         cy.get('[data-qa="download-btn"]', { timeout: 120000 }).should("be.visible");
@@ -30,4 +32,4 @@ class ReviewExportActions extends BaseActions {
         return this;
     }
 }
-export default new ReviewExportActions();
+export default new ReviewExportActions(reviewExportPage);
