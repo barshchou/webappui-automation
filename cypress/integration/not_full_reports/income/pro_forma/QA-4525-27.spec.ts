@@ -62,6 +62,11 @@ describe("Potential Gross Income",
             .clickYesIfExist();
         Income._MiscellaneousManager.Storage.addStorageIncome(testData.storageIncome);
 
+        cy.stepInfo("10. Go to Income → Miscellaneous → Other and fill in all necessary values"); 
+        _NavigationSection.clickOtherButton()
+            .clickYesIfExist();
+            Income._MiscellaneousManager.Other.addOtherIncome(testData.otherIncomeItem);
+
         cy.saveLocalStorage();
     });
     

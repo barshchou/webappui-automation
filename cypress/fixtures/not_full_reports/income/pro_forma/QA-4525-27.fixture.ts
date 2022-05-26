@@ -19,6 +19,13 @@ const _monthlyRents = [ 450, 231 ];
 const _laundryIncome = 4567.99;
 const _storageIncome = 4321.98;
 
+const _otherIncomeItem: BoweryReports.OtherIncomeItem = {
+    vcLossType: "Other",
+    vcPercent: 2,
+    incomeCategory: "Billboard",
+    annualAmount: 4422.79
+};
+
 const _totalCommercialIncome = () => {
     let total = 0;
     for (let i = 0; i < _commercialUnitSf.length; i++){
@@ -68,7 +75,7 @@ const _totalParkingIncome = () => {
 };
 
 const _potentialGrossIncomeTotal = _annualReimbursementTotal() + _totalCommercialIncome() + _totalResidentialIncome() +
-    _storageIncome + _laundryIncome + _totalParkingIncome();
+    _storageIncome + _laundryIncome + _otherIncomeItem.annualAmount + _totalParkingIncome();
 const _potentialGrossIncomePerSf = _potentialGrossIncomeTotal / _grossBuildingArea;
 const _potentialGrossIncomePerUnit = _potentialGrossIncomeTotal / _numberOfResidentialUnits;
 
@@ -100,6 +107,6 @@ export default {
     numberOfParkingPlaces: _numberOfParkingPlaces,
     monthlyRents: _monthlyRents,
     laundryIncome: _laundryIncome,
-    storageIncome: _storageIncome
-    
+    storageIncome: _storageIncome,
+    otherIncomeItem: _otherIncomeItem
 };
