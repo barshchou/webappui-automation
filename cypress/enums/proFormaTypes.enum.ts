@@ -2,6 +2,8 @@ const proFormaType = {
     potentialResIncome: "Potential Residential Income",
     potentialUnderterminedCommercialIncome: "Potential Undetermined Commercial Income",
     potentialCommercialIncome: "Potential Commercial Income",
+    parkingIncome: "Parking Income",
+    laundryIncome: "Laundry Income",
     potentialRealEstateTaxesReimbursement: "Potential Real Estate Taxes Reimbursement",
     otherIncome: "Other Income",
     potentialGrossIncome: "Potential Gross Income",
