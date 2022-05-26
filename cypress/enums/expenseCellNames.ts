@@ -5,14 +5,14 @@ const expensesCellNames = {
     electricity: "electricity",
     fuel: "fuel",
     waterAndSewer: "waterAndSewer",
+    utilities: "utilities",
     repairAndMaintenance: "repairsAndMaintenance",
     payrollBenefits: "payrollAndBenefits",
     generalAndAdministrative: "generalAndAdministrative",
     legalAndProfessional: "legalAndProfessionalFees",
     miscelaneous: "miscellaneous",
     managementFees: "management",
-    replacementsAndReserves: "reserves",
-    
+    replacementsAndReserves: "reserves"
 };
 
 export default Object.freeze(expensesCellNames);

@@ -4,11 +4,11 @@ import { createReport, deleteReport } from "../../../../actions/base/baseTest.ac
 import { _NavigationSection } from "../../../../actions/base";
 import { Property } from '../../../../actions/index';
 import { Income } from "../../../../actions";
-import { Tag } from "../../../../utils/tags.utils";
 import proFormaTypes from "../../../../enums/proFormaTypes.enum";
+import Enums from "../../../../enums/incomeTypesCellNames.enum";
 
 describe("Potential Real Estate Tax Reimbursement", 
-    { tags:[ Tag.income, Tag.pro_forma ] }, () => {
+    { tags:[ "@income", "@pro_forma" ] }, () => {
     
     before("Login, create report, prepare data", () => {
         cy.stepInfo(`1. Create new report or open the report which is already created. 
@@ -57,7 +57,8 @@ describe("Potential Real Estate Tax Reimbursement",
         cy.stepInfo(`5.1 Verify that Total is taken from Income → Potential Gross Income 
                     → table → Potential Real Estate Taxes Reimbursement`);
         _NavigationSection.navigateToPotentialGrossIncome();
-        Income._PotentialGrossIncome.verifyPotentialRealEstateTaxesReimbursement(`$${numberWithCommas(testData.annualReimbursement.toFixed(2))}`);
+        Income._PotentialGrossIncome.verifyIncomeTypeUnified(
+            Enums.potentialRealEstateTaxesReimbursement, `$${numberWithCommas(testData.annualReimbursement.toFixed(2))}`);
     });
 
     it(`[QA-4502]: `, () => {
