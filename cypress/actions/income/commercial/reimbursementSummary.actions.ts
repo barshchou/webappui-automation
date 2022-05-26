@@ -17,8 +17,7 @@ class ReimbursementSummaryActions extends BaseActionsExt<typeof reimbursementSum
     selectExpenseType(expense: string, expenseCellName: string): ReimbursementSummaryActions {
         reimbursementSummary.expenseTypeDropdown.click();
         reimbursementSummary.getDropdownOptionByValue(expenseCellName).click();
-        // eslint-disable-next-line no-irregular-whitespace
-        reimbursementSummary.expenseTypeSelected.should("have.text", `​${expense}`);
+        reimbursementSummary.expenseTypeSelected.should("contain.text", `${expense}`);
         return this;
     }
 
