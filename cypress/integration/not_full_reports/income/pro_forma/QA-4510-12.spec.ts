@@ -36,7 +36,7 @@ describe("Potential Storage Income",
             .verifyProgressBarNotExist();
     });
 
-    it(`[QA-4510]`, () => {
+    it("[QA-4510]", () => {
         cy.stepInfo(`5 Verify that Pro Forma table contains Storage Income Total value`);
         Income._ProFormaActions.verifyCategoryTotal(
             `$${numberWithCommas(Math.round(testData.storageIncome))}`, 
@@ -50,14 +50,14 @@ describe("Potential Storage Income",
             `$${numberWithCommas(testData.storageIncome.toFixed(2))}`);
     });
 
-    it(`[QA-4511]`, () => {
+    it("[QA-4511]", () => {
         cy.stepInfo(`5. Verify that Pro Forma table contains Storage Income PSF value`);
         Income._ProFormaActions.verifyCategoryPSFTotal(
             `$${numberWithCommas(testData.storageIncomePerSf.toFixed(2))}`, 
             proFormaTypes.storageIncome);
     });
 
-    it(`[QA-4512]`, () => {
+    it("[QA-4512]", () => {
         cy.stepInfo(`5. Verify that Pro Forma table contains Storage Income Per Unit value`);
         Income._ProFormaActions.verifyCategoryPerUnitTotal(
             `$${numberWithCommas(Math.round(testData.storageIncomePerUnit))}`, 

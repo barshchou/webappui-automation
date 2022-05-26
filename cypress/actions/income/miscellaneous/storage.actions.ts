@@ -10,7 +10,7 @@ class StorageActions extends BaseActionsExt<typeof storagePage> {
     }
 
     addStorageIncome(income: number): StorageActions {
-        storagePage.storageIncomeTextField.clear().type(income.toString());
+        storagePage.storageIncomeTextField.clear().type(`${income}`);
         storagePage.storageIncomeTextField.should("have.value", `$${numberWithCommas(income)}`);
         return this;
     }
