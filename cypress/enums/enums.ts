@@ -6,6 +6,7 @@ import proFormaTypesEnum from "./proFormaTypes.enum";
 import expenseCellNames from "./expenseCellNames";
 import expenseHistoryTableRowsEnum from "./expenseHistoryTableRows.enum";
 import reimbursementTypes from "./reimbursementTypes.enum";
+import incomeTypesCellNamesEnum from "./incomeTypesCellNames.enum";
 
 export default {
     TEMPLATE_TYPE: templateTypesEnum,
@@ -15,5 +16,6 @@ export default {
     PRO_FORMA_TYPES: proFormaTypesEnum,
     EXPENSE_CELL: expenseCellNames,
     EXPENSE_HISTORY_TABLE_ROWS: expenseHistoryTableRowsEnum,
-    REIMBURSEMENT_TYPES: reimbursementTypes
+    REIMBURSEMENT_TYPES: reimbursementTypes,
+    INCOME_TYPES_CELL_NAMES: incomeTypesCellNamesEnum
 };

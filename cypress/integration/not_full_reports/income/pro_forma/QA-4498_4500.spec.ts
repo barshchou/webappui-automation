@@ -5,6 +5,7 @@ import { _NavigationSection } from "../../../../actions/base";
 import { Property } from '../../../../actions';
 import { Income } from "../../../../actions";
 import proFormaTypes from "../../../../enums/proFormaTypes.enum";
+import Enums from "../../../../enums/incomeTypesCellNames.enum";
 
 describe("Potential [USE(Property -> Commercial Units] Income -> PSF / Per Unit", 
     { tags:[ "@income", "@pro_forma" ] }, () => {
@@ -64,7 +65,7 @@ describe("Potential [USE(Property -> Commercial Units] Income -> PSF / Per Unit"
         cy.stepInfo(`4.1 Verify that Total is taken from Income → 
             Potential Gross Income → table → Potential Commercial Income`);
         _NavigationSection.navigateToPotentialGrossIncome();
-        Income._PotentialGrossIncome.verifyPotentialGrossIncomeValue(`$${numberWithCommas(testData.total.toFixed(2))}`);
+        Income._PotentialGrossIncome.verifyIncomeTypeUnified(Enums.potentialGrossIncome, `$${numberWithCommas(testData.total.toFixed(2))}`);
     });
 
     after("Delete report after test suite", () => {
