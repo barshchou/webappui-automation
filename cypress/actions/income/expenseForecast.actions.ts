@@ -304,13 +304,14 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
         return this;
     }
 
-    addCustomExpenseCategory(categoryName): ExpenseForecastActions {
+    addCustomExpenseCategory(categoryName: string): ExpenseForecastActions {
         expenseForecastPage.createNewCategoryButton.click();
         expenseForecastPage.newCategoryExpenseName.clear().type(categoryName);
         this.Page.formSaveBtn(1).click();
         this.verifyProgressBarNotExist();
         return this;
     }
+
 }
 
 export default new ExpenseForecastActions(expenseForecastPage);
