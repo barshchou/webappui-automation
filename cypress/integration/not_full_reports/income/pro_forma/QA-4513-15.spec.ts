@@ -52,7 +52,7 @@ describe("Potential Other Income",
     });
 
     it(`[QA-4515]`, () => {
-        cy.stepInfo(`5. Verify that Pro Forma table contains Storage Income Per Unit value`);
+        cy.stepInfo(`5. Verify that Pro Forma table contains Other Income Per Unit value`);
         Income._ProFormaActions.verifyCategoryPerUnitTotal(
             `$${numberWithCommas(Math.round(testData.annualIncomePerUnit))}`, 
             testData.otherIncomeItem.incomeCategory);

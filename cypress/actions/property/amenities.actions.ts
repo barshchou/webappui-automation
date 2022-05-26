@@ -6,7 +6,7 @@ class AmenitiesActions extends BaseActionsExt<typeof amenitiesPage>{
 
     addParkingPlaces(numberOfPlaces: number): AmenitiesActions {
         amenitiesPage.hasParkingCheckbox.check().should("have.value", "true");
-        amenitiesPage.parkingSpacesNumberField.clear().type(numberOfPlaces.toString());
+        amenitiesPage.parkingSpacesNumberField.clear().type(`${numberOfPlaces}`);
         if(isDecimal(numberOfPlaces)) {
             numberOfPlaces = cutDecimalPartToNumberOfDigits(numberOfPlaces, 0);
         }
@@ -34,7 +34,7 @@ class AmenitiesActions extends BaseActionsExt<typeof amenitiesPage>{
 
     addStorageUnits(units: number): AmenitiesActions {
         this.checkStorageCheckbox();
-        amenitiesPage.storageUnitsTextField.clear().type(units.toString());
+        amenitiesPage.storageUnitsTextField.clear().type(`${units}`);
         amenitiesPage.storageUnitsTextField.should("have.value", units);
         return this;
     }
