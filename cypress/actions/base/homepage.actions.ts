@@ -140,8 +140,13 @@ class HomepageActions extends BaseActionsExt<typeof homepagePage> {
         return this;
     }
 
-    openReportByIndex(index: number): this {
-        homepagePage.reportNumberCells.eq(index).click({ force: true });
+    openReportByName(reportNumber: string): this {
+        homepagePage.reportNumberCells.contains(reportNumber).click({ force: true });
+        return this;
+    }
+
+    clickAllReportsTab(): this {
+        homepagePage.allReportsTab.click();
         return this;
     }
 
