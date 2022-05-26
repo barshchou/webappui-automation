@@ -319,6 +319,11 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         return this;
     }
 
+    clickOtherButton() {
+        navigationSectionPage.other.click();
+        return this;
+    }
+
     clickParkingButton() {
         navigationSectionPage.parking.click();
         return this;
@@ -377,6 +382,14 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         this.clickIncomeApproachButton()
             .clickMiscellaneousIncome()
             .clickStorageButton()
+            .clickYesIfExist();
+        return this;
+    }
+
+    navigateToOther() {
+        this.clickIncomeApproachButton()
+            .clickMiscellaneousIncome()
+            .clickOtherButton()
             .clickYesIfExist();
         return this;
     }
