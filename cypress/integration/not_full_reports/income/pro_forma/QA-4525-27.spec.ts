@@ -53,11 +53,13 @@ describe("Potential Gross Income",
         Income._MiscellaneousManager.Parking.addMonthlyRents(testData.monthlyRents);
 
         cy.stepInfo("8. Go to Income → Miscellaneous → Laundry and fill in all necessary values"); 
-        _NavigationSection.navigateToLaundry();
+        _NavigationSection.clickLaundryButton()
+            .clickYesIfExist();
         Income._MiscellaneousManager.Laundry.enterLaundryIncome(testData.laundryIncome);
 
         cy.stepInfo("9. Go to Income → Miscellaneous → Storage and fill in all necessary values"); 
-        _NavigationSection.navigateToStorage();
+        _NavigationSection.clickStorageButton()
+            .clickYesIfExist();
         Income._MiscellaneousManager.Storage.addStorageIncome(testData.storageIncome);
 
         cy.saveLocalStorage();

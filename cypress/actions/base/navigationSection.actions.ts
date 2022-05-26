@@ -3,7 +3,7 @@ import { Alias } from "../../utils/alias.utils";
 import BaseActionsExt from "./base.actions.ext";
 
 class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPage> {
-    private clickYesIfExist() {
+    clickYesIfExist() {
         cy.get("body").then($body => {
             if ($body.text().includes("You have unsaved changes")) this.clickYesButton();
         });

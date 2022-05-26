@@ -51,7 +51,24 @@ const _annualReimbursementTotal = () => {
     return total;
 };
 
-const _potentialGrossIncomeTotal = _annualReimbursementTotal() + _totalCommercialIncome() + _totalResidentialIncome();
+const _annualRentPerSpace = () => {
+    let annual = [];
+    _monthlyRents.forEach(element => {
+        annual.push(element * 12);
+    });
+    return annual;
+};
+
+const _totalParkingIncome = () => {
+    let total = 0;
+    _annualRentPerSpace().forEach(reimbursement => {
+        total = total + reimbursement;
+    });
+    return total;
+};
+
+const _potentialGrossIncomeTotal = _annualReimbursementTotal() + _totalCommercialIncome() + _totalResidentialIncome() +
+    _storageIncome + _laundryIncome + _totalParkingIncome();
 const _potentialGrossIncomePerSf = _potentialGrossIncomeTotal / _grossBuildingArea;
 const _potentialGrossIncomePerUnit = _potentialGrossIncomeTotal / _numberOfResidentialUnits;
 
