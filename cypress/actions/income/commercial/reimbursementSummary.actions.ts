@@ -47,7 +47,7 @@ class ReimbursementSummaryActions extends BaseActionsExt<typeof reimbursementSum
     }
 
     fillReimbursementsByRow(value: number, index = 0, knownInformation = "monthly"): ReimbursementSummaryActions {
-        reimbursementSummary.getReimbursementByRow(index, knownInformation).click().clear().type(value.toString())
+        reimbursementSummary.getReimbursementByRow(index, knownInformation).click().clear().type(`${value}`)
             .should('have.value', `$${value}`);
         return this;
     }
@@ -63,7 +63,7 @@ class ReimbursementSummaryActions extends BaseActionsExt<typeof reimbursementSum
         reimbursementSummary
             .getVCLossInputByRow(index)
             .click().clear()
-            .type(value.toString())
+            .type(`${value}`)
             .should('have.value', value);
         return this;
     }

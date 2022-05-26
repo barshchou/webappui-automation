@@ -10,9 +10,9 @@ class PotentialGrossIncomePage extends BasePage {
 
     get coStarMetroRateInput() { return cy.get("[name=costarMetroRate]"); }
 
-    get commentaryEditButton() { return cy.get("[data-qa^=residentialVCLossDiscussion] [data-qa$=edit-btn]"); }
+    get vCLossDiscussionCommentaryEditButton() { return cy.get("[data-qa^=residentialVCLossDiscussion] [data-qa$=edit-btn]"); }
 
-    get commentaryInput() { return cy.get("[name='residentialVCLossDiscussion.commentary']"); }
+    get vCLossDiscussionCommentaryInput() { return cy.get("[name='residentialVCLossDiscussion.commentary']"); }
 
     get potentialResidentialIncome() { return cy.get("[data-qa=potentialResidentialIncome-row] > [data-qa=value-cell]"); }
 

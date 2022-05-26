@@ -312,10 +312,6 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
         return this;
     }
 
-    enterAppraisersForecast(forecastItem: string, value: number): ExpenseForecastActions {
-        expenseForecastPage.getAppraisersForecastInput(forecastItem).clear().type(`${value}{enter}`).should('have.value', `$${value}`);
-        return this;
-    }
 }
 
 export default new ExpenseForecastActions(expenseForecastPage);

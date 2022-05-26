@@ -29,8 +29,8 @@ class PotentialGrossIncomeActions extends BaseActionsExt<typeof potentialGrossIn
     }
 
     editCommentary(newCommentary: string): PotentialGrossIncomeActions {
-        grossIncomePage.commentaryEditButton.click();
-        grossIncomePage.commentaryInput.clear().type(newCommentary).should("have.text", newCommentary);
+        grossIncomePage.vCLossDiscussionCommentaryEditButton.click();
+        grossIncomePage.vCLossDiscussionCommentaryInput.clear().type(newCommentary).should("have.text", newCommentary);
         return this;
     }
 

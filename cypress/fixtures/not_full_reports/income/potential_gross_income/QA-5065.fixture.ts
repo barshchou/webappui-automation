@@ -22,5 +22,5 @@ export default {
     knownInformation: "Annual",
     reimbursementValue: 500,
     vcLossPercentage: 10,
-    vcLossDiscussionCommentary: "We have applied a vacancy and collection loss of 10% to the utilities reimbursement, which has been added to our Pro Forma."
+    vcLossDiscussionCommentary: `We have applied a vacancy and collection loss of 10% to the utilities reimbursement, which has been added to our Pro Forma.`
 };
