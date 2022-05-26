@@ -6,7 +6,7 @@ import { Tag } from "../../../../../utils/tags.utils";
 import { getTodayDateString } from "../../../../../../utils/date.utils";
 
 describe("Verify the Save button functionality on the In-Place Rent Roll page",
-    { tags: [ Tag.income, Tag.commercial, Tag.in_place_rent_roll ] }, () => {
+    { tags: [ "@income", "@commercial", "@in_place_rent_roll" ] }, () => {
 
         before("Login, create report", () => {
             createReport(testData.reportCreationData);
