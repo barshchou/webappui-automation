@@ -136,6 +136,16 @@ class AdjustCompsActions extends BaseActionsExt<typeof adjustCompsPage> {
         return this;
     }
 
+    verifyNetMarketAdjustmentsByCompIndex(index = 0): AdjustCompsActions {
+        adjustCompsPage.getAllAdjustmentCellsByCompIndex(index).then(cells => {
+            const adjustmentsValues = Array.from(cells).map(cell => cell.getAttribute("value"))
+                .map(cellText => Number(cellText.replace("%", "")));
+            const netPropAdjustmentsToBe = adjustmentsValues.reduce((sum, prevValue) => sum + prevValue, 0);
+            adjustCompsPage.marketAdjustmentsCells.eq(index).should("have.text", `${netPropAdjustmentsToBe}%`);
+        });
+        return this;
+    }
+
     /**
     * Verify that Trended Price per selected @param {string} basis adjusted based on
     Net Market adjustment total value
