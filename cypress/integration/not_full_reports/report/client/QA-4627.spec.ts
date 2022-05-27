@@ -1,6 +1,5 @@
-import { Tag } from './../../../../utils/tags.utils';
-import { isProdEnv } from './../../../../../utils/env.utils';
-import { Organization, PreviewEdit } from './../../../../actions/index';
+import { isProdEnv } from '../../../../../utils/env.utils';
+import { Organization, PreviewEdit } from '../../../../actions';
 import { Report } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
@@ -9,7 +8,7 @@ import testData from '../../../../fixtures/not_full_reports/report/client/QA-462
 const conditionalDescribe = isProdEnv() ? describe.skip : describe;
 
 conditionalDescribe("[QA-4627] Verify the functionality of the Client field.", 
-    { tags:[ Tag.report, Tag.client ] }, () => {
+    { tags:[ "@report", "@client" ] }, () => {
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
      });

@@ -33,7 +33,7 @@ namespace BoweryReports {
     export type PerUnitPerSF = "Per Unit" | "Per SF"
     export type ForecastItemBasis = "insurance" | "electricity"
     | "fuel" | "waterAndSewer" | "repairsAndMaintenance" | "payrollAndBenefits" | "generalAndAdministrative" 
-    | "legalAndProfessionalFees" | "miscellaneous" | "management" | "reserves" | "total" | "custom";
+    | "legalAndProfessionalFees" | "miscellaneous" | "management" | "reserves" | "total" | "custom" | "utilities";
 
     export type CommercialUnitsUseValues = "retail" | "office" | "medical" | "community" | "industrial" | "other" | "undetermined";
     export type CommercialUnitsUseTexts = "Retail" | "Office" | "Medical Office" | "Community Facility" | "Industrial" |
@@ -103,7 +103,16 @@ namespace BoweryReports {
         type: "input" | "dropdown"
     };
 
+    export type OtherIncomeItem = {
+        vcLossType: string,
+        vcPercent: number,
+        incomeCategory: string,
+        annualAmount: number
+    }
+
     export type UnitsOfMeasure = "annually" | "monthly" | "per square foot per year" | "per square foot per month";
+
+    export type UtilityExpenses = "brokenOut" | "combinedElectricityAndFuel" | "combinedAll";
 }
 
 namespace Utils {

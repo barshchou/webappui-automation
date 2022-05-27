@@ -1,10 +1,9 @@
-import { Tag } from './../../../../utils/tags.utils';
-import { Sales } from './../../../../actions/index';
-import { _NavigationSection } from './../../../../actions/base/index';
+import { Sales } from '../../../../actions';
+import { _NavigationSection } from '../../../../actions/base';
 import testData from "../../../../fixtures/not_full_reports/sales/find_comps/QA-4167.fixture";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 
-describe("[QA-4167] Verify the Appraiser Commentary field", { tags: [ Tag.sales, Tag.find_comps, Tag.comp_plex ] }, () => {
+describe("[QA-4167] Verify the Appraiser Commentary field", { tags: [ "@sales", "@find_comps", "@comp_plex" ] }, () => {
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
     });

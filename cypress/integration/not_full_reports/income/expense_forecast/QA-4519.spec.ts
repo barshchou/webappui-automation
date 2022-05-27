@@ -3,11 +3,9 @@ import { createReport, deleteReport } from "../../../../actions/base/baseTest.ac
 import { Property, Income } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
 import tableExpenseHistoryCellNames from "../../../../enums/expenseHistoryTableRows.enum";
-import { Tag } from "../../../../utils/tags.utils";
-
 
 describe("Historical expense Insurance Per SF is correctly calculated and displayed",
-    { tags:[ Tag.snapshot_tests, Tag.income, Tag.expense_forecast ] }, () => {
+    { tags:[ "@snapshot_tests", "@income", "@expense_forecast" ] }, () => {
 
     before("Login, create report", () => {
         createReport(testData.reportCreationData);

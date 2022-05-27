@@ -49,50 +49,50 @@ class HomepageActions extends BaseActionsExt<typeof homepagePage> {
         return this;
     }
 
-    clickSubmitButton(): HomepageActions {
+    clickSubmitButton(): this {
         homepagePage.submitButton.should("not.be.disabled").click({ force: true });
         return this;
     }
 
-    clickToSearchResultRow(): HomepageActions {
+    clickToSearchResultRow(): this {
         homepagePage.searchResultsRows.should("be.visible").click();
         return this;
     }
 
-    pullExternalData(value: boolean) {
+    pullExternalData(value: boolean): this {
         homepagePage.pullExternalDataRadios.check(`${value.toString()}`);
         return this;
     }
 
-    enterReportNumber(reportNumber: string): HomepageActions {
-        homepagePage.reportNumberInput.type(reportNumber).blur().should("have.value", reportNumber);
+    enterReportNumber(reportNumber: string): this {
+        homepagePage.reportNumberInput.type(reportNumber).should("have.value", reportNumber);
         return this;
     }
 
-    checkTemplateType(typeValue: string): HomepageActions {
+    checkTemplateType(typeValue: string): this {
         homepagePage.templateTypesRadios.check(typeValue);
         return this;
     }
 
-    checkIncomeType(value: string) {
+    checkIncomeType(value: string): this {
         homepagePage.incomeTypesRadios.check(value);
         return this;
     }
 
 
-    checkConclusionType(value: string) {
+    checkConclusionType(value: string): this {
         homepagePage.valueConclusionsRadios.check(value);
         return this;
     }
 
-    clickCreateReportButton(): HomepageActions {
+    clickCreateReportButton(): this {
         homepagePage.createReportButton.should("not.be.disabled").click();
         homepagePage.keyInfoBlock.should("be.visible");
 
         return this;
     }
 
-    enterReportNumberToSearch(number: string): HomepageActions {
+    enterReportNumberToSearch(number: string): this {
         homepagePage.reportNumberSearchField.scrollIntoView().should("be.visible")
         .type(number).should("have.value", number);
         return this;
@@ -103,12 +103,12 @@ class HomepageActions extends BaseActionsExt<typeof homepagePage> {
         return this;
     }
 
-    verifyThatPageIsOpened(): HomepageActions {
+    verifyThatPageIsOpened(): this {
         homepagePage.createReportButton.should("be.visible");
         return this;
     }
 
-    clickAdvancedSearchButton(): HomepageActions {
+    clickAdvancedSearchButton(): this {
         homepagePage.advancedSearchButton.click();
         return this;
     }
@@ -120,23 +120,33 @@ class HomepageActions extends BaseActionsExt<typeof homepagePage> {
         return this;
     }
 
-    clickSelectStateButton(): HomepageActions {
+    clickSelectStateButton(): this {
         homepagePage.selectStateButton.click();
         return this;
     }
 
-    selectStateByName(name: string): HomepageActions {
+    selectStateByName(name: string): this {
         homepagePage.getStateByName(name).click();
         return this;
     }
 
-    enterPropertyIdentifierType(type: string): HomepageActions {
+    enterPropertyIdentifierType(type: string): this {
         homepagePage.propertyIdentifierTypeInput.type(type).should("have.value", type);
         return this;
     }
 
-    enterPropertyIdentifier(value: string): HomepageActions {
+    enterPropertyIdentifier(value: string): this {
         homepagePage.propertyIdentifierInput.type(value).should("have.value", value);
+        return this;
+    }
+
+    openReportByName(reportNumber: string): this {
+        homepagePage.reportNumberCells.contains(reportNumber).click({ force: true });
+        return this;
+    }
+
+    clickAllReportsTab(): this {
+        homepagePage.allReportsTab.click();
         return this;
     }
 

@@ -26,5 +26,6 @@ export enum Tag {
     preview_edit = "@preview_edit",
     introduction = "@introduction",
     market = "@market",
+    smoke = "@smoke",
     salesforce = "@salesforce"
 }
