@@ -17,7 +17,6 @@ class HomepageActions extends BaseActionsExt<typeof homepagePage> {
             .clickSubmitButton()
             .pullExternalData(data.isSalesForcePull)
             .enterReportNumber(data.reportNumber)
-            .clickReportModal()
             .checkTemplateType(data.templateValue)
             .checkIncomeType(data.incomeValue)
             .checkConclusionType(data.conclusionValue)
@@ -31,7 +30,6 @@ class HomepageActions extends BaseActionsExt<typeof homepagePage> {
             .clickSubmitButton()
             .pullExternalData(data.isSalesForcePull)
             .enterReportNumber(data.reportNumber)
-            .clickReportModal()
             .checkTemplateType(data.templateValue)
             .checkIncomeType(data.incomeValue)
             .checkConclusionType(data.conclusionValue)
@@ -67,7 +65,7 @@ class HomepageActions extends BaseActionsExt<typeof homepagePage> {
     }
 
     enterReportNumber(reportNumber: string): this {
-        homepagePage.reportNumberInput.type(reportNumber).should("have.value", reportNumber);
+        homepagePage.reportNumberInput.type(reportNumber).blur().should("have.value", reportNumber);
         return this;
     }
 
@@ -149,11 +147,6 @@ class HomepageActions extends BaseActionsExt<typeof homepagePage> {
 
     clickAllReportsTab(): this {
         homepagePage.allReportsTab.click();
-        return this;
-    }
-
-    clickReportModal(): this {
-        homepagePage.reportModal.click("top");
         return this;
     }
 
