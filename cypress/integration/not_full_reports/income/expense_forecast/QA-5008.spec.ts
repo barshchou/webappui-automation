@@ -16,7 +16,7 @@ describe(`[] [Income>Expense forecast] “Include Expense on Pro Forma” checkb
     //     cy.restoreLocalStorage();
     // });
 
-    it("Test body", () => {
+    it("[QA-5008]", () => {
         cy.stepInfo(`1. Go to Income > Expense Forecast`);
         _NavigationSection.navigateToExpenseForecast();
 
@@ -25,28 +25,38 @@ describe(`[] [Income>Expense forecast] “Include Expense on Pro Forma” checkb
           Income._ExpenseForecastActions.verifyIncludeInProFormaCheckboxExists(element);
 });
 
-cy.stepInfo(`2. Add new custom category`);
-        Income._ExpenseForecastActions.addCustomExpenseCategory(testData.customCategory.name);
+cy.stepInfo(`3. Verify  “Include Expense on Pro Forma” checkbox is NOT displayed under custom expense card`);
+Income._ExpenseForecastActions.addCustomExpenseCategory(testData.customCategory.name);
+   Income._ExpenseForecastActions.Page.forecastItemCardFull(testData.customCategory.name).children()
+   .contains("Include Expense on Pro Forma").should('not.exist')
 
-cy.stepInfo(`2. Verify  “Include Expense on Pro Forma” checkbox is NOT displayed under custom expense card`);
+});
 
-cy.get(`[data-qa="replacementReserves-forecast-item"]`)
-  .children()
-  .contains("Include Expense on Pro Forma").should('exist')
+it("[QA-5009]", () => {
+    cy.stepInfo(` Verify “Include Expense on Pro Forma” checkbox is selected by default for each existing expense card`);
+    expensesCardsNames.expensesCheckboxIncludeInProFormaNamesArray.forEach(element => {
+        Income._ExpenseForecastActions.verifyIncludeInProFormaCheckboxIsChecked(element);
+});
+
+it("[QA-5010]", () => {
+    cy.stepInfo(` Verify user hover on icon right to the "Include Expense on Pro Forma" checkbox - tooltip
+     with the following text "Unchecking this box will hide the expense from showing up on the Pro Forma." appears `);
 
 
-  Income._ExpenseForecastActions.Page.forecastItemCardFull()
+});
+
+
 // label="Include Expense on Pro Forma"span
 // cy.get(`[data-qa="${forecastItem}"].filter('.users')
 // cy.get('td').filter('.users')
-        // cy.stepInfo(`[QA-5052] => 3. Fill expenses forecast for custom and regular categories`);
+        // cy.stepInfo(`[] => 3. Fill expenses forecast for custom and regular categories`);
         // testData.expensesItems.forEach(foreCastItem => {
         //     Income._ExpenseForecastActions.enterForecastItemForecast(foreCastItem);
         // });
         // Income._ExpenseForecastActions.enterForecastItemForecast(testData.firstCustomCategory, true, 0);
         // Income._ExpenseForecastActions.enterForecastItemForecast(testData.secondCustomCategory, true, 1);
         
-        // cy.stepInfo(`[QA-5052] => 4. Verify total expenses calculation and commentary`);
+        // cy.stepInfo(`[] => 4. Verify total expenses calculation and commentary`);
         // Income._ExpenseForecastActions.verifyTOECommentary(testData.commentaryTotalExpenses.generatedPerSF)
         //     .verifyTotalForecast();
 
