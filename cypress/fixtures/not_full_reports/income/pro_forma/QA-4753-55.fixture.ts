@@ -34,9 +34,9 @@ const _otherIncomeItem: BoweryReports.OtherIncomeItem = {
 
 const _totalCommercialIncome = () => {
     let total = 0;
-    for (let i = 0; i < _commercialUnitSf.length; i++){
-        total += _commercialUnitSf[i] * _commercialRentSf[i];
-    }
+    _commercialUnitSf.forEach((unitSf, index) => {
+        total += unitSf[index] * _commercialRentSf[index];
+    });
     return total;
 };
 
@@ -93,7 +93,7 @@ const _effectiveGrossIncomeTotal = _potentialGrossIncomeTotal -
 const _effectiveGrossIncomePerSf = _effectiveGrossIncomeTotal / _grossBuildingArea;
 const _effectiveGrossIncomePerUnit = _effectiveGrossIncomeTotal / _numberOfResidentialUnits;
 
-const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("4525-27", {
+const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("4553-55", {
         incomeValue: Enums.INCOME_TYPE.BOTH
     });
 

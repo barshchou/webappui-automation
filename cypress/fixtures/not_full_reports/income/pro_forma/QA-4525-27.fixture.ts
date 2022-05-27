@@ -27,9 +27,9 @@ const _otherIncomeItem: BoweryReports.OtherIncomeItem = {
 
 const _totalCommercialIncome = () => {
     let total = 0;
-    for (let i = 0; i < _commercialUnitSf.length; i++){
-        total += _commercialUnitSf[i] * _commercialRentSf[i];
-    }
+    _commercialUnitSf.forEach((unitSf, index) => {
+        total += unitSf[index] * _commercialRentSf[index];
+    });
     return total;
 };
 
