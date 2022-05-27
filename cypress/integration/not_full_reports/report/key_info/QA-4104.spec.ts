@@ -3,7 +3,6 @@ import { createReport, deleteReport } from "../../../../actions/base/baseTest.ac
 import { _NavigationSection } from "../../../../actions/base";
 import { Report, ReviewExport } from "../../../../actions";
 
-
 describe("[QA-4104] Verify the Market Value generated commentary", 
     { tags: [ "@report", "@key_info", "@check_export" ] }, () => {
     it("Test body", () => {
