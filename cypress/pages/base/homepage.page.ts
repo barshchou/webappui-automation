@@ -1,6 +1,8 @@
 import BasePage from "./base.page";
 
 class Homepage extends BasePage {
+    get reportModal() {return cy.get("*[data-qa='create-report-settings-modal']");}
+
     get newReportButton() {return cy.get("*[data-qa='create-report-btn']");}
 
     get searchAddressField() {return cy.get("*[placeholder='Search Address']");}
