@@ -1,5 +1,5 @@
-import { numberWithCommas } from './../../../../../utils/numbers.utils';
-import testData from "../../../../fixtures/not_full_reports/income/pro_forma/QA-4759_63_65.fixture";
+import { numberWithCommas } from '../../../../../utils/numbers.utils';
+import testData from "../../../../fixtures/not_full_reports/income/pro_forma/QA-4779-81.fixture";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { Income, Property } from "../../../../actions";
@@ -32,27 +32,25 @@ describe("Pro Forma Page validation Operating Expenses -> Insurance",
             .verifyProgressBarNotExist();
     });
 
-    it("[QA-4756]", () => {
-        cy.stepInfo(`3. The value in the Insurance is taken from Income → 
+    it("[QA-4779]", () => {
+        cy.stepInfo(`3. The value in the Insurance Total is taken from Income → 
                     Expense Forecast → Insurance Forecast Discussion generated commentary`);
         Income._ProFormaActions.verifyCategoryTotal(
-            `$${numberWithCommas(Math.round(testData.insuranceSFTotal))}`, 
+            `$${numberWithCommas(Math.round(testData.insuranceUnitTotal))}`, 
             proFormaTypes.insurace);
     });
 
-    it("[QA-4757]", () => {
-        cy.stepInfo(`3. The value in the Insurance is taken from Income → 
-                    Expense Forecast → Insurance → Appraiser’s Forecast cell`);
+    it("[QA-4780]", () => {
+        cy.stepInfo(`3. The value in the Insurance → PSF is calculated by the formula: Total / GBA`);
         Income._ProFormaActions.verifyCategoryPSFTotal(
-            `$${numberWithCommas(testData.insuranceSFPerSf.toFixed(2))}`, 
+            `$${numberWithCommas(testData.insuranceUnitPerSf.toFixed(2))}`, 
             proFormaTypes.insurace);
     });
 
-    it("[QA-4758]", () => {
-        cy.stepInfo(`3. The value in the Insurance Per Unit is calculated by 
-                    formula: Annual value / # of Residential Units`);
+    it("[QA-4781]", () => {
+        cy.stepInfo(`3. The value in the Insurance Per Unit is Appraiser's Forecast value`);
         Income._ProFormaActions.verifyCategoryPerUnitTotal(
-            `$${numberWithCommas(Math.round(testData.insuranceSFPerUnit))}`, 
+            `$${numberWithCommas(Math.round(testData.insuranceUnitPerUnit))}`, 
             proFormaTypes.insurace);
 
         deleteReport(testData.reportCreationData.reportNumber);
