@@ -556,7 +556,7 @@ const expenseStructureFixture = () => {
 
 const parkingFixture = () => {
     return {
-        commentary: "The subject property has 6 parking spaces available."
+        commentary: "The subject property has 6 parking spaces available. Parking is a free amenity."
     };
 };
 

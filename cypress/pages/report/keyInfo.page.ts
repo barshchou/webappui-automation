@@ -25,7 +25,7 @@ class KeyInfoPage extends BasePage{
 
     get uploadFileInput() {return cy.get("*[data-qa='dropzone-container'] input");}
 
-    get uploadButton() {return cy.xpath("//*[contains(text(), 'Drag and drop or browse files below')]//following::button[1]");}
+    get uploadButton() {return cy.get("[data-qa=upload-btn]");}
 
     get insertButton() {return cy.get("*[data-qa='insert-btn']");}
 

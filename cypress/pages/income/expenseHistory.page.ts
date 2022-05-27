@@ -10,12 +10,6 @@ class ExpenseHistoryPage extends BasePage {
 
     get addExpenseYearButton() { return cy.get("[data-qa=expense-history-new-expense-year-btn]"); }
 
-    get grossRevenueCheckboxes() { return cy.get("[data-qa*='grossRevenue.reported'] input"); }
- 
-    get fuelCheckboxes() { return cy.get("[data-qa*='expenses.fuel.reported'] input"); }
-
-    get waterSewerCheckboxes() { return cy.get("[data-qa*='expenses.waterAndSewer.reported'] input"); }
-
     get expenseHistoryCommentary() { return cy.get("[data-qa^='expenseHistoryDiscussion.commentary']"); }
 
     get expenseMonth() { return cy.get("[data-qa=expenseMonth-form-control] input"); }
