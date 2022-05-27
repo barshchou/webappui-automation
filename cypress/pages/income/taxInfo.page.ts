@@ -13,7 +13,7 @@ class TaxInfoPage extends BasePage {
 
     get buildingTransitionalInput() {return cy.get("[name=buildingTransitional]");}
 
-    get includeTransitionalAssessedValueCheckbox() {return cy.get("[data-qa=hasTransitionalAssessedValue] input");}
+    get includeTransitionalAssessedValueCheckbox() {return cy.get("[data-qa^='hasTransitionalAssessedValue'] input");}
 
     get totalTaxableAssessedValue() {return cy.get("[data-qa=totalActual-cell]");}
 

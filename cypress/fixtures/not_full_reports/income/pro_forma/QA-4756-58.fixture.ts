@@ -4,16 +4,13 @@ import Enums from "../../../../enums/enums";
 const _grossBuildingArea = 5000;
 const _numberOfCommercialUnits = 3;
 const _numberOfResidentialUnits = 5;
+const _landTaxAssessedValue = 999999;
+const _buildingTaxAssessedValue = 456450;
+const _taxPercent = 10.755;
 
-const _otherIncomeItem: BoweryReports.OtherIncomeItem = {
-    vcLossType: "Other",
-    vcPercent: 2,
-    incomeCategory: "Billboard",
-    annualAmount: 4422.79
-};
-
-const _annualIncomePerSf = _otherIncomeItem.annualAmount / _grossBuildingArea;
-const _annualIncomePerUnit = _otherIncomeItem.annualAmount / _numberOfResidentialUnits;
+const _totalRealEstateTax = ((_landTaxAssessedValue + _buildingTaxAssessedValue) * _taxPercent) / 100;
+const _totalRealEstateTaxPerSf = _totalRealEstateTax / _grossBuildingArea;
+const _totalRealEstateTaxPerUnit = _totalRealEstateTax / _numberOfResidentialUnits;
 
 const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("4756-58", {
         incomeValue: Enums.INCOME_TYPE.BOTH
@@ -24,7 +21,10 @@ export default {
     grossBuildingArea: _grossBuildingArea,
     numberOfResidentialUnits: _numberOfResidentialUnits,
     numberOfCommercialUnits: _numberOfCommercialUnits,
-    annualIncomePerSf: _annualIncomePerSf,
-    annualIncomePerUnit: _annualIncomePerUnit,
-    otherIncomeItem: _otherIncomeItem
+    totalRealEstateTaxPerSf: _totalRealEstateTaxPerSf,
+    totalRealEstateTaxPerUnit: _totalRealEstateTaxPerUnit,
+    totalRealEstateTax: _totalRealEstateTax, 
+    landTaxAssessedValue: _landTaxAssessedValue,
+    buildingTaxAssessedValue: _buildingTaxAssessedValue,
+    taxPercent: _taxPercent
 };

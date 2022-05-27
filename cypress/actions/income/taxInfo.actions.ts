@@ -34,11 +34,14 @@ class TaxInfoActions extends BaseActionsExt<typeof taxInfoPage> {
         return this;
     }
 
-    checkUncheckIncludeTransitionalCheckbox(value = false): TaxInfoActions {
-        if (taxInfoPage.includeTransitionalAssessedValueCheckbox
-            .should('have.value', value)) {
-                taxInfoPage.includeTransitionalAssessedValueCheckbox.check().should('have.value', !value);
-            }
+    switchIncludeTransitionalCheckbox(value = false): TaxInfoActions {
+        taxInfoPage.includeTransitionalAssessedValueCheckbox
+            .invoke('attr', 'value').then(attr => {
+                cy.log(`${attr}`);
+                if (attr == `${!value}`){
+                    taxInfoPage.includeTransitionalAssessedValueCheckbox.click().should('have.value', `${value}`);
+                }
+            });
         return this;
     }
 

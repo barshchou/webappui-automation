@@ -4,8 +4,9 @@ import { createReport, deleteReport } from "../../../../actions/base/baseTest.ac
 import { _NavigationSection } from "../../../../actions/base";
 import { Property } from '../../../../actions/index';
 import { Income } from "../../../../actions";
+import proFormaTypes from "../../../../enums/proFormaTypes.enum";
 
-describe("Operating Expenses -> Real Estate Taxes -> Total", 
+describe("Pro Forma Page validation Operating Expenses -> Real Estate Taxes", 
     { tags:[ "@income", "@pro_forma" ] }, () => { 
     
     before("Login, create report, prepare data", () => {
@@ -17,12 +18,12 @@ describe("Operating Expenses -> Real Estate Taxes -> Total",
             .enterNumberOfResUnits(testData.numberOfResidentialUnits)
             .enterNumberOfCommercialUnits(testData.numberOfCommercialUnits);
 
-        cy.stepInfo("2. Go to Income → Miscellaneous → Other and fill in all necessary values"); 
+        cy.stepInfo("2. Go to the Income → Tax Info → Tax Information → Current page and fill in all necessary values"); 
         _NavigationSection.navigateToTaxInfo();
-        Income._TaxInfo.checkUncheckIncludeTransitionalCheckbox(true);
-
-        cy.pause();
-        
+        Income._TaxInfo.switchIncludeTransitionalCheckbox(false)
+            .enterTaxableAssessedLandValue(testData.landTaxAssessedValue)
+            .enterTaxableAssessedBuildingValue(testData.buildingTaxAssessedValue)
+            .clickSaveButton();
         cy.saveLocalStorage();
     });
     
@@ -32,32 +33,29 @@ describe("Operating Expenses -> Real Estate Taxes -> Total",
             .verifyProgressBarNotExist();
     });
 
-    it("[QA-4513]", () => {
-        cy.stepInfo(`5 Verify that Pro Forma table contains Other Income Total value`);
+    it("[QA-4756]", () => {
+        cy.stepInfo(`3. The value in the Real Estate Taxes is taken from 
+                    Income → Tax Info → Tax Information → Summary → Tax Liability (Total) cell`);
         Income._ProFormaActions.verifyCategoryTotal(
-            `$${numberWithCommas(Math.round(testData.otherIncomeItem.annualAmount))}`, 
-            testData.otherIncomeItem.incomeCategory);
-
-        cy.stepInfo(`5.1 Verify that Total is taken from Income → Potential Gross Income → 
-                    table → Other Income`);
-        _NavigationSection.navigateToPotentialGrossIncome();
-        Income._PotentialGrossIncome.verifyIncomeTypeUnified(
-            testData.otherIncomeItem.incomeCategory.toLocaleLowerCase(), 
-            `$${numberWithCommas(testData.otherIncomeItem.annualAmount.toFixed(2))}`);
+            `$${numberWithCommas(Math.round(testData.totalRealEstateTax))}`, 
+            proFormaTypes.realEstateTaxes);
     });
 
-    it("[QA-4514]", () => {
-        cy.stepInfo(`5. Verify that Pro Forma table contains Other Income PSF value`);
+    it("[QA-4757]", () => {
+        cy.stepInfo(`3. The value in the Real Estate Taxes → PSF is calculated 
+                    by the formula: Total / GBA or is taken from Income → Tax Info → 
+                    Tax Information → Summary → Tax Liability (PSF) cell`);
         Income._ProFormaActions.verifyCategoryPSFTotal(
-            `$${numberWithCommas(testData.annualIncomePerSf.toFixed(2))}`, 
-            testData.otherIncomeItem.incomeCategory);
+            `$${numberWithCommas(testData.totalRealEstateTaxPerSf.toFixed(2))}`, 
+            proFormaTypes.realEstateTaxes);
     });
 
-    it("[QA-4515]", () => {
-        cy.stepInfo(`5. Verify that Pro Forma table contains Other Income Per Unit value`);
+    it("[QA-4758]", () => {
+        cy.stepInfo(`3. The value in the Real Estate Taxes → Per Unit is calculated 
+                    by the formula: Total / # of Residential Units`);
         Income._ProFormaActions.verifyCategoryPerUnitTotal(
-            `$${numberWithCommas(Math.round(testData.annualIncomePerUnit))}`, 
-            testData.otherIncomeItem.incomeCategory);
+            `$${numberWithCommas(Math.round(testData.totalRealEstateTaxPerUnit))}`, 
+            proFormaTypes.realEstateTaxes);
 
         deleteReport(testData.reportCreationData.reportNumber);
     });
