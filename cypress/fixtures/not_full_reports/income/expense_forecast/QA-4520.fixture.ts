@@ -25,5 +25,6 @@ export default {
         }
     ],
     insuranceItem: _insuranceItem,
-    insuranceCardSnapshotName: "Insurance_Forecast_Item_Component"
+    insuranceCardSnapshotName: "Insurance_Forecast_Item_Component",
+    cellName: "insurance"
 };

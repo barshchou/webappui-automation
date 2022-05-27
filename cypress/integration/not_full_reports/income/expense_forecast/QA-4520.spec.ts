@@ -19,7 +19,7 @@ describe("Comparable Min, Max, Avg values for Insurance Per SF are correctly cal
             testData.comparables.forEach((comp) => {
                 Income.ComparableExpenses.Actions.clickAddBlankColumnButton()
                     .enterAddressByColumnIndex(comp.address)
-                    .enterCellDollarValueByColumnIndex(Income.ComparableExpenses.Page.getUnifiedEditableAndTotalCells("insurance"),
+                    .enterCellDollarValueByColumnIndex(Income.ComparableExpenses.Page.getUnifiedEditableAndTotalCells(testData.cellName),
                         comp.insurance)
                     .enterSquareFeetByColumnIndex(comp.squareFeet);
             });
