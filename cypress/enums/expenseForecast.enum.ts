@@ -1,6 +1,6 @@
 const expensesCardsNames = {
 
-    expensesCheckboxIncludeInProFormaNamesArray: ["insurance", "electricity", "fuel", "waterAndSewer", "repairAndMaintenance", "payrollAndBenefits", 
+    expensesCheckboxIncludeInProFormaNamesArray: ["insurance", "electricity", "fuel", "waterAndSewer", "repairsAndMaintenance", "payrollAndBenefits", 
         "generalAndAdministrative", "legalAndProfessionalFees", "miscellaneous", "management", "reserves"],
 
 
