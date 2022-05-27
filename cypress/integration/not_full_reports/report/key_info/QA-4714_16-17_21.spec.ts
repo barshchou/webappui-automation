@@ -27,8 +27,8 @@ describe(`[QA-4714_16-17_21] Verify the suggested text dropdown in the new narra
             Report._KeyInfo.enterDefinitionMarketValue(chip.enterValue, false, false, false);
             Report._KeyInfo.clickNarrativeSuggestions(chip.listValue, 1);
             Report._KeyInfo.Page.textBoxDefinitionOfMarketValue().should("include.text", chip.verifyTexValue);
-            Report._KeyInfo.clickSaveButton();
             cy.wait(500);
+            Report._KeyInfo.clickSaveButton();
             cy.reload();
         });
 
