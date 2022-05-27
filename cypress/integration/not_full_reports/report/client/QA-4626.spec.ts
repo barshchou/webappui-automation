@@ -1,10 +1,9 @@
-import { Tag } from './../../../../utils/tags.utils';
 import { Report } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import testData from '../../../../fixtures/not_full_reports/report/client/QA-4626.fixture';
 
-describe("Verify the display of the Client page.", { tags:[ Tag.report, Tag.client ] }, () => {
+describe("Verify the display of the Client page.", { tags:[ "@report", "@client" ] }, () => {
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
     });
@@ -30,9 +29,9 @@ describe("Verify the display of the Client page.", { tags:[ Tag.report, Tag.clie
             Report._Client.Page.clientFileNumberField.should("be.visible");
             Report._Client.Page.nycbApplicationNumber.should("be.visible");
             Report._Client.Page.intendedUserTextBox.should("be.visible");
-            Report._Client.Page.formEditBtn(0).should("be.visible");
+            Report._Client.Page.formEditBtn().should("be.visible");
             Report._Client.Page.identificationOfClientTextBox.should("be.visible");
-            Report._Client.Page.formEditBtn(0).should("be.visible");
+            Report._Client.Page.formEditBtn().should("be.visible");
             Report._Client.Page.clientGuidelinesCommentary.should("be.visible");
             
 

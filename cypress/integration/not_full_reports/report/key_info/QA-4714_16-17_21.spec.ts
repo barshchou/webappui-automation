@@ -27,17 +27,17 @@ describe(`[QA-4714_16-17_21] Verify the suggested text dropdown in the new narra
 
             Report._KeyInfo.enterDefinitionMarketValue(chip.enterValue, false, false, false);
             Report._KeyInfo.clickNarrativeSuggestions(chip.listValue, 1);
-            Report._KeyInfo.Page.textBoxDefinitionOfMarketValue.should("include.text", chip.verifyTexValue);
+            Report._KeyInfo.Page.textBoxDefinitionOfMarketValue().should("include.text", chip.verifyTexValue);
             Report._KeyInfo.clickSaveButton();
+            cy.wait(500);
             cy.reload();
         });
 
-        // Need resolve bug in QA-4721
-        // cy.stepInfo("3. Verify value after save and reload");
-        // testData.chips.forEach(chip => {
-        //     Report._KeyInfo.Page.textBoxPropertyRightsAppraised.should("include.text", chip.verifyTexValue);
-        //     Report._KeyInfo.Page.textBoxDefinitionOfMarketValue.should("include.text", chip.verifyTexValue);
-        // });
+        cy.stepInfo("3. Verify value after save and reload");
+        testData.chips.forEach(chip => {
+            Report._KeyInfo.Page.textBoxPropertyRightsAppraised.should("include.text", chip.verifyTexValue);
+            Report._KeyInfo.Page.textBoxDefinitionOfMarketValue().should("include.text", chip.verifyTexValue);
+        });
 
         deleteReport(testData.reportCreationData.reportNumber);
     });

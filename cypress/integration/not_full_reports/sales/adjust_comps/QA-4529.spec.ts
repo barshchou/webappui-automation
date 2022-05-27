@@ -1,10 +1,9 @@
-import { Tag } from './../../../../utils/tags.utils';
 import testData from "../../../../fixtures/not_full_reports/sales/adjust_comps/QA-4529.fixture";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
-import { Sales, ReviewExport } from "../../../../actions/index";
+import { Sales, ReviewExport } from "../../../../actions";
 
-describe("Check custom Utilities adjustment", { tags:[ Tag.sales, Tag.adjust_comps, Tag.check_export ] }, () => {
+describe("Check custom Utilities adjustment", { tags:[ "@sales", "@adjust_comps", "@check_export" ] }, () => {
     
     it("Verify custom utilities adjustments on UI and prepare report for export", () => {
         createReport(testData.reportCreationData);

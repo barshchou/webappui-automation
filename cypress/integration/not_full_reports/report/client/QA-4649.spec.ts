@@ -3,10 +3,9 @@ import { createReport, deleteReport } from "../../../../actions/base/baseTest.ac
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Report from "../../../../actions/report/report.manager";
 import Summary from "../../../../actions/property/summary.actions";
-import { Tag } from "../../../../utils/tags.utils";
 
 describe("Verify the Save & Continue button functionality on the Report > Client page", 
-    { tags: [ Tag.report, Tag.client ] }, () => {
+    { tags: [ "@report", "@client" ] }, () => {
         
     before("Login, create report", () => {
         createReport(testData.reportCreationData);

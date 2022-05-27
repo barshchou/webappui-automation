@@ -3,11 +3,10 @@ import { createReport, deleteReport } from "../../../../../actions/base/baseTest
 import NavigationSection from "../../../../../actions/base/navigationSection.actions";
 import Income from "../../../../../actions/income/income.manager";
 import Property from "../../../../../actions/property/property.manager";
-import { Tag } from "../../../../../utils/tags.utils";
 
 describe(`Verify clicking Add Unit button on Add New Rent Comp overlay is adding the unit to the appropriate group 
                 of comparable units on the Rent Comps page (Unit type of search is selected)`,
-{ tags:[ Tag.income, Tag.residential, Tag.rent_comps ] }, () => {
+{ tags:[ "@income", "@residential", "@rent_comps" ] }, () => {
 
     before("Login, create report", () => {
         createReport(testData.reportCreationData);

@@ -2,10 +2,9 @@ import testData from "../../../../fixtures/not_full_reports/property/commercial_
 import { Property } from "../../../../actions";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
-import { Tag } from "../../../../utils/tags.utils";
 
 describe("Verify the Save button functionality on the Commercial Units page",
-    { tags: [ Tag.property, Tag.commercial_units ] }, () => {
+    { tags: [ "@property", "@commercial_units" ] }, () => {
 
     before("Report creation and several commercial units addition", () => {
         createReport(testData.reportCreationData);

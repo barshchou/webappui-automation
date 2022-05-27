@@ -20,16 +20,15 @@ class KeyInfoActions extends BaseActionsExt<typeof keyInfoPage> {
 
     enterDefinitionMarketValue(textToType: string = null, edit = true, save = true, revert = false) {
         if (edit === true) keyInfoPage.formEditBtn(0).click();
-        keyInfoPage.textBoxDefinitionOfMarketValue.invoke("text")
-        .then(text => {
-            keyInfoPage.textBoxDefinitionOfMarketValue.type(textToType ?? text);
+        keyInfoPage.textBoxDefinitionOfMarketValue().invoke("text").then(text => {
+            keyInfoPage.textBoxDefinitionOfMarketValue().type(textToType ?? text);
         });
         if(save === true) keyInfoPage.formSaveBtn(0).click();
         if (revert === true) {
             keyInfoPage.formRevertToOriginalBtn(0).click();
             keyInfoPage.formYesRevertBtn.click();
         }
-        return keyInfoPage.textBoxDefinitionOfMarketValue.invoke("text");
+        return keyInfoPage.textBoxDefinitionOfMarketValue().invoke("text");
     }
 
     choosePurpose(purposeValue: string): KeyInfoActions {

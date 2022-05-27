@@ -45,7 +45,7 @@ export default class BaseActions {
         return this;
     }
 
-    clickSubmitBtn(){
+    clickSubmitBtn() {
         cy.get('[type="submit"][data-qa="save-btn"]').click();
         return this;
     }
@@ -91,6 +91,15 @@ export default class BaseActions {
             element.matchImageSnapshot(snapshotName, options);
             return this; 
         } 
+    }
+
+    /**
+     * Emulates paste of text by invoking function `val` of JQuery element.
+     * Does not related to functionality of Clipboard API of browser.
+     */
+    emulateCopyPaste(elem: Cypress.Chainable<JQuery<HTMLElement>>, text: string): this {
+        elem.click().invoke("val", text);
+        return this;
     }
 
     pause(){
