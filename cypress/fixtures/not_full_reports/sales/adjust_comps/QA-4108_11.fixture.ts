@@ -1,7 +1,7 @@
 import Enums from "../../../../enums/enums";
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 
-const _reportCreationData = ReportDataCreator.getReportData("4108", {
+const _reportCreationData = ReportDataCreator.getReportData("4108_11", {
     incomeValue: Enums.INCOME_TYPE.BOTH
 });
 
@@ -18,9 +18,15 @@ const _compAdjustments = {
     marketConditions: -30,
 };
 
+const _locationAdjustments = {
+    neighborhoodAdjustment: -30,
+    locationInNeighborhoodAdjustment: 20
+};
+
 export default {
     reportCreationData: _reportCreationData,
     comparablesAdjustments: _compAdjustments,
+    locationAdjustments: _locationAdjustments,
     comparable: Object.freeze(comparableFixture()),
     calculationUnits: "Per Residential Units",
 };

@@ -1,16 +1,21 @@
-import testData from "../../../../fixtures/not_full_reports/sales/adjust_comps/QA-4108.fixture";
+import testData from "../../../../fixtures/not_full_reports/sales/adjust_comps/QA-4108_11.fixture";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { Sales } from "../../../../actions";
 
-describe("[QA-4108] Net Market Adjustments in Sales Adjustment Grid is calculated with correct formula", 
+describe("Verify Grid is calculated with correct formula", 
     { tags:[ "@sales", "@adjust_comps", ] }, () => {
 
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
+        cy.saveLocalStorage();
     });
 
-    it("Test body", () => {
+    beforeEach("RestoreLocalStorage", () => {
+        cy.restoreLocalStorage();
+    });
+
+    it("[QA-4108]", () => {
         cy.stepInfo("1. Navigate to Sales > Find comps and select address");
         _NavigationSection.navigateToFindComps();
         Sales._FindComps.selectCompFromMapByAddress(testData.comparable.address);
@@ -24,6 +29,15 @@ describe("[QA-4108] Net Market Adjustments in Sales Adjustment Grid is calculate
 
         cy.stepInfo("3.Verify Net Market Adjustments = Property Rights + Financing Terms + Conditions of Sale + Market Conditions (Time)");
         Sales._AdjustComps.verifyNetMarketAdjustmentsByCompIndex();
+    });
+
+    it("[QA-4111]", () => {
+        cy.stepInfo("3. Fill inputs in Location Adjustment");
+        Sales._AdjustComps.checkCalculationUnitsRadio(testData.calculationUnits)
+            .enterLocationAdjustmentGroup(Object.keys(testData.locationAdjustments), Object.values(testData.locationAdjustments));
+
+        cy.stepInfo("3.Verify Net Market Adjustments = Property Rights + Financing Terms + Conditions of Sale + Market Conditions (Time)");
+        Sales._AdjustComps.verifyTotalLocationAdjustmentsByCompIndex();
 
         deleteReport(testData.reportCreationData.reportNumber);
     });
