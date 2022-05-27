@@ -45,7 +45,7 @@ export default class BaseActions {
         return this;
     }
 
-    clickSubmitBtn(){
+    clickSubmitBtn() {
         cy.get('[type="submit"][data-qa="save-btn"]').click();
         return this;
     }
