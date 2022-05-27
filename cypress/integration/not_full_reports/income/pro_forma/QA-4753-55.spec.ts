@@ -7,7 +7,7 @@ import { Income } from "../../../../actions";
 import proFormaTypes from "../../../../enums/proFormaTypes.enum";
 import Enums from "../../../../enums/incomeTypesCellNames.enum";
 
-describe("Effective Gross Income", 
+describe("Pro Forma page table Effective Gross Income validation", 
     { tags:[ "@income", "@pro_forma" ] }, () => {
     
     before("Login, create report, prepare data", () => {
