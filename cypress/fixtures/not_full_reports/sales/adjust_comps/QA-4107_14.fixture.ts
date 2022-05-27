@@ -1,3 +1,4 @@
+import Enums from "../../../../enums/enums";
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 
 const comparableFixture = () => {
@@ -11,7 +12,8 @@ const comparableFixture = () => {
 };
 
 export default {
-    reportCreationData: ReportDataCreator.getReportData("4107"),
+    reportMixedCreationData: ReportDataCreator.getReportData("4107", { incomeValue: Enums.INCOME_TYPE.BOTH }),
+    reportCreationData: ReportDataCreator.getReportData("4114"),
     calculationUnits: "Per Residential Units",
     comparable: Object.freeze(comparableFixture())
 };
