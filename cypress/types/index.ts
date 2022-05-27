@@ -113,6 +113,25 @@ namespace BoweryReports {
     export type UnitsOfMeasure = "annually" | "monthly" | "per square foot per year" | "per square foot per month";
 
     export type UtilityExpenses = "brokenOut" | "combinedElectricityAndFuel" | "combinedAll";
+
+    export type CurrentTaxInfoData = {
+        liabilityBasis?: string,
+        landValue: number,
+        buildingValue: number,
+        className?: string,
+        rateYear?: number,
+        rateValue?: number,
+        liabilityCommentary?: string
+    };
+
+    export type TaxCompData = {
+        address: string,
+        yearBuilt: number,
+        basis: number,
+        taxPerBasis: number,
+        sourceOfInfo: string,
+        taxYear: number
+    }
 }
 
 namespace Utils {
