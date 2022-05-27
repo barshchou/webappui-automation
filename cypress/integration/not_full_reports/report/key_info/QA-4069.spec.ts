@@ -1,12 +1,11 @@
 import { ReviewExport } from './../../../../actions/index';
-import { Tag } from './../../../../utils/tags.utils';
 import testData from "../../../../fixtures/not_full_reports/report/key_info/QA-4069.fixture";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { Report } from "../../../../actions";
 
 describe("[QA-4069] Check the helper text for Provided Documents)",
-    { tags: [ Tag.report, Tag.key_info, Tag.check_export ] }, () => {
+    { tags: [ "@report", "@key_info", "@check_export" ] }, () => {
 
     it("Test body", () => {
         cy.stepInfo(`1. Create report`);

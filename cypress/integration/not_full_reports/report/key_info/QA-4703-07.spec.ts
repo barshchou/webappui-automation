@@ -1,4 +1,3 @@
-import { Tag } from '../../../../utils/tags.utils';
 import testData from "../../../../fixtures/not_full_reports/report/key_info/QA-4703-07.fixture";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
@@ -6,7 +5,7 @@ import { Report } from "../../../../actions";
 
 
 describe("[QA-4703-07] Verify the Edit button functionality for Property Rights Appraised and Definition of Market Value sections",
-    { tags: [ Tag.report, Tag.key_info ] }, () => {
+    { tags: [ "@report", "@key_info" ] }, () => {
         
     before("Login, create report", () => {
         cy.stepInfo("Create report");
