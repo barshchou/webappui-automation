@@ -5,7 +5,7 @@ import BaseActionsExt from "../../base/base.actions.ext";
 class OtherActions extends BaseActionsExt<typeof otherPage> {
 
     verifyPageIsOpened() {
-        otherPage.pageHeader.should("exist");
+        otherPage.pageTitle.should("exist");
         return this;
     }
 

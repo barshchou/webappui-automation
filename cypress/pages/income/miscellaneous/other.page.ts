@@ -2,8 +2,6 @@ import BasePage from "../../base/base.page";
 
 class OtherPage extends BasePage {
 
-    get pageHeader() { return cy.get("[data-qa='other'] h5"); }
-
     get addOtherincomeButton() { return cy.get("[data-qa='add-btn']"); }
 
     otherIncomeAnnualAmount(index = 0) { return cy.get(`[name = 'lineItems[${index}].otherIncomeAnnualAmount']`); }
