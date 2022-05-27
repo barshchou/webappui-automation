@@ -13,7 +13,7 @@ class PropertyDescriptionFormActions {
     }
 
     enterAppraiserCommentary(value: string): this {
-        this.Page.appraiserCommentaryTextArea.click().realType(value);
+        this.Page.appraiserCommentaryTextArea.click().type(value).clear().type(value);
         this.Page.appraiserCommentaryTextArea.should("have.text", value);
         return this;
     }
