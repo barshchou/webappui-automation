@@ -57,7 +57,11 @@ class NavigationSection extends BasePage {
 
     get laundry() { return cy.get("#laundry-income"); }
 
+    get storage() {return cy.get("#storage-income");}
+
     get parking() {return cy.get("#parking-income");}
+
+    get other() {return cy.get("#other-income");}
 
     get miscellaneousIncome() {return cy.get("#miscellaneousIncome");}
 

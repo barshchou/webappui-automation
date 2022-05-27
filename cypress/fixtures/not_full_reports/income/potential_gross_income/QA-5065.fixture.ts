@@ -17,6 +17,7 @@ export default {
     forecastItemBasis: "utilities" as BoweryReports.ForecastItemBasis,
     utilitiesExpenseForecast: 25,
     expenseType: Enums.PRO_FORMA_TYPES.utilities,
+    potentialGrossIncome: Enums.INCOME_TYPES_CELL_NAMES.potentialGrossIncome,
     expenseCellName: Enums.EXPENSE_CELL.utilities,
     reimbursementType: Enums.REIMBURSEMENT_TYPES.dollarAmount,
     knownInformation: "Annual",

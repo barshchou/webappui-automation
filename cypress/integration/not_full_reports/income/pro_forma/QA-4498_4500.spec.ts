@@ -39,7 +39,7 @@ describe("Potential [USE(Property -> Commercial Units] Income -> PSF / Per Unit"
         cy.restoreLocalStorage();
     });
 
-    it(`[QA-4500]`, () => {
+    it("[QA-4500]", () => {
         cy.stepInfo(`4. Go to Income → Pro Forma page. Verify that value in the
             Potential Commercial Income → Per Unit is calculated by the formula: Total / # of ResidentialUnits`);
         Income._ProFormaActions.verifyCategoryPerUnitTotal(
@@ -47,7 +47,7 @@ describe("Potential [USE(Property -> Commercial Units] Income -> PSF / Per Unit"
             proFormaTypes.potentialUnderterminedCommercialIncome);
     });
 
-    it(`[QA-4499]`, () => {
+    it("[QA-4499]", () => {
         cy.stepInfo(`4. Go to Income → Pro Forma page. Verify that value in the 
             Potential Commercial Income → PSF is calculated by the formula: Total / GBA`);
         Income._ProFormaActions.verifyCategoryPSFTotal(
@@ -55,7 +55,7 @@ describe("Potential [USE(Property -> Commercial Units] Income -> PSF / Per Unit"
             proFormaTypes.potentialUnderterminedCommercialIncome);
     });
 
-    it(`[QA-4498]`, () => {
+    it("[QA-4498]", () => {
         cy.stepInfo(`4. Go to Income → Pro Forma page. Verify that value in the 
             Potential Commercial Income → Total is calculated by the formula: Total / GBA`);
         Income._ProFormaActions.verifyCategoryTotal(

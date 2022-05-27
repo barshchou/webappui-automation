@@ -103,6 +103,13 @@ namespace BoweryReports {
         type: "input" | "dropdown"
     };
 
+    export type OtherIncomeItem = {
+        vcLossType: string,
+        vcPercent: number,
+        incomeCategory: string,
+        annualAmount: number
+    }
+
     export type UnitsOfMeasure = "annually" | "monthly" | "per square foot per year" | "per square foot per month";
 
     export type UtilityExpenses = "brokenOut" | "combinedElectricityAndFuel" | "combinedAll";

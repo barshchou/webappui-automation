@@ -1,13 +1,11 @@
 import { numberWithCommas } from './../../../../../utils/numbers.utils';
-import testData from "../../../../fixtures/not_full_reports/income/pro_forma/QA-4507-09.fixture";
+import testData from "../../../../fixtures/not_full_reports/income/pro_forma/QA-4513-15.fixture";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { Property } from '../../../../actions/index';
 import { Income } from "../../../../actions";
-import proFormaTypes from "../../../../enums/proFormaTypes.enum";
-import Enums from "../../../../enums/incomeTypesCellNames.enum";
 
-describe("Potential Laundry Income", 
+describe("Potential Other Income", 
     { tags:[ "@income", "@pro_forma" ] }, () => { 
     
     before("Login, create report, prepare data", () => {
@@ -19,13 +17,9 @@ describe("Potential Laundry Income",
             .enterNumberOfResUnits(testData.numberOfResidentialUnits)
             .enterNumberOfCommercialUnits(testData.numberOfCommercialUnits);
 
-        cy.stepInfo("2. Go to Property → Amenities, check Laundry checkbox");
-        _NavigationSection.navigateToPropertyAmenities();
-        Property._Amenities.checkLaundryRoomCheckbox();
-        
-        cy.stepInfo("3. Go to Income → Miscellaneous → Laundry and fill in all necessary values"); 
-        _NavigationSection.navigateToLaundry();
-        Income._MiscellaneousManager.Laundry.enterLaundryIncome(testData.laundryIncome);
+        cy.stepInfo("2. Go to Income → Miscellaneous → Other and fill in all necessary values"); 
+        _NavigationSection.navigateToOther();
+        Income._MiscellaneousManager.Other.addOtherIncome(testData.otherIncomeItem);
         
         cy.saveLocalStorage();
     });
@@ -36,32 +30,32 @@ describe("Potential Laundry Income",
             .verifyProgressBarNotExist();
     });
 
-    it("[QA-4507]", () => {
-        cy.stepInfo(`5 Verify that Pro Forma table contains Laundry Income Total value`);
+    it("[QA-4513]", () => {
+        cy.stepInfo(`5 Verify that Pro Forma table contains Other Income Total value`);
         Income._ProFormaActions.verifyCategoryTotal(
-            `$${numberWithCommas(Math.round(testData.laundryIncome))}`, 
-            proFormaTypes.laundryIncome);
+            `$${numberWithCommas(Math.round(testData.otherIncomeItem.annualAmount))}`, 
+            testData.otherIncomeItem.incomeCategory);
 
         cy.stepInfo(`5.1 Verify that Total is taken from Income → Potential Gross Income → 
-                    table → Laundry Income`);
+                    table → Other Income`);
         _NavigationSection.navigateToPotentialGrossIncome();
         Income._PotentialGrossIncome.verifyIncomeTypeUnified(
-            Enums.laundryIncome, 
-            `$${numberWithCommas(testData.laundryIncome.toFixed(2))}`);
+            testData.otherIncomeItem.incomeCategory.toLocaleLowerCase(), 
+            `$${numberWithCommas(testData.otherIncomeItem.annualAmount.toFixed(2))}`);
     });
 
-    it("[QA-4508]", () => {
-        cy.stepInfo(`5. Verify that Pro Forma table contains Laundry Income PSF value`);
+    it("[QA-4514]", () => {
+        cy.stepInfo(`5. Verify that Pro Forma table contains Other Income PSF value`);
         Income._ProFormaActions.verifyCategoryPSFTotal(
-            `$${numberWithCommas(testData.laundryIncomePerSf.toFixed(2))}`, 
-            proFormaTypes.laundryIncome);
+            `$${numberWithCommas(testData.annualIncomePerSf.toFixed(2))}`, 
+            testData.otherIncomeItem.incomeCategory);
     });
 
-    it("[QA-4509]", () => {
-        cy.stepInfo(`5. Verify that Pro Forma table contains Laundry Income Per Unit value`);
+    it("[QA-4515]", () => {
+        cy.stepInfo(`5. Verify that Pro Forma table contains Other Income Per Unit value`);
         Income._ProFormaActions.verifyCategoryPerUnitTotal(
-            `$${numberWithCommas(Math.round(testData.laundryIncomePerUnit))}`, 
-            proFormaTypes.laundryIncome);
+            `$${numberWithCommas(Math.round(testData.annualIncomePerUnit))}`, 
+            testData.otherIncomeItem.incomeCategory);
 
         deleteReport(testData.reportCreationData.reportNumber);
     });

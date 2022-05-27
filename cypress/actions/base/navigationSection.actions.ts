@@ -3,7 +3,7 @@ import { Alias } from "../../utils/alias.utils";
 import BaseActionsExt from "./base.actions.ext";
 
 class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPage> {
-    private clickYesIfExist() {
+    clickYesIfExist() {
         cy.get("body").then($body => {
             if ($body.text().includes("You have unsaved changes")) this.clickYesButton();
         });
@@ -314,6 +314,16 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         return this;
     }
 
+    clickStorageButton() {
+        navigationSectionPage.storage.click();
+        return this;
+    }
+
+    clickOtherButton() {
+        navigationSectionPage.other.click();
+        return this;
+    }
+
     clickParkingButton() {
         navigationSectionPage.parking.click();
         return this;
@@ -364,6 +374,22 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         this.clickIncomeApproachButton()
             .clickMiscellaneousIncome()
             .clickLaundryButton()
+            .clickYesIfExist();
+        return this;
+    }
+
+    navigateToStorage() {
+        this.clickIncomeApproachButton()
+            .clickMiscellaneousIncome()
+            .clickStorageButton()
+            .clickYesIfExist();
+        return this;
+    }
+
+    navigateToOther() {
+        this.clickIncomeApproachButton()
+            .clickMiscellaneousIncome()
+            .clickOtherButton()
             .clickYesIfExist();
         return this;
     }

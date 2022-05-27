@@ -1,5 +1,5 @@
 import { numberWithCommas } from './../../../../../utils/numbers.utils';
-import testData from "../../../../fixtures/not_full_reports/income/pro_forma/QA-4504-06.fixture";
+import testData from "../../../../fixtures/not_full_reports/income/pro_forma/QA-4510-12.fixture";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { Property } from '../../../../actions/index';
@@ -7,8 +7,8 @@ import { Income } from "../../../../actions";
 import proFormaTypes from "../../../../enums/proFormaTypes.enum";
 import Enums from "../../../../enums/incomeTypesCellNames.enum";
 
-describe("Potential Parking Income", 
-    { tags:[ "@income", "@pro_forma" ] }, () => {
+describe("Potential Storage Income", 
+    { tags:[ "@income", "@pro_forma" ] }, () => { 
     
     before("Login, create report, prepare data", () => {
         cy.stepInfo(`1. Create new report or open the report which is already created. 
@@ -19,13 +19,13 @@ describe("Potential Parking Income",
             .enterNumberOfResUnits(testData.numberOfResidentialUnits)
             .enterNumberOfCommercialUnits(testData.numberOfCommercialUnits);
 
-        cy.stepInfo("2. Go to Property → Amenities, check Parking checkbox and fill in the number of Parking Spaces");
+        cy.stepInfo("2. Go to Property → Amenities, check Storage checkbox");
         _NavigationSection.navigateToPropertyAmenities();
-        Property._Amenities.addParkingPlaces(testData.numberOfParkingPlaces);
+        Property._Amenities.addStorageUnits(testData.storageUnits);
         
-        cy.stepInfo("3. Go to Income → Miscellaneous → Parking and fill in all necessary values"); 
-        _NavigationSection.navigateToParking();
-        Income._MiscellaneousManager.Parking.addMonthlyRents(testData.monthlyRents);
+        cy.stepInfo("3. Go to Income → Miscellaneous → Storage and fill in all necessary values"); 
+        _NavigationSection.navigateToStorage();
+        Income._MiscellaneousManager.Storage.addStorageIncome(testData.storageIncome);
         
         cy.saveLocalStorage();
     });
@@ -36,31 +36,32 @@ describe("Potential Parking Income",
             .verifyProgressBarNotExist();
     });
 
-    it("[QA-4504]", () => {
-        cy.stepInfo(`5 Verify that Pro Forma table contains Parking Income Total value`);
+    it("[QA-4510]", () => {
+        cy.stepInfo(`5 Verify that Pro Forma table contains Storage Income Total value`);
         Income._ProFormaActions.verifyCategoryTotal(
-            `$${numberWithCommas(Math.round(testData.annualRentTotal))}`, 
-            proFormaTypes.parkingIncome);
+            `$${numberWithCommas(Math.round(testData.storageIncome))}`, 
+            proFormaTypes.storageIncome);
 
-        cy.stepInfo(`5.1 Verify that Total is taken from Income → Potential Gross Income → table → Parking Income`);
+        cy.stepInfo(`5.1 Verify that Total is taken from Income → Potential Gross Income → 
+                    table → Storage Income`);
         _NavigationSection.navigateToPotentialGrossIncome();
         Income._PotentialGrossIncome.verifyIncomeTypeUnified(
-            Enums.parkingIncome, 
-            `$${numberWithCommas(testData.annualRentTotal.toFixed(2))}`);
+            Enums.storageIncome, 
+            `$${numberWithCommas(testData.storageIncome.toFixed(2))}`);
     });
 
-    it("[QA-4505]", () => {
-        cy.stepInfo(`5. Verify that Pro Forma table contains Parking Income PSF value`);
+    it("[QA-4511]", () => {
+        cy.stepInfo(`5. Verify that Pro Forma table contains Storage Income PSF value`);
         Income._ProFormaActions.verifyCategoryPSFTotal(
-            `$${numberWithCommas(testData.parkingincomePerSf.toFixed(2))}`, 
-            proFormaTypes.parkingIncome);
+            `$${numberWithCommas(testData.storageIncomePerSf.toFixed(2))}`, 
+            proFormaTypes.storageIncome);
     });
 
-    it("[QA-4506]", () => {
-        cy.stepInfo(`5. Verify that Pro Forma table contains Parking Income Per Unit value`);
+    it("[QA-4512]", () => {
+        cy.stepInfo(`5. Verify that Pro Forma table contains Storage Income Per Unit value`);
         Income._ProFormaActions.verifyCategoryPerUnitTotal(
-            `$${numberWithCommas(Math.round(testData.parkingincomePerUnit))}`, 
-            proFormaTypes.parkingIncome);
+            `$${numberWithCommas(Math.round(testData.storageIncomePerUnit))}`, 
+            proFormaTypes.storageIncome);
 
         deleteReport(testData.reportCreationData.reportNumber);
     });
