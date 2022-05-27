@@ -162,6 +162,11 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
         return this;
     }
 
+    verifyIncludeInProFormaCheckboxIsChecked(forecastItem: string): ExpenseForecastActions {
+        expenseForecastPage.getCheckboxIncludeInProForma(forecastItem).should("have.value", "true");
+        return this;
+    }
+
     verifyIncludeInProFormaCheckboxExists(forecastItem: string): ExpenseForecastActions {
         expenseForecastPage.getCheckboxIncludeInProForma(forecastItem).should("exist");
         return this;
