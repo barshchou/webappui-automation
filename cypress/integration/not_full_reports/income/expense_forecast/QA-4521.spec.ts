@@ -20,7 +20,8 @@ describe("Historical expense Insurance Per Unit is correctly calculated and disp
             cy.stepInfo("1. Go to Income > Expense History");
             _NavigationSection.Actions.navigateToExpenseHistory();
 
-            cy.stepInfo("2. Add columns for all types of Expense Period: Actual, Actual T12, Annualized Historical and Projection + Fill in Insurance field for all added columns and save changes");
+            cy.stepInfo(`2. Add columns for all types of Expense Period: Actual, Actual T12, Annualized Historical and Projection + 
+            Fill in Insurance field for all added columns and save changes`);
             testData.periods.forEach((per) => {
                 Income._ExpenseHistory.Actions.selectExpensePeriod(per.expensePeriodType)
                     .enterExpenseYear(per.year)
@@ -41,8 +42,10 @@ describe("Historical expense Insurance Per Unit is correctly calculated and disp
             Income._ExpenseForecastActions.chooseForecastItemBasis(testData.actualInsuranceItem);
             Income._ExpenseForecastActions.Actions.verifyForecastItemBasis(testData.actualInsuranceItem);
 
-            cy.stepInfo("4.1 Check historical expenses values for Insurance card. They should be calculated for each expense type as: [Expense Period type]Insurance / # of Residential Units");
-            Income._ExpenseForecastActions.Actions.verifyForecastItemByExpensePeriodType(testData.actualInsuranceItem, testData.buildingDescription, "Actual")
+            cy.stepInfo(`4.1 Check historical expenses values for Insurance card. 
+            They should be calculated for each expense type as: [Expense Period type]Insurance / # of Residential Units`);
+            Income._ExpenseForecastActions.Actions
+                .verifyForecastItemByExpensePeriodType(testData.actualInsuranceItem, testData.buildingDescription, "Actual")
                 .verifyForecastItemByExpensePeriodType(testData.t12InsuranceIItem, testData.buildingDescription, "Actual T12")
                 .verifyForecastItemByExpensePeriodType(testData.historicalInsuranceIItem, testData.buildingDescription, "Annualized Historical")
                 .verifyForecastItemByExpensePeriodType(testData.ownerProjectionInsuranceIItem, testData.buildingDescription, "Owner's Projection")

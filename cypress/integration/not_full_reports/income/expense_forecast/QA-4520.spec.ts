@@ -35,7 +35,8 @@ describe("Comparable Min, Max, Avg values for Insurance Per SF are correctly cal
                 .verifyForecastItemCompMax(testData.insuranceItem, testData.comparables)
                 .hideExpenseForecastHeader();
 
-            cy.stepInfo("4.2 Check Comp Min, Comp Max and Comp Avg values for Insurance card. They should be correctly displayed on a slidebar");
+            cy.stepInfo(`4.2 Check Comp Min, Comp Max and Comp Avg values for Insurance card. 
+            They should be correctly displayed on a slidebar`);
             Income.ExpenseForecast.Actions.matchElementSnapshot(
                 Income.ExpenseForecast.Page.insuranceCard, testData.insuranceCardSnapshotName, { padding: [ 10, 100 ] });
 
