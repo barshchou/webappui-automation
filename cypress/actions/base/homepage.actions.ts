@@ -65,7 +65,7 @@ class HomepageActions extends BaseActionsExt<typeof homepagePage> {
     }
 
     enterReportNumber(reportNumber: string): this {
-        homepagePage.reportNumberInput.type(reportNumber).should("have.value", reportNumber);
+        homepagePage.reportNumberInput.type(reportNumber).blur().should("have.value", reportNumber);
         return this;
     }
 
