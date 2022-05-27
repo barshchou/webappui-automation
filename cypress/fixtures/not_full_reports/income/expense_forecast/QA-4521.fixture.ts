@@ -30,6 +30,34 @@ const _buildingDescription: BoweryReports.BuildingDescription = {
     numberOfUnits: 5,
 };
 
+const _periods: BoweryReports.Periods[] = [
+    {
+        expensePeriodType: "Actual",
+        year: Number(getYearFromDate()) - 1,
+        insurance: 10000,
+    },
+    {
+        expensePeriodType: "Projection",
+        year: Number(getYearFromDate()) + 1,
+        insurance: 17000,
+    }
+];
+
+const _periodsMonth: BoweryReports.PeriodsMonth[] = [
+    {
+        expensePeriodType: "Actual T12",
+        month: getCurrentMonthName(),
+        year: getYearFromDate(),
+        insurance: 13000,
+    },
+    {
+        expensePeriodType: "Annualized Historical",
+        month: getCurrentMonthName(),
+        year: getYearFromDate(),
+        insurance: 15000,
+    },
+];
+
 export default {
     reportCreationData: ReportDataCreator.getReportData("4521"),
     actualInsuranceItem: _actualInsuranceItem,
@@ -37,32 +65,7 @@ export default {
     historicalInsuranceIItem: _historicalInsuranceIItem,
     ownerProjectionInsuranceIItem: _ownerProjectionInsuranceIItem,
     buildingDescription: _buildingDescription,
-    periods: [
-        {
-            expensePeriodType: "Actual",
-            year: Number(getYearFromDate()) - 1,
-            insurance: 10000,
-        },
-        {
-            expensePeriodType: "Projection",
-            year: Number(getYearFromDate()) + 1,
-            insurance: 17000,
-        },
-    ],
-    periodsMonth: [
-        {
-            expensePeriodType: "Actual T12",
-            month: getCurrentMonthName(),
-            year: getYearFromDate(),
-            insurance: 13000,
-        },
-        {
-            expensePeriodType: "Annualized Historical",
-            month: getCurrentMonthName(),
-            year: getYearFromDate(),
-            insurance: 15000,
-        },
-    ],
-
+    periods: _periods,
+    periodsMonth: _periodsMonth,
     insuranceICardSnapshotName: "InsuranceI_Forecast_Item_Component",
 };
