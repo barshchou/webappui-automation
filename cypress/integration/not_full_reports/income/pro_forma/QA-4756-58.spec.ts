@@ -19,7 +19,9 @@ describe("Operating Expenses -> Real Estate Taxes -> Total",
 
         cy.stepInfo("2. Go to Income → Miscellaneous → Other and fill in all necessary values"); 
         _NavigationSection.navigateToTaxInfo();
-        
+        Income._TaxInfo.checkUncheckIncludeTransitionalCheckbox(true);
+
+        cy.pause();
         
         cy.saveLocalStorage();
     });

@@ -4,7 +4,7 @@ import BaseActionsExt from "../base/base.actions.ext";
 
 class TaxInfoActions extends BaseActionsExt<typeof taxInfoPage> {
 
-    checkBasisByValue(value): TaxInfoActions {
+    checkBasisByValue(value: string): TaxInfoActions {
         taxInfoPage.basisRadio.check(value);
         taxInfoPage.getVerifyBasisRadioInput(value).should("exist");
         return this;
@@ -16,9 +16,29 @@ class TaxInfoActions extends BaseActionsExt<typeof taxInfoPage> {
         return this;
     }
 
+    enterTransitionalLandValue(value: number | string): TaxInfoActions {
+        const valueToBe = `$${numberWithCommas(value)}`;
+        taxInfoPage.landTransitional.clear().type(`${value}`).should("have.value", valueToBe);
+        return this;
+    }
+
     enterTaxableAssessedBuildingValue(value: string | number): TaxInfoActions {
         const valueToBe = `$${numberWithCommas(value)}`;
         taxInfoPage.buildingActualInput.clear().type(`${value}`).should("have.value", valueToBe);
+        return this;
+    }
+
+    enterTransitionalBuildingValue(value: string | number): TaxInfoActions {
+        const valueToBe = `$${numberWithCommas(value)}`;
+        taxInfoPage.buildingTransitionalInput.clear().type(`${value}`).should("have.value", valueToBe);
+        return this;
+    }
+
+    checkUncheckIncludeTransitionalCheckbox(value = false): TaxInfoActions {
+        if (taxInfoPage.includeTransitionalAssessedValueCheckbox
+            .should('have.value', value)) {
+                taxInfoPage.includeTransitionalAssessedValueCheckbox.check().should('have.value', !value);
+            }
         return this;
     }
 
@@ -315,12 +335,12 @@ class TaxInfoActions extends BaseActionsExt<typeof taxInfoPage> {
         return this;
     }
 
-    verifyTaxSummaryTooltip(tooltipToBe) {
+    verifyTaxSummaryTooltip(tooltipToBe: string): TaxInfoActions {
         taxInfoPage.taxSummaryDiscussionTooltip.should("exist").should("have.attr", "aria-label", tooltipToBe);
         return this;
     }
 
-    verifyTaxSummaryDiscussionTitle(titleToBe) {
+    verifyTaxSummaryDiscussionTitle(titleToBe: string) {
         taxInfoPage.taxSummaryDiscussionTitle.should("exist").should("have.text", titleToBe);
         return this;
     }
