@@ -34,6 +34,8 @@ cy.get(`[data-qa="replacementReserves-forecast-item"]`)
   .children()
   .contains("Include Expense on Pro Forma").should('exist')
 
+
+  Income._ExpenseForecastActions.Page.forecastItemCardFull()
 // label="Include Expense on Pro Forma"span
 // cy.get(`[data-qa="${forecastItem}"].filter('.users')
 // cy.get('td').filter('.users')
