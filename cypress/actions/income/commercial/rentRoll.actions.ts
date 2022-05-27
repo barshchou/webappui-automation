@@ -4,16 +4,6 @@ import CommercialRentRollSharedComponent from "../../shared_components/commercia
 
 class CommercialRentRollActions extends CommercialRentRollSharedComponent<typeof rentRollPage> {
 
-    verifyThatPageIsOpened(): this {
-        rentRollPage.pageHeader.should("be.visible");
-        cy.url().then(url => {
-            let urlObj = new URL(url);
-            cy.log("Check whether current URL ends with '/commercial-rent-roll'");
-            cy.wrap(urlObj.pathname.endsWith("/commercial-rent-roll")).should("be.true");
-        });
-        return this;
-    }
-
     verifyBasisOfRentTooltip() {
         rentRollPage.basisOfRentField.should("exist");
         rentRollPage.basisOfRentTooltip.should("exist").trigger("mouseover");
