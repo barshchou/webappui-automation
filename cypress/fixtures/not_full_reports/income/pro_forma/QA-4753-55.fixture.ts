@@ -93,7 +93,7 @@ const _effectiveGrossIncomeTotal = _potentialGrossIncomeTotal -
 const _effectiveGrossIncomePerSf = _effectiveGrossIncomeTotal / _grossBuildingArea;
 const _effectiveGrossIncomePerUnit = _effectiveGrossIncomeTotal / _numberOfResidentialUnits;
 
-const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("4553-55", {
+const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("4753-55", {
         incomeValue: Enums.INCOME_TYPE.BOTH
     });
 
