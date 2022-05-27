@@ -86,16 +86,8 @@ namespace BoweryReports {
 
     export type Periods = { 
         expensePeriodType: BoweryReports.ExpensePeriodType | string, 
-        year: number, 
-        insurance?: number, electricity?: number, fuel?: number, waterAndSewer?: number, repairsAndMaintenance?: number, 
-        payrollAndBenefits?: number, generalAndAdministrative?: number, legalAndProfessionalFees?: number, miscellaneous?: number, 
-        management?: number, replacementReserves?: number 
-    };
-
-    export type PeriodsMonth = { 
-        expensePeriodType: BoweryReports.ExpensePeriodType | string, 
-        month: string,
-        year: string, 
+        month?: string,
+        year: number | string, 
         insurance?: number, electricity?: number, fuel?: number, waterAndSewer?: number, repairsAndMaintenance?: number, 
         payrollAndBenefits?: number, generalAndAdministrative?: number, legalAndProfessionalFees?: number, miscellaneous?: number, 
         management?: number, replacementReserves?: number 

@@ -43,7 +43,7 @@ const _periods: BoweryReports.Periods[] = [
     }
 ];
 
-const _periodsMonth: BoweryReports.PeriodsMonth[] = [
+const _periodsMonth: BoweryReports.Periods[] = [
     {
         expensePeriodType: "Actual T12",
         month: getCurrentMonthName(),
