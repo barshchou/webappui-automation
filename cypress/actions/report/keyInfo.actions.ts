@@ -8,12 +8,12 @@ class KeyInfoActions extends BaseActionsExt<typeof keyInfoPage> {
      * ernst: REFACTOR: add form data (index of save and edit btn) as param.
      */
     enterPropertyRightsAppraisedComment(textToType: string = null) {
-        keyInfoPage.formEditBtn(0).click();
+        keyInfoPage.formEditBtn().click();
         keyInfoPage.textBoxPropertyRightsAppraised.invoke("text")
         .then(text => {
             keyInfoPage.textBoxPropertyRightsAppraised.click().clear().type(textToType ?? text);
         });
-        keyInfoPage.formSaveBtn(0).click();
+        keyInfoPage.formSaveBtn().click();
         return keyInfoPage.textBoxPropertyRightsAppraised.invoke("text");
     }
 

@@ -41,7 +41,7 @@ class KeyInfoPage extends BasePage{
 
     get wrapperLetterOfTransmittalPurpose() {return cy.get("*[data-qa='letterOfTransmittalPurpose-generated-comment-wrapper']");}
 
-    get jobNumberTextInput() {return cy.get("*[data-qa='job-number-text-input']");}
+    get jobNumberTextInput() {return cy.get("*[data-qa='job-number-text-input'] input");}
 
     get wrapperDefinitionOfMarketValue() {return cy.get("*[data-qa='definition-of-market-value-tile']");}
     

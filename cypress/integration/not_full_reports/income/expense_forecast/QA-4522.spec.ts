@@ -2,10 +2,9 @@ import testData from "../../../../fixtures/not_full_reports/income/expense_forec
 import { _NavigationSection } from "../../../../actions/base";
 import { Income } from "../../../../actions";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
-import { Tag } from "../../../../utils/tags.utils";
 
 describe(`Comparable Min, Max, Avg values for Water & Sewer Per Unit are correctly calculated and displayed`,
-    { tags:[ Tag.income, Tag.expense_forecast, Tag.snapshot_tests ] }, () => {
+    { tags:[ "@income", "@expense_forecast", "@snapshot_tests" ] }, () => {
 
     before("Login, create report", () => {
         createReport(testData.reportCreationData);

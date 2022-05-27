@@ -4,12 +4,11 @@ import { _BaseTest } from "../../../../actions/base";
 import { Report, PreviewEdit } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { getReportId } from "../../../../../utils/intercept.utils";
-import { Tag } from "../../../../utils/tags.utils";
 
 const { createReport, deleteReport } = _BaseTest;
 
 describe('Verify the "Property Rights Appraised" commentary on the Introduction page', 
-    { tags:[ Tag.preview_edit, Tag.introduction ] }, () => {
+    { tags:[ "@preview_edit", "@introduction" ] }, () => {
         
     before("Login, create report", () => {
         cy.stepInfo(`1. Create a report`);
