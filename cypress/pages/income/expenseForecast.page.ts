@@ -13,6 +13,8 @@ class ExpenseForecastPage extends BasePage {
 
     forecastItemCard(forecastItem: string) { return cy.get(`[data-qa=${forecastItem}-forecast-item] > div`).last(); }
 
+    forecastItemCardFull(forecastItem: string) { return cy.get(`[data-qa=${forecastItem}-forecast-item]`); }            
+
     get toeCard() { return cy.xpath("//*[.='TOTAL OPERATING EXPENSES ($/SF)']/parent::div").first(); }
 
     getForecastItemBasisRadio(item) {return cy.get(`[name='${item}.basis']`);}
