@@ -7,6 +7,7 @@ import expenseCellNames from "./expenseCellNames";
 import expenseHistoryTableRowsEnum from "./expenseHistoryTableRows.enum";
 import reimbursementTypes from "./reimbursementTypes.enum";
 import incomeTypesCellNamesEnum from "./incomeTypesCellNames.enum";
+import expenseForecast from "./expenseForecast.enum";
 
 export default {
     TEMPLATE_TYPE: templateTypesEnum,
@@ -17,5 +18,6 @@ export default {
     EXPENSE_CELL: expenseCellNames,
     EXPENSE_HISTORY_TABLE_ROWS: expenseHistoryTableRowsEnum,
     REIMBURSEMENT_TYPES: reimbursementTypes,
-    INCOME_TYPES_CELL_NAMES: incomeTypesCellNamesEnum
+    INCOME_TYPES_CELL_NAMES: incomeTypesCellNamesEnum,
+    EXPENCE_FORCAST_ITEMS: expenseForecast
 };
