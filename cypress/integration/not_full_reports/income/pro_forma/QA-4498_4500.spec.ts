@@ -2,13 +2,13 @@ import { numberWithCommas } from '../../../../../utils/numbers.utils';
 import testData from "../../../../fixtures/not_full_reports/income/pro_forma/QA-4498_4500.fixture";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
-import { Property } from '../../../../actions/index';
+import { Property } from '../../../../actions';
 import { Income } from "../../../../actions";
-import { Tag } from "../../../../utils/tags.utils";
 import proFormaTypes from "../../../../enums/proFormaTypes.enum";
+import Enums from "../../../../enums/incomeTypesCellNames.enum";
 
 describe("Potential [USE(Property -> Commercial Units] Income -> PSF / Per Unit", 
-    { tags:[ Tag.income, Tag.pro_forma ] }, () => {
+    { tags:[ "@income", "@pro_forma" ] }, () => {
     
     before("Login, create report, prepare data", () => {
         cy.stepInfo(`1. Create new report or open the report which is already created. 
@@ -65,7 +65,7 @@ describe("Potential [USE(Property -> Commercial Units] Income -> PSF / Per Unit"
         cy.stepInfo(`4.1 Verify that Total is taken from Income → 
             Potential Gross Income → table → Potential Commercial Income`);
         _NavigationSection.navigateToPotentialGrossIncome();
-        Income._PotentialGrossIncome.verifyPotentialGrossIncomeValue(`$${numberWithCommas(testData.total.toFixed(2))}`);
+        Income._PotentialGrossIncome.verifyIncomeTypeUnified(Enums.potentialGrossIncome, `$${numberWithCommas(testData.total.toFixed(2))}`);
     });
 
     after("Delete report after test suite", () => {

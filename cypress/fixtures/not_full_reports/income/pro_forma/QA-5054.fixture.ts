@@ -33,10 +33,10 @@ export default {
     reportCreationData: _reportCreationData,
     expensesItems: expensesItemsFixture(),
     customCategory: _customCategory,
-    totalToe: "$52,542,783",
+    totalToe: "$21,244,410",
     totalToeNetRe: "$21,244,410",
     customTotal: "$8,497,764",
-    netOperationIncome: "-$52,542,783",
+    netOperationIncome: "-$21,244,410",
     reserverstotal: "$4,248,882",
     fuelTotal: "$6,373,323",
     waterAndSewerTotal: "$2,124,441"

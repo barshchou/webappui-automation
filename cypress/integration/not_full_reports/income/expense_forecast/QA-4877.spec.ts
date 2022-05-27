@@ -3,10 +3,9 @@ import testData from "../../../../fixtures/not_full_reports/income/expense_forec
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Income from "../../../../actions/income/income.manager";
-import { Tag } from "../../../../utils/tags.utils";
 
 describe("Comparable Min, Max, Avg values for Electricity Per SF are correctly calculated and displayed",
-    { tags:[ Tag.snapshot_tests, Tag.income, Tag.expense_forecast ] }, () => {
+    { tags:[ "@snapshot_tests", "@income", "@expense_forecast" ] }, () => {
         
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
