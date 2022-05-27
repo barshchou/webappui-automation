@@ -1,12 +1,11 @@
 import testData from "../../../../fixtures/not_full_reports/property/market/QA-4430_42.fixture";
 import { Base, Property, ReviewExport } from "../../../../actions";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
-import { Tag } from "../../../../utils/tags.utils";
 import { _NavigationSection } from "../../../../actions/base";
 
 
 describe("Verify the functionality of the Ceiling Height radio button", 
-    { tags:[ Tag.property, Tag.market, Tag.check_export ] }, () => {
+    { tags:[ "@property", "@market", "@check_export" ] }, () => {
 
     it("Test body", () => {
         createReport(testData.reportCreationData);

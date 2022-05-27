@@ -4,10 +4,9 @@ import { createReport, deleteReport } from "../../../../actions/base/baseTest.ac
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Property from "../../../../actions/property/property.manager";
 import Income from "../../../../actions/income/income.manager";
-import { Tag } from "../../../../utils/tags.utils";
 
-describe("Historical expense Fuel Per SF is correctly calculated and displayed", 
-    { tags: [ Tag.income, Tag.expense_forecast ] }, () => {
+describe("Historical expense Repairs & Maintenance Per SF is correctly calculated and displayed", 
+    { tags: [ "@income", "@expense_forecast" ] }, () => {
         
     before("Login, create report", () => {
         createReport(testData.reportCreationData);

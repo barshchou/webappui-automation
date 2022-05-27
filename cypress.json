@@ -8,8 +8,5 @@
   "videoUploadOnPasses": false,
   "experimentalStudio": true,
   "projectId": "EDvaU4",
-  "ignoreTestFiles": "*.studio.*",
-  "retries": {
-    "runMode": 1
-  }
+  "ignoreTestFiles": "*.studio.*"
 }

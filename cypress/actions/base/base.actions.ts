@@ -74,6 +74,11 @@ export default class BaseActions {
         return this;
     }
 
+    verifyTooltipExist() {
+        cy.get("[role=tooltip]").should("not.exist");
+        return this;
+    }
+
     /**
      * Retrive DOM-element screenshot and compares it with baseline.
      * @param element - PageElement to be snapshoted. 
@@ -86,6 +91,15 @@ export default class BaseActions {
             element.matchImageSnapshot(snapshotName, options);
             return this; 
         } 
+    }
+
+    /**
+     * Emulates paste of text by invoking function `val` of JQuery element.
+     * Does not related to functionality of Clipboard API of browser.
+     */
+    emulateCopyPaste(elem: Cypress.Chainable<JQuery<HTMLElement>>, text: string): this {
+        elem.click().invoke("val", text);
+        return this;
     }
 
     pause(){

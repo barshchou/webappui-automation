@@ -13,7 +13,7 @@ class ExpenseForecastPage extends BasePage {
 
     forecastItemCard(forecastItem: string) { return cy.get(`[data-qa=${forecastItem}-forecast-item] > div`).last(); }
 
-    get toeCard() {return cy.xpath("//*[.='TOTAL OPERATING EXPENSES ($/SF)']/parent::div").first();}
+    get toeCard() { return cy.xpath("//*[.='TOTAL OPERATING EXPENSES ($/SF)']/parent::div").first(); }
 
     getForecastItemBasisRadio(item) {return cy.get(`[name='${item}.basis']`);}
 
@@ -33,11 +33,11 @@ class ExpenseForecastPage extends BasePage {
 
     getForecastItemProjectionByType(item, type) {return cy.contains(`[data-qa=${item}-forecast-item] [data-qa$=historical]`, type);}
 
-    getExpenseCommentary(forecastItem: string) {return cy.xpath(`//*[@data-qa="${forecastItem}-forecast-item"]//following::div[@data-slate-editor][1]`);}
+    getExpenseCommentary(forecastItem: string, index = 1) {return cy.xpath(`//*[@data-qa="${forecastItem}-forecast-item"]//following::div[@data-slate-editor][${index}]`);}
 
-    getExpenseCommentaryEditButton(forecastItem: string) {return cy.xpath(`//*[@data-qa="${forecastItem}-forecast-item"]//following::button[.='Edit'][1]`);}
+    getExpenseCommentaryEditButton(forecastItem: string, index = 1) {return cy.xpath(`//*[@data-qa="${forecastItem}-forecast-item"]//following::button[.='Edit'][${index}]`);}
 
-    getExpenseCommentarySaveButton(forecastItem: string) {return cy.xpath(`//*[@data-qa="${forecastItem}-forecast-item"]//following::button[.='Save'][1]`);}
+    getExpenseCommentarySaveButton(forecastItem: string, index = 1) {return cy.xpath(`//*[@data-qa="${forecastItem}-forecast-item"]//following::button[.='Save'][${index}]`);}
 
     getExpenseCommentaryModified(forecastItem: string) {return cy.xpath(`//*[@data-qa="${forecastItem}-forecast-item"]//following::*[.='Modified'][2]`);}
 

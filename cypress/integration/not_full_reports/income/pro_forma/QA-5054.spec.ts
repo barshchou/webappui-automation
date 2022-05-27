@@ -3,10 +3,9 @@ import { createReport, deleteReport } from "../../../../actions/base/baseTest.ac
 import { Income } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
 import enums from "../../../../enums/enums";
-import { Tag } from "../../../../utils/tags.utils";
 
 describe("[QA-5054] Appraiser's Forecast of Custom Expense Forecast is included in calculation", 
-    { tags:[ Tag.income, Tag.pro_forma ] }, () => {
+    { tags:[ "@income", "@pro_forma" ] }, () => {
 
     before("Login, create report", () => {
         createReport(testData.reportCreationData);

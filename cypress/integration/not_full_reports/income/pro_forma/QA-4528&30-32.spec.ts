@@ -3,10 +3,9 @@ import { createReport, deleteReport } from "../../../../actions/base/baseTest.ac
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Property from "../../../../actions/property/property.manager";
 import Income from "../../../../actions/income/income.manager";
-import { Tag } from "../../../../utils/tags.utils";
 
 describe("Residential V/C Loss @ X% row", 
-    { tags:[ Tag.income, Tag.pro_forma ] }, () => {
+    { tags:[ "@income", "@pro_forma" ] }, () => {
         
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
