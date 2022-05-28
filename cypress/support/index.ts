@@ -46,6 +46,8 @@ declare global {
          * @param message 
          */
         stepInfo(message:string): void
+
+        dragAndDrop: (subject:string, target:string) => void;
       }
     }
   }

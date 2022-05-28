@@ -1,7 +1,7 @@
-import BaseActions from "../../base/base.actions";
 import compGroupsPage from "../../../pages/income/commercial/compGroups.page";
+import BaseActionsExt from "../../base/base.actions.ext";
 
-class CompGroupsActions extends BaseActions {
+class CompGroupsActions extends BaseActionsExt<typeof compGroupsPage> {
 
     clickAddCompGroupButton() {
         compGroupsPage.addCompGroupButton.click();
@@ -54,4 +54,4 @@ class CompGroupsActions extends BaseActions {
     }
 }
 
-export default new CompGroupsActions();
+export default new CompGroupsActions(compGroupsPage);
