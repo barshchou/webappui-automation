@@ -22,8 +22,8 @@
     "currents:run:debug": "currents run --browser chrome",
     "tsc:check": "npx tsc --project ./cypress/tsconfig.json --noEmit",
     "tsc:watch": "npm run tsc:check -- --watch",
-    "lint:run": "eslint \"./**\"",
-    "lint:fix": "eslint \"./**\" --fix",
+    "lint:run": "eslint \"./**\" --max-warnings=0",
+    "lint:fix": "eslint \"./**\" --fix --max-warnings=0",
     "prepare": "husky install"
   },
   "repository": {
