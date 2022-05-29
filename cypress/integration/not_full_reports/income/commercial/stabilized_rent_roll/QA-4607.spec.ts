@@ -10,7 +10,7 @@ import { Income, Property } from "../../../../../actions";
  * + we have "drag_and_drop" lable for this kind of tests
  * TODO: Make draggable components accessible to Cypress
 */
-    // just test
+
     describe.skip("Verify the Commercial Stabilized Rent Roll table", 
     { tags: [ "@income", "@commercial", "@stabilized_rent_roll" ] }, () => {
         
