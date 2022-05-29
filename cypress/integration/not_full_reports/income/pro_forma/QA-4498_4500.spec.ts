@@ -8,10 +8,8 @@ import proFormaTypes from "../../../../enums/proFormaTypes.enum";
 import Enums from "../../../../enums/incomeTypesCellNames.enum";
 
 describe("Potential [USE(Property -> Commercial Units] Income -> PSF / Per Unit", 
-    { tags:["@income", "@pro_forma"] }, () => {
+    { tags:[ "@income", "@pro_forma" ] }, () => {
     
-
-    // test pre-commit lint script test 2 test 3
     before("Login, create report, prepare data", () => {
         cy.stepInfo(`1. Create new report or open the report which is already created. 
                     Make sure that there is at least two commercial units.`);
