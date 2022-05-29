@@ -11,7 +11,7 @@ describe("Potential [USE(Property -> Commercial Units] Income -> PSF / Per Unit"
     { tags:["@income", "@pro_forma"] }, () => {
     
 
-    // test pre-commit lint script
+    // test pre-commit lint script test 2
     before("Login, create report, prepare data", () => {
         cy.stepInfo(`1. Create new report or open the report which is already created. 
                     Make sure that there is at least two commercial units.`);
