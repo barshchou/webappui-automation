@@ -24,7 +24,8 @@
     "tsc:watch": "npm run tsc:check -- --watch",
     "lint:run": "eslint \"./**\"",
     "lint:fix": "eslint \"./**\" --fix",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "eslint": "bash ./pre-commit-eslint-script.sh"
   },
   "repository": {
     "type": "git",
