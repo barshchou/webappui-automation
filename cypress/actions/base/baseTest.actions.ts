@@ -16,6 +16,7 @@ export const deleteReport = (reportNumber) => {
 
 export const salesInterceptions = () => {
     cy.intercept('POST', '/graphql', req => {
+        aliasQuery(req, "searchSalesTransactions");
         aliasQuery(req, "findSalesComps");
         aliasQuery(req, "findSingleSalesComp");
         aliasQuery(req, "updateAppraisal");
