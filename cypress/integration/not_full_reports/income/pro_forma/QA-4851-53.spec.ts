@@ -1,5 +1,5 @@
 import { numberWithCommas } from '../../../../../utils/numbers.utils';
-import testData from "../../../../fixtures/not_full_reports/income/pro_forma/QA-4848-50.fixture";
+import testData from "../../../../fixtures/not_full_reports/income/pro_forma/QA-4851-53.fixture";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { Income, Property } from "../../../../actions";
@@ -32,27 +32,25 @@ describe("Pro Forma Page validation Operating Expenses -> Electricity",
             .verifyProgressBarNotExist();
     });
 
-    it("[QA-4848]", () => {
+    it("[QA-4851]", () => {
         cy.stepInfo(`3. The value in the Electricity Total is taken from Income → 
                     Expense Forecast → Electricity Forecast Discussion generated commentary`);
         Income._ProFormaActions.verifyCategoryTotal(
-            `$${numberWithCommas(Math.round(testData.electricitySfTotal))}`, 
+            `$${numberWithCommas(Math.round(testData.electricityUnitTotal))}`, 
             proFormaTypes.electricity);
     });
 
-    it("[QA-4849]", () => {
-        cy.stepInfo(`3. The value in the Electricity is taken from Income → 
-                    Expense Forecast → Electricity → Appraiser’s Forecast cell`);
+    it("[QA-4852]", () => {
+        cy.stepInfo(`3. The value in the Electricity → PSF is calculated by the formula: Total / GBA`);
         Income._ProFormaActions.verifyCategoryPSFTotal(
-            `$${numberWithCommas(testData.electricitySfPerSf.toFixed(2))}`, 
+            `$${numberWithCommas(testData.electricityUnitPerSf.toFixed(2))}`, 
             proFormaTypes.electricity);
     });
 
-    it("[QA-4850]", () => {
-        cy.stepInfo(`3. The value in the Electricity → 
-                    Per Unit is calculated by the formula: Total / # of Residential Units`);
+    it("[QA-4853]", () => {
+        cy.stepInfo(`3. The value in the Electricity Per Unit is Appraiser's Forecast value`);
         Income._ProFormaActions.verifyCategoryPerUnitTotal(
-            `$${numberWithCommas(Math.round(testData.electricitySfPerUnit))}`, 
+            `$${numberWithCommas(Math.round(testData.electricityUnitPerUnit))}`, 
             proFormaTypes.electricity);
 
         deleteReport(testData.reportCreationData.reportNumber);
