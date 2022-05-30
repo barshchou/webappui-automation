@@ -26,7 +26,7 @@ describe("Pro Forma Page validation Operating Expenses -> Electricity",
         cy.saveLocalStorage();
     });
     
-    beforeEach("Restore local storeage", () => {
+    beforeEach("Restore local storage", () => {
         cy.restoreLocalStorage();
         _NavigationSection.navigateToProForma()
             .verifyProgressBarNotExist();
