@@ -12,6 +12,7 @@ export const Alias = {
     salesComps_eventIds: _alias("salesComps_eventIds"),
     gql:{
         SearchSalesTransactions:_gqlAlias("searchSalesTransactions"),
+        FindTransactionByIdAndVersion:_gqlAlias("findTransactionByIdAndVersion"),
         FindSalesComps:_gqlAlias("findSalesComps"),
         FindSingleSalesComp:_gqlAlias("findSingleSalesComp"),
         UpdateAppraisal:_gqlAlias("updateAppraisal"),
