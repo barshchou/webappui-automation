@@ -7,12 +7,12 @@
   - [System requirements](#system_requirements)
   - [General prerequisites](#general_prerequisites)
   - [Setup](#setup)
-- [Usage](#usage)
+- [Contributing](#contributing)
   - [Development flow](#development_flow)
-  - [CLI_flags](#cli_flags)
   - [GH Actions debug](#gh_actions_debug)
   - [Validation of export](#export_validation)
-  - [Additional NPM scripts](#npm_scripts)
+- [Usage](#usage)
+  - [CLI_flags](#cli_flags)
 - [Useful VS Code extensions](#vs_code_extensions)
 
 ## About <a id="about"></a>
@@ -54,13 +54,7 @@ There are several main folders of these project:
   "PASSWORD": "value"
 }
 ```
-
-## Usage <a id="usage"></a>
-
-General way to run all cypress tests to run `npx cypress run` command. This command will run all existing test spec headless in electron browser at staging environment, using Api login method by default. General way to open cypress GUI is to run `npx cypress open` command.
-
-`package.json` file in `"scripts":` property contains ready to use commands for some mostly used cases. For example `npm run cy:open` command will open cypress GUI, `npm run cy:chrome_headed_prod_api` will run all tests in chrome headed browser at production environment, using Api login method etc.
-
+## Contributing <a id="contributing"></a>
 ### Development flow <a id="development_flow"></a>
 
 We don't have strict rules for our development flow. Everything is pretty standard: 
@@ -74,20 +68,7 @@ We don't have strict rules for our development flow. Everything is pretty standa
   **NOTE**: 
   - **please, while developing anything** - run `npm run tsc:watch` command in separate terminal instance (or split terminal into two). This will make TypeScript compilier keep an eye on your files changes and alert you when you forget, for example, update methods names after merge.
   - please, when writing commit message - add something meaningful, rather than "added some code". Good commit message: "[QA-something] added new actions into module_name" / "[misc] linter fixes". Bad commit message: "upd" / "fix" 
-  - (ernst): I do not force to use small commits instead of big ones, but when commit something - think what you would do with the big one if you have to revert / reset or cherry-pick it. 
-     
-
-### CLI flags <a id="cli_flags"></a>
-
-About cypress command line and it's general flags can be read [here](https://docs.cypress.io/guides/guides/command-line).
-
-Project's specific environment variables for `--env` flag:
-1. `url=` - accepts values `dev`,`prod` or `staging` for development, production or staging environment. Example of usage: `npx cypress run --env url=prod` will run tests at production environment. If this variable was not passed, uses `staging` by default.
-2. `loginMethod=` - accepts values `ui` or `api` for login by UI or Api. Example of usage: `npx cypress run --env loginMethod=ui` will launch tests with login by UI. If this variable was not passed, uses `api` by default.
-Example of combining previous variables: `npx cypress run --env url=dev,loginMethod=ui` will launch tests at development environment with login by UI.
-3. `customEnv=` - accepts url to specific branch environment. Example of usage: `npx cypress run --env customEnv=https://someUrl/to/env` will launch tests at this environment.
-
-### GH Actions debug <a id="gh_actions_debug"></a>
+  - (ernst): I do not force to use small commits instead of big ones, but when commit something - think what you would do with the big one if you have to revert / reset or cherry-pick it.### GH Actions debug <a id="gh_actions_debug"></a>
 
 If your task will be connected with GH Actions changes or you would like to check how your newly implemnted test can behave in GH Actions - you should use [act](https://github.com/nektos/act), rather then commit a lot of times into the repo and trigger the real pipeline.
 
@@ -108,25 +89,21 @@ You can refer to [QA-4053 spec](./cypress/integration/not_full_reports/sales/val
 3. (2nd `it` in `describe`) Your test opens generated html report in Cypress (Cypress *can't* (well, until [release 9.6.0](https://github.com/cypress-io/cypress/releases/tag/v9.6.0)) [visit other origin url](https://docs.cypress.io/guides/guides/web-security#Same-superdomain-per-test))
 4. (2nd `it` in `describe`) Your test makes traverse and assert on generated html report. 
 
-## NPM Scripts <a id="npm_scripts"></a>
+## Usage <a id="usage"></a>
 
-| Script         | Description                                                                                                                                                                       |
-| -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| act:debug            | Runs [act cli](https://github.com/nektos/act) for local GithubAction workflow (you can check install_notes in `.act` dir for more).                                                                                                                                          |
-| cy:open      | Opens [Cypress GUI](https://docs.cypress.io/guides/getting-started/installing-cypress#Opening-Cypress)                                                     |
-| cy:chrome:snapshot_tests       | Runs [snapshot tests](https://github.com/jaredpalmer/cypress-image-snapshot#cypress-image-snapshot) in headless Chrome                                                        |
-| cy:chrome:update_snapshots    | Updates [snapshot tests](https://github.com/jaredpalmer/cypress-image-snapshot#updating-snapshots) in headless Chrome                                 |
-| cy:chrome_headed_stage_api     | Runs tests in a headed-mode on staging env (default env for test runs) in Chrome |
-| cy:chrome_headed_dev_api          | Runs tests in a headed-mode on dev env in Chrome                                                                                                                                                       |
-| cy:chrome_stage_api          | Runs tests in a headless mode on staging env in Chrome                                                                                                                                                                    |
-| cy:chrome_prod_api        | Runs tests in a headless mode on prod env in Chrome                                                                                                                            |
-| cy:full_prod_api   | Runs [full-report spec](cypress/integration/full_reportsfullBoweryMultifamilyAsComplete.spec.ts) on prod env in Electron browser (default browser for Cypress). **NOTE: DO NOT RUN THIS SPEC FOR NOW SINCE ITS UNSTABLE AND TAKES 40-50 MINUTES TO RUN**                                                                                                                     |
-| cy:full_chrome_headed_prod_api         | Runs all tests in a dir `cypress/integration/not_full_reports` on prod env in headed Chrome                                                                                                               |
-| cy:not_full_chrome_headed | Runs all tests in a dir `cypress/integration/not_full_reports` on staging env in headed Chrome                                                                                                                            |
-| tsc:check | Runs TypeScript compilier with `--noEmit` flag to check whether errors in codebase                                                                                                                            |
-| tsc:watch | Runs TypeScript compilier in watch mode. Can be useful for local development                                                                                                                            |
-| lint:run | Runs ESlint to check codebase                                                                                                                            |
-| lint:fix | Runs ESlint to fix auto-fixable issues. **NOTE: Please, use this only after development to have separate commit for linter changes**                                                                                                                            |
+General way to run all cypress tests to run `npx cypress run` command. This command will run all existing test spec headless in electron browser at staging environment, using Api login method by default. General way to open cypress GUI is to run `npx cypress open` command.
+
+`package.json` file in `"scripts":` property contains ready to use commands for some mostly used cases. For example `npm run cy:open` command will open cypress GUI, `npm run cy:chrome_headed_prod_api` will run all tests in chrome headed browser at production environment, using Api login method etc.  
+
+### CLI flags <a id="cli_flags"></a>
+
+About cypress command line and it's general flags can be read [here](https://docs.cypress.io/guides/guides/command-line).
+
+Project's specific environment variables for `--env` flag:
+1. `url=` - accepts values `dev`,`prod` or `staging` for development, production or staging environment. Example of usage: `npx cypress run --env url=prod` will run tests at production environment. If this variable was not passed, uses `staging` by default.
+2. `loginMethod=` - accepts values `ui` or `api` for login by UI or Api. Example of usage: `npx cypress run --env loginMethod=ui` will launch tests with login by UI. If this variable was not passed, uses `api` by default.
+Example of combining previous variables: `npx cypress run --env url=dev,loginMethod=ui` will launch tests at development environment with login by UI.
+3. `customEnv=` - accepts url to specific branch environment. Example of usage: `npx cypress run --env customEnv=https://someUrl/to/env` will launch tests at this environment. 
 
 ## Useful VS Code extensions <a id="vs_code_extensions"></a>
 
