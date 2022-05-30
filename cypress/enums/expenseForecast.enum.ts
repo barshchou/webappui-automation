@@ -1,10 +1,7 @@
 const expensesCardsNames = {
 
-    expensesCheckboxIncludeInProFormaNamesArray: ["insurance", "electricity", "fuel", "waterAndSewer", "repairsAndMaintenance", "payrollAndBenefits", 
-        "generalAndAdministrative", "legalAndProfessionalFees", "miscellaneous", "management", "reserves"],
-
-
-
+    expenseCardsIDArray: [ "insurance", "electricity", "fuel", "waterSewer", "repairsMaintenance", "payrollBenefits",
+        "generalAdministrative", "legalProfessionalFees", "miscellaneous", "managementFees", "replacementReserves" ],
 
     realEstateTaxes: "realEstateTaxes",
     insurace: "insurance",
@@ -20,7 +17,6 @@ const expensesCardsNames = {
     managementFees: "management",
     replacementsAndReserves: "reserves"
 };
-
 
 
 export default Object.freeze(expensesCardsNames);
