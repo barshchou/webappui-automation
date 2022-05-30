@@ -47,7 +47,6 @@ import { Income, Property } from "../../../../../actions";
         const subject = cy.get(Income._CommercialManager.CompGroups.Page.getDragableElement(1));
         subject.dragAndDrop(Income._CommercialManager.CompGroups.Page.getDragableElement(1), 
             Income._CommercialManager.CompGroups.Page.getDragableArea(compGroup, 1));
-        cy.wait(10000);
 
     });
 
