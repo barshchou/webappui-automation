@@ -2,10 +2,9 @@ import { Report } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import testData from '../../../../fixtures/not_full_reports/report/client/QA-4634.fixture';
-import { Tag } from "../../../../utils/tags.utils";
 
 describe("Verify the 'Changes will be lost' modal functionality for Intended User and Identification of the Client sections", 
-    { tags: [ Tag.report, Tag.client ] }, () => {
+    { tags: [ "@report", "@client" ] }, () => {
         
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
@@ -16,8 +15,8 @@ describe("Verify the 'Changes will be lost' modal functionality for Intended Use
         _NavigationSection.navigateToClientPage();
 
         Report._Client.verifyProgressBarNotExist()
-            .Page.formEditBtn(0).click();
-        Report._Client.Page.formEditBtn(0).click();
+            .Page.formEditBtn().click();
+        Report._Client.Page.formEditBtn().click();
 
         cy.stepInfo("2. Edit comment and click on the Revert to Original button for both sections.");
         Report._Client.enterIntendedUserTextBox(testData.textToType)
@@ -26,7 +25,7 @@ describe("Verify the 'Changes will be lost' modal functionality for Intended Use
             .clickNarrativeSuggestions(testData.verifyListValue, 1);
 
         cy.stepInfo("3. Verify the ‘Changes will be lost modal’ is displayed for both sections.");
-        Report._Client.Page.formRevertToOriginalBtn(0).click();
+        Report._Client.Page.formRevertToOriginalBtn().click();
         Report._Client.Page.modalWindow.should('be.visible');
         Report._Client.Page.formYesRevertBtn.click();
         Report._Client.Page.formRevertToOriginalBtn(1).click();
@@ -38,7 +37,7 @@ describe("Verify the 'Changes will be lost' modal functionality for Intended Use
             .clickNarrativeSuggestions(testData.verifyListValue)
             .enterIdentificationOfTheClientTextBox(testData.textToType)
             .clickNarrativeSuggestions(testData.verifyListValue, 1)
-            .Page.formRevertToOriginalBtn(0).click();
+            .Page.formRevertToOriginalBtn().click();
             Report._Client.Page.CloseIcon.click();
             Report._Client.Page.formRevertToOriginalBtn(1).click();
             Report._Client.Page.CloseIcon.click();
@@ -52,7 +51,7 @@ describe("Verify the 'Changes will be lost' modal functionality for Intended Use
             .clickNarrativeSuggestions(testData.verifyListValue)
             .enterIdentificationOfTheClientTextBox(testData.textToType)
             .clickNarrativeSuggestions(testData.verifyListValue, 1)
-            .Page.formRevertToOriginalBtn(0).click();
+            .Page.formRevertToOriginalBtn().click();
             Report._Client.Page.CloseIcon.click();
             Report._Client.Page.formRevertToOriginalBtn(1).click();
             Report._Client.Page.CloseIcon.click();
@@ -66,7 +65,7 @@ describe("Verify the 'Changes will be lost' modal functionality for Intended Use
             .clickNarrativeSuggestions(testData.verifyListValue)
             .enterIdentificationOfTheClientTextBox(testData.textToType)
             .clickNarrativeSuggestions(testData.verifyListValue, 1)
-            .Page.formRevertToOriginalBtn(0).click();
+            .Page.formRevertToOriginalBtn().click();
             Report._Client.Page.formYesRevertBtn.click();
             Report._Client.Page.formRevertToOriginalBtn(1).click();
             Report._Client.Page.formYesRevertBtn.click();

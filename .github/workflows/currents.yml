@@ -26,7 +26,7 @@ on:
         type: string
         description: Run test with specific tags (via grep,grepTags,burn)  
         required: false
-        default: grep=,grepTags=,burn=
+        default: grep=,grepTags=-@smoke,burn=
 
 jobs:
   Not-full-reports-run:
@@ -48,7 +48,7 @@ jobs:
         with:
           # npm cache files are stored in `~/.npm` on Linux/macOS
           path: ~/.npm
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('./package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-build-${{ env.cache-name }}-
             ${{ runner.os }}-build-
@@ -66,8 +66,8 @@ jobs:
       - name: Run Cypress not snapshot tests on Currents.dev
         run: currents run --tag ${{ github.event.inputs.env }} --spec ${{ github.event.inputs.spec_file }} --env ${{ github.event.inputs.tags }} --browser chrome --record --parallel --key ${{ secrets.CURRENTS_RECORD_KEY }} --ci-build-id "${{ github.repository }}-${{ github.run_id }}-${{ github.run_attempt}}"
         env:
-          CYPRESS_USERNAME: ${{ github.event.inputs.env == 'custom' && secrets.CESAR_USERNAME || secrets.USERNAME }}
-          CYPRESS_PASSWORD: ${{ github.event.inputs.env == 'custom' && secrets.CESAR_PASSWORD || secrets.PASSWORD }}
+          CYPRESS_USERNAME: ${{ secrets.USERNAME }}
+          CYPRESS_PASSWORD: ${{ secrets.PASSWORD }}
           CYPRESS_url: ${{ github.event.inputs.env }}
           CYPRESS_customEnv: ${{ github.event.inputs.customEnv }}
           CYPRESS_grepFilterSpecs: true

@@ -33,7 +33,7 @@ namespace BoweryReports {
     export type PerUnitPerSF = "Per Unit" | "Per SF"
     export type ForecastItemBasis = "insurance" | "electricity"
     | "fuel" | "waterAndSewer" | "repairsAndMaintenance" | "payrollAndBenefits" | "generalAndAdministrative" 
-    | "legalAndProfessionalFees" | "miscellaneous" | "management" | "reserves" | "total" | "custom";
+    | "legalAndProfessionalFees" | "miscellaneous" | "management" | "reserves" | "total" | "custom" | "utilities";
 
     export type CommercialUnitsUseValues = "retail" | "office" | "medical" | "community" | "industrial" | "other" | "undetermined";
     export type CommercialUnitsUseTexts = "Retail" | "Office" | "Medical Office" | "Community Facility" | "Industrial" |
@@ -51,11 +51,10 @@ namespace BoweryReports {
     export type CommercialUnitsFacadeValues = "plate glass" | "other";
     export type CommercialUnitsStateValues = "finished" | "unfinished" | "vanilla box" | "other";
     export type CommercialUnitsCeilingHeightValues = "low" | "normal" | "high" | "other"; 
-    export type CommercialUnitsFloorValues = "belowGrade" | "groundFloor" | "upperFloor" | "other";
+    export type CommercialUnitsLocationValues = "corner" | "mid-block" | "through-lot";
     export type CommercialUnitsStreetTypeValues = "side street" | "avenue";
-    export type CommercialUnitsLocationValues = "corner" | "mid-block" | "through-lot" ;
-    export type CommercialUnitsFrontageValues = "small" | "medium" | "large" | "other"; 
-
+    export type CommercialUnitsFloorValues = "belowGrade" | "groundFloor" | "upperFloor" | "other";
+    export type CommercialUnitsFrontageValues = "small" | "medium"| "large" | "other";
     export namespace CommercialUnits {
         /*
         More Unit Groups Values will be added after other values types added
@@ -84,6 +83,18 @@ namespace BoweryReports {
         forecast?: number | undefined, 
         projection?: number 
     }
+
+    export type Periods = { 
+        expensePeriodType: BoweryReports.ExpensePeriodType | string, 
+        month?: string,
+        year: number | string, 
+        insurance?: number, electricity?: number, fuel?: number, waterAndSewer?: number, repairsAndMaintenance?: number, 
+        payrollAndBenefits?: number, generalAndAdministrative?: number, legalAndProfessionalFees?: number, miscellaneous?: number, 
+        management?: number, replacementReserves?: number 
+    };
+
+    export type ExpensePeriodType = "Actual" | "Projection" | "Actual T12" | "Annualized Historical";
+
     export type Comparable = {address: string, location?: string, period?: string, squareFeet?: number, resUnits?: number,
         insurance?: number, electricity?: number, fuel?: number, waterAndSewer?: number, repairsAndMaintenance?: number, 
         payrollAndBenefits?: number, generalAndAdministrative?: number, legalAndProfessionalFees?: number, miscellaneous?: number, 
@@ -104,7 +115,26 @@ namespace BoweryReports {
         type: "input" | "dropdown"
     };
 
+    export type OtherIncomeItem = {
+        vcLossType: string,
+        vcPercent: number,
+        incomeCategory: string,
+        annualAmount: number
+    }
+
+    export type ParkingVcLossType = "Residential" | "Parking"
+
+    export type StorageVcLossType = "Residential" | "Storage V/C"
+
+    export type LaundryVcLossType = "Residential" | "Laundry V/C"
+
+    export type ReimbursementType = "dollarAmount" | "percentOfCurrentYearLiability" | "increaseOverBaseYear"
+
+    export type KnownInformation = "Annual" | "Monthly"
+
     export type UnitsOfMeasure = "annually" | "monthly" | "per square foot per year" | "per square foot per month";
+
+    export type UtilityExpenses = "brokenOut" | "combinedElectricityAndFuel" | "combinedAll";
 }
 
 namespace Utils {

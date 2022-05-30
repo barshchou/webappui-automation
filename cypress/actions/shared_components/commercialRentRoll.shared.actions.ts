@@ -222,7 +222,7 @@ class CommercialRentRollSharedComponent<T extends CommercialRentRollSharedCompon
     }
 
     clickEditDiscussionButton(): this {
-        this.Page.formEditBtn(0).click({ force: true });
+        this.Page.formEditBtn().click({ force: true });
         return this;
     }
 
@@ -233,7 +233,7 @@ class CommercialRentRollSharedComponent<T extends CommercialRentRollSharedCompon
     }
 
     clickSaveDiscussionButton(): this {
-        this.Page.formSaveBtn(0).click();
+        this.Page.formSaveBtn().click();
         return this;
     }
 
@@ -262,7 +262,7 @@ class CommercialRentRollSharedComponent<T extends CommercialRentRollSharedCompon
     }
 
     clickRevertToOriginalButton(): this {
-        this.Page.formRevertToOriginalBtn(0).click();
+        this.Page.formRevertToOriginalBtn().click();
         this.Page.changesLostModalHeader.should("exist");
         return this;
     }
@@ -293,15 +293,15 @@ class CommercialRentRollSharedComponent<T extends CommercialRentRollSharedCompon
     }
 
     verifyEditDiscussionButtonsDisplayed(): this {
-        this.Page.formCancelButton(0).should("be.visible");
+        this.Page.formCancelButton().should("be.visible");
         this.Page.editDiscussionButton.should("not.exist");
-        this.Page.formRevertToOriginalBtn(0).should("be.visible");
-        this.Page.formSaveBtn(0).should("be.visible");
+        this.Page.formRevertToOriginalBtn().should("be.visible");
+        this.Page.formSaveBtn().should("be.visible");
         return this;
     }
 
     clickCancelDiscussionEditButton(): this {
-        this.Page.formCancelButton(0).click();
+        this.Page.formCancelButton().click();
         return this;
     }
 

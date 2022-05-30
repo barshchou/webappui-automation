@@ -160,6 +160,11 @@ class ExpenseHistoryActions extends BaseActionsExt<typeof expenseHistoryPage>{
         }
         return this;
     }
+
+    checkUtilitiesExpensesOption(optionName: string): ExpenseHistoryActions {
+        expenseHistoryPage.getUtilityExpensesOption(optionName).check().should("be.checked");
+        return this;
+    }
 }
 
 export default new ExpenseHistoryActions(expenseHistoryPage);
