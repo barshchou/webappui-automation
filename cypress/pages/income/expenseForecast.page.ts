@@ -13,7 +13,9 @@ class ExpenseForecastPage extends BasePage {
 
     forecastItemCard(forecastItem: string) { return cy.get(`[data-qa=${forecastItem}-forecast-item] > div`).last(); }
 
-    forecastItemCardFull(forecastItem: string) { return cy.get(`[data-qa=${forecastItem}-forecast-item]`); }            
+    forecastItemCardFull(forecastItem: string) { return cy.get(`[data-qa=${forecastItem}-forecast-item]`); }       
+    
+    forecastItemTooltip(forecastItem: string) { return cy.get(`[data-qa=${forecastItem}-forecast-item]`).children('[data-testid=InfoOutlinedIcon]'); }
 
     get toeCard() { return cy.xpath("//*[.='TOTAL OPERATING EXPENSES ($/SF)']/parent::div").first(); }
 
