@@ -3,7 +3,6 @@ import { createReport, deleteReport } from "../../../../actions/base/baseTest.ac
 import { _NavigationSection } from "../../../../actions/base";
 import { Report } from "../../../../actions";
 
-
 describe("[QA-4351] Prefill Inspection Date from Salesforce (Inspection Date is the same as Date of Valuation)",
     { tags: [ "@report", "@key_info", "@salesforce" ] }, () => {
 

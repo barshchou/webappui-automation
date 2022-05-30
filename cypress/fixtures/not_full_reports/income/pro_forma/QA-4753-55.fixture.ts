@@ -17,6 +17,13 @@ const _numberOfParkingPlaces = 2;
 const _monthlyRents = [ 450, 231 ];
 const _laundryIncome = 4567.99;
 const _storageIncome = 4321.98;
+const _reimbursementVcLoss = 3;
+const _parkingVCLoss = 3;
+const _laundryVCLoss = 5;
+const _storageVCLoss = 4;
+const _parkingVcLossTypeRadio = Enums.PARKING_VC_LOSS_TYPE.parking as BoweryReports.ParkingVcLossType;
+const _laundryVcLossTypeRadio = Enums.LAUNDRY_VC_LOSS_TYPE.laundryVC as BoweryReports.LaundryVcLossType;
+const _storageVcLossTypeRadio = Enums.STORAGE_VC_LOSS_TYPE.storageVC as BoweryReports.StorageVcLossType;
 
 const _otherIncomeItem: BoweryReports.OtherIncomeItem = {
     vcLossType: "Other",
@@ -75,10 +82,18 @@ const _totalParkingIncome = () => {
 
 const _potentialGrossIncomeTotal = _annualReimbursementTotal() + _totalCommercialIncome() + _totalResidentialIncome() +
     _storageIncome + _laundryIncome + _otherIncomeItem.annualAmount + _totalParkingIncome();
-const _potentialGrossIncomePerSf = _potentialGrossIncomeTotal / _grossBuildingArea;
-const _potentialGrossIncomePerUnit = _potentialGrossIncomeTotal / _numberOfResidentialUnits;
 
-const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("4525-27", {
+const _effectiveGrossIncomeTotal = _potentialGrossIncomeTotal - 
+    ((_annualReimbursementTotal() * _reimbursementVcLoss) / 100 ) - 
+    ((_storageIncome * _storageVCLoss) / 100 ) - 
+    ((_laundryIncome * _laundryVCLoss) / 100 ) - 
+    ((_totalParkingIncome() * _parkingVCLoss) / 100 ) - 
+    ((_otherIncomeItem.annualAmount * _otherIncomeItem.vcPercent) / 100 );
+
+const _effectiveGrossIncomePerSf = _effectiveGrossIncomeTotal / _grossBuildingArea;
+const _effectiveGrossIncomePerUnit = _effectiveGrossIncomeTotal / _numberOfResidentialUnits;
+
+const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("4753-55", {
         incomeValue: Enums.INCOME_TYPE.BOTH
     });
 
@@ -99,12 +114,20 @@ export default {
     reimbursementType: _reimbursementType,
     residentialMonthlyRent: _residentialMonthlyRent,
     potentialGrossIncomeTotal: _potentialGrossIncomeTotal,
-    potentialGrossIncomePerSf: _potentialGrossIncomePerSf,
-    potentialGrossIncomePerUnit: _potentialGrossIncomePerUnit,
+    effectiveGrossIncomePerSf: _effectiveGrossIncomePerSf,
+    effectiveGrossIncomePerUnit: _effectiveGrossIncomePerUnit,
     storageUnits: _storageUnits,
     numberOfParkingPlaces: _numberOfParkingPlaces,
     monthlyRents: _monthlyRents,
     laundryIncome: _laundryIncome,
     storageIncome: _storageIncome,
-    otherIncomeItem: _otherIncomeItem
+    otherIncomeItem: _otherIncomeItem,
+    reimbursementVcLoss: _reimbursementVcLoss,
+    vcLossTypeRadio: _parkingVcLossTypeRadio,
+    parkingVCLoss: _parkingVCLoss,
+    laundryVCLoss: _laundryVCLoss,
+    laundryVcLossTypeRadio: _laundryVcLossTypeRadio,
+    storageVcLossTypeRadio: _storageVcLossTypeRadio,
+    storageVCLoss: _storageVCLoss,
+    effectiveGrossIncomeTotal: _effectiveGrossIncomeTotal
 };
