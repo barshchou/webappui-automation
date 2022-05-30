@@ -37,10 +37,21 @@ it("[QA-5009]", () => {
     expensesCardsNames.expensesCheckboxIncludeInProFormaNamesArray.forEach(element => {
         Income._ExpenseForecastActions.verifyIncludeInProFormaCheckboxIsChecked(element);
 });
+});
 
 it("[QA-5010]", () => {
     cy.stepInfo(` Verify user hover on icon right to the "Include Expense on Pro Forma" checkbox - tooltip
      with the following text "Unchecking this box will hide the expense from showing up on the Pro Forma." appears `);
+     expensesCardsNames.expensesCheckboxIncludeInProFormaNamesArray.forEach(element => {
+      //  Income._ExpenseForecastActions.(element);
+
+     //   verifyGuidelineTooltip() {
+        Income._ExpenseForecastActions.Page.forecastItemTooltip(element).should("exist");
+            // clientPage.toCheckTooltipExist.should("not.exist");
+            // clientPage.guidelinesTooltip.trigger("mouseover");
+            // clientPage.toCheckTooltipExist.should("exist");
+       //     return this;
+     //   }
 
 
 });
