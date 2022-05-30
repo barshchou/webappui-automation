@@ -1,11 +1,10 @@
-import { Tag } from './../../../../utils/tags.utils';
 import testData from "../../../../fixtures/not_full_reports/property/commercial_units/QA-4555.fixture";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { Property } from "../../../../actions";
 
 describe("[QA-4555] Verify the functionality of the Commercial Unit button",
-    { tags:[ Tag.property, Tag.commercial_units ] }, () => {
+    { tags:[ "@property", "@commercial_units" ] }, () => {
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
     });

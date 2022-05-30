@@ -3,10 +3,9 @@ import { createReport, deleteReport } from "../../../../../actions/base/baseTest
 import NavigationSection from "../../../../../actions/base/navigationSection.actions";
 import Property from "../../../../../actions/property/property.manager";
 import Income from "../../../../../actions/income/income.manager";
-import { Tag } from "../../../../../utils/tags.utils";
 
 describe(" Verify the Number of Residential Units section on the In-Place Rent Roll page", 
-    { tags:[ Tag.income, Tag.residential, Tag.in_place_rent_roll ] }, () => {
+    { tags:[ "@income", "@residential", "@in_place_rent_roll" ] }, () => {
         
     before("Login, create report", () => {
         createReport(testData.reportCreationData);

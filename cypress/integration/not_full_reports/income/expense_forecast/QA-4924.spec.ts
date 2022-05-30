@@ -4,10 +4,9 @@ import { createReport, deleteReport } from "../../../../actions/base/baseTest.ac
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Income from "../../../../actions/income/income.manager";
 import tableExpenseHistoryCellNames from "../../../../../cypress/enums/expenseHistoryTableRows.enum";
-import { Tag } from "../../../../utils/tags.utils";
 
 describe("User selects Per SF radiobutton for Repairs & Maintenance on Expense Forecast form and historical expenses per SF are correctly calculated and displayed", 
-    { tags:[ Tag.income, Tag.expense_forecast, Tag.snapshot_tests ] }, () => {
+    { tags:[ "@income", "@expense_forecast", "@snapshot_tests" ] }, () => {
 
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
