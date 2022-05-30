@@ -16,8 +16,9 @@ const _forecastItem: BoweryReports.ForecastItem = {
     forecast: _forecast
 };
 
-const _electricitySfTotal = _forecast * _numberOfResidentialUnits;
-const _electricitySfPerSf = _electricitySfTotal / _grossBuildingArea;
+const _electricitySfTotal = _forecast * _grossBuildingArea;
+const _electricitySfPerSf = _forecast;
+const _electricitySfPerUnit = _electricitySfTotal / _numberOfResidentialUnits;
 
 const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("4848-50", {
         incomeValue: Enums.INCOME_TYPE.BOTH
@@ -31,6 +32,6 @@ export default {
     forecastItem: _forecastItem,
     electricitySfTotal: _electricitySfTotal,
     electricitySfPerSf: _electricitySfPerSf,
-    electricitySfPerUnit: _forecast
+    electricitySfPerUnit: _electricitySfPerUnit
 
 };
