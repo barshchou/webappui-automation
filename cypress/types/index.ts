@@ -110,6 +110,16 @@ namespace BoweryReports {
         annualAmount: number
     }
 
+    export type ParkingVcLossType = "Residential" | "Parking"
+
+    export type StorageVcLossType = "Residential" | "Storage V/C"
+
+    export type LaundryVcLossType = "Residential" | "Laundry V/C"
+
+    export type ReimbursementType = "dollarAmount" | "percentOfCurrentYearLiability" | "increaseOverBaseYear"
+
+    export type KnownInformation = "Annual" | "Monthly"
+
     export type UnitsOfMeasure = "annually" | "monthly" | "per square foot per year" | "per square foot per month";
 
     export type UtilityExpenses = "brokenOut" | "combinedElectricityAndFuel" | "combinedAll";
