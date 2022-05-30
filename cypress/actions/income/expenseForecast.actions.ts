@@ -7,7 +7,7 @@ type BuildingDescription = BoweryReports.BuildingDescription;
 type Comparable = BoweryReports.Comparable;
 
 class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> {
-    
+
     chooseForecastItemBasis(forecastItem: ForecastItem): ExpenseForecastActions {
         expenseForecastPage.getForecastItemBasisRadio(forecastItem.name).check(forecastItem.basis);
         this.verifyForecastItemBasis(forecastItem);
@@ -23,7 +23,7 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
         const valueToBe = `$${numberWithCommas(forecastItem.forecast)}`;
         if (forecastItem.name != "total") {
             expenseForecastPage.getForecastItemForecastInput(forecastItem.name, customCategory, index).clear()
-            .type(`${forecastItem.forecast}`).should("have.value", valueToBe);
+                .type(`${forecastItem.forecast}`).should("have.value", valueToBe);
         }
         return this;
     }
@@ -103,7 +103,7 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
     }
 
     verifyForecastItemBasisMoney(forecastItem: ForecastItem, currentDescription: BuildingDescription,
-                                 forecastEgi?: string): ExpenseForecastActions {
+        forecastEgi?: string): ExpenseForecastActions {
         let forecastToBe;
         if (forecastEgi) {
             forecastToBe = forecastEgi;
@@ -112,10 +112,10 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
         }
         let textToBe;
         if (forecastItem.basis === "unit") {
-            textToBe = `Per SF: $${numberWithCommas((forecastToBe / 
+            textToBe = `Per SF: $${numberWithCommas((forecastToBe /
                 (currentDescription.grossArea / currentDescription.numberOfUnits)).toFixed(2))}`;
         } else {
-            textToBe = `Per Unit: $${numberWithCommas(Math.round(forecastToBe * 
+            textToBe = `Per Unit: $${numberWithCommas(Math.round(forecastToBe *
                 currentDescription.grossArea / currentDescription.numberOfUnits))}`;
         }
         expenseForecastPage.getForecastItemBasisMoneyValue(this.getItemNameForAverage(forecastItem.name))
@@ -124,7 +124,7 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
     }
 
     verifyForecastItemByExpensePeriodType(forecastItem: ForecastItem, buildingDescription: BuildingDescription,
-                                          expensePeriodType: string): ExpenseForecastActions {
+        expensePeriodType: string): ExpenseForecastActions {
         let numberToBe;
         if (forecastItem.basis === "unit") {
             numberToBe = numberWithCommas(Math.round(forecastItem.projection / buildingDescription.numberOfUnits));
@@ -137,19 +137,19 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
     }
 
     getItemNameForAverage(itemOriginal: string): string {
-        return this.itemOriginalObj[`${itemOriginal}`] == undefined 
-            ? itemOriginal 
+        return this.itemOriginalObj[`${itemOriginal}`] == undefined
+            ? itemOriginal
             : this.itemOriginalObj[`${itemOriginal}`];
     }
 
     itemOriginalObj = {
         waterAndSewer: "waterSewer",
         repairsAndMaintenance: "repairsMaintenance",
-            payrollAndBenefits: "payrollBenefits",
-            generalAndAdministrative: "generalAdministrative",
-            legalAndProfessionalFees: "legalProfessionalFees",
-            management: "managementFees",
-            reserves: "replacementReserves"
+        payrollAndBenefits: "payrollBenefits",
+        generalAndAdministrative: "generalAdministrative",
+        legalAndProfessionalFees: "legalProfessionalFees",
+        management: "managementFees",
+        reserves: "replacementReserves"
     }
 
     checkPercentOfEGICheckbox(): ExpenseForecastActions {
@@ -164,6 +164,16 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
 
     verifyIncludeInProFormaCheckboxIsChecked(forecastItem: string): ExpenseForecastActions {
         expenseForecastPage.getCheckboxIncludeInProForma(forecastItem).should("have.value", "true");
+        return this;
+    }
+
+    verifyProFormaTooltip(forecastItem: string): ExpenseForecastActions {
+        expenseForecastPage.forecastItemTooltipButton(forecastItem).should("exist");
+        expenseForecastPage.openedTooltip.should('not.exist');
+        expenseForecastPage.forecastItemTooltipButton(forecastItem).scrollIntoView().trigger("mouseover", 'right');
+        expenseForecastPage.openedTooltip.should('exist');
+        expenseForecastPage.forecastItemTooltipButton(forecastItem).trigger('mouseout', 'right');
+        expenseForecastPage.openedTooltip.should('not.exist');
         return this;
     }
 
@@ -308,7 +318,7 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
     hideExpenseForecastHeader(): ExpenseForecastActions {
         // ernst: A few hacks to get clear Insurance_Forecast_Item component without overlayed headers
         cy.log('hide');
-        if(Cypress.browser.isHeadless == true){
+        if (Cypress.browser.isHeadless == true) {
             expenseForecastPage.Header.then(elem => {
                 elem.hide();
             });
