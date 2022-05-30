@@ -2,6 +2,7 @@
 
 ## 📝 Table of Contents
 
+- [TL;DR](#tl_dr)
 - [About](#about)
 - [Getting Started](#getting_started)
   - [System requirements](#system_requirements)
@@ -15,9 +16,17 @@
   - [CLI_flags](#cli_flags)
   - [Tags and tagged test run](#tagged_run)
   - [PR deploy / localhost test run](#run_tests_in_custom_env)
+  - [Triggering GH Actions pipeline](#trigger_gh_actions)
+  - [Exploring test results](#explore_test_results)
 - [NPM Scripts](#npm_scripts)
 - [Useful VS Code extensions](#vs_code_extensions)
 
+## TL;DR <a id="tl_dr"></a>
+- Make sure everything is ready from "[Getting Started](#getting_started)" if you want to use these tests.
+- If you need to figure out how to use these tests in your developement flow - go to "[PR deploy / localhost test run](#run_tests_in_custom_env)" section. 
+- If you need to run specific test spec or set of tests related to specific domain - go to "[Tags and tagged test run](#tagged_run)" section. 
+-  If you need to use GH Actions pipeline with these tests - go to [Triggering GH Actions pipeline](#trigger_gh_actions).
+- If you need to check test results from triggered GH Actions pipeline or just see the stats / insights for end-to-end tests - go to "[Exploring test results](#explore_test_results)" section 
 ## About <a id="about"></a>
 This repository contains the code of end-to-end tests, written in  Cypress framework (https://docs.cypress.io/guides/getting-started/writing-your-first-test). Main pattern used for this project - is Page Object. We describe elements of pages and the way they can behave (*pages* folder). We describe actions, which we use to interact with pages (*actions* folder). And describe test specs (*integration* folder) - things/flows we want to test and verify on our pages, using actions to put the app in a required state.
 
@@ -123,6 +132,14 @@ Sometimes there could be a case when we need to run
 ### PR deploy / localhost test run (or any custom env) <a id="run_tests_in_custom_env"></a>
 
 Sometimes there could be a case when we need to run 
+
+### Triggering GH Actions pipeline <a id="trigger_gh_actions"></a>
+
+SomethingSomethingSomethingSomethingSomethingSomethingSomething
+
+### Exploring test results <a id="explore_test_results"></a>
+
+SomethingSomethingSomethingSomethingSomethingSomethingSomething
 
 ## NPM Scripts <a id="npm_scripts"></a>
 
