@@ -18,8 +18,6 @@
     "cy:full_chrome_headed_prod_api": "npx cypress run --spec cypress/integration/full_reports/** --browser chrome --headed --env url=prod",
     "cy:not_full_chrome_headed": "npx cypress run --spec cypress/integration/not_full_reports/** --browser chrome --headed",
     "cy:not_full_dev_chrome_headed": "npx cypress run --spec cypress/integration/not_full_reports/** --browser chrome --headed --env url=dev",
-    "currents:run": "currents run --spec './cypress/integration/not_full_reports/**/*.spec.ts' --browser chrome --record --parallel",
-    "currents:run:debug": "currents run --browser chrome",
     "tsc:check": "npx tsc --project ./cypress/tsconfig.json --noEmit",
     "tsc:watch": "npm run tsc:check -- --watch",
     "lint:run": "eslint \"./**\"",
