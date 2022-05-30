@@ -4,9 +4,15 @@ import NavigationSection from "./navigationSection.actions";
 import { createPayload } from "../../api/report_payloads/462Avenue1NY.payload";
 
 export const createReport = (reportCreationData: BoweryAutomation.ReportCreationData, payloadFunction = createPayload) => {
-    // cy.login();
-    // Homepage.createReport(reportCreationData);
-    cy.createApiReport(reportCreationData, payloadFunction);
+    cy.login();
+    if(Cypress.env("report") == "api"){
+        cy.task("createReportApi",
+        { _reportCreationData: reportCreationData, _payloadFn: payloadFunction(reportCreationData, "user_id") });
+        cy.pause();
+    }
+    else {
+        Homepage.createReport(reportCreationData);
+    }
     salesInterceptions();
 };
 

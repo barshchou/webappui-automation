@@ -7,7 +7,7 @@
 // ***********************************************************
 /// <reference types="cypress" />
 
-const { existsSync, writeFileSync, renameSync } = require("fs");
+const { existsSync, writeFileSync, readFile } = require("fs");
 const mammoth = require("mammoth");
 const glob = require("glob");
 
@@ -94,6 +94,26 @@ const _convertDocxToHtml = async (report) => {
   return _getFilePath(_reportName, _docx_html, currentTime + 1000, timeout);
 }
 
+/**
+ * ernst: for type - check `cypress/types`, I couldn't import it via JSDoc explicitly
+ * 
+ * Converts docx file into html via mammoth lib and writes it into cypress/downloads
+ * @param {ReportFile} report 
+ * @returns {null} for tasks' return type - please check notes above
+ */
+ const _createReportApi = async (_reportCreationData, _payloadFn) => {
+   console.log(_reportCreationData);
+   console.log(_payloadFn);
+
+  readFile('./cypress.env.json', 'utf8', function (err, data) {
+    if (err) throw err;
+    cypressEnv = JSON.parse(data);
+    console.log(cypressEnv.USERNAME);
+    console.log(cypressEnv.PASSWORD);
+  });
+  return null;
+}
+
 //#endregion
 
 /**
@@ -135,6 +155,12 @@ module.exports = (on, config) => {
   on("task",{
     async getFilePath({_reportName, _docx_html}){
       return await _getFilePath(_reportName, _docx_html);
+    }
+  });
+
+  on("task",{
+    async createReportApi({_reportCreationData, _payloadFn}){
+      return await _createReportApi(_reportCreationData, _payloadFn);
     }
   });
 

@@ -8,5 +8,8 @@
   "videoUploadOnPasses": false,
   "experimentalStudio": true,
   "projectId": "EDvaU4",
-  "ignoreTestFiles": "*.studio.*"
+  "ignoreTestFiles": "*.studio.*",
+  "env":{
+    "report":"api"
+  }
 }
