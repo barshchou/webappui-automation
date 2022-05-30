@@ -7,6 +7,10 @@ import expenseCellNames from "./expenseCellNames";
 import expenseHistoryTableRowsEnum from "./expenseHistoryTableRows.enum";
 import reimbursementTypes from "./reimbursementTypes.enum";
 import incomeTypesCellNamesEnum from "./incomeTypesCellNames.enum";
+import parkingVcLossType from "./parkingVcLossType.enum";
+import laundryVcLossType from "./laundryVcLossType.enum";
+import storageVcLossType from "./storageVcLossType.enum";
+import knownInformation from "./knownInformationType.enum";
 
 export default {
     TEMPLATE_TYPE: templateTypesEnum,
@@ -17,5 +21,9 @@ export default {
     EXPENSE_CELL: expenseCellNames,
     EXPENSE_HISTORY_TABLE_ROWS: expenseHistoryTableRowsEnum,
     REIMBURSEMENT_TYPES: reimbursementTypes,
-    INCOME_TYPES_CELL_NAMES: incomeTypesCellNamesEnum
+    INCOME_TYPES_CELL_NAMES: incomeTypesCellNamesEnum,
+    PARKING_VC_LOSS_TYPE: parkingVcLossType,
+    LAUNDRY_VC_LOSS_TYPE: laundryVcLossType,
+    STORAGE_VC_LOSS_TYPE: storageVcLossType,
+    KNOWN_INFORMATION: knownInformation
 };

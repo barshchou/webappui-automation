@@ -83,6 +83,18 @@ namespace BoweryReports {
         forecast?: number | undefined, 
         projection?: number 
     }
+
+    export type Periods = { 
+        expensePeriodType: BoweryReports.ExpensePeriodType | string, 
+        month?: string,
+        year: number | string, 
+        insurance?: number, electricity?: number, fuel?: number, waterAndSewer?: number, repairsAndMaintenance?: number, 
+        payrollAndBenefits?: number, generalAndAdministrative?: number, legalAndProfessionalFees?: number, miscellaneous?: number, 
+        management?: number, replacementReserves?: number 
+    };
+
+    export type ExpensePeriodType = "Actual" | "Projection" | "Actual T12" | "Annualized Historical";
+
     export type Comparable = {address: string, location?: string, period?: string, squareFeet?: number, resUnits?: number,
         insurance?: number, electricity?: number, fuel?: number, waterAndSewer?: number, repairsAndMaintenance?: number, 
         payrollAndBenefits?: number, generalAndAdministrative?: number, legalAndProfessionalFees?: number, miscellaneous?: number, 
@@ -109,6 +121,16 @@ namespace BoweryReports {
         incomeCategory: string,
         annualAmount: number
     }
+
+    export type ParkingVcLossType = "Residential" | "Parking"
+
+    export type StorageVcLossType = "Residential" | "Storage V/C"
+
+    export type LaundryVcLossType = "Residential" | "Laundry V/C"
+
+    export type ReimbursementType = "dollarAmount" | "percentOfCurrentYearLiability" | "increaseOverBaseYear"
+
+    export type KnownInformation = "Annual" | "Monthly"
 
     export type UnitsOfMeasure = "annually" | "monthly" | "per square foot per year" | "per square foot per month";
 
