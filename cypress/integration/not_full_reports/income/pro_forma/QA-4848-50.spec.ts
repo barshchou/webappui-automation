@@ -32,7 +32,7 @@ describe("Pro Forma Page validation Operating Expenses -> Electricity",
             .verifyProgressBarNotExist();
     });
 
-    it("[QA-4779]", () => {
+    it("[QA-4848]", () => {
         cy.stepInfo(`3. The value in the Electricity Total is taken from Income → 
                     Expense Forecast → Electricity Forecast Discussion generated commentary`);
         Income._ProFormaActions.verifyCategoryTotal(
@@ -40,14 +40,14 @@ describe("Pro Forma Page validation Operating Expenses -> Electricity",
             proFormaTypes.electricity);
     });
 
-    it("[QA-4780]", () => {
+    it("[QA-4849]", () => {
         cy.stepInfo(`3. The value in the Electricity → PSF is calculated by the formula: Total / GBA`);
         Income._ProFormaActions.verifyCategoryPSFTotal(
             `$${numberWithCommas(testData.electricitySfPerSf.toFixed(2))}`, 
             proFormaTypes.electricity);
     });
 
-    it("[QA-4781]", () => {
+    it("[QA-4850]", () => {
         cy.stepInfo(`3. The value in the Electricity Per Unit is Appraiser's Forecast value`);
         Income._ProFormaActions.verifyCategoryPerUnitTotal(
             `$${numberWithCommas(Math.round(testData.electricitySfPerUnit))}`, 
