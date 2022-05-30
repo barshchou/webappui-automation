@@ -113,6 +113,11 @@ namespace BoweryReports {
     export type UnitsOfMeasure = "annually" | "monthly" | "per square foot per year" | "per square foot per month";
 
     export type UtilityExpenses = "brokenOut" | "combinedElectricityAndFuel" | "combinedAll";
+
+    export type leaseDate = {
+        name: LeaseDateName,
+        value: string
+    }
 }
 
 namespace Utils {

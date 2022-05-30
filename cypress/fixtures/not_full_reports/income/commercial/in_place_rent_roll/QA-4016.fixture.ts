@@ -2,13 +2,28 @@ import Enums from "../../../../../enums/enums";
 import ReportDataCreator from "../../../../data_creator/reportData.creator";
 
 const reportCreationFixture = () => {
-    return ReportDataCreator.setReportNumber("4322")
-        .setAddress()
-        .setTemplateValue(Enums.TEMPLATE_TYPE.NOT_FREDDIE_MAC)
-        .setIncomeValue(Enums.INCOME_TYPE.BOTH)
-        .setConclusionValue(Enums.VALUE_CONCLUSION_TYPE.AS_COMPLETE).build();
+    return ReportDataCreator.getReportData("4016", {
+        incomeValue: Enums.INCOME_TYPE.BOTH
+    });
 };
 
+const _leaseDates: BoweryReports.leaseDate[] = [
+    {
+        name: "Start",
+        value: "01012022"
+    },
+    {
+        name: "Expiry",
+        value: "12012022"
+    }
+];
+
 export default {
-    reportCreationData: reportCreationFixture()
+    reportCreationData: reportCreationFixture(),
+    squareFootage: 12,
+    leaseStatus: "Occupied" as BoweryReports.LeaseStatus,
+    tenantName: "Test",
+    leaseDates: _leaseDates,
+    annualRent: 120,
+    monthlyRent: 10
 };
