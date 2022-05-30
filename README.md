@@ -12,7 +12,7 @@
   - [CLI_flags](#cli_flags)
   - [GH Actions debug](#gh_actions_debug)
   - [Validation of export](#export_validation)
-  - [Additional NPM scripts](#additional_npm_scripts)
+  - [Additional NPM scripts](#npm_scripts)
 - [Useful VS Code extensions](#vs_code_extensions)
 
 ## About <a id="about"></a>
@@ -108,23 +108,25 @@ You can refer to [QA-4053 spec](./cypress/integration/not_full_reports/sales/val
 3. (2nd `it` in `describe`) Your test opens generated html report in Cypress (Cypress *can't* (well, until [release 9.6.0](https://github.com/cypress-io/cypress/releases/tag/v9.6.0)) [visit other origin url](https://docs.cypress.io/guides/guides/web-security#Same-superdomain-per-test))
 4. (2nd `it` in `describe`) Your test makes traverse and assert on generated html report. 
 
-## Additional NPM Scripts <a id="additional_npm_scripts"></a>
+## NPM Scripts <a id="npm_scripts"></a>
 
 | Script         | Description                                                                                                                                                                       |
 | -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | act:debug            | Runs [act cli](https://github.com/nektos/act) for local GithubAction workflow (you can check install_notes in `.act` dir for more).                                                                                                                                          |
 | cy:open      | Opens [Cypress GUI](https://docs.cypress.io/guides/getting-started/installing-cypress#Opening-Cypress)                                                     |
 | cy:chrome:snapshot_tests       | Runs [snapshot tests](https://github.com/jaredpalmer/cypress-image-snapshot#cypress-image-snapshot) in headless Chrome                                                        |
-| dev:cognito    | Starts backend in watch mode and frontend; [Uses Cognito for Authentication](#amazon-cognito) > [Read Guide](http://on.cypress.io/amazon-cognito)                                 |
-| dev:google     | Starts backend in watch mode and frontend; [Uses Google for Authentication](#google) > [Read Guide](https://docs.cypress.io/guides/testing-strategies/google-authentication.html) |
-| start          | Starts backend and frontend                                                                                                                                                       |
-| types          | Validates types                                                                                                                                                                   |
-| db:seed        | Generates fresh database seeds for json files in /data                                                                                                                            |
-| start:empty    | Starts backend, frontend and Cypress with empty database seed                                                                                                                     |
-| tsnode         | Customized ts-node command to get around react-scripts restrictions                                                                                                               |
-| list:dev:users | Provides id and username for users in the dev database                                                                                                                            |
-
-For a complete list of scripts see [package.json](./package.json)
+| cy:chrome:update_snapshots    | Updates [snapshot tests](https://github.com/jaredpalmer/cypress-image-snapshot#updating-snapshots) in headless Chrome                                 |
+| cy:chrome_headed_stage_api     | Runs tests in a headed-mode on staging env (default env for test runs) in Chrome |
+| cy:chrome_headed_dev_api          | Runs tests in a headed-mode on dev env in Chrome                                                                                                                                                       |
+| cy:chrome_stage_api          | Runs tests in a headless mode on staging env in Chrome                                                                                                                                                                    |
+| cy:chrome_prod_api        | Runs tests in a headless mode on prod env in Chrome                                                                                                                            |
+| cy:full_prod_api   | Runs [full-report spec](cypress/integration/full_reportsfullBoweryMultifamilyAsComplete.spec.ts) on prod env in Electron browser (default browser for Cypress). **NOTE: DO NOT RUN THIS SPEC FOR NOW SINCE ITS UNSTABLE AND TAKES 40-50 MINUTES TO RUN**                                                                                                                     |
+| cy:full_chrome_headed_prod_api         | Runs all tests in a dir `cypress/integration/not_full_reports` on prod env in headed Chrome                                                                                                               |
+| cy:not_full_chrome_headed | Runs all tests in a dir `cypress/integration/not_full_reports` on staging env in headed Chrome                                                                                                                            |
+| tsc:check | Runs TypeScript compilier with `--noEmit` flag to check whether errors in codebase                                                                                                                            |
+| tsc:watch | Runs TypeScript compilier in watch mode. Can be useful for local development                                                                                                                            |
+| lint:run | Runs ESlint to check codebase                                                                                                                            |
+| lint:fix | Runs ESlint to fix auto-fixable issues. **NOTE: Please, use this only after development to have separate commit for linter changes**                                                                                                                            |
 
 ## Useful VS Code extensions <a id="vs_code_extensions"></a>
 
