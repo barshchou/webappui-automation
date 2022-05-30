@@ -35,6 +35,8 @@ class KeyInfoPage extends BasePage{
 
     get clickHereText() {return cy.contains("Click here or drag file to upload");}
 
+    get modalUploadButton() {return cy.get("*[data-qa='upload-btn']");}
+
     get textBoxPropertyRightsAppraised() {
         return cy.xpath("//*[contains(text(), 'Property Rights Appraised')]//following::*[@data-slate-editor][1]");
     }
