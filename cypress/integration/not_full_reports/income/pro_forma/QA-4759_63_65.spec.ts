@@ -32,7 +32,7 @@ describe("Pro Forma Page validation Operating Expenses -> Insurance",
             .verifyProgressBarNotExist();
     });
 
-    it("[QA-4756]", () => {
+    it("[QA-4759]", () => {
         cy.stepInfo(`3. The value in the Insurance is taken from Income → 
                     Expense Forecast → Insurance Forecast Discussion generated commentary`);
         Income._ProFormaActions.verifyCategoryTotal(
@@ -40,7 +40,7 @@ describe("Pro Forma Page validation Operating Expenses -> Insurance",
             proFormaTypes.insurace);
     });
 
-    it("[QA-4757]", () => {
+    it("[QA-4763]", () => {
         cy.stepInfo(`3. The value in the Insurance is taken from Income → 
                     Expense Forecast → Insurance → Appraiser’s Forecast cell`);
         Income._ProFormaActions.verifyCategoryPSFTotal(
@@ -48,7 +48,7 @@ describe("Pro Forma Page validation Operating Expenses -> Insurance",
             proFormaTypes.insurace);
     });
 
-    it("[QA-4758]", () => {
+    it("[QA-4765]", () => {
         cy.stepInfo(`3. The value in the Insurance Per Unit is calculated by 
                     formula: Annual value / # of Residential Units`);
         Income._ProFormaActions.verifyCategoryPerUnitTotal(
