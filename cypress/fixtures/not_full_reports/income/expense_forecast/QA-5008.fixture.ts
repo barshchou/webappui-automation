@@ -6,7 +6,7 @@ const _customCategory: BoweryReports.ForecastItem = {
 };
 
 export default {
-    reportCreationData: ReportDataCreator.getReportData("5008"),
+    reportCreationData: ReportDataCreator.getReportData("5008&09&10"),
     customCategory: _customCategory,
    // checkBoxLabel: "Include Expense on Pro Forma"
 };
