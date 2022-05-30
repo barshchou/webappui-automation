@@ -2,10 +2,9 @@ import testData from "../../../../fixtures/not_full_reports/property/commercial_
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Property from "../../../../actions/property/property.manager";
-import { Tag } from "../../../../utils/tags.utils";
 
 describe("Verify the functionality of the Frontage radio button", 
-    { tags: [ Tag.property, Tag.commercial_units ] }, () => {
+    { tags: [ "@property", "@commercial_units" ] }, () => {
         
     before("Login, create report", () => {
         cy.stepInfo(`Preconditions: The mixed report is created and several commercial units are added.`);

@@ -1,11 +1,10 @@
-import { Tag } from './../../../../utils/tags.utils';
 import testData from "../../../../fixtures/not_full_reports/property/commercial_units/QA-4537.fixture";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { Income, Property } from "../../../../actions";
 
 describe("[QA-4537] Verify the Commercial Unit # SF field functionality",
-    { tags:[ Tag.property, Tag.commercial_units ] }, () => {
+    { tags:[ "@property", "@commercial_units" ] }, () => {
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
     });

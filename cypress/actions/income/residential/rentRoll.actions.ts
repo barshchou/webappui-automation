@@ -250,6 +250,13 @@ class InPlaceRentRollActions extends ResidentialRentRollSharedActions<typeof ren
         return this;
     }
 
+    enterMonthlyRents(values: number[]): InPlaceRentRollActions {
+        values.forEach((value, index) => {
+            this.enterMonthlyRentByRowNumber(value, index);
+        });
+        return this;
+    }
+
     enterAllEqualMonthlyRents(monthlyRent: string | number): InPlaceRentRollActions {
         rentRollPage.monthlyRentCells.each((cell, i) => {
             this.enterMonthlyRentByRowNumber(monthlyRent, i);

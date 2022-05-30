@@ -2,10 +2,9 @@ import testData from "../../../../fixtures/not_full_reports/income/expense_forec
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import { Income, Property } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
-import { Tag } from "../../../../utils/tags.utils";
 
 describe("Appraiser's Forecast value for Electricity is correctly converted to Per SF/Per Unit value", 
-    { tags:[ Tag.expense_forecast, Tag.income ] }, () => {
+    { tags:[ "@expense_forecast", "@income" ] }, () => {
 
     before("Login, create report", () => {
         createReport(testData.reportCreationData);

@@ -2,7 +2,7 @@ import { numberWithCommas } from '../../../../../utils/numbers.utils';
 import testData from "../../../../fixtures/not_full_reports/income/pro_forma/QA-4498_4500.fixture";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
-import { Property } from '../../../../actions/index';
+import { Property } from '../../../../actions';
 import { Income } from "../../../../actions";
 import proFormaTypes from "../../../../enums/proFormaTypes.enum";
 import Enums from "../../../../enums/incomeTypesCellNames.enum";
@@ -39,7 +39,7 @@ describe("Potential [USE(Property -> Commercial Units] Income -> PSF / Per Unit"
         cy.restoreLocalStorage();
     });
 
-    it(`[QA-4500]`, () => {
+    it("[QA-4500]", () => {
         cy.stepInfo(`4. Go to Income → Pro Forma page. Verify that value in the
             Potential Commercial Income → Per Unit is calculated by the formula: Total / # of ResidentialUnits`);
         Income._ProFormaActions.verifyCategoryPerUnitTotal(
@@ -47,7 +47,7 @@ describe("Potential [USE(Property -> Commercial Units] Income -> PSF / Per Unit"
             proFormaTypes.potentialUnderterminedCommercialIncome);
     });
 
-    it(`[QA-4499]`, () => {
+    it("[QA-4499]", () => {
         cy.stepInfo(`4. Go to Income → Pro Forma page. Verify that value in the 
             Potential Commercial Income → PSF is calculated by the formula: Total / GBA`);
         Income._ProFormaActions.verifyCategoryPSFTotal(
@@ -55,7 +55,7 @@ describe("Potential [USE(Property -> Commercial Units] Income -> PSF / Per Unit"
             proFormaTypes.potentialUnderterminedCommercialIncome);
     });
 
-    it(`[QA-4498]`, () => {
+    it("[QA-4498]", () => {
         cy.stepInfo(`4. Go to Income → Pro Forma page. Verify that value in the 
             Potential Commercial Income → Total is calculated by the formula: Total / GBA`);
         Income._ProFormaActions.verifyCategoryTotal(

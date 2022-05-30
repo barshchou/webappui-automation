@@ -6,7 +6,8 @@ const incomeTypeCellNames = {
     effectiveGrossIncome: "effectiveGrossIncome",
     potentialRealEstateTaxesReimbursement: "potentialRealEstateTaxesReimbursement",
     parkingIncome: "parkingIncome",
-    laundryIncome: "laundryIncome"
+    laundryIncome: "laundryIncome",
+    storageIncome: "storageIncome"
 };
 
 export default Object.freeze(incomeTypeCellNames);

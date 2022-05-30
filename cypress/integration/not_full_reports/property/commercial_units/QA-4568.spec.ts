@@ -1,11 +1,10 @@
-import { Tag } from './../../../../utils/tags.utils';
 import testData from "../../../../fixtures/not_full_reports/property/commercial_units/QA-4568.fixture";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { Property } from "../../../../actions";
 
 describe("[QA-4568] Verify the Save & Continue button functionality on the Commercial Units page",
-    { tags:[ Tag.property, Tag.commercial_units ] }, () => {
+    { tags:[ "@property", "@commercial_units" ] }, () => {
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
     });
