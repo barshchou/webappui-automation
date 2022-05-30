@@ -8,11 +8,7 @@ class CompGroupsActions extends BaseActionsExt<typeof compGroupsPage> {
         return this;
     }
 
-    /**
-     * @param {string} name
-     * @returns {CompGroupsActions}
-     */
-    enterGroupName(name) {
+    enterGroupName(name: string) {
         compGroupsPage.compGroupNameInput.type(name).should("have.value", name);
         return this;
     }
@@ -22,20 +18,12 @@ class CompGroupsActions extends BaseActionsExt<typeof compGroupsPage> {
         return this;
     }
 
-    /**
-     * @param {string} groupName
-     * @returns {CompGroupsActions}
-     */
-    verifyCompGroupExists(groupName) {
+    verifyCompGroupExists(groupName: string) {
         compGroupsPage.getCompGroupSection(groupName).should("exist");
         return this;
     }
 
-    /**
-     * @param {string} groupName
-     * @returns {CompGroupsActions}
-     */
-    addCompGroup(groupName) {
+    addCompGroup(groupName: string) {
         this.clickAddCompGroupButton()
             .enterGroupName(groupName)
             .clickDialogAddCompGroupButton()

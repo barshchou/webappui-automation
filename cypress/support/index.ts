@@ -47,6 +47,10 @@ declare global {
          */
         stepInfo(message:string): void
 
+        /**
+         * @param {string} subject element to drag
+         * @param {string} target element to drop into
+         */
         dragAndDrop: (subject:string, target:string) => void;
       }
     }
