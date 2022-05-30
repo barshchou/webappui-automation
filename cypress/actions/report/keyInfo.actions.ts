@@ -74,7 +74,7 @@ class KeyInfoActions extends BaseActionsExt<typeof keyInfoPage> {
         keyInfoPage.cloudButton.should("exist").click();
         keyInfoPage.clickHereText.should("be.visible");
         keyInfoPage.uploadFileInput.should("exist").attachFile(getUploadFixture(fileName));
-        keyInfoPage.uploadButton.should("be.visible").click();
+        keyInfoPage.modalUploadButton.should("be.visible").click();
         keyInfoPage.insertButton.should("not.be.disabled").click();
         const fileNameSplit = fileName.split("/");
         const fileNameToCheck = fileNameSplit[fileNameSplit.length - 1];
