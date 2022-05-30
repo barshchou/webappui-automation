@@ -113,12 +113,12 @@ class AdjustCompsActions extends BaseActionsExt<typeof adjustCompsPage> {
     }
 
     verifyTrendedPriceByColumn(value: string, index = 0): AdjustCompsActions {
-        adjustCompsPage.trendedPriceCells.eq(index).should("have.text", value);
+        adjustCompsPage.cumulativePriceCells.eq(index).should("have.text", value);
         return this;
     }
 
     verifyAdjustedPriceByColumn(index = 0): AdjustCompsActions {
-        adjustCompsPage.trendedPriceCells.eq(index).invoke("text").then(trendedText => {
+        adjustCompsPage.cumulativePriceCells.eq(index).invoke("text").then(trendedText => {
             const trendedNumber = getNumberFromDollarNumberWithCommas(trendedText);
             adjustCompsPage.netPropertyAdjustmentsCells.eq(index).invoke("text").then(netAdjText => {
                 const netAdjNumber = Number(netAdjText.replace("%", ""));
@@ -155,7 +155,7 @@ class AdjustCompsActions extends BaseActionsExt<typeof adjustCompsPage> {
                 } else {
                     adjustedTrendedPriceText = `$${numberWithCommas(adjustedTrendedPriceToBe.toFixed(2))}`;
                 }
-                adjustCompsPage.trendedPriceCells.eq(index).should("have.text", adjustedTrendedPriceText);
+                adjustCompsPage.cumulativePriceCells.eq(index).should("have.text", adjustedTrendedPriceText);
             });
         });
             
