@@ -1,6 +1,7 @@
 import BasePage from "../base/base.page";
 
 class ExpenseForecastPage extends BasePage {
+
     get expenseForecastHeader(){ return cy.get('[data-qa="expenseForecast"]'); }
 
     get electricityCard(){ return cy.get("[data-qa='electricity-forecast-item'] > div").last(); }
@@ -15,7 +16,9 @@ class ExpenseForecastPage extends BasePage {
 
     forecastItemCardFull(forecastItem: string) { return cy.get(`[data-qa=${forecastItem}-forecast-item]`); }       
     
-    forecastItemTooltip(forecastItem: string) { return cy.get(`[data-qa=${forecastItem}-forecast-item]`).children('[data-testid=InfoOutlinedIcon]'); }
+    forecastItemTooltipButton(forecastItem: string) { return cy.get(`[data-qa=${forecastItem}-forecast-item] svg[aria-label="Unchecking this box will hide the expense from showing up on the Pro Forma."]`); }
+
+    get openedTooltip() {return cy.get("[role=tooltip]");}
 
     get toeCard() { return cy.xpath("//*[.='TOTAL OPERATING EXPENSES ($/SF)']/parent::div").first(); }
 
@@ -47,7 +50,7 @@ class ExpenseForecastPage extends BasePage {
 
     getExpenseCommentaryRevertToOriginal(forecastItem: string) {return cy.xpath(`//*[@data-qa="${forecastItem}-forecast-item"]//following::button[.='Revert to Original'][1]`);}
 
-    getCheckboxIncludeInProForma(forecastItem: string) {return cy.get(`[data-qa="${forecastItem}.includeInProForma-checked"]>span>input[type="checkbox"]`);}
+    getCheckboxIncludeInProForma(forecastItem: string) {return cy.get(`[data-qa=${forecastItem}-forecast-item] input[type="checkbox"]`);}
 
     get inputPercentOfEGICheckbox() {return cy.get("[label='Input % of EGI'] input");}
 
