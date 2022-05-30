@@ -32,10 +32,9 @@ describe("[QA-4494] [QA-4495] [QA-4496] [QA-4497] [Income -> Pro Forma] Potentia
         it("[QA-4494] Verify table with the following columns: Income, Total, PSF, Per Unit", () => {
             cy.stepInfo("1. Go to Income -> Pro Forma page and verify that the table contains Income, Total, PSF, Per Unit columns");
             _NavigationSection.navigateToProForma();
-            Income._ProFormaActions.Page.columnHeaderIncome.should('exist');
-            Income._ProFormaActions.Page.columnHeaderTotal.should('exist');
-            Income._ProFormaActions.Page.columnHeaderPSF.should('exist');
-            Income._ProFormaActions.Page.columnHeaderPerUnit.should('exist');
+            testData.columnName.forEach(columnName => {
+                Income._ProFormaActions.Page.columnHeaderItem(columnName).should('exist');
+            });
         });
 
         it(`[QA-4495] Potential Residential Income >Total [taken from Income>Potential Gross Income -> 

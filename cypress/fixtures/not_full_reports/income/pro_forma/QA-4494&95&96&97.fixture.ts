@@ -16,6 +16,7 @@ const annualTotalRent = () => {
 
 const _totalPerSF = annualTotalRent() / _grossBuildingArea;
 const _totalPerUnit = annualTotalRent() / _resUnits;
+const _columnName = [ "label", "total", "psf", "perUnit" ];
 
 export default {
     reportCreationData: _reportCreationData,
@@ -25,5 +26,6 @@ export default {
     listOfUnitsSF: _listOfUnitsSF,
     resUnits: _resUnits,
     monthlyRent: _monthlyRent,
-    annualTotalRent: annualTotalRent()
+    annualTotalRent: annualTotalRent(),
+    columnName : _columnName
 };
