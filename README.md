@@ -13,6 +13,9 @@
   - [Validation of export](#export_validation)
 - [Usage](#usage)
   - [CLI_flags](#cli_flags)
+  - [Tags and tagged test run](#tagged_run)
+  - [PR deploy / localhost test run](#run_tests_in_custom_env)
+- [NPM Scripts](#npm_scripts)
 - [Useful VS Code extensions](#vs_code_extensions)
 
 ## About <a id="about"></a>
@@ -97,13 +100,49 @@ General way to run all cypress tests to run `npx cypress run` command. This comm
 
 ### CLI flags <a id="cli_flags"></a>
 
-About cypress command line and it's general flags can be read [here](https://docs.cypress.io/guides/guides/command-line).
+About cypress command line and it's general flags can be read [here](https://docs.cypress.io/guides/guides/command-line). This section will describe how to work with [custom env variables](https://docs.cypress.io/guides/guides/command-line#cypress-run-env-lt-env-gt) related to the Cypress.
 
 Project's specific environment variables for `--env` flag:
-1. `url=` - accepts values `dev`,`prod` or `staging` for development, production or staging environment. Example of usage: `npx cypress run --env url=prod` will run tests at production environment. If this variable was not passed, uses `staging` by default.
+1. `url=` - accepts values `dev`,`prod` or `staging` for development, production or staging environment. Example of usage:
+```shell
+npx cypress run --env url=prod
+```
+or
+```shell
+npm run 
+```
+will run tests at production environment. If this variable was not passed, uses `staging` by default.
 2. `loginMethod=` - accepts values `ui` or `api` for login by UI or Api. Example of usage: `npx cypress run --env loginMethod=ui` will launch tests with login by UI. If this variable was not passed, uses `api` by default.
 Example of combining previous variables: `npx cypress run --env url=dev,loginMethod=ui` will launch tests at development environment with login by UI.
 3. `customEnv=` - accepts url to specific branch environment. Example of usage: `npx cypress run --env customEnv=https://someUrl/to/env` will launch tests at this environment. 
+
+### Tags and tagged test run <a id="tagged_run"></a>
+
+Sometimes there could be a case when we need to run 
+
+### PR deploy / localhost test run (or any custom env) <a id="run_tests_in_custom_env"></a>
+
+Sometimes there could be a case when we need to run 
+
+## NPM Scripts <a id="npm_scripts"></a>
+
+| Script         | Description                                                                                                                                                                       |
+| -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| act:debug            | Runs [act cli](https://github.com/nektos/act) for local GithubAction workflow (you can check install_notes in `.act` dir for more).                                                                                                                                          |
+| cy:open      | Opens [Cypress GUI](https://docs.cypress.io/guides/getting-started/installing-cypress#Opening-Cypress)                                                     |
+| cy:chrome:snapshot_tests       | Runs [snapshot tests](https://github.com/jaredpalmer/cypress-image-snapshot#cypress-image-snapshot) in headless Chrome                                                        |
+| cy:chrome:update_snapshots    | Updates [snapshot tests](https://github.com/jaredpalmer/cypress-image-snapshot#updating-snapshots) in headless Chrome                                 |
+| cy:chrome_headed_stage_api     | Runs tests in a headed-mode on staging env (default env for test runs) in Chrome |
+| cy:chrome_headed_dev_api          | Runs tests in a headed-mode on dev env in Chrome                                                                                                                                                       |
+| cy:chrome_stage_api          | Runs tests in a headless mode on staging env in Chrome                                                                                                                                                                    |
+| cy:chrome_prod_api        | Runs tests in a headless mode on prod env in Chrome                                                                                                                            |
+| cy:full_prod_api   | Runs [full-report spec](cypress/integration/full_reportsfullBoweryMultifamilyAsComplete.spec.ts) on prod env in Electron browser (default browser for Cypress). **NOTE: DO NOT RUN THIS SPEC FOR NOW SINCE ITS UNSTABLE AND TAKES 40-50 MINUTES TO RUN**                                                                                                                     |
+| cy:full_chrome_headed_prod_api         | Runs all tests in a dir `cypress/integration/not_full_reports` on prod env in headed Chrome                                                                                                               |
+| cy:not_full_chrome_headed | Runs all tests in a dir `cypress/integration/not_full_reports` on staging env in headed Chrome                                                                                                                            |
+| tsc:check | Runs TypeScript compilier with `--noEmit` flag to check whether errors in codebase                                                                                                                            |
+| tsc:watch | Runs TypeScript compilier in watch mode. Can be useful for local development                                                                                                                            |
+| lint:run | Runs ESlint to check codebase                                                                                                                            |
+| lint:fix | Runs ESlint to fix auto-fixable issues. **NOTE: Please, use this only after development to have separate commit for linter changes**                                                                                                                            |
 
 ## Useful VS Code extensions <a id="vs_code_extensions"></a>
 
