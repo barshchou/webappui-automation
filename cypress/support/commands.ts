@@ -54,27 +54,14 @@ Cypress.Commands.add("login", () => {
             break;
         default:
             cy.loginByApi(envUrl);
+            _cyVisit(envUrl).pause();
     }
 });
 
-Cypress.Commands.add("createApiReport", (reportCreationData: BoweryAutomation.ReportCreationData, payload) => {
-    const envUrl = getEnvUrl();
-    cy.loginByApi(envUrl).then(loginResponse => {
-        const requestBody = payload(reportCreationData, loginResponse.body.user._id);
-        cy.request({
-            method: "POST",
-            url: `${envUrl}/report`,
-            auth: {
-                bearer: loginResponse.body.token
-            },
-            body: requestBody
-        }).then(response => {
-            expect(response.status).to.be.eq(200);
-            cy.log(`Report ID is: ${response.body}`);
-            // const reportUrl = `${envUrl}/report/${response.body}`;
-            // _cyVisit(reportUrl);
-        });
-    });
+Cypress.Commands.add("createApiReport", (reportCreationData: BoweryAutomation.ReportCreationData, payload, token) => {
+    // const envUrl = getEnvUrl();
+    // cy.task("createReportApi", { });
+    cy.log("NOT YET IMPLEMENTED");
 });
 
 Cypress.Commands.add("stepInfo", (message:string) => {
