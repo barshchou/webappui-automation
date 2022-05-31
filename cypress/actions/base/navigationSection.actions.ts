@@ -98,6 +98,11 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         return this;
     }
 
+    clickPropertyDescription() {
+        navigationSectionPage.propertyDescriptionButton.click()
+        return this;
+    }
+
     clickReportButton() {
         navigationSectionPage.reportButton.click();
         return this;
@@ -172,6 +177,13 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
     navigateToPropertyMarket(): NavigationSectionActions {
         this.clickPropertyButton()
             .clickMarketButton()
+            .clickYesIfExist();
+        return this;
+    }
+
+    naviateToPropertyDescription() {
+        this.clickPropertyButton()
+            .clickPropertyDescription()
             .clickYesIfExist();
         return this;
     }

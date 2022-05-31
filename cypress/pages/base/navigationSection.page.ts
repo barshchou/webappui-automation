@@ -29,6 +29,8 @@ class NavigationSection extends BasePage {
 
     get marketButton() { return cy.get("#property-market"); }
 
+    get propertyDescriptionButton() { return cy.get("#general-property-description"); }
+
     get clientButton() { return cy.get("#client"); }
 
     get siteDescription() { return cy.get("#site-description"); }
