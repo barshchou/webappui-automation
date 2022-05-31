@@ -5,27 +5,27 @@ import BaseActionsExt from "../base/base.actions.ext";
 
 class KeyInfoActions extends BaseActionsExt<typeof keyInfoPage> {
     enterPropertyRightsAppraisedComment(textToType: string = null, edit = true, save = true, revert = false) {
-        if (edit === true) keyInfoPage.formEditBtn(0).click();
+        if (edit === true) keyInfoPage.formEditBtn().click();
         keyInfoPage.textBoxPropertyRightsAppraised.invoke("text")
         .then(text => {
             keyInfoPage.textBoxPropertyRightsAppraised.focus().type(textToType ?? text);
         });
-        if(save === true) keyInfoPage.formSaveBtn(0).click();
+        if(save === true) keyInfoPage.formSaveBtn().click();
         if (revert === true) {
-            keyInfoPage.formRevertToOriginalBtn(0).click();
+            keyInfoPage.formRevertToOriginalBtn().click();
             keyInfoPage.formYesRevertBtn.click();
         }
         return keyInfoPage.textBoxPropertyRightsAppraised.invoke("text");
     }
 
     enterDefinitionMarketValue(textToType: string = null, edit = true, save = true, revert = false) {
-        if (edit === true) keyInfoPage.formEditBtn(0).click();
+        if (edit === true) keyInfoPage.formEditBtn().click();
         keyInfoPage.textBoxDefinitionOfMarketValue().invoke("text").then(text => {
             keyInfoPage.textBoxDefinitionOfMarketValue().focus().type(textToType ?? text);
         });
-        if(save === true) keyInfoPage.formSaveBtn(0).click();
+        if(save === true) keyInfoPage.formSaveBtn().click();
         if (revert === true) {
-            keyInfoPage.formRevertToOriginalBtn(0).click();
+            keyInfoPage.formRevertToOriginalBtn().click();
             keyInfoPage.formYesRevertBtn.click();
         }
         return keyInfoPage.textBoxDefinitionOfMarketValue().invoke("text");

@@ -1,7 +1,7 @@
 import Enums from "../../../../enums/enums";
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 
-const _numbersJobId = [ "2200016363", "2200018586", "1764459100", "1764459005" ];
+const _numbersJobId = [ "2200016362", "2200018586", "1764459100", "1764459005" ];
 
 export const reportCreationData = (numbersJobId: string) => {
     return ReportDataCreator.setAddress()

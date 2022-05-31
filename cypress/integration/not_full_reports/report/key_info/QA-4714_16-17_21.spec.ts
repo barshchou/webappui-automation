@@ -17,8 +17,8 @@ describe(`[QA-4714_16-17_21] Verify the suggested text dropdown in the new narra
 
         cy.stepInfo(`2. Enter the “=F“ and select the 'Foreclosure sale' then “=Sh“ and select the 'Sheriff's sale' then “=Unc“ and select the 'Unchanged Renovation' 
             option for both sections.`);
-        Report._KeyInfo.Page.formEditBtn(0).click();
-        Report._KeyInfo.Page.formEditBtn(0).click();
+        Report._KeyInfo.Page.formEditBtn().click();
+        Report._KeyInfo.Page.formEditBtn().click();
         testData.chips.forEach(chip => {
             Report._KeyInfo.enterPropertyRightsAppraisedComment(chip.enterValue, false, false, false);
             Report._KeyInfo.clickNarrativeSuggestions(chip.listValue);

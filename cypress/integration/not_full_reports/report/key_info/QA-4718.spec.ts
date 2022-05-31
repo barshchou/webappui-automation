@@ -17,8 +17,8 @@ describe(`[QA-4718] Verify the "Linked" chips dropdown in the new narrative comp
         cy.stepInfo(`2.Enter the “=“ and verify the "Linked" chips dropdown for both sections: options 'Gross Building Area', 'Building Name', 'Property Type', 
             'Residential Unit Count', 'Commercial Unit Count', 'Street Address', 'Street Name', 'Site Area', 'Year Built', 'Block', 'Lot', 'Concluded Cap Rate', 'Zones', 
             'Condition'.`);
-        Report._KeyInfo.Page.formEditBtn(0).click();
-        Report._KeyInfo.Page.formEditBtn(0).click();
+        Report._KeyInfo.Page.formEditBtn().click();
+        Report._KeyInfo.Page.formEditBtn().click();
         testData.chips.forEach(chip => {
             Report._KeyInfo.enterPropertyRightsAppraisedComment(`=${chip.typeSuggestValue}`, false, false, false);
             Report._KeyInfo.clickNarrativeSuggestions(chip.suggestionName);
@@ -27,7 +27,7 @@ describe(`[QA-4718] Verify the "Linked" chips dropdown in the new narrative comp
             Report._KeyInfo.clickNarrativeSuggestions(chip.suggestionName, 1);
             Report._KeyInfo.Page.textBoxPropertyRightsAppraised.should("include.text", chip.verifySuggest);
         });
-        Report._KeyInfo.Page.formSaveBtn(0).click();
+        Report._KeyInfo.Page.formSaveBtn().click();
         Report._KeyInfo.Page.formSaveBtn(1).click();
 
         _NavigationSection.openReviewAndExport();
