@@ -51,7 +51,7 @@ class NavigationSection extends BasePage {
 
     get commercialRentCompsButton() { return cy.get("#commercial-rent-comps"); }
 
-    get comparableExpenses() { return cy.get("#comparable-expenses-v-2"); }
+    get comparableExpenses() { return cy.get("#comparable-expenses"); }
 
     get amenities() { return cy.get("#amenities"); }
 
@@ -71,17 +71,17 @@ class NavigationSection extends BasePage {
 
     get letterOfTransmittal() { return cy.get("#letter-of-transmittal"); }
 
-    get potentialGrossIncome() { return cy.get("#potential-gross-income-v-2"); }
+    get potentialGrossIncome() { return cy.get("#potential-gross-income"); }
 
     get taxInfo() { return cy.get("#tax-information"); }
 
-    get proForma() { return cy.get("#pro-forma-v-2"); }
+    get proForma() { return cy.get("#pro-forma"); }
 
     get commercialCompGroups() { return cy.get("#commercial-comp-groups"); }
 
-    get expenseHistory() { return cy.get("#expense-history-v-2"); }
+    get expenseHistory() { return cy.get("#expense-history"); }
 
-    get expenseForecast() { return cy.get("#expense-forecast-v-2"); }
+    get expenseForecast() { return cy.get("#expense-forecast"); }
 
     get supportingCapRates() { return cy.get("#supporting-cap-rates"); }
 
@@ -93,7 +93,7 @@ class NavigationSection extends BasePage {
 
     get menuItemsProfileOrganization() {return cy.get("[role=menu] > li");}
 
-    get comercialReimbursementButton() {return cy.get("#commercial-reimbursement-summary-v-2");}
+    get comercialReimbursementButton() {return cy.get("#commercial-reimbursement-summary");}
 }
 
 export default new NavigationSection();
