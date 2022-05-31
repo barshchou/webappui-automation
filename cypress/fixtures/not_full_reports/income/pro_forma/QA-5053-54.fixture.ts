@@ -21,7 +21,7 @@ const _customCategoriesAmount = 3; //pay attention to custom categories amount a
 //#region Formulas
 /* Formulas for calculation Pro Forma table.
     Expenses:
-    Real Estate Taxes = landTaxAssessed + buildingAssesed * tax
+    Real Estate Taxes = (landTaxAssessed + buildingAssesed) * tax / 100
     Water And Reserves = water forecast * GBA
     Fuel = fuel forecast * GBA
     Custom expense = custom forecast * GBA
