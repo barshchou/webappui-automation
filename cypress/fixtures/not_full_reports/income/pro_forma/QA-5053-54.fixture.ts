@@ -18,6 +18,19 @@ const _reservesForecast = 23;
 const _fuelForecast = 34;
 const _customCategoriesAmount = 3; //pay attention to custom categories amount added below
 
+//#region Formulas
+/* Formulas for calculation Pro Forma table.
+    Expenses:
+    Real Estate Taxes = landTaxAssessed + buildingAssesed * tax
+    Water And Reserves = water forecast * GBA
+    Fuel = fuel forecast * GBA
+    Custom expense = custom forecast * GBA
+
+    Totals:
+    Total Operating Expenses = Total of all expenses(included custom) + Real Estate Taxes total
+    Total Operating Expenses ex Taxed = Total Operating Expenses - Real Estate Taxes total
+    Total Operating Income = Effective Gross Income - Total Operating Expenses
+*/
 const _totalRealEstateTax = ((_landTaxAssessedValue + _buildingTaxAssessedValue) * _taxPercent) / 100;
 const _totalWater = _waterForecast * _grossBuildingArea;
 const _totalReserves = _reservesForecast * _grossBuildingArea;
@@ -28,6 +41,8 @@ const _totalCustoms = _totalCustomCategory * _customCategoriesAmount;
 const _totalTOE = _totalFuel + _totalReserves + _totalWater + _totalCustoms + _totalRealEstateTax;
 const _totalTOEexTaxes = _totalTOE - _totalRealEstateTax;
 const _totalNetOperatingIncome = _totalTOE;
+
+//#endregion
 
 const _customCategoryFirstCapital = (): BoweryReports.ForecastItem => {
     return {
