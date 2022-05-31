@@ -4,7 +4,8 @@ import { _NavigationSection } from "../../../../actions/base";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import testData from '../../../../fixtures/not_full_reports/report/key_info/QA-4719.fixture';
 
-describe(`[QA-4719] Verify the "Linked" chips dropdown in the new narrative component for Property Rights Appraised and Definition of Market Value sections`,
+describe(`[QA-4719] Verify the "Linked" chips dropdown in the new narrative component for As Is and As Stabilized report for Property Rights Appraised 
+    and Definition of Market Value sections`,
     { tags:[ "@report", "@key_info", "@check_export" ] }, () => {
     it("Test body", () => {
         cy.stepInfo("Login, create report");
@@ -15,8 +16,8 @@ describe(`[QA-4719] Verify the "Linked" chips dropdown in the new narrative comp
             .clickYesButton();
 
         cy.stepInfo(`2.Enter the “=“ and verify the "Linked" chips dropdown for both sections: options 'Gross Building Area', 'Building Name', 'Property Type', 
-            'Residential Unit Count', 'Commercial Unit Count', 'Street Address', 'Street Name', 'Site Area', 'Year Built', 'Block', 'Lot', 'Concluded Cap Rate', 'Zones', 
-            'Condition'.`);
+            'Residential Unit Count', 'Commercial Unit Count', 'Street Address', 'Street Name', 'Site Area', 'Year Built', 'Block', 'Lot', 'Concluded Cap Rate', 
+            'Zones', 'Condition'.`);
         Report._KeyInfo.Page.formEditBtn().click();
         Report._KeyInfo.Page.formEditBtn().click();
         testData.chips.forEach(chip => {
