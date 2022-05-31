@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable @typescript-eslint/no-namespace */
 
@@ -30,7 +31,8 @@ declare global {
          * Custom command to select DOM element by data-cy attribute.
          * @example cy.dataCy('greeting')
          */
-        loginByApi(url: string): Cypress.Chainable
+        loginByApi(url: string): Cypress.Chainable<Cypress.Response<any>>
+        
         /**
          * 
          * @param value 

@@ -23,23 +23,28 @@ const _cyVisit = (url: string) => cy.visit(url, { timeout: Cypress.env("DEBUG") 
 
 Cypress.Commands.add("loginByApi", (url) => {
     cy.log("Logging in by api");
-    return cy.request({
-        method: "POST",
-        url: `${url}/user/login`,
-        body: {
-            username: Cypress.env("USERNAME"),
-            password: Cypress.env("PASSWORD")
-        },
-    }).then((response) => {
-        const token = response.body.token;
-        window.localStorage.setItem("jwToken", token);
-        const userId = response.body.user._id;
-        cy.log(`User Id is: ${userId}`);
-        const bearerToken = response.headers.authorization;
-        cy.log(`Authorization header is: ${bearerToken}`);
-        cy.log(`Headers are: ${JSON.stringify(response.headers)}`);
-        // _cyVisit(url);
+    // return cy.request({
+    //     method: "POST",
+    //     url: `${url}/user/login`,
+    //     body: {
+    //         username: Cypress.env("USERNAME"),
+    //         password: Cypress.env("PASSWORD")
+    //     },
+    // }).then((response) => {
+    //     const token = response.body.token;
+    //     window.localStorage.setItem("jwToken", token);
+    //     const userId = response.body.user._id;
+    //     cy.log(`User Id is: ${userId}`);
+    //     const bearerToken = response.headers.authorization;
+    //     cy.log(`Authorization header is: ${bearerToken}`);
+    //     cy.log(`Headers are: ${JSON.stringify(response.headers)}`);
+    //     _cyVisit(url);
+    // });
+    cy.task("loginApi").then(token => {
+        cy.log("token from task");
+        cy.log(<string>token);
     });
+    return cy.log("test");
 });
 
 Cypress.Commands.add("loginByUI", (url) => {
@@ -76,8 +81,8 @@ Cypress.Commands.add("createApiReport", (reportCreationData: BoweryAutomation.Re
         }).then(response => {
             expect(response.status).to.be.eq(200);
             cy.log(`Report ID is: ${response.body}`);
-            const reportUrl = `${envUrl}/report/${response.body}`;
-            _cyVisit(reportUrl);
+            // const reportUrl = `${envUrl}/report/${response.body}`;
+            // _cyVisit(reportUrl);
         });
     });
 });
