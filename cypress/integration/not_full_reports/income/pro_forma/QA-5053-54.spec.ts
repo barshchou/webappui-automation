@@ -1,24 +1,40 @@
 import testData from "../../../../fixtures/not_full_reports/income/pro_forma/QA-5053-54.fixture";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
-import { Income } from "../../../../actions";
+import { Income, Property } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
 import enums from "../../../../enums/enums";
+import { numberWithCommas } from "../../../../../utils/numbers.utils";
 
 describe("Pro Forma -> Expenses", 
     { tags:[ "@income", "@pro_forma" ] }, () => {
 
     before("Login, create report", () => {
+        cy.stepInfo(`1. Create new report or open the report which is already created. 
+                    Make sure that there is at least three commercial units.`);
         createReport(testData.reportCreationData);
+        _NavigationSection.navigateToPropertySummary();
+        Property._Summary.enterGrossBuildingArea(testData.grossBuildingArea)
+            .enterNumberOfResUnits(testData.numberOfResidentialUnits)
+            .enterNumberOfCommercialUnits(testData.numberOfCommercialUnits);
 
-        cy.stepInfo("1: Prepare report data: Navigate to Expense Forecast and add custom category and expenses forecast to the report");
+        cy.stepInfo("2. Prepare report data: Navigate to Expense Forecast and add custom categories and expenses forecast to the report");
         _NavigationSection.navigateToExpenseForecast();
-        Income._ExpenseForecastActions.addCustomExpenseCategory(testData.customCategoryFirstCapital.name);
-        Income._ExpenseForecastActions.addCustomExpenseCategory(testData.customCategoryAllCapitals.name);
-        Income._ExpenseForecastActions.addCustomExpenseCategory(testData.customCategoryMix.name);
+        testData.customCategories.forEach(customCategory => {
+            Income._ExpenseForecastActions.addCustomExpenseCategory(customCategory.name);
+        });
         testData.expensesItems.forEach(foreCastItem => {
             Income._ExpenseForecastActions.enterForecastItemForecast(foreCastItem);
         });
-        Income._ExpenseForecastActions.enterForecastItemForecast(testData.customCategoryFirstCapital, true);
+        testData.customCategories.forEach((customForecast, index) => {
+            Income._ExpenseForecastActions.enterForecastItemForecast(customForecast, true, index);
+        });
+
+        cy.stepInfo("3. Go to the Income → Tax Info → Tax Information → Current page and fill in all necessary values"); 
+        _NavigationSection.navigateToTaxInfo();
+        Income._TaxInfo.switchIncludeTransitionalCheckbox(false)
+            .enterTaxableAssessedLandValue(testData.landTaxAssessedValue)
+            .enterTaxableAssessedBuildingValue(testData.buildingTaxAssessedValue)
+            .clickSaveButton();
 
         cy.saveLocalStorage();
     });
@@ -29,18 +45,20 @@ describe("Pro Forma -> Expenses",
     });
 
     it("[QA-5054] Appraiser's Forecast of Custom Expense Forecast is included in calculation", () => {
-        cy.stepInfo("2. On Pro Forma page validate Custom Expense Forecast is included in calculation");
-        Income._ProFormaActions.verifyCategoryTotal(testData.customTotal, testData.customCategoryFirstCapital.name)
-            .verifyCategoryTotal(testData.reserverstotal, enums.PRO_FORMA_TYPES.replacementsAndReserves)
-            .verifyCategoryTotal(testData.waterAndSewerTotal, enums.PRO_FORMA_TYPES.waterAndSewer)
-            .verifyCategoryTotal(testData.fuelTotal, enums.PRO_FORMA_TYPES.fuel)
-            .verifyCategoryTotal(testData.totalToe, enums.PRO_FORMA_TYPES.totalOperatingExpenses)
-            .verifyCategoryTotal(testData.totalToeNetRe, enums.PRO_FORMA_TYPES.totalOperatingExpensesExTaxes)
-            .verifyCategoryTotal(testData.netOperationIncome, enums.PRO_FORMA_TYPES.netOperatingIncome);
+        cy.stepInfo("4. On Pro Forma page validate Custom Expense Forecast is included in calculation");
+        Income._ProFormaActions.verifyCategoryTotal(`$${numberWithCommas(Math.round(testData.totalCustomCategory))}`, testData.customCategoryFirstCapital.name)
+            .verifyCategoryTotal(`$${numberWithCommas(Math.round(testData.totalCustomCategory))}`, testData.customCategoryAllCapitals.name)
+            .verifyCategoryTotal(`$${numberWithCommas(Math.round(testData.totalCustomCategory))}`, testData.customCategoryMix.name)
+            .verifyCategoryTotal(`$${numberWithCommas(Math.round(testData.reserverstotal))}`, enums.PRO_FORMA_TYPES.replacementsAndReserves)
+            .verifyCategoryTotal(`$${numberWithCommas(Math.round(testData.waterAndSewerTotal))}`, enums.PRO_FORMA_TYPES.waterAndSewer)
+            .verifyCategoryTotal(`$${numberWithCommas(Math.round(testData.fuelTotal))}`, enums.PRO_FORMA_TYPES.fuel)
+            .verifyCategoryTotal(`$${numberWithCommas(Math.round(testData.totalToe))}`, enums.PRO_FORMA_TYPES.totalOperatingExpenses)
+            .verifyCategoryTotal(`$${numberWithCommas(Math.round(testData.totalToeNetRe))}`, enums.PRO_FORMA_TYPES.totalOperatingExpensesExTaxes)
+            .verifyCategoryTotal(`-$${numberWithCommas(Math.round(testData.netOperationIncome))}`, enums.PRO_FORMA_TYPES.netOperatingIncome);
     });
 
     it("[QA-5053] Custom Expense Forecast is displayed in Operating Expenses grid on Pro Forma", () => {
-        cy.stepInfo(`2. On Pro Forma page verify  there is validation for each custom expense 
+        cy.stepInfo(`4. On Pro Forma page verify  there is validation for each custom expense 
                     forecast to capitalize the first letter of each word`);
         Income._ProFormaActions.verifyCustomCategoryName(testData.customCategoryFirstCapital.name);
         Income._ProFormaActions.verifyCustomCategoryName(testData.customCategoryAllCapitals.name);

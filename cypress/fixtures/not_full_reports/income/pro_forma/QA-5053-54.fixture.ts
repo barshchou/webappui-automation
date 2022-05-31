@@ -1,23 +1,64 @@
 import ReportDataCreator from "../../../data_creator/reportData.creator";
+import Enums from "../../../../enums/enums";
 
-const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("5053-54");
+const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("5053-54", {
+    incomeValue: Enums.INCOME_TYPE.BOTH
+});
 
-const _customCategoryFirstCapital: BoweryReports.ForecastItem = {
-    name: "Verify first capital",
-    basis: "sf",
-    forecast: 4
+const _grossBuildingArea = 5000;
+const _numberOfCommercialUnits = 3;
+const _numberOfResidentialUnits = 5;
+const _landTaxAssessedValue = 999999;
+const _buildingTaxAssessedValue = 456450;
+const _taxPercent = 10.755;
+const _basis = "sf" as BoweryReports.UnitSF;
+const _customForecast = 45;
+const _waterForecast = 12;
+const _reservesForecast = 23;
+const _fuelForecast = 34;
+const _customCategoriesAmount = 3; //pay attention to custom categories amount added below
+
+const _totalRealEstateTax = ((_landTaxAssessedValue + _buildingTaxAssessedValue) * _taxPercent) / 100;
+const _totalWater = _waterForecast * _grossBuildingArea;
+const _totalReserves = _reservesForecast * _grossBuildingArea;
+const _totalFuel = _fuelForecast * _grossBuildingArea;
+const _totalCustomCategory = _customForecast * _grossBuildingArea;
+const _totalCustoms = _totalCustomCategory * _customCategoriesAmount;
+
+const _totalTOE = _totalFuel + _totalReserves + _totalWater + _totalCustoms + _totalRealEstateTax;
+const _totalTOEexTaxes = _totalTOE - _totalRealEstateTax;
+const _totalNetOperatingIncome = _totalTOE;
+
+const _customCategoryFirstCapital = (): BoweryReports.ForecastItem => {
+    return {
+        name: "Verify first capital",
+        basis: _basis,
+        forecast: _customForecast
+    };
 };
 
-const _customCategoryAllCapitals: BoweryReports.ForecastItem = {
-    name: "Verify All Capitals",
-    basis: "sf",
-    forecast: 4
+const _customCategoryAllCapitals = (): BoweryReports.ForecastItem => {
+    return {
+        name: "Verify All Capitals",
+        basis: _basis,
+        forecast: _customForecast
+    };
 };
 
-const _customCategoryMix: BoweryReports.ForecastItem = {
-    name: "verify Mix cases",
-    basis: "sf",
-    forecast: 4
+const _customCategoryMix = (): BoweryReports.ForecastItem => {
+    return {
+        name: "verify Mix cases",
+        basis: _basis,
+        forecast: _customForecast
+    };
+};
+
+const _customCategories = (): BoweryReports.ForecastItem[] => {
+    let customCategories = [] as BoweryReports.ForecastItem[];
+    customCategories.push(_customCategoryAllCapitals());
+    customCategories.push(_customCategoryFirstCapital());
+    customCategories.push(_customCategoryMix());
+    return customCategories;
 };
 
 //Making changes to forecast will impact totals amount in exported values: totalToe, totalToeNetRe, customTotal
@@ -25,18 +66,18 @@ const expensesItemsFixture = (): BoweryReports.ForecastItem[] => {
     return [
         {
             name: "waterAndSewer",
-            basis: "sf",
-            forecast: 1
+            basis: _basis,
+            forecast: _waterForecast
         },
         {
             name: "reserves",
-            basis: "sf",
-            forecast: 2
+            basis: _basis,
+            forecast: _reservesForecast
         },
         {
             name: "fuel",
-            basis: "sf",
-            forecast: 3
+            basis: _basis,
+            forecast: _fuelForecast
         },
     ];
 };
@@ -44,14 +85,22 @@ const expensesItemsFixture = (): BoweryReports.ForecastItem[] => {
 export default {
     reportCreationData: _reportCreationData,
     expensesItems: expensesItemsFixture(),
-    customCategoryFirstCapital: _customCategoryFirstCapital,
-    customCategoryAllCapitals: _customCategoryAllCapitals,
-    customCategoryMix: _customCategoryMix,
-    totalToe: "$21,244,410",
-    totalToeNetRe: "$21,244,410",
-    customTotal: "$8,497,764",
-    netOperationIncome: "-$21,244,410",
-    reserverstotal: "$4,248,882",
-    fuelTotal: "$6,373,323",
-    waterAndSewerTotal: "$2,124,441"
+    customCategoryFirstCapital: _customCategoryFirstCapital(),
+    customCategoryAllCapitals: _customCategoryAllCapitals(),
+    customCategoryMix: _customCategoryMix(),
+    totalRealEstateTax: _totalRealEstateTax,
+    grossBuildingArea: _grossBuildingArea,
+    numberOfCommercialUnits: _numberOfCommercialUnits,
+    numberOfResidentialUnits: _numberOfResidentialUnits,
+    totalToe: _totalTOE,
+    totalToeNetRe: _totalTOEexTaxes,
+    totalCustomCategory: _totalCustomCategory,
+    customTotal: _totalCustoms,
+    netOperationIncome: _totalNetOperatingIncome,
+    reserverstotal: _totalReserves,
+    fuelTotal: _totalFuel,
+    waterAndSewerTotal: _totalWater, 
+    landTaxAssessedValue: _landTaxAssessedValue,
+    buildingTaxAssessedValue: _buildingTaxAssessedValue,
+    customCategories: _customCategories()
 };
