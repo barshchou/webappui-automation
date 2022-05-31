@@ -27,6 +27,10 @@ class KeyInfoPage extends BasePage{
 
     get uploadButton() {return cy.xpath("//*[contains(text(), 'Drag and drop or browse files below')]//following::button[1]");}
 
+    get addPdfButton() {return cy.get("*[data-qa='add-pdf-btn']");}
+
+    get addWordButton() {return cy.get("*[data-qa='add-word-btn']");}
+
     get insertButton() {return cy.get("*[data-qa='insert-btn']");}
 
     get inputToCheckUpload() {return cy.get("*[data-qa='file-selection-letterOfEngagement-input'] input");}
