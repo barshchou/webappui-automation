@@ -54,7 +54,10 @@ declare global {
          * @param reportCreationData Data of a report to pass to testData
          * @param payload Function, that returns payload object
          */
-        createApiReport(reportCreationData: BoweryAutomation.ReportCreationData, payload: any): void
+        createApiReport(reportCreationData: BoweryAutomation.ReportCreationData, payload: any, token: any): void
+
+        _mapSet(key: any, value: any): void  
+        _mapGet(key: any): Cypress.Chainable<any>
       }
     }
   }

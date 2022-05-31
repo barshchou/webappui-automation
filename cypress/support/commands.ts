@@ -3,6 +3,8 @@ import "cypress-file-upload";
 import "cypress-localstorage-commands";
 import { getEnvUrl } from "../../utils/env.utils";
 
+const _map = new Map();
+
 //#region plugin commands initialization
 addMatchImageSnapshotCommand({
     failureThreshold: 0.05, // threshold for entire image
@@ -31,8 +33,7 @@ Cypress.Commands.add("loginByApi", (url) => {
         window.localStorage.setItem("jwToken", token);
         const userId = responseBody.user._id;
         cy.log(`User Id is: ${userId}`);
-        _cyVisit(url);
-        cy.pause();
+        cy._mapSet("token", token);
     });
 });
 
@@ -86,5 +87,13 @@ Cypress.Commands.add("stepInfo", (message:string) => {
             };
         }
     });
+});
+
+
+Cypress.Commands.add("_mapSet", (_key:any, _value:any) => {
+    return _map.set(_key, _value);
+});
+Cypress.Commands.add("_mapGet", (_key: any) => {
+    return _map.get(_key);
 });
 //#endregion
