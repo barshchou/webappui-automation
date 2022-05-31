@@ -1,9 +1,21 @@
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 
-const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("5054");
+const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("5053-54");
 
-const _customCategory: BoweryReports.ForecastItem = {
-    name: "custom",
+const _customCategoryFirstCapital: BoweryReports.ForecastItem = {
+    name: "Verify first capital",
+    basis: "sf",
+    forecast: 4
+};
+
+const _customCategoryAllCapitals: BoweryReports.ForecastItem = {
+    name: "Verify All Capitals",
+    basis: "sf",
+    forecast: 4
+};
+
+const _customCategoryMix: BoweryReports.ForecastItem = {
+    name: "verify Mix cases",
     basis: "sf",
     forecast: 4
 };
@@ -32,7 +44,9 @@ const expensesItemsFixture = (): BoweryReports.ForecastItem[] => {
 export default {
     reportCreationData: _reportCreationData,
     expensesItems: expensesItemsFixture(),
-    customCategory: _customCategory,
+    customCategoryFirstCapital: _customCategoryFirstCapital,
+    customCategoryAllCapitals: _customCategoryAllCapitals,
+    customCategoryMix: _customCategoryMix,
     totalToe: "$21,244,410",
     totalToeNetRe: "$21,244,410",
     customTotal: "$8,497,764",

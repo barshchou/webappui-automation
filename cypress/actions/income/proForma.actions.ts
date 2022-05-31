@@ -90,6 +90,11 @@ class ProFormaActions extends BaseActionsExt<typeof proFormaPage> {
         return this;
     }
     
+    verifyCustomCategoryName(categoryName: string): ProFormaActions {
+        let textToBe = proFormaPage.capitalizeWordsInCategoryName(categoryName).toString();
+        proFormaPage.getCustomCategoryIncomeCell(categoryName).eq(0).invoke('text').should('deep.include', textToBe);
+        return this;
+    }
 }
 
 export default new ProFormaActions(proFormaPage);

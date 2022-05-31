@@ -48,13 +48,21 @@ class ProFormaPage extends BasePage {
             ? this.getCategoryElementByType(categoryName, "perUnit").first() : this.getCategoryElementByType(categoryName, "perUnit");
     }
 
-    private capitalizeFirstLetter(string: string) {
-        return string.charAt(0).toUpperCase() + string.slice(1);
+    capitalizeWordsInCategoryName(categoryName: string):string {
+        let capitalizedName = '';
+        categoryName.split(' ').forEach(word => {
+            capitalizedName = capitalizedName + word.charAt(0).toUpperCase() + word.slice(1) + ' ';
+        });
+        return capitalizedName.trim();
     }
 
     private getCategoryElementByType(categoryName: string, colId: string) {
-        return cy.get(`[row-id^='${this.capitalizeFirstLetter(categoryName)}'] [role=gridcell][col-id=${colId}]`);
-    } 
+        return cy.get(`[row-id^='${this.capitalizeWordsInCategoryName(categoryName)}'] [role=gridcell][col-id=${colId}]`);
+    }
+
+    getCustomCategoryIncomeCell(categoryName: string) {
+        return cy.get(`[row-id^='${this.capitalizeWordsInCategoryName(categoryName)}'] div`);
+    }
 }
 
 export default new ProFormaPage();
