@@ -35,7 +35,7 @@ describe("Potential [USE(Property -> Commercial Units] Income -> PSF / Per Unit"
         cy.saveLocalStorage();
     });
     
-    beforeEach("Restore local storeage", () => {
+    beforeEach("Restore local storage", () => {
         cy.restoreLocalStorage();
     });
 
