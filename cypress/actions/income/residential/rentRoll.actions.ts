@@ -264,13 +264,6 @@ class InPlaceRentRollActions extends ResidentialRentRollSharedActions<typeof ren
         return this;
     }
 
-    enterListMonthlyRents(monthlyRentList: Array<number>): this {
-        for (let i = 0; i < monthlyRentList.length; i++) {
-            this.enterMonthlyRentByRowNumber(monthlyRentList[i], i);
-        }
-        return this;
-    }
-
     enterAllEqualForecast(forecastValue: string | number, numberOfUnits: number): InPlaceRentRollActions {
         for (let i = 0; i < numberOfUnits; i++) {
             this.enterForecastByRowNumber(forecastValue, i);

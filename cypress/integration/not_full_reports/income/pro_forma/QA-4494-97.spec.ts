@@ -20,7 +20,7 @@ describe("[QA-4494] [QA-4495] [QA-4496] [QA-4497] [Income -> Pro Forma] Potentia
 
             cy.stepInfo("3. Go to Income → Residential → In-Place Rent Role and fill in all necessary values to the table");
             _NavigationSection.navigateToResInPlaceRentRoll();
-            Income._Residential.InPlaceRentRoll.enterListMonthlyRents(testData.monthlyRent);
+            Income._Residential.InPlaceRentRoll.enterMonthlyRents(testData.monthlyRent);
 
             cy.saveLocalStorage();
         });
