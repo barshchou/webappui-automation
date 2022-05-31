@@ -13,6 +13,7 @@
   - [GH Actions debug](#gh_actions_debug)
   - [Validation of export](#export_validation)
 - [Useful VS Code extensions](#vs_code_extensions)
+- [Using Husky](#husky_usage)
 
 ## About <a id="about"></a>
 This repository contains the code of end-to-end tests, written in  Cypress framework (https://docs.cypress.io/guides/getting-started/writing-your-first-test). Main pattern used for this project - is Page Object. We describe elements of pages and the way they can behave (*pages* folder). We describe actions, which we use to interact with pages (*actions* folder). And describe test specs (*integration* folder) - things/flows we want to test and verify on our pages, using actions to put the app in a required state.
