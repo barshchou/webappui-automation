@@ -23,7 +23,7 @@ describe("Total Utility Adjustments in Sales Adjustment Grid is calculated with 
         _NavigationSection.openAdjustCompsInSales();
         Sales._AdjustComps.checkCalculationUnitsRadio(testData.calculationUnits)
             .enterMarketAdjustmentsGroup(Object.keys(testData.comparablesAdjustments), Object.values(testData.comparablesAdjustments))
-            .verifyTrendedPricePerBasis(testData.basis);
+            .verifyTrendedPricePerBasis(Object.values(testData.comparablesAdjustments), testData.basis);
 
         deleteReport(testData.reportCreationData.reportNumber);
     });
