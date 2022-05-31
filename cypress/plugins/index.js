@@ -10,12 +10,19 @@
 const { existsSync, writeFileSync, readFile } = require("fs");
 const mammoth = require("mammoth");
 const glob = require("glob");
+const request = require('supertest');
+const util = require("util");
 
 const {
   addMatchImageSnapshotPlugin,
 } = require("cypress-image-snapshot/plugin");
 
 const grepFilterPlugin = require("cypress-grep/src/plugin");
+
+//#region helper functions, not used as task functions
+const readFileAsync = util.promisify(readFile);
+
+//#endregion
 
 /**
  * NOTE: (ernst) Sometimes we need call functions recursively (function calls itself).
@@ -95,11 +102,31 @@ const _convertDocxToHtml = async (report) => {
 }
 
 /**
- * ernst: for type - check `cypress/types`, I couldn't import it via JSDoc explicitly
  * 
- * Converts docx file into html via mammoth lib and writes it into cypress/downloads
- * @param {ReportFile} report 
- * @returns {null} for tasks' return type - please check notes above
+ * @returns 
+ */
+const _loginApi = async () => {
+  let cypressEnvJson = JSON.parse(
+    await readFileAsync("./cypress.env.json",{encoding:"utf-8"})
+  );
+
+  const response = await request("https://bowery-staging.herokuapp.com")
+  .post('/user/login')
+  .send({
+    username:cypressEnvJson.USERNAME,
+    password:cypressEnvJson.PASSWORD
+  })
+  .expect('Content-Type', /json/)
+  .expect(200);
+
+  return response.body.token;
+}
+
+/**
+ * 
+ * @param {*} _reportCreationData 
+ * @param {*} _payloadFn 
+ * @returns 
  */
  const _createReportApi = async (_reportCreationData, _payloadFn) => {
    console.log(_reportCreationData);
@@ -164,6 +191,11 @@ module.exports = (on, config) => {
     }
   });
 
+  on("task",{
+    loginApi(){
+      return _loginApi();
+    }
+  });
   //#endregion
 
   return config;
