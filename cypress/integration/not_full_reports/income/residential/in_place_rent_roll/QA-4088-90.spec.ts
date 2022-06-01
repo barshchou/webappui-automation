@@ -19,8 +19,8 @@ describe("[QA-4088], [QA-4089], [QA-4090] 'What time period should rent PSF be b
             cy.stepInfo("1. Go to Income > Residential > In-Place Rent Roll.");
             _NavigationSection.navigateToResInPlaceRentRoll();
 
-            cy.stepInfo(`2. Verify if "What time period should rent PSF be based on?" question with 2 radiobuttons ( Per year and Per Month) 
-            appears under the question "Do you know per unit square footage?
+            cy.stepInfo(`2. Verify if "What time period should rent PSF be based on?" question with 2 radiobuttons 
+            ( Per year and Per Month) appears under the question "Do you know per unit square footage?
             when checkbox "Yes" is selected under question field "Do you know per unit square footage?"`);
             Income._Residential.InPlaceRentRoll.Page.getPerUnitSFRadio('false').should("be.checked");
             Income._Residential.InPlaceRentRoll.checkPerUnitSquareFootage('true');
