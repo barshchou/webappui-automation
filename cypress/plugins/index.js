@@ -113,8 +113,8 @@ const _loginApi = async () => {
   const response = await request("https://bowery-staging.herokuapp.com")
   .post('/user/login')
   .send({
-    username:cypressEnvJson.USERNAME,
-    password:cypressEnvJson.PASSWORD
+    username:process.env.CYPRESS_USERNAME ?? cypressEnvJson.USERNAME,
+    password:process.env.CYPRESS_PASSWORD ?? cypressEnvJson.PASSWORD
   })
   .expect('Content-Type', /json/)
   .expect(200);
