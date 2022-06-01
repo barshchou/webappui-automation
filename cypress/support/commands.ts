@@ -1,7 +1,6 @@
 import { addMatchImageSnapshotCommand } from 'cypress-image-snapshot/command';
 import "cypress-file-upload";
 import "cypress-localstorage-commands";
-import { getEnvUrl } from "../../utils/env.utils";
 
 const _map = new Map();
 
@@ -34,6 +33,7 @@ Cypress.Commands.add("loginByApi", (url) => {
         const userId = responseBody.user._id;
         cy.log(`User Id is: ${userId}`);
         cy._mapSet("token", token);
+        cy._mapSet("user_id_api", userId);
     });
 });
 
@@ -46,22 +46,9 @@ Cypress.Commands.add("loginByUI", (url) => {
     cy.get("*[name='password']").should("be.visible").type(password).type("{enter}");
 });
 
-Cypress.Commands.add("login", () => {
-    const envUrl = getEnvUrl();
-    switch (Cypress.env("loginMethod")) {
-        case "ui":
-            cy.loginByUI(envUrl);
-            break;
-        default:
-            cy.loginByApi(envUrl);
-            _cyVisit(envUrl).pause();
-    }
-});
-
 Cypress.Commands.add("createApiReport", (reportCreationData: BoweryAutomation.ReportCreationData, payload, token) => {
-    // const envUrl = getEnvUrl();
-    // cy.task("createReportApi", { });
-    cy.log("NOT YET IMPLEMENTED");
+    cy.task("createReportApi", 
+    { _reportCreationData:reportCreationData, _payload:payload, _token:token  });
 });
 
 Cypress.Commands.add("stepInfo", (message:string) => {

@@ -33,9 +33,12 @@ export const loginAction = () => {
             break;
         default:
             cy.loginByApi(envUrl);
-            cy.visit(envUrl);
     }
 };
+
+export const navigateToEnv = () => {
+    return cy.visit(getEnvUrl());
+}; 
 
 export const createReport = (reportCreationData: BoweryAutomation.ReportCreationData, payloadFunction = createPayload) => {
     loginAction();
@@ -50,6 +53,7 @@ export const createReport = (reportCreationData: BoweryAutomation.ReportCreation
                     reportCreationData, _payload, _token
                 );
                 cy.pause();
+                navigateToEnv();
             });
             
         }
