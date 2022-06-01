@@ -4,10 +4,9 @@ import NavigationSection from "../../../../actions/base/navigationSection.action
 import Property from "../../../../actions/property/property.manager";
 import Income from "../../../../actions/income/income.manager";
 import Sales from "../../../../actions/sales/sales.manager";
-import { Tag } from "../../../../utils/tags.utils";
 
 describe("Prospective Market Value As Stabilized -> Less Commission Fee data is pulled from Cap Rate Conclusion",
-    { tags:[ Tag.sales, Tag.value_conclusion ] }, () => {
+    { tags:[ "@sales", "@value_conclusion" ] }, () => {
         
     before("Login, create report", () => {
         createReport(testData.reportCreationData);

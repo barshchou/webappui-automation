@@ -3,10 +3,9 @@ import testData from "../../../../fixtures/not_full_reports/property/commercial_
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { Property } from "../../../../actions";
-import { Tag } from "../../../../utils/tags.utils";
 
 describe("Verify the functionality of the Image upload to the Interior and Exterior Images sections",
-    { tags:[ Tag.property, Tag.commercial_units ] },  () => {
+    { tags:[ "@property", "@commercial_units" ] },  () => {
         
     before("Login, create report", () => {
         cy.stepInfo(`Preconditions: The mixed report is created and several commercial units are added.`);

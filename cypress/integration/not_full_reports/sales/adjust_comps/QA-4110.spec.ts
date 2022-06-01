@@ -1,11 +1,10 @@
-import { Tag } from './../../../../utils/tags.utils';
 import testData from "../../../../fixtures/not_full_reports/sales/adjust_comps/QA-4110.fixture";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
-import { Sales } from "../../../../actions/index";
+import { Sales } from "../../../../actions";
 
 describe("Total Utility Adjustments in Sales Adjustment Grid is calculated with correct formula", 
-    { tags:[ Tag.sales, Tag.adjust_comps, ] }, () => {
+    { tags:[ "@sales", "@adjust_comps", ] }, () => {
 
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
@@ -24,7 +23,7 @@ describe("Total Utility Adjustments in Sales Adjustment Grid is calculated with 
         _NavigationSection.openAdjustCompsInSales();
         Sales._AdjustComps.checkCalculationUnitsRadio(testData.calculationUnits)
             .enterMarketAdjustmentsGroup(Object.keys(testData.comparablesAdjustments), Object.values(testData.comparablesAdjustments))
-            .verifyTrendedPricePerBasis(testData.basis);
+            .verifyTrendedPricePerBasis(Object.values(testData.comparablesAdjustments), testData.basis);
 
         deleteReport(testData.reportCreationData.reportNumber);
     });

@@ -3,10 +3,9 @@ import NavigationSection from "../../../../../actions/base/navigationSection.act
 import Income from "../../../../../actions/income/income.manager";
 import Property from "../../../../../actions/property/property.manager";
 import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
-import { Tag } from "../../../../../utils/tags.utils";
 
 describe("Verify the display of the Unit grid with the added comparable unit on the '$ Rent Comps' page", 
-{ tags:[ Tag.income, Tag.residential, Tag.rent_comps ] }, () => {
+{ tags:[ "@income", "@residential", "@rent_comps" ] }, () => {
 
     beforeEach("Login action", () => {
         createReport(tesData.reportCreationData);

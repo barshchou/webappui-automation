@@ -21,10 +21,10 @@
     "currents:run": "currents run --spec './cypress/integration/not_full_reports/**/*.spec.ts' --browser chrome --record --parallel",
     "currents:run:debug": "currents run --browser chrome",
     "tsc:check": "npx tsc --project ./cypress/tsconfig.json --noEmit",
-    "tsc:watch":"npm run tsc:check -- --watch",
-    "lint:run": "eslint \"./**\"",
-    "lint:fix": "eslint \"./**\" --fix"
-
+    "tsc:watch": "npm run tsc:check -- --watch",
+    "lint:run": "eslint \"./**\" --max-warnings=0",
+    "lint:fix": "eslint \"./**\" --fix --max-warnings=0",
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",
@@ -52,6 +52,7 @@
     "eslint": "^7.32.0",
     "eslint-plugin-cypress": "^2.12.1",
     "glob": "^8.0.1",
+    "husky": "^8.0.1",
     "mammoth": "^1.4.21",
     "typescript": "^4.5.5"
   }

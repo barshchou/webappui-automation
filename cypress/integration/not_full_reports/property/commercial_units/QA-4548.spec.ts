@@ -2,10 +2,9 @@ import testData from "../../../../fixtures/not_full_reports/property/commercial_
 import { Property } from "../../../../actions";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
-import { Tag } from "../../../../utils/tags.utils";
 
 describe("Verify the Modified label functionality",
-    { tags: [ Tag.property, Tag.commercial_units ] }, () => {
+    { tags: [ "@property", "@commercial_units" ] }, () => {
 
         before("Report creation and several commercial units addition", () => {
             createReport(testData.reportCreationData);
@@ -19,11 +18,11 @@ describe("Verify the Modified label functionality",
             _NavigationSection.navigateToCommercialUnits();
             Property._CommercialUnits.verifyThatPageIsOpened();
             Property._CommercialUnits.Page.modifiedLabel(false).should('not.exist');
-            Property._CommercialUnits.Page.formEditBtn(0).scrollIntoView().click();
+            Property._CommercialUnits.Page.formEditBtn().scrollIntoView().click();
 
             cy.stepInfo("2. Edit comment and click on the Save button.");
             Property._CommercialUnits.Page.commercialUnitSFDiscussionTextArea.clear().type(testData.text);
-            Property._CommercialUnits.Page.formSaveBtn(0).first().click();
+            Property._CommercialUnits.Page.formSaveBtn().click();
 
             cy.stepInfo("3.  Verify that the Modified label appears after saving changes made to commentary.");
             Property._CommercialUnits.Page.modifiedLabel().should('exist');

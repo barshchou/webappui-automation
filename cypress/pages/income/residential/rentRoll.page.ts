@@ -1,6 +1,7 @@
-import BasePage from "../../base/base.page";
+import ResidentialRentRollSharedPage from "../../shared_components/residentialRentRoll.shared.page";
 
-class InPlaceRentRollPage extends BasePage {
+class InPlaceRentRollPage extends ResidentialRentRollSharedPage {
+
     get numberOfResidentialUnitsField() {return cy.get("*[data-qa='number-of-items-input'] input");}
 
     get goToPropSummaryButton() {return cy.get("[aria-label='Go To Property Summary'] [href$='/property-summary']");}
@@ -27,53 +28,17 @@ class InPlaceRentRollPage extends BasePage {
 
     get importDataButton() {return cy.get("*[data-qa='import-data-btn']");}
 
-    get isInspectedColumnCells() {return cy.get("*[data-qa^='isInspected']");}
-
-    get rentTypeCells() {return cy.get("[data-qa^=rentType]");}
-
     get textAreaToInput() {return cy.get("div:not([class*='hidden']) > *[class='handsontableInput']");}
-
-    getIsInspectedCheckboxByRowNumber(number) {return cy.get(`[data-qa^=isInspected-${number}] input`);}
-
-    get unitNumberCells() {return cy.get("[data-qa^='number'][data-qa$=cell]");}
-
-    get roomsCells() {return cy.get("[data-qa^=rooms]");}
-
-    get bedroomsCells() {return cy.get("[data-qa^=bedrooms]");}
-
-    get leaseStatusCells() {return cy.get("[data-qa^=leaseStatus]");}
-
-    get rentForecastCells() {return cy.get("[data-qa^=rentForecast]");}
-
-    get monthlyTotalForecast() {return cy.get("[data-qa='monthlyTotal-rent']");}
-
-    get annualTotalForecast() {return cy.get("[data-qa='annualTotal-rent']");}
-
-    get monthlyTotalRent() {return cy.get("[data-qa='monthlyTotal-rent']");}
-
-    get annualTotalRent() {return cy.get("[data-qa='annualTotal-rent']");}
 
     get rentRollCommentary() {return cy.get("[data-qa*='currentRentRollDiscussion.commentary']");}
 
     get monthlyRentCells() {return cy.get("[data-qa^=rent-][data-qa$=cell]");}
 
-    get closeIcon() {return cy.get("[data-qa=close-icon]");}
-
-    get numberCells() {return cy.get("[data-qa^='#']");}
-
-    get outdoorSpaceCells() {return cy.get("[data-qa^=outdoor][data-qa$=cell]");}
-
     get tableListboxOptions() {return cy.get("td.listbox");}
 
-    get squareFootageCells() {return cy.get("[data-qa^=squareFootage][data-qa$=cell]");}
-
-    get bathroomsCells() {return cy.get("[data-qa^=bathrooms][data-qa$=cell]");}
-
-    get unitTypeCells() {return cy.get("[data-qa^=unitLayout][data-qa$=cell]");}
-
+    // TODO: Fix locator for this cells after https://bowery.atlassian.net/browse/WEB-5364 bug fix and move methods and elements, related to it to shared components
     get rentSFCell() {return cy.xpath("//*[contains(@class, 'readOnly') and not(contains(@data-qa, 'cell'))]");}
 
-    get rentRoomCell() {return cy.get("[data-qa^='rent/room']");}
 }
 
 export default new InPlaceRentRollPage();

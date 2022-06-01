@@ -1,11 +1,10 @@
-import { Tag } from './../../../../utils/tags.utils';
 import { PreviewEdit, Report } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import testData from '../../../../fixtures/not_full_reports/report/client/QA-4630.fixture';
 
 describe("Verify the functionality of the NYCB Application No. (optional) field",
-    { tags:[ Tag.report, Tag.client ] }, () => {
+    { tags:[ "@report", "@client" ] }, () => {
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
     });
@@ -14,8 +13,8 @@ describe("Verify the functionality of the NYCB Application No. (optional) field"
         cy.stepInfo("1. Proceed to the Report > Client page.");
         _NavigationSection.navigateToClientPage();
         Report._Client.verifyProgressBarNotExist()
-            .Page.formEditBtn(0).click();
-        Report._Client.Page.formEditBtn(0).click();
+            .Page.formEditBtn().click();
+        Report._Client.Page.formEditBtn().click();
 
         cy.stepInfo("2. Try to enter any num. value / non-integer / non-num. / long value in the Client File Number field (NO validation).");
         Report._Client.enterNycbApplicationNumber(testData.clientFileNumber);

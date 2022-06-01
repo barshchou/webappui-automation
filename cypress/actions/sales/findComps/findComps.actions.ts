@@ -1,10 +1,25 @@
-import findCompsPage from "../../pages/sales/findComps.page";
-import { getUploadFixture } from "../../../utils/fixtures.utils";
-import { isNumber, numberWithCommas } from "../../../utils/numbers.utils";
-import BaseActionsExt from "../base/base.actions.ext";
-import { Alias } from "../../utils/alias.utils";
+import { findCompsPage } from "../../../pages/sales/findComps.page";
+import { getUploadFixture } from "../../../../utils/fixtures.utils";
+import { isNumber, numberWithCommas } from "../../../../utils/numbers.utils";
+import BaseActionsExt from "../../base/base.actions.ext";
+import saleInfoFormActions from "./drm/saleInfoForm.actions";
+import propertDescActions from "./drm/propertyDescForm.actions";
+import propertyInfoFormActions from "./drm/propertyInfoForm.actions";
+import { Alias } from "../../../utils/alias.utils";
 
 class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
+
+    get SaleInfo(){
+        return saleInfoFormActions;
+    }
+
+    get PropertyDesc(){
+        return propertDescActions;
+    }
+
+    get PropertyInfo(){
+        return propertyInfoFormActions;
+    }
 
     addExistingComparable(address: string): FindCompsActions {
         this.clickCreateCompButton()
@@ -74,9 +89,9 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
     }
 
     checkFindSingleSalesComp(){
-        cy.wait(`@${Alias.gql.FindSingleSalesComp}`, { timeout:70000 }).then((interception) => {
-            cy.log(interception.response.body.data.findSingleSalesComp.salesEventId);
-            cy.wrap(interception.response.body.data.findSingleSalesComp.salesEventId)
+        cy.wait(`@${Alias.gql.FindTransactionByIdAndVersion}`, { timeout:70000 }).then((interception) => {
+            cy.log(interception.response.body.data.findTransactionByIdAndVersion.salesEventId);
+            cy.wrap(interception.response.body.data.findTransactionByIdAndVersion.salesEventId)
             .as(Alias.salesEventId);
         });
         return this; 

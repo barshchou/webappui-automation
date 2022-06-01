@@ -1,9 +1,17 @@
 import BasePage from "../base/base.page";
 
 class KeyInfoPage extends BasePage{
+    get keyInfoTitle() {return cy.get("*[data-qa='keyInfo']");}
+
     get purposeDropdown() {return cy.get("*[data-qa='intendedUse-form-control'] [role='button']");}
 
     getPurposeOptionByValue(value) {return cy.get(`li[role='option'][data-value='${value}']`);}
+
+    get asIsMarketInterestsGroup() {return cy.get("*[data-qa='interestAppraisedAsIsMarketValue-radio-group']");}
+
+    get asCompleteInterestsGroup() {return cy.get("*[data-qa='interestAppraisedAsComplete-radio-group']");}
+
+    get asStabilizedInterestsGroup() {return cy.get("*[data-qa='interestAppraisedAsStabilized-radio-group']");}
 
     get asIsMarketInterests() {return cy.get("*[name='interestAppraisedAsIsMarketValue']");}
 
@@ -17,7 +25,7 @@ class KeyInfoPage extends BasePage{
 
     get uploadFileInput() {return cy.get("*[data-qa='dropzone-container'] input");}
 
-    get uploadButton() {return cy.get("*[data-qa='upload-btn']");}
+    get uploadButton() {return cy.xpath("//*[contains(text(), 'Drag and drop or browse files below')]//following::button[1]");}
 
     get insertButton() {return cy.get("*[data-qa='insert-btn']");}
 
@@ -27,9 +35,31 @@ class KeyInfoPage extends BasePage{
 
     get clickHereText() {return cy.contains("Click here or drag file to upload");}
 
+    get modalUploadButton() {return cy.get("*[data-qa='upload-btn']");}
+
     get textBoxPropertyRightsAppraised() {
-        return cy.xpath('//*[@data-qa="letterOfTransmittalPurpose-generated-comment-wrapper"]/preceding-sibling::div//p');
+        return cy.xpath("//*[contains(text(), 'Property Rights Appraised')]//following::*[@data-slate-editor][1]");
     }
+
+    get wrapperLetterOfTransmittalPurpose() {return cy.get("*[data-qa='letterOfTransmittalPurpose-generated-comment-wrapper']");}
+
+    get jobNumberTextInput() {return cy.get("*[data-qa='job-number-text-input'] input");}
+
+    get wrapperDefinitionOfMarketValue() {return cy.get("*[data-qa='definition-of-market-value-tile']");}
+    
+    textBoxDefinitionOfMarketValue(index = 1) {return cy.xpath(`//*[contains(@data-qa, 'definition-of-market-value-tile')]//following::*[@data-slate-editor][${index}]`);}
+
+    get tooltipDefinitionOfMarketValue() {return cy.get("*[role='tooltip']");}
+
+    get addPdfDocumentButton() {return cy.get("*[data-qa='add-pdf-btn']");}
+
+    get addWordDocumentButton() {return cy.get("*[data-qa='add-word-btn']");}
+
+    get narrativeSuggestionsList() {return cy.get("[data-qa='narrative-suggestions-list'] > ul");}
+
+    iconDefinitionOfMarketValue(index = 1) {return cy.xpath(`//*[contains(@data-qa, 'definition-of-market-value-tile')]//following::*[@data-icon='info-circle'][${index}]`);}
+
+    get inputToCheckMyDateIsDifferent() {return cy.get("*[data-qa='isDifferentDateOfValuation']");}
 }
 
 export default new KeyInfoPage();
