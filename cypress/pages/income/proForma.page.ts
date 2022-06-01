@@ -3,6 +3,8 @@ import BasePage from "../base/base.page";
 
 class ProFormaPage extends BasePage {
 
+    columnHeaderItem(columnName: string) {return cy.xpath(`(//div[@role="columnheader"][@col-id='${columnName}'])`);}
+
     get residentialVCLossLabelCell() {return cy.xpath('(//div[@row-id="Potential Gross Income_2"])[2]//following-sibling::div[@role="row"]').eq(0);}
 
     get residentialVCLossTotal() {return this.residentialVCLossLabelCell.children('[col-id="total"]');}
