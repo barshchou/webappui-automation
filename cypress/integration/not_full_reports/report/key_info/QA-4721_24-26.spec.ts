@@ -102,7 +102,7 @@ describe(`Verify the Save and Save & Continue button functionality on the Report
         deleteReport(testData.reportCreationData.reportNumber);
     });
 
-    it.only("[QA-4726]", () => {
+    it("[QA-4726]", () => {
         cy.stepInfo("1. Proceed to the Report > Key Info page");
         _NavigationSection.navigateToReportInformation()
             .clickYesButton();
