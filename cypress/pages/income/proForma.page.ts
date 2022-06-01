@@ -3,6 +3,7 @@ import enums from "../../enums/enums";
 import BasePage from "../base/base.page";
 
 class ProFormaPage extends BasePage {
+    columnHeaderItem(columnName: string) {return cy.xpath(`(//div[@role="columnheader"][@col-id='${columnName}'])`);}
 
     residentialVCLossLabelCell(categoryName: string, colId = 'label') {return cy.get(`[row-id^='Less ${categoryName}'] [role=gridcell][col-id=${colId}]`);}
 
