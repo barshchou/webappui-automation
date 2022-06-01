@@ -13,6 +13,7 @@
   - [GH Actions debug](#gh_actions_debug)
   - [Validation of export](#export_validation)
 - [Useful VS Code extensions](#vs_code_extensions)
+- [Using Husky](#husky_usage)
 
 ## About <a id="about"></a>
 This repository contains the code of end-to-end tests, written in  Cypress framework (https://docs.cypress.io/guides/getting-started/writing-your-first-test). Main pattern used for this project - is Page Object. We describe elements of pages and the way they can behave (*pages* folder). We describe actions, which we use to interact with pages (*actions* folder). And describe test specs (*integration* folder) - things/flows we want to test and verify on our pages, using actions to put the app in a required state.
@@ -118,3 +119,29 @@ List of useful extensions:
   - GitLens
   - GitHub Pull Requests
   - Jira and Bitbucket (you will use only Jira integration)
+
+## Using Husky <a id="husky_usage"></a>
+
+Husky is a tool that allows custom scripts to be ran against your repository.
+Currently husky pre-commit hook is set up in that way so 2 scripts are executed:
+*lint:run* and *tsc:check*.
+
+**Create a hook**
+
+To add a command to a hook or create a new one, use `husky add <file> [cmd]`
+
+`npx husky add .husky/pre-commit "npm test"`
+  
+`git add .husky/pre-commit`
+
+Try to make a commit
+`git commit -m "Keep calm and commit"`
+
+If *_npm_* *_test_* command fails, your commit will be automatically aborted.
+
+**Note**
+  
+Husky is currently not working with VScode UI commits, so to prevent "broken" commits get into repository
+use git commands in terminal
+
+[husky documentation](https://typicode.github.io/husky/#/)

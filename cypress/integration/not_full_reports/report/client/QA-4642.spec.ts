@@ -2,7 +2,6 @@ import testData from "../../../../fixtures/not_full_reports/report/client/QA-464
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Report from "../../../../actions/report/report.manager";
-import { Tag } from "../../../../utils/tags.utils";
 
 const checkChipsOptions = (suggestion: string, optionName: string, textBoxName: "IntendedUserTextBox" | "IdentificationOfClientTextBox") => {
     const interactWithText = (textBox: Cypress.Chainable, indexForElement: number) => {
@@ -25,7 +24,7 @@ const checkChipsOptions = (suggestion: string, optionName: string, textBoxName: 
  * ernst: WARN: remove skip after fixing this test
  */
 describe.skip("Verify the Client Guidelines Discussion on the page", 
-    { tags: [ Tag.report, Tag.client ] }, () => {
+    { tags: [ "@report", "@client" ] }, () => {
 
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
@@ -34,8 +33,8 @@ describe.skip("Verify the Client Guidelines Discussion on the page",
     it("Test body", () => {
         NavigationSection.navigateToClientPage().verifyProgressBarNotExist();
 
-        Report.Client.Page.formEditBtn(0).click();
-        Report.Client.Page.formEditBtn(0).click();
+        Report.Client.Page.formEditBtn().click();
+        Report.Client.Page.formEditBtn().click();
 
         for(let [ suggestion, option ] of testData.linkedChipsDropdownOptions){
             checkChipsOptions(suggestion, option, "IntendedUserTextBox");

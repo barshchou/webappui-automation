@@ -1,11 +1,7 @@
 import testData from "../../../../../fixtures/not_full_reports/income/commercial/stabilized_rent_roll/QA-4607.fixture";
 import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
-import NavigationSection from "../../../../../actions/base/navigationSection.actions";
-import Property from "../../../../../actions/property/property.manager";
-import Income from "../../../../../actions/income/income.manager";
-import { Tag } from "../../../../../utils/tags.utils";
-
-
+import { _NavigationSection } from "../../../../../actions/base";
+import { Income, Property } from "../../../../../actions";
 
 /**
  * ernst: This test needs to be skipped due to drag and drop issues,
@@ -15,8 +11,8 @@ import { Tag } from "../../../../../utils/tags.utils";
  * TODO: Make draggable components accessible to Cypress
 */
 
-describe.skip("Verify the Commercial Stabilized Rent Roll table", 
-    { tags: [ Tag.income, Tag.commercial, Tag.stabilized_rent_roll ] }, () => {
+    describe.skip("Verify the Commercial Stabilized Rent Roll table", 
+    { tags: [ "@income", "@commercial", "@stabilized_rent_roll" ] }, () => {
         
     before("Login, create report", () => {
         cy.stepInfo(`
@@ -29,22 +25,29 @@ describe.skip("Verify the Commercial Stabilized Rent Roll table",
         - On the Income > Commercial > Rent Reconciliation, the Market Rent Conclusion field is filled with any value;
         `);
         createReport(testData.reportCreationData);
-        NavigationSection.Actions.clickPropertyButton()
-        .verifyProgressBarNotExist()
-        .clickCommercialUnits()
-        .clickYesButton().verifyProgressBarNotExist();
-        Property.CommercialUnits.enterUnitSFByUnitIndex(testData.squareFeet)
-        .clickSaveButton();
-        NavigationSection.Actions.clickIncomeApproachButton()
-        .clickCommercialArrow().clickCommercialRentRollButton()
-        .pause();
-        Income.Commercial.InPlaceRentRoll.chooseLeaseStatusByRowNumber("Vacant").pause();
-
-        NavigationSection.Actions.clickIncomeApproachButton()
-        .clickCommercialArrow().clickCommercialCompGroups()
-        .clickYesButton().verifyProgressBarNotExist().pause();
+        _NavigationSection.Actions.clickPropertyButton()
+            .verifyProgressBarNotExist()
+            .clickCommercialUnits()
+            .clickYesButton().verifyProgressBarNotExist();
+        Property._CommercialUnits.enterUnitSFByUnitIndex(testData.squareFeet)
+            .clickSaveButton();
+            _NavigationSection.Actions.clickIncomeApproachButton()
+            .clickCommercialArrow()
+            .clickCommercialRentRollButton();
         
-        Income.Commercial.CompGroups.Actions.addCompGroup("QA_4607_Comp_Group").pause();
+        Income._CommercialManager.InPlaceRentRoll.chooseLeaseStatusByRowNumber("Vacant");
+
+        _NavigationSection.Actions.clickIncomeApproachButton()
+        .clickCommercialArrow().clickCommercialCompGroups()
+        .clickYesButton().verifyProgressBarNotExist();
+        
+        let compGroup = "QA_4607_Comp_Group";
+        Income._CommercialManager.CompGroups.addCompGroup(compGroup);
+
+        const subject = cy.get(Income._CommercialManager.CompGroups.Page.getDragableElement(1));
+        subject.dragAndDrop(Income._CommercialManager.CompGroups.Page.getDragableElement(1), 
+            Income._CommercialManager.CompGroups.Page.getDragableArea(compGroup, 1));
+
     });
 
     it("Test body", () => {  

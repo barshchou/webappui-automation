@@ -4,7 +4,7 @@ class ExpenseHistoryPage extends BasePage {
 
     get expensePeriodDropdown() { return cy.get("[data-qa=expensePeriod-select-list] [data-qa=select-value]"); }
 
-    getDropdownOptionByValue(value) { return cy.get(`li[data-value='${value}']`); }
+    getDropdownOptionByValue(value: string) { return cy.get(`li[data-value='${value}']`); }
 
     get expenseYearInput() { return cy.get("[name=expenseYear]"); }
 
@@ -27,6 +27,8 @@ class ExpenseHistoryPage extends BasePage {
     }
 
     getUnifiedAverageCell(cellName: string) { return cy.get(`[row-id=${cellName}] [col-id=average]`); }
+
+    getUtilityExpensesOption(optionName: string) { return cy.get(`[name=utilitiesExpensesMode][value=${optionName}]`); }
 
 }
 

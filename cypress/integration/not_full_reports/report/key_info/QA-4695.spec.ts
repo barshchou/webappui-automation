@@ -1,11 +1,10 @@
-import { Tag } from './../../../../utils/tags.utils';
 import { Report } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import testData from '../../../../fixtures/not_full_reports/report/key_info/QA-4695.fixture';
 
 describe("[QA-4695] Verify the Save button functionality on the Report > Client page",
-    { tags:[ Tag.report, Tag.client ] }, () => {
+    { tags:[ "@report", "@key_info" ] }, () => {
         
     before("Login, create report", () => {
         createReport(testData.reportCreationData);

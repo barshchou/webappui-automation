@@ -1,6 +1,8 @@
 import BasePage from "../base/base.page";
 
 class SiteDescriptionPage extends BasePage{
+    get siteDescriptionTitle() {return cy.get("[data-qa=siteDescription]");}
+
     get transportationCommEdit() {return cy.get("*[data-qa*='transportationDiscussion'] [data-qa*='edit-btn']");}
 
     get transportationCommentary() {return cy.get("*[name='transportationDiscussion.commentary']");}

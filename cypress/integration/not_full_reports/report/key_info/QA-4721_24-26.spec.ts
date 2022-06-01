@@ -21,7 +21,7 @@ describe(`Verify the Save and Save & Continue button functionality on the Report
         Report._KeyInfo.Page.textBoxPropertyRightsAppraised.should("include.text", testData.verifyTexValue);
         Report._KeyInfo.enterDefinitionMarketValue(testData.enterValue, true, false, false);
         Report._KeyInfo.clickNarrativeSuggestions(testData.listValue, 1);
-        Report._KeyInfo.Page.textBoxDefinitionOfMarketValue.should("include.text", testData.verifyTexValue);
+        Report._KeyInfo.Page.textBoxDefinitionOfMarketValue().should("include.text", testData.verifyTexValue);
         cy.wait(500);
         Report._KeyInfo.clickSaveButton();
         cy.reload();
@@ -29,7 +29,7 @@ describe(`Verify the Save and Save & Continue button functionality on the Report
 
         cy.stepInfo("3. Verify that the changes are saved");
         Report._KeyInfo.Page.textBoxPropertyRightsAppraised.should("include.text", testData.verifyTexValue);
-        Report._KeyInfo.Page.textBoxDefinitionOfMarketValue.should("include.text", testData.verifyTexValue);
+        Report._KeyInfo.Page.textBoxDefinitionOfMarketValue().should("include.text", testData.verifyTexValue);
 
         deleteReport(testData.reportCreationData.reportNumber);
     });
@@ -45,7 +45,7 @@ describe(`Verify the Save and Save & Continue button functionality on the Report
         Report._KeyInfo.Page.textBoxPropertyRightsAppraised.should("include.text", testData.verifyTexValue);
         Report._KeyInfo.enterDefinitionMarketValue(testData.enterValue, true, false, false);
         Report._KeyInfo.clickNarrativeSuggestions(testData.listValue, 1);
-        Report._KeyInfo.Page.textBoxDefinitionOfMarketValue.should("include.text", testData.verifyTexValue);
+        Report._KeyInfo.Page.textBoxDefinitionOfMarketValue().should("include.text", testData.verifyTexValue);
         cy.wait(500);
         Report._KeyInfo.clickSaveContinueButton();
 
@@ -54,7 +54,7 @@ describe(`Verify the Save and Save & Continue button functionality on the Report
         cy.go("back");
         Report._KeyInfo.clickYesButton();
         Report._KeyInfo.Page.textBoxPropertyRightsAppraised.should("include.text", testData.verifyTexValue);
-        Report._KeyInfo.Page.textBoxDefinitionOfMarketValue.should("include.text", testData.verifyTexValue);
+        Report._KeyInfo.Page.textBoxDefinitionOfMarketValue().should("include.text", testData.verifyTexValue);
 
         deleteReport(testData.reportCreationData.reportNumber);
     });
@@ -70,7 +70,7 @@ describe(`Verify the Save and Save & Continue button functionality on the Report
         Report._KeyInfo.Page.textBoxPropertyRightsAppraised.should("include.text", testData.verifyTexValue);
         Report._KeyInfo.enterDefinitionMarketValue(testData.enterValue, true, false, false);
         Report._KeyInfo.clickNarrativeSuggestions(testData.listValue, 1);
-        Report._KeyInfo.Page.textBoxDefinitionOfMarketValue.should("include.text", testData.verifyTexValue);
+        Report._KeyInfo.Page.textBoxDefinitionOfMarketValue().should("include.text", testData.verifyTexValue);
 
         cy.stepInfo("3. Try to proceed on any other page and verify that the Unsaved changes modal is displayed");
         _NavigationSection.clickPreviewEditButton()
@@ -78,7 +78,7 @@ describe(`Verify the Save and Save & Continue button functionality on the Report
             .verifyUnsavedChangesModal()
             .clickYesButton();
         Report._KeyInfo.Page.textBoxPropertyRightsAppraised.should("include.text", testData.verifyTexValue);
-        Report._KeyInfo.Page.textBoxDefinitionOfMarketValue.should("include.text", testData.verifyTexValue);
+        Report._KeyInfo.Page.textBoxDefinitionOfMarketValue().should("include.text", testData.verifyTexValue);
 
         cy.stepInfo("4. Try to proceed on any other page from the Key Info page and verify that the Unsaved changes modal is displayed");
         _NavigationSection.clickReportButton()
@@ -88,7 +88,7 @@ describe(`Verify the Save and Save & Continue button functionality on the Report
         Report._KeyInfo.Page.textBoxPropertyRightsAppraised.should("include.text", testData.verifySecondTexValue);
         Report._KeyInfo.enterDefinitionMarketValue(testData.enterSecondValue, false, false, false);
         Report._KeyInfo.clickNarrativeSuggestions(testData.secondListValue, 1);
-        Report._KeyInfo.Page.textBoxDefinitionOfMarketValue.should("include.text", testData.verifySecondTexValue);
+        Report._KeyInfo.Page.textBoxDefinitionOfMarketValue().should("include.text", testData.verifySecondTexValue);
 
         cy.stepInfo("5 Verify that the changes are NOT saved on the Key Info page");
         _NavigationSection.clickPreviewEditButton()
@@ -97,7 +97,7 @@ describe(`Verify the Save and Save & Continue button functionality on the Report
             .clickNoButton();
         cy.go("back");
         Report._KeyInfo.Page.textBoxPropertyRightsAppraised.should("not.include.text", testData.verifySecondTexValue);
-        Report._KeyInfo.Page.textBoxDefinitionOfMarketValue.should("not.include.text", testData.verifySecondTexValue);
+        Report._KeyInfo.Page.textBoxDefinitionOfMarketValue().should("not.include.text", testData.verifySecondTexValue);
 
         deleteReport(testData.reportCreationData.reportNumber);
     });

@@ -1,263 +1,141 @@
-import BaseActions from "../base/base.actions";
 import utilitiesPage from "../../pages/property/utilities.page";
+import BaseActionsExt from "../base/base.actions.ext";
 
-class UtilitiesActions extends BaseActions{
-
-    /**
-     *
-     * @returns {UtilitiesActions}
-     */
-    checkHeatingSystem() {
+class UtilitiesActions extends BaseActionsExt<typeof utilitiesPage>{
+    checkHeatingSystem(): UtilitiesActions {
         utilitiesPage.heatingSystemCheckbox.check().should("have.value", "true");
         return this;
     }
 
-    /**
-     *
-     * @param {string} typeValue
-     * @param {number} systemNumber
-     * @returns {UtilitiesActions}
-     */
-    selectHeatingSystemType(typeValue, systemNumber = 0) {
+    selectHeatingSystemType(typeValue: string, systemNumber = 0): UtilitiesActions {
         utilitiesPage.getHeatingSystemTypeDropdownBySystemNumber(systemNumber).click();
         utilitiesPage.getDropdownOptionByValue(typeValue).click();
         return this;
     }
 
-    /**
-     *
-     * @param {string} locationValue
-     * @param {number} systemNumber
-     * @returns {UtilitiesActions}
-     */
-    selectHeatingSystemLocation(locationValue, systemNumber = 0) {
+    selectHeatingSystemLocation(locationValue: string, systemNumber = 0): UtilitiesActions {
         utilitiesPage.getHeatingSystemLocationDropdownBySystemNumber(systemNumber).click();
         utilitiesPage.getDropdownOptionByValue(locationValue).click();
         return this;
     }
 
-    /**
-     * @param {Readonly<{type: string, location: string, systemNumber: number}>} heatingSystemData
-     * @returns {UtilitiesActions}
-     */
-    addHeatingSystemParameters(heatingSystemData) {
+    addHeatingSystemParameters(heatingSystemData: Readonly<{type: string, location: string, systemNumber: number}>): UtilitiesActions {
         this.selectHeatingSystemType(heatingSystemData.type, heatingSystemData.systemNumber)
             .selectHeatingSystemLocation(heatingSystemData.location, heatingSystemData.systemNumber);
         return this;
     }
 
-    /**
-     *
-     * @returns {UtilitiesActions}
-     */
-    checkCoolingSystem() {
+    checkCoolingSystem(): UtilitiesActions {
         utilitiesPage.coolingSystemCheckbox.check().should("have.value", "true");
         return this;
     }
 
-    /**
-     *
-     * @param {string} typeValue
-     * @param {number} systemNumber
-     * @returns {UtilitiesActions}
-     */
-    selectCoolingSystemType(typeValue, systemNumber = 0) {
+    selectCoolingSystemType(typeValue: string, systemNumber = 0): UtilitiesActions {
         utilitiesPage.getCoolingSystemTypeDropdownBySystemNumber(systemNumber).click();
         utilitiesPage.getDropdownOptionByValue(typeValue).click();
         return this;
     }
 
-    /**
-     *
-     * @param {string} locationValue
-     * @param {number} systemNumber
-     * @returns {UtilitiesActions}
-     */
-    selectCoolingSystemLocation(locationValue, systemNumber = 0) {
+    selectCoolingSystemLocation(locationValue: string, systemNumber = 0): UtilitiesActions {
         utilitiesPage.getCoolingSystemLocationDropdownBySystemNumber(systemNumber).click();
         utilitiesPage.getDropdownOptionByValue(locationValue).click();
         return this;
     }
 
-    /**
-     *
-     * @param {Readonly<{type: string, location: string, systemNumber: number}>} coolingData
-     * @returns {UtilitiesActions}
-     */
-    addCoolingSystemParameters(coolingData) {
+    addCoolingSystemParameters(coolingData: Readonly<{type: string, location: string, systemNumber: number}>): UtilitiesActions {
         this.selectCoolingSystemType(coolingData.type, coolingData.systemNumber)
             .selectCoolingSystemLocation(coolingData.location, coolingData.systemNumber);
         return this;
     }
 
-    /**
-     *
-     * @param {string} commentaryToBe
-     * @returns {UtilitiesActions}
-     */
-    verifyHeatingCoolingCommentary(commentaryToBe) {
+    verifyHeatingCoolingCommentary(commentaryToBe: string): UtilitiesActions {
         utilitiesPage.heatingCoolingCommentary.should("contain.text", commentaryToBe);
         return this;
     }
 
-    /**
-     *
-     * @returns {UtilitiesActions}
-     */
-    checkGasMeters() {
+    checkGasMeters(): UtilitiesActions {
         utilitiesPage.gasMetersCheckbox.check().should("have.value", "true");
         return this;
     }
 
-    /**
-     *
-     * @param {string} typeValue
-     * @returns {UtilitiesActions}
-     */
-    selectGasMetersType(typeValue) {
+    selectGasMetersType(typeValue: string): UtilitiesActions {
         utilitiesPage.gasMetersTypeDropdown.click();
         utilitiesPage.getDropdownOptionByValue(typeValue).click();
         return this;
     }
 
-    /**
-     *
-     * @param {string} locationValue
-     * @returns {UtilitiesActions}
-     */
-    selectGasMetersLocation(locationValue) {
+    selectGasMetersLocation(locationValue: string): UtilitiesActions {
         utilitiesPage.gasMetersLocationDropdown.click();
         utilitiesPage.getDropdownOptionByValue(locationValue).click();
         return this;
     }
 
-    /**
-     *
-     * @param {Readonly<{type: string, location: string}>} gasMetersData
-     * @returns {UtilitiesActions}
-     */
-    addGasMetersParameters(gasMetersData) {
+    addGasMetersParameters(gasMetersData: Readonly<{type: string, location: string}>): UtilitiesActions {
         this.selectGasMetersType(gasMetersData.type)
             .selectGasMetersLocation(gasMetersData.location);
         return this;
     }
 
-    /**
-     *
-     * @param {string} commentaryToBe
-     * @returns {UtilitiesActions}
-     */
-    verifyGasMetersCommentary(commentaryToBe) {
+    verifyGasMetersCommentary(commentaryToBe: string): UtilitiesActions {
         utilitiesPage.gasMetersCommentary.should("contain.text", commentaryToBe);
         return this;
     }
 
-    /**
-     *
-     * @returns {UtilitiesActions}
-     */
-    checkElectricMetersCheckbox() {
+    checkElectricMetersCheckbox(): UtilitiesActions {
         utilitiesPage.electricMetersCheckbox.check().should("have.value", "true");
         return this;
     }
 
-    /**
-     *
-     * @param {string} typeValue
-     * @returns {UtilitiesActions}
-     */
-    selectElectricMetersType(typeValue) {
+    selectElectricMetersType(typeValue: string): UtilitiesActions {
         utilitiesPage.electricMetersTypeDrop.click();
         utilitiesPage.getDropdownOptionByValue(typeValue).click();
         return this;
     }
 
-    /**
-     *
-     * @param {string} locationValue
-     * @returns {UtilitiesActions}
-     */
-    selectElectricMetersLocation(locationValue) {
+    selectElectricMetersLocation(locationValue: string): UtilitiesActions {
         utilitiesPage.electricMetersLocationDrop.click();
         utilitiesPage.getDropdownOptionByValue(locationValue).click();
         return this;
     }
 
-    /**
-     *
-     * @param {Readonly<{type: string, location: string}>} electricMetersData
-     * @returns {UtilitiesActions}
-     */
-    addElectricMetersParameters(electricMetersData) {
+    addElectricMetersParameters(electricMetersData: Readonly<{type: string, location: string}>): UtilitiesActions {
         this.selectElectricMetersType(electricMetersData.type)
             .selectElectricMetersLocation(electricMetersData.location);
         return this;
     }
 
-    /**
-     *
-     * @param {string} commentaryToBe
-     * @returns {UtilitiesActions}
-     */
-    verifyElectricMetersCommentary(commentaryToBe) {
+    verifyElectricMetersCommentary(commentaryToBe: string): UtilitiesActions {
         utilitiesPage.electricMetersCommentary.should("contain.text", commentaryToBe);
         return this;
     }
 
-    /**
-     *
-     * @returns {UtilitiesActions}
-     */
-    checkHotWaterSystemsCheckbox() {
+    checkHotWaterSystemsCheckbox(): UtilitiesActions {
         utilitiesPage.hotWaterSystemsCheckbox.check().should("have.value", "true");
         return this;
     }
 
-    /**
-     *
-     * @param {string} typeValue
-     * @param {number} systemNumber
-     * @returns {UtilitiesActions}
-     */
-    selectHotWaterSystemTypeBySystemNumber(typeValue, systemNumber = 0) {
+    selectHotWaterSystemTypeBySystemNumber(typeValue: string, systemNumber = 0): UtilitiesActions {
         utilitiesPage.getHotWaterSystemTypeDropBySystemNumber(systemNumber).click();
         utilitiesPage.getDropdownOptionByValue(typeValue).click();
         return this;
     }
 
-    /**
-     *
-     * @param {string} locationValue
-     * @param {number} systemNumber
-     * @returns {UtilitiesActions}
-     */
-    selectHotWaterSystemLocationBySystemNumber(locationValue, systemNumber = 0) {
+    selectHotWaterSystemLocationBySystemNumber(locationValue: string, systemNumber = 0): UtilitiesActions {
         utilitiesPage.getHotWaterSystemLocationDropBySystemNumber(systemNumber).click();
         utilitiesPage.getDropdownOptionByValue(locationValue).click();
         return this;
     }
 
-
-    /**
-     *
-     * @param {Readonly<{type: string, location: string, systemNumber: number}>} hotWaterSystemData
-     * @returns {UtilitiesActions}
-     */
-    addHotWaterSystemParameters(hotWaterSystemData) {
+    addHotWaterSystemParameters(hotWaterSystemData: Readonly<{type: string, location: string, systemNumber: number}>): UtilitiesActions {
         this.selectHotWaterSystemTypeBySystemNumber(hotWaterSystemData.type, hotWaterSystemData.systemNumber)
             .selectHotWaterSystemLocationBySystemNumber(hotWaterSystemData.location, hotWaterSystemData.systemNumber);
         return this;
     }
-
-    /**
-     *
-     * @param {string} commentaryToBe
-     * @returns {UtilitiesActions}
-     */
-    verifyHotWaterSystemCommentary(commentaryToBe) {
+    
+    verifyHotWaterSystemCommentary(commentaryToBe: string): UtilitiesActions {
         utilitiesPage.hotWaterSystemCommentary.should("contain.text", commentaryToBe);
         return this;
     }
 }
 
-export default new UtilitiesActions();
+export default new UtilitiesActions(utilitiesPage);

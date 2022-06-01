@@ -14,5 +14,7 @@ class ReviewExportPage extends BasePage {
     get generateXmlBtn(){
         return cy.get('[data-qa="generate-xml-btn"]').should("be.visible");
     }
+
+    get statusBar() {return cy.get("[data-qa=status]");}
 }
 export default new ReviewExportPage();

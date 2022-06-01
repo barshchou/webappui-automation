@@ -2,10 +2,9 @@ import testData from "../../../../fixtures/not_full_reports/property/commercial_
 import { Property } from "../../../../actions";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
-import { Tag } from "../../../../utils/tags.utils";
 
 describe("Verify the functionality of the Street Type radio button", 
-    { tags:[ Tag.property, Tag.commercial_units ] }, () => {
+    { tags:[ "@property", "@commercial_units" ] }, () => {
 
     before("Login, create report", () => {
 
