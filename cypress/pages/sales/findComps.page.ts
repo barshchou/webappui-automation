@@ -25,8 +25,8 @@ class FindCompsPage extends BasePage {
     get csvInput() {return cy.get("[data-qa=file-input]");}
 
     getSelectCompFromMapButtonByAddress(address) {
-        return cy.get("[class*=address]").filter(`:contains('${address}')`).parent()
-            .siblings("[class*=buttonsColumn]").find("span").contains("Select").parent();
+        return cy.get("[class*=salesCompItemWrapper]", { includeShadowDom: true }).contains(`${address}`).parent()
+        .siblings("[class*=buttonsColumn]").find("span").contains("ADD").parent();
     }
 
     getRemoveSelectedCompButtonByAddress(address) {
@@ -40,8 +40,8 @@ class FindCompsPage extends BasePage {
     }
 
     getRemoveCompFromMapButtonByAddress(address) {
-        return cy.get("[class*=address]").filter(`:contains('${address}')`).parent()
-            .siblings("[class*=buttonsColumn]").find("span").contains("Remove").parent();
+        return cy.get("[class*=salesCompItemWrapper]", { includeShadowDom: true }).contains(`${address}`).parent()
+        .siblings("[class*=buttonsColumn]").find("span").contains("REMOVE").parent();
     }
 
     get reportToSearchCompInput() {return cy.get("[name^=report]");}

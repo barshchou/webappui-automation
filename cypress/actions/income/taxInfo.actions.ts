@@ -1,121 +1,89 @@
-import BaseActions from "../base/base.actions";
 import taxInfoPage from "../../pages/income/taxInfo.page";
 import { getNumberFromDollarNumberWithCommas, numberWithCommas } from "../../../utils/numbers.utils";
+import BaseActionsExt from "../base/base.actions.ext";
 
-class TaxInfoActions extends BaseActions {
+class TaxInfoActions extends BaseActionsExt<typeof taxInfoPage> {
 
-    /**
-     *
-     * @param value
-     * @returns {TaxInfoActions}
-     */
-    checkBasisByValue(value) {
+    checkBasisByValue(value: string): TaxInfoActions {
         taxInfoPage.basisRadio.check(value);
         taxInfoPage.getVerifyBasisRadioInput(value).should("exist");
         return this;
     }
 
-    /**
-     *
-     * @param {number | string} value
-     * @returns {TaxInfoActions}
-     */
-    enterTaxableAssessedLandValue(value) {
+    enterTaxableAssessedLandValue(value: number | string): TaxInfoActions {
         const valueToBe = `$${numberWithCommas(value)}`;
-        taxInfoPage.landActualInput.clear().type(value).should("have.value", valueToBe);
+        taxInfoPage.landActualInput.clear().type(`${value}`).should("have.value", valueToBe);
         return this;
     }
 
-    /**
-     *
-     * @param {string | number} value
-     * @returns {TaxInfoActions}
-     */
-    enterTaxableAssessedBuildingValue(value) {
+    enterTransitionalLandValue(value: number | string): TaxInfoActions {
         const valueToBe = `$${numberWithCommas(value)}`;
-        taxInfoPage.buildingActualInput.clear().type(value).should("have.value", valueToBe);
+        taxInfoPage.landTransitional.clear().type(`${value}`).should("have.value", valueToBe);
         return this;
     }
 
-    /**
-     *
-     * @param {Readonly<{landValue: number | string, buildingValue: number | string}>} currentTaxInfoData
-     * @returns {TaxInfoActions}
-     */
-    verifyTotalAssessedValue(currentTaxInfoData) {
-        const textToBe = `$${numberWithCommas(currentTaxInfoData.landValue + currentTaxInfoData.buildingValue)}`;
+    enterTaxableAssessedBuildingValue(value: string | number): TaxInfoActions {
+        const valueToBe = `$${numberWithCommas(value)}`;
+        taxInfoPage.buildingActualInput.clear().type(`${value}`).should("have.value", valueToBe);
+        return this;
+    }
+
+    enterTransitionalBuildingValue(value: string | number): TaxInfoActions {
+        const valueToBe = `$${numberWithCommas(value)}`;
+        taxInfoPage.buildingTransitionalInput.clear().type(`${value}`).should("have.value", valueToBe);
+        return this;
+    }
+
+    switchIncludeTransitionalCheckbox(value = false): TaxInfoActions {
+        taxInfoPage.includeTransitionalAssessedValueCheckbox
+            .invoke('attr', 'value').then(attr => {
+                cy.log(`${attr}`);
+                if (attr == `${!value}`){
+                    taxInfoPage.includeTransitionalAssessedValueCheckbox.click().should('have.value', `${value}`);
+                }
+            });
+        return this;
+    }
+
+    verifyTotalAssessedValue(currentTaxInfoData: Readonly<{ landValue: number | string; buildingValue: number | string; }>): TaxInfoActions {
+        const textToBe = `$${numberWithCommas(`${currentTaxInfoData.landValue}` + `${currentTaxInfoData.buildingValue}`)}`;
         taxInfoPage.totalTaxableAssessedValue.should("have.text", textToBe);
         return this;
     }
 
-    /**
-     *
-     * @param {Readonly<{landValue: number | string, buildingValue: number | string}>} currentTaxInfoData
-     * @returns {TaxInfoActions}
-     */
-    fillTaxableAssessedValues(currentTaxInfoData) {
+    fillTaxableAssessedValues(currentTaxInfoData: Readonly<{ landValue: number | string; buildingValue: number | string; }>): TaxInfoActions {
         this.enterTaxableAssessedLandValue(currentTaxInfoData.landValue)
             .enterTaxableAssessedBuildingValue(currentTaxInfoData.buildingValue)
             .verifyTotalAssessedValue(currentTaxInfoData);
         return this;
     }
 
-    /**
-     *
-     * @returns {TaxInfoActions}
-     */
-    clickEditTaxRatesButton() {
+    clickEditTaxRatesButton(): TaxInfoActions {
         taxInfoPage.editTaxRatesButton.click();
         return this;
     }
 
-    /**
-     *
-     * @param {string} name
-     * @returns {TaxInfoActions}
-     */
-    enterTaxClassName(name) {
+    enterTaxClassName(name: string): TaxInfoActions {
         taxInfoPage.taxClassNameInput.clear().type(name).should("have.value", name);
         return this;
     }
 
-    /**
-     *
-     * @param {string | number} value
-     * @param {number} index
-     * @returns {TaxInfoActions}
-     */
-    enterTaxRateYearByIndex(value, index = 0) {
-        taxInfoPage.taxRateYearInputs.eq(index).clear().type(value).clear().type(value).should("have.value", value);
+    enterTaxRateYearByIndex(value: string | number, index = 0): TaxInfoActions {
+        taxInfoPage.taxRateYearInputs.eq(index).clear().type(`${value}`).clear().type(`${value}`).should("have.value", value);
         return this;
     }
 
-    /**
-     *
-     * @param {string | number} value
-     * @param {number} index
-     * @returns {TaxInfoActions}
-     */
-    enterTaxRateValueByIndex(value, index = 0) {
-        taxInfoPage.taxRateValueInputs.eq(index).clear().type(value).should("have.value", `${value}%`);
+    enterTaxRateValueByIndex(value: string | number, index = 0): TaxInfoActions {
+        taxInfoPage.taxRateValueInputs.eq(index).clear().type(`${value}`).should("have.value", `${value}%`);
         return this;
     }
 
-    /**
-     *
-     * @returns {TaxInfoActions}
-     */
-    clickSaveChangesButton() {
+    clickSaveChangesButton(): TaxInfoActions {
         taxInfoPage.saveButton.click();
         return this;
     }
 
-    /**
-     *
-     * @param {Readonly<{className: string, rateYear: string | number, rateValue: string | number}>} currentTaxInfoData
-     * @returns {TaxInfoActions}
-     */
-    editTaxRatesWithoutAddingNew(currentTaxInfoData) {
+    editTaxRatesWithoutAddingNew(currentTaxInfoData: Readonly<{ className: string; rateYear: string | number; rateValue: string | number; }>): TaxInfoActions {
         this.clickEditTaxRatesButton()
             .enterTaxClassName(currentTaxInfoData.className)
             .enterTaxRateYearByIndex(currentTaxInfoData.rateYear)
@@ -124,42 +92,23 @@ class TaxInfoActions extends BaseActions {
         return this;
     }
 
-    /**
-     *
-     * @param {string} textToBe
-     * @returns {TaxInfoActions}
-     */
-    verifyTaxClassDropdownText(textToBe) {
+    verifyTaxClassDropdownText(textToBe: string): TaxInfoActions {
         taxInfoPage.taxClassDropdown.should("contain.text", textToBe);
         return this;
     }
 
-    /**
-     *
-     * @param {string | number} textToBe
-     * @returns {TaxInfoActions}
-     */
-    verifyTaxRateDropdownText(textToBe) {
+    verifyTaxRateDropdownText(textToBe: string | number): TaxInfoActions {
         taxInfoPage.taxRateDropdown.should("have.text", textToBe);
         return this;
     }
 
-    /**
-     *
-     * @param {Readonly<{className: string, rateYear: number | string}>} currentTaxInfoData
-     * @returns {TaxInfoActions}
-     */
-    verifyTaxLiabilityInfo(currentTaxInfoData) {
+    verifyTaxLiabilityInfo(currentTaxInfoData: Readonly<{ className: string; rateYear: number | string; }>): TaxInfoActions {
         this.verifyTaxClassDropdownText(currentTaxInfoData.className)
             .verifyTaxRateDropdownText(currentTaxInfoData.rateYear);
         return this;
     }
 
-    /**
-     *
-     * @returns {TaxInfoActions}
-     */
-    verifyTaxableAssessedValue() {
+    verifyTaxableAssessedValue(): TaxInfoActions {
         taxInfoPage.totalTaxableAssessedValue.invoke("text").then(totalAssessedText => {
             const totalAssessedNumber = getNumberFromDollarNumberWithCommas(totalAssessedText);
             const textToBe = `$${numberWithCommas(totalAssessedNumber.toFixed(2))}`;
@@ -168,22 +117,12 @@ class TaxInfoActions extends BaseActions {
         return this;
     }
 
-    /**
-     *
-     * @param {number | string} rateToBe
-     * @returns {TaxInfoActions}
-     */
-    verifyTaxRateValueCell(rateToBe) {
+    verifyTaxRateValueCell(rateToBe: number | string): TaxInfoActions {
         taxInfoPage.taxRateValueCell.should("have.text", `${rateToBe}%`);
         return this;
     }
 
-    /**
-     *
-     * @param {number | string} taxRate
-     * @returns {TaxInfoActions}
-     */
-    verifyTaxLiabilityTotalCell(taxRate) {
+    verifyTaxLiabilityTotalCell(taxRate: number): TaxInfoActions {
         taxInfoPage.taxableAssessedValue.invoke("text").then(taxableAssessedText => {
             const taxableAssessedNumber = getNumberFromDollarNumberWithCommas(taxableAssessedText);
             const textToBe = `$${numberWithCommas((taxableAssessedNumber / 100 * taxRate).toFixed(2))}`;
@@ -192,21 +131,12 @@ class TaxInfoActions extends BaseActions {
         return this;
     }
 
-    /**
-     *
-     * @param {string | number} textToBe
-     * @returns {TaxInfoActions}
-     */
-    verifySFOrUnitsNumberCell(textToBe) {
+    verifySFOrUnitsNumberCell(textToBe: string | number): TaxInfoActions {
         taxInfoPage.sfOrUnitsNumberCell.should("have.text", textToBe);
         return this;
     }
 
-    /**
-     *
-     * @returns {TaxInfoActions}
-     */
-    verifyPerBasisCell() {
+    verifyPerBasisCell(): TaxInfoActions {
         taxInfoPage.taxLiabilityTotalCell.invoke("text").then(taxLiabilityText => {
             const taxLiabilityNumber = getNumberFromDollarNumberWithCommas(taxLiabilityText);
             taxInfoPage.sfOrUnitsNumberCell.invoke("text").then(basisText => {
@@ -218,13 +148,7 @@ class TaxInfoActions extends BaseActions {
         return this;
     }
 
-    /**
-     *
-     * @param {string | number} taxRate
-     * @param {string | number} sfOrUnitsNumber
-     * @returns {TaxInfoActions}
-     */
-    verifyTaxLiabilityTable(taxRate, sfOrUnitsNumber) {
+    verifyTaxLiabilityTable(taxRate: number, sfOrUnitsNumber: string | number): TaxInfoActions {
         this.verifyTaxableAssessedValue()
             .verifyTaxRateValueCell(taxRate)
             .verifyTaxLiabilityTotalCell(taxRate)
@@ -233,139 +157,76 @@ class TaxInfoActions extends BaseActions {
         return this;
     }
 
-    /**
-     *
-     * @param {string} commToBe
-     * @returns {TaxInfoActions}
-     */
-    verifyTaxLiabilityCommentary(commToBe) {
+    verifyTaxLiabilityCommentary(commToBe: string): TaxInfoActions {
         taxInfoPage.taxLiabilityCommentary.should("have.text", commToBe);
         return this;
     }
 
-    /**
-     *
-     * @returns {TaxInfoActions}
-     */
-    clickProjectedTab() {
+    clickProjectedTab(): TaxInfoActions {
         taxInfoPage.projectedTab.click();
         return this;
     }
 
-    /**
-     *
-     * @returns {TaxInfoActions}
-     */
-    checkProjectedIncludeCheckbox() {
+    checkProjectedIncludeCheckbox(): TaxInfoActions {
         taxInfoPage.projectedIncludeInExportCheckbox.check().should("have.value", "true");
         return this;
     }
 
-    /**
-     *
-     * @param {string} commToBe
-     * @returns {TaxInfoActions}
-     */
-    verifyProjectedLiabilityCommentary(commToBe) {
+    verifyProjectedLiabilityCommentary(commToBe: string): TaxInfoActions {
         taxInfoPage.projectedLiabilityCommentary.should("have.text", commToBe);
         return this;
     }
 
-    /**
-     *
-     * @returns {TaxInfoActions}
-     */
-    clickComparablesTab() {
+    clickComparablesTab(): TaxInfoActions {
         taxInfoPage.comparablesTab.click();
         return this;
     }
 
-    /**
-     *
-     * @returns {TaxInfoActions}
-     */
-    clickAddBlankRowButton() {
+    clickAddBlankRowButton(): TaxInfoActions {
         taxInfoPage.addBlankRowButton.click();
         return this;
     }
 
-    /**
-     *
-     * @param {string} address
-     * @returns {TaxInfoActions}
-     */
-    enterNewTaxCompAddress(address) {
+    enterNewTaxCompAddress(address: string): TaxInfoActions {
         taxInfoPage.newTaxCompAddressInput.type(address).should("have.value", address);
         return this;
     }
 
-    /**
-     *
-     * @param {number | string} year
-     * @returns {TaxInfoActions}
-     */
-    enterNewTaxCompYearBuilt(year) {
-        taxInfoPage.newTaxCompYearBuiltInput.type(year).should("have.value", year);
+    enterNewTaxCompYearBuilt(year: number | string): TaxInfoActions {
+        taxInfoPage.newTaxCompYearBuiltInput.type(`${year}`).should("have.value", year);
         return this;
     }
 
-    /**
-     *
-     * @param {number | string} basisValue
-     * @returns {TaxInfoActions}
-     */
-    enterNewTaxCompBasis(basisValue) {
-        taxInfoPage.newTaxCompBasisInput.type(basisValue).should("have.value", basisValue);
+    enterNewTaxCompBasis(basisValue: number | string): TaxInfoActions {
+        taxInfoPage.newTaxCompBasisInput.type(`${basisValue}`).should("have.value", basisValue);
         return this;
     }
 
-    /**
-     *
-     * @param {number | string} taxesPerBasis
-     * @returns {TaxInfoActions}
-     */
-    enterTaxesPerBasis(taxesPerBasis) {
-        taxInfoPage.newTaxCompTaxesPerBasisInput.type(taxesPerBasis).should("have.value", `$${taxesPerBasis}`);
+    enterTaxesPerBasis(taxesPerBasis: number | string): TaxInfoActions {
+        taxInfoPage.newTaxCompTaxesPerBasisInput.type(`${taxesPerBasis}`).should("have.value", `$${taxesPerBasis}`);
         return this;
     }
 
-    /**
-     *
-     * @param {number} year
-     * @returns {TaxInfoActions}
-     */
-    enterTaxYear(year) {
-        taxInfoPage.newTaxCompTaxYearInput.type(year).should("have.value", year);
+    enterTaxYear(year: number): TaxInfoActions {
+        taxInfoPage.newTaxCompTaxYearInput.type(`${year}`).should("have.value", year);
         return this;
     }
 
-    /**
-     *
-     * @param {string} sourceValue
-     * @returns {TaxInfoActions}
-     */
-    selectSourceOfInfo(sourceValue) {
+    selectSourceOfInfo(sourceValue: string): TaxInfoActions {
         taxInfoPage.sourceOfInfoDropdown.click();
         taxInfoPage.getDropdownOptionByValue(sourceValue).click();
         return this;
     }
 
-    /**
-     *
-     * @returns {TaxInfoActions}
-     */
-    clickAddButton() {
+    clickAddButton(): TaxInfoActions {
         taxInfoPage.addButton.click();
         return this;
     }
 
-    /**
-     *
-     * @param {Readonly<{address: string, yearBuilt: number, basis: number, taxPerBasis: number, sourceOfInfo: string,
-     * taxYear: number}>} taxCompData
-     * @returns {TaxInfoActions}
-     */
-    addTaxComparableWithoutSourceInfoData(taxCompData) {
+    addTaxComparableWithoutSourceInfoData(taxCompData: Readonly<{
+            address: string; yearBuilt: number; basis: number; taxPerBasis: number; sourceOfInfo: string;
+            taxYear: number;
+        }>): TaxInfoActions {
         this.clickAddBlankRowButton()
             .enterNewTaxCompAddress(taxCompData.address)
             .enterNewTaxCompYearBuilt(taxCompData.yearBuilt)
@@ -377,27 +238,20 @@ class TaxInfoActions extends BaseActions {
         return this;
     }
 
-    /**
-     *
-     * @param {Array<Readonly<{address: string, yearBuilt: number, basis: number, taxPerBasis: number, sourceOfInfo: string,
-     * taxYear: number}>>} taxCompDatas
-     * @returns {TaxInfoActions}
-     */
-    addListTaxComparablesWithoutSourceInfoData(taxCompDatas) {
+    addListTaxComparablesWithoutSourceInfoData(taxCompDatas: Array<Readonly<{
+            address: string; yearBuilt: number; basis: number; taxPerBasis: number; sourceOfInfo: string;
+            taxYear: number;
+        }>>): TaxInfoActions {
         taxCompDatas.forEach(data => {
             this.addTaxComparableWithoutSourceInfoData(data);
         });
         return this;
     }
 
-    /**
-     *
-     * @param {Readonly<{address: string, yearBuilt: number, basis: number, taxPerBasis: number, sourceOfInfo: string,
-     * taxYear: number}>} taxCompData
-     * @param {number} rowNumber
-     * @returns {TaxInfoActions}
-     */
-    verifyAddedComparableByRowNumber(taxCompData, rowNumber) {
+    verifyAddedComparableByRowNumber(taxCompData: Readonly<{
+            address: string; yearBuilt: number; basis: number; taxPerBasis: number; sourceOfInfo: string;
+            taxYear: number;
+        }>, rowNumber: number): TaxInfoActions {
         taxInfoPage.taxCompsTableAddresses.eq(rowNumber).should("have.text", taxCompData.address);
         taxInfoPage.taxCompsTableYearsBuilt.eq(rowNumber).should("have.value", taxCompData.yearBuilt);
         taxInfoPage.taxCompsTableTaxYears.eq(rowNumber).should("have.value", taxCompData.taxYear);
@@ -408,12 +262,7 @@ class TaxInfoActions extends BaseActions {
         return this;
     }
 
-    /**
-     * @private
-     * @param {string} value
-     * @returns {string}
-     */
-    getSourceOfInfoTextByValue(value) {
+    getSourceOfInfoTextByValue(value: string): string {
         switch (value) {
             case "externalDatabase":
                 return "External Database";
@@ -424,13 +273,10 @@ class TaxInfoActions extends BaseActions {
         }
     }
 
-    /**
-     *
-     * @param {Array<Readonly<{address: string, yearBuilt: number, basis: number, taxPerBasis: number, sourceOfInfo: string,
-     * taxYear: number}>>} taxCompDatas
-     * @returns {TaxInfoActions}
-     */
-    verifyListAddedComparables(taxCompDatas) {
+    verifyListAddedComparables(taxCompDatas: Array<Readonly<{
+            address: string; yearBuilt: number; basis: number; taxPerBasis: number; sourceOfInfo: string;
+            taxYear: number;
+        }>>): TaxInfoActions {
         let rowIndex = taxCompDatas.length - 1;
         for (let i = 0; i < taxCompDatas.length; i++) {
             this.verifyAddedComparableByRowNumber(taxCompDatas[i], rowIndex);
@@ -439,86 +285,46 @@ class TaxInfoActions extends BaseActions {
         return this;
     }
 
-    /**
-     *
-     * @param {string} commToBe
-     * @returns {TaxInfoActions}
-     */
-    verifyTaxCompsCommentary(commToBe) {
+    verifyTaxCompsCommentary(commToBe: string): TaxInfoActions {
         taxInfoPage.taxCompsDiscussionComm.should("have.text", commToBe);
         return this;
     }
 
-    /**
-     *
-     * @returns {TaxInfoActions}
-     */
-    clickSummaryTab() {
+    clickSummaryTab(): TaxInfoActions {
         taxInfoPage.summaryTab.click();
         return this;
     }
 
-    /**
-     *
-     * @param {string} value
-     * @returns {TaxInfoActions}
-     */
-    checkConcludedLiabilityTypeByValue(value) {
+    checkConcludedLiabilityTypeByValue(value: string): TaxInfoActions {
         taxInfoPage.concludedLiabilityTypeRadio.check(value);
         taxInfoPage.getVerifyConcludedTaxLiabTypeInput(value).should("exist");
         return this;
     }
 
-    /**
-     *
-     * @param {number | string} value
-     * @returns {TaxInfoActions}
-     */
-    enterConcludedLiabilityPerBasis(value) {
+    enterConcludedLiabilityPerBasis(value: number | string): TaxInfoActions {
         const valueToBe = `$${numberWithCommas(value)}`;
-        taxInfoPage.concludedLiabilityPerBasisInput.clear().type(value).should("have.value", valueToBe);
+        taxInfoPage.concludedLiabilityPerBasisInput.clear().type(`${value}`).should("have.value", valueToBe);
         return this;
     }
 
-    /**
-     *
-     * @param {number} concludedLiability
-     * @param {number} numberOfUnits
-     * @returns {TaxInfoActions}
-     */
-    verifyAppraiserOpinionLiabilityTotal(concludedLiability, numberOfUnits) {
+    verifyAppraiserOpinionLiabilityTotal(concludedLiability: number, numberOfUnits: number): TaxInfoActions {
         const textToBe = `$${numberWithCommas(concludedLiability * numberOfUnits)}`;
         taxInfoPage.appraiserOpTaxLiabilityTotal.should("have.text", textToBe);
         return this;
     }
 
-    /**
-     *
-     * @param {number} taxLiability
-     * @returns {TaxInfoActions}
-     */
-    verifyAppraiserOpinionTaxLiabilityPerBasis(taxLiability) {
+    verifyAppraiserOpinionTaxLiabilityPerBasis(taxLiability: number): TaxInfoActions {
         const textToBe = `$${numberWithCommas(taxLiability)}`;
         taxInfoPage.appraiserOpTaxLiabilityPerBasis.should("have.text", textToBe);
         return this;
     }
 
-    /**
-     *
-     * @param {number} taxRate
-     * @returns {TaxInfoActions}
-     */
-    verifyAppraiserOpinionTaxRateCell(taxRate) {
+    verifyAppraiserOpinionTaxRateCell(taxRate: number): TaxInfoActions {
         taxInfoPage.appraiserOpTaxLiabTaxRateValueCell.should("have.text", `${taxRate}%`);
         return this;
     }
 
-    /**
-     *
-     * @param {number} taxRate
-     * @returns {TaxInfoActions}
-     */
-    verifyAppraiserOpinionTaxableAssessedValueCell(taxRate) {
+    verifyAppraiserOpinionTaxableAssessedValueCell(taxRate: number): TaxInfoActions {
         taxInfoPage.appraiserOpTaxLiabilityTotal.invoke("text").then(liabilityTotalText => {
             const liabilityTotalNumber = getNumberFromDollarNumberWithCommas(liabilityTotalText);
             const textToBe = `$${numberWithCommas((liabilityTotalNumber * 100 / taxRate).toFixed(2))}`;
@@ -527,25 +333,20 @@ class TaxInfoActions extends BaseActions {
         return this;
     }
 
-    /**
-     *
-     * @param {string} commToBe
-     * @returns {TaxInfoActions}
-     */
-    verifyTaxSummaryCommentary(commToBe) {
+    verifyTaxSummaryCommentary(commToBe: string): TaxInfoActions {
         taxInfoPage.taxSummaryDiscussionCommentary.should("exist").should("have.text", commToBe);
         return this;
     }
 
-    verifyTaxSummaryTooltip(tooltipToBe) {
+    verifyTaxSummaryTooltip(tooltipToBe: string): TaxInfoActions {
         taxInfoPage.taxSummaryDiscussionTooltip.should("exist").should("have.attr", "aria-label", tooltipToBe);
         return this;
     }
 
-    verifyTaxSummaryDiscussionTitle(titleToBe) {
+    verifyTaxSummaryDiscussionTitle(titleToBe: string) {
         taxInfoPage.taxSummaryDiscussionTitle.should("exist").should("have.text", titleToBe);
         return this;
     }
 }
 
-export default new TaxInfoActions();
+export default new TaxInfoActions(taxInfoPage);

@@ -29,7 +29,7 @@ class AdjustCompsPage extends BasePage {
 
     getMarketAdjustmentsRowCells(marketAdjName: string) {return cy.get(`[name*='adjustments.${marketAdjName}']`);}
 
-    get trendedPriceCells() {return cy.xpath("//*[starts-with(., 'Trended Price')]//following-sibling::td");}
+    get cumulativePriceCells() {return cy.xpath("//*[starts-with(., 'Cumulative Price')]//following-sibling::td");}
 
     get adjustedPriceCells() {return cy.xpath("//*[starts-with(., 'Adjusted Price')]//following-sibling::td");}
 
