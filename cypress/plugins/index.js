@@ -11,6 +11,7 @@ const { existsSync, writeFileSync, readFile } = require("fs");
 const mammoth = require("mammoth");
 const glob = require("glob");
 const request = require('supertest');
+const events = require("events");
 const util = require("util");
 
 const {
@@ -152,17 +153,37 @@ const _loginApi = async () => {
  * @param {*} _payloadFn 
  * @returns 
  */
- const _createReportApi = async (_reportCreationData, _payloadFn) => {
-   console.log(_reportCreationData);
-   console.log(_payloadFn);
+ const _createReportApi = async (_reportCreationData, _payload, _token) => {
+    console.log(_reportCreationData+"\n");
+    console.log(_payload+"\n");
+    console.log(_token);
 
-  readFile('./cypress.env.json', 'utf8', function (err, data) {
-    if (err) throw err;
-    cypressEnv = JSON.parse(data);
-    console.log(cypressEnv.USERNAME);
-    console.log(cypressEnv.PASSWORD);
-  });
-  return null;
+    const socket = new events.EventEmitter();
+    socket.id = 'test';
+
+    await request("https://bowery-staging.herokuapp.com")
+      .post('/report')
+      .set('Accept', 'application/json')
+      .send(_payload)
+      .set('Authorization', `Bearer ${_token}`)
+      .set('SocketId', `${socket.id}`)
+      .expect(200);
+
+    const subscription = new Promise((res, rej) =>
+      socket.on('report:created', (data) => {
+        if (!data || data.report_number !== _payload.reportNumber) {
+          rej(new Error('Report was not found!'));
+        } else {
+          res(data);
+        }
+      })
+    );
+
+    const report = await subscription;
+    let reportId = report._id;
+   
+    return reportId;
+
 }
 
 //#endregion
@@ -210,8 +231,8 @@ module.exports = (on, config) => {
   });
 
   on("task",{
-    async createReportApi({_reportCreationData, _payloadFn}){
-      return await _createReportApi(_reportCreationData, _payloadFn);
+    async createReportApi({_reportCreationData, _payload, _token}){
+      return await _createReportApi(_reportCreationData, _payload, _token);
     }
   });
 
