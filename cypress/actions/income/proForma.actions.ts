@@ -4,6 +4,7 @@ import {
     numberWithCommas
 } from "../../../utils/numbers.utils";
 import BaseActionsExt from "../base/base.actions.ext";
+import { uppercaseFirstLetterEachWord } from "../../../utils/string.utils";
 
 class ProFormaActions extends BaseActionsExt<typeof proFormaPage> {
 
@@ -91,8 +92,8 @@ class ProFormaActions extends BaseActionsExt<typeof proFormaPage> {
     }
     
     verifyCustomCategoryName(categoryName: string): ProFormaActions {
-        let textToBe = proFormaPage.capitalizeWordsInCategoryName(categoryName).toString();
-        proFormaPage.getCustomCategoryIncomeCell(categoryName).eq(0).invoke('text').should('deep.include', textToBe);
+        let textToBe = uppercaseFirstLetterEachWord(categoryName).toString();
+        proFormaPage.getCustomCategoryIncomeCell(categoryName).first().invoke('text').should('deep.include', textToBe);
         return this;
     }
 }

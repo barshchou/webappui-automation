@@ -1,3 +1,4 @@
+import { uppercaseFirstLetterEachWord } from "../../../utils/string.utils";
 import enums from "../../enums/enums";
 import BasePage from "../base/base.page";
 
@@ -48,20 +49,12 @@ class ProFormaPage extends BasePage {
             ? this.getCategoryElementByType(categoryName, "perUnit").first() : this.getCategoryElementByType(categoryName, "perUnit");
     }
 
-    capitalizeWordsInCategoryName(categoryName: string):string {
-        let capitalizedName = '';
-        categoryName.split(' ').forEach(word => {
-            capitalizedName = capitalizedName + word.charAt(0).toUpperCase() + word.slice(1) + ' ';
-        });
-        return capitalizedName.trim();
-    }
-
     private getCategoryElementByType(categoryName: string, colId: string) {
-        return cy.get(`[row-id^='${this.capitalizeWordsInCategoryName(categoryName)}'] [role=gridcell][col-id=${colId}]`);
+        return cy.get(`[row-id^='${uppercaseFirstLetterEachWord(categoryName)}'] [role=gridcell][col-id=${colId}]`);
     }
 
     getCustomCategoryIncomeCell(categoryName: string) {
-        return cy.get(`[row-id^='${this.capitalizeWordsInCategoryName(categoryName)}'] div`);
+        return cy.get(`[row-id^='${uppercaseFirstLetterEachWord(categoryName)}'] div`);
     }
 }
 
