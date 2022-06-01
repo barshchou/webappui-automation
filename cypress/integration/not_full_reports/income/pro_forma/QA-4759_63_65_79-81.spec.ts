@@ -1,5 +1,5 @@
 import { numberWithCommas } from '../../../../../utils/numbers.utils';
-import testData from "../../../../fixtures/not_full_reports/income/pro_forma/QA-4779-81.fixture";
+import testData from "../../../../fixtures/not_full_reports/income/pro_forma/QA-4759_63_65_79-81.fixture";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { Income, Property } from "../../../../actions";
@@ -32,7 +32,38 @@ describe("Pro Forma Page validation Operating Expenses -> Insurance",
             .verifyProgressBarNotExist();
     });
 
+    it("[QA-4759]", () => {
+        cy.stepInfo(`3. The value in the Insurance is taken from Income → 
+                    Expense Forecast → Insurance Forecast Discussion generated commentary`);
+        Income._ProFormaActions.verifyCategoryTotal(
+            `$${numberWithCommas(Math.round(testData.insuranceSFTotal))}`, 
+            proFormaTypes.insurace);
+    });
+
+    it("[QA-4763]", () => {
+        cy.stepInfo(`3. The value in the Insurance is taken from Income → 
+                    Expense Forecast → Insurance → Appraiser’s Forecast cell`);
+        Income._ProFormaActions.verifyCategoryPSFTotal(
+            `$${numberWithCommas(testData.insuranceSFPerSf.toFixed(2))}`, 
+            proFormaTypes.insurace);
+    });
+
+    it("[QA-4765]", () => {
+        cy.stepInfo(`3. The value in the Insurance Per Unit is calculated by 
+                    formula: Annual value / # of Residential Units`);
+        Income._ProFormaActions.verifyCategoryPerUnitTotal(
+            `$${numberWithCommas(Math.round(testData.insuranceSFPerUnit))}`, 
+            proFormaTypes.insurace);
+    });
+
     it("[QA-4779]", () => {
+        // Navigate to Expense Forecast and change basis
+        testData.forecastItem.basis = "unit" as BoweryReports.UnitSF;
+        _NavigationSection.navigateToExpenseForecast();
+        Income._ExpenseForecastActions.switchExpenseForecastBasis(testData.forecastItem);
+        _NavigationSection.navigateToProForma()
+            .verifyProgressBarNotExist();
+        
         cy.stepInfo(`3. The value in the Insurance Total is taken from Income → 
                     Expense Forecast → Insurance Forecast Discussion generated commentary`);
         Income._ProFormaActions.verifyCategoryTotal(
