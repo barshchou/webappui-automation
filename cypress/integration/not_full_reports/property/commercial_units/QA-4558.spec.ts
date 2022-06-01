@@ -88,8 +88,10 @@ describe("Verify the functionality of the Use* radio button",
             Property._CommercialUnits.clickRadioButtonByValueAndUnitIndex(testData.groupName, radio);
             if (radio === "other") Property._CommercialUnits.enterOtherValueByGroupName(testData.groupName, testData.otherValue);
             _NavigationSection.navigateToProForma();
-            Income._ProFormaActions.Page.getCommercialUseVCLossLabel(testData.useTexts[index]).should("exist");
-            Income._ProFormaActions.Page.getCommercialUseVCLossRow(testData.useTexts[index]).should("exist");
+            Income._ProFormaActions.Page.residentialVCLossLabelCell(testData.useTexts[index]).should("exist");
+            Income._ProFormaActions.Page.residentialVCLossTotal(testData.useTexts[index]).should("exist");
+            Income._ProFormaActions.Page.residentialVCLossPerSF(testData.useTexts[index]).should("exist");
+            Income._ProFormaActions.Page.residentialVCLossPerUnit(testData.useTexts[index]).should("exist");
             Income._ProFormaActions.clickIncludeNOIComparisonCheckbox();
             _NavigationSection.navigateToCommercialUnits();
         });
