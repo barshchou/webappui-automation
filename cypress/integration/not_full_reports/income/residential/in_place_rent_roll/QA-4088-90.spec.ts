@@ -1,11 +1,10 @@
-import testData from "../../../../../fixtures/not_full_reports/income/residential/in_place_rent_roll/QA-4088&89&90.fixture";
+import testData from "../../../../../fixtures/not_full_reports/income/residential/in_place_rent_roll/QA-4088-90.fixture";
 import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../../actions/base";
 import { Income } from "../../../../../actions";
-import { Tag } from "../../../../../utils/tags.utils";
 
 describe("[QA-4088], [QA-4089], [QA-4090] 'What time period should rent PSF be based on?' radiobuttons and label functionality",
-    { tags: [ Tag.income, Tag.residential, Tag.in_place_rent_roll ] }, () => {
+    { tags: [ "@income", "@residential", "@in_place_rent_roll" ] }, () => {
 
         before("Login, create report", () => {
             createReport(testData.reportCreationData);
