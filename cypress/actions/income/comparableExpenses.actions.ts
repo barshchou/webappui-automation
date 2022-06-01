@@ -14,7 +14,10 @@ class ComparableExpensesActions extends BaseActions {
     }
 
     enterAddressByColumnIndex(address: string, index = 0): this {
-        compExpensesPage.getUnifiedEditableAndTotalCells("address").eq(index).dblclick().scrollIntoView()
+        compExpensesPage.getUnifiedEditableAndTotalCells("address").eq(index).realType("something");
+        compExpensesPage.getUnifiedEditableAndTotalCells("address").eq(index).dblclick()
+            .clear()
+            .scrollIntoView()
             .realType(`${address}{enter}`);
         compExpensesPage.getUnifiedEditableAndTotalCells("address").eq(index).children(compExpensesPage.elementToCheckCellTextSelector)
             .should("have.text", address);
@@ -30,8 +33,8 @@ class ComparableExpensesActions extends BaseActions {
     }
 
     chooseExpensePeriodByColumnIndex(periodValue: string, index = 0): this {
-        compExpensesPage.getUnifiedEditableAndTotalCells("expensePeriod").eq(index).focus()
-            .type(`${periodValue}{enter}`);
+        compExpensesPage.getUnifiedEditableAndTotalCells("expensePeriod").eq(index).type("something")
+            .dblclick().clear().type(`${periodValue}{enter}`);
         compExpensesPage.getUnifiedEditableAndTotalCells("expensePeriod").eq(index)
             .children(compExpensesPage.elementToCheckCellTextSelector).should("have.text", periodValue);
         return this;
