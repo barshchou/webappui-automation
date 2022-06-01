@@ -35,8 +35,8 @@ describe("Pro Forma page table Effective Gross Income validation",
         });
         
         cy.stepInfo("5. Go to Income → Reimbursement Summary and add Real Estate Taxes Reimbursement for commercial units"); 
-        _NavigationSection.navigateToCommercialInPlaceRentRoll()
-            .navigateToCommercialReimbursementSummary();
+        _NavigationSection.clickCommercialReimbursementSummaryButton()
+            .clickYesIfExist();
         Income._CommercialManager.ReimbursementSummary.addNewCommercialReimbursement(
             testData.expenseType, testData.expenceTypeCellName, testData.reimbursementType, testData.knownInformation)
             .fillReimbursements(testData.monthlyReimbursement)
