@@ -54,6 +54,7 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
 
     clickCommercialRentRollButton() {
         navigationSectionPage.commercialRentRollButton.click();
+        this.clickYesIfExist();
         return this;
     }
 

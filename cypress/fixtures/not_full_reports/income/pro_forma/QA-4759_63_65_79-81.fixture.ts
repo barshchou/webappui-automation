@@ -4,22 +4,29 @@ import Enums from "../../../../enums/enums";
 const _grossBuildingArea = 5000;
 const _numberOfCommercialUnits = 3;
 const _numberOfResidentialUnits = 5;
-const _name = Enums.EXPENSE_CELL.insurace;
+const _name = Enums.EXPENSE_CELL.insurance;
 const _basis = "sf" as BoweryReports.UnitSF;
 const _projection = 465.01;
 const _forecast = 99.99;
 
-const _forecastItem: BoweryReports.ForecastItem = {
-    name: _name,
-    basis: _basis,
-    projection: _projection,
-    forecast: _forecast
+const _forecastItem = (): BoweryReports.ForecastItem => {
+    return {
+        name: _name,
+        basis: _basis,
+        projection: _projection,
+        forecast: _forecast
+    };
 };
 
 const _insuranceSFTotal = _forecast * _grossBuildingArea;
 const _insuranceSFPerUnit = _insuranceSFTotal / _numberOfResidentialUnits;
+const _insuranceSFPerSf = _forecast;
 
-const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("4759_63_65", {
+const _insuranceUnitTotal = _forecast * _numberOfResidentialUnits;
+const _insuranceUnitPerSf = _insuranceUnitTotal / _grossBuildingArea;
+const _insuranceUnitPerUnit = _forecast;
+
+const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("4759_63_65_79-81", {
         incomeValue: Enums.INCOME_TYPE.BOTH
     });
 
@@ -28,9 +35,11 @@ export default {
     grossBuildingArea: _grossBuildingArea,
     numberOfResidentialUnits: _numberOfResidentialUnits,
     numberOfCommercialUnits: _numberOfCommercialUnits,
-    forecastItem: _forecastItem,
+    forecastItem: _forecastItem(),
     insuranceSFTotal: _insuranceSFTotal,
     insuranceSFPerUnit: _insuranceSFPerUnit,
-    insuranceSFPerSf: _forecast
-
+    insuranceSFPerSf: _insuranceSFPerSf,
+    insuranceUnitTotal: _insuranceUnitTotal,
+    insuranceUnitPerSf: _insuranceUnitPerSf,
+    insuranceUnitPerUnit: _insuranceUnitPerUnit
 };
