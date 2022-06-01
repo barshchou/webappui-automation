@@ -51,6 +51,8 @@ class ExpenseForecastPage extends BasePage {
     getExpenseCommentaryRevertToOriginal(forecastItem: string) {return cy.xpath(`//*[@data-qa="${forecastItem}-forecast-item"]//following::button[.='Revert to Original'][1]`);}
 
     getCheckboxIncludeInProForma(forecastItem: string) {return cy.get(`[data-qa=${forecastItem}-forecast-item] input[type="checkbox"]`);}
+ // getCheckboxIncludeInProForma(forecastItem: string) {return cy.get(`[data-qa=${forecastItem}-forecast-item] svg[aria-hidden="true"]`);}
+  
 
     get inputPercentOfEGICheckbox() {return cy.get("[label='Input % of EGI'] input");}
 
