@@ -2,6 +2,7 @@ import { aliasQuery } from "../../utils/graphql.utils";
 import Homepage from "./homepage.actions";
 import NavigationSection from "./navigationSection.actions";
 import { createPayload } from "../../api/report_payloads/462Avenue1NY.payload";
+import { getEnvUrl } from "../../../utils/env.utils";
 
 /**
  * ernst: createReport is used everywhere - default logic should be: 
@@ -21,22 +22,42 @@ import { createPayload } from "../../api/report_payloads/462Avenue1NY.payload";
  * api login + UI report (implemented)
  */
 
+/**
+ * Login action
+ */
+export const loginAction = () => {
+    const envUrl = getEnvUrl();
+    switch (Cypress.env("loginMethod")) {
+        case "ui":
+            cy.loginByUI(envUrl);
+            break;
+        default:
+            cy.loginByApi(envUrl);
+            cy.visit(envUrl);
+    }
+};
+
 export const createReport = (reportCreationData: BoweryAutomation.ReportCreationData, payloadFunction = createPayload) => {
-    cy.login();
-    if(Cypress.env("report") == "api"){
-        cy._mapGet("token").then(val => {
-            cy.log(val);
-            cy.pause();
-            cy.task("createReportApi",
-            { _reportCreationData: reportCreationData, _payloadFn: payloadFunction(reportCreationData, "user_id"), _token: val });
-            cy.pause();
-        });
-        
-    }
-    else {
-        Homepage.createReport(reportCreationData);
-    }
-    salesInterceptions();
+    loginAction();
+    cy._mapGet("user_id_api").then(_userId => {
+        cy.log(`user id is: ${_userId}`);
+        const _payload = payloadFunction(reportCreationData, _userId);
+        if(Cypress.env("report") == "api"){
+            cy._mapGet("token").then(_token => {
+                cy.log(`token is: ${_token}`);
+                cy.pause();
+                cy.createApiReport(
+                    reportCreationData, _payload, _token
+                );
+                cy.pause();
+            });
+            
+        }
+        else {
+            Homepage.createReport(reportCreationData);
+        }
+        salesInterceptions();
+    });
 };
 
 export const deleteReport = (reportNumber) => {
