@@ -59,7 +59,7 @@ class FindCompsPage extends BasePage {
 
     get createCompNumberResidentialUnits() {return cy.xpath("//*[.='# Residential Units*']//child::input");}
 
-    get conditionDropdown() {return cy.xpath("//*[text()='Condition*']//following::*[@class='ant-select-selector'][1]");}
+    get conditionDropdown() {return cy.xpath("//*[text()='Condition']//following::*[@class='ant-select-selector'][1]");}
 
     getDropdownOption(title: string) {return cy.get(`.ant-select-item-option[title='${title}']`);}
 
