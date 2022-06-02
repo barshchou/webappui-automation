@@ -11,7 +11,7 @@ import { Income, Property } from "../../../../../actions";
  * TODO: Make draggable components accessible to Cypress
 */
 
-    describe.skip("Verify the Commercial Stabilized Rent Roll table", 
+    describe("Verify the Commercial Stabilized Rent Roll table", 
     { tags: [ "@income", "@commercial", "@stabilized_rent_roll" ] }, () => {
         
     before("Login, create report", () => {
@@ -25,28 +25,45 @@ import { Income, Property } from "../../../../../actions";
         - On the Income > Commercial > Rent Reconciliation, the Market Rent Conclusion field is filled with any value;
         `);
         createReport(testData.reportCreationData);
-        _NavigationSection.Actions.clickPropertyButton()
-            .verifyProgressBarNotExist()
-            .clickCommercialUnits()
-            .clickYesButton().verifyProgressBarNotExist();
-        Property._CommercialUnits.enterUnitSFByUnitIndex(testData.squareFeet)
-            .clickSaveButton();
-            _NavigationSection.Actions.clickIncomeApproachButton()
-            .clickCommercialArrow()
-            .clickCommercialRentRollButton();
-        
-        Income._CommercialManager.InPlaceRentRoll.chooseLeaseStatusByRowNumber("Vacant");
+        _NavigationSection.navigateToPropertySummary();
+        Property._Summary.enterGrossBuildingArea(testData.grossBuildingArea)
+            .enterNumberOfCommercialUnits(testData.numberOfCommercialUnits);
 
-        _NavigationSection.Actions.clickIncomeApproachButton()
-        .clickCommercialArrow().clickCommercialCompGroups()
-        .clickYesButton().verifyProgressBarNotExist();
-        
+        cy.stepInfo(""); 
+        _NavigationSection.navigateToCommercialUnits();
+        Property._CommercialUnits.enterListUnitSF(testData.listOfUnitsSF, testData.numberOfCommercialUnits);
+
+        cy.stepInfo(""); 
+        _NavigationSection.navigateToCommercialInPlaceRentRoll();
+        Income._CommercialManager.InPlaceRentRoll.chooseListLeaseStatuses(testData.leaseStatuses, testData.numberOfCommercialUnits);
+        // testData.rentsPsf.forEach((rent, index) => {
+        //     Income._CommercialManager.InPlaceRentRoll.enterRentPerSFAnnuallyByRowNumber(rent, index);
+        // });
+
+        cy.stepInfo(""); 
+        _NavigationSection.navigateToCompGroups();
+  
         let compGroup = "QA_4607_Comp_Group";
         Income._CommercialManager.CompGroups.addCompGroup(compGroup);
 
         const subject = cy.get(Income._CommercialManager.CompGroups.Page.getDragableElement(1));
         subject.dragAndDrop(Income._CommercialManager.CompGroups.Page.getDragableElement(1), 
             Income._CommercialManager.CompGroups.Page.getDragableArea(compGroup, 1));
+
+        cy.stepInfo("");
+        _NavigationSection.clickCommercialRentComps()
+            .clickYesIfExist();
+        Income._CommercialManager.RentComps.clickManuallyAddANewCompButton().
+            searchNewCompByAddress(testData.address);
+        testData.rentCompFields.forEach(field => {
+            if(field.type == "input") {
+                Income._CommercialManager.RentComps.fillInRentCompFieldInput(field.name, field.value);
+            } else {
+                Income._CommercialManager.RentComps.chooseRentCompFieldDropdownOption(field.name, field.value);
+            }
+        });
+        Income._CommercialManager.RentComps.enterLeaseDate(testData.leaseDate).clickSubmitButton();
+        cy.pause();
 
     });
 

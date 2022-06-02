@@ -143,6 +143,15 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         return this;
     }
 
+    navigateToCompGroups() {
+        this.clickIncomeApproachButton()
+            .clickCommercialArrow()
+            .clickCommercialCompGroups()
+            .clickYesButton()
+            .verifyProgressBarNotExist();
+        return this;
+    }
+
     openRentCompsInResidential() {
         this.clickRentCompsButton()
             .clickYesIfExist();
@@ -152,8 +161,8 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
     navigateToCommercialInPlaceRentRoll() {
         this.clickIncomeApproachButton()
             .clickCommercialArrow()
-            .clickCommercialRentRollButton()
-            .clickYesIfExist();
+            .clickCommercialRentRollButton();
+            //.clickYesIfExist();
         return this;
     }
 
