@@ -160,8 +160,8 @@ const _loginApi = async () => {
     console.log(_token);
 
     const socket = io.connect("https://bowery-staging.herokuapp.com");
-    socket.on('connect', () => console.log('Socket opened'))
-    socket.on('init', async socketId => {
+    const _connect = new Promise((res,rej)=>
+      socket.on('connect', () => console.log('Socket opened')).on('init', async socketId => {
         console.log(socketId)
         await request("https://bowery-staging.herokuapp.com")
         .post('/report')
@@ -170,8 +170,11 @@ const _loginApi = async () => {
         .set('Authorization', `Bearer ${_token}`)
         .set('SocketId', `${socketId}`)
         .expect(200);
-
-      const subscription = new Promise((res, rej) =>
+        res(socketId);
+      })
+    ) 
+    console.log("socketid is "+await _connect);
+    const subscription = new Promise((res, rej) =>
         socket.on('report:created', (data) => {
           if (!data || data.report_number !== _payload.reportNumber) {
             rej(new Error('Report was not found!'));
@@ -179,14 +182,12 @@ const _loginApi = async () => {
             res(data);
           }
         })
-      );
+      )
 
       const report = await subscription;
       console.log(report._id);
       console.log(report.report_number);
       reportId = report._id;
-      return reportId;
-    });
    
     return reportId;
 
