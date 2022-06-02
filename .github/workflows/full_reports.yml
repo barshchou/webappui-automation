@@ -46,11 +46,8 @@ jobs:
       - name: Install Currents globally
         run: npm i @currents/cli -g
 
-      - name: Install Husky globally
-        run: npm i husky -g
-
       - name: Install Dependencies
-        run: npm install
+        run: HUSKY=0 npm install
 
       - name: Run Cypress full_report tests on Currents.dev
         run: currents run --tag ${{ github.event.inputs.env }} --spec "./cypress/integration/full_reports/*.spec.ts" --browser chrome --record --parallel --key ${{ secrets.CURRENTS_RECORD_KEY }} --ci-build-id "${{ github.repository }}-${{ github.run_id }}-${{ github.run_attempt}}"
