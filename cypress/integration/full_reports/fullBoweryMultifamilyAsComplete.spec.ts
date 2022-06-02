@@ -33,6 +33,7 @@ describe("Full bowery way, multifamily as complete report", { tags: [ "@full_rep
             .fillMarketResearch(testData.marketResearch)
             .enterMarketQuarter(testData.marketResearch.quarter)
             .clickPullFromDropbox()
+            // TODO: Refactor this step after we'll have more info about https://bowery.atlassian.net/browse/WEB-5511 bug
             // .verifyMultifamilySubmarketAnalysisHasDocument(testData.marketResearch.multifamilySubmarketDocument)
             .clickSaveContinueButton();
         Property.History.enterCurrentOwner(testData.owner.name)
