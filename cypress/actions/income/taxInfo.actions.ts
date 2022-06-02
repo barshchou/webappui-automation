@@ -16,9 +16,32 @@ class TaxInfoActions extends BaseActionsExt<typeof taxInfoPage> {
         return this;
     }
 
+    enterTransitionalLandValue(value: number | string): TaxInfoActions {
+        const valueToBe = `$${numberWithCommas(value)}`;
+        taxInfoPage.landTransitional.clear().type(`${value}`).should("have.value", valueToBe);
+        return this;
+    }
+
     enterTaxableAssessedBuildingValue(value: number): this {
         const valueToBe = `$${numberWithCommas(value)}`;
         taxInfoPage.buildingActualInput.clear().type(`${value}`).should("have.value", valueToBe);
+        return this;
+    }
+
+    enterTransitionalBuildingValue(value: string | number): TaxInfoActions {
+        const valueToBe = `$${numberWithCommas(value)}`;
+        taxInfoPage.buildingTransitionalInput.clear().type(`${value}`).should("have.value", valueToBe);
+        return this;
+    }
+
+    switchIncludeTransitionalCheckbox(value = false): TaxInfoActions {
+        taxInfoPage.includeTransitionalAssessedValueCheckbox
+            .invoke('attr', 'value').then(attr => {
+            cy.log(`${attr}`);
+            if (attr == `${!value}`){
+                taxInfoPage.includeTransitionalAssessedValueCheckbox.click().should('have.value', `${value}`);
+            }
+        });
         return this;
     }
 

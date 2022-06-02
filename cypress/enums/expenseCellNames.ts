@@ -1,7 +1,7 @@
 const expensesCellNames = {
 
     realEstateTaxes: "realEstateTaxes",
-    insurace: "insurance",
+    insurance: "insurance",
     electricity: "electricity",
     fuel: "fuel",
     waterAndSewer: "waterAndSewer",

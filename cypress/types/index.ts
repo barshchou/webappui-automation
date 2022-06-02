@@ -136,6 +136,11 @@ namespace BoweryReports {
 
     export type UtilityExpenses = "brokenOut" | "combinedElectricityAndFuel" | "combinedAll";
 
+    export type leaseDate = {
+        name: LeaseDateName,
+        value: string
+    }
+
     export type CurrentTaxInfoData = {
         liabilityBasis?: string,
         landValue: number,

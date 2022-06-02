@@ -74,7 +74,7 @@ describe("Pro Forma page table Effective Gross Income validation",
         cy.saveLocalStorage();
     });
     
-    beforeEach("Restore local storeage", () => {
+    beforeEach("Restore local storage", () => {
         cy.restoreLocalStorage();
         _NavigationSection.navigateToProForma()
             .verifyProgressBarNotExist();
