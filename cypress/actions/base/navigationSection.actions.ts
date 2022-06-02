@@ -10,24 +10,6 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         return this;
     }
 
-     /**
-     * 
-     * Get element in the main DOM.
-     * If element contains shadow root then replace its 
-     * content with the HTML of shadow DOM.
-     */
-    replaceContentShadowDOM() {
-        cy.window().then(window => {
-            const el = window.document.querySelector('comp-plex');
-            if (el.shadowRoot)  el.innerHTML = el.shadowRoot.innerHTML;
-            // for (let el of window.document.querySelector('comp-plex')) {
-            // /
-            //     if (el.shadowRoot) el.innerHTML = el.shadowRoot.innerHTML;
-            // }
-        });
-        return this;
-    }
-
     openReviewAndExport(isNewReport = true) {
         let reportAlias = "docxReportAsync";
         cy.intercept({
@@ -262,7 +244,7 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
             .clickFindCompsButton()
             .clickYesIfExist();        
         cy.wait(`@${Alias.gql.SearchSalesTransactions}`, { timeout:120000 });
-        this.replaceContentShadowDOM();
+    
         return this;
     }
 
