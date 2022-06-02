@@ -11,8 +11,8 @@ const { existsSync, writeFileSync, readFile } = require("fs");
 const mammoth = require("mammoth");
 const glob = require("glob");
 const request = require('supertest');
-const events = require("events");
 const util = require("util");
+const io = require("socket.io-client");
 
 const {
   addMatchImageSnapshotPlugin,
@@ -154,33 +154,39 @@ const _loginApi = async () => {
  * @returns 
  */
  const _createReportApi = async (_reportCreationData, _payload, _token) => {
+    let reportId = "not report id";
     console.log(_reportCreationData+"\n");
     console.log(_payload+"\n");
     console.log(_token);
 
-    const socket = new events.EventEmitter();
-    socket.id = 'test';
+    const socket = io.connect("https://bowery-staging.herokuapp.com");
+    socket.on('connect', () => console.log('Socket opened'))
+    socket.on('init', async socketId => {
+        console.log(socketId)
+        await request("https://bowery-staging.herokuapp.com")
+        .post('/report')
+        .set('Accept', 'application/json')
+        .send(_payload)
+        .set('Authorization', `Bearer ${_token}`)
+        .set('SocketId', `${socketId}`)
+        .expect(200);
 
-    await request("https://bowery-staging.herokuapp.com")
-      .post('/report')
-      .set('Accept', 'application/json')
-      .send(_payload)
-      .set('Authorization', `Bearer ${_token}`)
-      .set('SocketId', `${socket.id}`)
-      .expect(200);
+      const subscription = new Promise((res, rej) =>
+        socket.on('report:created', (data) => {
+          if (!data || data.report_number !== _payload.reportNumber) {
+            rej(new Error('Report was not found!'));
+          } else {
+            res(data);
+          }
+        })
+      );
 
-    const subscription = new Promise((res, rej) =>
-      socket.on('report:created', (data) => {
-        if (!data || data.report_number !== _payload.reportNumber) {
-          rej(new Error('Report was not found!'));
-        } else {
-          res(data);
-        }
-      })
-    );
-
-    const report = await subscription;
-    let reportId = report._id;
+      const report = await subscription;
+      console.log(report._id);
+      console.log(report.report_number);
+      reportId = report._id;
+      return reportId;
+    });
    
     return reportId;
 

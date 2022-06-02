@@ -48,7 +48,12 @@ Cypress.Commands.add("loginByUI", (url) => {
 
 Cypress.Commands.add("createApiReport", (reportCreationData: BoweryAutomation.ReportCreationData, payload, token) => {
     cy.task("createReportApi", 
-    { _reportCreationData:reportCreationData, _payload:payload, _token:token  });
+    { _reportCreationData:reportCreationData, _payload:payload, _token:token  }, { timeout:30000 }).then(val => {
+        cy.log("reportId is next: ");
+        cy.log(<any>val);
+    });
+    cy.log("createApiReport");
+    cy.pause();
 });
 
 Cypress.Commands.add("stepInfo", (message:string) => {
