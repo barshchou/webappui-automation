@@ -287,28 +287,29 @@ describe("Full bowery way, multifamily as complete report", { tags: [ "@full_rep
             .verifyAverageTable()
             .verifyExpenseHistoryCommentary(testData.expenseHistory.commentary);
         NavigationSection.navigateToComparableExpenses();
-        testData.comparableExpenses.comparables.forEach((comp, i) => {
+        testData.comparableExpenses.comparables.forEach(comp => {
+            let j = 0;
             Income.ComparableExpenses.clickAddBlankColumnButton()
-                .enterAddressByColumnIndex(comp.address, i)
-                .enterLocationByColumnIndex(comp.location, i)
-                .chooseExpensePeriodByColumnIndex(comp.period, i)
-                .enterSquareFeetByColumnIndex(comp.squareFeet, i)
-                .enterResidentialUnitsByColumnIndex(comp.resUnits, i)
+                .enterAddressByColumnIndex(comp.address, j)
+                .enterLocationByColumnIndex(comp.location, j)
+                .chooseExpensePeriodByColumnIndex(comp.period, j)
+                .enterSquareFeetByColumnIndex(comp.squareFeet, j)
+                .enterResidentialUnitsByColumnIndex(comp.resUnits, j)
                 .enterCellDollarValueByColumnIndex(Income.ComparableExpenses.Page.getUnifiedEditableAndTotalCells("insurance"),
-                    comp.insurance, i)
+                    comp.insurance, j)
                 .enterCellDollarValueByColumnIndex(Income.ComparableExpenses.Page.getUnifiedEditableAndTotalCells("electricity"),
-                    comp.electricity, i)
+                    comp.electricity, j)
                 .enterCellDollarValueByColumnIndex(Income.ComparableExpenses.Page.getUnifiedEditableAndTotalCells("repairsAndMaintenance"),
-                    comp.repairsAndMaintenance, i)
+                    comp.repairsAndMaintenance, j)
                 .enterCellDollarValueByColumnIndex(Income.ComparableExpenses.Page.getUnifiedEditableAndTotalCells("payrollAndBenefits"),
-                    comp.payrollAndBenefits, i)
+                    comp.payrollAndBenefits, j)
                 .enterCellDollarValueByColumnIndex(Income.ComparableExpenses.Page.getUnifiedEditableAndTotalCells("generalAndAdministrative"),
-                    comp.generalAndAdministrative, i)
+                    comp.generalAndAdministrative, j)
                 .enterCellDollarValueByColumnIndex(Income.ComparableExpenses.Page.getUnifiedEditableAndTotalCells("management"),
-                    comp.management, i)
-                .verifyTOEByColumnIndex(comp.toe, i)
-                .verifyTOEPerSFByColumnIndex(i)
-                .verifyToePerUnitByColumnIndex(i);
+                    comp.management, j)
+                .verifyTOEByColumnIndex(comp.toe, j)
+                .verifyTOEPerSFByColumnIndex(j)
+                .verifyToePerUnitByColumnIndex(j);
         });
         Income.ComparableExpenses.verifyTableAverageValues();
         NavigationSection.navigateToExpenseForecast()

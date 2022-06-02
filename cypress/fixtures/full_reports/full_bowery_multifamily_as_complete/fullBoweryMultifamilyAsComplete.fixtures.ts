@@ -511,12 +511,12 @@ const rentComparablesFixture = () => {
 
 const resRentReconcilFixture = () => {
     return {
-        reconcilIntroComm: "Important considerations in determining potential rental value include location, access " +
-            "to transportation and neighborhood amenities, and building design and condition. The subject is in a " +
-            "desirable section of Lakeview, a neighborhood that has seen significant investment in the past 5 to 10 " +
+        reconcilIntroComm: "Important considerations in determining potential rental value include location, access to " +
+            "transportation and neighborhood amenities, and building design and condition. The subject is in a primarily" +
+            " residential section of Lakeview, a neighborhood that has seen significant investment in the past 5 to 10 " +
             "years. The site has good access to  transportation, and the block is appealing. The comparables are similar " +
-            "in their physical and locational appeal and are good indicators of value. Thus, our analysis of the forecast" +
-            " of market rents is presented:",
+            "in their physical and locational appeal and are good indicators of value. Thus, our analysis of the forecast " +
+            "of market rents is presented:",
         marketConclusion: 1100,
         marketBreakdown: "all market oriented",
         reconcilCommentary: "The comparable two-bedroom units range from $1,000 to $1,200 per month with an average of " +
