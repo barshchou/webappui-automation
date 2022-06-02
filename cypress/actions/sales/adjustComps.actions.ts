@@ -113,12 +113,12 @@ class AdjustCompsActions extends BaseActionsExt<typeof adjustCompsPage> {
     }
 
     verifyTrendedPriceByColumn(value: string, index = 0): AdjustCompsActions {
-        adjustCompsPage.trendedPriceCells.eq(index).should("have.text", value);
+        adjustCompsPage.cumulativePriceCells.eq(index).should("have.text", value);
         return this;
     }
 
     verifyAdjustedPriceByColumn(index = 0): AdjustCompsActions {
-        adjustCompsPage.trendedPriceCells.eq(index).invoke("text").then(trendedText => {
+        adjustCompsPage.cumulativePriceCells.eq(index).invoke("text").then(trendedText => {
             const trendedNumber = getNumberFromDollarNumberWithCommas(trendedText);
             adjustCompsPage.netPropertyAdjustmentsCells.eq(index).invoke("text").then(netAdjText => {
                 const netAdjNumber = Number(netAdjText.replace("%", ""));
@@ -140,23 +140,25 @@ class AdjustCompsActions extends BaseActionsExt<typeof adjustCompsPage> {
     * Verify that Trended Price per selected @param {string} basis adjusted based on
     Net Market adjustment total value
     */
-    verifyTrendedPricePerBasis(basis: string, index = 0): AdjustCompsActions {
+    verifyTrendedPricePerBasis(comparablesAdjustments: number[], basis: string, index = 0): AdjustCompsActions {
         adjustCompsPage.viewMarketDetails.click();
         adjustCompsPage.getPricePerBasisValue(basis).should("be.visible");
         adjustCompsPage.getPricePerBasisValue(basis).invoke("text").then(pricePerUnitText => {
-            const pricePerBasisNumber = getNumberFromDollarNumberWithCommas(pricePerUnitText);
-            adjustCompsPage.marketAdjustmentsCells.eq(index).invoke("text").then(marketAdjText => {
-                const marketAdjNumber = Number(marketAdjText.replace("%", ""));
-                const adjustedTrendedPriceToBe = Math.ceil((pricePerBasisNumber + pricePerBasisNumber * (marketAdjNumber / 100)) * 100) / 100;
-                let adjustedTrendedPriceText: string;
-                if (adjustedTrendedPriceToBe < 0) {
-                    adjustedTrendedPriceText = `-$${numberWithCommas(adjustedTrendedPriceToBe.toFixed(2)
-                        .replace("-", ""))}`;
-                } else {
-                    adjustedTrendedPriceText = `$${numberWithCommas(adjustedTrendedPriceToBe.toFixed(2))}`;
-                }
-                adjustCompsPage.trendedPriceCells.eq(index).should("have.text", adjustedTrendedPriceText);
-            });
+            let pricePerBasisNumber = getNumberFromDollarNumberWithCommas(pricePerUnitText);
+            let pricePerBasisNumberWithPercentage = 0;
+            for (let i = 0; i < comparablesAdjustments.length; i++) {
+                pricePerBasisNumberWithPercentage = pricePerBasisNumber + (pricePerBasisNumber * comparablesAdjustments[i]/ 100);
+                pricePerBasisNumber = pricePerBasisNumberWithPercentage;
+            }
+             let adjustedTrendedPriceText: string;
+             if (pricePerBasisNumber < 0) {
+                 adjustedTrendedPriceText = `-$${numberWithCommas(pricePerBasisNumber.toFixed(2)
+                     .replace("-", ""))}`;
+             } else {
+                 adjustedTrendedPriceText = `$${numberWithCommas(pricePerBasisNumber.toFixed(2))}`;
+             }
+             adjustCompsPage.cumulativePriceCells.eq(index).should("have.text", adjustedTrendedPriceText);
+           
         });
             
         return this;

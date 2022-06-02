@@ -1,18 +1,14 @@
-import BaseActions from "../../base/base.actions";
 import compGroupsPage from "../../../pages/income/commercial/compGroups.page";
+import BaseActionsExt from "../../base/base.actions.ext";
 
-class CompGroupsActions extends BaseActions {
+class CompGroupsActions extends BaseActionsExt<typeof compGroupsPage> {
 
     clickAddCompGroupButton() {
         compGroupsPage.addCompGroupButton.click();
         return this;
     }
 
-    /**
-     * @param {string} name
-     * @returns {CompGroupsActions}
-     */
-    enterGroupName(name) {
+    enterGroupName(name: string) {
         compGroupsPage.compGroupNameInput.type(name).should("have.value", name);
         return this;
     }
@@ -22,20 +18,12 @@ class CompGroupsActions extends BaseActions {
         return this;
     }
 
-    /**
-     * @param {string} groupName
-     * @returns {CompGroupsActions}
-     */
-    verifyCompGroupExists(groupName) {
+    verifyCompGroupExists(groupName: string) {
         compGroupsPage.getCompGroupSection(groupName).should("exist");
         return this;
     }
 
-    /**
-     * @param {string} groupName
-     * @returns {CompGroupsActions}
-     */
-    addCompGroup(groupName) {
+    addCompGroup(groupName: string) {
         this.clickAddCompGroupButton()
             .enterGroupName(groupName)
             .clickDialogAddCompGroupButton()
@@ -54,4 +42,4 @@ class CompGroupsActions extends BaseActions {
     }
 }
 
-export default new CompGroupsActions();
+export default new CompGroupsActions(compGroupsPage);

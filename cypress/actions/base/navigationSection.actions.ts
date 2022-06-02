@@ -54,6 +54,7 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
 
     clickCommercialRentRollButton() {
         navigationSectionPage.commercialRentRollButton.click();
+        this.clickYesIfExist();
         return this;
     }
 
@@ -243,7 +244,7 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         this.clickSalesButton()
             .clickFindCompsButton()
             .clickYesIfExist();        
-        cy.wait(`@${Alias.gql.FindSalesComps}`, { timeout:70000 });
+        cy.wait(`@${Alias.gql.SearchSalesTransactions}`, { timeout:120000 });
 
         return this;
     }

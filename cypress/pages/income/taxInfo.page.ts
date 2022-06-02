@@ -3,11 +3,17 @@ import BasePage from "../base/base.page";
 class TaxInfoPage extends BasePage {
     get basisRadio() {return cy.get("[name=basis]");}
 
-    getVerifyBasisRadioInput(value) {return cy.get(`[data-qa='basis-radio-group'] [data-qa=checked] input[value='${value}']`);}
+    getVerifyBasisRadioInput(value: string) {return cy.get(`[data-qa='basis-radio-group'] [data-qa=checked] input[value='${value}']`);}
 
     get landActualInput() {return cy.get("[name=landActual]");}
 
+    get landTransitional() {return cy.get("[name=landTransitional]");}
+
     get buildingActualInput() {return cy.get("[name=buildingActual]");}
+
+    get buildingTransitionalInput() {return cy.get("[name=buildingTransitional]");}
+
+    get includeTransitionalAssessedValueCheckbox() {return cy.get("[data-qa^='hasTransitionalAssessedValue'] input");}
 
     get totalTaxableAssessedValue() {return cy.get("[data-qa=totalActual-cell]");}
 
