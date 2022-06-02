@@ -6,12 +6,14 @@ const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreat
 });
 
 const _grossBuildingArea = 5000;
-const _numberOfCommercialUnits = 3;
-const _commercialUnitSf = [ 100000, 120000, 145000 ];
-const _leaseStatuses: Array<BoweryReports.LeaseStatus> = [ "Vacant", "Vacant", "Vacant" ];
-const _commercialRentSf = [ 499, 1256.12, 777.99 ];
+const _numberOfCommercialUnits = 2;
+const _commercialUnitSf = [ 100000, 120000 ];
+const _leaseStatuses: Array<BoweryReports.LeaseStatus> = [ "Vacant", "Vacant" ];
 const _address = "462 1st Avenue, New York, USA";
 const _leaseDate = "01012022";
+const _compGroup = "QA_4607_Comp_Group";
+const _marketRentConclusion = 332;
+const _unitsOfMeasure = "annually" as BoweryReports.UnitsOfMeasure;
 
 const _rentCompFields: BoweryReports.RentCompField[] = [
     {
@@ -48,7 +50,10 @@ export default {
     grossBuildingArea: _grossBuildingArea,
     listOfUnitsSF: _commercialUnitSf,
     leaseStatuses: _leaseStatuses,
-    rentsPsf: _commercialRentSf,
     rentCompFields: _rentCompFields,
-    leaseDate: _leaseDate
+    leaseDate: _leaseDate,
+    compGroup: _compGroup,
+    marketRentConclusion: _marketRentConclusion, 
+    unitsOfMeasure: _unitsOfMeasure,
+    compsAmount: 1
 };

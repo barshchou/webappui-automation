@@ -6,6 +6,7 @@ class StabilizedRentRollPage extends CommercialRentRollSharedComponentPage {
 
     get stabilizedRentRollHeaderSection() {return cy.get("*[data-qa='stabilizedRentRoll']");}
 
+    get autoFillButton() {return cy.get(`[data-qa=autofill-button]`);}
 }
 
 export default new StabilizedRentRollPage();
