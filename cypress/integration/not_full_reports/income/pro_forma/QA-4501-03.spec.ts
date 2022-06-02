@@ -23,14 +23,14 @@ describe("Potential Real Estate Tax Reimbursement",
         _NavigationSection.navigateToCommercialUnits();
         Property._CommercialUnits.enterListUnitSF(testData.listOfUnitsSF, testData.numberOfCommercialUnits);
 
-        cy.stepInfo("3. Go to Income → Commercial → In-Place Rent Role and fill in all necessary values to the table"); 
+        cy.stepInfo("3. Go to Income → Commercial → In-Place Rent Roll and fill in all necessary values to the table"); 
         _NavigationSection.navigateToCommercialInPlaceRentRoll();
         Income._CommercialManager.InPlaceRentRoll.chooseListLeaseStatuses(testData.leaseStatuses, testData.numberOfCommercialUnits);
         testData.rentsPsf.forEach((rent, index) => {
             Income._CommercialManager.InPlaceRentRoll.enterRentPerSFAnnuallyByRowNumber(rent, index);
         });
         
-        cy.stepInfo("3. Go to Income → Commercial → In-Place Rent Role and fill in all necessary values to the table"); 
+        cy.stepInfo("3. Go to Income → Commercial → In-Place Rent Roll and fill in all necessary values to the table"); 
         _NavigationSection.navigateToCommercialInPlaceRentRoll()
             .navigateToCommercialReimbursementSummary();
         

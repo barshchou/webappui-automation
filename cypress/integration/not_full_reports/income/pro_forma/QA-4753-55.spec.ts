@@ -19,7 +19,7 @@ describe("Pro Forma page table Effective Gross Income validation",
             .enterNumberOfResUnits(testData.numberOfResidentialUnits)
             .enterNumberOfCommercialUnits(testData.numberOfCommercialUnits);
 
-        cy.stepInfo("2. Go to Income → Residential → In-Place Rent Role and fill in all necessary values to the table"); 
+        cy.stepInfo("2. Go to Income → Residential → In-Place Rent Roll and fill in all necessary values to the table"); 
         _NavigationSection.navigateToResInPlaceRentRoll();
         Income._Residential.InPlaceRentRoll.enterMonthlyRents(testData.residentialMonthlyRent);
 
@@ -27,7 +27,7 @@ describe("Pro Forma page table Effective Gross Income validation",
         _NavigationSection.navigateToCommercialUnits();
         Property._CommercialUnits.enterListUnitSF(testData.listOfUnitsSF, testData.numberOfCommercialUnits);
 
-        cy.stepInfo("4. Go to Income → Commercial → In-Place Rent Role and fill in all necessary values to the table"); 
+        cy.stepInfo("4. Go to Income → Commercial → In-Place Rent Roll and fill in all necessary values to the table"); 
         _NavigationSection.navigateToCommercialInPlaceRentRoll();
         Income._CommercialManager.InPlaceRentRoll.chooseListLeaseStatuses(testData.leaseStatuses, testData.numberOfCommercialUnits);
         testData.rentsPsf.forEach((rent, index) => {

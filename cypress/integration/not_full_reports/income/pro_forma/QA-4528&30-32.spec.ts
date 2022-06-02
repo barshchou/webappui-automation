@@ -17,7 +17,7 @@ describe("Residential V/C Loss @ X% row",
         Property.Summary.enterNumberOfResUnits(testData.numberOfUnits)
             .enterGrossBuildingArea(testData.grossBuildingArea);
 
-        cy.stepInfo("2. Go to Income → Residential → In-Place Rent Role and fill in all necessary values to the table");
+        cy.stepInfo("2. Go to Income → Residential → In-Place Rent Roll and fill in all necessary values to the table");
         NavigationSection.navigateToResInPlaceRentRoll();
         Income.Residential.InPlaceRentRoll.enterAllEqualRentTypeCells(testData.rentType)
             .enterAllEqualLeaseStatuses(testData.leaseStatus)
