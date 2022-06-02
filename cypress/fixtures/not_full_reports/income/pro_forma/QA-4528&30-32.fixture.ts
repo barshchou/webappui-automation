@@ -8,5 +8,6 @@ export default {
     monthlyRent: 1500,
     resVacancyCollectionLoss: 5,
     resVCLossTotal: "-$2,700",
-    grossBuildingArea: 950
+    grossBuildingArea: 950,
+    residential: "Residential"
 };
