@@ -6,6 +6,7 @@ type ForecastItem = BoweryReports.ForecastItem;
 type BuildingDescription = BoweryReports.BuildingDescription;
 type Comparable = BoweryReports.Comparable;
 
+
 class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> {
 
     chooseForecastItemBasis(forecastItem: ForecastItem): ExpenseForecastActions {
@@ -166,8 +167,6 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
         expenseForecastPage.getCheckboxIncludeInProForma(forecastItem).should("have.value", "true").uncheck().should("have.value", "false");
         return this;
     }
-  //  
-
 
     verifyIncludeInProFormaCheckboxIsChecked(forecastItem: string): ExpenseForecastActions {
         expenseForecastPage.getCheckboxIncludeInProForma(forecastItem).should("have.value", "true");
@@ -273,6 +272,49 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
         });
         return this;
     }
+
+    xxverifyTotalForecastPSF(): ExpenseForecastActions {
+       //  expenseForecastPage.allForecastsInputs.then(elements => {
+            
+         //   let mainEl= elements.parent('[data-qa="fuel-forecast-item"]')
+            let mainEl= expenseForecastPage.allForecastsInputs
+            .parents('[data-qa$=insurance-forecast-item]').find('[data-qa="checked"]').find('[type="radio"]')
+           let attr =  mainEl.should('have.attr', 'value')
+           // let attribute = mainEl.getAttribute('value')
+         //    if (mainEl.should('have.attr', 'value').and('equal', 'unit')  ) {
+             //   if (mainEl.hasAttribute('value')) {
+            if (attr = "sf") {
+
+           // let io = mainEl.children('[data-qa$=checked]')
+               //value = "unit"
+            cy.log('yes');} else /*(mainEl.should('have.attr', 'value', 'sf') )*/ {
+                cy.log('no')}
+        //    mainEl.children(data-qa="checked").children(type="radio")
+     //    });
+        return this;
+    }
+
+
+    // verifyTotalForecastPSF(): ExpenseForecastActions {
+    //     expenseForecastPage.allForecastsInputs.then(elements => {
+    //         let sum = 0;
+    //         let mainEl= elements.parentsUntil('@data-qa=checked')
+    //         if ()
+    //         for (let i = 0; i < elements.length; i++) {
+    //             let elNumber = getNumberFromDollarNumberWithCommas(elements[i].getAttribute("value"));
+    //             sum += elNumber;
+    //         }
+    //         const textToBe = `Appraiser's Forecast: $${numberWithCommas(sum.toFixed(2))}`;
+    //         expenseForecastPage.appraisersTotalForecast.should("have.text", textToBe);
+    //     });
+    //     return this;
+    // }
+
+
+
+
+
+
 
     verifyTOECommentary(textToBe: string): ExpenseForecastActions {
         expenseForecastPage.toeCommentary.should("contain.text", textToBe);
