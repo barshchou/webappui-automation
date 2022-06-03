@@ -25,8 +25,8 @@ describe("Verify the Commercial Stabilized Rent Roll table",
         cy.stepInfo(`4. On the Income > Commercial > Comp Groups, a new Comp Group has been created with added Comps`); 
         _NavigationSection.clickCommercialCompGroups()
             .clickYesIfExist();
-        Income._CommercialManager.CompGroups.addCompGroup(testData.compGroup);
-        Income._CommercialManager.CompGroups.dragAllCommercialUnitsIntoGroup(testData.compGroup, testData.numberOfCommercialUnits);
+        Income._CommercialManager.CompGroups.addCompGroup(testData.compGroup)
+            .dragAllCommercialUnitsIntoGroup(testData.compGroup, testData.numberOfCommercialUnits);
 
         cy.stepInfo(`5. On the Income > Commercial > Rent Comps, several comps have been added for 
                     comparison into a new Created Group from the previous step`);
@@ -41,8 +41,9 @@ describe("Verify the Commercial Stabilized Rent Roll table",
                 Income._CommercialManager.RentComps.chooseRentCompFieldDropdownOption(field.name, field.value);
             }
         });
-        Income._CommercialManager.RentComps.enterLeaseDate(testData.leaseDate).clickSubmitButton();
-        Income._CommercialManager.RentComps.dragAllCommercialUnitsIntoGroup(testData.compGroup, testData.compsAmount);
+        Income._CommercialManager.RentComps.enterLeaseDate(testData.leaseDate)
+            .clickSubmitButton()
+            .dragAllCommercialUnitsIntoGroup(testData.compGroup, testData.compsAmount);
 
         cy.stepInfo(`6. On the Income > Commercial > Rent Reconciliation, the Market Rent Conclusion 
                     field is filled with any value`);
