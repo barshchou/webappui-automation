@@ -6,6 +6,6 @@ export default {
     enterSecondValue: "=Blo",
     listValue: "Unchanged Renovations",
     secondListValue: "Block",
-    verifyTexValue: "Upon renovation, the subject unit count and gross building area will remain unchanged.",
-    verifySecondTexValue: "962"
+    verifyTaxValue: "Upon renovation, the subject unit count and gross building area will remain unchanged.",
+    verifySecondTaxValue: "962"
 };

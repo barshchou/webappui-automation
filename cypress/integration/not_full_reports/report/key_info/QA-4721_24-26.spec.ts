@@ -18,18 +18,20 @@ describe(`Verify the Save and Save & Continue button functionality on the Report
         cy.stepInfo("2. Fill in the editable fields with values and click on the Save button then reload page");
         Report._KeyInfo.enterPropertyRightsAppraisedComment(testData.enterValue, true, false, false);
         Report._KeyInfo.clickNarrativeSuggestions(testData.listValue);
-        Report._KeyInfo.Page.textBoxPropertyRightsAppraised.should("include.text", testData.verifyTexValue);
+        Report._KeyInfo.Page.textBoxPropertyRightsAppraised.should("include.text", testData.verifyTaxValue);
         Report._KeyInfo.enterDefinitionMarketValue(testData.enterValue, true, false, false);
         Report._KeyInfo.clickNarrativeSuggestions(testData.listValue, 1);
-        Report._KeyInfo.Page.textBoxDefinitionOfMarketValue().should("include.text", testData.verifyTexValue);
-        cy.wait(500);
+        Report._KeyInfo.Page.textBoxDefinitionOfMarketValue().should("include.text", testData.verifyTaxValue);
+        Report._KeyInfo.Page.textBoxPropertyRightsAppraised.focus().clear().type(testData.enterValue);
+        Report._KeyInfo.clickNarrativeSuggestions(testData.listValue);
+        Report._KeyInfo.Page.textBoxPropertyRightsAppraised.should("include.text", testData.verifyTaxValue);
         Report._KeyInfo.clickSaveButton();
         cy.reload();
        
 
         cy.stepInfo("3. Verify that the changes are saved");
-        Report._KeyInfo.Page.textBoxPropertyRightsAppraised.should("include.text", testData.verifyTexValue);
-        Report._KeyInfo.Page.textBoxDefinitionOfMarketValue().should("include.text", testData.verifyTexValue);
+        Report._KeyInfo.Page.textBoxPropertyRightsAppraised.should("include.text", testData.verifyTaxValue);
+        Report._KeyInfo.Page.textBoxDefinitionOfMarketValue().should("include.text", testData.verifyTaxValue);
 
         deleteReport(testData.reportCreationData.reportNumber);
     });
@@ -42,19 +44,21 @@ describe(`Verify the Save and Save & Continue button functionality on the Report
         cy.stepInfo("2. Fill in the editable fields with values and click on the Save & Continue button");
         Report._KeyInfo.enterPropertyRightsAppraisedComment(testData.enterValue, true, false, false);
         Report._KeyInfo.clickNarrativeSuggestions(testData.listValue);
-        Report._KeyInfo.Page.textBoxPropertyRightsAppraised.should("include.text", testData.verifyTexValue);
+        Report._KeyInfo.Page.textBoxPropertyRightsAppraised.should("include.text", testData.verifyTaxValue);
         Report._KeyInfo.enterDefinitionMarketValue(testData.enterValue, true, false, false);
         Report._KeyInfo.clickNarrativeSuggestions(testData.listValue, 1);
-        Report._KeyInfo.Page.textBoxDefinitionOfMarketValue().should("include.text", testData.verifyTexValue);
-        cy.wait(500);
+        Report._KeyInfo.Page.textBoxDefinitionOfMarketValue().should("include.text", testData.verifyTaxValue);
+        Report._KeyInfo.Page.textBoxPropertyRightsAppraised.focus().clear().type(testData.enterValue);
+        Report._KeyInfo.clickNarrativeSuggestions(testData.listValue);
+        Report._KeyInfo.Page.textBoxPropertyRightsAppraised.should("include.text", testData.verifyTaxValue);
         Report._KeyInfo.clickSaveContinueButton();
 
         cy.stepInfo("3. Verify that the changes are saved and the user is redirected to the next page (Report > Appraiser)");
         Report._Appraiser.verifyPageOpened();
         cy.go("back");
         Report._KeyInfo.clickYesButton();
-        Report._KeyInfo.Page.textBoxPropertyRightsAppraised.should("include.text", testData.verifyTexValue);
-        Report._KeyInfo.Page.textBoxDefinitionOfMarketValue().should("include.text", testData.verifyTexValue);
+        Report._KeyInfo.Page.textBoxPropertyRightsAppraised.should("include.text", testData.verifyTaxValue);
+        Report._KeyInfo.Page.textBoxDefinitionOfMarketValue().should("include.text", testData.verifyTaxValue);
 
         deleteReport(testData.reportCreationData.reportNumber);
     });
@@ -67,28 +71,28 @@ describe(`Verify the Save and Save & Continue button functionality on the Report
         cy.stepInfo("2. Fill in the editable fields with values and do NOT click on the Save button");
         Report._KeyInfo.enterPropertyRightsAppraisedComment(testData.enterValue, true, false, false);
         Report._KeyInfo.clickNarrativeSuggestions(testData.listValue);
-        Report._KeyInfo.Page.textBoxPropertyRightsAppraised.should("include.text", testData.verifyTexValue);
+        Report._KeyInfo.Page.textBoxPropertyRightsAppraised.should("include.text", testData.verifyTaxValue);
         Report._KeyInfo.enterDefinitionMarketValue(testData.enterValue, true, false, false);
         Report._KeyInfo.clickNarrativeSuggestions(testData.listValue, 1);
-        Report._KeyInfo.Page.textBoxDefinitionOfMarketValue().should("include.text", testData.verifyTexValue);
+        Report._KeyInfo.Page.textBoxDefinitionOfMarketValue().should("include.text", testData.verifyTaxValue);
 
         cy.stepInfo("3. Try to proceed on any other page and verify that the Unsaved changes modal is displayed");
         _NavigationSection.clickPreviewEditButton()
             .clickLetterOfTransmittal()
             .verifyUnsavedChangesModal()
             .clickYesButton();
-        Report._KeyInfo.Page.textBoxPropertyRightsAppraised.should("include.text", testData.verifyTexValue);
-        Report._KeyInfo.Page.textBoxDefinitionOfMarketValue().should("include.text", testData.verifyTexValue);
+        Report._KeyInfo.Page.textBoxPropertyRightsAppraised.should("include.text", testData.verifyTaxValue);
+        Report._KeyInfo.Page.textBoxDefinitionOfMarketValue().should("include.text", testData.verifyTaxValue);
 
         cy.stepInfo("4. Try to proceed on any other page from the Key Info page and verify that the Unsaved changes modal is displayed");
         _NavigationSection.clickReportButton()
             .navigateToReportInformation();
         Report._KeyInfo.enterPropertyRightsAppraisedComment(testData.enterSecondValue, false, false, false);
         Report._KeyInfo.clickNarrativeSuggestions(testData.secondListValue);
-        Report._KeyInfo.Page.textBoxPropertyRightsAppraised.should("include.text", testData.verifySecondTexValue);
+        Report._KeyInfo.Page.textBoxPropertyRightsAppraised.should("include.text", testData.verifySecondTaxValue);
         Report._KeyInfo.enterDefinitionMarketValue(testData.enterSecondValue, false, false, false);
         Report._KeyInfo.clickNarrativeSuggestions(testData.secondListValue, 1);
-        Report._KeyInfo.Page.textBoxDefinitionOfMarketValue().should("include.text", testData.verifySecondTexValue);
+        Report._KeyInfo.Page.textBoxDefinitionOfMarketValue().should("include.text", testData.verifySecondTaxValue);
 
         cy.stepInfo("5 Verify that the changes are NOT saved on the Key Info page");
         _NavigationSection.clickPreviewEditButton()
@@ -96,8 +100,8 @@ describe(`Verify the Save and Save & Continue button functionality on the Report
             .verifyUnsavedChangesModal()
             .clickNoButton();
         cy.go("back");
-        Report._KeyInfo.Page.textBoxPropertyRightsAppraised.should("not.include.text", testData.verifySecondTexValue);
-        Report._KeyInfo.Page.textBoxDefinitionOfMarketValue().should("not.include.text", testData.verifySecondTexValue);
+        Report._KeyInfo.Page.textBoxPropertyRightsAppraised.should("not.include.text", testData.verifySecondTaxValue);
+        Report._KeyInfo.Page.textBoxDefinitionOfMarketValue().should("not.include.text", testData.verifySecondTaxValue);
 
         deleteReport(testData.reportCreationData.reportNumber);
     });
