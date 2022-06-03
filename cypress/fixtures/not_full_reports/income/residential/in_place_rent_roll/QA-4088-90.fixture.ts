@@ -8,7 +8,7 @@ const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreat
 
 export default {
     reportCreationData: _reportCreationData,
-    psfRadioValuePerAnnually: 'annually',
+    psfRadioValuePerMonthly: 'monthly' as BoweryReports.UnitsOfMeasure,
     psfRadioValuePerMonthly: 'monthly',
     labelText: 'What time period should rent PSF be based on?'
 };
