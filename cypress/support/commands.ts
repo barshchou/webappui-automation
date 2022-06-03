@@ -47,7 +47,7 @@ Cypress.Commands.add("loginByUI", (url) => {
 });
 
 Cypress.Commands.add("login", () => {
-    const envUrl = getEnvUrl();
+    const envUrl = "/";
     switch (Cypress.env("loginMethod")) {
         case "ui":
             cy.loginByUI(envUrl);
