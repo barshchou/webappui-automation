@@ -24,7 +24,7 @@ export default class BaseActions {
     }
 
     returnToHomePage() {
-        cy.visit(`${getEnvUrl()}/reports`);
+        cy.visit(`/reports`);
     }
 
     goBackWithSave() {
