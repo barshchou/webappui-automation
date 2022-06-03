@@ -1,12 +1,8 @@
 import ReportDataCreator from "../../../data_creator/reportData.creator";
-import { getCurrentMonthName } from "../../../../../utils/date.utils";
+import { getFullDate } from "../../../../../utils/date.utils";
 
 const _currentDate = () => {
-    let currentDate = getCurrentMonthName()
-        .substring(4)
-        .replaceAll(" ", ", ")
-        .replace(", ", " ");
-    return currentDate;
+    return getFullDate();
 };
 
 

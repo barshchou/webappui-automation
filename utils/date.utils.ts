@@ -69,3 +69,14 @@ export const getCurrentMonthName = (): string => {
 export const isCorrectQuarter = (quarter) => {
     return quarter === "Q1" || quarter === "Q2" || quarter === "Q3" || quarter === "Q4";
 };
+
+export const getFullDate = (): string => {
+    return Intl.DateTimeFormat(
+        'us', 
+        { 
+            day: 'numeric', 
+            month: 'long', 
+            year: 'numeric' 
+        }
+    ).format(new Date());
+};
