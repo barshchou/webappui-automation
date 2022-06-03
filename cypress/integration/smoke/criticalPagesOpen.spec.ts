@@ -12,7 +12,7 @@ const reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreato
     templateValue: Enums.TEMPLATE_TYPE.FREDDIE_MAC
 });
 
-describe("Verify that critical pages are opening", () => {
+describe("Verify that critical pages are opening", { tags: [ "@smoke" ] }, () => {
 
     before("Create report", () => {
         createReport(reportCreationData);
