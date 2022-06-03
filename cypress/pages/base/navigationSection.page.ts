@@ -51,6 +51,8 @@ class NavigationSection extends BasePage {
 
     get commercialRentCompsButton() { return cy.get("#commercial-rent-comps"); }
 
+    get commercialCompGroupsDiscussionButton() { return cy.get(`#commercial-comp-groups-discussion`);}
+
     get comparableExpenses() { return cy.get("#comparable-expenses"); }
 
     get amenities() { return cy.get("#amenities"); }

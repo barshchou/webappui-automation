@@ -5,6 +5,7 @@ import compGroupsActions from "./compGroups.actions";
 import rentReconciliationActions from "./rentReconciliation.actions";
 import stabilizedLeaseStructureActions from "./stabilizedLeaseStructure.actions";
 import reimbursementSummaryActions from "./reimbursementSummary.actions";
+import compGroupDiscussionActions from "./compGroupDiscussion.actions";
 
 export default {
     InPlaceRentRoll: rentRollActions,
@@ -12,6 +13,7 @@ export default {
     RentComps: commercialRentCompsActions,
     ReimbursementSummary: reimbursementSummaryActions,
     CompGroups: compGroupsActions,
+    CompGroupsDiscussion: compGroupDiscussionActions,
     RentReconciliation: rentReconciliationActions,
     StabilizedLeaseStructure : stabilizedLeaseStructureActions
 };
