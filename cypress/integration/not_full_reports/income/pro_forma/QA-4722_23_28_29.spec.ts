@@ -1,11 +1,9 @@
 import { numberWithCommas } from '../../../../../utils/numbers.utils';
-import testData from "../../../../fixtures/not_full_reports/income/pro_forma/QA-4501-03.fixture";
+import testData from "../../../../fixtures/not_full_reports/income/pro_forma/QA-4722_23_28_29.fixture";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { Property } from '../../../../actions';
 import { Income } from "../../../../actions";
-import proFormaTypes from "../../../../enums/proFormaTypes.enum";
-import Enums from "../../../../enums/incomeTypesCellNames.enum";
 
 describe("Potential Real Estate Tax Reimbursement", 
     { tags:[ "@income", "@pro_forma" ] }, () => {
@@ -30,14 +28,13 @@ describe("Potential Real Estate Tax Reimbursement",
             Income._CommercialManager.InPlaceRentRoll.enterRentPerSFAnnuallyByRowNumber(rent, index);
         });
         
-        cy.stepInfo("3. Go to Income → Commercial → In-Place Rent Roll and fill in all necessary values to the table"); 
-        _NavigationSection.navigateToCommercialInPlaceRentRoll()
-            .navigateToCommercialReimbursementSummary();
-        
-        cy.stepInfo("4. Go to Income → Reimbursement Summary and add Real Estate Taxes Reimbursement for commercial units"); 
+        cy.stepInfo("3. Go to Income → Reimbursement Summary and add Real Estate Taxes Reimbursement for commercial units"); 
+        _NavigationSection.clickCommercialReimbursementSummaryButton()
+            .clickYesIfExist();
         Income._CommercialManager.ReimbursementSummary.addNewCommercialReimbursement(
             testData.expenseType, testData.expenceTypeCellName, testData.reimbursementType, testData.knownInformation)
-            .fillReimbursements(testData.monthlyReimbursement);
+            .fillReimbursements(testData.monthlyReimbursement)
+            .fillVCLossByRow(testData.reimbursementVcLoss);
 
         cy.saveLocalStorage();
     });
@@ -48,31 +45,36 @@ describe("Potential Real Estate Tax Reimbursement",
             .verifyProgressBarNotExist();
     });
 
-    it("[QA-4501]", () => {
-        cy.stepInfo(`5 Verify that Pro Forma table contains Taxes Reimbursement Total value`);
-        Income._ProFormaActions.verifyCategoryTotal(
-            `$${numberWithCommas(Math.round(testData.annualReimbursement))}`, 
-            proFormaTypes.potentialRealEstateTaxesReimbursement);
-
-        cy.stepInfo(`5.1 Verify that Total is taken from Income → Potential Gross Income 
-                    → table → Potential Real Estate Taxes Reimbursement`);
-        _NavigationSection.navigateToPotentialGrossIncome();
-        Income._PotentialGrossIncome.verifyIncomeTypeUnified(
-            Enums.potentialRealEstateTaxesReimbursement, `$${numberWithCommas(testData.annualReimbursement.toFixed(2))}`);
+    it("[QA-4722]", () => {
+        cy.stepInfo(`4. The value in the Less Real Estate Taxes Reimbursement 
+                    V/C Loss @ X% is taken from Income → Commercial → Reimbursement Summary → V/C Loss % cell`);
+        Income._ProFormaActions.verifyResidentialVCLossLabel(
+            testData.expenseType, 
+            testData.reimbursementVcLoss);
     });
 
-    it("[QA-4502]", () => {
-        cy.stepInfo(`5. Verify that Pro Forma table contains Taxes Reimbursement PSF value`);
-        Income._ProFormaActions.verifyCategoryPSFTotal(
-            `$${numberWithCommas(testData.reimbursmentPerSf.toFixed(2))}`, 
-            proFormaTypes.potentialRealEstateTaxesReimbursement);
+    it("[QA-4723]", () => {
+        cy.stepInfo(`4. The value in the Less Real Estate Taxes Reimbursement 
+                    V/C Loss @ X% is taken from Income → Commercial → Reimbursement Summary → 
+                    Gross V/C Loss cell`);
+        Income._ProFormaActions.verifyResidentialVCLossTotal(
+            testData.expenseType, 
+            `-$${numberWithCommas(Math.round(testData.reimbursementLossTotal))}`);
     });
 
-    it("[QA-4503]", () => {
-        cy.stepInfo(`5. Verify that Pro Forma table contains Taxes Reimbursement Per Unit value`);
-        Income._ProFormaActions.verifyCategoryPerUnitTotal(
-            `$${numberWithCommas(Math.round(testData.reimbursmentPerUnit))}`, 
-            proFormaTypes.potentialRealEstateTaxesReimbursement);
+    it("[QA-4728]", () => {
+        cy.stepInfo(`4. The value in the Less Real Estate Taxes Reimbursement 
+                    V/C Loss @ X% is calcualted by formual: 
+                    Real Estate Taxes Reimbursement V/C Loss @ X% → PSF [Total/GBA Value]`);
+        Income._ProFormaActions.verifyResidentialVCLossPerSF(
+            testData.expenseType, testData.grossBuildingArea);
+    });
+
+    it("[QA-4729]", () => {
+        cy.stepInfo(`4. The value in the Less Real Estate Taxes Reimbursement 
+                    V/C Loss @ X% → Per Unit is calculated by the formula: Total / # of Residential Units`);
+        Income._ProFormaActions.verifyResidentialVCLossPerUnit(
+            testData.expenseType, testData.numberOfResidentialUnits);
 
         deleteReport(testData.reportCreationData.reportNumber);
     });

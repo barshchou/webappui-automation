@@ -5,8 +5,15 @@ import BaseActionsExt from "./base.actions.ext";
 class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPage> {
     clickYesIfExist() {
         cy.get("body").then($body => {
-            if ($body.text().includes("You have unsaved changes")) this.clickYesButton();
-        });
+                if ($body.text().includes("You have unsaved changes")) {
+                    cy.get("[data-qa=form-confirm-dialog]").invoke('prop', 'hidden').then($prop => {
+                        cy.log(`${$prop}`);
+                        if ($prop == false) {
+                            this.clickYesButton();
+                        }
+                    });
+                }
+            });
         return this;
     }
 

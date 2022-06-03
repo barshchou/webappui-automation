@@ -28,7 +28,7 @@ describe("Less [USE (Property>Commercial Units)] Commercial V/C Loss @ X% row",
     });
 
     it("QA-4602: Commercial V/C Loss @ X%", () => {
-        ProFormaPage.getCommercialUseVCLossRow(testData.useText)
+        ProFormaPage.commercialVCLossLabelCell(testData.useText)
             .should("contain.text", `${testData.comUseVCLossPercentage.toFixed(2)}%`);
         deleteReport(testData.reportCreationData.reportNumber);
     });

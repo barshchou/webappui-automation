@@ -14,6 +14,7 @@ export default class BaseActions {
 
     clickYesButton() {
         cy.get("*[name='form-confirm-submit-btn']").click();
+        this.verifyProgressBarNotExist();
         return this;
     }
 
