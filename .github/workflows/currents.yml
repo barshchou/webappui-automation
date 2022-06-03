@@ -13,6 +13,15 @@ on:
         - custom
         required: true
         default: staging
+      url:
+        type: choice
+        description: Select the url explicitly
+        options:
+        - 'https://bowery-development.herokuapp.com'
+        - 'https://bowery-staging.herokuapp.com'
+        - 'https://app.boweryvaluation.com'
+        required: true
+        default: staging
       customEnv:
         type: string
         description: Add custom environment url if needed
@@ -64,7 +73,7 @@ jobs:
         run: npm install
 
       - name: Run Cypress not snapshot tests on Currents.dev
-        run: currents run --tag ${{ github.event.inputs.env }} --spec ${{ github.event.inputs.spec_file }} --env ${{ github.event.inputs.tags }} --browser chrome --record --parallel --key ${{ secrets.CURRENTS_RECORD_KEY }} --ci-build-id "${{ github.repository }}-${{ github.run_id }}-${{ github.run_attempt}}"
+        run: currents run --config baseUrl=${{ github.event.inputs.url }} --tag ${{ github.event.inputs.env }} --spec ${{ github.event.inputs.spec_file }} --env ${{ github.event.inputs.tags }} --browser chrome --record --parallel --key ${{ secrets.CURRENTS_RECORD_KEY }} --ci-build-id "${{ github.repository }}-${{ github.run_id }}-${{ github.run_attempt}}"
         env:
           CYPRESS_USERNAME: ${{ secrets.USERNAME }}
           CYPRESS_PASSWORD: ${{ secrets.PASSWORD }}
