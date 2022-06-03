@@ -18,7 +18,7 @@ describe("[QA-4494] [QA-4495] [QA-4496] [QA-4497] [Income -> Pro Forma] Potentia
             Property._Summary.enterNumberOfResUnits(testData.resUnits)
                 .enterGrossBuildingArea(testData.grossBuildingArea);
 
-            cy.stepInfo("3. Go to Income → Residential → In-Place Rent Role and fill in all necessary values to the table");
+            cy.stepInfo("3. Go to Income → Residential → In-Place Rent Roll and fill in all necessary values to the table");
             _NavigationSection.navigateToResInPlaceRentRoll();
             Income._Residential.InPlaceRentRoll.enterMonthlyRents(testData.monthlyRent);
 
