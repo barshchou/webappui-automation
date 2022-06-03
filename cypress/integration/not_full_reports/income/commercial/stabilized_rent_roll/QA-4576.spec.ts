@@ -7,7 +7,7 @@ import { _NavigationSection } from "../../../../../actions/base";
 import { getTodayDateString } from "../../../../../../utils/date.utils";
 import stabilizedRentRollPage from "../../../../../pages/income/commercial/stabilizedRentRoll.page";
 
-describe.skip("Verify the display of the Stabilized Rent Roll page", 
+describe("Verify the display of the Stabilized Rent Roll page", 
     { tags: [ "@income", "@commercial", "@stabilized_rent_roll", "@snapshot_tests" ] }, () => {
         
     before("Login, create report", () => {
@@ -64,24 +64,33 @@ describe.skip("Verify the display of the Stabilized Rent Roll page",
         );
 
         cy.stepInfo(`3. Verify the display of the Stabilized Rent Roll page 
-        if there are > 0 Commercial Units with Comp Groups.`);
+                    if there are > 0 Commercial Units with Comp Groups.`);
 
-        cy.log("next section includes drag-and-drop interaction, so we can't go further for now.");
-        /**
-         * Automate behavior desribed by Alesia.
-         * ernst: next section includes drag-and-drop interaction, so we can't go further for now.
-         */
-        // _NavigationSection.openCompGroupsInCommercial();
-        // testData.compGroupName.forEach(groupName => {
-        //     Income._CommercialManager.CompGroups.Actions.addCompGroup(groupName);
-        // });
-        // _NavigationSection.clickCommercialRentComps().clickYesButton().verifyProgressBarNotExist();
-        // [testData.comparableFirst.address, testData.comparableSecond.address].forEach(address => {
-        //     Income._CommercialManager.RentComps.addCompFromMapByAddress(address);
-        // });
-        // Income._CommercialManager.RentComps.clickSaveButton().verifyProgressBarNotExist();
-        // _NavigationSection.clickCommercialStabRentRollButton().verifyProgressBarNotExist();
-        // cy.pause();
+        _NavigationSection.openCompGroupsInCommercial();
+        Income._CommercialManager.CompGroups.Actions.addCompGroup(testData.compGroup);
+        _NavigationSection.clickCommercialRentComps()
+            .clickYesIfExist();
+        Income._CommercialManager.RentComps.clickManuallyAddANewCompButton().
+                searchNewCompByAddress(testData.comparableFirst.address);
+        testData.rentCompFields.forEach(field => {
+            if(field.type == "input") {
+                Income._CommercialManager.RentComps.fillInRentCompFieldInput(field.name, field.value);
+            } else {
+                Income._CommercialManager.RentComps.chooseRentCompFieldDropdownOption(field.name, field.value);
+            }
+        });
+        Income._CommercialManager.RentComps.enterLeaseDate(testData.leaseDate)
+            .checkUnitOfMeasureRadioButton(testData.unitMeasureMontly)
+            .clickSubmitButton();
+        Income._CommercialManager.RentComps.dragAllCommercialUnitsIntoGroup(testData.compGroupName[0], testData.numberOfCommercialUnits)
+            .verifyAllItemsDragged();
+        _NavigationSection.clickRentReconcillationButton()
+            .clickYesIfExist();
+        Income._CommercialManager.RentReconciliation.addMarketRentConclusion(testData.marketRentConclusion);
+        _NavigationSection.clickCommercialStabRentRollButton()
+            .clickYesIfExist();
+        
+
 
         deleteReport(testData.reportCreationData.reportNumber);
     });

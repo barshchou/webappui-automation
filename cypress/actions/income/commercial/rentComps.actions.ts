@@ -81,7 +81,7 @@ class CommercialRentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
     }
 
     clickToSearchResultsRow(): CommercialRentCompsActions {
-        rentCompsPage.searchResultsRow.should("be.visible").click();
+        rentCompsPage.searchResultsRow.first().should("be.visible").click();
         return this;
     }
 
@@ -125,21 +125,29 @@ class CommercialRentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
     }
 
     verifyAllItemsDragged(): CommercialRentCompsActions {
-        rentCompsPage.draggablePlaceholder.should('be.visible');
+        rentCompsPage.draggableUnsortedPlaceholder.should('be.visible');
         return this;
     }
 
     /**
      * Drags ALL elements (units) from unsorted group into <groupName>.
      * 
+     * Verifies that after dragging all elements there is no units left in unsorted group
+    */
+    dragAllCommercialUnitsIntoGroup(groupName: string, numberOfUnits = 1, index = 0): CommercialRentCompsActions {
+        this.dragCommercialUnitsIntoGroup(groupName, numberOfUnits, index)
+            .verifyAllItemsDragged();
+        return this;
+    }
+
+    /**
+     * Drag N amount of commercial unit into a group.
+     * 
      * By default 1st commercial unit in unsorted group is dragged as after dragging indexes are reassigned.
      * 
      * If there is no elements in a drop group we use default locator, in other case we use 1st row of a group.
-     * 
-     * Verifies that after dragging all elements there is no units left in unsorted group
-     * 
-    */
-    dragAllCommercialUnitsIntoGroup(groupName: string, numberOfUnits = 1, index = 0): CommercialRentCompsActions {
+     */
+    dragCommercialUnitsIntoGroup(groupName: string, numberOfUnits = 1, index = 0): CommercialRentCompsActions {
         let subject = rentCompsPage.getDragableElement(index); 
         let commercialUnit = cy.get(subject);
         let target: string;
@@ -153,8 +161,6 @@ class CommercialRentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
             
             commercialUnit.dragAndDrop(subject, target);
         }
-
-        this.verifyAllItemsDragged();
         return this;
     }
 }
