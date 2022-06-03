@@ -9,6 +9,8 @@ export const reportCreationFixture = () => {
     });
 };
 
+
+
 export default {
     reportCreationData: reportCreationFixture(),
     chips: [
@@ -17,7 +19,7 @@ export default {
             typeSuggestValue: 'Commercial',
             verifySuggest: '1',
             verifyExport: '1'
-        }, 
+        }, // propertyInformation.commercialUnits.commercialUnitCount
         {
             suggestionName: 'As Complete Residential Unit Count',
             typeSuggestValue: 'Residential',
@@ -35,7 +37,7 @@ export default {
             typeSuggestValue: 'Bloc',
             verifySuggest: '962',
             verifyExport: '962'
-        }, 
+        }, // block
         {
             suggestionName: 'Building Name',
             typeSuggestValue: 'Buildin',
@@ -53,7 +55,7 @@ export default {
             typeSuggestValue: 'Commercial',
             verifySuggest: '1',
             verifyExport: '1'
-        },
+        }, // propertyInformation.commercialUnits.currentCommercialUnitCount
         {
             suggestionName: 'Current Condition',
             typeSuggestValue: 'Condition',
@@ -65,7 +67,7 @@ export default {
             typeSuggestValue: 'Residential',
             verifySuggest: '0',
             verifyExport: '0'
-        },
+        }, // propertyInformation.propertySummary.current.residentialUnitCount
         {
             suggestionName: 'Foreclosure Sale',
             typeSuggestValue: 'Foreclosur',
@@ -83,37 +85,37 @@ export default {
             typeSuggestValue: 'Gros',
             verifySuggest: '2,124,441',
             verifyExport: 'Gross building area'
-        }, 
+        }, // propertyInformation.commercialUnits.commercialSquareFootage
         {
             suggestionName: 'Property Type',
             typeSuggestValue: 'Propert',
             verifySuggest: 'mixed-use',
             verifyExport: 'mixed-use'
-        }, 
+        }, // propertyType
         {
             suggestionName: 'Site Area',
             typeSuggestValue: 'Sit',
             verifySuggest: '753,175',
             verifyExport: '753,175'
-        }, 
+        }, // propertyInformation.propertySummary.siteArea
         {
             suggestionName: 'Street Address',
             typeSuggestValue: 'Stree',
             verifySuggest: '462 1st Avenue',
             verifyExport: '462 1st Avenue'
-        },
+        }, // address
         {
             suggestionName: 'Lot',
             typeSuggestValue: 'Lo',
             verifySuggest: '100',
             verifyExport: '100'
-        },  
+        }, // lot
         {
             suggestionName: 'Street Name',
             typeSuggestValue: 'Stree',
             verifySuggest: '1st Avenue',
             verifyExport: '1st Avenue'
-        }, 
+        }, // propertyInformation.propertySummary.streetName
         {
             suggestionName: 'Unchanged Renovations',
             typeSuggestValue: 'Unchange',
