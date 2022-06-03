@@ -85,6 +85,12 @@ class RentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
         return this;
     }
 
+    verifyCheckboxByQaAttr(attribute: string | number, isChecked = true): this {
+        rentCompsPage.getCheckboxByDataQaAttr(attribute)
+            .should("have.value", isChecked ? "true" : "false");
+        return this;
+    }
+
     uncheckCheckboxByQaAttr(attribute: string | number): this {
         rentCompsPage.getCheckboxByDataQaAttr(attribute)
             .should("have.value", "true").uncheck({ force: true }).should("have.value", "false");
@@ -594,6 +600,20 @@ class RentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
 
     verifyColumnExist(columnName: string): this {
         rentCompsPage.tablesColumns.contains(columnName).should("exist");
+        return this;
+    }
+
+    checkFilterValue(name: string, value: string): this {
+        rentCompsPage.getFilterArrowButton(name).click();
+        this.checkCheckboxByQaAttr(value);
+        rentCompsPage.getFilterArrowButton(name).click();
+        return this;
+    }
+
+    verifyFilterValue(name: string, value: string, isChecked = true): this {
+        rentCompsPage.getFilterArrowButton(name).click();
+        this.verifyCheckboxByQaAttr(value, isChecked);
+        rentCompsPage.getFilterArrowButton(name).click();
         return this;
     }
 }

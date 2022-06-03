@@ -11,7 +11,7 @@ class RentCompsPage extends BasePage{
 
     get unitTypesArrowButton() {return cy.xpath("//*[text()='Unit Type']//following-sibling::button");}
 
-    getCheckboxByDataQaAttr(attribute) {return cy.get(`*[data-qa='${attribute}'] input`);}
+    getCheckboxByDataQaAttr(attribute: string | number) {return cy.get(`*[data-qa='${attribute}'] input`);}
 
     get changeCompTypePopUpMessage() {return cy.xpath("//*[text()='Changing your comp type will cause you " +
         "to lose all currently selected comparables.']");}
@@ -48,7 +48,7 @@ class RentCompsPage extends BasePage{
 
     get pickerCalendar() {return cy.get("*[role='document']");}
 
-    getDayInCurrentMonthPicker(day) {return cy.xpath(`//*[text()='${day}']//parent::button[@tabindex='0']`);}
+    getDayInCurrentMonthPicker(day: string | number) {return cy.xpath(`//*[text()='${day}']//parent::button[@tabindex='0']`);}
 
     get amenitiesArrowButton() {return cy.xpath("//*[text()='Amenities']//following-sibling::button");}
 
@@ -58,7 +58,7 @@ class RentCompsPage extends BasePage{
 
     get sortByDropdown() {return cy.get("*[data-qa='select-value']");}
 
-    getSortDropdownOptionByValue(value) {return cy.get(`*[data-value='${value}']`);}
+    getSortDropdownOptionByValue(value: string) {return cy.get(`*[data-value='${value}']`);}
 
     get loadingModal() {return cy.get("*[data-qa='loading-modal']");}
 
@@ -106,9 +106,9 @@ class RentCompsPage extends BasePage{
 
     get newUnitForm() {return cy.get("*[data-qa='new-unit-modal']");}
 
-    getCategoryRowByIndexLocator(index) {return `*[data-qa='row-${index}']`;}
+    getCategoryRowByIndexLocator(index: number) {return `*[data-qa='row-${index}']`;}
 
-    getCategoryRowByIndex(index) {return cy.get(this.getCategoryRowByIndexLocator(index));}
+    getCategoryRowByIndex(index: number) {return cy.get(this.getCategoryRowByIndexLocator(index));}
 
     get categoryRoomsCellsLocator() {return "*[data-qa='col-rooms']";}
 
@@ -124,15 +124,15 @@ class RentCompsPage extends BasePage{
 
     get selectStateButton() {return cy.get("[data-qa='search.locationIdentifier-select-list'] [role='button']");}
 
-    getStateByName(name) {return cy.get(`[data-qa='search.locationIdentifier-${name}-select-option']`);}
+    getStateByName(name: string) {return cy.get(`[data-qa='search.locationIdentifier-${name}-select-option']`);}
 
     get propertyIdentifierInput() {return cy.get("*[name='search.propertyIdentifier']");}
 
-    getBedroomTableByNumber(bedroomsNumber) {return cy.get(`[data-qa='bedrooms_${bedroomsNumber}']`);}
+    getBedroomTableByNumber(bedroomsNumber: number | string) {return cy.get(`[data-qa='bedrooms_${bedroomsNumber}']`);}
 
-    getSelectButtonByAddress(address) {return cy.xpath(`//*[text()='${address}']//following-sibling::button`);}
+    getSelectButtonByAddress(address: string) {return cy.xpath(`//*[text()='${address}']//following-sibling::button`);}
 
-    getRemoveButtonByAddress(address) {return cy.xpath(`//*[text()='${address}']//following-sibling::button[contains(@data-qa, 'remove-btn')]`);}
+    getRemoveButtonByAddress(address: string) {return cy.xpath(`//*[text()='${address}']//following-sibling::button[contains(@data-qa, 'remove-btn')]`);}
 
     get editButtonLocator() {return "[data-qa=col-edit] button";}
 
@@ -170,27 +170,29 @@ class RentCompsPage extends BasePage{
 
     get bathroomsCellsLocator() {return "[data-qa=col-bathrooms]";}
 
-    getBedroomsTableHeader(bedroomsNumber) {return cy.get(`[data-qa='rent-comps-type-bedrooms_${bedroomsNumber}'] > p`);}
+    getBedroomsTableHeader(bedroomsNumber: number) {return cy.get(`[data-qa='rent-comps-type-bedrooms_${bedroomsNumber}'] > p`);}
 
-    get uncategorizedTableHeader() {return cy.get("[data-qa=rent-comps-type-uncategorized] > p");}
+    get uncategorizedTableHeader() { return cy.get("[data-qa=rent-comps-type-uncategorized] > p"); }
 
-    getBedroomSubjectColumn(bedroomsNumber) {
+    getBedroomSubjectColumn(bedroomsNumber: number) {
         return cy.get(`[data-qa=rent-comps-type-bedrooms_${bedroomsNumber}] [data-qa=computed-panel] [data-qa='0-column']`);
     }
 
-    getBedroomMarketRateSummary(bedroomsNumber) {
+    getBedroomMarketRateSummary(bedroomsNumber: number) {
         return cy.xpath(`//*[@data-qa='rent-comps-type-bedrooms_${bedroomsNumber}']//descendant::p[.='Rent Roll Market Rate Summary']`);
     }
 
-    get perBuildingFiltersButton() {return cy.xpath("//button[.='Filters']");}
+    get perBuildingFiltersButton() { return cy.xpath("//button[.='Filters']"); }
 
-    get tablesColumns() {return cy.get("[scope=col]");}
+    get tablesColumns() { return cy.get("[scope=col]"); }
 
-    get unitTypesWrapper() {return cy.get("[data-qa^='filters.selectedUnitTypes'] [data-qa=chips-wrapper]");}
+    get unitTypesWrapper() { return cy.get("[data-qa^='filters.selectedUnitTypes'] [data-qa=chips-wrapper]"); }
 
-    getAreYouSurePopUp(basis) {return cy.xpath(`//*[.='Are you sure you want to search Per ${basis}?']`);}
+    getAreYouSurePopUp(basis: string) { return cy.xpath(`//*[.='Are you sure you want to search Per ${basis}?']`); }
 
-    get searchCancelButton() {return cy.get("[data-qa=search-cancel]");}
+    get searchCancelButton() { return cy.get("[data-qa=search-cancel]"); }
+
+    getFilterArrowButton(name: string) { return cy.xpath(`//*[text()='${name}']//following-sibling::button`); }
 }
 
 export default new RentCompsPage();
