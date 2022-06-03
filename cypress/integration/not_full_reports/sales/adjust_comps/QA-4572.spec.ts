@@ -19,7 +19,7 @@ describe("Check custom adjustment",
             .selectCompFromMapByAddress(testData.comparableSecond.address);
 
         cy.stepInfo("2. Open Adjust comps page, verify custom adjustment row can be added and edited");
-        NavigationSection.openAdjustCompsInSales();
+        NavigationSection.navigateToAdjustComps();
         Sales.AdjustComps.enterSizeAdjustmentByColumn(testData.comparableFirst.sizeAdjustment, 0)
             .enterSizeAdjustmentByColumn(testData.comparableSecond.sizeAdjustment, 1)
             .enterConditionAdjustmentByColumn(testData.comparableFirst.conditionAdjustment, 0)
