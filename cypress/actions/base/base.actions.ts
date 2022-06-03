@@ -4,7 +4,6 @@
 
 
 import { Options } from "cypress-image-snapshot";
-import { getEnvUrl } from "../../../utils/env.utils";
 
 export default class BaseActions {
 
