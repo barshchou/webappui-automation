@@ -11,8 +11,21 @@ const _customCategory: BoweryReports.ForecastItem = {
     name: "customExpence"
 };
 
+
+const _buildingDescription: BoweryReports.BuildingDescription = {
+    grossArea: 2500,
+    numberOfUnits: 1,
+  };
+
 const _numberOfCommercialUnits = 2;
-const _numberOfResidentialUnits = 2;
+const _numberOfResidentialUnits = 1;
+
+const rentRollResidentialUnitFixture = () : BoweryReports.ResidentialUnit => {
+    return {
+            rooms: 5,
+            monthlyRent: 400
+        };
+    };
 
 
 const _expensesInProFormaByDefaultArray = [
@@ -172,6 +185,7 @@ const _forecastPerUnitnotIncluded = '$0';
 export default {
     reportCreationData: _reportCreationData,
     customCategory: _customCategory,
+    buildingDescription: _buildingDescription,
     expensesInProFormaByDefaultArray: _expensesInProFormaByDefaultArray,
     // expenseForecastInsuranceFixture,
     // expenseForecastElectricityFixture,
@@ -191,5 +205,7 @@ export default {
     expenseForecastFixtureWithPSFArray,
     commentaries: Object.freeze(commentariesFixture()),
     forecastPSFnotIncluded: _forecastPSFnotIncluded,
-    forecastPerUnitnotIncluded: _forecastPerUnitnotIncluded
+    forecastPerUnitnotIncluded: _forecastPerUnitnotIncluded,
+    residentialUnits: rentRollResidentialUnitFixture(),
+    perRoomAnalysis: "Include Per Room Analysis in Report"
 };
