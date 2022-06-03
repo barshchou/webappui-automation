@@ -6,8 +6,6 @@ import { ReviewExport } from '../../../../actions';
 describe("", () => {
 
     it("Test body", { tags: [ "@report", "@key_info", "@check_export" ] }, () => {
-        cy.restoreLocalStorage();
-
         createReport(testData.reportCreationData);
 
         cy.stepInfo("1. Export the report");
