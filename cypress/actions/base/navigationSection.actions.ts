@@ -147,8 +147,7 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         this.clickIncomeApproachButton()
             .clickCommercialArrow()
             .clickCommercialCompGroups()
-            .clickYesIfExist()
-            .verifyProgressBarNotExist();
+            .clickYesIfExist();
         return this;
     }
 
