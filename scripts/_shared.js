@@ -10,21 +10,15 @@ function _exec(command,cb) {
    }).stdout.pipe(process.stdout);
 }
 
-function _mutateCommand(command, args, commandKey){
+function _mutateCommand(command, args){
     if(args != undefined || args == ""){
       command = command.concat(` ${args}`)
-      console.log(command+"\n");
       let customEnv = "";
       customEnv =  args.split(",").find(elem => elem.startsWith("customEnv="))
       if(customEnv != undefined){
         customEnv = customEnv.replace("customEnv=","").replace(/["']/g, "");
         command = command.concat(` --config baseUrl=${customEnv}`)
       }
-      console.log(customEnv+"\n");
-      console.log(command);
-    }
-    if(commandKey.startsWith("cy:") || commandKey.startsWith("currents:")){
-      console.log(command);
     }
     return command
 }

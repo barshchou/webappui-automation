@@ -15,12 +15,10 @@ let args = `${process.argv[process.argv.length-1]}`
  */
 let command = JSON.parse(packageJson).scripts[commandKey]
 
-console.log(command);
 
-command = _mutateCommand(command, args, commandKey);
+command = _mutateCommand(command, args);
 
-console.log(command);
-console.log(args)
+console.log("Command: "+command+"\n");
 _exec(command, (result)=>{
     console.log(result);
 })
