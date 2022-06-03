@@ -58,7 +58,7 @@ class ProFormaActions extends BaseActionsExt<typeof proFormaPage> {
     verifyResidentialVCLossPerUnit(categoryName: string, numberOfUnits: number): this {
         proFormaPage.residentialVCLossTotal(categoryName).invoke("text").then(totalText => {
             const totalNumber = getNumberFromMinusDollarNumberWithCommas(totalText);
-            const perUnitTextToBe = `-$${numberWithCommas(totalNumber / numberOfUnits)}`;
+            const perUnitTextToBe = `-$${numberWithCommas(Math.round(totalNumber / numberOfUnits))}`;
             proFormaPage.residentialVCLossPerUnit(categoryName).should("have.text", perUnitTextToBe);
         });
         return this;
