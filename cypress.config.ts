@@ -1,4 +1,4 @@
-import { defineConfig } from 'cypress'
+import { defineConfig } from 'cypress';
 
 export default defineConfig({
   chromeWebSecurity: false,
@@ -8,15 +8,15 @@ export default defineConfig({
   watchForFileChanges: false,
   videoCompression: 15,
   videoUploadOnPasses: false,
-  experimentalStudio: true,
   projectId: 'EDvaU4',
   e2e: {
     // We've imported your old cypress plugins here.
     // You may want to clean this up later by importing these.
     setupNodeEvents(on, config) {
-      return require('./cypress/plugins/index.js')(on, config)
+      // eslint-disable-next-line @typescript-eslint/no-var-requires
+      return require('./cypress/plugins/index.js')(on, config);
     },
     excludeSpecPattern: '*.studio.*',
-    specPattern: 'cypress/e2e/**/*.{js,jsx,ts,tsx}',
+    specPattern: 'cypress/integration/**/*.spec.{js,jsx,ts,tsx}',
   },
-})
+});

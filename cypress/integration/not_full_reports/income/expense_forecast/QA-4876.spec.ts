@@ -3,7 +3,7 @@ import { createReport, deleteReport } from "../../../../actions/base/baseTest.ac
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Property from "../../../../actions/property/property.manager";
 import Income from "../../../../actions/income/income.manager";
-import tableExpenseHistoryCellNames from "../../../../../cypress/enums/expenseHistoryTableRows.enum";
+import tableExpenseHistoryCellNames from "../../../../enums/expenseHistoryTableRows.enum";
 
 describe("Historical expense Electricity Per SF is correctly calculated and displayed",
         { tags: [ "@snapshot_tests", "@expense_forecast", "@income" ] }, () => {

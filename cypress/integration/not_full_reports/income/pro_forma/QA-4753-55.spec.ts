@@ -1,5 +1,5 @@
-import { numberWithCommas } from './../../../../../utils/numbers.utils';
-import testData from "../../../../fixtures/not_full_reports/income/pro_forma/QA-4525-27.fixture";
+import { numberWithCommas } from '../../../../../utils/numbers.utils';
+import testData from "../../../../fixtures/not_full_reports/income/pro_forma/QA-4753-55.fixture";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { Property } from '../../../../actions/index';
@@ -7,7 +7,7 @@ import { Income } from "../../../../actions";
 import proFormaTypes from "../../../../enums/proFormaTypes.enum";
 import Enums from "../../../../enums/incomeTypesCellNames.enum";
 
-describe("Potential Gross Income", 
+describe("Pro Forma page table Effective Gross Income validation", 
     { tags:[ "@income", "@pro_forma" ] }, () => {
     
     before("Login, create report, prepare data", () => {
@@ -39,7 +39,8 @@ describe("Potential Gross Income",
             .clickYesIfExist();
         Income._CommercialManager.ReimbursementSummary.addNewCommercialReimbursement(
             testData.expenseType, testData.expenceTypeCellName, testData.reimbursementType, testData.knownInformation)
-            .fillReimbursements(testData.monthlyReimbursement);
+            .fillReimbursements(testData.monthlyReimbursement)
+            .fillVCLossByRow(testData.reimbursementVcLoss);
 
         cy.stepInfo(`6. Go to Property → Amenities, check Parking checkbox and fill in the number of Parking Spaces, 
                     check Laundry checkbox, check Storage Units checkbox and fill in the number of Storage Units`);
@@ -50,17 +51,20 @@ describe("Potential Gross Income",
         
         cy.stepInfo("7. Go to Income → Miscellaneous → Parking and fill in all necessary values");
         _NavigationSection.navigateToParking();
-        Income._MiscellaneousManager.Parking.addMonthlyRents(testData.monthlyRents);
+        Income._MiscellaneousManager.Parking.addMonthlyRents(testData.monthlyRents)
+            .addParkingVCLossPercentage(testData.vcLossTypeRadio, testData.parkingVCLoss);
 
         cy.stepInfo("8. Go to Income → Miscellaneous → Laundry and fill in all necessary values"); 
         _NavigationSection.clickLaundryButton()
             .clickYesIfExist();
-        Income._MiscellaneousManager.Laundry.enterLaundryIncome(testData.laundryIncome);
+        Income._MiscellaneousManager.Laundry.enterLaundryIncome(testData.laundryIncome)
+            .enterLaundryVCLossPercentage(testData.laundryVCLoss, testData.laundryVcLossTypeRadio);
 
         cy.stepInfo("9. Go to Income → Miscellaneous → Storage and fill in all necessary values"); 
         _NavigationSection.clickStorageButton()
             .clickYesIfExist();
-        Income._MiscellaneousManager.Storage.addStorageIncome(testData.storageIncome);
+        Income._MiscellaneousManager.Storage.addStorageIncome(testData.storageIncome)
+            .enterStorageVCLossPercentage(testData.storageVCLoss, testData.storageVcLossTypeRadio);
 
         cy.stepInfo("10. Go to Income → Miscellaneous → Other and fill in all necessary values"); 
         _NavigationSection.clickOtherButton()
@@ -76,33 +80,32 @@ describe("Potential Gross Income",
             .verifyProgressBarNotExist();
     });
 
-    it("[QA-4525]", () => {
-        cy.stepInfo(`11. Total = [Total_PotentialResidentialIncome] + [Total_Potential[USE]Income](up to 5 uses) + 
-                    [Total_RealEstateTaxReimbursement] + [Total_ParkingIncome] + [Total_LaundryIncome] + 
-                    [Total_StorageIncome] + [Total_OtherIncome]`);
+    it(`[QA-4753]`, () => {
+        cy.stepInfo(`11. The value in the Potential Gross Income → Total is calculated by the formula:
+                    Total = [Total_Potential Gross Income] - all Losses`);
         Income._ProFormaActions.verifyCategoryTotal(
-            `$${numberWithCommas(Math.round(testData.potentialGrossIncomeTotal))}`, 
-            proFormaTypes.potentialGrossIncome);
+            `$${numberWithCommas(Math.round(testData.effectiveGrossIncomeTotal))}`, 
+            proFormaTypes.effectiveGrossIncome);
 
         cy.stepInfo(`11.1 Verify that Total is taken from Income → Potential Gross Income 
-                    → table → Potential Gross Income`);
+                    → table → Effective Gross Income`);
         _NavigationSection.navigateToPotentialGrossIncome();
         Income._PotentialGrossIncome.verifyIncomeTypeUnified(
-            Enums.potentialGrossIncome, `$${numberWithCommas(testData.potentialGrossIncomeTotal.toFixed(2))}`);
+            Enums.effectiveGrossIncome, `$${numberWithCommas(testData.effectiveGrossIncomeTotal.toFixed(2))}`);
     });
 
-    it("[QA-4526]", () => {
-        cy.stepInfo(`11. Verify that Pro Forma table contains Potential Gross Income PSF value`);
+    it(`[QA-4754]`, () => {
+        cy.stepInfo(`11. Verify that Pro Forma table contains Effective Gross Income PSF value`);
         Income._ProFormaActions.verifyCategoryPSFTotal(
-            `$${numberWithCommas(testData.potentialGrossIncomePerSf.toFixed(2))}`, 
-            proFormaTypes.potentialGrossIncome);
+            `$${numberWithCommas(testData.effectiveGrossIncomePerSf.toFixed(2))}`, 
+            proFormaTypes.effectiveGrossIncome);
     });
 
-    it("[QA-4527]", () => {
-        cy.stepInfo(`11. Verify that Pro Forma table contains Potential Gross Income Per Unit value`);
+    it(`[QA-4755]`, () => {
+        cy.stepInfo(`11. Verify that Pro Forma table contains Effective Gross Income Per Unit value`);
         Income._ProFormaActions.verifyCategoryPerUnitTotal(
-            `$${numberWithCommas(Math.round(testData.potentialGrossIncomePerUnit))}`, 
-            proFormaTypes.potentialGrossIncome);
+            `$${numberWithCommas(Math.round(testData.effectiveGrossIncomePerUnit))}`, 
+            proFormaTypes.effectiveGrossIncome);
 
         deleteReport(testData.reportCreationData.reportNumber);
     });
