@@ -28,8 +28,17 @@ describe(`[QA-5011] [Income>Expense forecast] “Include Expense on Pro Forma”
         //     _NavigationSection.navigateToResInPlaceRentRoll();
         //     Income._Residential.InPlaceRentRoll.checkCheckboxByLabel(testData.perRoomAnalysis)
         //     .enterRoomsNumberByRowNumber(testData.residentialUnits.rooms, 0);
+       
         _NavigationSection.navigateToExpenseForecast();
-        Income._ExpenseForecastActions.xxverifyTotalForecastPSF();
+        // expensesCardsNames.expenseCardsIDArray.forEach(element => {
+        //              Income._ExpenseForecastActions.uncheckIncludeInProFormaCheckbox(element);
+        //          });
+        testData.expenseForecastFixtureWithUnitArray.forEach(element => {
+                    Income._ExpenseForecastActions.enterForecastItemForecast(element);
+                 });
+      
+      
+                 Income._ExpenseForecastActions.xxverifyTotalForecastPSF();
 
 
            

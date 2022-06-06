@@ -274,25 +274,56 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
     }
 
     xxverifyTotalForecastPSF(): ExpenseForecastActions {
-       //  expenseForecastPage.allForecastsInputs.then(elements => {
-            
-         //   let mainEl= elements.parent('[data-qa="fuel-forecast-item"]')
-            let mainEl= expenseForecastPage.allForecastsInputs
-            .parents('[data-qa$=insurance-forecast-item]').find('[data-qa="checked"]').find('[type="radio"]')
-           let attr =  mainEl.should('have.attr', 'value')
-           // let attribute = mainEl.getAttribute('value')
-         //    if (mainEl.should('have.attr', 'value').and('equal', 'unit')  ) {
-             //   if (mainEl.hasAttribute('value')) {
-            if (attr = "sf") {
+        expenseForecastPage.allForecastsInputs.then(inputs => {
+            cy.wrap(inputs.parents('[data-qa$=-forecast-item]').find('[label="Include Expense on Pro Forma"]').find('[type="checkbox"]'))
+                .invoke('prop', 'value').then(value => {
 
-           // let io = mainEl.children('[data-qa$=checked]')
-               //value = "unit"
-            cy.log('yes');} else /*(mainEl.should('have.attr', 'value', 'sf') )*/ {
-                cy.log('no')}
-        //    mainEl.children(data-qa="checked").children(type="radio")
-     //    });
+                    let checked = value
+                    if (checked === "true") {
+                        cy.wrap(inputs.parents('[data-qa$=-forecast-item]').find('[data-qa="checked"]').find('[type="radio"]'))
+                            .invoke('prop', 'value').then(value => {
+
+                                let unitBasis = value
+                                if (unitBasis === "unit") {
+                                    cy.log('unit');
+                                } if (unitBasis === "sf") {
+                                    let sum = 0;
+                                    for (let i = 0; i < inputs.length; i++) {
+                                        let elNumber = getNumberFromDollarNumberWithCommas(inputs[i].getAttribute("value"));
+                                        sum += elNumber;
+                                    }
+                                    const textToBe = `Appraiser's Forecast: $${numberWithCommas(sum.toFixed(2))}`;
+                                    expenseForecastPage.appraisersTotalForecast.should("have.text", textToBe);
+                                    // cy.log('sf')
+                                } else {
+                                    cy.log('room')
+                                }
+                            });
+                    }
+
+
+                });
+
+        });
         return this;
     }
+    // return nnn
+
+    //  cy.log(mainEl)
+    // cy.log(mainEl)
+    // let attr =  mainEl.getAttribute('value');
+    // let attribute = mainEl.getAttribute('value')
+    //    if (mainEl.should('have.attr', 'value').and('equal', 'unit')  ) {
+    //   if (mainEl === "sf") {
+    //    if (attr === "sf") {
+
+    // let io = mainEl.children('[data-qa$=checked]')
+    //value = "unit"
+    // cy.log('yes');} else /*(mainEl.should('have.attr', 'value', 'sf') )*/ {
+    //     cy.log('no')}
+    //    mainEl.children(data-qa="checked").children(type="radio")
+    //    });
+
 
 
     // verifyTotalForecastPSF(): ExpenseForecastActions {
