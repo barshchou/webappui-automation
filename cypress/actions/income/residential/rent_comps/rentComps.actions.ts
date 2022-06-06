@@ -234,22 +234,22 @@ class RentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
         return this;
     }
 
-    enterDateInput(date: string, type = "min"): this {
+    enterDateInput(date: string | number, type = "min"): this {
         this.clearDateInput(type);
         const isDateCorrect = isDateHasCorrectFormat(date);
         switch (type) {
             case "max":
-                rentCompsPage.maxDateValueInput.scrollIntoView().should("be.visible").type(date);
+                rentCompsPage.maxDateValueInput.scrollIntoView().should("be.visible").type(`${date}`);
                 if (isDateCorrect) {
-                    this.verifyEnteredDate("max", date);
+                    this.verifyEnteredDate("max", `${date}`);
                 } else {
                     rentCompsPage.errorMessage.should("exist");
                 }
                 break;
             default:
-                rentCompsPage.minDateValueInput.scrollIntoView().should("be.visible").type(date);
+                rentCompsPage.minDateValueInput.scrollIntoView().should("be.visible").type(`${date}`);
                 if (isDateCorrect) {
-                    this.verifyEnteredDate("min", date);
+                    this.verifyEnteredDate("min", `${date}`);
                 } else {
                     rentCompsPage.errorMessage.should("exist");
                 }
@@ -274,7 +274,7 @@ class RentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
         return this;
     }
 
-    verifyEnteredDate(type: string, date: string): this {
+    verifyEnteredDate(type: string, date: string | number): this {
         date = date ?? getTodayDateString();
         if (type === "min") {
             rentCompsPage.dateMinInputToCheckValue.should("have.value", date);
@@ -603,14 +603,14 @@ class RentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
         return this;
     }
 
-    checkFilterValue(name: string, value: string): this {
+    checkFilterValue(name: string, value: string | number): this {
         rentCompsPage.getFilterArrowButton(name).click();
         this.checkCheckboxByQaAttr(value);
         rentCompsPage.getFilterArrowButton(name).click();
         return this;
     }
 
-    verifyFilterValue(name: string, value: string, isChecked = true): this {
+    verifyFilterValue(name: string, value: string | number, isChecked = true): this {
         rentCompsPage.getFilterArrowButton(name).click();
         this.verifyCheckboxByQaAttr(value, isChecked);
         rentCompsPage.getFilterArrowButton(name).click();

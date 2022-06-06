@@ -18,17 +18,17 @@ describe(`Saved filter values after page refreshing
         testData.filters.forEach((filter) => {
             Income._Residential
                 .RentComps.BaseActions
-                .checkFilterValue(filter.name, filter.value as string);
+                .checkFilterValue(filter.name, filter.value);
         });
         testData.numericFilters.forEach((filter) => {
             Income._Residential
                 .RentComps.BaseActions
-                .enterValueToInput(filter.name, filter.value as string);
+                .enterValueToInput(filter.name, filter.value);
         });
         testData.dateFilters.forEach((filter) => {
             Income._Residential
                 .RentComps.BaseActions
-                .enterDateInput(filter.value as string, filter.name);
+                .enterDateInput(filter.value, filter.name);
         });
 
         cy.stepInfo(`2. Click 'Save' button, refresh the page
@@ -38,7 +38,7 @@ describe(`Saved filter values after page refreshing
         testData.filters.forEach((filter) => {
             Income._Residential
                 .RentComps.BaseActions
-                .verifyFilterValue(filter.name, filter.value as string, true);
+                .verifyFilterValue(filter.name, filter.value, true);
         });
         testData.numericFilters.forEach((filter) => {
             Income._Residential
@@ -48,7 +48,7 @@ describe(`Saved filter values after page refreshing
         testData.dateFilters.forEach((filter) => {
             Income._Residential
                 .RentComps.BaseActions
-                .verifyEnteredDate(filter.name, filter.value as string);
+                .verifyEnteredDate(filter.name, filter.value);
         });
 
         cy.stepInfo(`3. Click 'Reset filters' button, click 'Save' button,
@@ -60,7 +60,7 @@ describe(`Saved filter values after page refreshing
         testData.filters.forEach((filter) => {
             Income._Residential
                 .RentComps.BaseActions
-                .verifyFilterValue(filter.name, filter.value as string, false);
+                .verifyFilterValue(filter.name, filter.value, false);
         });
         testData.numericFilters.forEach((filter) => {
             Income._Residential
