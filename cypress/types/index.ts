@@ -161,6 +161,15 @@ namespace BoweryReports {
         sourceOfInfo: string,
         taxYear: number
     }
+
+    export type UnitType = "typical" | "duplex" | "triplex" | "simplex";
+    export type SourceOfInformation = "bowery subject" | "external database" | "other";
+    export type Amenities = "none" | "backyard" | "balcony" | "roof";
+
+    export type RentCompsFilter = {
+        name: string,
+        value: string | number 
+    };
 }
 
 namespace Utils {
