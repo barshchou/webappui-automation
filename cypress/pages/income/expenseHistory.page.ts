@@ -23,9 +23,6 @@ class ExpenseHistoryPage extends BasePage {
     getUnifiedAverageCell(cellName: string) { return cy.get(`[row-id=${cellName}] [col-id=average]`); }
 
     getUtilityExpensesOption(optionName: string) { return cy.get(`[name=utilitiesExpensesMode][value=${optionName}]`); }
-
-    expenseModeRadioButton(mode: string) { return cy.get(`[name="utilitiesExpensesMode"][value='${mode}']`);}
-
 }
 
 export default new ExpenseHistoryPage();
