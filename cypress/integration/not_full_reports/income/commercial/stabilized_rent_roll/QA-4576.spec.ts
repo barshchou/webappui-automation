@@ -7,7 +7,7 @@ import { _NavigationSection } from "../../../../../actions/base";
 import { getTodayDateString } from "../../../../../../utils/date.utils";
 import stabilizedRentRollPage from "../../../../../pages/income/commercial/stabilizedRentRoll.page";
 
-describe("Verify the display of the Stabilized Rent Roll page", 
+describe("[QA-4576] Verify the display of the Stabilized Rent Roll page", 
     { tags: [ "@income", "@commercial", "@stabilized_rent_roll", "@snapshot_tests" ] }, () => {
         
     before("Login, create report", () => {
