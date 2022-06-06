@@ -20,7 +20,7 @@ conditionalDescribe("Group of tests for numeric inputs at create comp modal",
             .selectDropdownOptionNewComp(Sales._FindComps.Page.conditionDropdown, testData.condition);
     });
 
-    it.only("QA-4139: Verify the # Residential Units* field", () => {
+    it("QA-4139: Verify the # Residential Units* field", () => {
         Sales._FindComps.verifyNumericInputNewComp(Sales._FindComps.Page.createCompNumberResidentialUnits, testData.spec4139.numberOfUnitsDefault)
             .enterNumericInputNewComp(Sales._FindComps.Page.createCompNumberResidentialUnits, testData.spec4139.regularNum)
             .enterNumericInputNewComp(Sales._FindComps.Page.createCompNumberResidentialUnits, testData.spec4139.decimalNum)
