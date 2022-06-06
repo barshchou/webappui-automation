@@ -9,7 +9,6 @@ const _currentDate = () => {
     return currentDate;
 };
 
-
 export default {
     reportCreationData: ReportDataCreator.getReportData("4017"),
     dateOfInspectionRowName: "Date of Inspection",
