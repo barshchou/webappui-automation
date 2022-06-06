@@ -140,6 +140,34 @@ namespace BoweryReports {
         name: LeaseDateName,
         value: string
     }
+
+    export type CurrentTaxInfoData = {
+        liabilityBasis?: string,
+        landValue: number,
+        buildingValue: number,
+        className?: string,
+        rateYear?: number,
+        rateValue?: number,
+        liabilityCommentary?: string
+    };
+
+    export type TaxCompData = {
+        address: string,
+        yearBuilt: number,
+        basis: number,
+        taxPerBasis: number,
+        sourceOfInfo: string,
+        taxYear: number
+    }
+
+    export type UnitType = "typical" | "duplex" | "triplex" | "simplex";
+    export type SourceOfInformation = "bowery subject" | "external database" | "other";
+    export type Amenities = "none" | "backyard" | "balcony" | "roof";
+
+    export type RentCompsFilter = {
+        name: string,
+        value: string | number 
+    };
 }
 
 namespace Utils {

@@ -94,6 +94,8 @@ class NavigationSection extends BasePage {
     get menuItemsProfileOrganization() {return cy.get("[role=menu] > li");}
 
     get comercialReimbursementButton() {return cy.get("#commercial-reimbursement-summary");}
+
+    get commercialRentReconcillationButton() {return cy.get(`#commercial-rent-reconciliation`);}
 }
 
 export default new NavigationSection();

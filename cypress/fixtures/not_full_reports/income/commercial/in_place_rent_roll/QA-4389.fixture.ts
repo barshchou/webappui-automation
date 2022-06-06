@@ -19,6 +19,8 @@ const generalFixture = () => {
 };
 
 export default {
+    unitsOfMeasureAnnually: "annually" as BoweryReports.UnitsOfMeasure,
+    unitsOfMeasureMonthly: "monthly" as BoweryReports.UnitsOfMeasure,
     reportCreationData: reportCreationFixture(),
     general: Object.freeze(generalFixture())
 };
