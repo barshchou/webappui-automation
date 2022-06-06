@@ -150,6 +150,11 @@ class ExpenseHistoryActions extends BaseActionsExt<typeof expenseHistoryPage>{
         expenseHistoryPage.getUtilityExpensesOption(optionName).check().should("be.checked");
         return this;
     }
+
+    clickUtilitiesExpensesMode(mode: string): ExpenseHistoryActions {
+        expenseHistoryPage.expenseModeRadioButton(mode).click();
+        return this;
+    }
 }
 
 export default new ExpenseHistoryActions(expenseHistoryPage);

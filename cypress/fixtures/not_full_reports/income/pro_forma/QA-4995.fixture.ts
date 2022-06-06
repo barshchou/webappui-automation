@@ -36,7 +36,11 @@ const _periods = {
         expensePeriodType: "Actual",
         year: Number(getYearFromDate()) - 1,
         insurance: 10000,
-    };
+};
+
+const _expenseModeElectricityFuel = "combinedElectricityAndFuel";
+const _expenseModeElectricityFuelWater = "combinedAll";
+const _expenseModeBrokenOut = "brokenOut";
 
 export default {
     reportCreationData: ReportDataCreator.getReportData("4519"),
@@ -47,5 +51,8 @@ export default {
     buildingDescription: _buildingDescription,
     periods: _periods,
     insurancePerSfCardSnapshotName: "Insurance_PerSF_Forecast_Item_Component",
-    basis: _basis
+    basis: _basis,
+    expenseModeElectricityFuelWater: _expenseModeElectricityFuelWater,
+    expenseModeBrokenOut: _expenseModeBrokenOut,
+    expenseModeElectricityFuel: _expenseModeElectricityFuel
 };

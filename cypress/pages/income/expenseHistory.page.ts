@@ -24,6 +24,8 @@ class ExpenseHistoryPage extends BasePage {
 
     getUtilityExpensesOption(optionName: string) { return cy.get(`[name=utilitiesExpensesMode][value=${optionName}]`); }
 
+    expenseModeRadioButton(mode: string) { return cy.get(`[name="utilitiesExpensesMode"][value='${mode}']`);}
+
 }
 
 export default new ExpenseHistoryPage();
