@@ -26,7 +26,7 @@ describe(`[QA-4719] Verify the "Linked" chips dropdown in the new narrative comp
             Report._KeyInfo.Page.textBoxPropertyRightsAppraised.should("include.text", chip.verifySuggest);
             Report._KeyInfo.enterDefinitionMarketValue(`=${chip.typeSuggestValue}`, false, false, false);
             Report._KeyInfo.clickNarrativeSuggestions(chip.suggestionName, 1);
-            Report._KeyInfo.Page.textBoxPropertyRightsAppraised.should("include.text", chip.verifySuggest);
+            Report._KeyInfo.Page.textBoxDefinitionOfMarketValue().should("include.text", chip.verifySuggest);
         });
         Report._KeyInfo.Page.formSaveBtn().click();
         Report._KeyInfo.Page.formSaveBtn(1).click();

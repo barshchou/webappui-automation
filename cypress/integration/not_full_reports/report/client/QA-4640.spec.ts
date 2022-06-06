@@ -22,34 +22,13 @@ describe(`[QA-4640] Verify the "Linked" chips dropdown in the new narrative comp
         cy.stepInfo(`3. Enter the “=“ and verify the "Linked" chips dropdown for both sections: options 'Gross Building Area', 
             'Building Name', 'Property Type', 'Residential Unit Count', 'Commercial Unit Count', 'Street Address', 'Street Name', 
             'Site Area', 'Year Built', 'Block', 'Lot', 'Concluded Cap Rate', 'Zones', 'Condition'.`);
-        Report._Client.enterIntendedUserTextBox(testData.textToType);
-        testData.suggestions.forEach(el => {
-            Report._Client.verifyNarrativeSuggestions(el.suggestionName)
-            .Page.intendedUserTextBox.type("{downarrow}");
-        });
-
-        Report._Client.Page.identificationOfClientTextBox.click();
-        Report._Client.enterIdentificationOfTheClientTextBox(testData.textToType);
-        testData.suggestions.forEach(el => {
-            Report._Client.verifyNarrativeSuggestions(el.suggestionName, 1)
-            .Page.identificationOfClientTextBox.type("{downarrow}");
-        });
-
-        cy.stepInfo(`4. Verify that each option can be selected for both sections.
-            5. Verify that the form displays updated chips values for both sections.`);
-        Report._Client.Page.intendedUserTextBox.click();
-        testData.suggestions.forEach(el => {
-            Report._Client.enterIntendedUserTextBox(`=${el.typeSuggestValue}`)
-            .clickNarrativeSuggestions(el.suggestionName)
-            .verifyIntendedUserTextBox(el.verifySuggest);
-        });
-
-        Report._Client.Page.identificationOfClientTextBox.click();
-        testData.suggestions.forEach(el => {
-            Report._Client.enterIdentificationOfTheClientTextBox(`=${el.typeSuggestValue}`)
-            .clickNarrativeSuggestions(el.suggestionName, 1)
-            .verifyIdentificationOfTheClientTextBox(el.verifySuggest);
-
+        testData.chips.forEach(chip => {
+            Report._Client.enterIntendedUser(`=${chip.typeSuggestValue}`, false, false, false);
+            Report._Client.clickNarrativeSuggestions(chip.suggestionName);
+            Report._Client.Page.intendedUserTextBox.should("include.text", chip.verifySuggest);
+            Report._Client.enterIdentificationOfTheClient(`=${chip.typeSuggestValue}`, false, false, false);
+            Report._Client.clickNarrativeSuggestions(chip.suggestionName, 1);
+            Report._Client.Page.identificationOfClientTextBox.should("include.text", chip.verifySuggest);
         });
 
         cy.stepInfo("5. Download report");
@@ -65,7 +44,7 @@ describe(`[QA-4640] Verify the "Linked" chips dropdown in the new narrative comp
             cy.stepInfo("6. Verify the linked chips on export for both sections:");
             cy.visit(<string>file);
 
-            testData.suggestions.forEach(item => {
+            testData.chips.forEach(item => {
                 cy.contains("Identification of the Client").next().scrollIntoView().should("include.text", item.verifyExport);
                 cy.contains("Intended Use & User").next().scrollIntoView().should("include.text", item.verifyExport);
             });
