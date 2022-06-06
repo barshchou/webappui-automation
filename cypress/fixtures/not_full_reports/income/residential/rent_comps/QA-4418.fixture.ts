@@ -1,6 +1,6 @@
 import ReportDataCreator from "../../../../data_creator/reportData.creator";
 
-const _filters: BoweryReports.Filter[] = [
+const _filters: BoweryReports.RentCompsFilter[] = [
     {
         name: "Unit Type",
         value: "typical" as BoweryReports.UnitType
@@ -19,7 +19,7 @@ const _filters: BoweryReports.Filter[] = [
     }
 ];
 
-const _numericFilters: BoweryReports.Filter[] = [
+const _numericFilters: BoweryReports.RentCompsFilter[] = [
     {
         name: "minRent",
         value: 10
@@ -38,7 +38,7 @@ const _numericFilters: BoweryReports.Filter[] = [
     }
 ];
 
-const _dateFilters: BoweryReports.Filter[] = [
+const _dateFilters: BoweryReports.RentCompsFilter[] = [
     {
         name: "min",
         value: "01-01-2022"

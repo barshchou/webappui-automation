@@ -164,7 +164,7 @@ namespace BoweryReports {
     export type SourceOfInformation = "bowery subject" | "external database" | "other";
     export type Amenities = "none" | "backyard" | "balcony" | "roof";
 
-    export type Filter = {
+    export type RentCompsFilter = {
         name: string,
         value: string | number 
     };
