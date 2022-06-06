@@ -31,6 +31,11 @@ class StabilizedRentRollActions extends CommercialRentRollSharedComponent<typeof
         return this;
     }
 
+    clickAutoFillButton(): StabilizedRentRollActions {
+        stabRentRollPage.autoFillButton.click();
+        return this;
+    }
+
 }
 
 export default new StabilizedRentRollActions(stabRentRollPage);

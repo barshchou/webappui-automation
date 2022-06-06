@@ -104,7 +104,7 @@ class CommercialRentRollSharedComponent<T extends CommercialRentRollSharedCompon
         return this;
     }
 
-    verifyAnnualRentCellPerSFBasisByRow(rentPerSF: number, squareFoot: number, calcMethod: "annually" | "monthly",
+    verifyAnnualRentCellPerSFBasisByRow(rentPerSF: number, squareFoot: number, calcMethod: BoweryReports.UnitsOfMeasure,
                                         rowNumber = 0): this {
         let numberToBe;
         if (calcMethod === "annually") {
@@ -139,7 +139,7 @@ class CommercialRentRollSharedComponent<T extends CommercialRentRollSharedCompon
         return this;
     }
 
-    verifyMonthlyRentPerSFByRow(rentPerSF: number, squareFoot: number, calcMethod: "annually" | "monthly",
+    verifyMonthlyRentPerSFByRow(rentPerSF: number, squareFoot: number, calcMethod: BoweryReports.UnitsOfMeasure,
                                 rowNumber = 0): this {
         let numberToBe;
         if (calcMethod === "annually") {
