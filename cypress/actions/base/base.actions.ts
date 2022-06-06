@@ -14,6 +14,7 @@ export default class BaseActions {
 
     clickYesButton() {
         cy.get("*[name='form-confirm-submit-btn']").click();
+        this.verifyProgressBarNotExist();
         return this;
     }
 
@@ -45,7 +46,7 @@ export default class BaseActions {
         return this;
     }
 
-    clickSubmitBtn(){
+    clickSubmitBtn() {
         cy.get('[type="submit"][data-qa="save-btn"]').click();
         return this;
     }
@@ -71,6 +72,11 @@ export default class BaseActions {
 
     verifyContainsValue(expectedValue: string) {
         cy.contains(expectedValue).should("be.visible");
+        return this;
+    }
+
+    verifyTooltipExist() {
+        cy.get("[role=tooltip]").should("not.exist");
         return this;
     }
 

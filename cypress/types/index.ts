@@ -33,7 +33,7 @@ namespace BoweryReports {
     export type PerUnitPerSF = "Per Unit" | "Per SF"
     export type ForecastItemBasis = "insurance" | "electricity"
     | "fuel" | "waterAndSewer" | "repairsAndMaintenance" | "payrollAndBenefits" | "generalAndAdministrative" 
-    | "legalAndProfessionalFees" | "miscellaneous" | "management" | "reserves" | "total" | "custom";
+    | "legalAndProfessionalFees" | "miscellaneous" | "management" | "reserves" | "total" | "custom" | "utilities";
 
     export type CommercialUnitsUseValues = "retail" | "office" | "medical" | "community" | "industrial" | "other" | "undetermined";
     export type CommercialUnitsUseTexts = "Retail" | "Office" | "Medical Office" | "Community Facility" | "Industrial" |
@@ -83,6 +83,18 @@ namespace BoweryReports {
         forecast?: number | undefined, 
         projection?: number 
     }
+
+    export type Periods = { 
+        expensePeriodType: BoweryReports.ExpensePeriodType | string, 
+        month?: string,
+        year: number | string, 
+        insurance?: number, electricity?: number, fuel?: number, waterAndSewer?: number, repairsAndMaintenance?: number, 
+        payrollAndBenefits?: number, generalAndAdministrative?: number, legalAndProfessionalFees?: number, miscellaneous?: number, 
+        management?: number, replacementReserves?: number 
+    };
+
+    export type ExpensePeriodType = "Actual" | "Projection" | "Actual T12" | "Annualized Historical";
+
     export type Comparable = {address: string, location?: string, period?: string, squareFeet?: number, resUnits?: number,
         insurance?: number, electricity?: number, fuel?: number, waterAndSewer?: number, repairsAndMaintenance?: number, 
         payrollAndBenefits?: number, generalAndAdministrative?: number, legalAndProfessionalFees?: number, miscellaneous?: number, 
@@ -103,7 +115,50 @@ namespace BoweryReports {
         type: "input" | "dropdown"
     };
 
+    export type OtherIncomeItem = {
+        vcLossType: string,
+        vcPercent: number,
+        incomeCategory: string,
+        annualAmount: number
+    }
+
+    export type ParkingVcLossType = "Residential" | "Parking"
+
+    export type StorageVcLossType = "Residential" | "Storage V/C"
+
+    export type LaundryVcLossType = "Residential" | "Laundry V/C"
+
+    export type ReimbursementType = "dollarAmount" | "percentOfCurrentYearLiability" | "increaseOverBaseYear"
+
+    export type KnownInformation = "Annual" | "Monthly"
+
     export type UnitsOfMeasure = "annually" | "monthly" | "per square foot per year" | "per square foot per month";
+
+    export type UtilityExpenses = "brokenOut" | "combinedElectricityAndFuel" | "combinedAll";
+
+    export type leaseDate = {
+        name: LeaseDateName,
+        value: string
+    }
+
+    export type CurrentTaxInfoData = {
+        liabilityBasis?: string,
+        landValue: number,
+        buildingValue: number,
+        className?: string,
+        rateYear?: number,
+        rateValue?: number,
+        liabilityCommentary?: string
+    };
+
+    export type TaxCompData = {
+        address: string,
+        yearBuilt: number,
+        basis: number,
+        taxPerBasis: number,
+        sourceOfInfo: string,
+        taxYear: number
+    }
 }
 
 namespace Utils {

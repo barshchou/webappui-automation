@@ -3,10 +3,9 @@ import { createReport, deleteReport } from "../../../../actions/base/baseTest.ac
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Property from "../../../../actions/property/property.manager";
 import Income from "../../../../actions/income/income.manager";
-import { Tag } from "../../../../utils/tags.utils";
 
 describe("Per SF Appraiser's Forecast value for Insurance is correctly converted to Per Unit value", 
-    { tags: [ Tag.income, Tag.expense_forecast ] }, () => {
+    { tags: [ "@income", "@expense_forecast" ] }, () => {
         
     before("Login, create report", () => {
         createReport(testData.reportCreationData);

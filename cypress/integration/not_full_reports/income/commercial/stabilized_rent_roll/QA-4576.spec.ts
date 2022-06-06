@@ -6,11 +6,9 @@ import { Base, Property, Income } from "../../../../../actions";
 import { _NavigationSection } from "../../../../../actions/base";
 import { getTodayDateString } from "../../../../../../utils/date.utils";
 import stabilizedRentRollPage from "../../../../../pages/income/commercial/stabilizedRentRoll.page";
-import { Tag } from "../../../../../utils/tags.utils";
-
 
 describe.skip("Verify the display of the Stabilized Rent Roll page", 
-    { tags: [ Tag.income, Tag.commercial, Tag.stabilized_rent_roll, Tag.snapshot_tests ] }, () => {
+    { tags: [ "@income", "@commercial", "@stabilized_rent_roll", "@snapshot_tests" ] }, () => {
         
     before("Login, create report", () => {
         createReport(testData.reportCreationData);

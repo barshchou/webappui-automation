@@ -16,6 +16,7 @@ export enum Tag {
     sales = "@sales",
     value_conclusion = "@value_conclusion",
     check_export = "@check_export",
+    key_info = "@key_info",
     tax_info = "@tax_info",
     report = "@report",
     client = "@client",
@@ -24,5 +25,7 @@ export enum Tag {
     pro_forma = "@pro_forma",
     preview_edit = "@preview_edit",
     introduction = "@introduction",
-    market = "@market"
+    market = "@market",
+    smoke = "@smoke",
+    salesforce = "@salesforce"
 }

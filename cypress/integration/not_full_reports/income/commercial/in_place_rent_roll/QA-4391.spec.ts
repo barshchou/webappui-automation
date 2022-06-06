@@ -3,10 +3,9 @@ import NavigationSection from "../../../../../actions/base/navigationSection.act
 import Property from "../../../../../actions/property/property.manager";
 import Income from "../../../../../actions/income/income.manager";
 import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
-import { Tag } from "../../../../../utils/tags.utils";
 
 describe("Verify the SF Total is calculated correctly in the grid.", 
-    { tags:[ Tag.income, Tag.commercial, Tag.in_place_rent_roll ] }, () => {
+    { tags:[ "@income", "@commercial", "@in_place_rent_roll" ] }, () => {
 
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
