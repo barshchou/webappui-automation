@@ -18,5 +18,6 @@ export default {
     leaseStatuses: leaseStatusesFixture,
     tenantNames: [ "vacant name", "test name" ],
     rentsPsf: [ 100, 120 ],
-    newTenantName: "new test name"
+    newTenantName: "new test name",
+    unitsOfMeasure: "annually" as BoweryReports.UnitsOfMeasure
 };

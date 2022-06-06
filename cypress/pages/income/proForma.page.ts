@@ -1,38 +1,28 @@
+import { uppercaseFirstLetterEachWord } from "../../../utils/string.utils";
 import enums from "../../enums/enums";
 import BasePage from "../base/base.page";
 
 class ProFormaPage extends BasePage {
+    columnHeaderItem(columnName: string) {return cy.xpath(`(//div[@role="columnheader"][@col-id='${columnName}'])`);}
 
-    get residentialVCLossLabelCell() {return cy.xpath('(//div[@row-id="Potential Gross Income_2"])[2]//following-sibling::div[@role="row"]').eq(0);}
+    residentialVCLossLabelCell(categoryName: string, colId = 'label') {return cy.get(`[row-id^='Less ${categoryName}'] [role=gridcell][col-id=${colId}]`);}
 
-    get residentialVCLossTotal() {return this.residentialVCLossLabelCell.children('[col-id="total"]');}
+    residentialVCLossTotal(categoryName: string) {return this.residentialVCLossLabelCell(categoryName, "total");}
 
-    get residentialVCLossPerSF() {return this.residentialVCLossLabelCell.children('[col-id="psf"]');}
+    residentialVCLossPerSF(categoryName: string) {return this.residentialVCLossLabelCell(categoryName, "psf");}
 
-    get residentialVCLossPerUnit() {return this.residentialVCLossLabelCell.children('[col-id="perUnit"]');}
+    residentialVCLossPerUnit(categoryName: string) {return this.residentialVCLossLabelCell(categoryName, "perUnit");}
 
     get includeNOIComparisonCheckbox() {return cy.get("[data-qa^=includeNOIComparison] input");}
 
-    getCommercialUseVCLossRow(useText) {
-        const firstPart = useText === "Undetermined" || useText === "Industrial" ? `${useText} Commercial` : useText;
-        return cy.contains(`Less ${firstPart} V/C Loss`);
-    }
+    commercialVCLossLabelCell(categoryName: string, colId = 'label') {return cy.get(`[row-id^='Less ${categoryName} Commercial'] [role=gridcell][col-id=${colId}]`);}
 
-    getCommercialUseVCLossPerUnitCell(useText) {return this.getCommercialUseVCLossRow(useText).siblings('[col-id="perUnit"]');}
+    getCommercialUseVCLossPerUnitCell(categoryName: string) {return this.commercialVCLossLabelCell(categoryName, "perUnit");}
 
-    getCommercialUseVCLossTotal(useText) {return this.getCommercialUseVCLossRow(useText).siblings('[col-id="total"]');}
+    getCommercialUseVCLossTotal(categoryName: string) {return this.commercialVCLossLabelCell(categoryName, "total");}
 
-    getCommercialUseVCLossPerSF(useText) {return this.getCommercialUseVCLossRow(useText).siblings('[col-id="psf"]');}
+    getCommercialUseVCLossPerSF(categoryName: string) {return this.commercialVCLossLabelCell(categoryName, "psf");}
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    getCommercialUseVCLossLabel(useText: string) {
-        // const attributeToBe = useText === "Undetermined" || useText === "Industrial" ?
-        //     `${useText}Commercial` : useText.replaceAll(" ", "");
-        // return cy.get(`[data-qa='less${attributeToBe}VCLoss-label-cell']`);
-        // TODO: add more robust method later
-        return this.residentialVCLossLabelCell;
-    }
-    
     categoryCellTotal(categoryName: string) {
         return categoryName == enums.PRO_FORMA_TYPES.totalOperatingExpenses 
             ? this.getCategoryElementByType(categoryName, "total").first() : this.getCategoryElementByType(categoryName, "total");
@@ -48,13 +38,13 @@ class ProFormaPage extends BasePage {
             ? this.getCategoryElementByType(categoryName, "perUnit").first() : this.getCategoryElementByType(categoryName, "perUnit");
     }
 
-    private capitalizeFirstLetter(string: string) {
-        return string.charAt(0).toUpperCase() + string.slice(1);
+    private getCategoryElementByType(categoryName: string, colId: string) {
+        return cy.get(`[row-id^='${uppercaseFirstLetterEachWord(categoryName)}'] [role=gridcell][col-id=${colId}]`);
     }
 
-    private getCategoryElementByType(categoryName: string, colId: string) {
-        return cy.get(`[row-id^='${this.capitalizeFirstLetter(categoryName)}'] [role=gridcell][col-id=${colId}]`);
-    } 
+    getCustomCategoryIncomeCell(categoryName: string) {
+        return cy.get(`[row-id^='${uppercaseFirstLetterEachWord(categoryName)}'] div`);
+    }
 }
 
 export default new ProFormaPage();

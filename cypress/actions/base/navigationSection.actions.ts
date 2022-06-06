@@ -5,8 +5,15 @@ import BaseActionsExt from "./base.actions.ext";
 class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPage> {
     clickYesIfExist() {
         cy.get("body").then($body => {
-            if ($body.text().includes("You have unsaved changes")) this.clickYesButton();
-        });
+                if ($body.text().includes("You have unsaved changes")) {
+                    cy.get("[data-qa=form-confirm-dialog]").invoke('prop', 'hidden').then($prop => {
+                        cy.log(`${$prop}`);
+                        if ($prop == false) {
+                            this.clickYesButton();
+                        }
+                    });
+                }
+            });
         return this;
     }
 
@@ -54,6 +61,7 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
 
     clickCommercialRentRollButton() {
         navigationSectionPage.commercialRentRollButton.click();
+        this.clickYesIfExist();
         return this;
     }
 
@@ -138,6 +146,14 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         this.clickIncomeApproachButton()
             .clickResidentialIncomeArrow()
             .clickRentCompsButton()
+            .clickYesIfExist();
+        return this;
+    }
+
+    navigateToCompGroups() {
+        this.clickIncomeApproachButton()
+            .clickCommercialArrow()
+            .clickCommercialCompGroups()
             .clickYesIfExist();
         return this;
     }
@@ -294,6 +310,19 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
     openInPlaceRentRollInResidential() {
         this.clickInPlaceRentRollButton()
             .clickYesIfExist();
+        return this;
+    }
+
+    navigateToRentReconcillation() {
+        this.clickIncomeApproachButton()
+            .clickCommercialArrow()
+            .clickRentReconcillationButton()
+            .clickYesIfExist();
+        return this;
+    }
+
+    clickRentReconcillationButton() {
+        navigationSectionPage.commercialRentReconcillationButton.click();
         return this;
     }
 

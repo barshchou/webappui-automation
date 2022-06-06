@@ -4,17 +4,31 @@ import { getUploadFixture } from "../../../utils/fixtures.utils";
 import BaseActionsExt from "../base/base.actions.ext";
 
 class KeyInfoActions extends BaseActionsExt<typeof keyInfoPage> {
-    /**
-     * ernst: REFACTOR: add form data (index of save and edit btn) as param.
-     */
-    enterPropertyRightsAppraisedComment(textToType: string = null) {
-        keyInfoPage.formEditBtn().click();
+    enterPropertyRightsAppraisedComment(textToType: string = null, edit = true, save = true, revert = false) {
+        if (edit === true) keyInfoPage.formEditBtn().click();
         keyInfoPage.textBoxPropertyRightsAppraised.invoke("text")
         .then(text => {
-            keyInfoPage.textBoxPropertyRightsAppraised.click().clear().type(textToType ?? text);
+            keyInfoPage.textBoxPropertyRightsAppraised.focus().type(textToType ?? text);
         });
-        keyInfoPage.formSaveBtn().click();
+        if(save === true) keyInfoPage.formSaveBtn().click();
+        if (revert === true) {
+            keyInfoPage.formRevertToOriginalBtn().click();
+            keyInfoPage.formYesRevertBtn.click();
+        }
         return keyInfoPage.textBoxPropertyRightsAppraised.invoke("text");
+    }
+
+    enterDefinitionMarketValue(textToType: string = null, edit = true, save = true, revert = false) {
+        if (edit === true) keyInfoPage.formEditBtn().click();
+        keyInfoPage.textBoxDefinitionOfMarketValue().invoke("text").then(text => {
+            keyInfoPage.textBoxDefinitionOfMarketValue().focus().type(textToType ?? text);
+        });
+        if(save === true) keyInfoPage.formSaveBtn().click();
+        if (revert === true) {
+            keyInfoPage.formRevertToOriginalBtn().click();
+            keyInfoPage.formYesRevertBtn.click();
+        }
+        return keyInfoPage.textBoxDefinitionOfMarketValue().invoke("text");
     }
 
     choosePurpose(purposeValue: string): KeyInfoActions {
@@ -60,7 +74,7 @@ class KeyInfoActions extends BaseActionsExt<typeof keyInfoPage> {
         keyInfoPage.cloudButton.should("exist").click();
         keyInfoPage.clickHereText.should("be.visible");
         keyInfoPage.uploadFileInput.should("exist").attachFile(getUploadFixture(fileName));
-        keyInfoPage.uploadButton.should("be.visible").click();
+        keyInfoPage.modalUploadButton.should("be.visible").click();
         keyInfoPage.insertButton.should("not.be.disabled").click();
         const fileNameSplit = fileName.split("/");
         const fileNameToCheck = fileNameSplit[fileNameSplit.length - 1];
@@ -70,6 +84,11 @@ class KeyInfoActions extends BaseActionsExt<typeof keyInfoPage> {
 
     verifyElementIsVisible(element:  Cypress.Chainable<JQuery<HTMLElement>>): KeyInfoActions {
         element.should("be.visible");
+        return this;
+    }
+
+    clickNarrativeSuggestions(verifyListValue: string, numberLists = 0): KeyInfoActions {
+        keyInfoPage.narrativeSuggestionsList.eq(numberLists).contains(verifyListValue).should("have.text", verifyListValue).click();
         return this;
     }
 }
