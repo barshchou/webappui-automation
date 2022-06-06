@@ -2,10 +2,9 @@ import { Income } from "../../../../../actions";
 import { _NavigationSection } from "../../../../../actions/base";
 import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
 import testData from "../../../../../fixtures/not_full_reports/income/commercial/stabilized_rent_roll/QA-4592.fixture";
-import { Tag } from "../../../../../utils/tags.utils";
 
 describe(`Verify the 'Changes will be lost' modal functionality`,
-    { tags: [ Tag.income, Tag.commercial, Tag.stabilized_rent_roll ] }, () => {
+    { tags: [ '@income', '@commercial', '@stabilized_rent_roll' ] }, () => {
 
         before("Login, create report", () => {
             createReport(testData.reportCreationData);
