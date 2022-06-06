@@ -87,7 +87,7 @@ class RentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
 
     verifyCheckboxByQaAttr(attribute: string | number, isChecked = true): this {
         rentCompsPage.getCheckboxByDataQaAttr(attribute)
-            .should("have.value", isChecked ? "true" : "false");
+            .should("have.value", `${isChecked}`);
         return this;
     }
 
