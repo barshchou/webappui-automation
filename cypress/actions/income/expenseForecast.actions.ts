@@ -285,14 +285,23 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
 
                                 let unitBasis = value
                                 if (unitBasis === "unit") {
-                                    cy.log('unit');
-                                } if (unitBasis === "sf") {
-                                    let sum = 0;
+                                    let sumPerSF = 0;
                                     for (let i = 0; i < inputs.length; i++) {
                                         let elNumber = getNumberFromDollarNumberWithCommas(inputs[i].getAttribute("value"));
-                                        sum += elNumber;
+                                        sumPerSF += elNumber;
                                     }
-                                    const textToBe = `Appraiser's Forecast: $${numberWithCommas(sum.toFixed(2))}`;
+
+
+
+
+
+                                } if (unitBasis === "sf") {
+                                    let sumPerSF = 0;
+                                    for (let i = 0; i < inputs.length; i++) {
+                                        let elNumber = getNumberFromDollarNumberWithCommas(inputs[i].getAttribute("value"));
+                                        sumPerSF += elNumber;
+                                    }
+                                    const textToBe = `Appraiser's Forecast: $${numberWithCommas(sumPerSF.toFixed(2))}`;
                                     expenseForecastPage.appraisersTotalForecast.should("have.text", textToBe);
                                     // cy.log('sf')
                                 } else {
