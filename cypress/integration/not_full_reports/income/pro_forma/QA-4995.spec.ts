@@ -2,6 +2,8 @@ import testData from "../../../../fixtures/not_full_reports/income/pro_forma/QA-
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import { Property, Income } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
+import proFormaTypesEnum from "../../../../enums/proFormaTypes.enum";
+import { numberWithCommas } from "../../../../../utils/numbers.utils";
 
 describe("[QA-4995] Verify that combined utilities expenses is enabled on the Pro Forma page",
     { tags:[ "@income", "@pro_forma" ] }, () => {
@@ -14,51 +16,60 @@ describe("[QA-4995] Verify that combined utilities expenses is enabled on the Pr
         Property._Summary.enterNumberOfResUnits(testData.buildingDescription.numberOfUnits)
             .enterGrossBuildingArea(testData.buildingDescription.grossArea);
 
-        cy.stepInfo(`2. Expenses for Fuel, Electricity and Water&Sewer are added`);
+        cy.stepInfo(`Navigate to Expense Forecast page and set expenses for Fuel, Electricity and Water&Sewer.`);
         _NavigationSection.navigateToExpenseForecast();
         testData.forecastItems.forEach(expense => {
-            Income._ExpenseForecastActions.enterForecastItemForecast(expense);    
+            Income._ExpenseForecastActions.enterForecastItemForecast(expense);   
         });
-
-        cy.stepInfo(`2. Go to Income > Expense History`);
-        _NavigationSection.Actions.navigateToExpenseHistory();
-
-        cy.stepInfo(`3. Add expense years with combined utility expenses.`);
-        Income._ExpenseHistory.Actions.selectExpensePeriod(testData.periods.expensePeriodType)
-            .enterExpenseYear(testData.periods.year)
-            .clickAddExpenseYearButton();
-
-        cy.saveLocalStorage();
     });
 
-    beforeEach("Change Utility Expenses combinations", () => {
-        cy.restoreLocalStorage();
-
-        cy.stepInfo("Go to Income > Expense History");
-        _NavigationSection.Actions.navigateToExpenseHistory();
-    });
-    
-    it("Broken Out", () => {
-        Income._ExpenseHistory.checkUtilitiesExpensesOption(testData.expenseModeBrokenOut);
-        
-        _NavigationSection.navigateToProForma();
-        Income._ProFormaActions.verifyExpensesCombined(testData.expenseModeBrokenOut);
-                    
-    });
-
-    it("Combined Electricity and Fuel", () => {
+    it("Test body", () => {
+        cy.stepInfo(`Navigate to Expense History and Set Expense mode: Electricity and Fuel`);
+        _NavigationSection.navigateToExpenseHistory();
         Income._ExpenseHistory.checkUtilitiesExpensesOption(testData.expenseModeElectricityFuel);
 
+        cy.stepInfo(`Navigate to Expense Forecast and set Utilities expenses`);
+        _NavigationSection.navigateToExpenseForecast();
+        Income._ExpenseForecastActions.enterForecastItemForecast(testData.utilitiesFuelElectricityItem);
+
+        cy.stepInfo(`4.1 Navigate to Pro Forma page and validate: 
+                    If Combined Electricity and Fuel on Income > Expense History: the Utilities line item instead
+                    of Electricity and Fuel which reflects the Total, PSF, and per unit forecasted values for the Utilities expense. `);
         _NavigationSection.navigateToProForma();
         Income._ProFormaActions.verifyExpensesCombined(testData.expenseModeElectricityFuel);
-    });
+        Income._ProFormaActions.verifyCategoryTotal(`$${numberWithCommas(Math.round(testData.totalElectricityAndFuel))}`, proFormaTypesEnum.utilities)
+            .verifyCategoryTotal(`$${numberWithCommas(Math.round(testData.totalWater))}`, proFormaTypesEnum.waterAndSewer);
 
-    it("Combined Electricity, Fuel and Water&Sewer", () => {
+        cy.stepInfo(`Navigate to Expense History and Set Expense mode: Electricity, Fuel and Water `);
+        _NavigationSection.navigateToExpenseHistory();
         Income._ExpenseHistory.checkUtilitiesExpensesOption(testData.expenseModeElectricityFuelWater);
+    
+        cy.stepInfo(`Navigate to Expense Forecast and set Utilities expenses`);
+        _NavigationSection.navigateToExpenseForecast();
+        Income._ExpenseForecastActions.enterForecastItemForecast(testData.utilitiesFuelElectricityWaterItem);
 
+        cy.stepInfo(`4.2 Navigate to Pro Forma page and validate: 
+                    If Combined Electricity, Fuel, Water & Sewer on Income > Expense History: 
+                    the Utilities line item instead of Electricity, Fuel, and Water & Sewer line items which 
+                    reflects the Total, PSF, and per unit forecasted values for the Utilities expense.`);
         _NavigationSection.navigateToProForma();
         Income._ProFormaActions.verifyExpensesCombined(testData.expenseModeElectricityFuelWater);
-                    
+        Income._ProFormaActions.verifyCategoryTotal(`$${numberWithCommas(Math.round(testData.totalElectricityFuelWater))}`, proFormaTypesEnum.utilities);
+
+        cy.stepInfo(`Navigate to Expense History and Set Expense mode: Broken Out`);
+        _NavigationSection.navigateToExpenseHistory();
+        Income._ExpenseHistory.checkUtilitiesExpensesOption(testData.expenseModeBrokenOut);
+
+        cy.stepInfo(`4.3 Navigate to Pro Forma page and validate: 
+                    If Broken Out on Income > Expense History: 
+                    no change from current behavior, Electricity, Fuel, and Water & Sewer line items all appear`);
+        _NavigationSection.navigateToProForma();
+        Income._ProFormaActions.verifyExpensesCombined(testData.expenseModeBrokenOut);
+        Income._ProFormaActions.verifyCategoryTotal(`$${numberWithCommas(Math.round(testData.totalElectricity))}`, proFormaTypesEnum.electricity)
+            .verifyCategoryTotal(`$${numberWithCommas(Math.round(testData.totalFuel))}`, proFormaTypesEnum.fuel)
+            .verifyCategoryTotal(`$${numberWithCommas(Math.round(testData.totalWater))}`, proFormaTypesEnum.waterAndSewer);
+
+
         deleteReport(testData.reportCreationData.reportNumber);
     });
 });
