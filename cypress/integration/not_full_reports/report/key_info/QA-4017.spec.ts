@@ -3,7 +3,7 @@ import { createReport, deleteReport } from "../../../../actions/base/baseTest.ac
 import { _NavigationSection } from "../../../../actions/base";
 import { ReviewExport } from '../../../../actions';
 
-describe("", () => {
+describe('Verify that "Date of the Report" row is displayed on the Salient Facts.', () => {
 
     it("Test body", { tags: [ "@report", "@key_info", "@check_export" ] }, () => {
         createReport(testData.reportCreationData);

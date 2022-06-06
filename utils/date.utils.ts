@@ -72,11 +72,11 @@ export const isCorrectQuarter = (quarter) => {
 
 export const getFullDate = (): string => {
     return Intl.DateTimeFormat(
-        'us', 
+        'eng',
         { 
             day: 'numeric', 
             month: 'long', 
-            year: 'numeric' 
+            year: 'numeric'
         }
     ).format(new Date());
 };
