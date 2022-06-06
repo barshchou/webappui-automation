@@ -610,6 +610,13 @@ class RentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
         return this;
     }
 
+    unCheckFilterValue(name: string, value: string | number): this {
+        rentCompsPage.getFilterArrowButton(name).click();
+        this.uncheckCheckboxByQaAttr(value);
+        rentCompsPage.getFilterArrowButton(name).click();
+        return this;
+    }
+
     verifyFilterValue(name: string, value: string | number, isChecked = true): this {
         rentCompsPage.getFilterArrowButton(name).click();
         this.verifyCheckboxByQaAttr(value, isChecked);
