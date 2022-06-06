@@ -15,9 +15,8 @@ describe("Verify the display of the Stabilized Rent Roll page",
     });
 
     it("Test body",  () => {  
-        cy.stepInfo(`
-        1. Verify the display of the Stabilized Rent Roll page if there are > 0 Commercial Units with Comp Groups.
-        `);
+        cy.stepInfo(`1. Verify the display of the Stabilized Rent Roll page if there 
+                    are > 0 Commercial Units with Comp Groups.`);
 
         Base._NavigationSection.navigateToPropertySummary();
         Property._Summary.enterNumberOfCommercialUnits(0).clickSaveButton();
@@ -32,7 +31,7 @@ describe("Verify the display of the Stabilized Rent Roll page",
 
 
         cy.stepInfo(`2. Verify the display of the Stabilized Rent Roll page 
-        if there are > 0 Commercial Units without Comp Groups.`);
+                    if there are > 0 Commercial Units without Comp Groups.`);
 
         Base._NavigationSection.navigateToPropertySummary();
         Property._Summary.enterNumberOfCommercialUnits(testData.numberOfCommercialUnits);
@@ -63,9 +62,7 @@ describe("Verify the display of the Stabilized Rent Roll page",
             testData.snapshotNames.stabilizedRRPanel_severalUnits,
         );
 
-        cy.stepInfo(`3. Verify the display of the Stabilized Rent Roll page 
-                    if there are > 0 Commercial Units with Comp Groups.`);
-
+        cy.stepInfo(`Add comp group and a new comp`);
         _NavigationSection.openCompGroupsInCommercial();
         Income._CommercialManager.CompGroups.Actions.addCompGroup(testData.compGroup);
         _NavigationSection.clickCommercialRentComps()
@@ -82,15 +79,22 @@ describe("Verify the display of the Stabilized Rent Roll page",
         Income._CommercialManager.RentComps.enterLeaseDate(testData.leaseDate)
             .checkUnitOfMeasureRadioButton(testData.unitMeasureMontly)
             .clickSubmitButton();
-        Income._CommercialManager.RentComps.dragAllCommercialUnitsIntoGroup(testData.compGroupName[0], testData.numberOfCommercialUnits)
-            .verifyAllItemsDragged();
+
+        cy.stepInfo(`Drag all comps into created group`);
+        Income._CommercialManager.RentComps.dragAllCommercialUnitsIntoGroup(testData.compGroup, testData.numberOfCommercialUnits);
+
+        cy.stepInfo(`Navigate to Reconcialltion and add market reconcillation`);
         _NavigationSection.clickRentReconcillationButton()
             .clickYesIfExist();
         Income._CommercialManager.RentReconciliation.addMarketRentConclusion(testData.marketRentConclusion);
+
+        cy.stepInfo(`3. Verify the display of the Stabilized Rent Roll page 
+                    if there are > 0 Commercial Units with Comp Groups.`);
         _NavigationSection.clickCommercialStabRentRollButton()
             .clickYesIfExist();
-        
-
+        Income._CommercialManager.StabilizedRentRoll.verifyCommercialCompGroupHeaderDisplayed()
+            .verifyCommercialCompGroupForecastRentDisplayed(testData.marketRentConclusion)
+            .verifyCommercialCompGroupDisplayed(testData.compGroup);
 
         deleteReport(testData.reportCreationData.reportNumber);
     });

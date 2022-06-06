@@ -153,12 +153,7 @@ class CommercialRentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
         let target: string;
 
         for (let i = 0; i < numberOfUnits; i++) {
-            if (i == 0){
-                target = rentCompsPage.getDropableArea(groupName);
-            } else {
-                target = rentCompsPage.getDropableAreaDropped(groupName);
-            }
-            
+            target = i == 0 ? rentCompsPage.getDropableArea(groupName) : rentCompsPage.getDropableAreaDropped(groupName);
             commercialUnit.dragAndDrop(subject, target);
         }
         return this;
