@@ -55,7 +55,6 @@ export default {
     filters: _filters,
     numericFilters: _numericFilters,
     dateFilters: _dateFilters,
-    numberOfBedrooms: "0",
     sourceOfInfo: "bowery subject" as BoweryReports.SourceOfInformation,
     amenities: "balcony" as BoweryReports.Amenities
 };
