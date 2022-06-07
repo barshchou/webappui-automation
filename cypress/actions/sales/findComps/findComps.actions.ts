@@ -179,21 +179,22 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
         return this;
     }
 
-    clearNumericInputNewComp(inputElement: Cypress.Chainable): FindCompsActions {
-        inputElement.clear();
+    clearNumericInputNewComp(elementAlias: string): FindCompsActions {
+        cy.get(`@${elementAlias}`).clear({ force: true });
         return this;
     }
 
-    enterNumericInputNewComp(inputElement: Cypress.Chainable, numberOfUnits: number | string): FindCompsActions {
-        this.clearNumericInputNewComp(inputElement);
-        inputElement.type(`${numberOfUnits}`);
-        this.verifyNumericInputNewComp(inputElement, numberOfUnits);
+    enterNumericInputNewComp(elementAlias: string, numberOfUnits: number | string): FindCompsActions {
+        this.clearNumericInputNewComp(elementAlias);
+        cy.get(`@${elementAlias}`).realClick();
+        cy.get(`@${elementAlias}`).realType(`${numberOfUnits}`, { pressDelay:45, delay: 50 });
+        this.verifyNumericInputNewComp(elementAlias, numberOfUnits);
         return this;
     }
 
-    verifyNumericInputNewComp(inputElement: Cypress.Chainable, numberOfUnits: number | string): FindCompsActions {
+    verifyNumericInputNewComp(elementAlias: string, numberOfUnits: number | string): FindCompsActions {
         const valueToBe = isNumber(numberOfUnits) ? numberWithCommas(`${numberOfUnits}`.replace("-", "")) : "";
-        inputElement.should("have.value", valueToBe);
+        cy.get(`@${elementAlias}`).should("have.value", valueToBe);
         return this;
     }
 }

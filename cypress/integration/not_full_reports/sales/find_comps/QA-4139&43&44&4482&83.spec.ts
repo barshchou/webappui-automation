@@ -3,11 +3,13 @@ import { createReport, deleteReport } from "../../../../actions/base/baseTest.ac
 import { _NavigationSection } from "../../../../actions/base";
 import { Sales } from "../../../../actions";
 import { isProdEnv } from "../../../../../utils/env.utils";
+import { Alias } from "../../../../utils/alias.utils";
 /*
     # Uladzislau.Samykou
     This spec is conditional, because tests for Create Sales Comp feature should NOT be tested on PROD environment
  */
 const conditionalDescribe = isProdEnv() ? describe.skip : describe;
+const { pageElements } = Alias;
 
 conditionalDescribe("Group of tests for numeric inputs at create comp modal", 
     { tags:[ "@find_comps", "@sales" ] }, () => {
@@ -21,15 +23,25 @@ conditionalDescribe("Group of tests for numeric inputs at create comp modal",
     });
 
     it("QA-4139: Verify the # Residential Units* field", () => {
-        Sales._FindComps.verifyNumericInputNewComp(Sales._FindComps.Page.createCompNumberResidentialUnits, testData.spec4139.numberOfUnitsDefault)
-            .enterNumericInputNewComp(Sales._FindComps.Page.createCompNumberResidentialUnits, testData.spec4139.regularNum)
-            .enterNumericInputNewComp(Sales._FindComps.Page.createCompNumberResidentialUnits, testData.spec4139.decimalNum)
-            .enterNumericInputNewComp(Sales._FindComps.Page.createCompNumberResidentialUnits, testData.spec4139.nonNumberValue)
-            .enterNumericInputNewComp(Sales._FindComps.Page.createCompNumberResidentialUnits, testData.spec4139.longValue)
-            .clearNumericInputNewComp(Sales._FindComps.Page.createCompNumberResidentialUnits)
+        /**
+         * ernst: Little hack necessary to interact correctly from Cypress with shadow-dom elements.
+         * We get elements once, their recieve their aliases and with further methods - we requery them everytime
+         */
+        Sales._FindComps.Page.createCompNumberResidentialUnits;
+        Sales._FindComps.Page.conditionDropdown;
+        Sales._FindComps.Page.newCompContinueButton;
+
+        Sales._FindComps.verifyNumericInputNewComp(Alias.pageElements.comp_plex.createCompNumberResidentialUnits, testData.spec4139.numberOfUnitsDefault)
+            .enterNumericInputNewComp(pageElements.comp_plex.createCompNumberResidentialUnits, testData.spec4139.regularNum)
+            .enterNumericInputNewComp(pageElements.comp_plex.createCompNumberResidentialUnits, testData.spec4139.decimalNum)
+            .enterNumericInputNewComp(pageElements.comp_plex.createCompNumberResidentialUnits, testData.spec4139.nonNumberValue)
+            .enterNumericInputNewComp(pageElements.comp_plex.createCompNumberResidentialUnits, testData.spec4139.longValue)
+            .clearNumericInputNewComp(pageElements.comp_plex.createCompNumberResidentialUnits)
             .selectDropdownOptionNewComp(Sales._FindComps.Page.conditionDropdown, testData.condition)
             .Page.errorMessageNewComp.should("exist");
-        Sales._FindComps.Page.newCompContinueButton.should("be.disabled");
+  
+        // ernst: commented due to test case update. when update will be finished - assertion will be updated
+        // Sales._FindComps.Page.newCompContinueButton.should("be.disabled");
         deleteReport(testData.reportCreationData.reportNumber);
     });
 
