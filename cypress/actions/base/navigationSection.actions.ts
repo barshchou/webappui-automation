@@ -260,7 +260,7 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
             .clickFindCompsButton()
             .clickYesIfExist();        
         cy.wait(`@${Alias.gql.SearchSalesTransactions}`, { timeout:120000 });
-
+    
         return this;
     }
 

@@ -1,9 +1,9 @@
 import { Report } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
-import testData from '../../../../fixtures/not_full_reports/report/key_info/QA-4714_16-17_21.fixture';
+import testData from '../../../../fixtures/not_full_reports/report/key_info/QA-4714_16-17.fixture';
 
-describe(`[QA-4714_16-17_21] Verify the suggested text dropdown in the new narrative component added through "=" for the 'Foreclosure sale'
+describe(`[QA-4714_16-17] Verify the suggested text dropdown in the new narrative component added through "=" for the 'Foreclosure sale'
     then “=Sh“ and select the 'Sheriff's sale'  option on the Report > Key Info page for Property Rights Appraised and Definition of Market Value sections`,
     { tags:[ "@report", "@key_info" ] }, () => {
     before("Login, create report", () => {

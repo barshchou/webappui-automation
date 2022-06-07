@@ -32,10 +32,10 @@ class ComparableExpensesActions extends BaseActions {
     }
 
     chooseExpensePeriodByColumnIndex(periodValue: string, index = 0): this {
-        compExpensesPage.getUnifiedEditableAndTotalCells("expensePeriod").eq(index).as("periodCell");
-        cy.get("@periodCell").focus().type("fdgoijdfgojfdoijgdfgoi").type("dfsdfdsfds").type("blblblbbl");
-        cy.get("@periodCell").dblclick().clear().type(`${periodValue}{enter}`);
-        cy.get("@periodCell").children(compExpensesPage.elementToCheckCellTextSelector).should("have.text", periodValue);
+        compExpensesPage.getUnifiedEditableAndTotalCells("expensePeriod").eq(index).type("something")
+            .dblclick().clear().type(`${periodValue}{enter}`);
+        compExpensesPage.getUnifiedEditableAndTotalCells("expensePeriod").eq(index)
+            .children(compExpensesPage.elementToCheckCellTextSelector).should("have.text", periodValue);
         return this;
     }
 
