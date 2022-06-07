@@ -31,23 +31,12 @@ class FindCompsPage extends BasePage {
         .siblings("[class*=buttonsColumn]").find("span").contains("ADD").parent();
     }
 
-    // getRemoveSelectedCompButtonByAddress(address) {
-    //     return cy.xpath(`//*[contains(text(), '${address}')]//parent::td//following-sibling::td` +
-    //         "//descendant::button[@aria-label='Remove']");
-    // }
-
     getRemoveSelectedCompButtonByAddress(address) {
-        return cy.contains(address, { includeShadowDom: true }).parent("td").siblings("td").children("button[@aria-label='Remove']");
+        return cy.contains(address).parent("td").parent().find('[data-qa="selected-comp-remove-btn"]');
     }
 
-    // getRemoveDeletedCompButtonByAddress(address) {
-    //     return cy.xpath(`//*[contains(text(), '${address}')]//parent::td//following-sibling::td` +
-    //         "//descendant::button[@aria-label='Add']//following::button[@aria-label='Remove'][1]");
-    // }
-
     getRemoveDeletedCompButtonByAddress(address) {
-        return cy.contains(address, { includeShadowDom: true }).parent("td").siblings("td").children("button[@aria-label='Add']")
-            .next("button[@aria-label='Add'");
+        return cy.contains(address).parent("td").parent().find('[data-qa="removed-comp-remove-btn"]');
     }
 
     getRemoveCompFromMapButtonByAddress(address) {
