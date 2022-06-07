@@ -2,6 +2,11 @@
 import reviewExportPage from "../../pages/reviewExport/reviewExport.page";
 import BaseActionsExt from "../base/base.actions.ext";
 class ReviewExportActions extends BaseActionsExt<typeof reviewExportPage> {
+
+    verifyPageIsOpened() {
+        reviewExportPage.headerTitle.should("exist");
+        return this;
+    }
     
     waitForReportGenerated(): this {
         reviewExportPage.statusBar.should("contain.text", "Pending");

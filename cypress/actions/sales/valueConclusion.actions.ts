@@ -1,50 +1,30 @@
-import BaseActions from "../base/base.actions";
 import valueConclusionPage from "../../pages/sales/valueConclusion.page";
 import { numberWithCommas } from "../../../utils/numbers.utils";
+import BaseActionsExt from "../base/base.actions.ext";
 
-class ValueConclusionActions extends BaseActions {
+class ValueConclusionActions extends BaseActionsExt<typeof valueConclusionPage> {
 
-    /**
-     * @param {string} price
-     * @returns {ValueConclusionActions}
-     */
-    verifyUnadjustedPriceMin(price) {
+    verifyUnadjustedPriceMin(price: string): this {
         valueConclusionPage.unadjustedPriceMin.should("have.text", price);
         return this;
     }
 
-    /**
-     * @param {string} price
-     * @returns {ValueConclusionActions}
-     */
-    verifyUnadjustedPriceAvg(price) {
+    verifyUnadjustedPriceAvg(price: string): this {
         valueConclusionPage.unadjustedPriceAvg.should("have.text", price);
         return this;
     }
 
-    /**
-     * @param {string} price
-     * @returns {ValueConclusionActions}
-     */
-    verifyUnadjustedPriceMax(price) {
+    verifyUnadjustedPriceMax(price: string): this {
         valueConclusionPage.unadjustedPriceMax.should("have.text", price);
         return this;
     }
 
-    /**
-     * @param {string} price
-     * @returns {ValueConclusionActions}
-     */
-    verifyUnadjustedPriceMedian(price) {
+    verifyUnadjustedPriceMedian(price: string): this {
         valueConclusionPage.unadjustedPriceMedian.should("have.text", price);
         return this;
     }
 
-    /**
-     * @param {Readonly<{min: string, avg: string, max: string, median: string}>} unadjustedPrices
-     * @returns {ValueConclusionActions}
-     */
-    verifyUnadjustedPrices(unadjustedPrices) {
+    verifyUnadjustedPrices(unadjustedPrices: Readonly<{min: string, avg: string, max: string, median: string}>): this {
         this.verifyUnadjustedPriceMin(unadjustedPrices.min)
             .verifyUnadjustedPriceAvg(unadjustedPrices.avg)
             .verifyUnadjustedPriceMax(unadjustedPrices.max)
@@ -52,47 +32,27 @@ class ValueConclusionActions extends BaseActions {
         return this;
     }
 
-    /**
-     * @param {string} price
-     * @returns {ValueConclusionActions}
-     */
-    verifyAdjustedPriceMin(price) {
+    verifyAdjustedPriceMin(price: string): this {
         valueConclusionPage.adjustedPriceMin.should("have.text", price);
         return this;
     }
 
-    /**
-     * @param {string} price
-     * @returns {ValueConclusionActions}
-     */
-    verifyAdjustedPriceAvg(price) {
+    verifyAdjustedPriceAvg(price: string): this {
         valueConclusionPage.adjustedPriceAvg.should("have.text", price);
         return this;
     }
 
-    /**
-     * @param {string} price
-     * @returns {ValueConclusionActions}
-     */
-    verifyAdjustedPriceMax(price) {
+    verifyAdjustedPriceMax(price: string): this {
         valueConclusionPage.adjustedPriceMax.should("have.text", price);
         return this;
     }
 
-    /**
-     * @param {string} price
-     * @returns {ValueConclusionActions}
-     */
-    verifyAdjustedPriceMedian(price) {
+    verifyAdjustedPriceMedian(price: string): this {
         valueConclusionPage.adjustedPriceMedian.should("have.text", price);
         return this;
     }
 
-    /**
-     * @param {Readonly<{min: string, avg: string, max: string, median: string}>} adjustedPrices
-     * @returns {ValueConclusionActions}
-     */
-    verifyAdjustedPrices(adjustedPrices) {
+    verifyAdjustedPrices(adjustedPrices: Readonly<{min: string, avg: string, max: string, median: string}>): this {
         this.verifyAdjustedPriceMin(adjustedPrices.min)
             .verifyAdjustedPriceAvg(adjustedPrices.avg)
             .verifyAdjustedPriceMax(adjustedPrices.max)
@@ -100,297 +60,180 @@ class ValueConclusionActions extends BaseActions {
         return this;
     }
 
-    /**
-     * @param {string} textToBe
-     * @returns {ValueConclusionActions}
-     */
-    verifyIncomeApproachConclusion(textToBe) {
+    verifyIncomeApproachConclusion(textToBe: string): this {
         valueConclusionPage.incomeApproachConclusion.should("have.text", textToBe);
         return this;
     }
 
-    /**
-     * @param {string | number} value
-     * @returns {ValueConclusionActions}
-     */
-    enterSaleValueConclusion(value) {
+    enterSaleValueConclusion(value: string | number): this {
         const valueToBe = typeof value === "string" ? value : `$${numberWithCommas(value)}`;
-        valueConclusionPage.saleValueConclusion.clear().type(value).should("have.value", valueToBe);
+        valueConclusionPage.saleValueConclusion.clear().type(`${value}`).should("have.value", valueToBe);
         return this;
     }
 
-    /**
-     * @param {string | number} value
-     * @returns {ValueConclusionActions}
-     */
-    verifySaleValueConclusion(value) {
+    verifySaleValueConclusion(value: string | number): this {
         const valueToBe = typeof value === "string" ? value : `$${numberWithCommas(value)}`;
         valueConclusionPage.saleValueConclusion.should("have.value", valueToBe);
         return this;
     }
 
-    /**
-     * @param {string} period
-     * @returns {ValueConclusionActions}
-     */
-    verifyAsStabilizedPeriod(period) {
+    verifyAsStabilizedPeriod(period: string): this {
         valueConclusionPage.asStabilizedPeriod.should("have.text", period);
         return this;
     }
 
-    /**
-     * @param {string} amount
-     * @returns {ValueConclusionActions}
-     */
-    verifyAsStabilizedAmount(amount) {
+    verifyAsStabilizedAmount(amount: string): this {
         valueConclusionPage.asStabilizedAmount.should("have.text", amount);
         return this;
     }
 
-    /**
-     * @param {string} value
-     * @returns {ValueConclusionActions}
-     */
-    verifyAsStabilizedFinalValue(value) {
+    verifyAsStabilizedFinalValue(value: string): this {
         valueConclusionPage.asStabilizedFinalValue.should("have.text", value);
         return this;
     }
 
-    /**
-     * @param {Readonly<{period: string, amount: string, finalValue: string}>} rowData
-     * @returns {ValueConclusionActions}
-     */
-    verifyAsStabilizedRow(rowData) {
+    verifyAsStabilizedRow(rowData: Readonly<{period: string, amount: string, finalValue: string}>): this {
         this.verifyAsStabilizedPeriod(rowData.period)
             .verifyAsStabilizedAmount(rowData.amount)
             .verifyAsStabilizedFinalValue(rowData.finalValue);
         return this;
     }
 
-    /**
-     * @param {string} period
-     * @returns {ValueConclusionActions}
-     */
-    verifyAsCompletePeriod(period) {
+    verifyAsCompletePeriod(period: string): this {
         valueConclusionPage.asCompletePeriod.should("have.text", period);
         return this;
     }
 
-    /**
-     * @param {string} amount
-     * @returns {ValueConclusionActions}
-     */
-    verifyAsCompleteAmount(amount) {
+    verifyAsCompleteAmount(amount: string): this {
         valueConclusionPage.asCompleteAmount.should("have.text", amount);
         return this;
     }
 
-    /**
-     * @param {string} value
-     * @returns {ValueConclusionActions}
-     */
-    verifyAsCompleteFinalValue(value) {
+    verifyAsCompleteFinalValue(value: string): this {
         valueConclusionPage.asCompleteFinalValue.should("have.text", value);
         return this;
     }
 
-    /**
-     * @param {Readonly<{period: string, amount: string, finalValue: string}>} rowData
-     * @returns {ValueConclusionActions}
-     */
-    verifyAsCompleteRow(rowData) {
+    verifyAsCompleteRow(rowData: Readonly<{period: string, amount: string, finalValue: string}>): this {
         this.verifyAsCompletePeriod(rowData.period)
             .verifyAsCompleteAmount(rowData.amount)
             .verifyAsCompleteFinalValue(rowData.finalValue);
         return this;
     }
 
-    /**
-     * @param {string} period
-     * @returns {ValueConclusionActions}
-     */
-    verifyAsIsMarketPeriod(period) {
+    verifyAsIsMarketPeriod(period: string): this {
         const textToBe = period.includes("-") ? period.replaceAll("-", "/") : period;
         valueConclusionPage.asIsMarketPeriod.should("have.text", textToBe);
         return this;
     }
 
-    /**
-     * @param {string} amount
-     * @returns {ValueConclusionActions}
-     */
-    verifyAsIsMarketAmount(amount) {
+    verifyAsIsMarketAmount(amount: string): this {
         valueConclusionPage.asIsMarketAmount.should("have.text", amount);
         return this;
     }
 
-    /**
-     * @param {string} value
-     * @returns {ValueConclusionActions}
-     */
-    verifyAsIsMarketFinalValue(value) {
+    verifyAsIsMarketFinalValue(value: string): this {
         valueConclusionPage.asIsMarketFinalValue.should("have.text", value);
         return this;
     }
 
-    /**
-     * @param {Readonly<{period: string, amount: string, finalValue: string}>} rowData
-     * @returns {ValueConclusionActions}
-     */
-    verifyAsIsMarketRow(rowData) {
+    verifyAsIsMarketRow(rowData: Readonly<{period: string, amount: string, finalValue: string}>): this {
         this.verifyAsIsMarketPeriod(rowData.period)
             .verifyAsIsMarketAmount(rowData.amount)
             .verifyAsIsMarketFinalValue(rowData.finalValue);
         return this;
     }
 
-    checkMatchIncomeApproachDeductionsCheckbox() {
+    checkMatchIncomeApproachDeductionsCheckbox(): this {
         valueConclusionPage.matchIncomeApproachDeductionsCheckbox.check().should("have.value", "true");
         return this;
     }
 
-    verifyMatchIncomeApproachDeductionsChecked() {
+    verifyMatchIncomeApproachDeductionsChecked(): this {
         valueConclusionPage.matchIncomeApproachDeductionsCheckbox.should("have.value", "true");
         return this;
     }
 
-    /**
-     * @param {string | number} period
-     * @param {number} rowNumber
-     * @returns {ValueConclusionActions}
-     */
-    verifyAsStabResRentLossTimePeriodByRow(period, rowNumber = 0) {
+    verifyAsStabResRentLossTimePeriodByRow(period: number, rowNumber = 0): this {
         valueConclusionPage.asStabResRentLossTimePeriodCells.eq(rowNumber).should("have.value", period);
         return this;
     }
 
-    /**
-     * @param {string} commentary
-     * @returns {ValueConclusionActions}
-     */
-    enterAdditionalCommentary(commentary) {
+    enterAdditionalCommentary(commentary: string): this {
         valueConclusionPage.additionalCommentaryInput.type(commentary);
         this.verifyAdditionalCommentaryText(commentary);
         return this;
     }
 
-    /**
-     * @param {string} commToBe
-     * @returns {ValueConclusionActions}
-     */
-    verifyAdditionalCommentaryText(commToBe) {
+    verifyAdditionalCommentaryText(commToBe: string): this {
         valueConclusionPage.additionalCommentaryInput.should("have.text", commToBe);
         return this;
     }
 
-    /**
-     * @param {string} commToBe
-     * @returns {ValueConclusionActions}
-     */
-    verifyGeneratedCommentary(commToBe) {
+    verifyGeneratedCommentary(commToBe: string): this {
         valueConclusionPage.valueConclusionDiscussionCommentary.should("have.text", commToBe);
         return this;
     }
 
-    /**
-     * @param {string} commentary
-     * @returns {ValueConclusionActions}
-     */
-    enterNewCommentary(commentary) {
+    enterNewCommentary(commentary: string): this {
         valueConclusionPage.editCommentaryButton.click();
         valueConclusionPage.commentaryInput.clear().type(commentary).should("have.text", commentary);
         return this;
     }
 
-    clickRevertCommentaryButton() {
+    clickRevertCommentaryButton(): this {
         valueConclusionPage.revertCommentaryButton.click();
         return this;
     }
 
-    /**
-     * @param {string | number} profit
-     * @returns {ValueConclusionActions}
-     */
-    verifyAsCompleteLessEntrepreneurialProfit(profit) {
+    verifyAsCompleteLessEntrepreneurialProfit(profit: string | number): this {
         const valueToBe = typeof profit === "string" ? profit : `${profit}%`;
         valueConclusionPage.asCompleteLessEntrepreneurialProfit.should("have.value", valueToBe);
         return this;
     }
 
-    /**
-     * @param {string} title
-     * @returns {ValueConclusionActions}
-     */
-    verifyPopUpWithTitleExists(title) {
+    verifyPopUpWithTitleExists(title: string): this {
         cy.get(`[aria-label='${title}']`).should("exist");
         return this;
     }
 
-    /**
-     * @param {string | number} gbaToBe
-     * @returns {ValueConclusionActions}
-     */
-    verifyGrossBuildingAreaAmount(gbaToBe) {
+    verifyGrossBuildingAreaAmount(gbaToBe: string | number): this {
         const textToBe = typeof gbaToBe === "string" ? gbaToBe : numberWithCommas(gbaToBe);
         valueConclusionPage.gbaAmount.should("contain.text", textToBe);
         return this;
     }
 
-    /**
-     * @param {number} monthsToBe
-     * @returns {ValueConclusionActions}
-     */
-    verifyAsStabilizedLaundryLossMonths(monthsToBe) {
+    verifyAsStabilizedLaundryLossMonths(monthsToBe: number): this {
         valueConclusionPage.asStabilizedLaundryLossMonths.should("have.value", monthsToBe);
         return this;
     }
 
-    /**
-     * @param {number} monthsToBe
-     * @returns {ValueConclusionActions}
-     */
-    verifyAsCompleteLaundryLossMonths(monthsToBe) {
+    verifyAsCompleteLaundryLossMonths(monthsToBe: number): this {
         valueConclusionPage.asCompleteLessLaundryLossMonths.should("have.value", monthsToBe);
         return this;
     }
 
-    /**
-     * @param {string} amountToBe
-     * @returns {ValueConclusionActions}
-     */
-    verifyAsStabilizedLaundryLossAmount(amountToBe) {
+    verifyAsStabilizedLaundryLossAmount(amountToBe: string): this {
         valueConclusionPage.asStabilizedLaundryLossAmount.should("have.value", amountToBe);
         return this;
     }
 
-    /**
-     * @param {string} amountToBe
-     * @returns {ValueConclusionActions}
-     */
-    verifyAsCompleteLaundryLossAmount(amountToBe) {
+    verifyAsCompleteLaundryLossAmount(amountToBe: string): this {
         valueConclusionPage.asCompleteLaundryLossAmount.should("have.value", amountToBe);
         return this;
     }
 
-    /**
-     * @param {string | number} amountToBe
-     * @returns {ValueConclusionActions}
-     */
-    verifyAsStabilizedCommissionFeeAmount(amountToBe) {
+    verifyAsStabilizedCommissionFeeAmount(amountToBe: string | number): this {
         const valueToBe = typeof amountToBe === "string" ? amountToBe : `-$${numberWithCommas(amountToBe)}`;
         valueConclusionPage.asStabilizedCommissionFeeAmount.should("have.value", valueToBe);
         return this;
     }
-    
-    /**
-     * @param {string | number} amountToBe
-     * @returns {ValueConclusionActions}
-     */
-    verifyNumberOfUnitsAmount(amountToBe) {
+
+    verifyNumberOfUnitsAmount(amountToBe: string | number): this {
         const valueToBe = typeof amountToBe === "string" ? amountToBe : `-$${numberWithCommas(amountToBe)}`;
         valueConclusionPage.numberOfUnitsAmount.should("have.text", valueToBe);
         return this;
     }
 }
 
-export default new ValueConclusionActions();
+export default new ValueConclusionActions(valueConclusionPage);
