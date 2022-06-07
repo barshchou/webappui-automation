@@ -273,49 +273,85 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
         return this;
     }
 
-    xxverifyTotalForecastPSF(): ExpenseForecastActions {
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+    TotalForecastPSF(GBA: number, resUnits?: number, rooms?: number): ExpenseForecastActions {
         expenseForecastPage.allForecastsInputs.then(inputs => {
-            cy.wrap(inputs.parents('[data-qa$=-forecast-item]').find('[label="Include Expense on Pro Forma"]').find('[type="checkbox"]'))
-                .invoke('prop', 'value').then(value => {
 
-                    let checked = value
-                    if (checked === "true") {
-                        cy.wrap(inputs.parents('[data-qa$=-forecast-item]').find('[data-qa="checked"]').find('[type="radio"]'))
-                            .invoke('prop', 'value').then(value => {
+            let sumPerSF = 0;
+            for (let i = 0; i < inputs.length; i++) {
 
-                                let unitBasis = value
-                                if (unitBasis === "unit") {
-                                    let sumPerSF = 0;
-                                    for (let i = 0; i < inputs.length; i++) {
-                                        let elNumber = getNumberFromDollarNumberWithCommas(inputs[i].getAttribute("value"));
-                                        sumPerSF += elNumber;
-                                    }
+                cy.wrap(inputs[i]).parents('[data-qa$=-forecast-item]').find('[label="Include Expense on Pro Forma"]').find('[type="checkbox"]')
+                    .invoke('prop', 'value').then(value => {
+
+                        let checked = value
+                        if (checked === "true") {
+
+                            cy.wrap(inputs[i]).parents('[data-qa$=-forecast-item]').find('[data-qa="checked"]').find('[type="radio"]')
+                                .invoke('prop', 'value').then(basisValue => {
 
 
+                                    let unitBasis = basisValue
+                                    let elNumber = getNumberFromDollarNumberWithCommas(inputs[i].getAttribute("value"));
+                                    if (unitBasis === "unit") {
+
+                                        let elNumberPerSF = (elNumber * resUnits) / GBA;
+                                        sumPerSF += elNumberPerSF;
+                                        cy.log(sumPerSF)
+
+                                    } else if (unitBasis === "sf") {
+
+                                        let elNumberPerSF = elNumber
+                                        sumPerSF += elNumberPerSF
+                                        cy.log(sumPerSF)
+
+                                    } else if (unitBasis === "room") {
+
+                                        let elNumberPerSF = (elNumber * rooms) / GBA;
+                                        sumPerSF += elNumberPerSF;
+                                        cy.log(sumPerSF)
+
+                                    } else if (i === inputs.length) {
+                                        const textToBe = `Appraiser's Forecast: $${numberWithCommas(sumPerSF.toFixed(2))}`;
+                                        cy.log(textToBe)
+                                        expenseForecastPage.appraisersTotalForecast.should("have.text", textToBe);
+                                      //  break;
+                                      }
+
+                                    //  cy.log(sumPerSF)    
+
+                                    // cy.wrap(sumPerSF).as('SUMA')
+                                    // let  totalSumPSF = 
+
+                                })//.as('SUMA')      
+
+                        }
 
 
+                    }).as('SUMA');
 
-                                } if (unitBasis === "sf") {
-                                    let sumPerSF = 0;
-                                    for (let i = 0; i < inputs.length; i++) {
-                                        let elNumber = getNumberFromDollarNumberWithCommas(inputs[i].getAttribute("value"));
-                                        sumPerSF += elNumber;
-                                    }
-                                    const textToBe = `Appraiser's Forecast: $${numberWithCommas(sumPerSF.toFixed(2))}`;
-                                    expenseForecastPage.appraisersTotalForecast.should("have.text", textToBe);
-                                    // cy.log('sf')
-                                } else {
-                                    cy.log('room')
-                                }
-                            });
-                    }
+            }
+            // const textToBe = `Appraiser's Forecast: $${numberWithCommas(sumPerSF.toFixed(2))}`; //
+            //  return textToBe
+            //   expenseForecastPage.appraisersTotalForecast.should("have.text", textToBe);
 
 
-                });
+        })
 
-        });
         return this;
     }
+
+
+    verifyTotalForecastPSF(GBA, resUnits, rooms): ExpenseForecastActions {
+        let textToBe = this.TotalForecastPSF(GBA, resUnits, rooms)
+        expenseForecastPage.appraisersTotalForecast.should("have.text", textToBe);
+
+        return this;
+    }
+
+
+
     // return nnn
 
     //  cy.log(mainEl)

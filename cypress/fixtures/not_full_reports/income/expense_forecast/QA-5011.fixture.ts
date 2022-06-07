@@ -143,12 +143,12 @@ const expenseForecastTotalFixture = (_basis: "unit" | "sf"): BoweryReports.Forec
 const expenseForecastFixtureWithUnitArray = [
     expenseForecastInsuranceFixture("unit"),
     expenseForecastElectricityFixture("unit"),
-    expenseForecastFuelFixture("unit"),
+    expenseForecastFuelFixture("sf"),
     expenseForecastWaterAndSewerFixture("unit"),
     expenseForecastRepairsAndMaintenanceFixture("unit"), 
     expenseForecastPayrollAndBenefitsFixture("unit"),
     expenseForecastGeneralAndAdministrativeFixture("unit"),
-    expenseForecastLegalAndProfessionalFeesFixture("unit"),
+    expenseForecastLegalAndProfessionalFeesFixture("sf"),
     expenseForecastMiscellaneousFixture("unit"),
     expenseForecastManagementFixture("unit"),
     expenseForecastReservesFixture("unit")
@@ -206,6 +206,6 @@ export default {
     commentaries: Object.freeze(commentariesFixture()),
     forecastPSFnotIncluded: _forecastPSFnotIncluded,
     forecastPerUnitnotIncluded: _forecastPerUnitnotIncluded,
-    residentialUnits: rentRollResidentialUnitFixture(),
+    rentRollresUnitFixture: rentRollResidentialUnitFixture(),
     perRoomAnalysis: "Include Per Room Analysis in Report"
 };

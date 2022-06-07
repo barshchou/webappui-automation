@@ -18,11 +18,11 @@ describe(`[QA-5011] [Income>Expense forecast] “Include Expense on Pro Forma”
         });
 
         it("[QA-5011]", () => {
-        //     cy.stepInfo(`1. Go to Property > Summary and add residential and commertial units`);
-        //     _NavigationSection.navigateToPropertySummary();
-        // Property._Summary.enterNumberOfResUnits(testData.numberOfResidentialUnits)
-        //     .enterNumberOfCommercialUnits(testData.numberOfCommercialUnits)
-        //     .enterGrossBuildingArea(testData.buildingDescription.grossArea);
+            cy.stepInfo(`1. Go to Property > Summary and add residential and commertial units`);
+            _NavigationSection.navigateToPropertySummary();
+        Property._Summary.enterNumberOfResUnits(testData.numberOfResidentialUnits)
+            .enterNumberOfCommercialUnits(testData.numberOfCommercialUnits)
+            .enterGrossBuildingArea(testData.buildingDescription.grossArea);
             
         //     cy.stepInfo(`2. Go to Income > Residential > In-Place Rent Roll and add rooms to residential units`);
         //     _NavigationSection.navigateToResInPlaceRentRoll();
@@ -33,12 +33,21 @@ describe(`[QA-5011] [Income>Expense forecast] “Include Expense on Pro Forma”
         // expensesCardsNames.expenseCardsIDArray.forEach(element => {
         //              Income._ExpenseForecastActions.uncheckIncludeInProFormaCheckbox(element);
         //          });
+
+
         testData.expenseForecastFixtureWithUnitArray.forEach(element => {
                     Income._ExpenseForecastActions.enterForecastItemForecast(element);
                  });
+                 testData.expenseForecastFixtureWithUnitArray.forEach(element => {
+                            Income._ExpenseForecastActions.chooseForecastItemBasis(element);
+                        });
+                        Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastFuelFixture('room'));
       
       
-                 Income._ExpenseForecastActions.xxverifyTotalForecastPSF();
+                 Income._ExpenseForecastActions.TotalForecastPSF(
+                     testData.buildingDescription.grossArea, 
+                     testData.numberOfResidentialUnits, 
+                     testData.rentRollresUnitFixture.rooms);
 
 
            
