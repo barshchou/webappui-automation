@@ -280,6 +280,11 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         return this;
     }
 
+    clickCommercialCompGroupsDiscussion() {
+        navigationSectionPage.commercialCompGroupsDiscussionButton.click();
+        return this;
+    }
+
     navigateToCommercialRentComps() {
         this.clickIncomeApproachButton()
             .clickCommercialArrow()
