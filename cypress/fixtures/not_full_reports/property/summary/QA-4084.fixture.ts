@@ -6,7 +6,7 @@ const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreat
     conclusionValue: Enums.VALUE_CONCLUSION_TYPE.AS_COMPLETE
 });
 
-const _verifyValues: Array<string> = ["3551.22", "0551.22", "0051.22", "0001.22"];
+const _verifyValues: Array<string> = [ "3551.22", "0551.22", "0051.22", "0001.22" ];
 
 export default {
     reportCreationData: _reportCreationData,

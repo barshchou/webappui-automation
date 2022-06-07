@@ -1,19 +1,18 @@
-/// <reference types="cypress-grep" />
 import testData from "../../../../fixtures/not_full_reports/income/expense_forecast/QA-4931.fixture";
-import {
-  createReport,
-  deleteReport,
-} from "../../../../actions/base/baseTest.actions";
+import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Income from "../../../../actions/income/income.manager";
 import Property from "../../../../actions/property/property.manager";
+import tableExpenseHistoryCellNames from "../../../../../cypress/enums/expenseHistoryTableRows.enum";
 
-describe("Historical expense Repairs & Maintenance Per Unit is correctly calculated and displayed", () => {
+describe("Historical expense Repairs & Maintenance Per Unit is correctly calculated and displayed", 
+  { tags:[ "@expense_forecast", "@income", "@snapshot_tests" ] }, () => {
+    
   before("Login, create report", () => {
     createReport(testData.reportCreationData);
   });
 
-  it("Test body", { tags: "@snapshot_tests" }, () => {
+  it("Test body", () => {
     cy.stepInfo("Pre-condition: Residential Units should be filled in on Property > Summary form");
     NavigationSection.navigateToPropertySummary();
     Property.Summary.enterNumberOfResUnits(Object.values(testData.buildingDescription)[1]);
@@ -27,7 +26,7 @@ describe("Historical expense Repairs & Maintenance Per Unit is correctly calcula
       Income.ExpenseHistory.Actions.selectExpensePeriod(per.expensePeriodType)
         .enterExpenseYear(per.year)
         .clickAddExpenseYearButton()
-        .enterRepairsAndMaintenanceByColIndex(per.repairsAndMaintenance);
+        .enterIssueByColIndex(per.repairsAndMaintenance, tableExpenseHistoryCellNames.repairsAndMaintenance);
     });
 
     testData.periodsMonth.forEach((per) => {
@@ -35,7 +34,7 @@ describe("Historical expense Repairs & Maintenance Per Unit is correctly calcula
         .enterExpenseMonth(per.month)
         .enterExpenseYear(per.year)
         .clickAddExpenseYearButton()
-        .enterRepairsAndMaintenanceByColIndex(per.repairsAndMaintenance);
+        .enterIssueByColIndex(per.repairsAndMaintenance, tableExpenseHistoryCellNames.repairsAndMaintenance);
     });
 
     cy.stepInfo("3. Fill in Repairs & Maintenance field for all added columns and save changes");
@@ -51,12 +50,12 @@ describe("Historical expense Repairs & Maintenance Per Unit is correctly calcula
       5.2 correctly displayed on slidebars`);
       Income.ExpenseForecast.Actions.verifyForecastItemByExpensePeriodType(testData.actualRepairsItem, testData.buildingDescription, "Actual")
       .verifyForecastItemByExpensePeriodType(testData.t12RepairsItem, testData.buildingDescription, "Actual T12")
-      .verifyForecastItemByExpensePeriodType(testData.historicalRepairsItem, testData.buildingDescription,"Annualized Historical")
+      .verifyForecastItemByExpensePeriodType(testData.historicalRepairsItem, testData.buildingDescription, "Annualized Historical")
       .verifyForecastItemByExpensePeriodType(testData.ownerProjectionRepairsItem, testData.buildingDescription, "Owner's Projection")
       .hideExpenseForecastHeader();
 
       Income.ExpenseForecast.Actions.matchElementSnapshot(
-        Income.ExpenseForecast.Page.repairsAndMaintenanceCard, testData.repairsCardSnapshotName, {padding: [10, 100]});
+        Income.ExpenseForecast.Page.repairsAndMaintenanceCard, testData.repairsCardSnapshotName, { padding: [ 10, 100 ] });
   
       deleteReport(testData.reportCreationData.reportNumber);
   

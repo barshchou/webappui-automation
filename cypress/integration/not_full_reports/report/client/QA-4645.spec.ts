@@ -1,10 +1,12 @@
 import testData from "../../../../fixtures/not_full_reports/report/client/QA-4645.fixture";
-import {createReport, deleteReport} from "../../../../actions/base/baseTest.actions";
+import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import { Report } from '../../../../actions';
 
 
-describe("Verify the Client Guidelines Discussion on the page", () => {
+describe("Verify the Client Guidelines Discussion on the page", 
+    { tags: [ "@report", "@client" ] }, () => {
+        
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
     });

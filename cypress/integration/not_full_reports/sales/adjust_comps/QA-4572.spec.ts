@@ -1,10 +1,12 @@
 import testData from "../../../../fixtures/not_full_reports/sales/adjust_comps/QA-4572.fixture";
-import {createReport} from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Sales from "../../../../actions/sales/sales.manager";
 import ReviewExport from "../../../../actions/reviewExport/reviewExport.actions";
 
-describe("Check custom adjustment", () => {
+describe("Check custom adjustment", 
+    { tags: [ "@adjust_comps", "@sales" ] }, () => {
+        
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
     });
@@ -66,7 +68,7 @@ describe("Check custom adjustment", () => {
             .verifyNetPropertyAdjustmentsByCompIndex(1)
             .verifyAdjustedPriceByColumn()
             .verifyAdjustedPriceByColumn(1);
-        NavigationSection.openReviewAndExport(true);
+        NavigationSection.openReviewAndExport();
         ReviewExport.generateDocxReport()
             .waitForReportGenerated();
     });

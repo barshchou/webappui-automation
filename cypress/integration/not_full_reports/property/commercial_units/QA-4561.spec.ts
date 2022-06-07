@@ -3,9 +3,8 @@ import { Property } from "../../../../actions";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 
-
-describe("Verify the functionality of the Street Type radio button", () => {
-
+describe("Verify the functionality of the Street Type radio button", 
+    { tags:[ "@property", "@commercial_units" ] }, () => {
 
     before("Login, create report", () => {
 
@@ -14,7 +13,6 @@ describe("Verify the functionality of the Street Type radio button", () => {
         _NavigationSection.navigateToPropertySummary();
         Property._Summary.enterNumberOfCommercialUnits(testData.numberOfCommercialUnits);
     });
-
 
     it("Test body", () => {
 

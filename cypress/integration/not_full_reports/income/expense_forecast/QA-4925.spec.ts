@@ -4,13 +4,14 @@ import { createReport, deleteReport } from "../../../../actions/base/baseTest.ac
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Income from "../../../../actions/income/income.manager";
 
-describe("Comparable Min, Max, Avg values for Repairs & Maintenance Per SF are correctly calculated and displayed", () => {
+describe("Comparable Min, Max, Avg values for Repairs & Maintenance Per SF are correctly calculated and displayed", 
+    { tags:[ "@income", "@snapshot_tests", "@expense_forecast" ] }, () => {
 
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
     });
 
-    it("Test body", { tags: '@snapshot_tests' }, () => {
+    it("Test body", () => {
         cy.stepInfo("1. Go to Income > Comparable Expenses");
         NavigationSection.Actions.navigateToComparableExpenses();
 
@@ -37,9 +38,8 @@ describe("Comparable Min, Max, Avg values for Repairs & Maintenance Per SF are c
 
         cy.stepInfo("4.2 Check Comp Min, Comp Max and Comp Avg values for Repairs & Maintenance card. They should be correctly displayed on a slidebar");
         Income.ExpenseForecast.Actions.matchElementSnapshot(
-            Income.ExpenseForecast.Page.repairsAndMaintenanceCard, testData.repairsAndMaintenanceCardSnapshotName, {padding: [10, 100]});
+            Income.ExpenseForecast.Page.repairsAndMaintenanceCard, testData.repairsAndMaintenanceCardSnapshotName, { padding: [ 10, 100 ] });
 
-        cy.stepInfo("5. Delete report");
         deleteReport(testData.reportCreationData.reportNumber);
     });
 });

@@ -1,11 +1,13 @@
 import testData from "../../../../fixtures/not_full_reports/income/pro_forma/QA-4602&04&05&10.fixture";
-import {createReport, deleteReport} from "../../../../actions/base/baseTest.actions";
+import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Property from "../../../../actions/property/property.manager";
 import Income from "../../../../actions/income/income.manager";
 import ProFormaPage from "../../../../pages/income/proForma.page";
 
-describe("Less [USE (Property>Commercial Units)] Commercial V/C Loss @ X% row", () => {
+describe("Less [USE (Property>Commercial Units)] Commercial V/C Loss @ X% row", 
+    { tags:[ "@income", "@pro_forma" ] }, () => {
+        
     beforeEach("Login, create report", () => {
         createReport(testData.reportCreationData);
         NavigationSection.navigateToPropertySummary();
@@ -17,7 +19,7 @@ describe("Less [USE (Property>Commercial Units)] Commercial V/C Loss @ X% row", 
         NavigationSection.navigateToCommercialInPlaceRentRoll();
         Income.Commercial.InPlaceRentRoll.chooseListLeaseStatuses(testData.leaseStatuses, testData.numberOfCommercialUnits);
         testData.rentsPsf.forEach((rent, index) => {
-            Income.Commercial.InPlaceRentRoll.enterAnnualRentPerSFByRowNumber(rent, index);
+            Income.Commercial.InPlaceRentRoll.enterRentPerSFAnnuallyByRowNumber(rent, index);
         });
         NavigationSection.navigateToPotentialGrossIncome();
         Income.PotentialGrossIncome.enterCommercialVCLossPercentage(testData.comUseVCLossPercentage, testData.useValue);
@@ -26,7 +28,7 @@ describe("Less [USE (Property>Commercial Units)] Commercial V/C Loss @ X% row", 
     });
 
     it("QA-4602: Commercial V/C Loss @ X%", () => {
-        ProFormaPage.getCommercialUseVCLossRow(testData.useText)
+        ProFormaPage.commercialVCLossLabelCell(testData.useText)
             .should("contain.text", `${testData.comUseVCLossPercentage.toFixed(2)}%`);
         deleteReport(testData.reportCreationData.reportNumber);
     });

@@ -1,10 +1,12 @@
 import testData from "../../../../fixtures/not_full_reports/report/client/QA-4649.fixture";
-import {createReport, deleteReport} from "../../../../actions/base/baseTest.actions";
+import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Report from "../../../../actions/report/report.manager";
 import Summary from "../../../../actions/property/summary.actions";
 
-describe("Verify the Save & Continue button functionality on the Report > Client page", () => {
+describe("Verify the Save & Continue button functionality on the Report > Client page", 
+    { tags: [ "@report", "@client" ] }, () => {
+        
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
     });

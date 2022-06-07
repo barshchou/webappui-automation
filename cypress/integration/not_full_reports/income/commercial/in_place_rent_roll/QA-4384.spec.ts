@@ -2,12 +2,13 @@ import testData from "../../../../../fixtures/not_full_reports/income/commercial
 import NavigationSection from "../../../../../actions/base/navigationSection.actions";
 import Income from "../../../../../actions/income/income.manager";
 import Property from "../../../../../actions/property/property.manager";
-import {createReport, deleteReport} from "../../../../../actions/base/baseTest.actions";
+import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
 
-describe("Verify the Use column in the grid", () => {
+describe("Verify the Use column in the grid", 
+    { tags:[ "@income", "@commercial", "@in_place_rent_roll" ] }, () => {
 
-    const useRadios: BoweryReports.CommercialUnitGroupsValues[] = ["retail", "office", "medical", "community", "undetermined"];
-    const useTexts = ["Retail", "Office", "Medical Office", "Community Facility", "Undetermined"];
+    const useRadios: BoweryReports.CommercialUnitGroupsValues[] = [ "retail", "office", "medical", "community", "undetermined" ];
+    const useTexts = [ "Retail", "Office", "Medical Office", "Community Facility", "Undetermined" ];
     const groupName = "Use";
     const defaultUseValue = "Undetermined";
 
@@ -20,12 +21,12 @@ describe("Verify the Use column in the grid", () => {
             NavigationSection.navigateToCommercialInPlaceRentRoll()
                 .verifyProgressBarNotExist();
             Income.Commercial.InPlaceRentRoll.chooseLeaseStatusByRowNumber(testData.leaseStatus)
-                .verifyUseCellTextByRowNumber(defaultUseValue);
+                .verifyUseCellByRow(defaultUseValue);
             NavigationSection.navigateToCommercialUnits();
             Property.CommercialUnits.clickCommercialUnitTabByIndex()
                 .clickRadioButtonByValueAndUnitIndex(groupName, useRadios[index]);
             NavigationSection.navigateToCommercialInPlaceRentRoll();
-            Income.Commercial.InPlaceRentRoll.verifyUseCellTextByRowNumber(useText);
+            Income.Commercial.InPlaceRentRoll.verifyUseCellByRow(useText);
             deleteReport(testData.reportCreationData.reportNumber);
         });
     });

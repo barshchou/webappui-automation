@@ -2,9 +2,11 @@ import testData from "../../../../fixtures/not_full_reports/sales/value_conclusi
 import { _NavigationSection } from "../../../../actions/base";
 import { Property } from "../../../../actions";
 import { Sales } from "../../../../actions";
-import {createReport, deleteReport} from "../../../../actions/base/baseTest.actions";
+import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 
-describe("The amount column of the # of Units shows the correct number of units", () => {
+describe("The amount column of the # of Units shows the correct number of units", 
+    { tags: [ "@sales", "@value_conclusion" ] }, () => {
+        
     before("Login action", () => {
         createReport(testData.reportCreationData);
     });

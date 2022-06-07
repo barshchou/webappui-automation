@@ -3,7 +3,9 @@ import { createReport, deleteReport } from "../../../../../actions/base/baseTest
 import { _NavigationSection } from "../../../../../actions/base";
 import { Property, Income } from "../../../../../actions";
 
-describe("Verify the Monthly Total row in the grid", () => {
+describe("Verify the Monthly Total row in the grid", 
+    { tags:[ "@income", "@residential", "@in_place_rent_roll" ] }, () => {
+        
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
     });

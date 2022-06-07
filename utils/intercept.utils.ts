@@ -2,7 +2,7 @@
 /// <reference types="cypress" />
 
 import { getEnvUrl } from "./env.utils";
-import { ALIASE } from "./const.utils";
+import { Alias } from "../cypress/utils/alias.utils";
 
 export const interceptGoogleScriptsLoad = () => {
     cy.intercept({
@@ -12,7 +12,7 @@ export const interceptGoogleScriptsLoad = () => {
 };
 
 export const waitGoogleScriptsToLoad = () => {
-    cy.wait("@googleScripts", {timeout: 10000}).its("response.statusCode").should("eq", 200);
+    cy.wait("@googleScripts", { timeout: 10000 }).its("response.statusCode").should("eq", 200);
 };
 
 export const interceptGoogleScriptsAndWaitLoad = () => {
@@ -20,20 +20,19 @@ export const interceptGoogleScriptsAndWaitLoad = () => {
     waitGoogleScriptsToLoad();
 };
 
-const aliasInterceptedReportId = "aliasInterceptedReportId";
 export const interceptReportId = () => {
-    return cy.intercept("GET","/report/*").as(aliasInterceptedReportId);
+    return cy.intercept("GET", "/report/*").as(Alias.reportId);
 };
 
 export const setReportId = () => {
     cy.url().then(url => {
         const reportID = url.replace("/report-information", "").replace(`${getEnvUrl()}/report/`, "");
         cy.log(`Current report ID is ${reportID}`);
-        cy.wrap(reportID).as(ALIASE.reportId);
+        cy.wrap(reportID).as(Alias.reportId);
     });
 };
 export const getReportId = () => {
-    return cy.get(`@${ALIASE.reportId}`);
+    return cy.get(`@${Alias.reportId}`);
 };
 
 const pathToNetworkActivity = "./cypress/gh_artifacts/network_activity_records";

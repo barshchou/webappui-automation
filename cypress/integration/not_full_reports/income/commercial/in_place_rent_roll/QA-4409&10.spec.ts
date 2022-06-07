@@ -1,11 +1,12 @@
 import testData from "../../../../../fixtures/not_full_reports/income/commercial/in_place_rent_roll/QA-4409&10.fixture";
 import NavigationSection from "../../../../../actions/base/navigationSection.actions";
 import Income from "../../../../../actions/income/income.manager";
-import {createReport, deleteReport} from "../../../../../actions/base/baseTest.actions";
+import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
 
 
-describe("Verify the functionality of Edit and Cancel commentary buttons", () => {
-
+describe("Verify the functionality of Edit and Cancel commentary buttons", 
+    { tags:[ "@income", "@commercial", "@in_place_rent_roll" ] }, () => {
+        
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
     });
@@ -15,8 +16,8 @@ describe("Verify the functionality of Edit and Cancel commentary buttons", () =>
             .verifyProgressBarNotExist();
         Income.Commercial.InPlaceRentRoll.clickEditDiscussionButton()
             .verifyEditDiscussionButtonsDisplayed()
-            .clearAndEnterNewCommentary(testData.newCommentary)
-            .clickCancelDiscussionEditButton()
+            .editDiscussionTextArea(testData.newCommentary);
+        Income.Commercial.InPlaceRentRoll.clickCancelDiscussionEditButton()
             .verifyCommentaryTextNotContains(testData.newCommentary);
         deleteReport(testData.reportCreationData.reportNumber);
     });

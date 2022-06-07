@@ -1,16 +1,18 @@
-/// <reference types="cypress-grep" />
 import testData from "../../../../fixtures/not_full_reports/income/expense_forecast/QA-4941.fixture";
-import {createReport, deleteReport} from "../../../../actions/base/baseTest.actions";
+import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Property from "../../../../actions/property/property.manager";
 import Income from "../../../../actions/income/income.manager";
+import tableExpenseHistoryCellNames from "../../../../../cypress/enums/expenseHistoryTableRows.enum";
 
-describe("Historical expense Fuel Per SF is correctly calculated and displayed", () => {
+describe("Historical expense Fuel Per SF is correctly calculated and displayed",
+    { tags: [ "@snapshot_tests", "@income", "@expense_forecast" ] }, () => {
+        
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
     });
 
-    it("Test body", { tags: "@snapshot_tests" }, () => {
+    it("Test body", () => {
         cy.stepInfo("1. Navigate to Property -> Summary and enter gross building area");
         NavigationSection.navigateToPropertySummary();
         Property.Summary.enterGrossBuildingArea(testData.buildingDescription.grossArea)
@@ -37,10 +39,10 @@ describe("Historical expense Fuel Per SF is correctly calculated and displayed",
             .clickAddExpenseYearButton();
 
         cy.stepInfo("3. Fill in Fuel field for all added columns and save changes");
-        Income.ExpenseHistory.enterFuelByColIndex(testData.actual.fuelExpense, 3)
-            .enterFuelByColIndex(testData.t12.fuelExpense, 2)
-            .enterFuelByColIndex(testData.historical.fuelExpense, 1)
-            .enterFuelByColIndex(testData.projection.fuelExpense, 0);
+        Income.ExpenseHistory.enterIssueByColIndex(testData.actual.fuelExpense, tableExpenseHistoryCellNames.fuel, 3)
+            .enterIssueByColIndex(testData.t12.fuelExpense, tableExpenseHistoryCellNames.fuel, 2)
+            .enterIssueByColIndex(testData.historical.fuelExpense, tableExpenseHistoryCellNames.fuel, 1)
+            .enterIssueByColIndex(testData.projection.fuelExpense, tableExpenseHistoryCellNames.fuel, 0);
         NavigationSection.navigateToExpenseForecast();
 
         cy.stepInfo("4. Go to Expense Forecast and make sure that Per SF radiobutton is selected for Fuel card");
@@ -56,7 +58,7 @@ describe("Historical expense Fuel Per SF is correctly calculated and displayed",
 
         cy.stepInfo("6. Check historical expenses values for Fuel card. They should be correctly displayed on slidebars");
         Income.ExpenseForecast.Actions.matchElementSnapshot(
-            Income.ExpenseForecast.Page.fuelCard, testData.fuelCardSnapshotName, {padding: [10, 100]});
+            Income.ExpenseForecast.Page.fuelCard, testData.fuelCardSnapshotName, { padding: [ 10, 100 ] });
 
         deleteReport(testData.reportCreationData.reportNumber);
     });

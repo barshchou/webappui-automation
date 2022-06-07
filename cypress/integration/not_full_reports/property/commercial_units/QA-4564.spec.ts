@@ -1,9 +1,11 @@
 import testData from "../../../../fixtures/not_full_reports/property/commercial_units/QA-4564.fixture";
-import {createReport, deleteReport} from "../../../../actions/base/baseTest.actions";
-import {_NavigationSection} from "../../../../actions/base";
-import {Property} from "../../../../actions";
+import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { _NavigationSection } from "../../../../actions/base";
+import { Property } from "../../../../actions";
 
-describe("Verify the functionality of the Facade radio button", () => {
+describe("Verify the functionality of the Facade radio button", 
+    { tags: [ "@property", "@commercial_units" ] }, () => {
+        
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
     });

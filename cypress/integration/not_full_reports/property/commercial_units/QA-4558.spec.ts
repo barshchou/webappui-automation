@@ -1,9 +1,10 @@
 import testData from "../../../../fixtures/not_full_reports/property/commercial_units/QA-4558.fixture";
-import {createReport, deleteReport} from "../../../../actions/base/baseTest.actions";
-import {_NavigationSection} from "../../../../actions/base";
-import {Income, Property} from "../../../../actions";
+import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { _NavigationSection } from "../../../../actions/base";
+import { Income, Property } from "../../../../actions";
 
-describe("Verify the functionality of the Use* radio button", () => {
+describe("Verify the functionality of the Use* radio button", 
+    { tags:[ "@property", "@commercial_units" ] }, () => {
 
     beforeEach("Login, create report", () => {
         createReport(testData.reportCreationData);
@@ -47,13 +48,13 @@ describe("Verify the functionality of the Use* radio button", () => {
             Property._CommercialUnits.clickRadioButtonByValueAndUnitIndex(testData.groupName, radio);
             if (radio === "other") Property._CommercialUnits.enterOtherValueByGroupName(testData.groupName, testData.otherValue);
             _NavigationSection.navigateToCommercialInPlaceRentRoll();
-            Income._CommercialManager.InPlaceRentRoll.verifyUseCellTextByRowNumber(testData.useTexts[index])
+            Income._CommercialManager.InPlaceRentRoll.verifyUseCellByRow(testData.useTexts[index])
                 .chooseLeaseStatusByRowNumber("Occupied");
-            _NavigationSection.openCommercialStabilizedRentRollInCommercial();
+            _NavigationSection.navigateToStabilizedRentRollInCommercial();
             Income._CommercialManager.StabilizedRentRoll.verifyUseCellByRow(testData.useTexts[index])
                 .verifyProgressBarNotExist()
-                .Page.formEditBtn(0).click();
-            Income._CommercialManager.StabilizedRentRoll.Page.formCancelButton(0).click();
+                .clickEditDiscussionButton()
+                .Page.formCancelButton().click();
             _NavigationSection.navigateToCommercialUnits();
         });
         deleteReport(testData.reportCreationData.reportNumber);
@@ -87,8 +88,10 @@ describe("Verify the functionality of the Use* radio button", () => {
             Property._CommercialUnits.clickRadioButtonByValueAndUnitIndex(testData.groupName, radio);
             if (radio === "other") Property._CommercialUnits.enterOtherValueByGroupName(testData.groupName, testData.otherValue);
             _NavigationSection.navigateToProForma();
-            Income._ProFormaActions.Page.getCommercialUseVCLossLabel(testData.useTexts[index]).should("exist");
-            Income._ProFormaActions.Page.getCommercialUseVCLossRow(testData.useTexts[index]).should("exist");
+            Income._ProFormaActions.Page.residentialVCLossLabelCell(testData.useTexts[index]).should("exist");
+            Income._ProFormaActions.Page.residentialVCLossTotal(testData.useTexts[index]).should("exist");
+            Income._ProFormaActions.Page.residentialVCLossPerSF(testData.useTexts[index]).should("exist");
+            Income._ProFormaActions.Page.residentialVCLossPerUnit(testData.useTexts[index]).should("exist");
             Income._ProFormaActions.clickIncludeNOIComparisonCheckbox();
             _NavigationSection.navigateToCommercialUnits();
         });

@@ -1,12 +1,12 @@
-/// <reference types="cypress-grep" /> 
 import testData from "../../../../fixtures/not_full_reports/income/expense_forecast/QA-4924.fixture";
 import Property from "../../../../actions/property/property.manager";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Income from "../../../../actions/income/income.manager";
+import tableExpenseHistoryCellNames from "../../../../../cypress/enums/expenseHistoryTableRows.enum";
 
-
-describe("User selects Per SF radiobutton for Repairs & Maintenance on Expense Forecast form and historical expenses per SF are correctly calculated and displayed", () => {
+describe("User selects Per SF radiobutton for Repairs & Maintenance on Expense Forecast form and historical expenses per SF are correctly calculated and displayed", 
+    { tags:[ "@income", "@expense_forecast", "@snapshot_tests" ] }, () => {
 
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
@@ -15,7 +15,7 @@ describe("User selects Per SF radiobutton for Repairs & Maintenance on Expense F
             .enterNumberOfResUnits(testData.buildingDescription.numberOfUnits); 
     });
 
-    it("Test body", { tags: '@snapshot_tests' },  () => {
+    it("Test body", () => {
 
         cy.stepInfo(`QA-4924 =>1. Go to Income > Expense History`);
         NavigationSection.navigateToExpenseHistory();
@@ -40,10 +40,10 @@ describe("User selects Per SF radiobutton for Repairs & Maintenance on Expense F
 
 
         cy.stepInfo(`QA-4924 => 3. Fill in Repairs & Maintenance field for all added columns and save changes`);
-        Income.ExpenseHistory.enterRepairsAndMaintenanceByColIndex(testData.actual.repairsAndMaintenanceExpense, 3)
-            .enterRepairsAndMaintenanceByColIndex(testData.t12.repairsAndMaintenanceExpense, 2)
-            .enterRepairsAndMaintenanceByColIndex(testData.historical.repairsAndMaintenanceExpense, 1)
-            .enterRepairsAndMaintenanceByColIndex(testData.projection.repairsAndMaintenanceExpense, 0);
+        Income.ExpenseHistory.enterIssueByColIndex(testData.actual.repairsAndMaintenanceExpense, tableExpenseHistoryCellNames.repairsAndMaintenance, 3)
+            .enterIssueByColIndex(testData.t12.repairsAndMaintenanceExpense, tableExpenseHistoryCellNames.repairsAndMaintenance, 2)
+            .enterIssueByColIndex(testData.historical.repairsAndMaintenanceExpense, tableExpenseHistoryCellNames.repairsAndMaintenance, 1)
+            .enterIssueByColIndex(testData.projection.repairsAndMaintenanceExpense, tableExpenseHistoryCellNames.repairsAndMaintenance, 0);
         NavigationSection.navigateToExpenseForecast();
 
 
@@ -62,7 +62,7 @@ describe("User selects Per SF radiobutton for Repairs & Maintenance on Expense F
 
         Income.ExpenseForecast.Actions.matchElementSnapshot(
             Income.ExpenseForecast.Page.repairsAndMaintenanceCard, testData.repairsAndMaintenanceCardSnapshotName,
-            {padding: [10, 100]});
+            { padding: [ 10, 100 ] });
 
         deleteReport(testData.reportCreationData.reportNumber);
     });

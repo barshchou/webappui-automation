@@ -1,5 +1,5 @@
 import expenseForecastPage from "../../pages/income/expenseForecast.page";
-import {getNumberFromDollarNumberWithCommas, numberWithCommas} from "../../../utils/numbers.utils";
+import { getNumberFromDollarNumberWithCommas, numberWithCommas } from "../../../utils/numbers.utils";
 import BaseActionsExt from "../base/base.actions.ext";
 
 type ForecastItem = BoweryReports.ForecastItem;
@@ -136,25 +136,20 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
         return this;
     }
 
-    private getItemNameForAverage(itemOriginal: string): string {
-        switch (itemOriginal) {
-            case "waterAndSewer":
-                return "waterSewer";
-            case "repairsAndMaintenance":
-                return "repairsMaintenance";
-            case "payrollAndBenefits":
-                return "payrollBenefits";
-            case "generalAndAdministrative":
-                return "generalAdministrative";
-            case "legalAndProfessionalFees":
-                return "legalProfessionalFees";
-            case "management":
-                return "managementFees";
-            case "reserves":
-                return "replacementReserves";
-            default:
-                return itemOriginal;
-        }
+    getItemNameForAverage(itemOriginal: string): string {
+        return this.itemOriginalObj[`${itemOriginal}`] == undefined 
+            ? itemOriginal 
+            : this.itemOriginalObj[`${itemOriginal}`];
+    }
+
+    itemOriginalObj = {
+        waterAndSewer: "waterSewer",
+        repairsAndMaintenance: "repairsMaintenance",
+            payrollAndBenefits: "payrollBenefits",
+            generalAndAdministrative: "generalAdministrative",
+            legalAndProfessionalFees: "legalProfessionalFees",
+            management: "managementFees",
+            reserves: "replacementReserves"
     }
 
     checkPercentOfEGICheckbox(): ExpenseForecastActions {
@@ -252,8 +247,8 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
         return this;
     }
 
-    verifyForecastCommentary(textToBe: string, forecastItem: BoweryReports.ForecastItem): ExpenseForecastActions {
-        expenseForecastPage.getExpenseCommentary(this.getItemNameForAverage(forecastItem.name)).should("contain.text", textToBe);
+    verifyForecastCommentary(textToBe: string, forecastItem: BoweryReports.ForecastItem, index = 1): ExpenseForecastActions {
+        expenseForecastPage.getExpenseCommentary(this.getItemNameForAverage(forecastItem.name), index).should("contain.text", textToBe);
         return this;
     }
 
@@ -268,25 +263,25 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
         return this;
     }
 
-    editExpenseForecastCommentary(newText: string, forecastItem: BoweryReports.ForecastItem, isWithClear = false, ): ExpenseForecastActions {
+    editExpenseForecastCommentary(newText: string, forecastItem: BoweryReports.ForecastItem, isWithClear = false, index = 1): ExpenseForecastActions {
         let item = this.getItemNameForAverage(forecastItem.name);
-        expenseForecastPage.getExpenseCommentaryEditButton(item).click();
+        expenseForecastPage.getExpenseCommentaryEditButton(item, index).click();
         if (isWithClear) {
-            expenseForecastPage.getExpenseCommentary(item).clear();
+            expenseForecastPage.getExpenseCommentary(item, index).clear();
         }
-        expenseForecastPage.getExpenseCommentary(item).type(newText);
-        expenseForecastPage.getExpenseCommentarySaveButton(item).click();
+        expenseForecastPage.getExpenseCommentary(item, index).type(newText);
+        expenseForecastPage.getExpenseCommentarySaveButton(item, index).click();
         expenseForecastPage.getExpenseCommentaryModified(item).should("exist");
         return this;
     }
 
-    revertToOriginalExpenseForecastCommentary(forecastItem: BoweryReports.ForecastItem): ExpenseForecastActions {
+    revertToOriginalExpenseForecastCommentary(forecastItem: BoweryReports.ForecastItem, index = 1): ExpenseForecastActions {
         let item = this.getItemNameForAverage(forecastItem.name);
-        expenseForecastPage.getExpenseCommentaryEditButton(item).click();
+        expenseForecastPage.getExpenseCommentaryEditButton(item, index).click();
         expenseForecastPage.getExpenseCommentaryRevertToOriginal(item).click();
         this.verifyProgressBarNotExist();
         expenseForecastPage.expenseConfirmRevertButton.click();
-        expenseForecastPage.getExpenseCommentarySaveButton(item).click();
+        expenseForecastPage.getExpenseCommentarySaveButton(item, index).click();
         return this;
     }
 
@@ -309,13 +304,14 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
         return this;
     }
 
-    addCustomExpenseCategory(categoryName): ExpenseForecastActions {
+    addCustomExpenseCategory(categoryName: string): ExpenseForecastActions {
         expenseForecastPage.createNewCategoryButton.click();
         expenseForecastPage.newCategoryExpenseName.clear().type(categoryName);
         this.Page.formSaveBtn(1).click();
         this.verifyProgressBarNotExist();
         return this;
     }
+
 }
 
 export default new ExpenseForecastActions(expenseForecastPage);

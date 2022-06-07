@@ -1,14 +1,17 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import reviewExportPage from "../../pages/reviewExport/reviewExport.page";
-import BaseActions from "../base/base.actions";
+import BaseActionsExt from "../base/base.actions.ext";
+class ReviewExportActions extends BaseActionsExt<typeof reviewExportPage> {
 
-class ReviewExportActions extends BaseActions {
-    get Page() {
-        return reviewExportPage;
-    }    
+    verifyPageIsOpened() {
+        reviewExportPage.headerTitle.should("exist");
+        return this;
+    }
     
     waitForReportGenerated(): this {
-        cy.get('[data-qa="download-btn"]', {timeout: 120000}).should("be.visible");
+        reviewExportPage.statusBar.should("contain.text", "Pending");
+        reviewExportPage.statusBar.should("contain.text", "Complete");
+        cy.get('[data-qa="download-btn"]', { timeout: 120000 }).should("be.visible");
         return this;
     }
 
@@ -23,12 +26,12 @@ class ReviewExportActions extends BaseActions {
      */
     downloadAndConvertDocxReport(reportName:string): this {
         reviewExportPage.downloadBtn.click();
-        cy.task("getFilePath",{_reportName: reportName, _docx_html: "docx"}).then(file => {
+        cy.task("getFilePath", { _reportName: reportName, _docx_html: "docx" }).then(file => {
             cy.log(<string>file);
-            cy.task("waitForFileExists",file);
-            cy.task("convertDocxToHtml",file); 
+            cy.task("waitForFileExists", file);
+            cy.task("convertDocxToHtml", file); 
         });
         return this;
     }
 }
-export default new ReviewExportActions();
+export default new ReviewExportActions(reviewExportPage);

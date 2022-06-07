@@ -1,5 +1,5 @@
 import testData from "../../../../../fixtures/not_full_reports/income/residential/in_place_rent_roll/QA-4219.fixture";
-import {createReport, deleteReport} from "../../../../../actions/base/baseTest.actions";
+import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
 import ReportDataCreator from "../../../../../fixtures/data_creator/reportData.creator";
 import NavigationSection from "../../../../../actions/base/navigationSection.actions";
 import Income from "../../../../../actions/income/income.manager";
@@ -7,7 +7,9 @@ import Property from "../../../../../actions/property/property.manager";
 
 const reportCreationData = ReportDataCreator.getReportData("4219");
 
-describe("Verify the # column in the grid", () => {
+describe("Verify the # column in the grid", 
+    { tags:[ "@income", "@residential", "@in_place_rent_roll" ] }, () => {
+        
     before("Login, create report", () => {
         createReport(reportCreationData);
     });

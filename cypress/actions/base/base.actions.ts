@@ -4,7 +4,7 @@
 
 
 import { Options } from "cypress-image-snapshot";
-import {getEnvUrl} from "../../../utils/env.utils";
+import { getEnvUrl } from "../../../utils/env.utils";
 
 export default class BaseActions {
 
@@ -14,6 +14,7 @@ export default class BaseActions {
 
     clickYesButton() {
         cy.get("*[name='form-confirm-submit-btn']").click();
+        this.verifyProgressBarNotExist();
         return this;
     }
 
@@ -45,7 +46,7 @@ export default class BaseActions {
         return this;
     }
 
-    clickSubmitBtn(){
+    clickSubmitBtn() {
         cy.get('[type="submit"][data-qa="save-btn"]').click();
         return this;
     }
@@ -65,7 +66,17 @@ export default class BaseActions {
     }
 
     clickBackButton() {
-        cy.xpath("//button[.='BACK']").click();
+        cy.xpath("//button[.='Back']").click();
+        return this;
+    }
+
+    verifyContainsValue(expectedValue: string) {
+        cy.contains(expectedValue).should("be.visible");
+        return this;
+    }
+
+    verifyTooltipExist() {
+        cy.get("[role=tooltip]").should("not.exist");
         return this;
     }
 
@@ -76,11 +87,20 @@ export default class BaseActions {
      * @see https://github.com/jaredpalmer/cypress-image-snapshot
      */
 
-    matchElementSnapshot(element:Cypress.Chainable, snapshotName: string, options: Options = { allowSizeMismatch: true} ){
+    matchElementSnapshot(element:Cypress.Chainable, snapshotName: string, options: Options = { allowSizeMismatch: true } ){
         if(Cypress.browser.isHeadless == true) {
-            element.matchImageSnapshot(snapshotName,options);
+            element.matchImageSnapshot(snapshotName, options);
             return this; 
         } 
+    }
+
+    /**
+     * Emulates paste of text by invoking function `val` of JQuery element.
+     * Does not related to functionality of Clipboard API of browser.
+     */
+    emulateCopyPaste(elem: Cypress.Chainable<JQuery<HTMLElement>>, text: string): this {
+        elem.click().invoke("val", text);
+        return this;
     }
 
     pause(){

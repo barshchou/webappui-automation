@@ -17,7 +17,7 @@ Cypress.on("uncaught:exception", () => {
     return false;
 });
 
-Cypress.on("fail",(err) => {
+Cypress.on("fail", (err) => {
   recordDOM_Snapshot();
   recordProxiedRequests();
   throw err;
@@ -46,6 +46,12 @@ declare global {
          * @param message 
          */
         stepInfo(message:string): void
+
+        /**
+         * @param {string} subject element to drag
+         * @param {string} target element to drop into
+         */
+        dragAndDrop: (subject:string, target:string) => void;
       }
     }
   }

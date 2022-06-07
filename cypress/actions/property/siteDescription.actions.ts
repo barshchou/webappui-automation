@@ -1,67 +1,38 @@
-import BaseActions from "../base/base.actions";
 import siteDescriptionPage from "../../pages/property/siteDescription.page";
-import {numberWithCommas} from "../../../utils/numbers.utils";
+import { numberWithCommas } from "../../../utils/numbers.utils";
+import BaseActionsExt from "../base/base.actions.ext";
 
-class SiteDescriptionActions extends BaseActions{
+class SiteDescriptionActions extends BaseActionsExt<typeof siteDescriptionPage>{
 
-    /**
-     *
-     * @param {string} newCommentary
-     * @return {SiteDescriptionActions}
-     */
-    editTransportationDiscussionCommentary(newCommentary) {
+    editTransportationDiscussionCommentary(newCommentary: string): SiteDescriptionActions {
         siteDescriptionPage.transportationCommEdit.click();
         siteDescriptionPage.transportationCommentary.type(newCommentary).clear()
             .type(newCommentary).should("have.text", newCommentary);
         return this;
     }
 
-    /**
-     *
-     * @return {SiteDescriptionActions}
-     */
-    checkSurroundingResidential() {
+    checkSurroundingResidential(): SiteDescriptionActions {
         siteDescriptionPage.surroundingResidentalCheckbox.check().should("have.value", "true");
         return this;
     }
 
-    /**
-     *
-     * @param {number} areaToBe
-     * @return {SiteDescriptionActions}
-     */
-    verifySiteArea(areaToBe) {
+    verifySiteArea(areaToBe: number): SiteDescriptionActions {
         const areaWithCommas = numberWithCommas(areaToBe);
         siteDescriptionPage.siteDescriptorSiteArea.should("have.text", `${areaWithCommas} square feet`);
         return this;
     }
 
-    /**
-     *
-     * @param {string} shapeToBe
-     * @return {SiteDescriptionActions}
-     */
-    verifyPropertyShape(shapeToBe) {
+    verifyPropertyShape(shapeToBe: string): SiteDescriptionActions {
         siteDescriptionPage.siteDescriptorPropShape.should("have.text", shapeToBe);
         return this;
     }
 
-    /**
-     *
-     * @param {number} frontageToBe
-     * @return {SiteDescriptionActions}
-     */
-    verifyPropertyFrontage(frontageToBe) {
+    verifyPropertyFrontage(frontageToBe: number): SiteDescriptionActions {
         siteDescriptionPage.siteDescriptorFrontage.should("contain.text", `${frontageToBe} ft`);
         return this;
     }
 
-    /**
-     *
-     * @param {Array<string>} itemsToBe
-     * @returns {SiteDescriptionActions}
-     */
-    verifySiteDescriptionItems(itemsToBe) {
+    verifySiteDescriptionItems(itemsToBe: Array<string>): SiteDescriptionActions {
         siteDescriptionPage.siteDescriptionItems.then(items => {
             for (let i = 0; i < items.length; i++) {
                 cy.wrap(items[i]).should("have.value", itemsToBe[i]);
@@ -70,23 +41,13 @@ class SiteDescriptionActions extends BaseActions{
         return this;
     }
 
-    /**
-     *
-     * @param {string} newCommentary
-     * @returns {SiteDescriptionActions}
-     */
-    editFloodHazardCommentary(newCommentary) {
+    editFloodHazardCommentary(newCommentary: string): SiteDescriptionActions {
         siteDescriptionPage.floodHazardEditButton.click();
         siteDescriptionPage.floodHazardCommentary.clear().type(newCommentary).should("have.text", newCommentary);
         return this;
     }
 
-    /**
-     *
-     * @param {Array<string>} itemsToBe
-     * @returns {SiteDescriptionActions}
-     */
-    verifyUtilitiesItems(itemsToBe) {
+    verifyUtilitiesItems(itemsToBe: Array<string>): SiteDescriptionActions {
         siteDescriptionPage.utilitiesItems.then(items => {
             for (let i = 0; i < items.length; i++) {
                 cy.wrap(items[i]).should("have.value", itemsToBe[i]);
@@ -95,12 +56,7 @@ class SiteDescriptionActions extends BaseActions{
         return this;
     }
 
-    /**
-     *
-     * @param {string} description
-     * @returns {SiteDescriptionActions}
-     */
-    verifyUtilitiesDescriptions(description) {
+    verifyUtilitiesDescriptions(description: string): SiteDescriptionActions {
         siteDescriptionPage.utilitiesDescriptions.then(elements => {
             for (let i = 0; i < elements.length; i++) {
                 let textToCheck = "City";
@@ -115,4 +71,4 @@ class SiteDescriptionActions extends BaseActions{
     }
 }
 
-export default new SiteDescriptionActions();
+export default new SiteDescriptionActions(siteDescriptionPage);

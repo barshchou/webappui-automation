@@ -1,9 +1,9 @@
 import testData from "../../../../fixtures/not_full_reports/property/summary/QA-4084.fixture";
-import {createReport, deleteReport} from "../../../../actions/base/baseTest.actions";
-import {_NavigationSection} from "../../../../actions/base";
-import {Property} from "../../../../actions";
+import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { _NavigationSection } from "../../../../actions/base";
+import { Property } from "../../../../actions";
 
-describe("[QA-4084] Check the Census Tract field", { tags: ["@property", "@summary" ] }, () => {
+describe("[QA-4084] Check the Census Tract field", { tags: [ "@property", "@summary" ] }, () => {
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
     });

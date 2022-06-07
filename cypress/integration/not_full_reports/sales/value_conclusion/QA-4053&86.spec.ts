@@ -1,12 +1,13 @@
-import { Sales, ReviewExport } from './../../../../actions/index';
+import { Sales, ReviewExport } from '../../../../actions';
 import testData from "../../../../fixtures/not_full_reports/sales/value_conclusion/QA-4053&86..fixture";
-import { _NavigationSection } from "../../../../actions/base/index";
-import {createReport, deleteReport} from "../../../../actions/base/baseTest.actions";
+import { _NavigationSection } from "../../../../actions/base";
+import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import { _Summary } from "../../../../actions/property";
 
+describe("[QA-4053] [QA-4086] The Concluded Value Per Unit is calculated correctly and includes both commercial and residential units.", 
+    { tags: [ "@check_export", "@sales", "@value_conclusion" ] }, () => {
 
-describe("[QA-4053] [QA-4086] The Concluded Value Per Unit is calculated correctly and includes both commercial and residential units.", () => {
-    it("Test body", { tags: '@to_check_export' }, () => {
+    it("Test body", () => {
         createReport(testData.reportCreationData);
         cy.stepInfo('Precondition: Navigate to report summary and specify amount of residential and commercial units');
         _NavigationSection.navigateToPropertySummary();
@@ -30,18 +31,18 @@ describe("[QA-4053] [QA-4086] The Concluded Value Per Unit is calculated correct
             .verifyAsIsMarketAmount(totalValue)
             .verifyAsCompleteAmount(totalValue);
 
-        _NavigationSection.Actions.openReviewAndExport(true).closeSatisfactionSurvey();
+        _NavigationSection.Actions.openReviewAndExport().closeSatisfactionSurvey();
         ReviewExport.generateDocxReport()
         .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
         deleteReport(testData.reportCreationData.reportNumber);
     });
     
-    it("Check html report",() => {
+    it("Check html report", () => {
         cy.stepInfo(`
         Verify the export of the report
         `);
         cy.task("getFilePath",
-        {_reportName: testData.reportCreationData.reportNumber, _docx_html: "html"}
+        { _reportName: testData.reportCreationData.reportNumber, _docx_html: "html" }
         ).then(file => {
             cy.log(<string>file);
             cy.visit(<string>file);

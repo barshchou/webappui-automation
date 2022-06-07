@@ -1,15 +1,17 @@
 /// <reference types="cypress-grep" />
 import testData from "../../../../fixtures/not_full_reports/income/expense_forecast/QA-4877.fixture";
-import {createReport, deleteReport} from "../../../../actions/base/baseTest.actions";
+import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Income from "../../../../actions/income/income.manager";
 
-describe("Comparable Min, Max, Avg values for Electricity Per SF are correctly calculated and displayed", () => {
+describe("Comparable Min, Max, Avg values for Electricity Per SF are correctly calculated and displayed",
+    { tags:[ "@snapshot_tests", "@income", "@expense_forecast" ] }, () => {
+        
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
     });
 
-    it("Test body", { tags: '@snapshot_tests' }, () => {
+    it("Test body", () => {
         cy.stepInfo("1. Go to Income > Comparable Expenses");
         NavigationSection.Actions.navigateToComparableExpenses();
 
@@ -40,7 +42,7 @@ describe("Comparable Min, Max, Avg values for Electricity Per SF are correctly c
             5.2 correctly displayed on a slidebar
         `);
         Income.ExpenseForecast.Actions.matchElementSnapshot(
-            Income.ExpenseForecast.Page.electricityCard, testData.electricityCardSnapshotName, {padding: [10, 100]}
+            Income.ExpenseForecast.Page.electricityCard, testData.electricityCardSnapshotName, { padding: [ 10, 100 ] }
         );
 
         deleteReport(testData.reportCreationData.reportNumber);

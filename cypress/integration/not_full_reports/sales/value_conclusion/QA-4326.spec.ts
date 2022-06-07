@@ -1,9 +1,10 @@
 import testData from "../../../../fixtures/not_full_reports/sales/value_conclusion/QA-4326.fixture";
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Sales from "../../../../actions/sales/sales.manager";
-import {createReport, deleteReport} from "../../../../actions/base/baseTest.actions";
+import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 
-describe("Sales Value Conclusion Discussion -> Generated Commentary is revertible", () => {
+describe("Sales Value Conclusion Discussion -> Generated Commentary is revertible", 
+    { tags: [ "@sales", "@value_conclusion" ] }, () => {
 
     before("Login, create report", () => {
        createReport(testData.reportCreationData);

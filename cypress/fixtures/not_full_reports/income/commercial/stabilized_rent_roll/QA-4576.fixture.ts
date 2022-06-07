@@ -1,9 +1,9 @@
 import ReportDataCreator from "../../../../data_creator/reportData.creator";
 
 const groupNameFixture: BoweryReports.CommercialUnitsGroups = "Use";
-const useRadiosFixture: BoweryReports.CommercialUnitsUseValues[] = ["retail", "office"];
-const useTextFixture: BoweryReports.CommercialUnitsUseTexts[] = ["Retail", "Office"];
-const leaseStatusesFixture: BoweryReports.LeaseStatus[] = ["Vacant", "Occupied"];
+const useRadiosFixture: BoweryReports.CommercialUnitsUseValues[] = [ "retail", "office" ];
+const useTextFixture: BoweryReports.CommercialUnitsUseTexts[] = [ "Retail", "Office" ];
+const leaseStatusesFixture: BoweryReports.LeaseStatus[] = [ "Vacant", "Occupied" ];
 const occupiedLeaseFixture: BoweryReports.LeaseStatus = "Occupied";
 const vacantLeaseFixture: BoweryReports.LeaseStatus = "Vacant";
 
@@ -15,13 +15,13 @@ export default {
     },
     reportCreationData: ReportDataCreator.getReportData("4576"),
     numberOfCommercialUnits: 2,
-    listOfUnitsSF: [1000, 2000],
+    listOfUnitsSF: [ 1000, 2000 ],
     groupName: groupNameFixture,
     useRadios: useRadiosFixture,
     useTexts: useTextFixture,
     leaseStatuses: leaseStatusesFixture,
-    tenantNames: ["vacant name", "test name"],
-    rentsPsf: [100, 120],
+    tenantNames: [ "vacant name", "test name" ],
+    rentsPsf: [ 100, 120 ],
     annualRent: "$240,000.00",
     monthlyRent: "$20,000.00",
     newTenantName: "new test name",
@@ -42,5 +42,5 @@ export default {
     wrongFormatLeaseDate: "25/45/3000",
     occupiedLease: occupiedLeaseFixture,
     vacantLease: vacantLeaseFixture,
-    compGroupName: ["Group1", "Group2"]
+    compGroupName: [ "Group1", "Group2" ]
 };

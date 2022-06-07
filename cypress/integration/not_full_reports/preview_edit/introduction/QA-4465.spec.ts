@@ -7,7 +7,9 @@ import { getReportId } from "../../../../../utils/intercept.utils";
 
 const { createReport, deleteReport } = _BaseTest;
 
-describe('Verify the "Property Rights Appraised" commentary on the Introduction page', () => {
+describe('Verify the "Property Rights Appraised" commentary on the Introduction page', 
+    { tags:[ "@preview_edit", "@introduction" ] }, () => {
+        
     before("Login, create report", () => {
         cy.stepInfo(`1. Create a report`);
         createReport(testData.reportCreationData);
@@ -25,9 +27,8 @@ describe('Verify the "Property Rights Appraised" commentary on the Introduction 
             Report._KeyInfo.enterPropertyRightsAppraisedComment(value).then(text => {
                 cy.wrap(text).as(testData.aliases.PropertyRightsAppraised);
             });
-            _NavigationSection.clickPreviewEditButton();
-            _NavigationSection.Page.introduction.click();
-            _NavigationSection.clickYesButton().verifyProgressBarNotExist();
+            _NavigationSection.navigateToIntroduction()
+                .verifyProgressBarNotExist();
     
             PreviewEdit._Introduction.Page.TextPropertyRightsAppraised
             .invoke("text")
@@ -48,7 +49,7 @@ describe('Verify the "Property Rights Appraised" commentary on the Introduction 
             PreviewEdit._Introduction.Page.ChipModified.should("be.visible");
             PreviewEdit._Introduction.Page.getBacklink(testData.backlinkName)
             .should("be.visible")
-            .invoke("attr","href")
+            .invoke("attr", "href")
             .then(href => {
                 getReportId().then(val => {
                     expect(href).includes(val);

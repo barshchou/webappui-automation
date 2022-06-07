@@ -1,4 +1,4 @@
-import {getTodayDateString, getYearFromDate} from "../../../../utils/date.utils";
+import { getTodayDateString, getYearFromDate } from "../../../../utils/date.utils";
 import Enums from "../../../enums/enums";
 
 const reportCreationFixture = (): BoweryAutomation.ReportCreationData => {
@@ -115,8 +115,8 @@ const siteInspectionFixture = () => {
     return {
         generalPropertyCondition: "Average",
         stabilizedCondition: "Good",
-        locationsInspectedLabels: ["Building Facade", "Exterior Entrance", "Interior Hallways", "Common Areas",
-            "Mechanical/electrical systems", "Stairs"],
+        locationsInspectedLabels: [ "Building Facade", "Exterior Entrance", "Interior Hallways", "Common Areas",
+            "Mechanical/electrical systems", "Stairs" ],
         stairCondition: "Average"
     };
 };
@@ -125,14 +125,14 @@ const descriptionOfImprovementsFixture = () => {
     return {
         foundationValue: "Poured concrete",
         structuralSystemValue: "Wood joists and masonry",
-        externalWallsLabels: ["Brick", "Masonry"],
+        externalWallsLabels: [ "Brick", "Masonry" ],
         framingValue: "Wood post and beam",
         roofType: "Flat built-up",
-        windowsLabels: ["Double-hung"],
-        plumbingLabels: ["PVC", "Copper", "Iron"],
+        windowsLabels: [ "Double-hung" ],
+        plumbingLabels: [ "PVC", "Copper", "Iron" ],
         sprinklersValue: "None",
-        securityLabels: ["Door Locks"],
-        basementAccess: ["Interior"],
+        securityLabels: [ "Door Locks" ],
+        basementAccess: [ "Interior" ],
         basementState: "Unfinished"
     };
 };
@@ -159,8 +159,8 @@ const siteDescriptorsFixture = () => {
         siteArea: siteDetailsFixture().siteArea,
         propertyShape: "Rectangular",
         propertyFrontage: 50,
-        siteDescriptionItems: ["Access", "Topography", "Drainage", "Paving", "Street Lighting", "Hazardous Substances",
-            "Easements, Encroachments, and Restrictions"],
+        siteDescriptionItems: [ "Access", "Topography", "Drainage", "Paving", "Street Lighting", "Hazardous Substances",
+            "Easements, Encroachments, and Restrictions" ],
         floodHazardCommentary: "According to National Flood Insurance Program Rate Map dated August 19, 2008 Community " +
             "Panel #17031C0655J, the subject is located within a Zone X flood zone. Zone X is an area of minimal flooding." +
             " These areas are determined to be outside the 500-year floodplain and are determined to be outside the 1% " +
@@ -170,7 +170,7 @@ const siteDescriptorsFixture = () => {
 
 const utilitiesSiteDescriptionFixture = () => {
     return {
-        utilitiesItems: ["Water/Sewer and Refuse", "Police & Fire Protection", "Gas", "Electricity"],
+        utilitiesItems: [ "Water/Sewer and Refuse", "Police & Fire Protection", "Gas", "Electricity" ],
         utilitiesDescription: "Comed"
     };
 };
@@ -228,7 +228,7 @@ const facadePhotosFixture = () => {
     return {
         section: "Building Facade",
         photosFolder: "full_reports/full_bowery_multifamily_as_complete/facade_photos",
-        photosFileNames: ["building_facade_1.png", "building_facade_2.png", "building_facade_3.png"]
+        photosFileNames: [ "building_facade_1.png", "building_facade_2.png", "building_facade_3.png" ]
     };
 };
 
@@ -236,7 +236,7 @@ const subjectPhotosFixture = () => {
     return {
         section: "Subject Street",
         photosFolder: "full_reports/full_bowery_multifamily_as_complete/subject_street_photos",
-        photosFileNames: ["subject_street_1.png", "subject_street_2.png"]
+        photosFileNames: [ "subject_street_1.png", "subject_street_2.png" ]
     };
 };
 
@@ -244,7 +244,7 @@ const exteriorEntrancePhotosFixture = () => {
     return {
         section: "Exterior Entrance",
         photosFolder: "full_reports/full_bowery_multifamily_as_complete/exterior_entrance_photos",
-        photosFileNames: ["exterior_entrance_1.png", "exterior_entrance_2.png", "exterior_entrance_3.png"]
+        photosFileNames: [ "exterior_entrance_1.png", "exterior_entrance_2.png", "exterior_entrance_3.png" ]
     };
 };
 
@@ -252,8 +252,8 @@ const stairwayPhotosFixture = () => {
     return {
         section: "Typical Stairway",
         photosFolder: "full_reports/full_bowery_multifamily_as_complete/typical_stairway_photos",
-        photosFileNames: ["typical_stairway_1.png", "typical_stairway_2.png", "typical_stairway_3.png",
-            "typical_stairway_4.png", "typical_stairway_5.png"]
+        photosFileNames: [ "typical_stairway_1.png", "typical_stairway_2.png", "typical_stairway_3.png",
+            "typical_stairway_4.png", "typical_stairway_5.png" ]
     };
 };
 
@@ -261,7 +261,7 @@ const hallwayPhotosFixture = () => {
     return {
         section: "Typical Hallway",
         photosFolder: "full_reports/full_bowery_multifamily_as_complete/typical_hallway_photos",
-        photosFileNames: ["typical_hallway_1.png", "typical_hallway_2.png"]
+        photosFileNames: [ "typical_hallway_1.png", "typical_hallway_2.png" ]
     };
 };
 
@@ -269,8 +269,8 @@ const kitchenPhotosFixture = () => {
     return {
         section: "Typical Kitchen",
         photosFolder: "full_reports/full_bowery_multifamily_as_complete/typical_kitchen_photos",
-        photosFileNames: ["typical_kitchen_1.png", "typical_kitchen_2.png", "typical_kitchen_3.png", "typical_kitchen_4.png",
-            "typical_kitchen_5.png"]
+        photosFileNames: [ "typical_kitchen_1.png", "typical_kitchen_2.png", "typical_kitchen_3.png", "typical_kitchen_4.png",
+            "typical_kitchen_5.png" ]
     };
 };
 
@@ -278,7 +278,7 @@ const bathroomPhotosFixture = () => {
     return {
         section: "Typical Bathroom",
         photosFolder: "full_reports/full_bowery_multifamily_as_complete/typical_bathroom_photos",
-        photosFileNames: ["typical_bathroom_1.png", "typical_bathroom_2.png"]
+        photosFileNames: [ "typical_bathroom_1.png", "typical_bathroom_2.png" ]
     };
 };
 
@@ -286,7 +286,7 @@ const bedroomPhotosFixture = () => {
     return {
         section: "Typical Bedroom",
         photosFolder: "full_reports/full_bowery_multifamily_as_complete/typical_bedroom_photos",
-        photosFileNames: ["typical_bedroom_1.png", "typical_bedroom_2.png", "typical_bedroom_3.png", "typical_bedroom_4.png"]
+        photosFileNames: [ "typical_bedroom_1.png", "typical_bedroom_2.png", "typical_bedroom_3.png", "typical_bedroom_4.png" ]
     };
 };
 
@@ -294,7 +294,7 @@ const livingRoomPhotosFixture = () => {
     return {
         section: "Typical Living Room",
         photosFolder: "full_reports/full_bowery_multifamily_as_complete/typical_living_room_photos",
-        photosFileNames: ["living_room_1.png", "living_room_2.png", "living_room_3.png"]
+        photosFileNames: [ "living_room_1.png", "living_room_2.png", "living_room_3.png" ]
     };
 };
 
@@ -302,7 +302,7 @@ const electricMetersPhotosFixture = () => {
     return {
         section: "Electric Meters",
         photosFolder: "full_reports/full_bowery_multifamily_as_complete/electric_meters_photos",
-        photosFileNames: ["electric_meters.png"]
+        photosFileNames: [ "electric_meters.png" ]
     };
 };
 
@@ -310,7 +310,7 @@ const gasMetersPhotosFixture = () => {
     return {
         section: "Gas Meters",
         photosFolder: "full_reports/full_bowery_multifamily_as_complete/gas_meters_photos",
-        photosFileNames: ["gas_meters.png"]
+        photosFileNames: [ "gas_meters.png" ]
     };
 };
 
@@ -319,7 +319,7 @@ const heatingSystemPhotosFixture = () => {
         sectionOldName: "Heating System",
         section: "HVAC System",
         photosFolder: "full_reports/full_bowery_multifamily_as_complete/heating_system_photos",
-        photosFileNames: ["hvac_system_1.png", "hvac_system_2.png", "hvac_system_3.png"]
+        photosFileNames: [ "hvac_system_1.png", "hvac_system_2.png", "hvac_system_3.png" ]
     };
 };
 
@@ -327,13 +327,13 @@ const hotWaterPhotosFixture = () => {
     return {
         section: "Hot Water System",
         photosFolder: "full_reports/full_bowery_multifamily_as_complete/hot_water_system_photos",
-        photosFileNames: ["hot_water_system.png"]
+        photosFileNames: [ "hot_water_system.png" ]
     };
 };
 
 const zoningDescriptionInformationFixture = () => {
     return {
-        zonesNames: ["RS-3"],
+        zonesNames: [ "RS-3" ],
         city: "Chicago",
         siteArea: siteDetailsFixture().siteArea,
         propertyIdentificationCommentary: "The subject is situated on a 6,250 square foot parcel in an RS-3 zone " +
@@ -349,16 +349,16 @@ const zoningDescriptionUsesFixture = () => {
         currentPropertyUse: "Residential",
         zonesNames: zoningDescriptionInformationFixture().zonesNames,
         isConformable: true,
-        permittedUses: ["residential"],
-        currentUses: ["residential"],
+        permittedUses: [ "residential" ],
+        currentUses: [ "residential" ],
         streetAddress: siteDetailsFixture().streetAddress
     };
 };
 
 const zoningDescriptionBulkFixture = () => {
     return {
-        regulationValuesDelete: ["Maximum Density", "Permitted Units", "Minimum Lot Width", "Minimum Setback (Both Sides)",
-            "Minimum Rear Yard", "Maximum Building Coverage"],
+        regulationValuesDelete: [ "Maximum Density", "Permitted Units", "Minimum Lot Width", "Minimum Setback (Both Sides)",
+            "Minimum Rear Yard", "Maximum Building Coverage" ],
         regulationNew: {
             name: "Maximum FAR",
             actualValue: "0.76",
@@ -457,7 +457,7 @@ const inPLaceRentRollFixture = () => {
         includePerRoom: "Include Per Room Analysis in Report",
         forecastLabel: "Developer's Forecast",
         forecastColumn: "Rent Forecast",
-        isInspectedRowsToCheck: [0, 1],
+        isInspectedRowsToCheck: [ 0, 1 ],
         roomsNumber: 4,
         bedroomsNumber: 2,
         rentType: "Market Rate",
@@ -511,12 +511,12 @@ const rentComparablesFixture = () => {
 
 const resRentReconcilFixture = () => {
     return {
-        reconcilIntroComm: "Important considerations in determining potential rental value include location, access " +
-            "to transportation and neighborhood amenities, and building design and condition. The subject is in a " +
-            "desirable section of Lakeview, a neighborhood that has seen significant investment in the past 5 to 10 " +
+        reconcilIntroComm: "Important considerations in determining potential rental value include location, access to " +
+            "transportation and neighborhood amenities, and building design and condition. The subject is in a primarily" +
+            " residential section of Lakeview, a neighborhood that has seen significant investment in the past 5 to 10 " +
             "years. The site has good access to  transportation, and the block is appealing. The comparables are similar " +
-            "in their physical and locational appeal and are good indicators of value. Thus, our analysis of the forecast" +
-            " of market rents is presented:",
+            "in their physical and locational appeal and are good indicators of value. Thus, our analysis of the forecast " +
+            "of market rents is presented:",
         marketConclusion: 1100,
         marketBreakdown: "all market oriented",
         reconcilCommentary: "The comparable two-bedroom units range from $1,000 to $1,200 per month with an average of " +
@@ -556,7 +556,7 @@ const expenseStructureFixture = () => {
 
 const parkingFixture = () => {
     return {
-        commentary: "The subject property has 6 parking spaces available."
+        commentary: "The subject property has 6 parking spaces available. Parking is a free amenity."
     };
 };
 
@@ -738,21 +738,21 @@ const expenseForecastFixture = (): {insuranceItem: BoweryReports.ForecastItem,
 
 const proFormaFixture = () => {
     return {
-        potentialResIncomeRow: {total: "$79,200", perSF: "$16.74", perUnit: "$13,200"},
-        potentialGrossIncomeRow: {total: "$79,200", perSF: "$16.74", perUnit: "$13,200"},
-        vcLossRow: {total: "-$3,960", perSF: "-$0.84", perUnit: "-$660"},
-        effectiveGrossRow: {total: "$75,240", perSF: "$15.90", perUnit: "$12,540"},
-        reTaxesRow: {total: "$3,093", perSF: "$0.65", perUnit: "$516"},
-        insuranceRow: {total: "$2,100", perSF: "$0.44", perUnit: "$350"},
-        electricityRow: {total: "$8,280", perSF: "$1.75", perUnit: "$1,380"},
-        repairsRow: {total: "$2,700", perSF: "$0.57", perUnit: "$450"},
-        payrollRow: {total: "$2,100", perSF: "$0.44", perUnit: "$350"},
-        generalRow: {total: "$1,200", perSF: "$0.25", perUnit: "$200"},
-        managementRow: {total: "$3,010", perSF: "$0.64", perUnit: "$502"},
-        reservesRow: {total: "$1,200", perSF: "$0.25", perUnit: "$200"},
-        toeRow: {total: "$23,683", perSF: "$5.00", perUnit: "$3,947"},
-        toeNetReRow: {total: "$20,590", perSF: "$4.35", perUnit: "$3,432"},
-        netOpIncomeRow: {total: "$51,557", perSF: "$10.90", perUnit: "$8,593"},
+        potentialResIncomeRow: { total: "$79,200", perSF: "$16.74", perUnit: "$13,200" },
+        potentialGrossIncomeRow: { total: "$79,200", perSF: "$16.74", perUnit: "$13,200" },
+        vcLossRow: { total: "-$3,960", perSF: "-$0.84", perUnit: "-$660" },
+        effectiveGrossRow: { total: "$75,240", perSF: "$15.90", perUnit: "$12,540" },
+        reTaxesRow: { total: "$3,093", perSF: "$0.65", perUnit: "$516" },
+        insuranceRow: { total: "$2,100", perSF: "$0.44", perUnit: "$350" },
+        electricityRow: { total: "$8,280", perSF: "$1.75", perUnit: "$1,380" },
+        repairsRow: { total: "$2,700", perSF: "$0.57", perUnit: "$450" },
+        payrollRow: { total: "$2,100", perSF: "$0.44", perUnit: "$350" },
+        generalRow: { total: "$1,200", perSF: "$0.25", perUnit: "$200" },
+        managementRow: { total: "$3,010", perSF: "$0.64", perUnit: "$502" },
+        reservesRow: { total: "$1,200", perSF: "$0.25", perUnit: "$200" },
+        toeRow: { total: "$23,683", perSF: "$5.00", perUnit: "$3,947" },
+        toeNetReRow: { total: "$20,590", perSF: "$4.35", perUnit: "$3,432" },
+        netOpIncomeRow: { total: "$51,557", perSF: "$10.90", perUnit: "$8,593" },
         opExpenseRatio: "31.48%"
     };
 };
@@ -915,9 +915,9 @@ const capRateCompsFixture = () => {
 const findCompsFixture = () => {
     return {
         comparables: [
-            {address: "8138 S Exchange Ave."},
-            {address: "8041 S Manistee Ave."},
-            {address: "8103 S Luella Ave."}
+            { address: "8138 S Exchange Ave." },
+            { address: "8041 S Manistee Ave." },
+            { address: "8103 S Luella Ave." }
         ]
     };
 };
@@ -1013,16 +1013,16 @@ const highestBestUseFixture = () => {
 
 const unitInspectionFixture = () => {
     return {
-        readyForOccupancyValues: ["N/A", "N/A"],
+        readyForOccupancyValues: [ "N/A", "N/A" ],
     };
 };
 
 const capRateDiscussionFixture = () => {
     return {
-        capRateTable: {min: "8.69%", max: "11.44%", average: "9.71%"},
-        pwcRow: {min: "3.50%", average: "5.03%", max: "7.00%"},
-        situsRow: {min: "4.00%", average: "5.20%", max: "6.00%"},
-        capRateCompsTable: {income: "Similar", propConditions: "Similar", location: "Similar"},
+        capRateTable: { min: "8.69%", max: "11.44%", average: "9.71%" },
+        pwcRow: { min: "3.50%", average: "5.03%", max: "7.00%" },
+        situsRow: { min: "4.00%", average: "5.20%", max: "6.00%" },
+        capRateCompsTable: { income: "Similar", propConditions: "Similar", location: "Similar" },
         incomeSpikesTable: {
             capRate: "10.00%",
             occupancy: "0.00%",

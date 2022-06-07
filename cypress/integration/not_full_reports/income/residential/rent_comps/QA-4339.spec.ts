@@ -1,11 +1,12 @@
 import testData from "../../../../../fixtures/not_full_reports/income/residential/rent_comps/QA-4339.fixture";
-import {createReport, deleteReport} from "../../../../../actions/base/baseTest.actions";
+import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../../actions/base/navigationSection.actions";
 import Income from "../../../../../actions/income/income.manager";
 import Property from "../../../../../actions/property/property.manager";
 
 describe(`Verify clicking Add Unit button on Add New Rent Comp overlay is adding the unit to the appropriate group 
-                of comparable units on the Rent Comps page (Unit type of search is selected)`, () => {
+                of comparable units on the Rent Comps page (Unit type of search is selected)`,
+{ tags:[ "@income", "@residential", "@rent_comps" ] }, () => {
 
     before("Login, create report", () => {
         createReport(testData.reportCreationData);

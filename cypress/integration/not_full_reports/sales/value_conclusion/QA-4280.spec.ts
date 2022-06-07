@@ -3,10 +3,12 @@ import NavigationSection from "../../../../actions/base/navigationSection.action
 import Income from "../../../../actions/income/income.manager";
 import Property from "../../../../actions/property/property.manager";
 import Sales from "../../../../actions/sales/sales.manager";
-import {createReport, deleteReport} from "../../../../actions/base/baseTest.actions";
+import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 
 describe(`Prospective Market Value As Stabilized -> Less Residential Rent Loss 
-                data is pulled from Cap Rate Conclusion`, () => {
+                data is pulled from Cap Rate Conclusion`, 
+    { tags:[ "@sales", "@value_conclusion" ] }, () => {
+        
     before("Login action", () => {
         createReport(testData.reportCreationData);
     });
