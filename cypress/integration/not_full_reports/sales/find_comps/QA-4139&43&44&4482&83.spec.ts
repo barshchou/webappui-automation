@@ -28,8 +28,6 @@ conditionalDescribe("Group of tests for numeric inputs at create comp modal",
          * We get elements once, their recieve their aliases and with further methods - we requery them everytime
          */
         Sales._FindComps.Page.createCompNumberResidentialUnits;
-        Sales._FindComps.Page.conditionDropdown;
-        Sales._FindComps.Page.newCompContinueButton;
 
         Sales._FindComps.verifyNumericInputNewComp(Alias.pageElements.comp_plex.createCompNumberResidentialUnits, testData.spec4139.numberOfUnitsDefault)
             .enterNumericInputNewComp(pageElements.comp_plex.createCompNumberResidentialUnits, testData.spec4139.regularNum)
@@ -45,18 +43,24 @@ conditionalDescribe("Group of tests for numeric inputs at create comp modal",
         deleteReport(testData.reportCreationData.reportNumber);
     });
 
-    it("QA-4143: Verify the #Commercial Units* field", () => {
+    it("QA-4143: Verify the #Commercial Units* field", () => {        
         Sales._FindComps.Page.createCompNumberCommercialUnits.should("not.exist");
-        Sales._FindComps.selectDropdownOptionNewComp(Sales._FindComps.Page.comparableTypeDropdown, testData.comparableType)
-            .enterNumericInputNewComp(Sales._FindComps.Page.createCompNumberCommercialUnits, testData.spec4143.regularNumber)
-            .enterNumericInputNewComp(Sales._FindComps.Page.createCompNumberCommercialUnits, testData.spec4143.regularNumOverThousand)
-            .enterNumericInputNewComp(Sales._FindComps.Page.createCompNumberCommercialUnits, testData.spec4143.nonNumberValue)
-            .enterNumericInputNewComp(Sales._FindComps.Page.createCompNumberCommercialUnits, testData.spec4143.decimalNum)
-            .enterNumericInputNewComp(Sales._FindComps.Page.createCompNumberCommercialUnits, testData.spec4143.longValue)
-            .clearNumericInputNewComp(Sales._FindComps.Page.createCompNumberCommercialUnits)
+        Sales._FindComps.selectDropdownOptionNewComp(Sales._FindComps.Page.comparableTypeDropdown, testData.comparableType);
+        
+        // ernst: query element once more in order to have "clean" alias
+        Sales._FindComps.Page.createCompNumberCommercialUnits;
+        
+        Sales._FindComps
+            .enterNumericInputNewComp(Alias.pageElements.comp_plex.createCompNumberCommercialUnits, testData.spec4143.regularNumber)
+            .enterNumericInputNewComp(Alias.pageElements.comp_plex.createCompNumberCommercialUnits, testData.spec4143.regularNumOverThousand)
+            .enterNumericInputNewComp(Alias.pageElements.comp_plex.createCompNumberCommercialUnits, testData.spec4143.nonNumberValue)
+            .enterNumericInputNewComp(Alias.pageElements.comp_plex.createCompNumberCommercialUnits, testData.spec4143.decimalNum)
+            .enterNumericInputNewComp(Alias.pageElements.comp_plex.createCompNumberCommercialUnits, testData.spec4143.longValue)
+            .clearNumericInputNewComp(Alias.pageElements.comp_plex.createCompNumberCommercialUnits)
             .selectDropdownOptionNewComp(Sales._FindComps.Page.conditionDropdown, testData.condition)
             .Page.errorMessageNewComp.should("exist");
-        Sales._FindComps.Page.newCompContinueButton.should("be.disabled");
+        // ernst: commented due to test case update. when update will be finished - assertion will be updated
+        // Sales._FindComps.Page.newCompContinueButton.should("be.disabled");
         deleteReport(testData.reportCreationData.reportNumber);
     });
 
