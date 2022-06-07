@@ -14,9 +14,15 @@ export default {
     label: { 
         devForecast: "Developer's Forecast", 
         perRoom: "Include Per Room Analysis in Report",
+        bathrooms: "Bathrooms",
+        outSpace: "Outdoor Space",
+        unitType: "Unit Type"
     },
     column: { 
         devForecast: "Rent Forecast",  
-        perRoom: "Rooms", 
+        perRoom: "Rooms",
+        bathrooms: "# Bathrooms",
+        outSpace: "Outdoor Space",
+        unitType: "Unit Type"
     }
 };

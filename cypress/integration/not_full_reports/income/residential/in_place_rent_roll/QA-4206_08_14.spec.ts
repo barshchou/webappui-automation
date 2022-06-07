@@ -14,8 +14,14 @@ describe("Verify the Developer's Forecast checkbox on the In-Place Rent Roll pag
             NavigationSection.navigateToResInPlaceRentRoll();
             Income.Residential.InPlaceRentRoll.verifyColumnNotExist(testData.column.devForecast)
                 .verifyColumnNotExist(testData.column.perRoom)
+                .verifyColumnNotExist(testData.column.bathrooms)
+                .verifyColumnNotExist(testData.column.outSpace)
+                .verifyColumnNotExist(testData.column.unitType)
                 .checkUncheckCheckboxForColumn(testData.column.devForecast, testData.label.devForecast)
-                .checkUncheckCheckboxForColumn(testData.column.perRoom, testData.label.perRoom);
+                .checkUncheckCheckboxForColumn(testData.column.perRoom, testData.label.perRoom)
+                .checkUncheckCheckboxForColumn(testData.column.bathrooms, testData.label.bathrooms)
+                .checkUncheckCheckboxForColumn(testData.column.outSpace, testData.label.outSpace)
+                .checkUncheckCheckboxForColumn(testData.column.unitType, testData.label.unitType);
             deleteReport(reportCreationData(value).reportNumber);
         });
     });
