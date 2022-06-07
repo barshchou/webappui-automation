@@ -1,7 +1,7 @@
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 
 export default {
-    reportCreationData: ReportDataCreator.getReportData("4714_16-17_21"),
+    reportCreationData: ReportDataCreator.getReportData("4714_16-17"),
     chips: [
         {
             enterValue: "=F",
