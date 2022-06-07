@@ -558,6 +558,25 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         navigationSectionPage.comercialReimbursementButton.click();
         return this;
     }
+
+    clickResidentialProjectedRentRoll(): NavigationSectionActions {
+        navigationSectionPage.residentialProjectedRentRoll.click();
+        return this;
+    }
+
+    openStabilizedRentRoll(): NavigationSectionActions {
+        this.clickResidentialProjectedRentRoll()
+            .clickYesIfExist();
+        return this;
+    }
+
+    navigateToResidentialProjectedRentRoll(): NavigationSectionActions {
+        this.clickIncomeApproachButton()
+            .clickResidentialIncomeArrow()
+            .clickResidentialProjectedRentRoll()
+            .clickYesIfExist();
+        return this;
+    }
 }
 
 export default new NavigationSectionActions(navigationSectionPage);
