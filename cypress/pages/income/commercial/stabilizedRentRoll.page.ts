@@ -8,6 +8,12 @@ class StabilizedRentRollPage extends CommercialRentRollSharedComponentPage {
 
     get autoFillButton() {return cy.get(`[data-qa=autofill-button]`);}
 
+    commercialCompGroupName(groupName: string ) { return cy.xpath(`//table[@class = 'htCore']//td[text()='${groupName}']`); }
+
+    get commercialCompGroupHeader() { return cy.xpath(`//div[@class='ht_master handsontable']//table[@class = 'htCore']//span[text() = 'Commercial Comp Group']`); }
+
+    commercialCompGroupForecastRent(forecast: string) { return cy.xpath(`//table[@class = 'htCore']//td[text()='$${forecast}']`); }
+    
     get stabilizedCommercialIncomeDiscussion() { return cy.get(`[data-slate-editor]`); }
 }
 

@@ -36,6 +36,21 @@ class StabilizedRentRollActions extends CommercialRentRollSharedComponent<typeof
         return this;
     }
 
+    verifyCommercialCompGroupDisplayed(groupName: string): StabilizedRentRollActions {
+        stabRentRollPage.commercialCompGroupName(groupName).should('be.visible');
+        return this;
+    }
+
+    verifyCommercialCompGroupForecastRentDisplayed(forecast: number): StabilizedRentRollActions {
+        stabRentRollPage.commercialCompGroupForecastRent(`${forecast}`).should('be.visible');
+        return this;
+    }
+
+    verifyCommercialCompGroupHeaderDisplayed(): StabilizedRentRollActions {
+        stabRentRollPage.commercialCompGroupHeader.should('exist');
+        return this;
+    }
+    
     verifyStabilizedCommercialIncomeDiscussion(textToBe: string): StabilizedRentRollActions {
         stabRentRollPage.stabilizedCommercialIncomeDiscussion.should('have.text', textToBe);
         return this;
