@@ -27,8 +27,9 @@ class FindCompsPage extends BasePage {
     get csvInput() {return cy.get("[data-qa=file-input]", { includeShadowDom: true });}
 
     getSelectCompFromMapButtonByAddress(address) {
-        return cy.get("[class*=salesCompItemWrapper]", { includeShadowDom: true }).contains(`${address}`).parent()
-        .siblings("[class*=buttonsColumn]").find("span").contains("ADD").parent();
+        return cy.get('[data-qa="sales-comp-item"]', { includeShadowDom: true })
+        .contains(`${address}`, { includeShadowDom: true }).parent()
+        .find('[data-qa="sales-comp-item-add-btn"]', { includeShadowDom: true });
     }
 
     getRemoveSelectedCompButtonByAddress(address) {

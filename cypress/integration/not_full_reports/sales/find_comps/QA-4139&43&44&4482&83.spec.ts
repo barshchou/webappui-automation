@@ -29,7 +29,7 @@ conditionalDescribe("Group of tests for numeric inputs at create comp modal",
          */
         Sales._FindComps.Page.createCompNumberResidentialUnits;
 
-        Sales._FindComps.verifyNumericInputNewComp(Alias.pageElements.comp_plex.createCompNumberResidentialUnits, testData.spec4139.numberOfUnitsDefault)
+        Sales._FindComps.verifyNumericInputNewComp(pageElements.comp_plex.createCompNumberResidentialUnits, testData.spec4139.numberOfUnitsDefault)
             .enterNumericInputNewComp(pageElements.comp_plex.createCompNumberResidentialUnits, testData.spec4139.regularNum)
             .enterNumericInputNewComp(pageElements.comp_plex.createCompNumberResidentialUnits, testData.spec4139.decimalNum)
             .enterNumericInputNewComp(pageElements.comp_plex.createCompNumberResidentialUnits, testData.spec4139.nonNumberValue)
@@ -51,12 +51,12 @@ conditionalDescribe("Group of tests for numeric inputs at create comp modal",
         Sales._FindComps.Page.createCompNumberCommercialUnits;
         
         Sales._FindComps
-            .enterNumericInputNewComp(Alias.pageElements.comp_plex.createCompNumberCommercialUnits, testData.spec4143.regularNumber)
-            .enterNumericInputNewComp(Alias.pageElements.comp_plex.createCompNumberCommercialUnits, testData.spec4143.regularNumOverThousand)
-            .enterNumericInputNewComp(Alias.pageElements.comp_plex.createCompNumberCommercialUnits, testData.spec4143.nonNumberValue)
-            .enterNumericInputNewComp(Alias.pageElements.comp_plex.createCompNumberCommercialUnits, testData.spec4143.decimalNum)
-            .enterNumericInputNewComp(Alias.pageElements.comp_plex.createCompNumberCommercialUnits, testData.spec4143.longValue)
-            .clearNumericInputNewComp(Alias.pageElements.comp_plex.createCompNumberCommercialUnits)
+            .enterNumericInputNewComp(pageElements.comp_plex.createCompNumberCommercialUnits, testData.spec4143.regularNumber)
+            .enterNumericInputNewComp(pageElements.comp_plex.createCompNumberCommercialUnits, testData.spec4143.regularNumOverThousand)
+            .enterNumericInputNewComp(pageElements.comp_plex.createCompNumberCommercialUnits, testData.spec4143.nonNumberValue)
+            .enterNumericInputNewComp(pageElements.comp_plex.createCompNumberCommercialUnits, testData.spec4143.decimalNum)
+            .enterNumericInputNewComp(pageElements.comp_plex.createCompNumberCommercialUnits, testData.spec4143.longValue)
+            .clearNumericInputNewComp(pageElements.comp_plex.createCompNumberCommercialUnits)
             .selectDropdownOptionNewComp(Sales._FindComps.Page.conditionDropdown, testData.condition)
             .Page.errorMessageNewComp.should("exist");
         // ernst: commented due to test case update. when update will be finished - assertion will be updated
