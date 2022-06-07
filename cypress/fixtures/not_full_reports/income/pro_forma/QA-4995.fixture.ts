@@ -52,17 +52,13 @@ const _totalWater = _waterForecast * _buildingDescription.grossArea;
 const _totalElectricityAndFuel = _utilitiesFuelElectricityForecast * _buildingDescription.grossArea;
 const _totalElectricityFuelWater = _utilitiesFuelElectricityWaterForecast * _buildingDescription.grossArea;
 
-const _expenseModeElectricityFuel = "combinedElectricityAndFuel";
-const _expenseModeElectricityFuelWater = "combinedAll";
-const _expenseModeBrokenOut = "brokenOut";
-
 export default {
     reportCreationData: ReportDataCreator.getReportData("4995"),
     buildingDescription: _buildingDescription,
     basis: _basis,
-    expenseModeElectricityFuelWater: _expenseModeElectricityFuelWater,
-    expenseModeBrokenOut: _expenseModeBrokenOut,
-    expenseModeElectricityFuel: _expenseModeElectricityFuel,
+    expenseModeElectricityFuelWater: enums.UTILITIES_EXPENSES_MODE.combinedElectricityFuelWater,
+    expenseModeBrokenOut: enums.UTILITIES_EXPENSES_MODE.brokenOut,
+    expenseModeElectricityFuel: enums.UTILITIES_EXPENSES_MODE.combinedElectricityAndFuel,
     forecastItems: _forecastItems(),
     totalElectricity: _totalElectricity,
     totalFuel: _totalFuel,
