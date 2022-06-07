@@ -14,7 +14,7 @@ describe("Check custom Utilities adjustment", { tags:[ "@sales", "@adjust_comps"
             .selectCompFromMapByAddress(testData.comparableSecond.address);
 
         cy.stepInfo("2. Open Adjust comps page, verify custom utilities adjustment row can be added and deleted");
-        _NavigationSection.openAdjustCompsInSales();
+        _NavigationSection.navigateToAdjustComps();
         Sales._AdjustComps.clickAddCustomUtilitiesAdjustment()
             .editOtherUtilitiesAdjustmentRowName(testData.customUtilitiesAdjustmentDefaultName, testData.newCustomUtilitiesAdjustmentName)
             .deleteOtherAdjustmentRow(testData.newCustomUtilitiesAdjustmentName);
