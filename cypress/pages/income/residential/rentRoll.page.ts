@@ -43,6 +43,8 @@ class InPlaceRentRollPage extends ResidentialRentRollSharedPage {
 
     get includePerRoomAnalysis() {return cy.get("[data-qa='includePerRoomAnalysis']");}
 
+    get appraiserCommentary() {return cy.get("[name='currentRentRollDiscussion.additionalCommentary']");}
+
 }
 
 export default new InPlaceRentRollPage();

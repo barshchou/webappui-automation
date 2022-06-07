@@ -371,6 +371,12 @@ class InPlaceRentRollActions extends ResidentialRentRollSharedActions<typeof ren
         rentRollPage.includePerRoomAnalysis.should("be.visible");
         return this;
     }
+
+    enterAppraiserCommentary(value: string | number): InPlaceRentRollActions {
+        rentRollPage.appraiserCommentary.should("be.visible");
+        rentRollPage.appraiserCommentary.clear().type(`${value}`).should("have.text", value);
+        return this;
+    }
     
 }
 
