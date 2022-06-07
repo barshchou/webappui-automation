@@ -11,6 +11,12 @@ export default {
         Enums.VALUE_CONCLUSION_TYPE.AS_STABILIZED,
         Enums.VALUE_CONCLUSION_TYPE.AS_COMPLETE
     ] as Array<BoweryReports.ConclusionValue>,
-    label: { devForecast: "Developer's Forecast", perRoom: "Include Per Room Analysis in Report" },
-    column: { devForecast: "Rent Forecast",  perRoom: "Rooms" }
+    label: { 
+        devForecast: "Developer's Forecast", 
+        perRoom: "Include Per Room Analysis in Report",
+    },
+    column: { 
+        devForecast: "Rent Forecast",  
+        perRoom: "Rooms", 
+    }
 };
