@@ -7,6 +7,8 @@ class StabilizedRentRollPage extends CommercialRentRollSharedComponentPage {
     get stabilizedRentRollHeaderSection() {return cy.get("*[data-qa='stabilizedRentRoll']");}
 
     get autoFillButton() {return cy.get(`[data-qa=autofill-button]`);}
+
+    get stabilizedCommercialIncomeDiscussion() { return cy.get(`[data-slate-editor]`); }
 }
 
 export default new StabilizedRentRollPage();

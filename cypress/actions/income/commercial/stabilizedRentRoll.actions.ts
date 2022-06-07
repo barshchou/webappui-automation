@@ -36,6 +36,11 @@ class StabilizedRentRollActions extends CommercialRentRollSharedComponent<typeof
         return this;
     }
 
+    verifyStabilizedCommercialIncomeDiscussion(textToBe: string): StabilizedRentRollActions {
+        stabRentRollPage.stabilizedCommercialIncomeDiscussion.should('have.text', textToBe);
+        return this;
+    }
+
 }
 
 export default new StabilizedRentRollActions(stabRentRollPage);
