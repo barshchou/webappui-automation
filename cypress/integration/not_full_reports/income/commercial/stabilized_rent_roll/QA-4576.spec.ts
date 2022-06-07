@@ -81,6 +81,9 @@ describe("[QA-4576] Verify the display of the Stabilized Rent Roll page",
             .clickSubmitButton();
 
         cy.stepInfo(`Drag all comps into created group`);
+        /**
+         * Note: Do not change window focus while debugging in headless mode
+         */
         Income._CommercialManager.RentComps.dragAllCommercialUnitsIntoGroup(testData.compGroup, testData.numberOfCommercialUnits);
 
         cy.stepInfo(`Navigate to Reconcialltion and add market reconcillation`);
