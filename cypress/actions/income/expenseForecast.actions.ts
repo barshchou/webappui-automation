@@ -275,6 +275,32 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+inputRetrive(): ExpenseForecastActions {
+    expenseForecastPage.allForecastsInputs.then(inputs => {
+        cy.wrap(inputs).parents('[data-qa$=-forecast-item]').find('[label="Include Expense on Pro Forma"]').find('[type="checkbox"]')
+        .invoke('prop', 'value').then(value => {
+            
+            cy.wrap(value).as(`ifChecked`);
+
+        });
+        
+     //   let ggg =  this.extractAlias(cheker)
+  //    if (@ifChecked === "true") {cy.log('final') }
+      cy.log(cy.get(`@ifChecked`))
+    //if(cy.get(`@cheker`).should('equal', 'false'))  {cy.log('xxx')} else {cy.log('final')}
+     // let gggx= cy.get(`@cheker`)
+     // cy.log(cy.get(`@cheker`)); 
+    
+})
+return this
+}
+
+
+
+
+
+
+
 
     TotalForecastPSF(GBA: number, resUnits?: number, rooms?: number): ExpenseForecastActions {
         expenseForecastPage.allForecastsInputs.then(inputs => {
@@ -306,13 +332,14 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
                                         sumPerSF += elNumberPerSF
                                         cy.log(sumPerSF)
 
-                                    } else if (unitBasis === "room") {
+                                    } else {
 
                                         let elNumberPerSF = (elNumber * rooms) / GBA;
                                         sumPerSF += elNumberPerSF;
                                         cy.log(sumPerSF)
+                                    }
 
-                                    } else if (i === inputs.length) {
+                                     if (i == inputs.length) {
                                         const textToBe = `Appraiser's Forecast: $${numberWithCommas(sumPerSF.toFixed(2))}`;
                                         cy.log(textToBe)
                                         expenseForecastPage.appraisersTotalForecast.should("have.text", textToBe);
@@ -320,8 +347,8 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
                                       }
 
                                     //  cy.log(sumPerSF)    
-
-                                    // cy.wrap(sumPerSF).as('SUMA')
+                                    const textToBe = `Appraiser's Forecast: $${numberWithCommas(sumPerSF.toFixed(2))}`;
+                                     cy.wrap(textToBe).as('SUMA')
                                     // let  totalSumPSF = 
 
                                 })//.as('SUMA')      
@@ -329,13 +356,13 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
                         }
 
 
-                    }).as('SUMA');
+                    })
 
             }
             // const textToBe = `Appraiser's Forecast: $${numberWithCommas(sumPerSF.toFixed(2))}`; //
             //  return textToBe
-            //   expenseForecastPage.appraisersTotalForecast.should("have.text", textToBe);
-
+               expenseForecastPage.appraisersTotalForecast.should("have.text", cy.get(`@SUMA`));
+        //       cy.get(`@SUMA`).should('equal', 'false')
 
         })
 
