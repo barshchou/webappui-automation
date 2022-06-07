@@ -96,6 +96,8 @@ class NavigationSection extends BasePage {
     get comercialReimbursementButton() {return cy.get("#commercial-reimbursement-summary");}
 
     get commercialRentReconcillationButton() {return cy.get(`#commercial-rent-reconciliation`);}
+
+    get residentialProjectedRentRoll() {return cy.get("#residential-projected-rent-roll");}
 }
 
 export default new NavigationSection();
