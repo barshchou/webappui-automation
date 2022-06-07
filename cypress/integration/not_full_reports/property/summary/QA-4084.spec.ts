@@ -3,7 +3,7 @@ import {createReport, deleteReport} from "../../../../actions/base/baseTest.acti
 import {_NavigationSection} from "../../../../actions/base";
 import {Property} from "../../../../actions";
 
-describe("[QA-4084] Check the Census Tract field", () => {
+describe("[QA-4084] Check the Census Tract field", { tags: ["@property", "@summary" ] }, () => {
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
     });
