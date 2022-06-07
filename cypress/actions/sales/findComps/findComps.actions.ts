@@ -82,6 +82,12 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
         return this;
     }
 
+    /**
+     * ernst: WARN: this method needs to be refactored
+     * we need to create workaround for shadow-dom elements, which dynamically rendered
+     * during some action (scrolling the list, for example).
+     * if you try to do this manually - you probably get the error `doc.createTreeWalker is not a function`
+     */
     selectCompFromMapByAddress(address: string): FindCompsActions {
         findCompsPage.getSelectCompFromMapButtonByAddress(address).scrollIntoView().click({ force: true });
         this.checkFindSingleSalesComp();
