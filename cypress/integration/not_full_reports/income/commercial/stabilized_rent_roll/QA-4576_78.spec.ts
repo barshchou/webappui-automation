@@ -7,7 +7,7 @@ import { _NavigationSection } from "../../../../../actions/base";
 import { getTodayDateString } from "../../../../../../utils/date.utils";
 import stabilizedRentRollPage from "../../../../../pages/income/commercial/stabilizedRentRoll.page";
 
-describe("[QA-4576] Verify the display of the Stabilized Rent Roll page", 
+describe("[QA-4576][QA-4578] Verify the display of the Stabilized Rent Roll page", 
     { tags: [ "@income", "@commercial", "@stabilized_rent_roll", "@snapshot_tests" ] }, () => {
         
     before("Login, create report", () => {
@@ -62,7 +62,7 @@ describe("[QA-4576] Verify the display of the Stabilized Rent Roll page",
             testData.snapshotNames.stabilizedRRPanel_severalUnits,
         );
 
-        cy.stepInfo(`[QA-4576] [QA-4578] Add comp group and a new comp`);
+        cy.stepInfo(`[QA-4576][QA-4578] Add comp group and a new comp`);
         _NavigationSection.openCompGroupsInCommercial();
         Income._CommercialManager.CompGroups.Actions.addCompGroup(testData.compGroup);
         _NavigationSection.clickCommercialRentComps()
