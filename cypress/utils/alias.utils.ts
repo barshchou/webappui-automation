@@ -17,5 +17,20 @@ export const Alias = {
         FindSingleSalesComp:_gqlAlias("findSingleSalesComp"),
         UpdateAppraisal:_gqlAlias("updateAppraisal"),
         FindSalesCompsByEventIds:_gqlAlias("findSalesCompsByEventIds")
+    }, 
+    pageElements:{
+        comp_plex:{
+            conditionDropdown:"comp_plex_conditionDropdown",
+            getDropdownOption:"comp_plex_getDropdownOption",
+            errorMessage:"comp_plex_errorMessage",
+            newCompContinueButton:"newCompContinueButton",
+            createCompNumberCommercialUnits:"createCompNumberCommercialUnits",
+            comparableTypeDropdown:"comparableTypeDropdown",
+            createCompNumberResidentialUnits:"createCompNumberResidentialUnits",
+            commercialAreaNewComp:"commercialAreaNewComp",
+            netRentableAreaNewComp:"netRentableAreaNewComp",
+            averageUnitSizeNewComp:"averageUnitSizeNewComp",
+            internalNotesTextArea:"internalNotesTextArea"
+        }
     }
 };
