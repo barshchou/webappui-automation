@@ -1,4 +1,4 @@
-import testData from "../../../../../fixtures/not_full_reports/income/residential/in_place_rent_roll/QA-4200-02.fixture";
+import testData from "../../../../../fixtures/not_full_reports/income/residential/in_place_rent_roll/QA-4200-03.fixture";
 import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../../actions/base/navigationSection.actions";
 import Income from "../../../../../actions/income/income.manager";
@@ -13,8 +13,9 @@ describe("Verify the Import manager functionality",
 
     it("Test body", () => {
         NavigationSection.navigateToResInPlaceRentRoll();
-        Income.Residential.InPlaceRentRoll.verifyViaCSVExist();
-        Income.Residential.InPlaceRentRoll.verifyUploadCSVRow(testData.links);
+        Income.Residential.InPlaceRentRoll.verifyViaCSVExist()
+            .verifyUploadCSVRow(testData.links)
+            .verifyRentRollOptions();
         Income.Residential.InPlaceRentRoll.verifyNumberOfResidentialUnits(testData.numberOfUnits)
             .uploadFile(testData.csvFileName, testData.csvNumberOfUnits);
         cy.reload();
@@ -23,7 +24,8 @@ describe("Verify the Import manager functionality",
         Property.Summary.verifyThatPageIsOpened()
             .enterNumberOfResUnits(testData.numberOfUnitsToChange)
             .goBackWithSave();
-        Income.Residential.InPlaceRentRoll.uploadFile(testData.csvFileName, testData.csvNumberOfUnits);
+        Income.Residential.InPlaceRentRoll.uploadFile(testData.csvFileName, testData.csvNumberOfUnits)
+            .verifyRentRollOptions();
         deleteReport(testData.reportCreationData.reportNumber);
     });
 });

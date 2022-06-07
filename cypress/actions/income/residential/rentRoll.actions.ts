@@ -365,6 +365,12 @@ class InPlaceRentRollActions extends ResidentialRentRollSharedActions<typeof ren
         });
         return this;
     }
+
+    verifyRentRollOptions(): InPlaceRentRollActions {
+        rentRollPage.showDevelopersForecast.should("be.visible");
+        rentRollPage.includePerRoomAnalysis.should("be.visible");
+        return this;
+    }
     
 }
 
