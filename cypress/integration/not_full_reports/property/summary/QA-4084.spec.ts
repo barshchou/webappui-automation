@@ -22,14 +22,14 @@ describe("[QA-4084] Check the Census Tract field", { tags: [ "@property", "@summ
         cy.stepInfo("3. Fill in value starting with any number");
         testData.verifyValues.forEach(value => {
             Property._Summary.Page.censusTractField.clear().type(value);
-            Property._Summary.clickSaveButton();
-            Property._Summary.verifyCensusTract(value);
+            Property._Summary.clickSaveButton()
+                .verifyCensusTract(value);
         }); 
 
         cy.stepInfo("4. The Census Tract field is empty");
         Property._Summary.Page.censusTractField.clear();
-        Property._Summary.clickSaveButton();
-        Property._Summary.verifyCensusTract("");
+        Property._Summary.clickSaveButton()
+            .verifyCensusTract("");
 
         cy.stepInfo("5. Fill in value using incorrect format and try to Save");
         Property._Summary.Page.censusTractField.clear().type(testData.incorrectValue);

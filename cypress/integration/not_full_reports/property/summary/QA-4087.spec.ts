@@ -25,8 +25,8 @@ describe("[QA-4087] Verify validation of the Residential Units and Commercial Un
                 - 1000000
                 - copy-paste`);
         testData.verifyValues.forEach(value => {
-            Property._Summary.enterNumberOfResUnits(value);
-            Property._Summary.enterNumberOfCommercialUnits(value);
+            Property._Summary.enterNumberOfResUnits(value)
+                .enterNumberOfCommercialUnits(value);
             if (value > 5000) {
                 Property._Summary.Page.resUnitsInputValidationText("Max value is 5000").should("be.visible");
                 Property._Summary.Page.commercialUnitsInputValidationText("Max value is 5000").should("be.visible");
