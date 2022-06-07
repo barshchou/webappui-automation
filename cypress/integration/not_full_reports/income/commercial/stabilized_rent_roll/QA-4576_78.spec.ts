@@ -1,6 +1,6 @@
 /// <reference types="cypress-grep" />
 
-import testData from "../../../../../fixtures/not_full_reports/income/commercial/stabilized_rent_roll/QA-4576.fixture";
+import testData from "../../../../../fixtures/not_full_reports/income/commercial/stabilized_rent_roll/QA-4576_78.fixture";
 import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
 import { Base, Property, Income } from "../../../../../actions";
 import { _NavigationSection } from "../../../../../actions/base";
@@ -62,7 +62,7 @@ describe("[QA-4576] Verify the display of the Stabilized Rent Roll page",
             testData.snapshotNames.stabilizedRRPanel_severalUnits,
         );
 
-        cy.stepInfo(`Add comp group and a new comp`);
+        cy.stepInfo(`[QA-4576] [QA-4578] Add comp group and a new comp`);
         _NavigationSection.openCompGroupsInCommercial();
         Income._CommercialManager.CompGroups.Actions.addCompGroup(testData.compGroup);
         _NavigationSection.clickCommercialRentComps()
