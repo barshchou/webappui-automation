@@ -4,7 +4,7 @@ import Columns from "../../../enums/compGroupsColumns.enum";
 
 class CompGroupsDiscussionActions extends BaseActionsExt<typeof compGroupsDiscussionPage> {
 
-    verifyCompGroupUnitValue(compGroupName: string, columnName: string, expectedValue: string, index = 0): CompGroupsDiscussionActions {
+    verifyCompGroupUnitValue(compGroupName: string, columnName: string, expectedValue: string | number, index = 0): CompGroupsDiscussionActions {
         let valueToBe = expectedValue === typeof Number ? `${expectedValue}` : expectedValue;
         if (columnName == Columns.rentSF) valueToBe = `$${valueToBe}`;
         compGroupsDiscussionPage.compGroupDataByRow(compGroupName, columnName, index).should('have.text', valueToBe);
