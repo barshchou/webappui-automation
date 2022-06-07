@@ -64,18 +64,24 @@ conditionalDescribe("Group of tests for numeric inputs at create comp modal",
         deleteReport(testData.reportCreationData.reportNumber);
     });
 
-    it("QA-4144: Verify the Commercial Area* field", () => {
+    /**
+     * Skipped due to obsolent test case
+     */
+    it.skip("QA-4144: Verify the Commercial Area* field", () => {
         Sales._FindComps.Page.commercialAreaNewComp.should("not.exist");
-        Sales._FindComps.selectDropdownOptionNewComp(Sales._FindComps.Page.comparableTypeDropdown, testData.comparableType)
-            .enterNumericInputNewComp(Sales._FindComps.Page.commercialAreaNewComp, testData.spec4144.regularNumber)
-            .enterNumericInputNewComp(Sales._FindComps.Page.commercialAreaNewComp, testData.spec4144.regularNumOverThousand)
-            .enterNumericInputNewComp(Sales._FindComps.Page.commercialAreaNewComp, testData.spec4144.decimalNum)
-            .enterNumericInputNewComp(Sales._FindComps.Page.commercialAreaNewComp, testData.spec4144.nonNumberValue)
-            .enterNumericInputNewComp(Sales._FindComps.Page.commercialAreaNewComp, testData.spec4144.longValue)
-            .clearNumericInputNewComp(Sales._FindComps.Page.commercialAreaNewComp)
+        Sales._FindComps.selectDropdownOptionNewComp(Sales._FindComps.Page.comparableTypeDropdown, testData.comparableType);
+        Sales._FindComps.Page.commercialAreaNewComp;
+        Sales._FindComps
+            .enterNumericInputNewComp(pageElements.comp_plex.commercialAreaNewComp, testData.spec4144.regularNumber)
+            .enterNumericInputNewComp(pageElements.comp_plex.commercialAreaNewComp, testData.spec4144.regularNumOverThousand)
+            .enterNumericInputNewComp(pageElements.comp_plex.commercialAreaNewComp, testData.spec4144.decimalNum)
+            .enterNumericInputNewComp(pageElements.comp_plex.commercialAreaNewComp, testData.spec4144.nonNumberValue)
+            .enterNumericInputNewComp(pageElements.comp_plex.commercialAreaNewComp, testData.spec4144.longValue)
+            .clearNumericInputNewComp(pageElements.comp_plex.commercialAreaNewComp)
             .selectDropdownOptionNewComp(Sales._FindComps.Page.conditionDropdown, testData.condition)
             .Page.errorMessageNewComp.should("exist");
-        Sales._FindComps.Page.newCompContinueButton.should("be.disabled");
+        // ernst: commented due to test case update. when update will be finished - assertion will be updated
+        // Sales._FindComps.Page.newCompContinueButton.should("be.disabled");
         deleteReport(testData.reportCreationData.reportNumber);
     });
 
