@@ -54,11 +54,12 @@ export default class PropertyInformationForm {
     }
 
     get internalNotesTextArea() {
-        return cy.xpath("//*[text()='Internal Notes']//following::*[@class='ant-input'][1]")
+        return cy.get('[data-qa="Internal notes"]', { includeShadowDom:true })
         .as(comp_plex.internalNotesTextArea);
     }
 
     get appraiserCommentaryTextArea() {
-        return cy.xpath("//*[text()='Appraiser Commentary']//following::*[contains(@class, 'ant-input')][1]");
+        return cy.get('[data-qa="Appraiser Commentary"] [data-qa="text-input"]', { includeShadowDom: true })
+        .as(comp_plex.appraiserCommentaryTextArea);
     }
 }

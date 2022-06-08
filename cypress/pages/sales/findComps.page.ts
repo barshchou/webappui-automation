@@ -58,7 +58,7 @@ class FindCompsPage extends BasePage {
 
     get createNewCompButton() {return cy.contains("Create New", { includeShadowDom: true });}
 
-    get newCompSaveAndCloseButton() {return cy.contains("Save & Close", { includeShadowDom: true });}
+    get newCompSaveAndCloseButton() {return cy.get('[data-qa="Save & Close"]', { includeShadowDom: true });}
 }
 
 /**

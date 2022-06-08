@@ -8,12 +8,15 @@ class PropertyDescriptionFormActions {
     }
 
     enterInternalNotes(value: string): this {
-        this.Page.internalNotesTextArea.clear().type(value).should("have.text", value);
+        this.Page.internalNotesTextArea.clear()
+        .type(value, { force:true }).should("have.text", value);
         return this;
     }
 
     enterAppraiserCommentary(value: string): this {
-        this.Page.appraiserCommentaryTextArea.click().type(value).clear().type(value);
+        this.Page.appraiserCommentaryTextArea.click()
+        .type(value, { force:true }).clear()
+        .type(value, { force:true });
         this.Page.appraiserCommentaryTextArea.should("have.text", value);
         return this;
     }

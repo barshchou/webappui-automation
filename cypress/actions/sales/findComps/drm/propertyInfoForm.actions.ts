@@ -9,12 +9,12 @@ class PropertyInfoFormActions {
     }
 
     setCommercialArea(area: string){
-        this.Page.commercialAreaNewComp.type(area);
+        this.Page.commercialAreaNewComp.type(area, { force: true });
         return this;
     }
             
     setCommercialUnits(units: string) {
-        this.Page.createCompNumberCommercialUnits.type(units);
+        this.Page.createCompNumberCommercialUnits.type(units, { force: true });
         return this;
     }
 }

@@ -15,12 +15,12 @@ class SaleInfoFromActions {
     }
 
     setBuyerGrantee(name: string): this {
-        this.Page.BuyerGranteeNewComp.type(name);
+        this.Page.BuyerGranteeNewComp.type(name, { force: true });
         return this;
     }
 
     setSellerGarantor(seller: string): this {
-        this.Page.SellerGrantor.type(seller);   
+        this.Page.SellerGrantor.type(seller, { force:true });   
         return this;
     }    
 }

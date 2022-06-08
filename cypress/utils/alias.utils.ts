@@ -30,7 +30,8 @@ export const Alias = {
             commercialAreaNewComp:"commercialAreaNewComp",
             netRentableAreaNewComp:"netRentableAreaNewComp",
             averageUnitSizeNewComp:"averageUnitSizeNewComp",
-            internalNotesTextArea:"internalNotesTextArea"
+            internalNotesTextArea:"internalNotesTextArea",
+            appraiserCommentaryTextArea:"appraiserCommentaryTextArea"
         }
     }
 };
