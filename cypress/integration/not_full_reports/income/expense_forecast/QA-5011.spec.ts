@@ -15,6 +15,9 @@ describe(`[QA-5011] [Income>Expense forecast] “Include Expense on Pro Forma”
 
         beforeEach(() => {
             cy.restoreLocalStorage();
+            Income._ExpenseForecastActions.Page.allForecastsInputs.then(inputs => {
+                cy.wrap(inputs).parents('[data-qa$=-forecast-item]').find('[label="Include Expense on Pro Forma"]').find('[type="checkbox"]')
+                .invoke('prop', 'value').as('val')
         });
 
      /*   let value 
@@ -29,7 +32,7 @@ describe(`[QA-5011] [Income>Expense forecast] “Include Expense on Pro Forma”
         
     })*/
 
-
+it (' asdfasdf', function() { cy.log(this.val)  })
 
 
         it("[QA-5011]", () => {
