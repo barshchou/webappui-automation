@@ -16,7 +16,7 @@ describe(`Verify the 'Changes will be lost' modal functionality`,
             _NavigationSection.navigateToCommercialInPlaceRentRoll().verifyProgressBarNotExist();
 
             cy.stepInfo(`1. Click on the Edit button. + Edit comment and click on the Revert to Original button +
-            Verify the "Changes will be lost" modal is displayed.`);
+                         Verify the "Changes will be lost" modal is displayed.`);
             Income._CommercialManager.StabilizedRentRoll.clickEditDiscussionButton()
                 .verifyEditDiscussionButtonsDisplayed()
                 .editDiscussionTextArea(testData.commentText)
@@ -28,15 +28,15 @@ describe(`Verify the 'Changes will be lost' modal functionality`,
                 .verifyCommentaryFullText(testData.commentText);
 
             cy.stepInfo(`3. Click on the Revert to Original button again + 
-            Click on the Cancel button in the modal and verify that the modal is closed and no changes are applied.`);
+                         Click on the Cancel button in the modal and verify that the modal is closed and no changes are applied.`);
             Income._CommercialManager.StabilizedRentRoll
                 .clickRevertToOriginalButton()
                 .clickCancelRevertButton()
                 .verifyCommentaryFullText(testData.commentText);
 
             cy.stepInfo(`4. Click on the Revert to Original button again + 
-            Click on the "Yes, revert" button in the modal + 
-            verify that the modal is closed and all custom changes made to the Stabilized Commercial Income Discussion are deleted.`);
+                         Click on the "Yes, revert" button in the modal + 
+                         verify that the modal is closed and all custom changes made to the Stabilized Commercial Income Discussion are deleted.`);
             Income._CommercialManager.StabilizedRentRoll
                 .clickRevertToOriginalButton()
                 .clickYesRevertButton()
