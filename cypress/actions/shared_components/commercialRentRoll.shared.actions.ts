@@ -57,7 +57,7 @@ class CommercialRentRollSharedComponent<T extends CommercialRentRollSharedCompon
         return this;
     }
 
-    verifyUseCellByRow(useText: BoweryReports.CommercialUnitsUseTexts, rowNumber = 0): this {
+    verifyUseCellByRow(useText: BoweryReports.CommercialUnitsUseTexts | string, rowNumber = 0): this {
         this.Page.useCells.eq(rowNumber).should("have.text", useText).and("have.class", "readOnly");
         return this;
     }

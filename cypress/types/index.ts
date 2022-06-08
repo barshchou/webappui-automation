@@ -29,7 +29,7 @@ export namespace BoweryReports {
     export type isSalesForcePull = boolean
     export type ReportCreationOptions = {
         incomeValue?: string,
-        conclusionValue?: BoweryReports.ConclusionValue,
+        conclusionValue?: ConclusionValue,
         templateValue?: string,
         address?: string,
         isSalesForcePull?: isSalesForcePull

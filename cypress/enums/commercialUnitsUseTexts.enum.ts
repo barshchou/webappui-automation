@@ -5,7 +5,8 @@ const commercialUnitsUseTexts = {
     COMMUNITY: "Community Facility",
     INDUSTRIAL: "Industrial",
     OTHER: "Other",
-    UNDETERMINED: "Undetermined"
+    UNDETERMINED: "Undetermined",
+    JERONIMO: "Jeronimo"
 } as const;
 
 export default Object.freeze(commercialUnitsUseTexts);
