@@ -1,5 +1,4 @@
 const incomeTypeCellNames = {
-
     potentialResidentialIncome: "potentialResidentialIncome", 
     otherIncome: "otherIncome",
     potentialGrossIncome: "potentialGrossIncome",
@@ -8,6 +7,6 @@ const incomeTypeCellNames = {
     parkingIncome: "parkingIncome",
     laundryIncome: "laundryIncome",
     storageIncome: "storageIncome"
-};
+} as const;
 
 export default Object.freeze(incomeTypeCellNames);
