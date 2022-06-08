@@ -15,10 +15,10 @@ describe("[QA-4053] [QA-4086] The Concluded Value Per Unit is calculated correct
             enterNumberOfCommercialUnits(testData.general.commercialUnits);
         
         cy.stepInfo('1. Proceed to the Sales > Adjust Comps page.');
-        _NavigationSection.navigateToSalesValueConclusion().clickAdjustCompsButton();
+        _NavigationSection.navigateToSalesValueConclusion().navigateToAdjustComps();
 
         cy.stepInfo('2. Select the Per Total Units radio button in the Sale Comparables Setup and save it.');
-        Sales._AdjustComps.clickComparisonPerUnitRadioButton();
+        Sales._AdjustComps.closeUserSurveyIfExist().clickComparisonPerUnitRadioButton();
 
         cy.stepInfo('3. Proceed to the Sales > Value Conclusions > Sales Value Conclusion Table.');
         _NavigationSection.navigateToSalesValueConclusion();
@@ -31,7 +31,7 @@ describe("[QA-4053] [QA-4086] The Concluded Value Per Unit is calculated correct
             .verifyAsIsMarketAmount(totalValue)
             .verifyAsCompleteAmount(totalValue);
 
-        _NavigationSection.Actions.openReviewAndExport().closeSatisfactionSurvey();
+        _NavigationSection.Actions.openReviewAndExport().closeUserSurveyIfExist();
         ReviewExport.generateDocxReport()
         .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
         deleteReport(testData.reportCreationData.reportNumber);
