@@ -7,6 +7,10 @@ import { getReportId } from "../../../../../utils/intercept.utils";
 
 const { createReport, deleteReport } = _BaseTest;
 
+const _normalize = (textToNormalize: string): string => {
+    return textToNormalize.replaceAll('﻿', '').trim();
+};
+
 describe('Verify the "Property Rights Appraised" commentary on the Introduction page', 
     { tags:[ "@preview_edit", "@introduction" ] }, () => {
         
@@ -25,7 +29,7 @@ describe('Verify the "Property Rights Appraised" commentary on the Introduction 
        
         testData.textToVerify.forEach(value => {
             Report._KeyInfo.enterPropertyRightsAppraisedComment(value).then(text => {
-                cy.wrap(text).as(testData.aliases.PropertyRightsAppraised);
+                cy.wrap(_normalize(text)).as(testData.aliases.PropertyRightsAppraised);
             });
             _NavigationSection.navigateToIntroduction()
                 .verifyProgressBarNotExist();
@@ -33,7 +37,7 @@ describe('Verify the "Property Rights Appraised" commentary on the Introduction 
             PreviewEdit._Introduction.Page.TextPropertyRightsAppraised
             .invoke("text")
             .then(text => {
-                cy.wrap(text).as(testData.aliases.PreviewEditText);
+                cy.wrap(_normalize(text)).as(testData.aliases.PreviewEditText);
             });
 
             PreviewEdit._Introduction.Actions.extractAlias(testData.aliases.PropertyRightsAppraised)
