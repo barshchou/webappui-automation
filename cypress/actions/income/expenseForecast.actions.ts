@@ -280,15 +280,21 @@ inputRetrive(): ExpenseForecastActions {
         cy.wrap(inputs).parents('[data-qa$=-forecast-item]').find('[label="Include Expense on Pro Forma"]').find('[type="checkbox"]')
         .invoke('prop', 'value').then(value => {
             
-            cy.wrap(value).as(`ifChecked`);
+           // cy.wrap(value).as(`ifChecked`);
+
+           
 
         });
         
      //   let ggg =  this.extractAlias(cheker)
   //    if (@ifChecked === "true") {cy.log('final') }
-      cy.log(cy.get(`@ifChecked`))
-    //if(cy.get(`@cheker`).should('equal', 'false'))  {cy.log('xxx')} else {cy.log('final')}
-     // let gggx= cy.get(`@cheker`)
+     
+  
+ // cy.log(cy.get(`@ifChecked`))
+
+
+  //  if(cy.get(`@cheker`).should('equal', 'true'))  {cy.log('xxx')} else {cy.log('final')}
+     // let gggx= cy.get(`@ifChecked`) //.its(value)
      // cy.log(cy.get(`@cheker`)); 
     
 })

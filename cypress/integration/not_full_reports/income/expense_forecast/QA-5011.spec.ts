@@ -17,6 +17,21 @@ describe(`[QA-5011] [Income>Expense forecast] “Include Expense on Pro Forma”
             cy.restoreLocalStorage();
         });
 
+     /*   let value 
+
+        expenseForecastPage.allForecastsInputs.then(inputs => {
+            cy.wrap(inputs).parents('[data-qa$=-forecast-item]').find('[label="Include Expense on Pro Forma"]').find('[type="checkbox"]')
+            .invoke('prop', 'value').then(value => {
+                
+               // cy.wrap(value).as(`ifChecked`);
+    
+            });
+        
+    })*/
+
+
+
+
         it("[QA-5011]", () => {
             cy.stepInfo(`1. Go to Property > Summary and add residential and commertial units`);
         /*    _NavigationSection.navigateToPropertySummary();
@@ -44,7 +59,6 @@ describe(`[QA-5011] [Income>Expense forecast] “Include Expense on Pro Forma”
                         Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastFuelFixture('room'));*/
       
                         Income._ExpenseForecastActions.inputRetrive();
-
 
 
 
