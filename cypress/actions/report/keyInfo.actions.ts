@@ -91,6 +91,21 @@ class KeyInfoActions extends BaseActionsExt<typeof keyInfoPage> {
         keyInfoPage.narrativeSuggestionsList.eq(numberLists).contains(verifyListValue).should("have.text", verifyListValue).click();
         return this;
     }
+
+    renterTextBoxPropertyRightsAppraised(value: string) {
+        keyInfoPage.textBoxPropertyRightsAppraised.focus().clear().type(value);
+        return this;
+    }
+
+    verifyTextBoxPropertyRightsAppraised(value: string, condition = "include.text") {
+        keyInfoPage.textBoxPropertyRightsAppraised.should(condition, value);
+        return this;
+    }
+    
+    verifyTextBoxDefinitionOfMarketValue(value: string, condition = "include.text") {
+        keyInfoPage.textBoxDefinitionOfMarketValue().should(condition, value);
+        return this;
+    }
 }
 
 export default new KeyInfoActions(keyInfoPage);
