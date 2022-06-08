@@ -172,7 +172,7 @@ export namespace BoweryReports {
     };
 }
 
-namespace Utils {
+export namespace Utils {
     type _GraphQLRequest = {
         operationName: string,
         query: string,
