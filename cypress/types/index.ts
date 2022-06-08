@@ -1,11 +1,5 @@
 
-import { KnownInformationKeys, LaundryVcLossKeys, StorageVcLossKeys, 
-    ParkingVcLossKeys, TemplateTypesKeys, ProFormaTypeKeys, IncomeTypesKeys, 
-    CompGroupsColumnsKeys, LeaseDateNameKeys, LeaseStatusKeys, ImageTypeKeys, 
-    InputTypeKeys, PerUnitPerSFKeys, CommercialUnitsUseTextsKeys, CommercialUnitsGroupsKeys, 
-    CommercialUnitsFacadeKeys, CommercialUnitsStateKeys, CommercialUnitsLocationKeys,
-    CommercialUnitsStreetTypeKeys, OrganizationAddresseePrefixKeys, OrganizationStateKeys, 
-    ExpensePeriodTypeKeys, UnitsOfMeasureKeys, SourceOfInformationKeys } from './../enums/enumKeys.enum';
+import * as KeyInfo from './../enums/enumKeys.enum';
 import Enums from "../enums/enums";
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
@@ -34,17 +28,17 @@ export namespace BoweryReports {
         address?: string,
         isSalesForcePull?: isSalesForcePull
     }
-    export type LeaseDateName = typeof Enums.LEASE_DATE_NAME[LeaseDateNameKeys]
-    export type LeaseStatus = typeof Enums.LEASE_STATUS[LeaseStatusKeys]
-    export type ImageType =  typeof Enums.IMAGE_TYPE[ImageTypeKeys]
-    export type InputType = typeof Enums.INPUT_TYPE[InputTypeKeys]
+    export type LeaseDateName = typeof Enums.LEASE_DATE_NAME[KeyInfo.LeaseDateNameKeys]
+    export type LeaseStatus = typeof Enums.LEASE_STATUS[KeyInfo.LeaseStatusKeys]
+    export type ImageType =  typeof Enums.IMAGE_TYPE[KeyInfo.ImageTypeKeys]
+    export type InputType = typeof Enums.INPUT_TYPE[KeyInfo.InputTypeKeys]
     export type UnitSF = keyof typeof Enums.UNIT_SF
-    export type PerUnitPerSF = typeof Enums.PER_UNIT_PER_SF[PerUnitPerSFKeys]
+    export type PerUnitPerSF = typeof Enums.PER_UNIT_PER_SF[KeyInfo.PerUnitPerSFKeys]
     export type ForecastItemBasis = keyof typeof Enums.EXPENSE_CELL
 
     export type CommercialUnitsUseValues = keyof typeof Enums.COMMERCIAL_UNITS_USE_VALUES;
-    export type CommercialUnitsUseTexts = typeof Enums.COMMERCIAL_UNITS_USE_TEXTS[CommercialUnitsUseTextsKeys];
-    export type CommercialUnitsGroups = typeof Enums.COMMERCIAL_UNITS_GROUPS[CommercialUnitsGroupsKeys]
+    export type CommercialUnitsUseTexts = typeof Enums.COMMERCIAL_UNITS_USE_TEXTS[KeyInfo.CommercialUnitsUseTextsKeys];
+    export type CommercialUnitsGroups = typeof Enums.COMMERCIAL_UNITS_GROUPS[KeyInfo.CommercialUnitsGroupsKeys]
 
     export type ProFormaAnyIncome = {
         total: string,
@@ -53,11 +47,11 @@ export namespace BoweryReports {
     };
 
     export type CommercialUnitsGradeValues = keyof typeof Enums.COMMERCIAL_UNITS_GRADE_VALUES
-    export type CommercialUnitsFacadeValues = typeof Enums.COMMERCIAL_UNITS_FACADE_VALUES[CommercialUnitsFacadeKeys]
-    export type CommercialUnitsStateValues = typeof Enums.COMMERCIAL_UNITS_STATE_VALUES[CommercialUnitsStateKeys]
+    export type CommercialUnitsFacadeValues = typeof Enums.COMMERCIAL_UNITS_FACADE_VALUES[KeyInfo.CommercialUnitsFacadeKeys]
+    export type CommercialUnitsStateValues = typeof Enums.COMMERCIAL_UNITS_STATE_VALUES[KeyInfo.CommercialUnitsStateKeys]
     export type CommercialUnitsCeilingHeightValues = keyof typeof Enums.COMMERCIAL_UNITS_CEILING_HEIGHT_VALUES
-    export type CommercialUnitsLocationValues = typeof Enums.COMMERCIAL_UNITS_LOCATION_VALUES[CommercialUnitsLocationKeys]
-    export type CommercialUnitsStreetTypeValues =  typeof Enums.COMMERCIAL_UNITS_STREET_TYPE_VALUES[CommercialUnitsStreetTypeKeys]
+    export type CommercialUnitsLocationValues = typeof Enums.COMMERCIAL_UNITS_LOCATION_VALUES[KeyInfo.CommercialUnitsLocationKeys]
+    export type CommercialUnitsStreetTypeValues =  typeof Enums.COMMERCIAL_UNITS_STREET_TYPE_VALUES[KeyInfo.CommercialUnitsStreetTypeKeys]
     export type CommercialUnitsFloorValues = keyof typeof Enums.COMMERCIAL_UNITS_FLOOR_VALUES
     export type CommercialUnitsFrontageValues = keyof typeof Enums.COMMERCIAL_UNITS_FRONTAGE_VALUES
     export namespace CommercialUnits {
@@ -74,8 +68,8 @@ export namespace BoweryReports {
      */
     export type CommercialUnitGroupsValues = CommercialUnitsUseValues | CommercialUnitsGradeValues | CommercialUnitsFacadeValues | CommercialUnitsCeilingHeightValues | CommercialUnitsFrontageValues;
 
-    export type OrganizationAddresseePrefix = typeof Enums.ORGANIZATION_ADDRESSEE_PREFIX[OrganizationAddresseePrefixKeys]
-    export type OrganizationState = typeof Enums.ORGANIZATION_STATE[OrganizationStateKeys]
+    export type OrganizationAddresseePrefix = typeof Enums.ORGANIZATION_ADDRESSEE_PREFIX[KeyInfo.OrganizationAddresseePrefixKeys]
+    export type OrganizationState = typeof Enums.ORGANIZATION_STATE[KeyInfo.OrganizationStateKeys]
 
     export type ForecastItem = { 
         name: BoweryReports.ForecastItemBasis | string, 
@@ -93,7 +87,7 @@ export namespace BoweryReports {
         management?: number, replacementReserves?: number 
     };
 
-    export type ExpensePeriodType = typeof Enums.EXPENSE_PERIOD_TYPE[ExpensePeriodTypeKeys]
+    export type ExpensePeriodType = typeof Enums.EXPENSE_PERIOD_TYPE[KeyInfo.ExpensePeriodTypeKeys]
 
     export type Comparable = {address: string, location?: string, period?: string, squareFeet?: number, resUnits?: number,
         insurance?: number, electricity?: number, fuel?: number, waterAndSewer?: number, repairsAndMaintenance?: number, 
@@ -122,21 +116,21 @@ export namespace BoweryReports {
         annualAmount: number
     }
 
-    export type ParkingVcLossType = typeof Enums.PARKING_VC_LOSS_TYPE[ParkingVcLossKeys]
+    export type ParkingVcLossType = typeof Enums.PARKING_VC_LOSS_TYPE[KeyInfo.ParkingVcLossKeys]
 
-    export type StorageVcLossType =  typeof Enums.STORAGE_VC_LOSS_TYPE[StorageVcLossKeys]
+    export type StorageVcLossType =  typeof Enums.STORAGE_VC_LOSS_TYPE[KeyInfo.StorageVcLossKeys]
 
-    export type LaundryVcLossType = typeof Enums.LAUNDRY_VC_LOSS_TYPE[LaundryVcLossKeys]
+    export type LaundryVcLossType = typeof Enums.LAUNDRY_VC_LOSS_TYPE[KeyInfo.LaundryVcLossKeys]
 
     export type ReimbursementType = keyof typeof Enums.REIMBURSEMENT_TYPES
 
-    export type KnownInformation = typeof Enums.KNOWN_INFORMATION[KnownInformationKeys]
+    export type KnownInformation = typeof Enums.KNOWN_INFORMATION[KeyInfo.KnownInformationKeys]
 
-    export type UnitsOfMeasure = typeof Enums.UNITS_OF_MEASURE[UnitsOfMeasureKeys]
+    export type UnitsOfMeasure = typeof Enums.UNITS_OF_MEASURE[KeyInfo.UnitsOfMeasureKeys]
 
     export type UtilityExpenses = keyof typeof Enums.UTILITY_EXPENSES;
 
-    export type CompGroupsColumns = typeof Enums.COMP_GROUP_COLUMNS[CompGroupsColumnsKeys]
+    export type CompGroupsColumns = typeof Enums.COMP_GROUP_COLUMNS[KeyInfo.CompGroupsColumnsKeys]
 
     export type leaseDate = {
         name: LeaseDateName,
@@ -163,7 +157,7 @@ export namespace BoweryReports {
     }
 
     export type UnitType = keyof typeof Enums.UNIT_TYPE
-    export type SourceOfInformation = typeof Enums.SOURCE_OF_INFORMATION[SourceOfInformationKeys]
+    export type SourceOfInformation = typeof Enums.SOURCE_OF_INFORMATION[KeyInfo.SourceOfInformationKeys]
     export type Amenities = keyof typeof Enums.AMENITIES
 
     export type RentCompsFilter = {
@@ -171,10 +165,10 @@ export namespace BoweryReports {
         value: string | number 
     };
 
-    export type TemplateTypes = typeof Enums.TEMPLATE_TYPE[TemplateTypesKeys]
-    export type ProFormaTypes = typeof Enums.PRO_FORMA_TYPES[ProFormaTypeKeys]
+    export type TemplateTypes = typeof Enums.TEMPLATE_TYPE[KeyInfo.TemplateTypesKeys]
+    export type ProFormaTypes = typeof Enums.PRO_FORMA_TYPES[KeyInfo.ProFormaTypeKeys]
     export type IncomeTypeCellNamesTypes = keyof typeof Enums.INCOME_TYPES_CELL_NAMES
-    export type IncomeTypes = typeof Enums.INCOME_TYPE[IncomeTypesKeys]
+    export type IncomeTypes = typeof Enums.INCOME_TYPE[KeyInfo.IncomeTypesKeys]
 }
 
 export namespace Utils {
