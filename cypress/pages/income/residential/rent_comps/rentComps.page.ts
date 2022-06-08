@@ -195,6 +195,16 @@ class RentCompsPage extends BasePage{
     get searchCancelButton() { return cy.get("[data-qa=search-cancel]"); }
 
     getFilterArrowButton(name: string) { return cy.xpath(`//*[text()='${name}']//following-sibling::button`); }
+
+    getAddComparableFromSearchButtonByIndex(searchIndex: number) { return cy.get("[role=rowgroup] [role=presentation]").eq(searchIndex); }
+
+    getRemoveCompButtonByIndex(index: number) { return cy.get("[data-qa=selected-building-comps-table] [role=presentation]").eq(index); }
+
+    get removedBuildingCompsTable() { return cy.get("[data-qa=selected-building-comps-table]").eq(1); }
+
+    getRemovedBuildingCompsTableHeader(name: string) {
+        return cy.xpath(`//tbody[@data-qa='selected-building-comps-table']/../thead`).eq(1).contains(name);
+    }
 }
 
 export default new RentCompsPage();

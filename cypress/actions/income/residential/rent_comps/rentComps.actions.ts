@@ -623,6 +623,21 @@ class RentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
         rentCompsPage.getFilterArrowButton(name).click();
         return this;
     }
+
+    clickAddComparableFromSearchByIndex(searchIndex = 0): this {
+        rentCompsPage.getAddComparableFromSearchButtonByIndex(searchIndex).click();
+        return this;
+    }
+
+    clickRemoveCompButtonByIndex(index = 0): this {
+        rentCompsPage.getRemoveCompButtonByIndex(index).click();
+        return this;
+    }
+
+    verifyRemovedBuildingCompsHeader(name: string) {
+        rentCompsPage.getRemovedBuildingCompsTableHeader(name).should("have.text", name);
+        return this;
+    }
 }
 
 export default new RentCompsActions(rentCompsPage);

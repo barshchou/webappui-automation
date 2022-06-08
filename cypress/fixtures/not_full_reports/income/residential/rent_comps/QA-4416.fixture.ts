@@ -1,60 +1,49 @@
 import ReportDataCreator from "../../../../data_creator/reportData.creator";
 
-const _filters: BoweryReports.RentCompsFilter[] = [
+const _removedBuildingCompsColumn = [
     {
-        name: "Unit Type",
-        value: "typical" as BoweryReports.UnitType
+        name: "#",
+        value: null
     },
     {
-        name: "Bedrooms",
-        value: "0"
+        name: "Address",
+        value: null
     },
     {
-        name: "Source of Information",
-        value: "bowery subject" as BoweryReports.SourceOfInformation
+        name: "Sub-Type",
+        value: [ "Low-Rise", "Mid-Rise", "High-Rise" ]
     },
     {
-        name: "Amenities",
-        value: "balcony" as BoweryReports.Amenities
-    }
-];
-
-const _numericFilters: BoweryReports.RentCompsFilter[] = [
-    {
-        name: "minRent",
-        value: 10
+        name: "Elevator",
+        value: [ "Yes", "No" ]
     },
     {
-        name: "maxRent",
-        value: 5000
+        name: "# Units",
+        value: null
     },
     {
-        name: "minSF",
-        value: 10
+        name: "Unit Types",
+        value: null
     },
     {
-        name: "maxSF",
-        value: 5000
-    }
-];
-
-const _dateFilters: BoweryReports.RentCompsFilter[] = [
-    {
-        name: "min",
-        value: "01-01-2022"
+        name: "Avg Rent",
+        value: null
     },
     {
-        name: "max",
-        value: "12-01-2022"
+        name: "Dist.",
+        value: null
+    },
+    {
+        name: "As of Date",
+        value: null
+    },
+    {
+        name: "Actions",
+        value: [ "Show Details", "Add", "X" ]
     }
 ];
 
 export default {
     reportCreationData: ReportDataCreator.getReportData("4416"),
-    unitType: "typical" as BoweryReports.UnitType,
-    filters: _filters,
-    numericFilters: _numericFilters,
-    dateFilters: _dateFilters,
-    sourceOfInfo: "bowery subject" as BoweryReports.SourceOfInformation,
-    amenities: "balcony" as BoweryReports.Amenities
+    removedBuildingCompsColumn: _removedBuildingCompsColumn
 };
