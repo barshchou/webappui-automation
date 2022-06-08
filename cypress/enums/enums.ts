@@ -11,6 +11,7 @@ import parkingVcLossType from "./parkingVcLossType.enum";
 import laundryVcLossType from "./laundryVcLossType.enum";
 import storageVcLossType from "./storageVcLossType.enum";
 import knownInformation from "./knownInformationType.enum";
+import compGroupsColumnsEnum from "./compGroupsColumns.enum";
 import utilitiesExpensesMode from "./utilitiesExpensesMode.enum";
 
 export default {
@@ -27,5 +28,6 @@ export default {
     LAUNDRY_VC_LOSS_TYPE: laundryVcLossType,
     STORAGE_VC_LOSS_TYPE: storageVcLossType,
     KNOWN_INFORMATION: knownInformation,
+    COMP_GROUP_COLUMNS: compGroupsColumnsEnum
     UTILITIES_EXPENSES_MODE: utilitiesExpensesMode
 };

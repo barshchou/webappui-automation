@@ -136,6 +136,8 @@ namespace BoweryReports {
 
     export type UtilityExpenses = "brokenOut" | "combinedElectricityAndFuel" | "combinedAll";
 
+    export type CompGroupsColumns = "#" | "address" | "use" | "tenantName" | "dateSigned" | "squareFeet" | "rentPerSf"
+
     export type leaseDate = {
         name: LeaseDateName,
         value: string

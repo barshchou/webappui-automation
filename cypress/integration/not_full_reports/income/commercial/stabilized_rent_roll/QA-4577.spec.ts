@@ -2,6 +2,7 @@ import { Income, Property } from "../../../../../actions";
 import { _NavigationSection } from "../../../../../actions/base";
 import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
 import testData from "../../../../../fixtures/not_full_reports/income/commercial/stabilized_rent_roll/QA-4577.fixture";
+import { _IncomeTitles } from "../../../../../enums/pages_titles";
 
 describe("Verify the functionality of the Frontage radio button", 
     { tags: [ "@income", "@commercial", "@stabilized_rent_roll" ] }, () => {
@@ -41,7 +42,7 @@ describe("Verify the functionality of the Frontage radio button",
         .find("h5")
         .invoke("text")
         .then(text => {
-            expect(text).to.be.equal(testData.headerText);
+            expect(text).to.be.equal(_IncomeTitles._Commercial.RENT_RECONCILIATION);
         });
         Income._CommercialManager.RentReconciliation.Page.GeneratedCommentary
         .should("be.visible");
