@@ -32,7 +32,7 @@ describe(`[QA-5011] [Income>Expense forecast] “Include Expense on Pro Forma”
         
     })*/
 
-it (' asdfasdf', function() { cy.log(this.val)  })
+it (' asdfasdf', function() { this. cy.log(this.val)  })
 
 
         it("[QA-5011]", () => {
