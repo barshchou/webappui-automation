@@ -8,7 +8,7 @@
  * where we can have ForecastItem type.
  */
 
-namespace BoweryReports {
+export namespace BoweryReports {
     export type ReportFile = {
         name: string
         path: string
