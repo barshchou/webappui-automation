@@ -1,7 +1,7 @@
 import { Income, Property } from "../../../../../actions";
 import { _NavigationSection } from "../../../../../actions/base";
 import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
-import testData from "../../../../../fixtures/not_full_reports/income/commercial/stabilized_rent_roll/QA-4589-91_94.fixture";
+import testData from "../../../../../fixtures/not_full_reports/income/commercial/stabilized_rent_roll/QA-4589-92_94.fixture";
 
 describe(`Verify the commentary functionality`, 
     { tags:[ "@income", "@commercial", "@stabilized_rent_roll" ] }, () => {
@@ -24,7 +24,7 @@ describe(`Verify the commentary functionality`,
 
         cy.stepInfo("[QA-4589] 2. Click on the Edit button and modify commentary and save changes.");
         Income._CommercialManager.StabilizedRentRoll.clickEditDiscussionButton()
-            .editDiscussionTextArea(testData.value)
+            .editDiscussionTextArea(testData.textUpdateValue)
             .verifyEditDiscussionButtonsDisplayed()
             .clickSaveDiscussionButton();
 
@@ -33,13 +33,27 @@ describe(`Verify the commentary functionality`,
         
         cy.stepInfo("[QA-4591] 4. Verify commentary revert to original");
         Income._CommercialManager.StabilizedRentRoll.revertToOriginalCommentary()
-            .verifyCommentaryContainsText(testData.defaultText);
+            .verifyCommentaryFullText(testData.defaultText);
 
-        cy.stepInfo("[QA-4590] 5. Modify commentary and check 'Cancel' button functionality");
+        cy.stepInfo("[QA-4592] 5. Verify the 'Changes will be lost' modal functionality");
         Income._CommercialManager.StabilizedRentRoll.clickEditDiscussionButton()
-            .editDiscussionTextArea(testData.value)
+            .editDiscussionTextArea(testData.textUpdateValue)
+            .clickRevertToOriginalButton()
+            .clickCloseButton()
+            .verifyCommentaryContainsText(testData.textUpdateValue)
+            .clickRevertToOriginalButton()
+            .clickCancelRevertButton()
+            .verifyCommentaryContainsText(testData.textUpdateValue)
+            .clickRevertToOriginalButton()
+            .clickYesRevertButton()
+            .verifyCommentaryFullText(testData.defaultText)
+            .clickCancelDiscussionEditButton();
+
+        cy.stepInfo("[QA-4590] 6. Modify commentary and check 'Cancel' button functionality");
+        Income._CommercialManager.StabilizedRentRoll.clickEditDiscussionButton()
+            .editDiscussionTextArea(testData.textUpdateValue)
             .clickCancelDiscussionEditButton()
-            .verifyCommentaryContainsText(testData.defaultText);
+            .verifyCommentaryFullText(testData.defaultText);
 
         deleteReport(testData.reportCreationData.reportNumber);
     });

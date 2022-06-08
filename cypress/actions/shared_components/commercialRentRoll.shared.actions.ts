@@ -238,7 +238,9 @@ class CommercialRentRollSharedComponent<T extends CommercialRentRollSharedCompon
     }
 
     verifyCommentaryFullText(textToBe: string): this {
-        this.Page.commentaryText.should("have.text", textToBe);
+        this.Page.commentaryText.invoke('text').then(text => {
+            cy.wrap(this.normalizeText(text)).should('deep.equal', textToBe);
+        });
         return this;
     }
 
