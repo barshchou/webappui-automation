@@ -183,7 +183,7 @@ export namespace Utils {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-namespace BoweryAutomation {
+export namespace BoweryAutomation {
     /**
      * Base data for report setup
      */

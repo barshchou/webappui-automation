@@ -1,6 +1,6 @@
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 import Enums from "../../../../enums/enums";
-import { BoweryReports } from "../../../../types";
+import { BoweryAutomation, BoweryReports } from "../../../../types";
 
 const _grossBuildingArea = 5000;
 const _numberOfCommercialUnits = 3;
