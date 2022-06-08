@@ -3,7 +3,11 @@ import { createReport, deleteReport } from "../../../../actions/base/baseTest.ac
 import { _NavigationSection } from "../../../../actions/base";
 import { Sales, ReviewExport } from "../../../../actions";
 
-describe("Check custom Utilities adjustment", { tags:[ "@sales", "@adjust_comps", "@check_export" ] }, () => {
+/**
+ * ernst: we need either select first two comparables or refactor method 
+ * for sales comps selection by address
+ */
+describe.skip("Check custom Utilities adjustment", { tags:[ "@fix", "@sales", "@adjust_comps", "@check_export" ] }, () => {
     
     it("Verify custom utilities adjustments on UI and prepare report for export", () => {
         createReport(testData.reportCreationData);
