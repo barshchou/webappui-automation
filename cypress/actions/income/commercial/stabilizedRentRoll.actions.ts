@@ -52,7 +52,10 @@ class StabilizedRentRollActions extends CommercialRentRollSharedComponent<typeof
     }
     
     verifyStabilizedCommercialIncomeDiscussion(textToBe: string): StabilizedRentRollActions {
-        stabRentRollPage.stabilizedCommercialIncomeDiscussion.should('have.text', textToBe);
+        stabRentRollPage.stabilizedCommercialIncomeDiscussion.invoke('text').then(text => {
+            cy.wrap(this.normalizeText(text)).should('deep.equal', textToBe);
+        });
+        
         return this;
     }
 

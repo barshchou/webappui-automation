@@ -23,6 +23,8 @@ describe(`Verify the Back button functionality on the Stabilized Rent Roll page`
         Income._CommercialManager.StabilizedRentRoll.verifyStabilizedCommercialIncomeDiscussion(testData.commentaryAsIsMixed);
 
         cy.stepInfo(`Set all units lease status to 'Occupied'.`);
+        _NavigationSection.clickCommercialRentRollButton()
+            .clickYesIfExist();
         Income._CommercialManager.InPlaceRentRoll.chooseListLeaseStatuses(testData.leaseStatusOccupied, testData.numberOfCommercialUnits);
 
         cy.stepInfo(`Navigate to Stabilized Rent Roll and verify generated commentary`);
@@ -30,6 +32,8 @@ describe(`Verify the Back button functionality on the Stabilized Rent Roll page`
         Income._CommercialManager.StabilizedRentRoll.verifyStabilizedCommercialIncomeDiscussion(testData.commentaryAsIsOccupied);
 
         cy.stepInfo(`Set all units lease status to 'Vacant'.`);
+        _NavigationSection.clickCommercialRentRollButton()
+            .clickYesIfExist();
         Income._CommercialManager.InPlaceRentRoll.chooseListLeaseStatuses(testData.leaseStatusVacant, testData.numberOfCommercialUnits);
 
         cy.stepInfo(`Navigate to Stabilized Rent Roll and verify generated commentary`);
@@ -56,6 +60,8 @@ describe(`Verify the Back button functionality on the Stabilized Rent Roll page`
         Income._CommercialManager.StabilizedRentRoll.verifyStabilizedCommercialIncomeDiscussion(testData.commentaryAsStabilizedMixed);
 
         cy.stepInfo(`Set all units lease status to 'Occupied'.`);
+        _NavigationSection.clickCommercialRentRollButton()
+            .clickYesIfExist();
         Income._CommercialManager.InPlaceRentRoll.chooseListLeaseStatuses(testData.leaseStatusOccupied, testData.numberOfCommercialUnits);
 
         cy.stepInfo(`Navigate to Stabilized Rent Roll and verify generated commentary`);
@@ -63,6 +69,8 @@ describe(`Verify the Back button functionality on the Stabilized Rent Roll page`
         Income._CommercialManager.StabilizedRentRoll.verifyStabilizedCommercialIncomeDiscussion(testData.commentaryAsStabilizedOccupied);
 
         cy.stepInfo(`Set all units lease status to 'Vacant'.`);
+        _NavigationSection.clickCommercialRentRollButton()
+            .clickYesIfExist();
         Income._CommercialManager.InPlaceRentRoll.chooseListLeaseStatuses(testData.leaseStatusVacant, testData.numberOfCommercialUnits);
 
         cy.stepInfo(`Navigate to Stabilized Rent Roll and verify generated commentary`);
@@ -89,6 +97,8 @@ describe(`Verify the Back button functionality on the Stabilized Rent Roll page`
         Income._CommercialManager.StabilizedRentRoll.verifyStabilizedCommercialIncomeDiscussion(testData.commentaryAsCompleteMixed);
 
         cy.stepInfo(`Set all units lease status to 'Occupied'.`);
+        _NavigationSection.clickCommercialRentRollButton()
+            .clickYesIfExist();
         Income._CommercialManager.InPlaceRentRoll.chooseListLeaseStatuses(testData.leaseStatusOccupied, testData.numberOfCommercialUnits);
 
         cy.stepInfo(`Navigate to Stabilized Rent Roll and verify generated commentary`);
@@ -96,6 +106,8 @@ describe(`Verify the Back button functionality on the Stabilized Rent Roll page`
         Income._CommercialManager.StabilizedRentRoll.verifyStabilizedCommercialIncomeDiscussion(testData.commentaryAsCompleteOccupied);
 
         cy.stepInfo(`Set all units lease status to 'Vacant'.`);
+        _NavigationSection.clickCommercialRentRollButton()
+            .clickYesIfExist();
         Income._CommercialManager.InPlaceRentRoll.chooseListLeaseStatuses(testData.leaseStatusVacant, testData.numberOfCommercialUnits);
 
         cy.stepInfo(`Navigate to Stabilized Rent Roll and verify generated commentary`);
