@@ -22,7 +22,7 @@ class FindCompsPage extends BasePage {
 
     get importCompsButton() {return cy.get("[data-qa=import-btn]", { includeShadowDom: true });}
 
-    get importCompModal() {return cy.get("[data-qa*=import][data-qa*=modal]", { includeShadowDom: true });}
+    get importCompModal() {return cy.get('[class="ant-modal-content"]', { includeShadowDom: true });}
 
     get csvInput() {return cy.get("[data-qa=file-input]", { includeShadowDom: true });}
 
