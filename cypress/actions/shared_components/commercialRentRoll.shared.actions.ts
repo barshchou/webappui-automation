@@ -2,6 +2,7 @@ import { numberWithCommas } from "../../../utils/numbers.utils";
 import { isDateHasCorrectFormat } from "../../../utils/date.utils";
 import BaseActions from "../base/base.actions";
 import CommercialRentRollSharedComponentPage from "../../pages/shared_components/commercialRentRoll.shared.page";
+import { BoweryReports } from "../../types";
 
 class CommercialRentRollSharedComponent<T extends CommercialRentRollSharedComponentPage> extends BaseActions {
 

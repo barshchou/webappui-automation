@@ -1,5 +1,6 @@
 import { getTodayDateString, getYearFromDate } from "../../../../utils/date.utils";
 import Enums from "../../../enums/enums";
+import { BoweryAutomation, BoweryReports } from "../../../types";
 
 const reportCreationFixture = (): BoweryAutomation.ReportCreationData => {
     return {
