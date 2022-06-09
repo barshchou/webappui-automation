@@ -334,6 +334,10 @@ class RentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
             currentPhoto.should("exist");
             let currentStyle = jQueryPhotoElements.eq(i).attr("style");
             currentPhoto.invoke("attr", "style").should("not.equal", style);
+            /**
+             * ernst: very unstable part in QA-4332, simetimes this spec fails here with
+             * probably gonna need add {force: true}
+             */
             if (direction === "forward") {
                 rentCompsPage.nextPhotoButtons.eq(comparableIndex).click();
             } else {
