@@ -648,6 +648,18 @@ class RentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
         rentCompsPage.getRemovedBuildingCompsTableButton(buttonName).should("exist");
         return this;
     }
+
+    clickShowDetailsButtonByIndex(index = 0): this {
+        rentCompsPage.getRemovedBuildingCompsTableButton("SHOW DETAILS").eq(index).click();
+        return this;
+    }
+
+    verifyShowDetailsHeader(headerName: string): this {
+        rentCompsPage.getShowDetailsHeader(headerName)
+            .should("exist")
+            .should("have.text", headerName);
+        return this;
+    }
 }
 
 export default new RentCompsActions(rentCompsPage);

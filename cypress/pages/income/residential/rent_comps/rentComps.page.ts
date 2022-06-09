@@ -209,8 +209,12 @@ class RentCompsPage extends BasePage{
     getRemovedBuildingCompsTableColumnText(columnName: string) { return cy.get(`[data-qa=${columnName}-cell]`).eq(1); }
 
     getRemovedBuildingCompsTableButton(name: string) {
-        return cy.xpath(`//tbody[@data-qa='selected-building-comps-table']//button[.='${name}']`);
+        return cy.get("[data-qa=selected-building-comps-table]").eq(1).contains(name);
     }
+
+    getShowDetailsRowByIndex(index: number) { return cy.xpath(`//tr[@data-qa='row-${index}']/following-sibling::tr`); }
+
+    getShowDetailsHeader(name: string) { return cy.xpath(`//tr[@data-qa='row-0']/following-sibling::tr//thead//th[.='${name}']`); }
 }
 
 export default new RentCompsPage();

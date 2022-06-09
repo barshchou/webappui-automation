@@ -50,9 +50,20 @@ const _removedBuildingCompsColumns = [
 
 const _removedBuildingCompsTableButtons = [ "SHOW DETAILS", "Add" ];
 
+const _showDetailsColumnHeaders = [
+    "Image",
+    "Unit Mix Item",
+    "# Units",
+    "Avg Baths",
+    "Min Rent",
+    "Avg Rent",
+    "Max Rent"
+];
+
 export default {
-    reportCreationData: ReportDataCreator.getReportData("4416"),
+    reportCreationData: ReportDataCreator.getReportData("4416&17"),
     removedBuildingCompsColumns: _removedBuildingCompsColumns,
     actionsHeader: "Actions",
-    removedBuildingCompsTableButtons: _removedBuildingCompsTableButtons
+    removedBuildingCompsTableButtons: _removedBuildingCompsTableButtons,
+    showDetailsColumnHeaders: _showDetailsColumnHeaders
 };
