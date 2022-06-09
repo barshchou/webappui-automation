@@ -35,26 +35,27 @@ describe(`[QA-5011] [Income>Expense forecast] “Include Expense on Pro Forma”
                      Income._ExpenseForecastActions.uncheckIncludeInProFormaCheckbox(element);
                  });
 
-                 Income._ExpenseForecastActions.addCustomExpenseCategory(testData.customExpence.name);   // delete!
+                 Income._ExpenseForecastActions.addCustomExpenseCategory(testData.customExpence.name)
+                 .enterForecastItemForecast(testData.expenseForecastcustomFixture('unit'));   // delete!
 
        // _NavigationSection.navigateToExpenseForecast();
        testData.expenseForecastFixtureWithUnitArray.forEach(element => {
                     Income._ExpenseForecastActions.enterForecastItemForecast(element);
                  });
-                 testData.expenseForecastFixtureWithUnitArray.forEach(element => {
+                 testData.expenseForecastFixtureWithUnitArray.forEach(element => {             //
                             Income._ExpenseForecastActions.chooseForecastItemBasis(element);
                         });
                         Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastFuelFixture('room'));
       
-                    //   Income._ExpenseForecastActions.inputRetrive();
-
+                   
 
 
 
                  Income._ExpenseForecastActions.verifyTotalForecastPSF(
                      testData.buildingDescription.grossArea, 
                      testData.numberOfResidentialUnits, 
-                     testData.rentRollresUnitFixture.rooms);
+                     testData.rentRollresUnitFixture.rooms
+                     );
 
 
            

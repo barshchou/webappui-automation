@@ -138,13 +138,13 @@ const expenseForecastTotalFixture = (_basis: "unit" | "sf"): BoweryReports.Forec
 
 const expenseForecastcustomFixture = (_basis: "unit" | "sf" ): BoweryReports.ForecastItem => {    // delete????
     return {
-    name: "customExpence",
+    name: "customExpenses[0]",
     basis: _basis as BoweryReports.UnitSF,
     forecast: 30
 };
 }
 
-const customExpence: BoweryReports.ForecastItem {
+const customExpence: BoweryReports.ForecastItem = { // delete????
     name: "customExpence"
 }
 
@@ -162,10 +162,7 @@ const expenseForecastFixtureWithUnitArray = [
     expenseForecastLegalAndProfessionalFeesFixture("sf"),
     expenseForecastMiscellaneousFixture("unit"),
     expenseForecastManagementFixture("unit"),
-    expenseForecastReservesFixture("unit"),
-
-    expenseForecastcustomFixture("unit") // delete!
-
+    expenseForecastReservesFixture("unit")
 ];
 
 const expenseForecastFixtureWithPSFArray = [
@@ -197,6 +194,9 @@ const _forecastPSFnotIncluded = '$0.00';
 const _forecastPerUnitnotIncluded = '$0';
 
 export default {
+    expenseForecastcustomFixture,
+
+
     reportCreationData: _reportCreationData,
     customExpence,
     buildingDescription: _buildingDescription,
