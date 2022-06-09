@@ -634,8 +634,18 @@ class RentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
         return this;
     }
 
-    verifyRemovedBuildingCompsHeader(name: string) {
+    verifyRemovedBuildingCompsTableHeader(name: string): this {
         rentCompsPage.getRemovedBuildingCompsTableHeader(name).should("have.text", name);
+        return this;
+    }
+
+    verifyRemovedBuildingCompsTableColumnText(columnName: string, textToBe: string): this {
+        rentCompsPage.getRemovedBuildingCompsTableColumnText(columnName).should("have.text", textToBe);
+        return this;
+    }
+
+    verifyRemovedBuildingCompsTableButton(buttonName: string): this {
+        rentCompsPage.getRemovedBuildingCompsTableButton(buttonName).should("exist");
         return this;
     }
 }

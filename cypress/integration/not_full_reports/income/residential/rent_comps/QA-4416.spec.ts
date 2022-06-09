@@ -30,8 +30,18 @@ describe(`Verify "Removed Building Comparables" table on the "Rent Comps" page`,
         RentCompsPage.removedBuildingCompsTable.should("exist");
 
         cy.stepInfo("4. Verify contents of Removed Building Comparables table");
-        // testData.removedBuildingCompsColumn.forEach((column) => {
-        // });
+        testData.removedBuildingCompsColumns.forEach((column) => {
+            Income._Residential.RentComps.BaseActions
+                .verifyRemovedBuildingCompsTableHeader(column.name)
+                .verifyRemovedBuildingCompsTableColumnText(column.selector, column.text);
+        });
+        Income._Residential.RentComps.BaseActions
+            .verifyRemovedBuildingCompsTableHeader(testData.actionsHeader);
+        testData.removedBuildingCompsTableButtons.forEach((buttonName) => {
+            Income._Residential.RentComps.BaseActions
+                .verifyRemovedBuildingCompsTableButton(buttonName);
+        });
+        RentCompsPage.getRemoveCompButtonByIndex(0).should("exist");
 
         deleteReport(testData.reportCreationData.reportNumber);
     });

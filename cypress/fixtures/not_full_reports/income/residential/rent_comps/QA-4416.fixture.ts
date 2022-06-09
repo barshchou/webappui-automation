@@ -1,49 +1,58 @@
 import ReportDataCreator from "../../../../data_creator/reportData.creator";
 
-const _removedBuildingCompsColumn = [
+const _removedBuildingCompsColumns = [
     {
         name: "#",
-        value: null
+        selector: "index",
+        text: "1"
     },
     {
         name: "Address",
-        value: null
+        selector: "address",
+        text: "508 Broadway, New York, NY 10012"
     },
     {
         name: "Sub-Type",
-        value: [ "Low-Rise", "Mid-Rise", "High-Rise" ]
+        selector: "subType",
+        text: "Mid-Rise"
     },
     {
         name: "Elevator",
-        value: [ "Yes", "No" ]
+        selector: "elevator",
+        text: "No"
     },
     {
         name: "# Units",
-        value: null
+        selector: "units",
+        text: "4"
     },
     {
         name: "Unit Types",
-        value: null
+        selector: "bedroomCounts",
+        text: "-"
     },
     {
         name: "Avg Rent",
-        value: null
+        selector: "avg-rent",
+        text: "$0.00"
     },
     {
         name: "Dist.",
-        value: null
+        selector: "distance",
+        text: "2.0m"
     },
     {
         name: "As of Date",
-        value: null
-    },
-    {
-        name: "Actions",
-        value: [ "Show Details", "Add", "X" ]
+        selector: "asOfDate",
+        text: "-"
     }
 ];
 
+const _removedBuildingCompsTableButtons = [ "SHOW DETAILS", "Add" ];
+
 export default {
     reportCreationData: ReportDataCreator.getReportData("4416"),
-    removedBuildingCompsColumn: _removedBuildingCompsColumn
+    removedBuildingCompsColumns: _removedBuildingCompsColumns,
+    actionsHeader: "Actions",
+    removedBuildingCompsTableButtons: _removedBuildingCompsTableButtons
 };
