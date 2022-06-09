@@ -7,9 +7,6 @@ const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreat
     conclusionValue: Enums.VALUE_CONCLUSION_TYPE.AS_COMPLETE
 });
 
-const _customCategory: BoweryReports.ForecastItem = {
-    name: "customExpence"
-};
 
 
 const _buildingDescription: BoweryReports.BuildingDescription = {
@@ -139,6 +136,20 @@ const expenseForecastTotalFixture = (_basis: "unit" | "sf"): BoweryReports.Forec
 
 
 
+const expenseForecastcustomFixture = (_basis: "unit" | "sf" ): BoweryReports.ForecastItem => {    // delete????
+    return {
+    name: "customExpence",
+    basis: _basis as BoweryReports.UnitSF,
+    forecast: 30
+};
+}
+
+const customExpence: BoweryReports.ForecastItem {
+    name: "customExpence"
+}
+
+
+
 
 const expenseForecastFixtureWithUnitArray = [
     expenseForecastInsuranceFixture("unit"),
@@ -151,7 +162,10 @@ const expenseForecastFixtureWithUnitArray = [
     expenseForecastLegalAndProfessionalFeesFixture("sf"),
     expenseForecastMiscellaneousFixture("unit"),
     expenseForecastManagementFixture("unit"),
-    expenseForecastReservesFixture("unit")
+    expenseForecastReservesFixture("unit"),
+
+    expenseForecastcustomFixture("unit") // delete!
+
 ];
 
 const expenseForecastFixtureWithPSFArray = [
@@ -184,7 +198,7 @@ const _forecastPerUnitnotIncluded = '$0';
 
 export default {
     reportCreationData: _reportCreationData,
-    customCategory: _customCategory,
+    customExpence,
     buildingDescription: _buildingDescription,
     expensesInProFormaByDefaultArray: _expensesInProFormaByDefaultArray,
     // expenseForecastInsuranceFixture,

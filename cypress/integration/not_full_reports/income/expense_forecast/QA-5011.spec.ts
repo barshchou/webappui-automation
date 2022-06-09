@@ -35,6 +35,8 @@ describe(`[QA-5011] [Income>Expense forecast] “Include Expense on Pro Forma”
                      Income._ExpenseForecastActions.uncheckIncludeInProFormaCheckbox(element);
                  });
 
+                 Income._ExpenseForecastActions.addCustomExpenseCategory(testData.customExpence.name);   // delete!
+
        // _NavigationSection.navigateToExpenseForecast();
        testData.expenseForecastFixtureWithUnitArray.forEach(element => {
                     Income._ExpenseForecastActions.enterForecastItemForecast(element);
