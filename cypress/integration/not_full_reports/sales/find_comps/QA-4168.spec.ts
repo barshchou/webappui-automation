@@ -39,9 +39,7 @@ describe("[QA-4168] Verify the Internal Notes field", { tags: [ "@sales", "@find
         Sales._FindComps.Actions.PropertyDesc.enterInternalNotes(testData.verifyTextValue);
         Sales._FindComps.Actions.emulateCopyPaste(
             Sales._FindComps.Page.internalNotesTextArea, testData.verifyTextValue
-        );  
-        // ernst: obsolent assertion, will be uncommented after test case update      
-        // cy.contains(testData.verifyTextUnderTextArea).should("be.visible");
+        );
 
         deleteReport(testData.reportCreationData.reportNumber);
     });

@@ -60,11 +60,6 @@ export default class BaseActions {
         return this;
     }
 
-    // closeSatisfactionSurvey() {
-    //     cy.get("[aria-label=Close]").click();
-    //     return this;
-    // }
-
     clickBackButton() {
         cy.xpath("//button[.='Back']").click();
         return this;
