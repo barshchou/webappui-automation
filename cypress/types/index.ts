@@ -8,7 +8,7 @@
  * where we can have ForecastItem type.
  */
 
-namespace BoweryReports {
+export namespace BoweryReports {
     export type ReportFile = {
         name: string
         path: string
@@ -136,6 +136,8 @@ namespace BoweryReports {
 
     export type UtilityExpenses = "brokenOut" | "combinedElectricityAndFuel" | "combinedAll";
 
+    export type CompGroupsColumns = "#" | "address" | "use" | "tenantName" | "dateSigned" | "squareFeet" | "rentPerSf"
+
     export type leaseDate = {
         name: LeaseDateName,
         value: string
@@ -159,9 +161,18 @@ namespace BoweryReports {
         sourceOfInfo: string,
         taxYear: number
     }
+
+    export type UnitType = "typical" | "duplex" | "triplex" | "simplex";
+    export type SourceOfInformation = "bowery subject" | "external database" | "other";
+    export type Amenities = "none" | "backyard" | "balcony" | "roof";
+
+    export type RentCompsFilter = {
+        name: string,
+        value: string | number 
+    };
 }
 
-namespace Utils {
+export namespace Utils {
     type _GraphQLRequest = {
         operationName: string,
         query: string,
@@ -172,7 +183,7 @@ namespace Utils {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-namespace BoweryAutomation {
+export namespace BoweryAutomation {
     /**
      * Base data for report setup
      */

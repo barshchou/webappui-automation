@@ -40,6 +40,39 @@ class CompGroupsActions extends BaseActionsExt<typeof compGroupsPage> {
         });
         return this;
     }
+
+    /**
+     * Drags ALL elements (units) from unsorted group into <groupName>.
+     * 
+     * By default 1st commercial unit in unsorted group is dragged as after dragging indexes are reassigned.
+     * 
+     * If there is no elements in a drop group we use default locator, in other case we use 1st row of a group.
+     * 
+     * Verifies that after dragging all elements there is no units left in unsorted group
+    */
+    dragAllCommercialUnitsIntoGroup(groupName: string, numberOfUnits = 1, index = 0): CompGroupsActions {
+        let subject = compGroupsPage.getDragableElement(index); //always selects 1st element in group
+        let commercialUnit = cy.get(subject);
+        let target: string;
+
+        for (let i = 0; i < numberOfUnits; i++) {
+            if (i == 0){
+                target = compGroupsPage.getDropableArea(groupName);
+            } else {
+                target = compGroupsPage.getDropableAreaDropped(groupName);
+            }
+            
+            commercialUnit.dragAndDrop(subject, target);
+        }
+
+        this.verifyAllItemsDragged();
+        return this;
+    }
+
+    verifyAllItemsDragged(): CompGroupsActions {
+        compGroupsPage.draggablePlaceholder.should('be.visible');
+        return this;
+    }
 }
 
 export default new CompGroupsActions(compGroupsPage);

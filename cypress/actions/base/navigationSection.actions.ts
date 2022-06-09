@@ -126,6 +126,11 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         return this;
     }
 
+    clickResidentialStabilizedRentRoll(): this {
+        navigationSectionPage.residentialStabilizedRentRoll.click();
+        return this;
+    }
+
     navigateToUnitInspection() {
         this.clickSaveButton();
         this.clickFinalButton()
@@ -146,6 +151,14 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         this.clickIncomeApproachButton()
             .clickResidentialIncomeArrow()
             .clickRentCompsButton()
+            .clickYesIfExist();
+        return this;
+    }
+
+    navigateToCompGroups() {
+        this.clickIncomeApproachButton()
+            .clickCommercialArrow()
+            .clickCommercialCompGroups()
             .clickYesIfExist();
         return this;
     }
@@ -252,7 +265,7 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
             .clickFindCompsButton()
             .clickYesIfExist();        
         cy.wait(`@${Alias.gql.SearchSalesTransactions}`, { timeout:120000 });
-
+    
         return this;
     }
 
@@ -261,14 +274,20 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         return this;
     }
 
-    openAdjustCompsInSales() {
-        this.clickAdjustCompsButton()
+    navigateToAdjustComps() {
+        this.clickSalesButton()
+            .clickAdjustCompsButton()
             .clickYesIfExist();
         return this;
     }
 
     clickCommercialRentComps() {
         navigationSectionPage.commercialRentCompsButton.click();
+        return this;
+    }
+
+    clickCommercialCompGroupsDiscussion() {
+        navigationSectionPage.commercialCompGroupsDiscussionButton.click();
         return this;
     }
 
@@ -302,6 +321,19 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
     openInPlaceRentRollInResidential() {
         this.clickInPlaceRentRollButton()
             .clickYesIfExist();
+        return this;
+    }
+
+    navigateToRentReconcillation() {
+        this.clickIncomeApproachButton()
+            .clickCommercialArrow()
+            .clickRentReconcillationButton()
+            .clickYesIfExist();
+        return this;
+    }
+
+    clickRentReconcillationButton() {
+        navigationSectionPage.commercialRentReconcillationButton.click();
         return this;
     }
 
@@ -535,6 +567,30 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
 
     clickCommercialReimbursementSummaryButton(): NavigationSectionActions {
         navigationSectionPage.comercialReimbursementButton.click();
+        return this;
+    }
+
+    navigateToResidentialStabilizedRentRoll(): this {
+        this.clickIncomeApproachButton();
+        navigationSectionPage.residentialIncomeArrow.then(el => {
+            if (!el.hasClass("expanded")) {
+                this.clickResidentialIncomeArrow();
+            }
+        });
+        this.clickResidentialStabilizedRentRoll()
+            .clickYesIfExist();
+        return this;
+    }
+
+    navigateToCommercialStabilizedRentRoll(): this {
+        this.clickIncomeApproachButton();
+        navigationSectionPage.commercialIncomeArrow.then(el => {
+            if (!el.hasClass("expanded")) {
+                this.clickCommercialArrow();
+            }
+        });
+        this.clickCommercialStabRentRollButton()
+            .clickYesIfExist();
         return this;
     }
 }

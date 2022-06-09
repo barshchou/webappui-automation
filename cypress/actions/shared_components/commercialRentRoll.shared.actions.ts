@@ -2,6 +2,7 @@ import { numberWithCommas } from "../../../utils/numbers.utils";
 import { isDateHasCorrectFormat } from "../../../utils/date.utils";
 import BaseActions from "../base/base.actions";
 import CommercialRentRollSharedComponentPage from "../../pages/shared_components/commercialRentRoll.shared.page";
+import { BoweryReports } from "../../types";
 
 class CommercialRentRollSharedComponent<T extends CommercialRentRollSharedComponentPage> extends BaseActions {
 
@@ -104,9 +105,9 @@ class CommercialRentRollSharedComponent<T extends CommercialRentRollSharedCompon
         return this;
     }
 
-    verifyAnnualRentCellPerSFBasisByRow(rentPerSF: number, squareFoot: number, calcMethod: "annually" | "monthly",
+    verifyAnnualRentCellPerSFBasisByRow(rentPerSF: number, squareFoot: number, calcMethod: BoweryReports.UnitsOfMeasure,
                                         rowNumber = 0): this {
-        let numberToBe;
+        let numberToBe: number;
         if (calcMethod === "annually") {
             numberToBe = rentPerSF * squareFoot;
         } else {
@@ -139,7 +140,7 @@ class CommercialRentRollSharedComponent<T extends CommercialRentRollSharedCompon
         return this;
     }
 
-    verifyMonthlyRentPerSFByRow(rentPerSF: number, squareFoot: number, calcMethod: "annually" | "monthly",
+    verifyMonthlyRentPerSFByRow(rentPerSF: number, squareFoot: number, calcMethod: BoweryReports.UnitsOfMeasure,
                                 rowNumber = 0): this {
         let numberToBe;
         if (calcMethod === "annually") {
