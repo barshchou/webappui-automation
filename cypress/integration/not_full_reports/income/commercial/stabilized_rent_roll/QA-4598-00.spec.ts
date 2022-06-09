@@ -1,4 +1,4 @@
-import { Income } from "../../../../../actions";
+import { Income, Property } from "../../../../../actions";
 import { _NavigationSection } from "../../../../../actions/base";
 import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
 import testData from "../../../../../fixtures/not_full_reports/income/commercial/stabilized_rent_roll/QA-4598-00.fixture";
@@ -6,10 +6,14 @@ import testData from "../../../../../fixtures/not_full_reports/income/commercial
 describe(`Verify the suggested text dropdown in the new narrative component added through "=" for the 'Unchanged Renovation' 
   option in the Generated Commentary on the Stabilized Rent Roll page.`, 
     { tags: [ "@income", "@commercial", "@stabilized_rent_roll", "@check_export" ] }, () => {
-      
+
     it.only("Test body", () => {
         cy.stepInfo(`Preconditions: The mixed report is created and several commercial units are added.`);
         createReport(testData.reportCreationDataAsIs);
+
+        _NavigationSection.navigateToPropertySummary();
+        Property._Summary.enterNumberOfCommercialUnits(testData.numberOfCommercialUnits)
+            .enterNumberOfResUnits(testData.numberOfResidentialUnits);
 
         cy.stepInfo("1. Proceed to the Income > Commercial > Stabilized Rent Roll page.");
         _NavigationSection.navigateToCommercialStabilizedRentRoll();

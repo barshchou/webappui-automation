@@ -1,7 +1,7 @@
 import enums from "../../../../../enums/enums";
 import reportDataCreator from "../../../../data_creator/reportData.creator";
 
-const _chips_is_stabilized =  [
+const _baseChip =  [
     {
         suggestionName: 'Block',
         typeSuggestValue: 'Bloc',
@@ -21,12 +21,6 @@ const _chips_is_stabilized =  [
         verifyExport: 'Conclude'
     }, 
     {
-        suggestionName: 'Condition',
-        typeSuggestValue: 'Conditio',
-        verifySuggest: 'in  condition',
-        verifyExport: 'condition'
-    }, 
-    {
         suggestionName: 'Foreclosure Sale',
         typeSuggestValue: 'Foreclosur',
         verifySuggest: 'The above transaction reflects a foreclosure sale of the property. Typically in a foreclosure sale, the buyer assumes all encumbrances on the site, including any outstanding mortgage amount and legal fees ("upset costs"), delinquent taxes and water and sewer charges, foreclosure sale fee, and realty transfer taxes. This information was requested from the owner; however, not provided.',
@@ -44,12 +38,6 @@ const _chips_is_stabilized =  [
         verifySuggest: '2,124,441',
         verifyExport: 'Gross building area'
     }, 
-    {
-        suggestionName: 'Residential Unit Count',
-        typeSuggestValue: 'Residentia',
-        verifySuggest: '0',
-        verifyExport: '0'
-    },  
     {
         suggestionName: 'Site Area',
         typeSuggestValue: 'Sit',
@@ -88,6 +76,69 @@ const _chips_is_stabilized =  [
     }, 
 ];
 
+const _baseChipsAsCompleted = [
+    {
+        suggestionName: 'Current Residential Unit Count',
+        typeSuggestValue: 'Current Residential',
+        verifySuggest: '3',
+        verifyExport: '3'
+    },
+    {
+        suggestionName: 'Current Commercial Unit Count',
+        typeSuggestValue: 'Current Commercial',
+        verifySuggest: '2',
+        verifyExport: '2'
+    },
+    {
+        suggestionName: 'Current Condition',
+        typeSuggestValue: 'Current Condition',
+        verifySuggest: 'condition',
+        verifyExport: 'condition'
+    },
+    {
+        suggestionName: 'As Complete Residential Unit Count',
+        typeSuggestValue: 'As Complete Residential',
+        verifySuggest: '0',
+        verifyExport: '0'
+    },
+    {
+        suggestionName: 'As Complete Commercial Unit Count',
+        typeSuggestValue: 'As Complete Commercial',
+        verifySuggest: '1',
+        verifyExport: '1'
+    },
+    {
+        suggestionName: 'As Stabilized Condition',
+        typeSuggestValue: 'As Stabilized',
+        verifySuggest: 'in condition',
+        verifyExport: 'in condition'
+    }
+];
+
+const _baseChipsAsIsAsStabilized = [
+    {
+        suggestionName: 'Residential Unit Count',
+        typeSuggestValue: 'Residentia',
+        verifySuggest: '3',
+        verifyExport: '3'
+    },
+    {
+        suggestionName: 'Commercial Unit Count',
+        typeSuggestValue: 'Commercial Unit',
+        verifySuggest: '2',
+        verifyExport: '2'
+    },
+    {
+        suggestionName: 'Condition',
+        typeSuggestValue: 'Conditio',
+        verifySuggest: 'in  condition',
+        verifyExport: 'condition'
+    }
+];
+
+const _asCompletedChips = [ { ..._baseChip, ..._baseChipsAsCompleted } ];
+const _asIsAsStabilizedChips = [ { ..._baseChip, ..._baseChipsAsIsAsStabilized } ];
+
 export default {
     reportCreationDataAsIs: reportDataCreator.getReportData("4598-00", {
         incomeValue: enums.INCOME_TYPE.BOTH,
@@ -102,8 +153,11 @@ export default {
         conclusionValue: enums.VALUE_CONCLUSION_TYPE.AS_COMPLETE
     }),
     numberOfCommercialUnits: 2,
+    numberOfResidentialUnits: 3,
     narrativeSuggestion:"=",
     verifyListValue: "Unchanged Renovations",
     verifyAreaValue: "Upon renovation, the subject unit count and gross building area will remain unchanged.",
-    chips: _chips_is_stabilized
+    chips: _baseChip,
+    asCompletedChips: _asCompletedChips,
+    asIsAsStabilizedChips: _asIsAsStabilizedChips
 };
