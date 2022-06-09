@@ -75,8 +75,11 @@ export default class BaseActions {
         return this;
     }
 
-    verifyTooltipExist() {
+    verifyTooltipExist(verifyValue?: string) {
         cy.get("[role=tooltip]").should("not.exist");
+        if (verifyValue) {
+            cy.get("[role=tooltip]").should("include.text", verifyValue);
+        }
         return this;
     }
 

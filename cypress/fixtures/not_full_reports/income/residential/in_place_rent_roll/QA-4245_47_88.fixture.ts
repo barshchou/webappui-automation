@@ -45,9 +45,10 @@ const _textValues = [
 ];
 
 export default {
-    reportCreationData: ReportDataCreator.getReportData("4245_88"),
+    reportCreationData: ReportDataCreator.getReportData("4245_47_88"),
     numberOfUnits: 5,
     columnName: "Monthly Total",
     residentialUnits: rentRollResidentialUnitsFixture(),
-    textValues: _textValues
+    textValues: _textValues,
+    tooltipText: "The following generated text will appear in the Income Approach's Current Residential Rent Roll."
 };

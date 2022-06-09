@@ -45,6 +45,8 @@ class InPlaceRentRollPage extends ResidentialRentRollSharedPage {
 
     get appraiserCommentary() {return cy.get("[name='currentRentRollDiscussion.additionalCommentary']");}
 
+    infoIcon(index = 1) {return cy.xpath(`//*[text()='Current Rent Roll Discussion']//following::*[@role='presentation'][${index}]`);}
+
 }
 
 export default new InPlaceRentRollPage();

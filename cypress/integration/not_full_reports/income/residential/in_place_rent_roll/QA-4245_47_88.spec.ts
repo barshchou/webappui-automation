@@ -1,4 +1,4 @@
-import testData from "../../../../../fixtures/not_full_reports/income/residential/in_place_rent_roll/QA-4245_88.fixture";
+import testData from "../../../../../fixtures/not_full_reports/income/residential/in_place_rent_roll/QA-4245_47_88.fixture";
 import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../../actions/base";
 import { Property, Income } from "../../../../../actions";
@@ -30,6 +30,13 @@ describe("Verify the Monthly Total row in the grid",
                 .enterLeaseStatusByRowNumber(unit.leaseStatus, index);
         });
         Income._Residential.InPlaceRentRoll.verifyMonthlyTotalRentValue();
+    });
+
+    it("[QA-4247]", () => {
+        _NavigationSection.navigateToResInPlaceRentRoll();
+        
+        Income._Residential.InPlaceRentRoll.Page.infoIcon().realHover();
+        Income._Residential.InPlaceRentRoll.verifyTooltipExist(testData.tooltipText);
     });
 
     it("[QA-4288]", () => {
