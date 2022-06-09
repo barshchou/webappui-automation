@@ -1,3 +1,5 @@
+import { BoweryReports } from "../types";
+
 const utilitiesExpensesMode = {
 
     brokenOut: "brokenOut" as BoweryReports.UtilityExpenses,
