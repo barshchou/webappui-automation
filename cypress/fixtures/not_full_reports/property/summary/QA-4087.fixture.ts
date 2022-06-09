@@ -17,4 +17,5 @@ const _verifyValues: Array<number> = [ 0, getRandomInt(1, 4999), 4999, 5000, 500
 export default {
     reportCreationData: _reportCreationData,
     verifyValues: _verifyValues,
+    notInclude: [ "+", "-", "*", "/", "=", "%", "@", "^", ">", "<", "~" ]
 };
