@@ -244,8 +244,9 @@ class CommercialRentRollSharedComponent<T extends CommercialRentRollSharedCompon
         return this;
     }
 
-    verifyCommentaryContainsText(verifyAreaValue: string): this {
-        this.Page.commentaryText.should("contain.text", verifyAreaValue);
+    verifyCommentaryContainsText(verifyAreaValue: string | number): this {
+        let expectedText = typeof verifyAreaValue ===  "number" ? `${numberWithCommas(verifyAreaValue)}`: verifyAreaValue;
+        this.Page.commentaryText.should("contain.text", `${expectedText}`);
         return this;
     }
 
