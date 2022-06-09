@@ -274,31 +274,31 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+//let tempObj = { property: props}
 inputRetrive(): ExpenseForecastActions {
     expenseForecastPage.allForecastsInputs.then(inputs => {
         cy.wrap(inputs).parents('[data-qa$=-forecast-item]').find('[label="Include Expense on Pro Forma"]').find('[type="checkbox"]')
         .invoke('prop', 'value').then(value => {
-            
-           // cy.wrap(value).as(`ifChecked`);
-
-           
+        
+            cy.wrap(value).as(`isChecked`);
 
         });
+
+        
         
      //   let ggg =  this.extractAlias(cheker)
   //    if (@ifChecked === "true") {cy.log('final') }
      
   
- // cy.log(cy.get(`@ifChecked`))
 
 
+ 
   //  if(cy.get(`@cheker`).should('equal', 'true'))  {cy.log('xxx')} else {cy.log('final')}
      // let gggx= cy.get(`@ifChecked`) //.its(value)
      // cy.log(cy.get(`@cheker`)); 
     
-})
-return this
+});
+return this;
 }
 
 
@@ -308,11 +308,24 @@ return this
 
 
 
-    TotalForecastPSF(GBA: number, resUnits?: number, rooms?: number): ExpenseForecastActions {
+verifyTotalForecastPSF(GBA: number, resUnits?: number, rooms?: number): ExpenseForecastActions {
         expenseForecastPage.allForecastsInputs.then(inputs => {
 
             let sumPerSF = 0;
             for (let i = 0; i < inputs.length; i++) {
+
+                
+//exist???  
+const lele = cy.find(inputs[i].parents('[data-qa$=-forecast-item]').find('[label="Include Expense on Pro Forma"]').find('[type="checkbox"]'))
+//if (lele.length > 0) {cy.log('nice')}
+        //    cy.wrap(inputs[i]).parents('[data-qa$=-forecast-item]').find('[label="Include Expense on Pro Forma"]').find('[type="checkbox"]').then(checkbox => {
+        //     if (checkbox > 0) {
+
+        //    }
+
+              
+            //evaluates as true
+        
 
                 cy.wrap(inputs[i]).parents('[data-qa$=-forecast-item]').find('[label="Include Expense on Pro Forma"]').find('[type="checkbox"]')
                     .invoke('prop', 'value').then(value => {
@@ -323,108 +336,49 @@ return this
                             cy.wrap(inputs[i]).parents('[data-qa$=-forecast-item]').find('[data-qa="checked"]').find('[type="radio"]')
                                 .invoke('prop', 'value').then(basisValue => {
 
-
                                     let unitBasis = basisValue
                                     let elNumber = getNumberFromDollarNumberWithCommas(inputs[i].getAttribute("value"));
+                                  
                                     if (unitBasis === "unit") {
-
                                         let elNumberPerSF = (elNumber * resUnits) / GBA;
-                                        sumPerSF += elNumberPerSF;
-                                        cy.log(sumPerSF)
-
+                                        sumPerSF += elNumberPerSF;  
                                     } else if (unitBasis === "sf") {
-
                                         let elNumberPerSF = elNumber
-                                        sumPerSF += elNumberPerSF
-                                        cy.log(sumPerSF)
-
+                                        sumPerSF += elNumberPerSF                                       
                                     } else {
-
                                         let elNumberPerSF = (elNumber * rooms) / GBA;
-                                        sumPerSF += elNumberPerSF;
-                                        cy.log(sumPerSF)
+                                        sumPerSF += elNumberPerSF;                           
                                     }
-
-                                     if (i == inputs.length) {
-                                        const textToBe = `Appraiser's Forecast: $${numberWithCommas(sumPerSF.toFixed(2))}`;
-                                        cy.log(textToBe)
-                                        expenseForecastPage.appraisersTotalForecast.should("have.text", textToBe);
-                                      //  break;
-                                      }
-
-                                    //  cy.log(sumPerSF)    
-                                    const textToBe = `Appraiser's Forecast: $${numberWithCommas(sumPerSF.toFixed(2))}`;
-                                     cy.wrap(textToBe).as('SUMA')
-                                    // let  totalSumPSF = 
-
-                                })//.as('SUMA')      
-
+                                    cy.wrap(sumPerSF).as('SUMA');
+                                });
+                        } else {
+                            sumPerSF += 0;
+                            cy.wrap(sumPerSF).as('SUMA');
                         }
 
+                    });
+           // } else {cy.log('nope')}
 
-                    })
-
-            }
-            // const textToBe = `Appraiser's Forecast: $${numberWithCommas(sumPerSF.toFixed(2))}`; //
-            //  return textToBe
-               expenseForecastPage.appraisersTotalForecast.should("have.text", cy.get(`@SUMA`));
-        //       cy.get(`@SUMA`).should('equal', 'false')
-
+}
+cy.get('@SUMA').then(val => {
+    const textToBe = `Appraiser's Forecast: $${numberWithCommas(val.toFixed(2))}`;
+    cy.log(textToBe);
+    expenseForecastPage.appraisersTotalForecast.should("have.text", textToBe);
+})
         })
-
         return this;
     }
 
 
-    verifyTotalForecastPSF(GBA, resUnits, rooms): ExpenseForecastActions {
-        let textToBe = this.TotalForecastPSF(GBA, resUnits, rooms)
+    verifyTotalForecastPSFX(GBA, resUnits, rooms): ExpenseForecastActions {
+      //  let textToBe = this.TotalForecastPSF(GBA, resUnits, rooms)
         expenseForecastPage.appraisersTotalForecast.should("have.text", textToBe);
 
         return this;
     }
 
 
-
-    // return nnn
-
-    //  cy.log(mainEl)
-    // cy.log(mainEl)
-    // let attr =  mainEl.getAttribute('value');
-    // let attribute = mainEl.getAttribute('value')
-    //    if (mainEl.should('have.attr', 'value').and('equal', 'unit')  ) {
-    //   if (mainEl === "sf") {
-    //    if (attr === "sf") {
-
-    // let io = mainEl.children('[data-qa$=checked]')
-    //value = "unit"
-    // cy.log('yes');} else /*(mainEl.should('have.attr', 'value', 'sf') )*/ {
-    //     cy.log('no')}
-    //    mainEl.children(data-qa="checked").children(type="radio")
-    //    });
-
-
-
-    // verifyTotalForecastPSF(): ExpenseForecastActions {
-    //     expenseForecastPage.allForecastsInputs.then(elements => {
-    //         let sum = 0;
-    //         let mainEl= elements.parentsUntil('@data-qa=checked')
-    //         if ()
-    //         for (let i = 0; i < elements.length; i++) {
-    //             let elNumber = getNumberFromDollarNumberWithCommas(elements[i].getAttribute("value"));
-    //             sum += elNumber;
-    //         }
-    //         const textToBe = `Appraiser's Forecast: $${numberWithCommas(sum.toFixed(2))}`;
-    //         expenseForecastPage.appraisersTotalForecast.should("have.text", textToBe);
-    //     });
-    //     return this;
-    // }
-
-
-
-
-
-
-
+    
     verifyTOECommentary(textToBe: string): ExpenseForecastActions {
         expenseForecastPage.toeCommentary.should("contain.text", textToBe);
         return this;

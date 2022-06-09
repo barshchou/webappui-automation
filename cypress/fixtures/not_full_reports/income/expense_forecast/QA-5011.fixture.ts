@@ -46,7 +46,7 @@ const expenseForecastInsuranceFixture = (_basis: "unit" | "sf" ): BoweryReports.
     return {
         name: "insurance",
         basis: _basis as BoweryReports.UnitSF,
-        forecast: 5
+        forecast: 30
     };
 };
 
@@ -54,7 +54,7 @@ const expenseForecastElectricityFixture = (_basis: "unit" | "sf"): BoweryReports
     return {
         name: "electricity",
         basis: _basis as BoweryReports.UnitSF,
-        forecast: 5
+        forecast: 30
     };
 };
 
@@ -62,7 +62,7 @@ const expenseForecastFuelFixture = (_basis: "unit" | "room" | "sf"): BoweryRepor
     return {
         name: "fuel",
         basis: _basis as BoweryReports.UnitSF,
-        forecast: 5
+        forecast: 150
     };
 };
 
@@ -70,7 +70,7 @@ const expenseForecastWaterAndSewerFixture = (_basis: "unit" | "sf"): BoweryRepor
     return {
         name: "waterAndSewer",
         basis: _basis as BoweryReports.UnitSF,
-        forecast: 5
+        forecast: 30
     };
 };
 
@@ -78,7 +78,7 @@ const expenseForecastRepairsAndMaintenanceFixture = (_basis: "unit" | "sf"): Bow
     return {
         name: "repairsAndMaintenance",
         basis: _basis as BoweryReports.UnitSF,
-        forecast: 5
+        forecast: 30
     };
 };
 
@@ -86,7 +86,7 @@ const expenseForecastPayrollAndBenefitsFixture = (_basis: "unit" | "sf"): Bowery
     return {
         name: "payrollAndBenefits",
         basis: _basis as BoweryReports.UnitSF,
-        forecast: 5
+        forecast: 30
     };
 };
 
@@ -94,7 +94,7 @@ const expenseForecastGeneralAndAdministrativeFixture = (_basis: "unit" | "sf"): 
     return {
         name: "generalAndAdministrative",
         basis: _basis as BoweryReports.UnitSF,
-        forecast: 5
+        forecast: 30
     };
 };
 
@@ -102,7 +102,7 @@ const expenseForecastLegalAndProfessionalFeesFixture = (_basis: "unit" | "sf"): 
     return {
         name: "legalAndProfessionalFees",
         basis: _basis as BoweryReports.UnitSF,
-        forecast: 5
+        forecast: 30
     };
 };
 
@@ -110,7 +110,7 @@ const expenseForecastMiscellaneousFixture = (_basis: "unit" | "sf"): BoweryRepor
     return {
         name: "miscellaneous",
         basis: _basis as BoweryReports.UnitSF,
-        forecast: 5
+        forecast: 30
     };
 };
 
@@ -118,7 +118,7 @@ const expenseForecastManagementFixture = (_basis: "unit" | "sf"): BoweryReports.
     return {
         name: "management",
         basis: _basis as BoweryReports.UnitSF,
-        forecast: 5
+        forecast: 30
     };
 };
 
@@ -126,7 +126,7 @@ const expenseForecastReservesFixture = (_basis: "unit" | "sf"): BoweryReports.Fo
     return {
         name: "reserves",
         basis: _basis as BoweryReports.UnitSF,
-        forecast: 5
+        forecast: 30
     };
 };
 

@@ -15,60 +15,44 @@ describe(`[QA-5011] [Income>Expense forecast] “Include Expense on Pro Forma”
 
         beforeEach(() => {
             cy.restoreLocalStorage();
-            Income._ExpenseForecastActions.Page.allForecastsInputs.then(inputs => {
-                cy.wrap(inputs).parents('[data-qa$=-forecast-item]').find('[label="Include Expense on Pro Forma"]').find('[type="checkbox"]')
-                .invoke('prop', 'value').as('val')
+           
         });
 
-     /*   let value 
-
-        expenseForecastPage.allForecastsInputs.then(inputs => {
-            cy.wrap(inputs).parents('[data-qa$=-forecast-item]').find('[label="Include Expense on Pro Forma"]').find('[type="checkbox"]')
-            .invoke('prop', 'value').then(value => {
-                
-               // cy.wrap(value).as(`ifChecked`);
-    
-            });
-        
-    })*/
-
-it (' asdfasdf', function() { this. cy.log(this.val)  })
-
-
-        it("[QA-5011]", () => {
+        it("[QA-5011]", function () {
             cy.stepInfo(`1. Go to Property > Summary and add residential and commertial units`);
-        /*    _NavigationSection.navigateToPropertySummary();
+            _NavigationSection.navigateToPropertySummary();
         Property._Summary.enterNumberOfResUnits(testData.numberOfResidentialUnits)
             .enterNumberOfCommercialUnits(testData.numberOfCommercialUnits)
-            .enterGrossBuildingArea(testData.buildingDescription.grossArea);*/
+            .enterGrossBuildingArea(testData.buildingDescription.grossArea);
             
-        //     cy.stepInfo(`2. Go to Income > Residential > In-Place Rent Roll and add rooms to residential units`);
-        //     _NavigationSection.navigateToResInPlaceRentRoll();
-        //     Income._Residential.InPlaceRentRoll.checkCheckboxByLabel(testData.perRoomAnalysis)
-        //     .enterRoomsNumberByRowNumber(testData.residentialUnits.rooms, 0);
+            cy.stepInfo(`2. Go to Income > Residential > In-Place Rent Roll and add rooms to residential units`);
+            _NavigationSection.navigateToResInPlaceRentRoll();
+            Income._Residential.InPlaceRentRoll.checkCheckboxByLabel(testData.perRoomAnalysis)
+            .enterRoomsNumberByRowNumber(testData.rentRollresUnitFixture.rooms, 0);
        
         _NavigationSection.navigateToExpenseForecast();
-        // expensesCardsNames.expenseCardsIDArray.forEach(element => {
-        //              Income._ExpenseForecastActions.uncheckIncludeInProFormaCheckbox(element);
-        //          });
+        expensesCardsNames.expenseCardsIDArray2.forEach(element => {                                   //!!!!
+                     Income._ExpenseForecastActions.uncheckIncludeInProFormaCheckbox(element);
+                 });
 
-
-    /*    testData.expenseForecastFixtureWithUnitArray.forEach(element => {
+       // _NavigationSection.navigateToExpenseForecast();
+       testData.expenseForecastFixtureWithUnitArray.forEach(element => {
                     Income._ExpenseForecastActions.enterForecastItemForecast(element);
                  });
                  testData.expenseForecastFixtureWithUnitArray.forEach(element => {
                             Income._ExpenseForecastActions.chooseForecastItemBasis(element);
                         });
-                        Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastFuelFixture('room'));*/
+                        Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastFuelFixture('room'));
       
-                        Income._ExpenseForecastActions.inputRetrive();
+                    //   Income._ExpenseForecastActions.inputRetrive();
 
 
 
-                //  Income._ExpenseForecastActions.TotalForecastPSF(
-                //      testData.buildingDescription.grossArea, 
-                //      testData.numberOfResidentialUnits, 
-                //      testData.rentRollresUnitFixture.rooms);
+
+                 Income._ExpenseForecastActions.verifyTotalForecastPSF(
+                     testData.buildingDescription.grossArea, 
+                     testData.numberOfResidentialUnits, 
+                     testData.rentRollresUnitFixture.rooms);
 
 
            

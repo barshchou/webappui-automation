@@ -3,6 +3,10 @@ const expensesCardsNames = {
     expenseCardsIDArray: [ "insurance", "electricity", "fuel", "waterSewer", "repairsMaintenance", "payrollBenefits",
         "generalAdministrative", "legalProfessionalFees", "miscellaneous", "managementFees", "replacementReserves" ],
 
+        expenseCardsIDArray2: [ "electricity", "waterSewer", "payrollBenefits",
+        "generalAdministrative", "legalProfessionalFees", "miscellaneous", "replacementReserves" ],   //////// delete nahui
+
+
     realEstateTaxes: "realEstateTaxes",
     insurace: "insurance",
     electricity: "electricity",
