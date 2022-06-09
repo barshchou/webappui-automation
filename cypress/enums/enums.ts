@@ -28,6 +28,6 @@ export default {
     LAUNDRY_VC_LOSS_TYPE: laundryVcLossType,
     STORAGE_VC_LOSS_TYPE: storageVcLossType,
     KNOWN_INFORMATION: knownInformation,
-    COMP_GROUP_COLUMNS: compGroupsColumnsEnum
+    COMP_GROUP_COLUMNS: compGroupsColumnsEnum,
     UTILITIES_EXPENSES_MODE: utilitiesExpensesMode
 };
