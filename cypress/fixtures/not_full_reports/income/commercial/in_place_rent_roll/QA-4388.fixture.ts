@@ -1,4 +1,5 @@
 import Enums from "../../../../../enums/enums";
+import { BoweryReports } from "../../../../../types";
 import ReportDataCreator from "../../../../data_creator/reportData.creator";
 
 const reportCreationFixture = () => {
@@ -20,5 +21,7 @@ const generalFixture = () => {
 
 export default {
     reportCreationData: reportCreationFixture(),
-    general: Object.freeze(generalFixture())
+    general: Object.freeze(generalFixture()),
+    untisOfMeasureAnnualy: "annually" as BoweryReports.UnitsOfMeasure,
+    untisOfMeasureMontly: "monthly" as BoweryReports.UnitsOfMeasure
 };

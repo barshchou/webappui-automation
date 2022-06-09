@@ -14,10 +14,12 @@ class ComparableExpensesActions extends BaseActions {
     }
 
     enterAddressByColumnIndex(address: string, index = 0): this {
-        compExpensesPage.getUnifiedEditableAndTotalCells("address").eq(index).dblclick().scrollIntoView()
+        compExpensesPage.getUnifiedEditableAndTotalCells("address").eq(index).as("addressCell");
+        cy.get("@addressCell").type("something").dblclick()
+            .clear()
+            .scrollIntoView()
             .realType(`${address}{enter}`);
-        compExpensesPage.getUnifiedEditableAndTotalCells("address").eq(index).children(compExpensesPage.elementToCheckCellTextSelector)
-            .should("have.text", address);
+        cy.get("@addressCell").children(compExpensesPage.elementToCheckCellTextSelector).should("have.text", address);
         return this;
     }
 
@@ -30,8 +32,8 @@ class ComparableExpensesActions extends BaseActions {
     }
 
     chooseExpensePeriodByColumnIndex(periodValue: string, index = 0): this {
-        compExpensesPage.getUnifiedEditableAndTotalCells("expensePeriod").eq(index).focus()
-            .type(`${periodValue}{enter}`);
+        compExpensesPage.getUnifiedEditableAndTotalCells("expensePeriod").eq(index).type("something")
+            .dblclick().clear().type(`${periodValue}{enter}`);
         compExpensesPage.getUnifiedEditableAndTotalCells("expensePeriod").eq(index)
             .children(compExpensesPage.elementToCheckCellTextSelector).should("have.text", periodValue);
         return this;
@@ -95,7 +97,7 @@ class ComparableExpensesActions extends BaseActions {
 
     verifySquareFeetAverage(): this {
         compExpensesPage.getUnifiedEditableAndTotalCells("squareFeet").then(elements => {
-           const averageTextToBe = numberWithCommas(Math.round(this.getAverageValueFromInputs(elements)));
+           const averageTextToBe = numberWithCommas(Math.round(ComparableExpensesActions.getAverageValueFromInputs(elements)));
            compExpensesPage.getUnifiedAverageCell("squareFeet").should("have.text", averageTextToBe);
         });
         return this;
@@ -103,13 +105,13 @@ class ComparableExpensesActions extends BaseActions {
 
     verifyUnitsNumberAverage(): this {
         compExpensesPage.getUnifiedEditableAndTotalCells("residentialUnits").then(elements => {
-            const averageTextToBe = numberWithCommas(Math.round(this.getAverageValueFromInputs(elements)));
+            const averageTextToBe = numberWithCommas(Math.round(ComparableExpensesActions.getAverageValueFromInputs(elements)));
             compExpensesPage.getUnifiedAverageCell("residentialUnits").should("have.text", averageTextToBe);
         });
         return this;
     }
 
-    private getAverageValueFromInputs(elements: JQuery<HTMLElement>): number {
+    private static getAverageValueFromInputs(elements: JQuery<HTMLElement>): number {
         let sum = 0;
         let counterOfElements = 0;
         for (let i = 0; i < elements.length; i++) {
@@ -129,21 +131,21 @@ class ComparableExpensesActions extends BaseActions {
 
     verifyEGIAverage(): this {
         compExpensesPage.getUnifiedEditableAndTotalCells("egi").then(elements => {
-            const averageNumber = this.getAverageValueFromInputs(elements);
+            const averageNumber = ComparableExpensesActions.getAverageValueFromInputs(elements);
             const textToBe = averageNumber === 0 ? "-" : `$${numberWithCommas(averageNumber.toFixed(2))}`;
             compExpensesPage.getUnifiedAverageCell("egi").should("have.text", textToBe);
         });
         return this;
     }
 
-    private getCellTextForNumberCells(averageNumber: number): string {
+    private static getCellTextForNumberCells(averageNumber: number): string {
         return averageNumber === 0 ? "$0.00" : `$${numberWithCommas(averageNumber.toFixed(2))}`;
     }
 
     verifyDollarCellsAverage(cellsName: string): this {
         compExpensesPage.getUnifiedEditableAndTotalCells(cellsName).then(elements => {
-            const averageNumber = this.getAverageValueFromInputs(elements);
-            const textToBe = this.getCellTextForNumberCells(averageNumber);
+            const averageNumber = ComparableExpensesActions.getAverageValueFromInputs(elements);
+            const textToBe = ComparableExpensesActions.getCellTextForNumberCells(averageNumber);
             compExpensesPage.getUnifiedAverageCell(cellsName).should("have.text", textToBe);
         });
         return this;

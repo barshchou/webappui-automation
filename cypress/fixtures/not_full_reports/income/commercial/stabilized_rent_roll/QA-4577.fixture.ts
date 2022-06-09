@@ -5,6 +5,5 @@ export default {
     reportCreationData: reportDataCreator.getReportData("4577", {
         incomeValue: enums.INCOME_TYPE.BOTH
     }),
-    numberOfCommercialUnits: 2,
-    headerText:"Rent Reconciliation"
+    numberOfCommercialUnits: 2
 };

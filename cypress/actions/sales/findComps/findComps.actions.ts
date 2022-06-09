@@ -6,6 +6,7 @@ import saleInfoFormActions from "./drm/saleInfoForm.actions";
 import propertDescActions from "./drm/propertyDescForm.actions";
 import propertyInfoFormActions from "./drm/propertyInfoForm.actions";
 import { Alias } from "../../../utils/alias.utils";
+import { Utils } from "../../../types";
 
 class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
 
@@ -89,9 +90,9 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
     }
 
     checkFindSingleSalesComp(){
-        cy.wait(`@${Alias.gql.FindSingleSalesComp}`, { timeout:70000 }).then((interception) => {
-            cy.log(interception.response.body.data.findSingleSalesComp.salesEventId);
-            cy.wrap(interception.response.body.data.findSingleSalesComp.salesEventId)
+        cy.wait(`@${Alias.gql.FindTransactionByIdAndVersion}`, { timeout:70000 }).then((interception) => {
+            cy.log(interception.response.body.data.findTransactionByIdAndVersion.salesEventId);
+            cy.wrap(interception.response.body.data.findTransactionByIdAndVersion.salesEventId)
             .as(Alias.salesEventId);
         });
         return this; 

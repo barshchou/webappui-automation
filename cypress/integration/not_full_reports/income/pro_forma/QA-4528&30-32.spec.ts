@@ -17,7 +17,7 @@ describe("Residential V/C Loss @ X% row",
         Property.Summary.enterNumberOfResUnits(testData.numberOfUnits)
             .enterGrossBuildingArea(testData.grossBuildingArea);
 
-        cy.stepInfo("2. Go to Income → Residential → In-Place Rent Role and fill in all necessary values to the table");
+        cy.stepInfo("2. Go to Income → Residential → In-Place Rent Roll and fill in all necessary values to the table");
         NavigationSection.navigateToResInPlaceRentRoll();
         Income.Residential.InPlaceRentRoll.enterAllEqualRentTypeCells(testData.rentType)
             .enterAllEqualLeaseStatuses(testData.leaseStatus)
@@ -37,10 +37,10 @@ describe("Residential V/C Loss @ X% row",
         Verify that PSF value is calculated by the formula: Total / GBA
         Verify that Per Unit value is calculated by the formula: Total / # of Residential Units`);
         NavigationSection.navigateToProForma();
-        Income.ProForma.verifyResidentialVCLossLabel(testData.resVacancyCollectionLoss)
-            .verifyResidentialVCLossTotal(testData.resVCLossTotal)
-            .verifyResidentialVCLossPerSF(testData.grossBuildingArea)
-            .verifyResidentialVCLossPerUnit(testData.numberOfUnits);
+        Income.ProForma.verifyResidentialVCLossLabel(testData.residential, testData.resVacancyCollectionLoss)
+            .verifyResidentialVCLossTotal(testData.residential, testData.resVCLossTotal)
+            .verifyResidentialVCLossPerSF(testData.residential, testData.grossBuildingArea)
+            .verifyResidentialVCLossPerUnit(testData.residential, testData.numberOfUnits);
         deleteReport(testData.reportCreationData.reportNumber);
     });
 });

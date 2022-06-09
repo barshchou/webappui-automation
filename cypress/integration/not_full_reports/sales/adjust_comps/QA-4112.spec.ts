@@ -19,7 +19,7 @@ describe("Total Utility Adjustments in Sales Adjustment Grid is calculated with 
                     Verify Total Utility Adjustments in Total Footer = 
                     Commercial Space Adjustment + Corner Adjustment + Finishes Adjustment + 
                     Elevator Adjustment + Amenities Adjustment + Air Rights Adjustment + Other Utility Adjustment)`);
-        _NavigationSection.openAdjustCompsInSales();
+        _NavigationSection.navigateToAdjustComps();
         Sales._AdjustComps.clickAddCustomUtilitiesAdjustment()
             .editOtherUtilitiesAdjustmentRowName(testData.customUtilitiesAdjustmentDefaultName, testData.newCustomUtilitiesAdjustmentName)
             .enterOtherUtilitiesAdjustmentByColumn(testData.comparableFirst.otherUtilityAdjustment, 0, 0)
