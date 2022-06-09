@@ -316,7 +316,7 @@ verifyTotalForecastPSF(GBA: number, resUnits?: number, rooms?: number): ExpenseF
 
                 
 //exist???  
-const lele = cy.find(inputs[i].parents('[data-qa$=-forecast-item]').find('[label="Include Expense on Pro Forma"]').find('[type="checkbox"]'))
+//const lele = inputs[i].parents('[data-qa$=-forecast-item]').find('[label="Include Expense on Pro Forma"]').find('[type="checkbox"]'))
 //if (lele.length > 0) {cy.log('nice')}
         //    cy.wrap(inputs[i]).parents('[data-qa$=-forecast-item]').find('[label="Include Expense on Pro Forma"]').find('[type="checkbox"]').then(checkbox => {
         //     if (checkbox > 0) {
@@ -329,6 +329,9 @@ const lele = cy.find(inputs[i].parents('[data-qa$=-forecast-item]').find('[label
 
                 cy.wrap(inputs[i]).parents('[data-qa$=-forecast-item]').find('[label="Include Expense on Pro Forma"]').find('[type="checkbox"]')
                     .invoke('prop', 'value').then(value => {
+
+                        if (value.length > 0) {cy.log('norm')}
+
 
                         let checked = value
                         if (checked === "true") {
@@ -370,12 +373,23 @@ cy.get('@SUMA').then(val => {
     }
 
 
+
+
+
+
+
     verifyTotalForecastPSFX(GBA, resUnits, rooms): ExpenseForecastActions {
       //  let textToBe = this.TotalForecastPSF(GBA, resUnits, rooms)
         expenseForecastPage.appraisersTotalForecast.should("have.text", textToBe);
 
         return this;
     }
+
+
+
+
+
+
 
 
     
