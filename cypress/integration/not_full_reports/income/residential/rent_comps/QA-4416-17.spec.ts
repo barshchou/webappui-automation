@@ -1,7 +1,7 @@
 import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../../actions/base";
 import { Income } from "../../../../../actions";
-import testData from "../../../../../fixtures/not_full_reports/income/residential/rent_comps/QA-4416&17.fixture";
+import testData from "../../../../../fixtures/not_full_reports/income/residential/rent_comps/QA-4416-17.fixture";
 import RentCompsPage from "../../../../../pages/income/residential/rent_comps/rentComps.page";
 
 describe(`[Income - Residential - Rent Comps]`,

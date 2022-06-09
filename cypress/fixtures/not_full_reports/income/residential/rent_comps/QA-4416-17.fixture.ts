@@ -61,7 +61,7 @@ const _showDetailsColumnHeaders = [
 ];
 
 export default {
-    reportCreationData: ReportDataCreator.getReportData("4416&17"),
+    reportCreationData: ReportDataCreator.getReportData("4416-17"),
     removedBuildingCompsColumns: _removedBuildingCompsColumns,
     actionsHeader: "Actions",
     removedBuildingCompsTableButtons: _removedBuildingCompsTableButtons,
