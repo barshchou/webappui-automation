@@ -1,4 +1,5 @@
 import Enums from "../../../../enums/enums";
+import { BoweryReports } from "../../../../types";
 import reportDataCreator from "../../../data_creator/reportData.creator";
 
 export const reportCreationData = conclusionValue => {

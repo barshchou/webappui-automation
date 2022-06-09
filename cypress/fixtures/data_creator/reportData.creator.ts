@@ -1,4 +1,5 @@
 import Enums from "../../enums/enums";
+import { BoweryReports } from "../../types";
 
 let ReportCreationData = function (address, isSalesForcePull = false, number, templateValue, incomeValue, conclusionValue) {
     this.address = address;

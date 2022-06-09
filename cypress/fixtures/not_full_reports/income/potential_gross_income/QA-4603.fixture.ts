@@ -1,5 +1,6 @@
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 import Enums from "../../../../enums/enums";
+import { BoweryReports } from "../../../../types";
 
 const leaseStatusesFixture: BoweryReports.LeaseStatus[] = [ "Occupied", "Occupied" ];
 
