@@ -1,4 +1,5 @@
 import stabRentRollPage from "../../../pages/income/commercial/stabilizedRentRoll.page";
+import { BoweryReports } from "../../../types";
 import CommercialRentRollSharedComponent from "../../shared_components/commercialRentRoll.shared.actions";
 
 class StabilizedRentRollActions extends CommercialRentRollSharedComponent<typeof stabRentRollPage> {
