@@ -250,6 +250,12 @@ class InPlaceRentRollActions extends ResidentialRentRollSharedActions<typeof ren
         return this;
     }
 
+    pasteMonthlyRentByRowNumber(value: string | number, rowNumber = 0): InPlaceRentRollActions {
+        const textToBe = typeof value === "string" ? value : `$${numberWithCommas(value.toFixed(2))}`;
+        rentRollPage.monthlyRentCells.eq(rowNumber).dblclick().invoke("val", value).should("have.text", textToBe);
+        return this;
+    }
+
     enterMonthlyRents(values: number[]): InPlaceRentRollActions {
         values.forEach((value, index) => {
             this.enterMonthlyRentByRowNumber(value, index);
