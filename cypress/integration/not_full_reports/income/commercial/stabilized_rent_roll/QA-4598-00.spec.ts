@@ -1,5 +1,4 @@
 import { numberWithCommas } from "../../../../../../utils/numbers.utils";
-import { normalizeText } from "../../../../../../utils/string.utils";
 import { Income, Property, ReviewExport } from "../../../../../actions";
 import { _NavigationSection } from "../../../../../actions/base";
 import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
@@ -9,14 +8,12 @@ describe(`Verify the suggested text dropdown in the new narrative component adde
   option in the Generated Commentary on the Stabilized Rent Roll page.`, 
     { tags: [ "@income", "@commercial", "@stabilized_rent_roll", "@check_export" ] }, () => {
 
+    const url = `${Cypress.config().baseUrl}`;
+
     it("As Is", () => {
         cy.stepInfo(`Preconditions: The mixed report is created and several commercial units are added.`);
         createReport(testData.reportCreationDataAsIs);
 
-        cy.intercept({
-            method: 'PATCH',
-            url: '/report/*'
-        }).as("reportTest");
 
         _NavigationSection.navigateToPropertySummary();
         Property._Summary.enterNumberOfCommercialUnits(testData.numberOfCommercialUnits)
@@ -34,16 +31,11 @@ describe(`Verify the suggested text dropdown in the new narrative component adde
         cy.stepInfo("3. Enter the “=“ and select the an option. Verify each option.");
         testData.asIschips.forEach((chip) => {
             Income._CommercialManager.StabilizedRentRoll.editDiscussionTextArea(`=${chip.typeSuggestValue}`, false)
-            .clickNarrativeSuggestions(chip.typeSuggestValue)
+            .clickNarrativeSuggestions(chip.suggestionName)
             .verifyCommentaryContainsText(chip.verifySuggest);
         });
         Income._CommercialManager.StabilizedRentRoll.clickSaveDiscussionButton()
             .verifyProgressBarNotExist();
-        
-        cy.wait('@reportTest').then( ({ response }) => {
-            expect(response.statusCode).equal(200);
-            cy.log("Waiting for report to properly save");
-        });
 
         _NavigationSection.openReviewAndExport();
         ReviewExport.generateDocxReport().waitForReportGenerated()
@@ -52,6 +44,7 @@ describe(`Verify the suggested text dropdown in the new narrative component adde
     });
 
     it("Check export", () => {
+        Cypress.config().baseUrl = null;
         cy.task("getFilePath", { _reportName: testData.reportCreationDataAsIs.reportNumber, _docx_html: "html" }).then(file => {
             cy.log(<string>file);
             cy.stepInfo("3. Verify the linked chips on export");
@@ -64,6 +57,7 @@ describe(`Verify the suggested text dropdown in the new narrative component adde
     });
 
     it("As Stabilized", () => {
+        Cypress.config().baseUrl = url;
         cy.stepInfo(`Preconditions: The mixed report is created and several commercial units are added.`);
         createReport(testData.reportCreationDataAsStablized);
 
@@ -81,9 +75,9 @@ describe(`Verify the suggested text dropdown in the new narrative component adde
         Income._CommercialManager.StabilizedRentRoll.clickEditDiscussionButton();
 
         cy.stepInfo("3. Enter the “=“ and select the an option. Verify each option.");
-        testData.asStabilizedChips.forEach((chip: { typeSuggestValue: string; verifySuggest: string | number; }) => {
+        testData.asStabilizedChips.forEach((chip) => {
             Income._CommercialManager.StabilizedRentRoll.editDiscussionTextArea(`=${chip.typeSuggestValue}`, false)
-            .clickNarrativeSuggestions(chip.typeSuggestValue)
+            .clickNarrativeSuggestions(chip.suggestionName)
             .verifyCommentaryContainsText(chip.verifySuggest);
         });
         Income._CommercialManager.StabilizedRentRoll.clickSaveDiscussionButton()
@@ -96,6 +90,7 @@ describe(`Verify the suggested text dropdown in the new narrative component adde
     });
 
     it("Check export", () => {
+        Cypress.config().baseUrl = null;
         cy.task("getFilePath", { _reportName: testData.reportCreationDataAsIs.reportNumber, _docx_html: "html" }).then(file => {
             cy.log(<string>file);
             cy.stepInfo("3. Verify the linked chips on export");
@@ -107,7 +102,8 @@ describe(`Verify the suggested text dropdown in the new narrative component adde
         }); 
     });
 
-    it.only("As Completed", () => {
+    it("As Completed", () => {
+        Cypress.config().baseUrl = url;
         cy.stepInfo(`Preconditions: The mixed report is created and several commercial units are added.`);
         createReport(testData.reportCreationDataAsComplete);
 
@@ -127,9 +123,9 @@ describe(`Verify the suggested text dropdown in the new narrative component adde
         Income._CommercialManager.StabilizedRentRoll.clickEditDiscussionButton();
 
         cy.stepInfo("3. Enter the “=“ and select the an option. Verify each option.");
-        testData.asCompletedChips.forEach((chip: { typeSuggestValue: string; verifySuggest: string | number; }) => {
+        testData.asCompletedChips.forEach((chip) => {
             Income._CommercialManager.StabilizedRentRoll.editDiscussionTextArea(`=${chip.typeSuggestValue}`, false)
-            .clickNarrativeSuggestions(chip.typeSuggestValue)
+            .clickNarrativeSuggestions(chip.suggestionName)
             .verifyCommentaryContainsText(chip.verifySuggest);
         });
         Income._CommercialManager.StabilizedRentRoll.clickSaveDiscussionButton()
@@ -141,13 +137,14 @@ describe(`Verify the suggested text dropdown in the new narrative component adde
         deleteReport(testData.reportCreationDataAsComplete.reportNumber);
     });
 
-    it.only("Check export", () => {
+    it("Check export", () => {
+        Cypress.config().baseUrl = null;
         cy.task("getFilePath", { _reportName: testData.reportCreationDataAsIs.reportNumber, _docx_html: "html" }).then(file => {
             cy.log(<string>file);
             cy.stepInfo("3. Verify the linked chips on export");
             cy.visit(<string>file);
             testData.asCompletedChips.forEach(chip => {
-                let expectedText = typeof chip.verifyExport ===  "number" ? `${numberWithCommas(chip.verifyExport)}`: normalizeText(chip.verifyExport);
+                let expectedText = typeof chip.verifyExport ===  "number" ? `${numberWithCommas(chip.verifyExport)}`: chip.verifyExport;
                 cy.contains("Commercial Stabilized Rent Roll").next().scrollIntoView().should("include.text", expectedText);
             });
         }); 

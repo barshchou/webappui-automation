@@ -55,7 +55,7 @@ const _baseChip = () => {
         }, 
         {
             suggestionName: 'Street Address',
-            typeSuggestValue: 'Stree',
+            typeSuggestValue: 'Street',
             verifySuggest: '462 1st Avenue',
             verifyExport: '462 1st Avenue'
         },
@@ -90,39 +90,39 @@ const _baseChipsAsCompleted = () => {
     return [
         {
             suggestionName: 'Current Residential Unit Count',
-            typeSuggestValue: 'Current Residential',
+            typeSuggestValue: 'Residential',
             verifySuggest: _numberOfCommercialUnits,
             verifyExport: _numberOfCommercialUnits
         },
         {
             suggestionName: 'Current Commercial Unit Count',
-            typeSuggestValue: 'Current Commercial',
+            typeSuggestValue: 'Commercial',
             verifySuggest: _numberOfResidentialUnits,
             verifyExport: _numberOfResidentialUnits
         },
         {
             suggestionName: 'Current Condition',
-            typeSuggestValue: 'Current Condition',
-            verifySuggest: 'condition',
-            verifyExport: 'condition'
+            typeSuggestValue: 'Condition',
+            verifySuggest: 'in  condition',
+            verifyExport: 'in  condition'
         },
         {
             suggestionName: 'As Complete Residential Unit Count',
-            typeSuggestValue: 'As Complete Residential',
+            typeSuggestValue: 'Residential',
             verifySuggest: _currentNumberOfResidentialUnits,
             verifyExport: _currentNumberOfResidentialUnits
         },
         {
             suggestionName: 'As Complete Commercial Unit Count',
-            typeSuggestValue: 'As Complete Commercial',
+            typeSuggestValue: 'Commercial',
             verifySuggest: _currentNumberOfCommercialUnits,
             verifyExport: _currentNumberOfCommercialUnits
         },
         {
             suggestionName: 'As Stabilized Condition',
-            typeSuggestValue: 'As Stabilized',
-            verifySuggest: 'in condition',
-            verifyExport: 'in condition'
+            typeSuggestValue: 'Conditio',
+            verifySuggest: 'in  condition',
+            verifyExport: 'condition'
         }
     ];
 };
