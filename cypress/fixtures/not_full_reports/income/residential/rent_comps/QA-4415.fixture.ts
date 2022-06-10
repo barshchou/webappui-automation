@@ -1,11 +1,14 @@
 import { BoweryReports } from "../../../../../types";
 import ReportDataCreator from "../../../../data_creator/reportData.creator";
 
+const _unitType: BoweryReports.UnitType = "typical";
+const _sourceOfInfo: BoweryReports.SourceOfInformation = "bowery subject";
+const _amenities: BoweryReports.Amenities = "balcony";
 
 const _filters: BoweryReports.RentCompsFilter[] = [
     {
         name: "Unit Type",
-        value: "typical" as BoweryReports.UnitType
+        value: _unitType
     },
     {
         name: "Bedrooms",
@@ -13,11 +16,11 @@ const _filters: BoweryReports.RentCompsFilter[] = [
     },
     {
         name: "Source of Information",
-        value: "bowery subject" as BoweryReports.SourceOfInformation
+        value: _sourceOfInfo
     },
     {
         name: "Amenities",
-        value: "balcony" as BoweryReports.Amenities
+        value: _amenities
     }
 ];
 
@@ -50,10 +53,6 @@ const _dateFilters: BoweryReports.RentCompsFilter[] = [
         value: "12-01-2022"
     }
 ];
-
-const _unitType: BoweryReports.UnitType = "typical";
-const _sourceOfInfo: BoweryReports.SourceOfInformation = "bowery subject";
-const _amenities: BoweryReports.Amenities = "balcony";
 
 export default {
     reportCreationData: ReportDataCreator.getReportData("4415"),
