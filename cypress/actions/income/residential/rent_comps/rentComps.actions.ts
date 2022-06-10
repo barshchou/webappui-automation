@@ -597,17 +597,17 @@ class RentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
         return this;
     }
 
-    changeStateOfFilter(name: string, value: string | number, isToCheck = true): RentCompsActions {
-        rentCompsPage.getFilterArrowButton(name).click();
-        this.changeStateOfCheckboxByQaAttr(value, isToCheck);
-        rentCompsPage.getFilterArrowButton(name).click();
+    changeStateOfFilter(filterName: string, filterValue: string | number, isToCheck = true): RentCompsActions {
+        rentCompsPage.getFilterArrowButton(filterName).click();
+        this.changeStateOfCheckboxByQaAttr(filterValue, isToCheck);
+        rentCompsPage.getFilterArrowButton(filterName).click();
         return this;
     }
 
-    verifyFilterValue(name: string, value: string | number, isChecked = true): RentCompsActions {
-        rentCompsPage.getFilterArrowButton(name).click();
-        this.verifyCheckboxByQaAttr(value, isChecked);
-        rentCompsPage.getFilterArrowButton(name).click();
+    verifyFilterValue(filterName: string, filterValue: string | number, isChecked = true): RentCompsActions {
+        rentCompsPage.getFilterArrowButton(filterName).click();
+        this.verifyCheckboxByQaAttr(filterValue, isChecked);
+        rentCompsPage.getFilterArrowButton(filterName).click();
         return this;
     }
 
@@ -621,8 +621,8 @@ class RentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
         return this;
     }
 
-    verifyRemovedBuildingCompsTableHeader(name: string): RentCompsActions {
-        rentCompsPage.getRemovedBuildingCompsTableHeader(name).should("have.text", name);
+    verifyRemovedBuildingCompsTableHeader(headerName: string): RentCompsActions {
+        rentCompsPage.getRemovedBuildingCompsTableHeader(headerName).should("have.text", name);
         return this;
     }
 
