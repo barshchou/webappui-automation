@@ -339,10 +339,9 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
         return this;
     }
 
-
     totalSumForecastPerUnit(GBA?: number, resUnits?: number, rooms?: number): ExpenseForecastActions {
         expenseForecastPage.allForecastsInputs.then(inputs => {
-            let sumPerSF = 0;
+            let sumPerUnit = 0;
             for (let i = 0; i < inputs.length; i++) {
                 cy.wrap(inputs[i]).parents('[data-qa$=-forecast-item]').then(card => {
                     if (card.find('[label="Include Expense on Pro Forma"]').length > 0) {
@@ -355,19 +354,19 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
                                             let expenseBasis = basisValue;
                                             let inputValue = getNumberFromDollarNumberWithCommas(inputs[i].getAttribute("value"));
                                             if (expenseBasis === "sf") {
-                                                sumPerSF += inputValue;
-                                            } else if (expenseBasis === "unit") {
-                                                let inputValuePerSF = (inputValue * resUnits) / GBA;
-                                                sumPerSF += inputValuePerSF;
+                                                let inputValuePerUnit = (inputValue * GBA) / resUnits;
+                                                sumPerUnit += inputValuePerUnit;
+                                            } else if (expenseBasis === "unit") {                    
+                                                sumPerUnit += inputValue;
                                             } else {
-                                                let inputValuePerSF = (inputValue * rooms) / GBA;
-                                                sumPerSF += inputValuePerSF;
+                                                let inputValuePerUnit = (inputValue * rooms) / resUnits;
+                                                sumPerUnit += inputValuePerUnit;
                                             }
-                                            cy.wrap(sumPerSF).as('summaPerSF');
+                                            cy.wrap(sumPerUnit).as('summaPerUnit');
                                         });
                                 } else {
-                                    sumPerSF += 0;
-                                    cy.wrap(sumPerSF).as('summaPerSF');
+                                    sumPerUnit += 0;
+                                    cy.wrap(sumPerUnit).as('summaPerUnit');
                                 }
                             });
                     } else {
@@ -376,15 +375,15 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
                                 let expenseBasis = basisValue;
                                 let inputValue = getNumberFromDollarNumberWithCommas(inputs[i].getAttribute("value"));
                                 if (expenseBasis === "sf") {
-                                    sumPerSF += inputValue;
-                                } else if (expenseBasis === "unit") {
-                                    let inputValuePerSF = (inputValue * resUnits) / GBA;
-                                    sumPerSF += inputValuePerSF;
+                                    let inputValuePerUnit = (inputValue * GBA) / resUnits;
+                                    sumPerUnit += inputValuePerUnit;
+                                } else if (expenseBasis === "unit") {                    
+                                    sumPerUnit += inputValue;
                                 } else {
-                                    let inputValuePerSF = (inputValue * rooms) / GBA;
-                                    sumPerSF += inputValuePerSF;
+                                    let inputValuePerUnit = (inputValue * rooms) / resUnits;
+                                    sumPerUnit += inputValuePerUnit;
                                 }
-                                cy.wrap(sumPerSF).as('summaPerSF');
+                                cy.wrap(sumPerUnit).as('summaPerUnit');
                             });
                     }
                 });
@@ -395,7 +394,7 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
 
     verifyTotalForecastPerUnit(GBA?, resUnits?, rooms?): ExpenseForecastActions {
     this.totalSumForecastPerUnit(GBA, resUnits, rooms);
-    cy.get('@summaPerSF').then(val => {
+    cy.get('@summaPerUnit').then(val => {
             const textToBe = `Appraiser's Forecast: $${numberWithCommas(Number(val).toFixed(2))}`;
             cy.log(textToBe);
             expenseForecastPage.appraisersTotalForecast.should("have.text", textToBe);

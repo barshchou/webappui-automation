@@ -58,6 +58,14 @@ describe(`[QA-5011] [Income>Expense forecast] “Include Expense on Pro Forma”
                      );
 
 
+
+                     Income._ExpenseForecastActions.chooseForecastItemBasis(element);
+                     
+                     Income._ExpenseForecastActions.verifyTotalForecastPerUnit(
+                        testData.buildingDescription.grossArea, 
+                        testData.numberOfResidentialUnits, 
+                        testData.rentRollresUnitFixture.rooms
+                        );
            
         //     cy.stepInfo(`3. Verify if “Include Expense on Pro Forma” is unselected -> this  expense category 
         //     is NOT displayed in the Pro Forma page> Operating Expenses section and
