@@ -650,7 +650,7 @@ class RentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
     }
 
     clickShowDetailsButtonByIndex(index = 0): RentCompsActions {
-        rentCompsPage.getRemovedBuildingCompsTableButton("SHOW DETAILS").eq(index).click();
+        rentCompsPage.getShowDetailsButtonByIndex(index).click();
         return this;
     }
 
