@@ -25,6 +25,7 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         }).as(reportAlias);
         cy.get('[id="review-and-export"]').click();
         this.clickYesIfExist();
+        this.verifyProgressBarNotExist();
         if (isNewReport) cy.wait(`@${reportAlias}`, { timeout:20000 });
         return this;
     }

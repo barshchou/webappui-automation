@@ -8,9 +8,14 @@ describe(`Verify the suggested text dropdown in the new narrative component adde
   option in the Generated Commentary on the Stabilized Rent Roll page.`, 
     { tags: [ "@income", "@commercial", "@stabilized_rent_roll", "@check_export" ] }, () => {
 
-    it.only("As Is", () => {
+    it("As Is", () => {
         cy.stepInfo(`Preconditions: The mixed report is created and several commercial units are added.`);
         createReport(testData.reportCreationDataAsIs);
+
+        cy.intercept({
+            method: 'PATCH',
+            url: '/report/*'
+        }).as("reportTest");
 
         _NavigationSection.navigateToPropertySummary();
         Property._Summary.enterNumberOfCommercialUnits(testData.numberOfCommercialUnits)
@@ -31,17 +36,18 @@ describe(`Verify the suggested text dropdown in the new narrative component adde
             .clickNarrativeSuggestions(chip.typeSuggestValue)
             .verifyCommentaryContainsText(chip.verifySuggest);
         });
-        Income._CommercialManager.StabilizedRentRoll.clickSaveDiscussionButton();
-        Income._CommercialManager.StabilizedRentRoll.clickSaveButton()
-            .verifyProgressBarNotExist()
-            .clickEditDiscussionButton()
-            .clickSaveDiscussionButton();
+        Income._CommercialManager.StabilizedRentRoll.clickSaveDiscussionButton()
+            .verifyProgressBarNotExist();
         
+        cy.wait('@reportTest').then( ({ response }) => {
+            expect(response.statusCode).equal(200);
+            cy.log("Waiting for report to properly save");
+        });
 
         _NavigationSection.openReviewAndExport();
         ReviewExport.generateDocxReport().waitForReportGenerated()
             .downloadAndConvertDocxReport(testData.reportCreationDataAsIs.reportNumber);
-        //deleteReport(testData.reportCreationDataAsIs.reportNumber);
+        deleteReport(testData.reportCreationDataAsIs.reportNumber);
     });
 
     it("Check export", () => {
@@ -79,12 +85,8 @@ describe(`Verify the suggested text dropdown in the new narrative component adde
             .clickNarrativeSuggestions(chip.typeSuggestValue)
             .verifyCommentaryContainsText(chip.verifySuggest);
         });
-        Income._CommercialManager.StabilizedRentRoll.Page.formSaveBtn().click();
-        Income._CommercialManager.StabilizedRentRoll.clickSaveButton()
+        Income._CommercialManager.StabilizedRentRoll.clickSaveDiscussionButton()
             .verifyProgressBarNotExist();
-        Income._CommercialManager.StabilizedRentRoll.verifyModifiedLabelExist();
-        _NavigationSection.clickCommercialCompGroups()
-            .clickYesIfExist();
 
         _NavigationSection.openReviewAndExport();
         ReviewExport.generateDocxReport().waitForReportGenerated()
@@ -104,7 +106,7 @@ describe(`Verify the suggested text dropdown in the new narrative component adde
         }); 
     });
 
-    it("As Completed", () => {
+    it.only("As Completed", () => {
         cy.stepInfo(`Preconditions: The mixed report is created and several commercial units are added.`);
         createReport(testData.reportCreationDataAsComplete);
 
@@ -129,12 +131,8 @@ describe(`Verify the suggested text dropdown in the new narrative component adde
             .clickNarrativeSuggestions(chip.typeSuggestValue)
             .verifyCommentaryContainsText(chip.verifySuggest);
         });
-        Income._CommercialManager.StabilizedRentRoll.Page.formSaveBtn().click();
-        Income._CommercialManager.StabilizedRentRoll.clickSaveButton()
+        Income._CommercialManager.StabilizedRentRoll.clickSaveDiscussionButton()
             .verifyProgressBarNotExist();
-        Income._CommercialManager.StabilizedRentRoll.verifyModifiedLabelExist();
-        _NavigationSection.clickCommercialCompGroups()
-            .clickYesIfExist();
 
         _NavigationSection.openReviewAndExport();
         ReviewExport.generateDocxReport().waitForReportGenerated()
@@ -142,7 +140,7 @@ describe(`Verify the suggested text dropdown in the new narrative component adde
         deleteReport(testData.reportCreationDataAsComplete.reportNumber);
     });
 
-    it("Check export", () => {
+    it.only("Check export", () => {
         cy.task("getFilePath", { _reportName: testData.reportCreationDataAsIs.reportNumber, _docx_html: "html" }).then(file => {
             cy.log(<string>file);
             cy.stepInfo("3. Verify the linked chips on export");
