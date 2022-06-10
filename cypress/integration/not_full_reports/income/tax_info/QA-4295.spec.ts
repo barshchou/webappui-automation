@@ -13,10 +13,10 @@ describe("[Assessed Value & RE Taxes] Verify the 'Tax Calculation Discussion' ge
         _NavigationSection.navigateToTaxInfo();
 
         cy.stepInfo("2. Verify  Tax Calculation discussion title and commentary is diplayed");
-        _TaxInfo.verifyTaxSummaryDiscussionTitle(testData.title).verifyTaxSummaryCommentary(testData.commentary);
+        _TaxInfo.verifyTaxCalculationDiscussionTitle(testData.title).verifyTaxCalculationCommentary(testData.commentary);
 
         cy.stepInfo("3. Verify Tax Calculation discussion's tooltip content");
-        _TaxInfo.verifyTaxSummaryTooltip(testData.tooltip);
+        _TaxInfo.verifyTaxCalculationTooltip(testData.tooltip);
 
         cy.stepInfo("4. Export the report");
         _NavigationSection.Actions.openReviewAndExport();

@@ -8,7 +8,7 @@
  * where we can have ForecastItem type.
  */
 
-namespace BoweryReports {
+export namespace BoweryReports {
     export type ReportFile = {
         name: string
         path: string
@@ -135,9 +135,44 @@ namespace BoweryReports {
     export type UnitsOfMeasure = "annually" | "monthly" | "per square foot per year" | "per square foot per month";
 
     export type UtilityExpenses = "brokenOut" | "combinedElectricityAndFuel" | "combinedAll";
+
+    export type CompGroupsColumns = "#" | "address" | "use" | "tenantName" | "dateSigned" | "squareFeet" | "rentPerSf"
+
+    export type leaseDate = {
+        name: LeaseDateName,
+        value: string
+    }
+
+    export type CurrentTaxInfoData = {
+        liabilityBasis?: string,
+        landValue: number,
+        buildingValue: number,
+        className?: string,
+        rateYear?: number,
+        rateValue?: number,
+        liabilityCommentary?: string
+    };
+
+    export type TaxCompData = {
+        address: string,
+        yearBuilt: number,
+        basis: number,
+        taxPerBasis: number,
+        sourceOfInfo: string,
+        taxYear: number
+    }
+
+    export type UnitType = "typical" | "duplex" | "triplex" | "simplex";
+    export type SourceOfInformation = "bowery subject" | "external database" | "other";
+    export type Amenities = "none" | "backyard" | "balcony" | "roof";
+
+    export type RentCompsFilter = {
+        name: string,
+        value: string | number 
+    };
 }
 
-namespace Utils {
+export namespace Utils {
     type _GraphQLRequest = {
         operationName: string,
         query: string,
@@ -148,7 +183,7 @@ namespace Utils {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-namespace BoweryAutomation {
+export namespace BoweryAutomation {
     /**
      * Base data for report setup
      */

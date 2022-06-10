@@ -4,7 +4,6 @@
 
 
 import { Options } from "cypress-image-snapshot";
-import { getEnvUrl } from "../../../utils/env.utils";
 
 export default class BaseActions {
 
@@ -14,6 +13,7 @@ export default class BaseActions {
 
     clickYesButton() {
         cy.get("*[name='form-confirm-submit-btn']").click();
+        this.verifyProgressBarNotExist();
         return this;
     }
 
@@ -23,7 +23,7 @@ export default class BaseActions {
     }
 
     returnToHomePage() {
-        cy.visit(`${getEnvUrl()}/reports`);
+        cy.visit(`/reports`);
     }
 
     goBackWithSave() {
