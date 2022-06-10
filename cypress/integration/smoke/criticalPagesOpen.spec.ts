@@ -6,6 +6,7 @@ import { _NavigationSection } from "../../actions/base";
 import { Income, Sales } from "../../actions";
 import Enums from "../../enums/enums";
 import { _IncomeTitles, _SalesTitles } from "../../enums/pages_titles";
+import { BoweryAutomation } from "../../types";
 
 const reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("criticalPages", {
     incomeValue: Enums.INCOME_TYPE.BOTH,
