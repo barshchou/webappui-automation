@@ -1,4 +1,6 @@
+import { BoweryReports } from "../../../../../types";
 import ReportDataCreator from "../../../../data_creator/reportData.creator";
+
 
 const _filters: BoweryReports.RentCompsFilter[] = [
     {
@@ -49,12 +51,16 @@ const _dateFilters: BoweryReports.RentCompsFilter[] = [
     }
 ];
 
+const _unitType: BoweryReports.UnitType = "typical";
+const _sourceOfInfo: BoweryReports.SourceOfInformation = "bowery subject";
+const _amenities: BoweryReports.Amenities = "balcony";
+
 export default {
     reportCreationData: ReportDataCreator.getReportData("4415"),
-    unitType: "typical" as BoweryReports.UnitType,
+    unitType: _unitType,
     filters: _filters,
     numericFilters: _numericFilters,
     dateFilters: _dateFilters,
-    sourceOfInfo: "bowery subject" as BoweryReports.SourceOfInformation,
-    amenities: "balcony" as BoweryReports.Amenities
+    sourceOfInfo: _sourceOfInfo,
+    amenities: _amenities
 };
