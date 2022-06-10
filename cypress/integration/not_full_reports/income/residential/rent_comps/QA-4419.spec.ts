@@ -18,16 +18,16 @@ describe(`Filter values after page refreshing (some filters set)
         testData.filters.forEach((filter) => {
             Income._Residential
                 .RentComps.BaseActions
-                .checkFilterValue(filter.name, filter.value as string);
+                .changeStateOfFilter(filter.name, filter.value);
         });
         testData.numericFilters.forEach((filter) => {
             Income._Residential
                 .RentComps.BaseActions
-                .enterValueToInput(filter.name, filter.value as string);
+                .enterValueToInput(filter.name, filter.value);
         });
         Income._Residential.RentComps.BaseActions
                 .enterDateInput(
-                    testData.dateFilter.value as string,
+                    testData.dateFilter.value,
                     testData.dateFilter.name
                 );
 
@@ -43,7 +43,7 @@ describe(`Filter values after page refreshing (some filters set)
         testData.filters.forEach((filter) => {
             Income._Residential
                 .RentComps.BaseActions
-                .verifyFilterValue(filter.name, filter.value as string, true);
+                .verifyFilterValue(filter.name, filter.value, true);
         });
         testData.numericFilters.forEach((filter) => {
             Income._Residential
@@ -54,7 +54,7 @@ describe(`Filter values after page refreshing (some filters set)
                 .RentComps.BaseActions
                 .verifyEnteredDate(
                     testData.dateFilter.name,
-                    testData.dateFilter.value as string
+                    testData.dateFilter.value
                 );
 
         deleteReport(testData.reportCreationData.reportNumber);

@@ -79,9 +79,9 @@ class RentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
         return this;
     }
 
-    checkCheckboxByQaAttr(attribute: string | number): RentCompsActions {
+    changeStateOfCheckboxByQaAttr(attribute: string | number, isToCheck = true): RentCompsActions {
         rentCompsPage.getCheckboxByDataQaAttr(attribute)
-            .should("have.value", "false").check({ force: true }).should("have.value", "true");
+            .should("have.value", "false").check({ force: isToCheck }).should("have.value", `${isToCheck}`);
         return this;
     }
 
@@ -91,22 +91,16 @@ class RentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
         return this;
     }
 
-    uncheckCheckboxByQaAttr(attribute: string | number): RentCompsActions {
-        rentCompsPage.getCheckboxByDataQaAttr(attribute)
-            .should("have.value", "true").uncheck({ force: true }).should("have.value", "false");
-        return this;
-    }
-
     checkListOfCheckboxesByQa(attributes: Array<string | number>): RentCompsActions {
         attributes.forEach(attr => {
-            this.checkCheckboxByQaAttr(attr);
+            this.changeStateOfCheckboxByQaAttr(attr);
         });
         return this;
     }
 
     uncheckListOfCheckboxesByQa(attributes: Array<string | number>): RentCompsActions {
         attributes.forEach(attr => {
-            this.uncheckCheckboxByQaAttr(attr);
+            this.changeStateOfCheckboxByQaAttr(attr, false);
         });
         return this;
     }
@@ -603,16 +597,9 @@ class RentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
         return this;
     }
 
-    checkFilterValue(name: string, value: string | number): RentCompsActions {
+    changeStateOfFilter(name: string, value: string | number, isToCheck = true): RentCompsActions {
         rentCompsPage.getFilterArrowButton(name).click();
-        this.checkCheckboxByQaAttr(value);
-        rentCompsPage.getFilterArrowButton(name).click();
-        return this;
-    }
-
-    unCheckFilterValue(name: string, value: string | number): RentCompsActions {
-        rentCompsPage.getFilterArrowButton(name).click();
-        this.uncheckCheckboxByQaAttr(value);
+        this.changeStateOfCheckboxByQaAttr(value, isToCheck);
         rentCompsPage.getFilterArrowButton(name).click();
         return this;
     }

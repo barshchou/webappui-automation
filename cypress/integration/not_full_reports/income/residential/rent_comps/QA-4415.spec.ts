@@ -17,7 +17,7 @@ describe(`Saved filter values after page refreshing (all filters removed)`,
         testData.filters.forEach((filter) => {
             Income._Residential
                 .RentComps.BaseActions
-                .checkFilterValue(filter.name, filter.value);
+                .changeStateOfFilter(filter.name, filter.value);
         });
         testData.numericFilters.forEach((filter) => {
             Income._Residential
@@ -55,7 +55,7 @@ describe(`Saved filter values after page refreshing (all filters removed)`,
         testData.filters.forEach((filter) => {
             Income._Residential
                 .RentComps.BaseActions
-                .unCheckFilterValue(filter.name, filter.value);
+                .changeStateOfFilter(filter.name, filter.value, false);
         });
         testData.numericFilters.forEach((filter) => {
             Income._Residential
