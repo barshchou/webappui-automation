@@ -1,3 +1,4 @@
+import { BoweryReports } from "../../types";
 import BasePage from "../base/base.page";
 
 class ExpenseForecastPage extends BasePage {

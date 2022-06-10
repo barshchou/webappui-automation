@@ -1,5 +1,6 @@
 import ReportDataCreator from "../../../../data_creator/reportData.creator";
 import Enums from "../../../../../enums/enums";
+import { BoweryReports } from "../../../../../types";
 
 const groupNameFixture: BoweryReports.CommercialUnitsGroups = "Use";
 const useRadiosFixture: BoweryReports.CommercialUnitsUseValues[] = [ "retail", "office" ];
@@ -46,7 +47,7 @@ export default {
         stabilizedRRPanel_severalUnits:"StabilizedRentRoll_Panel_Several_Units",
         stabilizedRRPanel_severalUnits_compGroups:"stabilizedRRPanel_severalUnits_compGroups"
     },
-    reportCreationData: ReportDataCreator.getReportData("4576", { incomeValue: Enums.INCOME_TYPE.BOTH }),
+    reportCreationData: ReportDataCreator.getReportData("4576_78", { incomeValue: Enums.INCOME_TYPE.BOTH }),
     numberOfCommercialUnits: 2,
     listOfUnitsSF: [ 1000, 2000 ],
     groupName: groupNameFixture,
