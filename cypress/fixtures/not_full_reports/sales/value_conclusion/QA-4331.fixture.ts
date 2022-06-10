@@ -1,4 +1,5 @@
 import Enums from "../../../../enums/enums";
+import { BoweryAutomation } from "../../../../types";
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 
 const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("4331", {
