@@ -1,7 +1,6 @@
 import ReportDataCreator from "../../fixtures/data_creator/reportData.creator";
 import { createReport } from "../../actions/base/baseTest.actions";
 import { getReportId, setReportId } from "../../../utils/intercept.utils";
-import { getEnvUrl } from "../../../utils/env.utils";
 import { _NavigationSection } from "../../actions/base";
 import { Income, Sales } from "../../actions";
 import Enums from "../../enums/enums";
@@ -25,7 +24,7 @@ describe("Verify that critical pages are opening", { tags: [ "@smoke" ] }, () =>
         cy.restoreLocalStorage();
         setReportId();
         getReportId().then(id => {
-            cy.visit(`${getEnvUrl()}/report/${id}/report-information`);
+            cy.visit(`${Cypress.config().baseUrl}/report/${id}/report-information`);
         });
     });
 
