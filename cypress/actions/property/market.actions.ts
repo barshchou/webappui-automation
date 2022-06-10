@@ -5,6 +5,9 @@ import { BoweryReports } from "../../types";
 import { isStringContainSubstring } from "../../../utils/string.utils";
 
 class MarketActions extends BaseActions{
+    readonly errorRetrieveFileMessage = "Cannot retrieve file. Contact Research team.";
+
+    readonly finalDocumentNamePart = "FINAL";
 
     verifyExposureTimeMin(monthsToBe: number): MarketActions {
         marketPage.exposureTimeMin.should("have.value", monthsToBe);
@@ -77,18 +80,21 @@ class MarketActions extends BaseActions{
     }
 
     fillMarketResearch(marketResearch: BoweryReports.MarketResearch, marketAnalysisUse: BoweryReports.MarketAnalysisUses,
-                       isEnterState = true): MarketActions {
+                       isEnterState = true, isEnterQuarter = false): MarketActions {
         this.enterNeighborhood(marketResearch.neighborhoodValue);
-        if (isEnterState) {
-            this.enterMarketState(marketResearch.state);
-        }
+        if (isEnterState) this.enterMarketState(marketResearch.state);
         this.verifyMarketState(marketResearch.state)
             .enterArea(marketResearch.marketArea)
             .verifyNeighborhoodYear(getYearFromDate(marketResearch.marketDate))
             .enterMarket(marketResearch.macroMarket, marketAnalysisUse)
-            .enterSubmarket(marketResearch.submarket, marketAnalysisUse)
-            .verifyMarketQuarter(getQuarter(marketResearch.dateOfValuation))
-            .verifyMarketYear(getYearFromDate(marketResearch.dateOfValuation));
+            .enterSubmarket(marketResearch.submarket, marketAnalysisUse);
+        if (isEnterQuarter)  {
+            this.enterMarketQuarter(marketResearch.quarter)
+                .verifyMarketQuarter(marketResearch.quarter);
+        } else {
+            this.verifyMarketQuarter(getQuarter(marketResearch.dateOfValuation));
+        }
+        this.verifyMarketYear(getYearFromDate(marketResearch.dateOfValuation));
         return this;
     }
 
@@ -164,31 +170,36 @@ class MarketActions extends BaseActions{
         return this;
     }
 
-    verifyAreaEconomicAnalysisHasFile(): MarketActions {
+    verifyAreaEconomicAnalysisHasFile(textToContain = this.finalDocumentNamePart): MarketActions {
         marketPage.areaEconomicAnalysisFile.invoke("attr", "value").then(fileName => {
-            expect(isStringContainSubstring(fileName, "FINAL")).to.be.true;
+            expect(isStringContainSubstring(fileName, textToContain)).to.be.true;
         });
         return this;
     }
 
-    verifyNeighborhoodDemographicHasFile(): MarketActions {
+    verifyNeighborhoodDemographicHasFile(textToContain = this.finalDocumentNamePart): MarketActions {
         marketPage.neighborhoodDemographicFile.invoke("attr", "value").then(fileName => {
-            expect(isStringContainSubstring(fileName, "FINAL")).to.be.true;
+            expect(isStringContainSubstring(fileName, textToContain)).to.be.true;
         });
         return this;
     }
 
-    verifyMarketByAnalysisUseHasFile(use: BoweryReports.MarketAnalysisUses): MarketActions {
+    verifyMarketByAnalysisUseHasFile(use: BoweryReports.MarketAnalysisUses, textToContain = this.finalDocumentNamePart): MarketActions {
         marketPage.getMarketFileByAnalysisUse(use).invoke("attr", "value").then(fileName => {
-            expect(isStringContainSubstring(fileName, "FINAL")).to.be.true;
+            expect(isStringContainSubstring(fileName, textToContain)).to.be.true;
         });
         return this;
     }
 
-    verifySubmarketByAnalysisUseHasFile(use: BoweryReports.MarketAnalysisUses): MarketActions {
+    verifySubmarketByAnalysisUseHasFile(use: BoweryReports.MarketAnalysisUses, textToContain = this.finalDocumentNamePart): MarketActions {
         marketPage.getSubmarketFileByAnalysisUse(use).invoke("attr", "value").then(fileName => {
-            expect(isStringContainSubstring(fileName, "FINAL")).to.be.true;
+            expect(isStringContainSubstring(fileName, textToContain)).to.be.true;
         });
+        return this;
+    }
+
+    verifyAreaEconomicAnalysisInputErrorRetrieving(): MarketActions {
+        marketPage.areaEconomicAnalysisContainer.contains(this.errorRetrieveFileMessage).should("exist");
         return this;
     }
 }

@@ -48,16 +48,16 @@ export const getYearFromDate = (date: string = getTodayDateString()): string => 
     return date.split("-")[2];
 };
 
-export const getQuarter = (dateString) => {
+export const getQuarter = (dateString, isPlusQuarter = false, numberOfQuartersToPlus = 2) => {
     const currentMonthNumber = Number(getMonthFromDate(dateString));
     if (currentMonthNumber >= 1 && currentMonthNumber < 4) {
-        return "Q4";
+        return isPlusQuarter ? numberOfQuartersToPlus === 1 ? "Q1" : "Q2" : "Q4";
     } else if (currentMonthNumber >= 4 && currentMonthNumber < 7) {
-        return "Q1";
+        return isPlusQuarter ? numberOfQuartersToPlus === 1 ? "Q2" : "Q3" : "Q1";
     } else if (currentMonthNumber >= 7 && currentMonthNumber < 10) {
-        return "Q2";
+        return isPlusQuarter ? numberOfQuartersToPlus === 1 ? "Q3" : "Q4" : "Q2";
     } else if (currentMonthNumber >= 10 && currentMonthNumber <= 12) {
-        return "Q3";
+        return isPlusQuarter ? numberOfQuartersToPlus === 1 ? "Q4" : "Q1" : "Q3";
     }
 };
 

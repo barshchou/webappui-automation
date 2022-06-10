@@ -48,7 +48,9 @@ class MarketPage extends BasePage{
 
     getMarketAnalysisUseCheckbox(useValue) {return cy.get(`[data-qa^='marketAnalysisUses.${useValue}-checkbox'] input`);}
 
-    get areaEconomicAnalysisFile() {return cy.get("[data-qa=file-selection-areaEconomicAnalysis-input] input");}
+    get areaEconomicAnalysisContainer() {return cy.get("[data-qa=file-selection-areaEconomicAnalysis-input]");}
+
+    get areaEconomicAnalysisFile() {return this.areaEconomicAnalysisContainer.find("input");}
 
     get neighborhoodDemographicFile() {return cy.get("[data-qa=file-selection-neighborhoodDemographicOverview-input] input");}
 }
