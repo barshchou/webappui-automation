@@ -31,13 +31,14 @@ describe("[QA-4053] [QA-4086] The Concluded Value Per Unit is calculated correct
             .verifyAsIsMarketAmount(totalValue)
             .verifyAsCompleteAmount(totalValue);
 
-        _NavigationSection.Actions.openReviewAndExport().closeSatisfactionSurvey();
+        _NavigationSection.Actions.openReviewAndExport();
         ReviewExport.generateDocxReport()
         .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
         deleteReport(testData.reportCreationData.reportNumber);
     });
     
     it("Check html report", () => {
+        Cypress.config().baseUrl = null;
         cy.stepInfo(`
         Verify the export of the report
         `);
