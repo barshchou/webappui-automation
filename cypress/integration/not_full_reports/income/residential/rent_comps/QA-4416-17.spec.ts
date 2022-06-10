@@ -4,7 +4,8 @@ import { Income } from "../../../../../actions";
 import testData from "../../../../../fixtures/not_full_reports/income/residential/rent_comps/QA-4416-17.fixture";
 import RentCompsPage from "../../../../../pages/income/residential/rent_comps/rentComps.page";
 
-describe(`[Income - Residential - Rent Comps]`,
+describe(`[Income - Residential - Rent Comps] Verify tables with the unit 
+        information and details are displayed on "Rent Comps" page`,
         { tags: [ "@income", "@residential", "@rent_comps" ] }, () => {
 
     before("Login, create report, prepare data", () => {
