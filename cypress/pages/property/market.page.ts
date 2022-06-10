@@ -1,4 +1,5 @@
 import BasePage from "../base/base.page";
+import { BoweryReports } from "../../types";
 
 class MarketPage extends BasePage{
     get exposureTimeMin() {return cy.get("*[name='exposureTime.min']");}
@@ -17,9 +18,13 @@ class MarketPage extends BasePage{
 
     get neighborhoodYear() {return cy.get("*[name=neighborhoodYear]");}
 
-    get multifamilyMarket() {return cy.get("[data-qa=multifamilyMarket-form-control] input");}
+    getMarketInputByAnalysisUse(marketAnalysisUse: BoweryReports.MarketAnalysisUses) {
+        return cy.get(`[data-qa=${marketAnalysisUse}Market-form-control] input`);
+    }
 
-    get multifamilySubmarket() {return cy.get("[data-qa=multifamilySubmarket-form-control] input");}
+    getSubmarketInputByAnalysisUse(marketAnalysisUse: BoweryReports.MarketAnalysisUses) {
+        return cy.get(`[data-qa=${marketAnalysisUse}Submarket-form-control] input`);
+    }
 
     get marketQuarter() {return cy.get("[data-qa=marketQuarter-form-control] input");}
 
@@ -27,15 +32,25 @@ class MarketPage extends BasePage{
 
     get pullDropboxButton() {return cy.xpath("//button[.='PULL FROM DROPBOX']");}
 
-    get multifamilySubmarketAnalysisFile() {return cy.get("[data-qa=file-selection-multifamilySubmarketAnalysis-input] input");}
+    getSubmarketFileByAnalysisUse(use: BoweryReports.MarketAnalysisUses) {
+        return cy.get(`[data-qa=file-selection-${use}SubmarketAnalysis-input] input`);
+    }
 
-    get pulledFileConfirmation() {return cy.contains("This file will appear after the Introduction.");}
+    getMarketFileByAnalysisUse(use: BoweryReports.MarketAnalysisUses) {
+        return cy.get(`[data-qa=file-selection-${use}MarketAnalysis-input] input`);
+    }
 
     get exposureTimeDescription() {return cy.xpath("//*[.='Exposure Time Description']//following::div[@data-slate-editor]");}
 
     get marketTimeDescription() {return cy.xpath("//*[.='Marketing Time Description']//following::div[@data-slate-editor]");}
 
     get includeMarketTimeCheckbox() {return cy.get("[data-qa^='includeMarketingTime']");}
+
+    getMarketAnalysisUseCheckbox(useValue) {return cy.get(`[data-qa^='marketAnalysisUses.${useValue}-checkbox'] input`);}
+
+    get areaEconomicAnalysisFile() {return cy.get("[data-qa=file-selection-areaEconomicAnalysis-input] input");}
+
+    get neighborhoodDemographicFile() {return cy.get("[data-qa=file-selection-neighborhoodDemographicOverview-input] input");}
 }
 
 export default new MarketPage();
