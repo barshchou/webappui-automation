@@ -4,12 +4,9 @@ import { _BaseTest } from "../../../../actions/base";
 import { Report, PreviewEdit } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { getReportId } from "../../../../../utils/intercept.utils";
+import { _normalize } from "../../../../../utils/string.utils";
 
 const { createReport, deleteReport } = _BaseTest;
-
-const _normalize = (textToNormalize: string): string => {
-    return textToNormalize.replaceAll('﻿', '').trim();
-};
 
 describe('Verify the "Property Rights Appraised" commentary on the Introduction page', 
     { tags:[ "@preview_edit", "@introduction" ] }, () => {

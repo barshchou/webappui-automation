@@ -32,7 +32,7 @@ describe("Potential Real Estate Tax Reimbursement",
         
         cy.stepInfo("3. Go to Income → Commercial → In-Place Rent Roll and fill in all necessary values to the table"); 
         _NavigationSection.clickCommercialReimbursementSummaryButton()
-        .clickYesButton();
+        .clickYesIfExist();
         
         cy.stepInfo("4. Go to Income → Reimbursement Summary and add Real Estate Taxes Reimbursement for commercial units"); 
         Income._CommercialManager.ReimbursementSummary.addNewCommercialReimbursement(
