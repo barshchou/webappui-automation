@@ -150,16 +150,15 @@ const customExpence: BoweryReports.ForecastItem = { // delete????
 
 
 
-
 const expenseForecastFixtureWithUnitArray = [
     expenseForecastInsuranceFixture("unit"),
     expenseForecastElectricityFixture("unit"),
-    expenseForecastFuelFixture("sf"),
+    expenseForecastFuelFixture("unit"),
     expenseForecastWaterAndSewerFixture("unit"),
     expenseForecastRepairsAndMaintenanceFixture("unit"), 
     expenseForecastPayrollAndBenefitsFixture("unit"),
     expenseForecastGeneralAndAdministrativeFixture("unit"),
-    expenseForecastLegalAndProfessionalFeesFixture("sf"),
+    expenseForecastLegalAndProfessionalFeesFixture("unit"),
     expenseForecastMiscellaneousFixture("unit"),
     expenseForecastManagementFixture("unit"),
     expenseForecastReservesFixture("unit")
@@ -221,5 +220,6 @@ export default {
     forecastPSFnotIncluded: _forecastPSFnotIncluded,
     forecastPerUnitnotIncluded: _forecastPerUnitnotIncluded,
     rentRollresUnitFixture: rentRollResidentialUnitFixture(),
-    perRoomAnalysis: "Include Per Room Analysis in Report"
+    perRoomAnalysis: "Include Per Room Analysis in Report",
+    
 };
