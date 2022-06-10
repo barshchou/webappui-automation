@@ -83,7 +83,7 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
     }
 
     /**
-     * ernst: WARN: this method needs to be refactored
+     * ernst: WARN this method needs to be refactored
      * we need to create workaround for shadow-dom elements, which dynamically rendered
      * during some action (scrolling the list, for example).
      * if you try to do this manually - you probably get the error `doc.createTreeWalker is not a function`
@@ -144,7 +144,7 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
      * Checks WebApp REST request /salesComps/eventIds/:report_id
      * which returns salesEventId which in its turn will be passed to DRM's GraphQL API
      */
-    checkSingleSalesCompsByEventId(): this{
+    checkSingleSalesCompsByEventId(): FindCompsActions{
         cy.wait(`@${Alias.salesComps_eventIds}`).then(({ response }) => {
             cy.get(`@${Alias.salesEventId}`).then(_salesEventId => {
                 // eslint-disable-next-line @typescript-eslint/no-explicit-any

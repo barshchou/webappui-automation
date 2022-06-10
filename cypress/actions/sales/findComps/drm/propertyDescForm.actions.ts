@@ -7,13 +7,13 @@ class PropertyDescriptionFormActions {
         this.Page = page;
     }
 
-    enterInternalNotes(value: string): this {
+    enterInternalNotes(value: string): PropertyDescriptionFormActions {
         this.Page.internalNotesTextArea.clear()
         .type(value, { force:true }).should("have.text", value);
         return this;
     }
 
-    enterAppraiserCommentary(value: string): this {
+    enterAppraiserCommentary(value: string): PropertyDescriptionFormActions {
         this.Page.appraiserCommentaryTextArea.click()
         .type(value, { force:true }).clear()
         .type(value, { force:true });
