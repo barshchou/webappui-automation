@@ -1,3 +1,4 @@
+import { normalizeText } from './../../../../utils/string.utils';
 import stabRentRollPage from "../../../pages/income/commercial/stabilizedRentRoll.page";
 import { BoweryReports } from "../../../types";
 import CommercialRentRollSharedComponent from "../../shared_components/commercialRentRoll.shared.actions";
@@ -54,7 +55,7 @@ class StabilizedRentRollActions extends CommercialRentRollSharedComponent<typeof
     
     verifyStabilizedCommercialIncomeDiscussion(textToBe: string): StabilizedRentRollActions {
         stabRentRollPage.stabilizedCommercialIncomeDiscussion.invoke('text').then(text => {
-            cy.wrap(this.normalizeText(text)).should('deep.equal', textToBe);
+            cy.wrap(normalizeText(text)).should('deep.equal', textToBe);
         });
         
         return this;
