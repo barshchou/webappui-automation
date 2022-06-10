@@ -1,4 +1,3 @@
-import { getEnvUrl } from "../../../utils/env.utils";
 import { Base, Sales } from "../../actions";
 import { salesInterceptions } from "../../actions/base/baseTest.actions";
 import { _SalesTitles } from "../../enums/pages_titles";
@@ -8,7 +7,7 @@ const reportNumber = "TestAutoReport-QA-generate-download";
 describe("Open any existing report and open any page", { tags: [ "@smoke" ] }, () => {
 
     it("Test body", () => {
-       cy.loginByApi(getEnvUrl());
+       cy.loginByApi(Cypress.config().baseUrl);
        salesInterceptions();
        Base._HomePage.clickAllReportsTab()
            .verifyProgressBarNotExist()

@@ -13,6 +13,15 @@ on:
           - custom
         required: true
         default: staging
+      url:
+        type: choice
+        description: Select the url explicitly
+        options:
+        - 'https://bowery-development.herokuapp.com'
+        - 'https://bowery-staging.herokuapp.com'
+        - 'https://app.boweryvaluation.com'
+        required: true
+        default: 'https://bowery-staging.herokuapp.com'
       customEnv:
         type: string
         description: Add custom environment url if needed

@@ -1,7 +1,9 @@
 {
     "inputs":{
         "config":"cypress.json",
-        "env":"dev",
+        "env":"staging",
+        "url":"https://bowery-staging.herokuapp.com",
+        "customEnv":"",
         "spec_file":"cypress/integration/not_full_reports/income/commercial/in_place_rent_roll/QA-4323.spec.ts"
     }
 }
