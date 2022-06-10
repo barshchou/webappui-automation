@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 /// <reference types="cypress" />
 
-import { getEnvUrl } from "./env.utils";
 import { Alias } from "../cypress/utils/alias.utils";
 
 export const interceptGoogleScriptsLoad = () => {
@@ -26,7 +25,7 @@ export const interceptReportId = () => {
 
 export const setReportId = () => {
     cy.url().then(url => {
-        const reportID = url.split(`${getEnvUrl()}/report/`)[1].split("/")[0];
+        const reportID = url.replace("/report-information", "").replace(`${Cypress.config().baseUrl}/report/`, "");
         cy.log(`Current report ID is ${reportID}`);
         cy.wrap(reportID).as(Alias.reportId);
     });
