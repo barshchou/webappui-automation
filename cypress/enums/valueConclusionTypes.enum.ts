@@ -1,3 +1,5 @@
+import { BoweryReports } from "../types";
+
 const _asIs: BoweryReports.ConclusionValue = "AS_IS";
 const _asStabilized: BoweryReports.ConclusionValue = "AS_STABILIZED";
 const _asCompleted: BoweryReports.ConclusionValue = "AS_COMPLETE";

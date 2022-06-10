@@ -1,4 +1,5 @@
 import enums from "../../../../enums/enums";
+import { BoweryReports } from "../../../../types";
 import reportDataCreator from "../../../data_creator/reportData.creator";
 
 const imagesTypesFixture = (): BoweryReports.ImageType[] => {

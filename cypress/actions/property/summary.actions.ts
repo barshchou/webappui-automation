@@ -18,13 +18,23 @@ class SummaryActions extends BaseActionsExt<typeof summaryPage> {
         return this;
     }
 
-    enterNumberOfResUnits(number: number): this {
+    enterNumberOfResUnits(number: number, notInclude?: string[]): this {
         summaryPage.numberOfResUnitsInput.clear().type(`${number}`).should("have.value", number);
+        if (notInclude) {
+            notInclude.forEach(val => {
+                summaryPage.numberOfResUnitsInput.should("not.include.value", val);
+            });
+        }
         return this;
     }
 
-    enterNumberOfCommercialUnits(number = 1): this {
+    enterNumberOfCommercialUnits(number = 1,  notInclude?: string[]): this {
         summaryPage.numberOfCommercialUnitsInput.clear().type(`${number}`).should("have.value", number);
+        if (notInclude) {
+            notInclude.forEach(val => {
+                summaryPage.numberOfCommercialUnitsInput.should("not.include.value", val);
+            });
+        }
         return this;
     }
 
