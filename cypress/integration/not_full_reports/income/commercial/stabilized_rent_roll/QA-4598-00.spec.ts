@@ -1,4 +1,5 @@
 import { numberWithCommas } from "../../../../../../utils/numbers.utils";
+import { normalizeText } from "../../../../../../utils/string.utils";
 import { Income, Property, ReviewExport } from "../../../../../actions";
 import { _NavigationSection } from "../../../../../actions/base";
 import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
@@ -146,7 +147,7 @@ describe(`Verify the suggested text dropdown in the new narrative component adde
             cy.stepInfo("3. Verify the linked chips on export");
             cy.visit(<string>file);
             testData.asCompletedChips.forEach(chip => {
-                let expectedText = typeof chip.verifyExport ===  "number" ? `${numberWithCommas(chip.verifyExport)}`: chip.verifyExport;
+                let expectedText = typeof chip.verifyExport ===  "number" ? `${numberWithCommas(chip.verifyExport)}`: normalizeText(chip.verifyExport);
                 cy.contains("Commercial Stabilized Rent Roll").next().scrollIntoView().should("include.text", expectedText);
             });
         }); 

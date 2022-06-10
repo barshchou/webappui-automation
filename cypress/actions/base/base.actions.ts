@@ -107,8 +107,4 @@ export default class BaseActions {
         cy.pause();
         return this;
     }
-
-    normalizeText(textToNormalize: string): string {
-        return textToNormalize.replaceAll('﻿', '').trim();
-    }
 }
