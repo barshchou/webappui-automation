@@ -628,7 +628,7 @@ class RentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
     }
 
     verifyRemovedBuildingCompsTableHeader(headerName: string): RentCompsActions {
-        rentCompsPage.getRemovedBuildingCompsTableHeader(headerName).should("have.text", name);
+        rentCompsPage.getRemovedBuildingCompsTableHeader(headerName).should("have.text", headerName);
         return this;
     }
 
