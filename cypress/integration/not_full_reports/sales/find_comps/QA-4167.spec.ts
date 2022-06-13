@@ -26,7 +26,7 @@ describe("[QA-4167] Verify the Appraiser Commentary field", { tags: [ "@sales", 
         Sales._FindComps.Actions.
         SaleInfo.selectSaleDate().setBuyerGrantee(testData.saleInfo.buyer).setSellerGarantor(testData.saleInfo.seller);
         Sales._FindComps
-        .Actions.selectDropdownOptionNewComp(Sales._FindComps.Page.SourceInput, testData.selectItems.source)
+        .Actions.selectDropdownOptionNewComp(Sales._FindComps.Page.LinkTypeInput, testData.selectItems.source)
         .Page.newCompContinueButton.click();
 
         cy.stepInfo(` 1. Verify the Appraiser Commentary is free text input type;

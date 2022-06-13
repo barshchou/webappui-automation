@@ -7,7 +7,7 @@ describe(`[QA-4640] Verify the "Linked" chips dropdown in the new narrative comp
     report for Intended User and Identification of the Client sections`,
     { tags:[ "@report", "@client" ] }, () => {
 
-    it("Test body", { tags: "@to_check_export" }, () => {
+    it("Test body", { tags: "@check_export" }, () => {
         cy.stepInfo("Login, create report");
         createReport(testData.reportCreationData);
 
@@ -51,7 +51,6 @@ describe(`[QA-4640] Verify the "Linked" chips dropdown in the new narrative comp
             .verifyIdentificationOfTheClientTextBox(el.verifySuggest);
 
         });
-
         cy.stepInfo("5. Download report");
         _NavigationSection.openReviewAndExport();
         ReviewExport.generateDocxReport().waitForReportGenerated()
@@ -60,6 +59,7 @@ describe(`[QA-4640] Verify the "Linked" chips dropdown in the new narrative comp
     });
 
     it("Check export", () => {
+        Cypress.config().baseUrl = null;
         cy.task("getFilePath", { _reportName: testData.reportCreationData.reportNumber, _docx_html: "html" }).then(file => {
             cy.log(<string>file);
             cy.stepInfo("6. Verify the linked chips on export for both sections:");

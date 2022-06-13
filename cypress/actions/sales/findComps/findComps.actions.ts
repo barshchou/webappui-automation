@@ -83,6 +83,12 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
         return this;
     }
 
+    /**
+     * ernst: WARN this method needs to be refactored
+     * we need to create workaround for shadow-dom elements, which dynamically rendered
+     * during some action (scrolling the list, for example).
+     * if you try to do this manually - you probably get the error `doc.createTreeWalker is not a function`
+     */
     selectCompFromMapByAddress(address: string): FindCompsActions {
         findCompsPage.getSelectCompFromMapButtonByAddress(address).scrollIntoView().click({ force: true });
         this.checkFindSingleSalesComp();
@@ -139,7 +145,7 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
      * Checks WebApp REST request /salesComps/eventIds/:report_id
      * which returns salesEventId which in its turn will be passed to DRM's GraphQL API
      */
-    checkSingleSalesCompsByEventId(): this{
+    checkSingleSalesCompsByEventId(): FindCompsActions{
         cy.wait(`@${Alias.salesComps_eventIds}`).then(({ response }) => {
             cy.get(`@${Alias.salesEventId}`).then(_salesEventId => {
                 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -180,21 +186,29 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
         return this;
     }
 
-    clearNumericInputNewComp(inputElement: Cypress.Chainable): FindCompsActions {
-        inputElement.clear();
+    clearNumericInputNewComp(elementAlias: string): FindCompsActions {
+        cy.get(`@${elementAlias}`).clear({ force: true });
         return this;
     }
 
-    enterNumericInputNewComp(inputElement: Cypress.Chainable, numberOfUnits: number | string): FindCompsActions {
-        this.clearNumericInputNewComp(inputElement);
-        inputElement.type(`${numberOfUnits}`);
-        this.verifyNumericInputNewComp(inputElement, numberOfUnits);
+    enterNumericInputNewComp(elementAlias: string, numberOfUnits: number | string): FindCompsActions {
+        this.clearNumericInputNewComp(elementAlias);
+        
+        // ernst: little hack to work with commercialAreaNewComp input due its specific behaviour
+        if(elementAlias != Alias.pageElements.comp_plex.commercialAreaNewComp){
+            cy.get(`@${elementAlias}`).realClick();
+        }
+        else{
+            cy.get(`@${elementAlias}`).focus();
+        }
+        cy.get(`@${elementAlias}`).realType(`{enter}${numberOfUnits}`, { pressDelay:45, delay: 50 });
+        this.verifyNumericInputNewComp(elementAlias, numberOfUnits);
         return this;
     }
 
-    verifyNumericInputNewComp(inputElement: Cypress.Chainable, numberOfUnits: number | string): FindCompsActions {
+    verifyNumericInputNewComp(elementAlias: string, numberOfUnits: number | string): FindCompsActions {
         const valueToBe = isNumber(numberOfUnits) ? numberWithCommas(`${numberOfUnits}`.replace("-", "")) : "";
-        inputElement.should("have.value", valueToBe);
+        cy.get(`@${elementAlias}`).should("have.value", valueToBe);
         return this;
     }
 }

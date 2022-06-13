@@ -3,7 +3,11 @@ import { createReport, deleteReport } from "../../../../actions/base/baseTest.ac
 import { _NavigationSection } from "../../../../actions/base";
 import { Sales, ReviewExport } from "../../../../actions";
 
-describe("Check custom Utilities adjustment", { tags:[ "@sales", "@adjust_comps", "@check_export" ] }, () => {
+/**
+ * ernst: we need either select first two comparables or refactor method 
+ * for sales comps selection by address
+ */
+describe.skip("Check custom Utilities adjustment", { tags:[ "@fix", "@sales", "@adjust_comps", "@check_export" ] }, () => {
     
     it("Verify custom utilities adjustments on UI and prepare report for export", () => {
         createReport(testData.reportCreationData);
@@ -68,6 +72,7 @@ describe("Check custom Utilities adjustment", { tags:[ "@sales", "@adjust_comps"
     });
 
     it("Check exported document other utilities values and commentaries", () => {
+        Cypress.config().baseUrl = null;
         cy.task("getFilePath", { _reportName: testData.reportCreationData.reportNumber, _docx_html: "html" })
         .then(file => {
             cy.stepInfo(`6. Verify that other utilities adjustments are added to Comparable Sales Adjustment Grid `);

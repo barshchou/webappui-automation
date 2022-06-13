@@ -6,7 +6,7 @@ import { createReport, deleteReport } from "../../../../actions/base/baseTest.ac
 import { Alias } from "../../../../utils/alias.utils";
 
 describe("Verify the Comps can be added by entering the existing Report ID in the modal", 
-{ tags:[ "@comp_plex", "@sales", "@find_comps" ] }, () => {
+{ tags:[ "@fix", "@comp_plex", "@sales", "@find_comps" ] }, () => {
     before("Login, create report", () => {
         createReport(fixture.reportCreationData);
     });
