@@ -192,8 +192,15 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
 
     enterNumericInputNewComp(elementAlias: string, numberOfUnits: number | string): FindCompsActions {
         this.clearNumericInputNewComp(elementAlias);
-        cy.get(`@${elementAlias}`).realClick();
-        cy.get(`@${elementAlias}`).realType(`${numberOfUnits}`, { pressDelay:45, delay: 50 });
+        
+        // ernst: little hack to work with commercialAreaNewComp input due its specific behaviour
+        if(elementAlias != Alias.pageElements.comp_plex.commercialAreaNewComp){
+            cy.get(`@${elementAlias}`).realClick();
+        }
+        else{
+            cy.get(`@${elementAlias}`).focus();
+        }
+        cy.get(`@${elementAlias}`).realType(`{enter}${numberOfUnits}`, { pressDelay:45, delay: 50 });
         this.verifyNumericInputNewComp(elementAlias, numberOfUnits);
         return this;
     }
