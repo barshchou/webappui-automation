@@ -36,9 +36,9 @@ class ClientActions extends BaseActionsExt<typeof clientPage> {
 
     verifyGuidelineTooltip() {
         clientPage.guidelinesTooltip.should("exist");
-        clientPage.toCheckTooltipExist.should("not.exist");
+        clientPage.tooltip.should("not.exist");
         clientPage.guidelinesTooltip.trigger("mouseover");
-        clientPage.toCheckTooltipExist.should("exist");
+        clientPage.tooltip.should("exist");
         return this;
     }
 
