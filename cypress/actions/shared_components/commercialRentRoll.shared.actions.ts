@@ -107,7 +107,7 @@ class CommercialRentRollSharedComponent<T extends CommercialRentRollSharedCompon
 
     verifyAnnualRentCellPerSFBasisByRow(rentPerSF: number, squareFoot: number, calcMethod: BoweryReports.UnitsOfMeasure,
                                         rowNumber = 0): this {
-        let numberToBe;
+        let numberToBe: number;
         if (calcMethod === "annually") {
             numberToBe = rentPerSF * squareFoot;
         } else {

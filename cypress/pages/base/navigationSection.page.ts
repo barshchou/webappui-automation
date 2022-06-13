@@ -5,13 +5,13 @@ class NavigationSection extends BasePage {
 
     get incomeApproachButton() { return cy.get("#income-approach svg"); }
 
-    get residentialIncomeArrow() { return cy.get("#residentialIncome svg"); }
+    get residentialIncomeArrow() { return cy.get("#residentialIncome"); }
 
     get inPlaceRentRollButton() { return cy.get("#residential-rent-roll"); }
 
     get rentCompsButton() { return cy.get("#residential-rent-comps"); }
 
-    get commercialIncomeArrow() { return cy.get("#commercialIncome svg"); }
+    get commercialIncomeArrow() { return cy.get("#commercialIncome"); }
 
     get commercialRentRollButton() { return cy.get("#commercial-rent-roll"); }
 
@@ -96,6 +96,8 @@ class NavigationSection extends BasePage {
     get menuItemsProfileOrganization() {return cy.get("[role=menu] > li");}
 
     get comercialReimbursementButton() {return cy.get("#commercial-reimbursement-summary");}
+
+    get residentialStabilizedRentRoll() {return cy.get("#residential-projected-rent-roll");}
 
     get commercialRentReconcillationButton() {return cy.get(`#commercial-rent-reconciliation`);}
 }

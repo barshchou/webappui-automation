@@ -77,5 +77,5 @@ export default {
     UTILITY_EXPENSES: utilityExpenses,
     UNIT_TYPE: unitType,
     SOURCE_OF_INFORMATION: sourceOfInformation,
-    AMENITIES: amenities
+    AMENITIES: amenities,
 };

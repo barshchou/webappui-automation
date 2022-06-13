@@ -127,7 +127,7 @@ export namespace BoweryReports {
 
     export type UnitsOfMeasure = typeof Enums.UNITS_OF_MEASURE[KeyInfo.UnitsOfMeasureKeys]
 
-    export type UtilityExpenses = keyof typeof Enums.UTILITY_EXPENSES;
+    export type UtilityExpenses = keyof typeof Enums.UTILITY_EXPENSES
 
     export type CompGroupsColumns = typeof Enums.COMP_GROUP_COLUMNS[KeyInfo.CompGroupsColumnsKeys]
 
