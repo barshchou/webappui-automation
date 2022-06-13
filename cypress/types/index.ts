@@ -168,6 +168,19 @@ export namespace BoweryReports {
     export type ProFormaTypes = typeof Enums.PRO_FORMA_TYPES[KeyInfo.ProFormaTypeKeys]
     export type IncomeTypeCellNamesTypes = keyof typeof Enums.INCOME_TYPES_CELL_NAMES
     export type IncomeTypes = typeof Enums.INCOME_TYPE[KeyInfo.IncomeTypesKeys]
+    export type MarketResearch = {
+        neighborhoodValue: string,
+        marketArea: string,
+        state: string,
+        macroMarket: string,
+        submarket: string,
+        dateOfValuation: string,
+        marketDate: string,
+        quarter?: string,
+        document?: string
+    }
+
+    export type MarketAnalysisUses = "multifamily" | "retail" | "office" | "industrial";
 }
 
 export namespace Utils {

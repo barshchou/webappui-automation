@@ -37,6 +37,7 @@ import laundryVcLossType from "./laundryVcLossType.enum";
 import storageVcLossType from "./storageVcLossType.enum";
 import knownInformation from "./knownInformationType.enum";
 import compGroupsColumnsEnum from "./compGroupsColumns.enum";
+import marketAnalysisUsesEnum from "./marketAnalysisUses.enum";
 
 export default {
     TEMPLATE_TYPE: templateTypesEnum,
@@ -78,4 +79,5 @@ export default {
     UNIT_TYPE: unitType,
     SOURCE_OF_INFORMATION: sourceOfInformation,
     AMENITIES: amenities,
+    MARKET_ANALYSIS_USES: marketAnalysisUsesEnum
 };
