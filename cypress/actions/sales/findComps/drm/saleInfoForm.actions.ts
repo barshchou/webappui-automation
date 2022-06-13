@@ -8,19 +8,19 @@ class SaleInfoFromActions {
         this.Page = page;
     }
 
-    selectSaleDate(): this {
+    selectSaleDate(): SaleInfoFromActions {
         this.Page.SaleDateCalendarNewComp.click();
         this.Page.SaleDateToday.click();
         return this;
     }
 
-    setBuyerGrantee(name: string): this {
-        this.Page.BuyerGranteeNewComp.type(name);
+    setBuyerGrantee(name: string): SaleInfoFromActions {
+        this.Page.BuyerGranteeNewComp.type(name, { force: true });
         return this;
     }
 
-    setSellerGarantor(seller: string): this {
-        this.Page.SellerGrantor.type(seller);   
+    setSellerGarantor(seller: string): SaleInfoFromActions {
+        this.Page.SellerGrantor.type(seller, { force:true });   
         return this;
     }    
 }

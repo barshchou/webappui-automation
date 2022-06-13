@@ -335,9 +335,9 @@ class RentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
             let currentStyle = jQueryPhotoElements.eq(i).attr("style");
             currentPhoto.invoke("attr", "style").should("not.equal", style);
             if (direction === "forward") {
-                rentCompsPage.nextPhotoButtons.eq(comparableIndex).click();
+                rentCompsPage.nextPhotoButtons.eq(comparableIndex).realClick();
             } else {
-                rentCompsPage.prevPhotoButtons.eq(comparableIndex).click();
+                rentCompsPage.prevPhotoButtons.eq(comparableIndex).realClick();
             }
             this.verifyLoadingDoesntExist();
             style = currentStyle;

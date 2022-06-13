@@ -24,7 +24,7 @@ describe("Save and Save & Continue buttons tests",
 
     it("QA-4346 Save & Continue button test", () => {
         Sales.ValueConclusion.clickSaveContinueButton();
-        Final._FinalValuesReconciliation.closeSatisfactionSurvey()
+        Final._FinalValuesReconciliation.closeUserSurveyIfExist()
             .goBackWithSave();
         Sales.ValueConclusion.verifyMatchIncomeApproachDeductionsChecked()
             .verifySaleValueConclusion(testData.saleValueConclusion);
