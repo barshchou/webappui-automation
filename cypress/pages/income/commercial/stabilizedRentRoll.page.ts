@@ -13,6 +13,7 @@ class StabilizedRentRollPage extends CommercialRentRollSharedComponentPage {
     get commercialCompGroupHeader() { return cy.xpath(`//div[@class='ht_master handsontable']//table[@class = 'htCore']//span[text() = 'Commercial Comp Group']`); }
 
     commercialCompGroupForecastRent(forecast: string) { return cy.xpath(`//table[@class = 'htCore']//td[text()='$${forecast}']`); }
+
 }
 
 export default new StabilizedRentRollPage();
