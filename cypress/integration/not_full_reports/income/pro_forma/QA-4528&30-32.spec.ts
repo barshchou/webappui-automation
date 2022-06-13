@@ -26,11 +26,8 @@ describe("Residential V/C Loss @ X% row",
         cy.stepInfo(`3. Go to Income → Potential Gross Income → Residential Vacancy and Collection Loss table 
         and fill in the value into the Residential Vacancy and Collection Loss cell`);
         NavigationSection.navigateToPotentialGrossIncome();
-        Income.PotentialGrossIncome.enterResVacancyCollLoss(testData.resVacancyCollectionLoss)
-            .clickSaveButton()
-            .verifyProgressBarNotExist();
+        Income.PotentialGrossIncome.enterResVacancyCollLoss(testData.resVacancyCollectionLoss);
 
-        // TODO: Change to navigation with saving, after https://bowery.atlassian.net/browse/WEB-4956 bug fix
         cy.stepInfo(`4. Go to Income → Pro Forma page.
         Verify that label has format Less Residential V/C Loss @ X%.
         Verify that Total value is taken from Potential Gross Income → table → Less Residential V/C Loss @ X% → $

@@ -86,6 +86,11 @@ class SummaryActions extends BaseActionsExt<typeof summaryPage> {
         return this;
     }
 
+    enterBuildingName(buildingName: string): SummaryActions {
+        summaryPage.buildingNameInput.clear().type(`${buildingName}`).should("have.value", buildingName);
+        return this;
+    }
+
     enterSiteArea(area: number): SummaryActions {
         if (isHasDecimalPartMoreNumberOfDigits(area, 4)) {
             area = cutDecimalPartToNumberOfDigits(area, 4);
@@ -130,6 +135,11 @@ class SummaryActions extends BaseActionsExt<typeof summaryPage> {
 
     enterCurrentNumberOfResUnits(number: number): this {
         summaryPage.currentNumberOfResUnits.clear().type(`${number}`).should("have.value", number);
+        return this;
+    }
+
+    enterCurrentNumberOfCommercialUnits(number: number): this {
+        summaryPage.currentNumberOfCommercialUnitsInput.clear().type(`${number}`).should("have.value", number);
         return this;
     }
 
