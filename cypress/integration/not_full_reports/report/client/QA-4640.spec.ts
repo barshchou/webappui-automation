@@ -23,11 +23,11 @@ describe(`[QA-4640] Verify the "Linked" chips dropdown in the new narrative comp
             'Building Name', 'Property Type', 'Residential Unit Count', 'Commercial Unit Count', 'Street Address', 'Street Name', 
             'Site Area', 'Year Built', 'Block', 'Lot', 'Concluded Cap Rate', 'Zones', 'Condition'.`);
         testData.chips.forEach(chip => {
-            Report._Client.enterIntendedUser(`=${chip.typeSuggestValue}`, false, false, false);
-            Report._Client.clickNarrativeSuggestions(chip.suggestionName);
+            Report._Client.enterIntendedUser(`=${chip.typeSuggestValue}`, false, false, false)
+                .clickNarrativeSuggestions(chip.suggestionName);
             Report._Client.Page.intendedUserTextBox.should("include.text", chip.verifySuggest);
-            Report._Client.enterIdentificationOfTheClient(`=${chip.typeSuggestValue}`, false, false, false);
-            Report._Client.clickNarrativeSuggestions(chip.suggestionName, 1);
+            Report._Client.enterIdentificationOfTheClient(`=${chip.typeSuggestValue}`, false, false, false)
+                .clickNarrativeSuggestions(chip.suggestionName, 1);
             Report._Client.Page.identificationOfClientTextBox.should("include.text", chip.verifySuggest);
         });
 

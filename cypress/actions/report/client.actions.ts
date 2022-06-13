@@ -14,7 +14,7 @@ class ClientActions extends BaseActionsExt<typeof clientPage> {
             clientPage.formRevertToOriginalBtn().click();
             clientPage.formYesRevertBtn.click();
         }
-        return clientPage.intendedUserTextBox.invoke("text");
+        return this;
     }
 
     enterIdentificationOfTheClient(textToType: string = null, edit = true, save = true, revert = false) {
@@ -27,7 +27,7 @@ class ClientActions extends BaseActionsExt<typeof clientPage> {
             clientPage.formRevertToOriginalBtn().click();
             clientPage.formYesRevertBtn.click();
         }
-        return clientPage.identificationOfClientTextBox.invoke("text");
+        return this;
     }
 
     verifyInputChangesToBeUnsaved(clientFileNumber: string): ClientActions {
