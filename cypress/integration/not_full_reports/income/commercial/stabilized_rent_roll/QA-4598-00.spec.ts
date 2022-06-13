@@ -10,7 +10,7 @@ describe(`[QA-4598][QA-4599][QA-4600] Verify the suggested text dropdown in the 
 
     const url = `${Cypress.config().baseUrl}`;
 
-    it("As Is", () => {
+    it("[QA-4598] As Is", () => {
         cy.stepInfo(`Preconditions: The mixed report is created and several commercial units are added.`);
         createReport(testData.reportCreationDataAsIs);
 
@@ -43,7 +43,7 @@ describe(`[QA-4598][QA-4599][QA-4600] Verify the suggested text dropdown in the 
         deleteReport(testData.reportCreationDataAsIs.reportNumber);
     });
 
-    it("Check export", () => {
+    it("[QA-4598] Check export", () => {
         Cypress.config().baseUrl = null;
         cy.task("getFilePath", { _reportName: testData.reportCreationDataAsIs.reportNumber, _docx_html: "html" }).then(file => {
             cy.log(<string>file);
@@ -56,7 +56,7 @@ describe(`[QA-4598][QA-4599][QA-4600] Verify the suggested text dropdown in the 
         }); 
     });
 
-    it("As Stabilized", () => {
+    it("[QA-4599] As Stabilized", () => {
         Cypress.config().baseUrl = url;
         cy.stepInfo(`Preconditions: The mixed report is created and several commercial units are added.`);
         createReport(testData.reportCreationDataAsStablized);
@@ -89,7 +89,7 @@ describe(`[QA-4598][QA-4599][QA-4600] Verify the suggested text dropdown in the 
         deleteReport(testData.reportCreationDataAsStablized.reportNumber);
     });
 
-    it("Check export", () => {
+    it("[QA-4599] Check export", () => {
         Cypress.config().baseUrl = null;
         cy.task("getFilePath", { _reportName: testData.reportCreationDataAsIs.reportNumber, _docx_html: "html" }).then(file => {
             cy.log(<string>file);
@@ -102,7 +102,7 @@ describe(`[QA-4598][QA-4599][QA-4600] Verify the suggested text dropdown in the 
         }); 
     });
 
-    it("As Completed", () => {
+    it("[QA-4600] As Completed", () => {
         Cypress.config().baseUrl = url;
         cy.stepInfo(`Preconditions: The mixed report is created and several commercial units are added.`);
         createReport(testData.reportCreationDataAsComplete);
@@ -137,7 +137,7 @@ describe(`[QA-4598][QA-4599][QA-4600] Verify the suggested text dropdown in the 
         deleteReport(testData.reportCreationDataAsComplete.reportNumber);
     });
 
-    it("Check export", () => {
+    it("[QA-4600] Check export", () => {
         Cypress.config().baseUrl = null;
         cy.task("getFilePath", { _reportName: testData.reportCreationDataAsIs.reportNumber, _docx_html: "html" }).then(file => {
             cy.log(<string>file);
