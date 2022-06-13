@@ -16,8 +16,8 @@ export const replaceEntersWithSpaces = (stringToChange) => {
 
 export const isStringContainSubstring = (originString: string, stringToFind: string) => {
   return originString.includes(stringToFind);
+};
 
 export const normalizeText = (textToNormalize: string): string => {
   return textToNormalize.replaceAll('﻿', '').trim();
-  
 };
