@@ -47,16 +47,16 @@ const industrialMarketResearch: BoweryReports.MarketResearch = {
 
 const _researchesUses = [
     {
-        research: multifamilyMarketResearch, use: Enums.MARKET_ANALYSIS_USES.MULTIFAMILY
+        research: multifamilyMarketResearch, use: Enums.MARKET_ANALYSIS_USES.multifamily
     },
     {
-        research: retailMarketResearch, use: Enums.MARKET_ANALYSIS_USES.RETAIL
+        research: retailMarketResearch, use: Enums.MARKET_ANALYSIS_USES.retail
     },
     {
-        research: officeMarketResearch, use: Enums.MARKET_ANALYSIS_USES.OFFICE
+        research: officeMarketResearch, use: Enums.MARKET_ANALYSIS_USES.office
     },
     {
-        research: industrialMarketResearch, use: Enums.MARKET_ANALYSIS_USES.INDUSTRIAL
+        research: industrialMarketResearch, use: Enums.MARKET_ANALYSIS_USES.industrial
     }
 ];
 

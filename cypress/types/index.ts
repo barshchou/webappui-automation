@@ -180,7 +180,7 @@ export namespace BoweryReports {
         document?: string
     }
 
-    export type MarketAnalysisUses = "multifamily" | "retail" | "office" | "industrial";
+    export type MarketAnalysisUses = keyof typeof Enums.MARKET_ANALYSIS_USES
 }
 
 export namespace Utils {

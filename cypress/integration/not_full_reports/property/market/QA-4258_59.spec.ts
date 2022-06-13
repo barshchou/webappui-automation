@@ -20,7 +20,7 @@ describe("Verify area analysis pull from dropbox", { tags: [ "@property", "@mark
         _NavigationSection.navigateToPropertyMarket();
 
         cy.stepInfo("2. Fill market research data with quarter for [QA-4259]");
-        Property._Market.fillMarketResearch(testData.marketResearch, Enums.MARKET_ANALYSIS_USES.MULTIFAMILY, true, true)
+        Property._Market.fillMarketResearch(testData.marketResearch, Enums.MARKET_ANALYSIS_USES.multifamily, true, true)
             .clickPullFromDropbox()
             .verifyAreaEconomicAnalysisInputErrorRetrieving();
 
