@@ -8,34 +8,46 @@ describe(`Verify the commentary functionality`,
 
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
-    });
 
-    it("Test body", () => {
         cy.stepInfo("Precondition: Navigate to Summary page and set commercial units");
         _NavigationSection.navigateToPropertySummary();
         Property._Summary.enterNumberOfCommercialUnits(testData.numberOfCommercialUnits);
-        
-        cy.stepInfo("1. Proceed to the Income > Commercial > Stabilized Rent Roll page.");
+
+        cy.stepInfo("Precondition: Proceed to the Income > Commercial > Stabilized Rent Roll page.");
         _NavigationSection.navigateToCommercialUnits()
             .clickIncomeApproachButton()
             .clickCommercialArrow()
             .navigateToStabilizedRentRollInCommercial()
             .verifyProgressBarNotExist();
 
-        cy.stepInfo("[QA-4589] 2. Click on the Edit button and modify commentary and save changes.");
+        cy.saveLocalStorage();
+    });
+
+    beforeEach('Test', () => {
+        cy.restoreLocalStorage();
+    });
+
+    it("[QA-4589]", () => {
+        cy.stepInfo("1. Click on the Edit button and modify commentary and save changes.");
         Income._CommercialManager.StabilizedRentRoll.clickEditDiscussionButton()
             .editDiscussionTextArea(testData.textUpdateValue)
             .verifyEditDiscussionButtonsDisplayed()
             .clickSaveDiscussionButton();
+    });
 
-        cy.stepInfo("[QA-4594] 3. Verify that commentary 'Modified' label appears");
+    it("[QA-4594]", () => {
+        cy.stepInfo("1. Verify that commentary 'Modified' label appears");
         Income._CommercialManager.StabilizedRentRoll.verifyModifiedLabelExist();
-        
-        cy.stepInfo("[QA-4591] 4. Verify commentary revert to original");
+    });
+
+    it("[QA-4591]", () => {
+        cy.stepInfo("1. Verify commentary revert to original");
         Income._CommercialManager.StabilizedRentRoll.revertToOriginalCommentary()
             .verifyCommentaryFullText(testData.defaultText);
+    });
 
-        cy.stepInfo("[QA-4592] 5. Verify the 'Changes will be lost' modal functionality");
+    it("[QA-4592]", () => {
+        cy.stepInfo("1. Verify the 'Changes will be lost' modal functionality");
         Income._CommercialManager.StabilizedRentRoll.clickEditDiscussionButton()
             .editDiscussionTextArea(testData.textUpdateValue)
             .clickRevertToOriginalButton()
@@ -48,8 +60,10 @@ describe(`Verify the commentary functionality`,
             .clickYesRevertButton()
             .verifyCommentaryFullText(testData.defaultText)
             .clickCancelDiscussionEditButton();
+    });
 
-        cy.stepInfo("[QA-4590] 6. Modify commentary and check 'Cancel' button functionality");
+    it("[QA-4590]", () => {
+        cy.stepInfo("1. Modify commentary and check 'Cancel' button functionality");
         Income._CommercialManager.StabilizedRentRoll.clickEditDiscussionButton()
             .editDiscussionTextArea(testData.textUpdateValue)
             .clickCancelDiscussionEditButton()
