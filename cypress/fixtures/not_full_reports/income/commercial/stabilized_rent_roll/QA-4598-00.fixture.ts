@@ -4,7 +4,7 @@ import reportDataCreator from "../../../../data_creator/reportData.creator";
 const _numberOfCommercialUnits = 3;
 const _numberOfResidentialUnits = 2;
 const _buildingName = 'Test Building Name QA-4598-00';
-const _grossBuildingArea = 5000;
+const _grossBuildingArea = 5999;
 const _siteArea = 735000;
 const _currentNumberOfCommercialUnits = 5;
 const _currentNumberOfResidentialUnits = 4;
@@ -45,7 +45,7 @@ const _baseChip = () => {
             suggestionName: 'Gross Building Area',
             typeSuggestValue: 'Gros',
             verifySuggest: _grossBuildingArea,
-            verifyExport: 'Gross building area'
+            verifyExport: _grossBuildingArea
         }, 
         {
             suggestionName: 'Site Area',
