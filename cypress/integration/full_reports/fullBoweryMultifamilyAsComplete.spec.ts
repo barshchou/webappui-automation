@@ -8,6 +8,7 @@ import Final from "../../actions/final/final.manager";
 import Sales from "../../actions/sales/sales.manager";
 import proFormaTypesEnum from "../../enums/proFormaTypes.enum";
 import tableExpenseHistoryCellNames from "../../../cypress/enums/expenseHistoryTableRows.enum";
+import Enums from "../../enums/enums";
 
 describe("Full bowery way, multifamily as complete report", { tags: [ "@full_report" ] }, () => {
     it("Test", () => {
@@ -30,11 +31,10 @@ describe("Full bowery way, multifamily as complete report", { tags: [ "@full_rep
             .editAsCompleteExport(testData.asCompleteDescription.asCompleteExportText)
             .clickSaveContinueButton();
         Property.Market.verifyTimeOnMarket(testData.timeOnMarket)
-            .fillMarketResearch(testData.marketResearch)
+            .fillMarketResearch(testData.marketResearch, Enums.MARKET_ANALYSIS_USES.MULTIFAMILY, false)
             .enterMarketQuarter(testData.marketResearch.quarter)
             .clickPullFromDropbox()
-            // TODO: Refactor this step after we'll have more info about https://bowery.atlassian.net/browse/WEB-5511 bug
-            // .verifyMultifamilySubmarketAnalysisHasDocument(testData.marketResearch.multifamilySubmarketDocument)
+            .verifyMarketByAnalysisUseHasFile(Enums.MARKET_ANALYSIS_USES.MULTIFAMILY)
             .clickSaveContinueButton();
         Property.History.enterCurrentOwner(testData.owner.name)
             .checkIsUnderContractCheckbox()
