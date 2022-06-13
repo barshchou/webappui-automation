@@ -1,7 +1,7 @@
 import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../../actions/base";
 import { Income } from "../../../../../actions";
-import testData from "../../../../../fixtures/not_full_reports/income/residential/rent_comps/QA-4415_18-19.fixture";
+import testData from "../../../../../fixtures/not_full_reports/income/residential/rent_comps/QA-4402_07_15_18-19.fixture";
 
 describe(`[Income -> Residential -> Rent Comps -> Map] Saved filter values after page refreshing`,
         { tags: [ "@income", "@residential", "@rent_comps" ] }, () => {
@@ -17,6 +17,87 @@ describe(`[Income -> Residential -> Rent Comps -> Map] Saved filter values after
 
     beforeEach("Restore local storage", () => {
         cy.restoreLocalStorage();
+    });
+
+    it("[QA-4402]", () => {
+        cy.stepInfo(`2. Fill in all filters`);
+        testData.filters.forEach((filter) => {
+            Income._Residential
+                .RentComps.BaseActions
+                .changeStateOfFilter(filter.name, filter.value);
+        });
+        testData.numericFilters.forEach((filter) => {
+            Income._Residential
+                .RentComps.BaseActions
+                .enterValueToInput(filter.name, filter.value);
+        });
+        testData.dateFilters.forEach((filter) => {
+            Income._Residential
+                .RentComps.BaseActions
+                .enterDateInput(filter.value, filter.name);
+        });
+
+        cy.stepInfo(`3. Click 'Save' button, refresh the page
+                     and verify filters values`);
+        Income._Residential.RentComps.BaseActions.clickSaveButton();
+        cy.reload();
+        testData.filters.forEach((filter) => {
+            Income._Residential
+                .RentComps.BaseActions
+                .verifyFilterValue(filter.name, filter.value, true);
+        });
+        testData.numericFilters.forEach((filter) => {
+            Income._Residential
+                .RentComps.BaseActions
+                .verifyEnteredValueToInput(filter.name, filter.value);
+        });
+        testData.dateFilters.forEach((filter) => {
+            Income._Residential
+                .RentComps.BaseActions
+                .verifyEnteredDate(filter.name, filter.value);
+        });
+    });
+
+    it("[QA-4407]", () => {
+        cy.stepInfo(`2. Fill in some filters`);
+        testData.filters.forEach((filter) => {
+            Income._Residential
+                .RentComps.BaseActions
+                .changeStateOfFilter(filter.name, filter.value);
+        });
+        testData.numericFilters.forEach((filter) => {
+            Income._Residential
+                .RentComps.BaseActions
+                .enterValueToInput(filter.name, filter.value);
+        });
+        Income._Residential.RentComps.BaseActions
+                .enterDateInput(
+                    testData.dateFilters[0].value,
+                    testData.dateFilters[0].name
+                );
+
+        cy.stepInfo(`3. Click 'Save' button, refresh the page
+                    and verify filters values`);
+        Income._Residential.RentComps.BaseActions.clickSaveButton();
+        cy.reload();
+
+        cy.stepInfo(`4. Verify that all filter values which were set are saved on the page`);
+        testData.filters.forEach((filter) => {
+            Income._Residential
+                .RentComps.BaseActions
+                .verifyFilterValue(filter.name, filter.value, true);
+        });
+        testData.numericFilters.forEach((filter) => {
+            Income._Residential
+                .RentComps.BaseActions
+                .verifyEnteredValueToInput(filter.name, filter.value);
+        });
+        Income._Residential
+                .RentComps.BaseActions
+                .verifyEnteredDate(
+                    testData.dateFilters[0].name,
+                    testData.dateFilters[0].value
+                );
     });
 
     it("[QA-4415]", () => {
@@ -200,6 +281,12 @@ describe(`[Income -> Residential -> Rent Comps -> Map] Saved filter values after
                     testData.dateFilters[0].name,
                     testData.dateFilters[0].value
                 );
+    });
+
+    afterEach("Clear all filters", () => {
+        Income._Residential.RentComps.BaseActions
+            .clickResetFiltersButton()
+            .clickSaveButton();
     });
 
     after("Delete report after test suite", () => {

@@ -80,8 +80,14 @@ class RentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
     }
 
     changeStateOfCheckboxByQaAttr(attribute: string | number, isToCheck = true): RentCompsActions {
-        rentCompsPage.getCheckboxByDataQaAttr(attribute)
-            .should("have.value", "false").check({ force: isToCheck }).should("have.value", `${isToCheck}`);
+        if(isToCheck) {
+            rentCompsPage.getCheckboxByDataQaAttr(attribute)
+                .should("have.value", "false").check({ force: true }).should("have.value", "true");
+        } else {
+            rentCompsPage.getCheckboxByDataQaAttr(attribute)
+                .should("have.value", "true").uncheck({ force: true }).should("have.value", "false");
+        }
+        
         return this;
     }
 
