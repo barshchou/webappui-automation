@@ -16,6 +16,11 @@ export default class BaseActionsExt<T extends BasePage> extends BaseActions {
         this.Page = page;
     }
 
+    verifyTooltipNotExist() {
+        this.Page.tooltip.should("not.exist");
+        return this;
+    }
+
     /**
      * 
      * @param aliasName alias name, you don't need to procees string with '@'
