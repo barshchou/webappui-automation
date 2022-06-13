@@ -5,9 +5,6 @@ import Enums from "../../../../enums/enums";
 
 const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("4471");
 
-const _checkboxes: BoweryReports.MarketAnalysisUses[] = [ Enums.MARKET_ANALYSIS_USES.MULTIFAMILY, Enums.MARKET_ANALYSIS_USES.RETAIL,
-    Enums.MARKET_ANALYSIS_USES.OFFICE, Enums.MARKET_ANALYSIS_USES.INDUSTRIAL ];
-
 const multifamilyMarketResearch: BoweryReports.MarketResearch = {
     neighborhoodValue: "Chester",
     marketArea: "Delaware County",
@@ -48,11 +45,22 @@ const industrialMarketResearch: BoweryReports.MarketResearch = {
     marketDate: getTodayDateString()
 };
 
-const _marketResearches: BoweryReports.MarketResearch[] =
-    [ multifamilyMarketResearch, retailMarketResearch, officeMarketResearch, industrialMarketResearch ];
+const _researchesUses = [
+    {
+        research: multifamilyMarketResearch, use: Enums.MARKET_ANALYSIS_USES.MULTIFAMILY
+    },
+    {
+        research: retailMarketResearch, use: Enums.MARKET_ANALYSIS_USES.RETAIL
+    },
+    {
+        research: officeMarketResearch, use: Enums.MARKET_ANALYSIS_USES.OFFICE
+    },
+    {
+        research: industrialMarketResearch, use: Enums.MARKET_ANALYSIS_USES.INDUSTRIAL
+    }
+];
 
 export default {
     reportCreationData: _reportCreationData,
-    checkboxes: _checkboxes,
-    marketResearches: _marketResearches
+    researchesUses: _researchesUses
 };

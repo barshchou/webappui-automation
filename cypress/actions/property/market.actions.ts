@@ -148,25 +148,21 @@ class MarketActions extends BaseActions{
         return this;
     }
 
-    verifyMarketAnalysisUseCheckboxChecked(use: BoweryReports.MarketAnalysisUses): MarketActions {
-        marketPage.getMarketAnalysisUseCheckbox(use).should("have.value", "true");
+    verifyMarketAnalysisUseCheckboxState(use: BoweryReports.MarketAnalysisUses, isCheck = true): MarketActions {
+        marketPage.getMarketAnalysisUseCheckbox(use).should("have.value", `${isCheck}`);
         return this;
     }
 
-    verifyMarketAnalysisUseCheckboxUnchecked(use: BoweryReports.MarketAnalysisUses): MarketActions {
-        marketPage.getMarketAnalysisUseCheckbox(use).should("have.value", "false");
-        return this;
-    }
-
-    checkMarketAnalysisUseCheckbox(use: BoweryReports.MarketAnalysisUses): MarketActions {
-        marketPage.getMarketAnalysisUseCheckbox(use).check();
-        this.verifyMarketAnalysisUseCheckboxChecked(use);
-        return this;
-    }
-
-    uncheckMarketAnalysisUseCheckbox(use: BoweryReports.MarketAnalysisUses): MarketActions {
-        marketPage.getMarketAnalysisUseCheckbox(use).uncheck();
-        this.verifyMarketAnalysisUseCheckboxUnchecked(use);
+    checkUncheckMarketAnalysisUseCheckbox(use: BoweryReports.MarketAnalysisUses): MarketActions {
+        marketPage.getMarketAnalysisUseCheckbox(use).then(checkbox => {
+            if (checkbox.attr("value") === "false" || checkbox.attr("value") === "") {
+                cy.wrap(checkbox).check();
+                this.verifyMarketAnalysisUseCheckboxState(use, true);
+            } else {
+                cy.wrap(checkbox).uncheck();
+                this.verifyMarketAnalysisUseCheckboxState(use, false);
+            }
+        });
         return this;
     }
 

@@ -17,26 +17,26 @@ describe("'Pull from dropbox' clicked - needed files are uploaded", { tags: [ "@
         cy.restoreLocalStorage();
     });
 
-    testData.checkboxes.forEach((marketAnalysisUse, index) => {
-        it(`Test with ${marketAnalysisUse} market analysis use`, () => {
+    testData.researchesUses.forEach(researchUseObject => {
+        it(`Test with ${researchUseObject.use} market analysis use`, () => {
 
-            cy.stepInfo(`1. Check ${marketAnalysisUse} use checkbox`);
-            if (marketAnalysisUse === Enums.MARKET_ANALYSIS_USES.MULTIFAMILY) {
-                Property._Market.verifyMarketAnalysisUseCheckboxChecked(marketAnalysisUse);
+            cy.stepInfo(`1. Check ${researchUseObject.use} use checkbox`);
+            if (researchUseObject.use === Enums.MARKET_ANALYSIS_USES.MULTIFAMILY) {
+                Property._Market.verifyMarketAnalysisUseCheckboxState(researchUseObject.use);
             } else {
-                Property._Market.checkMarketAnalysisUseCheckbox(marketAnalysisUse);
+                Property._Market.checkUncheckMarketAnalysisUseCheckbox(researchUseObject.use);
             }
 
             cy.stepInfo("2. Fill market research data");
-            Property._Market.fillMarketResearch(testData.marketResearches[index], marketAnalysisUse);
+            Property._Market.fillMarketResearch(researchUseObject.research, researchUseObject.use);
 
             cy.stepInfo("3. Pull data from dropbox and verify");
             Property._Market.clickPullFromDropbox()
                 .verifyAreaEconomicAnalysisHasFile()
                 .verifyNeighborhoodDemographicHasFile()
-                .verifyMarketByAnalysisUseHasFile(marketAnalysisUse)
-                .verifySubmarketByAnalysisUseHasFile(marketAnalysisUse)
-                .uncheckMarketAnalysisUseCheckbox(marketAnalysisUse);
+                .verifyMarketByAnalysisUseHasFile(researchUseObject.use)
+                .verifySubmarketByAnalysisUseHasFile(researchUseObject.use)
+                .checkUncheckMarketAnalysisUseCheckbox(researchUseObject.use);
         });
     });
 
