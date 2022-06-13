@@ -19,7 +19,7 @@ export default class BaseActionsExt<T extends BasePage> extends BaseActions {
     verifyTooltipNotExist() {
         this.Page.tooltip.should("not.exist");
         return this;
-    }
+    } 
 
     /**
      * 
