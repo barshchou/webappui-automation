@@ -1,9 +1,17 @@
+const _blockValue = '962';
+const _grossbuildingArea = '2,124,441';
+const _siteArea = '753,175';
+const _lotValue = '100';
+const _residentialUnit  = '0';
+const _streetAddress = '462 1st Avenue';
+const _streetName = '1st Avenue';
+
 export const _chips_is_stabilized =  [
     {
         suggestionName: 'Block',
         typeSuggestValue: 'Bloc',
-        verifySuggest: '962',
-        verifyExport: '962'
+        verifySuggest: _blockValue,
+        verifyExport: _blockValue
     }, 
     {
         suggestionName: 'Building Name',
@@ -38,38 +46,38 @@ export const _chips_is_stabilized =  [
     {
         suggestionName: 'Gross Building Area',
         typeSuggestValue: 'Gros',
-        verifySuggest: '2,124,441',
+        verifySuggest: _grossbuildingArea,
         verifyExport: 'Gross building area'
     }, 
     {
         suggestionName: 'Residential Unit Count',
         typeSuggestValue: 'Residentia',
-        verifySuggest: '0',
-        verifyExport: '0'
+        verifySuggest: _residentialUnit,
+        verifyExport: _residentialUnit
     },  
     {
         suggestionName: 'Site Area',
         typeSuggestValue: 'Sit',
-        verifySuggest: '753,175',
-        verifyExport: '753,175'
+        verifySuggest: _siteArea,
+        verifyExport: _siteArea
     }, 
     {
         suggestionName: 'Street Address',
         typeSuggestValue: 'Stree',
-        verifySuggest: '462 1st Avenue',
-        verifyExport: '462 1st Avenue'
+        verifySuggest: _streetAddress,
+        verifyExport: _streetAddress
     },
     {
         suggestionName: 'Lot',
         typeSuggestValue: 'Lo',
-        verifySuggest: '100',
-        verifyExport: '100'
+        verifySuggest: _lotValue,
+        verifyExport: _lotValue
     },  
     {
         suggestionName: 'Street Name',
         typeSuggestValue: 'Stree',
-        verifySuggest: '1st Avenue',
-        verifyExport: '1st Avenue'
+        verifySuggest: _streetName,
+        verifyExport: _streetName
     }, 
     {
         suggestionName: 'Unchanged Renovations',
