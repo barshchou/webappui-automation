@@ -1,4 +1,3 @@
-import { getEnvUrl } from "../../../utils/env.utils";
 import { Base, ReviewExport } from "../../actions";
 import testData from "../../fixtures/smoke/generateDownloadExistReport.fixture";
 import { createReport, deleteReport } from "../../actions/base/baseTest.actions";
@@ -6,7 +5,7 @@ import { createReport, deleteReport } from "../../actions/base/baseTest.actions"
 describe("Open any existing report, generate report and download it", { tags: [ "@smoke" ] }, () => {
 
     it("Download, generate report", () => {
-        cy.loginByApi(getEnvUrl());
+        cy.loginByApi(Cypress.config().baseUrl);
         Base._HomePage.clickAllReportsTab()
             .verifyProgressBarNotExist()
             .enterReportNumberToSearch(testData.reportCreationData.reportNumber)
