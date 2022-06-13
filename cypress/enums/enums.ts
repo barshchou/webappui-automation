@@ -13,6 +13,7 @@ import storageVcLossType from "./storageVcLossType.enum";
 import knownInformation from "./knownInformationType.enum";
 import compGroupsColumnsEnum from "./compGroupsColumns.enum";
 import utilitiesExpensesMode from "./utilitiesExpensesMode.enum";
+import marketAnalysisUsesEnum from "./marketAnalysisUses.enum";
 
 export default {
     TEMPLATE_TYPE: templateTypesEnum,
@@ -29,5 +30,6 @@ export default {
     STORAGE_VC_LOSS_TYPE: storageVcLossType,
     KNOWN_INFORMATION: knownInformation,
     COMP_GROUP_COLUMNS: compGroupsColumnsEnum,
-    UTILITIES_EXPENSES_MODE: utilitiesExpensesMode
+    UTILITIES_EXPENSES_MODE: utilitiesExpensesMode,
+    MARKET_ANALYSIS_USES: marketAnalysisUsesEnum
 };

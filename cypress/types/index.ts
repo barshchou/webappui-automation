@@ -170,6 +170,20 @@ export namespace BoweryReports {
         name: string,
         value: string | number 
     };
+
+    export type MarketResearch = {
+        neighborhoodValue: string,
+        marketArea: string,
+        state: string,
+        macroMarket: string,
+        submarket: string,
+        dateOfValuation: string,
+        marketDate: string,
+        quarter?: string,
+        document?: string
+    }
+
+    export type MarketAnalysisUses = "multifamily" | "retail" | "office" | "industrial";
 }
 
 export namespace Utils {
