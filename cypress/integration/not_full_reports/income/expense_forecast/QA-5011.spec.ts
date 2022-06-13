@@ -141,21 +141,36 @@ describe(`[QA-5011] [Income>Expense forecast] `,
 
 
 
-        //  it("[QA-5012]", () => {
-        // cy.stepInfo(`1. Verify If “Include Expense on Pro Forma”  checkbox is unselected but there is 
-        // data left in the forecast, this data is not included in calculations on Pro forma and Expense forecast page (PSF measure)`);
-
-
-
-        //  cy.stepInfo(`8. Verify if “Include Expense on Pro Forma” is unselected -> this  expense category 
-        // // is NOT displayed in the Expense Forecast page>Total operating expenses card and generated comment (PSF measure + Full Appraiser’s forecasts)`);
-        //  _NavigationSection.navigateToExpenseForecast();
+         it("[QA-5012]", () => {
+        cy.stepInfo(`1. Verify If “Include Expense on Pro Forma”  checkbox is unselected but there is 
+        data left in the forecast, this data is not included in calculations on Pro forma and Expense forecast page (Per Room measure for Fuel)`);
+        Income._ExpenseForecastActions.totalSumForecastPSF(
+            testData.buildingDescription.grossArea, 
+            testData.numberOfResidentialUnits, 
+            testData.rentRollresUnitFixture.rooms
+            )
+            .totalSumForecastPerUnit(
+                testData.buildingDescription.grossArea, 
+                testData.numberOfResidentialUnits, 
+                testData.rentRollresUnitFixture.rooms
+                );
+        
+        _NavigationSection.navigateToProForma();
+                        
+                    
+         
+         
+         
+         
+        //                  _NavigationSection.navigateToExpenseForecast();
         //  Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastFuelFixture('sf'));
         //  Income._ExpenseForecastActions.verifyTOECommentary(testData.commentaries.generated);
         //  Income._ExpenseForecastActions.Page.toeAppraisersForecastValueLine.should('contain', testData.forecastPSFnotIncluded)
         // testData.array1.forEach(element => {
         //     Income._ExpenseForecastActions.enterForecastItemForecast(element);
         // });
+
+
 
         // cy.stepInfo(`3. Verify  “Include Expense on Pro Forma” checkbox is NOT displayed under custom expense card`);
         // Income._ExpenseForecastActions.addCustomExpenseCategory(testData.customCategory.name);
@@ -187,4 +202,5 @@ describe(`[QA-5011] [Income>Expense forecast] `,
         //     cy.stepInfo(``);
         //     deleteReport(testData.reportCreationData.reportNumber);
         // });
+            })
     });

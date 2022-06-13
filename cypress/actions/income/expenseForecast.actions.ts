@@ -334,7 +334,6 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
     this.totalSumForecastPSF(GBA, resUnits, rooms);
     cy.get('@summaPerSF').then(val => {
             const textToBe = `Appraiser's Forecast: $${numberWithCommas(Number(val).toFixed(2))}`;
-            cy.log(textToBe);
             expenseForecastPage.appraisersTotalForecast.should("have.text", textToBe);
     });
         return this;
@@ -397,7 +396,6 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
     this.totalSumForecastPerUnit(GBA, resUnits, rooms);
     cy.get('@summaPerUnit').then(val => {
             const textToBe = `Appraiser's Forecast: $${numberWithCommas(Number(val).toFixed(2))}`;
-            cy.log(textToBe);
             expenseForecastPage.appraisersTotalForecast.should("have.text", textToBe);
     });
         return this;
