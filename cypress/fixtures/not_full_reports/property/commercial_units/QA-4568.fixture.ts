@@ -1,5 +1,6 @@
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 import Enums from "../../../../enums/enums";
+import { BoweryAutomation, BoweryReports } from "../../../../types";
 
 const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("4568", {
     incomeValue: Enums.INCOME_TYPE.BOTH,
@@ -52,6 +53,5 @@ const _arrayValuesAndGroup: Array<groupValue> = [
 
 export default {
     reportCreationData: _reportCreationData,
-    titleValue: "Utilities Description",
     arrayValuesAndGroup: _arrayValuesAndGroup
 };

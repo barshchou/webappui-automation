@@ -38,7 +38,7 @@ class ProFormaPage extends BasePage {
             ? this.getCategoryElementByType(categoryName, "perUnit").first() : this.getCategoryElementByType(categoryName, "perUnit");
     }
 
-    private getCategoryElementByType(categoryName: string, colId: string) {
+    getCategoryElementByType(categoryName: string, colId: string) {
         return cy.get(`[row-id^='${uppercaseFirstLetterEachWord(categoryName)}'] [role=gridcell][col-id=${colId}]`);
     }
 
