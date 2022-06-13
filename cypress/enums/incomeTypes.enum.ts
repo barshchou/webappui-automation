@@ -1,7 +1,7 @@
 const types = {
-    RESIDENTIAL: "multifamily",
-    COMMERCIAL: "commercial",
-    BOTH: "mixed-use"
+    residential: "multifamily",
+    commercial: "commercial",
+    both: "mixed-use"
 } as const;
 
 export default Object.freeze(types);

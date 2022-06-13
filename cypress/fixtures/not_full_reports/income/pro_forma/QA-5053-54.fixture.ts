@@ -3,7 +3,7 @@ import Enums from "../../../../enums/enums";
 import { BoweryAutomation, BoweryReports } from "../../../../types";
 
 const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("5053-54", {
-    incomeValue: Enums.INCOME_TYPE.BOTH
+    incomeValue: Enums.INCOME_TYPE.both
 });
 
 const _grossBuildingArea = 5000;

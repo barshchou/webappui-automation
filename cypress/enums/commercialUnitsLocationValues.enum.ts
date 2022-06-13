@@ -1,7 +1,7 @@
 const commercialUnitsLocationValues = {
-    CORNER: "corner",
-    MID_BLOCK: "mid-block",
-    THROUGH_LOT: "through-lot",
+    corner: "corner",
+    mid_block: "mid-block",
+    through_lot: "through-lot",
 } as const;
 
 export default Object.freeze(commercialUnitsLocationValues);

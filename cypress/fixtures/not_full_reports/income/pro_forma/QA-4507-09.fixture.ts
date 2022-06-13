@@ -11,7 +11,7 @@ const _laundryIncomePerSf = _laundryIncome / _grossBuildingArea;
 const _laundryIncomePerUnit = _laundryIncome / _numberOfResidentialUnits;
 
 const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("4507-09", {
-        incomeValue: Enums.INCOME_TYPE.BOTH
+        incomeValue: Enums.INCOME_TYPE.both
     });
 
 const _leaseStatuses: Array<BoweryReports.LeaseStatus> = [ "Occupied", "Occupied", "Occupied" ];

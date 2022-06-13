@@ -28,7 +28,7 @@ const _parkingincomePerSf = _annualRentTotal() / _grossBuildingArea;
 const _parkingincomePerUnit = _annualRentTotal() / _numberOfResidentialUnits;
 
 const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("4504-06", {
-        incomeValue: Enums.INCOME_TYPE.BOTH
+        incomeValue: Enums.INCOME_TYPE.both
     });
 
 const _leaseStatuses: Array<BoweryReports.LeaseStatus> = [ "Occupied", "Occupied", "Occupied" ];

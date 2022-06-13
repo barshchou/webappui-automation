@@ -1,6 +1,6 @@
 const leaseDateName = {
-    START: "Start",
-    EXPIRY: "Expiry",
+    start: "Start",
+    expiry: "Expiry",
 } as const;
 
 export default Object.freeze(leaseDateName);

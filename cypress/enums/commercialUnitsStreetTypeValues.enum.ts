@@ -1,6 +1,6 @@
 const commercialUnitsStreetTypeValues = {
-    SIDE_STREET: "side street",
-    AVENUE: "avenue",
+    sideStreet: "side street",
+    avenue: "avenue",
 } as const;
 
 export default Object.freeze(commercialUnitsStreetTypeValues);

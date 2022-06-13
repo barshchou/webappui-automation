@@ -28,7 +28,7 @@ const _electricityUnitPerSf = _electricityUnitTotal / _grossBuildingArea;
 const _electricityUnitPerUnit = _forecast;
 
 const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("4848-53", {
-        incomeValue: Enums.INCOME_TYPE.BOTH
+        incomeValue: Enums.INCOME_TYPE.both
     });
 
 export default {

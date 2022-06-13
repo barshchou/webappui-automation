@@ -1,8 +1,8 @@
 const organizationAddresseePrefix = {
-    MR: "Mr.",
-    MRS: "Mrs.",
-    MS: "Ms.",
-    DR: "Dr."
+    mr: "Mr.",
+    mrs: "Mrs.",
+    ms: "Ms.",
+    dr: "Dr."
 } as const;
 
 export default Object.freeze(organizationAddresseePrefix);

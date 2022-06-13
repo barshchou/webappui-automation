@@ -47,7 +47,7 @@ export default {
         stabilizedRRPanel_severalUnits:"StabilizedRentRoll_Panel_Several_Units",
         stabilizedRRPanel_severalUnits_compGroups:"stabilizedRRPanel_severalUnits_compGroups"
     },
-    reportCreationData: ReportDataCreator.getReportData("4576", { incomeValue: Enums.INCOME_TYPE.BOTH }),
+    reportCreationData: ReportDataCreator.getReportData("4576", { incomeValue: Enums.INCOME_TYPE.both }),
     numberOfCommercialUnits: 2,
     listOfUnitsSF: [ 1000, 2000 ],
     groupName: groupNameFixture,

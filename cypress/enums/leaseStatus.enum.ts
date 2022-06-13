@@ -1,7 +1,7 @@
 const leaseStatus = {
-    OCCUPIED: "Occupied",
-    VACANT: "Vacant",
-    EMPLOYEE: "Employee"
+    occupied: "Occupied",
+    vacant: "Vacant",
+    employee: "Employee"
 } as const;
 
 export default Object.freeze(leaseStatus);

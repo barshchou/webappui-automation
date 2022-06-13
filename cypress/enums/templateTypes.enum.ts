@@ -1,6 +1,6 @@
 const types = {
-    FREDDIE_MAC: "freddie-mac",
-    NOT_FREDDIE_MAC: "bowery-way"
+    freddieMac: "freddie-mac",
+    notFreddieMac: "bowery-way"
 } as const;
 
 export default Object.freeze(types);

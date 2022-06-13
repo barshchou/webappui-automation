@@ -1,7 +1,7 @@
 const sourceOfInformation = {
-    BOWERY_SUBJECT: "bowery subject",
-    EXTERNAL_DATABASE: "external database",
-    OTHER: "other",
+    bowerySubject: "bowery subject",
+    externalDatabase: "external database",
+    other: "other",
 } as const;
 
 export default Object.freeze(sourceOfInformation);

@@ -1,13 +1,13 @@
 const commercialUnitsGroups = {
-    USE: "Use",
-    STATE: "State",
-    LOCATION: "Location",
-    STREET_TYPE: "Street Type",
-    FLOOR: "Floor",
-    GRADE: "Grade",
-    FACADE: "Facade",
-    CEILING_HEIGHT: "Ceiling Height",
-    FRONTAGE: "Frontage"
+    use: "Use",
+    state: "State",
+    location: "Location",
+    streetType: "Street Type",
+    floor: "Floor",
+    grade: "Grade",
+    facade: "Facade",
+    ceilingHeight: "Ceiling Height",
+    frontage: "Frontage"
 } as const;
 
 export default Object.freeze(commercialUnitsGroups);

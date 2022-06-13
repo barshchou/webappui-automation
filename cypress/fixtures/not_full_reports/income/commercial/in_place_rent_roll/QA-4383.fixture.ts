@@ -7,8 +7,8 @@ const _leaseVacant: BoweryReports.LeaseStatus = "Vacant";
 
 const reportCreationFixture = () => {
     return ReportDataCreator.setReportNumber("4383").setAddress()
-        .setTemplateValue(Enums.TEMPLATE_TYPE.FREDDIE_MAC)
-        .setIncomeValue(Enums.INCOME_TYPE.BOTH)
+        .setTemplateValue(Enums.TEMPLATE_TYPE.freddieMac)
+        .setIncomeValue(Enums.INCOME_TYPE.both)
         .setConclusionValue(Enums.VALUE_CONCLUSION_TYPE.AS_COMPLETE).build();
 };
 

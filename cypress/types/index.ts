@@ -72,14 +72,14 @@ export namespace BoweryReports {
     export type OrganizationState = typeof Enums.ORGANIZATION_STATE[KeyInfo.OrganizationStateKeys]
 
     export type ForecastItem = { 
-        name: BoweryReports.ForecastItemBasis | string, 
-        basis?: BoweryReports.UnitSF, 
+        name: ForecastItemBasis | string, 
+        basis?: UnitSF, 
         forecast?: number | undefined, 
         projection?: number 
     }
 
     export type Periods = { 
-        expensePeriodType: BoweryReports.ExpensePeriodType | string, 
+        expensePeriodType: ExpensePeriodType | string, 
         month?: string,
         year: number | string, 
         insurance?: number, electricity?: number, fuel?: number, waterAndSewer?: number, repairsAndMaintenance?: number, 
@@ -100,7 +100,7 @@ export namespace BoweryReports {
         footage?: number,
         rooms?: number,
         monthlyRent: number,
-        leaseStatus?: BoweryReports.LeaseStatus
+        leaseStatus?: LeaseStatus
     }
 
     export type RentCompField = {

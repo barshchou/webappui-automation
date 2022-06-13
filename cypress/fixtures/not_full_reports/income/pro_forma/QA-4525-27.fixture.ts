@@ -80,7 +80,7 @@ const _potentialGrossIncomePerSf = _potentialGrossIncomeTotal / _grossBuildingAr
 const _potentialGrossIncomePerUnit = _potentialGrossIncomeTotal / _numberOfResidentialUnits;
 
 const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("4525-27", {
-        incomeValue: Enums.INCOME_TYPE.BOTH
+        incomeValue: Enums.INCOME_TYPE.both
     });
 
 const _leaseStatuses: Array<BoweryReports.LeaseStatus> = [ "Occupied", "Occupied", "Occupied" ];
