@@ -55,7 +55,7 @@ const _dateFilters: BoweryReports.RentCompsFilter[] = [
 ];
 
 export default {
-    reportCreationData: ReportDataCreator.getReportData("4415_18-19"),
+    reportCreationData: ReportDataCreator.getReportData("4402_07_15_18-19"),
     unitType: _unitType,
     filters: _filters,
     numericFilters: _numericFilters,
