@@ -38,6 +38,7 @@ describe("[QA-4053] [QA-4086] The Concluded Value Per Unit is calculated correct
     });
     
     it("Check html report", () => {
+        Cypress.config().baseUrl = null;
         cy.stepInfo(`
         Verify the export of the report
         `);
