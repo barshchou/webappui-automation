@@ -47,7 +47,7 @@ describe(`[QA-4598][QA-4599][QA-4600] Verify the suggested text dropdown in the 
         Cypress.config().baseUrl = null;
         cy.task("getFilePath", { _reportName: testData.reportCreationDataAsIs.reportNumber, _docx_html: "html" }).then(file => {
             cy.log(<string>file);
-            cy.stepInfo("1. Verify the linked chips on export");
+            cy.stepInfo("4. Verify the linked chips on export");
             cy.visit(<string>file);
             testData.asIschips.forEach(chip => {
                 let expectedText = typeof chip.verifyExport ===  "number" ? `${numberWithCommas(chip.verifyExport)}`: chip.verifyExport;
@@ -93,7 +93,7 @@ describe(`[QA-4598][QA-4599][QA-4600] Verify the suggested text dropdown in the 
         Cypress.config().baseUrl = null;
         cy.task("getFilePath", { _reportName: testData.reportCreationDataAsIs.reportNumber, _docx_html: "html" }).then(file => {
             cy.log(<string>file);
-            cy.stepInfo("1. Verify the linked chips on export");
+            cy.stepInfo("4. Verify the linked chips on export");
             cy.visit(<string>file);
             testData.asStabilizedChips.forEach(chip => {
                 let expectedText = typeof chip.verifyExport ===  "number" ? `${numberWithCommas(chip.verifyExport)}`: chip.verifyExport;
@@ -141,7 +141,7 @@ describe(`[QA-4598][QA-4599][QA-4600] Verify the suggested text dropdown in the 
         Cypress.config().baseUrl = null;
         cy.task("getFilePath", { _reportName: testData.reportCreationDataAsIs.reportNumber, _docx_html: "html" }).then(file => {
             cy.log(<string>file);
-            cy.stepInfo("1. Verify the linked chips on export");
+            cy.stepInfo("4. Verify the linked chips on export");
             cy.visit(<string>file);
             testData.asCompletedChips.forEach(chip => {
                 let expectedText = typeof chip.verifyExport ===  "number" ? `${numberWithCommas(chip.verifyExport)}`: chip.verifyExport;
