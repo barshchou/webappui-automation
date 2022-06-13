@@ -48,7 +48,16 @@ export const getYearFromDate = (date: string = getTodayDateString()): string => 
     return date.split("-")[2];
 };
 
-export const getQuarter = (dateString, isPlusQuarter = false, numberOfQuartersToPlus = 2) => {
+/**
+ * @description This function returns a quarter for Quarter field on Property -> Market page. If no parameter other than date
+ * is passed, it will return quarter previous from current as needed documents always will be FINAL for previous quarter
+ * for example for current Q1 of current year it will be Q4 of previous year.
+ * @param dateString Date for which we will return quarter
+ * @param isPlusQuarter If we need any quarter above previous, we pass this parameter
+ * @param numberOfQuartersToPlus Here we pass number for as many quarters above we want to return, this will always
+ * return 1 or 2 quarters above, because we won't need more, it was just for 1 test
+ */
+export const getQuarter = (dateString: string, isPlusQuarter = false, numberOfQuartersToPlus = 2) => {
     const currentMonthNumber = Number(getMonthFromDate(dateString));
     if (currentMonthNumber >= 1 && currentMonthNumber < 4) {
         return isPlusQuarter ? numberOfQuartersToPlus === 1 ? "Q1" : "Q2" : "Q4";
