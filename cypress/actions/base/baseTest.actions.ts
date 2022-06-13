@@ -1,3 +1,4 @@
+import { BoweryAutomation } from "../../types";
 import { aliasQuery } from "../../utils/graphql.utils";
 import Homepage from "./homepage.actions";
 import NavigationSection from "./navigationSection.actions";

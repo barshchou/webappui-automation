@@ -4,6 +4,7 @@ import { createReport, deleteReport } from "../../../../actions/base/baseTest.ac
 import { _NavigationSection } from "../../../../actions/base";
 import { Income, Property } from "../../../../actions";
 import proFormaTypes from "../../../../enums/proFormaTypes.enum";
+import { BoweryReports } from '../../../../types';
 
 describe("Pro Forma Page validation Operating Expenses -> Electricity", 
     { tags:[ "@income", "@pro_forma" ] }, () => { 

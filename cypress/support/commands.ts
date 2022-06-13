@@ -1,7 +1,6 @@
 import { addMatchImageSnapshotCommand } from 'cypress-image-snapshot/command';
 import "cypress-file-upload";
 import "cypress-localstorage-commands";
-import { getEnvUrl } from "../../utils/env.utils";
 
 //#region plugin commands initialization
 addMatchImageSnapshotCommand({
@@ -47,7 +46,7 @@ Cypress.Commands.add("loginByUI", (url) => {
 });
 
 Cypress.Commands.add("login", () => {
-    const envUrl = getEnvUrl();
+    const envUrl = "/";
     switch (Cypress.env("loginMethod")) {
         case "ui":
             cy.loginByUI(envUrl);

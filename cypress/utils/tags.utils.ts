@@ -28,5 +28,6 @@ export enum Tag {
     market = "@market",
     smoke = "@smoke",
     salesforce = "@salesforce",
-    flaky = "@flaky"
+    flaky = "@flaky",
+    summary= "@summary"
 }

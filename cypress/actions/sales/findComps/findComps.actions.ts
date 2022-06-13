@@ -6,6 +6,7 @@ import saleInfoFormActions from "./drm/saleInfoForm.actions";
 import propertDescActions from "./drm/propertyDescForm.actions";
 import propertyInfoFormActions from "./drm/propertyInfoForm.actions";
 import { Alias } from "../../../utils/alias.utils";
+import { Utils } from "../../../types";
 
 class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
 
