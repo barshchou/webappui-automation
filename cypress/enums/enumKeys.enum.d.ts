@@ -24,3 +24,4 @@ export type OrganizationStateKeys = keyof typeof Enums.ORGANIZATION_STATE
 export type ExpensePeriodTypeKeys = keyof typeof Enums.EXPENSE_PERIOD_TYPE
 export type UnitsOfMeasureKeys = keyof typeof Enums.UNITS_OF_MEASURE
 export type SourceOfInformationKeys = keyof typeof Enums.SOURCE_OF_INFORMATION
+export type IncomeTypeKeys = keyof typeof Enums.INCOME_TYPE

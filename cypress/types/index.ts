@@ -21,9 +21,9 @@ export namespace BoweryReports {
     export type ConclusionValue = keyof typeof Enums.VALUE_CONCLUSION_TYPE 
     export type isSalesForcePull = boolean
     export type ReportCreationOptions = {
-        incomeValue?: string,
+        incomeValue?: typeof Enums.INCOME_TYPE[KeyInfo.IncomeTypeKeys],
         conclusionValue?: ConclusionValue,
-        templateValue?: string,
+        templateValue?: TemplateTypes,
         address?: string,
         isSalesForcePull?: isSalesForcePull
     }
@@ -186,11 +186,11 @@ export namespace BoweryAutomation {
      * Base data for report setup
      */
     export type BaseReportCreationData = {
-        incomeValue: string, 
+        incomeValue: typeof Enums.INCOME_TYPE[KeyInfo.IncomeTypeKeys],
         address: string, 
         isSalesForcePull: boolean,
         reportNumber: string, 
-        templateValue: string,
+        templateValue: typeof Enums.TEMPLATE_TYPE[KeyInfo.TemplateTypesKeys],
         conclusionValue: BoweryReports.ConclusionValue
     }
 
