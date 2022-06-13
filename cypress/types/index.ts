@@ -1,5 +1,5 @@
 
-import * as KeyInfo from './../enums/enumKeys.enum';
+import * as KeyInfo from '../enums/enumKeys.enum';
 import Enums from "../enums/enums";
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
