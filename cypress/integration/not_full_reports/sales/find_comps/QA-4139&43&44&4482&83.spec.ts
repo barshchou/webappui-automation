@@ -61,9 +61,6 @@ conditionalDescribe("Group of tests for numeric inputs at create comp modal",
         deleteReport(testData.reportCreationData.reportNumber);
     });
 
-    /**
-     * Skipped due to obsolent test case
-     */
     it("QA-4144: Verify the Commercial Area* field", () => {
         Sales._FindComps.Page.commercialAreaNewComp.should("not.exist");
         Sales._FindComps.selectDropdownOptionNewComp(Sales._FindComps.Page.comparableTypeDropdown, testData.comparableType);
@@ -81,7 +78,6 @@ conditionalDescribe("Group of tests for numeric inputs at create comp modal",
         deleteReport(testData.reportCreationData.reportNumber);
     });
 
-    // ernst: skipped due to 'commercialAreaNewComp' undescribed behavior in test case
     it("QA-4482: Verify the Net Rentable Area field", () => {
         Sales._FindComps.Page.netRentableAreaNewComp.should("not.exist");
         Sales._FindComps.selectDropdownOptionNewComp(Sales._FindComps.Page.comparableTypeDropdown, testData.comparableType);
