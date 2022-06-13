@@ -34,6 +34,8 @@ const rentRollResidentialUnitsFixture = () : BoweryReports.ResidentialUnit[] => 
     ];
 };
 
+const _leaseStatusFixture = [ occupied, vacant ] as BoweryReports.LeaseStatus[];
+
 const _textValues = [
     `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since
     the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries,
@@ -50,5 +52,6 @@ export default {
     columnName: "Monthly Total",
     residentialUnits: rentRollResidentialUnitsFixture(),
     textValues: _textValues,
-    tooltipText: "The following generated text will appear in the Income Approach's Current Residential Rent Roll."
+    tooltipText: "The following generated text will appear in the Income Approach's Current Residential Rent Roll.",
+    leaseStatusData: _leaseStatusFixture
 };

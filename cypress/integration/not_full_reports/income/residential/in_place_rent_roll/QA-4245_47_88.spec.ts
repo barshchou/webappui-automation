@@ -32,11 +32,14 @@ describe("Verify the Monthly Total row in the grid",
         Income._Residential.InPlaceRentRoll.verifyMonthlyTotalRentValue();
     });
 
-    it("[QA-4247]", () => {
+    it.only("[QA-4247]", () => {
         _NavigationSection.navigateToResInPlaceRentRoll();
         
         Income._Residential.InPlaceRentRoll.Page.infoIcon().realHover();
-        Income._Residential.InPlaceRentRoll.verifyTooltipExist(testData.tooltipText);
+        Income._Residential.InPlaceRentRoll.verifyTooltipExist(testData.tooltipText)
+
+        testData.residentialUnits
+            .verifyRentRollCommentary();
     });
 
     it("[QA-4288]", () => {
