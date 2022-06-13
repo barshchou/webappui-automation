@@ -4,21 +4,28 @@ import { createReport, deleteReport } from "../../../../actions/base/baseTest.ac
 import { _NavigationSection } from "../../../../actions/base";
 import { Property } from "../../../../actions";
 
-describe("[QA-4538] Verify the Commercial Unit # SF field validation",
+describe("[Property > Commercial Units > Commercial Unit SF] Commercial Units page validation tests",
     { tags:[ "@property", "@commercial_units" ] }, () => {
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
-    });
 
-    it("Test body", () => {
         cy.stepInfo("1. Proceed to the Property > Commercial Units page.");
         _NavigationSection.navigateToPropertySummary();
         Property._Summary.enterNumberOfCommercialUnits(testData.numberOfCommercialUnits);
-        
+        _NavigationSection.navigateToCommercialUnits();
+
+        cy.saveLocalStorage();
+    });
+
+    beforeEach('Restore local storage', () => {
+        cy.restoreLocalStorage();
+    });
+
+    it("[QA-4538] Verify the Commercial Unit # SF field validation", () => {
+
         cy.stepInfo(`2. Verify the Commercial Unit # SF field is editable by entering 
                     any value (text field, whole numbers, but numbers greater than 999 
                     are automatically separated by a comma).`);
-        _NavigationSection.navigateToCommercialUnits();
         testData.sfValues.forEach((value, index) => {
             Property._CommercialUnits.Page.commercialUnitsSFInputs.eq(index)
                 .type(`${value}`)
@@ -48,6 +55,16 @@ describe("[QA-4538] Verify the Commercial Unit # SF field validation",
             .should('not.have.value');
         Property._CommercialUnits.clickSaveButton()
             .verifyProgressBarNotExist();
+    });
+
+    it('[QA-4539] Verify the Commercial Gross Leasable Area tooltip', () => {
+
+        cy.stepInfo(`2. Hover the Commercial Gross Leasable Area tooltip.`);
+        Property._CommercialUnits.Page.commercialGrossLeasableAreaToolip
+            .trigger('mouseover')
+            .get("[role='tooltip']").invoke("text").then(text => {
+                expect(text).to.be.equal(testData.tooltipText);
+            });
 
         deleteReport(testData.reportCreationData.reportNumber);
     });
