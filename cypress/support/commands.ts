@@ -24,9 +24,9 @@ addMatchImageSnapshotCommand({
  */
 const _cyVisit = (url: string) => cy.visit(url, { timeout: Cypress.env("DEBUG") == 1 ? 180000 : 60000 });
 
-Cypress.Commands.add("loginByApi", (url) => {
+Cypress.Commands.add("loginByApi", (_envUrl) => {
     cy.log("Logging in by api");
-    cy.task("loginApi").then(_response => {
+    cy.task("loginApi", _envUrl).then(_response => {
         const response: any = _response;
         const responseBody = JSON.parse(response.text);
 

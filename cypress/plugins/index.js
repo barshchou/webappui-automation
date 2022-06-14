@@ -103,15 +103,15 @@ const _convertDocxToHtml = async (report) => {
 }
 
 /**
- * 
- * @returns 
+ * Login by api
+ * @returns response from `/user/login` endpoint
  */
-const _loginApi = async () => {
+const _loginApi = async (_envUrl) => {
   let cypressEnvJson = JSON.parse(
     await readFileAsync("./cypress.env.json",{encoding:"utf-8"})
   );
 
-  const response = await request("https://bowery-staging.herokuapp.com")
+  const response = await request(_envUrl)
   .post('/user/login')
   .send({
     username:process.env.CYPRESS_USERNAME ?? cypressEnvJson.USERNAME,
@@ -120,30 +120,6 @@ const _loginApi = async () => {
   .expect('Content-Type', /json/)
   .expect(200);
 
-  /**
-   * ernst: when you will be resolving value through `.then(()=>{})` - it WILL NOT return 
-   * value of `request.Response` type. It will return this:
-   * {
-    "req": {
-        "method": "POST",
-        "url": "https://bowery-staging.herokuapp.com/user/login",
-        "data": {
-            "username": "ernst.dzeravianka@boweryvaluation.com",
-            "password": "login"
-        },
-        "headers": {
-            "content-type": "application/json"
-        }
-    },
-    "header": {
-      ...
-    },
-    "status": 200,
-    "text": "{\"token\":\"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI2MjJmODQ4MzljZTU5ZjVkZWNjMTg5NGIiLCJ1c2VybmFtZSI6ImVybnN0LmR6ZXJhdmlhbmthQGJvd2VyeXZhbHVhdGlvbi5jb20iLCJwYXNzd29yZCI6IiQyYSQwOCRaTktqNXp1RER4Rmh0NDBuWDRFcVFPeTE5ZUZYLlc0WXJjNU1CNDNaV1F1VXRpYVFCajRrbSIsImF2YXRhciI6eyJfaWQiOiI2Mjk0YmRiOWEzZDc2NzAwM2JlZmQ4YTIiLCJjZG5VcmwiOiJodHRwczovL2xoMy5nb29nbGV1c2VyY29udGVudC5jb20vYS9BQVRYQUp6ZEdmYTFiUGFkb21KenE4d3VLaGg1aF9hSkhHM3IwVEcweUVDaz1zOTYtYyJ9LCJvcmdhbml6YXRpb25JZCI6IjU4MThjMjVmNjdhYzE1MTEwMDk1YWZjNCIsImFjdGl2YXRlZCI6dHJ1ZSwicm9sZXMiOlswXSwibmFtZSI6eyJfaWQiOiI2Mjk2MDk1MDU3NjEzYjAwNGI5NWY4MzkiLCJmaXJzdCI6IkVybnN0IiwibGFzdCI6IkR6ZXJhdmlhbmthIn0sImlzUm9ib3QiOmZhbHNlLCJnb29nbGVJZCI6IjExMzE2NzUxMzgyOTUzOTkwNjY1MyIsInBlcm1pc3Npb25zIjpbImNvbnRlbnRFZGl0b3IiLCJvcmdhbml6YXRpb25TZXR0aW5ncy52aWV3Iiwib3JnYW5pemF0aW9uU2V0dGluZ3MuZWRpdCJdLCJ0cyI6MTY1Mzk5OTk1MzAzM30.pzNy6xg30GbUguQQBYRHdEk1TP1M1sH-fSpv40R-opQ\",\"user\":{\"permissions\":[\"contentEditor\",\"organizationSettings.view\",\"organizationSettings.edit\"],\"groups\":[\"Product Design & Tech\"],\"isRobot\":false,\"roles\":[0],\"_id\":\"622f84839ce59f5decc1894b\",\"username\":\"ernst.dzeravianka@boweryvaluation.com\",\"name\":{\"_id\":\"6296095057613b004b95f839\",\"first\":\"Ernst\",\"last\":\"Dzeravianka\"},\"activated\":true,\"organizationId\":\"5818c25f67ac15110095afc4\",\"password\":\"$2a$08$ZNKj5zuDDxFht40nX4EqQOy19eFX.W4Yrc5MB43ZWQuUtiaQBj4km\",\"__v\":2,\"appraisalCertifications\":[],\"googleId\":\"113167513829539906653\",\"avatar\":{\"_id\":\"6294bdb9a3d767003befd8a2\",\"cdnUrl\":\"https://lh3.googleusercontent.com/a/AATXAJzdGfa1bPadomJzq8wuKhh5h_aJHG3r0TG0yECk=s96-c\"},\"ts\":1653999953033,\"fullName\":\"Ernst Dzeravianka\",\"id\":\"622f84839ce59f5decc1894b\"}}"
-}
-  `text` property - is a stringified response.body
-  I don't know why it resolve this value instead of `request.Response` but however.
-   */
   return response;
 }
 
@@ -250,8 +226,8 @@ module.exports = (on, config) => {
   });
 
   on("task",{
-    async loginApi(){
-      return await _loginApi();
+    async loginApi(_envUrl){
+      return await _loginApi(_envUrl);
     }
   });
   //#endregion
