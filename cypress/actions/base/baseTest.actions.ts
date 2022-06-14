@@ -6,24 +6,6 @@ import mapKeysUtils from "../../utils/mapKeys.utils";
 import { _HomePage } from ".";
 
 /**
- * ernst: createReport is used everywhere - default logic should be: 
- * api login + api report 
- * -> navigation to dashboard 
- * -> check whether report exist on dashboard 
- * -> navigate there via UI
- * ____
- * UI login + api report
- * -> navigate to login 
- * -> auth via api 
- * -> create report via api
- * -> check whether report exists via api
- * -> re-login via ui
- * -> navigate to report (via report_id, which can be set to _setMap)
- * ___
- * api login + UI report (implemented)
- */
-
-/**
  * Login action
  */
 export const loginAction = () => {
@@ -50,14 +32,13 @@ export const createReport = (reportCreationData: BoweryAutomation.ReportCreation
         const _payload = payloadFunction(reportCreationData, _userId);
         if(Cypress.env("report") == "api"){
             cy._mapGet("token").then(_token => {
-                cy.log(`token is: ${_token}`);
                 cy.createApiReport(
                     reportCreationData, _payload, _token, envUrl
                 );
                 navigateToEnv();
             });
             cy._mapGet(mapKeysUtils.report_id).then(reportId => {
-                cy.log(reportId);
+                cy.log("Report id: "+reportId);
                 _HomePage.Page.reportsRows.should("be.visible")
                 .each((elem) => {
                     if(elem.attr("href").includes(reportId)){

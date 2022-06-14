@@ -124,6 +124,23 @@ const _loginApi = async (_envUrl) => {
 }
 
 /**
+ * Creates report with api. Uses websockets in order to be able to wait uncertain amount of time
+ * (with http - it could fail due to response timeout).
+ * 
+ * The flow is next:
+ * Connect to remote server
+ * -> create promise, which we will wait to resolved
+ * In this promise we do next: 
+ *  -> wait on `connect` event
+ *  -> when `connect` is emmited - wait on `init` event (we need to wait synchronously, exaclty after `connect` event)
+ *  -> when `init` is emmited - resolving callback with data from `init` event
+ *  -> resolving promise with `resolve` fn and socketId param
+ * 
+ * We "await" until our promise will be resolved with `socketId` value.
+ * Then we wait with promise once more until event `report:created` will be emitted.
+ * 
+ * Since we wrap this event into promise, the data which will be resolved there
+ * will be our report with necessary props (reportId and reportNumber)
  * 
  * @param {*} _reportCreationData 
  * @param {*} _payloadFn 
@@ -131,13 +148,10 @@ const _loginApi = async (_envUrl) => {
  */
  const _createReportApi = async (_reportCreationData, _payload, _token, _envUrl) => {
     let reportId = "not report id";
-    
-    console.log(_reportCreationData+"\n");
-    console.log(_payload+"\n");
-    console.log(_token);
-
     const socket = io.connect(_envUrl);
     const _connect = new Promise((res,rej)=>
+      // ernst: we have to chain sockets in order to have synchronous order of execution,
+      // without it - we will not be able to wait until socket id will be generated and resolved by promise 
       socket.on('connect', () => console.log('Socket opened')).on('init', async socketId => {
         
         console.log(socketId)
@@ -149,6 +163,7 @@ const _loginApi = async (_envUrl) => {
         .set('Authorization', `Bearer ${_token}`)
         .set('SocketId', `${socketId}`)
         .expect(200);
+
         res(socketId);
       })
     ) 
@@ -166,8 +181,8 @@ const _loginApi = async (_envUrl) => {
 
       const report = await subscription;
       
-      console.log(report._id);
-      console.log(report.report_number);
+      console.log("Report id: "+ report._id);
+      console.log("Report number: "+report.report_number);
       
       reportId = report._id;
    
