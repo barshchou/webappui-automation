@@ -1,3 +1,4 @@
+import { BoweryAutomation } from "../../types";
 import { aliasQuery } from "../../utils/graphql.utils";
 import Homepage from "./homepage.actions";
 import NavigationSection from "./navigationSection.actions";
@@ -20,7 +21,7 @@ export const salesInterceptions = () => {
         aliasQuery(req, "findTransactionByIdAndVersion");
         aliasQuery(req, "findSalesComps");
         aliasQuery(req, "findSingleSalesComp");
-        aliasQuery(req, "updateAppraisal");
+        aliasQuery(req, "updateJob");
         aliasQuery(req, "findSalesCompsByEventIds");
     });
 };

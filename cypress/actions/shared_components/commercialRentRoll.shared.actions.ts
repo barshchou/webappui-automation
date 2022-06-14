@@ -2,6 +2,8 @@ import { numberWithCommas } from "../../../utils/numbers.utils";
 import { isDateHasCorrectFormat } from "../../../utils/date.utils";
 import BaseActions from "../base/base.actions";
 import CommercialRentRollSharedComponentPage from "../../pages/shared_components/commercialRentRoll.shared.page";
+import { BoweryReports } from "../../types";
+import { normalizeText } from "../../../utils/string.utils";
 
 class CommercialRentRollSharedComponent<T extends CommercialRentRollSharedComponentPage> extends BaseActions {
 
@@ -56,7 +58,7 @@ class CommercialRentRollSharedComponent<T extends CommercialRentRollSharedCompon
         return this;
     }
 
-    verifyUseCellByRow(useText: BoweryReports.CommercialUnitsUseTexts, rowNumber = 0): this {
+    verifyUseCellByRow(useText: BoweryReports.CommercialUnitsUseTexts | string, rowNumber = 0): this {
         this.Page.useCells.eq(rowNumber).should("have.text", useText).and("have.class", "readOnly");
         return this;
     }
@@ -106,7 +108,7 @@ class CommercialRentRollSharedComponent<T extends CommercialRentRollSharedCompon
 
     verifyAnnualRentCellPerSFBasisByRow(rentPerSF: number, squareFoot: number, calcMethod: BoweryReports.UnitsOfMeasure,
                                         rowNumber = 0): this {
-        let numberToBe;
+        let numberToBe: number;
         if (calcMethod === "annually") {
             numberToBe = rentPerSF * squareFoot;
         } else {
@@ -118,7 +120,7 @@ class CommercialRentRollSharedComponent<T extends CommercialRentRollSharedCompon
     }
 
     clickNarrativeSuggestions(verifyListValue: string): this {
-        this.Page.narrativeSuggestionsList.contains(verifyListValue).click();
+        this.Page.narrativeSuggestionsList.first().contains(verifyListValue).should("have.text", verifyListValue).click(); 
         this.Page.commentaryText.click();
         return this;
     }
@@ -238,12 +240,15 @@ class CommercialRentRollSharedComponent<T extends CommercialRentRollSharedCompon
     }
 
     verifyCommentaryFullText(textToBe: string): this {
-        this.Page.commentaryText.should("have.text", textToBe);
+        this.Page.commentaryText.invoke('text').then(text => {
+            cy.wrap(normalizeText(text)).should('deep.equal', textToBe);
+        });
         return this;
     }
 
-    verifyCommentaryContainsText(verifyAreaValue: string): this {
-        this.Page.commentaryText.should("contain.text", verifyAreaValue);
+    verifyCommentaryContainsText(verifyAreaValue: string | number): this {
+        let expectedText = typeof verifyAreaValue ===  "number" ? `${numberWithCommas(verifyAreaValue)}`: verifyAreaValue;
+        this.Page.commentaryText.should("include.text", `${expectedText}`);
         return this;
     }
 

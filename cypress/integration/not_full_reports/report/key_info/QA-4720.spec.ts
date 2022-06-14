@@ -1,4 +1,4 @@
-import { ReviewExport } from '../../../../actions/index';
+import { ReviewExport } from './../../../../actions/index';
 import { Report } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
@@ -25,11 +25,10 @@ describe(`[QA-4720] Verify the "Linked" chips dropdown in the new narrative comp
             Report._KeyInfo.Page.textBoxPropertyRightsAppraised.should("include.text", chip.verifySuggest);
             Report._KeyInfo.enterDefinitionMarketValue(`=${chip.typeSuggestValue}`, false, false, false);
             Report._KeyInfo.clickNarrativeSuggestions(chip.suggestionName, 1);
-            Report._KeyInfo.Page.textBoxPropertyRightsAppraised.should("include.text", chip.verifySuggest);
+            Report._KeyInfo.Page.textBoxDefinitionOfMarketValue().should("include.text", chip.verifySuggest);
         });
         Report._KeyInfo.Page.formSaveBtn().click();
         Report._KeyInfo.Page.formSaveBtn(1).click();
-
         _NavigationSection.openReviewAndExport();
         ReviewExport.generateDocxReport().waitForReportGenerated()
             .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
@@ -37,6 +36,7 @@ describe(`[QA-4720] Verify the "Linked" chips dropdown in the new narrative comp
     });
     
     it("Check export", () => {
+        Cypress.config().baseUrl = null;
         cy.task("getFilePath", { _reportName: testData.reportCreationData.reportNumber, _docx_html: "html" }).then(file => {
             cy.log(<string>file);
             cy.stepInfo("3. Verify the linked chips on export for both sections");
