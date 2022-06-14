@@ -1,5 +1,4 @@
 const reimbursementTypes = {
-
     dollarAmount: "dollarAmount",
     percentOfCurrentYearLiability: "percentOfCurrentYearLiability",
     increaseOverBaseYear: "increaseOverBaseYear",

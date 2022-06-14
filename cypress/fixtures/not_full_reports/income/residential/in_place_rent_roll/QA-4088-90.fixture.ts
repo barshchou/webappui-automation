@@ -3,7 +3,7 @@ import Enums from "../../../../../enums/enums";
 import { BoweryAutomation, BoweryReports } from "../../../../../types";
 
 const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("4088-90", {
-    incomeValue: Enums.INCOME_TYPE.RESIDENTIAL,
+    incomeValue: Enums.INCOME_TYPE.residential,
     conclusionValue: Enums.VALUE_CONCLUSION_TYPE.AS_COMPLETE
 });
 

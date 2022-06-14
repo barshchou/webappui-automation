@@ -8,9 +8,9 @@ import { _IncomeTitles, _SalesTitles } from "../../enums/pages_titles";
 import { BoweryAutomation } from "../../types";
 
 const reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("criticalPages", {
-    incomeValue: Enums.INCOME_TYPE.BOTH,
+    incomeValue: Enums.INCOME_TYPE.both,
     conclusionValue: Enums.VALUE_CONCLUSION_TYPE.AS_COMPLETE,
-    templateValue: Enums.TEMPLATE_TYPE.FREDDIE_MAC
+    templateValue: Enums.TEMPLATE_TYPE.freddieMac
 });
 
 describe("Verify that critical pages are opening", { tags: [ "@smoke" ] }, () => {

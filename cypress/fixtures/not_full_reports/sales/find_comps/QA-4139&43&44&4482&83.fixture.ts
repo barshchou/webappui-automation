@@ -3,7 +3,7 @@ import Enums from "../../../../enums/enums";
 
 export default {
     reportCreationData: ReportDataCreator.getReportData("4139&43&44&4482&83", {
-            incomeValue: Enums.INCOME_TYPE.BOTH,
+            incomeValue: Enums.INCOME_TYPE.both,
             conclusionValue: Enums.VALUE_CONCLUSION_TYPE.AS_IS
         }),
     compAddress: "140 E 14th St, New York, NY 10003, USA",

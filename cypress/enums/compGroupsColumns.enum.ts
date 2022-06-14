@@ -6,6 +6,6 @@ const compGroupColumns = {
     dataSigned: "dateSigned",
     squareFeet: "squareFeet",
     rentSF: "rentPerSf",
-};
+} as const;
 
 export default Object.freeze(compGroupColumns);

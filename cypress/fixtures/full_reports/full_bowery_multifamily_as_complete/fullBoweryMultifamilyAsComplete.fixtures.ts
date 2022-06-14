@@ -10,8 +10,8 @@ const reportCreationFixture = (): BoweryAutomation.ReportCreationData => {
         identifier: "20-36-420-020-0000",
         reportNumber: "Full Report Test Automation",
         isSalesForcePull: false,
-        templateValue: Enums.TEMPLATE_TYPE.NOT_FREDDIE_MAC,
-        incomeValue: Enums.INCOME_TYPE.RESIDENTIAL,
+        templateValue: Enums.TEMPLATE_TYPE.notFreddieMac,
+        incomeValue: Enums.INCOME_TYPE.residential,
         conclusionValue: Enums.VALUE_CONCLUSION_TYPE.AS_COMPLETE
     };
 };

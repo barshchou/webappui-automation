@@ -31,10 +31,10 @@ describe("Full bowery way, multifamily as complete report", { tags: [ "@full_rep
             .editAsCompleteExport(testData.asCompleteDescription.asCompleteExportText)
             .clickSaveContinueButton();
         Property.Market.verifyTimeOnMarket(testData.timeOnMarket)
-            .fillMarketResearch(testData.marketResearch, Enums.MARKET_ANALYSIS_USES.MULTIFAMILY, false)
+            .fillMarketResearch(testData.marketResearch, Enums.MARKET_ANALYSIS_USES.multifamily, false)
             .enterMarketQuarter(testData.marketResearch.quarter)
             .clickPullFromDropbox()
-            .verifyMarketByAnalysisUseHasFile(Enums.MARKET_ANALYSIS_USES.MULTIFAMILY)
+            .verifyMarketByAnalysisUseHasFile(Enums.MARKET_ANALYSIS_USES.multifamily)
             .clickSaveContinueButton();
         Property.History.enterCurrentOwner(testData.owner.name)
             .checkIsUnderContractCheckbox()

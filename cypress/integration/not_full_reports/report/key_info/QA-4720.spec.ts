@@ -1,6 +1,4 @@
 import { ReviewExport } from './../../../../actions/index';
-import { getReportId } from './../../../../../utils/intercept.utils';
-import { getEnvUrl } from './../../../../../utils/env.utils';
 import { Report } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
@@ -11,9 +9,6 @@ describe(`[QA-4720] Verify the "Linked" chips dropdown in the new narrative comp
     it("Test body", () => {
         cy.stepInfo("Login, create report");
         createReport(testData.reportCreationData);
-        getReportId().then(id => {
-            cy.intercept("PATCH", `${getEnvUrl()}/report/${id}`).as("reportData");
-        });
 
         cy.stepInfo("1. Proceed to the Report > Key Info page.");
         _NavigationSection.navigateToReportInformation()

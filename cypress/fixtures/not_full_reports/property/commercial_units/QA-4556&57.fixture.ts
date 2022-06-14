@@ -12,7 +12,7 @@ const inputTypesFixture = (): BoweryReports.InputType[] => {
 
 export default {
     reportCreationData: reportDataCreator.getReportData("4556&57", {
-        incomeValue: enums.INCOME_TYPE.BOTH
+        incomeValue: enums.INCOME_TYPE.both
     }),
     numberOfCommercialUnits: 2,
     imagesType: imagesTypesFixture(),

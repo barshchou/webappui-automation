@@ -7,7 +7,7 @@ const useRadiosFixture: BoweryReports.CommercialUnitGroupsValues[] = [ "small", 
 
 export default {
     reportCreationData: ReportDataCreator.getReportData("4566", {
-        incomeValue: Enums.INCOME_TYPE.BOTH
+        incomeValue: Enums.INCOME_TYPE.both
     }),
     numberOfCommercialUnits: 1,
     groupName: groupNameFixture,

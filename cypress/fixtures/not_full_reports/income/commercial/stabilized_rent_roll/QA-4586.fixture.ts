@@ -44,7 +44,7 @@ const _rentCompFields: BoweryReports.RentCompField[] = [
 
 export default {
     reportCreationData: ReportDataCreator.getReportData("4586", {
-        incomeValue: Enums.INCOME_TYPE.BOTH
+        incomeValue: Enums.INCOME_TYPE.both
     }),
     numberOfCommercialUnits: 2,
     listOfUnitsSF: [ 1000, 2000 ],

@@ -41,12 +41,12 @@ class ReportCreator {
     }
 
     setTemplateValue(templateValue?) {
-        this.templateValue = templateValue ?? Enums.TEMPLATE_TYPE.FREDDIE_MAC;
+        this.templateValue = templateValue ?? Enums.TEMPLATE_TYPE.freddieMac;
         return this;
     }
 
     setIncomeValue(incomeValue?) {
-        this.incomeValue = incomeValue ?? Enums.INCOME_TYPE.RESIDENTIAL;
+        this.incomeValue = incomeValue ?? Enums.INCOME_TYPE.residential;
         return this;
     }
 

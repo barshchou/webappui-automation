@@ -36,7 +36,7 @@ const _fuelRoomPerUnit = _forecast * _numberOfRooms;
 
 
 const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("QA-4854_55_58_4864-66_4921-23", {
-        incomeValue: Enums.INCOME_TYPE.BOTH
+        incomeValue: Enums.INCOME_TYPE.both
     });
 
 export default {

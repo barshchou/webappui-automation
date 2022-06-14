@@ -3,7 +3,7 @@ import { BoweryAutomation } from "../../../../types";
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 
 const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("4053", {
-    incomeValue: Enums.INCOME_TYPE.BOTH,
+    incomeValue: Enums.INCOME_TYPE.both,
     conclusionValue: Enums.VALUE_CONCLUSION_TYPE.AS_COMPLETE
 });
 
