@@ -66,3 +66,7 @@ export const isHalfDecimalPart = (number) => {
 export const isNumber = (value) => {
     return typeof value === "number";
 };
+
+export const cutDotFromNumber = (number: number) => {
+    return Number(`${number}`.replace(".", ""));
+};
