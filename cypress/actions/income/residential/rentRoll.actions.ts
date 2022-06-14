@@ -167,6 +167,7 @@ class InPlaceRentRollActions extends ResidentialRentRollSharedActions<typeof ren
     pasteRentTypeByRowNumber(value: string | number, rowNumber = 0): InPlaceRentRollActions {
         rentRollPage.rentTypeCells.eq(rowNumber).dblclick();
         rentRollPage.textAreaToInput.clear().invoke("val", value);
+        cy.get(".listbox ").contains(value).click();
         rentRollPage.rentTypeCells.eq(rowNumber).should("include.text", value);
         return this;
     }
@@ -241,7 +242,7 @@ class InPlaceRentRollActions extends ResidentialRentRollSharedActions<typeof ren
     pasteLeaseStatusByRowNumber(value: string | number, rowNumber = 0): InPlaceRentRollActions {
         rentRollPage.leaseStatusCells.eq(rowNumber).dblclick();
         rentRollPage.textAreaToInput.clear().invoke("val", value);
-        cy.contains(value).click();
+        cy.get(".listbox").contains(value).click();
         rentRollPage.leaseStatusCells.eq(rowNumber).should("include.text", value);
         return this;
     }
