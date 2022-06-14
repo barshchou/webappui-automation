@@ -34,8 +34,7 @@ describe("In-Place Rent Roll table tests",
 
         cy.stepInfo("3. Copy / Paste value into the Mounthly Rent ($) cell");
 
-        // Problem with Paste Elements
-        // Income._Residential.InPlaceRentRoll.pasteMonthlyRentByRowNumber(testData.residentialUnits[0].monthlyRent, 1);
+        Income._Residential.InPlaceRentRoll.pasteMonthlyRentByRowNumber(testData.residentialUnits[0].monthlyRent, 1);
 
         deleteReport(testData.reportCreationData.reportNumber);
     });

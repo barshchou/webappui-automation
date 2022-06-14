@@ -252,7 +252,9 @@ class InPlaceRentRollActions extends ResidentialRentRollSharedActions<typeof ren
 
     pasteMonthlyRentByRowNumber(value: string | number, rowNumber = 0): InPlaceRentRollActions {
         const textToBe = typeof value === "string" ? value : `$${numberWithCommas(value.toFixed(2))}`;
-        rentRollPage.monthlyRentCells.eq(rowNumber).dblclick().invoke("val", value).should("have.text", textToBe);
+        rentRollPage.monthlyRentCells.eq(rowNumber).dblclick();
+        this.pasteTextToTextarea(`${value}`);
+        rentRollPage.monthlyRentCells.eq(rowNumber).should("have.text", textToBe);
         return this;
     }
 
@@ -348,6 +350,11 @@ class InPlaceRentRollActions extends ResidentialRentRollSharedActions<typeof ren
 
     private enterTextToTextarea(text: string): InPlaceRentRollActions {
         rentRollPage.textAreaToInput.clear().type(text).type("{enter}");
+        return this;
+    }
+
+    private pasteTextToTextarea(text: string): InPlaceRentRollActions {
+        rentRollPage.textAreaToInput.clear().invoke("val", text).type("{enter}");
         return this;
     }
 
