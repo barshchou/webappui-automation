@@ -101,7 +101,8 @@ export namespace BoweryReports {
         rooms?: number,
         monthlyRent: number,
         leaseStatus?: LeaseStatus,
-        rentType?: RentType
+        rentType?: RentType,
+        bedRooms?: number | string
     }
 
     export type RentCompField = {
