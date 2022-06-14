@@ -1,18 +1,19 @@
 const expensesCellNames = {
-
     realEstateTaxes: "realEstateTaxes",
     insurance: "insurance",
     electricity: "electricity",
     fuel: "fuel",
     waterAndSewer: "waterAndSewer",
-    utilities: "utilities",
     repairAndMaintenance: "repairsAndMaintenance",
     payrollBenefits: "payrollAndBenefits",
     generalAndAdministrative: "generalAndAdministrative",
     legalAndProfessional: "legalAndProfessionalFees",
     miscelaneous: "miscellaneous",
     managementFees: "management",
-    replacementsAndReserves: "reserves"
+    replacementsAndReserves: "reserves",
+    total: "total",
+    custom: "custom",
+    utilities: "utilities"
 };
 
 export default Object.freeze(expensesCellNames);

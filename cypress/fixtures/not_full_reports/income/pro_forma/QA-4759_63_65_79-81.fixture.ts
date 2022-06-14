@@ -1,5 +1,6 @@
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 import Enums from "../../../../enums/enums";
+import { BoweryAutomation, BoweryReports } from "../../../../types";
 
 const _grossBuildingArea = 5000;
 const _numberOfCommercialUnits = 3;
@@ -27,7 +28,7 @@ const _insuranceUnitPerSf = _insuranceUnitTotal / _grossBuildingArea;
 const _insuranceUnitPerUnit = _forecast;
 
 const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("4759_63_65_79-81", {
-        incomeValue: Enums.INCOME_TYPE.BOTH
+        incomeValue: Enums.INCOME_TYPE.both
     });
 
 export default {

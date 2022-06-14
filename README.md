@@ -12,6 +12,7 @@
   - [CLI_flags](#cli_flags)
   - [GH Actions debug](#gh_actions_debug)
   - [Validation of export](#export_validation)
+  - [Env selection (dev/staging/prod/custom)](#env_selection)
 - [Useful VS Code extensions](#vs_code_extensions)
 - [Using Husky](#husky_usage)
 
@@ -105,8 +106,44 @@ You can refer to [QA-4053 spec](./cypress/integration/not_full_reports/sales/val
 
 1. (1st `it` in `describe`) Your test creates report.
 2. (1st `it` in `describe`) Your test downloads report. Report has `job_id.docx` name and stored in `cypress/download`. Inside method `downloadAndConvertDocxReport()` we call several tasks (code which executes in nodejs): wait until file showed up in filesystem -> we convert docx into html -> we rename docx file from `job_id.docx` to `QA-test_case_number.docx` -> we rename html file from `job_id.html` to `QA-test_case_number.html`
-3. (2nd `it` in `describe`) Your test opens generated html report in Cypress (Cypress *can't* (well, until [release 9.6.0](https://github.com/cypress-io/cypress/releases/tag/v9.6.0)) [visit other origin url](https://docs.cypress.io/guides/guides/web-security#Same-superdomain-per-test))
-4. (2nd `it` in `describe`) Your test makes traverse and assert on generated html report. 
+3. (2nd `it` in `describe`) **important** Before calling `cy.task("getFilePath")` to get the path of your html report - you will need explicitly change `baseUrl` in `cypress.json` by adding next line:
+
+```ts
+Cypress.config().baseUrl = null;
+```
+
+This will set baseUrl of `cypress.json` to `null` and reload browser's window, which eventually made possible to navigate to static html page in filesystem. Without it - Cypress will consider relative path of html report as path to web resource (will navigate to `http://baseUrl.com/
+cypress/downloads/TestAutoReport-QA-4719 - 462 1st Avenue, Manhattan, NY 10016.docx.html`, for example).
+
+4. (2nd `it` in `describe`) Your test opens generated html report in Cypress (Cypress *can't* (well, until [release 9.6.0](https://github.com/cypress-io/cypress/releases/tag/v9.6.0)) [visit other origin url](https://docs.cypress.io/guides/guides/web-security#Same-superdomain-per-test))
+5. (2nd `it` in `describe`) Your test makes traverse and assert on generated html report. 
+
+### Env selection (dev/staging/prod/custom) <a id="env_selection"></a>
+
+TL;DR
+
+If you want to open Cypress GUI - run `start.local.js` through nodejs
+
+Examples:
+
+Open Cypress GUI on dev env
+```shell
+node ./start.local.js 'cy:open' "--env url=dev"
+```
+Open Cypress GUI on staging env
+```shell
+node ./start.local.js 'cy:open' "--env url=staging"
+```
+Open Cypress GUI on custom env
+```shell
+node ./start.local.js 'cy:open' "--env url=custom,customEnv='https://bowery-staging.herokuapp.com'"
+```
+
+The same approach we use to set url via env variables, which described in [CLI](#cli_flags). A bit inconvinient, but works properly.
+
+A bit of a history and problem
+
+Previously, we were selecting specific url to run the tests with help of [Cypress environmental variables](https://docs.cypress.io/guides/guides/environment-variables), but our `baseUrl` in `cypress.json` wasn't set. It [wasn't a good approach](https://docs.cypress.io/guides/references/best-practices#Setting-a-global-baseUrl), but it allowed us dynamically set the url to visit and url for api requests. **BUT ALSO** our `before/beforeEach` **hooks were executing two time** (two time of login through api). And if we would try to create report - we would create two report and were working in the second one.     
 
 ## Useful VS Code extensions <a id="vs_code_extensions"></a>
 

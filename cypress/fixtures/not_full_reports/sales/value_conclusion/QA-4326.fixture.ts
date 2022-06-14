@@ -12,7 +12,7 @@ const commentaryFixture = () => {
 
 export default {
     reportCreationData: ReportDataCreator.getReportData("4326", {
-        incomeValue: Enums.INCOME_TYPE.BOTH
+        incomeValue: Enums.INCOME_TYPE.both
     }),
     commentaryData: Object.freeze(commentaryFixture())
 };

@@ -7,6 +7,7 @@ import {
 } from "../../../../utils/numbers.utils";
 import { isProdEnv } from "../../../../utils/env.utils";
 import ResidentialRentRollSharedActions from "../../shared_components/residentialRentRoll.shared.actions";
+import { BoweryReports } from "../../../types";
 
 class InPlaceRentRollActions extends ResidentialRentRollSharedActions<typeof rentRollPage> {
 
@@ -154,6 +155,19 @@ class InPlaceRentRollActions extends ResidentialRentRollSharedActions<typeof ren
     enterRentTypeCellByRowNumber(rentType: string, rowNumber = 0): this {
         rentRollPage.rentTypeCells.eq(rowNumber).dblclick();
         this.enterTextToTextarea(rentType);
+        return this;
+    }
+
+    removeRentTypeByRowNumber(number = 0): InPlaceRentRollActions {
+        rentRollPage.rentTypeCells.eq(number).click().type("{backspace}");
+        this.verifyLeaseStatusByRow("", number);
+        return this;
+    }
+
+    pasteRentTypeByRowNumber(value: string | number, rowNumber = 0): InPlaceRentRollActions {
+        rentRollPage.rentTypeCells.eq(rowNumber).dblclick();
+        rentRollPage.textAreaToInput.clear().invoke("val", value);
+        rentRollPage.rentTypeCells.eq(rowNumber).should("include.text", value);
         return this;
     }
 

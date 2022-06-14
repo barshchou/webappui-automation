@@ -3,7 +3,7 @@ import ReportDataCreator from "../../../data_creator/reportData.creator";
 
 export default {
     reportCreationData: ReportDataCreator.getReportData("4112", {
-        incomeValue: Enums.INCOME_TYPE.BOTH
+        incomeValue: Enums.INCOME_TYPE.both
     }),
     comparableFirst: {
         address: "200 West 78 Street",

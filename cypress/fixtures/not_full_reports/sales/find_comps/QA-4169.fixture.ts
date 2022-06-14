@@ -9,7 +9,7 @@ const comparableFixture = () => {
 
 export default {
     reportCreationData: ReportDataCreator.getReportData("4169", {
-        incomeValue: Enums.INCOME_TYPE.BOTH
+        incomeValue: Enums.INCOME_TYPE.both
     }),
     compAddress: "140 E 14th St, New York, NY 10003, USA",
     condition: "Shell",
