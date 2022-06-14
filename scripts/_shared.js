@@ -1,6 +1,23 @@
 const { exec } = require("child_process");
 const envUrls = require("./env.urls");
 
+const _envs = {
+  DEV: "url=dev",
+  STAGE: "url=staging",
+  PROD: "url=prod"
+}
+
+function _findArg(_args, argName){
+  let arg;
+  arg = _args.split(",").find(elem => elem.includes(argName));
+  if(arg == undefined){
+    return;
+  }
+  else{
+    return arg.split(" ").find(elem => elem.startsWith(argName));
+  }       
+}
+
 function _exec(command,cb) {   
     exec(command, function(err,stdout,stderr){
         if(err) {
@@ -13,13 +30,15 @@ function _exec(command,cb) {
 
 function _mutateCommand(command, args){
     if(args != undefined || args == ""){
-      command = command.concat(` ${args}`)
+      command = command.concat(` --env ${args}`)
+
+      console.log(args);
+
       let customEnv = "";
       let url = "";
 
-      customEnv = args.split(",").find(elem => elem.startsWith("customEnv="));
-      url = args.split(",").find(elem => elem.includes("url="))
-      .split(" ").find(elem => elem.startsWith("url="));
+      customEnv = _findArg(args,"customEnv");
+      url = _findArg(args,"url");
 
       console.log("\n"+"Env is: "+url);
       console.log("Custom url is:"+customEnv+"\n");
@@ -31,13 +50,13 @@ function _mutateCommand(command, args){
       }
       else if(url != undefined){
         switch(true){
-          case (url == "url=dev"):
+          case (url == _envs.DEV):
             command = command.concat(` --config baseUrl=${envUrls.DEV}`);
             break;
-          case (url == "url=staging"):
+          case (url == _envs.STAGE):
             command = command.concat(` --config baseUrl=${envUrls.STAGING}`);
             break;
-          case (url == "url=prod"):
+          case (url == _envs.PROD):
             command = command.concat(` --config baseUrl=${envUrls.PROD}`);
             break;
         }        
