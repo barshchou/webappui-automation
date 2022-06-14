@@ -50,8 +50,14 @@ declare global {
          * Create report through API
          * @param reportCreationData Data of a report to pass to testData
          * @param payload Function, that returns payload object
+         * @param token jwt token retrieved during login
+         * @param envUrl url where the api request will go (basically, it's a Cypress' `baseUrl`)
          */
-        createApiReport(reportCreationData: BoweryAutomation.ReportCreationData, payload: any, token: any): void
+        createApiReport(
+          reportCreationData: BoweryAutomation.ReportCreationData, 
+          payload: any, 
+          token: any,
+          envUrl: any): void
 
         _mapSet(key: any, value: any): void  
         _mapGet(key: any): Cypress.Chainable<any>

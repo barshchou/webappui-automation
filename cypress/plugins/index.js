@@ -153,17 +153,20 @@ const _loginApi = async () => {
  * @param {*} _payloadFn 
  * @returns 
  */
- const _createReportApi = async (_reportCreationData, _payload, _token) => {
+ const _createReportApi = async (_reportCreationData, _payload, _token, _envUrl) => {
     let reportId = "not report id";
+    
     console.log(_reportCreationData+"\n");
     console.log(_payload+"\n");
     console.log(_token);
 
-    const socket = io.connect("https://bowery-staging.herokuapp.com");
+    const socket = io.connect(_envUrl);
     const _connect = new Promise((res,rej)=>
       socket.on('connect', () => console.log('Socket opened')).on('init', async socketId => {
+        
         console.log(socketId)
-        await request("https://bowery-staging.herokuapp.com")
+        
+        await request(_envUrl)
         .post('/report')
         .set('Accept', 'application/json')
         .send(_payload)
@@ -174,6 +177,7 @@ const _loginApi = async () => {
       })
     ) 
     console.log("socketid is "+await _connect);
+    
     const subscription = new Promise((res, rej) =>
         socket.on('report:created', (data) => {
           if (!data || data.report_number !== _payload.reportNumber) {
@@ -185,8 +189,10 @@ const _loginApi = async () => {
       )
 
       const report = await subscription;
+      
       console.log(report._id);
       console.log(report.report_number);
+      
       reportId = report._id;
    
     return reportId;
@@ -238,8 +244,8 @@ module.exports = (on, config) => {
   });
 
   on("task",{
-    async createReportApi({_reportCreationData, _payload, _token}){
-      return await _createReportApi(_reportCreationData, _payload, _token);
+    async createReportApi({_reportCreationData, _payload, _token, _envUrl}){
+      return await _createReportApi(_reportCreationData, _payload, _token, _envUrl);
     }
   });
 

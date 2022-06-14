@@ -40,6 +40,7 @@ export const navigateToEnv = () => {
 }; 
 
 export const createReport = (reportCreationData: BoweryAutomation.ReportCreationData, payloadFunction = createPayload) => {
+    const envUrl = Cypress.config().baseUrl;
     loginAction();
     cy._mapGet("user_id_api").then(_userId => {
         cy.log(`user id is: ${_userId}`);
@@ -47,11 +48,9 @@ export const createReport = (reportCreationData: BoweryAutomation.ReportCreation
         if(Cypress.env("report") == "api"){
             cy._mapGet("token").then(_token => {
                 cy.log(`token is: ${_token}`);
-                cy.pause();
                 cy.createApiReport(
-                    reportCreationData, _payload, _token
+                    reportCreationData, _payload, _token, envUrl
                 );
-                cy.pause();
                 navigateToEnv();
             });
             

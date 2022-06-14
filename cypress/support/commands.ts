@@ -48,14 +48,21 @@ Cypress.Commands.add("loginByUI", (url) => {
     cy.get("*[name='password']").should("be.visible").type(password).type("{enter}");
 });
 
-Cypress.Commands.add("createApiReport", (reportCreationData: BoweryAutomation.ReportCreationData, payload, token) => {
+Cypress.Commands.add("createApiReport", 
+(reportCreationData: BoweryAutomation.ReportCreationData, payload, token, envUrl) => {
     cy.task("createReportApi", 
-    { _reportCreationData:reportCreationData, _payload:payload, _token:token  }, { timeout:30000 }).then(val => {
+    { 
+        _reportCreationData:reportCreationData, 
+        _payload:payload, 
+        _token:token,
+        _envUrl:envUrl
+
+    }, { timeout:30000 })
+    .then(val => {
         cy.log(`reportId is next: ${val}`);
         cy._mapSet(mapKeysUtils.report_id, val);
     });
     cy.log("createApiReport");
-    cy.pause();
 });
 
 Cypress.Commands.add("dragAndDrop", (subject, target) => {
@@ -120,6 +127,7 @@ Cypress.Commands.add("stepInfo", (message:string) => {
 Cypress.Commands.add("_mapSet", (_key:any, _value:any) => {
     return _map.set(_key, _value);
 });
+
 Cypress.Commands.add("_mapGet", (_key: any) => {
     return _map.get(_key);
 });
