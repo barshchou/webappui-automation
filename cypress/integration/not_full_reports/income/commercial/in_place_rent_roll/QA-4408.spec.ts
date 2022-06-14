@@ -16,7 +16,7 @@ describe("Verify the Current Commercial Income Discussion on the In-Place Rent R
         Property.Summary.enterNumberOfCommercialUnits(testData.noVacantData.numberOfCommercialUnits);
         NavigationSection.navigateToCommercialInPlaceRentRoll();
         Income.Commercial.InPlaceRentRoll.chooseListLeaseStatuses(testData.leaseNoVacant, testData.noVacantData.numberOfCommercialUnits)
-            .verifyCommentaryFullText(testData.noVacantData.commentaryToBe);
+            .verifyCommentaryContainsText(testData.noVacantData.commentaryToBe);
         deleteReport(testData.reportCreationData.reportNumber);
     });
 
@@ -25,7 +25,7 @@ describe("Verify the Current Commercial Income Discussion on the In-Place Rent R
         Property.Summary.enterNumberOfCommercialUnits(testData.oneVacantData.numberOfCommercialUnits);
         NavigationSection.navigateToCommercialInPlaceRentRoll();
         Income.Commercial.InPlaceRentRoll.chooseListLeaseStatuses(testData.leaseOneVacant, testData.oneVacantData.numberOfCommercialUnits)
-            .verifyCommentaryFullText(testData.oneVacantData.commentaryToBe);
+            .verifyCommentaryContainsText(testData.oneVacantData.commentaryToBe);
         deleteReport(testData.reportCreationData.reportNumber);
     });
 
@@ -34,7 +34,7 @@ describe("Verify the Current Commercial Income Discussion on the In-Place Rent R
         Property.Summary.enterNumberOfCommercialUnits(testData.allVacantData.numberOfCommercialUnits);
         NavigationSection.navigateToCommercialInPlaceRentRoll();
         Income.Commercial.InPlaceRentRoll.chooseListLeaseStatuses(testData.leaseAllVacant, testData.allVacantData.numberOfCommercialUnits)
-            .verifyCommentaryFullText(testData.allVacantData.commentaryToBe);
+            .verifyCommentaryContainsText(testData.allVacantData.commentaryToBe);
         deleteReport(testData.reportCreationData.reportNumber);
     });
 
@@ -43,7 +43,7 @@ describe("Verify the Current Commercial Income Discussion on the In-Place Rent R
         Property.Summary.enterNumberOfCommercialUnits(testData.oneUnitData.numberOfCommercialUnits);
         NavigationSection.navigateToCommercialInPlaceRentRoll();
         Income.Commercial.InPlaceRentRoll.chooseLeaseStatusByRowNumber(testData.leaseOneOccupied)
-            .verifyCommentaryFullText(testData.oneUnitData.commentaryToBe);
+            .verifyCommentaryContainsText(testData.oneUnitData.commentaryToBe);
         deleteReport(testData.reportCreationData.reportNumber);
     });
 
@@ -53,7 +53,7 @@ describe("Verify the Current Commercial Income Discussion on the In-Place Rent R
         NavigationSection.navigateToCommercialInPlaceRentRoll();
         Income.Commercial.InPlaceRentRoll.chooseListLeaseStatuses(testData.leaseFewVacantFewOccupied,
             testData.fewVacantFewOccupiedData.numberOfCommercialUnits)
-            .verifyCommentaryFullText(testData.fewVacantFewOccupiedData.commentaryToBe);
+            .verifyCommentaryContainsText(testData.fewVacantFewOccupiedData.commentaryToBe);
         deleteReport(testData.reportCreationData.reportNumber);
     });
 });
