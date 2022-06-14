@@ -1,8 +1,9 @@
 import { BoweryAutomation } from "../../types";
 import { aliasQuery } from "../../utils/graphql.utils";
-import Homepage from "./homepage.actions";
 import NavigationSection from "./navigationSection.actions";
 import { createPayload } from "../../api/report_payloads/462Avenue1NY.payload";
+import mapKeysUtils from "../../utils/mapKeys.utils";
+import { _HomePage } from ".";
 
 /**
  * ernst: createReport is used everywhere - default logic should be: 
@@ -40,6 +41,8 @@ export const navigateToEnv = () => {
 }; 
 
 export const createReport = (reportCreationData: BoweryAutomation.ReportCreationData, payloadFunction = createPayload) => {
+    salesInterceptions();
+
     const envUrl = Cypress.config().baseUrl;
     loginAction();
     cy._mapGet("user_id_api").then(_userId => {
@@ -53,19 +56,28 @@ export const createReport = (reportCreationData: BoweryAutomation.ReportCreation
                 );
                 navigateToEnv();
             });
-            
+            cy._mapGet(mapKeysUtils.report_id).then(reportId => {
+                cy.log(reportId);
+                _HomePage.Page.reportsRows.should("be.visible")
+                .each((elem) => {
+                    if(elem.attr("href").includes(reportId)){
+                        cy.log("Found Report").visit(`/report/${reportId}`);
+                    }
+                    return;
+                });
+            });
         }
         else {
-            Homepage.createReport(reportCreationData);
+            navigateToEnv();
+            _HomePage.createReport(reportCreationData);
         }
-        salesInterceptions();
     });
 };
 
 export const deleteReport = (reportNumber) => {
     cy.stepInfo('Delete report');
     NavigationSection.returnToHomePage();
-    Homepage.deleteReport(reportNumber);
+    _HomePage.deleteReport(reportNumber);
 };
 
 export const salesInterceptions = () => {
