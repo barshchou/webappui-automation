@@ -15,7 +15,8 @@ class ComparableExpensesActions extends BaseActions {
 
     enterAddressByColumnIndex(address: string, index = 0): this {
         compExpensesPage.getUnifiedEditableAndTotalCells("address").eq(index).as("addressCell");
-        cy.get("@addressCell").type("something").dblclick()
+        cy.get("@addressCell").invoke('val', "some text placeholder")
+            .type(`{enter}`)
             .clear()
             .scrollIntoView()
             .realType(`${address}{enter}`);
