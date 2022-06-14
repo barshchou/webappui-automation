@@ -157,7 +157,13 @@ describe(`[QA-5011] [Income>Expense forecast] `,
         
         _NavigationSection.navigateToProForma();
                         
-                    
+        cy.get('@summaPerSF').then(val => {
+            
+cy.log('val')
+
+
+         //   expenseForecastPage.appraisersTotalForecast.should("have.text", textToBe);
+    });            
          
          
          
