@@ -15,7 +15,7 @@ describe("Gross Building Area value pulled from Property -> Summary -> As Is Bui
         NavigationSection.navigateToSalesValueConclusion();
         Sales.ValueConclusion.verifyGrossBuildingAreaAmount(testData.gbaToBe);
         NavigationSection.navigateToPropertySummary()
-            .closeSatisfactionSurvey();
+            .closeUserSurveyIfExist();
         Property.Summary.enterGrossBuildingArea(testData.newGba);
         NavigationSection.navigateToSalesValueConclusion();
         Sales.ValueConclusion.verifyGrossBuildingAreaAmount(testData.newGba);

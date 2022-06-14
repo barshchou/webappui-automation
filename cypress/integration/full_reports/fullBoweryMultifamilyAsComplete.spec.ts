@@ -9,6 +9,7 @@ import Sales from "../../actions/sales/sales.manager";
 import proFormaTypesEnum from "../../enums/proFormaTypes.enum";
 import tableExpenseHistoryCellNames from "../../../cypress/enums/expenseHistoryTableRows.enum";
 import { loginAction } from "../../actions/base/baseTest.actions";
+import Enums from "../../enums/enums";
 
 describe("Full bowery way, multifamily as complete report", { tags: [ "@full_report" ] }, () => {
     it("Test", () => {
@@ -31,10 +32,10 @@ describe("Full bowery way, multifamily as complete report", { tags: [ "@full_rep
             .editAsCompleteExport(testData.asCompleteDescription.asCompleteExportText)
             .clickSaveContinueButton();
         Property.Market.verifyTimeOnMarket(testData.timeOnMarket)
-            .fillMarketResearch(testData.marketResearch)
+            .fillMarketResearch(testData.marketResearch, Enums.MARKET_ANALYSIS_USES.multifamily, false)
             .enterMarketQuarter(testData.marketResearch.quarter)
             .clickPullFromDropbox()
-            .verifyMultifamilySubmarketAnalysisHasDocument(testData.marketResearch.multifamilySubmarketDocument)
+            .verifyMarketByAnalysisUseHasFile(Enums.MARKET_ANALYSIS_USES.multifamily)
             .clickSaveContinueButton();
         Property.History.enterCurrentOwner(testData.owner.name)
             .checkIsUnderContractCheckbox()
@@ -271,19 +272,16 @@ describe("Full bowery way, multifamily as complete report", { tags: [ "@full_rep
             .verifyAppraiserOpinionTaxLiabilityPerBasis(testData.summaryTaxInfo.liabilityValue)
             .verifyAppraiserOpinionTaxRateCell(testData.currentTaxInfo.rateValue)
             .verifyAppraiserOpinionTaxableAssessedValueCell(testData.currentTaxInfo.rateValue)
-            .verifyTaxSummaryCommentary(testData.summaryTaxInfo.commentary)
+            .verifyTaxSummaryDiscussion(testData.summaryTaxInfo.commentary)
             .clickSaveContinueButton();
         Income.ExpenseHistory.selectExpensePeriod(testData.expenseHistory.expensePeriod)
             .verifyExpenseYear(testData.expenseHistory.expenseYear)
             .clickAddExpenseYearButton()
-            .checkGrossRevenueCheckboxByColumnIndex()
             .enterIssueByColIndex(testData.expenseHistory.grossRevenue, tableExpenseHistoryCellNames.grossRevenue)
             .enterIssueByColIndex(testData.expenseHistory.realEstateTaxes, tableExpenseHistoryCellNames.realEstateTaxes)
             .enterIssueByColIndex(testData.expenseHistory.insuranceExpense, tableExpenseHistoryCellNames.insurance)
             .enterIssueByColIndex(testData.expenseHistory.electricityExpense, tableExpenseHistoryCellNames.electricity)
             .enterIssueByColIndex(testData.expenseHistory.fuelExpense, tableExpenseHistoryCellNames.fuel)
-            .uncheckFuelCheckboxByColIndex()
-            .uncheckWaterSewerCheckboxByColIndex()
             .enterIssueByColIndex(testData.expenseHistory.payrollBenefitsExpense, tableExpenseHistoryCellNames.payrollAndBenefits)
             .verifyTotalOpExpensesByColIndex(testData.expenseHistory.toeToBe)
             .verifyTOEExcludingRETByIndex(testData.expenseHistory.realEstateTaxes)
@@ -291,28 +289,28 @@ describe("Full bowery way, multifamily as complete report", { tags: [ "@full_rep
             .verifyAverageTable()
             .verifyExpenseHistoryCommentary(testData.expenseHistory.commentary);
         NavigationSection.navigateToComparableExpenses();
-        testData.comparableExpenses.comparables.forEach((comp, i) => {
+        testData.comparableExpenses.comparables.forEach(comp => {
             Income.ComparableExpenses.clickAddBlankColumnButton()
-                .enterAddressByColumnIndex(comp.address, i)
-                .enterLocationByColumnIndex(comp.location, i)
-                .chooseExpensePeriodByColumnIndex(comp.period, i)
-                .enterSquareFeetByColumnIndex(comp.squareFeet, i)
-                .enterResidentialUnitsByColumnIndex(comp.resUnits, i)
+                .enterAddressByColumnIndex(comp.address)
+                .enterLocationByColumnIndex(comp.location)
+                .chooseExpensePeriodByColumnIndex(comp.period)
+                .enterSquareFeetByColumnIndex(comp.squareFeet)
+                .enterResidentialUnitsByColumnIndex(comp.resUnits)
                 .enterCellDollarValueByColumnIndex(Income.ComparableExpenses.Page.getUnifiedEditableAndTotalCells("insurance"),
-                    comp.insurance, i)
+                    comp.insurance)
                 .enterCellDollarValueByColumnIndex(Income.ComparableExpenses.Page.getUnifiedEditableAndTotalCells("electricity"),
-                    comp.electricity, i)
+                    comp.electricity)
                 .enterCellDollarValueByColumnIndex(Income.ComparableExpenses.Page.getUnifiedEditableAndTotalCells("repairsAndMaintenance"),
-                    comp.repairsAndMaintenance, i)
+                    comp.repairsAndMaintenance)
                 .enterCellDollarValueByColumnIndex(Income.ComparableExpenses.Page.getUnifiedEditableAndTotalCells("payrollAndBenefits"),
-                    comp.payrollAndBenefits, i)
+                    comp.payrollAndBenefits)
                 .enterCellDollarValueByColumnIndex(Income.ComparableExpenses.Page.getUnifiedEditableAndTotalCells("generalAndAdministrative"),
-                    comp.generalAndAdministrative, i)
+                    comp.generalAndAdministrative)
                 .enterCellDollarValueByColumnIndex(Income.ComparableExpenses.Page.getUnifiedEditableAndTotalCells("management"),
-                    comp.management, i)
-                .verifyTOEByColumnIndex(comp.toe, i)
-                .verifyTOEPerSFByColumnIndex(i)
-                .verifyToePerUnitByColumnIndex(i);
+                    comp.management)
+                .verifyTOEByColumnIndex(comp.toe)
+                .verifyTOEPerSFByColumnIndex()
+                .verifyToePerUnitByColumnIndex();
         });
         Income.ComparableExpenses.verifyTableAverageValues();
         NavigationSection.navigateToExpenseForecast()
@@ -457,7 +455,7 @@ describe("Full bowery way, multifamily as complete report", { tags: [ "@full_rep
             .verifyAsCompleteRow(testData.valueConclusion.asCompleteRow)
             .verifyAsIsMarketRow(testData.valueConclusion.asIsMarketRow)
             .clickSaveContinueButton();
-        Final.FinalValuesReconciliation.closeSatisfactionSurvey()
+        Final.FinalValuesReconciliation.closeUserSurveyIfExist()
             .checkPerUnitCheckbox()
             .verifyIncomeStabDate(testData.finalValuesReconciliation.stabilizedCompleteDate)
             .verifyIncomeCompleteDate(testData.finalValuesReconciliation.stabilizedCompleteDate)

@@ -7,6 +7,12 @@ class PropertySummaryPage extends BasePage {
 
     get numberOfCommercialUnitsInput() {return cy.get("*[name=commercialUnitCount]");}
 
+    get currentNumberOfCommercialUnitsInput() {return cy.get("*[name='current.commercialUnitCount']");}
+
+    get buildingNameInput() { return cy.get(`[name='buildingName']`); } 
+
+    get siteAreaInput() { return cy.get(`[name='siteArea']`); }
+
     resUnitsInputValidationText(text: string) {return cy.xpath(`//*[contains(@name, 'residentialUnitCount')]//following::*[contains(text(), '${text}')][1]`);}
 
     commercialUnitsInputValidationText(text: string) {return cy.xpath(`//*[contains(@name, 'commercialUnitCount')]//following::*[contains(text(), '${text}')][1]`);}

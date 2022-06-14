@@ -1,4 +1,6 @@
+import { normalizeText } from './../../../../utils/string.utils';
 import stabRentRollPage from "../../../pages/income/commercial/stabilizedRentRoll.page";
+import { BoweryReports } from "../../../types";
 import CommercialRentRollSharedComponent from "../../shared_components/commercialRentRoll.shared.actions";
 
 class StabilizedRentRollActions extends CommercialRentRollSharedComponent<typeof stabRentRollPage> {
@@ -28,6 +30,34 @@ class StabilizedRentRollActions extends CommercialRentRollSharedComponent<typeof
                 this.verifyRentPsfAnnuallyByRow(rentToBe[i], i);
             }
         }
+        return this;
+    }
+
+    clickAutoFillButton(): StabilizedRentRollActions {
+        stabRentRollPage.autoFillButton.click();
+        return this;
+    }
+
+    verifyCommercialCompGroupDisplayed(groupName: string): StabilizedRentRollActions {
+        stabRentRollPage.commercialCompGroupName(groupName).should('be.visible');
+        return this;
+    }
+
+    verifyCommercialCompGroupForecastRentDisplayed(forecast: number): StabilizedRentRollActions {
+        stabRentRollPage.commercialCompGroupForecastRent(`${forecast}`).should('be.visible');
+        return this;
+    }
+
+    verifyCommercialCompGroupHeaderDisplayed(): StabilizedRentRollActions {
+        stabRentRollPage.commercialCompGroupHeader.should('exist');
+        return this;
+    }
+    
+    verifyStabilizedCommercialIncomeDiscussion(textToBe: string): StabilizedRentRollActions {
+        stabRentRollPage.commentaryText.invoke('text').then(text => {
+            cy.wrap(normalizeText(text)).should('deep.equal', textToBe);
+        });
+        
         return this;
     }
 

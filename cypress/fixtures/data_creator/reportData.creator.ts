@@ -1,4 +1,5 @@
 import Enums from "../../enums/enums";
+import { BoweryReports } from "../../types";
 
 let ReportCreationData = function (address, isSalesForcePull = false, number, templateValue, incomeValue, conclusionValue) {
     this.address = address;
@@ -40,12 +41,12 @@ class ReportCreator {
     }
 
     setTemplateValue(templateValue?) {
-        this.templateValue = templateValue ?? Enums.TEMPLATE_TYPE.FREDDIE_MAC;
+        this.templateValue = templateValue ?? Enums.TEMPLATE_TYPE.freddieMac;
         return this;
     }
 
     setIncomeValue(incomeValue?) {
-        this.incomeValue = incomeValue ?? Enums.INCOME_TYPE.RESIDENTIAL;
+        this.incomeValue = incomeValue ?? Enums.INCOME_TYPE.residential;
         return this;
     }
 

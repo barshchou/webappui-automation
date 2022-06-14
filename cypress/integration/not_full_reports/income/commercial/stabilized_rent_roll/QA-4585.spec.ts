@@ -51,8 +51,8 @@ describe("Verify the Commercial Stabilized Rent Roll table",
             .verifyTenantNames(testData.tenantNames, testData.leaseStatuses)
             .verifyUseCells(testData.useTexts)
             .verifySFCells(testData.listOfUnitsSF)
-            .verifyAnnualRentCellPerSFBasisByRow(testData.rentsPsf[1], testData.listOfUnitsSF[1], "annually", 1)
-            .verifyMonthlyRentPerSFByRow(testData.rentsPsf[1], testData.listOfUnitsSF[1], "annually", 1)
+            .verifyAnnualRentCellPerSFBasisByRow(testData.rentsPsf[1], testData.listOfUnitsSF[1], testData.unitsOfMeasure, 1)
+            .verifyMonthlyRentPerSFByRow(testData.rentsPsf[1], testData.listOfUnitsSF[1], testData.unitsOfMeasure, 1)
             .verifyRentPsfAnnuallyByRow(testData.rentsPsf[1], 1)
             .clickSaveButton()
             .verifyProgressBarNotExist();

@@ -5,8 +5,15 @@ import BaseActionsExt from "./base.actions.ext";
 class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPage> {
     clickYesIfExist() {
         cy.get("body").then($body => {
-            if ($body.text().includes("You have unsaved changes")) this.clickYesButton();
-        });
+                if ($body.text().includes("You have unsaved changes")) {
+                    cy.get("[data-qa=form-confirm-dialog]").invoke('prop', 'hidden').then($prop => {
+                        cy.log(`${$prop}`);
+                        if ($prop == false) {
+                            this.clickYesButton();
+                        }
+                    });
+                }
+            });
         return this;
     }
 
@@ -18,6 +25,7 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         }).as(reportAlias);
         cy.get('[id="review-and-export"]').click();
         this.clickYesIfExist();
+        this.verifyProgressBarNotExist();
         if (isNewReport) cy.wait(`@${reportAlias}`, { timeout:20000 });
         return this;
     }
@@ -54,6 +62,7 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
 
     clickCommercialRentRollButton() {
         navigationSectionPage.commercialRentRollButton.click();
+        this.clickYesIfExist();
         return this;
     }
 
@@ -118,6 +127,11 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         return this;
     }
 
+    clickResidentialStabilizedRentRoll(): this {
+        navigationSectionPage.residentialStabilizedRentRoll.click();
+        return this;
+    }
+
     navigateToUnitInspection() {
         this.clickSaveButton();
         this.clickFinalButton()
@@ -128,7 +142,7 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
 
     navigateToResInPlaceRentRoll() {
         this.clickIncomeApproachButton()
-            .clickResidentialIncomeArrow()
+            .clickResidentialMenuIfClosed()
             .clickInPlaceRentRollButton()
             .clickYesIfExist();
         return this;
@@ -136,8 +150,16 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
 
     navigateToRentComps() {
         this.clickIncomeApproachButton()
-            .clickResidentialIncomeArrow()
+            .clickResidentialMenuIfClosed()
             .clickRentCompsButton()
+            .clickYesIfExist();
+        return this;
+    }
+
+    navigateToCompGroups() {
+        this.clickIncomeApproachButton()
+            .clickCommercialMenuIfClosed()
+            .clickCommercialCompGroups()
             .clickYesIfExist();
         return this;
     }
@@ -150,7 +172,7 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
 
     navigateToCommercialInPlaceRentRoll() {
         this.clickIncomeApproachButton()
-            .clickCommercialArrow()
+            .clickCommercialMenuIfClosed()
             .clickCommercialRentRollButton()
             .clickYesIfExist();
         return this;
@@ -243,8 +265,8 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         this.clickSalesButton()
             .clickFindCompsButton()
             .clickYesIfExist();        
-        cy.wait(`@${Alias.gql.FindSalesComps}`, { timeout:70000 });
-
+        cy.wait(`@${Alias.gql.SearchSalesTransactions}`, { timeout:120000 });
+    
         return this;
     }
 
@@ -253,8 +275,9 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         return this;
     }
 
-    openAdjustCompsInSales() {
-        this.clickAdjustCompsButton()
+    navigateToAdjustComps() {
+        this.clickSalesButton()
+            .clickAdjustCompsButton()
             .clickYesIfExist();
         return this;
     }
@@ -264,9 +287,14 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         return this;
     }
 
+    clickCommercialCompGroupsDiscussion() {
+        navigationSectionPage.commercialCompGroupsDiscussionButton.click();
+        return this;
+    }
+
     navigateToCommercialRentComps() {
         this.clickIncomeApproachButton()
-            .clickCommercialArrow()
+            .clickCommercialMenuIfClosed()
             .clickCommercialRentComps()
             .clickYesIfExist();
         return this;
@@ -294,6 +322,19 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
     openInPlaceRentRollInResidential() {
         this.clickInPlaceRentRollButton()
             .clickYesIfExist();
+        return this;
+    }
+
+    navigateToRentReconcillation() {
+        this.clickIncomeApproachButton()
+            .clickCommercialMenuIfClosed()
+            .clickRentReconcillationButton()
+            .clickYesIfExist();
+        return this;
+    }
+
+    clickRentReconcillationButton() {
+        navigationSectionPage.commercialRentReconcillationButton.click();
         return this;
     }
 
@@ -513,13 +554,13 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
 
     openCommercialStabilizedRentRollInCommercial(): NavigationSectionActions {
         this.clickCommercialStabRentRollButton()
-            .clickYesButton();
+            .clickYesIfExist();
         return this;
     }
 
     navigateToCommercialReimbursementSummary(): NavigationSectionActions {
         this.clickIncomeApproachButton()
-            .clickCommercialArrow()
+            .clickCommercialMenuIfClosed()
             .clickCommercialReimbursementSummaryButton()
             .clickYesIfExist();
         return this;
@@ -527,6 +568,42 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
 
     clickCommercialReimbursementSummaryButton(): NavigationSectionActions {
         navigationSectionPage.comercialReimbursementButton.click();
+        return this;
+    }
+
+    navigateToResidentialStabilizedRentRoll(): this {
+        this.clickIncomeApproachButton();
+        this.clickResidentialMenuIfClosed();
+        this.clickResidentialStabilizedRentRoll()
+            .clickYesIfExist();
+        return this;
+    }
+
+    navigateToCommercialStabilizedRentRoll(): this {
+        this.clickIncomeApproachButton();
+        this.clickCommercialMenuIfClosed();
+        this.clickCommercialStabRentRollButton()
+            .clickYesIfExist();
+        return this;
+    }
+
+    private clickCommercialMenuIfClosed(): NavigationSectionActions {
+        navigationSectionPage.commercialIncomeArrow.then(el => {
+            if (!el.hasClass("expanded")) {
+                this.clickCommercialArrow();
+            }
+        });
+
+        return this;
+    }
+
+    private clickResidentialMenuIfClosed(): NavigationSectionActions {
+        navigationSectionPage.residentialIncomeArrow.then(el => {
+            if (!el.hasClass("expanded")) {
+                this.clickResidentialIncomeArrow();
+            }
+        });
+
         return this;
     }
 }

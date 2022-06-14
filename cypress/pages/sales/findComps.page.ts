@@ -4,74 +4,61 @@ import PropertyInformationForm from "./drm/propertyInfo.page";
 import SaleInformationForm from "./drm/salesInfo.page";
 
 class FindCompsPage extends BasePage {
-    get createCompButton() {return cy.get("[data-qa=create-sales-comps-btn]");}
+    get createCompButton() {return cy.get("[data-qa=create-sales-comps-btn]", { includeShadowDom: true });}
 
-    get searchCompAddressInput() {return cy.get("[data-qa='google-autocomplete-search.location-input'] input");}
+    get searchCompAddressInput() {return cy.get("[data-qa='google-autocomplete-search.location-input'] input", { includeShadowDom: true });}
 
-    get findCompField() {return cy.contains("Enter New Comparable Address");}
+    get findCompField() {return cy.contains("Enter New Comparable Address", { includeShadowDom: true });}
 
-    get submitButton() {return cy.get("[data-qa=submit-button]");}
+    get submitButton() {return cy.get("[data-qa=submit-button]", { includeShadowDom: true });}
 
-    getSelectCompButtonByAddress(address) {return cy.xpath(`//*[text()='${address}']//following-sibling::td/a`);}
+    //getSelectCompButtonByAddress(address) {return cy.xpath(`//*[text()='${address}']//following-sibling::td/a`);}
 
-    get addressCells() {return cy.get("[data-qa=address]");}
+    getSelectCompButtonByAddress(address) {return cy.contains(address, { includeShadowDom: true }).siblings("td").find("a");}
 
-    get capRateCells() {return cy.get("td[data-qa=cap-rate]");}
+    get addressCells() {return cy.get("[data-qa=address]", { includeShadowDom: true });}
 
-    get importCompsButton() {return cy.get("[data-qa=import-btn]");}
+    get capRateCells() {return cy.get("td[data-qa=cap-rate]", { includeShadowDom: true });}
 
-    get importCompModal() {return cy.get("[data-qa*=import][data-qa*=modal]");}
+    get importCompsButton() {return cy.get("[data-qa=import-btn]", { includeShadowDom: true });}
 
-    get csvInput() {return cy.get("[data-qa=file-input]");}
+    get importCompModal() {return cy.get('[class="ant-modal-content"]', { includeShadowDom: true });}
+
+    get csvInput() {return cy.get("[data-qa=file-input]", { includeShadowDom: true });}
 
     getSelectCompFromMapButtonByAddress(address) {
-        return cy.get("[class*=address]").filter(`:contains('${address}')`).parent()
-            .siblings("[class*=buttonsColumn]").find("span").contains("Select").parent();
+        return cy.get('[data-qa="sales-comp-item"]', { includeShadowDom: true })
+        .contains(`${address}`, { includeShadowDom: true }).parent()
+        .find('[data-qa="sales-comp-item-add-btn"]', { includeShadowDom: true });
     }
 
     getRemoveSelectedCompButtonByAddress(address) {
-        return cy.xpath(`//*[contains(text(), '${address}')]//parent::td//following-sibling::td` +
-            "//descendant::button[@aria-label='Remove']");
+        return cy.contains(address).parent("td").parent().find('[data-qa="selected-comp-remove-btn"]');
     }
 
     getRemoveDeletedCompButtonByAddress(address) {
-        return cy.xpath(`//*[contains(text(), '${address}')]//parent::td//following-sibling::td` +
-            "//descendant::button[@aria-label='Add']//following::button[@aria-label='Remove'][1]");
+        return cy.contains(address).parent("td").parent().find('[data-qa="removed-comp-remove-btn"]');
     }
 
     getRemoveCompFromMapButtonByAddress(address) {
-        return cy.get("[class*=address]").filter(`:contains('${address}')`).parent()
-            .siblings("[class*=buttonsColumn]").find("span").contains("Remove").parent();
+        return cy.get("comp-plex").shadow().find("[class*=salesCompItemWrapper]").contains(`${address}`).parent()
+        .siblings("[class*=buttonsColumn]").find("span").contains("REMOVE").parent();
     }
 
-    get reportToSearchCompInput() {return cy.get("[name^=report]");}
+    get reportToSearchCompInput() {return cy.get("[name^=report]", { includeShadowDom: true });}
 
     get importReportCompsButton() {return this.importCompModal.find("span").contains("Import")
         .parent("button");}
 
-    get searchButton() {return cy.xpath("//button[.='Search']");}
+    get searchButton() {return cy.get("button[.='Search']", { includeShadowDom: true });}
 
-    get importCompsSelectButtons() {return cy.xpath("//*[.='Selected for report']//following::button[.='Select']");}
+    get importCompsSelectButtons() {return cy.contains("Selected for report", { includeShadowDom: true }).siblings("button[.='Select']");}
 
-    get createCompSearchResults() {return cy.get("[data-qa=search-result-form] tbody tr");}
+    get createCompSearchResults() {return cy.get("[data-qa=search-result-form] tbody tr", { includeShadowDom: true });}
 
-    get createNewCompButton() {return cy.xpath("//button[.='Create New']");}
+    get createNewCompButton() {return cy.contains("Create New", { includeShadowDom: true });}
 
-    get createCompNumberResidentialUnits() {return cy.xpath("//*[.='# Residential Units*']//child::input");}
-
-    get conditionDropdown() {return cy.xpath("//*[text()='Condition*']//following::*[@class='ant-select-selector'][1]");}
-
-    getDropdownOption(title: string) {return cy.get(`.ant-select-item-option[title='${title}']`);}
-
-    get errorMessageNewComp() {return cy.xpath("//*[text()='Required'][contains(@class, 'errorText')]");}
-
-    get newCompContinueButton() {return cy.xpath("//button[.='Continue']");}
-
-    get netRentableAreaNewComp() {return cy.xpath("//*[.='Net Rentable Area']//child::input");}
-
-    get averageUnitSizeNewComp() {return cy.xpath("//*[.='Average Unit Size']//child::input");}
-
-    get newCompSaveAndCloseButton() {return cy.xpath("//button[.='Save & Close']");}
+    get newCompSaveAndCloseButton() {return cy.get('[data-qa="Save & Close"]', { includeShadowDom: true });}
 }
 
 /**

@@ -6,6 +6,7 @@ import { recordProxiedRequests } from "../../utils/intercept.utils";
 import { recordDOM_Snapshot } from "../utils/snapshot.utils";
 import "./commands";
 import "cypress-real-events/support";
+import { BoweryAutomation } from "../types";
 
 require("cypress-xpath");
 require("cypress-iframe");
@@ -54,6 +55,12 @@ declare global {
 
         _mapSet(key: any, value: any): void  
         _mapGet(key: any): Cypress.Chainable<any>
+        
+        /**
+         * @param {string} subject element to drag
+         * @param {string} target element to drop into
+         */
+        dragAndDrop: (subject:string, target:string) => void;
       }
     }
   }

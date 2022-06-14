@@ -1,23 +1,23 @@
 export default class SaleInformationForm {
-    get SourceInput(){
-        return cy.xpath('//div[.="Source*"]//following-sibling::div');
+    get LinkTypeInput(){
+        return cy.get('[data-qa="Link Type"]', { includeShadowDom:true });
     }
 
-    get SourceList(){
-        return cy.get('[class="rc-virtual-list"]');
+    get LinkTypeList(){
+        return cy.get('[class="rc-virtual-list"]', { includeShadowDom:true });
     }
 
-    getSourceListOption(optionName = "Bowery Subject"){
-        return cy.xpath(`//div[@class="ant-select-item-option-content"]//parent::div[@title="${optionName}"]`);
+    getLinkTypeListOption(optionName = "Bowery Subject"){
+        return cy.get(`[data-qa="Link Type"] [title="${optionName}"]`);
     }
 
-    get SaleDateCalendarNewComp() {return cy.xpath("//*[text()='Sale Date*']//following::input[1]");}
+    get SaleDateCalendarNewComp() {return cy.get('[data-qa="Sale Date"]', { includeShadowDom:true });}
 
     get SaleDateToday(){
-        return cy.get('[class="ant-picker-today-btn"]');
+        return cy.get('[class="ant-picker-today-btn"]', { includeShadowDom: true });
     }
 
-    get BuyerGranteeNewComp() {return cy.xpath("//*[text()='Buyer (Grantee)*']//following::input[1]");}
+    get BuyerGranteeNewComp() {return cy.get('[data-qa="Buyer (Grantee)"]', { includeShadowDom:true });}
 
-    get SellerGrantor() {return cy.xpath("//*[text()='Seller (Grantor)*']//following::input[1]");}
+    get SellerGrantor() {return cy.get('[data-qa="Seller (Grantor)"]', { includeShadowDom:true });}
 }

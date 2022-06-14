@@ -1,5 +1,6 @@
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 import Enums from "../../../../enums/enums";
+import { BoweryReports } from "../../../../types";
 
 
 const _buildingDescription: BoweryReports.BuildingDescription = {
@@ -9,7 +10,7 @@ const _buildingDescription: BoweryReports.BuildingDescription = {
 
 export default {
     reportCreationData: ReportDataCreator.getReportData("5065", {
-        incomeValue: Enums.INCOME_TYPE.BOTH
+        incomeValue: Enums.INCOME_TYPE.both
     }),
     buildingDescription: _buildingDescription,
     squareFeet: 100,

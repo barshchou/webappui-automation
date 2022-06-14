@@ -1,9 +1,10 @@
 import ReportDataCreator from "../data_creator/reportData.creator";
 import Enums from "../../enums/enums";
+import { BoweryAutomation } from "../../types";
 
 const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("createReport", {
-    incomeValue: Enums.INCOME_TYPE.BOTH,
-    templateValue: Enums.TEMPLATE_TYPE.FREDDIE_MAC,
+    incomeValue: Enums.INCOME_TYPE.both,
+    templateValue: Enums.TEMPLATE_TYPE.freddieMac,
     conclusionValue: Enums.VALUE_CONCLUSION_TYPE.AS_COMPLETE
 });
 
