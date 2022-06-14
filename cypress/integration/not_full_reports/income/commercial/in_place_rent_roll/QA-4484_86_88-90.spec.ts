@@ -13,6 +13,9 @@ describe(`[Income > Commercial > In-Place Rent Roll > Generated Commentary]
         cy.stepInfo("Precondition: Proceed to the Income > Commercial > In-Place Rent Roll page.");
         _NavigationSection.navigateToCommercialInPlaceRentRoll()
             .verifyProgressBarNotExist();
+        Income._CommercialManager.InPlaceRentRoll
+            .chooseLeaseStatusByRowNumber(testData.leaseStatus)
+            .clickSaveButton();
 
         cy.saveLocalStorage();
     });
@@ -21,14 +24,35 @@ describe(`[Income > Commercial > In-Place Rent Roll > Generated Commentary]
         cy.restoreLocalStorage();
     });
 
-    it("[QA-4484]", () => {
-        cy.stepInfo("1. Edit discussion and enter '=F' value; click 'Foreclosure Sale' suggested value");
-        Income._CommercialManager.InPlaceRentRoll.clickEditDiscussionButton()
-            .editDiscussionTextArea(testData.value)
-            .clickNarrativeSuggestions(testData.unchangeRennovation);
+    it("[QA-4484], [QA-4486]", () => {
+        Income._CommercialManager.InPlaceRentRoll.clickEditDiscussionButton();
+        testData.suggestionsVerificationData.forEach((data) => {
+            cy.stepInfo(`1. Edit discussion and enter '${data.value}'
+                        value; click '${data.suggestion}' suggested value`);
+            Income._CommercialManager.InPlaceRentRoll.editDiscussionTextArea(data.value)
+                .clickNarrativeSuggestions(data.suggestion);
+    
+            cy.stepInfo(`2. Verify that the following text appears.`);
+            Income._CommercialManager.InPlaceRentRoll
+                .verifyCommentaryContainsText(data.verifyAreaValue);
+        });
+    });
 
-        cy.stepInfo("3. Verify that the following text appears.");
-        Income._CommercialManager.InPlaceRentRoll.verifyCommentaryContainsText(testData.verifyAreaValue);
+    it("[QA-4488]", () => {
+        cy.reload();
+        Income._CommercialManager.InPlaceRentRoll.clickEditDiscussionButton()
+            .editDiscussionTextArea(" ");
+        testData.chipVerificationData.forEach((data) => {
+            cy.stepInfo(`1. Edit discussion and enter '${testData.chipPromptValue}' 
+                        value; click '${data.suggestion}' suggested value`);
+            Income._CommercialManager.InPlaceRentRoll
+                .editDiscussionTextArea(data.value, false)
+                .clickNarrativeSuggestions(data.suggestion);
+            
+            cy.stepInfo(`2. Verify that the following text appears.`);
+            Income._CommercialManager.InPlaceRentRoll
+                .verifyCommentaryContainsText(data.verifyAreaValue);
+        });
     });
 
     after("Delete report after test suite", () => {
