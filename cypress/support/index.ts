@@ -32,7 +32,7 @@ declare global {
          * Custom command to select DOM element by data-cy attribute.
          * @example cy.dataCy('greeting')
          */
-        loginByApi(url: string): Cypress.Chainable<Cypress.Response<any>>
+        loginByApi(url: string, username: any, password: any): Cypress.Chainable<Cypress.Response<any>>
         
         /**
          * 

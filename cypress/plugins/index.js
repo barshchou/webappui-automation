@@ -106,16 +106,12 @@ const _convertDocxToHtml = async (report) => {
  * Login by api
  * @returns response from `/user/login` endpoint
  */
-const _loginApi = async (_envUrl) => {
-  let cypressEnvJson = JSON.parse(
-    await readFileAsync("./cypress.env.json",{encoding:"utf-8"})
-  );
-
+const _loginApi = async (_envUrl, _username, _password) => {
   const response = await request(_envUrl)
   .post('/user/login')
   .send({
-    username:process.env.CYPRESS_USERNAME ?? cypressEnvJson.USERNAME,
-    password:process.env.CYPRESS_PASSWORD ?? cypressEnvJson.PASSWORD
+    username:_username,
+    password:_password
   })
   .expect('Content-Type', /json/)
   .expect(200);
@@ -241,8 +237,8 @@ module.exports = (on, config) => {
   });
 
   on("task",{
-    async loginApi(_envUrl){
-      return await _loginApi(_envUrl);
+    async loginApi({_envUrl, _username, _password}){
+      return await _loginApi(_envUrl, _username, _password);
     }
   });
   //#endregion

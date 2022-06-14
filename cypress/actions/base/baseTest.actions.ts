@@ -14,7 +14,11 @@ export const loginAction = () => {
             cy.loginByUI(Cypress.config().baseUrl);
             break;
         default:
-            cy.loginByApi(Cypress.config().baseUrl);
+            cy.loginByApi(
+                Cypress.config().baseUrl, 
+                Cypress.env("USERNAME"), 
+                Cypress.env("PASSWORD")
+            );
     }
 };
 

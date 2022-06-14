@@ -5,7 +5,11 @@ import { createReport, deleteReport } from "../../actions/base/baseTest.actions"
 describe("Open any existing report, generate report and download it", { tags: [ "@smoke" ] }, () => {
 
     it("Download, generate report", () => {
-        cy.loginByApi(Cypress.config().baseUrl);
+        cy.loginByApi(
+            Cypress.config().baseUrl, 
+            Cypress.env("USERNAME"), 
+            Cypress.env("PASSWORD")
+        );
         Base._HomePage.clickAllReportsTab()
             .verifyProgressBarNotExist()
             .enterReportNumberToSearch(testData.reportCreationData.reportNumber)
