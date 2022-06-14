@@ -454,7 +454,7 @@ describe("Full bowery way, multifamily as complete report", { tags: [ "@full_rep
             .verifyAsCompleteRow(testData.valueConclusion.asCompleteRow)
             .verifyAsIsMarketRow(testData.valueConclusion.asIsMarketRow)
             .clickSaveContinueButton();
-        Final.FinalValuesReconciliation.closeSatisfactionSurvey()
+        Final.FinalValuesReconciliation.closeUserSurveyIfExist()
             .checkPerUnitCheckbox()
             .verifyIncomeStabDate(testData.finalValuesReconciliation.stabilizedCompleteDate)
             .verifyIncomeCompleteDate(testData.finalValuesReconciliation.stabilizedCompleteDate)

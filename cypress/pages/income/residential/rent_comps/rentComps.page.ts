@@ -194,7 +194,31 @@ class RentCompsPage extends BasePage{
 
     get searchCancelButton() { return cy.get("[data-qa=search-cancel]"); }
 
-    getFilterArrowButton(name: string) { return cy.xpath(`//*[text()='${name}']//following-sibling::button`); }
+    getFilterArrowButton(filterName: string) { return cy.xpath(`//*[text()='${filterName}']//following-sibling::button`); }
+
+    getAddComparableFromSearchButtonByIndex(searchIndex: number) { return cy.get("[role=rowgroup] [role=presentation]").eq(searchIndex); }
+
+    getRemoveCompButtonByIndex(index: number) { return cy.get("[data-qa=selected-building-comps-table] [role=presentation]").eq(index); }
+
+    get removedBuildingCompsTable() { return cy.get("[data-qa=selected-building-comps-table]").eq(1); }
+
+    getRemovedBuildingCompsTableHeader(headerName: string) {
+        return cy.get("[data-qa=selected-building-comps-table]").eq(1).prev().contains(headerName);
+    }
+
+    getRemovedBuildingCompsTableColumnText(columnName: string) { return cy.get(`[data-qa=${columnName}-cell]`).eq(1); }
+
+    getRemovedBuildingCompsTableButton(buttonName: string) {
+        return cy.get("[data-qa=selected-building-comps-table]").eq(1).contains(buttonName);
+    }
+
+    getShowDetailsRowByIndex(index: number) { return cy.xpath(`//tr[@data-qa='row-${index}']/following-sibling::tr`); }
+
+    getShowDetailsHeader(headerName: string) { return cy.xpath(`//tr[@data-qa='row-0']/following-sibling::tr//thead//th[.='${headerName}']`); }
+
+    getShowDetailsButtonByIndex(index: number) {
+        return cy.get("[data-qa=selected-building-comps-table]").eq(1).contains("SHOW DETAILS").eq(index);
+    }
 }
 
 export default new RentCompsPage();

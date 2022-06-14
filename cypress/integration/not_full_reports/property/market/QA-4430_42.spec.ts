@@ -40,6 +40,7 @@ describe("Verify the functionality of the Ceiling Height radio button",
     });
 
     it("Check exported document other utilities values and commentaries", () => {
+        Cypress.config().baseUrl = null;
         cy.task("getFilePath", { _reportName: testData.reportCreationData.reportNumber, _docx_html: "html" })
         .then(file => {
             cy.log(<string>file);

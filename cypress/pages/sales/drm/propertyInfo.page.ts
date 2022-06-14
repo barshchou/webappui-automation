@@ -1,31 +1,65 @@
+import { Alias } from "../../../utils/alias.utils";
+
+const { comp_plex } = Alias.pageElements;
+
 export default class PropertyInformationForm {
-    // get createCompNumberResidentialUnits() {return cy.xpath("//*[.='# Residential Units*']//child::input");}
+    get conditionDropdown() {
+        return cy.get('[data-qa="Condition"]', { includeShadowDom: true })
+        .as(comp_plex.conditionDropdown);
+    }
 
-    get createCompNumberResidentialUnits() {return cy.get("comp-plex").shadow().contains("# Residential Units").next().find("input");}
+    getDropdownOption(title: string) {
+        return cy.get(`.ant-select-item-option[title='${title}']`, { includeShadowDom: true })
+        .as(comp_plex.getDropdownOption);
+    }
 
-    // get conditionDropdown() {return cy.xpath("//*[text()='Condition*']//following::*[@class='ant-select-selector'][1]");}
+    get errorMessageNewComp() {
+        return cy.get('[data-qa="error-text"]', { includeShadowDom: true })
+        .as(comp_plex.errorMessage);
+    }
 
-    get conditionDropdown() {return cy.get("comp-plex").shadow().contains("Condition").next();}
+    get newCompContinueButton() {
+        return cy.get('[data-qa="Continue"]', { includeShadowDom: true })
+        .as(comp_plex.newCompContinueButton);
+    }
 
-    getDropdownOption(title: string) {return cy.get(`.ant-select-item-option[title='${title}']`, { includeShadowDom: true });}
+    get comparableTypeDropdown() {
+        return cy.get('[data-qa="Comparable Type"]', { includeShadowDom: true })
+        .as(comp_plex.comparableTypeDropdown);
+    }
 
-    get errorMessageNewComp() {return cy.xpath("//*[text()='Required'][contains(@class, 'errorText')]");}
+    get createCompNumberCommercialUnits() {
+        return cy.get('[data-qa="# Commercial Units"]', { includeShadowDom:true })
+        .as(comp_plex.createCompNumberCommercialUnits);
+    }
 
-    // get errorMessageNewComp() {return cy.get("comp-plex").shadow().contains("Required").find()}
+    get createCompNumberResidentialUnits() {
+        return cy.get('[data-qa="# Residential Units"]', { includeShadowDom: true })
+        .as(comp_plex.createCompNumberResidentialUnits);
+    }
 
-    get newCompContinueButton() {return cy.xpath("//button[.='Continue']");}
+    get commercialAreaNewComp() {
+        return cy.get('[data-qa="Commercial Area"]', { includeShadowDom:true })
+        .as(comp_plex.commercialAreaNewComp);
+    }
 
-    get comparableTypeDropdown() {return cy.xpath("//*[text()='Comparable Type*']//following::*[@class='ant-select-selector'][1]");}
+    get netRentableAreaNewComp() {
+        return cy.get('[data-qa="Net Rentable Area"]', { includeShadowDom: true })
+        .as(comp_plex.netRentableAreaNewComp);
+    }
 
-    get createCompNumberCommercialUnits() {return cy.xpath("//*[text()='# Commercial Units*']//following::input[1]");}
+    get averageUnitSizeNewComp() {
+        return cy.get('[data-qa="Average Unit Size"]', { includeShadowDom: true })
+        .as(comp_plex.averageUnitSizeNewComp);
+    }
 
-    get commercialAreaNewComp() {return cy.xpath("//*[text()='Commercial Area*']//following::input[1]");}
+    get internalNotesTextArea() {
+        return cy.get('[data-qa="Internal notes"]', { includeShadowDom:true })
+        .as(comp_plex.internalNotesTextArea);
+    }
 
-    get netRentableAreaNewComp() {return cy.xpath("//*[.='Net Rentable Area']//child::input");}
-
-    get averageUnitSizeNewComp() {return cy.xpath("//*[.='Average Unit Size']//child::input");}
-
-    get internalNotesTextArea() {return cy.xpath("//*[text()='Internal Notes']//following::*[@class='ant-input'][1]");}
-
-    get appraiserCommentaryTextArea() {return cy.xpath("//*[text()='Appraiser Commentary']//following::*[contains(@class, 'ant-input')][1]");}
+    get appraiserCommentaryTextArea() {
+        return cy.get('[data-qa="Appraiser Commentary"] [data-qa="text-input"]', { includeShadowDom: true })
+        .as(comp_plex.appraiserCommentaryTextArea);
+    }
 }

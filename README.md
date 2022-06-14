@@ -106,8 +106,17 @@ You can refer to [QA-4053 spec](./cypress/integration/not_full_reports/sales/val
 
 1. (1st `it` in `describe`) Your test creates report.
 2. (1st `it` in `describe`) Your test downloads report. Report has `job_id.docx` name and stored in `cypress/download`. Inside method `downloadAndConvertDocxReport()` we call several tasks (code which executes in nodejs): wait until file showed up in filesystem -> we convert docx into html -> we rename docx file from `job_id.docx` to `QA-test_case_number.docx` -> we rename html file from `job_id.html` to `QA-test_case_number.html`
-3. (2nd `it` in `describe`) Your test opens generated html report in Cypress (Cypress *can't* (well, until [release 9.6.0](https://github.com/cypress-io/cypress/releases/tag/v9.6.0)) [visit other origin url](https://docs.cypress.io/guides/guides/web-security#Same-superdomain-per-test))
-4. (2nd `it` in `describe`) Your test makes traverse and assert on generated html report. 
+3. (2nd `it` in `describe`) **important** Before calling `cy.task("getFilePath")` to get the path of your html report - you will need explicitly change `baseUrl` in `cypress.json` by adding next line:
+
+```ts
+Cypress.config().baseUrl = null;
+```
+
+This will set baseUrl of `cypress.json` to `null` and reload browser's window, which eventually made possible to navigate to static html page in filesystem. Without it - Cypress will consider relative path of html report as path to web resource (will navigate to `http://baseUrl.com/
+cypress/downloads/TestAutoReport-QA-4719 - 462 1st Avenue, Manhattan, NY 10016.docx.html`, for example).
+
+4. (2nd `it` in `describe`) Your test opens generated html report in Cypress (Cypress *can't* (well, until [release 9.6.0](https://github.com/cypress-io/cypress/releases/tag/v9.6.0)) [visit other origin url](https://docs.cypress.io/guides/guides/web-security#Same-superdomain-per-test))
+5. (2nd `it` in `describe`) Your test makes traverse and assert on generated html report. 
 
 ### Env selection (dev/staging/prod/custom) <a id="env_selection"></a>
 
