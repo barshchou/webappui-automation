@@ -22,7 +22,7 @@ const rentRollResidentialUnitsFixture = () : BoweryReports.ResidentialUnit[] => 
 };
 
 export default {
-    reportCreationData: ReportDataCreator.getReportData("4241-42", {
+    reportCreationData: ReportDataCreator.getReportData("4239_41-42", {
         conclusionValue: enums.VALUE_CONCLUSION_TYPE.AS_IS,
         incomeValue: enums.INCOME_TYPE.RESIDENTIAL
     }),

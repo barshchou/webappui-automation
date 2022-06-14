@@ -1,4 +1,4 @@
-import testData from "../../../../../fixtures/not_full_reports/income/residential/in_place_rent_roll/QA-4241-42.fixture";
+import testData from "../../../../../fixtures/not_full_reports/income/residential/in_place_rent_roll/QA-4239_41-42.fixture";
 import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../../actions/base";
 import { Income, Property } from "../../../../../actions";
@@ -10,7 +10,7 @@ describe("In-Place Rent Roll table tests",
         createReport(testData.reportCreationData);
     });
 
-    it("[QA-4241-42]", () => {
+    it("[QA-4239_41-42]", () => {
         cy.stepInfo('Preconditions: Navigate to Income -> Summary and specify amount of units');
         _NavigationSection.navigateToPropertySummary();
         Property._Summary.enterNumberOfResUnits(testData.residentialUnits.length);
@@ -33,8 +33,18 @@ describe("In-Place Rent Roll table tests",
         });
 
         cy.stepInfo("3. Copy / Paste value into the Mounthly Rent ($) cell");
-
         Income._Residential.InPlaceRentRoll.pasteMonthlyRentByRowNumber(testData.residentialUnits[0].monthlyRent, 1);
+
+        cy.stepInfo("4.Verify that each value can be selected (NOTE: If 'Vacant' is selected proper 'Monthly Rent ($) field is disabled)");
+        Income._Residential.InPlaceRentRoll.enterLeaseStatusByRowNumber(testData.residentialUnits[0].leaseStatus);
+        Income._Residential.InPlaceRentRoll.Page.monthlyRentCells.eq(0).should("have.class", "readOnly");
+
+        cy.stepInfo("5. Verify the value can be deleted");
+        Income._Residential.InPlaceRentRoll.removeLeaseStatusByRowNumber();
+        Income._Residential.InPlaceRentRoll.Page.inPlaceRentRollTitle.click();
+        
+        cy.stepInfo("6. Copy / Paste selected value into the Lease Status cell");
+        Income._Residential.InPlaceRentRoll.pasteLeaseStatusByRowNumber(testData.residentialUnits[0].leaseStatus);
 
         deleteReport(testData.reportCreationData.reportNumber);
     });
