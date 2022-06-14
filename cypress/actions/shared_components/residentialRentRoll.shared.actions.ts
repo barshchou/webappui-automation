@@ -151,8 +151,13 @@ export default class ResidentialRentRollSharedActions<T extends ResidentialRentR
         return this;
     }
 
-    verifyBedroomsNumberByRow(bedroomsNumber: number, rowNumber: number): this {
-        this.Page.bedroomsCells.eq(rowNumber).should("have.text", bedroomsNumber);
+    verifyBedroomsNumberByRow(bedroomsNumber: number | string, rowNumber: number): this {
+        if (typeof bedroomsNumber === "string") {
+            this.Page.bedroomsCells.eq(rowNumber).should("have.text", 0);
+        } else {
+            const textToBe = Math.floor(bedroomsNumber);
+            this.Page.bedroomsCells.eq(rowNumber).should("have.text", textToBe);
+        }
         return this;
     }
 
