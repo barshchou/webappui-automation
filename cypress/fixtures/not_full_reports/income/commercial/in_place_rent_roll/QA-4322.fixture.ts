@@ -1,8 +1,6 @@
 import Enums from "../../../../../enums/enums";
 import ReportDataCreator from "../../../../data_creator/reportData.creator";
 
-Cypress.env("report", "ui");
-
 const reportCreationFixture = () => {
     return ReportDataCreator.setReportNumber("4322")
         .setAddress()

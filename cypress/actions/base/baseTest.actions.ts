@@ -68,7 +68,6 @@ export const createReport = (reportCreationData: BoweryAutomation.ReportCreation
             });
         }
         else {
-            navigateToEnv();
             _HomePage.createReport(reportCreationData);
         }
     });
