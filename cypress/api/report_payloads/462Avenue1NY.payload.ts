@@ -1,3 +1,5 @@
+import { BoweryAutomation } from "../../types";
+
 export const createPayload = (reportCreationData: BoweryAutomation.ReportCreationData, userID: string) => {
     return {
         APPBBL: 1009620100,

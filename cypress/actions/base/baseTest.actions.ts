@@ -3,7 +3,6 @@ import { aliasQuery } from "../../utils/graphql.utils";
 import Homepage from "./homepage.actions";
 import NavigationSection from "./navigationSection.actions";
 import { createPayload } from "../../api/report_payloads/462Avenue1NY.payload";
-import { getEnvUrl } from "../../../utils/env.utils";
 
 /**
  * ernst: createReport is used everywhere - default logic should be: 
@@ -27,18 +26,17 @@ import { getEnvUrl } from "../../../utils/env.utils";
  * Login action
  */
 export const loginAction = () => {
-    const envUrl = getEnvUrl();
     switch (Cypress.env("loginMethod")) {
         case "ui":
-            cy.loginByUI(envUrl);
+            cy.loginByUI(Cypress.config().baseUrl);
             break;
         default:
-            cy.loginByApi(envUrl);
+            cy.loginByApi(Cypress.config().baseUrl);
     }
 };
 
 export const navigateToEnv = () => {
-    return cy.visit(getEnvUrl());
+    return cy.visit(Cypress.config().baseUrl);
 }; 
 
 export const createReport = (reportCreationData: BoweryAutomation.ReportCreationData, payloadFunction = createPayload) => {
