@@ -19,12 +19,12 @@ describe("Verify the Square Footage column in the grid",
             cy.stepInfo("2. Check Dev Forecast");
             Income._Residential.InPlaceRentRoll.checkCheckboxByLabel(testData.label);
 
-            cy.stepInfo(`3-${index}. Verify initial comments`);
+            cy.stepInfo(`3-${index + 1}. Verify initial comments`);
             if (index === 0) {
                 Income._Residential.InPlaceRentRoll.verifyRentRollCommentary(testData.textCommentaryData[3], true);
+            } else {
+                Income._Residential.InPlaceRentRoll.verifyRentRollCommentary(testData.textCommentaryData[4], true);
             }
-
-            Income._Residential.InPlaceRentRoll.verifyRentRollCommentary(testData.textCommentaryData[4], true);
         });
 
 
@@ -38,7 +38,8 @@ describe("Verify the Square Footage column in the grid",
         Income._Residential.InPlaceRentRoll.verifyTooltipExist(testData.tooltipText);
 
         cy.stepInfo("6. Verify generate comments");    
-        Income._Residential.InPlaceRentRoll.enterLeaseStatusByRowNumber(testData.leaseStatusData[0])
+        Income._Residential.InPlaceRentRoll.uncheckCheckboxByLabel(testData.label)
+            .enterLeaseStatusByRowNumber(testData.leaseStatusData[0])
             .enterLeaseStatusByRowNumber(testData.leaseStatusData[0], 1)
             .clickSaveButton()
             .verifyProgressBarNotExist()

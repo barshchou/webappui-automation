@@ -301,8 +301,9 @@ class InPlaceRentRollActions extends ResidentialRentRollSharedActions<typeof ren
     verifyRentRollCommentary(commentaryToBe: string, include = false): InPlaceRentRollActions {
         if (include === true) {
             rentRollPage.rentRollCommentary.should("include.text", commentaryToBe);
+        } else {
+            rentRollPage.rentRollCommentary.should("have.text", commentaryToBe);
         }
-        rentRollPage.rentRollCommentary.should("have.text", commentaryToBe);
         return this;
     }
 

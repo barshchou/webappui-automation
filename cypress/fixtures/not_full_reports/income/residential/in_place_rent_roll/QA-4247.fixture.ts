@@ -2,7 +2,7 @@
 import Enums from "../../../../../enums/enums";
 import ReportDataCreator from "../../../../data_creator/reportData.creator";
 
-const _conclusionValues = [ Enums.VALUE_CONCLUSION_TYPE.AS_IS, Enums.VALUE_CONCLUSION_TYPE.AS_STABILIZED ];
+const _conclusionValues = [ Enums.VALUE_CONCLUSION_TYPE.AS_IS, Enums.VALUE_CONCLUSION_TYPE.AS_COMPLETE ];
 
 export const createReportData = (value) => {
     return ReportDataCreator.getReportData("4247", { conclusionValue: value });
@@ -18,7 +18,7 @@ const _textCommentaryFixture = [
     "462 1st Avenue is currently 100% vacant. We requested the developer's projected residential rent roll, but did not receive it. The property will contain 2 studios.",
     "462 1st Avenue currently contains 1 occupied unit and 1 vacant unit generating $0 of total annual residential income.",
     "The developer's projected residential rent roll is presented below.",
-    "units upon completion of the construction works; the developer's projected residential rent roll "
+    "upon completion of the construction works; the developer's projected residential rent roll is presented below."
 ];
 
 export default {
