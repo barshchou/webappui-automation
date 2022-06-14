@@ -9,7 +9,8 @@ import { isProdEnv } from "../../../../../../../utils/env.utils";
  */
 const conditionalDescribe = isProdEnv() ? describe.skip : describe;
 
-conditionalDescribe("Base Itemized Unit Info table tests", () => {
+conditionalDescribe("Base Itemized Unit Info table tests", { tags: [ "@residential", "@rent_comps",
+        "@full_building_comps", "@unit_mix" ] }, () => {
 
     before("Create report, navigate to unit mix", () => {
        createReport(testData.reportCreationData);
