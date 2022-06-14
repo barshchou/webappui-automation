@@ -218,6 +218,20 @@ class InPlaceRentRollActions extends ResidentialRentRollSharedActions<typeof ren
         return this;
     }
 
+    removeLeaseStatusByRowNumber(number = 0): InPlaceRentRollActions {
+        rentRollPage.leaseStatusCells.eq(number).click().type("{backspace}");
+        this.verifyLeaseStatusByRow("", number);
+        return this;
+    }
+
+    pasteLeaseStatusByRowNumber(value: string | number, rowNumber = 0): InPlaceRentRollActions {
+        rentRollPage.leaseStatusCells.eq(rowNumber).dblclick();
+        rentRollPage.textAreaToInput.clear().invoke("val", value);
+        cy.contains(value).click();
+        rentRollPage.leaseStatusCells.eq(rowNumber).should("include.text", value);
+        return this;
+    }
+
     enterAllEqualLeaseStatuses(leaseStatus: string): InPlaceRentRollActions {
         rentRollPage.leaseStatusCells.each((cell, i) => {
             this.enterLeaseStatusByRowNumber(leaseStatus, i);
