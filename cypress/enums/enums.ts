@@ -25,7 +25,7 @@ export default {
     EXPENSE_HISTORY_TABLE_ROWS: expenseHistoryTableRowsEnum,
     REIMBURSEMENT_TYPES: reimbursementTypes,
     INCOME_TYPES_CELL_NAMES: incomeTypesCellNamesEnum,
-    EXPENSE_FORCAST_ITEMS: expenseForecast,
+    EXPENSE_FORECAST_ITEMS: expenseForecast,
     PARKING_VC_LOSS_TYPE: parkingVcLossType,
     LAUNDRY_VC_LOSS_TYPE: laundryVcLossType,
     STORAGE_VC_LOSS_TYPE: storageVcLossType,
