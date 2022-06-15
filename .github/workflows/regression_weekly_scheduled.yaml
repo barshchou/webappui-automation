@@ -1,17 +1,17 @@
-name: Smoke test daily prod
+name: Regression run on staging
 
 on:
   schedule:
-    - cron: 00 05 * * * #Run smoke test every day at 5 AM UTC
+    - cron: 00 05 * * MON #Run regession tests on staging env every Monday at 5 AM UTC
 
 jobs:
-  Smoke-tests-run-daily:
+  Regression-run-on-staging:
     runs-on: ubuntu-latest
     container: cypress/browsers:node16.13.2-chrome100-ff98
     strategy:
       fail-fast: false
       matrix:
-        containers: [1]
+        containers: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
     steps:
       - name: Checkout
@@ -40,9 +40,9 @@ jobs:
         run: npm install
 
       - name: Run smoke tests on staging
-        run: currents run --config baseUrl=https://app.boweryvaluation.com --tag staging --spec cypress/integration/**/**/*.spec.ts --env grep=,grepTags=@smoke,burn= --browser chrome --record --parallel --key ${{ secrets.CURRENTS_RECORD_KEY }} --ci-build-id "${{ github.repository }}-${{ github.run_id }}-${{ github.run_attempt}}"
+        run: currents run --config baseUrl=https://bowery-staging.herokuapp.com --tag staging --spec cypress/integration/**/**/*.spec.ts --env grep=,grepTags=-@smoke,burn= --browser chrome --record --parallel --key ${{ secrets.CURRENTS_RECORD_KEY }} --ci-build-id "${{ github.repository }}-${{ github.run_id }}-${{ github.run_attempt}}"
         env:
           CYPRESS_USERNAME: ${{ secrets.USERNAME }}
           CYPRESS_PASSWORD: ${{ secrets.PASSWORD }}
-          CYPRESS_url: https://app.boweryvaluation.com
+          CYPRESS_url: https://bowery-staging.herokuapp.com
           CYPRESS_grepFilterSpecs: true
