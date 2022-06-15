@@ -27,6 +27,8 @@ class UnitMixPage extends BasePage {
     get squareFeetInputs() {return cy.get("[name$=sqft]");}
 
     get monthlyRentInputs() {return cy.get("[name$=rent]");}
+
+    get numberCells() {return cy.xpath("//*[.='Itemized Unit Info']//following::tbody[1]//descendant::td[2]");}
 }
 
 export default new UnitMixPage();

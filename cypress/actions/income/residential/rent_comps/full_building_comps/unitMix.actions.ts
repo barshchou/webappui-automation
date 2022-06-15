@@ -105,6 +105,11 @@ class UnitMixActions extends BaseActionsExt<typeof unitMixPage> {
         return this;
     }
 
+    verifyNumberCellValue(valueToBe: number, row = 0): UnitMixActions {
+        unitMixPage.numberCells.eq(row).should("have.text", valueToBe);
+        return this;
+    }
+
 }
 
 export default new UnitMixActions(unitMixPage);

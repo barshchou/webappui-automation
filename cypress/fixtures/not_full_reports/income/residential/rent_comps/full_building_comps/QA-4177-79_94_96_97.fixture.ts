@@ -19,5 +19,6 @@ export default {
     squareFeet: 1500,
     monthlyRent: 20000.598,
     itemizedUnitInfoHeaders: _itemizedUnitInfoHeaders,
-    unitMixHeaders: _unitMixHeaders
+    unitMixHeaders: _unitMixHeaders,
+    unitsQuantity4194: 3
 };

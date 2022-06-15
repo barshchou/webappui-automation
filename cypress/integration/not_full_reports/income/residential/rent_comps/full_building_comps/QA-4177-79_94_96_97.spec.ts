@@ -1,4 +1,4 @@
-import testData from "../../../../../../fixtures/not_full_reports/income/residential/rent_comps/full_building_comps/QA-4177-79.fixture";
+import testData from "../../../../../../fixtures/not_full_reports/income/residential/rent_comps/full_building_comps/QA-4177-79_94_96_97.fixture";
 import { createReport, deleteReport } from "../../../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../../../actions/base";
 import { Income } from "../../../../../../actions";
@@ -70,6 +70,13 @@ conditionalDescribe("Base Itemized Unit Info table tests", { tags: [ "@residenti
             .enterMonthlyRent(testData.monthlyRent)
             .checkUncheckIncludeToggle()
             .checkUncheckIncludeToggle(true);
+    });
+
+    it("[QA-4194] Verify the # column on the Unit Mix page", () => {
+        Income._Residential.RentComps.FullBuildingComps.UnitMix.enterResidentialUnitsNumber(testData.unitsQuantity4194);
+        Income._Residential.RentComps.FullBuildingComps.UnitMix.Page.numberCells.each((cell, index) => {
+            Income._Residential.RentComps.FullBuildingComps.UnitMix.verifyNumberCellValue(index + 1, index);
+        });
     });
 
     after(() => {
