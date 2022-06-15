@@ -22,10 +22,6 @@ export const loginAction = () => {
     }
 };
 
-export const navigateToEnv = () => {
-    return cy.visit(Cypress.config().baseUrl);
-}; 
-
 export const createReport = (reportCreationData: BoweryAutomation.ReportCreationData, payloadFunction = createPayload) => {
     salesInterceptions();
 
@@ -39,17 +35,10 @@ export const createReport = (reportCreationData: BoweryAutomation.ReportCreation
                 cy.createApiReport(
                     reportCreationData, _payload, _token, envUrl
                 );
-                navigateToEnv();
             });
             cy._mapGet(mapKeysUtils.report_id).then(reportId => {
                 cy.log("Report id: "+reportId);
-                _HomePage.Page.reportsRows.should("be.visible")
-                .each((elem) => {
-                    if(elem.attr("href").includes(reportId)){
-                        cy.log("Found Report").visit(`/report/${reportId}`);
-                    }
-                    return;
-                });
+                cy.visit(`/report/${reportId}`);
             });
         }
         else {
