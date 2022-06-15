@@ -8,6 +8,8 @@ class StabilizedRentRollPage extends ResidentialRentRollSharedPage{
         return cy.xpath(`//*[@data-qa='unit-group-name'][.='${unitType}']` +
             "//following-sibling::td[@data-qa='unit-group-market-rent-conclusion']");
     }
+    
+    getLabelInGridTable(label) {return cy.xpath(`//*[@data-qa='residential-rent-roll-table']//th[contains(text(), '${label}')]`);}
 
     get monthlyRentCellsInputs() {return cy.get("[data-qa=rent-cell] input:not([type=hidden])");}
 
