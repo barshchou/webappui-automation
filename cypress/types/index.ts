@@ -98,11 +98,11 @@ export namespace BoweryReports {
 
     export type ResidentialUnit = {
         footage?: number,
-        rooms?: number | string,
+        rooms?: number,
         monthlyRent: number,
         leaseStatus?: LeaseStatus,
         rentType?: RentType,
-        bedRooms?: number | string,
+        bedRooms?: number,
         unitNumber?: number
     }
 
