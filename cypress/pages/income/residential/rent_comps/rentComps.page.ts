@@ -219,6 +219,14 @@ class RentCompsPage extends BasePage{
     getShowDetailsButtonByIndex(index: number) {
         return cy.get("[data-qa=selected-building-comps-table]").eq(1).contains("SHOW DETAILS").eq(index);
     }
+
+    getAddRemoveBuildingCompButtons(address: string) {
+        return cy.xpath(`(//*[.='${address}'])[1]//following::button[2]`);
+    }
+
+    getEditAddedBuildingCompButtonByAddress(address: string) {
+        return cy.xpath(`//*[contains(text(), '${address}')]//parent::tr//following-sibling::td//child::button[.='Edit']`);
+    }
 }
 
 export default new RentCompsPage();
