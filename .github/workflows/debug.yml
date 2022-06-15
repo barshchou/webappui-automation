@@ -59,4 +59,4 @@ jobs:
           url: ${{ github.event.inputs.url }}
           spec_file: ${{ github.event.inputs.spec_file }}
           tags: ${{ github.event.inputs.tags }}
-          record_key: "debug"
+          record_key: 'debug'
