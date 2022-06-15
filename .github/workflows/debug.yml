@@ -49,7 +49,7 @@ jobs:
 
     steps:
       - name: Run e2e tests
-        uses: Ernst-D/action-e2e-currents-dev@v0.0.3
+        uses: Ernst-D/action-e2e-currents-dev@v0.0.4
         with:
           github_token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
           username: ${{ secrets.USERNAME }}
