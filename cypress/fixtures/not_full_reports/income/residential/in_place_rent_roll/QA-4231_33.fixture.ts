@@ -7,28 +7,32 @@ const rentRollResidentialUnitsFixture = () : BoweryReports.ResidentialUnit[] => 
         {
             monthlyRent: 500.01,
             bedRooms: 2,
-            rooms: 5
+            rooms: 5,
+            unitNumber: 4
         },
         {
             monthlyRent: 701,
             bedRooms: 5.5,
-            rooms: 10.5
+            rooms: 10.5,
+            unitNumber: 8
         },
         {
             monthlyRent: 12345,
             bedRooms: "fdsf",
-            rooms: "fdff"
+            rooms: "fdff",
+            unitNumber: 65645643634
         },
         {
             monthlyRent: 125,
             bedRooms: 0,
-            rooms: 2
+            rooms: 2,
+            unitNumber: 14
         },
     ];
 };
 
 export default {
-    reportCreationData: ReportDataCreator.getReportData("4232_33", {
+    reportCreationData: ReportDataCreator.getReportData("4231_33", {
         conclusionValue: enums.VALUE_CONCLUSION_TYPE.AS_IS,
         incomeValue: enums.INCOME_TYPE.residential
     }),

@@ -1,4 +1,4 @@
-import testData from "../../../../../fixtures/not_full_reports/income/residential/in_place_rent_roll/QA-4232_33.fixture";
+import testData from "../../../../../fixtures/not_full_reports/income/residential/in_place_rent_roll/QA-4231_33.fixture";
 import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../../actions/base";
 import { Income, Property } from "../../../../../actions";
@@ -25,20 +25,23 @@ describe("In-Place Rent Roll table tests",
             Income._Residential.InPlaceRentRoll.verifyRoomsNumberByRow(testData.initialValue, index + 1);
         });
 
-        cy.stepInfo("3. Fill residential units and verify Rent room cells values and Bedrooms cells");
+        cy.stepInfo("3. Fill residential units and verify Rent rooms cells, Unit Nuber values and Bedrooms cells");
         testData.residentialUnits.forEach((unit, index) => {
             Income._Residential.InPlaceRentRoll.enterMonthlyRentByRowNumber(unit.monthlyRent, index)
                 .enterBedroomsNumberByRowNumber(unit.bedRooms, index)
-                .enterRoomsNumberByRowNumber(unit.rooms, index);
+                .enterRoomsNumberByRowNumber(unit.rooms, index)
+                .enterUnitNumberByRow(unit.unitNumber, index);
         });
 
-        cy.stepInfo("4. Verify the Bedrooms and Rooms value can be deleted");
-        Income._Residential.InPlaceRentRoll.removeBedroomsNumberByRowNumber();
-        Income._Residential.InPlaceRentRoll.removeRoomsNumberByRowNumber();
+        cy.stepInfo("4. Verify the Bedrooms, Unit Nuber and Rooms value can be deleted");
+        Income._Residential.InPlaceRentRoll.removeBedroomsNumberByRowNumber()
+            .removeRoomsNumberByRowNumber()
+            .removeUnitNumberByRowNumber();
 
         cy.stepInfo("5. Copy / Paste selected value into the Bedrooms and Rooms cell");
-        Income._Residential.InPlaceRentRoll.pasteBedroomsByRowNumber(testData.residentialUnits[0].bedRooms);
-        Income._Residential.InPlaceRentRoll.pasteRoomsByRowNumber(testData.residentialUnits[0].rooms);
+        Income._Residential.InPlaceRentRoll.pasteBedroomsByRowNumber(testData.residentialUnits[0].bedRooms)
+            .pasteRoomsByRowNumber(testData.residentialUnits[0].rooms)
+            .pasteUnitNumberByRowNumber(testData.residentialUnits[0].unitNumber);
 
         deleteReport(testData.reportCreationData.reportNumber);
     });
