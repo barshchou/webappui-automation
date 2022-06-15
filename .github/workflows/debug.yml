@@ -48,36 +48,15 @@ jobs:
         containers: [1]
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: Cache node modules
-        uses: actions/cache@v2
-        env:
-          cache-name: cache-node-modules
+      - name: Run e2e tests
+        uses: Ernst-D/action-e2e-currents-dev@v0.0.3
         with:
-          # npm cache files are stored in `~/.npm` on Linux/macOS
-          path: ~/.npm
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('./package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-build-${{ env.cache-name }}-
-            ${{ runner.os }}-build-
-            ${{ runner.os }}-
-      
-      - name: Install Cypress globally
-        run: npm i cypress@9.6.0 -g
-
-      - name: Install Currents globally
-        run: npm i @currents/cli -g
-
-      - name: Install Dependencies
-        run: npm install
-
-      - name: Run Cypress not snapshot tests on Currents.dev
-        run: npm run currents:run:debug -- --config baseUrl=${{ github.event.inputs.customEnv == '' && github.event.inputs.url ||  github.event.inputs.customEnv }} --spec ${{ github.event.inputs.spec_file }} --env ${{ github.event.inputs.tags }}
-        env:
-          CYPRESS_USERNAME: ${{ github.event.inputs.env == 'custom' && secrets.CESAR_USERNAME || secrets.USERNAME }}
-          CYPRESS_PASSWORD: ${{ github.event.inputs.env == 'custom' && secrets.CESAR_PASSWORD || secrets.PASSWORD }}
-          CYPRESS_url: ${{ github.event.inputs.env }}
-          CYPRESS_customEnv: ${{ github.event.inputs.customEnv }}
-          CYPRESS_grepFilterSpecs: true
+          token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          env: ${{ github.event.inputs.env }}
+          customEnv: ${{ github.event.inputs.customEnv }}
+          url: ${{ github.event.inputs.url }}
+          spec_file: ${{ github.event.inputs.spec_file }}
+          tags: ${{ github.event.inputs.tags }}
+          record_key: "debug"
