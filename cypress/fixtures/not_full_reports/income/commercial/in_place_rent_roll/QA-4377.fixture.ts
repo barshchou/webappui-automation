@@ -2,9 +2,6 @@ import Enums from "../../../../../enums/enums";
 import { BoweryReports } from "../../../../../types";
 import ReportDataCreator from "../../../../data_creator/reportData.creator";
 
-Cypress.env("report", "ui");
-Cypress.env("loginMethod", "ui");
-
 const _leaseStatus: BoweryReports.LeaseStatus = "Occupied";
 
 const reportCreationFixture = () => {
