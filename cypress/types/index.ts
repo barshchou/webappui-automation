@@ -98,7 +98,7 @@ export namespace BoweryReports {
 
     export type ResidentialUnit = {
         footage?: number,
-        rooms?: number,
+        rooms?: number | string,
         monthlyRent: number,
         leaseStatus?: LeaseStatus,
         rentType?: RentType,
