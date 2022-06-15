@@ -13,6 +13,8 @@ describe("Open any existing report and open any page", { tags: [ "@smoke" ] }, (
            Cypress.env("PASSWORD")
         );
        salesInterceptions();
+       cy.visit("/");
+
        Base._HomePage.clickAllReportsTab()
            .verifyProgressBarNotExist()
            .enterReportNumberToSearch(reportNumber)
