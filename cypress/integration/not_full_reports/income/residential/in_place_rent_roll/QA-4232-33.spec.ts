@@ -1,0 +1,45 @@
+import testData from "../../../../../fixtures/not_full_reports/income/residential/in_place_rent_roll/QA-4232_33.fixture";
+import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
+import { _NavigationSection } from "../../../../../actions/base";
+import { Income, Property } from "../../../../../actions";
+
+describe("In-Place Rent Roll table tests", 
+    { tags:[ "@income", "@residential", "@in_place_rent_roll" ] }, () => {
+        
+    before("Login, create report", () => {
+        createReport(testData.reportCreationData);
+    });
+
+    it("[QA-4239_41-42]", () => {
+        cy.stepInfo('Preconditions: Navigate to Income -> Summary and specify amount of units');
+        _NavigationSection.navigateToPropertySummary();
+        Property._Summary.enterNumberOfResUnits(testData.residentialUnits.length);
+
+        cy.stepInfo("1. Navigate to Residential and check Per Room Analysis");
+        _NavigationSection.navigateToResInPlaceRentRoll();
+        Income._Residential.InPlaceRentRoll.checkCheckboxByLabel(testData.perRoomAnalysis);
+        
+        cy.stepInfo("2. Verify the Rooms are prefilled (=2) if the Rent Type is selected, if not - it’s empty");
+        Income._Residential.InPlaceRentRoll.enterRoomsNumberByRowNumber(testData.residentialUnits[0].rooms, 0);
+        testData.residentialUnits.slice(1).forEach((unit, index) => {
+            Income._Residential.InPlaceRentRoll.verifyRoomsNumberByRow(testData.initialValue, index + 1);
+        });
+
+        cy.stepInfo("3. Fill residential units and verify Rent room cells values and Bedrooms cells");
+        testData.residentialUnits.forEach((unit, index) => {
+            Income._Residential.InPlaceRentRoll.enterMonthlyRentByRowNumber(unit.monthlyRent, index)
+                .enterBedroomsNumberByRowNumber(unit.bedRooms, index)
+                .enterRoomsNumberByRowNumber(unit.rooms, index);
+        });
+
+        cy.stepInfo("4. Verify the Bedrooms and Rooms value can be deleted");
+        Income._Residential.InPlaceRentRoll.removeBedroomsNumberByRowNumber();
+        Income._Residential.InPlaceRentRoll.removeRoomsNumberByRowNumber();
+
+        cy.stepInfo("5. Copy / Paste selected value into the Bedrooms and Rooms cell");
+        Income._Residential.InPlaceRentRoll.pasteBedroomsByRowNumber(testData.residentialUnits[0].bedRooms);
+        Income._Residential.InPlaceRentRoll.pasteRoomsByRowNumber(testData.residentialUnits[0].rooms);
+
+        deleteReport(testData.reportCreationData.reportNumber);
+    });
+});
