@@ -21,7 +21,7 @@ export const salesInterceptions = () => {
         aliasQuery(req, "findTransactionByIdAndVersion");
         aliasQuery(req, "findSalesComps");
         aliasQuery(req, "findSingleSalesComp");
-        aliasQuery(req, "updateAppraisal");
+        aliasQuery(req, "updateJob");
         aliasQuery(req, "findSalesCompsByEventIds");
     });
 };

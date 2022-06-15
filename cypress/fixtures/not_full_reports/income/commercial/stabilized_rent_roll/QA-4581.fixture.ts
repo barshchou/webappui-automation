@@ -9,7 +9,7 @@ const _buildingDescription: BoweryReports.BuildingDescription = {
 
 export default {
     reportCreationData: ReportDataCreator.getReportData("4581", {
-        incomeValue: enums.INCOME_TYPE.BOTH
+        incomeValue: enums.INCOME_TYPE.both
     }),
     buildingDescription: _buildingDescription,
     numberOfCommercialUnits: 3,

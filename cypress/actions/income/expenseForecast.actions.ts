@@ -176,11 +176,11 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
 
     verifyProFormaTooltip(forecastItem: string): ExpenseForecastActions {
         expenseForecastPage.forecastItemTooltipButton(forecastItem).should("exist");
-        expenseForecastPage.openedTooltip.should('not.exist');
+        expenseForecastPage.tooltip.should('not.exist');
         expenseForecastPage.forecastItemTooltipButton(forecastItem).scrollIntoView().trigger("mouseover", 'right');
-        expenseForecastPage.openedTooltip.should('exist');
+        expenseForecastPage.tooltip.should('exist');
         expenseForecastPage.forecastItemTooltipButton(forecastItem).trigger('mouseout', 'right');
-        expenseForecastPage.openedTooltip.should('not.exist');
+        expenseForecastPage.tooltip.should('not.exist');
         return this;
     }
 

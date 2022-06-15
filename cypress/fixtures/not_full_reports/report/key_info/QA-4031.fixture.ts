@@ -4,8 +4,8 @@ import reportDataCreator from "../../../data_creator/reportData.creator";
 export const reportCreationData = jobNumvber => {
     return reportDataCreator.getReportData(jobNumvber,
     {
-        templateValue: Enums.TEMPLATE_TYPE.NOT_FREDDIE_MAC,
-        incomeValue: Enums.INCOME_TYPE.BOTH,
+        templateValue: Enums.TEMPLATE_TYPE.notFreddieMac,
+        incomeValue: Enums.INCOME_TYPE.both,
     }, true);
 };
 

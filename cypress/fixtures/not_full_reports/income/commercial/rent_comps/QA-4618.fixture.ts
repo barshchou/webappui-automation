@@ -3,7 +3,7 @@ import Enums from "../../../../../enums/enums";
 import { BoweryAutomation, BoweryReports } from "../../../../../types/index";
 
 const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("4618", {
-    incomeValue: Enums.INCOME_TYPE.BOTH
+    incomeValue: Enums.INCOME_TYPE.both
 });
 
 const _address = "462 1st Avenue, New York, USA";

@@ -19,8 +19,6 @@ class ExpenseForecastPage extends BasePage {
     
     forecastItemTooltipButton(forecastItem: string) { return cy.get(`[data-qa=${forecastItem}-forecast-item] svg[aria-label="Unchecking this box will hide the expense from showing up on the Pro Forma."]`); }
 
-    get openedTooltip() {return cy.get("[role=tooltip]");}
-
     get toeCard() { return cy.xpath("//*[.='TOTAL OPERATING EXPENSES ($/SF)']/parent::div").first(); }
 
     getForecastItemBasisRadio(item) {return cy.get(`[name='${item}.basis']`);}

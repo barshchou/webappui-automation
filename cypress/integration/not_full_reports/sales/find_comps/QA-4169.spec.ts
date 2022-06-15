@@ -30,7 +30,7 @@ describe.skip("Verify the New Comp is created after clicking on 'Save&Close' but
         .Page.newCompContinueButton.click();
         Sales._FindComps
         .Actions.selectDropdownOptionNewComp(
-            Sales._FindComps.Page.SourceInput, testData.source
+            Sales._FindComps.Page.LinkTypeInput, testData.source
         ).
         SaleInfo.selectSaleDate();
         Sales._FindComps

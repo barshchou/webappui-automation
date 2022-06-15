@@ -4,7 +4,7 @@ import { BoweryReports } from "../../../../types";
 
 export default {
     reportCreationData: ReportDataCreator.getReportData("4168", {
-            incomeValue: Enums.INCOME_TYPE.BOTH,
+            incomeValue: Enums.INCOME_TYPE.both,
             conclusionValue: Enums.VALUE_CONCLUSION_TYPE.AS_IS
         }),
     compAddress: "601 West 26th Street, New York, USA",
