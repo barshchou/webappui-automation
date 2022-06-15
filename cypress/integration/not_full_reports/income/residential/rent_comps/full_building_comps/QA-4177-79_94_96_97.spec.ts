@@ -79,6 +79,16 @@ conditionalDescribe("Base Itemized Unit Info table tests", { tags: [ "@residenti
         });
     });
 
+    it("[QA-4196] Verify the #Unit column on the Unit Mix page", () => {
+        Income._Residential.RentComps.FullBuildingComps.UnitMix.enterUnitNumber(testData.unitNumber);
+    });
+
+    it("[QA-4197] Verify the #Bedrooms column on the Unit Mix page", () => {
+        Income._Residential.RentComps.FullBuildingComps.UnitMix.enterBedroomsNumber(testData.decimalBedrooms)
+            .enterBedroomsNumber(testData.stringBedrooms)
+            .enterBedroomsNumber(testData.bedrooms);
+    });
+
     after(() => {
         deleteReport(testData.reportCreationData.reportNumber);
     });

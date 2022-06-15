@@ -110,6 +110,17 @@ class UnitMixActions extends BaseActionsExt<typeof unitMixPage> {
         return this;
     }
 
+    enterUnitNumber(text: string | number, row = 0): UnitMixActions {
+        unitMixPage.unitNumberInputs.eq(row).clear().type(`${text}`);
+        this.verifyUnitNumberCell(text, row);
+        return this;
+    }
+
+    verifyUnitNumberCell(textToBe: string | number, row = 0): UnitMixActions {
+        unitMixPage.unitNumberInputs.eq(row).should("have.value", textToBe);
+        return this;
+    }
+
 }
 
 export default new UnitMixActions(unitMixPage);
