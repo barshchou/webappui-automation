@@ -3,6 +3,10 @@ import proFormaTypes from "../../../../../cypress/enums/proFormaTypes.enum";
 import Enums from "../../../../enums/enums";
 import { BoweryAutomation, BoweryReports } from "../../../../types";
 
+import { Income, Property } from "../../../../actions";
+import enums from "../../../../enums/enums";
+import { getNumberFromDollarNumberWithCommas, numberWithCommas, getNumberWithDecimalPart, cutDecimalPartToNumberOfDigits } from "../../../../../utils/numbers.utils";
+
 const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("5011", {
     incomeValue: Enums.INCOME_TYPE.BOTH,
     conclusionValue: Enums.VALUE_CONCLUSION_TYPE.AS_COMPLETE
@@ -192,6 +196,7 @@ const commentariesFixture = () => {
 
 const _forecastPSFnotIncluded = '$0.00';
 const _forecastPerUnitnotIncluded = '$0';
+
 
 export default {
     expenseForecastcustomFixture,
