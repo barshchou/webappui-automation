@@ -198,6 +198,20 @@ class InPlaceRentRollActions extends ResidentialRentRollSharedActions<typeof ren
         return this;
     }
 
+    removeUnitNumberByRowNumber(number = 0): InPlaceRentRollActions {
+        rentRollPage.unitNumberCells.eq(number).click().type("{backspace}");
+        rentRollPage.inPlaceRentRollTitle.click();
+        rentRollPage.unitNumberCells.eq(number).should("have.text", "");
+        return this;
+    }
+
+    pasteUnitNumberByRowNumber(value: number, rowNumber = 0): InPlaceRentRollActions {
+        rentRollPage.unitNumberCells.eq(rowNumber).dblclick();
+        this.pasteTextToTextarea(`${value}`);
+        this.verifyUnitNumberByRow(value, rowNumber);
+        return this;
+    }
+
     enterRoomsNumberByRowNumber(value: number | string, number: number): InPlaceRentRollActions {
         rentRollPage.roomsCells.eq(number).dblclick();
         this.enterTextToTextarea(`${value}`);
