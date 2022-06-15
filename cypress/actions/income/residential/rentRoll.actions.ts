@@ -177,6 +177,11 @@ class InPlaceRentRollActions extends ResidentialRentRollSharedActions<typeof ren
         return this;
     }
 
+    uncheckIsInspectedByRowNumber(number: number): InPlaceRentRollActions {
+        rentRollPage.isInspectedInputs.eq(number).uncheck();
+        return this;
+    }
+
     checkListIsInspectedByRowNumbers(numbers: Array<number>): InPlaceRentRollActions {
         numbers.forEach(number => {
             this.checkIsInspectedByRowNumber(number);
