@@ -54,8 +54,13 @@ export default class ResidentialRentRollSharedActions<T extends ResidentialRentR
         return this;
     }
 
-    verifyRoomsNumberByRow(roomsNumber: number, rowNumber = 0): this {
-        this.Page.roomsCells.eq(rowNumber).should("have.text", roomsNumber);
+    verifyRoomsNumberByRow(roomsNumber: number | string, rowNumber = 0): this {
+        if (typeof roomsNumber === "string") {
+            this.Page.roomsCells.eq(rowNumber).should("have.text", 0);
+        } else {
+            const textToBe = Math.floor(roomsNumber);
+            this.Page.roomsCells.eq(rowNumber).should("have.text", textToBe);
+        }
         return this;
     }
 

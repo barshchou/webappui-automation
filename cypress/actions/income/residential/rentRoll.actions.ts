@@ -206,7 +206,20 @@ class InPlaceRentRollActions extends ResidentialRentRollSharedActions<typeof ren
         } else {
             this.verifyRoomsNumberByRow(value, number);
         }
+        return this;
+    }
 
+    removeRoomsNumberByRowNumber(number = 0): InPlaceRentRollActions {
+        rentRollPage.roomsCells.eq(number).click().type("{backspace}");
+        rentRollPage.inPlaceRentRollTitle.click();
+        this.verifyRoomsNumberByRow(0, number);
+        return this;
+    }
+
+    pasteRoomsByRowNumber(value: number | string, rowNumber = 0): InPlaceRentRollActions {
+        rentRollPage.roomsCells.eq(rowNumber).dblclick();
+        this.pasteTextToTextarea(`${value}`);
+        this.verifyRoomsNumberByRow(value, rowNumber);
         return this;
     }
 
