@@ -1,12 +1,6 @@
-import Enums from "../../../../../enums/enums";
+import enums from "../../../../../enums/enums";
 import { BoweryReports } from "../../../../../types";
-import ReportDataCreator from "../../../../data_creator/reportData.creator";
-
-const reportCreationFixture = () => {
-    return ReportDataCreator.getReportData("4484_86_88-90", {
-        incomeValue: Enums.INCOME_TYPE.both
-    });
-};
+import reportDataCreator from "../../../../data_creator/reportData.creator";
 
 const _suggestionsVerificationData = [
     {
@@ -29,86 +23,164 @@ const _suggestionsVerificationData = [
     }
 ];
 
-const _chipVerificationData = [
-    {
-        value: "=B",
-        suggestion: "Block",
-        verifyAreaValue: "962"
-    },
-    {
-        value: "=B",
-        suggestion: "Building Name",
-        verifyAreaValue: "buildingName"
-    },
-    {
-        value: "=C",
-        suggestion: "Commercial Unit Count",
-        verifyAreaValue: "1"
-    },
-    {
-        value: "=C",
-        suggestion: "Concluded Cap Rate",
-        verifyAreaValue: "0%"
-    },
-    {
-        value: "=C",
-        suggestion: "Condition",
-        verifyAreaValue: "in  condition"
-    },
-    {
-        value: "=G",
-        suggestion: "Gross Building Area",
-        verifyAreaValue: "2,124,441"
-    },
-    {
-        value: "=Lo",
-        suggestion: "Lot",
-        verifyAreaValue: "100"
-    },
-    {
-        value: "=P",
-        suggestion: "Property Type",
-        verifyAreaValue: "mixed-use"
-    },
-    {
-        value: "=Res",
-        suggestion: "Residential Unit Count",
-        verifyAreaValue: "0"
-    },
-    {
-        value: "=Si",
-        suggestion: "Site Area",
-        verifyAreaValue: "753,175"
-    },
-    {
-        value: "=St",
-        suggestion: "Street Address",
-        verifyAreaValue: "462 1st Avenue"
-    },
-    {
-        value: "=St",
-        suggestion: "Street Name",
-        verifyAreaValue: "1st Avenue"
-    },
-    {
-        value: "=Y",
-        suggestion: "Year Built",
-        verifyAreaValue: "1910"
-    },
-    {
-        value: "=Z",
-        suggestion: "Zone(s)",
-        verifyAreaValue: "R8"
-    }
-];
+const _numberOfCommercialUnits = 3;
+const _numberOfResidentialUnits = 2;
+const _buildingName = 'Test Building Name QA-4598-00';
+const _grossBuildingArea = 5999;
+const _siteArea = 735000;
+const _currentNumberOfCommercialUnits = 5;
+const _currentNumberOfResidentialUnits = 4;
 
+const _baseChip = () => {
+    return [
+        {
+            suggestionName: 'Block',
+            typeSuggestValue: 'Bloc',
+            verifySuggest: '962',
+            verifyExport: '962'
+        }, 
+        {
+            suggestionName: 'Building Name',
+            typeSuggestValue: 'Buildin',
+            verifySuggest: _buildingName,
+            verifyExport: _buildingName
+        }, 
+        {
+            suggestionName: 'Concluded Cap Rate',
+            typeSuggestValue: 'Conclude',
+            verifySuggest: '0%',
+            verifyExport: '0%'
+        },
+        {
+            suggestionName: 'Gross Building Area',
+            typeSuggestValue: 'Gros',
+            verifySuggest: _grossBuildingArea,
+            verifyExport: _grossBuildingArea
+        }, 
+        {
+            suggestionName: 'Site Area',
+            typeSuggestValue: 'Sit',
+            verifySuggest: _siteArea,
+            verifyExport: _siteArea
+        }, 
+        {
+            suggestionName: 'Street Address',
+            typeSuggestValue: 'Street',
+            verifySuggest: '462 1st Avenue',
+            verifyExport: '462 1st Avenue'
+        },
+        {
+            suggestionName: 'Lot',
+            typeSuggestValue: 'Lo',
+            verifySuggest: '100',
+            verifyExport: '100'
+        },  
+        {
+            suggestionName: 'Street Name',
+            typeSuggestValue: 'Stree',
+            verifySuggest: '1st Avenue',
+            verifyExport: '1st Avenue'
+        },
+        {
+            suggestionName: 'Zone(s)',
+            typeSuggestValue: 'Zone',
+            verifySuggest: 'R8',
+            verifyExport: 'R8'
+        }, 
+    ];
+}; 
+
+const _baseChipsAsCompleted = () => {
+    return [
+        {
+            suggestionName: 'Current Residential Unit Count',
+            typeSuggestValue: 'Residential',
+            verifySuggest: _numberOfCommercialUnits,
+            verifyExport: _numberOfCommercialUnits
+        },
+        {
+            suggestionName: 'Current Commercial Unit Count',
+            typeSuggestValue: 'Commercial',
+            verifySuggest: _numberOfResidentialUnits,
+            verifyExport: _numberOfResidentialUnits
+        },
+        {
+            suggestionName: 'Current Condition',
+            typeSuggestValue: 'Condition',
+            verifySuggest: 'in  condition',
+            verifyExport: 'in  condition'
+        },
+        {
+            suggestionName: 'As Complete Residential Unit Count',
+            typeSuggestValue: 'Residential',
+            verifySuggest: _currentNumberOfResidentialUnits,
+            verifyExport: _currentNumberOfResidentialUnits
+        },
+        {
+            suggestionName: 'As Complete Commercial Unit Count',
+            typeSuggestValue: 'Commercial',
+            verifySuggest: _currentNumberOfCommercialUnits,
+            verifyExport: _currentNumberOfCommercialUnits
+        },
+        {
+            suggestionName: 'As Stabilized Condition',
+            typeSuggestValue: 'Conditio',
+            verifySuggest: 'in  condition',
+            verifyExport: 'condition'
+        }
+    ];
+};
+
+const _baseChipsAsIsAsStabilized = () => {
+    return [
+        {
+            suggestionName: 'Residential Unit Count',
+            typeSuggestValue: 'Residentia',
+            verifySuggest: _numberOfResidentialUnits,
+            verifyExport: _numberOfResidentialUnits
+        },
+        {
+            suggestionName: 'Commercial Unit Count',
+            typeSuggestValue: 'Commerci',
+            verifySuggest: _numberOfCommercialUnits,
+            verifyExport: _numberOfCommercialUnits
+        },
+        {
+            suggestionName: 'Condition',
+            typeSuggestValue: 'Conditio',
+            verifySuggest: 'in  condition',
+            verifyExport: 'condition'
+        }
+    ];
+};
+
+const _asIsAsStabilizedChips = _baseChip().concat(_baseChipsAsIsAsStabilized());
+const _asCompletedChips = _baseChip().concat(_baseChipsAsCompleted());
 const _leaseStatus: BoweryReports.LeaseStatus = "Occupied";
-const _chipPromptValue = "=";
 
 export default {
-    reportCreationData: reportCreationFixture(),
+    reportCreationDataAsIs: reportDataCreator.getReportData("4484_86_88-90", {
+        incomeValue: enums.INCOME_TYPE.both,
+        conclusionValue: enums.VALUE_CONCLUSION_TYPE.AS_IS
+    }),
+    reportCreationDataAsStablized: reportDataCreator.getReportData("4484_86_88-90", {
+        incomeValue: enums.INCOME_TYPE.both,
+        conclusionValue: enums.VALUE_CONCLUSION_TYPE.AS_STABILIZED
+    }),
+    reportCreationDataAsComplete: reportDataCreator.getReportData("4484_86_88-90", {
+        incomeValue: enums.INCOME_TYPE.both,
+        conclusionValue: enums.VALUE_CONCLUSION_TYPE.AS_COMPLETE
+    }),
     leaseStatus: _leaseStatus,
     suggestionsVerificationData: _suggestionsVerificationData,
-    chipVerificationData: _chipVerificationData,
-    chipPromptValue: _chipPromptValue
+    numberOfCommercialUnits: _numberOfCommercialUnits,
+    numberOfResidentialUnits: _numberOfResidentialUnits,
+    asIschips: _asIsAsStabilizedChips,
+    asStabilizedChips: _asIsAsStabilizedChips,
+    asCompletedChips: _asCompletedChips,
+    currentNumberOfCommercialUnits: _currentNumberOfCommercialUnits,
+    currentNumberOfResidentialUnits: _currentNumberOfResidentialUnits,
+    grossBuildingArea: _grossBuildingArea,
+    siteArea: _siteArea,
+    buildingName: _buildingName,
 };
