@@ -20,9 +20,9 @@ describe("Verify the # column in the grid",
         cy.stepInfo("2. Verify that the Inspected column (checkbox) is displayed after the # in the grid and check them");
         testData.labelNames.forEach(val =>  {
             Income._Residential.InPlaceRentRoll.checkCheckboxByLabel(val.checkLabel);
-            // if (val.checkLabel !== testData.labelNames[0].checkLabel) {
-            //     Income._Residential.InPlaceRentRoll.verifyColumnExist(val.columnLabel);
-            // }
+            if (val.checkLabel !== testData.labelNames[0].checkLabel) {
+                Income._Residential.InPlaceRentRoll.verifyColumnExist(val.columnLabel);
+            }
         });
         Income._Residential.InPlaceRentRoll.checkIsInspectedByRowNumber(0)
             .enterForecastByRowNumber(testData.forecastNumber);
@@ -30,7 +30,7 @@ describe("Verify the # column in the grid",
         cy.stepInfo("3. Navigate to Income > Residential > Stabilized Rent Roll and verify checked column exist");
         _NavigationSection.navigateToResidentialStabilizedRentRoll();
 
-        testData.labelNames.splice(1).forEach(val => {
+        testData.labelNames.slice(1).forEach(val => {
             Income._Residential.StabilizedRentRoll.verifyColumnExistInTable(val.columnLabel);
         });
 
@@ -43,20 +43,20 @@ describe("Verify the # column in the grid",
         _NavigationSection.navigateToResInPlaceRentRoll();
         testData.labelNames.forEach(val =>  {
             Income._Residential.InPlaceRentRoll.uncheckCheckboxByLabel(val.checkLabel);
-            // if (val.checkLabel !== testData.labelNames[0].checkLabel) {
-            //     Income._Residential.InPlaceRentRoll.verifyColumnNotExist(val.columnLabel);
-            // }
+            if (val.checkLabel !== testData.labelNames[0].checkLabel) {
+                Income._Residential.InPlaceRentRoll.verifyColumnNotExist(val.columnLabel);
+            }
         });
-        Income._Residential.InPlaceRentRoll.checkIsInspectedByRowNumber(0);
+        Income._Residential.InPlaceRentRoll.uncheckIsInspectedByRowNumber(0);
 
-        // _NavigationSection.navigateToResidentialStabilizedRentRoll();
+        _NavigationSection.navigateToResidentialStabilizedRentRoll();
 
-        // testData.labelNames.splice(1).forEach(val => {
-        //     Income._Residential.StabilizedRentRoll.verifyColumnNotExistInTable(val.columnLabel);
-        // });
+        testData.labelNames.slice(1).forEach(val => {
+            Income._Residential.StabilizedRentRoll.verifyColumnNotExistInTable(val.columnLabel);
+        });
 
-        // _NavigationSection.navigateToUnitInspection();
-        // Final._UnitInspection.verifyRowNotExistInTable();
+        _NavigationSection.navigateToUnitInspection();
+        Final._UnitInspection.verifyRowNotExistInTable();
         
         deleteReport(testData.reportCreationData.reportNumber);
     });
