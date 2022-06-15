@@ -1,8 +1,14 @@
 import enums from "../../../../../enums/enums";
-import { BoweryReports } from "../../../../../types";
 import ReportDataCreator from "../../../../data_creator/reportData.creator";
 
-const rentRollResidentialUnitsFixture = () : BoweryReports.ResidentialUnit[] => {
+type rentRollResidentialUnitsFixture = Array<{
+    monthlyRent: number,
+    bedRooms: number | string,
+    rooms: number | string,
+    unitNumber: number
+}>
+
+const rentRollResidentialUnitsFixture = () :rentRollResidentialUnitsFixture => {
     return [
         {
             monthlyRent: 500.01,
