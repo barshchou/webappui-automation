@@ -19,7 +19,7 @@ conditionalDescribe("Base Itemized Unit Info table tests", { tags: [ "@residenti
            .clickAddRemoveBuildingCompByAddress(testData.compAddress)
            .clickEditBuildingCompButtonByAddress(testData.compAddress);
        _NavigationSection.clickYesIfExist();
-       Income._Residential.RentComps.FullBuildingComps.UnitMix.openPage();
+       Income._Residential.RentComps.FullBuildingComps.UnitMix.openNavigationTab();
        cy.saveLocalStorage();
     });
 
@@ -30,31 +30,15 @@ conditionalDescribe("Base Itemized Unit Info table tests", { tags: [ "@residenti
     it("[QA-4177] The default state of the Unit Mix page", () => {
         cy.contains("h6", "Itemized Unit Info").should("exist");
         Income._Residential.RentComps.FullBuildingComps.UnitMix.Page.importCsvButton.should("exist");
-        cy.contains("th", "Include").should("exist");
-        cy.contains("th", "#").should("exist");
-        cy.contains("th", "# Unit").should("exist");
-        cy.contains("th", "# Bedrooms").should("exist");
-        cy.contains("th", "# Bathrooms").should("exist");
-        cy.contains("th", "# Rooms").should("exist");
-        cy.contains("th", "Square Feet").should("exist");
-        cy.contains("th", "Outdoor Space").should("exist");
-        cy.contains("th", "Rent Type").should("exist");
-        cy.contains("th", "Monthly Rent").should("exist");
-        cy.contains("th", "Rent/Room").should("exist");
+        testData.itemizedUnitInfoHeaders.forEach(header => {
+            cy.contains("th", header).should("exist");
+        });
         cy.xpath("//*[.='Itemized Unit Info']//following::th[.='Remove'][1]").should("exist");
         Income._Residential.RentComps.FullBuildingComps.UnitMix.Page.isNotReportedSFCheckboxes.eq(0).should("exist");
         cy.contains("h6", "Unit Mix").should("exist");
-        cy.contains("th", "Unit Group").should("exist");
-        cy.contains("th", "Units").should("exist");
-        cy.contains("th", "Avg Baths").should("exist");
-        cy.contains("th", "Avg Rooms").should("exist");
-        cy.contains("th", "Min Rent").should("exist");
-        cy.contains("th", "Avg Rent").should("exist");
-        cy.contains("th", "Max Rent").should("exist");
-        cy.contains("th", "Avg Square Feet").should("exist");
-        cy.contains("th", "Avg Rent/Room").should("exist");
-        cy.contains("th", "Avg Rent/SF/Month").should("exist");
-        cy.contains("th", "Avg Rent/SF/Year").should("exist");
+        testData.unitMixHeaders.forEach(header => {
+            cy.contains("th", header).should("exist");
+        });
         cy.xpath("//h6[.='Unit Mix']//following::th[.='Remove'][1]").should("exist");
         Income._Residential.RentComps.FullBuildingComps.UnitMix.Page.isEstimatedUnitMixSFAverageCheckbox.should("exist");
     });

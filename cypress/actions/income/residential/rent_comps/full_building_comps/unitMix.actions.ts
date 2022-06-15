@@ -1,16 +1,13 @@
 import BaseActionsExt from "../../../../base/base.actions.ext";
 import unitMixPage from "../../../../../pages/income/residential/rent_comps/full_building_comps/unitMix.page";
 import {
-    cutDecimalPartToNumberOfDigits,
-    cutDotFromNumber,
-    isHasDecimalPartMoreNumberOfDigits,
-    isNumber,
-    numberWithCommas
+    getValueDecimalCommasInput,
+    getValueNotDecimalNotCommasInput
 } from "../../../../../../utils/numbers.utils";
 
-class UnitMixActions extends BaseActionsExt<typeof unitMixPage>{
+class UnitMixActions extends BaseActionsExt<typeof unitMixPage> {
 
-    openPage(): UnitMixActions {
+    openNavigationTab(): UnitMixActions {
         unitMixPage.navigationTab.click();
         return this;
     }
@@ -23,7 +20,7 @@ class UnitMixActions extends BaseActionsExt<typeof unitMixPage>{
     }
 
     verifyResidentialUnitsNumberInput(number: number | string): UnitMixActions {
-        const valueToBe = UnitMixActions.getValueNotDecimalNotCommasInput(number);
+        const valueToBe = getValueNotDecimalNotCommasInput(number);
         unitMixPage.residentialUnitsNumberInput.should("have.value", valueToBe);
         return this;
     }
@@ -48,23 +45,15 @@ class UnitMixActions extends BaseActionsExt<typeof unitMixPage>{
         return this;
     }
 
-    checkUncheckIncludeToggle(isCheck = true, index = 0): UnitMixActions {
-        if (isCheck) {
-            unitMixPage.includeToggles.eq(index).check();
-            this.verifyIncludeToggleCheckState(true, index);
-        } else {
-            unitMixPage.includeToggles.eq(index).uncheck();
-            this.verifyIncludeToggleCheckState(false, index);
-        }
+    checkUncheckIncludeToggle(isToCheck = true, index = 0): UnitMixActions {
+        isToCheck ? unitMixPage.includeToggles.eq(index).check() : unitMixPage.includeToggles.eq(index).uncheck();
+        this.verifyIncludeToggleCheckState(isToCheck, index);
         return this;
     }
 
     verifyIncludeToggleCheckState(isChecked = false, index = 0): UnitMixActions {
-        if (isChecked) {
-            unitMixPage.includeToggles.eq(index).parent().should("have.class", "Mui-checked");
-        } else {
-            unitMixPage.includeToggles.eq(index).parent().should("not.have.class", "Mui-checked");
-        }
+        const assertion = isChecked ? "have.class" : "not.have.class";
+        unitMixPage.includeToggles.eq(index).parent().should(assertion, "Mui-checked");
         return this;
     }
 
@@ -75,7 +64,7 @@ class UnitMixActions extends BaseActionsExt<typeof unitMixPage>{
     }
 
     verifyBedroomsNumber(number: number | string, row = 0): UnitMixActions {
-        const valueToBe = UnitMixActions.getValueNotDecimalNotCommasInput(number);
+        const valueToBe = getValueNotDecimalNotCommasInput(number);
         unitMixPage.bedroomsNumberInputs.eq(row).should("have.value", valueToBe);
         return this;
     }
@@ -87,29 +76,9 @@ class UnitMixActions extends BaseActionsExt<typeof unitMixPage>{
     }
 
     verifyRoomsNumber(number: number | string, row = 0): UnitMixActions {
-        const valueToBe = UnitMixActions.getValueNotDecimalNotCommasInput(number);
+        const valueToBe = getValueNotDecimalNotCommasInput(number);
         unitMixPage.roomsNumberInputs.eq(row).should("have.value", valueToBe);
         return this;
-    }
-
-    private static getValueNotDecimalNotCommasInput(number: number | string): string {
-        return isNumber(number) ? Number.isInteger(number) ? `${number}` : `${cutDotFromNumber(<number>number)}` : "";
-    }
-
-    private static getValueDecimalCommasInput(number: number | string): string {
-        if (isNumber(number)) {
-            if (Number.isInteger(number)) {
-                return numberWithCommas(number);
-            } else {
-                if (isHasDecimalPartMoreNumberOfDigits(number)) {
-                    return `${numberWithCommas(`${cutDecimalPartToNumberOfDigits(number)}`)}`;
-                } else {
-                    return numberWithCommas(number);
-                }
-            }
-        } else {
-            return "";
-        }
     }
 
     enterSquareFeet(value: number | string, row = 0): UnitMixActions {
@@ -119,7 +88,7 @@ class UnitMixActions extends BaseActionsExt<typeof unitMixPage>{
     }
 
     verifySquareFeet(value: number | string, row = 0): UnitMixActions {
-        const valueToBe = UnitMixActions.getValueDecimalCommasInput(value);
+        const valueToBe = getValueDecimalCommasInput(value);
         unitMixPage.squareFeetInputs.eq(row).should("have.value", valueToBe);
         return this;
     }
@@ -131,7 +100,7 @@ class UnitMixActions extends BaseActionsExt<typeof unitMixPage>{
     }
 
     verifyMonthlyRent(value: number | string, row = 0): UnitMixActions {
-        const valueToBe = UnitMixActions.getValueDecimalCommasInput(value);
+        const valueToBe = getValueDecimalCommasInput(value);
         unitMixPage.monthlyRentInputs.eq(row).should("have.value", valueToBe);
         return this;
     }

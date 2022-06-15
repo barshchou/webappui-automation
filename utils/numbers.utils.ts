@@ -70,3 +70,23 @@ export const isNumber = (value) => {
 export const cutDotFromNumber = (number: number) => {
     return Number(`${number}`.replace(".", ""));
 };
+
+export const getValueNotDecimalNotCommasInput = (number: number | string): string => {
+    return isNumber(number) ? Number.isInteger(number) ? `${number}` : `${cutDotFromNumber(<number>number)}` : "";
+};
+
+export const getValueDecimalCommasInput = (number: number | string): string => {
+    if (isNumber(number)) {
+        if (Number.isInteger(number)) {
+            return numberWithCommas(number);
+        } else {
+            if (isHasDecimalPartMoreNumberOfDigits(number)) {
+                return `${numberWithCommas(`${cutDecimalPartToNumberOfDigits(number)}`)}`;
+            } else {
+                return numberWithCommas(number);
+            }
+        }
+    } else {
+        return "";
+    }
+};
