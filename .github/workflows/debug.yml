@@ -51,7 +51,7 @@ jobs:
       - name: Run e2e tests
         uses: Ernst-D/action-e2e-currents-dev@v0.0.3
         with:
-          token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
+          github_token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
           env: ${{ github.event.inputs.env }}
