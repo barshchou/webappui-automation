@@ -73,17 +73,17 @@ class ProFormaActions extends BaseActionsExt<typeof proFormaPage> {
         return this;
     }
 
-    verifyCategoryTotal(totalToBe: string, categoryName: string): this{
+    verifyCategoryTotal(totalToBe: string, categoryName: string): this {
         proFormaPage.categoryCellTotal(categoryName).should("have.text", totalToBe);
         return this;
     }
 
-    verifyCategoryPSFTotal(totalToBe: string, categoryName: string): this{
+    verifyCategoryPSFTotal(totalToBe: string, categoryName: string): this {
         proFormaPage.categoryPSFTotal(categoryName).should("have.text", totalToBe);
         return this;
     }
 
-    verifyCategoryPerUnitTotal(totalToBe: string, categoryName: string): this{
+    verifyCategoryPerUnitTotal(totalToBe: string, categoryName: string): this {
         proFormaPage.categoryPerUnitTotal(categoryName).should("have.text", totalToBe);
         return this;
     }
@@ -94,7 +94,7 @@ class ProFormaActions extends BaseActionsExt<typeof proFormaPage> {
             .verifyCategoryPerUnitTotal(rowData.perUnit, categoryName);
         return this;
     }
-    
+
     verifyCustomCategoryName(categoryName: string): ProFormaActions {
         let textToBe = uppercaseFirstLetterEachWord(categoryName).toString();
         proFormaPage.getCustomCategoryIncomeCell(categoryName).first().invoke('text').should('deep.include', textToBe);
@@ -131,129 +131,125 @@ class ProFormaActions extends BaseActionsExt<typeof proFormaPage> {
             this.verifyCategoryTotal(textToBeTotal, enums.PRO_FORMA_TYPES.totalOperatingExpensesExTaxes);
         });
         return this;
-        }
+    }
 
-        verifyPsfTOEexTaxesIncludeForecasts(aliasPSFFromForecast: string): ProFormaActions {
-            cy.get(aliasPSFFromForecast).then(val => {
-                let valPSF = Number(val);
-                let textToBePSF = `$${getNumberWithDecimalPart(Number(valPSF))}`;
-                this.verifyCategoryPSFTotal(textToBePSF, enums.PRO_FORMA_TYPES.totalOperatingExpensesExTaxes);
-            });
-            return this;
-            }
+    verifyPsfTOEexTaxesIncludeForecasts(aliasPSFFromForecast: string): ProFormaActions {
+        cy.get(aliasPSFFromForecast).then(val => {
+            let valPSF = Number(val);
+            let textToBePSF = `$${getNumberWithDecimalPart(Number(valPSF))}`;
+            this.verifyCategoryPSFTotal(textToBePSF, enums.PRO_FORMA_TYPES.totalOperatingExpensesExTaxes);
+        });
+        return this;
+    }
 
-            verifyPerUnitTOEexTaxesIncludeForecasts(aliasPerUnitFromForecast: string): ProFormaActions {
-                cy.get(aliasPerUnitFromForecast).then(val => {
-                    let valPerUnit = Number(val);
-                    let textToBePerUnit = `$${numberWithCommas(Number(valPerUnit))}`;
-                    this.verifyCategoryPerUnitTotal(textToBePerUnit, enums.PRO_FORMA_TYPES.totalOperatingExpensesExTaxes);
+    verifyPerUnitTOEexTaxesIncludeForecasts(aliasPerUnitFromForecast: string): ProFormaActions {
+        cy.get(aliasPerUnitFromForecast).then(val => {
+            let valPerUnit = Number(val);
+            let textToBePerUnit = `$${numberWithCommas(Number(valPerUnit))}`;
+            this.verifyCategoryPerUnitTotal(textToBePerUnit, enums.PRO_FORMA_TYPES.totalOperatingExpensesExTaxes);
+        });
+        return this;
+    }
+
+    verifyTotalTOEIncludeForecasts(aliasPSFFromForecast: string, GBA: number): ProFormaActions {
+        cy.get(aliasPSFFromForecast).then(val => {
+            let valTotal = (Number(val) * GBA);
+            this.Page.categoryCellTotal(enums.PRO_FORMA_TYPES.totalOperatingExpenses).invoke("text").then(totalText => {
+                const totalNumberWithTaxes = getNumberFromDollarNumberWithCommas(totalText);
+                this.Page.categoryCellTotal(enums.PRO_FORMA_TYPES.realEstateTaxes).invoke("text").then(taxesText => {
+                    const taxesNumber = getNumberFromDollarNumberWithCommas(taxesText);
+                    const totalNumberWithoutTaxes = totalNumberWithTaxes - taxesNumber;
+                    expect(valTotal).to.equal(totalNumberWithoutTaxes);
                 });
-                return this;
-                }
+            });
+        });
+        return this;
+    }
 
-                verifyTotalTOEIncludeForecasts(aliasPSFFromForecast: string, GBA: number): ProFormaActions {
-                    cy.get(aliasPSFFromForecast).then(val => {
-                        let valTotal = (Number(val) * GBA);
-                        this.Page.categoryCellTotal(enums.PRO_FORMA_TYPES.totalOperatingExpenses).invoke("text").then(totalText => {
-                            const totalNumberWithTaxes = getNumberFromDollarNumberWithCommas(totalText);
-                            this.Page.categoryCellTotal(enums.PRO_FORMA_TYPES.realEstateTaxes).invoke("text").then(taxesText => {
-                                const taxesNumber = getNumberFromDollarNumberWithCommas(taxesText);
-                                const totalNumberWithoutTaxes = totalNumberWithTaxes - taxesNumber;
-                                expect(valTotal).to.equal(totalNumberWithoutTaxes);
-                            });
-                        });
+    verifyPsfTOEIncludeForecasts(aliasPSFFromForecast: string): ProFormaActions {
+        cy.get(aliasPSFFromForecast).then(val => {
+            let valPSF = Number(val);
+            this.Page.categoryPSFTotal(enums.PRO_FORMA_TYPES.totalOperatingExpenses).invoke("text").then(psfText => {
+                const psfNumberWithTaxes = getNumberFromDollarNumberWithCommas(psfText);
+                this.Page.categoryPSFTotal(enums.PRO_FORMA_TYPES.realEstateTaxes).invoke("text").then(taxesText => {
+                    const taxesNumber = getNumberFromDollarNumberWithCommas(taxesText);
+                    const psfNumberWithoutTaxes = psfNumberWithTaxes - taxesNumber;
+                    expect(valPSF).to.equal(psfNumberWithoutTaxes);
+                });
+            });
+        });
+        return this;
+    }
+
+    verifyPerUnitTOEIncludeForecasts(aliasPerUnitFromForecast: string): ProFormaActions {
+        cy.get(aliasPerUnitFromForecast).then(val => {
+            let valPerUnit = Number(val);
+            this.Page.categoryPerUnitTotal(enums.PRO_FORMA_TYPES.totalOperatingExpenses).invoke("text").then(perUnitText => {
+                const perUnitNumberWithTaxes = getNumberFromDollarNumberWithCommas(perUnitText);
+                this.Page.categoryPerUnitTotal(enums.PRO_FORMA_TYPES.realEstateTaxes).invoke("text").then(taxesText => {
+                    const taxesNumber = getNumberFromDollarNumberWithCommas(taxesText);
+                    const perUnitNumberWithoutTaxes = perUnitNumberWithTaxes - taxesNumber;
+                    expect(valPerUnit).to.equal(perUnitNumberWithoutTaxes);
+                });
+            });
+        });
+        return this;
+    }
+
+    verifyTotalNOIIncludeForecasts(aliasPSFFromForecast: string, GBA: number): ProFormaActions {
+        cy.get(aliasPSFFromForecast).then(val => {
+            let valTotal = (Number(val) * GBA);
+            this.Page.categoryCellTotal(enums.PRO_FORMA_TYPES.netOperatingIncome).invoke("text").then(totalIncome => {
+                const totalNumberWithTaxes = getNumberFromDollarNumberWithCommas(totalIncome);
+                this.Page.categoryCellTotal(enums.PRO_FORMA_TYPES.realEstateTaxes).invoke("text").then(taxesText => {
+                    const taxesNumber = getNumberFromDollarNumberWithCommas(taxesText);
+                    this.Page.categoryCellTotal(enums.PRO_FORMA_TYPES.effectiveGrossIncome).invoke("text").then(incomeText => {
+                        const incomeNumber = getNumberFromDollarNumberWithCommas(incomeText);
+                        const totalNumberWithoutTaxes = incomeNumber - totalNumberWithTaxes - taxesNumber;
+                        expect(valTotal).to.equal(totalNumberWithoutTaxes);
                     });
-                    return this;
-                    }
+                });
+            });
+        });
+        return this;
+    }
 
-                    verifyPsfTOEIncludeForecasts(aliasPSFFromForecast: string): ProFormaActions {
-                        cy.get(aliasPSFFromForecast).then(val => {
-                            let valPSF = Number(val);
-                            this.Page.categoryPSFTotal(enums.PRO_FORMA_TYPES.totalOperatingExpenses).invoke("text").then(psfText => {
-                                const psfNumberWithTaxes = getNumberFromDollarNumberWithCommas(psfText);
-                                this.Page.categoryPSFTotal(enums.PRO_FORMA_TYPES.realEstateTaxes).invoke("text").then(taxesText => {
-                                    const taxesNumber = getNumberFromDollarNumberWithCommas(taxesText);
-                                    const psfNumberWithoutTaxes = psfNumberWithTaxes - taxesNumber;
-                                    expect(valPSF).to.equal(psfNumberWithoutTaxes);
-                                });
-                            });
-                        });
-                        return this;
-                        }
+    verifyPsfNOIIncludeForecasts(aliasPSFFromForecast: string): ProFormaActions {
+        cy.get(aliasPSFFromForecast).then(val => {
+            let valPSF = Number(val);
+            this.Page.categoryPSFTotal(enums.PRO_FORMA_TYPES.netOperatingIncome).invoke("text").then(psfIncome => {
+                const psfNumberWithTaxes = getNumberFromDollarNumberWithCommas(psfIncome);
+                this.Page.categoryPSFTotal(enums.PRO_FORMA_TYPES.realEstateTaxes).invoke("text").then(taxesText => {
+                    const taxesNumber = getNumberFromDollarNumberWithCommas(taxesText);
+                    this.Page.categoryPSFTotal(enums.PRO_FORMA_TYPES.effectiveGrossIncome).invoke("text").then(incomeText => {
+                        const incomeNumber = getNumberFromDollarNumberWithCommas(incomeText);
+                        const totalNumberWithoutTaxes = incomeNumber - psfNumberWithTaxes - taxesNumber;
+                        expect(valPSF).to.equal(totalNumberWithoutTaxes);
+                    });
+                });
+            });
+        });
+        return this;
+    }
 
-                        verifyPerUnitTOEIncludeForecasts(aliasPerUnitFromForecast: string): ProFormaActions {
-                            cy.get(aliasPerUnitFromForecast).then(val => {
-                                let valPerUnit = Number(val);
-                                this.Page.categoryPerUnitTotal(enums.PRO_FORMA_TYPES.totalOperatingExpenses).invoke("text").then(perUnitText => {
-                                    const perUnitNumberWithTaxes = getNumberFromDollarNumberWithCommas(perUnitText);
-                                    this.Page.categoryPerUnitTotal(enums.PRO_FORMA_TYPES.realEstateTaxes).invoke("text").then(taxesText => {
-                                        const taxesNumber = getNumberFromDollarNumberWithCommas(taxesText);
-                                        const perUnitNumberWithoutTaxes = perUnitNumberWithTaxes - taxesNumber;
-                                        expect(valPerUnit).to.equal(perUnitNumberWithoutTaxes);
-                                    });
-                                });
-                            });
-                            return this;
-                            }
-
-                            verifyTotalNOIIncludeForecasts(aliasPSFFromForecast: string, GBA: number): ProFormaActions {
-                                cy.get(aliasPSFFromForecast).then(val => {
-                                    let valTotal = (Number(val) * GBA);
-                                    this.Page.categoryCellTotal(enums.PRO_FORMA_TYPES.netOperatingIncome).invoke("text").then(totalIncome => {
-                                        const totalNumberWithTaxes = getNumberFromDollarNumberWithCommas(totalIncome);
-                                        this.Page.categoryCellTotal(enums.PRO_FORMA_TYPES.realEstateTaxes).invoke("text").then(taxesText => {
-                                            const taxesNumber = getNumberFromDollarNumberWithCommas(taxesText);
-                                            this.Page.categoryCellTotal(enums.PRO_FORMA_TYPES.effectiveGrossIncome).invoke("text").then(incomeText => {
-                                            const incomeNumber = getNumberFromDollarNumberWithCommas(incomeText);
-                                            const totalNumberWithoutTaxes = incomeNumber + totalNumberWithTaxes - taxesNumber;
-                                            expect(valTotal).to.equal(totalNumberWithoutTaxes);
-                                        });
-                                        });
-                                    });
-                                });
-                                return this;
-                                }
-
-                                verifyPsfNOIIncludeForecasts(aliasPSFFromForecast: string): ProFormaActions {
-                                    cy.get(aliasPSFFromForecast).then(val => {
-                                        let valPSF = Number(val);
-                                        this.Page.categoryPSFTotal(enums.PRO_FORMA_TYPES.netOperatingIncome).invoke("text").then(psfIncome => {
-                                            const psfNumberWithTaxes = getNumberFromDollarNumberWithCommas(psfIncome);
-                                            this.Page.categoryPSFTotal(enums.PRO_FORMA_TYPES.realEstateTaxes).invoke("text").then(taxesText => {
-                                                const taxesNumber = getNumberFromDollarNumberWithCommas(taxesText);
-                                                this.Page.categoryPSFTotal(enums.PRO_FORMA_TYPES.effectiveGrossIncome).invoke("text").then(incomeText => {
-                                                const incomeNumber = getNumberFromDollarNumberWithCommas(incomeText);
-                                                const totalNumberWithoutTaxes = incomeNumber + psfNumberWithTaxes - taxesNumber;
-                                                expect(valPSF).to.equal(totalNumberWithoutTaxes);
-                                            });
-                                            });
-                                        });
-                                    });
-                                    return this;
-                                    }
-
-                                    verifyPerUnitNOIIncludeForecasts(aliasPerUnitFromForecast: string): ProFormaActions {
-                                        cy.get(aliasPerUnitFromForecast).then(val => {
-                                            let valPerUnit = Number(val);
-                                            this.Page.categoryPerUnitTotal(enums.PRO_FORMA_TYPES.netOperatingIncome).invoke("text").then(perUnitIncome => {
-                                                const perUnitNumberWithTaxes = getNumberFromDollarNumberWithCommas(perUnitIncome);
-                                                this.Page.categoryPerUnitTotal(enums.PRO_FORMA_TYPES.realEstateTaxes).invoke("text").then(taxesText => {
-                                                    const taxesNumber = getNumberFromDollarNumberWithCommas(taxesText);
-                                                    this.Page.categoryPerUnitTotal(enums.PRO_FORMA_TYPES.effectiveGrossIncome).invoke("text").then(incomeText => {
-                                                    const incomeNumber = getNumberFromDollarNumberWithCommas(incomeText);
-                                                    const totalNumberWithoutTaxes = incomeNumber + perUnitNumberWithTaxes - taxesNumber;
-                                                    expect(valPerUnit).to.equal(totalNumberWithoutTaxes);
-                                                });
-                                                });
-                                            });
-                                        });
-                                        return this;
-                                        }
+    verifyPerUnitNOIIncludeForecasts(aliasPerUnitFromForecast: string): ProFormaActions {
+        cy.get(aliasPerUnitFromForecast).then(val => {
+            let valPerUnit = Number(val);
+            this.Page.categoryPerUnitTotal(enums.PRO_FORMA_TYPES.netOperatingIncome).invoke("text").then(perUnitIncome => {
+                const perUnitNumberWithTaxes = getNumberFromDollarNumberWithCommas(perUnitIncome);
+                this.Page.categoryPerUnitTotal(enums.PRO_FORMA_TYPES.realEstateTaxes).invoke("text").then(taxesText => {
+                    const taxesNumber = getNumberFromDollarNumberWithCommas(taxesText);
+                    this.Page.categoryPerUnitTotal(enums.PRO_FORMA_TYPES.effectiveGrossIncome).invoke("text").then(incomeText => {
+                        const incomeNumber = getNumberFromDollarNumberWithCommas(incomeText);
+                        const totalNumberWithoutTaxes = incomeNumber - perUnitNumberWithTaxes - taxesNumber;
+                        expect(valPerUnit).to.equal(totalNumberWithoutTaxes);
+                    });
+                });
+            });
+        });
+        return this;
+    }
     
-
-
-
-
 }
 
 export default new ProFormaActions(proFormaPage);
