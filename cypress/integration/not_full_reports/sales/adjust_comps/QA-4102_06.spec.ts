@@ -1,4 +1,4 @@
-import testData from "../../../../fixtures/not_full_reports/sales/adjust_comps/QA-4106.fixture";
+import testData from "../../../../fixtures/not_full_reports/sales/adjust_comps/QA-4102_06.fixture";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { Sales } from "../../../../actions";
@@ -21,9 +21,14 @@ describe("Total Utility Adjustments in Sales Adjustment Grid is calculated with 
                     or
                     Trended Price per Unit = [Unadjusted Price] * (1 + (SUM[Unadjusted Adjustments]))/ # of total units`);
         _NavigationSection.navigateToAdjustComps();
-        Sales._AdjustComps.checkCalculationUnitsRadio(testData.calculationUnits)
+        Sales._AdjustComps.checkCalculationUnitsRadio(testData.calculationUnits[0])
             .enterMarketAdjustmentsGroup(Object.keys(testData.comparablesAdjustments), Object.values(testData.comparablesAdjustments))
             .verifyTrendedPricePerBasis(Object.values(testData.comparablesAdjustments), testData.basis);
+
+        cy.stepInfo("3. Verify PSF, Per Residential Units, Per Total Units radio buttons are displayed");
+        testData.calculationUnits.forEach(val => {
+            Sales._AdjustComps.checkCalculationUnitsRadio(val);
+        });
 
         deleteReport(testData.reportCreationData.reportNumber);
     });

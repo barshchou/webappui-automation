@@ -1,7 +1,7 @@
 import Enums from "../../../../enums/enums";
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 
-const _reportCreationData = ReportDataCreator.getReportData("4106", {
+const _reportCreationData = ReportDataCreator.getReportData("4102_06", {
     incomeValue: Enums.INCOME_TYPE.both
 });
 
@@ -22,6 +22,6 @@ export default {
     reportCreationData: _reportCreationData,
     comparablesAdjustments: _compAdjustments,
     comparable: Object.freeze(comparableFixture()),
-    calculationUnits: "Per Residential Units",
+    calculationUnits: [ "Per Residential Units", "PSF", "Per Total Units" ], 
     basis: "Price per Unit"
 };
