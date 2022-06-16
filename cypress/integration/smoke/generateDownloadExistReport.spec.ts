@@ -4,6 +4,8 @@ import { createReport, deleteReport } from "../../actions/base/baseTest.actions"
 
 describe("Open any existing report, generate report and download it", { tags: [ "@smoke" ] }, () => {
 
+    const url = `${Cypress.config().baseUrl}`;
+
     it("Download, generate report", () => {
         cy.loginByApi(Cypress.config().baseUrl);
         Base._HomePage.clickAllReportsTab()
@@ -19,6 +21,7 @@ describe("Open any existing report, generate report and download it", { tags: [ 
     });
 
     it("Verify exported report", () => {
+        Cypress.config().baseUrl = null;
         cy.task("getFilePath", { _reportName: testData.reportCreationData.reportNumber, _docx_html: "html" }).then(file => {
             cy.visit(<string>file);
             cy.contains(testData.textToVerifyInReport).should("exist");
@@ -26,6 +29,7 @@ describe("Open any existing report, generate report and download it", { tags: [ 
     });
 
     it("Create new report for next tests", () => {
+        Cypress.config().baseUrl = url;
         createReport(testData.reportCreationData);
         deleteReport(testData.reportCreationData.reportNumber);
     });
