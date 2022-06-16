@@ -1,6 +1,6 @@
 import { createReportData } from './../../../../fixtures/not_full_reports/sales/adjust_comps/QA-4606.fixture';
 import testData from "../../../../fixtures/not_full_reports/sales/adjust_comps/QA-4606.fixture";
-import { Sales } from "../../../../actions";
+import { Property, Sales } from "../../../../actions";
 import { _NavigationSection as NavigationSection } from "../../../../actions/base";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 
@@ -14,25 +14,25 @@ describe("[QA-4606] Check the reference 'Condition' line in the Sales Adjustment
 
             cy.stepInfo("2. Add Comp");
             NavigationSection.navigateToFindComps();
-            Sales._FindComps.selectCompFromMapByAddress(testData.comparable.address);
+            Sales._FindComps.selectCompFromMapByAddress(testData.address);
 
-            cy.stepInfo("3. Property > Property Description > Sales Adjustment Grid");
-            NavigationSection.naviateToPropertyDescription();
+            cy.stepInfo("3. Navigate Property > Property Description > Site Description and verify As Is General Property Condition");
+            NavigationSection.navigateToPropertyDescription();
+            if (conclusion === "AS_COMPLETE") {
+                Property._Description.selectAsStabilizedPropertyCondition(testData.propertyCondition);
+            } else {
+                Property._Description.selectGeneralPropertyCondition(testData.propertyCondition);
+            }
 
-            cy.stepInfo("3. Navigate to Sales > Adjust Comps > Sales Adjustment Grid");
-            NavigationSection.openAdjustCompsInSales();
+            cy.stepInfo("4. Navigate to Sales > Adjust Comps > Sales Adjustment Grid");
+            NavigationSection.navigateToAdjustComps();
 
-            cy.stepInfo(`4. Verify that the subject column displays the subject property condition as set in Property 
+            cy.stepInfo(`5. Verify that the subject column displays the subject property condition as set in Property 
             > Property Description > Site Description`);
-            // Sales._AdjustComps.checkCalculationUnitsRadio(testData.calculationUnits[0])
-            //     .enterSizeAdjustmentByColumn(testData.comparable.sizeAdjustment)
-            //     .enterConditionAdjustmentByColumn(testData.comparable.conditionAdjustment)
-            //     .clickAddOtherAdjustmentButton()
-            //     .enterOtherAdjustmentByColumn(testData.comparable.otherAdjustment)
-            //     .enterPropertyRightsByColumn(testData.comparable.propertyRights)
-            //     .verifyAdjustedPriceByColumn();
+            Sales._AdjustComps.clickViewAdjustmentDetails()
+                .verifyExistValueInOtherAdjustmentDetails(testData.propertyCondition);
 
-            // deleteReport(createReportData(conclusion).reportNumber);
+            deleteReport(createReportData(conclusion).reportNumber);
         }); 
     });
 });

@@ -1,18 +1,9 @@
 import Enums from "../../../../enums/enums";
+import { BoweryReports } from "../../../../types";
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 
 export const createReportData = conclusion => {
-    return ReportDataCreator.getReportData("4106", { incomeValue: Enums.INCOME_TYPE.BOTH, conclusionValue: conclusion });
-};
-
-const comparableFixture = () => {
-    return {
-        address: "200 West 78 Street",
-        sizeAdjustment: 20,
-        conditionAdjustment: -30,
-        otherAdjustment: 40,
-        propertyRights: -60
-    };
+    return ReportDataCreator.getReportData("4606", { incomeValue: Enums.INCOME_TYPE.BOTH, conclusionValue: conclusion });
 };
 
 const _conclusionValue: Array<BoweryReports.ConclusionValue> = [
@@ -24,6 +15,7 @@ const _conclusionValue: Array<BoweryReports.ConclusionValue> = [
 
 export default {
     conclusionValue: _conclusionValue,
+    propertyCondition: "Satisfactory",
     calculationUnits: [ "PSF", "Per Residential Units" ],
-    comparable: Object.freeze(comparableFixture())
+    address: "200 West 78 Street",
 };
