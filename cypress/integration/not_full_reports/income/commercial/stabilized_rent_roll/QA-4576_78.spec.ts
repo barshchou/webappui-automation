@@ -84,7 +84,7 @@ describe("[QA-4576][QA-4578] Verify the display of the Stabilized Rent Roll page
         /**
          * Note: Do not change window focus while debugging in headless mode
          */
-        Income._CommercialManager.RentComps.dragAllCommercialUnitsIntoGroup(testData.compGroup, testData.numberOfCommercialUnits);
+        Income._CommercialManager.RentComps.dragAllCommercialUnitsIntoGroup(testData.compGroup);
 
         cy.stepInfo(`Navigate to Reconcialltion and add market reconcillation`);
         _NavigationSection.clickRentReconcillationButton()
