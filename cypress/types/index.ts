@@ -1,3 +1,5 @@
+import * as KeyInfo from '../enums/enumKeys.enum';
+import Enums from "../enums/enums";
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-namespace */
@@ -16,30 +18,26 @@ export namespace BoweryReports {
         fullPath?: string
     }
     
-    export type ConclusionValue = "AS_IS" | "AS_STABILIZED" | "AS_COMPLETE" 
+    export type ConclusionValue = keyof typeof Enums.VALUE_CONCLUSION_TYPE 
     export type isSalesForcePull = boolean
     export type ReportCreationOptions = {
-        incomeValue?: string,
-        conclusionValue?: BoweryReports.ConclusionValue,
-        templateValue?: string,
+        incomeValue?: typeof Enums.INCOME_TYPE[KeyInfo.IncomeTypeKeys],
+        conclusionValue?: ConclusionValue,
+        templateValue?: TemplateTypes,
         address?: string,
         isSalesForcePull?: isSalesForcePull
     }
-    export type LeaseDateName = "Start" | "Expiry"
-    export type LeaseStatus = "Occupied" | "Vacant" | "Employee"
-    export type ImageType = "Interior Images" | "Exterior Images";
-    export type InputType = "drag-n-drop" | "input";
-    export type UnitSF = "unit" | "sf" | "room"
-    export type PerUnitPerSF = "Per Unit" | "Per SF"
-    export type ForecastItemBasis = "insurance" | "electricity"
-    | "fuel" | "waterAndSewer" | "repairsAndMaintenance" | "payrollAndBenefits" | "generalAndAdministrative" 
-    | "legalAndProfessionalFees" | "miscellaneous" | "management" | "reserves" | "total" | "custom" | "utilities";
+    export type LeaseDateName = typeof Enums.LEASE_DATE_NAME[KeyInfo.LeaseDateNameKeys]
+    export type LeaseStatus = typeof Enums.LEASE_STATUS[KeyInfo.LeaseStatusKeys]
+    export type ImageType =  typeof Enums.IMAGE_TYPE[KeyInfo.ImageTypeKeys]
+    export type InputType = typeof Enums.INPUT_TYPE[KeyInfo.InputTypeKeys]
+    export type UnitSF = keyof typeof Enums.UNIT_SF
+    export type PerUnitPerSF = typeof Enums.PER_UNIT_PER_SF[KeyInfo.PerUnitPerSFKeys]
+    export type ForecastItemBasis = keyof typeof Enums.EXPENSE_CELL
 
-    export type CommercialUnitsUseValues = "retail" | "office" | "medical" | "community" | "industrial" | "other" | "undetermined";
-    export type CommercialUnitsUseTexts = "Retail" | "Office" | "Medical Office" | "Community Facility" | "Industrial" |
-        "Undetermined" | string;
-    export type CommercialUnitsGroups = "Use" | "State" | "Location" | "Street Type" | "Floor" | "Grade" | "Facade"
-    | "Ceiling Height" | "Frontage";
+    export type CommercialUnitsUseValues = keyof typeof Enums.COMMERCIAL_UNITS_USE_VALUES;
+    export type CommercialUnitsUseTexts = typeof Enums.COMMERCIAL_UNITS_USE_TEXTS[KeyInfo.CommercialUnitsUseTextsKeys];
+    export type CommercialUnitsGroups = typeof Enums.COMMERCIAL_UNITS_GROUPS[KeyInfo.CommercialUnitsGroupsKeys]
 
     export type ProFormaAnyIncome = {
         total: string,
@@ -47,14 +45,14 @@ export namespace BoweryReports {
         perUnit: string
     };
 
-    export type CommercialUnitsGradeValues = "atGrade" | "partiallyBelowGrade" | "belowGrade" | "other";
-    export type CommercialUnitsFacadeValues = "plate glass" | "other";
-    export type CommercialUnitsStateValues = "finished" | "unfinished" | "vanilla box" | "other";
-    export type CommercialUnitsCeilingHeightValues = "low" | "normal" | "high" | "other"; 
-    export type CommercialUnitsLocationValues = "corner" | "mid-block" | "through-lot";
-    export type CommercialUnitsStreetTypeValues = "side street" | "avenue";
-    export type CommercialUnitsFloorValues = "belowGrade" | "groundFloor" | "upperFloor" | "other";
-    export type CommercialUnitsFrontageValues = "small" | "medium"| "large" | "other";
+    export type CommercialUnitsGradeValues = keyof typeof Enums.COMMERCIAL_UNITS_GRADE_VALUES
+    export type CommercialUnitsFacadeValues = typeof Enums.COMMERCIAL_UNITS_FACADE_VALUES[KeyInfo.CommercialUnitsFacadeKeys]
+    export type CommercialUnitsStateValues = typeof Enums.COMMERCIAL_UNITS_STATE_VALUES[KeyInfo.CommercialUnitsStateKeys]
+    export type CommercialUnitsCeilingHeightValues = keyof typeof Enums.COMMERCIAL_UNITS_CEILING_HEIGHT_VALUES
+    export type CommercialUnitsLocationValues = typeof Enums.COMMERCIAL_UNITS_LOCATION_VALUES[KeyInfo.CommercialUnitsLocationKeys]
+    export type CommercialUnitsStreetTypeValues =  typeof Enums.COMMERCIAL_UNITS_STREET_TYPE_VALUES[KeyInfo.CommercialUnitsStreetTypeKeys]
+    export type CommercialUnitsFloorValues = keyof typeof Enums.COMMERCIAL_UNITS_FLOOR_VALUES
+    export type CommercialUnitsFrontageValues = keyof typeof Enums.COMMERCIAL_UNITS_FRONTAGE_VALUES
     export namespace CommercialUnits {
         /*
         More Unit Groups Values will be added after other values types added
@@ -69,23 +67,18 @@ export namespace BoweryReports {
      */
     export type CommercialUnitGroupsValues = CommercialUnitsUseValues | CommercialUnitsGradeValues | CommercialUnitsFacadeValues | CommercialUnitsCeilingHeightValues | CommercialUnitsFrontageValues;
 
-    export type OrganizationAddresseePrefix = "Mr." | "Mrs." | "Ms." | "Dr.";
-    export type OrganizationState = "New York" | "Alabama" | "Alaska" | "Arizona" | "Arkansas" | "California" | "Colorado" | "Connecticut"
-    | "Delaware" | "District Of Columbia" | "Florida" | "Georgia" | "Hawaii" | "Idaho" | "Illinois" | "Indiana" | "Iowa" | "Kansas"
-    | "Kentucky" | "Louisiana" | "Maine" | "Maryland" | "Massachusetts"| "Michigan" | "Minnesota" | "Mississippi" | "Missouri" | "Montana"
-    | "Nebraska" | "Nevada" | "New Hampshire" | "New Jersey" | "New Mexico" | "North Carolina" | "North Dakota" | "Ohio" | "Oklahoma"
-    | "Oregon" | "Pennsylvania" | "Puerto Rico" | "Rhode Island" | "South Carolina" | "South Dakota" | "Tennessee" | "Texas" | "Utah"
-    | "Vermont" | "Virginia" | "Washington" | "Wisconsin" | "West Virginia" | "Wyoming";
+    export type OrganizationAddresseePrefix = typeof Enums.ORGANIZATION_ADDRESSEE_PREFIX[KeyInfo.OrganizationAddresseePrefixKeys]
+    export type OrganizationState = typeof Enums.ORGANIZATION_STATE[KeyInfo.OrganizationStateKeys]
 
     export type ForecastItem = { 
-        name: BoweryReports.ForecastItemBasis | string, 
-        basis?: BoweryReports.UnitSF, 
+        name: ForecastItemBasis | string, 
+        basis?: UnitSF, 
         forecast?: number | undefined, 
         projection?: number 
     }
 
     export type Periods = { 
-        expensePeriodType: BoweryReports.ExpensePeriodType | string, 
+        expensePeriodType: ExpensePeriodType | string, 
         month?: string,
         year: number | string, 
         insurance?: number, electricity?: number, fuel?: number, waterAndSewer?: number, repairsAndMaintenance?: number, 
@@ -93,7 +86,7 @@ export namespace BoweryReports {
         management?: number, replacementReserves?: number 
     };
 
-    export type ExpensePeriodType = "Actual" | "Projection" | "Actual T12" | "Annualized Historical";
+    export type ExpensePeriodType = typeof Enums.EXPENSE_PERIOD_TYPE[KeyInfo.ExpensePeriodTypeKeys]
 
     export type Comparable = {address: string, location?: string, period?: string, squareFeet?: number, resUnits?: number,
         insurance?: number, electricity?: number, fuel?: number, waterAndSewer?: number, repairsAndMaintenance?: number, 
@@ -106,7 +99,7 @@ export namespace BoweryReports {
         footage?: number,
         rooms?: number,
         monthlyRent: number,
-        leaseStatus?: BoweryReports.LeaseStatus
+        leaseStatus?: LeaseStatus
     }
 
     export type RentCompField = {
@@ -122,21 +115,21 @@ export namespace BoweryReports {
         annualAmount: number
     }
 
-    export type ParkingVcLossType = "Residential" | "Parking"
+    export type ParkingVcLossType = typeof Enums.PARKING_VC_LOSS_TYPE[KeyInfo.ParkingVcLossKeys]
 
-    export type StorageVcLossType = "Residential" | "Storage V/C"
+    export type StorageVcLossType =  typeof Enums.STORAGE_VC_LOSS_TYPE[KeyInfo.StorageVcLossKeys]
 
-    export type LaundryVcLossType = "Residential" | "Laundry V/C"
+    export type LaundryVcLossType = typeof Enums.LAUNDRY_VC_LOSS_TYPE[KeyInfo.LaundryVcLossKeys]
 
-    export type ReimbursementType = "dollarAmount" | "percentOfCurrentYearLiability" | "increaseOverBaseYear"
+    export type ReimbursementType = keyof typeof Enums.REIMBURSEMENT_TYPES
 
-    export type KnownInformation = "Annual" | "Monthly"
+    export type KnownInformation = typeof Enums.KNOWN_INFORMATION[KeyInfo.KnownInformationKeys]
 
-    export type UnitsOfMeasure = "annually" | "monthly" | "per square foot per year" | "per square foot per month";
+    export type UnitsOfMeasure = typeof Enums.UNITS_OF_MEASURE[KeyInfo.UnitsOfMeasureKeys]
 
-    export type UtilityExpenses = "brokenOut" | "combinedElectricityAndFuel" | "combinedAll";
+    export type UtilityExpenses = keyof typeof Enums.UTILITY_EXPENSES
 
-    export type CompGroupsColumns = "#" | "address" | "use" | "tenantName" | "dateSigned" | "squareFeet" | "rentPerSf"
+    export type CompGroupsColumns = typeof Enums.COMP_GROUP_COLUMNS[KeyInfo.CompGroupsColumnsKeys]
 
     export type leaseDate = {
         name: LeaseDateName,
@@ -162,15 +155,19 @@ export namespace BoweryReports {
         taxYear: number
     }
 
-    export type UnitType = "typical" | "duplex" | "triplex" | "simplex";
-    export type SourceOfInformation = "bowery subject" | "external database" | "other";
-    export type Amenities = "none" | "backyard" | "balcony" | "roof";
+    export type UnitType = keyof typeof Enums.UNIT_TYPE
+    export type SourceOfInformation = typeof Enums.SOURCE_OF_INFORMATION[KeyInfo.SourceOfInformationKeys]
+    export type Amenities = keyof typeof Enums.AMENITIES
 
     export type RentCompsFilter = {
         name: string,
         value: string | number 
     };
 
+    export type TemplateTypes = typeof Enums.TEMPLATE_TYPE[KeyInfo.TemplateTypesKeys]
+    export type ProFormaTypes = typeof Enums.PRO_FORMA_TYPES[KeyInfo.ProFormaTypeKeys]
+    export type IncomeTypeCellNamesTypes = keyof typeof Enums.INCOME_TYPES_CELL_NAMES
+    export type IncomeTypes = typeof Enums.INCOME_TYPE[KeyInfo.IncomeTypesKeys]
     export type MarketResearch = {
         neighborhoodValue: string,
         marketArea: string,
@@ -183,7 +180,7 @@ export namespace BoweryReports {
         document?: string
     }
 
-    export type MarketAnalysisUses = "multifamily" | "retail" | "office" | "industrial";
+    export type MarketAnalysisUses = keyof typeof Enums.MARKET_ANALYSIS_USES
 }
 
 export namespace Utils {
@@ -202,11 +199,11 @@ export namespace BoweryAutomation {
      * Base data for report setup
      */
     export type BaseReportCreationData = {
-        incomeValue: string, 
+        incomeValue: typeof Enums.INCOME_TYPE[KeyInfo.IncomeTypeKeys],
         address: string, 
         isSalesForcePull: boolean,
         reportNumber: string, 
-        templateValue: string,
+        templateValue: typeof Enums.TEMPLATE_TYPE[KeyInfo.TemplateTypesKeys],
         conclusionValue: BoweryReports.ConclusionValue
     }
 

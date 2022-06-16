@@ -15,7 +15,7 @@ const _leaseStatuses: BoweryReports.LeaseStatus[] = [
 
 export default {
     reportCreationData: ReportDataCreator.getReportData("4582", {
-        incomeValue: enums.INCOME_TYPE.BOTH
+        incomeValue: enums.INCOME_TYPE.both
     }),
     buildingDescription: _buildingDescription,
     numberOfCommercialUnits: 3,

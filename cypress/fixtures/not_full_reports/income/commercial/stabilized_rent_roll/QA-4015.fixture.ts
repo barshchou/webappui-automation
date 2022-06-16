@@ -9,7 +9,7 @@ const leaseStatusesFixture: BoweryReports.LeaseStatus[] = [ "Vacant", "Occupied"
 
 export default {
     reportCreationData: ReportDataCreator.getReportData("4015", {
-        incomeValue: Enums.INCOME_TYPE.BOTH,
+        incomeValue: Enums.INCOME_TYPE.both,
     }),
     numberOfCommercialUnits: 2,
     listOfUnitsSF: [ 1000, 2000 ],

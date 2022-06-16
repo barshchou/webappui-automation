@@ -155,15 +155,15 @@ const _asCompletedChips = _baseChip().concat(_baseChipsAsCompleted());
 
 export default {
     reportCreationDataAsIs: reportDataCreator.getReportData("4598-00", {
-        incomeValue: enums.INCOME_TYPE.BOTH,
+        incomeValue: enums.INCOME_TYPE.both,
         conclusionValue: enums.VALUE_CONCLUSION_TYPE.AS_IS
     }),
     reportCreationDataAsStablized: reportDataCreator.getReportData("4598-00", {
-        incomeValue: enums.INCOME_TYPE.BOTH,
+        incomeValue: enums.INCOME_TYPE.both,
         conclusionValue: enums.VALUE_CONCLUSION_TYPE.AS_STABILIZED
     }),
     reportCreationDataAsComplete: reportDataCreator.getReportData("4598-00", {
-        incomeValue: enums.INCOME_TYPE.BOTH,
+        incomeValue: enums.INCOME_TYPE.both,
         conclusionValue: enums.VALUE_CONCLUSION_TYPE.AS_COMPLETE
     }),
     numberOfCommercialUnits: _numberOfCommercialUnits,

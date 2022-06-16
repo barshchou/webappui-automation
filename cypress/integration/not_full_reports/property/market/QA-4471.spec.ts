@@ -21,7 +21,7 @@ describe("'Pull from dropbox' clicked - needed files are uploaded", { tags: [ "@
         it(`Test with ${researchUseObject.use} market analysis use`, () => {
 
             cy.stepInfo(`1. Check ${researchUseObject.use} use checkbox`);
-            if (researchUseObject.use === Enums.MARKET_ANALYSIS_USES.MULTIFAMILY) {
+            if (researchUseObject.use === Enums.MARKET_ANALYSIS_USES.multifamily) {
                 Property._Market.verifyMarketAnalysisUseCheckboxState(researchUseObject.use);
             } else {
                 Property._Market.checkUncheckMarketAnalysisUseCheckbox(researchUseObject.use);

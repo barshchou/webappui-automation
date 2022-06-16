@@ -653,6 +653,16 @@ class RentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
             .should("have.text", headerName);
         return this;
     }
+
+    clickAddRemoveBuildingCompByAddress(address: string): RentCompsActions {
+        rentCompsPage.getAddRemoveBuildingCompButtons(address).click();
+        return this;
+    }
+
+    clickEditBuildingCompButtonByAddress(address: string): RentCompsActions {
+        rentCompsPage.getEditAddedBuildingCompButtonByAddress(address).click();
+        return this;
+    }
 }
 
 export default new RentCompsActions(rentCompsPage);

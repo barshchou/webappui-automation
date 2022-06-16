@@ -4,8 +4,8 @@ import ReportDataCreator from "../../../../data_creator/reportData.creator";
 
 const reportCreationFixture = () => {
     return ReportDataCreator.getReportData("4408", {
-        templateValue: Enums.TEMPLATE_TYPE.NOT_FREDDIE_MAC,
-        incomeValue: Enums.INCOME_TYPE.BOTH,
+        templateValue: Enums.TEMPLATE_TYPE.notFreddieMac,
+        incomeValue: Enums.INCOME_TYPE.both,
         conclusionValue: Enums.VALUE_CONCLUSION_TYPE.AS_COMPLETE
     });
 };

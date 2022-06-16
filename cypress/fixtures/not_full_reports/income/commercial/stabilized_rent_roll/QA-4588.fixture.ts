@@ -40,15 +40,15 @@ const _commentaryAsCompleteOccupied = "Upon completion of the renovations, the s
 
 export default {
     reportCreationDataAsIs: reportDataCreator.getReportData("4588", {
-        incomeValue: enums.INCOME_TYPE.BOTH,
+        incomeValue: enums.INCOME_TYPE.both,
         conclusionValue: enums.VALUE_CONCLUSION_TYPE.AS_IS
     }),
     reportCreationDataAsStabilized: reportDataCreator.getReportData("4588", {
-        incomeValue: enums.INCOME_TYPE.BOTH,
+        incomeValue: enums.INCOME_TYPE.both,
         conclusionValue: enums.VALUE_CONCLUSION_TYPE.AS_STABILIZED
     }),
     reportCreationDataAsComplete: reportDataCreator.getReportData("4588", {
-        incomeValue: enums.INCOME_TYPE.BOTH,
+        incomeValue: enums.INCOME_TYPE.both,
         conclusionValue: enums.VALUE_CONCLUSION_TYPE.AS_COMPLETE
     }),
     leaseStatusMixed: _leaseStatusMixed,
