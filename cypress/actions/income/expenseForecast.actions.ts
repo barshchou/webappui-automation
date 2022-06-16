@@ -274,8 +274,18 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
         return this;
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-   
+/**
+   * 1. Action takes all allForecastsInputs (forecast expense card inputs).
+   * 2. In cycle we check all forecast cards does it has checkbox "Include Expense on Pro Forma" or not: 
+   * 2.1. If it does not have checkbox "Include Expense on Pro Forma" - function takes input value, 
+   * then calculate and transfer it to value in Per SF, then sum into sumPerSF 
+   *
+   * 2.2. If it has checkbox "Include Expense on Pro Forma" - we check does it checked or not: 
+   * 2.2.1. If checkbox "Include Expense on Pro Forma" is checked - then function takes input value, then calculate and transfer it to value in Per SF, then sum into sumPerSF.
+   * 2.2.2. If checkbox "Include Expense on Pro Forma" is not checked - then function does not sum input value into sumPerSF.
+   *
+   * 3. sumPerSF value wraped as alias 'summaPerSF' and is used in other actions 
+   */
 
     totalSumForecastPSF(GBA?: number, resUnits?: number, rooms?: number): ExpenseForecastActions {
         expenseForecastPage.allForecastsInputs.then(inputs => {
@@ -339,6 +349,19 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
         return this;
     }
 
+    /**
+   * 1. Action takes all allForecastsInputs (forecast expense card inputs).
+   * 2. In cycle we check all forecast cards does it has checkbox "Include Expense on Pro Forma" or not: 
+   * 2.1. If it does not have checkbox "Include Expense on Pro Forma" - function takes input value, 
+   * then calculate and transfer it to value in Per Unit, then sum into sumPerUnit 
+   *
+   * 2.2. If it has checkbox "Include Expense on Pro Forma" - we check does it checked or not: 
+   * 2.2.1. If checkbox "Include Expense on Pro Forma" is checked - then function takes input value, then calculate and transfer it to value in Per Unit, then sum into sumPerUnit.
+   * 2.2.2. If checkbox "Include Expense on Pro Forma" is not checked - then function does not sum input value into sumPerUnit.
+   *
+   * 3. sumPerUnit value wraped as alias 'summaPerUnit' and is used in other actions 
+   */
+
     totalSumForecastPerUnit(GBA?: number, resUnits?: number, rooms?: number): ExpenseForecastActions {
         expenseForecastPage.allForecastsInputs.then(inputs => {
             let sumPerUnit = 0;
@@ -400,12 +423,6 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
     });
         return this;
     }
-
-
-
-
-
-
 
     verifyTOECommentary(textToBe: string): ExpenseForecastActions {
         expenseForecastPage.toeCommentary.should("contain.text", textToBe);
