@@ -231,6 +231,16 @@ class AdjustCompsActions extends BaseActionsExt<typeof adjustCompsPage> {
         adjustCompsPage.addCustomUtilitiesAdjustmentButton.click();
         return this;
     }
+
+    clickViewAdjustmentDetails(): AdjustCompsActions {
+        adjustCompsPage.viewAdjustmentDetails.click();
+        return this;
+    }
+
+    verifyExistValueInOtherAdjustmentDetails(value: string, index = 1): AdjustCompsActions {
+        adjustCompsPage.getOtherAdjustmentColumnValue(value, index).should("have.text", value);
+        return this;
+    }
 }
 
 export default new AdjustCompsActions(adjustCompsPage);
