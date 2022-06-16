@@ -1,5 +1,5 @@
 import enums from "../../../../enums/enums";
-import reportDataCreator from "../../../../fixtures/data_creator/reportData.creator";
+import reportDataCreator from "../../../data_creator/reportData.creator";
 
 const _numberOfCommercialUnits = 3;
 const _numberOfResidentialUnits = 2;

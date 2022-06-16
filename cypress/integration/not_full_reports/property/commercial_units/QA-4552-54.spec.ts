@@ -1,5 +1,5 @@
 import { numberWithCommas } from "../../../../../utils/numbers.utils";
-import { Income, Property, ReviewExport } from "../../../../actions";
+import { Property, ReviewExport } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import testData from "../../../../fixtures/not_full_reports/property/commercial_units/QA-4549-54.fixture";
@@ -23,7 +23,7 @@ describe(`[QA-4552][QA-4553][QA-4554] Verify the "Linked" chips dropdown in the 
         cy.stepInfo("1. Proceed to the Property -> Commercial Units");
         _NavigationSection.navigateToCommercialUnits();
 
-        cy.stepInfo("2. Click on the Edit button in the Stabilized Commercial Income Discussion section.");
+        cy.stepInfo("2. Click on the Edit button in the Commercial Unit SF Discussion section.");
         Property._CommercialUnits.clickEditDiscussionButton();
 
         cy.stepInfo("3. Enter the “=“ and select the an option. Verify each option.");
@@ -69,7 +69,7 @@ describe(`[QA-4552][QA-4553][QA-4554] Verify the "Linked" chips dropdown in the 
         cy.stepInfo("1. Proceed to the Property -> Commercial Units");
         _NavigationSection.navigateToCommercialUnits();
 
-        cy.stepInfo("2. Click on the Edit button in the Stabilized Commercial Income Discussion section.");
+        cy.stepInfo("2. Click on the Edit button in the Commercial Unit SF Discussion section.");
         Property._CommercialUnits.clickEditDiscussionButton();
 
         cy.stepInfo("3. Enter the “=“ and select the an option. Verify each option.");
@@ -115,7 +115,7 @@ describe(`[QA-4552][QA-4553][QA-4554] Verify the "Linked" chips dropdown in the 
         cy.stepInfo("1. Proceed to the Property -> Commercial Units");
         _NavigationSection.navigateToCommercialUnits();
 
-        cy.stepInfo("2. Click on the Edit button in the Stabilized Commercial Income Discussion section.");
+        cy.stepInfo("2. Click on the Edit button in the Commercial Unit SF Discussion section.");
         Property._CommercialUnits.clickEditDiscussionButton();
 
         cy.stepInfo("3. Enter the “=“ and select the an option. Verify each option.");
