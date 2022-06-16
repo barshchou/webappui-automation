@@ -181,7 +181,7 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         return this;
     }
 
-    naviateToPropertyDescription() {
+    navigateToPropertyDescription() {
         this.clickPropertyButton()
             .clickPropertyDescription()
             .clickYesIfExist();
@@ -257,6 +257,13 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
             .clickYesIfExist();        
         cy.wait(`@${Alias.gql.SearchSalesTransactions}`, { timeout:120000 });
 
+        return this;
+    }
+
+    navigateToAdjustComps() {
+        this.clickSalesButton()
+            .clickAdjustCompsButton()
+            .clickYesIfExist();
         return this;
     }
 
