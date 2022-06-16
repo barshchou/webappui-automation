@@ -56,6 +56,12 @@ class CommercialUnitsPage extends BasePage {
     get commentaryText() {return cy.get("div[data-slate-editor]");}
 
     get narrativeSuggestionsList() {return cy.get("[data-qa='narrative-suggestions-list'] > ul");}
+
+    get modalWindow() {return cy.get("[role='dialog']");}
+
+    get changesLostModalHeader() {return cy.contains("Changes will be lost");}
+
+    get cancelRevertButton() {return this.formYesRevertBtn.prev("button");}
 }
 
 export default new CommercialUnitsPage();

@@ -2,6 +2,7 @@ import commercialUnitsPage from "../../pages/property/commercialUnits.page";
 import { cutDecimalPartToNumberOfDigits, isHasDecimalPartMoreNumberOfDigits, numberWithCommas } from "../../../utils/numbers.utils";
 import BaseActionsExt from "../base/base.actions.ext";
 import { BoweryReports } from "../../types";
+import { normalizeText } from "../../../utils/string.utils";
 
 class CommercialUnitsActions extends BaseActionsExt<typeof commercialUnitsPage> {
 
@@ -175,6 +176,40 @@ class CommercialUnitsActions extends BaseActionsExt<typeof commercialUnitsPage> 
         this.Page.formSaveBtn().click();
         return this;
     }
+
+    clickRevertToOriginalButton(): this {
+        this.Page.formRevertToOriginalBtn().click();
+        this.Page.changesLostModalHeader.should("exist");
+        return this;
+    }
+
+    clickCloseButton(): this {
+        this.Page.CloseIcon.click();
+        return this;
+    }
+
+    clickCancelRevertButton(): this {
+        this.Page.cancelRevertButton.click();
+        return this;
+    }
+
+    clickYesRevertButton(): this {
+        this.Page.formYesRevertBtn.click();
+        return this;
+    }
+
+    verifyCommentaryFullText(textToBe: string): this {
+        this.Page.commentaryText.invoke('text').then(text => {
+            cy.wrap(normalizeText(text)).should('deep.equal', textToBe);
+        });
+        return this;
+    }
+
+    clickCancelDiscussionEditButton(): this {
+        this.Page.formCancelButton().click();
+        return this;
+    }
+
 }
 
 export default new CommercialUnitsActions(commercialUnitsPage);
