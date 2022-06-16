@@ -50,6 +50,8 @@ class CommercialUnitsPage extends BasePage {
     }
 
     get commercialGrossLeasableAreaToolip() { return cy.xpath(`//label[text() = "Commercial Gross Leasable Area"]/span[1]`);}
+
+    get commercialUnitSfDiscussionTooltip() { return cy.xpath(`//h6[.= "Commercial Unit SF Discussion"]//following-sibling::*[@data-icon="info-circle"]`);}
 }
 
 export default new CommercialUnitsPage();
