@@ -2,7 +2,6 @@ import { getNumberFromDollarNumberWithCommas } from './../../../../utils/numbers
 import stabRentRollPage from "../../../pages/income/residential/stabilizedRentRoll.page";
 import { numberWithCommas } from "../../../../utils/numbers.utils";
 import ResidentialRentRollSharedActions from "../../shared_components/residentialRentRoll.shared.actions";
-import rentRollPage from '../../../pages/income/residential/rentRoll.page';
 
 class StabilizedRentRollActions extends ResidentialRentRollSharedActions<typeof stabRentRollPage> {
 
