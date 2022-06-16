@@ -70,7 +70,7 @@ class StabilizedRentRollActions extends ResidentialRentRollSharedActions<typeof 
     }
 
     verifyStabilizedRentPSFValueByRow(isPerMonth = true, rowNumber = 0 ) {
-        this.Page.monthlyRentCells.eq(rowNumber).invoke("text").then(monthlyRentText => {
+        this.Page.stabilizedMonthlyRentCells.eq(rowNumber).invoke("val").then(monthlyRentText => {
             const rentValue = getNumberFromDollarNumberWithCommas(monthlyRentText);
             this.Page.squareFootageCells.eq(rowNumber).invoke("text").then(sfText => {
                 const footageValue = getNumberFromDollarNumberWithCommas(sfText);
