@@ -7,17 +7,36 @@ const _envs = {
   PROD: "url=prod"
 }
 
+/**
+ * Parses second argument we send to the `start.local.js` script
+ * and extracts specific argument that matches `argName`.
+ * 
+ * Used for retrieving specific args which can be manipulated further.
+ * 
+ * @param {string} _args String of arguments we send to setup script (`"url=prod,test=test"`, for example)
+ * @param {string} argName Name of the argument we want to retrieve (`customEnv`, for example)
+ * @returns 
+ */
 function _findArg(_args, argName){
   let arg;
   arg = _args.split(",").find(elem => elem.includes(argName));
+  console.log("arg is "+ arg);
   if(arg == undefined){
     return;
   }
   else{
+    console.log(arg.split(" ").find(elem => elem.startsWith(argName)));
     return arg.split(" ").find(elem => elem.startsWith(argName));
   }       
 }
 
+/**
+ * Executes specific command using `exec` function from `child_process` module
+ * and pipes output from this process to main nodejs process.
+ * @see https://nodejs.org/api/child_process.html#child_processexeccommand-options-callback
+ * @param {string} command 
+ * @param {Function} cb 
+ */
 function _exec(command,cb) {   
     exec(command, function(err,stdout,stderr){
         if(err) {
@@ -28,6 +47,22 @@ function _exec(command,cb) {
    }).stdout.pipe(process.stdout);
 }
 
+/**
+ * Mutates command to format where all the CLI arg and npm script's value will be inlined 
+ * 
+ * Example input:
+ * ```shell
+ * node .\start.local.js "cy:open" "url=prod,test=test"
+ * ```
+ * 
+ * Example output:
+ * ```shell
+ * npx cypress open --env url=prod,test=test --config baseUrl=https://app.boweryvaluation.com
+ * ```
+ * @param {*} command 
+ * @param {*} args 
+ * @returns 
+ */
 function _mutateCommand(command, args){
     if(args != undefined || args == ""){
       command = command.concat(` --env ${args}`)
@@ -60,6 +95,7 @@ function _mutateCommand(command, args){
             command = command.concat(` --config baseUrl=${envUrls.PROD}`);
             break;
         }        
+        console.log(command);
         return command;
       }
     }

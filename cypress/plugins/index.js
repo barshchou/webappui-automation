@@ -7,11 +7,10 @@
 // ***********************************************************
 /// <reference types="cypress" />
 
-const { existsSync, writeFileSync, readFile } = require("fs");
+const { existsSync, writeFileSync } = require("fs");
 const mammoth = require("mammoth");
 const glob = require("glob");
 const request = require('supertest');
-const util = require("util");
 const io = require("socket.io-client");
 
 const {
@@ -19,11 +18,6 @@ const {
 } = require("cypress-image-snapshot/plugin");
 
 const grepFilterPlugin = require("cypress-grep/src/plugin");
-
-//#region helper functions, not used as task functions
-const readFileAsync = util.promisify(readFile);
-
-//#endregion
 
 /**
  * NOTE: (ernst) Sometimes we need call functions recursively (function calls itself).
@@ -65,7 +59,7 @@ const _waitForFileExists = async (filePath, currentTime = 0, timeout = 60000) =>
   if (currentTime === timeout){
      return false; 
   }
-  await new Promise((resolve, reject) =>{
+  await new Promise((resolve) =>{
     setTimeout(() => resolve(true), 1000)
   });
   return _waitForFileExists(filePath, currentTime + 1000, timeout);
@@ -96,7 +90,7 @@ const _convertDocxToHtml = async (report) => {
   if (file != undefined) {
     return file;  
   }
-  await new Promise((resolve, reject) =>{
+  await new Promise((resolve) =>{
     setTimeout(() => resolve(true), 1000)
   });
   return _getFilePath(_reportName, _docx_html, currentTime + 1000, timeout);
@@ -145,7 +139,7 @@ const _loginApi = async (_envUrl, _username, _password) => {
  const _createReportApi = async (_reportCreationData, _payload, _token, _envUrl) => {
     let reportId = "not report id";
     const socket = io.connect(_envUrl);
-    const _connect = new Promise((res,rej)=>
+    const _connect = new Promise((res)=>
       // ernst: we have to chain sockets in order to have synchronous order of execution,
       // without it - we will not be able to wait until socket id will be generated and resolved by promise 
       socket.on('connect', () => console.log('Socket opened')).on('init', async socketId => {
