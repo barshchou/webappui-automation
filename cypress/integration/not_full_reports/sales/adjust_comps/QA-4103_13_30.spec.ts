@@ -1,5 +1,5 @@
-import { Sales } from './../../../../actions/index';
-import testData from "../../../../fixtures/not_full_reports/sales/adjust_comps/QA-4103_13.fixture";
+import { Sales } from '../../../../actions/index';
+import testData from "../../../../fixtures/not_full_reports/sales/adjust_comps/QA-4103_13_30.fixture";
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 
@@ -16,10 +16,10 @@ describe("Net Property Adjustments in Sales Adjustment Grid is calculated with c
 
     beforeEach(() => {
         cy.restoreLocalStorage();
+        NavigationSection.navigateToAdjustComps();
     });
 
     it("[QA-4103]", () => {
-        NavigationSection.navigateToAdjustComps();
         testData.calculationUnits.forEach(val => {
             Sales._AdjustComps.checkCalculationUnitsRadio(val);
             // Sales.AdjustComps.enterSizeAdjustmentByColumn(testData.comparable.sizeAdjustment)
@@ -31,14 +31,23 @@ describe("Net Property Adjustments in Sales Adjustment Grid is calculated with c
     });
 
     it("[QA-4113]", () => {
-        NavigationSection.navigateToFindComps();
-        Sales._FindComps.selectCompFromMapByAddress(testData.comparable.address);
-        NavigationSection.navigateToAdjustComps();
         Sales._AdjustComps.enterSizeAdjustmentByColumn(testData.comparable.sizeAdjustment)
             .enterConditionAdjustmentByColumn(testData.comparable.conditionAdjustment)
             .clickAddOtherAdjustmentButton()
             .enterOtherAdjustmentByColumn(testData.comparable.otherAdjustment)
             .verifyNetPropertyAdjustmentsByCompIndex();
         deleteReport(testData.reportCreationData.reportNumber);
+    });
+
+    it("[QA-4130]", () => {
+        // What is it  Price per Unit and Sale price
+        testData.calculationUnits.forEach(val => {
+            Sales._AdjustComps.checkCalculationUnitsRadio(val);
+            // .enterSizeAdjustmentByColumn(testData.comparable.sizeAdjustment)
+            // .enterConditionAdjustmentByColumn(testData.comparable.conditionAdjustment)
+            // .clickAddOtherAdjustmentButton()
+            // .enterOtherAdjustmentByColumn(testData.comparable.otherAdjustment)
+            // .verifyNetPropertyAdjustmentsByCompIndex();
+        });
     });
 });
