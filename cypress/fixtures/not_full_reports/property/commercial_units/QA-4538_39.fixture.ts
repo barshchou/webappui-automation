@@ -9,7 +9,7 @@ const _longValue = '1111111111111111111111111111111111111111111111';
 const _tooltipText = 'This value will be deducted from the GBA to determine the Residential Gross Leasable Area.';
 
 const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("4538_39", {
-    incomeValue: Enums.INCOME_TYPE.BOTH
+    incomeValue: Enums.INCOME_TYPE.both
 });
 
 export default {

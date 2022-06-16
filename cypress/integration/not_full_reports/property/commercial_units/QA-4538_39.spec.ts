@@ -61,8 +61,9 @@ describe("[Property > Commercial Units > Commercial Unit SF] Commercial Units pa
 
         cy.stepInfo(`2. Hover the Commercial Gross Leasable Area tooltip.`);
         Property._CommercialUnits.Page.commercialGrossLeasableAreaToolip
-            .trigger('mouseover')
-            .get("[role='tooltip']").invoke("text").then(text => {
+            .trigger('mouseover');
+        Property._CommercialUnits.Page.tooltip
+            .invoke("text").then(text => {
                 expect(text).to.be.equal(testData.tooltipText);
             });
 
