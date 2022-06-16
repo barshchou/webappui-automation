@@ -1,4 +1,5 @@
 import createNewClientPage from "../../pages/organization/createNewClient.page";
+import { BoweryAutomation } from "../../types";
 import BaseActionsExt from "../base/base.actions.ext";
 
 class OrganizationInfoActions extends BaseActionsExt<typeof createNewClientPage>{

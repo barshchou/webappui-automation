@@ -3,6 +3,32 @@ import { replaceEntersWithLineBreak } from "../../../utils/string.utils";
 import BaseActionsExt from "../base/base.actions.ext";
 
 class ClientActions extends BaseActionsExt<typeof clientPage> {
+    enterIntendedUser(textToType: string = null, edit = true, save = true, revert = false) {
+        if (edit === true) clientPage.formEditBtn().click();
+        clientPage.intendedUserTextBox.invoke("text")
+        .then(text => {
+            clientPage.intendedUserTextBox.focus().type(textToType ?? text);
+        });
+        if(save === true) clientPage.formSaveBtn().click();
+        if (revert === true) {
+            clientPage.formRevertToOriginalBtn().click();
+            clientPage.formYesRevertBtn.click();
+        }
+        return this;
+    }
+
+    enterIdentificationOfTheClient(textToType: string = null, edit = true, save = true, revert = false) {
+        if (edit === true) clientPage.formEditBtn().click();
+        clientPage.identificationOfClientTextBox.invoke("text").then(text => {
+            clientPage.identificationOfClientTextBox.focus().type(textToType ?? text);
+        });
+        if(save === true) clientPage.formSaveBtn().click();
+        if (revert === true) {
+            clientPage.formRevertToOriginalBtn().click();
+            clientPage.formYesRevertBtn.click();
+        }
+        return this;
+    }
 
     verifyInputChangesToBeUnsaved(clientFileNumber: string): ClientActions {
         clientPage.clientFileNumberField.should("have.value", clientFileNumber);
@@ -36,9 +62,9 @@ class ClientActions extends BaseActionsExt<typeof clientPage> {
 
     verifyGuidelineTooltip() {
         clientPage.guidelinesTooltip.should("exist");
-        clientPage.toCheckTooltipExist.should("not.exist");
+        clientPage.tooltip.should("not.exist");
         clientPage.guidelinesTooltip.trigger("mouseover");
-        clientPage.toCheckTooltipExist.should("exist");
+        clientPage.tooltip.should("exist");
         return this;
     }
 

@@ -3,7 +3,7 @@ import { BoweryReports } from "../../../../types";
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 
 export const createReportData = conclusion => {
-    return ReportDataCreator.getReportData("4606", { incomeValue: Enums.INCOME_TYPE.BOTH, conclusionValue: conclusion });
+    return ReportDataCreator.getReportData("4606", { incomeValue: Enums.INCOME_TYPE.both, conclusionValue: conclusion });
 };
 
 const _conclusionValue: Array<BoweryReports.ConclusionValue> = [

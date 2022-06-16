@@ -13,3 +13,15 @@ export const replaceEntersWithLineBreak = (stringToChange) => {
 export const replaceEntersWithSpaces = (stringToChange) => {
   return stringToChange.replaceAll("{enter}", " ");
 };
+
+export const _normalize = (textToNormalize: string): string => {
+  return textToNormalize.replaceAll('﻿', '').trim();
+};
+
+export const isStringContainSubstring = (originString: string, stringToFind: string) => {
+  return originString.includes(stringToFind);
+};
+
+export const normalizeText = (textToNormalize: string): string => {
+  return textToNormalize.replaceAll('﻿', '').trim();
+};

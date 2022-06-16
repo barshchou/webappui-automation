@@ -56,6 +56,15 @@ class CommercialRentCompsPage extends BasePage {
     }
 
     getRentPerSFCellByRowNumber(rowNumber = 0) {return cy.xpath(`//tr[@data-qa='row-${rowNumber}']/td[@data-qa='rentPerSF-cell']`);}
+
+    getDragableElement(index: number) { return `[data-qa="row-${index}"] [data-react-beautiful-dnd-drag-handle="2"]`;}
+
+    getDropableArea(compGroup: string) {return `[data-qa="${compGroup}-group-panel"] tbody[data-react-beautiful-dnd-droppable] tr td`;}
+
+    getDropableAreaDropped(compGroup: string) {return `[data-qa="${compGroup}-group-panel"] [data-qa="row-0"]`;}
+
+    get draggableUnsortedPlaceholder() {return cy.xpath(`//*[@data-qa="unsorted_group"]//td[contains(text(), 'Drop any rent roll unit here')]`);}
+
 }
 
 export default new CommercialRentCompsPage();

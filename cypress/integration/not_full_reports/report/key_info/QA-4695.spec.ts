@@ -27,7 +27,7 @@ describe("[QA-4695] Verify the Save button functionality on the Report > Client 
             .verifyElementIsVisible(Report._KeyInfo.Page.getDateInputByQA('inspectionDate'))
             .verifyElementIsVisible(Report._KeyInfo.Page.inputToCheckUpload)
             .verifyElementIsVisible(Report._KeyInfo.Page.jobNumberTextInput)
-            .verifyElementIsVisible(Report._KeyInfo.Page.uploadButton)
+            .verifyElementIsVisible(Report._KeyInfo.Page.uploadFilesButton)
             .verifyElementIsVisible(Report._KeyInfo.Page.wrapperDefinitionOfMarketValue);
 
         deleteReport(testData.reportCreationData.reportNumber);

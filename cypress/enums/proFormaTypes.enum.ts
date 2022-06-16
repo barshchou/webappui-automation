@@ -28,6 +28,6 @@ const proFormaType = {
     totalOperatingExpensesExTaxes: "Total Operating Expenses (Excl. RE Taxes)",
     netOperatingIncome: "Net Operating Income",
     operatingExpenseRatio: "Operating Expense Ratio"
-};
+} as const;
 
 export default Object.freeze(proFormaType);
