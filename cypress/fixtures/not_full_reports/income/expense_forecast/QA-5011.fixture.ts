@@ -3,32 +3,38 @@ import proFormaTypes from "../../../../../cypress/enums/proFormaTypes.enum";
 import Enums from "../../../../enums/enums";
 import { BoweryAutomation, BoweryReports } from "../../../../types";
 
-import { Income, Property } from "../../../../actions";
-import enums from "../../../../enums/enums";
-import { getNumberFromDollarNumberWithCommas, numberWithCommas, getNumberWithDecimalPart, cutDecimalPartToNumberOfDigits } from "../../../../../utils/numbers.utils";
-
 const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("5011", {
-    incomeValue: Enums.INCOME_TYPE.BOTH,
+    incomeValue: Enums.INCOME_TYPE.both,
     conclusionValue: Enums.VALUE_CONCLUSION_TYPE.AS_COMPLETE
 });
-
-
 
 const _buildingDescription: BoweryReports.BuildingDescription = {
     grossArea: 2500,
     numberOfUnits: 1,
-  };
+};
 
 const _numberOfCommercialUnits = 2;
 const _numberOfResidentialUnits = 1;
 
-const rentRollResidentialUnitFixture = () : BoweryReports.ResidentialUnit => {
+const rentRollResidentialUnitFixture = (): BoweryReports.ResidentialUnit => {
     return {
-            rooms: 5,
-            monthlyRent: 400
-        };
+        rooms: 5,
+        monthlyRent: 400
     };
+};
 
+const commentariesFixture = () => {
+    return {
+        generated: "Operating expenses, exclusive of real estate taxes, were forecasted at $0.00 per square foot and $0 per unit. " +
+            "Excluding real estate taxes, the comparables ranged from Comp totals map psf min to Comp totals map psf max per square foot and Comp totals map unit min to " +
+            "Comp totals map unit max per unit. Our forecast is near the comparable range on both a per square foot and per unit basis, " +
+            "as well as logically placed in relation to the historical performance of the asset. Thus, this forecast is " +
+            "reasonable and will be applied in our valuation analysis.",
+    };
+};
+
+const _forecastPSFnotIncluded = '$0.00';
+const _forecastPerUnitnotIncluded = '$0';
 
 const _expensesInProFormaByDefaultArray = [
     proFormaTypes.insurace,
@@ -44,7 +50,7 @@ const _expensesInProFormaByDefaultArray = [
     proFormaTypes.replacementsAndReserves,
 ];
 
-const expenseForecastInsuranceFixture = (_basis: "unit" | "sf" ): BoweryReports.ForecastItem => {
+const expenseForecastInsuranceFixture = (_basis: "unit" | "sf"): BoweryReports.ForecastItem => {
     return {
         name: "insurance",
         basis: _basis as BoweryReports.UnitSF,
@@ -139,28 +145,12 @@ const expenseForecastTotalFixture = (_basis: "unit" | "sf"): BoweryReports.Forec
     };
 };
 
-
-
-const expenseForecastcustomFixture = (_basis: "unit" | "sf" ): BoweryReports.ForecastItem => {    // delete????
-    return {
-    name: "customExpenses[0]",
-    basis: _basis as BoweryReports.UnitSF,
-    forecast: 30
-};
-}
-
-const customExpence: BoweryReports.ForecastItem = { // delete????
-    name: "customExpence"
-}
-
-
-
 const expenseForecastFixtureWithUnitArray = [
     expenseForecastInsuranceFixture("unit"),
     expenseForecastElectricityFixture("unit"),
     expenseForecastFuelFixture("unit"),
     expenseForecastWaterAndSewerFixture("unit"),
-    expenseForecastRepairsAndMaintenanceFixture("unit"), 
+    expenseForecastRepairsAndMaintenanceFixture("unit"),
     expenseForecastPayrollAndBenefitsFixture("unit"),
     expenseForecastGeneralAndAdministrativeFixture("unit"),
     expenseForecastLegalAndProfessionalFeesFixture("unit"),
@@ -174,50 +164,21 @@ const expenseForecastFixtureWithPSFArray = [
     expenseForecastElectricityFixture("sf"),
     expenseForecastFuelFixture("sf"),
     expenseForecastWaterAndSewerFixture("sf"),
-    expenseForecastRepairsAndMaintenanceFixture("sf"), 
+    expenseForecastRepairsAndMaintenanceFixture("sf"),
     expenseForecastPayrollAndBenefitsFixture("sf"),
     expenseForecastGeneralAndAdministrativeFixture("sf"),
     expenseForecastLegalAndProfessionalFeesFixture("sf"),
     expenseForecastMiscellaneousFixture("sf"),
     expenseForecastManagementFixture("sf"),
     expenseForecastReservesFixture("sf")
-]; 
-
-
-const commentariesFixture = () => {
-    return {
-        generated: "Operating expenses, exclusive of real estate taxes, were forecasted at $0.00 per square foot and $0 per unit. " +
-        "Excluding real estate taxes, the comparables ranged from Comp totals map psf min to Comp totals map psf max per square foot and Comp totals map unit min to " +
-        "Comp totals map unit max per unit. Our forecast is near the comparable range on both a per square foot and per unit basis, " +
-        "as well as logically placed in relation to the historical performance of the asset. Thus, this forecast is " +
-        "reasonable and will be applied in our valuation analysis.",
-    };
-};
-
-const _forecastPSFnotIncluded = '$0.00';
-const _forecastPerUnitnotIncluded = '$0';
-
+];
 
 export default {
-    expenseForecastcustomFixture,
-
-
     reportCreationData: _reportCreationData,
-    customExpence,
     buildingDescription: _buildingDescription,
     expensesInProFormaByDefaultArray: _expensesInProFormaByDefaultArray,
-    // expenseForecastInsuranceFixture,
-    // expenseForecastElectricityFixture,
-     expenseForecastFuelFixture,
-     expenseForecastTotalFixture,
-    // expenseForecastWaterAndSewerFixture,
-    // expenseForecastRepairsAndMaintenanceFixture, 
-    // expenseForecastPayrollAndBenefitsFixture,
-    // expenseForecastGeneralAndAdministrativeFixture,
-    // expenseForecastLegalAndProfessionalFeesFixture,
-    // expenseForecastMiscellaneousFixture,
-    // expenseForecastManagementFixture,
-    // expenseForecastReservesFixture
+    expenseForecastFuelFixture,
+    expenseForecastTotalFixture,
     numberOfResidentialUnits: _numberOfResidentialUnits,
     numberOfCommercialUnits: _numberOfCommercialUnits,
     expenseForecastFixtureWithUnitArray,
@@ -227,5 +188,4 @@ export default {
     forecastPerUnitnotIncluded: _forecastPerUnitnotIncluded,
     rentRollresUnitFixture: rentRollResidentialUnitFixture(),
     perRoomAnalysis: "Include Per Room Analysis in Report",
-    
 };
