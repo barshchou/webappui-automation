@@ -2,6 +2,7 @@ import { getNumberFromDollarNumberWithCommas } from './../../../../utils/numbers
 import stabRentRollPage from "../../../pages/income/residential/stabilizedRentRoll.page";
 import { numberWithCommas } from "../../../../utils/numbers.utils";
 import ResidentialRentRollSharedActions from "../../shared_components/residentialRentRoll.shared.actions";
+import rentRollPage from '../../../pages/income/residential/rentRoll.page';
 
 class StabilizedRentRollActions extends ResidentialRentRollSharedActions<typeof stabRentRollPage> {
 
@@ -68,8 +69,8 @@ class StabilizedRentRollActions extends ResidentialRentRollSharedActions<typeof 
         return this;
     }
 
-    verifyRentPSFValueByRow(isPerMonth = true, rowNumber = 0) {
-        this.Page.monthlyRentCells(rowNumber).invoke("val").then(monthlyRentText => {
+    verifyStabilizedRentPSFValueByRow(isPerMonth = true, rowNumber = 0 ) {
+        this.Page.monthlyRentCells.eq(rowNumber).invoke("text").then(monthlyRentText => {
             const rentValue = getNumberFromDollarNumberWithCommas(monthlyRentText);
             this.Page.squareFootageCells.eq(rowNumber).invoke("text").then(sfText => {
                 const footageValue = getNumberFromDollarNumberWithCommas(sfText);
@@ -88,6 +89,7 @@ class StabilizedRentRollActions extends ResidentialRentRollSharedActions<typeof 
         });
         return this;
     }
+
 }
 
 export default new StabilizedRentRollActions(stabRentRollPage);

@@ -100,8 +100,6 @@ class NavigationSection extends BasePage {
     get residentialStabilizedRentRoll() {return cy.get("#residential-projected-rent-roll");}
 
     get commercialRentReconcillationButton() {return cy.get(`#commercial-rent-reconciliation`);}
-
-    get residentialProjectedRentRoll() {return cy.get("#residential-projected-rent-roll");}
 }
 
 export default new NavigationSection();

@@ -45,7 +45,7 @@ describe("Verify the Monthly Total row in the grid",
             testData.textValues.forEach(text => {
                 Income._Residential.InPlaceRentRoll.enterAppraiserCommentary(text);
             });
-            Income._Residential.InPlaceRentRoll.Page.appraiserCommentary.invoke("val", testData.textValues[0]);
+            Income._Residential.InPlaceRentRoll.Page.rentRollAppraiserCommentary.invoke("val", testData.textValues[0]);
         
             deleteReport(testData.reportCreationData.reportNumber);
     });

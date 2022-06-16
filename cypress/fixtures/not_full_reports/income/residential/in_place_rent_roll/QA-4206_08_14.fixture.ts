@@ -3,7 +3,7 @@ import { BoweryReports } from "../../../../../types";
 import ReportDataCreator from "../../../../data_creator/reportData.creator";
 
 export const reportCreationData = (value: BoweryReports.ConclusionValue) => {
-    return ReportDataCreator.getReportData("4206_08", { conclusionValue: value });
+    return ReportDataCreator.getReportData("4206_08_14", { conclusionValue: value });
 };
 
 export default {

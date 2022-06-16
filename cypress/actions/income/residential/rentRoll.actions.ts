@@ -272,7 +272,7 @@ class InPlaceRentRollActions extends ResidentialRentRollSharedActions<typeof ren
         return this;
     }
 
-    verifyRentPSFValueByRow(isPerMonth = true, rowNumber = 0) {
+    verifyRentPSFValueByRow(isPerMonth = true, rowNumber = 0 ) {
         this.Page.monthlyRentCells.eq(rowNumber).invoke("text").then(monthlyRentText => {
             const rentValue = getNumberFromDollarNumberWithCommas(monthlyRentText);
             this.Page.squareFootageCells.eq(rowNumber).invoke("text").then(sfText => {
@@ -367,15 +367,9 @@ class InPlaceRentRollActions extends ResidentialRentRollSharedActions<typeof ren
         return this;
     }
 
-    verifyRentRollOptions(): InPlaceRentRollActions {
-        rentRollPage.showDevelopersForecast.should("be.visible");
-        rentRollPage.includePerRoomAnalysis.should("be.visible");
-        return this;
-    }
-
     enterAppraiserCommentary(value: string | number): InPlaceRentRollActions {
-        rentRollPage.appraiserCommentary.should("be.visible");
-        rentRollPage.appraiserCommentary.clear().type(`${value}`).should("have.text", value);
+        rentRollPage.rentRollAppraiserCommentary.should("be.visible");
+        rentRollPage.rentRollAppraiserCommentary.clear().type(`${value}`).should("have.text", value);
         return this;
     }
     
