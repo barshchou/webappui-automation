@@ -11,7 +11,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        containers: [1]
+        containers: [1, 2, 3, 4, 5]
 
     steps:
       - name: Checkout
@@ -40,7 +40,7 @@ jobs:
         run: npm install
 
       - name: Run smoke tests on staging
-        run: currents run --config baseUrl=https://app.boweryvaluation.com --tag staging --spec cypress/integration/**/**/*.spec.ts --env grep=,grepTags=@smoke,burn= --browser chrome --record --parallel --key ${{ secrets.CURRENTS_RECORD_KEY }} --ci-build-id "${{ github.repository }}-${{ github.run_id }}-${{ github.run_attempt}}"
+        run: currents run --config baseUrl=https://app.boweryvaluation.com --tag prod --spec cypress/integration/**/**/*.spec.ts --env grep=,grepTags=@smoke,burn= --browser chrome --record --parallel --key ${{ secrets.CURRENTS_RECORD_KEY }} --ci-build-id "${{ github.repository }}-${{ github.run_id }}-${{ github.run_attempt}}"
         env:
           CYPRESS_USERNAME: ${{ secrets.USERNAME }}
           CYPRESS_PASSWORD: ${{ secrets.PASSWORD }}
