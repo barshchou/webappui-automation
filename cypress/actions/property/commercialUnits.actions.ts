@@ -154,61 +154,66 @@ class CommercialUnitsActions extends BaseActionsExt<typeof commercialUnitsPage> 
         return this;
     }
 
-    editDiscussionTextArea(value: string, clearText = true): this {
+    editDiscussionTextArea(value: string, clearText = true): CommercialUnitsActions {
         clearText ? this.Page.commentaryText.clear().type(value) :
             this.Page.commentaryText.type(value);
         return this;
     }
 
-    clickNarrativeSuggestions(verifyListValue: string): this {
+    clickNarrativeSuggestions(verifyListValue: string): CommercialUnitsActions {
         this.Page.narrativeSuggestionsList.first().contains(verifyListValue).should("have.text", verifyListValue).click({ force: true }); 
         this.Page.commentaryText.click();
         return this;
     }
 
-    verifyCommentaryContainsText(verifyAreaValue: string | number): this {
+    verifyCommentaryContainsText(verifyAreaValue: string | number): CommercialUnitsActions {
         let expectedText = typeof verifyAreaValue ===  "number" ? `${numberWithCommas(verifyAreaValue)}`: verifyAreaValue;
         this.Page.commentaryText.should("include.text", `${expectedText}`);
         return this;
     }
 
-    clickSaveDiscussionButton(): this {
+    clickSaveDiscussionButton(): CommercialUnitsActions {
         this.Page.formSaveBtn().click();
         return this;
     }
 
-    clickRevertToOriginalButton(): this {
+    clickRevertToOriginalButton(): CommercialUnitsActions {
         this.Page.formRevertToOriginalBtn().click();
         this.Page.changesLostModalHeader.should("exist");
         return this;
     }
 
-    clickCloseButton(): this {
+    clickCloseButton(): CommercialUnitsActions {
         this.Page.CloseIcon.click();
         return this;
     }
 
-    clickCancelRevertButton(): this {
+    clickCancelRevertButton(): CommercialUnitsActions {
         this.Page.cancelRevertButton.click();
         return this;
     }
 
-    clickYesRevertButton(): this {
+    clickYesRevertButton(): CommercialUnitsActions {
         this.Page.formYesRevertBtn.click();
         return this;
     }
 
-    verifyCommentaryFullText(textToBe: string): this {
+    verifyCommentaryFullText(textToBe: string): CommercialUnitsActions {
         this.Page.commentaryText.invoke('text').then(text => {
             cy.wrap(normalizeText(text)).should('deep.equal', textToBe);
         });
         return this;
     }
 
-    clickCancelDiscussionEditButton(): this {
+    clickCancelDiscussionEditButton(): CommercialUnitsActions {
         this.Page.formCancelButton().click();
         return this;
     }
+
+    clickCommercialUnitTab(unitNumber = 1): CommercialUnitsActions {
+        this.Page.commercialUnitsTab(unitNumber).click();
+        return this;
+    } 
 
 }
 

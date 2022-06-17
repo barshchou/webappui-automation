@@ -62,6 +62,14 @@ class CommercialUnitsPage extends BasePage {
     get changesLostModalHeader() {return cy.contains("Changes will be lost");}
 
     get cancelRevertButton() {return this.formYesRevertBtn.prev("button");}
+
+    get commercialUnitsNumberInput() {return cy.xpath("//label[.='No. of Commercial Units']//following-sibling::div//input");}
+
+    get commercialUnitsDiscussionTitle() {return cy.xpath("//h6[.='Commercial Unit SF Discussion']");}
+
+    commercialUnitDescriptionTitle(unitNumber = 1) {return cy.xpath(`//div[.='Commercial Unit ${unitNumber} Description']`);}
+
+    commercialUnitsTab(unitNumber = 1) {return cy.xpath(`//div[@role='tablist']/button[.="Commercial Unit ${unitNumber}"]`);} 
 }
 
 export default new CommercialUnitsPage();
