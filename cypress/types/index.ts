@@ -181,6 +181,8 @@ export namespace BoweryReports {
     }
 
     export type MarketAnalysisUses = keyof typeof Enums.MARKET_ANALYSIS_USES
+
+    export type PropertyConditions = keyof typeof Enums.PROPERTY_CONDITIONS;
 }
 
 export namespace Utils {
