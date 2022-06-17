@@ -51,9 +51,7 @@ class KeyInfoPage extends BasePage{
 
     get tooltipDefinitionOfMarketValue() {return cy.get("*[role='tooltip']");}
 
-    get addPdfDocumentButton() {return cy.get("*[data-qa='add-pdf-btn']");}
-
-    get addWordDocumentButton() {return cy.get("*[data-qa='add-word-btn']");}
+    get uploadFilesButton() { return cy.xpath("//button[text() = 'Upload Files']");}
 
     get narrativeSuggestionsList() {return cy.get("[data-qa='narrative-suggestions-list'] > ul");}
 

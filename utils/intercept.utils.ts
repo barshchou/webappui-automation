@@ -25,7 +25,7 @@ export const interceptReportId = () => {
 
 export const setReportId = () => {
     cy.url().then(url => {
-        const reportID = url.replace("/report-information", "").replace(`${Cypress.config().baseUrl}/report/`, "");
+        const reportID = url.split(`${Cypress.config().baseUrl}/report/`)[1].split("/")[0];
         cy.log(`Current report ID is ${reportID}`);
         cy.wrap(reportID).as(Alias.reportId);
     });
