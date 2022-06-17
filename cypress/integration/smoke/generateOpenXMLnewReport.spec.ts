@@ -5,7 +5,7 @@ import { BoweryAutomation } from "../../types";
 
 const reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("generateOpenXMLNewReport");
 
-describe("Generate new report, generate and open in XML format", { tags: [ "@smoke" ] }, () => {
+describe("Create new report, generate and open in XML format", { tags: [ "@smoke" ] }, () => {
 
     it("Generate and open XML report", () => {
         createReport(reportCreationData);
