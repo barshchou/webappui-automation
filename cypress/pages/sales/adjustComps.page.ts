@@ -68,6 +68,10 @@ class AdjustCompsPage extends BasePage {
     get viewAdjustmentDetails() {return cy.xpath("//*[contains(text(), 'Other Adjustment')]//following::*[@role='presentation'][1]");}
 
     getOtherAdjustmentColumnValue(value, index = 1) {return cy.xpath(`//*[contains(text(), 'Other Adjustment')]//following::*[contains(text(), '${value}')][${index}]`);}
+
+    get discussionsShowAllButton() {return cy.xpath("//*[@type='button']/*[contains(text(), 'Show All')]");}
+
+    get conditionDiscussionCommentary() {return cy.get("[data-qa='conditionDiscussion.commentary-generated-text']");}
 }
 
 export default new AdjustCompsPage();
