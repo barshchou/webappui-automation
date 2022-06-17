@@ -20,14 +20,14 @@ addMatchImageSnapshotCommand({
  */
 const _cyVisit = (url: string) => cy.visit(url, { timeout: Cypress.env("DEBUG") == 1 ? 180000 : 60000 });
 
-Cypress.Commands.add("loginByApi", (url) => {
+Cypress.Commands.add("loginByApi", (url, user = Cypress.env("USERNAME"), pass = Cypress.env("PASSWORD")) => {
     cy.log("Logging in by api");
     cy.request({
         method: "POST",
         url: `${url}/user/login`,
         body: {
-            username: Cypress.env("USERNAME"),
-            password: Cypress.env("PASSWORD")
+            username: Cypress.env(user),
+            password: Cypress.env(pass)
         },
     }).then((response) => {
         const token = response.body.token;
@@ -36,23 +36,21 @@ Cypress.Commands.add("loginByApi", (url) => {
     });
 });
 
-Cypress.Commands.add("loginByUI", (url) => {
+Cypress.Commands.add("loginByUI", (url, username = Cypress.env("USERNAME"), password = Cypress.env("PASSWORD")) => {
     cy.log("Logging in by UI");
     _cyVisit(url);
-    const username = Cypress.env("USERNAME");
-    const password = Cypress.env("PASSWORD");
     cy.get("*[name='username']").should("be.visible").type(username).should("have.value", username);
     cy.get("*[name='password']").should("be.visible").type(password).type("{enter}");
 });
 
-Cypress.Commands.add("login", () => {
+Cypress.Commands.add("login", (username = Cypress.env("USERNAME"), password = Cypress.env("PASSWORD")) => {
     const envUrl = "/";
     switch (Cypress.env("loginMethod")) {
         case "ui":
-            cy.loginByUI(envUrl);
+            cy.loginByUI(envUrl, username, password);
             break;
         default:
-            cy.loginByApi(envUrl);
+            cy.loginByApi(envUrl, username, password);
     }
 });
 
