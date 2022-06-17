@@ -1,0 +1,18 @@
+import { createReport, deleteReport } from "../../actions/base/baseTest.actions";
+import ReportDataCreator from "../../fixtures/data_creator/reportData.creator";
+import { Base, ReviewExport } from "../../actions";
+import { BoweryAutomation } from "../../types";
+
+const reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("generateOpenXMLNewReport");
+
+describe("Generate new report, generate and open in XML format", { tags: [ "@smoke" ] }, () => {
+
+    it("Generate and open XML report", () => {
+        createReport(reportCreationData);
+        Base._NavigationSection.openReviewAndExport();
+        ReviewExport.verifyXMLReportID(reportCreationData.reportNumber)
+        .verifyXMLReportOpens(reportCreationData.reportNumber);
+
+        deleteReport(reportCreationData.reportNumber);
+     });
+});
