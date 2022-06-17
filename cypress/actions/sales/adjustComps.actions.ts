@@ -241,6 +241,16 @@ class AdjustCompsActions extends BaseActionsExt<typeof adjustCompsPage> {
         adjustCompsPage.getOtherAdjustmentColumnValue(value, index).should("have.text", value);
         return this;
     }
+
+    clickDiscussionsShowAllButton(): AdjustCompsActions {
+        adjustCompsPage.discussionsShowAllButton.click();
+        return this;
+    }
+
+    verifyConditionDiscussionCommentary(value: string): AdjustCompsActions {
+        adjustCompsPage.conditionDiscussionCommentary.should("include.text", value);
+        return this;
+    }
 }
 
 export default new AdjustCompsActions(adjustCompsPage);
