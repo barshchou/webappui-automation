@@ -13,7 +13,7 @@ describe("Open any existing report, generate and open in XML format", { tags: [ 
             .verifyProgressBarNotExist();
         Base._NavigationSection.openReviewAndExport(false)
             .verifyProgressBarNotExist();
-        ReviewExport.verifyXMLReportID(testData.reportCreationData.reportNumber)
+        ReviewExport.verifyXMLReportName(testData.reportCreationData.reportNumber)
         .verifyXMLReportOpens(testData.reportCreationData.reportNumber);
     });
 

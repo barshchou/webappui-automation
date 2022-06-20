@@ -1,3 +1,4 @@
+import { Alias } from './../../utils/alias.utils';
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import reviewExportPage from "../../pages/reviewExport/reviewExport.page";
 import BaseActionsExt from "../base/base.actions.ext";
@@ -25,14 +26,13 @@ class ReviewExportActions extends BaseActionsExt<typeof reviewExportPage> {
         return this;
     }
 
-    verifyXMLReportID(reportName: string): this {
-        let aliasXMLGeneration = "aliasXMLGeneration";
+    verifyXMLReportName(reportName: string): this {
         cy.intercept({
             method: 'GET',
             url: '**api/xmlGeneration/?*'
-        }).as(aliasXMLGeneration);
+        }).as(Alias.aliasXMLGeneration);
         this.generateXMLReport();
-        cy.wait(`@${aliasXMLGeneration}`, { timeout: 20000 })
+        cy.wait(`@${Alias.aliasXMLGeneration}`, { timeout: 20000 })
             .then(({ response }) => {
                 const fileNamePart = `${Cypress._.snakeCase(reportName)}`;
                 expect(response.statusCode).equal(200);
@@ -42,13 +42,12 @@ class ReviewExportActions extends BaseActionsExt<typeof reviewExportPage> {
     }
 
     verifyXMLReportOpens(reportName: string): this {
-        let aliasOpenXML = "aliasOpenXML";
         const urlNamePart = `${Cypress._.snakeCase(reportName)}`;
         cy.intercept({
             method: 'GET',
             url: `**/downloadXML/${urlNamePart}*`
-        }).as(aliasOpenXML);
-        cy.wait(`@${aliasOpenXML}`, { timeout: 20000 })
+        }).as(Alias.aliasOpenXML);
+        cy.wait(`@${Alias.aliasOpenXML}`, { timeout: 20000 })
             .then(({ response }) => {
                 expect(response.statusCode).equal(200);
             });

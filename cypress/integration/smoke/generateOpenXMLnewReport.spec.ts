@@ -10,7 +10,7 @@ describe("Create new report, generate and open in XML format", { tags: [ "@smoke
     it("Generate and open XML report", () => {
         createReport(reportCreationData);
         Base._NavigationSection.openReviewAndExport();
-        ReviewExport.verifyXMLReportID(reportCreationData.reportNumber)
+        ReviewExport.verifyXMLReportName(reportCreationData.reportNumber)
         .verifyXMLReportOpens(reportCreationData.reportNumber);
 
         deleteReport(reportCreationData.reportNumber);
