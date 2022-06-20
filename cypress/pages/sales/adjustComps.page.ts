@@ -72,6 +72,10 @@ class AdjustCompsPage extends BasePage {
     get discussionsShowAllButton() {return cy.xpath("//*[@type='button']/*[contains(text(), 'Show All')]");}
 
     get conditionDiscussionCommentary() {return cy.get("[data-qa='conditionDiscussion.commentary-generated-text']");}
+
+    get marketConditionAdjustmentTooltip() {return cy.get("svg[data-icon=info-circle]");}
+
+    get applyMarketConditionAdjustmentButton() {return cy.get("[data-qa='apply-market-condition-adjustment']");}
 }
 
 export default new AdjustCompsPage();
