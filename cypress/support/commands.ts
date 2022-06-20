@@ -46,7 +46,7 @@ Cypress.Commands.add("loginByApi", (envUrl, username, password) => {
     });
 });
 
-Cypress.Commands.add("loginByUI", (url, username = Cypress.env("USERNAME"), password = Cypress.env("PASSWORD")) => {
+Cypress.Commands.add("loginByUI", (url: string, username: string, password: string) => {
     cy.log("Logging in by UI");
     _cyVisit(url);
     cy.get("*[name='username']").should("be.visible").type(username).should("have.value", username);

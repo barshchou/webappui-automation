@@ -8,8 +8,8 @@ const reportCreationFixture = () => {
     });
 };
 
-const _username = Enums.USERS.webapp_lead_appraiser_username;
-const _password = Enums.USERS.webapp_lead_appraiser_password;
+const _username = Cypress.env(`${Enums.USERS.webapp_lead_appraiser_username}`);
+const _password = Cypress.env(`${Enums.USERS.webapp_lead_appraiser_password}`);
 
 export default {
     reportCreationData: reportCreationFixture(),

@@ -1,3 +1,4 @@
+import { loginAction } from './../../actions/base/baseTest.actions';
 import { Base, ReviewExport } from "../../actions";
 import testData from "../../fixtures/smoke/generateDownloadExistReport.fixture";
 import { createReport, deleteReport } from "../../actions/base/baseTest.actions";
@@ -6,8 +7,8 @@ const _origBaseUrl = Cypress.config().baseUrl;
 
 describe("Open any existing report, generate report and download it", { tags: [ "@smoke" ] }, () => {
     it("Download, generate report", () => {
-        cy.loginByApi(Cypress.config().baseUrl, testData.username, testData.password);
-        cy.visit("/");
+        loginAction(testData.username, testData.password);
+
         Base._HomePage.clickAllReportsTab()
             .verifyProgressBarNotExist()
             .enterReportNumberToSearch(testData.reportCreationData.reportNumber)
@@ -32,7 +33,8 @@ describe("Open any existing report, generate report and download it", { tags: [ 
         Cypress.config().baseUrl = _origBaseUrl;
         createReport(testData.reportCreationData);
         // ernst: remove second call after cypress 10 migration
-        deleteReport(testData.reportCreationData.reportNumber);
+        // slava: removed 2nd deleteReport as there were no duplicate reports after run
+        // and test fails
         deleteReport(testData.reportCreationData.reportNumber);
     });
 });

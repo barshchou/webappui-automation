@@ -15,12 +15,14 @@ export const loginAction = (username = Cypress.env("USERNAME"), password = Cypre
             break;
         default:
             cy.loginByApi(Cypress.config().baseUrl, username, password);
+            cy.visit('/');
     }
+    
 };
 
 export const createReport = (reportCreationData: BoweryAutomation.ReportCreationData, 
-                            payloadFunction = createPayload, 
-                            username = Cypress.env("USERNAME"), password = Cypress.env("PASSWORD")) => {
+                            username = Cypress.env("USERNAME"), password = Cypress.env("PASSWORD"),
+                            payloadFunction = createPayload) => {
 
     salesInterceptions();
 
