@@ -1,6 +1,6 @@
 import { createReport, deleteReport } from "../../actions/base/baseTest.actions";
 import ReportDataCreator from "../../fixtures/data_creator/reportData.creator";
-import { Base, ReviewExport } from "../../actions";
+import { ReviewExport } from "../../actions";
 import { BoweryAutomation } from "../../types";
 
 const reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("generateDownloadNewReport");
