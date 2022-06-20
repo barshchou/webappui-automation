@@ -24,13 +24,13 @@ conditionalDescribe("Property Conditions tests", { tags: [ "@residential", "@ren
     it("[QA-4101] The 'Average' option is displayed for each property condition on the Property Conditions page", () => {
         Income._Residential.RentComps.FullBuildingComps.PropertyConditions.openNavigationTab()
             .Page.pageTitle.should("exist").and("have.text", _IncomeTitles._Residential.PROPERTY_CONDITIONS);
-        for (let condition in Enums.PROPERTY_CONDITIONS) {
-            let conditionValue = Enums.PROPERTY_CONDITIONS[condition];
-            Income._Residential.RentComps.FullBuildingComps.PropertyConditions.checkGeneralConditionRadio(conditionValue)
-                .checkGeneralKitchenConditionRadio(conditionValue)
-                .checkGeneralBathroomConditionRadio(conditionValue)
-                .checkGeneralBedroomConditionRadio(conditionValue);
-        }
+        const conditions = Object.values(Enums.PROPERTY_CONDITIONS);
+        const radios = Object.values(Enums.PROPERTY_CONDITIONS_RADIOS);
+        radios.forEach(radio => {
+           conditions.forEach(condition => {
+               Income._Residential.RentComps.FullBuildingComps.PropertyConditions.checkRadio(radio, condition);
+           });
+        });
         deleteReport(testData.reportCreationData.reportNumber);
     });
 });

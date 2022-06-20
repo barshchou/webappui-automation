@@ -10,30 +10,10 @@ class PropertyConditionsActions extends BaseActionsExt<typeof propertyConditions
         return this;
     }
 
-    checkGeneralConditionRadio(value: BoweryReports.PropertyConditions): PropertyConditionsActions {
-        propertyConditionsPage.getGeneralPropertyRadioByValue(value).click().parents("[data-qa=checked]")
-            .should("exist");
+    checkRadio(radio: BoweryReports.PropertyConditionsRadios, value: BoweryReports.PropertyConditions): PropertyConditionsActions {
+        propertyConditionsPage.getRadioByValue(radio, value).click().parents("[data-qa=checked]").should("exist");
         return this;
     }
-
-    checkGeneralBathroomConditionRadio(value: BoweryReports.PropertyConditions): PropertyConditionsActions {
-        propertyConditionsPage.getGeneralBathroomRadioByValue(value).click().parents("[data-qa=checked]")
-            .should("exist");
-        return this;
-    }
-
-    checkGeneralKitchenConditionRadio(value: BoweryReports.PropertyConditions): PropertyConditionsActions {
-        propertyConditionsPage.getGeneralKitchenRadioByValue(value).click().parents("[data-qa=checked]")
-            .should("exist");
-        return this;
-    }
-
-    checkGeneralBedroomConditionRadio(value: BoweryReports.PropertyConditions): PropertyConditionsActions {
-        propertyConditionsPage.getGeneralBedroomRadioByValue(value).click().parents("[data-qa=checked]")
-            .should("exist");
-        return this;
-    }
-
 
 }
 
