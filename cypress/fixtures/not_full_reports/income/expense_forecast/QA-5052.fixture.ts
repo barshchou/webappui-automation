@@ -95,7 +95,7 @@ const totalSum = (arr = expensesItemsFixture()): string => {
 const totalExpensesCommentariesFixture = () => {
     return {
         generatedPerSF: 
-        "Operating expenses, exclusive of real estate taxes, were forecasted at $" + totalSum() + " per square foot and $NaN per unit. " +
+        "Operating expenses, exclusive of real estate taxes, were forecasted at $" + totalSum() + " per square foot and $0 per unit. " +
         "Excluding real estate taxes, the comparables ranged from Comp totals map psf min to Comp totals map psf max per square " +
         "foot and Comp totals map unit min to Comp totals map unit max per unit. Our forecast is near the comparable range on both " +
         "a per square foot and per unit basis, as well as logically placed in relation to the historical performance of the asset. "+
