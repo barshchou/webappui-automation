@@ -15,8 +15,7 @@ describe("[QA-4703-07] Verify the Edit button functionality for Property Rights 
     it("Test body", () => {
         cy.stepInfo(`1. Verify that the Edit buttons are displayed on the Report > Key Info page for Property
         Rights Appraised and Definition of Market Value sections`);
-        _NavigationSection.navigateToReportInformation()
-            .clickYesButton();
+        _NavigationSection.navigateToReportInformation();
         Report._KeyInfo.Page.formEditBtn().should("be.visible");
         Report._KeyInfo.Page.formEditBtn(1).should("be.visible");
 

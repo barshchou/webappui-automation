@@ -12,8 +12,7 @@ describe(`[QA-4714_16-17] Verify the suggested text dropdown in the new narrativ
 
     it("Test body", () => {
         cy.stepInfo("1. Proceed to the Report > Key Info page.");
-        _NavigationSection.navigateToReportInformation()
-            .clickYesButton();
+        _NavigationSection.navigateToReportInformation();
 
         cy.stepInfo(`2. Enter the “=F“ and select the 'Foreclosure sale' then “=Sh“ and select the 'Sheriff's sale' then “=Unc“ and select the 'Unchanged Renovation' 
             option for both sections.`);
