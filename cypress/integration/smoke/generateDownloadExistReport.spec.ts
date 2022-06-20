@@ -2,12 +2,12 @@ import { Base, ReviewExport } from "../../actions";
 import testData from "../../fixtures/smoke/generateDownloadExistReport.fixture";
 import { createReport, deleteReport } from "../../actions/base/baseTest.actions";
 
+const _origBaseUrl = Cypress.config().baseUrl;
+
 describe("Open any existing report, generate report and download it", { tags: [ "@smoke" ] }, () => {
-
-    const url = `${Cypress.config().baseUrl}`;
-
     it("Download, generate report", () => {
         cy.loginByApi(Cypress.config().baseUrl, testData.username, testData.password);
+        cy.visit("/");
         Base._HomePage.clickAllReportsTab()
             .verifyProgressBarNotExist()
             .enterReportNumberToSearch(testData.reportCreationData.reportNumber)
@@ -29,8 +29,10 @@ describe("Open any existing report, generate report and download it", { tags: [ 
     });
 
     it("Create new report for next tests", () => {
-        Cypress.config().baseUrl = url;
+        Cypress.config().baseUrl = _origBaseUrl;
         createReport(testData.reportCreationData);
+        // ernst: remove second call after cypress 10 migration
+        deleteReport(testData.reportCreationData.reportNumber);
         deleteReport(testData.reportCreationData.reportNumber);
     });
 });
