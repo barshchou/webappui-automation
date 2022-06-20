@@ -44,6 +44,13 @@ class Homepage extends BasePage {
     get reportNumberCells() {return cy.get("[aria-colindex='2']");}
 
     get allReportsTab() {return cy.xpath("//button[.='ALL REPORTS']");}
+
+    /**
+     * @returns List of report rows available on dashboard
+     */
+    get reportsRows(){
+        return cy.get('[aria-label="grid"] a');
+    }
 }
 
 export default new Homepage();
