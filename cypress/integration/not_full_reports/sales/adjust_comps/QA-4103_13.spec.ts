@@ -21,18 +21,13 @@ describe("Net Property Adjustments in Sales Adjustment Grid is calculated with c
     it("[QA-4103]", () => {
         NavigationSection.navigateToAdjustComps();
         testData.calculationUnits.forEach(val => {
-            Sales._AdjustComps.checkCalculationUnitsRadio(val);
-            // Sales.AdjustComps.enterSizeAdjustmentByColumn(testData.comparable.sizeAdjustment)
-            // .enterConditionAdjustmentByColumn(testData.comparable.conditionAdjustment)
-            // .clickAddOtherAdjustmentButton()
-            // .enterOtherAdjustmentByColumn(testData.comparable.otherAdjustment)
-            // .verifyNetPropertyAdjustmentsByCompIndex();
+            Sales._AdjustComps.checkCalculationUnitsRadio(val)
+                .verifyRowWithNameExists(testData.existColumns[0])
+                .verifyRowWithNameExists(testData.existColumns[1]);
         });
     });
 
     it("[QA-4113]", () => {
-        NavigationSection.navigateToFindComps();
-        Sales._FindComps.selectCompFromMapByAddress(testData.comparable.address);
         NavigationSection.navigateToAdjustComps();
         Sales._AdjustComps.enterSizeAdjustmentByColumn(testData.comparable.sizeAdjustment)
             .enterConditionAdjustmentByColumn(testData.comparable.conditionAdjustment)
