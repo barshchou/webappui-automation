@@ -3,7 +3,7 @@ import NavigationSection from "../../../../../actions/base/navigationSection.act
 import Income from "../../../../../actions/income/income.manager";
 import Property from "../../../../../actions/property/property.manager";
 import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
-import { BoweryReports } from "../../../../../types";
+import { BoweryReports } from "../../../../../types/boweryReports.type";
 
 describe("Verify the Use column in the grid", 
     { tags:[ "@income", "@commercial", "@in_place_rent_roll" ] }, () => {

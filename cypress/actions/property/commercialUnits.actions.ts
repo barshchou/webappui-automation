@@ -1,7 +1,7 @@
 import commercialUnitsPage from "../../pages/property/commercialUnits.page";
 import { cutDecimalPartToNumberOfDigits, isHasDecimalPartMoreNumberOfDigits, numberWithCommas } from "../../../utils/numbers.utils";
 import BaseActionsExt from "../base/base.actions.ext";
-import { BoweryReports } from "../../types";
+import { BoweryReports } from "../../types/boweryReports.type";
 
 class CommercialUnitsActions extends BaseActionsExt<typeof commercialUnitsPage> {
 

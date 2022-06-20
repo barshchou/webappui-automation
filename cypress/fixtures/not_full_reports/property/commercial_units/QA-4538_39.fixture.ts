@@ -1,6 +1,6 @@
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 import Enums from "../../../../enums/enums";
-import { BoweryAutomation } from "../../../../types";
+import { BoweryAutomation } from "../../../../types/boweryAutomation.type";
 
 const _numberOfCommercialUnits = 3;
 const _specialSymbols = '!@#$%^&*()-=+_';

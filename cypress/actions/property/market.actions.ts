@@ -1,7 +1,7 @@
 import BaseActions from "../base/base.actions";
 import marketPage from "../../pages/property/market.page";
 import { getQuarter, getYearFromDate, isCorrectQuarter } from "../../../utils/date.utils";
-import { BoweryReports } from "../../types";
+import { BoweryReports } from "../../types/boweryReports.type";
 import { isStringContainSubstring } from "../../../utils/string.utils";
 
 class MarketActions extends BaseActions{
