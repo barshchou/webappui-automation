@@ -49,7 +49,7 @@ class CommercialUnitsPage extends BasePage {
         return cy.xpath(`//*[text()='Grade']/..//descendant::input[@value='${value}']`).eq(index);
     }
 
-    get commercialGrossLeasableAreaToolip() { return cy.xpath(`//label[text() = "Commercial Gross Leasable Area"]/span[1]`);}
+    get commercialGrossLeasableAreaTooltip() { return cy.xpath(`//label[text() = "Commercial Gross Leasable Area"]/span[1]`);}
 
     get commercialUnitSfDiscussionTooltip() { return cy.xpath(`//h6[.= "Commercial Unit SF Discussion"]//following-sibling::*[@data-icon="info-circle"]`);}
 
@@ -57,7 +57,7 @@ class CommercialUnitsPage extends BasePage {
 
     get narrativeSuggestionsList() {return cy.get("[data-qa='narrative-suggestions-list'] > ul");}
 
-    get modalWindow() {return cy.get("[role='dialog']");}
+    
 
     get changesLostModalHeader() {return cy.contains("Changes will be lost");}
 

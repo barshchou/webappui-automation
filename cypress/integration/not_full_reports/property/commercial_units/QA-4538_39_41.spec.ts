@@ -60,7 +60,7 @@ describe("[Property > Commercial Units > Commercial Unit SF] Commercial Units pa
     it('[QA-4539] Verify the Commercial Gross Leasable Area tooltip', () => {
 
         cy.stepInfo(`2. Hover the Commercial Gross Leasable Area tooltip.`);
-        Property._CommercialUnits.Page.commercialGrossLeasableAreaToolip
+        Property._CommercialUnits.Page.commercialGrossLeasableAreaTooltip
             .trigger('mouseover');
 
         cy.stepInfo(`3. Verify the following text is displayed: 
@@ -70,8 +70,8 @@ describe("[Property > Commercial Units > Commercial Unit SF] Commercial Units pa
                 expect(text).to.be.equal(testData.groosLeasableAreatooltipText);
             });
 
-        //Remove hover from a tooltip and make sure tooltip doesn't exist
-        Property._CommercialUnits.Page.commercialGrossLeasableAreaToolip
+        cy.stepInfo(`4. Move hover from the icon and verify that tooltip isn't shown`);
+        Property._CommercialUnits.Page.commercialGrossLeasableAreaTooltip
             .trigger('mouseout');
         Property._CommercialUnits.Page.tooltip.should('not.exist');
     });

@@ -27,7 +27,7 @@ describe(`[QA-4552][QA-4553][QA-4554] Verify the "Linked" chips dropdown in the 
         Property._CommercialUnits.clickEditDiscussionButton();
 
         cy.stepInfo("3. Enter the “=“ and select the an option. Verify each option.");
-        testData.asIschips.forEach((chip) => {
+        testData.asIsChips.forEach((chip) => {
             Property._CommercialUnits.editDiscussionTextArea(`=${chip.typeSuggestValue}`, false)
             .clickNarrativeSuggestions(chip.suggestionName)
             .verifyCommentaryContainsText(chip.verifySuggest);
@@ -47,7 +47,7 @@ describe(`[QA-4552][QA-4553][QA-4554] Verify the "Linked" chips dropdown in the 
             cy.log(<string>file);
             cy.stepInfo("4. Verify the linked chips on export");
             cy.visit(<string>file);
-            testData.asIschips.forEach(chip => {
+            testData.asIsChips.forEach(chip => {
                 let expectedText = typeof chip.verifyExport ===  "number" ? `${numberWithCommas(chip.verifyExport)}`: chip.verifyExport;
                 cy.contains("Commercial Space").next().scrollIntoView().should("include.text", expectedText);
             });
@@ -73,7 +73,7 @@ describe(`[QA-4552][QA-4553][QA-4554] Verify the "Linked" chips dropdown in the 
         Property._CommercialUnits.clickEditDiscussionButton();
 
         cy.stepInfo("3. Enter the “=“ and select the an option. Verify each option.");
-        testData.asIschips.forEach((chip) => {
+        testData.asIsChips.forEach((chip) => {
             Property._CommercialUnits.editDiscussionTextArea(`=${chip.typeSuggestValue}`, false)
             .clickNarrativeSuggestions(chip.suggestionName)
             .verifyCommentaryContainsText(chip.verifySuggest);
@@ -93,7 +93,7 @@ describe(`[QA-4552][QA-4553][QA-4554] Verify the "Linked" chips dropdown in the 
             cy.log(<string>file);
             cy.stepInfo("4. Verify the linked chips on export");
             cy.visit(<string>file);
-            testData.asIschips.forEach(chip => {
+            testData.asIsChips.forEach(chip => {
                 let expectedText = typeof chip.verifyExport ===  "number" ? `${numberWithCommas(chip.verifyExport)}`: chip.verifyExport;
                 cy.contains("Commercial Space").next().scrollIntoView().should("include.text", expectedText);
             });
@@ -119,7 +119,7 @@ describe(`[QA-4552][QA-4553][QA-4554] Verify the "Linked" chips dropdown in the 
         Property._CommercialUnits.clickEditDiscussionButton();
 
         cy.stepInfo("3. Enter the “=“ and select the an option. Verify each option.");
-        testData.asIschips.forEach((chip) => {
+        testData.asIsChips.forEach((chip) => {
             Property._CommercialUnits.editDiscussionTextArea(`=${chip.typeSuggestValue}`, false)
             .clickNarrativeSuggestions(chip.suggestionName)
             .verifyCommentaryContainsText(chip.verifySuggest);
@@ -139,7 +139,7 @@ describe(`[QA-4552][QA-4553][QA-4554] Verify the "Linked" chips dropdown in the 
             cy.log(<string>file);
             cy.stepInfo("4. Verify the linked chips on export");
             cy.visit(<string>file);
-            testData.asIschips.forEach(chip => {
+            testData.asIsChips.forEach(chip => {
                 let expectedText = typeof chip.verifyExport ===  "number" ? `${numberWithCommas(chip.verifyExport)}`: chip.verifyExport;
                 cy.contains("Commercial Space").next().scrollIntoView().should("include.text", expectedText);
             });

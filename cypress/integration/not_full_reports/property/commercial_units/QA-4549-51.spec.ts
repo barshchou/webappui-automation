@@ -34,7 +34,7 @@ describe(`[QA-4549][QA-4550][QA-4551] Verify the "Linked" chips dropdown in the 
         Property._CommercialUnits.clickEditDiscussionButton();
 
         cy.stepInfo("3. Enter the “=“ and select the an option. Verify each option.");
-        let chip = testData.asIschips.filter(chip => { return chip.suggestionName == 'Foreclosure Sale'; });
+        let chip = testData.asIsChips.filter(chip => { return chip.suggestionName == 'Foreclosure Sale'; });
         Property._CommercialUnits.editDiscussionTextArea(`=${chip[0].typeSuggestValue}`, false)
             .clickNarrativeSuggestions(chip[0].suggestionName)
             .verifyCommentaryContainsText(chip[0].verifySuggest);
@@ -50,7 +50,7 @@ describe(`[QA-4549][QA-4550][QA-4551] Verify the "Linked" chips dropdown in the 
         Property._CommercialUnits.clickEditDiscussionButton();
 
         cy.stepInfo("3. Enter the “=“ and select the an option. Verify each option.");
-        let chip = testData.asIschips.filter(chip => { return chip.suggestionName == 'Sherrif\'s Sale'; });
+        let chip = testData.asIsChips.filter(chip => { return chip.suggestionName == 'Sherrif\'s Sale'; });
         Property._CommercialUnits.editDiscussionTextArea(`=${chip[0].typeSuggestValue}`, false)
             .clickNarrativeSuggestions(chip[0].suggestionName)
             .verifyCommentaryContainsText(chip[0].verifySuggest);
@@ -66,14 +66,16 @@ describe(`[QA-4549][QA-4550][QA-4551] Verify the "Linked" chips dropdown in the 
         Property._CommercialUnits.clickEditDiscussionButton();
 
         cy.stepInfo("3. Enter the “=“ and select the an option. Verify each option.");
-        let chip = testData.asIschips.filter(chip => { return chip.suggestionName == 'Unchanged Renovations'; });
+        let chip = testData.asIsChips.filter(chip => { return chip.suggestionName == 'Unchanged Renovations'; });
         Property._CommercialUnits.editDiscussionTextArea(`=${chip[0].typeSuggestValue}`, false)
             .clickNarrativeSuggestions(chip[0].suggestionName)
             .verifyCommentaryContainsText(chip[0].verifySuggest);
 
         Property._CommercialUnits.clickSaveDiscussionButton()
             .verifyProgressBarNotExist();
+    });
 
+    after('Delete report', () => {
         deleteReport(testData.reportCreationDataAsIs.reportNumber);
     });
 });

@@ -8,14 +8,18 @@ const _grossBuildingArea = 5999;
 const _siteArea = 735000;
 const _currentNumberOfCommercialUnits = 5;
 const _currentNumberOfResidentialUnits = 4;
+const _block = '962';
+const _streetAddress = '462 1st Avenue';
+const _lotValue = '100';
+const _streetName = '1st Avenue';
 
 const _baseChip = () => {
     return [
         {
             suggestionName: 'Block',
             typeSuggestValue: 'Bloc',
-            verifySuggest: '962',
-            verifyExport: '962'
+            verifySuggest: _block,
+            verifyExport: _block
         }, 
         {
             suggestionName: 'Building Name',
@@ -56,20 +60,20 @@ const _baseChip = () => {
         {
             suggestionName: 'Street Address',
             typeSuggestValue: 'Street',
-            verifySuggest: '462 1st Avenue',
-            verifyExport: '462 1st Avenue'
+            verifySuggest: _streetAddress,
+            verifyExport: _streetAddress
         },
         {
             suggestionName: 'Lot',
             typeSuggestValue: 'Lo',
-            verifySuggest: '100',
-            verifyExport: '100'
+            verifySuggest: _lotValue,
+            verifyExport: _lotValue
         },  
         {
             suggestionName: 'Street Name',
             typeSuggestValue: 'Stree',
-            verifySuggest: '1st Avenue',
-            verifyExport: '1st Avenue'
+            verifySuggest: _streetName,
+            verifyExport: _streetName
         }, 
         {
             suggestionName: 'Unchanged Renovations',
@@ -158,7 +162,7 @@ export default {
         incomeValue: enums.INCOME_TYPE.both,
         conclusionValue: enums.VALUE_CONCLUSION_TYPE.AS_IS
     }),
-    reportCreationDataAsStablized: reportDataCreator.getReportData("4549-54", {
+    reportCreationDataAsStabilized: reportDataCreator.getReportData("4549-54", {
         incomeValue: enums.INCOME_TYPE.both,
         conclusionValue: enums.VALUE_CONCLUSION_TYPE.AS_STABILIZED
     }),
@@ -168,7 +172,7 @@ export default {
     }),
     numberOfCommercialUnits: _numberOfCommercialUnits,
     numberOfResidentialUnits: _numberOfResidentialUnits,
-    asIschips: _asIsAsStabilizedChips,
+    asIsChips: _asIsAsStabilizedChips,
     asStabilizedChips: _asIsAsStabilizedChips,
     asCompletedChips: _asCompletedChips,
     currentNumberOfCommercialUnits: _currentNumberOfCommercialUnits,
