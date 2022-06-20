@@ -73,7 +73,7 @@ jobs:
         run: npm install
 
       - name: Run tests on Currents.dev
-        run: currents run --tag ${{ github.event.inputs.env }} --spec ${{ github.event.inputs.spec_file }} --env ${{ github.event.inputs.tags }} --browser chrome --record --parallel --key ${{ secrets.CURRENTS_RECORD_KEY }} --ci-build-id "${{ github.repository }}-${{ github.run_id }}-${{ github.run_attempt}}"
+        run: currents run --config baseUrl=${{ github.event.inputs.customEnv == '' && github.event.inputs.url ||  github.event.inputs.customEnv }} --tag ${{ github.event.inputs.env }} --spec ${{ github.event.inputs.spec_file }} --env ${{ github.event.inputs.tags }} --browser chrome --record --parallel --key ${{ secrets.CURRENTS_RECORD_KEY }} --ci-build-id "${{ github.repository }}-${{ github.run_id }}-${{ github.run_attempt}}"
         env:
           CYPRESS_USERNAME: ${{ secrets.USERNAME }}
           CYPRESS_PASSWORD: ${{ secrets.PASSWORD }}

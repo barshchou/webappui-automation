@@ -15,5 +15,6 @@ export default {
         incomeValue: Enums.INCOME_TYPE.both
     }),
     comparable: Object.freeze(comparableFixture()),
-    calculationUnits: [ "Per Residential Units", "Per Total Units" ]
+    calculationUnits: [ "Per Residential Units", "Per Total Units" ],
+    existColumns: [ "Cumulative Price Per Unit", "Adjusted Price Per Unit" ]
 };

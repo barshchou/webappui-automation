@@ -3,6 +3,9 @@ import tesData from "../../fixtures/smoke/createReport.fixture";
 import { Base, Report, Sales } from "../../actions";
 import { _ReportTitles } from "../../enums/pages_titles";
 
+Cypress.env("report", "ui");
+Cypress.env("loginMethod", "ui");
+
 describe("Create report test, open Find Comps, check if map is loaded", { tags: [ "@smoke" ] }, () => {
 
     it("Test body", () => {
