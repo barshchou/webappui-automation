@@ -14,7 +14,6 @@ describe(`[QA-4598][QA-4599][QA-4600] Verify the suggested text dropdown in the 
         cy.stepInfo(`Preconditions: The mixed report is created and several commercial units are added.`);
         createReport(testData.reportCreationDataAsIs);
 
-
         _NavigationSection.navigateToPropertySummary();
         Property._Summary.enterNumberOfCommercialUnits(testData.numberOfCommercialUnits)
             .enterNumberOfResUnits(testData.numberOfResidentialUnits)
