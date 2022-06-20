@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import reviewExportPage from "../../pages/reviewExport/reviewExport.page";
 import BaseActionsExt from "../base/base.actions.ext";
-import { snakeCase } from 'lodash';
 class ReviewExportActions extends BaseActionsExt<typeof reviewExportPage> {
 
     verifyPageIsOpened() {
@@ -35,7 +34,7 @@ class ReviewExportActions extends BaseActionsExt<typeof reviewExportPage> {
         this.generateXMLReport();
         cy.wait(`@${aliasXMLGeneration}`, { timeout: 20000 })
             .then(({ response }) => {
-                const fileNamePart = `${snakeCase(reportName)}`;
+                const fileNamePart = `${Cypress._.snakeCase(reportName)}`;
                 expect(response.statusCode).equal(200);
                 expect(response.body.downloadUrl).contain(`/downloadXML/${fileNamePart}`);
             });
@@ -44,7 +43,7 @@ class ReviewExportActions extends BaseActionsExt<typeof reviewExportPage> {
 
     verifyXMLReportOpens(reportName: string): this {
         let aliasOpenXML = "aliasOpenXML";
-        const urlNamePart = `${snakeCase(reportName)}`;
+        const urlNamePart = `${Cypress._.snakeCase(reportName)}`;
         cy.intercept({
             method: 'GET',
             url: `**/downloadXML/${urlNamePart}*`
