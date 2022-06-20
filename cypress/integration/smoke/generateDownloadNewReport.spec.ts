@@ -9,7 +9,6 @@ describe("Generate new report and download it", { tags: [ "@smoke" ] }, () => {
 
     it("Generate and download report", () => {
         createReport(reportCreationData);
-        Base._NavigationSection.openReviewAndExport();
         ReviewExport.generateDocxReport()
             .waitForReportGenerated()
             .downloadAndConvertDocxReport(reportCreationData.reportNumber);
