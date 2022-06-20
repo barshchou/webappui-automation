@@ -251,6 +251,11 @@ class AdjustCompsActions extends BaseActionsExt<typeof adjustCompsPage> {
         adjustCompsPage.conditionDiscussionCommentary.should("include.text", value);
         return this;
     }
+
+    verifyDiscussionsFieldWithNameExists(name: string): AdjustCompsActions {
+        cy.contains("h6", name).should("exist");
+        return this;
+    }
 }
 
 export default new AdjustCompsActions(adjustCompsPage);
