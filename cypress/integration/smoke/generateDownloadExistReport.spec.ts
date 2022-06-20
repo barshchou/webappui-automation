@@ -7,7 +7,7 @@ describe("Open any existing report, generate report and download it", { tags: [ 
     const url = `${Cypress.config().baseUrl}`;
 
     it("Download, generate report", () => {
-        cy.loginByApi(Cypress.config().baseUrl);
+        cy.loginByApi(Cypress.config().baseUrl, testData.username, testData.password);
         Base._HomePage.clickAllReportsTab()
             .verifyProgressBarNotExist()
             .enterReportNumberToSearch(testData.reportCreationData.reportNumber)

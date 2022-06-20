@@ -1,6 +1,6 @@
 describe("Test suite", () => {
     before("Login, create report", () => {
-        cy.login();
+        cy.login(Cypress.env("USERNAME"), Cypress.env("PASSWORD"));
     });
 
     it("Test body", () => {

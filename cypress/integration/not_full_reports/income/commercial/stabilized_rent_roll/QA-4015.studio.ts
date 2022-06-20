@@ -4,7 +4,7 @@ describe(" Verify that changes are displayed for Annual and Monthly Rent columns
     before("Login, create report", () => {
         cy.stepInfo(`1. Proceed to the Income Approach > 
         Commercial Stabilized Rent Roll and fill all fields on the WebApp.`);
-        cy.login();
+        cy.login(Cypress.env("USERNAME"), Cypress.env("PASSWORD"));
         /**
          * ernst: We can intercept report_id in before hook and memorize it with "as" command.
          * And then access it in test body

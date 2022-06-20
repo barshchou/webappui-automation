@@ -12,7 +12,7 @@ import Enums from "../../enums/enums";
 
 describe("Full bowery way, multifamily as complete report", { tags: [ "@full_report" ] }, () => {
     it("Test", () => {
-        cy.login();
+        cy.login(Cypress.env("USERNAME"), Cypress.env("PASSWORD"));
         Homepage.createReport(testData.reportCreationData);
         Report.KeyInfo.choosePurpose(testData.keyInfoPurposeData.purposeValue)
             .checkAllInterestAppraisedByValues(testData.keyInfoPurposeData.interestAppraised)

@@ -3,8 +3,10 @@ import { aliasQuery } from "../../utils/graphql.utils";
 import Homepage from "./homepage.actions";
 import NavigationSection from "./navigationSection.actions";
 
-export const createReport = (reportCreationData: BoweryAutomation.ReportCreationData) => {
-    cy.login();
+export const createReport = (reportCreationData: BoweryAutomation.ReportCreationData, 
+    username = Cypress.env("USERNAME"), 
+    password = Cypress.env("PASSWORD")) => {
+    cy.login(username, password);
     Homepage.createReport(reportCreationData);
     salesInterceptions();
 };

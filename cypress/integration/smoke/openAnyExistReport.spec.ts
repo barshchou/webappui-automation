@@ -7,7 +7,7 @@ const reportNumber = "TestAutoReport-QA-generate-download";
 describe("Open any existing report and open any page", { tags: [ "@smoke" ] }, () => {
 
     it("Test body", () => {
-       cy.loginByApi(Cypress.config().baseUrl);
+       cy.loginByApi(Cypress.config().baseUrl, Cypress.env("USERNAME"), Cypress.env("PASSWORD"));
        salesInterceptions();
        Base._HomePage.clickAllReportsTab()
            .verifyProgressBarNotExist()
