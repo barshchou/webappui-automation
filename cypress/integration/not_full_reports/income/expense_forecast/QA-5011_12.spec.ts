@@ -153,15 +153,15 @@ describe(`[QA-5011] [QA-5012] [Income>Expense forecast] Unselected existing expe
                     testData.rentRollresUnitFixture.rooms
                 );
             _NavigationSection.navigateToProForma();
-            Income._ProFormaActions.verifyTotalTOEexTaxesIncludeForecasts('@summaPerSF', testData.buildingDescription.grossArea)
-                .verifyPsfTOEexTaxesIncludeForecasts('@summaPerSF')
-                .verifyPerUnitTOEexTaxesIncludeForecasts('@summaPerUnit')
-                .verifyTotalTOEIncludeForecasts('@summaPerSF', testData.buildingDescription.grossArea)
-                .verifyPsfTOEIncludeForecasts('@summaPerSF')
-                .verifyPerUnitTOEIncludeForecasts('@summaPerUnit')
-                .verifyTotalNOIIncludeForecasts('@summaPerSF', testData.buildingDescription.grossArea)
-                .verifyPsfNOIIncludeForecasts('@summaPerSF')
-                .verifyPerUnitNOIIncludeForecasts('@summaPerUnit');
+            Income._ProFormaActions.verifyTotalTOEexTaxesIncludeForecasts(testData.buildingDescription.grossArea)
+                .verifyPsfTOEexTaxesIncludeForecasts()
+                .verifyPerUnitTOEexTaxesIncludeForecasts()
+                .verifyTotalTOEIncludeForecasts(testData.buildingDescription.grossArea)
+                .verifyPsfTOEIncludeForecasts()
+                .verifyPerUnitTOEIncludeForecasts()
+                .verifyTotalNOIIncludeForecasts(testData.buildingDescription.grossArea)
+                .verifyPsfNOIIncludeForecasts()
+                .verifyPerUnitNOIIncludeForecasts();
             _NavigationSection.navigateToExpenseForecast();
             Income._ExpenseForecastActions.verifyTotalForecastPSF(
                 testData.buildingDescription.grossArea,
@@ -192,15 +192,15 @@ describe(`[QA-5011] [QA-5012] [Income>Expense forecast] Unselected existing expe
                     testData.rentRollresUnitFixture.rooms
                 );
             _NavigationSection.navigateToProForma();
-            Income._ProFormaActions.verifyTotalTOEexTaxesIncludeForecasts('@summaPerSF', testData.buildingDescription.grossArea)
-                .verifyPsfTOEexTaxesIncludeForecasts('@summaPerSF')
-                .verifyPerUnitTOEexTaxesIncludeForecasts('@summaPerUnit')
-                .verifyTotalTOEIncludeForecasts('@summaPerSF', testData.buildingDescription.grossArea)
-                .verifyPsfTOEIncludeForecasts('@summaPerSF')
-                .verifyPerUnitTOEIncludeForecasts('@summaPerUnit')
-                .verifyTotalNOIIncludeForecasts('@summaPerSF', testData.buildingDescription.grossArea)
-                .verifyPsfNOIIncludeForecasts('@summaPerSF')
-                .verifyPerUnitNOIIncludeForecasts('@summaPerUnit');
+            Income._ProFormaActions.verifyTotalTOEexTaxesIncludeForecasts(testData.buildingDescription.grossArea)
+                .verifyPsfTOEexTaxesIncludeForecasts()
+                .verifyPerUnitTOEexTaxesIncludeForecasts()
+                .verifyTotalTOEIncludeForecasts(testData.buildingDescription.grossArea)
+                .verifyPsfTOEIncludeForecasts()
+                .verifyPerUnitTOEIncludeForecasts()
+                .verifyTotalNOIIncludeForecasts(testData.buildingDescription.grossArea)
+                .verifyPsfNOIIncludeForecasts()
+                .verifyPerUnitNOIIncludeForecasts();
             _NavigationSection.navigateToExpenseForecast();
             Income._ExpenseForecastActions.verifyTotalForecastPerUnit(
                 testData.buildingDescription.grossArea,
@@ -231,15 +231,15 @@ describe(`[QA-5011] [QA-5012] [Income>Expense forecast] Unselected existing expe
                     testData.rentRollresUnitFixture.rooms
                 );
             _NavigationSection.navigateToProForma();
-            Income._ProFormaActions.verifyTotalTOEexTaxesIncludeForecasts('@summaPerSF', testData.buildingDescription.grossArea)
-                .verifyPsfTOEexTaxesIncludeForecasts('@summaPerSF')
-                .verifyPerUnitTOEexTaxesIncludeForecasts('@summaPerUnit')
-                .verifyTotalTOEIncludeForecasts('@summaPerSF', testData.buildingDescription.grossArea)
-                .verifyPsfTOEIncludeForecasts('@summaPerSF')
-                .verifyPerUnitTOEIncludeForecasts('@summaPerUnit')
-                .verifyTotalNOIIncludeForecasts('@summaPerSF', testData.buildingDescription.grossArea)
-                .verifyPsfNOIIncludeForecasts('@summaPerSF')
-                .verifyPerUnitNOIIncludeForecasts('@summaPerUnit');
+            Income._ProFormaActions.verifyTotalTOEexTaxesIncludeForecasts(testData.buildingDescription.grossArea)
+                .verifyPsfTOEexTaxesIncludeForecasts()
+                .verifyPerUnitTOEexTaxesIncludeForecasts()
+                .verifyTotalTOEIncludeForecasts(testData.buildingDescription.grossArea)
+                .verifyPsfTOEIncludeForecasts()
+                .verifyPerUnitTOEIncludeForecasts()
+                .verifyTotalNOIIncludeForecasts(testData.buildingDescription.grossArea)
+                .verifyPsfNOIIncludeForecasts()
+                .verifyPerUnitNOIIncludeForecasts();
             _NavigationSection.navigateToExpenseForecast();
             Income._ExpenseForecastActions.verifyTotalForecastPSF(
                 testData.buildingDescription.grossArea,

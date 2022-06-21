@@ -9,6 +9,7 @@ import BaseActionsExt from "../base/base.actions.ext";
 import { uppercaseFirstLetterEachWord } from "../../../utils/string.utils";
 import { BoweryReports } from "../../types";
 import enums from "../../enums/enums";
+import { Alias } from "../../utils/alias.utils";
 
 class ProFormaActions extends BaseActionsExt<typeof proFormaPage> {
 
@@ -123,8 +124,8 @@ class ProFormaActions extends BaseActionsExt<typeof proFormaPage> {
         return this;
     }
 
-    verifyTotalTOEexTaxesIncludeForecasts(aliasPSFFromForecast: string, GBA: number): ProFormaActions {
-        cy.get(aliasPSFFromForecast).then(val => {
+    verifyTotalTOEexTaxesIncludeForecasts(GBA: number): ProFormaActions {
+        cy.get(`@${Alias.expenceForcastAliases.summaPerSF}`).then(val => {
             let valTotal = (Number(val) * GBA);
             let textToBeTotal = `$${numberWithCommas(Number(valTotal))}`;
             this.verifyCategoryTotal(textToBeTotal, enums.PRO_FORMA_TYPES.totalOperatingExpensesExTaxes);
@@ -132,8 +133,8 @@ class ProFormaActions extends BaseActionsExt<typeof proFormaPage> {
         return this;
     }
 
-    verifyPsfTOEexTaxesIncludeForecasts(aliasPSFFromForecast: string): ProFormaActions {
-        cy.get(aliasPSFFromForecast).then(val => {
+    verifyPsfTOEexTaxesIncludeForecasts(): ProFormaActions {
+        cy.get(`@${Alias.expenceForcastAliases.summaPerSF}`).then(val => {
             let valPSF = Number(val);
             let textToBePSF = `$${getNumberWithDecimalPart(Number(valPSF))}`;
             this.verifyCategoryPSFTotal(textToBePSF, enums.PRO_FORMA_TYPES.totalOperatingExpensesExTaxes);
@@ -141,8 +142,8 @@ class ProFormaActions extends BaseActionsExt<typeof proFormaPage> {
         return this;
     }
 
-    verifyPerUnitTOEexTaxesIncludeForecasts(aliasPerUnitFromForecast: string): ProFormaActions {
-        cy.get(aliasPerUnitFromForecast).then(val => {
+    verifyPerUnitTOEexTaxesIncludeForecasts(): ProFormaActions {
+        cy.get(`@${Alias.expenceForcastAliases.summaPerUnit}`).then(val => {
             let valPerUnit = Number(val);
             let textToBePerUnit = `$${numberWithCommas(Number(valPerUnit))}`;
             this.verifyCategoryPerUnitTotal(textToBePerUnit, enums.PRO_FORMA_TYPES.totalOperatingExpensesExTaxes);
@@ -150,8 +151,8 @@ class ProFormaActions extends BaseActionsExt<typeof proFormaPage> {
         return this;
     }
 
-    verifyTotalTOEIncludeForecasts(aliasPSFFromForecast: string, GBA: number): ProFormaActions {
-        cy.get(aliasPSFFromForecast).then(val => {
+    verifyTotalTOEIncludeForecasts(GBA: number): ProFormaActions {
+        cy.get(`@${Alias.expenceForcastAliases.summaPerSF}`).then(val => {
             let valTotal = (Number(val) * GBA);
             this.Page.categoryCellTotal(enums.PRO_FORMA_TYPES.totalOperatingExpenses).invoke("text").then(totalText => {
                 const totalNumberWithTaxes = getNumberFromDollarNumberWithCommas(totalText);
@@ -165,8 +166,8 @@ class ProFormaActions extends BaseActionsExt<typeof proFormaPage> {
         return this;
     }
 
-    verifyPsfTOEIncludeForecasts(aliasPSFFromForecast: string): ProFormaActions {
-        cy.get(aliasPSFFromForecast).then(val => {
+    verifyPsfTOEIncludeForecasts(): ProFormaActions {
+        cy.get(`@${Alias.expenceForcastAliases.summaPerSF}`).then(val => {
             let valPSF = Number(val);
             this.Page.categoryPSFTotal(enums.PRO_FORMA_TYPES.totalOperatingExpenses).invoke("text").then(psfText => {
                 const psfNumberWithTaxes = getNumberFromDollarNumberWithCommas(psfText);
@@ -180,8 +181,8 @@ class ProFormaActions extends BaseActionsExt<typeof proFormaPage> {
         return this;
     }
 
-    verifyPerUnitTOEIncludeForecasts(aliasPerUnitFromForecast: string): ProFormaActions {
-        cy.get(aliasPerUnitFromForecast).then(val => {
+    verifyPerUnitTOEIncludeForecasts(): ProFormaActions {
+        cy.get(`@${Alias.expenceForcastAliases.summaPerUnit}`).then(val => {
             let valPerUnit = Number(val);
             this.Page.categoryPerUnitTotal(enums.PRO_FORMA_TYPES.totalOperatingExpenses).invoke("text").then(perUnitText => {
                 const perUnitNumberWithTaxes = getNumberFromDollarNumberWithCommas(perUnitText);
@@ -195,8 +196,8 @@ class ProFormaActions extends BaseActionsExt<typeof proFormaPage> {
         return this;
     }
 
-    verifyTotalNOIIncludeForecasts(aliasPSFFromForecast: string, GBA: number): ProFormaActions {
-        cy.get(aliasPSFFromForecast).then(val => {
+    verifyTotalNOIIncludeForecasts(GBA: number): ProFormaActions {
+        cy.get(`@${Alias.expenceForcastAliases.summaPerSF}`).then(val => {
             let valTotal = (Number(val) * GBA);
             this.Page.categoryCellTotal(enums.PRO_FORMA_TYPES.netOperatingIncome).invoke("text").then(totalIncome => {
                 const totalNumberWithTaxes = getNumberFromDollarNumberWithCommas(totalIncome);
@@ -213,8 +214,8 @@ class ProFormaActions extends BaseActionsExt<typeof proFormaPage> {
         return this;
     }
 
-    verifyPsfNOIIncludeForecasts(aliasPSFFromForecast: string): ProFormaActions {
-        cy.get(aliasPSFFromForecast).then(val => {
+    verifyPsfNOIIncludeForecasts(): ProFormaActions {
+        cy.get(`@${Alias.expenceForcastAliases.summaPerSF}`).then(val => {
             let valPSF = Number(val);
             this.Page.categoryPSFTotal(enums.PRO_FORMA_TYPES.netOperatingIncome).invoke("text").then(psfIncome => {
                 const psfNumberWithTaxes = getNumberFromDollarNumberWithCommas(psfIncome);
@@ -231,8 +232,8 @@ class ProFormaActions extends BaseActionsExt<typeof proFormaPage> {
         return this;
     }
 
-    verifyPerUnitNOIIncludeForecasts(aliasPerUnitFromForecast: string): ProFormaActions {
-        cy.get(aliasPerUnitFromForecast).then(val => {
+    verifyPerUnitNOIIncludeForecasts(): ProFormaActions {
+        cy.get(`@${Alias.expenceForcastAliases.summaPerUnit}`).then(val => {
             let valPerUnit = Number(val);
             this.Page.categoryPerUnitTotal(enums.PRO_FORMA_TYPES.netOperatingIncome).invoke("text").then(perUnitIncome => {
                 const perUnitNumberWithTaxes = getNumberFromDollarNumberWithCommas(perUnitIncome);

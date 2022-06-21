@@ -2,6 +2,7 @@ import expenseForecastPage from "../../pages/income/expenseForecast.page";
 import { getNumberFromDollarNumberWithCommas, numberWithCommas } from "../../../utils/numbers.utils";
 import BaseActionsExt from "../base/base.actions.ext";
 import { BoweryReports } from "../../types";
+import { Alias } from "../../utils/alias.utils";
 
 type ForecastItem = BoweryReports.ForecastItem;
 type BuildingDescription = BoweryReports.BuildingDescription;
@@ -311,11 +312,11 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
                                                 let inputValuePerSF = (inputValue * rooms) / GBA;
                                                 sumPerSF += inputValuePerSF;
                                             }
-                                            cy.wrap(sumPerSF).as('summaPerSF');
+                                            cy.wrap(sumPerSF).as(Alias.expenceForcastAliases.summaPerSF);
                                         });
                                 } else {
                                     sumPerSF += 0;
-                                    cy.wrap(sumPerSF).as('summaPerSF');
+                                    cy.wrap(sumPerSF).as(Alias.expenceForcastAliases.summaPerSF);
                                 }
                             });
                     } else {
@@ -332,7 +333,7 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
                                     let inputValuePerSF = (inputValue * rooms) / GBA;
                                     sumPerSF += inputValuePerSF;
                                 }
-                                cy.wrap(sumPerSF).as('summaPerSF');
+                                cy.wrap(sumPerSF).as(Alias.expenceForcastAliases.summaPerSF);
                             });
                     }
                 });
@@ -343,7 +344,7 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
 
     verifyTotalForecastPSF(GBA?, resUnits?, rooms?): ExpenseForecastActions {
     this.totalSumForecastPSF(GBA, resUnits, rooms);
-    cy.get('@summaPerSF').then(val => {
+    cy.get(`@${Alias.expenceForcastAliases.summaPerSF}`).then(val => {
             const textToBe = `Appraiser's Forecast: $${numberWithCommas(Number(val).toFixed(2))}`;
             expenseForecastPage.appraisersTotalForecast.should("have.text", textToBe);
     });
@@ -386,11 +387,11 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
                                                 let inputValuePerUnit = (inputValue * rooms) / resUnits;
                                                 sumPerUnit += inputValuePerUnit;
                                             }
-                                            cy.wrap(sumPerUnit).as('summaPerUnit');
+                                            cy.wrap(sumPerUnit).as(Alias.expenceForcastAliases.summaPerUnit);
                                         });
                                 } else {
                                     sumPerUnit += 0;
-                                    cy.wrap(sumPerUnit).as('summaPerUnit');
+                                    cy.wrap(sumPerUnit).as(Alias.expenceForcastAliases.summaPerUnit);
                                 }
                             });
                     } else {
@@ -407,7 +408,7 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
                                     let inputValuePerUnit = (inputValue * rooms) / resUnits;
                                     sumPerUnit += inputValuePerUnit;
                                 }
-                                cy.wrap(sumPerUnit).as('summaPerUnit');
+                                cy.wrap(sumPerUnit).as(Alias.expenceForcastAliases.summaPerUnit);
                             });
                     }
                 });
@@ -418,7 +419,7 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
 
     verifyTotalForecastPerUnit(GBA?, resUnits?, rooms?): ExpenseForecastActions {
     this.totalSumForecastPerUnit(GBA, resUnits, rooms);
-    cy.get('@summaPerUnit').then(val => {
+    cy.get(`@${Alias.expenceForcastAliases.summaPerUnit}`).then(val => {
             const textToBe = `Appraiser's Forecast: $${numberWithCommas(Number(val).toFixed(2))}`;
             expenseForecastPage.appraisersTotalForecast.should("have.text", textToBe);
     });
