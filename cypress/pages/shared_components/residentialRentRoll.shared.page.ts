@@ -42,4 +42,6 @@ export default class ResidentialRentRollSharedPage extends BasePage {
 
     get monthlyRentCells() {return cy.get("[data-qa^=rent-][data-qa$=cell]");}
 
+    get stabilizedMonthlyRentCells() {return cy.get("[name^='units['][name$='.rent']");}
+
 }
