@@ -16,10 +16,6 @@ class StabilizedRentRollPage extends ResidentialRentRollSharedPage{
     get occupancyRateEditButton() {return cy.get("[data-qa^=occupancyRateDiscussion] [data-qa$=edit-btn]");}
 
     get occupancyRateInput() {return cy.get("[name='occupancyRateDiscussion.commentary']");}
-
-    get rentSFCell() {return cy.get("[data-qa='rentPerSquareFootage-cell']");}
-
-    get stabilizedMonthlyRentCells() {return cy.get("[name^='units['][name$='.rent']");}
 }
 
 export default new StabilizedRentRollPage();
