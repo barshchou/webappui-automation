@@ -28,18 +28,19 @@ Cypress.on("fail", (err) => {
 declare global {
     namespace Cypress {
       interface Chainable {
+        
         /**
          * Custom command to select DOM element by data-cy attribute.
          * @example cy.dataCy('greeting')
          */
         loginByApi(url: string, username: any, password: any): Cypress.Chainable<Cypress.Response<any>>
-        
+
         /**
          * 
          * @param value 
          */
-        loginByUI(url: string): Chainable<Element>
-        
+        loginByUI(url: string, username: string, password: string): Chainable<Element>
+
         /**
          * Description of step which will desribe code below. 
          * @param message 

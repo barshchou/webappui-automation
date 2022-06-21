@@ -39,6 +39,7 @@ import storageVcLossType from "./storageVcLossType.enum";
 import knownInformation from "./knownInformationType.enum";
 import compGroupsColumnsEnum from "./compGroupsColumns.enum";
 import marketAnalysisUsesEnum from "./marketAnalysisUses.enum";
+import usersEnum from "../enums/users/users.enum";
 
 export default {
     TEMPLATE_TYPE: templateTypesEnum,
@@ -81,5 +82,6 @@ export default {
     UNIT_TYPE: unitType,
     SOURCE_OF_INFORMATION: sourceOfInformation,
     AMENITIES: amenities,
-    MARKET_ANALYSIS_USES: marketAnalysisUsesEnum
+    MARKET_ANALYSIS_USES: marketAnalysisUsesEnum,
+    USERS: usersEnum
 };
