@@ -1,5 +1,5 @@
 import reimbursementSummary from "../../../pages/income/commercial/reimbursementSummary.page";
-import { BoweryReports } from "../../../types";
+import { BoweryReports } from "../../../types/boweryReports.type";
 import BaseActionsExt from "../../base/base.actions.ext";
 
 class ReimbursementSummaryActions extends BaseActionsExt<typeof reimbursementSummary> {

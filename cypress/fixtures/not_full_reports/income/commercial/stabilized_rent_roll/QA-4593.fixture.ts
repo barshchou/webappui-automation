@@ -1,5 +1,5 @@
 import enums from "../../../../../enums/enums";
-import { BoweryReports } from "../../../../../types";
+import { BoweryReports } from "../../../../../types/boweryReports.type";
 import reportDataCreator from "../../../../data_creator/reportData.creator";
 
 export default {
