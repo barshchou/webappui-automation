@@ -1,17 +1,19 @@
 import { BoweryAutomation } from "../../types";
 
-let ClientCreationData = function (prefix: string, title: string, firstName: string, middleInitial: string, lastName: string, clientSuffix: string, clientCompanyName: string, streetAddress: string, city: string, state: string, zipCode: string | number) {
-    this.prefix = prefix;
-    this.title = title;
-    this.firstName = firstName;
-    this.middleInitial = middleInitial;
-    this.lastName = lastName;
-    this.clientSuffix = clientSuffix;
-    this.clientCompanyName = clientCompanyName;
-    this.streetAddress = streetAddress;
-    this.city = city;
-    this.state = state;
-    this.zipCode = zipCode;
+let ClientCreationData = function (prefix: string, title: string, firstName: string, 
+    middleInitial: string, lastName: string, clientSuffix: string, clientCompanyName: string, 
+    streetAddress: string, city: string, state: string, zipCode: string | number) {
+        this.prefix = prefix;
+        this.title = title;
+        this.firstName = firstName;
+        this.middleInitial = middleInitial;
+        this.lastName = lastName;
+        this.clientSuffix = clientSuffix;
+        this.clientCompanyName = clientCompanyName;
+        this.streetAddress = streetAddress;
+        this.city = city;
+        this.state = state;
+        this.zipCode = zipCode;
 };
 
 class ClientCreator {

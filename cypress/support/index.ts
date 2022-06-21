@@ -42,12 +42,6 @@ declare global {
         loginByUI(url: string, username: string, password: string): Chainable<Element>
 
         /**
-         * 
-         * @param value 
-         */
-        login(username: string, password: string): Chainable<Element>
-
-        /**
          * Description of step which will desribe code below. 
          * @param message 
          */

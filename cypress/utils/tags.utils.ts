@@ -32,6 +32,5 @@ export enum Tag {
     summary = "@summary",
     full_building_comps = "@full_building_comps",
     unit_mix = "@unit_mix",
-
-    orgranization = "@organizations"
+    organizations = "@organizations"
 }
