@@ -49,7 +49,27 @@ class CommercialUnitsPage extends BasePage {
         return cy.xpath(`//*[text()='Grade']/..//descendant::input[@value='${value}']`).eq(index);
     }
 
-    get commercialGrossLeasableAreaToolip() { return cy.xpath(`//label[text() = "Commercial Gross Leasable Area"]/span[1]`);}
+    get commercialGrossLeasableAreaTooltip() { return cy.xpath(`//label[text() = "Commercial Gross Leasable Area"]/span[1]`);}
+
+    get commercialUnitSfDiscussionTooltip() { return cy.xpath(`//h6[.= "Commercial Unit SF Discussion"]//following-sibling::*[@data-icon="info-circle"]`);}
+
+    get commentaryText() {return cy.get("div[data-slate-editor]");}
+
+    get narrativeSuggestionsList() {return cy.get("[data-qa='narrative-suggestions-list'] > ul");}
+
+    
+
+    get changesLostModalHeader() {return cy.contains("Changes will be lost");}
+
+    get cancelRevertButton() {return this.formYesRevertBtn.prev("button");}
+
+    get commercialUnitsNumberInput() {return cy.xpath("//label[.='No. of Commercial Units']//following-sibling::div//input");}
+
+    get commercialUnitsDiscussionTitle() {return cy.xpath("//h6[.='Commercial Unit SF Discussion']");}
+
+    commercialUnitDescriptionTitle(unitNumber = 1) {return cy.xpath(`//div[.='Commercial Unit ${unitNumber} Description']`);}
+
+    commercialUnitsTab(unitNumber = 1) {return cy.xpath(`//div[@role='tablist']/button[.="Commercial Unit ${unitNumber}"]`);} 
 }
 
 export default new CommercialUnitsPage();
