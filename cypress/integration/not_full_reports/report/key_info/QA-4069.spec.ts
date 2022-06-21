@@ -13,8 +13,7 @@ describe("[QA-4069] Check the helper text for Provided Documents)",
 
         cy.stepInfo(`2. Go to Report → Key Info → Engagement tab and upload files`);
         _NavigationSection.navigateToReportInformation();
-        Report._KeyInfo.clickYesButton()
-            .uploadFile(testData.pdfFileName);
+        Report._KeyInfo.uploadFile(testData.pdfFileName);
 
         _NavigationSection.openReviewAndExport();
         ReviewExport.generateDocxReport().waitForReportGenerated()
