@@ -1,4 +1,3 @@
-import { getNumberFromDollarNumberWithCommas } from './../../../../utils/numbers.utils';
 import stabRentRollPage from "../../../pages/income/residential/stabilizedRentRoll.page";
 import { numberWithCommas } from "../../../../utils/numbers.utils";
 import ResidentialRentRollSharedActions from "../../shared_components/residentialRentRoll.shared.actions";
