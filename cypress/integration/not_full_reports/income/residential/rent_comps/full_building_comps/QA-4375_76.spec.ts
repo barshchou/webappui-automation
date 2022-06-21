@@ -13,11 +13,12 @@ conditionalDescribe("Comp summary tests", { tags: [ "@residential", "@rent_comps
     before("Create report, navigate to page", () => {
         createReport(testData.reportCreationData);
         _NavigationSection.navigateToRentComps();
+        cy.stepInfo("1. Add comparable, click edit button, open comp summary");
         Income._Residential.RentComps.BaseActions.changeToBuildingSearch()
             .clickAddRemoveBuildingCompByAddress(testData.compAddress)
             .clickEditBuildingCompButtonByAddress(testData.compAddress);
         _NavigationSection.clickYesIfExist();
-        Income._Residential.RentComps.FullBuildingComps.CompSummary.openNavigationTab();
+        Income._Residential.RentComps.FullBuildingComps._CompSummary.openNavigationTab();
         cy.saveLocalStorage();
     });
 
@@ -26,13 +27,13 @@ conditionalDescribe("Comp summary tests", { tags: [ "@residential", "@rent_comps
     });
 
     it("[QA-4375] The default state of the Comp Summary page", () => {
-        Income._Residential.RentComps.FullBuildingComps.CompSummary.matchElementSnapshot(
-            Income._Residential.RentComps.FullBuildingComps.CompSummary.Page.compSummaryForm, testData.snapshotName);
+        Income._Residential.RentComps.FullBuildingComps._CompSummary.matchElementSnapshot(
+            Income._Residential.RentComps.FullBuildingComps._CompSummary.Page.compSummaryForm, testData.snapshotName);
     });
 
     it("[QA-4376] Verify the Unit Mix button on the Comp Summary page", () => {
-        Income._Residential.RentComps.FullBuildingComps.CompSummary.clickUnitMixButton();
-        Income._Residential.RentComps.FullBuildingComps.UnitMix.Page.pageTitle.should("exist")
+        Income._Residential.RentComps.FullBuildingComps._CompSummary.clickUnitMixButton();
+        Income._Residential.RentComps.FullBuildingComps._UnitMix.Page.pageTitle.should("exist")
             .and("have.text", _IncomeTitles._Residential.UNIT_MIX);
     });
 
