@@ -60,12 +60,12 @@ class OrganizationInfoActions extends BaseActionsExt<typeof createNewClientPage>
         return this;
     }
 
-    clickSaveFormButton() {
+    clickSaveFormButton(): OrganizationInfoActions {
         createNewClientPage.saveFormButton.should("be.enabled").click();
         return this;
     }
 
-    verifySuccessModal() {
+    verifySuccessModal(): OrganizationInfoActions {
         createNewClientPage.successModal.should("be.visible");
         return this;
     }
