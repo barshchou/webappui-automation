@@ -1,13 +1,9 @@
-import BaseActions from "../base/base.actions";
 import swotAnalysisPage from "../../pages/final/swotAnalysis.page";
+import BaseActionsExt from "../base/base.actions.ext";
 
-class SwotAnalysisActions extends BaseActions {
-
-    /**
-     *
-     * @returns {SwotAnalysisActions}
-     */
-    uncheckIncludeInReportCheckbox() {
+class SwotAnalysisActions extends BaseActionsExt<typeof swotAnalysisPage> {
+    
+    uncheckIncludeInReportCheckbox(): SwotAnalysisActions {
         swotAnalysisPage.includeInReportCheckbox.uncheck().should("have.value", "false");
         swotAnalysisPage.addThreatsButton.should("be.disabled");
         swotAnalysisPage.addOpportunitiesButton.should("be.disabled");
@@ -18,4 +14,4 @@ class SwotAnalysisActions extends BaseActions {
 
 }
 
-export default new SwotAnalysisActions();
+export default new SwotAnalysisActions(swotAnalysisPage);

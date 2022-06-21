@@ -1,118 +1,64 @@
-import BaseActions from "../base/base.actions";
 import finalValuesPage from "../../pages/final/finalValuesReconciliation.page";
+import BaseActionsExt from "../base/base.actions.ext";
 
-class FinalValuesReconciliationActions extends BaseActions {
+class FinalValuesReconciliationActions extends BaseActionsExt<typeof finalValuesPage> {
 
-    /**
-     *
-     * @returns {FinalValuesReconciliationActions}
-     */
-    checkPerUnitCheckbox() {
+    checkPerUnitCheckbox(): FinalValuesReconciliationActions {
         finalValuesPage.perUnitCheckbox.check().should("have.value", "true");
         return this;
     }
 
-    /**
-     *
-     * @param {string} date
-     * @returns {FinalValuesReconciliationActions}
-     */
-    verifyIncomeStabDate(date) {
+    verifyIncomeStabDate(date: string): FinalValuesReconciliationActions {
         finalValuesPage.incomeStabilizedDate.should("have.text", date);
         return this;
     }
 
-    /**
-     *
-     * @param {string} date
-     * @returns {FinalValuesReconciliationActions}
-     */
-    verifyIncomeCompleteDate(date) {
+    verifyIncomeCompleteDate(date: string): FinalValuesReconciliationActions {
         finalValuesPage.incomeCompleteDate.should("have.text", date);
         return this;
     }
 
-    /**
-     *
-     * @param {string} date
-     * @returns {FinalValuesReconciliationActions}
-     */
-    verifyIncomeMarketDate(date) {
+    verifyIncomeMarketDate(date: string): FinalValuesReconciliationActions {
         finalValuesPage.incomeMarketDate.should("have.text", date);
         return this;
     }
 
-    /**
-     *
-     * @param {string} date
-     * @returns {FinalValuesReconciliationActions}
-     */
-    verifySalesStabilizedDate(date) {
+    verifySalesStabilizedDate(date: string): FinalValuesReconciliationActions {
         finalValuesPage.salesStabilizedDate.should("have.text", date);
         return this;
     }
 
-    /**
-     *
-     * @param {string} date
-     * @returns {FinalValuesReconciliationActions}
-     */
-    verifySalesCompleteDate(date) {
+    verifySalesCompleteDate(date: string): FinalValuesReconciliationActions {
         finalValuesPage.salesCompleteDate.should("have.text", date);
         return this;
     }
 
-    /**
-     *
-     * @param {string} date
-     * @returns {FinalValuesReconciliationActions}
-     */
-    verifySalesMarketDate(date) {
+    verifySalesMarketDate(date: string): FinalValuesReconciliationActions {
         finalValuesPage.salesMarketDate.should("have.text", date);
         return this;
     }
 
-    /**
-     *
-     * @param {string} value
-     * @returns {FinalValuesReconciliationActions}
-     */
-    checkFinalValueApproachRadio(value) {
+    checkFinalValueApproachRadio(value: string): FinalValuesReconciliationActions {
         finalValuesPage.finalValueApproachRadio.check(value);
         finalValuesPage.getElementToVerifyRadio(value).should("exist");
         return this;
     }
 
-    /**
-     *
-     * @param {string} date
-     * @returns {FinalValuesReconciliationActions}
-     */
-    verifyFinalValueAsStabDate(date) {
+    verifyFinalValueAsStabDate(date: string): FinalValuesReconciliationActions {
         finalValuesPage.finalValueAsStabDate.should("have.text", date);
         return this;
     }
 
-    /**
-     *
-     * @param {string} date
-     * @returns {FinalValuesReconciliationActions}
-     */
-    verifyFinalValueAsCompleteDate(date) {
+    verifyFinalValueAsCompleteDate(date: string): FinalValuesReconciliationActions {
         finalValuesPage.finalValueAsCompleteDate.should("have.text", date);
         return this;
     }
 
-    /**
-     *
-     * @param {string} date
-     * @returns {FinalValuesReconciliationActions}
-     */
-    verifyFinalValueAsIsDate(date) {
+    verifyFinalValueAsIsDate(date: string): FinalValuesReconciliationActions {
         finalValuesPage.finalValueAsIsDate.should("have.text", date);
         return this;
     }
 
 }
 
-export default new FinalValuesReconciliationActions();
+export default new FinalValuesReconciliationActions(finalValuesPage);
