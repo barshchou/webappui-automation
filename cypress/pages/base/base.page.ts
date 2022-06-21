@@ -31,6 +31,8 @@ export default class BasePage {
         return cy.get("[role=tooltip]");
     }
 
+    get modalWindow() {return cy.get("[role='dialog']");}
+
     formEditBtn(index = 0) {
         return cy.xpath('//*[@data-icon="pencil"]//ancestor::button')
             .eq((index !== 0) ? index : 0);
