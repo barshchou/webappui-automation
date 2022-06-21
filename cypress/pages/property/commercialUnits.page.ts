@@ -48,6 +48,8 @@ class CommercialUnitsPage extends BasePage {
     getGradeCheckbox(value: string, index = 0) {
         return cy.xpath(`//*[text()='Grade']/..//descendant::input[@value='${value}']`).eq(index);
     }
+
+    get commercialGrossLeasableAreaToolip() { return cy.xpath(`//label[text() = "Commercial Gross Leasable Area"]/span[1]`);}
 }
 
 export default new CommercialUnitsPage();
