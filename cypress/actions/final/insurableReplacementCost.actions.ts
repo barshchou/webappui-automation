@@ -1,38 +1,23 @@
-import BaseActions from "../base/base.actions";
 import replacementCostPage from "../../pages/final/insurableReplacementCost.page";
+import BaseActionsExt from "../base/base.actions.ext";
 
-class InsurableReplacementCostActions extends BaseActions {
+class InsurableReplacementCostActions extends BaseActionsExt<typeof replacementCostPage> {
 
-    /**
-     *
-     * @param {string} state
-     * @returns {InsurableReplacementCostActions}
-     */
-    verifySubjectState(state) {
+    verifySubjectState(state: string): InsurableReplacementCostActions {
         replacementCostPage.subjectStateDropdown.should("have.text", state);
         return this;
     }
 
-    /**
-     *
-     * @param {string} locale
-     * @returns {InsurableReplacementCostActions}
-     */
-    verifySubjectLocale(locale) {
+    verifySubjectLocale(locale: string): InsurableReplacementCostActions {
         replacementCostPage.subjectLocaleDropdown.should("have.text", locale);
         return this;
     }
 
-    /**
-     *
-     * @param {string} multiplier
-     * @returns {InsurableReplacementCostActions}
-     */
-    verifyLocalMultiplier(multiplier = "1.00") {
+    verifyLocalMultiplier(multiplier = "1.00"): InsurableReplacementCostActions {
         replacementCostPage.localMultiplier.should("have.value", `${multiplier}`);
         return this;
     }
 
 }
 
-export default new InsurableReplacementCostActions();
+export default new InsurableReplacementCostActions(replacementCostPage);
