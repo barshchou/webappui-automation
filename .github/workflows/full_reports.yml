@@ -59,7 +59,7 @@ jobs:
         run: npm install
 
       - name: Run Cypress full_report tests on Currents.dev
-        run: currents run --tag ${{ github.event.inputs.env }} --spec "./cypress/integration/full_reports/*.spec.ts" --browser chrome --record --parallel --key ${{ secrets.CURRENTS_RECORD_KEY }} --ci-build-id "${{ github.repository }}-${{ github.run_id }}-${{ github.run_attempt}}"
+        run: currents run --config baseUrl=${{ github.event.inputs.customEnv == '' && github.event.inputs.url ||  github.event.inputs.customEnv }} --tag ${{ github.event.inputs.env }} --spec "./cypress/integration/full_reports/*.spec.ts" --browser chrome --record --parallel --key ${{ secrets.CURRENTS_RECORD_KEY }} --ci-build-id "${{ github.repository }}-${{ github.run_id }}-${{ github.run_attempt}}"
         env:
           CYPRESS_USERNAME: ${{ github.event.inputs.env == 'custom' && secrets.CESAR_USERNAME || secrets.USERNAME }}
           CYPRESS_PASSWORD: ${{ github.event.inputs.env == 'custom' && secrets.CESAR_PASSWORD || secrets.PASSWORD }}

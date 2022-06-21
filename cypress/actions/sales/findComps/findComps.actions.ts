@@ -208,7 +208,7 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
 
     verifyNumericInputNewComp(elementAlias: string, numberOfUnits: number | string): FindCompsActions {
         const valueToBe = isNumber(numberOfUnits) ? numberWithCommas(`${numberOfUnits}`.replace("-", "")) : "";
-        cy.get(`@${elementAlias}`).should("have.value", valueToBe);
+        cy.get(`@${elementAlias}`, { timeout: 10000 }).should("have.value", valueToBe);
         return this;
     }
 }
