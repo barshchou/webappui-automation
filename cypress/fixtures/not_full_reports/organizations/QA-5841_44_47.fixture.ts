@@ -1,7 +1,7 @@
 import ReportDataCreator from "../../data_creator/reportData.creator";
 import Enums from "../../../enums/enums";
-import { BoweryAutomation } from "../../../types";
 import ClientCreationData from "../../data_creator/clientData.creator";
+import { BoweryAutomation } from "../../../types/boweryAutomation.type";
 
 const reportCreationFixture = () => {
     return ReportDataCreator.getReportData("5841_44_47", {

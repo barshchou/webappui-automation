@@ -1,4 +1,4 @@
-import { BoweryAutomation } from "../../types";
+import { BoweryAutomation } from "../../types/boweryAutomation.type";
 
 let ClientCreationData = function (prefix: string, title: string, firstName: string, 
     middleInitial: string, lastName: string, clientSuffix: string, clientCompanyName: string, 
