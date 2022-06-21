@@ -2,7 +2,7 @@ import { numberWithCommas } from "../../../utils/numbers.utils";
 import { isDateHasCorrectFormat } from "../../../utils/date.utils";
 import BaseActions from "../base/base.actions";
 import CommercialRentRollSharedComponentPage from "../../pages/shared_components/commercialRentRoll.shared.page";
-import { BoweryReports } from "../../types";
+import { BoweryReports } from "../../types/boweryReports.type";
 import { normalizeText } from "../../../utils/string.utils";
 
 class CommercialRentRollSharedComponent<T extends CommercialRentRollSharedComponentPage> extends BaseActions {
@@ -58,12 +58,12 @@ class CommercialRentRollSharedComponent<T extends CommercialRentRollSharedCompon
         return this;
     }
 
-    verifyUseCellByRow(useText: BoweryReports.CommercialUnitsUseTexts | string, rowNumber = 0): this {
+    verifyUseCellByRow(useText: BoweryReports.CommercialUnits.UseTexts | string, rowNumber = 0): this {
         this.Page.useCells.eq(rowNumber).should("have.text", useText).and("have.class", "readOnly");
         return this;
     }
 
-    verifyUseCells(useTexts: Array<BoweryReports.CommercialUnitsUseTexts>): this {
+    verifyUseCells(useTexts: Array<BoweryReports.CommercialUnits.UseTexts>): this {
         useTexts.forEach((text, index) => {
             this.verifyUseCellByRow(text, index);
         });

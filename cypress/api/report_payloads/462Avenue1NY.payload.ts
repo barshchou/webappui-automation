@@ -1,4 +1,4 @@
-import { BoweryAutomation } from "../../types";
+import { BoweryAutomation } from "../../types/boweryAutomation.type";
 
 export const createPayload = (reportCreationData: BoweryAutomation.ReportCreationData, userID: string) => {
     return {

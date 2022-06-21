@@ -2,7 +2,7 @@ import { addMatchImageSnapshotCommand } from 'cypress-image-snapshot/command';
 import "cypress-file-upload";
 import "cypress-localstorage-commands";
 import mapKeysUtils from '../utils/mapKeys.utils';
-import { BoweryAutomation } from '../types';
+import { BoweryAutomation } from '../types/boweryAutomation.type';
 
 const _map = new Map();
 
