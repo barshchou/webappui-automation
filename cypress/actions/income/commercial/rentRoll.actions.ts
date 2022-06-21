@@ -83,7 +83,7 @@ class CommercialRentRollActions extends CommercialRentRollSharedComponent<typeof
     }
 
     pressDeleteLeaseStatusByRow(rowNumber = 0): this {
-        this.Page.leaseStatusCells.eq(rowNumber).trigger("keydown", { keyCode: 46 })
+        this.Page.leaseStatusCells.eq(rowNumber).click().trigger("keydown", { keyCode: 46 })
             .should("have.text", "");
         return this;
     }
@@ -166,7 +166,7 @@ class CommercialRentRollActions extends CommercialRentRollSharedComponent<typeof
 
     enterListPerSF(leaseStatuses: Array<BoweryReports.LeaseStatus>, perSFList: Array<number>): this {
         for (let i = 0; i < leaseStatuses.length; i++) {
-            if (leaseStatuses[i] === "Vacant") {
+            if (leaseStatuses[i] === "Vacant" || perSFList[i] === 0) {
                 continue;
             }
             this.enterRentPerSFAnnuallyByRowNumber(perSFList[i], i);
@@ -229,6 +229,12 @@ class CommercialRentRollActions extends CommercialRentRollSharedComponent<typeof
         }
         const textToBe = numberWithCommas((totalAnnualRent / totalSF).toFixed(2));
         this.Page.rentPerSFAnnuallyTotal.should("have.text", `$${textToBe}`);
+        return this;
+    }
+
+    verifyLeaseStatusNeedsToBeFilled(rowNumber = 0): CommercialRentRollActions {
+        this.Page.leaseStatusCells.eq(rowNumber).should("have.css", "box-shadow",
+            "rgb(211, 65, 65) 0px 0px 0px 1px");
         return this;
     }
 

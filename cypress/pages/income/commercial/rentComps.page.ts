@@ -65,6 +65,14 @@ class CommercialRentCompsPage extends BasePage {
 
     get draggableUnsortedPlaceholder() {return cy.xpath(`//*[@data-qa="unsorted_group"]//td[contains(text(), 'Drop any rent roll unit here')]`);}
 
+    get computedSubjectColumn() {return cy.get("[data-qa=computed-panel] [data-qa='0-column']");}
+
+    get computedSubjectMinCell() {return this.computedSubjectColumn.find("[data-qa='00-cell']");}
+
+    get computedSubjectAvgCell() {return this.computedSubjectColumn.find("[data-qa='01-cell']");}
+
+    get computedSubjectMaxCell() {return this.computedSubjectColumn.find("[data-qa='02-cell']");}
+
 }
 
 export default new CommercialRentCompsPage();
