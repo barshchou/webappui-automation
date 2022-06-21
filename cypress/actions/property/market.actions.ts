@@ -1,10 +1,10 @@
-import BaseActions from "../base/base.actions";
 import marketPage from "../../pages/property/market.page";
 import { getQuarter, getYearFromDate, isCorrectQuarter } from "../../../utils/date.utils";
 import { BoweryReports } from "../../types";
 import { isStringContainSubstring } from "../../../utils/string.utils";
+import BaseActionsExt from "../base/base.actions.ext";
 
-class MarketActions extends BaseActions{
+class MarketActions extends BaseActionsExt<typeof marketPage>{
     readonly errorRetrieveFileMessage = "Cannot retrieve file. Contact Research team.";
 
     readonly finalDocumentNamePart = "FINAL";
@@ -200,4 +200,4 @@ class MarketActions extends BaseActions{
     }
 }
 
-export default new MarketActions();
+export default new MarketActions(marketPage);
