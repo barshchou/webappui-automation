@@ -1,5 +1,5 @@
 import Enums from "../../../../../enums/enums";
-import { BoweryReports } from "../../../../../types";
+import { BoweryReports } from "../../../../../types/boweryReports.type";
 import ReportDataCreator from "../../../../data_creator/reportData.creator";
 
 const reportCreationFixture = () => {
@@ -26,7 +26,7 @@ const _rentCompFields: BoweryReports.RentCompField[] = [
     },
     {
         name: "use",
-        value: "office" as BoweryReports.CommercialUnitsUseValues,
+        value: "office" as BoweryReports.CommercialUnits.UseValues,
         type: "dropdown"
     },
     {
