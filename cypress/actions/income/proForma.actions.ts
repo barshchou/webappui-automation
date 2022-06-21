@@ -12,12 +12,12 @@ import enums from "../../enums/enums";
 
 class ProFormaActions extends BaseActionsExt<typeof proFormaPage> {
 
-    verifyOperatingExpenseRatio(textToBe: string, categoryName: string): this {
+    verifyOperatingExpenseRatio(textToBe: string, categoryName: string): ProFormaActions {
         proFormaPage.categoryCellTotal(categoryName).should("have.text", textToBe);
         return this;
     }
 
-    verifyCommercialUseVCLossPerUnit(useText: string, numberOfResUnits: number): this {
+    verifyCommercialUseVCLossPerUnit(useText: string, numberOfResUnits: number): ProFormaActions {
         proFormaPage.getCommercialUseVCLossTotal(useText).invoke("text").then(totalText => {
             const totalNumber = getNumberFromMinusDollarNumberWithCommas(totalText);
             const perUnitTextToBe = `-$${numberWithCommas(totalNumber / numberOfResUnits)}`;
@@ -26,12 +26,12 @@ class ProFormaActions extends BaseActionsExt<typeof proFormaPage> {
         return this;
     }
 
-    verifyCommercialUseVCLossTotal(useText: string, totalToBe: string): this {
+    verifyCommercialUseVCLossTotal(useText: string, totalToBe: string): ProFormaActions {
         proFormaPage.getCommercialUseVCLossTotal(useText).should("have.text", totalToBe);
         return this;
     }
 
-    verifyCommercialUseVCPerSF(useText: string, grossBuildingArea: number): this {
+    verifyCommercialUseVCPerSF(useText: string, grossBuildingArea: number): ProFormaActions {
         proFormaPage.getCommercialUseVCLossTotal(useText).invoke("text").then(totalText => {
             const totalNumber = getNumberFromMinusDollarNumberWithCommas(totalText);
             const perSFTextToBe = `-$${numberWithCommas((totalNumber / grossBuildingArea).toFixed(2))}`;
@@ -40,17 +40,17 @@ class ProFormaActions extends BaseActionsExt<typeof proFormaPage> {
         return this;
     }
 
-    verifyResidentialVCLossLabel(categoryName: string, vcLossValue: number): this {
+    verifyResidentialVCLossLabel(categoryName: string, vcLossValue: number): ProFormaActions {
         proFormaPage.residentialVCLossLabelCell(categoryName).should("contain.text", `${vcLossValue.toFixed(2)}%`);
         return this;
     }
 
-    verifyResidentialVCLossTotal(categoryName: string, totalToBe: string): this {
+    verifyResidentialVCLossTotal(categoryName: string, totalToBe: string): ProFormaActions {
         proFormaPage.residentialVCLossTotal(categoryName).should("have.text", totalToBe);
         return this;
     }
 
-    verifyResidentialVCLossPerSF(categoryName: string, grossBuildingArea: number): this {
+    verifyResidentialVCLossPerSF(categoryName: string, grossBuildingArea: number): ProFormaActions {
         proFormaPage.residentialVCLossTotal(categoryName).invoke("text").then(totalText => {
             const totalNumber = getNumberFromMinusDollarNumberWithCommas(totalText);
             const perSFTextToBe = `-$${numberWithCommas((totalNumber / grossBuildingArea).toFixed(2))}`;
@@ -59,7 +59,7 @@ class ProFormaActions extends BaseActionsExt<typeof proFormaPage> {
         return this;
     }
 
-    verifyResidentialVCLossPerUnit(categoryName: string, numberOfUnits: number): this {
+    verifyResidentialVCLossPerUnit(categoryName: string, numberOfUnits: number): ProFormaActions {
         proFormaPage.residentialVCLossTotal(categoryName).invoke("text").then(totalText => {
             const totalNumber = getNumberFromMinusDollarNumberWithCommas(totalText);
             const perUnitTextToBe = `-$${numberWithCommas(Math.round(totalNumber / numberOfUnits))}`;
@@ -68,27 +68,27 @@ class ProFormaActions extends BaseActionsExt<typeof proFormaPage> {
         return this;
     }
 
-    clickIncludeNOIComparisonCheckbox(): this {
+    clickIncludeNOIComparisonCheckbox(): ProFormaActions {
         proFormaPage.includeNOIComparisonCheckbox.click();
         return this;
     }
 
-    verifyCategoryTotal(totalToBe: string, categoryName: string): this {
+    verifyCategoryTotal(totalToBe: string, categoryName: string): ProFormaActions {
         proFormaPage.categoryCellTotal(categoryName).should("have.text", totalToBe);
         return this;
     }
 
-    verifyCategoryPSFTotal(totalToBe: string, categoryName: string): this {
+    verifyCategoryPSFTotal(totalToBe: string, categoryName: string): ProFormaActions {
         proFormaPage.categoryPSFTotal(categoryName).should("have.text", totalToBe);
         return this;
     }
 
-    verifyCategoryPerUnitTotal(totalToBe: string, categoryName: string): this {
+    verifyCategoryPerUnitTotal(totalToBe: string, categoryName: string): ProFormaActions {
         proFormaPage.categoryPerUnitTotal(categoryName).should("have.text", totalToBe);
         return this;
     }
 
-    verifyCategoryRow(rowData: BoweryReports.ProFormaAnyIncome, categoryName: string): this {
+    verifyCategoryRow(rowData: BoweryReports.ProFormaAnyIncome, categoryName: string): ProFormaActions {
         this.verifyCategoryTotal(rowData.total, categoryName)
             .verifyCategoryPSFTotal(rowData.perSF, categoryName)
             .verifyCategoryPerUnitTotal(rowData.perUnit, categoryName);
@@ -120,7 +120,6 @@ class ProFormaActions extends BaseActionsExt<typeof proFormaPage> {
                 proFormaPage.getCategoryElementByType(enums.PRO_FORMA_TYPES.waterAndSewer, "label").should('not.exist');
                 proFormaPage.getCategoryElementByType(enums.PRO_FORMA_TYPES.utilities, "label").should('be.visible');
         }
-
         return this;
     }
 
