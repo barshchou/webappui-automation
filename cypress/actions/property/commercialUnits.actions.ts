@@ -49,14 +49,14 @@ class CommercialUnitsActions extends BaseActionsExt<typeof commercialUnitsPage> 
         return this;
     }
 
-    private clickRadioOrCheckbox(group: BoweryReports.CommercialUnitsGroups,
+    private clickRadioOrCheckbox(group: BoweryReports.CommercialUnits.Groups,
         value: BoweryReports.CommercialUnits.GroupsValues, index = 0): CommercialUnitsActions {
         commercialUnitsPage.getRadioButtonByValueAndUnitIndex(group, value, index).click();
         return this;
     }
 
-    clickRadioButtonByValueAndUnitIndex(group: BoweryReports.CommercialUnitsGroups,
-        value: BoweryReports.CommercialUnits.GroupsValues, index = 0): CommercialUnitsActions {
+    clickRadioButtonByValueAndUnitIndex(group: BoweryReports.CommercialUnits.Groups,
+        value: BoweryReports.CommercialUnits.GroupsValues, index = 0): this {
         this.clickRadioOrCheckbox(group, value, index)
             .verifyRadioIsChecked(group, value, index);
         if (value === "other") {
@@ -66,7 +66,7 @@ class CommercialUnitsActions extends BaseActionsExt<typeof commercialUnitsPage> 
         return this;
     }
 
-    clickCheckboxToUncheck(group: BoweryReports.CommercialUnitsGroups, value: BoweryReports.CommercialUnits.GroupsValues,
+    clickCheckboxToUncheck(group: BoweryReports.CommercialUnits.Groups, value: BoweryReports.CommercialUnits.GroupsValues,
         index = 0): CommercialUnitsActions {
         this.clickRadioOrCheckbox(group, value, index)
             .verifyRadioIsNotChecked(group, value, index);
@@ -76,12 +76,12 @@ class CommercialUnitsActions extends BaseActionsExt<typeof commercialUnitsPage> 
         return this;
     }
 
-    verifyRadioIsChecked(group: BoweryReports.CommercialUnitsGroups, value: BoweryReports.CommercialUnits.GroupsValues, index = 0): CommercialUnitsActions {
+    verifyRadioIsChecked(group: BoweryReports.CommercialUnits.Groups, value: BoweryReports.CommercialUnits.GroupsValues, index = 0): CommercialUnitsActions {
         commercialUnitsPage.getRadioButtonByValueAndUnitIndex(group, value, index).parent().should("have.class", "Mui-checked");
         return this;
     }
 
-    verifyRadioIsNotChecked(group: BoweryReports.CommercialUnitsGroups, value: BoweryReports.CommercialUnits.GroupsValues, index = 0): CommercialUnitsActions {
+    verifyRadioIsNotChecked(group: BoweryReports.CommercialUnits.Groups, value: BoweryReports.CommercialUnits.GroupsValues, index = 0): CommercialUnitsActions {
         commercialUnitsPage.getRadioButtonByValueAndUnitIndex(group, value, index).parent()
             .should("not.have.class", "Mui-checked");
         return this;
@@ -133,18 +133,18 @@ class CommercialUnitsActions extends BaseActionsExt<typeof commercialUnitsPage> 
         return this;
     }
 
-    verifyCommercialUnitSFDiscussionTextAreaNotContains(text: BoweryReports.CommercialUnitsUseValues): CommercialUnitsActions {
+    verifyCommercialUnitSFDiscussionTextAreaNotContains(text: BoweryReports.CommercialUnits.UseValues): CommercialUnitsActions {
         commercialUnitsPage.commercialUnitSFDiscussionTextArea.should("not.contain.text", text);
         return this;
     }
 
-    enterOtherValueByGroupName(groupName: BoweryReports.CommercialUnitsGroups, value: string, index = 0): CommercialUnitsActions {
+    enterOtherValueByGroupName(groupName: BoweryReports.CommercialUnits.Groups, value: string, index = 0): CommercialUnitsActions {
         commercialUnitsPage.getOtherFieldByGroup(groupName, index).clear().type(value);
         this.verifyOtherValueByGroupName(groupName, value);
         return this;
     }
 
-    verifyOtherValueByGroupName(groupName: BoweryReports.CommercialUnitsGroups, value: string, index = 0): CommercialUnitsActions {
+    verifyOtherValueByGroupName(groupName: BoweryReports.CommercialUnits.Groups, value: string, index = 0): CommercialUnitsActions {
         commercialUnitsPage.getOtherFieldByGroup(groupName, index).should("have.value", value);
         return this;
     }

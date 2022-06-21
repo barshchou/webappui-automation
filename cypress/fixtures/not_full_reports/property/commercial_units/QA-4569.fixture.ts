@@ -9,7 +9,7 @@ const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreat
 });
 
 type groupValue = {
-    group:BoweryReports.CommercialUnitsGroups, 
+    group:BoweryReports.CommercialUnits.Groups, 
     value: BoweryReports.CommercialUnits.GroupsValues,
 }
 

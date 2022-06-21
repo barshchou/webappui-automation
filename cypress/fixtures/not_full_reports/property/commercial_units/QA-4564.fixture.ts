@@ -8,9 +8,9 @@ const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreat
     conclusionValue: Enums.VALUE_CONCLUSION_TYPE.AS_STABILIZED
 });
 
-const _facadeValues: Array<BoweryReports.CommercialUnitsFacadeValues> = [ "plate glass", "other" ];
+const _facadeValues: Array<BoweryReports.CommercialUnits.FacadeValues> = [ "plate glass", "other" ];
 
-const _groupName: BoweryReports.CommercialUnitsGroups = "Facade";
+const _groupName: BoweryReports.CommercialUnits.Groups = "Facade";
 
 export default {
     reportCreationData: _reportCreationData,

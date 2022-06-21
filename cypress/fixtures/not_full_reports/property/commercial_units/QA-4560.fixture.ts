@@ -8,8 +8,8 @@ const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreat
     conclusionValue: Enums.VALUE_CONCLUSION_TYPE.AS_COMPLETE
 });
 
-const _locationValues: Array<BoweryReports.CommercialUnitsLocationValues> = [ "corner", "mid-block", "through-lot" ];
-const _groupName: BoweryReports.CommercialUnitsGroups = "Location";
+const _locationValues: Array<BoweryReports.CommercialUnits.LocationValues> = [ "corner", "mid-block", "through-lot" ];
+const _groupName: BoweryReports.CommercialUnits.Groups = "Location";
 
 export default {
     reportCreationData: _reportCreationData,
