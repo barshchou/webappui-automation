@@ -1,89 +1,51 @@
-import BaseActions from "../base/base.actions";
 import residentialUnitsPage from "../../pages/property/residentialUnits.page";
+import BaseActionsExt from "../base/base.actions.ext";
 
-class ResidentialUnitsActions extends BaseActions{
+class ResidentialUnitsActions extends BaseActionsExt<typeof residentialUnitsPage>{
 
-    /**
-     *
-     * @param {string} value
-     * @returns {ResidentialUnitsActions}
-     */
-    chooseKitchenCondition(value) {
+    chooseKitchenCondition(value: string): ResidentialUnitsActions {
         residentialUnitsPage.kitchenConditionRadio.check(value);
         this.verifyRadioIsChecked(value);
         return this;
     }
 
-    /**
-     * @private
-     * @param {string} value
-     */
-    verifyRadioIsChecked(value) {
+    private verifyRadioIsChecked(value: string) {
         residentialUnitsPage.getElementToCheckRadio(value).should("exist");
     }
 
-    /**
-     *
-     * @param {string} value
-     * @returns {ResidentialUnitsActions}
-     */
-    chooseKitchenFlooring(value) {
+    chooseKitchenFlooring(value: string): ResidentialUnitsActions {
         residentialUnitsPage.kitchenFlooring.check(value);
         this.verifyRadioIsChecked(value);
         return this;
     }
 
-    /**
-     *
-     * @param {string} value
-     * @returns {ResidentialUnitsActions}
-     */
-    chooseCounterTops(value) {
+    chooseCounterTops(value: string): ResidentialUnitsActions {
         residentialUnitsPage.counterTops.check(value);
         this.verifyRadioIsChecked(value);
         return this;
     }
 
-    /**
-     *
-     * @param {string} value
-     * @returns {ResidentialUnitsActions}
-     */
-    chooseCabinetry(value) {
+    chooseCabinetry(value: string): ResidentialUnitsActions {
         residentialUnitsPage.cabinetry.check(value);
         this.verifyRadioIsChecked(value);
         return this;
     }
 
-    /**
-     *
-     * @param {string} value
-     * @returns {ResidentialUnitsActions}
-     */
-    chooseStovetops(value) {
+    chooseStovetops(value: string): ResidentialUnitsActions {
         residentialUnitsPage.stovetops.check(value);
         this.verifyRadioIsChecked(value);
         return this;
     }
 
-    /**
-     *
-     * @param {string} value
-     * @returns {ResidentialUnitsActions}
-     */
-    chooseRefrigerators(value) {
+    chooseRefrigerators(value: string): ResidentialUnitsActions {
         residentialUnitsPage.refrigerators.check(value);
         this.verifyRadioIsChecked(value);
         return this;
     }
 
-    /**
-     *
-     * @param {Readonly<{condition: string, flooring: string, counterTops: string, cabinetry: string, stovetops: string,
-     * refrigerators: string}>} kitchenConditionData
-     * @returns {ResidentialUnitsActions}
-     */
-    fillKitchenDescription(kitchenConditionData) {
+    fillKitchenDescription(kitchenConditionData: Readonly<{condition: string, flooring: string,
+        counterTops: string, cabinetry: string, 
+        stovetops: string, refrigerators: string}>): ResidentialUnitsActions {
         this.chooseKitchenCondition(kitchenConditionData.condition)
             .chooseKitchenFlooring(kitchenConditionData.flooring)
             .chooseCounterTops(kitchenConditionData.counterTops)
@@ -93,13 +55,9 @@ class ResidentialUnitsActions extends BaseActions{
         return this;
     }
 
-    /**
-     *
-     * @param {Readonly<{condition: string, flooring: string, counterTops: string, cabinetry: string, stovetops: string,
-     * refrigerators: string}>} bathroomConditionData
-     * @returns {ResidentialUnitsActions}
-     */
-    verifyKitchenConditionCommentary(bathroomConditionData) {
+    verifyKitchenConditionCommentary(bathroomConditionData: Readonly<{condition: string, flooring: string, 
+        counterTops: string, cabinetry: string, 
+        stovetops: string, refrigerators: string}>): ResidentialUnitsActions {
         const commentaryObject = {
             condition: bathroomConditionData.condition.toLowerCase(),
             flooring: bathroomConditionData.flooring.toLowerCase(),
@@ -113,13 +71,8 @@ class ResidentialUnitsActions extends BaseActions{
         return this;
     }
 
-    /**
-     * @private
-     * @param {{condition: string, flooring: string, counterTops: string, cabinetry: string, stovetops: string,
-     * refrigerators: string}} bathroomConditionData
-     * @returns {string}
-     */
-    getKitchenConditionCommentary(bathroomConditionData) {
+     private getKitchenConditionCommentary(bathroomConditionData: {condition: string, flooring: string,
+        counterTops: string, cabinetry: string, stovetops: string, refrigerators: string}): string {
         return `The units will feature ${bathroomConditionData.condition} ` +
             "quality kitchen finishes relative to typical units in similar walk-up buildings in the subject's area. " +
             `The units will contain ${bathroomConditionData.flooring} flooring, ${bathroomConditionData.counterTops} ` +
@@ -127,67 +80,38 @@ class ResidentialUnitsActions extends BaseActions{
             ` and ${bathroomConditionData.refrigerators} refrigerators.`;
     }
 
-    /**
-     *
-     * @param {string} value
-     * @returns {ResidentialUnitsActions}
-     */
-    chooseBathroomCondition(value) {
+    chooseBathroomCondition(value: string): ResidentialUnitsActions {
         residentialUnitsPage.bathroomCondition.check(value);
         this.verifyRadioIsChecked(value);
         return this;
     }
 
-    /**
-     *
-     * @param {string} value
-     * @returns {ResidentialUnitsActions}
-     */
-    chooseBathroomFlooring(value) {
+    chooseBathroomFlooring(value: string): ResidentialUnitsActions {
         residentialUnitsPage.bathroomFlooring.check(value);
         this.verifyRadioIsChecked(value);
         return this;
     }
 
-    /**
-     *
-     * @param {string} value
-     * @returns {ResidentialUnitsActions}
-     */
-    chooseBathroomTub(value) {
+    chooseBathroomTub(value: string): ResidentialUnitsActions {
         residentialUnitsPage.bathroomTub.check(value);
         this.verifyRadioIsChecked(value);
         return this;
     }
 
-    /**
-     *
-     * @param {string} value
-     * @returns {ResidentialUnitsActions}
-     */
-    chooseSink(value) {
+    chooseSink(value: string): ResidentialUnitsActions {
         residentialUnitsPage.sink.check(value);
         this.verifyRadioIsChecked(value);
         return this;
     }
 
-    /**
-     *
-     * @param {string} value
-     * @returns {ResidentialUnitsActions}
-     */
-    chooseToilet(value) {
+    chooseToilet(value: string): ResidentialUnitsActions {
         residentialUnitsPage.toilet.check(value);
         this.verifyRadioIsChecked(value);
         return this;
     }
 
-    /**
-     *
-     * @param {Readonly<{condition: string, flooring: string, tub: string, sink: string, toilet: string}>} bathroomConditionData
-     * @returns {ResidentialUnitsActions}
-     */
-    fillBathroomDescription(bathroomConditionData) {
+    fillBathroomDescription(bathroomConditionData: Readonly<{condition: string, flooring: string, 
+        tub: string, sink: string, toilet: string}>): ResidentialUnitsActions {
         this.chooseBathroomCondition(bathroomConditionData.condition)
             .chooseBathroomFlooring(bathroomConditionData.flooring)
             .chooseBathroomTub(bathroomConditionData.tub)
@@ -196,11 +120,8 @@ class ResidentialUnitsActions extends BaseActions{
         return this;
     }
 
-    /**
-     * @param {Readonly<{condition: string, flooring: string, tub: string, sink: string, toilet: string}>} bathroomConditionData
-     * @returns {ResidentialUnitsActions}
-     */
-    verifyBathroomCommentary(bathroomConditionData) {
+    verifyBathroomCommentary(bathroomConditionData: Readonly<{condition: string, flooring: string, 
+        tub: string, sink: string, toilet: string}>): ResidentialUnitsActions {
         const commentaryObject = {
             condition: bathroomConditionData.condition.toLowerCase(),
             flooring: bathroomConditionData.flooring.toLowerCase(),
@@ -213,68 +134,39 @@ class ResidentialUnitsActions extends BaseActions{
         return this;
     }
 
-    /**
-     * @private
-     * @param {{condition: string, flooring: string, tub: string, sink: string, toilet: string}} bathroomConditionData
-     * @returns {string}
-     */
-    getBathroomCommentary(bathroomConditionData) {
+   
+    private getBathroomCommentary(bathroomConditionData: {condition: string, flooring: string, tub: string, sink: string, toilet: string}): string {
         return `The units will feature ${bathroomConditionData.condition} quality bathroom finishes relative to typical ` +
             `units in similar walk-up buildings in the subject's area. The units will contain ${bathroomConditionData.flooring} flooring,` +
             ` ${bathroomConditionData.tub} tubs, ${bathroomConditionData.sink} sinks, and ${bathroomConditionData.toilet} toilets.`;
     }
 
-    /**
-     *
-     * @param {string} value
-     * @returns {ResidentialUnitsActions}
-     */
-    chooseBedroomCondition(value) {
+    chooseBedroomCondition(value: string): ResidentialUnitsActions {
         residentialUnitsPage.bedroomCondition.check(value);
         this.verifyRadioIsChecked(value);
         return this;
     }
 
-    /**
-     *
-     * @param {string} value
-     * @returns {ResidentialUnitsActions}
-     */
-    chooseBedroomFlooring(value) {
+    chooseBedroomFlooring(value: string): ResidentialUnitsActions {
         residentialUnitsPage.bedroomFlooring.check(value);
         this.verifyRadioIsChecked(value);
         return this;
     }
 
-    /**
-     *
-     * @param {string} value
-     * @returns {ResidentialUnitsActions}
-     */
-    chooseBedroomWalls(value) {
+    chooseBedroomWalls(value: string): ResidentialUnitsActions {
         residentialUnitsPage.bedroomWalls.check(value);
         this.verifyRadioIsChecked(value);
         return this;
     }
 
-    /**
-     *
-     * @param {Readonly<{condition: string, flooring: string, walls: string}>} bedroomConditionData
-     * @returns {ResidentialUnitsActions}
-     */
-    fillBedroomDescription(bedroomConditionData) {
+    fillBedroomDescription(bedroomConditionData: Readonly<{condition: string, flooring: string, walls: string}>): ResidentialUnitsActions {
         this.chooseBedroomCondition(bedroomConditionData.condition)
             .chooseBedroomFlooring(bedroomConditionData.flooring)
             .chooseBedroomWalls(bedroomConditionData.walls);
         return this;
     }
 
-    /**
-     *
-     * @param {Readonly<{condition: string, flooring: string, walls: string}>} bedroomConditionData
-     * @returns {ResidentialUnitsActions}
-     */
-    verifyBedroomCommentary(bedroomConditionData) {
+    verifyBedroomCommentary(bedroomConditionData: Readonly<{condition: string, flooring: string, walls: string}>): ResidentialUnitsActions {
         const commentaryObject = {
             condition: bedroomConditionData.condition.toLowerCase(),
             flooring: bedroomConditionData.flooring.toLowerCase(),
@@ -284,68 +176,38 @@ class ResidentialUnitsActions extends BaseActions{
         return this;
     }
 
-    /**
-     * @private
-     * @param {{condition: string, flooring: string, walls: string}} bedroomConditionData
-     * @returns {string}
-     */
-    getBedroomCommentary(bedroomConditionData) {
+    private getBedroomCommentary(bedroomConditionData: {condition: string, flooring: string, walls: string}): string {
         return `The units will feature ${bedroomConditionData.condition} quality ` +
             "bedroom finishes relative to typical units in similar walk-up buildings in the subject's area. " +
             `The units will contain ${bedroomConditionData.flooring} flooring, and ${bedroomConditionData.walls} walls.`;
     }
 
-    /**
-     *
-     * @param {string} value
-     * @returns {ResidentialUnitsActions}
-     */
-    chooseLivingRoomCondition(value) {
+    chooseLivingRoomCondition(value: string): ResidentialUnitsActions {
         residentialUnitsPage.livingRoomCondition.check(value);
         this.verifyRadioIsChecked(value);
         return  this;
     }
 
-    /**
-     *
-     * @param {string} value
-     * @returns {ResidentialUnitsActions}
-     */
-    chooseLivingRoomFlooring(value) {
+    chooseLivingRoomFlooring(value: string): ResidentialUnitsActions {
         residentialUnitsPage.livingRoomFlooring.check(value);
         this.verifyRadioIsChecked(value);
         return this;
     }
 
-    /**
-     *
-     * @param {string} value
-     * @returns {ResidentialUnitsActions}
-     */
-    chooseLivingRoomWalls(value) {
+    chooseLivingRoomWalls(value: string): ResidentialUnitsActions {
         residentialUnitsPage.livingRoomWalls.check(value);
         this.verifyRadioIsChecked(value);
         return this;
     }
 
-    /**
-     *
-     * @param {Readonly<{condition: string, flooring: string, walls: string}>} livingRoomConditionData
-     * @returns {ResidentialUnitsActions}
-     */
-    fillLivingRoomDescription(livingRoomConditionData) {
+    fillLivingRoomDescription(livingRoomConditionData: Readonly<{condition: string, flooring: string, walls: string}>): ResidentialUnitsActions {
         this.chooseLivingRoomCondition(livingRoomConditionData.condition)
             .chooseLivingRoomFlooring(livingRoomConditionData.flooring)
             .chooseLivingRoomWalls(livingRoomConditionData.walls);
         return this;
     }
 
-    /**
-     *
-     * @param {Readonly<{condition: string, flooring: string, walls: string}>} livingRoomCondition
-     * @returns {ResidentialUnitsActions}
-     */
-    verifyLivingRoomCommentary(livingRoomCondition) {
+    verifyLivingRoomCommentary(livingRoomCondition: Readonly<{condition: string, flooring: string, walls: string}>): ResidentialUnitsActions {
         const commentaryObject = {
             condition: livingRoomCondition.condition.toLowerCase(),
             flooring: livingRoomCondition.flooring.toLowerCase(),
@@ -355,72 +217,41 @@ class ResidentialUnitsActions extends BaseActions{
         return this;
     }
 
-    /**
-     * @private
-     * @param {{condition: string, flooring: string, walls: string}} livingRoomCondition
-     * @returns {string}
-     */
-    getLivingRoomCommentary(livingRoomCondition) {
+    private getLivingRoomCommentary(livingRoomCondition: {condition: string, flooring: string, walls: string}): string {
         return `The units will feature ${livingRoomCondition.condition} quality ` +
             "living room finishes relative to typical units in similar walk-up buildings in the subject's area. " +
             `The units will contain ${livingRoomCondition.flooring} flooring, and ${livingRoomCondition.walls} walls.`;
     }
 
-
-    /**
-     *
-     * @param {number | string} number
-     * @returns {ResidentialUnitsActions}
-     */
-    enterNumberOfStairs(number) {
-        residentialUnitsPage.numberOfStairsInput.clear().type(number).should("have.value", number);
+    enterNumberOfStairs(number: number | string): ResidentialUnitsActions {
+        residentialUnitsPage.numberOfStairsInput.clear().type(`${number}`).should("have.value", number);
         return this;
     }
 
-    /**
-     *
-     * @param {string} value
-     * @returns {ResidentialUnitsActions}
-     */
-    chooseStairsStart(value) {
+    chooseStairsStart(value: string): ResidentialUnitsActions {
         residentialUnitsPage.stairsStart.check(value);
         this.verifyRadioIsChecked(value);
         return this;
     }
 
-    /**
-     *
-     * @param {string} value
-     * @returns {ResidentialUnitsActions}
-     */
-    chooseStairsEnd(value) {
+    chooseStairsEnd(value: string): ResidentialUnitsActions {
         residentialUnitsPage.stairsEnd.check(value);
         this.verifyRadioIsChecked(value);
         return this;
     }
 
-    /**
-     *
-     * @param {Readonly<{numberOfStairs: string | number, stairsStart: string, stairsEnd: string}>} stairsData
-     * @returns {ResidentialUnitsActions}
-     */
-    fillStairsDescription(stairsData) {
+    fillStairsDescription(stairsData: Readonly<{numberOfStairs: string | number, stairsStart: string, stairsEnd: string}>): ResidentialUnitsActions {
         this.enterNumberOfStairs(stairsData.numberOfStairs)
             .chooseStairsStart(stairsData.stairsStart)
             .chooseStairsEnd(stairsData.stairsEnd);
         return this;
     }
 
-    /**
-     *
-     * @param {string} newCommentary
-     * @returns {ResidentialUnitsActions}
-     */
-    editStairsCommentary(newCommentary) {
+    editStairsCommentary(newCommentary: string): ResidentialUnitsActions {
         residentialUnitsPage.stairsCommentaryEditButton.click();
         residentialUnitsPage.stairsCommentaryInput.clear().type(newCommentary).should("have.text", newCommentary);
         return this;
     }
 }
 
-export default new ResidentialUnitsActions();
+export default new ResidentialUnitsActions(residentialUnitsPage);

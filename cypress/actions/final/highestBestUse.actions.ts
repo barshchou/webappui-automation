@@ -1,179 +1,94 @@
-import BaseActions from "../base/base.actions";
 import highestBestUsePage from "../../pages/final/highestBestUse.page";
 import { numberWithCommas } from "../../../utils/numbers.utils";
+import BaseActionsExt from "../base/base.actions.ext";
 
-class HighestBestUseActions extends BaseActions {
+class HighestBestUseActions extends BaseActionsExt<typeof highestBestUsePage> {
 
-    /**
-     *
-     * @param {string} name
-     * @param index
-     * @returns {HighestBestUseActions}
-     */
-    verifyZoneNameByRow(name, index = 0) {
+    verifyZoneNameByRow(name: string, index = 0): HighestBestUseActions {
         highestBestUsePage.zonesCells.eq(index).should("have.text", name);
         return this;
     }
 
-    /**
-     *
-     * @param {string} uses
-     * @param {number} index
-     * @returns {HighestBestUseActions}
-     */
-    verifyAllowableUsesByRow(uses, index = 0) {
+    verifyAllowableUsesByRow(uses: string, index = 0): HighestBestUseActions {
         highestBestUsePage.allowableUsesCells.eq(index).should("have.text", uses);
         return this;
     }
 
-    /**
-     *
-     * @param {string} area
-     * @param {number} index
-     * @returns {HighestBestUseActions}
-     */
-    verifySiteAreaByRow(area, index = 0) {
+    verifySiteAreaByRow(area: string | number, index = 0): HighestBestUseActions {
         area = typeof area === "string" ? area : numberWithCommas(area);
         highestBestUsePage.siteAreaCells.eq(index).should("have.text", area);
         return this;
     }
 
-    /**
-     *
-     * @param {string} area
-     * @param {number} index
-     * @returns {HighestBestUseActions}
-     */
-    verifyZoningAreaByRow(area, index = 0) {
+    verifyZoningAreaByRow(area: string | number, index = 0): HighestBestUseActions {
         area = typeof area === "string" ? area : numberWithCommas(area);
         highestBestUsePage.zoningFloorAreaCells.eq(index).should("have.text", area);
         return this;
     }
 
-    /**
-     *
-     * @returns {HighestBestUseActions}
-     */
-    clickPhysicallyTab() {
+    clickPhysicallyTab(): HighestBestUseActions {
         highestBestUsePage.physicallyTab.click();
         return this;
     }
 
-    /**
-     *
-     * @param {number | string} frontage
-     * @returns {HighestBestUseActions}
-     */
-    verifyPropertyFrontage(frontage) {
+    verifyPropertyFrontage(frontage: number | string): HighestBestUseActions {
         highestBestUsePage.propertyFrontage.should("have.text", `${frontage} ft`);
         return this;
     }
 
-    /**
-     *
-     * @param {string} condition
-     * @returns {HighestBestUseActions}
-     */
-    verifyPropertyCondition(condition) {
+    verifyPropertyCondition(condition: string): HighestBestUseActions {
         highestBestUsePage.propertyCondition.should("have.text", condition);
         return this;
     }
 
-    /**
-     *
-     * @param {string} bulk
-     * @returns {HighestBestUseActions}
-     */
-    verifyComplyingBulk(bulk) {
+    verifyComplyingBulk(bulk: string): HighestBestUseActions {
         highestBestUsePage.complyingBulk.should("have.text", bulk);
         return this;
     }
 
-    /**
-     *
-     * @param use
-     * @returns {HighestBestUseActions}
-     */
-    verifyConformingUse(use) {
+    verifyConformingUse(use: string): HighestBestUseActions {
         highestBestUsePage.conformingUse.should("have.text", use);
         return this;
     }
 
-    /**
-     *
-     * @param {string} type
-     * @returns {HighestBestUseActions}
-     */
-    verifyUnitType(type) {
+    verifyUnitType(type: string): HighestBestUseActions {
         highestBestUsePage.unitType.should("have.text", type);
         return this;
     }
 
-    /**
-     *
-     * @param {string | number} number
-     * @returns {HighestBestUseActions}
-     */
-    verifyUnitsNumber(number) {
+    verifyUnitsNumber(number: string | number): HighestBestUseActions {
         highestBestUsePage.unitsNumber.should("have.text", `${number}`);
         return this;
     }
 
-    /**
-     *
-     * @returns {HighestBestUseActions}
-     */
-    checkSizeWithinRangeCheckbox() {
+    checkSizeWithinRangeCheckbox(): HighestBestUseActions {
         highestBestUsePage.sizeWithinRangeCheckbox.check().should("have.value", "true");
         return this;
     }
 
-    /**
-     *
-     * @returns {HighestBestUseActions}
-     */
-    checkUtilitiesAvailableCheckbox() {
+    checkUtilitiesAvailableCheckbox(): HighestBestUseActions {
         highestBestUsePage.utilitiesAvailableCheckbox.check().should("have.value", "true");
         return this;
     }
 
-    /**
-     *
-     * @returns {HighestBestUseActions}
-     */
-    clickFinanciallyTab() {
+    clickFinanciallyTab(): HighestBestUseActions {
         highestBestUsePage.financiallyTab.click();
         return this;
     }
 
-    /**
-     *
-     * @param {string} value
-     * @returns {HighestBestUseActions}
-     */
-    checkSubjectMarketRadioValue(value) {
+    checkSubjectMarketRadioValue(value: string): HighestBestUseActions {
         highestBestUsePage.subjectMarketRadio.check(value);
         highestBestUsePage.getSubjectMarketElementToCheckRadio(value).should("exist");
         return this;
     }
 
-    /**
-     *
-     * @param {string} value
-     * @returns {HighestBestUseActions}
-     */
-    checkAsVacantBestUsePropTypeRadioValue(value) {
+    checkAsVacantBestUsePropTypeRadioValue(value: string): HighestBestUseActions {
         highestBestUsePage.asVacantBestUsePropTypeRadio.check(value);
         highestBestUsePage.getAsVacantBestUseElToCheckRadio(value).should("exist");
         return this;
     }
 
-    /**
-     *
-     * @param {string | Array<string>} types
-     * @returns {HighestBestUseActions}
-     */
-    addFinanciallyFeasiblePropertyTypesAsVacant(types) {
+    addFinanciallyFeasiblePropertyTypesAsVacant(types: string | Array<string>): HighestBestUseActions {
         highestBestUsePage.asVacantFeasiblePropTypesDropdown.click();
         if (Array.isArray(types)) {
             types.forEach(type => {
@@ -186,43 +101,24 @@ class HighestBestUseActions extends BaseActions {
         return this;
     }
 
-    /**
-     * @private
-     * @param {string} attr
-     * @returns {HighestBestUseActions}
-     */
-    checkDropdownOptionByQaAttribute(attr) {
+    private checkDropdownOptionByQaAttribute(attr: string): HighestBestUseActions {
         highestBestUsePage.getDropdownOptionByQaAttr(attr).check().should("have.value", "true");
         return this;
     }
 
-    /**
-     *
-     * @returns {HighestBestUseActions}
-     */
-    uncheckNewConstructionFeasibleCheckbox() {
+    uncheckNewConstructionFeasibleCheckbox(): HighestBestUseActions {
         highestBestUsePage.newConstructionFeasibleCheckbox.uncheck();
         highestBestUsePage.newConstructionFeasibleChecked.should("not.exist");
         return this;
     }
 
-    /**
-     *
-     * @param {string} value
-     * @returns {HighestBestUseActions}
-     */
-    checkAsImprovedBestUseRadioValue(value) {
+    checkAsImprovedBestUseRadioValue(value: string): HighestBestUseActions {
         highestBestUsePage.asImprovedBestUsePropTypeRadio.check(value);
         highestBestUsePage.getAsImprovedBestUseElToCheckRadio(value).should("exist");
         return this;
     }
 
-    /**
-     *
-     * @param {string | Array<string>} types
-     * @returns {HighestBestUseActions}
-     */
-    addFinanciallyFeasiblePropertyTypesAsImproved(types) {
+    addFinanciallyFeasiblePropertyTypesAsImproved(types: string | Array<string>): HighestBestUseActions {
         highestBestUsePage.asImprovedFeasiblePropTypesDropdown.click();
         if (Array.isArray(types)) {
             types.forEach(type => {
@@ -235,106 +131,58 @@ class HighestBestUseActions extends BaseActions {
         return this;
     }
 
-    /**
-     *
-     * @returns {HighestBestUseActions}
-     */
-    clickHighestUseTab() {
+    clickHighestUseTab(): HighestBestUseActions {
         highestBestUsePage.highestUseTab.click();
         return this;
     }
 
-    /**
-     *
-     * @param {string} type
-     * @returns {HighestBestUseActions}
-     */
-    verifyAsVacantBestUseType(type) {
+    verifyAsVacantBestUseType(type: string): HighestBestUseActions {
         highestBestUsePage.asVacantBestUseType.should("have.text", type);
         return this;
     }
 
-    /**
-     *
-     * @param {string} type
-     * @returns {HighestBestUseActions}
-     */
-    verifyAsVacantFeasiblePropTypes(type) {
+    verifyAsVacantFeasiblePropTypes(type: string): HighestBestUseActions {
         highestBestUsePage.asVacantFeasiblePropTypes.should("have.text", type);
         return this;
     }
 
-    /**
-     *
-     * @param {string} bestUseType
-     * @param {string} feasiblePropType
-     * @returns {HighestBestUseActions}
-     */
-    verifyAsVacantHighestUse(bestUseType, feasiblePropType) {
+    verifyAsVacantHighestUse(bestUseType: string, feasiblePropType: string): HighestBestUseActions {
         this.verifyAsVacantBestUseType(bestUseType)
             .verifyAsVacantFeasiblePropTypes(feasiblePropType);
         return this;
     }
 
-    /**
-     *
-     * @param {string} type
-     * @returns {HighestBestUseActions}
-     */
-    verifyAsImprovedBestUseType(type) {
+    verifyAsImprovedBestUseType(type: string): HighestBestUseActions {
         highestBestUsePage.asImprovedBestUseType.should("have.text", type);
         return this;
     }
 
-    /**
-     *
-     * @param {string} type
-     * @returns {HighestBestUseActions}
-     */
-    verifyAsImprovedFeasiblePropTypes(type) {
+    verifyAsImprovedFeasiblePropTypes(type: string): HighestBestUseActions {
         highestBestUsePage.asImprovedFeasiblePropTypes.should("have.text", type);
         return this;
     }
 
-    /**
-     *
-     * @param {string} bestUseType
-     * @param {string} feasiblePropType
-     * @returns {HighestBestUseActions}
-     */
-    verifyAsImprovedHighestUse(bestUseType, feasiblePropType) {
+    verifyAsImprovedHighestUse(bestUseType: string, feasiblePropType: string): HighestBestUseActions {
         this.verifyAsImprovedBestUseType(bestUseType)
             .verifyAsImprovedFeasiblePropTypes(feasiblePropType);
         return this;
     }
 
-    /**
-     *
-     * @returns {HighestBestUseActions}
-     */
-    clickProbableBuyerTab() {
+    clickProbableBuyerTab(): HighestBestUseActions {
         highestBestUsePage.probableBuyerTab.click();
         return this;
     }
 
-    /**
-     *
-     * @returns {HighestBestUseActions}
-     */
-    checkLocalCheckbox() {
+    checkLocalCheckbox(): HighestBestUseActions {
         highestBestUsePage.localCheckbox.check().should("have.value", "true");
         return this;
     }
 
-    /**
-     *
-     * @returns {HighestBestUseActions}
-     */
-    checkRegionalCheckbox() {
+    checkRegionalCheckbox(): HighestBestUseActions {
         highestBestUsePage.regionalCheckbox.check().should("have.value", "true");
         return this;
     }
 
 }
 
-export default new HighestBestUseActions();
+export default new HighestBestUseActions(highestBestUsePage);

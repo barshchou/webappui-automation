@@ -6,7 +6,7 @@ import { recordProxiedRequests } from "../../utils/intercept.utils";
 import { recordDOM_Snapshot } from "../utils/snapshot.utils";
 import "./commands";
 import "cypress-real-events/support";
-import { BoweryAutomation } from "../types";
+import { BoweryAutomation } from "../types/boweryAutomation.type";
 
 require("cypress-xpath");
 require("cypress-iframe");

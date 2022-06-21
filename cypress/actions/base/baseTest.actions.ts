@@ -1,4 +1,4 @@
-import { BoweryAutomation } from "../../types";
+import { BoweryAutomation } from "../../types/boweryAutomation.type";
 import { aliasQuery } from "../../utils/graphql.utils";
 import NavigationSection from "./navigationSection.actions";
 import { createPayload } from "../../api/report_payloads/462Avenue1NY.payload";
