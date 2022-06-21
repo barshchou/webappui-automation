@@ -1,4 +1,6 @@
-class UnitGroupsPage {
+import BasePage from "../../base/base.page";
+
+class UnitGroupsPage extends BasePage {
     get pageHeaderSection() {return cy.get("*[data-qa='unitGroups']");}
 
     getBedroomEqualTableRowsNoneComp(bedroomsNumber) {return cy.get(`[data-qa='bedrooms_${bedroomsNumber}'] [data-qa^=row]`);}
