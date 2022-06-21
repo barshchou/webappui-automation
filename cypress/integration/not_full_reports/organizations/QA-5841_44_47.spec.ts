@@ -4,7 +4,7 @@ import { _NavigationSection } from '../../../actions/base/index';
 import testData from "../../../fixtures/not_full_reports/organizations/QA-5841_44_47.fixture";
 
 describe("Verify users roles to create new clients", 
-    { tags:[ "@permissions_roles" ] }, () => {
+    { tags:[ "@permissions_roles, @client", "@organizations" ] }, () => {
 
     it("[QA-5844]]", () => {
         cy.stepInfo('1. Login with Lead Appraiser user role');
