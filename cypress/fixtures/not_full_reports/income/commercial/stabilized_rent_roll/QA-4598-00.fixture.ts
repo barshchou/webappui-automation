@@ -1,8 +1,7 @@
 import enums from "../../../../../enums/enums";
-import { BoweryReports } from "../../../../../types";
+import { BoweryReports } from "../../../../../types/boweryReports.type";
 import chipsDataCreator from "../../../../data_creator/chipsData.creator";
 import reportDataCreator from "../../../../data_creator/reportData.creator";
-
 
 const _numberOfCommercialUnits = 3;
 const _numberOfResidentialUnits = 2;
@@ -21,7 +20,6 @@ const _chipsOptions: BoweryReports.ChipsCreationOptions = {
     currentCommercialUnits: _currentNumberOfCommercialUnits,
     currentResidentialUnits: _currentNumberOfResidentialUnits
 };
-
 export default {
     reportCreationDataAsIs: reportDataCreator.getReportData("4598-00", {
         incomeValue: enums.INCOME_TYPE.both,

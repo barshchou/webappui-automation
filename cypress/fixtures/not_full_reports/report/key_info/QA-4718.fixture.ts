@@ -2,7 +2,7 @@ import Enums from "../../../../enums/enums";
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 import chipsDataCreator from '../../../data_creator/chipsData.creator';
 import enums from '../../../../enums/enums';
-import { BoweryReports } from '../../../../types';
+import { BoweryReports } from "../../../../types/boweryReports.type";
 
 export const reportCreationFixture = () => {
     return ReportDataCreator.getReportData("4718", {

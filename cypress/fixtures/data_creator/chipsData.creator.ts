@@ -1,5 +1,6 @@
 import enums from "../../enums/enums";
-import { BoweryReports } from "../../types";
+import { BoweryReports } from "../../types/boweryReports.type";
+
 class Chips {
 
     private _numberOfCommercialUnits: number;

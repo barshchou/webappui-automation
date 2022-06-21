@@ -1,5 +1,5 @@
 import enums from "../../../../enums/enums";
-import { BoweryReports } from "../../../../types";
+import { BoweryReports } from "../../../../types/boweryReports.type";
 import chipsDataCreator from "../../../data_creator/chipsData.creator";
 import reportDataCreator from "../../../data_creator/reportData.creator";
 

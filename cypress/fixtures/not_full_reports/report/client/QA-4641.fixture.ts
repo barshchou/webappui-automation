@@ -1,8 +1,8 @@
 import Enums from "../../../../enums/enums";
 import ReportDataCreator from "../../../data_creator/reportData.creator";
-import { BoweryReports } from '../../../../types';
 import enums from '../../../../enums/enums';
 import chipsDataCreator from '../../../data_creator/chipsData.creator';
+import { BoweryReports } from "../../../../types/boweryReports.type";
 
 const reportCreationFixture = () => {
     return ReportDataCreator.getReportData("4641", { templateValue:Enums.TEMPLATE_TYPE.notFreddieMac,
