@@ -31,7 +31,7 @@ const _rentCompFields: BoweryReports.RentCompField[] = [
     },
     {
         name: "use",
-        value: "other" as BoweryReports.CommercialUnitsUseValues,
+        value: "other" as BoweryReports.CommercialUnits.UseValues,
         type: "dropdown"
     },
     {

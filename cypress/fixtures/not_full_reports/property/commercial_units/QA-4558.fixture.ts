@@ -3,17 +3,17 @@ import Enums from "../../../../enums/enums";
 import { BoweryReports } from "../../../../types/boweryReports.type";
 import { BoweryAutomation } from "../../../../types/boweryAutomation.type";
 
-const _useRadios: BoweryReports.CommercialUnitsUseValues[] = [ "retail", "office", "medical", "community", "industrial",
+const _useRadios: BoweryReports.CommercialUnits.UseValues[] = [ "retail", "office", "medical", "community", "industrial",
     "other", "undetermined" ];
 
-const _useTexts: BoweryReports.CommercialUnitsUseTexts[] = [ "Retail", "Office", "Medical Office",
+const _useTexts: BoweryReports.CommercialUnits.UseTexts[] = [ "Retail", "Office", "Medical Office",
     "Community Facility", "Industrial", "Jeronimo", "Undetermined" ];
 
-const _defaultUse: BoweryReports.CommercialUnitsUseValues = "undetermined";
+const _defaultUse: BoweryReports.CommercialUnits.UseValues = "undetermined";
 
-const _otherValue: BoweryReports.CommercialUnitsUseTexts = "Jeronimo";
+const _otherValue: BoweryReports.CommercialUnits.UseTexts = "Jeronimo";
 
-const _groupName: BoweryReports.CommercialUnitsGroups = "Use";
+const _groupName: BoweryReports.CommercialUnits.Groups = "Use";
 
 const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("4558", {
     incomeValue: Enums.INCOME_TYPE.both,

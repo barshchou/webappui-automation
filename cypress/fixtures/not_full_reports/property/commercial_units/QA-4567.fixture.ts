@@ -10,40 +10,40 @@ const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreat
 
 const groupsNamesAndValues = [
     {
-        groupName: "Use" as BoweryReports.CommercialUnitsGroups,
-        value: "office" as BoweryReports.CommercialUnitsUseValues
+        groupName: "Use" as BoweryReports.CommercialUnits.Groups,
+        value: "office" as BoweryReports.CommercialUnits.UseValues
     },
     {
-        groupName: "State" as BoweryReports.CommercialUnitsGroups,
-        value: "unfinished" as BoweryReports.CommercialUnitsStateValues
+        groupName: "State" as BoweryReports.CommercialUnits.Groups,
+        value: "unfinished" as BoweryReports.CommercialUnits.StateValues
     },
     {
-        groupName: "Location" as BoweryReports.CommercialUnitsGroups,
-        value: "mid-block" as BoweryReports.CommercialUnitsLocationValues
+        groupName: "Location" as BoweryReports.CommercialUnits.Groups,
+        value: "mid-block" as BoweryReports.CommercialUnits.LocationValues
     },
     {
-        groupName: "Street Type" as BoweryReports.CommercialUnitsGroups,
-        value: "side street" as BoweryReports.CommercialUnitsStreetTypeValues
+        groupName: "Street Type" as BoweryReports.CommercialUnits.Groups,
+        value: "side street" as BoweryReports.CommercialUnits.StreetTypeValues
     },
     {
-        groupName: "Floor" as BoweryReports.CommercialUnitsGroups,
-        value: "other" as BoweryReports.CommercialUnitsFloorValues
+        groupName: "Floor" as BoweryReports.CommercialUnits.Groups,
+        value: "other" as BoweryReports.CommercialUnits.FloorValues
     },
     {
-        groupName: "Grade" as BoweryReports.CommercialUnitsGroups,
-        value: "partiallyBelowGrade" as BoweryReports.CommercialUnitsGradeValues
+        groupName: "Grade" as BoweryReports.CommercialUnits.Groups,
+        value: "partiallyBelowGrade" as BoweryReports.CommercialUnits.GradeValues
     },
     {
-        groupName: "Facade" as BoweryReports.CommercialUnitsGroups,
-        value: "plate glass" as BoweryReports.CommercialUnitsFacadeValues
+        groupName: "Facade" as BoweryReports.CommercialUnits.Groups,
+        value: "plate glass" as BoweryReports.CommercialUnits.FacadeValues
     },
     {
-        groupName: "Ceiling Height" as BoweryReports.CommercialUnitsGroups,
-        value: "high" as BoweryReports.CommercialUnitsCeilingHeightValues
+        groupName: "Ceiling Height" as BoweryReports.CommercialUnits.Groups,
+        value: "high" as BoweryReports.CommercialUnits.CeilingHeightValues
     },
     {
-        groupName: "Frontage" as BoweryReports.CommercialUnitsGroups,
-        value: "medium" as BoweryReports.CommercialUnitsFrontageValues
+        groupName: "Frontage" as BoweryReports.CommercialUnits.Groups,
+        value: "medium" as BoweryReports.CommercialUnits.FrontageValues
     },
 ];
 
