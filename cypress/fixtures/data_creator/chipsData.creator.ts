@@ -25,27 +25,27 @@ class Chips {
     private _streetName = '1st Avenue';
 
     setNumberOfCommercialUnits(numberOfCommercialUnits?: number) {
-        this._numberOfCommercialUnits = numberOfCommercialUnits ?? 3;
+        this._numberOfCommercialUnits = numberOfCommercialUnits ?? 1;
         return this;
     }
 
     setNumberOfResidentialUnits(residentialUnits?: number){
-        this._numberOfResidentialUnits = residentialUnits ?? 2;
+        this._numberOfResidentialUnits = residentialUnits ?? 0;
         return this;
     }
 
     setBuildngName(buildingName?: string){
-        this._buildingName = buildingName ?? "Test Building Name";
+        this._buildingName = buildingName ?? "";
         return this;
     }
 
     setGrossBuildingAre(grossBuildingArea?: number){
-        this._grossBuildingArea = grossBuildingArea ?? 5999;
+        this._grossBuildingArea = grossBuildingArea ?? 2124441;
         return this;
     }
 
     setSiteArea(siteArea?: number){
-        this._siteArea = siteArea ?? 735000;
+        this._siteArea = siteArea ?? 753175;
         return this;
     }
 

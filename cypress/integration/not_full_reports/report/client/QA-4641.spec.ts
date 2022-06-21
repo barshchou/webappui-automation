@@ -1,4 +1,4 @@
-import { Report, ReviewExport } from "../../../../actions";
+import { Property, Report, ReviewExport } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import testData from '../../../../fixtures/not_full_reports/report/client/QA-4641.fixture';
@@ -10,6 +10,10 @@ describe(`[QA-4641] Verify the "Linked" chips dropdown in the new narrative comp
     it("Test body", { tags: "@check_export" }, () => {
         cy.stepInfo("Login, create report");
         createReport(testData.reportCreationData);
+
+        cy.stepInfo("Precondition: Set building name");
+        _NavigationSection.navigateToPropertySummary();
+        Property._Summary.enterBuildingName(testData.buildingName);
 
         cy.stepInfo("1. Proceed to the Report > Client page.");
         _NavigationSection.navigateToClientPage()
@@ -25,10 +29,10 @@ describe(`[QA-4641] Verify the "Linked" chips dropdown in the new narrative comp
         testData.chips.forEach(chip => {
             Report._Client.enterIntendedUser(`=${chip.typeSuggestValue}`, false, false, false)
                 .clickNarrativeSuggestions(chip.suggestionName);
-            Report._Client.Page.intendedUserTextBox.should("include.text", chip.verifySuggest);
+            Report._Client.verifyCommentaryContainsText(chip.verifySuggest, 1);
             Report._Client.enterIdentificationOfTheClient(`=${chip.typeSuggestValue}`, false, false, false)
                 .clickNarrativeSuggestions(chip.suggestionName, 1);
-            Report._Client.Page.identificationOfClientTextBox.should("include.text", chip.verifySuggest);
+            Report._Client.verifyCommentaryContainsText(chip.verifySuggest, 2);
         });
 
         cy.stepInfo("4. Download report");
@@ -47,7 +51,7 @@ describe(`[QA-4641] Verify the "Linked" chips dropdown in the new narrative comp
 
             testData.chips.forEach(item => {
                 cy.contains("Identification of the Client").next().scrollIntoView().should("include.text", item.verifyExport);
-                cy.contains("Intended Use & User").next().scrollIntoView().should("include.text", item.verifyExport);
+                cy.contains("Intended Use & User").next().next().scrollIntoView().should("include.text", item.verifyExport);
             });
         });
     });

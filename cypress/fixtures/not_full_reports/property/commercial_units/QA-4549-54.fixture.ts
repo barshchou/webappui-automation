@@ -5,7 +5,7 @@ import reportDataCreator from "../../../data_creator/reportData.creator";
 
 const _numberOfCommercialUnits = 3;
 const _numberOfResidentialUnits = 2;
-const _buildingName = 'Test Building Name QA-4598-00';
+const _buildingName = 'Test Building Name QA-4549-54';
 const _grossBuildingArea = 5999;
 const _siteArea = 735000;
 const _currentNumberOfCommercialUnits = 5;

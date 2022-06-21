@@ -1,6 +1,8 @@
-import { _chips_complete } from './../../data_chips/chips_complete.fixture';
 import Enums from "../../../../enums/enums";
 import ReportDataCreator from "../../../data_creator/reportData.creator";
+import enums from '../../../../enums/enums';
+import chipsDataCreator from '../../../data_creator/chipsData.creator';
+import { BoweryReports } from '../../../../types';
 
 export const reportCreationFixture = () => {
     return ReportDataCreator.getReportData("4720", {
@@ -10,7 +12,14 @@ export const reportCreationFixture = () => {
     });
 };
 
+const _buildingName = 'Test Building Name QA-4720';
+
+const _chipsOptions: BoweryReports.ChipsCreationOptions = {
+    buildingName: _buildingName,
+};
+
 export default {
     reportCreationData: reportCreationFixture(),
-    chips: _chips_complete
+    chips: chipsDataCreator.getChipsData(_chipsOptions, enums.VALUE_CONCLUSION_TYPE.AS_COMPLETE),
+    buildingName: _buildingName
 };

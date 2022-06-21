@@ -1,8 +1,19 @@
-import { _chips_is_stabilized } from './../../data_chips/chips_is_stabilized.fixture';
+import enums from "../../../../enums/enums";
+import { BoweryReports } from "../../../../types";
+import chipsDataCreator from "../../../data_creator/chipsData.creator";
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 
+const _buildingName = 'Test Building Name QA-4640';
+
+const _chipsOptions: BoweryReports.ChipsCreationOptions = {
+    buildingName: _buildingName,
+};
+
 export default {
-    reportCreationData: ReportDataCreator.getReportData("4640"),
+    reportCreationData: ReportDataCreator.getReportData("4640", {
+        incomeValue: enums.INCOME_TYPE.both
+    }),
     textToType: "=",
-    chips: _chips_is_stabilized
+    chips: chipsDataCreator.getChipsData(_chipsOptions, enums.VALUE_CONCLUSION_TYPE.AS_STABILIZED),
+    buildingName: _buildingName
 };

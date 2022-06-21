@@ -58,6 +58,8 @@ class KeyInfoPage extends BasePage{
     iconDefinitionOfMarketValue(index = 1) {return cy.xpath(`//*[contains(@data-qa, 'definition-of-market-value-tile')]//following::*[@data-icon='info-circle'][${index}]`);}
 
     get inputToCheckMyDateIsDifferent() {return cy.get("*[data-qa='isDifferentDateOfValuation']");}
+
+    commentaryText(index: number) {return cy.xpath(`//div[@data-slate-editor]['${index}']`);}
 }
 
 export default new KeyInfoPage();

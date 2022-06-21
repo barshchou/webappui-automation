@@ -505,6 +505,13 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
     }
 
     navigateToReportInformation(){
+        this.clickReportButton()
+            .clickReportInformationButton()
+            .clickYesIfExist();
+        return this;
+    }
+
+    clickReportInformationButton() {
         navigationSectionPage.reportInfoButton.click();
         return this;
     }

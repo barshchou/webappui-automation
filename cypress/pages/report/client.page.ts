@@ -41,6 +41,8 @@ class ClientPage extends BasePage{
     chipModified(index?: number) {return cy.get('[ui="indicator"]').eq((index !== 0) ? index : 0);}
 
     get addNewClient() {return cy.xpath("//*[@data-qa='callout-btn']//child::*[@target='_self']");}
+
+    commentaryText(index: number) {return cy.xpath(`//div[@data-slate-editor]['${index}']`);}
 }
 
 export default new ClientPage();
