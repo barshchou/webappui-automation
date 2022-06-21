@@ -156,7 +156,7 @@ class CapRateCompsActions extends BaseActionsExt<typeof capRateCompsPage> {
         return this;
     }
 
-    private getCapRateCommentary(minRate: number, maxRate: number, avgRate: number): string {
+    private getCapRateCommentary(minRate: number, maxRate: number, avgRate: number | string): string {
         return "We analyzed sales of comparable multifamily " +
             `assets within the subject’s periphery and they exhibit overall capitalization rates from ${minRate}% to ${maxRate}%` +
             ` with an average of ${avgRate}%. We have supplemented our capitalization rate comparables with additional ` +
