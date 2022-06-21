@@ -30,7 +30,7 @@ describe("Default selection on Stabilized Rent Roll table is the same selection 
         _NavigationSection.navigateToResidentialStabilizedRentRoll();
 
         testData.residentialUnits.forEach((unit, index) => {
-            Income._Residential.StabilizedRentRoll.verifyStabilizedRentPSFValueByRow(false, index);
+            Income._Residential.InPlaceRentRoll.verifyRentPSFValueByRow(false, index, true);
         });
 
         deleteReport(testData.reportCreationData.reportNumber);
