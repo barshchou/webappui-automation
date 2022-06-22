@@ -359,7 +359,7 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
            * 3. sumPerSF value wraped as alias 'summaPerSF' and is used in other actions 
            */
 
-private SUMPSF(inputs: JQuery<HTMLElement>, i: number): ExpenseForecastActions {
+private SUMPSF(inputs: JQuery<HTMLElement>, i: number, resUnits: number, GBA: number, rooms: number, sumPerSF: number): number {
       this.includeExpenseProFormaCheckboxValue(inputs, i);
     cy.get("@checkboxValue").then(checkboxValue => {
         this.radiobuttonBasis(inputs, i);
@@ -382,9 +382,10 @@ private SUMPSF(inputs: JQuery<HTMLElement>, i: number): ExpenseForecastActions {
                 sumPerSF += 0;
                 cy.wrap(sumPerSF).as(Alias.expenceForcastAliases.summaPerSF);
             }
+            cy.log(sumPerSF)
         });
     }); 
-    return this;
+    return sumPerSF;
 }
 
 
@@ -421,6 +422,8 @@ private SUMPSF(inputs: JQuery<HTMLElement>, i: number): ExpenseForecastActions {
                         //         }
                         //     });
                         // });
+                        this.SUMPSF(inputs, i, resUnits, GBA, rooms, sumPerSF);
+                    //    cy.wrap(sumPerSF).as(Alias.expenceForcastAliases.summaPerSF);
                     } else {
                         this.radiobuttonBasis(inputs, i);
                         cy.get("@basisValue").then(basisValue => {
@@ -435,7 +438,7 @@ private SUMPSF(inputs: JQuery<HTMLElement>, i: number): ExpenseForecastActions {
                                 let inputValuePerSF = (inputValue * rooms) / GBA;
                                 sumPerSF += inputValuePerSF;
                             }
-                            cy.wrap(sumPerSF).as(Alias.expenceForcastAliases.summaPerSF);
+                            //cy.wrap(sumPerSF).as(Alias.expenceForcastAliases.summaPerSF);
                         });
                     }
                 });

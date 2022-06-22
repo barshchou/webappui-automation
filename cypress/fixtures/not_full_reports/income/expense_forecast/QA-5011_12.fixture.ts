@@ -1,7 +1,8 @@
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 import proFormaTypes from "../../../../enums/proFormaTypes.enum";
 import Enums from "../../../../enums/enums";
-import { BoweryAutomation, BoweryReports } from "../../../../types";
+import { BoweryAutomation } from "../../../../types/boweryAutomation.type";
+import { BoweryReports } from "../../../../types/boweryReports.type";
 
 const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("5011_12", {
     incomeValue: Enums.INCOME_TYPE.both,
