@@ -359,6 +359,37 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
            * 3. sumPerSF value wraped as alias 'summaPerSF' and is used in other actions 
            */
 
+private SUMPSF(inputs: JQuery<HTMLElement>, i: number): ExpenseForecastActions {
+      this.includeExpenseProFormaCheckboxValue(inputs, i);
+    cy.get("@checkboxValue").then(checkboxValue => {
+        this.radiobuttonBasis(inputs, i);
+        cy.get("@basisValue").then(basisValue => {
+            let ifChecked = String(checkboxValue);
+            if (ifChecked === "true") {
+                let expenseBasis = String(basisValue);
+                let inputValue = getNumberFromDollarNumberWithCommas(inputs[i].getAttribute("value"));
+                if (expenseBasis === "sf") {
+                    sumPerSF += inputValue;
+                } else if (expenseBasis === "unit") {
+                    let inputValuePerSF = (inputValue * resUnits) / GBA;
+                    sumPerSF += inputValuePerSF;
+                } else {
+                    let inputValuePerSF = (inputValue * rooms) / GBA;
+                    sumPerSF += inputValuePerSF;
+                }
+                cy.wrap(sumPerSF).as(Alias.expenceForcastAliases.summaPerSF);
+            } else {
+                sumPerSF += 0;
+                cy.wrap(sumPerSF).as(Alias.expenceForcastAliases.summaPerSF);
+            }
+        });
+    }); 
+    return this;
+}
+
+
+
+
        totalSumForecastPSF(GBA?: number, resUnits?: number, rooms?: number): ExpenseForecastActions {
         expenseForecastPage.allForecastsInputs.then(inputs => {
             let sumPerSF = 0;
@@ -366,30 +397,30 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
                 this.includeExpensesProFormaCheckbox(inputs, i);
                 cy.get("@IncludeExpenseonProFormaCheckbox").then(card => {
                     if (card.find('[label="Include Expense on Pro Forma"]').length > 0) {
-                        this.includeExpenseProFormaCheckboxValue(inputs, i);
-                        cy.get("@checkboxValue").then(checkboxValue => {
-                            this.radiobuttonBasis(inputs, i);
-                            cy.get("@basisValue").then(basisValue => {
-                                let ifChecked = String(checkboxValue);
-                                if (ifChecked === "true") {
-                                    let expenseBasis = String(basisValue);
-                                    let inputValue = getNumberFromDollarNumberWithCommas(inputs[i].getAttribute("value"));
-                                    if (expenseBasis === "sf") {
-                                        sumPerSF += inputValue;
-                                    } else if (expenseBasis === "unit") {
-                                        let inputValuePerSF = (inputValue * resUnits) / GBA;
-                                        sumPerSF += inputValuePerSF;
-                                    } else {
-                                        let inputValuePerSF = (inputValue * rooms) / GBA;
-                                        sumPerSF += inputValuePerSF;
-                                    }
-                                    cy.wrap(sumPerSF).as(Alias.expenceForcastAliases.summaPerSF);
-                                } else {
-                                    sumPerSF += 0;
-                                    cy.wrap(sumPerSF).as(Alias.expenceForcastAliases.summaPerSF);
-                                }
-                            });
-                        });
+                        // this.includeExpenseProFormaCheckboxValue(inputs, i);
+                        // cy.get("@checkboxValue").then(checkboxValue => {
+                        //     this.radiobuttonBasis(inputs, i);
+                        //     cy.get("@basisValue").then(basisValue => {
+                        //         let ifChecked = String(checkboxValue);
+                        //         if (ifChecked === "true") {
+                        //             let expenseBasis = String(basisValue);
+                        //             let inputValue = getNumberFromDollarNumberWithCommas(inputs[i].getAttribute("value"));
+                        //             if (expenseBasis === "sf") {
+                        //                 sumPerSF += inputValue;
+                        //             } else if (expenseBasis === "unit") {
+                        //                 let inputValuePerSF = (inputValue * resUnits) / GBA;
+                        //                 sumPerSF += inputValuePerSF;
+                        //             } else {
+                        //                 let inputValuePerSF = (inputValue * rooms) / GBA;
+                        //                 sumPerSF += inputValuePerSF;
+                        //             }
+                        //             cy.wrap(sumPerSF).as(Alias.expenceForcastAliases.summaPerSF);
+                        //         } else {
+                        //             sumPerSF += 0;
+                        //             cy.wrap(sumPerSF).as(Alias.expenceForcastAliases.summaPerSF);
+                        //         }
+                        //     });
+                        // });
                     } else {
                         this.radiobuttonBasis(inputs, i);
                         cy.get("@basisValue").then(basisValue => {
@@ -522,6 +553,7 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
             });
         return this;
     }
+    
 
 }
 
