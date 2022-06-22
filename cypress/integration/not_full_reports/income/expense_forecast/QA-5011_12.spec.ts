@@ -1,3 +1,4 @@
+import { ForecastItem } from './../../../../types/index';
 import testData from "../../../../fixtures/not_full_reports/income/expense_forecast/QA-5011_12.fixture";
 import { _NavigationSection } from "../../../../actions/base";
 import { Income, Property } from "../../../../actions";
@@ -142,6 +143,17 @@ describe(`[QA-5011] [QA-5012] [Income>Expense forecast] Unselected existing expe
             cy.stepInfo(`1. Verify If “Include Expense on Pro Forma”  checkbox is unselected but there is 
                          data left in the forecast, this data is not included in calculations on Pro forma and Expense forecast page 
                          (Per Room measure for Fuel + Full Appraiser's forecasts)`);
+
+
+                         const _firstCustomCategory : BoweryReports.ForecastItem = {
+                            name: "firstcustom",
+                            basis: "sf",
+                            forecast: 1.22
+                        }; //delete
+                         Income._ExpenseForecastActions.addCustomExpenseCategory(_firstCustomCategory.name);
+                        //  Income._ExpenseForecastActions.enterForecastItemForecast(_firstCustomCategory);
+                        
+
             Income._ExpenseForecastActions.totalSumForecastPSF(
                 testData.buildingDescription.grossArea,
                 testData.numberOfResidentialUnits,
@@ -162,7 +174,6 @@ describe(`[QA-5011] [QA-5012] [Income>Expense forecast] Unselected existing expe
                 .verifyTotalNOIIncludeForecasts(testData.buildingDescription.grossArea)
                 .verifyPsfNOIIncludeForecasts()
                 .verifyPerUnitNOIIncludeForecasts();
-                
 
             _NavigationSection.navigateToExpenseForecast();
             Income._ExpenseForecastActions.verifyTotalForecastPSF(

@@ -459,6 +459,7 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
                                         let inputValuePerUnit = (inputValue * rooms) / resUnits;
                                         sumPerUnit += inputValuePerUnit;
                                     }
+                                    
                                     cy.wrap(sumPerUnit).as(Alias.expenceForcastAliases.summaPerUnit);
                                 } else {
                                     sumPerUnit += 0;
