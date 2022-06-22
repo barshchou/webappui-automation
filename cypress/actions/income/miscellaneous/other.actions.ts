@@ -1,7 +1,7 @@
 import { numberWithCommas } from './../../../../utils/numbers.utils';
 import otherPage from "../../../pages/income/miscellaneous/other.page";
 import BaseActionsExt from "../../base/base.actions.ext";
-import { BoweryReports } from '../../../types';
+import { BoweryReports } from '../../../types/boweryReports.type';
 
 class OtherActions extends BaseActionsExt<typeof otherPage> {
 
