@@ -1,6 +1,6 @@
 import marketPage from "../../pages/property/market.page";
 import { getQuarter, getYearFromDate, isCorrectQuarter } from "../../../utils/date.utils";
-import { BoweryReports } from "../../types";
+import { BoweryReports } from "../../types/boweryReports.type";
 import { isStringContainSubstring } from "../../../utils/string.utils";
 import BaseActionsExt from "../base/base.actions.ext";
 

@@ -1,4 +1,4 @@
-import { BoweryAutomation } from "../../types";
+import { BoweryAutomation } from "../../types/boweryAutomation.type";
 import { aliasQuery } from "../../utils/graphql.utils";
 import NavigationSection from "./navigationSection.actions";
 import { createPayload } from "../../api/report_payloads/462Avenue1NY.payload";
@@ -8,25 +8,26 @@ import { _HomePage } from ".";
 /**
  * Login action
  */
-export const loginAction = () => {
+export const loginAction = (username = Cypress.env("USERNAME"), password = Cypress.env("PASSWORD")) => {
     switch (Cypress.env("loginMethod")) {
         case "ui":
-            cy.loginByUI(Cypress.config().baseUrl);
+            cy.loginByUI(Cypress.config().baseUrl, username, password);
             break;
         default:
-            cy.loginByApi(
-                Cypress.config().baseUrl, 
-                Cypress.env("USERNAME"), 
-                Cypress.env("PASSWORD")
-            );
+            cy.loginByApi(Cypress.config().baseUrl, username, password);
+            cy.visit('/');
     }
+    
 };
 
-export const createReport = (reportCreationData: BoweryAutomation.ReportCreationData, payloadFunction = createPayload) => {
+export const createReport = (reportCreationData: BoweryAutomation.ReportCreationData, 
+                            username = Cypress.env("USERNAME"), password = Cypress.env("PASSWORD"),
+                            payloadFunction = createPayload) => {
+
     salesInterceptions();
 
     const envUrl = Cypress.config().baseUrl;
-    loginAction();
+    loginAction(username, password);
     cy._mapGet("user_id_api").then(_userId => {
         cy.log(`user id is: ${_userId}`);
         const _payload = payloadFunction(reportCreationData, _userId);

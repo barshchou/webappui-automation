@@ -1,7 +1,7 @@
 import rentRollPage from "../../../pages/income/commercial/rentRoll.page";
 import { numberWithCommas } from "../../../../utils/numbers.utils";
 import CommercialRentRollSharedComponent from "../../shared_components/commercialRentRoll.shared.actions";
-import { BoweryReports } from "../../../types";
+import { BoweryReports } from "../../../types/boweryReports.type";
 
 class CommercialRentRollActions extends CommercialRentRollSharedComponent<typeof rentRollPage> {
 

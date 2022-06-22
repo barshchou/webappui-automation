@@ -57,7 +57,7 @@ class ResidentialUnitsActions extends BaseActionsExt<typeof residentialUnitsPage
 
     verifyKitchenConditionCommentary(bathroomConditionData: Readonly<{condition: string, flooring: string, 
         counterTops: string, cabinetry: string, 
-        stovetops: string,refrigerators: string}>): ResidentialUnitsActions {
+        stovetops: string, refrigerators: string}>): ResidentialUnitsActions {
         const commentaryObject = {
             condition: bathroomConditionData.condition.toLowerCase(),
             flooring: bathroomConditionData.flooring.toLowerCase(),
