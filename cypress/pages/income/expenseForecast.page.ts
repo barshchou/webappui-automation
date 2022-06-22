@@ -83,6 +83,7 @@ class ExpenseForecastPage extends BasePage {
 
     get newCategoryExpenseName() { return cy.get('[data-qa="expenseName-form-control"] input');}
 
+    get electricityCardText() { return cy.xpath("//span[@data-qa='electricity.includeInProForma-checked']/following-sibling::span"); }
 }
 
 export default new ExpenseForecastPage();
