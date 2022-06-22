@@ -1,4 +1,4 @@
-import testData from "../../../../fixtures/not_full_reports/income/expense_forecast/QA-5008-10.fixture";
+import testData from "../../../../fixtures/not_full_reports/income/expense_forecast/QA-5042.fixture";
 import { _NavigationSection } from "../../../../actions/base";
 import { Income } from "../../../../actions";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
@@ -37,15 +37,17 @@ describe(`[QA-5008] [QA-5009] [QA-5010] [Income>Expense forecast] “Include Exp
             * Title of  the required field "Category Name"
             * There are two buttons on the right bottom:
             * "Cancel" button and "Save" button`);
-           
-            
+            Income._ExpenseForecastActions.Page.titleOfaddCustomExpenseCategoryModal.should('exist');
+            Income._ExpenseForecastActions.Page.addCustomExpenseCategoryInput.should('exist');
+            Income._ExpenseForecastActions.Page.addCustomExpenseCategoryCancelButton.should('exist');
+            Income._ExpenseForecastActions.Page.addCustomExpenseCategorySaveButton.should('exist');
         });
 
-        it("[QA-5010]", () => {
+        it("[QA-5045]", () => {
             cy.stepInfo(`1. Verify user hover on icon right to the "Include Expense on Pro Forma" checkbox - tooltip
                          with the following text "Unchecking this box will hide the expense from showing up on the Pro Forma." appears `);
            
 
-            deleteReport(testData.reportCreationData.reportNumber);
+         //   deleteReport(testData.reportCreationData.reportNumber);
         });
     });

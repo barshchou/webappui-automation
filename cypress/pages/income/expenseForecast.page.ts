@@ -81,9 +81,15 @@ class ExpenseForecastPage extends BasePage {
 
     get createNewCategoryButton() {return cy.contains('Add Expense Category +');}
 
-    get addCustomExpenseCategoryModal () {return cy.get('[role=dialog] ').find('Add Custom Expense Category');} //
+    get addCustomExpenseCategoryModal () {return cy.contains('Add Custom Expense Category').parent('[role=dialog] ');} 
+
+    get titleOfaddCustomExpenseCategoryModal() {return cy.get('[role=dialog]').contains('Add Custom Expense Category');} 
+
+    get addCustomExpenseCategoryInput() {return cy.get('input[placeholder="Enter Custom Expense..."]');} 
     
-    get cancelButton () {return cy.contains('Cancel');}
+    get addCustomExpenseCategoryCancelButton() {return cy.contains('Add Custom Expense Category').parent('[role=dialog]').contains('Cancel');}
+
+    get addCustomExpenseCategorySaveButton() {return cy.contains('Add Custom Expense Category').parent('[role=dialog]').contains('Save');}
 
     get newCategoryExpenseName() { return cy.get('[data-qa="expenseName-form-control"] input');}
 
