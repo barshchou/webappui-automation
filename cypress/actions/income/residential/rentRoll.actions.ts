@@ -271,30 +271,6 @@ class InPlaceRentRollActions extends ResidentialRentRollSharedActions<typeof ren
         }
         return this;
     }
-
-    verifyRentPSFValueByRow(isPerMonth = true, rowNumber = 0, isStabilized = false) {
-        const monthlyRentCellsToBe = (isStabilized === false) ? this.Page.monthlyRentCells.eq(rowNumber).invoke("text")
-            : this.Page.stabilizedMonthlyRentCells.eq(rowNumber).invoke("val");  
-        monthlyRentCellsToBe.then(monthlyRentText => {
-                const rentValue = getNumberFromDollarNumberWithCommas(monthlyRentText);
-                this.Page.squareFootageCells.eq(rowNumber).invoke("text").then(sfText => {
-                    const rentSFCellToBe = (isStabilized === false) ? this.Page.rentSFCell : this.Page.stabilizedRentSFCell;
-                    const footageValue = getNumberFromDollarNumberWithCommas(sfText);
-                    const rentPSFMonthly = `$${(rentValue / footageValue).toFixed(2)}`;
-                    const rentPSFAnnually = `$${((rentValue / footageValue) * 12).toFixed(2)}`;
-                    if (footageValue === 0) {
-                        rentSFCellToBe.eq(rowNumber).should("have.text", "$NaN");
-                    } else {
-                        if (isPerMonth) {
-                            rentSFCellToBe.eq(rowNumber).should("have.text", rentPSFMonthly);
-                        } else {
-                            rentSFCellToBe.eq(rowNumber).should("have.text", rentPSFAnnually);
-                        }
-                    }
-                });
-            });
-        return this;
-    }
       
     verifyRentRollCommentary(commentaryToBe: string): InPlaceRentRollActions {
         rentRollPage.rentRollCommentary.should("have.text", commentaryToBe);
