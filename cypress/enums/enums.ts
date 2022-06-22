@@ -40,6 +40,8 @@ import knownInformation from "./knownInformationType.enum";
 import compGroupsColumnsEnum from "./compGroupsColumns.enum";
 import marketAnalysisUsesEnum from "./marketAnalysisUses.enum";
 import usersEnum from "../enums/users/users.enum";
+import propertyConditionsEnum from "./propertyConditions.enum";
+import propertyConditionsRadiosEnum from "./propertyConditionsRadios.enum";
 
 export default {
     TEMPLATE_TYPE: templateTypesEnum,
@@ -83,5 +85,7 @@ export default {
     SOURCE_OF_INFORMATION: sourceOfInformation,
     AMENITIES: amenities,
     MARKET_ANALYSIS_USES: marketAnalysisUsesEnum,
-    USERS: usersEnum
+    USERS: usersEnum,
+    PROPERTY_CONDITIONS: propertyConditionsEnum,
+    PROPERTY_CONDITIONS_RADIOS: propertyConditionsRadiosEnum
 };
