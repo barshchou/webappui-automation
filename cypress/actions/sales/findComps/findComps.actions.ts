@@ -6,7 +6,7 @@ import saleInfoFormActions from "./drm/saleInfoForm.actions";
 import propertDescActions from "./drm/propertyDescForm.actions";
 import propertyInfoFormActions from "./drm/propertyInfoForm.actions";
 import { Alias } from "../../../utils/alias.utils";
-import { Utils } from "../../../types";
+import { Utils } from "../../../types/utils.type";
 
 class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
 
@@ -208,7 +208,7 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
 
     verifyNumericInputNewComp(elementAlias: string, numberOfUnits: number | string): FindCompsActions {
         const valueToBe = isNumber(numberOfUnits) ? numberWithCommas(`${numberOfUnits}`.replace("-", "")) : "";
-        cy.get(`@${elementAlias}`).should("have.value", valueToBe);
+        cy.get(`@${elementAlias}`, { timeout: 10000 }).should("have.value", valueToBe);
         return this;
     }
 }

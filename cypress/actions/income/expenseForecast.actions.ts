@@ -1,7 +1,7 @@
 import expenseForecastPage from "../../pages/income/expenseForecast.page";
 import { getNumberFromDollarNumberWithCommas, numberWithCommas } from "../../../utils/numbers.utils";
 import BaseActionsExt from "../base/base.actions.ext";
-import { BoweryReports } from "../../types";
+import { BoweryReports } from "../../types/boweryReports.type";
 
 type ForecastItem = BoweryReports.ForecastItem;
 type BuildingDescription = BoweryReports.BuildingDescription;

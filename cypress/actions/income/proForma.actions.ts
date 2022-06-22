@@ -5,7 +5,7 @@ import {
 } from "../../../utils/numbers.utils";
 import BaseActionsExt from "../base/base.actions.ext";
 import { uppercaseFirstLetterEachWord } from "../../../utils/string.utils";
-import { BoweryReports } from "../../types";
+import { BoweryReports } from "../../types/boweryReports.type";
 import enums from "../../enums/enums";
 
 class ProFormaActions extends BaseActionsExt<typeof proFormaPage> {
