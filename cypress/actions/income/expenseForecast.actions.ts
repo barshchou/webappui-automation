@@ -276,43 +276,90 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
         return this;
     }
 
-    includeExpensesProFormaCheckbox(inputs: JQuery<HTMLElement>, i: number): ExpenseForecastActions {
-        cy.wrap(inputs[i]).parents('[data-qa$=-forecast-item]').then(card => {
-            cy.wrap(card).as("IncludeExpenseonProFormaCheckbox");
-        });
+    verifyTOECommentary(textToBe: string): ExpenseForecastActions {
+        expenseForecastPage.toeCommentary.should("contain.text", textToBe);
         return this;
     }
 
-    includeExpenseProFormaCheckboxValue(inputs: JQuery<HTMLElement>, i: number): ExpenseForecastActions {
-        cy.wrap(inputs[i]).parents('[data-qa$=-forecast-item]').find('[label="Include Expense on Pro Forma"]').find('[type="checkbox"]')
-            .invoke('prop', 'value').then(checkboxValue => {
-                cy.wrap(checkboxValue).as("checkboxValue");
+    verifyForecastCommentary(textToBe: string, forecastItem: BoweryReports.ForecastItem, index = 1): ExpenseForecastActions {
+        expenseForecastPage.getExpenseCommentary(this.getItemNameForAverage(forecastItem.name), index).should("contain.text", textToBe);
+        return this;
+    }
+
+    editTOECommentary(newText: string, isWithClear = false): ExpenseForecastActions {
+        expenseForecastPage.toeCommentaryEditButton.click();
+        if (isWithClear) {
+            expenseForecastPage.toeCommentary.clear();
+        }
+        expenseForecastPage.toeCommentary.type(newText);
+        expenseForecastPage.toeCommentarySaveButton.click();
+        expenseForecastPage.toeCommentaryModified.should("exist");
+        return this;
+    }
+
+    editExpenseForecastCommentary(newText: string, forecastItem: BoweryReports.ForecastItem, isWithClear = false, index = 1): ExpenseForecastActions {
+        let item = this.getItemNameForAverage(forecastItem.name);
+        expenseForecastPage.getExpenseCommentaryEditButton(item, index).click();
+        if (isWithClear) {
+            expenseForecastPage.getExpenseCommentary(item, index).clear();
+        }
+        expenseForecastPage.getExpenseCommentary(item, index).type(newText);
+        expenseForecastPage.getExpenseCommentarySaveButton(item, index).click();
+        expenseForecastPage.getExpenseCommentaryModified(item).should("exist");
+        return this;
+    }
+
+    revertToOriginalExpenseForecastCommentary(forecastItem: BoweryReports.ForecastItem, index = 1): ExpenseForecastActions {
+        let item = this.getItemNameForAverage(forecastItem.name);
+        expenseForecastPage.getExpenseCommentaryEditButton(item, index).click();
+        expenseForecastPage.getExpenseCommentaryRevertToOriginal(item).click();
+        this.verifyProgressBarNotExist();
+        expenseForecastPage.expenseConfirmRevertButton.click();
+        expenseForecastPage.getExpenseCommentarySaveButton(item, index).click();
+        return this;
+    }
+
+    switchExpenseForecastBasis(forecastItem: ForecastItem): ExpenseForecastActions {
+        expenseForecastPage.getElementBasisToSwitch(forecastItem.name, forecastItem.basis).click();
+        return this;
+    }
+
+    hideExpenseForecastHeader(): ExpenseForecastActions {
+        // ernst: A few hacks to get clear Insurance_Forecast_Item component without overlayed headers
+        cy.log('hide');
+        if (Cypress.browser.isHeadless == true) {
+            expenseForecastPage.Header.then(elem => {
+                elem.hide();
             });
-        return this;
-    }
-
-    radiobuttonBasis(inputs: JQuery<HTMLElement>, i: number): ExpenseForecastActions {
-        cy.wrap(inputs[i]).parents('[data-qa$=-forecast-item]').find('[data-qa="checked"]').find('[type="radio"]')
-            .invoke('prop', 'value').then(basisValue => {
-                cy.wrap(basisValue).as("basisValue");
+            expenseForecastPage.expenseForecastHeader.then(elem => {
+                elem.hide();
             });
+        }
         return this;
     }
 
-/**
-       * 1. Action takes all allForecastsInputs (forecast expense card inputs).
-       * 2. In cycle we check all forecast cards does it has checkbox "Include Expense on Pro Forma" or not: 
-       * 2.1. If it does not have checkbox "Include Expense on Pro Forma" - function takes input value, 
-       * then calculate and transfer it to value in Per SF, then sum into sumPerSF 
-       *
-       * 2.2. If it has checkbox "Include Expense on Pro Forma" - we check does it checked or not: 
-       * 2.2.1. If checkbox "Include Expense on Pro Forma" is checked - then function takes input value, then calculate and transfer it to value in Per SF, then sum into sumPerSF.
-       * 2.2.2. If checkbox "Include Expense on Pro Forma" is not checked - then function does not sum input value into sumPerSF.
-       *
-       * 3. sumPerSF value wraped as alias 'summaPerSF' and is used in other actions 
-       */
+    addCustomExpenseCategory(categoryName: string): ExpenseForecastActions {
+        expenseForecastPage.createNewCategoryButton.click();
+        expenseForecastPage.newCategoryExpenseName.clear().type(categoryName);
+        this.Page.formSaveBtn(1).click();
+        this.verifyProgressBarNotExist();
+        return this;
+    }
 
-    totalSumForecastPSF(GBA?: number, resUnits?: number, rooms?: number): ExpenseForecastActions {
+      /**
+           * 1. Action takes all allForecastsInputs (forecast expense card inputs).
+           * 2. In cycle we check all forecast cards does it has checkbox "Include Expense on Pro Forma" or not: 
+           * 2.1. If it does not have checkbox "Include Expense on Pro Forma" - function takes input value, 
+           * then calculate and transfer it to value in Per SF, then sum into sumPerSF 
+           *
+           * 2.2. If it has checkbox "Include Expense on Pro Forma" - we check does it checked or not: 
+           * 2.2.1. If checkbox "Include Expense on Pro Forma" is checked - then function takes input value, then calculate and transfer it to value in Per SF, then sum into sumPerSF.
+           * 2.2.2. If checkbox "Include Expense on Pro Forma" is not checked - then function does not sum input value into sumPerSF.
+           *
+           * 3. sumPerSF value wraped as alias 'summaPerSF' and is used in other actions 
+           */
+
+       totalSumForecastPSF(GBA?: number, resUnits?: number, rooms?: number): ExpenseForecastActions {
         expenseForecastPage.allForecastsInputs.then(inputs => {
             let sumPerSF = 0;
             for (let i = 0; i < inputs.length; i++) {
@@ -451,73 +498,27 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
         return this;
     }
 
-    verifyTOECommentary(textToBe: string): ExpenseForecastActions {
-        expenseForecastPage.toeCommentary.should("contain.text", textToBe);
+    
+    private includeExpensesProFormaCheckbox(inputs: JQuery<HTMLElement>, i: number): ExpenseForecastActions {
+        cy.wrap(inputs[i]).parents('[data-qa$=-forecast-item]').then(card => {
+            cy.wrap(card).as("IncludeExpenseonProFormaCheckbox");
+        });
         return this;
     }
 
-    verifyForecastCommentary(textToBe: string, forecastItem: BoweryReports.ForecastItem, index = 1): ExpenseForecastActions {
-        expenseForecastPage.getExpenseCommentary(this.getItemNameForAverage(forecastItem.name), index).should("contain.text", textToBe);
-        return this;
-    }
-
-    editTOECommentary(newText: string, isWithClear = false): ExpenseForecastActions {
-        expenseForecastPage.toeCommentaryEditButton.click();
-        if (isWithClear) {
-            expenseForecastPage.toeCommentary.clear();
-        }
-        expenseForecastPage.toeCommentary.type(newText);
-        expenseForecastPage.toeCommentarySaveButton.click();
-        expenseForecastPage.toeCommentaryModified.should("exist");
-        return this;
-    }
-
-    editExpenseForecastCommentary(newText: string, forecastItem: BoweryReports.ForecastItem, isWithClear = false, index = 1): ExpenseForecastActions {
-        let item = this.getItemNameForAverage(forecastItem.name);
-        expenseForecastPage.getExpenseCommentaryEditButton(item, index).click();
-        if (isWithClear) {
-            expenseForecastPage.getExpenseCommentary(item, index).clear();
-        }
-        expenseForecastPage.getExpenseCommentary(item, index).type(newText);
-        expenseForecastPage.getExpenseCommentarySaveButton(item, index).click();
-        expenseForecastPage.getExpenseCommentaryModified(item).should("exist");
-        return this;
-    }
-
-    revertToOriginalExpenseForecastCommentary(forecastItem: BoweryReports.ForecastItem, index = 1): ExpenseForecastActions {
-        let item = this.getItemNameForAverage(forecastItem.name);
-        expenseForecastPage.getExpenseCommentaryEditButton(item, index).click();
-        expenseForecastPage.getExpenseCommentaryRevertToOriginal(item).click();
-        this.verifyProgressBarNotExist();
-        expenseForecastPage.expenseConfirmRevertButton.click();
-        expenseForecastPage.getExpenseCommentarySaveButton(item, index).click();
-        return this;
-    }
-
-    switchExpenseForecastBasis(forecastItem: ForecastItem): ExpenseForecastActions {
-        expenseForecastPage.getElementBasisToSwitch(forecastItem.name, forecastItem.basis).click();
-        return this;
-    }
-
-    hideExpenseForecastHeader(): ExpenseForecastActions {
-        // ernst: A few hacks to get clear Insurance_Forecast_Item component without overlayed headers
-        cy.log('hide');
-        if (Cypress.browser.isHeadless == true) {
-            expenseForecastPage.Header.then(elem => {
-                elem.hide();
+    private includeExpenseProFormaCheckboxValue(inputs: JQuery<HTMLElement>, i: number): ExpenseForecastActions {
+        cy.wrap(inputs[i]).parents('[data-qa$=-forecast-item]').find('[label="Include Expense on Pro Forma"]').find('[type="checkbox"]')
+            .invoke('prop', 'value').then(checkboxValue => {
+                cy.wrap(checkboxValue).as("checkboxValue");
             });
-            expenseForecastPage.expenseForecastHeader.then(elem => {
-                elem.hide();
-            });
-        }
         return this;
     }
 
-    addCustomExpenseCategory(categoryName: string): ExpenseForecastActions {
-        expenseForecastPage.createNewCategoryButton.click();
-        expenseForecastPage.newCategoryExpenseName.clear().type(categoryName);
-        this.Page.formSaveBtn(1).click();
-        this.verifyProgressBarNotExist();
+    private radiobuttonBasis(inputs: JQuery<HTMLElement>, i: number): ExpenseForecastActions {
+        cy.wrap(inputs[i]).parents('[data-qa$=-forecast-item]').find('[data-qa="checked"]').find('[type="radio"]')
+            .invoke('prop', 'value').then(basisValue => {
+                cy.wrap(basisValue).as("basisValue");
+            });
         return this;
     }
 
