@@ -1,7 +1,7 @@
-import { loginAction } from '../../../actions/base/baseTest.actions';
-import { Organization } from '../../../actions/index';
-import { _NavigationSection } from '../../../actions/base/index';
-import testData from "../../../fixtures/not_full_reports/organizations/QA-5841_44_47.fixture";
+import { loginAction } from '../../../../actions/base/baseTest.actions';
+import { Organization } from '../../../../actions/index';
+import { _NavigationSection } from '../../../../actions/base/index';
+import testData from "../../../../fixtures/not_full_reports/organizations/QA-5841_44_47.fixture";
 
 describe("Verify users roles to create new clients", 
     { tags:[ "@permissions_roles, @client", "@organizations" ] }, () => {
