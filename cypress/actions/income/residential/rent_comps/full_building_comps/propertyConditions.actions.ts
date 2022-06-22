@@ -1,7 +1,7 @@
 import BaseActionsExt from "../../../../base/base.actions.ext";
 import propertyConditionsPage
     from "../../../../../pages/income/residential/rent_comps/full_building_comps/propertyConditions.page";
-import { BoweryReports } from "../../../../../types";
+import { BoweryReports } from "../../../../../types/boweryReports.type";
 
 class PropertyConditionsActions extends BaseActionsExt<typeof propertyConditionsPage>{
 
