@@ -9,7 +9,7 @@ const _numberOfResidentialUnits = 5;
 const _name = Enums.EXPENSE_CELL.replacementsAndReserves;
 const _basis = "sf" as BoweryReports.UnitSF;
 const _projection = 335.44;
-const _forecast = 66.01;
+const _forecast = 88.01;
 
 const _forecastItem = (): BoweryReports.ForecastItem => {
     return {
