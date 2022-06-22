@@ -256,6 +256,23 @@ class AdjustCompsActions extends BaseActionsExt<typeof adjustCompsPage> {
         cy.contains("h6", name).should("exist");
         return this;
     }
+
+    enterMarketConditionAdjustment(value: string | number): AdjustCompsActions {
+        adjustCompsPage.marketConditionAdjustmentInput.type(`${value}`).should("have.value", value);
+        adjustCompsPage.applyMarketConditionAdjustmentButton.click();
+        return this;
+    }
+
+    verifyMarketConditionsTime(dateOfValue: Date, saleDate: Date, index = 0): AdjustCompsActions {
+        const diff = new Date(+saleDate).setHours(12) - new Date(+dateOfValue).setHours(12);
+        const daysDifference = Math.round(diff/8.64e7);
+        adjustCompsPage.marketConditionAdjustmentInput.invoke("val").then((val: number) => {
+            const marketConditionsTime = Math.round(Math.abs(daysDifference) / 365 * val);
+            adjustCompsPage.getMarketAdjustmentsRowCells("marketConditions").eq(index).should("have.value", `${marketConditionsTime}%`);
+        });
+        return this;
+    }
+
 }
 
 export default new AdjustCompsActions(adjustCompsPage);
