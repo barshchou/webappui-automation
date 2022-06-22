@@ -1,50 +1,28 @@
-import BaseActions from "../../base/base.actions";
 import rentReconciliationPage from "../../../pages/income/residential/rentReconciliation.page";
 import { numberWithCommas } from "../../../../utils/numbers.utils";
+import BaseActionsExt from "../../base/base.actions.ext";
 
-class RentReconciliationActions extends BaseActions{
+class RentReconciliationActions extends BaseActionsExt<typeof rentReconciliationPage>{
 
-    /**
-     *
-     * @param {string} commToBe
-     * @returns {RentReconciliationActions}
-     */
-    verifyIntroCommentary(commToBe) {
+     verifyIntroCommentary(commToBe: string): RentReconciliationActions {
         rentReconciliationPage.introCommentary.should("have.text", commToBe);
         return this;
     }
 
-    /**
-     *
-     * @param {number} bedroomNumber
-     * @returns {RentReconciliationActions}
-     */
-    expandBedroomReconByNumber(bedroomNumber) {
+    expandBedroomReconByNumber(bedroomNumber: number): RentReconciliationActions {
         rentReconciliationPage.getBedReconByBedNumb(bedroomNumber).click();
         return this;
     }
 
-
-    /**
-     *
-     * @param {number} bedroomNumber
-     * @param {ArrayLike<number>} forecasts
-     * @returns {RentReconciliationActions}
-     */
-    verifyBedroomMinForecastByNumber(bedroomNumber, ...forecasts) {
+    verifyBedroomMinForecastByNumber(bedroomNumber: number, ...forecasts: Array<number>): RentReconciliationActions {
         const minValue = Math.min(...forecasts);
         const textToBe = `$${numberWithCommas(minValue.toFixed(2))}`;
         rentReconciliationPage.getBedMinForecastByNum(bedroomNumber).should("have.text", textToBe);
         return this;
     }
 
-    /**
-     *
-     * @param {Readonly<{numberOfUnits: number | string, bedroomsNumber: number}>} rentRollData
-     * @param {ArrayLike<number>} forecasts
-     * @returns {RentReconciliationActions}
-     */
-    verifyBedroomAvgForecastByNumber(rentRollData, ...forecasts) {
+    verifyBedroomAvgForecastByNumber(rentRollData: Readonly<{numberOfUnits: number | string, bedroomsNumber: number}>, 
+        ...forecasts: Array<number>): RentReconciliationActions {
         let forecastSum = 0;
         let forecastsArray = [];
         if (forecasts.length === 1 && rentRollData.numberOfUnits !== 1) {
@@ -55,44 +33,27 @@ class RentReconciliationActions extends BaseActions{
             forecasts.forEach(el => forecastsArray.push(el));
         }
         forecastsArray.forEach(el => forecastSum += el);
-        const avgValue = forecastSum / rentRollData.numberOfUnits;
+        const avgValue = forecastSum / Number(rentRollData.numberOfUnits);
         const textToBe = `$${numberWithCommas(avgValue.toFixed(2))}`;
         rentReconciliationPage.getBedAvgForecastByNum(rentRollData.bedroomsNumber).should("have.text", textToBe);
         return this;
     }
 
-    /**
-     *
-     * @param {number} bedroomNumber
-     * @param {ArrayLike<number>} forecasts
-     * @returns {RentReconciliationActions}
-     */
-    verifyBedroomMaxForecastByNumber(bedroomNumber, ...forecasts) {
+    verifyBedroomMaxForecastByNumber(bedroomNumber: number, ...forecasts: Array<number>): RentReconciliationActions {
         const maxValue = Math.max(...forecasts);
         const textToBe = `$${numberWithCommas(maxValue.toFixed(2))}`;
         rentReconciliationPage.getBedMaxForecastByNum(bedroomNumber).should("have.text", textToBe);
         return this;
     }
 
-    /**
-     *
-     * @param {number} bedroomNumber
-     * @param {Array<{monthly: number}>} comparables
-     * @returns {RentReconciliationActions}
-     */
-    verifyBedroomMinCompByNumber(bedroomNumber, comparables) {
+    verifyBedroomMinCompByNumber(bedroomNumber: number, comparables: Array<{monthly: number}>): RentReconciliationActions {
         const minValue = Math.min(...this.getRentsArray(comparables));
         const textToBe = `$${numberWithCommas(minValue.toFixed(2))}`;
         rentReconciliationPage.getBedMinCompByNum(bedroomNumber).should("have.text", textToBe);
         return this;
     }
 
-    /**
-     * @private
-     * @param {Array<{monthly: number}>} comparables
-     * @returns {Array<number>}
-     */
-    getRentsArray(comparables) {
+     private getRentsArray(comparables: Array<{monthly: number}>): Array<number> {
         let rentsArray = [];
         comparables.forEach(comp => {
             rentsArray.push(comp.monthly);
@@ -100,13 +61,7 @@ class RentReconciliationActions extends BaseActions{
         return rentsArray;
     }
 
-    /**
-     *
-     * @param {number} bedroomNumber
-     * @param {Array<{monthly: number}>} comparables
-     * @returns {RentReconciliationActions}
-     */
-    verifyBedroomAvgCompByNumber(bedroomNumber, comparables) {
+    verifyBedroomAvgCompByNumber(bedroomNumber: number, comparables: Array<{monthly: number}>): RentReconciliationActions {
         let comparableSum = 0;
         const rentsArray = this.getRentsArray(comparables);
         rentsArray.forEach(el => comparableSum += el);
@@ -116,53 +71,28 @@ class RentReconciliationActions extends BaseActions{
         return this;
     }
 
-
-    /**
-     *
-     * @param {number} bedroomNumber
-     * @param {Array<{monthly: number}>} comparables
-     * @returns {RentReconciliationActions}
-     */
-    verifyBedroomMaxCompByNumber(bedroomNumber, comparables) {
+    verifyBedroomMaxCompByNumber(bedroomNumber: number, comparables: Array<{monthly: number}>): RentReconciliationActions {
         const maxValue = Math.max(...this.getRentsArray(comparables));
         const textToBe = `$${numberWithCommas(maxValue.toFixed(2))}`;
         rentReconciliationPage.getBedMaxCompByNum(bedroomNumber).should("have.text", textToBe);
         return this;
     }
 
-    /**
-     *
-     * @param {number} bedroomNumber
-     * @param {number} conclusionValue
-     * @returns {RentReconciliationActions}
-     */
-    enterBedroomMarketConclusionByNumber(bedroomNumber, conclusionValue) {
+    enterBedroomMarketConclusionByNumber(bedroomNumber: number, conclusionValue: number): RentReconciliationActions {
         const textToBe = numberWithCommas(conclusionValue);
-        rentReconciliationPage.getMarketConclusionBedByNumb(bedroomNumber).clear().type(conclusionValue)
+        rentReconciliationPage.getMarketConclusionBedByNumb(bedroomNumber).clear().type(`${conclusionValue}`)
             .should("have.value", textToBe);
         return this;
     }
 
-    /**
-     *
-     * @param {number} bedroomsNumber
-     * @param {string} value
-     * @returns {RentReconciliationActions}
-     */
-    selectBedroomMarketBreakdownBedByNumber(bedroomsNumber, value) {
+    selectBedroomMarketBreakdownBedByNumber(bedroomsNumber: number, value: string): RentReconciliationActions {
         rentReconciliationPage.getMarketBreakdownDropBedByNum(bedroomsNumber).click();
         rentReconciliationPage.getDropdownOptionByValue(value).click();
         rentReconciliationPage.getMarketBreakdownBedInputCheckByNum(bedroomsNumber).should("have.value", value);
         return this;
     }
 
-    /**
-     *
-     * @param {number} bedroomsNumber
-     * @param {string} newCommentary
-     * @returns {RentReconciliationActions}
-     */
-    editBedroomCommentaryByBedNum(bedroomsNumber, newCommentary) {
+    editBedroomCommentaryByBedNum(bedroomsNumber: number, newCommentary: string): RentReconciliationActions {
         rentReconciliationPage.getBedCommentaryEditButtonByBedNum(bedroomsNumber).click();
         rentReconciliationPage.getBedCommentaryByBedNum(bedroomsNumber).clear().type(newCommentary)
             .should("have.text", newCommentary);
@@ -170,4 +100,4 @@ class RentReconciliationActions extends BaseActions{
     }
 }
 
-export default new RentReconciliationActions();
+export default new RentReconciliationActions(rentReconciliationPage);

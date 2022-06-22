@@ -1,105 +1,60 @@
-import BaseActions from "../../base/base.actions";
 import expenseStructurePage from "../../../pages/income/residential/expenseStructure.page";
+import BaseActionsExt from "../../base/base.actions.ext";
 
-class ExpenseStructureActions extends BaseActions {
+class ExpenseStructureActions extends BaseActionsExt<typeof expenseStructurePage> {
 
-    /**
-     *
-     * @param {string} value
-     * @returns {ExpenseStructureActions}
-     */
-    checkHeatExpensesByValue(value) {
+    checkHeatExpensesByValue(value: string): ExpenseStructureActions {
         expenseStructurePage.heatExpensesRadio.check(value);
         expenseStructurePage.getHeatExpensesToCheck(value).should("exist");
         return this;
     }
 
-    /**
-     *
-     * @param {string} value
-     * @returns {ExpenseStructureActions}
-     */
-    checkElectricityByValue(value) {
+    checkElectricityByValue(value: string): ExpenseStructureActions {
         expenseStructurePage.electricityRadio.check(value);
         expenseStructurePage.getElectricityToCheck(value).should("exist");
         return this;
     }
 
-    /**
-     *
-     * @param {string} value
-     * @returns {ExpenseStructureActions}
-     */
-    checkCommonElectricityByValue(value) {
+    checkCommonElectricityByValue(value: string): ExpenseStructureActions {
         expenseStructurePage.commonElectricityRadio.check(value);
         expenseStructurePage.getCommonElectricityToCheck(value).should("exist");
         return this;
     }
 
-    /**
-     *
-     * @param {string} value
-     * @returns {ExpenseStructureActions}
-     */
-    checkGasByValue(value) {
+    checkGasByValue(value: string): ExpenseStructureActions {
         expenseStructurePage.gasExpensesRadio.check(value);
         expenseStructurePage.getGasToCheck(value).should("exist");
         return this;
     }
 
-    /**
-     *
-     * @param {string} value
-     * @returns {ExpenseStructureActions}
-     */
-    checkRefuseRemovalByValue(value) {
+    checkRefuseRemovalByValue(value: string): ExpenseStructureActions {
         expenseStructurePage.refuseRemovalRadio.check(value);
         expenseStructurePage.getRefuseRemovalToCheck(value).should("exist");
         return  this;
     }
 
-    /**
-     *
-     * @param {string} value
-     * @returns {ExpenseStructureActions}
-     */
-    checkWaterSewerByValue(value) {
+    checkWaterSewerByValue(value: string): ExpenseStructureActions {
         expenseStructurePage.waterSewerRadio.check(value);
         expenseStructurePage.getWaterSewerToCheck(value).should("exist");
         return  this;
     }
 
-    /**
-     *
-     * @param {string} value
-     * @returns {ExpenseStructureActions}
-     */
-    checkAreaMaintenanceByValue(value) {
+    checkAreaMaintenanceByValue(value: string): ExpenseStructureActions {
         expenseStructurePage.areaMaintenanceRadio.check(value);
         expenseStructurePage.getAreaMaintenanceToCheck(value).should("exist");
         return this;
     }
 
-    /**
-     *
-     * @param {string} commToBe
-     * @returns {ExpenseStructureActions}
-     */
-    verifyTenantObligationsCommentary(commToBe) {
+    verifyTenantObligationsCommentary(commToBe: string): ExpenseStructureActions {
         expenseStructurePage.tenantObligationsDiscussion.should("have.text", commToBe);
         return this;
     }
 
-    /**
-     *
-     * @param {string} commToBe
-     * @returns {ExpenseStructureActions}
-     */
-    verifyOwnerObligationsCommentary(commToBe) {
+    verifyOwnerObligationsCommentary(commToBe: string): ExpenseStructureActions {
         expenseStructurePage.ownerObligationsDiscussion.should("have.text", commToBe);
         return this;
     }
 }
 
 
-export default new ExpenseStructureActions();
+export default new ExpenseStructureActions(expenseStructurePage);

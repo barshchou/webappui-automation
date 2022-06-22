@@ -59,9 +59,21 @@ jobs:
         run: npm install
 
       - name: Run Cypress full_report tests on Currents.dev
-        run: currents run --tag ${{ github.event.inputs.env }} --spec "./cypress/integration/full_reports/*.spec.ts" --browser chrome --record --parallel --key ${{ secrets.CURRENTS_RECORD_KEY }} --ci-build-id "${{ github.repository }}-${{ github.run_id }}-${{ github.run_attempt}}"
+        run: currents run --config baseUrl=${{ github.event.inputs.customEnv == '' && github.event.inputs.url ||  github.event.inputs.customEnv }} --tag ${{ github.event.inputs.env }} --spec "./cypress/integration/full_reports/*.spec.ts" --browser chrome --record --parallel --key ${{ secrets.CURRENTS_RECORD_KEY }} --ci-build-id "${{ github.repository }}-${{ github.run_id }}-${{ github.run_attempt}}"
         env:
           CYPRESS_USERNAME: ${{ github.event.inputs.env == 'custom' && secrets.CESAR_USERNAME || secrets.USERNAME }}
           CYPRESS_PASSWORD: ${{ github.event.inputs.env == 'custom' && secrets.CESAR_PASSWORD || secrets.PASSWORD }}
           CYPRESS_url: ${{ github.event.inputs.env }}
           CYPRESS_customEnv: ${{ github.event.inputs.customEnv }}
+          CYPRESS_WEBAPP_APPRAISER_USERNAME: ${{ secrets.WEBAPP_APPRAISER_USERNAME }}
+          CYPRESS_WEBAPP_APPRAISER_PASSWORD: ${{ secrets.WEBAPP_APPRAISER_PASSWORD }}
+          CYPRESS_WEBAPP_INSPECTOR_USERNAME: ${{ secrets.WEBAPP_INSPECTOR_USERNAME }}
+          CYPRESS_WEBAPP_INSPECTOR_PASSWORD: ${{ secrets.WEBAPP_INSPECTOR_PASSWORD }}
+          CYPRESS_WEBAPP_ADMIN_USERNAME: ${{ secrets.WEBAPP_ADMIN_USERNAME }}
+          CYPRESS_WEBAPP_ADMIN_PASSWORD: ${{ secrets.WEBAPP_ADMIN_PASSWORD }}
+          CYPRESS_WEBAPP_LEAD_APPRAISER_USERNAME: ${{ secrets.WEBAPP_LEAD_APPRAISER_USERNAME }}
+          CYPRESS_WEBAPP_LEAD_APPRAISER_PASSWORD: ${{ secrets.WEBAPP_LEAD_APPRAISER_PASSWORD }}
+          CYPRESS_WEBAPP_ROLE_TEST_USERNAME: ${{ secrets.WEBAPP_ROLE_TEST_USERNAME }}
+          CYPRESS_WEBAPP_ROLE_TEST_PASSWORD: ${{ secrets.WEBAPP_ROLE_TEST_PASSWORD }}
+          CYPRESS_WEBAPP_TEST_USERNAME: ${{ secrets.WEBAPP_TEST_USERNAME }}
+          CYPRESS_WEBAPP_TEST_PASSWORD: ${{ secrets.WEBAPP_TEST_PASSWORD }}

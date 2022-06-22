@@ -1,5 +1,5 @@
 import createNewClientPage from "../../pages/organization/createNewClient.page";
-import { BoweryAutomation } from "../../types";
+import { BoweryAutomation } from "../../types/boweryAutomation.type";
 import BaseActionsExt from "../base/base.actions.ext";
 
 class OrganizationInfoActions extends BaseActionsExt<typeof createNewClientPage>{
@@ -60,12 +60,12 @@ class OrganizationInfoActions extends BaseActionsExt<typeof createNewClientPage>
         return this;
     }
 
-    clickSaveFormButton() {
+    clickSaveFormButton(): OrganizationInfoActions {
         createNewClientPage.saveFormButton.should("be.enabled").click();
         return this;
     }
 
-    verifySuccessModal() {
+    verifySuccessModal(): OrganizationInfoActions {
         createNewClientPage.successModal.should("be.visible");
         return this;
     }
