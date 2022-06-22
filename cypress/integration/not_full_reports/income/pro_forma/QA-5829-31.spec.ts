@@ -1,12 +1,12 @@
 import { numberWithCommas } from '../../../../../utils/numbers.utils';
-import testData from "../../../../fixtures/not_full_reports/income/pro_forma/QA-5832-34.fixture";
+import testData from "../../../../fixtures/not_full_reports/income/pro_forma/QA-5829-31.fixture";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { Income, Property } from "../../../../actions";
 import proFormaTypes from "../../../../enums/proFormaTypes.enum";
 import { BoweryReports } from '../../../../types/boweryReports.type';
 
-describe("Pro Forma Page validation Operating Expenses -> Payroll & Benefits", 
+describe("Pro Forma Page validation Operating Expenses -> Repairs & Maintenance", 
     { tags:[ "@income", "@pro_forma" ] }, () => { 
     
     before("Login, create report, prepare data", () => {
@@ -18,7 +18,7 @@ describe("Pro Forma Page validation Operating Expenses -> Payroll & Benefits",
             .enterNumberOfResUnits(testData.numberOfResidentialUnits)
             .enterNumberOfCommercialUnits(testData.numberOfCommercialUnits);
         
-        cy.stepInfo(`2. Go to the Income → Expense Forecast → Payroll & Benefits check Per SF 
+        cy.stepInfo(`2. Go to the Income → Expense Forecast → Repairs & Maintenance check Per SF 
                     radio button and fill in the value into Appraiser’s Forecast cell`);
         _NavigationSection.navigateToExpenseForecast();
         Income._ExpenseForecastActions.chooseForecastItemBasis(testData.forecastItem)
@@ -33,34 +33,34 @@ describe("Pro Forma Page validation Operating Expenses -> Payroll & Benefits",
             .verifyProgressBarNotExist();
     });
 
-    it("[QA-5832]", () => {
-        cy.stepInfo(`3. The value in the Payroll & Benefits Total is taken from Income → 
-                    Expense Forecast → Payroll & Benefits Forecast Discussion generated commentary`);
+    it("[QA-5829]", () => {
+        cy.stepInfo(`3. The value in the Repairs & Maintenance Total is taken from Income → 
+                    Expense Forecast → Repairs & Maintenance Forecast Discussion generated commentary`);
         Income._ProFormaActions.verifyCategoryTotal(
-            `$${numberWithCommas(Math.round(testData.payrollBenefitsSfTotal))}`, 
-            proFormaTypes.payrollBenefits);
+            `$${numberWithCommas(Math.round(testData.repairAndMaintenanceSfTotal))}`, 
+            proFormaTypes.repairAndMaintenance);
     });
 
-    it("[QA-5833]", () => {
-        cy.stepInfo(`3. The value in the Payroll & Benefits is taken from Income → 
-                    Expense Forecast → Payroll & Benefits → Appraiser’s Forecast cell`);
+    it("[QA-5830]", () => {
+        cy.stepInfo(`3. The value in the Repairs & Maintenance is taken from Income → 
+                    Expense Forecast → Repairs & Maintenance → Appraiser’s Forecast cell`);
         Income._ProFormaActions.verifyCategoryPSFTotal(
-            `$${numberWithCommas(testData.payrollBenefitsSfPerSf.toFixed(2))}`, 
-            proFormaTypes.payrollBenefits);
+            `$${numberWithCommas(testData.repairAndMaintenanceSfPerSf.toFixed(2))}`, 
+            proFormaTypes.repairAndMaintenance);
     });
 
-    it("[QA-5834]", () => {
+    it("[QA-5831]", () => {
         //Navigate to Expense Forecast and change basis
         testData.forecastItem.basis = "unit" as BoweryReports.UnitSF;
         _NavigationSection.navigateToExpenseForecast();
         Income._ExpenseForecastActions.switchExpenseForecastBasis(testData.forecastItem);
         _NavigationSection.navigateToProForma()
             .verifyProgressBarNotExist();
-        cy.stepInfo(`3. The value in the Payroll & Benefits → PSF is calculated by the formula: 
+        cy.stepInfo(`3. The value in the Repairs & Maintenance → PSF is calculated by the formula: 
                     Total / selected Basis of Square Foot Analysis (Property>Summary)`);
         Income._ProFormaActions.verifyCategoryPSFTotal(
-            `$${numberWithCommas(testData.payrollBenefitsUnitPerSf.toFixed(2))}`, 
-            proFormaTypes.payrollBenefits);
+            `$${numberWithCommas(testData.repairAndMaintenanceUnitPerSf.toFixed(2))}`, 
+            proFormaTypes.repairAndMaintenance);
 
         deleteReport(testData.reportCreationData.reportNumber);
     });
