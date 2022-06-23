@@ -2,9 +2,7 @@ import testData from "../../../../../fixtures/not_full_reports/income/commercial
 import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../../actions/base";
 import { Income, Property } from "../../../../../actions";
-import { setReportId } from "../../../../../../utils/intercept.utils";
-import { Alias } from "../../../../../utils/alias.utils";
-
+import { _IncomeRoutes } from "../../../../../enums/pages_routes";
 
 describe("Subject column calculations", { tags: [ "@income", "@commercial", "@rent_comps" ] }, () => {
 
@@ -20,8 +18,7 @@ describe("Subject column calculations", { tags: [ "@income", "@commercial", "@re
 
     beforeEach(() => {
         cy.restoreLocalStorage();
-        setReportId();
-        openCommercialRentRoll();
+        _NavigationSection.openPageByVisit(_IncomeRoutes._CommercialRoutes._InPlaceRentRoll);
     });
 
     it("All units are occupied and have rent PSF filled in", () => {
@@ -91,10 +88,3 @@ describe("Subject column calculations", { tags: [ "@income", "@commercial", "@re
        deleteReport(testData.reportCreationData.reportNumber);
     });
 });
-
-const openCommercialRentRoll = () => {
-    const baseUrl = Cypress.config().baseUrl;
-    cy.get(`@${Alias.reportId}`).then(reportId => {
-        cy.visit(`${baseUrl}/report/${reportId}/commercial-rent-roll`);
-    });
-};

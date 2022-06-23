@@ -1,6 +1,9 @@
 import BaseActionsExt from "../../base/base.actions.ext";
 import rentCompsPage from "../../../pages/income/commercial/rentComps.page";
-import { BoweryReports } from "../../../types";
+import { BoweryReports } from "../../../types/boweryReports.type";
+import { getNumberFromDollarNumberWithCommas } from "../../../../utils/numbers.utils";
+import { _map } from "../../../support/commands";
+import mapKeysUtils from "../../../utils/mapKeys.utils";
 
 class CommercialRentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
 
@@ -120,8 +123,8 @@ class CommercialRentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
         return this;
     }
 
-    verifyRentPerSFCellValue(value: number, rowNumber = 0): CommercialRentCompsActions {
-        rentCompsPage.getRentPerSFCellByRowNumber(rowNumber).should("have.text", `$${value}.00`);
+    verifyRentPerSFCellValue(value: number, group = "unsorted", rowNumber = 0): CommercialRentCompsActions {
+        rentCompsPage.getRentPerSFCellByRowNumberAndGroup(group, rowNumber).should("have.text", `$${value}.00`);
         return this;
     }
 
@@ -192,6 +195,79 @@ class CommercialRentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
 
     private static handleRentPSFsArray(rentPSFs: number[], leaseStatuses: BoweryReports.LeaseStatus[]): number[] {
         return rentPSFs.filter((value, index) => leaseStatuses[index] !== "Vacant");
+    }
+
+    clickAddCompButtonByIndex(index = 0): CommercialRentCompsActions {
+        rentCompsPage.addCompButtons.as("rentComps");
+        cy.get("@rentComps").eq(index).click({ force: true });
+        return this;
+    }
+
+    addNumberFirstComparables(numberToAdd: number): CommercialRentCompsActions {
+        for (let i = 0; i < numberToAdd; i++) {
+            this.clickAddCompButtonByIndex(i);
+        }
+        return this;
+    }
+
+    saveCompPricePerSFPerYearToAliasByIndex(group = "unsorted", index = 0): CommercialRentCompsActions {
+        rentCompsPage.getRentPerSFCellByRowNumberAndGroup(group, index).invoke("text").then(elText => {
+            const numberPriceValue = getNumberFromDollarNumberWithCommas(elText.trim());
+            _map.set(`${index + 1}${mapKeysUtils.rent_per_sf}`, numberPriceValue);
+        });
+        return this;
+    }
+
+    saveCompPricesPerSFPerYearToAliasNumberFirstComps(numberToSave: number, group = "unsorted"): CommercialRentCompsActions {
+        for (let i = 0; i < numberToSave; i++) {
+            this.saveCompPricePerSFPerYearToAliasByIndex(group, i);
+        }
+        return this;
+    }
+
+    verifyComputedCompsMinValue(rentPSFs: number[]): CommercialRentCompsActions {
+        const textToBe = rentPSFs.length === 0 ? "$0" : `$${Math.round(Math.min(...rentPSFs))}`;
+        rentCompsPage.computedCompsMinCell.should("have.text", textToBe);
+        return this;
+    }
+
+    verifyComputedCompsAvgValue(rentPSFs: number[]): CommercialRentCompsActions {
+        const avgValue = rentPSFs.length === 0 ? 0 :
+            rentPSFs.reduce((sum, current) => sum + current, 0) / rentPSFs.length;
+        const textToBe = `$${Math.round(avgValue)}`;
+        rentCompsPage.computedCompsAvgCell.should("have.text", textToBe);
+        return this;
+    }
+
+    verifyComputedCompsMaxValue(rentPSFs: number[]): CommercialRentCompsActions {
+        const textToBe = rentPSFs.length === 0 ? "$0" : `$${Math.round(Math.max(...rentPSFs))}`;
+        rentCompsPage.computedCompsMaxCell.should("have.text", textToBe);
+        return this;
+    }
+
+    verifyComputedCompsColumn(rentPSFs: number[]): CommercialRentCompsActions {
+        this.verifyComputedCompsMinValue(rentPSFs)
+            .verifyComputedCompsAvgValue(rentPSFs)
+            .verifyComputedCompsMaxValue(rentPSFs);
+        return this;
+    }
+
+    saveComputedCompsColumnValues(): CommercialRentCompsActions {
+        rentCompsPage.computedCompsMinCell.invoke("text").then(value => {
+            _map.set(mapKeysUtils.computed_comps_min, getNumberFromDollarNumberWithCommas(value));
+        });
+        rentCompsPage.computedCompsAvgCell.invoke("text").then(value => {
+            _map.set(mapKeysUtils.computed_comps_avg, getNumberFromDollarNumberWithCommas(value));
+        });
+        rentCompsPage.computedCompsMaxCell.invoke("text").then(value => {
+            _map.set(mapKeysUtils.computed_comps_max, getNumberFromDollarNumberWithCommas(value));
+        });
+        return this;
+    }
+
+    clickRemoveCompButtonGroupTableByIndex(index = 0, group = "unsorted"): CommercialRentCompsActions {
+        rentCompsPage.getRemoveCompButtonsFromGroupTable(group).eq(index).click();
+        return this;
     }
 }
 

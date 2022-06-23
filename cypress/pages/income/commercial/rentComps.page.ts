@@ -55,7 +55,9 @@ class CommercialRentCompsPage extends BasePage {
             find(`input[value='${name}']`);
     }
 
-    getRentPerSFCellByRowNumber(rowNumber = 0) {return cy.xpath(`//tr[@data-qa='row-${rowNumber}']/td[@data-qa='rentPerSF-cell']`);}
+    getRentPerSFCellByRowNumberAndGroup(group = "unsorted", rowNumber = 0) {
+        return cy.get(`[data-qa='${group}_group'] [data-qa=rentPerSF-cell]`).eq(rowNumber);
+    }
 
     getDragableElement(index: number) { return `[data-qa="row-${index}"] [data-react-beautiful-dnd-drag-handle="2"]`;}
 
@@ -73,6 +75,19 @@ class CommercialRentCompsPage extends BasePage {
 
     get computedSubjectMaxCell() {return this.computedSubjectColumn.find("[data-qa='02-cell']");}
 
+    get addCompButtons() {return cy.get(this.addCompButtonsLocator);}
+
+    get computedCompsColumn() {return cy.get("[data-qa=computed-panel] [data-qa='1-column']");}
+
+    get computedCompsMinCell() {return this.computedCompsColumn.find("[data-qa='10-cell']");}
+
+    get computedCompsAvgCell() {return this.computedCompsColumn.find("[data-qa='11-cell']");}
+
+    get computedCompsMaxCell() {return this.computedCompsColumn.find("[data-qa='12-cell']");}
+
+    getRemoveCompButtonsFromGroupTable(group = "unsorted") {
+        return cy.get(`[data-qa='${group}_group'] [data-qa="remove-comp-btn"]`);
+    }
 }
 
 export default new CommercialRentCompsPage();

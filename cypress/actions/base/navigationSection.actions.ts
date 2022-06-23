@@ -1,6 +1,7 @@
 import navigationSectionPage from "../../pages/base/navigationSection.page";
 import { Alias } from "../../utils/alias.utils";
 import BaseActionsExt from "./base.actions.ext";
+import mapKeysUtils from "../../utils/mapKeys.utils";
 
 class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPage> {
     clickYesIfExist() {
@@ -604,6 +605,14 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
             }
         });
 
+        return this;
+    }
+
+    openPageByVisit(pageRoute: string): NavigationSectionActions {
+        const baseUrl = Cypress.config().baseUrl;
+        cy._mapGet(mapKeysUtils.report_id).then(reportId => {
+            cy.visit(`${baseUrl}/report/${reportId}/${pageRoute}`);
+        });
         return this;
     }
 }
