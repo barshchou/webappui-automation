@@ -4,11 +4,12 @@ import NavigationSection from "./navigationSection.actions";
 import { createPayload } from "../../api/report_payloads/462Avenue1NY.payload";
 import mapKeysUtils from "../../utils/mapKeys.utils";
 import { _HomePage } from ".";
+import Users from "../../../cypress.env.json";
 
 /**
  * Login action
  */
-export const loginAction = (username = Cypress.env("USERNAME"), password = Cypress.env("PASSWORD")) => {
+export const loginAction = (username = Users.USERNAME, password = Users.PASSWORD) => { //Cypress.env("USERNAME"), password = Cypress.env("PASSWORD")
     switch (Cypress.env("loginMethod")) {
         case "ui":
             cy.loginByUI(Cypress.config().baseUrl, username, password);
@@ -21,7 +22,7 @@ export const loginAction = (username = Cypress.env("USERNAME"), password = Cypre
 };
 
 export const createReport = (reportCreationData: BoweryAutomation.ReportCreationData, 
-                            username = Cypress.env("USERNAME"), password = Cypress.env("PASSWORD"),
+                            username = Users.USERNAME, password = Users.PASSWORD, //username = Cypress.env("USERNAME"), password = Cypress.env("PASSWORD")
                             payloadFunction = createPayload) => {
 
     salesInterceptions();

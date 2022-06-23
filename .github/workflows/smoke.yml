@@ -63,6 +63,16 @@ jobs:
             ${{ runner.os }}-build-
             ${{ runner.os }}-
 
+      - name: create-json
+        id: create-json
+        uses: jsdaniell/create-json@1.1.2
+        with:
+          name: "cypress.env.json"
+          json: ${{ secrets.USERS }}
+          dir: "src/"
+
+      # - run: git config --global user.email "viachaslau.barshchou@boweryvaluation.com" && git config --global user.name "barshchou" && git add . && git add --force src/users.json && git status && git commit -a -m "Run e2e tests Commit with the Credentials JSON created!"
+
       - name: Install Cypress globally
         run: npm i cypress@9.6.0 -g
 
@@ -92,3 +102,4 @@ jobs:
           CYPRESS_WEBAPP_ROLE_TEST_PASSWORD: ${{ secrets.WEBAPP_ROLE_TEST_PASSWORD }}
           CYPRESS_WEBAPP_TEST_USERNAME: ${{ secrets.WEBAPP_TEST_USERNAME }}
           CYPRESS_WEBAPP_TEST_PASSWORD: ${{ secrets.WEBAPP_TEST_PASSWORD }}
+          CYPRESS_USERS: ${{ secrets.USERS}}

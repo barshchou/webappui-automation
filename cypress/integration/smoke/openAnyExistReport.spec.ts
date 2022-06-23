@@ -1,6 +1,7 @@
 import { Base, Sales } from "../../actions";
 import { salesInterceptions } from "../../actions/base/baseTest.actions";
 import { _SalesTitles } from "../../enums/pages_titles";
+import Users from "../../../cypress.env.json";
 
 const reportNumber = "TestAutoReport-QA-generate-download";
 
@@ -8,7 +9,7 @@ describe("Open any existing report and open any page", { tags: [ "@smoke" ] }, (
 
     it("Test body", () => {
 
-       cy.loginByApi(Cypress.config().baseUrl, Cypress.env("USERNAME"), Cypress.env("PASSWORD"));
+       cy.loginByApi(Cypress.config().baseUrl, Users.USERNAME, Users.PASSWORD); //Cypress.env("USERNAME"), Cypress.env("PASSWORD")
 
        salesInterceptions();
        cy.visit("/");

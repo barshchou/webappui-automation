@@ -2,7 +2,9 @@
     "compilerOptions": {
       "target": "es5",
       "lib": ["esnext", "dom"],
-      "types": ["cypress", "cypress-real-events", "cypress-grep", "node"]
+      "types": ["cypress", "cypress-real-events", "cypress-grep", "node"],
+      "resolveJsonModule": true,
+      "esModuleInterop": true,
     },
     "include": ["**/*.ts"],
     "watchOptions": {
