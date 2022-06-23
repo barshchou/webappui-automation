@@ -1,7 +1,7 @@
 import { Base, Sales } from "../../actions";
 import { salesInterceptions } from "../../actions/base/baseTest.actions";
 import { _SalesTitles } from "../../enums/pages_titles";
-import Users from "../../../cypress.env.json";
+import * as Users from "../../../cypress.env.json";
 
 const reportNumber = "TestAutoReport-QA-generate-download";
 

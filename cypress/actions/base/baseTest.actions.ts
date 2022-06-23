@@ -4,7 +4,7 @@ import NavigationSection from "./navigationSection.actions";
 import { createPayload } from "../../api/report_payloads/462Avenue1NY.payload";
 import mapKeysUtils from "../../utils/mapKeys.utils";
 import { _HomePage } from ".";
-import Users from "../../../cypress.env.json";
+import * as Users from "../../../cypress.env.json";
 
 /**
  * Login action
