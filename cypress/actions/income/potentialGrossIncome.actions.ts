@@ -2,7 +2,7 @@ import grossIncomePage from "../../pages/income/potentialGrossIncome.page";
 import { getNumberFromDollarNumberWithCommas, numberWithCommas } from "../../../utils/numbers.utils";
 import potentialGrossIncomePage from "../../pages/income/potentialGrossIncome.page";
 import BaseActionsExt from "../base/base.actions.ext";
-import Enums from "../../enums/incomeTypesCellNames.enum";
+import Enums from "../../enums/income/incomeTypesCellNames.enum";
 
 class PotentialGrossIncomeActions extends BaseActionsExt<typeof potentialGrossIncomePage> {
 
