@@ -58,6 +58,10 @@ class KeyInfoPage extends BasePage{
     iconDefinitionOfMarketValue(index = 1) {return cy.xpath(`//*[contains(@data-qa, 'definition-of-market-value-tile')]//following::*[@data-icon='info-circle'][${index}]`);}
 
     get inputToCheckMyDateIsDifferent() {return cy.get("*[data-qa='isDifferentDateOfValuation']");}
+
+    get propertyRightsAppraisedFormEditButton() { return cy.xpath("//div[.='Property Rights Appraised']/..//*[@data-icon='pencil']//ancestor::button"); }
+
+    get definitionOfMarketValueFormEditButton() { return cy.xpath("//div[.='Definition of Market Value']/..//*[@data-icon='pencil']//ancestor::button"); }
 }
 
 export default new KeyInfoPage();

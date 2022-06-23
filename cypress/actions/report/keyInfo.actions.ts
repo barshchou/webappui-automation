@@ -5,11 +5,11 @@ import BaseActionsExt from "../base/base.actions.ext";
 
 class KeyInfoActions extends BaseActionsExt<typeof keyInfoPage> {
     enterPropertyRightsAppraisedComment(textToType: string = null, edit = true, save = true, revert = false) {
-        if (edit === true) keyInfoPage.formEditBtn().click();
-        keyInfoPage.textBoxPropertyRightsAppraised.invoke("text")
-        .then(text => {
-            keyInfoPage.textBoxPropertyRightsAppraised.focus().type(textToType ?? text);
-        });
+        if (edit === true) keyInfoPage.propertyRightsAppraisedFormEditButton.click();
+            keyInfoPage.textBoxPropertyRightsAppraised.invoke("text")
+            .then(text => {
+                keyInfoPage.textBoxPropertyRightsAppraised.focus().type(textToType ?? text);
+            });
         if(save === true) keyInfoPage.formSaveBtn().click();
         if (revert === true) {
             keyInfoPage.formRevertToOriginalBtn().click();
@@ -19,7 +19,7 @@ class KeyInfoActions extends BaseActionsExt<typeof keyInfoPage> {
     }
 
     enterDefinitionMarketValue(textToType: string = null, edit = true, save = true, revert = false) {
-        if (edit === true) keyInfoPage.formEditBtn(1).click();
+        if (edit === true) keyInfoPage.definitionOfMarketValueFormEditButton.click();
         keyInfoPage.textBoxDefinitionOfMarketValue().invoke("text").then(text => {
             keyInfoPage.textBoxDefinitionOfMarketValue().focus().type(textToType ?? text);
         });

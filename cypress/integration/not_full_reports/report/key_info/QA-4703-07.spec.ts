@@ -47,19 +47,17 @@ describe("[QA-4703-07] Verify the Edit button functionality for Property Rights 
 
         cy.stepInfo("8. CLick on the Revert ot Original button and Click on the X icon and verify that the modal is closed and no changes are applied");
         Report._KeyInfo.enterPropertyRightsAppraisedComment(testData.enterValue, true, false);
-        Report._KeyInfo.Page.formRevertToOriginalBtn().click();
+        Report._KeyInfo.Page.formRevertToOriginalBtn(0).click();
         Report._KeyInfo.Page.CloseIcon.click();
-        Report._KeyInfo.Page.formSaveBtn().click();
         Report._KeyInfo.enterDefinitionMarketValue(testData.enterValue, true, false);
-        Report._KeyInfo.Page.formRevertToOriginalBtn().click();
+        Report._KeyInfo.Page.formRevertToOriginalBtn(1).click();
         Report._KeyInfo.Page.CloseIcon.click();
-        Report._KeyInfo.Page.formSaveBtn().click();
         Report._KeyInfo.Page.textBoxPropertyRightsAppraised.should("include.text", testData.enterValue);
         Report._KeyInfo.Page.textBoxDefinitionOfMarketValue().should("include.text", testData.enterValue);
 
         cy.stepInfo("9 Edit comment and click on the Save button for both sections. Verify that the changes from step 2 are saved");
-        Report._KeyInfo.enterPropertyRightsAppraisedComment(testData.enterValue, true, true);
-        Report._KeyInfo.enterDefinitionMarketValue(testData.enterValue, true, true);
+        Report._KeyInfo.enterPropertyRightsAppraisedComment(testData.enterValue, false, true);
+        Report._KeyInfo.enterDefinitionMarketValue(testData.enterValue, false, true);
 
         deleteReport(testData.reportCreationData.reportNumber);
     });
