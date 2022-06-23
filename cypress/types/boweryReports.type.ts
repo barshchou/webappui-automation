@@ -56,7 +56,7 @@ export namespace BoweryReports {
         export type FloorValues = keyof typeof Enums.COMMERCIAL_UNITS_FLOOR_VALUES
         export type FrontageValues = keyof typeof Enums.COMMERCIAL_UNITS_FRONTAGE_VALUES
 
-        export type GroupsValues = UseValues | GradeValues | FacadeValues | StateValues 
+        export type GroupsValues = UseValues | GradeValues | FacadeValues | StateValues
         | CeilingHeightValues | LocationValues | StreetTypeValues | FrontageValues | FloorValues;
     }
 
@@ -64,7 +64,7 @@ export namespace BoweryReports {
         total: string,
         perSF: string,
         perUnit: string
-    };    
+    };
     export type OrganizationAddresseePrefix = typeof Enums.ORGANIZATION_ADDRESSEE_PREFIX[KeyInfo.OrganizationAddresseePrefixKeys]
     export type OrganizationState = typeof Enums.ORGANIZATION_STATE[KeyInfo.OrganizationStateKeys]
 
@@ -88,14 +88,14 @@ export namespace BoweryReports {
 
     export type Comparable = {
         address: string, location?: string, period?: string, squareFeet?: number, resUnits?: number,
-        insurance?: number, electricity?: number, fuel?: number, waterAndSewer?: number, 
-        repairsAndMaintenance?: number, payrollAndBenefits?: number, generalAndAdministrative?: number, 
-        legalAndProfessionalFees?: number, miscellaneous?: number, 
+        insurance?: number, electricity?: number, fuel?: number, waterAndSewer?: number,
+        repairsAndMaintenance?: number, payrollAndBenefits?: number, generalAndAdministrative?: number,
+        legalAndProfessionalFees?: number, miscellaneous?: number,
         management?: number, replacementReserves?: number, toe?: string
     };
 
     export type BuildingDescription = {
-        grossArea: number, 
+        grossArea: number,
         numberOfUnits: number
     }
 
@@ -185,4 +185,8 @@ export namespace BoweryReports {
     }
 
     export type MarketAnalysisUses = keyof typeof Enums.MARKET_ANALYSIS_USES
+
+    export type PropertyConditions = typeof Enums.PROPERTY_CONDITIONS[KeyInfo.PropertyConditions];
+
+    export type PropertyConditionsRadios = keyof typeof Enums.PROPERTY_CONDITIONS_RADIOS;
 }

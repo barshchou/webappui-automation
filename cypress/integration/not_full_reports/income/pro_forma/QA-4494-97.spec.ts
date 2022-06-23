@@ -2,7 +2,7 @@ import testData from "../../../../fixtures/not_full_reports/income/pro_forma/QA-
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import { Income, Property } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
-import Enums from "../../../../enums/incomeTypesCellNames.enum";
+import Enums from "../../../../enums/income/incomeTypesCellNames.enum";
 import proFormaTypes from "../../../../enums/proFormaTypes.enum";
 import { numberWithCommas } from '../../../../../utils/numbers.utils';
 
