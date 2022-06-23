@@ -7,26 +7,37 @@ import { Income, Property, ReviewExport } from "../../../../../actions";
 describe("Verify the Developer's Forecast checkbox on the In-Place Rent Roll page", 
     { tags:[ "@income", "@residential", "@in_place_rent_roll", "@check_export" ] }, () => {
 
-    it("Test body", () => {
-        for (let i = 0; i < 2; i++) {
-            cy.stepInfo("Login, create report");
-            createReport(reportCreationData(i));
-            _NavigationSection.navigateToPropertySummary();
-            Property._Summary.enterNumberOfResUnits(testData.residentialUnits.length);
+    it("Check the Summarize current rent roll checkbox", () => {
+        cy.stepInfo("Login, create report");
+        createReport(reportCreationData(0));
+        _NavigationSection.navigateToPropertySummary();
+         Property._Summary.enterNumberOfResUnits(testData.residentialUnits.length);
 
-            cy.stepInfo("1. Navigate to Income > Residential > In-Place Rent Roll");
-            _NavigationSection.navigateToResInPlaceRentRoll();
-
-            cy.stepInfo("2. Check the Summarize current rent roll checkbox");
-            if (i === 1) {
-                Income._Residential.InPlaceRentRoll.checkCheckboxByLabel(testData.sumCurrent);
-            }
+        cy.stepInfo("1. Navigate to Income > Residential > In-Place Rent Roll");
+        _NavigationSection.navigateToResInPlaceRentRoll();
                 
-            _NavigationSection.openReviewAndExport();
-            ReviewExport.generateDocxReport().waitForReportGenerated()
-                .downloadAndConvertDocxReport(reportCreationData(i).reportNumber);
-            deleteReport(reportCreationData(i).reportNumber);
-        }
+        _NavigationSection.openReviewAndExport();
+        ReviewExport.generateDocxReport().waitForReportGenerated()
+            .downloadAndConvertDocxReport(reportCreationData(0).reportNumber);
+        deleteReport(reportCreationData(0).reportNumber);
+    });
+
+    it("Uncheck the Summarize current rent roll checkbox", () => {
+        cy.stepInfo("Login, create report");
+        createReport(reportCreationData(1));
+        _NavigationSection.navigateToPropertySummary();
+         Property._Summary.enterNumberOfResUnits(testData.residentialUnits.length);
+
+        cy.stepInfo("1. Navigate to Income > Residential > In-Place Rent Roll");
+        _NavigationSection.navigateToResInPlaceRentRoll();
+
+        cy.stepInfo("2. Check the Summarize current rent roll checkbox");
+        Income._Residential.InPlaceRentRoll.checkCheckboxByLabel(testData.sumCurrent);
+                
+        _NavigationSection.openReviewAndExport();
+        ReviewExport.generateDocxReport().waitForReportGenerated()
+            .downloadAndConvertDocxReport(reportCreationData(1).reportNumber);
+        deleteReport(reportCreationData(1).reportNumber);
     });
 
     it("Verify export report", () => {
