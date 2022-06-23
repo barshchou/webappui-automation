@@ -69,7 +69,7 @@ jobs:
         with:
           name: "cypress.env.json"
           json: ${{ secrets.USERS }}
-          dir: "src/"
+          # dir: "src/"
 
       # - run: git config --global user.email "viachaslau.barshchou@boweryvaluation.com" && git config --global user.name "barshchou" && git add . && git add --force src/users.json && git status && git commit -a -m "Run e2e tests Commit with the Credentials JSON created!"
 
