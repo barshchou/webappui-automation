@@ -1,12 +1,22 @@
 import Enums from "../../../../enums/enums";
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 
+export const reportCreationData = conclusionValue => {
+    return ReportDataCreator.getReportData("5350_5706", { 
+        incomeValue: Enums.INCOME_TYPE.both,
+        conclusionValue  
+    });
+};
+
 export default {
     reportCreationData: ReportDataCreator.getReportData("5706", { incomeValue: Enums.INCOME_TYPE.both }),
-    address: "200 West 78 Street",
+    marketConditionAdjustment: 2,
+    addressDates: [ new Date(2021, 12, 31), new Date(2021, 5, 1) ],
+    dateOfValue: new Date(2022, 1, 15),
+    address: [ "200 West 78 Street", "88 Laight Street" ],
     dateFixture: {
-        type: "dueDate",
-        date: "12-12-2022",
+        type: "dateOfValuation",
+        date: "01-15-2022",
     },
     comparablesAdjustments: {
         propertyRights: -70,
