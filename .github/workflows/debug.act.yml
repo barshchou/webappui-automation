@@ -1,4 +1,4 @@
-name: DEBUG. Cypress not full reports tests in Currents.dev
+name: ACT DEBUG. NOT RUN ON CI. Cypress not full reports tests in Currents.dev
 
 on:
   workflow_dispatch:
@@ -39,7 +39,7 @@ on:
         default: grep=,grepTags=,burn=
         
 jobs:
-  Not-full-reports-run-DEBUG:
+  Not-full-reports-run-DEBUG-ACT:
     runs-on: ubuntu-latest
     container: cypress/browsers:node16.13.2-chrome100-ff98
     strategy:
@@ -48,15 +48,30 @@ jobs:
         containers: [1]
 
     steps:
-      - name: Run end-to-end tests (DEBUG, one container)
-        uses: Bowery-RES/action-run-e2e-tests@v0.0.3
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Cache node modules
+        uses: actions/cache@v3
+        env:
+          cache-name: cache-node-modules
         with:
-          github_token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
-          username: ${{ secrets.USERNAME }}
-          password: ${{ secrets.PASSWORD }}
-          env: ${{ github.event.inputs.env }}
-          customEnv: ${{ github.event.inputs.customEnv }}
-          url: ${{ github.event.inputs.url }}
-          spec_file: ${{ github.event.inputs.spec_file }}
-          tags: ${{ github.event.inputs.tags }}
-          record_key: 'debug'
+          # npm cache files are stored in `~/.npm` on Linux/macOS
+          path: ~/.npm
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('./package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+      
+      - name: Install Cypress globally
+        run: npm i cypress@9.6.0 -g
+
+      - name: Install Currents globally
+        run: npm i @currents/cli -g
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Run Cypress not snapshot tests on Currents.dev
+        run: npm run currents:run:debug -- --config baseUrl=${{ github.event.inputs.customEnv == '' && github.event.inputs.url ||  github.event.inputs.customEnv }} --spec ${{ github.event.inputs.spec_file }} --env ${{ github.event.inputs.tags }}
