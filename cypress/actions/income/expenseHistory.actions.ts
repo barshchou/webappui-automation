@@ -1,7 +1,7 @@
 import expenseHistoryPage from "../../pages/income/expenseHistory.page";
 import { getNumberFromDollarNumberWithCommas, numberWithCommas } from "../../../utils/numbers.utils";
 import BaseActionsExt from "../base/base.actions.ext";
-import tableExpenseHistoryCellNames from "../../../cypress/enums/expenseHistoryTableRows.enum";
+import tableExpenseHistoryCellNames from "../../../cypress/enums/expense/expenseHistoryTableRows.enum";
 
 class ExpenseHistoryActions extends BaseActionsExt<typeof expenseHistoryPage>{
 
