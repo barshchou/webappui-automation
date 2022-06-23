@@ -134,9 +134,9 @@ class ClientActions extends BaseActionsExt<typeof clientPage> {
         return this;
     }
 
-    verifyCommentaryContainsText(verifyAreaValue: string | number, commentaryAreaIndex = 1): ClientActions {
+    verifyCommentaryContainsText(verifyAreaValue: string | number, commentaryTitle: string): ClientActions { 
         let expectedText = typeof verifyAreaValue ===  "number" ? `${numberWithCommas(verifyAreaValue)}`: verifyAreaValue;
-        this.Page.commentaryText(commentaryAreaIndex).should("include.text", `${expectedText}`);
+        this.Page.commentaryText(commentaryTitle).should("include.text", `${expectedText}`);
         return this;
     }
 }

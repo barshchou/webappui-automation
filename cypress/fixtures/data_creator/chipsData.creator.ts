@@ -35,7 +35,7 @@ class Chips {
         return this;
     }
 
-    setBuildngName(buildingName?: string){
+    setBuildingName(buildingName?: string){
         this._buildingName = buildingName ?? "";
         return this;
     }
@@ -65,8 +65,8 @@ class Chips {
         return this;
     }
 
-    setStreetAddress(streetAdress?: string){
-        this._streetAddress = streetAdress ?? "462 1st Avenue";
+    setStreetAddress(streetAddress?: string){
+        this._streetAddress = streetAddress ?? "462 1st Avenue";
         return this;
     }
 
@@ -87,7 +87,7 @@ class Chips {
     getChipsData(options?: BoweryReports.ChipsCreationOptions, valueConclusion?: BoweryReports.ConclusionValue){
                
         options?.block == undefined ? this.setBlock() : this.setBlock(options.block);
-        options?.buildingName == undefined ? this.setBuildngName() : this.setBuildngName(options.buildingName);
+        options?.buildingName == undefined ? this.setBuildingName() : this.setBuildingName(options.buildingName);
         options?.grossBuildingArea == undefined ? this.setGrossBuildingAre() : this.setGrossBuildingAre(options.grossBuildingArea);
         options?.lotValue == undefined ? this.setLotValue() : this.setLotValue(options.lotValue);
         options?.numberOfCommercialUnits == undefined ? this.setNumberOfCommercialUnits() : this.setNumberOfCommercialUnits(options.numberOfCommercialUnits);

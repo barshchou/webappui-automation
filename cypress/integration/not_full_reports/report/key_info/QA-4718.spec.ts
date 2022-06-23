@@ -25,10 +25,10 @@ describe(`[QA-4718] Verify the "Linked" chips dropdown in the new narrative comp
         testData.chips.forEach(chip => {
             Report._KeyInfo.enterPropertyRightsAppraisedComment(`=${chip.typeSuggestValue}`, false, false, false);
             Report._KeyInfo.clickNarrativeSuggestions(chip.suggestionName);
-            Report._KeyInfo.verifyCommentaryContainsText(chip.verifySuggest, 1);
+            Report._KeyInfo.verifyCommentaryContainsText(chip.verifySuggest, testData.propertyRightsAppraisedCommentaryTitle);
             Report._KeyInfo.enterDefinitionMarketValue(`=${chip.typeSuggestValue}`, false, false, false);
             Report._KeyInfo.clickNarrativeSuggestions(chip.suggestionName, 1);
-            Report._KeyInfo.verifyCommentaryContainsText(chip.verifySuggest, 2);
+            Report._KeyInfo.verifyCommentaryContainsText(chip.verifySuggest, testData.definitionOfMarketValueCommentaryTitle);
         });
         Report._KeyInfo.Page.formSaveBtn().click();
         Report._KeyInfo.Page.formSaveBtn(1).click();

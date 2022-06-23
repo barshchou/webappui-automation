@@ -25,7 +25,7 @@ export default {
         incomeValue: enums.INCOME_TYPE.both,
         conclusionValue: enums.VALUE_CONCLUSION_TYPE.AS_IS
     }),
-    reportCreationDataAsStablized: reportDataCreator.getReportData("4598-00", {
+    reportCreationDataAsStabilized: reportDataCreator.getReportData("4598-00", {
         incomeValue: enums.INCOME_TYPE.both,
         conclusionValue: enums.VALUE_CONCLUSION_TYPE.AS_STABILIZED
     }),
@@ -35,7 +35,7 @@ export default {
     }),
     numberOfCommercialUnits: _numberOfCommercialUnits,
     numberOfResidentialUnits: _numberOfResidentialUnits,
-    asIschips: chipsDataCreator.getChipsData(_chipsOptions),
+    asIsChips: chipsDataCreator.getChipsData(_chipsOptions),
     asStabilizedChips: chipsDataCreator.getChipsData(_chipsOptions, enums.VALUE_CONCLUSION_TYPE.AS_STABILIZED),
     asCompletedChips: chipsDataCreator.getChipsData(_chipsOptions, enums.VALUE_CONCLUSION_TYPE.AS_COMPLETE),
     currentNumberOfCommercialUnits: _currentNumberOfCommercialUnits,

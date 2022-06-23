@@ -20,5 +20,7 @@ export default {
     reportCreationData: reportCreationFixture(),
     textToType: "=",
     chips: chipsDataCreator.getChipsData(_chipsOptions, enums.VALUE_CONCLUSION_TYPE.AS_STABILIZED),
-    buildingName: _buildingName
+    buildingName: _buildingName,
+    intendedUserCommentaryTitle: "Intended User",
+    identificationOfTheClientCommentaryTitle: "Identification of the Client"
 };

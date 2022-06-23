@@ -29,10 +29,10 @@ describe(`[QA-4640] Verify the "Linked" chips dropdown in the new narrative comp
         testData.chips.forEach(chip => {
             Report._Client.enterIntendedUser(`=${chip.typeSuggestValue}`, false, false, false)
                 .clickNarrativeSuggestions(chip.suggestionName);
-            Report._Client.verifyCommentaryContainsText(chip.verifySuggest, 1);
+            Report._Client.verifyCommentaryContainsText(chip.verifySuggest, testData.intendedUserCommentaryTitle);
             Report._Client.enterIdentificationOfTheClient(`=${chip.typeSuggestValue}`, false, false, false)
                 .clickNarrativeSuggestions(chip.suggestionName, 1);
-            Report._Client.verifyCommentaryContainsText(chip.verifySuggest, 2);
+            Report._Client.verifyCommentaryContainsText(chip.verifySuggest, testData.identificationOfTheClientCommentaryTitle);
         });
         cy.stepInfo("5. Download report");
         _NavigationSection.openReviewAndExport();

@@ -59,7 +59,7 @@ class KeyInfoPage extends BasePage{
 
     get inputToCheckMyDateIsDifferent() {return cy.get("*[data-qa='isDifferentDateOfValuation']");}
 
-    commentaryText(index: number) {return cy.xpath(`//div[@data-slate-editor]['${index}']`);}
+    commentaryText(commentaryTitle: string) {return cy.xpath(`//h6[.='${commentaryTitle}']//following::div[@data-slate-editor][1]`);}
 }
 
 export default new KeyInfoPage();
