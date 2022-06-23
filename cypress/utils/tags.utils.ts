@@ -31,5 +31,9 @@ export enum Tag {
     flaky = "@flaky",
     summary = "@summary",
     full_building_comps = "@full_building_comps",
-    unit_mix = "@unit_mix"
+    unit_mix = "@unit_mix",
+    organizations = "@organizations",
+    permissions_roles = "@permissions_roles",
+    propertyConditions = "@property_conditions",
+    comp_summary = "@comp_summary"
 }

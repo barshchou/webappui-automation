@@ -1,7 +1,7 @@
 import expenseForecastPage from "../../pages/income/expenseForecast.page";
 import { getNumberFromDollarNumberWithCommas, numberWithCommas } from "../../../utils/numbers.utils";
 import BaseActionsExt from "../base/base.actions.ext";
-import { BoweryReports } from "../../types";
+import { BoweryReports } from "../../types/boweryReports.type";
 
 type ForecastItem = BoweryReports.ForecastItem;
 type BuildingDescription = BoweryReports.BuildingDescription;
@@ -9,14 +9,16 @@ type Comparable = BoweryReports.Comparable;
 
 class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> {
 
-    chooseForecastItemBasis(forecastItem: ForecastItem): ExpenseForecastActions {
-        expenseForecastPage.getForecastItemBasisRadio(forecastItem.name).check(forecastItem.basis);
-        this.verifyForecastItemBasis(forecastItem);
+    chooseForecastItemBasis(forecastItem: ForecastItem, customCategory = false, index = 0): ExpenseForecastActions {
+        let expenseName = customCategory ? `customExpenses[${index}]` : forecastItem.name;
+        expenseForecastPage.getForecastItemBasisRadio(expenseName).check(forecastItem.basis);
+        this.verifyForecastItemBasis(forecastItem, customCategory, index);
         return this;
     }
 
-    verifyForecastItemBasis(forecastItem: ForecastItem): ExpenseForecastActions {
-        expenseForecastPage.getElementToCheckRadio(forecastItem.name, forecastItem.basis).should("exist");
+    verifyForecastItemBasis(forecastItem: ForecastItem, customCategory = false, index = 0): ExpenseForecastActions {
+        let expenseName = customCategory ? `customExpenses[${index}]` : forecastItem.name;
+        expenseForecastPage.getElementToCheckRadio(expenseName, forecastItem.basis).should("exist");
         return this;
     }
 
@@ -311,8 +313,9 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
         return this;
     }
 
-    switchExpenseForecastBasis(forecastItem: ForecastItem): ExpenseForecastActions {
-        expenseForecastPage.getElementBasisToSwitch(forecastItem.name, forecastItem.basis).click();
+    switchExpenseForecastBasis(forecastItem: ForecastItem, customCategory = false, index = 0): ExpenseForecastActions {
+        let expenseName = customCategory ? `customExpenses[${index}]` : forecastItem.name;
+        expenseForecastPage.getElementBasisToSwitch(expenseName, forecastItem.basis).click();
         return this;
     }
 

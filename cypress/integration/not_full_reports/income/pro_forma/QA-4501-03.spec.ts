@@ -5,7 +5,7 @@ import { _NavigationSection } from "../../../../actions/base";
 import { Property } from '../../../../actions';
 import { Income } from "../../../../actions";
 import proFormaTypes from "../../../../enums/proFormaTypes.enum";
-import Enums from "../../../../enums/incomeTypesCellNames.enum";
+import Enums from "../../../../enums/income/incomeTypesCellNames.enum";
 
 describe("Potential Real Estate Tax Reimbursement", 
     { tags:[ "@income", "@pro_forma" ] }, () => {

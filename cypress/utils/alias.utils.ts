@@ -10,6 +10,8 @@ export const Alias = {
     reportId: _alias("reportId"),
     salesEventId: _alias("salesEventId"),
     salesComps_eventIds: _alias("salesComps_eventIds"),
+    aliasXMLGeneration: _alias("aliasXMLGeneration"),
+    aliasOpenXML: _alias("aliasOpenXML"),
     gql:{
         SearchSalesTransactions:_gqlAlias("searchSalesTransactions"),
         FindTransactionByIdAndVersion:_gqlAlias("findTransactionByIdAndVersion"),
