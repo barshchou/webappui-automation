@@ -19,7 +19,7 @@ class KeyInfoActions extends BaseActionsExt<typeof keyInfoPage> {
     }
 
     enterDefinitionMarketValue(textToType: string = null, edit = true, save = true, revert = false) {
-        if (edit === true) keyInfoPage.formEditBtn().click();
+        if (edit === true) keyInfoPage.formEditBtn(1).click();
         keyInfoPage.textBoxDefinitionOfMarketValue().invoke("text").then(text => {
             keyInfoPage.textBoxDefinitionOfMarketValue().focus().type(textToType ?? text);
         });

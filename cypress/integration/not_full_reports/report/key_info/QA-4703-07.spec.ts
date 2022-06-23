@@ -36,9 +36,9 @@ describe("[QA-4703-07] Verify the Edit button functionality for Property Rights 
         Report._KeyInfo.Page.formSaveBtn().click();
 
         cy.stepInfo("6. Edit comment and verify that the Revert to Original button becomes enabled for both sections");
-        Report._KeyInfo.enterPropertyRightsAppraisedComment(testData.enterValue, false, false, true);
+        Report._KeyInfo.enterPropertyRightsAppraisedComment(testData.enterValue, true, false, true);
         Report._KeyInfo.Page.formCancelButton().click();
-        Report._KeyInfo.enterDefinitionMarketValue(testData.enterValue, false, false, true);
+        Report._KeyInfo.enterDefinitionMarketValue(testData.enterValue, true, false, true);
 
         cy.stepInfo("7. Click on the Revert to Original button and verify the ‘Changes will be lost modal’ is displayed for both sections");
         Report._KeyInfo.Page.textBoxPropertyRightsAppraised.should("not.include.text", testData.enterValue);
@@ -49,15 +49,17 @@ describe("[QA-4703-07] Verify the Edit button functionality for Property Rights 
         Report._KeyInfo.enterPropertyRightsAppraisedComment(testData.enterValue, true, false);
         Report._KeyInfo.Page.formRevertToOriginalBtn().click();
         Report._KeyInfo.Page.CloseIcon.click();
+        Report._KeyInfo.Page.formSaveBtn().click();
         Report._KeyInfo.enterDefinitionMarketValue(testData.enterValue, true, false);
-        Report._KeyInfo.Page.formRevertToOriginalBtn(1).click();
+        Report._KeyInfo.Page.formRevertToOriginalBtn().click();
         Report._KeyInfo.Page.CloseIcon.click();
+        Report._KeyInfo.Page.formSaveBtn().click();
         Report._KeyInfo.Page.textBoxPropertyRightsAppraised.should("include.text", testData.enterValue);
         Report._KeyInfo.Page.textBoxDefinitionOfMarketValue().should("include.text", testData.enterValue);
 
         cy.stepInfo("9 Edit comment and click on the Save button for both sections. Verify that the changes from step 2 are saved");
-        Report._KeyInfo.enterPropertyRightsAppraisedComment(testData.enterValue, false, true);
-        Report._KeyInfo.enterDefinitionMarketValue(testData.enterValue, false, true);
+        Report._KeyInfo.enterPropertyRightsAppraisedComment(testData.enterValue, true, true);
+        Report._KeyInfo.enterDefinitionMarketValue(testData.enterValue, true, true);
 
         deleteReport(testData.reportCreationData.reportNumber);
     });
