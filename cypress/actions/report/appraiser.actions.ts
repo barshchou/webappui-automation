@@ -1,13 +1,13 @@
-import BaseActions from "../base/base.actions";
 import appraiserPage from "../../pages/report/appraiser.page";
 import { _ReportTitles } from "../../enums/pages_titles";
+import BaseActionsExt from "../base/base.actions.ext";
 
-class AppraiserActions extends BaseActions {
+class AppraiserActions extends BaseActionsExt<typeof appraiserPage> {
 
-    verifyPageOpened() {
+    verifyPageOpened(): AppraiserActions {
         appraiserPage.pageHeader.should("exist").and("contain.text", _ReportTitles.APPRAISERS);
         return this;
     }
 }
 
-export default new AppraiserActions();
+export default new AppraiserActions(appraiserPage);

@@ -1,5 +1,5 @@
 import ReportDataCreator from "../../../data_creator/reportData.creator";
-import { BoweryReports } from "../../../../types";
+import { BoweryReports } from "../../../../types/boweryReports.type";
 import expensesCardsNames from " ../../../cypress/enums/expense/expenseForecast.enum";
 
 const _customCategory: BoweryReports.ForecastItem = {

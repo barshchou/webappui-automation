@@ -1,9 +1,9 @@
 import addCompFormPage from "../../../../pages/income/residential/rent_comps/addCompForm.page";
 import { getTodayDateString, getTodayDay, isDateHasCorrectFormat } from "../../../../../utils/date.utils";
 import { isDecimal, isHalfDecimalPart, numberWithCommas } from "../../../../../utils/numbers.utils";
-import BaseActions from "../../../base/base.actions";
+import BaseActionsExt from "../../../base/base.actions.ext";
 
-class AddCompFormActions extends BaseActions {
+class AddCompFormActions extends BaseActionsExt<typeof addCompFormPage> {
 
     clickCloseButton(): AddCompFormActions {
         addCompFormPage.closeButton.should("be.enabled").click();
@@ -247,4 +247,4 @@ class AddCompFormActions extends BaseActions {
     }
 }
 
-export default new AddCompFormActions();
+export default new AddCompFormActions(addCompFormPage);

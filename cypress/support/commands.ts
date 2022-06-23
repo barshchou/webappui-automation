@@ -1,8 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { addMatchImageSnapshotCommand } from 'cypress-image-snapshot/command';
 import "cypress-file-upload";
 import "cypress-localstorage-commands";
 import mapKeysUtils from '../utils/mapKeys.utils';
-import { BoweryAutomation } from '../types';
+import { BoweryAutomation } from '../types/boweryAutomation.type';
 
 const _map = new Map();
 
@@ -46,11 +47,9 @@ Cypress.Commands.add("loginByApi", (envUrl, username, password) => {
     });
 });
 
-Cypress.Commands.add("loginByUI", (url) => {
+Cypress.Commands.add("loginByUI", (url: string, username: string, password: string) => {
     cy.log("Logging in by UI");
     _cyVisit(url);
-    const username = Cypress.env("USERNAME");
-    const password = Cypress.env("PASSWORD");
     cy.get("*[name='username']").should("be.visible").type(username).should("have.value", username);
     cy.get("*[name='password']").should("be.visible").type(password).type("{enter}");
 });

@@ -1,41 +1,26 @@
-import BaseActions from "../base/base.actions";
 import propertySalePage from "../../pages/final/propertySaleConclusion.page";
 import { getNumberFromDollarNumberWithCommas, numberWithCommas } from "../../../utils/numbers.utils";
+import BaseActionsExt from "../base/base.actions.ext";
 
-class PropertySaleConclusionActions extends BaseActions {
+class PropertySaleConclusionActions extends BaseActionsExt<typeof propertySalePage> {
 
-    /**
-     *
-     * @param {number | string} price
-     * @returns {PropertySaleConclusionActions}
-     */
-    verifyContractPrice(price) {
+    verifyContractPrice(price: number | string): PropertySaleConclusionActions {
         const textToBe = typeof price === "string" ? price : `$${numberWithCommas(price)}`;
         propertySalePage.contractPrice.should("have.text", textToBe);
         return this;
     }
 
-    /**
-     *
-     * @param {string} date
-     * @returns {PropertySaleConclusionActions}
-     */
-    verifyContractDate(date) {
+    verifyContractDate(date: string): PropertySaleConclusionActions {
         propertySalePage.contractDate.should("have.text", date);
         return this;
     }
 
-    /**
-     *
-     * @param {string | number} asIsMarketFinalValue
-     * @returns {PropertySaleConclusionActions}
-     */
-    verifyContractChangeInValue(asIsMarketFinalValue) {
+    verifyContractChangeInValue(asIsMarketFinalValue: string | number): PropertySaleConclusionActions {
         asIsMarketFinalValue = typeof asIsMarketFinalValue === "number" ? asIsMarketFinalValue :
             getNumberFromDollarNumberWithCommas(asIsMarketFinalValue);
         propertySalePage.contractPrice.invoke("text").then(contractPriceText => {
             const contractPriceNumber = getNumberFromDollarNumberWithCommas(contractPriceText);
-            const resultPercent = asIsMarketFinalValue * 100 / contractPriceNumber;
+            const resultPercent = Number(asIsMarketFinalValue) * 100 / contractPriceNumber;
             let textToBe;
             if (resultPercent > 100) {
                 textToBe = `${(resultPercent - 100).toFixed(2)}%`;
@@ -48,4 +33,4 @@ class PropertySaleConclusionActions extends BaseActions {
     }
 }
 
-export default new PropertySaleConclusionActions();
+export default new PropertySaleConclusionActions(propertySalePage);
