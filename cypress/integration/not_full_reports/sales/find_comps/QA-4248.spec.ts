@@ -3,7 +3,6 @@ import fixture from "../../../../fixtures/not_full_reports/sales/find_comps/QA-4
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Sales from "../../../../actions/sales/sales.manager";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
-import { Alias } from "../../../../utils/alias.utils";
 import mapKeysUtils from "../../../../utils/mapKeys.utils";
 
 describe("Verify the Comps can be added by entering the existing Report ID in the modal", 
