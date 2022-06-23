@@ -76,6 +76,8 @@ class AdjustCompsPage extends BasePage {
     get marketConditionAdjustmentTooltip() {return cy.get("svg[data-icon=info-circle]");}
 
     get applyMarketConditionAdjustmentButton() {return cy.get("[data-qa='apply-market-condition-adjustment']");}
+
+    get marketConditionAdjustmentInput() {return cy.get("[name='marketConditionAdjustment']");}
 }
 
 export default new AdjustCompsPage();
