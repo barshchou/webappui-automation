@@ -7,7 +7,7 @@ describe(`[QA-4640] Verify the "Linked" chips dropdown in the new narrative comp
     report for Intended User and Identification of the Client sections`,
     { tags:[ "@report", "@client" ] }, () => {
 
-    it.skip("Test body", { tags: "@check_export" }, () => {
+    it("Test body", { tags: "@check_export" }, () => {
         cy.stepInfo("Login, create report");
         createReport(testData.reportCreationData);
 
