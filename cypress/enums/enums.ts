@@ -1,10 +1,10 @@
 import leaseDateName from "./lease/leaseDateName.enum";
 import leaseStatus from "./lease/leaseStatus.enum";
-import imageType from "./imageType.enum";
-import inputType from "./inputType.enum";
+import imageType from "./elements/imageType.enum";
+import inputType from "./elements/inputType.enum";
 import unitSF from "./unit/unitSF.enum";
 import commercialUnitsUseValues from "./commercial/commercialUnitsUseValues.enum";
-import perUnitPerSF from "./perUnitPerSF.enum";
+import perUnitPerSF from "./inputValues/perUnitPerSF.enum";
 import commercialUnitsUseTexts from "./commercial/commercialUnitsUseTexts.enum";
 import commercialUnitsGroups from "./commercial/commercialUnitsGroups.enum";
 import commercialUnitsGradeValues from "./commercial/commercialUnitsGradeValues.enum";
@@ -23,9 +23,9 @@ import utilityExpenses from "./utilityExpenses.enum";
 import unitType from "./unit/unitType.enum";
 import sourceOfInformation from "./sourceOfInformation.enum";
 import amenities from "./amenities.enum";
-import templateTypesEnum from "./templateTypes.enum";
+import templateTypesEnum from "./reportParams/templateTypes.enum";
 import incomeTypesEnum from "./income/incomeTypes.enum";
-import valueConclusionTypesEnum from "./valueConclusionTypes.enum";
+import valueConclusionTypesEnum from "./reportParams/valueConclusionTypes.enum";
 import envUrlsEnum from "./envUrls.enum";
 import proFormaTypesEnum from "./proFormaTypes.enum";
 import expenseCellNames from "./expense/expenseCellNames";
@@ -33,15 +33,15 @@ import expenseHistoryTableRowsEnum from "./expense/expenseHistoryTableRows.enum"
 import reimbursementTypes from "./reimbursementTypes.enum";
 import incomeTypesCellNamesEnum from "./income/incomeTypesCellNames.enum";
 import expenseForecast from "./expense/expenseForecast.enum";
-import parkingVcLossType from "./parkingVcLossType.enum";
-import laundryVcLossType from "./laundryVcLossType.enum";
-import storageVcLossType from "./storageVcLossType.enum";
+import parkingVcLossType from "./inputValues/parkingVcLossType.enum";
+import laundryVcLossType from "./inputValues/laundryVcLossType.enum";
+import storageVcLossType from "./inputValues/storageVcLossType.enum";
 import knownInformation from "./knownInformationType.enum";
 import compGroupsColumnsEnum from "./compGroupsColumns.enum";
 import marketAnalysisUsesEnum from "./marketAnalysisUses.enum";
 import usersEnum from "../enums/users/users.enum";
-import propertyConditionsEnum from "./propertyConditions.enum";
-import propertyConditionsRadiosEnum from "./propertyConditionsRadios.enum";
+import propertyConditionsEnum from "./property/propertyConditions.enum";
+import propertyConditionsRadiosEnum from "./property/propertyConditionsRadios.enum";
 
 export default {
     TEMPLATE_TYPE: templateTypesEnum,
