@@ -46,7 +46,7 @@ describe(`[QA-4640] Verify the "Linked" chips dropdown in the new narrative comp
 
             testData.chips.forEach(item => {
                 cy.contains("Identification of the Client").next().scrollIntoView().should("include.text", item.verifyExport);
-                cy.contains("Intended Use & User").next().scrollIntoView().should("include.text", item.verifyExport);
+                cy.contains("Intended Use & User").next().next().scrollIntoView().should("include.text", item.verifyExport);
             });
         }); 
     });

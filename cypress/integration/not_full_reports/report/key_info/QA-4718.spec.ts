@@ -11,8 +11,7 @@ describe(`[QA-4718] Verify the "Linked" chips dropdown in the new narrative comp
         createReport(testData.reportCreationData);
 
         cy.stepInfo("1. Proceed to the Report > Key Info page.");
-        _NavigationSection.navigateToReportInformation()
-            .clickYesButton();
+        _NavigationSection.navigateToReportInformation();
 
         cy.stepInfo(`2.Enter the “=“ and verify the "Linked" chips dropdown for both sections: options 'Gross Building Area', 'Building Name', 'Property Type', 
             'Residential Unit Count', 'Commercial Unit Count', 'Street Address', 'Street Name', 'Site Area', 'Year Built', 'Block', 'Lot', 'Concluded Cap Rate', 'Zones', 

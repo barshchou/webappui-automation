@@ -12,9 +12,9 @@ class CompGroupsPage extends BasePage {
 
     getCompGroupSection(groupName) {return cy.get(`[data-qa='${groupName}-comp-group']`);}
 
-    getDragableElement(index: number) { return `[data-qa="row-${index}"] [data-react-beautiful-dnd-drag-handle="1"]`;}
+    getDragableElement(index: number) { return `[data-qa="row-${index}"] [data-qa='drag-cell']>span`;}
 
-    getDropableArea(compGroup: string) {return `[data-qa="${compGroup}-comp-group"] tbody[data-react-beautiful-dnd-droppable="1"] tr td`;}
+    getDropableArea(compGroup: string) {return `[data-qa="${compGroup}-comp-group"] tr td`;}
 
     getDropableAreaDropped(compGroup: string) {return `[data-qa="${compGroup}-comp-group"] [data-qa="row-0"]`;}
 

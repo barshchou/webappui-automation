@@ -30,18 +30,6 @@ const _baseChip = () => {
             verifyExport: 'Conclude'
         }, 
         {
-            suggestionName: 'Foreclosure Sale',
-            typeSuggestValue: 'Foreclosur',
-            verifySuggest: 'The above transaction reflects a foreclosure sale of the property. Typically in a foreclosure sale, the buyer assumes all encumbrances on the site, including any outstanding mortgage amount and legal fees ("upset costs"), delinquent taxes and water and sewer charges, foreclosure sale fee, and realty transfer taxes. This information was requested from the owner; however, not provided.',
-            verifyExport: 'foreclosure sale'
-        }, 
-        {
-            suggestionName: 'Sherrif\'s Sale',
-            typeSuggestValue: 'Sherri',
-            verifySuggest: "The above transaction reflects a Sheriff's sale of the property. Typically in a Sheriff’s sale, the buyer assumes all encumbrances on the site, including any outstanding mortgage amount and legal fees (\"upset costs\"), delinquent taxes and water and sewer charges, Sheriff's sale fee, and realty transfer taxes. This information was requested from the owner; however, not provided.",
-            verifyExport: "The above transaction reflects a Sheriff's sale of the property. Typically in a Sheriff’s sale, the buyer assumes all encumbrances on the site, including any outstanding mortgage amount and legal fees (\"upset costs\"), delinquent taxes and water and sewer charges, Sheriff's sale fee, and realty transfer taxes. This information was requested from the owner; however, not provided."
-        },
-        {
             suggestionName: 'Gross Building Area',
             typeSuggestValue: 'Gros',
             verifySuggest: _grossBuildingArea,
@@ -71,12 +59,6 @@ const _baseChip = () => {
             verifySuggest: '1st Avenue',
             verifyExport: '1st Avenue'
         }, 
-        {
-            suggestionName: 'Unchanged Renovations',
-            typeSuggestValue: 'Unchange',
-            verifySuggest: 'Upon renovation, the subject unit count and gross building area will remain unchanged.',
-            verifyExport: 'Upon renovation, the subject unit count and gross building area will remain unchanged.'
-        },
         {
             suggestionName: 'Zone(s)',
             typeSuggestValue: 'Zone',
