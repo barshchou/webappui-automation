@@ -3,6 +3,7 @@ import { Organization, PreviewEdit } from '../../../../actions';
 import { Report } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import enums from '../../../../enums/enums';
 import testData from '../../../../fixtures/not_full_reports/report/client/QA-4627.fixture';
 
 const conditionalDescribe = isProdEnv() ? describe.skip : describe;
@@ -50,8 +51,8 @@ conditionalDescribe("[QA-4627] Verify the functionality of the Client field.",
 
         cy.stepInfo(`9. Proceed to the Preview & Edit > Introduction page and verify that the Client Company is displayed in the IDENTIFICATION 
             OF THE CLIENT and INTENDED USE & USER sections (if the Client has Company added on the Organization > Clients page).`);
-        _NavigationSection.navigateToProfileOrganization(testData.profileOrganizationName);
-        cy.contains("Organization Clients").click();
+        _NavigationSection.navigateToProfileOrganization(enums.MENU_LINKS.organization);
+        Organization._OrganizationActions.openOrganizationClientsPage();
         Organization._OrganizationClientsActions.deleteClient(testData.textToType);
 
         deleteReport(testData.reportCreationData.reportNumber);
