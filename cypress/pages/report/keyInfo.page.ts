@@ -59,9 +59,9 @@ class KeyInfoPage extends BasePage{
 
     get inputToCheckMyDateIsDifferent() {return cy.get("*[data-qa='isDifferentDateOfValuation']");}
 
-    get propertyRightsAppraisedFormEditButton() { return cy.xpath("//div[.='Property Rights Appraised']/..//*[@data-icon='pencil']//ancestor::button"); }
+    get propertyRightsAppraisedFormEditButton() { return cy.xpath("//h6[.='Property Rights Appraised']//following::button[1]"); }
 
-    get definitionOfMarketValueFormEditButton() { return cy.xpath("//div[.='Definition of Market Value']/..//*[@data-icon='pencil']//ancestor::button"); }
+    get definitionOfMarketValueFormEditButton() { return cy.xpath("//h6[.='Definition of Market Value']//following::button[1]"); }
 }
 
 export default new KeyInfoPage();
