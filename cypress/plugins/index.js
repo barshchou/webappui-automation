@@ -101,6 +101,14 @@ const _convertDocxToHtml = async (report) => {
  * @returns response from `/user/login` endpoint
  */
 const _loginApi = async (_envUrl, _username, _password) => {
+  
+  if (_username != undefined || _username != null) {
+    return _username;
+  }
+  await new Promise((resolve) => {
+    setTimeout(() => resolve(true), 1000)
+  });
+
   const response = await request(_envUrl)
   .post('/user/login')
   .send({

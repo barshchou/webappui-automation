@@ -5,7 +5,7 @@ import * as Users from "../../../cypress.env.json";
 
 const reportNumber = "TestAutoReport-QA-generate-download";
 
-describe("Open any existing report and open any page", { tags: [ "@smoke" ] }, () => {
+describe("Open any existing report and open any page", { tags: [ "@smoke", "@logintest" ] }, () => {
 
     it("Test body", () => {
 
