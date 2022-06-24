@@ -23,9 +23,8 @@ describe(`[QA-5008] [QA-5009] [QA-5010] [Income>Expense forecast] “Include Exp
             Income._ExpenseForecastActions.Page.createNewCategoryButton.should('exist');
 
             cy.stepInfo(`3. Verify the button is enabled and clickable`);
-            Income._ExpenseForecastActions.Page.createNewCategoryButton.click();
+            Income._ExpenseForecastActions.Page.createNewCategoryButton.should('be.enabled').click();
             Income._ExpenseForecastActions.Page.addCustomExpenseCategoryModal.should('exist');
-            
         });
 
         it("[QA-5044]", () => {
@@ -39,15 +38,89 @@ describe(`[QA-5008] [QA-5009] [QA-5010] [Income>Expense forecast] “Include Exp
             * "Cancel" button and "Save" button`);
             Income._ExpenseForecastActions.Page.titleOfaddCustomExpenseCategoryModal.should('exist');
             Income._ExpenseForecastActions.Page.addCustomExpenseCategoryInput.should('exist');
-            Income._ExpenseForecastActions.Page.addCustomExpenseCategoryCancelButton.should('exist');
+            Income._ExpenseForecastActions.Page.formCancelButton().should('exist');
             Income._ExpenseForecastActions.Page.addCustomExpenseCategorySaveButton.should('exist');
         });
 
+
+       
+            // it("should handle the alerts automatically", () => {
+            //   Cypress.on("uncaught:exception", (err, runnable) => {
+            //     // returning false here prevents Cypress from failing the test
+            //     return false;
+            //   });
+            //   Income._ExpenseForecastActions.Page.addCustomExpenseCategoryInput.trigger('mouseover', 'center', { bubbles: true }).invoke('show') //trigger('mouseover', { bubbles: true }  )    //focused({timeout:10000})
+            //   cy.wait(10000)
+              
+            //   cy.on("window:alert", (str) => {
+                
+            //   //window:alert is the event which get fired on alert open
+            //     expect(str).to.equal("I am alert");
+            //   cy.get('[name="alert"]').click();
+            //   });
+            // });
+          
+
         it("[QA-5045]", () => {
-            cy.stepInfo(`1. Verify user hover on icon right to the "Include Expense on Pro Forma" checkbox - tooltip
-                         with the following text "Unchecking this box will hide the expense from showing up on the Pro Forma." appears `);
+            cy.stepInfo(`1. Verify Category Name field is required on "Add New Expense Category" modal `);
+         
+            // cy.on("window:alert", (str) => {
+
+            //     Income._ExpenseForecastActions.Page.addCustomExpenseCategoryInput.trigger('mouseover')
+            //     //window:alert is the event which get fired on alert open
+            //     cy.log(str)
+            //       expect(str).to.equal("I am alert");
+            //     //cy.get('[name="alert"]').click();
+            //     });
+
+
+            //pointerover???
+           
+            cy.stepInfo(`2. Verify "Save" button is disabled if Category Name field is empty and user can not new expense with the empty field`);
+            Income._ExpenseForecastActions.Page.addCustomExpenseCategoryInput.should('be.empty');
+            Income._ExpenseForecastActions.Page.addCustomExpenseCategorySaveButton.should('be.disabled').click({ force: true });    //maybe from base page?
+            Income._ExpenseForecastActions.Page.titleOfaddCustomExpenseCategoryModal.should('exist');
+
+            cy.stepInfo(`3. Verify if user click on the empty field and then clicks outside the field → 
+            the field is highlighted with red and “Category name is required” warning appears under the field`);
+            Income._ExpenseForecastActions.Page.addCustomExpenseCategoryInput.click().blur();
+            Income._ExpenseForecastActions.Page.addCustomExpenseCategoryWarning.should('exist');
+            Income._ExpenseForecastActions.Page.addCustomExpenseCategoryFieldset.should('have.css', 'border-color', 'rgb(244, 67, 54)');
+          
+
+            cy.stepInfo(`4. Verify "Save" button is enabled if Category Name field is filled with valid data (the field is free-text. `);
+            Income._ExpenseForecastActions.Page.addCustomExpenseCategoryInput.click().type(testData.customCategoryNameValidation.name);
+            Income._ExpenseForecastActions.Page.addCustomExpenseCategorySaveButton.should('be.enabled');
+        });
+
+        it("[QA-5047]", () => {
+            cy.stepInfo(`1. Verify after clicking Save button  on the “Add New Expense Category” modal with the filled "Category Name" field ->  
+            a new card is added to the bottom of the page underneath “Replacement Reserves” and below Total Operating Expenses card`);
+            Income._ExpenseForecastActions.Page.addCustomExpenseCategoryInput.clear().type(testData.firstCustomCategory.name);
+            Income._ExpenseForecastActions.Page.addCustomExpenseCategorySaveButton.click();
            
 
-         //   deleteReport(testData.reportCreationData.reportNumber);
+         Income._ExpenseForecastActions.Page.forecastItemCardFull('plantsGrowing').should('exist');
+        // .then($el => $el[0].offsetTop)
+
+           //.offsetTop
+            
+           // assert.isAbove(valueToCheck, valueToBeAbove, [message])
+
+           cy.stepInfo(`2. Verify new custom expense forecast is added on “Save” button on “Adding New Expense Category” after “Editing Expense Category” modal was closed`);
+           Income._ExpenseForecastActions.Page.editCustomExpenseCategoryButton('plantsGrowing').click();
+           Income._ExpenseForecastActions.Page.formCancelButton().click();
+           Income._ExpenseForecastActions.Page.createNewCategoryButton.click()
+           Income._ExpenseForecastActions.Page.addCustomExpenseCategoryInput.type(testData.secondCustomCategory.name);
+           Income._ExpenseForecastActions.Page.addCustomExpenseCategorySaveButton.click();
+           Income._ExpenseForecastActions.Page.forecastItemCardFull('Pool cleaning').should('exist');
+
+           cy.stepInfo(`1. Verify each subsequent custom expense card is added underneath  previously added custom expense card and below  Total Operating Expenses `);
+       
+       
+            
         });
+
+
+        //   deleteReport(testData.reportCreationData.reportNumber);
     });

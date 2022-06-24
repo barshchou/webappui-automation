@@ -2,12 +2,24 @@ import ReportDataCreator from "../../../data_creator/reportData.creator";
 import { BoweryReports } from "../../../../types/boweryReports.type";
 import expensesCardsNames from " ../../../cypress/enums/expenseForecast.enum";
 
-const _customCategory: BoweryReports.ForecastItem = {
-    name: "customExpence"
+const _customCategoryNameValidation: BoweryReports.ForecastItem = {
+    name: " _CustomКатегори !№;%: _ "
 };
+
+const _firstCustomCategory: BoweryReports.ForecastItem = {
+    name: "Plants growing"
+};
+
+const _secondCustomCategory: BoweryReports.ForecastItem = {
+    name: "Pool cleaning"
+};
+
+
 
 export default {
     reportCreationData: ReportDataCreator.getReportData("5042"),
-    customCategory: _customCategory,
+    customCategoryNameValidation: _customCategoryNameValidation,
+    firstCustomCategory: _firstCustomCategory,
+    secondCustomCategory: _secondCustomCategory,
     expenseCardsIDArray : expensesCardsNames.expenseCardsIDArray
 };
