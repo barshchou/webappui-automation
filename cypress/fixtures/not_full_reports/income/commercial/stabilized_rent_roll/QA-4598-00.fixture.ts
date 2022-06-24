@@ -33,7 +33,7 @@ const _baseChip = () => {
             suggestionName: 'Gross Building Area',
             typeSuggestValue: 'Gros',
             verifySuggest: _grossBuildingArea,
-            verifyExport: "Gross building area"
+            verifyExport: _grossBuildingArea
         }, 
         {
             suggestionName: 'Site Area',
