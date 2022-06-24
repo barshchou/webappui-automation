@@ -14,6 +14,10 @@ const _secondCustomCategory: BoweryReports.ForecastItem = {
     name: "Pool cleaning"
 };
 
+const _thirdCustomCategory: BoweryReports.ForecastItem = {
+    name: "Car parking"
+};
+
 
 
 export default {
@@ -21,5 +25,6 @@ export default {
     customCategoryNameValidation: _customCategoryNameValidation,
     firstCustomCategory: _firstCustomCategory,
     secondCustomCategory: _secondCustomCategory,
+    thirdCustomCategory: _thirdCustomCategory,
     expenseCardsIDArray : expensesCardsNames.expenseCardsIDArray
 };

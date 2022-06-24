@@ -111,8 +111,8 @@ describe(`[QA-5008] [QA-5009] [QA-5010] [Income>Expense forecast] “Include Exp
            Income._ExpenseForecastActions.Page.editCustomExpenseCategoryButton('plantsGrowing').click();
            Income._ExpenseForecastActions.Page.formCancelButton().click();
            Income._ExpenseForecastActions.Page.createNewCategoryButton.click();
-           Income._ExpenseForecastActions.Page.addCustomExpenseCategoryInput.invoke('val').should('be.empty').type(testData.secondCustomCategory.name);
-          // Income._ExpenseForecastActions.Page.addCustomExpenseCategoryInput.type(testData.secondCustomCategory.name);
+           Income._ExpenseForecastActions.Page.addCustomExpenseCategoryInput.invoke('val').should('be.empty');
+           Income._ExpenseForecastActions.Page.addCustomExpenseCategoryInput.type(testData.secondCustomCategory.name);
            Income._ExpenseForecastActions.Page.addCustomExpenseCategorySaveButton.click();
            Income._ExpenseForecastActions.Page.forecastItemCardFull('poolCleaning').should('exist');
            Income._ExpenseForecastActions.Page.forecastItemCardFull('plantsGrowing').should('exist');
@@ -123,8 +123,20 @@ describe(`[QA-5008] [QA-5009] [QA-5010] [Income>Expense forecast] “Include Exp
         });
 
         it("[QA-5048]", () => {
-            cy.stepInfo(`1. Go to Income > Expense Forecast`);
-            
+            cy.stepInfo(`1. Verify as soon as user clicks Cancel button  on the “Add New Expense Category” modal (with filled/empty Category Name field) ->  
+            no expense card is added`);
+            Income._ExpenseForecastActions.Page.createNewCategoryButton.click();
+            Income._ExpenseForecastActions.Page.formCancelButton().click();
+// .should('not.exist');
+
+Income._ExpenseForecastActions.Page.createNewCategoryButton.click();
+Income._ExpenseForecastActions.Page.addCustomExpenseCategoryInput.type(testData.thirdCustomCategory.name);
+            Income._ExpenseForecastActions.Page.formCancelButton().click();
+
+            cy.stepInfo(`2. Verify  “Add New Expense Category” modal closes after clicking on Cancel button`);
+
+            cy.stepInfo(`2. Verify  if user clicks on Cancel button with filled Category Name and opens “Add New Expense Category” modal again-> 
+            Category Name field is empty. no previous data is displayed there`);
             
         });
 
