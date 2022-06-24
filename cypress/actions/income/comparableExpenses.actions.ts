@@ -56,7 +56,7 @@ class ComparableExpensesActions extends BaseActionsExt<typeof compExpensesPage> 
     enterCellDollarValueByColumnIndex(cellsElements: Cypress.Chainable, value: number, index = 0): ComparableExpensesActions {
         const valueToBe = `$${numberWithCommas(value.toFixed(2))}`;
         cellsElements.eq(index).as("cell");
-        cy.get("@cell").dblclick().scrollIntoView().focus().clear().realType(`${value}{enter}`);
+        cy.get("@cell").dblclick().scrollIntoView().clear().realType(`${value}{enter}`);
         cy.get("@cell").children(compExpensesPage.elementToCheckCellTextSelector)
             .should("have.text", valueToBe);
         return this;
