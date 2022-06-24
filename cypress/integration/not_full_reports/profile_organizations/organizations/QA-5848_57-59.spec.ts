@@ -11,15 +11,16 @@ describe("Verify users roles to create new clients",
         cy.stepInfo('1. Login with Admin user role');
         loginAction(testData.adminUsername, testData.adminPassword);
 
-        cy.stepInfo('2. Navigate to Organization -> Create New Client page');
+        cy.stepInfo('2. Navigate to Organization -> Create New User page');
         _NavigationSection.navigateToProfileOrganization(enums.MENU_LINKS.organization);
         Organization._OrganizationActions.openCreateNewUserPage();
 
-        cy.stepInfo('3. Create new client');
-        Organization._CreateNewClient.createNewClient(testData.clientCreationData);
+        cy.stepInfo('3. Create new user');
+        Organization._CreateNewUser.createNewUser(testData.clientCreationData);
 
-        cy.stepInfo('4. Verify that the client created in the step 5 is displayed in the list of users, delete client');
-        cy.contains("Organization Clients").click();
+        cy.stepInfo('4. Verify that new user is created ');
+        Organization._OrganizationActions.openOrganizationUsersPage();
+        //TODO
         Organization._OrganizationClientsActions.deleteClient(testData.textToType);
     });
 });

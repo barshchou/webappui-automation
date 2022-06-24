@@ -2,6 +2,7 @@ import ReportDataCreator from "../../data_creator/reportData.creator";
 import Enums from "../../../enums/enums";
 import ClientCreationData from "../../data_creator/clientData.creator";
 import { BoweryAutomation } from "../../../types/boweryAutomation.type";
+import userDataCreator from "../../data_creator/userData.creator";
 
 const reportCreationFixture = () => {
     return ReportDataCreator.getReportData("5848_57-59", {
@@ -21,17 +22,17 @@ const _adminPassword = Cypress.env(`${Enums.USERS.webapp_admin_password}`);
 const _clientFirstName = "TestClientFirstName-" + `${Date.now()}`;
 const _clientLastName = "TestClientLastName-" + `${Date.now()}`;
 
-const _clientOptions: BoweryAutomation.OrganizationCreateNewClientData = {
-    firstName: _clientFirstName,
-    lastName: _clientLastName,
-    clientCompanyName: null,
-    streetAddress: null,
-    city: null
-};
+// const _clientOptions: BoweryAutomation.OrganizationCreateNewClientData = {
+//     firstName: _clientFirstName,
+//     lastName: _clientLastName,
+//     clientCompanyName: null,
+//     streetAddress: null,
+//     city: null
+// };
 
 export default {
     reportCreationData: reportCreationFixture(),
-    clientCreationData: ClientCreationData.getClientData(_clientOptions),
+    clientCreationData: userDataCreator.getDefaultUserData(),
     shortTextToType: _clientFirstName,
     textToType: _clientFirstName + " " + _clientLastName,
     companyName: "Test Company & CO",

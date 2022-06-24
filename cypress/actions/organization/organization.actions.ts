@@ -15,7 +15,12 @@ class OrganizationActions extends BaseActionsExt<typeof organizationPage>{
     }
 
     openOrganizationClientsPage(): OrganizationActions {
-        this.Page.createNewUser.click();
+        this.Page.organizationClients.click();
+        return this;
+    }
+
+    openOrganizationUsersPage(): OrganizationActions {
+        this.Page.organizationUsers.click();
         return this;
     }
 }

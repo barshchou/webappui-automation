@@ -5,7 +5,9 @@ class OrganizationPage extends BasePage{
    
    get createNewUser() {return cy.contains("Create New User");}
 
-   get organizationClient() {return cy.contains("Organization Clients");}
+   get organizationClients() {return cy.contains("Organization Clients");}
+
+   get organizationUsers() {return cy.contains("Organization Users");}
 }
 
 export default new OrganizationPage();
