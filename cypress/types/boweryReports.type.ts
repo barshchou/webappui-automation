@@ -22,6 +22,19 @@ export namespace BoweryReports {
         address?: string,
         isSalesForcePull?: isSalesForcePull
     }
+    export type ChipsCreationOptions = {
+        block?: string,
+        buildingName?: string,
+        grossBuildingArea?: number,
+        lotValue?: string,
+        numberOfCommercialUnits?: number,
+        numberOfResidentialUnits?: number,
+        siteArea?: number,
+        streetAddress?: string,
+        streetName?: string,
+        currentCommercialUnits?: number,
+        currentResidentialUnits?: number
+    }
     export type LeaseDateName = typeof Enums.LEASE_DATE_NAME[KeyInfo.LeaseDateNameKeys]
     export type LeaseStatus = typeof Enums.LEASE_STATUS[KeyInfo.LeaseStatusKeys]
     export type ImageType =  typeof Enums.IMAGE_TYPE[KeyInfo.ImageTypeKeys]

@@ -2,6 +2,7 @@ import testData from "../../../../fixtures/not_full_reports/report/key_info/QA-4
 import { reportCreationData } from "../../../../fixtures/not_full_reports/report/key_info/QA-4621-24.fixture";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import { Report } from "../../../../actions";
+import { _NavigationSection } from "../../../../actions/base";
 
 describe("The Letter of Engagement prefill from Dropbox to LoE filed in WebApp - 1 LoE PDF file",
     { tags: [ "@report", "@key_info", "@salesforce" ] }, () => {
@@ -10,7 +11,8 @@ describe("The Letter of Engagement prefill from Dropbox to LoE filed in WebApp -
         createReport(reportCreationData(testData.numbersJobId[0]));
         
         cy.stepInfo(`2. Navigate to the Report > Key Info > Engagement and Verify that the Letter Of Engagement field is empty and nothing 
-        is auto-filled from Dropbox`);
+                    is auto-filled from Dropbox`);
+        _NavigationSection.navigateToReportInformation();
         Report._KeyInfo.Page.inputToCheckUpload.should("have.value", testData.verifyValue);
 
         deleteReport(reportCreationData(testData.numbersJobId[0]).reportNumber);
@@ -21,7 +23,8 @@ describe("The Letter of Engagement prefill from Dropbox to LoE filed in WebApp -
         createReport(reportCreationData(testData.numbersJobId[1]));
         
         cy.stepInfo(`2. Navigate to the Report > Key Info > Engagement and Verify that the Letter Of Engagement field is empty and nothing 
-        is auto-filled from Dropbox`);
+                    is auto-filled from Dropbox`);
+        _NavigationSection.navigateToReportInformation();
         Report._KeyInfo.Page.inputToCheckUpload.should("be.empty");
 
         deleteReport(reportCreationData(testData.numbersJobId[1]).reportNumber);
@@ -32,7 +35,8 @@ describe("The Letter of Engagement prefill from Dropbox to LoE filed in WebApp -
         createReport(reportCreationData(testData.numbersJobId[2]));
         
         cy.stepInfo(`2. Navigate to the Report > Key Info > Engagement and Verify that the Letter Of Engagement field is empty and nothing 
-            is auto-filled from Dropbox`);
+                    is auto-filled from Dropbox`);
+        _NavigationSection.navigateToReportInformation();
         Report._KeyInfo.Page.inputToCheckUpload.should("be.empty");
 
         deleteReport(reportCreationData(testData.numbersJobId[2]).reportNumber);
@@ -43,7 +47,8 @@ describe("The Letter of Engagement prefill from Dropbox to LoE filed in WebApp -
         createReport(reportCreationData(testData.numbersJobId[3]));
         
         cy.stepInfo(`2. Navigate to the Report > Key Info > Engagement and Verify that the Letter Of Engagement field is empty and nothing 
-        is auto-filled from Dropbox`);
+                    is auto-filled from Dropbox`);
+        _NavigationSection.navigateToReportInformation();
         Report._KeyInfo.Page.inputToCheckUpload.should("be.empty");
 
         deleteReport(reportCreationData(testData.numbersJobId[3]).reportNumber);
