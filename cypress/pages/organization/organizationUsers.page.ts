@@ -9,7 +9,9 @@ class OrganizationUsersPage extends BasePage{
 
    get successModalCloseButton() {return cy.xpath("//*[contains(text(), 'Success')]//following::button[1]");}
 
-   editButton(name: string) {return cy.xpath(`//td[.='${name}']//following-sibling::td/button[.="Edit"]`);}
+   editButton(name: string) {return cy.xpath(`//td[.="${name}"]//following-sibling::td/button[.="Edit"]`);}
+
+   get editButtonAny() {return cy.xpath('//button[.="Edit"]');}
 }
 
 export default new OrganizationUsersPage();

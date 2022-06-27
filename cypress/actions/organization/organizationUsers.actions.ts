@@ -10,8 +10,14 @@ class OrganizationUsersActions extends BaseActionsExt<typeof organizationUsersPa
         return this;
     }
 
-    verifyUserEditButton(name: string): OrganizationUsersActions {
-        organizationUsersPage.editButton(name).should('be.enabled');
+    verifyUserEditButton(name: string, enabled = true): OrganizationUsersActions {
+        enabled ? organizationUsersPage.editButton(name).should('exist') :
+            organizationUsersPage.editButton(name).should('not.exist');
+        return this;
+    }
+
+    verifyEditButtonsNotDisplayed(): OrganizationUsersActions {
+        organizationUsersPage.editButtonAny.should('not.exist');
         return this;
     }
 
@@ -20,8 +26,8 @@ class OrganizationUsersActions extends BaseActionsExt<typeof organizationUsersPa
         return this;
     }
 
-    clickEditUser(name: string): OrganizationUsersActions {
-        this.verifyUserEditButton(name)
+    clickEditUser(name: string, enabled = true): OrganizationUsersActions {
+        this.verifyUserEditButton(name, enabled)
             .clickUserEditButton(name);
         
         return this;

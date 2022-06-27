@@ -21,7 +21,6 @@ class OrganizationEditUserActions extends BaseActionsExt<typeof organizationEdit
             organizationEditUserPage.selectRoleOption(role).click();
         });
         organizationEditUserPage.selectRoleOption(roles[0]).type('{esc}');
-        this.saveChanges();
         return this;
     }
 
@@ -37,13 +36,13 @@ class OrganizationEditUserActions extends BaseActionsExt<typeof organizationEdit
         return this;
     }
 
-    verifySuccessModal(): OrganizationEditUserActions {
-        organizationEditUserPage.successModal.should("be.visible");
+    verifyModal(result = true): OrganizationEditUserActions {
+        organizationEditUserPage.resultModal(result).should("be.visible"); 
         return this;
     }
 
-    closeSuccessModal(): OrganizationEditUserActions {
-        organizationEditUserPage.successModalCloseButton.click();
+    closeModal(result = true): OrganizationEditUserActions {
+        organizationEditUserPage.resultModalCloseButton(result).click();
         return this;
     }
 }
