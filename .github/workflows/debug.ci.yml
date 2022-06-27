@@ -1,4 +1,4 @@
-name: Cypress full reports tests
+name: CI DEBUG. Cypress not full reports tests in Currents.dev
 
 on:
   workflow_dispatch:
@@ -7,10 +7,10 @@ on:
         type: choice
         description: Select the environment
         options:
-          - dev
-          - staging
-          - prod
-          - custom
+        - dev
+        - staging
+        - prod
+        - custom
         required: true
         default: staging
       url:
@@ -26,14 +26,29 @@ on:
         type: string
         description: Add custom environment url if needed
         required: false
-
+      # IMPORTANT: debug inputs
+      spec_file:
+        type: string
+        description: Spec(s) to be executed
+        required: false
+        default: cypress/integration/not_full_reports/**/*.spec.ts
+      tags:
+        type: string
+        description: Run tests with specific tags
+        required: false
+        default: grep=,grepTags=,burn=
+        
 jobs:
-  Full-reports-run:
+  Not-full-reports-run-DEBUG:
     runs-on: ubuntu-latest
     container: cypress/browsers:node16.13.2-chrome100-ff98
+    strategy:
+      fail-fast: false
+      matrix:
+        containers: [1]
 
     steps:
-      - name: Run full-report end-to-end test with Currents dev
+      - name: Run end-to-end tests (DEBUG, one container)
         uses: Bowery-RES/action-run-e2e-tests@latest
         with:
           github_token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
@@ -42,7 +57,7 @@ jobs:
           env: ${{ github.event.inputs.env }}
           customEnv: ${{ github.event.inputs.customEnv }}
           url: ${{ github.event.inputs.url }}
-          spec_file: cypress/integration/full_reports/*.spec.ts'
+          spec_file: ${{ github.event.inputs.spec_file }}
           tags: ${{ github.event.inputs.tags }}
           record_key: ${{ secrets.CURRENTS_RECORD_KEY }}
         env: 
@@ -58,11 +73,3 @@ jobs:
           CYPRESS_WEBAPP_ROLE_TEST_PASSWORD: ${{ secrets.WEBAPP_ROLE_TEST_PASSWORD }}
           CYPRESS_WEBAPP_TEST_USERNAME: ${{ secrets.WEBAPP_TEST_USERNAME }}
           CYPRESS_WEBAPP_TEST_PASSWORD: ${{ secrets.WEBAPP_TEST_PASSWORD }}
-      
-      - name: Archive DOM snapshots from failed tests
-        if: failure()
-        uses: actions/upload-artifact@v3
-        with:
-          name: failed-tests-DOM-snapshots
-          path: cypress/gh_artifacts
-          retention-days: 2
