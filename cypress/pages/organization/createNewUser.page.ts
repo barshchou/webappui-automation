@@ -20,6 +20,8 @@ class OrganizationCreateNewUserPage extends BasePage{
 
     get successModal() {return cy.xpath("//*[contains(text(), 'Success')]");}
 
+    get successModalCloseButton() {return cy.xpath("//*[contains(text(), 'Success')]//following::button[1]");}
+
     selectRoleOption(role: BoweryAutomation.OrganizationRoles) {return cy.xpath(`//ul[@role = 'listbox']//span[.= '${role}']`);}
 
     prefixSelectOption(prefix: BoweryReports.OrganizationAddresseePrefix) {return cy.get(`[data-qa="prefix-${prefix}-select-option"]`);}

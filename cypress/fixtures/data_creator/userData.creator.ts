@@ -2,13 +2,13 @@ import enums from "../../enums/enums";
 import { BoweryAutomation } from "../../types/boweryAutomation.type";
 import { BoweryReports } from "../../types/boweryReports.type";
 
-let UserCreationData = function (username: string, roleName: BoweryAutomation.OrganizationRoles, 
+let UserCreationData = function (username: string, roleName: BoweryAutomation.OrganizationRoles[], 
         prefix: BoweryReports.OrganizationAddresseePrefix, firstName: string, middleName: string,
         lastName: string, userSuffix: string, positionInOrg: string, 
         boweryOffice: BoweryReports.BoweryOffices, phone: string) {
         
         this.username = username;
-        this.role = roleName;
+        this.roleName = roleName;
         this.prefix = prefix;
         this.firstName = firstName;
         this.middleName = middleName;
@@ -23,7 +23,7 @@ class UserCreator {
 
     username: string
 
-    roleName: BoweryAutomation.OrganizationRoles
+    roleName: BoweryAutomation.OrganizationRoles[]
 
     prefix?: BoweryReports.OrganizationAddresseePrefix
 
@@ -46,8 +46,8 @@ class UserCreator {
         return this;
     }
 
-    setRoleName(roleName?: BoweryAutomation.OrganizationRoles) {
-        this.roleName = roleName ?? enums.USER_ROLES.appraiser;
+    setRoleName(roleName?: BoweryAutomation.OrganizationRoles[]) {
+        this.roleName = roleName ?? [ enums.USER_ROLES.appraiser ];
         return this;
     }
 

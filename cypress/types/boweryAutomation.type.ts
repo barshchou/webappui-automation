@@ -52,7 +52,7 @@ export namespace BoweryAutomation {
 
     export type OrganizationCreateNewUserData = {
         username: string,
-        roleName: BoweryAutomation.OrganizationRoles,
+        roleName: BoweryAutomation.OrganizationRoles[],
         prefix?: BoweryReports.OrganizationAddresseePrefix,
         firstName: string,
         middleName?: string,

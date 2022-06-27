@@ -10,9 +10,12 @@ class CreateNewUserActions extends BaseActionsExt<typeof createNewUserPage>{
         return this;
     }
 
-    selectUserRole(role: BoweryAutomation.OrganizationRoles): CreateNewUserActions {
+    selectUserRole(roles: BoweryAutomation.OrganizationRoles[]): CreateNewUserActions {
         createNewUserPage.roleNameField.click();
-        createNewUserPage.selectRoleOption(role).click;
+        roles.forEach(role => {
+            createNewUserPage.selectRoleOption(role).click();    
+        });
+        createNewUserPage.roleNameField.realClick();
         return this;
     }
 
@@ -22,12 +25,12 @@ class CreateNewUserActions extends BaseActionsExt<typeof createNewUserPage>{
     }
 
     enterFirstName(firstName: string): CreateNewUserActions {
-        createNewUserPage.usernameField.type(firstName).should("have.value", firstName);
+        createNewUserPage.firstNameField.type(firstName).should("have.value", firstName);
         return this;
     }
 
     enterLastName(lastName: string): CreateNewUserActions {
-        createNewUserPage.usernameField.type(lastName).should("have.value", lastName);
+        createNewUserPage.lastNameField.type(lastName).should("have.value", lastName);
         return this;
     }
 
@@ -41,14 +44,21 @@ class CreateNewUserActions extends BaseActionsExt<typeof createNewUserPage>{
         return this;
     }
 
+    closeSuccessModal(): CreateNewUserActions {
+        createNewUserPage.successModalCloseButton.click();
+        return this;
+    }
+
     createNewUser(data: BoweryAutomation.OrganizationCreateNewUserData): CreateNewUserActions {
-        this.selectUserRole(data.roleName)
-            .enterUsername(data.username)
+        this.enterUsername(data.username)
             .enterFirstName(data.firstName)
             .enterLastName(data.lastName)
+            .selectUserPrefix(data.prefix)
+            .selectUserRole(data.roleName)
             .clickSaveFormButton()
             .verifyProgressBarNotExist()
-            .verifySuccessModal();
+            .verifySuccessModal()
+            .closeSuccessModal();
         return this;
     }
 }

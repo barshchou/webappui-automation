@@ -7,7 +7,7 @@ import enums from '../../../../enums/enums';
 describe("Verify users roles to create new clients", 
     { tags:[ "@permissions_roles, @client", "@organizations" ] }, () => {
 
-    it("[QA-5848]]", () => {
+    it("[QA-5848]", () => {
         cy.stepInfo('1. Login with Admin user role');
         loginAction(testData.adminUsername, testData.adminPassword);
 
@@ -20,7 +20,6 @@ describe("Verify users roles to create new clients",
 
         cy.stepInfo('4. Verify that new user is created ');
         Organization._OrganizationActions.openOrganizationUsersPage();
-        //TODO
-        Organization._OrganizationClientsActions.deleteClient(testData.textToType);
+        Organization._OrganizationUsersActions.deleteUser(testData.userToFind);
     });
 });

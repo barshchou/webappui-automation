@@ -3,6 +3,7 @@ import Enums from "../../../enums/enums";
 import ClientCreationData from "../../data_creator/clientData.creator";
 import { BoweryAutomation } from "../../../types/boweryAutomation.type";
 import userDataCreator from "../../data_creator/userData.creator";
+import enums from "../../../enums/enums";
 
 const reportCreationFixture = () => {
     return ReportDataCreator.getReportData("5848_57-59", {
@@ -19,23 +20,23 @@ const _inspectorPassword = Cypress.env(`${Enums.USERS.webapp_inspector_password}
 const _adminUsername = Cypress.env(`${Enums.USERS.webapp_admin_username}`);
 const _adminPassword = Cypress.env(`${Enums.USERS.webapp_admin_password}`);
 
-const _clientFirstName = "TestClientFirstName-" + `${Date.now()}`;
-const _clientLastName = "TestClientLastName-" + `${Date.now()}`;
+const _userFirstName = "TestUserFirstName-" + `${Date.now()}`;
+const _userLastName = "TestUserLastName-" + `${Date.now()}`;
+const _userName = "TestUserName-" + `${Date.now()}` + '@boweryvaluation.com';
+const _roleName = [ enums.USER_ROLES.appraiser ];
 
-// const _clientOptions: BoweryAutomation.OrganizationCreateNewClientData = {
-//     firstName: _clientFirstName,
-//     lastName: _clientLastName,
-//     clientCompanyName: null,
-//     streetAddress: null,
-//     city: null
-// };
+const _userOptions: BoweryAutomation.OrganizationCreateNewUserData = {
+    username: _userName,
+    firstName: _userFirstName,
+    lastName: _userLastName,
+    roleName: _roleName
+};
 
 export default {
     reportCreationData: reportCreationFixture(),
-    clientCreationData: userDataCreator.getDefaultUserData(),
-    shortTextToType: _clientFirstName,
-    textToType: _clientFirstName + " " + _clientLastName,
-    companyName: "Test Company & CO",
+    clientCreationData: userDataCreator.getUserData(_userOptions),
+    shortTextToType: _userFirstName,
+    userToFind: _userFirstName + " " + _userLastName,
     leadAppraiserUsername: _leadAppraiserUsername,
     leadAppraiserPassword: _leadAppraiserPassword,
     appraiserUsername: _appraiserUsername,
@@ -44,5 +45,4 @@ export default {
     inspectorPassword: _inspectorPassword,
     adminUsername: _adminUsername,
     adminPassword: _adminPassword,
-    profileOrganizationName: "Organization"
 };
