@@ -18,6 +18,7 @@ const {
 } = require("cypress-image-snapshot/plugin");
 
 const grepFilterPlugin = require("cypress-grep/src/plugin");
+const { initLaunchDarklyApiTasks } = require("cypress-ld-control");
 
 /**
  * NOTE: (ernst) Sometimes we need call functions recursively (function calls itself).
@@ -195,6 +196,40 @@ module.exports = (on, config) => {
   addMatchImageSnapshotPlugin(on, config);
   grepFilterPlugin(config);
 
+  const tasks = {
+    async waitForFileExists(filePath){
+      return await _waitForFileExists(filePath);
+    },
+
+    async convertDocxToHtml(report){
+      // ernst: it's async because it has call of async function from mammoth lib 
+      return await _convertDocxToHtml(report);
+    },
+
+    async getFilePath({_reportName, _docx_html}){
+      return await _getFilePath(_reportName, _docx_html);
+    },
+
+    async createReportApi({_reportCreationData, _payload, _token, _envUrl}){
+      return await _createReportApi(_reportCreationData, _payload, _token, _envUrl);
+    },
+
+    async loginApi({_envUrl, _username, _password}){
+      return await _loginApi(_envUrl, _username, _password);
+    }
+  }
+
+  
+  const ldApiTasks = initLaunchDarklyApiTasks({
+    projectKey: "default",
+    authToken: "api-791cd945-3719-48cd-9c00-596d34a7f829",
+      environment: 'staging', // the key of the environment to use
+    })
+    // copy all LaunchDarkly methods as individual tasks
+    Object.assign(tasks, ldApiTasks)
+    config.env.launchDarklyApiAvailable = true
+    
+    
 
   on("before:browser:launch", (browser, launchOptions) => {
       if (browser.isHeadless === true) {
@@ -205,36 +240,8 @@ module.exports = (on, config) => {
 
   //#region Cypress Tasks (more about tasks: https://docs.cypress.io/api/commands/task)
   
-  on("task",{
-    async waitForFileExists(filePath){
-      return await _waitForFileExists(filePath);
-    }
-  });
+  on("task", tasks)
 
-  on("task",{
-    async convertDocxToHtml(report){
-      // ernst: it's async because it has call of async function from mammoth lib 
-      return await _convertDocxToHtml(report);
-    }
-  });
-
-  on("task",{
-    async getFilePath({_reportName, _docx_html}){
-      return await _getFilePath(_reportName, _docx_html);
-    }
-  });
-
-  on("task",{
-    async createReportApi({_reportCreationData, _payload, _token, _envUrl}){
-      return await _createReportApi(_reportCreationData, _payload, _token, _envUrl);
-    }
-  });
-
-  on("task",{
-    async loginApi({_envUrl, _username, _password}){
-      return await _loginApi(_envUrl, _username, _password);
-    }
-  });
   //#endregion
 
   return config;
