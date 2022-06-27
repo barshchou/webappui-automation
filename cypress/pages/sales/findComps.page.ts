@@ -45,12 +45,12 @@ class FindCompsPage extends BasePage {
         .siblings("[class*=buttonsColumn]").find("span").contains("REMOVE").parent();
     }
 
-    get reportToSearchCompInput() {return cy.get("[name^=report]", { includeShadowDom: true });}
+    get reportToSearchCompInput() {return cy.get("[data-qa='Report Unique ID']", { includeShadowDom: true });}
 
     get importReportCompsButton() {return this.importCompModal.find("span").contains("Import")
         .parent("button");}
 
-    get searchButton() {return cy.get("button[.='Search']", { includeShadowDom: true });}
+    get searchButton() {return cy.get("button.searchButton-3-4-2", { includeShadowDom: true });}
 
     get importCompsSelectButtons() {return cy.contains("Selected for report", { includeShadowDom: true }).siblings("button[.='Select']");}
 
