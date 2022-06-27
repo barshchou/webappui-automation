@@ -1,4 +1,4 @@
-name: DEBUG. Cypress not full reports tests in Currents.dev
+name: ACT DEBUG. NOT RUN ON CI. Cypress not full reports tests in Currents.dev
 
 on:
   workflow_dispatch:
@@ -39,7 +39,7 @@ on:
         default: grep=,grepTags=,burn=
         
 jobs:
-  Not-full-reports-run-DEBUG:
+  Not-full-reports-run-DEBUG-ACT:
     runs-on: ubuntu-latest
     container: cypress/browsers:node16.13.2-chrome100-ff98
     strategy:
@@ -49,10 +49,10 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Cache node modules
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         env:
           cache-name: cache-node-modules
         with:
@@ -75,21 +75,3 @@ jobs:
 
       - name: Run Cypress not snapshot tests on Currents.dev
         run: npm run currents:run:debug -- --config baseUrl=${{ github.event.inputs.customEnv == '' && github.event.inputs.url ||  github.event.inputs.customEnv }} --spec ${{ github.event.inputs.spec_file }} --env ${{ github.event.inputs.tags }}
-        env:
-          CYPRESS_USERNAME: ${{ github.event.inputs.env == 'custom' && secrets.CESAR_USERNAME || secrets.USERNAME }}
-          CYPRESS_PASSWORD: ${{ github.event.inputs.env == 'custom' && secrets.CESAR_PASSWORD || secrets.PASSWORD }}
-          CYPRESS_url: ${{ github.event.inputs.env }}
-          CYPRESS_customEnv: ${{ github.event.inputs.customEnv }}
-          CYPRESS_grepFilterSpecs: true
-          CYPRESS_WEBAPP_APPRAISER_USERNAME: ${{ secrets.WEBAPP_APPRAISER_USERNAME }}
-          CYPRESS_WEBAPP_APPRAISER_PASSWORD: ${{ secrets.WEBAPP_APPRAISER_PASSWORD }}
-          CYPRESS_WEBAPP_INSPECTOR_USERNAME: ${{ secrets.WEBAPP_INSPECTOR_USERNAME }}
-          CYPRESS_WEBAPP_INSPECTOR_PASSWORD: ${{ secrets.WEBAPP_INSPECTOR_PASSWORD }}
-          CYPRESS_WEBAPP_ADMIN_USERNAME: ${{ secrets.WEBAPP_ADMIN_USERNAME }}
-          CYPRESS_WEBAPP_ADMIN_PASSWORD: ${{ secrets.WEBAPP_ADMIN_PASSWORD }}
-          CYPRESS_WEBAPP_LEAD_APPRAISER_USERNAME: ${{ secrets.WEBAPP_LEAD_APPRAISER_USERNAME }}
-          CYPRESS_WEBAPP_LEAD_APPRAISER_PASSWORD: ${{ secrets.WEBAPP_LEAD_APPRAISER_PASSWORD }}
-          CYPRESS_WEBAPP_ROLE_TEST_USERNAME: ${{ secrets.WEBAPP_ROLE_TEST_USERNAME }}
-          CYPRESS_WEBAPP_ROLE_TEST_PASSWORD: ${{ secrets.WEBAPP_ROLE_TEST_PASSWORD }}
-          CYPRESS_WEBAPP_TEST_USERNAME: ${{ secrets.WEBAPP_TEST_USERNAME }}
-          CYPRESS_WEBAPP_TEST_PASSWORD: ${{ secrets.WEBAPP_TEST_PASSWORD }}

@@ -60,5 +60,4 @@ export default class BasePage {
             return cy.xpath("//span[contains(text(), 'Modified')]");
         }
     }
-
 }

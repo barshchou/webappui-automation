@@ -57,7 +57,7 @@ class CommercialRentCompsPage extends BasePage {
 
     getRentPerSFCellByRowNumber(rowNumber = 0) {return cy.xpath(`//tr[@data-qa='row-${rowNumber}']/td[@data-qa='rentPerSF-cell']`);}
 
-    getDragableElement(index: number) { return `[data-qa="row-${index}"] [data-react-beautiful-dnd-drag-handle="2"]`;}
+    getDragableElement(index: number) { return `[data-qa="row-${index}"] [data-qa="drag-cell"]>span`;}
 
     getDropableArea(compGroup: string) {return `[data-qa="${compGroup}-group-panel"] tbody[data-react-beautiful-dnd-droppable] tr td`;}
 
