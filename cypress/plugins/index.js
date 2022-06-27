@@ -13,12 +13,6 @@ const glob = require("glob");
 const request = require('supertest');
 const io = require("socket.io-client");
 
-const {
-  addMatchImageSnapshotPlugin,
-} = require("cypress-image-snapshot/plugin");
-
-const grepFilterPlugin = require("cypress-grep/src/plugin");
-
 /**
  * NOTE: (ernst) Sometimes we need call functions recursively (function calls itself).
  * If you try to make INLINED function call itself (how it often described in cy.task examples) - 
@@ -191,11 +185,6 @@ const _loginApi = async (_envUrl, _username, _password) => {
  */
 // eslint-disable-next-line no-unused-vars
 module.exports = (on, config) => {
- 
-  addMatchImageSnapshotPlugin(on, config);
-  grepFilterPlugin(config);
-
-
   on("before:browser:launch", (browser, launchOptions) => {
       if (browser.isHeadless === true) {
         launchOptions.args.push("--window-size=1920,1080");

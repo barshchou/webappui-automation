@@ -37,6 +37,7 @@
   "homepage": "https://github.com/Bowery-RES/webapp-ui-automation#readme",
   "devDependencies": {
     "@currents/cli": "^1.0.8",
+    "@simonsmith/cypress-image-snapshot": "^5.0.2",
     "@types/cypress-image-snapshot": "^3.1.6",
     "@typescript-eslint/eslint-plugin": "^5.17.0",
     "@typescript-eslint/parser": "^5.17.0",
@@ -44,7 +45,6 @@
     "cypress-file-upload": "^5.0.8",
     "cypress-grep": "^3.0.0",
     "cypress-iframe": "^1.0.1",
-    "cypress-image-snapshot": "^4.0.1",
     "cypress-localstorage-commands": "^2.1.0",
     "cypress-real-events": "^1.7.1",
     "cypress-xpath": "^2.0.0",
