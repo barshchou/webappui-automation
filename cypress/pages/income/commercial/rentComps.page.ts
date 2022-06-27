@@ -59,7 +59,7 @@ class CommercialRentCompsPage extends BasePage {
         return cy.get(`[data-qa='${group}_group'] [data-qa=rentPerSF-cell]`).eq(rowNumber);
     }
 
-    getDragableElement(index: number) { return `[data-qa="row-${index}"] [data-react-beautiful-dnd-drag-handle="2"]`;}
+    getDragableElement(index: number) { return `[data-qa="row-${index}"] [data-qa="drag-cell"]>span`;}
 
     getDropableArea(compGroup: string) {return `[data-qa="${compGroup}-group-panel"] tbody[data-react-beautiful-dnd-droppable] tr td`;}
 

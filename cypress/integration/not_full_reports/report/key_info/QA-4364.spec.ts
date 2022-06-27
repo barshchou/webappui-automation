@@ -15,7 +15,6 @@ describe("[QA-4364] Prefill Inspection Date from Salesforce - deletion of the Da
     it("Test body", () => {
         cy.stepInfo("2. Go to Report → Key Info → Engagement tab and delete the Date of Valuation");
         _NavigationSection.navigateToReportInformation();
-        Report._KeyInfo.clickYesButton();
         Report._KeyInfo.Page.getDateInputByQA(testData.nameInputByQA).clear().should("be.empty");
 
         deleteReport(testData.reportCreationData.reportNumber);

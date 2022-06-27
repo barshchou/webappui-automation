@@ -14,7 +14,6 @@ describe("[QA-4426] Check the generated commentary for Property Rights Appraised
 
             cy.stepInfo("1. Report > Key Info");
             _NavigationSection.navigateToReportInformation();
-            Report._KeyInfo.clickYesButton();
 
             cy.stepInfo("2. Verify that the generated commentary for Property Rights Appraised discussion is a next-gen component");
             Report._KeyInfo.Page.textBoxPropertyRightsAppraised.should("include.text", item.reportConclusionText);
