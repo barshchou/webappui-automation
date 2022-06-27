@@ -9,6 +9,23 @@ class OrganizationUsersActions extends BaseActionsExt<typeof organizationUsersPa
         organizationUsersPage.successModalCloseButton.click();
         return this;
     }
+
+    verifyUserEditButton(name: string): OrganizationUsersActions {
+        organizationUsersPage.editButton(name).should('be.enabled');
+        return this;
+    }
+
+    clickUserEditButton(name: string): OrganizationUsersActions {
+        organizationUsersPage.editButton(name).click();
+        return this;
+    }
+
+    clickEditUser(name: string): OrganizationUsersActions {
+        this.verifyUserEditButton(name)
+            .clickUserEditButton(name);
+        
+        return this;
+    }
 }
 
 export default new OrganizationUsersActions(organizationUsersPage);
