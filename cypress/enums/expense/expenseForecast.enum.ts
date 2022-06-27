@@ -15,7 +15,7 @@ const expensesCardsNames = {
     legalAndProfessional: "legalAndProfessionalFees",
     miscelaneous: "miscellaneous",
     managementFees: "management",
-    replacementsAndReserves: "reserves"
+    replacementsAndReserves: "replacementReserves"
 };
 
 
