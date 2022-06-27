@@ -92,7 +92,7 @@ class ExpenseForecastPage extends BasePage {
 
     get addCustomExpenseCategoryFieldset() { return cy.get('[data-qa="autosuggest-text-input-field"]').find('fieldset'); }
 
-    // get addCustomExpenseCategoryCancelButton() {return cy.contains('Add Custom Expense Category').parent('[role=dialog]').contains('Cancel');}
+     get addCustomExpenseCategoryCancelButton() { return cy.xpath("//*[.='Add Custom Expense Category']//following::button[.='Cancel']"); }
 
     get addCustomExpenseCategorySaveButton() { return cy.xpath("//*[.='Add Custom Expense Category']//following::button[.='Save']"); }
 

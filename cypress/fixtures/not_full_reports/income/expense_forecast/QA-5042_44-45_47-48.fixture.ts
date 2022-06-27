@@ -18,7 +18,9 @@ const _thirdCustomCategory: BoweryReports.ForecastItem = {
     name: "Car parking"
 };
 
-
+const _validationMessage = 'Please fill out this field.';
+const _redColor = 'rgb(244, 67, 54)';
+const _replacementsAndReserves = expensesCardsNames.replacementsAndReserves;
 
 export default {
     reportCreationData: ReportDataCreator.getReportData("5042"),
@@ -26,5 +28,8 @@ export default {
     firstCustomCategory: _firstCustomCategory,
     secondCustomCategory: _secondCustomCategory,
     thirdCustomCategory: _thirdCustomCategory,
-    expenseCardsIDArray : expensesCardsNames.expenseCardsIDArray
+    expenseCardsIDArray: expensesCardsNames.expenseCardsIDArray,
+    validationMessage: _validationMessage,
+    redColor: _redColor,
+    replacementsAndReserves : _replacementsAndReserves
 };
