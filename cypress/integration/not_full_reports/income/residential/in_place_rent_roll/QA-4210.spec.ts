@@ -29,20 +29,20 @@ describe("Verify the Developer's Forecast checkbox on the In-Place Rent Roll pag
         });
     }
 
-    it("Verify export report", () => {
-        for (let i = 0; i < 2; i++) {
+    for (let i = 0; i < 2; i++) {
+        it(`Export №${i + 1} Verify export report`, () => {
             Cypress.config().baseUrl = null;
             cy.task("getFilePath", { _reportName: reportCreationData(i).reportNumber, _docx_html: "html" }).then(file => {
                 cy.log(<string>file);
                 cy.stepInfo("4. Verify the summarize values in the Current Residential Rent Roll table");
                 cy.visit(<string>file);
-
+    
                 if (i === 0) {
                     cy.contains("Current Residential Rent Roll").scrollIntoView().next().next().should("not.have.text", testData.verifyText);
                 } else {
                     cy.contains("Current Residential Rent Roll").scrollIntoView().next().next().should("have.text", testData.verifyText);
                 }
             });
-        }
-    });
+        });      
+    }
 });
