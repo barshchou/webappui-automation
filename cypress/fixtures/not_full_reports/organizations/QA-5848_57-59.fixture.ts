@@ -1,6 +1,5 @@
 import ReportDataCreator from "../../data_creator/reportData.creator";
 import Enums from "../../../enums/enums";
-import ClientCreationData from "../../data_creator/clientData.creator";
 import { BoweryAutomation } from "../../../types/boweryAutomation.type";
 import userDataCreator from "../../data_creator/userData.creator";
 import enums from "../../../enums/enums";
