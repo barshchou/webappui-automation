@@ -17,7 +17,9 @@ describe("Verify the Client Guidelines Discussion on the page",
         enterClientFileNumber(testData.clientFileNumber);
 
         cy.stepInfo(`2. Try to proceed on any other page and verify that the Unsaved changes modal is displayed.`);
-        NavigationSection.navigateToReportInformation().verifyUnsavedChangesModal();
+        NavigationSection.clickReportButton()
+            .clickReportInfoButton()
+            .verifyUnsavedChangesModal();
 
         cy.stepInfo(`3. Click on the Yes button and verify that the changes are saved on the Client page.`);
         NavigationSection.clickYesButton().navigateToClientPage();
@@ -26,7 +28,9 @@ describe("Verify the Client Guidelines Discussion on the page",
         and verify that the Unsaved changes modal is displayed.`);
         Report.Client.enterClientName(testData.clientName).
         enterClientFileNumber(testData.clientFileNumber+"_UNSAVED");
-        NavigationSection.navigateToReportInformation().verifyUnsavedChangesModal();
+        NavigationSection.clickReportButton()
+            .clickReportInfoButton()
+            .verifyUnsavedChangesModal();
 
         cy.stepInfo(`5. Click on the No button and verify that the changes are NOT saved on the Client page.`);
         NavigationSection.clickNoButton().navigateToClientPage();

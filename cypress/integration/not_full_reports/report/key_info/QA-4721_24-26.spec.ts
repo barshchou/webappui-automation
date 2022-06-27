@@ -77,9 +77,10 @@ describe(`Verify the Save and Save & Continue button functionality on the Report
         _NavigationSection.clickPreviewEditButton()
             .clickLetterOfTransmittal()
             .verifyUnsavedChangesModal()
-            .clickYesButton();
-            Report._KeyInfo.verifyTextBoxPropertyRightsAppraised(testData.verifyTaxValue)
-                .verifyTextBoxDefinitionOfMarketValue(testData.verifyTaxValue);
+            .clickYesButton()
+            .navigateToReportInformation();
+        Report._KeyInfo.verifyTextBoxPropertyRightsAppraised(testData.verifyTaxValue)
+            .verifyTextBoxDefinitionOfMarketValue(testData.verifyTaxValue);
 
         cy.stepInfo("4. Try to proceed on any other page from the Key Info page and verify that the Unsaved changes modal is displayed");
         _NavigationSection.navigateToReportInformation();
@@ -106,8 +107,9 @@ describe(`Verify the Save and Save & Continue button functionality on the Report
         cy.stepInfo("1. Proceed to the Report > Key Info page");
         _NavigationSection.navigateToReportInformation();
        
-        cy.stepInfo("3. Click on the Back button and verify the user is redirected to another page (Settings & Export > Review and Export).");
-        Report._KeyInfo.clickBackButton();
+        cy.stepInfo("2. Click on the Back button and verify the user is redirected to another page (Settings & Export > Review and Export).");
+        Report._KeyInfo.clickBackButton()
+            .clickYesButton();
         ReviewExport.verifyPageIsOpened();
 
         deleteReport(testData.reportCreationData.reportNumber);
