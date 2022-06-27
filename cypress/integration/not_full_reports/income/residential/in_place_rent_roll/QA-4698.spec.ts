@@ -1,4 +1,4 @@
-import testData from "../../../../../fixtures/not_full_reports/income/residential/in_place_rent_roll/QA-4245.fixture";
+import testData from "../../../../../fixtures/not_full_reports/income/residential/in_place_rent_roll/QA-4698.fixture";
 import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../../actions/base";
 import { Property, Income } from "../../../../../actions";
@@ -15,11 +15,10 @@ describe("Verify the Monthly Total row in the grid",
         _NavigationSection.navigateToPropertySummary();
         Property._Summary.enterNumberOfResUnits(testData.numberOfUnits);
 
-        cy.stepInfo("2. Navigate to Income -> Residential -> In-Place Rent Roll and make sure that the Monthly Total row is displayed in the grid (not editable, default = 0.00$).");
+        cy.stepInfo("2. Navigate to Income -> Residential -> In-Place Rent Roll");
         _NavigationSection.navigateToResInPlaceRentRoll();
-        Income._Residential.InPlaceRentRoll.verifyMonthlyTotalRentValue();
         
-        cy.stepInfo("3. Verify the Monthly Total row is calculated per formula = Monthly Rent ($) sum - vacant units' rents");
+        cy.stepInfo("3. Verify Rent PSF/Month value in the Grid is displayed with 2 decimals places");
         testData.residentialUnits.forEach((unit, index) => {
             Income._Residential.InPlaceRentRoll.enterMonthlyRentByRowNumber(unit.monthlyRent, index);
             Income._Residential.InPlaceRentRoll.enterLeaseStatusByRowNumber(unit.leaseStatus, index);
