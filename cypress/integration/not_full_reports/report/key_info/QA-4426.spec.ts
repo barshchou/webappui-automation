@@ -14,14 +14,13 @@ describe("[QA-4426] Check the generated commentary for Property Rights Appraised
 
             cy.stepInfo("1. Report > Key Info");
             _NavigationSection.navigateToReportInformation();
-            Report._KeyInfo.clickYesButton();
 
             cy.stepInfo("2. Verify that the generated commentary for Property Rights Appraised discussion is a next-gen component");
             Report._KeyInfo.Page.textBoxPropertyRightsAppraised.should("include.text", item.reportConclusionText);
 
             cy.stepInfo("3. Verify that the interest appraised elements of the generated commentary (highlighted in red) are chips");
             Report._KeyInfo.Page.textBoxPropertyRightsAppraised.contains(item.check).trigger("mouseover");
-            Report._KeyInfo.verifyTooltipExist();
+            Report._KeyInfo.verifyTooltipNotExist();
 
             cy.stepInfo(`4. Verify that the Property Rights Appraised  discussion appears below the h2 Introduction > Property Rights 
                 Appraised section in the exported report.`);

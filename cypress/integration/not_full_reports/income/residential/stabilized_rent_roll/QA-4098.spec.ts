@@ -27,10 +27,10 @@ describe("Default selection on Stabilized Rent Roll table is the same selection 
         });
 
         cy.stepInfo("1. Navigate to Income > Residential > Stabilized Rent Roll");
-        _NavigationSection.openStabilizedRentRoll();
+        _NavigationSection.navigateToResidentialStabilizedRentRoll();
 
         testData.residentialUnits.forEach((unit, index) => {
-            Income._Residential.StabilizedRentRoll.verifyRentPSFValueByRow(false, index);
+            Income._Residential.InPlaceRentRoll.verifyRentPSFValueByRow(false, index, true);
         });
 
         deleteReport(testData.reportCreationData.reportNumber);

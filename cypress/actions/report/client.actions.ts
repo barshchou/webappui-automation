@@ -1,6 +1,7 @@
 import clientPage from "../../pages/report/client.page";
 import { replaceEntersWithLineBreak } from "../../../utils/string.utils";
 import BaseActionsExt from "../base/base.actions.ext";
+import { numberWithCommas } from "../../../utils/numbers.utils";
 
 class ClientActions extends BaseActionsExt<typeof clientPage> {
     enterIntendedUser(textToType: string = null, edit = true, save = true, revert = false) {
@@ -62,9 +63,9 @@ class ClientActions extends BaseActionsExt<typeof clientPage> {
 
     verifyGuidelineTooltip() {
         clientPage.guidelinesTooltip.should("exist");
-        clientPage.toCheckTooltipExist.should("not.exist");
+        clientPage.tooltip.should("not.exist");
         clientPage.guidelinesTooltip.trigger("mouseover");
-        clientPage.toCheckTooltipExist.should("exist");
+        clientPage.tooltip.should("exist");
         return this;
     }
 
@@ -130,6 +131,12 @@ class ClientActions extends BaseActionsExt<typeof clientPage> {
 
     verifyNotContainIdentificationOfTheClientTextBox(verifyAreaValue: string): ClientActions {
         clientPage.identificationOfClientTextBox.should("not.contain.text", verifyAreaValue);
+        return this;
+    }
+
+    verifyCommentaryContainsText(verifyAreaValue: string | number, commentaryTitle: string): ClientActions { 
+        let expectedText = typeof verifyAreaValue ===  "number" ? `${numberWithCommas(verifyAreaValue)}`: verifyAreaValue;
+        this.Page.commentaryText(commentaryTitle).should("include.text", `${expectedText}`);
         return this;
     }
 }

@@ -1,11 +1,11 @@
 import ReportDataCreator from "../../fixtures/data_creator/reportData.creator";
 import { createReport } from "../../actions/base/baseTest.actions";
-import { getReportId, setReportId } from "../../../utils/intercept.utils";
 import { _NavigationSection } from "../../actions/base";
 import { Income, Sales } from "../../actions";
 import Enums from "../../enums/enums";
 import { _IncomeTitles, _SalesTitles } from "../../enums/pages_titles";
-import { BoweryAutomation } from "../../types";
+import { BoweryAutomation } from "../../types/boweryAutomation.type";
+import mapKeysUtils from "../../utils/mapKeys.utils";
 
 const reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("criticalPages", {
     incomeValue: Enums.INCOME_TYPE.both,
@@ -22,9 +22,8 @@ describe("Verify that critical pages are opening", { tags: [ "@smoke" ] }, () =>
 
     beforeEach("Restore local storage", () => {
         cy.restoreLocalStorage();
-        setReportId();
-        getReportId().then(id => {
-            cy.visit(`${Cypress.config().baseUrl}/report/${id}/report-information`);
+        cy._mapGet(mapKeysUtils.report_id).then(_reportId => {
+            cy.visit(`/report/${_reportId}/report-information`);
         });
     });
 

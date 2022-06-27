@@ -5,5 +5,6 @@ export default {
     reportCreationData: reportDataCreator.getReportData("4577", {
         incomeValue: enums.INCOME_TYPE.both
     }),
-    numberOfCommercialUnits: 2
+    numberOfCommercialUnits: 2,
+    compGroup: "Test_Comp_Group_4577",
 };

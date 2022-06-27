@@ -2,14 +2,15 @@ import keyInfoPage from "../../pages/report/keyInfo.page";
 import { isDateHasCorrectFormat } from "../../../utils/date.utils";
 import { getUploadFixture } from "../../../utils/fixtures.utils";
 import BaseActionsExt from "../base/base.actions.ext";
+import { numberWithCommas } from "../../../utils/numbers.utils";
 
 class KeyInfoActions extends BaseActionsExt<typeof keyInfoPage> {
     enterPropertyRightsAppraisedComment(textToType: string = null, edit = true, save = true, revert = false) {
-        if (edit === true) keyInfoPage.formEditBtn().click();
-        keyInfoPage.textBoxPropertyRightsAppraised.invoke("text")
-        .then(text => {
-            keyInfoPage.textBoxPropertyRightsAppraised.focus().type(textToType ?? text);
-        });
+        if (edit === true) keyInfoPage.propertyRightsAppraisedFormEditButton.click();
+            keyInfoPage.textBoxPropertyRightsAppraised.invoke("text")
+            .then(text => {
+                keyInfoPage.textBoxPropertyRightsAppraised.focus().type(textToType ?? text);
+            });
         if(save === true) keyInfoPage.formSaveBtn().click();
         if (revert === true) {
             keyInfoPage.formRevertToOriginalBtn().click();
@@ -19,7 +20,7 @@ class KeyInfoActions extends BaseActionsExt<typeof keyInfoPage> {
     }
 
     enterDefinitionMarketValue(textToType: string = null, edit = true, save = true, revert = false) {
-        if (edit === true) keyInfoPage.formEditBtn().click();
+        if (edit === true) keyInfoPage.definitionOfMarketValueFormEditButton.click();
         keyInfoPage.textBoxDefinitionOfMarketValue().invoke("text").then(text => {
             keyInfoPage.textBoxDefinitionOfMarketValue().focus().type(textToType ?? text);
         });
@@ -104,6 +105,12 @@ class KeyInfoActions extends BaseActionsExt<typeof keyInfoPage> {
     
     verifyTextBoxDefinitionOfMarketValue(value: string, condition = "include.text") {
         keyInfoPage.textBoxDefinitionOfMarketValue().should(condition, value);
+        return this;
+    }
+
+    verifyCommentaryContainsText(verifyAreaValue: string | number, commentaryTitle: string): KeyInfoActions {
+        let expectedText = typeof verifyAreaValue ===  "number" ? `${numberWithCommas(verifyAreaValue)}`: verifyAreaValue;
+        this.Page.commentaryText(commentaryTitle).should("include.text", `${expectedText}`);
         return this;
     }
 }

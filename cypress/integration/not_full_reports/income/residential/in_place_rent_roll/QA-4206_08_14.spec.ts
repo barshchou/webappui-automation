@@ -1,17 +1,20 @@
-import testData from "../../../../../fixtures/not_full_reports/income/residential/in_place_rent_roll/QA-4206_08.fixture";
+import testData from "../../../../../fixtures/not_full_reports/income/residential/in_place_rent_roll/QA-4206_08_14.fixture";
 import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../../actions/base/navigationSection.actions";
 import Income from "../../../../../actions/income/income.manager";
-import { reportCreationData } from "../../../../../fixtures/not_full_reports/income/residential/in_place_rent_roll/QA-4206_08.fixture";
+import { reportCreationData } from "../../../../../fixtures/not_full_reports/income/residential/in_place_rent_roll/QA-4206_08_14.fixture";
 
-describe("Verify the Developer's Forecast checkbox on the In-Place Rent Roll page", 
+describe("[QA-4206_08_14] Verify the Developer's Forecast checkbox on the In-Place Rent Roll page", 
     { tags:[ "@income", "@residential", "@in_place_rent_roll" ] }, () => {
-
-    it("Test body", () => {
-        testData.conclusionValues.forEach(value => {
+    testData.conclusionValues.forEach(value => {
+        it(`${value} test`, () => {
+            cy.stepInfo("1. Login, create report");
             createReport(reportCreationData(value));
-
+        
+            cy.stepInfo("2. Navigate to Income < Residential < In-Place Rent Roll");
             NavigationSection.navigateToResInPlaceRentRoll();
+        
+            cy.stepInfo("3. Verify Element Exist and Check / Uncheck them");
             Income.Residential.InPlaceRentRoll.verifyColumnNotExist(testData.column.devForecast)
                 .verifyColumnNotExist(testData.column.perRoom)
                 .verifyColumnNotExist(testData.column.bathrooms)

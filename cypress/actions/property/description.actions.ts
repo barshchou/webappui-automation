@@ -1,38 +1,23 @@
-import BaseActions from "../base/base.actions";
 import descriptionPage from "../../pages/property/description.page";
+import BaseActionsExt from "../base/base.actions.ext";
 
-class DescriptionActions extends BaseActions {
+class DescriptionActions extends BaseActionsExt<typeof descriptionPage> {
 
-    /**
-     *
-     * @param {string} conditionValue
-     * @returns {DescriptionActions}
-     */
-    selectGeneralPropertyCondition(conditionValue) {
+    selectGeneralPropertyCondition(conditionValue: string): DescriptionActions {
         descriptionPage.selectGeneralConditionButton.click();
         descriptionPage.getDropdownOptionByValue(conditionValue).should("exist").click();
         descriptionPage.selectGeneralConditionButton.should("have.text", conditionValue);
         return this;
     }
 
-    /**
-     *
-     * @param {string} conditionValue
-     * @returns {DescriptionActions}
-     */
-    selectAsStabilizedPropertyCondition(conditionValue) {
+    selectAsStabilizedPropertyCondition(conditionValue: string): DescriptionActions {
         descriptionPage.selectAsStabilizedConditionButton.click();
         descriptionPage.getDropdownOptionByValue(conditionValue).should("exist").click();
         descriptionPage.selectAsStabilizedConditionButton.should("have.text", conditionValue);
         return this;
     }
 
-    /**
-     *
-     * @param {string} label
-     * @returns {DescriptionActions}
-     */
-    checkCheckboxByLabel(label) {
+    checkCheckboxByLabel(label: string): DescriptionActions {
         descriptionPage.getCheckboxByLabel(label).check().should("have.value", "true");
         if (label === "Stairs") {
             descriptionPage.stairsConditionContainer.should("exist");
@@ -42,133 +27,74 @@ class DescriptionActions extends BaseActions {
         return this;
     }
 
-    /**
-     *
-     * @param {Array<string>} labels
-     * @returns {DescriptionActions}
-     */
-    checkListCheckboxesByLabels(labels) {
+    checkListCheckboxesByLabels(labels: Array<string>): DescriptionActions {
         labels.forEach(label => {
             this.checkCheckboxByLabel(label);
         });
         return this;
     }
 
-    /**
-     *
-     * @param {string} value
-     * @returns {DescriptionActions}
-     */
-    checkStairConditionByValue(value) {
+    checkStairConditionByValue(value: string): DescriptionActions {
         descriptionPage.stairsConditionRadios.check(value);
         this.verifyRadioIsChecked(value);
         return this;
     }
 
-    /**
-     *
-     * @param {string} value
-     * @return {DescriptionActions}
-     */
-    verifyRadioIsChecked(value) {
+    verifyRadioIsChecked(value: string): DescriptionActions {
         descriptionPage.getElementToCheckRadio(value).should("exist");
         return this;
     }
 
-    /**
-     *
-     * @param {string} value
-     * @return {DescriptionActions}
-     */
-    checkFoundationByValue(value) {
+    checkFoundationByValue(value: string): DescriptionActions {
         descriptionPage.foundationRadios.check(value);
         this.verifyRadioIsChecked(value);
         return this;
     }
 
-    /**
-     *
-     * @param {string} value
-     * @return {DescriptionActions}
-     */
-    checkStructuralSystemByValue(value) {
+    checkStructuralSystemByValue(value: string): DescriptionActions {
         descriptionPage.structuralSystem.check(value);
         this.verifyRadioIsChecked(value);
         return this;
     }
 
-    /**
-     *
-     * @param {string} value
-     * @return {DescriptionActions}
-     */
-    checkFramingByValue(value) {
+    checkFramingByValue(value: string): DescriptionActions {
         descriptionPage.framingRadios.check(value);
         this.verifyRadioIsChecked(value);
         return this;
     }
 
-    /**
-     *
-     * @param {string} value
-     * @return {DescriptionActions}
-     */
-    checkRoofTypeByValue(value) {
+    checkRoofTypeByValue(value: string): DescriptionActions {
         descriptionPage.roofTypeRadios.check(value);
         this.verifyRadioIsChecked(value);
         return this;
     }
 
-    /**
-     *
-     * @param {string} value
-     * @return {DescriptionActions}
-     */
-    checkSprinklersByValue(value) {
+    checkSprinklersByValue(value: string): DescriptionActions {
         descriptionPage.sprinklersRadios.check(value);
         this.verifyRadioIsChecked(value);
         return this;
     }
 
-    /**
-     *
-     * @return {DescriptionActions}
-     */
-    checkContainsBasement() {
+    checkContainsBasement(): DescriptionActions {
         descriptionPage.containsBasementCheckbox.check().should("have.value", "true");
         return this;
     }
 
-    /**
-     *
-     * @param {string} value
-     * @return {DescriptionActions}
-     */
-    checkBasementStateByValue(value) {
+    checkBasementStateByValue(value: string): DescriptionActions {
         descriptionPage.basementStateRadios.check(value);
         this.verifyRadioIsChecked(value);
         return this;
     }
 
-    /**
-     *
-     * @param {string} lifeToBe
-     * @return {DescriptionActions}
-     */
-    verifyTotalEconomicLife(lifeToBe) {
+    verifyTotalEconomicLife(lifeToBe: string): DescriptionActions {
         descriptionPage.totalEconomicLifeField.should("have.value", lifeToBe);
         return this;
     }
 
-    /**
-     *
-     * @param {string} value
-     * @return {DescriptionActions}
-     */
-    enterAgeEffective(value) {
+    enterAgeEffective(value: string): DescriptionActions {
         descriptionPage.effectiveAge.clear().type(value).should("have.value", value);
         return this;
     }
 }
 
-export default new DescriptionActions();
+export default new DescriptionActions(descriptionPage);
