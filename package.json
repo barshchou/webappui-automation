@@ -5,7 +5,7 @@
   "main": "index.js",
   "types": "./cypress/types",
   "scripts": {
-    "act:debug": "act -e ./.act/debug.json --secret-file ./.act/.secrets -j Not-full-reports-run-DEBUG",
+    "act:debug": "act -e ./.act/debug.json --secret-file ./.act/.secrets -j Not-full-reports-run-DEBUG-ACT",
     "cy:open": "npx cypress open",
     "cy:chrome:snapshot_tests": "npx cypress run --env grepTags=@snapshot_tests,grepFilterSpecs=true --headless --browser=chrome",
     "cy:chrome:update_snapshots": "npx cypress run --env grepTags=@snapshot_tests,grepFilterSpecs=true,updateSnapshots=true --headless --browser=chrome",
