@@ -3,11 +3,12 @@ import NavigationSection from "../../../../../actions/base/navigationSection.act
 import Income from "../../../../../actions/income/income.manager";
 import Property from "../../../../../actions/property/property.manager";
 import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
+import { BoweryReports } from "../../../../../types/boweryReports.type";
 
 describe("Verify the Use column in the grid", 
     { tags:[ "@income", "@commercial", "@in_place_rent_roll" ] }, () => {
 
-    const useRadios: BoweryReports.CommercialUnitGroupsValues[] = [ "retail", "office", "medical", "community", "undetermined" ];
+    const useRadios: BoweryReports.CommercialUnits.GroupsValues[] = [ "retail", "office", "medical", "community", "undetermined" ];
     const useTexts = [ "Retail", "Office", "Medical Office", "Community Facility", "Undetermined" ];
     const groupName = "Use";
     const defaultUseValue = "Undetermined";

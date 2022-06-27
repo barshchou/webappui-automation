@@ -8,13 +8,13 @@ class PropertyInfoFormActions {
         this.Page = page;
     }
 
-    setCommercialArea(area: string){
-        this.Page.commercialAreaNewComp.type(area);
+    setCommercialArea(area: string): PropertyInfoFormActions{
+        this.Page.commercialAreaNewComp.type(area, { force: true });
         return this;
     }
             
-    setCommercialUnits(units: string) {
-        this.Page.createCompNumberCommercialUnits.type(units);
+    setCommercialUnits(units: string): PropertyInfoFormActions {
+        this.Page.createCompNumberCommercialUnits.type(units, { force: true });
         return this;
     }
 }

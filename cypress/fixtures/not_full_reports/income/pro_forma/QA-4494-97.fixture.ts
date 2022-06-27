@@ -1,3 +1,4 @@
+import { BoweryAutomation } from "../../../../types/boweryAutomation.type";
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 
 const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("4494-97");

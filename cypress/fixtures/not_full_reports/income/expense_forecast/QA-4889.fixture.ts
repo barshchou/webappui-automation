@@ -1,3 +1,4 @@
+import { BoweryReports } from "../../../../types/boweryReports.type";
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 
 const _electricityItem: BoweryReports.ForecastItem = { name: "electricity", basis: "unit", };

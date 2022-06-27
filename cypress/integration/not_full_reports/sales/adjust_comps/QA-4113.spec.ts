@@ -13,7 +13,7 @@ describe("Net Property Adjustments in Sales Adjustment Grid is calculated with c
     it("Test body", () => {
         NavigationSection.navigateToFindComps();
         Sales.FindComps.selectCompFromMapByAddress(testData.comparable.address);
-        NavigationSection.openAdjustCompsInSales();
+        NavigationSection.navigateToAdjustComps();
         Sales.AdjustComps.enterSizeAdjustmentByColumn(testData.comparable.sizeAdjustment)
             .enterConditionAdjustmentByColumn(testData.comparable.conditionAdjustment)
             .clickAddOtherAdjustmentButton()

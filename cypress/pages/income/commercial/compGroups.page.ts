@@ -12,9 +12,13 @@ class CompGroupsPage extends BasePage {
 
     getCompGroupSection(groupName) {return cy.get(`[data-qa='${groupName}-comp-group']`);}
 
-    getDragableElement(index: number) { return `[data-react-beautiful-dnd-drag-handle="${index}"]`;}
+    getDragableElement(index: number) { return `[data-qa="row-${index}"] [data-qa='drag-cell']>span`;}
 
-    getDragableArea(compGroup: string, index: number) {return `[data-qa="${compGroup}-comp-group"] tbody[data-react-beautiful-dnd-droppable="${index}"] tr td`;}
+    getDropableArea(compGroup: string) {return `[data-qa="${compGroup}-comp-group"] tr td`;}
+
+    getDropableAreaDropped(compGroup: string) {return `[data-qa="${compGroup}-comp-group"] [data-qa="row-0"]`;}
+
+    get draggablePlaceholder() {return cy.xpath(`//*[@data-qa="unsorted_group"]//td[contains(text(), 'Drop any rent roll unit here')]`);}
 }
 
 export default new CompGroupsPage();

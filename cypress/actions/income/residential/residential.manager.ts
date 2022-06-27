@@ -1,4 +1,4 @@
-import rentCompsManager from "./rent_comps/rentComps.manager";
+import * as rentCompsManager from "./rent_comps";
 import expenseStructureActions from "./expenseStructure.actions";
 import rentCompsMapActions from "./rentCompsMap.actions";
 import rentReconciliationActions from "./rentReconciliation.actions";

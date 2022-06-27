@@ -4,8 +4,12 @@ import NavigationSection from "../../../../actions/base/navigationSection.action
 import Sales from "../../../../actions/sales/sales.manager";
 import ReviewExport from "../../../../actions/reviewExport/reviewExport.actions";
 
-describe("Check custom adjustment", 
-    { tags: [ "@adjust_comps", "@sales" ] }, () => {
+/**
+ * ernst: we need either select first two comparables or refactor method 
+ * for sales comps selection by address
+ */
+describe.skip("Check custom adjustment", 
+    { tags: [ "@fix", "@adjust_comps", "@sales" ] }, () => {
         
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
@@ -19,7 +23,7 @@ describe("Check custom adjustment",
             .selectCompFromMapByAddress(testData.comparableSecond.address);
 
         cy.stepInfo("2. Open Adjust comps page, verify custom adjustment row can be added and edited");
-        NavigationSection.openAdjustCompsInSales();
+        NavigationSection.navigateToAdjustComps();
         Sales.AdjustComps.enterSizeAdjustmentByColumn(testData.comparableFirst.sizeAdjustment, 0)
             .enterSizeAdjustmentByColumn(testData.comparableSecond.sizeAdjustment, 1)
             .enterConditionAdjustmentByColumn(testData.comparableFirst.conditionAdjustment, 0)

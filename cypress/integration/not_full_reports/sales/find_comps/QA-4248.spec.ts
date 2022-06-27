@@ -3,10 +3,10 @@ import fixture from "../../../../fixtures/not_full_reports/sales/find_comps/QA-4
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Sales from "../../../../actions/sales/sales.manager";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
-import { Alias } from "../../../../utils/alias.utils";
+import mapKeysUtils from "../../../../utils/mapKeys.utils";
 
 describe("Verify the Comps can be added by entering the existing Report ID in the modal", 
-{ tags:[ "@comp_plex", "@sales", "@find_comps" ] }, () => {
+{ tags:[ "@fix", "@comp_plex", "@sales", "@find_comps" ] }, () => {
     before("Login, create report", () => {
         createReport(fixture.reportCreationData);
     });
@@ -16,7 +16,7 @@ describe("Verify the Comps can be added by entering the existing Report ID in th
         Sales.FindComps.selectCompFromMapByAddress(fixture.comparable.address)
             .clickSaveContinueButton();
         Sales.CreateCompMap.verifyPageOpened();
-        cy.get(`@${Alias.reportId}`).then(reportId => {
+        cy._mapGet(mapKeysUtils.report_id).then(reportId => {
             cy.log(`Current report ID is ${reportId}`);
             Sales.CreateCompMap.returnToHomePage();
             Homepage.verifyThatPageIsOpened()

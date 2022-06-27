@@ -1,17 +1,57 @@
+import { BoweryAutomation } from "../../types/boweryAutomation.type";
 import { aliasQuery } from "../../utils/graphql.utils";
-import Homepage from "./homepage.actions";
 import NavigationSection from "./navigationSection.actions";
+import { createPayload } from "../../api/report_payloads/462Avenue1NY.payload";
+import mapKeysUtils from "../../utils/mapKeys.utils";
+import { _HomePage } from ".";
 
-export const createReport = (reportCreationData: BoweryAutomation.ReportCreationData) => {
-    cy.login();
-    Homepage.createReport(reportCreationData);
+/**
+ * Login action
+ */
+export const loginAction = (username = Cypress.env("USERNAME"), password = Cypress.env("PASSWORD")) => {
+    switch (Cypress.env("loginMethod")) {
+        case "ui":
+            cy.loginByUI(Cypress.config().baseUrl, username, password);
+            break;
+        default:
+            cy.loginByApi(Cypress.config().baseUrl, username, password);
+            cy.visit('/');
+    }
+    
+};
+
+export const createReport = (reportCreationData: BoweryAutomation.ReportCreationData, 
+                            username = Cypress.env("USERNAME"), password = Cypress.env("PASSWORD"),
+                            payloadFunction = createPayload) => {
+
     salesInterceptions();
+
+    const envUrl = Cypress.config().baseUrl;
+    loginAction(username, password);
+    cy._mapGet("user_id_api").then(_userId => {
+        cy.log(`user id is: ${_userId}`);
+        const _payload = payloadFunction(reportCreationData, _userId);
+        if(Cypress.env("report") == "api"){
+            cy._mapGet("token").then(_token => {
+                cy.createApiReport(
+                    reportCreationData, _payload, _token, envUrl
+                );
+            });
+            cy._mapGet(mapKeysUtils.report_id).then(reportId => {
+                cy.log("Report id: "+reportId);
+                cy.visit(`/report/${reportId}`);
+            });
+        }
+        else {
+            _HomePage.createReport(reportCreationData);
+        }
+    });
 };
 
 export const deleteReport = (reportNumber) => {
     cy.stepInfo('Delete report');
     NavigationSection.returnToHomePage();
-    Homepage.deleteReport(reportNumber);
+    _HomePage.deleteReport(reportNumber);
 };
 
 export const salesInterceptions = () => {
@@ -20,7 +60,7 @@ export const salesInterceptions = () => {
         aliasQuery(req, "findTransactionByIdAndVersion");
         aliasQuery(req, "findSalesComps");
         aliasQuery(req, "findSingleSalesComp");
-        aliasQuery(req, "updateAppraisal");
+        aliasQuery(req, "updateJob");
         aliasQuery(req, "findSalesCompsByEventIds");
     });
 };

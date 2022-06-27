@@ -1,4 +1,5 @@
 import parkingPage from "../../../pages/income/miscellaneous/parking.page";
+import { BoweryReports } from "../../../types/boweryReports.type";
 import BaseActionsExt from "../../base/base.actions.ext";
 
 class ParkingActions extends BaseActionsExt<typeof parkingPage> {

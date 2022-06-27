@@ -12,7 +12,6 @@ describe("[QA-4104] Verify the Market Value generated commentary",
 
         cy.stepInfo("2. Go to Report > Key Info > Definition of Market Value");
         _NavigationSection.navigateToReportInformation();
-        Report._KeyInfo.clickYesButton();
         
         cy.stepInfo("3. Check that this sentence exports in the Introduction, replacing the boilerplate sentence currently exported there");
         Report._KeyInfo.Page.textBoxDefinitionOfMarketValue().should("include.text", testData.verifyText);
@@ -29,6 +28,7 @@ describe("[QA-4104] Verify the Market Value generated commentary",
     });
 
     it("Check export", () => {
+        Cypress.config().baseUrl = null;
         cy.task("getFilePath", { _reportName: testData.reportCreationData.reportNumber, _docx_html: "html" }).then(file => {
             cy.log(<string>file);
             cy.stepInfo("5. Check that this sentence exports in the Introduction, replacing the boilerplate sentence currently exported there");

@@ -1,6 +1,7 @@
 import taxInfoPage from "../../pages/income/taxInfo.page";
 import { getNumberFromDollarNumberWithCommas, numberWithCommas } from "../../../utils/numbers.utils";
 import BaseActionsExt from "../base/base.actions.ext";
+import { BoweryReports } from "../../types/boweryReports.type";
 
 class TaxInfoActions extends BaseActionsExt<typeof taxInfoPage> {
 

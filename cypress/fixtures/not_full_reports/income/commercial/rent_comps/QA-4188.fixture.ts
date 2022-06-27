@@ -1,9 +1,10 @@
 import Enums from "../../../../../enums/enums";
+import { BoweryReports } from "../../../../../types/boweryReports.type";
 import ReportDataCreator from "../../../../data_creator/reportData.creator";
 
 const reportCreationFixture = () => {
     return ReportDataCreator.getReportData("4188", {
-        incomeValue: Enums.INCOME_TYPE.BOTH
+        incomeValue: Enums.INCOME_TYPE.both
     });
 };
 
@@ -25,7 +26,7 @@ const _rentCompFields: BoweryReports.RentCompField[] = [
     },
     {
         name: "use",
-        value: "office" as BoweryReports.CommercialUnitsUseValues,
+        value: "office" as BoweryReports.CommercialUnits.UseValues,
         type: "dropdown"
     },
     {

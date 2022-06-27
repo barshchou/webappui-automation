@@ -1,5 +1,6 @@
 import { interceptReportId, setReportId } from "../../../utils/intercept.utils";
 import homepagePage from "../../pages/base/homepage.page";
+import { BoweryAutomation } from "../../types/boweryAutomation.type";
 import BaseActionsExt from "./base.actions.ext";
 
 class HomepageActions extends BaseActionsExt<typeof homepagePage> {

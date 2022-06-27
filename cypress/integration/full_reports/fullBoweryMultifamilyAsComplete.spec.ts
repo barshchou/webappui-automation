@@ -7,11 +7,13 @@ import Income from "../../actions/income/income.manager";
 import Final from "../../actions/final/final.manager";
 import Sales from "../../actions/sales/sales.manager";
 import proFormaTypesEnum from "../../enums/proFormaTypes.enum";
-import tableExpenseHistoryCellNames from "../../enums/expenseHistoryTableRows.enum";
+import tableExpenseHistoryCellNames from "../../../cypress/enums/expense/expenseHistoryTableRows.enum";
+import { loginAction } from "../../actions/base/baseTest.actions";
+import Enums from "../../enums/enums";
 
 describe("Full bowery way, multifamily as complete report", { tags: [ "@full_report" ] }, () => {
     it("Test", () => {
-        cy.login();
+        loginAction();
         Homepage.createReport(testData.reportCreationData);
         Report.KeyInfo.choosePurpose(testData.keyInfoPurposeData.purposeValue)
             .checkAllInterestAppraisedByValues(testData.keyInfoPurposeData.interestAppraised)
@@ -30,11 +32,10 @@ describe("Full bowery way, multifamily as complete report", { tags: [ "@full_rep
             .editAsCompleteExport(testData.asCompleteDescription.asCompleteExportText)
             .clickSaveContinueButton();
         Property.Market.verifyTimeOnMarket(testData.timeOnMarket)
-            .fillMarketResearch(testData.marketResearch)
+            .fillMarketResearch(testData.marketResearch, Enums.MARKET_ANALYSIS_USES.multifamily, false)
             .enterMarketQuarter(testData.marketResearch.quarter)
             .clickPullFromDropbox()
-            // TODO: Refactor this step after we'll have more info about https://bowery.atlassian.net/browse/WEB-5511 bug
-            // .verifyMultifamilySubmarketAnalysisHasDocument(testData.marketResearch.multifamilySubmarketDocument)
+            .verifyMarketByAnalysisUseHasFile(Enums.MARKET_ANALYSIS_USES.multifamily)
             .clickSaveContinueButton();
         Property.History.enterCurrentOwner(testData.owner.name)
             .checkIsUnderContractCheckbox()
@@ -454,7 +455,7 @@ describe("Full bowery way, multifamily as complete report", { tags: [ "@full_rep
             .verifyAsCompleteRow(testData.valueConclusion.asCompleteRow)
             .verifyAsIsMarketRow(testData.valueConclusion.asIsMarketRow)
             .clickSaveContinueButton();
-        Final.FinalValuesReconciliation.closeSatisfactionSurvey()
+        Final.FinalValuesReconciliation.closeUserSurveyIfExist()
             .checkPerUnitCheckbox()
             .verifyIncomeStabDate(testData.finalValuesReconciliation.stabilizedCompleteDate)
             .verifyIncomeCompleteDate(testData.finalValuesReconciliation.stabilizedCompleteDate)

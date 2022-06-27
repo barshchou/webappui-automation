@@ -1,6 +1,7 @@
 import laundryPage from "../../../pages/income/miscellaneous/laundry.page";
 import { numberWithCommas } from "../../../../utils/numbers.utils";
 import BaseActionsExt from "../../base/base.actions.ext";
+import { BoweryReports } from "../../../types/boweryReports.type";
 
 class LaundryActions extends BaseActionsExt<typeof laundryPage>{
 

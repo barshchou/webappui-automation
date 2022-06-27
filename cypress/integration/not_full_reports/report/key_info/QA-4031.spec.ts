@@ -13,8 +13,7 @@ describe("[QA-4031] Verify the export of the report with the Pre-filled Report D
             createReport(reportCreationData(value.jobNumber));
     
             cy.stepInfo("2. Navigate to the Report > Key Info page");
-             _NavigationSection.navigateToReportInformation();
-             _NavigationSection.clickYesButton();
+            _NavigationSection.navigateToReportInformation();
         
             cy.stepInfo(`3. Verify the export of the report with the Pre-filled Report Due Date from SalesForce:
             - null

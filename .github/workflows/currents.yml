@@ -13,6 +13,15 @@ on:
         - custom
         required: true
         default: staging
+      url:
+        type: choice
+        description: Select the url explicitly
+        options:
+        - 'https://bowery-development.herokuapp.com'
+        - 'https://bowery-staging.herokuapp.com'
+        - 'https://app.boweryvaluation.com'
+        required: true
+        default: 'https://bowery-staging.herokuapp.com'
       customEnv:
         type: string
         description: Add custom environment url if needed
@@ -38,39 +47,31 @@ jobs:
         containers: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: Cache node modules
-        uses: actions/cache@v2
-        env:
-          cache-name: cache-node-modules
+      - name: Run end-to-end tests with Currents dev
+        uses: Bowery-RES/action-run-e2e-tests@latest
         with:
-          # npm cache files are stored in `~/.npm` on Linux/macOS
-          path: ~/.npm
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('./package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-build-${{ env.cache-name }}-
-            ${{ runner.os }}-build-
-            ${{ runner.os }}-
-      
-      - name: Install Cypress globally
-        run: npm i cypress@9.6.0 -g
-
-      - name: Install Currents globally
-        run: npm i @currents/cli -g
-
-      - name: Install Dependencies
-        run: npm install
-
-      - name: Run Cypress not snapshot tests on Currents.dev
-        run: currents run --tag ${{ github.event.inputs.env }} --spec ${{ github.event.inputs.spec_file }} --env ${{ github.event.inputs.tags }} --browser chrome --record --parallel --key ${{ secrets.CURRENTS_RECORD_KEY }} --ci-build-id "${{ github.repository }}-${{ github.run_id }}-${{ github.run_attempt}}"
-        env:
-          CYPRESS_USERNAME: ${{ secrets.USERNAME }}
-          CYPRESS_PASSWORD: ${{ secrets.PASSWORD }}
-          CYPRESS_url: ${{ github.event.inputs.env }}
-          CYPRESS_customEnv: ${{ github.event.inputs.customEnv }}
-          CYPRESS_grepFilterSpecs: true
+          github_token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          env: ${{ github.event.inputs.env }}
+          customEnv: ${{ github.event.inputs.customEnv }}
+          url: ${{ github.event.inputs.url }}
+          spec_file: ${{ github.event.inputs.spec_file }}
+          tags: ${{ github.event.inputs.tags }}
+          record_key: ${{ secrets.CURRENTS_RECORD_KEY }}
+        env: 
+          CYPRESS_WEBAPP_APPRAISER_USERNAME: ${{ secrets.WEBAPP_APPRAISER_USERNAME }}
+          CYPRESS_WEBAPP_APPRAISER_PASSWORD: ${{ secrets.WEBAPP_APPRAISER_PASSWORD }}
+          CYPRESS_WEBAPP_INSPECTOR_USERNAME: ${{ secrets.WEBAPP_INSPECTOR_USERNAME }}
+          CYPRESS_WEBAPP_INSPECTOR_PASSWORD: ${{ secrets.WEBAPP_INSPECTOR_PASSWORD }}
+          CYPRESS_WEBAPP_ADMIN_USERNAME: ${{ secrets.WEBAPP_ADMIN_USERNAME }}
+          CYPRESS_WEBAPP_ADMIN_PASSWORD: ${{ secrets.WEBAPP_ADMIN_PASSWORD }}
+          CYPRESS_WEBAPP_LEAD_APPRAISER_USERNAME: ${{ secrets.WEBAPP_LEAD_APPRAISER_USERNAME }}
+          CYPRESS_WEBAPP_LEAD_APPRAISER_PASSWORD: ${{ secrets.WEBAPP_LEAD_APPRAISER_PASSWORD }}
+          CYPRESS_WEBAPP_ROLE_TEST_USERNAME: ${{ secrets.WEBAPP_ROLE_TEST_USERNAME }}
+          CYPRESS_WEBAPP_ROLE_TEST_PASSWORD: ${{ secrets.WEBAPP_ROLE_TEST_PASSWORD }}
+          CYPRESS_WEBAPP_TEST_USERNAME: ${{ secrets.WEBAPP_TEST_USERNAME }}
+          CYPRESS_WEBAPP_TEST_PASSWORD: ${{ secrets.WEBAPP_TEST_PASSWORD }}
 
       - name: Archive DOM snapshots from failed tests
         if: failure()

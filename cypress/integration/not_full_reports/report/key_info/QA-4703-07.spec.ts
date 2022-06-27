@@ -15,8 +15,7 @@ describe("[QA-4703-07] Verify the Edit button functionality for Property Rights 
     it("Test body", () => {
         cy.stepInfo(`1. Verify that the Edit buttons are displayed on the Report > Key Info page for Property
         Rights Appraised and Definition of Market Value sections`);
-        _NavigationSection.navigateToReportInformation()
-            .clickYesButton();
+        _NavigationSection.navigateToReportInformation();
         Report._KeyInfo.Page.formEditBtn().should("be.visible");
         Report._KeyInfo.Page.formEditBtn(1).should("be.visible");
 
@@ -37,9 +36,9 @@ describe("[QA-4703-07] Verify the Edit button functionality for Property Rights 
         Report._KeyInfo.Page.formSaveBtn().click();
 
         cy.stepInfo("6. Edit comment and verify that the Revert to Original button becomes enabled for both sections");
-        Report._KeyInfo.enterPropertyRightsAppraisedComment(testData.enterValue, false, false, true);
+        Report._KeyInfo.enterPropertyRightsAppraisedComment(testData.enterValue, true, false, true);
         Report._KeyInfo.Page.formCancelButton().click();
-        Report._KeyInfo.enterDefinitionMarketValue(testData.enterValue, false, false, true);
+        Report._KeyInfo.enterDefinitionMarketValue(testData.enterValue, true, false, true);
 
         cy.stepInfo("7. Click on the Revert to Original button and verify the ‘Changes will be lost modal’ is displayed for both sections");
         Report._KeyInfo.Page.textBoxPropertyRightsAppraised.should("not.include.text", testData.enterValue);
@@ -48,7 +47,7 @@ describe("[QA-4703-07] Verify the Edit button functionality for Property Rights 
 
         cy.stepInfo("8. CLick on the Revert ot Original button and Click on the X icon and verify that the modal is closed and no changes are applied");
         Report._KeyInfo.enterPropertyRightsAppraisedComment(testData.enterValue, true, false);
-        Report._KeyInfo.Page.formRevertToOriginalBtn().click();
+        Report._KeyInfo.Page.formRevertToOriginalBtn(0).click();
         Report._KeyInfo.Page.CloseIcon.click();
         Report._KeyInfo.enterDefinitionMarketValue(testData.enterValue, true, false);
         Report._KeyInfo.Page.formRevertToOriginalBtn(1).click();

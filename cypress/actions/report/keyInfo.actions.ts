@@ -5,11 +5,11 @@ import BaseActionsExt from "../base/base.actions.ext";
 
 class KeyInfoActions extends BaseActionsExt<typeof keyInfoPage> {
     enterPropertyRightsAppraisedComment(textToType: string = null, edit = true, save = true, revert = false) {
-        if (edit === true) keyInfoPage.formEditBtn().click();
-        keyInfoPage.textBoxPropertyRightsAppraised.invoke("text")
-        .then(text => {
-            keyInfoPage.textBoxPropertyRightsAppraised.focus().type(textToType ?? text);
-        });
+        if (edit === true) keyInfoPage.propertyRightsAppraisedFormEditButton.click();
+            keyInfoPage.textBoxPropertyRightsAppraised.invoke("text")
+            .then(text => {
+                keyInfoPage.textBoxPropertyRightsAppraised.focus().type(textToType ?? text);
+            });
         if(save === true) keyInfoPage.formSaveBtn().click();
         if (revert === true) {
             keyInfoPage.formRevertToOriginalBtn().click();
@@ -19,7 +19,7 @@ class KeyInfoActions extends BaseActionsExt<typeof keyInfoPage> {
     }
 
     enterDefinitionMarketValue(textToType: string = null, edit = true, save = true, revert = false) {
-        if (edit === true) keyInfoPage.formEditBtn().click();
+        if (edit === true) keyInfoPage.definitionOfMarketValueFormEditButton.click();
         keyInfoPage.textBoxDefinitionOfMarketValue().invoke("text").then(text => {
             keyInfoPage.textBoxDefinitionOfMarketValue().focus().type(textToType ?? text);
         });
@@ -89,6 +89,21 @@ class KeyInfoActions extends BaseActionsExt<typeof keyInfoPage> {
 
     clickNarrativeSuggestions(verifyListValue: string, numberLists = 0): KeyInfoActions {
         keyInfoPage.narrativeSuggestionsList.eq(numberLists).contains(verifyListValue).should("have.text", verifyListValue).click();
+        return this;
+    }
+
+    renterTextBoxPropertyRightsAppraised(value: string) {
+        keyInfoPage.textBoxPropertyRightsAppraised.focus().clear().type(value);
+        return this;
+    }
+
+    verifyTextBoxPropertyRightsAppraised(value: string, condition = "include.text") {
+        keyInfoPage.textBoxPropertyRightsAppraised.should(condition, value);
+        return this;
+    }
+    
+    verifyTextBoxDefinitionOfMarketValue(value: string, condition = "include.text") {
+        keyInfoPage.textBoxDefinitionOfMarketValue().should(condition, value);
         return this;
     }
 }

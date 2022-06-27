@@ -4,7 +4,6 @@
 
 
 import { Options } from "cypress-image-snapshot";
-import { getEnvUrl } from "../../../utils/env.utils";
 
 export default class BaseActions {
 
@@ -24,7 +23,7 @@ export default class BaseActions {
     }
 
     returnToHomePage() {
-        cy.visit(`${getEnvUrl()}/reports`);
+        cy.visit(`/reports`);
     }
 
     goBackWithSave() {
@@ -60,11 +59,6 @@ export default class BaseActions {
         return this;
     }
 
-    closeSatisfactionSurvey() {
-        cy.get("[aria-label=Close]").click();
-        return this;
-    }
-
     clickBackButton() {
         cy.xpath("//button[.='Back']").click();
         return this;
@@ -72,11 +66,6 @@ export default class BaseActions {
 
     verifyContainsValue(expectedValue: string) {
         cy.contains(expectedValue).should("be.visible");
-        return this;
-    }
-
-    verifyTooltipExist() {
-        cy.get("[role=tooltip]").should("not.exist");
         return this;
     }
 
@@ -105,6 +94,18 @@ export default class BaseActions {
 
     pause(){
         cy.pause();
+        return this;
+    }
+
+    closeUserSurveyIfExist() {
+        cy.get("body").then($body => {
+            if ($body.find('form h6 [aria-label="Close"]').length > 0) {   
+                cy.get('form h6 [aria-label="Close"]').click();
+            } 
+            else {
+                return;
+            }
+        });
         return this;
     }
 }

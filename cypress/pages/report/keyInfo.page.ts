@@ -51,15 +51,17 @@ class KeyInfoPage extends BasePage{
 
     get tooltipDefinitionOfMarketValue() {return cy.get("*[role='tooltip']");}
 
-    get addPdfDocumentButton() {return cy.get("*[data-qa='add-pdf-btn']");}
-
-    get addWordDocumentButton() {return cy.get("*[data-qa='add-word-btn']");}
+    get uploadFilesButton() { return cy.xpath("//button[text() = 'Upload Files']");}
 
     get narrativeSuggestionsList() {return cy.get("[data-qa='narrative-suggestions-list'] > ul");}
 
     iconDefinitionOfMarketValue(index = 1) {return cy.xpath(`//*[contains(@data-qa, 'definition-of-market-value-tile')]//following::*[@data-icon='info-circle'][${index}]`);}
 
     get inputToCheckMyDateIsDifferent() {return cy.get("*[data-qa='isDifferentDateOfValuation']");}
+
+    get propertyRightsAppraisedFormEditButton() { return cy.xpath("//h6[.='Property Rights Appraised']//following::button[1]"); }
+
+    get definitionOfMarketValueFormEditButton() { return cy.xpath("//h6[.='Definition of Market Value']//following::button[1]"); }
 }
 
 export default new KeyInfoPage();

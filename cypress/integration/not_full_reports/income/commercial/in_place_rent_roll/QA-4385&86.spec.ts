@@ -3,6 +3,7 @@ import { getTodayDateString } from "../../../../../../utils/date.utils";
 import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../../actions/base";
 import { Income } from "../../../../../actions";
+import { BoweryReports } from "../../../../../types/boweryReports.type";
 
 describe("Verify the Dates columns in the grid",
     { tags:[ "@income", "@commercial", "@in_place_rent_roll" ] }, () => {

@@ -13,8 +13,7 @@ describe("[QA-4069] Check the helper text for Provided Documents)",
 
         cy.stepInfo(`2. Go to Report → Key Info → Engagement tab and upload files`);
         _NavigationSection.navigateToReportInformation();
-        Report._KeyInfo.clickYesButton()
-            .uploadFile(testData.pdfFileName);
+        Report._KeyInfo.uploadFile(testData.pdfFileName);
 
         _NavigationSection.openReviewAndExport();
         ReviewExport.generateDocxReport().waitForReportGenerated()
@@ -23,6 +22,7 @@ describe("[QA-4069] Check the helper text for Provided Documents)",
     });
 
     it("Check export", () => {
+        Cypress.config().baseUrl = null;
         cy.task("getFilePath", { _reportName: testData.reportCreationData.reportNumber, _docx_html: "html" }).then(file => {
             cy.log(<string>file);
             cy.stepInfo("3. Verify updloaded file in following the Rent Roll & Financial Statements");

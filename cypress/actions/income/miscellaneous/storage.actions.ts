@@ -1,6 +1,7 @@
 import { numberWithCommas } from './../../../../utils/numbers.utils';
 import storagePage from "../../../pages/income/miscellaneous/storage.page";
 import BaseActionsExt from "../../base/base.actions.ext";
+import { BoweryReports } from '../../../types/boweryReports.type';
 
 class StorageActions extends BaseActionsExt<typeof storagePage> {
 

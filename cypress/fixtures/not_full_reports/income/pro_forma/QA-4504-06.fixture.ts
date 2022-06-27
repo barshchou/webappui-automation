@@ -1,5 +1,7 @@
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 import Enums from "../../../../enums/enums";
+import { BoweryReports } from "../../../../types/boweryReports.type";
+import { BoweryAutomation } from "../../../../types/boweryAutomation.type";
 
 const _grossBuildingArea = 5000;
 const _numberOfCommercialUnits = 3;
@@ -27,7 +29,7 @@ const _parkingincomePerSf = _annualRentTotal() / _grossBuildingArea;
 const _parkingincomePerUnit = _annualRentTotal() / _numberOfResidentialUnits;
 
 const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("4504-06", {
-        incomeValue: Enums.INCOME_TYPE.BOTH
+        incomeValue: Enums.INCOME_TYPE.both
     });
 
 const _leaseStatuses: Array<BoweryReports.LeaseStatus> = [ "Occupied", "Occupied", "Occupied" ];

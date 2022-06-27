@@ -1,4 +1,3 @@
-import BaseActions from "../base/base.actions";
 import historyPage from "../../pages/property/history.page";
 import { isDateHasCorrectFormat } from "../../../utils/date.utils";
 import {
@@ -6,34 +5,21 @@ import {
     isHasDecimalPartMoreNumberOfDigits,
     numberWithCommas
 } from "../../../utils/numbers.utils";
+import BaseActionsExt from "../base/base.actions.ext";
 
-class HistoryActions extends BaseActions{
+class HistoryActions extends BaseActionsExt<typeof historyPage>{
 
-    /**
-     *
-     * @param {string} owner
-     * @returns {HistoryActions}
-     */
-    enterCurrentOwner(owner) {
+    enterCurrentOwner(owner: string): HistoryActions {
         historyPage.currentOwnerField.clear().type(owner).should("have.value", owner);
         return this;
     }
 
-    /**
-     *
-     * @returns {HistoryActions}
-     */
-    checkIsUnderContractCheckbox() {
+    checkIsUnderContractCheckbox(): HistoryActions {
         historyPage.isUnderContractCheckbox.check().should("have.value", "true");
         return this;
     }
 
-    /**
-     *
-     * @param {Readonly<{buyer: string, contractDate: string, contractPrice: number}>} contractDetails
-     * @returns {HistoryActions}
-     */
-    enterContractDetails(contractDetails) {
+    enterContractDetails(contractDetails: Readonly<{buyer: string, contractDate: string, contractPrice: number}>): HistoryActions {
         historyPage.buyerField.should("exist").clear().type(contractDetails.buyer)
             .should("have.value", contractDetails.buyer);
         historyPage.contractDate.clear().type(contractDetails.contractDate);
@@ -47,9 +33,9 @@ class HistoryActions extends BaseActions{
             contractPrice = cutDecimalPartToNumberOfDigits(contractPrice);
         }
         const textToBe = numberWithCommas(contractPrice);
-        historyPage.contractPrice.clear().type(contractPrice).should("have.value", textToBe);
+        historyPage.contractPrice.clear().type(`${contractPrice}`).should("have.value", textToBe);
         return this;
     }
 }
 
-export default new HistoryActions();
+export default new HistoryActions(historyPage);
