@@ -1,4 +1,5 @@
 import BasePage from "../../base/base.page";
+import { BoweryReports } from "../../../types/boweryReports.type";
 
 class CommercialRentCompsPage extends BasePage {
     get mapDropdown() {return cy.get("[data-qa=commercial-rent-comps-map]");}
@@ -47,7 +48,9 @@ class CommercialRentCompsPage extends BasePage {
 
     get leaseDatePicker() {return cy.get("[data-qa=dateSigned-date-picker] div input");}
 
-    getEditButtonByRowNubmer(rowNumber = 0) {return cy.xpath(`//tr[@data-qa='row-${rowNumber}']//button[.='Edit']`);}
+    getEditButtonByRowNumberAndGroup(group = "unsorted", rowNumber = 0) {
+        return cy.xpath(`//*[@data-qa='${group}_group']//child::button[.='Edit']`).eq(rowNumber);
+    }
 
     getUnitOfMeasureRadioButton(name: string) {
         return cy.get("div[data-qa=rentType-radio-group] [role=radiogroup]").
@@ -88,6 +91,11 @@ class CommercialRentCompsPage extends BasePage {
     getRemoveCompButtonsFromGroupTable(group = "unsorted") {
         return cy.get(`[data-qa='${group}_group'] [data-qa="remove-comp-btn"]`);
     }
+
+    get commercialUnitDetailsModal() {return cy.get("[data-qa=commRentCompDetailsModal]");}
+
+    getUnitMeasureRadioByValue(value: BoweryReports.UnitsOfMeasure) {return this.commercialUnitDetailsModal
+        .find(`[data-qa=rentType-radio-group] input[value='${value}']`);}
 }
 
 export default new CommercialRentCompsPage();

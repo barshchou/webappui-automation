@@ -113,8 +113,8 @@ class CommercialRentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
         return this;
     }
 
-    clickEditButtonByRowNumber(rowNumber = 0): CommercialRentCompsActions {
-        rentCompsPage.getEditButtonByRowNubmer(rowNumber).click();
+    clickEditButtonByRowNumber(group = "unsorted", rowNumber = 0): CommercialRentCompsActions {
+        rentCompsPage.getEditButtonByRowNumberAndGroup(group, rowNumber).click();
         return this;
     }
 
@@ -267,6 +267,11 @@ class CommercialRentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
 
     clickRemoveCompButtonGroupTableByIndex(index = 0, group = "unsorted"): CommercialRentCompsActions {
         rentCompsPage.getRemoveCompButtonsFromGroupTable(group).eq(index).click();
+        return this;
+    }
+
+    verifyCommercialUnitDetailsUnitMeasureRadioChecked(measureValue: BoweryReports.UnitsOfMeasure): CommercialRentCompsActions {
+        rentCompsPage.getUnitMeasureRadioByValue(measureValue).parent("[data-qa=checked]").should("exist");
         return this;
     }
 }
