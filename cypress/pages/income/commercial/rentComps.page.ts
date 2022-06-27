@@ -24,13 +24,13 @@ class CommercialRentCompsPage extends BasePage {
 
     get addressCellsLocator() {return "[data-qa=address-cell]";}
 
-    getMoveIconByGroupNameIndex(address: string, index: number) {
-        return cy.get(`${this.getCompGroupTableLocator(address)} [data-qa=row-${index}] i`);
+    getCompGroupTableLocator(groupName: string) {return `//*[@data-qa='${groupName}-group-panel']`;}
+
+    getCompGroupTable(groupName) {return cy.xpath(this.getCompGroupTableLocator(groupName));}
+
+    getCompGroupTableColumn(groupName: string, columnName: string) {
+        return cy.xpath(`${this.getCompGroupTableLocator(groupName)}//child::th[text()='${columnName}']`);
     }
-
-    getCompGroupTableLocator(groupName: string) {return `[data-qa='${groupName}-group-panel']`;}
-
-    getCompGroupTable(groupName) {return cy.get(this.getCompGroupTableLocator(groupName));}
 
     get manuallyAddANewCompButton() {return cy.get("[data-qa=manually-add-a-new-comp-btn]");}
 
@@ -50,12 +50,6 @@ class CommercialRentCompsPage extends BasePage {
 
     getEditButtonByRowNumberAndGroup(group = "unsorted", rowNumber = 0) {
         return cy.xpath(`//*[@data-qa='${group}_group']//child::button[.='Edit']`).eq(rowNumber);
-    }
-
-    getUnitOfMeasureRadioButton(name: string) {
-        return cy.get("div[data-qa=rentType-radio-group] [role=radiogroup]").
-            eq(1).
-            find(`input[value='${name}']`);
     }
 
     getRentPerSFCellByRowNumberAndGroup(group = "unsorted", rowNumber = 0) {

@@ -118,8 +118,8 @@ class CommercialRentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
         return this;
     }
 
-    checkUnitOfMeasureRadioButton(name: string): CommercialRentCompsActions {
-        rentCompsPage.getUnitOfMeasureRadioButton(name).click();
+    checkUnitOfMeasureRadioButton(name: BoweryReports.UnitsOfMeasure): CommercialRentCompsActions {
+        rentCompsPage.getUnitMeasureRadioByValue(name).click();
         return this;
     }
 
@@ -272,6 +272,12 @@ class CommercialRentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
 
     verifyCommercialUnitDetailsUnitMeasureRadioChecked(measureValue: BoweryReports.UnitsOfMeasure): CommercialRentCompsActions {
         rentCompsPage.getUnitMeasureRadioByValue(measureValue).parent("[data-qa=checked]").should("exist");
+        return this;
+    }
+
+    verifyCompGroupColumnExistsOrNot(column: string, isExists = true, group = "Unsorted"): CommercialRentCompsActions {
+        const matcher = isExists ? "exist" : "not.exist";
+        rentCompsPage.getCompGroupTableColumn(group, column).should(matcher);
         return this;
     }
 }

@@ -238,6 +238,22 @@ class CommercialRentRollActions extends CommercialRentRollSharedComponent<typeof
         return this;
     }
 
+    clickBasisOfRentTabByUnitMeasure(measure: BoweryReports.UnitsOfMeasure) {
+        switch (measure) {
+            case "annually":
+                this.clickAnnuallyBasisButton();
+                break;
+            case "monthly":
+                this.clickMonthlyBasisButton();
+                break;
+            case "per square foot per year":
+                this.clickPerSquareFootButton(false);
+                break;
+            default:
+                this.clickPerSquareFootPerMonthButton();
+        }
+    }
+
 }
 
 export default new CommercialRentRollActions(rentRollPage);
