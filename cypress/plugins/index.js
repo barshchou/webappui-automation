@@ -91,23 +91,6 @@ const _convertDocxToHtml = async (report) => {
 }
 
 /**
- * Login by api
- * @returns response from `/user/login` endpoint
- */
-const _loginApi = async (_envUrl, _username, _password) => {
-  const response = await request(_envUrl)
-  .post('/user/login')
-  .send({
-    username:_username,
-    password:_password
-  })
-  .expect('Content-Type', /json/)
-  .expect(200);
-
-  return response;
-}
-
-/**
  * Creates report with api. Uses websockets in order to be able to wait uncertain amount of time
  * (with http - it could fail due to response timeout).
  * 
@@ -219,11 +202,11 @@ module.exports = (on, config) => {
     }
   });
 
-  on("task",{
-    async loginApi({_envUrl, _username, _password}){
-      return await _loginApi(_envUrl, _username, _password);
-    }
-  });
+  // on("task",{
+  //   async loginApi({_envUrl, _username, _password}){
+  //     return await _loginApi(_envUrl, _username, _password);
+  //   }
+  // });
   //#endregion
 
   return config;

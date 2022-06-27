@@ -1,4 +1,7 @@
 import { defineConfig } from 'cypress';
+import grepFilterPlugin from "cypress-grep/src/plugin";
+import { addMatchImageSnapshotPlugin } from '@simonsmith/cypress-image-snapshot/plugin';
+import api from "./cypress/api";
 
 export default defineConfig({
   chromeWebSecurity: false,
@@ -13,6 +16,19 @@ export default defineConfig({
     // We've imported your old cypress plugins here.
     // You may want to clean this up later by importing these.
     setupNodeEvents(on, config) {
+
+      // configuring cypress-grep plugin
+      grepFilterPlugin(config);
+
+      // configuring cypress-image-snapshot plugin
+      addMatchImageSnapshotPlugin(on, config);
+
+      on("task", {
+        async loginApi({ _envUrl, _username, _password }){
+          return await api._loginApi(_envUrl, _username, _password);
+        }
+      });
+
       // eslint-disable-next-line @typescript-eslint/no-var-requires
       return require('./cypress/plugins/index.js')(on, config);
     },
