@@ -22,4 +22,49 @@ describe("Verify users roles to create new clients",
         Organization._OrganizationActions.openOrganizationUsersPage();
         Organization._OrganizationUsersActions.deleteUser(testData.userToFind);
     });
+
+    it("[QA-5857]", () => {
+        cy.stepInfo('1. Login with Lead Appraiser user role');
+        loginAction(testData.leadAppraiserUsername, testData.leadAppraiserPassword);
+
+        cy.stepInfo(`2. Navigate to Organization -> Verify “Create New User” does not 
+                    appear as an option in the Organization navigation for Lead Appraiser`);
+        _NavigationSection.navigateToProfileOrganization(enums.MENU_LINKS.organization);
+        cy.contains("Create New User").should('not.exist');
+
+        cy.stepInfo(`3. Organization Info page is opened if Appraiser user tries 
+                    to open “Create New User” by direct link`);
+        cy.visit('/organization/5818c25f67ac15110095afc4/organization-new-user');
+        Organization._Info.Page.pageTitle.should('be.visible');
+    });
+
+    it("[QA-5858]", () => {
+        cy.stepInfo('1. Login with Appraiser user role');
+        loginAction(testData.appraiserUsername, testData.appraiserPassword);
+
+        cy.stepInfo(`2. Navigate to Organization -> Verify “Create New User” does not 
+                    appear as an option in the Organization navigation for Appraiser`);
+        _NavigationSection.navigateToProfileOrganization(enums.MENU_LINKS.organization);
+        cy.contains("Create New User").should('not.exist');
+
+        cy.stepInfo(`3. Organization Info page is opened if Appraiser user tries 
+                    to open “Create New User” by direct link`);
+        cy.visit('/organization/5818c25f67ac15110095afc4/organization-new-user');
+        Organization._Info.Page.pageTitle.should('be.visible');
+    });
+
+    it("[QA-5859]", () => {
+        cy.stepInfo('1. Login with Inspector user role');
+        loginAction(testData.inspectorUsername, testData.inspectorPassword);
+
+        cy.stepInfo(`2. Navigate to Organization -> Verify “Create New User” does not 
+                    appear as an option in the Organization navigation for Inspector`);
+        _NavigationSection.navigateToProfileOrganization(enums.MENU_LINKS.organization);
+        cy.contains("Create New User").should('not.exist');
+
+        cy.stepInfo(`3. Organization Info page is opened if Appraiser user tries 
+                    to open “Create New User” by direct link`);
+        cy.visit('/organization/5818c25f67ac15110095afc4/organization-new-user');
+        Organization._Info.Page.pageTitle.should('be.visible');
+    });
 });
