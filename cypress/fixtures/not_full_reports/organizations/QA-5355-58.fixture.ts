@@ -38,7 +38,8 @@ const _updatedRoleName = [ enums.USER_ROLES.leadAppraiser, enums.USER_ROLES.insp
 export default {
     reportCreationData: reportCreationFixture(),
     clientCreationData: userDataCreator.getUserData(_userOptions),
-    shortTextToType: _userFirstName,
+    userFirstName: _userFirstName,
+    userLastName: _userLastName,
     userToFind: _userFirstName + " " + _userLastName,
     updateUserToFind: _userUpdatedFirstName + " " + _userUpdatedLastName,
     leadAppraiserUsername: _leadAppraiserUsername,

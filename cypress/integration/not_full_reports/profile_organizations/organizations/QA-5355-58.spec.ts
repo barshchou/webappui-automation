@@ -29,7 +29,14 @@ describe("Verify users roles to create new clients",
             .saveChanges()
             .verifyModal()
             .closeModal();
+        
+        cy.stepInfo('Post test cleanup: Rename created user back to initial first name and last name')
         Organization._OrganizationUsersActions.clickEditUser(testData.updateUserToFind);
+        Organization._OrganizationEditUserActions.editUserFirstName(testData.userFirstName)
+            .editUserLastName(testData.userLastName)
+            .saveChanges()
+            .verifyModal()
+            .closeModal();
     });
 
     it("[QA-5356]", () => {
@@ -43,7 +50,7 @@ describe("Verify users roles to create new clients",
         cy.stepInfo(`2. Verify that there are 'Edit' buttons in 'Actions' column opposite each user ->
                     Click 'Edit' button on any user -> Edit that user and save ->
                     Verify that error appears`);
-        Organization._OrganizationUsersActions.clickEditUser(testData.updateUserToFind);
+        Organization._OrganizationUsersActions.clickEditUser(testData.userToFind);
         Organization._OrganizationEditUserActions.editUserLastName(testData.userUpdatedLastName)
             .editUserFirstName(testData.userUpdatedFirstName)
             .editUserRole(testData.roleName, testData.updatedRoleName)
@@ -81,6 +88,6 @@ describe("Verify users roles to create new clients",
         loginAction(testData.adminUsername, testData.adminPassword);
         _NavigationSection.navigateToProfileOrganization(enums.MENU_LINKS.organization);
         Organization._OrganizationActions.openOrganizationUsersPage();
-        Organization._OrganizationUsersActions.deleteUser(testData.updateUserToFind);
+        Organization._OrganizationUsersActions.deleteUser(testData.userToFind);
     });
 });
