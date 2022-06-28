@@ -1,4 +1,4 @@
-import testData from "../../../../../fixtures/not_full_reports/income/residential/in_place_rent_roll/QA-4094.fixture";
+import testData from "../../../../../fixtures/not_full_reports/income/residential/in_place_rent_roll/QA-4093-94.fixture";
 import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../../actions/base";
 import { Income, Property } from "../../../../../actions";
@@ -27,6 +27,7 @@ describe(`[QA-4094] Verify if "Per Month" time period PSF Rent based on is selec
         testData.rentRollResidentialUnits.forEach(el => {
             Income._Residential.InPlaceRentRoll.checkPerUnitSquareFootage()
             .Page.getPSFRadio(testData.psfRadioValue).click();
+            Income._Residential.InPlaceRentRoll.verifyColumnExist(testData.columnName);
             Income._Residential.InPlaceRentRoll.enterSquareFootageByRow(el.footage)
             .enterMonthlyRentByRowNumber(el.monthlyRent)
             .verifyRentPSFValueByRow();
