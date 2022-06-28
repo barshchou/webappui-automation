@@ -1,10 +1,8 @@
-import { ForecastItem } from './../../../../types/index';
 import testData from "../../../../fixtures/not_full_reports/income/expense_forecast/QA-5011_12.fixture";
 import { _NavigationSection } from "../../../../actions/base";
 import { Income, Property } from "../../../../actions";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
-import expensesCardsNames from "../../../../enums/expenseForecast.enum";
-
+import expensesCardsNames from " ../../../cypress/enums/expense/expenseForecast.enum";
 
 describe(`[QA-5011] [QA-5012] [Income>Expense forecast] Unselected existing expense card is not included in calculation + is not displayed in certain places `,
     { tags: [ "@income", "@expense_forecast" ] }, () => {
@@ -36,106 +34,106 @@ describe(`[QA-5011] [QA-5012] [Income>Expense forecast] Unselected existing expe
                         is NOT displayed in the Pro Forma page> Operating Expenses section and
                         is NOT displayed in the Expense Forecast page>Total operating expenses card and generated comment (PSF measure + Empty Appraiser's forecasts)`);
             _NavigationSection.navigateToExpenseForecast();
-            // expensesCardsNames.expenseCardsIDArray.forEach(element => {
-            //     Income._ExpenseForecastActions.changeStateOfIncludeInProFormaCheckbox(element, false);
-            // });
-            // _NavigationSection.navigateToProForma();
-            // testData.expensesInProFormaByDefaultArray.forEach(element => {
-            //     Income._ProFormaActions.Page.categoryCellTotal(element).should('not.exist');
-            // });
-            // _NavigationSection.navigateToExpenseForecast();
-            // Income._ExpenseForecastActions.verifyTOECommentary(testData.commentaries.generated);
-            // Income._ExpenseForecastActions.Page.toeAppraisersForecastValueLine.should('contain', testData.forecastPSFnotIncluded);
-            // Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastTotalFixture('unit'))
-            //     .verifyTOECommentary(testData.commentaries.generated);
-            // Income._ExpenseForecastActions.Page.toeAppraisersForecastValueLine.should('contain', testData.forecastPerUnitnotIncluded);
-            // Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastTotalFixture('sf'));
+            expensesCardsNames.expenseCardsIDArray.forEach(element => {
+                Income._ExpenseForecastActions.changeStateOfIncludeInProFormaCheckbox(element, false);
+            });
+            _NavigationSection.navigateToProForma();
+            testData.expensesInProFormaByDefaultArray.forEach(element => {
+                Income._ProFormaActions.Page.categoryCellTotal(element).should('not.exist');
+            });
+            _NavigationSection.navigateToExpenseForecast();
+            Income._ExpenseForecastActions.verifyTOECommentary(testData.commentaries.generated);
+            Income._ExpenseForecastActions.Page.toeAppraisersForecastValueLine.should('contain', testData.forecastPSFnotIncluded);
+            Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastTotalFixture('unit'))
+                .verifyTOECommentary(testData.commentaries.generated);
+            Income._ExpenseForecastActions.Page.toeAppraisersForecastValueLine.should('contain', testData.forecastPerUnitnotIncluded);
+            Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastTotalFixture('sf'));
 
-            // cy.stepInfo(`3. Verify if “Include Expense on Pro Forma” is unselected -> this  expense category 
-            //             is NOT displayed in the Pro Forma page> Operating Expenses section andis NOT displayed 
-            //             in the Expense Forecast page>Total operating expenses card and generated comment (Per Unit measure + Empty Appraiser's forecasts)`);
-            // testData.expenseForecastFixtureWithUnitArray.forEach(element => {
-            //     Income._ExpenseForecastActions.chooseForecastItemBasis(element);
-            // });
-            // _NavigationSection.navigateToProForma();
-            // testData.expensesInProFormaByDefaultArray.forEach(element => {
-            //     Income._ProFormaActions.Page.categoryCellTotal(element).should('not.exist');
-            // });
-            // _NavigationSection.navigateToExpenseForecast();
-            // Income._ExpenseForecastActions.verifyTOECommentary(testData.commentaries.generated);
-            // Income._ExpenseForecastActions.Page.toeAppraisersForecastValueLine.should('contain', testData.forecastPSFnotIncluded);
-            // Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastTotalFixture('unit'))
-            //     .verifyTOECommentary(testData.commentaries.generated);
-            // Income._ExpenseForecastActions.Page.toeAppraisersForecastValueLine.should('contain', testData.forecastPerUnitnotIncluded);
-            // Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastTotalFixture('sf'));
+            cy.stepInfo(`3. Verify if “Include Expense on Pro Forma” is unselected -> this  expense category 
+                        is NOT displayed in the Pro Forma page> Operating Expenses section and is NOT displayed 
+                        in the Expense Forecast page>Total operating expenses card and generated comment (Per Unit measure + Empty Appraiser's forecasts)`);
+            testData.expenseForecastFixtureWithUnitArray.forEach(element => {
+                Income._ExpenseForecastActions.chooseForecastItemBasis(element);
+            });
+            _NavigationSection.navigateToProForma();
+            testData.expensesInProFormaByDefaultArray.forEach(element => {
+                Income._ProFormaActions.Page.categoryCellTotal(element).should('not.exist');
+            });
+            _NavigationSection.navigateToExpenseForecast();
+            Income._ExpenseForecastActions.verifyTOECommentary(testData.commentaries.generated);
+            Income._ExpenseForecastActions.Page.toeAppraisersForecastValueLine.should('contain', testData.forecastPSFnotIncluded);
+            Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastTotalFixture('unit'))
+                .verifyTOECommentary(testData.commentaries.generated);
+            Income._ExpenseForecastActions.Page.toeAppraisersForecastValueLine.should('contain', testData.forecastPerUnitnotIncluded);
+            Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastTotalFixture('sf'));
 
-            // cy.stepInfo(`4. Verify if “Include Expense on Pro Forma” is unselected -> this  expense category 
-            //             is NOT displayed in the Pro Forma page> Operating Expenses section and is NOT displayed 
-            //             in the Expense Forecast page>Total operating expenses card and generated comment (Per Room measure for Fuel + Empty Appraiser's forecasts)`);
-            // Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastFuelFixture('room'));
-            // _NavigationSection.navigateToProForma();
-            // testData.expensesInProFormaByDefaultArray.forEach(element => {
-            //     Income._ProFormaActions.Page.categoryCellTotal(element).should('not.exist');
-            // });
-            // _NavigationSection.navigateToExpenseForecast();
-            // Income._ExpenseForecastActions.verifyTOECommentary(testData.commentaries.generated);
-            // Income._ExpenseForecastActions.Page.toeAppraisersForecastValueLine.should('contain', testData.forecastPSFnotIncluded);
-            // Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastTotalFixture('unit'))
-            //     .verifyTOECommentary(testData.commentaries.generated);
-            // Income._ExpenseForecastActions.Page.toeAppraisersForecastValueLine.should('contain', testData.forecastPerUnitnotIncluded);
-            // Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastTotalFixture('sf'));
+            cy.stepInfo(`4. Verify if “Include Expense on Pro Forma” is unselected -> this  expense category 
+                        is NOT displayed in the Pro Forma page> Operating Expenses section and is NOT displayed 
+                        in the Expense Forecast page>Total operating expenses card and generated comment (Per Room measure for Fuel + Empty Appraiser's forecasts)`);
+            Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastFuelFixture('room'));
+            _NavigationSection.navigateToProForma();
+            testData.expensesInProFormaByDefaultArray.forEach(element => {
+                Income._ProFormaActions.Page.categoryCellTotal(element).should('not.exist');
+            });
+            _NavigationSection.navigateToExpenseForecast();
+            Income._ExpenseForecastActions.verifyTOECommentary(testData.commentaries.generated);
+            Income._ExpenseForecastActions.Page.toeAppraisersForecastValueLine.should('contain', testData.forecastPSFnotIncluded);
+            Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastTotalFixture('unit'))
+                .verifyTOECommentary(testData.commentaries.generated);
+            Income._ExpenseForecastActions.Page.toeAppraisersForecastValueLine.should('contain', testData.forecastPerUnitnotIncluded);
+            Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastTotalFixture('sf'));
 
-            // cy.stepInfo(`5. Verify if “Include Expense on Pro Forma” is unselected -> this  expense category 
-            //             is NOT displayed in the Pro Forma page> Operating Expenses section and is NOT displayed in the 
-            //             Expense Forecast page>Total operating expenses card and generated comment (Per Unit measure + Full Appraiser's forecasts)`);
+            cy.stepInfo(`5. Verify if “Include Expense on Pro Forma” is unselected -> this  expense category 
+                        is NOT displayed in the Pro Forma page> Operating Expenses section and is NOT displayed in the 
+                        Expense Forecast page>Total operating expenses card and generated comment (Per Unit measure + Full Appraiser's forecasts)`);
             testData.expenseForecastFixtureWithUnitArray.forEach(element => {
                 Income._ExpenseForecastActions.enterForecastItemForecast(element);
             });
-            // _NavigationSection.navigateToProForma();
-            // testData.expensesInProFormaByDefaultArray.forEach(element => {
-            //     Income._ProFormaActions.Page.categoryCellTotal(element).should('not.exist');
-            // });
-            // _NavigationSection.navigateToExpenseForecast();
-            // Income._ExpenseForecastActions.verifyTOECommentary(testData.commentaries.generated);
-            // Income._ExpenseForecastActions.Page.toeAppraisersForecastValueLine.should('contain', testData.forecastPSFnotIncluded);
-            // Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastTotalFixture('unit'))
-            //     .verifyTOECommentary(testData.commentaries.generated);
-            // Income._ExpenseForecastActions.Page.toeAppraisersForecastValueLine.should('contain', testData.forecastPerUnitnotIncluded);
-            // Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastTotalFixture('sf'));
+            _NavigationSection.navigateToProForma();
+            testData.expensesInProFormaByDefaultArray.forEach(element => {
+                Income._ProFormaActions.Page.categoryCellTotal(element).should('not.exist');
+            });
+            _NavigationSection.navigateToExpenseForecast();
+            Income._ExpenseForecastActions.verifyTOECommentary(testData.commentaries.generated);
+            Income._ExpenseForecastActions.Page.toeAppraisersForecastValueLine.should('contain', testData.forecastPSFnotIncluded);
+            Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastTotalFixture('unit'))
+                .verifyTOECommentary(testData.commentaries.generated);
+            Income._ExpenseForecastActions.Page.toeAppraisersForecastValueLine.should('contain', testData.forecastPerUnitnotIncluded);
+            Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastTotalFixture('sf'));
 
-            // cy.stepInfo(`6. Verify if “Include Expense on Pro Forma” is unselected -> this  expense category 
-            //             is NOT displayed in the Pro Forma page> Operating Expenses section and is NOT displayed in the 
-            //             Expense Forecast page>Total operating expenses card and generated comment (PSF measure + Full Appraiser's forecasts)`);
-            // testData.expenseForecastFixtureWithPSFArray.forEach(element => {
-            //     Income._ExpenseForecastActions.chooseForecastItemBasis(element);
-            // });
-            // _NavigationSection.navigateToProForma();
-            // testData.expensesInProFormaByDefaultArray.forEach(element => {
-            //     Income._ProFormaActions.Page.categoryCellTotal(element).should('not.exist');
-            // });
-            // _NavigationSection.navigateToExpenseForecast();
-            // Income._ExpenseForecastActions.verifyTOECommentary(testData.commentaries.generated);
-            // Income._ExpenseForecastActions.Page.toeAppraisersForecastValueLine.should('contain', testData.forecastPSFnotIncluded);
-            // Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastTotalFixture('unit'))
-            //     .verifyTOECommentary(testData.commentaries.generated);
-            // Income._ExpenseForecastActions.Page.toeAppraisersForecastValueLine.should('contain', testData.forecastPerUnitnotIncluded);
-            // Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastTotalFixture('sf'));
+            cy.stepInfo(`6. Verify if “Include Expense on Pro Forma” is unselected -> this  expense category 
+                        is NOT displayed in the Pro Forma page> Operating Expenses section and is NOT displayed in the 
+                        Expense Forecast page>Total operating expenses card and generated comment (PSF measure + Full Appraiser's forecasts)`);
+            testData.expenseForecastFixtureWithPSFArray.forEach(element => {
+                Income._ExpenseForecastActions.chooseForecastItemBasis(element);
+            });
+            _NavigationSection.navigateToProForma();
+            testData.expensesInProFormaByDefaultArray.forEach(element => {
+                Income._ProFormaActions.Page.categoryCellTotal(element).should('not.exist');
+            });
+            _NavigationSection.navigateToExpenseForecast();
+            Income._ExpenseForecastActions.verifyTOECommentary(testData.commentaries.generated);
+            Income._ExpenseForecastActions.Page.toeAppraisersForecastValueLine.should('contain', testData.forecastPSFnotIncluded);
+            Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastTotalFixture('unit'))
+                .verifyTOECommentary(testData.commentaries.generated);
+            Income._ExpenseForecastActions.Page.toeAppraisersForecastValueLine.should('contain', testData.forecastPerUnitnotIncluded);
+            Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastTotalFixture('sf'));
 
-            // cy.stepInfo(`7. Verify if “Include Expense on Pro Forma” is unselected -> this  expense category 
-            //             is NOT displayed in the Pro Forma page> Operating Expenses section and is NOT displayed 
-            //             in the Expense Forecast page>Total operating expenses card and generated comment (Per Room measure for Fuel + Full Appraiser's forecasts)`);
-            // Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastFuelFixture('room'));
-            // _NavigationSection.navigateToProForma();
-            // testData.expensesInProFormaByDefaultArray.forEach(element => {
-            //     Income._ProFormaActions.Page.categoryCellTotal(element).should('not.exist');
-            // });
-            // _NavigationSection.navigateToExpenseForecast();
-            // Income._ExpenseForecastActions.verifyTOECommentary(testData.commentaries.generated);
-            // Income._ExpenseForecastActions.Page.toeAppraisersForecastValueLine.should('contain', testData.forecastPSFnotIncluded);
-            // Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastTotalFixture('unit'))
-            //     .verifyTOECommentary(testData.commentaries.generated);
-            // Income._ExpenseForecastActions.Page.toeAppraisersForecastValueLine.should('contain', testData.forecastPerUnitnotIncluded);
-            // Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastTotalFixture('sf'));
+            cy.stepInfo(`7. Verify if “Include Expense on Pro Forma” is unselected -> this  expense category 
+                        is NOT displayed in the Pro Forma page> Operating Expenses section and is NOT displayed 
+                        in the Expense Forecast page>Total operating expenses card and generated comment (Per Room measure for Fuel + Full Appraiser's forecasts)`);
+            Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastFuelFixture('room'));
+            _NavigationSection.navigateToProForma();
+            testData.expensesInProFormaByDefaultArray.forEach(element => {
+                Income._ProFormaActions.Page.categoryCellTotal(element).should('not.exist');
+            });
+            _NavigationSection.navigateToExpenseForecast();
+            Income._ExpenseForecastActions.verifyTOECommentary(testData.commentaries.generated);
+            Income._ExpenseForecastActions.Page.toeAppraisersForecastValueLine.should('contain', testData.forecastPSFnotIncluded);
+            Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastTotalFixture('unit'))
+                .verifyTOECommentary(testData.commentaries.generated);
+            Income._ExpenseForecastActions.Page.toeAppraisersForecastValueLine.should('contain', testData.forecastPerUnitnotIncluded);
+            Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastTotalFixture('sf'));
         });
 
         it("[QA-5012]", () => {
@@ -143,17 +141,6 @@ describe(`[QA-5011] [QA-5012] [Income>Expense forecast] Unselected existing expe
             cy.stepInfo(`1. Verify If “Include Expense on Pro Forma”  checkbox is unselected but there is 
                          data left in the forecast, this data is not included in calculations on Pro forma and Expense forecast page 
                          (Per Room measure for Fuel + Full Appraiser's forecasts)`);
-
-
-                         const _firstCustomCategory : BoweryReports.ForecastItem = {
-                            name: "firstcustom",
-                            basis: "sf",
-                            forecast: 1.22
-                        }; //delete
-                         Income._ExpenseForecastActions.addCustomExpenseCategory(_firstCustomCategory.name);
-                        //  Income._ExpenseForecastActions.enterForecastItemForecast(_firstCustomCategory);
-                        
-
             Income._ExpenseForecastActions.totalSumForecastPSF(
                 testData.buildingDescription.grossArea,
                 testData.numberOfResidentialUnits,
@@ -174,7 +161,6 @@ describe(`[QA-5011] [QA-5012] [Income>Expense forecast] Unselected existing expe
                 .verifyTotalNOIIncludeForecasts(testData.buildingDescription.grossArea)
                 .verifyPsfNOIIncludeForecasts()
                 .verifyPerUnitNOIIncludeForecasts();
-
             _NavigationSection.navigateToExpenseForecast();
             Income._ExpenseForecastActions.verifyTotalForecastPSF(
                 testData.buildingDescription.grossArea,
