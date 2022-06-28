@@ -62,6 +62,8 @@ class KeyInfoPage extends BasePage{
     get propertyRightsAppraisedFormEditButton() { return cy.xpath("//h6[.='Property Rights Appraised']//following::button[1]"); }
 
     get definitionOfMarketValueFormEditButton() { return cy.xpath("//h6[.='Definition of Market Value']//following::button[1]"); }
+    
+    commentaryText(commentaryTitle: string) {return cy.xpath(`//h6[.='${commentaryTitle}']//following::div[@data-slate-editor][1]`);}
 }
 
 export default new KeyInfoPage();
