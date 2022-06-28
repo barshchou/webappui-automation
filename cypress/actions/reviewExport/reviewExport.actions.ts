@@ -2,6 +2,8 @@ import { Alias } from './../../utils/alias.utils';
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import reviewExportPage from "../../pages/reviewExport/reviewExport.page";
 import BaseActionsExt from "../base/base.actions.ext";
+import { BoweryReports } from '../../types/boweryReports.type';
+import enums from '../../enums/enums';
 class ReviewExportActions extends BaseActionsExt<typeof reviewExportPage> {
 
     verifyPageIsOpened() {
@@ -68,40 +70,42 @@ class ReviewExportActions extends BaseActionsExt<typeof reviewExportPage> {
         return this;
     }
 
-    changeReportStatus(statusToChange: string): ReviewExportActions {
-        // reviewExportPage.reportStatus.invoke('text').as('$status');
+    changeReportStatus(statusToChange: BoweryReports.ReportStatus): ReviewExportActions {
         reviewExportPage.reportStatus.invoke('text').then(($status) => {
-            
             switch ($status) {
-                case "Draft":
-                    if (statusToChange != "Approved" && statusToChange != "Submitted" && statusToChange != "Draft") {
-                        reviewExportPage.changeReportStatusButton(statusToChange.toLowerCase()).click();
+                case enums.REPORT_STATUS.draft:
+                    if (statusToChange != enums.REPORT_STATUS.approved 
+                        && statusToChange !=  enums.REPORT_STATUS.submitted 
+                        && statusToChange !=  enums.REPORT_STATUS.draft) {
+                            reviewExportPage.changeReportStatusButton(statusToChange.toLowerCase()).click();
                     } else {
                         cy.log(`Status couldn't be changed from '${$status}' to '${statusToChange}!'`);
                     }
                     break;
                 case "Review":
-                    if (statusToChange != "Submitted") {
+                    if (statusToChange != enums.REPORT_STATUS.submitted) {
                         reviewExportPage.changeReportStatusButton(statusToChange.toLowerCase()).click();
                     } else {
                         cy.log(`Status couldn't be changed from '${$status}' to '${statusToChange}!'`);
                     }
                     break;
                 case "Approved":
-                    if (statusToChange != "Approved") {
+                    if (statusToChange != enums.REPORT_STATUS.approved) {
                         reviewExportPage.changeReportStatusButton(statusToChange.toLowerCase()).click();
                     } else {
                         cy.log(`Status couldn't be changed from '${$status}' to '${statusToChange}!'`);
                     }
                     break;
                 case "Submitted":
-                    if (statusToChange != "Approved" && statusToChange != "Draft") {
-                        reviewExportPage.changeReportStatusButton(statusToChange.toLowerCase()).click();
+                    if (statusToChange != enums.REPORT_STATUS.approved 
+                        && statusToChange !=  enums.REPORT_STATUS.draft) {
+                            reviewExportPage.changeReportStatusButton(statusToChange.toLowerCase()).click();
                     } else {
                         cy.log(`Status couldn't be changed from '${$status}' to '${statusToChange}!'`);
                     }
                     break;
                 default:
+                    cy.log(`Status couldn't be changed from '${$status}' to '${statusToChange}!'`);
                     break;
             }
         });

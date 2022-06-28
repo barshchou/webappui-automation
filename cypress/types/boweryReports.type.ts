@@ -12,7 +12,8 @@ export namespace BoweryReports {
         extension: "docx" | "html",
         fullPath?: string
     }
-    
+
+    export type ReportStatus = typeof Enums.REPORT_STATUS[KeyInfo.ReportStatus]
     export type ConclusionValue = keyof typeof Enums.VALUE_CONCLUSION_TYPE 
     export type isSalesForcePull = boolean
     export type ReportCreationOptions = {

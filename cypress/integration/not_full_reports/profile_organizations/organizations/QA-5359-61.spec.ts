@@ -16,6 +16,9 @@ describe("Verify users roles to create new clients",
         cy.stepInfo(`1. Change report status`);
         _NavigationSection.openReviewAndExport();
         ReviewExport.changeReportStatus(testData.reviewStatus);
+        ReviewExport.changeReportStatus(testData.draftStatus);
+        ReviewExport.changeReportStatus(testData.submittedStatus);
+        ReviewExport.changeReportStatus(testData.approvedStatus);
     });
 
     

@@ -16,8 +16,10 @@ const _inspectorPassword = Cypress.env(`${Enums.USERS.webapp_inspector_password}
 const _adminUsername = Cypress.env(`${Enums.USERS.webapp_admin_username}`);
 const _adminPassword = Cypress.env(`${Enums.USERS.webapp_admin_password}`);
 
-const _reviewStatus = "Review";
-
+const _reviewStatus = Enums.REPORT_STATUS.review;
+const _draftStatus =  Enums.REPORT_STATUS.draft;
+const _submittedStatus = Enums.REPORT_STATUS.submitted;
+const _approvedStatus =  Enums.REPORT_STATUS.approved;
 
 export default {
     reportCreationData: reportCreationFixture(),
@@ -29,5 +31,8 @@ export default {
     inspectorPassword: _inspectorPassword,
     adminUsername: _adminUsername,
     adminPassword: _adminPassword,
-    reviewStatus: _reviewStatus
+    reviewStatus: _reviewStatus,
+    draftStatus: _draftStatus,
+    submittedStatus: _submittedStatus,
+    approvedStatus: _approvedStatus
 };
