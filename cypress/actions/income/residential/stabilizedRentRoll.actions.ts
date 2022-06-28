@@ -66,6 +66,7 @@ class StabilizedRentRollActions extends ResidentialRentRollSharedActions<typeof 
         stabRentRollPage.occupancyRateInput.clear().type(newCommentary).should("have.text", newCommentary);
         return this;
     }
+
 }
 
 export default new StabilizedRentRollActions(stabRentRollPage);
