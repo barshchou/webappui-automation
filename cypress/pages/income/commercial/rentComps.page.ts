@@ -26,8 +26,6 @@ class CommercialRentCompsPage extends BasePage {
 
     getCompGroupTableLocator(groupName: string) {return `//*[@data-qa='${groupName}-group-panel']`;}
 
-    getCompGroupTable(groupName) {return cy.xpath(this.getCompGroupTableLocator(groupName));}
-
     getCompGroupTableColumn(groupName: string, columnName: string) {
         return cy.xpath(`${this.getCompGroupTableLocator(groupName)}//child::th[text()='${columnName}']`);
     }

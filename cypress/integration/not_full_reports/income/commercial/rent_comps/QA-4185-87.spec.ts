@@ -28,8 +28,8 @@ describe(`[QA-4186] Unit of Measure on Commercial Unit Details modal is defaulte
     });
 
     it("[QA-4187]", () => {
-        Income._CommercialManager.RentComps.verifyCompGroupColumnExistsOrNot("Rent/SF", false)
-            .verifyCompGroupColumnExistsOrNot("Rent/SF/Month");
+        Income._CommercialManager.RentComps.verifyCompGroupColumnExists("Rent/SF", false)
+            .verifyCompGroupColumnExists("Rent/SF/Month");
     });
 
     testData.unitMeasures.forEach(measure => {

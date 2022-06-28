@@ -2,6 +2,7 @@ import rentRollPage from "../../../pages/income/commercial/rentRoll.page";
 import { numberWithCommas } from "../../../../utils/numbers.utils";
 import CommercialRentRollSharedComponent from "../../shared_components/commercialRentRoll.shared.actions";
 import { BoweryReports } from "../../../types/boweryReports.type";
+import Enums from "../../../enums/enums";
 
 class CommercialRentRollActions extends CommercialRentRollSharedComponent<typeof rentRollPage> {
 
@@ -240,13 +241,13 @@ class CommercialRentRollActions extends CommercialRentRollSharedComponent<typeof
 
     clickBasisOfRentTabByUnitMeasure(measure: BoweryReports.UnitsOfMeasure) {
         switch (measure) {
-            case "annually":
+            case Enums.UNITS_OF_MEASURE.annually:
                 this.clickAnnuallyBasisButton();
                 break;
-            case "monthly":
+            case Enums.UNITS_OF_MEASURE.monthly:
                 this.clickMonthlyBasisButton();
                 break;
-            case "per square foot per year":
+            case Enums.UNITS_OF_MEASURE.perSquareFootPerYear:
                 this.clickPerSquareFootButton(false);
                 break;
             default:

@@ -10,7 +10,8 @@ const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreat
 const _leaseStatus: BoweryReports.LeaseStatus = "Occupied";
 
 const _unitMeasures: BoweryReports.UnitsOfMeasure[] =
-    [ "per square foot per month", "annually", "monthly", "per square foot per year" ];
+    [ Enums.UNITS_OF_MEASURE.perSquareFootPerMonth, Enums.UNITS_OF_MEASURE.annually, Enums.UNITS_OF_MEASURE.monthly,
+        Enums.UNITS_OF_MEASURE.perSquareFootPerYear ];
 
 export default {
     reportCreationData: _reportCreationData,

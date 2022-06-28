@@ -275,7 +275,7 @@ class CommercialRentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
         return this;
     }
 
-    verifyCompGroupColumnExistsOrNot(column: string, isExists = true, group = "Unsorted"): CommercialRentCompsActions {
+    verifyCompGroupColumnExists(column: string, isExists = true, group = "Unsorted"): CommercialRentCompsActions {
         const matcher = isExists ? "exist" : "not.exist";
         rentCompsPage.getCompGroupTableColumn(group, column).should(matcher);
         return this;
