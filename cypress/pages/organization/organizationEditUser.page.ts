@@ -20,7 +20,7 @@ class OrganizationEditUserPage extends BasePage{
         return cy.xpath(`//*[contains(text(), "${message}")]//following::button[1]`);
     }
 
-    selectRoleOption(role: BoweryAutomation.OrganizationRoles) {return cy.xpath(`//ul[@role = 'listbox']//span[.= '${role}']`);}
+    selectRoleOption(role: BoweryAutomation.OrganizationRoles) {return cy.xpath(`//ul[@role='listbox']//span[.='${role}']`);}
 }
 
 export default new OrganizationEditUserPage();
