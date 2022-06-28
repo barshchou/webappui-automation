@@ -26,17 +26,13 @@ describe("Verify users roles to create new clients",
         Organization._OrganizationEditUserActions.editUserLastName(testData.userUpdatedLastName)
             .editUserFirstName(testData.userUpdatedFirstName)
             .editUserRole(testData.roleName, testData.updatedRoleName)
-            .saveChanges()
-            .verifyModal()
-            .closeModal();
+            .verifySaveChanges();
         
-        cy.stepInfo('Post test cleanup: Rename created user back to initial first name and last name')
+        cy.stepInfo('Post test cleanup: Rename created user back to initial first name and last name');
         Organization._OrganizationUsersActions.clickEditUser(testData.updateUserToFind);
         Organization._OrganizationEditUserActions.editUserFirstName(testData.userFirstName)
             .editUserLastName(testData.userLastName)
-            .saveChanges()
-            .verifyModal()
-            .closeModal();
+            .verifySaveChanges();
     });
 
     it("[QA-5356]", () => {
@@ -54,9 +50,7 @@ describe("Verify users roles to create new clients",
         Organization._OrganizationEditUserActions.editUserLastName(testData.userUpdatedLastName)
             .editUserFirstName(testData.userUpdatedFirstName)
             .editUserRole(testData.roleName, testData.updatedRoleName)
-            .saveChanges()
-            .verifyModal(false)
-            .closeModal(false);
+            .verifySaveChanges(false);
     });
 
     it("[QA-5357]", () => {

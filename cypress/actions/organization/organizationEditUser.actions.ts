@@ -36,13 +36,20 @@ class OrganizationEditUserActions extends BaseActionsExt<typeof organizationEdit
         return this;
     }
 
-    verifyModal(result = true): OrganizationEditUserActions {
-        organizationEditUserPage.resultModal(result).should("be.visible"); 
+    verifyModal(success = true): OrganizationEditUserActions {
+        organizationEditUserPage.resultModal(success).should("be.visible"); 
         return this;
     }
 
-    closeModal(result = true): OrganizationEditUserActions {
-        organizationEditUserPage.resultModalCloseButton(result).click();
+    closeModal(success = true): OrganizationEditUserActions {
+        organizationEditUserPage.resultModalCloseButton(success).click();
+        return this;
+    }
+
+    verifySaveChanges(success = true): OrganizationEditUserActions {
+        this.saveChanges()
+            .verifyModal(success)
+            .closeModal(success);
         return this;
     }
 }
