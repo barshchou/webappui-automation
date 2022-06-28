@@ -3,7 +3,7 @@ import { BoweryReports } from "../../../../../types/boweryReports.type";
 import ReportDataCreator from "../../../../data_creator/reportData.creator";
 
 const reportCreationFixture = () => {
-    return ReportDataCreator.getReportData("4388", {
+    return ReportDataCreator.getReportData("4183_4388", {
         templateValue: Enums.TEMPLATE_TYPE.freddieMac,
         incomeValue: Enums.INCOME_TYPE.both,
         conclusionValue: Enums.VALUE_CONCLUSION_TYPE.AS_COMPLETE
@@ -22,6 +22,6 @@ const generalFixture = () => {
 export default {
     reportCreationData: reportCreationFixture(),
     general: Object.freeze(generalFixture()),
-    untisOfMeasureAnnualy: "annually" as BoweryReports.UnitsOfMeasure,
-    untisOfMeasureMontly: "monthly" as BoweryReports.UnitsOfMeasure
+    unitsOfMeasureAnnually: "annually" as BoweryReports.UnitsOfMeasure,
+    unitsOfMeasureMonthly: "monthly" as BoweryReports.UnitsOfMeasure
 };

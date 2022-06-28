@@ -1,4 +1,4 @@
-import testData from "../../../../../fixtures/not_full_reports/income/commercial/in_place_rent_roll/QA-4388.fixture";
+import testData from "../../../../../fixtures/not_full_reports/income/commercial/in_place_rent_roll/QA-4183_4388.fixture";
 import { _NavigationSection } from "../../../../../actions/base";
 import { Property } from "../../../../../actions";
 import { Income } from "../../../../../actions";
@@ -30,14 +30,14 @@ describe("Verify the Annual Rent column in the grid",
 
     it("Per square foot", () => {
         Income._CommercialManager.InPlaceRentRoll.enterRentPerSFAnnuallyByRowNumber(testData.general.rentPerSF)
-            .verifyAnnualRentCellPerSFBasisByRow(testData.general.rentPerSF, testData.general.squareFeet, testData.untisOfMeasureAnnualy);
+            .verifyAnnualRentCellPerSFBasisByRow(testData.general.rentPerSF, testData.general.squareFeet, testData.unitsOfMeasureAnnually);
         deleteReport(testData.reportCreationData.reportNumber);
     });
 
-    it("Per square foot per month", () => {
+    it("Per square foot per month, the same [QA-4183]", () => {
         Income._CommercialManager.InPlaceRentRoll.clickPerSquareFootPerMonthButton()
             .enterRentPerSFMonthlyByRowNumber(testData.general.rentPerSF)
-            .verifyAnnualRentCellPerSFBasisByRow(testData.general.rentPerSF, testData.general.squareFeet, testData.untisOfMeasureMontly);
+            .verifyAnnualRentCellPerSFBasisByRow(testData.general.rentPerSF, testData.general.squareFeet, testData.unitsOfMeasureMonthly);
         deleteReport(testData.reportCreationData.reportNumber);
     });
 });
