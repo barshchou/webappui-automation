@@ -42,6 +42,9 @@ import marketAnalysisUsesEnum from "./marketAnalysisUses.enum";
 import usersEnum from "../enums/users/users.enum";
 import propertyConditionsEnum from "./property/propertyConditions.enum";
 import propertyConditionsRadiosEnum from "./property/propertyConditionsRadios.enum";
+import menuLinksNamesEnum from "./menuLinksNames.enum";
+import rolesEnum from "./users/roles.enum";
+import boweryOfficesEnum from "./organization/boweryOffices.enum";
 
 export default {
     TEMPLATE_TYPE: templateTypesEnum,
@@ -87,5 +90,8 @@ export default {
     MARKET_ANALYSIS_USES: marketAnalysisUsesEnum,
     USERS: usersEnum,
     PROPERTY_CONDITIONS: propertyConditionsEnum,
-    PROPERTY_CONDITIONS_RADIOS: propertyConditionsRadiosEnum
+    PROPERTY_CONDITIONS_RADIOS: propertyConditionsRadiosEnum,
+    MENU_LINKS: menuLinksNamesEnum,
+    USER_ROLES: rolesEnum,
+    BOWERY_OFFICES: boweryOfficesEnum
 };
