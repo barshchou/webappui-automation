@@ -1,7 +1,7 @@
 import BasePage from "../base/base.page";
 
 class OrganizationUsersPage extends BasePage{
-   fullName(fullName: string) {return cy.contains(fullName).siblings().last();}
+   getFullName(fullName: string) {return cy.contains(fullName).siblings().last();}
 
    get confirmDelete() {return cy.get('[data-qa=form-confirm-submit-btn]');}
 
