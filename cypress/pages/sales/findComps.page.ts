@@ -1,7 +1,7 @@
 import { applyMixins } from "../../utils/object.utils";
 import BasePage from "../base/base.page";
-import PropertyInformationForm from "./drm/propertyInfo.page";
-import SaleInformationForm from "./drm/salesInfo.page";
+import PropertyInformationForm from "./comp_plex/propertyInfo.page";
+import SaleInformationForm from "./comp_plex/salesInfo.page";
 
 class FindCompsPage extends BasePage {
     get createCompButton() {return cy.get("[data-qa=create-sales-comps-btn]", { includeShadowDom: true });}
