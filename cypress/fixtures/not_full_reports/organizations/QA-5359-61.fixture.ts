@@ -1,8 +1,5 @@
 import ReportDataCreator from "../../data_creator/reportData.creator";
 import Enums from "../../../enums/enums";
-import { BoweryAutomation } from "../../../types/boweryAutomation.type";
-import userDataCreator from "../../data_creator/userData.creator";
-import enums from "../../../enums/enums";
 
 const reportCreationFixture = () => {
     return ReportDataCreator.getReportData("5359-61", {
@@ -19,29 +16,11 @@ const _inspectorPassword = Cypress.env(`${Enums.USERS.webapp_inspector_password}
 const _adminUsername = Cypress.env(`${Enums.USERS.webapp_admin_username}`);
 const _adminPassword = Cypress.env(`${Enums.USERS.webapp_admin_password}`);
 
-const _userFirstName = "TestUserFirstName-" + `${Date.now()}`;
-const _userLastName = "TestUserLastName-" + `${Date.now()}`;
-const _userName = "TestUserName-" + `${Date.now()}` + '@boweryvaluation.com';
-const _roleName = [ enums.USER_ROLES.appraiser ];
+const _reviewStatus = "Review";
 
-const _userOptions: BoweryAutomation.OrganizationCreateNewUserData = {
-    username: _userName,
-    firstName: _userFirstName,
-    lastName: _userLastName,
-    roleName: _roleName
-};
-
-const _userUpdatedFirstName = "UpdatedUserFirstName-" + `${Date.now()}`;
-const _userUpdatedLastName = "UpdatedUserFirstName-" + `${Date.now()}`;
-const _updatedRoleName = [ enums.USER_ROLES.leadAppraiser, enums.USER_ROLES.inspector ];
 
 export default {
     reportCreationData: reportCreationFixture(),
-    clientCreationData: userDataCreator.getUserData(_userOptions),
-    userFirstName: _userFirstName,
-    userLastName: _userLastName,
-    userToFind: _userFirstName + " " + _userLastName,
-    updateUserToFind: _userUpdatedFirstName + " " + _userUpdatedLastName,
     leadAppraiserUsername: _leadAppraiserUsername,
     leadAppraiserPassword: _leadAppraiserPassword,
     appraiserUsername: _appraiserUsername,
@@ -50,8 +29,5 @@ export default {
     inspectorPassword: _inspectorPassword,
     adminUsername: _adminUsername,
     adminPassword: _adminPassword,
-    userUpdatedFirstName: _userUpdatedFirstName,
-    userUpdatedLastName: _userUpdatedLastName,
-    updatedRoleName: _updatedRoleName,
-    roleName: _roleName
+    reviewStatus: _reviewStatus
 };

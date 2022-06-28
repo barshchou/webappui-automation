@@ -16,5 +16,9 @@ class ReviewExportPage extends BasePage {
     }
 
     get statusBar() {return cy.get("[data-qa=status]");}
+
+    get reportStatus() {return cy.get("[data-qa='report-status']");}
+
+    changeReportStatusButton(status: string) {return cy.get(`[data-qa='${status}-btn']`);}
 }
 export default new ReviewExportPage();

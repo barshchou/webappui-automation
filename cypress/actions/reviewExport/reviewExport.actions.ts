@@ -9,24 +9,24 @@ class ReviewExportActions extends BaseActionsExt<typeof reviewExportPage> {
         return this;
     }
 
-    waitForReportGenerated(): this {
+    waitForReportGenerated(): ReviewExportActions {
         reviewExportPage.statusBar.should("contain.text", "Pending");
         reviewExportPage.statusBar.should("contain.text", "Complete");
         cy.get('[data-qa="download-btn"]', { timeout: 120000 }).should("be.visible");
         return this;
     }
 
-    generateDocxReport(): this {
+    generateDocxReport(): ReviewExportActions {
         reviewExportPage.generateReportBtn.click();
         return this;
     }
 
-    generateXMLReport(): this {
+    generateXMLReport(): ReviewExportActions {
         reviewExportPage.generateXmlBtn.click();
         return this;
     }
 
-    verifyXMLReportName(reportName: string): this {
+    verifyXMLReportName(reportName: string): ReviewExportActions {
         cy.intercept({
             method: 'GET',
             url: '**api/xmlGeneration/?*'
@@ -41,7 +41,7 @@ class ReviewExportActions extends BaseActionsExt<typeof reviewExportPage> {
         return this;
     }
 
-    verifyXMLReportOpens(reportName: string): this {
+    verifyXMLReportOpens(reportName: string): ReviewExportActions {
         const urlNamePart = `${Cypress._.snakeCase(reportName)}`;
         cy.intercept({
             method: 'GET',
@@ -58,13 +58,54 @@ class ReviewExportActions extends BaseActionsExt<typeof reviewExportPage> {
      * Downloads and converts *.docx report into html
      * and renames it to *current_spec_name*.html
      */
-    downloadAndConvertDocxReport(reportName: string): this {
+    downloadAndConvertDocxReport(reportName: string): ReviewExportActions {
         reviewExportPage.downloadBtn.click();
         cy.task("getFilePath", { _reportName: reportName, _docx_html: "docx" }).then(file => {
             cy.log(<string>file);
             cy.task("waitForFileExists", file);
             cy.task("convertDocxToHtml", file);
         });
+        return this;
+    }
+
+    changeReportStatus(statusToChange: string): ReviewExportActions {
+        // reviewExportPage.reportStatus.invoke('text').as('$status');
+        reviewExportPage.reportStatus.invoke('text').then(($status) => {
+            
+            switch ($status) {
+                case "Draft":
+                    if (statusToChange != "Approved" && statusToChange != "Submitted" && statusToChange != "Draft") {
+                        reviewExportPage.changeReportStatusButton(statusToChange.toLowerCase()).click();
+                    } else {
+                        cy.log(`Status couldn't be changed from '${$status}' to '${statusToChange}!'`);
+                    }
+                    break;
+                case "Review":
+                    if (statusToChange != "Submitted") {
+                        reviewExportPage.changeReportStatusButton(statusToChange.toLowerCase()).click();
+                    } else {
+                        cy.log(`Status couldn't be changed from '${$status}' to '${statusToChange}!'`);
+                    }
+                    break;
+                case "Approved":
+                    if (statusToChange != "Approved") {
+                        reviewExportPage.changeReportStatusButton(statusToChange.toLowerCase()).click();
+                    } else {
+                        cy.log(`Status couldn't be changed from '${$status}' to '${statusToChange}!'`);
+                    }
+                    break;
+                case "Submitted":
+                    if (statusToChange != "Approved" && statusToChange != "Draft") {
+                        reviewExportPage.changeReportStatusButton(statusToChange.toLowerCase()).click();
+                    } else {
+                        cy.log(`Status couldn't be changed from '${$status}' to '${statusToChange}!'`);
+                    }
+                    break;
+                default:
+                    break;
+            }
+        });
+
         return this;
     }
 }
