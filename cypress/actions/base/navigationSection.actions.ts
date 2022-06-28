@@ -615,6 +615,10 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         return this;
     }
 
+    /**
+     * @description Opens specific page by url, that contains id of current report, which is opened in moment of method call
+     * @param pageRoute The route to specific page, pages routes are contained in pages_routes enums directory
+     */
     openPageByVisit(pageRoute: string): NavigationSectionActions {
         const baseUrl = Cypress.config().baseUrl;
         cy._mapGet(mapKeysUtils.report_id).then(reportId => {
