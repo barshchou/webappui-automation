@@ -3,7 +3,7 @@ import { BoweryReports } from "../../../../types/boweryReports.type";
 import chipsDataCreator from "../../../data_creator/chipsData.creator";
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 
-const _buildingName = 'Test Building Name QA-4641';
+const _buildingName = 'Test Building Name QA-4642';
 
 const _chipsOptions: BoweryReports.ChipsCreationOptions = {
     buildingName: _buildingName,

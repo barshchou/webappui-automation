@@ -4,7 +4,7 @@ import { createReport, deleteReport } from "../../../../actions/base/baseTest.ac
 import { _NavigationSection } from '../../../../actions/base';
 
 describe("Verify the Client Guidelines Discussion on the page", () => {
-    it("Test body", { tags: [ "@report", "@client", "@check_export" ] }, () => {
+    it("[QA-4642]", { tags: [ "@report", "@client", "@check_export" ] }, () => {
         cy.stepInfo("1. Proceed to the Report > Client page");
         createReport(testData.reportCreationData);
         _NavigationSection.navigateToClientPage().verifyProgressBarNotExist();
