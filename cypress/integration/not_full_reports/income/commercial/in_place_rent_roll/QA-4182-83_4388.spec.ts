@@ -1,4 +1,4 @@
-import testData from "../../../../../fixtures/not_full_reports/income/commercial/in_place_rent_roll/QA-4183_4388.fixture";
+import testData from "../../../../../fixtures/not_full_reports/income/commercial/in_place_rent_roll/QA-4182-83_4388.fixture";
 import { _NavigationSection } from "../../../../../actions/base";
 import { Property } from "../../../../../actions";
 import { Income } from "../../../../../actions";
@@ -14,7 +14,7 @@ describe("Verify the Annual Rent column in the grid",
         _NavigationSection.navigateToCommercialInPlaceRentRoll();
     });
 
-    it("Annually", () => {
+    it("Annually, the same [QA-4182]", () => {
         Income._CommercialManager.InPlaceRentRoll.clickAnnuallyBasisButton()
             .verifyAnnualRentCellTextByRow()
             .enterAnnualRentByRowNumber(testData.general.annualRent);
