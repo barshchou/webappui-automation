@@ -4,7 +4,9 @@ import NavigationSection from "../../../../../actions/base/navigationSection.act
 import Property from "../../../../../actions/property/property.manager";
 import Income from "../../../../../actions/income/income.manager";
 
-describe(" Verify the Number of Residential Units section on the In-Place Rent Roll page", () => {
+describe(" Verify the Number of Residential Units section on the In-Place Rent Roll page", 
+    { tags:[ "@income", "@residential", "@in_place_rent_roll" ] }, () => {
+        
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
     });

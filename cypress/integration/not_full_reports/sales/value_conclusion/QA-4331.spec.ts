@@ -3,7 +3,9 @@ import NavigationSection from "../../../../actions/base/navigationSection.action
 import Sales from "../../../../actions/sales/sales.manager";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 
-describe("Sales Value Conclusion Discussion -> Appraiser Commentary", () => {
+describe("Sales Value Conclusion Discussion -> Appraiser Commentary", 
+    { tags: [ "@sales", "@value_conclusion" ] }, () => {
+        
     before("Login", () => {
         createReport(testData.reportCreationData);
     });

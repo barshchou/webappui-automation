@@ -3,12 +3,11 @@ import { createReport, deleteReport } from "../../../../actions/base/baseTest.ac
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Property from "../../../../actions/property/property.manager";
 import Income from "../../../../actions/income/income.manager";
-import tableExpenseHistoryCellNames from "../../../../../cypress/enums/expenseHistoryTableRows.enum";
-
-import { Tag } from "../../../../utils/tags.utils";
+import tableExpenseHistoryCellNames from "../../../../../cypress/enums/expense/expenseHistoryTableRows.enum";
 
 describe("Historical expense Fuel Per SF is correctly calculated and displayed",
-{ tags: [ Tag.snapshot_tests, Tag.income, Tag.expense_forecast ] }, () => {
+    { tags: [ "@snapshot_tests", "@income", "@expense_forecast" ] }, () => {
+        
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
     });

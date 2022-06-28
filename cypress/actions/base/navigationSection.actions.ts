@@ -1,115 +1,138 @@
 import navigationSectionPage from "../../pages/base/navigationSection.page";
-import BaseActions from "./base.actions";
+import { Alias } from "../../utils/alias.utils";
+import BaseActionsExt from "./base.actions.ext";
 
-class NavigationSectionActions extends BaseActions {
-    get Page() {
-        return navigationSectionPage;
+class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPage> {
+    clickYesIfExist(): NavigationSectionActions {
+        cy.get("body").then($body => {
+                if ($body.text().includes("You have unsaved changes")) {
+                    cy.get("[data-qa=form-confirm-dialog]").invoke('prop', 'hidden').then($prop => {
+                        cy.log(`${$prop}`);
+                        if ($prop == false) {
+                            this.clickYesButton();
+                        }
+                    });
+                }
+            });
+        return this;
     }
 
-    openReviewAndExport(isWithSave = false) {
+    openReviewAndExport(isNewReport = true): NavigationSectionActions {
         let reportAlias = "docxReportAsync";
         cy.intercept({
             method: 'GET',
             url: '/api/docx-report-async/get-report-hierarchy*'
         }).as(reportAlias);
         cy.get('[id="review-and-export"]').click();
-        if (isWithSave) this.clickYesButton();
-        cy.wait(`@${reportAlias}`, { timeout:20000 });
+        this.clickYesIfExist();
+        this.verifyProgressBarNotExist();
+        if (isNewReport) cy.wait(`@${reportAlias}`, { timeout:20000 });
         return this;
     }
-    
-    verifyUnsavedChangesModal() {
+
+    verifyUnsavedChangesModal(): NavigationSectionActions {
         cy.get('[data-qa="form-confirm-dialog"]').should("be.visible");
         return this;
     }
 
-    clickIncomeApproachButton() {
+    clickIncomeApproachButton(): NavigationSectionActions {
         navigationSectionPage.incomeApproachButton.click();
         return this;
     }
 
-    clickResidentialIncomeArrow() {
+    clickResidentialIncomeArrow(): NavigationSectionActions {
         navigationSectionPage.residentialIncomeArrow.click();
         return this;
     }
 
-    clickInPlaceRentRollButton() {
+    clickInPlaceRentRollButton(): NavigationSectionActions {
         navigationSectionPage.inPlaceRentRollButton.click();
         return this;
     }
 
-    clickRentCompsButton() {
+    clickRentCompsButton(): NavigationSectionActions {
         navigationSectionPage.rentCompsButton.click();
         return this;
     }
 
-    clickCommercialArrow() {
+    clickCommercialArrow(): NavigationSectionActions {
         navigationSectionPage.commercialIncomeArrow.click();
         return this;
     }
 
-    clickCommercialRentRollButton() {
+    clickCommercialRentRollButton(): NavigationSectionActions {
         navigationSectionPage.commercialRentRollButton.click();
+        this.clickYesIfExist();
         return this;
     }
 
-    clickCommercialStabRentRollButton() {
+    clickCommercialStabRentRollButton(): NavigationSectionActions {
         navigationSectionPage.commercialStabRentRollButton.click();
         return this;
     }
 
-    navigateToStabilizedRentRollInCommercial() {
+    navigateToStabilizedRentRollInCommercial(): NavigationSectionActions {
         this.clickCommercialStabRentRollButton()
-            .clickYesButton();
+            .clickYesIfExist();
         return this;
     }
 
-    clickFinalButton() {
+    clickFinalButton(): NavigationSectionActions {
         navigationSectionPage.finalButton.click();
         return this;
     }
 
-    clickUnitInspectionButton() {
+    clickUnitInspectionButton(): NavigationSectionActions {
         navigationSectionPage.unitInspectionButton.click();
         return this;
     }
 
-    clickPropertyButton() {
+    clickPropertyButton(): NavigationSectionActions {
         navigationSectionPage.propertyButton.click();
         return this;
     }
 
-    clickCommercialUnits() {
+    clickCommercialUnits(): NavigationSectionActions {
         navigationSectionPage.commercialUnitsButton.click();
         return this;
     }
 
-    clickSummaryButton() {
+    clickSummaryButton(): NavigationSectionActions {
         navigationSectionPage.summaryButton.click();
         return this;
     }
 
-    clickReportButton() {
+    clickMarketButton(): NavigationSectionActions {
+        navigationSectionPage.marketButton.click();
+        return this;
+    }
+
+    clickReportButton(): NavigationSectionActions {
         navigationSectionPage.reportButton.click();
         return this;
     }
 
-    clickClientButton() {
+    clickClientButton(): NavigationSectionActions {
         navigationSectionPage.clientButton.click();
         return this;
     }
 
-    clickSiteDescriptionButton() {
+    clickSiteDescriptionButton(): NavigationSectionActions {
         navigationSectionPage.siteDescription.click();
         return this;
     }
 
-    clickMapsButton() {
+    clickMapsButton(): NavigationSectionActions {
         navigationSectionPage.propertyMaps.click();
         return this;
     }
 
-    navigateToUnitInspection() {
+    clickResidentialStabilizedRentRoll(): NavigationSectionActions {
+        navigationSectionPage.residentialStabilizedRentRoll.click();
+        return this;
+    }
+
+    navigateToUnitInspection(): NavigationSectionActions {
         this.clickSaveButton();
         this.clickFinalButton()
             .clickUnitInspectionButton()
@@ -117,257 +140,378 @@ class NavigationSectionActions extends BaseActions {
         return this;
     }
 
-    navigateToResInPlaceRentRoll() {
+    navigateToResInPlaceRentRoll(): NavigationSectionActions {
         this.clickIncomeApproachButton()
-            .clickResidentialIncomeArrow()
+            .clickResidentialMenuIfClosed()
             .clickInPlaceRentRollButton()
-            .clickYesButton();
+            .clickYesIfExist();
         return this;
     }
 
-    navigateToRentComps() {
+    navigateToRentComps(): NavigationSectionActions {
         this.clickIncomeApproachButton()
-            .clickResidentialIncomeArrow()
+            .clickResidentialMenuIfClosed()
             .clickRentCompsButton()
-            .clickYesButton();
+            .clickYesIfExist();
         return this;
     }
 
-    openRentCompsInResidential() {
-        this.clickRentCompsButton()
-            .clickYesButton();
-        return this;
-    }
-
-    navigateToCommercialInPlaceRentRoll(isWithSave = true) {
+    navigateToCompGroups(): NavigationSectionActions {
         this.clickIncomeApproachButton()
-            .clickCommercialArrow()
-            .clickCommercialRentRollButton();
-        if (isWithSave) {
-            this.clickYesButton();
-        }
+            .clickCommercialMenuIfClosed()
+            .clickCommercialCompGroups()
+            .clickYesIfExist();
         return this;
     }
 
-    openInPlaceRentRollInCommercial(isWithSave = true): NavigationSectionActions {
-        this.clickCommercialRentRollButton();
-        if (isWithSave) this.clickYesButton();
+    openRentCompsInResidential(): NavigationSectionActions {
+        this.clickRentCompsButton()
+            .clickYesIfExist();
         return this;
     }
 
-    navigateToPropertySummary() {
+    navigateToCommercialInPlaceRentRoll(): NavigationSectionActions {
+        this.clickIncomeApproachButton()
+            .clickCommercialMenuIfClosed()
+            .clickCommercialRentRollButton()
+            .clickYesIfExist();
+        return this;
+    }
+
+    openInPlaceRentRollInCommercial(): NavigationSectionActions {
+        this.clickCommercialRentRollButton()
+            .clickYesIfExist();
+        return this;
+    }
+
+    navigateToPropertySummary(): NavigationSectionActions {
         this.clickPropertyButton()
             .clickSummaryButton()
-            .clickYesButton();
+            .clickYesIfExist();
         return this;
     }
 
-    navigateToClientPage() {
+    navigateToPropertyMarket(): NavigationSectionActions {
+        this.clickPropertyButton()
+            .clickMarketButton()
+            .clickYesIfExist();
+        return this;
+    }
+
+    navigateToClientPage(): NavigationSectionActions {
         this.clickReportButton()
             .clickClientButton()
-            .clickYesButton();
+            .clickYesIfExist();
         return this;
     }
 
-    openSiteDescriptionInProperty() {
+    openSiteDescriptionInProperty(): NavigationSectionActions {
         this.clickSiteDescriptionButton()
-            .clickYesButton();
+            .clickYesIfExist();
         return this;
     }
 
-    openMapsInProperty() {
+    openMapsInProperty(): NavigationSectionActions {
         this.clickMapsButton()
-            .clickYesButton();
+            .clickYesIfExist();
         return this;
     }
 
-    clickExpenseForecastBookmark() {
+    clickExpenseForecastBookmark(): NavigationSectionActions {
         navigationSectionPage.expenseForecastBookmark.click().should("have.attr", "color", "#F68750");
         return this;
     }
 
-    clickCapRateConclusion() {
+    clickCapRateConclusion(): NavigationSectionActions {
         navigationSectionPage.capRateConclusion.click();
         return this;
     }
 
-    navigateToCapRateConclusion(isWithSave = true) {
+    navigateToCapRateConclusion(): NavigationSectionActions {
         this.clickIncomeApproachButton()
-            .clickCapRateConclusion();
-        if (isWithSave) {
-            this.clickYesButton();
-        }
+            .clickCapRateConclusion()
+            .clickYesIfExist();
         return this;
     }
 
-    clickSalesButton() {
+    clickSalesButton(): NavigationSectionActions {
         navigationSectionPage.salesApproachButton.click();
         return this;
     }
 
-    clickValueConclusionButton() {
+    clickValueConclusionButton(): NavigationSectionActions {
         navigationSectionPage.valueConclusionButton.click();
         return this;
     }
 
-    clickInsurableReplacementCostBookmark() {
+    clickInsurableReplacementCostBookmark(): NavigationSectionActions {
         navigationSectionPage.insurableReplacementCostBookmark.click().should("have.attr", "color", "#F68750");
         return this;
     }
 
-    navigateToSalesValueConclusion() {
+    navigateToSalesValueConclusion(): NavigationSectionActions {
         this.clickSalesButton()
             .clickValueConclusionButton()
-            .clickYesButton();
+            .clickYesIfExist();
         return this;
     }
 
-    clickFindCompsButton() {
+    clickFindCompsButton(): NavigationSectionActions {
         navigationSectionPage.findCompsButton.click();
         return this;
     }
 
-    navigateToFindComps() {
+    navigateToFindComps(): NavigationSectionActions {
         this.clickSalesButton()
             .clickFindCompsButton()
-            .clickYesButton();
+            .clickYesIfExist();        
+        cy.wait(`@${Alias.gql.SearchSalesTransactions}`, { timeout:120000 });
+    
         return this;
     }
 
-    clickAdjustCompsButton() {
+    clickAdjustCompsButton(): NavigationSectionActions {
         navigationSectionPage.adjustCompsButton.click();
         return this;
     }
 
-    openAdjustCompsInSales() {
-        this.clickAdjustCompsButton()
-            .clickYesButton();
+    navigateToAdjustComps(): NavigationSectionActions {
+        this.clickSalesButton()
+            .clickAdjustCompsButton()
+            .clickYesIfExist();
         return this;
     }
 
-    clickCommercialRentComps() {
+    clickCommercialRentComps(): NavigationSectionActions {
         navigationSectionPage.commercialRentCompsButton.click();
         return this;
     }
 
-    navigateToCommercialRentComps() {
-        this.clickIncomeApproachButton()
-            .clickCommercialArrow()
-            .clickCommercialRentComps()
-            .clickYesButton();
+    clickCommercialCompGroupsDiscussion(): NavigationSectionActions {
+        navigationSectionPage.commercialCompGroupsDiscussionButton.click();
         return this;
     }
 
-    clickComparableExpenses() {
+    navigateToCommercialRentComps(): NavigationSectionActions {
+        this.clickIncomeApproachButton()
+            .clickCommercialMenuIfClosed()
+            .clickCommercialRentComps()
+            .clickYesIfExist();
+        return this;
+    }
+
+    clickComparableExpenses(): NavigationSectionActions {
         navigationSectionPage.comparableExpenses.click();
         return this;
     }
 
-    navigateToComparableExpenses() {
+    navigateToComparableExpenses(): NavigationSectionActions {
         this.clickIncomeApproachButton()
             .clickComparableExpenses()
-            .clickYesButton();
+            .clickYesIfExist();
         return this;
     }
 
-    navigateToCommercialUnits() {
+    navigateToCommercialUnits(): NavigationSectionActions {
         this.clickPropertyButton()
             .clickCommercialUnits()
-            .clickYesButton();
+            .clickYesIfExist();
         return this;
     }
 
-    openInPlaceRentRollInResidential(isWithSave = false) {
-        this.clickInPlaceRentRollButton();
-        if (isWithSave) this.clickYesButton();
+    openInPlaceRentRollInResidential(): NavigationSectionActions {
+        this.clickInPlaceRentRollButton()
+            .clickYesIfExist();
         return this;
     }
 
-    clickAmenitiesButton() {
+    navigateToRentReconcillation(): NavigationSectionActions {
+        this.clickIncomeApproachButton()
+            .clickCommercialMenuIfClosed()
+            .clickRentReconcillationButton()
+            .clickYesIfExist();
+        return this;
+    }
+
+    clickRentReconcillationButton(): NavigationSectionActions {
+        navigationSectionPage.commercialRentReconcillationButton.click();
+        return this;
+    }
+
+    clickAmenitiesButton(): NavigationSectionActions {
         navigationSectionPage.amenities.click();
         return this;
     }
 
-    navigateToPropertyAmenities() {
+    navigateToPropertyAmenities(): NavigationSectionActions {
         this.clickPropertyButton()
             .clickAmenitiesButton()
-            .clickYesButton();
+            .clickYesIfExist();
         return this;
     }
 
-    clickLaundryButton() {
+    clickLaundryButton(): NavigationSectionActions {
         navigationSectionPage.laundry.click();
         return this;
     }
 
-    clickMiscellaneousIncome() {
+    clickStorageButton(): NavigationSectionActions {
+        navigationSectionPage.storage.click();
+        return this;
+    }
+
+    clickOtherButton(): NavigationSectionActions {
+        navigationSectionPage.other.click();
+        return this;
+    }
+
+    clickParkingButton(): NavigationSectionActions {
+        navigationSectionPage.parking.click();
+        return this;
+    }
+
+    clickMiscellaneousIncome(): NavigationSectionActions {
         navigationSectionPage.miscellaneousIncome.click();
         return this;
     }
 
-    clickPreviewEditButton() {
+    clickPreviewEditButton(): NavigationSectionActions {
         navigationSectionPage.previewEditButton.click();
         return this;
     }
 
-    clickLetterOfTransmittal() {
+    clickLetterOfTransmittal(): NavigationSectionActions {
         navigationSectionPage.letterOfTransmittal.click();
         return this;
     }
 
-    navigateToLaundry() {
+    clickCoverPage(): NavigationSectionActions {
+        navigationSectionPage.coverPage.click();
+        return this;
+    }
+
+    clickIntroduction(): NavigationSectionActions {
+        navigationSectionPage.introduction.click();
+        return this;
+    }
+
+    clickProfileOrganization(): NavigationSectionActions {
+        navigationSectionPage.profileOrganization.click();
+        return this;
+    }
+
+    selectLink(nameLink: string): NavigationSectionActions {
+        navigationSectionPage.menuItemsProfileOrganization.contains(nameLink).click();
+        return this;
+    }
+
+    navigateToProfileOrganization(nameLink: string): NavigationSectionActions {
+        this.clickProfileOrganization()
+            .selectLink(nameLink);
+        return this;
+    }
+
+    navigateToLaundry(): NavigationSectionActions {
         this.clickIncomeApproachButton()
             .clickMiscellaneousIncome()
             .clickLaundryButton()
-            .clickYesButton();
+            .clickYesIfExist();
         return this;
     }
 
-    navigateToLetterOfTransmittal() {
+    navigateToStorage(): NavigationSectionActions {
+        this.clickIncomeApproachButton()
+            .clickMiscellaneousIncome()
+            .clickStorageButton()
+            .clickYesIfExist();
+        return this;
+    }
+
+    navigateToOther(): NavigationSectionActions {
+        this.clickIncomeApproachButton()
+            .clickMiscellaneousIncome()
+            .clickOtherButton()
+            .clickYesIfExist();
+        return this;
+    }
+
+    navigateToParking(): NavigationSectionActions {
+        this.clickIncomeApproachButton()
+            .clickMiscellaneousIncome()
+            .clickParkingButton()
+            .clickYesIfExist();
+        return this;
+    }
+
+    navigateToCoverPage(): NavigationSectionActions {
+        this.clickPreviewEditButton()
+        .clickCoverPage()
+        .clickYesIfExist();
+    return this;
+    }
+
+    navigateToIntroduction(): NavigationSectionActions {
+        this.clickPreviewEditButton()
+        .clickIntroduction()
+        .clickYesIfExist();
+    return this;
+    }
+
+    navigateToLetterOfTransmittal(): NavigationSectionActions {
         this.clickPreviewEditButton()
             .clickLetterOfTransmittal()
-            .clickYesButton();
+            .clickYesIfExist();
         return this;
     }
 
-    clickPotentialGrossIncome() {
+    clickPotentialGrossIncome(): NavigationSectionActions {
         navigationSectionPage.potentialGrossIncome.click();
         return this;
     }
 
-    navigateToPotentialGrossIncome() {
-        this.clickIncomeApproachButton()
-            .clickPotentialGrossIncome()
-            .clickYesButton();
+    clickTaxInfo(): NavigationSectionActions {
+        navigationSectionPage.taxInfo.click();
         return this;
     }
 
-    clickProForma() {
+    navigateToPotentialGrossIncome(): NavigationSectionActions {
+        this.clickIncomeApproachButton()
+            .clickPotentialGrossIncome()
+            .clickYesIfExist();
+        return this;
+    }
+
+    clickProForma(): NavigationSectionActions {
         navigationSectionPage.proForma.click();
         return this;
     }
   
-    navigateToProForma(isWithSave = true): NavigationSectionActions {
+    navigateToProForma(): NavigationSectionActions {
         this.clickIncomeApproachButton()
             .clickProForma();
-        if (isWithSave) {
-            this.clickYesButton();
-        }
+            this.clickYesIfExist();
         return this;
     }
 
-    clickCommercialCompGroups() {
+    clickCommercialCompGroups(): NavigationSectionActions {
         navigationSectionPage.commercialCompGroups.click();
         return this;
     }
 
-    openCompGroupsInCommercial() {
+    openCompGroupsInCommercial(): NavigationSectionActions {
         this.clickCommercialCompGroups()
-            .clickYesButton();
+            .clickYesIfExist();
         return this;
     }
 
-    navigateToReportInformation(){
+    navigateToReportInformation(): NavigationSectionActions {
+        this.clickReportButton()
+            .clickReportInfoButton()
+            .clickYesIfExist();
+        return this;
+    }
+
+    clickReportInfoButton(): NavigationSectionActions {
         navigationSectionPage.reportInfoButton.click();
         return this;
     }
@@ -380,7 +524,7 @@ class NavigationSectionActions extends BaseActions {
     navigateToExpenseHistory(): NavigationSectionActions {
         this.clickIncomeApproachButton()
             .clickExpenseHistoryButton()
-            .clickYesButton();
+            .clickYesIfExist();
         return this;
     }
 
@@ -392,7 +536,7 @@ class NavigationSectionActions extends BaseActions {
     navigateToExpenseForecast(): NavigationSectionActions {
         this.clickIncomeApproachButton()
             .clickExpenseForecastButton()
-            .clickYesButton();
+            .clickYesIfExist();
         return this;
     }
 
@@ -401,14 +545,74 @@ class NavigationSectionActions extends BaseActions {
         return this;
     }
 
-    navigateToSupportingCapRates(isWithYes = false): NavigationSectionActions {
+    navigateToSupportingCapRates(): NavigationSectionActions {
         this.clickIncomeApproachButton()
-            .clickSupportingCapRates();
-        if(isWithYes) {
-            this.clickYesButton();
-        }
+            .clickSupportingCapRates()
+            .clickYesIfExist();
+        return this;
+    }
+
+    navigateToTaxInfo(): NavigationSectionActions {
+        this.clickIncomeApproachButton()
+            .clickTaxInfo()
+            .clickYesIfExist();
+        return this;
+    }
+
+    openCommercialStabilizedRentRollInCommercial(): NavigationSectionActions {
+        this.clickCommercialStabRentRollButton()
+            .clickYesIfExist();
+        return this;
+    }
+
+    navigateToCommercialReimbursementSummary(): NavigationSectionActions {
+        this.clickIncomeApproachButton()
+            .clickCommercialMenuIfClosed()
+            .clickCommercialReimbursementSummaryButton()
+            .clickYesIfExist();
+        return this;
+    }
+
+    clickCommercialReimbursementSummaryButton(): NavigationSectionActions {
+        navigationSectionPage.comercialReimbursementButton.click();
+        return this;
+    }
+
+    navigateToResidentialStabilizedRentRoll(): this {
+        this.clickIncomeApproachButton();
+        this.clickResidentialMenuIfClosed();
+        this.clickResidentialStabilizedRentRoll()
+            .clickYesIfExist();
+        return this;
+    }
+
+    navigateToCommercialStabilizedRentRoll(): this {
+        this.clickIncomeApproachButton();
+        this.clickCommercialMenuIfClosed();
+        this.clickCommercialStabRentRollButton()
+            .clickYesIfExist();
+        return this;
+    }
+
+    private clickCommercialMenuIfClosed(): NavigationSectionActions {
+        navigationSectionPage.commercialIncomeArrow.then(el => {
+            if (!el.hasClass("expanded")) {
+                this.clickCommercialArrow();
+            }
+        });
+
+        return this;
+    }
+
+    private clickResidentialMenuIfClosed(): NavigationSectionActions {
+        navigationSectionPage.residentialIncomeArrow.then(el => {
+            if (!el.hasClass("expanded")) {
+                this.clickResidentialIncomeArrow();
+            }
+        });
+
         return this;
     }
 }
 
-export default new NavigationSectionActions();
+export default new NavigationSectionActions(navigationSectionPage);

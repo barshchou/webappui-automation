@@ -3,7 +3,9 @@ import NavigationSection from "../../../../../actions/base/navigationSection.act
 import Income from "../../../../../actions/income/income.manager";
 import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
 
-describe("Verify the Save and Save&Continue buttons functionality", () => {
+describe("Verify the Save and Save&Continue buttons functionality", 
+    { tags:[ "@income", "@residential", "@in_place_rent_roll" ] }, () => {
+        
     beforeEach("Login, create report, check checkbox", () => {
         createReport(testData.reportCreationData);
         NavigationSection.navigateToResInPlaceRentRoll();

@@ -3,7 +3,9 @@ import NavigationSection from "../../../../actions/base/navigationSection.action
 import Sales from "../../../../actions/sales/sales.manager";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 
-describe("Verify the functionality of the Upload Comps button", () => {
+describe("Verify the functionality of the Upload Comps button", 
+    { tags:[ "@find_comps", "@sales" ] }, () => {
+        
     before("Login and create report", () => {
         createReport(testData.reportCreationData);
     });

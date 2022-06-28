@@ -4,7 +4,9 @@ import NavigationSection from "../../../../actions/base/navigationSection.action
 import Property from "../../../../actions/property/property.manager";
 import Income from "../../../../actions/income/income.manager";
 
-describe("Residential V/C Loss @ X% row", () => {
+describe("Residential V/C Loss @ X% row", 
+    { tags:[ "@income", "@pro_forma" ] }, () => {
+        
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
     });
@@ -15,7 +17,7 @@ describe("Residential V/C Loss @ X% row", () => {
         Property.Summary.enterNumberOfResUnits(testData.numberOfUnits)
             .enterGrossBuildingArea(testData.grossBuildingArea);
 
-        cy.stepInfo("2. Go to Income → Residential → In-Place Rent Role and fill in all necessary values to the table");
+        cy.stepInfo("2. Go to Income → Residential → In-Place Rent Roll and fill in all necessary values to the table");
         NavigationSection.navigateToResInPlaceRentRoll();
         Income.Residential.InPlaceRentRoll.enterAllEqualRentTypeCells(testData.rentType)
             .enterAllEqualLeaseStatuses(testData.leaseStatus)
@@ -24,21 +26,18 @@ describe("Residential V/C Loss @ X% row", () => {
         cy.stepInfo(`3. Go to Income → Potential Gross Income → Residential Vacancy and Collection Loss table 
         and fill in the value into the Residential Vacancy and Collection Loss cell`);
         NavigationSection.navigateToPotentialGrossIncome();
-        Income.PotentialGrossIncome.enterResVacancyCollLoss(testData.resVacancyCollectionLoss)
-            .clickSaveButton()
-            .verifyProgressBarNotExist();
+        Income.PotentialGrossIncome.enterResVacancyCollLoss(testData.resVacancyCollectionLoss);
 
-        // TODO: Change to navigation with saving, after https://bowery.atlassian.net/browse/WEB-4956 bug fix
         cy.stepInfo(`4. Go to Income → Pro Forma page.
         Verify that label has format Less Residential V/C Loss @ X%.
         Verify that Total value is taken from Potential Gross Income → table → Less Residential V/C Loss @ X% → $
         Verify that PSF value is calculated by the formula: Total / GBA
         Verify that Per Unit value is calculated by the formula: Total / # of Residential Units`);
-        NavigationSection.navigateToProForma(false);
-        Income.ProForma.verifyResidentialVCLossLabel(testData.resVacancyCollectionLoss)
-            .verifyResidentialVCLossTotal(testData.resVCLossTotal)
-            .verifyResidentialVCLossPerSF(testData.grossBuildingArea)
-            .verifyResidentialVCLossPerUnit(testData.numberOfUnits);
+        NavigationSection.navigateToProForma();
+        Income.ProForma.verifyResidentialVCLossLabel(testData.residential, testData.resVacancyCollectionLoss)
+            .verifyResidentialVCLossTotal(testData.residential, testData.resVCLossTotal)
+            .verifyResidentialVCLossPerSF(testData.residential, testData.grossBuildingArea)
+            .verifyResidentialVCLossPerUnit(testData.residential, testData.numberOfUnits);
         deleteReport(testData.reportCreationData.reportNumber);
     });
 });

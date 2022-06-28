@@ -4,7 +4,9 @@ import NavigationSection from "../../../../actions/base/navigationSection.action
 import Sales from "../../../../actions/sales/sales.manager";
 import Property from "../../../../actions/property/property.manager";
 
-describe("Gross Building Area value pulled from Property -> Summary -> As Is Building Description", () => {
+describe("Gross Building Area value pulled from Property -> Summary -> As Is Building Description", 
+    { tags: [ "@sales", "@value_conclusion" ] }, () => {
+        
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
     });
@@ -13,7 +15,7 @@ describe("Gross Building Area value pulled from Property -> Summary -> As Is Bui
         NavigationSection.navigateToSalesValueConclusion();
         Sales.ValueConclusion.verifyGrossBuildingAreaAmount(testData.gbaToBe);
         NavigationSection.navigateToPropertySummary()
-            .closeSatisfactionSurvey();
+            .closeUserSurveyIfExist();
         Property.Summary.enterGrossBuildingArea(testData.newGba);
         NavigationSection.navigateToSalesValueConclusion();
         Sales.ValueConclusion.verifyGrossBuildingAreaAmount(testData.newGba);

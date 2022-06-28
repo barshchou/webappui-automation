@@ -4,7 +4,9 @@ import { Property } from "../../../../actions";
 import { Sales } from "../../../../actions";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 
-describe("The amount column of the # of Units shows the correct number of units", () => {
+describe("The amount column of the # of Units shows the correct number of units", 
+    { tags: [ "@sales", "@value_conclusion" ] }, () => {
+        
     before("Login action", () => {
         createReport(testData.reportCreationData);
     });
@@ -15,7 +17,7 @@ describe("The amount column of the # of Units shows the correct number of units"
         Property._Summary.enterNumberOfResUnits(testData.data.numberOfResUnits);
         Property._Summary.enterNumberOfCommercialUnits(testData.data.numberOfCommercialUnits);
         cy.stepInfo("2. Select the Per Total Units radio button in the Sale Comparables Setup and save it.");
-        _NavigationSection.clickSalesButton().openAdjustCompsInSales();
+        _NavigationSection.clickSalesButton().navigateToAdjustComps();
         Sales._AdjustComps.checkCalculationUnitsRadio(testData.data.calculationUnits);
         cy.stepInfo("3. Proceed to the Sales > Value Conclusion >  Sales Value Conclusion Table and verify the value column is labeled # of Units.");
         _NavigationSection.navigateToSalesValueConclusion();

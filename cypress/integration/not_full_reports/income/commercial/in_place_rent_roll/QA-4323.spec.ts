@@ -3,7 +3,9 @@ import NavigationSection from "../../../../../actions/base/navigationSection.act
 import Income from "../../../../../actions/income/income.manager";
 import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
 
-describe("Verify the Rent Basis buttons", () => {
+describe("Verify the Rent Basis buttons", 
+    { tags:[ "@income", "@commercial", "@in_place_rent_roll" ] }, () => {
+        
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
     });

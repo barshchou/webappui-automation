@@ -5,7 +5,9 @@ import Report from "../../../../actions/report/report.manager";
 
 const reportCreationData = ReportDataCreator.getReportData("4651");
 
-describe("Verify the Back button functionality on the Client page", () => {
+describe("Verify the Back button functionality on the Client page", 
+    { tags: [ "@report", "@client" ] }, () => {
+        
     before("Login, create report", () => {
         createReport(reportCreationData);
     });

@@ -1,12 +1,12 @@
 import summaryPage from "../../pages/property/summary.page";
-import BaseActions from "../base/base.actions";
 import {
     cutDecimalPartToNumberOfDigits,
     isHasDecimalPartMoreNumberOfDigits,
     numberWithCommas
 } from "../../../utils/numbers.utils";
+import BaseActionsExt from "../base/base.actions.ext";
 
-class SummaryActions extends BaseActions {
+class SummaryActions extends BaseActionsExt<typeof summaryPage> {
 
     verifyThatPageIsOpened(): this {
         summaryPage.headerSection.should("be.visible");
@@ -18,13 +18,23 @@ class SummaryActions extends BaseActions {
         return this;
     }
 
-    enterNumberOfResUnits(number: number): this {
+    enterNumberOfResUnits(number: number, notInclude?: string[]): this {
         summaryPage.numberOfResUnitsInput.clear().type(`${number}`).should("have.value", number);
+        if (notInclude) {
+            notInclude.forEach(val => {
+                summaryPage.numberOfResUnitsInput.should("not.include.value", val);
+            });
+        }
         return this;
     }
 
-    enterNumberOfCommercialUnits(number = 1): this {
+    enterNumberOfCommercialUnits(number = 1,  notInclude?: string[]): this {
         summaryPage.numberOfCommercialUnitsInput.clear().type(`${number}`).should("have.value", number);
+        if (notInclude) {
+            notInclude.forEach(val => {
+                summaryPage.numberOfCommercialUnitsInput.should("not.include.value", val);
+            });
+        }
         return this;
     }
 
@@ -58,11 +68,6 @@ class SummaryActions extends BaseActions {
         return this;
     }
 
-    /**
-     * @param {Readonly<{streetAddress: string, censusTract: string, streetName: string, buildingDescriptor: string,
-     * identifierType: string, identifier: string}>} siteDetails
-     * @returns {SummaryActions}
-     */
     verifySiteDetails(siteDetails: Readonly<{
             streetAddress: string; censusTract: string; streetName: string; buildingDescriptor: string;
             identifierType: string; identifier: string;
@@ -81,7 +86,12 @@ class SummaryActions extends BaseActions {
         return this;
     }
 
-    enterSiteArea(area: number | string): SummaryActions {
+    enterBuildingName(buildingName: string): SummaryActions {
+        summaryPage.buildingNameInput.clear().type(`${buildingName}`).should("have.value", buildingName);
+        return this;
+    }
+
+    enterSiteArea(area: number): SummaryActions {
         if (isHasDecimalPartMoreNumberOfDigits(area, 4)) {
             area = cutDecimalPartToNumberOfDigits(area, 4);
         }
@@ -96,30 +106,17 @@ class SummaryActions extends BaseActions {
         return this;
     }
 
-    /**
-     * @param {string | number} gbaToBe
-     * @returns {SummaryActions}
-     */
     verifyGrossBuildingArea(gbaToBe: string | number): this {
         const valueToBe = typeof gbaToBe === "string" ? gbaToBe : numberWithCommas(gbaToBe);
         summaryPage.grossBuildingArea.should("have.value", valueToBe);
         return this;
     }
 
-    /**
-     *
-     * @param {number | string} number
-     * @returns {SummaryActions}
-     */
     enterFloorsNumber(number: number): this {
-        summaryPage.floorsNumber.clear().type(number.toString()).should("have.value", number);
+        summaryPage.floorsNumber.clear().type(`${number}`).should("have.value", number);
         return this;
     }
 
-    /**
-     *
-     * @returns {SummaryActions}
-     */
     clickWalkUpTypeButtons(): this {
         summaryPage.walkUpTypeButtons.each(button => {
             cy.wrap(button).click();
@@ -127,45 +124,30 @@ class SummaryActions extends BaseActions {
         return this;
     }
 
-    /**
-     *
-     * @param {number | string} area
-     * @returns {SummaryActions}
-     */
     enterCurrentGrossBuildingArea(area: number): this {
         if (isHasDecimalPartMoreNumberOfDigits(area, 2)) {
             area = cutDecimalPartToNumberOfDigits(area, 2);
         }
         const textToBe = numberWithCommas(area);
-        summaryPage.currentGrossBuildingArea.clear().type(area.toString()).should("have.value", textToBe);
+        summaryPage.currentGrossBuildingArea.clear().type(`${area}`).should("have.value", textToBe);
         return this;
     }
 
-    /**
-     *
-     * @param {number | string} number
-     * @returns {SummaryActions}
-     */
     enterCurrentNumberOfResUnits(number: number): this {
-        summaryPage.currentNumberOfResUnits.clear().type(number.toString()).should("have.value", number);
+        summaryPage.currentNumberOfResUnits.clear().type(`${number}`).should("have.value", number);
         return this;
     }
 
-    /**
-     *
-     * @param {number | string} number
-     * @returns {SummaryActions}
-     */
+    enterCurrentNumberOfCommercialUnits(number: number): this {
+        summaryPage.currentNumberOfCommercialUnitsInput.clear().type(`${number}`).should("have.value", number);
+        return this;
+    }
+
     enterCurrentFloorsNumber(number: number): this {
-        summaryPage.currentFloorsNumber.clear().type(number.toString()).should("have.value", number);
+        summaryPage.currentFloorsNumber.clear().type(`${number}`).should("have.value", number);
         return this;
     }
 
-    /**
-     *
-     * @param {string} newText
-     * @returns {SummaryActions}
-     */
     editAsCompleteExport(newText: string): this {
         summaryPage.editCommentaryButtons.first().click();
         summaryPage.textBox.clear().type(newText);
@@ -174,10 +156,6 @@ class SummaryActions extends BaseActions {
         return this;
     }
 
-    /**
-     * @param {Readonly<{grossArea: number, numberOfUnits: number, floorsNumber: number}>} description
-     * @returns {SummaryActions}
-     */
     fillAsCompleteBuildingDescription(description: Readonly<{ grossArea: number; numberOfUnits: number; floorsNumber: number; }>): this {
         this.enterGrossBuildingArea(description.grossArea)
             .enterNumberOfResUnits(description.numberOfUnits)
@@ -185,11 +163,6 @@ class SummaryActions extends BaseActions {
         return this;
     }
 
-    /**
-     *
-     * @param {Readonly<{grossArea: number, numberOfUnits: number, floorsNumber: number}>} description
-     * @returns {SummaryActions}
-     */
     fillCurrentBuildDescription(description: Readonly<{ grossArea: number; numberOfUnits: number; floorsNumber: number; }>): this {
         this.enterCurrentGrossBuildingArea(description.grossArea)
             .enterCurrentNumberOfResUnits(description.numberOfUnits)
@@ -198,4 +171,4 @@ class SummaryActions extends BaseActions {
     }
 }
 
-export default new SummaryActions();
+export default new SummaryActions(summaryPage);

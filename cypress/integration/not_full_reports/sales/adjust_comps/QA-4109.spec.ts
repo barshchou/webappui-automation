@@ -3,7 +3,8 @@ import Sales from "../../../../actions/sales/sales.manager";
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 
-describe("Adjusted Price per Residential Unit in Sales Adjustment Grid is calculated with correct formula", () => {
+describe("Adjusted Price per Residential Unit in Sales Adjustment Grid is calculated with correct formula", 
+    { tags: [ "@adjust_comps", "@sales" ] }, () => {
 
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
@@ -12,7 +13,7 @@ describe("Adjusted Price per Residential Unit in Sales Adjustment Grid is calcul
     it("Test body", () => {
         NavigationSection.navigateToFindComps();
         Sales.FindComps.selectCompFromMapByAddress(testData.comparable.address);
-        NavigationSection.openAdjustCompsInSales();
+        NavigationSection.navigateToAdjustComps();
         Sales.AdjustComps.checkCalculationUnitsRadio(testData.calculationUnits)
             .enterPropertyRightsByColumn(testData.comparable.propertyRights)
             .verifyTrendedPriceByColumn(testData.comparable.trendedPrice);

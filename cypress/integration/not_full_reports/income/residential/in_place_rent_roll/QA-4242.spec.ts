@@ -3,7 +3,9 @@ import { createReport, deleteReport } from "../../../../../actions/base/baseTest
 import { _NavigationSection } from "../../../../../actions/base";
 import { Income, Property } from "../../../../../actions";
 
-describe("In-Place Rent Roll table tests", () => {
+describe("In-Place Rent Roll table tests", 
+    { tags:[ "@income", "@residential", "@in_place_rent_roll" ] }, () => {
+        
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
     });

@@ -1,5 +1,7 @@
 import { getTodayDateString, getYearFromDate } from "../../../../utils/date.utils";
 import Enums from "../../../enums/enums";
+import { BoweryAutomation } from "../../../types/boweryAutomation.type";
+import { BoweryReports } from "../../../types/boweryReports.type";
 
 const reportCreationFixture = (): BoweryAutomation.ReportCreationData => {
     return {
@@ -9,8 +11,8 @@ const reportCreationFixture = (): BoweryAutomation.ReportCreationData => {
         identifier: "20-36-420-020-0000",
         reportNumber: "Full Report Test Automation",
         isSalesForcePull: false,
-        templateValue: Enums.TEMPLATE_TYPE.NOT_FREDDIE_MAC,
-        incomeValue: Enums.INCOME_TYPE.RESIDENTIAL,
+        templateValue: Enums.TEMPLATE_TYPE.notFreddieMac,
+        incomeValue: Enums.INCOME_TYPE.residential,
         conclusionValue: Enums.VALUE_CONCLUSION_TYPE.AS_COMPLETE
     };
 };
@@ -91,9 +93,8 @@ const marketResearchFixture = () => {
         macroMarket: "IL-Chicago",
         submarket: "IL-South Chicago",
         dateOfValuation: keyInfoEngagementFixture().dateOfValuation.date,
-        marketYear: getTodayDateString(),
-        quarter: "Q4",
-        multifamilySubmarketDocument: "2021 Q4 IL - South Chicago - Multifamily Submarket_FINAL"
+        marketDate: getTodayDateString(),
+        quarter: "Q4"
     };
 };
 
@@ -511,12 +512,12 @@ const rentComparablesFixture = () => {
 
 const resRentReconcilFixture = () => {
     return {
-        reconcilIntroComm: "Important considerations in determining potential rental value include location, access " +
-            "to transportation and neighborhood amenities, and building design and condition. The subject is in a " +
-            "desirable section of Lakeview, a neighborhood that has seen significant investment in the past 5 to 10 " +
+        reconcilIntroComm: "Important considerations in determining potential rental value include location, access to " +
+            "transportation and neighborhood amenities, and building design and condition. The subject is in a primarily" +
+            " residential section of Lakeview, a neighborhood that has seen significant investment in the past 5 to 10 " +
             "years. The site has good access to  transportation, and the block is appealing. The comparables are similar " +
-            "in their physical and locational appeal and are good indicators of value. Thus, our analysis of the forecast" +
-            " of market rents is presented:",
+            "in their physical and locational appeal and are good indicators of value. Thus, our analysis of the forecast " +
+            "of market rents is presented:",
         marketConclusion: 1100,
         marketBreakdown: "all market oriented",
         reconcilCommentary: "The comparable two-bedroom units range from $1,000 to $1,200 per month with an average of " +
@@ -556,7 +557,7 @@ const expenseStructureFixture = () => {
 
 const parkingFixture = () => {
     return {
-        commentary: "The subject property has 6 parking spaces available."
+        commentary: "The subject property has 6 parking spaces available. Parking is a free amenity."
     };
 };
 

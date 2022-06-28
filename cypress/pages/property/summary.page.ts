@@ -7,7 +7,19 @@ class PropertySummaryPage extends BasePage {
 
     get numberOfCommercialUnitsInput() {return cy.get("*[name=commercialUnitCount]");}
 
+    get currentNumberOfCommercialUnitsInput() {return cy.get("*[name='current.commercialUnitCount']");}
+
+    get buildingNameInput() { return cy.get(`[name='buildingName']`); } 
+
+    get siteAreaInput() { return cy.get(`[name='siteArea']`); }
+
+    resUnitsInputValidationText(text: string) {return cy.xpath(`//*[contains(@name, 'residentialUnitCount')]//following::*[contains(text(), '${text}')][1]`);}
+
+    commercialUnitsInputValidationText(text: string) {return cy.xpath(`//*[contains(@name, 'commercialUnitCount')]//following::*[contains(text(), '${text}')][1]`);}
+
     get censusTractField() {return cy.get("*[name=censusTract]");}
+
+    censusTractFieldValidationText(text: string) {return cy.xpath(`//*[contains(@name, 'censusTract')]//following::*[contains(text(), '${text}')][1]`);}
 
     get buildingDescriptor() {return cy.get("*[name=buildingDescriptor]");}
 
@@ -24,13 +36,13 @@ class PropertySummaryPage extends BasePage {
     get siteArea() {return cy.get("*[name=siteArea]");}
 
     get grossBuildingArea() {return cy.get("*[name=grossBuildingArea]");}
-
+    
     get floorsNumber() {return cy.get("*[name=floors]");}
 
     get walkUpTypeButtons() {return cy.get("*[data-qa=walk-up-btn]");}
 
     get currentGrossBuildingArea() {return cy.get("*[name='current.grossBuildingArea']");}
-
+    
     get currentNumberOfResUnits() {return cy.get("*[name='current.residentialUnitCount']");}
 
     get currentFloorsNumber() {return cy.get("*[name='current.floors']");}

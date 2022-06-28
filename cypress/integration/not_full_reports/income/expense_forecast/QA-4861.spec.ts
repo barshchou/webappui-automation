@@ -4,7 +4,9 @@ import NavigationSection from "../../../../actions/base/navigationSection.action
 import Property from "../../../../actions/property/property.manager";
 import Income from "../../../../actions/income/income.manager";
 
-describe("Per SF Appraiser's Forecast value for Insurance is correctly converted to Per Unit value", () => {
+describe("Per SF Appraiser's Forecast value for Insurance is correctly converted to Per Unit value", 
+    { tags: [ "@income", "@expense_forecast" ] }, () => {
+        
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
     });

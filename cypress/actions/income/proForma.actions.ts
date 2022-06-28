@@ -4,6 +4,9 @@ import {
     numberWithCommas
 } from "../../../utils/numbers.utils";
 import BaseActionsExt from "../base/base.actions.ext";
+import { uppercaseFirstLetterEachWord } from "../../../utils/string.utils";
+import { BoweryReports } from "../../types/boweryReports.type";
+import enums from "../../enums/enums";
 
 class ProFormaActions extends BaseActionsExt<typeof proFormaPage> {
 
@@ -35,30 +38,30 @@ class ProFormaActions extends BaseActionsExt<typeof proFormaPage> {
         return this;
     }
 
-    verifyResidentialVCLossLabel(vcLossValue: number): this {
-        proFormaPage.residentialVCLossLabelCell.should("contain.text", `${vcLossValue.toFixed(2)}%`);
+    verifyResidentialVCLossLabel(categoryName: string, vcLossValue: number): this {
+        proFormaPage.residentialVCLossLabelCell(categoryName).should("contain.text", `${vcLossValue.toFixed(2)}%`);
         return this;
     }
 
-    verifyResidentialVCLossTotal(totalToBe: string): this {
-        proFormaPage.residentialVCLossTotal.should("have.text", totalToBe);
+    verifyResidentialVCLossTotal(categoryName: string, totalToBe: string): this {
+        proFormaPage.residentialVCLossTotal(categoryName).should("have.text", totalToBe);
         return this;
     }
 
-    verifyResidentialVCLossPerSF(grossBuildingArea: number): this {
-        proFormaPage.residentialVCLossTotal.invoke("text").then(totalText => {
+    verifyResidentialVCLossPerSF(categoryName: string, grossBuildingArea: number): this {
+        proFormaPage.residentialVCLossTotal(categoryName).invoke("text").then(totalText => {
             const totalNumber = getNumberFromMinusDollarNumberWithCommas(totalText);
             const perSFTextToBe = `-$${numberWithCommas((totalNumber / grossBuildingArea).toFixed(2))}`;
-            proFormaPage.residentialVCLossPerSF.should("have.text", perSFTextToBe);
+            proFormaPage.residentialVCLossPerSF(categoryName).should("have.text", perSFTextToBe);
         });
         return this;
     }
 
-    verifyResidentialVCLossPerUnit(numberOfUnits: number): this {
-        proFormaPage.residentialVCLossTotal.invoke("text").then(totalText => {
+    verifyResidentialVCLossPerUnit(categoryName: string, numberOfUnits: number): this {
+        proFormaPage.residentialVCLossTotal(categoryName).invoke("text").then(totalText => {
             const totalNumber = getNumberFromMinusDollarNumberWithCommas(totalText);
-            const perUnitTextToBe = `-$${numberWithCommas(totalNumber / numberOfUnits)}`;
-            proFormaPage.residentialVCLossPerUnit.should("have.text", perUnitTextToBe);
+            const perUnitTextToBe = `-$${numberWithCommas(Math.round(totalNumber / numberOfUnits))}`;
+            proFormaPage.residentialVCLossPerUnit(categoryName).should("have.text", perUnitTextToBe);
         });
         return this;
     }
@@ -90,6 +93,34 @@ class ProFormaActions extends BaseActionsExt<typeof proFormaPage> {
         return this;
     }
     
+    verifyCustomCategoryName(categoryName: string): ProFormaActions {
+        let textToBe = uppercaseFirstLetterEachWord(categoryName).toString();
+        proFormaPage.getCustomCategoryIncomeCell(categoryName).first().invoke('text').should('deep.include', textToBe);
+        return this;
+    }
+
+    verifyExpensesCombined(expenseMode: string): ProFormaActions {
+        switch (expenseMode) {
+            case "brokenOut":
+                proFormaPage.getCategoryElementByType(enums.PRO_FORMA_TYPES.electricity, "label").should('be.visible');
+                proFormaPage.getCategoryElementByType(enums.PRO_FORMA_TYPES.fuel, "label").should('be.visible');
+                proFormaPage.getCategoryElementByType(enums.PRO_FORMA_TYPES.waterAndSewer, "label").should('be.visible');
+                break;
+            case "combinedElectricityAndFuel":
+                proFormaPage.getCategoryElementByType(enums.PRO_FORMA_TYPES.fuel, "label").should('not.exist');
+                proFormaPage.getCategoryElementByType(enums.PRO_FORMA_TYPES.electricity, "label").should('not.exist');
+                proFormaPage.getCategoryElementByType(enums.PRO_FORMA_TYPES.waterAndSewer, "label").should('be.visible');
+                proFormaPage.getCategoryElementByType(enums.PRO_FORMA_TYPES.utilities, "label").should('be.visible');
+                break;
+            case "combinedAll":
+                proFormaPage.getCategoryElementByType(enums.PRO_FORMA_TYPES.fuel, "label").should('not.exist');
+                proFormaPage.getCategoryElementByType(enums.PRO_FORMA_TYPES.electricity, "label").should('not.exist');
+                proFormaPage.getCategoryElementByType(enums.PRO_FORMA_TYPES.waterAndSewer, "label").should('not.exist');
+                proFormaPage.getCategoryElementByType(enums.PRO_FORMA_TYPES.utilities, "label").should('be.visible');
+        }
+
+        return this;
+    }
 }
 
 export default new ProFormaActions(proFormaPage);

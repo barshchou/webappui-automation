@@ -3,7 +3,9 @@ import NavigationSection from "../../../../../actions/base/navigationSection.act
 import Income from "../../../../../actions/income/income.manager";
 import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
 
-describe("Verify the Tenant column in the grid", () => {
+describe("Verify the Tenant column in the grid", 
+    { tags:[ "@income", "@commercial", "@in_place_rent_roll" ] }, () => {
+        
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
     });
@@ -12,9 +14,9 @@ describe("Verify the Tenant column in the grid", () => {
         NavigationSection.navigateToCommercialInPlaceRentRoll();
         Income.Commercial.InPlaceRentRoll.chooseLeaseStatusByRowNumber(testData.leaseOccupied)
             .enterTenantNameByRowNumber(testData.tenantName)
-            .verifyTenantNameByRowNumber(testData.leaseOccupied, testData.tenantName)
+            .verifyTenantNameByRow(testData.leaseOccupied, testData.tenantName)
             .chooseLeaseStatusByRowNumber(testData.leaseVacant)
-            .verifyTenantNameByRowNumber(testData.leaseVacant);
+            .verifyTenantNameByRow(testData.leaseVacant);
         deleteReport(testData.reportCreationData.reportNumber);
     });
 });

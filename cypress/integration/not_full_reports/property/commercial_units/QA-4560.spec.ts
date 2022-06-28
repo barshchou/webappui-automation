@@ -3,9 +3,8 @@ import { Base, Property } from "../../../../actions";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 
-
-describe("Verify the functionality of the Location radio button", () => {
-
+describe("Verify the functionality of the Location radio button", 
+    { tags:[ "@property", "@commercial_units" ] }, () => {
 
     before("Login, create report", () => {
 
@@ -14,7 +13,6 @@ describe("Verify the functionality of the Location radio button", () => {
         Base._NavigationSection.navigateToPropertySummary();
         Property._Summary.enterNumberOfCommercialUnits(testData.numberOfCommercialUnits);
     });
-
 
     it("Test body", () => {
 

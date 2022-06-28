@@ -4,7 +4,9 @@ import Sales from "../../../../actions/sales/sales.manager";
 import { Final } from "../../../../actions";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 
-describe("Save and Save & Continue buttons tests", () => {
+describe("Save and Save & Continue buttons tests", 
+    { tags: [ "@sales", "@value_conclusion" ] }, () => {
+        
     beforeEach("Login, open sales value conclusion and make changes", () => {
         createReport(testData.reportCreationData);
         NavigationSection.navigateToSalesValueConclusion();
@@ -22,7 +24,7 @@ describe("Save and Save & Continue buttons tests", () => {
 
     it("QA-4346 Save & Continue button test", () => {
         Sales.ValueConclusion.clickSaveContinueButton();
-        Final._FinalValuesReconciliation.closeSatisfactionSurvey()
+        Final._FinalValuesReconciliation.closeUserSurveyIfExist()
             .goBackWithSave();
         Sales.ValueConclusion.verifyMatchIncomeApproachDeductionsChecked()
             .verifySaleValueConclusion(testData.saleValueConclusion);

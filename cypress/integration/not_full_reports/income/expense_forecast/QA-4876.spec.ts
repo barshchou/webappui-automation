@@ -3,16 +3,16 @@ import { createReport, deleteReport } from "../../../../actions/base/baseTest.ac
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Property from "../../../../actions/property/property.manager";
 import Income from "../../../../actions/income/income.manager";
-import tableExpenseHistoryCellNames from "../../../../../cypress/enums/expenseHistoryTableRows.enum";
-import { Tag } from "../../../../utils/tags.utils";
+import tableExpenseHistoryCellNames from "../../../../../cypress/enums/expense/expenseHistoryTableRows.enum";
 
 describe("Historical expense Electricity Per SF is correctly calculated and displayed",
-    { tags: [ Tag.snapshot_tests, Tag.expense_forecast, Tag.income ] }, () => {
+        { tags: [ "@snapshot_tests", "@expense_forecast", "@income" ] }, () => {
+
         before("Login, create report", () => {
             createReport(testData.reportCreationData);
         });
 
-        it("Test body", { tags: '@snapshot_tests' }, () => {
+        it("Test body", () => {
             cy.stepInfo("1. Navigate to Property -> Summary and enter gross building area");
             NavigationSection.navigateToPropertySummary();
             Property.Summary.enterGrossBuildingArea(testData.buildingDescription.grossArea)

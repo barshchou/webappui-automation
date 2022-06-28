@@ -4,8 +4,9 @@ import NavigationSection from "../../../../../actions/base/navigationSection.act
 import Property from "../../../../../actions/property/property.manager";
 import Income from "../../../../../actions/income/income.manager";
 
-describe(`Verify that if the Outdoor Space value is selected, the proper group can be created on the Unit Groups 
-                and Rent Comps pages`, () => {
+describe(`Verify that if the Outdoor Space value is selected, the proper 
+    group can be created on the Unit Groups and Rent Comps pages`, 
+    { tags:[ "@income", "@residential", "@in_place_rent_roll" ] }, () => {
 
     before("Login, create report", () => {
         createReport(testData.reportCreationData);

@@ -3,7 +3,8 @@ import { createReport, deleteReport } from "../../../../actions/base/baseTest.ac
 import { _NavigationSection } from "../../../../actions/base";
 import { Property } from "../../../../actions";
 
-describe("Verify the functionality of the Grade checkbox", () => {
+describe("Verify the functionality of the Grade checkbox", 
+    { tags: [ "@property", "@commercial_units" ] }, () => {
 
     before("Login, create report", () => {
         createReport(testData.reportCreationData);

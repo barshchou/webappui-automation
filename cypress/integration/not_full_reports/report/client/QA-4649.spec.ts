@@ -4,7 +4,9 @@ import NavigationSection from "../../../../actions/base/navigationSection.action
 import Report from "../../../../actions/report/report.manager";
 import Summary from "../../../../actions/property/summary.actions";
 
-describe("Verify the Save & Continue button functionality on the Report > Client page", () => {
+describe("Verify the Save & Continue button functionality on the Report > Client page", 
+    { tags: [ "@report", "@client" ] }, () => {
+        
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
     });

@@ -4,7 +4,9 @@ import NavigationSection from "../../../../actions/base/navigationSection.action
 import { Report, PreviewEdit, Base } from "../../../../actions";
 import { replaceEntersWithSpaces } from "../../../../../utils/string.utils";
 
-describe("Verify the Appraiser Commentary field", () => {
+describe("Verify the Appraiser Commentary field", 
+    { tags: [ "@report", "@client" ] }, () => {
+        
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
     });

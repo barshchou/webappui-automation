@@ -7,7 +7,9 @@ import Property from "../../../../../actions/property/property.manager";
 
 const reportCreationData = ReportDataCreator.getReportData("4219");
 
-describe("Verify the # column in the grid", () => {
+describe("Verify the # column in the grid", 
+    { tags:[ "@income", "@residential", "@in_place_rent_roll" ] }, () => {
+        
     before("Login, create report", () => {
         createReport(reportCreationData);
     });

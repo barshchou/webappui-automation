@@ -3,11 +3,10 @@
 import testData from "../../../../../fixtures/not_full_reports/income/commercial/stabilized_rent_roll/QA-4581.fixture";
 import { Base, Property, Income } from "../../../../../actions";
 import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
-import { Tag } from "../../../../../utils/tags.utils";
-
 
 describe("Verify the Save & Continue button functionality on the Stabilized Rent Roll page:", 
-    { tags: [ Tag.income, Tag.commercial, Tag.stabilized_rent_roll ] }, () => {
+    { tags: [ "@income", "@commercial", "@stabilized_rent_roll" ] }, () => {
+        
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
     });
@@ -29,14 +28,14 @@ describe("Verify the Save & Continue button functionality on the Stabilized Rent
 
         cy.stepInfo(` 3. Fill in the editable fields with values or/and check check-boxes or/and click the radio button and click on the Save & Continue button. `);
         Income._CommercialManager.StabilizedRentRoll.verifyIsInspectedCheckedAll(testData.isInspected)
-            .enterListPerSF(testData.leaseStatuses, testData.rentToBe)
+            .enterListPerSFAnnually(testData.leaseStatuses, testData.rentToBe)
             .clickSaveContinueButton();
 
         cy.stepInfo(` 4. Verify that the changes are saved and the user is redirected to the next page (Income > Miscellaneous > Laundry). `);
         Income._MiscellaneousManager.Laundry.verifyThatPageIsOpened();
         Base._NavigationSection.clickIncomeApproachButton()
             .clickCommercialArrow().clickCommercialStabRentRollButton();
-        Income._CommercialManager.StabilizedRentRoll.verifyAnnuallyRentPsfByRowNumber(testData.leaseStatuses, testData.rentToBe);
+        Income._CommercialManager.StabilizedRentRoll.verifyListRentPsfAnnually(testData.leaseStatuses, testData.rentToBe);
 
         cy.stepInfo(` 4. Delete report`);
         deleteReport(testData.reportCreationData.reportNumber);

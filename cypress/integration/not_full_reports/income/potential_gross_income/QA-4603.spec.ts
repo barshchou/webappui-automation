@@ -4,7 +4,9 @@ import NavigationSection from "../../../../actions/base/navigationSection.action
 import Property from "../../../../actions/property/property.manager";
 import Income from "../../../../actions/income/income.manager";
 
-describe("Commercial V/C Loss Discussion Generated Commentary", () => {
+describe("Commercial V/C Loss Discussion Generated Commentary", 
+    { tags:[ "@income", "@potential_gross_income" ] }, () => {
+        
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
     });

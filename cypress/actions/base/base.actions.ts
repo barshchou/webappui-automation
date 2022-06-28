@@ -4,7 +4,6 @@
 
 
 import { Options } from "cypress-image-snapshot";
-import { getEnvUrl } from "../../../utils/env.utils";
 
 export default class BaseActions {
 
@@ -14,6 +13,7 @@ export default class BaseActions {
 
     clickYesButton() {
         cy.get("*[name='form-confirm-submit-btn']").click();
+        this.verifyProgressBarNotExist();
         return this;
     }
 
@@ -23,7 +23,7 @@ export default class BaseActions {
     }
 
     returnToHomePage() {
-        cy.visit(`${getEnvUrl()}/reports`);
+        cy.visit(`/reports`);
     }
 
     goBackWithSave() {
@@ -45,7 +45,7 @@ export default class BaseActions {
         return this;
     }
 
-    clickSubmitBtn(){
+    clickSubmitBtn() {
         cy.get('[type="submit"][data-qa="save-btn"]').click();
         return this;
     }
@@ -59,13 +59,13 @@ export default class BaseActions {
         return this;
     }
 
-    closeSatisfactionSurvey() {
-        cy.get("[aria-label=Close]").click();
+    clickBackButton() {
+        cy.xpath("//button[.='Back']").click();
         return this;
     }
 
-    clickBackButton() {
-        cy.xpath("//button[.='BACK']").click();
+    verifyContainsValue(expectedValue: string) {
+        cy.contains(expectedValue).should("be.visible");
         return this;
     }
 
@@ -83,8 +83,29 @@ export default class BaseActions {
         } 
     }
 
+    /**
+     * Emulates paste of text by invoking function `val` of JQuery element.
+     * Does not related to functionality of Clipboard API of browser.
+     */
+    emulateCopyPaste(elem: Cypress.Chainable<JQuery<HTMLElement>>, text: string): this {
+        elem.click().invoke("val", text);
+        return this;
+    }
+
     pause(){
         cy.pause();
+        return this;
+    }
+
+    closeUserSurveyIfExist() {
+        cy.get("body").then($body => {
+            if ($body.find('form h6 [aria-label="Close"]').length > 0) {   
+                cy.get('form h6 [aria-label="Close"]').click();
+            } 
+            else {
+                return;
+            }
+        });
         return this;
     }
 }

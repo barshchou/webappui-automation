@@ -3,10 +3,9 @@ import { Base, Property } from "../../../../actions";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 
-
-describe("Verify the functionality of the State radio button", () => {
-
-
+describe("Verify the functionality of the State radio button", 
+    { tags:[ "@property", "@commercial_units" ] }, () => {
+    
     before("Login, create report", () => {
 
         cy.stepInfo(` 1. Report creation and several commercial units addition`);
@@ -14,7 +13,6 @@ describe("Verify the functionality of the State radio button", () => {
         Base._NavigationSection.navigateToPropertySummary();
         Property._Summary.enterNumberOfCommercialUnits(testData.numberOfCommercialUnits);
     });
-
 
     it("Test body", () => {
 

@@ -1,4 +1,3 @@
-import BaseActions from "../../../base/base.actions";
 import rentCompsPage from "../../../../pages/income/residential/rent_comps/rentComps.page";
 import { getTodayDateString, getTodayDay, isDateHasCorrectFormat } from "../../../../../utils/date.utils";
 import {
@@ -6,25 +5,17 @@ import {
     isHasDecimalPartMoreNumberOfDigits,
     numberWithCommas
 } from "../../../../../utils/numbers.utils";
+import BaseActionsExt from "../../../base/base.actions.ext";
 
-class RentCompsActions extends BaseActions {
+class RentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
 
-    /**
-     * @param {string} conclusionType
-     * @returns {RentCompsActions}
-     */
-    verifyGCText(conclusionType) {
+    verifyGCText(conclusionType: string): RentCompsActions {
         rentCompsPage.generatedCommentary.should("exist")
-            .should("contain.text", this.getCommentary(conclusionType));
+            .should("contain.text", RentCompsActions.getCommentary(conclusionType));
         return this;
     }
 
-    /**
-     * @private
-     * @param {string} conclusionType
-     * @returns {string}
-     */
-    getCommentary(conclusionType) {
+    private static getCommentary(conclusionType: string): string {
         if (conclusionType === "AS_IS") {
             return "In order to gauge the reasonableness of the contract rents, " +
                 "we have examined the following rental activity in the submarket:";
@@ -34,7 +25,7 @@ class RentCompsActions extends BaseActions {
         }
     }
 
-    verifyUnitSwitchBackground(isChosen = true) {
+    verifyUnitSwitchBackground(isChosen = true): RentCompsActions {
         if (isChosen) {
             rentCompsPage.unitSwitchButton.should("have.css", "background-color", "rgb(66, 96, 211)");
         } else {
@@ -43,7 +34,7 @@ class RentCompsActions extends BaseActions {
         return this;
     }
 
-    verifyBuildingSwitchBackground(isChosen = true) {
+    verifyBuildingSwitchBackground(isChosen = true): RentCompsActions {
         if (isChosen) {
             rentCompsPage.buildingSwitchButton.should("have.css", "background-color", "rgb(66, 96, 211)");
         } else {
@@ -52,96 +43,86 @@ class RentCompsActions extends BaseActions {
         return this;
     }
 
-    clickUnitSwitchButton() {
+    clickUnitSwitchButton(): RentCompsActions {
         this.verifyUnitSwitchBackground(false);
         rentCompsPage.unitSwitchButton.should("be.enabled").click();
         return this;
     }
 
-    clickBuildingSwitchButton() {
+    clickBuildingSwitchButton(): RentCompsActions {
         this.verifyBuildingSwitchBackground(false);
         rentCompsPage.buildingSwitchButton.should("be.enabled").click();
         return this;
     }
 
-    verifyBuildingSelected() {
+    verifyBuildingSelected(): RentCompsActions {
         rentCompsPage.buildingSwitchButton.should("have.attr", "aria-pressed", "true");
         this.verifyBuildingSwitchBackground();
         return this;
     }
 
-    verifyUnitSelected() {
+    verifyUnitSelected(): RentCompsActions {
         rentCompsPage.unitSwitchButton.should("have.attr", "aria-pressed", "true");
         this.verifyUnitSwitchBackground();
         return this;
     }
 
-    clickSwitchConfirmButton(basis) {
+    clickSwitchConfirmButton(basis: string): RentCompsActions {
         rentCompsPage.switchSearchConfirmButton.should("contain.text", "Search")
             .and("contain.text", `Per ${basis}`);
         rentCompsPage.switchSearchConfirmButton.click();
         return this;
     }
 
-    clickUnitTypesArrowButton() {
+    clickUnitTypesArrowButton(): RentCompsActions {
         rentCompsPage.unitTypesArrowButton.scrollIntoView().should("be.visible").click();
         return this;
     }
 
-    /**
-     * @param {string} attribute
-     * @returns {RentCompsActions}
-     */
-    checkCheckboxByQaAttr(attribute) {
-        rentCompsPage.getCheckboxByDataQaAttr(attribute)
-            .should("have.value", "false").check({ force: true }).should("have.value", "true");
+    changeStateOfCheckboxByQaAttr(attribute: string | number, isToCheck = true): RentCompsActions {
+        if(isToCheck) {
+            rentCompsPage.getCheckboxByDataQaAttr(attribute)
+                .should("have.value", "false").check({ force: true }).should("have.value", "true");
+        } else {
+            rentCompsPage.getCheckboxByDataQaAttr(attribute)
+                .should("have.value", "true").uncheck({ force: true }).should("have.value", "false");
+        }
+        
         return this;
     }
 
-    /**
-     * @param {string} attribute
-     * @returns {RentCompsActions}
-     */
-    uncheckCheckboxByQaAttr(attribute) {
+    verifyCheckboxByQaAttr(attribute: string | number, isChecked = true): RentCompsActions {
         rentCompsPage.getCheckboxByDataQaAttr(attribute)
-            .should("have.value", "true").uncheck({ force: true }).should("have.value", "false");
+            .should("have.value", `${isChecked}`);
         return this;
     }
 
-    /**
-     * @param {Array<string>} attributes
-     * @returns {RentCompsActions}
-     */
-    checkListOfCheckboxesByQa(attributes) {
+    checkListOfCheckboxesByQa(attributes: Array<string | number>): RentCompsActions {
         attributes.forEach(attr => {
-            this.checkCheckboxByQaAttr(attr);
+            this.changeStateOfCheckboxByQaAttr(attr);
         });
         return this;
     }
 
-    /**
-     * @param {Array<string>} attributes
-     * @returns {RentCompsActions}
-     */
-    uncheckListOfCheckboxesByQa(attributes) {
+    uncheckListOfCheckboxesByQa(attributes: Array<string | number>): RentCompsActions {
         attributes.forEach(attr => {
-            this.uncheckCheckboxByQaAttr(attr);
+            this.changeStateOfCheckboxByQaAttr(attr, false);
         });
         return this;
     }
 
-    verifyPopUpTextExist(basis) {
+    verifyPopUpTextExist(basis: string): RentCompsActions {
         rentCompsPage.changeCompTypePopUpMessage.should("exist");
         rentCompsPage.getAreYouSurePopUp(basis).should("exist");
         return this;
     }
 
-    verifySearchCancelExists() {
+    verifySearchCancelExists(): RentCompsActions {
         rentCompsPage.searchCancelButton.should("exist");
         return this;
     }
 
-    changeToBuildingSearch() {
+    changeToBuildingSearch(): RentCompsActions {
         this.clickBuildingSwitchButton()
             .verifyPopUpTextExist("Building")
             .verifySearchCancelExists()
@@ -150,7 +131,7 @@ class RentCompsActions extends BaseActions {
         return this;
     }
 
-    changeToUnitSearch() {
+    changeToUnitSearch(): RentCompsActions {
         this.clickUnitSwitchButton()
             .verifyPopUpTextExist("Unit")
             .verifySearchCancelExists()
@@ -159,12 +140,7 @@ class RentCompsActions extends BaseActions {
         return this;
     }
 
-    /**
-     * @param {string} fieldName
-     * @param {string | number} value
-     * @returns {RentCompsActions}
-     */
-    enterValueToInput(fieldName, value) {
+    enterValueToInput(fieldName: string, value: string | number): RentCompsActions {
         this.clearInput(fieldName);
         let inputField;
         let placeholder;
@@ -191,12 +167,7 @@ class RentCompsActions extends BaseActions {
         return this;
     }
 
-    /**
-     * @param {string} fieldName
-     * @param {string | number} value
-     * @returns {RentCompsActions}
-     */
-    verifyEnteredValueToInput(fieldName, value = "") {
+    verifyEnteredValueToInput(fieldName: string, value: string| number = ""): RentCompsActions {
         let inputField;
         let valueToBe;
         if (typeof value === "number") {
@@ -225,11 +196,7 @@ class RentCompsActions extends BaseActions {
         return this;
     }
 
-    /**
-     * @param {string} fieldName
-     * @returns {RentCompsActions}
-     */
-    clearInput(fieldName) {
+    clearInput(fieldName: string): RentCompsActions {
         switch (fieldName) {
             case "minRent":
                 rentCompsPage.minRentInput.clear();
@@ -246,21 +213,17 @@ class RentCompsActions extends BaseActions {
         return this;
     }
 
-    clickNumberOfBedroomsArrow() {
+    clickNumberOfBedroomsArrow(): RentCompsActions {
         rentCompsPage.numberOfBedroomsArrowButton.should("be.enabled").click();
         return this;
     }
 
-    clickSourceOfInfoButton() {
+    clickSourceOfInfoButton(): RentCompsActions {
         rentCompsPage.sourceOfInfoArrow.should("be.enabled").click();
         return this;
     }
 
-    /**
-     * @param {string} type
-     * @returns {RentCompsActions}
-     */
-    clearDateInput(type = "min") {
+    clearDateInput(type = "min"): this {
         switch (type) {
             case "max":
                 rentCompsPage.maxDateValueInput.clear();
@@ -271,27 +234,22 @@ class RentCompsActions extends BaseActions {
         return this;
     }
 
-    /**
-     * @param {string} date
-     * @param {string} type
-     * @returns {RentCompsActions}
-     */
-    enterDateInput(date, type = "min") {
+    enterDateInput(date: string | number, type = "min"): RentCompsActions {
         this.clearDateInput(type);
         const isDateCorrect = isDateHasCorrectFormat(date);
         switch (type) {
             case "max":
-                rentCompsPage.maxDateValueInput.scrollIntoView().should("be.visible").type(date);
+                rentCompsPage.maxDateValueInput.scrollIntoView().should("be.visible").type(`${date}`);
                 if (isDateCorrect) {
-                    this.verifyEnteredDate("max", date);
+                    this.verifyEnteredDate("max", `${date}`);
                 } else {
                     rentCompsPage.errorMessage.should("exist");
                 }
                 break;
             default:
-                rentCompsPage.minDateValueInput.scrollIntoView().should("be.visible").type(date);
+                rentCompsPage.minDateValueInput.scrollIntoView().should("be.visible").type(`${date}`);
                 if (isDateCorrect) {
-                    this.verifyEnteredDate("min", date);
+                    this.verifyEnteredDate("min", `${date}`);
                 } else {
                     rentCompsPage.errorMessage.should("exist");
                 }
@@ -299,11 +257,7 @@ class RentCompsActions extends BaseActions {
         return this;
     }
 
-    /**
-     * @param {string} type
-     * @returns {RentCompsActions}
-     */
-    clickPickerButton(type = "min") {
+    clickPickerButton(type = "min"): RentCompsActions {
         switch (type) {
             case "max":
                 rentCompsPage.dateMaxPickerButton.should("be.enabled").click();
@@ -314,22 +268,13 @@ class RentCompsActions extends BaseActions {
         return this;
     }
 
-    /**
-     * @param {string} day
-     * @returns {RentCompsActions}
-     */
-    clickDayInPicker(day) {
+    clickDayInPicker(day: string | number): RentCompsActions {
         day = day ?? Number(getTodayDay());
         rentCompsPage.getDayInCurrentMonthPicker(day).scrollIntoView().should("be.visible").click();
         return this;
     }
 
-    /**
-     * @param {string} type
-     * @param {string} date
-     * @returns {RentCompsActions}
-     */
-    verifyEnteredDate(type, date) {
+    verifyEnteredDate(type: string, date: string | number): RentCompsActions {
         date = date ?? getTodayDateString();
         if (type === "min") {
             rentCompsPage.dateMinInputToCheckValue.should("have.value", date);
@@ -339,33 +284,24 @@ class RentCompsActions extends BaseActions {
         return this;
     }
 
-    /**
-     * @param {string} type
-     * @param {string | number} day
-     * @returns {RentCompsActions}
-     */
-    selectDayFromPicker(type, day) {
+    selectDayFromPicker(type: string, day: string | number): RentCompsActions {
         this.clickPickerButton(type);
         rentCompsPage.pickerCalendar.should("be.visible");
         this.clickDayInPicker(day);
         return this;
     }
 
-    clickAmenitiesArrow() {
+    clickAmenitiesArrow(): RentCompsActions {
         rentCompsPage.amenitiesArrowButton.should("be.enabled").click();
         return this;
     }
 
-    clickResetFiltersButton() {
+    clickResetFiltersButton(): RentCompsActions {
         rentCompsPage.resetFiltersButton.click();
         return this;
     }
 
-    /**
-     * @param {string} value
-     * @returns {RentCompsActions}
-     */
-    selectSortByOptionByValue(value) {
+    selectSortByOptionByValue(value: string): RentCompsActions {
         this.verifyLoadingDoesntExist();
         rentCompsPage.sortByDropdown.should("be.visible").click({ force: true });
         rentCompsPage.getSortDropdownOptionByValue(value).click();
@@ -373,16 +309,12 @@ class RentCompsActions extends BaseActions {
         return this;
     }
 
-    verifyLoadingDoesntExist() {
+    verifyLoadingDoesntExist(): RentCompsActions {
         rentCompsPage.loadingModal.should("not.exist");
         return this;
     }
 
-    /**
-     * @param {number} comparableIndex
-     * @returns {RentCompsActions}
-     */
-    verifyPhotosExistAndNavigateByPhotos(comparableIndex) {
+    verifyPhotosExistAndNavigateByPhotos(comparableIndex: number): RentCompsActions {
         this.verifyLoadingDoesntExist();
         rentCompsPage.comparableItems.eq(comparableIndex).then($item => {
             cy.wrap($item).find(rentCompsPage.photoElementLocator).then($photos => {
@@ -393,13 +325,8 @@ class RentCompsActions extends BaseActions {
         return this;
     }
 
-    /**
-     * @param {JQuery<HTMLElement>} jQueryPhotoElements
-     * @param {number} comparableIndex
-     * @param {string} direction
-     * @returns {RentCompsActions}
-     */
-    navigateThroughAllPhotosInComparable(jQueryPhotoElements, comparableIndex, direction = "forward") {
+    navigateThroughAllPhotosInComparable(jQueryPhotoElements: JQuery<HTMLElement>, comparableIndex: number,
+                                         direction = "forward"): RentCompsActions {
         let numberOfPhotos = jQueryPhotoElements.length;
         let style = "";
         for (let i = 0; i < numberOfPhotos; i++) {
@@ -408,9 +335,9 @@ class RentCompsActions extends BaseActions {
             let currentStyle = jQueryPhotoElements.eq(i).attr("style");
             currentPhoto.invoke("attr", "style").should("not.equal", style);
             if (direction === "forward") {
-                rentCompsPage.nextPhotoButtons.eq(comparableIndex).click();
+                rentCompsPage.nextPhotoButtons.eq(comparableIndex).realClick();
             } else {
-                rentCompsPage.prevPhotoButtons.eq(comparableIndex).click();
+                rentCompsPage.prevPhotoButtons.eq(comparableIndex).realClick();
             }
             this.verifyLoadingDoesntExist();
             style = currentStyle;
@@ -418,31 +345,31 @@ class RentCompsActions extends BaseActions {
         return this;
     }
 
-    verifyLoadingModalExist() {
+    verifyLoadingModalExist(): RentCompsActions {
         rentCompsPage.loadingModal.should("exist");
         return this;
     }
 
-    clickZoomInButton() {
+    clickZoomInButton(): RentCompsActions {
         rentCompsPage.zoomInButton.click();
         this.verifyLoadingModalExist()
             .verifyLoadingDoesntExist();
         return this;
     }
 
-    clickZoomOutButton() {
+    clickZoomOutButton(): RentCompsActions {
         rentCompsPage.zoomOutButton.click();
         this.verifyLoadingModalExist()
             .verifyLoadingDoesntExist();
         return this;
     }
 
-    clickAllSelectComparableButtons() {
+    clickAllSelectComparableButtons(): RentCompsActions {
         rentCompsPage.selectComparableButtons.then(buttons => {
             const buttonsLength = buttons.length;
             for (let i = 0; i < buttonsLength; i++) {
                 if (i !== 0) {
-                    rentCompsPage.selectedComparableButtons.eq(i).should("not.exist");
+                    rentCompsPage.selectedMapComparableRemoveButtons.eq(i).should("not.exist");
                 }
                 cy.wrap(buttons.eq(i)).should("be.enabled").click({ force: true });
                 this.verifyComparableSelectedByIndex(i);
@@ -451,65 +378,40 @@ class RentCompsActions extends BaseActions {
         return this;
     }
 
-    /**
-     * @param {number} index
-     * @returns {RentCompsActions}
-     */
-    selectComparableByIndex(index = 0) {
-        rentCompsPage.selectComparableButtons.eq(index).click();
+    selectComparableByIndex(index = 0): RentCompsActions {
+        rentCompsPage.selectComparableButtons.eq(index).click( { force: true } );
         return this;
     }
 
-    /**
-     * @param {number} index
-     * @returns {RentCompsActions}
-     */
-    verifyComparableSelectedByIndex(index = 0) {
-        rentCompsPage.selectedComparableButtons.eq(index).should("exist");
+    verifyComparableSelectedByIndex(index = 0): RentCompsActions {
+        rentCompsPage.selectedMapComparableRemoveButtons.eq(index).should("exist");
         return this;
     }
 
-    /**
-     * @param {string} address
-     * @returns {RentCompsActions}
-     */
-    selectComparableByAddress(address) {
+    selectComparableByAddress(address: string): RentCompsActions {
         rentCompsPage.getSelectButtonByAddress(address).click({ force: true });
         this.verifyComparableSelectedByAddress(address);
         return this;
     }
 
-    /**
-     * @param {string} address
-     * @returns {RentCompsActions}
-     */
-    verifyComparableSelectedByAddress(address) {
-        rentCompsPage.getSelectedButtonByAddress(address).should("exist");
+    verifyComparableSelectedByAddress(address: string): RentCompsActions {
+        rentCompsPage.getRemoveButtonByAddress(address).should("exist");
         return this;
     }
 
-    verifyUncategorizedCompsNumberAsSelected() {
+    verifyUncategorizedCompsNumberAsSelected(): RentCompsActions {
         rentCompsPage.uncategorizedTable.find(rentCompsPage.indexColumnCellsSelector).then(indexCells => {
-            rentCompsPage.selectedComparableButtons.should("have.length", indexCells.length);
+            rentCompsPage.selectedMapComparableRemoveButtons.should("have.length", indexCells.length);
         });
         return this;
     }
 
-    /**
-     * @param {number} searchResultIndex
-     * @returns {RentCompsActions}
-     */
-    verifySearchResultIsShown(searchResultIndex = 0) {
+    verifySearchResultIsShown(searchResultIndex = 0): RentCompsActions {
         rentCompsPage.searchResultsRows.eq(searchResultIndex).should("be.visible");
         return this;
     }
 
-    /**
-     * @param {string} address
-     * @param {number} searchResIndex
-     * @returns {RentCompsActions}
-     */
-    openAddNewComparableForm(address, searchResIndex = 0) {
+    openAddNewComparableForm(address: string, searchResIndex = 0): RentCompsActions {
         this.verifyLoadingDoesntExist();
         rentCompsPage.addNewRentCompButton.scrollIntoView().should("be.enabled").click();
         rentCompsPage.findRentCompSection.should("be.visible");
@@ -524,11 +426,7 @@ class RentCompsActions extends BaseActions {
         return this;
     }
 
-    /**
-     * @param {Readonly<{state: string, address: string, id: string | number}>} comparableData
-     * @returns {RentCompsActions}
-     */
-    openAddNewComparableFormAdvanced(comparableData) {
+    openAddNewComparableFormAdvanced(comparableData: Readonly<{ state: string, address: string, id: string | number }>): RentCompsActions {
         this.verifyLoadingDoesntExist();
         rentCompsPage.addNewRentCompButton.scrollIntoView().click();
         rentCompsPage.advancedSearchButton.click();
@@ -537,41 +435,23 @@ class RentCompsActions extends BaseActions {
         rentCompsPage.searchAddressField.type(`${comparableData.address}{enter}`)
             .should("have.value", comparableData.address);
         rentCompsPage.findRentCompSection.click();
-        rentCompsPage.propertyIdentifierInput.type(comparableData.id).should("have.value", comparableData.id);
+        rentCompsPage.propertyIdentifierInput.type(`${comparableData.id}`).should("have.value", comparableData.id);
         rentCompsPage.submitButton.click();
         return this;
     }
 
-    /**
-     * @private
-     * @param {JQuery<HTMLElement>} rowJQueryEl
-     * @param {string} cellLocator
-     * @param {string} textToBe
-     * @returns {RentCompsActions}
-     */
-    verifyCellText(rowJQueryEl, cellLocator, textToBe) {
+    private verifyCellText(rowJQueryEl: JQuery<HTMLElement>, cellLocator: string, textToBe: string | number): RentCompsActions {
         cy.wrap(rowJQueryEl).find(cellLocator).should("have.text", textToBe);
         return this;
     }
 
-    /**
-     * @private
-     * @param {JQuery<HTMLElement>} rowJQueryEl
-     * @param {string} cellLocator
-     * @returns {RentCompsActions}
-     */
-    verifyCellExist(rowJQueryEl, cellLocator) {
+    private verifyCellExist(rowJQueryEl: JQuery<HTMLElement>, cellLocator: string): RentCompsActions {
         cy.wrap(rowJQueryEl).find(cellLocator).should("exist");
         return this;
     }
 
-    /**
-     * @param {number} index
-     * @param {Readonly<{bedrooms: number | string, rooms: number | string, monthly: string | number,
-     * sourceInfoCheck: string, address: string}>} rentCompData
-     * @returns {RentCompsActions}
-     */
-    verifyComparableBedroomTableByNumber(index, rentCompData) {
+    verifyComparableBedroomTableByNumber(index: number, rentCompData: Readonly<{ bedrooms: number | string, rooms: number | string,
+                                        monthly: string | number, sourceInfoCheck: string, address: string }>): RentCompsActions {
         rentCompsPage.getBedroomTableByNumber(rentCompData.bedrooms).find(rentCompsPage.getCategoryRowByIndexLocator(index))
             .then(row => {
                 this.verifyCompRowDefaultCells(row, rentCompData, index);
@@ -579,103 +459,72 @@ class RentCompsActions extends BaseActions {
         return this;
     }
 
-    /**
-     * @param {number} rowIndex
-     * @param {Readonly<{bedrooms: number | string, rooms: number | string, monthly: string | number,
-     * sourceInfoCheck: string, address: string}>} rentCompData
-     * @returns {RentCompsActions}
-     */
-    verifyComparableUncategorizedDefaultCellsByRow(rowIndex, rentCompData) {
+    verifyComparableUncategorizedDefaultCellsByRow(rowIndex: number, rentCompData: Readonly<{bedrooms: number | string,
+                    rooms: number | string, monthly: string | number, sourceInfoCheck: string, address: string}>): RentCompsActions {
         rentCompsPage.uncategorizedTable.find(rentCompsPage.getCategoryRowByIndexLocator(rowIndex)).then(row => {
             this.verifyCompRowDefaultCells(row, rentCompData, rowIndex);
         });
         return this;
     }
 
-    /**
-     * @param {number | string} minValue
-     * @returns {RentCompsActions}
-     */
-    verifyUncategorizedMinCell(minValue) {
+    verifyUncategorizedMinCell(minValue: number | string): RentCompsActions {
         const textToBe = typeof minValue === "string" ? minValue : `$${numberWithCommas(minValue)}`;
         rentCompsPage.uncategorizedMinCell.should("have.text", textToBe);
         return this;
     }
 
-    /**
-     * @param {number | string} averageValue
-     * @returns {RentCompsActions}
-     */
-    verifyUncategorizedAverageCell(averageValue) {
+    verifyUncategorizedAverageCell(averageValue: number | string): RentCompsActions {
         const textToBe = typeof averageValue === "string" ? averageValue : `$${numberWithCommas(averageValue)}`;
         rentCompsPage.uncategorizedAverageCell.should("have.text", textToBe);
         return this;
     }
 
-    /**
-     * @param {number | string} maxValue
-     * @returns {RentCompsActions}
-     */
-    verifyUncategorizedMaxCell(maxValue) {
+    verifyUncategorizedMaxCell(maxValue: number | string): RentCompsActions {
         const textToBe = typeof maxValue === "string" ? maxValue : `$${numberWithCommas(maxValue)}`;
         rentCompsPage.uncategorizedMaxCell.should("have.text", textToBe);
         return this;
     }
 
-    verifyRentRollSummaryExist() {
+    verifyRentRollSummaryExist(): RentCompsActions {
         rentCompsPage.rentRollSummary.should("exist");
         return this;
     }
 
-    verifyUncategorizedSubjectMinExist() {
+    verifyUncategorizedSubjectMinExist(): RentCompsActions {
         rentCompsPage.uncategorizedSubjectMin.should("exist");
         return this;
     }
 
-    verifyUncategorizedSubjectAverageExist() {
+    verifyUncategorizedSubjectAverageExist(): RentCompsActions {
         rentCompsPage.uncategorizedSubjectAverage.should("exist");
         return this;
     }
 
-    verifyUncategorizedSubjectMaxExist() {
+    verifyUncategorizedSubjectMaxExist(): RentCompsActions {
         rentCompsPage.uncategorizedSubjectMax.should("exist");
         return this;
     }
 
-    /**
-     * @param {string} textToBe
-     * @returns {RentCompsActions}
-     */
-    verifyUncategorizedSubjectColumnText(textToBe) {
+    verifyUncategorizedSubjectColumnText(textToBe: string): RentCompsActions {
         rentCompsPage.uncategorizedSubjectColumn.should("have.text", textToBe);
         return this;
     }
 
-    checkDisplaySquareFootageForCompsCheckbox() {
+    checkDisplaySquareFootageForCompsCheckbox(): RentCompsActions {
         rentCompsPage.displaySquareFootageForCompsCheckbox.check().should("have.value", "true");
         return this;
     }
 
-    /**
-     * @param {number} index
-     * @param {Readonly<{squareFootage: number | string, rentPSF: number | string}>} rentCompData
-     * @returns {RentCompsActions}
-     */
-    verifyUncategorizedSquareFootageCells(index, rentCompData) {
+    verifyUncategorizedSquareFootageCells(index: number, rentCompData: Readonly<{squareFootage: number | string,
+                                            rentPSF: number | string}>): RentCompsActions {
         rentCompsPage.uncategorizedTable.find(rentCompsPage.getCategoryRowByIndexLocator(index)).then(row => {
             this.verifyRentPsfSfCompRowCells(row, rentCompData);
         });
         return this;
     }
 
-
-    /**
-     * @private
-     * @param {JQuery<HTMLElement>} JQueryRowElement
-     * @param {Readonly<{squareFootage: number | string, rentPSF: number | string}>} rentCompData
-     * @returns {RentCompsActions}
-     */
-    verifyRentPsfSfCompRowCells(JQueryRowElement, rentCompData) {
+    private verifyRentPsfSfCompRowCells(JQueryRowElement: JQuery<HTMLElement>,
+                                        rentCompData: Readonly<{squareFootage: number | string, rentPSF: number | string}>): RentCompsActions {
         const sfText = typeof rentCompData.squareFootage === "string" ? rentCompData.squareFootage :
             numberWithCommas(rentCompData.squareFootage);
         this.verifyCellText(JQueryRowElement, rentCompsPage.squareFootageCellsLocator, sfText);
@@ -685,15 +534,9 @@ class RentCompsActions extends BaseActions {
         return this;
     }
 
-    /**
-     * @private
-     * @param {JQuery<HTMLElement>} JQueryRowElement
-     * @param {Readonly<{bedrooms: number | string, rooms: number | string, monthly: string | number,
-     * sourceInfoCheck: string, address: string}>} rentCompData
-     * @param {number} rowIndex
-     * @returns {RentCompsActions}
-     */
-    verifyCompRowDefaultCells(JQueryRowElement, rentCompData, rowIndex) {
+    private verifyCompRowDefaultCells(JQueryRowElement: JQuery<HTMLElement>, rentCompData: Readonly<{bedrooms: number | string,
+        rooms: number | string, monthly: string | number, sourceInfoCheck: string, address: string}>, rowIndex: number): RentCompsActions {
+
         this.verifyCellExist(JQueryRowElement, rentCompsPage.moveCellLocator);
         this.verifyCellText(JQueryRowElement, rentCompsPage.indexCellLocator, `${rowIndex + 1}`);
         this.verifyCellText(JQueryRowElement, rentCompsPage.unitAddressLocator, rentCompData.address);
@@ -704,7 +547,7 @@ class RentCompsActions extends BaseActions {
         this.verifyCellText(JQueryRowElement, rentCompsPage.categoryRentsCellsLocator, monthlyRentText);
         const rentForCalc = typeof rentCompData.monthly === "string" ?
             rentCompData.monthly.replaceAll(",", "") : rentCompData.monthly;
-        const perRoom = numberWithCommas(Math.round(rentForCalc / rentCompData.rooms));
+        const perRoom = numberWithCommas(Math.round(<number>rentForCalc / <number>rentCompData.rooms));
         this.verifyCellText(JQueryRowElement, rentCompsPage.categoryRentPerRoomLocator, `$${perRoom}`)
             .verifyCellText(JQueryRowElement, rentCompsPage.categorySourceOfInfoLocator, rentCompData.sourceInfoCheck);
         cy.wrap(JQueryRowElement).find(rentCompsPage.editButtonLocator).should("exist");
@@ -712,89 +555,114 @@ class RentCompsActions extends BaseActions {
         return this;
     }
 
-    /**
-     * @param {string} textToBe
-     * @returns {RentCompsActions}
-     */
-    verifyUncategorizedSubjectDevForecast(textToBe) {
+    verifyUncategorizedSubjectDevForecast(textToBe: string): RentCompsActions {
         rentCompsPage.uncategorizedDevForecast.should("have.text", textToBe);
         return this;
     }
 
-    /**
-     * @private
-     * @param {JQuery<HTMLElement>} JQueryRowElement
-     * @param {string | number} bathroomsNumber
-     * @returns {RentCompsActions}
-     */
-    verifyBathroomsCompRowCell(JQueryRowElement, bathroomsNumber) {
+    private verifyBathroomsCompRowCell(JQueryRowElement: JQuery<HTMLElement>, bathroomsNumber: string | number): RentCompsActions {
         this.verifyCellText(JQueryRowElement, rentCompsPage.bathroomsCellsLocator, bathroomsNumber);
         return this;
     }
 
-    /**
-     * @param {number} rowNumber
-     * @param {number | string} bathroomsNumber
-     * @returns {RentCompsActions}
-     */
-    verifyUncategorizedBathroomsRowCell(rowNumber, bathroomsNumber) {
+    verifyUncategorizedBathroomsRowCell(rowNumber: number, bathroomsNumber: number | string): RentCompsActions {
         rentCompsPage.uncategorizedTable.find(rentCompsPage.getCategoryRowByIndexLocator(rowNumber)).then(row => {
             this.verifyBathroomsCompRowCell(row, bathroomsNumber);
         });
         return this;
     }
 
-    verifyUncategorizedHeader() {
+    verifyUncategorizedHeader(): RentCompsActions {
         rentCompsPage.uncategorizedTableHeader.should("exist").and("have.text", "Uncategorized");
         return this;
     }
 
-    /**
-     * @param bedroomsNumber
-     * @returns {RentCompsActions}
-     */
-    verifyBedroomTableHeader(bedroomsNumber) {
+    verifyBedroomTableHeader(bedroomsNumber: number): RentCompsActions {
         rentCompsPage.getBedroomsTableHeader(bedroomsNumber).should("exist")
             .and("have.text", `${bedroomsNumber} Bedroom`);
         return this;
     }
 
-    /**
-     * @param {number} bedroomsNumber
-     * @param {string} textToBe
-     * @returns {RentCompsActions}
-     */
-    verifyBedroomSubjectColumnText(bedroomsNumber, textToBe) {
+    verifyBedroomSubjectColumnText(bedroomsNumber: number, textToBe: string): RentCompsActions {
         rentCompsPage.getBedroomSubjectColumn(bedroomsNumber).should("have.text", textToBe);
         return this;
     }
 
-    /**
-     * @param {number} bedroomsNumber
-     * @returns {RentCompsActions}
-     */
-    verifyBedroomMarketRateSummaryExist(bedroomsNumber) {
+    verifyBedroomMarketRateSummaryExist(bedroomsNumber: number): RentCompsActions {
         rentCompsPage.getBedroomMarketRateSummary(bedroomsNumber).should("exist");
         return this;
     }
 
-    /**
-     * @param {string} columnName
-     * @returns {RentCompsActions}
-     */
-    verifyColumnNotExist(columnName) {
+    verifyColumnNotExist(columnName: string): RentCompsActions {
         rentCompsPage.tablesColumns.contains(columnName).should("not.exist");
         return this;
     }
 
-    /**
-     * @param {string} columnName
-     * @returns {RentCompsActions}
-     */
-    verifyColumnExist(columnName) {
+    verifyColumnExist(columnName: string): RentCompsActions {
         rentCompsPage.tablesColumns.contains(columnName).should("exist");
+        return this;
+    }
+
+    changeStateOfFilter(filterName: string, filterValue: string | number, isToCheck = true): RentCompsActions {
+        rentCompsPage.getFilterArrowButton(filterName).click();
+        this.changeStateOfCheckboxByQaAttr(filterValue, isToCheck);
+        rentCompsPage.getFilterArrowButton(filterName).click();
+        return this;
+    }
+
+    verifyFilterValue(filterName: string, filterValue: string | number, isChecked = true): RentCompsActions {
+        rentCompsPage.getFilterArrowButton(filterName).click();
+        this.verifyCheckboxByQaAttr(filterValue, isChecked);
+        rentCompsPage.getFilterArrowButton(filterName).click();
+        return this;
+    }
+
+    clickAddComparableFromSearchByIndex(searchIndex = 0): RentCompsActions {
+        rentCompsPage.getAddComparableFromSearchButtonByIndex(searchIndex).click();
+        return this;
+    }
+
+    clickRemoveCompButtonByIndex(index = 0): RentCompsActions {
+        rentCompsPage.getRemoveCompButtonByIndex(index).click();
+        return this;
+    }
+
+    verifyRemovedBuildingCompsTableHeader(headerName: string): RentCompsActions {
+        rentCompsPage.getRemovedBuildingCompsTableHeader(headerName).should("have.text", headerName);
+        return this;
+    }
+
+    verifyRemovedBuildingCompsTableColumnText(columnName: string, textToBe: string): RentCompsActions {
+        rentCompsPage.getRemovedBuildingCompsTableColumnText(columnName).should("have.text", textToBe);
+        return this;
+    }
+
+    verifyRemovedBuildingCompsTableButton(buttonName: string): RentCompsActions {
+        rentCompsPage.getRemovedBuildingCompsTableButton(buttonName).should("exist");
+        return this;
+    }
+
+    clickShowDetailsButtonByIndex(index = 0): RentCompsActions {
+        rentCompsPage.getShowDetailsButtonByIndex(index).click();
+        return this;
+    }
+
+    verifyShowDetailsHeader(headerName: string): RentCompsActions {
+        rentCompsPage.getShowDetailsHeader(headerName)
+            .should("exist")
+            .should("have.text", headerName);
+        return this;
+    }
+
+    clickAddRemoveBuildingCompByAddress(address: string): RentCompsActions {
+        rentCompsPage.getAddRemoveBuildingCompButtons(address).click();
+        return this;
+    }
+
+    clickEditBuildingCompButtonByAddress(address: string): RentCompsActions {
+        rentCompsPage.getEditAddedBuildingCompButtonByAddress(address).click();
         return this;
     }
 }
 
-export default new RentCompsActions();
+export default new RentCompsActions(rentCompsPage);

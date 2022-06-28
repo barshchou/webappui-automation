@@ -6,8 +6,8 @@ import { createReport, deleteReport } from "../../../../actions/base/baseTest.ac
 import { _NavigationSection } from "../../../../actions/base";
 
 
-describe("Verify the functionality of the Ceiling Height radio button", () => {
-
+describe("Verify the functionality of the Ceiling Height radio button", 
+    { tags:[ "@property", "@commercial_units" ] }, () => {
 
     before("Login, create report", () => {
 

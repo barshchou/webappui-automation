@@ -3,7 +3,9 @@ import { createReport, deleteReport } from "../../../../actions/base/baseTest.ac
 import { _NavigationSection } from "../../../../actions/base";
 import { Property } from "../../../../actions";
 
-describe("Verify the functionality of the Facade radio button", () => {
+describe("Verify the functionality of the Facade radio button", 
+    { tags: [ "@property", "@commercial_units" ] }, () => {
+        
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
     });

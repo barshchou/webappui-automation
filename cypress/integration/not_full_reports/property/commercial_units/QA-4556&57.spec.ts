@@ -1,11 +1,12 @@
 /// <reference types="cypress-file-upload" />
-
 import testData from "../../../../fixtures/not_full_reports/property/commercial_units/QA-4556&57.fixture";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { Property } from "../../../../actions";
 
-describe("Verify the functionality of the Image upload to the Interior and Exterior Images sections", () => {
+describe("Verify the functionality of the Image upload to the Interior and Exterior Images sections",
+    { tags:[ "@property", "@commercial_units" ] },  () => {
+        
     before("Login, create report", () => {
         cy.stepInfo(`Preconditions: The mixed report is created and several commercial units are added.`);
         createReport(testData.reportCreationData);

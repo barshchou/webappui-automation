@@ -3,7 +3,8 @@ import NavigationSection from "../../../../actions/base/navigationSection.action
 import Sales from "../../../../actions/sales/sales.manager";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 
-describe("Selected Comparables table. Verify the functionality of Remove button", () => {
+describe("Selected Comparables table. Verify the functionality of Remove button", 
+    { tags:[ "@find_comps", "@sales" ] }, () => {
 
     before("Login, create report", () => {
         createReport(testData.reportCreationData);

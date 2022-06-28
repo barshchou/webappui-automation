@@ -6,7 +6,9 @@ import { Income } from "../../../../../actions";
 import Property from "../../../../../actions/property/property.manager";
 import ReportDataCreator from "../../../../../fixtures/data_creator/reportData.creator";
 
-describe("Verify the grid is present", () => {
+describe("Verify the grid is present", 
+    { tags:[ "@income", "@residential", "@in_place_rent_roll" ] }, () => {
+        
     const conclusionValues = [ Enums.VALUE_CONCLUSION_TYPE.AS_IS, Enums.VALUE_CONCLUSION_TYPE.AS_STABILIZED,
         Enums.VALUE_CONCLUSION_TYPE.AS_COMPLETE ];
 

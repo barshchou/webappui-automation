@@ -4,7 +4,9 @@ import NavigationSection from "../../../../actions/base/navigationSection.action
 import { Report } from '../../../../actions';
 
 
-describe("Verify the Client Guidelines Discussion on the page", () => {
+describe("Verify the Client Guidelines Discussion on the page", 
+    { tags: [ "@report", "@client" ] }, () => {
+        
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
     });

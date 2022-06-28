@@ -3,11 +3,17 @@ import BasePage from "../base/base.page";
 class TaxInfoPage extends BasePage {
     get basisRadio() {return cy.get("[name=basis]");}
 
-    getVerifyBasisRadioInput(value) {return cy.get(`[data-qa='basis-radio-group'] [data-qa=checked] input[value='${value}']`);}
+    getVerifyBasisRadioInput(value: string) {return cy.get(`[data-qa='basis-radio-group'] [data-qa=checked] input[value='${value}']`);}
 
     get landActualInput() {return cy.get("[name=landActual]");}
 
+    get landTransitional() {return cy.get("[name=landTransitional]");}
+
     get buildingActualInput() {return cy.get("[name=buildingActual]");}
+
+    get buildingTransitionalInput() {return cy.get("[name=buildingTransitional]");}
+
+    get includeTransitionalAssessedValueCheckbox() {return cy.get("[data-qa^='hasTransitionalAssessedValue'] input");}
 
     get totalTaxableAssessedValue() {return cy.get("[data-qa=totalActual-cell]");}
 
@@ -92,8 +98,14 @@ class TaxInfoPage extends BasePage {
     get appraiserOpTaxLiabTaxRateValueCell() {return cy.get(`[data-qa="Appraiser's Opinion-taxRate-value-cell"]`);}
 
     get appraiserOpTaxAssessedValueCell() {return cy.get(`[data-qa="Appraiser's Opinion-taxableAssessedValue-value-cell"]`);}
+    
+    get taxCalculationDiscussionCommentary() {return cy.xpath("//*[.='Tax Calculation Discussion']//following::*[@data-slate-editor][1]");}
+    
+    get taxCalculationDiscussionTooltip() {return cy.get("svg[data-icon=info-circle]");}
+    
+    get taxCalculationDiscussionTitle() {return cy.xpath("//h6[contains(text(),'Tax Calculation Discussion')]");}
 
-    get taxSummaryDiscussionCommentary() {return cy.get("[data-qa^='taxSummaryDiscussion.commentary']");}
+    get taxSummaryDiscussion() {return cy.get("[data-qa^='taxSummaryDiscussion.commentary'],[name='taxSummaryDiscussion.commentary']");}
 }
 
 export default new TaxInfoPage();

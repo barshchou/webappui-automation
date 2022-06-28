@@ -4,7 +4,8 @@ import Property from "../../../../../actions/property/property.manager";
 import Income from "../../../../../actions/income/income.manager";
 import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
 
-describe("Verify the Rent PSF column in the grid", () => {
+describe("Verify the Rent PSF column in the grid", 
+    { tags:[ "@income", "@commercial", "@in_place_rent_roll" ] }, () => {
 
     beforeEach("Create report, prepare table", () => {
         createReport(testData.reportCreationData);
@@ -16,26 +17,26 @@ describe("Verify the Rent PSF column in the grid", () => {
     it("Annually", () => {
         Income.Commercial.InPlaceRentRoll.clickAnnuallyBasisButton()
             .enterAnnualRentByRowNumber(testData.general.annualRent)
-            .verifyRentPerSFAnnuallyByRowNumber(testData.general.annualRent, testData.general.squareFeet);
+            .verifyRentPerSFAnnuallyAnnuallyCalcByRow(testData.general.annualRent, testData.general.squareFeet);
         deleteReport(testData.reportCreationData.reportNumber);
     });
 
     it("Monthly", () => {
         Income.Commercial.InPlaceRentRoll.clickMonthlyBasisButton()
             .enterMonthlyRentByRowNumber(testData.general.monthlyRent)
-            .verifyRentPerSFMonthlyByRowNumber(testData.general.monthlyRent, testData.general.squareFeet);
+            .verifyRentPerSFAnnuallyMonthlyCalcByRowNumber(testData.general.monthlyRent, testData.general.squareFeet);
         deleteReport(testData.reportCreationData.reportNumber);
     });
 
     it("Per square foot", () => {
-        Income.Commercial.InPlaceRentRoll.verifyRentPerSFAnnuallyByRowNumberCellText()
-            .enterAnnualRentPerSFByRowNumber(testData.general.rentPerSF);
+        Income.Commercial.InPlaceRentRoll.verifyRentPerSFAnnuallyCellTextByRow()
+            .enterRentPerSFAnnuallyByRowNumber(testData.general.rentPerSF);
         deleteReport(testData.reportCreationData.reportNumber);
     });
 
     it("Per square foot per month", () => {
         Income.Commercial.InPlaceRentRoll.clickPerSquareFootPerMonthButton()
-            .enterMonthlyRentPerSFByRowNumber(testData.general.rentPerSF);
+            .enterRentPerSFMonthlyByRowNumber(testData.general.rentPerSF);
         deleteReport(testData.reportCreationData.reportNumber);
     });
 });

@@ -5,9 +5,10 @@ import Property from "../../../../../actions/property/property.manager";
 import Income from "../../../../../actions/income/income.manager";
 import ReviewExport from "../../../../../actions/reviewExport/reviewExport.actions";
 import { isEndsWithDecimal } from "../../../../../utils/html.utils";
-import { Tag } from "../../../../../utils/tags.utils";
 
-describe("Verify the Commercial Stabilized Rent Roll table", { tags: [ Tag.income, Tag.commercial, Tag.stabilized_rent_roll ] }, () => {
+describe("Verify the Commercial Stabilized Rent Roll table",
+    { tags: [ "@income", "@commercial", "@stabilized_rent_roll", "@check_export" ] }, () => {
+
     it("Test body", () => {  
         createReport(testData.reportCreationData);
         
@@ -24,10 +25,11 @@ describe("Verify the Commercial Stabilized Rent Roll table", { tags: [ Tag.incom
         }    
         NavigationSection.navigateToCommercialInPlaceRentRoll();
         Income.Commercial.InPlaceRentRoll.chooseListLeaseStatuses(testData.leaseStatuses, testData.numberOfCommercialUnits)
-            .enterTenantNames(testData.tenantNames, testData.leaseStatuses);
+            .enterTenantNames(testData.tenantNames, testData.leaseStatuses)
+            .verifyTenantNames(testData.tenantNames, testData.leaseStatuses);
         testData.rentsPsf.forEach((rent, index) => {
             if (testData.leaseStatuses[index] !== "Vacant") {
-                Income.Commercial.InPlaceRentRoll.enterAnnualRentPerSFByRowNumber(rent, index);
+                Income.Commercial.InPlaceRentRoll.enterRentPerSFAnnuallyByRowNumber(rent, index);
             }
         });
         NavigationSection.navigateToStabilizedRentRollInCommercial()
@@ -42,6 +44,7 @@ describe("Verify the Commercial Stabilized Rent Roll table", { tags: [ Tag.incom
     });
 
     it("Check export", () => {
+        Cypress.config().baseUrl = null;
         cy.task("getFilePath",
         { _reportName: testData.reportCreationData.reportNumber, _docx_html: "html" }
         ).then(file => {

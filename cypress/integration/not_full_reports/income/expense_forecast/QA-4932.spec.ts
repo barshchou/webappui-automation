@@ -1,21 +1,17 @@
 /// <reference types="cypress-grep" />
 import testData from "../../../../fixtures/not_full_reports/income/expense_forecast/QA-4932.fixture";
-import {
-  createReport,
-  deleteReport,
-} from "../../../../actions/base/baseTest.actions";
+import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Income from "../../../../actions/income/income.manager";
-import { Tag } from "../../../../utils/tags.utils";
-
 
 describe("Comparable Min, Max, Avg values for Repairs & Maintenance Per Unit are correctly calculated and displayed",
-{ tags:[ Tag.expense_forecast, Tag.income, Tag.snapshot_tests ] }, () => {
+  { tags:[ "@expense_forecast", "@income", "@snapshot_tests" ] }, () => {
+    
   before("Login, create report", () => {
     createReport(testData.reportCreationData);
   });
 
-  it("Test body", { tags: "@snapshot_tests" }, () => {
+  it("Test body", () => {
     cy.stepInfo("1. Go to Income > Comparable Expenses");
     NavigationSection.Actions.navigateToComparableExpenses();
 

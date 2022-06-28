@@ -1,9 +1,15 @@
 import BasePage from "../base/base.page";
 
 class ClientPage extends BasePage{
+    get clientTitle() {return cy.get("[data-qa=client]");}
+
+    get warningMessage() {return cy.xpath("//*[contains(@data-qa, 'callout-btn')]/parent::*");}
+
     get clientNameField() {return cy.get("*[name=client]");}
 
     get clientFileNumberField() {return cy.get('[name="clientFileNumber"]');}
+
+    get nycbApplicationNumber() {return cy.get("[name=applicationNumber]");}
 
     get addClientButton() {return cy.xpath("//a[.='Add']");}
 
@@ -33,8 +39,10 @@ class ClientPage extends BasePage{
     get narrativeSuggestionsList() {return cy.get("[data-qa='narrative-suggestions-list'] > ul");}
 
     chipModified(index?: number) {return cy.get('[ui="indicator"]').eq((index !== 0) ? index : 0);}
-    
-    get modalWindow() {return cy.get("[role='dialog']");}
+
+    get addNewClient() {return cy.xpath("//*[@data-qa='callout-btn']//child::*[@target='_self']");}
+
+    commentaryText(commentaryTitle: string) {return cy.xpath(`//h6[.='${commentaryTitle}']//following::div[@data-slate-editor][1]`);}
 }
 
 export default new ClientPage();

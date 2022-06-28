@@ -4,55 +4,42 @@ import NavigationSection from "../../../../../actions/base/navigationSection.act
 import Property from "../../../../../actions/property/property.manager";
 import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
 
-describe("Verify the Current Commercial Income Discussion on the In-Place Rent Roll page", () => {
+describe("Verify the Current Commercial Income Discussion on the In-Place Rent Roll page", 
+    { tags:[ "@income", "@commercial", "@in_place_rent_roll" ] }, () => {
 
-    beforeEach("Login, create report", () => {
+    before('Prepare report', () => {
+        cy.stepInfo('Preconditions: Create report and set number of commercial units');
         createReport(testData.reportCreationData);
+        NavigationSection.navigateToPropertySummary();
+        Property.Summary.enterNumberOfCommercialUnits(testData.numberOfCommercialUnits);
+        NavigationSection.navigateToCommercialInPlaceRentRoll();
+
+        cy.saveLocalStorage();
     });
 
-    it("No Vacant Units", () => {
-        NavigationSection.navigateToPropertySummary();
-        Property.Summary.enterNumberOfCommercialUnits(testData.noVacantData.numberOfCommercialUnits);
-        NavigationSection.navigateToCommercialInPlaceRentRoll();
-        Income.Commercial.InPlaceRentRoll.chooseListLeaseStatuses(testData.leaseNoVacant, testData.noVacantData.numberOfCommercialUnits)
-            .verifyCommentarySavedText(testData.noVacantData.commentaryToBe);
-        deleteReport(testData.reportCreationData.reportNumber);
+    beforeEach("Restore local storage", () => {
+        cy.restoreLocalStorage();
     });
 
-    it("One unit is Vacant", () => {
-        NavigationSection.navigateToPropertySummary();
-        Property.Summary.enterNumberOfCommercialUnits(testData.oneVacantData.numberOfCommercialUnits);
-        NavigationSection.navigateToCommercialInPlaceRentRoll();
-        Income.Commercial.InPlaceRentRoll.chooseListLeaseStatuses(testData.leaseOneVacant, testData.oneVacantData.numberOfCommercialUnits)
-            .verifyCommentarySavedText(testData.oneVacantData.commentaryToBe);
-        deleteReport(testData.reportCreationData.reportNumber);
+    it("All Vacant Units", () => {
+
+        cy.stepInfo('1. Set lease status and verify commentary text when all units are vacant');
+        Income.Commercial.InPlaceRentRoll.chooseListLeaseStatuses(testData.leaseAllVacantFixture, testData.numberOfCommercialUnits)
+            .verifyCommentaryContainsText(testData.allVacantFixture.commentaryToBe);
     });
 
-    it("All units are Vacant", () => {
-        NavigationSection.navigateToPropertySummary();
-        Property.Summary.enterNumberOfCommercialUnits(testData.allVacantData.numberOfCommercialUnits);
-        NavigationSection.navigateToCommercialInPlaceRentRoll();
-        Income.Commercial.InPlaceRentRoll.chooseListLeaseStatuses(testData.leaseAllVacant, testData.allVacantData.numberOfCommercialUnits)
-            .verifyCommentarySavedText(testData.allVacantData.commentaryToBe);
-        deleteReport(testData.reportCreationData.reportNumber);
+    it("All units are Occupied", () => {
+
+        cy.stepInfo('1. Set lease status and verify commentary text when all units are occupied');
+        Income.Commercial.InPlaceRentRoll.chooseListLeaseStatuses(testData.leaseAllOccupiedFixture, testData.numberOfCommercialUnits)
+            .verifyCommentaryContainsText(testData.allOccupiedFixture.commentaryToBe);
     });
 
-    it("One unit test", () => {
-        NavigationSection.navigateToPropertySummary();
-        Property.Summary.enterNumberOfCommercialUnits(testData.oneUnitData.numberOfCommercialUnits);
-        NavigationSection.navigateToCommercialInPlaceRentRoll();
-        Income.Commercial.InPlaceRentRoll.chooseLeaseStatusByRowNumber(testData.leaseOneOccupied)
-            .verifyCommentarySavedText(testData.oneUnitData.commentaryToBe);
-        deleteReport(testData.reportCreationData.reportNumber);
-    });
+    it("Few vacant, few occupied", () => {
 
-    it("Few vacant, few occupied test", () => {
-        NavigationSection.navigateToPropertySummary();
-        Property.Summary.enterNumberOfCommercialUnits(testData.fewVacantFewOccupiedData.numberOfCommercialUnits);
-        NavigationSection.navigateToCommercialInPlaceRentRoll();
-        Income.Commercial.InPlaceRentRoll.chooseListLeaseStatuses(testData.leaseFewVacantFewOccupied,
-            testData.fewVacantFewOccupiedData.numberOfCommercialUnits)
-            .verifyCommentarySavedText(testData.fewVacantFewOccupiedData.commentaryToBe);
+        cy.stepInfo('1. Set lease status and verify commentary text when units have mixed lease status');
+        Income.Commercial.InPlaceRentRoll.chooseListLeaseStatuses(testData.leaseMixedFixture, testData.numberOfCommercialUnits)
+            .verifyCommentaryContainsText(testData.mixedFixture.commentaryToBe);
         deleteReport(testData.reportCreationData.reportNumber);
     });
 });

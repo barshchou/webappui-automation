@@ -4,7 +4,9 @@ import NavigationSection from "../../../../../actions/base/navigationSection.act
 import Income from "../../../../../actions/income/income.manager";
 import Enums from "../../../../../enums/enums";
 
-describe("Verify the Rent Roll Options are present on the In-Place Rent Roll page", () => {
+describe("Verify the Rent Roll Options are present on the In-Place Rent Roll page", 
+    { tags:[ "@income", "@residential", "@in_place_rent_roll" ] }, () => {
+        
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
     });

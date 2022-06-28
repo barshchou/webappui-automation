@@ -4,20 +4,17 @@ import testData from "../../../../fixtures/not_full_reports/income/expense_forec
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import { Property, Income } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
-import tableExpenseHistoryCellNames from "../../../../../cypress/enums/expenseHistoryTableRows.enum";
-import { Tag } from "../../../../utils/tags.utils";
-
+import tableExpenseHistoryCellNames from "../../../../../cypress/enums/expense/expenseHistoryTableRows.enum";
 
 describe("Historical expense Electricity Per Unit is correctly calculated and displayed",
-{ tags:[ Tag.snapshot_tests, Tag.income, Tag.expense_forecast ] }, () => {
-
+    { tags:[ "@snapshot_tests", "@income", "@expense_forecast" ] }, () => {
 
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
     });
 
 
-    it("Test body", { tags: "@snapshot_tests" }, () => {
+    it("Test body", () => {
 
         cy.stepInfo("1. Pre-condition: Residential Units should be filled in on Property > Summary form");
         _NavigationSection.navigateToPropertySummary();
