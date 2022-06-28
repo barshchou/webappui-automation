@@ -67,6 +67,7 @@ export namespace BoweryReports {
     };
     export type OrganizationAddresseePrefix = typeof Enums.ORGANIZATION_ADDRESSEE_PREFIX[KeyInfo.OrganizationAddresseePrefixKeys]
     export type OrganizationState = typeof Enums.ORGANIZATION_STATE[KeyInfo.OrganizationStateKeys]
+    export type BoweryOffices = typeof Enums.BOWERY_OFFICES[KeyInfo.BoweryOffices]
 
     export type ForecastItem = { 
         name: ForecastItemBasis | string, 

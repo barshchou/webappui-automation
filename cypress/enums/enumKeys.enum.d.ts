@@ -26,3 +26,5 @@ export type UnitsOfMeasureKeys = keyof typeof Enums.UNITS_OF_MEASURE
 export type SourceOfInformationKeys = keyof typeof Enums.SOURCE_OF_INFORMATION
 export type IncomeTypeKeys = keyof typeof Enums.INCOME_TYPE
 export type PropertyConditions = keyof typeof Enums.PROPERTY_CONDITIONS
+export type UserRoles = keyof typeof Enums.USER_ROLES
+export type BoweryOffices = keyof typeof Enums.BOWERY_OFFICES
