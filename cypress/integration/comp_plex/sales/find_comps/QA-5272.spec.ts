@@ -11,7 +11,12 @@ describe("[QA-5272]", () => {
         .find("a").click();
         
         cy.get('[data-qa="property-info-edit-btn"]', { includeShadowDom:true }).should("be.visible").click();
+
+        cy.get('[data-qa="street-address"] input', { includeShadowDom:true }).should("be.disabled");
         cy.get('[data-qa="city"] input', { includeShadowDom:true }).should("be.disabled");
-        
+        cy.get('[data-qa="state"] input', { includeShadowDom:true }).should("be.disabled");
+        cy.get('[data-qa="postal-code"] input', { includeShadowDom:true }).should("be.disabled");
+        cy.get('[data-qa="property-id"] input', { includeShadowDom:true }).should("be.disabled");
+        cy.get('[data-qa="property-id-type"] input', { includeShadowDom:true }).should("be.disabled");        
     });
 });
