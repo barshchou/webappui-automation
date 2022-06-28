@@ -47,7 +47,7 @@ class CommercialRentCompsPage extends BasePage {
 
     get leaseDatePicker() {return cy.get("[data-qa=dateSigned-date-picker] div input");}
 
-    getEditButtonByRowNubmer(rowNumber = 0) {return cy.xpath(`//tr[@data-qa='row-${rowNumber}']//button[.='Edit']`);}
+    getEditButtonByRowNumber(rowNumber = 0) {return cy.xpath(`//tr[@data-qa='row-${rowNumber}']//button[.='Edit']`);}
 
     getUnitOfMeasureRadioButton(name: string) {
         return cy.get("div[data-qa=rentType-radio-group] [role=radiogroup]").
