@@ -1,6 +1,7 @@
 import { applyMixins } from "../../utils/object.utils";
 import BasePage from "../base/base.page";
 import PropertyInformationForm from "./comp_plex/propertyInfo.page";
+import SalesCompsDetailsForm from "./comp_plex/salesCompDetails.page";
 import SaleInformationForm from "./comp_plex/salesInfo.page";
 
 class FindCompsPage extends BasePage {
@@ -66,7 +67,7 @@ class FindCompsPage extends BasePage {
  * the expected mixins with the same name as your base
  */
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
-interface FindCompsPage extends PropertyInformationForm, SaleInformationForm {}
-applyMixins(FindCompsPage, [ PropertyInformationForm, SaleInformationForm ]);
+interface FindCompsPage extends PropertyInformationForm, SaleInformationForm, SalesCompsDetailsForm {}
+applyMixins(FindCompsPage, [ PropertyInformationForm, SaleInformationForm, SalesCompsDetailsForm ]);
 
 export const findCompsPage = new FindCompsPage();

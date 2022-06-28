@@ -1,22 +1,27 @@
 import { salesInterceptions } from "../../../../actions/base/baseTest.actions";
-import * as _Sales from "../../../../actions/sales";
+import { Sales, CompPlex } from "../../../../actions";
 
 describe("[QA-5272]", () => {
-    it("Enter Sale Information form] Verify the Buyer(Grantee) field", () => {
+    it(`[Sales > Find Comps > Edit of the comp] 
+    Check that following fields are disabled in the edit mode `,
+    { tags: "@comp-plex-standalone" }, () => {
+        /**
+         * ernst: this tests should run only on standalone comp_plex 
+         * (localhost or client's url whatever)
+         * remove this comment when we figure out how to manage such test runs
+         */
         salesInterceptions();
         cy.visit("/");
-        _Sales._FindComps.selectCompFromMapByAddress("443 East 88 Street");
-        cy.get('[id="selectedComps"]').find("tr").contains("443 East 88 Street")
-        .parent()
-        .find("a").click();
-        
-        cy.get('[data-qa="property-info-edit-btn"]', { includeShadowDom:true }).should("be.visible").click();
 
-        cy.get('[data-qa="street-address"] input', { includeShadowDom:true }).should("be.disabled");
-        cy.get('[data-qa="city"] input', { includeShadowDom:true }).should("be.disabled");
-        cy.get('[data-qa="state"] input', { includeShadowDom:true }).should("be.disabled");
-        cy.get('[data-qa="postal-code"] input', { includeShadowDom:true }).should("be.disabled");
-        cy.get('[data-qa="property-id"] input', { includeShadowDom:true }).should("be.disabled");
-        cy.get('[data-qa="property-id-type"] input', { includeShadowDom:true }).should("be.disabled");        
+        Sales._FindComps.selectCompFromMapByAddress("443 East 88 Street");
+        CompPlex.Page.getsalesCompDetails("443 East 88 Street").click();
+        
+        Sales._FindComps.Page.propertyInfoEditBtn.should("be.visible").click();
+        Sales._FindComps.Page.streetAdderssInput.should("be.disabled");
+        Sales._FindComps.Page.cityInput.should("be.disabled");
+        Sales._FindComps.Page.stateInput.should("be.disabled");
+        Sales._FindComps.Page.postalCodeInput.should("be.disabled");
+        Sales._FindComps.Page.propertyIdInput.should("be.disabled");
+        Sales._FindComps.Page.propertyIdTypeInput.should("be.disabled");        
     });
 });
