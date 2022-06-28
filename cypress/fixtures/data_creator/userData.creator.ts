@@ -113,7 +113,6 @@ class UserCreator {
     }
 
     getUserData(options?: BoweryAutomation.OrganizationCreateNewUserData) {
-        
         options?.username == undefined ? this.setUsername() : this.setUsername(options.username);
         options?.roleName == undefined ? this.setRoleName() : this.setRoleName(options.roleName);
         options?.prefix == undefined ? this.setPrefix() : this.setPrefix(options.prefix);
@@ -124,7 +123,6 @@ class UserCreator {
         options?.positionInOrg == undefined ? this.setPositionInOrg() : this.setPositionInOrg(options.positionInOrg);
         options?.boweryOffice == undefined ? this.setBoweryOffice() : this.setBoweryOffice(options.boweryOffice);
         options?.phone == undefined ? this.setPhone() : this.setPhone(options.phone);
-        
         return this.build();
     }
 }
