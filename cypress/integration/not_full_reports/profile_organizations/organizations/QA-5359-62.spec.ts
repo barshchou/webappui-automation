@@ -66,7 +66,7 @@ describe("Verify users roles to create new clients",
         deleteReport(testData.reportCreationData.reportNumber);
     });
 
-    it.only('[QA-5362]', () => {
+    it('[QA-5362]', () => {
 
         cy.stepInfo('Precondition: Create test user with Inspector user');
         createReport(testData.reportCreationData, testData.inspectorUsername, testData.inspectorPassword);
