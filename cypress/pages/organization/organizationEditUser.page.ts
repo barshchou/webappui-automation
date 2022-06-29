@@ -10,12 +10,12 @@ class OrganizationEditUserPage extends BasePage{
 
     get saveButton() {return cy.xpath('//button[.="save"]');}
 
-    resultModal(result = true) {
+    getResultModal(result = true) {
         let message = result ? "Success" : "Error";
         return cy.xpath(`//*[contains(text(), "${message}")]`);
     }
 
-    resultModalCloseButton(result = true) {
+    getResultModalCloseButton(result = true) {
         let message = result ? "Success" : "Error";
         return cy.xpath(`//*[contains(text(), "${message}")]//following::button[1]`);
     }
