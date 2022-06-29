@@ -4,7 +4,7 @@ const expensesCardsNames = {
         "generalAdministrative", "legalProfessionalFees", "miscellaneous", "managementFees", "replacementReserves" ],
 
     realEstateTaxes: "realEstateTaxes",
-    insurace: "insurance",
+    insurance: "insurance",
     electricity: "electricity",
     fuel: "fuel",
     waterAndSewer: "waterAndSewer",
@@ -13,7 +13,7 @@ const expensesCardsNames = {
     payrollBenefits: "payrollAndBenefits",
     generalAndAdministrative: "generalAndAdministrative",
     legalAndProfessional: "legalAndProfessionalFees",
-    miscelaneous: "miscellaneous",
+    miscellaneous: "miscellaneous",
     managementFees: "management",
     replacementsAndReserves: "reserves"
 };

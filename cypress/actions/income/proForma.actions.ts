@@ -125,7 +125,7 @@ class ProFormaActions extends BaseActionsExt<typeof proFormaPage> {
     }
 
     verifyTotalTOEexTaxesIncludeForecasts(GBA: number): ProFormaActions {
-        cy.get(`@${Alias.expenceForcastAliases.summaPerSF}`).then(val => {
+        cy.get(`@${Alias.expenceForecastAliases.sumPerSF}`).then(val => {
             let valTotal = (Number(val) * GBA).toFixed(0);
             let textToBeTotal = `$${numberWithCommas(Number(valTotal))}`;        
             this.verifyCategoryTotal(textToBeTotal, enums.PRO_FORMA_TYPES.totalOperatingExpensesExTaxes);
@@ -134,7 +134,7 @@ class ProFormaActions extends BaseActionsExt<typeof proFormaPage> {
     }
 
     verifyPsfTOEexTaxesIncludeForecasts(): ProFormaActions {
-        cy.get(`@${Alias.expenceForcastAliases.summaPerSF}`).then(val => {
+        cy.get(`@${Alias.expenceForecastAliases.sumPerSF}`).then(val => {
             let valPSF = Number(val);
             let textToBePSF = `$${getNumberWithDecimalPart(valPSF)}`;
             this.verifyCategoryPSFTotal(textToBePSF, enums.PRO_FORMA_TYPES.totalOperatingExpensesExTaxes);
@@ -143,7 +143,7 @@ class ProFormaActions extends BaseActionsExt<typeof proFormaPage> {
     }
 
     verifyPerUnitTOEexTaxesIncludeForecasts(): ProFormaActions {
-        cy.get(`@${Alias.expenceForcastAliases.summaPerUnit}`).then(val => {
+        cy.get(`@${Alias.expenceForecastAliases.sumPerUnit}`).then(val => {
             let valPerUnit = Number(val);
             let textToBePerUnit = `$${numberWithCommas(valPerUnit)}`;
             this.verifyCategoryPerUnitTotal(textToBePerUnit, enums.PRO_FORMA_TYPES.totalOperatingExpensesExTaxes);
@@ -152,7 +152,7 @@ class ProFormaActions extends BaseActionsExt<typeof proFormaPage> {
     }
 
     verifyTotalTOEIncludeForecasts(GBA: number): ProFormaActions {
-        cy.get(`@${Alias.expenceForcastAliases.summaPerSF}`).then(val => {
+        cy.get(`@${Alias.expenceForecastAliases.sumPerSF}`).then(val => {
             this.Page.categoryCellTotal(enums.PRO_FORMA_TYPES.totalOperatingExpenses).invoke("text").then(totalText => {
                 this.Page.categoryCellTotal(enums.PRO_FORMA_TYPES.realEstateTaxes).invoke("text").then(taxesText => {
                     let valTotal = (Number(val) * GBA).toFixed(0); 
@@ -167,7 +167,7 @@ class ProFormaActions extends BaseActionsExt<typeof proFormaPage> {
     }
 
     verifyPsfTOEIncludeForecasts(): ProFormaActions {
-        cy.get(`@${Alias.expenceForcastAliases.summaPerSF}`).then(val => {
+        cy.get(`@${Alias.expenceForecastAliases.sumPerSF}`).then(val => {
             this.Page.categoryPSFTotal(enums.PRO_FORMA_TYPES.totalOperatingExpenses).invoke("text").then(psfText => {
                 this.Page.categoryPSFTotal(enums.PRO_FORMA_TYPES.realEstateTaxes).invoke("text").then(taxesText => {
                     let valPSF = Number(val).toFixed(2);
@@ -182,7 +182,7 @@ class ProFormaActions extends BaseActionsExt<typeof proFormaPage> {
     }
 
     verifyPerUnitTOEIncludeForecasts(): ProFormaActions {
-        cy.get(`@${Alias.expenceForcastAliases.summaPerUnit}`).then(val => {
+        cy.get(`@${Alias.expenceForecastAliases.sumPerUnit}`).then(val => {
             this.Page.categoryPerUnitTotal(enums.PRO_FORMA_TYPES.totalOperatingExpenses).invoke("text").then(perUnitText => {
                 this.Page.categoryPerUnitTotal(enums.PRO_FORMA_TYPES.realEstateTaxes).invoke("text").then(taxesText => {
                     let valPerUnit =Number(val).toFixed(0);
@@ -197,7 +197,7 @@ class ProFormaActions extends BaseActionsExt<typeof proFormaPage> {
     }
 
     verifyTotalNOIIncludeForecasts(GBA: number): ProFormaActions {
-        cy.get(`@${Alias.expenceForcastAliases.summaPerSF}`).then(val => {
+        cy.get(`@${Alias.expenceForecastAliases.sumPerSF}`).then(val => {
             this.Page.categoryCellTotal(enums.PRO_FORMA_TYPES.netOperatingIncome).invoke("text").then(totalIncome => {
                 this.Page.categoryCellTotal(enums.PRO_FORMA_TYPES.realEstateTaxes).invoke("text").then(taxesText => {
                     this.Page.categoryCellTotal(enums.PRO_FORMA_TYPES.effectiveGrossIncome).invoke("text").then(incomeText => {
@@ -215,7 +215,7 @@ class ProFormaActions extends BaseActionsExt<typeof proFormaPage> {
     }
 
     verifyPsfNOIIncludeForecasts(): ProFormaActions {
-        cy.get(`@${Alias.expenceForcastAliases.summaPerSF}`).then(val => {           
+        cy.get(`@${Alias.expenceForecastAliases.sumPerSF}`).then(val => {           
             this.Page.categoryPSFTotal(enums.PRO_FORMA_TYPES.netOperatingIncome).invoke("text").then(psfIncome => {                
                 this.Page.categoryPSFTotal(enums.PRO_FORMA_TYPES.realEstateTaxes).invoke("text").then(taxesText => {                   
                     this.Page.categoryPSFTotal(enums.PRO_FORMA_TYPES.effectiveGrossIncome).invoke("text").then(incomeText => {
@@ -233,7 +233,7 @@ class ProFormaActions extends BaseActionsExt<typeof proFormaPage> {
     }
 
     verifyPerUnitNOIIncludeForecasts(): ProFormaActions {
-        cy.get(`@${Alias.expenceForcastAliases.summaPerUnit}`).then(val => {            
+        cy.get(`@${Alias.expenceForecastAliases.sumPerUnit}`).then(val => {            
             this.Page.categoryPerUnitTotal(enums.PRO_FORMA_TYPES.netOperatingIncome).invoke("text").then(perUnitIncome => {                
                 this.Page.categoryPerUnitTotal(enums.PRO_FORMA_TYPES.realEstateTaxes).invoke("text").then(taxesText => {                    
                     this.Page.categoryPerUnitTotal(enums.PRO_FORMA_TYPES.effectiveGrossIncome).invoke("text").then(incomeText => {

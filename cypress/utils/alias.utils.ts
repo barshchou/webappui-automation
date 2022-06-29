@@ -36,8 +36,8 @@ export const Alias = {
             appraiserCommentaryTextArea:"appraiserCommentaryTextArea"
         }
     },
-    expenceForcastAliases: {
-        summaPerSF: "summaPerSF",
-        summaPerUnit: "summaPerUnit"
+    expenceForecastAliases: {
+        sumPerSF: "sumPerSF",
+        sumPerUnit: "sumPerUnit"
     },
 };

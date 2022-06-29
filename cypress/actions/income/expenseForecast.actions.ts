@@ -359,16 +359,16 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
          * 2.2.1. If checkbox "Include Expense on Pro Forma" is checked - then function takes input value, then calculate and transfer it to value in Per SF, then sum into sumPerSF.
          * 2.2.2. If checkbox "Include Expense on Pro Forma" is not checked - then function does not sum input value into sumPerSF.
          *
-         * 3. sumPerSF value wraped as alias 'summaPerSF' and is used in other actions 
+         * 3. sumPerSF value wraped as alias 'sumPerSF' and is used in other actions 
          */
 
     totalSumForecastPSF(GBA?: number, resUnits?: number, rooms?: number): ExpenseForecastActions {
         expenseForecastPage.allForecastsInputs.then(inputs => {
             let sumPerSF = 0;
-            cy.wrap(sumPerSF).as(Alias.expenceForcastAliases.summaPerSF);
+            cy.wrap(sumPerSF).as(Alias.expenceForecastAliases.sumPerSF);
             for (let i = 0; i < inputs.length; i++) {
                 this.includeExpensesProFormaCheckbox(inputs, i);
-                cy.get("@IncludeExpenseonProFormaCheckbox").then(card => {
+                cy.get("@IncludeExpenseOnProFormaCheckbox").then(card => {
                     if (card.find('[label="Include Expense on Pro Forma"]').length > 0) {
                         this.includeExpenseProFormaCheckboxValue(inputs, i);
                         cy.get("@checkboxValue").then(checkboxValue => {
@@ -388,7 +388,7 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
 
     verifyTotalForecastPSF(GBA?, resUnits?, rooms?): ExpenseForecastActions {
         this.totalSumForecastPSF(GBA, resUnits, rooms);
-        cy.get(`@${Alias.expenceForcastAliases.summaPerSF}`).then(val => {
+        cy.get(`@${Alias.expenceForecastAliases.sumPerSF}`).then(val => {
             const textToBe = `Appraiser's Forecast: $${numberWithCommas(Number(val).toFixed(2))}`;
             expenseForecastPage.appraisersTotalForecast.should("have.text", textToBe);
         });
@@ -405,16 +405,16 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
     * 2.2.1. If checkbox "Include Expense on Pro Forma" is checked - then function takes input value, then calculate and transfer it to value in Per Unit, then sum into sumPerUnit.
     * 2.2.2. If checkbox "Include Expense on Pro Forma" is not checked - then function does not sum input value into sumPerUnit.
     *
-    * 3. sumPerUnit value wraped as alias 'summaPerUnit' and is used in other actions 
+    * 3. sumPerUnit value wraped as alias 'sumPerUnit' and is used in other actions 
     */
 
     totalSumForecastPerUnit(GBA?: number, resUnits?: number, rooms?: number): ExpenseForecastActions {
         expenseForecastPage.allForecastsInputs.then(inputs => {
             let sumPerUnit = 0;
-            cy.wrap(sumPerUnit).as(Alias.expenceForcastAliases.summaPerUnit);
+            cy.wrap(sumPerUnit).as(Alias.expenceForecastAliases.sumPerUnit);
             for (let i = 0; i < inputs.length; i++) {
                 this.includeExpensesProFormaCheckbox(inputs, i);
-                cy.get("@IncludeExpenseonProFormaCheckbox").then(card => {
+                cy.get("@IncludeExpenseOnProFormaCheckbox").then(card => {
                     if (card.find('[label="Include Expense on Pro Forma"]').length > 0) {
                         this.includeExpenseProFormaCheckboxValue(inputs, i);
                         cy.get("@checkboxValue").then(checkboxValue => {
@@ -434,7 +434,7 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
 
     verifyTotalForecastPerUnit(GBA?, resUnits?, rooms?): ExpenseForecastActions {
         this.totalSumForecastPerUnit(GBA, resUnits, rooms);
-        cy.get(`@${Alias.expenceForcastAliases.summaPerUnit}`).then(val => {
+        cy.get(`@${Alias.expenceForecastAliases.sumPerUnit}`).then(val => {
             const textToBe = `Appraiser's Forecast: $${numberWithCommas(Number(val).toFixed(2))}`;
             expenseForecastPage.appraisersTotalForecast.should("have.text", textToBe);
         });
@@ -442,10 +442,10 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
     }
 
     private SumPsfDependingOnBasis(inputs: JQuery<HTMLElement>, i: number, resUnits: number, GBA: number, rooms: number): ExpenseForecastActions {
-        cy.get(`@${Alias.expenceForcastAliases.summaPerSF}`).then(summaPerSF => {
-            this.radiobuttonBasis(inputs, i);
+        cy.get(`@${Alias.expenceForecastAliases.sumPerSF}`).then(sumPerSF => {
+            this.radioButtonBasis(inputs, i);
             cy.get("@basisValue").then(basisValue => {
-                let sumPSF = Number(summaPerSF);
+                let sumPSF = Number(sumPerSF);
                 let expenseBasis = String(basisValue);
                 let inputValue = getNumberFromDollarNumberWithCommas(inputs[i].getAttribute("value"));
                 if (expenseBasis === "sf") {
@@ -457,29 +457,29 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
                     let inputValuePerSF = (inputValue * rooms) / GBA;
                     sumPSF += inputValuePerSF;
                 }
-                cy.wrap(sumPSF).as(Alias.expenceForcastAliases.summaPerSF);
+                cy.wrap(sumPSF).as(Alias.expenceForecastAliases.sumPerSF);
             });
         });
         return this;
     }
 
     private SumPerUnitDependingOnBasis(inputs: JQuery<HTMLElement>, i: number, resUnits: number, GBA: number, rooms: number): ExpenseForecastActions {
-        cy.get(`@${Alias.expenceForcastAliases.summaPerUnit}`).then(summaPerUnit => {
-            this.radiobuttonBasis(inputs, i);
+        cy.get(`@${Alias.expenceForecastAliases.sumPerUnit}`).then(sumPerUnit => {
+            this.radioButtonBasis(inputs, i);
             cy.get("@basisValue").then(basisValue => {
-                let sumPerUnit = Number(summaPerUnit);
+                let sumUnit = Number(sumPerUnit);
                 let expenseBasis = String(basisValue);
                 let inputValue = getNumberFromDollarNumberWithCommas(inputs[i].getAttribute("value"));
                 if (expenseBasis === "sf") {
                     let inputValuePerUnit = (inputValue * GBA) / resUnits;
-                    sumPerUnit += inputValuePerUnit;
+                    sumUnit += inputValuePerUnit;
                 } else if (expenseBasis === "unit") {
                     sumPerUnit += inputValue;
                 } else {
                     let inputValuePerUnit = (inputValue * rooms) / resUnits;
-                    sumPerUnit += inputValuePerUnit;
+                    sumUnit += inputValuePerUnit;
                 }
-                cy.wrap(sumPerUnit).as(Alias.expenceForcastAliases.summaPerUnit);
+                cy.wrap(sumUnit).as(Alias.expenceForecastAliases.sumPerUnit);
             });
         });
         return this;
@@ -487,7 +487,7 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
 
     private includeExpensesProFormaCheckbox(inputs: JQuery<HTMLElement>, i: number): ExpenseForecastActions {
         cy.wrap(inputs[i]).parents('[data-qa$=-forecast-item]').then(card => {
-            cy.wrap(card).as("IncludeExpenseonProFormaCheckbox");
+            cy.wrap(card).as("IncludeExpenseOnProFormaCheckbox");
         });
         return this;
     }
@@ -500,7 +500,7 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
         return this;
     }
 
-    private radiobuttonBasis(inputs: JQuery<HTMLElement>, i: number): ExpenseForecastActions {
+    private radioButtonBasis(inputs: JQuery<HTMLElement>, i: number): ExpenseForecastActions {
         cy.wrap(inputs[i]).parents('[data-qa$=-forecast-item]').find('[data-qa="checked"]').find('[type="radio"]')
             .invoke('prop', 'value').then(basisValue => {
                 cy.wrap(basisValue).as("basisValue");

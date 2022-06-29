@@ -28,7 +28,7 @@ describe(`[QA-5011] [QA-5012] [Income>Expense forecast] Unselected existing expe
             cy.stepInfo(`2. Go to Income > Residential > In-Place Rent Roll and add rooms to residential units`);
             _NavigationSection.navigateToResInPlaceRentRoll();
             Income._Residential.InPlaceRentRoll.checkCheckboxByLabel(testData.perRoomAnalysis)
-                .enterRoomsNumberByRowNumber(testData.rentRollresUnitFixture.rooms, 0);
+                .enterRoomsNumberByRowNumber(testData.rentRollResUnitFixture.rooms, 0);
 
             cy.stepInfo(`3. Verify if “Include Expense on Pro Forma” is unselected -> this  expense category 
                          is NOT displayed in the Pro Forma page> Operating Expenses section and
@@ -46,7 +46,7 @@ describe(`[QA-5011] [QA-5012] [Income>Expense forecast] Unselected existing expe
             Income._ExpenseForecastActions.Page.toeAppraisersForecastValueLine.should('contain', testData.forecastPSFnotIncluded);
             Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastTotalFixture('unit'))
                 .verifyTOECommentary(testData.commentaries.generated);
-            Income._ExpenseForecastActions.Page.toeAppraisersForecastValueLine.should('contain', testData.forecastPerUnitnotIncluded);
+            Income._ExpenseForecastActions.Page.toeAppraisersForecastValueLine.should('contain', testData.forecastPerUnitNotIncluded);
             Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastTotalFixture('sf'));
 
             cy.stepInfo(`3. Verify if “Include Expense on Pro Forma” is unselected -> this  expense category 
@@ -64,7 +64,7 @@ describe(`[QA-5011] [QA-5012] [Income>Expense forecast] Unselected existing expe
             Income._ExpenseForecastActions.Page.toeAppraisersForecastValueLine.should('contain', testData.forecastPSFnotIncluded);
             Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastTotalFixture('unit'))
                 .verifyTOECommentary(testData.commentaries.generated);
-            Income._ExpenseForecastActions.Page.toeAppraisersForecastValueLine.should('contain', testData.forecastPerUnitnotIncluded);
+            Income._ExpenseForecastActions.Page.toeAppraisersForecastValueLine.should('contain', testData.forecastPerUnitNotIncluded);
             Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastTotalFixture('sf'));
 
             cy.stepInfo(`4. Verify if “Include Expense on Pro Forma” is unselected -> this  expense category 
@@ -80,7 +80,7 @@ describe(`[QA-5011] [QA-5012] [Income>Expense forecast] Unselected existing expe
             Income._ExpenseForecastActions.Page.toeAppraisersForecastValueLine.should('contain', testData.forecastPSFnotIncluded);
             Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastTotalFixture('unit'))
                 .verifyTOECommentary(testData.commentaries.generated);
-            Income._ExpenseForecastActions.Page.toeAppraisersForecastValueLine.should('contain', testData.forecastPerUnitnotIncluded);
+            Income._ExpenseForecastActions.Page.toeAppraisersForecastValueLine.should('contain', testData.forecastPerUnitNotIncluded);
             Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastTotalFixture('sf'));
 
             cy.stepInfo(`5. Verify if “Include Expense on Pro Forma” is unselected -> this  expense category 
@@ -98,7 +98,7 @@ describe(`[QA-5011] [QA-5012] [Income>Expense forecast] Unselected existing expe
             Income._ExpenseForecastActions.Page.toeAppraisersForecastValueLine.should('contain', testData.forecastPSFnotIncluded);
             Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastTotalFixture('unit'))
                 .verifyTOECommentary(testData.commentaries.generated);
-            Income._ExpenseForecastActions.Page.toeAppraisersForecastValueLine.should('contain', testData.forecastPerUnitnotIncluded);
+            Income._ExpenseForecastActions.Page.toeAppraisersForecastValueLine.should('contain', testData.forecastPerUnitNotIncluded);
             Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastTotalFixture('sf'));
 
             cy.stepInfo(`6. Verify if “Include Expense on Pro Forma” is unselected -> this  expense category 
@@ -116,7 +116,7 @@ describe(`[QA-5011] [QA-5012] [Income>Expense forecast] Unselected existing expe
             Income._ExpenseForecastActions.Page.toeAppraisersForecastValueLine.should('contain', testData.forecastPSFnotIncluded);
             Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastTotalFixture('unit'))
                 .verifyTOECommentary(testData.commentaries.generated);
-            Income._ExpenseForecastActions.Page.toeAppraisersForecastValueLine.should('contain', testData.forecastPerUnitnotIncluded);
+            Income._ExpenseForecastActions.Page.toeAppraisersForecastValueLine.should('contain', testData.forecastPerUnitNotIncluded);
             Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastTotalFixture('sf'));
 
             cy.stepInfo(`7. Verify if “Include Expense on Pro Forma” is unselected -> this  expense category 
@@ -134,7 +134,7 @@ describe(`[QA-5011] [QA-5012] [Income>Expense forecast] Unselected existing expe
             Income._ExpenseForecastActions.Page.toeAppraisersForecastValueLine.should('contain', testData.forecastPSFnotIncluded);
             Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastTotalFixture('unit'))
                 .verifyTOECommentary(testData.commentaries.generated);
-            Income._ExpenseForecastActions.Page.toeAppraisersForecastValueLine.should('contain', testData.forecastPerUnitnotIncluded);
+            Income._ExpenseForecastActions.Page.toeAppraisersForecastValueLine.should('contain', testData.forecastPerUnitNotIncluded);
             Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastTotalFixture('sf'));
         });
 
@@ -146,12 +146,12 @@ describe(`[QA-5011] [QA-5012] [Income>Expense forecast] Unselected existing expe
             Income._ExpenseForecastActions.totalSumForecastPSF(
                 testData.buildingDescription.grossArea,
                 testData.numberOfResidentialUnits,
-                testData.rentRollresUnitFixture.rooms
+                testData.rentRollResUnitFixture.rooms
             )
                 .totalSumForecastPerUnit(
                     testData.buildingDescription.grossArea,
                     testData.numberOfResidentialUnits,
-                    testData.rentRollresUnitFixture.rooms
+                    testData.rentRollResUnitFixture.rooms
                 );
             _NavigationSection.navigateToProForma();
             Income._ProFormaActions.verifyTotalTOEexTaxesIncludeForecasts(testData.buildingDescription.grossArea)
@@ -167,13 +167,13 @@ describe(`[QA-5011] [QA-5012] [Income>Expense forecast] Unselected existing expe
             Income._ExpenseForecastActions.verifyTotalForecastPSF(
                 testData.buildingDescription.grossArea,
                 testData.numberOfResidentialUnits,
-                testData.rentRollresUnitFixture.rooms
+                testData.rentRollResUnitFixture.rooms
             )
                 .chooseForecastItemBasis(testData.expenseForecastTotalFixture('unit'))
                 .verifyTotalForecastPerUnit(
                     testData.buildingDescription.grossArea,
                     testData.numberOfResidentialUnits,
-                    testData.rentRollresUnitFixture.rooms
+                    testData.rentRollResUnitFixture.rooms
                 );
 
             cy.stepInfo(`2. Verify If “Include Expense on Pro Forma” checkbox is unselected but there is 
@@ -185,12 +185,12 @@ describe(`[QA-5011] [QA-5012] [Income>Expense forecast] Unselected existing expe
             Income._ExpenseForecastActions.totalSumForecastPSF(
                 testData.buildingDescription.grossArea,
                 testData.numberOfResidentialUnits,
-                testData.rentRollresUnitFixture.rooms
+                testData.rentRollResUnitFixture.rooms
             )
                 .totalSumForecastPerUnit(
                     testData.buildingDescription.grossArea,
                     testData.numberOfResidentialUnits,
-                    testData.rentRollresUnitFixture.rooms
+                    testData.rentRollResUnitFixture.rooms
                 );
             _NavigationSection.navigateToProForma();
             Income._ProFormaActions.verifyTotalTOEexTaxesIncludeForecasts(testData.buildingDescription.grossArea)
@@ -206,13 +206,13 @@ describe(`[QA-5011] [QA-5012] [Income>Expense forecast] Unselected existing expe
             Income._ExpenseForecastActions.verifyTotalForecastPerUnit(
                 testData.buildingDescription.grossArea,
                 testData.numberOfResidentialUnits,
-                testData.rentRollresUnitFixture.rooms
+                testData.rentRollResUnitFixture.rooms
             )
                 .chooseForecastItemBasis(testData.expenseForecastTotalFixture('sf'))
                 .verifyTotalForecastPSF(
                     testData.buildingDescription.grossArea,
                     testData.numberOfResidentialUnits,
-                    testData.rentRollresUnitFixture.rooms
+                    testData.rentRollResUnitFixture.rooms
                 );
 
             cy.stepInfo(`3. Verify If “Include Expense on Pro Forma”  checkbox is unselected but there is 
@@ -222,12 +222,12 @@ describe(`[QA-5011] [QA-5012] [Income>Expense forecast] Unselected existing expe
             Income._ExpenseForecastActions.totalSumForecastPSF(
                 testData.buildingDescription.grossArea,
                 testData.numberOfResidentialUnits,
-                testData.rentRollresUnitFixture.rooms
+                testData.rentRollResUnitFixture.rooms
             )
                 .totalSumForecastPerUnit(
                     testData.buildingDescription.grossArea,
                     testData.numberOfResidentialUnits,
-                    testData.rentRollresUnitFixture.rooms
+                    testData.rentRollResUnitFixture.rooms
                 );
             _NavigationSection.navigateToProForma();
             Income._ProFormaActions.verifyTotalTOEexTaxesIncludeForecasts(testData.buildingDescription.grossArea)
@@ -243,13 +243,13 @@ describe(`[QA-5011] [QA-5012] [Income>Expense forecast] Unselected existing expe
             Income._ExpenseForecastActions.verifyTotalForecastPSF(
                 testData.buildingDescription.grossArea,
                 testData.numberOfResidentialUnits,
-                testData.rentRollresUnitFixture.rooms
+                testData.rentRollResUnitFixture.rooms
             )
                 .chooseForecastItemBasis(testData.expenseForecastTotalFixture('unit'))
                 .verifyTotalForecastPerUnit(
                     testData.buildingDescription.grossArea,
                     testData.numberOfResidentialUnits,
-                    testData.rentRollresUnitFixture.rooms
+                    testData.rentRollResUnitFixture.rooms
                 );
 
             deleteReport(testData.reportCreationData.reportNumber);

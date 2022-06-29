@@ -35,10 +35,10 @@ const commentariesFixture = () => {
 };
 
 const _forecastPSFnotIncluded = '$0.00';
-const _forecastPerUnitnotIncluded = '$0';
+const _forecastPerUnitNotIncluded = '$0';
 
 const _expensesInProFormaByDefaultArray = [
-    proFormaTypes.insurace,
+    proFormaTypes.insurance,
     proFormaTypes.electricity,
     proFormaTypes.fuel,
     proFormaTypes.waterAndSewer,
@@ -46,7 +46,7 @@ const _expensesInProFormaByDefaultArray = [
     proFormaTypes.payrollBenefits,
     proFormaTypes.generalAndAdministrative,
     proFormaTypes.legalAndProfessional,
-    proFormaTypes.miscelaneous,
+    proFormaTypes.miscellaneous,
     proFormaTypes.managementFees,
     proFormaTypes.replacementsAndReserves,
 ];
@@ -171,7 +171,7 @@ export default {
     expenseForecastFixtureArray,
     commentaries: Object.freeze(commentariesFixture()),
     forecastPSFnotIncluded: _forecastPSFnotIncluded,
-    forecastPerUnitnotIncluded: _forecastPerUnitnotIncluded,
-    rentRollresUnitFixture: rentRollResidentialUnitFixture(),
+    forecastPerUnitNotIncluded: _forecastPerUnitNotIncluded,
+    rentRollResUnitFixture: rentRollResidentialUnitFixture(),
     perRoomAnalysis: "Include Per Room Analysis in Report",
 };
