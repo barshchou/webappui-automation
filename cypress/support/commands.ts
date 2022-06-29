@@ -5,7 +5,10 @@ import "cypress-localstorage-commands";
 import mapKeysUtils from '../utils/mapKeys.utils';
 import { BoweryAutomation } from '../types/boweryAutomation.type';
 
-const _map = new Map();
+/**
+ * You can use exporting of this map only in exceptional cases, as in QA-4136 spec
+ */
+export const _map = new Map();
 
 //#region plugin commands initialization
 addMatchImageSnapshotCommand({
@@ -63,7 +66,7 @@ Cypress.Commands.add("createApiReport",
         _token:token,
         _envUrl:envUrl
 
-    }, { timeout:30000 })
+    }, { timeout:60000 })
     .then(val => {
         cy.log(`reportId is next: ${val}`);
         cy._mapSet(mapKeysUtils.report_id, val);
