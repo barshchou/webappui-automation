@@ -146,33 +146,19 @@ const expenseForecastTotalFixture = (_basis: "unit" | "sf"): BoweryReports.Forec
     };
 };
 
-const expenseForecastFixtureWithUnitArray = [
-    expenseForecastInsuranceFixture("unit"),
-    expenseForecastElectricityFixture("unit"),
-    expenseForecastFuelFixture("unit"),
-    expenseForecastWaterAndSewerFixture("unit"),
-    expenseForecastRepairsAndMaintenanceFixture("unit"),
-    expenseForecastPayrollAndBenefitsFixture("unit"),
-    expenseForecastGeneralAndAdministrativeFixture("unit"),
-    expenseForecastLegalAndProfessionalFeesFixture("unit"),
-    expenseForecastMiscellaneousFixture("unit"),
-    expenseForecastManagementFixture("unit"),
-    expenseForecastReservesFixture("unit")
-];
-
-const expenseForecastFixtureWithPSFArray = [
-    expenseForecastInsuranceFixture("sf"),
-    expenseForecastElectricityFixture("sf"),
-    expenseForecastFuelFixture("sf"),
-    expenseForecastWaterAndSewerFixture("sf"),
-    expenseForecastRepairsAndMaintenanceFixture("sf"),
-    expenseForecastPayrollAndBenefitsFixture("sf"),
-    expenseForecastGeneralAndAdministrativeFixture("sf"),
-    expenseForecastLegalAndProfessionalFeesFixture("sf"),
-    expenseForecastMiscellaneousFixture("sf"),
-    expenseForecastManagementFixture("sf"),
-    expenseForecastReservesFixture("sf")
-];
+const expenseForecastFixtureArray = (basis?: "unit" | "sf"): Array<BoweryReports.ForecastItem> => {
+    return [ expenseForecastInsuranceFixture(basis),
+    expenseForecastElectricityFixture(basis),
+    expenseForecastFuelFixture(basis),
+    expenseForecastWaterAndSewerFixture(basis),
+    expenseForecastRepairsAndMaintenanceFixture(basis),
+    expenseForecastPayrollAndBenefitsFixture(basis),
+    expenseForecastGeneralAndAdministrativeFixture(basis),
+    expenseForecastLegalAndProfessionalFeesFixture(basis),
+    expenseForecastMiscellaneousFixture(basis),
+    expenseForecastManagementFixture(basis),
+    expenseForecastReservesFixture(basis) ];
+};
 
 export default {
     reportCreationData: _reportCreationData,
@@ -182,8 +168,7 @@ export default {
     expenseForecastTotalFixture,
     numberOfResidentialUnits: _numberOfResidentialUnits,
     numberOfCommercialUnits: _numberOfCommercialUnits,
-    expenseForecastFixtureWithUnitArray,
-    expenseForecastFixtureWithPSFArray,
+    expenseForecastFixtureArray,
     commentaries: Object.freeze(commentariesFixture()),
     forecastPSFnotIncluded: _forecastPSFnotIncluded,
     forecastPerUnitnotIncluded: _forecastPerUnitnotIncluded,

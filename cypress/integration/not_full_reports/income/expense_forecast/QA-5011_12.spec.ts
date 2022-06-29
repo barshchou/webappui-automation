@@ -52,7 +52,7 @@ describe(`[QA-5011] [QA-5012] [Income>Expense forecast] Unselected existing expe
             cy.stepInfo(`3. Verify if “Include Expense on Pro Forma” is unselected -> this  expense category 
                          is NOT displayed in the Pro Forma page> Operating Expenses section and is NOT displayed 
                          in the Expense Forecast page>Total operating expenses card and generated comment (Per Unit measure + Empty Appraiser's forecasts)`);
-            testData.expenseForecastFixtureWithUnitArray.forEach(element => {
+            testData.expenseForecastFixtureArray("unit").forEach(element => {
                 Income._ExpenseForecastActions.chooseForecastItemBasis(element);
             });
             _NavigationSection.navigateToProForma();
@@ -85,8 +85,8 @@ describe(`[QA-5011] [QA-5012] [Income>Expense forecast] Unselected existing expe
 
             cy.stepInfo(`5. Verify if “Include Expense on Pro Forma” is unselected -> this  expense category 
                          is NOT displayed in the Pro Forma page> Operating Expenses section and is NOT displayed in the 
-                         Expense Forecast page>Total operating expenses card and generated comment (Per Unit measure + Full Appraiser's forecasts)`);
-            testData.expenseForecastFixtureWithUnitArray.forEach(element => {
+                         Expense Forecast page>Total operating expenses card and generated comment (Per Room measure for Fuel + Full Appraiser's forecasts)`);
+            testData.expenseForecastFixtureArray().forEach(element => {
                 Income._ExpenseForecastActions.enterForecastItemForecast(element);
             });
             _NavigationSection.navigateToProForma();
@@ -104,7 +104,7 @@ describe(`[QA-5011] [QA-5012] [Income>Expense forecast] Unselected existing expe
             cy.stepInfo(`6. Verify if “Include Expense on Pro Forma” is unselected -> this  expense category 
                          is NOT displayed in the Pro Forma page> Operating Expenses section and is NOT displayed in the 
                          Expense Forecast page>Total operating expenses card and generated comment (PSF measure + Full Appraiser's forecasts)`);
-            testData.expenseForecastFixtureWithPSFArray.forEach(element => {
+            testData.expenseForecastFixtureArray("sf").forEach(element => {
                 Income._ExpenseForecastActions.chooseForecastItemBasis(element);
             });
             _NavigationSection.navigateToProForma();
@@ -121,8 +121,10 @@ describe(`[QA-5011] [QA-5012] [Income>Expense forecast] Unselected existing expe
 
             cy.stepInfo(`7. Verify if “Include Expense on Pro Forma” is unselected -> this  expense category 
                          is NOT displayed in the Pro Forma page> Operating Expenses section and is NOT displayed 
-                         in the Expense Forecast page>Total operating expenses card and generated comment (Per Room measure for Fuel + Full Appraiser's forecasts)`);
-            Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastFuelFixture('room'));
+                         in the Expense Forecast page>Total operating expenses card and generated comment (Per Unit measure + Full Appraiser's forecasts)`);
+            testData.expenseForecastFixtureArray("unit").forEach(element => {
+                Income._ExpenseForecastActions.chooseForecastItemBasis(element);
+            });
             _NavigationSection.navigateToProForma();
             testData.expensesInProFormaByDefaultArray.forEach(element => {
                 Income._ProFormaActions.Page.categoryCellTotal(element).should('not.exist');
@@ -140,7 +142,7 @@ describe(`[QA-5011] [QA-5012] [Income>Expense forecast] Unselected existing expe
 
             cy.stepInfo(`1. Verify If “Include Expense on Pro Forma”  checkbox is unselected but there is 
                          data left in the forecast, this data is not included in calculations on Pro forma and Expense forecast page 
-                         (Per Room measure for Fuel + Full Appraiser's forecasts)`);
+                         (Per Unit measure + Full Appraiser's forecasts)`);
             Income._ExpenseForecastActions.totalSumForecastPSF(
                 testData.buildingDescription.grossArea,
                 testData.numberOfResidentialUnits,
@@ -177,7 +179,7 @@ describe(`[QA-5011] [QA-5012] [Income>Expense forecast] Unselected existing expe
             cy.stepInfo(`2. Verify If “Include Expense on Pro Forma” checkbox is unselected but there is 
                         data left in the forecast, this data is not included in calculations on Pro forma and Expense forecast page 
                         (PSF measure + Full Appraiser's forecasts)`);
-            testData.expenseForecastFixtureWithPSFArray.forEach(element => {
+            testData.expenseForecastFixtureArray("sf").forEach(element => {
                 Income._ExpenseForecastActions.chooseForecastItemBasis(element);
             });
             Income._ExpenseForecastActions.totalSumForecastPSF(
@@ -215,10 +217,8 @@ describe(`[QA-5011] [QA-5012] [Income>Expense forecast] Unselected existing expe
 
             cy.stepInfo(`3. Verify If “Include Expense on Pro Forma”  checkbox is unselected but there is 
                          data left in the forecast, this data is not included in calculations on Pro forma and Expense forecast page 
-                         (Per Unit measure + Full Appraiser's forecasts)`);
-            testData.expenseForecastFixtureWithUnitArray.forEach(element => {
-                Income._ExpenseForecastActions.chooseForecastItemBasis(element);
-            });
+                         (Per Room measure for Fuel + Full Appraiser's forecasts)`);
+            Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastFuelFixture('room'));
             Income._ExpenseForecastActions.totalSumForecastPSF(
                 testData.buildingDescription.grossArea,
                 testData.numberOfResidentialUnits,
