@@ -38,7 +38,7 @@ describe(`[QA-5042] [QA-5044] [QA-5045] [QA-5047] [QA-5048][Income>Expense forec
                          * Title of  the required field "Category Name"
                          * There are two buttons on the right bottom:
                          * "Cancel" button and "Save" button`);
-            Income._ExpenseForecastActions.Page.titleOfaddCustomExpenseCategoryModal.should('exist');
+            Income._ExpenseForecastActions.Page.titleOfAddCustomExpenseCategoryModal.should('exist');
             Income._ExpenseForecastActions.Page.addCustomExpenseCategoryInput.should('exist');
             Income._ExpenseForecastActions.Page.addCustomExpenseCategoryCancelButton.should('exist');
             Income._ExpenseForecastActions.Page.addCustomExpenseCategorySaveButton.should('exist');
@@ -53,7 +53,7 @@ describe(`[QA-5042] [QA-5044] [QA-5045] [QA-5047] [QA-5048][Income>Expense forec
             cy.stepInfo(`2. Verify "Save" button is disabled if Category Name field is empty and user can not new expense with the empty field`);
             Income._ExpenseForecastActions.Page.addCustomExpenseCategoryInput.should('be.empty');
             Income._ExpenseForecastActions.Page.addCustomExpenseCategorySaveButton.should('be.disabled').click({ force: true });
-            Income._ExpenseForecastActions.Page.titleOfaddCustomExpenseCategoryModal.should('exist');
+            Income._ExpenseForecastActions.Page.titleOfAddCustomExpenseCategoryModal.should('exist');
 
             cy.stepInfo(`3. Verify if user click on the empty field and then clicks outside the field → 
                          the field is highlighted with red and “Category name is required” warning appears under the field`);
