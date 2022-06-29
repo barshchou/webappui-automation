@@ -1,4 +1,4 @@
-import { Alias } from './../../utils/alias.utils';
+import { Alias } from '../../utils/alias.utils';
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import reviewExportPage from "../../pages/reviewExport/reviewExport.page";
 import BaseActionsExt from "../base/base.actions.ext";
