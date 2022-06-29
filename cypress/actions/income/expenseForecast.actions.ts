@@ -163,13 +163,8 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
     }
 
     changeStateOfIncludeInProFormaCheckbox(forecastItem: string, isToCheck = true): ExpenseForecastActions {
-        if (isToCheck) {
             expenseForecastPage.getCheckboxIncludeInProForma(forecastItem)
-                .should("have.value", "false").check({ force: true }).should("have.value", "true");
-        } else {
-            expenseForecastPage.getCheckboxIncludeInProForma(forecastItem)
-                .should("have.value", "true").uncheck({ force: true }).should("have.value", "false");
-        }
+                .should("have.value", `${!isToCheck}`).click({ multiple: true }).should("have.value", `${isToCheck}`);
         return this;
     }
 
