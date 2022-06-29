@@ -78,10 +78,10 @@ describe(`[QA-5042] [QA-5044] [QA-5045] [QA-5047] [QA-5048][Income>Expense forec
             Income._ExpenseForecastActions.Page.forecastItemCardFull(testData.firstCustomCategory.name, true)
                 .then(el => cy.wrap(el[0].offsetTop).as('coordinatesCustomCard'));
             Income._ExpenseForecastActions.Page.toeCard
-                .then(el => cy.wrap(el[0].offsetTop).as('coordinatesTotalcard'));
+                .then(el => cy.wrap(el[0].offsetTop).as('coordinatesTotalCard'));
             cy.get('@coordinatesReplacementCard').then(coordinatesReplacementCard => {
                 cy.get('@coordinatesCustomCard').then(coordinatesCustomCard => {
-                    cy.get('@coordinatesTotalcard').then(coordinatesTotalcard => {
+                    cy.get('@coordinatesTotalCard').then(coordinatesTotalcard => {
                         expect(Number(coordinatesTotalcard)).to.be.greaterThan(Number(coordinatesCustomCard));
                         expect(Number(coordinatesCustomCard)).to.be.greaterThan(Number(coordinatesReplacementCard));
                     });
@@ -105,10 +105,10 @@ describe(`[QA-5042] [QA-5044] [QA-5045] [QA-5047] [QA-5048][Income>Expense forec
             Income._ExpenseForecastActions.Page.forecastItemCardFull(testData.secondCustomCategory.name, true)
                 .then(el => cy.wrap(el[0].offsetTop).as('coordinatesSecondCustomCard'));
             Income._ExpenseForecastActions.Page.toeCard
-                .then(el => cy.wrap(el[0].offsetTop).as('coordinatesTotalcard'));
+                .then(el => cy.wrap(el[0].offsetTop).as('coordinatesTotalCard'));
             cy.get('@coordinatesFirstCustomCard').then(coordinatesFirstCustomCard => {
                 cy.get('@coordinatesSecondCustomCard').then(coordinatesSecondCustomCard => {
-                    cy.get('@coordinatesTotalcard').then(coordinatesTotalcard => {
+                    cy.get('@coordinatesTotalCard').then(coordinatesTotalcard => {
                         expect(Number(coordinatesTotalcard)).to.be.greaterThan(Number(coordinatesSecondCustomCard));
                         expect(Number(coordinatesSecondCustomCard)).to.be.greaterThan(Number(coordinatesFirstCustomCard));
                     });
