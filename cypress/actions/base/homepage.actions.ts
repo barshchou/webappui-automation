@@ -1,11 +1,12 @@
 import { interceptReportId, setReportId } from "../../../utils/intercept.utils";
 import homepagePage from "../../pages/base/homepage.page";
 import { BoweryAutomation } from "../../types/boweryAutomation.type";
+import { BoweryReports } from "../../types/boweryReports.type";
 import BaseActionsExt from "./base.actions.ext";
 
 class HomepageActions extends BaseActionsExt<typeof homepagePage> {
 
-    createReport(data: BoweryAutomation.ReportCreationData): this {
+    createReport(data: BoweryAutomation.ReportCreationData): HomepageActions {
         interceptReportId();
         if(data?.state) {
             this.clickNewReportButton()
@@ -40,113 +41,126 @@ class HomepageActions extends BaseActionsExt<typeof homepagePage> {
         return this;
     }
 
-    clickNewReportButton(): this {
+    clickNewReportButton(): HomepageActions {
         homepagePage.newReportButton.should("be.enabled").click();
         return this;
     }
 
-    enterAddressToSearch(address: string): this {
+    enterAddressToSearch(address: string): HomepageActions {
         homepagePage.searchAddressField.type(`${address}{enter}`).should("have.value", address);
         return this;
     }
 
-    clickSubmitButton(): this {
+    clickSubmitButton(): HomepageActions {
         homepagePage.submitButton.should("not.be.disabled").click({ force: true });
         return this;
     }
 
-    clickToSearchResultRow(): this {
+    clickToSearchResultRow(): HomepageActions {
         homepagePage.searchResultsRows.should("be.visible").click();
         return this;
     }
 
-    pullExternalData(value: boolean): this {
+    pullExternalData(value: boolean): HomepageActions {
         homepagePage.pullExternalDataRadios.check(`${value.toString()}`);
         return this;
     }
 
-    enterReportNumber(reportNumber: string): this {
+    enterReportNumber(reportNumber: string): HomepageActions {
         homepagePage.reportNumberInput.type(reportNumber).blur().should("have.value", reportNumber);
         return this;
     }
 
-    checkTemplateType(typeValue: string): this {
+    checkTemplateType(typeValue: string): HomepageActions {
         homepagePage.templateTypesRadios.check(typeValue);
         return this;
     }
 
-    checkIncomeType(value: string): this {
+    checkIncomeType(value: string): HomepageActions {
         homepagePage.incomeTypesRadios.check(value);
         return this;
     }
 
 
-    checkConclusionType(value: string): this {
+    checkConclusionType(value: string): HomepageActions {
         homepagePage.valueConclusionsRadios.check(value);
         return this;
     }
 
-    clickCreateReportButton(): this {
+    clickCreateReportButton(): HomepageActions {
         homepagePage.createReportButton.should("not.be.disabled").click();
         homepagePage.keyInfoBlock.should("be.visible");
 
         return this;
     }
 
-    enterReportNumberToSearch(number: string): this {
+    enterReportNumberToSearch(number: string): HomepageActions {
         homepagePage.reportNumberSearchField.scrollIntoView().should("be.visible")
         .type(number).should("have.value", number);
         return this;
     }
 
-    clickArchiveButton(reportNumber: string): this {
+    clickArchiveButton(reportNumber: string): HomepageActions {
         homepagePage.getArchiveButton(reportNumber).should("exist").click({ force:true });
         return this;
     }
 
-    verifyThatPageIsOpened(): this {
+    verifyThatPageIsOpened(): HomepageActions {
         homepagePage.createReportButton.should("be.visible");
         return this;
     }
 
-    clickAdvancedSearchButton(): this {
+    clickAdvancedSearchButton(): HomepageActions {
         homepagePage.advancedSearchButton.click();
         return this;
     }
 
-    deleteReport(reportNumber: string): this {
+    deleteReport(reportNumber: string): HomepageActions {
         this.verifyThatPageIsOpened()
             .enterReportNumberToSearch(reportNumber)
             .clickArchiveButton(reportNumber);
         return this;
     }
 
-    clickSelectStateButton(): this {
+    filterReportsByReportNumber(reportNumber: string): HomepageActions {
+        this.verifyThatPageIsOpened()
+            .enterReportNumberToSearch(reportNumber);
+        return this;
+    }
+
+    verifyReportStatus(status: BoweryReports.ReportStatus): HomepageActions {
+        homepagePage.reportStatus.invoke('text').then($status => {
+            expect($status).to.be.eq(status, `Report status: ${$status} doesn't correspond expected: ${status}!`);
+        });
+        return this;
+    }
+
+    clickSelectStateButton(): HomepageActions {
         homepagePage.selectStateButton.click();
         return this;
     }
 
-    selectStateByName(name: string): this {
+    selectStateByName(name: string): HomepageActions {
         homepagePage.getStateByName(name).click();
         return this;
     }
 
-    enterPropertyIdentifierType(type: string): this {
+    enterPropertyIdentifierType(type: string): HomepageActions {
         homepagePage.propertyIdentifierTypeInput.type(type).should("have.value", type);
         return this;
     }
 
-    enterPropertyIdentifier(value: string): this {
+    enterPropertyIdentifier(value: string): HomepageActions {
         homepagePage.propertyIdentifierInput.type(value).should("have.value", value);
         return this;
     }
 
-    openReportByName(reportNumber: string): this {
+    openReportByName(reportNumber: string): HomepageActions {
         homepagePage.reportNumberCells.contains(reportNumber).click({ force: true });
         return this;
     }
 
-    clickAllReportsTab(): this {
+    clickAllReportsTab(): HomepageActions {
         homepagePage.allReportsTab.click();
         return this;
     }

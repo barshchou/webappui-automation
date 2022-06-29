@@ -70,39 +70,42 @@ class ReviewExportActions extends BaseActionsExt<typeof reviewExportPage> {
         return this;
     }
 
+    private clickReportStatusButton(status: string, statusToChange: BoweryReports.ReportStatus): ReviewExportActions {
+        cy.log(`Changing status from '${status}' to '${statusToChange}...`);
+        reviewExportPage.changeReportStatusButton(statusToChange.toLowerCase()).click();
+        this.waitForStatusChange(statusToChange);
+        return this;
+    }
+
+    waitForStatusChange(statusToChange: BoweryReports.ReportStatus): ReviewExportActions {
+        this.verifyModal()
+            .closeModal()
+            .verifyReportStatusChanged(statusToChange);
+        return this;
+    }
+
     changeReportStatus(statusToChange: BoweryReports.ReportStatus): ReviewExportActions {
         reviewExportPage.reportStatus.invoke('text').then(($status) => {
             switch ($status) {
                 case enums.REPORT_STATUS.draft:
-                    if (statusToChange != enums.REPORT_STATUS.approved 
-                        && statusToChange !=  enums.REPORT_STATUS.submitted 
-                        && statusToChange !=  enums.REPORT_STATUS.draft) {
-                            reviewExportPage.changeReportStatusButton(statusToChange.toLowerCase()).click();
-                    } else {
-                        cy.log(`Status couldn't be changed from '${$status}' to '${statusToChange}!'`);
-                    }
+                    statusToChange == enums.REPORT_STATUS.review 
+                        ? this.clickReportStatusButton($status, statusToChange) 
+                        : cy.log(`Error! Couldn't change status from '${$status}' to '${statusToChange}!`);
                     break;
                 case "Review":
-                    if (statusToChange != enums.REPORT_STATUS.submitted) {
-                        reviewExportPage.changeReportStatusButton(statusToChange.toLowerCase()).click();
-                    } else {
-                        cy.log(`Status couldn't be changed from '${$status}' to '${statusToChange}!'`);
-                    }
+                    statusToChange != enums.REPORT_STATUS.submitted
+                        ? this.clickReportStatusButton($status, statusToChange) 
+                        : cy.log(`Error! Couldn't change status from '${$status}' to '${statusToChange}!`);
                     break;
                 case "Approved":
-                    if (statusToChange != enums.REPORT_STATUS.approved) {
-                        reviewExportPage.changeReportStatusButton(statusToChange.toLowerCase()).click();
-                    } else {
-                        cy.log(`Status couldn't be changed from '${$status}' to '${statusToChange}!'`);
-                    }
+                    statusToChange != enums.REPORT_STATUS.approved
+                        ? this.clickReportStatusButton($status, statusToChange) 
+                        : cy.log(`Error! Couldn't change status from '${$status}' to '${statusToChange}!`);
                     break;
                 case "Submitted":
-                    if (statusToChange != enums.REPORT_STATUS.approved 
-                        && statusToChange !=  enums.REPORT_STATUS.draft) {
-                            reviewExportPage.changeReportStatusButton(statusToChange.toLowerCase()).click();
-                    } else {
-                        cy.log(`Status couldn't be changed from '${$status}' to '${statusToChange}!'`);
-                    }
+                    statusToChange != enums.REPORT_STATUS.approved && statusToChange !=  enums.REPORT_STATUS.draft
+                        ? this.clickReportStatusButton($status, statusToChange) 
+                        : cy.log(`Error! Couldn't change status from '${$status}' to '${statusToChange}!`);
                     break;
                 default:
                     cy.log(`Status couldn't be changed from '${$status}' to '${statusToChange}!'`);
@@ -110,6 +113,23 @@ class ReviewExportActions extends BaseActionsExt<typeof reviewExportPage> {
             }
         });
 
+        return this;
+    }
+
+    verifyReportStatusChanged(statusToChange: BoweryReports.ReportStatus): ReviewExportActions {
+        reviewExportPage.reportStatus.invoke('text').then(($status) => {
+            expect($status).to.be.equals(statusToChange, `Report ${$status} status isn't equal to expected status: ${statusToChange}`);
+        });
+        return this;
+    }
+
+    verifyModal(success = true): ReviewExportActions {
+        reviewExportPage.resultModal(success).should("be.visible"); 
+        return this;
+    }
+
+    closeModal(success = true): ReviewExportActions {
+        reviewExportPage.resultModalCloseButton(success).click();
         return this;
     }
 }
