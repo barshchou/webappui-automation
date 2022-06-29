@@ -613,6 +613,12 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
 
         return this;
     }
+
+    logout(): NavigationSectionActions {
+        this.clickProfileOrganization()
+            .selectLink("Log Out");
+        return this;
+    }
 }
 
 export default new NavigationSectionActions(navigationSectionPage);

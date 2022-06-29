@@ -1,8 +1,12 @@
 import ReportDataCreator from "../../data_creator/reportData.creator";
 import Enums from "../../../enums/enums";
 
+const _randomPart = (): string => {
+    return "5359-62-" + Date.now().toString();
+};
+
 const reportCreationFixture = () => {
-    return ReportDataCreator.getReportData("5359-61" + `${Date.now}`, {
+    return ReportDataCreator.getReportData(_randomPart(), {
         incomeValue: Enums.INCOME_TYPE.both
     });
 };
@@ -34,5 +38,5 @@ export default {
     reviewStatus: _reviewStatus,
     draftStatus: _draftStatus,
     submittedStatus: _submittedStatus,
-    approvedStatus: _approvedStatus
+    approvedStatus: _approvedStatus,
 };

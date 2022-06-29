@@ -125,6 +125,11 @@ class HomepageActions extends BaseActionsExt<typeof homepagePage> {
     filterReportsByReportNumber(reportNumber: string): HomepageActions {
         this.verifyThatPageIsOpened()
             .enterReportNumberToSearch(reportNumber);
+        cy.intercept({ method: 'GET', url: '*report/currentUser?filters*' }).as('filtering');
+        cy.wait(`@filtering`, { timeout: 10000 }).then(({ response }) => {
+                expect(response.statusCode).equal(200);
+                expect(response.body.totalCount).equal(1);
+            });
         return this;
     }
 

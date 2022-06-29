@@ -52,7 +52,7 @@ class Homepage extends BasePage {
         return cy.get('[aria-label="grid"] a');
     }
 
-    get reportStatus() {return cy.xpath("//div[aria-colindex='9']//span");} 
+    get reportStatus() {return cy.xpath("//div[@aria-colindex='9']//span");} 
 }
 
 export default new Homepage();

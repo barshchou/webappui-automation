@@ -71,13 +71,17 @@ class ReviewExportActions extends BaseActionsExt<typeof reviewExportPage> {
     }
 
     private clickReportStatusButton(status: string, statusToChange: BoweryReports.ReportStatus): ReviewExportActions {
+        cy.intercept({ method: 'PATCH', url: '*report/state/*' }).as('reportState');
         cy.log(`Changing status from '${status}' to '${statusToChange}...`);
         reviewExportPage.changeReportStatusButton(statusToChange.toLowerCase()).click();
         this.waitForStatusChange(statusToChange);
         return this;
     }
 
-    waitForStatusChange(statusToChange: BoweryReports.ReportStatus): ReviewExportActions {
+    private waitForStatusChange(statusToChange: BoweryReports.ReportStatus): ReviewExportActions {
+        cy.wait(`@reportState`, { timeout: 10000 }).then(({ response }) => {
+            expect(response.statusCode).equal(200);
+        });
         this.verifyModal()
             .closeModal()
             .verifyReportStatusChanged(statusToChange);
