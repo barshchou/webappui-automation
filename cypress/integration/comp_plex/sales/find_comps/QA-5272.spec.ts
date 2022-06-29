@@ -1,10 +1,10 @@
 import { salesInterceptions } from "../../../../actions/base/baseTest.actions";
 import { Sales, CompPlex } from "../../../../actions";
+import testData from "../../../../fixtures/comp_plex/sales/find_comps/QA-5272.fixture";
 
 describe("[QA-5272]", () => {
-    it(`[Sales > Find Comps > Edit of the comp] 
-    Check that following fields are disabled in the edit mode `,
-    { tags: "@comp-plex-standalone" }, () => {
+
+    before(() => {
         /**
          * ernst: this tests should run only on standalone comp_plex 
          * (localhost or client's url whatever)
@@ -12,9 +12,13 @@ describe("[QA-5272]", () => {
          */
         salesInterceptions();
         cy.visit("/");
+    });
 
-        Sales._FindComps.selectCompFromMapByAddress("443 East 88 Street");
-        CompPlex.Page.getsalesCompDetails("443 East 88 Street").click();
+    it(`[Sales > Find Comps > Edit of the comp] 
+    Check that following fields are disabled in the edit mode `,
+    { tags: "@comp-plex-standalone" }, () => {
+        Sales._FindComps.selectCompFromMapByAddress(testData.address);
+        CompPlex.Page.getsalesCompDetails(testData.address).click();
         
         Sales._FindComps.Page.propertyInfoEditBtn.should("be.visible").click();
         Sales._FindComps.Page.streetAdderssInput.should("be.disabled");
