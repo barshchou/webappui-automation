@@ -37,19 +37,19 @@ describe("In-Place Rent Roll table tests",
         Income._Residential.InPlaceRentRoll.pasteMonthlyRentByRowNumber(testData.residentialUnits[0].monthlyRent, 1);
 
         cy.stepInfo("4.Verify that each value can be selected (NOTE: If 'Vacant' is selected proper 'Monthly Rent ($) field is disabled)");
-        Income._Residential.InPlaceRentRoll.enterLeaseStatusByRowNumber(testData.residentialUnits[0].leaseStatus);
-        Income._Residential.InPlaceRentRoll.Page.monthlyRentCells.eq(0).should("have.class", "readOnly");
+        Income._Residential.InPlaceRentRoll.enterLeaseStatusByRowNumber(testData.residentialUnits[0].leaseStatus)
+            .Page.monthlyRentCells.eq(0).should("have.class", "readOnly");
 
         cy.stepInfo("5. Verify the Lease Status value can be deleted");
-        Income._Residential.InPlaceRentRoll.removeLeaseStatusByRowNumber();
-        Income._Residential.InPlaceRentRoll.Page.inPlaceRentRollTitle.click();
+        Income._Residential.InPlaceRentRoll.removeLeaseStatusByRowNumber()
+            .Page.pageTitle.click();
         
         cy.stepInfo("6. Copy / Paste selected value into the Lease Status cell");
         Income._Residential.InPlaceRentRoll.pasteLeaseStatusByRowNumber(testData.residentialUnits[0].leaseStatus);
 
         cy.stepInfo("7. Verify the Rent Type value can be deleted");
-        Income._Residential.InPlaceRentRoll.removeRentTypeByRowNumber();
-        Income._Residential.InPlaceRentRoll.Page.inPlaceRentRollTitle.click();
+        Income._Residential.InPlaceRentRoll.removeRentTypeByRowNumber()
+            .Page.pageTitle.click();
 
         cy.stepInfo("8. Copy / Paste selected value into the Rent Type cell");
         Income._Residential.InPlaceRentRoll.pasteRentTypeByRowNumber(testData.residentialUnits[1].rentType);

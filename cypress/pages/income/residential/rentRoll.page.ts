@@ -2,8 +2,6 @@ import ResidentialRentRollSharedPage from "../../shared_components/residentialRe
 
 class InPlaceRentRollPage extends ResidentialRentRollSharedPage {
 
-    get inPlaceRentRollTitle() {return cy.get("*[data-qa='inPlaceRentRoll']");}
-
     get numberOfResidentialUnitsField() {return cy.get("*[data-qa='number-of-items-input'] input");}
 
     get goToPropSummaryButton() {return cy.get("[aria-label='Go To Property Summary'] [href$='/property-summary']");}
