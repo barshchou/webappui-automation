@@ -32,7 +32,7 @@ describe("Verify the Developer's Forecast checkbox on the In-Place Rent Roll pag
     for (let i = 0; i < 2; i++) {
         it(`Export №${i + 1} Verify export report`, () => {
             Cypress.config().baseUrl = null;
-            cy.task("getFilePath", { _reportName: reportCreationData(i).reportNumber, _docx_html: "html" }).then(file => {
+            cy.task("getFilePath", { _reportName: `Bowery Appraisal_${reportCreationData(i).reportNumber}`, _docx_html: "html" }).then(file => {
                 cy.log(<string>file);
                 cy.stepInfo("4. Verify the summarize values in the Current Residential Rent Roll table");
                 cy.visit(<string>file);

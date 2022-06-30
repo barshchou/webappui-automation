@@ -43,7 +43,7 @@ describe("[QA-4053] [QA-4086] The Concluded Value Per Unit is calculated correct
         Verify the export of the report
         `);
         cy.task("getFilePath",
-        { _reportName: testData.reportCreationData.reportNumber, _docx_html: "html" }
+        { _reportName: `Bowery Appraisal_${testData.reportCreationData.reportNumber}`, _docx_html: "html" }
         ).then(file => {
             cy.log(<string>file);
             cy.visit(<string>file);

@@ -40,7 +40,7 @@ describe("Verify that changes are displayed for Annual and Monthly Rent columns,
     it("Check export", () => {
         Cypress.config().baseUrl = null;
         cy.task("getFilePath",
-        { _reportName: testData.reportCreationData.reportNumber, _docx_html: "html" }
+        { _reportName: `Bowery Appraisal_${testData.reportCreationData.reportNumber}`, _docx_html: "html" }
         ).then(file => {
             cy.log(<string>file);
             
