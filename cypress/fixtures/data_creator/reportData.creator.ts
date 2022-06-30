@@ -36,7 +36,7 @@ class ReportCreator {
 
     setReportNumber(testNumber: string, isSaleForcePull?: BoweryReports.isSalesForcePull) {
         this.isSalesForcePull = (isSaleForcePull == undefined ? false : isSaleForcePull);
-        this.reportNumber = this.isSalesForcePull ? `${testNumber}` : `TestAutoReport-QA-${testNumber}`;
+        this.reportNumber = this.isSalesForcePull ? `${testNumber}` : `Bowery Appraisal_TestAutoReport-QA-${testNumber}`;
         return this;
     }
 
