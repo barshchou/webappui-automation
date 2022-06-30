@@ -3,7 +3,7 @@ import { createReport, deleteReport } from '../../../../actions/base/baseTest.ac
 import { ReviewExport } from '../../../../actions/index';
 import testData from "../../../../fixtures/not_full_reports/organizations/QA-5359-62.fixture";
 
-describe("Verify users roles to create new clients", 
+describe("Verify users roles permissions to change report status", 
     { tags:[ "@permissions_roles", "report_status" ] }, () => {
 
     afterEach('Open Home page', () => {
@@ -11,7 +11,7 @@ describe("Verify users roles to create new clients",
     });
 
     it('[QA-5359]', () => {
-        cy.stepInfo('Precondition: Create test user with Admin user');
+        cy.stepInfo('Precondition: Create report with Admin user');
         createReport(testData.reportCreationData, testData.adminUsername, testData.adminPassword);
 
         cy.stepInfo('2. On a Review & Export page change report status');
@@ -30,7 +30,7 @@ describe("Verify users roles to create new clients",
 
     it('[QA-5360]', () => {
 
-        cy.stepInfo('Precondition: Create test user with Lead Appraiser user');
+        cy.stepInfo('Precondition: Create report with Lead Appraiser user');
         createReport(testData.reportCreationData, testData.leadAppraiserUsername, testData.leadAppraiserPassword);
 
         cy.stepInfo('2. On a Review & Export page change report status');
@@ -49,7 +49,7 @@ describe("Verify users roles to create new clients",
 
     it('[QA-5361]', () => {
 
-        cy.stepInfo('Precondition: Create test user with Appraiser user');
+        cy.stepInfo('Precondition: Create report with Appraiser user');
         createReport(testData.reportCreationData, testData.appraiserUsername, testData.appraiserPassword);
 
         cy.stepInfo('2. On a Review & Export page change report status');
@@ -68,7 +68,7 @@ describe("Verify users roles to create new clients",
 
     it('[QA-5362]', () => {
 
-        cy.stepInfo('Precondition: Create test user with Inspector user');
+        cy.stepInfo('Precondition: Create report with Inspector user');
         createReport(testData.reportCreationData, testData.inspectorUsername, testData.inspectorPassword);
 
         cy.stepInfo('2. On a Review & Export page verify there is no change report status buttons');
