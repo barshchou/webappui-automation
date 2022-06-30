@@ -51,7 +51,7 @@ jobs:
 
     steps:
       - name: Run end-to-end tests with Currents dev
-        uses: Bowery-RES/action-run-e2e-tests@0.0.7
+        uses: Bowery-RES/action-run-e2e-tests@v0.0.7
         with:
           github_token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
           username: ${{ secrets.USERNAME }}
