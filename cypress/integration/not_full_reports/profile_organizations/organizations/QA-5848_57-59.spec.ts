@@ -23,8 +23,10 @@ describe("Verify users roles to create new users",
         Organization._OrganizationUsersActions.deleteUser(testData.userToFind);
     });
 
-    it("[QA-5857]", () => {
+    it.only("[QA-5857]", () => {
         cy.stepInfo('1. Login with Lead Appraiser user role');
+        console.log("leadAppraiserUsername "+testData.leadAppraiserUsername);
+        console.log("leadAppraiserPassword "+testData.leadAppraiserPassword);
         loginAction(testData.leadAppraiserUsername, testData.leadAppraiserPassword);
 
         cy.stepInfo(`2. Navigate to Organization -> Verify “Create New User” does not 
