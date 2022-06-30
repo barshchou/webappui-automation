@@ -10,17 +10,17 @@ class OrganizationEditUserPage extends BasePage{
 
     get saveButton() {return cy.xpath('//button[.="save"]');}
 
-    resultModal(result = true) {
+    getResultModal(result = true) {
         let message = result ? "Success" : "Error";
         return cy.xpath(`//*[contains(text(), "${message}")]`);
     }
 
-    resultModalCloseButton(result = true) {
+    getResultModalCloseButton(result = true) {
         let message = result ? "Success" : "Error";
         return cy.xpath(`//*[contains(text(), "${message}")]//following::button[1]`);
     }
 
-    selectRoleOption(role: BoweryAutomation.OrganizationRoles) {return cy.xpath(`//ul[@role = 'listbox']//span[.= '${role}']`);}
+    selectRoleOption(role: BoweryAutomation.OrganizationRoles) {return cy.xpath(`//ul[@role='listbox']//span[.='${role}']`);}
 }
 
 export default new OrganizationEditUserPage();

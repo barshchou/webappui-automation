@@ -37,12 +37,12 @@ class OrganizationEditUserActions extends BaseActionsExt<typeof organizationEdit
     }
 
     verifyModal(success = true): OrganizationEditUserActions {
-        organizationEditUserPage.resultModal(success).should("be.visible"); 
+        organizationEditUserPage.getResultModal(success).should("be.visible"); 
         return this;
     }
 
     closeModal(success = true): OrganizationEditUserActions {
-        organizationEditUserPage.resultModalCloseButton(success).click();
+        organizationEditUserPage.getResultModalCloseButton(success).click();
         return this;
     }
 
