@@ -109,8 +109,6 @@ class LaunchDarkly {
           // Nothing to remove
           return null;
         }
-        cy.log("targets", targets);
-        cy.log("userIndex", userIndex);
 
         const jsonPatch = {
           op: 'remove',
