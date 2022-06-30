@@ -9,8 +9,8 @@ export const createReportData = (value) => {
     return ReportDataCreator.getReportData("4247", { conclusionValue: value });
 };
 
-const occupied: BoweryReports.LeaseStatus = "Occupied";
-const vacant: BoweryReports.LeaseStatus = "Vacant";
+const occupied: BoweryReports.LeaseStatus = Enums.LEASE_STATUS.occupied;
+const vacant: BoweryReports.LeaseStatus = Enums.LEASE_STATUS.vacant;
 
 const _leaseStatusFixture = [ occupied, vacant ] as BoweryReports.LeaseStatus[];
 
