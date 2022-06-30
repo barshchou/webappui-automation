@@ -8,7 +8,7 @@ class PropertyDescriptionFormActions {
     }
 
     enterInternalNotes(value: string): PropertyDescriptionFormActions {
-        this.Page.internalNotesTextArea.clear()
+        this.Page.internalNotesTextArea.click().clear()
         .type(value, { force:true }).should("have.text", value);
         return this;
     }
