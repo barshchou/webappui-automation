@@ -1,7 +1,7 @@
 import testData from "../fixtures/not_full_reports/organizations/QA-5841_44_47.fixture";
 import NavigationSection from "../actions/base/navigationSection.actions";
 import { createReport, deleteReport } from "../actions/base/baseTest.actions";
-import launchDarkly from "../api/launchDarkly";
+import launchDarklyApi from "../api/launchDarkly.api";
 
 const projectKey = 'default';
 
@@ -15,8 +15,9 @@ describe("Verify the Rent Basis buttons",
     { tags:[ "@income", "@commercial", "@in_place_rent_roll" ] }, () => {
         
     before("Login, create report", () => {
-        // launchDarkly.getFeatureFlag(featureFlagKey);
-        launchDarkly.setFeatureFlagForUser(featureFlagKey, userId, 0);
+        launchDarklyApi.getFeatureFlag(featureFlagKey);
+        launchDarklyApi.getFeatureFlags();
+        launchDarklyApi.setFeatureFlagForUser(featureFlagKey, 0);
         createReport(testData.reportCreationData);
     });
 
@@ -27,6 +28,6 @@ describe("Verify the Rent Basis buttons",
     });
 
     after(() => {
-        launchDarkly.removeUserTarget(featureFlagKey, userId, 0);
+        launchDarklyApi.removeUserTarget(featureFlagKey, 0);
     });
 });
