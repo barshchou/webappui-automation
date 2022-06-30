@@ -4,8 +4,8 @@ import { _NavigationSection } from '../../../../actions/base/index';
 import testData from "../../../../fixtures/not_full_reports/organizations/QA-5848_57-59.fixture";
 import enums from '../../../../enums/enums';
 
-describe("Verify users roles to create new clients", 
-    { tags:[ "@permissions_roles, @client", "@organizations" ] }, () => {
+describe("Verify users roles to create new users", 
+    { tags:[ "@permissions_roles, @users", "@organizations" ] }, () => {
 
     it("[QA-5848]", () => {
         cy.stepInfo('1. Login with Admin user role');
