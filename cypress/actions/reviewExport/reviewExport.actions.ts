@@ -3,7 +3,7 @@ import { Alias } from './../../utils/alias.utils';
 import reviewExportPage from "../../pages/reviewExport/reviewExport.page";
 import BaseActionsExt from "../base/base.actions.ext";
 import { BoweryReports } from '../../types/boweryReports.type';
-import enums from '../../enums/enums';
+import reportStatuses from '../../enums/reportParams/reportStatus.enum';
 class ReviewExportActions extends BaseActionsExt<typeof reviewExportPage> {
 
     verifyPageIsOpened() {
@@ -91,25 +91,25 @@ class ReviewExportActions extends BaseActionsExt<typeof reviewExportPage> {
     changeReportStatus(statusToChange: BoweryReports.ReportStatus): ReviewExportActions {
         reviewExportPage.reportStatus.invoke('text').then(($status) => {
             switch ($status) {
-                case enums.REPORT_STATUS.draft:
-                    statusToChange == enums.REPORT_STATUS.review 
+                case reportStatuses.draft:
+                    statusToChange == reportStatuses.review 
                         ? this.clickReportStatusButton($status, statusToChange) 
-                        : cy.log(`Error! Couldn't change status from '${$status}' to '${statusToChange}!`);
+                        : cy.log(`Error! Couldn't change status from '${$status}' to '${statusToChange}'!`);
                     break;
-                case "Review":
-                    statusToChange != enums.REPORT_STATUS.submitted
+                case reportStatuses.review:
+                    statusToChange != reportStatuses.submitted
                         ? this.clickReportStatusButton($status, statusToChange) 
-                        : cy.log(`Error! Couldn't change status from '${$status}' to '${statusToChange}!`);
+                        : cy.log(`Error! Couldn't change status from '${$status}' to '${statusToChange}'!`);
                     break;
-                case "Approved":
-                    statusToChange != enums.REPORT_STATUS.approved
+                case reportStatuses.approved:
+                    statusToChange != reportStatuses.approved
                         ? this.clickReportStatusButton($status, statusToChange) 
-                        : cy.log(`Error! Couldn't change status from '${$status}' to '${statusToChange}!`);
+                        : cy.log(`Error! Couldn't change status from '${$status}' to '${statusToChange}'!`);
                     break;
-                case "Submitted":
-                    statusToChange != enums.REPORT_STATUS.approved && statusToChange !=  enums.REPORT_STATUS.draft
+                case reportStatuses.submitted:
+                    statusToChange != reportStatuses.approved && statusToChange !=  reportStatuses.draft
                         ? this.clickReportStatusButton($status, statusToChange) 
-                        : cy.log(`Error! Couldn't change status from '${$status}' to '${statusToChange}!`);
+                        : cy.log(`Error! Couldn't change status from '${$status}' to '${statusToChange}'!`);
                     break;
                 default:
                     cy.log(`Status couldn't be changed from '${$status}' to '${statusToChange}!'`);

@@ -133,8 +133,8 @@ class HomepageActions extends BaseActionsExt<typeof homepagePage> {
         return this;
     }
 
-    verifyReportStatus(status: BoweryReports.ReportStatus): HomepageActions {
-        homepagePage.reportStatus.invoke('text').then($status => {
+    verifyReportStatus(status: BoweryReports.ReportStatus, reportNumber: string): HomepageActions {
+        homepagePage.reportStatus(reportNumber).invoke('text').then($status => {
             expect($status).to.be.eq(status, `Report status: ${$status} doesn't correspond expected: ${status}!`);
         });
         return this;

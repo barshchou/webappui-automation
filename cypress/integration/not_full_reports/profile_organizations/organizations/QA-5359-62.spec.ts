@@ -1,16 +1,16 @@
-import { _NavigationSection, _HomePage } from '../../../../actions/base/index';
+import { _NavigationSection, _HomePage } from '../../../../actions/base';
 import { createReport, deleteReport } from '../../../../actions/base/baseTest.actions';
 import { ReviewExport } from '../../../../actions/index';
 import testData from "../../../../fixtures/not_full_reports/organizations/QA-5359-62.fixture";
 
 describe("Verify users roles permissions to change report status", 
-    { tags:[ "@permissions_roles", "report_status" ] }, () => {
+    { tags:[ "@permissions_roles", "@report_status" ] }, () => {
 
     afterEach('Open Home page', () => {
         _NavigationSection.logout(); 
     });
 
-    it('[QA-5359]', () => {
+    it('[QA-5359] Verify that Admin is able to change a report status', () => {
         cy.stepInfo('Precondition: Create report with Admin user');
         createReport(testData.reportCreationData, testData.adminUsername, testData.adminPassword);
 
@@ -23,12 +23,12 @@ describe("Verify users roles permissions to change report status",
         cy.stepInfo('4. Navigate to Home page and verify report status is changed');
         _NavigationSection.returnToHomePage();
         _HomePage.filterReportsByReportNumber(testData.reportCreationData.reportNumber)
-            .verifyReportStatus(testData.reviewStatus);
+            .verifyReportStatus(testData.reviewStatus, testData.reportCreationData.reportNumber);
         
         deleteReport(testData.reportCreationData.reportNumber);
     });
 
-    it('[QA-5360]', () => {
+    it('[QA-5360] Verify that Lead Appraiser is able to change a report status', () => {
 
         cy.stepInfo('Precondition: Create report with Lead Appraiser user');
         createReport(testData.reportCreationData, testData.leadAppraiserUsername, testData.leadAppraiserPassword);
@@ -42,12 +42,12 @@ describe("Verify users roles permissions to change report status",
         cy.stepInfo('4. Navigate to Home page and verify report status is changed');
         _NavigationSection.returnToHomePage();
         _HomePage.filterReportsByReportNumber(testData.reportCreationData.reportNumber)
-            .verifyReportStatus(testData.reviewStatus);
+            .verifyReportStatus(testData.reviewStatus, testData.reportCreationData.reportNumber);
         
         deleteReport(testData.reportCreationData.reportNumber);
     });
 
-    it('[QA-5361]', () => {
+    it('[QA-5361] Verify that Appraiser is able to change a report status', () => {
 
         cy.stepInfo('Precondition: Create report with Appraiser user');
         createReport(testData.reportCreationData, testData.appraiserUsername, testData.appraiserPassword);
@@ -61,12 +61,12 @@ describe("Verify users roles permissions to change report status",
         cy.stepInfo('4. Navigate to Home page and verify report status is changed');
         _NavigationSection.returnToHomePage();
         _HomePage.filterReportsByReportNumber(testData.reportCreationData.reportNumber)
-            .verifyReportStatus(testData.reviewStatus);
+            .verifyReportStatus(testData.reviewStatus, testData.reportCreationData.reportNumber);
         
         deleteReport(testData.reportCreationData.reportNumber);
     });
 
-    it('[QA-5362]', () => {
+    it('[QA-5362] Verify that Inspector is NOT able to change a report status', () => {
 
         cy.stepInfo('Precondition: Create report with Inspector user');
         createReport(testData.reportCreationData, testData.inspectorUsername, testData.inspectorPassword);
