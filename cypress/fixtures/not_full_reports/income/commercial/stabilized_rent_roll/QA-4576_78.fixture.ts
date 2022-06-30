@@ -78,7 +78,7 @@ export default {
     vacantLease: vacantLeaseFixture,
     compGroupName: [ "Group1", "Group2" ],
     leaseDate: _leaseDate,
-    unitMeasureMontly: _monthly,
+    unitMeasureMonthly: _monthly,
     compGroup: _compGroup,
     rentCompFields: _rentCompFields,
     marketRentConclusion: _marketRentConclusion
