@@ -49,7 +49,9 @@ describe("Historical expense Electricity Per Unit is correctly calculated and di
             .verifyForecastItemByExpensePeriodType(testData.t12ElectricityItem, testData.buildingDescription, "Actual T12")
             .verifyForecastItemByExpensePeriodType(testData.historicalElectricityItem, testData.buildingDescription, "Annualized Historical")
             .verifyForecastItemByExpensePeriodType(testData.ownerProjectionElectricityItem, testData.buildingDescription, "Owner's Projection")
-            .hideHeader();
+            .hideHeader()
+            .clickSaveButton()
+            .verifyProgressBarNotExist();
 
         cy.stepInfo("4.2 Check historical expenses values for Electricity card. They should be correctly displayed on slidebars");
 

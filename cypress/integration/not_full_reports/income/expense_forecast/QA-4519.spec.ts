@@ -57,7 +57,8 @@ describe("Historical expense Insurance Per SF is correctly calculated and displa
             .verifyForecastItemByExpensePeriodType(testData.historicalInsuranceItem, testData.buildingDescription, "Annualized Historical")
             .verifyForecastItemByExpensePeriodType(testData.ownerProjectionInsuranceItem, testData.buildingDescription, "Owner's Projection")
             .hideHeader()
-            .clickSaveButton();
+            .clickSaveButton()
+            .verifyProgressBarNotExist();
 
         cy.stepInfo("4.2 Check historical expenses values for Insurance card. They should be correctly displayed on slidebars");
 

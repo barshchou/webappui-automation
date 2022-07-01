@@ -34,7 +34,9 @@ describe("Comparable Min, Max, Avg values for Repairs & Maintenance Per SF are c
         Income.ExpenseForecast.Actions.verifyForecastItemCompMin(testData.repairsAndMaintenanceItem, testData.comparables)
             .verifyForecastItemCompAverage(testData.repairsAndMaintenanceItem, testData.comparables)
             .verifyForecastItemCompMax(testData.repairsAndMaintenanceItem, testData.comparables)
-            .hideHeader();
+            .hideHeader()
+            .clickSaveButton()
+            .verifyProgressBarNotExist();
 
         cy.stepInfo("4.2 Check Comp Min, Comp Max and Comp Avg values for Repairs & Maintenance card. They should be correctly displayed on a slidebar");
         Income.ExpenseForecast.Actions.matchElementSnapshot(

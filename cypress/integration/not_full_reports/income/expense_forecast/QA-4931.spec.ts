@@ -49,10 +49,12 @@ describe("Historical expense Repairs & Maintenance Per Unit is correctly calcula
       5.1 calculated for each expense type as: [Expense Period type]Repairs & Maintenance / # of Residential Units
       5.2 correctly displayed on slidebars`);
       Income.ExpenseForecast.Actions.verifyForecastItemByExpensePeriodType(testData.actualRepairsItem, testData.buildingDescription, "Actual")
-      .verifyForecastItemByExpensePeriodType(testData.t12RepairsItem, testData.buildingDescription, "Actual T12")
-      .verifyForecastItemByExpensePeriodType(testData.historicalRepairsItem, testData.buildingDescription, "Annualized Historical")
-      .verifyForecastItemByExpensePeriodType(testData.ownerProjectionRepairsItem, testData.buildingDescription, "Owner's Projection")
-      .hideHeader();
+          .verifyForecastItemByExpensePeriodType(testData.t12RepairsItem, testData.buildingDescription, "Actual T12")
+          .verifyForecastItemByExpensePeriodType(testData.historicalRepairsItem, testData.buildingDescription, "Annualized Historical")
+          .verifyForecastItemByExpensePeriodType(testData.ownerProjectionRepairsItem, testData.buildingDescription, "Owner's Projection")
+          .hideHeader()
+          .clickSaveButton()
+          .verifyProgressBarNotExist();
 
       Income.ExpenseForecast.Actions.matchElementSnapshot(
         Income.ExpenseForecast.Page.repairsAndMaintenanceCard, testData.repairsCardSnapshotName, { padding: [ 10, 100 ] });

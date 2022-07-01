@@ -6,7 +6,7 @@ import { _map } from "../../../../../support/commands";
 import mapKeysUtils from "../../../../../utils/mapKeys.utils";
 import { getNumberFromDollarNumberWithCommas } from "../../../../../../utils/numbers.utils";
 
-describe("[QA-4133][QA-4136]", { tags: [ "@income", "@commercial", "@rent_comps" ] }, () => {
+describe("[QA-4133][QA-4136]", { tags: [ "@income", "@commercial", "@rent_comps", "@snapshot_tests" ] }, () => {
 
     before("Create report", () => {
         createReport(testData.reportCreationData);

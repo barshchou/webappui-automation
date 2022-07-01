@@ -9,5 +9,5 @@ const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreat
 export default {
     reportCreationData: _reportCreationData,
     compsNumber: 3,
-    snapshotName: "computed-panel-snapshot"
+    snapshotName: "Computed_Panel_Snapshot"
 };

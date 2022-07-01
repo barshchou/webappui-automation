@@ -38,9 +38,11 @@ describe("Comparable Min, Max, Avg values for Electricity Per Unit are correctly
         5.1 calculated as: Min, Max and Avg of range of values [CompElectricity / Residential Units]
         5.2 correctly displayed on slidebar`);
     Income.ExpenseForecast.Actions.verifyForecastItemCompMin(testData.electricityItem, testData.comparables)
-      .verifyForecastItemCompAverage(testData.electricityItem, testData.comparables)
-      .verifyForecastItemCompMax(testData.electricityItem, testData.comparables)
-      .hideHeader();
+        .verifyForecastItemCompAverage(testData.electricityItem, testData.comparables)
+        .verifyForecastItemCompMax(testData.electricityItem, testData.comparables)
+        .hideHeader()
+        .clickSaveButton()
+        .verifyProgressBarNotExist();
 
     Income.ExpenseForecast.Actions.matchElementSnapshot(
       Income.ExpenseForecast.Page.electricityCard, testData.electricityCardSnapshotName, { padding: [ 10, 100 ] });
