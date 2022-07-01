@@ -16,7 +16,7 @@ describe("Verify the Rent Basis buttons",
         
     before("Login, create report", () => {
         launchDarklyApi.getFeatureFlag(featureFlagKey);
-        launchDarklyApi.getFeatureFlags();
+        launchDarklyApi.getFeatureFlag();
         launchDarklyApi.setFeatureFlagForUser(featureFlagKey, 0);
         createReport(testData.reportCreationData);
     });

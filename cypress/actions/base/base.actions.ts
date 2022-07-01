@@ -69,6 +69,14 @@ export default class BaseActions {
         return this;
     }
 
+    verifyTooltipExist(verifyValue?: string) {
+        cy.get("[role=tooltip]").should("not.exist");
+        if (verifyValue) {
+            cy.get("[role=tooltip]").should("include.text", verifyValue);
+        }
+        return this;
+    }
+
     /**
      * Retrive DOM-element screenshot and compares it with baseline.
      * @param element - PageElement to be snapshoted. 

@@ -39,14 +39,17 @@ import storageVcLossType from "./inputValues/storageVcLossType.enum";
 import knownInformation from "./knownInformationType.enum";
 import compGroupsColumnsEnum from "./compGroupsColumns.enum";
 import marketAnalysisUsesEnum from "./marketAnalysisUses.enum";
+import rentTypesEnum from "./rent/rentTypes.enum";
 import usersEnum from "../enums/users/users.enum";
 import propertyConditionsEnum from "./property/propertyConditions.enum";
 import propertyConditionsRadiosEnum from "./property/propertyConditionsRadios.enum";
 import featureFlagKeys from "./featureFlags/featureFlagKeys.enum";
 import envLaunchDarkly from "./featureFlags/envLaunchDarkly.enum";
+import rentRollOptionsCheckboxsEnum from "./rent/rentRollOptionsCheckboxs.enum";
 import menuLinksNamesEnum from "./menuLinksNames.enum";
 import rolesEnum from "./users/roles.enum";
 import boweryOfficesEnum from "./organization/boweryOffices.enum";
+import reportStatusEnum from "./reportParams/reportStatus.enum";
 
 export default {
     TEMPLATE_TYPE: templateTypesEnum,
@@ -90,12 +93,15 @@ export default {
     SOURCE_OF_INFORMATION: sourceOfInformation,
     AMENITIES: amenities,
     MARKET_ANALYSIS_USES: marketAnalysisUsesEnum,
+    RENT_TYPE: rentTypesEnum,
     USERS: usersEnum,
     PROPERTY_CONDITIONS: propertyConditionsEnum,
     PROPERTY_CONDITIONS_RADIOS: propertyConditionsRadiosEnum,
     FEATURE_FLAG_KEYS: featureFlagKeys,
     ENV_LAUNCH_DARKLY: envLaunchDarkly,
+    RENT_ROLL_OPTIONS_CHECKBOXS: rentRollOptionsCheckboxsEnum,
     MENU_LINKS: menuLinksNamesEnum,
     USER_ROLES: rolesEnum,
-    BOWERY_OFFICES: boweryOfficesEnum
+    BOWERY_OFFICES: boweryOfficesEnum,
+    REPORT_STATUS: reportStatusEnum
 };
