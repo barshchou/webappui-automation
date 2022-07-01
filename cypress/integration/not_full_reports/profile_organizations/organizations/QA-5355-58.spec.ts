@@ -1,7 +1,7 @@
 import { loginAction } from '../../../../actions/base/baseTest.actions';
 import { Organization } from '../../../../actions/index';
 import { _NavigationSection } from '../../../../actions/base/index';
-import testData from "../../../../fixtures/not_full_reports/organizations/QA-5355-58.fixture";
+import testData from "../../../../fixtures/not_full_reports/profile_organizations/organizations/QA-5355-58.fixture";
 import enums from '../../../../enums/enums';
 
 describe("Verify users roles to create new users", 

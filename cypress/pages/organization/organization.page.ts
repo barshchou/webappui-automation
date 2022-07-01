@@ -8,6 +8,8 @@ class OrganizationPage extends BasePage{
    get organizationClients() {return cy.contains("Organization Clients");}
 
    get organizationUsers() {return cy.contains("Organization Users");}
+
+   get organizationSettings() {return cy.contains("Settings");}
 }
 
 export default new OrganizationPage();
