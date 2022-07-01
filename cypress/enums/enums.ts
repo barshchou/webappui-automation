@@ -39,10 +39,11 @@ import storageVcLossType from "./inputValues/storageVcLossType.enum";
 import knownInformation from "./knownInformationType.enum";
 import compGroupsColumnsEnum from "./compGroupsColumns.enum";
 import marketAnalysisUsesEnum from "./marketAnalysisUses.enum";
-import rentTypesEnum from "./rentTypes.enum";
+import rentTypesEnum from "./rent/rentTypes.enum";
 import usersEnum from "../enums/users/users.enum";
 import propertyConditionsEnum from "./property/propertyConditions.enum";
 import propertyConditionsRadiosEnum from "./property/propertyConditionsRadios.enum";
+import rentRollOptionsCheckboxsEnum from "./rent/rentRollOptionsCheckboxs.enum";
 
 export default {
     TEMPLATE_TYPE: templateTypesEnum,
@@ -89,5 +90,6 @@ export default {
     RENT_TYPE: rentTypesEnum,
     USERS: usersEnum,
     PROPERTY_CONDITIONS: propertyConditionsEnum,
-    PROPERTY_CONDITIONS_RADIOS: propertyConditionsRadiosEnum
+    PROPERTY_CONDITIONS_RADIOS: propertyConditionsRadiosEnum,
+    RENT_ROLL_OPTIONS_CHECKBOXS: rentRollOptionsCheckboxsEnum
 };
