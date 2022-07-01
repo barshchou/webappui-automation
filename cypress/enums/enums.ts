@@ -44,7 +44,9 @@ import propertyConditionsEnum from "./property/propertyConditions.enum";
 import propertyConditionsRadiosEnum from "./property/propertyConditionsRadios.enum";
 import featureFlagKeys from "./featureFlags/featureFlagKeys.enum";
 import envLaunchDarkly from "./featureFlags/envLaunchDarkly.enum";
-
+import menuLinksNamesEnum from "./menuLinksNames.enum";
+import rolesEnum from "./users/roles.enum";
+import boweryOfficesEnum from "./organization/boweryOffices.enum";
 
 export default {
     TEMPLATE_TYPE: templateTypesEnum,
@@ -92,5 +94,8 @@ export default {
     PROPERTY_CONDITIONS: propertyConditionsEnum,
     PROPERTY_CONDITIONS_RADIOS: propertyConditionsRadiosEnum,
     FEATURE_FLAG_KEYS: featureFlagKeys,
-    ENV_LAUNCH_DARKLY: envLaunchDarkly
+    ENV_LAUNCH_DARKLY: envLaunchDarkly,
+    MENU_LINKS: menuLinksNamesEnum,
+    USER_ROLES: rolesEnum,
+    BOWERY_OFFICES: boweryOfficesEnum
 };
