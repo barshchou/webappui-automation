@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Utils } from "../types/utils.type";
 
 interface IConfig {
@@ -5,6 +6,10 @@ interface IConfig {
   projectKey: string,
   environmentKey: Utils.EnvLaunchDarklyType
 }
+
+type Methods = "GET" | "PATCH"
+
+type Operations = "add" | "remove"
 
 class LaunchDarkly {
   private readonly apiKey = Cypress.env("LAUNCH_DARKLY_AUTH_TOKEN");
@@ -28,80 +33,77 @@ class LaunchDarkly {
     }
   }
 
-  getFeatureFlag(featureFlagKey: Utils.FeatureFlagKeysType) {
-    cy.request({
-      method: "GET",
-      url: `https://app.launchdarkly.com/api/v2/flags/${this.projectKey}/${featureFlagKey}`,
-      headers: this.headersContent
-    }).then(resp => {
-      cy.log("Feature Flag Key", resp.body);
-    }).its("status").should("eq", 200);
+  private jsonPatch(op: Operations, path: string, value: string | object) {
+    return {
+      op,
+      path,
+      value,
+    };
   }
 
-  getFeatureFlags() {
-    cy.request({
-      method: "GET",
-      url: `https://app.launchdarkly.com/api/v2/flags/${this.projectKey}`,
-      headers: this.headersContent
-    }).then(resp => {
-      cy.log("Feature flags", resp.body.items);
-    }).its("status").should("eq", 200);
+  private baseRequest(featureFlagKey: Utils.FeatureFlagKeysType, method: Methods = "GET", options?: object): Cypress.Chainable<Cypress.Response<any>> {
+    if (method === "PATCH") {
+      return cy.request({
+        method,
+        url: `https://app.launchdarkly.com/api/v2/flags/${this.projectKey}/${featureFlagKey}`,
+        headers: this.headersContent,
+        body : JSON.stringify({
+          patch: [ options ]
+        })
+      }); 
+    } else {
+      return cy.request({
+        method,
+        url: `https://app.launchdarkly.com/api/v2/flags/${this.projectKey}/${featureFlagKey}`,
+        headers: this.headersContent
+      });
+    }
+ 
   }
 
-  setFeatureFlagForUser(featureFlagKey: Utils.FeatureFlagKeysType, variationIndex: number, userId = this.userId) {
+  getFeatureFlag(featureFlagKey?: Utils.FeatureFlagKeysType): LaunchDarkly {
+    const _url = featureFlagKey ? `https://app.launchdarkly.com/api/v2/flags/${this.projectKey}/${featureFlagKey}`
+      : `https://app.launchdarkly.com/api/v2/flags/${this.projectKey}`;
     cy.request({
       method: "GET",
-      url: `https://app.launchdarkly.com/api/v2/flags/${this.projectKey}/${featureFlagKey}`,
+      url: _url,
       headers: this.headersContent
     }).then(resp => {
+      featureFlagKey ? cy.log("Feature Flag Key", resp.body) : cy.log("Feature Flags", resp.body);
+    }).its("status").should("eq", 200);
+
+    return this;
+  }
+
+  setFeatureFlagForUser(featureFlagKey: Utils.FeatureFlagKeysType, variationIndex: number, userId = this.userId): LaunchDarkly {
+    this.baseRequest(featureFlagKey).then(resp => {
       const targets = resp.body.environments[this.environmentKey].targets;
       const existingTargetIndex = targets.findIndex(target => target.variation === variationIndex);
       if (existingTargetIndex === -1) {
         cy.log(`Adding feature flag ${featureFlagKey} for ${userId}`);
 
-        const jsonPatch = {
-          op: 'add',
-          path: `/environments/${this.environmentKey}/targets/-`,
-          value: {
+        this.baseRequest(featureFlagKey, "PATCH", this.jsonPatch(
+          "add",
+          `/environments/${this.environmentKey}/targets/-`,
+          {
             variation: variationIndex,
             values: [ userId ],
           },
-        };
-
-        cy.request({
-          method: "PATCH",
-          url: `https://app.launchdarkly.com/api/v2/flags/${this.projectKey}/${featureFlagKey}`,
-          headers: this.headersContent,
-          body: JSON.stringify({
-            patch: [ jsonPatch ]
-          })
-        }).its("status").should("eq", 200);
+        )).its("status").should("eq", 200);
       } else {
-        const jsonPatch = {
-          op: 'add',
-          path: `/environments/${this.environmentKey}/targets/${existingTargetIndex}/values/-`,
-          value: userId,
-        };
-
-        cy.request({
-          method: "PATCH",
-          url: `https://app.launchdarkly.com/api/v2/flags/${this.projectKey}/${featureFlagKey}`,
-          headers: this.headersContent,
-          body: JSON.stringify({
-            patch: [ jsonPatch ]
-          })
-        }).its("status").should("eq", 200);
+        this.baseRequest(featureFlagKey, "PATCH", this.jsonPatch(
+          "add",
+          `/environments/${this.environmentKey}/targets/${existingTargetIndex}/values/-`,
+          userId
+        )).its("status").should("eq", 200);
       }
       cy.log(`Set ${featureFlagKey} feature flag`);
     });
+    return this;
   }
 
-  removeUserTarget(featureFlagKey: Utils.FeatureFlagKeysType, variationIndex: number, userId = this.userId) {
-    cy.request({
-      method: "GET",
-      url: `https://app.launchdarkly.com/api/v2/flags/${this.projectKey}/${featureFlagKey}`,
-      headers: this.headersContent
-    }).then(resp => {
+  removeUserTarget(featureFlagKey: Utils.FeatureFlagKeysType, variationIndex: number, userId = this.userId): LaunchDarkly {
+    this.baseRequest(featureFlagKey).then(resp => {
         const targets = resp.body.environments[this.environmentKey].targets.map(el => el.values)[variationIndex];
         const userIndex = targets.indexOf(userId);
 
@@ -110,23 +112,15 @@ class LaunchDarkly {
           return null;
         }
 
-        const jsonPatch = {
-          op: 'remove',
-          path: `/environments/${this.environmentKey}/targets/${variationIndex}/values/${userIndex}`,
-          value: userId
-        };
-
-        cy.request({
-          method: "PATCH",
-          url: `https://app.launchdarkly.com/api/v2/flags/${this.projectKey}/${featureFlagKey}`,
-          headers: this.headersContent,
-          body: JSON.stringify({
-            patch: [ jsonPatch ]
-          })
-        }).its("status").should("eq", 200);
+        this.baseRequest(featureFlagKey, "PATCH", this.jsonPatch(
+          "remove",
+          `/environments/${this.environmentKey}/targets/${variationIndex}/values/${userIndex}`,
+          userId
+        )).its("status").should("eq", 200);
         
         cy.log(`User ${userId} has been deleted`);
     });
+    return this;
   }
 
 }

@@ -15,9 +15,9 @@ describe("Verify the Rent Basis buttons",
     { tags:[ "@income", "@commercial", "@in_place_rent_roll" ] }, () => {
         
     before("Login, create report", () => {
-        launchDarklyApi.getFeatureFlag(featureFlagKey);
-        launchDarklyApi.getFeatureFlag();
-        launchDarklyApi.setFeatureFlagForUser(featureFlagKey, 0);
+        launchDarklyApi.getFeatureFlag(featureFlagKey)
+            .getFeatureFlag()
+            .setFeatureFlagForUser(featureFlagKey, 0);
         createReport(testData.reportCreationData);
     });
 
