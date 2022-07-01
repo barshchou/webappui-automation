@@ -47,6 +47,7 @@ import rentRollOptionsCheckboxsEnum from "./rent/rentRollOptionsCheckboxs.enum";
 import menuLinksNamesEnum from "./menuLinksNames.enum";
 import rolesEnum from "./users/roles.enum";
 import boweryOfficesEnum from "./organization/boweryOffices.enum";
+import reportStatusEnum from "./reportParams/reportStatus.enum";
 
 export default {
     TEMPLATE_TYPE: templateTypesEnum,
@@ -97,5 +98,6 @@ export default {
     RENT_ROLL_OPTIONS_CHECKBOXS: rentRollOptionsCheckboxsEnum,
     MENU_LINKS: menuLinksNamesEnum,
     USER_ROLES: rolesEnum,
-    BOWERY_OFFICES: boweryOfficesEnum
+    BOWERY_OFFICES: boweryOfficesEnum,
+    REPORT_STATUS: reportStatusEnum
 };
