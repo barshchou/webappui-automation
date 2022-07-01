@@ -1,4 +1,4 @@
-import testData from "../../../../../fixtures/not_full_reports/income/commercial/rent_comps/QA-4615.fixture";
+import testData from "../../../../../fixtures/not_full_reports/income/commercial/rent_comps/QA-4615_17.fixture";
 import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../../actions/base";
 import { Income } from "../../../../../actions";
@@ -19,7 +19,7 @@ describe("Verify Input in 'Use-Other*' free text works correctly",
             .clickEditButtonByRowNumber();
 
         cy.stepInfo("3. Open the “Use” drop down and select “Other” option");
-        Income._CommercialManager.RentComps.chooseRentCompFieldDropdownOption(testData.rentCompFields.name, testData.rentCompFields.value);
+        Income._CommercialManager.RentComps.chooseRentCompFieldDropdownOption(testData.useRentCompField.name, testData.useRentCompField.value);
     
 
         cy.stepInfo("4. Verify Input in 'Use-Other*' user can be fill several values");
@@ -40,7 +40,15 @@ describe("Verify Input in 'Use-Other*' free text works correctly",
             testData.verifyFillValues[0]
             );
         Income._CommercialManager.RentComps.Page.getRentCompInputField(testData.fieldName).should("have.value", testData.verifyFillValues[0]);
-        
+
+        cy.stepInfo("7. Fill in other required fields if necessary and save changes for Rent Comp");
+        Income._CommercialManager.RentComps.fillInRentCompFieldInput(testData.fieldName, testData.verifyFillValues[0])
+            .chooseRentCompFieldDropdownOption(testData.sourceOfInformationRentCompField.name, testData.sourceOfInformationRentCompField.value)
+            .clickSubmitButton();
+
+        cy.stepInfo("8. Verify if entered value is displayed in Use column in Selected Rent Comps table");
+        Income._CommercialManager.RentComps.clickEditButtonByRowNumber()
+            .Page.getRentCompInputField(testData.fieldName).should("have.value", testData.verifyFillValues[0]);
 
         deleteReport(testData.reportCreationData.reportNumber);
     });
