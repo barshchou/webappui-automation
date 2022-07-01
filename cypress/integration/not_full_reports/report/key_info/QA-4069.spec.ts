@@ -23,7 +23,7 @@ describe("[QA-4069] Check the helper text for Provided Documents)",
 
     it("Check export", () => {
         Cypress.config().baseUrl = null;
-        cy.task("getFilePath", { _reportName: `Bowery Appraisal_${testData.reportCreationData.reportNumber}`, _docx_html: "html" }).then(file => {
+        cy.task("getFilePath", { _reportName: testData.reportCreationData.reportNumber, _docx_html: "html" }).then(file => {
             cy.log(<string>file);
             cy.stepInfo("3. Verify updloaded file in following the Rent Roll & Financial Statements");
             cy.visit(<string>file);

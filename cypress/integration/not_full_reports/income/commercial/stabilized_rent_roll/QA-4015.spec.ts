@@ -46,7 +46,7 @@ describe("Verify the Commercial Stabilized Rent Roll table",
     it("Check export", () => {
         Cypress.config().baseUrl = null;
         cy.task("getFilePath",
-        { _reportName: `Bowery Appraisal_${testData.reportCreationData.reportNumber}`, _docx_html: "html" }
+        { _reportName: testData.reportCreationData.reportNumber, _docx_html: "html" }
         ).then(file => {
             cy.log(<string>file);
             cy.stepInfo(`

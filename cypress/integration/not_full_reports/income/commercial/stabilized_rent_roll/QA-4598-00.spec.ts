@@ -44,7 +44,7 @@ describe(`[QA-4598][QA-4599][QA-4600] Verify the suggested text dropdown in the 
 
     it("[QA-4598] Check export", () => {
         Cypress.config().baseUrl = null;
-        cy.task("getFilePath", { _reportName: `Bowery Appraisal_${testData.reportCreationDataAsIs.reportNumber}`, _docx_html: "html" }).then(file => {
+        cy.task("getFilePath", { _reportName: testData.reportCreationDataAsIs.reportNumber, _docx_html: "html" }).then(file => {
             cy.log(<string>file);
             cy.stepInfo("4. Verify the linked chips on export");
             cy.visit(<string>file);
@@ -90,7 +90,7 @@ describe(`[QA-4598][QA-4599][QA-4600] Verify the suggested text dropdown in the 
 
     it("[QA-4599] Check export", () => {
         Cypress.config().baseUrl = null;
-        cy.task("getFilePath", { _reportName: `Bowery Appraisal_${testData.reportCreationDataAsIs.reportNumber}`, _docx_html: "html" }).then(file => {
+        cy.task("getFilePath", { _reportName: testData.reportCreationDataAsIs.reportNumber, _docx_html: "html" }).then(file => {
             cy.log(<string>file);
             cy.stepInfo("4. Verify the linked chips on export");
             cy.visit(<string>file);
@@ -138,7 +138,7 @@ describe(`[QA-4598][QA-4599][QA-4600] Verify the suggested text dropdown in the 
 
     it("[QA-4600] Check export", () => {
         Cypress.config().baseUrl = null;
-        cy.task("getFilePath", { _reportName: `Bowery Appraisal_${testData.reportCreationDataAsIs.reportNumber}`, _docx_html: "html" }).then(file => {
+        cy.task("getFilePath", { _reportName: testData.reportCreationDataAsIs.reportNumber, _docx_html: "html" }).then(file => {
             cy.log(<string>file);
             cy.stepInfo("4. Verify the linked chips on export");
             cy.visit(<string>file);

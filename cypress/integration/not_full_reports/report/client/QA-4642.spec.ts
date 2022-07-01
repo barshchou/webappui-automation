@@ -34,7 +34,7 @@ describe("Verify the Client Guidelines Discussion on the page", () => {
     });
 
     it("Check export", () => {
-        cy.task("getFilePath", { _reportName: `Bowery Appraisal_${testData.reportCreationData.reportNumber}`, _docx_html: "html" }).then(file => {
+        cy.task("getFilePath", { _reportName: testData.reportCreationData.reportNumber, _docx_html: "html" }).then(file => {
             cy.log(<string>file);
             cy.stepInfo("5. Verify the linked chips on export for both sections");
             cy.visit(<string>file);

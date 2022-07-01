@@ -43,7 +43,7 @@ describe(`[QA-4640] Verify the "Linked" chips dropdown in the new narrative comp
 
     it("Check export", () => {
         Cypress.config().baseUrl = null;
-        cy.task("getFilePath", { _reportName: `Bowery Appraisal_${testData.reportCreationData.reportNumber}`, _docx_html: "html" }).then(file => {
+        cy.task("getFilePath", { _reportName: testData.reportCreationData.reportNumber, _docx_html: "html" }).then(file => {
             cy.log(<string>file);
             cy.stepInfo("6. Verify the linked chips on export for both sections:");
             cy.visit(<string>file);
