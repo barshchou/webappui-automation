@@ -23,7 +23,7 @@ describe("Verify users roles to create new users",
         Organization._OrganizationUsersActions.deleteUser(testData.userToFind);
     });
 
-    it.only("[QA-5857]", () => {
+    it("[QA-5857]", () => {
         cy.stepInfo('1. Login with Lead Appraiser user role');
         loginAction(testData.leadAppraiserUsername, testData.leadAppraiserPassword);
 
