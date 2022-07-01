@@ -1,6 +1,7 @@
 import navigationSectionPage from "../../pages/base/navigationSection.page";
 import { Alias } from "../../utils/alias.utils";
 import BaseActionsExt from "./base.actions.ext";
+import mapKeysUtils from "../../utils/mapKeys.utils";
 
 class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPage> {
     clickYesIfExist(): NavigationSectionActions {
@@ -577,7 +578,7 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         navigationSectionPage.comercialReimbursementButton.click();
         return this;
     }
-
+    
     navigateToResidentialStabilizedRentRoll(): this {
         this.clickIncomeApproachButton();
         this.clickResidentialMenuIfClosed();
@@ -591,6 +592,12 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         this.clickCommercialMenuIfClosed();
         this.clickCommercialStabRentRollButton()
             .clickYesIfExist();
+        return this;
+    }
+
+    logout(): NavigationSectionActions {
+        this.clickProfileOrganization()
+            .selectLink("Log Out");
         return this;
     }
 
@@ -609,6 +616,19 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
             if (!el.hasClass("expanded")) {
                 this.clickResidentialIncomeArrow();
             }
+        });
+
+        return this;
+    }
+
+    /**
+     * @description Opens specific page by url, that contains id of current report, which is opened in moment of method call
+     * @param pageRoute The route to specific page, pages routes are contained in pages_routes enums directory
+     */
+    openPageByVisit(pageRoute: string): NavigationSectionActions {
+        const baseUrl = Cypress.config().baseUrl;
+        cy._mapGet(mapKeysUtils.report_id).then(reportId => {
+            cy.visit(`${baseUrl}/report/${reportId}/${pageRoute}`);
         });
 
         return this;
