@@ -578,7 +578,7 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         navigationSectionPage.comercialReimbursementButton.click();
         return this;
     }
-
+    
     navigateToResidentialStabilizedRentRoll(): this {
         this.clickIncomeApproachButton();
         this.clickResidentialMenuIfClosed();

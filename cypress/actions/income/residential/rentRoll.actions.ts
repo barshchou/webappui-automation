@@ -158,6 +158,20 @@ class InPlaceRentRollActions extends ResidentialRentRollSharedActions<typeof ren
         return this;
     }
 
+    removeRentTypeByRowNumber(number = 0): InPlaceRentRollActions {
+        rentRollPage.rentTypeCells.eq(number).click().type("{backspace}");
+        this.verifyLeaseStatusByRow("", number);
+        return this;
+    }
+
+    pasteRentTypeByRowNumber(value: string | number, rowNumber = 0): InPlaceRentRollActions {
+        rentRollPage.rentTypeCells.eq(rowNumber).dblclick();
+        rentRollPage.textAreaToInput.clear().invoke("val", value);
+        cy.get(".listbox ").contains(value).click();
+        rentRollPage.rentTypeCells.eq(rowNumber).should("include.text", value);
+        return this;
+    }
+
     checkIsInspectedByRowNumber(number: number): InPlaceRentRollActions {
         rentRollPage.isInspectedInputs.eq(number).check();
         return this;
@@ -219,6 +233,20 @@ class InPlaceRentRollActions extends ResidentialRentRollSharedActions<typeof ren
         return this;
     }
 
+    removeLeaseStatusByRowNumber(number = 0): InPlaceRentRollActions {
+        rentRollPage.leaseStatusCells.eq(number).click().type("{backspace}");
+        this.verifyLeaseStatusByRow("", number);
+        return this;
+    }
+
+    pasteLeaseStatusByRowNumber(value: string | number, rowNumber = 0): InPlaceRentRollActions {
+        rentRollPage.leaseStatusCells.eq(rowNumber).dblclick();
+        rentRollPage.textAreaToInput.clear().invoke("val", value);
+        cy.get(".listbox").contains(value).click();
+        rentRollPage.leaseStatusCells.eq(rowNumber).should("include.text", value);
+        return this;
+    }
+
     enterAllEqualLeaseStatuses(leaseStatus: string): InPlaceRentRollActions {
         rentRollPage.leaseStatusCells.each((cell, i) => {
             this.enterLeaseStatusByRowNumber(leaseStatus, i);
@@ -251,6 +279,14 @@ class InPlaceRentRollActions extends ResidentialRentRollSharedActions<typeof ren
         return this;
     }
 
+    pasteMonthlyRentByRowNumber(value: string | number, rowNumber = 0): InPlaceRentRollActions {
+        const textToBe = typeof value === "string" ? value : `$${numberWithCommas(value.toFixed(2))}`;
+        rentRollPage.monthlyRentCells.eq(rowNumber).dblclick();
+        this.pasteTextToTextarea(`${value}`);
+        rentRollPage.monthlyRentCells.eq(rowNumber).should("have.text", textToBe);
+        return this;
+    }
+
     enterMonthlyRents(values: number[]): InPlaceRentRollActions {
         values.forEach((value, index) => {
             this.enterMonthlyRentByRowNumber(value, index);
@@ -272,8 +308,12 @@ class InPlaceRentRollActions extends ResidentialRentRollSharedActions<typeof ren
         return this;
     }
       
-    verifyRentRollCommentary(commentaryToBe: string): InPlaceRentRollActions {
-        rentRollPage.rentRollCommentary.should("have.text", commentaryToBe);
+    verifyRentRollCommentary(commentaryToBe: string, include = false): InPlaceRentRollActions {
+        if (include === true) {
+            rentRollPage.rentRollCommentary.should("include.text", commentaryToBe);
+        } else {
+            rentRollPage.rentRollCommentary.should("have.text", commentaryToBe);
+        }
         return this;
     }
 
@@ -318,6 +358,11 @@ class InPlaceRentRollActions extends ResidentialRentRollSharedActions<typeof ren
 
     private enterTextToTextarea(text: string): InPlaceRentRollActions {
         rentRollPage.textAreaToInput.clear().type(text).type("{enter}");
+        return this;
+    }
+
+    private pasteTextToTextarea(text: string): InPlaceRentRollActions {
+        rentRollPage.textAreaToInput.clear().invoke("val", text).type("{enter}");
         return this;
     }
 

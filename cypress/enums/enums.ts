@@ -39,9 +39,11 @@ import storageVcLossType from "./inputValues/storageVcLossType.enum";
 import knownInformation from "./knownInformationType.enum";
 import compGroupsColumnsEnum from "./compGroupsColumns.enum";
 import marketAnalysisUsesEnum from "./marketAnalysisUses.enum";
+import rentTypesEnum from "./rent/rentTypes.enum";
 import usersEnum from "../enums/users/users.enum";
 import propertyConditionsEnum from "./property/propertyConditions.enum";
 import propertyConditionsRadiosEnum from "./property/propertyConditionsRadios.enum";
+import rentRollOptionsCheckboxsEnum from "./rent/rentRollOptionsCheckboxs.enum";
 import menuLinksNamesEnum from "./menuLinksNames.enum";
 import rolesEnum from "./users/roles.enum";
 import boweryOfficesEnum from "./organization/boweryOffices.enum";
@@ -89,9 +91,11 @@ export default {
     SOURCE_OF_INFORMATION: sourceOfInformation,
     AMENITIES: amenities,
     MARKET_ANALYSIS_USES: marketAnalysisUsesEnum,
+    RENT_TYPE: rentTypesEnum,
     USERS: usersEnum,
     PROPERTY_CONDITIONS: propertyConditionsEnum,
     PROPERTY_CONDITIONS_RADIOS: propertyConditionsRadiosEnum,
+    RENT_ROLL_OPTIONS_CHECKBOXS: rentRollOptionsCheckboxsEnum,
     MENU_LINKS: menuLinksNamesEnum,
     USER_ROLES: rolesEnum,
     BOWERY_OFFICES: boweryOfficesEnum,
