@@ -114,13 +114,13 @@ class ClientActions extends BaseActionsExt<typeof clientPage> {
         return this;
     }
 
-    verifyIntendedUserTextBox(verifyAreaValue: string): ClientActions {
-        clientPage.intendedUserTextBox.should("contain.text", verifyAreaValue);
+    verifyIntendedUserTextBox(verifyAreaValue: string | number): ClientActions {
+        clientPage.intendedUserTextBox.should("contain.text", `${verifyAreaValue}`);
         return this;
     }
 
-    verifyIdentificationOfTheClientTextBox(verifyAreaValue: string): ClientActions {
-        clientPage.identificationOfClientTextBox.should("contain.text", verifyAreaValue);
+    verifyIdentificationOfTheClientTextBox(verifyAreaValue: string | number): ClientActions {
+        clientPage.identificationOfClientTextBox.should("contain.text", `${verifyAreaValue}`);
         return this;
     }
 

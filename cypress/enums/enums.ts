@@ -44,6 +44,9 @@ import usersEnum from "../enums/users/users.enum";
 import propertyConditionsEnum from "./property/propertyConditions.enum";
 import propertyConditionsRadiosEnum from "./property/propertyConditionsRadios.enum";
 import rentRollOptionsCheckboxsEnum from "./rent/rentRollOptionsCheckboxs.enum";
+import menuLinksNamesEnum from "./menuLinksNames.enum";
+import rolesEnum from "./users/roles.enum";
+import boweryOfficesEnum from "./organization/boweryOffices.enum";
 
 export default {
     TEMPLATE_TYPE: templateTypesEnum,
@@ -91,5 +94,8 @@ export default {
     USERS: usersEnum,
     PROPERTY_CONDITIONS: propertyConditionsEnum,
     PROPERTY_CONDITIONS_RADIOS: propertyConditionsRadiosEnum,
-    RENT_ROLL_OPTIONS_CHECKBOXS: rentRollOptionsCheckboxsEnum
+    RENT_ROLL_OPTIONS_CHECKBOXS: rentRollOptionsCheckboxsEnum,
+    MENU_LINKS: menuLinksNamesEnum,
+    USER_ROLES: rolesEnum,
+    BOWERY_OFFICES: boweryOfficesEnum
 };
