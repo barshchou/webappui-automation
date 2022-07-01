@@ -22,7 +22,7 @@ describe("Verify users roles access to 'Settings' page",
     });
 
     testData.usersRoles.forEach(userRole => {
-        it(`[QA-5517] Verify that users without admin role has no access to the "Settings" tab on "Organization info" page`, () => {
+        it(`[QA-5517] Verify that '${userRole.roleName}' without admin role has no access to the "Settings" tab on "Organization info" page`, () => {
             cy.stepInfo(`1. Login to the application as an '${userRole.roleName}'`);
             loginAction(userRole.username, userRole.password);
     
