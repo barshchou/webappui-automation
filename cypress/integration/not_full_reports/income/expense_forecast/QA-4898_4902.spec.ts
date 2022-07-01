@@ -56,7 +56,7 @@ describe("Historical expense Water & Sewer Per SF/Unit is correctly calculated a
             .verifyForecastItemByExpensePeriodType(testData.t12WaterAndSewerItem, testData.buildingDescription, "Actual T12")
             .verifyForecastItemByExpensePeriodType(testData.historicalWaterAndSewerItem, testData.buildingDescription, "Annualized Historical")
             .verifyForecastItemByExpensePeriodType(testData.ownerProjectionWaterAndSewerItem, testData.buildingDescription, "Owner's Projection")
-            .hideExpenseForecastHeader()
+            .hideHeader()
             .clickSaveButton();
 
         cy.stepInfo("4.2 Check historical expenses values for Water & Sewer card. They should be correctly displayed on slidebars");
@@ -82,7 +82,7 @@ describe("Historical expense Water & Sewer Per SF/Unit is correctly calculated a
             .verifyForecastItemByExpensePeriodType(testData.t12WaterAndSewerItem, testData.buildingDescription, "Actual T12")
             .verifyForecastItemByExpensePeriodType(testData.historicalWaterAndSewerItem, testData.buildingDescription, "Annualized Historical")
             .verifyForecastItemByExpensePeriodType(testData.ownerProjectionWaterAndSewerItem, testData.buildingDescription, "Owner's Projection")
-            .hideExpenseForecastHeader()
+            .hideHeader()
             .clickSaveButton();
 
         cy.stepInfo("4.2 Check historical expenses values for Water & Sewer card. They should be correctly displayed on slidebars");

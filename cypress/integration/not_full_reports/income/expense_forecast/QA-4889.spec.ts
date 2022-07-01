@@ -40,7 +40,7 @@ describe("Comparable Min, Max, Avg values for Electricity Per Unit are correctly
     Income.ExpenseForecast.Actions.verifyForecastItemCompMin(testData.electricityItem, testData.comparables)
       .verifyForecastItemCompAverage(testData.electricityItem, testData.comparables)
       .verifyForecastItemCompMax(testData.electricityItem, testData.comparables)
-      .hideExpenseForecastHeader();
+      .hideHeader();
 
     Income.ExpenseForecast.Actions.matchElementSnapshot(
       Income.ExpenseForecast.Page.electricityCard, testData.electricityCardSnapshotName, { padding: [ 10, 100 ] });

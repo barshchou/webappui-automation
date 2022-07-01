@@ -27,7 +27,18 @@ export default class BaseActionsExt<T extends BasePage> extends BaseActions {
      * @see https://docs.cypress.io/api/commands/as
      * @returns Cypress.Chainable with aliased value
      */
-    extractAlias(aliasName: string){
+    extractAlias(aliasName: string) {
         return cy.get(`@${aliasName}`);
+    }
+
+    hideHeader() {
+        cy.log('hide');
+        if (Cypress.browser.isHeadless == true) {
+            this.hideElement(this.Page.Header);
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
+            this.hideElement(this.Page.pageHeaderElement);
+        }
+        return this;
     }
 }
