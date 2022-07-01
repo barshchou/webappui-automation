@@ -14,8 +14,7 @@ class PropertyDescriptionFormActions {
     }
 
     enterAppraiserCommentary(value: string): PropertyDescriptionFormActions {
-        this.Page.appraiserCommentaryTextArea.click()
-        .type(value, { force:true }).clear()
+        this.Page.appraiserCommentaryTextArea.click().clear()
         .type(value, { force:true });
         this.Page.appraiserCommentaryTextArea.should("have.text", value);
         return this;
