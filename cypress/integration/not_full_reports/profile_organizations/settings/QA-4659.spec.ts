@@ -13,15 +13,13 @@ describe("",
         _NavigationSection.navigateToProfileOrganization(enums.MENU_LINKS.organization);
         Organization._OrganizationActions.openOrganizationSettingsPage();
         Organization._OrganizationSettingsActions.Page.treasuryBondsLastUpdated.invoke('attr', 'value').then(date => {
-           
             let formattedDate = new Date(date);
             const offset = formattedDate.getTimezoneOffset();
             formattedDate = new Date(formattedDate.getTime() - (offset * 60 * 1000));
-            cy._mapSet('date', formattedDate.toISOString().split('T')[0]);
-
+            cy._mapSet('lastUpdatedDate', formattedDate.toISOString().split('T')[0]);
         });
 
-        cy._mapGet('date').then(date => {
+        cy._mapGet('lastUpdatedDate').then(date => {
             cy.request(
                 { 
                     method: 'GET', 
