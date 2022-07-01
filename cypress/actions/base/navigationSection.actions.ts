@@ -595,6 +595,12 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         return this;
     }
 
+    logout(): NavigationSectionActions {
+        this.clickProfileOrganization()
+            .selectLink("Log Out");
+        return this;
+    }
+
     private clickCommercialMenuIfClosed(): NavigationSectionActions {
         navigationSectionPage.commercialIncomeArrow.then(el => {
             if (!el.hasClass("expanded")) {
@@ -624,6 +630,7 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         cy._mapGet(mapKeysUtils.report_id).then(reportId => {
             cy.visit(`${baseUrl}/report/${reportId}/${pageRoute}`);
         });
+
         return this;
     }
 }
