@@ -14,7 +14,7 @@ export default {
     ] as Array<BoweryReports.ConclusionValue>,
     label: { 
         devForecast: "Developer's Forecast", 
-        perRoom: "Include Per Room Analysis in Report",
+        perRoom: Enums.RENT_ROLL_OPTIONS_CHECKBOXS.include,
         bathrooms: "Bathrooms",
         outSpace: "Outdoor Space",
         unitType: "Unit Type"

@@ -5,7 +5,7 @@ import testData from "../../../../fixtures/not_full_reports/organizations/QA-584
 import enums from '../../../../enums/enums';
 
 describe("Verify users roles to create new users", 
-    { tags:[ "@permissions_roles, @users", "@organizations" ] }, () => {
+    { tags:[ "@permissions_roles", "@users", "@organizations" ] }, () => {
 
     it("[QA-5848]", () => {
         cy.stepInfo('1. Login with Admin user role');

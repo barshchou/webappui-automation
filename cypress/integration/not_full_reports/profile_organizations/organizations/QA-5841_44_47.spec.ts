@@ -5,7 +5,7 @@ import testData from "../../../../fixtures/not_full_reports/organizations/QA-584
 import enums from '../../../../enums/enums';
 
 describe("Verify users roles to create new clients", 
-    { tags:[ "@permissions_roles, @client", "@organizations" ] }, () => {
+    { tags:[ "@permissions_roles", "@client", "@organizations" ] }, () => {
 
     it("[QA-5844]]", () => {
         cy.stepInfo('1. Login with Lead Appraiser user role');
