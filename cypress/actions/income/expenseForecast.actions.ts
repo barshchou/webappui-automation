@@ -319,20 +319,6 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
         return this;
     }
 
-    hideExpenseForecastHeader(): ExpenseForecastActions {
-        // ernst: A few hacks to get clear Insurance_Forecast_Item component without overlayed headers
-        cy.log('hide');
-        if (Cypress.browser.isHeadless == true) {
-            expenseForecastPage.Header.then(elem => {
-                elem.hide();
-            });
-            expenseForecastPage.expenseForecastHeader.then(elem => {
-                elem.hide();
-            });
-        }
-        return this;
-    }
-
     addCustomExpenseCategory(categoryName: string): ExpenseForecastActions {
         expenseForecastPage.createNewCategoryButton.click();
         expenseForecastPage.newCategoryExpenseName.clear().type(categoryName);
