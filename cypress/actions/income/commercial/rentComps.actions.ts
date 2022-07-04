@@ -1,3 +1,4 @@
+import { numberWithCommas } from './../../../../utils/numbers.utils';
 import BaseActionsExt from "../../base/base.actions.ext";
 import rentCompsPage from "../../../pages/income/commercial/rentComps.page";
 
@@ -93,7 +94,7 @@ class CommercialRentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
         return this;
     }
 
-    fillInRentCompFieldInput(fieldName: string, value: string): CommercialRentCompsActions {
+    fillInRentCompFieldInput(fieldName: string, value: string | number): CommercialRentCompsActions {
         rentCompsPage.getRentCompInputField(fieldName).clear().type(`${value}{enter}`);
         return this;
     }
@@ -120,7 +121,7 @@ class CommercialRentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
     }
 
     verifyRentPerSFCellValue(value: number, rowNumber = 0): CommercialRentCompsActions {
-        rentCompsPage.getRentPerSFCellByRowNumber(rowNumber).should("have.text", `$${value}.00`);
+        rentCompsPage.getRentPerSFCellByRowNumber(rowNumber).should("have.text", `$${numberWithCommas(value.toFixed(2))}`);
         return this;
     }
 
