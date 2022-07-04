@@ -28,7 +28,7 @@ class FindCompsPage extends BasePage {
 
     getSelectCompFromMapButtonByAddress(address) {
         return cy.get('[data-qa="sales-comp-item"]', { includeShadowDom: true })
-        .contains(`${address}`, { includeShadowDom: true }).parent()
+        .contains(`${address}`, { includeShadowDom: true }).parent().parent()
         .find('[data-qa="sales-comp-item-add-btn"]', { includeShadowDom: true });
     }
 

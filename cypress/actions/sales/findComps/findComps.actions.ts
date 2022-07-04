@@ -7,6 +7,7 @@ import propertDescActions from "./drm/propertyDescForm.actions";
 import propertyInfoFormActions from "./drm/propertyInfoForm.actions";
 import { Alias } from "../../../utils/alias.utils";
 import { Utils } from "../../../types/utils.type";
+import { BoweryReports } from "../../../types/boweryReports.type";
 
 class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
 

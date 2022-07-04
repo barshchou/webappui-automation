@@ -56,6 +56,10 @@ class AdjustCompsPage extends BasePage {
     getPricePerBasisValue(basisName: string) {return cy.xpath(`//*[starts-with(., '${basisName}')]//following-sibling::td`);}
 
     get viewMarketDetails() { return cy.xpath("//div[text() = 'Market Adjustment']");}
+
+    getAdjustmentArrow(adjustmentName: "Location Adjustment" | "Market Adjustment" | "Utility Adjustment" | "Other Adjustment"){
+        return cy.contains(adjustmentName).next();
+    }
 }
 
 export default new AdjustCompsPage();
