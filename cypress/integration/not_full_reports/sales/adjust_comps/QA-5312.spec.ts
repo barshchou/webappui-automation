@@ -18,8 +18,13 @@ describe("Total Utility Adjustments in Sales Adjustment Grid is calculated with 
             Sales._FindComps.Page.getSelectedComparable(index).should('be.visible');
         });
         _NavigationSection.navigateToAdjustComps();
-        Sales._AdjustComps.Page.getAdjustmentArrow("Other Adjustment").click();
-        cy.pause();
+        Sales._AdjustComps.Page.getAdjustmentArrow("market-adjustment").click().pause();
+        [ 0, 1, 2 ].forEach((index) => {
+            cy.get('[data-qa="expansion-row-market-adjustment"] [data-qa="Property Description"] a').eq(index).click();
+            cy.get('[id="salesApproach.salesAdjustmentGrid-final-form"]').should("be.visible");
+            cy.get('[aria-label="Close"]', { includeShadowDom:true }).click();
+            cy.pause();
+        });
         deleteReport(testData.reportCreationData.reportNumber);
     });
 });
