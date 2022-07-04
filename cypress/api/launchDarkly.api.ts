@@ -33,7 +33,7 @@ class LaunchDarkly {
     }
   }
 
-  private jsonPatch(op: Operations, path: string, value: string | object) {
+  private jsonPatch(op: Operations, path: string, value?: string | object) {
     return {
       op,
       path,
@@ -58,7 +58,14 @@ class LaunchDarkly {
         headers: this.headersContent
       });
     }
- 
+  }
+
+  private removeTarget(featureFlagKey: Utils.FeatureFlagKeysType, variationIndex: number): null {
+    this.baseRequest(featureFlagKey, "PATCH", this.jsonPatch(
+      "remove",
+      `/environments/${this.environmentKey}/targets/${variationIndex}`
+    ));
+    return null;
   }
 
   getFeatureFlag(featureFlagKey?: Utils.FeatureFlagKeysType): LaunchDarkly {
@@ -79,6 +86,10 @@ class LaunchDarkly {
     this.baseRequest(featureFlagKey).then(resp => {
       const targets = resp.body.environments[this.environmentKey].targets;
       const existingTargetIndex = targets.findIndex(target => target.variation === variationIndex);
+
+      // Remove any existing targets for the user
+      this.removeUserTarget(featureFlagKey, userId);
+
       if (existingTargetIndex === -1) {
         cy.log(`Adding feature flag ${featureFlagKey} for ${userId}`);
 
@@ -102,25 +113,38 @@ class LaunchDarkly {
     return this;
   }
 
-  removeUserTarget(featureFlagKey: Utils.FeatureFlagKeysType, variationIndex: number, userId = this.userId): LaunchDarkly {
+  removeUserTarget(featureFlagKey: Utils.FeatureFlagKeysType, userId = this.userId): null {
     this.baseRequest(featureFlagKey).then(resp => {
-        const targets = resp.body.environments[this.environmentKey].targets.map(el => el.values)[variationIndex];
-        const userIndex = targets.indexOf(userId);
+      const targets = resp.body.environments[this.environmentKey].targets;
+      const existingUserTargetIndex = targets.findIndex((target) =>
+        target.values.includes(userId),
+      );
 
-        if (userIndex === -1) {
-          // Nothing to remove
-          return null;
-        }
+    if (existingUserTargetIndex === -1) {
+      // Nothing to remove
+      return null;
+    }
 
-        this.baseRequest(featureFlagKey, "PATCH", this.jsonPatch(
-          "remove",
-          `/environments/${this.environmentKey}/targets/${variationIndex}/values/${userIndex}`,
-          userId
-        )).its("status").should("eq", 200);
-        
-        cy.log(`User ${userId} has been deleted`);
+    const existingUserTarget = targets[existingUserTargetIndex];
+    if(existingUserTarget.values.length === 1) {
+      // A single user in the target, need to remove the entire target
+      this.removeTarget(featureFlagKey, existingUserTargetIndex);
+      // Recursively continue removing the user targets
+      // since the same user can have multiple targets
+      return this.removeUserTarget(featureFlagKey, userId);
+    }
+
+    const userIndex = existingUserTarget.values.indexOf(userId);
+
+    this.baseRequest(featureFlagKey, "PATCH", this.jsonPatch(
+      "remove",
+      `/environments/${this.environmentKey}/targets/${existingUserTargetIndex}/values/${userIndex}`,
+      userId
+    )).its("status").should("eq", 200);
+    
+    cy.log(`User ${userId} has been deleted`);
     });
-    return this;
+    return null;
   }
 
 }
