@@ -1,11 +1,12 @@
 import ReportDataCreator from "../../data_creator/reportData.creator";
 import Enums from "../../../enums/enums";
-import { BoweryAutomation } from "../../../types/boweryAutomation.type";
-import userDataCreator from "../../data_creator/userData.creator";
-import enums from "../../../enums/enums";
+
+const _randomPart = (): string => {
+    return "5359-62-" + Date.now().toString();
+};
 
 const reportCreationFixture = () => {
-    return ReportDataCreator.getReportData("5848_57-59", {
+    return ReportDataCreator.getReportData(_randomPart(), {
         incomeValue: Enums.INCOME_TYPE.both
     });
 };
@@ -19,23 +20,13 @@ const _inspectorPassword = Cypress.env(`${Enums.USERS.webapp_inspector_password}
 const _adminUsername = Cypress.env(`${Enums.USERS.webapp_admin_username}`);
 const _adminPassword = Cypress.env(`${Enums.USERS.webapp_admin_password}`);
 
-const _userFirstName = "TestUserFirstName-" + `${Date.now()}`;
-const _userLastName = "TestUserLastName-" + `${Date.now()}`;
-const _userName = "TestUserName-" + `${Date.now()}` + '@boweryvaluation.com';
-const _roleName = [ enums.USER_ROLES.appraiser ];
-
-const _userOptions: BoweryAutomation.OrganizationCreateNewUserData = {
-    username: _userName,
-    firstName: _userFirstName,
-    lastName: _userLastName,
-    roleName: _roleName
-};
+const _reviewStatus = Enums.REPORT_STATUS.review;
+const _draftStatus =  Enums.REPORT_STATUS.draft;
+const _submittedStatus = Enums.REPORT_STATUS.submitted;
+const _approvedStatus =  Enums.REPORT_STATUS.approved;
 
 export default {
     reportCreationData: reportCreationFixture(),
-    clientCreationData: userDataCreator.getUserData(_userOptions),
-    shortTextToType: _userFirstName,
-    userToFind: _userFirstName + " " + _userLastName,
     leadAppraiserUsername: _leadAppraiserUsername,
     leadAppraiserPassword: _leadAppraiserPassword,
     appraiserUsername: _appraiserUsername,
@@ -43,5 +34,9 @@ export default {
     inspectorUsername: _inspectorUsername,
     inspectorPassword: _inspectorPassword,
     adminUsername: _adminUsername,
-    adminPassword: _adminPassword
+    adminPassword: _adminPassword,
+    reviewStatus: _reviewStatus,
+    draftStatus: _draftStatus,
+    submittedStatus: _submittedStatus,
+    approvedStatus: _approvedStatus,
 };

@@ -6,19 +6,17 @@ const expensesCardsNames = {
     expenseCardsIncludeInProFormaCheckboxArray: [ "insurance", "electricity", "fuel", "waterAndSewer", "repairsAndMaintenance", "payrollAndBenefits",
         "generalAndAdministrative", "legalAndProfessionalFees", "miscellaneous", "management", "reserves" ],
 
-    realEstateTaxes: "realEstateTaxes",
     insurance: "insurance",
     electricity: "electricity",
     fuel: "fuel",
     waterAndSewer: "waterAndSewer",
-    utilities: "utilities",
     repairAndMaintenance: "repairsAndMaintenance",
     payrollBenefits: "payrollAndBenefits",
     generalAndAdministrative: "generalAndAdministrative",
     legalAndProfessional: "legalAndProfessionalFees",
     miscellaneous: "miscellaneous",
     managementFees: "management",
-    replacementsAndReserves: "reserves"
+    replacementsAndReserves: "replacementReserves"
 };
 
 

@@ -311,7 +311,7 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
         expenseForecastPage.getExpenseCommentaryEditButton(item, index).click();
         expenseForecastPage.getExpenseCommentaryRevertToOriginal(item).click();
         this.verifyProgressBarNotExist();
-        expenseForecastPage.expenseConfirmRevertButton.click();
+        expenseForecastPage.formYesRevertBtn.click();
         expenseForecastPage.getExpenseCommentarySaveButton(item, index).click();
         return this;
     }
