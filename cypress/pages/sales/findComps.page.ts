@@ -32,6 +32,23 @@ class FindCompsPage extends BasePage {
         .find('[data-qa="sales-comp-item-add-btn"]', { includeShadowDom: true });
     }
 
+    /**
+     * Get all sales comps from search list
+     * @returns List of all rendered sales comps in search list
+     */
+    getSelectCompFromMapButton() {
+        return cy.get('[data-qa="sales-comp-item"]', { includeShadowDom: true })
+        .find('[data-qa="sales-comp-item-add-btn"]', { includeShadowDom: true });
+    } 
+
+    /**
+     * Sales Comp row in Selected Comparable table
+     * @param index number of selected comparables (default - 0)
+     */
+    getSelectedComparable(index = 0){
+        return cy.get(`[data-qa="row-${index}"]`);
+    }
+
     getRemoveSelectedCompButtonByAddress(address) {
         return cy.contains(address).parent("td").parent().find('[data-qa="selected-comp-remove-btn"]');
     }

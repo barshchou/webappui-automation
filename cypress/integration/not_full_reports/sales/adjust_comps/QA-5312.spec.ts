@@ -13,8 +13,9 @@ describe("Total Utility Adjustments in Sales Adjustment Grid is calculated with 
     it("Test body", () => {
         cy.stepInfo("1. Navigate to Find comps page and add a sales comps");
         _NavigationSection.navigateToFindComps().pause();
-        testData.comparable.addresses.forEach(address => {
-            Sales._FindComps.selectCompFromMapByAddress(address);
+        [ 0, 1, 2 ].forEach((index) => {
+            Sales._FindComps.selectCompFromMap();
+            Sales._FindComps.Page.getSelectedComparable(index).should('be.visible');
         });
         _NavigationSection.navigateToAdjustComps();
         Sales._AdjustComps.Page.getAdjustmentArrow("Other Adjustment").click();
