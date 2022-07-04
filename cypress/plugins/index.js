@@ -93,7 +93,7 @@ const _convertDocxToHtml = async (report) => {
   await new Promise((resolve) =>{
     setTimeout(() => resolve(true), 1000)
   });
-  return _getFilePath(_reportName, _docx_html, currentTime + 1000, timeout);
+  return _getFilePath(`Bowery Appraisal_${_reportName}`, _docx_html, currentTime + 1000, timeout);
 }
 
 /**
