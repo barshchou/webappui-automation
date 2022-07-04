@@ -10,7 +10,6 @@ describe("[QA-4433] Launch Darkly for Inspection Date & Date of Valuation (featu
     before("Login, create report", () => {
         cy.stepInfo(`1. Create a new report on the WebApp (Note: the JOB # of that report corresponds with the JOB # of an open 
             job on SalesForce).`);
-        // launchDarklyApi.removeUserTarget(testData.featureFlagKey);
         launchDarklyApi.setFeatureFlagForUser(testData.featureFlagKey, testData.offFeatureFlag);
         createReport(testData.reportCreationData);
     });
