@@ -1,5 +1,6 @@
 import enums from "../../enums/enums";
 import { BoweryReports } from "../../types/boweryReports.type";
+import { numberWithCommas } from "../../../utils/numbers.utils";
 
 class Chips {
 
@@ -9,9 +10,9 @@ class Chips {
 
     private _buildingName: string;
 
-    private _grossBuildingArea: number;
+    private _grossBuildingArea: string | number;
 
-    private _siteArea: number;
+    private _siteArea: string | number;
 
     private _currentNumberOfCommercialUnits: number;
 
@@ -40,13 +41,15 @@ class Chips {
         return this;
     }
 
-    setGrossBuildingAre(grossBuildingArea?: number){
-        this._grossBuildingArea = grossBuildingArea ?? 2124441;
+    setGrossBuildingArea(grossBuildingArea?: number){
+        const grossBuildingAreaValue = grossBuildingArea ?? "2,124,441";
+        this._grossBuildingArea = typeof grossBuildingAreaValue === "string" ? grossBuildingAreaValue : numberWithCommas(grossBuildingArea);
         return this;
     }
 
     setSiteArea(siteArea?: number){
-        this._siteArea = siteArea ?? 753175;
+        const siteAreaValue = siteArea ?? "753,175";
+        this._siteArea = typeof siteAreaValue === "string" ? siteAreaValue : numberWithCommas(siteArea);
         return this;
     }
 
@@ -88,7 +91,7 @@ class Chips {
                
         options?.block == undefined ? this.setBlock() : this.setBlock(options.block);
         options?.buildingName == undefined ? this.setBuildingName() : this.setBuildingName(options.buildingName);
-        options?.grossBuildingArea == undefined ? this.setGrossBuildingAre() : this.setGrossBuildingAre(options.grossBuildingArea);
+        options?.grossBuildingArea == undefined ? this.setGrossBuildingArea() : this.setGrossBuildingArea(options.grossBuildingArea);
         options?.lotValue == undefined ? this.setLotValue() : this.setLotValue(options.lotValue);
         options?.numberOfCommercialUnits == undefined ? this.setNumberOfCommercialUnits() : this.setNumberOfCommercialUnits(options.numberOfCommercialUnits);
         options?.numberOfResidentialUnits == undefined ? this.setNumberOfResidentialUnits() : this.setNumberOfResidentialUnits(options.numberOfResidentialUnits);
