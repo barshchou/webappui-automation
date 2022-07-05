@@ -52,7 +52,7 @@ class ExpenseForecastPage extends BasePage {
 
     getExpenseCommentaryRevertToOriginal(forecastItem: string) { return cy.xpath(`//*[@data-qa="${forecastItem}-forecast-item"]//following::button[.='Revert to Original'][1]`); }
 
-    getCheckboxIncludeInProForma(forecastItem: string) {return cy.get(`[data-qa^="${forecastItem}.includeInProForma-"]`).find('input[type="checkbox"]');}
+    getCheckboxIncludeInProForma(forecastItem: string) {return cy.get(`[data-qa^="${forecastItem}.includeInProForma"]`).find('input[type="checkbox"]');}
 
     get inputPercentOfEGICheckbox() { return cy.get("[label='Input % of EGI'] input"); }
 
@@ -67,6 +67,8 @@ class ExpenseForecastPage extends BasePage {
     get allProjections() { return cy.get("[data-qa$=historical]"); }
 
     get allForecastsInputs() { return cy.get("[name$=concludedValue]"); }
+
+    get allForecastsInputsCustomCards() { return cy.get("[name^=customExpenses][name$=concludedValue]"); }
 
     get toeOwnerProjection() { return cy.get("[data-qa=owners-projection]"); }
 

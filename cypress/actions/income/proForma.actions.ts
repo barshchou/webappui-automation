@@ -135,8 +135,8 @@ class ProFormaActions extends BaseActionsExt<typeof proFormaPage> {
 
     verifyPsfTOEexTaxesIncludeForecasts(): ProFormaActions {
         cy.get(`@${Alias.expenceForecastAliases.sumPerSF}`).then(val => {
-            let valPSF = Number(val);
-            let textToBePSF = `$${getNumberWithDecimalPart(valPSF)}`;
+            let valPSF = Number(val).toFixed(2);
+         let textToBePSF = `$${numberWithCommas(valPSF)}`;
             this.verifyCategoryPSFTotal(textToBePSF, enums.PRO_FORMA_TYPES.totalOperatingExpensesExTaxes);
         });
         return this;
