@@ -2,7 +2,6 @@ import proFormaPage from "../../pages/income/proForma.page";
 import {
     getNumberFromMinusDollarNumberWithCommas,
     numberWithCommas,
-    getNumberWithDecimalPart,
     getNumberFromDollarNumberWithCommas
 } from "../../../utils/numbers.utils";
 import BaseActionsExt from "../base/base.actions.ext";
