@@ -1,3 +1,5 @@
+import rowsMarketadjustmentEnum from "../../../../enums/adjustComps/rows.marketadjustment.enum";
+import salesadjustmentgridEnum from "../../../../enums/adjustComps/salesadjustmentgrid.enum";
 import Enums from "../../../../enums/enums";
 import { BoweryReports } from "../../../../types/boweryReports.type";
 import ReportDataCreator from "../../../data_creator/reportData.creator";
@@ -8,8 +10,8 @@ const _reportCreationData = ReportDataCreator.getReportData("5312", {
 
 const _numberOfSalesComps = [ 0, 1, 2 ];
 
-const _adjustmentName: BoweryReports.SalesAdjustmentGrid.AdjustmentName = "market-adjustment";
-const _rowName: BoweryReports.SalesAdjustmentGrid.RowsMarketAdjustment = "Property Description";
+const _adjustmentName: BoweryReports.SalesAdjustmentGrid.AdjustmentName = salesadjustmentgridEnum.market_adjustment;
+const _rowName: BoweryReports.SalesAdjustmentGrid.RowsMarketAdjustment = rowsMarketadjustmentEnum.property_description;
 
 export default {
     reportCreationData: _reportCreationData,
