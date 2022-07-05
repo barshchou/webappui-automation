@@ -12,18 +12,22 @@ describe("Total Utility Adjustments in Sales Adjustment Grid is calculated with 
 
     it("Test body", () => {
         cy.stepInfo("1. Navigate to Find comps page and add a sales comps");
-        _NavigationSection.navigateToFindComps().pause();
-        [ 0, 1, 2 ].forEach((index) => {
+        _NavigationSection.navigateToFindComps();
+        testData.numberOfSalesComps.forEach((index) => {
             Sales._FindComps.selectCompFromMap();
             Sales._FindComps.Page.getSelectedComparable(index).should('be.visible');
         });
+        cy.stepInfo(`2. Go to Adjust Comps page`);
         _NavigationSection.navigateToAdjustComps();
-        Sales._AdjustComps.Page.getAdjustmentArrow("market-adjustment").click().pause();
-        [ 0, 1, 2 ].forEach((index) => {
-            cy.get('[data-qa="expansion-row-market-adjustment"] [data-qa="Property Description"] a').eq(index).click();
-            cy.get('[id="salesApproach.salesAdjustmentGrid-final-form"]').should("be.visible");
-            cy.get('[aria-label="Close"]', { includeShadowDom:true }).click();
-            cy.pause();
+        cy.stepInfo(`3. In the Sales adjustment grid click on the dropdown icon next to the Market Adjustment`);
+        Sales._AdjustComps.Page.getAdjustmentArrow("market-adjustment").click();
+        testData.numberOfSalesComps.forEach((index) => {
+            cy.stepInfo(`4. Click on the “View“ of any address`);
+            Sales._AdjustComps.Page
+            .getAdjustmentRow("market-adjustment", "Property Description").eq(index).click;
+            cy.stepInfo(`5. Verify that modal with all the information about the comp is opened`);
+            Sales._AdjustComps.Page.ModalSalesCompInfo.should("be.visible");
+            Sales._AdjustComps.Page.CloseIconShadowDom.click();
         });
         deleteReport(testData.reportCreationData.reportNumber);
     });
