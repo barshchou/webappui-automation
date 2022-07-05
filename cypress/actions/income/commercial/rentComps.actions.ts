@@ -1,6 +1,7 @@
-import { numberWithCommas } from './../../../../utils/numbers.utils';
+import { numberWithCommas, getNumberFromDollarNumberWithCommas } from './../../../../utils/numbers.utils';
 import BaseActionsExt from "../../base/base.actions.ext";
 import rentCompsPage from "../../../pages/income/commercial/rentComps.page";
+import { BoweryReports } from '../../../types/boweryReports.type';
 
 class CommercialRentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
 
@@ -120,8 +121,37 @@ class CommercialRentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
         return this;
     }
 
-    verifyRentPerSFCellValue(value: number, rowNumber = 0): CommercialRentCompsActions {
+    verifyRentPerMonthCellValue(value: number, rowNumber = 0): CommercialRentCompsActions {
         rentCompsPage.getRentPerSFCellByRowNumber(rowNumber).should("have.text", `$${numberWithCommas(value.toFixed(2))}`);
+        return this;
+    }
+
+    verifyRentPerMonthCellPSFValue(rowNumber = 0): CommercialRentCompsActions {
+        this.clickEditButtonByRowNumber(rowNumber);
+        const baseRent =  rentCompsPage.getRentCompInputField("baseRent").invoke("val");
+        baseRent.then(baseRent => {
+            const rentValue = getNumberFromDollarNumberWithCommas(baseRent);
+            const perSquareFootValue = `$${(rentValue / 12).toFixed(2)}`;
+            rentCompsPage.cancelModalButton.click();
+            rentCompsPage.getRentPerSFCellByRowNumber(rowNumber).should("have.text", perSquareFootValue);
+        });
+        return this;
+    }
+
+    verifyRentPerMonthCellMonthlyOrAnnuallyValue(name: BoweryReports.UnitsOfMeasure = "monthly", rowNumber = 0): CommercialRentCompsActions {
+        this.clickEditButtonByRowNumber(rowNumber);
+        const baseRent =  rentCompsPage.getRentCompInputField("baseRent").invoke("val");
+        const squareFeet =  rentCompsPage.getRentCompInputField("squareFeet").invoke("val");
+        baseRent.then(baseRent => {
+            const baseRentNum = getNumberFromDollarNumberWithCommas(baseRent);
+            squareFeet.then(squareFeet => {
+               const squareFeetNum = getNumberFromDollarNumberWithCommas(squareFeet);
+               const perSquareFootValue = (name === "monthly") ? `$${(baseRentNum / squareFeetNum).toFixed(2)}` 
+                    : `$${(baseRentNum / 12 / squareFeetNum).toFixed(2)}`;
+               rentCompsPage.cancelModalButton.click();
+               rentCompsPage.getRentPerSFCellByRowNumber(rowNumber).should("have.text", perSquareFootValue);
+            });
+        });
         return this;
     }
 

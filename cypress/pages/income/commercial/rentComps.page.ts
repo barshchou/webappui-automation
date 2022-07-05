@@ -65,6 +65,8 @@ class CommercialRentCompsPage extends BasePage {
 
     get draggableUnsortedPlaceholder() {return cy.xpath(`//*[@data-qa="unsorted_group"]//td[contains(text(), 'Drop any rent roll unit here')]`);}
 
+    get cancelModalButton() {return cy.get("[data-qa=cancel-link]");}
+
 }
 
 export default new CommercialRentCompsPage();
