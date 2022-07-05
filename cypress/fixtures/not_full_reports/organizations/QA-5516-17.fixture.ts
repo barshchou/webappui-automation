@@ -32,5 +32,6 @@ const userRoles = () => {
 export default {
     adminUsername: _adminUsername,
     adminPassword: _adminPassword,
-    usersRoles: userRoles()
+    usersRoles: userRoles(),
+    settingsPageTitle: "Settings"
 };

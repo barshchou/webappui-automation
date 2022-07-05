@@ -1,11 +1,10 @@
-// import { _Appraiser } from './../../../../actions/report/index';
 import { _NavigationSection } from '../../../../actions/base';
 import { createReport, deleteReport } from '../../../../actions/base/baseTest.actions';
 import { Report } from '../../../../actions';
 import testData from "../../../../fixtures/not_full_reports/report/appraiser/QA-5363-66.fixture";
 
 describe("Verify that 'Sign Report' checkbox for different user roles", 
-    { tags:[ "@permissions_roles", "@report_status" ] }, () => {
+    { tags:[ "@permissions_roles", "@report_status", "@report", "@appraiser" ] }, () => {
 
     before('Create a report', () => {
         cy.stepInfo('Precondition: Create report with Admin user');

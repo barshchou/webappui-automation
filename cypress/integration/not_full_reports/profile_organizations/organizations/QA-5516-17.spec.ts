@@ -18,7 +18,7 @@ describe("Verify users roles access to 'Settings' page",
         _NavigationSection.navigateToProfileOrganization(enums.MENU_LINKS.organization);
 
         cy.stepInfo('3. Verify that the “Settings” tab is displayed in the left navigation menu of the page');
-        cy.contains("Settings").should('exist');
+        cy.contains(testData.settingsPageTitle).should('exist');
     });
 
     testData.usersRoles.forEach(userRole => {
@@ -30,7 +30,7 @@ describe("Verify users roles access to 'Settings' page",
             _NavigationSection.navigateToProfileOrganization(enums.MENU_LINKS.organization);
     
             cy.stepInfo('3. Verify that the “Settings” tab is NOT displayed in the left navigation menu of the page');
-            cy.contains("Settings").should('not.exist');
+            cy.contains(testData.settingsPageTitle).should('not.exist');
         });
     });
 });
