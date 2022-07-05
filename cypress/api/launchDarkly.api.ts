@@ -16,6 +16,8 @@ class LaunchDarkly {
 
   private readonly projectKey = Cypress.env("LAUNCH_DARKLY_PROJECT_KEY");
 
+  private readonly baseUrl = "https://app.launchdarkly.com/api/v2/flags/";
+
   private environmentKey: Utils.EnvLaunchDarklyType = 'staging'
 
   private userId = Cypress.env("USERNAME");
@@ -45,7 +47,7 @@ class LaunchDarkly {
     if (method === "PATCH") {
       return cy.request({
         method,
-        url: `https://app.launchdarkly.com/api/v2/flags/${this.projectKey}/${featureFlagKey}`,
+        url: `${this.baseUrl}${this.projectKey}/${featureFlagKey}`,
         headers: this.headersContent,
         body : JSON.stringify({
           patch: [ options ]
@@ -54,7 +56,7 @@ class LaunchDarkly {
     } else {
       return cy.request({
         method,
-        url: `https://app.launchdarkly.com/api/v2/flags/${this.projectKey}/${featureFlagKey}`,
+        url: `${this.baseUrl}${this.projectKey}/${featureFlagKey}`,
         headers: this.headersContent
       });
     }
@@ -69,8 +71,8 @@ class LaunchDarkly {
   }
 
   getFeatureFlag(featureFlagKey?: Utils.FeatureFlagKeysType): LaunchDarkly {
-    const _url = featureFlagKey ? `https://app.launchdarkly.com/api/v2/flags/${this.projectKey}/${featureFlagKey}`
-      : `https://app.launchdarkly.com/api/v2/flags/${this.projectKey}`;
+    const _url = featureFlagKey ? `${this.baseUrl}${this.projectKey}/${featureFlagKey}`
+      : `${this.baseUrl}${this.projectKey}`;
     cy.request({
       method: "GET",
       url: _url,
@@ -90,23 +92,25 @@ class LaunchDarkly {
       // Remove any existing targets for the user
       this.removeUserTarget(featureFlagKey, userId);
 
-      if (existingTargetIndex === -1) {
-        cy.log(`Adding feature flag ${featureFlagKey} for ${userId}`);
-
-        this.baseRequest(featureFlagKey, "PATCH", this.jsonPatch(
+      const jsonPatchObj = (existingTargetIndex === -1) ? this.jsonPatch(
           "add",
           `/environments/${this.environmentKey}/targets/-`,
           {
             variation: variationIndex,
             values: [ userId ],
-          },
-        )).its("status").should("eq", 200);
-      } else {
-        this.baseRequest(featureFlagKey, "PATCH", this.jsonPatch(
+          }
+        ) : this.jsonPatch(
           "add",
           `/environments/${this.environmentKey}/targets/${existingTargetIndex}/values/-`,
           userId
-        )).its("status").should("eq", 200);
+        );
+
+      if (existingTargetIndex === -1) {
+        cy.log(`Adding feature flag ${featureFlagKey} for ${userId}`);
+
+        this.baseRequest(featureFlagKey, "PATCH", jsonPatchObj).its("status").should("eq", 200);
+      } else {
+        this.baseRequest(featureFlagKey, "PATCH", jsonPatchObj).its("status").should("eq", 200);
       }
       cy.log(`Set ${featureFlagKey} feature flag`);
     });
