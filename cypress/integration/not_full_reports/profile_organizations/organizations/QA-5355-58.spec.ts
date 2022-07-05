@@ -5,7 +5,7 @@ import testData from "../../../../fixtures/not_full_reports/organizations/QA-535
 import enums from '../../../../enums/enums';
 
 describe("Verify users roles to create new users", 
-    { tags:[ "@permissions_roles, @users", "@organizations" ] }, () => {
+    { tags:[ "@permissions_roles", "@users", "@organizations" ] }, () => {
 
     before('Prepare test data', () => {
         cy.stepInfo('Precondition: Create test user');
