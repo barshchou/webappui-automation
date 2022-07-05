@@ -3,7 +3,7 @@ import Enums from "../../../../../enums/enums";
 import { BoweryReports } from "../../../../../types/boweryReports.type";
 import { BoweryAutomation } from "../../../../../types/boweryAutomation.type";
 
-const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("4618", {
+const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("5395", {
     incomeValue: Enums.INCOME_TYPE.both
 });
 
@@ -12,6 +12,7 @@ const _leaseDate = "01012022";
 const _compGroup = "QA_4618_Comp_Group";
 const _otherUse = "TestUseOther";
 const _monthly: BoweryReports.UnitsOfMeasure = "monthly";
+const _compAddress = "153 Clinton Street";
 
 const _rentCompFields: BoweryReports.RentCompField[] = [
     {
@@ -54,5 +55,7 @@ export default {
     compGroup: _compGroup,
     compsAmount: 1, 
     otherUse: _otherUse,
-    unitMeasureMonthly: _monthly
+    unitMeasureMonthly: _monthly,
+    compAddress: _compAddress,
+    title: "Comps"
 };

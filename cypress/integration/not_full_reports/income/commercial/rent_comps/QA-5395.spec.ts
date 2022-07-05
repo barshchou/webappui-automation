@@ -1,8 +1,7 @@
-import testData from "../../../../../fixtures/not_full_reports/income/commercial/rent_comps/QA-4618.fixture";
+import testData from "../../../../../fixtures/not_full_reports/income/commercial/rent_comps/QA-5395.fixture";
 import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../../actions/base";
 import { Income } from "../../../../../actions";
-import columns from "../../../../../enums/compGroupsColumns.enum";
 
 describe("Verify entered Use is displayed in Selected Rent Comps table", 
     { tags: [ "@income", "@commercial", "@rent_comps" ] }, () => {
@@ -32,16 +31,39 @@ describe("Verify entered Use is displayed in Selected Rent Comps table",
         });
         Income._CommercialManager.RentComps.enterLeaseDate(testData.leaseDate)
             .checkUnitOfMeasureRadioButton(testData.unitMeasureMonthly)
-            .clickSubmitButton();
-            
+            .clickSubmitButton()
+            .clickRemoveButtonByRowNumber();
 
-        // cy.stepInfo(`4. Navigate to Comp Group Discussion page and verify the entered use appears 
-        //             under use Commercial Comp Groups Discussion page`);
-        // _NavigationSection.clickCommercialCompGroupsDiscussion()
-        //     .clickYesIfExist();
-        // Income._CommercialManager.CompGroupsDiscussion.verifyCompGroupUnitValue(testData.compGroup, columns.use, 
-        //      testData.otherUse);
 
-        // deleteReport(testData.reportCreationData.reportNumber);
+        cy.stepInfo(`4. When user clicks to the '+' button - the Removed Comps return to the appropriate group. 
+            If the comp does not have a group saved it can return to Uncategorized.`);
+        Income._CommercialManager.RentComps.clickAddRemovedCompByRowButton();    
+
+        cy.stepInfo("5. Click  to the '-' button - the Removed Comps table would delete the comp entirely from the report");
+        Income._CommercialManager.RentComps.clickRemoveButtonByRowNumber()
+            .clickRemoveRemovedCompByRowButton();
+        
+        
+        cy.stepInfo(`6 Add several comp and Click to the Clear ALL button and verify that this button deletes all comps in the 
+            'Removed Comps' table entirely from the report`);
+        Income._CommercialManager.RentComps.openMap()
+            .verifyProgressBarNotExist()
+            .verifyFiltersDropdownExist()
+            .addCompFromMapByAddress(testData.compAddress)
+            .clickRemoveButtonByRowNumber()
+            .clickClearAllButton(testData.title);
+
+        cy.stepInfo("7. If user saves and navigate away from the page with removed comps - they save to the page and user can re-add them");
+        Income._CommercialManager.RentComps.openMap()
+            .verifyProgressBarNotExist()
+            .verifyFiltersDropdownExist()
+            .addCompFromMapByAddress(testData.compAddress)
+            .clickRemoveButtonByRowNumber()
+            .clickSaveContinueButton();
+
+        _NavigationSection.navigateToCommercialRentComps();
+        Income._CommercialManager.RentComps.Page.getRemovedCompRows().should('exist');
+
+        deleteReport(testData.reportCreationData.reportNumber);
     });
 });
