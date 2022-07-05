@@ -116,4 +116,9 @@ export default class BaseActions {
         });
         return this;
     }
+
+    hideElement(element: Cypress.Chainable<JQuery<HTMLElement>>) {
+        element.then(el => el.hide());
+        return this;
+    }
 }

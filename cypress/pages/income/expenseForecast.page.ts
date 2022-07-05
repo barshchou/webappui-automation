@@ -3,7 +3,7 @@ import BasePage from "../base/base.page";
 
 class ExpenseForecastPage extends BasePage {
 
-    get expenseForecastHeader() { return cy.get('[data-qa="expenseForecast"]'); }
+    get pageHeaderElement() { return cy.get('[data-qa="expenseForecast"]'); }
 
     get electricityCard() { return cy.get("[data-qa='electricity-forecast-item'] > div").last(); }
 
