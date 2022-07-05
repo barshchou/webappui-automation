@@ -116,6 +116,11 @@ class CommercialRentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
         return this;
     }
 
+    clickRemoveButtonByRowNumber(rowNumber = 0): CommercialRentCompsActions {
+        rentCompsPage.getRemoveButtonByRowNumber(rowNumber).click();
+        return this;
+    } 
+
     checkUnitOfMeasureRadioButton(name: string): CommercialRentCompsActions {
         rentCompsPage.getUnitOfMeasureRadioButton(name).click();
         return this;
@@ -187,6 +192,24 @@ class CommercialRentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
             target = i == 0 ? rentCompsPage.getDropableArea(groupName) : rentCompsPage.getDropableAreaDropped(groupName);
             commercialUnit.dragAndDrop(subject, target);
         }
+        return this;
+    }
+
+    clickAddRemovedCompByRowButton(rowNumber = 0): CommercialRentCompsActions {
+        rentCompsPage.addRemovedCompByRowButton(rowNumber).click().should("not.exist");
+        rentCompsPage.getEditButtonByRowNumber(rowNumber).should("exist");
+        return this;
+    }
+
+    clickRemoveRemovedCompByRowButton(rowNumber = 0): CommercialRentCompsActions {
+        rentCompsPage.removeRemovedCompByRowButton(rowNumber).click();
+        rentCompsPage.removeRemovedCompByRowButton(rowNumber).should("not.exist");
+        return this;
+    }
+
+    clickClearAllButton(): CommercialRentCompsActions {
+        rentCompsPage.clearAllButton.click();
+        rentCompsPage.removedCompRows.should('not.exist');
         return this;
     }
 }

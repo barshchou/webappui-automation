@@ -19,6 +19,8 @@ class CommercialRentCompsPage extends BasePage {
 
     get addCompButtonsLocator() {return "[data-qa=add-comp-btn]";}
 
+    get removeCompButtonLocator() {return "[data-qa=remove-comp-btn]";}
+
     getAddCompButtonByAddress(address: string) {return cy.contains(address).siblings(this.addCompButtonsLocator);}
 
     get addressCellsLocator() {return "[data-qa=address-cell]";}
@@ -49,6 +51,8 @@ class CommercialRentCompsPage extends BasePage {
 
     getEditButtonByRowNumber(rowNumber = 0) {return cy.xpath(`//tr[@data-qa='row-${rowNumber}']//button[.='Edit']`);}
 
+    getRemoveButtonByRowNumber(rowNumber = 0) {return cy.xpath(`//tr[@data-qa='row-${rowNumber}']//button[.='Remove']`);}
+
     getUnitOfMeasureRadioButton(name: string) {
         return cy.get("div[data-qa=rentType-radio-group] [role=radiogroup]").
             eq(1).
@@ -66,6 +70,14 @@ class CommercialRentCompsPage extends BasePage {
     get draggableUnsortedPlaceholder() {return cy.xpath(`//*[@data-qa="unsorted_group"]//td[contains(text(), 'Drop any rent roll unit here')]`);}
 
     get cancelModalButton() {return cy.get("[data-qa=cancel-link]");}
+
+    addRemovedCompByRowButton(rowNumber: number) {return cy.get(`[data-qa=row-${rowNumber}] [aria-label=Add]`);}
+
+    removeRemovedCompByRowButton(rowNumber: number) {return cy.get(`[data-qa=row-${rowNumber}] [aria-label=Remove]`);}
+
+    get clearAllButton() {return cy.get("button").contains("Clear All");}
+
+    get removedCompRows() {return cy.xpath("//*[contains(text(), 'Removed Comps')]//following::tbody//tr");}
 
 }
 
