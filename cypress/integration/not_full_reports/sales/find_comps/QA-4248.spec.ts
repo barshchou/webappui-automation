@@ -4,6 +4,31 @@ import NavigationSection from "../../../../actions/base/navigationSection.action
 import Sales from "../../../../actions/sales/sales.manager";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import mapKeysUtils from "../../../../utils/mapKeys.utils";
+import { _map } from "../../../../support/commands";
+import { recurse } from "cypress-recurse";
+
+/**
+ * list of elems -> iterate over it -> if elem includes address = return from 
+ */
+const _scrollAndSearchComp = (compAddress:string) => {
+    return cy.get('[aria-label="grid"] > div > div', { includeShadowDom: true }).each((elem, index, list) => {
+        if(elem.text().includes(compAddress)){
+            cy.log("found");
+            cy.log(<any>list.length);
+            cy.log(<any>index);
+            _map.set("key", elem);
+            return;
+        }
+        else if(list.length == index+1){
+            if(_map.get("key") == undefined){
+                cy.log("recusrsive search");
+                cy.wrap(elem).scrollIntoView();
+                return;
+            }
+            return;
+        }
+    });
+};
 
 describe("Verify the Comps can be added by entering the existing Report ID in the modal", 
 { tags:[ "@fix", "@comp_plex", "@sales", "@find_comps" ] }, () => {
@@ -13,6 +38,8 @@ describe("Verify the Comps can be added by entering the existing Report ID in th
 
     it("Test body", () => {
         NavigationSection.navigateToFindComps();
+        recurse(() => _scrollAndSearchComp(fixture.comparable.address), () => _map.get("key") != undefined, { delay: 2000 });
+
         Sales.FindComps.selectCompFromMapByAddress(fixture.comparable.address)
             .clickSaveContinueButton();
         Sales.CreateCompMap.verifyPageOpened();
@@ -25,7 +52,7 @@ describe("Verify the Comps can be added by entering the existing Report ID in th
             NavigationSection.navigateToFindComps();
             Sales.FindComps.clickImportComparableButton()
                 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                .enterReportToSearchComp(<any>reportId);
+                .enterReportToSearchComp(<any>reportId).pause();
         });
         Sales.FindComps.clickSearchButton()
             .checkSingleSalesCompsByEventId()
