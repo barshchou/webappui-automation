@@ -60,6 +60,11 @@ export namespace BoweryReports {
         | CeilingHeightValues | LocationValues | StreetTypeValues | FrontageValues | FloorValues;
     }
 
+    export namespace SalesAdjustmentGrid {
+        export type AdjustmentName = "location-adjustment" | "market-adjustment" | "utility-adjustment" | "other-adjustment"
+        export type RowsMarketAdjustment = "Sale Date" | "Sale Price" | "Cap Rate" | "Price per Unit" | "Price per SF" | "Property Description"
+    }
+
     export type ProFormaAnyIncome = {
         total: string,
         perSF: string,
