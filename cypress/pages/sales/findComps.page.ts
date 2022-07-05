@@ -12,8 +12,6 @@ class FindCompsPage extends BasePage {
 
     get submitButton() {return cy.get("[data-qa=submit-button]", { includeShadowDom: true });}
 
-    //getSelectCompButtonByAddress(address) {return cy.xpath(`//*[text()='${address}']//following-sibling::td/a`);}
-
     getSelectCompButtonByAddress(address) {return cy.contains(address, { includeShadowDom: true }).siblings("td").find("a");}
 
     get addressCells() {return cy.get("[data-qa=address]", { includeShadowDom: true });}
@@ -49,15 +47,15 @@ class FindCompsPage extends BasePage {
         return cy.get(`[data-qa="row-${index}"]`);
     }
 
-    getRemoveSelectedCompButtonByAddress(address) {
+    getRemoveSelectedCompButtonByAddress(address: string) {
         return cy.contains(address).parent("td").parent().find('[data-qa="selected-comp-remove-btn"]');
     }
 
-    getRemoveDeletedCompButtonByAddress(address) {
+    getRemoveDeletedCompButtonByAddress(address: string) {
         return cy.contains(address).parent("td").parent().find('[data-qa="removed-comp-remove-btn"]');
     }
 
-    getRemoveCompFromMapButtonByAddress(address) {
+    getRemoveCompFromMapButtonByAddress(address: string) {
         return cy.get("comp-plex").shadow().find("[class*=salesCompItemWrapper]").contains(`${address}`).parent()
         .siblings("[class*=buttonsColumn]").find("span").contains("REMOVE").parent();
     }

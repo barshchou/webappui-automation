@@ -17,14 +17,18 @@ describe("Total Utility Adjustments in Sales Adjustment Grid is calculated with 
             Sales._FindComps.selectCompFromMap();
             Sales._FindComps.Page.getSelectedComparable(index).should('be.visible');
         });
+
         cy.stepInfo(`2. Go to Adjust Comps page`);
         _NavigationSection.navigateToAdjustComps();
+        
         cy.stepInfo(`3. In the Sales adjustment grid click on the dropdown icon next to the Market Adjustment`);
         Sales._AdjustComps.Page.getAdjustmentArrow(testData.adjustmentName).click();
+        
         testData.numberOfSalesComps.forEach((index) => {
             cy.stepInfo(`4. Click on the “View“ of any address`);
             Sales._AdjustComps.Page
             .getAdjustmentRow(testData.adjustmentName, testData.rowName).eq(index).click();
+            
             cy.stepInfo(`5. Verify that modal with all the information about the comp is opened`);
             Sales._AdjustComps.Page.ModalSalesCompInfo.should("be.visible");
             Sales._AdjustComps.Page.CloseIconShadowDom.click();

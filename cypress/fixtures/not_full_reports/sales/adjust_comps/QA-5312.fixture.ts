@@ -8,12 +8,12 @@ const _reportCreationData = ReportDataCreator.getReportData("5312", {
 
 const _numberOfSalesComps = [ 0, 1, 2 ];
 
-const adjustmentName: BoweryReports.SalesAdjustmentGrid.AdjustmentName = "market-adjustment";
-const rowName: BoweryReports.SalesAdjustmentGrid.RowsMarketAdjustment = "Property Description";
+const _adjustmentName: BoweryReports.SalesAdjustmentGrid.AdjustmentName = "market-adjustment";
+const _rowName: BoweryReports.SalesAdjustmentGrid.RowsMarketAdjustment = "Property Description";
 
 export default {
     reportCreationData: _reportCreationData,
     numberOfSalesComps:_numberOfSalesComps,
-    adjustmentName,
-    rowName
+    adjustmentName: _adjustmentName,
+    rowName: _rowName
 };

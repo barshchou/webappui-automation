@@ -7,7 +7,6 @@ import propertDescActions from "./drm/propertyDescForm.actions";
 import propertyInfoFormActions from "./drm/propertyInfoForm.actions";
 import { Alias } from "../../../utils/alias.utils";
 import { Utils } from "../../../types/utils.type";
-import { BoweryReports } from "../../../types/boweryReports.type";
 
 class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
 
@@ -106,7 +105,7 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
         return this;
     }
 
-    checkFindSingleSalesComp(){
+    checkFindSingleSalesComp(): FindCompsActions{
         cy.wait(`@${Alias.gql.FindTransactionByIdAndVersion}`, { timeout:70000 }).then((interception) => {
             cy.log(interception.response.body.data.findTransactionByIdAndVersion.salesEventId);
             cy.wrap(interception.response.body.data.findTransactionByIdAndVersion.salesEventId)
