@@ -1,4 +1,4 @@
-import testData from "../../../../../fixtures/not_full_reports/income/commercial/rent_comps/QA-4618.fixture";
+import testData from "../../../../../fixtures/not_full_reports/income/commercial/rent_comps/QA-5395.fixture";
 import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../../actions/base";
 import { Income } from "../../../../../actions";
@@ -31,7 +31,7 @@ describe("Verify entered Use is displayed in Selected Rent Comps table",
             }
         });
         Income._CommercialManager.RentComps.enterLeaseDate(testData.leaseDate)
-            .checkUnitOfMeasureRadioButton(testData.unitMeasureMontly)
+            .checkUnitOfMeasureRadioButton(testData.unitMeasureMonthly)
             .clickSubmitButton()
             .dragAllCommercialUnitsIntoGroup(testData.compGroup, testData.compsAmount);
 
