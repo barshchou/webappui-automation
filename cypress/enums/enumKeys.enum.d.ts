@@ -31,3 +31,4 @@ export type RentRollOptionsCheckboxsKeys= keyof typeof Enums.RENT_ROLL_OPTIONS_C
 export type UserRoles = keyof typeof Enums.USER_ROLES
 export type BoweryOffices = keyof typeof Enums.BOWERY_OFFICES
 export type ReportStatus = keyof typeof Enums.REPORT_STATUS
+export type BondTypes = keyof typeof Enums.BOND_TYPES
