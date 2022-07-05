@@ -1,4 +1,3 @@
-import { BoweryAutomation } from "../../types/boweryAutomation.type";
 import { BoweryReports } from "../../types/boweryReports.type";
 import BasePage from "../base/base.page";
 

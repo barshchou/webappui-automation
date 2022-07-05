@@ -13,9 +13,9 @@ const _ticker10YearsBonds = bondTypesEnum.tenYearTreasuryBond;
 const _ticker30YearsBonds = bondTypesEnum.thirtyYearTreasuryBond;
 const _tickerCorporateBonds = bondTypesEnum.corporateBonds;
 
-const _tenYearsBondType = Object.keys(bondTypesEnum)[Object.values(bondTypesEnum).indexOf(_ticker10YearsBonds)] as  BoweryReports.BondTypes;
-const _thirtyYearsBondType = Object.keys(bondTypesEnum)[Object.values(bondTypesEnum).indexOf(_ticker30YearsBonds)] as  BoweryReports.BondTypes;
-const _corporateBondType = Object.keys(bondTypesEnum)[Object.values(bondTypesEnum).indexOf(_tickerCorporateBonds)] as  BoweryReports.BondTypes;
+const _tenYearsBondType = Object.keys(bondTypesEnum)[Object.values(bondTypesEnum).indexOf(_ticker10YearsBonds)] as BoweryReports.BondTypes;
+const _thirtyYearsBondType = Object.keys(bondTypesEnum)[Object.values(bondTypesEnum).indexOf(_ticker30YearsBonds)] as BoweryReports.BondTypes;
+const _corporateBondType = Object.keys(bondTypesEnum)[Object.values(bondTypesEnum).indexOf(_tickerCorporateBonds)] as BoweryReports.BondTypes;
 
 const _url10YearsBonds = _url(_ticker10YearsBonds);
 const _url30YearsBonds = _url(_ticker30YearsBonds);

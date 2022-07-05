@@ -3,7 +3,6 @@ import { Organization } from '../../../../actions/index';
 import { _NavigationSection } from '../../../../actions/base/index';
 import testData from "../../../../fixtures/not_full_reports/profile_organizations/settings/QA-4659-61.fixture";
 import enums from '../../../../enums/enums';
-import { keys } from 'cypress/types/lodash';
 
 describe("", 
     { tags:[ "@organizations", "@settings" ] }, () => {
