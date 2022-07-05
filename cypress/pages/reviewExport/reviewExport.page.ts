@@ -16,5 +16,19 @@ class ReviewExportPage extends BasePage {
     }
 
     get statusBar() {return cy.get("[data-qa=status]");}
+
+    get reportStatus() {return cy.get("[data-qa='report-status']");}
+
+    changeReportStatusButton(status: string) {return cy.get(`[data-qa='${status}-btn']`);}
+
+    resultModal(result = true) {
+        let message = result ? "Success" : "Error";
+        return cy.xpath(`//*[contains(text(), "${message}")]`);
+    }
+
+    resultModalCloseButton(result = true) {
+        let message = result ? "Success" : "Error";
+        return cy.xpath(`//*[contains(text(), "${message}")]//following::button[1]`);
+    }
 }
 export default new ReviewExportPage();

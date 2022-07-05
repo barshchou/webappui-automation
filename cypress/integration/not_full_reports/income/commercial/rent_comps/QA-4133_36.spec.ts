@@ -1,4 +1,4 @@
-import testData from "../../../../../fixtures/not_full_reports/income/commercial/rent_comps/QA-4136.fixture";
+import testData from "../../../../../fixtures/not_full_reports/income/commercial/rent_comps/QA-4133_36.fixture";
 import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../../actions/base";
 import { Income } from "../../../../../actions";
@@ -6,15 +6,26 @@ import { _map } from "../../../../../support/commands";
 import mapKeysUtils from "../../../../../utils/mapKeys.utils";
 import { getNumberFromDollarNumberWithCommas } from "../../../../../../utils/numbers.utils";
 
-describe("State of Comps column in the Computed Values Panel grid", { tags: [ "@income", "@commercial", "@rent_comps" ] }, () => {
+describe("[QA-4133][QA-4136]", { tags: [ "@income", "@commercial", "@rent_comps", "@snapshot_tests" ] }, () => {
 
     before("Create report", () => {
         createReport(testData.reportCreationData);
         _NavigationSection.navigateToCommercialRentComps()
             .verifyProgressBarNotExist();
+        cy.saveLocalStorage();
     });
 
-    it("Test body", () => {
+    beforeEach(() => {
+        cy.restoreLocalStorage();
+    });
+
+    it("[QA-4133] Check that Computed Values Panel grid is visible on the page", () => {
+        Income._CommercialManager.RentComps.hideHeader()
+            .matchElementSnapshot(Income._CommercialManager.RentComps.Page.computedPanel,
+            testData.snapshotName);
+    });
+
+    it("[QA-4136] State of Comps column in the Computed Values Panel grid", () => {
         cy.stepInfo("Add several comps from map, save prices");
         Income._CommercialManager.RentComps.openMap()
             .verifyProgressBarNotExist()

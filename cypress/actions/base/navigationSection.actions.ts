@@ -578,7 +578,7 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         navigationSectionPage.comercialReimbursementButton.click();
         return this;
     }
-
+    
     navigateToResidentialStabilizedRentRoll(): this {
         this.clickIncomeApproachButton();
         this.clickResidentialMenuIfClosed();
@@ -592,6 +592,12 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         this.clickCommercialMenuIfClosed();
         this.clickCommercialStabRentRollButton()
             .clickYesIfExist();
+        return this;
+    }
+
+    logout(): NavigationSectionActions {
+        this.clickProfileOrganization()
+            .selectLink("Log Out");
         return this;
     }
 
@@ -624,6 +630,7 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         cy._mapGet(mapKeysUtils.report_id).then(reportId => {
             cy.visit(`${baseUrl}/report/${reportId}/${pageRoute}`);
         });
+
         return this;
     }
 }

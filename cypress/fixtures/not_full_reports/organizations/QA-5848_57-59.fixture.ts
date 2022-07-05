@@ -43,5 +43,5 @@ export default {
     inspectorUsername: _inspectorUsername,
     inspectorPassword: _inspectorPassword,
     adminUsername: _adminUsername,
-    adminPassword: _adminPassword,
+    adminPassword: _adminPassword
 };
