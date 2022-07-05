@@ -37,7 +37,11 @@ export const Alias = {
         }
     },
     expenceForecastAliases: {
+        sumPerSFCustomCards: "sumPerSFCustomCards",
+        sumPerSFCheckedDefaultCards: "sumPerSFCheckedDefaultCards",
         sumPerSF: "sumPerSF",
+        sumPerUnitCustomCards: "sumPerUnitCustomCards",
+        sumPerUnitCheckedDefaultCards: "sumPerUnitCheckedDefaultCards",
         sumPerUnit: "sumPerUnit"
     },
 };
