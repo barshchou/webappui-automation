@@ -39,7 +39,7 @@ describe("[Income>Commercial>Rent Comps] Rent/SF/Month is calculated with correc
         Income._CommercialManager.RentComps.clickEditButtonByRowNumber().
             checkUnitOfMeasureRadioButton(testData.perMonth).
             clickSubmitButton().
-            verifyRentPerSFCellValue(rentPerSFValue);
+            verifyRentPerMonthCellValue(rentPerSFValue);
 
         cy.stepInfo(`5. Verify if Per Square Foot Per Month is selected on In-Place RR page and 
         Per Square Foot is selected as Unit of Measure on Commercial Unit Details modal -> Rent/SF/Month 
@@ -48,7 +48,7 @@ describe("[Income>Commercial>Rent Comps] Rent/SF/Month is calculated with correc
         Income._CommercialManager.RentComps.clickEditButtonByRowNumber().
             checkUnitOfMeasureRadioButton(testData.perYear).
             clickSubmitButton().
-            verifyRentPerSFCellValue(rentPerSFValue);
+            verifyRentPerMonthCellValue(rentPerSFValue);
 
         cy.stepInfo(`6. Verify if  Per Square Foot is selected on In-Place RR page and 
         Per Square Foot Per Month is selected as Unit of Measure on Commercial Unit Details modal -> Rent/SF 
@@ -60,7 +60,7 @@ describe("[Income>Commercial>Rent Comps] Rent/SF/Month is calculated with correc
         Income._CommercialManager.RentComps.clickEditButtonByRowNumber().
             checkUnitOfMeasureRadioButton(testData.perMonth).
             clickSubmitButton().
-            verifyRentPerSFCellValue(rentPerSFValue);
+            verifyRentPerMonthCellValue(rentPerSFValue);
 
         cy.stepInfo(`7. Verify if  Per Square Foot is selected on In-Place RR page and 
         as Unit of Measure on Commercial Unit Details modal -> Rent/SF 
@@ -69,7 +69,7 @@ describe("[Income>Commercial>Rent Comps] Rent/SF/Month is calculated with correc
         Income._CommercialManager.RentComps.clickEditButtonByRowNumber().
             checkUnitOfMeasureRadioButton(testData.perYear).
             clickSubmitButton().
-            verifyRentPerSFCellValue(rentPerSFValue);
+            verifyRentPerMonthCellValue(rentPerSFValue);
 
         deleteReport(testData.reportCreationData.reportNumber);
     });
