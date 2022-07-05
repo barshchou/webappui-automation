@@ -1,5 +1,5 @@
-import { Property, Income } from './../../../../../actions/index';
-import testData from "../../../../../fixtures/not_full_reports/income/commercial/rent_comps/QA-4710.fixture";
+import { Property, Income } from '../../../../../actions/index';
+import testData from "../../../../../fixtures/not_full_reports/income/commercial/rent_comps/QA-4710-11.fixture";
 import NavigationSection from "../../../../../actions/base/navigationSection.actions";
 import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
 

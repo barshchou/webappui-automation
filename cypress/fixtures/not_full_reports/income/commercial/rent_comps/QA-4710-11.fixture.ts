@@ -3,7 +3,7 @@ import { BoweryReports } from "../../../../../types/boweryReports.type";
 import ReportDataCreator from "../../../../data_creator/reportData.creator";
 
 const reportCreationFixture = () => {
-    return ReportDataCreator.getReportData("4710", {
+    return ReportDataCreator.getReportData("4710-11", {
         incomeValue: Enums.INCOME_TYPE.both
     });
 };
