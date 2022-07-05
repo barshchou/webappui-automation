@@ -45,6 +45,8 @@ import propertyConditionsRadiosEnum from "./property/propertyConditionsRadios.en
 import menuLinksNamesEnum from "./menuLinksNames.enum";
 import rolesEnum from "./users/roles.enum";
 import boweryOfficesEnum from "./organization/boweryOffices.enum";
+import salesadjustmentgridEnum from "./adjustComps/salesadjustmentgrid.enum";
+import rowsMarketadjustmentEnum from "./adjustComps/rows.marketadjustment.enum";
 
 export default {
     TEMPLATE_TYPE: templateTypesEnum,
@@ -93,5 +95,7 @@ export default {
     PROPERTY_CONDITIONS_RADIOS: propertyConditionsRadiosEnum,
     MENU_LINKS: menuLinksNamesEnum,
     USER_ROLES: rolesEnum,
-    BOWERY_OFFICES: boweryOfficesEnum
+    BOWERY_OFFICES: boweryOfficesEnum,
+    SALES_ADJUSTMENT_GRID: salesadjustmentgridEnum,
+    ROWS_MARKET_ADJUSTMENT: rowsMarketadjustmentEnum
 };

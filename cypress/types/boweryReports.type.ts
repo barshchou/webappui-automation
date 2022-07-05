@@ -61,8 +61,8 @@ export namespace BoweryReports {
     }
 
     export namespace SalesAdjustmentGrid {
-        export type AdjustmentName = "location-adjustment" | "market-adjustment" | "utility-adjustment" | "other-adjustment"
-        export type RowsMarketAdjustment = "Sale Date" | "Sale Price" | "Cap Rate" | "Price per Unit" | "Price per SF" | "Property Description"
+        export type AdjustmentName = typeof Enums.SALES_ADJUSTMENT_GRID[KeyInfo.SalesAdjustmentGridKeys]
+        export type RowsMarketAdjustment = typeof Enums.ROWS_MARKET_ADJUSTMENT[KeyInfo.RowsMarketAdjustmentKeys]
     }
 
     export type ProFormaAnyIncome = {

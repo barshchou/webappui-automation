@@ -28,3 +28,5 @@ export type IncomeTypeKeys = keyof typeof Enums.INCOME_TYPE
 export type PropertyConditions = keyof typeof Enums.PROPERTY_CONDITIONS
 export type UserRoles = keyof typeof Enums.USER_ROLES
 export type BoweryOffices = keyof typeof Enums.BOWERY_OFFICES
+export type SalesAdjustmentGridKeys = keyof typeof Enums.SALES_ADJUSTMENT_GRID
+export type RowsMarketAdjustmentKeys = keyof typeof Enums.ROWS_MARKET_ADJUSTMENT
