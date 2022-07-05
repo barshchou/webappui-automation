@@ -207,9 +207,9 @@ class CommercialRentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
         return this;
     }
 
-    clickClearAllButton(): CommercialRentCompsActions {
+    clickClearAllButton(title?: string): CommercialRentCompsActions {
         rentCompsPage.clearAllButton.click();
-        rentCompsPage.removedCompRows.should('not.exist');
+        rentCompsPage.getRemovedCompRows(title).should('not.exist');
         return this;
     }
 }

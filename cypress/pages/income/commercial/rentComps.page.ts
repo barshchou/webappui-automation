@@ -77,7 +77,7 @@ class CommercialRentCompsPage extends BasePage {
 
     get clearAllButton() {return cy.get("button").contains("Clear All");}
 
-    get removedCompRows() {return cy.xpath("//*[contains(text(), 'Removed Comps')]//following::tbody//tr");}
+    getRemovedCompRows(title = "Comp") {return cy.xpath(`//*[contains(text(), 'Removed ${title}')]//following::tbody//tr`);}
 
 }
 
