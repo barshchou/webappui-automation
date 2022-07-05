@@ -159,6 +159,11 @@ If you want to edit/add secrets:
 3. Find AWS Secret Manager in Search and navigate there.
 4. Paste secret name you want to edit or create your own (**IMPORTANT:** Naming convention for such secrets should be next - Github/Cypress/**, like `Github/Cypress/User_Roles`).
 
+Code of custom action can be found [here](https://github.com/Bowery-RES/action-run-e2e-tests). Flow of credentials exposing into execution environment (this is why we don't need to write or somehow add secret info into codebase):
+1. Connect to AWS Secret Manager (step "Configure secrets") from **allowed GH repository** (private info, configurable by privacy policy in AWS) with **specific role** (public info).
+2. Reading AWS secrets and emmiting them into environment (step "Set secrets to GH environment") That's why Cypress-specific creds need to have `CYPRESS_` prefix to be accessible with `Cypress.env` method).
+3. That's it! Variables was read from AWS and set to the environment in runtime. From that moment they are accessible to our test.
+
 ## Useful VS Code extensions <a id="vs_code_extensions"></a>
 
 WARN: if you use Prettier - **make sure to disable it**, since it has conflicts with ESLint.
