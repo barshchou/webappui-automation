@@ -23,6 +23,8 @@ export namespace BoweryReports {
         address?: string,
         isSalesForcePull?: isSalesForcePull
     }
+    export type RentType = typeof Enums.RENT_TYPE[KeyInfo.RentTypeKeys]
+    export type RentRollOptionsCheckboxsType = typeof Enums.RENT_ROLL_OPTIONS_CHECKBOXS[KeyInfo.RentRollOptionsCheckboxsKeys]
     export type ChipsCreationOptions = {
         block?: string,
         buildingName?: string,
@@ -105,7 +107,8 @@ export namespace BoweryReports {
         footage?: number,
         rooms?: number,
         monthlyRent: number,
-        leaseStatus?: LeaseStatus
+        leaseStatus?: LeaseStatus,
+        rentType?: RentType
     }
 
     export type RentCompField = {

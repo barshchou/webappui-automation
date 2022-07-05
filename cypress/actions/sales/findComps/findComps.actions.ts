@@ -182,7 +182,7 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
 
     selectDropdownOptionNewComp(dropdownElement: Cypress.Chainable, title: string): FindCompsActions {
         dropdownElement.click();
-        findCompsPage.getDropdownOption(title).click();
+        findCompsPage.getDropdownOption(title).click({ force: true });
         return this;
     }
 

@@ -308,7 +308,7 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
         expenseForecastPage.getExpenseCommentaryEditButton(item, index).click();
         expenseForecastPage.getExpenseCommentaryRevertToOriginal(item).click();
         this.verifyProgressBarNotExist();
-        expenseForecastPage.expenseConfirmRevertButton.click();
+        expenseForecastPage.formYesRevertBtn.click();
         expenseForecastPage.getExpenseCommentarySaveButton(item, index).click();
         return this;
     }
@@ -316,20 +316,6 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
     switchExpenseForecastBasis(forecastItem: ForecastItem, customCategory = false, index = 0): ExpenseForecastActions {
         let expenseName = customCategory ? `customExpenses[${index}]` : forecastItem.name;
         expenseForecastPage.getElementBasisToSwitch(expenseName, forecastItem.basis).click();
-        return this;
-    }
-
-    hideExpenseForecastHeader(): ExpenseForecastActions {
-        // ernst: A few hacks to get clear Insurance_Forecast_Item component without overlayed headers
-        cy.log('hide');
-        if (Cypress.browser.isHeadless == true) {
-            expenseForecastPage.Header.then(elem => {
-                elem.hide();
-            });
-            expenseForecastPage.expenseForecastHeader.then(elem => {
-                elem.hide();
-            });
-        }
         return this;
     }
 
