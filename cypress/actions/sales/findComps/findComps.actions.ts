@@ -97,8 +97,8 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
 
     checkFindSingleSalesComp(){
         cy.wait(`@${Alias.gql.FindTransactionByIdAndVersion}`, { timeout:70000 }).then((interception) => {
-            cy.log(interception.response.body.data.findTransactionByIdAndVersion.salesEventId);
-            cy.wrap(interception.response.body.data.findTransactionByIdAndVersion.salesEventId)
+            cy.log(interception.response.body.data.findTransactionByIdAndVersion.id);
+            cy.wrap(interception.response.body.data.findTransactionByIdAndVersion.id)
             .as(Alias.salesEventId);
         });
         return this; 
