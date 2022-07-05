@@ -27,24 +27,37 @@ describe("Dropdown 'Filters'- 'Sort by' section",
             .verifyFiltersDropdownExist()
             .addCompFromMapByAddress(testData.compAddress);
 
-        cy.stepInfo("3. Select Per Square Foot Per Month radio button on Commercial Unit Details modal and fill valid values");
-        testData.baseValue.value.forEach(value => {
-            Income._CommercialManager.RentComps.clickEditButtonByRowNumber()
-                .checkUnitOfMeasureRadioButton(testData.radioButtonNames[0])
-                .fillInRentCompFieldInput(testData.baseValue.name, value)
-                .chooseRentCompFieldDropdownOption(testData.sourceValue.name, testData.sourceValue.value)
-                .clickSubmitButton()
-                .verifyRentPerSFCellValue(value);
+        cy.stepInfo("3. Select Per Square Foot Per Month and Per Square Foot Per Year radio button on Commercial Unit Details modal and fill valid values");
+        testData.perSquareAndPerMonth.forEach((value, index) => {
+            testData.perSquareAndPerMonth[index].values.forEach(value => {
+                Income._CommercialManager.RentComps.clickEditButtonByRowNumber()
+                    .checkUnitOfMeasureRadioButton(testData.radioButtonNames[index])
+                    .fillInRentCompFieldInput(testData.perSquareAndPerMonth[index].name, value)
+                    .chooseRentCompFieldDropdownOption(testData.sourceValue.name, testData.sourceValue.value)
+                    .clickSubmitButton();
+
+                    if (index === 0) {
+                        Income._CommercialManager.RentComps.verifyRentPerMonthCellValue(value);
+                    } else {
+                        Income._CommercialManager.RentComps.verifyRentPerMonthCellPSFValue();
+                    }
+            });
         });
 
-        cy.stepInfo("4. Select Per Square Foot radio button on Commercial Unit Details modal on Commercial Unit Details modal and fill valid values");
-        testData.baseValue.value.forEach(value => {
+        cy.stepInfo("4. Select Monthly and Annually radio button on Commercial Unit Details modal and fill valid values");
+        testData.monthlyAnnually.forEach((value, index) => {
             Income._CommercialManager.RentComps.clickEditButtonByRowNumber()
-                .checkUnitOfMeasureRadioButton(testData.radioButtonNames[1])
-                .fillInRentCompFieldInput(testData.baseValue.name, value)
+                .checkUnitOfMeasureRadioButton(testData.radioButtonNames[index + 2])
+                .fillInRentCompFieldInput(value.baseRent, value.baseRentValues[index])
+                .fillInRentCompFieldInput(value.sf, value.baseRentValues[index])
                 .chooseRentCompFieldDropdownOption(testData.sourceValue.name, testData.sourceValue.value)
-                .clickSubmitButton()
-                .verifyRentPerSFCellValue(value);
+                .clickSubmitButton();
+
+            if (index === 0) {
+                Income._CommercialManager.RentComps.verifyRentPerMonthCellMonthlyOrAnnuallyValue(testData.radioButtonNames[2]);
+            } else {
+                Income._CommercialManager.RentComps.verifyRentPerMonthCellMonthlyOrAnnuallyValue(testData.radioButtonNames[3]);
+            }
         });
 
         deleteReport(testData.reportCreationData.reportNumber);
