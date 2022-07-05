@@ -13,6 +13,7 @@
   - [GH Actions debug](#gh_actions_debug)
   - [Validation of export](#export_validation)
   - [Env selection (dev/staging/prod/custom)](#env_selection)
+  - [AWS secrets (User roles and etc)](#aws_secrets)
 - [Useful VS Code extensions](#vs_code_extensions)
 - [Using Husky](#husky_usage)
 
@@ -143,7 +144,20 @@ The same approach we use to set url via env variables, which described in [CLI](
 
 A bit of a history and problem
 
-Previously, we were selecting specific url to run the tests with help of [Cypress environmental variables](https://docs.cypress.io/guides/guides/environment-variables), but our `baseUrl` in `cypress.json` wasn't set. It [wasn't a good approach](https://docs.cypress.io/guides/references/best-practices#Setting-a-global-baseUrl), but it allowed us dynamically set the url to visit and url for api requests. **BUT ALSO** our `before/beforeEach` **hooks were executing two time** (two time of login through api). And if we would try to create report - we would create two report and were working in the second one.     
+Previously, we were selecting specific url to run the tests with help of [Cypress environmental variables](https://docs.cypress.io/guides/guides/environment-variables), but our `baseUrl` in `cypress.json` wasn't set. It [wasn't a good approach](https://docs.cypress.io/guides/references/best-practices#Setting-a-global-baseUrl), but it allowed us dynamically set the url to visit and url for api requests. **BUT ALSO** our `before/beforeEach` **hooks were executing two time** (two time of login through api). And if we would try to create report - we would create two report and were working in the second one.   
+
+### AWS secrets (User Roles and etc) <a id="aws_secrets"></a>
+
+We have tests which requires login as specific user (Lead Appraiser, Appraiser user, Admin and etc), you can find them by `@permissions_roles` tag. 
+
+We could've store these secrets in GH Actions secrets, but in that case we won't have an option to edit them (especially, if we store a pretty big `json`).
+
+That's why we need AWS Secret Manager. We set there secret `Github/Cypress/User_Roles` which store data about User Roles (their usernames and passwords). 
+If you want to edit/add secrets: 
+1. Go to the AWS (use AWS SSO, which you can find in `Google apps` in your Bowery Gmail account).
+2. Select `GoogleSAMLPowerUserRole` in `bowery-prod` section.
+3. Find AWS Secret Manager in Search and navigate there.
+4. Paste secret name you want to edit or create your own (**IMPORTANT:** Naming convention for such secrets should be next - Github/Cypress/**, like `Github/Cypress/User_Roles`).
 
 ## Useful VS Code extensions <a id="vs_code_extensions"></a>
 
