@@ -43,7 +43,9 @@ class LaunchDarkly {
     };
   }
 
-  private baseRequest(featureFlagKey: Utils.FeatureFlagKeysType, method: Methods = "GET", options?: object): Cypress.Chainable<Cypress.Response<any>> {
+  private baseRequest(featureFlagKey?: Utils.FeatureFlagKeysType, method: Methods = "GET", options?: object): Cypress.Chainable<Cypress.Response<any>> {
+    const _url = featureFlagKey ? `${this.baseUrl}${this.projectKey}/${featureFlagKey}`
+      : `${this.baseUrl}${this.projectKey}`;
     if (method === "PATCH") {
       return cy.request({
         method,
@@ -56,7 +58,7 @@ class LaunchDarkly {
     } else {
       return cy.request({
         method,
-        url: `${this.baseUrl}${this.projectKey}/${featureFlagKey}`,
+        url: _url,
         headers: this.headersContent
       });
     }
@@ -71,13 +73,7 @@ class LaunchDarkly {
   }
 
   getFeatureFlag(featureFlagKey?: Utils.FeatureFlagKeysType): LaunchDarkly {
-    const _url = featureFlagKey ? `${this.baseUrl}${this.projectKey}/${featureFlagKey}`
-      : `${this.baseUrl}${this.projectKey}`;
-    cy.request({
-      method: "GET",
-      url: _url,
-      headers: this.headersContent
-    }).then(resp => {
+    this.baseRequest(featureFlagKey).then(resp => {
       featureFlagKey ? cy.log("Feature Flag Key", resp.body) : cy.log("Feature Flags", resp.body);
     }).its("status").should("eq", 200);
 
