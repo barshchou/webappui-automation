@@ -63,7 +63,7 @@ const expenseForecastElectricityFixture = (_basis: "unit" | "sf"): BoweryReports
     return {
         name: "electricity",
         basis: _basis as BoweryReports.UnitSF,
-        forecast: 30
+        forecast: 1451.5
     };
 };
 
@@ -87,7 +87,7 @@ const expenseForecastRepairsAndMaintenanceFixture = (_basis: "unit" | "sf"): Bow
     return {
         name: "repairsAndMaintenance",
         basis: _basis as BoweryReports.UnitSF,
-        forecast: 30
+        forecast: 1880
     };
 };
 
@@ -103,7 +103,7 @@ const expenseForecastGeneralAndAdministrativeFixture = (_basis: "unit" | "sf"): 
     return {
         name: "generalAndAdministrative",
         basis: _basis as BoweryReports.UnitSF,
-        forecast: 30
+        forecast: 543
     };
 };
 
@@ -119,7 +119,7 @@ const expenseForecastMiscellaneousFixture = (_basis: "unit" | "sf"): BoweryRepor
     return {
         name: "miscellaneous",
         basis: _basis as BoweryReports.UnitSF,
-        forecast: 30
+        forecast: 123.12
     };
 };
 
@@ -127,7 +127,7 @@ const expenseForecastManagementFixture = (_basis: "unit" | "sf"): BoweryReports.
     return {
         name: "management",
         basis: _basis as BoweryReports.UnitSF,
-        forecast: 30
+        forecast: 1
     };
 };
 
@@ -135,7 +135,7 @@ const expenseForecastReservesFixture = (_basis: "unit" | "sf"): BoweryReports.Fo
     return {
         name: "reserves",
         basis: _basis as BoweryReports.UnitSF,
-        forecast: 30
+        forecast: 0.58
     };
 };
 
