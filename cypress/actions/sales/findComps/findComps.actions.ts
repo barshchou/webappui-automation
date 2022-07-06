@@ -200,7 +200,7 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
     }
 
     clearNumericInputNewComp(elementAlias: string): FindCompsActions {
-        cy.get(`@${elementAlias}`).clear({ force: true });
+        cy.get(`@${elementAlias}`, { includeShadowDom: true }).clear({ force: true });
         return this;
     }
 
@@ -209,19 +209,19 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
         
         // ernst: little hack to work with commercialAreaNewComp input due its specific behaviour
         if(elementAlias != Alias.pageElements.comp_plex.commercialAreaNewComp){
-            cy.get(`@${elementAlias}`).realClick();
+            cy.get(`@${elementAlias}`, { includeShadowDom: true }).realClick();
         }
         else{
-            cy.get(`@${elementAlias}`).focus();
+            cy.get(`@${elementAlias}`, { includeShadowDom: true }).focus();
         }
-        cy.get(`@${elementAlias}`).realType(`{enter}${numberOfUnits}`, { pressDelay:45, delay: 50 });
+        cy.get(`@${elementAlias}`, { includeShadowDom: true }).realType(`{enter}${numberOfUnits}`, { pressDelay:45, delay: 50 });
         this.verifyNumericInputNewComp(elementAlias, numberOfUnits);
         return this;
     }
 
     verifyNumericInputNewComp(elementAlias: string, numberOfUnits: number | string): FindCompsActions {
         const valueToBe = isNumber(numberOfUnits) ? numberWithCommas(`${numberOfUnits}`.replace("-", "")) : "";
-        cy.get(`@${elementAlias}`, { timeout: 10000 }).should("have.value", valueToBe);
+        cy.get(`@${elementAlias}`, { includeShadowDom: true, timeout: 10000 }).should("have.value", valueToBe);
         return this;
     }
 }
