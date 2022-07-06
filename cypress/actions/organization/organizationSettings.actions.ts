@@ -18,7 +18,7 @@ class OrganizationSettingsActions extends BaseActionsExt<typeof organizationSett
     }
 
     getLastUpdatedDateFromUI(bondType: BoweryReports.BondTypes): OrganizationSettingsActions{
-        organizationSettingsPage.treasuryBondsLastUpdated(bondType).invoke('attr', 'value').then(date => { //organizationSettingsPage.treasuryBonds10YearsLastUpdated
+        organizationSettingsPage.bondsLastUpdated(bondType).invoke('attr', 'value').then(date => { //organizationSettingsPage.treasuryBonds10YearsLastUpdated
             let formattedDate = new Date(date);
             const offset = formattedDate.getTimezoneOffset();
             formattedDate = new Date(formattedDate.getTime() - (offset * 60 * 1000));
@@ -32,13 +32,29 @@ class OrganizationSettingsActions extends BaseActionsExt<typeof organizationSett
         this.getLastUpdatedDateFromUI(bondType);
         cy._mapGet('lastUpdatedDate').then(date => {
             this.getTreasuryBondRateFromAPI(url, date);
-            organizationSettingsPage.treasuryBondsRateInput(bondType).invoke('attr', 'value').then((rateValueUI) => {
+            organizationSettingsPage.bondsRateInput(bondType).invoke('attr', 'value').then((rateValueUI) => {
                 cy._mapGet("rate").then((rateValueAPI) => {
                     rateValueUI = Number(rateValueUI).toFixed(2);
                     expect(rateValueUI).to.eq(rateValueAPI);
                 });
             });
         });
+        return this;
+    }
+
+    verifyBondsTooltipText(bondType: string, tooltipText: string): OrganizationSettingsActions {
+        organizationSettingsPage.bondsTooltip(bondType).should('have.text', tooltipText);
+        return this;
+    }
+
+    verifyBondsIconColor(bondType: string, color = "rgb(6, 116, 97)"): OrganizationSettingsActions {
+        organizationSettingsPage.bondsIcon(bondType).should('have.css', 'color', color);
+        return this;
+    }
+
+    verifyBondsTooltip(bondType: string, tooltipText: string, color = "rgb(6, 116, 97)"): OrganizationSettingsActions {
+        this.verifyBondsTooltipText(bondType, tooltipText)
+            .verifyBondsIconColor(bondType, color);
         return this;
     }
 }
