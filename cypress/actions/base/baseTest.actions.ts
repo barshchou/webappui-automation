@@ -1,9 +1,10 @@
 import { BoweryAutomation } from "../../types/boweryAutomation.type";
-import { aliasQuery, gqlOperationNames } from "../../utils/graphql.utils";
+import { aliasQuery } from "../../utils/graphql.utils";
 import NavigationSection from "./navigationSection.actions";
 import { createPayload } from "../../api/report_payloads/462Avenue1NY.payload";
 import mapKeysUtils from "../../utils/mapKeys.utils";
 import { _HomePage } from ".";
+import { gqlOperationNames } from "../../utils/alias.utils";
 
 /**
  * Login action

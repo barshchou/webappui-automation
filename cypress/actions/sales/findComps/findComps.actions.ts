@@ -5,9 +5,8 @@ import BaseActionsExt from "../../base/base.actions.ext";
 import saleInfoFormActions from "./drm/saleInfoForm.actions";
 import propertDescActions from "./drm/propertyDescForm.actions";
 import propertyInfoFormActions from "./drm/propertyInfoForm.actions";
-import { Alias } from "../../../utils/alias.utils";
+import { Alias, gqlOperationNames } from "../../../utils/alias.utils";
 import { Utils } from "../../../types/utils.type";
-import { gqlOperationNames } from "../../../utils/graphql.utils";
 
 class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
 

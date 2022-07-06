@@ -20,12 +20,3 @@ export const aliasQuery = (req: CyHttpMessages.IncomingHttpRequest, operationNam
       req.alias = _gqlAlias(operationName);
     }
 };
-
-export const gqlOperationNames = {
-  findSalesComps: "findSalesComps",
-  searchSalesTransactions: "searchSalesTransactions",
-  findTransactionByIdAndVersion: "findTransactionByIdAndVersion",
-  findSingleSalesComp: "findSingleSalesComp",
-  updateJob: "updateJob",
-  findTransactionsByIdsAndVersions: "findTransactionsByIdsAndVersions"
-};

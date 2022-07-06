@@ -1,5 +1,3 @@
-import { gqlOperationNames } from "./graphql.utils";
-
 const _alias = (aliasName:string) => `${aliasName}_${Cypress._.random(0, 1e6)}`;
 /**
  * Util function. Do not use in tests.
@@ -7,6 +5,15 @@ const _alias = (aliasName:string) => `${aliasName}_${Cypress._.random(0, 1e6)}`;
  * @returns 
  */
 export const _gqlAlias = (operationName:string) => `gql${operationName}Query`;
+
+export const gqlOperationNames = {
+    findSalesComps: "findSalesComps",
+    searchSalesTransactions: "searchSalesTransactions",
+    findTransactionByIdAndVersion: "findTransactionByIdAndVersion",
+    findSingleSalesComp: "findSingleSalesComp",
+    updateJob: "updateJob",
+    findTransactionsByIdsAndVersions: "findTransactionsByIdsAndVersions"
+  };
 
 export const Alias = {
     reportId: _alias("reportId"),
