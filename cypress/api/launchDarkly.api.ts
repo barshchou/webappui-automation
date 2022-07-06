@@ -1,6 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Utils } from "../types/utils.type";
 
+/**
+ * @param apiKey This is a token for authorization in Launch Darkly
+ * @param projectKey Project name in Launch Darkly. There are two project Bowery Valuation and Off-app activity tracker
+ * @param environmentKey Environment name in Launch Darkly for requests
+ */
 interface IConfig {
   apiKey: string,
   projectKey: string,
@@ -18,6 +23,9 @@ class LaunchDarkly {
 
   private readonly baseUrl = "https://app.launchdarkly.com/api/v2/flags/";
 
+  /**
+   *  @param environmentKey For Bowery Valuation there are 5 environment keys: staging, production, test, development, local
+   */
   private environmentKey: Utils.EnvLaunchDarklyType = 'staging'
 
   private userId = Cypress.env("USERNAME");
@@ -35,6 +43,13 @@ class LaunchDarkly {
     }
   }
 
+  /**
+   * Method for creating options template to pass in body patch 
+   * @param op Type operation: add or remove
+   * @param path Request path
+   * @param value Value for patch
+   * @returns object
+   */
   private jsonPatch(op: Operations, path: string, value?: string | object) {
     return {
       op,
@@ -43,6 +58,13 @@ class LaunchDarkly {
     };
   }
 
+  /**
+   * Method for creating a template for receiving a response to a flag feature request
+   * @param featureFlagKey Name feature flag in style kebab-case  
+   * @param method Request Method
+   * @param options `jsonPatch()`
+   * @returns `Cypress.Chainable<Cypress.Response<any>>`
+   */
   private baseRequest(featureFlagKey?: Utils.FeatureFlagKeysType, method: Methods = "GET", options?: object): Cypress.Chainable<Cypress.Response<any>> {
     const _url = featureFlagKey ? `${this.baseUrl}${this.projectKey}/${featureFlagKey}`
       : `${this.baseUrl}${this.projectKey}`;
@@ -64,6 +86,12 @@ class LaunchDarkly {
     }
   }
 
+  /**
+   * Remove feature flag depending on variationIndex
+   * @param featureFlagKey Name feature flag in style kebab-case
+   * @param variationIndex Number feature flag variation 
+   * @returns `null`
+   */
   private removeTarget(featureFlagKey: Utils.FeatureFlagKeysType, variationIndex: number): null {
     this.baseRequest(featureFlagKey, "PATCH", this.jsonPatch(
       "remove",
@@ -72,6 +100,11 @@ class LaunchDarkly {
     return null;
   }
 
+  /**
+   * Get feature flag or flags
+   * @param featureFlagKey Name feature flag in style kebab-case. If passed without a parameter, it will return all feature flags
+   * @returns  `this`
+   */
   getFeatureFlag(featureFlagKey?: Utils.FeatureFlagKeysType): LaunchDarkly {
     this.baseRequest(featureFlagKey).then(resp => {
       featureFlagKey ? cy.log("Feature Flag Key", resp.body) : cy.log("Feature Flags", resp.body);
@@ -80,6 +113,13 @@ class LaunchDarkly {
     return this;
   }
 
+  /**
+   * Set feature flag. If the feature flag is already set, remove it and set it again 
+   * @param featureFlagKey Name feature flag in style kebab-case
+   * @param variationIndex Number feature flag variation 
+   * @param userId User login credentials
+   * @returns `this`
+   */
   setFeatureFlagForUser(featureFlagKey: Utils.FeatureFlagKeysType, variationIndex: number, userId = this.userId): LaunchDarkly {
     this.baseRequest(featureFlagKey).then(resp => {
       const targets = resp.body.environments[this.environmentKey].targets;
@@ -109,6 +149,12 @@ class LaunchDarkly {
     return this;
   }
 
+  /**
+   * Remove the set feature flag for the user.
+   * @param featureFlagKey Name feature flag in style kebab-case
+   * @param userId User login credentials
+   * @returns `null`
+   */
   removeUserTarget(featureFlagKey: Utils.FeatureFlagKeysType, userId = this.userId): null {
     this.baseRequest(featureFlagKey).then(resp => {
       const targets = resp.body.environments[this.environmentKey].targets;
