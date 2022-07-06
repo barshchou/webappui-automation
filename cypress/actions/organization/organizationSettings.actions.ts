@@ -1,3 +1,4 @@
+import { _map } from './../../support/commands';
 import organizationSettingsPage from "../../pages/organization/organizationSettings.page";
 import { BoweryReports } from "../../types/boweryReports.type";
 import BaseActionsExt from "../base/base.actions.ext";
@@ -65,22 +66,20 @@ class OrganizationSettingsActions extends BaseActionsExt<typeof organizationSett
 
     verifySurveyOfCompetitiveRatesDiscussion(bondType: BoweryReports.BondTypes): OrganizationSettingsActions {
         organizationSettingsPage.bondsRateInput(bondType).invoke('attr', 'value').then(rateValueUI => {
-            cy._mapSet("tenYearsBondsRate", rateValueUI);
+            _map.set("tenYearsBondsRate", rateValueUI);
         });
         organizationSettingsPage.minMortgageRate.invoke('attr', 'value').then(minMortgageRate => {
-            cy._mapSet("minMortgageRate", minMortgageRate);
+            _map.set("minMortgageRate", minMortgageRate);
         });
         organizationSettingsPage.maxMortgageRate.invoke('attr', 'value').then(maxMortgageRate => {
-            cy._mapSet("maxMortgageRate", maxMortgageRate);
+            _map.set("maxMortgageRate", maxMortgageRate);
         });
 
-        organizationSettingsPage.verifySurveyOfCompetitiveRatesDiscussion.invoke('text').should('deep.equal', 
-            `Currently, 10-year treasuries are trading at ${cy._mapGet('@tenYearsBondsRate')}% suggesting mortgage rates of roughly ${cy._mapGet('@minMortgageRate')}% to ${cy._mapGet('@maxMortgageRate')}%. The current mortgage market indicates a competitive interest rate, as there is strong demand from mortgage lenders seeking stable multi-unit residential deals.`
-        );
+        organizationSettingsPage.verifySurveyOfCompetitiveRatesDiscussion.invoke('text').then(textToBe => {
+            expect(textToBe).to.be.eq(`Currently, 10-year treasuries are trading at ${_map.get('tenYearsBondsRate')}% suggesting mortgage rates of roughly ${_map.get('minMortgageRate')}% to ${_map.get('maxMortgageRate')}%. The current mortgage market indicates a competitive interest rate, as there is strong demand from mortgage lenders seeking stable multi-unit residential deals.`);
+        }); 
         return this;
     }
-
-        
 }
 
 export default new OrganizationSettingsActions(organizationSettingsPage);
