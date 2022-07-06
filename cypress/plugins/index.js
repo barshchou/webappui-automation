@@ -86,14 +86,14 @@ const _convertDocxToHtml = async (report) => {
  * @see https://www.npmjs.com/package/glob
  */
  const _getFilePath = async (_reportName, _docx_html, currentTime = 0, timeout = 60000) =>{
-  let file = glob.sync(`cypress/downloads/${_reportName}**.${_docx_html}`)[0];
+  let file = glob.sync(`cypress/downloads/**${_reportName}**.${_docx_html}`)[0];
   if (file != undefined) {
     return file;  
   }
   await new Promise((resolve) =>{
     setTimeout(() => resolve(true), 1000)
   });
-  return _getFilePath(`Bowery Appraisal_${_reportName}`, _docx_html, currentTime + 1000, timeout);
+  return _getFilePath(_reportName, _docx_html, currentTime + 1000, timeout);
 }
 
 /**

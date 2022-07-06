@@ -11,6 +11,8 @@ class OrganizationSettingsPage extends BasePage{
     bondsTooltip(bondType: string) {return this.bondsHeading(bondType).find('p');}
 
     bondsIcon(bondType: string) {return this.bondsHeading(bondType).find('svg');}
+
+    get surveyOfCompetitiveRatesCommentary() {return cy.xpath("//*[h6[.='Mortgage Component Introduction']]//following::*[@data-slate-string][1]");}
 }
 
 export default new OrganizationSettingsPage();

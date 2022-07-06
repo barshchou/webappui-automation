@@ -57,6 +57,11 @@ class OrganizationSettingsActions extends BaseActionsExt<typeof organizationSett
             .verifyBondsIconColor(bondType, color);
         return this;
     }
+
+    verifySurveyOfCompetitiveRatesCommentary(textToBe: string): OrganizationSettingsActions {
+        organizationSettingsPage.surveyOfCompetitiveRatesCommentary.invoke('text').should('deep.equal', textToBe);
+        return this;
+    }
 }
 
 export default new OrganizationSettingsActions(organizationSettingsPage);
