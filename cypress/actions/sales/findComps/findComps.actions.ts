@@ -7,6 +7,9 @@ import propertDescActions from "./drm/propertyDescForm.actions";
 import propertyInfoFormActions from "./drm/propertyInfoForm.actions";
 import { Alias, gqlOperationNames } from "../../../utils/alias.utils";
 import { Utils } from "../../../types/utils.type";
+import { _map } from "../../../support/commands";
+import { recurse } from "cypress-recurse";
+import mapKeysUtils from "../../../utils/mapKeys.utils";
 
 class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
 
@@ -83,13 +86,11 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
         return this;
     }
 
-    /**
-     * ernst: WARN this method needs to be refactored
-     * we need to create workaround for shadow-dom elements, which dynamically rendered
-     * during some action (scrolling the list, for example).
-     * if you try to do this manually - you probably get the error `doc.createTreeWalker is not a function`
-     */
     selectCompFromMapByAddress(address: string): FindCompsActions {
+        recurse(
+            () => _scrollAndSearchComp(address), 
+            () => _map.get(mapKeysUtils.search_result_sales_comp) != undefined, { delay: 2000, timeout: 60000 }
+        );
         findCompsPage.getSelectCompFromMapButtonByAddress(address).scrollIntoView().click({ force: true });
         this.checkFindSingleSalesComp();
         return this;
@@ -228,3 +229,28 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
 
 
 export default new FindCompsActions(findCompsPage);
+
+/**
+ * list of elems -> iterate over it 
+ * -> if elem includes address = record it to map 
+ * | if list over -> scroll to the last elem of the list
+ * 
+ * Run this function using cypress-recurse 
+ */
+const _scrollAndSearchComp = (compAddress:string) => {
+    return cy.get('[aria-label="grid"] > div > div', { includeShadowDom: true }).each((elem, index, list) => {
+        if(elem.text().includes(compAddress)){
+            cy.log(`Found SalesComps in next list ${list} with index ${index}`);
+            _map.set(mapKeysUtils.search_result_sales_comp, elem);
+            return;
+        }
+        else if(list.length == index+1){
+            if(_map.get(mapKeysUtils.search_result_sales_comp) == undefined){
+                cy.log("Scrolling to last comp in to continue search");
+                cy.wrap(elem).scrollIntoView();
+                return;
+            }
+            return;
+        }
+    });
+};
