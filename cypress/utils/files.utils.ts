@@ -1,16 +1,18 @@
-import glob = require("glob");
-import mammoth = require("mammoth");
+import { sync } from "glob";
+import { convertToHtml } from "mammoth";
 import { existsSync, writeFileSync } from "fs";
 
 /**
  * Get relative path to the file (report docx file or converted html in our case)
  * @param {string} _reportName - generated `testData.reportCreationData.reportNumber` in test fixture
  * @param {"docx" | "html"} _docx_html - look for file which ends with "docx" or "html" extension
+ * @param currentTime
+ * @param timeout
  * @returns first relative path from array of matches
  * @see https://www.npmjs.com/package/glob
  */
 export const _getFilePath = async (_reportName: string, _docx_html: string, currentTime = 0, timeout = 60000) => {
-    let file = glob.sync(`cypress/downloads/${_reportName}**.${_docx_html}`)[0];
+    let file = sync(`cypress/downloads/${_reportName}**.${_docx_html}`)[0];
     if (file != undefined) {
         return file;
     }
@@ -25,7 +27,7 @@ export const _getFilePath = async (_reportName: string, _docx_html: string, curr
  * @description Converts docx file into html via mammoth lib and writes it into cypress/downloads
  */
 export const _convertDocxToHtml = async (report: string): Promise<null> => {
-    let result = await mammoth.convertToHtml({ path: report });
+    let result = await convertToHtml({ path: report });
     writeFileSync(`${report}.html`, result.value);
     return null;
 };
