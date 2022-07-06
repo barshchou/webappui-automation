@@ -40,7 +40,7 @@ describe("Comparable Min, Max, Avg values for Repairs & Maintenance Per SF are c
 
         cy.stepInfo("4.2 Check Comp Min, Comp Max and Comp Avg values for Repairs & Maintenance card. They should be correctly displayed on a slidebar");
         Income.ExpenseForecast.Actions.matchElementSnapshot(
-            Income.ExpenseForecast.Page.repairsAndMaintenanceCard, testData.repairsAndMaintenanceCardSnapshotName, { padding: [ 10, 100 ] });
+            Income.ExpenseForecast.Page.repairsAndMaintenanceCard, testData.repairsAndMaintenanceCardSnapshotName, { padding: [ 0, 100 ] });
 
         deleteReport(testData.reportCreationData.reportNumber);
     });
