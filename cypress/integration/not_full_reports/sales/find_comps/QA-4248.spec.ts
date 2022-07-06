@@ -38,7 +38,10 @@ describe("Verify the Comps can be added by entering the existing Report ID in th
 
     it("Test body", () => {
         NavigationSection.navigateToFindComps();
-        recurse(() => _scrollAndSearchComp(fixture.comparable.address), () => _map.get("key") != undefined, { delay: 2000 });
+        recurse(
+            () => _scrollAndSearchComp(fixture.comparable.address), 
+            () => _map.get("key") != undefined, { delay: 2000, timeout: 60000 }
+        );
 
         Sales.FindComps.selectCompFromMapByAddress(fixture.comparable.address)
             .clickSaveContinueButton();
