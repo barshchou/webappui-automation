@@ -49,7 +49,7 @@ class LaunchDarkly {
     if (method === "PATCH") {
       return cy.request({
         method,
-        url: `${this.baseUrl}${this.projectKey}/${featureFlagKey}`,
+        url: _url,
         headers: this.headersContent,
         body : JSON.stringify({
           patch: [ options ]
@@ -101,13 +101,9 @@ class LaunchDarkly {
           userId
         );
 
-      if (existingTargetIndex === -1) {
-        cy.log(`Adding feature flag ${featureFlagKey} for ${userId}`);
+      cy.log(`Adding feature flag ${featureFlagKey} for ${userId}`);
+      this.baseRequest(featureFlagKey, "PATCH", jsonPatchObj).its("status").should("eq", 200);
 
-        this.baseRequest(featureFlagKey, "PATCH", jsonPatchObj).its("status").should("eq", 200);
-      } else {
-        this.baseRequest(featureFlagKey, "PATCH", jsonPatchObj).its("status").should("eq", 200);
-      }
       cy.log(`Set ${featureFlagKey} feature flag`);
     });
     return this;
@@ -131,6 +127,7 @@ class LaunchDarkly {
       this.removeTarget(featureFlagKey, existingUserTargetIndex);
       // Recursively continue removing the user targets
       // since the same user can have multiple targets
+      cy.log(`User ${userId} has been deleted`);
       return this.removeUserTarget(featureFlagKey, userId);
     }
 
