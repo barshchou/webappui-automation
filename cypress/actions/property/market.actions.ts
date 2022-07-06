@@ -157,15 +157,9 @@ class MarketActions extends BaseActionsExt<typeof marketPage>{
     }
 
     checkUncheckMarketAnalysisUseCheckbox(use: BoweryReports.MarketAnalysisUses, isCheck = true): MarketActions {
-        if (isCheck) {
-            this.verifyMarketAnalysisUseCheckboxState(use, false);
-            marketPage.getMarketAnalysisUseCheckbox(use).check();
-            this.verifyMarketAnalysisUseCheckboxState(use, isCheck);
-        } else {
-            this.verifyMarketAnalysisUseCheckboxState(use, true);
-            marketPage.getMarketAnalysisUseCheckbox(use).uncheck();
-            this.verifyMarketAnalysisUseCheckboxState(use, isCheck);
-        }
+        this.verifyMarketAnalysisUseCheckboxState(use, !isCheck);
+        marketPage.getMarketAnalysisUseCheckbox(use).click();
+        this.verifyMarketAnalysisUseCheckboxState(use, isCheck);
         return this;
     }
 
