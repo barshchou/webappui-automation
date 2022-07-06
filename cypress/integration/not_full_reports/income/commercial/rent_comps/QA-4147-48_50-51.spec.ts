@@ -1,5 +1,5 @@
 import { Income } from '../../../../../actions/index';
-import testData from "../../../../../fixtures/not_full_reports/income/commercial/rent_comps/QA-4148_50-51.fixture";
+import testData from "../../../../../fixtures/not_full_reports/income/commercial/rent_comps/QA-4147-48_50-51.fixture";
 import NavigationSection from "../../../../../actions/base/navigationSection.actions";
 import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
 
@@ -19,6 +19,8 @@ describe("Check that Commercial Rent Comps map has Filters dropdown",
             .verifyProgressBarNotExist()
             .verifyFiltersDropdownExist();
         
+        Income._CommercialManager.RentComps.Page.mapZoomInButton.should("exist");
+        Income._CommercialManager.RentComps.Page.mapZoomOutButton.should("exist");
         Income._CommercialManager.RentComps.Page.mapDrawPolygonButton.should("exist");
         Income._CommercialManager.RentComps.Page.mapStarZoomButton.click();
         Income._CommercialManager.RentComps.verifyProgressBarNotExist();

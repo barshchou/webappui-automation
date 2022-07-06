@@ -83,6 +83,9 @@ class CommercialRentCompsPage extends BasePage {
 
     get mapDrawPolygonButton() {return cy.get("[title='Draw a polygon']");}
 
+    get mapZoomInButton() {return cy.get("[title='Zoom in']");}
+
+    get mapZoomOutButton() {return cy.get("[title='Zoom out']");}
 }
 
 export default new CommercialRentCompsPage();
