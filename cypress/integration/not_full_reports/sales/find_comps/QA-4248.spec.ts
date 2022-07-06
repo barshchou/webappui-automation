@@ -8,20 +8,20 @@ import { _map } from "../../../../support/commands";
 import { recurse } from "cypress-recurse";
 
 /**
+ * TODO: move this function into SalesComps action when fixing Sales specs
  * list of elems -> iterate over it -> if elem includes address = return from 
  */
 const _scrollAndSearchComp = (compAddress:string) => {
     return cy.get('[aria-label="grid"] > div > div', { includeShadowDom: true }).each((elem, index, list) => {
+        cy.log(`Found ${list.length} SalesComps in search list`);
         if(elem.text().includes(compAddress)){
-            cy.log("found");
-            cy.log(<any>list.length);
-            cy.log(<any>index);
+            cy.log(`Found SalesComps in next list ${list} with index ${index}`);
             _map.set("key", elem);
             return;
         }
         else if(list.length == index+1){
             if(_map.get("key") == undefined){
-                cy.log("recusrsive search");
+                cy.log("Scrolling to last comp in to continue search");
                 cy.wrap(elem).scrollIntoView();
                 return;
             }
