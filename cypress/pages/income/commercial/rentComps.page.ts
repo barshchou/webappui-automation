@@ -79,7 +79,9 @@ class CommercialRentCompsPage extends BasePage {
 
     getRemovedCompRows(title = "Comp") {return cy.xpath(`//*[contains(text(), 'Removed ${title}')]//following::tbody//tr`);}
 
-    get starZoomButton() {return cy.get(".leaflet-control svg[role='presentation']");}
+    get mapStarZoomButton() {return cy.get(".leaflet-control svg[role='presentation']");}
+
+    get mapDrawPolygonButton() {return cy.get("[title='Draw a polygon']");}
 
 }
 
