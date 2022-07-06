@@ -25,6 +25,6 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           env: staging
           url: https://bowery-staging.herokuapp.com
-          spec_file: cypress/integration/**/**/*.spec.ts
+          spec_file: cypress/integration/not_full_reports/**/*.spec.ts
           tags: grep=,grepTags=-@smoke,burn=
           record_key: ${{ secrets.CURRENTS_RECORD_KEY }}
