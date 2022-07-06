@@ -24,7 +24,6 @@ class OrganizationSettingsActions extends BaseActionsExt<typeof organizationSett
             const offset = formattedDate.getTimezoneOffset();
             formattedDate = new Date(formattedDate.getTime() - (offset * 60 * 1000));
             cy._mapSet('lastUpdatedDate', formattedDate.toISOString().split('T')[0]);
-        
         });
         return this;
     }

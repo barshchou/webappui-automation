@@ -95,7 +95,17 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
         return this;
     }
 
-    checkFindSingleSalesComp(){
+    /**
+     * Selects first sales comp from search results.
+     * Useful when we need to select n-random sales comps
+     */
+    selectCompFromMap(): FindCompsActions {
+        findCompsPage.getSelectCompFromMapButton().first().scrollIntoView().click({ force: true });
+        this.checkFindSingleSalesComp();
+        return this;
+    }
+
+    checkFindSingleSalesComp(): FindCompsActions{
         cy.wait(`@${Alias.gql.FindTransactionByIdAndVersion}`, { timeout:70000 }).then((interception) => {
             cy.log(interception.response.body.data.findTransactionByIdAndVersion.salesEventId);
             cy.wrap(interception.response.body.data.findTransactionByIdAndVersion.salesEventId)

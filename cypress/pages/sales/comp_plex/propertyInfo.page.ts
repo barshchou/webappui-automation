@@ -62,4 +62,28 @@ export default class PropertyInformationForm {
         return cy.get('[data-qa="Appraiser Commentary"] [data-qa="text-input"]', { includeShadowDom: true })
         .as(comp_plex.appraiserCommentaryTextArea);
     }
+
+    get streetAdderssInput(){
+        return cy.get('[data-qa="street-address"] input', { includeShadowDom:true });
+    }
+
+    get cityInput(){
+        return cy.get('[data-qa="city"] input', { includeShadowDom:true });
+    }
+
+    get stateInput(){
+        return cy.get('[data-qa="state"] input', { includeShadowDom:true });
+    }
+
+    get postalCodeInput(){
+        return cy.get('[data-qa="postal-code"] input', { includeShadowDom:true });
+    }
+
+    get propertyIdInput(){
+        return cy.get('[data-qa="property-id"] input', { includeShadowDom:true });
+    }
+
+    get propertyIdTypeInput(){
+        return cy.get('[data-qa="property-id-type"] input', { includeShadowDom:true });   
+    }
 }
