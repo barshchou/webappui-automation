@@ -1,5 +1,5 @@
 import { BoweryAutomation } from "../../types/boweryAutomation.type";
-import { aliasQuery } from "../../utils/graphql.utils";
+import { aliasQuery, gqlOperationNames } from "../../utils/graphql.utils";
 import NavigationSection from "./navigationSection.actions";
 import { createPayload } from "../../api/report_payloads/462Avenue1NY.payload";
 import mapKeysUtils from "../../utils/mapKeys.utils";
@@ -56,11 +56,11 @@ export const deleteReport = (reportNumber) => {
 
 export const salesInterceptions = () => {
     cy.intercept('POST', '/graphql', req => {
-        aliasQuery(req, "searchSalesTransactions");
-        aliasQuery(req, "findTransactionByIdAndVersion");
-        aliasQuery(req, "findSalesComps");
-        aliasQuery(req, "findSingleSalesComp");
-        aliasQuery(req, "updateJob");
-        aliasQuery(req, "findSalesCompsByEventIds");
+        aliasQuery(req, gqlOperationNames.searchSalesTransactions);
+        aliasQuery(req, gqlOperationNames.findTransactionByIdAndVersion);
+        aliasQuery(req, gqlOperationNames.findSalesComps);
+        aliasQuery(req, gqlOperationNames.findSingleSalesComp);
+        aliasQuery(req, gqlOperationNames.updateJob);
+        aliasQuery(req, gqlOperationNames.findTransactionsByIdsAndVersions);
     });
 };
