@@ -29,7 +29,7 @@ describe("Verify users roles to create new clients",
 
         cy.stepInfo('2. Navigate to Organization -> Create New Client page');
         _NavigationSection.navigateToProfileOrganization(enums.MENU_LINKS.organization);
-        cy.contains("Create New Client").should('not.exist');
+        cy.contains(testData.createNewClientTitle).should('not.exist');
 
     });
 

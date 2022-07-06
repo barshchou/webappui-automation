@@ -59,7 +59,7 @@ export default {
     compGroup: _compGroup,
     rentCompFields: _rentCompFields,
     leaseDate: _leaseDate,
-    unitMeasureMontly: _monthly,
+    unitMeasureMonthly: _monthly,
     comparableFirst: {
         address: "200 West 78 Street",
         sizeAdjustment: 20,
