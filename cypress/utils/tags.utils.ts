@@ -36,5 +36,8 @@ export enum Tag {
     organizations = "@organizations",
     permissions_roles = "@permissions_roles",
     propertyConditions = "@property_conditions",
-    comp_summary = "@comp_summary"
+    comp_summary = "@comp_summary",
+    users = "@users",
+    report_status = "@report_status",
+    appraiser = "@appraiser" 
 }

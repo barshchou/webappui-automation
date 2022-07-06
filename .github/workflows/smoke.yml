@@ -41,6 +41,9 @@ jobs:
   Smoke-tests-run:
     runs-on: ubuntu-latest
     container: cypress/browsers:node16.13.2-chrome100-ff98
+    permissions:
+      id-token: write
+      contents: read
     strategy:
       fail-fast: false
       matrix:
