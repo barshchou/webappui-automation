@@ -1,7 +1,14 @@
-import Enums from "../../../enums/enums";
-import { BoweryAutomation } from "../../../types/boweryAutomation.type";
-import userDataCreator from "../../data_creator/userData.creator";
-import enums from "../../../enums/enums";
+import ReportDataCreator from "../../../data_creator/reportData.creator";
+import Enums from "../../../../enums/enums";
+import { BoweryAutomation } from "../../../../types/boweryAutomation.type";
+import userDataCreator from "../../../data_creator/userData.creator";
+import enums from "../../../../enums/enums";
+
+const reportCreationFixture = () => {
+    return ReportDataCreator.getReportData("5848_57-59", {
+        incomeValue: Enums.INCOME_TYPE.both
+    });
+};
 
 const _leadAppraiserUsername = Cypress.env(`${Enums.USERS.webapp_lead_appraiser_username}`);
 const _leadAppraiserPassword = Cypress.env(`${Enums.USERS.webapp_lead_appraiser_password}`);
@@ -24,16 +31,11 @@ const _userOptions: BoweryAutomation.OrganizationCreateNewUserData = {
     roleName: _roleName
 };
 
-const _userUpdatedFirstName = "UpdatedUserFirstName-" + `${Date.now()}`;
-const _userUpdatedLastName = "UpdatedUserFirstName-" + `${Date.now()}`;
-const _updatedRoleName = [ enums.USER_ROLES.leadAppraiser, enums.USER_ROLES.inspector ];
-
 export default {
+    reportCreationData: reportCreationFixture(),
     clientCreationData: userDataCreator.getUserData(_userOptions),
-    userFirstName: _userFirstName,
-    userLastName: _userLastName,
+    shortTextToType: _userFirstName,
     userToFind: _userFirstName + " " + _userLastName,
-    updateUserToFind: _userUpdatedFirstName + " " + _userUpdatedLastName,
     leadAppraiserUsername: _leadAppraiserUsername,
     leadAppraiserPassword: _leadAppraiserPassword,
     appraiserUsername: _appraiserUsername,
@@ -42,8 +44,6 @@ export default {
     inspectorPassword: _inspectorPassword,
     adminUsername: _adminUsername,
     adminPassword: _adminPassword,
-    userUpdatedFirstName: _userUpdatedFirstName,
-    userUpdatedLastName: _userUpdatedLastName,
-    updatedRoleName: _updatedRoleName,
-    roleName: _roleName
+    createNewUserTitle: "Create New User",
+    createNewUserDirectLink: "/organization/5818c25f67ac15110095afc4/organization-new-user"
 };

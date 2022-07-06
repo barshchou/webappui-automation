@@ -33,3 +33,4 @@ export type BoweryOffices = keyof typeof Enums.BOWERY_OFFICES
 export type SalesAdjustmentGridKeys = keyof typeof Enums.SALES_ADJUSTMENT_GRID
 export type RowsMarketAdjustmentKeys = keyof typeof Enums.ROWS_MARKET_ADJUSTMENT
 export type ReportStatus = keyof typeof Enums.REPORT_STATUS
+export type BondTypes = keyof typeof Enums.BOND_TYPES

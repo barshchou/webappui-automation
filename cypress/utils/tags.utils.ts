@@ -39,5 +39,6 @@ export enum Tag {
     comp_summary = "@comp_summary",
     users = "@users",
     report_status = "@report_status",
-    appraiser = "@appraiser" 
+    appraiser = "@appraiser",
+    settings = "@settings"
 }
