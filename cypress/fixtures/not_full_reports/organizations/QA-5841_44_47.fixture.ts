@@ -39,5 +39,6 @@ export default {
     appraiserPassword: _appraiserPassword,
     inspectorUsername: _inspectorUsername,
     inspectorPassword: _inspectorPassword,
-    profileOrganizationName: "Organization"
+    profileOrganizationName: "Organization",
+    createNewClientTitle :"Create New Client"
 };
