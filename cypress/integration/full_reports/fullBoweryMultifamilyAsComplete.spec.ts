@@ -376,7 +376,7 @@ describe("Full bowery way, multifamily as complete report", { tags: [ "@full_rep
             .verifyCategoryRow(testData.proForma.vcLossRow, proFormaTypesEnum.residentialVCLoss)
             .verifyCategoryRow(testData.proForma.effectiveGrossRow, proFormaTypesEnum.effectiveGrossIncome)
             .verifyCategoryRow(testData.proForma.reTaxesRow, proFormaTypesEnum.realEstateTaxes)
-            .verifyCategoryRow(testData.proForma.insuranceRow, proFormaTypesEnum.insurace)
+            .verifyCategoryRow(testData.proForma.insuranceRow, proFormaTypesEnum.insurance)
             .verifyCategoryRow(testData.proForma.electricityRow, proFormaTypesEnum.electricity)
             .verifyCategoryRow(testData.proForma.repairsRow, proFormaTypesEnum.repairAndMaintenance)
             .verifyCategoryRow(testData.proForma.payrollRow, proFormaTypesEnum.payrollBenefits)

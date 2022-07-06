@@ -1,10 +1,10 @@
-const _alias = (aliasName:string) => `${aliasName}_${Cypress._.random(0, 1e6)}`;
+const _alias = (aliasName: string) => `${aliasName}_${Cypress._.random(0, 1e6)}`;
 /**
  * Util function. Do not use in tests.
  * @param operationName 
  * @returns 
  */
-export const _gqlAlias = (operationName:string) => `gql${operationName}Query`;
+export const _gqlAlias = (operationName: string) => `gql${operationName}Query`;
 
 export const Alias = {
     reportId: _alias("reportId"),
@@ -35,5 +35,13 @@ export const Alias = {
             internalNotesTextArea:"internalNotesTextArea",
             appraiserCommentaryTextArea:"appraiserCommentaryTextArea"
         }
-    }
+    },
+    expenceForecastAliases: {
+        sumPerSFCustomCards: "sumPerSFCustomCards",
+        sumPerSFCheckedDefaultCards: "sumPerSFCheckedDefaultCards",
+        sumPerSF: "sumPerSF",
+        sumPerUnitCustomCards: "sumPerUnitCustomCards",
+        sumPerUnitCheckedDefaultCards: "sumPerUnitCheckedDefaultCards",
+        sumPerUnit: "sumPerUnit"
+    },
 };

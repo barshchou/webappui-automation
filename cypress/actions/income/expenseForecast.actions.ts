@@ -1,6 +1,7 @@
 import expenseForecastPage from "../../pages/income/expenseForecast.page";
 import { getNumberFromDollarNumberWithCommas, numberWithCommas } from "../../../utils/numbers.utils";
 import BaseActionsExt from "../base/base.actions.ext";
+import { Alias } from "../../utils/alias.utils";
 import { BoweryReports } from "../../types/boweryReports.type";
 
 type ForecastItem = BoweryReports.ForecastItem;
@@ -160,8 +161,9 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
         return this;
     }
 
-    checkIncludeInProFormaCheckbox(forecastItem: string): ExpenseForecastActions {
-        expenseForecastPage.getCheckboxIncludeInProForma(forecastItem).check().should("have.value", "true");
+    changeStateOfIncludeInProFormaCheckbox(forecastItem: string, isToCheck = true): ExpenseForecastActions {
+        expenseForecastPage.getCheckboxIncludeInProForma(forecastItem)
+            .should("have.value", `${!isToCheck}`).click({ multiple: true }).should("have.value", `${isToCheck}`);
         return this;
     }
 
@@ -324,6 +326,205 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
         expenseForecastPage.newCategoryExpenseName.clear().type(categoryName);
         this.Page.formSaveBtn(1).click();
         this.verifyProgressBarNotExist();
+        return this;
+    }
+
+    /**
+    * 1. Action takes all allForecastsInputs (forecast expense card inputs).
+    * 2. In cycle we check all forecast cards does it has checkbox "Include Expense on Pro Forma" or not: 
+    * 3. If it does not have checkbox "Include Expense on Pro Forma" - function takes input value, 
+    * then calculate and transfer it to value in PSF, then sum into sumPSF 
+    * 4. sumPSF value wraped as alias 'sumPerSFCustomCards' and is used in other actions 
+    */
+
+    totalSumInPSFCustomCards(GBA = 0, resUnits = 0, rooms = 0): ExpenseForecastActions {
+        expenseForecastPage.allForecastsInputs.then(inputs => {
+            let sumPerSFCustomCards = 0;
+            cy.wrap(sumPerSFCustomCards).as(Alias.expenceForecastAliases.sumPerSFCustomCards);
+            for (let i = 0; i < inputs.length; i++) {
+                this.expenseCard(inputs, i);
+                cy.get("@expenseCard").then(expenseCard => {
+                    if (expenseCard.find('[label="Include Expense on Pro Forma"]').length === 0) {
+                        this.SumPsfDependingOnBasis(inputs, i, resUnits, GBA, rooms,
+                            Alias.expenceForecastAliases.sumPerSFCustomCards);
+                    }
+                });
+            }
+        });
+        return this;
+    }
+
+    /**
+    * 1. Action takes all allForecastsInputs (forecast expense card inputs).
+    * 2. In cycle we check all forecast cards does it has checked checkbox "Include Expense on Pro Forma" or not. 
+    * 3. If it has checked checkbox "Include Expense on Pro Forma" - then function takes input value, 
+    * then calculate and transfer it to value in Per Unit, then sum into sumPSF.
+    * 4. sumPSF value wraped as alias 'sumPerSFCheckedDefaultCards' and is used in other actions 
+    */
+
+    totalSumInPSFCheckedDefaultCards(GBA = 0, resUnits = 0, rooms = 0): ExpenseForecastActions {
+        expenseForecastPage.allForecastsInputs.then(inputs => {
+            let sumPerSFDefaultCards = 0;
+            cy.wrap(sumPerSFDefaultCards).as(Alias.expenceForecastAliases.sumPerSFCheckedDefaultCards);
+            for (let i = 0; i < inputs.length; i++) {
+                this.expenseCard(inputs, i);
+                cy.get("@expenseCard").then(expenseCard => {
+                    if (expenseCard.find('[data-qa$=includeInProForma-checked]').length > 0) {
+                        this.SumPsfDependingOnBasis(inputs, i, resUnits, GBA, rooms, Alias.expenceForecastAliases.sumPerSFCheckedDefaultCards);
+                    }
+                });
+            }
+        });
+        return this;
+    }
+
+    verifyTotalForecastPSF(GBA = 0, resUnits = 0, rooms = 0): ExpenseForecastActions {
+        this.totalSumForecastPSFAllCards(GBA, resUnits, rooms);
+        cy.get(`@${Alias.expenceForecastAliases.sumPerSF}`).then(sumPerSF => {
+            const textToBe = `Appraiser's Forecast: $${numberWithCommas(Number(sumPerSF).toFixed(2))}`;
+            expenseForecastPage.appraisersTotalForecast.should("have.text", textToBe);
+        });
+        return this;
+    }
+
+    totalSumForecastPSFAllCards(GBA = 0, resUnits = 0, rooms = 0): ExpenseForecastActions {
+        this.totalSumInPSFCheckedDefaultCards(GBA, resUnits, rooms);
+        this.totalSumInPSFCustomCards(GBA, resUnits, rooms);
+        cy.get(`@${Alias.expenceForecastAliases.sumPerSFCheckedDefaultCards}`).then(sumPerSFCheckedDefaultCards => {
+            cy.get(`@${Alias.expenceForecastAliases.sumPerSFCustomCards}`).then(sumPerSFCustomCards => {
+                let sumPerSF = Number(sumPerSFCheckedDefaultCards) + Number(sumPerSFCustomCards);
+                cy.wrap(sumPerSF).as(Alias.expenceForecastAliases.sumPerSF);
+            });
+        });
+        return this;
+    }
+
+    private SumPsfDependingOnBasis(input: JQuery<HTMLElement>, index: number, resUnits = 0, GBA = 0, rooms = 0, AliasName: string): ExpenseForecastActions {
+        cy.get(`@${AliasName}`).then(sum => {
+            this.radioButtonBasis(input);
+            cy.get("@basisValue").then(basisValue => {
+                let sumPSF = Number(sum);
+                let expenseBasis = String(basisValue);
+                let inputValue = getNumberFromDollarNumberWithCommas(input[index].getAttribute("value"));
+                if (expenseBasis === "sf") {
+                    sumPSF += inputValue;
+                } else if (expenseBasis === "unit") {
+                    let inputValuePerSF = (inputValue * resUnits) / GBA;
+                    sumPSF += inputValuePerSF;
+                } else {
+                    let inputValuePerSF = (inputValue * rooms) / GBA;
+                    sumPSF += inputValuePerSF;
+                }
+                cy.wrap(sumPSF).as(AliasName);
+            });
+        });
+        return this;
+    }
+
+    /**
+        * 1. Action takes all allForecastsInputs (forecast expense card inputs).
+        * 2. In cycle we check all forecast cards does it has checkbox "Include Expense on Pro Forma" or not: 
+        * 3. If it does not have checkbox "Include Expense on Pro Forma" - function takes input value, 
+        * then calculate and transfer it to value in Per Unit, then sum into sumPerUnit 
+        * 4. sumPerUnit value wraped as alias 'sumPerUnitCustomCards' and is used in other actions 
+        */
+
+    totalSumInPerUnitCustomCards(GBA = 0, resUnits = 0, rooms = 0): ExpenseForecastActions {
+        expenseForecastPage.allForecastsInputs.then(inputs => {
+            let sumPerUnitCustomCards = 0;
+            cy.wrap(sumPerUnitCustomCards).as(Alias.expenceForecastAliases.sumPerUnitCustomCards);
+            for (let i = 0; i < inputs.length; i++) {
+                this.expenseCard(inputs, i);
+                cy.get("@expenseCard").then(expenseCard => {
+                    if (expenseCard.find('[label="Include Expense on Pro Forma"]').length === 0) {
+                        this.SumPerUnitDependingOnBasis(inputs, i, resUnits, GBA, rooms,
+                            Alias.expenceForecastAliases.sumPerUnitCustomCards);
+                    }
+                });
+            }
+        });
+        return this;
+    }
+
+    /**
+    * 1. Action takes all allForecastsInputs (forecast expense card inputs).
+    * 2. In cycle we check all forecast cards does it has checked checkbox "Include Expense on Pro Forma" or not: 
+    * 3. If it has checked checkbox "Include Expense on Pro Forma" - then function takes input value, 
+    * then calculate and transfer it to value in Per Unit, then sum into sumPerUnit.
+    * 4. sumPerUnit value wraped as alias 'sumPerUnitCheckedDefaultCards' and is used in other actions 
+    */
+
+    totalSumInPerUnitCheckedDefaultCards(GBA = 0, resUnits = 0, rooms = 0): ExpenseForecastActions {
+        expenseForecastPage.allForecastsInputs.then(inputs => {
+            let sumPerUnitDefaultCards = 0;
+            cy.wrap(sumPerUnitDefaultCards).as(Alias.expenceForecastAliases.sumPerUnitCheckedDefaultCards);
+            for (let i = 0; i < inputs.length; i++) {
+                this.expenseCard(inputs, i);
+                cy.get("@expenseCard").then(expenseCard => {
+                    if (expenseCard.find('[data-qa$=includeInProForma-checked]').length > 0) {
+                        this.SumPerUnitDependingOnBasis(inputs, i, resUnits, GBA, rooms, Alias.expenceForecastAliases.sumPerUnitCheckedDefaultCards);
+                    }
+                });
+            }
+        });
+        return this;
+    }
+
+    verifyTotalForecastPerUnit(GBA = 0, resUnits = 0, rooms = 0): ExpenseForecastActions {
+        this.totalSumForecastPerUnitAllCards(GBA, resUnits, rooms);
+        cy.get(`@${Alias.expenceForecastAliases.sumPerUnit}`).then(sumPerUnit => {
+            const textToBe = `Appraiser's Forecast: $${numberWithCommas(Number(sumPerUnit).toFixed(2))}`;
+            expenseForecastPage.appraisersTotalForecast.should("have.text", textToBe);
+        });
+        return this;
+    }
+
+    totalSumForecastPerUnitAllCards(GBA = 0, resUnits = 0, rooms = 0): ExpenseForecastActions {
+        this.totalSumInPerUnitCheckedDefaultCards(GBA, resUnits, rooms);
+        this.totalSumInPerUnitCustomCards(GBA, resUnits, rooms);
+        cy.get(`@${Alias.expenceForecastAliases.sumPerUnitCheckedDefaultCards}`).then(sumPerUnitCheckedDefaultCards => {
+            cy.get(`@${Alias.expenceForecastAliases.sumPerUnitCustomCards}`).then(sumPerUnitCustomCards => {
+                let sumPerUnit = Number(sumPerUnitCheckedDefaultCards) + Number(sumPerUnitCustomCards);
+                cy.wrap(sumPerUnit).as(Alias.expenceForecastAliases.sumPerUnit);
+            });
+        });
+        return this;
+    }
+
+    private SumPerUnitDependingOnBasis(input: JQuery<HTMLElement>, index: number, resUnits = 0, GBA = 0, rooms = 0, AliasName: string): ExpenseForecastActions {
+        cy.get(`@${AliasName}`).then(sum => {
+            this.radioButtonBasis(input);
+            cy.get("@basisValue").then(basisValue => {
+                let sumPerUnit = Number(sum);
+                let expenseBasis = String(basisValue);
+                let inputValue = getNumberFromDollarNumberWithCommas(input[index].getAttribute("value"));
+                if (expenseBasis === "sf") {
+                    let inputValuePerUnit = (inputValue * GBA) / resUnits;
+                    sumPerUnit += inputValuePerUnit;
+                } else if (expenseBasis === "unit") {
+                    sumPerUnit += inputValue;
+                } else {
+                    let inputValuePerUnit = (inputValue * rooms) / resUnits;
+                    sumPerUnit += inputValuePerUnit;
+                }
+                cy.wrap(sumPerUnit).as(AliasName);
+            });
+        });
+        return this;
+    }
+
+    private expenseCard(inputs: JQuery<HTMLElement>, index: number): ExpenseForecastActions {
+        cy.wrap(inputs[index]).parents('[data-qa$=-forecast-item]').then(expenseCard => {
+            cy.wrap(expenseCard).as("expenseCard");
+        });
+        return this;
+    }
+
+    private radioButtonBasis(input: JQuery<HTMLElement>,): ExpenseForecastActions {
+        cy.wrap(input).parents('[data-qa$=-forecast-item]').find('[data-qa="checked"]').find('[type="radio"]')
+            .invoke('prop', 'value').then(basisValue => {
+                cy.wrap(basisValue).as("basisValue");
+            });
         return this;
     }
 
