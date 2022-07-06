@@ -1,6 +1,6 @@
 import { loginAction } from '../../../../actions/base/baseTest.actions';
 import { _NavigationSection } from '../../../../actions/base/index';
-import testData from "../../../../fixtures/not_full_reports/organizations/QA-5516-17.fixture";
+import testData from "../../../../fixtures/not_full_reports/profile_organizations/organizations/QA-5516-17.fixture";
 import enums from '../../../../enums/enums';
 
 describe("Verify users roles access to 'Settings' page", 
