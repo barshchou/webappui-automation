@@ -18,12 +18,11 @@ class OrganizationSettingsActions extends BaseActionsExt<typeof organizationSett
     }
 
     getLastUpdatedDateFromUI(bondType: BoweryReports.BondTypes): OrganizationSettingsActions{
-        organizationSettingsPage.treasuryBondsLastUpdated(bondType).invoke('attr', 'value').then(date => { //organizationSettingsPage.treasuryBonds10YearsLastUpdated
+        organizationSettingsPage.treasuryBondsLastUpdated(bondType).invoke('attr', 'value').then(date => {
             let formattedDate = new Date(date);
             const offset = formattedDate.getTimezoneOffset();
             formattedDate = new Date(formattedDate.getTime() - (offset * 60 * 1000));
             cy._mapSet('lastUpdatedDate', formattedDate.toISOString().split('T')[0]);
-        
         });
         return this;
     }
