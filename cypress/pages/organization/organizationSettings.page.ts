@@ -12,7 +12,13 @@ class OrganizationSettingsPage extends BasePage{
 
     bondsIcon(bondType: string) {return this.bondsHeading(bondType).find('svg');}
 
-    get surveyOfCompetitiveRatesCommentary() {return cy.xpath("//*[h6[.='Mortgage Component Introduction']]//following::*[@data-slate-string][1]");}
+    get mortgageComponentIntroductionCommentary() {return cy.xpath("//*[h6[.='Mortgage Component Introduction']]//following::*[@data-slate-string][1]");}
+
+    get verifySurveyOfCompetitiveRatesDiscussion() {return cy.xpath("//*[h6[.='Survey of Competitive Rates Discussion']]//following::*[@data-slate-editor][1]");}
+
+    get minMortgageRate() {return cy.get('[name="surveyOfCompetitiveRates.suggestedMortgage.minRate"]');}
+
+    get maxMortgageRate() {return cy.get('[name="surveyOfCompetitiveRates.suggestedMortgage.maxRate"]');}
 }
 
 export default new OrganizationSettingsPage();

@@ -15,7 +15,7 @@ describe("",
         cy.stepInfo('2. Navigate to Organization -> Settings and verify commentary text');
         _NavigationSection.navigateToProfileOrganization(enums.MENU_LINKS.organization);
         Organization._OrganizationActions.openOrganizationSettingsPage();
-        Organization._OrganizationSettingsActions.verifySurveyOfCompetitiveRatesCommentary(testData.commentary);
+        Organization._OrganizationSettingsActions.verifyMortgageComponentIntroductionCommentary(testData.commentary);
 
         cy.stepInfo('3. Open created report and export it');
         _NavigationSection.returnToHomePage();

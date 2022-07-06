@@ -18,7 +18,7 @@ class OrganizationSettingsActions extends BaseActionsExt<typeof organizationSett
     }
 
     getLastUpdatedDateFromUI(bondType: BoweryReports.BondTypes): OrganizationSettingsActions{
-        organizationSettingsPage.bondsLastUpdated(bondType).invoke('attr', 'value').then(date => { //organizationSettingsPage.treasuryBonds10YearsLastUpdated
+        organizationSettingsPage.bondsLastUpdated(bondType).invoke('attr', 'value').then(date => {
             let formattedDate = new Date(date);
             const offset = formattedDate.getTimezoneOffset();
             formattedDate = new Date(formattedDate.getTime() - (offset * 60 * 1000));
@@ -58,10 +58,29 @@ class OrganizationSettingsActions extends BaseActionsExt<typeof organizationSett
         return this;
     }
 
-    verifySurveyOfCompetitiveRatesCommentary(textToBe: string): OrganizationSettingsActions {
-        organizationSettingsPage.surveyOfCompetitiveRatesCommentary.invoke('text').should('deep.equal', textToBe);
+    verifyMortgageComponentIntroductionCommentary(textToBe: string): OrganizationSettingsActions {
+        organizationSettingsPage.mortgageComponentIntroductionCommentary.invoke('text').should('deep.equal', textToBe);
         return this;
     }
+
+    verifySurveyOfCompetitiveRatesDiscussion(bondType: BoweryReports.BondTypes): OrganizationSettingsActions {
+        organizationSettingsPage.bondsRateInput(bondType).invoke('attr', 'value').then(rateValueUI => {
+            cy._mapSet("tenYearsBondsRate", rateValueUI);
+        });
+        organizationSettingsPage.minMortgageRate.invoke('attr', 'value').then(minMortgageRate => {
+            cy._mapSet("minMortgageRate", minMortgageRate);
+        });
+        organizationSettingsPage.maxMortgageRate.invoke('attr', 'value').then(maxMortgageRate => {
+            cy._mapSet("maxMortgageRate", maxMortgageRate);
+        });
+
+        organizationSettingsPage.verifySurveyOfCompetitiveRatesDiscussion.invoke('text').should('deep.equal', 
+            `Currently, 10-year treasuries are trading at ${cy._mapGet('@tenYearsBondsRate')}% suggesting mortgage rates of roughly ${cy._mapGet('@minMortgageRate')}% to ${cy._mapGet('@maxMortgageRate')}%. The current mortgage market indicates a competitive interest rate, as there is strong demand from mortgage lenders seeking stable multi-unit residential deals.`
+        );
+        return this;
+    }
+
+        
 }
 
 export default new OrganizationSettingsActions(organizationSettingsPage);
