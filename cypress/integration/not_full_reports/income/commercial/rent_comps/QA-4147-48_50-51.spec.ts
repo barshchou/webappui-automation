@@ -22,9 +22,9 @@ describe("Check that Commercial Rent Comps map has Filters dropdown",
         Income._CommercialManager.RentComps.Page.mapZoomInButton.should("exist");
         Income._CommercialManager.RentComps.Page.mapZoomOutButton.should("exist");
         Income._CommercialManager.RentComps.Page.mapDrawPolygonButton.should("exist");
-        Income._CommercialManager.RentComps.Page.mapStarZoomButton.click();
-        Income._CommercialManager.RentComps.verifyProgressBarNotExist();
 
-        deleteReport(testData.reportCreationData.reportNumber);
+        Income._CommercialManager.RentComps.drawPolygon();
+
+        // deleteReport(testData.reportCreationData.reportNumber);
     });
 });

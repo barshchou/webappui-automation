@@ -86,6 +86,8 @@ class CommercialRentCompsPage extends BasePage {
     get mapZoomInButton() {return cy.get("[title='Zoom in']");}
 
     get mapZoomOutButton() {return cy.get("[title='Zoom out']");}
+
+    get mapContainer() {return cy.get(".leaflet-container");}
 }
 
 export default new CommercialRentCompsPage();

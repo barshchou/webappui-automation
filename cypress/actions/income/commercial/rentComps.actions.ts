@@ -212,6 +212,15 @@ class CommercialRentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
         rentCompsPage.getRemovedCompRows(title).should('not.exist');
         return this;
     }
+
+    drawPolygon(coordinates = [ { width: 0, height: 0} ]): CommercialRentCompsActions {
+        rentCompsPage.mapDrawPolygonButton.click();
+        coordinates.forEach(coord => {
+            rentCompsPage.mapContainer.click(coord.width, coord.height);
+        });
+        cy.wait(10000);
+        return this;
+    }
 }
 
 export default new CommercialRentCompsActions(rentCompsPage);
