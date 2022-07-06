@@ -1,6 +1,6 @@
 import { loginAction } from '../../../../actions/base/baseTest.actions';
-import { Organization } from '../../../../actions/index';
-import { _NavigationSection } from '../../../../actions/base/index';
+import { Organization } from '../../../../actions';
+import { _NavigationSection } from '../../../../actions/base';
 import testData from "../../../../fixtures/not_full_reports/organizations/QA-5355-58.fixture";
 import enums from '../../../../enums/enums';
 
