@@ -10,6 +10,10 @@ const _chipsOptions: BoweryReports.ChipsCreationOptions = {
 };
 
 export default {
-    reportCreationData: ReportDataCreator.getReportData("4642", { conclusionValue: Enums.VALUE_CONCLUSION_TYPE.AS_COMPLETE }),
+    reportCreationData: ReportDataCreator.getReportData("4642", {
+        conclusionValue: Enums.VALUE_CONCLUSION_TYPE.AS_COMPLETE,
+        incomeValue: Enums.INCOME_TYPE.both
+    }),
     chips: chipsDataCreator.getChipsData(_chipsOptions, Enums.VALUE_CONCLUSION_TYPE.AS_COMPLETE),
+    buildingName: _buildingName
 };
