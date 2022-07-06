@@ -43,5 +43,7 @@ export default {
     inspectorUsername: _inspectorUsername,
     inspectorPassword: _inspectorPassword,
     adminUsername: _adminUsername,
-    adminPassword: _adminPassword
+    adminPassword: _adminPassword,
+    createNewUserTitle: "Create New User",
+    createNewUserDirectLink: "/organization/5818c25f67ac15110095afc4/organization-new-user"
 };

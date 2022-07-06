@@ -5,6 +5,7 @@ export enum Tag {
     stabilized_rent_roll = "@stabilized_rent_roll",
     in_place_rent_roll = "@in_place_rent_roll",
     comp_plex = "@comp_plex",
+    comp_plex_standalone = "@comp_plex_standalone",
     snapshot_tests = "@snapshot_tests",
     expense_forecast = "@expense_forecast",
     fix = "@fix",
@@ -36,5 +37,7 @@ export enum Tag {
     permissions_roles = "@permissions_roles",
     propertyConditions = "@property_conditions",
     comp_summary = "@comp_summary",
-    users = "@users"
+    users = "@users",
+    report_status = "@report_status",
+    appraiser = "@appraiser" 
 }
