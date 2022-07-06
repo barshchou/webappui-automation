@@ -47,6 +47,8 @@ import rentRollOptionsCheckboxsEnum from "./rent/rentRollOptionsCheckboxs.enum";
 import menuLinksNamesEnum from "./menuLinksNames.enum";
 import rolesEnum from "./users/roles.enum";
 import boweryOfficesEnum from "./organization/boweryOffices.enum";
+import salesadjustmentgridEnum from "./adjustComps/salesadjustmentgrid.enum";
+import rowsMarketadjustmentEnum from "./adjustComps/rows.marketadjustment.enum";
 import reportStatusEnum from "./reportParams/reportStatus.enum";
 
 export default {
@@ -99,5 +101,7 @@ export default {
     MENU_LINKS: menuLinksNamesEnum,
     USER_ROLES: rolesEnum,
     BOWERY_OFFICES: boweryOfficesEnum,
+    SALES_ADJUSTMENT_GRID: salesadjustmentgridEnum,
+    ROWS_MARKET_ADJUSTMENT: rowsMarketadjustmentEnum,
     REPORT_STATUS: reportStatusEnum
 };
