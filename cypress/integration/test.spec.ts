@@ -15,11 +15,21 @@ describe("Verify the Basis of Rent tooltip",
     it("Test body", () => {
         cy.log(window.localStorage.getItem("jwToken")).pause();
         deleteReport(testData.reportCreationData.reportNumber);
+
+        /**
+         * TODO: move this to the custom command
+         * and note on how it work (especially reference to WebApp code and possible deprecation of this removal approach)
+         */
         cy.log("Delete report");
-        cy._mapGet(mapKeysUtils.report_id).then(reportId=>{
+        cy._mapGet(mapKeysUtils.report_id).then(reportId => {
             cy.request({
                 method:"DELETE",
-                url:""
+                url:`${Cypress.config().baseUrl}/report/${reportId}`,
+                auth:{
+                    'bearer': window.localStorage.getItem("jwToken")
+                }
+            }).then((resp) => {
+                expect(resp.status).to.eq(200);
             });
         });
         
