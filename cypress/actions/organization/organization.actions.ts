@@ -23,6 +23,11 @@ class OrganizationActions extends BaseActionsExt<typeof organizationPage>{
         this.Page.organizationUsers.click();
         return this;
     }
+
+    openOrganizationSettingsPage(): OrganizationActions {
+        this.Page.organizationSettings.click();
+        return this;
+    }
 }
 
 export default new OrganizationActions(organizationPage);

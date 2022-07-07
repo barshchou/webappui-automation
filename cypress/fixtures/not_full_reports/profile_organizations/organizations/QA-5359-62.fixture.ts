@@ -1,5 +1,5 @@
-import ReportDataCreator from "../../data_creator/reportData.creator";
-import Enums from "../../../enums/enums";
+import ReportDataCreator from "../../../data_creator/reportData.creator";
+import Enums from "../../../../enums/enums";
 
 const _randomPart = (): string => {
     return "5359-62-" + Date.now().toString();

@@ -63,6 +63,11 @@ export namespace BoweryReports {
         | CeilingHeightValues | LocationValues | StreetTypeValues | FrontageValues | FloorValues;
     }
 
+    export namespace SalesAdjustmentGrid {
+        export type AdjustmentName = typeof Enums.SALES_ADJUSTMENT_GRID[KeyInfo.SalesAdjustmentGridKeys]
+        export type RowsMarketAdjustment = typeof Enums.ROWS_MARKET_ADJUSTMENT[KeyInfo.RowsMarketAdjustmentKeys]
+    }
+
     export type ProFormaAnyIncome = {
         total: string,
         perSF: string,
@@ -194,4 +199,6 @@ export namespace BoweryReports {
     export type PropertyConditions = typeof Enums.PROPERTY_CONDITIONS[KeyInfo.PropertyConditions];
 
     export type PropertyConditionsRadios = keyof typeof Enums.PROPERTY_CONDITIONS_RADIOS;
+    export type BondTickers = typeof Enums.BOND_TYPES[KeyInfo.BondTypes]
+    export type BondTypes = keyof typeof  Enums.BOND_TYPES
 }

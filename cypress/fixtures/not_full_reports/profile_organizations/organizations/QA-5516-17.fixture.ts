@@ -1,4 +1,4 @@
-import Enums from "../../../enums/enums";
+import Enums from "../../../../enums/enums";
 
 const _leadAppraiserUsername = Cypress.env(`${Enums.USERS.webapp_lead_appraiser_username}`);
 const _leadAppraiserPassword = Cypress.env(`${Enums.USERS.webapp_lead_appraiser_password}`);
