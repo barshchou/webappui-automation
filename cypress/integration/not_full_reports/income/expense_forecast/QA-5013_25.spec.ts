@@ -97,24 +97,28 @@ describe(`[QA-5013] [QA-5025] [Income>Expense forecast] Selected existing expens
             });
             
             _NavigationSection.navigateToExpenseForecast();
-            Income._ExpenseForecastActions.totalSumForecastPSFAllCards(
-                testData.buildingDescription.grossArea,
+            testData.verifyCommentGenerated(testData.buildingDescription.grossArea,
                 testData.numberOfResidentialUnits,
-                testData.rentRollResUnitFixture.rooms
-            )
-                .totalSumForecastPerUnitAllCards(
-                    testData.buildingDescription.grossArea,
-                    testData.numberOfResidentialUnits,
-                    testData.rentRollResUnitFixture.rooms
-                );
-                cy.get(`@${Alias.expenceForecastAliases.sumPerSF}`).then(sumPerSF => {
-                    cy.get(`@${Alias.expenceForecastAliases.sumPerUnit}`).then(sumPerUnit => {
+                testData.rentRollResUnitFixture.rooms);
+
+            // Income._ExpenseForecastActions.totalSumForecastPSFAllCards(
+            //     testData.buildingDescription.grossArea,
+            //     testData.numberOfResidentialUnits,
+            //     testData.rentRollResUnitFixture.rooms
+            // )
+            //     .totalSumForecastPerUnitAllCards(
+            //         testData.buildingDescription.grossArea,
+            //         testData.numberOfResidentialUnits,
+            //         testData.rentRollResUnitFixture.rooms
+            //     );
+            //     cy.get(`@${Alias.expenceForecastAliases.sumPerSF}`).then(sumPerSF => {
+            //         cy.get(`@${Alias.expenceForecastAliases.sumPerUnit}`).then(sumPerUnit => {
         
-                        Income._ExpenseForecastActions.verifyTOECommentary(testData.commentaries(testData.forecastPSFTotal(Number(sumPerSF)), 
-                        testData.forecastPerUnitTotal(Number(sumPerUnit))).generated);
+            //             Income._ExpenseForecastActions.verifyTOECommentary(testData.commentaries(testData.forecastPSFTotal(Number(sumPerSF)), 
+            //             testData.forecastPerUnitTotal(Number(sumPerUnit))).generated);
                    
-                });
-            });
+            //     });
+            // });
 
 
 // Income._ExpenseForecastActions.verifyCommentGenerated( testData.buildingDescription.grossArea,

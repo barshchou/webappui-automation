@@ -41,17 +41,21 @@ const _forecastPSFTotal = (psfToBe: number | string) => {return psfToBe === 0? '
 const _forecastPerUnitTotal = (perUnitToBe: number | string) => {return perUnitToBe === 0? '$0' : `$${perUnitToBe}`;}; 
 
 
-function verifyCommentGenerated (GBA = 0, resUnits = 0, rooms = 0, textToBe: string): ExpenseForecastActions {
+function verifyCommentGenerated (GBA: number, resUnits = 0, rooms = 0) {
     Income._ExpenseForecastActions.totalSumForecastPSFAllCards(GBA, resUnits, rooms);
     Income._ExpenseForecastActions.totalSumForecastPerUnitAllCards(GBA, resUnits, rooms);
     cy.get(`@${Alias.expenceForecastAliases.sumPerSF}`).then(sumPerSF => {
         cy.get(`@${Alias.expenceForecastAliases.sumPerUnit}`).then(sumPerUnit => {
+         let sumPerSFInComment =  Math.round(Number(sumPerSF));
+         let sumPerUnitInComment =  Math.round(Number(sumPerUnit));
 
-            this.verifyTOECommentary(textToBe)
+           let textToBe = String(commentariesFixture(sumPerSFInComment, sumPerUnitInComment));
+            Income._ExpenseForecastActions.verifyTOECommentary(textToBe);
+            
        
     });
 });
-    return this;
+    return verifyCommentGenerated;
 }
 
 
@@ -192,4 +196,5 @@ export default {
     forecastPerUnitTotal: _forecastPerUnitTotal,
     rentRollResUnitFixture: rentRollResidentialUnitFixture(),
     perRoomAnalysis: "Include Per Room Analysis in Report",
+    verifyCommentGenerated,
 };
