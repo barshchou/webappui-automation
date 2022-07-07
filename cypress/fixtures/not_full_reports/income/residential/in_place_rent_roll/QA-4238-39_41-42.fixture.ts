@@ -36,7 +36,7 @@ export default {
         conclusionValue: Enums.VALUE_CONCLUSION_TYPE.AS_IS,
         incomeValue: Enums.INCOME_TYPE.residential
     }),
-    perRoomAnalysis: Enums.RENT_ROLL_OPTIONS_CHECKBOXS.include,
+    perRoomAnalysis: Enums.RENT_ROLL_OPTIONS_CHECKBOXES.include,
     columnName: "Rent/Room",
     residentialUnits: rentRollResidentialUnitsFixture()
 };

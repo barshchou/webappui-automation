@@ -24,7 +24,7 @@ describe("'Pull from dropbox' clicked - needed files are uploaded", { tags: [ "@
             if (researchUseObject.use === Enums.MARKET_ANALYSIS_USES.multifamily) {
                 Property._Market.verifyMarketAnalysisUseCheckboxState(researchUseObject.use);
             } else {
-                Property._Market.checkUncheckMarketAnalysisUseCheckbox(researchUseObject.use);
+                Property._Market.checkUncheckMarketAnalysisUseCheckbox(researchUseObject.use, true);
             }
 
             cy.stepInfo("2. Fill market research data");
@@ -32,11 +32,9 @@ describe("'Pull from dropbox' clicked - needed files are uploaded", { tags: [ "@
 
             cy.stepInfo("3. Pull data from dropbox and verify");
             Property._Market.clickPullFromDropbox()
-                .verifyAreaEconomicAnalysisHasFile()
-                .verifyNeighborhoodDemographicHasFile()
-                .verifyMarketByAnalysisUseHasFile(researchUseObject.use)
-                .verifySubmarketByAnalysisUseHasFile(researchUseObject.use)
-                .checkUncheckMarketAnalysisUseCheckbox(researchUseObject.use);
+                .setFilesValuesToMap(researchUseObject.use)
+                .verifyAnyFileInputHasFile(researchUseObject.use)
+                .checkUncheckMarketAnalysisUseCheckbox(researchUseObject.use, false);
         });
     });
 

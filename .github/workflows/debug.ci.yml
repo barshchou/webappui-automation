@@ -37,6 +37,10 @@ on:
         description: Run tests with specific tags
         required: false
         default: grep=,grepTags=,burn=
+      ref:
+        type: string
+        description: Select branch, tag, commit ref
+        required: false
         
 jobs:
   Not-full-reports-run-DEBUG:
@@ -63,3 +67,4 @@ jobs:
           spec_file: ${{ github.event.inputs.spec_file }}
           tags: ${{ github.event.inputs.tags }}
           record_key: ${{ secrets.CURRENTS_RECORD_KEY }}
+          ref: ${{ github.event.inputs.ref }}

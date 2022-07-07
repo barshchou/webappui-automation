@@ -11,7 +11,7 @@ const _name = Enums.EXPENSE_CELL.fuel;
 const _basis = "sf" as BoweryReports.UnitSF;
 const _projection = 567.89;
 const _forecast = 322;
-const _perRoomAnalysis = Enums.RENT_ROLL_OPTIONS_CHECKBOXS.include;
+const _perRoomAnalysis = Enums.RENT_ROLL_OPTIONS_CHECKBOXES.include;
 const _residentialRooms = Array(_numberOfResidentialUnits).fill(_numberOfRooms);
 
 const _forecastItem = (): BoweryReports.ForecastItem => {

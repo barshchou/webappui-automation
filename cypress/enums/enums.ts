@@ -43,14 +43,14 @@ import rentTypesEnum from "./rent/rentTypes.enum";
 import usersEnum from "../enums/users/users.enum";
 import propertyConditionsEnum from "./property/propertyConditions.enum";
 import propertyConditionsRadiosEnum from "./property/propertyConditionsRadios.enum";
+import rentRollOptionsCheckboxesEnum from "./rent/rentRollOptionsCheckboxes.enum";
 import featureFlagKeys from "./featureFlags/featureFlagKeys.enum";
 import envLaunchDarkly from "./featureFlags/envLaunchDarkly.enum";
-import rentRollOptionsCheckboxsEnum from "./rent/rentRollOptionsCheckboxs.enum";
 import menuLinksNamesEnum from "./menuLinksNames.enum";
 import rolesEnum from "./users/roles.enum";
 import boweryOfficesEnum from "./organization/boweryOffices.enum";
-import salesadjustmentgridEnum from "./adjustComps/salesadjustmentgrid.enum";
-import rowsMarketadjustmentEnum from "./adjustComps/rows.marketadjustment.enum";
+import salesAdjustmentGridEnum from "./adjustComps/salesAdjustmentGrid.enum";
+import rowsMarketAdjustmentEnum from "./adjustComps/rows.marketAdjustment.enum";
 import reportStatusEnum from "./reportParams/reportStatus.enum";
 import bondTypesEnum from "./organization/bondTypes.enum";
 
@@ -100,14 +100,14 @@ export default {
     USERS: usersEnum,
     PROPERTY_CONDITIONS: propertyConditionsEnum,
     PROPERTY_CONDITIONS_RADIOS: propertyConditionsRadiosEnum,
+    RENT_ROLL_OPTIONS_CHECKBOXES: rentRollOptionsCheckboxesEnum,
     FEATURE_FLAG_KEYS: featureFlagKeys,
     ENV_LAUNCH_DARKLY: envLaunchDarkly,
-    RENT_ROLL_OPTIONS_CHECKBOXS: rentRollOptionsCheckboxsEnum,
     MENU_LINKS: menuLinksNamesEnum,
     USER_ROLES: rolesEnum,
     BOWERY_OFFICES: boweryOfficesEnum,
-    SALES_ADJUSTMENT_GRID: salesadjustmentgridEnum,
-    ROWS_MARKET_ADJUSTMENT: rowsMarketadjustmentEnum,
+    SALES_ADJUSTMENT_GRID: salesAdjustmentGridEnum,
+    ROWS_MARKET_ADJUSTMENT: rowsMarketAdjustmentEnum,
     REPORT_STATUS: reportStatusEnum,
     BOND_TYPES: bondTypesEnum
 };
