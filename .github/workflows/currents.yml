@@ -3,7 +3,7 @@ name: Cypress not full reports tests in Currents.dev
 on:
   workflow_dispatch:
     inputs:
-      env:
+      url:
         type: choice
         description: Select the environment
         options:
