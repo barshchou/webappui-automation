@@ -36,6 +36,10 @@ on:
         description: Run test with specific tags (via grep,grepTags,burn)
         required: false
         default: grep=,grepTags=@smoke,burn=
+      ref:
+        type: string
+        description: Select branch, tag, commit ref
+        required: false
 
 jobs:
   Smoke-tests-run:
@@ -62,3 +66,4 @@ jobs:
           spec_file: ${{ github.event.inputs.spec_file }}
           tags: ${{ github.event.inputs.tags }}
           record_key: ${{ secrets.CURRENTS_RECORD_KEY }}
+          ref: ${{ github.event.inputs.ref }}
