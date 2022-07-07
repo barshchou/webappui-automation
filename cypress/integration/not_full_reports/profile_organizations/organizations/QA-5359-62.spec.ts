@@ -1,7 +1,7 @@
 import { _NavigationSection, _HomePage } from '../../../../actions/base';
 import { createReport, deleteReport } from '../../../../actions/base/baseTest.actions';
 import { ReviewExport } from '../../../../actions/index';
-import testData from "../../../../fixtures/not_full_reports/organizations/QA-5359-62.fixture";
+import testData from "../../../../fixtures/not_full_reports/profile_organizations/organizations/QA-5359-62.fixture";
 
 describe("Verify users roles permissions to change report status", 
     { tags:[ "@permissions_roles", "@report_status" ] }, () => {

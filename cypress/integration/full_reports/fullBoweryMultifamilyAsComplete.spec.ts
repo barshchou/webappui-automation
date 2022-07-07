@@ -292,7 +292,7 @@ describe("Full bowery way, multifamily as complete report", { tags: [ "@full_rep
         testData.comparableExpenses.comparables.forEach(comp => {
             Income.ComparableExpenses.clickAddBlankColumnButton()
                 .enterAddressByColumnIndex(comp.address)
-                .enterLocationByColumnIndex(comp.location)
+                .enterCityByColumnIndex(comp.city)
                 .chooseExpensePeriodByColumnIndex(comp.period)
                 .enterSquareFeetByColumnIndex(comp.squareFeet)
                 .enterResidentialUnitsByColumnIndex(comp.resUnits)

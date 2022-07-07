@@ -3,7 +3,6 @@ import { createReport, deleteReport } from "../../../../actions/base/baseTest.ac
 import { _NavigationSection } from "../../../../actions/base";
 import { Property } from "../../../../actions";
 import Enums from "../../../../enums/enums";
-import { getQuarter } from "../../../../../utils/date.utils";
 
 
 describe("Verify area analysis pull from dropbox", { tags: [ "@property", "@market" ] }, () => {
@@ -27,7 +26,7 @@ describe("Verify area analysis pull from dropbox", { tags: [ "@property", "@mark
         cy.stepInfo("3. Change quarter for [QA-4258]");
         Property._Market.enterMarketQuarter(testData.quarterToChange)
             .clickPullFromDropbox()
-            .verifyAreaEconomicAnalysisHasFile(getQuarter(testData.marketResearch.dateOfValuation));
+            .verifyAreaEconomicAnalysisHasFile(testData.quarterToVerify);
 
         deleteReport(testData.reportCreationData.reportNumber);
     });

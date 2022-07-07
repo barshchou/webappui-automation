@@ -80,20 +80,22 @@ const _convertDocxToHtml = async (report) => {
 
 /**
  * Get relative path to the file (report docx file or converted html in our case)
- * @param {reportName} _reportName - generated `testData.reportCreationData.reportNumber` in test fixture
+ * @param _reportName - generated `testData.reportCreationData.reportNumber` in test fixture
  * @param {"docx" | "html"} _docx_html - look for file which ends with "docx" or "html" extension
+ * @param currentTime
+ * @param timeout
  * @returns first relative path from array of matches 
  * @see https://www.npmjs.com/package/glob
  */
  const _getFilePath = async (_reportName, _docx_html, currentTime = 0, timeout = 60000) =>{
-  let file = glob.sync(`cypress/downloads/${_reportName}**.${_docx_html}`)[0];
+  let file = glob.sync(`cypress/downloads/**${_reportName}**.${_docx_html}`)[0];
   if (file != undefined) {
     return file;  
   }
   await new Promise((resolve) =>{
     setTimeout(() => resolve(true), 1000)
   });
-  return _getFilePath(`Bowery Appraisal_${_reportName}`, _docx_html, currentTime + 1000, timeout);
+  return _getFilePath(_reportName, _docx_html, currentTime + 1000, timeout);
 }
 
 /**
@@ -131,10 +133,6 @@ const _loginApi = async (_envUrl, _username, _password) => {
  * 
  * Since we wrap this event into promise, the data which will be resolved there
  * will be our report with necessary props (reportId and reportNumber)
- * 
- * @param {*} _reportCreationData 
- * @param {*} _payloadFn 
- * @returns 
  */
  const _createReportApi = async (_reportCreationData, _payload, _token, _envUrl) => {
     let reportId = "not report id";
