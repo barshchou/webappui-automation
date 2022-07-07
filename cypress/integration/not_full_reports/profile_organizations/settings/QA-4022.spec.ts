@@ -5,10 +5,10 @@ import { _NavigationSection } from '../../../../actions/base/index';
 import testData from "../../../../fixtures/not_full_reports/profile_organizations/settings/QA-4022.fixture";
 import enums from '../../../../enums/enums';
 
-describe("", 
+describe("[QA-4022] A hard coded sentence is updated on the Organization page", 
     { tags:[ "@organizations", "@settings" ] }, () => {
 
-    it("[QA-4022] A hard coded sentence is updated on the Organization page", () => {
+    it('Create a report and verify sentence on UI. Export report', () => {
         cy.stepInfo('1. Create a report');
         createReport(testData.reportCreationData);
 

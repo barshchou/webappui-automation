@@ -79,6 +79,43 @@ class OrganizationSettingsActions extends BaseActionsExt<typeof organizationSett
         }); 
         return this;
     }
+
+    updateComplianceParagraphDiscussion(text: string, clear = false): OrganizationSettingsActions {
+        this.clickComplianceParagraphEditButton()
+            .editComplianceParagraphDiscussionText(text, clear)
+            .saveComplianceParagraphDiscussion();
+        return this;
+    }
+
+    clickComplianceParagraphEditButton(): OrganizationSettingsActions {
+        organizationSettingsPage.complianceParagraphEditButton.click();
+        return this;
+    }
+
+    editComplianceParagraphDiscussionText(text: string, clear = false): OrganizationSettingsActions {
+        if (clear) organizationSettingsPage.complianceParagraphDiscussion.clear();
+        organizationSettingsPage.complianceParagraphDiscussion
+            .type(text)
+            .should('contain.text', text);
+        return this;
+    }
+
+    verifyComplianceParagraphDiscussion(textToBe: string): OrganizationSettingsActions {
+        organizationSettingsPage.complianceParagraphDiscussion.should('have.text', textToBe);
+        return this;
+    }
+
+    saveComplianceParagraphDiscussion(): OrganizationSettingsActions {
+        organizationSettingsPage.complianceParagraphDiscussionSaveButton.click();
+        return this;
+    }
+
+    saveOrganizationSettings(): OrganizationSettingsActions {
+        organizationSettingsPage.saveButtonGlobal.click();
+        organizationSettingsPage.successModal.should('be.visible');
+        organizationSettingsPage.successModalCloseButton.click();
+        return this;
+    }
 }
 
 export default new OrganizationSettingsActions(organizationSettingsPage);
