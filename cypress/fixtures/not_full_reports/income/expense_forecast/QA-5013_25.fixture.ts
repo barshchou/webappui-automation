@@ -35,27 +35,27 @@ const commentariesFixture = (forecastPSFTotal: string, forecastPerUnitTotal: str
     };
 };
 
-const forecastPSFTotal = (psfToBe: number | string) => { return psfToBe === 0 ? '$0.00' : `$${psfToBe}`; };
-const forecastPerUnitTotal = (perUnitToBe: number | string) => { return perUnitToBe === 0 ? '$0' : `$${perUnitToBe}`; };
+const forecastPSFTotal = (psfToBe: string) => { return `$${psfToBe}`;};
+const forecastPerUnitTotal = (perUnitToBe: string) => { return `$${perUnitToBe}`;};
 
-function verifyTOEAppraisersValueLinePSF(GBA: number, resUnits = 0, rooms = 0) {
-    Income._ExpenseForecastActions.sumPSFTOEAppraisersForecast(GBA, resUnits, rooms);
+function verifyTOEAppraisersValueLinePSF(grossBuildingArea: number, resUnits = 0, rooms = 0) {
+    Income._ExpenseForecastActions.sumPSFTOEAppraisersForecast(grossBuildingArea, resUnits, rooms);
     cy.get(`@sumPSFTOEAppraisersForecast`).then(sumPSFTOEAppraisersForecast => {
         Income._ExpenseForecastActions.Page.toeAppraisersForecastValueLine.should('contain', forecastPSFTotal(String(sumPSFTOEAppraisersForecast)));
     });
     return this;
 }
 
-function verifyTOEAppraisersValueLinePerUnit(GBA: number, resUnits = 0, rooms = 0) {
-    Income._ExpenseForecastActions.sumPerUnitTOEAppraisersForecast(GBA, resUnits, rooms);
+function verifyTOEAppraisersValueLinePerUnit(grossBuildingArea: number, resUnits = 0, rooms = 0) {
+    Income._ExpenseForecastActions.sumPerUnitTOEAppraisersForecast(grossBuildingArea, resUnits, rooms);
     cy.get(`@sumPerUnitTOEAppraisersForecast`).then(sumPerUnitTOEAppraisersForecast => {
         Income._ExpenseForecastActions.Page.toeAppraisersForecastValueLine.should('contain', forecastPSFTotal(String(sumPerUnitTOEAppraisersForecast)));
     });
     return this;
 }
 
-function verifyTOECommentGenerated(GBA: number, resUnits = 0, rooms = 0) {
-    Income._ExpenseForecastActions.sumsInGeneratedComment(GBA, resUnits, rooms);
+function verifyTOECommentGenerated(grossBuildingArea: number, resUnits = 0, rooms = 0) {
+    Income._ExpenseForecastActions.sumsInGeneratedComment(grossBuildingArea, resUnits, rooms);
     cy.get(`@sumPerSFInComment`).then(sumPerSFInComment => {
         cy.get(`@sumPerUnitInComment`).then(sumPerUnitInComment => {
             let textToBe = commentariesFixture(String(sumPerSFInComment), String(sumPerUnitInComment)).generated;
