@@ -125,7 +125,7 @@ class ProFormaActions extends BaseActionsExt<typeof proFormaPage> {
 
     verifyTotalTOEexTaxesIncludeForecasts(GBA: number): ProFormaActions {
         cy.get(`@${Alias.expenceForecastAliases.sumPerSF}`).then(val => {
-            let valTotal = Math.round(Number(val) * GBA);
+            let valTotal = Math.round(Number(val) * GBA);  
             let textToBeTotal = `$${numberWithCommas(Number(valTotal))}`;        
             this.verifyCategoryTotal(textToBeTotal, enums.PRO_FORMA_TYPES.totalOperatingExpensesExTaxes);
         });
@@ -143,7 +143,7 @@ class ProFormaActions extends BaseActionsExt<typeof proFormaPage> {
 
     verifyPerUnitTOEexTaxesIncludeForecasts(): ProFormaActions {
         cy.get(`@${Alias.expenceForecastAliases.sumPerUnit}`).then(val => {
-            let valPerUnit = Number(val);
+            let valPerUnit = Math.round(Number(val));
             let textToBePerUnit = `$${numberWithCommas(valPerUnit)}`;
             this.verifyCategoryPerUnitTotal(textToBePerUnit, enums.PRO_FORMA_TYPES.totalOperatingExpensesExTaxes);
         });
@@ -154,10 +154,10 @@ class ProFormaActions extends BaseActionsExt<typeof proFormaPage> {
         cy.get(`@${Alias.expenceForecastAliases.sumPerSF}`).then(val => {
             this.Page.categoryCellTotal(enums.PRO_FORMA_TYPES.totalOperatingExpenses).invoke("text").then(totalText => {
                 this.Page.categoryCellTotal(enums.PRO_FORMA_TYPES.realEstateTaxes).invoke("text").then(taxesText => {
-                    let valTotal = Math.round(Number(val) * GBA); 
+                    let valTotal = Math.round(Number(val) * GBA);  
                     const totalNumberWithTaxes = getNumberFromDollarNumberWithCommas(totalText);
                     const taxesNumber = getNumberFromDollarNumberWithCommas(taxesText);
-                    const totalNumberWithoutTaxes = Math.round(totalNumberWithTaxes - taxesNumber);
+                    const totalNumberWithoutTaxes = Math.round(Number(totalNumberWithTaxes - taxesNumber));  
                     expect(valTotal).to.equal(totalNumberWithoutTaxes);
                 });
             });
@@ -187,7 +187,7 @@ class ProFormaActions extends BaseActionsExt<typeof proFormaPage> {
                     let valPerUnit = Math.round(Number(val));
                     const perUnitNumberWithTaxes = getNumberFromDollarNumberWithCommas(perUnitText);
                     const taxesNumber = getNumberFromDollarNumberWithCommas(taxesText);
-                    const perUnitNumberWithoutTaxes = Math.round(perUnitNumberWithTaxes - taxesNumber);
+                    const perUnitNumberWithoutTaxes = (perUnitNumberWithTaxes - taxesNumber).toFixed(0);
                     expect(valPerUnit).to.equal(perUnitNumberWithoutTaxes);
                 });
             });
@@ -200,11 +200,11 @@ class ProFormaActions extends BaseActionsExt<typeof proFormaPage> {
             this.Page.categoryCellTotal(enums.PRO_FORMA_TYPES.netOperatingIncome).invoke("text").then(totalIncome => {
                 this.Page.categoryCellTotal(enums.PRO_FORMA_TYPES.realEstateTaxes).invoke("text").then(taxesText => {
                     this.Page.categoryCellTotal(enums.PRO_FORMA_TYPES.effectiveGrossIncome).invoke("text").then(incomeText => {
-                        let valTotal = Math.round(Number(val) * GBA);
+                        let valTotal = Math.round(Number(val) * GBA);  
                         const totalNumberWithTaxes = getNumberFromDollarNumberWithCommas(totalIncome);
                         const taxesNumber = getNumberFromDollarNumberWithCommas(taxesText);
                         const incomeNumber = getNumberFromDollarNumberWithCommas(incomeText);
-                        const totalNumberWithoutTaxes = Math.round(incomeNumber - totalNumberWithTaxes - taxesNumber);
+                        const totalNumberWithoutTaxes = (incomeNumber - totalNumberWithTaxes - taxesNumber).toFixed(0);
                         expect(valTotal).to.equal(totalNumberWithoutTaxes);
                     });
                 });
@@ -240,7 +240,7 @@ class ProFormaActions extends BaseActionsExt<typeof proFormaPage> {
                         const perUnitNumberWithTaxes = getNumberFromDollarNumberWithCommas(perUnitIncome);
                         const taxesNumber = getNumberFromDollarNumberWithCommas(taxesText);
                         const incomeNumber = getNumberFromDollarNumberWithCommas(incomeText);
-                        const totalNumberWithoutTaxes = Math.round(incomeNumber - perUnitNumberWithTaxes - taxesNumber);
+                        const totalNumberWithoutTaxes = (incomeNumber - perUnitNumberWithTaxes - taxesNumber).toFixed(0);
                         expect(valPerUnit).to.equal(totalNumberWithoutTaxes);
                     });
                 });
