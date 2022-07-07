@@ -6,7 +6,7 @@ import testData from "../../../../fixtures/not_full_reports/profile_organization
 import enums from '../../../../enums/enums';
 import launchDarklyApi from '../../../../api/launchDarkly.api';
 
-describe("[QA-4727] Verify possibility to edit static text in-app", 
+describe("[QA-5382] Verify possibility to edit static text in-app", 
     { tags:[ "@organizations", "@settings", "@check_export" ] }, () => {
 
     before('', () => {
