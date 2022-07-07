@@ -8,6 +8,12 @@ export const ENVS = {
     prod: "https://app.boweryvaluation.com"
 };
 
+/**
+ * Evaluates Cypress' `baseUrl` with validators.
+ * 
+ * If you want to get `baseUrl` during test run - call `Cypress.config().baseUrl`
+ * @returns 
+ */
 export const evalUrl = (config: Cypress.PluginConfigOptions): string => {
     if(config.env.url == "custom"){
         return _validateCustomUrl(config.env.customUrl);
@@ -17,18 +23,24 @@ export const evalUrl = (config: Cypress.PluginConfigOptions): string => {
     }
 };
 
+/**
+ * Validates url according to available properties in ENVS object.
+ */
 const _validateUrl = (obj: object, key: string): string => {
     if(Object.keys(obj).includes(key)){
-        return obj[key];
+        return _trimSlash(obj[key]);
     }
     else {
-        throw new Error(`Key "${key}" in not defined in ENVS`);
+        throw new Error(`Key "${key}" in not defined in ENVS.`);
     }
 };
 
+/**
+ * Validates customUrl when `config.env.url` is `custom`.
+ */
 const _validateCustomUrl = (customUrl: string): string => {
     if(customUrl != undefined && (customUrl.indexOf("http://") == 0 || customUrl.indexOf("https://") == 0)){
-        return customUrl;
+        return _trimSlash(customUrl);
     }
     else {
         throw new Error(
@@ -37,3 +49,11 @@ const _validateCustomUrl = (customUrl: string): string => {
         );
     }
 };
+
+/**
+ * Trims `pathname` in link and return clear link.
+ * 
+ * Example: from `https://bowery-development.herokuapp.com/` -> to `https://bowery-development.herokuapp.com`
+ * @param str Url string
+ */
+const _trimSlash = (str: string) => new URL(str).origin; 

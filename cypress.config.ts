@@ -16,13 +16,16 @@ export default defineConfig({
   e2e: {
     // baseUrl is staging, but it will be reset downbelow
     baseUrl: ENVS.staging,
+    
     // We've imported your old cypress plugins here.
     // You may want to clean this up later by importing these.
     setupNodeEvents(on, config) {
-      console.log(config.env);
-
-
+      // setup and validate `baseUrl` in runtime
       config.baseUrl = evalUrl(config);
+
+      // ernst: don't remove, this is for debug in CI
+      // eslint-disable-next-line no-console
+      console.log(`\nBaseUrl is: ${config.baseUrl}\n`);
 
       // configuring cypress-grep plugin
       grepFilterPlugin(config);
