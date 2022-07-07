@@ -35,8 +35,8 @@ const commentariesFixture = (forecastPSFTotal: string, forecastPerUnitTotal: str
     };
 };
 
-const forecastPSFTotal = (psfToBe: string) => { return `$${psfToBe}`;};
-const forecastPerUnitTotal = (perUnitToBe: string) => { return `$${perUnitToBe}`;};
+const forecastPSFTotal = (psfToBe: string) => { return psfToBe === '0' ? '$0.00' : `$${psfToBe}`; };
+const forecastPerUnitTotal = (perUnitToBe: string) => { return perUnitToBe === '0' ? '$0' : `$${perUnitToBe}`; };
 
 function verifyTOEAppraisersValueLinePSF(grossBuildingArea: number, resUnits = 0, rooms = 0) {
     Income._ExpenseForecastActions.sumPSFTOEAppraisersForecast(grossBuildingArea, resUnits, rooms);
