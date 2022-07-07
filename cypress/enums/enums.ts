@@ -50,9 +50,9 @@ import menuLinksNamesEnum from "./menuLinksNames.enum";
 import rolesEnum from "./users/roles.enum";
 import boweryOfficesEnum from "./organization/boweryOffices.enum";
 import salesAdjustmentGridEnum from "./adjustComps/salesAdjustmentGrid.enum";
-import rowsMarketAdjustmentEnum from "./adjustComps/rows.marketAdjustment.enum";
 import reportStatusEnum from "./reportParams/reportStatus.enum";
 import bondTypesEnum from "./organization/bondTypes.enum";
+import rowsMarketAdjustmentEnum from "./adjustComps/rows.marketadjustment.enum";
 
 export default {
     TEMPLATE_TYPE: templateTypesEnum,
