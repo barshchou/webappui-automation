@@ -86,4 +86,8 @@ export default class PropertyInformationForm {
     get propertyIdTypeInput(){
         return cy.get('[data-qa="property-id-type"] input', { includeShadowDom:true });   
     }
+
+    get editContentArrow(){
+        return cy.get('[aria-controls="property_info_edit-content"]', { includeShadowDom: true });
+    }
 }

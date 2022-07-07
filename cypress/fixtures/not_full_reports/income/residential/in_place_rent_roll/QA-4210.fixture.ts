@@ -27,7 +27,7 @@ const rentRollResidentialUnitsFixture = () : BoweryReports.ResidentialUnit[] => 
 };
 
 export default {
-    sumCurrent: Enums.RENT_ROLL_OPTIONS_CHECKBOXS.summarize, 
+    sumCurrent: Enums.RENT_ROLL_OPTIONS_CHECKBOXES.summarize, 
     verifyExport: "test",
     residentialUnits: rentRollResidentialUnitsFixture(),
     verifyText: "Rent Roll Summary by Unit Type"
