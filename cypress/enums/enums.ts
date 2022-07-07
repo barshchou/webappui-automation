@@ -43,6 +43,8 @@ import rentTypesEnum from "./rent/rentTypes.enum";
 import usersEnum from "../enums/users/users.enum";
 import propertyConditionsEnum from "./property/propertyConditions.enum";
 import propertyConditionsRadiosEnum from "./property/propertyConditionsRadios.enum";
+import featureFlagKeys from "./featureFlags/featureFlagKeys.enum";
+import envLaunchDarkly from "./featureFlags/envLaunchDarkly.enum";
 import rentRollOptionsCheckboxsEnum from "./rent/rentRollOptionsCheckboxs.enum";
 import menuLinksNamesEnum from "./menuLinksNames.enum";
 import rolesEnum from "./users/roles.enum";
@@ -98,6 +100,8 @@ export default {
     USERS: usersEnum,
     PROPERTY_CONDITIONS: propertyConditionsEnum,
     PROPERTY_CONDITIONS_RADIOS: propertyConditionsRadiosEnum,
+    FEATURE_FLAG_KEYS: featureFlagKeys,
+    ENV_LAUNCH_DARKLY: envLaunchDarkly,
     RENT_ROLL_OPTIONS_CHECKBOXS: rentRollOptionsCheckboxsEnum,
     MENU_LINKS: menuLinksNamesEnum,
     USER_ROLES: rolesEnum,

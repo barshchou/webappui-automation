@@ -38,6 +38,7 @@ export enum Tag {
     propertyConditions = "@property_conditions",
     comp_summary = "@comp_summary",
     users = "@users",
+    feature_flag= "@feature_flag",
     report_status = "@report_status",
     appraiser = "@appraiser",
     settings = "@settings"
