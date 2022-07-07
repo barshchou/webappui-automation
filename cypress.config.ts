@@ -2,6 +2,7 @@ import { defineConfig } from 'cypress';
 import grepFilterPlugin from "cypress-grep/src/plugin";
 import { addMatchImageSnapshotPlugin } from '@simonsmith/cypress-image-snapshot/plugin';
 import api from "./cypress/api";
+import { ENVS, evalUrl } from './utils/env.utils';
 
 export default defineConfig({
   chromeWebSecurity: false,
@@ -13,9 +14,15 @@ export default defineConfig({
   videoUploadOnPasses: false,
   projectId: 'EDvaU4',
   e2e: {
+    // baseUrl is staging, but it will be reset downbelow
+    baseUrl: ENVS.staging,
     // We've imported your old cypress plugins here.
     // You may want to clean this up later by importing these.
     setupNodeEvents(on, config) {
+      console.log(config.env);
+
+
+      config.baseUrl = evalUrl(config);
 
       // configuring cypress-grep plugin
       grepFilterPlugin(config);
