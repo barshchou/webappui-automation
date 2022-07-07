@@ -3,6 +3,8 @@ import { _NavigationSection } from "../../../../actions/base";
 import { Income, Property } from "../../../../actions";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import expensesCardsNames from " ../../../cypress/enums/expense/expenseForecast.enum";
+// import { Alias } from "../../../../utils/alias.utils";
+
 
 describe(`[QA-5013] [QA-5025] [Income>Expense forecast] Selected existing expense card is included in calculation + is displayed in certain places `,
     { tags: [ "@income", "@expense_forecast" ] }, () => {
@@ -93,6 +95,7 @@ describe(`[QA-5013] [QA-5025] [Income>Expense forecast] Selected existing expens
             testData.expensesInProFormaByDefaultArray.forEach(element => {
                 Income._ProFormaActions.Page.categoryCellTotal(element).should('exist');
             });
+            
             _NavigationSection.navigateToExpenseForecast();
             Income._ExpenseForecastActions.totalSumForecastPSFAllCards(
                 testData.buildingDescription.grossArea,
@@ -104,9 +107,27 @@ describe(`[QA-5013] [QA-5025] [Income>Expense forecast] Selected existing expens
                     testData.numberOfResidentialUnits,
                     testData.rentRollResUnitFixture.rooms
                 );
+                cy.get(`@${Alias.expenceForecastAliases.sumPerSF}`).then(sumPerSF => {
+                    cy.get(`@${Alias.expenceForecastAliases.sumPerUnit}`).then(sumPerUnit => {
+        
+                        Income._ExpenseForecastActions.verifyTOECommentary(testData.commentaries(testData.forecastPSFTotal(Number(sumPerSF)), 
+                        testData.forecastPerUnitTotal(Number(sumPerUnit))).generated);
+                   
+                });
+            });
 
-cy.wait(30000)
 
+// Income._ExpenseForecastActions.verifyCommentGenerated( testData.buildingDescription.grossArea,
+//     testData.numberOfResidentialUnits,
+//     testData.rentRollResUnitFixture.rooms,
+//     testData.commentaries(testData.forecastPSFTotal(Number('@sumPerSF')), testData.forecastPerUnitTotal(Number('@sumPerUnit'))).generated
+//     );
+
+
+
+
+
+    cy.wait(30000)
       //      Income._ExpenseForecastActions.verifyTOECommentary(testData.commentaries(testData.forecastPSFTotal(0), testData.forecastPerUnitTotal(0)).generated);
          //   Income._ExpenseForecastActions.Page.toeAppraisersForecastValueLine.should('contain', testData.forecastPSFTotal(      ));
             Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastTotalFixture('unit'))

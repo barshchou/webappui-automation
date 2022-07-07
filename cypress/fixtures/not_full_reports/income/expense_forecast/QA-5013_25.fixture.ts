@@ -3,6 +3,8 @@ import proFormaTypes from "../../../../enums/proFormaTypes.enum";
 import Enums from "../../../../enums/enums";
 import { BoweryAutomation } from "../../../../types/boweryAutomation.type";
 import { BoweryReports } from "../../../../types/boweryReports.type";
+import { Alias } from "../../../../utils/alias.utils";
+import { Income, Property } from "../../../../actions";
 
 const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("5011_12", {
     incomeValue: Enums.INCOME_TYPE.both,
@@ -34,9 +36,24 @@ const commentariesFixture = (forecastPSFTotal, forecastPerUnitTotal) => {
     };
 };
 
-const _forecastPSFTotal = (psfToBe: number) => {return psfToBe === 0? '$0.00' : `$${psfToBe}`;};
+const _forecastPSFTotal = (psfToBe: number | string) => {return psfToBe === 0? '$0.00' : `$${psfToBe}`;};
 //const _forecastPerUnitTotal = '$0';
-const _forecastPerUnitTotal = (perUnitToBe: number) => {return perUnitToBe === 0? '$0' : `$${perUnitToBe}`;}; 
+const _forecastPerUnitTotal = (perUnitToBe: number | string) => {return perUnitToBe === 0? '$0' : `$${perUnitToBe}`;}; 
+
+
+function verifyCommentGenerated (GBA = 0, resUnits = 0, rooms = 0, textToBe: string): ExpenseForecastActions {
+    Income._ExpenseForecastActions.totalSumForecastPSFAllCards(GBA, resUnits, rooms);
+    Income._ExpenseForecastActions.totalSumForecastPerUnitAllCards(GBA, resUnits, rooms);
+    cy.get(`@${Alias.expenceForecastAliases.sumPerSF}`).then(sumPerSF => {
+        cy.get(`@${Alias.expenceForecastAliases.sumPerUnit}`).then(sumPerUnit => {
+
+            this.verifyTOECommentary(textToBe)
+       
+    });
+});
+    return this;
+}
+
 
 const _expensesInProFormaByDefaultArray = [
     proFormaTypes.insurance,

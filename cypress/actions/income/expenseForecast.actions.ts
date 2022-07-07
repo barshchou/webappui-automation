@@ -528,6 +528,7 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
         return this;
     }
 
+   
 }
 
 export default new ExpenseForecastActions(expenseForecastPage);
