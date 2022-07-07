@@ -24,7 +24,7 @@ export namespace BoweryReports {
         isSalesForcePull?: isSalesForcePull
     }
     export type RentType = typeof Enums.RENT_TYPE[KeyInfo.RentTypeKeys]
-    export type RentRollOptionsCheckboxsType = typeof Enums.RENT_ROLL_OPTIONS_CHECKBOXS[KeyInfo.RentRollOptionsCheckboxsKeys]
+    export type RentRollOptionsCheckboxesType = typeof Enums.RENT_ROLL_OPTIONS_CHECKBOXES[KeyInfo.RentRollOptionsCheckboxesKeys]
     export type ChipsCreationOptions = {
         block?: string,
         buildingName?: string,

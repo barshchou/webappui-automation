@@ -9,7 +9,7 @@ const _leaseStatusesMixed: BoweryReports.LeaseStatus[] = [ "Vacant", "Occupied" 
 const _leaseStatusesVacant: BoweryReports.LeaseStatus[] = [ "Vacant", "Vacant" ];
 const _leaseStatusesOccupied: BoweryReports.LeaseStatus[] = [ "Occupied", "Occupied" ];
 const _leaseDate = "01012022";
-const _compGroup = "QA_4576_Comp_Group";
+const _compGroup = "QA_4586_Comp_Group";
 const _monthly = "monthly" as BoweryReports.UnitsOfMeasure;
 const _marketRentConclusion = 333;
 

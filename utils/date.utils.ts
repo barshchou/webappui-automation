@@ -70,6 +70,23 @@ export const getQuarter = (dateString: string, isPlusQuarter = false, numberOfQu
     }
 };
 
+export const getPreviousQuarterFromQuarter = (quarter: string) => {
+    if (isCorrectQuarter(quarter)) {
+        switch (quarter) {
+            case "Q1":
+                return "Q4";
+            case "Q2":
+                return "Q1";
+            case "Q3":
+                return "Q2";
+            case "Q4":
+                return "Q3";
+        }
+    } else {
+        throw new Error("You've entered incorrect quarter");
+    }
+};
+
 export const getCurrentMonthName = (): string => {
     const date = new Date();
     return date.toDateString();

@@ -21,6 +21,6 @@ export default {
     numberOfUnits: 2,
     rentType: "Market Rate",
     numberOfBedrooms: 5,
-    includePerRoomCheckbox: Enums.RENT_ROLL_OPTIONS_CHECKBOXS.include,
+    includePerRoomCheckbox: Enums.RENT_ROLL_OPTIONS_CHECKBOXES.include,
     formData: Object.freeze(formDataFixture())
 };

@@ -66,9 +66,12 @@ class FindCompsPage extends BasePage {
     get importReportCompsButton() {return this.importCompModal.find("span").contains("Import")
         .parent("button");}
 
-    get searchButton() {return cy.get("button.searchButton-3-4-2", { includeShadowDom: true });}
+    get searchButton() {return cy.contains("Report Unique ID", { includeShadowDom: true })
+    .next().find("button", { includeShadowDom: true });}
 
-    get importCompsSelectButtons() {return cy.contains("Selected for report", { includeShadowDom: true }).siblings("button[.='Select']");}
+    get importCompsSelectButtons() {return cy.contains("Selected for report", { includeShadowDom: true })
+    .siblings('div')
+    .find('[data-qa="sales-comp-item-add-btn"]', { includeShadowDom: true });}
 
     get createCompSearchResults() {return cy.get("[data-qa=search-result-form] tbody tr", { includeShadowDom: true });}
 

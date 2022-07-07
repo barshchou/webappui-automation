@@ -1,5 +1,5 @@
-import rowsMarketadjustmentEnum from "../../../../enums/adjustComps/rows.marketadjustment.enum";
-import salesadjustmentgridEnum from "../../../../enums/adjustComps/salesadjustmentgrid.enum";
+import rowsMarketadjustmentEnum from "../../../../enums/adjustComps/marketadjustment.enum";
+import salesadjustmentgridEnum from "../../../../enums/adjustComps/salesadjustment.enum";
 import Enums from "../../../../enums/enums";
 import { BoweryReports } from "../../../../types/boweryReports.type";
 import ReportDataCreator from "../../../data_creator/reportData.creator";
