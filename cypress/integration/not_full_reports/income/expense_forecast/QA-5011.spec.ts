@@ -4,20 +4,14 @@ import { Income, Property } from "../../../../actions";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import expensesCardsNames from " ../../../cypress/enums/expense/expenseForecast.enum";
 
-describe(`[QA-5011] [QA-5012] [Income>Expense forecast] Unselected existing expense card is not included in calculation + is not displayed in certain places `,
+describe(`[QA-5011] [Income>Expense forecast] Unselected existing expense card is not displayed in certain places `,
     { tags: [ "@income", "@expense_forecast" ] }, () => {
 
         before("Login, create report", () => {
-            Cypress.config('numTestsKeptInMemory', 0);
             createReport(testData.reportCreationData);
-            cy.saveLocalStorage();
         });
 
-        beforeEach(() => {
-            cy.restoreLocalStorage();
-        });
-
-        it("[QA-5011]", function () {
+        it("Test body", function () {
 
             cy.stepInfo(`1. Go to Property > Summary and add residential and commertial units`);
             _NavigationSection.navigateToPropertySummary();
@@ -136,124 +130,6 @@ describe(`[QA-5011] [QA-5012] [Income>Expense forecast] Unselected existing expe
                 .verifyTOECommentary(testData.commentaries.generated);
             Income._ExpenseForecastActions.Page.toeAppraisersForecastValueLine.should('contain', testData.forecastPerUnitNotIncluded);
             Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastTotalFixture('sf'));
-        });
-
-        it("[QA-5012]", () => {
-
-            cy.stepInfo(`1. Verify If “Include Expense on Pro Forma”  checkbox is unselected but there is 
-                         data left in the forecast, this data is not included in calculations on Pro forma and Expense forecast page 
-                         (Per Unit measure + Full Appraiser's forecasts)`);
-            Income._ExpenseForecastActions.totalSumForecastPSFAllCards(
-                testData.buildingDescription.grossArea,
-                testData.numberOfResidentialUnits,
-                testData.rentRollResUnitFixture.rooms
-            )
-                .totalSumForecastPerUnitAllCards(
-                    testData.buildingDescription.grossArea,
-                    testData.numberOfResidentialUnits,
-                    testData.rentRollResUnitFixture.rooms
-                );
-            _NavigationSection.navigateToProForma();
-            Income._ProFormaActions.verifyTotalTOEexTaxesIncludeForecasts(testData.buildingDescription.grossArea)
-                .verifyPsfTOEexTaxesIncludeForecasts()
-                .verifyPerUnitTOEexTaxesIncludeForecasts()
-                .verifyTotalTOEIncludeForecasts(testData.buildingDescription.grossArea)
-                .verifyPsfTOEIncludeForecasts()
-                .verifyPerUnitTOEIncludeForecasts()
-                .verifyTotalNOIIncludeForecasts(testData.buildingDescription.grossArea)
-                .verifyPsfNOIIncludeForecasts()
-                .verifyPerUnitNOIIncludeForecasts();
-            _NavigationSection.navigateToExpenseForecast();
-            Income._ExpenseForecastActions.verifyTotalForecastPSF(
-                testData.buildingDescription.grossArea,
-                testData.numberOfResidentialUnits,
-                testData.rentRollResUnitFixture.rooms
-            )
-                .chooseForecastItemBasis(testData.expenseForecastTotalFixture('unit'))
-                .verifyTotalForecastPerUnit(
-                    testData.buildingDescription.grossArea,
-                    testData.numberOfResidentialUnits,
-                    testData.rentRollResUnitFixture.rooms
-                );
-
-            cy.stepInfo(`2. Verify If “Include Expense on Pro Forma” checkbox is unselected but there is 
-                        data left in the forecast, this data is not included in calculations on Pro forma and Expense forecast page 
-                        (PSF measure + Full Appraiser's forecasts)`);
-            testData.expenseForecastFixtureArray("sf").forEach(element => {
-                Income._ExpenseForecastActions.chooseForecastItemBasis(element);
-            });
-            Income._ExpenseForecastActions.totalSumForecastPSFAllCards(
-                testData.buildingDescription.grossArea,
-                testData.numberOfResidentialUnits,
-                testData.rentRollResUnitFixture.rooms
-            )
-                .totalSumForecastPerUnitAllCards(
-                    testData.buildingDescription.grossArea,
-                    testData.numberOfResidentialUnits,
-                    testData.rentRollResUnitFixture.rooms
-                );
-            _NavigationSection.navigateToProForma();
-            Income._ProFormaActions.verifyTotalTOEexTaxesIncludeForecasts(testData.buildingDescription.grossArea)
-                .verifyPsfTOEexTaxesIncludeForecasts()
-                .verifyPerUnitTOEexTaxesIncludeForecasts()
-                .verifyTotalTOEIncludeForecasts(testData.buildingDescription.grossArea)
-                .verifyPsfTOEIncludeForecasts()
-                .verifyPerUnitTOEIncludeForecasts()
-                .verifyTotalNOIIncludeForecasts(testData.buildingDescription.grossArea)
-                .verifyPsfNOIIncludeForecasts()
-                .verifyPerUnitNOIIncludeForecasts();
-            _NavigationSection.navigateToExpenseForecast();
-            Income._ExpenseForecastActions.verifyTotalForecastPerUnit(
-                testData.buildingDescription.grossArea,
-                testData.numberOfResidentialUnits,
-                testData.rentRollResUnitFixture.rooms
-            )
-                .chooseForecastItemBasis(testData.expenseForecastTotalFixture('sf'))
-                .verifyTotalForecastPSF(
-                    testData.buildingDescription.grossArea,
-                    testData.numberOfResidentialUnits,
-                    testData.rentRollResUnitFixture.rooms
-                );
-
-            cy.stepInfo(`3. Verify If “Include Expense on Pro Forma”  checkbox is unselected but there is 
-                         data left in the forecast, this data is not included in calculations on Pro forma and Expense forecast page 
-                         (Per Room measure for Fuel + Full Appraiser's forecasts)`);
-                         
-                         //BECAUSE OF BUG
-            // Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastFuelFixture('room'));
-            // Income._ExpenseForecastActions.totalSumForecastPSFAllCards(
-            //     testData.buildingDescription.grossArea,
-            //     testData.numberOfResidentialUnits,
-            //     testData.rentRollResUnitFixture.rooms
-            // )
-            //     .totalSumForecastPerUnitAllCards(
-            //         testData.buildingDescription.grossArea,
-            //         testData.numberOfResidentialUnits,
-            //         testData.rentRollResUnitFixture.rooms
-            //     );
-            // _NavigationSection.navigateToProForma();
-            // Income._ProFormaActions.verifyTotalTOEexTaxesIncludeForecasts(testData.buildingDescription.grossArea)
-            //     .verifyPsfTOEexTaxesIncludeForecasts()
-            //     .verifyPerUnitTOEexTaxesIncludeForecasts()
-            //     .verifyTotalTOEIncludeForecasts(testData.buildingDescription.grossArea)
-            //     .verifyPsfTOEIncludeForecasts()
-            //     .verifyPerUnitTOEIncludeForecasts()
-            //     .verifyTotalNOIIncludeForecasts(testData.buildingDescription.grossArea)
-            //     .verifyPsfNOIIncludeForecasts()
-            //     .verifyPerUnitNOIIncludeForecasts();
-            // _NavigationSection.navigateToExpenseForecast();
-            // Income._ExpenseForecastActions.verifyTotalForecastPSF(
-            //     testData.buildingDescription.grossArea,
-            //     testData.numberOfResidentialUnits,
-            //     testData.rentRollResUnitFixture.rooms
-            // )
-            //     .chooseForecastItemBasis(testData.expenseForecastTotalFixture('unit'))
-            //     .verifyTotalForecastPerUnit(
-            //         testData.buildingDescription.grossArea,
-            //         testData.numberOfResidentialUnits,
-            //         testData.rentRollResUnitFixture.rooms
-            //     );
-
             deleteReport(testData.reportCreationData.reportNumber);
         });
     });
