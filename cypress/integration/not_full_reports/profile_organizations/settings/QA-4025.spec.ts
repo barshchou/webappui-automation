@@ -4,7 +4,7 @@ import testData from "../../../../fixtures/not_full_reports/profile_organization
 import enums from '../../../../enums/enums';
 import { loginAction } from '../../../../actions/base/baseTest.actions';
 
-describe("", 
+describe("Verify bond rates UI against API", 
     { tags:[ "@organizations", "@settings" ] }, () => {
 
     it("[QA-4025] Check the Survey of Competitive Rates Discussion with it's logic", () => {
