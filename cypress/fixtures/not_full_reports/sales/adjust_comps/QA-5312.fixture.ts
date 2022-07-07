@@ -1,4 +1,4 @@
-import rowsMarketadjustmentEnum from "../../../../enums/adjustComps/rows.marketAdjustment.enum";
+import rowsMarketadjustmentEnum from "../../../../enums/adjustComps/marketadjustment.enum";
 import salesadjustmentgridEnum from "../../../../enums/adjustComps/salesAdjustmentGrid.enum";
 import Enums from "../../../../enums/enums";
 import { BoweryReports } from "../../../../types/boweryReports.type";
