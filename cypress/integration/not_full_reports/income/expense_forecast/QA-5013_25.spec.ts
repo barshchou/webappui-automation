@@ -94,7 +94,20 @@ describe(`[QA-5013] [QA-5025] [Income>Expense forecast] Selected existing expens
                 Income._ProFormaActions.Page.categoryCellTotal(element).should('exist');
             });
             _NavigationSection.navigateToExpenseForecast();
-      //      Income._ExpenseForecastActions.verifyTOECommentary(testData.commentaries.generated);
+            Income._ExpenseForecastActions.totalSumForecastPSFAllCards(
+                testData.buildingDescription.grossArea,
+                testData.numberOfResidentialUnits,
+                testData.rentRollResUnitFixture.rooms
+            )
+                .totalSumForecastPerUnitAllCards(
+                    testData.buildingDescription.grossArea,
+                    testData.numberOfResidentialUnits,
+                    testData.rentRollResUnitFixture.rooms
+                );
+
+cy.wait(30000)
+
+      //      Income._ExpenseForecastActions.verifyTOECommentary(testData.commentaries(testData.forecastPSFTotal(0), testData.forecastPerUnitTotal(0)).generated);
          //   Income._ExpenseForecastActions.Page.toeAppraisersForecastValueLine.should('contain', testData.forecastPSFTotal(      ));
             Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastTotalFixture('unit'))
        //         .verifyTOECommentary(testData.commentaries.generated);
