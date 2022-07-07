@@ -3,8 +3,7 @@ import proFormaTypes from "../../../../enums/proFormaTypes.enum";
 import Enums from "../../../../enums/enums";
 import { BoweryAutomation } from "../../../../types/boweryAutomation.type";
 import { BoweryReports } from "../../../../types/boweryReports.type";
-import { Alias } from "../../../../utils/alias.utils";
-import { Income, Property } from "../../../../actions";
+import { Income } from "../../../../actions";
 
 const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("5011_12", {
     incomeValue: Enums.INCOME_TYPE.both,
@@ -26,7 +25,7 @@ const rentRollResidentialUnitFixture = (): BoweryReports.ResidentialUnit => {
     };
 };
 
-const commentariesFixture = (forecastPSFTotal, forecastPerUnitTotal) => {
+const commentariesFixture = (forecastPSFTotal: string, forecastPerUnitTotal: string) => {
     return {
         generated: `Operating expenses, exclusive of real estate taxes, were forecasted at ${forecastPSFTotal} per square foot and ${forecastPerUnitTotal} per unit. ` +
             `Excluding real estate taxes, the comparables ranged from Comp totals map psf min to Comp totals map psf max per square foot and Comp totals map unit min to ` +
@@ -36,28 +35,35 @@ const commentariesFixture = (forecastPSFTotal, forecastPerUnitTotal) => {
     };
 };
 
-const _forecastPSFTotal = (psfToBe: number | string) => {return psfToBe === 0? '$0.00' : `$${psfToBe}`;};
-//const _forecastPerUnitTotal = '$0';
-const _forecastPerUnitTotal = (perUnitToBe: number | string) => {return perUnitToBe === 0? '$0' : `$${perUnitToBe}`;}; 
+const forecastPSFTotal = (psfToBe: number | string) => { return psfToBe === 0 ? '$0.00' : `$${psfToBe}`; };
+const forecastPerUnitTotal = (perUnitToBe: number | string) => { return perUnitToBe === 0 ? '$0' : `$${perUnitToBe}`; };
 
-
-function verifyCommentGenerated (GBA: number, resUnits = 0, rooms = 0) {
-    Income._ExpenseForecastActions.totalSumForecastPSFAllCards(GBA, resUnits, rooms);
-    Income._ExpenseForecastActions.totalSumForecastPerUnitAllCards(GBA, resUnits, rooms);
-    cy.get(`@${Alias.expenceForecastAliases.sumPerSF}`).then(sumPerSF => {
-        cy.get(`@${Alias.expenceForecastAliases.sumPerUnit}`).then(sumPerUnit => {
-         let sumPerSFInComment =  Math.round(Number(sumPerSF));
-         let sumPerUnitInComment =  Math.round(Number(sumPerUnit));
-
-           let textToBe = String(commentariesFixture(sumPerSFInComment, sumPerUnitInComment));
-            Income._ExpenseForecastActions.verifyTOECommentary(textToBe);
-            
-       
+function verifyTOEAppraisersValueLinePSF(GBA: number, resUnits = 0, rooms = 0) {
+    Income._ExpenseForecastActions.sumPSFTOEAppraisersForecast(GBA, resUnits, rooms);
+    cy.get(`@sumPSFTOEAppraisersForecast`).then(sumPSFTOEAppraisersForecast => {
+        Income._ExpenseForecastActions.Page.toeAppraisersForecastValueLine.should('contain', forecastPSFTotal(String(sumPSFTOEAppraisersForecast)));
     });
-});
-    return verifyCommentGenerated;
+    return this;
 }
 
+function verifyTOEAppraisersValueLinePerUnit(GBA: number, resUnits = 0, rooms = 0) {
+    Income._ExpenseForecastActions.sumPerUnitTOEAppraisersForecast(GBA, resUnits, rooms);
+    cy.get(`@sumPerUnitTOEAppraisersForecast`).then(sumPerUnitTOEAppraisersForecast => {
+        Income._ExpenseForecastActions.Page.toeAppraisersForecastValueLine.should('contain', forecastPSFTotal(String(sumPerUnitTOEAppraisersForecast)));
+    });
+    return this;
+}
+
+function verifyTOECommentGenerated(GBA: number, resUnits = 0, rooms = 0) {
+    Income._ExpenseForecastActions.sumsInGeneratedComment(GBA, resUnits, rooms);
+    cy.get(`@sumPerSFInComment`).then(sumPerSFInComment => {
+        cy.get(`@sumPerUnitInComment`).then(sumPerUnitInComment => {
+            let textToBe = commentariesFixture(String(sumPerSFInComment), String(sumPerUnitInComment)).generated;
+            Income._ExpenseForecastActions.verifyTOECommentary(textToBe);
+        });
+    });
+    return this;
+}
 
 const _expensesInProFormaByDefaultArray = [
     proFormaTypes.insurance,
@@ -192,9 +198,11 @@ export default {
     numberOfCommercialUnits: _numberOfCommercialUnits,
     expenseForecastFixtureArray,
     commentaries: Object.freeze(commentariesFixture),
-    forecastPSFTotal: _forecastPSFTotal,
-    forecastPerUnitTotal: _forecastPerUnitTotal,
+    forecastPSFTotal,
+    forecastPerUnitTotal,
     rentRollResUnitFixture: rentRollResidentialUnitFixture(),
     perRoomAnalysis: "Include Per Room Analysis in Report",
-    verifyCommentGenerated,
+    verifyTOECommentGenerated,
+    verifyTOEAppraisersValueLinePSF,
+    verifyTOEAppraisersValueLinePerUnit,
 };

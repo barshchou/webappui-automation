@@ -3,11 +3,10 @@ import { _NavigationSection } from "../../../../actions/base";
 import { Income, Property } from "../../../../actions";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import expensesCardsNames from " ../../../cypress/enums/expense/expenseForecast.enum";
-// import { Alias } from "../../../../utils/alias.utils";
 
 
 describe(`[QA-5013] [QA-5025] [Income>Expense forecast] Selected existing expense card is included in calculation + is displayed in certain places `,
-    { tags: [ "@income", "@expense_forecast" ] }, () => {
+    { tags: ["@income", "@expense_forecast"] }, () => {
 
         before("Login, create report", () => {
             Cypress.config('numTestsKeptInMemory', 0);
@@ -44,11 +43,20 @@ describe(`[QA-5013] [QA-5025] [Income>Expense forecast] Selected existing expens
                 Income._ProFormaActions.Page.categoryCellTotal(element).should('exist');
             });
             _NavigationSection.navigateToExpenseForecast();
-            Income._ExpenseForecastActions.verifyTOECommentary(testData.commentaries(testData.forecastPSFTotal(0), testData.forecastPerUnitTotal(0)).generated);
-            Income._ExpenseForecastActions.Page.toeAppraisersForecastValueLine.should('contain', testData.forecastPSFTotal(0));
-            Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastTotalFixture('unit'))
-                .verifyTOECommentary(testData.commentaries(testData.forecastPSFTotal(0), testData.forecastPerUnitTotal(0)).generated);
-            Income._ExpenseForecastActions.Page.toeAppraisersForecastValueLine.should('contain', testData.forecastPerUnitTotal(0));
+            testData.verifyTOECommentGenerated(testData.buildingDescription.grossArea,
+                testData.numberOfResidentialUnits,
+                testData.rentRollResUnitFixture.rooms,
+            ).
+                verifyTOEAppraisersValueLinePSF(testData.buildingDescription.grossArea,
+                    testData.numberOfResidentialUnits,
+                    testData.rentRollResUnitFixture.rooms);
+            Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastTotalFixture('unit'));
+            testData.verifyTOECommentGenerated(testData.buildingDescription.grossArea,
+                testData.numberOfResidentialUnits,
+                testData.rentRollResUnitFixture.rooms).
+                verifyTOEAppraisersValueLinePerUnit(testData.buildingDescription.grossArea,
+                    testData.numberOfResidentialUnits,
+                    testData.rentRollResUnitFixture.rooms);
             Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastTotalFixture('sf'));
 
             cy.stepInfo(`3. Verify if “Include Expense on Pro Forma” is selected -> this  expense category 
@@ -62,28 +70,47 @@ describe(`[QA-5013] [QA-5025] [Income>Expense forecast] Selected existing expens
                 Income._ProFormaActions.Page.categoryCellTotal(element).should('exist');
             });
             _NavigationSection.navigateToExpenseForecast();
-            Income._ExpenseForecastActions.verifyTOECommentary(testData.commentaries(testData.forecastPSFTotal(0), testData.forecastPerUnitTotal(0)).generated);
-            Income._ExpenseForecastActions.Page.toeAppraisersForecastValueLine.should('contain', testData.forecastPSFTotal(0));
-            Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastTotalFixture('unit'))
-                .verifyTOECommentary(testData.commentaries(testData.forecastPSFTotal(0), testData.forecastPerUnitTotal(0)).generated);
-            Income._ExpenseForecastActions.Page.toeAppraisersForecastValueLine.should('contain', testData.forecastPerUnitTotal(0));
+            testData.verifyTOECommentGenerated(testData.buildingDescription.grossArea,
+                testData.numberOfResidentialUnits,
+                testData.rentRollResUnitFixture.rooms,
+            ).
+                verifyTOEAppraisersValueLinePSF(testData.buildingDescription.grossArea,
+                    testData.numberOfResidentialUnits,
+                    testData.rentRollResUnitFixture.rooms);
+            Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastTotalFixture('unit'));
+            testData.verifyTOECommentGenerated(testData.buildingDescription.grossArea,
+                testData.numberOfResidentialUnits,
+                testData.rentRollResUnitFixture.rooms).
+                verifyTOEAppraisersValueLinePerUnit(testData.buildingDescription.grossArea,
+                    testData.numberOfResidentialUnits,
+                    testData.rentRollResUnitFixture.rooms);
             Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastTotalFixture('sf'));
 
             cy.stepInfo(`4. Verify if “Include Expense on Pro Forma” is selected -> this  expense category 
                          is displayed in the Pro Forma page > Operating Expenses section and is displayed 
                          in the Expense Forecast page > Total operating expenses card and generated comment (Per Room measure for Fuel + Empty Appraiser's forecasts)`);
-            Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastFuelFixture('room'));
-            _NavigationSection.navigateToProForma();
-            testData.expensesInProFormaByDefaultArray.forEach(element => {
-                Income._ProFormaActions.Page.categoryCellTotal(element).should('exist');
-            });
-            _NavigationSection.navigateToExpenseForecast();
-            Income._ExpenseForecastActions.verifyTOECommentary(testData.commentaries(testData.forecastPSFTotal(0), testData.forecastPerUnitTotal(0)).generated);
-            Income._ExpenseForecastActions.Page.toeAppraisersForecastValueLine.should('contain', testData.forecastPSFTotal(0));
-            Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastTotalFixture('unit'))
-                .verifyTOECommentary(testData.commentaries(testData.forecastPSFTotal(0), testData.forecastPerUnitTotal(0)).generated);
-            Income._ExpenseForecastActions.Page.toeAppraisersForecastValueLine.should('contain', testData.forecastPerUnitTotal(0));
-            Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastTotalFixture('sf'));
+            // Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastFuelFixture('room'));
+            // _NavigationSection.navigateToProForma();
+            // testData.expensesInProFormaByDefaultArray.forEach(element => {
+            //     Income._ProFormaActions.Page.categoryCellTotal(element).should('exist');
+            // });
+            // _NavigationSection.navigateToExpenseForecast();
+
+            // testData.verifyTOECommentGenerated(testData.buildingDescription.grossArea,
+            //     testData.numberOfResidentialUnits,
+            //     testData.rentRollResUnitFixture.rooms,
+            //     ).
+            //     verifyTOEAppraisersValueLinePSF(testData.buildingDescription.grossArea,
+            //         testData.numberOfResidentialUnits,
+            //         testData.rentRollResUnitFixture.rooms);
+            // Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastTotalFixture('unit'));
+            // testData.verifyTOECommentGenerated(testData.buildingDescription.grossArea,
+            //     testData.numberOfResidentialUnits,
+            //     testData.rentRollResUnitFixture.rooms).
+            //     verifyTOEAppraisersValueLinePerUnit(testData.buildingDescription.grossArea,
+            //         testData.numberOfResidentialUnits,
+            //         testData.rentRollResUnitFixture.rooms);
+            // Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastTotalFixture('sf'));
 
             cy.stepInfo(`5. Verify if “Include Expense on Pro Forma” is selected -> this  expense category 
                          is displayed in the Pro Forma page > Operating Expenses section and is displayed in the 
@@ -95,48 +122,21 @@ describe(`[QA-5013] [QA-5025] [Income>Expense forecast] Selected existing expens
             testData.expensesInProFormaByDefaultArray.forEach(element => {
                 Income._ProFormaActions.Page.categoryCellTotal(element).should('exist');
             });
-            
             _NavigationSection.navigateToExpenseForecast();
-            testData.verifyCommentGenerated(testData.buildingDescription.grossArea,
+            testData.verifyTOECommentGenerated(testData.buildingDescription.grossArea,
                 testData.numberOfResidentialUnits,
-                testData.rentRollResUnitFixture.rooms);
-
-            // Income._ExpenseForecastActions.totalSumForecastPSFAllCards(
-            //     testData.buildingDescription.grossArea,
-            //     testData.numberOfResidentialUnits,
-            //     testData.rentRollResUnitFixture.rooms
-            // )
-            //     .totalSumForecastPerUnitAllCards(
-            //         testData.buildingDescription.grossArea,
-            //         testData.numberOfResidentialUnits,
-            //         testData.rentRollResUnitFixture.rooms
-            //     );
-            //     cy.get(`@${Alias.expenceForecastAliases.sumPerSF}`).then(sumPerSF => {
-            //         cy.get(`@${Alias.expenceForecastAliases.sumPerUnit}`).then(sumPerUnit => {
-        
-            //             Income._ExpenseForecastActions.verifyTOECommentary(testData.commentaries(testData.forecastPSFTotal(Number(sumPerSF)), 
-            //             testData.forecastPerUnitTotal(Number(sumPerUnit))).generated);
-                   
-            //     });
-            // });
-
-
-// Income._ExpenseForecastActions.verifyCommentGenerated( testData.buildingDescription.grossArea,
-//     testData.numberOfResidentialUnits,
-//     testData.rentRollResUnitFixture.rooms,
-//     testData.commentaries(testData.forecastPSFTotal(Number('@sumPerSF')), testData.forecastPerUnitTotal(Number('@sumPerUnit'))).generated
-//     );
-
-
-
-
-
-    cy.wait(30000)
-      //      Income._ExpenseForecastActions.verifyTOECommentary(testData.commentaries(testData.forecastPSFTotal(0), testData.forecastPerUnitTotal(0)).generated);
-         //   Income._ExpenseForecastActions.Page.toeAppraisersForecastValueLine.should('contain', testData.forecastPSFTotal(      ));
+                testData.rentRollResUnitFixture.rooms,
+            ).
+                verifyTOEAppraisersValueLinePSF(testData.buildingDescription.grossArea,
+                    testData.numberOfResidentialUnits,
+                    testData.rentRollResUnitFixture.rooms);
             Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastTotalFixture('unit'))
-       //         .verifyTOECommentary(testData.commentaries.generated);
-       //     Income._ExpenseForecastActions.Page.toeAppraisersForecastValueLine.should('contain', testData.forecastPerUnitTotal(   ));
+            testData.verifyTOECommentGenerated(testData.buildingDescription.grossArea,
+                testData.numberOfResidentialUnits,
+                testData.rentRollResUnitFixture.rooms).
+                verifyTOEAppraisersValueLinePerUnit(testData.buildingDescription.grossArea,
+                    testData.numberOfResidentialUnits,
+                    testData.rentRollResUnitFixture.rooms);
             Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastTotalFixture('sf'));
 
             cy.stepInfo(`6. Verify if “Include Expense on Pro Forma” is selected -> this  expense category 
@@ -150,11 +150,20 @@ describe(`[QA-5013] [QA-5025] [Income>Expense forecast] Selected existing expens
                 Income._ProFormaActions.Page.categoryCellTotal(element).should('exist');
             });
             _NavigationSection.navigateToExpenseForecast();
-      //      Income._ExpenseForecastActions.verifyTOECommentary(testData.commentaries.generated);
-         //   Income._ExpenseForecastActions.Page.toeAppraisersForecastValueLine.should('contain', testData.forecastPSFTotal(      ));
-            Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastTotalFixture('unit'))
-       //         .verifyTOECommentary(testData.commentaries.generated);
-           // Income._ExpenseForecastActions.Page.toeAppraisersForecastValueLine.should('contain', testData.forecastPerUnitTotal(   ));
+            testData.verifyTOECommentGenerated(testData.buildingDescription.grossArea,
+                testData.numberOfResidentialUnits,
+                testData.rentRollResUnitFixture.rooms,
+            ).
+                verifyTOEAppraisersValueLinePSF(testData.buildingDescription.grossArea,
+                    testData.numberOfResidentialUnits,
+                    testData.rentRollResUnitFixture.rooms);
+            Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastTotalFixture('unit'));
+            testData.verifyTOECommentGenerated(testData.buildingDescription.grossArea,
+                testData.numberOfResidentialUnits,
+                testData.rentRollResUnitFixture.rooms).
+                verifyTOEAppraisersValueLinePerUnit(testData.buildingDescription.grossArea,
+                    testData.numberOfResidentialUnits,
+                    testData.rentRollResUnitFixture.rooms);
             Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastTotalFixture('sf'));
 
             cy.stepInfo(`7. Verify if “Include Expense on Pro Forma” is selected -> this  expense category 
@@ -168,11 +177,20 @@ describe(`[QA-5013] [QA-5025] [Income>Expense forecast] Selected existing expens
                 Income._ProFormaActions.Page.categoryCellTotal(element).should('exist');
             });
             _NavigationSection.navigateToExpenseForecast();
-    //        Income._ExpenseForecastActions.verifyTOECommentary(testData.commentaries.generated);
-           // Income._ExpenseForecastActions.Page.toeAppraisersForecastValueLine.should('contain', testData.forecastPSFTotal(      ));
-            Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastTotalFixture('unit'))
-   //             .verifyTOECommentary(testData.commentaries.generated);
-         //   Income._ExpenseForecastActions.Page.toeAppraisersForecastValueLine.should('contain', testData.forecastPerUnitTotal(   ));
+            testData.verifyTOECommentGenerated(testData.buildingDescription.grossArea,
+                testData.numberOfResidentialUnits,
+                testData.rentRollResUnitFixture.rooms,
+            ).
+                verifyTOEAppraisersValueLinePSF(testData.buildingDescription.grossArea,
+                    testData.numberOfResidentialUnits,
+                    testData.rentRollResUnitFixture.rooms);
+            Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastTotalFixture('unit'));
+            testData.verifyTOECommentGenerated(testData.buildingDescription.grossArea,
+                testData.numberOfResidentialUnits,
+                testData.rentRollResUnitFixture.rooms).
+                verifyTOEAppraisersValueLinePerUnit(testData.buildingDescription.grossArea,
+                    testData.numberOfResidentialUnits,
+                    testData.rentRollResUnitFixture.rooms);
             Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastTotalFixture('sf'));
         });
 
@@ -256,8 +274,8 @@ describe(`[QA-5013] [QA-5025] [Income>Expense forecast] Selected existing expens
             cy.stepInfo(`3. Verify If “Include Expense on Pro Forma”  checkbox is selected but there is 
                          data left in the forecast, this data is included in calculations on Pro forma and Expense forecast page 
                          (Per Room measure for Fuel + Full Appraiser's forecasts)`);
-                         
-                         //BECAUSE OF BUG
+
+            //BECAUSE OF BUG
             // Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastFuelFixture('room'));
             // Income._ExpenseForecastActions.totalSumForecastPSFAllCards(
             //     testData.buildingDescription.grossArea,
