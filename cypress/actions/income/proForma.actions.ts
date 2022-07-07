@@ -187,7 +187,7 @@ class ProFormaActions extends BaseActionsExt<typeof proFormaPage> {
                     let valPerUnit = Math.round(Number(val));
                     const perUnitNumberWithTaxes = getNumberFromDollarNumberWithCommas(perUnitText);
                     const taxesNumber = getNumberFromDollarNumberWithCommas(taxesText);
-                    const perUnitNumberWithoutTaxes = (perUnitNumberWithTaxes - taxesNumber).toFixed(0);
+                    const perUnitNumberWithoutTaxes = Math.round(Number(perUnitNumberWithTaxes - taxesNumber));
                     expect(valPerUnit).to.equal(perUnitNumberWithoutTaxes);
                 });
             });
@@ -204,7 +204,7 @@ class ProFormaActions extends BaseActionsExt<typeof proFormaPage> {
                         const totalNumberWithTaxes = getNumberFromDollarNumberWithCommas(totalIncome);
                         const taxesNumber = getNumberFromDollarNumberWithCommas(taxesText);
                         const incomeNumber = getNumberFromDollarNumberWithCommas(incomeText);
-                        const totalNumberWithoutTaxes = (incomeNumber - totalNumberWithTaxes - taxesNumber).toFixed(0);
+                        const totalNumberWithoutTaxes = Math.round(Number((incomeNumber - totalNumberWithTaxes - taxesNumber)));
                         expect(valTotal).to.equal(totalNumberWithoutTaxes);
                     });
                 });
@@ -240,7 +240,7 @@ class ProFormaActions extends BaseActionsExt<typeof proFormaPage> {
                         const perUnitNumberWithTaxes = getNumberFromDollarNumberWithCommas(perUnitIncome);
                         const taxesNumber = getNumberFromDollarNumberWithCommas(taxesText);
                         const incomeNumber = getNumberFromDollarNumberWithCommas(incomeText);
-                        const totalNumberWithoutTaxes = (incomeNumber - perUnitNumberWithTaxes - taxesNumber).toFixed(0);
+                        const totalNumberWithoutTaxes = Math.round(Number((incomeNumber - perUnitNumberWithTaxes - taxesNumber)));
                         expect(valPerUnit).to.equal(totalNumberWithoutTaxes);
                     });
                 });
