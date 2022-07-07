@@ -12,7 +12,8 @@ export namespace BoweryReports {
         extension: "docx" | "html",
         fullPath?: string
     }
-    
+
+    export type ReportStatus = typeof Enums.REPORT_STATUS[KeyInfo.ReportStatus]
     export type ConclusionValue = keyof typeof Enums.VALUE_CONCLUSION_TYPE 
     export type isSalesForcePull = boolean
     export type ReportCreationOptions = {
@@ -22,6 +23,8 @@ export namespace BoweryReports {
         address?: string,
         isSalesForcePull?: isSalesForcePull
     }
+    export type RentType = typeof Enums.RENT_TYPE[KeyInfo.RentTypeKeys]
+    export type RentRollOptionsCheckboxsType = typeof Enums.RENT_ROLL_OPTIONS_CHECKBOXS[KeyInfo.RentRollOptionsCheckboxsKeys]
     export type ChipsCreationOptions = {
         block?: string,
         buildingName?: string,
@@ -60,6 +63,11 @@ export namespace BoweryReports {
         | CeilingHeightValues | LocationValues | StreetTypeValues | FrontageValues | FloorValues;
     }
 
+    export namespace SalesAdjustmentGrid {
+        export type AdjustmentName = typeof Enums.SALES_ADJUSTMENT_GRID[KeyInfo.SalesAdjustmentGridKeys]
+        export type RowsMarketAdjustment = typeof Enums.ROWS_MARKET_ADJUSTMENT[KeyInfo.RowsMarketAdjustmentKeys]
+    }
+
     export type ProFormaAnyIncome = {
         total: string,
         perSF: string,
@@ -67,6 +75,7 @@ export namespace BoweryReports {
     };
     export type OrganizationAddresseePrefix = typeof Enums.ORGANIZATION_ADDRESSEE_PREFIX[KeyInfo.OrganizationAddresseePrefixKeys]
     export type OrganizationState = typeof Enums.ORGANIZATION_STATE[KeyInfo.OrganizationStateKeys]
+    export type BoweryOffices = typeof Enums.BOWERY_OFFICES[KeyInfo.BoweryOffices]
 
     export type ForecastItem = { 
         name: ForecastItemBasis | string, 
@@ -103,7 +112,8 @@ export namespace BoweryReports {
         footage?: number,
         rooms?: number,
         monthlyRent: number,
-        leaseStatus?: LeaseStatus
+        leaseStatus?: LeaseStatus,
+        rentType?: RentType
     }
 
     export type RentCompField = {
@@ -189,4 +199,6 @@ export namespace BoweryReports {
     export type PropertyConditions = typeof Enums.PROPERTY_CONDITIONS[KeyInfo.PropertyConditions];
 
     export type PropertyConditionsRadios = keyof typeof Enums.PROPERTY_CONDITIONS_RADIOS;
+    export type BondTickers = typeof Enums.BOND_TYPES[KeyInfo.BondTypes]
+    export type BondTypes = keyof typeof  Enums.BOND_TYPES
 }
