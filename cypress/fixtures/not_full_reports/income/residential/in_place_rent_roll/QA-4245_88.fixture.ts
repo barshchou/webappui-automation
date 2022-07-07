@@ -1,8 +1,9 @@
-import { BoweryReports } from "../../../../../types";
+import Enums from "../../../../../enums/enums";
+import { BoweryReports } from "../../../../../types/boweryReports.type";
 import ReportDataCreator from "../../../../data_creator/reportData.creator";
 
-const occupied: BoweryReports.LeaseStatus = "Occupied";
-const vacant: BoweryReports.LeaseStatus = "Vacant";
+const occupied: BoweryReports.LeaseStatus = Enums.LEASE_STATUS.occupied;
+const vacant: BoweryReports.LeaseStatus = Enums.LEASE_STATUS.vacant;
 
 const rentRollResidentialUnitsFixture = () : BoweryReports.ResidentialUnit[] => {
     return [
@@ -49,5 +50,5 @@ export default {
     numberOfUnits: 5,
     columnName: "Monthly Total",
     residentialUnits: rentRollResidentialUnitsFixture(),
-    textValues: _textValues,
+    textValues: _textValues
 };

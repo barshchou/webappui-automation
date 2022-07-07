@@ -1,4 +1,3 @@
-import { getNumberFromDollarNumberWithCommas } from './../../../../utils/numbers.utils';
 import stabRentRollPage from "../../../pages/income/residential/stabilizedRentRoll.page";
 import { numberWithCommas } from "../../../../utils/numbers.utils";
 import ResidentialRentRollSharedActions from "../../shared_components/residentialRentRoll.shared.actions";
@@ -65,27 +64,6 @@ class StabilizedRentRollActions extends ResidentialRentRollSharedActions<typeof 
     editOccupancyRateCommentary(newCommentary: string): this {
         stabRentRollPage.occupancyRateEditButton.click();
         stabRentRollPage.occupancyRateInput.clear().type(newCommentary).should("have.text", newCommentary);
-        return this;
-    }
-
-    verifyRentPSFValueByRow(isPerMonth = true, rowNumber = 0) {
-        this.Page.monthlyRentCells(rowNumber).invoke("val").then(monthlyRentText => {
-            const rentValue = getNumberFromDollarNumberWithCommas(monthlyRentText);
-            this.Page.squareFootageCells.eq(rowNumber).invoke("text").then(sfText => {
-                const footageValue = getNumberFromDollarNumberWithCommas(sfText);
-                const rentPSFMonthly = `$${(rentValue / footageValue).toFixed(2)}`;
-                const rentPSFAnnually = `$${((rentValue / footageValue) * 12).toFixed(2)}`;
-                if (footageValue === 0) {
-                    this.Page.rentSFCell.eq(rowNumber).should("have.text", "$NaN");
-                } else {
-                    if (isPerMonth) {
-                        this.Page.rentSFCell.eq(rowNumber).should("have.text", rentPSFMonthly);
-                    } else {
-                        this.Page.rentSFCell.eq(rowNumber).should("have.text", rentPSFAnnually);
-                    }
-                }
-            });
-        });
         return this;
     }
 

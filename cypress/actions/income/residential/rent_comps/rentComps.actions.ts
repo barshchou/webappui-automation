@@ -379,7 +379,7 @@ class RentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
     }
 
     selectComparableByIndex(index = 0): RentCompsActions {
-        rentCompsPage.selectComparableButtons.eq(index).click();
+        rentCompsPage.selectComparableButtons.eq(index).click( { force: true } );
         return this;
     }
 
@@ -651,6 +651,16 @@ class RentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
         rentCompsPage.getShowDetailsHeader(headerName)
             .should("exist")
             .should("have.text", headerName);
+        return this;
+    }
+
+    clickAddRemoveBuildingCompByAddress(address: string): RentCompsActions {
+        rentCompsPage.getAddRemoveBuildingCompButtons(address).click();
+        return this;
+    }
+
+    clickEditBuildingCompButtonByAddress(address: string): RentCompsActions {
+        rentCompsPage.getEditAddedBuildingCompButtonByAddress(address).click();
         return this;
     }
 }

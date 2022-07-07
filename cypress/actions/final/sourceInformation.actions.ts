@@ -1,7 +1,7 @@
-import BaseActions from "../base/base.actions";
 import sourceInformationPage from "../../pages/final/sourceInformation.page";
+import BaseActionsExt from "../base/base.actions.ext";
 
-class SourceInformationActions extends BaseActions {
+class SourceInformationActions extends BaseActionsExt<typeof sourceInformationPage> {
 
     get siteSizeDefaultSources() {return [ "Public Record" ];}
 
@@ -29,11 +29,11 @@ class SourceInformationActions extends BaseActions {
 
     get comparableSalesDataDefaultSources() {return [ "CoStar", "Public Record", "Primary Source" ];}
 
-    verifySourceLabelText(sourceLabel, textToBe) {
+    private verifySourceLabelText(sourceLabel: JQuery<HTMLElement>, textToBe: string) {
         expect(sourceLabel.text()).to.eq(textToBe);
     }
 
-    verifySiteSizeSources(sources = this.siteSizeDefaultSources) {
+    verifySiteSizeSources(sources = this.siteSizeDefaultSources): SourceInformationActions {
         sources = Array.isArray(sources) ? sources : Array.of(sources);
         sourceInformationPage.siteSizeSources.each((sourceElem, i) => {
             this.verifySourceLabelText(sourceElem, sources[i]);
@@ -41,7 +41,7 @@ class SourceInformationActions extends BaseActions {
         return this;
     }
 
-    verifyExcessSurplusLandSources(sources = this.excessSurplusLandDefaultSources) {
+    verifyExcessSurplusLandSources(sources = this.excessSurplusLandDefaultSources): SourceInformationActions {
         sources = Array.isArray(sources) ? sources : Array.of(sources);
         sourceInformationPage.excessSurplusLandSources.each((sourceElem, i) => {
             this.verifySourceLabelText(sourceElem, sources[i]);
@@ -49,7 +49,7 @@ class SourceInformationActions extends BaseActions {
         return this;
     }
 
-    verifyGrossSizeUnitsSources(sources = this.grossSizeUnitsDefaultSources) {
+    verifyGrossSizeUnitsSources(sources = this.grossSizeUnitsDefaultSources): SourceInformationActions {
         sources = Array.isArray(sources) ? sources : Array.of(sources);
         sourceInformationPage.grossSizeUnitsSources.each((sourceElem, i) => {
             this.verifySourceLabelText(sourceElem, sources[i]);
@@ -57,7 +57,7 @@ class SourceInformationActions extends BaseActions {
         return this;
     }
 
-    verifyResidentialSFSources(sources = this.residentialSFDefaultSources) {
+    verifyResidentialSFSources(sources = this.residentialSFDefaultSources): SourceInformationActions {
         sources = Array.isArray(sources) ? sources : Array.of(sources);
         sourceInformationPage.residentialSFSources.each((sourceElem, i) => {
             this.verifySourceLabelText(sourceElem, sources[i]);
@@ -65,7 +65,7 @@ class SourceInformationActions extends BaseActions {
         return this;
     }
 
-    verifyNumberOfBuildingsSources(sources = this.numberOfBuildingsDefaultSources) {
+    verifyNumberOfBuildingsSources(sources = this.numberOfBuildingsDefaultSources): SourceInformationActions {
         sources = Array.isArray(sources) ? sources : Array.of(sources);
         sourceInformationPage.numberOfBuildingsSources.each((sourceElem, i) => {
             this.verifySourceLabelText(sourceElem, sources[i]);
@@ -73,7 +73,7 @@ class SourceInformationActions extends BaseActions {
         return this;
     }
 
-    verifyAmenitiesSources(sources = this.amenitiesDefaultSources) {
+    verifyAmenitiesSources(sources = this.amenitiesDefaultSources): SourceInformationActions {
         sources = Array.isArray(sources) ? sources : Array.of(sources);
         sourceInformationPage.amenitiesSources.each((sourceElem, i) => {
             this.verifySourceLabelText(sourceElem, sources[i]);
@@ -81,7 +81,7 @@ class SourceInformationActions extends BaseActions {
         return this;
     }
 
-    verifyDeferredMaintenanceSources(sources = this.deferredMaintenanceDefaultSources) {
+    verifyDeferredMaintenanceSources(sources = this.deferredMaintenanceDefaultSources): SourceInformationActions {
         sources = Array.isArray(sources) ? sources : Array.of(sources);
         sourceInformationPage.deferredMaintenanceSources.each((sourceElem, i) => {
             this.verifySourceLabelText(sourceElem, sources[i]);
@@ -89,7 +89,7 @@ class SourceInformationActions extends BaseActions {
         return this;
     }
 
-    verifyAreaAnalysisSources(sources = this.areaAnalysisDefaultSources) {
+    verifyAreaAnalysisSources(sources = this.areaAnalysisDefaultSources): SourceInformationActions {
         sources = Array.isArray(sources) ? sources : Array.of(sources);
         sourceInformationPage.areaAnalysisSources.each((sourceElem, i) => {
             this.verifySourceLabelText(sourceElem, sources[i]);
@@ -97,7 +97,7 @@ class SourceInformationActions extends BaseActions {
         return this;
     }
 
-    verifyIncomeDataSources(sources = this.incomeDataDefaultSources) {
+    verifyIncomeDataSources(sources = this.incomeDataDefaultSources): SourceInformationActions {
         sources = Array.isArray(sources) ? sources : Array.of(sources);
         sourceInformationPage.incomeDataSources.each((sourceElem, i) => {
             this.verifySourceLabelText(sourceElem, sources[i]);
@@ -105,7 +105,7 @@ class SourceInformationActions extends BaseActions {
         return this;
     }
 
-    verifyExpenseDataSources(sources = this.expenseDataDefaultSources) {
+    verifyExpenseDataSources(sources = this.expenseDataDefaultSources): SourceInformationActions {
         sources = Array.isArray(sources) ? sources : Array.of(sources);
         sourceInformationPage.expenseDataSources.each((sourceElem, i) => {
             this.verifySourceLabelText(sourceElem, sources[i]);
@@ -113,7 +113,7 @@ class SourceInformationActions extends BaseActions {
         return this;
     }
 
-    verifyArchitecturalPlansSources(sources = this.architecturalPlansDefaultSources) {
+    verifyArchitecturalPlansSources(sources = this.architecturalPlansDefaultSources): SourceInformationActions {
         sources = Array.isArray(sources) ? sources : Array.of(sources);
         sourceInformationPage.architecturalPlansSources.each((sourceElem, i) => {
             this.verifySourceLabelText(sourceElem, sources[i]);
@@ -121,7 +121,7 @@ class SourceInformationActions extends BaseActions {
         return this;
     }
 
-    verifyComparableRentalDataSources(sources = this.comparableRentalDataDefaultSources) {
+    verifyComparableRentalDataSources(sources = this.comparableRentalDataDefaultSources): SourceInformationActions {
         sources = Array.isArray(sources) ? sources : Array.of(sources);
         sourceInformationPage.comparableRentalDataSources.each((sourceElem, i) => {
             this.verifySourceLabelText(sourceElem, sources[i]);
@@ -129,7 +129,7 @@ class SourceInformationActions extends BaseActions {
         return this;
     }
 
-    verifyComparableSalesDataSources(sources = this.comparableSalesDataDefaultSources) {
+    verifyComparableSalesDataSources(sources = this.comparableSalesDataDefaultSources): SourceInformationActions {
         sources = Array.isArray(sources) ? sources : Array.of(sources);
         sourceInformationPage.comparableSalesDataSources.each((sourceElem, i) => {
             this.verifySourceLabelText(sourceElem, sources[i]);
@@ -138,4 +138,4 @@ class SourceInformationActions extends BaseActions {
     }
 }
 
-export default new SourceInformationActions();
+export default new SourceInformationActions(sourceInformationPage);

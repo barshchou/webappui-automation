@@ -1,4 +1,5 @@
-import { BoweryReports } from "../../../../../types";
+import Enums from "../../../../../enums/enums";
+import { BoweryReports } from "../../../../../types/boweryReports.type";
 import ReportDataCreator from "../../../../data_creator/reportData.creator";
 
 export const reportCreationData = (val: number) => {
@@ -26,7 +27,7 @@ const rentRollResidentialUnitsFixture = () : BoweryReports.ResidentialUnit[] => 
 };
 
 export default {
-    sumCurrent: "Summarize current rent roll", 
+    sumCurrent: Enums.RENT_ROLL_OPTIONS_CHECKBOXES.summarize, 
     verifyExport: "test",
     residentialUnits: rentRollResidentialUnitsFixture(),
     verifyText: "Rent Roll Summary by Unit Type"

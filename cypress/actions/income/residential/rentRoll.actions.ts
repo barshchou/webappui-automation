@@ -7,7 +7,7 @@ import {
 } from "../../../../utils/numbers.utils";
 import { isProdEnv } from "../../../../utils/env.utils";
 import ResidentialRentRollSharedActions from "../../shared_components/residentialRentRoll.shared.actions";
-import { BoweryReports } from "../../../types";
+import { BoweryReports } from "../../../types/boweryReports.type";
 
 class InPlaceRentRollActions extends ResidentialRentRollSharedActions<typeof rentRollPage> {
 
@@ -205,7 +205,7 @@ class InPlaceRentRollActions extends ResidentialRentRollSharedActions<typeof ren
 
     removeUnitNumberByRowNumber(number = 0): InPlaceRentRollActions {
         rentRollPage.unitNumberCells.eq(number).click().type("{backspace}");
-        rentRollPage.inPlaceRentRollTitle.click();
+        rentRollPage.pageTitle.click();
         rentRollPage.unitNumberCells.eq(number).should("have.text", "");
         return this;
     }
@@ -230,7 +230,7 @@ class InPlaceRentRollActions extends ResidentialRentRollSharedActions<typeof ren
 
     removeRoomsNumberByRowNumber(number = 0): InPlaceRentRollActions {
         rentRollPage.roomsCells.eq(number).click().type("{backspace}");
-        rentRollPage.inPlaceRentRollTitle.click();
+        rentRollPage.pageTitle.click();
         this.verifyRoomsNumberByRow(0, number);
         return this;
     }
@@ -265,7 +265,7 @@ class InPlaceRentRollActions extends ResidentialRentRollSharedActions<typeof ren
 
     removeBedroomsNumberByRowNumber(number = 0): InPlaceRentRollActions {
         rentRollPage.bedroomsCells.eq(number).click().type("{backspace}");
-        rentRollPage.inPlaceRentRollTitle.click();
+        rentRollPage.pageTitle.click();
         this.verifyBedroomsNumberByRow(0, number);
         return this;
     }
@@ -358,27 +358,6 @@ class InPlaceRentRollActions extends ResidentialRentRollSharedActions<typeof ren
         }
         return this;
     }
-
-    verifyRentPSFValueByRow(isPerMonth = true, rowNumber = 0) {
-        this.Page.monthlyRentCells.eq(rowNumber).invoke("text").then(monthlyRentText => {
-            const rentValue = getNumberFromDollarNumberWithCommas(monthlyRentText);
-            this.Page.squareFootageCells.eq(rowNumber).invoke("text").then(sfText => {
-                const footageValue = getNumberFromDollarNumberWithCommas(sfText);
-                const rentPSFMonthly = `$${(rentValue / footageValue).toFixed(2)}`;
-                const rentPSFAnnually = `$${((rentValue / footageValue) * 12).toFixed(2)}`;
-                if (footageValue === 0) {
-                    this.Page.rentSFCell.eq(rowNumber).should("have.text", "$NaN");
-                } else {
-                    if (isPerMonth) {
-                        this.Page.rentSFCell.eq(rowNumber).should("have.text", rentPSFMonthly);
-                    } else {
-                        this.Page.rentSFCell.eq(rowNumber).should("have.text", rentPSFAnnually);
-                    }
-                }
-            });
-        });
-        return this;
-    }
       
     verifyRentRollCommentary(commentaryToBe: string, include = false): InPlaceRentRollActions {
         if (include === true) {
@@ -463,15 +442,9 @@ class InPlaceRentRollActions extends ResidentialRentRollSharedActions<typeof ren
         return this;
     }
 
-    verifyRentRollOptions(): InPlaceRentRollActions {
-        rentRollPage.showDevelopersForecast.should("be.visible");
-        rentRollPage.includePerRoomAnalysis.should("be.visible");
-        return this;
-    }
-
     enterAppraiserCommentary(value: string | number): InPlaceRentRollActions {
-        rentRollPage.appraiserCommentary.should("be.visible");
-        rentRollPage.appraiserCommentary.clear().type(`${value}`).should("have.text", value);
+        rentRollPage.rentRollAppraiserCommentary.should("be.visible");
+        rentRollPage.rentRollAppraiserCommentary.clear().type(`${value}`).should("have.text", value);
         return this;
     }
     

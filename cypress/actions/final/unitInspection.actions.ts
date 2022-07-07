@@ -17,7 +17,7 @@ class UnitInspectionActions extends BaseActionsExt<typeof unitInspectionPage> {
         return this;
     }
 
-    chooseReadyForOccupancyValueByRow(value, rowNumber = 0): UnitInspectionActions {
+    private chooseReadyForOccupancyValueByRow(value: string, rowNumber = 0): UnitInspectionActions {
         unitInspectionPage.readyForOccupancyDropdowns.eq(rowNumber).click();
         unitInspectionPage.getDropdownOptionByValue(value).click();
         return this;

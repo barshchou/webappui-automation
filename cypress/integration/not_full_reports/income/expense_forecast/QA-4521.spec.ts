@@ -2,7 +2,7 @@ import testData from "../../../../fixtures/not_full_reports/income/expense_forec
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import { Property, Income } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
-import tableExpenseHistoryCellNames from "../../../../../cypress/enums/expenseHistoryTableRows.enum";
+import tableExpenseHistoryCellNames from "../../../../../cypress/enums/expense/expenseHistoryTableRows.enum";
 
 describe("Historical expense Insurance Per Unit is correctly calculated and displayed",
     { tags: [ "@snapshot_tests", "@income", "@expense_forecast" ] }, () => {
@@ -49,7 +49,9 @@ describe("Historical expense Insurance Per Unit is correctly calculated and disp
                 .verifyForecastItemByExpensePeriodType(testData.t12InsuranceIItem, testData.buildingDescription, "Actual T12")
                 .verifyForecastItemByExpensePeriodType(testData.historicalInsuranceIItem, testData.buildingDescription, "Annualized Historical")
                 .verifyForecastItemByExpensePeriodType(testData.ownerProjectionInsuranceIItem, testData.buildingDescription, "Owner's Projection")
-                .hideExpenseForecastHeader();
+                .hideHeader()
+                .clickSaveButton()
+                .verifyProgressBarNotExist();
 
             cy.stepInfo("4.2 Check historical expenses values for Insurance card. They should be correctly displayed on slidebars");
             Income._ExpenseForecastActions.Actions.matchElementSnapshot(

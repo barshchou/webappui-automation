@@ -1,7 +1,8 @@
 import { applyMixins } from "../../utils/object.utils";
 import BasePage from "../base/base.page";
-import PropertyInformationForm from "./drm/propertyInfo.page";
-import SaleInformationForm from "./drm/salesInfo.page";
+import PropertyInformationForm from "./comp_plex/propertyInfo.page";
+import SalesCompsDetailsForm from "./comp_plex/salesCompDetails.page";
+import SaleInformationForm from "./comp_plex/salesInfo.page";
 
 class FindCompsPage extends BasePage {
     get createCompButton() {return cy.get("[data-qa=create-sales-comps-btn]", { includeShadowDom: true });}
@@ -11,8 +12,6 @@ class FindCompsPage extends BasePage {
     get findCompField() {return cy.contains("Enter New Comparable Address", { includeShadowDom: true });}
 
     get submitButton() {return cy.get("[data-qa=submit-button]", { includeShadowDom: true });}
-
-    //getSelectCompButtonByAddress(address) {return cy.xpath(`//*[text()='${address}']//following-sibling::td/a`);}
 
     getSelectCompButtonByAddress(address) {return cy.contains(address, { includeShadowDom: true }).siblings("td").find("a");}
 
@@ -28,31 +27,51 @@ class FindCompsPage extends BasePage {
 
     getSelectCompFromMapButtonByAddress(address) {
         return cy.get('[data-qa="sales-comp-item"]', { includeShadowDom: true })
-        .contains(`${address}`, { includeShadowDom: true }).parent()
+        .contains(`${address}`, { includeShadowDom: true }).parent().parent()
         .find('[data-qa="sales-comp-item-add-btn"]', { includeShadowDom: true });
     }
 
-    getRemoveSelectedCompButtonByAddress(address) {
+    /**
+     * Get all sales comps from search list
+     * @returns List of all rendered sales comps in search list
+     */
+    getSelectCompFromMapButton() {
+        return cy.get('[data-qa="sales-comp-item"]', { includeShadowDom: true })
+        .find('[data-qa="sales-comp-item-add-btn"]', { includeShadowDom: true });
+    } 
+
+    /**
+     * Sales Comp row in Selected Comparable table
+     * @param index number of selected comparables (default - 0)
+     */
+    getSelectedComparable(index = 0){
+        return cy.get(`[data-qa="row-${index}"]`);
+    }
+
+    getRemoveSelectedCompButtonByAddress(address: string) {
         return cy.contains(address).parent("td").parent().find('[data-qa="selected-comp-remove-btn"]');
     }
 
-    getRemoveDeletedCompButtonByAddress(address) {
+    getRemoveDeletedCompButtonByAddress(address: string) {
         return cy.contains(address).parent("td").parent().find('[data-qa="removed-comp-remove-btn"]');
     }
 
-    getRemoveCompFromMapButtonByAddress(address) {
+    getRemoveCompFromMapButtonByAddress(address: string) {
         return cy.get("comp-plex").shadow().find("[class*=salesCompItemWrapper]").contains(`${address}`).parent()
         .siblings("[class*=buttonsColumn]").find("span").contains("REMOVE").parent();
     }
 
-    get reportToSearchCompInput() {return cy.get("[name^=report]", { includeShadowDom: true });}
+    get reportToSearchCompInput() {return cy.get("[data-qa='Report Unique ID']", { includeShadowDom: true });}
 
     get importReportCompsButton() {return this.importCompModal.find("span").contains("Import")
         .parent("button");}
 
-    get searchButton() {return cy.get("button[.='Search']", { includeShadowDom: true });}
+    get searchButton() {return cy.contains("Report Unique ID", { includeShadowDom: true })
+    .next().find("button", { includeShadowDom: true });}
 
-    get importCompsSelectButtons() {return cy.contains("Selected for report", { includeShadowDom: true }).siblings("button[.='Select']");}
+    get importCompsSelectButtons() {return cy.contains("Selected for report", { includeShadowDom: true })
+    .siblings('div')
+    .find('[data-qa="sales-comp-item-add-btn"]', { includeShadowDom: true });}
 
     get createCompSearchResults() {return cy.get("[data-qa=search-result-form] tbody tr", { includeShadowDom: true });}
 
@@ -66,7 +85,7 @@ class FindCompsPage extends BasePage {
  * the expected mixins with the same name as your base
  */
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
-interface FindCompsPage extends PropertyInformationForm, SaleInformationForm {}
-applyMixins(FindCompsPage, [ PropertyInformationForm, SaleInformationForm ]);
+interface FindCompsPage extends PropertyInformationForm, SaleInformationForm, SalesCompsDetailsForm {}
+applyMixins(FindCompsPage, [ PropertyInformationForm, SaleInformationForm, SalesCompsDetailsForm ]);
 
 export const findCompsPage = new FindCompsPage();

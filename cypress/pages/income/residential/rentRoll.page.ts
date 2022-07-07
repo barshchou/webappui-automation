@@ -2,8 +2,6 @@ import ResidentialRentRollSharedPage from "../../shared_components/residentialRe
 
 class InPlaceRentRollPage extends ResidentialRentRollSharedPage {
 
-    get inPlaceRentRollTitle() {return cy.get("*[data-qa='inPlaceRentRoll']");}
-
     get numberOfResidentialUnitsField() {return cy.get("*[data-qa='number-of-items-input'] input");}
 
     get goToPropSummaryButton() {return cy.get("[aria-label='Go To Property Summary'] [href$='/property-summary']");}
@@ -34,18 +32,14 @@ class InPlaceRentRollPage extends ResidentialRentRollSharedPage {
 
     get rentRollCommentary() {return cy.get("[data-qa*='currentRentRollDiscussion.commentary']");}
 
-    get monthlyRentCells() {return cy.get("[data-qa^=rent-][data-qa$=cell]");}
-
     get tableListboxOptions() {return cy.get("td.listbox");}
 
     // TODO: Fix locator for this cells after https://bowery.atlassian.net/browse/WEB-5364 bug fix and move methods and elements, related to it to shared components
     get rentSFCell() {return cy.xpath("//*[contains(@class, 'readOnly') and not(contains(@data-qa, 'cell'))]");}
 
-    get showDevelopersForecast() {return cy.get("[data-qa='showDevelopersForecast']");}
+    get stabilizedRentSFCell() {return cy.get("[data-qa='rentPerSquareFootage-cell']");}
 
-    get includePerRoomAnalysis() {return cy.get("[data-qa='includePerRoomAnalysis']");}
-
-    get appraiserCommentary() {return cy.get("[name='currentRentRollDiscussion.additionalCommentary']");}
+    get rentRollAppraiserCommentary() {return cy.get("[name='currentRentRollDiscussion.additionalCommentary']");}
 
     infoIcon(index = 1) {return cy.xpath(`//*[text()='Current Rent Roll Discussion']//following::*[@role='presentation'][${index}]`);}
 

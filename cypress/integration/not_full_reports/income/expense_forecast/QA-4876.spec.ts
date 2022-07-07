@@ -3,7 +3,7 @@ import { createReport, deleteReport } from "../../../../actions/base/baseTest.ac
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Property from "../../../../actions/property/property.manager";
 import Income from "../../../../actions/income/income.manager";
-import tableExpenseHistoryCellNames from "../../../../../cypress/enums/expenseHistoryTableRows.enum";
+import tableExpenseHistoryCellNames from "../../../../../cypress/enums/expense/expenseHistoryTableRows.enum";
 
 describe("Historical expense Electricity Per SF is correctly calculated and displayed",
         { tags: [ "@snapshot_tests", "@expense_forecast", "@income" ] }, () => {
@@ -51,7 +51,9 @@ describe("Historical expense Electricity Per SF is correctly calculated and disp
                 .verifyForecastItemByExpensePeriodType(testData.t12ElectricityItem, testData.buildingDescription, "Actual T12")
                 .verifyForecastItemByExpensePeriodType(testData.historicalElectricityItem, testData.buildingDescription, "Annualized Historical")
                 .verifyForecastItemByExpensePeriodType(testData.ownerProjectionElectricityItem, testData.buildingDescription, "Owner's Projection")
-                .hideExpenseForecastHeader();
+                .hideHeader()
+                .clickSaveButton()
+                .verifyProgressBarNotExist();
 
 
             cy.stepInfo(`

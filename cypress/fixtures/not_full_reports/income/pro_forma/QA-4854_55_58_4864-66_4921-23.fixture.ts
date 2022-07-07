@@ -1,6 +1,7 @@
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 import Enums from "../../../../enums/enums";
-import { BoweryAutomation, BoweryReports } from "../../../../types";
+import { BoweryReports } from "../../../../types/boweryReports.type";
+import { BoweryAutomation } from "../../../../types/boweryAutomation.type";
 
 const _grossBuildingArea = 5000;
 const _numberOfCommercialUnits = 3;
@@ -10,8 +11,8 @@ const _name = Enums.EXPENSE_CELL.fuel;
 const _basis = "sf" as BoweryReports.UnitSF;
 const _projection = 567.89;
 const _forecast = 322;
-const _perRoomAnalysis = "Include Per Room Analysis in Report";
-const _residentialRooms =Array(_numberOfResidentialUnits).fill(_numberOfRooms);
+const _perRoomAnalysis = Enums.RENT_ROLL_OPTIONS_CHECKBOXES.include;
+const _residentialRooms = Array(_numberOfResidentialUnits).fill(_numberOfRooms);
 
 const _forecastItem = (): BoweryReports.ForecastItem => {
     return {

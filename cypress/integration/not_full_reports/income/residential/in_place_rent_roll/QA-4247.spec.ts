@@ -30,7 +30,7 @@ describe("Verify the Square Footage column in the grid",
 
         cy.stepInfo("4. Add Residential Units");
         _NavigationSection.navigateToPropertySummary();
-        Property._Summary.enterNumberOfResUnits(2);
+        Property._Summary.enterNumberOfResUnits(testData.numberOfUnits);
         _NavigationSection.navigateToResInPlaceRentRoll();
         
         cy.stepInfo("5. Verify the Tooltip text");
