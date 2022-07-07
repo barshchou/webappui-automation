@@ -49,7 +49,7 @@ import envLaunchDarkly from "./featureFlags/envLaunchDarkly.enum";
 import menuLinksNamesEnum from "./menuLinksNames.enum";
 import rolesEnum from "./users/roles.enum";
 import boweryOfficesEnum from "./organization/boweryOffices.enum";
-import salesAdjustmentGridEnum from "./adjustComps/salesAdjustmentGrid.enum";
+import salesAdjustmentGridEnum from "./adjustComps/salesadjustment.enum";
 import reportStatusEnum from "./reportParams/reportStatus.enum";
 import bondTypesEnum from "./organization/bondTypes.enum";
 import rowsMarketAdjustmentEnum from "./adjustComps/marketadjustment.enum";
