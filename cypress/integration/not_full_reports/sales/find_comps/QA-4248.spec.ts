@@ -22,12 +22,12 @@ describe("Verify the Comps can be added by entering the existing Report ID in th
             Homepage.verifyThatPageIsOpened()
                 .verifyProgressBarNotExist();
             Homepage.createReport(fixture.reportCreationData);
-            NavigationSection.navigateToFindComps();
+            NavigationSection.navigateToFindComps(true);
             Sales.FindComps.clickImportComparableButton()
                 // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 .enterReportToSearchComp(<any>reportId);
         });
-        Sales.FindComps.clickSearchButton()
+        Sales.FindComps.Actions.clickSearchButton()
             .checkSingleSalesCompsByEventId()
             .selectAllCompsForImport()
             .checkSelectedSingleSalesComps()

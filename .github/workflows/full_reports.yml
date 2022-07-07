@@ -26,6 +26,10 @@ on:
         type: string
         description: Add custom environment url if needed
         required: false
+      ref:
+        type: string
+        description: Select branch, tag, commit ref
+        required: false
 
 jobs:
   Full-reports-run:
@@ -47,6 +51,8 @@ jobs:
           spec_file: cypress/integration/full_reports/*.spec.ts'
           tags: ${{ github.event.inputs.tags }}
           record_key: ${{ secrets.CURRENTS_RECORD_KEY }}
+          ref: ${{ github.event.inputs.ref }}
+
       
       - name: Archive DOM snapshots from failed tests
         if: failure()

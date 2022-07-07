@@ -262,11 +262,13 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         return this;
     }
 
-    navigateToFindComps(): NavigationSectionActions {
+    navigateToFindComps(ignoreGqlWait = false): NavigationSectionActions {
         this.clickSalesButton()
             .clickFindCompsButton()
-            .clickYesIfExist();        
-        cy.wait(`@${Alias.gql.SearchSalesTransactions}`, { timeout:120000 });
+            .clickYesIfExist();
+            
+        ignoreGqlWait ? cy.log("Ignore wait for sales comps fetch") 
+        : cy.wait(`@${Alias.gql.SearchSalesTransactions}`, { timeout:120000 }); 
     
         return this;
     }

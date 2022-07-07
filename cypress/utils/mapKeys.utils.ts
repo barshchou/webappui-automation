@@ -7,5 +7,6 @@ export default {
     neighborhood_demographic_file: "neighborhood_demographic_file",
     market_analysis_use_file: "market_analysis_use_file",
     area_economic_analysis_file: "area_economic_analysis_file",
-    submarket_analysis_use_file: "submarket_analysis_use_file"
+    submarket_analysis_use_file: "submarket_analysis_use_file",
+    search_result_sales_comp:"search_result_sales_comp"
 };
