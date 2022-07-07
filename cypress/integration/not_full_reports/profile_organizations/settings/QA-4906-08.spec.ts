@@ -4,7 +4,7 @@ import { _NavigationSection } from '../../../../actions/base/index';
 import testData from "../../../../fixtures/not_full_reports/profile_organizations/settings/QA-4906-08.fixture";
 import enums from '../../../../enums/enums';
 
-describe("", 
+describe("Verify bond rate tooltip and icon", 
     { tags:[ "@organizations", "@settings" ] }, () => {
 
     before('Save local storage', () => {
