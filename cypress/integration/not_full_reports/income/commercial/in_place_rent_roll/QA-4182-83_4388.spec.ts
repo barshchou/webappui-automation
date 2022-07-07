@@ -14,7 +14,7 @@ describe("Verify the Annual Rent column in the grid",
         _NavigationSection.navigateToCommercialInPlaceRentRoll();
     });
 
-    it("Annually, the same [QA-4182]", () => {
+    it("Annually, [QA-4182] Verify Monthly Rent is calculated with correct formula", () => {
         Income._CommercialManager.InPlaceRentRoll.clickAnnuallyBasisButton()
             .verifyAnnualRentCellTextByRow()
             .enterAnnualRentByRowNumber(testData.general.annualRent);
@@ -34,7 +34,7 @@ describe("Verify the Annual Rent column in the grid",
         deleteReport(testData.reportCreationData.reportNumber);
     });
 
-    it("Per square foot per month, the same [QA-4183]", () => {
+    it("Per square foot per month, [QA-4183] Annual Rent is calculated with correct formula", () => {
         Income._CommercialManager.InPlaceRentRoll.clickPerSquareFootPerMonthButton()
             .enterRentPerSFMonthlyByRowNumber(testData.general.rentPerSF)
             .verifyAnnualRentCellPerSFBasisByRow(testData.general.rentPerSF, testData.general.squareFeet, testData.unitsOfMeasureMonthly);
