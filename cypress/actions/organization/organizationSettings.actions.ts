@@ -83,7 +83,8 @@ class OrganizationSettingsActions extends BaseActionsExt<typeof organizationSett
     updateComplianceParagraphDiscussion(text: string, clear = false): OrganizationSettingsActions {
         this.clickComplianceParagraphEditButton()
             .editComplianceParagraphDiscussionText(text, clear)
-            .saveComplianceParagraphDiscussion();
+            .saveComplianceParagraphDiscussion()
+            .saveOrganizationSettings();
         return this;
     }
 
@@ -113,7 +114,38 @@ class OrganizationSettingsActions extends BaseActionsExt<typeof organizationSett
     saveOrganizationSettings(): OrganizationSettingsActions {
         organizationSettingsPage.saveButtonGlobal.click();
         organizationSettingsPage.successModal.should('be.visible');
-        organizationSettingsPage.successModalCloseButton.click();
+        organizationSettingsPage.successModal.should('not.be.visible');
+        return this;
+    }
+
+    updateCertificationBulletPointDiscussion(text: string, clear = false, index = 1): OrganizationSettingsActions {
+        this.clickCertificationBulletPointEditButton(index)
+            .editCertificationBulletPointDiscussionText(text, clear)
+            .saveCertificationBulletPointDiscussion()
+            .saveOrganizationSettings();
+        return this;
+    }
+
+    clickCertificationBulletPointEditButton(index = 1): OrganizationSettingsActions {
+        organizationSettingsPage.certificationBulletPointEditButton(index).click();
+        return this;
+    }
+
+    editCertificationBulletPointDiscussionText(text: string, clear = false, index = 1): OrganizationSettingsActions {
+        if (clear) organizationSettingsPage.certificationBulletPointDiscussion(index).clear();
+        organizationSettingsPage.certificationBulletPointDiscussion(index)
+            .type(text)
+            .should('contain.text', text);
+        return this;
+    }
+
+    verifyCertificationBulletPointDiscussion(textToBe: string,  index = 1): OrganizationSettingsActions {
+        organizationSettingsPage.certificationBulletPointDiscussion(index).should('have.text', textToBe);
+        return this;
+    }
+
+    saveCertificationBulletPointDiscussion(index = 1): OrganizationSettingsActions {
+        organizationSettingsPage.certificationBulletPointDiscussionSaveButton(index).click();
         return this;
     }
 }

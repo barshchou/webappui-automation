@@ -2,17 +2,17 @@ import Enums from "../../../../enums/enums";
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 
 const reportCreationFixture = () => {
-    return ReportDataCreator.getReportData('4727', {
+    return ReportDataCreator.getReportData('5382', {
         incomeValue: Enums.INCOME_TYPE.both
     });
 };
 
-const _textUpdate = "Lorem Ipsum is simply dummy text of the printing and typesetting industry.";
+const _textUpdate = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Bullets";
 
 export default {
     reportCreationData: reportCreationFixture(),
     reportTextEditorFlagKey: Enums.FEATURE_FLAG_KEYS.reportTextEdit,
     swotAnalysisFlagKey: Enums.FEATURE_FLAG_KEYS.swotAnalysis,
-    featureFlagEnable: 0,
+    featureFlagEnable: 0, // 0 means true
     textUpdate: _textUpdate
 };

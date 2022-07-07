@@ -31,6 +31,12 @@ class OrganizationSettingsPage extends BasePage{
     get successModal() {return cy.xpath("//*[contains(text(), 'Success')]");}
 
     get successModalCloseButton() {return cy.xpath("//*[contains(text(), 'Success')]//following::button[1]");}
+
+    certificationBulletPointEditButton(index = 1) {return cy.xpath(`//h6[.='Certification Bullet Point ${index}']//following::button[.='Edit'][1]`);}
+
+    certificationBulletPointDiscussion(index = 1) {return cy.xpath(`//h6[.='Certification Bullet Point ${index}']//following::div[@data-slate-editor][1]`);}
+
+    certificationBulletPointDiscussionSaveButton(index = 1) {return cy.xpath(`//*[h6[.='Certification Bullet Point ${index}']]/following::button[.='Save'][1]`);}
 }
 
 export default new OrganizationSettingsPage();
