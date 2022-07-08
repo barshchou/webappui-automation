@@ -18,7 +18,7 @@ describe(`[QA-5095] Selected expenses forecast is exported to Estimated Operatin
         testData.expenseForecasts.forEach((forecastItem, index) => {
             forecastItem.basis = testData.perSFBasis;
             Income._ExpenseForecastActions
-                .checkIncludeInProFormaCheckbox(testData.checkboxNames[index]);
+                .changeStateOfIncludeInProFormaCheckbox(testData.checkboxNames[index]);
             Income._ExpenseForecastActions.changeStateOfPercentOfEGICheckbox(false);
             Income._ExpenseForecastActions.chooseForecastItemBasis(forecastItem);
             Income._ExpenseForecastActions.enterForecastItemForecast(forecastItem);
