@@ -10,9 +10,14 @@ describe(`[QA-5013] [Income>Expense forecast] Selected expense card is displayed
         before("Login, create report", () => {
             Cypress.config('numTestsKeptInMemory', 0);
             createReport(testData.reportCreationData);
+            cy.saveLocalStorage();
         });
 
-        it("Test body", function () {
+        beforeEach(() => {
+            cy.restoreLocalStorage();
+        });
+
+        it("Precondition", function () {
 
             cy.stepInfo(`1. Go to Property > Summary and add residential and commertial units`);
             _NavigationSection.navigateToPropertySummary();
@@ -24,10 +29,11 @@ describe(`[QA-5013] [Income>Expense forecast] Selected expense card is displayed
             _NavigationSection.navigateToResInPlaceRentRoll();
             Income._Residential.InPlaceRentRoll.checkCheckboxByLabel(testData.perRoomAnalysis)
                 .enterRoomsNumberByRowNumber(testData.rentRollResUnitFixture.rooms, 0);
+        });
 
-            cy.stepInfo(`3. Verify if “Include Expense on Pro Forma” is selected -> this  expense category 
-                         is displayed in the Pro Forma page > Operating Expenses section and
-                         is displayed in the Expense Forecast page > Total operating expenses card and generated comment (PSF measure + Empty Appraiser's forecasts)`);
+        it(`Verify if “Include Expense on Pro Forma” is selected -> this  expense category 
+            is displayed in the Pro Forma page > Operating Expenses section (PSF measure + Empty Appraiser's forecasts)`, function () {
+                
             _NavigationSection.navigateToExpenseForecast();
             expensesCardsNames.expenseCardsIncludeInProFormaCheckboxArray.forEach(element => {
                 Income._ExpenseForecastActions.verifyIncludeInProFormaCheckboxIsChecked(element);
@@ -36,17 +42,39 @@ describe(`[QA-5013] [Income>Expense forecast] Selected expense card is displayed
             testData.expensesInProFormaByDefaultArray.forEach(element => {
                 Income._ProFormaActions.Page.categoryCellTotal(element).should('exist');
             });
-            _NavigationSection.navigateToExpenseForecast();
-            Income._ExpenseForecastActions.verifyTOECommentary(testData.commentaries(testData.forecastPSFTotal('0'), testData.forecastPerUnitTotal('0')).generated);
-            Income._ExpenseForecastActions.Page.toeAppraisersForecastValueLine.should('contain', testData.forecastPSFTotal('0'));
-            Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastTotalFixture('unit'))
-                .verifyTOECommentary(testData.commentaries(testData.forecastPSFTotal('0'), testData.forecastPerUnitTotal('0')).generated);
-            Income._ExpenseForecastActions.Page.toeAppraisersForecastValueLine.should('contain', testData.forecastPerUnitTotal('0'));
-            Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastTotalFixture('sf'));
+        });
 
-            cy.stepInfo(`4. Verify if “Include Expense on Pro Forma” is selected -> this  expense category 
-                         is displayed in the Pro Forma page > Operating Expenses section and is displayed 
-                         in the Expense Forecast page > Total operating expenses card and generated comment (Per Unit measure + Empty Appraiser's forecasts)`);
+        it(`Verify if “Include Expense on Pro Forma” is selected -> this  expense category 
+            is displayed in the Expense Forecast page > Total operating expenses card (TOE card basis = Per SF)
+            and generated comment (PSF measure + Empty Appraiser's forecasts)`, function () {
+
+            _NavigationSection.navigateToExpenseForecast();
+            testData.verifyTOECommentGenerated(testData.buildingDescription.grossArea,
+                testData.numberOfResidentialUnits,
+                testData.rentRollResUnitFixture.rooms,
+            ).
+                verifyTOEAppraisersValueLinePSF(testData.buildingDescription.grossArea,
+                    testData.numberOfResidentialUnits,
+                    testData.rentRollResUnitFixture.rooms);
+        });
+
+        it(`Verify if “Include Expense on Pro Forma” is selected -> this  expense category 
+            is displayed in the Expense Forecast page > Total operating expenses card (TOE card basis = Per Unit)
+            and generated comment (PSF measure + Empty Appraiser's forecasts)`, function () {
+
+            Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastTotalFixture('unit'));
+            testData.verifyTOECommentGenerated(testData.buildingDescription.grossArea,
+                testData.numberOfResidentialUnits,
+                testData.rentRollResUnitFixture.rooms).
+                verifyTOEAppraisersValueLinePerUnit(testData.buildingDescription.grossArea,
+                    testData.numberOfResidentialUnits,
+                    testData.rentRollResUnitFixture.rooms);
+            Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastTotalFixture('sf'));
+        });
+
+        it(`Verify if “Include Expense on Pro Forma” is selected -> this  expense category 
+            is displayed in the Pro Forma page > Operating Expenses section (Per Unit measure + Empty Appraiser's forecasts)`, function () {
+
             testData.expenseForecastFixtureArray("unit").forEach(element => {
                 Income._ExpenseForecastActions.chooseForecastItemBasis(element);
             });
@@ -54,34 +82,79 @@ describe(`[QA-5013] [Income>Expense forecast] Selected expense card is displayed
             testData.expensesInProFormaByDefaultArray.forEach(element => {
                 Income._ProFormaActions.Page.categoryCellTotal(element).should('exist');
             });
-            _NavigationSection.navigateToExpenseForecast();
-            Income._ExpenseForecastActions.verifyTOECommentary(testData.commentaries(testData.forecastPSFTotal('0'), testData.forecastPerUnitTotal('0')).generated);
-            Income._ExpenseForecastActions.Page.toeAppraisersForecastValueLine.should('contain', testData.forecastPSFTotal('0'));
-            Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastTotalFixture('unit'))
-                .verifyTOECommentary(testData.commentaries(testData.forecastPSFTotal('0'), testData.forecastPerUnitTotal('0')).generated);
-            Income._ExpenseForecastActions.Page.toeAppraisersForecastValueLine.should('contain', testData.forecastPerUnitTotal('0'));
-            Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastTotalFixture('sf'));
+        });
 
-            cy.stepInfo(`5. Verify if “Include Expense on Pro Forma” is selected -> this  expense category 
-                         is displayed in the Pro Forma page > Operating Expenses section and is displayed 
-                         in the Expense Forecast page > Total operating expenses card and generated comment (Per Room measure for Fuel + Empty Appraiser's forecasts)`);
+        it(`Verify if “Include Expense on Pro Forma” is selected -> this  expense category 
+            is displayed in the Expense Forecast page > Total operating expenses card (TOE card basis = Per SF) 
+            and generated comment (Per Unit measure + Empty Appraiser's forecasts)`, function () {
+
+            _NavigationSection.navigateToExpenseForecast();
+            testData.verifyTOECommentGenerated(testData.buildingDescription.grossArea,
+                testData.numberOfResidentialUnits,
+                testData.rentRollResUnitFixture.rooms,
+            ).
+                verifyTOEAppraisersValueLinePSF(testData.buildingDescription.grossArea,
+                    testData.numberOfResidentialUnits,
+                    testData.rentRollResUnitFixture.rooms);
+        });
+
+        it(`Verify if “Include Expense on Pro Forma” is selected -> this  expense category 
+            is displayed in the Expense Forecast page > Total operating expenses card (TOE card basis = Per Unit) 
+            and generated comment (Per Unit measure + Empty Appraiser's forecasts)`, function () {
+
+            Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastTotalFixture('unit'));
+            testData.verifyTOECommentGenerated(testData.buildingDescription.grossArea,
+                testData.numberOfResidentialUnits,
+                testData.rentRollResUnitFixture.rooms).
+                verifyTOEAppraisersValueLinePerUnit(testData.buildingDescription.grossArea,
+                    testData.numberOfResidentialUnits,
+                    testData.rentRollResUnitFixture.rooms);
+            Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastTotalFixture('sf'));
+        });
+
+        it(`Verify if “Include Expense on Pro Forma” is selected -> this  expense category 
+            is displayed in the Pro Forma page > Operating Expenses section 
+            (Per Room measure for Fuel + Empty Appraiser's forecasts)`, function () {
+
+            // BECAUSE OF BUG
             // Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastFuelFixture('room'));
             // _NavigationSection.navigateToProForma();
             // testData.expensesInProFormaByDefaultArray.forEach(element => {
             //     Income._ProFormaActions.Page.categoryCellTotal(element).should('exist');
             // });
+        });
+
+        it(`Verify if “Include Expense on Pro Forma” is selected -> this  expense category 
+            is displayed in the Expense Forecast page > Total operating expenses card (TOE card basis = Per SF) 
+            and generated comment (Per Room measure for Fuel + Empty Appraiser's forecasts)`, function () {
+
             // _NavigationSection.navigateToExpenseForecast();
+            // testData.verifyTOECommentGenerated(testData.buildingDescription.grossArea,
+            //     testData.numberOfResidentialUnits,
+            //     testData.rentRollResUnitFixture.rooms,
+            // ).
+            //     verifyTOEAppraisersValueLinePSF(testData.buildingDescription.grossArea,
+            //         testData.numberOfResidentialUnits,
+            //         testData.rentRollResUnitFixture.rooms);
+        });
 
-            // Income._ExpenseForecastActions.verifyTOECommentary(testData.commentaries(testData.forecastPSFTotal('0'), testData.forecastPerUnitTotal('0')).generated);
-            // Income._ExpenseForecastActions.Page.toeAppraisersForecastValueLine.should('contain', testData.forecastPSFTotal('0'));
-            // Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastTotalFixture('unit'))
-            //     .verifyTOECommentary(testData.commentaries(testData.forecastPSFTotal('0'), testData.forecastPerUnitTotal('0')).generated);
-            // Income._ExpenseForecastActions.Page.toeAppraisersForecastValueLine.should('contain', testData.forecastPerUnitTotal('0'));
+        it(`Verify if “Include Expense on Pro Forma” is selected -> this  expense category 
+            is displayed in the Expense Forecast page > Total operating expenses card (TOE card basis = Per Unit) 
+            and generated comment (Per Room measure for Fuel + Empty Appraiser's forecasts)`, function () {
+
+            // Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastTotalFixture('unit'));
+            // testData.verifyTOECommentGenerated(testData.buildingDescription.grossArea,
+            //     testData.numberOfResidentialUnits,
+            //     testData.rentRollResUnitFixture.rooms).
+            //     verifyTOEAppraisersValueLinePerUnit(testData.buildingDescription.grossArea,
+            //         testData.numberOfResidentialUnits,
+            //         testData.rentRollResUnitFixture.rooms);
             // Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastTotalFixture('sf'));
+        });
 
-            cy.stepInfo(`6. Verify if “Include Expense on Pro Forma” is selected -> this  expense category 
-                         is displayed in the Pro Forma page > Operating Expenses section and is displayed in the 
-                         Expense Forecast page > Total operating expenses card and generated comment (Per Room measure for Fuel + Full Appraiser's forecasts)`);
+        it(`Verify if “Include Expense on Pro Forma” is selected -> this  expense category 
+            is displayed in the Pro Forma page > Operating Expenses section (Per Room measure for Fuel + Full Appraiser's forecasts)`, function () {
+
             testData.expenseForecastFixtureArray().forEach(element => {
                 Income._ExpenseForecastActions.enterForecastItemForecast(element);
             });
@@ -89,6 +162,12 @@ describe(`[QA-5013] [Income>Expense forecast] Selected expense card is displayed
             testData.expensesInProFormaByDefaultArray.forEach(element => {
                 Income._ProFormaActions.Page.categoryCellTotal(element).should('exist');
             });
+        });
+
+        it(`Verify if “Include Expense on Pro Forma” is selected -> this  expense category 
+            is displayed in the Expense Forecast page > Total operating expenses card (TOE card basis = Per SF) 
+            and generated comment (Per Room measure for Fuel + Full Appraiser's forecasts)`, function () {
+
             _NavigationSection.navigateToExpenseForecast();
             testData.verifyTOECommentGenerated(testData.buildingDescription.grossArea,
                 testData.numberOfResidentialUnits,
@@ -97,6 +176,12 @@ describe(`[QA-5013] [Income>Expense forecast] Selected expense card is displayed
                 verifyTOEAppraisersValueLinePSF(testData.buildingDescription.grossArea,
                     testData.numberOfResidentialUnits,
                     testData.rentRollResUnitFixture.rooms);
+        });
+
+        it(`Verify if “Include Expense on Pro Forma” is selected -> this  expense category 
+            is displayed in the Expense Forecast page > Total operating expenses card (TOE card basis = Per Unit) 
+            and generated comment (Per Room measure for Fuel + Full Appraiser's forecasts)`, function () {
+
             Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastTotalFixture('unit'));
             testData.verifyTOECommentGenerated(testData.buildingDescription.grossArea,
                 testData.numberOfResidentialUnits,
@@ -105,10 +190,12 @@ describe(`[QA-5013] [Income>Expense forecast] Selected expense card is displayed
                     testData.numberOfResidentialUnits,
                     testData.rentRollResUnitFixture.rooms);
             Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastTotalFixture('sf'));
+        });
 
-            cy.stepInfo(`7. Verify if “Include Expense on Pro Forma” is selected -> this  expense category 
-                         is displayed in the Pro Forma page> Operating Expenses section and is displayed in the 
-                         Expense Forecast page>Total operating expenses card and generated comment (PSF measure + Full Appraiser's forecasts)`);
+
+        it(`Verify if “Include Expense on Pro Forma” is selected -> this  expense category 
+            is displayed in the Pro Forma page > Operating Expenses section (PSF measure + Full Appraiser's forecasts)`, function () {
+
             testData.expenseForecastFixtureArray("sf").forEach(element => {
                 Income._ExpenseForecastActions.chooseForecastItemBasis(element);
             });
@@ -116,6 +203,12 @@ describe(`[QA-5013] [Income>Expense forecast] Selected expense card is displayed
             testData.expensesInProFormaByDefaultArray.forEach(element => {
                 Income._ProFormaActions.Page.categoryCellTotal(element).should('exist');
             });
+        });
+
+        it(`Verify if “Include Expense on Pro Forma” is selected -> this  expense category 
+            is displayed in the Expense Forecast page > Total operating expenses card (TOE card basis = Per SF) 
+            and generated comment (PSF measure + Full Appraiser's forecasts)`, function () {
+
             _NavigationSection.navigateToExpenseForecast();
             testData.verifyTOECommentGenerated(testData.buildingDescription.grossArea,
                 testData.numberOfResidentialUnits,
@@ -124,6 +217,12 @@ describe(`[QA-5013] [Income>Expense forecast] Selected expense card is displayed
                 verifyTOEAppraisersValueLinePSF(testData.buildingDescription.grossArea,
                     testData.numberOfResidentialUnits,
                     testData.rentRollResUnitFixture.rooms);
+        });
+
+        it(`Verify if “Include Expense on Pro Forma” is selected -> this  expense category 
+            is displayed in the Expense Forecast page > Total operating expenses card (TOE card basis = Per Unit) 
+            and generated comment (PSF measure + Full Appraiser's forecasts)`, function () {
+
             Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastTotalFixture('unit'));
             testData.verifyTOECommentGenerated(testData.buildingDescription.grossArea,
                 testData.numberOfResidentialUnits,
@@ -132,10 +231,12 @@ describe(`[QA-5013] [Income>Expense forecast] Selected expense card is displayed
                     testData.numberOfResidentialUnits,
                     testData.rentRollResUnitFixture.rooms);
             Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastTotalFixture('sf'));
+        });
 
-            cy.stepInfo(`8. Verify if “Include Expense on Pro Forma” is selected -> this  expense category 
-                         is displayed in the Pro Forma page > Operating Expenses section and is displayed 
-                         in the Expense Forecast page > Total operating expenses card and generated comment (Per Unit measure + Full Appraiser's forecasts)`);
+
+        it(`Verify if “Include Expense on Pro Forma” is selected -> this  expense category 
+            is displayed in the Pro Forma page > Operating Expenses section (Per Unit measure + Full Appraiser's forecasts)`, function () {
+
             testData.expenseForecastFixtureArray("unit").forEach(element => {
                 Income._ExpenseForecastActions.chooseForecastItemBasis(element);
             });
@@ -143,6 +244,12 @@ describe(`[QA-5013] [Income>Expense forecast] Selected expense card is displayed
             testData.expensesInProFormaByDefaultArray.forEach(element => {
                 Income._ProFormaActions.Page.categoryCellTotal(element).should('exist');
             });
+        });
+
+        it(`Verify if “Include Expense on Pro Forma” is selected -> this  expense category 
+            is displayed in the Expense Forecast page > Total operating expenses card (TOE card basis = Per SF) 
+            and generated comment (Per Unit measure + Full Appraiser's forecasts)`, function () {
+
             _NavigationSection.navigateToExpenseForecast();
             testData.verifyTOECommentGenerated(testData.buildingDescription.grossArea,
                 testData.numberOfResidentialUnits,
@@ -151,6 +258,12 @@ describe(`[QA-5013] [Income>Expense forecast] Selected expense card is displayed
                 verifyTOEAppraisersValueLinePSF(testData.buildingDescription.grossArea,
                     testData.numberOfResidentialUnits,
                     testData.rentRollResUnitFixture.rooms);
+        });
+
+        it(`Verify if “Include Expense on Pro Forma” is selected -> this  expense category 
+            is displayed in the Expense Forecast page > Total operating expenses card (TOE card basis = Per Unit) 
+            and generated comment (Per Unit measure + Full Appraiser's forecasts)`, function () {
+                
             Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastTotalFixture('unit'));
             testData.verifyTOECommentGenerated(testData.buildingDescription.grossArea,
                 testData.numberOfResidentialUnits,
@@ -161,5 +274,5 @@ describe(`[QA-5013] [Income>Expense forecast] Selected expense card is displayed
             Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastTotalFixture('sf'));
 
             deleteReport(testData.reportCreationData.reportNumber);
-        }); 
+        });
     });
