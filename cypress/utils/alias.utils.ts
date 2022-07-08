@@ -51,6 +51,8 @@ export const Alias = {
         sumPerSF: "sumPerSF",
         sumPerUnitCustomCards: "sumPerUnitCustomCards",
         sumPerUnitCheckedDefaultCards: "sumPerUnitCheckedDefaultCards",
-        sumPerUnit: "sumPerUnit"
+        sumPerUnit: "sumPerUnit",
+        expenseCard: "expenseCard",
+        basisValue: "basisValue"
     },
 };
