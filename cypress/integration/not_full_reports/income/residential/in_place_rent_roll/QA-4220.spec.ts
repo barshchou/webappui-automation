@@ -17,11 +17,11 @@ describe("Verify the # column in the grid",
         cy.stepInfo("1. Navigate to Income > Residential > In-Place Rent Roll");
         _NavigationSection.navigateToResInPlaceRentRoll();
 
-        testData.labelNames.forEach(val =>  {
-            cy.stepInfo(`2. Verify that the Inspected column (checkbox) is displayed after the ${val} in the grid and check them`);
-            Income._Residential.InPlaceRentRoll.checkCheckboxByLabel(val.checkLabel);
-            if (val.checkLabel !== testData.labelNames[0].checkLabel) {
-                Income._Residential.InPlaceRentRoll.verifyColumnExist(val.columnLabel);
+        testData.labelNames.forEach(labelName =>  {
+            cy.stepInfo(`2. Verify that the Inspected column (checkbox) is displayed after the ${labelName} in the grid and check them`);
+            Income._Residential.InPlaceRentRoll.checkCheckboxByLabel(labelName.checkLabel);
+            if (labelName.checkLabel !== testData.labelNames[0].checkLabel) {
+                Income._Residential.InPlaceRentRoll.verifyColumnExist(labelName.columnLabel);
             }
         });
         Income._Residential.InPlaceRentRoll.setIsInspectedCheckboxByRowNumber(0)
@@ -30,8 +30,8 @@ describe("Verify the # column in the grid",
         cy.stepInfo("3. Navigate to Income > Residential > Stabilized Rent Roll and verify checked column exist");
         _NavigationSection.navigateToResidentialStabilizedRentRoll();
 
-        testData.labelNames.slice(1).forEach(val => {
-            Income._Residential.StabilizedRentRoll.verifyColumnExistOrNotExistInTable(val.columnLabel);
+        testData.labelNames.slice(1).forEach(labelName => {
+            Income._Residential.StabilizedRentRoll.verifyColumnExistOrNotExistInTable(labelName.columnLabel);
         });
 
         cy.stepInfo("4. Proceed to the Final > Unit Inspection section and verify the correct data is displayed");
@@ -39,11 +39,11 @@ describe("Verify the # column in the grid",
         Final._UnitInspection.verifyRowExistOrNotExistInTable();
 
         _NavigationSection.navigateToResInPlaceRentRoll();
-        testData.labelNames.forEach(val =>  {
-            cy.stepInfo(`5. Uncheck ${val} checkbox on the Residential > Stabilized Rent Roll page`);
-            Income._Residential.InPlaceRentRoll.uncheckCheckboxByLabel(val.checkLabel);
-            if (val.checkLabel !== testData.labelNames[0].checkLabel) {
-                Income._Residential.InPlaceRentRoll.verifyColumnNotExist(val.columnLabel);
+        testData.labelNames.forEach(labelName =>  {
+            cy.stepInfo(`5. Uncheck ${labelName} checkbox on the Residential > Stabilized Rent Roll page`);
+            Income._Residential.InPlaceRentRoll.uncheckCheckboxByLabel(labelName.checkLabel);
+            if (labelName.checkLabel !== testData.labelNames[0].checkLabel) {
+                Income._Residential.InPlaceRentRoll.verifyColumnNotExist(labelName.columnLabel);
             }
         });
         Income._Residential.InPlaceRentRoll.setIsInspectedCheckboxByRowNumber(0, false);
