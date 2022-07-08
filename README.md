@@ -120,30 +120,32 @@ cypress/downloads/TestAutoReport-QA-4719 - 462 1st Avenue, Manhattan, NY 10016.d
 
 ### Env selection (dev/staging/prod/custom) <a id="env_selection"></a>
 
-TL;DR
+For dynamic [`baseUrl`](https://docs.cypress.io/guides/references/configuration#e2e) set we use [Cypress env variables](https://docs.cypress.io/guides/guides/environment-variables) and access to `config` from [`setupNodeEvents`](https://docs.cypress.io/guides/references/configuration#setupNodeEvents) (yeah, since Cypress 10 released - a lot of changed).
 
-If you want to open Cypress GUI - run `start.local.js` through nodejs
-
-Examples:
-
-Open Cypress GUI on dev env
-```shell
-node ./start.local.js 'cy:open' "--env url=dev"
+Basically what we do - we reassign `baseUrl` during runtime here:
+```ts
+config.baseUrl = evalUrl(config);
 ```
-Open Cypress GUI on staging env
+If want more details on hot it works - dive into `evalUrl` function.
+
+**How to use:**
+
+Pass `--env url=key_of_the_env` (urls and their **keys** defined in [ENVS](./utils/env.utils.ts)) 
+
+Opens Cypress GUI with dev url:
 ```shell
-node ./start.local.js 'cy:open' "--env url=staging"
-```
-Open Cypress GUI on custom env
-```shell
-node ./start.local.js 'cy:open' "--env url=custom,customEnv='https://bowery-staging.herokuapp.com'"
+npm run cy:open -- --env url=dev
 ```
 
-The same approach we use to set url via env variables, which described in [CLI](#cli_flags). A bit inconvinient, but works properly.
+Opens Cypress GUI with custom url:
+```shell
+npm run cy:open -- --env url=custom,customUrl='https://playwright.dev'
+```
 
-A bit of a history and problem
+**The same approach** remains for `npx cypress run` and CI runs.
 
-Previously, we were selecting specific url to run the tests with help of [Cypress environmental variables](https://docs.cypress.io/guides/guides/environment-variables), but our `baseUrl` in `cypress.json` wasn't set. It [wasn't a good approach](https://docs.cypress.io/guides/references/best-practices#Setting-a-global-baseUrl), but it allowed us dynamically set the url to visit and url for api requests. **BUT ALSO** our `before/beforeEach` **hooks were executing two time** (two time of login through api). And if we would try to create report - we would create two report and were working in the second one.     
+In CI we have check whether `url==custom` and in that case assign `customUrl`.
+
 
 ## Useful VS Code extensions <a id="vs_code_extensions"></a>
 
