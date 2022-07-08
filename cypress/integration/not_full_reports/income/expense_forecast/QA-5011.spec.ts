@@ -43,7 +43,7 @@ describe(`[QA-5011] [Income>Expense forecast] Unselected existing expense card i
             Income._ExpenseForecastActions.Page.toeAppraisersForecastValueLine.should('contain', testData.forecastPerUnitNotIncluded);
             Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastTotalFixture('sf'));
 
-            cy.stepInfo(`3. Verify if “Include Expense on Pro Forma” is unselected -> this  expense category 
+            cy.stepInfo(`4. Verify if “Include Expense on Pro Forma” is unselected -> this  expense category 
                          is NOT displayed in the Pro Forma page> Operating Expenses section and is NOT displayed 
                          in the Expense Forecast page>Total operating expenses card and generated comment (Per Unit measure + Empty Appraiser's forecasts)`);
             testData.expenseForecastFixtureArray("unit").forEach(element => {
@@ -61,7 +61,7 @@ describe(`[QA-5011] [Income>Expense forecast] Unselected existing expense card i
             Income._ExpenseForecastActions.Page.toeAppraisersForecastValueLine.should('contain', testData.forecastPerUnitNotIncluded);
             Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastTotalFixture('sf'));
 
-            cy.stepInfo(`4. Verify if “Include Expense on Pro Forma” is unselected -> this  expense category 
+            cy.stepInfo(`5. Verify if “Include Expense on Pro Forma” is unselected -> this  expense category 
                          is NOT displayed in the Pro Forma page> Operating Expenses section and is NOT displayed 
                          in the Expense Forecast page>Total operating expenses card and generated comment (Per Room measure for Fuel + Empty Appraiser's forecasts)`);
             Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastFuelFixture('room'));
@@ -77,7 +77,7 @@ describe(`[QA-5011] [Income>Expense forecast] Unselected existing expense card i
             Income._ExpenseForecastActions.Page.toeAppraisersForecastValueLine.should('contain', testData.forecastPerUnitNotIncluded);
             Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastTotalFixture('sf'));
 
-            cy.stepInfo(`5. Verify if “Include Expense on Pro Forma” is unselected -> this  expense category 
+            cy.stepInfo(`6. Verify if “Include Expense on Pro Forma” is unselected -> this  expense category 
                          is NOT displayed in the Pro Forma page> Operating Expenses section and is NOT displayed in the 
                          Expense Forecast page>Total operating expenses card and generated comment (Per Room measure for Fuel + Full Appraiser's forecasts)`);
             testData.expenseForecastFixtureArray().forEach(element => {
@@ -95,7 +95,7 @@ describe(`[QA-5011] [Income>Expense forecast] Unselected existing expense card i
             Income._ExpenseForecastActions.Page.toeAppraisersForecastValueLine.should('contain', testData.forecastPerUnitNotIncluded);
             Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastTotalFixture('sf'));
 
-            cy.stepInfo(`6. Verify if “Include Expense on Pro Forma” is unselected -> this  expense category 
+            cy.stepInfo(`7. Verify if “Include Expense on Pro Forma” is unselected -> this  expense category 
                          is NOT displayed in the Pro Forma page> Operating Expenses section and is NOT displayed in the 
                          Expense Forecast page>Total operating expenses card and generated comment (PSF measure + Full Appraiser's forecasts)`);
             testData.expenseForecastFixtureArray("sf").forEach(element => {
@@ -113,7 +113,7 @@ describe(`[QA-5011] [Income>Expense forecast] Unselected existing expense card i
             Income._ExpenseForecastActions.Page.toeAppraisersForecastValueLine.should('contain', testData.forecastPerUnitNotIncluded);
             Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastTotalFixture('sf'));
 
-            cy.stepInfo(`7. Verify if “Include Expense on Pro Forma” is unselected -> this  expense category 
+            cy.stepInfo(`8. Verify if “Include Expense on Pro Forma” is unselected -> this  expense category 
                          is NOT displayed in the Pro Forma page> Operating Expenses section and is NOT displayed 
                          in the Expense Forecast page>Total operating expenses card and generated comment (Per Unit measure + Full Appraiser's forecasts)`);
             testData.expenseForecastFixtureArray("unit").forEach(element => {
