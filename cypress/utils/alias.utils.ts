@@ -45,12 +45,12 @@ export const Alias = {
             appraiserCommentaryTextArea:"appraiserCommentaryTextArea"
         }
     },
-    // expenceForecastAliases: {
-    //     sumPerSFCustomCards: "sumPerSFCustomCards",
-    //     sumPerSFCheckedDefaultCards: "sumPerSFCheckedDefaultCards",
-    //     sumPerSF: "sumPerSF",
-    //     sumPerUnitCustomCards: "sumPerUnitCustomCards",
-    //     sumPerUnitCheckedDefaultCards: "sumPerUnitCheckedDefaultCards",
-    //     sumPerUnit: "sumPerUnit"
-    // },
+    expenceForecastAliases: {
+        sumPerSFCustomCards: "sumPerSFCustomCards",
+        sumPerSFCheckedDefaultCards: "sumPerSFCheckedDefaultCards",
+        sumPerSF: "sumPerSF",
+        sumPerUnitCustomCards: "sumPerUnitCustomCards",
+        sumPerUnitCheckedDefaultCards: "sumPerUnitCheckedDefaultCards",
+        sumPerUnit: "sumPerUnit"
+    },
 };

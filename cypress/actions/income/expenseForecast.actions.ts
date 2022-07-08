@@ -1,6 +1,7 @@
 import expenseForecastPage from "../../pages/income/expenseForecast.page";
 import { getNumberFromDollarNumberWithCommas, numberWithCommas } from "../../../utils/numbers.utils";
 import BaseActionsExt from "../base/base.actions.ext";
+import { Alias } from "../../utils/alias.utils";
 import { BoweryReports } from "../../types/boweryReports.type";
 
 type ForecastItem = BoweryReports.ForecastItem;
@@ -339,13 +340,13 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
     totalSumInPSFCustomCards(grossBuildingArea: number, resUnits = 0, rooms = 0): ExpenseForecastActions {
         expenseForecastPage.allForecastsInputs.then(inputs => {
             let sumPerSFCustomCards = 0;
-            cy.wrap(sumPerSFCustomCards).as('sumPerSFCustomCards');
+            cy.wrap(sumPerSFCustomCards).as(Alias.expenceForecastAliases.sumPerSFCustomCards);
             for (let i = 0; i < inputs.length; i++) {
                 this.expenseCard(inputs, i);
                 cy.get("@expenseCard").then(expenseCard => {
                     if (expenseCard.find('[label="Include Expense on Pro Forma"]').length === 0) {
                         this.SumPsfDependingOnBasis(inputs, i, resUnits, grossBuildingArea, rooms,
-                            '@sumPerSFCustomCards');
+                            Alias.expenceForecastAliases.sumPerSFCustomCards);
                     }
                 });
             }
@@ -364,12 +365,12 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
     totalSumInPSFCheckedDefaultCards(grossBuildingArea: number, resUnits = 0, rooms = 0): ExpenseForecastActions {
         expenseForecastPage.allForecastsInputs.then(inputs => {
             let sumPerSFDefaultCards = 0;
-            cy.wrap(sumPerSFDefaultCards).as('sumPerSFCheckedDefaultCards');
+            cy.wrap(sumPerSFDefaultCards).as(Alias.expenceForecastAliases.sumPerSFCheckedDefaultCards);
             for (let i = 0; i < inputs.length; i++) {
                 this.expenseCard(inputs, i);
                 cy.get("@expenseCard").then(expenseCard => {
                     if (expenseCard.find('[data-qa$=includeInProForma-checked]').length > 0) {
-                        this.SumPsfDependingOnBasis(inputs, i, grossBuildingArea, resUnits, rooms, '@sumPerSFCheckedDefaultCards');
+                        this.SumPsfDependingOnBasis(inputs, i, grossBuildingArea, resUnits, rooms, Alias.expenceForecastAliases.sumPerSFCheckedDefaultCards);
                     }
                 });
             }
@@ -379,7 +380,7 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
 
     verifyTotalForecastPSF(grossBuildingArea: number, resUnits = 0, rooms = 0): ExpenseForecastActions {
         this.totalSumForecastPSFAllCards(grossBuildingArea, resUnits, rooms);
-        cy.get(`@sumPerSF`).then(sumPerSF => {
+        cy.get(`@${Alias.expenceForecastAliases.sumPerSF}`).then(sumPerSF => {
             const textToBe = `Appraiser's Forecast: $${numberWithCommas(Number(sumPerSF).toFixed(2))}`;
             expenseForecastPage.appraisersTotalForecast.should("have.text", textToBe);
         });
@@ -389,10 +390,10 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
     totalSumForecastPSFAllCards(grossBuildingArea: number, resUnits = 0, rooms = 0): ExpenseForecastActions {
         this.totalSumInPSFCheckedDefaultCards(grossBuildingArea, resUnits, rooms);
         this.totalSumInPSFCustomCards(grossBuildingArea, resUnits, rooms);
-        cy.get(`@sumPerSFCheckedDefaultCards`).then(sumPerSFCheckedDefaultCards => {
-            cy.get('@sumPerSFCustomCards').then(sumPerSFCustomCards => {
+        cy.get(`@${Alias.expenceForecastAliases.sumPerSFCheckedDefaultCards}`).then(sumPerSFCheckedDefaultCards => {
+            cy.get(`@${Alias.expenceForecastAliases.sumPerSFCustomCards}`).then(sumPerSFCustomCards => {
                 let sumPerSF = Number(sumPerSFCheckedDefaultCards) + Number(sumPerSFCustomCards);
-                cy.wrap(sumPerSF).as('sumPerSF');
+                cy.wrap(sumPerSF).as(Alias.expenceForecastAliases.sumPerSF);
             });
         });
         return this;
@@ -431,13 +432,13 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
     totalSumInPerUnitCustomCards(grossBuildingArea: number, resUnits = 0, rooms = 0): ExpenseForecastActions {
         expenseForecastPage.allForecastsInputs.then(inputs => {
             let sumPerUnitCustomCards = 0;
-            cy.wrap(sumPerUnitCustomCards).as('sumPerUnitCustomCards');
+            cy.wrap(sumPerUnitCustomCards).as(Alias.expenceForecastAliases.sumPerUnitCustomCards);
             for (let i = 0; i < inputs.length; i++) {
                 this.expenseCard(inputs, i);
                 cy.get("@expenseCard").then(expenseCard => {
                     if (expenseCard.find('[label="Include Expense on Pro Forma"]').length === 0) {
                         this.SumPerUnitDependingOnBasis(inputs, i, grossBuildingArea, resUnits, rooms,
-                            '@sumPerUnitCustomCards');
+                            Alias.expenceForecastAliases.sumPerUnitCustomCards);
                     }
                 });
             }
@@ -456,12 +457,12 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
     totalSumInPerUnitCheckedDefaultCards(grossBuildingArea: number, resUnits = 0, rooms = 0): ExpenseForecastActions {
         expenseForecastPage.allForecastsInputs.then(inputs => {
             let sumPerUnitDefaultCards = 0;
-            cy.wrap(sumPerUnitDefaultCards).as('sumPerUnitCheckedDefaultCards');
+            cy.wrap(sumPerUnitDefaultCards).as(Alias.expenceForecastAliases.sumPerUnitCheckedDefaultCards);
             for (let i = 0; i < inputs.length; i++) {
                 this.expenseCard(inputs, i);
                 cy.get("@expenseCard").then(expenseCard => {
                     if (expenseCard.find('[data-qa$=includeInProForma-checked]').length > 0) {
-                        this.SumPerUnitDependingOnBasis(inputs, i, grossBuildingArea, resUnits, rooms, '@sumPerUnitCheckedDefaultCards');
+                        this.SumPerUnitDependingOnBasis(inputs, i, grossBuildingArea, resUnits, rooms, Alias.expenceForecastAliases.sumPerUnitCheckedDefaultCards);
                     }
                 });
             }
@@ -471,7 +472,7 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
 
     verifyTotalForecastPerUnit(grossBuildingArea: number, resUnits = 0, rooms = 0): ExpenseForecastActions {
         this.totalSumForecastPerUnitAllCards(grossBuildingArea, resUnits, rooms);
-        cy.get(`@sumPerUnit`).then(sumPerUnit => {
+        cy.get(`@${Alias.expenceForecastAliases.sumPerUnit}`).then(sumPerUnit => {
             const textToBe = `Appraiser's Forecast: $${numberWithCommas(Number(sumPerUnit).toFixed(2))}`;
             expenseForecastPage.appraisersTotalForecast.should("have.text", textToBe);
         });
@@ -481,10 +482,10 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
     totalSumForecastPerUnitAllCards(grossBuildingArea: number, resUnits = 0, rooms = 0): ExpenseForecastActions {
         this.totalSumInPerUnitCheckedDefaultCards(grossBuildingArea, resUnits, rooms);
         this.totalSumInPerUnitCustomCards(grossBuildingArea, resUnits, rooms);
-        cy.get(`@sumPerUnitCheckedDefaultCards`).then(sumPerUnitCheckedDefaultCards => {
-            cy.get(`@sumPerUnitCustomCards`).then(sumPerUnitCustomCards => {
+        cy.get(`@${Alias.expenceForecastAliases.sumPerUnitCheckedDefaultCards}`).then(sumPerUnitCheckedDefaultCards => {
+            cy.get(`@${Alias.expenceForecastAliases.sumPerUnitCustomCards}`).then(sumPerUnitCustomCards => {
                 let sumPerUnit = Number(sumPerUnitCheckedDefaultCards) + Number(sumPerUnitCustomCards);
-                cy.wrap(sumPerUnit).as('sumPerUnit');
+                cy.wrap(sumPerUnit).as(Alias.expenceForecastAliases.sumPerUnit);
             });
         });
         return this;
