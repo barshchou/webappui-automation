@@ -9,7 +9,7 @@ describe("Verify bond rates UI against API",
 
     it("[QA-4025] Check the Survey of Competitive Rates Discussion with it's logic", () => {
        
-        cy.stepInfo('2. Navigate to Organization -> Settings and verify commentary text');
+        cy.stepInfo('1. Navigate to Organization -> Settings and verify commentary text');
         loginAction(testData.adminUsername, testData.adminPassword);
         _NavigationSection.navigateToProfileOrganization(enums.MENU_LINKS.organization);
         Organization._OrganizationActions.openOrganizationSettingsPage();
