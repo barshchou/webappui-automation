@@ -75,13 +75,15 @@ class LaunchDarkly {
         headers: this.headersContent,
         body : JSON.stringify({
           patch: [ options ]
-        })
+        }),
+        retryOnStatusCodeFailure: true
       }); 
     } else {
       return cy.request({
         method,
         url: _url,
-        headers: this.headersContent
+        headers: this.headersContent,
+        retryOnStatusCodeFailure: true
       });
     }
   }
