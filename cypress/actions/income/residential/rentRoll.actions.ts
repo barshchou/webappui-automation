@@ -172,7 +172,7 @@ class InPlaceRentRollActions extends ResidentialRentRollSharedActions<typeof ren
         return this;
     }
 
-    setIsInspectedCheckboxByRowNumber(number: number, isCheck = true): InPlaceRentRollActions {
+    setIsInspectedCheckboxByRowNumber(number = 0, isCheck = true): InPlaceRentRollActions {
         isCheck === true ? rentRollPage.isInspectedInputs.eq(number).check()
             :  rentRollPage.isInspectedInputs.eq(number).uncheck();
         return this;

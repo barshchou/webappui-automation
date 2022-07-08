@@ -30,7 +30,7 @@ class UnitInspectionActions extends BaseActionsExt<typeof unitInspectionPage> {
         return this;
     }
 
-    verifyRowExistOrNotExistInTable(rowNumber = 0, isExist = true) {
+    verifyRowExistOrNotExistInTable(rowNumber = 0, isExist = true): UnitInspectionActions {
         isExist === true ?  unitInspectionPage.getRowInUnitInspectionTable(rowNumber).should("exist")
             : unitInspectionPage.getRowInUnitInspectionTable(rowNumber).should("not.exist");
         return this;
