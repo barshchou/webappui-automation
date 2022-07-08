@@ -262,6 +262,9 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         return this;
     }
 
+    /**
+     * @param ignoreGqlWait ignore gql request for comps to be resolved
+     */
     navigateToFindComps(ignoreGqlWait = false): NavigationSectionActions {
         this.clickSalesButton()
             .clickFindCompsButton()

@@ -12,6 +12,11 @@ import { recurse } from "cypress-recurse";
 import mapKeysUtils from "../../../utils/mapKeys.utils";
 
 class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
+    selectedCompsSetSort(sortType: "Custom" | "Data Sold") {
+        cy.get('[data-qa="sortSalesComps-select-list"]').click();
+        cy.get(`[data-qa="sortSalesComps-${sortType}-select-option"]`).click();
+        return this;
+    }
 
     get SaleInfo(){
         return saleInfoFormActions;
@@ -101,7 +106,7 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
      * Useful when we need to select n-random sales comps
      */
     selectCompFromMap(): FindCompsActions {
-        findCompsPage.getSelectCompFromMapButton().first().scrollIntoView().click({ force: true });
+        findCompsPage.getSelectCompFromMapButton().first().scrollIntoView().click();
         this.checkFindSingleSalesComp();
         return this;
     }
