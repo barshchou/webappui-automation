@@ -369,7 +369,7 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
                 this.expenseCard(inputs, i);
                 cy.get("@expenseCard").then(expenseCard => {
                     if (expenseCard.find('[data-qa$=includeInProForma-checked]').length > 0) {
-                        this.SumPsfDependingOnBasis(inputs, i, grossBuildingArea, resUnits, rooms, '@sumPerSFCheckedDefaultCards');
+                        this.SumPsfDependingOnBasis(inputs, i, grossBuildingArea, resUnits, rooms, 'sumPerSFCheckedDefaultCards');
                     }
                 });
             }
@@ -461,7 +461,7 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
                 this.expenseCard(inputs, i);
                 cy.get("@expenseCard").then(expenseCard => {
                     if (expenseCard.find('[data-qa$=includeInProForma-checked]').length > 0) {
-                        this.SumPerUnitDependingOnBasis(inputs, i, grossBuildingArea, resUnits, rooms, '@sumPerUnitCheckedDefaultCards');
+                        this.SumPerUnitDependingOnBasis(inputs, i, grossBuildingArea, resUnits, rooms, 'sumPerUnitCheckedDefaultCards');
                     }
                 });
             }
@@ -530,9 +530,9 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
     sumsInGeneratedComment(grossBuildingArea: number, resUnits = 0, rooms = 0): ExpenseForecastActions {
         this.totalSumForecastPSFAllCards(grossBuildingArea, resUnits, rooms);
         this.totalSumForecastPerUnitAllCards(grossBuildingArea, resUnits, rooms);
-        cy.get(`@${Alias.expenceForecastAliases.sumPerSF}`).then(sumPerSF => {
-            cy.get(`@${Alias.expenceForecastAliases.sumPerUnit}`).then(sumPerUnit => {
-                let sumPerSFInComment = `$${Number(sumPerSF).toFixed(2)}`;
+        cy.get(`@sumPerSF`).then(sumPerSF => {
+            cy.get(`@sumPerUnit`).then(sumPerUnit => {
+                let sumPerSFInComment = `$${numberWithCommas(Number(sumPerSF).toFixed(2))}`;
                 let sumPerUnitInComment = `$${numberWithCommas(Math.round(Number(sumPerUnit)))}`;
                 cy.wrap(sumPerSFInComment).as('sumPerSFInComment');
                 cy.wrap(sumPerUnitInComment).as('sumPerUnitInComment');
@@ -543,7 +543,7 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
 
     sumPerUnitTOEAppraisersForecast(grossBuildingArea: number, resUnits = 0, rooms = 0): ExpenseForecastActions {
         this.totalSumForecastPerUnitAllCards(grossBuildingArea, resUnits, rooms);
-        cy.get(`@${Alias.expenceForecastAliases.sumPerUnit}`).then(sumPerUnit => {
+        cy.get(`@sumPerUnit`).then(sumPerUnit => {
             let sumPerUnitTOEAppraisersForecast = numberWithCommas(Math.round(Number(sumPerUnit)));
             cy.wrap(sumPerUnitTOEAppraisersForecast).as('sumPerUnitTOEAppraisersForecast');
         });
@@ -552,7 +552,7 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
 
     sumPSFTOEAppraisersForecast(grossBuildingArea: number, resUnits = 0, rooms = 0): ExpenseForecastActions {
         this.totalSumForecastPSFAllCards(grossBuildingArea, resUnits, rooms);
-        cy.get(`@${Alias.expenceForecastAliases.sumPerSF}`).then(sumPerSF => {
+        cy.get(`@sumPerSF`).then(sumPerSF => {
             let sumPSFTOEAppraisersForecast = numberWithCommas(Number(sumPerSF).toFixed(2));
             cy.wrap(sumPSFTOEAppraisersForecast).as('sumPSFTOEAppraisersForecast');
         });

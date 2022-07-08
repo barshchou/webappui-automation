@@ -49,7 +49,7 @@ function verifyTOEAppraisersValueLinePSF(grossBuildingArea: number, resUnits = 0
 function verifyTOEAppraisersValueLinePerUnit(grossBuildingArea: number, resUnits = 0, rooms = 0) {
     Income._ExpenseForecastActions.sumPerUnitTOEAppraisersForecast(grossBuildingArea, resUnits, rooms);
     cy.get(`@sumPerUnitTOEAppraisersForecast`).then(sumPerUnitTOEAppraisersForecast => {
-        Income._ExpenseForecastActions.Page.toeAppraisersForecastValueLine.should('contain', forecastPSFTotal(String(sumPerUnitTOEAppraisersForecast)));
+        Income._ExpenseForecastActions.Page.toeAppraisersForecastValueLine.should('contain', forecastPerUnitTotal(String(sumPerUnitTOEAppraisersForecast)));
     });
     return this;
 }
