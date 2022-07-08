@@ -172,7 +172,7 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
      * Checks `findTransactionsByIdsAndVersions` gql operation whether its response has correct salesEventId ("salesCompId")
      */
     checkSelectedSingleSalesComps() {
-        cy.wait(`@${Alias.gql.FindTransactionsByIdsAndVersions}`).then(({ request, response }) => {
+        cy.wait(`@${Alias.gql.FindTransactionsByIdsAndVersions}`).then(({ request }) => {
             let req: Utils.GraphQLRequest = request.body;
             expect(req.operationName).to.equal(gqlOperationNames.findTransactionsByIdsAndVersions);
 
