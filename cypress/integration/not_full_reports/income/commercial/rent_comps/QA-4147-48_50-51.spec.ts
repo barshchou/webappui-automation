@@ -23,7 +23,8 @@ describe("Check that Commercial Rent Comps map has Filters dropdown",
         Income._CommercialManager.RentComps.Page.mapZoomOutButton.should("exist");
         Income._CommercialManager.RentComps.Page.mapDrawPolygonButton.should("exist");
 
-        Income._CommercialManager.RentComps.drawPolygon();
+        Income._CommercialManager.RentComps.drawPolygon(testData.coordinates)
+            .editDrewPolygon(testData.coordinates1);
 
         // deleteReport(testData.reportCreationData.reportNumber);
     });

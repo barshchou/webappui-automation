@@ -213,14 +213,98 @@ class CommercialRentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
         return this;
     }
 
-    drawPolygon(coordinates = [ { width: 0, height: 0} ]): CommercialRentCompsActions {
-        rentCompsPage.mapDrawPolygonButton.click();
-        coordinates.forEach(coord => {
-            rentCompsPage.mapContainer.click(coord.width, coord.height);
+    clickYesNoIfModalExist(yes = true): CommercialRentCompsActions {
+        cy.get("body").then($body => {
+            if ($body.text().includes("Would you like to select them?")) {
+                const button = yes === true ? rentCompsPage.getModalDialogYesButtons() : rentCompsPage.getModalDialogNoButtons();
+                button.click();
+                this.verifyProgressBarNotExist();
+            }
         });
-        cy.wait(10000);
         return this;
     }
+
+    drawPolygon(coordinates = [ { left: 0, top: 0 } ], dialogTitle = "Finish drawing", isSelect = true): CommercialRentCompsActions {
+        rentCompsPage.mapDrawPolygonButton.click();
+        coordinates.forEach(coord => {
+            rentCompsPage.mapContainer.click(coord.left, coord.top);
+        });
+        rentCompsPage.getMapDialogButtons(dialogTitle).click();
+        this.verifyProgressBarNotExist()
+            .clickYesNoIfModalExist(isSelect);
+
+        return this;
+    }
+
+    editDrewPolygon(coordinates = [ { elem: 0, left: 0, top: 0 } ], dialogTitle = "Save changes", isSelect = true): CommercialRentCompsActions {
+        rentCompsPage.getMapDialogButtons("Edit layers").click();
+        coordinates.forEach(coord => {
+            rentCompsPage.getEditingIcon(coord.elem).then($el => {
+                const canvas = $el.get(0);
+                const rect = canvas.getBoundingClientRect();
+                const center = {
+                    x: rect.left + rect.width / 2,
+                    y: rect.top + rect.height / 2
+                };
+
+              cy.log('mousedown', {
+                clientX: center.x,
+                clientY: center.y
+              });
+              canvas.dispatchEvent(
+                new MouseEvent('mousedown', {
+                  clientX: center.x,
+                  clientY: center.y
+                })
+              );
+
+              cy.log('mousemove', {
+                clientX: center.x,
+                clientY: center.y + 5
+              });
+              canvas.dispatchEvent(
+                new MouseEvent('mousemove', {
+                  clientX: center.x,
+                  clientY: center.y + 5,
+                  bubbles: true
+                })
+              );
+
+              cy.log('mousemove', {
+                clientX:  coord.left,
+                clientY:  coord.top
+              });
+              canvas.dispatchEvent(
+                new MouseEvent('mousemove', {
+                  clientX:  coord.left,
+                  clientY:  coord.top,
+                  bubbles: true
+                })
+              );
+
+              cy.log('mouseup', {
+                clientX:  coord.left,
+                clientY:  coord.top
+              });
+              requestAnimationFrame(() => {
+                canvas.dispatchEvent(
+                  new MouseEvent('mouseup', {
+                    clientX:  coord.left,
+                    clientY: coord.top,
+                    bubbles: true
+                  })
+                );
+              });
+            });
+            
+            // rentCompsPage.getEditingIcon(coord.elem).dragMapElement({ xMoveFactor: coord.left, yMoveFactor: coord.top });
+        });
+        rentCompsPage.getMapDialogButtons(dialogTitle).click();
+        this.verifyProgressBarNotExist()
+            .clickYesNoIfModalExist(isSelect);
+        return this;
+    }
+
 }
 
 export default new CommercialRentCompsActions(rentCompsPage);

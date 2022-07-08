@@ -88,6 +88,14 @@ class CommercialRentCompsPage extends BasePage {
     get mapZoomOutButton() {return cy.get("[title='Zoom out']");}
 
     get mapContainer() {return cy.get(".leaflet-container");}
+
+    getMapDialogButtons(title: string) {return cy.get(`[title='${title}']`);}
+
+    getModalDialogYesButtons() {return cy.get("[data-qa='yes.btn']");}
+
+    getModalDialogNoButtons() {return cy.get("[data-qa='no-btn']");}
+
+    getEditingIcon(index = 0) {return cy.get(".leaflet-editing-icon").eq(index);}
 }
 
 export default new CommercialRentCompsPage();
