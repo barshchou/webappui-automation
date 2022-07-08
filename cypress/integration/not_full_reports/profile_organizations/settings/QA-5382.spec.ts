@@ -10,8 +10,8 @@ describe("[QA-5382] Verify possibility to edit static text in-app",
     { tags:[ "@organizations", "@settings", "@check_export" ] }, () => {
 
     before('', () => {
-        launchDarklyApi.setFeatureFlagForUser(testData.reportTextEditorFlagKey, testData.featureFlagEnable);
-        launchDarklyApi.setFeatureFlagForUser(testData.swotAnalysisFlagKey, testData.featureFlagEnable);
+        launchDarklyApi.setFeatureFlagForUser(testData.reportTextEditorFlagKey, testData.featureFlagEnable)
+            .setFeatureFlagForUser(testData.swotAnalysisFlagKey, testData.featureFlagEnable);
     });
 
     it('Update static text in Settings and verify changes on a corresponding pages', () => {
@@ -44,5 +44,10 @@ describe("[QA-5382] Verify possibility to edit static text in-app",
             cy.stepInfo("5. Verify commentary text in exported report");
             cy.contains(testData.textUpdate).should('exist');
         });
+    });
+
+    after('Remove feature flag', () => {
+        launchDarklyApi.removeUserTarget(testData.reportTextEditorFlagKey);
+        launchDarklyApi.removeUserTarget(testData.swotAnalysisFlagKey);
     });
 });

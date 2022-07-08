@@ -75,7 +75,11 @@ class OrganizationSettingsActions extends BaseActionsExt<typeof organizationSett
         });
 
         organizationSettingsPage.verifySurveyOfCompetitiveRatesDiscussion.invoke('text').then(textToBe => {
-            expect(textToBe).to.be.eq(`Currently, 10-year treasuries are trading at ${_map.get('tenYearsBondsRate')}% suggesting mortgage rates of roughly ${_map.get('minMortgageRate')}% to ${_map.get('maxMortgageRate')}%. The current mortgage market indicates a competitive interest rate, as there is strong demand from mortgage lenders seeking stable multi-unit residential deals.`);
+            expect(textToBe).to.be.eq(`Currently, 10-year treasuries are trading at 
+            ${_map.get('tenYearsBondsRate')}% suggesting mortgage rates of roughly 
+            ${_map.get('minMortgageRate')}% to ${_map.get('maxMortgageRate')}%. The current 
+            mortgage market indicates a competitive interest rate, as there is strong 
+            demand from mortgage lenders seeking stable multi-unit residential deals.`);
         }); 
         return this;
     }
