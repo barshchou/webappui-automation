@@ -4,8 +4,10 @@ import Enums from "../../../../enums/enums";
 import { BoweryAutomation } from "../../../../types/boweryAutomation.type";
 import { BoweryReports } from "../../../../types/boweryReports.type";
 import { Income } from "../../../../actions";
+import { Alias } from "../../../../utils/alias.utils";
 
-const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("5011_12", {
+
+const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("5013_25", {
     incomeValue: Enums.INCOME_TYPE.both,
     conclusionValue: Enums.VALUE_CONCLUSION_TYPE.AS_COMPLETE
 });
@@ -40,7 +42,7 @@ const forecastPerUnitTotal = (perUnitToBe: string) => { return perUnitToBe === '
 
 function verifyTOEAppraisersValueLinePSF(grossBuildingArea: number, resUnits = 0, rooms = 0) {
     Income._ExpenseForecastActions.sumPSFTOEAppraisersForecast(grossBuildingArea, resUnits, rooms);
-    cy.get(`@sumPSFTOEAppraisersForecast`).then(sumPSFTOEAppraisersForecast => {
+    cy.get(`@${Alias.expenceForecastAliases.sumPSFTOEAppraisersForecast}`).then(sumPSFTOEAppraisersForecast => {
         Income._ExpenseForecastActions.Page.toeAppraisersForecastValueLine.should('contain', forecastPSFTotal(String(sumPSFTOEAppraisersForecast)));
     });
     return this;
@@ -48,7 +50,7 @@ function verifyTOEAppraisersValueLinePSF(grossBuildingArea: number, resUnits = 0
 
 function verifyTOEAppraisersValueLinePerUnit(grossBuildingArea: number, resUnits = 0, rooms = 0) {
     Income._ExpenseForecastActions.sumPerUnitTOEAppraisersForecast(grossBuildingArea, resUnits, rooms);
-    cy.get(`@sumPerUnitTOEAppraisersForecast`).then(sumPerUnitTOEAppraisersForecast => {
+    cy.get(`@${Alias.expenceForecastAliases.sumPerUnitTOEAppraisersForecast}`).then(sumPerUnitTOEAppraisersForecast => {
         Income._ExpenseForecastActions.Page.toeAppraisersForecastValueLine.should('contain', forecastPerUnitTotal(String(sumPerUnitTOEAppraisersForecast)));
     });
     return this;
@@ -56,8 +58,8 @@ function verifyTOEAppraisersValueLinePerUnit(grossBuildingArea: number, resUnits
 
 function verifyTOECommentGenerated(grossBuildingArea: number, resUnits = 0, rooms = 0) {
     Income._ExpenseForecastActions.sumsInGeneratedComment(grossBuildingArea, resUnits, rooms);
-    cy.get(`@sumPerSFInComment`).then(sumPerSFInComment => {
-        cy.get(`@sumPerUnitInComment`).then(sumPerUnitInComment => {
+    cy.get(`@${Alias.expenceForecastAliases.sumPerSFInComment}`).then(sumPerSFInComment => {
+        cy.get(`@${Alias.expenceForecastAliases.sumPerUnitInComment}`).then(sumPerUnitInComment => {
             let textToBe = commentariesFixture(String(sumPerSFInComment), String(sumPerUnitInComment)).generated;
             Income._ExpenseForecastActions.verifyTOECommentary(textToBe);
         });
