@@ -170,19 +170,13 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
 
     /**
      * Checks `findTransactionsByIdsAndVersions` gql operation whether its response has correct salesEventId ("salesCompId")
+     * 
+     * TODO: [QA-6132] Add assertion on salesEventId
      */
     checkSelectedSingleSalesComps() {
         cy.wait(`@${Alias.gql.FindTransactionsByIdsAndVersions}`).then(({ request }) => {
             let req: Utils.GraphQLRequest = request.body;
             expect(req.operationName).to.equal(gqlOperationNames.findTransactionsByIdsAndVersions);
-
-            // ernst: don't use this assert due to unpredictable behaviour
-            // uncomment when you get update about behavior
-            // cy.get(`@${Alias.salesEventId}`).then(_salesEventId => {
-            //     expect(_salesEventId).to.be.oneOf(
-            //         response.body.data.findTransactionsByIdsAndVersions.map(val => val.id)
-            //     );
-            // });
         });
         return this;
     }
