@@ -1,5 +1,5 @@
 import { Income } from '../../../../../actions/index';
-import testData from "../../../../../fixtures/not_full_reports/income/commercial/rent_comps/QA-4147-48_50-51.fixture";
+import testData from "../../../../../fixtures/not_full_reports/income/commercial/rent_comps/QA-4147-49_50-51.fixture";
 import NavigationSection from "../../../../../actions/base/navigationSection.actions";
 import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
 
@@ -23,9 +23,9 @@ describe("Check that Commercial Rent Comps map has Filters dropdown",
         Income._CommercialManager.RentComps.Page.mapZoomOutButton.should("exist");
         Income._CommercialManager.RentComps.Page.mapDrawPolygonButton.should("exist");
 
-        Income._CommercialManager.RentComps.drawPolygon(testData.coordinates)
-            .editDrewPolygon(testData.coordinates1);
+        Income._CommercialManager.RentComps.drawPolygon(testData.coordinates, testData.verifyDraftValue)
+            .editDrewPolygon(testData.editCoordinates, testData.verifyDrewValue);
 
-        // deleteReport(testData.reportCreationData.reportNumber);
+        deleteReport(testData.reportCreationData.reportNumber);
     });
 });
