@@ -224,83 +224,95 @@ class CommercialRentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
         return this;
     }
 
-    drawPolygon(coordinates = [ { left: 0, top: 0 } ], dialogTitle = "Finish drawing", isSelect = true): CommercialRentCompsActions {
+    private verifyIncludesPolygon(value: string | number): CommercialRentCompsActions {
+        cy.contains("This polygon includes").should("include.text", `${value}`);
+        return this;
+    }
+
+    drawPolygon(coordinates = [ { x: 0, y: 0 } ], verifyPolygons: number, dialogTitle = "Finish drawing", isSelect = true): CommercialRentCompsActions {
         rentCompsPage.mapDrawPolygonButton.click();
         coordinates.forEach(coord => {
-            rentCompsPage.mapContainer.click(coord.left, coord.top);
+            rentCompsPage.mapContainer.click(coord.x, coord.y);
         });
         rentCompsPage.getMapDialogButtons(dialogTitle).click();
         this.verifyProgressBarNotExist()
+            .verifyIncludesPolygon(verifyPolygons)
             .clickYesNoIfModalExist(isSelect);
 
         return this;
     }
 
-    editDrewPolygon(coordinates = [ { elem: 0, left: 0, top: 0 } ], dialogTitle = "Save changes", isSelect = true): CommercialRentCompsActions {
+    
+    /**
+    * Nikita: Edit only first element in edit polygon
+    * TODO: Need to figure out a way to change all the elements in edit polygon
+    */
+    //
+    editDrewPolygon(coordinates = [ { x: 0, y: 0 } ], verifyPolygons: number, dialogTitle = "Save changes", isSelect = true): CommercialRentCompsActions {
         rentCompsPage.getMapDialogButtons("Edit layers").click();
-        coordinates.forEach(coord => {
-            rentCompsPage.getEditingIcon(coord.elem).then($el => {
-                const canvas = $el.get(0);
-                const rect = canvas.getBoundingClientRect();
-                const center = {
+        coordinates.forEach((coord, index) => {
+            rentCompsPage.editingIcon.then($el => {
+                let canvas = $el.get(index);
+                let rect = canvas.getBoundingClientRect();
+                  
+                let center = {
                     x: rect.left + rect.width / 2,
                     y: rect.top + rect.height / 2
                 };
-
-              cy.log('mousedown', {
-                clientX: center.x,
-                clientY: center.y
-              });
-              canvas.dispatchEvent(
-                new MouseEvent('mousedown', {
-                  clientX: center.x,
-                  clientY: center.y
-                })
-              );
-
-              cy.log('mousemove', {
-                clientX: center.x,
-                clientY: center.y + 5
-              });
-              canvas.dispatchEvent(
-                new MouseEvent('mousemove', {
-                  clientX: center.x,
-                  clientY: center.y + 5,
-                  bubbles: true
-                })
-              );
-
-              cy.log('mousemove', {
-                clientX:  coord.left,
-                clientY:  coord.top
-              });
-              canvas.dispatchEvent(
-                new MouseEvent('mousemove', {
-                  clientX:  coord.left,
-                  clientY:  coord.top,
-                  bubbles: true
-                })
-              );
-
-              cy.log('mouseup', {
-                clientX:  coord.left,
-                clientY:  coord.top
-              });
-              requestAnimationFrame(() => {
+    
+                cy.log('mousedown', {
+                    clientX: center.x,
+                    clientY: center.y
+                });
                 canvas.dispatchEvent(
-                  new MouseEvent('mouseup', {
-                    clientX:  coord.left,
-                    clientY: coord.top,
-                    bubbles: true
-                  })
-                );
-              });
-            });
-            
-            // rentCompsPage.getEditingIcon(coord.elem).dragMapElement({ xMoveFactor: coord.left, yMoveFactor: coord.top });
+                    new MouseEvent('mousedown', {
+                      clientX: center.x,
+                      clientY: center.y
+                    })
+                  );
+    
+                  cy.log('mousemove', {
+                    clientX: center.x,
+                    clientY: center.y + 5
+                  });
+                  canvas.dispatchEvent(
+                    new MouseEvent('mousemove', {
+                        clientX: center.x,
+                        clientY: center.y + 5,
+                        bubbles: true
+                    })
+                  );
+    
+                  cy.log('mousemove', {
+                    clientX: center.x - coord.x,
+                    clientY: center.y - coord.y,
+                  });
+                  canvas.dispatchEvent(
+                    new MouseEvent('mousemove', {
+                        clientX: center.x - coord.x,
+                        clientY: center.y - coord.y,
+                        bubbles: true
+                    })
+                  );
+    
+                  cy.log('mouseup', {
+                    clientX: center.x - coord.x,
+                    clientY: center.y - coord.y,
+                  });
+                  requestAnimationFrame(() => {
+                    canvas.dispatchEvent(
+                      new MouseEvent('mouseup', {
+                        clientX: center.x - coord.x,
+                        clientY: center.y - coord.y,
+                        bubbles: true
+                      })
+                    );
+                  });
+                });
         });
         rentCompsPage.getMapDialogButtons(dialogTitle).click();
         this.verifyProgressBarNotExist()
+            .verifyIncludesPolygon(verifyPolygons)
             .clickYesNoIfModalExist(isSelect);
         return this;
     }

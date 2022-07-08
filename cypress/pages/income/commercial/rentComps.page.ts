@@ -95,7 +95,7 @@ class CommercialRentCompsPage extends BasePage {
 
     getModalDialogNoButtons() {return cy.get("[data-qa='no-btn']");}
 
-    getEditingIcon(index = 0) {return cy.get(".leaflet-editing-icon").eq(index);}
+    get editingIcon() {return cy.get(".leaflet-editing-icon");}
 }
 
 export default new CommercialRentCompsPage();
