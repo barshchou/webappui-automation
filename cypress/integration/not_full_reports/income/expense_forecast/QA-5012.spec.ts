@@ -39,7 +39,6 @@ describe(`[QA-5012] [Income>Expense forecast] Unselected existing expense card i
             testData.expenseForecastFixtureArray().forEach(element => {
                 Income._ExpenseForecastActions.enterForecastItemForecast(element);
             });
-
         });
 
         it(`Verify If “Include Expense on Pro Forma”  checkbox is unselected but there is 
