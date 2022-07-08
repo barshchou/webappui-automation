@@ -10,7 +10,7 @@ describe("In-Place Rent Roll table tests",
         createReport(testData.reportCreationData);
     });
 
-    it("[QA-4239_41-42]", () => {
+    it("[QA-4231-33]", () => {
         cy.stepInfo('Preconditions: Navigate to Income -> Summary and specify amount of units');
         _NavigationSection.navigateToPropertySummary();
         Property._Summary.enterNumberOfResUnits(testData.residentialUnits.length);
@@ -21,11 +21,11 @@ describe("In-Place Rent Roll table tests",
         
         cy.stepInfo("2. Verify the Rooms are prefilled (=2) if the Rent Type is selected, if not - it’s empty");
         Income._Residential.InPlaceRentRoll.enterRoomsNumberByRowNumber(testData.residentialUnits[0].rooms, 0);
-        testData.residentialUnits.slice(1).forEach((unit, index) => {
+        testData.residentialUnits.slice(1).forEach((_, index) => {
             Income._Residential.InPlaceRentRoll.verifyRoomsNumberByRow(testData.initialValue, index + 1);
         });
 
-        cy.stepInfo("3. Fill residential units and verify Rent rooms cells, Unit Nuber values and Bedrooms cells");
+        cy.stepInfo("3. Fill residential units and verify Rent rooms cells, Unit Number values and Bedrooms cells");
         testData.residentialUnits.forEach((unit, index) => {
             Income._Residential.InPlaceRentRoll.enterMonthlyRentByRowNumber(unit.monthlyRent, index)
                 .enterBedroomsNumberByRowNumber(unit.bedRooms, index)
@@ -33,7 +33,7 @@ describe("In-Place Rent Roll table tests",
                 .enterUnitNumberByRow(unit.unitNumber, index);
         });
 
-        cy.stepInfo("4. Verify the Bedrooms, Unit Nuber and Rooms value can be deleted");
+        cy.stepInfo("4. Verify the Bedrooms, Unit Number and Rooms value can be deleted");
         Income._Residential.InPlaceRentRoll.removeBedroomsNumberByRowNumber()
             .removeRoomsNumberByRowNumber()
             .removeUnitNumberByRowNumber();

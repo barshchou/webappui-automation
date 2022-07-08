@@ -67,16 +67,11 @@ class StabilizedRentRollActions extends ResidentialRentRollSharedActions<typeof 
         return this;
     }
 
-    verifyColumnExistInTable(name: string): this {
-        stabRentRollPage.getLabelInGridTable(name).should("exist");
+    verifyColumnExistOrNotExistInTable(name: string, isExist = true): this {
+        isExist === true ?  stabRentRollPage.getLabelInGridTable(name).should("exist")
+            :  stabRentRollPage.getLabelInGridTable(name).should("not.exist");
         return this;
     }
-
-    verifyColumnNotExistInTable(name: string): this {
-        stabRentRollPage.getLabelInGridTable(name).should("not.exist");
-        return this;
-    }
-
 } 
 
 export default new StabilizedRentRollActions(stabRentRollPage);

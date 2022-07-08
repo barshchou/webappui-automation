@@ -155,7 +155,7 @@ describe("Full bowery way, multifamily as complete report", { tags: [ "@full_rep
         Income.Residential.InPlaceRentRoll.verifyNumberOfResidentialUnits(testData.currentDescription.numberOfUnits)
             .checkCheckboxByLabel(testData.inPLaceRentRoll.includePerRoom)
             .checkCheckboxByLabelAndVerify(testData.inPLaceRentRoll.forecastLabel, testData.inPLaceRentRoll.forecastColumn)
-            .checkListIsInspectedByRowNumbers(testData.inPLaceRentRoll.isInspectedRowsToCheck)
+            .setCheckListIsInspectedByRowNumbers(testData.inPLaceRentRoll.isInspectedRowsToCheck)
             .enterUnitNumbersByOrderToAll(testData.currentDescription.numberOfUnits)
             .enterAllEqualRoomsNumber(testData.inPLaceRentRoll.roomsNumber, testData.currentDescription.numberOfUnits)
             .enterAllEqualBedroomsNumber(testData.inPLaceRentRoll.bedroomsNumber, testData.currentDescription.numberOfUnits)
