@@ -388,6 +388,11 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         return this;
     }
 
+    clickCertification(): NavigationSectionActions {
+        navigationSectionPage.certification.click();
+        return this;
+    }
+
     clickCoverPage(): NavigationSectionActions {
         navigationSectionPage.coverPage.click();
         return this;
@@ -463,6 +468,13 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
     navigateToLetterOfTransmittal(): NavigationSectionActions {
         this.clickPreviewEditButton()
             .clickLetterOfTransmittal()
+            .clickYesIfExist();
+        return this;
+    }
+
+    navigateToCertification(): NavigationSectionActions {
+        this.clickPreviewEditButton()
+            .clickCertification()
             .clickYesIfExist();
         return this;
     }
