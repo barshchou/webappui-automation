@@ -144,6 +144,6 @@ describe(`[QA-5025] [Income>Expense forecast] Selected existing expense card is 
             //         testData.rentRollResUnitFixture.rooms
             //     );
 
-            //deleteReport(testData.reportCreationData.reportNumber);
+            deleteReport(testData.reportCreationData.reportNumber);
         });
     });
