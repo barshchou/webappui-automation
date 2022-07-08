@@ -352,7 +352,7 @@ describe("Full bowery way, multifamily as complete report", { tags: [ "@full_rep
             .chooseForecastItemBasis(testData.expenseForecast.legalProf)
             .chooseForecastItemBasis(testData.expenseForecast.miscellaneous)
             .chooseForecastItemBasis(testData.expenseForecast.management)
-            .checkPercentOfEGICheckbox()
+            .changeStateOfPercentOfEGICheckbox()
             .enterPercentOfEgi(testData.expenseForecast.percentOfEgi);
         const managementForecastEgi = Income.ExpenseForecast
             .getManagementForecastEgiPercent(testData.expenseForecast.management, testData.expenseForecast.effectiveGrossIncome, testData.expenseForecast.percentOfEgi, testData.currentDescription);
