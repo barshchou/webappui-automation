@@ -6,7 +6,7 @@ const reportCreationFixture = () => {
     return ReportDataCreator.getReportData("5095");
 };
 
-const _checkboxNames: string[] = Enums.EXPENSE_FORECAST_ITEMS.expenseCardsIDArray;
+const _checkboxNames: string[] = Enums.EXPENSE_FORECAST_ITEMS.expenseCardsIncludeInProFormaCheckboxArray;
 
 const _expenseForecasts: BoweryReports.ForecastItem[] = [
     {
@@ -15,7 +15,7 @@ const _expenseForecasts: BoweryReports.ForecastItem[] = [
     },
     {
         name: "electricity",
-        forecast: 1380
+        forecast: 380
     },
     {
         name: "fuel", 
@@ -55,6 +55,20 @@ const _expenseForecasts: BoweryReports.ForecastItem[] = [
     }
 ];
 
+const _forecastNames: string[] = [
+    Enums.PRO_FORMA_TYPES.insurance,
+    Enums.PRO_FORMA_TYPES.electricity,
+    Enums.PRO_FORMA_TYPES.fuel,
+    Enums.PRO_FORMA_TYPES.waterAndSewer,
+    Enums.PRO_FORMA_TYPES.repairAndMaintenance,
+    Enums.PRO_FORMA_TYPES.payrollBenefits,
+    Enums.PRO_FORMA_TYPES.generalAndAdministrative,
+    Enums.PRO_FORMA_TYPES.legalAndProfessional,
+    Enums.PRO_FORMA_TYPES.miscellaneous,
+    Enums.PRO_FORMA_TYPES.managementFees,
+    Enums.PRO_FORMA_TYPES.replacementsAndReserves
+];
+
 const _perUnitBasis: BoweryReports.UnitSF = "unit";
 const _perSFBasis: BoweryReports.UnitSF = "sf";
 const _perRoomBasis: BoweryReports.UnitSF = "room";
@@ -69,6 +83,7 @@ export default {
     reportCreationData: reportCreationFixture(),
     checkboxNames: _checkboxNames,
     expenseForecasts: _expenseForecasts,
+    forecastNames: _forecastNames,
     perUnitBasis: _perUnitBasis,
     perSFBasis: _perSFBasis,
     perRoomBasis: _perRoomBasis,

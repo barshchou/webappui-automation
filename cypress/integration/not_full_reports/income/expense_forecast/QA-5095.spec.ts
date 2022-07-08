@@ -8,7 +8,7 @@ describe(`[QA-5095] Selected expenses forecast is exported to Estimated Operatin
 
     const url = `${Cypress.config().baseUrl}`;
 
-    it("Verify for each existing expense forecast and for Per SF as unit of measure", () => {
+    it.skip("Verify for each existing expense forecast and for Per SF as unit of measure", () => {
         createReport(testData.reportCreationData);
 
         cy.stepInfo("1. Go to Expense Forecast");
@@ -18,7 +18,7 @@ describe(`[QA-5095] Selected expenses forecast is exported to Estimated Operatin
         testData.expenseForecasts.forEach((forecastItem, index) => {
             forecastItem.basis = testData.perSFBasis;
             Income._ExpenseForecastActions
-                .changeStateOfIncludeInProFormaCheckbox(testData.checkboxNames[index]);
+                .verifyIncludeInProFormaCheckboxIsChecked(testData.checkboxNames[index]);
             Income._ExpenseForecastActions.changeStateOfPercentOfEGICheckbox(false);
             Income._ExpenseForecastActions.chooseForecastItemBasis(forecastItem);
             Income._ExpenseForecastActions.enterForecastItemForecast(forecastItem);
@@ -39,7 +39,14 @@ describe(`[QA-5095] Selected expenses forecast is exported to Estimated Operatin
             cy.log(<string>file);
             cy.stepInfo("4. Verify if selected Expense Forecast is displayed in Estimated Operating Expense section");
             cy.visit(<string>file);
-            
+            cy.contains("Estimated Operating Expenses").scrollIntoView();
+            testData.forecastNames.forEach((forecastName, index) => {
+                cy.xpath(`//*[text()='${forecastName}']`).should("have.text", forecastName)
+                    .next().contains("PSF Summary").should("have.text", "PSF Summary");
+                cy.xpath(`//*[text()='${forecastName}']/following-sibling::table//tr`)
+                    .eq(2).find("td").eq(1)
+                    .should("have.text", `$${testData.expenseForecasts[index].forecast.toFixed(2)}`);
+            });
         }); 
     });
 });
