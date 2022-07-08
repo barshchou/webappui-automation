@@ -10,9 +10,14 @@ describe(`[QA-5012] [Income>Expense forecast] Unselected existing expense card i
         before("Login, create report", () => {
             Cypress.config('numTestsKeptInMemory', 0);
             createReport(testData.reportCreationData);
+            cy.saveLocalStorage();
         });
 
-        it("Test body", () => {
+        beforeEach(() => {
+            cy.restoreLocalStorage();
+        });
+
+        it("Preconditions", () => {
 
             cy.stepInfo(`1. Go to Property > Summary and add residential and commertial units`);
             _NavigationSection.navigateToPropertySummary();
@@ -35,9 +40,12 @@ describe(`[QA-5012] [Income>Expense forecast] Unselected existing expense card i
                 Income._ExpenseForecastActions.enterForecastItemForecast(element);
             });
 
-            cy.stepInfo(`4. Verify If “Include Expense on Pro Forma”  checkbox is unselected but there is 
-                         data left in the forecast, this data is not included in calculations on Pro forma and Expense forecast page 
-                         (Per SF measure + Full Appraiser's forecasts)`);
+        });
+
+        it(`Verify If “Include Expense on Pro Forma”  checkbox is unselected but there is 
+            data left in the forecast, this data is not included in calculations on Pro forma and Expense forecast page 
+            (Per SF measure + Full Appraiser's forecasts)`, () => {
+
             Income._ExpenseForecastActions.totalSumForecastPSFAllCards(
                 testData.buildingDescription.grossArea,
                 testData.numberOfResidentialUnits,
@@ -70,10 +78,12 @@ describe(`[QA-5012] [Income>Expense forecast] Unselected existing expense card i
                     testData.numberOfResidentialUnits,
                     testData.rentRollResUnitFixture.rooms
                 );
+        });
 
-            cy.stepInfo(`5. Verify If “Include Expense on Pro Forma” checkbox is unselected but there is 
-                        data left in the forecast, this data is not included in calculations on Pro forma and Expense forecast page 
-                        (Per Unit measure + Full Appraiser's forecasts)`);
+        it(`Verify If “Include Expense on Pro Forma” checkbox is unselected but there is 
+                data left in the forecast, this data is not included in calculations on Pro forma and Expense forecast page 
+                (Per Unit measure + Full Appraiser's forecasts)`, () => {
+
             testData.expenseForecastFixtureArray("unit").forEach(element => {
                 Income._ExpenseForecastActions.chooseForecastItemBasis(element);
             });
@@ -109,10 +119,12 @@ describe(`[QA-5012] [Income>Expense forecast] Unselected existing expense card i
                     testData.numberOfResidentialUnits,
                     testData.rentRollResUnitFixture.rooms
                 );
+        });
 
-            cy.stepInfo(`6. Verify If “Include Expense on Pro Forma”  checkbox is unselected but there is 
-                         data left in the forecast, this data is not included in calculations on Pro forma and Expense forecast page 
-                         (Per Room measure for Fuel + Full Appraiser's forecasts)`);
+        it(`Verify If “Include Expense on Pro Forma”  checkbox is unselected but there is 
+                data left in the forecast, this data is not included in calculations on Pro forma and Expense forecast page 
+                (Per Room measure for Fuel + Full Appraiser's forecasts)`, () => {
+
             Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastFuelFixture('room'));
             Income._ExpenseForecastActions.totalSumForecastPSFAllCards(
                 testData.buildingDescription.grossArea,
