@@ -1,3 +1,4 @@
+import enums from "../../../enums/enums";
 import reimbursementSummary from "../../../pages/income/commercial/reimbursementSummary.page";
 import { BoweryReports } from "../../../types/boweryReports.type";
 import BaseActionsExt from "../../base/base.actions.ext";
@@ -22,7 +23,7 @@ class ReimbursementSummaryActions extends BaseActionsExt<typeof reimbursementSum
         return this;
     }
 
-    selectReimbursmentType(type: string): ReimbursementSummaryActions {
+    selectReimbursementType(type: string): ReimbursementSummaryActions {
         reimbursementSummary.reimbursementTypeRadioButton(type).click();
         return this;
     }
@@ -35,13 +36,13 @@ class ReimbursementSummaryActions extends BaseActionsExt<typeof reimbursementSum
     enterCommercialReimbursement(expense: string, expenseCellName: string, 
         expenseType: BoweryReports.ReimbursementType, knownType: BoweryReports.KnownInformation): ReimbursementSummaryActions {
             this.selectExpenseType(expense, expenseCellName)
-                .selectReimbursmentType(expenseType)
+                .selectReimbursementType(expenseType)
                 .selectKnownInformationType(knownType);
             return this;
     }
 
     addNewCommercialReimbursement(expense: string, expenseCellName: string, 
-        expenseType: BoweryReports.ReimbursementType, knownType: BoweryReports.KnownInformation): ReimbursementSummaryActions {
+        expenseType: BoweryReports.ReimbursementType, knownType: BoweryReports.KnownInformation = enums.KNOWN_INFORMATION.monthly): ReimbursementSummaryActions {
             this.openAddCommercialReimbursementModal()
                 .enterCommercialReimbursement(expense, expenseCellName, expenseType, knownType)
                 .clickSubmitBtn();

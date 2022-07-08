@@ -81,7 +81,9 @@ export namespace BoweryReports {
         name: ForecastItemBasis | string, 
         basis?: UnitSF, 
         forecast?: number | undefined, 
-        projection?: number 
+        projection?: number,
+        cardName?: ExpenseCardNames,
+        expenseUIName?: ProFormaTypes
     }
 
     export type Periods = { 
@@ -201,4 +203,5 @@ export namespace BoweryReports {
     export type PropertyConditionsRadios = keyof typeof Enums.PROPERTY_CONDITIONS_RADIOS;
     export type BondTickers = typeof Enums.BOND_TYPES[KeyInfo.BondTypes]
     export type BondTypes = keyof typeof  Enums.BOND_TYPES
+    export type ExpenseCardNames = typeof Enums.EXPENSES_CARD_NAMES[KeyInfo.ExpenseCardName]
 }

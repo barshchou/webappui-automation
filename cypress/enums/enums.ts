@@ -53,6 +53,7 @@ import salesAdjustmentGridEnum from "./adjustComps/salesadjustment.enum";
 import reportStatusEnum from "./reportParams/reportStatus.enum";
 import bondTypesEnum from "./organization/bondTypes.enum";
 import rowsMarketAdjustmentEnum from "./adjustComps/marketadjustment.enum";
+import expensesForecastCardNamesEnum from "./expense/expensesForecastCardNames.enum";
 
 export default {
     TEMPLATE_TYPE: templateTypesEnum,
@@ -109,5 +110,6 @@ export default {
     SALES_ADJUSTMENT_GRID: salesAdjustmentGridEnum,
     ROWS_MARKET_ADJUSTMENT: rowsMarketAdjustmentEnum,
     REPORT_STATUS: reportStatusEnum,
-    BOND_TYPES: bondTypesEnum
+    BOND_TYPES: bondTypesEnum,
+    EXPENSES_CARD_NAMES: expensesForecastCardNamesEnum
 };

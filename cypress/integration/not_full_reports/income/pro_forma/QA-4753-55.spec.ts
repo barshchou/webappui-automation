@@ -38,7 +38,7 @@ describe("Pro Forma page table Effective Gross Income validation",
         _NavigationSection.clickCommercialReimbursementSummaryButton()
             .clickYesIfExist();
         Income._CommercialManager.ReimbursementSummary.addNewCommercialReimbursement(
-            testData.expenseType, testData.expenceTypeCellName, testData.reimbursementType, testData.knownInformation)
+            testData.expenseType, testData.expenseTypeCellName, testData.reimbursementType, testData.knownInformation)
             .fillReimbursements(testData.monthlyReimbursement)
             .fillVCLossByRow(testData.reimbursementVcLoss);
 

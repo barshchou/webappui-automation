@@ -112,7 +112,7 @@ export default {
     expenseType: _expenseType,
     knownInformation: _knownInformation,
     monthlyReimbursement: _monthlyReimbursement,
-    expenceTypeCellName: _expenseTypeCellName,
+    expenseTypeCellName: _expenseTypeCellName,
     reimbursementType: _reimbursementType,
     residentialMonthlyRent: _residentialMonthlyRent,
     potentialGrossIncomeTotal: _potentialGrossIncomeTotal,
