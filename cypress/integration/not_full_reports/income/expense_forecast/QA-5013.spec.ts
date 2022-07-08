@@ -233,7 +233,6 @@ describe(`[QA-5013] [Income>Expense forecast] Selected expense card is displayed
             Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastTotalFixture('sf'));
         });
 
-
         it(`Verify if “Include Expense on Pro Forma” is selected -> this  expense category 
             is displayed in the Pro Forma page > Operating Expenses section (Per Unit measure + Full Appraiser's forecasts)`, function () {
 
@@ -263,7 +262,7 @@ describe(`[QA-5013] [Income>Expense forecast] Selected expense card is displayed
         it(`Verify if “Include Expense on Pro Forma” is selected -> this  expense category 
             is displayed in the Expense Forecast page > Total operating expenses card (TOE card basis = Per Unit) 
             and generated comment (Per Unit measure + Full Appraiser's forecasts)`, function () {
-                
+
             Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastTotalFixture('unit'));
             testData.verifyTOECommentGenerated(testData.buildingDescription.grossArea,
                 testData.numberOfResidentialUnits,
