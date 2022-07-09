@@ -38,13 +38,18 @@ describe("",
     });
     
     testData.expensesForecast.forEach(expense => {
-        it(`[${expense.testCaseId}] Verify ${expense.expenseForecast.expenseUIName} Appraiser's Forecast (GROSS) 
-            for each Commercial Unit is calculated as: 
-            Expense Forecast Per SF * [Selected Basis for Square Foot Analysis]*`, () => {
+        it(`[${expense.testCaseId}] Verifying ${expense.expenseForecast.expenseUIName} Appraiser's Forecast (GROSS) `, () => {
 
-            cy.stepInfo(`4. Click on Add Reimbursement and select expense in dropdown`);
+            cy.stepInfo(`4. Click on Add Reimbursement and select expense in dropdown
+                        5. Select  % of Appraiser Forecast radio button for Reimbursement Type 
+                        (it doesn't matter if Admin Fee is selected or not) and click on Add button`);
             Income._CommercialManager.ReimbursementSummary.addNewCommercialReimbursement(
                 expense.expenseForecast.expenseUIName, expense.expenseForecast.name, testData.reimbursementType);
+
+            cy.stepInfo(`6. Verify ${expense.expenseForecast.expenseUIName} Appraiser's Forecast (GROSS) 
+                        for each Commercial Unit is calculated as: 
+                        Expense Forecast Per SF * [Selected Basis for Square Foot Analysis]*`);
+            //TODO
         });
     });
     
