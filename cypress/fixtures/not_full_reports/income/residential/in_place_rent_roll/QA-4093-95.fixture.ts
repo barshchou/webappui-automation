@@ -21,11 +21,12 @@ const _rentRollResidentialUnitsFixture: BoweryReports.ResidentialUnit[] = [
     ];
 
 export default {
-    reportCreationData: ReportDataCreator.getReportData("4093-94"),
+    reportCreationData: ReportDataCreator.getReportData("4093-95"),
     resUnit: 1,
     squareFootage: 235,
     monthlyRent: 5758,
-    psfRadioValue: "monthly",
+    psfRadioValuePerMonthly: 'monthly' as BoweryReports.UnitsOfMeasure,
+    psfRadioValuePerAnnually: 'annually' as BoweryReports.UnitsOfMeasure,
     columnName: "Rent PSF/Month",
     rentRollResidentialUnits: _rentRollResidentialUnitsFixture
 };
