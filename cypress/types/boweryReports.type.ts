@@ -139,6 +139,8 @@ export namespace BoweryReports {
 
     export type ReimbursementType = keyof typeof Enums.REIMBURSEMENT_TYPES
 
+    export type ReimbursementColumnsId = typeof Enums.REIMBURSEMENT_COLUMN_ID[KeyInfo.ReimbursementColumnsId]
+
     export type KnownInformation = typeof Enums.KNOWN_INFORMATION[KeyInfo.KnownInformationKeys]
 
     export type UnitsOfMeasure = typeof Enums.UNITS_OF_MEASURE[KeyInfo.UnitsOfMeasureKeys]

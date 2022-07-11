@@ -14,7 +14,8 @@ const reportCreationFixture = () => {
 
 const _numberOfCommercialUnits = 3;
 const _commercialUnitSquareFootage = 500;
-const _grossBuildingArea = 5000;
+const _grossBuildingArea = 5000.12;
+const _percentOfTotal = [ 5, 6, 7 ];
 
 const _commercialUnits = () => {
     return {
@@ -136,47 +137,47 @@ const _expenseForecastLegalAndProfessionalFixture = (): BoweryReports.ForecastIt
 const _expensesForecast = () => { //BoweryReports.ForecastItem[]
     return [ { 
             expenseForecast: _expenseForecastWaterAndSewerFixture(),
-            testCaseId: 'QA-6164' 
+            testCaseIds: 'QA-5971 & QA-5972' 
         },
         {
             expenseForecast: _expenseForecastElectricityFixture(),
-            testCaseId: 'QA-6164' 
+            testCaseIds: 'QA-5967 & QA-5968' 
         },
         {
             expenseForecast: _expenseForecastFuelFixture(),
-            testCaseId: 'QA-6164' 
+            testCaseIds: 'QA-5969 & QA-5970' 
         },
         {
             expenseForecast: _expenseForecastGeneralAndAdministrativeFixture(),
-            testCaseId: 'QA-6164' 
+            testCaseIds: 'QA-5977 & QA-5978' 
         },
         {
             expenseForecast: _expenseForecastInsuranceFixture(),
-            testCaseId: 'QA-6164' 
+            testCaseIds: 'QA-5964 & QA-5966' 
         },
         {
             expenseForecast: _expenseForecastLegalAndProfessionalFixture(),
-            testCaseId: 'QA-6164' 
+            testCaseIds: 'QA-5979 & QA-5980' 
         },
         {
             expenseForecast: _expenseForecastManagementFeesFixture(),
-            testCaseId: 'QA-6164' 
+            testCaseIds: 'QA-5983 & QA-5984' 
         },
         {
             expenseForecast: _expenseForecastMiscellaneousFixture(),
-            testCaseId: 'QA-6164' 
+            testCaseIds: 'QA-5981 & QA-5982' 
         },
         {
             expenseForecast: _expenseForecastPayrollAndBenefitsFixture(),
-            testCaseId: 'QA-6164' 
+            testCaseIds: 'QA-5975 & QA-5976' 
         },
         {
             expenseForecast: _expenseForecastRepairAndMaintenanceFixture(),
-            testCaseId: 'QA-6164' 
+            testCaseIds: 'QA-5973 & QA-5974' 
         },
         {
             expenseForecast: _expenseForecastReplacementReserveFixture(),
-            testCaseId: 'QA-6164' 
+            testCaseIds: 'QA-5987 & QA-5988' 
         }
     ];
 };
@@ -188,5 +189,8 @@ export default {
     grossBuildingArea: _grossBuildingArea,
     commercialUnits: _commercialUnits(),
     expensesForecast: _expensesForecast(),
-    reimbursementType: Enums.REIMBURSEMENT_TYPES.dollarAmount  as BoweryReports.ReimbursementType
+    reimbursementType: Enums.REIMBURSEMENT_TYPES.percentOfAppraiserForecast as BoweryReports.ReimbursementType,
+    reimbursementColumnId: Enums.REIMBURSEMENT_COLUMN_ID.percentOfAppraiserForecast,
+    knownInformation: Enums.KNOWN_INFORMATION.adminFee as BoweryReports.KnownInformation,
+    percentOfTotal: _percentOfTotal
 };
