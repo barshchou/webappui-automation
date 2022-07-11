@@ -1,4 +1,4 @@
-import testData from "../../../../../fixtures/not_full_reports/income/residential/in_place_rent_roll/QA-4093-95.fixture";
+import testData from "../../../../../fixtures/not_full_reports/income/residential/in_place_rent_roll/QA-4093-96.fixture";
 import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../../actions/base";
 import { Income, Property } from "../../../../../actions";
@@ -34,13 +34,14 @@ describe(`[QA-4093-95] Verify if "Per Month" time period PSF Rent based on is se
             Income._Residential.InPlaceRentRoll.verifyColumnExist(testData.columnName)
                 .enterSquareFootageByRow(el.footage)
                 .enterMonthlyRentByRowNumber(el.monthlyRent)
-                .verifyRentPSFValueByRow();
+                .verifyRentPSFValueByRow(); 
             cy.reload();
         });
     });
 
-    it("[QA-4095]", () => {
-        cy.stepInfo("");
+    it("[QA-4095-96]", () => {
+        cy.stepInfo(`1. Verify if selected time period PSF rent based on is changed -> Calculation of "Rent/SF"and "Rent PSF/month" column is 
+            dynamically recalculated according to newly selected time period`);
         Income._Residential.InPlaceRentRoll.checkPerUnitSquareFootage()
             .Page.getPSFRadio(testData.psfRadioValuePerMonthly).click();
         Income._Residential.InPlaceRentRoll.verifyColumnExist(testData.columnName)
@@ -50,7 +51,12 @@ describe(`[QA-4093-95] Verify if "Per Month" time period PSF Rent based on is se
             .Page.getPSFRadio(testData.psfRadioValuePerAnnually).click();
         Income._Residential.InPlaceRentRoll.verifyRentPSFValueByRow(false);
         
-
+        cy.stepInfo(`2. Verify there is no change to Generated Commentary regardless user select "Yes" in "Do you know per unit square footage/" 
+            and selected time period`);
+        Income._Residential.InPlaceRentRoll.verifyRentRollCommentary(testData.commentaryToBe)
+            .checkPerUnitSquareFootage('false')
+            .verifyRentRollCommentary(testData.commentaryToBe);
+        
         deleteReport(testData.reportCreationData.reportNumber);
     });
 });
