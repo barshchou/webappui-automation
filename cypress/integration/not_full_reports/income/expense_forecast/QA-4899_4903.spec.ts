@@ -44,7 +44,7 @@ describe(`Comparable Min, Max, Avg values for Water & Sewer Per Unit are correct
             Income._ExpenseForecastActions.Page.forecastItemCard(
                 Income._ExpenseForecastActions.getItemNameForAverage(
                     testData.waterAndSewerPerUnitItem.name)), 
-                    testData.waterAndSewerPerUnitCardSnapshotName, { padding: [ 10, 100 ] }
+                    testData.waterAndSewerPerUnitCardSnapshotName, { padding: [ 0, 100 ] }
             );
 
         cy.stepInfo("7. [QA-4899] Go to Expense Forecast and make sure that Per Unit radiobutton is selected for Water & Sewer card");
@@ -65,7 +65,7 @@ describe(`Comparable Min, Max, Avg values for Water & Sewer Per Unit are correct
             Income._ExpenseForecastActions.Page.forecastItemCard(
                 Income._ExpenseForecastActions.getItemNameForAverage(
                     testData.waterAndSewerPerSfItem.name)), 
-                    testData.waterAndSewerPerSfCardSnapshotName, { padding: [ 10, 100 ] }
+                    testData.waterAndSewerPerSfCardSnapshotName, { padding: [ 0, 100 ] }
         );
 
         deleteReport(testData.reportCreationData.reportNumber);

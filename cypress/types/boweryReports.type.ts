@@ -24,7 +24,7 @@ export namespace BoweryReports {
         isSalesForcePull?: isSalesForcePull
     }
     export type RentType = typeof Enums.RENT_TYPE[KeyInfo.RentTypeKeys]
-    export type RentRollOptionsCheckboxsType = typeof Enums.RENT_ROLL_OPTIONS_CHECKBOXS[KeyInfo.RentRollOptionsCheckboxsKeys]
+    export type RentRollOptionsCheckboxesType = typeof Enums.RENT_ROLL_OPTIONS_CHECKBOXES[KeyInfo.RentRollOptionsCheckboxesKeys]
     export type ChipsCreationOptions = {
         block?: string,
         buildingName?: string,
@@ -61,6 +61,11 @@ export namespace BoweryReports {
 
         export type GroupsValues = UseValues | GradeValues | FacadeValues | StateValues
         | CeilingHeightValues | LocationValues | StreetTypeValues | FrontageValues | FloorValues;
+    }
+
+    export namespace SalesAdjustmentGrid {
+        export type AdjustmentName = typeof Enums.SALES_ADJUSTMENT_GRID[KeyInfo.SalesAdjustmentGridKeys]
+        export type RowsMarketAdjustment = typeof Enums.ROWS_MARKET_ADJUSTMENT[KeyInfo.RowsMarketAdjustmentKeys]
     }
 
     export type ProFormaAnyIncome = {
@@ -108,7 +113,9 @@ export namespace BoweryReports {
         rooms?: number,
         monthlyRent: number,
         leaseStatus?: LeaseStatus,
-        rentType?: RentType
+        rentType?: RentType,
+        bedRooms?: number,
+        unitNumber?: number
     }
 
     export type RentCompField = {
@@ -194,4 +201,6 @@ export namespace BoweryReports {
     export type PropertyConditions = typeof Enums.PROPERTY_CONDITIONS[KeyInfo.PropertyConditions];
 
     export type PropertyConditionsRadios = keyof typeof Enums.PROPERTY_CONDITIONS_RADIOS;
+    export type BondTickers = typeof Enums.BOND_TYPES[KeyInfo.BondTypes]
+    export type BondTypes = keyof typeof  Enums.BOND_TYPES
 }

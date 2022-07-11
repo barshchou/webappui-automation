@@ -1,4 +1,8 @@
+import { BoweryReports } from "../../types/boweryReports.type";
 import BasePage from "../base/base.page";
+
+type AdjustmentName = BoweryReports.SalesAdjustmentGrid.AdjustmentName;
+type RowsMarketAdjustment = BoweryReports.SalesAdjustmentGrid.RowsMarketAdjustment;
 
 class AdjustCompsPage extends BasePage {
     get calculationUnitsRadio() {return cy.get("[name=basisOfComparison]");}
@@ -56,6 +60,23 @@ class AdjustCompsPage extends BasePage {
     getPricePerBasisValue(basisName: string) {return cy.xpath(`//*[starts-with(., '${basisName}')]//following-sibling::td`);}
 
     get viewMarketDetails() { return cy.xpath("//div[text() = 'Market Adjustment']");}
+
+    getAdjustmentArrow(adjustmentName: AdjustmentName){
+        return cy.get(`[data-qa="expansion-row-${adjustmentName}"] [aria-label="Show more"]`);
+    }
+
+    getAdjustmentRow(adjustmentName: AdjustmentName, rowName: RowsMarketAdjustment){
+        return cy.get(`[data-qa="expansion-row-${adjustmentName}"] [data-qa="${rowName}"] a`);
+    }
+
+    /**
+     * ernst: this selector probably should move to comp-plex page objects
+     * or in base page (since its a shared page element)
+     * move it later
+     */
+    get ModalSalesCompInfo(){
+        return cy.get('[id="salesApproach.salesAdjustmentGrid-final-form"]');
+    }
 }
 
 export default new AdjustCompsPage();

@@ -36,19 +36,26 @@ on:
         description: Run test with specific tags (via grep,grepTags,burn)  
         required: false
         default: grep=,grepTags=-@smoke,burn=
+      ref:
+        type: string
+        description: Select branch, tag, commit ref
+        required: false
 
 jobs:
   Not-full-reports-run:
     runs-on: ubuntu-latest
     container: cypress/browsers:node16.13.2-chrome100-ff98
+    permissions:
+      id-token: write
+      contents: read
     strategy:
       fail-fast: false
       matrix:
-        containers: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+        containers: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
 
     steps:
       - name: Run end-to-end tests with Currents dev
-        uses: Bowery-RES/action-run-e2e-tests@v0.0.6
+        uses: Bowery-RES/action-run-e2e-tests@latest
         with:
           github_token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
           username: ${{ secrets.USERNAME }}
@@ -59,19 +66,8 @@ jobs:
           spec_file: ${{ github.event.inputs.spec_file }}
           tags: ${{ github.event.inputs.tags }}
           record_key: ${{ secrets.CURRENTS_RECORD_KEY }}
-        env: 
-          CYPRESS_WEBAPP_APPRAISER_USERNAME: ${{ secrets.WEBAPP_APPRAISER_USERNAME }}
-          CYPRESS_WEBAPP_APPRAISER_PASSWORD: ${{ secrets.WEBAPP_APPRAISER_PASSWORD }}
-          CYPRESS_WEBAPP_INSPECTOR_USERNAME: ${{ secrets.WEBAPP_INSPECTOR_USERNAME }}
-          CYPRESS_WEBAPP_INSPECTOR_PASSWORD: ${{ secrets.WEBAPP_INSPECTOR_PASSWORD }}
-          CYPRESS_WEBAPP_ADMIN_USERNAME: ${{ secrets.WEBAPP_ADMIN_USERNAME }}
-          CYPRESS_WEBAPP_ADMIN_PASSWORD: ${{ secrets.WEBAPP_ADMIN_PASSWORD }}
-          CYPRESS_WEBAPP_LEAD_APPRAISER_USERNAME: ${{ secrets.WEBAPP_LEAD_APPRAISER_USERNAME }}
-          CYPRESS_WEBAPP_LEAD_APPRAISER_PASSWORD: ${{ secrets.WEBAPP_LEAD_APPRAISER_PASSWORD }}
-          CYPRESS_WEBAPP_ROLE_TEST_USERNAME: ${{ secrets.WEBAPP_ROLE_TEST_USERNAME }}
-          CYPRESS_WEBAPP_ROLE_TEST_PASSWORD: ${{ secrets.WEBAPP_ROLE_TEST_PASSWORD }}
-          CYPRESS_WEBAPP_TEST_USERNAME: ${{ secrets.WEBAPP_TEST_USERNAME }}
-          CYPRESS_WEBAPP_TEST_PASSWORD: ${{ secrets.WEBAPP_TEST_PASSWORD }}
+          ref: ${{ github.event.inputs.ref }}
+
 
       - name: Archive DOM snapshots from failed tests
         if: failure()

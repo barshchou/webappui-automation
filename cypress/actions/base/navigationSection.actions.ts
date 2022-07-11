@@ -262,11 +262,13 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         return this;
     }
 
-    navigateToFindComps(): NavigationSectionActions {
+    navigateToFindComps(ignoreGqlWait = false): NavigationSectionActions {
         this.clickSalesButton()
             .clickFindCompsButton()
-            .clickYesIfExist();        
-        cy.wait(`@${Alias.gql.SearchSalesTransactions}`, { timeout:120000 });
+            .clickYesIfExist();
+            
+        ignoreGqlWait ? cy.log("Ignore wait for sales comps fetch") 
+        : cy.wait(`@${Alias.gql.SearchSalesTransactions}`, { timeout:120000 }); 
     
         return this;
     }
@@ -326,16 +328,16 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         return this;
     }
 
-    navigateToRentReconcillation(): NavigationSectionActions {
+    navigateToRentReconciliation(): NavigationSectionActions {
         this.clickIncomeApproachButton()
             .clickCommercialMenuIfClosed()
-            .clickRentReconcillationButton()
+            .clickRentReconciliationButton()
             .clickYesIfExist();
         return this;
     }
 
-    clickRentReconcillationButton(): NavigationSectionActions {
-        navigationSectionPage.commercialRentReconcillationButton.click();
+    clickRentReconciliationButton(): NavigationSectionActions {
+        navigationSectionPage.commercialRentReconciliationButton.click();
         return this;
     }
 
@@ -383,6 +385,11 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
 
     clickLetterOfTransmittal(): NavigationSectionActions {
         navigationSectionPage.letterOfTransmittal.click();
+        return this;
+    }
+
+    clickCertification(): NavigationSectionActions {
+        navigationSectionPage.certification.click();
         return this;
     }
 
@@ -461,6 +468,13 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
     navigateToLetterOfTransmittal(): NavigationSectionActions {
         this.clickPreviewEditButton()
             .clickLetterOfTransmittal()
+            .clickYesIfExist();
+        return this;
+    }
+
+    navigateToCertification(): NavigationSectionActions {
+        this.clickPreviewEditButton()
+            .clickCertification()
             .clickYesIfExist();
         return this;
     }
@@ -575,7 +589,7 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
     }
 
     clickCommercialReimbursementSummaryButton(): NavigationSectionActions {
-        navigationSectionPage.comercialReimbursementButton.click();
+        navigationSectionPage.commercialReimbursementButton.click();
         return this;
     }
     
@@ -598,6 +612,18 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
     logout(): NavigationSectionActions {
         this.clickProfileOrganization()
             .selectLink("Log Out");
+        return this;
+    }
+
+    navigateToReportAppraiser(): NavigationSectionActions {
+        this.clickReportButton()
+            .clickAppraiserButton()
+            .clickYesIfExist();
+        return this;
+    }
+
+    clickAppraiserButton(): NavigationSectionActions {
+        navigationSectionPage.reportAppraiserButton.click();
         return this;
     }
 
