@@ -28,7 +28,7 @@ describe(`[QA-5011] [Income>Expense forecast] Unselected existing expense card i
                          is NOT displayed in the Pro Forma page> Operating Expenses section and
                          is NOT displayed in the Expense Forecast page>Total operating expenses card and generated comment (PSF measure + Empty Appraiser's forecasts)`);
             _NavigationSection.navigateToExpenseForecast();
-            expensesCardsNames.expenseCardsIncludeInProFormaCheckboxArray.forEach(element => {
+            testData.expensesForecastCardNamesArray.forEach(element => {
                 Income._ExpenseForecastActions.changeStateOfIncludeInProFormaCheckbox(element, false);
             });
             _NavigationSection.navigateToProForma();

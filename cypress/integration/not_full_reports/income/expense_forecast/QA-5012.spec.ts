@@ -33,7 +33,7 @@ describe(`[QA-5012] [Income>Expense forecast] Unselected existing expense card i
             cy.stepInfo(`3. Go to Income > ExpenseForecast unselect “Include Expense on Pro Forma” checkbox
                          and add data in the forecast`);
             _NavigationSection.navigateToExpenseForecast();
-            expensesCardsNames.expenseCardsIncludeInProFormaCheckboxArray.forEach(element => {
+            testData.expensesForecastCardNamesArray.forEach(element => {
                 Income._ExpenseForecastActions.changeStateOfIncludeInProFormaCheckbox(element, false);
             });
             testData.expenseForecastFixtureArray().forEach(element => {

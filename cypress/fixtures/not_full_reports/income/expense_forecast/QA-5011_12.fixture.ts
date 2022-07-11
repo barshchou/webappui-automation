@@ -3,6 +3,7 @@ import proFormaTypes from "../../../../enums/proFormaTypes.enum";
 import Enums from "../../../../enums/enums";
 import { BoweryAutomation } from "../../../../types/boweryAutomation.type";
 import { BoweryReports } from "../../../../types/boweryReports.type";
+import expensesForecastCardNamesEnum from "../../../../enums/expense/expensesForecastCardNames.enum";
 
 const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("5011_12", {
     incomeValue: Enums.INCOME_TYPE.both,
@@ -49,6 +50,20 @@ const _expensesInProFormaByDefaultArray = [
     proFormaTypes.miscellaneous,
     proFormaTypes.managementFees,
     proFormaTypes.replacementsAndReserves,
+];
+
+const _expensesForecastCardNamesArray = [
+    expensesForecastCardNamesEnum.electricity,
+    expensesForecastCardNamesEnum.fuel,
+    expensesForecastCardNamesEnum.generalAndAdministrative,
+    expensesForecastCardNamesEnum.insurance,
+    expensesForecastCardNamesEnum.legalAndProfessional,
+    expensesForecastCardNamesEnum.managementFees,
+    expensesForecastCardNamesEnum.miscellaneous,
+    expensesForecastCardNamesEnum.payrollBenefits,
+    expensesForecastCardNamesEnum.repairAndMaintenance,
+    expensesForecastCardNamesEnum.replacementsAndReserves,
+    expensesForecastCardNamesEnum.waterAndSewer,
 ];
 
 const expenseForecastInsuranceFixture = (_basis: "unit" | "sf"): BoweryReports.ForecastItem => {
@@ -174,4 +189,5 @@ export default {
     forecastPerUnitNotIncluded: _forecastPerUnitNotIncluded,
     rentRollResUnitFixture: rentRollResidentialUnitFixture(),
     perRoomAnalysis: "Include Per Room Analysis in Report",
+    expensesForecastCardNamesArray: _expensesForecastCardNamesArray
 };
