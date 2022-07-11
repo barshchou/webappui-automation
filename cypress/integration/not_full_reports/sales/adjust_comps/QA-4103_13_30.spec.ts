@@ -37,7 +37,7 @@ describe("Net Property Adjustments in Sales Adjustment Grid is calculated with c
         deleteReport(testData.reportCreationData.reportNumber);
     });
 
-    it.only("[QA-4130]", () => {
+    it.skip("[QA-4130]", () => {
         // Feature flag test (Enable flexible gba analysis)
         testData.calculationUnits.forEach(val => {
             Sales._AdjustComps.checkCalculationUnitsRadio(val)
