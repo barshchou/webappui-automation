@@ -18,6 +18,9 @@ export const evalUrl = (config: Cypress.PluginConfigOptions): string => {
     if(config.env.url == "custom"){
         return _validateCustomUrl(config.env.customUrl);
     }
+    else if (config.env.url == undefined){
+        return ENVS.staging;
+    }
     else{
         return _validateUrl(ENVS, config.env.url);
     }
