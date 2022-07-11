@@ -26,6 +26,12 @@ class ExpenseForecastPage extends BasePage {
 
     getForecastItemBasisRadio(item) { return cy.get(`[name='${item}.basis']`); }
 
+
+    getForecastItemCheckedBasisRadio(custom = false, index = 0, forecastItem?: string) {
+        return !custom ? cy.get(`[data-qa="checked"][name='${forecastItem}.basis']`) :
+            cy.get(`[data-qa="checked"] [name='customExpenses[${index}].basis']`);
+    }
+
     getElementToCheckRadio(forecastItem: string, radioValue: BoweryReports.UnitSF) { return cy.get(`[data-qa=checked] [name='${forecastItem}.basis'][value='${radioValue}']`); }
 
     getElementBasisToSwitch(forecastItem: string, radioValue: BoweryReports.UnitSF) { return cy.get(`[name='${forecastItem}.basis'][value='${radioValue}']`); }
@@ -52,7 +58,7 @@ class ExpenseForecastPage extends BasePage {
 
     getExpenseCommentaryRevertToOriginal(forecastItem: string) { return cy.xpath(`//*[@data-qa="${forecastItem}-forecast-item"]//following::button[.='Revert to Original'][1]`); }
 
-    getCheckboxIncludeInProForma(forecastItem: string) {return cy.get(`[data-qa^="${forecastItem}.includeInProForma"]`).find('input[type="checkbox"]');}
+    getCheckboxIncludeInProForma(forecastItem: string) { return cy.get(`[data-qa^="${forecastItem}.includeInProForma"]`).find('input[type="checkbox"]'); }
 
     get inputPercentOfEGICheckbox() { return cy.get("[label='Input % of EGI'] input"); }
 
@@ -82,7 +88,7 @@ class ExpenseForecastPage extends BasePage {
 
     get toeCommentaryModified() { return cy.xpath("//*[.='TOTAL OPERATING EXPENSES']//following::*[.='Modified']"); }
 
-    get toeAppraisersForecastValueLine() {return cy.xpath(`//*[.='TOTAL OPERATING EXPENSES']//following::div[@data-qa='appraisers-forecast-values-line']`);}
+    get toeAppraisersForecastValueLine() { return cy.xpath(`//*[.='TOTAL OPERATING EXPENSES']//following::div[@data-qa='appraisers-forecast-values-line']`); }
 
     get createNewCategoryButton() { return cy.contains('Add Expense Category +'); }
 
