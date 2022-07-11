@@ -55,8 +55,13 @@ export default class ResidentialRentRollSharedActions<T extends ResidentialRentR
         return this;
     }
 
-    verifyRoomsNumberByRow(roomsNumber: number, rowNumber = 0): this {
-        this.Page.roomsCells.eq(rowNumber).should("have.text", roomsNumber);
+    verifyRoomsNumberByRow(roomsNumber: number | string, rowNumber = 0): this {
+        if (typeof roomsNumber === "string") {
+            this.Page.roomsCells.eq(rowNumber).should("have.text", 0);
+        } else {
+            const textToBe = Math.floor(roomsNumber);
+            this.Page.roomsCells.eq(rowNumber).should("have.text", textToBe);
+        }
         return this;
     }
 
@@ -152,8 +157,13 @@ export default class ResidentialRentRollSharedActions<T extends ResidentialRentR
         return this;
     }
 
-    verifyBedroomsNumberByRow(bedroomsNumber: number, rowNumber: number): this {
-        this.Page.bedroomsCells.eq(rowNumber).should("have.text", bedroomsNumber);
+    verifyBedroomsNumberByRow(bedroomsNumber: number | string, rowNumber: number): this {
+        if (typeof bedroomsNumber === "string") {
+            this.Page.bedroomsCells.eq(rowNumber).should("have.text", 0);
+        } else {
+            const textToBe = Math.floor(bedroomsNumber);
+            this.Page.bedroomsCells.eq(rowNumber).should("have.text", textToBe);
+        }
         return this;
     }
 
