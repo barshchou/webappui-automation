@@ -14,5 +14,6 @@ export default {
     reportCreationData: _reportCreationData,
     psfRadioValuePerMonthly: 'monthly' as BoweryReports.UnitsOfMeasure,
     psfRadioValuePerAnnually: 'annually' as BoweryReports.UnitsOfMeasure,
-    labelText: 'What time period should rent PSF be based on?'
+    labelText: 'What time period should rent PSF be based on?',
+    columnName: 'Rent/SF'
 };
