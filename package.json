@@ -39,6 +39,7 @@
     "@currents/cli": "^1.0.8",
     "@simonsmith/cypress-image-snapshot": "^5.0.2",
     "@types/cypress-image-snapshot": "^3.1.6",
+    "@types/glob": "^7.2.0",
     "@types/supertest": "^2.0.12",
     "@typescript-eslint/eslint-plugin": "^5.17.0",
     "@typescript-eslint/parser": "^5.17.0",
