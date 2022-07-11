@@ -44,7 +44,8 @@ describe("[QA-4088], [QA-4089], [QA-4090] [QA-4091] 'What time period should ren
         it("[QA-4091]", () => {
             cy.stepInfo("1. Verify if User selects 'Per Year' time period PSF rent based on -> 'Rent SF' is column name in In-Place RR table");
             Income._Residential.InPlaceRentRoll.Page.getPerUnitSFRadio(testData.true).click().should("be.checked");
-            cy.contains("Rent/SF").should("exist");
+            Income._Residential.InPlaceRentRoll.verifyColumnExist(testData.columnName);
+            
             deleteReport(testData.reportCreationData.reportNumber);
         });
     });
