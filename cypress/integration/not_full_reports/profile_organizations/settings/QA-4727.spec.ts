@@ -9,7 +9,7 @@ import launchDarklyApi from '../../../../api/launchDarkly.api';
 describe("[QA-4727] Verify possibility to edit static text in-app", 
     { tags:[ "@organizations", "@settings", "@check_export" ] }, () => {
 
-    it('Update static text in Settings and verify changes on a corresponding pages', () => {
+    it.only('Update static text in Settings and verify changes on a corresponding pages', () => {
         cy.stepInfo('1. Set Launch Darkly flag to see Report Copy Editor section. Create a report');
         launchDarklyApi.setFeatureFlagForUser(testData.reportTextEditorFlagKey, testData.featureFlagEnable)
             .setFeatureFlagForUser(testData.swotAnalysisFlagKey, testData.featureFlagEnable);
