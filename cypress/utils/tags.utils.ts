@@ -41,5 +41,6 @@ export enum Tag {
     feature_flag= "@feature_flag",
     report_status = "@report_status",
     appraiser = "@appraiser",
-    settings = "@settings"
+    settings = "@settings",
+    unit_details = "@unit_details"
 }
