@@ -68,6 +68,8 @@ class ExpenseForecastPage extends BasePage {
 
     get allForecastsInputs() { return cy.get("[name$=concludedValue]"); }
 
+    get allForecastsInputsCustomCards() { return cy.get("[name^=customExpenses][name$=concludedValue]"); }
+
     get toeOwnerProjection() { return cy.get("[data-qa=owners-projection]"); }
 
     get appraisersTotalForecast() { return cy.get("[data-qa=appraisers-total-conclusion]"); }
@@ -79,6 +81,8 @@ class ExpenseForecastPage extends BasePage {
     get toeCommentarySaveButton() { return cy.xpath("//*[.='TOTAL OPERATING EXPENSES']//following::button[.='Save'][1]"); }
 
     get toeCommentaryModified() { return cy.xpath("//*[.='TOTAL OPERATING EXPENSES']//following::*[.='Modified']"); }
+
+    get toeAppraisersForecastValueLine() {return cy.xpath(`//*[.='TOTAL OPERATING EXPENSES']//following::div[@data-qa='appraisers-forecast-values-line']`);}
 
     get createNewCategoryButton() { return cy.contains('Add Expense Category +'); }
 
