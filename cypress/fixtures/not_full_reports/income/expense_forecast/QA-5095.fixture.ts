@@ -2,8 +2,16 @@ import { BoweryReports } from "../../../../types/boweryReports.type";
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 import Enums from "../../../../enums/enums";
 
-const reportCreationFixture = () => {
-    return ReportDataCreator.getReportData("5095");
+const _reportCreationFixturePerSFBasis = () => {
+    return ReportDataCreator.getReportData("5095_PSF");
+};
+
+const _reportCreationFixturePerUnitBasis = () => {
+    return ReportDataCreator.getReportData("5095_PerUnit");
+};
+
+const _reportCreationFixturePerRoomBasis = () => {
+    return ReportDataCreator.getReportData("5095_PerRoom");
 };
 
 const _checkboxNames: string[] = Enums.EXPENSE_FORECAST_ITEMS.expenseCardsIncludeInProFormaCheckboxArray;
@@ -15,7 +23,7 @@ const _expenseForecasts: BoweryReports.ForecastItem[] = [
     },
     {
         name: "electricity",
-        forecast: 380
+        forecast: 1380
     },
     {
         name: "fuel", 
@@ -79,13 +87,18 @@ const _fuelForecastPerRoom: BoweryReports.ForecastItem = {
     forecast: 500
 };
 
+const _fuelForecastName: string = Enums.PRO_FORMA_TYPES.fuel;
+
 export default {
-    reportCreationData: reportCreationFixture(),
+    reportCreationDataPerSFBasis: _reportCreationFixturePerSFBasis(),
+    reportCreationDataPerUnitBasis: _reportCreationFixturePerUnitBasis(),
+    reportCreationDataPerRoomBasis: _reportCreationFixturePerRoomBasis(),
     checkboxNames: _checkboxNames,
     expenseForecasts: _expenseForecasts,
     forecastNames: _forecastNames,
     perUnitBasis: _perUnitBasis,
     perSFBasis: _perSFBasis,
     perRoomBasis: _perRoomBasis,
-    fuelForecastPerRoom: _fuelForecastPerRoom
+    fuelForecastPerRoom: _fuelForecastPerRoom,
+    fuelForecastName: _fuelForecastName
 };
