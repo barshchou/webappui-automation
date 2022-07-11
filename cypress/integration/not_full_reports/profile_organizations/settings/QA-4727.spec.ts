@@ -46,11 +46,6 @@ conditionalDescribe("[QA-4727] Verify possibility to edit static text in-app",
 
     after('Remove feature flag', () => {
         launchDarklyApi.removeUserTarget(testData.reportTextEditorFlagKey);
-        /*  VB: Wait is added coz we have LaunchDarkly API rate limit and it'll fails with 429 error
-            - One of the option is to add sleep
-            - Second option is to ask for rate limit increase (pretty not possible)
-         */
-        cy.wait(1000);
         launchDarklyApi.removeUserTarget(testData.swotAnalysisFlagKey);
     });
 });
