@@ -2,13 +2,11 @@ import testData from "../../../../fixtures/not_full_reports/income/expense_forec
 import { _NavigationSection } from "../../../../actions/base";
 import { Income, Property } from "../../../../actions";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
-import expensesCardsNames from " ../../../cypress/enums/expense/expenseForecast.enum";
 
-describe(`[QA-5012] [Income>Expense forecast] Unselected existing expense card is not included in calculation`,
+describe(`[QA-5049] [QA-5050] [Income>Expense forecast] "Per Unit" + "Per SF" value is calculated correct depends on what radiobutton is selected`,
     { tags: [ "@income", "@expense_forecast" ] }, () => {
 
         before("Login, create report", () => {
-          //  Cypress.config('numTestsKeptInMemory', 0);
             createReport(testData.reportCreationData);
             cy.saveLocalStorage();
         });
@@ -17,46 +15,81 @@ describe(`[QA-5012] [Income>Expense forecast] Unselected existing expense card i
             cy.restoreLocalStorage();
         });
 
-        it("Preconditions", () => {
+        it(`[QA-5049] "Per Unit" value is calculated correct if "Per SF" radiobutton is selected`, () => {
 
-            cy.stepInfo(`1. Go to Property > Summary and add residential units`);
+            cy.stepInfo(`1. Go to Property > Summary, add residential units and Gross Building Area`);
             _NavigationSection.navigateToPropertySummary();
             Property._Summary.enterNumberOfResUnits(testData.numberOfResidentialUnits)
                 .enterGrossBuildingArea(testData.buildingDescription.grossArea);
-        });
 
-        it(`[QA-5049] "Per Unit" value is calculated correct if "Per SF" radiobutton is selected`, () => {
             cy.stepInfo(`2. Go to Expense Forecast and add new Expense Forecast with valid name`);
-                _NavigationSection.navigateToExpenseForecast();
-                Income._ExpenseForecastActions.addCustomExpenseCategory(testData.expenseForecastCustomFixture("unit").name);
+            _NavigationSection.navigateToExpenseForecast();
+            Income._ExpenseForecastActions.addCustomExpenseCategory(testData.expenseForecastCustomFixture(testData.basis).name);
 
-                cy.stepInfo(`3. Make sure that Per SF radiobutton is selected for Custom Expense card`);
-                Income._ExpenseForecastActions.Page.getForecastItemCheckedBasisRadio(true, 0).invoke("attr", "value").then(value => {
-                    expect(value).to.be.equal('sf');
-                 });
+            cy.stepInfo(`3. Make sure that Per SF radiobutton is selected for Custom Expense card`);
+            Income._ExpenseForecastActions.Page.getForecastItemCheckedBasisRadio(true, 0).invoke("attr", "value").then(value => {
+                expect(value).to.be.equal('sf');
+            });
 
-                 cy.stepInfo(`4. Fill in Appraiser's Forecast field for Custom Expense card`);
-                Income._ExpenseForecastActions.enterForecastItemForecast(testData.expenseForecastCustomFixture, true)
-                
-     //               Income._ExpenseForecastActions.chooseForecastItemBasis(element);
-                
-        
+            cy.stepInfo(`4. Fill in Appraiser's Forecast field for Custom Expense card`);
+            Income._ExpenseForecastActions.enterForecastItemForecast(testData.expenseForecastCustomFixture(testData.basis), true, 0);
+
+            cy.stepInfo(`5. Verify that Per Unit value below this field is calculated as: 
+                            Per Unit Appraiser’s Forecast * selected Basis for Square Foot Analysis /  # of Resi Units `);
+            Income._ExpenseForecastActions.Page.getForecastItemBasisMoneyValue(testData.expenseForecastCustomFixture(testData.basis).name, true).invoke("text").then(text => {
+                expect(text).contain('Per Unit')
+                    .contain(testData.perUnitFieldValue());
+            });
+
+            cy.stepInfo(`6. Go to Property > Summary and add residential units equal 0`);
+            _NavigationSection.navigateToPropertySummary();
+            Property._Summary.enterNumberOfResUnits(testData.numberOfResidentialUnitsZero);
+
+            cy.stepInfo(`7. Verify if number of Residential Unit equal 0 →  expected result will be "Per Unit: $NaN"`);
+            _NavigationSection.navigateToExpenseForecast();
+            Income._ExpenseForecastActions.Page.getForecastItemBasisMoneyValue(testData.expenseForecastCustomFixture(testData.basis).name, true).invoke("text").then(text => {
+                expect(text).contain('Per Unit')
+                    .contain(testData.perUnitValueTextNaN);
+            });
         });
 
-        it(`Verify If “Include Expense on Pro Forma” checkbox is unselected but there is 
-                data left in the forecast, this data is not included in calculations on Pro forma and Expense forecast page 
-                (Per Unit measure + Full Appraiser's forecasts)`, () => {
+        it(`[QA-5050] "Per SF" value is calculated correct if "Per Unit" radiobutton is selected`, () => {
 
-            //               Income._ExpenseForecastActions.chooseForecastItemBasis(element);
-           
-        });
+            cy.stepInfo(`1. Go to Property > Summary, add residential units and Gross Building Area`);
+            _NavigationSection.navigateToPropertySummary();
+            Property._Summary.enterNumberOfResUnits(testData.numberOfResidentialUnits)
+                .enterGrossBuildingArea(testData.buildingDescription.grossArea);
 
-        it(`Verify If “Include Expense on Pro Forma”  checkbox is unselected but there is 
-                data left in the forecast, this data is not included in calculations on Pro forma and Expense forecast page 
-                (Per Room measure for Fuel + Full Appraiser's forecasts)`, () => {
+            cy.stepInfo(`2. Switch basis in Custom Expense card`);
+            _NavigationSection.navigateToExpenseForecast();
+            Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastCustomFixture('unit'), true);
 
-         //               Income._ExpenseForecastActions.chooseForecastItemBasis(element);
+            cy.stepInfo(`3. Make sure that Per Unit radiobutton is selected for Custom Expense card`);
+            Income._ExpenseForecastActions.Page.getForecastItemCheckedBasisRadio(true, 0).invoke("attr", "value").then(value => {
+                expect(value).to.be.equal('unit');
+            });
 
-           // deleteReport(testData.reportCreationData.reportNumber);
+            cy.stepInfo(`4. Verify that Per Unit value below this field is calculated as: 
+                            Per Unit Appraiser’s Forecast * selected Basis for Square Foot Analysis /  # of Resi Units `);
+            Income._ExpenseForecastActions.Page.getForecastItemBasisMoneyValue(testData.expenseForecastCustomFixture(testData.basis).name, true)
+            .invoke("text").then(text => {
+                expect(text).contain('Per SF')
+                    .contain(testData.perSFFieldValue());
+            });
+
+            cy.stepInfo(`5. Go to Property > Summary and add residential units equal 0`);
+            _NavigationSection.navigateToPropertySummary();
+            Property._Summary.enterNumberOfResUnits(testData.numberOfResidentialUnits)
+                .enterGrossBuildingArea(testData.numberOfResidentialUnitsZero);
+
+            cy.stepInfo(`6. Verify if selected Basis for Square Foot Analysis equal 0 -> expected result will be "Per Unit: $0.00"`);
+            _NavigationSection.navigateToExpenseForecast();
+            Income._ExpenseForecastActions.Page.getForecastItemBasisMoneyValue(testData.expenseForecastCustomFixture(testData.basis).name, true)
+            .invoke("text").then(text => {
+                expect(text).contain('Per SF')
+                    .contain(testData.perSFValueTextNaN);
+            });
+
+            deleteReport(testData.reportCreationData.reportNumber);
         });
     });

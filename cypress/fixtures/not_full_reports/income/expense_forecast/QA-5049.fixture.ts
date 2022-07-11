@@ -1,8 +1,8 @@
 import ReportDataCreator from "../../../data_creator/reportData.creator";
-import proFormaTypes from "../../../../enums/proFormaTypes.enum";
 import Enums from "../../../../enums/enums";
 import { BoweryAutomation } from "../../../../types/boweryAutomation.type";
 import { BoweryReports } from "../../../../types/boweryReports.type";
+import { numberWithCommas } from "../../../../../utils/numbers.utils";
 
 const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("5049-50", {
     incomeValue: Enums.INCOME_TYPE.both,
@@ -14,9 +14,25 @@ const _buildingDescription: BoweryReports.BuildingDescription = {
     numberOfUnits: 3,
 };
 
-const _numberOfResidentialUnits = 3;
+const basis = "unit";
+const numberOfResidentialUnits = 3;
+const numberOfResidentialUnitsZero = 0;
+const perUnitValueTextNaN = '$NaN';
+const perSFValueTextNaN = '$0.00';
 
-const expenseForecastCustomFixture = (_basis: "unit" | "sf"): BoweryReports.ForecastItem => {
+const perUnitFieldValue = () => {
+    let perUnitValue = numberWithCommas(Math.round(_buildingDescription.grossArea * expenseForecastCustomFixture(basis).forecast / _buildingDescription.numberOfUnits));
+    let perUnitValueText = `$${perUnitValue}`;
+    return perUnitValueText;
+};
+
+const perSFFieldValue = () => {
+    let perSFValue = numberWithCommas((_buildingDescription.numberOfUnits * expenseForecastCustomFixture(basis).forecast / _buildingDescription.grossArea).toFixed(2));
+    let perSFValueText = `$${perSFValue}`;
+    return perSFValueText;
+};
+
+const expenseForecastCustomFixture = (_basis: string): BoweryReports.ForecastItem => {
     return {
         name: "Custom Category",
         basis: _basis as BoweryReports.UnitSF,
@@ -27,7 +43,12 @@ const expenseForecastCustomFixture = (_basis: "unit" | "sf"): BoweryReports.Fore
 export default {
     reportCreationData: _reportCreationData,
     buildingDescription: _buildingDescription,
-    numberOfResidentialUnits: _numberOfResidentialUnits,
-    expenseForecastCustomFixture
-    
+    numberOfResidentialUnits,
+    expenseForecastCustomFixture,
+    basis,
+    perUnitFieldValue,
+    perSFFieldValue,
+    numberOfResidentialUnitsZero,
+    perUnitValueTextNaN,
+    perSFValueTextNaN
 };
