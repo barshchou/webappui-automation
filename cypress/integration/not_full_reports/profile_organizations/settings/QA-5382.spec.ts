@@ -5,9 +5,10 @@ import { _NavigationSection } from '../../../../actions/base';
 import testData from "../../../../fixtures/not_full_reports/profile_organizations/settings/QA-5382.fixture";
 import enums from '../../../../enums/enums';
 import launchDarklyApi from '../../../../api/launchDarkly.api';
+import { conditionalDescribe } from '../../../../../utils/env.utils';
 
-describe("[QA-5382] Verify possibility to edit static text in-app", 
-    { tags:[ "@organizations", "@settings", "@check_export" ] }, () => {
+conditionalDescribe("[QA-5382] Verify possibility to edit static text in-app", 
+    { tags:[ "@organizations", "@settings", "@check_export", "@feature_flag" ] }, () => {
 
     before('', () => {
         launchDarklyApi.setFeatureFlagForUser(testData.reportTextEditorFlagKey, testData.featureFlagEnable)

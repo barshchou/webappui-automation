@@ -1,12 +1,10 @@
-import { isProdEnv } from '../../../../../utils/env.utils';
+import { conditionalDescribe } from '../../../../../utils/env.utils';
 import { Organization, PreviewEdit } from '../../../../actions';
 import { Report } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import enums from '../../../../enums/enums';
 import testData from '../../../../fixtures/not_full_reports/report/client/QA-4627.fixture';
-
-const conditionalDescribe = isProdEnv() ? describe.skip : describe;
 
 conditionalDescribe("[QA-4627] Verify the functionality of the Client field.", 
     { tags:[ "@report", "@client" ] }, () => {
