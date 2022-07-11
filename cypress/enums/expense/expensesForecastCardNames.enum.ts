@@ -9,7 +9,8 @@ const expensesCardsNames = {
     legalAndProfessional: "legalProfessionalFees",
     miscellaneous: "miscellaneous",
     managementFees: "managementFees",
-    replacementsAndReserves: "replacementReserves"
+    replacementsAndReserves: "replacementReserves",
+    utilities: "utilities"
 } as const;
 
 export default Object.freeze(expensesCardsNames);

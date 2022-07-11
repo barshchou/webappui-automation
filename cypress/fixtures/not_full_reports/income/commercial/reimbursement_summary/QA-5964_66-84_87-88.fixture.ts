@@ -7,7 +7,7 @@ import expensesCellNames from "../../../../../enums/expense/expenseCellNames";
 import proFormaTypesEnum from "../../../../../enums/proFormaTypes.enum";
 
 const reportCreationFixture = () => {
-    return ReportDataCreator.getReportData("6164", {
+    return ReportDataCreator.getReportData("QA-5964_66-84_87-88", {
         incomeValue: Enums.INCOME_TYPE.both
     });
 };
@@ -134,7 +134,7 @@ const _expenseForecastLegalAndProfessionalFixture = (): BoweryReports.ForecastIt
     };
 };
 
-const _expensesForecast = () => { //BoweryReports.ForecastItem[]
+const _expensesForecast = () => { 
     return [ { 
             expenseForecast: _expenseForecastWaterAndSewerFixture(),
             testCaseIds: 'QA-5971 & QA-5972' 

@@ -2,7 +2,7 @@
 import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
 import { Property, Income } from "../../../../../actions";
 import { _NavigationSection } from "../../../../../actions/base";
-import testData from "../../../../../fixtures/not_full_reports/income/commercial/reimbursement_summary/QA-6164.fixture";
+import testData from "../../../../../fixtures/not_full_reports/income/commercial/reimbursement_summary/QA-5989-90.fixture";
 
 describe("",
     { tags: [ "@income", "@expense_forecast", "@reimbursement_summary" ] }, () => {
@@ -24,10 +24,14 @@ describe("",
         _NavigationSection.navigateToCommercialUnits();
         Property._CommercialUnits.enterListUnitSF(testData.commercialUnits.unitsSF, testData.commercialUnits.commercialUnitsNumber);
 
+        cy.stepInfo(`5. Go to Income > Expense History page and select Combined Electricity, Fuel, Water & Sewer radio button`);
+        _NavigationSection.navigateToExpenseHistory();
+        Income._ExpenseHistory.checkUtilitiesExpensesOption(testData.utilitiesExpenseOption);
+
         cy.stepInfo(`Steps: 1. Go to Income > Expense Forecast page and check “Include Expense 
                     on Pro Forma” checkbox for all Expense Forecasts.
                     2. Select Per SF radio button for General & Administrative Expense Forecast 
-                    and fill in Appraiser’s Forecast with valid numeric value`);
+                    and fill in Appraiser's Forecast with valid numeric value`);
         _NavigationSection.navigateToExpenseForecast();
         testData.expensesForecast.forEach((expense) => {
             Income._ExpenseForecastActions.setIncludeInProformaCheckbox(expense.expenseForecast.cardName, true)
@@ -69,7 +73,6 @@ describe("",
                 testData.reimbursementColumnId,
                 testData.commercialUnits.commercialUnitsNumber,
                 index);
-            
         });
     });
     
