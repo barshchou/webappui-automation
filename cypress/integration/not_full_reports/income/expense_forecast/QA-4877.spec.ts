@@ -35,17 +35,15 @@ describe("Comparable Min, Max, Avg values for Electricity Per SF are correctly c
         Income.ExpenseForecast.Actions.verifyForecastItemCompMin(testData.electricityItem, testData.comparables)
             .verifyForecastItemCompAverage(testData.electricityItem, testData.comparables)
             .verifyForecastItemCompMax(testData.electricityItem, testData.comparables)
-            .hideExpenseForecastHeader();
+            .hideHeader()
+            .clickSaveButton()
+            .verifyProgressBarNotExist();
 
         cy.stepInfo(`5. Check Comp Min, Comp Max and Comp Avg values for Electricity card. They should be
                         5.1 calculated as: Min, Max and Avg of range of values [CompElectricity / Square Feet]
                         5.2 correctly displayed on a slidebar`);
-
-        // ToDo: this is just an experimental solution for matching snapshot issue
-        Income.ExpenseForecast.Page.electricityCardText.should("have.css", "font-family", "Roboto, Helvetica, Arial, sans-serif");
-
         Income.ExpenseForecast.Actions.matchElementSnapshot(
-            Income.ExpenseForecast.Page.electricityCard, testData.electricityCardSnapshotName, { padding: [ 10, 100 ] }
+            Income.ExpenseForecast.Page.electricityCard, testData.electricityCardSnapshotName, { padding: [ 0, 100 ] }
         );
 
         deleteReport(testData.reportCreationData.reportNumber);

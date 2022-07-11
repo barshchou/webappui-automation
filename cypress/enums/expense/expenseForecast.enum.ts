@@ -3,19 +3,20 @@ const expensesCardsNames = {
     expenseCardsIDArray: [ "insurance", "electricity", "fuel", "waterSewer", "repairsMaintenance", "payrollBenefits",
         "generalAdministrative", "legalProfessionalFees", "miscellaneous", "managementFees", "replacementReserves" ],
 
-    realEstateTaxes: "realEstateTaxes",
-    insurace: "insurance",
+    expenseCardsIncludeInProFormaCheckboxArray: [ "insurance", "electricity", "fuel", "waterAndSewer", "repairsAndMaintenance", "payrollAndBenefits",
+        "generalAndAdministrative", "legalAndProfessionalFees", "miscellaneous", "management", "reserves" ],
+
+    insurance: "insurance",
     electricity: "electricity",
     fuel: "fuel",
     waterAndSewer: "waterAndSewer",
-    utilities: "utilities",
     repairAndMaintenance: "repairsAndMaintenance",
     payrollBenefits: "payrollAndBenefits",
     generalAndAdministrative: "generalAndAdministrative",
     legalAndProfessional: "legalAndProfessionalFees",
-    miscelaneous: "miscellaneous",
+    miscellaneous: "miscellaneous",
     managementFees: "management",
-    replacementsAndReserves: "reserves"
+    replacementsAndReserves: "replacementReserves"
 };
 
 

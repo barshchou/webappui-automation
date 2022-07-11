@@ -158,14 +158,29 @@ class InPlaceRentRollActions extends ResidentialRentRollSharedActions<typeof ren
         return this;
     }
 
-    checkIsInspectedByRowNumber(number: number): InPlaceRentRollActions {
-        rentRollPage.isInspectedInputs.eq(number).check();
+    removeRentTypeByRowNumber(number = 0): InPlaceRentRollActions {
+        rentRollPage.rentTypeCells.eq(number).click().type("{backspace}");
+        this.verifyLeaseStatusByRow("", number);
         return this;
     }
 
-    checkListIsInspectedByRowNumbers(numbers: Array<number>): InPlaceRentRollActions {
+    pasteRentTypeByRowNumber(value: string | number, rowNumber = 0): InPlaceRentRollActions {
+        rentRollPage.rentTypeCells.eq(rowNumber).dblclick();
+        rentRollPage.textAreaToInput.clear().invoke("val", value);
+        cy.get(".listbox ").contains(value).click();
+        rentRollPage.rentTypeCells.eq(rowNumber).should("include.text", value);
+        return this;
+    }
+
+    setIsInspectedCheckboxByRowNumber(number = 0, isCheck = true): InPlaceRentRollActions {
+        isCheck === true ? rentRollPage.isInspectedInputs.eq(number).check()
+            :  rentRollPage.isInspectedInputs.eq(number).uncheck();
+        return this;
+    }
+
+    setCheckListIsInspectedByRowNumbers(numbers: Array<number>, isCheck = true): InPlaceRentRollActions {
         numbers.forEach(number => {
-            this.checkIsInspectedByRowNumber(number);
+            this.setIsInspectedCheckboxByRowNumber(number, isCheck);
         });
         return this;
     }
@@ -184,10 +199,42 @@ class InPlaceRentRollActions extends ResidentialRentRollSharedActions<typeof ren
         return this;
     }
 
-    enterRoomsNumberByRowNumber(value: number, number: number): InPlaceRentRollActions {
+    removeUnitNumberByRowNumber(number = 0): InPlaceRentRollActions {
+        rentRollPage.unitNumberCells.eq(number).click().type("{backspace}");
+        rentRollPage.pageTitle.click();
+        rentRollPage.unitNumberCells.eq(number).should("have.text", "");
+        return this;
+    }
+
+    pasteUnitNumberByRowNumber(value: number, rowNumber = 0): InPlaceRentRollActions {
+        rentRollPage.unitNumberCells.eq(rowNumber).dblclick();
+        this.pasteTextToTextarea(`${value}`);
+        this.verifyUnitNumberByRow(value, rowNumber);
+        return this;
+    }
+
+    enterRoomsNumberByRowNumber(value: number | string, number: number): InPlaceRentRollActions {
         rentRollPage.roomsCells.eq(number).dblclick();
-        this.enterTextToTextarea(`${value}`)
-            .verifyRoomsNumberByRow(value, number);
+        this.enterTextToTextarea(`${value}`);
+        if (typeof value === "string") {
+            this.verifyRoomsNumberByRow(0, number);
+        } else {
+            this.verifyRoomsNumberByRow(value, number);
+        }
+        return this;
+    }
+
+    removeRoomsNumberByRowNumber(number = 0): InPlaceRentRollActions {
+        rentRollPage.roomsCells.eq(number).click().type("{backspace}");
+        rentRollPage.pageTitle.click();
+        this.verifyRoomsNumberByRow(0, number);
+        return this;
+    }
+
+    pasteRoomsByRowNumber(value: number | string, rowNumber = 0): InPlaceRentRollActions {
+        rentRollPage.roomsCells.eq(rowNumber).dblclick();
+        this.pasteTextToTextarea(`${value}`);
+        this.verifyRoomsNumberByRow(value, rowNumber);
         return this;
     }
 
@@ -198,7 +245,7 @@ class InPlaceRentRollActions extends ResidentialRentRollSharedActions<typeof ren
         return this;
     }
 
-    enterBedroomsNumberByRowNumber(bedroomsNumber: number, rowNumber = 0): InPlaceRentRollActions {
+    enterBedroomsNumberByRowNumber(bedroomsNumber: number | string, rowNumber = 0): InPlaceRentRollActions {
         rentRollPage.bedroomsCells.eq(rowNumber).dblclick();
         this.enterTextToTextarea(`${bedroomsNumber}`)
             .verifyBedroomsNumberByRow(bedroomsNumber, rowNumber);
@@ -212,10 +259,38 @@ class InPlaceRentRollActions extends ResidentialRentRollSharedActions<typeof ren
         return this;
     }
 
+    removeBedroomsNumberByRowNumber(number = 0): InPlaceRentRollActions {
+        rentRollPage.bedroomsCells.eq(number).click().type("{backspace}");
+        rentRollPage.pageTitle.click();
+        this.verifyBedroomsNumberByRow(0, number);
+        return this;
+    }
+
+    pasteBedroomsByRowNumber(value: number | string, rowNumber = 0): InPlaceRentRollActions {
+        rentRollPage.bedroomsCells.eq(rowNumber).dblclick();
+        this.pasteTextToTextarea(`${value}`);
+        this.verifyBedroomsNumberByRow(value, rowNumber);
+        return this;
+    }
+
     enterLeaseStatusByRowNumber(status: string, number = 0): this {
         rentRollPage.leaseStatusCells.eq(number).dblclick();
         this.enterTextToTextarea(status)
             .verifyLeaseStatusByRow(status, number);
+        return this;
+    }
+
+    removeLeaseStatusByRowNumber(number = 0): InPlaceRentRollActions {
+        rentRollPage.leaseStatusCells.eq(number).click().type("{backspace}");
+        this.verifyLeaseStatusByRow("", number);
+        return this;
+    }
+
+    pasteLeaseStatusByRowNumber(value: string | number, rowNumber = 0): InPlaceRentRollActions {
+        rentRollPage.leaseStatusCells.eq(rowNumber).dblclick();
+        rentRollPage.textAreaToInput.clear().invoke("val", value);
+        cy.get(".listbox").contains(value).click();
+        rentRollPage.leaseStatusCells.eq(rowNumber).should("include.text", value);
         return this;
     }
 
@@ -251,6 +326,14 @@ class InPlaceRentRollActions extends ResidentialRentRollSharedActions<typeof ren
         return this;
     }
 
+    pasteMonthlyRentByRowNumber(value: string | number, rowNumber = 0): InPlaceRentRollActions {
+        const textToBe = typeof value === "string" ? value : `$${numberWithCommas(value.toFixed(2))}`;
+        rentRollPage.monthlyRentCells.eq(rowNumber).dblclick();
+        this.pasteTextToTextarea(`${value}`);
+        rentRollPage.monthlyRentCells.eq(rowNumber).should("have.text", textToBe);
+        return this;
+    }
+
     enterMonthlyRents(values: number[]): InPlaceRentRollActions {
         values.forEach((value, index) => {
             this.enterMonthlyRentByRowNumber(value, index);
@@ -272,8 +355,12 @@ class InPlaceRentRollActions extends ResidentialRentRollSharedActions<typeof ren
         return this;
     }
       
-    verifyRentRollCommentary(commentaryToBe: string): InPlaceRentRollActions {
-        rentRollPage.rentRollCommentary.should("have.text", commentaryToBe);
+    verifyRentRollCommentary(commentaryToBe: string, include = false): InPlaceRentRollActions {
+        if (include === true) {
+            rentRollPage.rentRollCommentary.should("include.text", commentaryToBe);
+        } else {
+            rentRollPage.rentRollCommentary.should("have.text", commentaryToBe);
+        }
         return this;
     }
 
@@ -318,6 +405,11 @@ class InPlaceRentRollActions extends ResidentialRentRollSharedActions<typeof ren
 
     private enterTextToTextarea(text: string): InPlaceRentRollActions {
         rentRollPage.textAreaToInput.clear().type(text).type("{enter}");
+        return this;
+    }
+
+    private pasteTextToTextarea(text: string): InPlaceRentRollActions {
+        rentRollPage.textAreaToInput.clear().invoke("val", text).type("{enter}");
         return this;
     }
 
