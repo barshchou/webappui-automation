@@ -116,7 +116,8 @@ describe(`[QA-5013] [Income>Expense forecast] Selected expense card is displayed
             is displayed in the Pro Forma page > Operating Expenses section 
             (Per Room measure for Fuel + Empty Appraiser's forecasts)`, function () {
 
-            // BECAUSE OF BUG
+            // TODO: Uncomment this code + code below, after bug fix https://bowery.atlassian.net/browse/WEB-5881
+            //
             // Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastFuelFixture('room'));
             // _NavigationSection.navigateToProForma();
             // testData.expensesInProFormaByDefaultArray.forEach(element => {
