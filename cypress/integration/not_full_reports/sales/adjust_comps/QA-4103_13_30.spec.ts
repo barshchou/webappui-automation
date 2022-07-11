@@ -37,15 +37,15 @@ describe("Net Property Adjustments in Sales Adjustment Grid is calculated with c
         deleteReport(testData.reportCreationData.reportNumber);
     });
 
-    it.skip("[QA-4130]", () => {
+    it.only("[QA-4130]", () => {
         // Feature flag test (Enable flexible gba analysis)
         testData.calculationUnits.forEach(val => {
-            Sales._AdjustComps.checkCalculationUnitsRadio(val);
-            // .enterSizeAdjustmentByColumn(testData.comparable.sizeAdjustment)
-            // .enterConditionAdjustmentByColumn(testData.comparable.conditionAdjustment)
-            // .clickAddOtherAdjustmentButton()
-            // .enterOtherAdjustmentByColumn(testData.comparable.otherAdjustment)
-            // .verifyNetPropertyAdjustmentsByCompIndex();
+            Sales._AdjustComps.checkCalculationUnitsRadio(val)
+            .enterSizeAdjustmentByColumn(testData.comparable.sizeAdjustment)
+            .enterConditionAdjustmentByColumn(testData.comparable.conditionAdjustment)
+            .clickAddOtherAdjustmentButton()
+            .enterOtherAdjustmentByColumn(testData.comparable.otherAdjustment)
+            .verifyNetPropertyAdjustmentsByCompIndex();
         });
     });
 });

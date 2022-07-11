@@ -7,7 +7,7 @@ import Income from "../../actions/income/income.manager";
 import Final from "../../actions/final/final.manager";
 import Sales from "../../actions/sales/sales.manager";
 import proFormaTypesEnum from "../../enums/proFormaTypes.enum";
-import tableExpenseHistoryCellNames from "../../../cypress/enums/expenseHistoryTableRows.enum";
+import tableExpenseHistoryCellNames from "../../../cypress/enums/expense/expenseHistoryTableRows.enum";
 import { loginAction } from "../../actions/base/baseTest.actions";
 import Enums from "../../enums/enums";
 
@@ -292,7 +292,7 @@ describe("Full bowery way, multifamily as complete report", { tags: [ "@full_rep
         testData.comparableExpenses.comparables.forEach(comp => {
             Income.ComparableExpenses.clickAddBlankColumnButton()
                 .enterAddressByColumnIndex(comp.address)
-                .enterLocationByColumnIndex(comp.location)
+                .enterCityByColumnIndex(comp.city)
                 .chooseExpensePeriodByColumnIndex(comp.period)
                 .enterSquareFeetByColumnIndex(comp.squareFeet)
                 .enterResidentialUnitsByColumnIndex(comp.resUnits)
@@ -376,7 +376,7 @@ describe("Full bowery way, multifamily as complete report", { tags: [ "@full_rep
             .verifyCategoryRow(testData.proForma.vcLossRow, proFormaTypesEnum.residentialVCLoss)
             .verifyCategoryRow(testData.proForma.effectiveGrossRow, proFormaTypesEnum.effectiveGrossIncome)
             .verifyCategoryRow(testData.proForma.reTaxesRow, proFormaTypesEnum.realEstateTaxes)
-            .verifyCategoryRow(testData.proForma.insuranceRow, proFormaTypesEnum.insurace)
+            .verifyCategoryRow(testData.proForma.insuranceRow, proFormaTypesEnum.insurance)
             .verifyCategoryRow(testData.proForma.electricityRow, proFormaTypesEnum.electricity)
             .verifyCategoryRow(testData.proForma.repairsRow, proFormaTypesEnum.repairAndMaintenance)
             .verifyCategoryRow(testData.proForma.payrollRow, proFormaTypesEnum.payrollBenefits)

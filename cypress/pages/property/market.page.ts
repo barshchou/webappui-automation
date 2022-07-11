@@ -1,5 +1,5 @@
 import BasePage from "../base/base.page";
-import { BoweryReports } from "../../types";
+import { BoweryReports } from "../../types/boweryReports.type";
 
 class MarketPage extends BasePage{
     get exposureTimeMin() {return cy.get("*[name='exposureTime.min']");}

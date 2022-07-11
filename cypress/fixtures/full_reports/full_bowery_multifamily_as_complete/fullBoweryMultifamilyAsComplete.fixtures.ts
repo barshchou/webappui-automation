@@ -1,6 +1,7 @@
 import { getTodayDateString, getYearFromDate } from "../../../../utils/date.utils";
 import Enums from "../../../enums/enums";
-import { BoweryAutomation, BoweryReports } from "../../../types";
+import { BoweryAutomation } from "../../../types/boweryAutomation.type";
+import { BoweryReports } from "../../../types/boweryReports.type";
 
 const reportCreationFixture = (): BoweryAutomation.ReportCreationData => {
     return {
@@ -652,27 +653,27 @@ const comparableExpensesFixture = () => {
     return {
         comparables: [
             {
-                address: "6001 S Sacramento Ave", location: "Chicago", period: "Projection",
+                address: "6001 S Sacramento Ave", city: "Chicago", period: "Projection",
                 squareFeet: 6608, resUnits: 13, insurance: 3900, electricity: 12675, repairsAndMaintenance: 5850,
                 payrollAndBenefits: 3900, generalAndAdministrative: 2925, management: 4899, toe: "$34,149.00"
             },
             {
-                address: "7955 S Emerald Ave", location: "Chicago", period: "Projection",
+                address: "7955 S Emerald Ave", city: "Chicago", period: "Projection",
                 squareFeet: 9000, resUnits: 12, insurance: 4525, electricity: 6754, repairsAndMaintenance: 6000,
                 payrollAndBenefits: 3104, generalAndAdministrative: 2640, management: 5383, toe: "$28,406.00"
             },
             {
-                address: "7613 S Kingston Ave", location: "Chicago", period: "Projection",
+                address: "7613 S Kingston Ave", city: "Chicago", period: "Projection",
                 squareFeet: 9750, resUnits: 13, insurance: 4200, electricity: 15917, repairsAndMaintenance: 5200,
                 payrollAndBenefits: 3357, generalAndAdministrative: 2275, management: 5902, toe: "$36,851.00"
             },
             {
-                address: "7655 S Coles Ave", location: "Chicago", period: "Projection",
+                address: "7655 S Coles Ave", city: "Chicago", period: "Projection",
                 squareFeet: 12771, resUnits: 13, insurance: 5161, electricity: 6151, repairsAndMaintenance: 5850,
                 payrollAndBenefits: 6248, generalAndAdministrative: 2300, management: 6529, toe: "$32,239.00"
             },
             {
-                address: "2320 E 70th Street", location: "Chicago", period: "Projection",
+                address: "2320 E 70th Street", city: "Chicago", period: "Projection",
                 squareFeet: 7250, "resUnits": 8, insurance: 3200, electricity: 3800, repairsAndMaintenance: 3200,
                 payrollAndBenefits: 5000, generalAndAdministrative: 1880, management: 5464.8, toe: "$22,544.80"
             },

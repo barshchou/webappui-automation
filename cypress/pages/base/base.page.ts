@@ -23,6 +23,13 @@ export default class BasePage {
         return cy.get("[aria-label=close]");
     }
 
+    /**
+     * Same as `CloseIcon` but inside shadow-dom
+     */
+    get CloseIconShadowDom(){
+        return cy.get('[aria-label="Close"]', { includeShadowDom:true });
+    }
+
     get formYesRevertBtn() {
         return cy.xpath("//*[contains(@role, 'dialog')]/descendant::*[contains(text(), 'Yes, revert')]");
     }
@@ -30,6 +37,8 @@ export default class BasePage {
     get tooltip() {
         return cy.get("[role=tooltip]");
     }
+
+    get modalWindow() {return cy.get("[role='dialog']");}
 
     formEditBtn(index = 0) {
         return cy.xpath('//*[@data-icon="pencil"]//ancestor::button')
@@ -58,5 +67,4 @@ export default class BasePage {
             return cy.xpath("//span[contains(text(), 'Modified')]");
         }
     }
-
 }

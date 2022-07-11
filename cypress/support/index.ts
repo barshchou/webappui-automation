@@ -6,7 +6,7 @@ import { recordProxiedRequests } from "../../utils/intercept.utils";
 import { recordDOM_Snapshot } from "../utils/snapshot.utils";
 import "./commands";
 import "cypress-real-events/support";
-import { BoweryAutomation } from "../types";
+import { BoweryAutomation } from "../types/boweryAutomation.type";
 
 require("cypress-xpath");
 require("cypress-iframe");
@@ -28,18 +28,19 @@ Cypress.on("fail", (err) => {
 declare global {
     namespace Cypress {
       interface Chainable {
+        
         /**
          * Custom command to select DOM element by data-cy attribute.
          * @example cy.dataCy('greeting')
          */
         loginByApi(url: string, username: any, password: any): Cypress.Chainable<Cypress.Response<any>>
-        
+
         /**
          * 
          * @param value 
          */
-        loginByUI(url: string): Chainable<Element>
-        
+        loginByUI(url: string, username: string, password: string): Chainable<Element>
+
         /**
          * Description of step which will desribe code below. 
          * @param message 
