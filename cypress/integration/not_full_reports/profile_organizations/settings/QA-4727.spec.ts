@@ -5,9 +5,10 @@ import { _NavigationSection } from '../../../../actions/base';
 import testData from "../../../../fixtures/not_full_reports/profile_organizations/settings/QA-4727.fixture";
 import enums from '../../../../enums/enums';
 import launchDarklyApi from '../../../../api/launchDarkly.api';
+import { conditionalDescribe } from '../../../../../utils/env.utils';
 
-describe("[QA-4727] Verify possibility to edit static text in-app", 
-    { tags:[ "@organizations", "@settings", "@check_export" ] }, () => {
+conditionalDescribe("[QA-4727] Verify possibility to edit static text in-app", 
+    { tags:[ "@organizations", "@settings", "@check_export", "@feature_flag" ] }, () => {
 
     it('Update static text in Settings and verify changes on a corresponding pages', () => {
         cy.stepInfo('1. Set Launch Darkly flag to see Report Copy Editor section. Create a report');
