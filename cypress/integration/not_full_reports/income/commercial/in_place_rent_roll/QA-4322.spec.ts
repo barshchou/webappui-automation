@@ -13,6 +13,7 @@ describe("Verify the Basis of Rent tooltip",
     it("Test body", () => {
         NavigationSection.navigateToCommercialInPlaceRentRoll();
         Income.Commercial.InPlaceRentRoll.verifyBasisOfRentTooltip();
+        cy.log("Added logging to check");
         deleteReport(testData.reportCreationData.reportNumber);
     });
 });
