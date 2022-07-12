@@ -81,92 +81,67 @@ const _expensesInProFormaByDefaultArray = [
     proFormaTypes.replacementsAndReserves,
 ];
 
-const expenseForecastInsuranceFixture = (_basis: "unit" | "sf"): BoweryReports.ForecastItem => {
+const expenseForecastInsuranceFixtureUltimate = (fixture: BoweryReports.ForecastItem, _basis: "unit" | "sf" | "room"): BoweryReports.ForecastItem => {
     return {
+        name: fixture.name,
+        basis: _basis as BoweryReports.UnitSF,
+        forecast: fixture.forecast
+    };
+};
+
+const expenseForecastInsuranceFixture: BoweryReports.ForecastItem = {
         name: "insurance",
-        basis: _basis as BoweryReports.UnitSF,
         forecast: 30
-    };
 };
 
-const expenseForecastElectricityFixture = (_basis: "unit" | "sf"): BoweryReports.ForecastItem => {
-    return {
+const expenseForecastElectricityFixture: BoweryReports.ForecastItem = {
         name: "electricity",
-        basis: _basis as BoweryReports.UnitSF,
         forecast: 1451.5
-    };
 };
 
-const expenseForecastFuelFixture = (_basis: "unit" | "room" | "sf"): BoweryReports.ForecastItem => {
-    return {
+const expenseForecastFuelFixture: BoweryReports.ForecastItem = {
         name: "fuel",
-        basis: _basis as BoweryReports.UnitSF,
         forecast: 150
-    };
 };
 
-const expenseForecastWaterAndSewerFixture = (_basis: "unit" | "sf"): BoweryReports.ForecastItem => {
-    return {
+const expenseForecastWaterAndSewerFixture: BoweryReports.ForecastItem = {
         name: "waterAndSewer",
-        basis: _basis as BoweryReports.UnitSF,
         forecast: 30
-    };
 };
 
-const expenseForecastRepairsAndMaintenanceFixture = (_basis: "unit" | "sf"): BoweryReports.ForecastItem => {
-    return {
+const expenseForecastRepairsAndMaintenanceFixture: BoweryReports.ForecastItem = {
         name: "repairsAndMaintenance",
-        basis: _basis as BoweryReports.UnitSF,
         forecast: 1880
-    };
 };
 
-const expenseForecastPayrollAndBenefitsFixture = (_basis: "unit" | "sf"): BoweryReports.ForecastItem => {
-    return {
+const expenseForecastPayrollAndBenefitsFixture: BoweryReports.ForecastItem = {
         name: "payrollAndBenefits",
-        basis: _basis as BoweryReports.UnitSF,
         forecast: 30
-    };
 };
 
-const expenseForecastGeneralAndAdministrativeFixture = (_basis: "unit" | "sf"): BoweryReports.ForecastItem => {
-    return {
+const expenseForecastGeneralAndAdministrativeFixture: BoweryReports.ForecastItem = {
         name: "generalAndAdministrative",
-        basis: _basis as BoweryReports.UnitSF,
         forecast: 543
-    };
 };
 
-const expenseForecastLegalAndProfessionalFeesFixture = (_basis: "unit" | "sf"): BoweryReports.ForecastItem => {
-    return {
+const expenseForecastLegalAndProfessionalFeesFixture: BoweryReports.ForecastItem = {
         name: "legalAndProfessionalFees",
-        basis: _basis as BoweryReports.UnitSF,
         forecast: 30
-    };
 };
 
-const expenseForecastMiscellaneousFixture = (_basis: "unit" | "sf"): BoweryReports.ForecastItem => {
-    return {
+const expenseForecastMiscellaneousFixture: BoweryReports.ForecastItem = {
         name: "miscellaneous",
-        basis: _basis as BoweryReports.UnitSF,
         forecast: 123.12
-    };
 };
 
-const expenseForecastManagementFixture = (_basis: "unit" | "sf"): BoweryReports.ForecastItem => {
-    return {
+const expenseForecastManagementFixture: BoweryReports.ForecastItem = {
         name: "management",
-        basis: _basis as BoweryReports.UnitSF,
         forecast: 1
-    };
 };
 
-const expenseForecastReservesFixture = (_basis: "unit" | "sf"): BoweryReports.ForecastItem => {
-    return {
+const expenseForecastReservesFixture: BoweryReports.ForecastItem = {
         name: "reserves",
-        basis: _basis as BoweryReports.UnitSF,
         forecast: 0.58
-    };
 };
 
 const expenseForecastTotalFixture = (_basis: "unit" | "sf"): BoweryReports.ForecastItem => {
@@ -176,18 +151,18 @@ const expenseForecastTotalFixture = (_basis: "unit" | "sf"): BoweryReports.Forec
     };
 };
 
-const expenseForecastFixtureArray = (basis?: "unit" | "sf"): Array<BoweryReports.ForecastItem> => {
-    return [ expenseForecastInsuranceFixture(basis),
-    expenseForecastElectricityFixture(basis),
-    expenseForecastFuelFixture(basis),
-    expenseForecastWaterAndSewerFixture(basis),
-    expenseForecastRepairsAndMaintenanceFixture(basis),
-    expenseForecastPayrollAndBenefitsFixture(basis),
-    expenseForecastGeneralAndAdministrativeFixture(basis),
-    expenseForecastLegalAndProfessionalFeesFixture(basis),
-    expenseForecastMiscellaneousFixture(basis),
-    expenseForecastManagementFixture(basis),
-    expenseForecastReservesFixture(basis) ];
+const expenseForecastFixtureArray = (): Array<BoweryReports.ForecastItem> => {
+    return [ expenseForecastInsuranceFixture,
+    expenseForecastElectricityFixture,
+    expenseForecastFuelFixture,
+    expenseForecastWaterAndSewerFixture,
+    expenseForecastRepairsAndMaintenanceFixture,
+    expenseForecastPayrollAndBenefitsFixture,
+    expenseForecastGeneralAndAdministrativeFixture,
+    expenseForecastLegalAndProfessionalFeesFixture,
+    expenseForecastMiscellaneousFixture,
+    expenseForecastManagementFixture,
+    expenseForecastReservesFixture ];
 };
 
 export default {
@@ -207,4 +182,5 @@ export default {
     verifyTOECommentGenerated,
     verifyTOEAppraisersValueLinePSF,
     verifyTOEAppraisersValueLinePerUnit,
+    expenseForecastInsuranceFixtureUltimate,
 };

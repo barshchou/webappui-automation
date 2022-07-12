@@ -78,8 +78,8 @@ describe(`[QA-5025] [Income>Expense forecast] Selected existing expense card is 
                 data left in the forecast, this data is included in calculations on Pro forma and Expense forecast page 
                 (PSF measure + Full Appraiser's forecasts)`, () => {
 
-            testData.expenseForecastFixtureArray("sf").forEach(element => {
-                Income._ExpenseForecastActions.chooseForecastItemBasis(element);
+            testData.expenseForecastFixtureArray().forEach(element => {
+                Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastInsuranceFixtureUltimate(element, "sf"));
             });
             Income._ExpenseForecastActions.totalSumForecastPSFAllCards(
                 testData.buildingDescription.grossArea,
@@ -120,7 +120,7 @@ describe(`[QA-5025] [Income>Expense forecast] Selected existing expense card is 
                 (Per Room measure for Fuel + Full Appraiser's forecasts)`, () => {
 
             //BECAUSE OF BUG
-            // Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastFuelFixture('room'));
+            //Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastInsuranceFixtureUltimate(testData.expenseForecastFuelFixture, "room"));
             // Income._ExpenseForecastActions.totalSumForecastPSFAllCards(
             //     testData.buildingDescription.grossArea,
             //     testData.numberOfResidentialUnits,
