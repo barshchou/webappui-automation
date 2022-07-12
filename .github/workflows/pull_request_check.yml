@@ -2,7 +2,8 @@ name: Run smoke tests and tests, included in PR
 
 on:
   pull_request:
-    types: [reopened]
+    types:
+      - reopened
 
 jobs:
   Run-smoke-tests:
