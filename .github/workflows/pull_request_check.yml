@@ -1,0 +1,32 @@
+name: Run smoke tests and tests, included in PR
+
+on:
+  pull_request:
+    types: [opened, review_requested]
+
+jobs:
+  Run-smoke-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run smoke tests action
+        uses: ./.github/workflows/smoke
+  Run-included-tests:
+    runs-on: ubuntu-latest
+    container: cypress/browsers:node16.13.2-chrome100-ff98
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - name: Define included specs
+        id: define_specs
+        run: |
+          CHANGED_SPECS=$(git diff --name-only origin/${{ github.base_ref }} origin/${{ github.head_ref }} -- cypress/integration)
+          echo '::set-output name=CHANGED_SPECS::$CHANGED_SPECS'
+      - name: Run included specs
+        uses: Bowery-RES/action-run-e2e-tests@latest
+        with:
+          github_token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          spec_file: ${{ steps.define_specs.outputs.CHANGED_SPECS }}
+          record_key: ${{ secrets.CURRENTS_RECORD_KEY }}
