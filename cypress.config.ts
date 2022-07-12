@@ -1,24 +1,32 @@
 import { defineConfig } from 'cypress';
-import grepFilterPlugin from "cypress-grep/src/plugin";
 import { addMatchImageSnapshotPlugin } from '@simonsmith/cypress-image-snapshot/plugin';
+import { ENVS, evalUrl } from './utils/env.utils';
 import api from "./cypress/api";
-import Enums from "./cypress/enums/enums";
-import { _convertDocxToHtml, _getFilePath, _waitForFileExists } from "./cypress/utils/files.utils";
+import fsUtil from "./cypress/utils/files.utils";
+import grepFilterPlugin from "cypress-grep/src/plugin";
 
 export default defineConfig({
-    chromeWebSecurity: false,
-    defaultCommandTimeout: 100000,
-    viewportWidth: 1920,
-    viewportHeight: 1080,
-    watchForFileChanges: false,
-    videoCompression: 15,
-    videoUploadOnPasses: false,
-    projectId: 'EDvaU4',
-    e2e: {
-        baseUrl: Enums.ENV_URLS.STAGING,
-        // We've imported your old cypress plugins here.
-        // You may want to clean this up later by importing these.
-        setupNodeEvents(on, config) {
+  chromeWebSecurity: false,
+  defaultCommandTimeout: 100000,
+  viewportWidth: 1920,
+  viewportHeight: 1080,
+  watchForFileChanges: false,
+  videoCompression: 15,
+  videoUploadOnPasses: false,
+  projectId: 'EDvaU4',
+  e2e: {
+    // baseUrl is staging, but it will be reset downbelow
+    baseUrl: ENVS.staging,
+    
+    // We've imported your old cypress plugins here.
+    // You may want to clean this up later by importing these.
+    setupNodeEvents(on, config) {
+      // setup and validate `baseUrl` in runtime
+      config.baseUrl = evalUrl(config);
+
+      // ernst: don't remove, this is for debug in CI
+      // eslint-disable-next-line no-console
+      console.log(`\nBaseUrl is: ${config.baseUrl}\n`);
 
             // configuring cypress-grep plugin
             grepFilterPlugin(config);
@@ -47,20 +55,20 @@ export default defineConfig({
 
             on("task", {
                 async getFilePath({ _reportName, _docx_html }){
-                    return await _getFilePath(_reportName, _docx_html);
+                    return await fsUtil._getFilePath(_reportName, _docx_html);
                 }
             });
 
             on("task", {
                 async convertDocxToHtml(report: string){
                     // ernst: it's async because it has call of async function from mammoth lib
-                    return await _convertDocxToHtml(report);
+                    return await fsUtil._convertDocxToHtml(report);
                 }
             });
 
             on("task", {
                 async waitForFileExists(filePath: string){
-                    return await _waitForFileExists(filePath);
+                    return await fsUtil._waitForFileExists(filePath);
                 }
             });
         },
