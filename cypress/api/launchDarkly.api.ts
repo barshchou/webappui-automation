@@ -76,15 +76,32 @@ class LaunchDarkly {
         body : JSON.stringify({
           patch: [ options ]
         }),
-        retryOnStatusCodeFailure: true
+        failOnStatusCode: false
+      })
+      .then(resp => {
+        if (resp.status === 429) {
+          cy.log("Status code 429, repeat request");
+          this.baseRequest(featureFlagKey, method, options);
+        } else {
+          expect(resp.status).to.eq(200);
+          return;
+        }
       }); 
     } else {
       return cy.request({
         method,
         url: _url,
         headers: this.headersContent,
-        retryOnStatusCodeFailure: true
-      });
+        failOnStatusCode: false
+      }).then(resp => {
+        if (resp.status === 429) {
+          cy.log("Status code 429, repeat request");
+          this.baseRequest(featureFlagKey, method, options);
+        } else {
+          expect(resp.status).to.eq(200);
+          return;
+        }
+      }); 
     }
   }
 
@@ -110,7 +127,7 @@ class LaunchDarkly {
   getFeatureFlag(featureFlagKey?: Utils.FeatureFlagKeysType): LaunchDarkly {
     this.baseRequest(featureFlagKey).then(resp => {
       featureFlagKey ? cy.log("Feature Flag Key", resp.body) : cy.log("Feature Flags", resp.body);
-    }).its("status").should("eq", 200);
+    });
 
     return this;
   }
@@ -144,9 +161,7 @@ class LaunchDarkly {
         );
 
       cy.log(`Adding feature flag ${featureFlagKey} for ${userId}`);
-      this.baseRequest(featureFlagKey, "PATCH", jsonPatchObj).its("status").should("eq", 200);
-
-      cy.log(`Set ${featureFlagKey} feature flag`);
+      this.baseRequest(featureFlagKey, "PATCH", jsonPatchObj);
     });
     return this;
   }
@@ -170,7 +185,7 @@ class LaunchDarkly {
     }
 
     const existingUserTarget = targets[existingUserTargetIndex];
-    if(existingUserTarget.values.length === 1) {
+    if (existingUserTarget.values.length === 1) {
       // A single user in the target, need to remove the entire target
       this.removeTarget(featureFlagKey, existingUserTargetIndex);
       // Recursively continue removing the user targets
@@ -185,7 +200,7 @@ class LaunchDarkly {
       "remove",
       `/environments/${this.environmentKey}/targets/${existingUserTargetIndex}/values/${userIndex}`,
       userId
-    )).its("status").should("eq", 200);
+    ));
     
     cy.log(`User ${userId} has been deleted`);
     });
