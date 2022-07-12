@@ -24,36 +24,39 @@ describe(`[QA-5134] Check when "custom" dropdown is selected user can drag&drop 
             Sales._FindComps.Actions.selectCompFromMap();
         });
 
-        cy.stepInfo(`
-        3. [QA-5134] -> When sort for Selected Comparables set to "Sale Date",
-        then user unable to sort selected comparables by drag-and-drop
-        `);
-        /**
-         * Check that there are no draggable elements
-         */
-        // code
+        cy.stepInfo(`3. [QA-5134] -> When sort for Selected Comparables set to "Sale Date",
+        then user unable to sort selected comparables by drag-and-drop`);
+        cy.get('[data-react-beautiful-dnd-drag-handle="0"]').should("not.exist");
 
         cy.stepInfo(`4. [QA-5134] -> User set "Custom" sort for Selected Comparables`);
-        Sales._FindComps.Actions.selectedCompsSetSort("Custom").pause();
+        Sales._FindComps.Actions.selectedCompsSetSort("Custom");
 
         cy.stepInfo(`5.1. [QA-5134] -> User can move selected comparable down the list by drag-and-drop`);
         cy.get('[data-qa="selected-sales-comps-table"] [data-qa="address"]').spread((...comps) => {
-            // ernst: removing first undraggable comps from list
-            comps.shift();
-            comps = comps.map(elem => elem.innerText);
+            comps = comps.slice(1).map(elem => elem.innerText);
             cy.wrap(comps).as("comps_before");
-            cy.get(`@comps_before`).then(val => cy.log(<any>val));
+
+            cy.get(`@comps_before`).then(_before => cy.log(<any>_before));
 
             Sales._FindComps.moveComparableByDnD('[data-react-beautiful-dnd-drag-handle="0"]', 0, "down", 2);        
         });
 
+        cy.stepInfo(`5.2. [QA-5134] -> User see that order of comps changed`);
         cy.get('[data-qa="selected-sales-comps-table"] [data-qa="address"]').spread((...comps) => {
-            comps.shift();
-            comps = comps.map(elem => elem.innerText);
+            comps = comps.slice(1).map(elem => elem.innerText);
             cy.wrap(comps).as("comps_after");
-            cy.get("@comps_after").then((val) => cy.log(<any>val));
+            
+            cy.get("@comps_after").then((_after) => {
+                cy.log(<any>_after);
+                
+                cy.get("@comps_before").then((_before) => {
+                    expect(_after).to.not.deep.equal(
+                        _before, "Sales Comparables has different order after DnD (by addresses)."
+                    );
+                });
+            });
         });
 
-        // deleteReport(testData.reportCreationData.reportNumber);
+        deleteReport(testData.reportCreationData.reportNumber);
     });
 });
