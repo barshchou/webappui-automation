@@ -18,8 +18,7 @@ describe(`[QA-5095] Selected expenses forecast is exported to Estimated Operatin
         cy.stepInfo("2. Select Expense Forecast by checking 'Include Expense on Pro Forma' checkbox");
         testData.expenseForecasts.forEach((forecastItem, index) => {
             forecastItem.basis = testData.perSFBasis;
-            Income._ExpenseForecastActions
-                .verifyIncludeInProFormaCheckboxIsChecked(testData.checkboxNames[index])
+            Income._ExpenseForecastActions.verifyIncludeInProFormaCheckboxIsChecked(testData.checkboxNames[index])
                 .changeStateOfPercentOfEGICheckbox(false)
                 .chooseForecastItemBasis(forecastItem)
                 .enterForecastItemForecast(forecastItem);
@@ -64,8 +63,7 @@ describe(`[QA-5095] Selected expenses forecast is exported to Estimated Operatin
         cy.stepInfo("2. Select Expense Forecast by checking 'Include Expense on Pro Forma' checkbox");
         testData.expenseForecasts.forEach((forecastItem, index) => {
             forecastItem.basis = testData.perUnitBasis;
-            Income._ExpenseForecastActions
-                .verifyIncludeInProFormaCheckboxIsChecked(testData.checkboxNames[index])
+            Income._ExpenseForecastActions.verifyIncludeInProFormaCheckboxIsChecked(testData.checkboxNames[index])
                 .changeStateOfPercentOfEGICheckbox(false)
                 .chooseForecastItemBasis(forecastItem)
                 .enterForecastItemForecast(forecastItem);
@@ -109,8 +107,7 @@ describe(`[QA-5095] Selected expenses forecast is exported to Estimated Operatin
 
         cy.stepInfo("2. Select Expense Forecast by checking 'Include Expense on Pro Forma' checkbox");
         
-        Income._ExpenseForecastActions
-            .verifyIncludeInProFormaCheckboxIsChecked(testData.fuelForecastPerRoom.name)
+        Income._ExpenseForecastActions.verifyIncludeInProFormaCheckboxIsChecked(testData.fuelForecastPerRoom.name)
             .chooseForecastItemBasis(testData.fuelForecastPerRoom)
             .enterForecastItemForecast(testData.fuelForecastPerRoom);
 
