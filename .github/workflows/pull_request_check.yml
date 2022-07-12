@@ -2,14 +2,14 @@ name: Run smoke tests and tests, included in PR
 
 on:
   pull_request:
-    types: [opened, review_requested]
+    types: [opened, review_requested, reopened]
 
 jobs:
   Run-smoke-tests:
     runs-on: ubuntu-latest
     steps:
       - name: Run smoke tests action
-        uses: ./.github/workflows/smoke
+        uses: ./.github/workflows/smoke.yml
   Run-included-tests:
     runs-on: ubuntu-latest
     container: cypress/browsers:node16.13.2-chrome100-ff98
