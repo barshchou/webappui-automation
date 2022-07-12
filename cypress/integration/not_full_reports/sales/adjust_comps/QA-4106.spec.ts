@@ -3,6 +3,8 @@ import { createReport, deleteReport } from "../../../../actions/base/baseTest.ac
 import { _NavigationSection } from "../../../../actions/base";
 import { Sales } from "../../../../actions";
 
+//fix later
+// due to test case update
 describe("Total Utility Adjustments in Sales Adjustment Grid is calculated with correct formula", 
     { tags:[ "@sales", "@adjust_comps", ] }, () => {
 
