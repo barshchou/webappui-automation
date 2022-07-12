@@ -109,13 +109,15 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
      * NOTE: 0 - first, -1 - last in the list
      */
     selectCompFromMap(index = 0 ): FindCompsActions {
-        findCompsPage.getSelectCompFromMapButton().eq(index).scrollIntoView().click();
+        findCompsPage.getSelectCompFromMapButton().eq(index).scrollIntoView().click({ force: true });
         this.checkFindSingleSalesComp();
+        // ernst: delay to no accidentaly dispatch click to "Remove" btn in SalesComps search list
+        cy.wait(1500);
         return this;
     }
 
     checkFindSingleSalesComp(): FindCompsActions{
-        cy.wait(`@${Alias.gql.FindTransactionByIdAndVersion}`, { timeout:70000 }).then((interception) => {
+        cy.wait(`@${Alias.gql.FindTransactionByIdAndVersion}`, { timeout:35000 }).then((interception) => {
             cy.log(interception.response.body.data.findTransactionByIdAndVersion.id);
             cy.wrap(interception.response.body.data.findTransactionByIdAndVersion.id)
             .as(Alias.salesEventId);
