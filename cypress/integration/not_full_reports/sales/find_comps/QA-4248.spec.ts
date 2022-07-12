@@ -13,8 +13,11 @@ describe("Verify the Comps can be added by entering the existing Report ID in th
 
     it("Test body", () => {
         NavigationSection.navigateToFindComps();
-        Sales.FindComps.selectCompFromMapByAddress(fixture.comparable.address)
-            .clickSaveContinueButton();
+        [ 0, 1, 2 ].forEach(() => {
+            Sales.FindComps.selectCompFromMap();
+        });
+        
+        Sales.FindComps.clickSaveContinueButton();
         Sales.CreateCompMap.verifyPageOpened();
         cy._mapGet(mapKeysUtils.report_id).then(reportId => {
             cy.log(`Current report ID is ${reportId}`);
@@ -32,7 +35,6 @@ describe("Verify the Comps can be added by entering the existing Report ID in th
             .selectAllCompsForImport()
             .checkSelectedSingleSalesComps()
             .clickImportCompsFromReportButton();
-        Sales.FindComps.verifyAddedCompAddress(fixture.comparable.address);
         deleteReport(fixture.reportCreationData.reportNumber);
         cy.reload();
         Homepage.deleteReport(fixture.reportCreationData.reportNumber);
