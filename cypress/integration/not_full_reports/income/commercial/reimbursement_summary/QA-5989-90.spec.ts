@@ -43,6 +43,10 @@ describe("Income > Commercial > Reimbursement Summary - Verify Gross and Annual 
 
         cy.saveLocalStorage();
     });
+
+    beforeEach('Restore local storage', () => {
+        cy.restoreLocalStorage();
+    });
     
     testData.expensesForecast.forEach((expense, index) => {
         it(`[${expense.testCaseIds}] Verifying ${expense.expenseForecast.expenseUIName} Appraiser's Forecast (GROSS) and
@@ -83,7 +87,6 @@ describe("Income > Commercial > Reimbursement Summary - Verify Gross and Annual 
     });
     
     after('Delete report', () => {
-        cy.restoreLocalStorage();
         deleteReport(testData.reportCreationData.reportNumber);
     });
 });
