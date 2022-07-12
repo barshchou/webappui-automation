@@ -4,7 +4,7 @@ import Enums from "../../../../../enums/enums";
 import { BoweryReports } from "../../../../../types/boweryReports.type";
 
 const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreator
-    .getReportData("4113_14_16_20", {
+    .getReportData("4613_14_16_20", {
         incomeValue: Enums.INCOME_TYPE.both
     });
 
