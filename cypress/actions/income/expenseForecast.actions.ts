@@ -156,8 +156,10 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
         reserves: "replacementReserves"
     }
 
-    checkPercentOfEGICheckbox(): ExpenseForecastActions {
-        expenseForecastPage.inputPercentOfEGICheckbox.check().should("have.value", "true");
+    changeStateOfPercentOfEGICheckbox(isToCheck = true): ExpenseForecastActions {
+        isToCheck ? expenseForecastPage.inputPercentOfEGICheckbox.check() 
+            : expenseForecastPage.inputPercentOfEGICheckbox.uncheck();
+        expenseForecastPage.inputPercentOfEGICheckbox.should("have.value", `${isToCheck}`);
         return this;
     }
 

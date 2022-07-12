@@ -42,5 +42,6 @@ export enum Tag {
     report_status = "@report_status",
     appraiser = "@appraiser",
     settings = "@settings",
+    unit_details = "@unit_details",
     reimbursement_summary = "@reimbursement_summary"
 }

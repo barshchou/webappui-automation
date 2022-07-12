@@ -1,9 +1,14 @@
 import BaseActionsExt from "../../base/base.actions.ext";
 import rentCompsPage from "../../../pages/income/commercial/rentComps.page";
 import { BoweryReports } from "../../../types/boweryReports.type";
-import { getNumberFromDollarNumberWithCommas } from "../../../../utils/numbers.utils";
+import {
+    cutDecimalPartToNumberOfDigits, cutDotFromNumber,
+    getNumberFromDollarNumberWithCommas,
+    isDecimal, numberWithCommas
+} from "../../../../utils/numbers.utils";
 import { _map } from "../../../support/commands";
 import mapKeysUtils from "../../../utils/mapKeys.utils";
+import { getTodayDateString, isDateHasCorrectFormat } from "../../../../utils/date.utils";
 
 class CommercialRentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
 
@@ -97,19 +102,45 @@ class CommercialRentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
         return this;
     }
 
-    fillInRentCompFieldInput(fieldName: string, value: string): CommercialRentCompsActions {
-        rentCompsPage.getRentCompInputField(fieldName).clear().type(`${value}{enter}`);
+    fillInRentCompFieldInput(fieldName: string, value: string | number, isRequired = false): CommercialRentCompsActions {
+        const requiredAttrMatcher = isRequired ? "have.attr" : "not.have.attr";
+        rentCompsPage.getRentCompInputField(fieldName).clear().type(`${value}{enter}`)
+            .should(requiredAttrMatcher, "required");
         return this;
     }
 
     chooseRentCompFieldDropdownOption(fieldName: string, option: string): CommercialRentCompsActions {
+        this.clickRentCompDropdownField(fieldName)
+            .selectRentCompDropdownOption(option);
+        return this;
+    }
+
+    clickRentCompDropdownField(fieldName: string): CommercialRentCompsActions {
         rentCompsPage.getRentCompDropdownField(fieldName).click();
+        return this;
+    }
+
+    selectRentCompDropdownOption(option: string): CommercialRentCompsActions {
         rentCompsPage.getRentCompDropdownOption(option).click();
         return this;
     }
 
-    enterLeaseDate(leaseDate: string): CommercialRentCompsActions {
-        rentCompsPage.leaseDatePicker.type(leaseDate);
+    enterLeaseDate(leaseDate = getTodayDateString()): CommercialRentCompsActions {
+        rentCompsPage.leaseDatePicker.type(leaseDate).should("have.attr", "required");
+        this.verifyLeaseDate(leaseDate);
+        return this;
+    }
+
+    verifyLeaseDate(date: string): CommercialRentCompsActions {
+        const valueToBe = isDateHasCorrectFormat(date) ? date : "";
+        rentCompsPage.leaseDateInputToVerify.should("have.value", valueToBe);
+        this.verifyComponentErrorMessageExists(!isDateHasCorrectFormat(date));
+        return this;
+    }
+
+    verifyComponentErrorMessageExists(isExist = true): CommercialRentCompsActions {
+        const matcher = isExist ? "exist" : "not.exist";
+        rentCompsPage.componentErrorElement.should(matcher);
         return this;
     }
 
@@ -278,6 +309,50 @@ class CommercialRentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
     verifyCompGroupColumnExists(column: string, isExists = true, group = "Unsorted"): CommercialRentCompsActions {
         const matcher = isExists ? "exist" : "not.exist";
         rentCompsPage.getCompGroupTableColumn(group, column).should(matcher);
+        return this;
+    }
+
+    verifyUnitDetailsDropdownText(fieldName: string, text: string): CommercialRentCompsActions {
+        rentCompsPage.getRentCompDropdownField(fieldName).should("contain.text", text);
+        return this;
+    }
+
+    verifySubmitButtonDisabled(isDisabled = true): CommercialRentCompsActions {
+        const matcher = isDisabled ? "be.disabled" : "not.be.disabled";
+        rentCompsPage.submitButton.should(matcher);
+        return this;
+    }
+
+    enterUnitDetailsBaseRent(baseRent: number): CommercialRentCompsActions {
+        this.fillInRentCompFieldInput("baseRent", baseRent, true)
+            .verifyBaseRentInputValue(baseRent);
+        return this;
+    }
+
+    verifyBaseRentInputValue(baseRent: number): CommercialRentCompsActions {
+        const numberToBe = isDecimal(baseRent) ? cutDecimalPartToNumberOfDigits(baseRent) : baseRent;
+        const valueToBe = `$${numberWithCommas(numberToBe)}`;
+        this.verifyInputFieldValue("baseRent", valueToBe, true);
+        return this;
+    }
+
+    enterUnitDetailsSquareFeet(squareFeet: number): CommercialRentCompsActions {
+        this.fillInRentCompFieldInput("squareFeet", squareFeet, true)
+            .verifyUnitDetailsSquareFeet(squareFeet);
+        return this;
+    }
+
+    verifyUnitDetailsSquareFeet(squareFeet: number): CommercialRentCompsActions {
+        const numberToBe = isDecimal(squareFeet) ? cutDotFromNumber(squareFeet) : squareFeet;
+        const valueToBe = numberWithCommas(numberToBe);
+        this.verifyInputFieldValue("squareFeet", valueToBe, true);
+        return this;
+    }
+
+    verifyInputFieldValue(fieldName: string, value: string, isRequired = false): CommercialRentCompsActions {
+        const matcher = isRequired ? "have.attr" : "not.have.attr";
+        rentCompsPage.getRentCompInputField(fieldName).should("have.value", value)
+            .and(matcher, "required");
         return this;
     }
 }
