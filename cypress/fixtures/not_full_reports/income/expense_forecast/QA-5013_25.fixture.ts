@@ -5,6 +5,9 @@ import { BoweryAutomation } from "../../../../types/boweryAutomation.type";
 import { BoweryReports } from "../../../../types/boweryReports.type";
 import { Income } from "../../../../actions";
 import { Alias } from "../../../../utils/alias.utils";
+//TODO change enums here and in tests
+//import expensesForecastCardNamesEnum from "../../../../enums/expense/expensesForecastCardNames.enum"; 
+
 
 
 const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("5013_25", {
@@ -37,8 +40,8 @@ const commentariesFixture = (forecastPSFTotal: string, forecastPerUnitTotal: str
     };
 };
 
-const forecastPSFTotal = (psfToBe: string) => { return psfToBe === '0' ? '$0.00' : `$${psfToBe}`; };
-const forecastPerUnitTotal = (perUnitToBe: string) => { return perUnitToBe === '0' ? '$0' : `$${perUnitToBe}`; };
+const forecastPSFTotal = (psfToBe: string) => { return `$${psfToBe}`;};
+const forecastPerUnitTotal = (perUnitToBe: string) => { return `$${perUnitToBe}`;};
 
 function verifyTOEAppraisersValueLinePSF(grossBuildingArea: number, resUnits = 0, rooms = 0) {
     Income._ExpenseForecastActions.sumPSFTOEAppraisersForecast(grossBuildingArea, resUnits, rooms);

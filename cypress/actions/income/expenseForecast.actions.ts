@@ -528,6 +528,11 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
         return this;
     }
 
+    /**
+    * Action creates Aliases for 2 sum (in PSF + in Per Unit), 
+    * that is displayed in total operating expenses card in Generated Commentary field.
+    */
+
     sumsInGeneratedComment(grossBuildingArea: number, resUnits = 0, rooms = 0): ExpenseForecastActions {
         this.totalSumForecastPSFAllCards(grossBuildingArea, resUnits, rooms);
         this.totalSumForecastPerUnitAllCards(grossBuildingArea, resUnits, rooms);

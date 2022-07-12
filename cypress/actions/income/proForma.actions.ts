@@ -123,23 +123,38 @@ class ProFormaActions extends BaseActionsExt<typeof proFormaPage> {
         return this;
     }
 
+    /**
+    * Action takes Aliases, that was created for summarizing all expense cards on Expense Forecast page (in PSF), 
+    * and compare with text in 'Total Operating Expenses (Excl. RE Taxes)' in 'Total' column
+    */
+
     verifyTotalTOEexTaxesIncludeForecasts(GBA: number): ProFormaActions {
         cy.get(`@${Alias.expenceForecastAliases.sumPerSF}`).then(val => {
             let valTotal = Math.round(Number(val) * GBA);
-            let textToBeTotal = `$${numberWithCommas(Number(valTotal))}`;        
+            let textToBeTotal = `$${numberWithCommas(Number(valTotal))}`;
             this.verifyCategoryTotal(textToBeTotal, enums.PRO_FORMA_TYPES.totalOperatingExpensesExTaxes);
         });
         return this;
     }
 
+    /**
+    * Action takes Aliases, that was created for summarizing all expense cards on Expense Forecast page (in PSF), 
+    * and compare with text in 'Total Operating Expenses (Excl. RE Taxes)' in 'PSF' column
+    */
+
     verifyPsfTOEexTaxesIncludeForecasts(): ProFormaActions {
         cy.get(`@${Alias.expenceForecastAliases.sumPerSF}`).then(val => {
             let valPSF = Number(val).toFixed(2);
-         let textToBePSF = `$${numberWithCommas(valPSF)}`;
+            let textToBePSF = `$${numberWithCommas(valPSF)}`;
             this.verifyCategoryPSFTotal(textToBePSF, enums.PRO_FORMA_TYPES.totalOperatingExpensesExTaxes);
         });
         return this;
     }
+
+    /**
+    * Action takes Aliases, that was created for summarizing all expense cards on Expense Forecast page (in Per Unit), 
+    * and compare with text in 'Total Operating Expenses (Excl. RE Taxes)' in 'Per Unit' column
+    */
 
     verifyPerUnitTOEexTaxesIncludeForecasts(): ProFormaActions {
         cy.get(`@${Alias.expenceForecastAliases.sumPerUnit}`).then(val => {
@@ -150,20 +165,30 @@ class ProFormaActions extends BaseActionsExt<typeof proFormaPage> {
         return this;
     }
 
+    /**
+    * Action takes Aliases, that was created for summarizing all expense cards on Expense Forecast page (in PSF), 
+    * and compare with calculations ('Total Operating Expenses' - 'Real Estate Taxes')  in 'Total' column
+    */
+
     verifyTotalTOEIncludeForecasts(GBA: number): ProFormaActions {
         cy.get(`@${Alias.expenceForecastAliases.sumPerSF}`).then(val => {
             this.Page.categoryCellTotal(enums.PRO_FORMA_TYPES.totalOperatingExpenses).invoke("text").then(totalText => {
                 this.Page.categoryCellTotal(enums.PRO_FORMA_TYPES.realEstateTaxes).invoke("text").then(taxesText => {
-                    let valTotal = Math.round(Number(val) * GBA);  
+                    let valTotal = Math.round(Number(val) * GBA);
                     const totalNumberWithTaxes = getNumberFromDollarNumberWithCommas(totalText);
                     const taxesNumber = getNumberFromDollarNumberWithCommas(taxesText);
-                    const totalNumberWithoutTaxes = Math.round(Number(totalNumberWithTaxes - taxesNumber));  
+                    const totalNumberWithoutTaxes = Math.round(Number(totalNumberWithTaxes - taxesNumber));
                     expect(valTotal).to.equal(totalNumberWithoutTaxes);
                 });
             });
         });
         return this;
     }
+
+    /**
+    * Action takes Aliases, that was created for summarizing all expense cards on Expense Forecast page (in PSF), 
+    * and compare with calculations ('Total Operating Expenses' - 'Real Estate Taxes')  in 'PSF' column
+    */
 
     verifyPsfTOEIncludeForecasts(): ProFormaActions {
         cy.get(`@${Alias.expenceForecastAliases.sumPerSF}`).then(val => {
@@ -180,6 +205,11 @@ class ProFormaActions extends BaseActionsExt<typeof proFormaPage> {
         return this;
     }
 
+    /**
+    * Action takes Aliases, that was created for summarizing all expense cards on Expense Forecast page (in Per Unit), 
+    * and compare with calculations ('Total Operating Expenses' - 'Real Estate Taxes')  in 'Per Unit' column
+    */
+
     verifyPerUnitTOEIncludeForecasts(): ProFormaActions {
         cy.get(`@${Alias.expenceForecastAliases.sumPerUnit}`).then(val => {
             this.Page.categoryPerUnitTotal(enums.PRO_FORMA_TYPES.totalOperatingExpenses).invoke("text").then(perUnitText => {
@@ -195,12 +225,17 @@ class ProFormaActions extends BaseActionsExt<typeof proFormaPage> {
         return this;
     }
 
+    /**
+    * Action takes Aliases, that was created for summarizing all expense cards on Expense Forecast page (in PSF), 
+    * and compare with calculations ('Net Operating Income' - 'Total Operating Expenses' - 'Real Estate Taxes')  in 'Total' column
+    */
+
     verifyTotalNOIIncludeForecasts(GBA: number): ProFormaActions {
         cy.get(`@${Alias.expenceForecastAliases.sumPerSF}`).then(val => {
             this.Page.categoryCellTotal(enums.PRO_FORMA_TYPES.netOperatingIncome).invoke("text").then(totalIncome => {
                 this.Page.categoryCellTotal(enums.PRO_FORMA_TYPES.realEstateTaxes).invoke("text").then(taxesText => {
                     this.Page.categoryCellTotal(enums.PRO_FORMA_TYPES.effectiveGrossIncome).invoke("text").then(incomeText => {
-                        let valTotal = Math.round(Number(val) * GBA);  
+                        let valTotal = Math.round(Number(val) * GBA);
                         const totalNumberWithTaxes = getNumberFromDollarNumberWithCommas(totalIncome);
                         const taxesNumber = getNumberFromDollarNumberWithCommas(taxesText);
                         const incomeNumber = getNumberFromDollarNumberWithCommas(incomeText);
@@ -213,10 +248,15 @@ class ProFormaActions extends BaseActionsExt<typeof proFormaPage> {
         return this;
     }
 
+    /**
+    * Action takes Aliases, that was created for summarizing all expense cards on Expense Forecast page (in PSF), 
+    * and compare with calculations ('Net Operating Income' - 'Total Operating Expenses' - 'Real Estate Taxes')  in 'PSF' column
+    */
+
     verifyPsfNOIIncludeForecasts(): ProFormaActions {
-        cy.get(`@${Alias.expenceForecastAliases.sumPerSF}`).then(val => {           
-            this.Page.categoryPSFTotal(enums.PRO_FORMA_TYPES.netOperatingIncome).invoke("text").then(psfIncome => {                
-                this.Page.categoryPSFTotal(enums.PRO_FORMA_TYPES.realEstateTaxes).invoke("text").then(taxesText => {                   
+        cy.get(`@${Alias.expenceForecastAliases.sumPerSF}`).then(val => {
+            this.Page.categoryPSFTotal(enums.PRO_FORMA_TYPES.netOperatingIncome).invoke("text").then(psfIncome => {
+                this.Page.categoryPSFTotal(enums.PRO_FORMA_TYPES.realEstateTaxes).invoke("text").then(taxesText => {
                     this.Page.categoryPSFTotal(enums.PRO_FORMA_TYPES.effectiveGrossIncome).invoke("text").then(incomeText => {
                         let valPSF = Number(val).toFixed(2);
                         const psfNumberWithTaxes = getNumberFromDollarNumberWithCommas(psfIncome);
@@ -231,10 +271,15 @@ class ProFormaActions extends BaseActionsExt<typeof proFormaPage> {
         return this;
     }
 
+    /**
+    * Action takes Aliases, that was created for summarizing all expense cards on Expense Forecast page (in Per Unit), 
+    * and compare with calculations ('Net Operating Income' - 'Total Operating Expenses' - 'Real Estate Taxes')  in 'Per Unit' column
+    */
+
     verifyPerUnitNOIIncludeForecasts(): ProFormaActions {
-        cy.get(`@${Alias.expenceForecastAliases.sumPerUnit}`).then(val => {            
-            this.Page.categoryPerUnitTotal(enums.PRO_FORMA_TYPES.netOperatingIncome).invoke("text").then(perUnitIncome => {                
-                this.Page.categoryPerUnitTotal(enums.PRO_FORMA_TYPES.realEstateTaxes).invoke("text").then(taxesText => {                    
+        cy.get(`@${Alias.expenceForecastAliases.sumPerUnit}`).then(val => {
+            this.Page.categoryPerUnitTotal(enums.PRO_FORMA_TYPES.netOperatingIncome).invoke("text").then(perUnitIncome => {
+                this.Page.categoryPerUnitTotal(enums.PRO_FORMA_TYPES.realEstateTaxes).invoke("text").then(taxesText => {
                     this.Page.categoryPerUnitTotal(enums.PRO_FORMA_TYPES.effectiveGrossIncome).invoke("text").then(incomeText => {
                         let valPerUnit = Math.round(Number(val));
                         const perUnitNumberWithTaxes = getNumberFromDollarNumberWithCommas(perUnitIncome);
@@ -248,7 +293,7 @@ class ProFormaActions extends BaseActionsExt<typeof proFormaPage> {
         });
         return this;
     }
-    
+
 }
 
 export default new ProFormaActions(proFormaPage);
