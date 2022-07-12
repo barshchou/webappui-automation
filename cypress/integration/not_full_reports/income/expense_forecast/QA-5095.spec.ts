@@ -1,16 +1,16 @@
-import testData from "../../../../fixtures/not_full_reports/income/expense_forecast/QA-5095.fixture";
+import testData, { reportCreationFixture } from "../../../../fixtures/not_full_reports/income/expense_forecast/QA-5095.fixture";
 import { _NavigationSection } from "../../../../actions/base";
 import { ReviewExport, Income } from "../../../../actions";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import { numberWithCommas } from "../../../../../utils/numbers.utils";
 
 describe(`[QA-5095] Selected expenses forecast is exported to Estimated Operating Expense section`,
-    { tags:[ "@fix", "@income", "@expense_forecast", "@snapshot_tests" ] }, () => {
+    { tags:[ "@income", "@expense_forecast", "@check_export" ] }, () => {
 
     const url = `${Cypress.config().baseUrl}`;
 
     it("Verify for each existing expense forecast and for Per SF as unit of measure", () => {
-        createReport(testData.reportCreationDataPerSFBasis);
+        createReport(reportCreationFixture("Per SF"));
 
         cy.stepInfo("1. Go to Expense Forecast");
         _NavigationSection.navigateToExpenseForecast();
@@ -19,24 +19,24 @@ describe(`[QA-5095] Selected expenses forecast is exported to Estimated Operatin
         testData.expenseForecasts.forEach((forecastItem, index) => {
             forecastItem.basis = testData.perSFBasis;
             Income._ExpenseForecastActions
-                .verifyIncludeInProFormaCheckboxIsChecked(testData.checkboxNames[index]);
-            Income._ExpenseForecastActions.changeStateOfPercentOfEGICheckbox(false);
-            Income._ExpenseForecastActions.chooseForecastItemBasis(forecastItem);
-            Income._ExpenseForecastActions.enterForecastItemForecast(forecastItem);
+                .verifyIncludeInProFormaCheckboxIsChecked(testData.checkboxNames[index])
+                .changeStateOfPercentOfEGICheckbox(false)
+                .chooseForecastItemBasis(forecastItem)
+                .enterForecastItemForecast(forecastItem);
         });
 
         cy.stepInfo("3. Save the page and generate a report");
         Income._ExpenseForecastActions.clickSaveButton();
         _NavigationSection.openReviewAndExport();
         ReviewExport.generateDocxReport().waitForReportGenerated()
-            .downloadAndConvertDocxReport(testData.reportCreationDataPerSFBasis.reportNumber);
+            .downloadAndConvertDocxReport(reportCreationFixture("Per SF").reportNumber);
 
-        deleteReport(testData.reportCreationDataPerSFBasis.reportNumber);
+        deleteReport(reportCreationFixture("Per SF").reportNumber);
     });
 
     it("Check export", () => {
         Cypress.config().baseUrl = null;
-        cy.task("getFilePath", { _reportName: testData.reportCreationDataPerSFBasis.reportNumber, _docx_html: "html" })
+        cy.task("getFilePath", { _reportName: reportCreationFixture("Per SF").reportNumber, _docx_html: "html" })
             .then(file => {
                 cy.log(<string>file);
                 cy.stepInfo("4. Verify if selected Expense Forecast is displayed in Estimated Operating Expense section");
@@ -45,7 +45,7 @@ describe(`[QA-5095] Selected expenses forecast is exported to Estimated Operatin
                 testData.forecastNames.forEach((forecastName, index) => {
                     cy.xpath(`//h3[text()='Estimated Operating Expenses']/following-sibling::*[text()='${forecastName}']`)
                         .should("have.text", forecastName)
-                        .next().contains("PSF Summary").should("have.text", "PSF Summary");
+                        .next().contains(testData.perSFTitle).should("have.text", testData.perSFTitle);
                     cy.xpath(`//h3[text()='Estimated Operating Expenses']/following-sibling::
                         *[text()='${forecastName}']/following-sibling::table//tr`)
                         .eq(2).find("td").eq(1)
@@ -56,7 +56,7 @@ describe(`[QA-5095] Selected expenses forecast is exported to Estimated Operatin
 
     it("Verify for each existing expense forecast and for Per Unit as unit of measure", () => {
         Cypress.config().baseUrl = url;
-        createReport(testData.reportCreationDataPerUnitBasis);
+        createReport(reportCreationFixture("Per Unit"));
 
         cy.stepInfo("1. Go to Expense Forecast");
         _NavigationSection.navigateToExpenseForecast();
@@ -65,24 +65,24 @@ describe(`[QA-5095] Selected expenses forecast is exported to Estimated Operatin
         testData.expenseForecasts.forEach((forecastItem, index) => {
             forecastItem.basis = testData.perUnitBasis;
             Income._ExpenseForecastActions
-                .verifyIncludeInProFormaCheckboxIsChecked(testData.checkboxNames[index]);
-            Income._ExpenseForecastActions.changeStateOfPercentOfEGICheckbox(false);
-            Income._ExpenseForecastActions.chooseForecastItemBasis(forecastItem);
-            Income._ExpenseForecastActions.enterForecastItemForecast(forecastItem);
+                .verifyIncludeInProFormaCheckboxIsChecked(testData.checkboxNames[index])
+                .changeStateOfPercentOfEGICheckbox(false)
+                .chooseForecastItemBasis(forecastItem)
+                .enterForecastItemForecast(forecastItem);
         });
 
         cy.stepInfo("3. Save the page and generate a report");
         Income._ExpenseForecastActions.clickSaveButton();
         _NavigationSection.openReviewAndExport();
         ReviewExport.generateDocxReport().waitForReportGenerated()
-            .downloadAndConvertDocxReport(testData.reportCreationDataPerUnitBasis.reportNumber);
+            .downloadAndConvertDocxReport(reportCreationFixture("Per Unit").reportNumber);
 
-        deleteReport(testData.reportCreationDataPerUnitBasis.reportNumber);
+        deleteReport(reportCreationFixture("Per Unit").reportNumber);
     });
 
     it("Check export", () => {
         Cypress.config().baseUrl = null;
-        cy.task("getFilePath", { _reportName: testData.reportCreationDataPerUnitBasis.reportNumber, _docx_html: "html" })
+        cy.task("getFilePath", { _reportName: reportCreationFixture("Per Unit").reportNumber, _docx_html: "html" })
             .then(file => {
                 cy.log(<string>file);
                 cy.stepInfo("4. Verify if selected Expense Forecast is displayed in Estimated Operating Expense section");
@@ -91,7 +91,7 @@ describe(`[QA-5095] Selected expenses forecast is exported to Estimated Operatin
                 testData.forecastNames.forEach((forecastName, index) => {
                     cy.xpath(`//h3[text()='Estimated Operating Expenses']/following-sibling::*[text()='${forecastName}']`)
                         .should("have.text", forecastName)
-                        .next().contains("Per Unit Summary").should("have.text", "Per Unit Summary");
+                        .next().contains(testData.perUnitTitle).should("have.text", testData.perUnitTitle);
                     cy.xpath(`//h3[text()='Estimated Operating Expenses']/following-sibling::
                         *[text()='${forecastName}']/following-sibling::table//tr`)
                         .eq(2).find("td").eq(1)
@@ -102,7 +102,7 @@ describe(`[QA-5095] Selected expenses forecast is exported to Estimated Operatin
 
     it("Verify for each existing expense forecast and for Per Room as unit of measure", () => {
         Cypress.config().baseUrl = url;
-        createReport(testData.reportCreationDataPerRoomBasis);
+        createReport(reportCreationFixture("Per Room"));
 
         cy.stepInfo("1. Go to Expense Forecast");
         _NavigationSection.navigateToExpenseForecast();
@@ -110,22 +110,22 @@ describe(`[QA-5095] Selected expenses forecast is exported to Estimated Operatin
         cy.stepInfo("2. Select Expense Forecast by checking 'Include Expense on Pro Forma' checkbox");
         
         Income._ExpenseForecastActions
-            .verifyIncludeInProFormaCheckboxIsChecked(testData.fuelForecastPerRoom.name);
-        Income._ExpenseForecastActions.chooseForecastItemBasis(testData.fuelForecastPerRoom);
-        Income._ExpenseForecastActions.enterForecastItemForecast(testData.fuelForecastPerRoom);
+            .verifyIncludeInProFormaCheckboxIsChecked(testData.fuelForecastPerRoom.name)
+            .chooseForecastItemBasis(testData.fuelForecastPerRoom)
+            .enterForecastItemForecast(testData.fuelForecastPerRoom);
 
         cy.stepInfo("3. Save the page and generate a report");
         Income._ExpenseForecastActions.clickSaveButton();
         _NavigationSection.openReviewAndExport();
         ReviewExport.generateDocxReport().waitForReportGenerated()
-            .downloadAndConvertDocxReport(testData.reportCreationDataPerRoomBasis.reportNumber);
+            .downloadAndConvertDocxReport(reportCreationFixture("Per Room").reportNumber);
 
-        deleteReport(testData.reportCreationDataPerRoomBasis.reportNumber);
+        deleteReport(reportCreationFixture("Per Room").reportNumber);
     });
 
     it("Check export", () => {
         Cypress.config().baseUrl = null;
-        cy.task("getFilePath", { _reportName: testData.reportCreationDataPerRoomBasis.reportNumber, _docx_html: "html" })
+        cy.task("getFilePath", { _reportName: reportCreationFixture("Per Room").reportNumber, _docx_html: "html" })
             .then(file => {
                 cy.log(<string>file);
                 cy.stepInfo("4. Verify if selected Expense Forecast is displayed in Estimated Operating Expense section");
@@ -133,7 +133,7 @@ describe(`[QA-5095] Selected expenses forecast is exported to Estimated Operatin
                 cy.contains("Estimated Operating Expenses").scrollIntoView();
                 cy.xpath(`//h4[text()='${testData.fuelForecastName}']/following-sibling::p`)
                     .should("include.text", `$${numberWithCommas(testData.fuelForecastPerRoom.forecast.toFixed(2))}`)
-                    .should("include.text", "per room");
+                    .should("include.text", testData.perRoomTitle);
             });
     });
 });

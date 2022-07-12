@@ -2,16 +2,8 @@ import { BoweryReports } from "../../../../types/boweryReports.type";
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 import Enums from "../../../../enums/enums";
 
-const _reportCreationFixturePerSFBasis = () => {
-    return ReportDataCreator.getReportData("5095_PSF");
-};
-
-const _reportCreationFixturePerUnitBasis = () => {
-    return ReportDataCreator.getReportData("5095_PerUnit");
-};
-
-const _reportCreationFixturePerRoomBasis = () => {
-    return ReportDataCreator.getReportData("5095_PerRoom");
+export const reportCreationFixture = (name: string) => {
+    return ReportDataCreator.getReportData(name);
 };
 
 const _checkboxNames: string[] = Enums.EXPENSE_FORECAST_ITEMS.expenseCardsIncludeInProFormaCheckboxArray;
@@ -77,9 +69,9 @@ const _forecastNames: string[] = [
     Enums.PRO_FORMA_TYPES.replacementsAndReserves
 ];
 
-const _perUnitBasis: BoweryReports.UnitSF = "unit";
-const _perSFBasis: BoweryReports.UnitSF = "sf";
-const _perRoomBasis: BoweryReports.UnitSF = "room";
+const _perUnitBasis: BoweryReports.UnitSF = Enums.UNIT_SF.unit;
+const _perSFBasis: BoweryReports.UnitSF = Enums.UNIT_SF.sf;
+const _perRoomBasis: BoweryReports.UnitSF = Enums.UNIT_SF.room;
 
 const _fuelForecastPerRoom: BoweryReports.ForecastItem = {
     name: "fuel", 
@@ -89,10 +81,11 @@ const _fuelForecastPerRoom: BoweryReports.ForecastItem = {
 
 const _fuelForecastName: string = Enums.PRO_FORMA_TYPES.fuel;
 
+const _perSFTitle = "PSF Summary";
+const _perUnitTitle = "Per Unit Summary";
+const _perRoomTitle = "per room";
+
 export default {
-    reportCreationDataPerSFBasis: _reportCreationFixturePerSFBasis(),
-    reportCreationDataPerUnitBasis: _reportCreationFixturePerUnitBasis(),
-    reportCreationDataPerRoomBasis: _reportCreationFixturePerRoomBasis(),
     checkboxNames: _checkboxNames,
     expenseForecasts: _expenseForecasts,
     forecastNames: _forecastNames,
@@ -100,5 +93,8 @@ export default {
     perSFBasis: _perSFBasis,
     perRoomBasis: _perRoomBasis,
     fuelForecastPerRoom: _fuelForecastPerRoom,
-    fuelForecastName: _fuelForecastName
+    fuelForecastName: _fuelForecastName,
+    perSFTitle: _perSFTitle,
+    perUnitTitle: _perUnitTitle,
+    perRoomTitle: _perRoomTitle
 };
