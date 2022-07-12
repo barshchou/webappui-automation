@@ -1,4 +1,3 @@
-import { _PotentialGrossIncome } from './../../../../../actions/income/index';
 import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
 import { Property, Income, ReviewExport } from "../../../../../actions";
 import { _NavigationSection } from "../../../../../actions/base";
