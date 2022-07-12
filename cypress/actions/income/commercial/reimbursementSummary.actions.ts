@@ -97,7 +97,8 @@ class ReimbursementSummaryActions extends BaseActionsExt<typeof reimbursementSum
     }
 
     verifyAnnualReimbursementByExpenseType(expenseUIName: string, reimbursementType: BoweryReports.ReimbursementType, 
-        knownInformation: BoweryReports.KnownInformation, columnsId: BoweryReports.ReimbursementColumnsId, unitsAmount = 1, reimbursementIndex = 0): ReimbursementSummaryActions {
+        knownInformation: BoweryReports.KnownInformation, columnsId: BoweryReports.ReimbursementColumnsId, 
+        unitsAmount = 1, reimbursementIndex = 0): ReimbursementSummaryActions {
         for (let row = 1; row <= unitsAmount; row++) {
             let expectedAnnualReimbursement: number;
             reimbursementSummary.getAppraiserForecastGross(expenseUIName, row).invoke('text').then(gross => {
@@ -108,6 +109,14 @@ class ReimbursementSummaryActions extends BaseActionsExt<typeof reimbursementSum
                 });
             });
         }
+        return this;
+    }
+
+    verifyDefaultReimbursementCommentaryByExpenseType(expenseUIName: string, reimbursementIndex = 0): ReimbursementSummaryActions {
+        reimbursementSummary.getAnnualReimbursementTotal(expenseUIName).invoke('text').then((total) => {
+            reimbursementSummary.getGeneratedCommentaryByExpenseType(expenseUIName, reimbursementIndex)
+            .invoke('text').should('deep.equal', `According to our projections, the total utilities reimbursement is ${total} per year.`);
+        });
         return this;
     }
 }
