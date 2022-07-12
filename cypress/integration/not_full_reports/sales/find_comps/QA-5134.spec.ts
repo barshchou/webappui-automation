@@ -26,7 +26,7 @@ describe(`[QA-5134] Check when "custom" dropdown is selected user can drag&drop 
 
         cy.stepInfo(`3. [QA-5134] -> When sort for Selected Comparables set to "Sale Date",
         then user unable to sort selected comparables by drag-and-drop`);
-        cy.get(testData.draggableSelector).should("not.exist");
+        cy.get(Sales._FindComps.Page.selectorDraggableElement).should("not.exist");
 
         cy.stepInfo(`4. [QA-5134] -> User set "Custom" sort for Selected Comparables`);
         Sales._FindComps.Actions.selectedCompsSetSort("Custom");
@@ -38,7 +38,9 @@ describe(`[QA-5134] Check when "custom" dropdown is selected user can drag&drop 
 
             cy.get(`@${testData.aliasCompsBefore}`).then(_before => cy.log(<any>_before));
 
-            Sales._FindComps.moveComparableByDnD(testData.draggableSelector, 0, "down", 2);        
+            Sales._FindComps.moveComparableByDnD(
+                Sales._FindComps.Page.selectorDraggableElement, 0, "down", 2
+            );        
         });
 
         cy.stepInfo(`5.2. [QA-5134] -> User see that order of comps changed`);

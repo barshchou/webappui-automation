@@ -11,11 +11,6 @@ export default {
      */
     compsToAdd: [ 0, 1 ],
     /**
-     * Selector for draggable component. Should not be moved as Page Element since
-     * it's hard to extract the selector from `cy.get` method
-     */
-    draggableSelector: '[data-react-beautiful-dnd-drag-handle="0"]',
-    /**
      * alias for sales comps check
      */
     aliasCompsBefore:"comps_before",
