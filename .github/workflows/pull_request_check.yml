@@ -2,7 +2,7 @@ name: Run smoke tests and tests, included in PR
 
 on:
   pull_request:
-    types: [labeled, unlabeled]
+    types: [reopened]
 
 jobs:
   Run-smoke-tests:
@@ -14,7 +14,7 @@ jobs:
           token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
 
       - name: Run smoke tests action
-        uses: .github/workflows/smoke.yml
+        uses: Bowery-RES/webapp-ui-automation/.github/workflows/smoke.yml@main
 
   Run-included-tests:
     runs-on: ubuntu-latest
