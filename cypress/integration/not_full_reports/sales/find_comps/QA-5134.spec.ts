@@ -20,7 +20,7 @@ describe(`[QA-5134] Check when "custom" dropdown is selected user can drag&drop 
         _NavigationSection.navigateToFindComps();
         
         cy.stepInfo(`2. [QA-5134] -> User selects n-first comps from map`);
-        [ 0, 1, 2 ].forEach(() => {
+        [ 0, 1 ].forEach(() => {
             Sales._FindComps.Actions.selectCompFromMap();
         });
 
@@ -44,7 +44,7 @@ describe(`[QA-5134] Check when "custom" dropdown is selected user can drag&drop 
             cy.wrap(comps).as("comps_before");
             cy.get(`@comps_before`).then(val => cy.log(<any>val));
 
-            moveComparableByDnD('[data-react-beautiful-dnd-drag-handle="0"]', 1, "up", 1);        
+            Sales._FindComps.moveComparableByDnD('[data-react-beautiful-dnd-drag-handle="0"]', 0, "down", 2);        
         });
 
         cy.get('[data-qa="selected-sales-comps-table"] [data-qa="address"]').spread((...comps) => {
@@ -57,21 +57,3 @@ describe(`[QA-5134] Check when "custom" dropdown is selected user can drag&drop 
         // deleteReport(testData.reportCreationData.reportNumber);
     });
 });
-
-const moveComparableByDnD = (draggableSelector: string, elemIndex = 0, updown: "up" | "down", positionToMove = 1) => {
-    const compAlias = "draggableComp";
-    const _arrowKey = updown == "up" ? "{upArrow}" : "{downArrow}";
-    const _positionToMove = Array(positionToMove).fill(_arrowKey);
-
-    cy.get(draggableSelector).eq(elemIndex).as(compAlias);
-
-    cy.get(`@${compAlias}`)
-    .focus()
-    .trigger("keydown", { keyCode: 9, force: true })
-    .focus()
-    .trigger("keydown", { keyCode: 32, force:true })
-    .type(`${_arrowKey}`, { force:true })
-    .type(`${_positionToMove}`, { force:true, delay: 1500 })
-    .wait(1000)
-    .trigger("keydown", { keyCode: 32, force:true });
-};

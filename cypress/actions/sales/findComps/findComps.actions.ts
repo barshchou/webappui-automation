@@ -230,6 +230,38 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
         cy.get(`@${elementAlias}`, { includeShadowDom: true, timeout: 10000 }).should("have.value", valueToBe);
         return this;
     }
+
+    /**
+     * Drags and drop elements in Sales Comparables.
+     * 
+     * WARN: movement up is not work correctly due to incorrect work of `react-beautiful-dnd` component.
+     * The way you can move up is actually by sending `space` keyevent, but not the `upArrow`
+     * 
+     * @see cypress spec for testing reorder list: https://github.com/atlassian/react-beautiful-dnd/blob/master/cypress/integration/reorder.spec.js
+     * @param draggableSelector selector for draggable element. This must be a plain string, not Page Element
+     * @param elemIndex number of element in list to be moved. NOTE: 0 - first, -1 - last.
+     * @param updown upArrow or downArrow key. It will determine what key sequence you're gonna send.
+     * @param positionToMove number of position to be moved up or down. 
+     */
+    moveComparableByDnD = (draggableSelector: string, elemIndex = 0, updown: "up" | "down", positionToMove = 1): FindCompsActions => {
+        const compAlias = "draggableComp";
+        const _arrowKey: string = (updown == "up" ? "upArrow" : "downArrow");
+        const _arrowKeySeq: string[] = Array(positionToMove).fill(`{${_arrowKey}}`);
+        
+        cy.get(draggableSelector).eq(elemIndex).as(compAlias);
+    
+        cy.get(`@${compAlias}`)
+        .focus()
+        .trigger("keydown", { keyCode: 9, force: true })
+        .focus()
+        .trigger("keydown", { keyCode: 32, force:true })
+        .type(`${_arrowKey}`, { force:true })
+        .type(`${_arrowKeySeq}`, { force:true, delay: 2000 })
+        .wait(1500)
+        .trigger("keydown", { keyCode: 32, force:true });
+        
+        return this;
+    };
 }
 
 
