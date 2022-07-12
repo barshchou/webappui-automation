@@ -2,6 +2,7 @@ import { defineConfig } from 'cypress';
 import { addMatchImageSnapshotPlugin } from '@simonsmith/cypress-image-snapshot/plugin';
 import { ENVS, evalUrl } from './utils/env.utils';
 import api from "./cypress/api";
+import fsUtil from "./cypress/utils/files.utils";
 import grepFilterPlugin from "cypress-grep/src/plugin";
 
 export default defineConfig({
@@ -54,20 +55,20 @@ export default defineConfig({
 
             on("task", {
                 async getFilePath({ _reportName, _docx_html }){
-                    return await _getFilePath(_reportName, _docx_html);
+                    return await fsUtil._getFilePath(_reportName, _docx_html);
                 }
             });
 
             on("task", {
                 async convertDocxToHtml(report: string){
                     // ernst: it's async because it has call of async function from mammoth lib
-                    return await _convertDocxToHtml(report);
+                    return await fsUtil._convertDocxToHtml(report);
                 }
             });
 
             on("task", {
                 async waitForFileExists(filePath: string){
-                    return await _waitForFileExists(filePath);
+                    return await fsUtil._waitForFileExists(filePath);
                 }
             });
         },
