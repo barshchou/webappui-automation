@@ -3,10 +3,9 @@ import { createReport, deleteReport } from "../../../../actions/base/baseTest.ac
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Sales from "../../../../actions/sales/sales.manager";
 import Property from "../../../../actions/property/property.manager";
-import { Tag } from "../../../../utils/tags.utils";
 
 describe("Gross Building Area value pulled from Property -> Summary -> As Is Building Description", 
-    { tags: [ Tag.sales, Tag.value_conclusion ] }, () => {
+    { tags: [ "@sales", "@value_conclusion" ] }, () => {
         
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
@@ -16,7 +15,7 @@ describe("Gross Building Area value pulled from Property -> Summary -> As Is Bui
         NavigationSection.navigateToSalesValueConclusion();
         Sales.ValueConclusion.verifyGrossBuildingAreaAmount(testData.gbaToBe);
         NavigationSection.navigateToPropertySummary()
-            .closeSatisfactionSurvey();
+            .closeUserSurveyIfExist();
         Property.Summary.enterGrossBuildingArea(testData.newGba);
         NavigationSection.navigateToSalesValueConclusion();
         Sales.ValueConclusion.verifyGrossBuildingAreaAmount(testData.newGba);

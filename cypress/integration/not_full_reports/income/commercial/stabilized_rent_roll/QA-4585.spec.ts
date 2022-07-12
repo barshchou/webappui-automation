@@ -3,10 +3,9 @@ import { createReport, deleteReport } from "../../../../../actions/base/baseTest
 import { _NavigationSection } from "../../../../../actions/base";
 import { Property } from "../../../../../actions";
 import { Income } from "../../../../../actions";
-import { Tag } from "../../../../../utils/tags.utils";
 
 describe("Verify the Commercial Stabilized Rent Roll table", 
-    { tags: [ Tag.income, Tag.commercial, Tag.stabilized_rent_roll ] }, () => {
+    { tags: [ "@income", "@commercial", "@stabilized_rent_roll" ] }, () => {
         
     before("Login, create report", () => {
         cy.stepInfo(`1. Create a mixed report with several Commercial Units (e.g. 2).`);
@@ -52,8 +51,8 @@ describe("Verify the Commercial Stabilized Rent Roll table",
             .verifyTenantNames(testData.tenantNames, testData.leaseStatuses)
             .verifyUseCells(testData.useTexts)
             .verifySFCells(testData.listOfUnitsSF)
-            .verifyAnnualRentCellPerSFBasisByRow(testData.rentsPsf[1], testData.listOfUnitsSF[1], "annually", 1)
-            .verifyMonthlyRentPerSFByRow(testData.rentsPsf[1], testData.listOfUnitsSF[1], "annually", 1)
+            .verifyAnnualRentCellPerSFBasisByRow(testData.rentsPsf[1], testData.listOfUnitsSF[1], testData.unitsOfMeasure, 1)
+            .verifyMonthlyRentPerSFByRow(testData.rentsPsf[1], testData.listOfUnitsSF[1], testData.unitsOfMeasure, 1)
             .verifyRentPsfAnnuallyByRow(testData.rentsPsf[1], 1)
             .clickSaveButton()
             .verifyProgressBarNotExist();

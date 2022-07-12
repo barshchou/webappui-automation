@@ -1,21 +1,25 @@
 import expenseForecastPage from "../../pages/income/expenseForecast.page";
 import { getNumberFromDollarNumberWithCommas, numberWithCommas } from "../../../utils/numbers.utils";
 import BaseActionsExt from "../base/base.actions.ext";
+import { Alias } from "../../utils/alias.utils";
+import { BoweryReports } from "../../types/boweryReports.type";
 
 type ForecastItem = BoweryReports.ForecastItem;
 type BuildingDescription = BoweryReports.BuildingDescription;
 type Comparable = BoweryReports.Comparable;
 
 class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> {
-    
-    chooseForecastItemBasis(forecastItem: ForecastItem): ExpenseForecastActions {
-        expenseForecastPage.getForecastItemBasisRadio(forecastItem.name).check(forecastItem.basis);
-        this.verifyForecastItemBasis(forecastItem);
+
+    chooseForecastItemBasis(forecastItem: ForecastItem, customCategory = false, index = 0): ExpenseForecastActions {
+        let expenseName = customCategory ? `customExpenses[${index}]` : forecastItem.name;
+        expenseForecastPage.getForecastItemBasisRadio(expenseName).check(forecastItem.basis);
+        this.verifyForecastItemBasis(forecastItem, customCategory, index);
         return this;
     }
 
-    verifyForecastItemBasis(forecastItem: ForecastItem): ExpenseForecastActions {
-        expenseForecastPage.getElementToCheckRadio(forecastItem.name, forecastItem.basis).should("exist");
+    verifyForecastItemBasis(forecastItem: ForecastItem, customCategory = false, index = 0): ExpenseForecastActions {
+        let expenseName = customCategory ? `customExpenses[${index}]` : forecastItem.name;
+        expenseForecastPage.getElementToCheckRadio(expenseName, forecastItem.basis).should("exist");
         return this;
     }
 
@@ -23,7 +27,7 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
         const valueToBe = `$${numberWithCommas(forecastItem.forecast)}`;
         if (forecastItem.name != "total") {
             expenseForecastPage.getForecastItemForecastInput(forecastItem.name, customCategory, index).clear()
-            .type(`${forecastItem.forecast}`).should("have.value", valueToBe);
+                .type(`${forecastItem.forecast}`).should("have.value", valueToBe);
         }
         return this;
     }
@@ -103,7 +107,7 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
     }
 
     verifyForecastItemBasisMoney(forecastItem: ForecastItem, currentDescription: BuildingDescription,
-                                 forecastEgi?: string): ExpenseForecastActions {
+        forecastEgi?: string): ExpenseForecastActions {
         let forecastToBe;
         if (forecastEgi) {
             forecastToBe = forecastEgi;
@@ -112,10 +116,10 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
         }
         let textToBe;
         if (forecastItem.basis === "unit") {
-            textToBe = `Per SF: $${numberWithCommas((forecastToBe / 
+            textToBe = `Per SF: $${numberWithCommas((forecastToBe /
                 (currentDescription.grossArea / currentDescription.numberOfUnits)).toFixed(2))}`;
         } else {
-            textToBe = `Per Unit: $${numberWithCommas(Math.round(forecastToBe * 
+            textToBe = `Per Unit: $${numberWithCommas(Math.round(forecastToBe *
                 currentDescription.grossArea / currentDescription.numberOfUnits))}`;
         }
         expenseForecastPage.getForecastItemBasisMoneyValue(this.getItemNameForAverage(forecastItem.name))
@@ -124,7 +128,7 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
     }
 
     verifyForecastItemByExpensePeriodType(forecastItem: ForecastItem, buildingDescription: BuildingDescription,
-                                          expensePeriodType: string): ExpenseForecastActions {
+        expensePeriodType: string): ExpenseForecastActions {
         let numberToBe;
         if (forecastItem.basis === "unit") {
             numberToBe = numberWithCommas(Math.round(forecastItem.projection / buildingDescription.numberOfUnits));
@@ -137,23 +141,49 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
     }
 
     getItemNameForAverage(itemOriginal: string): string {
-        return this.itemOriginalObj[`${itemOriginal}`] == undefined 
-            ? itemOriginal 
+        return this.itemOriginalObj[`${itemOriginal}`] == undefined
+            ? itemOriginal
             : this.itemOriginalObj[`${itemOriginal}`];
     }
 
     itemOriginalObj = {
         waterAndSewer: "waterSewer",
         repairsAndMaintenance: "repairsMaintenance",
-            payrollAndBenefits: "payrollBenefits",
-            generalAndAdministrative: "generalAdministrative",
-            legalAndProfessionalFees: "legalProfessionalFees",
-            management: "managementFees",
-            reserves: "replacementReserves"
+        payrollAndBenefits: "payrollBenefits",
+        generalAndAdministrative: "generalAdministrative",
+        legalAndProfessionalFees: "legalProfessionalFees",
+        management: "managementFees",
+        reserves: "replacementReserves"
     }
 
     checkPercentOfEGICheckbox(): ExpenseForecastActions {
         expenseForecastPage.inputPercentOfEGICheckbox.check().should("have.value", "true");
+        return this;
+    }
+
+    changeStateOfIncludeInProFormaCheckbox(forecastItem: string, isToCheck = true): ExpenseForecastActions {
+        expenseForecastPage.getCheckboxIncludeInProForma(forecastItem)
+            .should("have.value", `${!isToCheck}`).click({ multiple: true }).should("have.value", `${isToCheck}`);
+        return this;
+    }
+
+    verifyIncludeInProFormaCheckboxIsChecked(forecastItem: string): ExpenseForecastActions {
+        expenseForecastPage.getCheckboxIncludeInProForma(forecastItem).should("have.value", "true");
+        return this;
+    }
+
+    verifyProFormaTooltip(forecastItem: string): ExpenseForecastActions {
+        expenseForecastPage.forecastItemTooltipButton(forecastItem).should("exist");
+        expenseForecastPage.tooltip.should('not.exist');
+        expenseForecastPage.forecastItemTooltipButton(forecastItem).scrollIntoView().trigger("mouseover", 'right');
+        expenseForecastPage.tooltip.should('exist');
+        expenseForecastPage.forecastItemTooltipButton(forecastItem).trigger('mouseout', 'right');
+        expenseForecastPage.tooltip.should('not.exist');
+        return this;
+    }
+
+    verifyIncludeInProFormaCheckboxExists(forecastItem: string): ExpenseForecastActions {
+        expenseForecastPage.getCheckboxIncludeInProForma(forecastItem).should("exist");
         return this;
     }
 
@@ -280,27 +310,14 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
         expenseForecastPage.getExpenseCommentaryEditButton(item, index).click();
         expenseForecastPage.getExpenseCommentaryRevertToOriginal(item).click();
         this.verifyProgressBarNotExist();
-        expenseForecastPage.expenseConfirmRevertButton.click();
+        expenseForecastPage.formYesRevertBtn.click();
         expenseForecastPage.getExpenseCommentarySaveButton(item, index).click();
         return this;
     }
 
-    switchExpenseForecastBasis(forecastItem: ForecastItem): ExpenseForecastActions {
-        expenseForecastPage.getElementBasisToSwitch(forecastItem.name, forecastItem.basis).click();
-        return this;
-    }
-
-    hideExpenseForecastHeader(): ExpenseForecastActions {
-        // ernst: A few hacks to get clear Insurance_Forecast_Item component without overlayed headers
-        cy.log('hide');
-        if(Cypress.browser.isHeadless == true){
-            expenseForecastPage.Header.then(elem => {
-                elem.hide();
-            });
-            expenseForecastPage.expenseForecastHeader.then(elem => {
-                elem.hide();
-            });
-        }
+    switchExpenseForecastBasis(forecastItem: ForecastItem, customCategory = false, index = 0): ExpenseForecastActions {
+        let expenseName = customCategory ? `customExpenses[${index}]` : forecastItem.name;
+        expenseForecastPage.getElementBasisToSwitch(expenseName, forecastItem.basis).click();
         return this;
     }
 
@@ -309,6 +326,205 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
         expenseForecastPage.newCategoryExpenseName.clear().type(categoryName);
         this.Page.formSaveBtn(1).click();
         this.verifyProgressBarNotExist();
+        return this;
+    }
+
+    /**
+    * 1. Action takes all allForecastsInputs (forecast expense card inputs).
+    * 2. In cycle we check all forecast cards does it has checkbox "Include Expense on Pro Forma" or not: 
+    * 3. If it does not have checkbox "Include Expense on Pro Forma" - function takes input value, 
+    * then calculate and transfer it to value in PSF, then sum into sumPSF 
+    * 4. sumPSF value wraped as alias 'sumPerSFCustomCards' and is used in other actions 
+    */
+
+    totalSumInPSFCustomCards(grossBuildingArea: number, resUnits = 0, rooms = 0): ExpenseForecastActions {
+        expenseForecastPage.allForecastsInputs.then(inputs => {
+            let sumPerSFCustomCards = 0;
+            cy.wrap(sumPerSFCustomCards).as(Alias.expenceForecastAliases.sumPerSFCustomCards);
+            for (let i = 0; i < inputs.length; i++) {
+                this.expenseCard(inputs, i);
+                cy.get(`@${Alias.expenceForecastAliases.expenseCard}`).then(expenseCard => {
+                    if (expenseCard.find('[label="Include Expense on Pro Forma"]').length === 0) {
+                        this.SumPsfDependingOnBasis(inputs, i, resUnits, grossBuildingArea, rooms,
+                            Alias.expenceForecastAliases.sumPerSFCustomCards);
+                    }
+                });
+            }
+        });
+        return this;
+    }
+
+    /**
+    * 1. Action takes all allForecastsInputs (forecast expense card inputs).
+    * 2. In cycle we check all forecast cards does it has checked checkbox "Include Expense on Pro Forma" or not. 
+    * 3. If it has checked checkbox "Include Expense on Pro Forma" - then function takes input value, 
+    * then calculate and transfer it to value in Per Unit, then sum into sumPSF.
+    * 4. sumPSF value wraped as alias 'sumPerSFCheckedDefaultCards' and is used in other actions 
+    */
+
+    totalSumInPSFCheckedDefaultCards(grossBuildingArea: number, resUnits = 0, rooms = 0): ExpenseForecastActions {
+        expenseForecastPage.allForecastsInputs.then(inputs => {
+            let sumPerSFDefaultCards = 0;
+            cy.wrap(sumPerSFDefaultCards).as(Alias.expenceForecastAliases.sumPerSFCheckedDefaultCards);
+            for (let i = 0; i < inputs.length; i++) {
+                this.expenseCard(inputs, i);
+                cy.get(`@${Alias.expenceForecastAliases.expenseCard}`).then(expenseCard => {
+                    if (expenseCard.find('[data-qa$=includeInProForma-checked]').length > 0) {
+                        this.SumPsfDependingOnBasis(inputs, i, grossBuildingArea, resUnits, rooms, Alias.expenceForecastAliases.sumPerSFCheckedDefaultCards);
+                    }
+                });
+            }
+        });
+        return this;
+    }
+
+    verifyTotalForecastPSF(grossBuildingArea: number, resUnits = 0, rooms = 0): ExpenseForecastActions {
+        this.totalSumForecastPSFAllCards(grossBuildingArea, resUnits, rooms);
+        cy.get(`@${Alias.expenceForecastAliases.sumPerSF}`).then(sumPerSF => {
+            const textToBe = `Appraiser's Forecast: $${numberWithCommas(Number(sumPerSF).toFixed(2))}`;
+            expenseForecastPage.appraisersTotalForecast.should("have.text", textToBe);
+        });
+        return this;
+    }
+
+    totalSumForecastPSFAllCards(grossBuildingArea: number, resUnits = 0, rooms = 0): ExpenseForecastActions {
+        this.totalSumInPSFCheckedDefaultCards(grossBuildingArea, resUnits, rooms);
+        this.totalSumInPSFCustomCards(grossBuildingArea, resUnits, rooms);
+        cy.get(`@${Alias.expenceForecastAliases.sumPerSFCheckedDefaultCards}`).then(sumPerSFCheckedDefaultCards => {
+            cy.get(`@${Alias.expenceForecastAliases.sumPerSFCustomCards}`).then(sumPerSFCustomCards => {
+                let sumPerSF = Number(sumPerSFCheckedDefaultCards) + Number(sumPerSFCustomCards);
+                cy.wrap(sumPerSF).as(Alias.expenceForecastAliases.sumPerSF);
+            });
+        });
+        return this;
+    }
+
+    private SumPsfDependingOnBasis(input: JQuery<HTMLElement>, index: number, grossBuildingArea: number, resUnits = 0, rooms = 0, AliasName: string): ExpenseForecastActions {
+        cy.get(`@${AliasName}`).then(sum => {
+            this.radioButtonBasis(input);
+            cy.get(`@${Alias.expenceForecastAliases.basisValue}`).then(basisValue => {
+                let sumPSF = Number(sum);
+                let expenseBasis = String(basisValue);
+                let inputValue = getNumberFromDollarNumberWithCommas(input[index].getAttribute("value"));
+                if (expenseBasis === "sf") {
+                    sumPSF += inputValue;
+                } else if (expenseBasis === "unit") {
+                    let inputValuePerSF = (inputValue * resUnits) / grossBuildingArea;
+                    sumPSF += inputValuePerSF;
+                } else {
+                    let inputValuePerSF = (inputValue * rooms) / grossBuildingArea;
+                    sumPSF += inputValuePerSF;
+                }
+                cy.wrap(sumPSF).as(AliasName);
+            });
+        });
+        return this;
+    }
+
+    /**
+        * 1. Action takes all allForecastsInputs (forecast expense card inputs).
+        * 2. In cycle we check all forecast cards does it has checkbox "Include Expense on Pro Forma" or not: 
+        * 3. If it does not have checkbox "Include Expense on Pro Forma" - function takes input value, 
+        * then calculate and transfer it to value in Per Unit, then sum into sumPerUnit 
+        * 4. sumPerUnit value wraped as alias 'sumPerUnitCustomCards' and is used in other actions 
+        */
+
+    totalSumInPerUnitCustomCards(grossBuildingArea: number, resUnits = 0, rooms = 0): ExpenseForecastActions {
+        expenseForecastPage.allForecastsInputs.then(inputs => {
+            let sumPerUnitCustomCards = 0;
+            cy.wrap(sumPerUnitCustomCards).as(Alias.expenceForecastAliases.sumPerUnitCustomCards);
+            for (let i = 0; i < inputs.length; i++) {
+                this.expenseCard(inputs, i);
+                cy.get(`@${Alias.expenceForecastAliases.expenseCard}`).then(expenseCard => {
+                    if (expenseCard.find('[label="Include Expense on Pro Forma"]').length === 0) {
+                        this.SumPerUnitDependingOnBasis(inputs, i, grossBuildingArea, resUnits, rooms,
+                            Alias.expenceForecastAliases.sumPerUnitCustomCards);
+                    }
+                });
+            }
+        });
+        return this;
+    }
+
+    /**
+    * 1. Action takes all allForecastsInputs (forecast expense card inputs).
+    * 2. In cycle we check all forecast cards does it has checked checkbox "Include Expense on Pro Forma" or not: 
+    * 3. If it has checked checkbox "Include Expense on Pro Forma" - then function takes input value, 
+    * then calculate and transfer it to value in Per Unit, then sum into sumPerUnit.
+    * 4. sumPerUnit value wraped as alias 'sumPerUnitCheckedDefaultCards' and is used in other actions 
+    */
+
+    totalSumInPerUnitCheckedDefaultCards(grossBuildingArea: number, resUnits = 0, rooms = 0): ExpenseForecastActions {
+        expenseForecastPage.allForecastsInputs.then(inputs => {
+            let sumPerUnitDefaultCards = 0;
+            cy.wrap(sumPerUnitDefaultCards).as(Alias.expenceForecastAliases.sumPerUnitCheckedDefaultCards);
+            for (let i = 0; i < inputs.length; i++) {
+                this.expenseCard(inputs, i);
+                cy.get(`@${Alias.expenceForecastAliases.expenseCard}`).then(expenseCard => {
+                    if (expenseCard.find('[data-qa$=includeInProForma-checked]').length > 0) {
+                        this.SumPerUnitDependingOnBasis(inputs, i, grossBuildingArea, resUnits, rooms, Alias.expenceForecastAliases.sumPerUnitCheckedDefaultCards);
+                    }
+                });
+            }
+        });
+        return this;
+    }
+
+    verifyTotalForecastPerUnit(grossBuildingArea: number, resUnits = 0, rooms = 0): ExpenseForecastActions {
+        this.totalSumForecastPerUnitAllCards(grossBuildingArea, resUnits, rooms);
+        cy.get(`@${Alias.expenceForecastAliases.sumPerUnit}`).then(sumPerUnit => {
+            const textToBe = `Appraiser's Forecast: $${numberWithCommas(Number(sumPerUnit).toFixed(2))}`;
+            expenseForecastPage.appraisersTotalForecast.should("have.text", textToBe);
+        });
+        return this;
+    }
+
+    totalSumForecastPerUnitAllCards(grossBuildingArea: number, resUnits = 0, rooms = 0): ExpenseForecastActions {
+        this.totalSumInPerUnitCheckedDefaultCards(grossBuildingArea, resUnits, rooms);
+        this.totalSumInPerUnitCustomCards(grossBuildingArea, resUnits, rooms);
+        cy.get(`@${Alias.expenceForecastAliases.sumPerUnitCheckedDefaultCards}`).then(sumPerUnitCheckedDefaultCards => {
+            cy.get(`@${Alias.expenceForecastAliases.sumPerUnitCustomCards}`).then(sumPerUnitCustomCards => {
+                let sumPerUnit = Number(sumPerUnitCheckedDefaultCards) + Number(sumPerUnitCustomCards);
+                cy.wrap(sumPerUnit).as(Alias.expenceForecastAliases.sumPerUnit);
+            });
+        });
+        return this;
+    }
+
+    private SumPerUnitDependingOnBasis(input: JQuery<HTMLElement>, index: number, grossBuildingArea: number, resUnits = 0, rooms = 0, AliasName: string): ExpenseForecastActions {
+        cy.get(`@${AliasName}`).then(sum => {
+            this.radioButtonBasis(input);
+            cy.get(`@${Alias.expenceForecastAliases.basisValue}`).then(basisValue => {
+                let sumPerUnit = Number(sum);
+                let expenseBasis = String(basisValue);
+                let inputValue = getNumberFromDollarNumberWithCommas(input[index].getAttribute("value"));
+                if (expenseBasis === "sf") {
+                    let inputValuePerUnit = (inputValue * grossBuildingArea) / resUnits;
+                    sumPerUnit += inputValuePerUnit;
+                } else if (expenseBasis === "unit") {
+                    sumPerUnit += inputValue;
+                } else {
+                    let inputValuePerUnit = (inputValue * rooms) / resUnits;
+                    sumPerUnit += inputValuePerUnit;
+                }
+                cy.wrap(sumPerUnit).as(AliasName);
+            });
+        });
+        return this;
+    }
+
+    private expenseCard(inputs: JQuery<HTMLElement>, index: number): ExpenseForecastActions {
+        cy.wrap(inputs[index]).parents('[data-qa$=-forecast-item]').then(expenseCard => {
+            cy.wrap(expenseCard).as(Alias.expenceForecastAliases.expenseCard);
+        });
+        return this;
+    }
+
+    private radioButtonBasis(input: JQuery<HTMLElement>,): ExpenseForecastActions {
+        cy.wrap(input).parents('[data-qa$=-forecast-item]').find('[data-qa="checked"]').find('[type="radio"]')
+            .invoke('prop', 'value').then(basisValue => {
+                cy.wrap(basisValue).as(Alias.expenceForecastAliases.basisValue);
+            });
         return this;
     }
 

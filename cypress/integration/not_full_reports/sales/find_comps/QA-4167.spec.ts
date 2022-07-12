@@ -1,10 +1,9 @@
-import { Tag } from './../../../../utils/tags.utils';
-import { Sales } from './../../../../actions/index';
-import { _NavigationSection } from './../../../../actions/base/index';
+import { Sales } from '../../../../actions';
+import { _NavigationSection } from '../../../../actions/base';
 import testData from "../../../../fixtures/not_full_reports/sales/find_comps/QA-4167.fixture";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 
-describe("[QA-4167] Verify the Appraiser Commentary field", { tags: [ Tag.sales, Tag.find_comps, Tag.comp_plex ] }, () => {
+describe("[QA-4167] Verify the Appraiser Commentary field", { tags: [ "@sales", "@find_comps", "@comp_plex" ] }, () => {
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
     });
@@ -20,15 +19,14 @@ describe("[QA-4167] Verify the Appraiser Commentary field", { tags: [ Tag.sales,
 
         Sales._FindComps.Actions
         .openAddNewComparableFormSearchResult(testData.compAddress)
-        .selectDropdownOptionNewComp(Sales._FindComps.Page.conditionDropdown, testData.selectItems.condition);
+        .selectDropdownOptionNewComp(Sales._FindComps.Page.conditionDropdown, testData.condition);
         Sales._FindComps.Actions.
         PropertyInfo.setCommercialUnits(`${testData.units.numberOfUnits}`).setCommercialArea(`${testData.units.grossArea}`)
         .Page.newCompContinueButton.click();
         Sales._FindComps.Actions.
         SaleInfo.selectSaleDate().setBuyerGrantee(testData.saleInfo.buyer).setSellerGarantor(testData.saleInfo.seller);
         Sales._FindComps
-        .Actions.selectDropdownOptionNewComp(Sales._FindComps.Page.SourceInput, testData.selectItems.source)
-        .Page.newCompContinueButton.click();
+        .Actions.Page.newCompContinueButton.click();
 
         cy.stepInfo(` 1. Verify the Appraiser Commentary is free text input type;
             -Try to enter any numerical / non-integer / text value;

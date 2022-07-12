@@ -5,10 +5,9 @@ import Property from "../../../../../actions/property/property.manager";
 import Income from "../../../../../actions/income/income.manager";
 import ReviewExport from "../../../../../actions/reviewExport/reviewExport.actions";
 import { isEndsWithDecimal } from "../../../../../utils/html.utils";
-import { Tag } from "../../../../../utils/tags.utils";
 
 describe("Verify the Commercial Stabilized Rent Roll table",
-    { tags: [ Tag.income, Tag.commercial, Tag.stabilized_rent_roll, Tag.check_export ] }, () => {
+    { tags: [ "@income", "@commercial", "@stabilized_rent_roll", "@check_export" ] }, () => {
 
     it("Test body", () => {  
         createReport(testData.reportCreationData);
@@ -45,6 +44,7 @@ describe("Verify the Commercial Stabilized Rent Roll table",
     });
 
     it("Check export", () => {
+        Cypress.config().baseUrl = null;
         cy.task("getFilePath",
         { _reportName: testData.reportCreationData.reportNumber, _docx_html: "html" }
         ).then(file => {

@@ -51,7 +51,7 @@ describe("[Income > Potential Gross Income]Support combined utility expense reim
         Income._PotentialGrossIncome
             .verifyCommercialVCLossCommentaryContain(testData.vcLossDiscussionCommentary)
             .verifyPotentialReimbursementValue(testData.expenseType, `$${numberWithCommas(testData.reimbursementValue.toFixed(2))}`)
-            .verifyPotentialGrossIncomeValue(`$${numberWithCommas(testData.reimbursementValue.toFixed(2))}`)
+            .verifyIncomeTypeUnified(testData.potentialGrossIncome, `$${numberWithCommas(testData.reimbursementValue.toFixed(2))}`)
             .verifyLessReimbursementVCLossValue(testData.expenseType, `-$${numberWithCommas(lessVCLossValue.toFixed(2))}`);
 
         deleteReport(testData.reportCreationData.reportNumber);

@@ -1,12 +1,10 @@
-import { Tag } from './../../../../utils/tags.utils';
 import testData from "../../../../fixtures/not_full_reports/report/key_info/QA-4104.fixture";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { Report, ReviewExport } from "../../../../actions";
 
-
 describe("[QA-4104] Verify the Market Value generated commentary", 
-    { tags: [ Tag.report, Tag.key_info, Tag.check_export ] }, () => {
+    { tags: [ "@report", "@key_info", "@check_export" ] }, () => {
     it("Test body", () => {
         cy.stepInfo(`1. Create report while creating set the same Job number as report from SalesForce has (e.g. JOB-1764459005) 
             Make sure that there is no Inspection Date in the Salesforce job`);
@@ -14,7 +12,6 @@ describe("[QA-4104] Verify the Market Value generated commentary",
 
         cy.stepInfo("2. Go to Report > Key Info > Definition of Market Value");
         _NavigationSection.navigateToReportInformation();
-        Report._KeyInfo.clickYesButton();
         
         cy.stepInfo("3. Check that this sentence exports in the Introduction, replacing the boilerplate sentence currently exported there");
         Report._KeyInfo.Page.textBoxDefinitionOfMarketValue().should("include.text", testData.verifyText);
@@ -31,6 +28,7 @@ describe("[QA-4104] Verify the Market Value generated commentary",
     });
 
     it("Check export", () => {
+        Cypress.config().baseUrl = null;
         cy.task("getFilePath", { _reportName: testData.reportCreationData.reportNumber, _docx_html: "html" }).then(file => {
             cy.log(<string>file);
             cy.stepInfo("5. Check that this sentence exports in the Introduction, replacing the boilerplate sentence currently exported there");

@@ -2,10 +2,9 @@ import testData from "../../../../fixtures/not_full_reports/income/expense_forec
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Income from "../../../../actions/income/income.manager";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
-import { Tag } from "../../../../utils/tags.utils";
 
 describe(`Verify that Generated Commentary for Total Operating Expenses is updated on the Expense Forecast page`, 
-    { tags: [ Tag.income, Tag.expense_forecast ] }, () => {
+    { tags: [ "@income", "@expense_forecast" ] }, () => {
 
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
@@ -15,7 +14,7 @@ describe(`Verify that Generated Commentary for Total Operating Expenses is updat
         NavigationSection.navigateToComparableExpenses();
         Income.ComparableExpenses.clickAddBlankColumnButton()
             .enterAddressByColumnIndex(testData.comparable.address)
-            .enterLocationByColumnIndex(testData.comparable.location)
+            .enterCityByColumnIndex(testData.comparable.city)
             .chooseExpensePeriodByColumnIndex(testData.comparable.period)
             .enterSquareFeetByColumnIndex(testData.comparable.squareFeet)
             .enterResidentialUnitsByColumnIndex(testData.comparable.resUnits)

@@ -2,10 +2,9 @@ import testData from "../../../../fixtures/not_full_reports/income/expense_forec
 import { _NavigationSection } from "../../../../actions/base";
 import { Income } from "../../../../actions";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
-import { Tag } from "../../../../utils/tags.utils";
 
 describe(`Comparable Min, Max, Avg values for Water & Sewer Per Unit are correctly calculated and displayed`,
-    { tags:[ Tag.income, Tag.expense_forecast, Tag.snapshot_tests ] }, () => {
+    { tags:[ "@income", "@expense_forecast", "@snapshot_tests" ] }, () => {
 
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
@@ -35,14 +34,16 @@ describe(`Comparable Min, Max, Avg values for Water & Sewer Per Unit are correct
         Income._ExpenseForecastActions.verifyForecastItemCompMin(testData.insuranceItem, testData.comparables)
             .verifyForecastItemCompAverage(testData.insuranceItem, testData.comparables)
             .verifyForecastItemCompMax(testData.insuranceItem, testData.comparables)
-            .hideExpenseForecastHeader();
+            .hideHeader()
+            .clickSaveButton()
+            .verifyProgressBarNotExist();
 
         cy.stepInfo("4.2 Check Comp Min, Comp Max and Comp Avg values for Water & Sewer card. They should be correctly displayed on a slidebar");
         Income._ExpenseForecastActions.matchElementSnapshot(
             Income._ExpenseForecastActions.Page.forecastItemCard(
                 Income._ExpenseForecastActions.getItemNameForAverage(
                     testData.insuranceItem.name)), 
-                    testData.insuranceCardSnapshotName, { padding: [ 10, 100 ] }
+                    testData.insuranceCardSnapshotName, { padding: [ 0, 100 ] }
         );
 
         deleteReport(testData.reportCreationData.reportNumber);

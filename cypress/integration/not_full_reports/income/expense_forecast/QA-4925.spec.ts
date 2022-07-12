@@ -3,10 +3,9 @@ import testData from "../../../../fixtures/not_full_reports/income/expense_forec
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Income from "../../../../actions/income/income.manager";
-import { Tag } from "../../../../utils/tags.utils";
 
 describe("Comparable Min, Max, Avg values for Repairs & Maintenance Per SF are correctly calculated and displayed", 
-    { tags:[ Tag.income, Tag.snapshot_tests, Tag.expense_forecast ] }, () => {
+    { tags:[ "@income", "@snapshot_tests", "@expense_forecast" ] }, () => {
 
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
@@ -35,11 +34,13 @@ describe("Comparable Min, Max, Avg values for Repairs & Maintenance Per SF are c
         Income.ExpenseForecast.Actions.verifyForecastItemCompMin(testData.repairsAndMaintenanceItem, testData.comparables)
             .verifyForecastItemCompAverage(testData.repairsAndMaintenanceItem, testData.comparables)
             .verifyForecastItemCompMax(testData.repairsAndMaintenanceItem, testData.comparables)
-            .hideExpenseForecastHeader();
+            .hideHeader()
+            .clickSaveButton()
+            .verifyProgressBarNotExist();
 
         cy.stepInfo("4.2 Check Comp Min, Comp Max and Comp Avg values for Repairs & Maintenance card. They should be correctly displayed on a slidebar");
         Income.ExpenseForecast.Actions.matchElementSnapshot(
-            Income.ExpenseForecast.Page.repairsAndMaintenanceCard, testData.repairsAndMaintenanceCardSnapshotName, { padding: [ 10, 100 ] });
+            Income.ExpenseForecast.Page.repairsAndMaintenanceCard, testData.repairsAndMaintenanceCardSnapshotName, { padding: [ 0, 100 ] });
 
         deleteReport(testData.reportCreationData.reportNumber);
     });

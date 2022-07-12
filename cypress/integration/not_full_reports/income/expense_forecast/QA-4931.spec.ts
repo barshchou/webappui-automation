@@ -3,11 +3,10 @@ import { createReport, deleteReport } from "../../../../actions/base/baseTest.ac
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Income from "../../../../actions/income/income.manager";
 import Property from "../../../../actions/property/property.manager";
-import tableExpenseHistoryCellNames from "../../../../../cypress/enums/expenseHistoryTableRows.enum";
-import { Tag } from "../../../../utils/tags.utils";
+import tableExpenseHistoryCellNames from "../../../../../cypress/enums/expense/expenseHistoryTableRows.enum";
 
 describe("Historical expense Repairs & Maintenance Per Unit is correctly calculated and displayed", 
-  { tags:[ Tag.expense_forecast, Tag.income, Tag.snapshot_tests ] }, () => {
+  { tags:[ "@expense_forecast", "@income", "@snapshot_tests" ] }, () => {
     
   before("Login, create report", () => {
     createReport(testData.reportCreationData);
@@ -50,10 +49,12 @@ describe("Historical expense Repairs & Maintenance Per Unit is correctly calcula
       5.1 calculated for each expense type as: [Expense Period type]Repairs & Maintenance / # of Residential Units
       5.2 correctly displayed on slidebars`);
       Income.ExpenseForecast.Actions.verifyForecastItemByExpensePeriodType(testData.actualRepairsItem, testData.buildingDescription, "Actual")
-      .verifyForecastItemByExpensePeriodType(testData.t12RepairsItem, testData.buildingDescription, "Actual T12")
-      .verifyForecastItemByExpensePeriodType(testData.historicalRepairsItem, testData.buildingDescription, "Annualized Historical")
-      .verifyForecastItemByExpensePeriodType(testData.ownerProjectionRepairsItem, testData.buildingDescription, "Owner's Projection")
-      .hideExpenseForecastHeader();
+          .verifyForecastItemByExpensePeriodType(testData.t12RepairsItem, testData.buildingDescription, "Actual T12")
+          .verifyForecastItemByExpensePeriodType(testData.historicalRepairsItem, testData.buildingDescription, "Annualized Historical")
+          .verifyForecastItemByExpensePeriodType(testData.ownerProjectionRepairsItem, testData.buildingDescription, "Owner's Projection")
+          .hideHeader()
+          .clickSaveButton()
+          .verifyProgressBarNotExist();
 
       Income.ExpenseForecast.Actions.matchElementSnapshot(
         Income.ExpenseForecast.Page.repairsAndMaintenanceCard, testData.repairsCardSnapshotName, { padding: [ 10, 100 ] });

@@ -1,11 +1,10 @@
-import { Tag } from './../../../../utils/tags.utils';
 import testData from "../../../../fixtures/not_full_reports/sales/adjust_comps/QA-4112.fixture";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
-import { Sales } from "../../../../actions/index";
+import { Sales } from "../../../../actions";
 
 describe("Total Utility Adjustments in Sales Adjustment Grid is calculated with correct formula", 
-    { tags:[ Tag.sales, Tag.adjust_comps, ] }, () => {
+    { tags:[ "@sales", "@adjust_comps", ] }, () => {
 
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
@@ -20,7 +19,7 @@ describe("Total Utility Adjustments in Sales Adjustment Grid is calculated with 
                     Verify Total Utility Adjustments in Total Footer = 
                     Commercial Space Adjustment + Corner Adjustment + Finishes Adjustment + 
                     Elevator Adjustment + Amenities Adjustment + Air Rights Adjustment + Other Utility Adjustment)`);
-        _NavigationSection.openAdjustCompsInSales();
+        _NavigationSection.navigateToAdjustComps();
         Sales._AdjustComps.clickAddCustomUtilitiesAdjustment()
             .editOtherUtilitiesAdjustmentRowName(testData.customUtilitiesAdjustmentDefaultName, testData.newCustomUtilitiesAdjustmentName)
             .enterOtherUtilitiesAdjustmentByColumn(testData.comparableFirst.otherUtilityAdjustment, 0, 0)

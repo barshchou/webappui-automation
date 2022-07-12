@@ -2,11 +2,10 @@ import testData from "../../../../../fixtures/not_full_reports/income/residentia
 import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../../actions/base";
 import { Income, Property } from "../../../../../actions";
-import { Tag } from "../../../../../utils/tags.utils";
 
 describe(`[QA-4094] Verify if "Per Month" time period PSF Rent based on is selected - > the calculation 
     of "Rent PSF/month" should be Monthly Rent/Square Footage`, 
-    { tags:[ Tag.income, Tag.residential, Tag.in_place_rent_roll ] }, () => {
+    { tags:[ "@income", "@residential", "@in_place_rent_roll" ] }, () => {
         
     before("Login, create report", () => {
         createReport(testData.reportCreationData);

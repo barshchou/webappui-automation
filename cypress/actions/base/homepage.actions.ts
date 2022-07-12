@@ -1,10 +1,12 @@
 import { interceptReportId, setReportId } from "../../../utils/intercept.utils";
 import homepagePage from "../../pages/base/homepage.page";
+import { BoweryAutomation } from "../../types/boweryAutomation.type";
+import { BoweryReports } from "../../types/boweryReports.type";
 import BaseActionsExt from "./base.actions.ext";
 
 class HomepageActions extends BaseActionsExt<typeof homepagePage> {
 
-    createReport(data: BoweryAutomation.ReportCreationData): this {
+    createReport(data: BoweryAutomation.ReportCreationData): HomepageActions {
         interceptReportId();
         if(data?.state) {
             this.clickNewReportButton()
@@ -39,12 +41,12 @@ class HomepageActions extends BaseActionsExt<typeof homepagePage> {
         return this;
     }
 
-    clickNewReportButton(): this {
+    clickNewReportButton(): HomepageActions {
         homepagePage.newReportButton.should("be.enabled").click();
         return this;
     }
 
-    enterAddressToSearch(address: string): this {
+    enterAddressToSearch(address: string): HomepageActions {
         homepagePage.searchAddressField.type(`${address}{enter}`).should("have.value", address);
         return this;
     }
@@ -59,7 +61,7 @@ class HomepageActions extends BaseActionsExt<typeof homepagePage> {
         return this;
     }
 
-    pullExternalData(value: boolean) {
+    pullExternalData(value: boolean): HomepageActions {
         homepagePage.pullExternalDataRadios.check(`${value.toString()}`);
         return this;
     }
@@ -74,13 +76,13 @@ class HomepageActions extends BaseActionsExt<typeof homepagePage> {
         return this;
     }
 
-    checkIncomeType(value: string) {
+    checkIncomeType(value: string): HomepageActions {
         homepagePage.incomeTypesRadios.check(value);
         return this;
     }
 
 
-    checkConclusionType(value: string) {
+    checkConclusionType(value: string): HomepageActions {
         homepagePage.valueConclusionsRadios.check(value);
         return this;
     }
@@ -98,7 +100,7 @@ class HomepageActions extends BaseActionsExt<typeof homepagePage> {
         return this;
     }
 
-    clickArchiveButton(reportNumber: string): this {
+    clickArchiveButton(reportNumber: string): HomepageActions {
         homepagePage.getArchiveButton(reportNumber).should("exist").click({ force:true });
         return this;
     }
@@ -113,10 +115,28 @@ class HomepageActions extends BaseActionsExt<typeof homepagePage> {
         return this;
     }
 
-    deleteReport(reportNumber: string): this {
+    deleteReport(reportNumber: string): HomepageActions {
         this.verifyThatPageIsOpened()
             .enterReportNumberToSearch(reportNumber)
             .clickArchiveButton(reportNumber);
+        return this;
+    }
+
+    filterReportsByReportNumber(reportNumber: string): HomepageActions {
+        this.verifyThatPageIsOpened()
+            .enterReportNumberToSearch(reportNumber);
+        cy.intercept({ method: 'GET', url: '*report/currentUser?filters*' }).as('filtering');
+        cy.wait(`@filtering`, { timeout: 10000 }).then(({ response }) => {
+                expect(response.statusCode).equal(200);
+                expect(response.body.totalCount).equal(1);
+            });
+        return this;
+    }
+
+    verifyReportStatus(status: BoweryReports.ReportStatus, reportNumber: string): HomepageActions {
+        homepagePage.reportStatus(reportNumber).invoke('text').then($status => {
+            expect($status).to.be.eq(status, `Report status: ${$status} doesn't correspond expected: ${status}!`);
+        });
         return this;
     }
 
@@ -137,6 +157,16 @@ class HomepageActions extends BaseActionsExt<typeof homepagePage> {
 
     enterPropertyIdentifier(value: string): HomepageActions {
         homepagePage.propertyIdentifierInput.type(value).should("have.value", value);
+        return this;
+    }
+
+    openReportByName(reportNumber: string): HomepageActions {
+        homepagePage.reportNumberCells.contains(reportNumber).click({ force: true });
+        return this;
+    }
+
+    clickAllReportsTab(): HomepageActions {
+        homepagePage.allReportsTab.click();
         return this;
     }
 

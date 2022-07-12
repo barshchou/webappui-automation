@@ -1,0 +1,69 @@
+name: Cypress smoke tests in Currents.dev
+
+on:
+  workflow_dispatch:
+    inputs:
+      env:
+        type: choice
+        description: Select the environment
+        options:
+          - dev
+          - staging
+          - prod
+          - custom
+        required: true
+        default: staging
+      url:
+        type: choice
+        description: Select the url explicitly
+        options:
+        - 'https://bowery-development.herokuapp.com'
+        - 'https://bowery-staging.herokuapp.com'
+        - 'https://app.boweryvaluation.com'
+        required: true
+        default: 'https://bowery-staging.herokuapp.com'
+      customEnv:
+        type: string
+        description: Add custom environment url if needed
+        required: false
+      spec_file:
+        type: string
+        description: Spec(s) to be executed
+        required: false
+        default: cypress/integration/**/**/*.spec.ts
+      tags:
+        type: string
+        description: Run test with specific tags (via grep,grepTags,burn)
+        required: false
+        default: grep=,grepTags=@smoke,burn=
+      ref:
+        type: string
+        description: Select branch, tag, commit ref
+        required: false
+
+jobs:
+  Smoke-tests-run:
+    runs-on: ubuntu-latest
+    container: cypress/browsers:node16.13.2-chrome100-ff98
+    permissions:
+      id-token: write
+      contents: read
+    strategy:
+      fail-fast: false
+      matrix:
+        containers: [1, 2, 3, 4, 5, 6]
+
+    steps:
+      - name: Run smoke end-to-end tests with Currents dev
+        uses: Bowery-RES/action-run-e2e-tests@latest
+        with:
+          github_token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          env: ${{ github.event.inputs.env }}
+          customEnv: ${{ github.event.inputs.customEnv }}
+          url: ${{ github.event.inputs.url }}
+          spec_file: ${{ github.event.inputs.spec_file }}
+          tags: ${{ github.event.inputs.tags }}
+          record_key: ${{ secrets.CURRENTS_RECORD_KEY }}
+          ref: ${{ github.event.inputs.ref }}

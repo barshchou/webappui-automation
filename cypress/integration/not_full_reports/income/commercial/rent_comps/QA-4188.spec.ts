@@ -2,10 +2,9 @@ import testData from "../../../../../fixtures/not_full_reports/income/commercial
 import { Income } from "../../../../../actions";
 import { _NavigationSection } from "../../../../../actions/base";
 import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
-import { Tag } from "../../../../../utils/tags.utils";
 
 describe("[Income>Commercial>Rent Comps] Rent/SF/Month is calculated with correct formula",
-    { tags:[ Tag.income, Tag.commercial, Tag.rent_comps ] }, () => {
+    { tags:[ "@income", "@commercial", "@rent_comps" ] }, () => {
 
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
@@ -55,9 +54,9 @@ describe("[Income>Commercial>Rent Comps] Rent/SF/Month is calculated with correc
         Per Square Foot Per Month is selected as Unit of Measure on Commercial Unit Details modal -> Rent/SF 
         in selected rent comps table = Rent/SF, where Rent = base rent*12*SF and 12 = number of months in year`);
         rentPerSFValue = testData.baseRent * testData.numberOfMonthsInYear * testData.squareFeet / testData.squareFeet;
-        _NavigationSection.clickCommercialRentRollButton().clickYesButton();
+        _NavigationSection.clickCommercialRentRollButton().clickYesIfExist();
         Income._CommercialManager.InPlaceRentRoll.clickPerSquareFootButton(false);
-        _NavigationSection.clickCommercialRentComps().clickYesButton();
+        _NavigationSection.clickCommercialRentComps().clickYesIfExist();
         Income._CommercialManager.RentComps.clickEditButtonByRowNumber().
             checkUnitOfMeasureRadioButton(testData.perMonth).
             clickSubmitButton().

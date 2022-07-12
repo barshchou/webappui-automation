@@ -3,11 +3,10 @@ import testData from "../../../../fixtures/not_full_reports/income/expense_forec
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Income from "../../../../actions/income/income.manager";
-import { Tag } from "../../../../utils/tags.utils";
 
 describe("Comparable Min, Max, Avg values for Electricity Per SF are correctly calculated and displayed",
-    { tags:[ Tag.snapshot_tests, Tag.income, Tag.expense_forecast ] }, () => {
-        
+    { tags:[ "@snapshot_tests", "@income", "@expense_forecast" ] }, () => {
+
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
     });
@@ -36,14 +35,15 @@ describe("Comparable Min, Max, Avg values for Electricity Per SF are correctly c
         Income.ExpenseForecast.Actions.verifyForecastItemCompMin(testData.electricityItem, testData.comparables)
             .verifyForecastItemCompAverage(testData.electricityItem, testData.comparables)
             .verifyForecastItemCompMax(testData.electricityItem, testData.comparables)
-            .hideExpenseForecastHeader();
-        cy.stepInfo(`
-        5. Check Comp Min, Comp Max and Comp Avg values for Electricity card. They should be
-            5.1 calculated as: Min, Max and Avg of range of values [CompElectricity / Square Feet]
-            5.2 correctly displayed on a slidebar
-        `);
+            .hideHeader()
+            .clickSaveButton()
+            .verifyProgressBarNotExist();
+
+        cy.stepInfo(`5. Check Comp Min, Comp Max and Comp Avg values for Electricity card. They should be
+                        5.1 calculated as: Min, Max and Avg of range of values [CompElectricity / Square Feet]
+                        5.2 correctly displayed on a slidebar`);
         Income.ExpenseForecast.Actions.matchElementSnapshot(
-            Income.ExpenseForecast.Page.electricityCard, testData.electricityCardSnapshotName, { padding: [ 10, 100 ] }
+            Income.ExpenseForecast.Page.electricityCard, testData.electricityCardSnapshotName, { padding: [ 0, 100 ] }
         );
 
         deleteReport(testData.reportCreationData.reportNumber);

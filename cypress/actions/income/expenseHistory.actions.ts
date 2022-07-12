@@ -1,7 +1,7 @@
 import expenseHistoryPage from "../../pages/income/expenseHistory.page";
 import { getNumberFromDollarNumberWithCommas, numberWithCommas } from "../../../utils/numbers.utils";
 import BaseActionsExt from "../base/base.actions.ext";
-import tableExpenseHistoryCellNames from "../../../cypress/enums/expenseHistoryTableRows.enum";
+import tableExpenseHistoryCellNames from "../../../cypress/enums/expense/expenseHistoryTableRows.enum";
 
 class ExpenseHistoryActions extends BaseActionsExt<typeof expenseHistoryPage>{
 
@@ -38,23 +38,8 @@ class ExpenseHistoryActions extends BaseActionsExt<typeof expenseHistoryPage>{
             expenseHistoryPage.getUnifiedEditableAndTotalCells(tableExpenseHistoryCellNames).eq(index).dblclick().clear()
                 .realType(`${issueValue}{enter}`);
             expenseHistoryPage.getUnifiedEditableAndTotalCells(tableExpenseHistoryCellNames).eq(index)
-                .should("have.text", `$${numberWithCommas(issueValue)}.00`);
+                .should("have.text", `$${numberWithCommas((<number>issueValue).toFixed(2))}`);
         }
-        return this;
-    }
-
-    checkGrossRevenueCheckboxByColumnIndex(index = 0): ExpenseHistoryActions {
-        expenseHistoryPage.grossRevenueCheckboxes.eq(index).check().should("have.value", "true");
-        return this;
-    }
-
-    uncheckFuelCheckboxByColIndex(index = 0): ExpenseHistoryActions {
-        expenseHistoryPage.fuelCheckboxes.eq(index).uncheck().should("have.value", "false");
-        return this;
-    }
-
-    uncheckWaterSewerCheckboxByColIndex(index = 0): ExpenseHistoryActions {
-        expenseHistoryPage.waterSewerCheckboxes.eq(index).uncheck().should("have.value", "false");
         return this;
     }
 

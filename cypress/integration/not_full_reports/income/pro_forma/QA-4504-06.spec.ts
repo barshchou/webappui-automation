@@ -5,7 +5,7 @@ import { _NavigationSection } from "../../../../actions/base";
 import { Property } from '../../../../actions/index';
 import { Income } from "../../../../actions";
 import proFormaTypes from "../../../../enums/proFormaTypes.enum";
-import Enums from "../../../../enums/incomeTypesCellNames.enum";
+import Enums from "../../../../enums/income/incomeTypesCellNames.enum";
 
 describe("Potential Parking Income", 
     { tags:[ "@income", "@pro_forma" ] }, () => {
@@ -30,13 +30,13 @@ describe("Potential Parking Income",
         cy.saveLocalStorage();
     });
     
-    beforeEach("Restore local storeage", () => {
+    beforeEach("Restore local storage", () => {
         cy.restoreLocalStorage();
         _NavigationSection.navigateToProForma()
             .verifyProgressBarNotExist();
     });
 
-    it(`[QA-4504]: `, () => {
+    it("[QA-4504]", () => {
         cy.stepInfo(`5 Verify that Pro Forma table contains Parking Income Total value`);
         Income._ProFormaActions.verifyCategoryTotal(
             `$${numberWithCommas(Math.round(testData.annualRentTotal))}`, 
@@ -49,14 +49,14 @@ describe("Potential Parking Income",
             `$${numberWithCommas(testData.annualRentTotal.toFixed(2))}`);
     });
 
-    it(`[QA-4505]: `, () => {
+    it("[QA-4505]", () => {
         cy.stepInfo(`5. Verify that Pro Forma table contains Parking Income PSF value`);
         Income._ProFormaActions.verifyCategoryPSFTotal(
             `$${numberWithCommas(testData.parkingincomePerSf.toFixed(2))}`, 
             proFormaTypes.parkingIncome);
     });
 
-    it(`[QA-4506]: `, () => {
+    it("[QA-4506]", () => {
         cy.stepInfo(`5. Verify that Pro Forma table contains Parking Income Per Unit value`);
         Income._ProFormaActions.verifyCategoryPerUnitTotal(
             `$${numberWithCommas(Math.round(testData.parkingincomePerUnit))}`, 

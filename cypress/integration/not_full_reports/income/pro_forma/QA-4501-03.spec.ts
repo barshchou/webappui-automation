@@ -1,11 +1,11 @@
-import { numberWithCommas } from './../../../../../utils/numbers.utils';
+import { numberWithCommas } from '../../../../../utils/numbers.utils';
 import testData from "../../../../fixtures/not_full_reports/income/pro_forma/QA-4501-03.fixture";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
-import { Property } from '../../../../actions/index';
+import { Property } from '../../../../actions';
 import { Income } from "../../../../actions";
 import proFormaTypes from "../../../../enums/proFormaTypes.enum";
-import Enums from "../../../../enums/incomeTypesCellNames.enum";
+import Enums from "../../../../enums/income/incomeTypesCellNames.enum";
 
 describe("Potential Real Estate Tax Reimbursement", 
     { tags:[ "@income", "@pro_forma" ] }, () => {
@@ -23,16 +23,16 @@ describe("Potential Real Estate Tax Reimbursement",
         _NavigationSection.navigateToCommercialUnits();
         Property._CommercialUnits.enterListUnitSF(testData.listOfUnitsSF, testData.numberOfCommercialUnits);
 
-        cy.stepInfo("3. Go to Income → Commercial → In-Place Rent Role and fill in all necessary values to the table"); 
+        cy.stepInfo("3. Go to Income → Commercial → In-Place Rent Roll and fill in all necessary values to the table"); 
         _NavigationSection.navigateToCommercialInPlaceRentRoll();
         Income._CommercialManager.InPlaceRentRoll.chooseListLeaseStatuses(testData.leaseStatuses, testData.numberOfCommercialUnits);
         testData.rentsPsf.forEach((rent, index) => {
             Income._CommercialManager.InPlaceRentRoll.enterRentPerSFAnnuallyByRowNumber(rent, index);
         });
         
-        cy.stepInfo("3. Go to Income → Commercial → In-Place Rent Role and fill in all necessary values to the table"); 
-        _NavigationSection.navigateToCommercialInPlaceRentRoll()
-            .navigateToCommercialReimbursementSummary();
+        cy.stepInfo("3. Go to Income → Commercial → In-Place Rent Roll and fill in all necessary values to the table"); 
+        _NavigationSection.clickCommercialReimbursementSummaryButton()
+        .clickYesIfExist();
         
         cy.stepInfo("4. Go to Income → Reimbursement Summary and add Real Estate Taxes Reimbursement for commercial units"); 
         Income._CommercialManager.ReimbursementSummary.addNewCommercialReimbursement(
@@ -42,13 +42,13 @@ describe("Potential Real Estate Tax Reimbursement",
         cy.saveLocalStorage();
     });
     
-    beforeEach("Restore local storeage", () => {
+    beforeEach("Restore local storage", () => {
         cy.restoreLocalStorage();
         _NavigationSection.navigateToProForma()
             .verifyProgressBarNotExist();
     });
 
-    it(`[QA-4501]: `, () => {
+    it("[QA-4501]", () => {
         cy.stepInfo(`5 Verify that Pro Forma table contains Taxes Reimbursement Total value`);
         Income._ProFormaActions.verifyCategoryTotal(
             `$${numberWithCommas(Math.round(testData.annualReimbursement))}`, 
@@ -61,14 +61,14 @@ describe("Potential Real Estate Tax Reimbursement",
             Enums.potentialRealEstateTaxesReimbursement, `$${numberWithCommas(testData.annualReimbursement.toFixed(2))}`);
     });
 
-    it(`[QA-4502]: `, () => {
+    it("[QA-4502]", () => {
         cy.stepInfo(`5. Verify that Pro Forma table contains Taxes Reimbursement PSF value`);
         Income._ProFormaActions.verifyCategoryPSFTotal(
             `$${numberWithCommas(testData.reimbursmentPerSf.toFixed(2))}`, 
             proFormaTypes.potentialRealEstateTaxesReimbursement);
     });
 
-    it(`[QA-4503]: `, () => {
+    it("[QA-4503]", () => {
         cy.stepInfo(`5. Verify that Pro Forma table contains Taxes Reimbursement Per Unit value`);
         Income._ProFormaActions.verifyCategoryPerUnitTotal(
             `$${numberWithCommas(Math.round(testData.reimbursmentPerUnit))}`, 

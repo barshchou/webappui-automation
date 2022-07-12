@@ -3,10 +3,9 @@ import testData from "../../../../fixtures/not_full_reports/income/expense_forec
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Income from "../../../../actions/income/income.manager";
-import { Tag } from "../../../../utils/tags.utils";
 
 describe("Comparable Min, Max, Avg values for Fuel Per SF are correctly calculated and displayed", 
-    { tags: [ Tag.income, Tag.expense_forecast, Tag.snapshot_tests ] }, () => {
+    { tags: [ "@income", "@expense_forecast", "@snapshot_tests" ] }, () => {
 
     before("Login, create report",  () => {
         createReport(testData.reportCreationData);
@@ -35,7 +34,9 @@ describe("Comparable Min, Max, Avg values for Fuel Per SF are correctly calculat
         Income.ExpenseForecast.Actions.verifyForecastItemCompMin(testData.fuelItem, testData.comparables)
             .verifyForecastItemCompAverage(testData.fuelItem, testData.comparables)
             .verifyForecastItemCompMax(testData.fuelItem, testData.comparables)
-            .hideExpenseForecastHeader();
+            .hideHeader()
+            .clickSaveButton()
+            .verifyProgressBarNotExist();
 
         cy.stepInfo("4. Check Comp Min, Comp Max and Comp Avg values for Fuel card. They should be correctly displayed on a slidebar");
         Income.ExpenseForecast.Actions.matchElementSnapshot(

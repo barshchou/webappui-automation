@@ -2,16 +2,14 @@ import testData from "../../../../fixtures/not_full_reports/sales/find_comps/QA-
 import { _NavigationSection } from "../../../../actions/base";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import { Sales } from "../../../../actions";
-import { Tag } from "../../../../utils/tags.utils";
 
 /**
  * ernst: when we will be able to delete SalesComps - use this instead of `describe`
  * TODO: Add actions to QA-4169 test after functionality for SalesComp removal will be added.
  */
-// const conditionalDescribe = isProdEnv() ? describe.skip : describe;
 
 describe.skip("Verify the New Comp is created after clicking on 'Save&Close' button on Property Description form", 
-{ tags:[ Tag.comp_plex, Tag.find_comps, Tag.sales ] }, () => {
+{ tags:[ "@comp_plex", "@find_comps", "@sales" ] }, () => {
 
     before(`
     Click on the Create Comp button > Enter New Comparable Address > 
@@ -31,7 +29,7 @@ describe.skip("Verify the New Comp is created after clicking on 'Save&Close' but
         .Page.newCompContinueButton.click();
         Sales._FindComps
         .Actions.selectDropdownOptionNewComp(
-            Sales._FindComps.Page.SourceInput, testData.source
+            Sales._FindComps.Page.LinkTypeInput, testData.source
         ).
         SaleInfo.selectSaleDate();
         Sales._FindComps

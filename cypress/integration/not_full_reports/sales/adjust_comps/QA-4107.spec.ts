@@ -2,10 +2,9 @@ import fixture from "../../../../fixtures/not_full_reports/sales/adjust_comps/QA
 import { Sales } from "../../../../actions";
 import { _NavigationSection as NavigationSection } from "../../../../actions/base";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
-import { Tag } from "../../../../utils/tags.utils";
 
 describe("Adjusted Price per Residential Unit in Sales Adjustment Grid is calculated with correct formula", 
-    { tags: [ Tag.adjust_comps, Tag.sales ] }, () => {
+    { tags: [ "@adjust_comps", "@sales" ] }, () => {
 
     before("Login, create report", () => {
         createReport(fixture.reportCreationData);
@@ -14,7 +13,7 @@ describe("Adjusted Price per Residential Unit in Sales Adjustment Grid is calcul
     it("Test body", () => {
         NavigationSection.navigateToFindComps();
         Sales._FindComps.selectCompFromMapByAddress(fixture.comparable.address);
-        NavigationSection.openAdjustCompsInSales();
+        NavigationSection.navigateToAdjustComps();
         Sales._AdjustComps.checkCalculationUnitsRadio(fixture.calculationUnits)
             .enterSizeAdjustmentByColumn(fixture.comparable.sizeAdjustment)
             .enterConditionAdjustmentByColumn(fixture.comparable.conditionAdjustment)

@@ -18,13 +18,23 @@ class SummaryActions extends BaseActionsExt<typeof summaryPage> {
         return this;
     }
 
-    enterNumberOfResUnits(number: number): this {
+    enterNumberOfResUnits(number: number, notInclude?: string[]): this {
         summaryPage.numberOfResUnitsInput.clear().type(`${number}`).should("have.value", number);
+        if (notInclude) {
+            notInclude.forEach(val => {
+                summaryPage.numberOfResUnitsInput.should("not.include.value", val);
+            });
+        }
         return this;
     }
 
-    enterNumberOfCommercialUnits(number = 1): this {
+    enterNumberOfCommercialUnits(number = 1,  notInclude?: string[]): this {
         summaryPage.numberOfCommercialUnitsInput.clear().type(`${number}`).should("have.value", number);
+        if (notInclude) {
+            notInclude.forEach(val => {
+                summaryPage.numberOfCommercialUnitsInput.should("not.include.value", val);
+            });
+        }
         return this;
     }
 
@@ -76,6 +86,11 @@ class SummaryActions extends BaseActionsExt<typeof summaryPage> {
         return this;
     }
 
+    enterBuildingName(buildingName: string): SummaryActions {
+        summaryPage.buildingNameInput.clear().type(`${buildingName}`).should("have.value", buildingName);
+        return this;
+    }
+
     enterSiteArea(area: number): SummaryActions {
         if (isHasDecimalPartMoreNumberOfDigits(area, 4)) {
             area = cutDecimalPartToNumberOfDigits(area, 4);
@@ -120,6 +135,11 @@ class SummaryActions extends BaseActionsExt<typeof summaryPage> {
 
     enterCurrentNumberOfResUnits(number: number): this {
         summaryPage.currentNumberOfResUnits.clear().type(`${number}`).should("have.value", number);
+        return this;
+    }
+
+    enterCurrentNumberOfCommercialUnits(number: number): this {
+        summaryPage.currentNumberOfCommercialUnitsInput.clear().type(`${number}`).should("have.value", number);
         return this;
     }
 

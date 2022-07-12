@@ -1,4 +1,5 @@
 import reimbursementSummary from "../../../pages/income/commercial/reimbursementSummary.page";
+import { BoweryReports } from "../../../types/boweryReports.type";
 import BaseActionsExt from "../../base/base.actions.ext";
 
 class ReimbursementSummaryActions extends BaseActionsExt<typeof reimbursementSummary> {
@@ -31,18 +32,20 @@ class ReimbursementSummaryActions extends BaseActionsExt<typeof reimbursementSum
         return this;
     }
 
-    enterCommercialReimbursement(expense: string, expenseCellName: string, expenseType: string, knownType: string): ReimbursementSummaryActions {
-        this.selectExpenseType(expense, expenseCellName)
-            .selectReimbursmentType(expenseType)
-            .selectKnownInformationType(knownType);
-        return this;
+    enterCommercialReimbursement(expense: string, expenseCellName: string, 
+        expenseType: BoweryReports.ReimbursementType, knownType: BoweryReports.KnownInformation): ReimbursementSummaryActions {
+            this.selectExpenseType(expense, expenseCellName)
+                .selectReimbursmentType(expenseType)
+                .selectKnownInformationType(knownType);
+            return this;
     }
 
-    addNewCommercialReimbursement(expense: string, expenseCellName: string, expenseType: string, knownType: string): ReimbursementSummaryActions {
-        this.openAddCommercialReimbursementModal()
-            .enterCommercialReimbursement(expense, expenseCellName, expenseType, knownType)
-            .clickSubmitBtn();
-        return this;
+    addNewCommercialReimbursement(expense: string, expenseCellName: string, 
+        expenseType: BoweryReports.ReimbursementType, knownType: BoweryReports.KnownInformation): ReimbursementSummaryActions {
+            this.openAddCommercialReimbursementModal()
+                .enterCommercialReimbursement(expense, expenseCellName, expenseType, knownType)
+                .clickSubmitBtn();
+            return this;
     }
 
     fillReimbursementsByRow(value: number, index = 0, knownInformation = "monthly"): ReimbursementSummaryActions {

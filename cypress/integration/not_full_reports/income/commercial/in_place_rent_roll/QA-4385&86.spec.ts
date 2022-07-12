@@ -3,10 +3,10 @@ import { getTodayDateString } from "../../../../../../utils/date.utils";
 import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../../actions/base";
 import { Income } from "../../../../../actions";
-import { Tag } from "../../../../../utils/tags.utils";
+import { BoweryReports } from "../../../../../types/boweryReports.type";
 
 describe("Verify the Dates columns in the grid",
-    { tags:[ Tag.income, Tag.commercial, Tag.in_place_rent_roll ] }, () => {
+    { tags:[ "@income", "@commercial", "@in_place_rent_roll" ] }, () => {
     const cellDatesNames: BoweryReports.LeaseDateName[] = [ "Start", "Expiry" ];
 
     beforeEach("Login, create report", () => {

@@ -1,17 +1,19 @@
 import BasePage from "./base.page";
 
 class NavigationSection extends BasePage {
-    get reportInfoButton() { return cy.get('[id="report-information"]');}
+    get reportInfoButton() { return cy.get('#report-information');}
+
+    get reportAppraiserButton() { return cy.get('#appraisers'); }
 
     get incomeApproachButton() { return cy.get("#income-approach svg"); }
 
-    get residentialIncomeArrow() { return cy.get("#residentialIncome svg"); }
+    get residentialIncomeArrow() { return cy.get("#residentialIncome"); }
 
     get inPlaceRentRollButton() { return cy.get("#residential-rent-roll"); }
 
     get rentCompsButton() { return cy.get("#residential-rent-comps"); }
 
-    get commercialIncomeArrow() { return cy.get("#commercialIncome svg"); }
+    get commercialIncomeArrow() { return cy.get("#commercialIncome"); }
 
     get commercialRentRollButton() { return cy.get("#commercial-rent-roll"); }
 
@@ -51,13 +53,19 @@ class NavigationSection extends BasePage {
 
     get commercialRentCompsButton() { return cy.get("#commercial-rent-comps"); }
 
-    get comparableExpenses() { return cy.get("#comparable-expenses-v-2"); }
+    get commercialCompGroupsDiscussionButton() { return cy.get(`#commercial-comp-groups-discussion`);}
+
+    get comparableExpenses() { return cy.get("#comparable-expenses"); }
 
     get amenities() { return cy.get("#amenities"); }
 
     get laundry() { return cy.get("#laundry-income"); }
 
+    get storage() {return cy.get("#storage-income");}
+
     get parking() {return cy.get("#parking-income");}
+
+    get other() {return cy.get("#other-income");}
 
     get miscellaneousIncome() {return cy.get("#miscellaneousIncome");}
 
@@ -67,17 +75,17 @@ class NavigationSection extends BasePage {
 
     get letterOfTransmittal() { return cy.get("#letter-of-transmittal"); }
 
-    get potentialGrossIncome() { return cy.get("#potential-gross-income-v-2"); }
+    get potentialGrossIncome() { return cy.get("#potential-gross-income"); }
 
     get taxInfo() { return cy.get("#tax-information"); }
 
-    get proForma() { return cy.get("#pro-forma-v-2"); }
+    get proForma() { return cy.get("#pro-forma"); }
 
     get commercialCompGroups() { return cy.get("#commercial-comp-groups"); }
 
-    get expenseHistory() { return cy.get("#expense-history-v-2"); }
+    get expenseHistory() { return cy.get("#expense-history"); }
 
-    get expenseForecast() { return cy.get("#expense-forecast-v-2"); }
+    get expenseForecast() { return cy.get("#expense-forecast"); }
 
     get supportingCapRates() { return cy.get("#supporting-cap-rates"); }
 
@@ -89,7 +97,13 @@ class NavigationSection extends BasePage {
 
     get menuItemsProfileOrganization() {return cy.get("[role=menu] > li");}
 
-    get comercialReimbursementButton() {return cy.get("#commercial-reimbursement-summary-v-2");}
+    get commercialReimbursementButton() {return cy.get("#commercial-reimbursement-summary");}
+
+    get residentialStabilizedRentRoll() {return cy.get("#residential-projected-rent-roll");}
+
+    get commercialRentReconciliationButton() {return cy.get(`#commercial-rent-reconciliation`);}
+
+    get certification() {return cy.get('#certification');}
 }
 
 export default new NavigationSection();

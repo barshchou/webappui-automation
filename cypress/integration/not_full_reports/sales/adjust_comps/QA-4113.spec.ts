@@ -2,10 +2,9 @@ import testData from "../../../../fixtures/not_full_reports/sales/adjust_comps/Q
 import Sales from "../../../../actions/sales/sales.manager";
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
-import { Tag } from "../../../../utils/tags.utils";
 
 describe("Net Property Adjustments in Sales Adjustment Grid is calculated with correct formula", 
-    { tags: [ Tag.adjust_comps, Tag.sales ] }, () => {
+    { tags: [ "@adjust_comps", "@sales" ] }, () => {
         
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
@@ -14,7 +13,7 @@ describe("Net Property Adjustments in Sales Adjustment Grid is calculated with c
     it("Test body", () => {
         NavigationSection.navigateToFindComps();
         Sales.FindComps.selectCompFromMapByAddress(testData.comparable.address);
-        NavigationSection.openAdjustCompsInSales();
+        NavigationSection.navigateToAdjustComps();
         Sales.AdjustComps.enterSizeAdjustmentByColumn(testData.comparable.sizeAdjustment)
             .enterConditionAdjustmentByColumn(testData.comparable.conditionAdjustment)
             .clickAddOtherAdjustmentButton()

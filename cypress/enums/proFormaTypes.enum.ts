@@ -4,6 +4,7 @@ const proFormaType = {
     potentialCommercialIncome: "Potential Commercial Income",
     parkingIncome: "Parking Income",
     laundryIncome: "Laundry Income",
+    storageIncome: "Storage Income",
     potentialRealEstateTaxesReimbursement: "Potential Real Estate Taxes Reimbursement",
     otherIncome: "Other Income",
     potentialGrossIncome: "Potential Gross Income",
@@ -11,7 +12,7 @@ const proFormaType = {
     effectiveGrossIncome: "Effective Gross Income",
     operatingExpenses: "Operating Expenses",
     realEstateTaxes: "Real Estate Taxes",
-    insurace: "Insurance",
+    insurance: "Insurance",
     electricity: "Electricity",
     fuel: "Fuel",
     waterAndSewer: "Water & Sewer",
@@ -20,13 +21,13 @@ const proFormaType = {
     payrollBenefits: "Payroll & Benefits",
     generalAndAdministrative: "General & Administrative",
     legalAndProfessional: "Legal & Professional Fees",
-    miscelaneous: "Miscellaneous",
+    miscellaneous: "Miscellaneous",
     managementFees: "Management Fees",
     replacementsAndReserves: "Replacement Reserves",
     totalOperatingExpenses: "Total Operating Expenses",
     totalOperatingExpensesExTaxes: "Total Operating Expenses (Excl. RE Taxes)",
     netOperatingIncome: "Net Operating Income",
     operatingExpenseRatio: "Operating Expense Ratio"
-};
+} as const;
 
 export default Object.freeze(proFormaType);

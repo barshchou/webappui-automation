@@ -1,15 +1,19 @@
-let ClientCreationData = function (prefix, title, firstName, middleInitial, lastName, clientSuffix, clientCompanyName, streetAddress, city, state, zipCode) {
-    this.prefix = prefix;
-    this.title = title;
-    this.firstName = firstName;
-    this.middleInitial = middleInitial;
-    this.lastName = lastName;
-    this.clientSuffix = clientSuffix;
-    this.clientCompanyName = clientCompanyName;
-    this.streetAddress = streetAddress;
-    this.city = city;
-    this.state = state;
-    this.zipCode = zipCode;
+import { BoweryAutomation } from "../../types/boweryAutomation.type";
+
+let ClientCreationData = function (prefix: string, title: string, firstName: string, 
+    middleInitial: string, lastName: string, clientSuffix: string, clientCompanyName: string, 
+    streetAddress: string, city: string, state: string, zipCode: string | number) {
+        this.prefix = prefix;
+        this.title = title;
+        this.firstName = firstName;
+        this.middleInitial = middleInitial;
+        this.lastName = lastName;
+        this.clientSuffix = clientSuffix;
+        this.clientCompanyName = clientCompanyName;
+        this.streetAddress = streetAddress;
+        this.city = city;
+        this.state = state;
+        this.zipCode = zipCode;
 };
 
 class ClientCreator {
@@ -35,57 +39,57 @@ class ClientCreator {
 
     zipCode: string | number
 
-    setAddresseePrefix(prefix?) {
+    setAddresseePrefix(prefix?: string) {
         this.prefix = prefix ?? "Mr.";
         return this;
     }
 
-    setAddresseeTitle(title?) {
+    setAddresseeTitle(title?: string) {
         this.title = title ?? "Test building";
         return this;
     }
 
-    setAddresseeFirstName(firstName?) {
+    setAddresseeFirstName(firstName?: string) {
         this.firstName = firstName ?? "Harley";
         return this;
     }
 
-    setAddresseeMiddleInitial(middleInitial?) {
+    setAddresseeMiddleInitial(middleInitial?: string) {
         this.middleInitial = middleInitial ?? " ";
         return this;
     }
 
-    setAddresseeLastName(lastName?) {
+    setAddresseeLastName(lastName?: string) {
         this.lastName = lastName ?? "Young";
         return this;
     }
 
-    setClientSuffix(clientSuffix?) {
+    setClientSuffix(clientSuffix?: string) {
         this.clientSuffix = clientSuffix ?? "Pre";
         return this;
     }
 
-    setClientCompanyName(clientCompanyName?) {
+    setClientCompanyName(clientCompanyName?: string) {
         this.clientCompanyName = clientCompanyName ?? "Test Company & CO";
         return this;
     }
 
-    setStreetAddress(streetAddress?) {
+    setStreetAddress(streetAddress?: string) {
         this.streetAddress = streetAddress ?? "422 1st Avenue";
         return this;
     }
 
-    setCity(city?) {
+    setCity(city?: string) {
         this.city = city ?? "New York";
         return this;
     }
 
-    setState(state?) {
+    setState(state?: string) {
         this.state = state ?? "New York";
         return this;
     }
 
-    setZipCode(zipCode?) {
+    setZipCode(zipCode?: string | number) {
         this.zipCode = zipCode ?? "10001";
         return this;
     }
@@ -112,6 +116,23 @@ class ClientCreator {
         .setState()
         .setZipCode()
         .build();
+    }
+
+    getClientData(options?: BoweryAutomation.OrganizationCreateNewClientData) {
+        
+        options?.prefix == undefined ? this.setAddresseePrefix() : this.setAddresseePrefix(options.prefix);
+        options?.title == undefined ? this.setAddresseeTitle() : this.setAddresseeTitle(options.title);
+        options?.firstName == undefined ? this.setAddresseeFirstName() : this.setAddresseeFirstName(options.firstName);
+        options?.middleInitial == undefined ? this.setAddresseeMiddleInitial() : this.setAddresseeMiddleInitial(options.middleInitial);
+        options?.lastName == undefined ? this.setAddresseeLastName() : this.setAddresseeLastName(options.lastName);
+        options?.clientSuffix == undefined ? this.setClientSuffix() : this.setClientSuffix(options.clientSuffix);
+        options?.clientCompanyName == undefined ? this.setClientCompanyName() : this.setClientCompanyName(options.clientCompanyName);
+        options?.streetAddress == undefined ? this.setStreetAddress() : this.setStreetAddress(options.streetAddress);
+        options?.city == undefined ? this.setCity() : this.setCity(options.city);
+        options?.state == undefined ? this.setState() : this.setState(options.state);
+        options?.zipCode == undefined ? this.setZipCode() : this.setZipCode(options.zipCode);
+        
+        return this.build();
     }
 }
 
