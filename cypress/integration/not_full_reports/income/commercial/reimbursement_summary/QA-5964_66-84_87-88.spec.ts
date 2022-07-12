@@ -4,7 +4,7 @@ import { Property, Income } from "../../../../../actions";
 import { _NavigationSection } from "../../../../../actions/base";
 import testData from "../../../../../fixtures/not_full_reports/income/commercial/reimbursement_summary/QA-5964_66-84_87-88.fixture";
 
-describe("",
+describe("Income > Commercial > Reimbursement Summary - Verify Gross and Annual values for added reimbursements",
     { tags: [ "@income", "@expense_forecast", "@reimbursement_summary" ] }, () => {
 
     before("Login, create report", () => {
@@ -38,7 +38,6 @@ describe("",
         _NavigationSection.navigateToCommercialReimbursementSummary();
 
         cy.saveLocalStorage();
-        
     });
     
     testData.expensesForecast.forEach((expense, index) => {
@@ -48,28 +47,34 @@ describe("",
             cy.stepInfo(`4. Click on Add Reimbursement and select expense in dropdown
                          5. Select  % of Appraiser Forecast radio button for Reimbursement Type 
                          (it doesn't matter if Admin Fee is selected or not) and click on Add button`);
-            Income._CommercialManager.ReimbursementSummary.addNewCommercialReimbursement(
-                expense.expenseForecast.expenseUIName, expense.expenseForecast.name, testData.reimbursementType, testData.knownInformation, false)
+            Income._CommercialManager.ReimbursementSummary
+                .addNewCommercialReimbursement(
+                    expense.expenseForecast.expenseUIName, 
+                    expense.expenseForecast.name, 
+                    testData.reimbursementType, 
+                    testData.knownInformation, 
+                    false)
                 .fillReimbursements(testData.percentOfTotal, testData.reimbursementColumnId, index);
 
             cy.stepInfo(`6. Verify ${expense.expenseForecast.expenseUIName} Appraiser's Forecast (GROSS) 
                         for each Commercial Unit is calculated as: 
                         Expense Forecast Per SF * [Selected Basis for Square Foot Analysis]*`);
-            Income._CommercialManager.ReimbursementSummary.verifyAppraiserForecastGrossByExpenseType(
+            Income._CommercialManager.ReimbursementSummary
+                .verifyAppraiserForecastGrossByExpenseType(
                     expense.expenseForecast.expenseUIName, 
                     testData.grossBuildingArea * expense.expenseForecast.forecast, 
                     testData.commercialUnits.commercialUnitsNumber);
 
             cy.stepInfo(`7. Verify for ${expense.expenseForecast.expenseUIName} Annual Reimbursement is 
                         calculated as  *Appraiser's Forecast (Gross) * % of Total*`);
-            Income._CommercialManager.ReimbursementSummary.verifyAnnualReimbursementByExpenseType(
-                expense.expenseForecast.expenseUIName, 
-                testData.reimbursementType,
-                testData.knownInformation,
-                testData.reimbursementColumnId,
-                testData.commercialUnits.commercialUnitsNumber,
-                index);
-            
+            Income._CommercialManager.ReimbursementSummary
+                .verifyAnnualReimbursementByExpenseType(
+                    expense.expenseForecast.expenseUIName, 
+                    testData.reimbursementType,
+                    testData.knownInformation,
+                    testData.reimbursementColumnId,
+                    testData.commercialUnits.commercialUnitsNumber,
+                    index);
         });
     });
     
