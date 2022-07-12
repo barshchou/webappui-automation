@@ -198,7 +198,7 @@ class InPlaceRentRollActions extends ResidentialRentRollSharedActions<typeof ren
         return this;
     }
 
-    enterRoomsNumberByRowNumber(value: number, number: number): InPlaceRentRollActions {
+    enterRoomsNumberByRowNumber(value: number, number = 0): InPlaceRentRollActions {
         rentRollPage.roomsCells.eq(number).dblclick();
         this.enterTextToTextarea(`${value}`)
             .verifyRoomsNumberByRow(value, number);
