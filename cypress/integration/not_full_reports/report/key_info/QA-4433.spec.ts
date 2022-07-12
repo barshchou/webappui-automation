@@ -3,8 +3,9 @@ import { createReport, deleteReport } from "../../../../actions/base/baseTest.ac
 import { _NavigationSection } from "../../../../actions/base";
 import { Report } from "../../../../actions";
 import launchDarklyApi from "../../../../api/launchDarkly.api";
+import { conditionalDescribe } from "../../../../../utils/env.utils";
 
-describe("[QA-4433] Launch Darkly for Inspection Date & Date of Valuation (feature in OFF)",
+conditionalDescribe("[QA-4433] Launch Darkly for Inspection Date & Date of Valuation (feature in OFF)",
     { tags: [ "@report", "@key_info", "@salesforce", "@feature_flag" ] }, () => {
         
     before("Login, create report", () => {

@@ -5,9 +5,10 @@ import { _NavigationSection } from '../../../../actions/base';
 import testData from "../../../../fixtures/not_full_reports/profile_organizations/settings/QA-5382.fixture";
 import enums from '../../../../enums/enums';
 import launchDarklyApi from '../../../../api/launchDarkly.api';
+import { conditionalDescribe } from '../../../../../utils/env.utils';
 
-describe("[QA-5382] Verify possibility to edit static text in-app", 
-    { tags:[ "@organizations", "@settings", "@check_export" ] }, () => {
+conditionalDescribe("[QA-5382] Verify possibility to edit static text in-app", 
+    { tags:[ "@organizations", "@settings", "@check_export", "@feature_flag" ] }, () => {
 
     before('', () => {
         launchDarklyApi.setFeatureFlagForUser(testData.reportTextEditorFlagKey, testData.featureFlagEnable)
@@ -48,11 +49,6 @@ describe("[QA-5382] Verify possibility to edit static text in-app",
 
     after('Remove feature flag', () => {
         launchDarklyApi.removeUserTarget(testData.reportTextEditorFlagKey);
-        /*  VB: Wait is added coz we have LaunchDarkly API rate limit and it'll fails with 429 error
-            - One of the option is to add sleep
-            - Second option is to ask for rate limit increase (pretty not possible)
-         */
-        cy.wait(1000);
         launchDarklyApi.removeUserTarget(testData.swotAnalysisFlagKey);
     });
 });
