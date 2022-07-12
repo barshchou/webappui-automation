@@ -174,9 +174,9 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
 
     setIncludeInProformaCheckbox(forecastItem: string, check = true): ExpenseForecastActions {
         expenseForecastPage.getCheckboxIncludeInProForma(forecastItem).then(checkbox => {
-            return checkbox.attr('value');
-        }).then(attributeValue => {
-            if (attributeValue != `${check}`) expenseForecastPage.getCheckboxIncludeInProForma(forecastItem).click();
+            if (checkbox.attr('value') !== `${check}`) {
+                expenseForecastPage.getCheckboxIncludeInProForma(forecastItem).click();
+            }
         });
         return this;
     }
