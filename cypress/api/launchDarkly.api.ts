@@ -77,10 +77,11 @@ class LaunchDarkly {
           patch: [ options ]
         }),
         failOnStatusCode: false
-      }).then(resp => {
+      })
+      .then(resp => {
         if (resp.status === 429) {
           cy.log("Status code 429, repeat request");
-          this.baseRequest();
+          this.baseRequest(featureFlagKey, method, options);
         } else {
           expect(resp.status).to.eq(200);
           return;
@@ -94,7 +95,8 @@ class LaunchDarkly {
         failOnStatusCode: false
       }).then(resp => {
         if (resp.status === 429) {
-          this.baseRequest();
+          cy.log("Status code 429, repeat request");
+          this.baseRequest(featureFlagKey, method, options);
         } else {
           expect(resp.status).to.eq(200);
           return;
