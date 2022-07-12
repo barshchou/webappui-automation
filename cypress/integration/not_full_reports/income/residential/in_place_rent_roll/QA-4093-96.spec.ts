@@ -30,8 +30,8 @@ describe(`[QA-4093-95] Verify if "Per Month" time period PSF Rent based on is se
                 -Monthly rent is not filled`);
         testData.rentRollResidentialUnits.forEach(unit => {
             Income._Residential.InPlaceRentRoll.checkPerUnitSquareFootage()
-                .Page.getPSFRadio(testData.psfRadioValuePerMonthly).click();
-            Income._Residential.InPlaceRentRoll.verifyColumnExist(testData.columnName)
+                .clickPSFRadio(testData.psfRadioValuePerMonthly)
+                .verifyColumnExist(testData.columnName)
                 .enterSquareFootageByRow(unit.footage)
                 .enterMonthlyRentByRowNumber(unit.monthlyRent)
                 .verifyRentPSFValueByRow(); 
@@ -43,13 +43,13 @@ describe(`[QA-4093-95] Verify if "Per Month" time period PSF Rent based on is se
         cy.stepInfo(`1. Verify if selected time period PSF rent based on is changed -> Calculation of "Rent/SF"and "Rent PSF/month" column is 
             dynamically recalculated according to newly selected time period`);
         Income._Residential.InPlaceRentRoll.checkPerUnitSquareFootage()
-            .Page.getPSFRadio(testData.psfRadioValuePerMonthly).click();
-        Income._Residential.InPlaceRentRoll.verifyColumnExist(testData.columnName)
+            .clickPSFRadio(testData.psfRadioValuePerMonthly)
+            .verifyColumnExist(testData.columnName)
             .enterSquareFootageByRow(testData.rentRollResidentialUnits[0].footage)
             .enterMonthlyRentByRowNumber(testData.rentRollResidentialUnits[0].monthlyRent)
             .verifyRentPSFValueByRow()
-            .Page.getPSFRadio(testData.psfRadioValuePerAnnually).click();
-        Income._Residential.InPlaceRentRoll.verifyRentPSFValueByRow(false);
+            .clickPSFRadio(testData.psfRadioValuePerAnnually)
+            .verifyRentPSFValueByRow(false);
         
         cy.stepInfo(`2. Verify there is no change to Generated Commentary regardless user select "Yes" in "Do you know per unit square footage/" 
             and selected time period`);

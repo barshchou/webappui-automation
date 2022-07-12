@@ -86,6 +86,21 @@ class InPlaceRentRollActions extends ResidentialRentRollSharedActions<typeof ren
         return this;
     }
 
+    clickPSFRadio(radioName: string): InPlaceRentRollActions {
+        rentRollPage.getPSFRadio(radioName).click();
+        return this;
+    }
+
+    verifyPerUnitSFRadioCheck(radio = true, isChecked = true): InPlaceRentRollActions {
+        const element = radio === true ? rentRollPage.getPerUnitSFRadio(radio) : rentRollPage.getPerUnitSFRadio(false);
+        if (isChecked === true) {
+            element.should("be.checked");
+        } else {
+            element.should("not.be.checked");
+        }
+        return this;
+    }
+
     checkCheckboxByLabel(label: string): InPlaceRentRollActions {
         rentRollPage.getCheckboxByLabel(label).scrollIntoView().should("have.value", "false")
             .check().should("have.value", "true");
