@@ -75,8 +75,8 @@ describe(`[QA-5013] [Income>Expense forecast] Selected expense card is displayed
         it(`Verify if “Include Expense on Pro Forma” is selected -> this  expense category 
             is displayed in the Pro Forma page > Operating Expenses section (Per Unit measure + Empty Appraiser's forecasts)`, function () {
 
-            testData.expenseForecastFixtureArray().forEach(element => {
-                Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastInsuranceFixtureUltimate(element, "unit"));
+            testData.expenseForecastFixtureArray('unit').forEach(element => {
+                Income._ExpenseForecastActions.chooseForecastItemBasis(element);
             });
             _NavigationSection.navigateToProForma();
             testData.expensesInProFormaByDefaultArray.forEach(element => {
@@ -118,7 +118,7 @@ describe(`[QA-5013] [Income>Expense forecast] Selected expense card is displayed
 
             // TODO: Uncomment this code + code below, after bug fix https://bowery.atlassian.net/browse/WEB-5881
             //
-            // Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastInsuranceFixtureUltimate(testData.expenseForecastFuelFixture(), 'room');
+            // Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastFuelFixture('room'));
             // _NavigationSection.navigateToProForma();
             // testData.expensesInProFormaByDefaultArray.forEach(element => {
             //     Income._ProFormaActions.Page.categoryCellTotal(element).should('exist');
@@ -193,12 +193,11 @@ describe(`[QA-5013] [Income>Expense forecast] Selected expense card is displayed
             Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastTotalFixture('sf'));
         });
 
-
         it(`Verify if “Include Expense on Pro Forma” is selected -> this  expense category 
             is displayed in the Pro Forma page > Operating Expenses section (PSF measure + Full Appraiser's forecasts)`, function () {
 
-            testData.expenseForecastFixtureArray().forEach(element => {
-                Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastInsuranceFixtureUltimate(element, "sf"));
+            testData.expenseForecastFixtureArray("sf").forEach(element => {
+                Income._ExpenseForecastActions.chooseForecastItemBasis(element);
             });
             _NavigationSection.navigateToProForma();
             testData.expensesInProFormaByDefaultArray.forEach(element => {
@@ -237,8 +236,8 @@ describe(`[QA-5013] [Income>Expense forecast] Selected expense card is displayed
         it(`Verify if “Include Expense on Pro Forma” is selected -> this  expense category 
             is displayed in the Pro Forma page > Operating Expenses section (Per Unit measure + Full Appraiser's forecasts)`, function () {
 
-            testData.expenseForecastFixtureArray().forEach(element => {
-                Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastInsuranceFixtureUltimate(element, "unit"));
+            testData.expenseForecastFixtureArray("unit").forEach(element => {
+                Income._ExpenseForecastActions.chooseForecastItemBasis(element);
             });
             _NavigationSection.navigateToProForma();
             testData.expensesInProFormaByDefaultArray.forEach(element => {

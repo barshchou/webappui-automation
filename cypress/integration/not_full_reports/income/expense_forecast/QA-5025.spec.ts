@@ -38,7 +38,7 @@ describe(`[QA-5025] [Income>Expense forecast] Selected existing expense card is 
 
         it(`Verify If “Include Expense on Pro Forma”  checkbox is selected but there is 
                 data left in the forecast, this data is included in calculations on Pro forma and Expense forecast page 
-                (Per Unit measure + Full Appraiser's forecasts)`, () => {
+                (Per SF measure + Full Appraiser's forecasts)`, () => {
 
             Income._ExpenseForecastActions.totalSumForecastPSFAllCards(
                 testData.buildingDescription.grossArea,
@@ -76,10 +76,10 @@ describe(`[QA-5025] [Income>Expense forecast] Selected existing expense card is 
 
         it(`Verify If “Include Expense on Pro Forma” checkbox is selected but there is 
                 data left in the forecast, this data is included in calculations on Pro forma and Expense forecast page 
-                (PSF measure + Full Appraiser's forecasts)`, () => {
+                (Per Unit measure + Full Appraiser's forecasts)`, () => {
 
-            testData.expenseForecastFixtureArray().forEach(element => {
-                Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastInsuranceFixtureUltimate(element, "sf"));
+            testData.expenseForecastFixtureArray("unit").forEach(element => {
+                Income._ExpenseForecastActions.chooseForecastItemBasis(element);
             });
             Income._ExpenseForecastActions.totalSumForecastPSFAllCards(
                 testData.buildingDescription.grossArea,
@@ -119,8 +119,9 @@ describe(`[QA-5025] [Income>Expense forecast] Selected existing expense card is 
                 data left in the forecast, this data is included in calculations on Pro forma and Expense forecast page 
                 (Per Room measure for Fuel + Full Appraiser's forecasts)`, () => {
 
-            //BECAUSE OF BUG
-            //Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastInsuranceFixtureUltimate(testData.expenseForecastFuelFixture, "room"));
+            //TODO: Uncomment this code + code below, after bug fix https://bowery.atlassian.net/browse/WEB-5881
+            //
+            //Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastFuelFixture("room"));
             // Income._ExpenseForecastActions.totalSumForecastPSFAllCards(
             //     testData.buildingDescription.grossArea,
             //     testData.numberOfResidentialUnits,
