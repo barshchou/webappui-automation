@@ -3,7 +3,6 @@ import ReportDataCreator from "../../../data_creator/reportData.creator";
 
 const comparableFixture = () => {
     return {
-        address: "200 West 78 Street",
         propertyRights: -70,
         trendedPrice: "$432.35"
     };
