@@ -78,6 +78,10 @@ class FindCompsPage extends BasePage {
     get createNewCompButton() {return cy.contains("Create New", { includeShadowDom: true });}
 
     get newCompSaveAndCloseButton() {return cy.get('[data-qa="Save & Close"]', { includeShadowDom: true });}
+
+    get addressSalesComparablesTable(){
+        return cy.get('[data-qa="selected-sales-comps-table"] [data-qa="address"]');
+    }
 }
 
 /**

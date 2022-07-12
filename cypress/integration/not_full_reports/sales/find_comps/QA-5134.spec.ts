@@ -20,36 +20,36 @@ describe(`[QA-5134] Check when "custom" dropdown is selected user can drag&drop 
         _NavigationSection.navigateToFindComps();
         
         cy.stepInfo(`2. [QA-5134] -> User selects n-first comps from map`);
-        [ 0, 1 ].forEach(() => {
+        testData.compsToAdd.forEach(() => {
             Sales._FindComps.Actions.selectCompFromMap();
         });
 
         cy.stepInfo(`3. [QA-5134] -> When sort for Selected Comparables set to "Sale Date",
         then user unable to sort selected comparables by drag-and-drop`);
-        cy.get('[data-react-beautiful-dnd-drag-handle="0"]').should("not.exist");
+        cy.get(testData.draggableSelector).should("not.exist");
 
         cy.stepInfo(`4. [QA-5134] -> User set "Custom" sort for Selected Comparables`);
         Sales._FindComps.Actions.selectedCompsSetSort("Custom");
 
         cy.stepInfo(`5.1. [QA-5134] -> User can move selected comparable down the list by drag-and-drop`);
-        cy.get('[data-qa="selected-sales-comps-table"] [data-qa="address"]').spread((...comps) => {
+        Sales._FindComps.Page.addressSalesComparablesTable.spread((...comps) => {
             comps = comps.slice(1).map(elem => elem.innerText);
-            cy.wrap(comps).as("comps_before");
+            cy.wrap(comps).as(testData.aliasCompsBefore);
 
-            cy.get(`@comps_before`).then(_before => cy.log(<any>_before));
+            cy.get(`@${testData.aliasCompsBefore}`).then(_before => cy.log(<any>_before));
 
-            Sales._FindComps.moveComparableByDnD('[data-react-beautiful-dnd-drag-handle="0"]', 0, "down", 2);        
+            Sales._FindComps.moveComparableByDnD(testData.draggableSelector, 0, "down", 2);        
         });
 
         cy.stepInfo(`5.2. [QA-5134] -> User see that order of comps changed`);
-        cy.get('[data-qa="selected-sales-comps-table"] [data-qa="address"]').spread((...comps) => {
+        Sales._FindComps.Page.addressSalesComparablesTable.spread((...comps) => {
             comps = comps.slice(1).map(elem => elem.innerText);
-            cy.wrap(comps).as("comps_after");
+            cy.wrap(comps).as(testData.aliasCompsAfter);
             
-            cy.get("@comps_after").then((_after) => {
+            cy.get(`@${testData.aliasCompsAfter}`).then((_after) => {
                 cy.log(<any>_after);
-                
-                cy.get("@comps_before").then((_before) => {
+
+                cy.get(`@${testData.aliasCompsBefore}`).then((_before) => {
                     expect(_after).to.not.deep.equal(
                         _before, "Sales Comparables has different order after DnD (by addresses)."
                     );
