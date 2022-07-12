@@ -1,3 +1,4 @@
+import Enums from "../../../../../enums/enums";
 import { BoweryReports } from "../../../../../types/boweryReports.type";
 import ReportDataCreator from "../../../../data_creator/reportData.creator";
 
@@ -27,8 +28,8 @@ export default {
     resUnit: 1,
     squareFootage: 235,
     monthlyRent: 5758,
-    psfRadioValuePerMonthly: 'monthly' as BoweryReports.UnitsOfMeasure,
-    psfRadioValuePerAnnually: 'annually' as BoweryReports.UnitsOfMeasure,
+    psfRadioValuePerMonthly: Enums.UNITS_OF_MEASURE.monthly,
+    psfRadioValuePerAnnually: Enums.UNITS_OF_MEASURE.annually,
     columnName: "Rent PSF/Month",
     rentRollResidentialUnits: _rentRollResidentialUnitsFixture,
     commentaryToBe: _commentaryToBe
