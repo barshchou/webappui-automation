@@ -28,12 +28,12 @@ describe(`[QA-4093-95] Verify if "Per Month" time period PSF Rent based on is se
                 -Square Footage is not filled
                 -Monthly rent is 0
                 -Monthly rent is not filled`);
-        testData.rentRollResidentialUnits.forEach(el => {
+        testData.rentRollResidentialUnits.forEach(unit => {
             Income._Residential.InPlaceRentRoll.checkPerUnitSquareFootage()
                 .Page.getPSFRadio(testData.psfRadioValuePerMonthly).click();
             Income._Residential.InPlaceRentRoll.verifyColumnExist(testData.columnName)
-                .enterSquareFootageByRow(el.footage)
-                .enterMonthlyRentByRowNumber(el.monthlyRent)
+                .enterSquareFootageByRow(unit.footage)
+                .enterMonthlyRentByRowNumber(unit.monthlyRent)
                 .verifyRentPSFValueByRow(); 
             cy.reload();
         });
@@ -54,7 +54,7 @@ describe(`[QA-4093-95] Verify if "Per Month" time period PSF Rent based on is se
         cy.stepInfo(`2. Verify there is no change to Generated Commentary regardless user select "Yes" in "Do you know per unit square footage/" 
             and selected time period`);
         Income._Residential.InPlaceRentRoll.verifyRentRollCommentary(testData.commentaryToBe)
-            .checkPerUnitSquareFootage('false')
+            .checkPerUnitSquareFootage(false)
             .verifyRentRollCommentary(testData.commentaryToBe);
         
         deleteReport(testData.reportCreationData.reportNumber);

@@ -80,7 +80,7 @@ class InPlaceRentRollActions extends ResidentialRentRollSharedActions<typeof ren
         return this;
     }
 
-    checkPerUnitSquareFootage(value = "true"):InPlaceRentRollActions {
+    checkPerUnitSquareFootage(value = true):InPlaceRentRollActions {
         rentRollPage.getPerUnitSFRadio(value).should("not.be.checked").scrollIntoView()
             .click().should("be.checked");
         return this;
@@ -124,7 +124,7 @@ class InPlaceRentRollActions extends ResidentialRentRollSharedActions<typeof ren
     checkUncheckPerUnitSquareFootage(columnNames: Array<string>): InPlaceRentRollActions {
         this.checkPerUnitSquareFootage()
             .verifyListColumnExist(columnNames)
-            .checkPerUnitSquareFootage("false")
+            .checkPerUnitSquareFootage(false)
             .verifyListColumnNotExist(columnNames);
         return this;
     }
