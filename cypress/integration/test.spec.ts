@@ -32,6 +32,10 @@ describe("Verify the Basis of Rent tooltip",
                 expect(resp.status).to.eq(200);
             });
         });
-        
+
+        cy.pause();
+        cy._mapGet(mapKeysUtils.report_id).then(reportId => {
+            cy.visit(`/report/${reportId}`);
+        });
     });
 });
