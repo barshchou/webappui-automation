@@ -13,7 +13,7 @@ describe("Total Utility Adjustments in Sales Adjustment Grid is calculated with 
     it("Test body", () => {
         cy.stepInfo("1. Navigate to Find comps page and add a sales comps");
         _NavigationSection.navigateToFindComps();
-        Sales._FindComps.selectCompFromMapByAddress(testData.comparable.address);
+        Sales._FindComps.selectCompFromMap();
 
         cy.stepInfo(`2. Verify if Per Residential Units is selected as Sales Comparables Setup then
                     Trended Price per Unit in Total Footer = Price  per Unit + Price  per Unit * Property Rights + 
