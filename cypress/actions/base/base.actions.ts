@@ -76,6 +76,7 @@ export default class BaseActions {
      * @see https://github.com/jaredpalmer/cypress-image-snapshot
      */
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     matchElementSnapshot(element:Cypress.Chainable, snapshotName: string, options: Options = { allowSizeMismatch: true } ){
         if(Cypress.browser.isHeadless == true) {
             element.should("be.visible");

@@ -1,8 +1,8 @@
 import { defineConfig } from 'cypress';
-import grepFilterPlugin from "cypress-grep/src/plugin";
 import { addMatchImageSnapshotPlugin } from '@simonsmith/cypress-image-snapshot/plugin';
-import api from "./cypress/api";
 import { ENVS, evalUrl } from './utils/env.utils';
+import api from "./cypress/api";
+import grepFilterPlugin from "cypress-grep/src/plugin";
 
 export default defineConfig({
   chromeWebSecurity: false,
@@ -27,22 +27,54 @@ export default defineConfig({
       // eslint-disable-next-line no-console
       console.log(`\nBaseUrl is: ${config.baseUrl}\n`);
 
-      // configuring cypress-grep plugin
-      grepFilterPlugin(config);
+            // configuring cypress-grep plugin
+            grepFilterPlugin(config);
 
-      // configuring cypress-image-snapshot plugin
-      addMatchImageSnapshotPlugin(on, config);
+            // configuring cypress-image-snapshot plugin
+            addMatchImageSnapshotPlugin(on, config);
 
-      on("task", {
-        async loginApi({ _envUrl, _username, _password }){
-          return await api._loginApi(_envUrl, _username, _password);
+            on("before:browser:launch", (browser, launchOptions) => {
+                if (browser.isHeadless === true) {
+                    launchOptions.args.push("--window-size=1920,1080");
+                    return launchOptions;
+                }
+            });
+
+            on("task", {
+                async loginApi({ _envUrl, _username, _password }) {
+                    return await api._loginApi(_envUrl, _username, _password);
+                }
+            });
+
+            on("task", {
+                async createReportApi({ _reportCreationData, _payload, _token, _envUrl }){
+                    return await api._createReportApi(_reportCreationData, _payload, _token, _envUrl);
+                }
+            });
+
+            on("task", {
+                async getFilePath({ _reportName, _docx_html }){
+                    return await _getFilePath(_reportName, _docx_html);
+                }
+            });
+
+            on("task", {
+                async convertDocxToHtml(report: string){
+                    // ernst: it's async because it has call of async function from mammoth lib
+                    return await _convertDocxToHtml(report);
+                }
+            });
+
+            on("task", {
+                async waitForFileExists(filePath: string){
+                    return await _waitForFileExists(filePath);
+                }
+            });
+        },
+        excludeSpecPattern: '*.studio.*',
+        specPattern: 'cypress/integration/**/*.spec.{js,jsx,ts,tsx}',
+        env: {
+            report: "api"
         }
-      });
-
-      // eslint-disable-next-line @typescript-eslint/no-var-requires
-      return require('./cypress/plugins/index.js')(on, config);
     },
-    excludeSpecPattern: '*.studio.*',
-    specPattern: 'cypress/integration/**/*.spec.{js,jsx,ts,tsx}',
-  },
 });

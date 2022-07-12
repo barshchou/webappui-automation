@@ -4,7 +4,8 @@
       "lib": ["esnext", "dom"],
       "skipLibCheck": true,
       "types": ["cypress", "cypress-real-events", 
-        "cypress-grep", "node", "@types/supertest"]
+        "cypress-grep", "node", "@types/supertest"],
+      "skipLibCheck": true
     },
     "include": ["**/*.ts"],
     "watchOptions": {
