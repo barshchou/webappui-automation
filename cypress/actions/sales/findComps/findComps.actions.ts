@@ -14,8 +14,8 @@ import { BoweryReports } from "../../../types/boweryReports.type";
 
 class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
     selectedCompsSetSort(sortType: BoweryReports.SalesComps.SelectedComparablesSortType) {
-        cy.get('[data-qa="sortSalesComps-select-list"]').click();
-        cy.get(`[data-qa="sortSalesComps-${sortType}-select-option"]`).click();
+        this.Page.sortSalesCompsSelectList.click();
+        this.Page.sortSalesCompsSelectListOption(sortType).click();
         return this;
     }
 
