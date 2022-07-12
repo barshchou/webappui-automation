@@ -4,34 +4,24 @@ import { Property, Income } from "../../../../../actions";
 import { _NavigationSection } from "../../../../../actions/base";
 import testData from "../../../../../fixtures/not_full_reports/income/commercial/reimbursement_summary/QA-4993.fixture";
 
-describe("Income > Commercial > Reimbursement Summary - Verify Gross and Annual values for added Utilities reimbursements",
+describe(`Verify that the user can reimburse based on a Utilities expense and the reimbursement 
+        settings structure mirrors that of existing utilities expenses`,
     { tags: [ "@income", "@expense_forecast", "@reimbursement_summary" ] }, () => {
 
-    before("Login, create report", () => {
-
-        cy.stepInfo(`Preconditions: 1. Create a mixed-use or commercial-only report`);
+    beforeEach('Create and setup report', () => {
+        cy.stepInfo(`Preconditions: 1. Create a mixed-use report and add commercial units`);
         createReport(testData.reportCreationData);
-       
-        cy.stepInfo(`2. Select any option as basis for Square Foot Analysis and fill in Square 
-                    Foot field with valid numeric value
-                    3. Make sure at least one commercial unit is added on Property > Summary`);
         _NavigationSection.navigateToPropertySummary();
         Property._Summary.enterGrossBuildingArea(testData.grossBuildingArea)
             .enterNumberOfCommercialUnits(testData.numberOfCommercialUnits);
-
-        cy.stepInfo(`4. Go to Property>Commercial Units page and fill in all Commercial 
-                    Unit SF with valid numeric values`);
         _NavigationSection.navigateToCommercialUnits();
         Property._CommercialUnits.enterListUnitSF(testData.commercialUnits.unitsSF, testData.commercialUnits.commercialUnitsNumber);
-
-        cy.saveLocalStorage();
     });
     
-    it(`[QA-4993] Verifying Combined Utilities expense reimbursements`, () => {
-
+    it(`[QA-4993] User changes to Broken Out utilities -> verify expense reimbursements non existence`, () => {
         cy.stepInfo(`Steps: 1. Go to Income > Expense History page and select Combined Electricity, Fuel, Water & Sewer radio button`);
         _NavigationSection.navigateToExpenseHistory();
-        Income._ExpenseHistory.checkUtilitiesExpensesOption(testData.utilitiesExpenseOption);
+        Income._ExpenseHistory.checkUtilitiesExpensesOption(testData.utilitiesCombinedExpenseOption);
 
         cy.stepInfo(`2. Go to Income > Expense Forecast page and check “Include Expense 
                     on Pro Forma” checkbox for all Expense Forecasts.`);
@@ -54,28 +44,61 @@ describe("Income > Commercial > Reimbursement Summary - Verify Gross and Annual 
             .verifyDefaultReimbursementCommentaryByExpenseType(
                 testData.expenseForecastUtilitiesFixture.expenseUIName, 0);
         
+        cy.stepInfo(`5. Go to Income > Expense History page and select 'Broken out' radio button`);
+        _NavigationSection.navigateToExpenseHistory();
+        Income._ExpenseHistory.checkUtilitiesExpensesOption(testData.utilitiesBrokenOutExpenseOption);
 
-        // cy.stepInfo(`6. Verify that a generated commentary appears in the same fashion as existing utilities reimbursements`);
-        // Income._CommercialManager.ReimbursementSummary
-        //     .verifyAppraiserForecastGrossByExpenseType(
-        //         expense.expenseForecast.expenseUIName, 
-        //         testData.grossBuildingArea * expense.expenseForecast.forecast, 
-        //         testData.commercialUnits.commercialUnitsNumber);
+        cy.stepInfo(`6. Go to Income > Commercial > Reimbursement Summary`);
+        _NavigationSection.navigateToCommercialReimbursementSummary();
+        Income._CommercialManager.ReimbursementSummary
+            .verifyReimbursementItemExistence(testData.expenseForecastUtilitiesFixture.expenseUIName, false);
 
-        // cy.stepInfo(`7. Verify for ${expense.expenseForecast.expenseUIName} Annual Reimbursement is 
-        //             calculated as  *Appraiser's Forecast (Gross) * % of Total*`);
-        // Income._CommercialManager.ReimbursementSummary
-        //     .verifyAnnualReimbursementByExpenseType(
-        //         expense.expenseForecast.expenseUIName, 
-        //         testData.reimbursementType,
-        //         testData.knownInformation,
-        //         testData.reimbursementColumnId,
-        //         testData.commercialUnits.commercialUnitsNumber,
-        //         index);
+        _NavigationSection.navigateToProForma();
+        Income._ProFormaActions.verifyExpensesCombined(testData.utilitiesBrokenOutExpenseOption);
     });
-    
-    // after('Delete report', () => {
-    //     cy.restoreLocalStorage();
-    //     deleteReport(testData.reportCreationData.reportNumber);
-    // });
+
+    it(`[QA-4993] User changes to Combined utilities -> verify expense reimbursements non existence`, () => {
+        cy.stepInfo(`1. Go to Income > Expense Forecast page and check “Include Expense 
+                    on Pro Forma” checkbox for all Expense Forecasts.`);
+        _NavigationSection.navigateToExpenseForecast();
+        testData.brokenOutExpensesFixture.forEach(expense => {
+            Income._ExpenseForecastActions.setIncludeInProformaCheckbox(expense.expenseForecast.cardName, true)
+                .enterForecastItemForecast(expense.expenseForecast);
+        });
+
+        cy.stepInfo(`2. Go to Income > Commercial > Reimbursement Summary`);
+        _NavigationSection.navigateToCommercialReimbursementSummary();
+
+        cy.stepInfo(`4. Add Utilities reimbursement`);
+        testData.brokenOutExpensesFixture.forEach((expense, index) => {
+            Income._CommercialManager.ReimbursementSummary
+                .addNewCommercialReimbursement(
+                    expense.expenseForecast.expenseUIName, 
+                    expense.expenseForecast.name, 
+                    testData.reimbursementType, 
+                    testData.knownInformation, 
+                    false)
+                .fillReimbursements(testData.percentOfTotal, testData.reimbursementColumnId, index)
+                .verifyDefaultReimbursementCommentaryByExpenseType(
+                    expense.expenseForecast.expenseUIName, index);
+        });
+        
+        cy.stepInfo(`5. Go to Income > Expense History page and select 'Broken out' radio button`);
+        _NavigationSection.navigateToExpenseHistory();
+        Income._ExpenseHistory.checkUtilitiesExpensesOption(testData.utilitiesCombinedExpenseOption);
+
+        cy.stepInfo(`6. Go to Income > Commercial > Reimbursement Summary`);
+        _NavigationSection.navigateToCommercialReimbursementSummary();
+        testData.brokenOutExpensesFixture.forEach(expense => {
+            Income._CommercialManager.ReimbursementSummary
+            .verifyReimbursementItemExistence(expense.expenseForecast.expenseUIName, false);
+        });
+
+        _NavigationSection.navigateToProForma();
+        Income._ProFormaActions.verifyExpensesCombined(testData.utilitiesCombinedExpenseOption);
+    });
+
+    afterEach('Delete report', () => {
+        deleteReport(testData.reportCreationData.reportNumber);
+    });
 });

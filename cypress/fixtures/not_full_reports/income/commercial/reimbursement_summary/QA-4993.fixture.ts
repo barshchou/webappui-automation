@@ -34,6 +34,50 @@ const _expenseForecastUtilitiesFixture = (): BoweryReports.ForecastItem => {
     };
 };
 
+const _expenseForecastWaterAndSewerFixture = (): BoweryReports.ForecastItem => {
+    return {
+        name: expensesCellNames.waterAndSewer,
+        basis: unitSFEnum.sf,
+        forecast: 2,
+        cardName: expensesCardNames.waterAndSewer,
+        expenseUIName: proFormaTypesEnum.waterAndSewer,
+    };
+};
+
+const _expenseForecastFuelFixture = (): BoweryReports.ForecastItem => {
+    return {
+        name: expensesCellNames.fuel,
+        basis: unitSFEnum.sf,
+        forecast: 3,
+        cardName: expensesCardNames.fuel,
+        expenseUIName: proFormaTypesEnum.fuel,
+    };
+};
+
+const _expenseForecastElectricityFixture = (): BoweryReports.ForecastItem => {
+    return {
+        name: expensesCellNames.electricity,
+        basis: unitSFEnum.sf,
+        forecast: 4,
+        cardName: expensesCardNames.electricity,
+        expenseUIName: proFormaTypesEnum.electricity,
+    };
+};
+
+const _brokenOutExpensesFixture = () => {
+    return [
+        {
+            expenseForecast: _expenseForecastWaterAndSewerFixture()
+        },
+        {
+            expenseForecast: _expenseForecastFuelFixture()
+        },
+        {
+            expenseForecast: _expenseForecastElectricityFixture()
+        }
+    ];
+};
+
 
 export default {
     reportCreationData: reportCreationFixture(),
@@ -42,9 +86,11 @@ export default {
     grossBuildingArea: _grossBuildingArea,
     commercialUnits: _commercialUnits(),
     expenseForecastUtilitiesFixture: _expenseForecastUtilitiesFixture(),
+    brokenOutExpensesFixture: _brokenOutExpensesFixture(),
     reimbursementType: Enums.REIMBURSEMENT_TYPES.percentOfAppraiserForecast as BoweryReports.ReimbursementType,
     reimbursementColumnId: Enums.REIMBURSEMENT_COLUMN_ID.percentOfAppraiserForecast,
     knownInformation: Enums.KNOWN_INFORMATION.adminFee as BoweryReports.KnownInformation,
     percentOfTotal: _percentOfTotal,
-    utilitiesExpenseOption: "combinedAll" as BoweryReports.UtilityExpenses,
+    utilitiesCombinedExpenseOption: Enums.UTILITY_EXPENSES.combinedAll,
+    utilitiesBrokenOutExpenseOption: Enums.UTILITY_EXPENSES.brokenOut,
 };

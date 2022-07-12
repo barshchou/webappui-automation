@@ -115,8 +115,13 @@ class ReimbursementSummaryActions extends BaseActionsExt<typeof reimbursementSum
     verifyDefaultReimbursementCommentaryByExpenseType(expenseUIName: string, reimbursementIndex = 0): ReimbursementSummaryActions {
         reimbursementSummary.getAnnualReimbursementTotal(expenseUIName).invoke('text').then((total) => {
             reimbursementSummary.getGeneratedCommentaryByExpenseType(expenseUIName, reimbursementIndex)
-            .invoke('text').should('deep.equal', `According to our projections, the total utilities reimbursement is ${total} per year.`);
+            .invoke('text').should('deep.equal', `According to our projections, the total ${expenseUIName.toLocaleLowerCase()} reimbursement is ${total} per year.`);
         });
+        return this;
+    }
+
+    verifyReimbursementItemExistence(expenseUIName: string, exists = true): ReimbursementSummaryActions {
+        reimbursementSummary.getReimbursementItemHeader(expenseUIName).should(exists ? 'exist' : 'not.exist');
         return this;
     }
 }

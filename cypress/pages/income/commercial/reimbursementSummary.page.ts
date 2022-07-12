@@ -45,8 +45,12 @@ class CommercialReimbursementSummaryPage extends BasePage {
     }
 
     getAnnualReimbursementTotal(expenseUIName: string) {
-            return cy.xpath(`//div[p[.='${expenseUIName} (% of Appraiser Forecast)']]//following-sibling::div[1]//tbody/tr[last()]/td[last()]`);
-        }
+        return cy.xpath(`//div[p[.='${expenseUIName} (% of Appraiser Forecast)']]//following-sibling::div[1]//tbody/tr[last()]/td[last()]`);
+    }
+
+    getReimbursementItemHeader(expenseUIName: string) {
+        return cy.xpath(`//div[p[.='${expenseUIName} (% of Appraiser Forecast)']]`);
+    }
 }
 
 export default new CommercialReimbursementSummaryPage();
