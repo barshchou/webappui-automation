@@ -10,6 +10,8 @@ const comparableFixture = () => {
         address: "200 West 78 Street",
     };
 };
+const _cumulativePricePerUnit = "$237,063";
+
 
 const _compAdjustments = {
     propertyRights: -70,
@@ -23,5 +25,6 @@ export default {
     comparablesAdjustments: _compAdjustments,
     comparable: Object.freeze(comparableFixture()),
     calculationUnits: "Per Total Units",
-    basis: "Price per Unit"
+    basis: "Price per Unit",
+    cumulativePricePerUnit: _cumulativePricePerUnit
 };
