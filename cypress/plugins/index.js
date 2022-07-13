@@ -196,7 +196,7 @@ module.exports = (on, config) => {
 
   on("before:browser:launch", (browser, launchOptions) => {
       if (browser.isHeadless === true) {
-        launchOptions.args.push("--window-size=1920,1080");
+        launchOptions.args.push("--window-size=1920,1200");
         return launchOptions;
       }
   });
