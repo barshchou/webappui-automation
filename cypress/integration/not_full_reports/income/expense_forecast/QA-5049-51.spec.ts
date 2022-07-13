@@ -122,15 +122,16 @@ describe(`[QA-5049] [QA-5050] [QA-5051] [Income>Expense forecast] "Per Unit" + "
             );
         });
 
-        it(`[QA-5051] Sliding bar graphic displays Appraiser's Forecast`, () => {
+        it(`[QA-5052] Appraiser's Forecast of Custom Expense Forecast is included in Total Operating Expenses calculation`, () => {
 
-            cy.stepInfo(`1. Verify if Per Unit radiobutton is selected-> Title of Sliding Bar Graphic is #Category Name ($/UNIT)`);
+            cy.stepInfo(`1. Verify forecasted amount of custom expense  is added to the calculation of Total Operating Expenses = 
+            sum of all selected existing expense expenses + sum of all custom expenses`);
          
 
-            cy.stepInfo(`2. Verify if Per SF radiobutton is selected-> Title of Sliding Bar Graphic is #Category Name ($/SF)`);
+            cy.stepInfo(`2. Verify if Generated Commentary on  Total Operating Expenses card is generated correctly`);
            
 
-            cy.stepInfo(`3. Verify Sliding bar graphic displays Appraiser's Forecast amount but it is always displayed in the left most position `);
+            cy.stepInfo(`3. Verify if Sliding bar graphic  on  Total Operating Expenses card is displayed correctly`);
            
             
 
