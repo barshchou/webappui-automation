@@ -5,7 +5,7 @@ import { _NavigationSection } from "../../../../../actions/base";
 import testData from "../../../../../fixtures/not_full_reports/income/commercial/reimbursement_summary/QA-5989-90.fixture";
 
 describe("Income > Commercial > Reimbursement Summary - Verify Gross and Annual values for added Utilities reimbursements",
-    { tags: [ "@income", "@expense_forecast", "@reimbursement_summary" ] }, () => {
+    { tags: [ "@income", "@commercial", "@reimbursement_summary" ] }, () => {
 
     before("Login, create report", () => {
 

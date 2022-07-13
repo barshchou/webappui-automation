@@ -24,20 +24,28 @@ const _commercialUnits = () => {
     };
 };
 
-const _expenseForecastElectricityFixture = (): BoweryReports.ForecastItem => {
+const setExpenseForecastFixture = (name: string, basis: BoweryReports.UnitSF, 
+    forecast: number | undefined, cardName: BoweryReports.ExpenseCardNames, 
+    expenseUIName: BoweryReports.ProFormaTypes): BoweryReports.ForecastItem => {
     return {
-        name: expensesCellNames.utilities,
-        basis: unitSFEnum.sf,
-        forecast: 5,
-        cardName: expensesCardNames.utilities,
-        expenseUIName: proFormaTypesEnum.utilities,
+        name: name,
+        basis: basis,
+        forecast: forecast,
+        cardName: cardName,
+        expenseUIName: expenseUIName
     };
 };
 
 const _expensesForecast = () => { 
     return [
         {
-            expenseForecast: _expenseForecastElectricityFixture(),
+            expenseForecast: setExpenseForecastFixture(
+                expensesCellNames.utilities,
+                unitSFEnum.sf,
+                5,
+                expensesCardNames.utilities,
+                proFormaTypesEnum.utilities
+            ),
             testCaseIds: 'QA-5989 & QA-5990' 
         }
     ];

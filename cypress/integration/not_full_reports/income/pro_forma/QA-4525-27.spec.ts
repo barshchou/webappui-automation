@@ -39,7 +39,7 @@ describe("Potential Gross Income",
             .clickYesIfExist();
         Income._CommercialManager.ReimbursementSummary.addNewCommercialReimbursement(
             testData.expenseType, testData.expenseTypeCellName, testData.reimbursementType, testData.knownInformation)
-            .fillReimbursements(testData.monthlyReimbursement, testData.columnsId);
+                .fillReimbursements(testData.monthlyReimbursement, testData.columnsId);
 
         cy.stepInfo(`6. Go to Property → Amenities, check Parking checkbox and fill in the number of Parking Spaces, 
                     check Laundry checkbox, check Storage Units checkbox and fill in the number of Storage Units`);
