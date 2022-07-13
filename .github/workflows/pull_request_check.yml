@@ -2,19 +2,30 @@ name: Run smoke tests and tests, included in PR
 
 on:
   pull_request:
-    types: [labeled, unlabeled]
+    types: [reopened]
 
 jobs:
   Run-smoke-tests:
     runs-on: ubuntu-latest
+    container: cypress/browsers:node16.13.2-chrome100-ff98
+    permissions:
+      id-token: write
+      contents: read
+    strategy:
+      fail-fast: false
+      matrix:
+        containers: [1, 2, 3, 4, 5, 6]
+        
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
+      - name: Run smoke end-to-end tests with Currents dev
+        uses: Bowery-RES/action-run-e2e-tests@latest
         with:
-          token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
-
-      - name: Run smoke tests action
-        uses: .github/workflows/smoke.yml
+          github_token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          spec_file: cypress/integration/**/**/*.spec.ts
+          tags: grep=,grepTags=@smoke,burn=
+          record_key: ${{ secrets.CURRENTS_RECORD_KEY }}
 
   Run-included-tests:
     runs-on: ubuntu-latest
