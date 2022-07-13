@@ -2,6 +2,7 @@ import { _NavigationSection } from '../../../../actions/base';
 import { createReport, deleteReport } from '../../../../actions/base/baseTest.actions';
 import { Report } from '../../../../actions';
 import testData from "../../../../fixtures/not_full_reports/report/appraiser/QA-5363-66.fixture";
+import { conditionalDescribe } from '../../../../../utils/env.utils';
 
 
 /**
@@ -11,7 +12,7 @@ import testData from "../../../../fixtures/not_full_reports/report/appraiser/QA-
  * + add `data-qa` attribute to "Add appraiser / inspector" btn in `appraiser.page.ts`
  */
 
-describe("Verify that 'Sign Report' checkbox for different user roles", 
+conditionalDescribe("Verify that 'Sign Report' checkbox for different user roles", 
     { tags:[ "@permissions_roles", "@report_status", "@report", "@appraiser" ] }, () => {
 
     before('Create a report', () => {
