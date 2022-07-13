@@ -13,7 +13,7 @@ describe("Verify the Comps can be added by entering the existing Report ID in th
 
     it("Test body", () => {
         NavigationSection.navigateToFindComps();
-        [ 0, 1, 2 ].forEach(() => {
+        fixture.compsNumber.forEach(() => {
             Sales.FindComps.selectCompFromMap();
         });
         
