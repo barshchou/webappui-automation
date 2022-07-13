@@ -183,12 +183,12 @@ class CommercialRentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
      * If there is no elements in a drop group we use default locator, in other case we use 1st row of a group.
      */
     dragCommercialUnitsIntoGroup(groupName: string, numberOfUnits = 1, index = 0): CommercialRentCompsActions {
-        let subject = rentCompsPage.getDragableElement(index); 
+        let subject = rentCompsPage.getDraggableElement(index); 
         let commercialUnit = cy.get(subject);
         let target: string;
 
         for (let i = 0; i < numberOfUnits; i++) {
-            target = i == 0 ? rentCompsPage.getDropableArea(groupName) : rentCompsPage.getDropableAreaDropped(groupName);
+            target = i == 0 ? rentCompsPage.getDroppableArea(groupName) : rentCompsPage.getDroppableAreaDropped(groupName);
             commercialUnit.dragAndDrop(subject, target);
         }
         return this;
