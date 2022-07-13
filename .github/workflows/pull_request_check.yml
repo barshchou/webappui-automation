@@ -69,6 +69,7 @@ jobs:
           git checkout ${{ github.sha }}
           CHANGED_SPECS=$(npx find-cypress-specs --branch master)
           echo ::set-output name=CHANGED_SPECS::$CHANGED_SPECS
+          git checkout ${{ github.head_ref }}
 
       - name: Run included specs
         uses: Bowery-RES/action-run-e2e-tests@latest
