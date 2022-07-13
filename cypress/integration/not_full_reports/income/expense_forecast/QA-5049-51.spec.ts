@@ -3,7 +3,7 @@ import { _NavigationSection } from "../../../../actions/base";
 import { Income, Property } from "../../../../actions";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 
-describe(`[QA-5049] [QA-5050] [QA-5051] [Income>Expense forecast] "Per Unit" + "Per SF" value is calculations + sliding bar view`,
+describe(`[QA-5049] [QA-5050] [QA-5051] [Income>Expense forecast] Custom card values calculations + card appearance`,
     { tags: [ "@snapshot_tests", "@income", "@expense_forecast" ] }, () => {
 
         before("Login, create report", () => {
@@ -19,7 +19,7 @@ describe(`[QA-5049] [QA-5050] [QA-5051] [Income>Expense forecast] "Per Unit" + "
 
             cy.stepInfo(`1. Go to Property > Summary, add residential units and Gross Building Area`);
             _NavigationSection.navigateToPropertySummary();
-            Property._Summary.enterNumberOfResUnits(testData.numberOfResidentialUnits)
+            Property._Summary.enterNumberOfResUnits(testData.buildingDescription.numberOfUnits)
                 .enterGrossBuildingArea(testData.buildingDescription.grossArea);
 
             cy.stepInfo(`2. Go to Expense Forecast and add new Expense Forecast with valid name`);
@@ -57,7 +57,7 @@ describe(`[QA-5049] [QA-5050] [QA-5051] [Income>Expense forecast] "Per Unit" + "
 
             cy.stepInfo(`1. Go to Property > Summary, add residential units and Gross Building Area`);
             _NavigationSection.navigateToPropertySummary();
-            Property._Summary.enterNumberOfResUnits(testData.numberOfResidentialUnits)
+            Property._Summary.enterNumberOfResUnits(testData.buildingDescription.numberOfUnits)
                 .enterGrossBuildingArea(testData.buildingDescription.grossArea);
 
             cy.stepInfo(`2. Switch basis in Custom Expense card`);
@@ -79,7 +79,7 @@ describe(`[QA-5049] [QA-5050] [QA-5051] [Income>Expense forecast] "Per Unit" + "
 
             cy.stepInfo(`5. Go to Property > Summary and add residential units equal 0`);
             _NavigationSection.navigateToPropertySummary();
-            Property._Summary.enterNumberOfResUnits(testData.numberOfResidentialUnits)
+            Property._Summary.enterNumberOfResUnits(testData.buildingDescription.numberOfUnits)
                 .enterGrossBuildingArea(testData.numberOfResidentialUnitsZero);
 
             cy.stepInfo(`6. Verify if selected Basis for Square Foot Analysis equal 0 -> expected result will be "Per Unit: $0.00"`);
@@ -112,29 +112,15 @@ describe(`[QA-5049] [QA-5050] [QA-5051] [Income>Expense forecast] "Per Unit" + "
 
             cy.stepInfo(`3. Verify Sliding bar graphic displays Appraiser's Forecast amount but it is always displayed in the left most position `);
             Income._ExpenseForecastActions.matchElementSnapshot(
-                Income._ExpenseForecastActions.Page.itemAppraisersForecastValueLine(testData.expenseForecastCustomFixture().name, true),
-                testData.slidingBarPerSFSnapshotName, { padding: [ 0, 20 ] }
+                Income._ExpenseForecastActions.Page.forecastItemCard(testData.expenseForecastCustomFixture().name, true),
+                testData.slidingBarPerSFSnapshotName, { padding: [ 50, 30 ] }
             );
             Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastCustomFixture('unit'), true);
             Income._ExpenseForecastActions.matchElementSnapshot(
-                Income._ExpenseForecastActions.Page.itemAppraisersForecastValueLine(testData.expenseForecastCustomFixture().name, true),
-                testData.slidingBarPerUnitSnapshotName, { padding: [ 0, 20 ] }
+                Income._ExpenseForecastActions.Page.forecastItemCard(testData.expenseForecastCustomFixture().name, true),
+                testData.slidingBarPerUnitSnapshotName, { padding: [ 50, 30 ] }
             );
-        });
 
-        it(`[QA-5052] Appraiser's Forecast of Custom Expense Forecast is included in Total Operating Expenses calculation`, () => {
-
-            cy.stepInfo(`1. Verify forecasted amount of custom expense  is added to the calculation of Total Operating Expenses = 
-            sum of all selected existing expense expenses + sum of all custom expenses`);
-         
-
-            cy.stepInfo(`2. Verify if Generated Commentary on  Total Operating Expenses card is generated correctly`);
-           
-
-            cy.stepInfo(`3. Verify if Sliding bar graphic  on  Total Operating Expenses card is displayed correctly`);
-           
-            
-
-            //deleteReport(testData.reportCreationData.reportNumber);
+            deleteReport(testData.reportCreationData.reportNumber);
         });
     });

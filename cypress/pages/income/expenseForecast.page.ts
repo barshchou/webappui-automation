@@ -13,7 +13,10 @@ class ExpenseForecastPage extends BasePage {
 
     get repairsAndMaintenanceCard() { return cy.get("[data-qa=repairsMaintenance-forecast-item] > div").last(); }
 
-    forecastItemCard(forecastItem: string) { return cy.get(`[data-qa=${forecastItem}-forecast-item] > div`).last(); }
+    forecastItemCard(item: string, custom = false) { 
+        return !custom ? cy.get(`[data-qa=${item}-forecast-item] > div`).last() :
+        cy.get(`[data-qa=${Cypress._.camelCase(Cypress._.toLower(Cypress._.replace(item, "&", "And")))}-forecast-item] > div`).eq(1);
+    }
 
     forecastItemCardFull(forecastItem: string, custom = false) {
         return !custom ? cy.get(`[data-qa=${forecastItem}-forecast-item]`) :
@@ -24,7 +27,7 @@ class ExpenseForecastPage extends BasePage {
 
     get toeCard() { return cy.xpath("//*[.='TOTAL OPERATING EXPENSES ($/SF)']/parent::div").first(); }
 
-    getForecastItemBasisRadio(item) { return cy.get(`[name='${item}.basis']`); }
+    getForecastItemBasisRadio(item: string) { return cy.get(`[name='${item}.basis']`); }
 
     getForecastItemCheckedBasisRadio(custom = false, index = 0, forecastItem?: string) {
         return !custom ? cy.get(`[data-qa="checked"][name='${forecastItem}.basis']`) :

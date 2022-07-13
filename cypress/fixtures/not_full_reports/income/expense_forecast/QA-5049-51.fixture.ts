@@ -4,7 +4,7 @@ import { BoweryAutomation } from "../../../../types/boweryAutomation.type";
 import { BoweryReports } from "../../../../types/boweryReports.type";
 import { numberWithCommas } from "../../../../../utils/numbers.utils";
 
-const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("5049-50", {
+const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("5049-51", {
     incomeValue: Enums.INCOME_TYPE.both,
     conclusionValue: Enums.VALUE_CONCLUSION_TYPE.AS_COMPLETE
 });
@@ -35,7 +35,6 @@ const expenseForecastCustomFixture = (_basis?: string): BoweryReports.ForecastIt
 };
 
 const basis = "unit";
-const numberOfResidentialUnits = 3;
 const numberOfResidentialUnitsZero = 0;
 const perUnitValueTextNaN = '$NaN';
 const perSFValueTextNaN = '$0.00';
@@ -47,11 +46,9 @@ const slidingBarPerSFSnapshotName = 'slidingBarPerSFSnapshotName';
 const slidingBarPerUnitSnapshotName = 'slidingBarPerUnitSnapshotName';
 
 
-
 export default {
     reportCreationData: _reportCreationData,
     buildingDescription: _buildingDescription,
-    numberOfResidentialUnits,
     expenseForecastCustomFixture,
     basis,
     perUnitFieldValue,
@@ -64,5 +61,5 @@ export default {
     perUnitSlidingBarTitleNameCustom,
     perSFSlidingBarTitleNameCustom,
     slidingBarPerSFSnapshotName,
-    slidingBarPerUnitSnapshotName
+    slidingBarPerUnitSnapshotName,
 };
