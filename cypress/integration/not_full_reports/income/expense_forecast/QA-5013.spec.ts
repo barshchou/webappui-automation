@@ -17,7 +17,7 @@ describe(`[QA-5013] [Income>Expense forecast] Selected expense card is displayed
             cy.restoreLocalStorage();
         });
 
-        it("Precondition", function () {
+        it("Precondition", () => {
 
             cy.stepInfo(`1. Go to Property > Summary and add residential and commertial units`);
             _NavigationSection.navigateToPropertySummary();
@@ -32,7 +32,7 @@ describe(`[QA-5013] [Income>Expense forecast] Selected expense card is displayed
         });
 
         it(`Verify if “Include Expense on Pro Forma” is selected -> this  expense category 
-            is displayed in the Pro Forma page > Operating Expenses section (PSF measure + Empty Appraiser's forecasts)`, function () {
+            is displayed in the Pro Forma page > Operating Expenses section (PSF measure + Empty Appraiser's forecasts)`, () => {
 
             _NavigationSection.navigateToExpenseForecast();
             expensesCardsNames.expenseCardsIncludeInProFormaCheckboxArray.forEach(element => {
@@ -46,7 +46,7 @@ describe(`[QA-5013] [Income>Expense forecast] Selected expense card is displayed
 
         it(`Verify if “Include Expense on Pro Forma” is selected -> this  expense category 
             is displayed in the Expense Forecast page > Total operating expenses card (TOE card basis = Per SF)
-            and generated comment (PSF measure + Empty Appraiser's forecasts)`, function () {
+            and generated comment (PSF measure + Empty Appraiser's forecasts)`, () => {
 
             _NavigationSection.navigateToExpenseForecast();
             testData.verifyTOECommentGenerated(testData.buildingDescription.grossArea,
@@ -60,7 +60,7 @@ describe(`[QA-5013] [Income>Expense forecast] Selected expense card is displayed
 
         it(`Verify if “Include Expense on Pro Forma” is selected -> this  expense category 
             is displayed in the Expense Forecast page > Total operating expenses card (TOE card basis = Per Unit)
-            and generated comment (PSF measure + Empty Appraiser's forecasts)`, function () {
+            and generated comment (PSF measure + Empty Appraiser's forecasts)`, () => {
 
             Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastTotalFixture('unit'));
             testData.verifyTOECommentGenerated(testData.buildingDescription.grossArea,
@@ -73,7 +73,7 @@ describe(`[QA-5013] [Income>Expense forecast] Selected expense card is displayed
         });
 
         it(`Verify if “Include Expense on Pro Forma” is selected -> this  expense category 
-            is displayed in the Pro Forma page > Operating Expenses section (Per Unit measure + Empty Appraiser's forecasts)`, function () {
+            is displayed in the Pro Forma page > Operating Expenses section (Per Unit measure + Empty Appraiser's forecasts)`, () => {
 
             testData.expenseForecastFixtureArray('unit').forEach(element => {
                 Income._ExpenseForecastActions.chooseForecastItemBasis(element);
@@ -86,7 +86,7 @@ describe(`[QA-5013] [Income>Expense forecast] Selected expense card is displayed
 
         it(`Verify if “Include Expense on Pro Forma” is selected -> this  expense category 
             is displayed in the Expense Forecast page > Total operating expenses card (TOE card basis = Per SF) 
-            and generated comment (Per Unit measure + Empty Appraiser's forecasts)`, function () {
+            and generated comment (Per Unit measure + Empty Appraiser's forecasts)`, () => {
 
             _NavigationSection.navigateToExpenseForecast();
             testData.verifyTOECommentGenerated(testData.buildingDescription.grossArea,
@@ -100,7 +100,7 @@ describe(`[QA-5013] [Income>Expense forecast] Selected expense card is displayed
 
         it(`Verify if “Include Expense on Pro Forma” is selected -> this  expense category 
             is displayed in the Expense Forecast page > Total operating expenses card (TOE card basis = Per Unit) 
-            and generated comment (Per Unit measure + Empty Appraiser's forecasts)`, function () {
+            and generated comment (Per Unit measure + Empty Appraiser's forecasts)`, () => {
 
             Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastTotalFixture('unit'));
             testData.verifyTOECommentGenerated(testData.buildingDescription.grossArea,
@@ -114,7 +114,7 @@ describe(`[QA-5013] [Income>Expense forecast] Selected expense card is displayed
 
         it(`Verify if “Include Expense on Pro Forma” is selected -> this  expense category 
             is displayed in the Pro Forma page > Operating Expenses section 
-            (Per Room measure for Fuel + Empty Appraiser's forecasts)`, function () {
+            (Per Room measure for Fuel + Empty Appraiser's forecasts)`, () => {
 
             // TODO: Uncomment this code + code below, after bug fix https://bowery.atlassian.net/browse/WEB-5881
             //
@@ -127,8 +127,9 @@ describe(`[QA-5013] [Income>Expense forecast] Selected expense card is displayed
 
         it(`Verify if “Include Expense on Pro Forma” is selected -> this  expense category 
             is displayed in the Expense Forecast page > Total operating expenses card (TOE card basis = Per SF) 
-            and generated comment (Per Room measure for Fuel + Empty Appraiser's forecasts)`, function () {
-
+            and generated comment (Per Room measure for Fuel + Empty Appraiser's forecasts)`, () => {
+            // TODO: Uncomment this code + code below, after bug fix https://bowery.atlassian.net/browse/WEB-5881
+            //
             // _NavigationSection.navigateToExpenseForecast();
             // testData.verifyTOECommentGenerated(testData.buildingDescription.grossArea,
             //     testData.numberOfResidentialUnits,
@@ -141,8 +142,9 @@ describe(`[QA-5013] [Income>Expense forecast] Selected expense card is displayed
 
         it(`Verify if “Include Expense on Pro Forma” is selected -> this  expense category 
             is displayed in the Expense Forecast page > Total operating expenses card (TOE card basis = Per Unit) 
-            and generated comment (Per Room measure for Fuel + Empty Appraiser's forecasts)`, function () {
-
+            and generated comment (Per Room measure for Fuel + Empty Appraiser's forecasts)`, () => {
+            // TODO: Uncomment this code + code below, after bug fix https://bowery.atlassian.net/browse/WEB-5881
+            //
             // Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastTotalFixture('unit'));
             // testData.verifyTOECommentGenerated(testData.buildingDescription.grossArea,
             //     testData.numberOfResidentialUnits,
@@ -154,7 +156,7 @@ describe(`[QA-5013] [Income>Expense forecast] Selected expense card is displayed
         });
 
         it(`Verify if “Include Expense on Pro Forma” is selected -> this  expense category 
-            is displayed in the Pro Forma page > Operating Expenses section (Per Room measure for Fuel + Full Appraiser's forecasts)`, function () {
+            is displayed in the Pro Forma page > Operating Expenses section (Per Room measure for Fuel + Full Appraiser's forecasts)`, () => {
 
             testData.expenseForecastFixtureArray().forEach(element => {
                 Income._ExpenseForecastActions.enterForecastItemForecast(element);
@@ -167,7 +169,7 @@ describe(`[QA-5013] [Income>Expense forecast] Selected expense card is displayed
 
         it(`Verify if “Include Expense on Pro Forma” is selected -> this  expense category 
             is displayed in the Expense Forecast page > Total operating expenses card (TOE card basis = Per SF) 
-            and generated comment (Per Room measure for Fuel + Full Appraiser's forecasts)`, function () {
+            and generated comment (Per Room measure for Fuel + Full Appraiser's forecasts)`, () => {
 
             _NavigationSection.navigateToExpenseForecast();
             testData.verifyTOECommentGenerated(testData.buildingDescription.grossArea,
@@ -181,7 +183,7 @@ describe(`[QA-5013] [Income>Expense forecast] Selected expense card is displayed
 
         it(`Verify if “Include Expense on Pro Forma” is selected -> this  expense category 
             is displayed in the Expense Forecast page > Total operating expenses card (TOE card basis = Per Unit) 
-            and generated comment (Per Room measure for Fuel + Full Appraiser's forecasts)`, function () {
+            and generated comment (Per Room measure for Fuel + Full Appraiser's forecasts)`, () => {
 
             Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastTotalFixture('unit'));
             testData.verifyTOECommentGenerated(testData.buildingDescription.grossArea,
@@ -194,7 +196,7 @@ describe(`[QA-5013] [Income>Expense forecast] Selected expense card is displayed
         });
 
         it(`Verify if “Include Expense on Pro Forma” is selected -> this  expense category 
-            is displayed in the Pro Forma page > Operating Expenses section (PSF measure + Full Appraiser's forecasts)`, function () {
+            is displayed in the Pro Forma page > Operating Expenses section (PSF measure + Full Appraiser's forecasts)`, () => {
 
             testData.expenseForecastFixtureArray("sf").forEach(element => {
                 Income._ExpenseForecastActions.chooseForecastItemBasis(element);
@@ -207,7 +209,7 @@ describe(`[QA-5013] [Income>Expense forecast] Selected expense card is displayed
 
         it(`Verify if “Include Expense on Pro Forma” is selected -> this  expense category 
             is displayed in the Expense Forecast page > Total operating expenses card (TOE card basis = Per SF) 
-            and generated comment (PSF measure + Full Appraiser's forecasts)`, function () {
+            and generated comment (PSF measure + Full Appraiser's forecasts)`, () => {
 
             _NavigationSection.navigateToExpenseForecast();
             testData.verifyTOECommentGenerated(testData.buildingDescription.grossArea,
@@ -221,7 +223,7 @@ describe(`[QA-5013] [Income>Expense forecast] Selected expense card is displayed
 
         it(`Verify if “Include Expense on Pro Forma” is selected -> this  expense category 
             is displayed in the Expense Forecast page > Total operating expenses card (TOE card basis = Per Unit) 
-            and generated comment (PSF measure + Full Appraiser's forecasts)`, function () {
+            and generated comment (PSF measure + Full Appraiser's forecasts)`, () => {
 
             Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastTotalFixture('unit'));
             testData.verifyTOECommentGenerated(testData.buildingDescription.grossArea,
@@ -234,7 +236,7 @@ describe(`[QA-5013] [Income>Expense forecast] Selected expense card is displayed
         });
 
         it(`Verify if “Include Expense on Pro Forma” is selected -> this  expense category 
-            is displayed in the Pro Forma page > Operating Expenses section (Per Unit measure + Full Appraiser's forecasts)`, function () {
+            is displayed in the Pro Forma page > Operating Expenses section (Per Unit measure + Full Appraiser's forecasts)`, () => {
 
             testData.expenseForecastFixtureArray("unit").forEach(element => {
                 Income._ExpenseForecastActions.chooseForecastItemBasis(element);
@@ -247,7 +249,7 @@ describe(`[QA-5013] [Income>Expense forecast] Selected expense card is displayed
 
         it(`Verify if “Include Expense on Pro Forma” is selected -> this  expense category 
             is displayed in the Expense Forecast page > Total operating expenses card (TOE card basis = Per SF) 
-            and generated comment (Per Unit measure + Full Appraiser's forecasts)`, function () {
+            and generated comment (Per Unit measure + Full Appraiser's forecasts)`, () => {
 
             _NavigationSection.navigateToExpenseForecast();
             testData.verifyTOECommentGenerated(testData.buildingDescription.grossArea,
@@ -261,7 +263,7 @@ describe(`[QA-5013] [Income>Expense forecast] Selected expense card is displayed
 
         it(`Verify if “Include Expense on Pro Forma” is selected -> this  expense category 
             is displayed in the Expense Forecast page > Total operating expenses card (TOE card basis = Per Unit) 
-            and generated comment (Per Unit measure + Full Appraiser's forecasts)`, function () {
+            and generated comment (Per Unit measure + Full Appraiser's forecasts)`, () => {
 
             Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastTotalFixture('unit'));
             testData.verifyTOECommentGenerated(testData.buildingDescription.grossArea,
