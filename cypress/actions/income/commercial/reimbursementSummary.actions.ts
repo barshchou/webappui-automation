@@ -97,7 +97,7 @@ class ReimbursementSummaryActions extends BaseActionsExt<typeof reimbursementSum
      * @returns ReimbursementSummaryActions
      */
     verifyAppraiserForecastGrossByExpenseType(expenseUIName: string, expectedForecastGross: number, unitsAmount = 1): ReimbursementSummaryActions {
-        for (let index = 1; index <= unitsAmount; index++) {
+        for (let index = 0; index < unitsAmount; index++) {
             this.verifyAppraiserForecastGrossByRow(expenseUIName, index, expectedForecastGross);
         }
         return this;
@@ -106,16 +106,16 @@ class ReimbursementSummaryActions extends BaseActionsExt<typeof reimbursementSum
     /**
      * Verifies Annual Reimbursement for provided commercial unit in table
      * @param  {string} expenseUIName Expense UI name e.g. "Water & Sewer"
-     * @param  {number} unitRow Commercial unit row
+     * @param  {number} unitIndex Commercial unit row
      * @param  {BoweryReports.ReimbursementType} reimbursementType Based on Reimbursement type table will change, either adds or removes
      * columns -> Need for computation proper table column id value.
      * @param  {BoweryReports.KnownInformation} knownInformation Part of the inputs locator
      * @param  {number} expectedAnnualReimbursement Calculated value to validate against UI
      * @returns ReimbursementSummaryActions
      */
-    verifyAnnualReimbursementByRow(expenseUIName: string, unitRow: number, reimbursementType: BoweryReports.ReimbursementType, 
+    verifyAnnualReimbursementByRow(expenseUIName: string, unitIndex: number, reimbursementType: BoweryReports.ReimbursementType, 
         knownInformation: BoweryReports.KnownInformation, expectedAnnualReimbursement: number): ReimbursementSummaryActions {
-        reimbursementSummary.getAnnualReimbursement(expenseUIName, unitRow, reimbursementType, knownInformation)
+        reimbursementSummary.getAnnualReimbursement(expenseUIName, unitIndex, reimbursementType, knownInformation)
             .should('have.text', `$${numberWithCommas(expectedAnnualReimbursement.toFixed(2))}`);
         return this;
     }
@@ -135,14 +135,14 @@ class ReimbursementSummaryActions extends BaseActionsExt<typeof reimbursementSum
      */
     verifyAnnualReimbursementByExpenseType(expenseUIName: string, reimbursementType: BoweryReports.ReimbursementType, 
         knownInformation: BoweryReports.KnownInformation, columnsId: BoweryReports.ReimbursementColumnsId, 
-        unitsAmount = 1, reimbursementIndex = 0): ReimbursementSummaryActions {
-        for (let row = 1; row <= unitsAmount; row++) {
+        unitsAmount = 0, reimbursementIndex = 0): ReimbursementSummaryActions {
+        for (let unitIndex = 0; unitIndex < unitsAmount; unitIndex++) {
             let expectedAnnualReimbursement: number;
-            reimbursementSummary.getAppraiserForecastGross(expenseUIName, row).invoke('text').then(gross => {
+            reimbursementSummary.getAppraiserForecastGross(expenseUIName, unitIndex).invoke('text').then(gross => {
                 let grossValue = getNumberFromDollarNumberWithCommas(gross);
-                reimbursementSummary.getReimbursementByRow(row - 1, columnsId, reimbursementIndex).invoke('attr', 'value').then(percentOfTotal => {
+                reimbursementSummary.getReimbursementByRow(unitIndex, columnsId, reimbursementIndex).invoke('attr', 'value').then(percentOfTotal => {
                     expectedAnnualReimbursement = Number(Math.round(grossValue * (Number(percentOfTotal))) / 100);
-                    this.verifyAnnualReimbursementByRow(expenseUIName, row, reimbursementType, knownInformation, expectedAnnualReimbursement);
+                    this.verifyAnnualReimbursementByRow(expenseUIName, unitIndex, reimbursementType, knownInformation, expectedAnnualReimbursement);
                 });
             });
         }
