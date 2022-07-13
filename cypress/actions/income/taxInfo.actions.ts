@@ -348,13 +348,18 @@ class TaxInfoActions extends BaseActionsExt<typeof taxInfoPage> {
         return this;
     }
 
-    verifyRowTaxLiability(name: string): TaxInfoActions {
-        taxInfoPage.getTaxLiabilityRowValue(name).should("exist");
+    verifyRowTaxLiability(name: string, rowNumber = 0): TaxInfoActions {
+        taxInfoPage.getTaxLiabilityRowValue(name).eq(rowNumber).should("exist");
         return this;
     }
     
-    enterRowTaxLiabilityName(rowName: string, enterName: string): TaxInfoActions {
-        taxInfoPage.getTaxLiabilityRowItem(rowName).type(`${enterName}{enter}`).should("have.text", enterName);
+    enterRowTaxLiabilityItem(rowName: string, enterName: string, rowNumber = 0): TaxInfoActions {
+        taxInfoPage.getTaxLiabilityRowItem(rowName).eq(rowNumber).type(`${enterName}{enter}`).should("have.text", enterName);
+        return this;
+    }
+
+    enterRowTaxLiabilityValue(rowName: string, enterName: string, rowNumber = 0): TaxInfoActions {
+        taxInfoPage.getTaxLiabilityRowItem(rowName).eq(rowNumber).type(`${enterName}{enter}`).should("have.text", enterName);
         return this;
     }
 }

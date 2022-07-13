@@ -1,4 +1,4 @@
-import testData from "../../../../fixtures/not_full_reports/income/tax_info/QA-5519-20.fixture";
+import testData from "../../../../fixtures/not_full_reports/income/tax_info/QA-5519-21.fixture";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { Income } from '../../../../actions/index';
@@ -16,13 +16,15 @@ describe("[QA-5183] Export column order both assessment psf and assessment per u
         cy.stepInfo("2. Navigate to Income -> Tax Info");
         _NavigationSection.navigateToTaxInfo();
 
-        cy.stepInfo("3. Click Add button on the Taxable Assessed Value card");
+        cy.stepInfo("3. Click Add button on the Taxable Assessed Value card and verify added rows");
         Income._TaxInfo.clickAddNewRowButton()
             .clickAddNewRowButton(testData.buttonName)
             .verifyRowTaxLiability(testData.rowNames.additional)
-            .verifyRowTaxLiability(testData.rowNames.special)
-            .enterRowTaxLiabilityName(testData.rowNames.additional, testData.enterName)
-            .enterRowTaxLiabilityName(testData.rowNames.special, testData.enterName);
+            .verifyRowTaxLiability(testData.rowNames.special);
+
+        cy.stepInfo("4. Enter new name in added rows");
+        Income._TaxInfo.enterRowTaxLiabilityItem(testData.rowNames.additional, testData.enterName)
+            .enterRowTaxLiabilityItem(testData.rowNames.special, testData.enterName);
 
         deleteReport(testData.reportCreationData.reportNumber);
     });
