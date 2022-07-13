@@ -4,6 +4,8 @@ import {
     numberWithCommas
 } from "../../../utils/numbers.utils";
 import BaseActionsExt from "../base/base.actions.ext";
+import { Alias } from "../../utils/alias.utils";
+import { _map } from "../../support/commands";
 
 class AdjustCompsActions extends BaseActionsExt<typeof adjustCompsPage> {
 
@@ -113,12 +115,12 @@ class AdjustCompsActions extends BaseActionsExt<typeof adjustCompsPage> {
     }
 
     verifyTrendedPriceByColumn(value: string, index = 0): AdjustCompsActions {
-        adjustCompsPage.cumulativePriceCells.eq(index).should("have.text", value);
+        adjustCompsPage.cellCumulativePriceValue.eq(index).should("have.text", value);
         return this;
     }
 
     verifyAdjustedPriceByColumn(index = 0): AdjustCompsActions {
-        adjustCompsPage.cumulativePriceCells.eq(index).invoke("text").then(trendedText => {
+        adjustCompsPage.cellCumulativePriceValue.eq(index).invoke("text").then(trendedText => {
             const trendedNumber = getNumberFromDollarNumberWithCommas(trendedText);
             adjustCompsPage.netPropertyAdjustmentsCells.eq(index).invoke("text").then(netAdjText => {
                 const netAdjNumber = Number(netAdjText.replace("%", ""));
@@ -157,8 +159,8 @@ class AdjustCompsActions extends BaseActionsExt<typeof adjustCompsPage> {
              } else {
                  adjustedTrendedPriceText = `$${numberWithCommas(pricePerBasisNumber.toFixed(2))}`;
              }
-             adjustCompsPage.cumulativePriceCells.eq(index).should("have.text", adjustedTrendedPriceText);
-           
+             cy.log("Cumulative Price Per Unit is: "+adjustedTrendedPriceText);
+             adjustCompsPage.cellCumulativePriceValue.eq(index).should("have.text", adjustedTrendedPriceText);
         });
             
         return this;

@@ -12,9 +12,17 @@ const _compAdjustments = {
     marketConditions: -30,
 };
 
+const _cumulativePricePerUnit = "$237,997";
+
 export default {
     reportCreationData: _reportCreationData,
     comparablesAdjustments: _compAdjustments,
     calculationUnits: "Per Residential Units",
-    basis: "Price per Unit"
+    basis: "Price per Unit",
+    /**
+     * This value we calculate during first test case, 
+     * but we can't share with second test case (where we validate export).
+     * So that's why we have to "hardcoded" it.
+     */
+    cumulativePricePerUnit:_cumulativePricePerUnit
 };

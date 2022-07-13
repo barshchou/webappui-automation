@@ -33,8 +33,12 @@ class AdjustCompsPage extends BasePage {
 
     getMarketAdjustmentsRowCells(marketAdjName: string) {return cy.get(`[name*='adjustments.${marketAdjName}']`);}
 
-    get cumulativePriceCells() {return cy.xpath("//*[starts-with(., 'Cumulative Price')]//following-sibling::td");}
+    get cellCumulativePriceValue() {return cy.xpath("//*[starts-with(., 'Cumulative Price')]//following-sibling::td");}
 
+    get cellCumulativePriceName(){
+        return cy.contains("Cumulative Price Per Unit");
+    }
+    
     get adjustedPriceCells() {return cy.xpath("//*[starts-with(., 'Adjusted Price')]//following-sibling::td");}
 
     get netPropertyAdjustmentsCells() {return cy.xpath("//td[.='Net Property Adjustments']//following-sibling::td");}
