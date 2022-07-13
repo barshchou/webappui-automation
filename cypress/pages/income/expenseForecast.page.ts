@@ -48,6 +48,11 @@ class ExpenseForecastPage extends BasePage {
             cy.get(`[data-qa=${Cypress._.camelCase(Cypress._.toLower(Cypress._.replace(item, "&", "And")))}-forecast-item] [data-qa=basis]`);
     }
 
+    getForecastItemSlidingBarTitle(item: string, custom = false) {
+        return !custom ? cy.get(`[data-qa=${item}-forecast-item] h6[class]`) :
+            cy.get(`[data-qa=${Cypress._.camelCase(Cypress._.toLower(Cypress._.replace(item, "&", "And")))}-forecast-item] [data-qa=basis]`);
+    }
+
     getForecastItemProjectionByType(item: string, type: string) { return cy.contains(`[data-qa=${item}-forecast-item] [data-qa$=historical]`, type); }
 
     getExpenseCommentary(forecastItem: string, index = 1) { return cy.xpath(`//*[@data-qa="${forecastItem}-forecast-item"]//following::div[@data-slate-editor][${index}]`); }

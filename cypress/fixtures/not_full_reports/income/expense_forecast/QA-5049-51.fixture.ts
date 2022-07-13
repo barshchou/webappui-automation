@@ -19,6 +19,10 @@ const numberOfResidentialUnits = 3;
 const numberOfResidentialUnitsZero = 0;
 const perUnitValueTextNaN = '$NaN';
 const perSFValueTextNaN = '$0.00';
+const perUnitSlidingBarBasis = '($/UNIT)';
+const perSFSlidingBarBasis = '($/SF)';
+
+
 
 const perUnitFieldValue = () => {
     let perUnitValue = numberWithCommas(Math.round(_buildingDescription.grossArea * expenseForecastCustomFixture(basis).forecast / _buildingDescription.numberOfUnits));
@@ -50,5 +54,7 @@ export default {
     perSFFieldValue,
     numberOfResidentialUnitsZero,
     perUnitValueTextNaN,
-    perSFValueTextNaN
+    perSFValueTextNaN,
+    perUnitSlidingBarBasis,
+    perSFSlidingBarBasis
 };

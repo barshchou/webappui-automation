@@ -1,4 +1,4 @@
-import testData from "../../../../fixtures/not_full_reports/income/expense_forecast/QA-5049.fixture";
+import testData from "../../../../fixtures/not_full_reports/income/expense_forecast/QA-5049-51.fixture";
 import { _NavigationSection } from "../../../../actions/base";
 import { Income, Property } from "../../../../actions";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
@@ -89,7 +89,30 @@ describe(`[QA-5049] [QA-5050] [Income>Expense forecast] "Per Unit" + "Per SF" va
                 expect(text).contain('Per SF')
                     .contain(testData.perSFValueTextNaN);
             });
+        });
 
-            deleteReport(testData.reportCreationData.reportNumber);
+
+        it(`[QA-5051] Sliding bar graphic displays Appraiser's Forecast`, () => {
+
+            cy.stepInfo(`1. Verify if Per Unit radiobutton is selected-> Title of Sliding Bar Graphic is #Category Name ($/UNIT)`);
+            Income._ExpenseForecastActions.Page.getForecastItemCheckedBasisRadio(true, 0).invoke("attr", "value").then(value => {
+                expect(value).to.be.equal('unit');
+            });
+            
+
+          
+            cy.stepInfo(`2. Verify if Per SF radiobutton is selected-> Title of Sliding Bar Graphic is #Category Name ($/SF)`);
+            Income._ExpenseForecastActions.Page.getForecastItemCheckedBasisRadio(true, 0).invoke("attr", "value").then(value => {
+                expect(value).to.be.equal('sf');
+            });
+
+
+            
+
+
+            cy.stepInfo(`3. Verify Sliding bar graphic displays Appraiser's Forecast amount but it is always displayed in the left most position `);
+
+
+            //deleteReport(testData.reportCreationData.reportNumber);
         });
     });
