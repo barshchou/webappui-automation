@@ -27,10 +27,13 @@ describe("Verify the report export with a prefilled Letter of Engagement from Dr
         Cypress.config().baseUrl = null;
         cy.task("getFilePath", { _reportName: testData.reportCreationData.reportNumber, _docx_html: "html" }).then(file => {
             cy.log(<string>file);
-            cy.stepInfo(`4. proceed to the Addenda > Letter of Engagement section.
+            cy.stepInfo(`4. Proceed to the Addenda > Letter of Engagement section.
                 Verify the correct Letter Of Engagement is displayed.`);
             cy.visit(<string>file);
-            cy.contains("Current Commercial Rent Roll").next().scrollIntoView();
+            testData.LOESourceStrings.forEach((sourceString, index) => {
+                cy.contains("Letter of Engagement").nextUntil("h2").eq(index).children()
+                    .should("have.attr", "src").and("include", sourceString);
+            });
         });
     });
 });
