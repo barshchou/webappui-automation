@@ -9,10 +9,12 @@ class AppraiserActions extends BaseActionsExt<typeof appraiserPage> {
         return this;
     }
 
-    searchAppraiser(appraiserName: string): AppraiserActions {
+    searchAndAddAppraiser(appraiserName: string): AppraiserActions {
+        cy.contains("Add appraiser / inspector").click();
         appraiserPage.searchAppraiserTextField.clear()
-            .type(appraiserName).should('have.value', appraiserName)
-            .type('{enter}');
+            .type(appraiserName).should('have.value', appraiserName);
+        cy.get('[data-option-index="0"]').should("be.visible").click();
+        appraiserPage.formAddButton().click();
         return this;
     }
 
