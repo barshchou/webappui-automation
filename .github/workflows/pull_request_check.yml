@@ -42,6 +42,7 @@ jobs:
           spec_file: cypress/integration/**/**/*.spec.ts
           tags: grep=,grepTags=@smoke,burn=
           record_key: ${{ secrets.CURRENTS_RECORD_KEY }}
+          ref: ${{ github.head_ref }}
 
   Run-included-tests:
     needs: Run-tsc-check
@@ -78,3 +79,4 @@ jobs:
           spec_file: ${{ steps.define_specs.outputs.CHANGED_SPECS }}
           record_key: ${{ secrets.CURRENTS_RECORD_KEY }}
           tags: grep=,grepTags=,burn=
+          ref: ${{ github.head_ref }}
