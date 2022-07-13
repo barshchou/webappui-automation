@@ -14,16 +14,6 @@ const _buildingDescription: BoweryReports.BuildingDescription = {
     numberOfUnits: 3,
 };
 
-const basis = "unit";
-const numberOfResidentialUnits = 3;
-const numberOfResidentialUnitsZero = 0;
-const perUnitValueTextNaN = '$NaN';
-const perSFValueTextNaN = '$0.00';
-const perUnitSlidingBarBasis = '($/UNIT)';
-const perSFSlidingBarBasis = '($/SF)';
-
-
-
 const perUnitFieldValue = () => {
     let perUnitValue = numberWithCommas(Math.round(_buildingDescription.grossArea * expenseForecastCustomFixture(basis).forecast / _buildingDescription.numberOfUnits));
     let perUnitValueText = `$${perUnitValue}`;
@@ -36,13 +26,27 @@ const perSFFieldValue = () => {
     return perSFValueText;
 };
 
-const expenseForecastCustomFixture = (_basis: string): BoweryReports.ForecastItem => {
+const expenseForecastCustomFixture = (_basis?: string): BoweryReports.ForecastItem => {
     return {
         name: "Custom Category",
         basis: _basis as BoweryReports.UnitSF,
         forecast: 213.19
     };
 };
+
+const basis = "unit";
+const numberOfResidentialUnits = 3;
+const numberOfResidentialUnitsZero = 0;
+const perUnitValueTextNaN = '$NaN';
+const perSFValueTextNaN = '$0.00';
+const perUnitSlidingBarBasis = '($/UNIT)';
+const perSFSlidingBarBasis = '($/SF)';
+const perUnitSlidingBarTitleNameCustom = `${Cypress._.toUpper(expenseForecastCustomFixture(basis).name)}` + ' ' + perUnitSlidingBarBasis;
+const perSFSlidingBarTitleNameCustom = `${Cypress._.toUpper(expenseForecastCustomFixture(basis).name)}` + ' ' + perSFSlidingBarBasis;
+const slidingBarPerSFSnapshotName = 'slidingBarPerSFSnapshotName';
+const slidingBarPerUnitSnapshotName = 'slidingBarPerUnitSnapshotName';
+
+
 
 export default {
     reportCreationData: _reportCreationData,
@@ -56,5 +60,9 @@ export default {
     perUnitValueTextNaN,
     perSFValueTextNaN,
     perUnitSlidingBarBasis,
-    perSFSlidingBarBasis
+    perSFSlidingBarBasis,
+    perUnitSlidingBarTitleNameCustom,
+    perSFSlidingBarTitleNameCustom,
+    slidingBarPerSFSnapshotName,
+    slidingBarPerUnitSnapshotName
 };

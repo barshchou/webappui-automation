@@ -3,8 +3,8 @@ import { _NavigationSection } from "../../../../actions/base";
 import { Income, Property } from "../../../../actions";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 
-describe(`[QA-5049] [QA-5050] [Income>Expense forecast] "Per Unit" + "Per SF" value is calculated correct depends on what radiobutton is selected`,
-    { tags: [ "@income", "@expense_forecast" ] }, () => {
+describe(`[QA-5049] [QA-5050] [QA-5051] [Income>Expense forecast] "Per Unit" + "Per SF" value is calculations + sliding bar view`,
+    { tags: [ "@snapshot_tests", "@income", "@expense_forecast" ] }, () => {
 
         before("Login, create report", () => {
             createReport(testData.reportCreationData);
@@ -24,7 +24,7 @@ describe(`[QA-5049] [QA-5050] [Income>Expense forecast] "Per Unit" + "Per SF" va
 
             cy.stepInfo(`2. Go to Expense Forecast and add new Expense Forecast with valid name`);
             _NavigationSection.navigateToExpenseForecast();
-            Income._ExpenseForecastActions.addCustomExpenseCategory(testData.expenseForecastCustomFixture(testData.basis).name);
+            Income._ExpenseForecastActions.addCustomExpenseCategory(testData.expenseForecastCustomFixture().name);
 
             cy.stepInfo(`3. Make sure that Per SF radiobutton is selected for Custom Expense card`);
             Income._ExpenseForecastActions.Page.getForecastItemCheckedBasisRadio(true, 0).invoke("attr", "value").then(value => {
@@ -32,11 +32,11 @@ describe(`[QA-5049] [QA-5050] [Income>Expense forecast] "Per Unit" + "Per SF" va
             });
 
             cy.stepInfo(`4. Fill in Appraiser's Forecast field for Custom Expense card`);
-            Income._ExpenseForecastActions.enterForecastItemForecast(testData.expenseForecastCustomFixture(testData.basis), true, 0);
+            Income._ExpenseForecastActions.enterForecastItemForecast(testData.expenseForecastCustomFixture(), true, 0);
 
             cy.stepInfo(`5. Verify that Per Unit value below this field is calculated as: 
                             Per Unit Appraiser’s Forecast * selected Basis for Square Foot Analysis /  # of Resi Units `);
-            Income._ExpenseForecastActions.Page.getForecastItemBasisMoneyValue(testData.expenseForecastCustomFixture(testData.basis).name, true).invoke("text").then(text => {
+            Income._ExpenseForecastActions.Page.getForecastItemBasisMoneyValue(testData.expenseForecastCustomFixture().name, true).invoke("text").then(text => {
                 expect(text).contain('Per Unit')
                     .contain(testData.perUnitFieldValue());
             });
@@ -47,7 +47,7 @@ describe(`[QA-5049] [QA-5050] [Income>Expense forecast] "Per Unit" + "Per SF" va
 
             cy.stepInfo(`7. Verify if number of Residential Unit equal 0 →  expected result will be "Per Unit: $NaN"`);
             _NavigationSection.navigateToExpenseForecast();
-            Income._ExpenseForecastActions.Page.getForecastItemBasisMoneyValue(testData.expenseForecastCustomFixture(testData.basis).name, true).invoke("text").then(text => {
+            Income._ExpenseForecastActions.Page.getForecastItemBasisMoneyValue(testData.expenseForecastCustomFixture().name, true).invoke("text").then(text => {
                 expect(text).contain('Per Unit')
                     .contain(testData.perUnitValueTextNaN);
             });
@@ -71,11 +71,11 @@ describe(`[QA-5049] [QA-5050] [Income>Expense forecast] "Per Unit" + "Per SF" va
 
             cy.stepInfo(`4. Verify that Per Unit value below this field is calculated as: 
                             Per Unit Appraiser’s Forecast * selected Basis for Square Foot Analysis /  # of Resi Units `);
-            Income._ExpenseForecastActions.Page.getForecastItemBasisMoneyValue(testData.expenseForecastCustomFixture(testData.basis).name, true)
-            .invoke("text").then(text => {
-                expect(text).contain('Per SF')
-                    .contain(testData.perSFFieldValue());
-            });
+            Income._ExpenseForecastActions.Page.getForecastItemBasisMoneyValue(testData.expenseForecastCustomFixture().name, true)
+                .invoke("text").then(text => {
+                    expect(text).contain('Per SF')
+                        .contain(testData.perSFFieldValue());
+                });
 
             cy.stepInfo(`5. Go to Property > Summary and add residential units equal 0`);
             _NavigationSection.navigateToPropertySummary();
@@ -84,13 +84,12 @@ describe(`[QA-5049] [QA-5050] [Income>Expense forecast] "Per Unit" + "Per SF" va
 
             cy.stepInfo(`6. Verify if selected Basis for Square Foot Analysis equal 0 -> expected result will be "Per Unit: $0.00"`);
             _NavigationSection.navigateToExpenseForecast();
-            Income._ExpenseForecastActions.Page.getForecastItemBasisMoneyValue(testData.expenseForecastCustomFixture(testData.basis).name, true)
-            .invoke("text").then(text => {
-                expect(text).contain('Per SF')
-                    .contain(testData.perSFValueTextNaN);
-            });
+            Income._ExpenseForecastActions.Page.getForecastItemBasisMoneyValue(testData.expenseForecastCustomFixture().name, true)
+                .invoke("text").then(text => {
+                    expect(text).contain('Per SF')
+                        .contain(testData.perSFValueTextNaN);
+                });
         });
-
 
         it(`[QA-5051] Sliding bar graphic displays Appraiser's Forecast`, () => {
 
@@ -98,20 +97,42 @@ describe(`[QA-5049] [QA-5050] [Income>Expense forecast] "Per Unit" + "Per SF" va
             Income._ExpenseForecastActions.Page.getForecastItemCheckedBasisRadio(true, 0).invoke("attr", "value").then(value => {
                 expect(value).to.be.equal('unit');
             });
-            
+            Income._ExpenseForecastActions.Page.getForecastItemSlidingBarTitle(testData.expenseForecastCustomFixture().name, true).invoke("text").then(text => {
+                expect(text).contain(testData.perUnitSlidingBarTitleNameCustom);
+            });
 
-          
             cy.stepInfo(`2. Verify if Per SF radiobutton is selected-> Title of Sliding Bar Graphic is #Category Name ($/SF)`);
+            Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastCustomFixture('sf'), true);
             Income._ExpenseForecastActions.Page.getForecastItemCheckedBasisRadio(true, 0).invoke("attr", "value").then(value => {
                 expect(value).to.be.equal('sf');
             });
-
-
-            
-
+            Income._ExpenseForecastActions.Page.getForecastItemSlidingBarTitle(testData.expenseForecastCustomFixture().name, true).invoke("text").then(text => {
+                expect(text).contain(testData.perSFSlidingBarTitleNameCustom);
+            });
 
             cy.stepInfo(`3. Verify Sliding bar graphic displays Appraiser's Forecast amount but it is always displayed in the left most position `);
+            Income._ExpenseForecastActions.matchElementSnapshot(
+                Income._ExpenseForecastActions.Page.itemAppraisersForecastValueLine(testData.expenseForecastCustomFixture().name, true),
+                testData.slidingBarPerSFSnapshotName, { padding: [ 0, 20 ] }
+            );
+            Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastCustomFixture('unit'), true);
+            Income._ExpenseForecastActions.matchElementSnapshot(
+                Income._ExpenseForecastActions.Page.itemAppraisersForecastValueLine(testData.expenseForecastCustomFixture().name, true),
+                testData.slidingBarPerUnitSnapshotName, { padding: [ 0, 20 ] }
+            );
+        });
 
+        it(`[QA-5051] Sliding bar graphic displays Appraiser's Forecast`, () => {
+
+            cy.stepInfo(`1. Verify if Per Unit radiobutton is selected-> Title of Sliding Bar Graphic is #Category Name ($/UNIT)`);
+         
+
+            cy.stepInfo(`2. Verify if Per SF radiobutton is selected-> Title of Sliding Bar Graphic is #Category Name ($/SF)`);
+           
+
+            cy.stepInfo(`3. Verify Sliding bar graphic displays Appraiser's Forecast amount but it is always displayed in the left most position `);
+           
+            
 
             //deleteReport(testData.reportCreationData.reportNumber);
         });

@@ -49,8 +49,8 @@ class ExpenseForecastPage extends BasePage {
     }
 
     getForecastItemSlidingBarTitle(item: string, custom = false) {
-        return !custom ? cy.get(`[data-qa=${item}-forecast-item] h6[class]`) :
-            cy.get(`[data-qa=${Cypress._.camelCase(Cypress._.toLower(Cypress._.replace(item, "&", "And")))}-forecast-item] [data-qa=basis]`);
+        return !custom ? cy.xpath(`//*[@data-qa="${item}-forecast-item"]/child::div/following::div//child::*[contains(text(),"${Cypress._.toUpper(item)}'")]`) :
+            cy.xpath(`//*[@data-qa="${Cypress._.camelCase(Cypress._.toLower(Cypress._.replace(item, "&", "And")))}-forecast-item"]/child::div/following::div//child::*[contains(text(),"${Cypress._.toUpper(item)}")]`);
     }
 
     getForecastItemProjectionByType(item: string, type: string) { return cy.contains(`[data-qa=${item}-forecast-item] [data-qa$=historical]`, type); }
@@ -96,6 +96,11 @@ class ExpenseForecastPage extends BasePage {
     get toeCommentaryModified() { return cy.xpath("//*[.='TOTAL OPERATING EXPENSES']//following::*[.='Modified']"); }
 
     get toeAppraisersForecastValueLine() { return cy.xpath(`//*[.='TOTAL OPERATING EXPENSES']//following::div[@data-qa='appraisers-forecast-values-line']`); }
+
+    itemAppraisersForecastValueLine(item: string, custom = false) {
+        return !custom ? cy.get(`[data-qa=${item}-forecast-item] [data-qa=appraisers-forecast-values-line]`) :
+            cy.get(`[data-qa=${Cypress._.camelCase(Cypress._.toLower(Cypress._.replace(item, "&", "And")))}-forecast-item] [data-qa=appraisers-forecast-values-line]`);
+    }
 
     get createNewCategoryButton() { return cy.contains('Add Expense Category +'); }
 
