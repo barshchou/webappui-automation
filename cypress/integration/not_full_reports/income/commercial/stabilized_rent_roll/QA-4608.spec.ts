@@ -94,7 +94,7 @@ describe("Verify the Commercial Stabilized Rent Roll table on export",
             cy.contains("Commercial Stabilized Rent Roll").scrollIntoView()
                 .next().next().should('have.text', testData.streetName)
                 .next("table").within(() => {
-                    cy.get("")
+                    cy.get("tr");
                 });
         });
     });
