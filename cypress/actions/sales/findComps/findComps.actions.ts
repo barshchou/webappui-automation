@@ -10,8 +10,14 @@ import { Utils } from "../../../types/utils.type";
 import { _map } from "../../../support/commands";
 import { recurse } from "cypress-recurse";
 import mapKeysUtils from "../../../utils/mapKeys.utils";
+import { BoweryReports } from "../../../types/boweryReports.type";
 
 class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
+    selectedCompsSetSort(sortType: BoweryReports.SalesComps.SelectedComparablesSortType) {
+        this.Page.sortSalesCompsSelectList.click();
+        this.Page.sortSalesCompsSelectListOption(sortType).click();
+        return this;
+    }
 
     get SaleInfo(){
         return saleInfoFormActions;
@@ -99,15 +105,19 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
     /**
      * Selects first sales comp from search results.
      * Useful when we need to select n-random sales comps
+     * @param index number of the comp. Default - 0 (first comp in a list).
+     * NOTE: 0 - first, -1 - last in the list
      */
-    selectCompFromMap(): FindCompsActions {
-        findCompsPage.getSelectCompFromMapButton().first().scrollIntoView().click({ force: true });
+    selectCompFromMap(index = 0 ): FindCompsActions {
+        findCompsPage.getSelectCompFromMapButton().eq(index).scrollIntoView().click({ force: true });
         this.checkFindSingleSalesComp();
+        // ernst: delay to no accidentaly dispatch click to "Remove" btn in SalesComps search list
+        cy.wait(1500);
         return this;
     }
 
     checkFindSingleSalesComp(): FindCompsActions{
-        cy.wait(`@${Alias.gql.FindTransactionByIdAndVersion}`, { timeout:70000 }).then((interception) => {
+        cy.wait(`@${Alias.gql.FindTransactionByIdAndVersion}`, { timeout:35000 }).then((interception) => {
             cy.log(interception.response.body.data.findTransactionByIdAndVersion.id);
             cy.wrap(interception.response.body.data.findTransactionByIdAndVersion.id)
             .as(Alias.salesEventId);
