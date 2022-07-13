@@ -1,6 +1,6 @@
 import testData from "../../../../fixtures/not_full_reports/income/tax_info/QA-5183.fixture";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
-import { _NavigationSection } from "../../../../actions/base";
+import { deleteReport, loginAction } from "../../../../actions/base/baseTest.actions";
+import { _HomePage, _NavigationSection } from "../../../../actions/base";
 import { ReviewExport, Income } from './../../../../actions/index';
 import launchDarklyApi from "../../../../api/launchDarkly.api";
 
@@ -9,7 +9,8 @@ describe("[QA-5183] Export column order both assessment psf and assessment per u
     it("Test body", { tags: [ "@check_export", "@income", "@tax_info" ] }, () => {
         cy.stepInfo("1. Set feature flag and create report");
         launchDarklyApi.setFeatureFlagForUser(testData.featureFlagKey, testData.onFeatureFlag);
-        createReport(testData.reportCreationData);
+        loginAction();
+        _HomePage.createReport(testData.reportCreationData);
 
         cy.stepInfo("2. Navigate to Income -> Tax Info");
         _NavigationSection.navigateToTaxInfo();
@@ -33,14 +34,17 @@ describe("[QA-5183] Export column order both assessment psf and assessment per u
         ).then(file => {
             cy.log(<string>file);
             
-            cy.stepInfo("Check that Tax Calculation Discussion commentary exports in the 'Assessed Value & RE Taxes' section of the report.");
+            cy.stepInfo(`5. Check the column order:
+                item (no heading), actual, actual per sf, actual per unit, transitional, transitional per sf, transitional per unit`);
             
             cy.visit(<string>file);
-            cy.contains("Assessed Value & Real Estate Taxes").scrollIntoView().next().next()
-                .next().next().next().next().next().should("have.text", testData.commentary);
+            testData.verifyExportValues.forEach((val, index) => {
+                cy.xpath(`//*[contains(text(), 'Taxable Assessed Value')]/../../following-sibling::*[${index + 1}]`)
+                .scrollIntoView()
+                .should("include.text", val);
+            });
         });
     });
-
 
     after(() => {
         launchDarklyApi.removeUserTarget(testData.featureFlagKey);
