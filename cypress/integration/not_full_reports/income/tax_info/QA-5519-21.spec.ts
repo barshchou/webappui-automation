@@ -26,6 +26,12 @@ describe("[QA-5183] Export column order both assessment psf and assessment per u
         Income._TaxInfo.enterRowTaxLiabilityItem(testData.rowNames.additional, testData.enterName)
             .enterRowTaxLiabilityItem(testData.rowNames.special, testData.enterName);
 
+        cy.stepInfo("5. Enter row TaxLiability value");
+        Income._TaxInfo.clickAddNewRowButton()
+            .clickAddNewRowButton(testData.buttonName)
+            .enterRowTaxLiabilityValue(testData.rowNames.additional, testData.additionalTaxRateValue)
+            .enterRowTaxLiabilityValue(testData.rowNames.special, testData.specialAssessmentRowValue);
+
         deleteReport(testData.reportCreationData.reportNumber);
     });
 

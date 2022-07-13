@@ -1,3 +1,4 @@
+import { getNumberWithDecimalPart } from './../../../utils/numbers.utils';
 import taxInfoPage from "../../pages/income/taxInfo.page";
 import { getNumberFromDollarNumberWithCommas, numberWithCommas } from "../../../utils/numbers.utils";
 import BaseActionsExt from "../base/base.actions.ext";
@@ -354,12 +355,28 @@ class TaxInfoActions extends BaseActionsExt<typeof taxInfoPage> {
     }
     
     enterRowTaxLiabilityItem(rowName: string, enterName: string, rowNumber = 0): TaxInfoActions {
-        taxInfoPage.getTaxLiabilityRowItem(rowName).eq(rowNumber).type(`${enterName}{enter}`).should("have.text", enterName);
+        taxInfoPage.getTaxLiabilityRowItem(rowName).eq(rowNumber)
+            .realClick()
+            .realClick()
+            .type(`${enterName}{enter}`)
+            .should("have.text", enterName);
         return this;
     }
 
-    enterRowTaxLiabilityValue(rowName: string, enterName: string, rowNumber = 0): TaxInfoActions {
-        taxInfoPage.getTaxLiabilityRowItem(rowName).eq(rowNumber).type(`${enterName}{enter}`).should("have.text", enterName);
+    /**
+     * Enters values for the selected row. Depending on the name of the row, the rounding of values changes
+     * @param rowName The name of the row you want to change
+     * @param value Enter value 
+     * @param rowNumber Row number. Need if there is row with similar name 
+     * @returns `this`
+     */
+    enterRowTaxLiabilityValue(rowName: string, value: number, rowNumber = 0): TaxInfoActions {
+        const initial =  taxInfoPage.getTaxLiabilityRowValue(rowName).eq(rowNumber).realClick().realClick().type(`${value}{enter}`);
+        if (rowName === "Additional Tax Rate") {
+            initial.should("have.text", `${getNumberWithDecimalPart(value, 9)}%`);
+        } else {
+            initial.should("have.text", `$${numberWithCommas(value.toFixed(2))}`);
+        }
         return this;
     }
 }
