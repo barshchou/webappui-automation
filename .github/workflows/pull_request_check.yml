@@ -81,4 +81,3 @@ jobs:
           spec_file: ${{ steps.define_specs.outputs.CHANGED_SPECS }}
           record_key: ${{ secrets.CURRENTS_RECORD_KEY }}
           tags: grep=,grepTags=,burn=
-          ref: ${{ github.head_ref }}
