@@ -15,5 +15,6 @@ describe("Verify the Basis of Rent tooltip",
         Income.Commercial.InPlaceRentRoll.verifyBasisOfRentTooltip();
         cy.log("Added logging to check");
         deleteReport(testData.reportCreationData.reportNumber);
+        cy.fail
     });
 });
