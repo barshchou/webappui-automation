@@ -35,8 +35,8 @@ class AdjustCompsPage extends BasePage {
 
     get cellCumulativePriceValue() {return cy.xpath("//*[starts-with(., 'Cumulative Price')]//following-sibling::td");}
 
-    get cellCumulativePriceName(){
-        return cy.contains("Cumulative Price Per Unit");
+    cellCumulativePriceName(basisName: "Unit" | "SF"){
+        return cy.contains(`Cumulative Price Per ${basisName}`);
     }
     
     get adjustedPriceCells() {return cy.xpath("//*[starts-with(., 'Adjusted Price')]//following-sibling::td");}

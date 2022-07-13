@@ -28,13 +28,13 @@ describe("[QA-4106] -> Total Utility Adjustments in Sales Adjustment Grid is cal
          * note: If we want position assert - we better add data-qa first 
          * since it's completely impossible to acces cells elements
          */
-        Sales._AdjustComps.Page.cellCumulativePriceName.should("be.visible");
+        Sales._AdjustComps.Page.cellCumulativePriceName("Unit").should("be.visible");
 
         cy.stepInfo(`2.[QA-4106] -> Verify the the calculations of the Cumulative Price Per Unit row`); 
         Sales._AdjustComps.verifyTrendedPricePerBasis(Object.values(testData.comparablesAdjustments), testData.basis);
 
-        cy.stepInfo(`[QA-4106] -> 'Cumulative Price Per Unit' is displayed in bold`);
-        Sales._AdjustComps.Page.cellCumulativePriceName.should("have.css", "font-weight", "500");
+        cy.stepInfo(`[QA-4106] -> 'Cumulative Price Per SF' is displayed in bold`);
+        Sales._AdjustComps.Page.cellCumulativePriceName("Unit").should("have.css", "font-weight", "500");
 
         cy.stepInfo(`[QA-4106] -> Generate and download this report `);
         Sales._AdjustComps.Page.SaveBtn.click();
