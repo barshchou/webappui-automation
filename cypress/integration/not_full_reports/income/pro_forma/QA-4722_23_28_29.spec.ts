@@ -33,7 +33,7 @@ describe("Potential Real Estate Tax Reimbursement",
             .clickYesIfExist();
         Income._CommercialManager.ReimbursementSummary.addNewCommercialReimbursement(
             testData.expenseType, testData.expenseTypeCellName, testData.reimbursementType, testData.knownInformation)
-            .fillReimbursements(testData.monthlyReimbursement, testData.columnsId)
+                .fillReimbursements(testData.monthlyReimbursement, testData.columnsId)
             .fillVCLossByRow(testData.reimbursementVcLoss);
 
         cy.saveLocalStorage();
