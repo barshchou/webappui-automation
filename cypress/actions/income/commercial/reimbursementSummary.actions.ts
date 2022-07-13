@@ -130,8 +130,8 @@ class ReimbursementSummaryActions extends BaseActionsExt<typeof reimbursementSum
      * columns -> Need for computation proper table column id value.
      * @param  {BoweryReports.KnownInformation} knownInformation Part of the inputs locator 
      * @param  {BoweryReports.ReimbursementColumnsId} columnsId Part of the inputs locator 
-     * @param  {} unitsAmount Commercial units amount to verify = reimbursement rows in table
-     * @param  {} reimbursementIndex Index of added reimbursement 
+     * @param  {number} unitsAmount Commercial units amount to verify = reimbursement rows in table
+     * @param  {number} reimbursementIndex Index of added reimbursement 
      */
     verifyAnnualReimbursementByExpenseType(expenseUIName: string, reimbursementType: BoweryReports.ReimbursementType, 
         knownInformation: BoweryReports.KnownInformation, columnsId: BoweryReports.ReimbursementColumnsId, 
