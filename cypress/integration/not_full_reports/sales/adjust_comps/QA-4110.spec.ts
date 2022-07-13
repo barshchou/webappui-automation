@@ -34,7 +34,7 @@ describe("Total Utility Adjustments in Sales Adjustment Grid is calculated with 
         deleteReport(testData.reportCreationData.reportNumber);
     });
 
-    it.only("Check export", () => {
+    it("Check export", () => {
         cy.stepInfo(`
         [QA-4110] → open Sales Adjustment Grid 
         → verify the 'Cumulative Price Per Unit:' label and the same calculations`);
