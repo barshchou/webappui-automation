@@ -1,7 +1,7 @@
-import testData from "../../../../fixtures/not_full_reports/income/tax_info/QA-5519.fixture";
+import testData from "../../../../fixtures/not_full_reports/income/tax_info/QA-5519-20.fixture";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
-import { Income } from './../../../../actions/index';
+import { Income } from '../../../../actions/index';
 import launchDarklyApi from "../../../../api/launchDarkly.api";
 
 describe("[QA-5183] Export column order both assessment psf and assessment per unit", () => {
@@ -20,7 +20,9 @@ describe("[QA-5183] Export column order both assessment psf and assessment per u
         Income._TaxInfo.clickAddNewRowButton()
             .clickAddNewRowButton(testData.buttonName)
             .verifyRowTaxLiability(testData.rowNames.additional)
-            .verifyRowTaxLiability(testData.rowNames.special);
+            .verifyRowTaxLiability(testData.rowNames.special)
+            .enterRowTaxLiabilityName(testData.rowNames.additional, testData.enterName)
+            .enterRowTaxLiabilityName(testData.rowNames.special, testData.enterName);
 
         deleteReport(testData.reportCreationData.reportNumber);
     });
