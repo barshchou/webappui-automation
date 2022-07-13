@@ -24,6 +24,18 @@ const _commercialUnits = () => {
     };
 };
 
+const setExpenseForecastFixture = (name: string, basis: BoweryReports.UnitSF, 
+    forecast: number | undefined, cardName: BoweryReports.ExpenseCardNames, 
+    expenseUIName: BoweryReports.ProFormaTypes): BoweryReports.ForecastItem => {
+    return {
+        name: name,
+        basis: basis,
+        forecast: forecast,
+        cardName: cardName,
+        expenseUIName: expenseUIName
+    };
+};
+
 const _expenseForecastUtilitiesFixture = (): BoweryReports.ForecastItem => {
     return {
         name: expensesCellNames.utilities,
@@ -34,50 +46,37 @@ const _expenseForecastUtilitiesFixture = (): BoweryReports.ForecastItem => {
     };
 };
 
-const _expenseForecastWaterAndSewerFixture = (): BoweryReports.ForecastItem => {
-    return {
-        name: expensesCellNames.waterAndSewer,
-        basis: unitSFEnum.sf,
-        forecast: 2,
-        cardName: expensesCardNames.waterAndSewer,
-        expenseUIName: proFormaTypesEnum.waterAndSewer,
-    };
-};
-
-const _expenseForecastFuelFixture = (): BoweryReports.ForecastItem => {
-    return {
-        name: expensesCellNames.fuel,
-        basis: unitSFEnum.sf,
-        forecast: 3,
-        cardName: expensesCardNames.fuel,
-        expenseUIName: proFormaTypesEnum.fuel,
-    };
-};
-
-const _expenseForecastElectricityFixture = (): BoweryReports.ForecastItem => {
-    return {
-        name: expensesCellNames.electricity,
-        basis: unitSFEnum.sf,
-        forecast: 4,
-        cardName: expensesCardNames.electricity,
-        expenseUIName: proFormaTypesEnum.electricity,
-    };
-};
-
 const _brokenOutExpensesFixture = () => {
     return [
         {
-            expenseForecast: _expenseForecastWaterAndSewerFixture()
+            expenseForecast: setExpenseForecastFixture(
+                expensesCellNames.waterAndSewer,
+                unitSFEnum.sf,
+                2,
+                expensesCardNames.waterAndSewer,
+                proFormaTypesEnum.waterAndSewer
+            )
         },
         {
-            expenseForecast: _expenseForecastFuelFixture()
+            expenseForecast: setExpenseForecastFixture(
+                expensesCellNames.fuel,
+                unitSFEnum.sf,
+                3,
+                expensesCardNames.fuel,
+                proFormaTypesEnum.fuel
+            )
         },
         {
-            expenseForecast: _expenseForecastElectricityFixture()
+            expenseForecast: setExpenseForecastFixture(
+                expensesCellNames.electricity,
+                unitSFEnum.sf,
+                4,
+                expensesCardNames.electricity,
+                proFormaTypesEnum.electricity
+            )
         }
     ];
 };
-
 
 export default {
     reportCreationData: reportCreationFixture(),
