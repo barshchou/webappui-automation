@@ -51,7 +51,6 @@
     "cypress-xpath": "^1.6.2",
     "eslint": "^7.32.0",
     "eslint-plugin-cypress": "^2.12.1",
-    "find-cypress-specs": "^1.17.0",
     "glob": "^8.0.1",
     "husky": "^8.0.1",
     "mammoth": "^1.4.21",
