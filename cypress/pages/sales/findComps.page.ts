@@ -1,3 +1,4 @@
+import { BoweryReports } from "../../types/boweryReports.type";
 import { applyMixins } from "../../utils/object.utils";
 import BasePage from "../base/base.page";
 import PropertyInformationForm from "./comp_plex/propertyInfo.page";
@@ -78,6 +79,18 @@ class FindCompsPage extends BasePage {
     get createNewCompButton() {return cy.contains("Create New", { includeShadowDom: true });}
 
     get newCompSaveAndCloseButton() {return cy.get('[data-qa="Save & Close"]', { includeShadowDom: true });}
+
+    get addressSalesComparablesTable(){
+        return cy.get('[data-qa="selected-sales-comps-table"] [data-qa="address"]');
+    }
+
+    get sortSalesCompsSelectList(){
+        return cy.get('[data-qa="sortSalesComps-select-list"]');
+    }
+
+    sortSalesCompsSelectListOption(sortType: BoweryReports.SalesComps.SelectedComparablesSortType){
+        return cy.get(`[data-qa="sortSalesComps-${sortType}-select-option"]`);  
+    }
 }
 
 /**

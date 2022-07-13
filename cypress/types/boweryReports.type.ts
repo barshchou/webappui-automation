@@ -203,4 +203,8 @@ export namespace BoweryReports {
     export type PropertyConditionsRadios = keyof typeof Enums.PROPERTY_CONDITIONS_RADIOS;
     export type BondTickers = typeof Enums.BOND_TYPES[KeyInfo.BondTypes]
     export type BondTypes = keyof typeof  Enums.BOND_TYPES
+
+    export namespace SalesComps {
+        export type SelectedComparablesSortType = "Custom" | "Data Sold"
+    }
 }
