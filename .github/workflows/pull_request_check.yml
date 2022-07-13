@@ -5,7 +5,23 @@ on:
     types: [reopened]
 
 jobs:
+  Run-tsc-check:
+    runs-on: ubuntu-latest
+    container: cypress/browsers:node16.13.2-chrome100-ff98
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
+
+      - name: Install dependecies
+        run: npm install
+
+      - name: Run tsc:check
+        run: npm run tsc:check
+
   Run-smoke-tests:
+    needs: Run-tsc-check
     runs-on: ubuntu-latest
     container: cypress/browsers:node16.13.2-chrome100-ff98
     permissions:
@@ -28,6 +44,7 @@ jobs:
           record_key: ${{ secrets.CURRENTS_RECORD_KEY }}
 
   Run-included-tests:
+    needs: Run-tsc-check
     runs-on: ubuntu-latest
     container: cypress/browsers:node16.13.2-chrome100-ff98
     permissions:
