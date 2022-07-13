@@ -27,13 +27,7 @@ const _commercialUnits = () => {
 const setExpenseForecastFixture = (name: string, basis: BoweryReports.UnitSF, 
     forecast: number | undefined, cardName: BoweryReports.ExpenseCardNames, 
     expenseUIName: BoweryReports.ProFormaTypes): BoweryReports.ForecastItem => {
-    return {
-        name: name,
-        basis: basis,
-        forecast: forecast,
-        cardName: cardName,
-        expenseUIName: expenseUIName
-    };
+    return { name, basis, forecast, cardName, expenseUIName };
 };
 
 const _expensesForecast = () => { 
