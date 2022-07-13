@@ -108,6 +108,8 @@ class TaxInfoPage extends BasePage {
     get taxSummaryDiscussion() {return cy.get("[data-qa^='taxSummaryDiscussion.commentary'],[name='taxSummaryDiscussion.commentary']");}
 
     getAddNewRowButton(name = "Add Additional Tax Rate") {return cy.xpath(`//*[contains(text(), '${name}')]`);}
+
+    getTaxLiabilityRow(name: string) {return cy.xpath(`//*[contains(text(), '${name}')]/following-sibling::*[1]`);}
 }
 
 export default new TaxInfoPage();
