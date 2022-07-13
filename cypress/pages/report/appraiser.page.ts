@@ -5,7 +5,17 @@ class AppraiserPage extends BasePage {
 
     get searchAppraiserTextField() {return cy.get('[role="dialog"] [type="text"]');}
 
-    appraiserSignCheckbox(appraiserName: string) { return cy.xpath(`//*[@data-qa='fullName'][.='${appraiserName}']/following::*[@data-qa='signReport-checkbox']//input`);}
+    get btnAddAppraiserInspector() {
+        return cy.contains("Add appraiser / inspector");
+    }
+
+    getAppraiserOptionFromList(index = 0){
+        return cy.get(`[data-option-index="${index}"]`).should("be.visible");
+    }
+
+    appraiserSignCheckbox(appraiserName: string) { 
+        return cy.xpath(`//*[@data-qa='fullName'][.='${appraiserName}']/following::*[@data-qa='signReport-checkbox']//input`);
+    }
 }
 
 export default new AppraiserPage();
