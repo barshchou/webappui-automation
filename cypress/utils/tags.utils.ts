@@ -43,5 +43,6 @@ export enum Tag {
     appraiser = "@appraiser",
     settings = "@settings",
     unit_details = "@unit_details",
+    reimbursement_summary = "@reimbursement_summary",
     rent_reconciliation = "@rent_reconciliation"
 }
