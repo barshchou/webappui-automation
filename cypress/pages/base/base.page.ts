@@ -64,6 +64,11 @@ export default class BasePage {
             .eq((index !== 0) ? index : 0);
     }
 
+    formAddButton(index = 0) {
+        return cy.xpath("//button[.='Add']")
+            .eq((index !== 0) ? index : 0);
+    }
+
     modifiedLabel(isExist = true, index = 0) {
         if (isExist) {
             return cy.xpath("//span[contains(text(), 'Modified')]").eq((index !== 0) ? index : 0);
