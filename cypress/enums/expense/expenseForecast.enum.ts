@@ -1,7 +1,7 @@
 const expensesCardsNames = {
 
-    expenseCardsIDArray: [ "insurance", "electricity", "fuel", "waterAndSewer", "repairsAndMaintenance", "payrollAndBenefits",
-        "generalAndAdministrative", "legalAndProfessionalFees", "miscellaneous", "management", "reserves" ],
+    expenseCardsIDArray: [ "insurance", "electricity", "fuel", "waterSewer", "repairsMaintenance", "payrollBenefits",
+        "generalAdministrative", "legalProfessionalFees", "miscellaneous", "managementFees", "replacementReserves" ],
 
     expenseCardsIncludeInProFormaCheckboxArray: [ "insurance", "electricity", "fuel", "waterAndSewer", "repairsAndMaintenance", "payrollAndBenefits",
         "generalAndAdministrative", "legalAndProfessionalFees", "miscellaneous", "management", "reserves" ],
