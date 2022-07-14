@@ -15,7 +15,7 @@ describe("Create report test, open Find Comps, check if map is loaded", { tags: 
     it("Test body", () => {
         cy.task('dd:addTags', { 'team.owner': 'ui' });
         cy.task('dd:addTags', { 'test.name': 'create report smoke test' });
-        
+
         const headerToContain = tesData.reportCreationData.address.split(",")[0];
         createReport(tesData.reportCreationData);
         Report._KeyInfo.Page.pageTitle.should("exist").and("have.text", _ReportTitles.KEY_INFO);
@@ -24,5 +24,6 @@ describe("Create report test, open Find Comps, check if map is loaded", { tags: 
             .verifyProgressBarNotExist();
         Sales._FindComps.selectCompFromMap();
         deleteReport(tesData.reportCreationData.reportNumber);
+        cy.get("something", { timeout:5000 }).should("be.visible");
     });
 });
