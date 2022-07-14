@@ -10,6 +10,26 @@ import { BoweryAutomation } from '../types/boweryAutomation.type';
  */
 export const _map = new Map();
 
+/**
+ * Mutating / creating array in `_map`. 
+ * Useful when you need push some data dynamically into array
+ * @param mapKey 
+ * @param value 
+ * @param message 
+ */
+export const _mutateArrayInMap = (mapKey: string, value: any, message = "Unknown array of values from map") => {
+    if(_map.get(mapKey) == undefined){
+        const arr = [ value ];
+        _map.set(mapKey, arr);
+    }
+    else{
+        cy._mapGet(mapKey).then(arr => {
+            return arr.push(value);
+        });
+    }
+    cy._mapGet(mapKey).then(arr => cy.log(`${message}: ${arr}`));
+};
+
 //#region plugin commands initialization
 addMatchImageSnapshotCommand({
     failureThreshold: 0.05, // threshold for entire image

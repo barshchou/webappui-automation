@@ -7,7 +7,7 @@ import propertDescActions from "./drm/propertyDescForm.actions";
 import propertyInfoFormActions from "./drm/propertyInfoForm.actions";
 import { Alias, gqlOperationNames } from "../../../utils/alias.utils";
 import { Utils } from "../../../types/utils.type";
-import { _map } from "../../../support/commands";
+import { _map, _mutateArrayInMap } from "../../../support/commands";
 import { recurse } from "cypress-recurse";
 import mapKeysUtils from "../../../utils/mapKeys.utils";
 import { BoweryReports } from "../../../types/boweryReports.type";
@@ -126,31 +126,25 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
     checkFindSingleSalesComp(): FindCompsActions{
         cy.wait(`@${Alias.gql.FindTransactionByIdAndVersion}`, { timeout:35000 }).then((interception) => {
             cy.log(interception.response.body.data.findTransactionByIdAndVersion.id);
-            if(_map.get(mapKeysUtils.sales_comps_ids) == undefined){
-                let arr = [ interception.response.body.data.findTransactionByIdAndVersion.id ];
-                _map.set(mapKeysUtils.sales_comps_ids, arr);
-            }
-            else{
-                cy._mapGet(mapKeysUtils.sales_comps_ids).then(arr => {
-                    return arr.push(interception.response.body.data.findTransactionByIdAndVersion.id);
-                });
-            }
-            cy.wrap(interception.response.body.data.findTransactionByIdAndVersion.id)
-            .as(Alias.salesEventId);
+            /**
+             * Pushing comps ids upon their addition
+             */
+            _mutateArrayInMap(
+                mapKeysUtils.sales_comps_ids,
+                interception.response.body.data.findTransactionByIdAndVersion.id,
+                "Sales_IDs array"
+            );
+
             /**
              * Pushing comps addresses upon their addition
              */
-            if(_map.get(mapKeysUtils.sales_comps_addresses) == undefined){
-                let arr = [ interception.response.body.data.findTransactionByIdAndVersion.address.streetAddress ];
-                _map.set(mapKeysUtils.sales_comps_addresses, arr);
-            }
-            else{
-                cy._mapGet(mapKeysUtils.sales_comps_addresses).then(arr => {
-                    return arr.push(interception.response.body.data.findTransactionByIdAndVersion.address.streetAddress);
-                });
-            }
-            cy._mapGet(mapKeysUtils.sales_comps_addresses).then(arr => cy.log("Sales_Comps addresses array: "+arr));
-            cy._mapGet(mapKeysUtils.sales_comps_ids).then(arr => cy.log("Sales_IDs array: "+arr));
+            _mutateArrayInMap(
+                mapKeysUtils.sales_comps_addresses,
+                interception.response.body.data.findTransactionByIdAndVersion.address.streetAddress,
+                "Sales_Comps addresses array"
+            );
+            cy.wrap(interception.response.body.data.findTransactionByIdAndVersion.id)
+            .as(Alias.salesEventId);           
         });
         return this; 
     }
