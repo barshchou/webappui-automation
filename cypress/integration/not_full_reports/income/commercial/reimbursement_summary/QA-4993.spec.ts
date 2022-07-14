@@ -27,7 +27,7 @@ describe(`Verify that the user can reimburse based on a Utilities expense and th
                     on Pro Forma” checkbox for all Expense Forecasts.`);
         _NavigationSection.navigateToExpenseForecast();
         Income._ExpenseForecastActions.setIncludeInProformaCheckbox(testData.expenseForecastUtilitiesFixture.cardName, true)
-                .enterForecastItemForecast(testData.expenseForecastUtilitiesFixture);
+            .enterForecastItemForecast(testData.expenseForecastUtilitiesFixture);
 
         cy.stepInfo(`3. Go to Income > Commercial > Reimbursement Summary`);
         _NavigationSection.navigateToCommercialReimbursementSummary();
@@ -69,7 +69,7 @@ describe(`Verify that the user can reimburse based on a Utilities expense and th
         cy.stepInfo(`2. Go to Income > Commercial > Reimbursement Summary`);
         _NavigationSection.navigateToCommercialReimbursementSummary();
 
-        cy.stepInfo(`4. Add Utilities reimbursement`);
+        cy.stepInfo(`3. Add Utilities reimbursement`);
         testData.brokenOutExpensesFixture.forEach((expense, index) => {
             Income._CommercialManager.ReimbursementSummary
                 .addNewCommercialReimbursement(
@@ -83,11 +83,11 @@ describe(`Verify that the user can reimburse based on a Utilities expense and th
                     expense.expenseForecast.expenseUIName, index);
         });
         
-        cy.stepInfo(`5. Go to Income > Expense History page and select 'Broken out' radio button`);
+        cy.stepInfo(`4. Go to Income > Expense History page and select 'Broken out' radio button`);
         _NavigationSection.navigateToExpenseHistory();
         Income._ExpenseHistory.checkUtilitiesExpensesOption(testData.utilitiesCombinedExpenseOption);
 
-        cy.stepInfo(`6. Go to Income > Commercial > Reimbursement Summary`);
+        cy.stepInfo(`5. Go to Income > Commercial > Reimbursement Summary`);
         _NavigationSection.navigateToCommercialReimbursementSummary();
         testData.brokenOutExpensesFixture.forEach(expense => {
             Income._CommercialManager.ReimbursementSummary

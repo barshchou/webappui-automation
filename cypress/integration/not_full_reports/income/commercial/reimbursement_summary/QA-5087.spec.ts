@@ -6,7 +6,7 @@ import testData from "../../../../../fixtures/not_full_reports/income/commercial
 describe(`Verify exported report: Change export schemas and templates to enable combined utilities expenses`,
     { tags: [ "@income", "@expense_forecast", "@reimbursement_summary" ] }, () => {
 
-    it(`[QA-4993] User changes to Broken Out utilities -> verify expense reimbursements non existence`, () => {
+    it(`[QA-5087] User changes to Broken Out utilities -> verify expense reimbursements non existence`, () => {
         cy.stepInfo(`Preconditions: 1. Create a mixed-use report and add commercial units`);
         createReport(testData.reportCreationData);
         _NavigationSection.navigateToPropertySummary();
@@ -23,7 +23,7 @@ describe(`Verify exported report: Change export schemas and templates to enable 
                     on Pro Forma” checkbox for all Expense Forecasts.`);
         _NavigationSection.navigateToExpenseForecast();
         Income._ExpenseForecastActions.setIncludeInProformaCheckbox(testData.expenseForecastUtilitiesFixture.cardName, true)
-                .enterForecastItemForecast(testData.expenseForecastUtilitiesFixture);
+            .enterForecastItemForecast(testData.expenseForecastUtilitiesFixture);
 
         cy.stepInfo(`3. Go to Income > Commercial > Reimbursement Summary`);
         _NavigationSection.navigateToCommercialReimbursementSummary();
@@ -43,7 +43,7 @@ describe(`Verify exported report: Change export schemas and templates to enable 
         _NavigationSection.navigateToPotentialGrossIncome();
         Income._PotentialGrossIncome.enterCommercialVCLossPercentage(testData.vcLossPercent, testData.useValue);
 
-        cy.stepInfo('5. Export the report');
+        cy.stepInfo('6. Export the report');
         _NavigationSection.Actions.openReviewAndExport();
         ReviewExport.generateDocxReport().waitForReportGenerated()
             .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
@@ -54,7 +54,7 @@ describe(`Verify exported report: Change export schemas and templates to enable 
     it("Check export", () => {
         Cypress.config().baseUrl = null;
         cy.task("getFilePath",
-        { _reportName: testData.reportCreationData.reportNumber, _docx_html: "html" }
+            { _reportName: testData.reportCreationData.reportNumber, _docx_html: "html" }
         ).then(file => {
             cy.log(<string>file);
             cy.visit(<string>file);
