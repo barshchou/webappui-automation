@@ -6,7 +6,7 @@ export const reportCreationFixture = (name: string) => {
     return ReportDataCreator.getReportData(name);
 };
 
-const _checkboxNames: string[] = Enums.EXPENSE_FORECAST_ITEMS.expenseCardsIncludeInProFormaCheckboxArray;
+const _checkboxNames: string[] = Enums.EXPENSE_FORECAST_ITEMS.expenseCardsIDArray;
 
 const _expenseForecasts: BoweryReports.ForecastItem[] = [
     {
