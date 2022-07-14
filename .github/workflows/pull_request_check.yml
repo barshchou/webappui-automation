@@ -72,7 +72,6 @@ jobs:
           CHANGED_SPECS=$(npx find-cypress-specs --branch master)
           echo ::set-output name=CHANGED_SPECS::$CHANGED_SPECS
           git rev-parse --abbrev-ref HEAD
-          rm -r ../webapp-ui-automation
 
       - name: Run included specs
         uses: Bowery-RES/action-run-e2e-tests@latest
@@ -83,3 +82,4 @@ jobs:
           spec_file: ${{ steps.define_specs.outputs.CHANGED_SPECS }}
           record_key: ${{ secrets.CURRENTS_RECORD_KEY }}
           tags: grep=,grepTags=,burn=
+          ref: ${{ github.sha }}
