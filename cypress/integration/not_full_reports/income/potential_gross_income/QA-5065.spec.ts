@@ -22,13 +22,13 @@ describe("[Income > Potential Gross Income]Support combined utility expense reim
         _NavigationSection.navigateToCommercialUnits();
         Property._CommercialUnits.enterUnitSFByUnitIndex(testData.squareFeet);
 
-        cy.stepInfo(`2. Navigate to Income -> Expence History and verify that Combined Electricity, 
+        cy.stepInfo(`2. Navigate to Income -> Expense History and verify that Combined Electricity, 
                     Fuel, Water & Sewer is chosen for Utility Expenses`);
         _NavigationSection.navigateToExpenseHistory();
-        Income._ExpenseHistory.checkUtilitiesExpensesOption(testData.utiliesExpenseOption);
+        Income._ExpenseHistory.checkUtilitiesExpensesOption(testData.utilitiesExpenseOption);
 
         cy.stepInfo(`3. Navigate to Income -> Commercial -> Reimbursement Summary, create new expense 
-                    reimburcement for Utilities and verify that all needed info is filled`);
+                    reimbursement for Utilities and verify that all needed info is filled`);
         _NavigationSection.navigateToCommercialReimbursementSummary();
         Income._CommercialManager.ReimbursementSummary
             .addNewCommercialReimbursement(
@@ -39,11 +39,11 @@ describe("[Income > Potential Gross Income]Support combined utility expense reim
             .fillReimbursementsByRow(
                 testData.reimbursementValue,
                 0,
-                testData.knownInformation.toLowerCase())
+                testData.columnsId)
             .fillVCLossByRow(testData.vcLossPercentage);
 
         cy.stepInfo(`4. Navigate to Income -> Potential Gross Income and 
-                    verify Combined Utilities expense reimburcement info`);
+                    verify Combined Utilities expense reimbursement info`);
         
         const lessVCLossValue = testData.reimbursementValue * (testData.vcLossPercentage / 100);
 
