@@ -9,11 +9,14 @@ const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreat
 
 const _streetName = "462 1st Avenue";
 const _numberOfCommercialUnits = 2;
-const _commercialUnitSf = [ 32, 50 ];
+const _commercialUnitSf = [ 32, 50, 82 ];
 const _commercialUnitGroup: BoweryReports.CommercialUnits.Groups = Enums.COMMERCIAL_UNITS_GROUPS.use;
 const _commercialUnitGroupValue: BoweryReports.CommercialUnits.GroupsValues = Enums.COMMERCIAL_UNITS_USE_VALUES.retail;
 const _leaseStatuses: Array<BoweryReports.LeaseStatus> = [ "Vacant", "Occupied" ];
 const _tenantName = "Tenant_test1";
+const _rentPSF = 550;
+
+
 
 const _leaseDates = [
     {
@@ -67,8 +70,8 @@ const _exportData = [
     {
         name: "Use",
         values: [
-            Enums.COMMERCIAL_UNITS_USE_VALUES.retail,
-            Enums.COMMERCIAL_UNITS_USE_VALUES.undetermined
+            Enums.COMMERCIAL_UNITS_USE_TEXTS.retail,
+            Enums.COMMERCIAL_UNITS_USE_TEXTS.undetermined
         ]
     },
     {
@@ -107,6 +110,8 @@ const _exportData = [
     }
 ];
 
+const _totalRowName = "Totals";
+
 export default {
     streetName: _streetName,
     leaseDate: _leaseDate,
@@ -118,10 +123,12 @@ export default {
     commercialUnitGroupValue: _commercialUnitGroupValue,
     leaseStatuses: _leaseStatuses,
     tenantName: _tenantName,
+    rentPSF: _rentPSF,
     leaseDates: _leaseDates,
     rentCompFields: _rentCompFields,
     compGroup: _compGroup,
     marketRentConclusion: _marketRentConclusion,
     compsAmount: 1,
-    exportData: _exportData
+    exportData: _exportData,
+    totalRowName: _totalRowName
 };
