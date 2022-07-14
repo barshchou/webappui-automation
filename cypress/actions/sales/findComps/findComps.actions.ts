@@ -113,16 +113,73 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
         this.checkFindSingleSalesComp();
         // ernst: delay to no accidentaly dispatch click to "Remove" btn in SalesComps search list
         cy.wait(1500);
+        // cy.pause();
         return this;
     }
 
+    /**
+     * todo: desc
+     */
     checkFindSingleSalesComp(): FindCompsActions{
         cy.wait(`@${Alias.gql.FindTransactionByIdAndVersion}`, { timeout:35000 }).then((interception) => {
             cy.log(interception.response.body.data.findTransactionByIdAndVersion.id);
             cy.wrap(interception.response.body.data.findTransactionByIdAndVersion.id)
             .as(Alias.salesEventId);
+
+            /**
+             * Pushing comps addresses upon their addition
+             */
+            if(_map.get(mapKeysUtils.sales_comps_addresses) == undefined){
+                let arr = [ interception.response.body.data.findTransactionByIdAndVersion.address.streetAddress ];
+                _map.set(mapKeysUtils.sales_comps_addresses, arr);
+            }
+            else{
+                cy._mapGet(mapKeysUtils.sales_comps_addresses).then(arr => {
+                    return arr.push(interception.response.body.data.findTransactionByIdAndVersion.address.streetAddress);
+                });
+            }
+            cy._mapGet(mapKeysUtils.sales_comps_addresses).then(arr => cy.log("Sales_Comps addresses array: "+arr));
         });
         return this; 
+    }
+
+    /**
+     * Checks whether when a comp gets added, 
+     * it gets automatically added to the bottom.
+     * 
+     * The algorithm is next: we add SalesComp from SearchList 
+     * -> we retrieve addresses from SalesComparables table 
+     * -> we extract array of addresses we got from intercepted query (see `checkFindSingleSalesComp` method)
+     * -> we compare both arrays
+     * 
+     * @param option If `reverse` true - checks whether list order changed comparing with default
+     */
+    checkSalesCompAddedToList(option = { reverse : false }){
+        this.Page.addressSalesComparablesTable.spread((...comps) => {
+            /**
+             * ernst: addresses from UI contains also city, state and postal code 
+             * so we need to trim them and left only first address
+             * Example: before -> "45 East 45 Street, New York, NY, 10017" / after -> '45 East 45 Street'
+             */
+            comps = comps.slice(1).map(elem => elem.innerText.split(",")[0]);
+            cy.wrap(comps).as(Alias.salesComps.addressSelectedComps);
+
+            cy.get(`@${Alias.salesComps.addressSelectedComps}`).then(
+                _ui_addresses => cy.log("Addresses from SelectedComps table: "+<any>_ui_addresses)
+            );
+
+            cy._mapGet(mapKeysUtils.sales_comps_addresses).then(_api_addresses => {
+                cy.log(_api_addresses);
+                if(option.reverse){
+                    expect(comps).to.not.deep.equal(_api_addresses);
+                }
+                else{
+                    expect(comps).to.deep.equal(_api_addresses);
+                }
+                
+            });
+        });
+        return this;
     }
 
     removeCompByAddress(address: string): FindCompsActions {
