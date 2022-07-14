@@ -1,12 +1,11 @@
 import Enums from "../../../../enums/enums";
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 
-export const reportCreationFixture = () => {
-    return ReportDataCreator.setAddress()
-    .setReportNumber("2200018572", true)
-    .setTemplateValue(Enums.TEMPLATE_TYPE.notFreddieMac)
-    .setIncomeValue(Enums.INCOME_TYPE.both)
-    .setConclusionValue(Enums.VALUE_CONCLUSION_TYPE.AS_COMPLETE).build();
+const reportCreationFixture = () => {
+    return ReportDataCreator.getReportData("2200018572", { 
+        templateValue: Enums.TEMPLATE_TYPE.notFreddieMac, 
+        incomeValue: Enums.INCOME_TYPE.both, 
+        conclusionValue: Enums.VALUE_CONCLUSION_TYPE.AS_COMPLETE }, true);
 };
 
 const _LOESourceStrings: string[] = [
