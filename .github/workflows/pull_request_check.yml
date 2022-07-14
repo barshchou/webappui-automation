@@ -71,7 +71,7 @@ jobs:
           git checkout ${{ github.sha }}
           CHANGED_SPECS=$(npx find-cypress-specs --branch master)
           echo ::set-output name=CHANGED_SPECS::$CHANGED_SPECS
-          git branch --show-current
+          git git rev-parse --abbrev-ref HEAD
           rm -r ../webapp-ui-automation
 
       - name: Run included specs
