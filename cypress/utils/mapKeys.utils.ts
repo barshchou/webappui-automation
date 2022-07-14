@@ -9,5 +9,6 @@ export default {
     area_economic_analysis_file: "area_economic_analysis_file",
     submarket_analysis_use_file: "submarket_analysis_use_file",
     search_result_sales_comp:"search_result_sales_comp",
-    sales_comps_addresses: "sales_comps_addresses"
+    sales_comps_addresses: "sales_comps_addresses",
+    sales_comps_ids:"sales_comps_ids"
 };

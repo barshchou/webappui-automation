@@ -99,6 +99,9 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
         );
         findCompsPage.getSelectCompFromMapButtonByAddress(address).scrollIntoView().click({ force: true });
         this.checkFindSingleSalesComp();
+        // TODO: [QA-6233] Invstigate on ways we can click "Add" btn on Search Comps List safely
+        // ernst: delay to not accidentaly dispatch click to "Remove" btn on SearchList
+        cy.wait(1500);
         return this;
     }
 
@@ -123,9 +126,17 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
     checkFindSingleSalesComp(): FindCompsActions{
         cy.wait(`@${Alias.gql.FindTransactionByIdAndVersion}`, { timeout:35000 }).then((interception) => {
             cy.log(interception.response.body.data.findTransactionByIdAndVersion.id);
+            if(_map.get(mapKeysUtils.sales_comps_ids) == undefined){
+                let arr = [ interception.response.body.data.findTransactionByIdAndVersion.id ];
+                _map.set(mapKeysUtils.sales_comps_ids, arr);
+            }
+            else{
+                cy._mapGet(mapKeysUtils.sales_comps_ids).then(arr => {
+                    return arr.push(interception.response.body.data.findTransactionByIdAndVersion.id);
+                });
+            }
             cy.wrap(interception.response.body.data.findTransactionByIdAndVersion.id)
             .as(Alias.salesEventId);
-
             /**
              * Pushing comps addresses upon their addition
              */
@@ -139,6 +150,7 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
                 });
             }
             cy._mapGet(mapKeysUtils.sales_comps_addresses).then(arr => cy.log("Sales_Comps addresses array: "+arr));
+            cy._mapGet(mapKeysUtils.sales_comps_ids).then(arr => cy.log("Sales_IDs array: "+arr));
         });
         return this; 
     }
@@ -210,7 +222,7 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
     }
 
     clickImportCompsFromReportButton(): FindCompsActions {
-        findCompsPage.importReportCompsButton.click();
+        findCompsPage.importReportCompsButton.should("be.visible").click();
         return this;
     }
 
@@ -241,10 +253,14 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
      * TODO: [QA-6132] Add assertion on salesEventId
      */
     checkSelectedSingleSalesComps() {
-        cy.wait(`@${Alias.gql.FindTransactionsByIdsAndVersions}`).then(({ request }) => {
+        cy.wait(`@${Alias.gql.FindTransactionsByIdsAndVersions}`).then(({ request, response }) => {
             let req: Utils.GraphQLRequest = request.body;
             expect(req.operationName).to.equal(gqlOperationNames.findTransactionsByIdsAndVersions);
+            cy.log(response.body.data.findTransactionsByIdsAndVersions.map(e => e.id));
+            expect(response.body.data.findTransactionsByIdsAndVersions.map(e => e.id))
+            .to.include.members(_map.get(mapKeysUtils.sales_comps_ids));
         });
+        cy.pause();
         return this;
     }
 
