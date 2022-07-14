@@ -82,7 +82,9 @@ export namespace BoweryReports {
         name: ForecastItemBasis | string, 
         basis?: UnitSF, 
         forecast?: number | undefined, 
-        projection?: number 
+        projection?: number,
+        cardName?: ExpenseCardNames,
+        expenseUIName?: ProFormaTypes
     }
 
     export type Periods = { 
@@ -139,6 +141,8 @@ export namespace BoweryReports {
     export type LaundryVcLossType = typeof Enums.LAUNDRY_VC_LOSS_TYPE[KeyInfo.LaundryVcLossKeys]
 
     export type ReimbursementType = keyof typeof Enums.REIMBURSEMENT_TYPES
+
+    export type ReimbursementColumnsId = typeof Enums.REIMBURSEMENT_COLUMN_ID[KeyInfo.ReimbursementColumnsId]
 
     export type KnownInformation = typeof Enums.KNOWN_INFORMATION[KeyInfo.KnownInformationKeys]
 
@@ -204,8 +208,11 @@ export namespace BoweryReports {
     export type PropertyConditionsRadios = keyof typeof Enums.PROPERTY_CONDITIONS_RADIOS;
     export type BondTickers = typeof Enums.BOND_TYPES[KeyInfo.BondTypes]
     export type BondTypes = keyof typeof  Enums.BOND_TYPES
-
+	export type ExpenseCardNames = typeof Enums.EXPENSES_CARD_NAMES[KeyInfo.ExpenseCardName]
+	
     export namespace SalesComps {
         export type SelectedComparablesSortType = "Custom" | "Data Sold"
     }
+    
+    
 }

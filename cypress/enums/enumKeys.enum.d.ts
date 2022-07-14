@@ -38,3 +38,5 @@ export type RowsMarketAdjustmentKeys = keyof typeof Enums.ROWS_MARKET_ADJUSTMENT
 export type SalesAdjustmentGridCumulativePrice = keyof typeof Enums.SALES_ADJUSTMENT_GRID_CUMULATIVE_PRICE
 export type ReportStatus = keyof typeof Enums.REPORT_STATUS
 export type BondTypes = keyof typeof Enums.BOND_TYPES
+export type ExpenseCardName = keyof typeof Enums.EXPENSES_CARD_NAMES
+export type ReimbursementColumnsId = keyof typeof Enums.REIMBURSEMENT_COLUMN_ID
