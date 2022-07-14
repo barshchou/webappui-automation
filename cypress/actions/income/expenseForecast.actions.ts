@@ -539,6 +539,43 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
         return this;
     }
 
+    /**
+    * Action creates Aliases for 2 sum (in PSF + in Per Unit), 
+    * that is displayed in total operating expenses card in Generated Commentary field.
+    */
+
+    sumsInGeneratedComment(grossBuildingArea: number, resUnits = 0, rooms = 0): ExpenseForecastActions {
+        this.totalSumForecastPSFAllCards(grossBuildingArea, resUnits, rooms);
+        this.totalSumForecastPerUnitAllCards(grossBuildingArea, resUnits, rooms);
+        cy.get(`@${Alias.expenceForecastAliases.sumPerSF}`).then(sumPerSF => {
+            cy.get(`@${Alias.expenceForecastAliases.sumPerUnit}`).then(sumPerUnit => {
+                let sumPerSFInComment = `$${numberWithCommas(Number(sumPerSF).toFixed(2))}`;
+                let sumPerUnitInComment = `$${numberWithCommas(Math.round(Number(sumPerUnit)))}`;
+                cy.wrap(sumPerSFInComment).as(Alias.expenceForecastAliases.sumPerSFInComment);
+                cy.wrap(sumPerUnitInComment).as(Alias.expenceForecastAliases.sumPerUnitInComment);
+            });
+        });
+        return this;
+    }
+
+    sumPerUnitTOEAppraisersForecast(grossBuildingArea: number, resUnits = 0, rooms = 0): ExpenseForecastActions {
+        this.totalSumForecastPerUnitAllCards(grossBuildingArea, resUnits, rooms);
+        cy.get(`@${Alias.expenceForecastAliases.sumPerUnit}`).then(sumPerUnit => {
+            let sumPerUnitTOEAppraisersForecast = numberWithCommas(Math.round(Number(sumPerUnit)));
+            cy.wrap(sumPerUnitTOEAppraisersForecast).as(Alias.expenceForecastAliases.sumPerUnitTOEAppraisersForecast);
+        });
+        return this;
+    }
+
+    sumPSFTOEAppraisersForecast(grossBuildingArea: number, resUnits = 0, rooms = 0): ExpenseForecastActions {
+        this.totalSumForecastPSFAllCards(grossBuildingArea, resUnits, rooms);
+        cy.get(`@${Alias.expenceForecastAliases.sumPerSF}`).then(sumPerSF => {
+            let sumPSFTOEAppraisersForecast = numberWithCommas(Number(sumPerSF).toFixed(2));
+            cy.wrap(sumPSFTOEAppraisersForecast).as(Alias.expenceForecastAliases.sumPSFTOEAppraisersForecast);
+        });
+        return this;
+    }
+
 }
 
 export default new ExpenseForecastActions(expenseForecastPage);
