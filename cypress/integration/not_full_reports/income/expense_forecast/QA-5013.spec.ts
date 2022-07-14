@@ -35,7 +35,7 @@ describe(`[QA-5013] [Income>Expense forecast] Selected expense card is displayed
             is displayed in the Pro Forma page > Operating Expenses section (PSF measure + Empty Appraiser's forecasts)`, () => {
 
             _NavigationSection.navigateToExpenseForecast();
-            expensesCardsNames.expenseCardsIncludeInProFormaCheckboxArray.forEach(element => {
+            testData.expensesForecastCardNamesArray.forEach(element => {
                 Income._ExpenseForecastActions.verifyIncludeInProFormaCheckboxIsChecked(element);
             });
             _NavigationSection.navigateToProForma();
