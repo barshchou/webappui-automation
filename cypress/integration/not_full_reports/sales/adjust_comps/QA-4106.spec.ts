@@ -53,8 +53,8 @@ describe("[QA-4106] -> Total Utility Adjustments in Sales Adjustment Grid is cal
             cy.visit(<string>file);
             
             cy.contains("Cumulative Price Per Unit")
-            .parent().parent().parent()
-            .scrollIntoView().find("td").last().should("have.text", testData.cumulativePricePerUnit);
+                .parent().parent().parent()
+                .scrollIntoView().find("td").last().should("have.text", testData.cumulativePricePerUnit);
         }); 
     });
 });

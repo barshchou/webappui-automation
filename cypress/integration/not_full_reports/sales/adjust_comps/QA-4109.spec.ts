@@ -15,8 +15,8 @@ describe("Adjusted Price per Residential Unit in Sales Adjustment Grid is calcul
         
         NavigationSection.navigateToAdjustComps();
         Sales.AdjustComps.checkCalculationUnitsRadio(testData.calculationUnits)
-        .enterMarketAdjustmentsGroup(Object.keys(testData.comparableAdjustment), Object.values(testData.comparableAdjustment))            
-        .verifyTrendedPricePerBasis(Object.values(testData.comparableAdjustment), testData.basis);
+            .enterMarketAdjustmentsGroup(Object.keys(testData.comparableAdjustment), Object.values(testData.comparableAdjustment))            
+            .verifyTrendedPricePerBasis(Object.values(testData.comparableAdjustment), testData.basis);
 
         cy.stepInfo(`[QA-4109] -> 'Cumulative Price Per SF' is displayed in bold`);
         Sales.AdjustComps.Actions.checkCumulativePriceName("SF");
@@ -38,9 +38,9 @@ describe("Adjusted Price per Residential Unit in Sales Adjustment Grid is calcul
             cy.log(<string>file);
             cy.visit(<string>file);
             cy.contains("Cumulative Price Per SF")
-            .parent().parent().parent()
-            .scrollIntoView().find("td").last()
-            .should("have.text", testData.cumulativePricePerSF);
+                .parent().parent().parent()
+                .scrollIntoView().find("td").last()
+                .should("have.text", testData.cumulativePricePerSF);
         }); 
     });
 });

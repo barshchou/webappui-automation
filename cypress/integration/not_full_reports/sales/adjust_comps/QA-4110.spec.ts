@@ -43,8 +43,8 @@ describe("Total Utility Adjustments in Sales Adjustment Grid is calculated with 
             cy.log(<string>file);
             cy.visit(<string>file);
             cy.contains("Cumulative Price Per Unit")
-            .parent().parent().parent()
-            .scrollIntoView().find("td").last().should("have.text", testData.cumulativePricePerUnit);
+                .parent().parent().parent()
+                .scrollIntoView().find("td").last().should("have.text", testData.cumulativePricePerUnit);
         }); 
     }
 );});
