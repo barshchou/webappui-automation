@@ -24,7 +24,7 @@ jobs:
     needs: Run-tsc-check
     runs-on: ubuntu-latest
     steps:
-        - uses: ./.github/workflows/smoke.yml
+        - uses: Bowery-RES/webapp-ui-automation/.github/workflows/smoke.yml
           with:
             github_token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
             username: ${{ secrets.USERNAME }}
