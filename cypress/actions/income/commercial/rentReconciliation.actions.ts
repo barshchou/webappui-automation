@@ -29,5 +29,35 @@ class RentReconciliationActions extends BaseActionsExt<typeof rentReconciliation
         rentReconciliationPage.getCompRent(compIndex).should("have.text", `$${expectedRent.toFixed(2)}`);
         return this;
     }
+
+    verifyCalculationInputValue(expectedLeaseTermsCalcType: string): RentReconciliationActions {
+        rentReconciliationPage.calculationDropdown.invoke('attr', 'value').should('have.value', expectedLeaseTermsCalcType);
+        return this;
+    }
+
+    setLeaseTermsCalculationType(leaseTermsCalcType: string): RentReconciliationActions {
+        this.openCalculationDropdown()
+            .selectLeaseTermsCalculationOption(leaseTermsCalcType);
+        return this;
+    }
+
+    openCalculationDropdown(): RentReconciliationActions {
+        rentReconciliationPage.calculationDropdown.click();
+        return this;
+    }
+
+    selectLeaseTermsCalculationOption(leaseTermsCalcType: string): RentReconciliationActions {
+        rentReconciliationPage.calculationOption(leaseTermsCalcType).click();
+        this.verifyCalculationInputValue(leaseTermsCalcType);
+        return this;
+    }
+
+    setLeaseTermsAdjustment(adjustment: string, compIndex = 0): RentReconciliationActions {
+        let expectedAdjustmentValue = adjustment === "%" ? adjustment : `$${adjustment}`;
+        rentReconciliationPage.leaseTermsAdjustments(compIndex).clear().type(adjustment)
+            .should('have.value', expectedAdjustmentValue);
+        return this;
+    }
+
 }
 export default new RentReconciliationActions(rentReconciliationPage);
