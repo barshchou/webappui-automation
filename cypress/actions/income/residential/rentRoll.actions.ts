@@ -80,9 +80,24 @@ class InPlaceRentRollActions extends ResidentialRentRollSharedActions<typeof ren
         return this;
     }
 
-    checkPerUnitSquareFootage(value = "true"):InPlaceRentRollActions {
+    checkPerUnitSquareFootage(value = true):InPlaceRentRollActions {
         rentRollPage.getPerUnitSFRadio(value).should("not.be.checked").scrollIntoView()
             .click().should("be.checked");
+        return this;
+    }
+
+    clickPSFRadio(radioName: string): InPlaceRentRollActions {
+        rentRollPage.getPSFRadio(radioName).click();
+        return this;
+    }
+
+    verifyPerUnitSFRadioCheck(radio = true, isChecked = true): InPlaceRentRollActions {
+        const element = radio === true ? rentRollPage.getPerUnitSFRadio(radio) : rentRollPage.getPerUnitSFRadio(false);
+        if (isChecked === true) {
+            element.should("be.checked");
+        } else {
+            element.should("not.be.checked");
+        }
         return this;
     }
 
@@ -124,7 +139,7 @@ class InPlaceRentRollActions extends ResidentialRentRollSharedActions<typeof ren
     checkUncheckPerUnitSquareFootage(columnNames: Array<string>): InPlaceRentRollActions {
         this.checkPerUnitSquareFootage()
             .verifyListColumnExist(columnNames)
-            .checkPerUnitSquareFootage("false")
+            .checkPerUnitSquareFootage(false)
             .verifyListColumnNotExist(columnNames);
         return this;
     }
