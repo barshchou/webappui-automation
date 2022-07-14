@@ -20,33 +20,33 @@ jobs:
       - name: Run tsc:check
         run: npm run tsc:check
 
-  Run-smoke-tests:
-    needs: Run-tsc-check
-    runs-on: ubuntu-latest
-    container: cypress/browsers:node16.13.2-chrome100-ff98
-    permissions:
-      id-token: write
-      contents: read
-    strategy:
-      fail-fast: false
-      matrix:
-        containers: [ 1, 2, 3, 4, 5, 6, 7, 8 ]
-
-    steps:
-      - name: Run smoke end-to-end tests with Currents dev
-        uses: Bowery-RES/action-run-e2e-tests@latest
-        with:
-          github_token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
-          username: ${{ secrets.USERNAME }}
-          password: ${{ secrets.PASSWORD }}
-          env: staging
-          url: 'https://bowery-staging.herokuapp.com'
-          tags: grep=,grepTags=@smoke,burn=
-          record_key: ${{ secrets.CURRENTS_RECORD_KEY }}
-          ref: ${{ github.head_ref }}
+#  Run-smoke-tests:
+#    needs: Run-tsc-check
+#    runs-on: ubuntu-latest
+#    container: cypress/browsers:node16.13.2-chrome100-ff98
+#    permissions:
+#      id-token: write
+#      contents: read
+#    strategy:
+#      fail-fast: false
+#      matrix:
+#        containers: [ 1, 2, 3, 4, 5, 6, 7, 8 ]
+#
+#    steps:
+#      - name: Run smoke end-to-end tests with Currents dev
+#        uses: Bowery-RES/action-run-e2e-tests@latest
+#        with:
+#          github_token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
+#          username: ${{ secrets.USERNAME }}
+#          password: ${{ secrets.PASSWORD }}
+#          env: staging
+#          url: 'https://bowery-staging.herokuapp.com'
+#          tags: grep=,grepTags=@smoke,burn=
+#          record_key: ${{ secrets.CURRENTS_RECORD_KEY }}
+#          ref: ${{ github.head_ref }}
 
   Run-included-tests:
-    needs: [Run-tsc-check, Run-smoke-tests]
+    needs: [Run-tsc-check]
     runs-on: ubuntu-latest
     container: cypress/browsers:node16.13.2-chrome100-ff98
     permissions:
@@ -71,7 +71,7 @@ jobs:
           git checkout ${{ github.sha }}
           CHANGED_SPECS=$(npx find-cypress-specs --branch master)
           echo ::set-output name=CHANGED_SPECS::$CHANGED_SPECS
-          git git rev-parse --abbrev-ref HEAD
+          git rev-parse --abbrev-ref HEAD
           rm -r ../webapp-ui-automation
 
       - name: Run included specs
