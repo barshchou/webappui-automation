@@ -379,6 +379,11 @@ class TaxInfoActions extends BaseActionsExt<typeof taxInfoPage> {
         }
         return this;
     }
+
+    deleteRowTaxLiability(rowName: string, rowNumber = 0): TaxInfoActions {
+        taxInfoPage.getTaxLiabilityRowAction(rowName).eq(rowNumber).click().should("not.exist");
+        return this;
+    }
 }
 
 export default new TaxInfoActions(taxInfoPage);

@@ -112,6 +112,8 @@ class TaxInfoPage extends BasePage {
     getTaxLiabilityRowValue(name: string) {return cy.xpath(`//*[@role='presentation']//*[contains(text(), '${name}')]/following-sibling::*[1]`);}
 
     getTaxLiabilityRowItem(name: string) {return cy.xpath(`//*[@role='presentation']//*[contains(text(), '${name}')]`);}
+
+    getTaxLiabilityRowAction(name: string) {return cy.xpath(`//*[@role='presentation']//*[contains(text(), '${name}')]/following-sibling::*[2]`);}
 }
 
 export default new TaxInfoPage();
