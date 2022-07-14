@@ -1,4 +1,4 @@
-import testData from "../../../../fixtures/not_full_reports/income/tax_info/QA-5519-21.fixture";
+import testData from "../../../../fixtures/not_full_reports/income/tax_info/QA-5519-22.fixture";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { Income } from '../../../../actions/index';
@@ -32,6 +32,11 @@ describe("[QA-5183] Export column order both assessment psf and assessment per u
             .enterRowTaxLiabilityValue(testData.rowNames.additional, testData.additionalTaxRateValue)
             .enterRowTaxLiabilityValue(testData.rowNames.special, testData.specialAssessmentRowValue);
 
+
+        cy.stepInfo("6. Click 'Delete' from 'Action' column and verify row successfully deleted");
+        Income._TaxInfo.deleteRowTaxLiability(testData.rowNames.additional)
+            .deleteRowTaxLiability(testData.rowNames.special);
+            
         deleteReport(testData.reportCreationData.reportNumber);
     });
 
