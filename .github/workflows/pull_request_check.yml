@@ -22,7 +22,7 @@ jobs:
 
   Run-smoke-tests:
     needs: Run-tsc-check
-    uses: Bowery-RES/webapp-ui-automation/.github/workflows/smoke.yml
+    uses: ./.github/workflows/smoke.yml@${{github.head_ref}}
     with:
       github_token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
       username: ${{ secrets.USERNAME }}
