@@ -1,4 +1,4 @@
-import testData from "../../../../fixtures/not_full_reports/income/tax_info/QA-5519-22.fixture";
+import testData from "../../../../fixtures/not_full_reports/income/tax_info/QA-5519-23.fixture";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { Income } from '../../../../actions/index';

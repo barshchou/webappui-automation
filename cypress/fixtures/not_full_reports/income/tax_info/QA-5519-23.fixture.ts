@@ -2,7 +2,7 @@ import Enums from "../../../../enums/enums";
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 
 export default {
-    reportCreationData: ReportDataCreator.getReportData("5519-22"),
+    reportCreationData: ReportDataCreator.getReportData("5519-23"),
     featureFlagKey: Enums.FEATURE_FLAG_KEYS.flexibleTaxes,
     enterName: "Test Name",
     rowNames: {
