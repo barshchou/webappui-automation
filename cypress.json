@@ -3,7 +3,7 @@
   "chromeWebSecurity": false,
   "defaultCommandTimeout": 100000,
   "viewportWidth": 1920,
-  "viewportHeight": 1080,
+  "viewportHeight": 1200,
   "watchForFileChanges": false,
   "videoCompression": 15,
   "videoUploadOnPasses": false,
