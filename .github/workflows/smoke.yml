@@ -40,6 +40,36 @@ on:
         type: string
         description: Select branch, tag, commit ref
         required: false
+  workflow_call:
+    inputs:
+      env:
+        type: string
+        description: Select the environment
+        required: true
+        default: staging
+      url:
+        type: string
+        description: Select the url explicitly
+        required: true
+        default: 'https://bowery-staging.herokuapp.com'
+      customEnv:
+        type: string
+        description: Add custom environment url if needed
+        required: false
+      spec_file:
+        type: string
+        description: Spec(s) to be executed
+        required: false
+        default: cypress/integration/**/**/*.spec.ts
+      tags:
+        type: string
+        description: Run test with specific tags (via grep,grepTags,burn)
+        required: false
+        default: grep=,grepTags=@smoke,burn=
+      ref:
+        type: string
+        description: Select branch, tag, commit ref
+        required: false
 
 jobs:
   Smoke-tests-run:
@@ -51,7 +81,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        containers: [1, 2, 3, 4, 5, 6]
+        containers: [1, 2, 3, 4, 5, 6, 7, 8]
 
     steps:
       - name: Run smoke end-to-end tests with Currents dev
