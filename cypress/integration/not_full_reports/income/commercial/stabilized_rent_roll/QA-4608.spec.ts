@@ -27,10 +27,8 @@ describe("Verify the Commercial Stabilized Rent Roll table on export",
         cy.stepInfo(`3. On the Income > Commercial > In-Place Rent Roll, the “Vacant“ value is selected 
                     in the Lease Status column for all commercial units (and some other data)`); 
         _NavigationSection.navigateToCommercialInPlaceRentRoll();
-        Income._CommercialManager.InPlaceRentRoll.chooseListLeaseStatuses(
-            testData.leaseStatuses,
-            testData.numberOfCommercialUnits
-        ).enterTenantNameByRowNumber(testData.tenantName, 1)
+        Income._CommercialManager.InPlaceRentRoll.chooseListLeaseStatuses(testData.leaseStatuses, testData.numberOfCommercialUnits)
+            .enterTenantNameByRowNumber(testData.tenantName, 1)
             .enterRentPerSFAnnuallyByRowNumber(testData.rentPSF, 1);
         testData.leaseDates.forEach(date => {
             Income._CommercialManager.InPlaceRentRoll.enterLeaseDateByRowNumber(
@@ -49,8 +47,8 @@ describe("Verify the Commercial Stabilized Rent Roll table on export",
                     comparison into a new Created Group from the previous step`);
         _NavigationSection.clickCommercialRentComps()
             .clickYesIfExist();
-        Income._CommercialManager.RentComps.clickManuallyAddANewCompButton().
-            searchNewCompByAddress(testData.address);
+        Income._CommercialManager.RentComps.clickManuallyAddANewCompButton()
+            .searchNewCompByAddress(testData.address);
         testData.rentCompFields.forEach(field => {
             if(field.type == "input") {
                 Income._CommercialManager.RentComps.fillInRentCompFieldInput(field.name, field.value, true);
