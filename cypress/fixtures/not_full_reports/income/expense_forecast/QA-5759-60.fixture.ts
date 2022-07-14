@@ -2,6 +2,7 @@ import { BoweryReports } from "../../../../types/boweryReports.type";
 import { BoweryAutomation } from "../../../../types/boweryAutomation.type";
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 import Enums from "../../../../enums/enums";
+import expensesForecastCardNamesEnum from "../../../../enums/expense/expensesForecastCardNames.enum";
 
 
 const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("5759-60", {
@@ -14,11 +15,11 @@ const _buildingDescription: BoweryReports.BuildingDescription = {
     numberOfUnits: 5,
 };
 
-const _basis = "unit";
+const _basis = "sf";
 
-const expenseForecastElectricityFixture = (): BoweryReports.ForecastItem => {
+const expenseForecastPayrollBenefitsFixture = (): BoweryReports.ForecastItem => {
     return {
-        name: "waterAndSewer",
+        name: expensesForecastCardNamesEnum.payrollBenefits,
         basis: _basis,
         forecast: 4000
     };
@@ -27,7 +28,7 @@ const expenseForecastElectricityFixture = (): BoweryReports.ForecastItem => {
 export default {
     reportCreationData: _reportCreationData,
     buildingDescription: _buildingDescription,
-    expenseForecastWaterAndSewer: expenseForecastElectricityFixture(),
+    expenseForecastPayrollBenefitsFixture,
     basis: _basis,
     
 };
