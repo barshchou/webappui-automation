@@ -1,4 +1,9 @@
 name: Run smoke tests and tests, included in PR
+env:
+  github_token: ${{ secrets.github_token }}
+  username: ${{ secrets.username }}
+  password: ${{ secrets.password }}
+  record_key: ${{ secrets.record_key }}
 
 on:
   pull_request:
@@ -24,14 +29,13 @@ jobs:
     needs: Run-tsc-check
     uses: Bowery-RES/webapp-ui-automation/.github/workflows/smoke.yml@feature/Vlad/QA-6173
     with:
+      github_token: $github_token
+      username: $username
+      password: $password
       spec_file: cypress/integration/**/**/*.spec.ts
       tags: grep=,grepTags=@smoke,burn=
+      record_key: $record_key
       ref: ${{ github.head_ref }}
-    secrets:
-      github_token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
-      username: ${{ secrets.USERNAME }}
-      password: ${{ secrets.PASSWORD }}
-      record_key: ${{ secrets.CURRENTS_RECORD_KEY }}
 
   Run-included-tests:
     needs: [Run-tsc-check, Run-smoke-tests]
