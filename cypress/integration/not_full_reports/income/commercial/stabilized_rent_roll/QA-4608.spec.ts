@@ -7,7 +7,7 @@ import { numberWithCommas } from "../../../../../../utils/numbers.utils";
 describe("Verify the Commercial Stabilized Rent Roll table on export", 
     { tags: [ "@income", "@commercial", "@stabilized_rent_roll", "@check_export" ] }, () => {
         
-    it("Test body", () => {
+    it.skip("Test body", () => {
         cy.stepInfo(`1. The mixed report is created and several commercial units are added`);
         createReport(testData.reportCreationData);
         _NavigationSection.navigateToPropertySummary();
@@ -16,7 +16,7 @@ describe("Verify the Commercial Stabilized Rent Roll table on export",
         cy.stepInfo(`2. On the Property Commercial Unit, the Commercial Unit # SF is filled by any value`); 
         _NavigationSection.navigateToCommercialUnits();
         Property._CommercialUnits.enterListUnitSF(
-            testData.listOfUnitsSF,
+            testData.commercialUnitSfValues,
             testData.numberOfCommercialUnits
         );
         Property._CommercialUnits.clickRadioButtonByValueAndUnitIndex(
@@ -92,18 +92,18 @@ describe("Verify the Commercial Stabilized Rent Roll table on export",
             cy.contains("Commercial Stabilized Rent Roll").scrollIntoView()
                 .next().next().should('have.text', testData.streetName)
                 .next("table").within(() => {
-                    for(let i = 0; i < testData.exportData.length; i++) {
+                    for(let i = 0; i < testData.exportTableValues.length; i++) {
                         cy.get("tr").eq(0).find("td").eq(i)
-                            .should("have.text", testData.exportData[i].name);
+                            .should("have.text", testData.exportedTableColumnNames[i]);
                         cy.get("tr").eq(1).find("td").eq(i)
-                            .should("have.text", testData.exportData[i].values[0]);
+                            .should("have.text", testData.exportTableValues[i][0]);
                         cy.get("tr").eq(2).find("td").eq(i)
-                            .should("have.text", testData.exportData[i].values[1]);
+                            .should("have.text", testData.exportTableValues[i][1]);
                     }
                     cy.get("tr").eq(3).find("td").eq(0).should("have.text", testData.totalRowName);
-                    for(let i = 6; i < testData.exportData.length; i++) {
+                    for(let i = 6; i < testData.exportTableValues.length; i++) {
                         cy.get("tr").eq(3).find("td").eq(i)
-                            .should("have.text", testData.exportData[i].values[2]);
+                            .should("have.text", testData.exportTableValues[i][2]);
                     }
                 });
         });
