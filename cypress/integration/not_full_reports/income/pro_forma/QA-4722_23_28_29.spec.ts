@@ -32,8 +32,8 @@ describe("Potential Real Estate Tax Reimbursement",
         _NavigationSection.clickCommercialReimbursementSummaryButton()
             .clickYesIfExist();
         Income._CommercialManager.ReimbursementSummary.addNewCommercialReimbursement(
-            testData.expenseType, testData.expenceTypeCellName, testData.reimbursementType, testData.knownInformation)
-            .fillReimbursements(testData.monthlyReimbursement)
+            testData.expenseType, testData.expenseTypeCellName, testData.reimbursementType, testData.knownInformation)
+                .fillReimbursements(testData.monthlyReimbursement, testData.columnsId)
             .fillVCLossByRow(testData.reimbursementVcLoss);
 
         cy.saveLocalStorage();
@@ -64,7 +64,7 @@ describe("Potential Real Estate Tax Reimbursement",
 
     it("[QA-4728]", () => {
         cy.stepInfo(`4. The value in the Less Real Estate Taxes Reimbursement 
-                    V/C Loss @ X% is calcualted by formual: 
+                    V/C Loss @ X% is calculated by formula: 
                     Real Estate Taxes Reimbursement V/C Loss @ X% → PSF [Total/GBA Value]`);
         Income._ProFormaActions.verifyResidentialVCLossPerSF(
             testData.expenseType, testData.grossBuildingArea);

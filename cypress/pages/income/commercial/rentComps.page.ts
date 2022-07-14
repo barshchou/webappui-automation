@@ -44,7 +44,9 @@ class CommercialRentCompsPage extends BasePage {
 
     getRentCompDropdownOption(option: string) {return cy.get(`[data-value=${option}]`);}
 
-    get leaseDatePicker() {return cy.get("[data-qa=dateSigned-date-picker] div input");}
+    get leaseDatePicker() {return cy.get("[data-qa=dateSigned-date-picker] input:not([type=hidden])");}
+
+    get leaseDateInputToVerify() {return cy.get("[data-qa=dateSigned-date-picker] input[type=hidden]");}
 
     getEditButtonByRowNumberAndGroup(group = "unsorted", rowNumber = 0) {
         return cy.xpath(`//*[@data-qa='${group}_group']//child::button[.='Edit']`).eq(rowNumber);
@@ -92,6 +94,12 @@ class CommercialRentCompsPage extends BasePage {
         .find(`[data-qa=rentType-radio-group] input[value='${value}']`);}
 
     get pageHeaderElement() {return cy.get("[data-qa=rentComps]");}
+
+    getDropdownOptionsByFieldName(name: string) {
+        return cy.get(`[data-qa^=${name}][data-qa$='-select-option']`);
+    }
+
+    get componentErrorElement() {return cy.get("#component-error-text");}
 }
 
 export default new CommercialRentCompsPage();
