@@ -1,9 +1,4 @@
 name: Run smoke tests and tests, included in PR
-env:
-  github_token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
-  username: ${{ secrets.USERNAME }}
-  password: ${{ secrets.PASSWORD }}
-  record_key: ${{ secrets.CURRENTS_RECORD_KEY }}
 
 on:
   pull_request:
@@ -17,7 +12,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
         with:
-          token: $github_token
+          token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
 
       - name: Install dependecies
         run: npm install
@@ -27,17 +22,28 @@ jobs:
 
   Run-smoke-tests:
     needs: Run-tsc-check
-    uses: Bowery-RES/webapp-ui-automation/.github/workflows/smoke.yml@feature/Vlad/QA-6173
-    with:
-      github_token: $github_token
-      env: staging
-      url: 'https://bowery-staging.herokuapp.com'
-      username: $username
-      password: $password
-      spec_file: cypress/integration/**/**/*.spec.ts
-      tags: grep=,grepTags=@smoke,burn=
-      record_key: $record_key
-      ref: ${{ github.head_ref }}
+    runs-on: ubuntu-latest
+    container: cypress/browsers:node16.13.2-chrome100-ff98
+    permissions:
+      id-token: write
+      contents: read
+    strategy:
+      fail-fast: false
+      matrix:
+        containers: [ 1, 2, 3, 4, 5, 6, 7, 8 ]
+
+    steps:
+      - name: Run smoke end-to-end tests with Currents dev
+        uses: Bowery-RES/action-run-e2e-tests@latest
+        with:
+          github_token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          env: staging
+          url: 'https://bowery-staging.herokuapp.com'
+          tags: grep=,grepTags=@smoke,burn=
+          record_key: ${{ secrets.CURRENTS_RECORD_KEY }}
+          ref: ${{ github.head_ref }}
 
   Run-included-tests:
     needs: [Run-tsc-check, Run-smoke-tests]
@@ -50,7 +56,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
         with:
-          token: $github_token
+          token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
 
       - name: Install find specs module
         run: npm install -g find-cypress-specs@1.17.0
@@ -71,9 +77,9 @@ jobs:
       - name: Run included specs
         uses: Bowery-RES/action-run-e2e-tests@latest
         with:
-          github_token: $github_token
-          username: $username
-          password: $password
+          github_token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
           spec_file: ${{ steps.define_specs.outputs.CHANGED_SPECS }}
-          record_key: $record_key
+          record_key: ${{ secrets.CURRENTS_RECORD_KEY }}
           tags: grep=,grepTags=,burn=
