@@ -5,9 +5,7 @@ import { BoweryAutomation } from "../../../../types/boweryAutomation.type";
 import { BoweryReports } from "../../../../types/boweryReports.type";
 import { Income } from "../../../../actions";
 import { Alias } from "../../../../utils/alias.utils";
-//TODO change enums here and in tests
-//import expensesForecastCardNamesEnum from "../../../../enums/expense/expensesForecastCardNames.enum"; 
-
+import expensesForecastCardNamesEnum from "../../../../enums/expense/expensesForecastCardNames.enum";
 
 
 const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("5013_25", {
@@ -84,6 +82,20 @@ const _expensesInProFormaByDefaultArray = [
     proFormaTypes.replacementsAndReserves,
 ];
 
+const expensesForecastCardNamesArray = [
+    expensesForecastCardNamesEnum.electricity,
+    expensesForecastCardNamesEnum.fuel,
+    expensesForecastCardNamesEnum.generalAndAdministrative,
+    expensesForecastCardNamesEnum.insurance,
+    expensesForecastCardNamesEnum.legalAndProfessional,
+    expensesForecastCardNamesEnum.managementFees,
+    expensesForecastCardNamesEnum.miscellaneous,
+    expensesForecastCardNamesEnum.payrollBenefits,
+    expensesForecastCardNamesEnum.repairAndMaintenance,
+    expensesForecastCardNamesEnum.replacementsAndReserves,
+    expensesForecastCardNamesEnum.waterAndSewer,
+];
+
 const expenseForecastFixture = (_name: BoweryReports.ForecastItemBasis | string, basis: "unit" | "sf" | "room", forecast: number): BoweryReports.ForecastItem => {
     return {
         name: _name,
@@ -140,4 +152,5 @@ export default {
     verifyTOECommentGenerated,
     verifyTOEAppraisersValueLinePSF,
     verifyTOEAppraisersValueLinePerUnit,
+    expensesForecastCardNamesArray
 };

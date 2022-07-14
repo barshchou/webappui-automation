@@ -2,7 +2,6 @@ import testData from "../../../../fixtures/not_full_reports/income/expense_forec
 import { _NavigationSection } from "../../../../actions/base";
 import { Income, Property } from "../../../../actions";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
-import expensesCardsNames from " ../../../cypress/enums/expense/expenseForecast.enum";
 
 describe(`[QA-5013] [Income>Expense forecast] Selected expense card is displayed in certain places`,
     { tags: [ "@income", "@expense_forecast" ] }, () => {
@@ -35,7 +34,7 @@ describe(`[QA-5013] [Income>Expense forecast] Selected expense card is displayed
             is displayed in the Pro Forma page > Operating Expenses section (PSF measure + Empty Appraiser's forecasts)`, () => {
 
             _NavigationSection.navigateToExpenseForecast();
-            expensesCardsNames.expenseCardsIncludeInProFormaCheckboxArray.forEach(element => {
+            testData.expensesForecastCardNamesArray.forEach(element => {
                 Income._ExpenseForecastActions.verifyIncludeInProFormaCheckboxIsChecked(element);
             });
             _NavigationSection.navigateToProForma();
