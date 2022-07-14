@@ -22,7 +22,7 @@ jobs:
 
   Run-smoke-tests:
     needs: Run-tsc-check
-    uses: ./.github/workflows/smoke.yml@${{github.head_ref}}
+    uses: ./.github/workflows/smoke.yml
     with:
       github_token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
       username: ${{ secrets.USERNAME }}
