@@ -1,4 +1,4 @@
-import testData from "../../../../../fixtures/not_full_reports/income/commercial/rent_reconciliation/QA-4189.fixture";
+import testData from "../../../../../fixtures/not_full_reports/income/commercial/rent_reconciliation/QA-4189_4712.fixture";
 import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../../actions/base";
 import { Income, Property } from "../../../../../actions";
@@ -13,10 +13,8 @@ describe("Rent is displayed on the same basis that is selected on In-Place rent 
        cy.stepInfo("Preconditions: Navigate to property summary, enter number of commercial units");
        _NavigationSection.navigateToPropertySummary();
        Property._Summary.enterNumberOfCommercialUnits(testData.unitsNumber);
-    });
 
-    it("[QA-4189] Rent is displayed on the same basis that is selected on In-Place rent roll", () => {
-        cy.stepInfo('1. Fill in Commercial In-Place RR table');
+       cy.stepInfo('1. Fill in Commercial In-Place RR table');
         _NavigationSection.navigateToCommercialInPlaceRentRoll();
         Income._CommercialManager.InPlaceRentRoll.clickPerSquareFootPerMonthButton();
         testData.leaseStatuses.forEach((status, index) => {
@@ -35,23 +33,43 @@ describe("Rent is displayed on the same basis that is selected on In-Place rent 
         cy.stepInfo('4. Select any rent comp (Income>Commercial>Rent Comps)');
         _NavigationSection.navigateToCommercialRentComps();
         Income._CommercialManager.RentComps.addNumberFirstComparables(testData.numberOfComparables)
-            .dragAllCommercialUnitsIntoGroup(testData.compGroupName, testData.unitsNumber)
-            .saveCompPricesPerSFPerYearToAliasNumberFirstComps(testData.numberOfComparables, testData.compGroupName);
+            .dragAllCommercialUnitsIntoGroup(testData.compGroupName, testData.numberOfComparables);
+        
+        cy.stepInfo('5. Update units of measure and base unit rent for comps');
+        for (let compIndex = 0; compIndex < testData.numberOfComparables; compIndex++){
+            Income._CommercialManager.RentComps.clickEditButtonByRowNumber(testData.compGroupName, compIndex)
+                .checkUnitOfMeasureRadioButton(testData.unitsOfMeasure)
+                .fillInRentCompFieldInput(testData.rentCompFields[compIndex].name, testData.rentCompFields[compIndex].value, true)
+                .chooseRentCompFieldDropdownOption(testData.sourceOfInformation.name, testData.sourceOfInformation.value)
+                .clickSubmitButton();
+        }
+        Income._CommercialManager.RentComps.saveCompPricesPerSFPerYearToAliasNumberFirstComps(testData.numberOfComparables, testData.compGroupName);
 
+       cy.saveLocalStorage();
+    });
+
+    beforeEach('Restore local storage', () => {
+        cy.restoreLocalStorage();
+    });
+
+    it("[QA-4189] [QA-4712] Rent is displayed on the same basis that is selected on In-Place rent roll", () => {
         cy.stepInfo(`5. Navigate to Rent Reconciliation and verify:
                     - Verify if Per Square Foot Per Month option is selected on In-Place RR page -> 
                         Rent label is "Rent/SF/Month" 
                     - Verify Rent/SF/Month for Base Unit
                     - Verify Rent/SF/Month for Subject Units
-                    - Verify Rent/SF/Month for Rent Comps pulls`);
+                    - Verify Rent/SF/Month for Rent Comps pulls
+                    - [QA-4712] Verify Rent PSF/Month value is displayed with 2 decimals places`);
         _NavigationSection.navigateToRentReconciliation();
         Income._CommercialManager.RentReconciliation.verifyRentLabel(testData.rentPSFLabelName)
             .verifyBaseUnitRent(testData.rentPSFs.at(-1))
             .verifySubjectUnitRent(testData.rentPSFs[0]);
         for (let index = 0; index < testData.numberOfComparables; index++){
             Income._CommercialManager.RentReconciliation.Page.getCompRent(index).then(() => {
-                let value = _map.get(`${index + 1}${mapKeysUtils.rent_per_sf}`);
-                Income._CommercialManager.RentReconciliation.verifyCompsRent(value, index);
+                let rentFromRentComps = _map.get(`${index + 1}${mapKeysUtils.rent_per_sf}`);
+                let checkDecimalRent = testData.rentCompFields[index].rentSf;
+                Income._CommercialManager.RentReconciliation.verifyCompsRent(rentFromRentComps, index)
+                    .verifyCompsRent(checkDecimalRent, index);
             });
         }
     });

@@ -190,6 +190,8 @@ class CommercialRentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
         for (let i = 0; i < numberOfUnits; i++) {
             target = i == 0 ? rentCompsPage.getDroppableArea(groupName) : rentCompsPage.getDroppableAreaDropped(groupName);
             commercialUnit.dragAndDrop(subject, target);
+            // VB: For more than 2 units Drag and drop is too slow and we need to wait a bit between dnd actions.
+            cy.wait(500);
         }
         return this;
     }
