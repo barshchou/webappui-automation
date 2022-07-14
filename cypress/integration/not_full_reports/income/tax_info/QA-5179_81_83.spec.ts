@@ -1,10 +1,10 @@
-import testData from "../../../../fixtures/not_full_reports/income/tax_info/QA-5179_83.fixture";
+import testData from "../../../../fixtures/not_full_reports/income/tax_info/QA-5179_81_83.fixture";
 import { deleteReport, loginAction } from "../../../../actions/base/baseTest.actions";
 import { _HomePage, _NavigationSection } from "../../../../actions/base";
 import { ReviewExport, Income } from '../../../../actions/index';
 import launchDarklyApi from "../../../../api/launchDarkly.api";
 
-describe("[QA-5179_83] Export column order both assessment psf and assessment per unit", () => {
+describe("[QA-5179_81_83] Export column order both assessment psf and assessment per unit", () => {
 
     it("Test body", { tags: [ "@check_export", "@income", "@tax_info" ] }, () => {
         cy.stepInfo("1. Set feature flag and create report");
@@ -19,7 +19,10 @@ describe("[QA-5179_83] Export column order both assessment psf and assessment pe
         Income._TaxInfo.clickAddNewRowButton()
             .clickAddNewRowButton("Add Special Assessment");
 
-        cy.stepInfo("4. Export the report");
+        cy.stepInfo("4. Check Per Unit");
+        Income._TaxInfo.checkBasisByValue(testData.checkValue);
+
+        cy.stepInfo("5. Export the report");
         _NavigationSection.Actions.openReviewAndExport();
         ReviewExport.generateDocxReport().waitForReportGenerated()
             .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
@@ -34,7 +37,7 @@ describe("[QA-5179_83] Export column order both assessment psf and assessment pe
         ).then(file => {
             cy.log(<string>file);
             
-            cy.stepInfo(`5. Check the column order:
+            cy.stepInfo(`6. Check the column order:
                 item (no heading), actual, actual per sf, actual per unit, transitional, transitional per sf, transitional per unit`);
             
             cy.visit(<string>file);
