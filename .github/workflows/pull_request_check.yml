@@ -24,7 +24,6 @@ jobs:
     needs: Run-tsc-check
     uses: ./.github/workflows/smoke.yml
     with:
-      github_token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
       username: ${{ secrets.USERNAME }}
       password: ${{ secrets.PASSWORD }}
       spec_file: cypress/integration/**/**/*.spec.ts
