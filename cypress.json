@@ -1,12 +1,16 @@
 {
+  "baseUrl":"https://bowery-staging.herokuapp.com",
   "chromeWebSecurity": false,
   "defaultCommandTimeout": 100000,
   "viewportWidth": 1920,
-  "viewportHeight": 1080,
+  "viewportHeight": 1200,
   "watchForFileChanges": false,
   "videoCompression": 15,
   "videoUploadOnPasses": false,
   "experimentalStudio": true,
   "projectId": "EDvaU4",
-  "ignoreTestFiles": "*.studio.*"
+  "ignoreTestFiles": "*.studio.*",
+  "env":{
+    "report":"api"
+  }
 }

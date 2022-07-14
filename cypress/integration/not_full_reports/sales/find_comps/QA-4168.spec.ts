@@ -19,15 +19,14 @@ describe("[QA-4168] Verify the Internal Notes field", { tags: [ "@sales", "@find
 
         Sales._FindComps.Actions
         .openAddNewComparableFormSearchResult(testData.compAddress)
-        .selectDropdownOptionNewComp(Sales._FindComps.Page.conditionDropdown, testData.selectItems.condition);
+        .selectDropdownOptionNewComp(Sales._FindComps.Page.conditionDropdown, testData.condition);
         Sales._FindComps.Actions.
         PropertyInfo.setCommercialUnits(`${testData.units.numberOfUnits}`).setCommercialArea(`${testData.units.grossArea}`)
         .Page.newCompContinueButton.click();
         Sales._FindComps.Actions.
         SaleInfo.selectSaleDate().setBuyerGrantee(testData.saleInfo.buyer).setSellerGarantor(testData.saleInfo.seller);
         Sales._FindComps
-        .Actions.selectDropdownOptionNewComp(Sales._FindComps.Page.SourceInput, testData.selectItems.source)
-        .Page.newCompContinueButton.click();
+        .Actions.Page.newCompContinueButton.click();
 
         cy.stepInfo(` 1.Verify the Internal Notes is free text input type;
             -Try to enter any numerical / non-integer / text value;
@@ -39,8 +38,7 @@ describe("[QA-4168] Verify the Internal Notes field", { tags: [ "@sales", "@find
         Sales._FindComps.Actions.PropertyDesc.enterInternalNotes(testData.verifyTextValue);
         Sales._FindComps.Actions.emulateCopyPaste(
             Sales._FindComps.Page.internalNotesTextArea, testData.verifyTextValue
-        );        
-        cy.contains(testData.verifyTextUnderTextArea).should("be.visible");
+        );
 
         deleteReport(testData.reportCreationData.reportNumber);
     });

@@ -1,8 +1,20 @@
 import rentRollPage from "../../../pages/income/commercial/rentRoll.page";
 import { numberWithCommas } from "../../../../utils/numbers.utils";
 import CommercialRentRollSharedComponent from "../../shared_components/commercialRentRoll.shared.actions";
+import { BoweryReports } from "../../../types/boweryReports.type";
+import Enums from "../../../enums/enums";
 
 class CommercialRentRollActions extends CommercialRentRollSharedComponent<typeof rentRollPage> {
+
+    verifyThatPageIsOpened(): this {
+        rentRollPage.pageHeader.should("be.visible");
+        cy.url().then(url => {
+            let urlObj = new URL(url);
+            cy.log("Check whether current URL ends with '/commercial-rent-roll'");
+            cy.wrap(urlObj.pathname.endsWith("/commercial-rent-roll")).should("be.true");
+        });
+        return this;
+    }
 
     verifyBasisOfRentTooltip() {
         rentRollPage.basisOfRentField.should("exist");
@@ -72,7 +84,7 @@ class CommercialRentRollActions extends CommercialRentRollSharedComponent<typeof
     }
 
     pressDeleteLeaseStatusByRow(rowNumber = 0): this {
-        this.Page.leaseStatusCells.eq(rowNumber).trigger("keydown", { keyCode: 46 })
+        this.Page.leaseStatusCells.eq(rowNumber).click().trigger("keydown", { keyCode: 46 })
             .should("have.text", "");
         return this;
     }
@@ -155,7 +167,7 @@ class CommercialRentRollActions extends CommercialRentRollSharedComponent<typeof
 
     enterListPerSF(leaseStatuses: Array<BoweryReports.LeaseStatus>, perSFList: Array<number>): this {
         for (let i = 0; i < leaseStatuses.length; i++) {
-            if (leaseStatuses[i] === "Vacant") {
+            if (leaseStatuses[i] === "Vacant" || perSFList[i] === 0) {
                 continue;
             }
             this.enterRentPerSFAnnuallyByRowNumber(perSFList[i], i);
@@ -219,6 +231,28 @@ class CommercialRentRollActions extends CommercialRentRollSharedComponent<typeof
         const textToBe = numberWithCommas((totalAnnualRent / totalSF).toFixed(2));
         this.Page.rentPerSFAnnuallyTotal.should("have.text", `$${textToBe}`);
         return this;
+    }
+
+    verifyLeaseStatusNeedsToBeFilled(rowNumber = 0): CommercialRentRollActions {
+        this.Page.leaseStatusCells.eq(rowNumber).should("have.css", "box-shadow",
+            "rgb(211, 65, 65) 0px 0px 0px 1px");
+        return this;
+    }
+
+    clickBasisOfRentTabByUnitMeasure(measure: BoweryReports.UnitsOfMeasure) {
+        switch (measure) {
+            case Enums.UNITS_OF_MEASURE.annually:
+                this.clickAnnuallyBasisButton();
+                break;
+            case Enums.UNITS_OF_MEASURE.monthly:
+                this.clickMonthlyBasisButton();
+                break;
+            case Enums.UNITS_OF_MEASURE.perSquareFootPerYear:
+                this.clickPerSquareFootButton(false);
+                break;
+            default:
+                this.clickPerSquareFootPerMonthButton();
+        }
     }
 
 }

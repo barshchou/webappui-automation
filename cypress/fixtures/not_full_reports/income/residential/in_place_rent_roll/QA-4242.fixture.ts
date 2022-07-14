@@ -1,4 +1,5 @@
 import enums from "../../../../../enums/enums";
+import { BoweryReports } from "../../../../../types/boweryReports.type";
 import ReportDataCreator from "../../../../data_creator/reportData.creator";
 
 const rentRollResidentialUnitsFixture = () : BoweryReports.ResidentialUnit[] => {
@@ -24,9 +25,9 @@ const rentRollResidentialUnitsFixture = () : BoweryReports.ResidentialUnit[] => 
 export default {
     reportCreationData: ReportDataCreator.getReportData("4242", {
         conclusionValue: enums.VALUE_CONCLUSION_TYPE.AS_IS,
-        incomeValue: enums.INCOME_TYPE.RESIDENTIAL
+        incomeValue: enums.INCOME_TYPE.residential
     }),
-    perRoomAnalysis: "Include Per Room Analysis in Report",
+    perRoomAnalysis: enums.RENT_ROLL_OPTIONS_CHECKBOXES.include,
     columnName: "Rent/Room",
     residentialUnits: rentRollResidentialUnitsFixture()
 };

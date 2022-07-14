@@ -18,10 +18,12 @@ describe("Verify Grid is calculated with correct formula",
     it("[QA-4108]", () => {
         cy.stepInfo("1. Navigate to Sales > Find comps and select address");
         _NavigationSection.navigateToFindComps();
-        Sales._FindComps.selectCompFromMapByAddress(testData.comparable.address);
+        testData.compsToAdd.forEach(() => {
+            Sales._FindComps.Actions.selectCompFromMap();
+        });
 
         cy.stepInfo("2. Navigate to Sales > Adjust Comps > Sales Adjustment Grid");
-        _NavigationSection.openAdjustCompsInSales();
+        _NavigationSection.navigateToAdjustComps();
 
         cy.stepInfo("3. Fill inputs in Market Adjustment");
         Sales._AdjustComps.checkCalculationUnitsRadio(testData.calculationUnits)

@@ -66,6 +66,12 @@ class StabilizedRentRollActions extends ResidentialRentRollSharedActions<typeof 
         stabRentRollPage.occupancyRateInput.clear().type(newCommentary).should("have.text", newCommentary);
         return this;
     }
-}
+
+    verifyColumnExistOrNotExistInTable(name: string, isExist = true): this {
+        isExist === true ?  stabRentRollPage.getLabelInGridTable(name).should("exist")
+            :  stabRentRollPage.getLabelInGridTable(name).should("not.exist");
+        return this;
+    }
+} 
 
 export default new StabilizedRentRollActions(stabRentRollPage);

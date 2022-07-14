@@ -1,6 +1,7 @@
 import laundryPage from "../../../pages/income/miscellaneous/laundry.page";
 import { numberWithCommas } from "../../../../utils/numbers.utils";
 import BaseActionsExt from "../../base/base.actions.ext";
+import { BoweryReports } from "../../../types/boweryReports.type";
 
 class LaundryActions extends BaseActionsExt<typeof laundryPage>{
 
@@ -31,7 +32,8 @@ class LaundryActions extends BaseActionsExt<typeof laundryPage>{
         return this;
     }
 
-    enterLaundryVCLossPercentage(percentage: number): LaundryActions {
+    enterLaundryVCLossPercentage(percentage: number, type: BoweryReports.LaundryVcLossType): LaundryActions {
+        this.checkLaundryVCLossRadio(type);
         laundryPage.laundryVCLossPercentage.clear().type(percentage.toString()).should("have.value", percentage);
         if (percentage > 100) {
             cy.contains("Max value is 100").should("exist");

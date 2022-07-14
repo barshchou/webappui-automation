@@ -5,7 +5,7 @@ import { _NavigationSection } from "../../../../actions/base";
 import { Property } from '../../../../actions/index';
 import { Income } from "../../../../actions";
 import proFormaTypes from "../../../../enums/proFormaTypes.enum";
-import Enums from "../../../../enums/incomeTypesCellNames.enum";
+import Enums from "../../../../enums/income/incomeTypesCellNames.enum";
 
 describe("Potential Laundry Income", 
     { tags:[ "@income", "@pro_forma" ] }, () => { 
@@ -30,13 +30,13 @@ describe("Potential Laundry Income",
         cy.saveLocalStorage();
     });
     
-    beforeEach("Restore local storeage", () => {
+    beforeEach("Restore local storage", () => {
         cy.restoreLocalStorage();
         _NavigationSection.navigateToProForma()
             .verifyProgressBarNotExist();
     });
 
-    it(`[QA-4507]: `, () => {
+    it("[QA-4507]", () => {
         cy.stepInfo(`5 Verify that Pro Forma table contains Laundry Income Total value`);
         Income._ProFormaActions.verifyCategoryTotal(
             `$${numberWithCommas(Math.round(testData.laundryIncome))}`, 
@@ -50,14 +50,14 @@ describe("Potential Laundry Income",
             `$${numberWithCommas(testData.laundryIncome.toFixed(2))}`);
     });
 
-    it(`[QA-4508]: `, () => {
+    it("[QA-4508]", () => {
         cy.stepInfo(`5. Verify that Pro Forma table contains Laundry Income PSF value`);
         Income._ProFormaActions.verifyCategoryPSFTotal(
             `$${numberWithCommas(testData.laundryIncomePerSf.toFixed(2))}`, 
             proFormaTypes.laundryIncome);
     });
 
-    it(`[QA-4509]: `, () => {
+    it("[QA-4509]", () => {
         cy.stepInfo(`5. Verify that Pro Forma table contains Laundry Income Per Unit value`);
         Income._ProFormaActions.verifyCategoryPerUnitTotal(
             `$${numberWithCommas(Math.round(testData.laundryIncomePerUnit))}`, 

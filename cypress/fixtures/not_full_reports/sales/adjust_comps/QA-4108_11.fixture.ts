@@ -2,7 +2,7 @@ import Enums from "../../../../enums/enums";
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 
 const _reportCreationData = ReportDataCreator.getReportData("4108_11", {
-    incomeValue: Enums.INCOME_TYPE.BOTH
+    incomeValue: Enums.INCOME_TYPE.both
 });
 
 const comparableFixture = () => {
@@ -29,4 +29,5 @@ export default {
     locationAdjustments: _locationAdjustments,
     comparable: Object.freeze(comparableFixture()),
     calculationUnits: "Per Residential Units",
+    compsToAdd: [ 0, 1 ],
 };

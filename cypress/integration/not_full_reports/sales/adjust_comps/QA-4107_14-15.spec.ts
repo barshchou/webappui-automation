@@ -12,10 +12,12 @@ describe("Adjusted Price per Residential Unit in Sales Adjustment Grid is calcul
 
         cy.stepInfo("2. Navigate to Sales > Find Comps and select comps");
         NavigationSection.navigateToFindComps();
-        Sales._FindComps.selectCompFromMapByAddress(testData.comparable.address);
+        testData.compsToAdd.forEach(() => {
+            Sales._FindComps.Actions.selectCompFromMap();
+        });
 
         cy.stepInfo("3. Navigate to Sales > Adjust Comps > Sales Adjustment Grid");
-        NavigationSection.openAdjustCompsInSales();
+        NavigationSection.navigateToAdjustComps();
 
         cy.stepInfo("4. Fill fields and verify Adjusted Price");
         Sales._AdjustComps.checkCalculationUnitsRadio(testData.calculationUnits[1])
@@ -35,10 +37,12 @@ describe("Adjusted Price per Residential Unit in Sales Adjustment Grid is calcul
 
         cy.stepInfo("2. Navigate to Sales > Find Comps and select comps");
         NavigationSection.navigateToFindComps();
-        Sales._FindComps.selectCompFromMapByAddress(testData.comparable.address);
+        testData.compsToAdd.forEach(() => {
+            Sales._FindComps.Actions.selectCompFromMap();
+        });
 
         cy.stepInfo("3. Navigate to Sales > Adjust Comps > Sales Adjustment Grid");
-        NavigationSection.openAdjustCompsInSales();
+        NavigationSection.navigateToAdjustComps();
 
         cy.stepInfo("4. Fill fields and verify Adjusted Price per Unit");
         Sales._AdjustComps.checkCalculationUnitsRadio(testData.calculationUnits[1])
@@ -58,10 +62,12 @@ describe("Adjusted Price per Residential Unit in Sales Adjustment Grid is calcul
 
         cy.stepInfo("2. Navigate to Sales > Find Comps and select comps");
         NavigationSection.navigateToFindComps();
-        Sales._FindComps.selectCompFromMapByAddress(testData.comparable.address);
+        testData.compsToAdd.forEach(() => {
+            Sales._FindComps.Actions.selectCompFromMap();
+        });
 
         cy.stepInfo("3. Navigate to Sales > Adjust Comps > Sales Adjustment Grid");
-        NavigationSection.openAdjustCompsInSales();
+        NavigationSection.navigateToAdjustComps();
 
         cy.stepInfo("4. Fill fields and verify Adjusted Price PSF");
         Sales._AdjustComps.checkCalculationUnitsRadio(testData.calculationUnits[0])

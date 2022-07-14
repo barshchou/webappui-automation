@@ -25,7 +25,7 @@ class Homepage extends BasePage {
 
     get reportNumberSearchField() {return cy.get("*[name='number']");}
 
-    getArchiveButton(reportNumber) {
+    getArchiveButton(reportNumber: string) {
         return cy.xpath(`//*[text()='${reportNumber}']//following::*[@data-qa='archive-btn']`).first();
     }
 
@@ -35,7 +35,7 @@ class Homepage extends BasePage {
 
     get selectStateButton() {return cy.get("*[data-qa='search.locationIdentifier-select-list'] [role='button']");}
 
-    getStateByName(name) {return cy.get(`*[data-qa='search.locationIdentifier-${name}-select-option']`);}
+    getStateByName(name: string) {return cy.get(`*[data-qa='search.locationIdentifier-${name}-select-option']`);}
 
     get propertyIdentifierTypeInput() {return cy.get("*[name='search.propertyIdentifierType']");}
 
@@ -44,6 +44,15 @@ class Homepage extends BasePage {
     get reportNumberCells() {return cy.get("[aria-colindex='2']");}
 
     get allReportsTab() {return cy.xpath("//button[.='ALL REPORTS']");}
+
+    /**
+     * @returns List of report rows available on dashboard
+     */
+    get reportsRows(){
+        return cy.get('[aria-label="grid"] a');
+    }
+
+    reportStatus(reportNumber: string) {return cy.xpath(`//*[text()='${reportNumber}']//following::div[@aria-colindex='9']//span`).first();} 
 }
 
 export default new Homepage();

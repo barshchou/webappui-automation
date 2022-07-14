@@ -1,13 +1,14 @@
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 import Enums from "../../../../enums/enums";
+import { BoweryReports } from "../../../../types/boweryReports.type";
 
 export default {
     reportCreationData: ReportDataCreator.getReportData("4168", {
-            incomeValue: Enums.INCOME_TYPE.BOTH,
+            incomeValue: Enums.INCOME_TYPE.both,
             conclusionValue: Enums.VALUE_CONCLUSION_TYPE.AS_IS
         }),
     compAddress: "601 West 26th Street, New York, USA",
-    selectItems: { condition: "Shell", source: "CoStar" },
+    condition: "Shell",
     units:  { grossArea: 25645, numberOfUnits: 2 } as BoweryReports.BuildingDescription,
     saleInfo: {
         saleDate: "05-17-2022",

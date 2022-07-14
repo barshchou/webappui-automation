@@ -23,8 +23,7 @@ describe("Prospective Market Value As Stabilized -> Less Laundry Rent Loss data 
             .enterLeaseStatusByRowNumber(testData.leaseStatus);
         NavigationSection.navigateToLaundry();
         Income.Miscellaneous.Laundry.enterLaundryIncome(testData.laundryIncome)
-            .checkLaundryVCLossRadio(testData.vcLossValue)
-            .enterLaundryVCLossPercentage(testData.vcLossPercentage);
+            .enterLaundryVCLossPercentage(testData.vcLossPercentage, testData.vcLossValue);
         NavigationSection.navigateToCapRateConclusion();
         Income.CapRateConclusion.enterConclusionSectionConcludedCapRate(testData.concludedCapRate)
             .enterAsStabilizedLaundryLossMonths(testData.lossMonths)

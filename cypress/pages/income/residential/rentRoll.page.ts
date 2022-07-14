@@ -14,6 +14,8 @@ class InPlaceRentRollPage extends ResidentialRentRollSharedPage {
 
     getCheckboxByLabel(label) {return cy.get(`*[label="${label}"] input`);}
 
+    radioButtonLabelByText(labelText) {return cy.xpath(`//label[text()="${labelText}"]`);}
+
     get importViaCSVHeader() {return cy.xpath("//p[text()='Import Rent Roll via CSV']");}
 
     get skipManualRentEntryRow() {return cy.xpath("//p[text()='Skip manual rent roll entry.']");}
@@ -30,12 +32,16 @@ class InPlaceRentRollPage extends ResidentialRentRollSharedPage {
 
     get rentRollCommentary() {return cy.get("[data-qa*='currentRentRollDiscussion.commentary']");}
 
-    get monthlyRentCells() {return cy.get("[data-qa^=rent-][data-qa$=cell]");}
-
     get tableListboxOptions() {return cy.get("td.listbox");}
 
     // TODO: Fix locator for this cells after https://bowery.atlassian.net/browse/WEB-5364 bug fix and move methods and elements, related to it to shared components
     get rentSFCell() {return cy.xpath("//*[contains(@class, 'readOnly') and not(contains(@data-qa, 'cell'))]");}
+
+    get stabilizedRentSFCell() {return cy.get("[data-qa='rentPerSquareFootage-cell']");}
+
+    get rentRollAppraiserCommentary() {return cy.get("[name='currentRentRollDiscussion.additionalCommentary']");}
+
+    infoIcon(index = 1) {return cy.xpath(`//*[text()='Current Rent Roll Discussion']//following::*[@role='presentation'][${index}]`);}
 
 }
 

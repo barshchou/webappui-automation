@@ -2,7 +2,7 @@ import grossIncomePage from "../../pages/income/potentialGrossIncome.page";
 import { getNumberFromDollarNumberWithCommas, numberWithCommas } from "../../../utils/numbers.utils";
 import potentialGrossIncomePage from "../../pages/income/potentialGrossIncome.page";
 import BaseActionsExt from "../base/base.actions.ext";
-import Enums from "../../enums/incomeTypesCellNames.enum";
+import Enums from "../../enums/income/incomeTypesCellNames.enum";
 
 class PotentialGrossIncomeActions extends BaseActionsExt<typeof potentialGrossIncomePage> {
 
@@ -35,23 +35,8 @@ class PotentialGrossIncomeActions extends BaseActionsExt<typeof potentialGrossIn
         return this;
     }
 
-    verifyPotentialResidentialIncome(incomeToBe: string): PotentialGrossIncomeActions {
-        grossIncomePage.potentialResidentialIncome.should("have.text", incomeToBe);
-        return this;
-    }
-
-    verifyPotentialRealEstateTaxesReimbursement(incomeToBe: string): PotentialGrossIncomeActions {
-        grossIncomePage.potentialRealEstateTaxesReimbursement.should("have.text", incomeToBe);
-        return this;
-    }
-
-    verifyPotentialGrossIncomeValue(incomeToBe: string): PotentialGrossIncomeActions {
-        grossIncomePage.potentialGrossIncome.should("have.text", incomeToBe);
-        return this;
-    }
-
     verifyOtherIncome(incomeToBe = "$0.00"): PotentialGrossIncomeActions {
-        grossIncomePage.otherIncome.should("have.text", incomeToBe);
+        grossIncomePage.getIncomeTypeUnified(Enums.otherIncome).should("have.text", incomeToBe);
         return this;
     }
 

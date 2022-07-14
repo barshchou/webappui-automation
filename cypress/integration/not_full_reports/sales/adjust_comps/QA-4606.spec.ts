@@ -15,7 +15,7 @@ describe("[QA-4606] Check the reference 'Condition' line in the Sales Adjustment
         Sales._FindComps.selectCompFromMapByAddress(testData.comparable.address);
 
         cy.stepInfo("3. Navigate to Sales > Adjust Comps > Sales Adjustment Grid");
-        NavigationSection.openAdjustCompsInSales();
+        NavigationSection.navigateToAdjustComps();
 
         cy.stepInfo("4. Fill fields and verify Adjusted Price PSF");
         Sales._AdjustComps.checkCalculationUnitsRadio(testData.calculationUnits[0])
@@ -26,6 +26,6 @@ describe("[QA-4606] Check the reference 'Condition' line in the Sales Adjustment
             .enterPropertyRightsByColumn(testData.comparable.propertyRights)
             .verifyAdjustedPriceByColumn();
 
-        // deleteReport(testData.reportCreationData.reportNumber);
+         deleteReport(testData.reportCreationData.reportNumber);
     });
 });

@@ -19,15 +19,14 @@ describe("[QA-4167] Verify the Appraiser Commentary field", { tags: [ "@sales", 
 
         Sales._FindComps.Actions
         .openAddNewComparableFormSearchResult(testData.compAddress)
-        .selectDropdownOptionNewComp(Sales._FindComps.Page.conditionDropdown, testData.selectItems.condition);
+        .selectDropdownOptionNewComp(Sales._FindComps.Page.conditionDropdown, testData.condition);
         Sales._FindComps.Actions.
         PropertyInfo.setCommercialUnits(`${testData.units.numberOfUnits}`).setCommercialArea(`${testData.units.grossArea}`)
         .Page.newCompContinueButton.click();
         Sales._FindComps.Actions.
         SaleInfo.selectSaleDate().setBuyerGrantee(testData.saleInfo.buyer).setSellerGarantor(testData.saleInfo.seller);
         Sales._FindComps
-        .Actions.selectDropdownOptionNewComp(Sales._FindComps.Page.SourceInput, testData.selectItems.source)
-        .Page.newCompContinueButton.click();
+        .Actions.Page.newCompContinueButton.click();
 
         cy.stepInfo(` 1. Verify the Appraiser Commentary is free text input type;
             -Try to enter any numerical / non-integer / text value;

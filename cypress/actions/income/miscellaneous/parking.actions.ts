@@ -1,10 +1,27 @@
 import parkingPage from "../../../pages/income/miscellaneous/parking.page";
+import { BoweryReports } from "../../../types/boweryReports.type";
 import BaseActionsExt from "../../base/base.actions.ext";
 
 class ParkingActions extends BaseActionsExt<typeof parkingPage> {
 
     checkIsFreeParkingCheckbox(): ParkingActions {
         parkingPage.isParkingFreeCheckbox.check().should("have.value", "true");
+        return this;
+    }
+
+    checkVCLossTypeCheckbox(type: string): ParkingActions {
+        parkingPage.vcLossTypeCheckbox(type).check().should("have.value", type);
+        return this;
+    }
+
+    addParkingVCLossPercentage(type: BoweryReports.ParkingVcLossType, percent: number): ParkingActions {
+        this.checkVCLossTypeCheckbox(type)
+            .fillVCLossPercentage(percent);
+        return this;
+    }
+
+    fillVCLossPercentage(value: number): ParkingActions {
+        parkingPage.parkingVCLossPercentage.clear().type(`${value}`).should('have.value', value);
         return this;
     }
 

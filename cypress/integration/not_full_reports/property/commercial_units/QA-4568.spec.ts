@@ -2,6 +2,7 @@ import testData from "../../../../fixtures/not_full_reports/property/commercial_
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { Property } from "../../../../actions";
+import { _PropertyTitles } from "../../../../enums/pages_titles";
 
 describe("[QA-4568] Verify the Save & Continue button functionality on the Commercial Units page",
     { tags:[ "@property", "@commercial_units" ] }, () => {
@@ -24,7 +25,7 @@ describe("[QA-4568] Verify the Save & Continue button functionality on the Comme
         Property._CommercialUnits.clickSaveContinueButton();
 
         cy.stepInfo("3. Verify that the changes are saved and the user is redirected to the next page (Property > Utilities).");
-        Property._Utilities.Page.utilitiesPageTitle.should("have.text", testData.titleValue);
+        Property._Utilities.Page.utilitiesPageTitle.should("have.text", _PropertyTitles.UTILITIES);
         _NavigationSection.navigateToCommercialUnits();
         
         deleteReport(testData.reportCreationData.reportNumber);
