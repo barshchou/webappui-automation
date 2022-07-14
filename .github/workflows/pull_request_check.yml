@@ -43,7 +43,7 @@ jobs:
           url: 'https://bowery-staging.herokuapp.com'
           tags: grep=,grepTags=@smoke,burn=
           record_key: ${{ secrets.CURRENTS_RECORD_KEY }}
-          ref: ${{ github.head_ref }}
+          ref: ${{ github.sha }}
 
   Run-included-tests:
     needs: [Run-tsc-check, Run-smoke-tests]
@@ -74,6 +74,7 @@ jobs:
           git rev-parse --abbrev-ref HEAD
 
       - name: Run included specs
+        if: steps.define_specs.outputs.CHANGED_SPECS != null
         uses: Bowery-RES/action-run-e2e-tests@latest
         with:
           github_token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
