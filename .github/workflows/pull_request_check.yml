@@ -22,18 +22,16 @@ jobs:
 
   Run-smoke-tests:
     needs: Run-tsc-check
-    runs-on: ubuntu-latest
-    steps:
-      - name: Run smoke tests
-        uses: Bowery-RES/webapp-ui-automation/.github/workflows/smoke.yml@${{ github.head_ref }}
-        with:
-          github_token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
-          username: ${{ secrets.USERNAME }}
-          password: ${{ secrets.PASSWORD }}
-          spec_file: cypress/integration/**/**/*.spec.ts
-          tags: grep=,grepTags=@smoke,burn=
-          record_key: ${{ secrets.CURRENTS_RECORD_KEY }}
-          ref: ${{ github.head_ref }}
+    uses: Bowery-RES/webapp-ui-automation/.github/workflows/smoke.yml@${{ github.head_ref }}
+    with:
+      github_token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
+      username: ${{ secrets.USERNAME }}
+      password: ${{ secrets.PASSWORD }}
+      spec_file: cypress/integration/**/**/*.spec.ts
+      tags: grep=,grepTags=@smoke,burn=
+      record_key: ${{ secrets.CURRENTS_RECORD_KEY }}
+      ref: ${{ github.head_ref }}
+    secrets: inherit
 
   Run-included-tests:
     needs: [Run-tsc-check, Run-smoke-tests]
