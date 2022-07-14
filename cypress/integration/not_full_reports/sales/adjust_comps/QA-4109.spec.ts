@@ -24,7 +24,6 @@ describe("Adjusted Price per Residential Unit in Sales Adjustment Grid is calcul
         Sales.AdjustComps.Page.cellCumulativePriceName("SF").should("have.css", "font-weight", "500");
 
         cy.stepInfo(`[QA-4109] -> Generate and download this report `);
-        Sales.AdjustComps.Page.SaveBtn.click();
         NavigationSection.Actions.openReviewAndExport();
         ReviewExport.Actions.generateDocxReport().downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
         

@@ -10,7 +10,7 @@ describe("Total Utility Adjustments in Sales Adjustment Grid is calculated with 
         createReport(testData.reportCreationData);
         cy.stepInfo("1. Navigate to Find comps page and add a sales comps");
         _NavigationSection.navigateToFindComps();
-        Sales._FindComps.selectCompFromMapByAddress("626 1 Avenue");
+        Sales._FindComps.selectCompFromMapByAddress(testData.compAddress);
 
 
         cy.stepInfo(`2. Verify if Per Total Units is selected as Sales Comparables Setup then

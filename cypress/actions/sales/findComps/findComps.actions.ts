@@ -99,6 +99,7 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
         );
         findCompsPage.getSelectCompFromMapButtonByAddress(address).scrollIntoView().click({ force: true });
         this.checkFindSingleSalesComp();
+        // TODO: [QA-6233] Invstigate on ways we can click "Add" btn on Search Comps List safely
         // ernst: delay to not accidentaly dispatch click to "Remove" btn on SearchList
         cy.wait(1500);
         return this;

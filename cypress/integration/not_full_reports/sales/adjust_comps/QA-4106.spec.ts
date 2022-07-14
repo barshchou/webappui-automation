@@ -13,7 +13,7 @@ describe("[QA-4106] -> Total Utility Adjustments in Sales Adjustment Grid is cal
         // test case note: According to Ira - we're allow to add one comp
         cy.stepInfo(`[QA-4106] -> Precondition: Add several comps in the Sales > Find Sales Comparables page`);
         _NavigationSection.navigateToFindComps();
-        Sales._FindComps.selectCompFromMapByAddress("626 1 Avenue");
+        Sales._FindComps.selectCompFromMapByAddress(testData.compAddress);
 
         cy.stepInfo(`[QA-4106] -> Precondition: Open Sales > Adjust Comps page`);
         _NavigationSection.navigateToAdjustComps();
@@ -22,7 +22,6 @@ describe("[QA-4106] -> Total Utility Adjustments in Sales Adjustment Grid is cal
         Sales._AdjustComps.checkCalculationUnitsRadio(testData.calculationUnits)
             .enterMarketAdjustmentsGroup(Object.keys(testData.comparablesAdjustments), Object.values(testData.comparablesAdjustments));
             
-        cy.pause();
         cy.stepInfo(`1.[QA-4106] -> Verify the row below Net Market Adjustments row in Total Footer of the Sales Adjustment Grid`);
         /**
          * note: If we want position assert - we better add data-qa first 

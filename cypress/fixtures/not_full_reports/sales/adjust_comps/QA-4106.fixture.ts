@@ -13,6 +13,7 @@ const _compAdjustments = {
 };
 
 const _cumulativePricePerUnit = "$237,997";
+const compAddress = "626 1 Avenue";
 
 export default {
     reportCreationData: _reportCreationData,
@@ -24,5 +25,6 @@ export default {
      * but we can't share with second test case (where we validate export).
      * So that's why we have to "hardcoded" it.
      */
-    cumulativePricePerUnit:_cumulativePricePerUnit
+    cumulativePricePerUnit:_cumulativePricePerUnit,
+    compAddress
 };
