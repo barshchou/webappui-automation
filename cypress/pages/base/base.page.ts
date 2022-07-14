@@ -40,6 +40,10 @@ export default class BasePage {
 
     get modalWindow() {return cy.get("[role='dialog']");}
 
+    get selectorDraggableElement(){
+        return '[data-react-beautiful-dnd-drag-handle="0"]';
+    } 
+
     formEditBtn(index = 0) {
         return cy.xpath('//*[@data-icon="pencil"]//ancestor::button')
             .eq((index !== 0) ? index : 0);
