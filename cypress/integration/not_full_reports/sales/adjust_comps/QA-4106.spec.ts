@@ -25,18 +25,17 @@ describe("[QA-4106] -> Total Utility Adjustments in Sales Adjustment Grid is cal
         cy.stepInfo(`1.[QA-4106] -> Verify the row below Net Market Adjustments row in Total Footer of the Sales Adjustment Grid`);
         /**
          * note: If we want position assert - we better add data-qa first 
-         * since it's completely impossible to acces cells elements
+         * since it's completely impossible to access cells elements
          */
         Sales._AdjustComps.Page.cellCumulativePriceName("Unit").should("be.visible");
 
         cy.stepInfo(`2.[QA-4106] -> Verify the the calculations of the Cumulative Price Per Unit row`); 
         Sales._AdjustComps.verifyTrendedPricePerBasis(Object.values(testData.comparablesAdjustments), testData.basis);
 
-        cy.stepInfo(`[QA-4106] -> 'Cumulative Price Per SF' is displayed in bold`);
-        Sales._AdjustComps.Page.cellCumulativePriceName("Unit").should("have.css", "font-weight", "500");
+        cy.stepInfo(`[QA-4106] -> 'Cumulative Price Per Unit' is displayed in bold`);
+        Sales._AdjustComps.Actions.checkCumulativePriceName("Unit");
 
         cy.stepInfo(`[QA-4106] -> Generate and download this report `);
-        Sales._AdjustComps.Page.SaveBtn.click();
         _NavigationSection.Actions.openReviewAndExport();
         ReviewExport.Actions.generateDocxReport().downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
         
@@ -52,6 +51,7 @@ describe("[QA-4106] -> Total Utility Adjustments in Sales Adjustment Grid is cal
         cy.task("getFilePath", { _reportName: testData.reportCreationData.reportNumber, _docx_html: "html" }).then(file => {
             cy.log(<string>file);
             cy.visit(<string>file);
+            
             cy.contains("Cumulative Price Per Unit")
             .parent().parent().parent()
             .scrollIntoView().find("td").last().should("have.text", testData.cumulativePricePerUnit);

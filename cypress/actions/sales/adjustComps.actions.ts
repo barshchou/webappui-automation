@@ -4,10 +4,16 @@ import {
     numberWithCommas
 } from "../../../utils/numbers.utils";
 import BaseActionsExt from "../base/base.actions.ext";
-import { Alias } from "../../utils/alias.utils";
-import { _map } from "../../support/commands";
+import { BoweryReports } from "../../types/boweryReports.type";
 
 class AdjustCompsActions extends BaseActionsExt<typeof adjustCompsPage> {
+    /**
+     * Checks whether name string in cell Cumulative Price Per *basis* is bold   
+     */
+    checkCumulativePriceName(basis: BoweryReports.SalesAdjustmentGrid.CumulativePrice) {
+        this.Page.cellCumulativePriceName(basis).should("have.css", "font-weight", "500");
+        return this;
+    }
 
     checkCalculationUnitsRadio(value: string): AdjustCompsActions {
         adjustCompsPage.calculationUnitsRadio.check(value).should("be.checked");

@@ -23,11 +23,10 @@ describe("Total Utility Adjustments in Sales Adjustment Grid is calculated with 
             .enterMarketAdjustmentsGroup(Object.keys(testData.comparablesAdjustments), Object.values(testData.comparablesAdjustments))
             .verifyTrendedPricePerBasis(Object.values(testData.comparablesAdjustments), testData.basis);
 
-        cy.stepInfo(`[QA-4110] -> 'Cumulative Price Per SF' is displayed in bold`);
-        Sales._AdjustComps.Page.cellCumulativePriceName("Unit").should("have.css", "font-weight", "500");
+        cy.stepInfo(`[QA-4110] -> 'Cumulative Price Per Unit' is displayed in bold`);
+        Sales._AdjustComps.Actions.checkCumulativePriceName("Unit");
 
         cy.stepInfo(`[QA-4110] -> Generate and download this report `);
-        Sales._AdjustComps.Page.SaveBtn.click();
         _NavigationSection.Actions.openReviewAndExport();
         ReviewExport.Actions.generateDocxReport().downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
         
