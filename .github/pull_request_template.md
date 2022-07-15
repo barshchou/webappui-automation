@@ -24,8 +24,8 @@ _Put an `x` in the boxes that apply_
 
 ## Select the environment on which you want to run your code
 
-Here you will choose the environment and, if chosen, leave the link to custom environment. If you choose custom option, 
-in section 2 just leave empty spaces. Check only one checkbox, you should check any other!
+Here you will choose the environment and, if chosen, leave the link to custom environment in bracers. If you choose not custom option, 
+in section 2 delete link reference, space after ':' should be empty. Check only one checkbox, you should check any other! Staging env is default value
 
 1. The environment:
    - [ ] Dev
@@ -33,7 +33,7 @@ in section 2 just leave empty spaces. Check only one checkbox, you should check 
    - [ ] Prod
    - [ ] Custom
    
-2. Paste the link to custom environment, if chosen: 
+2. Paste the link to custom environment, if chosen: [customEnvLink](https://yourLinkHere)
 
 ## Test run screenshots
 ![image](https://user-images.githubusercontent.com/34381131/165119211-23935985-2c90-43d4-a12b-649753e60f24.png)
