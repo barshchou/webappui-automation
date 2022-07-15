@@ -2,7 +2,7 @@ import { BoweryReports } from "../../../../types/boweryReports.type";
 import { BoweryAutomation } from "../../../../types/boweryAutomation.type";
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 import Enums from "../../../../enums/enums";
-import expensesForecastCardNamesEnum from "../../../../enums/expense/expensesForecastCardNames.enum";
+import expensesCellNames from "../../../../enums/expense/expenseCellNames";
 
 
 const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("5759-60", {
@@ -11,15 +11,13 @@ const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreat
 });
 
 const _buildingDescription: BoweryReports.BuildingDescription = {
-    grossArea: 2500,
+    grossArea: 2300,
     numberOfUnits: 5,
 };
 
-const _basis = "sf";
-
-const expenseForecastPayrollBenefitsFixture = (): BoweryReports.ForecastItem => {
+const _expenseForecastPayrollBenefitsFixture = (_basis: 'sf' | 'unit'): BoweryReports.ForecastItem => {
     return {
-        name: expensesForecastCardNamesEnum.payrollBenefits,
+        name: expensesCellNames.payrollBenefits,
         basis: _basis,
         forecast: 4000
     };
@@ -28,7 +26,5 @@ const expenseForecastPayrollBenefitsFixture = (): BoweryReports.ForecastItem => 
 export default {
     reportCreationData: _reportCreationData,
     buildingDescription: _buildingDescription,
-    expenseForecastPayrollBenefitsFixture,
-    basis: _basis,
-    
+    expenseForecastPayrollBenefitsFixture: _expenseForecastPayrollBenefitsFixture,
 };
