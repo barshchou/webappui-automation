@@ -18,7 +18,7 @@ export const _map = new Map();
  * @param message message which will be shown by `cy.log` method 
  */
 export const _mutateArrayInMap = (mapKey: string, value: any, message = "Unknown array of values from map") => {
-    if(_map.get(mapKey) == undefined){
+    if(_map.get(mapKey) === undefined){
         const arr = [ value ];
         _map.set(mapKey, arr);
     }
