@@ -273,6 +273,30 @@ class AdjustCompsActions extends BaseActionsExt<typeof adjustCompsPage> {
         return this;
     }
 
+    /**
+     * Count Price per Units. If in Sale Comparables Setup check `Per Residential Units` count like
+     * `Price per Units = Sale Price /  Residential Units`. If in Sale Comparables Setup check Per Total Units count like
+     * `Price per Units = Sale Price /  Residential Units +  Commercial Units`. Value is rounded down
+     * @param calculationUnit Name of Calculation Unit
+     * @param units Count Residential or/and Commercial units
+     * @returns `this`
+     */
+    verifyExpandMarketAdjustmentPricePerUnit(calculationUnit: string, units: number): AdjustCompsActions {
+        this.checkCalculationUnitsRadio(calculationUnit);
+        adjustCompsPage.getExpandMarketAdjustmentSubjectRow("Sale Price").invoke("text").then(salePrice => {
+            const salePriceNumber = getNumberFromDollarNumberWithCommas(salePrice);
+            const pricePerUnit = salePriceNumber / units;
+            const decimalPart = (pricePerUnit.toString().split(".")[1]);
+            cy.log("decimalPart.charAt(2)", decimalPart.charAt(2));
+            cy.log("test", Number(decimalPart.substring(0, 3)));
+            const pricePerUnitToBe = (decimalPart.charAt(2) === "5") ? 
+                `$${numberWithCommas(Math.round(pricePerUnit) + '.' + Number(decimalPart.substring(0, 2)))}`
+                :   `$${numberWithCommas(pricePerUnit.toFixed(2))}`;
+            adjustCompsPage.getExpandMarketAdjustmentSubjectRow("Price per Unit").should("have.text", pricePerUnitToBe);
+        });
+        return this;
+    }
+
 }
 
 export default new AdjustCompsActions(adjustCompsPage);

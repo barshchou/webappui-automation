@@ -99,6 +99,10 @@ class AdjustCompsPage extends BasePage {
     get ModalSalesCompInfo(){
         return cy.get('[id="salesApproach.salesAdjustmentGrid-final-form"]');
     }
+
+    getExpandMarketAdjustmentSubjectRow(name: string, index = 2) {
+        return cy.xpath(`//*[@data-qa='expansion-row-market-adjustment']//*[contains(text(), '${name}')]//following::*[${index}]`);
+    }
 }
 
 export default new AdjustCompsPage();
