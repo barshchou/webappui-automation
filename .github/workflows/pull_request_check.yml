@@ -51,7 +51,7 @@ jobs:
 
       - name: Set custom env url
         id: set_custom_env_url
-        if: $ENVIRONMENT == custom
+        if: $ENVIRONMENT == 'custom'
         run: echo ::set-output name=CUSTOM_ENV::${{ steps.define_pull_request_data.outputs.URL }}
 
       - name: Run smoke end-to-end tests with Currents dev
