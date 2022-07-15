@@ -77,25 +77,11 @@ class ReimbursementSummaryActions extends BaseActionsExt<typeof reimbursementSum
         return this;
     }
 
-    /**
-     * Verifies Appraiser Forecast Gross value taken for particular commercial unit row from UI against calculated value
-     * @param  {string} expenseUIName Expense UI name e.g. "Water & Sewer"
-     * @param  {number} unitRow Commercial unit row
-     * @param  {number} expectedForecastGross Expected Forecast Gross value in reimbursement table
-     * @returns ReimbursementSummaryActions
-     */
     verifyAppraiserForecastGrossByRow(expenseUIName: string, unitRow: number, expectedForecastGross: number): ReimbursementSummaryActions {
         reimbursementSummary.getAppraiserForecastGross(expenseUIName, unitRow).should('have.text', `$${numberWithCommas(expectedForecastGross.toFixed(2))}`);
         return this;
     }
 
-    /**
-     * Verifies each Appraiser Forecast Gross value taken for expense type from UI against calculated value
-     * @param  {string} expenseUIName Expense UI name e.g. "Water & Sewer"
-     * @param  {number} expectedForecastGross Expected Forecast Gross value in reimbursement table
-     * @param  {number} unitsAmount Commercial units amount to verify = reimbursement rows in table. Default: 1
-     * @returns ReimbursementSummaryActions
-     */
     verifyAppraiserForecastGrossByExpenseType(expenseUIName: string, expectedForecastGross: number, unitsAmount = 1): ReimbursementSummaryActions {
         for (let index = 0; index < unitsAmount; index++) {
             this.verifyAppraiserForecastGrossByRow(expenseUIName, index, expectedForecastGross);
@@ -103,16 +89,6 @@ class ReimbursementSummaryActions extends BaseActionsExt<typeof reimbursementSum
         return this;
     }
 
-    /**
-     * Verifies Annual Reimbursement for provided commercial unit in table
-     * @param  {string} expenseUIName Expense UI name e.g. "Water & Sewer"
-     * @param  {number} unitIndex Commercial unit row
-     * @param  {BoweryReports.ReimbursementType} reimbursementType Based on Reimbursement type table will change, either adds or removes
-     * columns -> Need for computation proper table column id value.
-     * @param  {BoweryReports.KnownInformation} knownInformation Part of the inputs locator
-     * @param  {number} expectedAnnualReimbursement Calculated value to validate against UI
-     * @returns ReimbursementSummaryActions
-     */
     verifyAnnualReimbursementByRow(expenseUIName: string, unitIndex: number, reimbursementType: BoweryReports.ReimbursementType, 
         knownInformation: BoweryReports.KnownInformation, expectedAnnualReimbursement: number): ReimbursementSummaryActions {
         reimbursementSummary.getAnnualReimbursement(expenseUIName, unitIndex, reimbursementType, knownInformation)
@@ -120,19 +96,6 @@ class ReimbursementSummaryActions extends BaseActionsExt<typeof reimbursementSum
         return this;
     }
     
-    /**
-     * Verify each annual reimbursement for each unit in added reimbursement.
-     * 1. Gets Forecast Gross value
-     * 2. Get percent of total
-     * 3. Calculate Annual reimbursement by formula: [Gross * percent / 100]
-     * @param  {string} expenseUIName Expense UI name e.g. "Water & Sewer"
-     * @param  {BoweryReports.ReimbursementType} reimbursementType Based on Reimbursement type table will change, either adds or removes
-     * columns -> Need for computation proper table column id value.
-     * @param  {BoweryReports.KnownInformation} knownInformation Part of the inputs locator 
-     * @param  {BoweryReports.ReimbursementColumnsId} columnsId Part of the inputs locator 
-     * @param  {number} unitsAmount Commercial units amount to verify = reimbursement rows in table
-     * @param  {number} reimbursementIndex Index of added reimbursement 
-     */
     verifyAnnualReimbursementByExpenseType(expenseUIName: string, reimbursementType: BoweryReports.ReimbursementType, 
         knownInformation: BoweryReports.KnownInformation, columnsId: BoweryReports.ReimbursementColumnsId, 
         unitsAmount = 0, reimbursementIndex = 0): ReimbursementSummaryActions {
@@ -149,12 +112,6 @@ class ReimbursementSummaryActions extends BaseActionsExt<typeof reimbursementSum
         return this;
     }
 
-    /**
-     * Verifies generated default commentary for given expense added on the Reimbursement Summary page
-     * @param  {string} expenseUIName Expense UI name e.g. "Water & Sewer"
-     * @param  {number} reimbursementIndex Index of added reimbursement. Default: 0
-     * @returns ReimbursementSummaryActions
-     */
     verifyDefaultReimbursementCommentaryByExpenseType(expenseUIName: string, reimbursementIndex = 0): ReimbursementSummaryActions {
         reimbursementSummary.getAnnualReimbursementTotal(expenseUIName).invoke('text').then((total) => {
             reimbursementSummary.getGeneratedCommentaryByExpenseType(expenseUIName, reimbursementIndex)
@@ -165,12 +122,6 @@ class ReimbursementSummaryActions extends BaseActionsExt<typeof reimbursementSum
         return this;
     }
 
-    /**
-     * Verify if added reimbursement exists on the Reimbursement Summary page
-     * @param  {string} expenseUIName Expense UI name e.g. "Water & Sewer"
-     * @param  {boolean} exists Flag to check if an reimbursement exists. Default: true
-     * @returns ReimbursementSummaryActions
-     */
     verifyReimbursementItemExistence(expenseUIName: string, exists = true): ReimbursementSummaryActions {
         reimbursementSummary.getReimbursementItemHeader(expenseUIName).should(exists ? 'exist' : 'not.exist');
         return this;
