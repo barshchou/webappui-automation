@@ -2,10 +2,11 @@ name: Run smoke tests and tests, included in PR
 
 on:
   pull_request:
+    # TODO: Not to forget to replace reopened type with open, review_requested types after PR approval
     types: [reopened]
 
 jobs:
-  Run-tsc-check:
+  run_tsc_check:
     runs-on: ubuntu-latest
     container: cypress/browsers:node16.13.2-chrome100-ff98
     steps:
@@ -20,8 +21,8 @@ jobs:
       - name: Run tsc:check
         run: npm run tsc:check
 
-  Run-smoke-tests:
-    needs: Run-tsc-check
+  run_smoke_tests:
+    needs: run_tsc_check
     runs-on: ubuntu-latest
     container: cypress/browsers:node16.13.2-chrome100-ff98
     permissions:
@@ -31,6 +32,10 @@ jobs:
       fail-fast: false
       matrix:
         containers: [ 1, 2, 3, 4, 5, 6, 7, 8 ]
+    outputs:
+      ENVIRONMENT: ${{ steps.define_pull_request_data.outputs.ENVIRONMENT }}
+      URL: ${{ steps.define_pull_request_data.outputs.URL }}
+      CUSTOM_ENV: ${{ steps.define_pull_request_data.outputs.CUSTOM_ENV }}
 
     steps:
       - name: Checkout
@@ -64,8 +69,8 @@ jobs:
           record_key: ${{ secrets.CURRENTS_RECORD_KEY }}
           ref: ${{ github.sha }}
 
-  Run-included-tests:
-    needs: [Run-tsc-check, Run-smoke-tests]
+  run_included_tests:
+    needs: [run_tsc_check, run_smoke_tests]
     runs-on: ubuntu-latest
     container: cypress/browsers:node16.13.2-chrome100-ff98
     permissions:
@@ -99,8 +104,9 @@ jobs:
           github_token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
-          env: staging
-          url: 'https://bowery-staging.herokuapp.com'
+          env: ${{ needs.run_smoke_tests.outputs.ENVIRONMENT }}
+          url: ${{ needs.run_smoke_tests.outputs.URL }}
+          customEnv: ${{ needs.run_smoke_tests.outputs.CUSTOM_ENV }}
           spec_file: ${{ steps.define_specs.outputs.CHANGED_SPECS }}
           record_key: ${{ secrets.CURRENTS_RECORD_KEY }}
           tags: grep=,grepTags=,burn=
