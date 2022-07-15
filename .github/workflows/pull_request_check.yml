@@ -46,13 +46,10 @@ jobs:
         run: |
           ENVIRONMENT=$(node scripts/pull_request_data/index.js --token ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }} --pr ${{ github.event.number }} --data env)
           URL=$(node scripts/pull_request_data/index.js --token ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }} --pr ${{ github.event.number }} --data url)
+          CUSTOM_ENV=$(node scripts/pull_request_data/index.js --token ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }} --pr ${{ github.event.number }} --data customEnv)
           echo ::set-output name=ENVIRONMENT::$ENVIRONMENT
           echo ::set-output name=URL::$URL
-
-      - name: Set custom env url
-        id: set_custom_env_url
-        if: ${{ steps.define_pull_request_data.outputs.ENVIRONMENT }} == 'custom'
-        run: echo ::set-output name=CUSTOM_ENV::${{ steps.define_pull_request_data.outputs.URL }}
+          echo ::set-output name=CUSTOM_ENV::$CUSTOM_ENV
 
       - name: Run smoke end-to-end tests with Currents dev
         uses: Bowery-RES/action-run-e2e-tests@latest
@@ -62,7 +59,7 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           env: ${{ steps.define_pull_request_data.outputs.ENVIRONMENT }}
           url: ${{ steps.define_pull_request_data.outputs.URL }}
-          customEnv: ${{ steps.set_custom_env_url.outputs.CUSTOM_ENV }}
+          customEnv: ${{ steps.define_pull_request_data.outputs.CUSTOM_ENV }}
           tags: grep=,grepTags=@smoke,burn=
           record_key: ${{ secrets.CURRENTS_RECORD_KEY }}
           ref: ${{ github.sha }}
