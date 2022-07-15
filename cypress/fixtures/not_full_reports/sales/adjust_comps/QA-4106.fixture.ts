@@ -5,12 +5,6 @@ const _reportCreationData = ReportDataCreator.getReportData("4106", {
     incomeValue: Enums.INCOME_TYPE.both
 });
 
-const comparableFixture = () => {
-    return {
-        address: "200 West 78 Street",
-    };
-};
-
 const _compAdjustments = {
     propertyRights: -70,
     financingTerms: 20,
@@ -18,10 +12,19 @@ const _compAdjustments = {
     marketConditions: -30,
 };
 
+const _cumulativePricePerUnit = "$237,997";
+const compAddress = "626 1 Avenue";
+
 export default {
     reportCreationData: _reportCreationData,
     comparablesAdjustments: _compAdjustments,
-    comparable: Object.freeze(comparableFixture()),
     calculationUnits: "Per Residential Units",
-    basis: "Price per Unit"
+    basis: "Price per Unit",
+    /**
+     * This value we calculate during first test case, 
+     * but we can't share with second test case (where we validate export).
+     * So that's why we have to "hardcoded" it.
+     */
+    cumulativePricePerUnit:_cumulativePricePerUnit,
+    compAddress
 };

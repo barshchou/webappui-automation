@@ -20,7 +20,9 @@ class ExpenseForecastPage extends BasePage {
             cy.get(`[data-qa=${Cypress._.camelCase(Cypress._.toLower(Cypress._.replace(forecastItem, "&", "And")))}-forecast-item]`);
     }
 
-    forecastItemTooltipButton(forecastItem: string) { return cy.get(`[data-qa=${forecastItem}-forecast-item] svg[aria-label="Unchecking this box will hide the expense from showing up on the Pro Forma."]`); }
+    forecastItemTooltipButton(forecastItem: string) { 
+        return cy.get(`[data-qa=${forecastItem}-forecast-item] svg[aria-label="Unchecking this box will hide the expense from showing up on the Pro Forma."]`); 
+    }
 
     get toeCard() { return cy.xpath("//*[.='TOTAL OPERATING EXPENSES ($/SF)']/parent::div").first(); }
 
@@ -52,7 +54,7 @@ class ExpenseForecastPage extends BasePage {
 
     getExpenseCommentaryRevertToOriginal(forecastItem: string) { return cy.xpath(`//*[@data-qa="${forecastItem}-forecast-item"]//following::button[.='Revert to Original'][1]`); }
 
-    getCheckboxIncludeInProForma(forecastItem: string) { return cy.get(`[data-qa=${forecastItem}-forecast-item] input[type="checkbox"]`); }
+    getCheckboxIncludeInProForma(forecastItem: string) { return cy.get(`[data-qa=${forecastItem}-forecast-item] input[type="checkbox"]`).first(); }
 
     get inputPercentOfEGICheckbox() { return cy.get("[label='Input % of EGI'] input"); }
 
@@ -68,6 +70,8 @@ class ExpenseForecastPage extends BasePage {
 
     get allForecastsInputs() { return cy.get("[name$=concludedValue]"); }
 
+    get allForecastsInputsCustomCards() { return cy.get("[name^=customExpenses][name$=concludedValue]"); }
+
     get toeOwnerProjection() { return cy.get("[data-qa=owners-projection]"); }
 
     get appraisersTotalForecast() { return cy.get("[data-qa=appraisers-total-conclusion]"); }
@@ -79,6 +83,8 @@ class ExpenseForecastPage extends BasePage {
     get toeCommentarySaveButton() { return cy.xpath("//*[.='TOTAL OPERATING EXPENSES']//following::button[.='Save'][1]"); }
 
     get toeCommentaryModified() { return cy.xpath("//*[.='TOTAL OPERATING EXPENSES']//following::*[.='Modified']"); }
+
+    get toeAppraisersForecastValueLine() {return cy.xpath(`//*[.='TOTAL OPERATING EXPENSES']//following::div[@data-qa='appraisers-forecast-values-line']`);}
 
     get createNewCategoryButton() { return cy.contains('Add Expense Category +'); }
 

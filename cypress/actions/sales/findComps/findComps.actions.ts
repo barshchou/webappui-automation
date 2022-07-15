@@ -10,8 +10,14 @@ import { Utils } from "../../../types/utils.type";
 import { _map } from "../../../support/commands";
 import { recurse } from "cypress-recurse";
 import mapKeysUtils from "../../../utils/mapKeys.utils";
+import { BoweryReports } from "../../../types/boweryReports.type";
 
 class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
+    selectedCompsSetSort(sortType: BoweryReports.SalesComps.SelectedComparablesSortType) {
+        this.Page.sortSalesCompsSelectList.click();
+        this.Page.sortSalesCompsSelectListOption(sortType).click();
+        return this;
+    }
 
     get SaleInfo(){
         return saleInfoFormActions;
@@ -93,24 +99,41 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
         );
         findCompsPage.getSelectCompFromMapButtonByAddress(address).scrollIntoView().click({ force: true });
         this.checkFindSingleSalesComp();
+        // TODO: [QA-6233] Invstigate on ways we can click "Add" btn on Search Comps List safely
+        // ernst: delay to not accidentaly dispatch click to "Remove" btn on SearchList
+        cy.wait(1500);
         return this;
     }
 
     /**
      * Selects first sales comp from search results.
      * Useful when we need to select n-random sales comps
+     * @param index number of the comp. Default - 0 (first comp in a list).
+     * NOTE: 0 - first, -1 - last in the list
      */
-    selectCompFromMap(): FindCompsActions {
-        findCompsPage.getSelectCompFromMapButton().first().scrollIntoView().click({ force: true });
+    selectCompFromMap(index = 0 ): FindCompsActions {
+        findCompsPage.getSelectCompFromMapButton().eq(index).scrollIntoView().click({ force: true });
         this.checkFindSingleSalesComp();
+        // ernst: delay to no accidentaly dispatch click to "Remove" btn in SalesComps search list
+        cy.wait(1500);
         return this;
     }
 
     checkFindSingleSalesComp(): FindCompsActions{
-        cy.wait(`@${Alias.gql.FindTransactionByIdAndVersion}`, { timeout:70000 }).then((interception) => {
+        cy.wait(`@${Alias.gql.FindTransactionByIdAndVersion}`, { timeout:35000 }).then((interception) => {
             cy.log(interception.response.body.data.findTransactionByIdAndVersion.id);
+            if(_map.get(mapKeysUtils.sales_comps_ids) == undefined){
+                let arr = [ interception.response.body.data.findTransactionByIdAndVersion.id ];
+                _map.set(mapKeysUtils.sales_comps_ids, arr);
+            }
+            else{
+                cy._mapGet(mapKeysUtils.sales_comps_ids).then(arr => {
+                    return arr.push(interception.response.body.data.findTransactionByIdAndVersion.id);
+                });
+            }
             cy.wrap(interception.response.body.data.findTransactionByIdAndVersion.id)
             .as(Alias.salesEventId);
+            cy._mapGet(mapKeysUtils.sales_comps_ids).then(arr => cy.log("Sales_IDs array: "+arr));
         });
         return this; 
     }
@@ -143,7 +166,7 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
     }
 
     clickImportCompsFromReportButton(): FindCompsActions {
-        findCompsPage.importReportCompsButton.click();
+        findCompsPage.importReportCompsButton.should("be.visible").click();
         return this;
     }
 
@@ -170,20 +193,18 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
 
     /**
      * Checks `findTransactionsByIdsAndVersions` gql operation whether its response has correct salesEventId ("salesCompId")
+     * 
+     * TODO: [QA-6132] Add assertion on salesEventId
      */
     checkSelectedSingleSalesComps() {
         cy.wait(`@${Alias.gql.FindTransactionsByIdsAndVersions}`).then(({ request, response }) => {
             let req: Utils.GraphQLRequest = request.body;
             expect(req.operationName).to.equal(gqlOperationNames.findTransactionsByIdsAndVersions);
-
-            // ernst: don't use this assert due to unpredictable behaviour
-            // uncomment when you get update about behavior
-            // cy.get(`@${Alias.salesEventId}`).then(_salesEventId => {
-            //     expect(_salesEventId).to.be.oneOf(
-            //         response.body.data.findTransactionsByIdsAndVersions.map(val => val.id)
-            //     );
-            // });
+            cy.log(response.body.data.findTransactionsByIdsAndVersions.map(e => e.id));
+            expect(response.body.data.findTransactionsByIdsAndVersions.map(e => e.id))
+            .to.include.members(_map.get(mapKeysUtils.sales_comps_ids));
         });
+        cy.pause();
         return this;
     }
 
