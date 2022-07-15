@@ -47,11 +47,11 @@ jobs:
           ENVIRONMENT=$(node scripts/pull_request_data/index.js --token ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }} --pr ${{ github.event.number }} --data env)
           URL=$(node scripts/pull_request_data/index.js --token ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }} --pr ${{ github.event.number }} --data url)
           echo ::set-output name=ENVIRONMENT::$ENVIRONMENT
-          echo ::set-output name=URL::URL
+          echo ::set-output name=URL::$URL
 
       - name: Set custom env url
         id: set_custom_env_url
-        if: ${{ steps.define_pull_request_data.outputs.ENVIRONMENT }} == custom
+        if: ${{ steps.define_pull_request_data.outputs.ENVIRONMENT }} == 'custom'
         run: echo ::set-output name=CUSTOM_ENV::${{ steps.define_pull_request_data.outputs.URL }}
 
       - name: Run smoke end-to-end tests with Currents dev
