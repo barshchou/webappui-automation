@@ -13,6 +13,7 @@ describe("Verify the Inspected checkbox functionality",
 
     it("Test body", () => {
        NavigationSection.navigateToCommercialInPlaceRentRoll();
+       // This comment is to make some changes, will be deleted
         Income.Commercial.InPlaceRentRoll.chooseLeaseStatusByRowNumber(testData.leaseStatus)
             .checkIsInspectedCheckboxByRowNumber();
         NavigationSection.navigateToStabilizedRentRollInCommercial()
