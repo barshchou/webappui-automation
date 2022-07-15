@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { findCompsPage } from "../../../pages/sales/findComps.page";
 import { getUploadFixture } from "../../../../utils/fixtures.utils";
 import { isNumber, numberWithCommas } from "../../../../utils/numbers.utils";
