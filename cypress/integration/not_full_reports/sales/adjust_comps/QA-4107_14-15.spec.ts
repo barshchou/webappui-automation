@@ -7,7 +7,7 @@ describe("Adjusted Price per Residential Unit in Sales Adjustment Grid is calcul
     { tags: [ "@adjust_comps", "@sales" ] }, () => {
 
     it("[QA-4107]", () => {
-        cy.stepInfo("Login, create report");
+        cy.stepInfo("1. Login, create report");
         createReport(testData.reportMixedCreationData);
 
         cy.stepInfo("2. Navigate to Sales > Find Comps and select comps");
@@ -32,7 +32,7 @@ describe("Adjusted Price per Residential Unit in Sales Adjustment Grid is calcul
     });
 
     it("[QA-4114]", () => {
-        cy.stepInfo("Login, create report");
+        cy.stepInfo("1. Login, create report");
         createReport(testData.reportCreationData);
 
         cy.stepInfo("2. Navigate to Sales > Find Comps and select comps");
@@ -57,7 +57,7 @@ describe("Adjusted Price per Residential Unit in Sales Adjustment Grid is calcul
     });
 
     it("[QA-4115]", () => {
-        cy.stepInfo("Login, create report");
+        cy.stepInfo("1. Login, create report");
         createReport(testData.reportCreationData);
 
         cy.stepInfo("2. Navigate to Sales > Find Comps and select comps");

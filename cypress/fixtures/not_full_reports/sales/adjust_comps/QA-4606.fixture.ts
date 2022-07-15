@@ -11,8 +11,7 @@ const comparableFixture = () => {
 };
 
 export default {
-    reportMixedCreationData: ReportDataCreator.getReportData("4107", { incomeValue: Enums.INCOME_TYPE.both }),
-    reportCreationData: ReportDataCreator.getReportData("4114-15"),
+    reportCreationData: ReportDataCreator.getReportData("4606", { incomeValue: Enums.INCOME_TYPE.both }),
     calculationUnits: [ "PSF", "Per Residential Units" ],
     comparable: Object.freeze(comparableFixture())
 };
