@@ -6,7 +6,7 @@ on:
     types: [reopened]
 
 jobs:
-  run-tsc-check:
+  Run-tsc-check:
     runs-on: ubuntu-latest
     container: cypress/browsers:node16.13.2-chrome100-ff98
     steps:
@@ -21,8 +21,8 @@ jobs:
       - name: Run tsc:check
         run: npm run tsc:check
 
-  run-smoke-tests:
-    needs: run-tsc-check
+  Run-smoke-tests:
+    needs: Run-tsc-check
     runs-on: ubuntu-latest
     container: cypress/browsers:node16.13.2-chrome100-ff98
     permissions:
@@ -69,8 +69,8 @@ jobs:
           record_key: ${{ secrets.CURRENTS_RECORD_KEY }}
           ref: ${{ github.sha }}
 
-  run-included-tests:
-    needs: [run-tsc-check, run-smoke-tests]
+  Run-included-tests:
+    needs: [Run-tsc-check, Run-smoke-tests]
     runs-on: ubuntu-latest
     container: cypress/browsers:node16.13.2-chrome100-ff98
     permissions:
@@ -103,9 +103,9 @@ jobs:
           github_token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
-          env: ${{ needs.run-smoke-tests.outputs.ENVIRONMENT }}
-          url: ${{ needs.run-smoke-tests.outputs.URL }}
-          customEnv: ${{ needs.run-smoke-tests.outputs.CUSTOM_ENV }}
+          env: ${{ needs.Run-smoke-tests.outputs.ENVIRONMENT }}
+          url: ${{ needs.Run-smoke-tests.outputs.URL }}
+          customEnv: ${{ needs.Run-smoke-tests.outputs.CUSTOM_ENV }}
           spec_file: ${{ steps.define_specs.outputs.CHANGED_SPECS }}
           record_key: ${{ secrets.CURRENTS_RECORD_KEY }}
           tags: grep=,grepTags=,burn=
