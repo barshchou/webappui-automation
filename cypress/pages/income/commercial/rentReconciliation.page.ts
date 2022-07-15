@@ -5,7 +5,7 @@ class RentReconciliationPage extends BasePage {
         return cy.get('[data-icon="exchange"]');
     }
 
-    get RentReconcillationHeader(){
+    get RentReconciliationHeader(){
         return cy.get('[data-qa="rentReconciliation"]');
     }
 
@@ -27,7 +27,9 @@ class RentReconciliationPage extends BasePage {
 
     getCompRent(compIndex = 0) {return this.rentPerSfRow.find(`[data-qa="rent-comp-${compIndex}-cell"]`);}
 
-    get calculationDropdown() {return cy.get('[data-qa="select-value"]');}
+    get baseUnitCell() {return cy.get('[data-qa="base-unit-cell"]');}
+
+    get calculationDropdown() {return this.baseUnitCell.find('[data-qa="select-value"]');}
 
     calculationOption(leaseTermsCalculationType: string, index = 0) {
         return cy.get(`[data-qa="reconciliationGroups.items[${index}].summary.leaseTermsCalcType-${leaseTermsCalculationType}-select-option"]`);
