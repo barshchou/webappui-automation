@@ -2,8 +2,17 @@ import { _NavigationSection } from '../../../../actions/base';
 import { createReport, deleteReport } from '../../../../actions/base/baseTest.actions';
 import { Report } from '../../../../actions';
 import testData from "../../../../fixtures/not_full_reports/report/appraiser/QA-5363-66.fixture";
+import { conditionalDescribe } from '../../../../../utils/env.utils';
 
-describe("Verify that 'Sign Report' checkbox for different user roles", 
+
+/**
+ * TODO: probably behaviour of this test can change,
+ * so need to fix this test later.
+ * As for now - we can just adapt it for current behaviour.
+ * + add `data-qa` attribute to "Add appraiser / inspector" btn in `appraiser.page.ts`
+ */
+
+conditionalDescribe("Verify that 'Sign Report' checkbox for different user roles", 
     { tags:[ "@permissions_roles", "@report_status", "@report", "@appraiser" ] }, () => {
 
     before('Create a report', () => {
@@ -19,7 +28,7 @@ describe("Verify that 'Sign Report' checkbox for different user roles",
     testData.appraisersRoles.forEach(appraiserRole => {
         it(`Check Sign Report checkbox for test ${appraiserRole.testId} with ${appraiserRole.role}`, () => {
             cy.stepInfo('2. Verify for each role sign report checkbox default state');
-            Report._Appraiser.searchAppraiser(appraiserRole.fullName)
+            Report._Appraiser.searchAndAddAppraiser(appraiserRole.fullName)
                 .verifySignCheckbox(appraiserRole.fullName, appraiserRole.canSignReport);
         });
     });

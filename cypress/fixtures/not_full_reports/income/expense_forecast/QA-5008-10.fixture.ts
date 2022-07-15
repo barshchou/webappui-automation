@@ -9,5 +9,6 @@ const _customCategory: BoweryReports.ForecastItem = {
 export default {
     reportCreationData: ReportDataCreator.getReportData("5008-10"),
     customCategory: _customCategory,
-    expenseCardsIDArray : expensesForecast.expenseCardsIDArray
+    expenseCardsIDArray : expensesForecast.expenseCardsIDArray,
+    expensesCardsCheckboxes: expensesForecast.expenseCardsIncludeInProFormaCheckboxArray
 };
