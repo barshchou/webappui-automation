@@ -20,7 +20,7 @@ export const Alias = {
     salesEventId: _alias("salesEventId"),
     salesComps_eventIds: _alias("salesComps_eventIds"),
     salesComps:{
-        addressSelectedComps: "ui_SelectedComps_Adresses"
+        addressSelectedComps: "ui_SelectedComps_Addresses"
     },
     aliasXMLGeneration: _alias("aliasXMLGeneration"),
     aliasOpenXML: _alias("aliasOpenXML"),
