@@ -44,8 +44,8 @@ jobs:
       - name: Define env and url variables
         id: define_pull_request_data
         run: |
-          ENVIRONMENT=$(node scripts/pull_request_data/index.js --token ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}) --pr ${{ github.event.number }} --data env)
-          URL=$(node scripts/pull_request_data/index.js --token ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}) --pr ${{ github.event.number }} --data url)
+          ENVIRONMENT=$(node scripts/pull_request_data/index.js --token ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }} --pr ${{ github.event.number }} --data env)
+          URL=$(node scripts/pull_request_data/index.js --token ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }} --pr ${{ github.event.number }} --data url)
           echo ::set-output name=ENVIRONMENT::$ENVIRONMENT
           echo ::set-output name=URL::URL
 
