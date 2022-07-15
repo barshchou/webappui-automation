@@ -33,14 +33,36 @@ jobs:
         containers: [ 1, 2, 3, 4, 5, 6, 7, 8 ]
 
     steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
+
+      - name: Install dependecies
+        run: npm install
+
+      - name: Define env and url variables
+        id: define_pull_request_data
+        run: |
+          ENVIRONMENT=$(node scripts/pull_request_data/index.js --token ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}) --pr ${{ github.event.number }} --data env)
+          URL=$(node scripts/pull_request_data/index.js --token ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}) --pr ${{ github.event.number }} --data url)
+          echo ::set-output name=ENVIRONMENT::$ENVIRONMENT
+          echo ::set-output name=URL::URL
+
+      - name: Set custom env url
+        id: set_custom_env_url
+        if: $ENVIRONMENT == custom
+        run: echo ::set-output name=CUSTOM_ENV::${{ steps.define_pull_request_data.outputs.URL }}
+
       - name: Run smoke end-to-end tests with Currents dev
         uses: Bowery-RES/action-run-e2e-tests@latest
         with:
           github_token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
-          env: staging
-          url: 'https://bowery-staging.herokuapp.com'
+          env: ${{ steps.define_pull_request_data.outputs.ENVIRONMENT }}
+          url: ${{ steps.define_pull_request_data.outputs.URL }}
+          customEnv: ${{ steps.set_custom_env_url.outputs.CUSTOM_ENV }}
           tags: grep=,grepTags=@smoke,burn=
           record_key: ${{ secrets.CURRENTS_RECORD_KEY }}
           ref: ${{ github.sha }}
@@ -80,6 +102,8 @@ jobs:
           github_token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
+          env: staging
+          url: 'https://bowery-staging.herokuapp.com'
           spec_file: ${{ steps.define_specs.outputs.CHANGED_SPECS }}
           record_key: ${{ secrets.CURRENTS_RECORD_KEY }}
           tags: grep=,grepTags=,burn=
