@@ -12,11 +12,11 @@ class CompGroupsPage extends BasePage {
 
     getCompGroupSection(groupName) {return cy.get(`[data-qa='${groupName}-comp-group']`);}
 
-    getDragableElement(index: number) { return `[data-qa="row-${index}"] [data-qa='drag-cell']>span`;}
+    getDraggableElement(index: number) { return `[data-qa="row-${index}"] [data-qa='drag-cell']>span`;}
 
-    getDropableArea(compGroup: string) {return `[data-qa="${compGroup}-comp-group"] tr td`;}
+    getDroppableArea(compGroup: string) {return `[data-qa="${compGroup}-comp-group"] tr td`;}
 
-    getDropableAreaDropped(compGroup: string) {return `[data-qa="${compGroup}-comp-group"] [data-qa="row-0"]`;}
+    getDroppableAreaDropped(compGroup: string) {return `[data-qa="${compGroup}-comp-group"] [data-qa="row-0"]`;}
 
     get draggablePlaceholder() {return cy.xpath(`//*[@data-qa="unsorted_group"]//td[contains(text(), 'Drop any rent roll unit here')]`);}
 }

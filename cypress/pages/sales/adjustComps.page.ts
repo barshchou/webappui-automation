@@ -3,6 +3,7 @@ import BasePage from "../base/base.page";
 
 type AdjustmentName = BoweryReports.SalesAdjustmentGrid.AdjustmentName;
 type RowsMarketAdjustment = BoweryReports.SalesAdjustmentGrid.RowsMarketAdjustment;
+type CumulativePrice = BoweryReports.SalesAdjustmentGrid.CumulativePrice
 
 class AdjustCompsPage extends BasePage {
     get calculationUnitsRadio() {return cy.get("[name=basisOfComparison]");}
@@ -38,7 +39,13 @@ class AdjustCompsPage extends BasePage {
     get trendedPriceCells() {return cy.xpath("//*[starts-with(., 'Trended Price')]//following-sibling::td");}
     
     get cumulativePriceCells() {return cy.xpath("//*[starts-with(., 'Cumulative Price')]//following-sibling::td");}
+    
+    get cellCumulativePriceValue() {return cy.xpath("//*[starts-with(., 'Cumulative Price')]//following-sibling::td");}
 
+    cellCumulativePriceName(basisName: CumulativePrice){
+        return cy.contains(`Cumulative Price Per ${basisName}`);
+    }
+    
     get adjustedPriceCells() {return cy.xpath("//*[starts-with(., 'Adjusted Price')]//following-sibling::td");}
 
     get netPropertyAdjustmentsCells() {return cy.xpath("//td[.='Net Property Adjustments']//following-sibling::td");}
