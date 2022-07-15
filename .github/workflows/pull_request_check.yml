@@ -85,6 +85,19 @@ jobs:
       - name: Install find specs module
         run: npm install -g find-cypress-specs@1.17.0
 
+      - name: Install dependecies
+        run: npm install
+
+      - name: Define env and url variables
+        id: define_pull_request_data
+        run: |
+          ENVIRONMENT=$(node scripts/pull_request_data/index.js --token ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }} --pr ${{ github.event.number }} --data env)
+          URL=$(node scripts/pull_request_data/index.js --token ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }} --pr ${{ github.event.number }} --data url)
+          CUSTOM_ENV=$(node scripts/pull_request_data/index.js --token ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }} --pr ${{ github.event.number }} --data customEnv)
+          echo ::set-output name=ENVIRONMENT::$ENVIRONMENT
+          echo ::set-output name=URL::$URL
+          echo ::set-output name=CUSTOM_ENV::$CUSTOM_ENV
+
       - name: Define included specs
         id: define_specs
         run: |
@@ -103,9 +116,9 @@ jobs:
           github_token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
-          env: ${{ needs.run-smoke-tests.outputs.ENVIRONMENT }}
-          url: ${{ needs.run-smoke-tests.outputs.URL }}
-          customEnv: ${{ needs.run-smoke-tests.outputs.CUSTOM_ENV }}
+          env: ${{ steps.define_pull_request_data.outputs.ENVIRONMENT }}
+          url: ${{ steps.define_pull_request_data.outputs.URL }}
+          customEnv: ${{ steps.define_pull_request_data.outputs.CUSTOM_ENV }}
           spec_file: ${{ steps.define_specs.outputs.CHANGED_SPECS }}
           record_key: ${{ secrets.CURRENTS_RECORD_KEY }}
           tags: grep=,grepTags=,burn=
