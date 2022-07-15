@@ -2,8 +2,6 @@ import testData from "../../../../../fixtures/not_full_reports/income/commercial
 import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../../actions/base";
 import { Income, Property } from "../../../../../actions";
-import { _map } from "../../../../../support/commands";
-import mapKeysUtils from "../../../../../utils/mapKeys.utils";
 
 describe("Verify the calculation field values", 
     { tags: [ "@income", "@commercial", "@rent_reconciliation" ] }, () => {
