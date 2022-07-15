@@ -37,7 +37,21 @@ class CommercialReimbursementSummaryPage extends BasePage {
         } else if (knownInformation == 'Monthly') {
             annualReimbursementColumnId = 4;
         }
-        return cy.xpath(`(//*[.='${expenseUIName} (% of Appraiser Forecast)']//following::tbody[1]/tr/td[${annualReimbursementColumnId}])`).eq(unitIndex);
+        return cy.xpath(`(//*[.='${expenseUIName} (% of Appraiser Forecast)']//following::tbody[1]/tr/td[${annualReimbursementColumnId}])`)
+            .eq(unitIndex);
+    }
+
+    getGeneratedCommentaryByExpenseType(expenseUIName: string, reimbursementIndex = 0) {
+        return cy.xpath("//div[p[.='"+ expenseUIName + " (% of Appraiser Forecast)']]//following-sibling::div[1]"+
+            "//p[@data-qa='reimbursements[" + reimbursementIndex + "].discussion.commentary-generated-text']");
+    }
+
+    getAnnualReimbursementTotal(expenseUIName: string) {
+        return cy.xpath(`//div[p[.='${expenseUIName} (% of Appraiser Forecast)']]//following-sibling::div[1]//tbody/tr[last()]/td[last()]`);
+    }
+
+    getReimbursementItemHeader(expenseUIName: string) {
+        return cy.xpath(`//div[p[.='${expenseUIName} (% of Appraiser Forecast)']]`);
     }
 }
 
