@@ -22,5 +22,18 @@ _Put an `x` in the boxes that apply_
 - [ ] Documentation content changes
 - [ ] Other (please describe):
 
+## Select the environment on which you want to run your code
+
+Here you will choose the environment and, if chosen, leave the link to custom environment. If you choose custom option, 
+in section 2 just leave empty spaces. Check only one checkbox, you should check any other!
+
+1. The environment:
+   - [ ] Dev
+   - [x] Staging
+   - [ ] Prod
+   - [ ] Custom
+   
+2. Paste the link to custom environment, if chosen: 
+
 ## Test run screenshots
 ![image](https://user-images.githubusercontent.com/34381131/165119211-23935985-2c90-43d4-a12b-649753e60f24.png)
