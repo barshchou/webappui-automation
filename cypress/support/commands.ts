@@ -13,9 +13,9 @@ export const _map = new Map();
 /**
  * Mutating / creating array in `_map`. 
  * Useful when you need push some data dynamically into array
- * @param mapKey 
- * @param value 
- * @param message 
+ * @param mapKey key from `mapKeyUtils`
+ * @param value value you want to set into array
+ * @param message message which will be shown by `cy.log` method 
  */
 export const _mutateArrayInMap = (mapKey: string, value: any, message = "Unknown array of values from map") => {
     if(_map.get(mapKey) == undefined){

@@ -116,12 +116,12 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
         this.checkFindSingleSalesComp();
         // ernst: delay to no accidentaly dispatch click to "Remove" btn in SalesComps search list
         cy.wait(1500);
-        // cy.pause();
         return this;
     }
 
     /**
-     * todo: desc
+     * Wait for request(`findTransactionByIdAndVersion`) for adding Sales Comp from Search List to be fulfilled,
+     * and also retrieves some data (`id` and `address`) from request and writes into `_map`
      */
     checkFindSingleSalesComp(): FindCompsActions{
         cy.wait(`@${Alias.gql.FindTransactionByIdAndVersion}`, { timeout:35000 }).then((interception) => {
