@@ -19,6 +19,18 @@ Cypress.on("uncaught:exception", () => {
     return false;
 });
 
+after(() => {
+  let isSmoke = Cypress.spec.relative.includes("smoke");
+  if(isSmoke){
+    cy.log("Smoke test, does not deleting report");
+    return;
+  }
+  else{
+    cy.log("Delete report");
+    cy.deleteApiReport();
+  }
+});
+
 Cypress.on("fail", (err) => {
   recordDOM_Snapshot();
   recordProxiedRequests();
