@@ -28,6 +28,6 @@ exports.verifyArguments = () => {
 
 exports.verifyDataFlag = () => {
     const dataValue = _getFlagValue(_dataFlag);
-    const isCorrectValue = dataValue === "env" || dataValue === "url";
+    const isCorrectValue = dataValue === "env" || dataValue === "url" || dataValue === "customEnv";
     if (!isCorrectValue) throw new Error(`You've entered incorrect data flag value, only 'env' or 'url' values are acceptable`);
 }

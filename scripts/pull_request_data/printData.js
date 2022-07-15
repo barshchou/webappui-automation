@@ -6,7 +6,7 @@ const printNecessaryData = (prData, dataToPrint) => {
     const envValue = getEnvValue(prData);
     if (dataToPrint === "env") {
         console.log(envValue.toLowerCase());
-    } else {
+    } else if (dataToPrint === "url") {
         if (envValue.toLowerCase() !== "custom") {
             const envUrl = getEnvUrl(envValue);
             console.log(envUrl);
@@ -14,6 +14,9 @@ const printNecessaryData = (prData, dataToPrint) => {
             const customUrl = getCustomUrl(prData);
             console.log(customUrl);
         }
+    } else {
+        const dataToPrint = envValue.toLowerCase() === "custom" ? getCustomUrl(prData) : "";
+        console.log(dataToPrint);
     }
 };
 
