@@ -61,7 +61,7 @@ class RentReconciliationActions extends BaseActionsExt<typeof rentReconciliation
         rentReconciliationPage.leaseTermsAdjustments(compIndex)
             .clear()
             .type(`{del}`)
-            .type(adjustment < 0 ? `${adjustment}-` : `${adjustment}`)
+            .type(adjustment < 0 && calculationType === enums.CALCULATION_TYPE.dollarPerSF ? `${adjustment}-` : `${adjustment}`)
             .blur()
             .should('have.value', expectedAdjustmentValue);
         return this;

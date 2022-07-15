@@ -103,7 +103,9 @@ describe("Verify the calculation field values",
             });
             
         }
+    });
 
+    after('Cleanup', () => {
         deleteReport(testData.reportCreationData.reportNumber);
     });
 });
