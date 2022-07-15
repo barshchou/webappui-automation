@@ -11,10 +11,8 @@ describe(`[QA-5134] Check when "custom" dropdown is selected user can drag&drop 
     });
 
     it("Test body", () => {
-        cy.stepInfo(`
-        [QA-5134] -> 
-        Verify when “custom” is selected, the user can drag and drop Selected comps up and down in the list. 
-        NOTE: The drag and drop functionality is disabled when Sort: Sale Date is selected`
+        cy.stepInfo(`[QA-5134] -> Verify when “custom” is selected, the user can drag and drop Selected comps up and down in the list.
+                    NOTE: The drag and drop functionality is disabled when Sort: Sale Date is selected`
         );
 
         cy.stepInfo(`1. [QA-5134] -> User navigates to SalesComps Search page `);
@@ -26,7 +24,7 @@ describe(`[QA-5134] Check when "custom" dropdown is selected user can drag&drop 
         });
 
         cy.stepInfo(`3. [QA-5134] -> When sort for Selected Comparables set to "Sale Date",
-        then user unable to sort selected comparables by drag-and-drop`);
+                    then user unable to sort selected comparables by drag-and-drop`);
         cy.get(Sales._FindComps.Page.selectorDraggableElement).should("not.exist");
 
         cy.stepInfo(`4. [QA-5134] -> User set "Custom" sort for Selected Comparables`);
