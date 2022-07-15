@@ -26,7 +26,6 @@ after(() => {
     return;
   }
   else{
-    cy.log("Delete report");
     cy.deleteApiReport();
   }
 });

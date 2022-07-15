@@ -90,21 +90,25 @@ Cypress.Commands.add("createApiReport",
     .then(val => {
         cy.log(`reportId is next: ${val}`);
         cy._mapSet(mapKeysUtils.report_id, val);
+        _mutateArrayInMap(mapKeysUtils.report_id_arr, val, "Array of report_id");
     });
     cy.log("createApiReport");
 });
 
 Cypress.Commands.add("deleteApiReport", () => {
     cy.log("Delete report");
-        cy._mapGet(mapKeysUtils.report_id).then(reportId => {
-            cy.request({
-                method:"DELETE",
-                url:`${Cypress.config().baseUrl}/report/${reportId}`,
-                auth:{
-                    'bearer': window.localStorage.getItem("jwToken")
-                }
-            }).then((resp) => {
-                expect(resp.status).to.eq(200);
+        cy._mapGet(mapKeysUtils.report_id_arr).then(arr => {
+            arr.forEach(reportId => {
+                cy.log(`Deleting report with id: ${reportId}`);
+                cy.request({
+                    method:"DELETE",
+                    url:`${Cypress.config().baseUrl}/report/${reportId}`,
+                    auth:{
+                        'bearer': window.localStorage.getItem("jwToken")
+                    }
+                }).then((resp) => {
+                    expect(resp.status).to.eq(200);
+                });
             });
         });
 });
