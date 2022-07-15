@@ -60,6 +60,18 @@ declare global {
           token: string,
           envUrl: string): void
 
+        /**
+         * Deletes report using `DELETE` method and `/report/:id` route.
+         * 
+         * Note_1: code of this methods starts in *WebApp* repo, search for `router.delete('/:id', userController.isAuthenticated, controller.delete)`
+         * in `./routes/report/index.js`
+         * 
+         * Note_2: this functionality in *WebApp* might changed due to migration 
+         * from old code to nestjs codebase (in a years to come),
+         * so just keep that in mind.
+         */
+        deleteApiReport(): void
+
         _mapSet(key: any, value: any): void  
         _mapGet(key: any): Cypress.Chainable<any>
         

@@ -74,6 +74,21 @@ Cypress.Commands.add("createApiReport",
     cy.log("createApiReport");
 });
 
+Cypress.Commands.add("deleteApiReport", () => {
+    cy.log("Delete report");
+        cy._mapGet(mapKeysUtils.report_id).then(reportId => {
+            cy.request({
+                method:"DELETE",
+                url:`${Cypress.config().baseUrl}/report/${reportId}`,
+                auth:{
+                    'bearer': window.localStorage.getItem("jwToken")
+                }
+            }).then((resp) => {
+                expect(resp.status).to.eq(200);
+            });
+        });
+});
+
 Cypress.Commands.add("dragAndDrop", (subject, target) => {
     Cypress.log({
         name: 'DRAGNDROP',
