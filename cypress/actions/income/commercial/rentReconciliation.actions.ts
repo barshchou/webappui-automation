@@ -32,12 +32,12 @@ class RentReconciliationActions extends BaseActionsExt<typeof rentReconciliation
         return this;
     }
 
-    verifyCalculationInputValue(expectedLeaseTermsCalcType: string): RentReconciliationActions {
+    verifyCalculationInputValue(expectedLeaseTermsCalcType: BoweryReports.CalculationType): RentReconciliationActions {
         rentReconciliationPage.calculationDropdown.invoke('text').should('deep.equal', expectedLeaseTermsCalcType);
         return this;
     }
 
-    setLeaseTermsCalculationType(leaseTermsCalcType: string): RentReconciliationActions {
+    setLeaseTermsCalculationType(leaseTermsCalcType: BoweryReports.CalculationType): RentReconciliationActions {
         this.openCalculationDropdown()
             .selectLeaseTermsCalculationOption(leaseTermsCalcType);
         return this;
@@ -48,15 +48,21 @@ class RentReconciliationActions extends BaseActionsExt<typeof rentReconciliation
         return this;
     }
 
-    selectLeaseTermsCalculationOption(leaseTermsCalcType: string): RentReconciliationActions {
+    selectLeaseTermsCalculationOption(leaseTermsCalcType: BoweryReports.CalculationType): RentReconciliationActions {
         rentReconciliationPage.calculationOption(leaseTermsCalcType).click();
         this.verifyCalculationInputValue(leaseTermsCalcType);
         return this;
     }
 
     setLeaseTermsAdjustment(adjustment: number, calculationType: BoweryReports.CalculationType, compIndex = 0): RentReconciliationActions {
-        let expectedAdjustmentValue = calculationType === enums.CALCULATION_TYPE.percent ? adjustment : `$${adjustment}`;
-        rentReconciliationPage.leaseTermsAdjustments(compIndex).clear().type(`${adjustment}`)
+        let expectedAdjustmentValue = calculationType === enums.CALCULATION_TYPE.percent 
+            ? adjustment 
+            : adjustment < 0 ? `-$${Math.abs(adjustment).toFixed(2)}` : `$${adjustment.toFixed(2)}`;
+        rentReconciliationPage.leaseTermsAdjustments(compIndex)
+            .clear()
+            .type(`{del}`)
+            .type(adjustment < 0 ? `${adjustment}-` : `${adjustment}`)
+            .blur()
             .should('have.value', expectedAdjustmentValue);
         return this;
     }
@@ -67,12 +73,17 @@ class RentReconciliationActions extends BaseActionsExt<typeof rentReconciliation
         return this;
     }
 
-    verifyTrendedRentSF(rentSf: number, leaseTermsAdjustment = 0, marketConditionAdjustment = 0, compIndex = 0): RentReconciliationActions {
-        let leaseTermsAdjustmentSubTotal = (rentSf * (100 + leaseTermsAdjustment)) / 100;
-        let expectedTrendedRentSF = (leaseTermsAdjustmentSubTotal * (100 + marketConditionAdjustment)) / 100;
-        expectedTrendedRentSF = (Math.round(expectedTrendedRentSF * 1000)) / 1000;
-        rentReconciliationPage.getTrendedRentSF(compIndex).should('have.text', `$${expectedTrendedRentSF.toFixed(2)}`);
-        return this;
+    verifyTrendedRentSF(rentSf: number, calculationType: BoweryReports.CalculationType, leaseTermsAdjustment = 0, 
+        marketConditionAdjustment = 0, compIndex = 0): RentReconciliationActions {
+            let leaseTermsAdjustmentSubTotal = calculationType === enums.CALCULATION_TYPE.percent 
+                ? (rentSf * (100 + leaseTermsAdjustment)) / 100 
+                : rentSf + leaseTermsAdjustment;
+            let expectedTrendedRentSF = Math.round(((leaseTermsAdjustmentSubTotal * (100 + marketConditionAdjustment)) / 100) * 1000) / 1000;
+            rentReconciliationPage.getTrendedRentSF(compIndex)
+                .should('have.text', expectedTrendedRentSF < 0 
+                    ? `-$${Math.abs(expectedTrendedRentSF).toFixed(2)}` 
+                    : `$${expectedTrendedRentSF.toFixed(2)}`);
+            return this;
     }
 
 }

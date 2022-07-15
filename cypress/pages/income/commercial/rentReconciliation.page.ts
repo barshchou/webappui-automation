@@ -30,7 +30,7 @@ class RentReconciliationPage extends BasePage {
     get calculationDropdown() {return cy.get('[data-qa="select-value"]');}
 
     calculationOption(leaseTermsCalculationType: string, index = 0) {
-        return cy.get(`[data-qa="reconciliationGroups.items[${index}}].summary.leaseTermsCalcType-${leaseTermsCalculationType}-select-option"]`);
+        return cy.get(`[data-qa="reconciliationGroups.items[${index}].summary.leaseTermsCalcType-${leaseTermsCalculationType}-select-option"]`);
     }
 
     leaseTermsAdjustments(compIndex = 0) {return cy.get(`[name="reconciliationGroups.items[0].summary.rentComps[${compIndex}].adjustments.leaseTerms"]`);}

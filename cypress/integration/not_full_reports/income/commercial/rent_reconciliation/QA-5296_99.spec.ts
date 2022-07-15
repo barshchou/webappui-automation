@@ -1,4 +1,4 @@
-import testData from "../../../../../fixtures/not_full_reports/income/commercial/rent_reconciliation/QA-5296.fixture";
+import testData from "../../../../../fixtures/not_full_reports/income/commercial/rent_reconciliation/QA-5296_99.fixture";
 import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../../actions/base";
 import { Income, Property } from "../../../../../actions";
@@ -32,14 +32,20 @@ describe("Verify the calculation field values",
         _NavigationSection.navigateToCommercialRentComps();
         Income._CommercialManager.RentComps.addNumberFirstComparables(testData.numberOfComparables)
             .dragAllCommercialUnitsIntoGroup(testData.compGroupName, testData.numberOfComparables);
+
+        cy.stepInfo('Steps: 1. Navigate to Income → Commercial → Rent Reconciliation');
+        _NavigationSection.navigateToRentReconciliation();
+
+        cy.saveLocalStorage();
+    });
+
+    beforeEach('Restore Local Storage', () => {
+        cy.restoreLocalStorage();
     });
 
     it(`[QA-5296] Verify the calculation of the "Trended Rent/SF" when "%" value is selected in 
         the "Calculations" drop-down of the "Rent Reconciliation" grid`, () => {
-        cy.stepInfo('Steps: 1. Navigate to Income → Commercial → Rent Reconciliation');
-        _NavigationSection.navigateToRentReconciliation();
-        
-        cy.stepInfo('2. Check that “%” is displayed in the “Calculations” dro-down field');
+        cy.stepInfo('2. Check that “%” is displayed in the “Calculations” dropdown field');
         Income._CommercialManager.RentReconciliation.verifyCalculationInputValue(testData.calculationTypePercent);
 
         cy.stepInfo('3. Enter any value into the input field of the “Market Conditions Adjustment” row for any added comparable (e.g. 5%)');
@@ -61,7 +67,39 @@ describe("Verify the calculation field values",
             Income._CommercialManager.RentReconciliation.Page.getCompRent(index).invoke('text').then(rentSf => {
                 let rent = Number(rentSf.replace('$', ''));
                 Income._CommercialManager.RentReconciliation
-                    .verifyTrendedRentSF(rent, testData.leaseTermsAdjustments[index], testData.marketConditionAdjustments[index], index);
+                    .verifyTrendedRentSF(rent, testData.calculationTypePercent, testData.leaseTermsAdjustments[index], 
+                        testData.marketConditionAdjustments[index], index);
+            });
+            
+        }
+    });
+
+    it(`[QA-5299] Verify the calculation of the "Trended Rent/SF" when "$/SF" value is selected in 
+        the "Calculations" drop-down of the "Rent Reconciliation" grid`, () => {
+        cy.stepInfo('1/2. Select “$/SF” value in the “Calculations” dropdown field');
+        Income._CommercialManager.RentReconciliation.setLeaseTermsCalculationType(testData.calculationTypeSF);
+
+        cy.stepInfo('3. Enter any value into the input field of the “Market Conditions Adjustment” row for any added comparable (e.g. 5%)');
+        for (let index = 0; index < testData.numberOfComparables; index++) {
+            Income._CommercialManager.RentReconciliation
+                .setLeaseTermsAdjustment(testData.leaseTermsAdjustments[index], testData.calculationTypeSF, index);
+        }
+
+        cy.stepInfo('4. Enter any value into the input field of the “Lease Terms Adjustment” row for the same comparable (e.g. 2%)');
+        for (let index = 0; index < testData.numberOfComparables; index++) {
+            Income._CommercialManager.RentReconciliation
+                .setMarketConditionAdjustment(testData.marketConditionAdjustments[index], index);
+        }
+
+        cy.stepInfo(`5. Verify that the “Trended Rent/SF” for the comparable from steps 3 and 5 is calculated by the following formula:
+            Rent/SF (the value is taken to the grid from the info of the added comparable)
+            Formula: ((RentSF + ((RentSF * Lease Term Adjustment) / 100)) * Market Condition Adjustment ) / 100`);
+        for (let index = 0; index < testData.numberOfComparables; index++) {
+            Income._CommercialManager.RentReconciliation.Page.getCompRent(index).invoke('text').then(rentSf => {
+                let rent = Number(rentSf.replace('$', ''));
+                Income._CommercialManager.RentReconciliation
+                    .verifyTrendedRentSF(rent, testData.calculationTypeSF, testData.leaseTermsAdjustments[index], 
+                        testData.marketConditionAdjustments[index], index);
             });
             
         }
