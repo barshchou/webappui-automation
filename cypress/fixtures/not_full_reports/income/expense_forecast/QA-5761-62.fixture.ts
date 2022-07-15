@@ -5,7 +5,7 @@ import Enums from "../../../../enums/enums";
 import expensesCellNames from "../../../../enums/expense/expenseCellNames";
 
 
-const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("5759-60", {
+const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("5761-62", {
     incomeValue: Enums.INCOME_TYPE.both,
     conclusionValue: Enums.VALUE_CONCLUSION_TYPE.AS_COMPLETE
 });
@@ -15,9 +15,9 @@ const _buildingDescription: BoweryReports.BuildingDescription = {
     numberOfUnits: 3,
 };
 
-const expenseForecastPayrollBenefitsFixture = (_basis: 'sf' | 'unit'): BoweryReports.ForecastItem => {
+const expenseForecastGeneralAdministrativeFixture = (_basis: 'sf' | 'unit'): BoweryReports.ForecastItem => {
     return {
-        name: expensesCellNames.payrollBenefits,
+        name: expensesCellNames.generalAndAdministrative,
         basis: _basis,
         forecast: 4599.19
     };
@@ -26,5 +26,5 @@ const expenseForecastPayrollBenefitsFixture = (_basis: 'sf' | 'unit'): BoweryRep
 export default {
     reportCreationData: _reportCreationData,
     buildingDescription: _buildingDescription,
-    expenseForecastPayrollBenefitsFixture,
+    expenseForecastGeneralAdministrativeFixture,
 };

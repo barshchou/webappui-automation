@@ -11,6 +11,7 @@ describe(" [QA-5759] [QA-5760] Appraiser's Forecast value for Payroll&Benefits  
             createReport(testData.reportCreationData);
             cy.saveLocalStorage();
         });
+        
         beforeEach(() => {
             cy.restoreLocalStorage();
         });
