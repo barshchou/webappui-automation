@@ -10,53 +10,24 @@ const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreat
 const _leaseStatuses: BoweryReports.LeaseStatus[] = [ "Occupied", "Occupied" ];
 const _rentPSFs: number[] = [ 100, 200 ];
 
-const _rentCompFields = [
-    {
-        name: "baseRent",
-        value: "120",
-        type: "input",
-        rentSf: 10.00
-    },
-    {
-        name: "baseRent",
-        value: "150",
-        type: "input",
-        rentSf: 12.50
-    },
-    {
-        name: "baseRent",
-        value: "75",
-        type: "input",
-        rentSf: 6.25
-    },
-    {
-        name: "baseRent",
-        value: "100",
-        type: "input",
-        rentSf: 8.33
-    }
-];
-
-const _sourceOfInformation = {
-    name: "sourceOfInformation",
-    value: "bowerySubject",
-    type: "dropdown"
+const _leaseTermsAdjustments = (): number[] => {
+    return [ 2, 3.00, -11.42 ];
 };
-
-const _leaseTermsAdjustments = [ 2, 3.00, 4.42 ];
+const _marketConditionAdjustments = (): number[] => {
+    return [ 5, -6.51, 30.01 ];
+};
 
 export default {
     reportCreationData: _reportCreationData,
     leaseStatuses: _leaseStatuses,
     unitsNumber: 2,
-    numberOfComparables: 4,
+    numberOfComparables: 3,
     rentPSFs: _rentPSFs,
     compGroupName: "TestCompGroup_4189",
     rentPSFLabelName: "Rent/SF/Month",
     unitsOfMeasure: Enums.UNITS_OF_MEASURE.perSquareFootPerYear,
-    rentCompFields: _rentCompFields, 
-    sourceOfInformation: _sourceOfInformation,
-    calculationTypePercent: "%",
-    calculationTypeSF: "$/SF",
-    leaseTermsAdjustments: _leaseTermsAdjustments
+    calculationTypePercent: Enums.CALCULATION_TYPE.percent,
+    calculationTypeSF: Enums.CALCULATION_TYPE.dollarPerSF,
+    leaseTermsAdjustments: _leaseTermsAdjustments(),
+    marketConditionAdjustments: _marketConditionAdjustments()
 };

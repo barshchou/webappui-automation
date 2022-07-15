@@ -1,4 +1,6 @@
+import enums from "../../../enums/enums";
 import rentReconciliationPage from "../../../pages/income/commercial/rentReconciliation.page";
+import { BoweryReports } from "../../../types/boweryReports.type";
 import BaseActionsExt from "../../base/base.actions.ext";
 
 class RentReconciliationActions extends BaseActionsExt<typeof rentReconciliationPage> {
@@ -31,7 +33,7 @@ class RentReconciliationActions extends BaseActionsExt<typeof rentReconciliation
     }
 
     verifyCalculationInputValue(expectedLeaseTermsCalcType: string): RentReconciliationActions {
-        rentReconciliationPage.calculationDropdown.invoke('attr', 'value').should('have.value', expectedLeaseTermsCalcType);
+        rentReconciliationPage.calculationDropdown.invoke('text').should('deep.equal', expectedLeaseTermsCalcType);
         return this;
     }
 
@@ -52,10 +54,24 @@ class RentReconciliationActions extends BaseActionsExt<typeof rentReconciliation
         return this;
     }
 
-    setLeaseTermsAdjustment(adjustment: string, compIndex = 0): RentReconciliationActions {
-        let expectedAdjustmentValue = adjustment === "%" ? adjustment : `$${adjustment}`;
-        rentReconciliationPage.leaseTermsAdjustments(compIndex).clear().type(adjustment)
+    setLeaseTermsAdjustment(adjustment: number, calculationType: BoweryReports.CalculationType, compIndex = 0): RentReconciliationActions {
+        let expectedAdjustmentValue = calculationType === enums.CALCULATION_TYPE.percent ? adjustment : `$${adjustment}`;
+        rentReconciliationPage.leaseTermsAdjustments(compIndex).clear().type(`${adjustment}`)
             .should('have.value', expectedAdjustmentValue);
+        return this;
+    }
+
+    setMarketConditionAdjustment(adjustment: number, compIndex = 0): RentReconciliationActions {
+        rentReconciliationPage.marketConditionsAdjustments(compIndex).clear().type(`${adjustment}`)
+            .should('have.value', adjustment);
+        return this;
+    }
+
+    verifyTrendedRentSF(rentSf: number, leaseTermsAdjustment = 0, marketConditionAdjustment = 0, compIndex = 0): RentReconciliationActions {
+        let leaseTermsAdjustmentSubTotal = (rentSf * (100 + leaseTermsAdjustment)) / 100;
+        let expectedTrendedRentSF = (leaseTermsAdjustmentSubTotal * (100 + marketConditionAdjustment)) / 100;
+        expectedTrendedRentSF = (Math.round(expectedTrendedRentSF * 1000)) / 1000;
+        rentReconciliationPage.getTrendedRentSF(compIndex).should('have.text', `$${expectedTrendedRentSF.toFixed(2)}`);
         return this;
     }
 

@@ -55,6 +55,7 @@ import bondTypesEnum from "./organization/bondTypes.enum";
 import rowsMarketAdjustmentEnum from "./adjustComps/marketadjustment.enum";
 import expensesForecastCardNamesEnum from "./expense/expensesForecastCardNames.enum";
 import reimbursementColumnsIdEnum from "./reimbursementColumnsId.enum";
+import calculationTypesEnum from "./commercial/rent_reconciliation/calculationTypes.enum";
 
 export default {
     TEMPLATE_TYPE: templateTypesEnum,
@@ -113,5 +114,6 @@ export default {
     REPORT_STATUS: reportStatusEnum,
     BOND_TYPES: bondTypesEnum,
     EXPENSES_CARD_NAMES: expensesForecastCardNamesEnum,
-    REIMBURSEMENT_COLUMN_ID: reimbursementColumnsIdEnum
+    REIMBURSEMENT_COLUMN_ID: reimbursementColumnsIdEnum,
+    CALCULATION_TYPE: calculationTypesEnum
 };

@@ -43,48 +43,29 @@ describe("Verify the calculation field values",
         
         cy.stepInfo('2. Check that “%” is displayed in the “Calculations” dro-down field');
         Income._CommercialManager.RentReconciliation.verifyCalculationInputValue(testData.calculationTypePercent);
-        Income._CommercialManager.RentReconciliation.setLeaseTermsCalculationType(testData.calculationTypePercent);
 
         cy.stepInfo('3. Enter any value into the input field of the “Market Conditions Adjustment” row for any added comparable (e.g. 5%)');
-        
+        for (let index = 0; index < testData.numberOfComparables; index++) {
+            Income._CommercialManager.RentReconciliation
+                .setLeaseTermsAdjustment(testData.leaseTermsAdjustments[index], testData.calculationTypePercent, index);
+        }
 
         cy.stepInfo('4. Enter any value into the input field of the “Lease Terms Adjustment” row for the same comparable (e.g. 2%)');
         for (let index = 0; index < testData.numberOfComparables; index++) {
-            Income._CommercialManager.RentReconciliation.setLeaseTermsAdjustment(testData.leaseTermsAdjustments[index].toString());
+            Income._CommercialManager.RentReconciliation
+                .setMarketConditionAdjustment(testData.marketConditionAdjustments[index], index);
         }
 
         cy.stepInfo(`5. Verify that the “Trended Rent/SF” for the comparable from steps 3 and 5 is calculated by the following formula:
-            Rent/SF (the value is taken to the grid from the info of the added comparable)`);
-
-         
-        for (let compIndex = 0; compIndex < testData.numberOfComparables; compIndex++){
-            Income._CommercialManager.RentComps.clickEditButtonByRowNumber(testData.compGroupName, compIndex)
-                .checkUnitOfMeasureRadioButton(testData.unitsOfMeasure)
-                .fillInRentCompFieldInput(testData.rentCompFields[compIndex].name, testData.rentCompFields[compIndex].value, true)
-                .chooseRentCompFieldDropdownOption(testData.sourceOfInformation.name, testData.sourceOfInformation.value)
-                .clickSubmitButton();
-         }
-         Income._CommercialManager.RentComps
-            .saveCompPricesPerSFPerYearToAliasNumberFirstComps(testData.numberOfComparables, testData.compGroupName);
-
-        cy.stepInfo(`6. Navigate to Rent Reconciliation and verify:
-                    - Verify if Per Square Foot Per Month option is selected on In-Place RR page -> 
-                        Rent label is "Rent/SF/Month" 
-                    - Verify Rent/SF/Month for Base Unit
-                    - Verify Rent/SF/Month for Subject Units
-                    - Verify Rent/SF/Month for Rent Comps pulls
-                    - [QA-4712] Verify Rent PSF/Month value is displayed with 2 decimals places`);
-        _NavigationSection.navigateToRentReconciliation();
-        Income._CommercialManager.RentReconciliation.verifyRentLabel(testData.rentPSFLabelName)
-            .verifyBaseUnitRent(testData.rentPSFs[testData.rentPSFs.length -1])
-            .verifySubjectUnitRent(testData.rentPSFs[0]);
-        for (let index = 0; index < testData.numberOfComparables; index++){
-            Income._CommercialManager.RentReconciliation.Page.getCompRent(index).then(() => {
-                let rentFromRentComps = _map.get(`${index + 1}${mapKeysUtils.rent_per_sf}`);
-                let checkDecimalRent = testData.rentCompFields[index].rentSf;
-                Income._CommercialManager.RentReconciliation.verifyCompsRent(rentFromRentComps, index)
-                    .verifyCompsRent(checkDecimalRent, index);
+            Rent/SF (the value is taken to the grid from the info of the added comparable)
+            Formula: ((RentSF + ((RentSF * Lease Term Adjustment) / 100)) * Market Condition Adjustment ) / 100`);
+        for (let index = 0; index < testData.numberOfComparables; index++) {
+            Income._CommercialManager.RentReconciliation.Page.getCompRent(index).invoke('text').then(rentSf => {
+                let rent = Number(rentSf.replace('$', ''));
+                Income._CommercialManager.RentReconciliation
+                    .verifyTrendedRentSF(rent, testData.leaseTermsAdjustments[index], testData.marketConditionAdjustments[index], index);
             });
+            
         }
 
         deleteReport(testData.reportCreationData.reportNumber);
