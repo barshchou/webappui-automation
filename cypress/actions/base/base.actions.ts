@@ -81,8 +81,7 @@ export default class BaseActions {
         if(Cypress.browser.isHeadless == true) {
             element.should("be.visible");
             
-            // ernst: until we figure out what to do with such tests - do not use cypress-image-snapshot plugin
-            // element.matchImageSnapshot(snapshotName, options);
+            element.matchImageSnapshot(snapshotName, options);
             return this; 
         } 
     }
