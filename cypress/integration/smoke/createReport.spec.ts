@@ -24,6 +24,5 @@ describe("Create report test, open Find Comps, check if map is loaded", { tags: 
             .verifyProgressBarNotExist();
         Sales._FindComps.selectCompFromMap();
         deleteReport(tesData.reportCreationData.reportNumber);
-        cy.get("something", { timeout:5000 }).should("be.visible");
     });
 });
