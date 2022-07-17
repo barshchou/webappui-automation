@@ -28,3 +28,8 @@ jobs:
           spec_file: cypress/integration/not_full_reports/**/*.spec.ts
           tags: grep=,grepTags=-@smoke,burn=
           record_key: ${{ secrets.CURRENTS_RECORD_KEY }}
+        env:
+          DD_CIVISIBILITY_AGENTLESS_ENABLED: true
+          DD_API_KEY: ${{ secrets.DD_API_KEY }}
+          DD_ENV: ${{ github.event.inputs.env }}
+          DD_SERVICE: 'webapp'
