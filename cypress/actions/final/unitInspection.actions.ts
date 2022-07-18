@@ -1,14 +1,9 @@
-import BaseActions from "../base/base.actions";
 import unitInspectionPage from "../../pages/final/unitInspection.page";
+import BaseActionsExt from "../base/base.actions.ext";
 
-class UnitInspectionActions extends BaseActions {
+class UnitInspectionActions extends BaseActionsExt<typeof unitInspectionPage> {
 
-    /**
-     *
-     * @param {number} inspectedNumber
-     * @returns {UnitInspectionActions}
-     */
-    verifyNumberOfInspectedUnitsCommentary(inspectedNumber = 1) {
+    verifyNumberOfInspectedUnitsCommentary(inspectedNumber = 1): UnitInspectionActions {
         if (inspectedNumber === 0) {
             unitInspectionPage.generatedCommentary.should("have.text", "We have not inspected any units.");
         } else {
@@ -17,39 +12,29 @@ class UnitInspectionActions extends BaseActions {
         return this;
     }
 
-    /**
-     *
-     * @param {number} number
-     * @returns {UnitInspectionActions}
-     */
-    verifyNumberOfInspectedUnitsRows(number) {
+    verifyNumberOfInspectedUnitsRows(number: number): UnitInspectionActions {
         unitInspectionPage.numberCells.should("have.length", number);
         return this;
     }
 
-    /**
-     *
-     * @param value
-     * @param rowNumber
-     * @returns {UnitInspectionActions}
-     */
-    chooseReadyForOccupancyValueByRow(value, rowNumber = 0) {
+    private chooseReadyForOccupancyValueByRow(value: string, rowNumber = 0): UnitInspectionActions {
         unitInspectionPage.readyForOccupancyDropdowns.eq(rowNumber).click();
         unitInspectionPage.getDropdownOptionByValue(value).click();
         return this;
     }
 
-    /**
-     *
-     * @param {Array<string>} values
-     * @returns {UnitInspectionActions}
-     */
-    chooseListReadyForOccupancyValues(values) {
+    chooseListReadyForOccupancyValues(values: Array<string>): UnitInspectionActions {
         values.forEach((value, index) => {
             this.chooseReadyForOccupancyValueByRow(value, index);
         });
         return this;
     }
+
+    verifyRowExistOrNotExistInTable(rowNumber = 0, isExist = true): UnitInspectionActions {
+        isExist === true ?  unitInspectionPage.getRowInUnitInspectionTable(rowNumber).should("exist")
+            : unitInspectionPage.getRowInUnitInspectionTable(rowNumber).should("not.exist");
+        return this;
+    }
 }
 
-export default new UnitInspectionActions();
+export default new UnitInspectionActions(unitInspectionPage);

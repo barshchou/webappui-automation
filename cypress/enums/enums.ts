@@ -1,44 +1,61 @@
-import leaseDateName from "./leaseDateName.enum";
-import leaseStatus from "./leaseStatus.enum";
-import imageType from "./imageType.enum";
-import inputType from "./inputType.enum";
-import unitSF from "./unitSF.enum";
-import commercialUnitsUseValues from "./commercialUnitsUseValues.enum";
-import perUnitPerSF from "./perUnitPerSF.enum";
-import commercialUnitsUseTexts from "./commercialUnitsUseTexts.enum";
-import commercialUnitsGroups from "./commercialUnitsGroups.enum";
-import commercialUnitsGradeValues from "./commercialUnitsGradeValues.enum";
-import commercialUnitsFacadeValues from "./commercialUnitsFacadeValues.enum";
-import commercialUnitsStateValues from "./commercialUnitsStateValues.enum";
-import commercialUnitsCeilingHeightValues from "./commercialUnitsCeilingHeightValues.enum";
-import commercialUnitsLocationValues from "./commercialUnitsLocationValues.enum";
-import commercialUnitsStreetTypeValues from "./commercialUnitsStreetTypeValues.enum";
-import commercialUnitsFloorValues from "./commercialUnitsFloorValues.enum";
-import commercialUnitsFrontageValues from "./commercialUnitsFrontageValues.enum";
-import organizationAddresseePrefix from "./organizationAddresseePrefix.enum";
-import organizationState from "./organizationState.enum";
-import expensePeriodType from "./expensePeriodType.enum";
-import unitsOfMeasure from "./unitsOfMeasure.enum";
+import leaseDateName from "./lease/leaseDateName.enum";
+import leaseStatus from "./lease/leaseStatus.enum";
+import imageType from "./elements/imageType.enum";
+import inputType from "./elements/inputType.enum";
+import unitSF from "./unit/unitSF.enum";
+import commercialUnitsUseValues from "./commercial/commercialUnitsUseValues.enum";
+import perUnitPerSF from "./inputValues/perUnitPerSF.enum";
+import commercialUnitsUseTexts from "./commercial/commercialUnitsUseTexts.enum";
+import commercialUnitsGroups from "./commercial/commercialUnitsGroups.enum";
+import commercialUnitsGradeValues from "./commercial/commercialUnitsGradeValues.enum";
+import commercialUnitsFacadeValues from "./commercial/commercialUnitsFacadeValues.enum";
+import commercialUnitsStateValues from "./commercial/commercialUnitsStateValues.enum";
+import commercialUnitsCeilingHeightValues from "./commercial/commercialUnitsCeilingHeightValues.enum";
+import commercialUnitsLocationValues from "./commercial/commercialUnitsLocationValues.enum";
+import commercialUnitsStreetTypeValues from "./commercial/commercialUnitsStreetTypeValues.enum";
+import commercialUnitsFloorValues from "./commercial/commercialUnitsFloorValues.enum";
+import commercialUnitsFrontageValues from "./commercial/commercialUnitsFrontageValues.enum";
+import organizationAddresseePrefix from "./organization/organizationAddresseePrefix.enum";
+import organizationState from "./organization/organizationState.enum";
+import expensePeriodType from "./expense/expensePeriodType.enum";
+import unitsOfMeasure from "./unit/unitsOfMeasure.enum";
 import utilityExpenses from "./utilityExpenses.enum";
-import unitType from "./unitType.enum";
+import unitType from "./unit/unitType.enum";
 import sourceOfInformation from "./sourceOfInformation.enum";
 import amenities from "./amenities.enum";
-import templateTypesEnum from "./templateTypes.enum";
-import incomeTypesEnum from "./incomeTypes.enum";
-import valueConclusionTypesEnum from "./valueConclusionTypes.enum";
+import templateTypesEnum from "./reportParams/templateTypes.enum";
+import incomeTypesEnum from "./income/incomeTypes.enum";
+import valueConclusionTypesEnum from "./reportParams/valueConclusionTypes.enum";
 import envUrlsEnum from "./envUrls.enum";
 import proFormaTypesEnum from "./proFormaTypes.enum";
-import expenseCellNames from "./expenseCellNames";
-import expenseHistoryTableRowsEnum from "./expenseHistoryTableRows.enum";
+import expenseCellNames from "./expense/expenseCellNames";
+import expenseHistoryTableRowsEnum from "./expense/expenseHistoryTableRows.enum";
 import reimbursementTypes from "./reimbursementTypes.enum";
-import incomeTypesCellNamesEnum from "./incomeTypesCellNames.enum";
-import expenseForecast from "./expenseForecast.enum";
-import parkingVcLossType from "./parkingVcLossType.enum";
-import laundryVcLossType from "./laundryVcLossType.enum";
-import storageVcLossType from "./storageVcLossType.enum";
+import incomeTypesCellNamesEnum from "./income/incomeTypesCellNames.enum";
+import expenseForecast from "./expense/expenseForecast.enum";
+import parkingVcLossType from "./inputValues/parkingVcLossType.enum";
+import laundryVcLossType from "./inputValues/laundryVcLossType.enum";
+import storageVcLossType from "./inputValues/storageVcLossType.enum";
 import knownInformation from "./knownInformationType.enum";
 import compGroupsColumnsEnum from "./compGroupsColumns.enum";
 import marketAnalysisUsesEnum from "./marketAnalysisUses.enum";
+import rentTypesEnum from "./rent/rentTypes.enum";
+import usersEnum from "../enums/users/users.enum";
+import propertyConditionsEnum from "./property/propertyConditions.enum";
+import propertyConditionsRadiosEnum from "./property/propertyConditionsRadios.enum";
+import rentRollOptionsCheckboxesEnum from "./rent/rentRollOptionsCheckboxes.enum";
+import featureFlagKeys from "./featureFlags/featureFlagKeys.enum";
+import envLaunchDarkly from "./featureFlags/envLaunchDarkly.enum";
+import menuLinksNamesEnum from "./menuLinksNames.enum";
+import rolesEnum from "./users/roles.enum";
+import boweryOfficesEnum from "./organization/boweryOffices.enum";
+import salesAdjustmentGridEnum from "./adjustComps/salesadjustment.enum";
+import reportStatusEnum from "./reportParams/reportStatus.enum";
+import bondTypesEnum from "./organization/bondTypes.enum";
+import rowsMarketAdjustmentEnum from "./adjustComps/marketadjustment.enum";
+import cumulativepriceSalesadjustEnum from "./adjustComps/cumulativeprice.salesadjust.enum";
+import expensesForecastCardNamesEnum from "./expense/expensesForecastCardNames.enum";
+import reimbursementColumnsIdEnum from "./reimbursementColumnsId.enum";
 
 export default {
     TEMPLATE_TYPE: templateTypesEnum,
@@ -81,5 +98,22 @@ export default {
     UNIT_TYPE: unitType,
     SOURCE_OF_INFORMATION: sourceOfInformation,
     AMENITIES: amenities,
-    MARKET_ANALYSIS_USES: marketAnalysisUsesEnum
+    MARKET_ANALYSIS_USES: marketAnalysisUsesEnum,
+    RENT_TYPE: rentTypesEnum,
+    USERS: usersEnum,
+    PROPERTY_CONDITIONS: propertyConditionsEnum,
+    PROPERTY_CONDITIONS_RADIOS: propertyConditionsRadiosEnum,
+    RENT_ROLL_OPTIONS_CHECKBOXES: rentRollOptionsCheckboxesEnum,
+    FEATURE_FLAG_KEYS: featureFlagKeys,
+    ENV_LAUNCH_DARKLY: envLaunchDarkly,
+    MENU_LINKS: menuLinksNamesEnum,
+    USER_ROLES: rolesEnum,
+    BOWERY_OFFICES: boweryOfficesEnum,
+    SALES_ADJUSTMENT_GRID: salesAdjustmentGridEnum,
+    SALES_ADJUSTMENT_GRID_CUMULATIVE_PRICE: cumulativepriceSalesadjustEnum,
+    ROWS_MARKET_ADJUSTMENT: rowsMarketAdjustmentEnum,
+    REPORT_STATUS: reportStatusEnum,
+    BOND_TYPES: bondTypesEnum,
+    EXPENSES_CARD_NAMES: expensesForecastCardNamesEnum,
+    REIMBURSEMENT_COLUMN_ID: reimbursementColumnsIdEnum
 };

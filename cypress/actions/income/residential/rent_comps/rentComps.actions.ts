@@ -379,7 +379,7 @@ class RentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
     }
 
     selectComparableByIndex(index = 0): RentCompsActions {
-        rentCompsPage.selectComparableButtons.eq(index).click();
+        rentCompsPage.selectComparableButtons.eq(index).click( { force: true } );
         return this;
     }
 

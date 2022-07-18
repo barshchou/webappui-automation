@@ -29,4 +29,5 @@ export default {
     locationAdjustments: _locationAdjustments,
     comparable: Object.freeze(comparableFixture()),
     calculationUnits: "Per Residential Units",
+    compsToAdd: [ 0, 1 ],
 };

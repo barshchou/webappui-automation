@@ -4,8 +4,16 @@ import {
     numberWithCommas
 } from "../../../utils/numbers.utils";
 import BaseActionsExt from "../base/base.actions.ext";
+import { BoweryReports } from "../../types/boweryReports.type";
 
 class AdjustCompsActions extends BaseActionsExt<typeof adjustCompsPage> {
+    /**
+     * Checks whether name string in cell Cumulative Price Per *basis* is bold   
+     */
+    checkCumulativePriceName(basis: BoweryReports.SalesAdjustmentGrid.CumulativePrice) {
+        this.Page.cellCumulativePriceName(basis).should("have.css", "font-weight", "500");
+        return this;
+    }
 
     checkCalculationUnitsRadio(value: string): AdjustCompsActions {
         adjustCompsPage.calculationUnitsRadio.check(value).should("be.checked");
@@ -126,12 +134,12 @@ class AdjustCompsActions extends BaseActionsExt<typeof adjustCompsPage> {
     }
 
     verifyTrendedPriceByColumn(value: string, index = 0): AdjustCompsActions {
-        adjustCompsPage.cumulativePriceCells.eq(index).should("have.text", value);
+        adjustCompsPage.cellCumulativePriceValue.eq(index).should("have.text", value);
         return this;
     }
 
     verifyAdjustedPriceByColumn(index = 0): AdjustCompsActions {
-        adjustCompsPage.cumulativePriceCells.eq(index).invoke("text").then(trendedText => {
+        adjustCompsPage.cellCumulativePriceValue.eq(index).invoke("text").then(trendedText => {
             const trendedNumber = getNumberFromDollarNumberWithCommas(trendedText);
             adjustCompsPage.netPropertyAdjustmentsCells.eq(index).invoke("text").then(netAdjText => {
                 const netAdjNumber = Number(netAdjText.replace("%", ""));
@@ -180,8 +188,8 @@ class AdjustCompsActions extends BaseActionsExt<typeof adjustCompsPage> {
              } else {
                  adjustedTrendedPriceText = `$${numberWithCommas(pricePerBasisNumber.toFixed(2))}`;
              }
-             adjustCompsPage.cumulativePriceCells.eq(index).should("have.text", adjustedTrendedPriceText);
-           
+             cy.log("Cumulative Price Per Unit is: "+adjustedTrendedPriceText);
+             adjustCompsPage.cellCumulativePriceValue.eq(index).should("have.text", adjustedTrendedPriceText);
         });
             
         return this;

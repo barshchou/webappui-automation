@@ -2,21 +2,45 @@ import testData from "../../../../fixtures/not_full_reports/sales/adjust_comps/Q
 import Sales from "../../../../actions/sales/sales.manager";
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { ReviewExport } from "../../../../actions";
 
 describe("Adjusted Price per Residential Unit in Sales Adjustment Grid is calculated with correct formula", 
-    { tags: [ "@adjust_comps", "@sales" ] }, () => {
-
-    before("Login, create report", () => {
-        createReport(testData.reportCreationData);
-    });
+    { tags: [ "@adjust_comps", "@sales", "@check_export" ] }, () => {
 
     it("Test body", () => {
+        createReport(testData.reportCreationData);
+
         NavigationSection.navigateToFindComps();
-        Sales.FindComps.selectCompFromMapByAddress(testData.comparable.address);
+        Sales.FindComps.selectCompFromMap();
+        
         NavigationSection.navigateToAdjustComps();
         Sales.AdjustComps.checkCalculationUnitsRadio(testData.calculationUnits)
-            .enterPropertyRightsByColumn(testData.comparable.propertyRights)
-            .verifyTrendedPriceByColumn(testData.comparable.trendedPrice);
+            .enterMarketAdjustmentsGroup(Object.keys(testData.comparableAdjustment), Object.values(testData.comparableAdjustment))            
+            .verifyTrendedPricePerBasis(Object.values(testData.comparableAdjustment), testData.basis);
+
+        cy.stepInfo(`[QA-4109] -> 'Cumulative Price Per SF' is displayed in bold`);
+        Sales.AdjustComps.Actions.checkCumulativePriceName("SF");
+
+        cy.stepInfo(`[QA-4109] -> Generate and download this report `);
+        NavigationSection.Actions.openReviewAndExport();
+        ReviewExport.Actions.generateDocxReport().downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
+        
         deleteReport(testData.reportCreationData.reportNumber);
+    });
+
+    it("Check export", () => {
+        cy.stepInfo(`
+        [QA-4109] → open Sales Adjustment Grid 
+        → verify the 'Cumulative Price Per SF:' label and the same calculations`);
+
+        Cypress.config().baseUrl = null;
+        cy.task("getFilePath", { _reportName: testData.reportCreationData.reportNumber, _docx_html: "html" }).then(file => {
+            cy.log(<string>file);
+            cy.visit(<string>file);
+            cy.contains("Cumulative Price Per SF")
+                .parent().parent().parent()
+                .scrollIntoView().find("td").last()
+                .should("have.text", testData.cumulativePricePerSF);
+        }); 
     });
 });

@@ -1,75 +1,48 @@
-import BaseActions from "../base/base.actions";
 import capRateDiscussionPage from "../../pages/final/capRateDiscussion.page";
+import BaseActionsExt from "../base/base.actions.ext";
 
-class CapRateDiscussionActions extends BaseActions {
+class CapRateDiscussionActions extends BaseActionsExt<typeof capRateDiscussionPage> {
 
-    /**
-     * @param {Readonly<{min: string, max: string, average: string}>} table
-     * @returns {CapRateDiscussionActions}
-     * */
-    verifyCapRateTable(table) {
+    verifyCapRateTable(table: Readonly<{min: string, max: string, average: string}>): CapRateDiscussionActions {
         capRateDiscussionPage.capRateCompsMin.should("have.text", table.min);
         capRateDiscussionPage.capRateCompsMax.should("have.text", table.max);
         capRateDiscussionPage.capRateCompsAverage.should("have.text", table.average);
         return this;
     }
 
-    /**
-     * @param {Readonly<{min: string, max: string, average: string}>} row
-     * @returns {CapRateDiscussionActions}
-     */
-    verifyPwCRow(row) {
+    verifyPwCRow(row: Readonly<{min: string, max: string, average: string}>): CapRateDiscussionActions {
         capRateDiscussionPage.pwcMin.should("have.text", row.min);
         capRateDiscussionPage.pwcAverage.should("have.text", row.average);
         capRateDiscussionPage.pwcMax.should("have.text", row.max);
         return this;
     }
 
-    /**
-     * @param {Readonly<{min: string, max: string, average: string}>} row
-     * @returns {CapRateDiscussionActions}
-     */
-    verifySitusRow(row) {
+    verifySitusRow(row: Readonly<{min: string, max: string, average: string}>): CapRateDiscussionActions {
         capRateDiscussionPage.situsMin.should("have.text", row.min);
         capRateDiscussionPage.situsAverage.should("have.text", row.average);
         capRateDiscussionPage.situsMax.should("have.text", row.max);
         return this;
     }
 
-    /**
-     *
-     * @returns {CapRateDiscussionActions}
-     */
-    clickCapRateCompsTab() {
+    clickCapRateCompsTab(): CapRateDiscussionActions {
         capRateDiscussionPage.capRateCompsTab.click();
         return this;
     }
 
-    /**
-     * @param {Readonly<{income: string, propConditions: string, location: string}>} table
-     * @returns {CapRateDiscussionActions}
-     */
-    verifyCapRateCompsTable(table) {
+    verifyCapRateCompsTable(table: Readonly<{income: string, propConditions: string, location: string}>): CapRateDiscussionActions {
         capRateDiscussionPage.incomePotentialCell.should("have.text", table.income);
         capRateDiscussionPage.propertyConditionsCell.should("have.text", table.propConditions);
         capRateDiscussionPage.locationCell.should("have.text", table.location);
         return this;
     }
 
-    /**
-     *
-     * @returns {CapRateDiscussionActions}
-     */
-    clickIncomeSpikesTab() {
+    clickIncomeSpikesTab(): CapRateDiscussionActions {
         capRateDiscussionPage.incomeSpikesTab.click();
         return this;
     }
 
-    /**
-     * @param {Readonly<{capRate: string, occupancy: string, percentageMarketRate: string, condition: string}>} table
-     * @returns {CapRateDiscussionActions}
-     */
-    verifyIncomeSpikesTable(table) {
+    verifyIncomeSpikesTable(table: Readonly<{capRate: string, occupancy: string, 
+        percentageMarketRate: string, condition: string}>): CapRateDiscussionActions {
         capRateDiscussionPage.concludedCapRateCell.should("have.text", table.capRate);
         capRateDiscussionPage.occupancyCell.should("have.text", table.occupancy);
         capRateDiscussionPage.percentageMarketRateCell.should("have.text", table.percentageMarketRate);
@@ -77,60 +50,37 @@ class CapRateDiscussionActions extends BaseActions {
         return this;
     }
 
-    /**
-     * @param {Readonly<{incomePotential: string, marketConditions: string, flowRisk: string}>} radios
-     * @returns {CapRateDiscussionActions}
-     */
-    checkIncomeSpikesRadios(radios) {
+    checkIncomeSpikesRadios(radios: Readonly<{incomePotential: string,
+        marketConditions: string, flowRisk: string}>): CapRateDiscussionActions {
         this.checkSubjectIncomePotentialRadio(radios.incomePotential)
             .checkCurrentMarketConditionsRadio(radios.marketConditions)
             .checkCashFlowRiskRadio(radios.flowRisk);
         return this;
     }
 
-    /**
-     *
-     * @param {string} value
-     * @returns {CapRateDiscussionActions}
-     */
-    checkSubjectIncomePotentialRadio(value) {
+    checkSubjectIncomePotentialRadio(value: string): CapRateDiscussionActions {
         capRateDiscussionPage.subjectIncomePotentialRadio.check(value);
         this.verifyRadioIsChecked(value);
         return this;
     }
 
-    /**
-     *
-     * @param {string} value
-     * @returns {CapRateDiscussionActions}
-     */
-    checkCurrentMarketConditionsRadio(value) {
+    checkCurrentMarketConditionsRadio(value: string): CapRateDiscussionActions {
         capRateDiscussionPage.currentMarketConditionsRadio.check(value);
         this.verifyRadioIsChecked(value);
         return this;
     }
 
-    /**
-     *
-     * @param {string} value
-     * @returns {CapRateDiscussionActions}
-     */
-    checkCashFlowRiskRadio(value) {
+    checkCashFlowRiskRadio(value: string): CapRateDiscussionActions {
         capRateDiscussionPage.cashFlowRiskRadio.check(value);
         this.verifyRadioIsChecked(value);
         return this;
     }
 
-    /**
-     *
-     * @param {string} value
-     * @returns {CapRateDiscussionActions}
-     */
-    verifyRadioIsChecked(value) {
+    verifyRadioIsChecked(value: string): CapRateDiscussionActions {
         capRateDiscussionPage.getElementToCheckRadio(value).should("exist");
         return this;
     }
 
 }
 
-export default new CapRateDiscussionActions();
+export default new CapRateDiscussionActions(capRateDiscussionPage);

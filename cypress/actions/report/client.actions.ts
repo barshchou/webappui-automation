@@ -1,6 +1,7 @@
 import clientPage from "../../pages/report/client.page";
 import { replaceEntersWithLineBreak } from "../../../utils/string.utils";
 import BaseActionsExt from "../base/base.actions.ext";
+import { numberWithCommas } from "../../../utils/numbers.utils";
 
 class ClientActions extends BaseActionsExt<typeof clientPage> {
     enterIntendedUser(textToType: string = null, edit = true, save = true, revert = false) {
@@ -113,13 +114,13 @@ class ClientActions extends BaseActionsExt<typeof clientPage> {
         return this;
     }
 
-    verifyIntendedUserTextBox(verifyAreaValue: string): ClientActions {
-        clientPage.intendedUserTextBox.should("contain.text", verifyAreaValue);
+    verifyIntendedUserTextBox(verifyAreaValue: string | number): ClientActions {
+        clientPage.intendedUserTextBox.should("contain.text", `${verifyAreaValue}`);
         return this;
     }
 
-    verifyIdentificationOfTheClientTextBox(verifyAreaValue: string): ClientActions {
-        clientPage.identificationOfClientTextBox.should("contain.text", verifyAreaValue);
+    verifyIdentificationOfTheClientTextBox(verifyAreaValue: string | number): ClientActions {
+        clientPage.identificationOfClientTextBox.should("contain.text", `${verifyAreaValue}`);
         return this;
     }
 
@@ -130,6 +131,12 @@ class ClientActions extends BaseActionsExt<typeof clientPage> {
 
     verifyNotContainIdentificationOfTheClientTextBox(verifyAreaValue: string): ClientActions {
         clientPage.identificationOfClientTextBox.should("not.contain.text", verifyAreaValue);
+        return this;
+    }
+
+    verifyCommentaryContainsText(verifyAreaValue: string | number, commentaryTitle: string): ClientActions { 
+        let expectedText = typeof verifyAreaValue ===  "number" ? `${numberWithCommas(verifyAreaValue)}`: verifyAreaValue;
+        this.Page.commentaryText(commentaryTitle).should("include.text", `${expectedText}`);
         return this;
     }
 }

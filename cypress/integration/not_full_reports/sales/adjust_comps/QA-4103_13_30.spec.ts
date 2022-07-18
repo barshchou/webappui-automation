@@ -9,7 +9,7 @@ describe("Net Property Adjustments in Sales Adjustment Grid is calculated with c
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
         NavigationSection.navigateToFindComps();
-        Sales._FindComps.selectCompFromMapByAddress(testData.comparable.address)
+        Sales._FindComps.selectCompFromMap()
             .clickSaveButton();
         cy.saveLocalStorage();
     });
@@ -37,7 +37,8 @@ describe("Net Property Adjustments in Sales Adjustment Grid is calculated with c
         deleteReport(testData.reportCreationData.reportNumber);
     });
 
-    it("[QA-4130]", () => {
+    // Will add in next PR
+    it.skip("[QA-4130]", () => {
         // Feature flag test (Enable flexible gba analysis)
         testData.calculationUnits.forEach(val => {
             Sales._AdjustComps.checkCalculationUnitsRadio(val);

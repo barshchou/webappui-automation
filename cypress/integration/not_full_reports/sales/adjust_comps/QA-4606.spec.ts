@@ -14,7 +14,7 @@ describe("[QA-4606] Check the reference 'Condition' line in the Sales Adjustment
 
             cy.stepInfo("2. Add Comp");
             NavigationSection.navigateToFindComps();
-            Sales._FindComps.selectCompFromMapByAddress(testData.address);
+            Sales._FindComps.selectCompFromMap();
 
             cy.stepInfo("3. Navigate Property > Property Description > Site Description and verify As Is General Property Condition");
             NavigationSection.navigateToPropertyDescription();

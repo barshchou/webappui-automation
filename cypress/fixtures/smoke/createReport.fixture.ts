@@ -1,6 +1,6 @@
 import ReportDataCreator from "../data_creator/reportData.creator";
 import Enums from "../../enums/enums";
-import { BoweryAutomation } from "../../types";
+import { BoweryAutomation } from "../../types/boweryAutomation.type";
 
 const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("createReport", {
     incomeValue: Enums.INCOME_TYPE.both,
@@ -9,6 +9,5 @@ const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreat
 });
 
 export default {
-    reportCreationData: _reportCreationData,
-    comparableAddress: "200 West 78 Street"
+    reportCreationData: _reportCreationData
 };

@@ -131,3 +131,6 @@ cypress/gh_artifacts/
 # act (tool for local GH Actions)
 .act/.secrets
 .act/debug.json
+
+# spec for debug something
+test.spec.ts

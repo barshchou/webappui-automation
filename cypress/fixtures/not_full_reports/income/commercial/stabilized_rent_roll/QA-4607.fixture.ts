@@ -1,6 +1,7 @@
 import ReportDataCreator from "../../../../data_creator/reportData.creator";
 import Enums from "../../../../../enums/enums";
-import { BoweryAutomation, BoweryReports } from "../../../../../types";
+import { BoweryReports } from "../../../../../types/boweryReports.type";
+import { BoweryAutomation } from "../../../../../types/boweryAutomation.type";
 
 const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("4607", {
     incomeValue: Enums.INCOME_TYPE.both
@@ -11,7 +12,7 @@ const _numberOfCommercialUnits = 2;
 const _commercialUnitSf = [ 100000, 120000 ];
 const _leaseStatuses: Array<BoweryReports.LeaseStatus> = [ "Vacant", "Vacant" ];
 const _address = "462 1st Avenue, New York, USA";
-const _leaseDate = "01012022";
+const _leaseDate = "01-01-2022";
 const _compGroup = "QA_4607_Comp_Group";
 const _marketRentConclusion = 332;
 const _unitsOfMeasure = "annually" as BoweryReports.UnitsOfMeasure;
@@ -34,7 +35,7 @@ const _rentCompFields: BoweryReports.RentCompField[] = [
     },
     {
         name: "use",
-        value: "office" as BoweryReports.CommercialUnitsUseValues,
+        value: "office" as BoweryReports.CommercialUnits.UseValues,
         type: "dropdown"
     },
     {

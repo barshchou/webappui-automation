@@ -1,5 +1,5 @@
 import Enums from "../../../../enums/enums";
-import { BoweryReports } from "../../../../types";
+import { BoweryReports } from "../../../../types/boweryReports.type";
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 
 export const createReportData = conclusion => {
@@ -16,6 +16,6 @@ const _conclusionValue: Array<BoweryReports.ConclusionValue> = [
 export default {
     conclusionValue: _conclusionValue,
     propertyCondition: "Satisfactory",
+    reportCreationData: ReportDataCreator.getReportData("4606", { incomeValue: Enums.INCOME_TYPE.both }),
     calculationUnits: [ "PSF", "Per Residential Units" ],
-    address: "200 West 78 Street",
 };

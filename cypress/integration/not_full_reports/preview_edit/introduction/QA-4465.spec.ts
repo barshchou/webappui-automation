@@ -3,8 +3,8 @@ import testData from "../../../../fixtures/not_full_reports/review_edit/introduc
 import { _BaseTest } from "../../../../actions/base";
 import { Report, PreviewEdit } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
-import { getReportId } from "../../../../../utils/intercept.utils";
-import { _normalize } from "../../../../../utils/string.utils";
+import { normalizeText } from "../../../../../utils/string.utils";
+import mapKeysUtils from "../../../../utils/mapKeys.utils";
 
 const { createReport, deleteReport } = _BaseTest;
 
@@ -16,6 +16,7 @@ describe('Verify the "Property Rights Appraised" commentary on the Introduction 
         createReport(testData.reportCreationData);
 
         cy.stepInfo(`2. Proceed to the Introduction page`);
+        _NavigationSection.navigateToReportInformation();
     });
 
     it("Test body", () => {
@@ -26,36 +27,36 @@ describe('Verify the "Property Rights Appraised" commentary on the Introduction 
        
         testData.textToVerify.forEach(value => {
             Report._KeyInfo.enterPropertyRightsAppraisedComment(value).then(text => {
-                cy.wrap(_normalize(text)).as(testData.aliases.PropertyRightsAppraised);
+                cy.wrap(normalizeText(text)).as(testData.aliases.PropertyRightsAppraised);
             });
             _NavigationSection.navigateToIntroduction()
                 .verifyProgressBarNotExist();
     
             PreviewEdit._Introduction.Page.TextPropertyRightsAppraised
-            .invoke("text")
-            .then(text => {
-                cy.wrap(_normalize(text)).as(testData.aliases.PreviewEditText);
-            });
+                .invoke("text")
+                .then(text => {
+                    cy.wrap(normalizeText(text)).as(testData.aliases.PreviewEditText);
+                });
 
             PreviewEdit._Introduction.Actions.extractAlias(testData.aliases.PropertyRightsAppraised)
-            .then(propertyCommentary => {
-                PreviewEdit._Introduction.Actions.extractAlias(testData.aliases.PreviewEditText)
-                .then(previewCommentary => {
-                    expect(propertyCommentary).to.equal(previewCommentary);
-                });
-            });  
+                .then(propertyCommentary => {
+                    PreviewEdit._Introduction.Actions.extractAlias(testData.aliases.PreviewEditText)
+                    .then(previewCommentary => {
+                        expect(propertyCommentary).to.equal(previewCommentary);
+                    });
+                });  
     
             PreviewEdit._Introduction.Page.SwitchEditBtn.click();
             
             PreviewEdit._Introduction.Page.ChipModified.should("be.visible");
             PreviewEdit._Introduction.Page.getBacklink(testData.backlinkName)
-            .should("be.visible")
-            .invoke("attr", "href")
-            .then(href => {
-                getReportId().then(val => {
-                    expect(href).includes(val);
+                .should("be.visible")
+                .invoke("attr", "href")
+                .then(href => {
+                    cy._mapGet(mapKeysUtils.report_id).then(val => {
+                        expect(href).includes(val);
+                    });
                 });
-            });
             PreviewEdit._Introduction.Page.getBacklink(testData.backlinkName).click();
             PreviewEdit._Introduction.Actions.clickYesButton().verifyProgressBarNotExist();
         });

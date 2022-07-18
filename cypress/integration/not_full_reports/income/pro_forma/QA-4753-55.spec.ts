@@ -5,7 +5,7 @@ import { _NavigationSection } from "../../../../actions/base";
 import { Property } from '../../../../actions/index';
 import { Income } from "../../../../actions";
 import proFormaTypes from "../../../../enums/proFormaTypes.enum";
-import Enums from "../../../../enums/incomeTypesCellNames.enum";
+import Enums from "../../../../enums/income/incomeTypesCellNames.enum";
 
 describe("Pro Forma page table Effective Gross Income validation", 
     { tags:[ "@income", "@pro_forma" ] }, () => {
@@ -38,8 +38,8 @@ describe("Pro Forma page table Effective Gross Income validation",
         _NavigationSection.clickCommercialReimbursementSummaryButton()
             .clickYesIfExist();
         Income._CommercialManager.ReimbursementSummary.addNewCommercialReimbursement(
-            testData.expenseType, testData.expenceTypeCellName, testData.reimbursementType, testData.knownInformation)
-            .fillReimbursements(testData.monthlyReimbursement)
+            testData.expenseType, testData.expenseTypeCellName, testData.reimbursementType, testData.knownInformation)
+                .fillReimbursements(testData.monthlyReimbursement, testData.columnsId)
             .fillVCLossByRow(testData.reimbursementVcLoss);
 
         cy.stepInfo(`6. Go to Property → Amenities, check Parking checkbox and fill in the number of Parking Spaces, 

@@ -5,7 +5,7 @@ import { _NavigationSection } from "../../../../actions/base";
 import { Property } from '../../../../actions';
 import { Income } from "../../../../actions";
 import proFormaTypes from "../../../../enums/proFormaTypes.enum";
-import Enums from "../../../../enums/incomeTypesCellNames.enum";
+import Enums from "../../../../enums/income/incomeTypesCellNames.enum";
 
 describe("Potential Real Estate Tax Reimbursement", 
     { tags:[ "@income", "@pro_forma" ] }, () => {
@@ -36,8 +36,8 @@ describe("Potential Real Estate Tax Reimbursement",
         
         cy.stepInfo("4. Go to Income → Reimbursement Summary and add Real Estate Taxes Reimbursement for commercial units"); 
         Income._CommercialManager.ReimbursementSummary.addNewCommercialReimbursement(
-            testData.expenseType, testData.expenceTypeCellName, testData.reimbursementType, testData.knownInformation)
-            .fillReimbursements(testData.monthlyReimbursement);
+            testData.expenseType, testData.expenseTypeCellName, testData.reimbursementType, testData.knownInformation)
+                .fillReimbursements(testData.monthlyReimbursement, testData.columnsId);
 
         cy.saveLocalStorage();
     });
@@ -64,14 +64,14 @@ describe("Potential Real Estate Tax Reimbursement",
     it("[QA-4502]", () => {
         cy.stepInfo(`5. Verify that Pro Forma table contains Taxes Reimbursement PSF value`);
         Income._ProFormaActions.verifyCategoryPSFTotal(
-            `$${numberWithCommas(testData.reimbursmentPerSf.toFixed(2))}`, 
+            `$${numberWithCommas(testData.reimbursementPerSf.toFixed(2))}`, 
             proFormaTypes.potentialRealEstateTaxesReimbursement);
     });
 
     it("[QA-4503]", () => {
         cy.stepInfo(`5. Verify that Pro Forma table contains Taxes Reimbursement Per Unit value`);
         Income._ProFormaActions.verifyCategoryPerUnitTotal(
-            `$${numberWithCommas(Math.round(testData.reimbursmentPerUnit))}`, 
+            `$${numberWithCommas(Math.round(testData.reimbursementPerUnit))}`, 
             proFormaTypes.potentialRealEstateTaxesReimbursement);
 
         deleteReport(testData.reportCreationData.reportNumber);
