@@ -72,7 +72,8 @@ declare global {
           envUrl: string): void
 
         /**
-         * Deletes report using `DELETE` method and `/report/:id` route.
+         * Deletes report(s) using `DELETE` method and `/report/:id` route. 
+         * Takes `report_id`'s from `_map`, iterates over them and execute request (see code in `./commands.ts`)
          * 
          * Note_1: code of this methods starts in *WebApp* repo, search for `router.delete('/:id', userController.isAuthenticated, controller.delete)`
          * in `./routes/report/index.js`

@@ -60,9 +60,14 @@ Cypress.Commands.add("loginByApi", (envUrl, username, password) => {
     .then(_response => {
         const response: any = _response;
         const responseBody = JSON.parse(response.text);
-
         const token = responseBody.token;
+
+        // set bearer token also in localStorage in order to avoid unexpected behaviour from old code
         window.localStorage.setItem("jwToken", token);
+
+        // set bearer token so we could we use this in global after hook in `./index.ts`
+        _map.set(mapKeysUtils.bearer_token, token);
+
         const userId = responseBody.user._id;
         cy.log(`User Id is: ${userId}`);
         cy._mapSet("token", token);
@@ -100,14 +105,31 @@ Cypress.Commands.add("deleteApiReport", () => {
         cy._mapGet(mapKeysUtils.report_id_arr).then(arr => {
             arr.forEach(reportId => {
                 cy.log(`Deleting report with id: ${reportId}`);
+                /**
+                 * Deleting report
+                 */
                 cy.request({
                     method:"DELETE",
                     url:`${Cypress.config().baseUrl}/report/${reportId}`,
                     auth:{
-                        'bearer': window.localStorage.getItem("jwToken")
+                        'bearer': _map.get(mapKeysUtils.bearer_token)
                     }
                 }).then((resp) => {
                     expect(resp.status).to.eq(200);
+                });
+
+                /**
+                 * Additional check whether report was deleted
+                 */
+                cy.request({
+                    failOnStatusCode: false,
+                    method:"GET",
+                    url:`${Cypress.config().baseUrl}/report/${reportId}`,
+                    auth:{
+                        'bearer': _map.get(mapKeysUtils.bearer_token)
+                    }
+                },).then((resp) => {
+                    expect(resp.status).to.eq(404);
                 });
             });
         });
