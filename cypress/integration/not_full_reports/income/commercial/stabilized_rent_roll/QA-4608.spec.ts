@@ -7,7 +7,7 @@ import { numberWithCommas } from "../../../../../../utils/numbers.utils";
 describe("Verify the Commercial Stabilized Rent Roll table on export", 
     { tags: [ "@income", "@commercial", "@stabilized_rent_roll", "@check_export" ] }, () => {
         
-    it.skip("Test body", () => {
+    it("Test body", () => {
         cy.stepInfo(`1. The mixed report is created and several commercial units are added`);
         createReport(testData.reportCreationData);
         _NavigationSection.navigateToPropertySummary();
