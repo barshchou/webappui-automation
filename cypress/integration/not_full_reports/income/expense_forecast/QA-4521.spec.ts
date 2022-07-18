@@ -52,8 +52,9 @@ describe("Historical expense Insurance Per Unit is correctly calculated and disp
                 .hideExpenseForecastHeader();
 
             cy.stepInfo("4.2 Check historical expenses values for Insurance card. They should be correctly displayed on slidebars");
-            Income._ExpenseForecastActions.Actions.matchElementSnapshot(
-                Income._ExpenseForecastActions.Page.insuranceCard, testData.insuranceICardSnapshotName, { padding: [ 10, 100 ] });
+            Income._ExpenseForecastActions.Actions.verifyProgressBarNotExist()
+                .matchElementSnapshot(
+                    Income._ExpenseForecastActions.Page.insuranceCard, testData.insuranceICardSnapshotName, { padding: [ 10, 100 ] });
 
             deleteReport(testData.reportCreationData.reportNumber);
 

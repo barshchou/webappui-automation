@@ -60,9 +60,10 @@ describe("User selects Per SF radiobutton for Repairs & Maintenance on Expense F
 
         cy.stepInfo(`QA-4924 =>5.2 Check historical expenses values for Repairs & Maintenance card. They should be correctly displayed on slidebars`);
 
-        Income.ExpenseForecast.Actions.matchElementSnapshot(
-            Income.ExpenseForecast.Page.repairsAndMaintenanceCard, testData.repairsAndMaintenanceCardSnapshotName,
-            { padding: [ 10, 100 ] });
+        Income.ExpenseForecast.Actions.verifyProgressBarNotExist()
+            .matchElementSnapshot(
+                Income.ExpenseForecast.Page.repairsAndMaintenanceCard, testData.repairsAndMaintenanceCardSnapshotName,
+                { padding: [ 10, 100 ] });
 
         deleteReport(testData.reportCreationData.reportNumber);
     });

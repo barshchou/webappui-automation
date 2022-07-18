@@ -59,9 +59,10 @@ describe("Historical expense Electricity Per SF is correctly calculated and disp
             5.1 calculated for each expense type as: [Expense Period type]Electricity / GBA
             5.2 correctly displayed on slidebars
         `);
-            Income.ExpenseForecast.Actions.matchElementSnapshot(
-                Income.ExpenseForecast.Page.electricityCard, testData.electricityCardSnapshotName, { padding: [ 10, 100 ] }
-            );
+            Income.ExpenseForecast.Actions.verifyProgressBarNotExist().
+                matchElementSnapshot(
+                    Income.ExpenseForecast.Page.electricityCard, testData.electricityCardSnapshotName, { padding: [ 10, 100 ] }
+                );
 
             deleteReport(testData.reportCreationData.reportNumber);
         });

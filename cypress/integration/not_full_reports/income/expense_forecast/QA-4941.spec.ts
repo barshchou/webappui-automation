@@ -57,8 +57,9 @@ describe("Historical expense Fuel Per SF is correctly calculated and displayed",
             .hideExpenseForecastHeader();
 
         cy.stepInfo("6. Check historical expenses values for Fuel card. They should be correctly displayed on slidebars");
-        Income.ExpenseForecast.Actions.matchElementSnapshot(
-            Income.ExpenseForecast.Page.fuelCard, testData.fuelCardSnapshotName, { padding: [ 10, 100 ] });
+        Income.ExpenseForecast.Actions.verifyProgressBarNotExist()
+            .matchElementSnapshot(
+                Income.ExpenseForecast.Page.fuelCard, testData.fuelCardSnapshotName, { padding: [ 10, 100 ] });
 
         deleteReport(testData.reportCreationData.reportNumber);
     });

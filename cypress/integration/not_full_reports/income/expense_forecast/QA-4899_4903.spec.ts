@@ -38,12 +38,13 @@ describe(`Comparable Min, Max, Avg values for Water & Sewer Per Unit are correct
             .hideExpenseForecastHeader();
 
         cy.stepInfo("6. [QA-4903] Check Comp Min, Comp Max and Comp Avg values for Water & Sewer card. They should be correctly displayed on a slidebar");
-        Income._ExpenseForecastActions.matchElementSnapshot(
-            Income._ExpenseForecastActions.Page.forecastItemCard(
-                Income._ExpenseForecastActions.getItemNameForAverage(
-                    testData.waterAndSewerPerUnitItem.name)), 
-                    testData.waterAndSewerPerUnitCardSnapshotName, { padding: [ 10, 100 ] }
-            );
+        Income._ExpenseForecastActions.verifyProgressBarNotExist()
+            .matchElementSnapshot(
+                Income._ExpenseForecastActions.Page.forecastItemCard(
+                    Income._ExpenseForecastActions.getItemNameForAverage(
+                        testData.waterAndSewerPerUnitItem.name)), 
+                        testData.waterAndSewerPerUnitCardSnapshotName, { padding: [ 10, 100 ] }
+                );
 
         cy.stepInfo("7. [QA-4899] Go to Expense Forecast and make sure that Per Unit radiobutton is selected for Water & Sewer card");
             Income._ExpenseForecastActions.chooseForecastItemBasis(testData.waterAndSewerPerSfItem)

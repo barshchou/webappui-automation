@@ -61,11 +61,11 @@ describe("Historical expense Water & Sewer Per SF/Unit is correctly calculated a
 
         cy.stepInfo("4.2 Check historical expenses values for Water & Sewer card. They should be correctly displayed on slidebars");
 
-        Income._ExpenseForecastActions.Actions.matchElementSnapshot(
-            Income._ExpenseForecastActions.Page.forecastItemCard(
-                Income._ExpenseForecastActions.getItemNameForAverage(
-                    testData.actualWaterAndSewerItem.name)), testData.waterAndSewerPerSfCardSnapshotName, { padding: [ 10, 100 ] });
-        
+        Income._ExpenseForecastActions.Actions.verifyProgressBarNotExist().
+            matchElementSnapshot(
+                Income._ExpenseForecastActions.Page.forecastItemCard(
+                    Income._ExpenseForecastActions.getItemNameForAverage(
+                        testData.actualWaterAndSewerItem.name)), testData.waterAndSewerPerSfCardSnapshotName, { padding: [ 10, 100 ] });
     });
 
     it("[QA-4902]", () => {
@@ -87,10 +87,11 @@ describe("Historical expense Water & Sewer Per SF/Unit is correctly calculated a
 
         cy.stepInfo("4.2 Check historical expenses values for Water & Sewer card. They should be correctly displayed on slidebars");
 
-        Income._ExpenseForecastActions.Actions.matchElementSnapshot(
-            Income._ExpenseForecastActions.Page.forecastItemCard(
-                Income._ExpenseForecastActions.getItemNameForAverage(
-                    testData.actualWaterAndSewerItem.name)), testData.waterAndSewerPerUnitCardSnapshotName, { padding: [ 10, 100 ] });
+        Income._ExpenseForecastActions.Actions.verifyProgressBarNotExist()
+            .matchElementSnapshot(
+                Income._ExpenseForecastActions.Page.forecastItemCard(
+                    Income._ExpenseForecastActions.getItemNameForAverage(
+                        testData.actualWaterAndSewerItem.name)), testData.waterAndSewerPerUnitCardSnapshotName, { padding: [ 10, 100 ] });
         
         deleteReport(testData.reportCreationData.reportNumber);
 

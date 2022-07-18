@@ -42,8 +42,9 @@ describe("Comparable Min, Max, Avg values for Electricity Per Unit are correctly
       .verifyForecastItemCompMax(testData.electricityItem, testData.comparables)
       .hideExpenseForecastHeader();
 
-    Income.ExpenseForecast.Actions.matchElementSnapshot(
-      Income.ExpenseForecast.Page.electricityCard, testData.electricityCardSnapshotName, { padding: [ 10, 100 ] });
+    Income.ExpenseForecast.Actions.verifyProgressBarNotExist()
+      .matchElementSnapshot(
+        Income.ExpenseForecast.Page.electricityCard, testData.electricityCardSnapshotName, { padding: [ 10, 100 ] });
 
     deleteReport(testData.reportCreationData.reportNumber);
   });
