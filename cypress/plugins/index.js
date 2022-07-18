@@ -192,6 +192,7 @@ module.exports = (on, config) => {
  
   addMatchImageSnapshotPlugin(on, config);
   grepFilterPlugin(config);
+  require('dd-trace/ci/cypress/plugin')(on, config)
 
 
   on("before:browser:launch", (browser, launchOptions) => {
