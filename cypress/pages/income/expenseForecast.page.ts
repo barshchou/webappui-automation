@@ -13,9 +13,9 @@ class ExpenseForecastPage extends BasePage {
 
     get repairsAndMaintenanceCard() { return cy.get("[data-qa=repairsMaintenance-forecast-item] > div").last(); }
 
-    forecastItemCard(item: string, custom = false) { 
+    forecastItemCard(item: string, custom = false) {
         return !custom ? cy.get(`[data-qa=${item}-forecast-item] > div`).last() :
-        cy.get(`[data-qa=${Cypress._.camelCase(Cypress._.toLower(Cypress._.replace(item, "&", "And")))}-forecast-item] > div`).eq(1);
+            cy.get(`[data-qa=${Cypress._.camelCase(Cypress._.toLower(Cypress._.replace(item, "&", "And")))}-forecast-item] > div`).eq(1);
     }
 
     forecastItemCardFull(forecastItem: string, custom = false) {
@@ -52,8 +52,7 @@ class ExpenseForecastPage extends BasePage {
     }
 
     getForecastItemSlidingBarTitle(item: string, custom = false) {
-        return !custom ? cy.xpath(`//*[@data-qa="${item}-forecast-item"]/child::div/following::div//child::*[contains(text(),"${Cypress._.toUpper(item)}'")]`) :
-            cy.xpath(`//*[@data-qa="${Cypress._.camelCase(Cypress._.toLower(Cypress._.replace(item, "&", "And")))}-forecast-item"]/child::div/following::div//child::*[contains(text(),"${Cypress._.toUpper(item)}")]`);
+        return this.forecastItemCardFull(item, custom).contains(`${Cypress._.toUpper(item)} (`);
     }
 
     getForecastItemProjectionByType(item: string, type: string) { return cy.contains(`[data-qa=${item}-forecast-item] [data-qa$=historical]`, type); }
@@ -102,7 +101,8 @@ class ExpenseForecastPage extends BasePage {
 
     itemAppraisersForecastValueLine(item: string, custom = false) {
         return !custom ? cy.get(`[data-qa=${item}-forecast-item] [data-qa=appraisers-forecast-values-line]`) :
-            cy.get(`[data-qa=${Cypress._.camelCase(Cypress._.toLower(Cypress._.replace(item, "&", "And")))}-forecast-item] [data-qa=appraisers-forecast-values-line]`);
+            cy.get(`[data-qa=${Cypress._.camelCase(Cypress._.toLower(Cypress._.replace(item, "&", "And")))}
+            -forecast-item] [data-qa=appraisers-forecast-values-line]`);
     }
 
     get createNewCategoryButton() { return cy.contains('Add Expense Category +'); }
