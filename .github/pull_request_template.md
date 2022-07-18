@@ -8,7 +8,6 @@
 
 ## Self-check checklist before submitting a PR:
 - [ ] 1. Make sure that you've ran `npm run lint:run` or `lint:fix` and there is no errors
-- [ ] 2. Make sure that you've ran `npm run tsc:check` and there is no errors
 
 ## Types of changes
 

@@ -2,12 +2,12 @@ name: Run smoke tests and tests, included in PR
 
 on:
   pull_request:
-    # TODO: Not to forget to replace reopened type with open, review_requested types after PR approval
-    types: [reopened]
+    types: [opened, review_requested, ready_for_review]
 
 jobs:
   Run-tsc-check:
     runs-on: ubuntu-latest
+    if: ${{ !github.event.pull_request.draft }}
     container: cypress/browsers:node16.13.2-chrome100-ff98
     steps:
       - name: Checkout
@@ -23,6 +23,7 @@ jobs:
 
   Run-smoke-tests:
     needs: Run-tsc-check
+    if: ${{ !github.event.pull_request.draft }}
     runs-on: ubuntu-latest
     container: cypress/browsers:node16.13.2-chrome100-ff98
     permissions:
@@ -57,7 +58,7 @@ jobs:
           echo ::set-output name=CUSTOM_ENV::$CUSTOM_ENV
 
       - name: Run smoke end-to-end tests with Currents dev
-        uses: Bowery-RES/action-run-e2e-tests@gh-job
+        uses: Bowery-RES/action-run-e2e-tests@latest
         with:
           github_token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
           username: ${{ secrets.USERNAME }}
@@ -72,6 +73,7 @@ jobs:
   Run-included-tests:
     needs: [Run-tsc-check, Run-smoke-tests]
     runs-on: ubuntu-latest
+    if: ${{ !github.event.pull_request.draft }}
     container: cypress/browsers:node16.13.2-chrome100-ff98
     permissions:
       id-token: write
@@ -98,7 +100,7 @@ jobs:
 
       - name: Run included specs
         if: steps.define_specs.outputs.CHANGED_SPECS != null
-        uses: Bowery-RES/action-run-e2e-tests@gh-job
+        uses: Bowery-RES/action-run-e2e-tests@latest
         with:
           github_token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
           username: ${{ secrets.USERNAME }}
