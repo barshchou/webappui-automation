@@ -41,8 +41,6 @@ describe("Comparable Min, Max, Avg values for Electricity Per SF are correctly c
                         5.1 calculated as: Min, Max and Avg of range of values [CompElectricity / Square Feet]
                         5.2 correctly displayed on a slidebar`);
 
-        // ToDo: this is just an experimental solution for matching snapshot issue
-        Income.ExpenseForecast.Page.electricityCardText.should("have.css", "font-family", "Roboto, Helvetica, Arial, sans-serif");
 
         Income.ExpenseForecast.Actions.matchElementSnapshot(
             Income.ExpenseForecast.Page.electricityCard, testData.electricityCardSnapshotName, { padding: [ 10, 100 ] }
