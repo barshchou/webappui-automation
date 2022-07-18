@@ -1,6 +1,6 @@
-import { getNumberWithDecimalPart } from './../../../utils/numbers.utils';
 import taxInfoPage from "../../pages/income/taxInfo.page";
-import { getNumberFromDollarNumberWithCommas, numberWithCommas } from "../../../utils/numbers.utils";
+import { getNumberFromDollarNumberWithCommas, numberWithCommas, 
+    getNumberWithDecimalPart, getNumberFromPercentNumberWithCommas } from "../../../utils/numbers.utils";
 import BaseActionsExt from "../base/base.actions.ext";
 import { BoweryReports } from "../../types/boweryReports.type";
 
@@ -382,6 +382,51 @@ class TaxInfoActions extends BaseActionsExt<typeof taxInfoPage> {
 
     deleteRowTaxLiability(rowName: string, rowNumber = 0): TaxInfoActions {
         taxInfoPage.getTaxLiabilityRowAction(rowName).eq(rowNumber).click().should("not.exist");
+        return this;
+    }
+
+    /**
+     * Get all "Tax Rate" and "Assessment Row" values and verify "Tax Liability (Total)" using this formula:
+     * sum of all tax rates * sum of all assessments = tax liability (total)
+     * @returns `this`
+     */
+    verifyTotalTaxLiability(): TaxInfoActions {
+        taxInfoPage.getTaxLiabilityRowValue("Tax Rate").then($el => {
+            const itemCount = $el.length;
+            const taxRates = [];
+            for (let i = 0; itemCount > i; i++) {
+                taxInfoPage.getTaxLiabilityRowValue("Tax Rate").eq(i).invoke("text").then(taxRateText => {
+                    let taxRateNumber = getNumberFromPercentNumberWithCommas(taxRateText);
+                    taxRates.push(taxRateNumber);
+                });
+            }
+            cy.wrap(taxRates).then(taxRates => {
+                const sumTaxRates = taxRates.reduce((a, b) => a + b);
+                const taxRatesPercent = sumTaxRates * 0.01;
+                taxInfoPage.getTaxLiabilityRowValue("Assessment Row").then($el => {
+                    const itemCount = $el.length;
+                    const assessments = [];
+                    for (let i = 0; itemCount > i; i++) {
+                        taxInfoPage.getTaxLiabilityRowValue("Assessment Row").eq(i).invoke("text").then(assessmentText => {
+                            let assessmentNumber = getNumberFromDollarNumberWithCommas(assessmentText);
+                            assessments.push(assessmentNumber);
+                        });
+                    }
+                    cy.wrap(assessments).then(assessments => {
+                        const sumAssessments = assessments.reduce((a, b) => a + b);
+                        taxInfoPage.getTaxLiabilityRowValue("Taxable Assessed Value").invoke("text").then(taxAssessedText => {
+                            const allTaxAssessedNumber = sumAssessments + getNumberFromDollarNumberWithCommas(taxAssessedText);
+                            const taxLiabilityTotalToBe = `$${numberWithCommas((allTaxAssessedNumber * taxRatesPercent).toFixed(2))}`;
+                            cy.log("taxAssessedText", taxAssessedText);
+                            cy.log("taxAssessedNumber", allTaxAssessedNumber);
+                            cy.log("taxLiabilityTotalToBe", taxLiabilityTotalToBe);
+                            taxInfoPage.getTaxLiabilityRowValue("Tax Liability (Total)").should("have.text", taxLiabilityTotalToBe);
+                        });
+                    });
+                });
+            });
+        });
+       
         return this;
     }
 }
