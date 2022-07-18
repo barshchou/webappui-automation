@@ -99,6 +99,9 @@ class RentReconciliationActions extends BaseActionsExt<typeof rentReconciliation
 
     /**
      * Verify Comps Trended Rent/SF/Month based on rent, adjustments and calculation type set.
+     * 
+     * We're getting comp rent, lease terms adjustments and market condition adjustments from map aliases. 
+     * Having those values we can calculate Trended Price/Sf/Month expected value.
      * @param  calculationType Calculation type for adjustments. Default: percent
      * @param  compIndex Index of comparable on Reconciliation Summary table
      * @returns RentReconciliationActions
