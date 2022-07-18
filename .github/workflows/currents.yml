@@ -67,6 +67,11 @@ jobs:
           tags: ${{ github.event.inputs.tags }}
           record_key: ${{ secrets.CURRENTS_RECORD_KEY }}
           ref: ${{ github.event.inputs.ref }}
+        env:
+          DD_CIVISIBILITY_AGENTLESS_ENABLED: true
+          DD_API_KEY: ${{ secrets.DD_API_KEY }}
+          DD_ENV: ${{ github.event.inputs.env }}
+          DD_SERVICE: 'webapp'
 
 
       - name: Archive DOM snapshots from failed tests

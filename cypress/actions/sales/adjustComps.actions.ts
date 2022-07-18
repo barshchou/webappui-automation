@@ -67,6 +67,19 @@ class AdjustCompsActions extends BaseActionsExt<typeof adjustCompsPage> {
         return this;
     }
 
+    enterLocationAdjustmentByName(adjustmentName: string, value: number, index = 0): AdjustCompsActions {
+        adjustCompsPage.getLocationAdjustmentsRowCells(adjustmentName).eq(index).scrollIntoView().clear()
+            .type(`${value}{del}`).should("have.value", `${value}%`);
+        return this;
+    }
+
+    enterLocationAdjustmentGroup(adjustmentName: string[], value: number[], index = 0): AdjustCompsActions {
+        adjustmentName.forEach((adjustment, i) => {
+            this.enterLocationAdjustmentByName(adjustment, value[i], index);
+        });
+        return this;
+    }
+
     enterOtherAdjustmentByColumn(value: number | string, rowNumber = 0, index = 0): AdjustCompsActions {
         adjustCompsPage.getOtherAdjustmentRowCells(rowNumber).eq(index).scrollIntoView().clear()
             .type(`${value}{del}`).should("have.value", `${value}%`);
@@ -144,6 +157,16 @@ class AdjustCompsActions extends BaseActionsExt<typeof adjustCompsPage> {
         return this;
     }
 
+    verifyNetMarketAdjustmentsByCompIndex(index = 0): AdjustCompsActions {
+        adjustCompsPage.getAllAdjustmentCellsByCompIndex(index).then(cells => {
+            const adjustmentsValues = Array.from(cells).map(cell => cell.getAttribute("value"))
+                .map(cellText => Number(cellText.replace("%", "")));
+            const netPropAdjustmentsToBe = adjustmentsValues.reduce((sum, prevValue) => sum + prevValue, 0);
+            adjustCompsPage.marketAdjustmentsCells.eq(index).should("have.text", `${netPropAdjustmentsToBe}%`);
+        });
+        return this;
+    }
+
     /**
     * Verify that Trended Price per selected @param {string} basis adjusted based on
     Net Market adjustment total value
@@ -178,6 +201,16 @@ class AdjustCompsActions extends BaseActionsExt<typeof adjustCompsPage> {
                 .map(cellText => Number(cellText.replace("%", "")));
             const netPropAdjustmentsToBe = adjustmentsValues.reduce((sum, prevValue) => sum + prevValue, 0);
             adjustCompsPage.netPropertyAdjustmentsCells.eq(index).should("have.text", `${netPropAdjustmentsToBe}%`);
+        });
+        return this;
+    }
+
+    verifyTotalLocationAdjustmentsByCompIndex(index = 0): AdjustCompsActions {
+        adjustCompsPage.getAllLocationAdjustmentCellsByCompIndex(index).then(cells => {
+            const adjustmentsValues = Array.from(cells).map(cell => cell.getAttribute("value"))
+                .map(cellText => Number(cellText.replace("%", "")));
+            const netPropAdjustmentsToBe = adjustmentsValues.reduce((sum, prevValue) => sum + prevValue, 0);
+            adjustCompsPage.totalLocationAdjustmentsCells.eq(index).should("have.text", `${netPropAdjustmentsToBe}%`);
         });
         return this;
     }
