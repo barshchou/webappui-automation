@@ -4,6 +4,7 @@ import "cypress-file-upload";
 import "cypress-localstorage-commands";
 import mapKeysUtils from '../utils/mapKeys.utils';
 import { BoweryAutomation } from '../types/boweryAutomation.type';
+import { Alias } from '../utils/alias.utils';
 
 /**
  * You can use exporting of this map only in exceptional cases, as in QA-4136 spec
@@ -66,12 +67,11 @@ Cypress.Commands.add("loginByApi", (envUrl, username, password) => {
         window.localStorage.setItem("jwToken", token);
 
         // set bearer token so we could we use this in global after hook in `./index.ts`
-        _map.set(mapKeysUtils.bearer_token, token);
+        cy._mapSet(mapKeysUtils.bearer_token, token);
 
         const userId = responseBody.user._id;
         cy.log(`User Id is: ${userId}`);
-        cy._mapSet("token", token);
-        cy._mapSet("user_id_api", userId);
+        cy._mapSet(mapKeysUtils.user_id, userId);
     });
 });
 
@@ -112,35 +112,43 @@ Cypress.Commands.add("createApiReport",
 Cypress.Commands.add("deleteApiReport", () => {
     cy.log("Delete report");
         cy._mapGet(mapKeysUtils.report_id_arr).then(arr => {
-            arr.forEach(reportId => {
-                cy.log(`Deleting report with id: ${reportId}`);
-                /**
-                 * Deleting report
-                 */
-                cy.request({
-                    method:"DELETE",
-                    url:`${Cypress.config().baseUrl}/report/${reportId}`,
-                    auth:{
-                        'bearer': _map.get(mapKeysUtils.bearer_token)
-                    }
-                }).then((resp) => {
-                    expect(resp.status).to.eq(200);
+            if(arr === undefined){
+                cy.log("No report_ids saved! Nothing to to delete.");
+                return;
+            }
+            else{
+                arr.forEach(reportId => {
+                    cy.log(`Deleting report with id: ${reportId}`);
+                    /**
+                     * Deleting report
+                     */
+                    cy.request({
+                        method:"DELETE",
+                        url:`${Cypress.config().baseUrl}/report/${reportId}`,
+                        auth:{
+                            'bearer': _map.get(mapKeysUtils.bearer_token)
+                        },
+                        timeout: 60000
+                    }).then((resp) => {
+                        expect(resp.status).to.eq(200);
+                    });
+    
+                    /**
+                     * Additional check whether report was deleted
+                     */
+                    cy.request({
+                        failOnStatusCode: false,
+                        method:"GET",
+                        url:`${Cypress.config().baseUrl}/report/${reportId}`,
+                        auth:{
+                            'bearer': _map.get(mapKeysUtils.bearer_token)
+                        },
+                        timeout: 60000
+                    },).then((resp) => {
+                        expect(resp.status).to.eq(404);
+                    });
                 });
-
-                /**
-                 * Additional check whether report was deleted
-                 */
-                cy.request({
-                    failOnStatusCode: false,
-                    method:"GET",
-                    url:`${Cypress.config().baseUrl}/report/${reportId}`,
-                    auth:{
-                        'bearer': _map.get(mapKeysUtils.bearer_token)
-                    }
-                },).then((resp) => {
-                    expect(resp.status).to.eq(404);
-                });
-            });
+            }
         });
 });
 
