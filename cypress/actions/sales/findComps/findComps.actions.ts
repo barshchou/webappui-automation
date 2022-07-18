@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { findCompsPage } from "../../../pages/sales/findComps.page";
 import { getUploadFixture } from "../../../../utils/fixtures.utils";
 import { isNumber, numberWithCommas } from "../../../../utils/numbers.utils";
@@ -7,7 +8,7 @@ import propertDescActions from "./drm/propertyDescForm.actions";
 import propertyInfoFormActions from "./drm/propertyInfoForm.actions";
 import { Alias, gqlOperationNames } from "../../../utils/alias.utils";
 import { Utils } from "../../../types/utils.type";
-import { _map } from "../../../support/commands";
+import { _map, _mutateArrayInMap } from "../../../support/commands";
 import { recurse } from "cypress-recurse";
 import mapKeysUtils from "../../../utils/mapKeys.utils";
 import { BoweryReports } from "../../../types/boweryReports.type";
@@ -119,23 +120,73 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
         return this;
     }
 
+    /**
+     * Wait for request(`findTransactionByIdAndVersion`) for adding Sales Comp from Search List to be fulfilled,
+     * and also retrieves some data (`id` and `address`) from request and writes into `_map`
+     */
     checkFindSingleSalesComp(): FindCompsActions{
         cy.wait(`@${Alias.gql.FindTransactionByIdAndVersion}`, { timeout:35000 }).then((interception) => {
             cy.log(interception.response.body.data.findTransactionByIdAndVersion.id);
-            if(_map.get(mapKeysUtils.sales_comps_ids) == undefined){
-                let arr = [ interception.response.body.data.findTransactionByIdAndVersion.id ];
-                _map.set(mapKeysUtils.sales_comps_ids, arr);
-            }
-            else{
-                cy._mapGet(mapKeysUtils.sales_comps_ids).then(arr => {
-                    return arr.push(interception.response.body.data.findTransactionByIdAndVersion.id);
-                });
-            }
+            /**
+             * Pushing comps ids upon their addition
+             */
+            _mutateArrayInMap(
+                mapKeysUtils.sales_comps_ids,
+                interception.response.body.data.findTransactionByIdAndVersion.id,
+                "Sales_IDs array"
+            );
+
+            /**
+             * Pushing comps addresses upon their addition
+             */
+            _mutateArrayInMap(
+                mapKeysUtils.sales_comps_addresses,
+                interception.response.body.data.findTransactionByIdAndVersion.address.streetAddress,
+                "Sales_Comps addresses array"
+            );
             cy.wrap(interception.response.body.data.findTransactionByIdAndVersion.id)
-            .as(Alias.salesEventId);
-            cy._mapGet(mapKeysUtils.sales_comps_ids).then(arr => cy.log("Sales_IDs array: "+arr));
+            .as(Alias.salesEventId);           
         });
         return this; 
+    }
+
+    /**
+     * Checks whether when a comp gets added, 
+     * it gets automatically added to the bottom.
+     * 
+     * The algorithm is next: we add SalesComp from SearchList 
+     * -> we retrieve addresses from SalesComparables table 
+     * -> we extract array of addresses we got from intercepted query (see `checkFindSingleSalesComp` method)
+     * -> we compare both arrays
+     * 
+     * @param option If `reverse` true - checks whether list order changed comparing with default
+     */
+    checkSalesCompAddedToList(option = { reverse : false }){
+        this.Page.addressSalesComparablesTable.spread((...comps) => {
+            /**
+             * ernst: addresses from UI contains also city, state and postal code 
+             * so we need to trim them and left only first address
+             * Example: before -> "45 East 45 Street, New York, NY, 10017" / after -> '45 East 45 Street'
+             */
+            comps = comps.slice(1).map(elem => elem.innerText.split(",")[0]);
+            cy.wrap(comps).as(Alias.salesComps.addressSelectedComps);
+
+            cy.get(`@${Alias.salesComps.addressSelectedComps}`).then(
+                _ui_addresses => cy.log("Addresses from SelectedComps table: "+<any>_ui_addresses)
+            );
+
+            cy._mapGet(mapKeysUtils.sales_comps_addresses).then(_api_addresses => {
+                cy.log(_api_addresses);
+                if(option.reverse){
+                    expect(comps).to.not.deep.equal(_api_addresses);
+                }
+                else{
+                    expect(comps).to.deep.equal(_api_addresses);
+                }
+                
+            });
+        });
+        return this;
     }
 
     removeCompByAddress(address: string): FindCompsActions {
