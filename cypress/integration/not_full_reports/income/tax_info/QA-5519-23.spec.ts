@@ -30,12 +30,15 @@ describe("[QA-5183] Export column order both assessment psf and assessment per u
         Income._TaxInfo.clickAddNewRowButton()
             .clickAddNewRowButton(testData.buttonName)
             .enterRowTaxLiabilityValue(testData.rowNames.additional, testData.additionalTaxRateValue)
-            .enterRowTaxLiabilityValue(testData.rowNames.special, testData.specialAssessmentRowValue);
+            .enterRowTaxLiabilityValue(testData.rowNames.special, testData.specialAssessmentRowValue)
+            .verifyTotalTaxLiability();
 
 
         cy.stepInfo("6. Click 'Delete' from 'Action' column and verify row successfully deleted");
         Income._TaxInfo.deleteRowTaxLiability(testData.rowNames.additional)
-            .deleteRowTaxLiability(testData.rowNames.special);
+            .deleteRowTaxLiability(testData.rowNames.special)
+            .deleteRowTaxLiability(testData.enterName)
+            .deleteRowTaxLiability(testData.enterName);
             
         deleteReport(testData.reportCreationData.reportNumber);
     });
