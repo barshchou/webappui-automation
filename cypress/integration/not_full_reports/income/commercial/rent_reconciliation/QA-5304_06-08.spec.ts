@@ -3,7 +3,7 @@ import { createReport, deleteReport } from "../../../../../actions/base/baseTest
 import { _NavigationSection } from "../../../../../actions/base";
 import { Income, Property, ReviewExport } from "../../../../../actions";
 
-describe(`Verify the "Lease Terms Adjustment Sub-Total" row`, 
+describe(`Verify the "Lease Terms Adjustment Sub-Total"`, 
     { tags: [ "@income", "@commercial", "@rent_reconciliation", "@check_export" ] }, () => {
 
     it(`[QA-5304] Verify the "Lease Terms Adjustment Sub-Total" row is displayed in the "Rent Reconciliation" grid
@@ -87,7 +87,7 @@ describe(`Verify the "Lease Terms Adjustment Sub-Total" row`,
                 cy.stepInfo(`1. Verify that the “Lease Terms Adjustment Sub-Total” row is displayed in the exported grid 
                             between the “Lease Terms Adjustment” and “Market Conditions (Time)” rows`);
                 cy.xpath(`//p[.='${testData.compGroupName} Rent Reconciliation Adjustment Grid']//following::tr[td/p[.='Lease Terms Adjustment']][1]`)
-                    .next().scrollIntoView()
+                    .next().children().eq(0).scrollIntoView()
                     .should('have.text', 'Lease Terms Adjustment Sub-Total');
 
                 cy.stepInfo(`2. Verify the order of rows in the exported report matches the following order:
@@ -96,16 +96,16 @@ describe(`Verify the "Lease Terms Adjustment Sub-Total" row`,
                             - Lease Terms Adjustment Sub-Total
                             - Market Conditions (Time)
                             - Trended Price/SF`);
+                cy.xpath(`//p[.='${testData.compGroupName} Rent Reconciliation Adjustment Grid']//following::tr[td/p[.='Lease Terms']][1]`)
+                    .next().children().eq(0).scrollIntoView().should('have.text', 'Rent /SF/Month');
                 cy.xpath(`//p[.='${testData.compGroupName} Rent Reconciliation Adjustment Grid']//following::tr[td/p[.='Rent /SF/Month']][1]`)
-                    .should('exist')
-                    .next().scrollIntoView()
-                    .should('have.text', 'Lease Terms Adjustment')
-                    .next().scrollIntoView()
-                    .should('have.text', 'Lease Terms Adjustment Sub-Total')
-                    .next().scrollIntoView()
-                    .should('have.text', 'Market Conditions (Time)')
-                    .next().scrollIntoView()
-                    .should('have.text', 'Trended Rent/SF/Month');
+                    .next().children().eq(0).scrollIntoView().should('have.text', 'Lease Terms Adjustment');
+                cy.xpath(`//p[.='${testData.compGroupName} Rent Reconciliation Adjustment Grid']//following::tr[td/p[.='Lease Terms Adjustment']][1]`)
+                    .next().children().eq(0).scrollIntoView().should('have.text', 'Lease Terms Adjustment Sub-Total');
+                cy.xpath(`//p[.='${testData.compGroupName} Rent Reconciliation Adjustment Grid']//following::tr[td/p[.='Lease Terms Adjustment Sub-Total']][1]`)
+                    .next().children().eq(0).scrollIntoView().should('have.text', 'Market Conditions (Time)');
+                cy.xpath(`//p[.='${testData.compGroupName} Rent Reconciliation Adjustment Grid']//following::tr[td/p[.='Market Conditions (Time)']][1]`)
+                    .next().children().eq(0).scrollIntoView().should('have.text', 'Trended Rent/SF/Month');
         });
     });
 });
