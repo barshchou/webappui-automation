@@ -13,18 +13,23 @@ class ExpenseForecastPage extends BasePage {
 
     get repairsAndMaintenanceCard() { return cy.get("[data-qa=repairsMaintenance-forecast-item] > div").last(); }
 
-    forecastItemCard(item: string, custom = false) {
-        return !custom ? cy.get(`[data-qa=${item}-forecast-item] > div`).last() :
-            cy.get(`[data-qa=${Cypress._.camelCase(Cypress._.toLower(Cypress._.replace(item, "&", "And")))}-forecast-item] > div`).eq(1);
-    }
+    /**
+    * If card is default - locator gets forecast card name (default names are contained in expensesForecastCardNames.enum.ts) for qa-data attribute  
+    * If card is custom - locator gets forecast card name and changes it (according to the rule from webapp) for qa-data attribute 
+    */
 
     forecastItemCardFull(forecastItem: string, custom = false) {
         return !custom ? cy.get(`[data-qa=${forecastItem}-forecast-item]`) :
             cy.get(`[data-qa=${Cypress._.camelCase(Cypress._.toLower(Cypress._.replace(forecastItem, "&", "And")))}-forecast-item]`);
     }
 
-    forecastItemTooltipButton(forecastItem: string) { 
-        return cy.get(`[data-qa=${forecastItem}-forecast-item] svg[aria-label="Unchecking this box will hide the expense from showing up on the Pro Forma."]`); 
+    forecastItemCard(item: string, custom = false) {
+        return !custom ? this.forecastItemCardFull(item, custom).children('div').last() :
+            this.forecastItemCardFull(item, custom).children('div').eq(1);
+    }
+
+    forecastItemTooltipButton(forecastItem: string) {
+        return this.forecastItemCardFull(forecastItem).find('svg[aria-label="Unchecking this box will hide the expense from showing up on the Pro Forma."]');
     }
 
     get toeCard() { return cy.xpath("//*[.='TOTAL OPERATING EXPENSES ($/SF)']/parent::div").first(); }
@@ -36,11 +41,18 @@ class ExpenseForecastPage extends BasePage {
             cy.get(`[data-qa="checked"] [name='customExpenses[${index}].basis']`);
     }
 
-    getElementToCheckRadio(forecastItem: string, radioValue: BoweryReports.UnitSF) { return cy.get(`[data-qa=checked] [name='${forecastItem}.basis'][value='${radioValue}']`); }
+    getElementToCheckRadio(forecastItem: string, radioValue: BoweryReports.UnitSF) {
+        return cy.get(`[data-qa=checked] [name='${forecastItem}.basis'][value='${radioValue}']`);
+    }
 
-    getElementBasisToSwitch(forecastItem: string, radioValue: BoweryReports.UnitSF) { return cy.get(`[name='${forecastItem}.basis'][value='${radioValue}']`); }
+    getElementBasisToSwitch(forecastItem: string, radioValue: BoweryReports.UnitSF) {
+        return cy.get(`[name='${forecastItem}.basis'][value='${radioValue}']`);
+    }
 
-    getForecastItemForecastInput(item: string, custom = false, index = 0) { return !custom ? cy.get(`[name='${item}.concludedValue']`) : cy.get(`[name='customExpenses[${index}].concludedValue']`); }
+    getForecastItemForecastInput(item: string, custom = false, index = 0) {
+        return !custom ? cy.get(`[name='${item}.concludedValue']`) :
+            cy.get(`[name='customExpenses[${index}].concludedValue']`);
+    }
 
     getForecastItemCompMin(item: string) { return cy.get(`[data-qa=${item}-forecast-item] [data-qa=comp-min]`); }
 
@@ -49,8 +61,7 @@ class ExpenseForecastPage extends BasePage {
     getForecastItemCompMax(item: string) { return cy.get(`[data-qa=${item}-forecast-item] [data-qa=comp-max]`); }
 
     getForecastItemBasisMoneyValue(item: string, custom = false) {
-        return !custom ? cy.get(`[data-qa=${item}-forecast-item] [data-qa=basis]`) :
-            cy.get(`[data-qa=${Cypress._.camelCase(Cypress._.toLower(Cypress._.replace(item, "&", "And")))}-forecast-item] [data-qa=basis]`);
+        return this.forecastItemCardFull(item, custom).find('[data-qa=basis]');
     }
 
     getForecastItemSlidingBarTitle(item: string, custom = false) {
@@ -59,15 +70,23 @@ class ExpenseForecastPage extends BasePage {
 
     getForecastItemProjectionByType(item: string, type: string) { return cy.contains(`[data-qa=${item}-forecast-item] [data-qa$=historical]`, type); }
 
-    getExpenseCommentary(forecastItem: string, index = 1) { return cy.xpath(`//*[@data-qa="${forecastItem}-forecast-item"]//following::div[@data-slate-editor][${index}]`); }
+    getExpenseCommentary(forecastItem: string, index = 1) {
+        return cy.xpath(`//*[@data-qa="${forecastItem}-forecast-item"]//following::div[@data-slate-editor][${index}]`);
+    }
 
-    getExpenseCommentaryEditButton(forecastItem: string, index = 1) { return cy.xpath(`//*[@data-qa="${forecastItem}-forecast-item"]//following::button[.='Edit'][${index}]`); }
+    getExpenseCommentaryEditButton(forecastItem: string, index = 1) {
+        return cy.xpath(`//*[@data-qa="${forecastItem}-forecast-item"]//following::button[.='Edit'][${index}]`);
+    }
 
-    getExpenseCommentarySaveButton(forecastItem: string, index = 1) { return cy.xpath(`//*[@data-qa="${forecastItem}-forecast-item"]//following::button[.='Save'][${index}]`); }
+    getExpenseCommentarySaveButton(forecastItem: string, index = 1) {
+        return cy.xpath(`//*[@data-qa="${forecastItem}-forecast-item"]//following::button[.='Save'][${index}]`);
+    }
 
     getExpenseCommentaryModified(forecastItem: string) { return cy.xpath(`//*[@data-qa="${forecastItem}-forecast-item"]//following::*[.='Modified'][2]`); }
 
-    getExpenseCommentaryRevertToOriginal(forecastItem: string) { return cy.xpath(`//*[@data-qa="${forecastItem}-forecast-item"]//following::button[.='Revert to Original'][1]`); }
+    getExpenseCommentaryRevertToOriginal(forecastItem: string) {
+        return cy.xpath(`//*[@data-qa="${forecastItem}-forecast-item"]//following::button[.='Revert to Original'][1]`);
+    }
 
     getCheckboxIncludeInProForma(forecastItem: string) { return cy.get(`[data-qa=${forecastItem}-forecast-item] input[type="checkbox"]`).first(); }
 
@@ -99,12 +118,12 @@ class ExpenseForecastPage extends BasePage {
 
     get toeCommentaryModified() { return cy.xpath("//*[.='TOTAL OPERATING EXPENSES']//following::*[.='Modified']"); }
 
-    get toeAppraisersForecastValueLine() { return cy.xpath(`//*[.='TOTAL OPERATING EXPENSES']//following::div[@data-qa='appraisers-forecast-values-line']`); }
+    get toeAppraisersForecastValueLine() {
+        return cy.xpath(`//*[.='TOTAL OPERATING EXPENSES']//following::div[@data-qa='appraisers-forecast-values-line']`);
+    }
 
     itemAppraisersForecastValueLine(item: string, custom = false) {
-        return !custom ? cy.get(`[data-qa=${item}-forecast-item] [data-qa=appraisers-forecast-values-line]`) :
-            cy.get(`[data-qa=${Cypress._.camelCase(Cypress._.toLower(Cypress._.replace(item, "&", "And")))}
-            -forecast-item] [data-qa=appraisers-forecast-values-line]`);
+        return this.forecastItemCardFull(item, custom).find('[data-qa=appraisers-forecast-values-line]');
     }
 
     get createNewCategoryButton() { return cy.contains('Add Expense Category +'); }
@@ -126,8 +145,7 @@ class ExpenseForecastPage extends BasePage {
     get addCustomExpenseCategoryWarning() { return cy.contains('Category name is required'); }
 
     editCustomExpenseCategoryButton(forecastItem: string, custom = false) {
-        return !custom ? cy.get(`[data-qa=${forecastItem}-forecast-item]`).find('[data-testid="EditIcon"]') :
-            cy.get(`[data-qa=${Cypress._.camelCase(Cypress._.toLower(Cypress._.replace(forecastItem, "&", "And")))}-forecast-item]`).find('[data-testid="EditIcon"]');
+        return this.forecastItemCardFull(forecastItem, custom).find('[data-testid="EditIcon"]');
     }
 
     get newCategoryExpenseName() { return cy.get('[data-qa="expenseName-form-control"] input'); }
