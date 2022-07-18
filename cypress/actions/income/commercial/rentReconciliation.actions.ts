@@ -28,7 +28,7 @@ class RentReconciliationActions extends BaseActionsExt<typeof rentReconciliation
     }
 
     verifyCompsRent(expectedRent: number, compIndex = 0): RentReconciliationActions {
-        rentReconciliationPage.getCompRent(compIndex).should("have.text", `$${expectedRent.toFixed(2)}`);
+        rentReconciliationPage.compRent(compIndex).should("have.text", `$${expectedRent.toFixed(2)}`);
         return this;
     }
 
@@ -73,17 +73,55 @@ class RentReconciliationActions extends BaseActionsExt<typeof rentReconciliation
         return this;
     }
 
-    verifyTrendedRentSF(rentSf: number, calculationType: BoweryReports.CalculationType, leaseTermsAdjustment = 0, 
-        marketConditionAdjustment = 0, compIndex = 0): RentReconciliationActions {
+    getLeaseTermsAdjustment(rentSf: number, calculationType: BoweryReports.CalculationType, compIndex = 0): RentReconciliationActions {
+        rentReconciliationPage.leaseTermsAdjustments(compIndex).invoke('attr', 'value').then(leaseTermAdj => {
             let leaseTermsAdjustmentSubTotal = calculationType === enums.CALCULATION_TYPE.percent 
-                ? (rentSf * (100 + leaseTermsAdjustment)) / 100 
-                : rentSf + leaseTermsAdjustment;
-            let expectedTrendedRentSF = Math.round(((leaseTermsAdjustmentSubTotal * (100 + marketConditionAdjustment)) / 100) * 1000) / 1000;
-            rentReconciliationPage.getTrendedRentSF(compIndex)
-                .should('have.text', expectedTrendedRentSF < 0 
-                    ? `-$${Math.abs(expectedTrendedRentSF).toFixed(2)}` 
-                    : `$${expectedTrendedRentSF.toFixed(2)}`);
-            return this;
+                ? (rentSf * (100 + Number(leaseTermAdj))) / 100 
+                : rentSf + Number(leaseTermAdj.replace('$', ''));
+            cy._mapSet('leaseTermsAdj', leaseTermsAdjustmentSubTotal);
+        });
+        return this;
+    }
+
+    getMarketConditionAdjustment(compIndex = 0): RentReconciliationActions {
+        rentReconciliationPage.marketConditionsAdjustments(compIndex).invoke('attr', 'value').then(marketConditionAdj => {
+            cy._mapSet('marketConditionAdj', marketConditionAdj);
+        });
+        return this;
+    }
+
+    getCompRent(compIndex = 0): RentReconciliationActions {
+        rentReconciliationPage.compRent(compIndex).invoke('text').then(rentSf => {
+            cy._mapSet('compRentSF', Number(rentSf.replace('$', '')));
+        });
+        return this;
+    }
+
+    /**
+     * Verify Comps Trended Rent/SF/Month based on rent, adjustments and calculation type set.
+     * @param  calculationType Calculation type for adjustments. Default: percent
+     * @param  compIndex Index of comparable on Reconciliation Summary table
+     * @returns RentReconciliationActions
+     */
+    verifyTrendedRentSF(calculationType: BoweryReports.CalculationType, compIndex = 0): RentReconciliationActions {
+        this.getCompRent(compIndex);
+        cy._mapGet('compRentSF').then(compRent => {
+            this.getLeaseTermsAdjustment(compRent, calculationType, compIndex)
+                .getMarketConditionAdjustment(compIndex);
+            cy._mapGet('leaseTermsAdj').then(leaseTermsAdjustmentSubTotal => {
+                cy.log(`${leaseTermsAdjustmentSubTotal}`);
+                cy._mapGet('marketConditionAdj').then(marketConditionAdjustment => {
+                    cy.log(`${marketConditionAdjustment}`);
+                    let expectedTrendedRentSF = 
+                        Math.round(((Number(leaseTermsAdjustmentSubTotal) * (100 + Number(marketConditionAdjustment))) / 100) * 1000) / 1000;
+                    rentReconciliationPage.getTrendedRentSF(compIndex)
+                        .should('have.text', expectedTrendedRentSF < 0 
+                            ? `-$${Math.abs(expectedTrendedRentSF).toFixed(2)}` 
+                            : `$${expectedTrendedRentSF.toFixed(2)}`);
+                });
+            });
+        });
+        return this;
     }
 
 }

@@ -64,13 +64,7 @@ describe("Verify the calculation field values",
             Rent/SF (the value is taken to the grid from the info of the added comparable)
             Formula: ((RentSF + ((RentSF * Lease Term Adjustment) / 100)) * Market Condition Adjustment ) / 100`);
         for (let index = 0; index < testData.numberOfComparables; index++) {
-            Income._CommercialManager.RentReconciliation.Page.getCompRent(index).invoke('text').then(rentSf => {
-                let rent = Number(rentSf.replace('$', ''));
-                Income._CommercialManager.RentReconciliation
-                    .verifyTrendedRentSF(rent, testData.calculationTypePercent, testData.leaseTermsAdjustments[index], 
-                        testData.marketConditionAdjustments[index], index);
-            });
-            
+            Income._CommercialManager.RentReconciliation.verifyTrendedRentSF(testData.calculationTypePercent, index);
         }
     });
 
@@ -96,13 +90,7 @@ describe("Verify the calculation field values",
             Rent/SF (the value is taken to the grid from the info of the added comparable)
             Formula: ((RentSF + ((RentSF * Lease Term Adjustment) / 100)) * Market Condition Adjustment ) / 100`);
         for (let index = 0; index < testData.numberOfComparables; index++) {
-            Income._CommercialManager.RentReconciliation.Page.getCompRent(index).invoke('text').then(rentSf => {
-                let rent = Number(rentSf.replace('$', ''));
-                Income._CommercialManager.RentReconciliation
-                    .verifyTrendedRentSF(rent, testData.calculationTypeSF, testData.leaseTermsAdjustments[index], 
-                        testData.marketConditionAdjustments[index], index);
-            });
-            
+            Income._CommercialManager.RentReconciliation.verifyTrendedRentSF(testData.calculationTypeSF, index);
         }
     });
 

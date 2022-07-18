@@ -25,7 +25,7 @@ class RentReconciliationPage extends BasePage {
 
     subjectUnitRentSfMonth(unit = 0) {return this.rentPerSfRow.find(`[data-qa="subject-unit-${unit}-cell"]`);}
 
-    getCompRent(compIndex = 0) {return this.rentPerSfRow.find(`[data-qa="rent-comp-${compIndex}-cell"]`);}
+    compRent(compIndex = 0) {return this.rentPerSfRow.find(`[data-qa="rent-comp-${compIndex}-cell"]`);}
 
     get baseUnitCell() {return cy.get('[data-qa="base-unit-cell"]');}
 
