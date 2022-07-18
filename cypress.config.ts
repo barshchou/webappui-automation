@@ -29,7 +29,7 @@ export default defineConfig({
       console.log(`\nBaseUrl is: ${config.baseUrl}\n`);
 
             // configuring cypress-grep plugin
-            grepFilterPlugin(config);
+            require('cypress-grep/src/plugin')(config);
 
             // configuring cypress-image-snapshot plugin
             addMatchImageSnapshotPlugin(on, config);
@@ -71,11 +71,14 @@ export default defineConfig({
                     return await fsUtil._waitForFileExists(filePath);
                 }
             });
+
+            return config;
         },
         excludeSpecPattern: '*.studio.*',
         specPattern: 'cypress/integration/**/*.spec.{js,jsx,ts,tsx}',
         env: {
             report: "api"
         }
+        
     },
 });
