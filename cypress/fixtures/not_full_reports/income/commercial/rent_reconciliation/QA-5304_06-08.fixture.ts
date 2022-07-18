@@ -3,7 +3,7 @@ import Enums from "../../../../../enums/enums";
 import { BoweryAutomation } from "../../../../../types/boweryAutomation.type";
 import { BoweryReports } from "../../../../../types/boweryReports.type";
 
-const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("5295-97_99", {
+const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("5304_06-08", {
     incomeValue: Enums.INCOME_TYPE.both
 });
 
@@ -23,7 +23,7 @@ export default {
     unitsNumber: 2,
     numberOfComparables: 3,
     rentPSFs: _rentPSFs,
-    compGroupName: "TestCompGroup_4189",
+    compGroupName: "TestCompGroup_5304_06-08",
     rentPSFLabelName: "Rent/SF/Month",
     unitsOfMeasure: Enums.UNITS_OF_MEASURE.perSquareFootPerYear,
     calculationTypePercent: Enums.CALCULATION_TYPE.percent,
