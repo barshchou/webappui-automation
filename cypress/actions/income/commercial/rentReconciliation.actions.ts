@@ -4,7 +4,7 @@ import { BoweryReports } from "../../../types/boweryReports.type";
 import BaseActionsExt from "../../base/base.actions.ext";
 
 class RentReconciliationActions extends BaseActionsExt<typeof rentReconciliationPage> {
-    addMarketRentConclusion(value: number, index = 0): RentReconciliationActions{
+    addMarketRentConclusion(value: number | string, index = 0): RentReconciliationActions{
         rentReconciliationPage.getMarketRentConclusion(index)
             .clear()
             .type(`${value}`)
