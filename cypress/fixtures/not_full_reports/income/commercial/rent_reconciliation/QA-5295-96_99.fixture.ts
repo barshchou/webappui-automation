@@ -10,12 +10,8 @@ const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreat
 const _leaseStatuses: BoweryReports.LeaseStatus[] = [ "Occupied", "Occupied" ];
 const _rentPSFs: number[] = [ 100, 200 ];
 
-const _leaseTermsAdjustments = (): number[] => {
-    return [ 2, 3.00, -11.42 ];
-};
-const _marketConditionAdjustments = (): number[] => {
-    return [ 5, -6.51, 30.01 ];
-};
+const _leaseTermsAdjustments = [ 2, 3.00, -11.42 ];
+const _marketConditionAdjustments = [ 5, -6.51, 30.01 ];
 
 export default {
     reportCreationData: _reportCreationData,
@@ -28,6 +24,6 @@ export default {
     unitsOfMeasure: Enums.UNITS_OF_MEASURE.perSquareFootPerYear,
     calculationTypePercent: Enums.CALCULATION_TYPE.percent,
     calculationTypeSF: Enums.CALCULATION_TYPE.dollarPerSF,
-    leaseTermsAdjustments: _leaseTermsAdjustments(),
-    marketConditionAdjustments: _marketConditionAdjustments()
+    leaseTermsAdjustments: _leaseTermsAdjustments,
+    marketConditionAdjustments: _marketConditionAdjustments
 };

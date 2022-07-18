@@ -102,9 +102,6 @@ class RentReconciliationActions extends BaseActionsExt<typeof rentReconciliation
      * 
      * We're getting comp rent, lease terms adjustments and market condition adjustments from map aliases. 
      * Having those values we can calculate Trended Price/Sf/Month expected value.
-     * @param  calculationType Calculation type for adjustments. Default: percent
-     * @param  compIndex Index of comparable on Reconciliation Summary table
-     * @returns RentReconciliationActions
      */
     verifyTrendedRentSF(calculationType: BoweryReports.CalculationType, compIndex = 0): RentReconciliationActions {
         this.getCompRent(compIndex);
@@ -112,15 +109,13 @@ class RentReconciliationActions extends BaseActionsExt<typeof rentReconciliation
             this.getLeaseTermsAdjustment(compRent, calculationType, compIndex)
                 .getMarketConditionAdjustment(compIndex);
             cy._mapGet('leaseTermsAdj').then(leaseTermsAdjustmentSubTotal => {
-                cy.log(`${leaseTermsAdjustmentSubTotal}`);
                 cy._mapGet('marketConditionAdj').then(marketConditionAdjustment => {
-                    cy.log(`${marketConditionAdjustment}`);
-                    let expectedTrendedRentSF = 
-                        Math.round(((Number(leaseTermsAdjustmentSubTotal) * (100 + Number(marketConditionAdjustment))) / 100) * 1000) / 1000;
+                    let expectedTrendedRentSF = ((Number(leaseTermsAdjustmentSubTotal) * (100 + Number(marketConditionAdjustment))) / 100);
+                    let expectedTrendedRentSFRounded = Math.round(expectedTrendedRentSF * 1000) / 1000;
                     rentReconciliationPage.getTrendedRentSF(compIndex)
-                        .should('have.text', expectedTrendedRentSF < 0 
-                            ? `-$${Math.abs(expectedTrendedRentSF).toFixed(2)}` 
-                            : `$${expectedTrendedRentSF.toFixed(2)}`);
+                        .should('have.text', expectedTrendedRentSFRounded < 0 
+                            ? `-$${Math.abs(expectedTrendedRentSFRounded).toFixed(2)}` 
+                            : `$${expectedTrendedRentSFRounded.toFixed(2)}`);
                 });
             });
         });
