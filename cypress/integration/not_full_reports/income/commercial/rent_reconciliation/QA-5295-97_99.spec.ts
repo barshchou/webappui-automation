@@ -76,14 +76,14 @@ describe("Verify the calculation field values",
         cy.stepInfo('1/2. Select “$/SF” value in the “Calculations” dropdown field');
         Income._CommercialManager.RentReconciliation.setLeaseTermsCalculationType(testData.calculationTypeSF);
 
-        cy.stepInfo('3. Enter any value into the input field of the “Market Conditions Adjustment” row for any added comparable (e.g. 5%)');
+        cy.stepInfo('3. Enter any value into the input field of the “Lease Terms Adjustment” row for any added comparable (e.g. 5%)');
         for (let index = 0; index < testData.numberOfComparables; index++) {
             Income._CommercialManager.RentReconciliation
                 .verifyLeaseTermsAdjustmentDefault(testData.calculationTypeSF, index)
                 .setLeaseTermsAdjustment(testData.leaseTermsAdjustments[index], testData.calculationTypeSF, index);
         }
 
-        cy.stepInfo('4. Enter any value into the input field of the “Lease Terms Adjustment” row for the same comparable (e.g. 2%)');
+        cy.stepInfo('4. Enter any value into the input field of the “Market Conditions Adjustment” row for the same comparable (e.g. 2%)');
         for (let index = 0; index < testData.numberOfComparables; index++) {
             Income._CommercialManager.RentReconciliation
                 .setMarketConditionAdjustment(testData.marketConditionAdjustments[index], index);

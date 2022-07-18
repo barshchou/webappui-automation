@@ -112,9 +112,7 @@ class RentReconciliationActions extends BaseActionsExt<typeof rentReconciliation
             this.getLeaseTermsAdjustment(compRent, calculationType, compIndex)
                 .getMarketConditionAdjustment(compIndex);
             cy._mapGet('leaseTermsAdj').then(leaseTermsAdjustmentSubTotal => {
-                cy.log(`${leaseTermsAdjustmentSubTotal}`);
                 cy._mapGet('marketConditionAdj').then(marketConditionAdjustment => {
-                    cy.log(`${marketConditionAdjustment}`);
                     let expectedTrendedRentSF = 
                         Math.round(((Number(leaseTermsAdjustmentSubTotal) * (100 + Number(marketConditionAdjustment))) / 100) * 1000) / 1000;
                     rentReconciliationPage.getTrendedRentSF(compIndex)
@@ -127,10 +125,23 @@ class RentReconciliationActions extends BaseActionsExt<typeof rentReconciliation
         return this;
     }
 
-    verifyLeaseTermsAdjustmentDefault(calculationType: BoweryReports.CalculationType, compIndex = 0): RentReconciliationActions {
-        rentReconciliationPage.leaseTermsAdjustmentsPlaceholder(compIndex).invoke('text').should('have.text', calculationType);
+    verifyLeaseTermsAdjustment(calculationType: BoweryReports.CalculationType, compIndex = 0): RentReconciliationActions {
+        this.getCompRent(compIndex);
+        cy._mapGet('compRentSF').then(compRent => {
+            this.getLeaseTermsAdjustment(compRent, calculationType, compIndex);
+            cy._mapGet('leaseTermsAdj').then(leaseTermsAdjustmentSubTotal => {
+                rentReconciliationPage.getLeaseTermsAdjustmentSubTotal(compIndex)
+                    .should('have.text', leaseTermsAdjustmentSubTotal < 0 
+                        ? `-$${Math.abs(leaseTermsAdjustmentSubTotal).toFixed(2)}`
+                        : `$${leaseTermsAdjustmentSubTotal.toFixed(2)}`);
+            });
+        });
         return this;
     }
 
+    verifyLeaseTermsAdjustmentDefault(calculationType: BoweryReports.CalculationType, compIndex = 0): RentReconciliationActions {
+        rentReconciliationPage.leaseTermsAdjustmentsPlaceholder(compIndex).invoke('text').should('deep.equal', calculationType);
+        return this;
+    }
 }
 export default new RentReconciliationActions(rentReconciliationPage);

@@ -17,6 +17,10 @@ class RentReconciliationPage extends BasePage {
 
     get rentPerSfRow() {return cy.get('[data-qa="rent-per-sf-row"]');}
 
+    get leaseTermsAdjustmentRow() {return cy.get('[data-qa="lease-terms-adjustments-row"]');}
+
+    get leaseTermsAdjustmentSubTotalRow() {return cy.get('[data-qa="trended-price-per-sf-row"]').eq(0);}
+
     get trendedRentPerSfRow() {return cy.get('[data-qa="trended-price-per-sf-row"]').eq(1);}
 
     get rentTypeLabel() {return this.rentPerSfRow.find('[data-qa="row-label-cell"]');} 
@@ -44,6 +48,11 @@ class RentReconciliationPage extends BasePage {
     getTrendedRentSF(compIndex = 0) {
         return compIndex != 0 ? this.trendedRentPerSfRow.find(`[data-qa="subject-unit-${compIndex}-cell"]`) :
         this.trendedRentPerSfRow.find(`[data-qa="subject-unit-${compIndex}-cell"]`).eq(1);
+    }
+
+    getLeaseTermsAdjustmentSubTotal(compIndex = 0) {
+        return compIndex != 0 ? this.leaseTermsAdjustmentSubTotalRow.find(`[data-qa="subject-unit-${compIndex}-cell"]`) :
+        this.leaseTermsAdjustmentSubTotalRow.find(`[data-qa="subject-unit-${compIndex}-cell"]`).eq(1);
     }
 }
 
