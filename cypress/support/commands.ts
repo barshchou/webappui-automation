@@ -76,10 +76,19 @@ Cypress.Commands.add("loginByApi", (envUrl, username, password) => {
 });
 
 Cypress.Commands.add("loginByUI", (url: string, username: string, password: string) => {
+    cy.intercept({
+        url: "/user/login",
+        method:"POST"
+    }).as(Alias.loginRequest);
     cy.log("Logging in by UI");
     _cyVisit(url);
     cy.get("*[name='username']").should("be.visible").type(username).should("have.value", username);
     cy.get("*[name='password']").should("be.visible").type(password).type("{enter}");
+    
+    cy.wait(`@${Alias.loginRequest}`).then(({ response }) => {
+        cy._mapSet(mapKeysUtils.bearer_token, response.body.token);
+        cy._mapSet(mapKeysUtils.user_id, response.body.user._id);
+    });
 });
 
 Cypress.Commands.add("createApiReport", 

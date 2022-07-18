@@ -8,6 +8,7 @@ export default {
      * Key for bearer token necessary for report removal via api
      */
     bearer_token:"bearer_token_key",
+    user_id:"user_id_key",
     rent_per_sf: "rent_per_SF_per_year",
     computed_comps_min: "computed_comps_min",
     computed_comps_max: "computed_comps_max",
