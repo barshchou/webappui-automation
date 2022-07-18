@@ -27,7 +27,8 @@ describe(`[QA-5049] [QA-5050] [QA-5051] [Income>Expense forecast] Custom card va
             Income._ExpenseForecastActions.addCustomExpenseCategory(testData.expenseForecastCustomFixture().name);
 
             cy.stepInfo(`3. Make sure that Per SF radiobutton is selected for Custom Expense card`);
-            Income._ExpenseForecastActions.Page.getForecastItemCheckedBasisRadio(true, 0).invoke("attr", "value").then(value => {
+            Income._ExpenseForecastActions.Page.getForecastItemCheckedBasisRadio(true, 0)
+            .invoke("attr", "value").then(value => {
                 expect(value).to.be.equal('sf');
             });
 
@@ -36,7 +37,8 @@ describe(`[QA-5049] [QA-5050] [QA-5051] [Income>Expense forecast] Custom card va
 
             cy.stepInfo(`5. Verify that Per Unit value below this field is calculated as: 
                             Per Unit Appraiser’s Forecast * selected Basis for Square Foot Analysis /  # of Resi Units `);
-            Income._ExpenseForecastActions.Page.getForecastItemBasisMoneyValue(testData.expenseForecastCustomFixture().name, true).invoke("text").then(text => {
+            Income._ExpenseForecastActions.Page.getForecastItemBasisMoneyValue(testData.expenseForecastCustomFixture().name, true)
+            .invoke("text").then(text => {
                 expect(text).contain('Per Unit')
                     .contain(testData.perUnitFieldValue());
             });
@@ -47,7 +49,8 @@ describe(`[QA-5049] [QA-5050] [QA-5051] [Income>Expense forecast] Custom card va
 
             cy.stepInfo(`7. Verify if number of Residential Unit equal 0 →  expected result will be "Per Unit: $NaN"`);
             _NavigationSection.navigateToExpenseForecast();
-            Income._ExpenseForecastActions.Page.getForecastItemBasisMoneyValue(testData.expenseForecastCustomFixture().name, true).invoke("text").then(text => {
+            Income._ExpenseForecastActions.Page.getForecastItemBasisMoneyValue(testData.expenseForecastCustomFixture().name, true)
+            .invoke("text").then(text => {
                 expect(text).contain('Per Unit')
                     .contain(testData.perUnitValueTextNaN);
             });
@@ -65,7 +68,8 @@ describe(`[QA-5049] [QA-5050] [QA-5051] [Income>Expense forecast] Custom card va
             Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastCustomFixture('unit'), true);
 
             cy.stepInfo(`3. Make sure that Per Unit radiobutton is selected for Custom Expense card`);
-            Income._ExpenseForecastActions.Page.getForecastItemCheckedBasisRadio(true, 0).invoke("attr", "value").then(value => {
+            Income._ExpenseForecastActions.Page.getForecastItemCheckedBasisRadio(true, 0).invoke("attr", "value")
+            .then(value => {
                 expect(value).to.be.equal('unit');
             });
 
@@ -94,19 +98,23 @@ describe(`[QA-5049] [QA-5050] [QA-5051] [Income>Expense forecast] Custom card va
         it(`[QA-5051] Sliding bar graphic displays Appraiser's Forecast`, () => {
 
             cy.stepInfo(`1. Verify if Per Unit radiobutton is selected-> Title of Sliding Bar Graphic is #Category Name ($/UNIT)`);
-            Income._ExpenseForecastActions.Page.getForecastItemCheckedBasisRadio(true, 0).invoke("attr", "value").then(value => {
+            Income._ExpenseForecastActions.Page.getForecastItemCheckedBasisRadio(true, 0).invoke("attr", "value")
+            .then(value => {
                 expect(value).to.be.equal('unit');
             });
-            Income._ExpenseForecastActions.Page.getForecastItemSlidingBarTitle(testData.expenseForecastCustomFixture().name, true).invoke("text").then(text => {
+            Income._ExpenseForecastActions.Page.getForecastItemSlidingBarTitle(testData.expenseForecastCustomFixture().name, true)
+            .invoke("text").then(text => {
                 expect(text).contain(testData.perUnitSlidingBarTitleNameCustom);
             });
 
             cy.stepInfo(`2. Verify if Per SF radiobutton is selected-> Title of Sliding Bar Graphic is #Category Name ($/SF)`);
-            Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastCustomFixture('sf'), true);
-            Income._ExpenseForecastActions.Page.getForecastItemCheckedBasisRadio(true, 0).invoke("attr", "value").then(value => {
+            Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastCustomFixture('sf'), true)
+            .Page.getForecastItemCheckedBasisRadio(true, 0).invoke("attr", "value")
+            .then(value => {
                 expect(value).to.be.equal('sf');
             });
-            Income._ExpenseForecastActions.Page.getForecastItemSlidingBarTitle(testData.expenseForecastCustomFixture().name, true).invoke("text").then(text => {
+            Income._ExpenseForecastActions.Page.getForecastItemSlidingBarTitle(testData.expenseForecastCustomFixture().name, true)
+            .invoke("text").then(text => {
                 expect(text).contain(testData.perSFSlidingBarTitleNameCustom);
             });
 
@@ -115,8 +123,8 @@ describe(`[QA-5049] [QA-5050] [QA-5051] [Income>Expense forecast] Custom card va
                 Income._ExpenseForecastActions.Page.forecastItemCard(testData.expenseForecastCustomFixture().name, true),
                 testData.slidingBarPerSFSnapshotName, { padding: [ 50, 30 ] }
             );
-            Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastCustomFixture('unit'), true);
-            Income._ExpenseForecastActions.matchElementSnapshot(
+            Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastCustomFixture('unit'), true)
+            .matchElementSnapshot(
                 Income._ExpenseForecastActions.Page.forecastItemCard(testData.expenseForecastCustomFixture().name, true),
                 testData.slidingBarPerUnitSnapshotName, { padding: [ 50, 30 ] }
             );
