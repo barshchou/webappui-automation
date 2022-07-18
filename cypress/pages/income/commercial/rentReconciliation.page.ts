@@ -37,6 +37,8 @@ class RentReconciliationPage extends BasePage {
 
     leaseTermsAdjustments(compIndex = 0) {return cy.get(`[name="reconciliationGroups.items[0].summary.rentComps[${compIndex}].adjustments.leaseTerms"]`);}
 
+    leaseTermsAdjustmentsPlaceholder(compIndex = 0) {return cy.get(`[name="reconciliationGroups.items[0].summary.rentComps[${compIndex}].adjustments.leaseTerms"]+div p`);}
+
     marketConditionsAdjustments(compIndex = 0) {return cy.get(`[name="reconciliationGroups.items[0].summary.rentComps[${compIndex}].adjustments.dateSigned"]`);}
 
     getTrendedRentSF(compIndex = 0) {

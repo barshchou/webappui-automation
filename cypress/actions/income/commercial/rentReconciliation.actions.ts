@@ -127,5 +127,10 @@ class RentReconciliationActions extends BaseActionsExt<typeof rentReconciliation
         return this;
     }
 
+    verifyLeaseTermsAdjustmentDefault(calculationType: BoweryReports.CalculationType, compIndex = 0): RentReconciliationActions {
+        rentReconciliationPage.leaseTermsAdjustmentsPlaceholder(compIndex).invoke('text').should('have.text', calculationType);
+        return this;
+    }
+
 }
 export default new RentReconciliationActions(rentReconciliationPage);

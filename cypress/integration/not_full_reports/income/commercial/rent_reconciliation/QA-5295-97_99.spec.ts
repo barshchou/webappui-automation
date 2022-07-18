@@ -1,4 +1,4 @@
-import testData from "../../../../../fixtures/not_full_reports/income/commercial/rent_reconciliation/QA-5295-96_99.fixture";
+import testData from "../../../../../fixtures/not_full_reports/income/commercial/rent_reconciliation/QA-5295-97_99.fixture";
 import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../../actions/base";
 import { Income, Property } from "../../../../../actions";
@@ -43,7 +43,8 @@ describe("Verify the calculation field values",
         cy.restoreLocalStorage();
     });
 
-    it(`[QA-5295] [QA-5296] Verify the calculation of the "Trended Rent/SF" when "%" value is selected in 
+    it(`[QA-5295] Verify that the "Calculations" drop-down is displayed in the "Base Unit"
+        [QA-5296] Verify the calculation of the "Trended Rent/SF" when "%" value is selected in 
         the "Calculations" drop-down of the "Rent Reconciliation" grid`, () => {
         cy.stepInfo('2. Check that “%” is displayed in the “Calculations” dropdown field');
         Income._CommercialManager.RentReconciliation.verifyCalculationInputValue(testData.calculationTypePercent);
@@ -69,6 +70,7 @@ describe("Verify the calculation field values",
     });
 
     it(`[QA-5295] Verify that the "Calculations" drop-down is displayed in the "Base Unit"
+        [QA-5297] Verify the display of the "Lease Terms Adjustment" row input fields when "$/SF" value is selected
         [QA-5299] Verify the calculation of the "Trended Rent/SF" when "$/SF" value is selected in 
         the "Calculations" drop-down of the "Rent Reconciliation" grid`, () => {
         cy.stepInfo('1/2. Select “$/SF” value in the “Calculations” dropdown field');
@@ -77,6 +79,7 @@ describe("Verify the calculation field values",
         cy.stepInfo('3. Enter any value into the input field of the “Market Conditions Adjustment” row for any added comparable (e.g. 5%)');
         for (let index = 0; index < testData.numberOfComparables; index++) {
             Income._CommercialManager.RentReconciliation
+                .verifyLeaseTermsAdjustmentDefault(testData.calculationTypeSF, index)
                 .setLeaseTermsAdjustment(testData.leaseTermsAdjustments[index], testData.calculationTypeSF, index);
         }
 
