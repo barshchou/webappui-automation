@@ -42,7 +42,10 @@ class ExpenseForecastPage extends BasePage {
 
     getForecastItemBasisMoneyValue(item: string) { return cy.get(`[data-qa=${item}-forecast-item] [data-qa=basis]`); }
 
-    getForecastItemProjectionByType(item: string, type: string) { return cy.contains(`[data-qa=${item}-forecast-item] [data-qa$=historical]`, type); }
+    getForecastItemProjectionByType(item: string, type: string, toeCard = false) { 
+        return !toeCard ?  cy.contains(`[data-qa=${item}-forecast-item] [data-qa$=historical]`, type) : 
+         cy.contains('TOTAL OPERATING EXPENSES').parent().parent().find('[data-qa$=historical]').contains(type);
+    }
 
     getExpenseCommentary(forecastItem: string, index = 1) { return cy.xpath(`//*[@data-qa="${forecastItem}-forecast-item"]//following::div[@data-slate-editor][${index}]`); }
 
