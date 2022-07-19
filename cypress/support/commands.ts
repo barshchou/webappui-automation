@@ -113,7 +113,7 @@ Cypress.Commands.add("deleteApiReport", () => {
     cy.log("Delete report");
         cy._mapGet(mapKeysUtils.report_id_arr).then(arr => {
             if (arr === undefined) {
-                cy.log("No report_ids saved! Nothing to to delete.");
+                cy.log("No report_ids saved! Nothing to delete.");
                 return;
             }
             else {
