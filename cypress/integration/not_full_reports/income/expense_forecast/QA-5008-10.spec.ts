@@ -20,7 +20,7 @@ describe(`[QA-5008] [QA-5009] [QA-5010] [Income>Expense forecast] “Include Exp
             _NavigationSection.navigateToExpenseForecast();
 
             cy.stepInfo(`2. Verify  “Include Expense on Pro Forma”  checkbox is displayed under existing expense card`);
-            testData.expensesCardsCheckboxes.forEach(element => {
+            testData.expenseCardsIDArray.forEach(element => {
                 Income._ExpenseForecastActions.verifyIncludeInProFormaCheckboxExists(element);
             });
 
@@ -32,7 +32,7 @@ describe(`[QA-5008] [QA-5009] [QA-5010] [Income>Expense forecast] “Include Exp
 
         it("[QA-5009]", () => {
             cy.stepInfo(`1. Verify “Include Expense on Pro Forma” checkbox is selected by default for each existing expense card`);
-            testData.expensesCardsCheckboxes.forEach(element => {
+            testData.expenseCardsIDArray.forEach(element => {
                 Income._ExpenseForecastActions.verifyIncludeInProFormaCheckboxIsChecked(element);
             });
         });
