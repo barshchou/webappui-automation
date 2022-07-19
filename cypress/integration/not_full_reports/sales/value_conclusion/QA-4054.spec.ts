@@ -21,7 +21,7 @@ describe("The amount column of the # of Units shows the correct number of units"
         Sales._AdjustComps.checkCalculationUnitsRadio(testData.data.calculationUnits);
         cy.stepInfo("3. Proceed to the Sales > Value Conclusion >  Sales Value Conclusion Table and verify the value column is labeled # of Units.");
         _NavigationSection.navigateToSalesValueConclusion();
-        cy.xpath("//tbody[@data-qa='as-is-as-stabilized']/tr[2]/td[2]").should('have.text', testData.data.valueColumnLabel);
+        cy.xpath(testData.xpath).should('have.text', testData.data.valueColumnLabel);
         cy.stepInfo("4. Verify that the # of Units shows the correct number of units (residential + commercial).");
         Sales._ValueConclusion.verifyNumberOfUnitsAmount(testData.data.totalNumberOfUnitsLabel);
         deleteReport(testData.reportCreationData.reportNumber);
