@@ -21,8 +21,8 @@ Cypress.on("uncaught:exception", () => {
 });
 
 after(() => {
-  let isSmokeTest = Cypress.spec.relative.includes("smoke");
-  if(isSmokeTest){
+  // check whether test was from smoke suite by its relative path
+  if(Cypress.spec.relative.includes("smoke")){
     cy.log("Smoke test, does not deleting report");
     return;
   }
