@@ -51,7 +51,7 @@ class DescriptionActions extends BaseActionsExt<typeof descriptionPage> {
         return this;
     }
 
-    checkStructuralSystemByValue(value: string):DescriptionActions {
+    checkStructuralSystemByValue(value: string): DescriptionActions {
         descriptionPage.structuralSystem.check(value);
         this.verifyRadioIsChecked(value);
         return this;

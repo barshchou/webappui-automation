@@ -1,4 +1,5 @@
 import Enums from "../../../../enums/enums";
+import { BoweryReports } from "../../../../types/boweryReports.type";
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 
 const comparableFixture = () => {
@@ -10,10 +11,10 @@ const comparableFixture = () => {
 };
 
 export default {
-    reportCreationData: ReportDataCreator.getReportData("4103_13_30", {
+    reportCreationData: ReportDataCreator.getReportData("4103_13", {
         incomeValue: Enums.INCOME_TYPE.both
     }),
     comparable: Object.freeze(comparableFixture()),
-    calculationUnits: [ "Per Residential Units", "Per Total Units" ],
+    calculationUnits: [ "Per Residential Units", "Per Total Units" ] as BoweryReports.SalesAdjustmentGrid.CalculationUnits[],
     existColumns: [ "Cumulative Price Per Unit", "Adjusted Price Per Unit" ]
 };

@@ -15,7 +15,7 @@ class AdjustCompsActions extends BaseActionsExt<typeof adjustCompsPage> {
         return this;
     }
 
-    checkCalculationUnitsRadio(value: string): AdjustCompsActions {
+    checkCalculationUnitsRadio(value = "Per Residential Units"): AdjustCompsActions {
         adjustCompsPage.calculationUnitsRadio.check(value).should("be.checked");
         return this;
     }

@@ -17,18 +17,18 @@ describe("[QA-4102_06] -> Total Utility Adjustments in Sales Adjustment Grid is 
 
         cy.stepInfo("3. Precondition: Open Sales > Adjust Comps page");
         _NavigationSection.navigateToAdjustComps();
-        Sales._AdjustComps.checkCalculationUnitsRadio(testData.calculationUnits[0])
+        Sales._AdjustComps.checkCalculationUnitsRadio()
             .enterMarketAdjustmentsGroup(Object.keys(testData.comparablesAdjustments), Object.values(testData.comparablesAdjustments))
             .verifyTrendedPricePerBasis(Object.values(testData.comparablesAdjustments), testData.basis);
 
         cy.stepInfo("4. Verify PSF, Per Residential Units, Per Total Units radio buttons are displayed");
-        testData.calculationUnits.forEach(val => {
-            Sales._AdjustComps.checkCalculationUnitsRadio(val);
+        testData.calculationUnits.forEach(unit => {
+            Sales._AdjustComps.checkCalculationUnitsRadio(unit);
         });
 
 
         cy.stepInfo("5. Precondition: Per Residential Units is selected as Calculation Units in Sales Comparables Setup");
-        Sales._AdjustComps.checkCalculationUnitsRadio(testData.calculationUnits[0])
+        Sales._AdjustComps.checkCalculationUnitsRadio()
             .enterMarketAdjustmentsGroup(Object.keys(testData.comparablesAdjustments), Object.values(testData.comparablesAdjustments));
             
         cy.stepInfo("6. Verify the row below Net Market Adjustments row in Total Footer of the Sales Adjustment Grid");

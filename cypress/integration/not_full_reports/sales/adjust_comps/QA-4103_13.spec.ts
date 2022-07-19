@@ -1,5 +1,5 @@
 import { Sales } from '../../../../actions/index';
-import testData from "../../../../fixtures/not_full_reports/sales/adjust_comps/QA-4103_13_30.fixture";
+import testData from "../../../../fixtures/not_full_reports/sales/adjust_comps/QA-4103_13.fixture";
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 
@@ -35,18 +35,5 @@ describe("Net Property Adjustments in Sales Adjustment Grid is calculated with c
             .enterOtherAdjustmentByColumn(testData.comparable.otherAdjustment)
             .verifyNetPropertyAdjustmentsByCompIndex();
         deleteReport(testData.reportCreationData.reportNumber);
-    });
-
-    // Will add in next PR
-    it.skip("[QA-4130]", () => {
-        // Feature flag test (Enable flexible gba analysis)
-        testData.calculationUnits.forEach(val => {
-            Sales._AdjustComps.checkCalculationUnitsRadio(val);
-            // .enterSizeAdjustmentByColumn(testData.comparable.sizeAdjustment)
-            // .enterConditionAdjustmentByColumn(testData.comparable.conditionAdjustment)
-            // .clickAddOtherAdjustmentButton()
-            // .enterOtherAdjustmentByColumn(testData.comparable.otherAdjustment)
-            // .verifyNetPropertyAdjustmentsByCompIndex();
-        });
     });
 });

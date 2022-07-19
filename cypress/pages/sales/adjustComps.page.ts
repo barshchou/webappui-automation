@@ -78,7 +78,7 @@ class AdjustCompsPage extends BasePage {
 
     get viewAdjustmentDetails() {return cy.xpath("//*[contains(text(), 'Other Adjustment')]//following::*[@role='presentation'][1]");}
 
-    getOtherAdjustmentColumnValue(value, index = 1) {return cy.xpath(`//*[contains(text(), 'Other Adjustment')]//following::*[contains(text(), '${value}')][${index}]`);}
+    getOtherAdjustmentColumnValue(value: string, index = 1) {return cy.xpath(`//*[contains(text(), 'Other Adjustment')]//following::*[contains(text(), '${value}')][${index}]`);}
     
     getAdjustmentArrow(adjustmentName: AdjustmentName){
         return cy.get(`[data-qa="expansion-row-${adjustmentName}"] [aria-label="Show more"]`);
