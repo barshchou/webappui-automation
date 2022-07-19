@@ -1,17 +1,17 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Sales } from '../../../../actions';
+import { ReviewExport, Sales } from '../../../../actions';
 import { _NavigationSection } from '../../../../actions/base';
 import testData from "../../../../fixtures/not_full_reports/sales/find_comps/QA-5136.fixture";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import mapKeysUtils from '../../../../utils/mapKeys.utils';
+import { _map } from '../../../../support/commands';
 
 describe(`[QA-5136] Check when "custom" dropdown is selected user can drag&drop comps`, 
 { tags: [ "@sales", "@find_comps", "@comp_plex" ] }, () => {
-    before("Login, create report", () => {
-        createReport(testData.reportCreationData);
-    });
-
+    
     it("Test body", () => {
+        createReport(testData.reportCreationData);
+
         cy.stepInfo(`[QA-5136] -> Verify when “custom” is selected, the user can drag and drop Selected comps up and down in the list.
                     NOTE: The drag and drop functionality is disabled when Sort: Sale Date is selected`
         );
@@ -50,6 +50,38 @@ describe(`[QA-5136] Check when "custom" dropdown is selected user can drag&drop 
 
         cy.pause();
 
+        _NavigationSection.Actions.openReviewAndExport();
+        ReviewExport.Actions.generateDocxReport()
+        .waitForReportGenerated()
+        .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
+
         deleteReport(testData.reportCreationData.reportNumber);
+    });
+
+    it.skip("debug", () => {
+        const addresses = [ "45 East 45th Street", "8 Spruce Street" ];
+        // cy.wrap(addresses).as("addr");
+        cy.get("body").then(() => {
+            _map.set("addr", addresses);
+        });
+    });
+    
+
+    it("check report", () => {
+        Cypress.config().baseUrl = null;
+        cy.task("getFilePath", { _reportName: testData.reportCreationData.reportNumber, _docx_html: "html" })
+        .then(file => {
+            cy.log(<string>file);
+            cy.visit(<string>file);
+            // cy.get("@addr").then(val => cy.log(val));
+            cy.get("body").then(() => cy.log(_map.get(mapKeysUtils.sales_comps_addresses)));
+            cy.contains("Comparable Sales Adjustment Grid").next()
+            .scrollIntoView().contains("Address")
+            .parents("tr").find("p").spread((...addresses) => {
+                addresses = addresses.map(a => a.innerText).splice(-2).map(a => a.split(",")[0]);
+                cy.log(<any>addresses);
+                expect(_map.get(mapKeysUtils.sales_comps_addresses)).to.deep.equal(addresses);
+            });
+        });
     });
 });
