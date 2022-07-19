@@ -53,17 +53,17 @@ const _expensesInProFormaByDefaultArray = [
 ];
 
 const _expensesForecastCardNamesArray = [
+    expensesForecastCardNamesEnum.insurance,
     expensesForecastCardNamesEnum.electricity,
     expensesForecastCardNamesEnum.fuel,
-    expensesForecastCardNamesEnum.generalAndAdministrative,
-    expensesForecastCardNamesEnum.insurance,
-    expensesForecastCardNamesEnum.legalAndProfessional,
-    expensesForecastCardNamesEnum.managementFees,
-    expensesForecastCardNamesEnum.miscellaneous,
-    expensesForecastCardNamesEnum.payrollBenefits,
-    expensesForecastCardNamesEnum.repairAndMaintenance,
-    expensesForecastCardNamesEnum.replacementsAndReserves,
     expensesForecastCardNamesEnum.waterAndSewer,
+    expensesForecastCardNamesEnum.repairAndMaintenance,
+    expensesForecastCardNamesEnum.payrollBenefits,
+    expensesForecastCardNamesEnum.generalAndAdministrative,
+    expensesForecastCardNamesEnum.legalAndProfessional,
+    expensesForecastCardNamesEnum.miscellaneous,
+    expensesForecastCardNamesEnum.managementFees,
+    expensesForecastCardNamesEnum.replacementsAndReserves,
 ];
 
 const expenseForecastInsuranceFixture = (_basis: "unit" | "sf"): BoweryReports.ForecastItem => {
