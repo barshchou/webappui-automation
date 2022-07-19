@@ -214,5 +214,5 @@ export namespace BoweryReports {
         export type SelectedComparablesSortType = "Custom" | "Date Sold"
     }
     
-    
+    export type CalculationType = typeof Enums.CALCULATION_TYPE[KeyInfo.CalculationType]
 }
