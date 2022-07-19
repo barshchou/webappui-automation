@@ -60,7 +60,7 @@ describe("Rent is displayed on the same basis that is selected on In-Place rent 
             .verifyBaseUnitRent(testData.rentPSFs[testData.rentPSFs.length -1])
             .verifySubjectUnitRent(testData.rentPSFs[0]);
         for (let index = 0; index < testData.numberOfComparables; index++){
-            Income._CommercialManager.RentReconciliation.Page.getCompRent(index).then(() => {
+            Income._CommercialManager.RentReconciliation.Page.compRent(index).then(() => {
                 let rentFromRentComps = _map.get(`${index + 1}${mapKeysUtils.rent_per_sf}`);
                 let checkDecimalRent = testData.rentCompFields[index].rentSf;
                 Income._CommercialManager.RentReconciliation.verifyCompsRent(rentFromRentComps, index)
