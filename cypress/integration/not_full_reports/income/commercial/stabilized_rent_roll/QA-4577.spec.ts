@@ -38,7 +38,7 @@ describe("Verify the functionality of the Frontage radio button",
             .verifyProgressBarNotExist();
         
         cy.stepInfo(`5. Verify that the Income > Commercial > Rent Reconciliation page is displayed.`);
-        Income._CommercialManager.RentReconciliation.Page.RentReconcillationHeader
+        Income._CommercialManager.RentReconciliation.Page.RentReconciliationHeader
             .should("be.visible")
             .find("h5")
             .invoke("text")

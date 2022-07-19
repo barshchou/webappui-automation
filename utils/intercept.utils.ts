@@ -1,7 +1,9 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 /// <reference types="cypress" />
 
+import { _mutateArrayInMap } from "../cypress/support/commands";
 import { Alias } from "../cypress/utils/alias.utils";
+import mapKeysUtils from "../cypress/utils/mapKeys.utils";
 
 export const interceptGoogleScriptsLoad = () => {
     cy.intercept({
@@ -28,6 +30,8 @@ export const setReportId = () => {
         const reportID = url.split(`${Cypress.config().baseUrl}/report/`)[1].split("/")[0];
         cy.log(`Current report ID is ${reportID}`);
         cy.wrap(reportID).as(Alias.reportId);
+
+        _mutateArrayInMap(mapKeysUtils.report_id_arr, reportID, "Array of report_id");
     });
 };
 export const getReportId = () => {
