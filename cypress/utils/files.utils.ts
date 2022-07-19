@@ -12,7 +12,7 @@ import { existsSync, writeFileSync } from "fs";
  * @see https://www.npmjs.com/package/glob
  */
 const _getFilePath = async (_reportName: string, _docx_html: string, currentTime = 0, timeout = 60000) => {
-    let file = sync(`cypress/downloads/${_reportName}**.${_docx_html}`)[0];
+    let file = sync(`cypress/downloads/**${_reportName}**.${_docx_html}`)[0];
     if (file != undefined) {
         return file;
     }
