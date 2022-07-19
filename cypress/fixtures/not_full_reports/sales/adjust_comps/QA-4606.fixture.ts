@@ -17,5 +17,5 @@ export default {
     conclusionValue: _conclusionValue,
     propertyCondition: "Satisfactory",
     reportCreationData: ReportDataCreator.getReportData("4606", { incomeValue: Enums.INCOME_TYPE.both }),
-    calculationUnits: [ "PSF", "Per Residential Units" ] as BoweryReports.SalesAdjustmentGrid.CalculationUnits[],
+    calculationUnits: [ Enums.CALCULATION_UNITS.psf, Enums.CALCULATION_UNITS.perResidentialUnits ] as BoweryReports.SalesAdjustmentGrid.CalculationUnits[],
 };

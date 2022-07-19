@@ -15,6 +15,6 @@ export default {
         incomeValue: Enums.INCOME_TYPE.both
     }),
     comparable: Object.freeze(comparableFixture()),
-    calculationUnits: [ "Per Residential Units", "Per Total Units" ] as BoweryReports.SalesAdjustmentGrid.CalculationUnits[],
+    calculationUnits: [ Enums.CALCULATION_UNITS.perResidentialUnits, Enums.CALCULATION_UNITS.perTotalUnits ] as BoweryReports.SalesAdjustmentGrid.CalculationUnits[],
     existColumns: [ "Cumulative Price Per Unit", "Adjusted Price Per Unit" ]
 };
