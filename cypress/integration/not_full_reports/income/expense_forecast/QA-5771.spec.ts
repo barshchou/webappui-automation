@@ -11,7 +11,7 @@ describe("[QA-5771] Historical expense Payroll & Benefits Per SF is correctly ca
             createReport(testData.reportCreationData);
         });
 
-        it("[QA-5771]", () => {
+        it("Test body", () => {
 
             cy.stepInfo("1. Pre-condition: Fill in Residential Units and GBA on Property > Summary form");
             _NavigationSection.navigateToPropertySummary();

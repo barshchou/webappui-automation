@@ -11,7 +11,7 @@ describe("[QA-5773] Historical expense Legal & Professional Fees Per SF is corre
             createReport(testData.reportCreationData);
         });
 
-        it("[QA-5773]", () => {
+        it("Test body", () => {
 
             cy.stepInfo("1. Pre-condition: Fill in Residential Units and GBA on Property > Summary form");
             _NavigationSection.navigateToPropertySummary();
