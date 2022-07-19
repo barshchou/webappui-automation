@@ -8,7 +8,7 @@ const _compAdjustments = {
     marketConditions: 0,
 };
 
-const _cumulativePricePerSF = "$1";
+const _cumulativePricePerSF = "$118";
 
 
 export default {
