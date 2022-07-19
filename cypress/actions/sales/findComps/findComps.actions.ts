@@ -272,7 +272,7 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
     }
 
     clearNumericInputNewComp(elementAlias: string): FindCompsActions {
-        cy.get(`@${elementAlias}`, { includeShadowDom: true }).clear({ force: true });
+        cy.get(`@${elementAlias}`, { includeShadowDom: true }).realClick().type("4235", { force: true }).clear({ force: true });
         return this;
     }
 
@@ -286,7 +286,7 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
         else{
             cy.get(`@${elementAlias}`, { includeShadowDom: true }).focus();
         }
-        cy.get(`@${elementAlias}`, { includeShadowDom: true }).realType(`{enter}${numberOfUnits}`, { pressDelay:45, delay: 50 });
+        cy.get(`@${elementAlias}`, { includeShadowDom: true }).realType(`{enter}${numberOfUnits}`, { pressDelay: 45, delay: 50 });
         this.verifyNumericInputNewComp(elementAlias, numberOfUnits);
         return this;
     }
