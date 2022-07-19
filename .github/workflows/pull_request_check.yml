@@ -15,7 +15,7 @@ jobs:
         with:
           token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
 
-      - name: Install dependecies
+      - name: Install dependencies
         run: npm install
 
       - name: Run tsc:check
@@ -44,7 +44,7 @@ jobs:
         with:
           token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
 
-      - name: Install dependecies
+      - name: Install dependencies
         run: npm install
 
       - name: Define env and url variables

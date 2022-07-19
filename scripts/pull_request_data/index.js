@@ -1,6 +1,6 @@
 const { getFlagValue, tokenFlag, prNumberFlag, dataFlag,
-    verifyArguments, verifyDataFlag} = require("./processFunctions");
-const {makeRequestPrintData} = require("./printData");
+    verifyArguments, verifyDataFlag } = require("./processFunctions");
+const { makeRequestPrintData } = require("./printData");
 
 verifyArguments();
 

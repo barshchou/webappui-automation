@@ -6,6 +6,10 @@ exports.tokenFlag = _tokenFlag;
 exports.prNumberFlag = _prNumberFlag;
 exports.dataFlag = _dataFlag;
 
+/**
+ * @param {string} flag flag, that is passed to command line
+ * @returns {string} Value of passed flag
+ */
 const _getFlagValue = (flag) => {
     let flagIndex;
     for (let i = 0; i < process.argv.length; i++) {
@@ -19,6 +23,9 @@ const _getFlagValue = (flag) => {
 
 exports.getFlagValue = _getFlagValue;
 
+/**
+ * @description This function checks, that all necessary flags for script are passed to command line, throws Error, if not
+ */
 exports.verifyArguments = () => {
     const stringArguments = process.argv.toString();
     const isFlagsPresent = stringArguments.includes(_tokenFlag) && stringArguments.includes(_prNumberFlag)
@@ -26,6 +33,9 @@ exports.verifyArguments = () => {
     if (!isFlagsPresent) throw new Error("You haven't entered all necessary flags!");
 };
 
+/**
+ * @description This function verifies --data flag value, only 'env' || 'url' || 'customEnv' are allowed
+ */
 exports.verifyDataFlag = () => {
     const dataValue = _getFlagValue(_dataFlag);
     const isCorrectValue = dataValue === "env" || dataValue === "url" || dataValue === "customEnv";
