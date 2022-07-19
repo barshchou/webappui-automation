@@ -62,5 +62,7 @@ describe("[QA-5771] Historical expense Payroll & Benefits Per SF is correctly ca
                 Income._ExpenseForecastActions.Page.forecastItemCard(
                     Income._ExpenseForecastActions.getItemNameForAverage(
                         testData.actualPayrollAndBenefitsItem.name)), testData.payrollAndBenefitsPerSfCardSnapshotName, { padding: [ 10, 100 ] });
+
+            deleteReport(testData.reportCreationData.reportNumber);
         });
     });
