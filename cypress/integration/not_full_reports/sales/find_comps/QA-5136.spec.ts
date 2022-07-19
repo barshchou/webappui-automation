@@ -51,30 +51,30 @@ describe(`Check the order of comps in the export when 'custom' dropdown is chose
         cy.stepInfo(`5. [QA-5136] -> User open report`);
         Cypress.config().baseUrl = null;
         cy.task("getFilePath", { _reportName: testData.reportCreationData.reportNumber, _docx_html: "html" })
-        .then(file => {
-            cy.log(<string>file);
-            cy.visit(<string>file);
+            .then(file => {
+                cy.log(<string>file);
+                cy.visit(<string>file);
          
-            cy.readFile(`./${mapKeysUtils.sales_comps_addresses}.txt`).then(data => {
+                cy.readFile(`./${mapKeysUtils.sales_comps_addresses}.txt`).then(data => {
 
-                // ernst: this step will be uncommented/removed when behavior will be explained
-                // cy.stepInfo(`5. [QA-5136] -> User see that the order of Selected Comps
-                // in 'Comparable Sales Adjustment Grid' section  are the same as the order on Sales Adjustment Grid`);
-                // cy.contains("Comparable Sales Adjustment Grid").next()
-                // .scrollIntoView().contains("Address")
-                // .parents("tr").find("p").spread((...addresses) => {
-                //     addresses = addresses.map(a => a.innerText).splice(-2).map(a => a.split(",")[0]);
-                //     cy.log(<any>addresses);
-                //     expect(JSON.parse(data)).to.deep.equal(addresses);
-                // });
+                    // ernst: this step will be uncommented/removed when behavior will be explained
+                    // cy.stepInfo(`5. [QA-5136] -> User see that the order of Selected Comps
+                    // in 'Comparable Sales Adjustment Grid' section  are the same as the order on Sales Adjustment Grid`);
+                    // cy.contains("Comparable Sales Adjustment Grid").next()
+                    // .scrollIntoView().contains("Address")
+                    // .parents("tr").find("p").spread((...addresses) => {
+                    //     addresses = addresses.map(a => a.innerText).splice(-2).map(a => a.split(",")[0]);
+                    //     cy.log(<any>addresses);
+                    //     expect(JSON.parse(data)).to.deep.equal(addresses);
+                    // });
 
-                cy.stepInfo(`5. [QA-5136] -> User see that the order of Selected Comps
-                            in 'Comparable Sales Outline' section are the same as the order on Sales Adjustment Grid`);
-                testData.compsToAdd.forEach(index => {
-                    cy.contains(`Comparable Sale ${index+1}`).scrollIntoView().next()
-                        .contains(JSON.parse(data)[index]).should("exist");
+                    cy.stepInfo(`5. [QA-5136] -> User see that the order of Selected Comps
+                                in 'Comparable Sales Outline' section are the same as the order on Sales Adjustment Grid`);
+                    testData.compsToAdd.forEach(index => {
+                        cy.contains(`Comparable Sale ${index+1}`).scrollIntoView().next()
+                            .contains(JSON.parse(data)[index]).should("exist");
+                    });
                 });
             });
-        });
     });
 });
