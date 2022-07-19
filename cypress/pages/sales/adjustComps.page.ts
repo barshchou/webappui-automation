@@ -92,6 +92,10 @@ class AdjustCompsPage extends BasePage {
     get ModalSalesCompInfo(){
         return cy.get('[id="salesApproach.salesAdjustmentGrid-final-form"]');
     }
+
+    get CellCompHeader(){
+        return cy.get('[data-qa="sales-adjustment-grid-header-row"] [data-qa="comp-header-cell"]');
+    }
 }
 
 export default new AdjustCompsPage();
