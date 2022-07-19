@@ -6,7 +6,7 @@ import { createReport, deleteReport } from "../../../../actions/base/baseTest.ac
 import mapKeysUtils from '../../../../utils/mapKeys.utils';
 import { _map } from '../../../../support/commands';
 
-describe(`[QA-5136] Check when "custom" dropdown is selected user can drag&drop comps`, 
+describe(`Check when "custom" dropdown is selected user can drag&drop comps`, 
 { tags: [ "@sales", "@find_comps", "@comp_plex" ] }, () => {
     
     it("Test body", () => {
@@ -44,6 +44,7 @@ describe(`[QA-5136] Check when "custom" dropdown is selected user can drag&drop 
             cy.get(`@comps_`).then(_comps => cy.log(<any>_comps));
 
             cy._mapGet(mapKeysUtils.sales_comps_addresses).then(_addresses => {
+                cy.writeFile(`./${mapKeysUtils.sales_comps_addresses}.txt`, _addresses);
                 expect(_addresses).to.deep.equal(comps);
             });
         });
@@ -59,8 +60,8 @@ describe(`[QA-5136] Check when "custom" dropdown is selected user can drag&drop 
     });
 
     it.skip("debug", () => {
-        const addresses = [ "45 East 45th Street", "8 Spruce Street" ];
-        // cy.wrap(addresses).as("addr");
+        const addresses = [ "45 East 45 Street", "8 Spruce Street" ];
+
         cy.get("body").then(() => {
             _map.set("addr", addresses);
         });
@@ -73,14 +74,22 @@ describe(`[QA-5136] Check when "custom" dropdown is selected user can drag&drop 
         .then(file => {
             cy.log(<string>file);
             cy.visit(<string>file);
-            // cy.get("@addr").then(val => cy.log(val));
-            cy.get("body").then(() => cy.log(_map.get(mapKeysUtils.sales_comps_addresses)));
-            cy.contains("Comparable Sales Adjustment Grid").next()
-            .scrollIntoView().contains("Address")
-            .parents("tr").find("p").spread((...addresses) => {
-                addresses = addresses.map(a => a.innerText).splice(-2).map(a => a.split(",")[0]);
-                cy.log(<any>addresses);
-                expect(_map.get(mapKeysUtils.sales_comps_addresses)).to.deep.equal(addresses);
+         
+            cy.readFile(`./${mapKeysUtils.sales_comps_addresses}.txt`).then(data => {
+
+                // ernst: this step will be uncommented when behavior will be explained
+                // cy.contains("Comparable Sales Adjustment Grid").next()
+                // .scrollIntoView().contains("Address")
+                // .parents("tr").find("p").spread((...addresses) => {
+                //     addresses = addresses.map(a => a.innerText).splice(-2).map(a => a.split(",")[0]);
+                //     cy.log(<any>addresses);
+                //     expect(JSON.parse(data)).to.deep.equal(addresses);
+                // });
+
+                testData.compsToAdd.forEach(index => {
+                    cy.contains(`Comparable Sale ${index+1}`).scrollIntoView().next()
+                    .contains(JSON.parse(data)[index]).should("exist");
+                });
             });
         });
     });
