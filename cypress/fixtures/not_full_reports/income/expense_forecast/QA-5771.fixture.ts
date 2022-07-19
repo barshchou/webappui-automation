@@ -81,5 +81,4 @@ export default {
     periods,
     periodsMonth,
     payrollAndBenefitsPerSfCardSnapshotName,
-    basis: _basis
 };
