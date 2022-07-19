@@ -41,8 +41,8 @@ describe(`Check the order of comps in the export when 'custom' dropdown is chose
         cy.stepInfo(`5. [QA-5136] -> User navigates to Review&Export and downloads report`);
         _NavigationSection.Actions.openReviewAndExport();
         ReviewExport.Actions.generateDocxReport()
-        .waitForReportGenerated()
-        .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
+            .waitForReportGenerated()
+            .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
 
         deleteReport(testData.reportCreationData.reportNumber);
     });
@@ -72,7 +72,7 @@ describe(`Check the order of comps in the export when 'custom' dropdown is chose
                             in 'Comparable Sales Outline' section are the same as the order on Sales Adjustment Grid`);
                 testData.compsToAdd.forEach(index => {
                     cy.contains(`Comparable Sale ${index+1}`).scrollIntoView().next()
-                    .contains(JSON.parse(data)[index]).should("exist");
+                        .contains(JSON.parse(data)[index]).should("exist");
                 });
             });
         });
