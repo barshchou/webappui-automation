@@ -19,7 +19,7 @@ export default {
     unitsNumber: 2,
     numberOfComparables: 3,
     rentPSFs: _rentPSFs,
-    compGroupName: "TestCompGroup_4189",
+    compGroupName: "TestCompGroup_5295-97_99",
     rentPSFLabelName: "Rent/SF/Month",
     unitsOfMeasure: Enums.UNITS_OF_MEASURE.perSquareFootPerYear,
     calculationTypePercent: Enums.CALCULATION_TYPE.percent,
