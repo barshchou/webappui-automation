@@ -255,7 +255,6 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
             expect(response.body.data.findTransactionsByIdsAndVersions.map(e => e.id))
             .to.include.members(_map.get(mapKeysUtils.sales_comps_ids));
         });
-        cy.pause();
         return this;
     }
 
