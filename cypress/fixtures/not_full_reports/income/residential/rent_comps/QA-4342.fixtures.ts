@@ -1,3 +1,4 @@
+import Enums from "../../../../../enums/enums";
 import ReportDataCreator from "../../../../data_creator/reportData.creator";
 
 const uncategorizedDataFixture = () => {
@@ -10,7 +11,7 @@ const uncategorizedDataFixture = () => {
         averageValue: 13500,
         maxValue: 13500,
         subjectColumnText: "Subject$0$0$0",
-        devForecastLabel: "Developer's Forecast",
+        devForecastLabel: Enums.RENT_ROLL_OPTIONS_CHECKBOXES.developer,
         devForecastText: "Subject Developer's Forecast$0$0$0",
         bathroomsLabel: "Bathrooms"
     };
@@ -39,7 +40,7 @@ export const bedroomCategoryData = () => {
 
 export default {
     reportCreationData: ReportDataCreator.getReportData("4342"),
-    includePerRoomCheckbox: "Include Per Room Analysis in Report",
+    includePerRoomCheckbox: Enums.RENT_ROLL_OPTIONS_CHECKBOXES.include,
     uncategorizedData: uncategorizedData(),
     bedroomCategory: bedroomCategoryData()
 };

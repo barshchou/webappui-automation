@@ -5,11 +5,9 @@ const _reportCreationData = ReportDataCreator.getReportData("4110", {
     incomeValue: Enums.INCOME_TYPE.both
 });
 
-const comparableFixture = () => {
-    return {
-        address: "200 West 78 Street",
-    };
-};
+const compAddress = "626 1 Avenue";
+const _cumulativePricePerUnit = "$237,063";
+
 
 const _compAdjustments = {
     propertyRights: -70,
@@ -21,7 +19,8 @@ const _compAdjustments = {
 export default {
     reportCreationData: _reportCreationData,
     comparablesAdjustments: _compAdjustments,
-    comparable: Object.freeze(comparableFixture()),
     calculationUnits: "Per Total Units",
-    basis: "Price per Unit"
+    basis: "Price per Unit",
+    cumulativePricePerUnit: _cumulativePricePerUnit,
+    compAddress
 };

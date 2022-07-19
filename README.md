@@ -13,6 +13,7 @@
   - [GH Actions debug](#gh_actions_debug)
   - [Validation of export](#export_validation)
   - [Env selection (dev/staging/prod/custom)](#env_selection)
+  - [AWS secrets (User roles and etc)](#aws_secrets)
 - [Useful VS Code extensions](#vs_code_extensions)
 - [Using Husky](#husky_usage)
 
@@ -68,9 +69,10 @@ We don't have strict rules for our development flow. Everything is pretty standa
   1. You branching from master (**always push empty branch after its creation, it will be a signal that you at least started work on a ticket**)
   2. If you develop test / framework feature - name branch in next notation **feature/your_name/jira_ticket_id** (for example, feature/Ernst/QA-666)
   - If you developing hotfix -> **hotfix/your_name/ticket_name_OR_hotfix_name**
-  3. Assign Ernst and Vlad as a reviewers (for now, later review can do anyone else). **Get all approvals.** (for the start, it is important for us to check all new code since we want to follow already declared codestyle rules and structure). 
+  3. Assign at least 2 reviewers for your pull request. **Get at least 2 approvals.**. 
   4. If you want to add improvements into someone's PR - branch from feature branch, make changes and create to PR into parents branch (naming: **feature/your_name/ticket_id__pr_changes**). *You can commit into someones branch*, **but you are allowed to do that in exceptional cases** (for example, PR almost merged and you need to run and apply ESLint changes) 
   5. When you got approvals - merge branch by yourself or ping someone who was a reviewer.
+  6. Use the pull request template to create PR, it is **NECESSARY** to check only 1 environment checkbox to trigger pull_request_check workflow appropriately. If you choose to run your tests on custom env, paste the link to customEnvLink URL section. This will trigger to run tests from your PR to check, if they work
 
   **NOTE**: 
   - **please, while developing anything** - run `npm run tsc:watch` command in separate terminal instance (or split terminal into two). This will make TypeScript compilier keep an eye on your files changes and alert you when you forget, for example, update methods names after merge.
@@ -146,6 +148,25 @@ npm run cy:open -- --env url=custom,customUrl='https://playwright.dev'
 
 In CI we have check whether `url==custom` and in that case assign `customUrl`.
 
+Previously, we were selecting specific url to run the tests with help of [Cypress environmental variables](https://docs.cypress.io/guides/guides/environment-variables), but our `baseUrl` in `cypress.json` wasn't set. It [wasn't a good approach](https://docs.cypress.io/guides/references/best-practices#Setting-a-global-baseUrl), but it allowed us dynamically set the url to visit and url for api requests. **BUT ALSO** our `before/beforeEach` **hooks were executing two time** (two time of login through api). And if we would try to create report - we would create two report and were working in the second one.   
+
+### AWS secrets (User Roles and etc) <a id="aws_secrets"></a>
+
+We have tests which requires login as specific user (Lead Appraiser, Appraiser user, Admin and etc), you can find them by `@permissions_roles` tag. 
+
+We could've store these secrets in GH Actions secrets, but in that case we won't have an option to edit them (especially, if we store a pretty big `json`).
+
+That's why we need AWS Secret Manager. We set there secret `Github/Cypress/User_Roles` which store data about User Roles (their usernames and passwords). 
+If you want to edit/add secrets: 
+1. Go to the AWS (use AWS SSO, which you can find in `Google apps` in your Bowery Gmail account).
+2. Select `GoogleSAMLPowerUserRole` in `bowery-prod` section.
+3. Find AWS Secret Manager in Search and navigate there.
+4. Paste secret name you want to edit or create your own (**IMPORTANT:** Naming convention for such secrets should be next - Github/Cypress/**, like `Github/Cypress/User_Roles`).
+
+Code of custom action can be found [here](https://github.com/Bowery-RES/action-run-e2e-tests). Flow of credentials exposing into execution environment (this is why we don't need to write or somehow add secret info into codebase):
+1. Connect to AWS Secret Manager (step "Configure secrets") from **allowed GH repository** (private info, configurable by privacy policy in AWS) with **specific role** (public info).
+2. Reading AWS secrets and emmiting them into environment (step "Set secrets to GH environment") That's why Cypress-specific creds need to have `CYPRESS_` prefix to be accessible with `Cypress.env` method).
+3. That's it! Variables was read from AWS and set to the environment in runtime. From that moment they are accessible to our test.
 
 ## Useful VS Code extensions <a id="vs_code_extensions"></a>
 

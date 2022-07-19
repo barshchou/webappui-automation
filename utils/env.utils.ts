@@ -59,4 +59,10 @@ const _validateCustomUrl = (customUrl: string): string => {
  * Example: from `https://bowery-development.herokuapp.com/` -> to `https://bowery-development.herokuapp.com`
  * @param str Url string
  */
-const _trimSlash = (str: string) => new URL(str).origin; 
+const _trimSlash = (str: string) => new URL(str).origin;
+
+/**
+ * Skipping test suite from execution if current execution env is `prod`.
+ * Necessary for tests where we manipulate with sensetive data
+ */
+export const conditionalDescribe: Mocha.PendingSuiteFunction | Mocha.SuiteFunction = isProdEnv() ? describe.skip : describe;

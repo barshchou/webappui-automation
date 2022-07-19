@@ -28,6 +28,10 @@ on:
         description: Run tests with specific tags
         required: false
         default: grep=,grepTags=,burn=
+      ref:
+        type: string
+        description: Select branch, tag, commit ref
+        required: false
         
 jobs:
   Not-full-reports-run-DEBUG:
@@ -53,16 +57,9 @@ jobs:
           spec_file: ${{ github.event.inputs.spec_file }}
           tags: ${{ github.event.inputs.tags }}
           record_key: ${{ secrets.CURRENTS_RECORD_KEY }}
-        env: 
-          CYPRESS_WEBAPP_APPRAISER_USERNAME: ${{ secrets.WEBAPP_APPRAISER_USERNAME }}
-          CYPRESS_WEBAPP_APPRAISER_PASSWORD: ${{ secrets.WEBAPP_APPRAISER_PASSWORD }}
-          CYPRESS_WEBAPP_INSPECTOR_USERNAME: ${{ secrets.WEBAPP_INSPECTOR_USERNAME }}
-          CYPRESS_WEBAPP_INSPECTOR_PASSWORD: ${{ secrets.WEBAPP_INSPECTOR_PASSWORD }}
-          CYPRESS_WEBAPP_ADMIN_USERNAME: ${{ secrets.WEBAPP_ADMIN_USERNAME }}
-          CYPRESS_WEBAPP_ADMIN_PASSWORD: ${{ secrets.WEBAPP_ADMIN_PASSWORD }}
-          CYPRESS_WEBAPP_LEAD_APPRAISER_USERNAME: ${{ secrets.WEBAPP_LEAD_APPRAISER_USERNAME }}
-          CYPRESS_WEBAPP_LEAD_APPRAISER_PASSWORD: ${{ secrets.WEBAPP_LEAD_APPRAISER_PASSWORD }}
-          CYPRESS_WEBAPP_ROLE_TEST_USERNAME: ${{ secrets.WEBAPP_ROLE_TEST_USERNAME }}
-          CYPRESS_WEBAPP_ROLE_TEST_PASSWORD: ${{ secrets.WEBAPP_ROLE_TEST_PASSWORD }}
-          CYPRESS_WEBAPP_TEST_USERNAME: ${{ secrets.WEBAPP_TEST_USERNAME }}
-          CYPRESS_WEBAPP_TEST_PASSWORD: ${{ secrets.WEBAPP_TEST_PASSWORD }}
+          ref: ${{ github.event.inputs.ref }}
+        env:
+          DD_CIVISIBILITY_AGENTLESS_ENABLED: true
+          DD_API_KEY: ${{ secrets.DD_API_KEY }}
+          DD_ENV: ${{ github.event.inputs.env }}
+          DD_SERVICE: 'webapp'
