@@ -4,7 +4,6 @@ import NavigationSection from "./navigationSection.actions";
 import { createPayload } from "../../api/report_payloads/462Avenue1NY.payload";
 import mapKeysUtils from "../../utils/mapKeys.utils";
 import { _HomePage } from ".";
-import { gqlOperationNames } from "../../utils/alias.utils";
 
 /**
  * Login action
@@ -57,11 +56,11 @@ export const deleteReport = (reportNumber) => {
 
 export const salesInterceptions = () => {
     cy.intercept('POST', '/graphql', req => {
-        aliasQuery(req, gqlOperationNames.searchSalesTransactions);
-        aliasQuery(req, gqlOperationNames.findTransactionByIdAndVersion);
-        aliasQuery(req, gqlOperationNames.findSalesComps);
-        aliasQuery(req, gqlOperationNames.findSingleSalesComp);
-        aliasQuery(req, gqlOperationNames.updateJob);
-        aliasQuery(req, gqlOperationNames.findTransactionsByIdsAndVersions);
+        aliasQuery(req, "searchSalesTransactions");
+        aliasQuery(req, "findTransactionByIdAndVersion");
+        aliasQuery(req, "findSalesComps");
+        aliasQuery(req, "findSingleSalesComp");
+        aliasQuery(req, "updateJob");
+        aliasQuery(req, "findSalesCompsByEventIds");
     });
 };

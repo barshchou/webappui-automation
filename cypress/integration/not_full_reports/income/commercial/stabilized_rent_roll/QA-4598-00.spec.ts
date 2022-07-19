@@ -28,7 +28,7 @@ describe(`[QA-4598][QA-4599][QA-4600] Verify the suggested text dropdown in the 
         Income._CommercialManager.StabilizedRentRoll.clickEditDiscussionButton();
 
         cy.stepInfo("3. Enter the “=“ and select the an option. Verify each option.");
-        testData.asIsChips.forEach((chip) => {
+        testData.asIschips.forEach((chip) => {
             Income._CommercialManager.StabilizedRentRoll.editDiscussionTextArea(`=${chip.typeSuggestValue}`, false)
             .clickNarrativeSuggestions(chip.suggestionName)
             .verifyCommentaryContainsText(chip.verifySuggest);
@@ -48,7 +48,7 @@ describe(`[QA-4598][QA-4599][QA-4600] Verify the suggested text dropdown in the 
             cy.log(<string>file);
             cy.stepInfo("4. Verify the linked chips on export");
             cy.visit(<string>file);
-            testData.asIsChips.forEach(chip => {
+            testData.asIschips.forEach(chip => {
                 let expectedText = typeof chip.verifyExport ===  "number" ? `${numberWithCommas(chip.verifyExport)}`: chip.verifyExport;
                 cy.contains("Commercial Stabilized Rent Roll").next().scrollIntoView().should("include.text", expectedText);
             });
@@ -58,7 +58,7 @@ describe(`[QA-4598][QA-4599][QA-4600] Verify the suggested text dropdown in the 
     it("[QA-4599] As Stabilized", () => {
         Cypress.config().baseUrl = url;
         cy.stepInfo(`Preconditions: The mixed report is created and several commercial units are added.`);
-        createReport(testData.reportCreationDataAsStabilized);
+        createReport(testData.reportCreationDataAsStablized);
 
         _NavigationSection.navigateToPropertySummary();
         Property._Summary.enterNumberOfCommercialUnits(testData.numberOfCommercialUnits)
@@ -84,8 +84,8 @@ describe(`[QA-4598][QA-4599][QA-4600] Verify the suggested text dropdown in the 
 
         _NavigationSection.openReviewAndExport();
         ReviewExport.generateDocxReport().waitForReportGenerated()
-            .downloadAndConvertDocxReport(testData.reportCreationDataAsStabilized.reportNumber);
-        deleteReport(testData.reportCreationDataAsStabilized.reportNumber);
+            .downloadAndConvertDocxReport(testData.reportCreationDataAsStablized.reportNumber);
+        deleteReport(testData.reportCreationDataAsStablized.reportNumber);
     });
 
     it("[QA-4599] Check export", () => {

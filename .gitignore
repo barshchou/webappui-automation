@@ -132,5 +132,4 @@ cypress/gh_artifacts/
 .act/.secrets
 .act/debug.json
 
-# spec for debug something
 test.spec.ts

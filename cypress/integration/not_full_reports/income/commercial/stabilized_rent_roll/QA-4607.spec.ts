@@ -36,7 +36,7 @@ describe("Verify the Commercial Stabilized Rent Roll table",
             searchNewCompByAddress(testData.address);
         testData.rentCompFields.forEach(field => {
             if(field.type == "input") {
-                Income._CommercialManager.RentComps.fillInRentCompFieldInput(field.name, field.value, true);
+                Income._CommercialManager.RentComps.fillInRentCompFieldInput(field.name, field.value);
             } else {
                 Income._CommercialManager.RentComps.chooseRentCompFieldDropdownOption(field.name, field.value);
             }
@@ -47,7 +47,7 @@ describe("Verify the Commercial Stabilized Rent Roll table",
 
         cy.stepInfo(`6. On the Income > Commercial > Rent Reconciliation, the Market Rent Conclusion 
                     field is filled with any value`);
-        _NavigationSection.clickRentReconciliationButton()
+        _NavigationSection.clickRentReconcillationButton()
             .clickYesIfExist();
         Income._CommercialManager.RentReconciliation.addMarketRentConclusion(testData.marketRentConclusion);
     });

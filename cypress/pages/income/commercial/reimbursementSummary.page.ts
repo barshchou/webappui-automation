@@ -1,4 +1,3 @@
-import { BoweryReports } from "../../../types/boweryReports.type";
 import BasePage from "../../base/base.page";
 
 class CommercialReimbursementSummaryPage extends BasePage {
@@ -19,40 +18,10 @@ class CommercialReimbursementSummaryPage extends BasePage {
 
     reimbursementKnownInformation(value: string) { return cy.xpath(`//input[@name = 'knownInformation.dollarAmountType'][@value = '${value}']`); }
 
-    getReimbursementByRow(index = 0, columnsId = "monthly", reimbursementIndex = 0) { 
-        return cy.get(`[name = 'reimbursements[${reimbursementIndex}].unitReimbursements[${index}].${columnsId}']`); 
-    }
+    getReimbursementByRow(index = 0, knownInformation = "monthly") { return cy.get(`[name = 'reimbursements[0].unitReimbursements[${index}].${knownInformation}']`); }
 
     getVCLossInputByRow(index = 0) { return cy.get(`[name='reimbursements[${index}].vcLoss']`); }
 
-    getAppraiserForecastGross(expenseUIName: string, unitIndex: number) { 
-        return cy.xpath(`(//*[.='${expenseUIName} (% of Appraiser Forecast)']//following::tbody[1]/tr/td[3])[position() < last()]`).eq(unitIndex);
-    }
-
-    getAnnualReimbursement(expenseUIName: string, unitIndex: number, reimbursementType: BoweryReports.ReimbursementType, 
-        knownInformation: BoweryReports.KnownInformation) {
-        let annualReimbursementColumnId = 3;
-        if (reimbursementType == 'percentOfAppraiserForecast') {
-            annualReimbursementColumnId = 5;
-        } else if (knownInformation == 'Monthly') {
-            annualReimbursementColumnId = 4;
-        }
-        return cy.xpath(`(//*[.='${expenseUIName} (% of Appraiser Forecast)']//following::tbody[1]/tr/td[${annualReimbursementColumnId}])`)
-            .eq(unitIndex);
-    }
-
-    getGeneratedCommentaryByExpenseType(expenseUIName: string, reimbursementIndex = 0) {
-        return cy.xpath("//div[p[.='"+ expenseUIName + " (% of Appraiser Forecast)']]//following-sibling::div[1]"+
-            "//p[@data-qa='reimbursements[" + reimbursementIndex + "].discussion.commentary-generated-text']");
-    }
-
-    getAnnualReimbursementTotal(expenseUIName: string) {
-        return cy.xpath(`//div[p[.='${expenseUIName} (% of Appraiser Forecast)']]//following-sibling::div[1]//tbody/tr[last()]/td[last()]`);
-    }
-
-    getReimbursementItemHeader(expenseUIName: string) {
-        return cy.xpath(`//div[p[.='${expenseUIName} (% of Appraiser Forecast)']]`);
-    }
 }
 
 export default new CommercialReimbursementSummaryPage();

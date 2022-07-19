@@ -1,6 +1,6 @@
 import { BoweryReports } from "../../../../types/boweryReports.type";
 import ReportDataCreator from "../../../data_creator/reportData.creator";
-import { getPreviousQuarterFromQuarter, getQuarter, getTodayDateString } from "../../../../../utils/date.utils";
+import { getQuarter, getTodayDateString } from "../../../../../utils/date.utils";
 import { BoweryAutomation } from "../../../../types/boweryAutomation.type";
 
 const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("4258_59");
@@ -19,6 +19,5 @@ const _marketResearch: BoweryReports.MarketResearch = {
 export default {
     reportCreationData: _reportCreationData,
     marketResearch: _marketResearch,
-    quarterToChange: getQuarter(getTodayDateString()),
-    quarterToVerify: getPreviousQuarterFromQuarter(getQuarter(getTodayDateString()))
+    quarterToChange: getQuarter(getTodayDateString(), true, 1)
 };

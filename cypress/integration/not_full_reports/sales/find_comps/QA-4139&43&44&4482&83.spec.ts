@@ -2,12 +2,13 @@ import testData from "../../../../fixtures/not_full_reports/sales/find_comps/QA-
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { Sales } from "../../../../actions";
-import { conditionalDescribe } from "../../../../../utils/env.utils";
+import { isProdEnv } from "../../../../../utils/env.utils";
 import { Alias } from "../../../../utils/alias.utils";
 /*
     # Uladzislau.Samykou
     This spec is conditional, because tests for Create Sales Comp feature should NOT be tested on PROD environment
  */
+const conditionalDescribe = isProdEnv() ? describe.skip : describe;
 const { pageElements } = Alias;
 
 conditionalDescribe("Group of tests for numeric inputs at create comp modal", 
@@ -16,7 +17,7 @@ conditionalDescribe("Group of tests for numeric inputs at create comp modal",
     beforeEach("Login, create report", () => {
         createReport(testData.reportCreationData);
         cy.stepInfo("Navigate to FindComps page and create new comp");
-        _NavigationSection.navigateToFindComps(true);
+        _NavigationSection.navigateToFindComps();
         Sales._FindComps.openAddNewComparableFormSearchResult(testData.compAddress)
             .selectDropdownOptionNewComp(Sales._FindComps.Page.conditionDropdown, testData.condition);
     });
@@ -60,9 +61,6 @@ conditionalDescribe("Group of tests for numeric inputs at create comp modal",
         deleteReport(testData.reportCreationData.reportNumber);
     });
 
-    /**
-     * ernst: Requires changes in Commercial Area* field to make it testable
-     */
     it("QA-4144: Verify the Commercial Area* field", () => {
         Sales._FindComps.Page.commercialAreaNewComp.should("not.exist");
         Sales._FindComps.selectDropdownOptionNewComp(Sales._FindComps.Page.comparableTypeDropdown, testData.comparableType);
@@ -87,8 +85,6 @@ conditionalDescribe("Group of tests for numeric inputs at create comp modal",
         Sales._FindComps.Page.netRentableAreaNewComp;
         Sales._FindComps.Page.createCompNumberCommercialUnits;
         Sales._FindComps.Page.commercialAreaNewComp;
-
-        Sales._FindComps.Page.editContentArrow.click();
         
         Sales._FindComps
             .enterNumericInputNewComp(pageElements.comp_plex.netRentableAreaNewComp, testData.spec4482.regularNumber)

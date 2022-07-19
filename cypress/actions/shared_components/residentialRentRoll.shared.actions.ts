@@ -1,7 +1,6 @@
 import BaseActions from "../base/base.actions";
 import ResidentialRentRollSharedPage from "../../pages/shared_components/residentialRentRoll.shared.page";
 import { getNumberFromDollarNumberWithCommas, numberWithCommas } from "../../../utils/numbers.utils";
-import rentRollPage from "../../pages/income/residential/rentRoll.page";
 
 export default class ResidentialRentRollSharedActions<T extends ResidentialRentRollSharedPage> extends BaseActions {
     Page: T;
@@ -55,13 +54,8 @@ export default class ResidentialRentRollSharedActions<T extends ResidentialRentR
         return this;
     }
 
-    verifyRoomsNumberByRow(roomsNumber: number | string, rowNumber = 0): this {
-        if (typeof roomsNumber === "string") {
-            this.Page.roomsCells.eq(rowNumber).should("have.text", 0);
-        } else {
-            const textToBe = Math.floor(roomsNumber);
-            this.Page.roomsCells.eq(rowNumber).should("have.text", textToBe);
-        }
+    verifyRoomsNumberByRow(roomsNumber: number, rowNumber = 0): this {
+        this.Page.roomsCells.eq(rowNumber).should("have.text", roomsNumber);
         return this;
     }
 
@@ -157,13 +151,8 @@ export default class ResidentialRentRollSharedActions<T extends ResidentialRentR
         return this;
     }
 
-    verifyBedroomsNumberByRow(bedroomsNumber: number | string, rowNumber: number): this {
-        if (typeof bedroomsNumber === "string") {
-            this.Page.bedroomsCells.eq(rowNumber).should("have.text", 0);
-        } else {
-            const textToBe = Math.floor(bedroomsNumber);
-            this.Page.bedroomsCells.eq(rowNumber).should("have.text", textToBe);
-        }
+    verifyBedroomsNumberByRow(bedroomsNumber: number, rowNumber: number): this {
+        this.Page.bedroomsCells.eq(rowNumber).should("have.text", bedroomsNumber);
         return this;
     }
 
@@ -268,30 +257,6 @@ export default class ResidentialRentRollSharedActions<T extends ResidentialRentR
                 this.verifyRentRoomCellValues(monthlyRents[i], numbersOfRooms[i], i);
             }
         }
-        return this;
-    }
-
-    verifyRentPSFValueByRow(isPerMonth = true, rowNumber = 0, isStabilized = false) {
-        const monthlyRentCellsToBe = (isStabilized === false) ? this.Page.monthlyRentCells.eq(rowNumber).invoke("text")
-            : this.Page.stabilizedMonthlyRentCells.eq(rowNumber).invoke("val");  
-        monthlyRentCellsToBe.then(monthlyRentText => {
-                const rentValue = getNumberFromDollarNumberWithCommas(monthlyRentText);
-                this.Page.squareFootageCells.eq(rowNumber).invoke("text").then(sfText => {
-                    const rentSFCellToBe = (isStabilized === false) ? rentRollPage.rentSFCell : rentRollPage.stabilizedRentSFCell;
-                    const footageValue = getNumberFromDollarNumberWithCommas(sfText);
-                    const rentPSFMonthly = `$${(rentValue / footageValue).toFixed(2)}`;
-                    const rentPSFAnnually = `$${((rentValue / footageValue) * 12).toFixed(2)}`;
-                    if (footageValue === 0) {
-                        rentSFCellToBe.eq(rowNumber).should("have.text", "$NaN");
-                    } else {
-                        if (isPerMonth) {
-                            rentSFCellToBe.eq(rowNumber).should("have.text", rentPSFMonthly);
-                        } else {
-                            rentSFCellToBe.eq(rowNumber).should("have.text", rentPSFAnnually);
-                        }
-                    }
-                });
-            });
         return this;
     }
 }

@@ -36,11 +36,9 @@ describe("Comparable Min, Max, Avg values for Repairs & Maintenance Per Unit are
         5.1 calculated as: Min, Max and Avg of range of values [Comp_Repairs & Maintenance / Residential Units]
         5.2 correctly displayed on slidebar`);
     Income.ExpenseForecast.Actions.verifyForecastItemCompMin(testData.repairsItem, testData.comparables)
-        .verifyForecastItemCompAverage(testData.repairsItem, testData.comparables)
-        .verifyForecastItemCompMax(testData.repairsItem, testData.comparables)
-        .hideHeader()
-        .clickSaveButton()
-        .verifyProgressBarNotExist();
+      .verifyForecastItemCompAverage(testData.repairsItem, testData.comparables)
+      .verifyForecastItemCompMax(testData.repairsItem, testData.comparables)
+      .hideExpenseForecastHeader();
 
     Income.ExpenseForecast.Actions.verifyProgressBarNotExist()
       .matchElementSnapshot(

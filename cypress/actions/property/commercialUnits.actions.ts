@@ -56,7 +56,7 @@ class CommercialUnitsActions extends BaseActionsExt<typeof commercialUnitsPage> 
     }
 
     clickRadioButtonByValueAndUnitIndex(group: BoweryReports.CommercialUnits.Groups,
-        value: BoweryReports.CommercialUnits.GroupsValues, index = 0): CommercialUnitsActions {
+        value: BoweryReports.CommercialUnits.GroupsValues, index = 0): this {
         this.clickRadioOrCheckbox(group, value, index)
             .verifyRadioIsChecked(group, value, index);
         if (value === "other") {

@@ -51,20 +51,18 @@ class CompGroupsActions extends BaseActionsExt<typeof compGroupsPage> {
      * Verifies that after dragging all elements there is no units left in unsorted group
     */
     dragAllCommercialUnitsIntoGroup(groupName: string, numberOfUnits = 1, index = 0): CompGroupsActions {
-        let subject = compGroupsPage.getDraggableElement(index); //always selects 1st element in group
+        let subject = compGroupsPage.getDragableElement(index); //always selects 1st element in group
         let commercialUnit = cy.get(subject);
         let target: string;
 
         for (let i = 0; i < numberOfUnits; i++) {
             if (i == 0){
-                target = compGroupsPage.getDroppableArea(groupName);
+                target = compGroupsPage.getDropableArea(groupName);
             } else {
-                target = compGroupsPage.getDroppableAreaDropped(groupName);
+                target = compGroupsPage.getDropableAreaDropped(groupName);
             }
             
             commercialUnit.dragAndDrop(subject, target);
-            // VB: For more than 2 units Drag and drop is too slow and we need to wait a bit between dnd actions.
-            cy.wait(500);
         }
 
         this.verifyAllItemsDragged();

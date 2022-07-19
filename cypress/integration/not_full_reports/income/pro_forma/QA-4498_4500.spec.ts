@@ -44,7 +44,7 @@ describe("Potential [USE(Property -> Commercial Units] Income -> PSF / Per Unit"
             Potential Commercial Income → Per Unit is calculated by the formula: Total / # of ResidentialUnits`);
         Income._ProFormaActions.verifyCategoryPerUnitTotal(
             `$${numberWithCommas(testData.perUnitCommercialIncome)}`, 
-            proFormaTypes.potentialUndeterminedCommercialIncome);
+            proFormaTypes.potentialUnderterminedCommercialIncome);
     });
 
     it("[QA-4499]", () => {
@@ -52,7 +52,7 @@ describe("Potential [USE(Property -> Commercial Units] Income -> PSF / Per Unit"
             Potential Commercial Income → PSF is calculated by the formula: Total / GBA`);
         Income._ProFormaActions.verifyCategoryPSFTotal(
             `$${numberWithCommas(testData.perSfCommercialIncome.toFixed(2))}`,
-            proFormaTypes.potentialUndeterminedCommercialIncome);
+            proFormaTypes.potentialUnderterminedCommercialIncome);
     });
 
     it("[QA-4498]", () => {
@@ -60,7 +60,7 @@ describe("Potential [USE(Property -> Commercial Units] Income -> PSF / Per Unit"
             Potential Commercial Income → Total is calculated by the formula: Total / GBA`);
         Income._ProFormaActions.verifyCategoryTotal(
             `$${numberWithCommas(testData.total)}`,
-            proFormaTypes.potentialUndeterminedCommercialIncome);
+            proFormaTypes.potentialUnderterminedCommercialIncome);
 
         cy.stepInfo(`4.1 Verify that Total is taken from Income → 
             Potential Gross Income → table → Potential Commercial Income`);

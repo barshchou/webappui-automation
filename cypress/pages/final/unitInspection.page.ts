@@ -7,9 +7,7 @@ class UnitInspectionPage extends BasePage {
 
     get readyForOccupancyDropdowns() {return cy.get("[data-qa*=readyForOccupancy] [data-qa=select-value]");}
 
-    getDropdownOptionByValue(value: string) {return cy.get(`li[data-value='${value}']`);}
-
-    getRowInUnitInspectionTable(row: string | number) {return cy.get(`*[data-qa="units[${row}]"]`);}
+    getDropdownOptionByValue(value) {return cy.get(`li[data-value='${value}']`);}
 }
 
 export default new UnitInspectionPage();

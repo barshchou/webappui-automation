@@ -3,7 +3,7 @@ import ReportDataCreator from "../../../data_creator/reportData.creator";
 
 const comparableFixture = () => {
     return {
-        address: "626 1 Avenue"
+        address: "200 West 78 Street"
     };
 };
 

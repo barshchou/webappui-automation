@@ -12,7 +12,6 @@ const _expenseType = Enums.PRO_FORMA_TYPES.realEstateTaxes;
 const _expenseTypeCellName = Enums.EXPENSE_CELL.realEstateTaxes;
 const _reimbursementType = Enums.REIMBURSEMENT_TYPES.dollarAmount as BoweryReports.ReimbursementType;
 const _knownInformation = Enums.KNOWN_INFORMATION.monthly as BoweryReports.KnownInformation;
-const _columnsId = Enums.REIMBURSEMENT_COLUMN_ID.monthly as BoweryReports.ReimbursementColumnsId;
 const _monthlyReimbursement = [ 20, 30, 46.07 ];
 
 const _annualReimbursement = () => {
@@ -50,11 +49,10 @@ export default {
     rentsPsf: _rentSf,
     expenseType: _expenseType,
     knownInformation: _knownInformation,
-    columnsId: _columnsId,
     monthlyReimbursement: _monthlyReimbursement,
     annualReimbursement: _annualReimbursementTotal(),
-    reimbursementPerSf: _reimbursementPerSf,
-    reimbursementPerUnit: _reimbursementPerUnit,
-    expenseTypeCellName: _expenseTypeCellName,
+    reimbursmentPerSf: _reimbursementPerSf,
+    reimbursmentPerUnit: _reimbursementPerUnit,
+    expenceTypeCellName: _expenseTypeCellName,
     reimbursementType: _reimbursementType
 };

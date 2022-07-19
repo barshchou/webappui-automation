@@ -1,9 +1,4 @@
-import { BoweryReports } from "../../types/boweryReports.type";
 import BasePage from "../base/base.page";
-
-type AdjustmentName = BoweryReports.SalesAdjustmentGrid.AdjustmentName;
-type RowsMarketAdjustment = BoweryReports.SalesAdjustmentGrid.RowsMarketAdjustment;
-type CumulativePrice = BoweryReports.SalesAdjustmentGrid.CumulativePrice
 
 class AdjustCompsPage extends BasePage {
     get calculationUnitsRadio() {return cy.get("[name=basisOfComparison]");}
@@ -34,31 +29,17 @@ class AdjustCompsPage extends BasePage {
 
     getMarketAdjustmentsRowCells(marketAdjName: string) {return cy.get(`[name*='adjustments.${marketAdjName}']`);}
 
-    getLocationAdjustmentsRowCells(locationAdjName: string) {return cy.get(`[name*='locationAdjustment.${locationAdjName}']`);}
-
-    get trendedPriceCells() {return cy.xpath("//*[starts-with(., 'Trended Price')]//following-sibling::td");}
-    
     get cumulativePriceCells() {return cy.xpath("//*[starts-with(., 'Cumulative Price')]//following-sibling::td");}
-    
-    get cellCumulativePriceValue() {return cy.xpath("//*[starts-with(., 'Cumulative Price')]//following-sibling::td");}
 
-    cellCumulativePriceName(basisName: CumulativePrice){
-        return cy.contains(`Cumulative Price Per ${basisName}`);
-    }
-    
     get adjustedPriceCells() {return cy.xpath("//*[starts-with(., 'Adjusted Price')]//following-sibling::td");}
 
     get netPropertyAdjustmentsCells() {return cy.xpath("//td[.='Net Property Adjustments']//following-sibling::td");}
 
     get marketAdjustmentsCells() {return cy.xpath("//td[.='Net Market Adjustments']//following-sibling::td");}
 
-    get totalLocationAdjustmentsCells() {return cy.xpath("//td[.=' Total Location Adjustments']//following-sibling::td");}
-
     get totalUtilityAdjustmentsCells() {return cy.xpath("//td[.='Total Utility Adjustments']//following-sibling::td");}
 
     getAllAdjustmentCellsByCompIndex(index: number) {return cy.get(`[name^='salesComps[${index}]']`);}
-
-    getAllLocationAdjustmentCellsByCompIndex(index: number) {return cy.get(`[name^='salesComps[${index}].adjustments.locationAdjustment']`);}
 
     getAllUtilitiesAdjustmentCellsByCompIndex(index: number) {return cy.get(`[name^='salesComps[${index}].adjustments.utilityAdjustment']`);}
 
@@ -75,23 +56,6 @@ class AdjustCompsPage extends BasePage {
     getPricePerBasisValue(basisName: string) {return cy.xpath(`//*[starts-with(., '${basisName}')]//following-sibling::td`);}
 
     get viewMarketDetails() { return cy.xpath("//div[text() = 'Market Adjustment']");}
-
-    getAdjustmentArrow(adjustmentName: AdjustmentName){
-        return cy.get(`[data-qa="expansion-row-${adjustmentName}"] [aria-label="Show more"]`);
-    }
-
-    getAdjustmentRow(adjustmentName: AdjustmentName, rowName: RowsMarketAdjustment){
-        return cy.get(`[data-qa="expansion-row-${adjustmentName}"] [data-qa="${rowName}"] a`);
-    }
-
-    /**
-     * ernst: this selector probably should move to comp-plex page objects
-     * or in base page (since its a shared page element)
-     * move it later
-     */
-    get ModalSalesCompInfo(){
-        return cy.get('[id="salesApproach.salesAdjustmentGrid-final-form"]');
-    }
 }
 
 export default new AdjustCompsPage();

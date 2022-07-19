@@ -2,11 +2,12 @@ import testData from "../../../../../../fixtures/not_full_reports/income/residen
 import { createReport, deleteReport } from "../../../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../../../actions/base";
 import { Income } from "../../../../../../actions";
-import { conditionalDescribe } from "../../../../../../../utils/env.utils";
+import { isProdEnv } from "../../../../../../../utils/env.utils";
 
 /**
  * On prod environment you cannot test editing of any comparables, so this test cannot be run on PROD env
  */
+const conditionalDescribe = isProdEnv() ? describe.skip : describe;
 
 conditionalDescribe("Base Itemized Unit Info table tests", { tags: [ "@residential", "@rent_comps",
         "@full_building_comps", "@unit_mix" ] }, () => {

@@ -51,9 +51,7 @@ describe("Historical expense Electricity Per SF is correctly calculated and disp
                 .verifyForecastItemByExpensePeriodType(testData.t12ElectricityItem, testData.buildingDescription, "Actual T12")
                 .verifyForecastItemByExpensePeriodType(testData.historicalElectricityItem, testData.buildingDescription, "Annualized Historical")
                 .verifyForecastItemByExpensePeriodType(testData.ownerProjectionElectricityItem, testData.buildingDescription, "Owner's Projection")
-                .hideHeader()
-                .clickSaveButton()
-                .verifyProgressBarNotExist();
+                .hideExpenseForecastHeader();
 
 
             cy.stepInfo(`

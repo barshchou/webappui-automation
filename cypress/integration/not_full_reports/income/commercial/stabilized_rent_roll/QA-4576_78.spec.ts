@@ -77,7 +77,7 @@ describe("[QA-4576][QA-4578] Verify the display of the Stabilized Rent Roll page
             }
         });
         Income._CommercialManager.RentComps.enterLeaseDate(testData.leaseDate)
-            .checkUnitOfMeasureRadioButton(testData.unitMeasureMonthly)
+            .checkUnitOfMeasureRadioButton(testData.unitMeasureMontly)
             .clickSubmitButton();
 
         cy.stepInfo(`Drag all comps into created group`);
@@ -86,8 +86,8 @@ describe("[QA-4576][QA-4578] Verify the display of the Stabilized Rent Roll page
          */
         Income._CommercialManager.RentComps.dragAllCommercialUnitsIntoGroup(testData.compGroup);
 
-        cy.stepInfo(`Navigate to Reconciliation and add market reconciliation`);
-        _NavigationSection.clickRentReconciliationButton()
+        cy.stepInfo(`Navigate to Reconcialltion and add market reconcillation`);
+        _NavigationSection.clickRentReconcillationButton()
             .clickYesIfExist();
         Income._CommercialManager.RentReconciliation.addMarketRentConclusion(testData.marketRentConclusion);
 

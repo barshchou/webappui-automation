@@ -1,9 +1,7 @@
 import BasePage from "./base.page";
 
 class NavigationSection extends BasePage {
-    get reportInfoButton() { return cy.get('#report-information');}
-
-    get reportAppraiserButton() { return cy.get('#appraisers'); }
+    get reportInfoButton() { return cy.get('[id="report-information"]');}
 
     get incomeApproachButton() { return cy.get("#income-approach svg"); }
 
@@ -97,13 +95,11 @@ class NavigationSection extends BasePage {
 
     get menuItemsProfileOrganization() {return cy.get("[role=menu] > li");}
 
-    get commercialReimbursementButton() {return cy.get("#commercial-reimbursement-summary");}
+    get comercialReimbursementButton() {return cy.get("#commercial-reimbursement-summary");}
 
     get residentialStabilizedRentRoll() {return cy.get("#residential-projected-rent-roll");}
 
-    get commercialRentReconciliationButton() {return cy.get(`#commercial-rent-reconciliation`);}
-
-    get certification() {return cy.get('#certification');}
+    get commercialRentReconcillationButton() {return cy.get(`#commercial-rent-reconciliation`);}
 }
 
 export default new NavigationSection();

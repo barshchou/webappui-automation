@@ -1,23 +1,22 @@
-const expensesForecast = {
+const expensesCardsNames = {
 
     expenseCardsIDArray: [ "insurance", "electricity", "fuel", "waterSewer", "repairsMaintenance", "payrollBenefits",
         "generalAdministrative", "legalProfessionalFees", "miscellaneous", "managementFees", "replacementReserves" ],
 
-    expenseCardsIncludeInProFormaCheckboxArray: [ "insurance", "electricity", "fuel", "waterAndSewer", "repairsAndMaintenance", "payrollAndBenefits",
-        "generalAndAdministrative", "legalAndProfessionalFees", "miscellaneous", "management", "reserves" ],
-
-    insurance: "insurance",
+    realEstateTaxes: "realEstateTaxes",
+    insurace: "insurance",
     electricity: "electricity",
     fuel: "fuel",
     waterAndSewer: "waterAndSewer",
+    utilities: "utilities",
     repairAndMaintenance: "repairsAndMaintenance",
     payrollBenefits: "payrollAndBenefits",
     generalAndAdministrative: "generalAndAdministrative",
     legalAndProfessional: "legalAndProfessionalFees",
-    miscellaneous: "miscellaneous",
+    miscelaneous: "miscellaneous",
     managementFees: "management",
-    replacementsAndReserves: "replacementReserves"
+    replacementsAndReserves: "reserves"
 };
 
 
-export default Object.freeze(expensesForecast);
+export default Object.freeze(expensesCardsNames);

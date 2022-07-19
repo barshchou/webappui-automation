@@ -8,7 +8,7 @@ export default {
             conclusionValue: Enums.VALUE_CONCLUSION_TYPE.AS_IS
         }),
     compAddress: "601 West 26th Street, New York, USA",
-    condition: "Shell",
+    selectItems: { condition: "Shell", source: "CoStar" },
     units:  { grossArea: 25645, numberOfUnits: 2 } as BoweryReports.BuildingDescription,
     saleInfo: {
         saleDate: "05-17-2022",

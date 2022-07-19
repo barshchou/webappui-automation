@@ -6,6 +6,7 @@ export default {
         incomeValue: Enums.INCOME_TYPE.both
     }),
     comparableFirst: {
+        address: "200 West 78 Street",
         otherUtilityAdjustment: 2,
     },
     compsAdj: {

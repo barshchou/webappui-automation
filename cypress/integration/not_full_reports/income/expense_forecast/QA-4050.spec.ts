@@ -14,7 +14,7 @@ describe(`Verify that Generated Commentary for Total Operating Expenses is updat
         NavigationSection.navigateToComparableExpenses();
         Income.ComparableExpenses.clickAddBlankColumnButton()
             .enterAddressByColumnIndex(testData.comparable.address)
-            .enterCityByColumnIndex(testData.comparable.city)
+            .enterLocationByColumnIndex(testData.comparable.location)
             .chooseExpensePeriodByColumnIndex(testData.comparable.period)
             .enterSquareFeetByColumnIndex(testData.comparable.squareFeet)
             .enterResidentialUnitsByColumnIndex(testData.comparable.resUnits)

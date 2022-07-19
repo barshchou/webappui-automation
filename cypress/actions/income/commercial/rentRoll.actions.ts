@@ -2,11 +2,10 @@ import rentRollPage from "../../../pages/income/commercial/rentRoll.page";
 import { numberWithCommas } from "../../../../utils/numbers.utils";
 import CommercialRentRollSharedComponent from "../../shared_components/commercialRentRoll.shared.actions";
 import { BoweryReports } from "../../../types/boweryReports.type";
-import Enums from "../../../enums/enums";
 
 class CommercialRentRollActions extends CommercialRentRollSharedComponent<typeof rentRollPage> {
 
-    verifyThatPageIsOpened(): CommercialRentRollActions {
+    verifyThatPageIsOpened(): this {
         rentRollPage.pageHeader.should("be.visible");
         cy.url().then(url => {
             let urlObj = new URL(url);
@@ -16,26 +15,26 @@ class CommercialRentRollActions extends CommercialRentRollSharedComponent<typeof
         return this;
     }
 
-    verifyBasisOfRentTooltip(): CommercialRentRollActions {
+    verifyBasisOfRentTooltip() {
         rentRollPage.basisOfRentField.should("exist");
         rentRollPage.basisOfRentTooltip.should("exist").trigger("mouseover");
         rentRollPage.basisOfRentTooltip.should("be.visible");
         return this;
     }
 
-    clickMonthlyBasisButton(backColor = "rgb(46, 67, 147)"): CommercialRentRollActions {
+    clickMonthlyBasisButton(backColor = "rgb(46, 67, 147)"): this {
         rentRollPage.monthlyBasisButton.should("not.have.css", "background-color", backColor)
             .click().should("have.css", "background-color", backColor);
         return this;
     }
 
-    clickAnnuallyBasisButton(backColor = "rgb(46, 67, 147)"): CommercialRentRollActions {
+    clickAnnuallyBasisButton(backColor = "rgb(46, 67, 147)"): this {
         rentRollPage.annuallyBasisButton.should("not.have.css", "background-color", backColor)
             .click().should("have.css", "background-color", backColor);
         return this;
     }
 
-    clickPerSquareFootButton(isFirstTime: boolean, backColor = "rgb(46, 67, 147)"): CommercialRentRollActions {
+    clickPerSquareFootButton(isFirstTime: boolean, backColor = "rgb(46, 67, 147)"): this {
         if (isFirstTime) {
             rentRollPage.perSquareBasisButton.should("have.css", "background-color", backColor).click();
         } else {
@@ -45,14 +44,14 @@ class CommercialRentRollActions extends CommercialRentRollSharedComponent<typeof
         return this;
     }
 
-    clickPerSquareFootPerMonthButton(backColor = "rgb(46, 67, 147)"): CommercialRentRollActions {
+    clickPerSquareFootPerMonthButton(backColor = "rgb(46, 67, 147)"): this {
        rentRollPage.perSquareFootPerMonthButton.should("not.have.css", "background-color", backColor)
            .click().should("have.css", "background-color", backColor);
        this.Page.rentPerSfPerMonthColumnName.scrollIntoView().should("exist");
        return this;
     }
 
-    verifyAllBasisButtons(backColor = "rgb(46, 67, 147)"): CommercialRentRollActions {
+    verifyAllBasisButtons(backColor = "rgb(46, 67, 147)"): this {
         this.clickPerSquareFootButton(true, backColor)
             .clickMonthlyBasisButton(backColor)
             .clickAnnuallyBasisButton(backColor)
@@ -61,7 +60,7 @@ class CommercialRentRollActions extends CommercialRentRollSharedComponent<typeof
         return this;
     }
 
-    chooseLeaseStatusByRowNumber(status: BoweryReports.LeaseStatus, rowNumber = 0): CommercialRentRollActions {
+    chooseLeaseStatusByRowNumber(status: BoweryReports.LeaseStatus, rowNumber = 0): this {
         rentRollPage.pageHeader.should("be.visible");
         rentRollPage.leaseStatusArrows.eq(rowNumber).should("be.visible").as("arrow");
         cy.get("@arrow").click({ force: true });
@@ -77,26 +76,26 @@ class CommercialRentRollActions extends CommercialRentRollSharedComponent<typeof
         return this;
     }
 
-    pasteToLeaseStatusByRow(textToPaste: string, rowNumber = 0): CommercialRentRollActions {
+    pasteToLeaseStatusByRow(textToPaste: string, rowNumber = 0): this {
         this.Page.leaseStatusCells.eq(rowNumber).invoke("text", textToPaste)
             .should("have.text", textToPaste);
         return this;
     }
 
-    pressDeleteLeaseStatusByRow(rowNumber = 0): CommercialRentRollActions {
-        this.Page.leaseStatusCells.eq(rowNumber).click().trigger("keydown", { keyCode: 46 })
+    pressDeleteLeaseStatusByRow(rowNumber = 0): this {
+        this.Page.leaseStatusCells.eq(rowNumber).trigger("keydown", { keyCode: 46 })
             .should("have.text", "");
         return this;
     }
 
-    chooseLeaseStatusesByRowNumber(statuses: BoweryReports.LeaseStatus[], rowNumber = 0): CommercialRentRollActions {
+    chooseLeaseStatusesByRowNumber(statuses: BoweryReports.LeaseStatus[], rowNumber = 0): this {
         statuses.forEach(status => {
             this.chooseLeaseStatusByRowNumber(status, rowNumber);
         });
         return this;
     }
 
-    checkIsInspectedCheckboxByRowNumber(rowNumber = 0): CommercialRentRollActions {
+    checkIsInspectedCheckboxByRowNumber(rowNumber = 0): this {
         rentRollPage.pageHeader.should("be.visible");
         this.verifyIsInspectedNotChecked(rowNumber);
         rentRollPage.isInspectedCheckboxes.eq(rowNumber).check({ force: true });
@@ -104,7 +103,7 @@ class CommercialRentRollActions extends CommercialRentRollSharedComponent<typeof
         return this;
     }
 
-    chooseCheckBoxesIsInspectedFromList(isInspected: boolean[]): CommercialRentRollActions {
+    chooseCheckBoxesIsInspectedFromList(isInspected: boolean[]): this {
         for (let i = 0; i < isInspected.length; i++) {
             if (isInspected[i]) {
                 this.checkIsInspectedCheckboxByRowNumber(i);
@@ -113,7 +112,7 @@ class CommercialRentRollActions extends CommercialRentRollSharedComponent<typeof
         return this;
     }
 
-    enterTenantNameByRowNumber(name: string, rowNumber = 0, leaseStatus?: BoweryReports.LeaseStatus): CommercialRentRollActions {
+    enterTenantNameByRowNumber(name: string, rowNumber = 0, leaseStatus?: BoweryReports.LeaseStatus): this {
         if (leaseStatus === "Vacant") {
             this.verifyTenantNameByRow(leaseStatus, name, rowNumber);
         } else {
@@ -123,26 +122,26 @@ class CommercialRentRollActions extends CommercialRentRollSharedComponent<typeof
         return this;
     }
 
-    deleteTenantNameByRowNumber(rowNumber: number): CommercialRentRollActions {
+    deleteTenantNameByRowNumber(rowNumber: number): this {
         this.Page.tenantNameCells.eq(rowNumber).dblclick();
         this.Page.textareaToInput.clear();
         return this;
     }
 
-    enterTenantNames(names: Array<string>, leaseStatuses: Array<BoweryReports.LeaseStatus>): CommercialRentRollActions {
+    enterTenantNames(names: Array<string>, leaseStatuses: Array<BoweryReports.LeaseStatus>): this {
         names.forEach((name, index) => {
             this.enterTenantNameByRowNumber(name, index, leaseStatuses[index]);
         });
         return this;
     }
 
-    enterLeaseDateByRowNumber(cellName: BoweryReports.LeaseDateName, date: string, rowNumber = 0): CommercialRentRollActions {
+    enterLeaseDateByRowNumber(cellName: BoweryReports.LeaseDateName, date: string, rowNumber = 0): this {
         this.Page.getLeaseDateCellsByName(cellName).eq(rowNumber).dblclick({ force: true });
         this.Page.textareaToInput.clear().type(date).type("{enter}");
         return this;
     }
 
-    enterMonthlyRentByRowNumber(monthlyRent: number, rowNumber = 0): CommercialRentRollActions {
+    enterMonthlyRentByRowNumber(monthlyRent: number, rowNumber = 0): this {
         this.Page.monthlyRentCells.eq(rowNumber).should("not.have.class", "readOnly").dblclick({ force: true });
         this.Page.textareaToInput.clear().type(`${monthlyRent}`).type("{enter}");
         const textToBe = numberWithCommas(monthlyRent.toFixed(2));
@@ -150,7 +149,7 @@ class CommercialRentRollActions extends CommercialRentRollSharedComponent<typeof
         return this;
     }
 
-    enterAnnualRentByRowNumber(annualRent: number, rowNumber = 0): CommercialRentRollActions {
+    enterAnnualRentByRowNumber(annualRent: number, rowNumber = 0): this {
         this.Page.annualRentCells.eq(rowNumber).should("not.have.class", "readOnly").dblclick({ force: true });
         this.Page.textareaToInput.clear().type(`${annualRent}`).type("{enter}");
         const textToBe = numberWithCommas(annualRent.toFixed(2));
@@ -158,16 +157,16 @@ class CommercialRentRollActions extends CommercialRentRollSharedComponent<typeof
         return this;
     }
 
-    chooseListLeaseStatuses(statuses: BoweryReports.LeaseStatus[], numberOfUnits: number): CommercialRentRollActions {
+    chooseListLeaseStatuses(statuses: BoweryReports.LeaseStatus[], numberOfUnits: number): this {
         for (let i = 0; i < numberOfUnits; i++) {
             this.chooseLeaseStatusByRowNumber(statuses[i], i);
         }
         return this;
     }
 
-    enterListPerSF(leaseStatuses: Array<BoweryReports.LeaseStatus>, perSFList: Array<number>): CommercialRentRollActions {
+    enterListPerSF(leaseStatuses: Array<BoweryReports.LeaseStatus>, perSFList: Array<number>): this {
         for (let i = 0; i < leaseStatuses.length; i++) {
-            if (leaseStatuses[i] === "Vacant" || perSFList[i] === 0) {
+            if (leaseStatuses[i] === "Vacant") {
                 continue;
             }
             this.enterRentPerSFAnnuallyByRowNumber(perSFList[i], i);
@@ -175,7 +174,7 @@ class CommercialRentRollActions extends CommercialRentRollSharedComponent<typeof
         return this;
     }
 
-    enterListMonthlyRent(leaseStatuses: Array<BoweryReports.LeaseStatus>, monthlyRentList: Array<number>): CommercialRentRollActions {
+    enterListMonthlyRent(leaseStatuses: Array<BoweryReports.LeaseStatus>, monthlyRentList: Array<number>): this {
         for (let i = 0; i < leaseStatuses.length; i++) {
             if (leaseStatuses[i] === "Vacant") {
                 continue;
@@ -185,13 +184,13 @@ class CommercialRentRollActions extends CommercialRentRollSharedComponent<typeof
         return this;
     }
 
-    verifyMonthlyRentTotal(leaseStatuses: Array<BoweryReports.LeaseStatus>, monthlyRents: Array<number>): CommercialRentRollActions {
+    verifyMonthlyRentTotal(leaseStatuses: Array<BoweryReports.LeaseStatus>, monthlyRents: Array<number>): this {
         const textToBe = CommercialRentRollActions.getTotalRentTextToBe(leaseStatuses, monthlyRents);
         this.Page.monthlyRentTotal.should("have.text", `$${textToBe}`);
         return this;
     }
 
-    enterListAnnuallyRent(leaseStatuses: Array<BoweryReports.LeaseStatus>, annuallyRents: Array<number>): CommercialRentRollActions {
+    enterListAnnuallyRent(leaseStatuses: Array<BoweryReports.LeaseStatus>, annuallyRents: Array<number>): this {
         for (let i = 0; i < leaseStatuses.length; i++) {
             if (leaseStatuses[i] === "Vacant") {
                 continue;
@@ -212,13 +211,13 @@ class CommercialRentRollActions extends CommercialRentRollSharedComponent<typeof
         return numberWithCommas(rentTotalToBe.toFixed(2));
     }
 
-    verifyAnnuallyRentTotal(leaseStatuses: Array<BoweryReports.LeaseStatus>, annualRents: Array<number>): CommercialRentRollActions {
+    verifyAnnuallyRentTotal(leaseStatuses: Array<BoweryReports.LeaseStatus>, annualRents: Array<number>): this {
         const textToBe = CommercialRentRollActions.getTotalRentTextToBe(leaseStatuses, annualRents);
         this.Page.annualRentTotal.should("have.text", `$${textToBe}`);
         return this;
     }
 
-    verifyPerSFAnnuallyTotal(leaseStatuses: Array<BoweryReports.LeaseStatus>, perSfRents: Array<number>, squareFootList: Array<number>): CommercialRentRollActions {
+    verifyPerSFAnnuallyTotal(leaseStatuses: Array<BoweryReports.LeaseStatus>, perSfRents: Array<number>, squareFootList: Array<number>): this {
         let totalAnnualRent = 0;
         let totalSF = 0;
         for (let i = 0; i < leaseStatuses.length; i++) {
@@ -230,29 +229,6 @@ class CommercialRentRollActions extends CommercialRentRollSharedComponent<typeof
         }
         const textToBe = numberWithCommas((totalAnnualRent / totalSF).toFixed(2));
         this.Page.rentPerSFAnnuallyTotal.should("have.text", `$${textToBe}`);
-        return this;
-    }
-
-    verifyLeaseStatusNeedsToBeFilled(rowNumber = 0): CommercialRentRollActions {
-        this.Page.leaseStatusCells.eq(rowNumber).should("have.css", "box-shadow",
-            "rgb(211, 65, 65) 0px 0px 0px 1px");
-        return this;
-    }
-
-    clickBasisOfRentTabByUnitMeasure(measure: BoweryReports.UnitsOfMeasure): CommercialRentRollActions {
-        switch (measure) {
-            case Enums.UNITS_OF_MEASURE.annually:
-                this.clickAnnuallyBasisButton();
-                break;
-            case Enums.UNITS_OF_MEASURE.monthly:
-                this.clickMonthlyBasisButton();
-                break;
-            case Enums.UNITS_OF_MEASURE.perSquareFootPerYear:
-                this.clickPerSquareFootButton(false);
-                break;
-            default:
-                this.clickPerSquareFootPerMonthButton();
-        }
         return this;
     }
 

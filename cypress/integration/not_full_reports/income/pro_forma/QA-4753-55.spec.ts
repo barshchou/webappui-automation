@@ -38,8 +38,8 @@ describe("Pro Forma page table Effective Gross Income validation",
         _NavigationSection.clickCommercialReimbursementSummaryButton()
             .clickYesIfExist();
         Income._CommercialManager.ReimbursementSummary.addNewCommercialReimbursement(
-            testData.expenseType, testData.expenseTypeCellName, testData.reimbursementType, testData.knownInformation)
-                .fillReimbursements(testData.monthlyReimbursement, testData.columnsId)
+            testData.expenseType, testData.expenceTypeCellName, testData.reimbursementType, testData.knownInformation)
+            .fillReimbursements(testData.monthlyReimbursement)
             .fillVCLossByRow(testData.reimbursementVcLoss);
 
         cy.stepInfo(`6. Go to Property → Amenities, check Parking checkbox and fill in the number of Parking Spaces, 

@@ -34,9 +34,7 @@ describe(`Comparable Min, Max, Avg values for Water & Sewer Per Unit are correct
         Income._ExpenseForecastActions.verifyForecastItemCompMin(testData.insuranceItem, testData.comparables)
             .verifyForecastItemCompAverage(testData.insuranceItem, testData.comparables)
             .verifyForecastItemCompMax(testData.insuranceItem, testData.comparables)
-            .hideHeader()
-            .clickSaveButton()
-            .verifyProgressBarNotExist();
+            .hideExpenseForecastHeader();
 
         cy.stepInfo("4.2 Check Comp Min, Comp Max and Comp Avg values for Water & Sewer card. They should be correctly displayed on a slidebar");
         Income._ExpenseForecastActions.verifyProgressBarNotExist()

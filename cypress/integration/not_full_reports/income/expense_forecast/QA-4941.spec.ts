@@ -54,9 +54,7 @@ describe("Historical expense Fuel Per SF is correctly calculated and displayed",
             .verifyForecastItemByExpensePeriodType(testData.t12FuelItem, testData.buildingDescription, "Actual T12")
             .verifyForecastItemByExpensePeriodType(testData.historicalFuelItem, testData.buildingDescription, "Annualized Historical")
             .verifyForecastItemByExpensePeriodType(testData.ownerProjectionFuelItem, testData.buildingDescription, "Owner's Projection")
-            .hideHeader()
-            .clickSaveButton()
-            .verifyProgressBarNotExist();
+            .hideExpenseForecastHeader();
 
         cy.stepInfo("6. Check historical expenses values for Fuel card. They should be correctly displayed on slidebars");
         Income.ExpenseForecast.Actions.verifyProgressBarNotExist()

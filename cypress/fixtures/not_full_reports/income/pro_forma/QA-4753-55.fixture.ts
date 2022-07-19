@@ -13,7 +13,6 @@ const _expenseType = Enums.PRO_FORMA_TYPES.realEstateTaxes;
 const _expenseTypeCellName = Enums.EXPENSE_CELL.realEstateTaxes;
 const _reimbursementType = Enums.REIMBURSEMENT_TYPES.dollarAmount as BoweryReports.ReimbursementType;
 const _knownInformation = Enums.KNOWN_INFORMATION.monthly as BoweryReports.KnownInformation;
-const _columnsId = Enums.REIMBURSEMENT_COLUMN_ID.monthly as BoweryReports.ReimbursementColumnsId;
 const _monthlyReimbursement = [ 20, 30, 46.07 ];
 const _storageUnits = 2;
 const _numberOfParkingPlaces = 2;
@@ -112,9 +111,8 @@ export default {
     rentsPsf: _commercialRentSf,
     expenseType: _expenseType,
     knownInformation: _knownInformation,
-    columnsId: _columnsId,
     monthlyReimbursement: _monthlyReimbursement,
-    expenseTypeCellName: _expenseTypeCellName,
+    expenceTypeCellName: _expenseTypeCellName,
     reimbursementType: _reimbursementType,
     residentialMonthlyRent: _residentialMonthlyRent,
     potentialGrossIncomeTotal: _potentialGrossIncomeTotal,

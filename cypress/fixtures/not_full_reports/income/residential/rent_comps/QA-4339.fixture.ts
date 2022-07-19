@@ -1,4 +1,3 @@
-import Enums from "../../../../../enums/enums";
 import ReportDataCreator from "../../../../data_creator/reportData.creator";
 
 const formDataFixture = () => {
@@ -21,6 +20,6 @@ export default {
     numberOfUnits: 2,
     rentType: "Market Rate",
     numberOfBedrooms: 5,
-    includePerRoomCheckbox: Enums.RENT_ROLL_OPTIONS_CHECKBOXES.include,
+    includePerRoomCheckbox: "Include Per Room Analysis in Report",
     formData: Object.freeze(formDataFixture())
 };

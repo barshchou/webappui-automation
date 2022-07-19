@@ -39,23 +39,9 @@ import storageVcLossType from "./inputValues/storageVcLossType.enum";
 import knownInformation from "./knownInformationType.enum";
 import compGroupsColumnsEnum from "./compGroupsColumns.enum";
 import marketAnalysisUsesEnum from "./marketAnalysisUses.enum";
-import rentTypesEnum from "./rent/rentTypes.enum";
 import usersEnum from "../enums/users/users.enum";
 import propertyConditionsEnum from "./property/propertyConditions.enum";
 import propertyConditionsRadiosEnum from "./property/propertyConditionsRadios.enum";
-import rentRollOptionsCheckboxesEnum from "./rent/rentRollOptionsCheckboxes.enum";
-import featureFlagKeys from "./featureFlags/featureFlagKeys.enum";
-import envLaunchDarkly from "./featureFlags/envLaunchDarkly.enum";
-import menuLinksNamesEnum from "./menuLinksNames.enum";
-import rolesEnum from "./users/roles.enum";
-import boweryOfficesEnum from "./organization/boweryOffices.enum";
-import salesAdjustmentGridEnum from "./adjustComps/salesadjustment.enum";
-import reportStatusEnum from "./reportParams/reportStatus.enum";
-import bondTypesEnum from "./organization/bondTypes.enum";
-import rowsMarketAdjustmentEnum from "./adjustComps/marketadjustment.enum";
-import cumulativepriceSalesadjustEnum from "./adjustComps/cumulativeprice.salesadjust.enum";
-import expensesForecastCardNamesEnum from "./expense/expensesForecastCardNames.enum";
-import reimbursementColumnsIdEnum from "./reimbursementColumnsId.enum";
 
 export default {
     TEMPLATE_TYPE: templateTypesEnum,
@@ -99,21 +85,7 @@ export default {
     SOURCE_OF_INFORMATION: sourceOfInformation,
     AMENITIES: amenities,
     MARKET_ANALYSIS_USES: marketAnalysisUsesEnum,
-    RENT_TYPE: rentTypesEnum,
     USERS: usersEnum,
     PROPERTY_CONDITIONS: propertyConditionsEnum,
-    PROPERTY_CONDITIONS_RADIOS: propertyConditionsRadiosEnum,
-    RENT_ROLL_OPTIONS_CHECKBOXES: rentRollOptionsCheckboxesEnum,
-    FEATURE_FLAG_KEYS: featureFlagKeys,
-    ENV_LAUNCH_DARKLY: envLaunchDarkly,
-    MENU_LINKS: menuLinksNamesEnum,
-    USER_ROLES: rolesEnum,
-    BOWERY_OFFICES: boweryOfficesEnum,
-    SALES_ADJUSTMENT_GRID: salesAdjustmentGridEnum,
-    SALES_ADJUSTMENT_GRID_CUMULATIVE_PRICE: cumulativepriceSalesadjustEnum,
-    ROWS_MARKET_ADJUSTMENT: rowsMarketAdjustmentEnum,
-    REPORT_STATUS: reportStatusEnum,
-    BOND_TYPES: bondTypesEnum,
-    EXPENSES_CARD_NAMES: expensesForecastCardNamesEnum,
-    REIMBURSEMENT_COLUMN_ID: reimbursementColumnsIdEnum
+    PROPERTY_CONDITIONS_RADIOS: propertyConditionsRadiosEnum
 };

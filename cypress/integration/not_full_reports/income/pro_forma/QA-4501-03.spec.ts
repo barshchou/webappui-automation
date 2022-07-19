@@ -36,8 +36,8 @@ describe("Potential Real Estate Tax Reimbursement",
         
         cy.stepInfo("4. Go to Income → Reimbursement Summary and add Real Estate Taxes Reimbursement for commercial units"); 
         Income._CommercialManager.ReimbursementSummary.addNewCommercialReimbursement(
-            testData.expenseType, testData.expenseTypeCellName, testData.reimbursementType, testData.knownInformation)
-                .fillReimbursements(testData.monthlyReimbursement, testData.columnsId);
+            testData.expenseType, testData.expenceTypeCellName, testData.reimbursementType, testData.knownInformation)
+            .fillReimbursements(testData.monthlyReimbursement);
 
         cy.saveLocalStorage();
     });
@@ -64,14 +64,14 @@ describe("Potential Real Estate Tax Reimbursement",
     it("[QA-4502]", () => {
         cy.stepInfo(`5. Verify that Pro Forma table contains Taxes Reimbursement PSF value`);
         Income._ProFormaActions.verifyCategoryPSFTotal(
-            `$${numberWithCommas(testData.reimbursementPerSf.toFixed(2))}`, 
+            `$${numberWithCommas(testData.reimbursmentPerSf.toFixed(2))}`, 
             proFormaTypes.potentialRealEstateTaxesReimbursement);
     });
 
     it("[QA-4503]", () => {
         cy.stepInfo(`5. Verify that Pro Forma table contains Taxes Reimbursement Per Unit value`);
         Income._ProFormaActions.verifyCategoryPerUnitTotal(
-            `$${numberWithCommas(Math.round(testData.reimbursementPerUnit))}`, 
+            `$${numberWithCommas(Math.round(testData.reimbursmentPerUnit))}`, 
             proFormaTypes.potentialRealEstateTaxesReimbursement);
 
         deleteReport(testData.reportCreationData.reportNumber);

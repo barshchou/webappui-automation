@@ -5,7 +5,6 @@ export enum Tag {
     stabilized_rent_roll = "@stabilized_rent_roll",
     in_place_rent_roll = "@in_place_rent_roll",
     comp_plex = "@comp_plex",
-    comp_plex_standalone = "@comp_plex_standalone",
     snapshot_tests = "@snapshot_tests",
     expense_forecast = "@expense_forecast",
     fix = "@fix",
@@ -36,13 +35,5 @@ export enum Tag {
     organizations = "@organizations",
     permissions_roles = "@permissions_roles",
     propertyConditions = "@property_conditions",
-    comp_summary = "@comp_summary",
-    users = "@users",
-    feature_flag= "@feature_flag",
-    report_status = "@report_status",
-    appraiser = "@appraiser",
-    settings = "@settings",
-    unit_details = "@unit_details",
-    reimbursement_summary = "@reimbursement_summary",
-    rent_reconciliation = "@rent_reconciliation"
+    comp_summary = "@comp_summary"
 }

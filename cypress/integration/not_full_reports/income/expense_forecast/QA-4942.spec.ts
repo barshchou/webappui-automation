@@ -34,9 +34,7 @@ describe("Comparable Min, Max, Avg values for Fuel Per SF are correctly calculat
         Income.ExpenseForecast.Actions.verifyForecastItemCompMin(testData.fuelItem, testData.comparables)
             .verifyForecastItemCompAverage(testData.fuelItem, testData.comparables)
             .verifyForecastItemCompMax(testData.fuelItem, testData.comparables)
-            .hideHeader()
-            .clickSaveButton()
-            .verifyProgressBarNotExist();
+            .hideExpenseForecastHeader();
 
         cy.stepInfo("4. Check Comp Min, Comp Max and Comp Avg values for Fuel card. They should be correctly displayed on a slidebar");
         Income.ExpenseForecast.Actions.verifyProgressBarNotExist()

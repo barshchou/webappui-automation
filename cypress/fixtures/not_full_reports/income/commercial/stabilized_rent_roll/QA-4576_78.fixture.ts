@@ -10,7 +10,7 @@ const occupiedLeaseFixture: BoweryReports.LeaseStatus = "Occupied";
 const vacantLeaseFixture: BoweryReports.LeaseStatus = "Vacant";
 const _leaseDate = "01012022";
 const _monthly = "monthly" as BoweryReports.UnitsOfMeasure;
-const _compGroup = "QA_4576_78_Comp_Group";
+const _compGroup = "QA_4576_Comp_Group";
 const _marketRentConclusion = 441;
 
 const _rentCompFields: BoweryReports.RentCompField[] = [
@@ -47,7 +47,7 @@ export default {
         stabilizedRRPanel_severalUnits:"StabilizedRentRoll_Panel_Several_Units",
         stabilizedRRPanel_severalUnits_compGroups:"stabilizedRRPanel_severalUnits_compGroups"
     },
-    reportCreationData: ReportDataCreator.getReportData("4576_78", { incomeValue: Enums.INCOME_TYPE.both }),
+    reportCreationData: ReportDataCreator.getReportData("4576", { incomeValue: Enums.INCOME_TYPE.both }),
     numberOfCommercialUnits: 2,
     listOfUnitsSF: [ 1000, 2000 ],
     groupName: groupNameFixture,
@@ -78,7 +78,7 @@ export default {
     vacantLease: vacantLeaseFixture,
     compGroupName: [ "Group1", "Group2" ],
     leaseDate: _leaseDate,
-    unitMeasureMonthly: _monthly,
+    unitMeasureMontly: _monthly,
     compGroup: _compGroup,
     rentCompFields: _rentCompFields,
     marketRentConclusion: _marketRentConclusion

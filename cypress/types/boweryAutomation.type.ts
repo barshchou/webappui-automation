@@ -49,19 +49,4 @@ export namespace BoweryAutomation {
         state?: BoweryReports.OrganizationState,
         zipCode?: string | number
     };
-
-    export type OrganizationCreateNewUserData = {
-        username: string,
-        roleName: BoweryAutomation.OrganizationRoles[],
-        prefix?: BoweryReports.OrganizationAddresseePrefix,
-        firstName: string,
-        middleName?: string,
-        lastName: string,
-        userSuffix?: string,
-        positionInOrg?: string,
-        boweryOffice?: BoweryReports.BoweryOffices,
-        phone?: string,
-    }
-
-    export type OrganizationRoles = typeof Enums.USER_ROLES[KeyInfo.UserRoles]
 }

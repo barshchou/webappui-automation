@@ -38,7 +38,7 @@ describe("Pro Forma Page validation Operating Expenses -> Miscellaneous",
                     Expense Forecast → Miscellaneous Forecast Discussion generated commentary`);
         Income._ProFormaActions.verifyCategoryTotal(
             `$${numberWithCommas(Math.round(testData.miscellaneousSfTotal))}`, 
-            proFormaTypes.miscellaneous);
+            proFormaTypes.miscelaneous);
     });
 
     it("[QA-5843]", () => {
@@ -46,7 +46,7 @@ describe("Pro Forma Page validation Operating Expenses -> Miscellaneous",
                     Expense Forecast → Miscellaneous → Appraiser’s Forecast cell`);
         Income._ProFormaActions.verifyCategoryPSFTotal(
             `$${numberWithCommas(testData.miscellaneousSfPerSf.toFixed(2))}`, 
-            proFormaTypes.miscellaneous);
+            proFormaTypes.miscelaneous);
     });
 
     it("[QA-5845]", () => {
@@ -60,7 +60,7 @@ describe("Pro Forma Page validation Operating Expenses -> Miscellaneous",
                     Total / selected Basis of Square Foot Analysis (Property>Summary)`);
         Income._ProFormaActions.verifyCategoryPSFTotal(
             `$${numberWithCommas(testData.miscellaneousUnitPerSf.toFixed(2))}`, 
-            proFormaTypes.miscellaneous);
+            proFormaTypes.miscelaneous);
 
         deleteReport(testData.reportCreationData.reportNumber);
     });

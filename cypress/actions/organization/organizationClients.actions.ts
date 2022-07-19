@@ -2,7 +2,7 @@ import organizationClientsPage from "../../pages/organization/organizationClient
 import BaseActionsExt from "../base/base.actions.ext";
 
 class OrganizationClientsActions extends BaseActionsExt<typeof organizationClientsPage>{
-    deleteClient(fullName: string): OrganizationClientsActions {
+    deleteClient(fullName: string) {
         organizationClientsPage.fullName(fullName).contains("Delete").click();
         return this;
     }

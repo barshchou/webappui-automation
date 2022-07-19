@@ -35,9 +35,7 @@ describe(`Comparable Min, Max, Avg values for Water & Sewer Per Unit are correct
         Income._ExpenseForecastActions.verifyForecastItemCompMin(testData.waterAndSewerPerUnitItem, testData.comparables)
             .verifyForecastItemCompAverage(testData.waterAndSewerPerUnitItem, testData.comparables)
             .verifyForecastItemCompMax(testData.waterAndSewerPerUnitItem, testData.comparables)
-            .hideHeader()
-            .clickSaveButton()
-            .verifyProgressBarNotExist();
+            .hideExpenseForecastHeader();
 
         cy.stepInfo("6. [QA-4903] Check Comp Min, Comp Max and Comp Avg values for Water & Sewer card. They should be correctly displayed on a slidebar");
         Income._ExpenseForecastActions.verifyProgressBarNotExist()
@@ -57,16 +55,14 @@ describe(`Comparable Min, Max, Avg values for Water & Sewer Per Unit are correct
         Income._ExpenseForecastActions.verifyForecastItemCompMin(testData.waterAndSewerPerSfItem, testData.comparables)
             .verifyForecastItemCompAverage(testData.waterAndSewerPerSfItem, testData.comparables)
             .verifyForecastItemCompMax(testData.waterAndSewerPerSfItem, testData.comparables)
-            .hideHeader()
-            .clickSaveButton()
-            .verifyProgressBarNotExist();
+            .hideExpenseForecastHeader();
 
         cy.stepInfo("9. [QA-4899] Check Comp Min, Comp Max and Comp Avg values for Water & Sewer card. They should be correctly displayed on a slidebar");
         Income._ExpenseForecastActions.matchElementSnapshot(
             Income._ExpenseForecastActions.Page.forecastItemCard(
                 Income._ExpenseForecastActions.getItemNameForAverage(
                     testData.waterAndSewerPerSfItem.name)), 
-                    testData.waterAndSewerPerSfCardSnapshotName, { padding: [ 0, 100 ] }
+                    testData.waterAndSewerPerSfCardSnapshotName, { padding: [ 10, 100 ] }
         );
 
         deleteReport(testData.reportCreationData.reportNumber);

@@ -7,6 +7,7 @@ import { Sales } from "../../../../actions";
  * ernst: when we will be able to delete SalesComps - use this instead of `describe`
  * TODO: Add actions to QA-4169 test after functionality for SalesComp removal will be added.
  */
+// const conditionalDescribe = isProdEnv() ? describe.skip : describe;
 
 describe.skip("Verify the New Comp is created after clicking on 'Save&Close' button on Property Description form", 
 { tags:[ "@comp_plex", "@find_comps", "@sales" ] }, () => {

@@ -1,17 +1,19 @@
 import testData from "../../../../fixtures/not_full_reports/sales/adjust_comps/QA-4110.fixture";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
-import { ReviewExport, Sales } from "../../../../actions";
+import { Sales } from "../../../../actions";
 
 describe("Total Utility Adjustments in Sales Adjustment Grid is calculated with correct formula", 
-    { tags:[ "@sales", "@adjust_comps", "@check_export" ] }, () => {
+    { tags:[ "@sales", "@adjust_comps", ] }, () => {
+
+    before("Login, create report", () => {
+        createReport(testData.reportCreationData);
+    });
 
     it("Test body", () => {
-        createReport(testData.reportCreationData);
         cy.stepInfo("1. Navigate to Find comps page and add a sales comps");
         _NavigationSection.navigateToFindComps();
-        Sales._FindComps.selectCompFromMapByAddress(testData.compAddress);
-
+        Sales._FindComps.selectCompFromMapByAddress(testData.comparable.address);
 
         cy.stepInfo(`2. Verify if Per Total Units is selected as Sales Comparables Setup then
                     Trended Price per Unit in Total Footer = Price  per Unit + Price  per Unit * Property Rights + 
@@ -23,28 +25,6 @@ describe("Total Utility Adjustments in Sales Adjustment Grid is calculated with 
             .enterMarketAdjustmentsGroup(Object.keys(testData.comparablesAdjustments), Object.values(testData.comparablesAdjustments))
             .verifyTrendedPricePerBasis(Object.values(testData.comparablesAdjustments), testData.basis);
 
-        cy.stepInfo(`[QA-4110] -> 'Cumulative Price Per Unit' is displayed in bold`);
-        Sales._AdjustComps.Actions.checkCumulativePriceName("Unit");
-
-        cy.stepInfo(`[QA-4110] -> Generate and download this report `);
-        _NavigationSection.Actions.openReviewAndExport();
-        ReviewExport.Actions.generateDocxReport().downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
-        
         deleteReport(testData.reportCreationData.reportNumber);
     });
-
-    it("Check export", () => {
-        cy.stepInfo(`
-        [QA-4110] → open Sales Adjustment Grid 
-        → verify the 'Cumulative Price Per Unit:' label and the same calculations`);
-
-        Cypress.config().baseUrl = null;
-        cy.task("getFilePath", { _reportName: testData.reportCreationData.reportNumber, _docx_html: "html" }).then(file => {
-            cy.log(<string>file);
-            cy.visit(<string>file);
-            cy.contains("Cumulative Price Per Unit")
-                .parent().parent().parent()
-                .scrollIntoView().find("td").last().should("have.text", testData.cumulativePricePerUnit);
-        }); 
-    }
-);});
+});

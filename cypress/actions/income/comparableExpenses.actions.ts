@@ -21,10 +21,10 @@ class ComparableExpensesActions extends BaseActionsExt<typeof compExpensesPage> 
         return this;
     }
 
-    enterCityByColumnIndex(location: string, index = 0): ComparableExpensesActions {
-        compExpensesPage.getUnifiedEditableAndTotalCells("city").eq(index).dblclick().scrollIntoView()
+    enterLocationByColumnIndex(location: string, index = 0): ComparableExpensesActions {
+        compExpensesPage.getUnifiedEditableAndTotalCells("location").eq(index).dblclick().scrollIntoView()
             .focus().clear().realType(`${location}{enter}`);
-        compExpensesPage.getUnifiedEditableAndTotalCells("city").eq(index).children(compExpensesPage.elementToCheckCellTextSelector)
+        compExpensesPage.getUnifiedEditableAndTotalCells("location").eq(index).children(compExpensesPage.elementToCheckCellTextSelector)
             .should("have.text", location);
         return this;
     }

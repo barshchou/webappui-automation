@@ -10,7 +10,6 @@ import { BoweryAutomation } from "../types/boweryAutomation.type";
 
 require("cypress-xpath");
 require("cypress-iframe");
-require('dd-trace/ci/cypress/support');
 const registerCypressGrep = require('cypress-grep');
 registerCypressGrep();
 

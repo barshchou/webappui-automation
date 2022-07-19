@@ -11,7 +11,7 @@ describe("[QA-4586] Verify the Commercial Stabilized Rent Roll table",
             - add commercial units;
             - add comp groups and drag units into it;
             - add rent comps and drag units into comp group
-            - add market reconciliation`, () => {
+            - add market reconcillation`, () => {
         cy.stepInfo(`Create a mixed report with several Commercial Units (e.g. 2).`);
         createReport(testData.reportCreationData);
 
@@ -39,21 +39,21 @@ describe("[QA-4586] Verify the Commercial Stabilized Rent Roll table",
                 searchNewCompByAddress(testData.comparableFirst.address);
         testData.rentCompFields.forEach(field => {
             if(field.type == "input") {
-                Income._CommercialManager.RentComps.fillInRentCompFieldInput(field.name, field.value, true);
+                Income._CommercialManager.RentComps.fillInRentCompFieldInput(field.name, field.value);
             } else {
                 Income._CommercialManager.RentComps.chooseRentCompFieldDropdownOption(field.name, field.value);
             }
         });
         Income._CommercialManager.RentComps.enterLeaseDate(testData.leaseDate)
-            .checkUnitOfMeasureRadioButton(testData.unitMeasureMonthly)
+            .checkUnitOfMeasureRadioButton(testData.unitMeasureMontly)
             .clickSubmitButton();
         /**
          * Note: Do not change window focus while debugging in headless mode
          */
         Income._CommercialManager.RentComps.dragAllCommercialUnitsIntoGroup(testData.compGroup, testData.numberOfCommercialUnits);
 
-        cy.stepInfo(`5. Navigate to Reconciliation and add market reconciliation`);
-        _NavigationSection.navigateToRentReconciliation();
+        cy.stepInfo(`5. Navigate to Reconcialltion and add market reconcillation`);
+        _NavigationSection.navigateToRentReconcillation();
         Income._CommercialManager.RentReconciliation.addMarketRentConclusion(testData.marketRentConclusion);
     });
 

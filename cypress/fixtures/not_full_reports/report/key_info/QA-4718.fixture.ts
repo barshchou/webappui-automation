@@ -1,8 +1,6 @@
+import { _chips_is_stabilized } from './../../data_chips/chips_is_stabilized.fixture';
 import Enums from "../../../../enums/enums";
 import ReportDataCreator from "../../../data_creator/reportData.creator";
-import chipsDataCreator from '../../../data_creator/chipsData.creator';
-import enums from '../../../../enums/enums';
-import { BoweryReports } from "../../../../types/boweryReports.type";
 
 export const reportCreationFixture = () => {
     return ReportDataCreator.getReportData("4718", {
@@ -12,16 +10,7 @@ export const reportCreationFixture = () => {
     });
 };
 
-const _buildingName = 'Test Building Name QA-4718';
-
-const _chipsOptions: BoweryReports.ChipsCreationOptions = {
-    buildingName: _buildingName,
-};
-
 export default {
     reportCreationData: reportCreationFixture(),
-    chips: chipsDataCreator.getChipsData(_chipsOptions, enums.VALUE_CONCLUSION_TYPE.AS_STABILIZED),
-    buildingName: _buildingName,
-    propertyRightsAppraisedCommentaryTitle: "Property Rights Appraised",
-    definitionOfMarketValueCommentaryTitle: "Definition of Market Value"
+    chips: _chips_is_stabilized
 };

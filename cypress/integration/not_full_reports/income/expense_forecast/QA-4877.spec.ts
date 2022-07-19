@@ -35,9 +35,7 @@ describe("Comparable Min, Max, Avg values for Electricity Per SF are correctly c
         Income.ExpenseForecast.Actions.verifyForecastItemCompMin(testData.electricityItem, testData.comparables)
             .verifyForecastItemCompAverage(testData.electricityItem, testData.comparables)
             .verifyForecastItemCompMax(testData.electricityItem, testData.comparables)
-            .hideHeader()
-            .clickSaveButton()
-            .verifyProgressBarNotExist();
+            .hideExpenseForecastHeader();
 
         cy.stepInfo(`5. Check Comp Min, Comp Max and Comp Avg values for Electricity card. They should be
                         5.1 calculated as: Min, Max and Avg of range of values [CompElectricity / Square Feet]
