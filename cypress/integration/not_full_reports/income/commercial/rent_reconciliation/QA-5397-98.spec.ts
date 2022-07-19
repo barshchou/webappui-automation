@@ -1,4 +1,4 @@
-import testData from "../../../../../fixtures/not_full_reports/income/commercial/rent_reconciliation/QA-5304_06-08.fixture";
+import testData from "../../../../../fixtures/not_full_reports/income/commercial/rent_reconciliation/QA-5397-98.fixture";
 import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../../actions/base";
 import { Income, Property, ReviewExport } from "../../../../../actions";
@@ -39,12 +39,15 @@ describe(`Verify "Trended Rent/SF" row in the "Rent Reconciliation Adjustment gr
 
         cy.stepInfo(`2. Verify “Trended Rent/SF” row is displayed in the grid between 
                     “Market Conditions Adjustment” row and “Size Adjustments” row.`);
+        Income._CommercialManager.RentReconciliation.Page.marketConditionsAdjustmentRow.next().children().eq(0).should('have.text', 'Trended Rent/SF/Month');
+        Income._CommercialManager.RentReconciliation.Page.trendedRentPerSfRow.next().children().eq(0).should('have.text', 'Size Adjustments');
         
-        
-        cy.stepInfo('3. Verify that “Trended Rent/SF” field for “Base Unit” column is greyed out and not editable.');
+        cy.stepInfo('3. Verify that “Trended Rent/SF” field for “Base Unit” column is greyed out and not editable.'); //isContentEditable
+        Income._CommercialManager.RentReconciliation.Page.baseUnitTrendedRentSfMonth.invoke('prop', 'isContentEditable').should('eq', false);
+        Income._CommercialManager.RentReconciliation.Page.baseUnitTrendedRentSfMonth.invoke('prop', 'tagName').should('eq', 'TD');
+        Income._CommercialManager.RentReconciliation.addMarketRentConclusion(testData.numberOfComparables);
 
-
-        cy.stepInfo("8. Export the report");
+        cy.stepInfo("4. Export the report");
         _NavigationSection.Actions.openReviewAndExport();
         ReviewExport.generateDocxReport().waitForReportGenerated()
             .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
@@ -52,35 +55,23 @@ describe(`Verify "Trended Rent/SF" row in the "Rent Reconciliation Adjustment gr
         deleteReport(testData.reportCreationData.reportNumber);
     });
 
-    it(`[QA-5308] Verify the "Lease Terms Adjustment Sub-Total" row is displayed in the exported report`, () => {
+    it(`[QA-5398] Verify that nothing is displayed in the exported "Rent Reconciliation Adjustment" grid 
+        in "Subject Base Unit" column - "Trended Rent/SF" row and "Adjusted Rent/SF" row`, () => {
         Cypress.config().baseUrl = null;
         cy.task("getFilePath", { _reportName: testData.reportCreationData.reportNumber, _docx_html: "html" })
             .then(file => {
                 cy.log(<string>file);
                 cy.visit(<string>file);
 
-                cy.stepInfo(`1. Verify that the “Lease Terms Adjustment Sub-Total” row is displayed in the exported grid 
-                            between the “Lease Terms Adjustment” and “Market Conditions (Time)” rows`);
-                cy.xpath(`//p[.='${testData.compGroupName} Rent Reconciliation Adjustment Grid']//following::tr[td/p[.='Lease Terms Adjustment']][1]`)
-                    .next().children().eq(0).scrollIntoView()
-                    .should('have.text', 'Lease Terms Adjustment Sub-Total');
+                cy.stepInfo(`1. Verify that nothing is displayed in the "Trended Rent/SF"`);
+                cy.xpath(`//p[.='${testData.compGroupName} Rent Reconciliation Adjustment Grid']//following::td[p[.='Trended Rent/SF/Month']][1]`)
+                    .next().scrollIntoView()
+                    .should('have.text', '');
 
-                cy.stepInfo(`2. Verify the order of rows in the exported report matches the following order:
-                            - Rent/SF
-                            - Lease Terms Adjustment
-                            - Lease Terms Adjustment Sub-Total
-                            - Market Conditions (Time)
-                            - Trended Price/SF`);
-                cy.xpath(`//p[.='${testData.compGroupName} Rent Reconciliation Adjustment Grid']//following::tr[td/p[.='Lease Terms']][1]`)
-                    .next().children().eq(0).scrollIntoView().should('have.text', 'Rent /SF/Month');
-                cy.xpath(`//p[.='${testData.compGroupName} Rent Reconciliation Adjustment Grid']//following::tr[td/p[.='Rent /SF/Month']][1]`)
-                    .next().children().eq(0).scrollIntoView().should('have.text', 'Lease Terms Adjustment');
-                cy.xpath(`//p[.='${testData.compGroupName} Rent Reconciliation Adjustment Grid']//following::tr[td/p[.='Lease Terms Adjustment']][1]`)
-                    .next().children().eq(0).scrollIntoView().should('have.text', 'Lease Terms Adjustment Sub-Total');
-                cy.xpath(`//p[.='${testData.compGroupName} Rent Reconciliation Adjustment Grid']//following::tr[td/p[.='Lease Terms Adjustment Sub-Total']][1]`)
-                    .next().children().eq(0).scrollIntoView().should('have.text', 'Market Conditions (Time)');
-                cy.xpath(`//p[.='${testData.compGroupName} Rent Reconciliation Adjustment Grid']//following::tr[td/p[.='Market Conditions (Time)']][1]`)
-                    .next().children().eq(0).scrollIntoView().should('have.text', 'Trended Rent/SF/Month');
+                cy.stepInfo(`2. Verify that nothing is displayed in the "Adjusted Rent/SF"`);
+                cy.xpath(`//p[.='${testData.compGroupName} Rent Reconciliation Adjustment Grid']//following::td[p[.='Adjusted Rent/SF/Month']][1]`)
+                    .next().scrollIntoView()
+                    .should('have.text', '');
         });
     });
 });

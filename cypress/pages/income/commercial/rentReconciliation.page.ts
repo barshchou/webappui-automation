@@ -21,11 +21,15 @@ class RentReconciliationPage extends BasePage {
 
     get leaseTermsAdjustmentSubTotalRow() {return cy.get('[data-qa="trended-price-per-sf-row"]').eq(0);}
 
+    get marketConditionsAdjustmentRow() {return cy.get('[data-qa="market-adjustments-row"]');}
+
     get trendedRentPerSfRow() {return cy.get('[data-qa="trended-price-per-sf-row"]').eq(1);}
 
     get rentTypeLabel() {return this.rentPerSfRow.find('[data-qa="row-label-cell"]');} 
 
     get baseUnitRentSfMonth() {return this.rentPerSfRow.find('[data-qa="base-unit-cell"]');}
+
+    get baseUnitTrendedRentSfMonth() {return this.trendedRentPerSfRow.find('[data-qa="base-unit-cell"]');}
 
     subjectUnitRentSfMonth(unit = 0) {return this.rentPerSfRow.find(`[data-qa="subject-unit-${unit}-cell"]`);}
 
