@@ -57,6 +57,7 @@ import cumulativepriceSalesadjustEnum from "./adjustComps/cumulativeprice.salesa
 import expensesForecastCardNamesEnum from "./expense/expensesForecastCardNames.enum";
 import reimbursementColumnsIdEnum from "./reimbursementColumnsId.enum";
 import calculationUnitsEnum from "./adjustComps/calculationUnits.enum";
+import calculationTypesEnum from "./commercial/rent_reconciliation/calculationTypes.enum";
 
 export default {
     TEMPLATE_TYPE: templateTypesEnum,
@@ -117,5 +118,6 @@ export default {
     BOND_TYPES: bondTypesEnum,
     EXPENSES_CARD_NAMES: expensesForecastCardNamesEnum,
     REIMBURSEMENT_COLUMN_ID: reimbursementColumnsIdEnum,
-    CALCULATION_UNITS: calculationUnitsEnum
+    CALCULATION_UNITS: calculationUnitsEnum,
+    CALCULATION_TYPE: calculationTypesEnum
 };

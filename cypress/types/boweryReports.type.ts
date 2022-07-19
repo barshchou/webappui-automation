@@ -212,8 +212,8 @@ export namespace BoweryReports {
 	export type ExpenseCardNames = typeof Enums.EXPENSES_CARD_NAMES[KeyInfo.ExpenseCardName]
 	
     export namespace SalesComps {
-        export type SelectedComparablesSortType = "Custom" | "Data Sold"
+        export type SelectedComparablesSortType = "Custom" | "Date Sold"
     }
     
-    
+    export type CalculationType = typeof Enums.CALCULATION_TYPE[KeyInfo.CalculationType]
 }
