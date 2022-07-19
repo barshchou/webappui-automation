@@ -22,18 +22,17 @@ describe(`[QA-5135] -> [Sales > Find Comps] Check the comps order when "custom" 
         Sales._FindComps.checkSalesCompAddedToList();
         
         cy.stepInfo(`4. [QA-5135] -> Order doesn’t change upon selection of “custom“ choice, 
-        until the appraiser manually moves comps around`);
+                    until the appraiser manually moves comps around`);
 
         Sales._FindComps.Actions.selectedCompsSetSort("Custom").checkSalesCompAddedToList()
-        .moveComparableByDnD(Sales._FindComps.Page.selectorDraggableElement, 0, "down", 2)
-        .checkSalesCompAddedToList({ reverse: true });
+            .moveComparableByDnD(Sales._FindComps.Page.selectorDraggableElement, 0, "down", 2)
+            .checkSalesCompAddedToList({ reverse: true });
 
         cy.stepInfo(`5. [QA-5135] -> If user selected custom order at first, 
-        re-ordered comps and after that selected “Date Sold” sorting 
-        -> comps get reordered by sale date on the fly.`);
+                    re-ordered comps and after that selected “Date Sold” sorting 
+                    -> comps get reordered by sale date on the fly.`);
         
         Sales._FindComps.Actions.selectedCompsSetSort("Date Sold").checkSalesCompAddedToList();
-
 
         deleteReport(testData.reportCreationData.reportNumber);
     });
