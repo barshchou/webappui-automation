@@ -21,8 +21,8 @@ Cypress.on("uncaught:exception", () => {
 });
 
 after(() => {
-  let isSmoke = Cypress.spec.relative.includes("smoke");
-  if(isSmoke){
+  let isSmokeTest = Cypress.spec.relative.includes("smoke");
+  if(isSmokeTest){
     cy.log("Smoke test, does not deleting report");
     return;
   }

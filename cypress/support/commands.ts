@@ -19,11 +19,11 @@ export const _map = new Map();
  * @param message message which will be shown by `cy.log` method 
  */
 export const _mutateArrayInMap = (mapKey: string, value: any, message = "Unknown array of values from map") => {
-    if(_map.get(mapKey) === undefined){
+    if (_map.get(mapKey) === undefined) {
         const arr = [ value ];
         _map.set(mapKey, arr);
     }
-    else{
+    else {
         cy._mapGet(mapKey).then(arr => {
             return arr.push(value);
         });
@@ -63,7 +63,7 @@ Cypress.Commands.add("loginByApi", (envUrl, username, password) => {
         const responseBody = JSON.parse(response.text);
         const token = responseBody.token;
 
-        // set bearer token also in localStorage in order to avoid unexpected behaviour from old code
+        // set bearer token also in localStorage in order to avoid unexpected behavior from old code
         window.localStorage.setItem("jwToken", token);
 
         // set bearer token so we could we use this in global after hook in `./index.ts`
@@ -112,16 +112,14 @@ Cypress.Commands.add("createApiReport",
 Cypress.Commands.add("deleteApiReport", () => {
     cy.log("Delete report");
         cy._mapGet(mapKeysUtils.report_id_arr).then(arr => {
-            if(arr === undefined){
+            if (arr === undefined) {
                 cy.log("No report_ids saved! Nothing to to delete.");
                 return;
             }
-            else{
+            else {
                 arr.forEach(reportId => {
                     cy.log(`Deleting report with id: ${reportId}`);
-                    /**
-                     * Deleting report
-                     */
+                    // Deleting report
                     cy.request({
                         method:"DELETE",
                         url:`${Cypress.config().baseUrl}/report/${reportId}`,
@@ -133,9 +131,7 @@ Cypress.Commands.add("deleteApiReport", () => {
                         expect(resp.status).to.eq(200);
                     });
     
-                    /**
-                     * Additional check whether report was deleted
-                     */
+                    // Additional check whether report was deleted
                     cy.request({
                         failOnStatusCode: false,
                         method:"GET",
@@ -144,7 +140,7 @@ Cypress.Commands.add("deleteApiReport", () => {
                             'bearer': _map.get(mapKeysUtils.bearer_token)
                         },
                         timeout: 60000
-                    },).then((resp) => {
+                    }).then((resp) => {
                         expect(resp.status).to.eq(404);
                     });
                 });
