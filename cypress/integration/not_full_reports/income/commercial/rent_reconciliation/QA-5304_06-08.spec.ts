@@ -22,9 +22,9 @@ describe(`Verify the "Lease Terms Adjustment Sub-Total"`,
                 .chooseLeaseStatusByRowNumber(status, index)
                 .enterRentPerSFMonthlyByRowNumber(testData.rentPSFs[index], index);
          });
- 
-        cy.stepInfo('Preconditions: Add any Comp Group (Income > Commercial > Comp Groups)');
-        cy.stepInfo('Preconditions: Move tenants to created Comp Group (Income > Commercial > Comp Groups)');
+
+        cy.stepInfo(`Preconditions: Add any Comp Group (Income > Commercial > Comp Groups). 
+                    Move tenants to created Comp Group (Income > Commercial > Comp Groups)`);
         _NavigationSection.openCompGroupsInCommercial();
         Income._CommercialManager.CompGroups
             .addCompGroup(testData.compGroupName)

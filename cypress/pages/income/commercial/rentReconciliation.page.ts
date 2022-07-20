@@ -43,11 +43,17 @@ class RentReconciliationPage extends BasePage {
         return cy.get(`[data-qa="reconciliationGroups.items[${index}].summary.leaseTermsCalcType-${leaseTermsCalculationType}-select-option"]`);
     }
 
-    leaseTermsAdjustments(compIndex = 0) {return cy.get(`[name="reconciliationGroups.items[0].summary.rentComps[${compIndex}].adjustments.leaseTerms"]`);}
+    leaseTermsAdjustments(compIndex = 0) { 
+        return cy.get(`[name="reconciliationGroups.items[0].summary.rentComps[${compIndex}].adjustments.leaseTerms"]`);
+    }
 
-    leaseTermsAdjustmentsPlaceholder(compIndex = 0) {return cy.get(`[name="reconciliationGroups.items[0].summary.rentComps[${compIndex}].adjustments.leaseTerms"]+div p`);}
+    leaseTermsAdjustmentsPlaceholder(compIndex = 0) { 
+        return cy.get(`[name="reconciliationGroups.items[0].summary.rentComps[${compIndex}].adjustments.leaseTerms"]+div p`);
+    }
 
-    marketConditionsAdjustments(compIndex = 0) {return cy.get(`[name="reconciliationGroups.items[0].summary.rentComps[${compIndex}].adjustments.dateSigned"]`);}
+    marketConditionsAdjustments(compIndex = 0) { 
+        return cy.get(`[name="reconciliationGroups.items[0].summary.rentComps[${compIndex}].adjustments.dateSigned"]`);
+    }
 
     getTrendedRentSF(compIndex = 0) {
         return compIndex != 0 ? this.trendedRentPerSfRow.find(`[data-qa="subject-unit-${compIndex}-cell"]`) :
