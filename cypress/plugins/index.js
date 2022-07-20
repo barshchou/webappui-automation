@@ -155,6 +155,7 @@ const _loginApi = async (_envUrl, _username, _password) => {
           res(socketId);
         } catch (error) {
           console.log(error);
+          rej(error);
         }
       })
     ) 
