@@ -1,7 +1,6 @@
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 import { BoweryReports } from "../../../../types/boweryReports.type";
 import expensesForecastCardNamesEnum from "../../../../enums/expense/expensesForecastCardNames.enum";
-import expensesForecast from "../../../../enums/expense/expenseForecast.enum";
 
 
 const _customCategory: BoweryReports.ForecastItem = {
@@ -25,6 +24,5 @@ const _expensesForecastCardNamesArray = [
 export default {
     reportCreationData: ReportDataCreator.getReportData("5008-10"),
     customCategory: _customCategory,
-    expenseCardsIDArray : expensesForecast.expenseCardsIDArray,
     expensesForecastCardNamesArray: _expensesForecastCardNamesArray
 };
