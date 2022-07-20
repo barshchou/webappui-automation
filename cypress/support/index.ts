@@ -93,6 +93,11 @@ declare global {
          * @param {string} target element to drop into
          */
         dragAndDrop: (subject:string, target:string) => void;
+
+        /**
+         * Add message to node js' `console.log` method
+         */
+        logNode: (message: string) => void;
       }
     }
   }

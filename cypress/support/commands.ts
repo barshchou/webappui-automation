@@ -110,9 +110,8 @@ Cypress.Commands.add("createApiReport",
 });
 
 Cypress.Commands.add("deleteApiReport", () => {
-    cy.log("Delete report");
-    // eslint-disable-next-line no-console
-    console.log("\nDelete report\n");
+    cy.log("Delete report");    
+    cy.logNode("\nDelete report");
         cy._mapGet(mapKeysUtils.report_id_arr).then(arr => {
             if (arr === undefined) {
                 cy.log("No report_ids saved! Nothing to delete.");
@@ -121,8 +120,7 @@ Cypress.Commands.add("deleteApiReport", () => {
             else {
                 arr.forEach(reportId => {
                     cy.log(`Deleting report with id: ${reportId}`);
-                    // eslint-disable-next-line no-console
-                    console.log(`Deleting report with id: ${reportId}\n`);
+                    cy.logNode(`Deleting report with id: ${reportId}`);
                     // Deleting report
                     cy.request({
                         method:"DELETE",
@@ -217,5 +215,9 @@ Cypress.Commands.add("_mapSet", (_key:any, _value:any) => {
 
 Cypress.Commands.add("_mapGet", (_key: any) => {
     return _map.get(_key);
+});
+
+Cypress.Commands.add("logNode", (message: string) => {
+    return cy.task("logNode", message);
 });
 //#endregion

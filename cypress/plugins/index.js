@@ -237,6 +237,13 @@ module.exports = (on, config) => {
       return await _loginApi(_envUrl, _username, _password);
     }
   });
+
+  on("task",{
+    logNode(message){
+      console.log(message);
+      return null;
+    }
+  })
   //#endregion
 
   return config;
