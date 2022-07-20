@@ -8,15 +8,11 @@ const _compAdjustments = {
     marketConditions: 0,
 };
 
-const _cumulativePricePerSF = "$118";
-
-
 export default {
     reportCreationData: ReportDataCreator.getReportData("4109", {
         conclusionValue: Enums.VALUE_CONCLUSION_TYPE.AS_STABILIZED
     }),
     comparableAdjustment: _compAdjustments,
     calculationUnits: "PSF",
-    basis:"Price per SF",
-    cumulativePricePerSF: _cumulativePricePerSF
+    basis:"Price per SF"
 };
