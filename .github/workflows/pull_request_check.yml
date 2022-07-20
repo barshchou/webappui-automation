@@ -7,7 +7,7 @@ on:
 jobs:
   Run-tsc-check:
     runs-on: ubuntu-latest
-    if: github.event.pull_request.draft == false || ( github.event.label.name == 'ready_for_review' && github.event.pull_request.draft == false && github.event_name == 'labeled' )
+    if: github.event.label.name == 'ready_for_review'
     container: cypress/browsers:node16.13.2-chrome100-ff98
     steps:
       - name: Checkout
