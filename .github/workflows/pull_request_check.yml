@@ -23,7 +23,6 @@ jobs:
 
   Run-smoke-tests:
     needs: Run-tsc-check
-    if: ${{ !github.event.pull_request.draft }} && {{ github.event.label.name == 'ready_for_review' }}
     runs-on: ubuntu-latest
     container: cypress/browsers:node16.13.2-chrome100-ff98
     permissions:
@@ -73,7 +72,6 @@ jobs:
   Run-included-tests:
     needs: [Run-tsc-check, Run-smoke-tests]
     runs-on: ubuntu-latest
-    if: ${{ !github.event.pull_request.draft }} && {{ github.event.label.name == 'ready_for_review' }}
     container: cypress/browsers:node16.13.2-chrome100-ff98
     permissions:
       id-token: write
