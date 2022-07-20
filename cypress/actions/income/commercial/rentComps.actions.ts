@@ -144,7 +144,7 @@ class CommercialRentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
         return this;
     }
 
-    clickEditButtonByRowNumber(group = "unsorted", rowNumber = 0): CommercialRentCompsActions {
+    clickEditButtonByRowNumber(group = "Unsorted", rowNumber = 0): CommercialRentCompsActions {
         rentCompsPage.getEditButtonByRowNumberAndGroup(group, rowNumber).click();
         return this;
     }
@@ -154,7 +154,7 @@ class CommercialRentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
         return this;
     }
 
-    verifyRentPerSFCellValue(value: number, group = "unsorted", rowNumber = 0): CommercialRentCompsActions {
+    verifyRentPerSFCellValue(value: number, group = "Unsorted", rowNumber = 0): CommercialRentCompsActions {
         rentCompsPage.getRentPerSFCellByRowNumberAndGroup(group, rowNumber).should("have.text", `$${value}.00`);
         return this;
     }
@@ -243,7 +243,7 @@ class CommercialRentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
         return this;
     }
 
-    saveCompPricePerSFPerYearToAliasByIndex(group = "unsorted", index = 0): CommercialRentCompsActions {
+    saveCompPricePerSFPerYearToAliasByIndex(group = "Unsorted", index = 0): CommercialRentCompsActions {
         rentCompsPage.getRentPerSFCellByRowNumberAndGroup(group, index).invoke("text").then(elText => {
             const numberPriceValue = getNumberFromDollarNumberWithCommas(elText.trim());
             _map.set(`${index + 1}${mapKeysUtils.rent_per_sf}`, numberPriceValue);
@@ -251,7 +251,7 @@ class CommercialRentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
         return this;
     }
 
-    saveCompPricesPerSFPerYearToAliasNumberFirstComps(numberToSave: number, group = "unsorted"): CommercialRentCompsActions {
+    saveCompPricesPerSFPerYearToAliasNumberFirstComps(numberToSave: number, group = "Unsorted"): CommercialRentCompsActions {
         for (let i = 0; i < numberToSave; i++) {
             this.saveCompPricePerSFPerYearToAliasByIndex(group, i);
         }
