@@ -20,28 +20,49 @@ Cypress.on("uncaught:exception", () => {
     return false;
 });
 
-Cypress.on("fail", (err) => {
+Cypress.on("fail", (err, runnable) => {
+  const createCustomErrorMessage = (error, steps, runnableObj) => {
+    let lastSteps = "Last logged step:\n";
+    steps.forEach(step => {
+      lastSteps += `${step}\n`;
+    });
+
+    const messageArr = [
+      `Test Suite: ${runnableObj.parent.title}`, // describe('...')
+      `Test: ${runnableObj.title}`, // it('...')
+      "----------",
+      `${error.message}`,
+      `\n${lastSteps}`
+    ];
+
+    return messageArr.join('\n');
+  };
+
   recordDOM_Snapshot();
   recordProxiedRequests();
   let customError = err;
-  // customError.message = "Test";
+
+  const customErrorMessage = createCustomErrorMessage(
+    err,
+    Cypress.env("stepInfo") || [ "no steps provided..." ],
+    runnable,
+  );
+
+  const updatedError = (changeValue: object) => {
+    return customError = { ...customError, ...changeValue };
+  };
+
+  const includesErrorMessage = (text: string) => customError.message.includes(text);
+
+  customError.message = customErrorMessage;
+
   switch (customError.name) {
     case "AssertionError":
-      customError = {
-        ...customError, name: "Test", message: "Test"
-      };
-      break;
-
-    case "CypressError": 
-      customError = {
-        ...customError, name: "CypressError", message: "CypressError"
-      };
-      break;
-
-    case "Error": 
-      customError = {
-        ...customError, name: "Error", message: "Error"
-      };
+      if (includesErrorMessage("Expected to find element")) {
+        updatedError({ name: "Element not found" });
+      } else if (includesErrorMessage("to have")) {
+        updatedError({ name: "Validation error" });
+      }
       break;
       
     default: 

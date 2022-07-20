@@ -141,6 +141,12 @@ Cypress.Commands.add("dragAndDrop", (subject, target) => {
 });
 
 Cypress.Commands.add("stepInfo", (message:string) => {
+    let arr = Cypress.env("stepInfo") || [];
+    // Add only last step
+    if (arr.length >= 1) {
+        arr = [];
+    }
+    arr.push(message);
     Cypress.log({
         displayName:"StepInfo",
         message:`${message}`,
@@ -150,6 +156,7 @@ Cypress.Commands.add("stepInfo", (message:string) => {
             };
         }
     });
+    Cypress.env("stepInfo", arr);
 });
 
 
