@@ -23,7 +23,31 @@ Cypress.on("uncaught:exception", () => {
 Cypress.on("fail", (err) => {
   recordDOM_Snapshot();
   recordProxiedRequests();
-  throw err;
+  let customError = err;
+  // customError.message = "Test";
+  switch (customError.name) {
+    case "AssertionError":
+      customError = {
+        ...customError, name: "Test", message: "Test"
+      };
+      break;
+
+    case "CypressError": 
+      customError = {
+        ...customError, name: "CypressError", message: "CypressError"
+      };
+      break;
+
+    case "Error": 
+      customError = {
+        ...customError, name: "Error", message: "Error"
+      };
+      break;
+      
+    default: 
+       customError;
+  }
+  throw customError;
 });
 
 declare global {
