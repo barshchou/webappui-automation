@@ -37,10 +37,12 @@ describe("Adjusted Price per Residential Unit in Sales Adjustment Grid is calcul
         cy.task("getFilePath", { _reportName: testData.reportCreationData.reportNumber, _docx_html: "html" }).then(file => {
             cy.log(<string>file);
             cy.visit(<string>file);
-            cy.contains("Cumulative Price Per SF")
+            cy.readFile(`./cypress/spec_data/${Cypress.spec.name}.txt`).then(text => {
+                cy.contains("Cumulative Price Per SF")
                 .parent().parent().parent()
                 .scrollIntoView().find("td").last()
-                .should("have.text", testData.cumulativePricePerSF);
+                .should("have.text", text);
+              });
         }); 
     });
 });

@@ -44,4 +44,6 @@ export default class ResidentialRentRollSharedPage extends BasePage {
 
     get stabilizedMonthlyRentCells() {return cy.get("[name^='units['][name$='.rent']");}
 
+    get rentSFCell() {return cy.xpath("//*[contains(@class, 'readOnly') and (contains(@data-qa,'rent/SF'))]");}
+
 }
