@@ -35,8 +35,8 @@
         "ImportDeclaration": 1, 
         "offsetTernaryExpressions": false 
         }],
-      "block-scoped-var": "error",
+      "block-scoped-var": "warn",
       "curly": "warn",
-      "default-case":"error"
+      "default-case":"warn"
     }
 }
