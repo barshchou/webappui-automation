@@ -5,6 +5,7 @@ import {
     numberWithCommas
 } from "../../../utils/numbers.utils";
 import BaseActionsExt from "../base/base.actions.ext";
+import { BoweryReports } from "../../types/boweryReports.type";
 
 class SummaryActions extends BaseActionsExt<typeof summaryPage> {
 
@@ -167,6 +168,11 @@ class SummaryActions extends BaseActionsExt<typeof summaryPage> {
         this.enterCurrentGrossBuildingArea(description.grossArea)
             .enterCurrentNumberOfResUnits(description.numberOfUnits)
             .enterCurrentFloorsNumber(description.floorsNumber);
+        return this;
+    }
+
+    selectBasisFootAnalysis(basisSquareFootAnalysis: BoweryReports.BasisSquareFootAnalysis): SummaryActions {
+        summaryPage.basisSquareFootAnalysis(basisSquareFootAnalysis).click().should('be.checked');
         return this;
     }
 }

@@ -41,3 +41,4 @@ export type BondTypes = keyof typeof Enums.BOND_TYPES
 export type ExpenseCardName = keyof typeof Enums.EXPENSES_CARD_NAMES
 export type ReimbursementColumnsId = keyof typeof Enums.REIMBURSEMENT_COLUMN_ID
 export type CalculationType = keyof typeof Enums.CALCULATION_TYPE
+export type BasisSquareFootAnalysis = keyof typeof Enums.BASIS_SQUARE_FOOT_ANALYSIS

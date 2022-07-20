@@ -1,3 +1,4 @@
+import { BoweryReports } from "../../types/boweryReports.type";
 import BasePage from "../base/base.page";
 
 class PropertySummaryPage extends BasePage {
@@ -52,6 +53,8 @@ class PropertySummaryPage extends BasePage {
     get textBox() {return cy.get("*[role=textbox]");}
 
     get saveExportEditButton() {return cy.xpath("//button[.='Save'][not(@data-qa='form-save-btn')]");}
+
+    basisSquareFootAnalysis(basis: BoweryReports.BasisSquareFootAnalysis) { return cy.get(`[name="basisForSFAnalysis"][value="${basis}"]`);}
 }
 
 export default new PropertySummaryPage();
