@@ -1,6 +1,7 @@
 import enums from "../../../enums/enums";
 import rentReconciliationPage from "../../../pages/income/commercial/rentReconciliation.page";
 import { BoweryReports } from "../../../types/boweryReports.type";
+import { RentReconciliationKeys } from "../../../utils/index";
 import BaseActionsExt from "../../base/base.actions.ext";
 
 class RentReconciliationActions extends BaseActionsExt<typeof rentReconciliationPage> {
@@ -78,21 +79,21 @@ class RentReconciliationActions extends BaseActionsExt<typeof rentReconciliation
             let leaseTermsAdjustmentSubTotal = calculationType === enums.CALCULATION_TYPE.percent 
                 ? (rentSf * (100 + Number(leaseTermAdj))) / 100 
                 : rentSf + Number(leaseTermAdj.replace('$', ''));
-            cy._mapSet('leaseTermsAdj', leaseTermsAdjustmentSubTotal);
+            cy._mapSet(RentReconciliationKeys.leaseTermsAdj, leaseTermsAdjustmentSubTotal);
         });
         return this;
     }
 
     getMarketConditionAdjustment(compIndex = 0): RentReconciliationActions {
         rentReconciliationPage.marketConditionsAdjustments(compIndex).invoke('attr', 'value').then(marketConditionAdj => {
-            cy._mapSet('marketConditionAdj', marketConditionAdj);
+            cy._mapSet(RentReconciliationKeys.marketConditionAdj, marketConditionAdj);
         });
         return this;
     }
 
     getCompRent(compIndex = 0): RentReconciliationActions {
         rentReconciliationPage.compRent(compIndex).invoke('text').then(rentSf => {
-            cy._mapSet('compRentSF', Number(rentSf.replace('$', '')));
+            cy._mapSet(RentReconciliationKeys.compRentSF, Number(rentSf.replace('$', '')));
         });
         return this;
     }
@@ -105,11 +106,11 @@ class RentReconciliationActions extends BaseActionsExt<typeof rentReconciliation
      */
     verifyTrendedRentSF(calculationType: BoweryReports.CalculationType, compIndex = 0): RentReconciliationActions {
         this.getCompRent(compIndex);
-        cy._mapGet('compRentSF').then(compRent => {
+        cy._mapGet(RentReconciliationKeys.compRentSF).then(compRent => {
             this.getLeaseTermsAdjustment(compRent, calculationType, compIndex)
                 .getMarketConditionAdjustment(compIndex);
-            cy._mapGet('leaseTermsAdj').then(leaseTermsAdjustmentSubTotal => {
-                cy._mapGet('marketConditionAdj').then(marketConditionAdjustment => {
+            cy._mapGet(RentReconciliationKeys.leaseTermsAdj).then(leaseTermsAdjustmentSubTotal => {
+                cy._mapGet(RentReconciliationKeys.marketConditionAdj).then(marketConditionAdjustment => {
                     let expectedTrendedRentSF = ((Number(leaseTermsAdjustmentSubTotal) * (100 + Number(marketConditionAdjustment))) / 100);
                     let expectedTrendedRentSFRounded = Math.round(expectedTrendedRentSF * 1000) / 1000;
                     rentReconciliationPage.getTrendedRentSF(compIndex)
@@ -124,9 +125,9 @@ class RentReconciliationActions extends BaseActionsExt<typeof rentReconciliation
 
     verifyLeaseTermsAdjustment(calculationType: BoweryReports.CalculationType, compIndex = 0): RentReconciliationActions {
         this.getCompRent(compIndex);
-        cy._mapGet('compRentSF').then(compRent => {
+        cy._mapGet(RentReconciliationKeys.compRentSF).then(compRent => {
             this.getLeaseTermsAdjustment(compRent, calculationType, compIndex);
-            cy._mapGet('leaseTermsAdj').then(leaseTermsAdjustmentSubTotal => {
+            cy._mapGet(RentReconciliationKeys.leaseTermsAdj).then(leaseTermsAdjustmentSubTotal => {
                 rentReconciliationPage.getLeaseTermsAdjustmentSubTotal(compIndex)
                     .should('have.text', leaseTermsAdjustmentSubTotal < 0 
                         ? `-$${Math.abs(leaseTermsAdjustmentSubTotal).toFixed(2)}`
