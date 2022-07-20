@@ -33,7 +33,7 @@ describe(`Check the order of comps in the export when 'custom' dropdown is chose
 
             cy._mapGet(mapKeysUtils.sales_comps_addresses).then(_addresses => {
                 // writing addresses into file so we can share this data between the test cases
-                cy.writeFile(`./${mapKeysUtils.sales_comps_addresses}.txt`, _addresses);
+                cy.writeFile(testData.memoTestDataFile, _addresses);
                 expect(_addresses).to.deep.equal(comps);
             });
         });
@@ -55,21 +55,10 @@ describe(`Check the order of comps in the export when 'custom' dropdown is chose
                 cy.log(<string>file);
                 cy.visit(<string>file);
          
-                cy.readFile(`./${mapKeysUtils.sales_comps_addresses}.txt`).then(data => {
-
-                    // ernst: this step will be uncommented/removed when behavior will be explained
-                    // cy.stepInfo(`5. [QA-5136] -> User see that the order of Selected Comps
-                    // in 'Comparable Sales Adjustment Grid' section  are the same as the order on Sales Adjustment Grid`);
-                    // cy.contains("Comparable Sales Adjustment Grid").next()
-                    // .scrollIntoView().contains("Address")
-                    // .parents("tr").find("p").spread((...addresses) => {
-                    //     addresses = addresses.map(a => a.innerText).splice(-2).map(a => a.split(",")[0]);
-                    //     cy.log(<any>addresses);
-                    //     expect(JSON.parse(data)).to.deep.equal(addresses);
-                    // });
-
+                cy.readFile(testData.memoTestDataFile).then(data => {
                     cy.stepInfo(`5. [QA-5136] -> User see that the order of Selected Comps
-                                in 'Comparable Sales Outline' section are the same as the order on Sales Adjustment Grid`);
+                    in 'Comparable Sales Outline' section are the same as the order on Sales Adjustment Grid`);
+                    
                     testData.compsToAdd.forEach(index => {
                         cy.contains(`Comparable Sale ${index+1}`).scrollIntoView().next()
                             .contains(JSON.parse(data)[index]).should("exist");

@@ -172,7 +172,7 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
             cy.wrap(comps).as(Alias.salesComps.addressSelectedComps);
 
             cy.get(`@${Alias.salesComps.addressSelectedComps}`).then(
-                _uiAddresses => cy.log("Addresses from SelectedComps table: "+<any>_uiAddresses)
+                _uiAddresses => cy.log("Addresses from SelectedComps table: " + <any>_uiAddresses)
             );
 
             cy._mapGet(mapKeysUtils.sales_comps_addresses).then(_api_addresses => {
