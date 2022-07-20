@@ -19,10 +19,7 @@ const dataFixture = () => {
     };
 };
 
-const _xpath = "//tbody[@data-qa='as-is-as-stabilized']/tr[2]/td[1]";
-
 export default {
     reportCreationData: reportCreationFixture(),
     data: Object.freeze(dataFixture()),
-    xpath: _xpath
 };

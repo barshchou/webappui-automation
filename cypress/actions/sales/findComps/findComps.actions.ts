@@ -273,6 +273,7 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
     }
 
     clearNumericInputNewComp(elementAlias: string): FindCompsActions {
+        // Number "4235" means something for this input
         cy.get(`@${elementAlias}`, { includeShadowDom: true }).realClick().type("4235", { force: true }).clear({ force: true });
         return this;
     }

@@ -68,6 +68,8 @@ class ValueConclusionPage extends BasePage {
     get asStabilizedCommissionFeeAmount() {return cy.get("[data-qa^='asStabilizedLossItems.commissionFee.amount'] input:not([type=hidden])");}
 
     get numberOfUnitsAmount() {return cy.get("td[data-qa='unitsNumber-amount-cell']");}
+
+    get salesValueConclusionTableOfUnitsAmount() {return cy.xpath("//tbody[@data-qa='as-is-as-stabilized']/tr[2]/td[1]");}
 }
 
 export default new ValueConclusionPage();
