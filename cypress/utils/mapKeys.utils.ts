@@ -1,14 +1,5 @@
 export default {
     report_id: `report_id_key`,
-    /**
-     * Key for array of `report_id`'s. Used for report removal after test run
-     */
-    report_id_arr: "report_id_arr_key",
-    /**
-     * Key for bearer token necessary for report removal via api
-     */
-    bearer_token:"bearer_token_key",
-    user_id:"user_id_key",
     rent_per_sf: "rent_per_SF_per_year",
     computed_comps_min: "computed_comps_min",
     computed_comps_max: "computed_comps_max",
