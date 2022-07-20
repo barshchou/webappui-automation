@@ -64,7 +64,7 @@ class CompGroupsActions extends BaseActionsExt<typeof compGroupsPage> {
             
             commercialUnit.dragAndDrop(subject, target);
             // VB: For more than 2 units Drag and drop is too slow and we need to wait a bit between dnd actions.
-            cy.wait(500);
+            cy.wait(1500);
         }
 
         this.verifyAllItemsDragged();
@@ -72,7 +72,7 @@ class CompGroupsActions extends BaseActionsExt<typeof compGroupsPage> {
     }
 
     verifyAllItemsDragged(): CompGroupsActions {
-        compGroupsPage.draggablePlaceholder.should('be.visible');
+        compGroupsPage.draggablePlaceholder.should('exist');
         return this;
     }
 }

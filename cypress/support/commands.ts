@@ -30,6 +30,17 @@ export const _mutateArrayInMap = (mapKey: string, value: any, message = "Unknown
     cy._mapGet(mapKey).then(arr => cy.log(`${message}: ${arr}`));
 };
 
+/**
+ * Create new file and save value in parameter. 
+ * To get the parameter use: `cy.readFile("./path/to/file").then(text => {cy.log(text);});`
+ * @param value Value to save
+ * @param filePath Custom file path
+ */
+export const _saveDataInFile = (value: any, filePath = `./cypress/spec_data/${Cypress.spec.name}.txt`) => {
+    cy.writeFile(filePath, value);
+    cy.log(`Saved value: ${value}`);
+};
+
 //#region plugin commands initialization
 addMatchImageSnapshotCommand({
     failureThreshold: 0.05, // threshold for entire image
