@@ -1,4 +1,4 @@
-import testData from "../../../../fixtures/not_full_reports/sales/find_comps/QA-4139&43&44&4482&83.fixture";
+import testData from "../../../../fixtures/not_full_reports/sales/find_comps/QA-4139_43_44_4482_83.fixture";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { Sales } from "../../../../actions";
