@@ -8,7 +8,7 @@ const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreat
 });
 
 const _address = "462 1st Avenue, New York, USA";
-const _leaseDate = "01012022";
+const _leaseDate = "01-01-2022";
 const _compGroup = "QA_4618_Comp_Group";
 const _otherUse = "TestUseOther";
 const _monthly: BoweryReports.UnitsOfMeasure = "monthly";
@@ -54,5 +54,5 @@ export default {
     compGroup: _compGroup,
     compsAmount: 1, 
     otherUse: _otherUse,
-    unitMeasureMontly: _monthly
+    unitMeasureMonthly: _monthly
 };
