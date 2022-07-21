@@ -4,6 +4,8 @@ import { _NavigationSection } from '../../../../actions/base';
 import testData from "../../../../fixtures/not_full_reports/sales/find_comps/QA-5136.fixture";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import mapKeysUtils from '../../../../utils/mapKeys.utils';
+import { pathSpecData } from '../../../../../utils/fixtures.utils';
+import { _saveDataInFile } from '../../../../support/commands';
 
 describe(`Check the order of comps in the export when 'custom' dropdown is chosen`, 
 { tags: [ "@sales", "@find_comps", "@comp_plex" ] }, () => {
@@ -33,7 +35,7 @@ describe(`Check the order of comps in the export when 'custom' dropdown is chose
 
             cy._mapGet(mapKeysUtils.sales_comps_addresses).then(_addresses => {
                 // writing addresses into file so we can share this data between the test cases
-                cy.writeFile(testData.memoTestDataFile, _addresses);
+                _saveDataInFile(_addresses, testData.memoTestDataFile);
                 expect(_addresses).to.deep.equal(comps);
             });
         });
@@ -43,8 +45,6 @@ describe(`Check the order of comps in the export when 'custom' dropdown is chose
         ReviewExport.Actions.generateDocxReport()
             .waitForReportGenerated()
             .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
-
-        deleteReport(testData.reportCreationData.reportNumber);
     });
 
     it("Check report", () => {
@@ -55,7 +55,7 @@ describe(`Check the order of comps in the export when 'custom' dropdown is chose
                 cy.log(<string>file);
                 cy.visit(<string>file);
          
-                cy.readFile(testData.memoTestDataFile).then(data => {
+                cy.readFile(`${pathSpecData()}${testData.memoTestDataFile}`).then(data => {
                     cy.stepInfo(`5. [QA-5136] -> User see that the order of Selected Comps
                     in 'Comparable Sales Outline' section are the same as the order on Sales Adjustment Grid`);
                     

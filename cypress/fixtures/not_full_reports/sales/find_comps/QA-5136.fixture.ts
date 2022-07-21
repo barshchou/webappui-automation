@@ -8,7 +8,7 @@ const aliasCompsBefore = "aliasCompsBefore";
  * Filename where test data during the report test case will be written,
  * so we read this data in export check test case
  */
-const memoTestDataFile =  `./cypress/spec_data/${Cypress.spec.name}/${mapKeysUtils.sales_comps_addresses}.txt`;
+const memoTestDataFile = `${mapKeysUtils.sales_comps_addresses}.txt`;
 
 export default {
     reportCreationData: ReportDataCreator.getReportData("5136", {
