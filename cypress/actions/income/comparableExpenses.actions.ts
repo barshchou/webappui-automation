@@ -12,8 +12,10 @@ class ComparableExpensesActions extends BaseActionsExt<typeof compExpensesPage> 
     enterAddressByColumnIndex(address: string, index = 0): ComparableExpensesActions {
         compExpensesPage.getUnifiedEditableAndTotalCells("address").eq(index).as("addressCell");
         cy.get("@addressCell").invoke('val', "some text placeholder")
-            .type(`{enter}`)
+            .realClick()
+            .realClick()
             .focus()
+            .type("something")
             .clear()
             .scrollIntoView()
             .realType(`${address}{enter}`);
@@ -22,8 +24,8 @@ class ComparableExpensesActions extends BaseActionsExt<typeof compExpensesPage> 
     }
 
     enterCityByColumnIndex(location: string, index = 0): ComparableExpensesActions {
-        compExpensesPage.getUnifiedEditableAndTotalCells("city").eq(index).dblclick().scrollIntoView()
-            .focus().clear().realType(`${location}{enter}`);
+        compExpensesPage.getUnifiedEditableAndTotalCells("city").eq(index).realClick().realClick().scrollIntoView()
+            .focus().type("something").clear().realType(`${location}{enter}`);
         compExpensesPage.getUnifiedEditableAndTotalCells("city").eq(index).children(compExpensesPage.elementToCheckCellTextSelector)
             .should("have.text", location);
         return this;
@@ -31,23 +33,23 @@ class ComparableExpensesActions extends BaseActionsExt<typeof compExpensesPage> 
 
     chooseExpensePeriodByColumnIndex(periodValue: string, index = 0): ComparableExpensesActions {
         compExpensesPage.getUnifiedEditableAndTotalCells("expensePeriod").eq(index).type("something")
-            .dblclick().focus().clear().type(`${periodValue}{enter}`);
+            .realClick().realClick().focus().type("something").clear().realType(`${periodValue}{enter}`);
         compExpensesPage.getUnifiedEditableAndTotalCells("expensePeriod").eq(index)
             .children(compExpensesPage.elementToCheckCellTextSelector).should("have.text", periodValue);
         return this;
     }
 
     enterSquareFeetByColumnIndex(value: number, index = 0): ComparableExpensesActions {
-        compExpensesPage.getUnifiedEditableAndTotalCells("squareFeet").eq(index).dblclick().scrollIntoView().focus()
-            .clear().realType(`${value}{enter}`);
+        compExpensesPage.getUnifiedEditableAndTotalCells("squareFeet").eq(index).realClick().realClick().scrollIntoView().focus()
+            .type("something").clear().realType(`${value}{enter}`);
         compExpensesPage.getUnifiedEditableAndTotalCells("squareFeet").eq(index)
             .children(compExpensesPage.elementToCheckCellTextSelector).should("have.text", `${numberWithCommas(value)}`);
         return this;
     }
 
     enterResidentialUnitsByColumnIndex(value: number, index = 0): ComparableExpensesActions {
-        compExpensesPage.getUnifiedEditableAndTotalCells("residentialUnits").eq(index).dblclick().scrollIntoView()
-            .focus().clear().realType(`${value}{enter}`);
+        compExpensesPage.getUnifiedEditableAndTotalCells("residentialUnits").eq(index).realClick().realClick().scrollIntoView()
+            .focus().type("something").clear().realType(`${value}{enter}`);
         compExpensesPage.getUnifiedEditableAndTotalCells("residentialUnits").eq(index)
             .children(compExpensesPage.elementToCheckCellTextSelector).should("have.text", value);
         return this;
@@ -56,7 +58,7 @@ class ComparableExpensesActions extends BaseActionsExt<typeof compExpensesPage> 
     enterCellDollarValueByColumnIndex(cellsElements: Cypress.Chainable, value: number, index = 0): ComparableExpensesActions {
         const valueToBe = `$${numberWithCommas(value.toFixed(2))}`;
         cellsElements.eq(index).as("cell");
-        cy.get("@cell").dblclick().scrollIntoView().clear().realType(`${value}{enter}`);
+        cy.get("@cell").realClick().realClick().scrollIntoView().focus().type("something").clear().realType(`${value}{enter}`);
         cy.get("@cell").children(compExpensesPage.elementToCheckCellTextSelector)
             .should("have.text", valueToBe);
         return this;
