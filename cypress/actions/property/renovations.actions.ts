@@ -6,7 +6,7 @@ import {
 } from "../../../utils/numbers.utils";
 import BaseActionsExt from "../base/base.actions.ext";
 
-class RenovationsActions extends BaseActionsExt<typeof renovationsPage>{
+class RenovationsActions extends BaseActionsExt<typeof renovationsPage> {
 
     chooseRenovationByValue(value: string): RenovationsActions {
         renovationsPage.prospectiveRenovationsDropdown.click();

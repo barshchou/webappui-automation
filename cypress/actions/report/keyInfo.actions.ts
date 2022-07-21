@@ -6,12 +6,12 @@ import { numberWithCommas } from "../../../utils/numbers.utils";
 
 class KeyInfoActions extends BaseActionsExt<typeof keyInfoPage> {
     enterPropertyRightsAppraisedComment(textToType: string = null, edit = true, save = true, revert = false) {
-        if (edit === true) keyInfoPage.propertyRightsAppraisedFormEditButton.click();
-            keyInfoPage.textBoxPropertyRightsAppraised.invoke("text")
+        if (edit === true) { keyInfoPage.propertyRightsAppraisedFormEditButton.click(); }
+        keyInfoPage.textBoxPropertyRightsAppraised.invoke("text")
             .then(text => {
                 keyInfoPage.textBoxPropertyRightsAppraised.focus().type(textToType ?? text);
             });
-        if(save === true) keyInfoPage.formSaveBtn().click();
+        if (save === true) { keyInfoPage.formSaveBtn().click(); }
         if (revert === true) {
             keyInfoPage.formRevertToOriginalBtn().click();
             keyInfoPage.formYesRevertBtn.click();
@@ -20,11 +20,11 @@ class KeyInfoActions extends BaseActionsExt<typeof keyInfoPage> {
     }
 
     enterDefinitionMarketValue(textToType: string = null, edit = true, save = true, revert = false) {
-        if (edit === true) keyInfoPage.definitionOfMarketValueFormEditButton.click();
+        if (edit === true) { keyInfoPage.definitionOfMarketValueFormEditButton.click(); }
         keyInfoPage.textBoxDefinitionOfMarketValue().invoke("text").then(text => {
             keyInfoPage.textBoxDefinitionOfMarketValue().focus().type(textToType ?? text);
         });
-        if(save === true) keyInfoPage.formSaveBtn().click();
+        if (save === true) { keyInfoPage.formSaveBtn().click(); }
         if (revert === true) {
             keyInfoPage.formRevertToOriginalBtn().click();
             keyInfoPage.formYesRevertBtn.click();
@@ -54,7 +54,8 @@ class KeyInfoActions extends BaseActionsExt<typeof keyInfoPage> {
         return this;
     }
 
-    checkAllInterestAppraisedByValues(interestAppraisedData: Readonly<{asIsMarket: string, asComplete: string, asStabilized: string}>): KeyInfoActions {
+    checkAllInterestAppraisedByValues(interestAppraisedData: Readonly<{asIsMarket: string, 
+        asComplete: string, asStabilized: string}>): KeyInfoActions {
         this.checkAsIsMarketInterestByValue(interestAppraisedData.asIsMarket)
             .checkAsCompleteInterestByValue(interestAppraisedData.asComplete)
             .checkAsStabilizedInterestByValue(interestAppraisedData.asStabilized);
@@ -89,7 +90,8 @@ class KeyInfoActions extends BaseActionsExt<typeof keyInfoPage> {
     }
 
     clickNarrativeSuggestions(verifyListValue: string, numberLists = 0): KeyInfoActions {
-        keyInfoPage.narrativeSuggestionsList.eq(numberLists).contains(verifyListValue).should("have.text", verifyListValue).click();
+        keyInfoPage.narrativeSuggestionsList.eq(numberLists)
+            .contains(verifyListValue).should("have.text", verifyListValue).click();
         return this;
     }
 
@@ -109,7 +111,9 @@ class KeyInfoActions extends BaseActionsExt<typeof keyInfoPage> {
     }
 
     verifyCommentaryContainsText(verifyAreaValue: string | number, commentaryTitle: string): KeyInfoActions {
-        let expectedText = typeof verifyAreaValue ===  "number" ? `${numberWithCommas(verifyAreaValue)}`: verifyAreaValue;
+        let expectedText = typeof verifyAreaValue ===  "number" 
+            ? `${numberWithCommas(verifyAreaValue)}`
+            : verifyAreaValue;
         this.Page.commentaryText(commentaryTitle).should("include.text", `${expectedText}`);
         return this;
     }

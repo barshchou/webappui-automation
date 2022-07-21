@@ -17,7 +17,8 @@ class AdjustCompsActions extends BaseActionsExt<typeof adjustCompsPage> {
         return this;
     }
 
-    checkCalculationUnitsRadio(value: BoweryReports.SalesAdjustmentGrid.CalculationUnits = Enums.CALCULATION_UNITS.perResidentialUnits): AdjustCompsActions {
+    checkCalculationUnitsRadio(value: BoweryReports.SalesAdjustmentGrid.CalculationUnits = 
+    Enums.CALCULATION_UNITS.perResidentialUnits): AdjustCompsActions {
         adjustCompsPage.calculationUnitsRadio.check(value).should("be.checked");
         return this;
     }
@@ -47,7 +48,8 @@ class AdjustCompsActions extends BaseActionsExt<typeof adjustCompsPage> {
 
     editOtherUtilitiesAdjustmentRowName(prevName: string, newName: string, index = 0): AdjustCompsActions {
         adjustCompsPage.getAdjustmentEditNameButton(prevName).click();
-        adjustCompsPage.getOtherUtilitiesAdjustmentNameInputField(index).clear().type(newName).should("have.value", newName);
+        adjustCompsPage.getOtherUtilitiesAdjustmentNameInputField(index)
+            .clear().type(newName).should("have.value", newName);
         adjustCompsPage.getOtherUtilitiesAdjustmentNameSaveButton(index).click();
         this.verifyRowWithNameExists(newName);
         return this;
@@ -170,9 +172,9 @@ class AdjustCompsActions extends BaseActionsExt<typeof adjustCompsPage> {
     }
 
     /**
-    * Verify that Trended Price per selected @param {string} basis adjusted based on
-    Net Market adjustment total value
-    */
+     * Verify that Trended Price per selected @param {string} basis adjusted based on
+     *Net Market adjustment total value
+     */
     verifyTrendedPricePerBasis(comparablesAdjustments: number[], basis: string, index = 0): AdjustCompsActions {
         adjustCompsPage.viewMarketDetails.click();
         adjustCompsPage.getPricePerBasisValue(basis).should("be.visible");
@@ -180,19 +182,20 @@ class AdjustCompsActions extends BaseActionsExt<typeof adjustCompsPage> {
             let pricePerBasisNumber = getNumberFromDollarNumberWithCommas(pricePerUnitText);
             let pricePerBasisNumberWithPercentage = 0;
             for (let i = 0; i < comparablesAdjustments.length; i++) {
-                pricePerBasisNumberWithPercentage = pricePerBasisNumber + (pricePerBasisNumber * comparablesAdjustments[i]/ 100);
+                pricePerBasisNumberWithPercentage = pricePerBasisNumber + 
+                    (pricePerBasisNumber * comparablesAdjustments[i]/ 100);
                 pricePerBasisNumber = pricePerBasisNumberWithPercentage;
             }
-             let adjustedTrendedPriceText: string;
-             if (pricePerBasisNumber < 0) {
-                 adjustedTrendedPriceText = `-$${numberWithCommas(pricePerBasisNumber.toFixed(2)
-                     .replace("-", ""))}`;
-             } else {
-                 adjustedTrendedPriceText = `$${numberWithCommas(pricePerBasisNumber.toFixed(2))}`;
-             }
-             cy.log("Cumulative Price Per Unit is: " + adjustedTrendedPriceText);
-             _saveDataInFile(`$${numberWithCommas(Math.round(pricePerBasisNumber))}`);
-             adjustCompsPage.cellCumulativePriceValue.eq(index).should("have.text", adjustedTrendedPriceText);
+            let adjustedTrendedPriceText: string;
+            if (pricePerBasisNumber < 0) {
+                adjustedTrendedPriceText = `-$${numberWithCommas(pricePerBasisNumber.toFixed(2)
+                    .replace("-", ""))}`;
+            } else {
+                adjustedTrendedPriceText = `$${numberWithCommas(pricePerBasisNumber.toFixed(2))}`;
+            }
+            cy.log("Cumulative Price Per Unit is: " + adjustedTrendedPriceText);
+            _saveDataInFile(`$${numberWithCommas(Math.round(pricePerBasisNumber))}`);
+            adjustCompsPage.cellCumulativePriceValue.eq(index).should("have.text", adjustedTrendedPriceText);
         });
             
         return this;

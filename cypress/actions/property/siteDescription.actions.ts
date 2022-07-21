@@ -2,7 +2,7 @@ import siteDescriptionPage from "../../pages/property/siteDescription.page";
 import { numberWithCommas } from "../../../utils/numbers.utils";
 import BaseActionsExt from "../base/base.actions.ext";
 
-class SiteDescriptionActions extends BaseActionsExt<typeof siteDescriptionPage>{
+class SiteDescriptionActions extends BaseActionsExt<typeof siteDescriptionPage> {
 
     editTransportationDiscussionCommentary(newCommentary: string): SiteDescriptionActions {
         siteDescriptionPage.transportationCommEdit.click();
@@ -12,7 +12,7 @@ class SiteDescriptionActions extends BaseActionsExt<typeof siteDescriptionPage>{
     }
 
     checkSurroundingResidential(): SiteDescriptionActions {
-        siteDescriptionPage.surroundingResidentalCheckbox.check().should("have.value", "true");
+        siteDescriptionPage.surroundingResidentialCheckbox.check().should("have.value", "true");
         return this;
     }
 
