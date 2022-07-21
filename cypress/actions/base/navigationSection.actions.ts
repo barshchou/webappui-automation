@@ -6,15 +6,15 @@ import mapKeysUtils from "../../utils/mapKeys.utils";
 class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPage> {
     clickYesIfExist(): NavigationSectionActions {
         cy.get("body").then($body => {
-                if ($body.text().includes("You have unsaved changes")) {
-                    cy.get("[data-qa=form-confirm-dialog]").invoke('prop', 'hidden').then($prop => {
-                        cy.log(`${$prop}`);
-                        if ($prop == false) {
-                            this.clickYesButton();
-                        }
-                    });
-                }
-            });
+            if ($body.text().includes("You have unsaved changes")) {
+                cy.get("[data-qa=form-confirm-dialog]").invoke('prop', 'hidden').then($prop => {
+                    cy.log(`${$prop}`);
+                    if ($prop == false) {
+                        this.clickYesButton();
+                    }
+                });
+            }
+        });
         return this;
     }
 
@@ -27,7 +27,7 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         cy.get('[id="review-and-export"]').click();
         this.clickYesIfExist();
         this.verifyProgressBarNotExist();
-        if (isNewReport) cy.wait(`@${reportAlias}`, { timeout:20000 });
+        if (isNewReport) { cy.wait(`@${reportAlias}`, { timeout:20000 }); }
         return this;
     }
 
@@ -283,7 +283,7 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
             .clickYesIfExist();
             
         ignoreGqlWait ? cy.log("Ignore wait for sales comps fetch") 
-        : cy.wait(`@${Alias.gql.SearchSalesTransactions}`, { timeout:120000 }); 
+            : cy.wait(`@${Alias.gql.SearchSalesTransactions}`, { timeout:120000 }); 
     
         return this;
     }
@@ -468,16 +468,16 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
 
     navigateToCoverPage(): NavigationSectionActions {
         this.clickPreviewEditButton()
-        .clickCoverPage()
-        .clickYesIfExist();
-    return this;
+            .clickCoverPage()
+            .clickYesIfExist();
+        return this;
     }
 
     navigateToIntroduction(): NavigationSectionActions {
         this.clickPreviewEditButton()
-        .clickIntroduction()
-        .clickYesIfExist();
-    return this;
+            .clickIntroduction()
+            .clickYesIfExist();
+        return this;
     }
 
     navigateToLetterOfTransmittal(): NavigationSectionActions {
@@ -519,7 +519,7 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
     navigateToProForma(): NavigationSectionActions {
         this.clickIncomeApproachButton()
             .clickProForma();
-            this.clickYesIfExist();
+        this.clickYesIfExist();
         return this;
     }
 
@@ -663,7 +663,8 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
     }
 
     /**
-     * @description Opens specific page by url, that contains id of current report, which is opened in moment of method call
+     * @description Opens specific page by url, that contains id of current report, 
+     * which is opened in moment of method call
      * @param pageRoute The route to specific page, pages routes are contained in pages_routes enums directory
      */
     openPageByVisit(pageRoute: string): NavigationSectionActions {
