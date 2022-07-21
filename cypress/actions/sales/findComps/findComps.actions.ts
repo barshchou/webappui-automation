@@ -308,7 +308,7 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
 export default new FindCompsActions(findCompsPage);
 
 /**
- * list of elems -> iterate over it 
+ * list of elements -> iterate over it 
  * -> if elem includes address = record it to map 
  * | if list over -> scroll to the last elem of the list
  * 
