@@ -22,8 +22,8 @@ export const loginAction = (username = Cypress.env("USERNAME"), password = Cypre
 };
 
 export const createReport = (reportCreationData: BoweryAutomation.ReportCreationData, 
-                            username = Cypress.env("USERNAME"), password = Cypress.env("PASSWORD"),
-                            payloadFunction = createPayload) => {
+    username = Cypress.env("USERNAME"), password = Cypress.env("PASSWORD"),
+    payloadFunction = createPayload) => {
 
     salesInterceptions();
 
@@ -32,7 +32,7 @@ export const createReport = (reportCreationData: BoweryAutomation.ReportCreation
     cy._mapGet(mapKeysUtils.user_id).then(_userId => {
         cy.log(`user id is: ${_userId}`);
         const _payload = payloadFunction(reportCreationData, _userId);
-        if(Cypress.env("report") == "api"){
+        if (Cypress.env("report") == "api") {
             cy._mapGet(mapKeysUtils.bearer_token).then(_token => {
                 cy.createApiReport(
                     reportCreationData, _payload, _token, envUrl
@@ -42,8 +42,7 @@ export const createReport = (reportCreationData: BoweryAutomation.ReportCreation
                 cy.log("Report id: "+reportId);
                 cy.visit(`/report/${reportId}`);
             });
-        }
-        else {
+        } else {
             _HomePage.createReport(reportCreationData);
         }
     });
