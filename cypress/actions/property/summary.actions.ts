@@ -1,3 +1,4 @@
+import { PropertySquareFootAnalysisKeys } from './../../enums/enumKeys.enum.d';
 import summaryPage from "../../pages/property/summary.page";
 import {
     cutDecimalPartToNumberOfDigits,
@@ -167,6 +168,17 @@ class SummaryActions extends BaseActionsExt<typeof summaryPage> {
         this.enterCurrentGrossBuildingArea(description.grossArea)
             .enterCurrentNumberOfResUnits(description.numberOfUnits)
             .enterCurrentFloorsNumber(description.floorsNumber);
+        return this;
+    }
+
+    checkSquareFootAnalysis(radio: PropertySquareFootAnalysisKeys, number: number): SummaryActions {
+        summaryPage.getRadioSquareFootAnalysis(radio).check();
+        summaryPage.getCheckedSquareFootAnalysis(number).invoke("attr", "data-qa").should("eq", "checked");
+        return this;
+    }
+
+    enterBasisForSFAnalysisInput(value: string): SummaryActions {
+        summaryPage.basisForSFAnalysisInput.type(value).should("have.value", numberWithCommas(value));
         return this;
     }
 }
