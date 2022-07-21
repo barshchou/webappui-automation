@@ -1,7 +1,7 @@
 import { Sales } from '../../../../actions/index';
 import testData from "../../../../fixtures/not_full_reports/sales/adjust_comps/QA-4103_13.fixture";
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 
 describe("Net Property Adjustments in Sales Adjustment Grid is calculated with correct formula", 
     { tags: [ "@adjust_comps", "@sales" ] }, () => {
@@ -34,6 +34,5 @@ describe("Net Property Adjustments in Sales Adjustment Grid is calculated with c
             .clickAddOtherAdjustmentButton()
             .enterOtherAdjustmentByColumn(testData.comparable.otherAdjustment)
             .verifyNetPropertyAdjustmentsByCompIndex();
-        deleteReport(testData.reportCreationData.reportNumber);
     });
 });

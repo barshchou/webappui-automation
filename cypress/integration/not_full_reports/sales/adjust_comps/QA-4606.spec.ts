@@ -2,7 +2,7 @@ import { createReportData } from './../../../../fixtures/not_full_reports/sales/
 import testData from "../../../../fixtures/not_full_reports/sales/adjust_comps/QA-4606.fixture";
 import { Property, Sales } from "../../../../actions";
 import { _NavigationSection as NavigationSection } from "../../../../actions/base";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 
 describe("[QA-4606] Check the reference 'Condition' line in the Sales Adjustment Grid", 
     { tags: [ "@adjust_comps", "@sales" ] }, () => {
@@ -31,8 +31,6 @@ describe("[QA-4606] Check the reference 'Condition' line in the Sales Adjustment
                 > Property Description > Site Description`);
                 Sales._AdjustComps.clickViewAdjustmentDetails()
                     .verifyExistValueInOtherAdjustmentDetails(testData.propertyCondition);
-
-                deleteReport(createReportData(conclusion).reportNumber);
             }); 
     });
 });

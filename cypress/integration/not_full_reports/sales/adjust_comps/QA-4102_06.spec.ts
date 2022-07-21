@@ -1,5 +1,5 @@
 import testData from "../../../../fixtures/not_full_reports/sales/adjust_comps/QA-4102_06.fixture";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { ReviewExport, Sales } from "../../../../actions";
 
@@ -47,8 +47,6 @@ describe("[QA-4102_06] -> Total Utility Adjustments in Sales Adjustment Grid is 
         cy.stepInfo("9. Generate and download this report");
         _NavigationSection.Actions.openReviewAndExport();
         ReviewExport.Actions.generateDocxReport().downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
-        
-        deleteReport(testData.reportCreationData.reportNumber);
     });
 
     it("Check export", () => {
