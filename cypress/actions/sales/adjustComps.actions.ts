@@ -6,6 +6,7 @@ import {
 import BaseActionsExt from "../base/base.actions.ext";
 import { BoweryReports } from "../../types/boweryReports.type";
 import { _saveDataInFile } from "../../support/commands";
+import Enums from "../../enums/enums";
 
 class AdjustCompsActions extends BaseActionsExt<typeof adjustCompsPage> {
     /**
@@ -16,7 +17,7 @@ class AdjustCompsActions extends BaseActionsExt<typeof adjustCompsPage> {
         return this;
     }
 
-    checkCalculationUnitsRadio(value: string): AdjustCompsActions {
+    checkCalculationUnitsRadio(value: BoweryReports.SalesAdjustmentGrid.CalculationUnits = Enums.CALCULATION_UNITS.perResidentialUnits): AdjustCompsActions {
         adjustCompsPage.calculationUnitsRadio.check(value).should("be.checked");
         return this;
     }
@@ -239,6 +240,16 @@ class AdjustCompsActions extends BaseActionsExt<typeof adjustCompsPage> {
 
     clickAddCustomUtilitiesAdjustment(): AdjustCompsActions {
         adjustCompsPage.addCustomUtilitiesAdjustmentButton.click();
+        return this;
+    }
+
+    clickViewAdjustmentDetails(): AdjustCompsActions {
+        adjustCompsPage.viewAdjustmentDetails.click();
+        return this;
+    }
+
+    verifyExistValueInOtherAdjustmentDetails(value: string, index = 1): AdjustCompsActions {
+        adjustCompsPage.getOtherAdjustmentColumnValue(value, index).should("have.text", value);
         return this;
     }
 }

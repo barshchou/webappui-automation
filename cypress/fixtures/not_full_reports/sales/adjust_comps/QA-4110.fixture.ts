@@ -19,7 +19,7 @@ const _compAdjustments = {
 export default {
     reportCreationData: _reportCreationData,
     comparablesAdjustments: _compAdjustments,
-    calculationUnits: "Per Total Units",
+    calculationUnits: Enums.CALCULATION_UNITS.perTotalUnits,
     basis: "Price per Unit",
     cumulativePricePerUnit: _cumulativePricePerUnit,
     compAddress
