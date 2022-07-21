@@ -31,6 +31,8 @@ describe(`[QA-5135] -> [Sales > Find Comps] Check the comps order when "custom" 
         cy.stepInfo(`5. [QA-5135] -> If user selected custom order at first, 
                     re-ordered comps and after that selected “Date Sold” sorting 
                     -> comps get reordered by sale date on the fly.`);
+
+                    //Check again, does this method check sort by sale date
         
         Sales._FindComps.Actions.selectedCompsSetSort("Date Sold").checkSalesCompAddedToList();
 
