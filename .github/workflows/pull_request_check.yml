@@ -83,8 +83,8 @@ jobs:
         with:
           token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
       
-      - name: Install cypress
-        run: npm i cypress@10.3.1 -g
+      - name: Installing modules
+        run: npm install
 
       - name: Install find specs module
         run: npm install -g find-cypress-specs@latest
