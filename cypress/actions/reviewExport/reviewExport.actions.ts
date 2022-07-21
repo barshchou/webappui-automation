@@ -62,7 +62,7 @@ class ReviewExportActions extends BaseActionsExt<typeof reviewExportPage> {
      */
     downloadAndConvertDocxReport(reportName: string): ReviewExportActions {
         reviewExportPage.downloadBtn.click();
-        cy.task("getFilePath", { _reportName: `Bowery Appraisal_${reportName}`, _docx_html: "docx" }).then(file => {
+        cy.task("getFilePath", { reportName: `Bowery Appraisal_${reportName}`, docxHtml: "docx" }).then(file => {
             cy.log(<string>file);
             cy.task("waitForFileExists", file);
             cy.task("convertDocxToHtml", file);
@@ -122,7 +122,8 @@ class ReviewExportActions extends BaseActionsExt<typeof reviewExportPage> {
 
     verifyReportStatusChanged(statusToChange: BoweryReports.ReportStatus): ReviewExportActions {
         reviewExportPage.reportStatus.invoke('text').then(($status) => {
-            expect($status).to.be.equals(statusToChange, `Report ${$status} status isn't equal to expected status: ${statusToChange}`);
+            expect($status).to.be
+                .equals(statusToChange, `Report ${$status} status isn't equal to expected status: ${statusToChange}`);
         });
         return this;
     }
