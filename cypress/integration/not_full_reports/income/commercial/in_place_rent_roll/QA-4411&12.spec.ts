@@ -3,8 +3,9 @@ import Income from "../../../../../actions/income/income.manager";
 import NavigationSection from "../../../../../actions/base/navigationSection.actions";
 import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
 
-describe(`Current Commercial Income Discussion > Verify the Revert to Original button and 'Changes will be lost' functionality`, 
-        { tags:[ "@income", "@commercial", "@in_place_rent_roll" ] }, () => {
+describe(`Current Commercial Income Discussion > Verify the Revert to Original button and 
+    'Changes will be lost' functionality`, 
+{ tags:[ "@income", "@commercial", "@in_place_rent_roll" ] }, () => {
             
     before("Login, create report", () => {
         createReport(testData.reportCreationData);

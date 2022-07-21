@@ -7,18 +7,18 @@ import { createReport, deleteReport } from "../../../../../actions/base/baseTest
 describe("Verify the functionality of Edit and Cancel commentary buttons", 
     { tags:[ "@income", "@commercial", "@in_place_rent_roll" ] }, () => {
         
-    before("Login, create report", () => {
-        createReport(testData.reportCreationData);
-    });
+        before("Login, create report", () => {
+            createReport(testData.reportCreationData);
+        });
 
-    it("Test body", () => {
-        NavigationSection.navigateToCommercialInPlaceRentRoll()
-            .verifyProgressBarNotExist();
-        Income.Commercial.InPlaceRentRoll.clickEditDiscussionButton()
-            .verifyEditDiscussionButtonsDisplayed()
-            .editDiscussionTextArea(testData.newCommentary);
-        Income.Commercial.InPlaceRentRoll.clickCancelDiscussionEditButton()
-            .verifyCommentaryTextNotContains(testData.newCommentary);
-        deleteReport(testData.reportCreationData.reportNumber);
+        it("Test body", () => {
+            NavigationSection.navigateToCommercialInPlaceRentRoll()
+                .verifyProgressBarNotExist();
+            Income.Commercial.InPlaceRentRoll.clickEditDiscussionButton()
+                .verifyEditDiscussionButtonsDisplayed()
+                .editDiscussionTextArea(testData.newCommentary);
+            Income.Commercial.InPlaceRentRoll.clickCancelDiscussionEditButton()
+                .verifyCommentaryTextNotContains(testData.newCommentary);
+            deleteReport(testData.reportCreationData.reportNumber);
+        });
     });
-});

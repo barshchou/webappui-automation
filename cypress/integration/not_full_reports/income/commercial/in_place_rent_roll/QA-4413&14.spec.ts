@@ -6,14 +6,14 @@ import { createReport, deleteReport } from "../../../../../actions/base/baseTest
 describe("Current Commercial Income Discussion > Modified label and Save button functionality", 
     { tags:[ "@income", "@commercial", "@in_place_rent_roll" ] }, () => {
         
-    before("Login, create report", () => {
-        createReport(testData.reportCreationData);
-    });
+        before("Login, create report", () => {
+            createReport(testData.reportCreationData);
+        });
 
-    it("Test body", () => {
-        NavigationSection.navigateToCommercialInPlaceRentRoll()
-            .verifyProgressBarNotExist();
-        Income.Commercial.InPlaceRentRoll.editDiscussion(testData.editedCommentary);
-        deleteReport(testData.reportCreationData.reportNumber);
+        it("Test body", () => {
+            NavigationSection.navigateToCommercialInPlaceRentRoll()
+                .verifyProgressBarNotExist();
+            Income.Commercial.InPlaceRentRoll.editDiscussion(testData.editedCommentary);
+            deleteReport(testData.reportCreationData.reportNumber);
+        });
     });
-});
