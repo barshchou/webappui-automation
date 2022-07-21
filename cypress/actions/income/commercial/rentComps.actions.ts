@@ -257,7 +257,7 @@ class CommercialRentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
     saveCompPricePerSFPerYearToAliasByIndex(group = "Unsorted", index = 0): CommercialRentCompsActions {
         rentCompsPage.getRentPerSFCellByRowNumberAndGroup(group, index).invoke("text").then(elText => {
             const numberPriceValue = getNumberFromDollarNumberWithCommas(elText.trim());
-            _map.set(`${index + 1}${mapKeysUtils.rent_per_sf}`, numberPriceValue);
+            _map.set(`${index + 1}${mapKeysUtils.rentPerSf}`, numberPriceValue);
         });
         return this;
     }
@@ -304,13 +304,13 @@ class CommercialRentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
 
     saveComputedCompsColumnValues(): CommercialRentCompsActions {
         rentCompsPage.computedCompsMinCell.invoke("text").then(value => {
-            _map.set(mapKeysUtils.computed_comps_min, getNumberFromDollarNumberWithCommas(value));
+            _map.set(mapKeysUtils.computedCompsMin, getNumberFromDollarNumberWithCommas(value));
         });
         rentCompsPage.computedCompsAvgCell.invoke("text").then(value => {
-            _map.set(mapKeysUtils.computed_comps_avg, getNumberFromDollarNumberWithCommas(value));
+            _map.set(mapKeysUtils.computedCompsAvg, getNumberFromDollarNumberWithCommas(value));
         });
         rentCompsPage.computedCompsMaxCell.invoke("text").then(value => {
-            _map.set(mapKeysUtils.computed_comps_max, getNumberFromDollarNumberWithCommas(value));
+            _map.set(mapKeysUtils.computedCompsMax, getNumberFromDollarNumberWithCommas(value));
         });
         return this;
     }

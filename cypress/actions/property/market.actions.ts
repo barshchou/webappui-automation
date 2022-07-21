@@ -173,7 +173,7 @@ class MarketActions extends BaseActionsExt<typeof marketPage> {
 
     setAreaEconomicAnalysisFileValueToMap(): MarketActions {
         marketPage.areaEconomicAnalysisFile.invoke("attr", "value").then(fileName => {
-            _map.set(mapKeysUtils.area_economic_analysis_file, fileName);
+            _map.set(mapKeysUtils.areaEconomicAnalysisFile, fileName);
         });
         return this;
     }
@@ -187,7 +187,7 @@ class MarketActions extends BaseActionsExt<typeof marketPage> {
 
     setNeighborhoodDemographicFileValueToMap(): MarketActions {
         marketPage.neighborhoodDemographicFile.invoke("attr", "value").then(fileName => {
-            _map.set(mapKeysUtils.neighborhood_demographic_file, fileName);
+            _map.set(mapKeysUtils.neighborhoodDemographicFile, fileName);
         });
         return this;
     }
@@ -202,7 +202,7 @@ class MarketActions extends BaseActionsExt<typeof marketPage> {
 
     setMarketByAnalysisUseFileValueToMap(use: BoweryReports.MarketAnalysisUses): MarketActions {
         marketPage.getMarketFileByAnalysisUse(use).invoke("attr", "value").then(fileName => {
-            _map.set(`${use}_${mapKeysUtils.market_analysis_use_file}`, fileName);
+            _map.set(`${use}_${mapKeysUtils.marketAnalysisUseFile}`, fileName);
         });
         return this;
     }
@@ -217,7 +217,7 @@ class MarketActions extends BaseActionsExt<typeof marketPage> {
 
     setSubmarketByAnalysisUseFileValueToMap(use: BoweryReports.MarketAnalysisUses): MarketActions {
         marketPage.getSubmarketFileByAnalysisUse(use).invoke("attr", "value").then(fileName => {
-            _map.set(`${use}_${mapKeysUtils.submarket_analysis_use_file}`, fileName);
+            _map.set(`${use}_${mapKeysUtils.submarketAnalysisUseFile}`, fileName);
         });
         return this;
     }
@@ -240,10 +240,10 @@ class MarketActions extends BaseActionsExt<typeof marketPage> {
         cy.url().then(() => {
             let isAnyHasFile = false;
             const files: string[] = [ 
-                _map.get(mapKeysUtils.area_economic_analysis_file),
-                _map.get(mapKeysUtils.neighborhood_demographic_file),
-                _map.get(`${use}_${mapKeysUtils.market_analysis_use_file}`), 
-                _map.get(`${use}_${mapKeysUtils.submarket_analysis_use_file}`) 
+                _map.get(mapKeysUtils.areaEconomicAnalysisFile),
+                _map.get(mapKeysUtils.neighborhoodDemographicFile),
+                _map.get(`${use}_${mapKeysUtils.marketAnalysisUseFile}`), 
+                _map.get(`${use}_${mapKeysUtils.submarketAnalysisUseFile}`) 
             ];
             for (let i = 0; i < files.length; i++) {
                 cy.log(`${files[i]} file value`);

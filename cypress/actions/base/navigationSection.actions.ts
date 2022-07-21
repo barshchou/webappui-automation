@@ -669,7 +669,7 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
      */
     openPageByVisit(pageRoute: string): NavigationSectionActions {
         const baseUrl = Cypress.config().baseUrl;
-        cy._mapGet(mapKeysUtils.report_id).then(reportId => {
+        cy._mapGet(mapKeysUtils.reportId).then(reportId => {
             cy.visit(`${baseUrl}/report/${reportId}/${pageRoute}`);
         });
 
