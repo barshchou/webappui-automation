@@ -171,8 +171,18 @@ class SummaryActions extends BaseActionsExt<typeof summaryPage> {
         return this;
     }
 
-    selectBasisFootAnalysis(basisSquareFootAnalysis: BoweryReports.BasisSquareFootAnalysis): SummaryActions {
-        summaryPage.basisSquareFootAnalysis(basisSquareFootAnalysis).click().should('be.checked');
+    selectBasisSquareFootAnalysis(basisSquareFootAnalysis: BoweryReports.BasisSquareFootAnalysis): SummaryActions {
+        summaryPage.basisSquareFootAnalysis(basisSquareFootAnalysis)
+            .click()
+            .should('be.checked');
+        return this;
+    }
+
+    fillBasisSquareFootAnalysis(area: number): SummaryActions {
+        summaryPage.basisSquareFootAnalysisArea
+            .clear()
+            .type(`${area}`)
+            .should('have.value', `${numberWithCommas(area)}`);
         return this;
     }
 }
