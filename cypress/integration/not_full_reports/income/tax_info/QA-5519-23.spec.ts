@@ -39,8 +39,6 @@ describe("[QA-5183] Export column order both assessment psf and assessment per u
             .deleteRowTaxLiability(testData.rowNames.special)
             .deleteRowTaxLiability(testData.enterName)
             .deleteRowTaxLiability(testData.enterName);
-            
-        deleteReport(testData.reportCreationData.reportNumber);
     });
 
     after(() => {

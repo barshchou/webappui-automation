@@ -417,9 +417,6 @@ class TaxInfoActions extends BaseActionsExt<typeof taxInfoPage> {
                         taxInfoPage.getTaxLiabilityRowValue("Taxable Assessed Value").invoke("text").then(taxAssessedText => {
                             const allTaxAssessedNumber = sumAssessments + getNumberFromDollarNumberWithCommas(taxAssessedText);
                             const taxLiabilityTotalToBe = `$${numberWithCommas((allTaxAssessedNumber * taxRatesPercent).toFixed(2))}`;
-                            cy.log("taxAssessedText", taxAssessedText);
-                            cy.log("taxAssessedNumber", allTaxAssessedNumber);
-                            cy.log("taxLiabilityTotalToBe", taxLiabilityTotalToBe);
                             taxInfoPage.getTaxLiabilityRowValue("Tax Liability (Total)").should("have.text", taxLiabilityTotalToBe);
                         });
                     });
