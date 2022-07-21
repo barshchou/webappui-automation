@@ -20,6 +20,25 @@
       "arrow-spacing": ["warn", { "before": true, "after": true }],
       "array-bracket-spacing":["warn", "always"],
       "object-curly-spacing":["warn", "always"],
-      "comma-spacing":["warn", { "before": false, "after": true }]
+      "comma-spacing":["warn", { "before": false, "after": true }],
+      "space-before-blocks":["warn", "always"],
+      "keyword-spacing":"warn",
+      "switch-colon-spacing": ["warn", {"after": true, "before": false}],
+      "block-spacing": "warn",
+      "brace-style":["warn", "1tbs", { "allowSingleLine": true }],
+      "camelcase":"warn",
+      "indent": ["warn", 4, { 
+        "SwitchCase": 1, 
+        "MemberExpression": 1, 
+        "ArrayExpression": 1, 
+        "ObjectExpression": 1, 
+        "ImportDeclaration": 1, 
+        "offsetTernaryExpressions": false 
+        }],
+      "block-scoped-var": "warn",
+      "curly": "warn",
+      "default-case":"warn",
+      "max-len": ["warn", { "code": 120 }],
+      "multiline-comment-style": "warn"
     }
 }
