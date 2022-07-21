@@ -7,18 +7,18 @@ import { createReport, deleteReport } from "../../../../../actions/base/baseTest
 describe("Verify the SF column in the grid", 
     { tags:[ "@income", "@commercial", "@in_place_rent_roll" ] }, () => {
 
-    before("Login, create report", () => {
-        createReport(testData.reportCreationData);
-    });
+        before("Login, create report", () => {
+            createReport(testData.reportCreationData);
+        });
 
-    it("Test body", () => {
-       NavigationSection.navigateToCommercialInPlaceRentRoll();
-       Income.Commercial.InPlaceRentRoll.chooseLeaseStatusByRowNumber(testData.leaseStatus)
-           .verifySfCellByRow();
-       NavigationSection.navigateToCommercialUnits();
-       Property.CommercialUnits.enterUnitSFByUnitIndex(testData.squareFeet);
-       NavigationSection.navigateToCommercialInPlaceRentRoll();
-       Income.Commercial.InPlaceRentRoll.verifySfCellByRow(testData.squareFeet);
-       deleteReport(testData.reportCreationData.reportNumber);
+        it("Test body", () => {
+            NavigationSection.navigateToCommercialInPlaceRentRoll();
+            Income.Commercial.InPlaceRentRoll.chooseLeaseStatusByRowNumber(testData.leaseStatus)
+                .verifySfCellByRow();
+            NavigationSection.navigateToCommercialUnits();
+            Property.CommercialUnits.enterUnitSFByUnitIndex(testData.squareFeet);
+            NavigationSection.navigateToCommercialInPlaceRentRoll();
+            Income.Commercial.InPlaceRentRoll.verifySfCellByRow(testData.squareFeet);
+            deleteReport(testData.reportCreationData.reportNumber);
+        });
     });
-});

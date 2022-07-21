@@ -7,19 +7,19 @@ import { createReport, deleteReport } from "../../../../../actions/base/baseTest
 describe("Verify the Unit column in the grid and grid presence", 
     { tags:[ "@income", "@commercial", "@in_place_rent_roll" ] }, () => {
         
-    before("Login, create report", () => {
-        createReport(testData.reportCreationData);
-    });
+        before("Login, create report", () => {
+            createReport(testData.reportCreationData);
+        });
 
-    it("Test body", () => {
-        NavigationSection.navigateToCommercialInPlaceRentRoll();
-        Income.Commercial.InPlaceRentRoll.verifyUnitNumberCells()
-            .chooseLeaseStatusByRowNumber(testData.leaseStatus);
-        NavigationSection.navigateToPropertySummary();
-        Property.Summary.enterNumberOfCommercialUnits(testData.newUnitsNumber);
-        NavigationSection.navigateToCommercialInPlaceRentRoll()
-            .verifyProgressBarNotExist();
-        Income.Commercial.InPlaceRentRoll.verifyUnitNumberCells(testData.newUnitsNumber);
-        deleteReport(testData.reportCreationData.reportNumber);
+        it("Test body", () => {
+            NavigationSection.navigateToCommercialInPlaceRentRoll();
+            Income.Commercial.InPlaceRentRoll.verifyUnitNumberCells()
+                .chooseLeaseStatusByRowNumber(testData.leaseStatus);
+            NavigationSection.navigateToPropertySummary();
+            Property.Summary.enterNumberOfCommercialUnits(testData.newUnitsNumber);
+            NavigationSection.navigateToCommercialInPlaceRentRoll()
+                .verifyProgressBarNotExist();
+            Income.Commercial.InPlaceRentRoll.verifyUnitNumberCells(testData.newUnitsNumber);
+            deleteReport(testData.reportCreationData.reportNumber);
+        });
     });
-});

@@ -7,24 +7,25 @@ import { BoweryReports } from "../../../../../types/boweryReports.type";
 
 describe("Verify the Dates columns in the grid",
     { tags:[ "@income", "@commercial", "@in_place_rent_roll" ] }, () => {
-    const cellDatesNames: BoweryReports.LeaseDateName[] = [ "Start", "Expiry" ];
+        const cellDatesNames: BoweryReports.LeaseDateName[] = [ "Start", "Expiry" ];
 
-    beforeEach("Login, create report", () => {
-        createReport(testData.reportCreationData);
-    });
+        beforeEach("Login, create report", () => {
+            createReport(testData.reportCreationData);
+        });
 
-    cellDatesNames.forEach(cellName => {
-       it(`Verify ${cellName} date cell`, () => {
-           _NavigationSection.navigateToCommercialInPlaceRentRoll();
-           Income._CommercialManager.InPlaceRentRoll.chooseLeaseStatusByRowNumber(testData.occupiedLease)
-               .enterLeaseDateByRowNumber(cellName, getTodayDateString("/"))
-               .verifyLeaseDateByRowNumber(cellName, testData.occupiedLease, "in-place", getTodayDateString("/"))
-               .chooseLeaseStatusByRowNumber(testData.vacantLease)
-               .verifyLeaseDateByRowNumber(cellName, testData.vacantLease, "in-place",)
-               .chooseLeaseStatusByRowNumber(testData.occupiedLease)
-               .enterLeaseDateByRowNumber(cellName, testData.wrongFormatLeaseDate)
-               .verifyLeaseDateByRowNumber(cellName, testData.occupiedLease, "in-place", testData.wrongFormatLeaseDate);
-           deleteReport(testData.reportCreationData.reportNumber);
-       });
+        cellDatesNames.forEach(cellName => {
+            it(`Verify ${cellName} date cell`, () => {
+                _NavigationSection.navigateToCommercialInPlaceRentRoll();
+                Income._CommercialManager.InPlaceRentRoll.chooseLeaseStatusByRowNumber(testData.occupiedLease)
+                    .enterLeaseDateByRowNumber(cellName, getTodayDateString("/"))
+                    .verifyLeaseDateByRowNumber(cellName, testData.occupiedLease, "in-place", getTodayDateString("/"))
+                    .chooseLeaseStatusByRowNumber(testData.vacantLease)
+                    .verifyLeaseDateByRowNumber(cellName, testData.vacantLease, "in-place",)
+                    .chooseLeaseStatusByRowNumber(testData.occupiedLease)
+                    .enterLeaseDateByRowNumber(cellName, testData.wrongFormatLeaseDate)
+                    .verifyLeaseDateByRowNumber(cellName, testData.occupiedLease, "in-place", 
+                        testData.wrongFormatLeaseDate);
+                deleteReport(testData.reportCreationData.reportNumber);
+            });
+        });
     });
-});
