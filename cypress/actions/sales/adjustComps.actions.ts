@@ -6,6 +6,7 @@ import {
 import BaseActionsExt from "../base/base.actions.ext";
 import { BoweryReports } from "../../types/boweryReports.type";
 import { _saveDataInFile } from "../../support/commands";
+import Enums from "../../enums/enums";
 
 class AdjustCompsActions extends BaseActionsExt<typeof adjustCompsPage> {
     /**
@@ -16,7 +17,7 @@ class AdjustCompsActions extends BaseActionsExt<typeof adjustCompsPage> {
         return this;
     }
 
-    checkCalculationUnitsRadio(value = "Per Residential Units"): AdjustCompsActions {
+    checkCalculationUnitsRadio(value = Enums.CALCULATION_UNITS.perResidentialUnits): AdjustCompsActions {
         adjustCompsPage.calculationUnitsRadio.check(value).should("be.checked");
         return this;
     }
