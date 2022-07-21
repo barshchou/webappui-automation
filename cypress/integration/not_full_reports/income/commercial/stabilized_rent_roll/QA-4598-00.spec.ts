@@ -6,7 +6,7 @@ import testData from "../../../../../fixtures/not_full_reports/income/commercial
 
 describe(`[QA-4598][QA-4599][QA-4600] Verify the suggested text dropdown in the new narrative component added through "=" 
         in the Generated Commentary on the Stabilized Rent Roll page.`, 
-    { tags: [ "@income", "@commercial", "@stabilized_rent_roll", "@check_export" ] }, () => {
+{ tags: [ "@income", "@commercial", "@stabilized_rent_roll", "@check_export" ] }, () => {
 
     const url = `${Cypress.config().baseUrl}`;
 
@@ -30,8 +30,8 @@ describe(`[QA-4598][QA-4599][QA-4600] Verify the suggested text dropdown in the 
         cy.stepInfo("3. Enter the “=“ and select the an option. Verify each option.");
         testData.asIsChips.forEach((chip) => {
             Income._CommercialManager.StabilizedRentRoll.editDiscussionTextArea(`=${chip.typeSuggestValue}`, false)
-            .clickNarrativeSuggestions(chip.suggestionName)
-            .verifyCommentaryContainsText(chip.verifySuggest);
+                .clickNarrativeSuggestions(chip.suggestionName)
+                .verifyCommentaryContainsText(chip.verifySuggest);
         });
         Income._CommercialManager.StabilizedRentRoll.clickSaveDiscussionButton()
             .verifyProgressBarNotExist();
@@ -76,8 +76,8 @@ describe(`[QA-4598][QA-4599][QA-4600] Verify the suggested text dropdown in the 
         cy.stepInfo("3. Enter the “=“ and select the an option. Verify each option.");
         testData.asStabilizedChips.forEach((chip) => {
             Income._CommercialManager.StabilizedRentRoll.editDiscussionTextArea(`=${chip.typeSuggestValue}`, false)
-            .clickNarrativeSuggestions(chip.suggestionName)
-            .verifyCommentaryContainsText(chip.verifySuggest);
+                .clickNarrativeSuggestions(chip.suggestionName)
+                .verifyCommentaryContainsText(chip.verifySuggest);
         });
         Income._CommercialManager.StabilizedRentRoll.clickSaveDiscussionButton()
             .verifyProgressBarNotExist();
@@ -124,8 +124,8 @@ describe(`[QA-4598][QA-4599][QA-4600] Verify the suggested text dropdown in the 
         cy.stepInfo("3. Enter the “=“ and select the an option. Verify each option.");
         testData.asCompletedChips.forEach((chip) => {
             Income._CommercialManager.StabilizedRentRoll.editDiscussionTextArea(`=${chip.typeSuggestValue}`, false)
-            .clickNarrativeSuggestions(chip.suggestionName)
-            .verifyCommentaryContainsText(chip.verifySuggest);
+                .clickNarrativeSuggestions(chip.suggestionName)
+                .verifyCommentaryContainsText(chip.verifySuggest);
         });
         Income._CommercialManager.StabilizedRentRoll.clickSaveDiscussionButton()
             .verifyProgressBarNotExist();
