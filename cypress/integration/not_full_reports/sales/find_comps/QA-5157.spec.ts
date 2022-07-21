@@ -7,7 +7,11 @@ describe(`[QA-5157] [Sales > Find Comps] "Date Sold" sorting is selected by defa
 { tags: [ "@sales", "@find_comps", "@comp_plex" ] }, () => {
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
-    });
+    cy.saveLocalStorage();
+});
+beforeEach(() => {
+    cy.restoreLocalStorage();
+});
 
     it("[QA-5157] [Sales > Find Comps] 'Date Sold' sorting is selected by default for sales comps", () => {
         cy.stepInfo(`1.Navigate to Sales > Find Comps page `);
@@ -19,9 +23,15 @@ describe(`[QA-5157] [Sales > Find Comps] "Date Sold" sorting is selected by defa
 
     it("[QA-5161] [Sales > Find Comps] 'Date Sold' sorting is applied correctly to selected comps", () => {
         cy.stepInfo(`1.Navigate to Sales > Find Comps page `);
+        Sales._FindComps.uploadComps(testData.filePath)
+        Sales._FindComps.Page.loadingModalCSV.should('exist')
+        Sales._FindComps.Page.loadingModalCSV.should('not.exist')
+        Sales._FindComps.Page.salesCompsDateSold.should(($p) => {
+         const  l = $p.length;
+        expect(l).to.be.above(1)});
+        Sales._FindComps.checkSalesCompSortedByDateSold()
+        
 
-        
-        
     });
 
 

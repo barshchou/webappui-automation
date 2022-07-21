@@ -20,15 +20,15 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
         return this;
     }
 
-    get SaleInfo(){
+    get SaleInfo() {
         return saleInfoFormActions;
     }
 
-    get PropertyDesc(){
+    get PropertyDesc() {
         return propertDescActions;
     }
 
-    get PropertyInfo(){
+    get PropertyInfo() {
         return propertyInfoFormActions;
     }
 
@@ -95,7 +95,7 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
 
     selectCompFromMapByAddress(address: string): FindCompsActions {
         recurse(
-            () => _scrollAndSearchComp(address), 
+            () => _scrollAndSearchComp(address),
             () => _map.get(mapKeysUtils.search_result_sales_comp) != undefined, { delay: 2000, timeout: 60000 }
         );
         findCompsPage.getSelectCompFromMapButtonByAddress(address).scrollIntoView().click({ force: true });
@@ -112,7 +112,7 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
      * @param index number of the comp. Default - 0 (first comp in a list).
      * NOTE: 0 - first, -1 - last in the list
      */
-    selectCompFromMap(index = 0 ): FindCompsActions {
+    selectCompFromMap(index = 0): FindCompsActions {
         findCompsPage.getSelectCompFromMapButton().eq(index).scrollIntoView().click({ force: true });
         this.checkFindSingleSalesComp();
         // ernst: delay to no accidentaly dispatch click to "Remove" btn in SalesComps search list
@@ -124,8 +124,8 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
      * Wait for request(`findTransactionByIdAndVersion`) for adding Sales Comp from Search List to be fulfilled,
      * and also retrieves some data (`id` and `address`) from request and writes into `_map`
      */
-    checkFindSingleSalesComp(): FindCompsActions{
-        cy.wait(`@${Alias.gql.FindTransactionByIdAndVersion}`, { timeout:35000 }).then((interception) => {
+    checkFindSingleSalesComp(): FindCompsActions {
+        cy.wait(`@${Alias.gql.FindTransactionByIdAndVersion}`, { timeout: 35000 }).then((interception) => {
             cy.log(interception.response.body.data.findTransactionByIdAndVersion.id);
             /**
              * Pushing comps ids upon their addition
@@ -145,9 +145,9 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
                 "Sales_Comps addresses array"
             );
             cy.wrap(interception.response.body.data.findTransactionByIdAndVersion.id)
-            .as(Alias.salesEventId);           
+                .as(Alias.salesEventId);
         });
-        return this; 
+        return this;
     }
 
     /**
@@ -161,7 +161,7 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
      * 
      * @param option If `reverse` true - checks whether list order changed comparing with default
      */
-    checkSalesCompAddedToList(option = { reverse : false }){
+    checkSalesCompAddedToList(option = { reverse: false }) {
         this.Page.addressSalesComparablesTable.spread((...comps) => {
             /**
              * ernst: addresses from UI contains also city, state and postal code 
@@ -172,18 +172,18 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
             cy.wrap(comps).as(Alias.salesComps.addressSelectedComps);
 
             cy.get(`@${Alias.salesComps.addressSelectedComps}`).then(
-                _ui_addresses => cy.log("Addresses from SelectedComps table: "+<any>_ui_addresses)
+                _ui_addresses => cy.log("Addresses from SelectedComps table: " + <any>_ui_addresses)
             );
 
             cy._mapGet(mapKeysUtils.sales_comps_addresses).then(_api_addresses => {
                 cy.log(_api_addresses);
-                if(option.reverse){
+                if (option.reverse) {
                     expect(comps).to.not.deep.equal(_api_addresses);
                 }
-                else{
+                else {
                     expect(comps).to.deep.equal(_api_addresses);
                 }
-                
+
             });
         });
         return this;
@@ -211,7 +211,7 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
 
     enterReportToSearchComp(reportID: string): FindCompsActions {
         cy.intercept("GET", `/salesComps/eventIds/${reportID}`)
-        .as(Alias.salesComps_eventIds);
+            .as(Alias.salesComps_eventIds);
         findCompsPage.reportToSearchCompInput.type(reportID).should("have.value", reportID);
         return this;
     }
@@ -230,13 +230,13 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
      * Checks WebApp REST request /salesComps/eventIds/:report_id
      * which returns salesEventId which in its turn will be passed to DRM's GraphQL API
      */
-    checkSingleSalesCompsByEventId(): FindCompsActions{
+    checkSingleSalesCompsByEventId(): FindCompsActions {
         cy.wait(`@${Alias.salesComps_eventIds}`).then(({ response }) => {
             cy.get(`@${Alias.salesEventId}`).then(_salesEventId => {
                 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                let arr: Array<any>  = response.body.selectedEventIds;
+                let arr: Array<any> = response.body.selectedEventIds;
                 expect(arr.find(val => val.salesEventId == _salesEventId))
-                .not.to.be.undefined;
+                    .not.to.be.undefined;
             });
         });
         return this;
@@ -253,7 +253,7 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
             expect(req.operationName).to.equal(gqlOperationNames.findTransactionsByIdsAndVersions);
             cy.log(response.body.data.findTransactionsByIdsAndVersions.map(e => e.id));
             expect(response.body.data.findTransactionsByIdsAndVersions.map(e => e.id))
-            .to.include.members(_map.get(mapKeysUtils.sales_comps_ids));
+                .to.include.members(_map.get(mapKeysUtils.sales_comps_ids));
         });
         cy.pause();
         return this;
@@ -279,15 +279,15 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
 
     enterNumericInputNewComp(elementAlias: string, numberOfUnits: number | string): FindCompsActions {
         this.clearNumericInputNewComp(elementAlias);
-        
+
         // ernst: little hack to work with commercialAreaNewComp input due its specific behaviour
-        if(elementAlias != Alias.pageElements.comp_plex.commercialAreaNewComp){
+        if (elementAlias != Alias.pageElements.comp_plex.commercialAreaNewComp) {
             cy.get(`@${elementAlias}`, { includeShadowDom: true }).realClick();
         }
-        else{
+        else {
             cy.get(`@${elementAlias}`, { includeShadowDom: true }).focus();
         }
-        cy.get(`@${elementAlias}`, { includeShadowDom: true }).realType(`{enter}${numberOfUnits}`, { pressDelay:45, delay: 50 });
+        cy.get(`@${elementAlias}`, { includeShadowDom: true }).realType(`{enter}${numberOfUnits}`, { pressDelay: 45, delay: 50 });
         this.verifyNumericInputNewComp(elementAlias, numberOfUnits);
         return this;
     }
@@ -297,6 +297,94 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
         cy.get(`@${elementAlias}`, { includeShadowDom: true, timeout: 10000 }).should("have.value", valueToBe);
         return this;
     }
+
+
+    checkSalesCompSortedByDateSold() {
+        this.Page.salesCompsDateSold.then(element => {
+            cy.log(element)
+
+
+
+            for (let i = 1; i+1 < element.length; i++) {
+
+let el1 = element[i].textContent;
+let el2 = element[(i + 1)].textContent;
+
+cy.log(el1, el2)
+           
+
+
+
+}
+
+
+
+
+            // switch (true) {
+
+              //   case (element.toArray()).some(element => { return element.textContent === 'Listing'; }):
+            //         // switch (true) {
+            //         //     case (element.toArray()).some(element => { return element.textContent === 'In-Contract'; }):
+                            
+            //                 // switch (true) {
+            //                 //     (element.toArray()).some(element => { return element.textContent === 'In-Contract'; }):
+            //                 // }
+            //                 // break;
+            //                 // default:
+                         
+            //         cy.log('Listing')
+            //         break;
+
+            //     case (element.toArray()).some(element => { return element.textContent === 'In-Contract'; }):
+            //         cy.log('In-Contract')
+            //         break;
+
+            //       //  case (element.toArray()).some(element => { return element.textContent == `${/^(0?[1-9]|1[012])[- \/\.](0?[1-9]|[12][0-9]|3[01])[- \/\.](19|20)?[0-9]{2}$/}`; }):
+            //       case (element.toArray()).some(element => { return Date.parse(element.textContent);}):
+            //         cy.log('DATE')                                    
+                
+            //         break;
+            
+            //         }
+                
+
+
+
+
+            // let  allDates = element.toArray()
+
+
+            //  cy.log(allDates)
+            // if ((element.toArray()).some(element => { return element.textContent === 'Listing'; })) {
+
+            //     cy.log('Listing or In-Contract')
+
+            //     if ((element.toArray()).some(element => { return element.textContent === 'In-Contract'; })) {
+
+            //     }
+
+
+            // } else if ((element.toArray()).some(element => { return element.textContent === 'Listing'; })) {
+
+            //     cy.log('DATE')
+            // }
+
+
+
+            // if (allDates.includes.call(element.should('contain', 'Listing'))     { cy.log("YES")}
+        
+        });
+        return this;
+    }
+
+
+
+
+
+
+
+
+
 }
 
 
@@ -309,15 +397,15 @@ export default new FindCompsActions(findCompsPage);
  * 
  * Run this function using cypress-recurse 
  */
-const _scrollAndSearchComp = (compAddress:string) => {
+const _scrollAndSearchComp = (compAddress: string) => {
     return cy.get('[aria-label="grid"] > div > div', { includeShadowDom: true }).each((elem, index, list) => {
-        if(elem.text().includes(compAddress)){
+        if (elem.text().includes(compAddress)) {
             cy.log(`Found SalesComps in next list ${list} with index ${index}`);
             _map.set(mapKeysUtils.search_result_sales_comp, elem);
             return;
         }
-        else if(list.length == index+1){
-            if(_map.get(mapKeysUtils.search_result_sales_comp) == undefined){
+        else if (list.length == index + 1) {
+            if (_map.get(mapKeysUtils.search_result_sales_comp) == undefined) {
                 cy.log("Scrolling to last comp in to continue search");
                 cy.wrap(elem).scrollIntoView();
                 return;
