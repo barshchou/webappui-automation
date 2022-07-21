@@ -84,7 +84,7 @@ jobs:
           token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
 
       - name: Install find specs module
-        run: npm install -g find-cypress-specs
+        run: npm install -g find-cypress-specs@latest
 
       - name: Define included specs
         id: define_specs
