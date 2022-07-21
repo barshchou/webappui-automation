@@ -12,8 +12,7 @@ export default defineConfig({
     viewportWidth: 1920,
     viewportHeight: 1200,
     watchForFileChanges: false,
-    videoCompression: 15,
-    videoUploadOnPasses: false,
+    video: false,
     projectId: 'EDvaU4',
     e2e: {
         // baseUrl is staging, but it will be reset down below
