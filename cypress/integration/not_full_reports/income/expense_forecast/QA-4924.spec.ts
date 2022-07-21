@@ -64,7 +64,7 @@ describe("User selects Per SF radiobutton for Repairs & Maintenance on Expense F
 
         Income.ExpenseForecast.Actions.matchElementSnapshot(
             Income.ExpenseForecast.Page.repairsAndMaintenanceCard, testData.repairsAndMaintenanceCardSnapshotName,
-            { padding: [ 10, 100 ] });
+            { padding: [ 0, 100 ] });
 
         deleteReport(testData.reportCreationData.reportNumber);
     });

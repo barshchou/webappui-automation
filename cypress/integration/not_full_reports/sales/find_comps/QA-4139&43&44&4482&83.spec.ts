@@ -2,15 +2,15 @@ import testData from "../../../../fixtures/not_full_reports/sales/find_comps/QA-
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { Sales } from "../../../../actions";
-import { conditionalDescribe } from "../../../../../utils/env.utils";
 import { Alias } from "../../../../utils/alias.utils";
+import { conditionalDescribe } from "../../../checkIsProd.utils";
 /*
     # Uladzislau.Samykou
     This spec is conditional, because tests for Create Sales Comp feature should NOT be tested on PROD environment
  */
 const { pageElements } = Alias;
 
-conditionalDescribe("Group of tests for numeric inputs at create comp modal", 
+conditionalDescribe("Group of tests for numeric inputs at create comp modal",
     { tags:[ "@find_comps", "@sales" ] }, () => {
 
     beforeEach("Login, create report", () => {
