@@ -13,6 +13,6 @@ export default {
         conclusionValue: Enums.VALUE_CONCLUSION_TYPE.AS_STABILIZED
     }),
     comparableAdjustment: _compAdjustments,
-    calculationUnits: "PSF",
+    calculationUnits: Enums.CALCULATION_UNITS.psf,
     basis:"Price per SF"
 };

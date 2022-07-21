@@ -17,7 +17,7 @@ class AdjustCompsActions extends BaseActionsExt<typeof adjustCompsPage> {
         return this;
     }
 
-    checkCalculationUnitsRadio(value = Enums.CALCULATION_UNITS.perResidentialUnits): AdjustCompsActions {
+    checkCalculationUnitsRadio(value: BoweryReports.SalesAdjustmentGrid.CalculationUnits = Enums.CALCULATION_UNITS.perResidentialUnits): AdjustCompsActions {
         adjustCompsPage.calculationUnitsRadio.check(value).should("be.checked");
         return this;
     }
