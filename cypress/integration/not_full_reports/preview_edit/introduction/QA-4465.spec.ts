@@ -3,7 +3,7 @@ import testData from "../../../../fixtures/not_full_reports/review_edit/introduc
 import { _BaseTest } from "../../../../actions/base";
 import { Report, PreviewEdit } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
-import { _normalize } from "../../../../../utils/string.utils";
+import { normalizeText } from "../../../../../utils/string.utils";
 import mapKeysUtils from "../../../../utils/mapKeys.utils";
 
 const { createReport, deleteReport } = _BaseTest;
@@ -27,7 +27,7 @@ describe('Verify the "Property Rights Appraised" commentary on the Introduction 
        
         testData.textToVerify.forEach(value => {
             Report._KeyInfo.enterPropertyRightsAppraisedComment(value).then(text => {
-                cy.wrap(_normalize(text)).as(testData.aliases.PropertyRightsAppraised);
+                cy.wrap(normalizeText(text)).as(testData.aliases.PropertyRightsAppraised);
             });
             _NavigationSection.navigateToIntroduction()
                 .verifyProgressBarNotExist();
@@ -35,7 +35,7 @@ describe('Verify the "Property Rights Appraised" commentary on the Introduction 
             PreviewEdit._Introduction.Page.TextPropertyRightsAppraised
                 .invoke("text")
                 .then(text => {
-                    cy.wrap(_normalize(text)).as(testData.aliases.PreviewEditText);
+                    cy.wrap(normalizeText(text)).as(testData.aliases.PreviewEditText);
                 });
 
             PreviewEdit._Introduction.Actions.extractAlias(testData.aliases.PropertyRightsAppraised)

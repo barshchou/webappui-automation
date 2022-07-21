@@ -44,21 +44,23 @@ class CommercialRentCompsPage extends BasePage {
 
     getRentCompDropdownOption(option: string) {return cy.get(`[data-value=${option}]`);}
 
-    get leaseDatePicker() {return cy.get("[data-qa=dateSigned-date-picker] div input");}
+    get leaseDatePicker() {return cy.get("[data-qa=dateSigned-date-picker] input:not([type=hidden])");}
 
-    getEditButtonByRowNumberAndGroup(group = "unsorted", rowNumber = 0) {
-        return cy.xpath(`//*[@data-qa='${group}_group']//child::button[.='Edit']`).eq(rowNumber);
+    get leaseDateInputToVerify() {return cy.get("[data-qa=dateSigned-date-picker] input[type=hidden]");}
+
+    getEditButtonByRowNumberAndGroup(group = "Unsorted", rowNumber = 0) {
+        return cy.xpath(`//*[@data-qa='${group}-group-panel']//child::button[.='Edit']`).eq(rowNumber);
     }
 
-    getRentPerSFCellByRowNumberAndGroup(group = "unsorted", rowNumber = 0) {
-        return cy.get(`[data-qa='${group}_group'] [data-qa=rentPerSF-cell]`).eq(rowNumber);
+    getRentPerSFCellByRowNumberAndGroup(group = "Unsorted", rowNumber = 0) {
+        return cy.get(`[data-qa='${group}-group-panel'] [data-qa=rentPerSF-cell]`).eq(rowNumber);
     }
 
-    getDragableElement(index: number) { return `[data-qa="row-${index}"] [data-qa="drag-cell"]>span`;}
+    getDraggableElement(index: number) { return `[data-qa="row-${index}"] [data-qa="drag-cell"]>span`;}
 
-    getDropableArea(compGroup: string) {return `[data-qa="${compGroup}-group-panel"] tbody[data-react-beautiful-dnd-droppable] tr td`;}
+    getDroppableArea(compGroup: string) {return `[data-qa="${compGroup}-group-panel"] tbody[data-react-beautiful-dnd-droppable] tr td`;}
 
-    getDropableAreaDropped(compGroup: string) {return `[data-qa="${compGroup}-group-panel"] [data-qa="row-0"]`;}
+    getDroppableAreaDropped(compGroup: string) {return `[data-qa="${compGroup}-group-panel"] [data-qa="row-0"]`;}
 
     get draggableUnsortedPlaceholder() {return cy.xpath(`//*[@data-qa="unsorted_group"]//td[contains(text(), 'Drop any rent roll unit here')]`);}
 
@@ -92,6 +94,12 @@ class CommercialRentCompsPage extends BasePage {
         .find(`[data-qa=rentType-radio-group] input[value='${value}']`);}
 
     get pageHeaderElement() {return cy.get("[data-qa=rentComps]");}
+
+    getDropdownOptionsByFieldName(name: string) {
+        return cy.get(`[data-qa^=${name}][data-qa$='-select-option']`);
+    }
+
+    get componentErrorElement() {return cy.get("#component-error-text");}
 }
 
 export default new CommercialRentCompsPage();

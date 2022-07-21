@@ -137,22 +137,26 @@ const _loginApi = async (_envUrl, _username, _password) => {
  const _createReportApi = async (_reportCreationData, _payload, _token, _envUrl) => {
     let reportId = "not report id";
     const socket = io.connect(_envUrl);
-    const _connect = new Promise((res)=>
+    const _connect = new Promise((res, rej)=>
       // ernst: we have to chain sockets in order to have synchronous order of execution,
       // without it - we will not be able to wait until socket id will be generated and resolved by promise 
       socket.on('connect', () => console.log('Socket opened')).on('init', async socketId => {
         
         console.log(socketId)
-        
-        await request(_envUrl)
-        .post('/report')
-        .set('Accept', 'application/json')
-        .send(_payload)
-        .set('Authorization', `Bearer ${_token}`)
-        .set('SocketId', `${socketId}`)
-        .expect(200);
+        try {
+          await request(_envUrl)
+          .post('/report')
+          .set('Accept', 'application/json')
+          .send(_payload)
+          .set('Authorization', `Bearer ${_token}`)
+          .set('SocketId', `${socketId}`)
+          .expect(200);
 
-        res(socketId);
+          res(socketId);
+        } catch (error) {
+          console.log(error);
+          rej(error);
+        }
       })
     ) 
     console.log("socketid is "+await _connect);
@@ -192,11 +196,12 @@ module.exports = (on, config) => {
  
   addMatchImageSnapshotPlugin(on, config);
   grepFilterPlugin(config);
+  require('dd-trace/ci/cypress/plugin')(on, config)
 
 
   on("before:browser:launch", (browser, launchOptions) => {
       if (browser.isHeadless === true) {
-        launchOptions.args.push("--window-size=1920,1080");
+        launchOptions.args.push("--window-size=1920,1200");
         return launchOptions;
       }
   });
@@ -233,6 +238,13 @@ module.exports = (on, config) => {
       return await _loginApi(_envUrl, _username, _password);
     }
   });
+
+  on("task",{
+    logNode(message){
+      console.log(message);
+      return null;
+    }
+  })
   //#endregion
 
   return config;
