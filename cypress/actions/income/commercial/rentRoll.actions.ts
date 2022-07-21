@@ -46,10 +46,10 @@ class CommercialRentRollActions extends CommercialRentRollSharedComponent<typeof
     }
 
     clickPerSquareFootPerMonthButton(backColor = "rgb(46, 67, 147)"): CommercialRentRollActions {
-       rentRollPage.perSquareFootPerMonthButton.should("not.have.css", "background-color", backColor)
-           .click().should("have.css", "background-color", backColor);
-       this.Page.rentPerSfPerMonthColumnName.scrollIntoView().should("exist");
-       return this;
+        rentRollPage.perSquareFootPerMonthButton.should("not.have.css", "background-color", backColor)
+            .click().should("have.css", "background-color", backColor);
+        this.Page.rentPerSfPerMonthColumnName.scrollIntoView().should("exist");
+        return this;
     }
 
     verifyAllBasisButtons(backColor = "rgb(46, 67, 147)"): CommercialRentRollActions {
@@ -113,7 +113,8 @@ class CommercialRentRollActions extends CommercialRentRollSharedComponent<typeof
         return this;
     }
 
-    enterTenantNameByRowNumber(name: string, rowNumber = 0, leaseStatus?: BoweryReports.LeaseStatus): CommercialRentRollActions {
+    enterTenantNameByRowNumber(name: string, rowNumber = 0, 
+        leaseStatus?: BoweryReports.LeaseStatus): CommercialRentRollActions {
         if (leaseStatus === "Vacant") {
             this.verifyTenantNameByRow(leaseStatus, name, rowNumber);
         } else {
@@ -136,7 +137,8 @@ class CommercialRentRollActions extends CommercialRentRollSharedComponent<typeof
         return this;
     }
 
-    enterLeaseDateByRowNumber(cellName: BoweryReports.LeaseDateName, date: string, rowNumber = 0): CommercialRentRollActions {
+    enterLeaseDateByRowNumber(cellName: BoweryReports.LeaseDateName, 
+        date: string, rowNumber = 0): CommercialRentRollActions {
         this.Page.getLeaseDateCellsByName(cellName).eq(rowNumber).dblclick({ force: true });
         this.Page.textareaToInput.clear().type(date).type("{enter}");
         return this;
@@ -165,7 +167,8 @@ class CommercialRentRollActions extends CommercialRentRollSharedComponent<typeof
         return this;
     }
 
-    enterListPerSF(leaseStatuses: Array<BoweryReports.LeaseStatus>, perSFList: Array<number>): CommercialRentRollActions {
+    enterListPerSF(leaseStatuses: Array<BoweryReports.LeaseStatus>, 
+        perSFList: Array<number>): CommercialRentRollActions {
         for (let i = 0; i < leaseStatuses.length; i++) {
             if (leaseStatuses[i] === "Vacant" || perSFList[i] === 0) {
                 continue;
@@ -175,7 +178,8 @@ class CommercialRentRollActions extends CommercialRentRollSharedComponent<typeof
         return this;
     }
 
-    enterListMonthlyRent(leaseStatuses: Array<BoweryReports.LeaseStatus>, monthlyRentList: Array<number>): CommercialRentRollActions {
+    enterListMonthlyRent(leaseStatuses: Array<BoweryReports.LeaseStatus>, 
+        monthlyRentList: Array<number>): CommercialRentRollActions {
         for (let i = 0; i < leaseStatuses.length; i++) {
             if (leaseStatuses[i] === "Vacant") {
                 continue;
@@ -185,13 +189,15 @@ class CommercialRentRollActions extends CommercialRentRollSharedComponent<typeof
         return this;
     }
 
-    verifyMonthlyRentTotal(leaseStatuses: Array<BoweryReports.LeaseStatus>, monthlyRents: Array<number>): CommercialRentRollActions {
+    verifyMonthlyRentTotal(leaseStatuses: Array<BoweryReports.LeaseStatus>, 
+        monthlyRents: Array<number>): CommercialRentRollActions {
         const textToBe = CommercialRentRollActions.getTotalRentTextToBe(leaseStatuses, monthlyRents);
         this.Page.monthlyRentTotal.should("have.text", `$${textToBe}`);
         return this;
     }
 
-    enterListAnnuallyRent(leaseStatuses: Array<BoweryReports.LeaseStatus>, annuallyRents: Array<number>): CommercialRentRollActions {
+    enterListAnnuallyRent(leaseStatuses: Array<BoweryReports.LeaseStatus>, 
+        annuallyRents: Array<number>): CommercialRentRollActions {
         for (let i = 0; i < leaseStatuses.length; i++) {
             if (leaseStatuses[i] === "Vacant") {
                 continue;
@@ -201,7 +207,8 @@ class CommercialRentRollActions extends CommercialRentRollSharedComponent<typeof
         return this;
     }
 
-    private static getTotalRentTextToBe(leaseStatuses: Array<BoweryReports.LeaseStatus>, rentsValues: Array<number>): string {
+    private static getTotalRentTextToBe(leaseStatuses: Array<BoweryReports.LeaseStatus>, 
+        rentsValues: Array<number>): string {
         let rentTotalToBe = 0;
         for (let i = 0; i < leaseStatuses.length; i++) {
             if (leaseStatuses[i] === "Vacant") {
@@ -212,13 +219,15 @@ class CommercialRentRollActions extends CommercialRentRollSharedComponent<typeof
         return numberWithCommas(rentTotalToBe.toFixed(2));
     }
 
-    verifyAnnuallyRentTotal(leaseStatuses: Array<BoweryReports.LeaseStatus>, annualRents: Array<number>): CommercialRentRollActions {
+    verifyAnnuallyRentTotal(leaseStatuses: Array<BoweryReports.LeaseStatus>, 
+        annualRents: Array<number>): CommercialRentRollActions {
         const textToBe = CommercialRentRollActions.getTotalRentTextToBe(leaseStatuses, annualRents);
         this.Page.annualRentTotal.should("have.text", `$${textToBe}`);
         return this;
     }
 
-    verifyPerSFAnnuallyTotal(leaseStatuses: Array<BoweryReports.LeaseStatus>, perSfRents: Array<number>, squareFootList: Array<number>): CommercialRentRollActions {
+    verifyPerSFAnnuallyTotal(leaseStatuses: Array<BoweryReports.LeaseStatus>, 
+        perSfRents: Array<number>, squareFootList: Array<number>): CommercialRentRollActions {
         let totalAnnualRent = 0;
         let totalSF = 0;
         for (let i = 0; i < leaseStatuses.length; i++) {
@@ -255,7 +264,6 @@ class CommercialRentRollActions extends CommercialRentRollSharedComponent<typeof
         }
         return this;
     }
-
 }
 
 export default new CommercialRentRollActions(rentRollPage);

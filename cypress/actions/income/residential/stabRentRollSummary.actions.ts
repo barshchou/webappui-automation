@@ -1,7 +1,7 @@
 import stabRentRollSummaryPage from "../../../pages/income/residential/stabRentRollSummary.page";
 import BaseActionsExt from "../../base/base.actions.ext";
 
-class StabilizedRentRollSummaryActions extends BaseActionsExt<typeof stabRentRollSummaryPage>{
+class StabilizedRentRollSummaryActions extends BaseActionsExt<typeof stabRentRollSummaryPage> {
 
     verifyAnnualRentByRow(rentToBe: string, rowNumber = 0): StabilizedRentRollSummaryActions {
         stabRentRollSummaryPage.annualRentCells.eq(rowNumber).should("have.text", rentToBe);
