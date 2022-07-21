@@ -1,18 +1,16 @@
-import testData from "../../../../fixtures/not_full_reports/income/tax_info/QA-5519-23.fixture";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import testData from "../../../../fixtures/not_full_reports/income/tax_info/QA-5519-23_26.fixture";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
-import { Income } from '../../../../actions/index';
+import { Income, ReviewExport } from '../../../../actions/index';
 import launchDarklyApi from "../../../../api/launchDarkly.api";
 
-describe("[QA-5183] Export column order both assessment psf and assessment per unit", () => {
+describe("[QA-5519-23_26] Check that rows added in the app are displayed in Tax Info --> Tax Liability", () => {
 
-    before("Login and create report", () => {
+    it("[QA-5519-23_26]", { tags: [ "@check_export", "@income", "@tax_info" ] }, () => {
         cy.stepInfo("1. Set feature flag and create report");
         launchDarklyApi.setFeatureFlagForUser(testData.featureFlagKey, testData.onFeatureFlag);
         createReport(testData.reportCreationData);
-    });
 
-    it("Test body", { tags: [ "@check_export", "@income", "@tax_info" ] }, () => {
         cy.stepInfo("2. Navigate to Income -> Tax Info");
         _NavigationSection.navigateToTaxInfo();
 
@@ -33,12 +31,25 @@ describe("[QA-5183] Export column order both assessment psf and assessment per u
             .enterRowTaxLiabilityValue(testData.rowNames.special, testData.specialAssessmentRowValue)
             .verifyTotalTaxLiability();
 
-
         cy.stepInfo("6. Click 'Delete' from 'Action' column and verify row successfully deleted");
-        Income._TaxInfo.deleteRowTaxLiability(testData.rowNames.additional)
-            .deleteRowTaxLiability(testData.rowNames.special)
-            .deleteRowTaxLiability(testData.enterName)
+        Income._TaxInfo.deleteRowTaxLiability(testData.enterName)
             .deleteRowTaxLiability(testData.enterName);
+
+        cy.stepInfo("7. Download and convert Docx Report");
+        _NavigationSection.openReviewAndExport();
+        ReviewExport.generateDocxReport().waitForReportGenerated()
+            .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
+    });
+
+    it("[QA-5526] Check export", () => {
+        Cypress.config().baseUrl = null;
+        cy.task("getFilePath", { _reportName: testData.reportCreationData.reportNumber, _docx_html: "html" }).then(file => {
+            cy.log(<string>file);
+            cy.stepInfo("8. Verify rows added in export export");
+            cy.visit(<string>file);
+            cy.contains(testData.rowNames.additional).should("exist");
+            cy.contains(testData.rowNames.special).should("exist");
+        }); 
     });
 
     after(() => {
