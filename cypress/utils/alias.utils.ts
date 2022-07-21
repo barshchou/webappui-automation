@@ -16,9 +16,13 @@ export const gqlOperationNames = {
   };
 
 export const Alias = {
+    loginRequest:_alias("loginRequest"),
     reportId: _alias("reportId"),
     salesEventId: _alias("salesEventId"),
     salesComps_eventIds: _alias("salesComps_eventIds"),
+    salesComps:{
+        addressSelectedComps: "ui_SelectedComps_Addresses"
+    },
     aliasXMLGeneration: _alias("aliasXMLGeneration"),
     aliasOpenXML: _alias("aliasOpenXML"),
     gql:{
@@ -53,6 +57,10 @@ export const Alias = {
         sumPerUnitCheckedDefaultCards: "sumPerUnitCheckedDefaultCards",
         sumPerUnit: "sumPerUnit",
         expenseCard: "expenseCard",
-        basisValue: "basisValue"
+        basisValue: "basisValue",
+        sumPerSFInComment: "sumPerSFInComment",
+        sumPerUnitInComment: "sumPerUnitInComment",
+        sumPerUnitTOEAppraisersForecast: "sumPerUnitTOEAppraisersForecast",
+        sumPSFTOEAppraisersForecast: "sumPSFTOEAppraisersForecast",
     },
 };

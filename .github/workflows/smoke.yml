@@ -51,7 +51,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        containers: [1, 2, 3, 4, 5, 6]
+        containers: [1, 2, 3, 4, 5, 6, 7, 8]
 
     steps:
       - name: Run smoke end-to-end tests with Currents dev
@@ -67,3 +67,8 @@ jobs:
           tags: ${{ github.event.inputs.tags }}
           record_key: ${{ secrets.CURRENTS_RECORD_KEY }}
           ref: ${{ github.event.inputs.ref }}
+        env:
+          DD_CIVISIBILITY_AGENTLESS_ENABLED: true
+          DD_API_KEY: ${{ secrets.DD_API_KEY }}
+          DD_ENV: ${{ github.event.inputs.env }}
+          DD_SERVICE: 'webapp'

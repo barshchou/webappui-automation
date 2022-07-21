@@ -9,6 +9,5 @@ const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreat
 });
 
 export default {
-    reportCreationData: _reportCreationData,
-    comparableAddress: "200 West 78 Street"
+    reportCreationData: _reportCreationData
 };
