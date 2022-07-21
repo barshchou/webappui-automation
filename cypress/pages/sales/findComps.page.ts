@@ -95,6 +95,15 @@ class FindCompsPage extends BasePage {
     get sortSalesCompsSelectValue(){
         return this.sortSalesCompsSelectList.find('[data-qa="select-value"]');
     }
+
+    get salesCompsDateSold(){
+        return cy.get('[data-qa="sale-date"]');
+    }
+    
+    
+    get loadingModalCSV(){
+        return cy.get('[data-qa="loading-modal"]');
+    }
 }
 
 /**
