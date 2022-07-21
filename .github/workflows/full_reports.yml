@@ -31,7 +31,7 @@ jobs:
       contents: read
     steps:
       - name: Run full-report end-to-end test with Currents dev
-        uses: Bowery-RES/action-run-e2e-tests@cy10.1
+        uses: Bowery-RES/action-run-e2e-tests@cy10
         with:
           github_token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
           username: ${{ secrets.USERNAME }}
