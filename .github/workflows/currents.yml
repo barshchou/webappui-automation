@@ -3,26 +3,17 @@ name: Cypress not full reports tests in Currents.dev
 on:
   workflow_dispatch:
     inputs:
-      env:
+      url:
         type: choice
         description: Select the environment
         options:
-        - dev
-        - staging
-        - prod
-        - custom
+          - dev
+          - staging
+          - prod
+          - custom
         required: true
         default: staging
-      url:
-        type: choice
-        description: Select the url explicitly
-        options:
-        - 'https://bowery-development.herokuapp.com'
-        - 'https://bowery-staging.herokuapp.com'
-        - 'https://app.boweryvaluation.com'
-        required: true
-        default: 'https://bowery-staging.herokuapp.com'
-      customEnv:
+      customUrl:
         type: string
         description: Add custom environment url if needed
         required: false
@@ -33,7 +24,7 @@ on:
         default: cypress/integration/not_full_reports/**/*.spec.ts
       tags:
         type: string
-        description: Run test with specific tags (via grep,grepTags,burn)  
+        description: Run test with specific tags (via grep,grepTags,burn)
         required: false
         default: grep=,grepTags=-@smoke,burn=
       ref:
@@ -55,14 +46,13 @@ jobs:
 
     steps:
       - name: Run end-to-end tests with Currents dev
-        uses: Bowery-RES/action-run-e2e-tests@latest
+        uses: Bowery-RES/action-run-e2e-tests@cy10
         with:
           github_token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
-          env: ${{ github.event.inputs.env }}
-          customEnv: ${{ github.event.inputs.customEnv }}
           url: ${{ github.event.inputs.url }}
+          customUrl: ${{ github.event.inputs.customUrl }}
           spec_file: ${{ github.event.inputs.spec_file }}
           tags: ${{ github.event.inputs.tags }}
           record_key: ${{ secrets.CURRENTS_RECORD_KEY }}
@@ -81,7 +71,7 @@ jobs:
           name: failed-tests-DOM-snapshots
           path: cypress/gh_artifacts
           retention-days: 2
-      
+
       - name: Archive downloaded Reports (html and docx)
         if: always()
         uses: actions/upload-artifact@v3

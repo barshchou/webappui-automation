@@ -3,26 +3,17 @@ name: CI DEBUG. Cypress not full reports tests in Currents.dev
 on:
   workflow_dispatch:
     inputs:
-      env:
+      url:
         type: choice
         description: Select the environment
         options:
-        - dev
-        - staging
-        - prod
-        - custom
+          - dev
+          - staging
+          - prod
+          - custom
         required: true
         default: staging
-      url:
-        type: choice
-        description: Select the url explicitly
-        options:
-        - 'https://bowery-development.herokuapp.com'
-        - 'https://bowery-staging.herokuapp.com'
-        - 'https://app.boweryvaluation.com'
-        required: true
-        default: 'https://bowery-staging.herokuapp.com'
-      customEnv:
+      customUrl:
         type: string
         description: Add custom environment url if needed
         required: false
@@ -41,7 +32,7 @@ on:
         type: string
         description: Select branch, tag, commit ref
         required: false
-        
+
 jobs:
   Not-full-reports-run-DEBUG:
     runs-on: ubuntu-latest
@@ -56,13 +47,12 @@ jobs:
 
     steps:
       - name: Run end-to-end tests (DEBUG, one container)
-        uses: Bowery-RES/action-run-e2e-tests@latest
+        uses: Bowery-RES/action-run-e2e-tests@cy10
         with:
           github_token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
-          env: ${{ github.event.inputs.env }}
-          customEnv: ${{ github.event.inputs.customEnv }}
+          customUrl: ${{ github.event.inputs.customUrl }}
           url: ${{ github.event.inputs.url }}
           spec_file: ${{ github.event.inputs.spec_file }}
           tags: ${{ github.event.inputs.tags }}
