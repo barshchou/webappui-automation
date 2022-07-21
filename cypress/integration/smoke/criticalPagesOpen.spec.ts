@@ -7,6 +7,7 @@ import { _IncomeTitles, _SalesTitles } from "../../enums/pages_titles";
 import { BoweryAutomation } from "../../types/boweryAutomation.type";
 import mapKeysUtils from "../../utils/mapKeys.utils";
 
+
 const reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("criticalPages", {
     incomeValue: Enums.INCOME_TYPE.both,
     conclusionValue: Enums.VALUE_CONCLUSION_TYPE.AS_COMPLETE,
