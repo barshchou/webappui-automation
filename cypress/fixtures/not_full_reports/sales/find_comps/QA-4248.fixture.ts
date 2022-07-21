@@ -1,14 +1,13 @@
 import { salesInterceptions } from "../../../../actions/base/baseTest.actions";
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 
-const comparableFixture = () => {
-    return {
-        address: "200 West 78 Street"
-    };
-};
+const _compsNumber: number[] = [ 0, 1, 2 ];
 
 export default {
     setupInterceptions:salesInterceptions,
     reportCreationData: ReportDataCreator.getReportData("4248"),
-    comparable: Object.freeze(comparableFixture())
+    /**
+    * Selecting several sales comps for test
+    */
+    compsNumber: _compsNumber
 };

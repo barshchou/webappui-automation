@@ -127,6 +127,7 @@ cypress/screenshots/
 cypress/downloads
 cypress/snapshots/**/__diff_output__
 cypress/gh_artifacts/
+cypress/spec_data/
 
 # act (tool for local GH Actions)
 .act/.secrets

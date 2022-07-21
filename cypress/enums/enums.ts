@@ -53,8 +53,11 @@ import salesAdjustmentGridEnum from "./adjustComps/salesadjustment.enum";
 import reportStatusEnum from "./reportParams/reportStatus.enum";
 import bondTypesEnum from "./organization/bondTypes.enum";
 import rowsMarketAdjustmentEnum from "./adjustComps/marketadjustment.enum";
+import cumulativepriceSalesadjustEnum from "./adjustComps/cumulativeprice.salesadjust.enum";
 import expensesForecastCardNamesEnum from "./expense/expensesForecastCardNames.enum";
 import reimbursementColumnsIdEnum from "./reimbursementColumnsId.enum";
+import calculationUnitsEnum from "./adjustComps/calculationUnits.enum";
+import calculationTypesEnum from "./commercial/rent_reconciliation/calculationTypes.enum";
 
 export default {
     TEMPLATE_TYPE: templateTypesEnum,
@@ -109,9 +112,12 @@ export default {
     USER_ROLES: rolesEnum,
     BOWERY_OFFICES: boweryOfficesEnum,
     SALES_ADJUSTMENT_GRID: salesAdjustmentGridEnum,
+    SALES_ADJUSTMENT_GRID_CUMULATIVE_PRICE: cumulativepriceSalesadjustEnum,
     ROWS_MARKET_ADJUSTMENT: rowsMarketAdjustmentEnum,
     REPORT_STATUS: reportStatusEnum,
     BOND_TYPES: bondTypesEnum,
     EXPENSES_CARD_NAMES: expensesForecastCardNamesEnum,
-    REIMBURSEMENT_COLUMN_ID: reimbursementColumnsIdEnum
+    REIMBURSEMENT_COLUMN_ID: reimbursementColumnsIdEnum,
+    CALCULATION_UNITS: calculationUnitsEnum,
+    CALCULATION_TYPE: calculationTypesEnum
 };

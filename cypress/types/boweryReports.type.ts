@@ -66,6 +66,8 @@ export namespace BoweryReports {
     export namespace SalesAdjustmentGrid {
         export type AdjustmentName = typeof Enums.SALES_ADJUSTMENT_GRID[KeyInfo.SalesAdjustmentGridKeys]
         export type RowsMarketAdjustment = typeof Enums.ROWS_MARKET_ADJUSTMENT[KeyInfo.RowsMarketAdjustmentKeys]
+        export type CumulativePrice = typeof Enums.SALES_ADJUSTMENT_GRID_CUMULATIVE_PRICE[KeyInfo.SalesAdjustmentGridCumulativePrice]
+        export type CalculationUnits = typeof Enums.CALCULATION_UNITS[KeyInfo.CalculationUnitsKeys]
     }
 
     export type ProFormaAnyIncome = {
@@ -210,8 +212,8 @@ export namespace BoweryReports {
 	export type ExpenseCardNames = typeof Enums.EXPENSES_CARD_NAMES[KeyInfo.ExpenseCardName]
 	
     export namespace SalesComps {
-        export type SelectedComparablesSortType = "Custom" | "Data Sold"
+        export type SelectedComparablesSortType = "Custom" | "Date Sold"
     }
     
-    
+    export type CalculationType = typeof Enums.CALCULATION_TYPE[KeyInfo.CalculationType]
 }
