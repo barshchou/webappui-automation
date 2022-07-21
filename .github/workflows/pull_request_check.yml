@@ -64,6 +64,11 @@ jobs:
           tags: grep=,grepTags=@smoke,burn=
           record_key: ${{ secrets.CURRENTS_RECORD_KEY }}
           ref: ${{ github.sha }}
+        env:
+          DD_CIVISIBILITY_AGENTLESS_ENABLED: true
+          DD_API_KEY: ${{ secrets.DD_API_KEY }}
+          DD_ENV: ${{ github.event.inputs.url }}
+          DD_SERVICE: 'webapp'
 
   Run-included-tests:
     needs: [Run-tsc-check, Run-smoke-tests]
@@ -105,3 +110,8 @@ jobs:
           record_key: ${{ secrets.CURRENTS_RECORD_KEY }}
           tags: grep=,grepTags=,burn=
           ref: ${{ github.sha }}
+        env:
+          DD_CIVISIBILITY_AGENTLESS_ENABLED: true
+          DD_API_KEY: ${{ secrets.DD_API_KEY }}
+          DD_ENV: ${{ github.event.inputs.url }}
+          DD_SERVICE: 'webapp'

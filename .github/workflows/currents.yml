@@ -60,7 +60,7 @@ jobs:
         env:
           DD_CIVISIBILITY_AGENTLESS_ENABLED: true
           DD_API_KEY: ${{ secrets.DD_API_KEY }}
-          DD_ENV: ${{ github.event.inputs.env }}
+          DD_ENV: ${{ github.event.inputs.url }}
           DD_SERVICE: 'webapp'
 
 
