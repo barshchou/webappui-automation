@@ -28,5 +28,5 @@ export default {
     featureFlagKey: Enums.FEATURE_FLAG_KEYS.flexibleTaxes,
     onFeatureFlag: 0,
     verifyExportValues: _verifyExportValues,
-    checkValue: "Per Unit"
+    checkValue: Enums.PER_UNIT_PER_SF.perUnit
 };
