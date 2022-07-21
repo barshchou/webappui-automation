@@ -29,11 +29,11 @@ export const createReport = (reportCreationData: BoweryAutomation.ReportCreation
 
     const envUrl = Cypress.config().baseUrl;
     loginAction(username, password);
-    cy._mapGet("user_id_api").then(_userId => {
+    cy._mapGet(mapKeysUtils.user_id).then(_userId => {
         cy.log(`user id is: ${_userId}`);
         const _payload = payloadFunction(reportCreationData, _userId);
         if(Cypress.env("report") == "api"){
-            cy._mapGet("token").then(_token => {
+            cy._mapGet(mapKeysUtils.bearer_token).then(_token => {
                 cy.createApiReport(
                     reportCreationData, _payload, _token, envUrl
                 );

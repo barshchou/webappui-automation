@@ -21,5 +21,5 @@ const dataFixture = () => {
 
 export default {
     reportCreationData: reportCreationFixture(),
-    data: Object.freeze(dataFixture())
+    data: Object.freeze(dataFixture()),
 };

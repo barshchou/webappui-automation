@@ -5,6 +5,7 @@ import {
 } from "../../../utils/numbers.utils";
 import BaseActionsExt from "../base/base.actions.ext";
 import { BoweryReports } from "../../types/boweryReports.type";
+import { _saveDataInFile } from "../../support/commands";
 
 class AdjustCompsActions extends BaseActionsExt<typeof adjustCompsPage> {
     /**
@@ -188,7 +189,8 @@ class AdjustCompsActions extends BaseActionsExt<typeof adjustCompsPage> {
              } else {
                  adjustedTrendedPriceText = `$${numberWithCommas(pricePerBasisNumber.toFixed(2))}`;
              }
-             cy.log("Cumulative Price Per Unit is: "+adjustedTrendedPriceText);
+             cy.log("Cumulative Price Per Unit is: " + adjustedTrendedPriceText);
+             _saveDataInFile(`$${numberWithCommas(Math.round(pricePerBasisNumber))}`);
              adjustCompsPage.cellCumulativePriceValue.eq(index).should("have.text", adjustedTrendedPriceText);
         });
             
