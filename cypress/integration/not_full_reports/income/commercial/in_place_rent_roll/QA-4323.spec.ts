@@ -4,9 +4,10 @@ import Income from "../../../../../actions/income/income.manager";
 import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
 
 describe("Verify the Rent Basis buttons", 
-    { tags:[ "@income", "@commercial", "@in_place_rent_roll" ] }, () => {
+    { tags:[ "@dd", "@income", "@commercial", "@in_place_rent_roll" ] }, () => {
         
     before("Login, create report", () => {
+        cy.get("somethign", { timeout:1500 }).should("exist");
         createReport(testData.reportCreationData);
     });
 
