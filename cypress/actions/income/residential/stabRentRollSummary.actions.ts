@@ -47,6 +47,16 @@ class StabilizedRentRollSummaryActions extends BaseActionsExt<typeof stabRentRol
         stabRentRollSummaryPage.distributionSummary.should("have.text", commToBe);
         return this;
     }
+
+    verifyRentTypeIncrease(rentControlledValue: number, rentTypeIndex = 0): StabilizedRentRollSummaryActions {
+        stabRentRollSummaryPage.rentTypeIncrease(rentTypeIndex).should('have.value', `${rentControlledValue}`);
+        return this;
+    }
+
+    verifyRentControlledIncreaseDiscussion(commentaryToBe: string): StabilizedRentRollSummaryActions {
+        stabRentRollSummaryPage.rentControlledIncreaseDiscussion.should('have.text', commentaryToBe);
+        return this;
+    }
 }
 
 export default new StabilizedRentRollSummaryActions(stabRentRollSummaryPage);
