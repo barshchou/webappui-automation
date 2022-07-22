@@ -86,7 +86,7 @@ describe(`Verify the "Lease Terms Adjustment Sub-Total"`,
 
         it(`[QA-5308] Verify the "Lease Terms Adjustment Sub-Total" row is displayed in the exported report`, () => {
             Cypress.config().baseUrl = null;
-            cy.task("getFilePath", { reportName: testData.reportCreationData.reportNumber, docxHtml: "html" })
+            cy.task("getFilePath", { _reportName: testData.reportCreationData.reportNumber, _docxHtml: "html" })
                 .then(file => {
                     cy.log(<string>file);
                     cy.visit(<string>file);

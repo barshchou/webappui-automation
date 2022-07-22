@@ -36,7 +36,7 @@ conditionalDescribe("[QA-4727] Verify possibility to edit static text in-app",
 
         it('Check export', () => {
             Cypress.config().baseUrl = null;
-            cy.task("getFilePath", { reportName: testData.reportCreationData.reportNumber, docxHtml: "html" })
+            cy.task("getFilePath", { _reportName: testData.reportCreationData.reportNumber, _docxHtml: "html" })
                 .then(file => {
                     cy.log(<string>file);
                     cy.visit(<string>file);

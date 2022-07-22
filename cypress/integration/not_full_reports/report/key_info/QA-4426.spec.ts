@@ -38,8 +38,8 @@ describe("[QA-4426] Check the generated commentary for Property Rights Appraised
             Cypress.config().baseUrl = null;
             testData.reportConclusionAndTextValues.forEach((item, index) => {
                 cy.task("getFilePath", { 
-                    reportName: reportCreationFixture(item.reportConclusion, `_${index + 1}`).reportNumber, 
-                    docxHtml: "html" 
+                    _reportName: reportCreationFixture(item.reportConclusion, `_${index + 1}`).reportNumber, 
+                    _docxHtml: "html" 
                 }).then(file => {
                     cy.log(<string>file);
                     cy.visit(<string>file);

@@ -4,8 +4,7 @@ import { createReport, deleteReport } from "../../../../actions/base/baseTest.ac
 import testData from "../../../../fixtures/not_full_reports/property/commercial_units/QA-4549-54.fixture";
 
 describe(`[QA-4549][QA-4550][QA-4551] Verify the "Linked" chips dropdown in the new narrative component`, 
-    { tags: [ "@property", "@commercial_units", "@check_export" ] }, () => {
-
+    { tags: [ "@property", "@commercial_units" ] }, () => {
         before('Create report', () => {
             cy.stepInfo(`Preconditions: The mixed report is created and several commercial units are added.`);
             createReport(testData.reportCreationDataAsIs);
@@ -29,7 +28,6 @@ describe(`[QA-4549][QA-4550][QA-4551] Verify the "Linked" chips dropdown in the 
 
         it(`[QA-4549] Verify the suggested text dropdown in the new narrative component added through "=" 
         for the 'Foreclosure sale' option`, () => {
-        
             cy.stepInfo("2. Click on the Edit button in the Commercial Unit SF Discussion section.");
             Property._CommercialUnits.clickEditDiscussionButton();
 
@@ -45,7 +43,6 @@ describe(`[QA-4549][QA-4550][QA-4551] Verify the "Linked" chips dropdown in the 
     
         it(`[QA-4550] Verify the suggested text dropdown in the new narrative component added through "=" 
         for the 'Sheriff's sale' option`, () => {
-
             cy.stepInfo("2. Click on the Edit button in the Commercial Unit SF Discussion section.");
             Property._CommercialUnits.clickEditDiscussionButton();
 
@@ -61,7 +58,6 @@ describe(`[QA-4549][QA-4550][QA-4551] Verify the "Linked" chips dropdown in the 
 
         it(`[QA-4551] Verify the suggested text dropdown in the new narrative component added through "=" 
         for the 'Unchanged Renovation' option`, () => {
-
             cy.stepInfo("2. Click on the Edit button in the Commercial Unit SF Discussion section.");
             Property._CommercialUnits.clickEditDiscussionButton();
 

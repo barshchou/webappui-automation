@@ -17,7 +17,7 @@ describe("Generate new report and download it", { tags: [ "@smoke" ] }, () => {
 
     it("Verify exported report", () => {
         Cypress.config().baseUrl = null;
-        cy.task("getFilePath", { _reportName: reportCreationData.reportNumber, _docx_html: "html" }).then(file => {
+        cy.task("getFilePath", { _reportName: reportCreationData.reportNumber, _docxHtml: "html" }).then(file => {
             cy.visit(<string>file);
             const addressToContain = reportCreationData.address.split(",")[0];
             cy.contains(addressToContain).should("exist");

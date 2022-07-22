@@ -6,7 +6,6 @@ import { _NavigationSection } from "../../../../actions/base";
 
 describe("Verify the functionality of the Ceiling Height radio button", 
     { tags:[ "@property", "@market", "@check_export" ] }, () => {
-
         it("Test body", () => {
             createReport(testData.reportCreationData);
 
@@ -41,7 +40,7 @@ describe("Verify the functionality of the Ceiling Height radio button",
 
         it("Check exported document other utilities values and commentaries", () => {
             Cypress.config().baseUrl = null;
-            cy.task("getFilePath", { _reportName: testData.reportCreationData.reportNumber, _docx_html: "html" })
+            cy.task("getFilePath", { _reportName: testData.reportCreationData.reportNumber, _docxHtml: "html" })
                 .then(file => {
                     cy.log(<string>file);
                     cy.visit(<string>file);

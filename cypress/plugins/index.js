@@ -81,21 +81,21 @@ const _convertDocxToHtml = async (report) => {
 /**
  * Get relative path to the file (report docx file or converted html in our case)
  * @param _reportName - generated `testData.reportCreationData.reportNumber` in test fixture
- * @param {"docx" | "html"} _docx_html - look for file which ends with "docx" or "html" extension
+ * @param {"docx" | "html"} _docxHtml - look for file which ends with "docx" or "html" extension
  * @param currentTime
  * @param timeout
  * @returns first relative path from array of matches 
  * @see https://www.npmjs.com/package/glob
  */
- const _getFilePath = async (_reportName, _docx_html, currentTime = 0, timeout = 60000) =>{
-  let file = glob.sync(`cypress/downloads/**${_reportName}**.${_docx_html}`)[0];
+ const _getFilePath = async (_reportName, _docxHtml, currentTime = 0, timeout = 60000) =>{
+  let file = glob.sync(`cypress/downloads/**${_reportName}**.${_docxHtml}`)[0];
   if (file != undefined) {
     return file;  
   }
   await new Promise((resolve) =>{
     setTimeout(() => resolve(true), 1000)
   });
-  return _getFilePath(_reportName, _docx_html, currentTime + 1000, timeout);
+  return _getFilePath(_reportName, _docxHtml, currentTime + 1000, timeout);
 }
 
 /**
@@ -106,8 +106,8 @@ const _loginApi = async (_envUrl, _username, _password) => {
   const response = await request(_envUrl)
   .post('/user/login')
   .send({
-    username:_username,
-    password:_password
+    username: _username,
+    password: _password
   })
   .expect('Content-Type', /json/)
   .expect(200);
@@ -124,8 +124,8 @@ const _loginApi = async (_envUrl, _username, _password) => {
  * -> create promise, which we will wait to resolved
  * In this promise we do next: 
  *  -> wait on `connect` event
- *  -> when `connect` is emmited - wait on `init` event (we need to wait synchronously, exaclty after `connect` event)
- *  -> when `init` is emmited - resolving callback with data from `init` event
+ *  -> when `connect` is emitted - wait on `init` event (we need to wait synchronously, exactly after `connect` event)
+ *  -> when `init` is emitted - resolving callback with data from `init` event
  *  -> resolving promise with `resolve` fn and socketId param
  * 
  * We "await" until our promise will be resolved with `socketId` value.
@@ -174,7 +174,7 @@ const _loginApi = async (_envUrl, _username, _password) => {
       const report = await subscription;
       
       console.log("Report id: "+ report._id);
-      console.log("Report number: "+report.report_number);
+      console.log("Report number: " + report.report_number);
       
       reportId = report._id;
    
@@ -222,8 +222,8 @@ module.exports = (on, config) => {
   });
 
   on("task",{
-    async getFilePath({_reportName, _docx_html}){
-      return await _getFilePath(_reportName, _docx_html);
+    async getFilePath({_reportName, _docxHtml}){
+      return await _getFilePath(_reportName, _docxHtml);
     }
   });
 

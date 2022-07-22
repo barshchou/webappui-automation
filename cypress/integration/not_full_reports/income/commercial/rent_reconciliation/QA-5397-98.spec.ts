@@ -64,7 +64,7 @@ describe(`Verify "Trended Rent/SF" row in the "Rent Reconciliation Adjustment gr
         it(`[QA-5398] Verify that nothing is displayed in the exported "Rent Reconciliation Adjustment" grid 
         in "Subject Base Unit" column - "Trended Rent/SF" row and "Adjusted Rent/SF" row`, () => {
             Cypress.config().baseUrl = null;
-            cy.task("getFilePath", { reportName: testData.reportCreationData.reportNumber, docxHtml: "html" })
+            cy.task("getFilePath", { _reportName: testData.reportCreationData.reportNumber, _docxHtml: "html" })
                 .then(file => {
                     cy.log(<string>file);
                     cy.visit(<string>file);

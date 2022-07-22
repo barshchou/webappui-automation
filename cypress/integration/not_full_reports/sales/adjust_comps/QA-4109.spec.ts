@@ -32,7 +32,7 @@ describe("Adjusted Price per Residential Unit in Sales Adjustment Grid is calcul
 
         it("Check export", () => {
             Cypress.config().baseUrl = null;
-            cy.task("getFilePath", { reportName: testData.reportCreationData.reportNumber, docxHtml: "html" })
+            cy.task("getFilePath", { _reportName: testData.reportCreationData.reportNumber, _docxHtml: "html" })
                 .then(file => {
                     cy.log(<string>file);
                     cy.visit(<string>file);

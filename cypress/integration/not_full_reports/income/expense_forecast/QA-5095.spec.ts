@@ -36,7 +36,7 @@ describe(`[QA-5095] Selected expenses forecast is exported to Estimated Operatin
 
         it("Check export", () => {
             Cypress.config().baseUrl = null;
-            cy.task("getFilePath", { reportName: reportCreationFixture("Per SF").reportNumber, docxHtml: "html" })
+            cy.task("getFilePath", { _reportName: reportCreationFixture("Per SF").reportNumber, _docxHtml: "html" })
                 .then(file => {
                     cy.log(<string>file);
                     cy.stepInfo(`4. Verify if selected Expense Forecast is displayed in 
@@ -84,7 +84,7 @@ describe(`[QA-5095] Selected expenses forecast is exported to Estimated Operatin
 
         it("Check export", () => {
             Cypress.config().baseUrl = null;
-            cy.task("getFilePath", { reportName: reportCreationFixture("Per Unit").reportNumber, docxHtml: "html" })
+            cy.task("getFilePath", { _reportName: reportCreationFixture("Per Unit").reportNumber, _docxHtml: "html" })
                 .then(file => {
                     cy.log(<string>file);
                     cy.stepInfo(`4. Verify if selected Expense Forecast is displayed 
@@ -128,7 +128,7 @@ describe(`[QA-5095] Selected expenses forecast is exported to Estimated Operatin
 
         it("Check export", () => {
             Cypress.config().baseUrl = null;
-            cy.task("getFilePath", { reportName: reportCreationFixture("Per Room").reportNumber, docxHtml: "html" })
+            cy.task("getFilePath", { _reportName: reportCreationFixture("Per Room").reportNumber, _docxHtml: "html" })
                 .then(file => {
                     cy.log(<string>file);
                     cy.stepInfo(`4. Verify if selected Expense Forecast is displayed 

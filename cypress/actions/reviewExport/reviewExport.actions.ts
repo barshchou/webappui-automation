@@ -62,7 +62,7 @@ class ReviewExportActions extends BaseActionsExt<typeof reviewExportPage> {
      */
     downloadAndConvertDocxReport(reportName: string): ReviewExportActions {
         reviewExportPage.downloadBtn.click();
-        cy.task("getFilePath", { reportName: `Bowery Appraisal_${reportName}`, docxHtml: "docx" }).then(file => {
+        cy.task("getFilePath", { _reportName: `Bowery Appraisal_${reportName}`, _docxHtml: "docx" }).then(file => {
             cy.log(<string>file);
             cy.task("waitForFileExists", file);
             cy.task("convertDocxToHtml", file);

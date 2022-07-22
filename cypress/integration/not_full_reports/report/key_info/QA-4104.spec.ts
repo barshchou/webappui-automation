@@ -31,7 +31,8 @@ describe("[QA-4104] Verify the Market Value generated commentary",
 
         it("Check export", () => {
             Cypress.config().baseUrl = null;
-            cy.task("getFilePath", { reportName: `${testData.reportCreationData.reportNumber}_462`, docxHtml: "html" })
+            cy.task("getFilePath", 
+                { _reportName: `${testData.reportCreationData.reportNumber}_462`, _docxHtml: "html" })
                 .then(file => {
                     cy.log(<string>file);
                     cy.visit(<string>file);

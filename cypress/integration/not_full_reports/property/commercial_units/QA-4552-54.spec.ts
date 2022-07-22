@@ -43,7 +43,7 @@ describe(`[QA-4552][QA-4553][QA-4554] Verify the "Linked" chips dropdown in the 
 
         it("[QA-4552] Check export", () => {
             Cypress.config().baseUrl = null;
-            cy.task("getFilePath", { reportName: testData.reportCreationDataAsIs.reportNumber, _docxHtml: "html" })
+            cy.task("getFilePath", { _reportName: testData.reportCreationDataAsIs.reportNumber, _docxHtml: "html" })
                 .then(file => {
                     cy.log(<string>file);
                     cy.stepInfo("4. Verify the linked chips on export");
@@ -92,7 +92,7 @@ describe(`[QA-4552][QA-4553][QA-4554] Verify the "Linked" chips dropdown in the 
 
         it("[QA-4553] Check export", () => {
             Cypress.config().baseUrl = null;
-            cy.task("getFilePath", { reportName: testData.reportCreationDataAsIs.reportNumber, docxHtml: "html" })
+            cy.task("getFilePath", { _reportName: testData.reportCreationDataAsIs.reportNumber, _docxHtml: "html" })
                 .then(file => {
                     cy.log(<string>file);
                     cy.stepInfo("4. Verify the linked chips on export");
@@ -141,7 +141,7 @@ describe(`[QA-4552][QA-4553][QA-4554] Verify the "Linked" chips dropdown in the 
 
         it("[QA-4554] Check export", () => {
             Cypress.config().baseUrl = null;
-            cy.task("getFilePath", { reportName: testData.reportCreationDataAsIs.reportNumber, docxHtml: "html" })
+            cy.task("getFilePath", { _reportName: testData.reportCreationDataAsIs.reportNumber, _docxHtml: "html" })
                 .then(file => {
                     cy.log(<string>file);
                     cy.stepInfo("4. Verify the linked chips on export");

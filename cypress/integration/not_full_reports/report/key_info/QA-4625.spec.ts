@@ -3,7 +3,7 @@ import { createReport, deleteReport } from "../../../../actions/base/baseTest.ac
 import { Report, ReviewExport } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
 
-describe("Verify the report export with a prefilled Letter of Engagement from Dropbox",
+describe("Verify the report export with a pre-filled Letter of Engagement from Dropbox",
     { tags: [ "@report", "@key_info", "@salesforce", "@check_export" ] }, () => {
         it("Test body", () => {
             cy.stepInfo(`1. Create a new report on the WebApp (Note: the JOB # of that report 
@@ -25,7 +25,8 @@ describe("Verify the report export with a prefilled Letter of Engagement from Dr
 
         it("Check export", () => {
             Cypress.config().baseUrl = null;
-            cy.task("getFilePath", { reportName: `${testData.reportCreationData.reportNumber}_462`, docxHtml: "html" })
+            cy.task("getFilePath", 
+                { _reportName: `${testData.reportCreationData.reportNumber}_462`, _docxHtml: "html" })
                 .then(file => {
                     cy.log(<string>file);
                     cy.visit(<string>file);

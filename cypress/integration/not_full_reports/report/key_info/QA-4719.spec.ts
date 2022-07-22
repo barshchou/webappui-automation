@@ -45,7 +45,7 @@ for As Is and As Stabilized report for Property Rights Appraised and Definition 
     
     it("Check export", () => {
         Cypress.config().baseUrl = null;
-        cy.task("getFilePath", { reportName: testData.reportCreationData.reportNumber, docxHtml: "html" })
+        cy.task("getFilePath", { _reportName: testData.reportCreationData.reportNumber, _docxHtml: "html" })
             .then(file => {
                 cy.log(<string>file);
                 cy.stepInfo(`3. Verify the linked chips on export for both sections`);

@@ -80,7 +80,7 @@ describe.skip("Check custom Utilities adjustment",
 
         it(`Check exported document other utilities values and commentaries`, () => {
             Cypress.config().baseUrl = null;
-            cy.task("getFilePath", { reportName: testData.reportCreationData.reportNumber, docxHtml: "html" })
+            cy.task("getFilePath", { _reportName: testData.reportCreationData.reportNumber, _docxHtml: "html" })
                 .then(file => {
                     cy.stepInfo(`6. Verify that other utilities adjustments are added to 
                     Comparable Sales Adjustment Grid `);

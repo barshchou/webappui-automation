@@ -43,7 +43,7 @@ and includes both commercial and residential units.`,
         Cypress.config().baseUrl = null;
         cy.stepInfo(`Verify the export of the report`);
         cy.task("getFilePath",
-            { reportName: testData.reportCreationData.reportNumber, docxHtml: "html" }
+            { _reportName: testData.reportCreationData.reportNumber, _docxHtml: "html" }
         ).then(file => {
             cy.log(<string>file);
             cy.visit(<string>file);
