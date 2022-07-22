@@ -128,14 +128,14 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
     }
 
     verifyForecastItemByExpensePeriodType(forecastItem: ForecastItem, buildingDescription: BuildingDescription,
-        expensePeriodType: string): ExpenseForecastActions {
+        expensePeriodType: string, toeCard = false): ExpenseForecastActions {
         let numberToBe;
         if (forecastItem.basis === "unit") {
             numberToBe = numberWithCommas(Math.round(forecastItem.projection / buildingDescription.numberOfUnits));
         } else {
             numberToBe = numberWithCommas((forecastItem.projection / buildingDescription.grossArea).toFixed(2));
         }
-        expenseForecastPage.getForecastItemProjectionByType(this.getItemNameForAverage(forecastItem.name), expensePeriodType)
+        expenseForecastPage.getForecastItemProjectionByType(this.getItemNameForAverage(forecastItem.name), expensePeriodType, toeCard)
             .should("contain.text", `$${numberToBe}`);
         return this;
     }
