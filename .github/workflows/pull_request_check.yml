@@ -54,7 +54,7 @@ jobs:
           echo ::set-output name=CUSTOM_URL::$CUSTOM_URL
 
       - name: Run smoke end-to-end tests with Currents dev
-        uses: Bowery-RES/action-run-e2e-tests@cy10
+        uses: Bowery-RES/action-run-e2e-tests@latest
         with:
           github_token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
           username: ${{ secrets.USERNAME }}
@@ -102,7 +102,7 @@ jobs:
 
       - name: Run included specs
         if: steps.define_specs.outputs.CHANGED_SPECS != null
-        uses: Bowery-RES/action-run-e2e-tests@cy10
+        uses: Bowery-RES/action-run-e2e-tests@latest
         with:
           github_token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
           username: ${{ secrets.USERNAME }}
