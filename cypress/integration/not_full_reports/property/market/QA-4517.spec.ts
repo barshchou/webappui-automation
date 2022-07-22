@@ -6,7 +6,7 @@ import { conditionalDescribe } from "../../../checkIsProd.utils";
 
 conditionalDescribe(`[QA-4517] Check that when "Summary of Rent Stabilization Laws" 
                     is empty in the report nothing shows up in export`,
-    { tags: [ "@property", "@market", "@check_export" ] }, () => {
+{ tags: [ "@property", "@market", "@check_export" ] }, () => {
         
     it("Test body", () => {
         cy.stepInfo(`1. Create a new report on the WebApp and navigate to Property > Market.`);
@@ -24,14 +24,15 @@ conditionalDescribe(`[QA-4517] Check that when "Summary of Rent Stabilization La
 
     it("Check export", () => {
         Cypress.config().baseUrl = null;
-        cy.task("getFilePath", { _reportName: testData.reportCreationData.reportNumber, _docx_html: "html" }).then(file => {
-            cy.log(<string>file);
+        cy.task("getFilePath", { _reportName: testData.reportCreationData.reportNumber, _docxHtml: "html" })
+            .then(file => {
+                cy.log(<string>file);
 
-            cy.stepInfo(`4. Verify that nothing shows up in the export in the Addenda 
+                cy.stepInfo(`4. Verify that nothing shows up in the export in the Addenda 
                         after Comparable sales outline and before Qualifications sections.`);
-            cy.visit(<string>file);
-            cy.xpath(`//h2[.='${testData.sectionBeforeName}']/following-sibling::h2`)
-                .eq(0).scrollIntoView().should("have.text", testData.sectionAfterName);
-        });
+                cy.visit(<string>file);
+                cy.xpath(`//h2[.='${testData.sectionBeforeName}']/following-sibling::h2`)
+                    .eq(0).scrollIntoView().should("have.text", testData.sectionAfterName);
+            });
     });
 });
