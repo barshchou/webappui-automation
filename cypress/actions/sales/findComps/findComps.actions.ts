@@ -87,6 +87,15 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
         return this;
     }
 
+    verifyUploadCompsSucceded(): FindCompsActions {
+        findCompsPage.loadingModalCSV.should('exist');
+        findCompsPage.loadingModalCSV.should('not.exist');
+        findCompsPage.salesCompsDateSold.should(($compsDateList) => {
+            expect($compsDateList.length).to.be.above(1);
+        });
+        return this;
+    }
+
     verifyComparablesNumber(number: number): FindCompsActions {
         const numberToBe = number + 1;
         findCompsPage.addressCells.should("have.length", numberToBe);
@@ -309,13 +318,13 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
                 let firstDateSoldString = element[i].textContent;
                 let secondDateSoldString = element[(i + 1)].textContent;
                 cy.log(firstDateSoldString, secondDateSoldString)
-                if (firstDateSoldString === 'Listing') {
-                    cy.log('Listing')
-                    expect(secondDateSoldString).to.be.a('Listing' || 'In-Contract' || 'number');
-
-                } else if (firstDateSoldString === 'In-Contract') {
+                if (firstDateSoldString === 'In-Contract') {
                     cy.log('In-Contract')
-                    expect(secondDateSoldString).to.be.a('In-Contract' || 'number');
+                    expect(secondDateSoldString).to.be.a('In-Contract' || 'Listing' || 'number');
+
+                } else if (firstDateSoldString === 'Listing') {
+                    cy.log('Listing')
+                    expect(secondDateSoldString).to.be.a('Listing' || 'number');
 
                 } else if (Date.parse(firstDateSoldString)) {
                     cy.log('DATE')
