@@ -287,7 +287,7 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
         this.clearNumericInputNewComp(elementAlias);
         
         // ernst: little hack to work with commercialAreaNewComp input due its specific behavior
-        if (elementAlias != Alias.pageElements.comp_plex.commercialAreaNewComp) {
+        if (elementAlias != Alias.pageElements.compPlex.commercialAreaNewComp) {
             cy.get(`@${elementAlias}`, { includeShadowDom: true }).realClick();
         } else {
             cy.get(`@${elementAlias}`, { includeShadowDom: true }).focus();
