@@ -304,88 +304,28 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
         this.Page.salesCompsDateSold.then(element => {
             cy.log(element)
 
+            for (let i = 1; i + 1 < element.length; i++) {
 
+                let firstDateSoldString = element[i].textContent;
+                let secondDateSoldString = element[(i + 1)].textContent;
+                cy.log(firstDateSoldString, secondDateSoldString)
+                if (firstDateSoldString === 'Listing') {
+                    cy.log('Listing')
+                    expect(secondDateSoldString).to.be.a('Listing' || 'In-Contract' || 'number');
 
-            for (let i = 1; i+1 < element.length; i++) {
+                } else if (firstDateSoldString === 'In-Contract') {
+                    cy.log('In-Contract')
+                    expect(secondDateSoldString).to.be.a('In-Contract' || 'number');
 
-let el1 = element[i].textContent;
-let el2 = element[(i + 1)].textContent;
-
-cy.log(el1, el2)
-           
-
-
-
-}
-
-
-
-
-            // switch (true) {
-
-              //   case (element.toArray()).some(element => { return element.textContent === 'Listing'; }):
-            //         // switch (true) {
-            //         //     case (element.toArray()).some(element => { return element.textContent === 'In-Contract'; }):
-                            
-            //                 // switch (true) {
-            //                 //     (element.toArray()).some(element => { return element.textContent === 'In-Contract'; }):
-            //                 // }
-            //                 // break;
-            //                 // default:
-                         
-            //         cy.log('Listing')
-            //         break;
-
-            //     case (element.toArray()).some(element => { return element.textContent === 'In-Contract'; }):
-            //         cy.log('In-Contract')
-            //         break;
-
-            //       //  case (element.toArray()).some(element => { return element.textContent == `${/^(0?[1-9]|1[012])[- \/\.](0?[1-9]|[12][0-9]|3[01])[- \/\.](19|20)?[0-9]{2}$/}`; }):
-            //       case (element.toArray()).some(element => { return Date.parse(element.textContent);}):
-            //         cy.log('DATE')                                    
-                
-            //         break;
-            
-            //         }
-                
-
-
-
-
-            // let  allDates = element.toArray()
-
-
-            //  cy.log(allDates)
-            // if ((element.toArray()).some(element => { return element.textContent === 'Listing'; })) {
-
-            //     cy.log('Listing or In-Contract')
-
-            //     if ((element.toArray()).some(element => { return element.textContent === 'In-Contract'; })) {
-
-            //     }
-
-
-            // } else if ((element.toArray()).some(element => { return element.textContent === 'Listing'; })) {
-
-            //     cy.log('DATE')
-            // }
-
-
-
-            // if (allDates.includes.call(element.should('contain', 'Listing'))     { cy.log("YES")}
-        
+                } else if (Date.parse(firstDateSoldString)) {
+                    cy.log('DATE')
+                    expect(Date.parse(secondDateSoldString)).to.be.a('number');
+                    expect(Date.parse(firstDateSoldString)).to.be.above(Date.parse(secondDateSoldString));
+                }
+            }
         });
         return this;
     }
-
-
-
-
-
-
-
-
-
 }
 
 
