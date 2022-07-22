@@ -65,7 +65,7 @@ describe("Historical expense Insurance Per SF is correctly calculated and displa
         Income._ExpenseForecastActions.Actions.matchElementSnapshot(
             Income._ExpenseForecastActions.Page.forecastItemCard(
                 Income._ExpenseForecastActions.getItemNameForAverage(
-                    testData.actualInsuranceItem.name)), testData.insurancePerSfCardSnapshotName, { padding: [ 10, 100 ] });
+                    testData.actualInsuranceItem.name)), testData.insurancePerSfCardSnapshotName, { padding: [ 0, 100 ] });
                     
         deleteReport(testData.reportCreationData.reportNumber);
     });
