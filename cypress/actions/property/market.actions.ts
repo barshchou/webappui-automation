@@ -48,6 +48,12 @@ class MarketActions extends BaseActionsExt<typeof marketPage>{
         return this;
     }
 
+    enterNeighborhoodYear(yearToBe: string | number): MarketActions {
+        marketPage.neighborhoodYear.type(`${yearToBe}`);
+        this.verifyNeighborhoodYear(yearToBe);
+        return this;
+    }
+
     verifyNeighborhoodYear(yearToBe: string | number): MarketActions {
         marketPage.neighborhoodYear.should("have.value", yearToBe);
         return this;
@@ -70,7 +76,13 @@ class MarketActions extends BaseActionsExt<typeof marketPage>{
         return this;
     }
 
-    verifyMarketYear(yearToBe: string): MarketActions {
+    enterMarketYear(yearToBe: string | number): MarketActions {
+        marketPage.marketYear.type(`${yearToBe}`);
+        this.verifyMarketYear(yearToBe);
+        return this;
+    }
+
+    verifyMarketYear(yearToBe: string | number): MarketActions {
         marketPage.marketYear.should("have.value", yearToBe);
         return this;
     }

@@ -44,5 +44,6 @@ export enum Tag {
     settings = "@settings",
     unit_details = "@unit_details",
     reimbursement_summary = "@reimbursement_summary",
-    rent_reconciliation = "@rent_reconciliation"
+    rent_reconciliation = "@rent_reconciliation",
+    site_description = "@site_description"
 }
