@@ -429,7 +429,7 @@ class TaxInfoActions extends BaseActionsExt<typeof taxInfoPage> {
 
     verifyTaxLiabilityItemAndValue(item: string, value: string): TaxInfoActions {
         taxInfoPage.getTaxLiabilityRowItem(item).should("exist");
-        taxInfoPage.getTaxLiabilityRowValue(value).should("have.text", value);
+        taxInfoPage.getTaxLiabilityRowItem(value).should("have.text", value);
         return this;
     }
 }

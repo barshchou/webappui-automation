@@ -1,7 +1,7 @@
-import testData from "../../../../fixtures/not_full_reports/income/tax_info/QA-5882.fixture";
+import testData from "../../../../fixtures/not_full_reports/income/tax_info/QA-5882_83.fixture";
 import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
-import { Income, Property } from './../../../../actions/index';
+import { Income, Property } from '../../../../actions/index';
 import launchDarklyApi from "../../../../api/launchDarkly.api";
 
 describe("[QA-5183] Square Foot row in Tax Liability grid is displayed according to selected Basis for Square Foot Analysis", () => {
@@ -25,8 +25,11 @@ describe("[QA-5183] Square Foot row in Tax Liability grid is displayed according
                 Income._TaxInfo.verifyTaxLiabilityItemAndValue(radio, testData.commonValue);
             } else {
                 Income._TaxInfo.verifyTaxLiabilityItemAndValue(radio, testData.enterValue);
-            }
+            }            
         });
+        Income._TaxInfo.clickAddNewRowButton()
+            .clickAddNewRowButton(testData.buttonName)
+            .verifyTotalTaxLiability();
     });
 
     after(() => {

@@ -1,4 +1,4 @@
-import { PropertySquareFootAnalysisKeys } from './../../../../enums/enumKeys.enum.d';
+import { PropertySquareFootAnalysisKeys } from '../../../../enums/enumKeys.enum';
 import Enums from "../../../../enums/enums";
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 
@@ -11,4 +11,5 @@ export default {
     enterValue: "1,000",
     onFeatureFlag: 0,
     tooltip: "The following text will appear below the Tax Liability table in your export",
+    buttonName: "Add Special Assessment",
 };
