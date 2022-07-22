@@ -22,14 +22,13 @@ describe("[QA-5183] Square Foot row in Tax Liability grid is displayed according
     
             cy.stepInfo(`4.${normalIndex}. Verify Tax Liability Item And Value`);
             if (radio === "GBA") {
-                Income._TaxInfo.verifyTaxLiabilityItemAndValue(radio, testData.commonValue);
+                Income._TaxInfo.verifyTaxLiabilityItemAndValue(radio, testData.commonValue)
+                    .verifyPSFTaxLiability(radio);
             } else {
-                Income._TaxInfo.verifyTaxLiabilityItemAndValue(radio, testData.enterValue);
+                Income._TaxInfo.verifyTaxLiabilityItemAndValue(radio, testData.enterValue)
+                    .verifyPSFTaxLiability(radio);
             }            
         });
-        Income._TaxInfo.clickAddNewRowButton()
-            .clickAddNewRowButton(testData.buttonName)
-            .verifyTotalTaxLiability();
     });
 
     after(() => {

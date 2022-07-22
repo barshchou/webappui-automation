@@ -1,3 +1,4 @@
+import { PropertySquareFootAnalysisKeys } from './../../enums/enumKeys.enum.d';
 import taxInfoPage from "../../pages/income/taxInfo.page";
 import { getNumberFromDollarNumberWithCommas, numberWithCommas, 
     getNumberWithDecimalPart, getNumberFromPercentNumberWithCommas } from "../../../utils/numbers.utils";
@@ -430,6 +431,18 @@ class TaxInfoActions extends BaseActionsExt<typeof taxInfoPage> {
     verifyTaxLiabilityItemAndValue(item: string, value: string): TaxInfoActions {
         taxInfoPage.getTaxLiabilityRowItem(item).should("exist");
         taxInfoPage.getTaxLiabilityRowItem(value).should("have.text", value);
+        return this;
+    }
+
+    verifyPSFTaxLiability(item: PropertySquareFootAnalysisKeys): TaxInfoActions {
+        taxInfoPage.getTaxLiabilityRowValue(item).invoke("text").then(PSFAnalysis => {
+            const numberPSFAnalysis = getNumberFromDollarNumberWithCommas(PSFAnalysis);
+            taxInfoPage.getTaxLiabilityRowValue("Tax Liability (Total)").invoke("text").then(taxLiabilityTotal => {
+                const numberTaxLiabilityTotal = getNumberFromDollarNumberWithCommas(taxLiabilityTotal);
+                const taxLiability = `$${numberWithCommas((numberTaxLiabilityTotal / numberPSFAnalysis).toFixed(2))}`;
+                taxInfoPage.getTaxLiabilityRowValue("Tax Liability (PSF)").should("have.text", taxLiability);
+            });
+        });
         return this;
     }
 }
