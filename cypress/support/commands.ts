@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { addMatchImageSnapshotCommand } from 'cypress-image-snapshot/command';
+import { addMatchImageSnapshotCommand } from '@simonsmith/cypress-image-snapshot/command';
 import "cypress-file-upload";
 import "cypress-localstorage-commands";
 import mapKeysUtils from '../utils/mapKeys.utils';
@@ -77,7 +77,7 @@ Cypress.Commands.add("loginByApi", (envUrl, username, password) => {
         // set bearer token also in localStorage in order to avoid unexpected behavior from old code
         window.localStorage.setItem("jwToken", token);
 
-        // set bearer token so we could we use this in global after hook in `./index.ts`
+        // set bearer token so we could we use this in global after hook in `./e2e.ts`
         cy._mapSet(mapKeysUtils.bearer_token, token);
 
         const userId = responseBody.user._id;

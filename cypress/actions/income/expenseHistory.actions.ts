@@ -27,7 +27,7 @@ class ExpenseHistoryActions extends BaseActionsExt<typeof expenseHistoryPage>{
         return this;
     }
 
-    enterIssueByColIndex(issueValue: number | string, tableExpenseHistoryCellNames: string, index = 0,): ExpenseHistoryActions {
+    enterIssueByColIndex(issueValue: number | string, tableExpenseHistoryCellNames: string, index = 0): ExpenseHistoryActions {
         if (issueValue === "clear") {
             expenseHistoryPage.getUnifiedEditableAndTotalCells(tableExpenseHistoryCellNames).eq(index).scrollIntoView()
                 .realType("something nonsense");
