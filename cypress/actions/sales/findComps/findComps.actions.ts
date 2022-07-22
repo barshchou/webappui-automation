@@ -212,7 +212,7 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
 
     enterReportToSearchComp(reportID: string): FindCompsActions {
         cy.intercept("GET", `/salesComps/eventIds/${reportID}`)
-            .as(Alias.salesComps_eventIds);
+            .as(Alias.salesCompsEventIds);
         findCompsPage.reportToSearchCompInput.type(reportID).should("have.value", reportID);
         return this;
     }
@@ -232,7 +232,7 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
      * which returns salesEventId which in its turn will be passed to DRM's GraphQL API
      */
     checkSingleSalesCompsByEventId(): FindCompsActions {
-        cy.wait(`@${Alias.salesComps_eventIds}`).then(({ response }) => {
+        cy.wait(`@${Alias.salesCompsEventIds}`).then(({ response }) => {
             cy.get(`@${Alias.salesEventId}`).then(_salesEventId => {
                 // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 let arr: Array<any>  = response.body.selectedEventIds;

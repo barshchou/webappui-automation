@@ -1,9 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable @typescript-eslint/no-namespace */
-
 import { recordProxiedRequests } from "../../utils/intercept.utils";
-import { recordDOM_Snapshot } from "../utils/snapshot.utils";
+import { recordDOMSnapshot } from "../utils/snapshot.utils";
 import "./commands";
 import "cypress-real-events/support";
 import { BoweryAutomation } from "../types/boweryAutomation.type";
@@ -15,27 +14,28 @@ const registerCypressGrep = require('cypress-grep');
 registerCypressGrep();
 
 Cypress.on("uncaught:exception", () => {
-    // returning false here prevents Cypress from
-    // failing the test
+    /*
+     * returning false here prevents Cypress from
+     * failing the test
+     */
     return false;
 });
 
 after(() => {
-  // check whether test was from smoke suite by its relative path
-  if(Cypress.spec.relative.includes("smoke")){
-    cy.log("Smoke test, does not deleting report");
-    cy.logNode("Smoke test, does not deleting report");
-    return;
-  }
-  else{
-    cy.deleteApiReport();
-  }
+    // check whether test was from smoke suite by its relative path
+    if (Cypress.spec.relative.includes("smoke")) {
+        cy.log("Smoke test, does not deleting report");
+        cy.logNode("Smoke test, does not deleting report");
+        return;
+    } else {
+        cy.deleteApiReport();
+    }
 });
 
 Cypress.on("fail", (err) => {
-  recordDOM_Snapshot();
-  recordProxiedRequests();
-  throw err;
+    recordDOMSnapshot();
+    recordProxiedRequests();
+    throw err;
 });
 
 declare global {
@@ -48,17 +48,13 @@ declare global {
          */
         loginByApi(url: string, username: any, password: any): Cypress.Chainable<Cypress.Response<any>>
 
-        /**
-         * 
-         * @param value 
-         */
         loginByUI(url: string, username: string, password: string): Chainable<Element>
 
         /**
-         * Description of step which will desribe code below. 
+         * Description of step which will describe code below. 
          * @param message 
          */
-        stepInfo(message:string): void
+        stepInfo(message: string): void
 
         /**
          * Create report through API
@@ -77,8 +73,8 @@ declare global {
          * Deletes report(s) using `DELETE` method and `/report/:id` route. 
          * Takes `report_id`'s from `_map`, iterates over them and execute request (see code in `./commands.ts`)
          * 
-         * Note_1: code of this methods starts in *WebApp* repo, search for `router.delete('/:id', userController.isAuthenticated, controller.delete)`
-         * in `./routes/report/index.js`
+         * Note_1: code of this methods starts in *WebApp* repo, search for 
+         * `router.delete('/:id', userController.isAuthenticated, controller.delete)` in `./routes/report/index.js`
          * 
          * Note_2: this functionality in *WebApp* might changed due to migration 
          * from old code to nestjs codebase (in a years to come),
