@@ -3,7 +3,8 @@ import ReportDataCreator from "../../fixtures/data_creator/reportData.creator";
 import { ReviewExport } from "../../actions";
 import { BoweryAutomation } from "../../types/boweryAutomation.type";
 
-const reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("generateDownloadNewReport");
+const reportCreationData: BoweryAutomation.ReportCreationData = 
+    ReportDataCreator.getReportData("generateDownloadNewReport");
 
 describe("Generate new report and download it", { tags: [ "@smoke" ] }, () => {
 
