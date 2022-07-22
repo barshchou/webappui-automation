@@ -1,5 +1,3 @@
-/// <reference types="cypress-grep" />
-
 import testData from "../../../../fixtures/not_full_reports/income/expense_forecast/QA-4889.fixture";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import Income from "../../../../actions/income/income.manager";
@@ -45,7 +43,7 @@ describe("Comparable Min, Max, Avg values for Electricity Per Unit are correctly
         .verifyProgressBarNotExist();
 
     Income.ExpenseForecast.Actions.matchElementSnapshot(
-      Income.ExpenseForecast.Page.electricityCard, testData.electricityCardSnapshotName, { padding: [ 10, 100 ] });
+      Income.ExpenseForecast.Page.electricityCard, testData.electricityCardSnapshotName, { padding: [ 0, 100 ] });
 
     deleteReport(testData.reportCreationData.reportNumber);
   });

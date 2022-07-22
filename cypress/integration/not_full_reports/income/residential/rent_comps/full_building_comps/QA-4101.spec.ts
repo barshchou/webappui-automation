@@ -1,10 +1,10 @@
-import {  conditionalDescribe } from "../../../../../../../utils/env.utils";
 import { createReport, deleteReport } from "../../../../../../actions/base/baseTest.actions";
 import testData from "../../../../../../fixtures/not_full_reports/income/residential/rent_comps/full_building_comps/QA-4101.fixture";
 import { _NavigationSection } from "../../../../../../actions/base";
 import { Income } from "../../../../../../actions";
 import { _IncomeTitles } from "../../../../../../enums/pages_titles";
 import Enums from "../../../../../../enums/enums";
+import { conditionalDescribe } from "../../../../../checkIsProd.utils";
 
 
 conditionalDescribe("Property Conditions tests", { tags: [ "@residential", "@rent_comps",

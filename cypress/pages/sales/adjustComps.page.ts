@@ -76,6 +76,10 @@ class AdjustCompsPage extends BasePage {
 
     get viewMarketDetails() { return cy.xpath("//div[text() = 'Market Adjustment']");}
 
+    get viewAdjustmentDetails() {return cy.xpath("//*[contains(text(), 'Other Adjustment')]//following::*[@role='presentation'][1]");}
+
+    getOtherAdjustmentColumnValue(value: string, index = 1) {return cy.xpath(`//*[contains(text(), 'Other Adjustment')]//following::*[contains(text(), '${value}')][${index}]`);}
+    
     getAdjustmentArrow(adjustmentName: AdjustmentName){
         return cy.get(`[data-qa="expansion-row-${adjustmentName}"] [aria-label="Show more"]`);
     }
