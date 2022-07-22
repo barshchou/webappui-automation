@@ -6,6 +6,6 @@ export const isProdEnv = () => {
 
 /**
  * Skipping test suite from execution if current execution env is `prod`.
- * Necessary for tests where we manipulate with sensetive data
+ * Necessary for tests where we manipulate with sensitive data
  */
 export const conditionalDescribe = isProdEnv() ? describe.skip : describe;
