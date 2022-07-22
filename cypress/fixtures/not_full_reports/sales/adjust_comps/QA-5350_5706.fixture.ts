@@ -1,15 +1,8 @@
 import Enums from "../../../../enums/enums";
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 
-export const reportCreationData = conclusionValue => {
-    return ReportDataCreator.getReportData("5350_5706", { 
-        incomeValue: Enums.INCOME_TYPE.both,
-        conclusionValue  
-    });
-};
-
 export default {
-    reportCreationData: ReportDataCreator.getReportData("5706", { incomeValue: Enums.INCOME_TYPE.both }),
+    reportCreationData: ReportDataCreator.getReportData("5350_5706", { incomeValue: Enums.INCOME_TYPE.both }),
     marketConditionAdjustment: 2,
     addressDates: [ new Date(2022, 2, 2), new Date(2022, 3, 1) ],
     dateOfValue: new Date(2022, 1, 15),

@@ -3,7 +3,6 @@ import { createReport } from "../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Sales from "../../../../actions/sales/sales.manager";
 
-
 describe("Calculation of Market Condition adjustment", 
     { tags: [ "@adjust_comps", "@sales" ] }, () => {
         
