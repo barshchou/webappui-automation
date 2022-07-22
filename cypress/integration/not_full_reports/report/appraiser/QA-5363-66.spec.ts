@@ -2,7 +2,7 @@ import { _NavigationSection } from '../../../../actions/base';
 import { createReport, deleteReport } from '../../../../actions/base/baseTest.actions';
 import { Report } from '../../../../actions';
 import testData from "../../../../fixtures/not_full_reports/report/appraiser/QA-5363-66.fixture";
-import { conditionalDescribe } from '../../../../../utils/env.utils';
+import { conditionalDescribe } from "../../../checkIsProd.utils";
 
 
 /**

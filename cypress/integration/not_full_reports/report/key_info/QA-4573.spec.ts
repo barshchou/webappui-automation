@@ -2,7 +2,7 @@ import testData from "../../../../fixtures/not_full_reports/report/key_info/QA-4
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { ReviewExport } from "../../../../actions";
-import { conditionalDescribe } from "../../../../../utils/env.utils";
+import { conditionalDescribe } from "../../../checkIsProd.utils";
 
 conditionalDescribe("[QA-4573] Verify the Source text is correct in the Survey of Competitive Rates table",
     { tags: [ "@report", "@key_info", "@check_export" ] }, () => {
