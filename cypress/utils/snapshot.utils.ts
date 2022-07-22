@@ -9,11 +9,13 @@ function _replaceStyle ($head, existingStyle, style) {
     const styleTag = _styleTag(style);
 
     if (existingStyle) {
-      Cypress.$(existingStyle).replaceWith(styleTag);
+        Cypress.$(existingStyle).replaceWith(styleTag);
     } else {
-      // no existing style at this index, so no more styles at all in
-      // the head, so just append it
-      $head.append(styleTag);
+        /*
+         * no existing style at this index, so no more styles at all in
+         * the head, so just append it
+         */
+        $head.append(styleTag);
     }
 }
 
@@ -31,7 +33,7 @@ function _styleTag (style) {
  * and recording into filesystem with internal Cypress methods.
  * TODO: Describe Cypress hacks in Readme in "Hacks" section
  */
-export const recordDOM_Snapshot = () => {
+export const recordDOMSnapshot = () => {
     // @ts-ignore
     Cypress.Commands._commands.log.fn("Recording DOM snapshot to file");
     // @ts-ignore
@@ -44,10 +46,9 @@ export const recordDOM_Snapshot = () => {
     const existingStyles = $head.find('link[rel="stylesheet"],style');
 
     headStyles.forEach((style, index) => {
-        if(style.href){
+        if (style.href) {
             //
-        }
-        else{
+        } else {
             _replaceStyle($head, existingStyles[index], style);
         }
     });
@@ -57,10 +58,14 @@ export const recordDOM_Snapshot = () => {
     let s ='<html>\n' + XMLS.serializeToString(Cypress.$autIframe.contents().find('head')[0]);
     s += XMLS.serializeToString(snap.body.get()[0]) + '\n</html>\n';
    
-    // first way
-    // Cypress.Commands._commands.writeFile.fn(`${Cypress.spec.name}.html`,s);
+    /*
+     * first way
+     * Cypress.Commands._commands.writeFile.fn(`${Cypress.spec.name}.html`,s);
+     */
 
-    // second way
-    // @ts-ignore
+    /*
+     * second way
+     * @ts-ignore
+     */
     Cypress.backend('write:file', `${pathToSnapshots}/${Cypress.spec.name}.html`, s);
 };
