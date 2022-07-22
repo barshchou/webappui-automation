@@ -63,9 +63,8 @@ export const recordDOMSnapshot = () => {
      * Cypress.Commands._commands.writeFile.fn(`${Cypress.spec.name}.html`,s);
      */
 
-    /*
-     * second way
-     * @ts-ignore
-     */
+    // eslint-disable-next-line multiline-comment-style
+    // second way
+    // @ts-ignore
     Cypress.backend('write:file', `${pathToSnapshots}/${Cypress.spec.name}.html`, s);
 };
