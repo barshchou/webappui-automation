@@ -6,8 +6,7 @@ import RentCompsPage from "../../../../../pages/income/residential/rent_comps/re
 
 describe(`Verify the UI elements of Find Rent Comparable overlay on Rent Comps page 
 and Add New Rent Comp button`, () => {
-    before("Login, create report", () => 
-    {
+    before("Login, create report", () => {
         createReport(testData.reportCreationData);
     });
 

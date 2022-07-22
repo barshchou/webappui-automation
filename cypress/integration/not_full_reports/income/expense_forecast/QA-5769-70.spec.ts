@@ -33,7 +33,7 @@ is correctly converted to Per SF/Unit value`,
 
         cy.stepInfo(`2. Fill in Appraiser's Forecast field for Replacement Reserves card`);
         Income._ExpenseForecastActions
-        .enterForecastItemForecast(testData.expenseForecastReplacementsReservesFixture('unit'));
+            .enterForecastItemForecast(testData.expenseForecastReplacementsReservesFixture('unit'));
 
         cy.stepInfo(`3. Verify that Per SF value below this field is calculated as: 
         Per Unit Appraiser's Forecast * # of Residential Units / selected Basis for Square Foot Analysis`);
