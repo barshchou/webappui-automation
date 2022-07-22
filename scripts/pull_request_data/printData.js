@@ -1,23 +1,15 @@
-const { getEnvValue, getEnvUrl, getCustomUrl } = require("./getData");
+const { getUrlValue, getCustomUrl } = require("./getData");
 const axios = require("axios");
 
 /**
- * @description Prints appropriate data to console, depending on the dataToPrint parameter and envValue
+ * @description Prints appropriate data to console, depending on the dataToPrint parameter and urlValue
  * @param {string} prData Data from pullRequest, that were acquired from api request
  * @param {string} dataToPrint Value of --data flag, passed to command line
  */
 const printNecessaryData = (prData, dataToPrint) => {
-    const envValue = getEnvValue(prData);
-    if (dataToPrint === "env") {
+    const envValue = getUrlValue(prData);
+    if (dataToPrint === "url") {
         console.log(envValue.toLowerCase());
-    } else if (dataToPrint === "url") {
-        if (envValue.toLowerCase() !== "custom") {
-            const envUrl = getEnvUrl(envValue);
-            console.log(envUrl);
-        } else {
-            const customUrl = getCustomUrl(prData);
-            console.log(customUrl);
-        }
     } else {
         const dataToPrint = envValue.toLowerCase() === "custom" ? getCustomUrl(prData) : "";
         console.log(dataToPrint);

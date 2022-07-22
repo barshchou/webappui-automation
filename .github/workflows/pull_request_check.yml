@@ -2,12 +2,12 @@ name: Run smoke tests and tests, included in PR
 
 on:
   pull_request:
-    types: [opened, review_requested, ready_for_review]
+    types: [opened, labeled, ready_for_review]
 
 jobs:
   Run-tsc-check:
     runs-on: ubuntu-latest
-    if: ${{ !github.event.pull_request.draft }}
+    if: github.event.label.name == 'ready_for_review'
     container: cypress/browsers:node16.13.2-chrome100-ff98
     steps:
       - name: Checkout
@@ -23,7 +23,6 @@ jobs:
 
   Run-smoke-tests:
     needs: Run-tsc-check
-    if: ${{ !github.event.pull_request.draft }}
     runs-on: ubuntu-latest
     container: cypress/browsers:node16.13.2-chrome100-ff98
     permissions:
@@ -34,9 +33,8 @@ jobs:
       matrix:
         containers: [ 1, 2, 3, 4, 5, 6, 7, 8 ]
     outputs:
-      ENVIRONMENT: ${{ steps.define_pull_request_data.outputs.ENVIRONMENT }}
       URL: ${{ steps.define_pull_request_data.outputs.URL }}
-      CUSTOM_ENV: ${{ steps.define_pull_request_data.outputs.CUSTOM_ENV }}
+      CUSTOM_URL: ${{ steps.define_pull_request_data.outputs.CUSTOM_URL }}
 
     steps:
       - name: Checkout
@@ -50,12 +48,10 @@ jobs:
       - name: Define env and url variables
         id: define_pull_request_data
         run: |
-          ENVIRONMENT=$(node scripts/pull_request_data/index.js --token ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }} --pr ${{ github.event.number }} --data env)
           URL=$(node scripts/pull_request_data/index.js --token ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }} --pr ${{ github.event.number }} --data url)
-          CUSTOM_ENV=$(node scripts/pull_request_data/index.js --token ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }} --pr ${{ github.event.number }} --data customEnv)
-          echo ::set-output name=ENVIRONMENT::$ENVIRONMENT
+          CUSTOM_URL=$(node scripts/pull_request_data/index.js --token ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }} --pr ${{ github.event.number }} --data customUrl)
           echo ::set-output name=URL::$URL
-          echo ::set-output name=CUSTOM_ENV::$CUSTOM_ENV
+          echo ::set-output name=CUSTOM_URL::$CUSTOM_URL
 
       - name: Run smoke end-to-end tests with Currents dev
         uses: Bowery-RES/action-run-e2e-tests@latest
@@ -63,17 +59,20 @@ jobs:
           github_token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
-          env: ${{ steps.define_pull_request_data.outputs.ENVIRONMENT }}
           url: ${{ steps.define_pull_request_data.outputs.URL }}
-          customEnv: ${{ steps.define_pull_request_data.outputs.CUSTOM_ENV }}
+          customUrl: ${{ steps.define_pull_request_data.outputs.CUSTOM_URL }}
           tags: grep=,grepTags=@smoke,burn=
           record_key: ${{ secrets.CURRENTS_RECORD_KEY }}
           ref: ${{ github.sha }}
+        env:
+          DD_CIVISIBILITY_AGENTLESS_ENABLED: true
+          DD_API_KEY: ${{ secrets.DD_API_KEY }}
+          DD_ENV: ${{ github.event.inputs.url }}
+          DD_SERVICE: 'webapp'
 
   Run-included-tests:
     needs: [Run-tsc-check, Run-smoke-tests]
     runs-on: ubuntu-latest
-    if: ${{ !github.event.pull_request.draft }}
     container: cypress/browsers:node16.13.2-chrome100-ff98
     permissions:
       id-token: write
@@ -83,9 +82,12 @@ jobs:
         uses: actions/checkout@v3
         with:
           token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
+      
+      - name: Installing modules
+        run: npm install
 
       - name: Install find specs module
-        run: npm install -g find-cypress-specs@1.17.0
+        run: npm install -g find-cypress-specs@latest
 
       - name: Define included specs
         id: define_specs
@@ -105,10 +107,14 @@ jobs:
           github_token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
-          env: ${{ needs.Run-smoke-tests.outputs.ENVIRONMENT }}
           url: ${{ needs.Run-smoke-tests.outputs.URL }}
-          customEnv: ${{ needs.Run-smoke-tests.outputs.CUSTOM_ENV }}
+          customUrl: ${{ needs.Run-smoke-tests.outputs.CUSTOM_URL }}
           spec_file: ${{ steps.define_specs.outputs.CHANGED_SPECS }}
           record_key: ${{ secrets.CURRENTS_RECORD_KEY }}
           tags: grep=,grepTags=,burn=
           ref: ${{ github.sha }}
+        env:
+          DD_CIVISIBILITY_AGENTLESS_ENABLED: true
+          DD_API_KEY: ${{ secrets.DD_API_KEY }}
+          DD_ENV: ${{ github.event.inputs.url }}
+          DD_SERVICE: 'webapp'

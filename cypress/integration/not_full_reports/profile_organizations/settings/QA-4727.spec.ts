@@ -1,11 +1,11 @@
-import { _HomePage } from './../../../../actions/base';
-import { createReport, deleteReport } from './../../../../actions/base/baseTest.actions';
+import { _HomePage } from '../../../../actions/base';
+import { createReport, deleteReport } from '../../../../actions/base/baseTest.actions';
 import { Organization, PreviewEdit, ReviewExport } from '../../../../actions';
 import { _NavigationSection } from '../../../../actions/base';
 import testData from "../../../../fixtures/not_full_reports/profile_organizations/settings/QA-4727.fixture";
 import enums from '../../../../enums/enums';
 import launchDarklyApi from '../../../../api/launchDarkly.api';
-import { conditionalDescribe } from '../../../../../utils/env.utils';
+import { conditionalDescribe } from "../../../checkIsProd.utils";
 
 conditionalDescribe("[QA-4727] Verify possibility to edit static text in-app", 
     { tags:[ "@organizations", "@settings", "@check_export", "@feature_flag" ] }, () => {
