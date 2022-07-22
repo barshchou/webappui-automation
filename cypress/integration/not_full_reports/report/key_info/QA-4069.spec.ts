@@ -1,4 +1,4 @@
-import { ReviewExport } from './../../../../actions/index';
+import { ReviewExport } from '../../../../actions';
 import testData from "../../../../fixtures/not_full_reports/report/key_info/QA-4069.fixture";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";

@@ -278,6 +278,11 @@ class TaxInfoActions extends BaseActionsExt<typeof taxInfoPage> {
         return this;
     }
 
+    clickAddNewRowButton(name = "Add Additional Tax Rate"): TaxInfoActions {
+        taxInfoPage.getAddNewRowButton(name).click();
+        return this;
+    } 
+
     verifyTaxCompsCommentary(commToBe: string): this {
         taxInfoPage.taxCompsDiscussionComm.should("have.text", commToBe);
         return this;

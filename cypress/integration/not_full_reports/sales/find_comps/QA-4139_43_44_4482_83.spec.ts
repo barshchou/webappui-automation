@@ -146,3 +146,4 @@ conditionalDescribe("Group of tests for numeric inputs at create comp modal",
             deleteReport(testData.reportCreationData.reportNumber);
         });
     });
+    });

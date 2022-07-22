@@ -1,5 +1,3 @@
-/// <reference types="cypress-grep" />
-
 import testData from "../../../../fixtures/not_full_reports/income/expense_forecast/QA-4888.fixture";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import { Property, Income } from "../../../../actions";

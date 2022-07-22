@@ -74,7 +74,7 @@ form and historical expenses per SF are correctly calculated and displayed`,
         They should be correctly displayed on slide bars`);
         Income.ExpenseForecast.Actions.matchElementSnapshot(
             Income.ExpenseForecast.Page.repairsAndMaintenanceCard, testData.repairsAndMaintenanceCardSnapshotName,
-            { padding: [ 10, 100 ] });
+            { padding: [ 0, 100 ] });
 
         deleteReport(testData.reportCreationData.reportNumber);
     });

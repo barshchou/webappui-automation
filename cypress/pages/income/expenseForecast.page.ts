@@ -71,8 +71,9 @@ class ExpenseForecastPage extends BasePage {
         return this.forecastItemCardFull(item, custom).contains(`${Cypress._.toUpper(item)} (`);
     }
 
-    getForecastItemProjectionByType(item: string, type: string) { 
-        return cy.contains(`[data-qa=${item}-forecast-item] [data-qa$=historical]`, type); 
+    getForecastItemProjectionByType(item: string, type: string, toeCard = false) { 
+        return !toeCard ?  cy.contains(`[data-qa=${item}-forecast-item] [data-qa$=historical]`, type) : 
+         cy.contains('TOTAL OPERATING EXPENSES').parent().parent().find('[data-qa$=historical]').contains(type);
     }
 
     getExpenseCommentary(forecastItem: string, index = 1) {
