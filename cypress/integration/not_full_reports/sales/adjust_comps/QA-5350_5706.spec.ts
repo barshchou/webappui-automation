@@ -1,5 +1,5 @@
 import testData from "../../../../fixtures/not_full_reports/sales/adjust_comps/QA-5350_5706.fixture";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import { Sales, Report } from "../../../../actions";
 
@@ -46,7 +46,5 @@ describe("Calculation of Market Condition adjustment",
             Sales._AdjustComps.verifyNetMarketAdjustmentsByCompIndex(i)
                 .verifyAdjustedPriceByColumn(i);
         }
-    
-        deleteReport(testData.reportCreationData.reportNumber);
     });
 });

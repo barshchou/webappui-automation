@@ -1,5 +1,5 @@
 import testData from "../../../../fixtures/not_full_reports/sales/adjust_comps/QA-5637.fixture";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Sales from "../../../../actions/sales/sales.manager";
 
@@ -19,7 +19,5 @@ describe("Calculation of Market Condition adjustment",
         testData.calculationUnits.forEach(val => {
             Sales.AdjustComps.checkCalculationUnitsRadio(val);
         });
-
-        deleteReport(testData.reportCreationData.reportNumber);
     });
 });

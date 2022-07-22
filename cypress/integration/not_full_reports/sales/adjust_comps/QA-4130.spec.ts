@@ -1,6 +1,6 @@
 import { _NavigationSection } from './../../../../actions/base/index';
 import testData from "../../../../fixtures/not_full_reports/sales/adjust_comps/QA-4130.fixture";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 import launchDarklyApi from "../../../../api/launchDarkly.api";
 import { Income, Sales, Property } from "../../../../actions";
 
@@ -40,8 +40,6 @@ describe("Adjusted Price per Residential Unit in Sales Adjustment Grid is calcul
         Sales._AdjustComps.Page.getAdjustmentArrow(testData.adjustmentName).click();
         Sales._AdjustComps.verifyExpandMarketAdjustmentPricePerUnit(testData.calculationUnits[0], testData.numberUnits)
             .verifyExpandMarketAdjustmentPricePerUnit(testData.calculationUnits[1], testData.numberUnits + testData.numberUnits);
-        
-        deleteReport(testData.reportCreationData.reportNumber);
     });
 
     after("Remove feature flag", () => {

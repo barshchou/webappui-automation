@@ -35,9 +35,8 @@ describe("Check Condition Discussion",
             Sales._AdjustComps.enterConditionAdjustmentByColumn(testData.otherAdjustment[index])
             .verifyConditionDiscussionCommentary(val);
             cy.reload();
-        });
-    
-        deleteReport(reportCreationData(val).reportNumber);
+            });
+            deleteReport(reportCreationData(val).reportNumber);
         });
     });
 });

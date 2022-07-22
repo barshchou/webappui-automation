@@ -1,7 +1,7 @@
 import testData from "../../../../fixtures/not_full_reports/sales/adjust_comps/QA-4974.fixture";
 import { Sales } from "../../../../actions";
 import { _NavigationSection as NavigationSection } from "../../../../actions/base";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 
 describe("[QA-4974] Verify sections of Sales Adjustment Grid", 
     { tags: [ "@adjust_comps", "@sales" ] }, () => {
@@ -26,7 +26,5 @@ describe("[QA-4974] Verify sections of Sales Adjustment Grid",
             testData.verifyDiscussionHeaders.forEach(val => {
                 Sales._AdjustComps.verifyDiscussionsFieldWithNameExists(val);
             });
-
-            deleteReport(testData.reportCreationData.reportNumber);
         }); 
 });
