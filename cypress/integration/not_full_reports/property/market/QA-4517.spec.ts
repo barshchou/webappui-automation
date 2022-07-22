@@ -2,7 +2,7 @@ import testData from "../../../../fixtures/not_full_reports/property/market/QA-4
 import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { Property, ReviewExport } from "../../../../actions";
-import { conditionalDescribe } from "../../../../../utils/env.utils";
+import { conditionalDescribe } from "../../../checkIsProd.utils";
 
 conditionalDescribe(`[QA-4517] Check that when "Summary of Rent Stabilization Laws" 
                     is empty in the report nothing shows up in export`,
