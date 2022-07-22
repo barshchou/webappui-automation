@@ -28,6 +28,6 @@ export default {
     comparablesAdjustments: _compAdjustments,
     locationAdjustments: _locationAdjustments,
     comparable: Object.freeze(comparableFixture()),
-    calculationUnits: "Per Residential Units",
+    calculationUnits: Enums.CALCULATION_UNITS.perResidentialUnits,
     compsToAdd: [ 0, 1 ],
 };
