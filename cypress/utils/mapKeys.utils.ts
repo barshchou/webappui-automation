@@ -1,5 +1,5 @@
 export default {
-    reportId: `reportId`,
+    reportId: "reportId",
     /**
      * Key for array of `report_id`'s. Used for report removal after test run
      */

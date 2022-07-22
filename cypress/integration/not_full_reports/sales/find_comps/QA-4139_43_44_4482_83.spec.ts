@@ -2,7 +2,7 @@ import testData from "../../../../fixtures/not_full_reports/sales/find_comps/QA-
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { Sales } from "../../../../actions";
-import { conditionalDescribe } from "../../../../../utils/env.utils";
+import { conditionalDescribe } from "../../../checkIsProd.utils";
 import { Alias } from "../../../../utils/alias.utils";
 /*
  *# Uladzislau.Samykou
@@ -145,5 +145,4 @@ conditionalDescribe("Group of tests for numeric inputs at create comp modal",
             
             deleteReport(testData.reportCreationData.reportNumber);
         });
-    });
     });
