@@ -18,9 +18,8 @@ describe("Calculation of Market Condition adjustment",
     
         cy.stepInfo("2. Navigate to the Sales > Find Comps and add a few Sales Comp");
         NavigationSection.navigateToFindComps();
-        testData.address.forEach(val => {
-            Sales._FindComps.selectCompFromMapByAddress(val);
-        });
+        Sales._FindComps.selectCompFromMap()
+            .selectCompFromMap(-1);
     
         cy.stepInfo("3. Open Adjust comps page, and copy paste value into Market Condition Adjustment field");
         NavigationSection.navigateToAdjustComps();
@@ -42,7 +41,7 @@ describe("Calculation of Market Condition adjustment",
         });
 
         cy.stepInfo("7. Verify the Cumulative Price Per SF row is calculated correctly when the Market Conditions is 0 (and >1)");
-        for (let i = 0; i < testData.address.length; i++) {
+        for (let i = 0; i < 2; i++) {
             Sales._AdjustComps.verifyNetMarketAdjustmentsByCompIndex(i)
                 .verifyAdjustedPriceByColumn(i);
         }

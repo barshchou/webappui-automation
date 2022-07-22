@@ -11,9 +11,8 @@ export const reportCreationData = conclusionValue => {
 export default {
     reportCreationData: ReportDataCreator.getReportData("5706", { incomeValue: Enums.INCOME_TYPE.both }),
     marketConditionAdjustment: 2,
-    addressDates: [ new Date(2021, 12, 31), new Date(2021, 5, 1) ],
+    addressDates: [ new Date(2022, 2, 2), new Date(2022, 3, 1) ],
     dateOfValue: new Date(2022, 1, 15),
-    address: [ "200 West 78 Street", "88 Laight Street" ],
     dateFixture: {
         type: "dateOfValuation",
         date: "01-15-2022",
