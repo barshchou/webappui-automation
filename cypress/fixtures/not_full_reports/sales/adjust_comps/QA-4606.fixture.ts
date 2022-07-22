@@ -16,6 +16,6 @@ const _conclusionValue: Array<BoweryReports.ConclusionValue> = [
 export default {
     conclusionValue: _conclusionValue,
     propertyCondition: "Satisfactory",
-    calculationUnits: [ "PSF", "Per Residential Units" ],
-    address: "200 West 78 Street",
+    reportCreationData: ReportDataCreator.getReportData("4606", { incomeValue: Enums.INCOME_TYPE.both }),
+    calculationUnits: [ Enums.CALCULATION_UNITS.psf, Enums.CALCULATION_UNITS.perResidentialUnits ] as BoweryReports.SalesAdjustmentGrid.CalculationUnits[],
 };

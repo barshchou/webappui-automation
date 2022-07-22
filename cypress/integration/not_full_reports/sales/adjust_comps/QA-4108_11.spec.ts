@@ -18,7 +18,9 @@ describe("Verify Grid is calculated with correct formula",
     it("[QA-4108]", () => {
         cy.stepInfo("1. Navigate to Sales > Find comps and select address");
         _NavigationSection.navigateToFindComps();
-        Sales._FindComps.selectCompFromMapByAddress(testData.comparable.address);
+        testData.compsToAdd.forEach(() => {
+            Sales._FindComps.Actions.selectCompFromMap();
+        });
 
         cy.stepInfo("2. Navigate to Sales > Adjust Comps > Sales Adjustment Grid");
         _NavigationSection.navigateToAdjustComps();
@@ -27,16 +29,16 @@ describe("Verify Grid is calculated with correct formula",
         Sales._AdjustComps.checkCalculationUnitsRadio(testData.calculationUnits)
             .enterMarketAdjustmentsGroup(Object.keys(testData.comparablesAdjustments), Object.values(testData.comparablesAdjustments));
 
-        cy.stepInfo("3.Verify Net Market Adjustments = Property Rights + Financing Terms + Conditions of Sale + Market Conditions (Time)");
+        cy.stepInfo("4. Verify Net Market Adjustments = Property Rights + Financing Terms + Conditions of Sale + Market Conditions (Time)");
         Sales._AdjustComps.verifyNetMarketAdjustmentsByCompIndex();
     });
 
     it("[QA-4111]", () => {
-        cy.stepInfo("3. Fill inputs in Location Adjustment");
+        cy.stepInfo("1. Fill inputs in Location Adjustment");
         Sales._AdjustComps.checkCalculationUnitsRadio(testData.calculationUnits)
             .enterLocationAdjustmentGroup(Object.keys(testData.locationAdjustments), Object.values(testData.locationAdjustments));
 
-        cy.stepInfo("3.Verify Net Market Adjustments = Property Rights + Financing Terms + Conditions of Sale + Market Conditions (Time)");
+        cy.stepInfo("2. Verify Net Market Adjustments = Property Rights + Financing Terms + Conditions of Sale + Market Conditions (Time)");
         Sales._AdjustComps.verifyTotalLocationAdjustmentsByCompIndex();
 
         deleteReport(testData.reportCreationData.reportNumber);

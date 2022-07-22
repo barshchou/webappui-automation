@@ -9,7 +9,7 @@ const _rentRollResidentialUnitFixture: BoweryReports.ResidentialUnit = {
     rentType: Enums.RENT_TYPE.marketRate
 };
 
-const _calculationUnits = [ "Per Residential Units", "Per Total Units" ];
+const _calculationUnits = [  Enums.CALCULATION_UNITS.perResidentialUnits,  Enums.CALCULATION_UNITS.perTotalUnits ];
 
 const _existColumns = [ "Cumulative Price Per Unit", "Adjusted Price Per Unit" ];
 

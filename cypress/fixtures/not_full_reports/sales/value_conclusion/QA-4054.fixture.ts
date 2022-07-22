@@ -14,12 +14,12 @@ const dataFixture = () => {
         numberOfResUnits: 2,
         numberOfCommercialUnits: 3,
         totalNumberOfUnitsLabel: "5",
-        calculationUnits: "Per Total Units",
+        calculationUnits: Enums.CALCULATION_UNITS.perTotalUnits,
         valueColumnLabel: "# of Units"
     };
 };
 
 export default {
     reportCreationData: reportCreationFixture(),
-    data: Object.freeze(dataFixture())
+    data: Object.freeze(dataFixture()),
 };
