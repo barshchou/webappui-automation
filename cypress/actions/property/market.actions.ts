@@ -5,6 +5,7 @@ import { isStringContainSubstring } from "../../../utils/string.utils";
 import BaseActionsExt from "../base/base.actions.ext";
 import { _map } from "../../support/commands";
 import mapKeysUtils from "../../utils/mapKeys.utils";
+import { FileSelection } from "../../enums/enumKeys.enum";
 
 class MarketActions extends BaseActionsExt<typeof marketPage>{
     readonly errorRetrieveFileMessage = "Cannot retrieve file. Contact Research team.";
@@ -260,7 +261,7 @@ class MarketActions extends BaseActionsExt<typeof marketPage>{
         return this;
     }
 
-    clickTrashCanButton(fileSelectionName: string): MarketActions {
+    clickTrashCanButton(fileSelectionName: BoweryReports.FileSelection): MarketActions {
         marketPage.getTrashCanButton(fileSelectionName).click();
         return this;
     }

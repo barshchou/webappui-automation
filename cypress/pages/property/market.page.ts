@@ -64,7 +64,7 @@ class MarketPage extends BasePage{
 
     get insertFileButton() { return cy.get("[data-qa=insert-btn]"); }
 
-    getTrashCanButton(fileSelectionName: string) {
+    getTrashCanButton(fileSelectionName: BoweryReports.FileSelection) {
         return cy.xpath(`//div[@data-qa='file-selection-${fileSelectionName}-input']/../..//button[@variant='contained']`);
     }
 }
