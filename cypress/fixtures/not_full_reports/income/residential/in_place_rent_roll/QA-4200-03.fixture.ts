@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import ReportDataCreator from "../../../../data_creator/reportData.creator";
 
 export default {

@@ -62,7 +62,7 @@ describe("[QA-4576][QA-4578] Verify the display of the Stabilized Rent Roll page
                 .verifyProgressBarNotExist();
             Income._CommercialManager.StabilizedRentRoll.Actions.matchElementSnapshot(
                 stabilizedRentRollPage.stabilizedRRPanel,
-                testData.snapshotNames.stabilizedRRPanel_severalUnits,
+                testData.snapshotNames.stabilizedRRPanelSeveralUnits,
             );
 
             cy.stepInfo(`[QA-4576][QA-4578] Add comp group and a new comp`);
