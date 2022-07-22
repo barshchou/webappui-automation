@@ -98,7 +98,7 @@ class AdjustCompsPage extends BasePage {
     }
 
     get CellCompHeader(){
-        return cy.get('[data-qa="sales-adjustment-grid-header-row"] [data-qa="comp-header-cell"]');
+        return cy.get('[data-qa="sales-adjustment-grid-header-row"] [data-qa="comp-header-cell"]', { timeout: 60000 });
     }
 }
 
