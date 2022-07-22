@@ -248,6 +248,29 @@ class MarketActions extends BaseActionsExt<typeof marketPage>{
         });
         return this;
     }
+
+    uploadRentStabilizationFile(fileName: string): MarketActions {
+        marketPage.uploadRentStabilizationFileButton.click();
+        marketPage.fileDropZone.attachFile(
+            `not_full_reports/property/market/${fileName}`,
+            { subjectType: 'drag-n-drop' }
+        );
+        marketPage.getUploadFileButton().click();
+        marketPage.insertFileButton.click();
+        return this;
+    }
+
+    clickTrashCanButton(fileSelectionName: string): MarketActions {
+        marketPage.getTrashCanButton(fileSelectionName).click();
+        return this;
+    }
+
+    verifyRentStabilizationFile(textToContain: string): MarketActions {
+        marketPage.rentStabilizationFile.invoke("attr", "value").then(fileName => {
+            expect(fileName).to.equal(textToContain);
+        });
+        return this;
+    }
 }
 
 export default new MarketActions(marketPage);
