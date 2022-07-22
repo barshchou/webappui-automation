@@ -1,4 +1,4 @@
-import testData from "../../../../../fixtures/not_full_reports/income/commercial/in_place_rent_roll/QA-4413&14.fixture";
+import testData from "../../../../../fixtures/not_full_reports/income/commercial/in_place_rent_roll/QA-4413-14.fixture";
 import Income from "../../../../../actions/income/income.manager";
 import NavigationSection from "../../../../../actions/base/navigationSection.actions";
 import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";

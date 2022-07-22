@@ -1,4 +1,4 @@
-import testData from "../../../../../fixtures/not_full_reports/income/commercial/in_place_rent_roll/QA-4385&86.fixture";
+import testData from "../../../../../fixtures/not_full_reports/income/commercial/in_place_rent_roll/QA-4385-86.fixture";
 import { getTodayDateString } from "../../../../../../utils/date.utils";
 import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../../actions/base";
