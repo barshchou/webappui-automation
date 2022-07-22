@@ -5,7 +5,7 @@ import { createReport } from "../../../../../actions/base/baseTest.actions";
 import enums from '../../../../../enums/enums';
 
 describe("Default selection on Stabilized Rent Roll table is the same selection made on In-Place RR page",
-    { tags:[ "@income", "@residential", "@stabilized_rent_roll" ] }, () => {
+    { tags:[ "@income", "@residential", "@stabilized_rent_roll_summary" ] }, () => {
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
         cy.saveLocalStorage();

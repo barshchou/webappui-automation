@@ -4,7 +4,7 @@ import testData from "../../../../../fixtures/not_full_reports/income/residentia
 import { createReport } from "../../../../../actions/base/baseTest.actions";
 
 describe("Default selection on Stabilized Rent Roll table is the same selection made on In-Place RR page",
-    { tags:[ "@income", "@residential", "@stabilized_rent_roll" ] }, () => {
+    { tags:[ "@income", "@residential", "@stabilized_rent_roll_summary" ] }, () => {
 
     it(`[QA-6167] Verify Rent-Controlled and Market Rate Increase values
         [QA-6168] Verify 'Rent Controlled Increases Discussion' generated commentary`, () => {
