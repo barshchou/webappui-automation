@@ -512,7 +512,7 @@ const rentComparablesFixture = () => {
 
 const resRentReconcilFixture = () => {
     return {
-        reconcilIntroComm: "Important considerations in determining potential rental value include location, access to " +
+        reconciliationIntroComm: "Important considerations in determining potential rental value include location, access to " +
             "transportation and neighborhood amenities, and building design and condition. The subject is in a primarily" +
             " residential section of Lakeview, a neighborhood that has seen significant investment in the past 5 to 10 " +
             "years. The site has good access to  transportation, and the block is appealing. The comparables are similar " +
@@ -520,7 +520,7 @@ const resRentReconcilFixture = () => {
             "of market rents is presented:",
         marketConclusion: 1100,
         marketBreakdown: "all market oriented",
-        reconcilCommentary: "The comparable two-bedroom units range from $1,000 to $1,200 per month with an average of " +
+        reconciliationCommentary: "The comparable two-bedroom units range from $1,000 to $1,200 per month with an average of " +
             "$1,080 per month. Based on the subject's market rate rents and the range of the comparables, we forecast a " +
             "market rent for the subject's two-bedroom units of $1,100 per month. Considering the range of the comparables " +
             "and our market rent forecasts for the subject units, the subject's market rate units are all currently market oriented."
@@ -1399,7 +1399,7 @@ export default {
     inPLaceRentRoll: inPLaceRentRollData(),
     unitGroups: unitGroupsData(),
     rentComparables: rentComparablesData(),
-    resRentReconcil: resRentReconcilData(),
+    residentialRentReconciliation: resRentReconcilData(),
     stabRentRoll: stabRentRollData(),
     stabRentRollSummary: stabRentRollSummaryData(),
     expenseStructure: expenseStructureData(),

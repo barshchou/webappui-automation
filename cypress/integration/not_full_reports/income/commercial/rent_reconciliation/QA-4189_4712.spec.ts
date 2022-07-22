@@ -1,4 +1,5 @@
-import testData from "../../../../../fixtures/not_full_reports/income/commercial/rent_reconciliation/QA-4189_4712.fixture";
+import testData from 
+    "../../../../../fixtures/not_full_reports/income/commercial/rent_reconciliation/QA-4189_4712.fixture";
 import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../../actions/base";
 import { Income, Property } from "../../../../../actions";
