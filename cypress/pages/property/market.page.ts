@@ -59,10 +59,12 @@ class MarketPage extends BasePage {
     get areaEconomicAnalysisFile() { return this.areaEconomicAnalysisContainer.find("input"); }
 
     get neighborhoodDemographicFile() { 
-    	return cy.get("[data-qa=file-selection-neighborhoodDemographicOverview-input] input"); 
+        return cy.get("[data-qa=file-selection-neighborhoodDemographicOverview-input] input"); 
     }
 
-    get rentStabilizationFile() { return cy.get("[data-qa=file-selection-summaryOfRentStabilizationLaws-input] input"); }
+    get rentStabilizationFile() { 
+        return cy.get("[data-qa=file-selection-summaryOfRentStabilizationLaws-input] input"); 
+    }
 }
 
 export default new MarketPage();

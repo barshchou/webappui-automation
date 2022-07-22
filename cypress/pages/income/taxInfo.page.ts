@@ -120,10 +120,12 @@ class TaxInfoPage extends BasePage {
     get taxCalculationDiscussionTitle() { return cy.xpath("//h6[contains(text(),'Tax Calculation Discussion')]"); }
 
     get taxSummaryDiscussion() {
-    	return cy.get("[data-qa^='taxSummaryDiscussion.commentary'],[name='taxSummaryDiscussion.commentary']");
+        return cy.get("[data-qa^='taxSummaryDiscussion.commentary'],[name='taxSummaryDiscussion.commentary']");
     }
 
-    getAddNewRowButton(name = "Add Additional Tax Rate") {return cy.xpath(`//*[contains(text(), '${name}')]`);}
+    getAddNewRowButton(name = "Add Additional Tax Rate") {
+        return cy.xpath(`//*[isStringContainSubstring(text(), '${name}')]`);
+    }
 }
 
 export default new TaxInfoPage();
