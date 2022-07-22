@@ -8,7 +8,6 @@ const _origBaseUrl = Cypress.config().baseUrl;
 describe("Open any existing report, generate report and download it", { tags: [ "@smoke" ] }, () => {
     it("Download, generate report", () => {
         loginAction(testData.username, testData.password);
-
         Base._HomePage.clickAllReportsTab()
             .verifyProgressBarNotExist()
             .enterReportNumberToSearch(testData.reportCreationData.reportNumber)
@@ -23,18 +22,21 @@ describe("Open any existing report, generate report and download it", { tags: [ 
 
     it("Verify exported report", () => {
         Cypress.config().baseUrl = null;
-        cy.task("getFilePath", { _reportName: testData.reportCreationData.reportNumber, _docx_html: "html" }).then(file => {
-            cy.visit(<string>file);
-            cy.contains(testData.textToVerifyInReport).should("exist");
-        });
+        cy.task("getFilePath", { reportName: testData.reportCreationData.reportNumber, docxHtml: "html" })
+            .then(file => {
+                cy.visit(<string>file);
+                cy.contains(testData.textToVerifyInReport).should("exist");
+            });
     });
 
     it("Create new report for next tests", () => {
         Cypress.config().baseUrl = _origBaseUrl;
         createReport(testData.reportCreationData);
-        // ernst: remove second call after cypress 10 migration
-        // slava: removed 2nd deleteReport as there were no duplicate reports after run
-        // and test fails
+        /*
+         * ernst: remove second call after cypress 10 migration
+         * slava: removed 2nd deleteReport as there were no duplicate reports after run
+         * and test fails
+         */
         deleteReport(testData.reportCreationData.reportNumber);
     });
 });
