@@ -10,12 +10,6 @@ export const reportCreationData = conclusionValue => {
     });
 };  
 
-const comparableFixture = () => {
-    return {
-        address: "200 West 78 Street",
-    };
-};
-
 const _initialCommentaryValues = [
     "and no adjustment was warranted.",
     "The subject property was constructed in",
@@ -30,11 +24,7 @@ const _generateCommentaryValues = [
 export default {
     initialCommentaryValues: _initialCommentaryValues,
     generateCommentaryValues: _generateCommentaryValues,
-    otherAdjustment: [ 42, -42 ],
-    comparable: Object.freeze(comparableFixture()),
-    calculationUnits: [ "Per Residential Units", "PSF", "Per Total Units" ], 
-    basis: "Price per Unit",
-    marketConditions: [ "marketConditions" ],
+    otherAdjustment: [ 42, -42 ], 
     conclusionValues: [
         Enums.VALUE_CONCLUSION_TYPE.AS_IS,
         Enums.VALUE_CONCLUSION_TYPE.AS_STABILIZED,
