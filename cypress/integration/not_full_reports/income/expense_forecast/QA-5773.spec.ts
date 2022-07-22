@@ -61,6 +61,6 @@ describe("[QA-5773] Historical expense Legal & Professional Fees Per SF is corre
             Income._ExpenseForecastActions.Actions.matchElementSnapshot(
                 Income._ExpenseForecastActions.Page.forecastItemCard(
                     Income._ExpenseForecastActions.getItemNameForAverage(
-                        testData.actualLegalAndProfessionalItem.name)), testData.legalAndProfessionalPerSfCardSnapshotName, { padding: [ 10, 100 ] });
+                        testData.actualLegalAndProfessionalItem.name)), testData.legalAndProfessionalPerSfCardSnapshotName, { padding: [ 0, 100 ] });
         });
     });

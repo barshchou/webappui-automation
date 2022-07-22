@@ -61,6 +61,6 @@ describe("[QA-5774] Historical expense Miscellaneous Per SF is correctly calcula
             Income._ExpenseForecastActions.Actions.matchElementSnapshot(
                 Income._ExpenseForecastActions.Page.forecastItemCard(
                     Income._ExpenseForecastActions.getItemNameForAverage(
-                        testData.actualMiscellaneousItem.name)), testData.miscellaneousPerSfCardSnapshotName, { padding: [ 10, 100 ] });
+                        testData.actualMiscellaneousItem.name)), testData.miscellaneousPerSfCardSnapshotName, { padding: [ 0, 100 ] });
         });
     });

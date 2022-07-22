@@ -61,6 +61,6 @@ describe("[QA-5777] Historical expense Replacement Reserves Per SF is correctly 
             Income._ExpenseForecastActions.Actions.matchElementSnapshot(
                 Income._ExpenseForecastActions.Page.forecastItemCard(
                     Income._ExpenseForecastActions.getItemNameForAverage(
-                        testData.actualReplacementReservesItem.name)), testData.replacementReservesPerSfCardSnapshotName, { padding: [ 10, 100 ] });
+                        testData.actualReplacementReservesItem.name)), testData.replacementReservesPerSfCardSnapshotName, { padding: [ 0, 100 ] });
         });
     });

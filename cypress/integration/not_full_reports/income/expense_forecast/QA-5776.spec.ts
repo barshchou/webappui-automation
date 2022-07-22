@@ -61,6 +61,6 @@ describe("[QA-5776] Historical expense Management Fees Per SF is correctly calcu
             Income._ExpenseForecastActions.Actions.matchElementSnapshot(
                 Income._ExpenseForecastActions.Page.forecastItemCard(
                     Income._ExpenseForecastActions.getItemNameForAverage(
-                        testData.actualManagementFeesItem.name)), testData.managementFeesPerSfCardSnapshotName, { padding: [ 10, 100 ] });
+                        testData.actualManagementFeesItem.name)), testData.managementFeesPerSfCardSnapshotName, { padding: [ 0, 100 ] });
         });
     });

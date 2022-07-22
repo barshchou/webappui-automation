@@ -61,6 +61,6 @@ describe("[QA-5772] Historical expense General & Administrative Per SF is correc
             Income._ExpenseForecastActions.Actions.matchElementSnapshot(
                 Income._ExpenseForecastActions.Page.forecastItemCard(
                     Income._ExpenseForecastActions.getItemNameForAverage(
-                        testData.actualGeneralAndAdministrativeItem.name)), testData.generalAndAdministrativePerSfCardSnapshotName, { padding: [ 10, 100 ] });
+                        testData.actualGeneralAndAdministrativeItem.name)), testData.generalAndAdministrativePerSfCardSnapshotName, { padding: [ 0, 100 ] });
         });
     });

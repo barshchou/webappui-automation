@@ -63,6 +63,6 @@ describe("[QA-5812] Historical expenses Per SF in Total Operating Expenses is co
 
             cy.stepInfo("5.2 Check historical expenses values for Total Operating Expenses card. They should be correctly displayed on slidebars");
             Income._ExpenseForecastActions.Actions.matchElementSnapshot(
-                Income._ExpenseForecastActions.Page.toeCard, testData.totalOperatingExpensesPerSfCardSnapshotName, { padding: [ 10, 100 ] });
+                Income._ExpenseForecastActions.Page.toeCard, testData.totalOperatingExpensesPerSfCardSnapshotName, { padding: [ 0, 100 ] });
         });
     });
