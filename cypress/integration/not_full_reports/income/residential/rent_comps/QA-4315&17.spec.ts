@@ -4,8 +4,10 @@ import NavigationSection from "../../../../../actions/base/navigationSection.act
 import Income from "../../../../../actions/income/income.manager";
 import RentCompsPage from "../../../../../pages/income/residential/rent_comps/rentComps.page";
 
-describe("Verify the UI elements of Find Rent Comparable overlay on Rent Comps page and Add New Rent Comp button", () => {
-    before("Login, create report", () => {
+describe(`Verify the UI elements of Find Rent Comparable overlay on Rent Comps page 
+and Add New Rent Comp button`, () => {
+    before("Login, create report", () => 
+    {
         createReport(testData.reportCreationData);
     });
 
