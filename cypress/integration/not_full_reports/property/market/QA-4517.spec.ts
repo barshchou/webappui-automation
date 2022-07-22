@@ -20,8 +20,6 @@ conditionalDescribe(`[QA-4517] Check that when "Summary of Rent Stabilization La
         _NavigationSection.openReviewAndExport();
         ReviewExport.generateDocxReport().waitForReportGenerated()
             .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
-        
-        deleteReport(testData.reportCreationData.reportNumber);
     });
 
     it("Check export", () => {
