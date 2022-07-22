@@ -136,7 +136,8 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
         } else {
             numberToBe = numberWithCommas((forecastItem.projection / buildingDescription.grossArea).toFixed(2));
         }
-        expenseForecastPage.getForecastItemProjectionByType(this.getItemNameForAverage(forecastItem.name), expensePeriodType, toeCard)
+        expenseForecastPage.getForecastItemProjectionByType(this.getItemNameForAverage(forecastItem.name), 
+            expensePeriodType, toeCard)
             .should("contain.text", `$${numberToBe}`);
         return this;
     }

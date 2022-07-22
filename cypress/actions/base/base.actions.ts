@@ -86,8 +86,9 @@ export default class BaseActions {
      * @see https://github.com/jaredpalmer/cypress-image-snapshot
      */
 
-    matchElementSnapshot(element:Cypress.Chainable, snapshotName: string, options: Options = { allowSizeMismatch: true } ){
-        if(Cypress.browser.isHeadless == true) {
+    matchElementSnapshot(element:Cypress.Chainable, snapshotName: string, 
+        options: Options = { allowSizeMismatch: true } ) {
+        if (Cypress.browser.isHeadless == true) {
             element.should("be.visible");
             element.matchImageSnapshot(snapshotName, options);
             return this; 

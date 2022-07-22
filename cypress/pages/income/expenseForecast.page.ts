@@ -73,7 +73,7 @@ class ExpenseForecastPage extends BasePage {
 
     getForecastItemProjectionByType(item: string, type: string, toeCard = false) { 
         return !toeCard ?  cy.contains(`[data-qa=${item}-forecast-item] [data-qa$=historical]`, type) : 
-         cy.contains('TOTAL OPERATING EXPENSES').parent().parent().find('[data-qa$=historical]').contains(type);
+            cy.contains('TOTAL OPERATING EXPENSES').parent().parent().find('[data-qa$=historical]').contains(type);
     }
 
     getExpenseCommentary(forecastItem: string, index = 1) {
