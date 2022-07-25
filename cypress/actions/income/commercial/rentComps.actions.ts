@@ -132,7 +132,7 @@ class CommercialRentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
     }
 
     clickRemoveButtonByRowNumber(rowNumber = 0): CommercialRentCompsActions {
-        rentCompsPage.getRemoveButtonByRowNumber(rowNumber).click();
+        rentCompsPage.getRemoveCompButton(rowNumber).click();
         return this;
     } 
 
@@ -237,7 +237,7 @@ class CommercialRentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
 
     clickAddRemovedCompByRowButton(rowNumber = 0): CommercialRentCompsActions {
         rentCompsPage.addRemovedCompByRowButton(rowNumber).click().should("not.exist");
-        rentCompsPage.getEditButtonByRowNumber(rowNumber).should("exist");
+        rentCompsPage.getEditCompButton(rowNumber).should("exist");
         return this;
     }
 

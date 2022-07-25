@@ -24,7 +24,7 @@ describe("Verify entered Use is displayed in Selected Rent Comps table",
             .searchNewCompByAddress(testData.address);
         testData.rentCompFields.forEach(field => {
             if(field.type == "input") {
-                Income._CommercialManager.RentComps.fillInRentCompFieldInput(field.name, field.value);
+                Income._CommercialManager.RentComps.fillInRentCompFieldInput(field.name, field.value, true);
             } else {
                 Income._CommercialManager.RentComps.chooseRentCompFieldDropdownOption(field.name, field.value);
             }
