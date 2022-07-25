@@ -61,6 +61,7 @@ import calculationTypesEnum from "./commercial/rent_reconciliation/calculationTy
 import fileSelectionNamesEnum from "./property/fileSelectionNames.enum";
 import salesAdjustmentGridDiscussionsEnum from "./adjustComps/salesAdjustmentGridDiscussions.enum";
 import salesAdjustmentGridRowsEnum from "./adjustComps/salesAdjustmentGridRows.enum";
+import basisSquareFootAnalysisEnum from "./property/basisSquareFootAnalysis.enum";
 
 export default {
     TEMPLATE_TYPE: templateTypesEnum,
@@ -125,5 +126,6 @@ export default {
     CALCULATION_TYPE: calculationTypesEnum,
     FILE_SELECTION_NAMES: fileSelectionNamesEnum,
     SALES_ADJUSTMENT_GRID_DISCUSSIONS: salesAdjustmentGridDiscussionsEnum,
-    SALES_ADJUSTMENT_GRID_ROWS: salesAdjustmentGridRowsEnum
+    SALES_ADJUSTMENT_GRID_ROWS: salesAdjustmentGridRowsEnum,
+    BASIS_SQUARE_FOOT_ANALYSIS: basisSquareFootAnalysisEnum
 };

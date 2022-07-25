@@ -18,6 +18,12 @@ class StabilizedRentRollSummaryPage extends BasePage {
     get grossIncomeDiscussion() { return cy.get("[data-qa^='potentialGrossResidentialIncomeDiscussion.commentary']"); }
 
     get distributionSummary() { return cy.get("[data-qa^='rentRollUnitDistributionSummary.commentary']"); }
+
+    rentTypeIncrease(rentTypeIndex = 0)  { return cy.get(`[name="rentTypeSummary[${rentTypeIndex}].increase"]`);}
+
+    get rentControlledIncreaseDiscussion() { 
+        return cy.get(`[data-qa="rentControlledDiscussion.commentary-generated-text"]`); 
+    }
 }
 
 export default new StabilizedRentRollSummaryPage();

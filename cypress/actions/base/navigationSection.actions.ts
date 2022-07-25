@@ -634,6 +634,19 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         return this;
     }
 
+    navigateToResidentialStabilizedRentRollSummary(): this {
+        this.clickIncomeApproachButton();
+        this.clickResidentialMenuIfClosed();
+        this.clickResidentialStabilizedRentRollSummary()
+            .clickYesIfExist();
+        return this;
+    }
+
+    clickResidentialStabilizedRentRollSummary(): this {
+        navigationSectionPage.residentialStabilizedRentRollSummary.click();
+        return this;
+    }
+
     navigateToCommercialStabilizedRentRoll(): this {
         this.clickIncomeApproachButton();
         this.clickCommercialMenuIfClosed();
