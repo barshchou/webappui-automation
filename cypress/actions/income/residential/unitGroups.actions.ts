@@ -9,7 +9,8 @@ class UnitGroupsActions extends BaseActionsExt<typeof unitGroupsPage> {
         return this;
     }
 
-    verifyRowsNumberEqualBedroomsNonComp(bedroomsNumber: number | string, numberOfUnits: number | string): UnitGroupsActions {
+    verifyRowsNumberEqualBedroomsNonComp(bedroomsNumber: number | string, 
+        numberOfUnits: number | string): UnitGroupsActions {
         unitGroupsPage.getBedroomEqualTableRowsNoneComp(bedroomsNumber).should("have.length", numberOfUnits);
         return this;
     }

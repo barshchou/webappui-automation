@@ -14,7 +14,7 @@ class UnitMixActions extends BaseActionsExt<typeof unitMixPage> {
 
     enterResidentialUnitsNumber(number: number | string, isWithEnter = true): UnitMixActions {
         unitMixPage.residentialUnitsNumberInput.clear().type(`${number}`);
-        if (isWithEnter) unitMixPage.residentialUnitsNumberInput.type("{enter}");
+        if (isWithEnter) { unitMixPage.residentialUnitsNumberInput.type("{enter}"); }
         this.verifyResidentialUnitsNumberInput(number);
         return this;
     }

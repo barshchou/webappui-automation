@@ -22,7 +22,7 @@ describe("[QA-4133][QA-4136]", { tags: [ "@income", "@commercial", "@rent_comps"
     it("[QA-4133] Check that Computed Values Panel grid is visible on the page", () => {
         Income._CommercialManager.RentComps.hideHeader()
             .matchElementSnapshot(Income._CommercialManager.RentComps.Page.computedPanel,
-            testData.snapshotName);
+                testData.snapshotName);
     });
 
     it("[QA-4136] State of Comps column in the Computed Values Panel grid", () => {
@@ -35,7 +35,7 @@ describe("[QA-4133][QA-4136]", { tags: [ "@income", "@commercial", "@rent_comps"
         Income._CommercialManager.RentComps.Page.computedCompsColumn.then(() => {
             let values = [];
             for (let i = 0; i < testData.compsNumber; i++) {
-               values.push(_map.get(`${i + 1}${mapKeysUtils.rent_per_sf}`));
+                values.push(_map.get(`${i + 1}${mapKeysUtils.rentPerSf}`));
             }
             Income._CommercialManager.RentComps.verifyComputedCompsColumn(values);
         });
@@ -46,13 +46,13 @@ describe("[QA-4133][QA-4136]", { tags: [ "@income", "@commercial", "@rent_comps"
         Income._CommercialManager.RentComps.Page.computedCompsColumn.then(() => {
             let values = [];
             for (let i = 1; i < testData.compsNumber; i++) {
-                values.push(_map.get(`${i + 1}${mapKeysUtils.rent_per_sf}`));
+                values.push(_map.get(`${i + 1}${mapKeysUtils.rentPerSf}`));
             }
             Income._CommercialManager.RentComps.verifyComputedCompsColumn(values);
         });
         Income._CommercialManager.RentComps.Page.computedCompsAvgCell.invoke("text").then(cellValue => {
             const priceNumber = getNumberFromDollarNumberWithCommas(cellValue);
-            expect(priceNumber).not.to.be.eq(_map.get(mapKeysUtils.computed_comps_avg));
+            expect(priceNumber).not.to.be.eq(_map.get(mapKeysUtils.computedCompsAvg));
         });
         deleteReport(testData.reportCreationData.reportNumber);
     });

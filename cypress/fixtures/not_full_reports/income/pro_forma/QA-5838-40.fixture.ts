@@ -29,8 +29,8 @@ const _legalAndProfessionalFeesUnitPerSf = _legalAndProfessionalFeesUnitTotal / 
 const _legalAndProfessionalFeesUnitPerUnit = _forecast;
 
 const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("5838-40", {
-        incomeValue: Enums.INCOME_TYPE.both
-    });
+    incomeValue: Enums.INCOME_TYPE.both
+});
 
 export default {
     reportCreationData: _reportCreationData,

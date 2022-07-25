@@ -10,45 +10,47 @@ import { conditionalDescribe } from "../../../checkIsProd.utils";
 conditionalDescribe("[QA-5382] Verify possibility to edit static text in-app", 
     { tags:[ "@organizations", "@settings", "@check_export", "@feature_flag" ] }, () => {
 
-    before('', () => {
-        launchDarklyApi.setFeatureFlagForUser(testData.reportTextEditorFlagKey, testData.featureFlagEnable)
-            .setFeatureFlagForUser(testData.swotAnalysisFlagKey, testData.featureFlagEnable);
-    });
+        before('', () => {
+            launchDarklyApi.setFeatureFlagForUser(testData.reportTextEditorFlagKey, testData.featureFlagEnable)
+                .setFeatureFlagForUser(testData.swotAnalysisFlagKey, testData.featureFlagEnable);
+        });
 
-    it('Update static text in Settings and verify changes on a corresponding pages', () => {
-        cy.stepInfo('1. Set Launch Darkly flag to see Report Copy Editor section. Create a report');
-        createReport(testData.reportCreationData);
+        it('Update static text in Settings and verify changes on a corresponding pages', () => {
+            cy.stepInfo('1. Set Launch Darkly flag to see Report Copy Editor section. Create a report');
+            createReport(testData.reportCreationData);
 
-        cy.stepInfo('2. Navigate to Organization -> Settings and update certificate bullet points text');
-        _NavigationSection.navigateToProfileOrganization(enums.MENU_LINKS.organization);
-        Organization._OrganizationActions.openOrganizationSettingsPage();
-        Organization._OrganizationSettingsActions.updateCertificationBulletPointDiscussion(testData.textUpdate, true);
+            cy.stepInfo('2. Navigate to Organization -> Settings and update certificate bullet points text');
+            _NavigationSection.navigateToProfileOrganization(enums.MENU_LINKS.organization);
+            Organization._OrganizationActions.openOrganizationSettingsPage();
+            Organization._OrganizationSettingsActions
+                .updateCertificationBulletPointDiscussion(testData.textUpdate, true);
 
-        cy.stepInfo('3. Open created report and verify certificate bullet points text');
-        _NavigationSection.returnToHomePage();
-        _HomePage.openReportByName(testData.reportCreationData.reportNumber);
-        _NavigationSection.navigateToCertification();
-        PreviewEdit._Certification.verifyTextInFormContainer(testData.textUpdate);
+            cy.stepInfo('3. Open created report and verify certificate bullet points text');
+            _NavigationSection.returnToHomePage();
+            _HomePage.openReportByName(testData.reportCreationData.reportNumber);
+            _NavigationSection.navigateToCertification();
+            PreviewEdit._Certification.verifyTextInFormContainer(testData.textUpdate);
 
-        cy.stepInfo('4. Export report');
-        _NavigationSection.openReviewAndExport();
-        ReviewExport.generateDocxReport().waitForReportGenerated()
-            .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
-        deleteReport(testData.reportCreationData.reportNumber);
-    });
+            cy.stepInfo('4. Export report');
+            _NavigationSection.openReviewAndExport();
+            ReviewExport.generateDocxReport().waitForReportGenerated()
+                .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
+            deleteReport(testData.reportCreationData.reportNumber);
+        });
 
-    it('Check export', () => {
-        Cypress.config().baseUrl = null;
-        cy.task("getFilePath", { _reportName: testData.reportCreationData.reportNumber, _docx_html: "html" }).then(file => {
-            cy.log(<string>file);
-            cy.visit(<string>file);
-            cy.stepInfo("5. Verify commentary text in exported report");
-            cy.contains(testData.textUpdate).should('exist');
+        it('Check export', () => {
+            Cypress.config().baseUrl = null;
+            cy.task("getFilePath", { _reportName: testData.reportCreationData.reportNumber, _docxHtml: "html" })
+                .then(file => {
+                    cy.log(<string>file);
+                    cy.visit(<string>file);
+                    cy.stepInfo("5. Verify commentary text in exported report");
+                    cy.contains(testData.textUpdate).should('exist');
+                });
+        });
+
+        after('Remove feature flag', () => {
+            launchDarklyApi.removeUserTarget(testData.reportTextEditorFlagKey);
+            launchDarklyApi.removeUserTarget(testData.swotAnalysisFlagKey);
         });
     });
-
-    after('Remove feature flag', () => {
-        launchDarklyApi.removeUserTarget(testData.reportTextEditorFlagKey);
-        launchDarklyApi.removeUserTarget(testData.swotAnalysisFlagKey);
-    });
-});

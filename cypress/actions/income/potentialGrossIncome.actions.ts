@@ -54,7 +54,7 @@ class PotentialGrossIncomeActions extends BaseActionsExt<typeof potentialGrossIn
 
     verifyLessResidentialVCLoss(): PotentialGrossIncomeActions {
         grossIncomePage.residentialVCLoss.then(vcLoss => {
-           const resVCLossNumber = getNumberFromDollarNumberWithCommas(vcLoss.attr("value"));
+            const resVCLossNumber = getNumberFromDollarNumberWithCommas(vcLoss.attr("value"));
             const textToBe = `-$${numberWithCommas(resVCLossNumber.toFixed(2))}`;
             grossIncomePage.lessResidentialVCLoss.should("have.text", textToBe);
         });

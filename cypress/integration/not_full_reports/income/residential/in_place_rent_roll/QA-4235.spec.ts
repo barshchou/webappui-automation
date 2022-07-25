@@ -7,20 +7,20 @@ import Income from "../../../../../actions/income/income.manager";
 describe("Verify the # Bathrooms column in the grid", 
     { tags:[ "@income", "@residential", "@in_place_rent_roll" ] }, () => {
         
-    before("Login, create report", () => {
-        createReport(testData.reportCreationData);
-    });
+        before("Login, create report", () => {
+            createReport(testData.reportCreationData);
+        });
 
-    it("Test body", () => {
-        NavigationSection.navigateToPropertySummary();
-        Property.Summary.enterNumberOfResUnits(testData.numberOfUnits);
-        NavigationSection.navigateToResInPlaceRentRoll();
-        Income.Residential.InPlaceRentRoll.verifyColumnNotExist(testData.column)
-            .checkCheckboxByLabelAndVerify(testData.label, testData.column)
-            .enterNumberBathroomsByRow(testData.wholeNumber)
-            .enterNumberBathroomsByRow(testData.halfNumber)
-            .enterNumberBathroomsByRow(testData.negativeNumber)
-            .enterNumberBathroomsByRow(testData.wrongDecimal);
-        deleteReport(testData.reportCreationData.reportNumber);
+        it("Test body", () => {
+            NavigationSection.navigateToPropertySummary();
+            Property.Summary.enterNumberOfResUnits(testData.numberOfUnits);
+            NavigationSection.navigateToResInPlaceRentRoll();
+            Income.Residential.InPlaceRentRoll.verifyColumnNotExist(testData.column)
+                .checkCheckboxByLabelAndVerify(testData.label, testData.column)
+                .enterNumberBathroomsByRow(testData.wholeNumber)
+                .enterNumberBathroomsByRow(testData.halfNumber)
+                .enterNumberBathroomsByRow(testData.negativeNumber)
+                .enterNumberBathroomsByRow(testData.wrongDecimal);
+            deleteReport(testData.reportCreationData.reportNumber);
+        });
     });
-});

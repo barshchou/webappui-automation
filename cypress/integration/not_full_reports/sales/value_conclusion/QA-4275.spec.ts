@@ -6,19 +6,18 @@ import Property from "../../../../actions/property/property.manager";
 
 describe("Gross Building Area value pulled from Property -> Summary -> As Is Building Description", 
     { tags: [ "@sales", "@value_conclusion" ] }, () => {
-        
-    before("Login, create report", () => {
-        createReport(testData.reportCreationData);
-    });
+        before("Login, create report", () => {
+            createReport(testData.reportCreationData);
+        });
 
-    it("Test body", () => {
-        NavigationSection.navigateToSalesValueConclusion();
-        Sales.ValueConclusion.verifyGrossBuildingAreaAmount(testData.gbaToBe);
-        NavigationSection.navigateToPropertySummary()
-            .closeUserSurveyIfExist();
-        Property.Summary.enterGrossBuildingArea(testData.newGba);
-        NavigationSection.navigateToSalesValueConclusion();
-        Sales.ValueConclusion.verifyGrossBuildingAreaAmount(testData.newGba);
-        deleteReport(testData.reportCreationData.reportNumber);
+        it("Test body", () => {
+            NavigationSection.navigateToSalesValueConclusion();
+            Sales.ValueConclusion.verifyGrossBuildingAreaAmount(testData.gbaToBe);
+            NavigationSection.navigateToPropertySummary()
+                .closeUserSurveyIfExist();
+            Property.Summary.enterGrossBuildingArea(testData.newGba);
+            NavigationSection.navigateToSalesValueConclusion();
+            Sales.ValueConclusion.verifyGrossBuildingAreaAmount(testData.newGba);
+            deleteReport(testData.reportCreationData.reportNumber);
+        });
     });
-});

@@ -3,7 +3,7 @@ import { cutDecimalPartToNumberOfDigits, isHasDecimalPartMoreNumberOfDigits } fr
 import { getUploadFixture } from "../../../utils/fixtures.utils";
 import BaseActionsExt from "../base/base.actions.ext";
 
-class MapsActions extends BaseActionsExt<typeof mapsPage>{
+class MapsActions extends BaseActionsExt<typeof mapsPage> {
 
     enterPropertyFrontage(frontage: number): MapsActions {
         if (isHasDecimalPartMoreNumberOfDigits(frontage, 2)) {

@@ -7,21 +7,20 @@ import Sales from "../../../../actions/sales/sales.manager";
 
 describe("Prospective Market Value As Stabilized -> Less Commission Fee data is pulled from Cap Rate Conclusion",
     { tags:[ "@sales", "@value_conclusion" ] }, () => {
-        
-    before("Login, create report", () => {
-        createReport(testData.reportCreationData);
-    });
+        before("Login, create report", () => {
+            createReport(testData.reportCreationData);
+        });
 
-    it("Test body", () => {
-        NavigationSection.navigateToPropertySummary();
-        Property.Summary.enterNumberOfResUnits(testData.numberOfUnits);
-        NavigationSection.navigateToResInPlaceRentRoll();
-        Income.Residential.InPlaceRentRoll.enterRentTypeCellByRowNumber(testData.rentType);
-        NavigationSection.navigateToCapRateConclusion();
-        Income.CapRateConclusion.enterAsStabilizedCommissionFeeAmount(testData.commissionFee);
-        NavigationSection.navigateToSalesValueConclusion()
-            .verifyProgressBarNotExist();
-        Sales.ValueConclusion.verifyAsStabilizedCommissionFeeAmount(testData.commissionFee);
-        deleteReport(testData.reportCreationData.reportNumber);
+        it("Test body", () => {
+            NavigationSection.navigateToPropertySummary();
+            Property.Summary.enterNumberOfResUnits(testData.numberOfUnits);
+            NavigationSection.navigateToResInPlaceRentRoll();
+            Income.Residential.InPlaceRentRoll.enterRentTypeCellByRowNumber(testData.rentType);
+            NavigationSection.navigateToCapRateConclusion();
+            Income.CapRateConclusion.enterAsStabilizedCommissionFeeAmount(testData.commissionFee);
+            NavigationSection.navigateToSalesValueConclusion()
+                .verifyProgressBarNotExist();
+            Sales.ValueConclusion.verifyAsStabilizedCommissionFeeAmount(testData.commissionFee);
+            deleteReport(testData.reportCreationData.reportNumber);
+        });
     });
-});

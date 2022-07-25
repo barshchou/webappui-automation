@@ -29,7 +29,8 @@ class CapRateDiscussionActions extends BaseActionsExt<typeof capRateDiscussionPa
         return this;
     }
 
-    verifyCapRateCompsTable(table: Readonly<{income: string, propConditions: string, location: string}>): CapRateDiscussionActions {
+    verifyCapRateCompsTable(table: Readonly<{income: string, propConditions: string, 
+        location: string}>): CapRateDiscussionActions {
         capRateDiscussionPage.incomePotentialCell.should("have.text", table.income);
         capRateDiscussionPage.propertyConditionsCell.should("have.text", table.propConditions);
         capRateDiscussionPage.locationCell.should("have.text", table.location);

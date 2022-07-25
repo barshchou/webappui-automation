@@ -29,8 +29,8 @@ const _miscellaneousUnitPerSf = _miscellaneousUnitTotal / _grossBuildingArea;
 const _miscellaneousUnitPerUnit = _forecast;
 
 const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("5842-43_45", {
-        incomeValue: Enums.INCOME_TYPE.both
-    });
+    incomeValue: Enums.INCOME_TYPE.both
+});
 
 export default {
     reportCreationData: _reportCreationData,
