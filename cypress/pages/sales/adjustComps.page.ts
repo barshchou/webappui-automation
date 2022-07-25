@@ -107,8 +107,13 @@ class AdjustCompsPage extends BasePage {
         return cy.get('[id="salesApproach.salesAdjustmentGrid-final-form"]');
     }
 
+<<<<<<< HEAD
     getExpandMarketAdjustmentSubjectRow(name: string, index = 2) {
         return cy.xpath(`//*[@data-qa='expansion-row-market-adjustment']//*[contains(text(), '${name}')]//following::*[${index}]`);
+=======
+    get CellCompHeader(){
+        return cy.get('[data-qa="sales-adjustment-grid-header-row"] [data-qa="comp-header-cell"]', { timeout: 60000 });
+>>>>>>> 66a75ee3d80b64ffca4fa720b768184821679636
     }
 }
 

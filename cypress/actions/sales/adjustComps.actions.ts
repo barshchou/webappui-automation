@@ -191,7 +191,7 @@ class AdjustCompsActions extends BaseActionsExt<typeof adjustCompsPage> {
                  adjustedTrendedPriceText = `$${numberWithCommas(pricePerBasisNumber.toFixed(2))}`;
              }
              cy.log("Cumulative Price Per Unit is: " + adjustedTrendedPriceText);
-             _saveDataInFile(`$${numberWithCommas(Math.round(pricePerBasisNumber))}`);
+             _saveDataInFile(`$${numberWithCommas(Math.round(pricePerBasisNumber))}`, "pricePerBasisNumber.txt");
              adjustCompsPage.cellCumulativePriceValue.eq(index).should("have.text", adjustedTrendedPriceText);
         });
             
