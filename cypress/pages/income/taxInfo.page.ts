@@ -106,6 +106,8 @@ class TaxInfoPage extends BasePage {
     get taxCalculationDiscussionTitle() {return cy.xpath("//h6[contains(text(),'Tax Calculation Discussion')]");}
 
     get taxSummaryDiscussion() {return cy.get("[data-qa^='taxSummaryDiscussion.commentary'],[name='taxSummaryDiscussion.commentary']");}
+
+    getAddNewRowButton(name = "Add Additional Tax Rate") {return cy.xpath(`//*[contains(text(), '${name}')]`);}
 }
 
 export default new TaxInfoPage();

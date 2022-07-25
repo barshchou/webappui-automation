@@ -65,7 +65,7 @@ describe("Historical expense Water & Sewer Per SF/Unit is correctly calculated a
         Income._ExpenseForecastActions.Actions.matchElementSnapshot(
             Income._ExpenseForecastActions.Page.forecastItemCard(
                 Income._ExpenseForecastActions.getItemNameForAverage(
-                    testData.actualWaterAndSewerItem.name)), testData.waterAndSewerPerSfCardSnapshotName, { padding: [ 10, 100 ] });
+                    testData.actualWaterAndSewerItem.name)), testData.waterAndSewerPerSfCardSnapshotName, { padding: [ 0, 100 ] });
         
     });
 
@@ -92,7 +92,7 @@ describe("Historical expense Water & Sewer Per SF/Unit is correctly calculated a
         Income._ExpenseForecastActions.Actions.matchElementSnapshot(
             Income._ExpenseForecastActions.Page.forecastItemCard(
                 Income._ExpenseForecastActions.getItemNameForAverage(
-                    testData.actualWaterAndSewerItem.name)), testData.waterAndSewerPerUnitCardSnapshotName, { padding: [ 10, 100 ] });
+                    testData.actualWaterAndSewerItem.name)), testData.waterAndSewerPerUnitCardSnapshotName, { padding: [ 0, 100 ] });
         
         deleteReport(testData.reportCreationData.reportNumber);
 

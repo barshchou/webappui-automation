@@ -78,6 +78,16 @@ class AdjustCompsPage extends BasePage {
 
     get viewAdjustmentDetails() {return cy.xpath("//*[contains(text(), 'Other Adjustment')]//following::*[@role='presentation'][1]");}
 
+    get discussionsShowAllButton() {return cy.xpath("//*[@type='button']/*[contains(text(), 'Show All')]");}
+
+    get conditionDiscussionCommentary() {return cy.get("[data-qa='conditionDiscussion.commentary-generated-text']");}
+
+    get marketConditionAdjustmentTooltip() {return cy.get("svg[data-icon=info-circle]");}
+
+    get applyMarketConditionAdjustmentButton() {return cy.get("[data-qa='apply-market-condition-adjustment']");}
+
+    get marketConditionAdjustmentInput() {return cy.get("[name='marketConditionAdjustment']");}
+
     getOtherAdjustmentColumnValue(value: string, index = 1) {return cy.xpath(`//*[contains(text(), 'Other Adjustment')]//following::*[contains(text(), '${value}')][${index}]`);}
     
     getAdjustmentArrow(adjustmentName: AdjustmentName){
@@ -95,6 +105,15 @@ class AdjustCompsPage extends BasePage {
      */
     get ModalSalesCompInfo(){
         return cy.get('[id="salesApproach.salesAdjustmentGrid-final-form"]');
+    }
+
+<<<<<<< HEAD
+    getExpandMarketAdjustmentSubjectRow(name: string, index = 2) {
+        return cy.xpath(`//*[@data-qa='expansion-row-market-adjustment']//*[contains(text(), '${name}')]//following::*[${index}]`);
+=======
+    get CellCompHeader(){
+        return cy.get('[data-qa="sales-adjustment-grid-header-row"] [data-qa="comp-header-cell"]', { timeout: 60000 });
+>>>>>>> 66a75ee3d80b64ffca4fa720b768184821679636
     }
 }
 

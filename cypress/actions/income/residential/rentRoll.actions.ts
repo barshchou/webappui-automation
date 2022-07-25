@@ -5,9 +5,9 @@ import {
     isHalfDecimalPart,
     numberWithCommas
 } from "../../../../utils/numbers.utils";
-import { isProdEnv } from "../../../../utils/env.utils";
 import ResidentialRentRollSharedActions from "../../shared_components/residentialRentRoll.shared.actions";
 import { BoweryReports } from "../../../types/boweryReports.type";
+import { isProdEnv } from "../../../integration/checkIsProd.utils";
 
 class InPlaceRentRollActions extends ResidentialRentRollSharedActions<typeof rentRollPage> {
 
