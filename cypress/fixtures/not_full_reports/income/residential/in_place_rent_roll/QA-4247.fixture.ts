@@ -16,8 +16,10 @@ const _leaseStatusFixture = [ occupied, vacant ] as BoweryReports.LeaseStatus[];
 
 const _textCommentaryFixture = [
     "462 1st Avenue currently contains 2 occupied units generating $0 of total annual residential income.",
-    "462 1st Avenue is currently 100% vacant. We requested the developer's projected residential rent roll, but did not receive it. The property will contain 2 studios.",
-    "462 1st Avenue currently contains 1 occupied unit and 1 vacant unit generating $0 of total annual residential income.",
+    "462 1st Avenue is currently 100% vacant. We requested the developer's projected residential rent roll, " + 
+    "but did not receive it. The property will contain 2 studios.",
+    "462 1st Avenue currently contains 1 occupied unit and 1 vacant unit generating $0 of total annual " + 
+    "residential income.",
     "The developer's projected residential rent roll is presented below.",
     "upon completion of the construction works; the developer's projected residential rent roll is presented below."
 ];

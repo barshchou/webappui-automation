@@ -5,7 +5,7 @@ import ReportDataCreator from "../../../../data_creator/reportData.creator";
 const _leaseStatus: BoweryReports.LeaseStatus = "Occupied";
 
 const reportCreationFixture = () => {
-    return ReportDataCreator.setReportNumber("4379&80")
+    return ReportDataCreator.setReportNumber("4379-80")
         .setAddress()
         .setTemplateValue(Enums.TEMPLATE_TYPE.notFreddieMac)
         .setIncomeValue(Enums.INCOME_TYPE.both)

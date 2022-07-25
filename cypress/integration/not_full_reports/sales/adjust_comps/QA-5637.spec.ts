@@ -6,17 +6,17 @@ import Sales from "../../../../actions/sales/sales.manager";
 describe("Calculation of Market Condition adjustment", 
     { tags: [ "@adjust_comps", "@sales" ] }, () => {
         
-    before("Login, create report", () => {
-        createReport(testData.reportCreationData);
-    });
+        before("Login, create report", () => {
+            createReport(testData.reportCreationData);
+        });
 
-    it("Test body", () => {
-        cy.stepInfo("1. Open Adjust comps page");
-        NavigationSection.navigateToAdjustComps();
+        it("Test body", () => {
+            cy.stepInfo("1. Open Adjust comps page");
+            NavigationSection.navigateToAdjustComps();
 
-        cy.stepInfo("2. Verify Calculation Units options in the Sale Comparables Setup");
-        testData.calculationUnits.forEach(val => {
-            Sales.AdjustComps.checkCalculationUnitsRadio(val);
+            cy.stepInfo("2. Verify Calculation Units options in the Sale Comparables Setup");
+            testData.calculationUnits.forEach(val => {
+                Sales.AdjustComps.checkCalculationUnitsRadio(val);
+            });
         });
     });
-});

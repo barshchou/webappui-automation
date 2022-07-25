@@ -7,22 +7,22 @@ import { createReport, deleteReport } from "../../../../../actions/base/baseTest
 describe("Verify the Unsaved changes modal functionality", 
     { tags:[ "@income", "@residential", "@in_place_rent_roll" ] }, () => {
         
-    before("Login, create report", () => {
-        createReport(testData.reportCreationData);
-    });
+        before("Login, create report", () => {
+            createReport(testData.reportCreationData);
+        });
 
-    it("Test body", () => {
-        NavigationSection.navigateToResInPlaceRentRoll();
-        Income.Residential.InPlaceRentRoll.checkCheckboxByLabel(testData.forecastLabel)
-            .goToPropSummaryWithSaveSaveClickFirst();
-        Property.Summary.verifyThatPageIsOpened()
-            .goBackWithSave();
-        Income.Residential.InPlaceRentRoll.verifyCheckboxIsChecked(testData.forecastLabel)
-            .uncheckCheckboxByLabel(testData.forecastLabel)
-            .goToPropSummaryWithoutSave();
-        Property.Summary.verifyThatPageIsOpened()
-            .goBackWithSave();
-        Income.Residential.InPlaceRentRoll.verifyCheckboxIsChecked(testData.forecastLabel);
-        deleteReport(testData.reportCreationData.reportNumber);
+        it("Test body", () => {
+            NavigationSection.navigateToResInPlaceRentRoll();
+            Income.Residential.InPlaceRentRoll.checkCheckboxByLabel(testData.forecastLabel)
+                .goToPropSummaryWithSaveSaveClickFirst();
+            Property.Summary.verifyThatPageIsOpened()
+                .goBackWithSave();
+            Income.Residential.InPlaceRentRoll.verifyCheckboxIsChecked(testData.forecastLabel)
+                .uncheckCheckboxByLabel(testData.forecastLabel)
+                .goToPropSummaryWithoutSave();
+            Property.Summary.verifyThatPageIsOpened()
+                .goBackWithSave();
+            Income.Residential.InPlaceRentRoll.verifyCheckboxIsChecked(testData.forecastLabel);
+            deleteReport(testData.reportCreationData.reportNumber);
+        });
     });
-});

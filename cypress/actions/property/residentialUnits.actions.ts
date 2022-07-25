@@ -1,7 +1,7 @@
 import residentialUnitsPage from "../../pages/property/residentialUnits.page";
 import BaseActionsExt from "../base/base.actions.ext";
 
-class ResidentialUnitsActions extends BaseActionsExt<typeof residentialUnitsPage>{
+class ResidentialUnitsActions extends BaseActionsExt<typeof residentialUnitsPage> {
 
     chooseKitchenCondition(value: string): ResidentialUnitsActions {
         residentialUnitsPage.kitchenConditionRadio.check(value);
@@ -71,7 +71,7 @@ class ResidentialUnitsActions extends BaseActionsExt<typeof residentialUnitsPage
         return this;
     }
 
-     private getKitchenConditionCommentary(bathroomConditionData: {condition: string, flooring: string,
+    private getKitchenConditionCommentary(bathroomConditionData: {condition: string, flooring: string,
         counterTops: string, cabinetry: string, stovetops: string, refrigerators: string}): string {
         return `The units will feature ${bathroomConditionData.condition} ` +
             "quality kitchen finishes relative to typical units in similar walk-up buildings in the subject's area. " +
@@ -135,10 +135,13 @@ class ResidentialUnitsActions extends BaseActionsExt<typeof residentialUnitsPage
     }
 
    
-    private getBathroomCommentary(bathroomConditionData: {condition: string, flooring: string, tub: string, sink: string, toilet: string}): string {
-        return `The units will feature ${bathroomConditionData.condition} quality bathroom finishes relative to typical ` +
-            `units in similar walk-up buildings in the subject's area. The units will contain ${bathroomConditionData.flooring} flooring,` +
-            ` ${bathroomConditionData.tub} tubs, ${bathroomConditionData.sink} sinks, and ${bathroomConditionData.toilet} toilets.`;
+    private getBathroomCommentary(bathroomConditionData: {condition: string, flooring: string, 
+        tub: string, sink: string, toilet: string}): string {
+        return `The units will feature ${bathroomConditionData.condition} quality bathroom `+
+        `finishes relative to typical units in similar walk-up buildings in the subject's area. `+
+        `The units will contain ${bathroomConditionData.flooring} flooring, ` +
+        `${bathroomConditionData.tub} tubs, ${bathroomConditionData.sink} sinks, ` +
+        `and ${bathroomConditionData.toilet} toilets.`;
     }
 
     chooseBedroomCondition(value: string): ResidentialUnitsActions {
@@ -159,14 +162,16 @@ class ResidentialUnitsActions extends BaseActionsExt<typeof residentialUnitsPage
         return this;
     }
 
-    fillBedroomDescription(bedroomConditionData: Readonly<{condition: string, flooring: string, walls: string}>): ResidentialUnitsActions {
+    fillBedroomDescription(bedroomConditionData: Readonly<{condition: string, 
+        flooring: string, walls: string}>): ResidentialUnitsActions {
         this.chooseBedroomCondition(bedroomConditionData.condition)
             .chooseBedroomFlooring(bedroomConditionData.flooring)
             .chooseBedroomWalls(bedroomConditionData.walls);
         return this;
     }
 
-    verifyBedroomCommentary(bedroomConditionData: Readonly<{condition: string, flooring: string, walls: string}>): ResidentialUnitsActions {
+    verifyBedroomCommentary(bedroomConditionData: Readonly<{condition: string, 
+        flooring: string, walls: string}>): ResidentialUnitsActions {
         const commentaryObject = {
             condition: bedroomConditionData.condition.toLowerCase(),
             flooring: bedroomConditionData.flooring.toLowerCase(),
@@ -179,7 +184,8 @@ class ResidentialUnitsActions extends BaseActionsExt<typeof residentialUnitsPage
     private getBedroomCommentary(bedroomConditionData: {condition: string, flooring: string, walls: string}): string {
         return `The units will feature ${bedroomConditionData.condition} quality ` +
             "bedroom finishes relative to typical units in similar walk-up buildings in the subject's area. " +
-            `The units will contain ${bedroomConditionData.flooring} flooring, and ${bedroomConditionData.walls} walls.`;
+            `The units will contain ${bedroomConditionData.flooring} flooring, ` +
+            `and ${bedroomConditionData.walls} walls.`;
     }
 
     chooseLivingRoomCondition(value: string): ResidentialUnitsActions {
@@ -200,14 +206,16 @@ class ResidentialUnitsActions extends BaseActionsExt<typeof residentialUnitsPage
         return this;
     }
 
-    fillLivingRoomDescription(livingRoomConditionData: Readonly<{condition: string, flooring: string, walls: string}>): ResidentialUnitsActions {
+    fillLivingRoomDescription(livingRoomConditionData: Readonly<{condition: string, 
+        flooring: string, walls: string}>): ResidentialUnitsActions {
         this.chooseLivingRoomCondition(livingRoomConditionData.condition)
             .chooseLivingRoomFlooring(livingRoomConditionData.flooring)
             .chooseLivingRoomWalls(livingRoomConditionData.walls);
         return this;
     }
 
-    verifyLivingRoomCommentary(livingRoomCondition: Readonly<{condition: string, flooring: string, walls: string}>): ResidentialUnitsActions {
+    verifyLivingRoomCommentary(livingRoomCondition: Readonly<{condition: string, 
+        flooring: string, walls: string}>): ResidentialUnitsActions {
         const commentaryObject = {
             condition: livingRoomCondition.condition.toLowerCase(),
             flooring: livingRoomCondition.flooring.toLowerCase(),
@@ -240,7 +248,8 @@ class ResidentialUnitsActions extends BaseActionsExt<typeof residentialUnitsPage
         return this;
     }
 
-    fillStairsDescription(stairsData: Readonly<{numberOfStairs: string | number, stairsStart: string, stairsEnd: string}>): ResidentialUnitsActions {
+    fillStairsDescription(stairsData: Readonly<{numberOfStairs: string | number, 
+        stairsStart: string, stairsEnd: string}>): ResidentialUnitsActions {
         this.enterNumberOfStairs(stairsData.numberOfStairs)
             .chooseStairsStart(stairsData.stairsStart)
             .chooseStairsEnd(stairsData.stairsEnd);

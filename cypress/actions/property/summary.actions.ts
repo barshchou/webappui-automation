@@ -156,14 +156,16 @@ class SummaryActions extends BaseActionsExt<typeof summaryPage> {
         return this;
     }
 
-    fillAsCompleteBuildingDescription(description: Readonly<{ grossArea: number; numberOfUnits: number; floorsNumber: number; }>): this {
+    fillAsCompleteBuildingDescription(description: Readonly<{ grossArea: number; numberOfUnits: number; 
+        floorsNumber: number; }>): this {
         this.enterGrossBuildingArea(description.grossArea)
             .enterNumberOfResUnits(description.numberOfUnits)
             .enterFloorsNumber(description.floorsNumber);
         return this;
     }
 
-    fillCurrentBuildDescription(description: Readonly<{ grossArea: number; numberOfUnits: number; floorsNumber: number; }>): this {
+    fillCurrentBuildDescription(description: Readonly<{ grossArea: number; numberOfUnits: number; 
+        floorsNumber: number; }>): this {
         this.enterCurrentGrossBuildingArea(description.grossArea)
             .enterCurrentNumberOfResUnits(description.numberOfUnits)
             .enterCurrentFloorsNumber(description.floorsNumber);

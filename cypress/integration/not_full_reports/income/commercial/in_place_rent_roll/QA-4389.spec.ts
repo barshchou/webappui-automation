@@ -7,37 +7,39 @@ import { createReport, deleteReport } from "../../../../../actions/base/baseTest
 describe("Verify the Monthly Rent column in the grid", 
     { tags:[ "@income", "@commercial", "@in_place_rent_roll" ] }, () => {
 
-    beforeEach("Create report, prepare table", () => {
-        createReport(testData.reportCreationData);
-        _NavigationSection.navigateToCommercialUnits();
-        Property._CommercialUnits.enterUnitSFByUnitIndex(testData.general.squareFeet);
-        _NavigationSection.navigateToCommercialInPlaceRentRoll();
-    });
+        beforeEach("Create report, prepare table", () => {
+            createReport(testData.reportCreationData);
+            _NavigationSection.navigateToCommercialUnits();
+            Property._CommercialUnits.enterUnitSFByUnitIndex(testData.general.squareFeet);
+            _NavigationSection.navigateToCommercialInPlaceRentRoll();
+        });
 
-    it("Annually", () => {
-        Income._CommercialManager.InPlaceRentRoll.clickAnnuallyBasisButton()
-            .enterAnnualRentByRowNumber(testData.general.annualRent)
-            .verifyMonthlyRentAnnuallyByRowNumber(testData.general.annualRent);
-        deleteReport(testData.reportCreationData.reportNumber);
-    });
+        it("Annually", () => {
+            Income._CommercialManager.InPlaceRentRoll.clickAnnuallyBasisButton()
+                .enterAnnualRentByRowNumber(testData.general.annualRent)
+                .verifyMonthlyRentAnnuallyByRowNumber(testData.general.annualRent);
+            deleteReport(testData.reportCreationData.reportNumber);
+        });
 
-    it("Monthly", () => {
-        Income._CommercialManager.InPlaceRentRoll.clickMonthlyBasisButton()
-            .verifyMonthlyRentByRowCellText();
-        Income._CommercialManager.InPlaceRentRoll.enterMonthlyRentByRowNumber(testData.general.monthlyRent);
-        deleteReport(testData.reportCreationData.reportNumber);
-    });
+        it("Monthly", () => {
+            Income._CommercialManager.InPlaceRentRoll.clickMonthlyBasisButton()
+                .verifyMonthlyRentByRowCellText();
+            Income._CommercialManager.InPlaceRentRoll.enterMonthlyRentByRowNumber(testData.general.monthlyRent);
+            deleteReport(testData.reportCreationData.reportNumber);
+        });
 
-    it("Per square foot", () => {
-        Income._CommercialManager.InPlaceRentRoll.enterRentPerSFAnnuallyByRowNumber(testData.general.rentPerSF)
-            .verifyMonthlyRentPerSFByRow(testData.general.rentPerSF, testData.general.squareFeet, testData.unitsOfMeasureAnnually);
-        deleteReport(testData.reportCreationData.reportNumber);
-    });
+        it("Per square foot", () => {
+            Income._CommercialManager.InPlaceRentRoll.enterRentPerSFAnnuallyByRowNumber(testData.general.rentPerSF)
+                .verifyMonthlyRentPerSFByRow(testData.general.rentPerSF, testData.general.squareFeet, 
+                    testData.unitsOfMeasureAnnually);
+            deleteReport(testData.reportCreationData.reportNumber);
+        });
 
-    it("Per square foot per month", () => {
-        Income._CommercialManager.InPlaceRentRoll.clickPerSquareFootPerMonthButton()
-            .enterRentPerSFMonthlyByRowNumber(testData.general.rentPerSF)
-            .verifyMonthlyRentPerSFByRow(testData.general.rentPerSF, testData.general.squareFeet, testData.unitsOfMeasureMonthly);
-        deleteReport(testData.reportCreationData.reportNumber);
+        it("Per square foot per month", () => {
+            Income._CommercialManager.InPlaceRentRoll.clickPerSquareFootPerMonthButton()
+                .enterRentPerSFMonthlyByRowNumber(testData.general.rentPerSF)
+                .verifyMonthlyRentPerSFByRow(testData.general.rentPerSF, testData.general.squareFeet, 
+                    testData.unitsOfMeasureMonthly);
+            deleteReport(testData.reportCreationData.reportNumber);
+        });
     });
-});

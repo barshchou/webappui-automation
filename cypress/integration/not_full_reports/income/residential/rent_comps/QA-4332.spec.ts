@@ -8,7 +8,7 @@ const reportCreationData = ReportDataCreator.getReportData("4332");
 
 describe(`Verify that display of results in the Map section on Rent Comps page 
                 when the Unit type of search is selected`, 
-                { tags:[ "@income", "@rent_comps", "@residential", "@flaky" ] }, () => {
+{ tags:[ "@income", "@rent_comps", "@residential", "@flaky" ] }, () => {
 
     before("Login, create report", () => {
         createReport(reportCreationData);
@@ -17,7 +17,7 @@ describe(`Verify that display of results in the Map section on Rent Comps page
     it("Test body", () => {
         NavigationSection.navigateToRentComps()
             .verifyProgressBarNotExist();
-        Income.Residential.RentComps.BaseActions.verifyLoadingDoesntExist()
+        Income.Residential.RentComps.BaseActions.verifyLoadingDoesNotExist()
             .verifyPhotosExistAndNavigateByPhotos(1);
         RentCompsPage.comparableAddressesTexts.each($address => {
             expect($address).not.to.be.empty;

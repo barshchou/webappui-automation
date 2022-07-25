@@ -3,33 +3,33 @@ import { _NavigationSection } from "../../../../actions/base";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import testData from '../../../../fixtures/not_full_reports/report/client/QA-4635.fixture';
 
-describe("Verify the Save button functionality for Intended User and Identification of the Client sections.", 
+describe(`Verify the Save button functionality for Intended User and Identification of the Client sections.`, 
     { tags: [ "@report", "@client" ] }, () => {
-        
-    before("Login, create report", () => {
-        createReport(testData.reportCreationData);
-    });
+        before("Login, create report", () => {
+            createReport(testData.reportCreationData);
+        });
 
-    it("Test body", () => {
-        cy.stepInfo("1. Click on the Edit button on the Report > Client page for Intended User and Identification of the Client sections.");
-        _NavigationSection.navigateToClientPage();
+        it("Test body", () => {
+            cy.stepInfo(`1. Click on the Edit button on the Report > Client page for Intended User 
+            and Identification of the Client sections.`);
+            _NavigationSection.navigateToClientPage();
 
-        Report._Client.verifyProgressBarNotExist()
-            .Page.formEditBtn().click();
-        Report._Client.Page.formEditBtn().click();
+            Report._Client.verifyProgressBarNotExist()
+                .Page.formEditBtn().click();
+            Report._Client.Page.formEditBtn().click();
 
-        cy.stepInfo("2. Edit comment and click on the Save button for both sections.");
-        Report._Client.enterIntendedUserTextBox(testData.textToType)
-            .clickNarrativeSuggestions(testData.verifyListValue)
-            .enterIdentificationOfTheClientTextBox(testData.textToType)
-            .clickNarrativeSuggestions(testData.verifyListValue, 1)
-            .Page.formSaveBtn().click();
-        Report._Client.Page.formSaveBtn().click();
+            cy.stepInfo(`2. Edit comment and click on the Save button for both sections.`);
+            Report._Client.enterIntendedUserTextBox(testData.textToType)
+                .clickNarrativeSuggestions(testData.verifyListValue)
+                .enterIdentificationOfTheClientTextBox(testData.textToType)
+                .clickNarrativeSuggestions(testData.verifyListValue, 1)
+                .Page.formSaveBtn().click();
+            Report._Client.Page.formSaveBtn().click();
             
-        cy.stepInfo("3. Verify that the changes from step 2 are saved.");
-        Report._Client.verifyIntendedUserTextBox(testData.verifyAreaValue)
-            .verifyIdentificationOfTheClientTextBox(testData.verifyAreaValue);
+            cy.stepInfo(`3. Verify that the changes from step 2 are saved.`);
+            Report._Client.verifyIntendedUserTextBox(testData.verifyAreaValue)
+                .verifyIdentificationOfTheClientTextBox(testData.verifyAreaValue);
 
-        deleteReport(testData.reportCreationData.reportNumber);
+            deleteReport(testData.reportCreationData.reportNumber);
+        });
     });
-});

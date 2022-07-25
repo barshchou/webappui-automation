@@ -3,7 +3,7 @@ import { createReport, deleteReport } from "../../../../../actions/base/baseTest
 import NavigationSection from "../../../../../actions/base/navigationSection.actions";
 import Income from "../../../../../actions/income/income.manager";
 
-const reportCreationData = ReportDataCreator.getReportData("4265&4354");
+const reportCreationData = ReportDataCreator.getReportData("4265_4354");
 
 describe("Verify the popups with appropriate wording appears on switching from Unit search type to Building", () => {
     before("Login, create report", () => {
