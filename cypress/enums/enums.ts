@@ -58,6 +58,7 @@ import expensesForecastCardNamesEnum from "./expense/expensesForecastCardNames.e
 import reimbursementColumnsIdEnum from "./reimbursementColumnsId.enum";
 import calculationUnitsEnum from "./adjustComps/calculationUnits.enum";
 import calculationTypesEnum from "./commercial/rent_reconciliation/calculationTypes.enum";
+import fileSelectionNamesEnum from "./property/fileSelectionNames.enum";
 import salesAdjustmentGridDiscussionsEnum from "./adjustComps/salesAdjustmentGridDiscussions.enum";
 import salesAdjustmentGridRowsEnum from "./adjustComps/salesAdjustmentGridRows.enum";
 
@@ -122,6 +123,7 @@ export default {
     REIMBURSEMENT_COLUMN_ID: reimbursementColumnsIdEnum,
     CALCULATION_UNITS: calculationUnitsEnum,
     CALCULATION_TYPE: calculationTypesEnum,
+    FILE_SELECTION_NAMES: fileSelectionNamesEnum,
     SALES_ADJUSTMENT_GRID_DISCUSSIONS: salesAdjustmentGridDiscussionsEnum,
     SALES_ADJUSTMENT_GRID_ROWS: salesAdjustmentGridRowsEnum
 };
