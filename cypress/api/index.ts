@@ -3,6 +3,7 @@
 import { agent as request } from "supertest";
 import io = require("socket.io-client");
 import { BoweryAutomation } from "../types/boweryAutomation.type";
+import axios from "axios";
 
 export default {
     /**
@@ -10,14 +11,18 @@ export default {
      * @returns response from `/user/login` endpoint
      */
     _loginApi: async function(_envUrl: string, _username: string, _password: string) {
-        const response = await request(_envUrl)
-            .post('/user/login')
-            .send({
-                username:_username,
-                password:_password
-            })
-            .expect('Content-Type', /json/)
-            .expect(200);
+        const response = await axios.post(`${_envUrl}/user/login`, {
+            username:_username,
+            password:_password
+        });
+        // const response = await request(_envUrl)
+        //     .post('/user/login')
+        //     .send({
+        //         username:_username,
+        //         password:_password
+        //     })
+        //     .expect('Content-Type', /json/)
+        //     .expect(200);
 
         return response;
     },
