@@ -235,7 +235,7 @@ class RentCompsPage extends BasePage {
     }
 
     getRemoveCompButtonByIndex(index: number) { 
-        return cy.get("[data-qa=selected-building-comps-table] [role=presentation]").eq(index); 
+        return cy.get("[data-qa=selected-building-comps-table] [data-testid='DisabledByDefaultIcon']").eq(index);
     }
 
     get removedBuildingCompsTable() { return cy.get("[data-qa=selected-building-comps-table]").eq(1); }
