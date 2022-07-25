@@ -1,7 +1,7 @@
 import BasePage from "./base.page";
 
 class NavigationSection extends BasePage {
-    get reportInfoButton() { return cy.get('#report-information');}
+    get reportInfoButton() { return cy.get('#report-information'); }
 
     get reportAppraiserButton() { return cy.get('#appraisers'); }
 
@@ -55,7 +55,7 @@ class NavigationSection extends BasePage {
 
     get commercialRentCompsButton() { return cy.get("#commercial-rent-comps"); }
 
-    get commercialCompGroupsDiscussionButton() { return cy.get(`#commercial-comp-groups-discussion`);}
+    get commercialCompGroupsDiscussionButton() { return cy.get(`#commercial-comp-groups-discussion`); }
 
     get comparableExpenses() { return cy.get("#comparable-expenses"); }
 
@@ -63,13 +63,13 @@ class NavigationSection extends BasePage {
 
     get laundry() { return cy.get("#laundry-income"); }
 
-    get storage() {return cy.get("#storage-income");}
+    get storage() { return cy.get("#storage-income"); }
 
-    get parking() {return cy.get("#parking-income");}
+    get parking() { return cy.get("#parking-income"); }
 
-    get other() {return cy.get("#other-income");}
+    get other() { return cy.get("#other-income"); }
 
-    get miscellaneousIncome() {return cy.get("#miscellaneousIncome");}
+    get miscellaneousIncome() { return cy.get("#miscellaneousIncome"); }
 
     get reportButton() { return cy.get("#report svg"); }
 
@@ -97,15 +97,15 @@ class NavigationSection extends BasePage {
 
     get profileOrganization() { return cy.get("[aria-label='Profile & Organization']"); }
 
-    get menuItemsProfileOrganization() {return cy.get("[role=menu] > li");}
+    get menuItemsProfileOrganization() { return cy.get("[role=menu] > li"); }
 
-    get commercialReimbursementButton() {return cy.get("#commercial-reimbursement-summary");}
+    get commercialReimbursementButton() { return cy.get("#commercial-reimbursement-summary"); }
 
-    get residentialStabilizedRentRoll() {return cy.get("#residential-projected-rent-roll");}
+    get residentialStabilizedRentRoll() { return cy.get("#residential-projected-rent-roll"); }
 
-    get commercialRentReconciliationButton() {return cy.get(`#commercial-rent-reconciliation`);}
+    get commercialRentReconciliationButton() { return cy.get(`#commercial-rent-reconciliation`); }
 
-    get certification() {return cy.get('#certification');}
+    get certification() { return cy.get('#certification'); }
 
     get residentialStabilizedRentRollSummary() { return cy.get(`#residential-projected-rent-roll-summary`); }
 }

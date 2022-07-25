@@ -6,15 +6,15 @@ import { createReport, deleteReport } from "../../../../../actions/base/baseTest
 describe("Verify the Lease Status column in the grid", 
     { tags:[ "@income", "@commercial", "@in_place_rent_roll" ] }, () => {
         
-    before("Login, create report", () => {
-        createReport(testData.reportCreationData);
-    });
+        before("Login, create report", () => {
+            createReport(testData.reportCreationData);
+        });
 
-    it("Test body", () => {
-        NavigationSection.navigateToCommercialInPlaceRentRoll();
-        Income.Commercial.InPlaceRentRoll.pasteToLeaseStatusByRow(testData.leaseStatuses[0])
-            .chooseLeaseStatusesByRowNumber(testData.leaseStatuses)
-            .pressDeleteLeaseStatusByRow();
-        deleteReport(testData.reportCreationData.reportNumber);
+        it("Test body", () => {
+            NavigationSection.navigateToCommercialInPlaceRentRoll();
+            Income.Commercial.InPlaceRentRoll.pasteToLeaseStatusByRow(testData.leaseStatuses[0])
+                .chooseLeaseStatusesByRowNumber(testData.leaseStatuses)
+                .pressDeleteLeaseStatusByRow();
+            deleteReport(testData.reportCreationData.reportNumber);
+        });
     });
-});

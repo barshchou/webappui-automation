@@ -30,7 +30,7 @@ const _otherIncomeItem: BoweryReports.OtherIncomeItem = {
 
 const _totalCommercialIncome = () => {
     let total = 0;
-    for (let i = 0; i < _commercialUnitSf.length; i++){
+    for (let i = 0; i < _commercialUnitSf.length; i++) {
         total += _commercialUnitSf[i] * _commercialRentSf[i];
     }
     return total;
@@ -82,8 +82,8 @@ const _potentialGrossIncomePerSf = _potentialGrossIncomeTotal / _grossBuildingAr
 const _potentialGrossIncomePerUnit = _potentialGrossIncomeTotal / _numberOfResidentialUnits;
 
 const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("4525-27", {
-        incomeValue: Enums.INCOME_TYPE.both
-    });
+    incomeValue: Enums.INCOME_TYPE.both
+});
 
 const _leaseStatuses: Array<BoweryReports.LeaseStatus> = [ "Occupied", "Occupied", "Occupied" ];
 

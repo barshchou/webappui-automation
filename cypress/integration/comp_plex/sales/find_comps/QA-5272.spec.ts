@@ -18,14 +18,14 @@ describe("[QA-5272]", () => {
     Check that following fields are disabled in the edit mode `,
     { tags: "@comp-plex-standalone" }, () => {
         Sales._FindComps.selectCompFromMapByAddress(testData.address);
-        CompPlex.Page.getsalesCompDetails(testData.address).click();
+        CompPlex.Page.getSalesCompDetails(testData.address).click();
         
         Sales._FindComps.Page.propertyInfoEditBtn.should("be.visible").click();
-        Sales._FindComps.Page.streetAdderssInput.should("be.disabled");
+        Sales._FindComps.Page.streetAddressInput.should("be.disabled");
         Sales._FindComps.Page.cityInput.should("be.disabled");
         Sales._FindComps.Page.stateInput.should("be.disabled");
         Sales._FindComps.Page.postalCodeInput.should("be.disabled");
         Sales._FindComps.Page.propertyIdInput.should("be.disabled");
-        Sales._FindComps.Page.propertyIdTypeInput.should("be.disabled");        
+        Sales._FindComps.Page.propertyIdTypeInput.should("be.disabled");
     });
 });

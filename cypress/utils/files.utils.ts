@@ -5,21 +5,21 @@ import { existsSync, writeFileSync } from "fs";
 /**
  * Get relative path to the file (report docx file or converted html in our case)
  * @param {string} _reportName - generated `testData.reportCreationData.reportNumber` in test fixture
- * @param {"docx" | "html"} _docx_html - look for file which ends with "docx" or "html" extension
+ * @param {"docx" | "html"} _docxHtml - look for file which ends with "docx" or "html" extension
  * @param currentTime
  * @param timeout
  * @returns first relative path from array of matches
  * @see https://www.npmjs.com/package/glob
  */
-const _getFilePath = async (_reportName: string, _docx_html: string, currentTime = 0, timeout = 60000) => {
-    let file = sync(`cypress/downloads/**${_reportName}**.${_docx_html}`)[0];
+const _getFilePath = async (_reportName: string, _docxHtml: string, currentTime = 0, timeout = 60000) => {
+    let file = sync(`cypress/downloads/**${_reportName}**.${_docxHtml}`)[0];
     if (file != undefined) {
         return file;
     }
     await new Promise((resolve) => {
         setTimeout(() => resolve(true), 1000);
     });
-    return _getFilePath(_reportName, _docx_html, currentTime + 1000, timeout);
+    return _getFilePath(_reportName, _docxHtml, currentTime + 1000, timeout);
 };
 
 /**
@@ -44,7 +44,7 @@ const _waitForFileExists = async (filePath: string, currentTime = 0, timeout = 6
     if (existsSync(filePath)) {
         return true;
     }
-    if (currentTime === timeout){
+    if (currentTime === timeout) {
         return false;
     }
     await new Promise((resolve) => {

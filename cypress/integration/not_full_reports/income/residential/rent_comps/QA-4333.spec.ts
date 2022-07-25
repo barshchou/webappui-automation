@@ -14,7 +14,7 @@ describe(`Verify Select button for the results displayed in the Map section is t
 
     it("Test body", () => {
         NavigationSection.navigateToRentComps();
-        Income.Residential.RentComps.BaseActions.verifyLoadingDoesntExist()
+        Income.Residential.RentComps.BaseActions.verifyLoadingDoesNotExist()
             .verifyUnitSelected()
             .clickAllSelectComparableButtons()
             .verifyUncategorizedCompsNumberAsSelected();

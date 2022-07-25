@@ -5,15 +5,14 @@ import { createReport, deleteReport } from "../../../../actions/base/baseTest.ac
 
 describe("Verify the functionality of the Upload Comps button", 
     { tags:[ "@find_comps", "@sales" ] }, () => {
-        
-    before("Login and create report", () => {
-        createReport(testData.reportCreationData);
-    });
+        before("Login and create report", () => {
+            createReport(testData.reportCreationData);
+        });
 
-    it("Test body", () => {
-        NavigationSection.navigateToFindComps();
-        Sales.FindComps.uploadComps(testData.filePath)
-            .verifyComparablesNumber(testData.compsNumber);
-        deleteReport(testData.reportCreationData.reportNumber);
+        it("Test body", () => {
+            NavigationSection.navigateToFindComps();
+            Sales.FindComps.uploadComps(testData.filePath)
+                .verifyComparablesNumber(testData.compsNumber);
+            deleteReport(testData.reportCreationData.reportNumber);
+        });
     });
-});

@@ -29,8 +29,8 @@ const _insuranceUnitPerSf = _insuranceUnitTotal / _grossBuildingArea;
 const _insuranceUnitPerUnit = _forecast;
 
 const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("4759_63_65_79-81", {
-        incomeValue: Enums.INCOME_TYPE.both
-    });
+    incomeValue: Enums.INCOME_TYPE.both
+});
 
 export default {
     reportCreationData: _reportCreationData,

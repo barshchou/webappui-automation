@@ -1,7 +1,7 @@
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 
 export default {
-    reportCreationData: ReportDataCreator.getReportData("4528&30-32"),
+    reportCreationData: ReportDataCreator.getReportData("4528_30-32"),
     numberOfUnits: 3,
     rentType: "Market Rate",
     leaseStatus: "Occupied",

@@ -10,24 +10,36 @@ class PotentialGrossIncomePage extends BasePage {
 
     get coStarMetroRateInput() { return cy.get("[name=costarMetroRate]"); }
 
-    get vCLossDiscussionCommentaryEditButton() { return cy.get("[data-qa^=residentialVCLossDiscussion] [data-qa$=edit-btn]"); }
+    get vCLossDiscussionCommentaryEditButton() { 
+        return cy.get("[data-qa^=residentialVCLossDiscussion] [data-qa$=edit-btn]"); 
+    }
 
     get vCLossDiscussionCommentaryInput() { return cy.get("[name='residentialVCLossDiscussion.commentary']"); }
 
     get lessResidentialVCLoss() { return cy.get("[data-qa^=lessResidentialVCLoss] > [data-qa=value-cell]"); }
 
-    getIncomeTypeUnified(incomeType: string) {return cy.get(`[data-qa=${incomeType}-row] > [data-qa=value-cell]`);}
+    getIncomeTypeUnified(incomeType: string) { return cy.get(`[data-qa=${incomeType}-row] > [data-qa=value-cell]`); }
 
-    getCommercialVCLossPercentage(useValue: string) { return cy.get(`[name='commercialVCLossPercentage.${useValue}']`); }
+    getCommercialVCLossPercentage(useValue: string) { 
+        return cy.get(`[name='commercialVCLossPercentage.${useValue}']`); 
+    }
 
-    getSubjectAreaCommercialVacancy(useValue: string) { return cy.get(`[name='subjectAreaCommercialVacancy.${useValue}']`); }
+    getSubjectAreaCommercialVacancy(useValue: string) { 
+        return cy.get(`[name='subjectAreaCommercialVacancy.${useValue}']`); 
+    }
 
-    getCommercialSubjectSuitabilityRadio(useValue: string) { return cy.get(`[name='commercialSubjectSuitability.${useValue}']`); }
+    getCommercialSubjectSuitabilityRadio(useValue: string) { 
+        return cy.get(`[name='commercialSubjectSuitability.${useValue}']`); 
+    }
 
     get commercialVCLossCommentary() { return cy.get("[data-qa^='commercialVCLossDiscussion.commentary']"); }
 
-    getPotentialReimbursementValue(reimbursementType: string) { return cy.get(`[data-qa^='potential${reimbursementType}Reimbursement-row'] > [data-qa=value-cell]`); }
+    getPotentialReimbursementValue(reimbursementType: string) { 
+        return cy.get(`[data-qa^='potential${reimbursementType}Reimbursement-row'] > [data-qa=value-cell]`); 
+    }
 
-    getLessReimbursementVCLossValue(reimbursementType: string) { return cy.get(`[data-qa^='less${reimbursementType}ReimbursementVCLoss'] > [data-qa=value-cell]`); }
+    getLessReimbursementVCLossValue(reimbursementType: string) { 
+        return cy.get(`[data-qa^='less${reimbursementType}ReimbursementVCLoss'] > [data-qa=value-cell]`); 
+    }
 }
 export default new PotentialGrossIncomePage();

@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 export enum Tag {
     property = "@property",
     income = "@income",

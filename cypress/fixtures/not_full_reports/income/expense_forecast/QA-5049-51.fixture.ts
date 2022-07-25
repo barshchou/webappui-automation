@@ -15,13 +15,16 @@ const _buildingDescription: BoweryReports.BuildingDescription = {
 };
 
 const perUnitFieldValue = () => {
-    let perUnitValue = numberWithCommas(Math.round(_buildingDescription.grossArea * expenseForecastCustomFixture(basis).forecast / _buildingDescription.numberOfUnits));
+    let perUnitValue = numberWithCommas(Math.round(
+        _buildingDescription.grossArea * expenseForecastCustomFixture(basis).forecast / 
+        _buildingDescription.numberOfUnits));
     let perUnitValueText = `$${perUnitValue}`;
     return perUnitValueText;
 };
 
 const perSFFieldValue = () => {
-    let perSFValue = numberWithCommas((_buildingDescription.numberOfUnits * expenseForecastCustomFixture(basis).forecast / _buildingDescription.grossArea).toFixed(2));
+    let perSFValue = numberWithCommas((_buildingDescription.numberOfUnits * 
+        expenseForecastCustomFixture(basis).forecast / _buildingDescription.grossArea).toFixed(2));
     let perSFValueText = `$${perSFValue}`;
     return perSFValueText;
 };
@@ -40,8 +43,10 @@ const perUnitValueTextNaN = '$NaN';
 const perSFValueTextNaN = '$0.00';
 const perUnitSlidingBarBasis = '($/UNIT)';
 const perSFSlidingBarBasis = '($/SF)';
-const perUnitSlidingBarTitleNameCustom = `${Cypress._.toUpper(expenseForecastCustomFixture(basis).name)}` + ' ' + perUnitSlidingBarBasis;
-const perSFSlidingBarTitleNameCustom = `${Cypress._.toUpper(expenseForecastCustomFixture(basis).name)}` + ' ' + perSFSlidingBarBasis;
+const perUnitSlidingBarTitleNameCustom = `${Cypress._.toUpper(expenseForecastCustomFixture(basis).name)}` + 
+    ' ' + perUnitSlidingBarBasis;
+const perSFSlidingBarTitleNameCustom = `${Cypress._.toUpper(expenseForecastCustomFixture(basis).name)}` + 
+    ' ' + perSFSlidingBarBasis;
 const slidingBarPerSFSnapshotName = 'slidingBarPerSFSnapshotName';
 const slidingBarPerUnitSnapshotName = 'slidingBarPerUnitSnapshotName';
 

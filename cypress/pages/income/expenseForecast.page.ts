@@ -14,13 +14,15 @@ class ExpenseForecastPage extends BasePage {
     get repairsAndMaintenanceCard() { return cy.get("[data-qa=repairsMaintenance-forecast-item] > div").last(); }
 
     /**
-    * If card is default - locator gets forecast card name (default names are contained in expensesForecastCardNames.enum.ts) for qa-data attribute  
-    * If card is custom - locator gets forecast card name and changes it (according to the rule from webapp) for qa-data attribute 
-    */
-
+     * If card is default - locator gets forecast card name 
+     * (default names are contained in expensesForecastCardNames.enum.ts) for qa-data attribute. 
+     * If card is custom - locator gets forecast card name and 
+     * changes it (according to the rule from webapp) for qa-data attribute 
+     */
     forecastItemCardFull(forecastItem: string, custom = false) {
         return !custom ? cy.get(`[data-qa=${forecastItem}-forecast-item]`) :
-            cy.get(`[data-qa=${Cypress._.camelCase(Cypress._.toLower(Cypress._.replace(forecastItem, "&", "And")))}-forecast-item]`);
+            cy.get(`[data-qa=${Cypress._.camelCase(Cypress._.toLower(Cypress._
+                .replace(forecastItem, "&", "And")))}-forecast-item]`);
     }
 
     forecastItemCard(item: string, custom = false) {
@@ -29,7 +31,8 @@ class ExpenseForecastPage extends BasePage {
     }
 
     forecastItemTooltipButton(forecastItem: string) {
-        return this.forecastItemCardFull(forecastItem).find('svg[aria-label="Unchecking this box will hide the expense from showing up on the Pro Forma."]');
+        return this.forecastItemCardFull(forecastItem)
+            .find('svg[aria-label="Unchecking this box will hide the expense from showing up on the Pro Forma."]');
     }
 
     get toeCard() { return cy.xpath("//*[.='TOTAL OPERATING EXPENSES ($/SF)']/parent::div").first(); }
@@ -70,7 +73,7 @@ class ExpenseForecastPage extends BasePage {
 
     getForecastItemProjectionByType(item: string, type: string, toeCard = false) { 
         return !toeCard ?  cy.contains(`[data-qa=${item}-forecast-item] [data-qa$=historical]`, type) : 
-         cy.contains('TOTAL OPERATING EXPENSES').parent().parent().find('[data-qa$=historical]').contains(type);
+            cy.contains('TOTAL OPERATING EXPENSES').parent().parent().find('[data-qa$=historical]').contains(type);
     }
 
     getExpenseCommentary(forecastItem: string, index = 1) {
@@ -85,13 +88,17 @@ class ExpenseForecastPage extends BasePage {
         return cy.xpath(`//*[@data-qa="${forecastItem}-forecast-item"]//following::button[.='Save'][${index}]`);
     }
 
-    getExpenseCommentaryModified(forecastItem: string) { return cy.xpath(`//*[@data-qa="${forecastItem}-forecast-item"]//following::*[.='Modified'][2]`); }
+    getExpenseCommentaryModified(forecastItem: string) { 
+        return cy.xpath(`//*[@data-qa="${forecastItem}-forecast-item"]//following::*[.='Modified'][2]`); 
+    }
 
     getExpenseCommentaryRevertToOriginal(forecastItem: string) {
         return cy.xpath(`//*[@data-qa="${forecastItem}-forecast-item"]//following::button[.='Revert to Original'][1]`);
     }
 
-    getCheckboxIncludeInProForma(forecastItem: string) { return cy.get(`[data-qa=${forecastItem}-forecast-item] input[type="checkbox"]`).first(); }
+    getCheckboxIncludeInProForma(forecastItem: string) { 
+        return cy.get(`[data-qa=${forecastItem}-forecast-item] input[type="checkbox"]`).first(); 
+    }
 
     get inputPercentOfEGICheckbox() { return cy.get("[label='Input % of EGI'] input"); }
 
@@ -117,12 +124,15 @@ class ExpenseForecastPage extends BasePage {
 
     get toeCommentaryEditButton() { return cy.xpath("//*[.='TOTAL OPERATING EXPENSES']//following::button[.='Edit']"); }
 
-    get toeCommentarySaveButton() { return cy.xpath("//*[.='TOTAL OPERATING EXPENSES']//following::button[.='Save'][1]"); }
+    get toeCommentarySaveButton() { 
+        return cy.xpath("//*[.='TOTAL OPERATING EXPENSES']//following::button[.='Save'][1]"); 
+    }
 
     get toeCommentaryModified() { return cy.xpath("//*[.='TOTAL OPERATING EXPENSES']//following::*[.='Modified']"); }
 
     get toeAppraisersForecastValueLine() {
-        return cy.xpath(`//*[.='TOTAL OPERATING EXPENSES']//following::div[@data-qa='appraisers-forecast-values-line']`);
+        return cy.xpath("//*[.='TOTAL OPERATING EXPENSES']" + 
+        "//following::div[@data-qa='appraisers-forecast-values-line']");
     }
 
     itemAppraisersForecastValueLine(item: string, custom = false) {
@@ -131,19 +141,31 @@ class ExpenseForecastPage extends BasePage {
 
     get createNewCategoryButton() { return cy.contains('Add Expense Category +'); }
 
-    get addCustomExpenseCategoryModal() { return cy.xpath("//*[.='Add Custom Expense Category']//parent::div[@role='dialog']"); }
+    get addCustomExpenseCategoryModal() { 
+        return cy.xpath("//*[.='Add Custom Expense Category']//parent::div[@role='dialog']"); 
+    }
 
-    get titleOfAddCustomExpenseCategoryModal() { return cy.get('[role=dialog]').contains('Add Custom Expense Category'); }
+    get titleOfAddCustomExpenseCategoryModal() { 
+        return cy.get('[role=dialog]').contains('Add Custom Expense Category'); 
+    }
 
     get addCustomExpenseCategoryInput() { return cy.get('input[placeholder="Enter Custom Expense..."]'); }
 
-    get addCustomExpenseCategoryFieldset() { return cy.get('[data-qa="autosuggest-text-input-field"]').find('fieldset'); }
+    get addCustomExpenseCategoryFieldset() { 
+        return cy.get('[data-qa="autosuggest-text-input-field"]').find('fieldset'); 
+    }
 
-    get addCustomExpenseCategoryCancelButton() { return cy.xpath("//*[.='Add Custom Expense Category']//following::button[.='Cancel']"); }
+    get addCustomExpenseCategoryCancelButton() { 
+        return cy.xpath("//*[.='Add Custom Expense Category']//following::button[.='Cancel']"); 
+    }
 
-    get editCustomExpenseCategoryCancelButton() { return cy.xpath("//*[.='Edit Custom Expense Category']//following::button[.='Cancel']"); }
+    get editCustomExpenseCategoryCancelButton() { 
+        return cy.xpath("//*[.='Edit Custom Expense Category']//following::button[.='Cancel']"); 
+    }
 
-    get addCustomExpenseCategorySaveButton() { return cy.xpath("//*[.='Add Custom Expense Category']//following::button[.='Save']"); }
+    get addCustomExpenseCategorySaveButton() { 
+        return cy.xpath("//*[.='Add Custom Expense Category']//following::button[.='Save']"); 
+    }
 
     get addCustomExpenseCategoryWarning() { return cy.contains('Category name is required'); }
 
@@ -153,7 +175,9 @@ class ExpenseForecastPage extends BasePage {
 
     get newCategoryExpenseName() { return cy.get('[data-qa="expenseName-form-control"] input'); }
 
-    get electricityCardText() { return cy.xpath("//span[@data-qa='electricity.includeInProForma-checked']/following-sibling::span"); }
+    get electricityCardText() { 
+        return cy.xpath("//span[@data-qa='electricity.includeInProForma-checked']/following-sibling::span"); 
+    }
 }
 
 export default new ExpenseForecastPage();

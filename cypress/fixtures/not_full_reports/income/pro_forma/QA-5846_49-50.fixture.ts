@@ -29,8 +29,8 @@ const _managementFeesUnitPerSf = _managementFeesUnitTotal / _grossBuildingArea;
 const _managementFeesUnitPerUnit = _forecast;
 
 const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("5846_49-50", {
-        incomeValue: Enums.INCOME_TYPE.both
-    });
+    incomeValue: Enums.INCOME_TYPE.both
+});
 
 export default {
     reportCreationData: _reportCreationData,

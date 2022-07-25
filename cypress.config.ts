@@ -55,8 +55,8 @@ export default defineConfig({
             });
 
             on("task", {
-                async getFilePath({ _reportName, _docx_html }) {
-                    return await fsUtil._getFilePath(_reportName, _docx_html);
+                async getFilePath({ _reportName, _docxHtml }) {
+                    return await fsUtil._getFilePath(_reportName, _docxHtml);
                 }
             });
 
@@ -74,7 +74,7 @@ export default defineConfig({
             });
 
             on("task", {
-                logNode(message){
+                logNode(message) {
                     // eslint-disable-next-line no-console
                     console.log(message);
                     return null;

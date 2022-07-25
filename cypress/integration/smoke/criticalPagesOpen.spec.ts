@@ -14,7 +14,6 @@ const reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreato
 });
 
 describe("Verify that critical pages are opening", { tags: [ "@smoke" ] }, () => {
-
     before("Create report", () => {
         createReport(reportCreationData);
         cy.saveLocalStorage();
@@ -22,44 +21,51 @@ describe("Verify that critical pages are opening", { tags: [ "@smoke" ] }, () =>
 
     beforeEach("Restore local storage", () => {
         cy.restoreLocalStorage();
-        cy._mapGet(mapKeysUtils.report_id).then(_reportId => {
+        cy._mapGet(mapKeysUtils.reportId).then(_reportId => {
             cy.visit(`/report/${_reportId}/report-information`);
         });
     });
 
     it("Residential In-Place Rent Roll", () => {
         _NavigationSection.navigateToResInPlaceRentRoll();
-        Income._Residential.InPlaceRentRoll.Page.pageTitle.should("have.text", _IncomeTitles._Residential.IN_PLACE_RENT_ROLL);
+        Income._Residential.InPlaceRentRoll.Page.pageTitle
+            .should("have.text", _IncomeTitles._Residential.IN_PLACE_RENT_ROLL);
     });
 
     it("Residential Stabilized Rent Roll", () => {
         _NavigationSection.navigateToResidentialStabilizedRentRoll();
-        Income._Residential.StabilizedRentRoll.Page.pageTitle.should("have.text", _IncomeTitles._Residential.STABILIZED_RENT_ROLL);
+        Income._Residential.StabilizedRentRoll.Page.pageTitle
+            .should("have.text", _IncomeTitles._Residential.STABILIZED_RENT_ROLL);
     });
 
     it("Commercial In-Place Rent Roll", () => {
         _NavigationSection.navigateToCommercialInPlaceRentRoll();
-        Income._CommercialManager.InPlaceRentRoll.Page.pageTitle.should("have.text", _IncomeTitles._Commercial.IN_PLACE_RENT_ROLL);
+        Income._CommercialManager.InPlaceRentRoll.Page.pageTitle
+            .should("have.text", _IncomeTitles._Commercial.IN_PLACE_RENT_ROLL);
     });
 
     it("Commercial Stabilized Rent Roll", () => {
         _NavigationSection.navigateToCommercialStabilizedRentRoll();
-        Income._CommercialManager.StabilizedRentRoll.Page.pageTitle.should("have.text", _IncomeTitles._Commercial.STABILIZED_RENT_ROLL);
+        Income._CommercialManager.StabilizedRentRoll.Page.pageTitle
+            .should("have.text", _IncomeTitles._Commercial.STABILIZED_RENT_ROLL);
     });
 
     it("Expense Forecast Page", () => {
         _NavigationSection.navigateToExpenseForecast();
-        Income._ExpenseForecastActions.Page.pageTitle.should("have.text", _IncomeTitles.EXPENSE_FORECAST);
+        Income._ExpenseForecastActions.Page.pageTitle
+            .should("have.text", _IncomeTitles.EXPENSE_FORECAST);
     });
 
     it("Residential Rent Comps", () => {
         _NavigationSection.navigateToRentComps();
-        Income._Residential.RentComps.BaseActions.Page.pageTitle.should("have.text", _IncomeTitles._Residential.RENT_COMPS);
+        Income._Residential.RentComps.BaseActions.Page.pageTitle
+            .should("have.text", _IncomeTitles._Residential.RENT_COMPS);
     });
 
     it("Commercial Rent Comps", () => {
         _NavigationSection.navigateToCommercialRentComps();
-        Income._CommercialManager.RentComps.Page.pageTitle.should("have.text", _IncomeTitles._Commercial.RENT_COMPS);
+        Income._CommercialManager.RentComps.Page.pageTitle
+            .should("have.text", _IncomeTitles._Commercial.RENT_COMPS);
     });
 
     it("Adjust Comps page", () => {
