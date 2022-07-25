@@ -7,7 +7,7 @@ const reportCreationFixture = () => {
 
 export default {
     reportCreationData: reportCreationFixture(),
-    fileName: "test.docx",
+    fileName: "QA-4516.docx",
     fileSelectionName: enums.FILE_SELECTION_NAMES.summaryOfRentStabilizationLaws,
     sectionBeforeName: "Comparable Sales Outline",
     sectionAfterName: "Qualifications"

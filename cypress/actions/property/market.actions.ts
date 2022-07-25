@@ -5,7 +5,6 @@ import { isStringContainSubstring } from "../../../utils/string.utils";
 import BaseActionsExt from "../base/base.actions.ext";
 import { _map } from "../../support/commands";
 import mapKeysUtils from "../../utils/mapKeys.utils";
-import { FileSelection } from "../../enums/enumKeys.enum";
 
 class MarketActions extends BaseActionsExt<typeof marketPage>{
     readonly errorRetrieveFileMessage = "Cannot retrieve file. Contact Research team.";
@@ -253,7 +252,7 @@ class MarketActions extends BaseActionsExt<typeof marketPage>{
     uploadRentStabilizationFile(fileName: string): MarketActions {
         marketPage.uploadRentStabilizationFileButton.click();
         marketPage.fileDropZone.attachFile(
-            `not_full_reports/property/market/${fileName}`,
+            `test_files/${fileName}`,
             { subjectType: 'drag-n-drop' }
         );
         marketPage.getUploadFileButton().click();
