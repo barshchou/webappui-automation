@@ -30,7 +30,7 @@ describe("Total Utility Adjustments in Sales Adjustment Grid is calculated with 
                     .getAdjustmentRow(testData.adjustmentName, testData.rowName).eq(index).click();
             
                 cy.stepInfo(`5. Verify that modal with all the information about the comp is opened`);
-                Sales._AdjustComps.Page.ModalSalesCompInfo.should("be.visible");
+                Sales._AdjustComps.Page.modalSalesCompInfo.should("be.visible");
                 Sales._AdjustComps.Page.CloseIconShadowDom.click();
             });
             deleteReport(testData.reportCreationData.reportNumber);

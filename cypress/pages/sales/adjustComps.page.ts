@@ -120,15 +120,15 @@ class AdjustCompsPage extends BasePage {
         return cy.xpath("//*[contains(text(), 'Other Adjustment')]//following::*[@role='presentation'][1]"); 
     }
 
-    get discussionsShowAllButton() {return cy.xpath("//*[@type='button']/*[contains(text(), 'Show All')]");}
+    get discussionsShowAllButton() { return cy.xpath("//*[@type='button']/*[contains(text(), 'Show All')]"); }
 
-    get conditionDiscussionCommentary() {return cy.get("[data-qa='conditionDiscussion.commentary-generated-text']");}
+    get conditionDiscussionCommentary() { return cy.get("[data-qa='conditionDiscussion.commentary-generated-text']"); }
 
-    get marketConditionAdjustmentTooltip() {return cy.get("svg[data-icon=info-circle]");}
+    get marketConditionAdjustmentTooltip() { return cy.get("svg[data-icon=info-circle]"); }
 
-    get applyMarketConditionAdjustmentButton() {return cy.get("[data-qa='apply-market-condition-adjustment']");}
+    get applyMarketConditionAdjustmentButton() { return cy.get("[data-qa='apply-market-condition-adjustment']"); }
 
-    get marketConditionAdjustmentInput() {return cy.get("[name='marketConditionAdjustment']");}
+    get marketConditionAdjustmentInput() { return cy.get("[name='marketConditionAdjustment']"); }
 
     getOtherAdjustmentColumnValue(value: string, index = 1) { 
         return cy.xpath(`//*[contains(text(), 'Other Adjustment')]` + 
@@ -148,17 +148,17 @@ class AdjustCompsPage extends BasePage {
      * or in base page (since its a shared page element)
      * move it later
      */
-    get ModalSalesCompInfo() {
+    get modalSalesCompInfo() {
         return cy.get('[id="salesApproach.salesAdjustmentGrid-final-form"]');
     }
 
-<<<<<<< HEAD
     getExpandMarketAdjustmentSubjectRow(name: string, index = 2) {
-        return cy.xpath(`//*[@data-qa='expansion-row-market-adjustment']//*[contains(text(), '${name}')]//following::*[${index}]`);
-=======
-    get CellCompHeader(){
+        return cy.xpath(`//*[@data-qa='expansion-row-market-adjustment']` + 
+        `//*[contains(text(), '${name}')]//following::*[${index}]`);
+    }
+
+    get cellCompHeader() {
         return cy.get('[data-qa="sales-adjustment-grid-header-row"] [data-qa="comp-header-cell"]', { timeout: 60000 });
->>>>>>> 66a75ee3d80b64ffca4fa720b768184821679636
     }
 }
 

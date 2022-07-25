@@ -8,7 +8,7 @@ export const getUploadFixturesArrayFromFolder =
     };
 
 export const getUploadFixture = (filePath: string): Cypress.FixtureData => {
-  return { filePath: filePath, encoding: "base64" };
+    return { filePath: filePath, encoding: "base64" };
 };
 
 /**
