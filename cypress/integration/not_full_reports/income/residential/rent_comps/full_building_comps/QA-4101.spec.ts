@@ -17,7 +17,7 @@ conditionalDescribe("Property Conditions tests", { tags: [ "@residential", "@ren
         Income._Residential.RentComps.BaseActions.changeToBuildingSearch()
             .clickAddRemoveBuildingCompByAddress(testData.compAddress)
             .clickEditBuildingCompButtonByAddress(testData.compAddress);
-        _NavigationSection.clickYesIfExist();
+        _NavigationSection.submitSaveChangesModal();
     });
 
     it(`[QA-4101] The 'Average' option is displayed for each property condition 

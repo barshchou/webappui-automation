@@ -19,7 +19,7 @@ conditionalDescribe("Base Itemized Unit Info table tests", { tags: [ "@residenti
         Income._Residential.RentComps.BaseActions.changeToBuildingSearch()
             .clickAddRemoveBuildingCompByAddress(testData.compAddress)
             .clickEditBuildingCompButtonByAddress(testData.compAddress);
-        _NavigationSection.clickYesIfExist();
+        _NavigationSection.submitSaveChangesModal();
         Income._Residential.RentComps.FullBuildingComps._UnitMix.openNavigationTab();
         cy.saveLocalStorage();
     });
