@@ -113,7 +113,7 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         return this;
     }
 
-    clickReportButton() {
+    clickReportButton(): NavigationSectionActions {
         navigationSectionPage.reportButton.click();
         return this;
     }
