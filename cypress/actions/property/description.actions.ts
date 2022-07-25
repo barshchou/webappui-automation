@@ -95,8 +95,6 @@ class DescriptionActions extends BaseActionsExt<typeof descriptionPage> {
         descriptionPage.effectiveAge.clear().type(value).should("have.value", value);
         return this;
     }
-
-    verifyGeneratedCommentary(, textToBe: string)
 }
 
 export default new DescriptionActions(descriptionPage);

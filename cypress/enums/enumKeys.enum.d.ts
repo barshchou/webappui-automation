@@ -43,3 +43,4 @@ export type ReimbursementColumnsId = keyof typeof Enums.REIMBURSEMENT_COLUMN_ID
 export type CalculationUnitsKeys = keyof typeof Enums.CALCULATION_UNITS
 export type CalculationType = keyof typeof Enums.CALCULATION_TYPE
 export type FileSelection = keyof typeof Enums.FILE_SELECTION_NAMES
+export type PropertyDiscussion = keyof typeof Enums.PROPERTY_DISCUSSION_NAMES

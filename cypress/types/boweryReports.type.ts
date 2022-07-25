@@ -218,4 +218,6 @@ export namespace BoweryReports {
     export type CalculationType = typeof Enums.CALCULATION_TYPE[KeyInfo.CalculationType]
 
     export type FileSelection = typeof Enums.FILE_SELECTION_NAMES[KeyInfo.FileSelection]
+
+    export type PropertyDiscussion = typeof Enums.PROPERTY_DISCUSSION_NAMES[KeyInfo.PropertyDiscussion]
 }

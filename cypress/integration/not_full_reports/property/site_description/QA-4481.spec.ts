@@ -20,6 +20,8 @@ conditionalDescribe(`[QA-4481] Check that generated text pulls in the first subm
             .enterMarketQuarter(testData.submarketAndMarketQuarter)
             .enterMarketYear(testData.submarketAndMarketYear);
 
+        Property._Market.checkUncheckMarketAnalysisUseCheckbox(testData.marketAnalysisUses[0], false);
+
         testData.marketAnalysisUses.forEach((use, index) => {
             Property._Market.checkUncheckMarketAnalysisUseCheckbox(use, true)
                 .enterMarket(testData.marketValues[index], use)
@@ -29,9 +31,9 @@ conditionalDescribe(`[QA-4481] Check that generated text pulls in the first subm
         cy.stepInfo(`3. Navigate to Property > Site Description and check that 
                     generated text pulls in the first submarket`);
         _NavigationSection.openSiteDescriptionInProperty();
-        Property._SiteDescription.verifyContainsValue
+        Property._SiteDescription.verifyGeneratedCommentary(testData.discussion, testData.commentary);
         
-        cy.stepInfo(`3. Export the report`);
+        cy.stepInfo(`4. Export the report`);
         _NavigationSection.openReviewAndExport();
         ReviewExport.generateDocxReport().waitForReportGenerated()
             .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
@@ -42,9 +44,13 @@ conditionalDescribe(`[QA-4481] Check that generated text pulls in the first subm
         cy.task("getFilePath", { _reportName: testData.reportCreationData.reportNumber, _docx_html: "html" }).then(file => {
             cy.log(<string>file);
 
-            cy.stepInfo(`4. Verify that nothing shows up in the export in the Addenda 
-                        after Comparable sales outline and before Qualifications sections.`);
+            cy.stepInfo(`5. Proceed to Site Description and verify that 
+                Location Description commentary has been exported correctly.`);
             cy.visit(<string>file);
+            cy.contains("Site Description").scrollIntoView().next("table").within(() => {
+                cy.get("tr").eq(0).find("td").eq(1).find("p")
+                    .should("have.text", testData.commentary);
+            }); 
         });
     });
 });
