@@ -38,6 +38,7 @@ describe(`[QA-4093-95] Verify if "Per Month" time period PSF Rent based on is se
                 .verifyRentPSFValueByRow(); 
             cy.reload();
         });
+        cy.saveLocalStorage();
     });
 
     it("[QA-4095-96]", () => {
