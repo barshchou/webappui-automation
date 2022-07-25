@@ -5,6 +5,7 @@ import "cypress-localstorage-commands";
 import mapKeysUtils from '../utils/mapKeys.utils';
 import { BoweryAutomation } from '../types/boweryAutomation.type';
 import { Alias } from '../utils/alias.utils';
+import { pathSpecData } from '../../utils/fixtures.utils';
 
 /**
  * You can use exporting of this map only in exceptional cases, as in QA-4136 spec
@@ -34,14 +35,16 @@ export const _mutateArrayInMap = (mapKey: string, value: any, message = "Unknown
  * Create new file and save value in parameter. 
  * To get the parameter use: `cy.readFile("./path/to/file").then(text => {cy.log(text);});`
  * @param value Value to save
+ * @param fileName Name of the file and its extension (example, `test.txt`)
  * @param filePath Custom file path
  */
-export const _saveDataInFile = (value: any, filePath = `./cypress/spec_data/${Cypress.spec.name}.txt`) => {
-    cy.writeFile(filePath, value);
+export const _saveDataInFile = (value: any, fileName: string, filePath = pathSpecData()) => {
+    cy.writeFile(filePath.concat(fileName), value);
     cy.log(`Saved value: ${value}`);
 };
 
 //#region plugin commands initialization
+
 addMatchImageSnapshotCommand({
     failureThreshold: 0.05, // threshold for entire image
     failureThresholdType: 'percent', // percent of image or number of pixels
@@ -53,6 +56,7 @@ addMatchImageSnapshotCommand({
 //#endregion
 
 //#region custom commands definition
+
 /**
  * If we set env variable CYPRESS_DEBUG=1 - pageLoadTimeout will be 3 minutes instead of 1.
  * Useful when some environments loads really slow.
@@ -227,4 +231,5 @@ Cypress.Commands.add("_mapGet", (_key: any) => {
 Cypress.Commands.add("logNode", (message: string) => {
     return cy.task("logNode", message);
 });
+
 //#endregion

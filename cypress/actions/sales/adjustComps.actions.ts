@@ -255,6 +255,62 @@ class AdjustCompsActions extends BaseActionsExt<typeof adjustCompsPage> {
         adjustCompsPage.getOtherAdjustmentColumnValue(value, index).should("have.text", value);
         return this;
     }
+
+    clickDiscussionsShowAllButton(): AdjustCompsActions {
+        adjustCompsPage.discussionsShowAllButton.click();
+        return this;
+    }
+
+    verifyConditionDiscussionCommentary(value: string): AdjustCompsActions {
+        adjustCompsPage.conditionDiscussionCommentary.should("include.text", value);
+        return this;
+    }
+
+    verifyDiscussionsFieldWithNameExists(name: string): AdjustCompsActions {
+        cy.contains("h6", name).should("exist");
+        return this;
+    }
+
+    enterMarketConditionAdjustment(value: string | number): AdjustCompsActions {
+        adjustCompsPage.marketConditionAdjustmentInput.type(`${value}`).should("have.value", value);
+        adjustCompsPage.applyMarketConditionAdjustmentButton.click();
+        return this;
+    }
+
+    verifyMarketConditionsTime(dateOfValue: Date, saleDate: Date, index = 0): AdjustCompsActions {
+        const diff = new Date(+saleDate).setHours(12) - new Date(+dateOfValue).setHours(12);
+        const daysDifference = Math.round(diff/8.64e7);
+        adjustCompsPage.marketConditionAdjustmentInput.invoke("val").then((val: number) => {
+            const marketConditionsTime = Math.round(Math.abs(daysDifference) / 365 * val);
+            adjustCompsPage.getMarketAdjustmentsRowCells("marketConditions").eq(index).should("have.value", `${marketConditionsTime}%`);
+        });
+        return this;
+    }
+
+    /**
+     * Count Price per Units. If in Sale Comparables Setup check `Per Residential Units` count like
+     * `Price per Units = Sale Price /  Residential Units`. If in Sale Comparables Setup check Per Total Units count like
+     * `Price per Units = Sale Price /  Residential Units +  Commercial Units`. Value is rounded down
+     * @param calculationUnit Name of Calculation Unit
+     * @param units Count Residential or/and Commercial units
+     * @returns `this`
+     */
+    verifyExpandMarketAdjustmentPricePerUnit(calculationUnit: BoweryReports.SalesAdjustmentGrid.CalculationUnits, units: number): AdjustCompsActions {
+        this.checkCalculationUnitsRadio(calculationUnit);
+        adjustCompsPage.getExpandMarketAdjustmentSubjectRow("Sale Price").invoke("text").then(salePrice => {
+            const salePriceNumber = getNumberFromDollarNumberWithCommas(salePrice);
+            const pricePerUnit = salePriceNumber / units;
+            const decimalPart = (pricePerUnit.toString().split(".")[1]);
+            cy.log("decimalPart.charAt(2)", decimalPart.charAt(2));
+            cy.log("test", Number(decimalPart.substring(0, 3)));
+            const pricePerUnitToBe = (decimalPart.charAt(2) === "5") ? 
+                `$${numberWithCommas(Math.round(pricePerUnit) + '.' + Number(decimalPart.substring(0, 2)))}`
+                :   `$${numberWithCommas(pricePerUnit.toFixed(2))}`;
+            adjustCompsPage.getExpandMarketAdjustmentSubjectRow("Price per Unit").should("have.text", pricePerUnitToBe);
+        });
+        return this;
+    }
+
 }
 
 export default new AdjustCompsActions(adjustCompsPage);

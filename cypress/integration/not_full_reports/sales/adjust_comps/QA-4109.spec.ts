@@ -3,6 +3,7 @@ import Sales from "../../../../actions/sales/sales.manager";
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import { ReviewExport } from "../../../../actions";
+import { pathSpecData } from "../../../../../utils/fixtures.utils";
 
 describe("Adjusted Price per Residential Unit in Sales Adjustment Grid is calculated with correct formula", 
     { tags: [ "@adjust_comps", "@sales", "@check_export" ] }, () => {
@@ -46,4 +47,5 @@ describe("Adjusted Price per Residential Unit in Sales Adjustment Grid is calcul
                     });
                 }); 
         });
+    });
     });
