@@ -32,7 +32,7 @@ describe("Dropdown 'Filters'- 'Sort by' section",
             testData.perSquareAndPerMonth[index].values.forEach(value => {
                 Income._CommercialManager.RentComps.clickEditButtonByRowNumber()
                     .checkUnitOfMeasureRadioButton(testData.radioButtonNames[index])
-                    .fillInRentCompFieldInput(testData.perSquareAndPerMonth[index].name, value)
+                    .fillInRentCompFieldInput(testData.perSquareAndPerMonth[index].name, value, true)
                     .chooseRentCompFieldDropdownOption(testData.sourceValue.name, testData.sourceValue.value)
                     .clickSubmitButton();
 
@@ -48,8 +48,8 @@ describe("Dropdown 'Filters'- 'Sort by' section",
         testData.monthlyAnnually.forEach((value, index) => {
             Income._CommercialManager.RentComps.clickEditButtonByRowNumber()
                 .checkUnitOfMeasureRadioButton(testData.radioButtonNames[index + 2])
-                .fillInRentCompFieldInput(value.baseRent, value.baseRentValues[index])
-                .fillInRentCompFieldInput(value.sf, value.baseRentValues[index])
+                .fillInRentCompFieldInput(value.baseRent, value.baseRentValues[index], true)
+                .fillInRentCompFieldInput(value.sf, value.baseRentValues[index], true)
                 .chooseRentCompFieldDropdownOption(testData.sourceValue.name, testData.sourceValue.value)
                 .clickSubmitButton();
 

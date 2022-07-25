@@ -39,7 +39,7 @@ describe("Rent is displayed on the same basis that is selected on In-Place rent 
          
         cy.stepInfo('5. Update units of measure and base unit rent for comps');
         for (let compIndex = 0; compIndex < testData.numberOfComparables; compIndex++){
-            Income._CommercialManager.RentComps.clickEditButtonByRowNumber(testData.compGroupName, compIndex)
+            Income._CommercialManager.RentComps.clickEditButtonByRowNumber(compIndex)
                 .checkUnitOfMeasureRadioButton(testData.unitsOfMeasure)
                 .fillInRentCompFieldInput(testData.rentCompFields[compIndex].name, testData.rentCompFields[compIndex].value, true)
                 .chooseRentCompFieldDropdownOption(testData.sourceOfInformation.name, testData.sourceOfInformation.value)

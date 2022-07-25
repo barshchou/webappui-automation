@@ -142,7 +142,7 @@ class CommercialRentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
     }
 
     verifyRentPerMonthCellPSFValue(group = "Unsorted", rowNumber = 0): CommercialRentCompsActions {
-        this.clickEditButtonByRowNumber(group, rowNumber);
+        this.clickEditButtonByRowNumber(rowNumber);
         const baseRent =  rentCompsPage.getRentCompInputField("baseRent").invoke("val");
         baseRent.then(baseRent => {
             const rentValue = getNumberFromDollarNumberWithCommas(baseRent);
@@ -154,7 +154,7 @@ class CommercialRentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
     }
 
     verifyRentPerMonthCellMonthlyOrAnnuallyValue(name: BoweryReports.UnitsOfMeasure = "monthly", group = "Unsorted", rowNumber = 0): CommercialRentCompsActions {
-        this.clickEditButtonByRowNumber(group, rowNumber);
+        this.clickEditButtonByRowNumber(rowNumber);
         const baseRent =  rentCompsPage.getRentCompInputField("baseRent").invoke("val");
         const squareFeet =  rentCompsPage.getRentCompInputField("squareFeet").invoke("val");
         baseRent.then(baseRent => {
