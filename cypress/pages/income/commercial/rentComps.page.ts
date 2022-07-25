@@ -49,7 +49,7 @@ class CommercialRentCompsPage extends BasePage {
     get leaseDateInputToVerify() { return cy.get("[data-qa=dateSigned-date-picker] input[type=hidden]"); }
 
     getEditButtonByRowNumberAndGroup(group = "Unsorted", rowNumber = 0) {
-        return cy.xpath(`//*[@data-qa='${group}-group-panel']//child::button[.='Edit']`).eq(rowNumber);
+        return cy.xpath(`//*[@data-qa='${group}-group-panel']//child::*[@data-testid="EditIcon"]`).eq(rowNumber);
     }
 
     getRentPerSFCellByRowNumberAndGroup(group = "Unsorted", rowNumber = 0) {
