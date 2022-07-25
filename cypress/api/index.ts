@@ -1,9 +1,15 @@
 /* eslint-disable no-console */
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import { agent as request } from "supertest";
 import io = require("socket.io-client");
 import { BoweryAutomation } from "../types/boweryAutomation.type";
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
+
+const throwErrorIfStatusNotOk = (response: AxiosResponse) => {
+    if (response.status != 200) {
+        throw new Error(`The request has failed, you've got ${response.status}` +
+            `status with text ${response.statusText}`);
+    }
+};
 
 export default {
     /**
@@ -15,16 +21,8 @@ export default {
             username:_username,
             password:_password
         });
-        // const response = await request(_envUrl)
-        //     .post('/user/login')
-        //     .send({
-        //         username:_username,
-        //         password:_password
-        //     })
-        //     .expect('Content-Type', /json/)
-        //     .expect(200);
-
-        return response;
+        throwErrorIfStatusNotOk(response);
+        return response.data;
     },
 
     /**
@@ -61,13 +59,15 @@ export default {
                 console.log(socketId);
 
                 try {
-                    await request(_envUrl)
-                        .post('/report')
-                        .set('Accept', 'application/json')
-                        .send(_payload)
-                        .set('Authorization', `Bearer ${_token}`)
-                        .set('SocketId', `${socketId}`)
-                        .expect(200);
+                    await axios.post(`${_envUrl}/report`, _payload, {
+                        headers: {
+                            "Accept": "application/json",
+                            "Authorization": `Bearer ${_token}`,
+                            "SocketId": `${socketId}`
+                        }
+                    }).then(response => {
+                        throwErrorIfStatusNotOk(response);
+                    });
 
                     res(socketId);
                 } catch (error) {
