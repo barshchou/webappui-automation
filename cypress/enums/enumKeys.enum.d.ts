@@ -42,6 +42,7 @@ export type ExpenseCardName = keyof typeof Enums.EXPENSES_CARD_NAMES
 export type ReimbursementColumnsId = keyof typeof Enums.REIMBURSEMENT_COLUMN_ID
 export type CalculationUnitsKeys = keyof typeof Enums.CALCULATION_UNITS
 export type CalculationType = keyof typeof Enums.CALCULATION_TYPE
+export type FileSelection = keyof typeof Enums.FILE_SELECTION_NAMES
 export type SalesAdjustmentGridDiscussionsKeys = keyof typeof Enums.SALES_ADJUSTMENT_GRID_DISCUSSIONS
 export type SalesAdjustmentGridRowsKeys = keyof typeof Enums.SALES_ADJUSTMENT_GRID_ROWS
 export type BasisSquareFootAnalysis = keyof typeof Enums.BASIS_SQUARE_FOOT_ANALYSIS
