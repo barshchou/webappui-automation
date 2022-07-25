@@ -20,6 +20,17 @@ conditionalDescribe(`[QA-4481] Check that generated text pulls in the first subm
             .enterMarketQuarter(testData.submarketAndMarketQuarter)
             .enterMarketYear(testData.submarketAndMarketYear);
 
+        testData.marketAnalysisUses.forEach((use, index) => {
+            Property._Market.checkUncheckMarketAnalysisUseCheckbox(use, true)
+                .enterMarket(testData.marketValues[index], use)
+                .enterSubmarket(testData.submarketValues[index], use);
+        });
+
+        cy.stepInfo(`3. Navigate to Property > Site Description and check that 
+                    generated text pulls in the first submarket`);
+        _NavigationSection.openSiteDescriptionInProperty();
+        Property._SiteDescription.verifyContainsValue
+        
         cy.stepInfo(`3. Export the report`);
         _NavigationSection.openReviewAndExport();
         ReviewExport.generateDocxReport().waitForReportGenerated()

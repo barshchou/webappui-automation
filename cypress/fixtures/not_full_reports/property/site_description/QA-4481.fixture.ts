@@ -24,10 +24,24 @@ const _retailMarket = "PA-Gettysburg";
 const _officeMarket = "PA-York";
 const _industrialMarket = "PA-York";
 
+const _marketValues: string[] = [
+    _multifamilyMarket,
+    _retailMarket,
+    _officeMarket,
+    _industrialMarket
+];
+
 const _multifamilySubmarket = "PA-Adams County";
 const _retailSubmarket = "PA-Adams County";
 const _officeSubmarket = "PA-York County";
 const _industrialSubmarket = "PA-York County";
+
+const _submarketValues: string[] = [
+    _multifamilySubmarket,
+    _retailSubmarket,
+    _officeSubmarket,
+    _industrialSubmarket
+];
 
 export default {
     reportCreationData: reportCreationFixture(),
@@ -38,12 +52,6 @@ export default {
     submarketAndMarketQuarter: _submarketAndMarketQuarter,
     submarketAndMarketYear: _submarketAndMarketYear,
     marketAnalysisUses: _marketAnalysisUses,
-    multifamilyMarket: _multifamilyMarket,
-    retailMarket: _retailMarket,
-    officeMarket: _officeMarket,
-    industrialMarket: _industrialMarket,
-    multifamilySubmarket: _multifamilySubmarket,
-    retailSubmarket: _retailSubmarket,
-    officeSubmarket: _officeSubmarket,
-    industrialSubmarket: _industrialSubmarket
+    marketValues: _marketValues,
+    submarketValues: _submarketValues
 };
