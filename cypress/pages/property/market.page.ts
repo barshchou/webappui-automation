@@ -55,6 +55,19 @@ class MarketPage extends BasePage{
     get neighborhoodDemographicFile() { return cy.get("[data-qa=file-selection-neighborhoodDemographicOverview-input] input"); }
 
     get rentStabilizationFile() { return cy.get("[data-qa=file-selection-summaryOfRentStabilizationLaws-input] input"); }
+
+    get uploadRentStabilizationFileButton() { return cy.get("[data-qa=file-selection-summaryOfRentStabilizationLaws-input] button"); }
+
+    get fileDropZone() { return cy.get("[data-qa=dropzone-container]"); }
+
+    getUploadFileButton(index = 0) { return cy.get("[data-qa=upload-btn]").eq(index); }
+
+    get insertFileButton() { return cy.get("[data-qa=insert-btn]"); }
+
+    getTrashCanButton(fileSelectionName: BoweryReports.FileSelection) {
+        return cy.xpath(`//div[@data-qa='file-${fileSelectionName}}-input']
+            /following::button[@variant='contained']`).eq(0);
+    }
 }
 
 export default new MarketPage();
