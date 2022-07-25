@@ -89,7 +89,8 @@ export const getPreviousQuarterFromQuarter = (quarter: string) => {
 
 export const getCurrentMonthName = (): string => {
     const date = new Date();
-    return date.toDateString();
+    let month = date.toLocaleString('default', { month: 'long' } );
+    return month;
 };
 
 export const isCorrectQuarter = (quarter) => {

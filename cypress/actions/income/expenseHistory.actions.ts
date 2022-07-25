@@ -132,16 +132,17 @@ class ExpenseHistoryActions extends BaseActionsExt<typeof expenseHistoryPage>{
     }
 
     enterExpenseMonth(month: string): ExpenseHistoryActions {
-        expenseHistoryPage.expenseMonth.clear().type(month);
+        expenseHistoryPage.expenseMonthDropdown.click();
+        expenseHistoryPage.expenseMonthDropdownValue(month).click();
         this.verifyExpenseMonth(month);
         return this;
     }
 
     verifyExpenseMonth(monthToBe: string, expensePeriodValue?: string): ExpenseHistoryActions {
         if (expensePeriodValue === "Projection" || expensePeriodValue === "Actual") {
-            expenseHistoryPage.expenseMonthProjection.should("be.disabled").and("have.value", monthToBe);
+            expenseHistoryPage.expenseMonthDropdown.should("be.disabled").and("have.value", monthToBe);
         } else {
-            expenseHistoryPage.expenseMonth.should("have.value", monthToBe);
+            expenseHistoryPage.expenseMonthDropdown.should("have.value", monthToBe);
         }
         return this;
     }

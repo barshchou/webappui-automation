@@ -55,7 +55,7 @@ export default {
   periodsMonth: [
     {
       expensePeriodType: "Actual T12",
-      month:getCurrentMonthName(),
+      month: getCurrentMonthName(),
       year: getYearFromDate(),
       insurance: 13000,
     },
