@@ -1,7 +1,7 @@
 import organizationUsersPage from "../../pages/organization/organizationUsers.page";
 import BaseActionsExt from "../base/base.actions.ext";
 
-class OrganizationUsersActions extends BaseActionsExt<typeof organizationUsersPage>{
+class OrganizationUsersActions extends BaseActionsExt<typeof organizationUsersPage> {
     deleteUser(fullName: string): OrganizationUsersActions {
         organizationUsersPage.getFullName(fullName).contains("Delete").click();
         organizationUsersPage.confirmDelete.click();

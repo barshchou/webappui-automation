@@ -7,20 +7,21 @@ import { createReport, deleteReport } from "../../../../../actions/base/baseTest
 describe("Verify the Monthly Rent Total is calculated correctly in the grid.", 
     { tags:[ "@income", "@commercial", "@in_place_rent_roll" ] }, () => {
 
-    before("Login, create report", () => {
-        createReport(testData.reportCreationData);
-    });
+        before("Login, create report", () => {
+            createReport(testData.reportCreationData);
+        });
 
-    it("Test body", () => {
-        NavigationSection.navigateToPropertySummary();
-        Property.Summary.enterNumberOfCommercialUnits(testData.general.numberOfUnits);
-        NavigationSection.navigateToCommercialUnits();
-        Property.CommercialUnits.enterListUnitSF(testData.general.squareFeetList, testData.general.numberOfUnits);
-        NavigationSection.navigateToCommercialInPlaceRentRoll();
-        Income.Commercial.InPlaceRentRoll.chooseListLeaseStatuses(testData.leaseStatusesList, testData.general.numberOfUnits)
-            .clickMonthlyBasisButton()
-            .enterListMonthlyRent(testData.leaseStatusesList, testData.general.monthlyRents)
-            .verifyMonthlyRentTotal(testData.leaseStatusesList, testData.general.monthlyRents);
-        deleteReport(testData.reportCreationData.reportNumber);
+        it("Test body", () => {
+            NavigationSection.navigateToPropertySummary();
+            Property.Summary.enterNumberOfCommercialUnits(testData.general.numberOfUnits);
+            NavigationSection.navigateToCommercialUnits();
+            Property.CommercialUnits.enterListUnitSF(testData.general.squareFeetList, testData.general.numberOfUnits);
+            NavigationSection.navigateToCommercialInPlaceRentRoll();
+            Income.Commercial.InPlaceRentRoll.chooseListLeaseStatuses(testData.leaseStatusesList, 
+                testData.general.numberOfUnits)
+                .clickMonthlyBasisButton()
+                .enterListMonthlyRent(testData.leaseStatusesList, testData.general.monthlyRents)
+                .verifyMonthlyRentTotal(testData.leaseStatusesList, testData.general.monthlyRents);
+            deleteReport(testData.reportCreationData.reportNumber);
+        });
     });
-});

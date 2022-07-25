@@ -5,17 +5,16 @@ import { createReport, deleteReport } from "../../../../actions/base/baseTest.ac
 
 describe("Sales Value Conclusion Discussion -> Appraiser Commentary", 
     { tags: [ "@sales", "@value_conclusion" ] }, () => {
-        
-    before("Login", () => {
-        createReport(testData.reportCreationData);
-    });
+        before("Login", () => {
+            createReport(testData.reportCreationData);
+        });
 
-    it("Test body", () => {
-        NavigationSection.navigateToSalesValueConclusion();
-        Sales.ValueConclusion.enterAdditionalCommentary(testData.commentary)
-            .clickSaveButton();
-        cy.reload();
-        Sales.ValueConclusion.verifyAdditionalCommentaryText(testData.commentary);
-        deleteReport(testData.reportCreationData.reportNumber);
+        it("Test body", () => {
+            NavigationSection.navigateToSalesValueConclusion();
+            Sales.ValueConclusion.enterAdditionalCommentary(testData.commentary)
+                .clickSaveButton();
+            cy.reload();
+            Sales.ValueConclusion.verifyAdditionalCommentaryText(testData.commentary);
+            deleteReport(testData.reportCreationData.reportNumber);
+        });
     });
-});

@@ -121,8 +121,9 @@ class CapRateCompsActions extends BaseActionsExt<typeof capRateCompsPage> {
         return this;
     }
 
-    fillAddedCompWithInfo(comparable: Readonly<{address: string, gba: number, type: string, isElevatored: boolean, numberOfUnits: number,
-        isListing: boolean, isInContract: boolean, saleDate: string, yearBuilt: number, pricePerSF: string, capRate: string,
+    fillAddedCompWithInfo(comparable: Readonly<{address: string, gba: number, type: string, 
+        isElevatored: boolean, numberOfUnits: number, isListing: boolean, isInContract: boolean, 
+        saleDate: string, yearBuilt: number, pricePerSF: string, capRate: string,
         sourceName: string, sourceUrl: string}>, index: number): CapRateCompsActions {
         this.verifyCompAddressByRow(comparable.address, index)
             .enterCompGBAByRow(comparable.gba, index)
@@ -157,12 +158,13 @@ class CapRateCompsActions extends BaseActionsExt<typeof capRateCompsPage> {
     }
 
     private getCapRateCommentary(minRate: number, maxRate: number, avgRate: number | string): string {
-        return "We analyzed sales of comparable multifamily " +
-            `assets within the subject’s periphery and they exhibit overall capitalization rates from ${minRate}% to ${maxRate}%` +
-            ` with an average of ${avgRate}%. We have supplemented our capitalization rate comparables with additional ` +
-            "comparables not used in our sales comparison approach. The additional rates are good indicators for capitalization " +
-            "rates for the subject and are recent, however, there are differences regarding the comparables which do not " +
-            "justify utilizing the comparable in the sales comparison approach (i.e. location, size, etc.).";
+        return `We analyzed sales of comparable multifamily assets within the subject’s periphery ` + 
+        `and they exhibit overall capitalization rates from ${minRate}% to ${maxRate}%` +
+        ` with an average of ${avgRate}%. We have supplemented our capitalization rate comparables with additional ` +
+        `comparables not used in our sales comparison approach. The additional rates are good ` + 
+        `indicators for capitalization rates for the subject and are recent, however, there are ` + 
+        `differences regarding the comparables which do not justify utilizing the comparable in ` + 
+        `the sales comparison approach (i.e. location, size, etc.).`;
     }
 
     chooseCompIncomePotential(value: string): CapRateCompsActions {

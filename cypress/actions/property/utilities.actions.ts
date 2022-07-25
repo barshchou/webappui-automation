@@ -1,7 +1,7 @@
 import utilitiesPage from "../../pages/property/utilities.page";
 import BaseActionsExt from "../base/base.actions.ext";
 
-class UtilitiesActions extends BaseActionsExt<typeof utilitiesPage>{
+class UtilitiesActions extends BaseActionsExt<typeof utilitiesPage> {
     checkHeatingSystem(): UtilitiesActions {
         utilitiesPage.heatingSystemCheckbox.check().should("have.value", "true");
         return this;
@@ -19,7 +19,8 @@ class UtilitiesActions extends BaseActionsExt<typeof utilitiesPage>{
         return this;
     }
 
-    addHeatingSystemParameters(heatingSystemData: Readonly<{type: string, location: string, systemNumber: number}>): UtilitiesActions {
+    addHeatingSystemParameters(heatingSystemData: Readonly<{type: string, 
+        location: string, systemNumber: number}>): UtilitiesActions {
         this.selectHeatingSystemType(heatingSystemData.type, heatingSystemData.systemNumber)
             .selectHeatingSystemLocation(heatingSystemData.location, heatingSystemData.systemNumber);
         return this;
@@ -42,7 +43,8 @@ class UtilitiesActions extends BaseActionsExt<typeof utilitiesPage>{
         return this;
     }
 
-    addCoolingSystemParameters(coolingData: Readonly<{type: string, location: string, systemNumber: number}>): UtilitiesActions {
+    addCoolingSystemParameters(coolingData: Readonly<{type: string, 
+        location: string, systemNumber: number}>): UtilitiesActions {
         this.selectCoolingSystemType(coolingData.type, coolingData.systemNumber)
             .selectCoolingSystemLocation(coolingData.location, coolingData.systemNumber);
         return this;
@@ -126,7 +128,8 @@ class UtilitiesActions extends BaseActionsExt<typeof utilitiesPage>{
         return this;
     }
 
-    addHotWaterSystemParameters(hotWaterSystemData: Readonly<{type: string, location: string, systemNumber: number}>): UtilitiesActions {
+    addHotWaterSystemParameters(hotWaterSystemData: Readonly<{type: string, 
+        location: string, systemNumber: number}>): UtilitiesActions {
         this.selectHotWaterSystemTypeBySystemNumber(hotWaterSystemData.type, hotWaterSystemData.systemNumber)
             .selectHotWaterSystemLocationBySystemNumber(hotWaterSystemData.location, hotWaterSystemData.systemNumber);
         return this;

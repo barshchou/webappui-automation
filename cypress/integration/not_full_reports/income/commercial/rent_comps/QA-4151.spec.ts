@@ -6,15 +6,15 @@ import { createReport, deleteReport } from "../../../../../actions/base/baseTest
 describe("Check that Commercial Rent Comps map has Filters dropdown", 
     { tags:[ "@income", "@commercial", "@rent_comps" ] }, () => {
         
-    before("Login, create report", () => {
-        createReport(testData.reportCreationData);
-    });
+        before("Login, create report", () => {
+            createReport(testData.reportCreationData);
+        });
 
-    it("Test body", () => {
-        NavigationSection.navigateToCommercialRentComps();
-        Income.Commercial.RentComps.openMap()
-            .verifyProgressBarNotExist()
-            .verifyFiltersDropdownExist();
-        deleteReport(testData.reportCreationData.reportNumber);
+        it("Test body", () => {
+            NavigationSection.navigateToCommercialRentComps();
+            Income.Commercial.RentComps.openMap()
+                .verifyProgressBarNotExist()
+                .verifyFiltersDropdownExist();
+            deleteReport(testData.reportCreationData.reportNumber);
+        });
     });
-});

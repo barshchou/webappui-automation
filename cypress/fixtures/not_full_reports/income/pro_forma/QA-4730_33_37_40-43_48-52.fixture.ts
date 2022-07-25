@@ -1,9 +1,8 @@
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 import Enums from "../../../../enums/enums";
 import { BoweryReports } from "../../../../types/boweryReports.type";
-import { BoweryAutomation } from "../../../../types/boweryAutomation.type";
 
-const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("4730_33_37_40-43_48-52", {
+const _reportCreationData = ReportDataCreator.getReportData("4730_33_37_40-43_48-52", {
     incomeValue: Enums.INCOME_TYPE.both
 });
 
@@ -71,7 +70,7 @@ export default {
     expenseType: _expenseType,
     knownInformation: _knownInformation,
     monthlyReimbursement: _monthlyReimbursement,
-    expenceTypeCellName: _expenseTypeCellName,
+    expenseTypeCellName: _expenseTypeCellName,
     reimbursementType: _reimbursementType,
     residentialMonthlyRent: _residentialMonthlyRent,
     storageUnits: _storageUnits,

@@ -11,9 +11,10 @@ describe("Verify area analysis pull from dropbox", { tags: [ "@property", "@mark
         createReport(testData.reportCreationData);
     });
 
-    it(`[QA-4259] Verify if there is no area analysis to be pulled in for the input quarter/year - error that the 
-             file does not exist appears
-             [QA-4258] Check if there is no area analysis pulled in, the most recent quarter/year is pulled from DropBox`, () => {
+    it(`[QA-4259] Verify if there is no area analysis to be pulled in for the input quarter/year - 
+    error that the file does not exist appears
+    [QA-4258] Check if there is no area analysis pulled in, the most recent 
+    quarter/year is pulled from DropBox`, () => {
 
         cy.stepInfo("1. Navigate to Property -> Market");
         _NavigationSection.navigateToPropertyMarket();

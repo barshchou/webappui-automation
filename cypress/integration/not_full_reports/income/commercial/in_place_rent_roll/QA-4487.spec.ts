@@ -5,7 +5,7 @@ import { createReport, deleteReport } from "../../../../../actions/base/baseTest
 
 describe(`Verify the suggested text dropdown in the new narrative component added through '=' 
                 for the 'Unchanged Renovation' option`,
-        { tags:[ "@income", "@commercial", "@in_place_rent_roll" ] }, () => {
+{ tags:[ "@income", "@commercial", "@in_place_rent_roll" ] }, () => {
             
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
@@ -16,10 +16,10 @@ describe(`Verify the suggested text dropdown in the new narrative component adde
         _NavigationSection.navigateToCommercialInPlaceRentRoll()
             .verifyProgressBarNotExist();
 
-        cy.stepInfo("2. Edit discussion and enter '=un' value; click 'Unchanged Rennovation' suggested value");
+        cy.stepInfo("2. Edit discussion and enter '=un' value; click 'Unchanged Renovation' suggested value");
         Income._CommercialManager.InPlaceRentRoll.clickEditDiscussionButton()
             .editDiscussionTextArea(testData.value)
-            .clickNarrativeSuggestions(testData.unchangeRennovation);
+            .clickNarrativeSuggestions(testData.unchangeRenovation);
 
         cy.stepInfo("3. Verify that the following text appears.");
         Income._CommercialManager.InPlaceRentRoll.verifyCommentaryContainsText(testData.verifyAreaValue);

@@ -2,7 +2,7 @@ import organizationEditUserPage from "../../pages/organization/organizationEditU
 import { BoweryAutomation } from "../../types/boweryAutomation.type";
 import BaseActionsExt from "../base/base.actions.ext";
 
-class OrganizationEditUserActions extends BaseActionsExt<typeof organizationEditUserPage>{
+class OrganizationEditUserActions extends BaseActionsExt<typeof organizationEditUserPage> {
     
     editUserLastName(lastName: string): OrganizationEditUserActions {
         organizationEditUserPage.lastNameTextField.clear().type(lastName).should('have.value', lastName);
@@ -14,7 +14,8 @@ class OrganizationEditUserActions extends BaseActionsExt<typeof organizationEdit
         return this;
     }
 
-    editUserRole(initialRole: BoweryAutomation.OrganizationRoles[], roles: BoweryAutomation.OrganizationRoles[]): OrganizationEditUserActions {
+    editUserRole(initialRole: BoweryAutomation.OrganizationRoles[], 
+        roles: BoweryAutomation.OrganizationRoles[]): OrganizationEditUserActions {
         organizationEditUserPage.roleNameField.click();
         this.rolesCleanUp(initialRole);
         roles.forEach(role => {

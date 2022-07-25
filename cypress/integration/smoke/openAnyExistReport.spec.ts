@@ -8,19 +8,19 @@ describe("Open any existing report and open any page", { tags: [ "@smoke" ] }, (
 
     it("Test body", () => {
 
-       cy.loginByApi(Cypress.config().baseUrl, Cypress.env("USERNAME"), Cypress.env("PASSWORD"));
+        cy.loginByApi(Cypress.config().baseUrl, Cypress.env("USERNAME"), Cypress.env("PASSWORD"));
 
-       salesInterceptions();
-       cy.visit("/");
+        salesInterceptions();
+        cy.visit("/");
 
-       Base._HomePage.clickAllReportsTab()
-           .verifyProgressBarNotExist()
-           .enterReportNumberToSearch(reportNumber)
-           .openReportByName(reportNumber)
-           .verifyProgressBarNotExist();
-       Base._NavigationSection.navigateToFindComps()
-           .verifyProgressBarNotExist();
-       Sales._FindComps.Page.pageTitle.should("have.text", _SalesTitles.FIND_COMPS);
-       Sales._FindComps.Page.createCompButton.should("exist");
+        Base._HomePage.clickAllReportsTab()
+            .verifyProgressBarNotExist()
+            .enterReportNumberToSearch(reportNumber)
+            .openReportByName(reportNumber)
+            .verifyProgressBarNotExist();
+        Base._NavigationSection.navigateToFindComps()
+            .verifyProgressBarNotExist();
+        Sales._FindComps.Page.pageTitle.should("have.text", _SalesTitles.FIND_COMPS);
+        Sales._FindComps.Page.createCompButton.should("exist");
     });
 });

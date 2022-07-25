@@ -15,7 +15,7 @@ describe("Open any existing report, generate and open in XML format", { tags: [ 
         Base._NavigationSection.openReviewAndExport(false)
             .verifyProgressBarNotExist();
         ReviewExport.verifyXMLReportName(testData.reportCreationData.reportNumber)
-        .verifyXMLReportOpens(testData.reportCreationData.reportNumber);
+            .verifyXMLReportOpens(testData.reportCreationData.reportNumber);
     });
 
     it("Create new report for next tests", () => {
