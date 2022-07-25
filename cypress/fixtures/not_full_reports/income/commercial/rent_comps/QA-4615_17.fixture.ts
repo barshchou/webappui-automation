@@ -31,7 +31,6 @@ const _verifyDeleteValues = [
 ];
 
 export default {
-    address: "154 Franklin Street",
     fieldName: "otherUse",
     reportCreationData: _reportCreationData,
     useRentCompField: _useRentCompField,

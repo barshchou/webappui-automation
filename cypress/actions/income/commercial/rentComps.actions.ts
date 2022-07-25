@@ -183,8 +183,8 @@ class CommercialRentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
         return this;
     }
 
-    clickEditButtonByRowNumber(group = "Unsorted", rowNumber = 0): CommercialRentCompsActions {
-        rentCompsPage.getEditButtonByRowNumberAndGroup(group, rowNumber).click();
+    clickEditButtonByRowNumber (rowNumber = 0): CommercialRentCompsActions {
+        rentCompsPage.getEditCompButton(rowNumber).click();
         return this;
     }
 
