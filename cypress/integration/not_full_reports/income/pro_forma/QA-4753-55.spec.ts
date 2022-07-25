@@ -1,8 +1,8 @@
-import { numberWithCommas } from './../../../../../utils/numbers.utils';
+import { numberWithCommas } from '../../../../../utils/numbers.utils';
 import testData from "../../../../fixtures/not_full_reports/income/pro_forma/QA-4753-55.fixture";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
-import { Property } from '../../../../actions/index';
+import { Property } from '../../../../actions';
 import { Income } from "../../../../actions";
 import proFormaTypes from "../../../../enums/proFormaTypes.enum";
 import Enums from "../../../../enums/income/incomeTypesCellNames.enum";
@@ -38,8 +38,8 @@ describe("Pro Forma page table Effective Gross Income validation",
         _NavigationSection.clickCommercialReimbursementSummaryButton()
             .clickYesIfExist();
         Income._CommercialManager.ReimbursementSummary.addNewCommercialReimbursement(
-            testData.expenseType, testData.expenceTypeCellName, testData.reimbursementType, testData.knownInformation)
-            .fillReimbursements(testData.monthlyReimbursement)
+            testData.expenseType, testData.expenseTypeCellName, testData.reimbursementType, testData.knownInformation)
+                .fillReimbursements(testData.monthlyReimbursement, testData.columnsId)
             .fillVCLossByRow(testData.reimbursementVcLoss);
 
         cy.stepInfo(`6. Go to Property → Amenities, check Parking checkbox and fill in the number of Parking Spaces, 

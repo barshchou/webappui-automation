@@ -71,13 +71,13 @@ describe("[QA-4576][QA-4578] Verify the display of the Stabilized Rent Roll page
                 searchNewCompByAddress(testData.comparableFirst.address);
         testData.rentCompFields.forEach(field => {
             if(field.type == "input") {
-                Income._CommercialManager.RentComps.fillInRentCompFieldInput(field.name, field.value);
+                Income._CommercialManager.RentComps.fillInRentCompFieldInput(field.name, field.value, true);
             } else {
                 Income._CommercialManager.RentComps.chooseRentCompFieldDropdownOption(field.name, field.value);
             }
         });
         Income._CommercialManager.RentComps.enterLeaseDate(testData.leaseDate)
-            .checkUnitOfMeasureRadioButton(testData.unitMeasureMontly)
+            .checkUnitOfMeasureRadioButton(testData.unitMeasureMonthly)
             .clickSubmitButton();
 
         cy.stepInfo(`Drag all comps into created group`);
@@ -86,8 +86,8 @@ describe("[QA-4576][QA-4578] Verify the display of the Stabilized Rent Roll page
          */
         Income._CommercialManager.RentComps.dragAllCommercialUnitsIntoGroup(testData.compGroup);
 
-        cy.stepInfo(`Navigate to Reconcialltion and add market reconcillation`);
-        _NavigationSection.clickRentReconcillationButton()
+        cy.stepInfo(`Navigate to Reconciliation and add market reconciliation`);
+        _NavigationSection.clickRentReconciliationButton()
             .clickYesIfExist();
         Income._CommercialManager.RentReconciliation.addMarketRentConclusion(testData.marketRentConclusion);
 

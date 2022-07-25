@@ -23,6 +23,13 @@ export default class BasePage {
         return cy.get("[aria-label=close]");
     }
 
+    /**
+     * Same as `CloseIcon` but inside shadow-dom
+     */
+    get CloseIconShadowDom(){
+        return cy.get('[aria-label="Close"]', { includeShadowDom:true });
+    }
+
     get formYesRevertBtn() {
         return cy.xpath("//*[contains(@role, 'dialog')]/descendant::*[contains(text(), 'Yes, revert')]");
     }
@@ -32,6 +39,10 @@ export default class BasePage {
     }
 
     get modalWindow() {return cy.get("[role='dialog']");}
+
+    get selectorDraggableElement(){
+        return '[data-react-beautiful-dnd-drag-handle="0"]';
+    } 
 
     formEditBtn(index = 0) {
         return cy.xpath('//*[@data-icon="pencil"]//ancestor::button')
@@ -50,6 +61,11 @@ export default class BasePage {
 
     formCancelButton(index = 0) {
         return cy.xpath("//button[.='Cancel']")
+            .eq((index !== 0) ? index : 0);
+    }
+
+    formAddButton(index = 0) {
+        return cy.xpath("//button[.='Add']")
             .eq((index !== 0) ? index : 0);
     }
 

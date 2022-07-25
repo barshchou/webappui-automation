@@ -1,4 +1,3 @@
-/// <reference types="cypress-grep" />
 import testData from "../../../../fixtures/not_full_reports/income/expense_forecast/QA-4942.fixture";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
@@ -34,11 +33,13 @@ describe("Comparable Min, Max, Avg values for Fuel Per SF are correctly calculat
         Income.ExpenseForecast.Actions.verifyForecastItemCompMin(testData.fuelItem, testData.comparables)
             .verifyForecastItemCompAverage(testData.fuelItem, testData.comparables)
             .verifyForecastItemCompMax(testData.fuelItem, testData.comparables)
-            .hideExpenseForecastHeader();
+            .hideHeader()
+            .clickSaveButton()
+            .verifyProgressBarNotExist();
 
         cy.stepInfo("4. Check Comp Min, Comp Max and Comp Avg values for Fuel card. They should be correctly displayed on a slidebar");
         Income.ExpenseForecast.Actions.matchElementSnapshot(
-            Income.ExpenseForecast.Page.fuelCard, testData.fuelCardSnapshotName, { padding: [ 10, 100 ] });
+            Income.ExpenseForecast.Page.fuelCard, testData.fuelCardSnapshotName, { padding: [ 0, 100 ] });
         deleteReport(testData.reportCreationData.reportNumber);
     });
 });

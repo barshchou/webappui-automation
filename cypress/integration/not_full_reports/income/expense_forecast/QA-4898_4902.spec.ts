@@ -56,15 +56,16 @@ describe("Historical expense Water & Sewer Per SF/Unit is correctly calculated a
             .verifyForecastItemByExpensePeriodType(testData.t12WaterAndSewerItem, testData.buildingDescription, "Actual T12")
             .verifyForecastItemByExpensePeriodType(testData.historicalWaterAndSewerItem, testData.buildingDescription, "Annualized Historical")
             .verifyForecastItemByExpensePeriodType(testData.ownerProjectionWaterAndSewerItem, testData.buildingDescription, "Owner's Projection")
-            .hideExpenseForecastHeader()
-            .clickSaveButton();
+            .hideHeader()
+            .clickSaveButton()
+            .verifyProgressBarNotExist();
 
         cy.stepInfo("4.2 Check historical expenses values for Water & Sewer card. They should be correctly displayed on slidebars");
 
         Income._ExpenseForecastActions.Actions.matchElementSnapshot(
             Income._ExpenseForecastActions.Page.forecastItemCard(
                 Income._ExpenseForecastActions.getItemNameForAverage(
-                    testData.actualWaterAndSewerItem.name)), testData.waterAndSewerPerSfCardSnapshotName, { padding: [ 10, 100 ] });
+                    testData.actualWaterAndSewerItem.name)), testData.waterAndSewerPerSfCardSnapshotName, { padding: [ 0, 100 ] });
         
     });
 
@@ -82,15 +83,16 @@ describe("Historical expense Water & Sewer Per SF/Unit is correctly calculated a
             .verifyForecastItemByExpensePeriodType(testData.t12WaterAndSewerItem, testData.buildingDescription, "Actual T12")
             .verifyForecastItemByExpensePeriodType(testData.historicalWaterAndSewerItem, testData.buildingDescription, "Annualized Historical")
             .verifyForecastItemByExpensePeriodType(testData.ownerProjectionWaterAndSewerItem, testData.buildingDescription, "Owner's Projection")
-            .hideExpenseForecastHeader()
-            .clickSaveButton();
+            .hideHeader()
+            .clickSaveButton()
+            .verifyProgressBarNotExist();
 
         cy.stepInfo("4.2 Check historical expenses values for Water & Sewer card. They should be correctly displayed on slidebars");
 
         Income._ExpenseForecastActions.Actions.matchElementSnapshot(
             Income._ExpenseForecastActions.Page.forecastItemCard(
                 Income._ExpenseForecastActions.getItemNameForAverage(
-                    testData.actualWaterAndSewerItem.name)), testData.waterAndSewerPerUnitCardSnapshotName, { padding: [ 10, 100 ] });
+                    testData.actualWaterAndSewerItem.name)), testData.waterAndSewerPerUnitCardSnapshotName, { padding: [ 0, 100 ] });
         
         deleteReport(testData.reportCreationData.reportNumber);
 

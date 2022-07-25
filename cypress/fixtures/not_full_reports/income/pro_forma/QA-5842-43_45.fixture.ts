@@ -6,7 +6,7 @@ import { BoweryAutomation } from "../../../../types/boweryAutomation.type";
 const _grossBuildingArea = 5000;
 const _numberOfCommercialUnits = 3;
 const _numberOfResidentialUnits = 5;
-const _name = Enums.EXPENSE_CELL.miscelaneous;
+const _name = Enums.EXPENSE_CELL.miscellaneous;
 const _basis = "sf" as BoweryReports.UnitSF;
 const _projection = 335.44;
 const _forecast = 44.01;

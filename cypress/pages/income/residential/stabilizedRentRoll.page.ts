@@ -2,12 +2,14 @@ import ResidentialRentRollSharedPage from "../../shared_components/residentialRe
 
 class StabilizedRentRollPage extends ResidentialRentRollSharedPage{
 
-    getSummaryTableUnitByType(type) {return cy.xpath(`//*[@data-qa='unit-group-name'][.='${type}']`);}
+    getSummaryTableUnitByType(type: string) {return cy.xpath(`//*[@data-qa='unit-group-name'][.='${type}']`);}
 
-    getSummaryTableRentConclusionUnit(unitType) {
+    getSummaryTableRentConclusionUnit(unitType: string) {
         return cy.xpath(`//*[@data-qa='unit-group-name'][.='${unitType}']` +
             "//following-sibling::td[@data-qa='unit-group-market-rent-conclusion']");
     }
+    
+    getLabelInGridTable(label: string) {return cy.xpath(`//*[@data-qa='residential-rent-roll-table']//th[contains(text(), '${label}')]`);}
 
     get monthlyRentCellsInputs() {return cy.get("[data-qa=rent-cell] input:not([type=hidden])");}
 

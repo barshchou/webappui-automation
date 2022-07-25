@@ -56,15 +56,16 @@ describe("Historical expense Insurance Per SF is correctly calculated and displa
             .verifyForecastItemByExpensePeriodType(testData.t12InsuranceItem, testData.buildingDescription, "Actual T12")
             .verifyForecastItemByExpensePeriodType(testData.historicalInsuranceItem, testData.buildingDescription, "Annualized Historical")
             .verifyForecastItemByExpensePeriodType(testData.ownerProjectionInsuranceItem, testData.buildingDescription, "Owner's Projection")
-            .hideExpenseForecastHeader()
-            .clickSaveButton();
+            .hideHeader()
+            .clickSaveButton()
+            .verifyProgressBarNotExist();
 
         cy.stepInfo("4.2 Check historical expenses values for Insurance card. They should be correctly displayed on slidebars");
 
         Income._ExpenseForecastActions.Actions.matchElementSnapshot(
             Income._ExpenseForecastActions.Page.forecastItemCard(
                 Income._ExpenseForecastActions.getItemNameForAverage(
-                    testData.actualInsuranceItem.name)), testData.insurancePerSfCardSnapshotName, { padding: [ 10, 100 ] });
+                    testData.actualInsuranceItem.name)), testData.insurancePerSfCardSnapshotName, { padding: [ 0, 100 ] });
                     
         deleteReport(testData.reportCreationData.reportNumber);
     });

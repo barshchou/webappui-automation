@@ -1,7 +1,9 @@
 import BasePage from "./base.page";
 
 class NavigationSection extends BasePage {
-    get reportInfoButton() { return cy.get('[id="report-information"]');}
+    get reportInfoButton() { return cy.get('#report-information');}
+
+    get reportAppraiserButton() { return cy.get('#appraisers'); }
 
     get incomeApproachButton() { return cy.get("#income-approach svg"); }
 
@@ -28,6 +30,8 @@ class NavigationSection extends BasePage {
     get summaryButton() { return cy.get("#property-summary"); }
 
     get marketButton() { return cy.get("#property-market"); }
+
+    get propertyDescriptionButton() { return cy.get("#general-property-description"); }
 
     get clientButton() { return cy.get("#client"); }
 
@@ -95,11 +99,13 @@ class NavigationSection extends BasePage {
 
     get menuItemsProfileOrganization() {return cy.get("[role=menu] > li");}
 
-    get comercialReimbursementButton() {return cy.get("#commercial-reimbursement-summary");}
+    get commercialReimbursementButton() {return cy.get("#commercial-reimbursement-summary");}
 
     get residentialStabilizedRentRoll() {return cy.get("#residential-projected-rent-roll");}
 
-    get commercialRentReconcillationButton() {return cy.get(`#commercial-rent-reconciliation`);}
+    get commercialRentReconciliationButton() {return cy.get(`#commercial-rent-reconciliation`);}
+
+    get certification() {return cy.get('#certification');}
 }
 
 export default new NavigationSection();

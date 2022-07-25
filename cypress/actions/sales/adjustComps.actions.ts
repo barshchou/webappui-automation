@@ -4,10 +4,20 @@ import {
     numberWithCommas
 } from "../../../utils/numbers.utils";
 import BaseActionsExt from "../base/base.actions.ext";
+import { BoweryReports } from "../../types/boweryReports.type";
+import { _saveDataInFile } from "../../support/commands";
+import Enums from "../../enums/enums";
 
 class AdjustCompsActions extends BaseActionsExt<typeof adjustCompsPage> {
+    /**
+     * Checks whether name string in cell Cumulative Price Per *basis* is bold   
+     */
+    checkCumulativePriceName(basis: BoweryReports.SalesAdjustmentGrid.CumulativePrice) {
+        this.Page.cellCumulativePriceName(basis).should("have.css", "font-weight", "500");
+        return this;
+    }
 
-    checkCalculationUnitsRadio(value: string): AdjustCompsActions {
+    checkCalculationUnitsRadio(value: BoweryReports.SalesAdjustmentGrid.CalculationUnits = Enums.CALCULATION_UNITS.perResidentialUnits): AdjustCompsActions {
         adjustCompsPage.calculationUnitsRadio.check(value).should("be.checked");
         return this;
     }
@@ -56,6 +66,19 @@ class AdjustCompsActions extends BaseActionsExt<typeof adjustCompsPage> {
     deleteOtherAdjustmentRow(name: string, index= 0): AdjustCompsActions {
         adjustCompsPage.getAdjustmentDeleteButton(name).eq(index).click();
         this.verifyRowWithNameNotExists(name);
+        return this;
+    }
+
+    enterLocationAdjustmentByName(adjustmentName: string, value: number, index = 0): AdjustCompsActions {
+        adjustCompsPage.getLocationAdjustmentsRowCells(adjustmentName).eq(index).scrollIntoView().clear()
+            .type(`${value}{del}`).should("have.value", `${value}%`);
+        return this;
+    }
+
+    enterLocationAdjustmentGroup(adjustmentName: string[], value: number[], index = 0): AdjustCompsActions {
+        adjustmentName.forEach((adjustment, i) => {
+            this.enterLocationAdjustmentByName(adjustment, value[i], index);
+        });
         return this;
     }
 
@@ -113,12 +136,12 @@ class AdjustCompsActions extends BaseActionsExt<typeof adjustCompsPage> {
     }
 
     verifyTrendedPriceByColumn(value: string, index = 0): AdjustCompsActions {
-        adjustCompsPage.cumulativePriceCells.eq(index).should("have.text", value);
+        adjustCompsPage.cellCumulativePriceValue.eq(index).should("have.text", value);
         return this;
     }
 
     verifyAdjustedPriceByColumn(index = 0): AdjustCompsActions {
-        adjustCompsPage.cumulativePriceCells.eq(index).invoke("text").then(trendedText => {
+        adjustCompsPage.cellCumulativePriceValue.eq(index).invoke("text").then(trendedText => {
             const trendedNumber = getNumberFromDollarNumberWithCommas(trendedText);
             adjustCompsPage.netPropertyAdjustmentsCells.eq(index).invoke("text").then(netAdjText => {
                 const netAdjNumber = Number(netAdjText.replace("%", ""));
@@ -132,6 +155,16 @@ class AdjustCompsActions extends BaseActionsExt<typeof adjustCompsPage> {
                 }
                 adjustCompsPage.adjustedPriceCells.eq(index).should("have.text", adjustedPriceText);
             });
+        });
+        return this;
+    }
+
+    verifyNetMarketAdjustmentsByCompIndex(index = 0): AdjustCompsActions {
+        adjustCompsPage.getAllAdjustmentCellsByCompIndex(index).then(cells => {
+            const adjustmentsValues = Array.from(cells).map(cell => cell.getAttribute("value"))
+                .map(cellText => Number(cellText.replace("%", "")));
+            const netPropAdjustmentsToBe = adjustmentsValues.reduce((sum, prevValue) => sum + prevValue, 0);
+            adjustCompsPage.marketAdjustmentsCells.eq(index).should("have.text", `${netPropAdjustmentsToBe}%`);
         });
         return this;
     }
@@ -157,8 +190,9 @@ class AdjustCompsActions extends BaseActionsExt<typeof adjustCompsPage> {
              } else {
                  adjustedTrendedPriceText = `$${numberWithCommas(pricePerBasisNumber.toFixed(2))}`;
              }
-             adjustCompsPage.cumulativePriceCells.eq(index).should("have.text", adjustedTrendedPriceText);
-           
+             cy.log("Cumulative Price Per Unit is: " + adjustedTrendedPriceText);
+             _saveDataInFile(`$${numberWithCommas(Math.round(pricePerBasisNumber))}`, "pricePerBasisNumber.txt");
+             adjustCompsPage.cellCumulativePriceValue.eq(index).should("have.text", adjustedTrendedPriceText);
         });
             
         return this;
@@ -170,6 +204,16 @@ class AdjustCompsActions extends BaseActionsExt<typeof adjustCompsPage> {
                 .map(cellText => Number(cellText.replace("%", "")));
             const netPropAdjustmentsToBe = adjustmentsValues.reduce((sum, prevValue) => sum + prevValue, 0);
             adjustCompsPage.netPropertyAdjustmentsCells.eq(index).should("have.text", `${netPropAdjustmentsToBe}%`);
+        });
+        return this;
+    }
+
+    verifyTotalLocationAdjustmentsByCompIndex(index = 0): AdjustCompsActions {
+        adjustCompsPage.getAllLocationAdjustmentCellsByCompIndex(index).then(cells => {
+            const adjustmentsValues = Array.from(cells).map(cell => cell.getAttribute("value"))
+                .map(cellText => Number(cellText.replace("%", "")));
+            const netPropAdjustmentsToBe = adjustmentsValues.reduce((sum, prevValue) => sum + prevValue, 0);
+            adjustCompsPage.totalLocationAdjustmentsCells.eq(index).should("have.text", `${netPropAdjustmentsToBe}%`);
         });
         return this;
     }
@@ -198,6 +242,72 @@ class AdjustCompsActions extends BaseActionsExt<typeof adjustCompsPage> {
         adjustCompsPage.addCustomUtilitiesAdjustmentButton.click();
         return this;
     }
+
+    clickViewAdjustmentDetails(): AdjustCompsActions {
+        adjustCompsPage.viewAdjustmentDetails.click();
+        return this;
+    }
+
+    verifyExistValueInOtherAdjustmentDetails(value: string, index = 1): AdjustCompsActions {
+        adjustCompsPage.getOtherAdjustmentColumnValue(value, index).should("have.text", value);
+        return this;
+    }
+
+    clickDiscussionsShowAllButton(): AdjustCompsActions {
+        adjustCompsPage.discussionsShowAllButton.click();
+        return this;
+    }
+
+    verifyConditionDiscussionCommentary(value: string): AdjustCompsActions {
+        adjustCompsPage.conditionDiscussionCommentary.should("include.text", value);
+        return this;
+    }
+
+    verifyDiscussionsFieldWithNameExists(name: string): AdjustCompsActions {
+        cy.contains("h6", name).should("exist");
+        return this;
+    }
+
+    enterMarketConditionAdjustment(value: string | number): AdjustCompsActions {
+        adjustCompsPage.marketConditionAdjustmentInput.type(`${value}`).should("have.value", value);
+        adjustCompsPage.applyMarketConditionAdjustmentButton.click();
+        return this;
+    }
+
+    verifyMarketConditionsTime(dateOfValue: Date, saleDate: Date, index = 0): AdjustCompsActions {
+        const diff = new Date(+saleDate).setHours(12) - new Date(+dateOfValue).setHours(12);
+        const daysDifference = Math.round(diff/8.64e7);
+        adjustCompsPage.marketConditionAdjustmentInput.invoke("val").then((val: number) => {
+            const marketConditionsTime = Math.round(Math.abs(daysDifference) / 365 * val);
+            adjustCompsPage.getMarketAdjustmentsRowCells("marketConditions").eq(index).should("have.value", `${marketConditionsTime}%`);
+        });
+        return this;
+    }
+
+    /**
+     * Count Price per Units. If in Sale Comparables Setup check `Per Residential Units` count like
+     * `Price per Units = Sale Price /  Residential Units`. If in Sale Comparables Setup check Per Total Units count like
+     * `Price per Units = Sale Price /  Residential Units +  Commercial Units`. Value is rounded down
+     * @param calculationUnit Name of Calculation Unit
+     * @param units Count Residential or/and Commercial units
+     * @returns `this`
+     */
+    verifyExpandMarketAdjustmentPricePerUnit(calculationUnit: BoweryReports.SalesAdjustmentGrid.CalculationUnits, units: number): AdjustCompsActions {
+        this.checkCalculationUnitsRadio(calculationUnit);
+        adjustCompsPage.getExpandMarketAdjustmentSubjectRow("Sale Price").invoke("text").then(salePrice => {
+            const salePriceNumber = getNumberFromDollarNumberWithCommas(salePrice);
+            const pricePerUnit = salePriceNumber / units;
+            const decimalPart = (pricePerUnit.toString().split(".")[1]);
+            cy.log("decimalPart.charAt(2)", decimalPart.charAt(2));
+            cy.log("test", Number(decimalPart.substring(0, 3)));
+            const pricePerUnitToBe = (decimalPart.charAt(2) === "5") ? 
+                `$${numberWithCommas(Math.round(pricePerUnit) + '.' + Number(decimalPart.substring(0, 2)))}`
+                :   `$${numberWithCommas(pricePerUnit.toFixed(2))}`;
+            adjustCompsPage.getExpandMarketAdjustmentSubjectRow("Price per Unit").should("have.text", pricePerUnitToBe);
+        });
+        return this;
+    }
+
 }
 
 export default new AdjustCompsActions(adjustCompsPage);

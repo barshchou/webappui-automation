@@ -49,11 +49,13 @@ describe("Historical expense Insurance Per Unit is correctly calculated and disp
                 .verifyForecastItemByExpensePeriodType(testData.t12InsuranceIItem, testData.buildingDescription, "Actual T12")
                 .verifyForecastItemByExpensePeriodType(testData.historicalInsuranceIItem, testData.buildingDescription, "Annualized Historical")
                 .verifyForecastItemByExpensePeriodType(testData.ownerProjectionInsuranceIItem, testData.buildingDescription, "Owner's Projection")
-                .hideExpenseForecastHeader();
+                .hideHeader()
+                .clickSaveButton()
+                .verifyProgressBarNotExist();
 
             cy.stepInfo("4.2 Check historical expenses values for Insurance card. They should be correctly displayed on slidebars");
             Income._ExpenseForecastActions.Actions.matchElementSnapshot(
-                Income._ExpenseForecastActions.Page.insuranceCard, testData.insuranceICardSnapshotName, { padding: [ 10, 100 ] });
+                Income._ExpenseForecastActions.Page.insuranceCard, testData.insuranceICardSnapshotName, { padding: [ 0, 100 ] });
 
             deleteReport(testData.reportCreationData.reportNumber);
 

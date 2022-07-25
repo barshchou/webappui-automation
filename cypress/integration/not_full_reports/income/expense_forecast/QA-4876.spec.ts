@@ -51,7 +51,9 @@ describe("Historical expense Electricity Per SF is correctly calculated and disp
                 .verifyForecastItemByExpensePeriodType(testData.t12ElectricityItem, testData.buildingDescription, "Actual T12")
                 .verifyForecastItemByExpensePeriodType(testData.historicalElectricityItem, testData.buildingDescription, "Annualized Historical")
                 .verifyForecastItemByExpensePeriodType(testData.ownerProjectionElectricityItem, testData.buildingDescription, "Owner's Projection")
-                .hideExpenseForecastHeader();
+                .hideHeader()
+                .clickSaveButton()
+                .verifyProgressBarNotExist();
 
 
             cy.stepInfo(`
@@ -60,7 +62,7 @@ describe("Historical expense Electricity Per SF is correctly calculated and disp
             5.2 correctly displayed on slidebars
         `);
             Income.ExpenseForecast.Actions.matchElementSnapshot(
-                Income.ExpenseForecast.Page.electricityCard, testData.electricityCardSnapshotName, { padding: [ 10, 100 ] }
+                Income.ExpenseForecast.Page.electricityCard, testData.electricityCardSnapshotName, { padding: [ 0, 100 ] }
             );
 
             deleteReport(testData.reportCreationData.reportNumber);

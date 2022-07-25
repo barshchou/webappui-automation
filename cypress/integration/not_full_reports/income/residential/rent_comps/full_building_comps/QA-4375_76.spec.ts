@@ -1,14 +1,12 @@
 import testData from "../../../../../../fixtures/not_full_reports/income/residential/rent_comps/full_building_comps/QA-4375_76.fixture";
-import { isProdEnv } from "../../../../../../../utils/env.utils";
 import { createReport, deleteReport } from "../../../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../../../actions/base";
 import { Income } from "../../../../../../actions";
 import { _IncomeTitles } from "../../../../../../enums/pages_titles";
-
-const conditionalDescribe = isProdEnv() ? describe.skip : describe;
+import { conditionalDescribe } from "../../../../../checkIsProd.utils";
 
 conditionalDescribe("Comp summary tests", { tags: [ "@residential", "@rent_comps",
-        "@full_building_comps", "@comp_summary" ] }, () => {
+        "@full_building_comps", "@comp_summary", "@snapshot_tests" ] }, () => {
 
     before("Create report, navigate to page", () => {
         createReport(testData.reportCreationData);

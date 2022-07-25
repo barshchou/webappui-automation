@@ -20,7 +20,8 @@ class CreateNewUserActions extends BaseActionsExt<typeof createNewUserPage>{
     }
 
     enterUsername(username: string): CreateNewUserActions {
-        createNewUserPage.usernameField.type(username).should("have.value", username);
+        createNewUserPage.usernameField.type("some placeholder text").clear()
+            .type(username).should("have.value", username);
         return this;
     }
 

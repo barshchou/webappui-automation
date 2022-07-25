@@ -155,7 +155,7 @@ describe("Full bowery way, multifamily as complete report", { tags: [ "@full_rep
         Income.Residential.InPlaceRentRoll.verifyNumberOfResidentialUnits(testData.currentDescription.numberOfUnits)
             .checkCheckboxByLabel(testData.inPLaceRentRoll.includePerRoom)
             .checkCheckboxByLabelAndVerify(testData.inPLaceRentRoll.forecastLabel, testData.inPLaceRentRoll.forecastColumn)
-            .checkListIsInspectedByRowNumbers(testData.inPLaceRentRoll.isInspectedRowsToCheck)
+            .setCheckListIsInspectedByRowNumbers(testData.inPLaceRentRoll.isInspectedRowsToCheck)
             .enterUnitNumbersByOrderToAll(testData.currentDescription.numberOfUnits)
             .enterAllEqualRoomsNumber(testData.inPLaceRentRoll.roomsNumber, testData.currentDescription.numberOfUnits)
             .enterAllEqualBedroomsNumber(testData.inPLaceRentRoll.bedroomsNumber, testData.currentDescription.numberOfUnits)
@@ -292,7 +292,7 @@ describe("Full bowery way, multifamily as complete report", { tags: [ "@full_rep
         testData.comparableExpenses.comparables.forEach(comp => {
             Income.ComparableExpenses.clickAddBlankColumnButton()
                 .enterAddressByColumnIndex(comp.address)
-                .enterLocationByColumnIndex(comp.location)
+                .enterCityByColumnIndex(comp.city)
                 .chooseExpensePeriodByColumnIndex(comp.period)
                 .enterSquareFeetByColumnIndex(comp.squareFeet)
                 .enterResidentialUnitsByColumnIndex(comp.resUnits)
@@ -352,7 +352,7 @@ describe("Full bowery way, multifamily as complete report", { tags: [ "@full_rep
             .chooseForecastItemBasis(testData.expenseForecast.legalProf)
             .chooseForecastItemBasis(testData.expenseForecast.miscellaneous)
             .chooseForecastItemBasis(testData.expenseForecast.management)
-            .checkPercentOfEGICheckbox()
+            .changeStateOfPercentOfEGICheckbox()
             .enterPercentOfEgi(testData.expenseForecast.percentOfEgi);
         const managementForecastEgi = Income.ExpenseForecast
             .getManagementForecastEgiPercent(testData.expenseForecast.management, testData.expenseForecast.effectiveGrossIncome, testData.expenseForecast.percentOfEgi, testData.currentDescription);
@@ -376,7 +376,7 @@ describe("Full bowery way, multifamily as complete report", { tags: [ "@full_rep
             .verifyCategoryRow(testData.proForma.vcLossRow, proFormaTypesEnum.residentialVCLoss)
             .verifyCategoryRow(testData.proForma.effectiveGrossRow, proFormaTypesEnum.effectiveGrossIncome)
             .verifyCategoryRow(testData.proForma.reTaxesRow, proFormaTypesEnum.realEstateTaxes)
-            .verifyCategoryRow(testData.proForma.insuranceRow, proFormaTypesEnum.insurace)
+            .verifyCategoryRow(testData.proForma.insuranceRow, proFormaTypesEnum.insurance)
             .verifyCategoryRow(testData.proForma.electricityRow, proFormaTypesEnum.electricity)
             .verifyCategoryRow(testData.proForma.repairsRow, proFormaTypesEnum.repairAndMaintenance)
             .verifyCategoryRow(testData.proForma.payrollRow, proFormaTypesEnum.payrollBenefits)

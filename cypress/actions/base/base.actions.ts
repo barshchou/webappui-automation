@@ -69,15 +69,25 @@ export default class BaseActions {
         return this;
     }
 
+    verifyTooltipExist(verifyValue?: string) {
+        cy.get("[role=tooltip]").should("not.exist");
+        if (verifyValue) {
+            cy.get("[role=tooltip]").should("include.text", verifyValue);
+        }
+        return this;
+    }
+
     /**
      * Retrive DOM-element screenshot and compares it with baseline.
      * @param element - PageElement to be snapshoted. 
-     * @param snapshotName - 
+     * @param snapshotName
+     * @param options
      * @see https://github.com/jaredpalmer/cypress-image-snapshot
      */
 
     matchElementSnapshot(element:Cypress.Chainable, snapshotName: string, options: Options = { allowSizeMismatch: true } ){
         if(Cypress.browser.isHeadless == true) {
+            element.should("be.visible");
             element.matchImageSnapshot(snapshotName, options);
             return this; 
         } 
@@ -106,6 +116,11 @@ export default class BaseActions {
                 return;
             }
         });
+        return this;
+    }
+
+    hideElement(element: Cypress.Chainable<JQuery<HTMLElement>>) {
+        element.then(el => el.hide());
         return this;
     }
 }
