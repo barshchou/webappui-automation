@@ -2,7 +2,7 @@
 import { ReviewExport, Sales } from '../../../../actions';
 import { _NavigationSection } from '../../../../actions/base';
 import testData from "../../../../fixtures/not_full_reports/sales/find_comps/QA-5136.fixture";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 import mapKeysUtils from '../../../../utils/mapKeys.utils';
 import { pathSpecData } from '../../../../../utils/fixtures.utils';
 import { _saveDataInFile } from '../../../../support/commands';
