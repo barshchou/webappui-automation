@@ -194,7 +194,7 @@ class AdjustCompsActions extends BaseActionsExt<typeof adjustCompsPage> {
                 adjustedTrendedPriceText = `$${numberWithCommas(pricePerBasisNumber.toFixed(2))}`;
             }
             cy.log("Cumulative Price Per Unit is: " + adjustedTrendedPriceText);
-            _saveDataInFile(`$${numberWithCommas(Math.round(pricePerBasisNumber))}`);
+            _saveDataInFile(`$${numberWithCommas(Math.round(pricePerBasisNumber))}`, `${Cypress.spec.name}.txt`);
             adjustCompsPage.cellCumulativePriceValue.eq(index).should("have.text", adjustedTrendedPriceText);
         });
             
@@ -282,20 +282,23 @@ class AdjustCompsActions extends BaseActionsExt<typeof adjustCompsPage> {
         const daysDifference = Math.round(diff/8.64e7);
         adjustCompsPage.marketConditionAdjustmentInput.invoke("val").then((val: number) => {
             const marketConditionsTime = Math.round(Math.abs(daysDifference) / 365 * val);
-            adjustCompsPage.getMarketAdjustmentsRowCells("marketConditions").eq(index).should("have.value", `${marketConditionsTime}%`);
+            adjustCompsPage.getMarketAdjustmentsRowCells("marketConditions").eq(index)
+                .should("have.value", `${marketConditionsTime}%`);
         });
         return this;
     }
 
     /**
      * Count Price per Units. If in Sale Comparables Setup check `Per Residential Units` count like
-     * `Price per Units = Sale Price /  Residential Units`. If in Sale Comparables Setup check Per Total Units count like
+     * `Price per Units = Sale Price /  Residential Units`. 
+     * If in Sale Comparables Setup check Per Total Units count like
      * `Price per Units = Sale Price /  Residential Units +  Commercial Units`. Value is rounded down
      * @param calculationUnit Name of Calculation Unit
      * @param units Count Residential or/and Commercial units
      * @returns `this`
      */
-    verifyExpandMarketAdjustmentPricePerUnit(calculationUnit: BoweryReports.SalesAdjustmentGrid.CalculationUnits, units: number): AdjustCompsActions {
+    verifyExpandMarketAdjustmentPricePerUnit(calculationUnit: BoweryReports.SalesAdjustmentGrid.CalculationUnits, 
+        units: number): AdjustCompsActions {
         this.checkCalculationUnitsRadio(calculationUnit);
         adjustCompsPage.getExpandMarketAdjustmentSubjectRow("Sale Price").invoke("text").then(salePrice => {
             const salePriceNumber = getNumberFromDollarNumberWithCommas(salePrice);
@@ -310,7 +313,6 @@ class AdjustCompsActions extends BaseActionsExt<typeof adjustCompsPage> {
         });
         return this;
     }
-
 }
 
 export default new AdjustCompsActions(adjustCompsPage);

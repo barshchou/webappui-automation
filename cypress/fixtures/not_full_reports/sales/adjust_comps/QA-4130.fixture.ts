@@ -24,5 +24,5 @@ export default {
     onFeatureFlag: 0,
     residentialUnit: _rentRollResidentialUnitFixture,
     concludedCapRate: 10,
-    adjustmentName: Enums.SALES_ADJUSTMENT_GRID.market_adjustment
+    adjustmentName: Enums.SALES_ADJUSTMENT_GRID.marketAdjustment
 };

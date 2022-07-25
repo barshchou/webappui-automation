@@ -16,7 +16,8 @@ export default {
         conditionsOfSale: 5,
         marketConditions: -30,
     },
-    tooltipText: "For As Is properties this will calculate a market condition adjustment based on (Subject Date of Value - Comp Date of Sale) " +
-    "/ 365 x % Market Condition Adjustment. For Stabilized properties, this will calculate a market condition adjustment based on (Subject Date " + 
+    tooltipText: "For As Is properties this will calculate a market condition adjustment based " + 
+    "on (Subject Date of Value - Comp Date of Sale) / 365 x % Market Condition Adjustment. For Stabilized " + 
+    "properties, this will calculate a market condition adjustment based on (Subject Date " + 
     "of Stabilization - Comp Date of Sale) / 365 x % Market Condition Adjustment." 
 };
