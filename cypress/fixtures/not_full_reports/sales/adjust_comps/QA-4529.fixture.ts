@@ -14,5 +14,6 @@ export default {
     },
     customUtilitiesAdjustmentDefaultName: "Other Utilities Adjustment",
     newCustomUtilitiesAdjustmentName: "new custom utilities adj name",
-    otherUtilitiesCommentaries: "Other Utilities Adjustment:  Comparable 1 required a 40% upward adjustment. Comparable 2 required a 50% downward adjustment."
+    otherUtilitiesCommentaries: "Other Utilities Adjustment:  Comparable 1 required a 40% " + 
+    "upward adjustment. Comparable 2 required a 50% downward adjustment."
 };

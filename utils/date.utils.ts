@@ -49,7 +49,8 @@ export const getYearFromDate = (date: string = getTodayDateString()): string => 
 };
 
 /**
- * @description This function returns a quarter for Quarter field on Property -> Market page. If no parameter other than date
+ * @description This function returns a quarter for Quarter field on Property -> 
+ * Market page. If no parameter other than date
  * is passed, it will return quarter previous from current as needed documents always will be FINAL for previous quarter
  * for example for current Q1 of current year it will be Q4 of previous year.
  * @param dateString Date for which we will return quarter
@@ -81,6 +82,9 @@ export const getPreviousQuarterFromQuarter = (quarter: string) => {
                 return "Q2";
             case "Q4":
                 return "Q3";
+            default:
+                cy.log('Not correct quarter');
+                return null;
         }
     } else {
         throw new Error("You've entered incorrect quarter");

@@ -7,7 +7,7 @@ import {
 } from "../../../utils/numbers.utils";
 import BaseActionsExt from "../base/base.actions.ext";
 
-class HistoryActions extends BaseActionsExt<typeof historyPage>{
+class HistoryActions extends BaseActionsExt<typeof historyPage> {
 
     enterCurrentOwner(owner: string): HistoryActions {
         historyPage.currentOwnerField.clear().type(owner).should("have.value", owner);
@@ -19,7 +19,8 @@ class HistoryActions extends BaseActionsExt<typeof historyPage>{
         return this;
     }
 
-    enterContractDetails(contractDetails: Readonly<{buyer: string, contractDate: string, contractPrice: number}>): HistoryActions {
+    enterContractDetails(contractDetails: Readonly<{buyer: string, 
+        contractDate: string, contractPrice: number}>): HistoryActions {
         historyPage.buyerField.should("exist").clear().type(contractDetails.buyer)
             .should("have.value", contractDetails.buyer);
         historyPage.contractDate.clear().type(contractDetails.contractDate);

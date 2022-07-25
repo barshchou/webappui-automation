@@ -7,18 +7,18 @@ import Income from "../../../../../actions/income/income.manager";
 describe(" Verify the Number of Residential Units section on the In-Place Rent Roll page", 
     { tags:[ "@income", "@residential", "@in_place_rent_roll" ] }, () => {
         
-    before("Login, create report", () => {
-        createReport(testData.reportCreationData);
-    });
+        before("Login, create report", () => {
+            createReport(testData.reportCreationData);
+        });
 
-    it("Test body", () => {
-        NavigationSection.navigateToPropertySummary();
-        Property.Summary.enterNumberOfResUnits(testData.numberOfUnits);
-        NavigationSection.navigateToResInPlaceRentRoll();
-        Income.Residential.InPlaceRentRoll.enterAllEqualRentTypeCells(testData.rentType)
-            .verifyNumberOfResidentialUnits(testData.numberOfUnits)
-            .goToPropSummaryWithSaveLeavingFirst();
-        Property.Summary.verifyThatPageIsOpened();
-        deleteReport(testData.reportCreationData.reportNumber);
+        it("Test body", () => {
+            NavigationSection.navigateToPropertySummary();
+            Property.Summary.enterNumberOfResUnits(testData.numberOfUnits);
+            NavigationSection.navigateToResInPlaceRentRoll();
+            Income.Residential.InPlaceRentRoll.enterAllEqualRentTypeCells(testData.rentType)
+                .verifyNumberOfResidentialUnits(testData.numberOfUnits)
+                .goToPropSummaryWithSaveLeavingFirst();
+            Property.Summary.verifyThatPageIsOpened();
+            deleteReport(testData.reportCreationData.reportNumber);
+        });
     });
-});

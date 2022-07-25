@@ -37,31 +37,38 @@ class ReimbursementSummaryActions extends BaseActionsExt<typeof reimbursementSum
     enterCommercialReimbursement(expense: string, expenseCellName: string, 
         reimbursementType: BoweryReports.ReimbursementType, knownType: BoweryReports.KnownInformation, 
         addKnownInformation = true): ReimbursementSummaryActions {
-            this.selectExpenseType(expense, expenseCellName)
-                .selectReimbursementType(reimbursementType);
-            if (reimbursementType != 'percentOfAppraiserForecast' && addKnownInformation){
-                this.selectKnownInformationType(knownType);
-            }
-            return this;
+        this.selectExpenseType(expense, expenseCellName)
+            .selectReimbursementType(reimbursementType);
+        if (reimbursementType != 'percentOfAppraiserForecast' && addKnownInformation) {
+            this.selectKnownInformationType(knownType);
+        }
+        return this;
     }
 
     addNewCommercialReimbursement(expense: string, expenseCellName: string, 
         expenseType: BoweryReports.ReimbursementType, knownType: BoweryReports.KnownInformation, 
         addKnownInformation = true): ReimbursementSummaryActions {
-            this.openAddCommercialReimbursementModal()
-                .enterCommercialReimbursement(expense, expenseCellName, expenseType, knownType, addKnownInformation)
-                .clickSubmitBtn();
-            return this;
+        this.openAddCommercialReimbursementModal()
+            .enterCommercialReimbursement(expense, expenseCellName, expenseType, knownType, addKnownInformation)
+            .clickSubmitBtn();
+        return this;
     }
 
-    fillReimbursementsByRow(value: number, index = 0, columnsId: BoweryReports.ReimbursementColumnsId = enums.REIMBURSEMENT_COLUMN_ID.monthly, reimbursementIndex = 0): ReimbursementSummaryActions {
-        let expectedValue = columnsId != enums.REIMBURSEMENT_COLUMN_ID.percentOfAppraiserForecast ? `$${value}` : `${value}`;
-        reimbursementSummary.getReimbursementByRow(index, columnsId, reimbursementIndex).click().clear().type(`${value}`)
+    fillReimbursementsByRow(value: number, index = 0, 
+        columnsId: BoweryReports.ReimbursementColumnsId = enums.REIMBURSEMENT_COLUMN_ID.monthly, 
+        reimbursementIndex = 0): ReimbursementSummaryActions {
+        let expectedValue = columnsId != enums.REIMBURSEMENT_COLUMN_ID.percentOfAppraiserForecast 
+            ? `$${value}` 
+            : `${value}`;
+        reimbursementSummary.getReimbursementByRow(index, columnsId, reimbursementIndex).click()
+            .clear().type(`${value}`)
             .should('have.value', expectedValue);
         return this;
     }
 
-    fillReimbursements(values: number[], columnsId: BoweryReports.ReimbursementColumnsId = enums.REIMBURSEMENT_COLUMN_ID.monthly, reimbursementIndex = 0): ReimbursementSummaryActions {
+    fillReimbursements(values: number[], 
+        columnsId: BoweryReports.ReimbursementColumnsId = enums.REIMBURSEMENT_COLUMN_ID.monthly, 
+        reimbursementIndex = 0): ReimbursementSummaryActions {
         values.forEach((value, index) => {
             this.fillReimbursementsByRow(value, index, columnsId, reimbursementIndex);
         });
@@ -83,8 +90,10 @@ class ReimbursementSummaryActions extends BaseActionsExt<typeof reimbursementSum
      * @param unitRow Commercial unit row
      * @param expectedForecastGross Expected Forecast Gross value in reimbursement table
      */
-    verifyAppraiserForecastGrossByRow(expenseUIName: string, unitRow: number, expectedForecastGross: number): ReimbursementSummaryActions {
-        reimbursementSummary.getAppraiserForecastGross(expenseUIName, unitRow).should('have.text', `$${numberWithCommas(expectedForecastGross.toFixed(2))}`);
+    verifyAppraiserForecastGrossByRow(expenseUIName: string, unitRow: number, 
+        expectedForecastGross: number): ReimbursementSummaryActions {
+        reimbursementSummary.getAppraiserForecastGross(expenseUIName, unitRow)
+            .should('have.text', `$${numberWithCommas(expectedForecastGross.toFixed(2))}`);
         return this;
     }
 
@@ -94,7 +103,8 @@ class ReimbursementSummaryActions extends BaseActionsExt<typeof reimbursementSum
      * @param expectedForecastGross Expected Forecast Gross value in reimbursement table
      * @param unitsAmount Commercial units amount to verify = reimbursement rows in table. Default: 1
      */
-    verifyAppraiserForecastGrossByExpenseType(expenseUIName: string, expectedForecastGross: number, unitsAmount = 1): ReimbursementSummaryActions {
+    verifyAppraiserForecastGrossByExpenseType(expenseUIName: string, expectedForecastGross: number, 
+        unitsAmount = 1): ReimbursementSummaryActions {
         for (let index = 0; index < unitsAmount; index++) {
             this.verifyAppraiserForecastGrossByRow(expenseUIName, index, expectedForecastGross);
         }
@@ -110,8 +120,9 @@ class ReimbursementSummaryActions extends BaseActionsExt<typeof reimbursementSum
      * @param knownInformation Part of the inputs locator
      * @param expectedAnnualReimbursement Calculated value to validate against UI
      */
-    verifyAnnualReimbursementByRow(expenseUIName: string, unitIndex: number, reimbursementType: BoweryReports.ReimbursementType, 
-        knownInformation: BoweryReports.KnownInformation, expectedAnnualReimbursement: number): ReimbursementSummaryActions {
+    verifyAnnualReimbursementByRow(expenseUIName: string, unitIndex: number, 
+        reimbursementType: BoweryReports.ReimbursementType, knownInformation: BoweryReports.KnownInformation, 
+        expectedAnnualReimbursement: number): ReimbursementSummaryActions {
         reimbursementSummary.getAnnualReimbursement(expenseUIName, unitIndex, reimbursementType, knownInformation)
             .should('have.text', `$${numberWithCommas(expectedAnnualReimbursement.toFixed(2))}`);
         return this;
@@ -137,21 +148,25 @@ class ReimbursementSummaryActions extends BaseActionsExt<typeof reimbursementSum
             let expectedAnnualReimbursement: number;
             reimbursementSummary.getAppraiserForecastGross(expenseUIName, unitIndex).invoke('text').then(gross => {
                 let grossValue = getNumberFromDollarNumberWithCommas(gross);
-                reimbursementSummary.getReimbursementByRow(unitIndex, columnsId, reimbursementIndex).invoke('attr', 'value').then(percentOfTotal => {
-                    expectedAnnualReimbursement = Number(Math.round(grossValue * (Number(percentOfTotal))) / 100);
-                    this.verifyAnnualReimbursementByRow(expenseUIName, unitIndex, reimbursementType, knownInformation, expectedAnnualReimbursement);
-                });
+                reimbursementSummary.getReimbursementByRow(unitIndex, columnsId, reimbursementIndex)
+                    .invoke('attr', 'value').then(percentOfTotal => {
+                        expectedAnnualReimbursement = Number(Math.round(grossValue * (Number(percentOfTotal))) / 100);
+                        this.verifyAnnualReimbursementByRow(expenseUIName, unitIndex, reimbursementType, 
+                            knownInformation, expectedAnnualReimbursement);
+                    });
             });
         }
         return this;
     }
 
-    verifyDefaultReimbursementCommentaryByExpenseType(expenseUIName: string, reimbursementIndex = 0): ReimbursementSummaryActions {
+    verifyDefaultReimbursementCommentaryByExpenseType(expenseUIName: string, 
+        reimbursementIndex = 0): ReimbursementSummaryActions {
         reimbursementSummary.getAnnualReimbursementTotal(expenseUIName).invoke('text').then((total) => {
             reimbursementSummary.getGeneratedCommentaryByExpenseType(expenseUIName, reimbursementIndex)
                 .invoke('text')
                 .should('deep.equal', 
-                `According to our projections, the total ${expenseUIName.toLocaleLowerCase()} reimbursement is ${total} per year.`);
+                    "According to our projections, the total "
+                    + expenseUIName.toLocaleLowerCase() + " reimbursement is " + total + " per year.");
         });
         return this;
     }

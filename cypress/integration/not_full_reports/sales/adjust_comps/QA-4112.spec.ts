@@ -5,27 +5,27 @@ import { Sales } from "../../../../actions";
 
 describe("Total Utility Adjustments in Sales Adjustment Grid is calculated with correct formula", 
     { tags:[ "@sales", "@adjust_comps", ] }, () => {
+        before("Login, create report", () => {
+            createReport(testData.reportCreationData);
+        });
 
-    before("Login, create report", () => {
-        createReport(testData.reportCreationData);
-    });
+        it("Test body", () => {
+            cy.stepInfo(`1. Navigate to Find comps page and add a sales comps`);
+            _NavigationSection.navigateToFindComps();
+            Sales._FindComps.selectCompFromMap();
 
-    it("Test body", () => {
-        cy.stepInfo("1. Navigate to Find comps page and add a sales comps");
-        _NavigationSection.navigateToFindComps();
-        Sales._FindComps.selectCompFromMap();
-
-        cy.stepInfo(`2. Open Adjust comps page, add all types of utilities adjustment and  
+            cy.stepInfo(`2. Open Adjust comps page, add all types of utilities adjustment and  
                     Verify Total Utility Adjustments in Total Footer = 
                     Commercial Space Adjustment + Corner Adjustment + Finishes Adjustment + 
                     Elevator Adjustment + Amenities Adjustment + Air Rights Adjustment + Other Utility Adjustment)`);
-        _NavigationSection.navigateToAdjustComps();
-        Sales._AdjustComps.clickAddCustomUtilitiesAdjustment()
-            .editOtherUtilitiesAdjustmentRowName(testData.customUtilitiesAdjustmentDefaultName, testData.newCustomUtilitiesAdjustmentName)
-            .enterOtherUtilitiesAdjustmentByColumn(testData.comparableFirst.otherUtilityAdjustment, 0, 0)
-            .enterUtilitiesAdjustmentGroup(Object.keys(testData.compsAdj), Object.values(testData.compsAdj))
-            .verifyTotalUtilitiesAdjustmentsByCompIndex();
+            _NavigationSection.navigateToAdjustComps();
+            Sales._AdjustComps.clickAddCustomUtilitiesAdjustment()
+                .editOtherUtilitiesAdjustmentRowName(testData.customUtilitiesAdjustmentDefaultName, 
+                    testData.newCustomUtilitiesAdjustmentName)
+                .enterOtherUtilitiesAdjustmentByColumn(testData.comparableFirst.otherUtilityAdjustment, 0, 0)
+                .enterUtilitiesAdjustmentGroup(Object.keys(testData.compsAdj), Object.values(testData.compsAdj))
+                .verifyTotalUtilitiesAdjustmentsByCompIndex();
 
-        deleteReport(testData.reportCreationData.reportNumber);
+            deleteReport(testData.reportCreationData.reportNumber);
+        });
     });
-});

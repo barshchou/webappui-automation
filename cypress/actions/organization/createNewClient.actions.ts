@@ -2,7 +2,7 @@ import createNewClientPage from "../../pages/organization/createNewClient.page";
 import { BoweryAutomation } from "../../types/boweryAutomation.type";
 import BaseActionsExt from "../base/base.actions.ext";
 
-class OrganizationInfoActions extends BaseActionsExt<typeof createNewClientPage>{
+class OrganizationInfoActions extends BaseActionsExt<typeof createNewClientPage> {
     selectAddresseePrefix(prefix?: string): OrganizationInfoActions {
         createNewClientPage.addresseePrefixField.click();
         createNewClientPage.prefixSelectOption(prefix).click();
@@ -55,7 +55,7 @@ class OrganizationInfoActions extends BaseActionsExt<typeof createNewClientPage>
         return this;
     }
 
-    entrerZipCode(zipCode?: string | number): OrganizationInfoActions {
+    enterZipCode(zipCode?: string | number): OrganizationInfoActions {
         createNewClientPage.zipCodeField.type(`${zipCode}`).should("have.value", zipCode);
         return this;
     }
@@ -72,19 +72,19 @@ class OrganizationInfoActions extends BaseActionsExt<typeof createNewClientPage>
  
     createNewClient(data: BoweryAutomation.OrganizationCreateNewClientData): OrganizationInfoActions {
         this.selectAddresseePrefix(data.prefix)
-        .enterAddresseeTitle(data.title)
-        .enterAddresseeFirstName(data.firstName)
-        .enterAddresseeMiddleInitial(data.middleInitial)
-        .enterAddresseeLastName(data.lastName)
-        .enterClientSuffix(data.clientSuffix)
-        .enterClientCompanyName(data.clientCompanyName)
-        .enterStreetAddress(data.streetAddress)
-        .enterCity(data.city)
-        .selectState(data.state)
-        .entrerZipCode(data.zipCode)
-        .clickSaveFormButton()
-        .verifyProgressBarNotExist()
-        .verifySuccessModal();
+            .enterAddresseeTitle(data.title)
+            .enterAddresseeFirstName(data.firstName)
+            .enterAddresseeMiddleInitial(data.middleInitial)
+            .enterAddresseeLastName(data.lastName)
+            .enterClientSuffix(data.clientSuffix)
+            .enterClientCompanyName(data.clientCompanyName)
+            .enterStreetAddress(data.streetAddress)
+            .enterCity(data.city)
+            .selectState(data.state)
+            .enterZipCode(data.zipCode)
+            .clickSaveFormButton()
+            .verifyProgressBarNotExist()
+            .verifySuccessModal();
         return this;
     }
 }

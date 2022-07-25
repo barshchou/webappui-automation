@@ -10,6 +10,6 @@ const reportCreationFixture = () => {
 export default {
     reportCreationData: reportCreationFixture(),
     value:"=un",
-    unchangeRennovation: "Unchanged Renovations",
+    unchangeRenovation: "Unchanged Renovations",
     verifyAreaValue: "Upon renovation, the subject unit count and gross building area will remain unchanged."
 };

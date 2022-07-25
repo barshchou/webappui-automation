@@ -6,21 +6,21 @@ import { createReport, deleteReport } from "../../../../../actions/base/baseTest
 describe("Dropdown 'Filters'- 'Lease terms' section", 
     { tags:[ "@income", "@commercial", "@rent_comps" ] }, () => {
 
-    before("Login, create report", () => {
-        createReport(testData.reportCreationData);
-    });
-
-    it("Test body", () => {
-        NavigationSection.navigateToCommercialRentComps();
-        Income.Commercial.RentComps.openMap()
-            .verifyProgressBarNotExist()
-            .verifyFiltersDropdownExist()
-            .clickFiltersDropdown()
-            .verifyLeaseTermsSectionExist();
-        testData.checkboxesAttributes.forEach(attr => {
-           Income.Commercial.RentComps.checkCheckboxByQAAttr(attr)
-               .uncheckCheckboxByQAAttr(attr);
+        before("Login, create report", () => {
+            createReport(testData.reportCreationData);
         });
-        deleteReport(testData.reportCreationData.reportNumber);
+
+        it("Test body", () => {
+            NavigationSection.navigateToCommercialRentComps();
+            Income.Commercial.RentComps.openMap()
+                .verifyProgressBarNotExist()
+                .verifyFiltersDropdownExist()
+                .clickFiltersDropdown()
+                .verifyLeaseTermsSectionExist();
+            testData.checkboxesAttributes.forEach(attr => {
+                Income.Commercial.RentComps.checkCheckboxByQAAttr(attr)
+                    .uncheckCheckboxByQAAttr(attr);
+            });
+            deleteReport(testData.reportCreationData.reportNumber);
+        });
     });
-});

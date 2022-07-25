@@ -11,17 +11,26 @@ const reportCreationFixture = () => {
 };
 
 const _numberOfCommercialUnits = 5;
-const _leaseMixedFixture: BoweryReports.LeaseStatus[] = [ "Occupied", "Vacant", "Vacant", "Occupied", "Occupied" ];
-const _leaseAllOccupiedFixture: BoweryReports.LeaseStatus[] = [ "Occupied", "Occupied", "Occupied", "Occupied", "Occupied" ];
-const _leaseAllVacantFixture: BoweryReports.LeaseStatus[] = [ "Vacant", "Vacant", "Vacant", "Vacant", "Vacant" ];
+const _leaseMixedFixture: BoweryReports.LeaseStatus[] = 
+[ 
+    "Occupied", "Vacant", "Vacant", "Occupied", "Occupied" 
+];
+const _leaseAllOccupiedFixture: BoweryReports.LeaseStatus[] = 
+[ 
+    "Occupied", "Occupied", "Occupied", "Occupied", "Occupied" 
+];
+const _leaseAllVacantFixture: BoweryReports.LeaseStatus[] = 
+[ 
+    "Vacant", "Vacant", "Vacant", "Vacant", "Vacant" 
+];
 
 const _allVacantFixture = () => {
     return {
         numberOfCommercialUnits: _numberOfCommercialUnits,
         leases: _leaseAllVacantFixture,
         commentaryToBe: "The subject currently contains no occupied commercial units. " +
-            "We will forecast market rent and market lease terms for the vacant units based on the comparables and our " +
-            "research of the subject's market."
+        "We will forecast market rent and market lease terms for the vacant units based on the comparables and our " +
+        "research of the subject's market."
     };
 };
 
@@ -38,7 +47,8 @@ const _mixedFixture = () => {
         numberOfCommercialUnits: _numberOfCommercialUnits,
         leases: _leaseMixedFixture,
         commentaryToBe: "The subject currently contains 5 commercial units. " +
-            "Units 1, 4, and 5 are occupied, while units 2 and 3 are currently vacant. The occupied unit leases are summarized below."
+        "Units 1, 4, and 5 are occupied, while units 2 and 3 are currently vacant. " + 
+        "The occupied unit leases are summarized below."
     };
 };
 

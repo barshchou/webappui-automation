@@ -13,6 +13,7 @@ export default {
     reportCreationData: _reportCreationData,
     numberOfCommercialUnits: _numberOfCommercialUnits,
     textUpdateValue: "Text for test",
-    defaultText: "The subject will contain "+ _numberOfCommercialUnits +" commercial units. Commercial unit 1 will be a undetermined space. "+
-                "Commercial unit 2 will be a undetermined space."
+    defaultText: "The subject will contain "+ _numberOfCommercialUnits +
+    " commercial units. Commercial unit 1 will be a undetermined space. "+
+    "Commercial unit 2 will be a undetermined space."
 };

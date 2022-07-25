@@ -2,7 +2,7 @@ import rentCompsMapPage from "../../../pages/income/residential/rentCompsMap.pag
 import { getUploadFixture } from "../../../../utils/fixtures.utils";
 import BaseActionsExt from "../../base/base.actions.ext";
 
-class RentCompsMapActions extends BaseActionsExt<typeof rentCompsMapPage>{
+class RentCompsMapActions extends BaseActionsExt<typeof rentCompsMapPage> {
 
     uploadCompMap(filePath: string): RentCompsMapActions {
         rentCompsMapPage.mapImageInput.attachFile(getUploadFixture(filePath));

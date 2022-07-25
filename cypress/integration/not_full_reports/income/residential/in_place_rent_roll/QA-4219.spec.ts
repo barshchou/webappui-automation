@@ -10,18 +10,18 @@ const reportCreationData = ReportDataCreator.getReportData("4219");
 describe("Verify the # column in the grid", 
     { tags:[ "@income", "@residential", "@in_place_rent_roll" ] }, () => {
         
-    before("Login, create report", () => {
-        createReport(reportCreationData);
-    });
+        before("Login, create report", () => {
+            createReport(reportCreationData);
+        });
 
-    it("Test body", () => {
-        NavigationSection.navigateToResInPlaceRentRoll();
-        Income.Residential.InPlaceRentRoll.verifyColumnExist(testData.columnName)
-            .verifyNumberOfNumberCells();
-        NavigationSection.navigateToPropertySummary();
-        Property.Summary.enterNumberOfResUnits(testData.numberOfUnits);
-        NavigationSection.navigateToResInPlaceRentRoll();
-        Income.Residential.InPlaceRentRoll.verifyNumberOfNumberCells(testData.numberOfUnits);
-        deleteReport(reportCreationData.reportNumber);
+        it("Test body", () => {
+            NavigationSection.navigateToResInPlaceRentRoll();
+            Income.Residential.InPlaceRentRoll.verifyColumnExist(testData.columnName)
+                .verifyNumberOfNumberCells();
+            NavigationSection.navigateToPropertySummary();
+            Property.Summary.enterNumberOfResUnits(testData.numberOfUnits);
+            NavigationSection.navigateToResInPlaceRentRoll();
+            Income.Residential.InPlaceRentRoll.verifyNumberOfNumberCells(testData.numberOfUnits);
+            deleteReport(reportCreationData.reportNumber);
+        });
     });
-});

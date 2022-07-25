@@ -77,8 +77,8 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
         capRateConclusionPage.netOperatingIncomeCell.invoke("text").then(noiText => {
             const noiNumber = getNumberFromDollarNumberWithCommas(noiText);
             capRateConclusionPage.concludedCapRateCellInputToVerify.invoke("attr", "value").then(capRate => {
-               const textToBe = `$${numberWithCommas(Math.round(noiNumber / Number.parseInt(capRate) * 100))}`;
-               capRateConclusionPage.asStabilizedAmountCell.should("have.text", textToBe);
+                const textToBe = `$${numberWithCommas(Math.round(noiNumber / Number.parseInt(capRate) * 100))}`;
+                capRateConclusionPage.asStabilizedAmountCell.should("have.text", textToBe);
             });
         });
         return this;
@@ -89,7 +89,8 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
         return this;
     }
 
-    verifyAsCompleteTablePart(partData: Readonly<{period: string, amount: string, finalValue: string}>): CapRateConclusionActions {
+    verifyAsCompleteTablePart(partData: Readonly<{period: string, amount: string, finalValue: string}>): 
+    CapRateConclusionActions {
         this.verifyAsCompletePeriodCell(partData.period)
             .verifyAsCompleteAmountCell(partData.amount)
             .verifyAsCompleteFinalValueCell(partData.finalValue);

@@ -37,10 +37,10 @@ class SupportingCapRatesActions extends BaseActionsExt<typeof supportingCapRates
 
     verifyNumberOfPayments(): SupportingCapRatesActions {
         supportingCapRatesPage.amortizationTerm.invoke("attr", "value").then(amortValue => {
-           supportingCapRatesPage.numberOfPaymentsPerYear.invoke("attr", "value").then(paymentsPerYear => {
-               supportingCapRatesPage.numberOfPayments.should("be.disabled")
-                   .should("have.value", `${parseInt(amortValue) * parseInt(paymentsPerYear)}`);
-           });
+            supportingCapRatesPage.numberOfPaymentsPerYear.invoke("attr", "value").then(paymentsPerYear => {
+                supportingCapRatesPage.numberOfPayments.should("be.disabled")
+                    .should("have.value", `${parseInt(amortValue) * parseInt(paymentsPerYear)}`);
+            });
         });
         return this;
     }
@@ -57,9 +57,10 @@ class SupportingCapRatesActions extends BaseActionsExt<typeof supportingCapRates
 
     verifySelectedLoanEquityRatio(): SupportingCapRatesActions {
         supportingCapRatesPage.loanToValueConstant.invoke("attr", "value").then(loanConst => {
-           supportingCapRatesPage.selectedLoanLoanToValueRatio.invoke("attr", "value").then(ratio => {
-              supportingCapRatesPage.selectedLoanEquityRatio.should("have.value", `${parseInt(loanConst) * 100 - parseInt(ratio)}`);
-           });
+            supportingCapRatesPage.selectedLoanLoanToValueRatio.invoke("attr", "value").then(ratio => {
+                supportingCapRatesPage.selectedLoanEquityRatio
+                    .should("have.value", `${parseInt(loanConst) * 100 - parseInt(ratio)}`);
+            });
         });
         return this;
     }

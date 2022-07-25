@@ -7,8 +7,7 @@ import { createReport, deleteReport } from "../../../../actions/base/baseTest.ac
 
 describe(`Prospective Market Value As Stabilized -> Less Entrepreneurial Profit 
                 data is pulled from Cap Rate Conclusion`, 
-    { tags:[ "@sales", "@value_conclusion" ] }, () => {
-
+{ tags:[ "@sales", "@value_conclusion" ] }, () => {
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
     });
