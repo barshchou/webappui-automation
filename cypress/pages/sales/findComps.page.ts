@@ -28,7 +28,7 @@ class FindCompsPage extends BasePage {
 
     getSelectCompFromMapButtonByAddress(address) {
         return cy.get('[data-qa="sales-comp-item"]', { includeShadowDom: true })
-        .contains(`${address}`, { includeShadowDom: true }).parent().parent()
+        .contains(`${address}`, { includeShadowDom: true }).parent().parent() // not contains!! .find(`:contains('${address}')`
         .find('[data-qa="sales-comp-item-add-btn"]', { includeShadowDom: true });
     }
 
@@ -50,11 +50,11 @@ class FindCompsPage extends BasePage {
     }
 
     getRemoveSelectedCompButtonByAddress(address: string) {
-        return cy.contains(address).parent("td").parent().find('[data-qa="selected-comp-remove-btn"]');
+        return cy.contains(address).parent("tr").parent().find('[data-qa="selected-comp-remove-btn"]');
     }
 
     getRemoveDeletedCompButtonByAddress(address: string) {
-        return cy.contains(address).parent("td").parent().find('[data-qa="removed-comp-remove-btn"]');
+        return cy.contains(address).parent("tr").parent().find('[data-qa="removed-comp-remove-btn"]');
     }
 
     getRemoveCompFromMapButtonByAddress(address: string) {
@@ -100,10 +100,27 @@ class FindCompsPage extends BasePage {
         return cy.get('[data-qa="sale-date"]');
     }
     
-    
     get loadingModalCSV(){
-        return cy.get('[data-qa="loading-modal"]');
+        return cy.get('[data-qa="loading-modal"]').contains('Give us just a sec...');
     }
+
+    get resetAllButton(){
+        return cy.contains('RESET ALL',  { includeShadowDom: true });
+    }
+
+    get loadingModalSpinner(){
+        return cy.get('[data-qa="loading-modal"] [data-icon="spinner"]', { includeShadowDom: true });
+    }
+
+    get filterSalePeriod(){
+        return cy.get('[data-qa="filter-sale-period"]', { includeShadowDom: true });
+    }
+
+    filterSalePeriodValue(value: string){
+        return cy.get('[role="option"]', { includeShadowDom: true })
+        .contains(`${value}`, { includeShadowDom: true });
+    }
+
 }
 
 /**
