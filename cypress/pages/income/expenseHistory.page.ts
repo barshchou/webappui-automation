@@ -17,7 +17,8 @@ class ExpenseHistoryPage extends BasePage {
     get expenseMonthProjection() { return cy.get("[data-qa='autosuggest-text-input-field'] input"); }
 
     getUnifiedEditableAndTotalCells(cellName: string) {
-        return cy.get(`[row-id=${cellName}] [role=gridcell]:not([col-id=average]):not([col-id=name]):not([col-id=row-action])`);
+        return cy.get(`[row-id=${cellName}] [role=gridcell]:not([col-id=average])` + 
+        `:not([col-id=name]):not([col-id=row-action])`);
     }
 
     getUnifiedAverageCell(cellName: string) { return cy.get(`[row-id=${cellName}] [col-id=average]`); }

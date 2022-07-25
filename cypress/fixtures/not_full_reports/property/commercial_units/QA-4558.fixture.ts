@@ -3,8 +3,8 @@ import Enums from "../../../../enums/enums";
 import { BoweryReports } from "../../../../types/boweryReports.type";
 import { BoweryAutomation } from "../../../../types/boweryAutomation.type";
 
-const _useRadios: BoweryReports.CommercialUnits.UseValues[] = [ "retail", "office", "medical", "community", "industrial",
-    "other", "undetermined" ];
+const _useRadios: BoweryReports.CommercialUnits.UseValues[] = 
+[ "retail", "office", "medical", "community", "industrial", "other", "undetermined" ];
 
 const _useTexts: BoweryReports.CommercialUnits.UseTexts[] = [ "Retail", "Office", "Medical Office",
     "Community Facility", "Industrial", "Jeronimo", "Undetermined" ];

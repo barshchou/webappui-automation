@@ -14,8 +14,8 @@ const _totalRealEstateTaxPerSf = _totalRealEstateTax / _grossBuildingArea;
 const _totalRealEstateTaxPerUnit = _totalRealEstateTax / _numberOfResidentialUnits;
 
 const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("4756-58", {
-        incomeValue: Enums.INCOME_TYPE.both
-    });
+    incomeValue: Enums.INCOME_TYPE.both
+});
 
 export default {
     reportCreationData: _reportCreationData,

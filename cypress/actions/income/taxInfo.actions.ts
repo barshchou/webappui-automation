@@ -38,11 +38,11 @@ class TaxInfoActions extends BaseActionsExt<typeof taxInfoPage> {
     switchIncludeTransitionalCheckbox(value = false): TaxInfoActions {
         taxInfoPage.includeTransitionalAssessedValueCheckbox
             .invoke('attr', 'value').then(attr => {
-            cy.log(`${attr}`);
-            if (attr == `${!value}`){
-                taxInfoPage.includeTransitionalAssessedValueCheckbox.click().should('have.value', `${value}`);
-            }
-        });
+                cy.log(`${attr}`);
+                if (attr == `${!value}`) {
+                    taxInfoPage.includeTransitionalAssessedValueCheckbox.click().should('have.value', `${value}`);
+                }
+            });
         return this;
     }
 
@@ -237,8 +237,8 @@ class TaxInfoActions extends BaseActionsExt<typeof taxInfoPage> {
         return this;
     }
 
-    addListTaxComparablesWithoutSourceInfoData(taxCompDatas: BoweryReports.TaxCompData[]): this {
-        taxCompDatas.forEach(data => {
+    addListTaxComparablesWithoutSourceInfoData(taxCompData: BoweryReports.TaxCompData[]): this {
+        taxCompData.forEach(data => {
             this.addTaxComparableWithoutSourceInfoData(data);
         });
         return this;
@@ -263,13 +263,16 @@ class TaxInfoActions extends BaseActionsExt<typeof taxInfoPage> {
                 return "Bowery Subject";
             case "other":
                 return "Other";
+            default:
+                cy.log('Provided source of information is not valid');
+                return null;
         }
     }
 
-    verifyListAddedComparables(taxCompDatas: BoweryReports.TaxCompData[]): this {
-        let rowIndex = taxCompDatas.length - 1;
-        for (let i = 0; i < taxCompDatas.length; i++) {
-            this.verifyAddedComparableByRowNumber(taxCompDatas[i], rowIndex);
+    verifyListAddedComparables(taxCompData: BoweryReports.TaxCompData[]): this {
+        let rowIndex = taxCompData.length - 1;
+        for (let i = 0; i < taxCompData.length; i++) {
+            this.verifyAddedComparableByRowNumber(taxCompData[i], rowIndex);
             rowIndex--;
         }
         return this;
@@ -292,7 +295,7 @@ class TaxInfoActions extends BaseActionsExt<typeof taxInfoPage> {
 
     checkConcludedLiabilityTypeByValue(value: string): this {
         taxInfoPage.concludedLiabilityTypeRadio.check(value);
-        taxInfoPage.getVerifyConcludedTaxLiabTypeInput(value).should("exist");
+        taxInfoPage.getVerifyConcludedTaxLiabilityTypeInput(value).should("exist");
         return this;
     }
 
@@ -315,7 +318,7 @@ class TaxInfoActions extends BaseActionsExt<typeof taxInfoPage> {
     }
 
     verifyAppraiserOpinionTaxRateCell(taxRate: number): this {
-        taxInfoPage.appraiserOpTaxLiabTaxRateValueCell.should("have.text", `${taxRate}%`);
+        taxInfoPage.appraiserOpTaxLiabilityTaxRateValueCell.should("have.text", `${taxRate}%`);
         return this;
     }
 

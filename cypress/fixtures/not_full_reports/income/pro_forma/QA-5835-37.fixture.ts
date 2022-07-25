@@ -29,8 +29,8 @@ const _generalAndAdministrativeUnitPerSf = _generalAndAdministrativeUnitTotal / 
 const _generalAndAdministrativeUnitPerUnit = _forecast;
 
 const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("5835-37", {
-        incomeValue: Enums.INCOME_TYPE.both
-    });
+    incomeValue: Enums.INCOME_TYPE.both
+});
 
 export default {
     reportCreationData: _reportCreationData,

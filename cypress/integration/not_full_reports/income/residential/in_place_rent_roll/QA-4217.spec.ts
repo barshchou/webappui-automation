@@ -6,15 +6,16 @@ import Income from "../../../../../actions/income/income.manager";
 describe("Verify the functionality of the Optional Columns checkboxes", 
     { tags:[ "@income", "@residential", "@in_place_rent_roll" ] }, () => {
         
-    before("Login, create report", () => {
-        createReport(testData.reportCreationData);
-    });
+        before("Login, create report", () => {
+            createReport(testData.reportCreationData);
+        });
 
-    it("Test body", () => {
-        NavigationSection.navigateToResInPlaceRentRoll();
-        Income.Residential.InPlaceRentRoll.checkUncheckCheckboxForColumn(testData.unitTypeLabelColumn, testData.unitTypeLabelColumn)
-            .checkUncheckCheckboxForColumn(testData.bathColumn, testData.bathLabel)
-            .checkUncheckCheckboxForColumn(testData.outdoorLabelAndColumn, testData.outdoorLabelAndColumn);
-        deleteReport(testData.reportCreationData.reportNumber);
+        it("Test body", () => {
+            NavigationSection.navigateToResInPlaceRentRoll();
+            Income.Residential.InPlaceRentRoll.checkUncheckCheckboxForColumn(testData.unitTypeLabelColumn, 
+                testData.unitTypeLabelColumn)
+                .checkUncheckCheckboxForColumn(testData.bathColumn, testData.bathLabel)
+                .checkUncheckCheckboxForColumn(testData.outdoorLabelAndColumn, testData.outdoorLabelAndColumn);
+            deleteReport(testData.reportCreationData.reportNumber);
+        });
     });
-});

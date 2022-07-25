@@ -24,7 +24,8 @@ export namespace BoweryReports {
         isSalesForcePull?: isSalesForcePull
     }
     export type RentType = typeof Enums.RENT_TYPE[KeyInfo.RentTypeKeys]
-    export type RentRollOptionsCheckboxesType = typeof Enums.RENT_ROLL_OPTIONS_CHECKBOXES[KeyInfo.RentRollOptionsCheckboxesKeys]
+    export type RentRollOptionsCheckboxesType = 
+        typeof Enums.RENT_ROLL_OPTIONS_CHECKBOXES[KeyInfo.RentRollOptionsCheckboxesKeys]
     export type ChipsCreationOptions = {
         block?: string,
         buildingName?: string,
@@ -55,7 +56,8 @@ export namespace BoweryReports {
         export type StateValues = typeof Enums.COMMERCIAL_UNITS_STATE_VALUES[KeyInfo.CommercialUnitsStateKeys]
         export type CeilingHeightValues = keyof typeof Enums.COMMERCIAL_UNITS_CEILING_HEIGHT_VALUES
         export type LocationValues = typeof Enums.COMMERCIAL_UNITS_LOCATION_VALUES[KeyInfo.CommercialUnitsLocationKeys]
-        export type StreetTypeValues =  typeof Enums.COMMERCIAL_UNITS_STREET_TYPE_VALUES[KeyInfo.CommercialUnitsStreetTypeKeys]
+        export type StreetTypeValues =  
+            typeof Enums.COMMERCIAL_UNITS_STREET_TYPE_VALUES[KeyInfo.CommercialUnitsStreetTypeKeys]
         export type FloorValues = keyof typeof Enums.COMMERCIAL_UNITS_FLOOR_VALUES
         export type FrontageValues = keyof typeof Enums.COMMERCIAL_UNITS_FRONTAGE_VALUES
 
@@ -66,8 +68,14 @@ export namespace BoweryReports {
     export namespace SalesAdjustmentGrid {
         export type AdjustmentName = typeof Enums.SALES_ADJUSTMENT_GRID[KeyInfo.SalesAdjustmentGridKeys]
         export type RowsMarketAdjustment = typeof Enums.ROWS_MARKET_ADJUSTMENT[KeyInfo.RowsMarketAdjustmentKeys]
-        export type CumulativePrice = typeof Enums.SALES_ADJUSTMENT_GRID_CUMULATIVE_PRICE[KeyInfo.SalesAdjustmentGridCumulativePrice]
+        export type CumulativePrice = 
+            typeof Enums.SALES_ADJUSTMENT_GRID_CUMULATIVE_PRICE[KeyInfo.SalesAdjustmentGridCumulativePrice]
         export type CalculationUnits = typeof Enums.CALCULATION_UNITS[KeyInfo.CalculationUnitsKeys]
+        export type SalesAdjustmentGridDiscussions = 
+            typeof Enums.SALES_ADJUSTMENT_GRID_DISCUSSIONS[KeyInfo.SalesAdjustmentGridDiscussionsKeys]
+        export type SalesAdjustmentGridRows = 
+            typeof Enums.SALES_ADJUSTMENT_GRID_ROWS[KeyInfo.SalesAdjustmentGridRowsKeys]
+
     }
 
     export type ProFormaAnyIncome = {
@@ -75,7 +83,8 @@ export namespace BoweryReports {
         perSF: string,
         perUnit: string
     };
-    export type OrganizationAddresseePrefix = typeof Enums.ORGANIZATION_ADDRESSEE_PREFIX[KeyInfo.OrganizationAddresseePrefixKeys]
+    export type OrganizationAddresseePrefix = 
+        typeof Enums.ORGANIZATION_ADDRESSEE_PREFIX[KeyInfo.OrganizationAddresseePrefixKeys]
     export type OrganizationState = typeof Enums.ORGANIZATION_STATE[KeyInfo.OrganizationStateKeys]
     export type BoweryOffices = typeof Enums.BOWERY_OFFICES[KeyInfo.BoweryOffices]
 
@@ -92,9 +101,9 @@ export namespace BoweryReports {
         expensePeriodType: ExpensePeriodType | string, 
         month?: string,
         year: number | string, 
-        insurance?: number, electricity?: number, fuel?: number, waterAndSewer?: number, repairsAndMaintenance?: number, 
-        payrollAndBenefits?: number, generalAndAdministrative?: number, legalAndProfessionalFees?: number, miscellaneous?: number, 
-        management?: number, replacementReserves?: number 
+        insurance?: number, electricity?: number, fuel?: number, waterAndSewer?: number, 
+        repairsAndMaintenance?: number, payrollAndBenefits?: number, generalAndAdministrative?: number, 
+        legalAndProfessionalFees?: number, miscellaneous?: number, management?: number, replacementReserves?: number 
     };
 
     export type ExpensePeriodType = typeof Enums.EXPENSE_PERIOD_TYPE[KeyInfo.ExpensePeriodTypeKeys]

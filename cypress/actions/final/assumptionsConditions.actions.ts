@@ -6,7 +6,8 @@ class AssumptionsConditionsActions extends BaseActionsExt<typeof assumptionsCond
     addExtraordinaryAssumption(assumptionText: string): AssumptionsConditionsActions {
         const defaultNumberOfAssumptions = 3;
         assumptionsConditionsPage.addExtraordinaryAssumptionsButton.click();
-        assumptionsConditionsPage.extraordinaryAssumptionsInputs.should("have.length.above", defaultNumberOfAssumptions);
+        assumptionsConditionsPage.extraordinaryAssumptionsInputs
+            .should("have.length.above", defaultNumberOfAssumptions);
         assumptionsConditionsPage.extraordinaryAssumptionsInputs.last()
             .should("have.attr", "placeholder", "Write an extraordinary assumption.")
             .type(assumptionText).should("have.text", assumptionText);

@@ -4,11 +4,11 @@ import reportDataCreator from "../../../data_creator/reportData.creator";
 
 export const reportCreationData = conclusionValue => {
     return reportDataCreator.getReportData("1764459100",
-    {
-        templateValue: Enums.TEMPLATE_TYPE.notFreddieMac,
-        incomeValue: Enums.INCOME_TYPE.both,
-        conclusionValue: conclusionValue
-    }, true);
+        {
+            templateValue: Enums.TEMPLATE_TYPE.notFreddieMac,
+            incomeValue: Enums.INCOME_TYPE.both,
+            conclusionValue: conclusionValue
+        }, true);
 };
 
 export default {

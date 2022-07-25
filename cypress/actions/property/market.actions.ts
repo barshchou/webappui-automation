@@ -6,7 +6,7 @@ import BaseActionsExt from "../base/base.actions.ext";
 import { _map } from "../../support/commands";
 import mapKeysUtils from "../../utils/mapKeys.utils";
 
-class MarketActions extends BaseActionsExt<typeof marketPage>{
+class MarketActions extends BaseActionsExt<typeof marketPage> {
     readonly errorRetrieveFileMessage = "Cannot retrieve file. Contact Research team.";
 
     readonly finalDocumentNamePart = "FINAL";
@@ -93,10 +93,11 @@ class MarketActions extends BaseActionsExt<typeof marketPage>{
         return this;
     }
 
-    fillMarketResearch(marketResearch: BoweryReports.MarketResearch, marketAnalysisUse: BoweryReports.MarketAnalysisUses,
-                       isEnterState = true, isEnterQuarter = false): MarketActions {
+    fillMarketResearch(marketResearch: BoweryReports.MarketResearch, 
+        marketAnalysisUse: BoweryReports.MarketAnalysisUses,
+        isEnterState = true, isEnterQuarter = false): MarketActions {
         this.enterNeighborhood(marketResearch.neighborhoodValue);
-        if (isEnterState) this.enterMarketState(marketResearch.state);
+        if (isEnterState) { this.enterMarketState(marketResearch.state); }
         this.verifyMarketState(marketResearch.state)
             .enterArea(marketResearch.marketArea)
             .verifyNeighborhoodYear(getYearFromDate(marketResearch.marketDate))
@@ -184,7 +185,7 @@ class MarketActions extends BaseActionsExt<typeof marketPage>{
 
     setAreaEconomicAnalysisFileValueToMap(): MarketActions {
         marketPage.areaEconomicAnalysisFile.invoke("attr", "value").then(fileName => {
-            _map.set(mapKeysUtils.area_economic_analysis_file, fileName);
+            _map.set(mapKeysUtils.areaEconomicAnalysisFile, fileName);
         });
         return this;
     }
@@ -198,12 +199,13 @@ class MarketActions extends BaseActionsExt<typeof marketPage>{
 
     setNeighborhoodDemographicFileValueToMap(): MarketActions {
         marketPage.neighborhoodDemographicFile.invoke("attr", "value").then(fileName => {
-            _map.set(mapKeysUtils.neighborhood_demographic_file, fileName);
+            _map.set(mapKeysUtils.neighborhoodDemographicFile, fileName);
         });
         return this;
     }
 
-    verifyMarketByAnalysisUseHasFile(use: BoweryReports.MarketAnalysisUses, textToContain = this.finalDocumentNamePart): MarketActions {
+    verifyMarketByAnalysisUseHasFile(use: BoweryReports.MarketAnalysisUses, 
+        textToContain = this.finalDocumentNamePart): MarketActions {
         marketPage.getMarketFileByAnalysisUse(use).invoke("attr", "value").then(fileName => {
             expect(isStringContainSubstring(fileName, textToContain)).to.be.true;
         });
@@ -212,12 +214,13 @@ class MarketActions extends BaseActionsExt<typeof marketPage>{
 
     setMarketByAnalysisUseFileValueToMap(use: BoweryReports.MarketAnalysisUses): MarketActions {
         marketPage.getMarketFileByAnalysisUse(use).invoke("attr", "value").then(fileName => {
-            _map.set(`${use}_${mapKeysUtils.market_analysis_use_file}`, fileName);
+            _map.set(`${use}_${mapKeysUtils.marketAnalysisUseFile}`, fileName);
         });
         return this;
     }
 
-    verifySubmarketByAnalysisUseHasFile(use: BoweryReports.MarketAnalysisUses, textToContain = this.finalDocumentNamePart): MarketActions {
+    verifySubmarketByAnalysisUseHasFile(use: BoweryReports.MarketAnalysisUses, 
+        textToContain = this.finalDocumentNamePart): MarketActions {
         marketPage.getSubmarketFileByAnalysisUse(use).invoke("attr", "value").then(fileName => {
             expect(isStringContainSubstring(fileName, textToContain)).to.be.true;
         });
@@ -226,7 +229,7 @@ class MarketActions extends BaseActionsExt<typeof marketPage>{
 
     setSubmarketByAnalysisUseFileValueToMap(use: BoweryReports.MarketAnalysisUses): MarketActions {
         marketPage.getSubmarketFileByAnalysisUse(use).invoke("attr", "value").then(fileName => {
-            _map.set(`${use}_${mapKeysUtils.submarket_analysis_use_file}`, fileName);
+            _map.set(`${use}_${mapKeysUtils.submarketAnalysisUseFile}`, fileName);
         });
         return this;
     }
@@ -244,11 +247,16 @@ class MarketActions extends BaseActionsExt<typeof marketPage>{
         return this;
     }
 
-    verifyAnyFileInputHasFile(use: BoweryReports.MarketAnalysisUses, textToContain = this.finalDocumentNamePart): MarketActions {
+    verifyAnyFileInputHasFile(use: BoweryReports.MarketAnalysisUses, 
+        textToContain = this.finalDocumentNamePart): MarketActions {
         cy.url().then(() => {
             let isAnyHasFile = false;
-            const files: string[] = [ _map.get(mapKeysUtils.area_economic_analysis_file), _map.get(mapKeysUtils.neighborhood_demographic_file),
-            _map.get(`${use}_${mapKeysUtils.market_analysis_use_file}`), _map.get(`${use}_${mapKeysUtils.submarket_analysis_use_file}`) ];
+            const files: string[] = [ 
+                _map.get(mapKeysUtils.areaEconomicAnalysisFile),
+                _map.get(mapKeysUtils.neighborhoodDemographicFile),
+                _map.get(`${use}_${mapKeysUtils.marketAnalysisUseFile}`), 
+                _map.get(`${use}_${mapKeysUtils.submarketAnalysisUseFile}`) 
+            ];
             for (let i = 0; i < files.length; i++) {
                 cy.log(`${files[i]} file value`);
                 if (files[i].includes(textToContain)) {

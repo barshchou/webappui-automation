@@ -18,8 +18,8 @@ const _annualIncomePerSf = _otherIncomeItem.annualAmount / _grossBuildingArea;
 const _annualIncomePerUnit = _otherIncomeItem.annualAmount / _numberOfResidentialUnits;
 
 const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("4513-15", {
-        incomeValue: Enums.INCOME_TYPE.both
-    });
+    incomeValue: Enums.INCOME_TYPE.both
+});
 
 export default {
     reportCreationData: _reportCreationData,

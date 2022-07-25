@@ -1,4 +1,5 @@
-import testData from "../../fixtures/full_reports/full_bowery_multifamily_as_complete/fullBoweryMultifamilyAsComplete.fixtures";
+import testData from 
+    "../../fixtures/full_reports/full_bowery_multifamily_as_complete/fullBoweryMultifamilyAsComplete.fixtures";
 import Homepage from "../../actions/base/homepage.actions";
 import Report from "../../actions/report/report.manager";
 import NavigationSection from "../../actions/base/navigationSection.actions";
@@ -59,7 +60,8 @@ describe("Full bowery way, multifamily as complete report", { tags: [ "@full_rep
             .checkBasementStateByValue(testData.descriptionOfImprovements.basementState)
             .enterAgeEffective(testData.remainingEconomicLife.ageEffective)
             .clickSaveContinueButton();
-        Property.SiteDescription.editTransportationDiscussionCommentary(testData.transportationSiteDescription.commentary)
+        Property.SiteDescription
+            .editTransportationDiscussionCommentary(testData.transportationSiteDescription.commentary)
             .checkSurroundingResidential()
             .verifySiteArea(testData.siteDescriptors.siteArea)
             .verifyPropertyShape(testData.siteDescriptors.propertyShape);
@@ -154,11 +156,13 @@ describe("Full bowery way, multifamily as complete report", { tags: [ "@full_rep
             .clickSaveContinueButton();
         Income.Residential.InPlaceRentRoll.verifyNumberOfResidentialUnits(testData.currentDescription.numberOfUnits)
             .checkCheckboxByLabel(testData.inPLaceRentRoll.includePerRoom)
-            .checkCheckboxByLabelAndVerify(testData.inPLaceRentRoll.forecastLabel, testData.inPLaceRentRoll.forecastColumn)
+            .checkCheckboxByLabelAndVerify(testData.inPLaceRentRoll.forecastLabel, 
+                testData.inPLaceRentRoll.forecastColumn)
             .setCheckListIsInspectedByRowNumbers(testData.inPLaceRentRoll.isInspectedRowsToCheck)
             .enterUnitNumbersByOrderToAll(testData.currentDescription.numberOfUnits)
             .enterAllEqualRoomsNumber(testData.inPLaceRentRoll.roomsNumber, testData.currentDescription.numberOfUnits)
-            .enterAllEqualBedroomsNumber(testData.inPLaceRentRoll.bedroomsNumber, testData.currentDescription.numberOfUnits)
+            .enterAllEqualBedroomsNumber(testData.inPLaceRentRoll.bedroomsNumber, 
+                testData.currentDescription.numberOfUnits)
             .enterAllEqualRentTypeCells(testData.inPLaceRentRoll.rentType)
             .enterAllEqualLeaseStatuses(testData.inPLaceRentRoll.leaseStatus)
             .enterAllEqualForecast(testData.inPLaceRentRoll.forecastValue, testData.currentDescription.numberOfUnits)
@@ -185,7 +189,8 @@ describe("Full bowery way, multifamily as complete report", { tags: [ "@full_rep
             .clickSaveContinueButton();
         const bedroomsNumber = testData.inPLaceRentRoll.bedroomsNumber;
         const forecastValue = testData.inPLaceRentRoll.forecastValue;
-        Income.Residential.RentReconciliation.verifyIntroCommentary(testData.resRentReconcil.reconcilIntroComm)
+        Income.Residential.RentReconciliation
+            .verifyIntroCommentary(testData.residentialRentReconciliation.reconciliationIntroComm)
             .expandBedroomReconByNumber(bedroomsNumber)
             .verifyBedroomMinForecastByNumber(bedroomsNumber, forecastValue)
             .verifyBedroomAvgForecastByNumber(testData.inPLaceRentRoll, forecastValue)
@@ -193,12 +198,15 @@ describe("Full bowery way, multifamily as complete report", { tags: [ "@full_rep
             .verifyBedroomMinCompByNumber(bedroomsNumber, testData.rentComparables.comparables)
             .verifyBedroomAvgCompByNumber(bedroomsNumber, testData.rentComparables.comparables)
             .verifyBedroomMaxCompByNumber(bedroomsNumber, testData.rentComparables.comparables)
-            .enterBedroomMarketConclusionByNumber(bedroomsNumber, testData.resRentReconcil.marketConclusion)
-            .selectBedroomMarketBreakdownBedByNumber(bedroomsNumber, testData.resRentReconcil.marketBreakdown)
-            .editBedroomCommentaryByBedNum(bedroomsNumber, testData.resRentReconcil.reconcilCommentary)
+            .enterBedroomMarketConclusionByNumber(bedroomsNumber, 
+                testData.residentialRentReconciliation.marketConclusion)
+            .selectBedroomMarketBreakdownBedByNumber(bedroomsNumber, 
+                testData.residentialRentReconciliation.marketBreakdown)
+            .editBedroomCommentaryByBedNum(bedroomsNumber, 
+                testData.residentialRentReconciliation.reconciliationCommentary)
             .clickSaveContinueButton();
         Income.Residential.StabilizedRentRoll.verifyUnitTypeAndRentConclusion(testData.unitGroups.unitType,
-            testData.resRentReconcil.marketConclusion)
+            testData.residentialRentReconciliation.marketConclusion)
             .verifyRowsNumber(testData.currentDescription.numberOfUnits)
             .verifyCheckedIsInspected(testData.inPLaceRentRoll.isInspectedRowsToCheck)
             .verifyUnitsNumberByOrder()
@@ -211,7 +219,8 @@ describe("Full bowery way, multifamily as complete report", { tags: [ "@full_rep
             .verifyAllPerRoomCells(testData.inPLaceRentRoll.roomsNumber, testData.stabRentRoll.monthlyRentStab)
             .verifyAllLeaseStatusesCells(testData.inPLaceRentRoll.leaseStatus)
             .verifyAllRentForecasts(testData.inPLaceRentRoll.forecastValue)
-            .verifyTotalMonthlyForecast(testData.currentDescription.numberOfUnits, testData.inPLaceRentRoll.forecastValue)
+            .verifyTotalMonthlyForecast(testData.currentDescription.numberOfUnits, 
+                testData.inPLaceRentRoll.forecastValue)
             .verifyTotalAnnualForecast()
             .verifyRentRollDiscussionCommentary(testData.stabRentRoll.rentRollDiscussionComm)
             .editOccupancyRateCommentary(testData.stabRentRoll.occupancyRateComm)
@@ -246,7 +255,8 @@ describe("Full bowery way, multifamily as complete report", { tags: [ "@full_rep
         Income.Miscellaneous.Other.verifyPageIsOpened()
             .clickSaveContinueButton();
         Income.PotentialGrossIncome.enterResVacancyCollLoss(testData.grossIncome.resVacancyCollLoss)
-            .verifyResidentialVCLoss(testData.grossIncome.resVacancyCollLoss, testData.stabRentRollSummary.marketAnnualRent)
+            .verifyResidentialVCLoss(testData.grossIncome.resVacancyCollLoss, 
+                testData.stabRentRollSummary.marketAnnualRent)
             .enterCoStarSubmarketRate(testData.grossIncome.coStarRate)
             .enterCoStarMetroRate(testData.grossIncome.coStarRate)
             .editCommentary(testData.grossIncome.commentary)
@@ -268,7 +278,8 @@ describe("Full bowery way, multifamily as complete report", { tags: [ "@full_rep
             .clickSummaryTab()
             .checkConcludedLiabilityTypeByValue(testData.summaryTaxInfo.liabilityType)
             .enterConcludedLiabilityPerBasis(testData.summaryTaxInfo.liabilityValue)
-            .verifyAppraiserOpinionLiabilityTotal(testData.summaryTaxInfo.liabilityValue, testData.currentDescription.numberOfUnits)
+            .verifyAppraiserOpinionLiabilityTotal(testData.summaryTaxInfo.liabilityValue, 
+                testData.currentDescription.numberOfUnits)
             .verifyAppraiserOpinionTaxLiabilityPerBasis(testData.summaryTaxInfo.liabilityValue)
             .verifyAppraiserOpinionTaxRateCell(testData.currentTaxInfo.rateValue)
             .verifyAppraiserOpinionTaxableAssessedValueCell(testData.currentTaxInfo.rateValue)
@@ -282,7 +293,8 @@ describe("Full bowery way, multifamily as complete report", { tags: [ "@full_rep
             .enterIssueByColIndex(testData.expenseHistory.insuranceExpense, tableExpenseHistoryCellNames.insurance)
             .enterIssueByColIndex(testData.expenseHistory.electricityExpense, tableExpenseHistoryCellNames.electricity)
             .enterIssueByColIndex(testData.expenseHistory.fuelExpense, tableExpenseHistoryCellNames.fuel)
-            .enterIssueByColIndex(testData.expenseHistory.payrollBenefitsExpense, tableExpenseHistoryCellNames.payrollAndBenefits)
+            .enterIssueByColIndex(testData.expenseHistory.payrollBenefitsExpense, 
+                tableExpenseHistoryCellNames.payrollAndBenefits)
             .verifyTotalOpExpensesByColIndex(testData.expenseHistory.toeToBe)
             .verifyTOEExcludingRETByIndex(testData.expenseHistory.realEstateTaxes)
             .verifyNetOpIncomeByIndex(testData.expenseHistory.grossRevenue)
@@ -296,17 +308,23 @@ describe("Full bowery way, multifamily as complete report", { tags: [ "@full_rep
                 .chooseExpensePeriodByColumnIndex(comp.period)
                 .enterSquareFeetByColumnIndex(comp.squareFeet)
                 .enterResidentialUnitsByColumnIndex(comp.resUnits)
-                .enterCellDollarValueByColumnIndex(Income.ComparableExpenses.Page.getUnifiedEditableAndTotalCells("insurance"),
+                .enterCellDollarValueByColumnIndex(
+                    Income.ComparableExpenses.Page.getUnifiedEditableAndTotalCells("insurance"),
                     comp.insurance)
-                .enterCellDollarValueByColumnIndex(Income.ComparableExpenses.Page.getUnifiedEditableAndTotalCells("electricity"),
+                .enterCellDollarValueByColumnIndex(
+                    Income.ComparableExpenses.Page.getUnifiedEditableAndTotalCells("electricity"),
                     comp.electricity)
-                .enterCellDollarValueByColumnIndex(Income.ComparableExpenses.Page.getUnifiedEditableAndTotalCells("repairsAndMaintenance"),
+                .enterCellDollarValueByColumnIndex(
+                    Income.ComparableExpenses.Page.getUnifiedEditableAndTotalCells("repairsAndMaintenance"),
                     comp.repairsAndMaintenance)
-                .enterCellDollarValueByColumnIndex(Income.ComparableExpenses.Page.getUnifiedEditableAndTotalCells("payrollAndBenefits"),
+                .enterCellDollarValueByColumnIndex(
+                    Income.ComparableExpenses.Page.getUnifiedEditableAndTotalCells("payrollAndBenefits"),
                     comp.payrollAndBenefits)
-                .enterCellDollarValueByColumnIndex(Income.ComparableExpenses.Page.getUnifiedEditableAndTotalCells("generalAndAdministrative"),
+                .enterCellDollarValueByColumnIndex(
+                    Income.ComparableExpenses.Page.getUnifiedEditableAndTotalCells("generalAndAdministrative"),
                     comp.generalAndAdministrative)
-                .enterCellDollarValueByColumnIndex(Income.ComparableExpenses.Page.getUnifiedEditableAndTotalCells("management"),
+                .enterCellDollarValueByColumnIndex(
+                    Income.ComparableExpenses.Page.getUnifiedEditableAndTotalCells("management"),
                     comp.management)
                 .verifyTOEByColumnIndex(comp.toe)
                 .verifyTOEPerSFByColumnIndex()
@@ -318,31 +336,43 @@ describe("Full bowery way, multifamily as complete report", { tags: [ "@full_rep
         Income.ExpenseForecast.chooseForecastItemBasis(testData.expenseForecast.insuranceItem)
             .enterForecastItemForecast(testData.expenseForecast.insuranceItem)
             .verifyForecastItemCompMin(testData.expenseForecast.insuranceItem, testData.comparableExpenses.comparables)
-            .verifyForecastItemCompAverage(testData.expenseForecast.insuranceItem, testData.comparableExpenses.comparables)
+            .verifyForecastItemCompAverage(testData.expenseForecast.insuranceItem, 
+                testData.comparableExpenses.comparables)
             .verifyForecastItemCompMax(testData.expenseForecast.insuranceItem, testData.comparableExpenses.comparables)
             .verifyForecastItemBasisMoney(testData.expenseForecast.insuranceItem, testData.currentDescription)
             .chooseForecastItemBasis(testData.expenseForecast.electricityItem)
             .enterForecastItemForecast(testData.expenseForecast.electricityItem)
-            .verifyForecastItemCompMin(testData.expenseForecast.electricityItem, testData.comparableExpenses.comparables)
-            .verifyForecastItemCompAverage(testData.expenseForecast.electricityItem, testData.comparableExpenses.comparables)
-            .verifyForecastItemCompMax(testData.expenseForecast.electricityItem, testData.comparableExpenses.comparables)
+            .verifyForecastItemCompMin(testData.expenseForecast.electricityItem, 
+                testData.comparableExpenses.comparables)
+            .verifyForecastItemCompAverage(testData.expenseForecast.electricityItem, 
+                testData.comparableExpenses.comparables)
+            .verifyForecastItemCompMax(testData.expenseForecast.electricityItem, 
+                testData.comparableExpenses.comparables)
             .verifyForecastItemBasisMoney(testData.expenseForecast.electricityItem, testData.currentDescription)
-            .verifyForecastItemByExpensePeriodType(testData.expenseForecast.electricityItem, testData.currentDescription, "Owner's Projection")
+            .verifyForecastItemByExpensePeriodType(testData.expenseForecast.electricityItem, 
+                testData.currentDescription, "Owner's Projection")
             .chooseForecastItemBasis(testData.expenseForecast.fuelItem)
             .chooseForecastItemBasis(testData.expenseForecast.waterSewerItem)
             .chooseForecastItemBasis(testData.expenseForecast.repairsMaintenance)
             .enterForecastItemForecast(testData.expenseForecast.repairsMaintenance)
-            .verifyForecastItemCompMin(testData.expenseForecast.repairsMaintenance, testData.comparableExpenses.comparables)
-            .verifyForecastItemCompAverage(testData.expenseForecast.repairsMaintenance, testData.comparableExpenses.comparables)
-            .verifyForecastItemCompMax(testData.expenseForecast.repairsMaintenance, testData.comparableExpenses.comparables)
+            .verifyForecastItemCompMin(testData.expenseForecast.repairsMaintenance, 
+                testData.comparableExpenses.comparables)
+            .verifyForecastItemCompAverage(testData.expenseForecast.repairsMaintenance, 
+                testData.comparableExpenses.comparables)
+            .verifyForecastItemCompMax(testData.expenseForecast.repairsMaintenance, 
+                testData.comparableExpenses.comparables)
             .verifyForecastItemBasisMoney(testData.expenseForecast.repairsMaintenance, testData.currentDescription)
             .chooseForecastItemBasis(testData.expenseForecast.payrollBenefits)
             .enterForecastItemForecast(testData.expenseForecast.payrollBenefits)
-            .verifyForecastItemCompMin(testData.expenseForecast.payrollBenefits, testData.comparableExpenses.comparables)
-            .verifyForecastItemCompAverage(testData.expenseForecast.payrollBenefits, testData.comparableExpenses.comparables)
-            .verifyForecastItemCompMax(testData.expenseForecast.payrollBenefits, testData.comparableExpenses.comparables)
+            .verifyForecastItemCompMin(testData.expenseForecast.payrollBenefits, 
+                testData.comparableExpenses.comparables)
+            .verifyForecastItemCompAverage(testData.expenseForecast.payrollBenefits, 
+                testData.comparableExpenses.comparables)
+            .verifyForecastItemCompMax(testData.expenseForecast.payrollBenefits, 
+                testData.comparableExpenses.comparables)
             .verifyForecastItemBasisMoney(testData.expenseForecast.payrollBenefits, testData.currentDescription)
-            .verifyForecastItemByExpensePeriodType(testData.expenseForecast.payrollBenefits, testData.currentDescription, "Owner's Projection")
+            .verifyForecastItemByExpensePeriodType(testData.expenseForecast.payrollBenefits, 
+                testData.currentDescription, "Owner's Projection")
             .chooseForecastItemBasis(testData.expenseForecast.general)
             .enterForecastItemForecast(testData.expenseForecast.general)
             .verifyForecastItemCompMin(testData.expenseForecast.general, testData.comparableExpenses.comparables)
@@ -355,12 +385,15 @@ describe("Full bowery way, multifamily as complete report", { tags: [ "@full_rep
             .changeStateOfPercentOfEGICheckbox()
             .enterPercentOfEgi(testData.expenseForecast.percentOfEgi);
         const managementForecastEgi = Income.ExpenseForecast
-            .getManagementForecastEgiPercent(testData.expenseForecast.management, testData.expenseForecast.effectiveGrossIncome, testData.expenseForecast.percentOfEgi, testData.currentDescription);
+            .getManagementForecastEgiPercent(testData.expenseForecast.management, 
+                testData.expenseForecast.effectiveGrossIncome, 
+                testData.expenseForecast.percentOfEgi, testData.currentDescription);
         Income.ExpenseForecast.verifyManagementForecast(managementForecastEgi)
             .verifyForecastItemCompMin(testData.expenseForecast.management, testData.comparableExpenses.comparables)
             .verifyForecastItemCompAverage(testData.expenseForecast.management, testData.comparableExpenses.comparables)
             .verifyForecastItemCompMax(testData.expenseForecast.management, testData.comparableExpenses.comparables)
-            .verifyForecastItemBasisMoney(testData.expenseForecast.management, testData.currentDescription, managementForecastEgi)
+            .verifyForecastItemBasisMoney(testData.expenseForecast.management, 
+                testData.currentDescription, managementForecastEgi)
             .chooseForecastItemBasis(testData.expenseForecast.reserves)
             .enterForecastItemForecast(testData.expenseForecast.reserves)
             .verifyForecastItemBasisMoney(testData.expenseForecast.reserves, testData.currentDescription)
@@ -423,7 +456,8 @@ describe("Full bowery way, multifamily as complete report", { tags: [ "@full_rep
             .verifyConcludedCapRateCell(testData.capRateConclusion.concludedCapRate)
             .verifyAsStabilizedTablePart(testData.capRateConclusion.asStabilizedPart)
             .verifyAsCompleteTablePart(testData.capRateConclusion.asCompletePart)
-            .enterAsCompleteLessEntrepreneurialProfit(testData.capRateConclusion.asCompletePart.lessEntrepreneurialProfit)
+            .enterAsCompleteLessEntrepreneurialProfit(
+                testData.capRateConclusion.asCompletePart.lessEntrepreneurialProfit)
             .verifyAsIsMarketTablePart(testData.capRateConclusion.asIsMarketPart)
             .clickSaveContinueButton();
         testData.findComps.comparables.forEach((comp) => {
@@ -497,8 +531,10 @@ describe("Full bowery way, multifamily as complete report", { tags: [ "@full_rep
             .checkAsImprovedBestUseRadioValue(testData.highestBestUse.marketCharPropType)
             .addFinanciallyFeasiblePropertyTypesAsImproved(testData.highestBestUse.feasiblePropertyType)
             .clickHighestUseTab()
-            .verifyAsVacantHighestUse(testData.highestBestUse.marketCharPropType, testData.highestBestUse.feasiblePropTypeWord)
-            .verifyAsImprovedHighestUse(testData.highestBestUse.marketCharPropType, testData.highestBestUse.feasiblePropTypeWord)
+            .verifyAsVacantHighestUse(testData.highestBestUse.marketCharPropType, 
+                testData.highestBestUse.feasiblePropTypeWord)
+            .verifyAsImprovedHighestUse(testData.highestBestUse.marketCharPropType, 
+                testData.highestBestUse.feasiblePropTypeWord)
             .clickProbableBuyerTab()
             .checkLocalCheckbox()
             .checkRegionalCheckbox()

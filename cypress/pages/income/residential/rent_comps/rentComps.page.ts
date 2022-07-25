@@ -1,6 +1,6 @@
 import BasePage from "../../../base/base.page";
 
-class RentCompsPage extends BasePage{
+class RentCompsPage extends BasePage {
     get generatedCommentary() { return cy.get("*[data-qa='rentCompsIntroduction.commentary-generated-text']"); }
 
     get unitSwitchButton() { return cy.get("*[data-qa='unit-switch-button']"); }
@@ -30,9 +30,13 @@ class RentCompsPage extends BasePage{
 
     get sourceOfInfoArrow() { return cy.xpath("//*[text()='Source of Information']//following-sibling::button"); }
 
-    get minDateValueInput() { return cy.get("*[data-qa='filters.minDateOfValue-date-picker'] input[placeholder='MM-DD-YYYY']"); }
+    get minDateValueInput() { 
+        return cy.get("*[data-qa='filters.minDateOfValue-date-picker'] input[placeholder='MM-DD-YYYY']"); 
+    }
 
-    get maxDateValueInput() { return cy.get("*[data-qa='filters.maxDateOfValue-date-picker'] input[placeholder='MM-DD-YYYY']"); }
+    get maxDateValueInput() { 
+        return cy.get("*[data-qa='filters.maxDateOfValue-date-picker'] input[placeholder='MM-DD-YYYY']"); 
+    }
 
     get dateMinInputToCheckValue() { return cy.get("*[data-qa='filters.minDateOfValue-date-picker'] > input"); }
 
@@ -50,7 +54,9 @@ class RentCompsPage extends BasePage{
 
     get pickerCalendar() { return cy.get("*[role='document']"); }
 
-    getDayInCurrentMonthPicker(day: string | number) { return cy.xpath(`//*[text()='${day}']//parent::button[@tabindex='0']`); }
+    getDayInCurrentMonthPicker(day: string | number) { 
+        return cy.xpath(`//*[text()='${day}']//parent::button[@tabindex='0']`); 
+    }
 
     get amenitiesArrowButton() { return cy.xpath("//*[text()='Amenities']//following-sibling::button"); }
 
@@ -130,11 +136,17 @@ class RentCompsPage extends BasePage{
 
     get propertyIdentifierInput() { return cy.get("*[name='search.propertyIdentifier']"); }
 
-    getBedroomTableByNumber(bedroomsNumber: number | string) { return cy.get(`[data-qa='bedrooms_${bedroomsNumber}']`); }
+    getBedroomTableByNumber(bedroomsNumber: number | string) { 
+        return cy.get(`[data-qa='bedrooms_${bedroomsNumber}']`); 
+    }
 
-    getSelectButtonByAddress(address: string) { return cy.xpath(`//*[text()='${address}']//following-sibling::button`); }
+    getSelectButtonByAddress(address: string) { 
+        return cy.xpath(`//*[text()='${address}']//following-sibling::button`); 
+    }
 
-    getRemoveButtonByAddress(address: string) { return cy.xpath(`//*[text()='${address}']//following-sibling::button[contains(@data-qa, 'remove-btn')]`); }
+    getRemoveButtonByAddress(address: string) { 
+        return cy.xpath(`//*[text()='${address}']//following-sibling::button[contains(@data-qa, 'remove-btn')]`); 
+    }
 
     get editButtonLocator() { return "[data-qa=col-edit] button"; }
 
@@ -146,21 +158,35 @@ class RentCompsPage extends BasePage{
 
     get unitAddressLocator() { return "[data-qa=col-unitAddress]"; }
 
-    get uncategorizedMinCell() { return cy.xpath("//*[@data-qa='uncategorized']//descendant::td[.='Min']//following-sibling::td[1]"); }
+    get uncategorizedMinCell() { 
+        return cy.xpath("//*[@data-qa='uncategorized']//descendant::td[.='Min']//following-sibling::td[1]"); 
+    }
 
-    get uncategorizedAverageCell() { return cy.xpath("//*[@data-qa='uncategorized']//descendant::td[.='Average']//following-sibling::td[1]"); }
+    get uncategorizedAverageCell() { 
+        return cy.xpath("//*[@data-qa='uncategorized']//descendant::td[.='Average']//following-sibling::td[1]"); 
+    }
 
-    get uncategorizedMaxCell() { return cy.xpath("//*[@data-qa='uncategorized']//descendant::td[.='Max']//following-sibling::td[1]"); }
+    get uncategorizedMaxCell() { 
+        return cy.xpath("//*[@data-qa='uncategorized']//descendant::td[.='Max']//following-sibling::td[1]"); 
+    }
 
     get rentRollSummary() { return cy.contains("Rent Roll Summary"); }
 
-    get uncategorizedSubjectMin() { return cy.get("[data-qa=rent-comps-type-uncategorized] [data-qa='Min:-cell']"); }
+    get uncategorizedSubjectMin() { 
+        return cy.get("[data-qa=rent-comps-type-uncategorized] [data-qa='Min:-cell']"); 
+    }
 
-    get uncategorizedSubjectAverage() { return cy.get("[data-qa=rent-comps-type-uncategorized] [data-qa='Avg:-cell']"); }
+    get uncategorizedSubjectAverage() { 
+        return cy.get("[data-qa=rent-comps-type-uncategorized] [data-qa='Avg:-cell']"); 
+    }
 
-    get uncategorizedSubjectMax() { return cy.get("[data-qa=rent-comps-type-uncategorized] [data-qa='Max:-cell']"); }
+    get uncategorizedSubjectMax() { 
+        return cy.get("[data-qa=rent-comps-type-uncategorized] [data-qa='Max:-cell']"); 
+    }
 
-    get uncategorizedSubjectColumn() { return cy.get("[data-qa=rent-comps-type-uncategorized] [data-qa=computed-panel] [data-qa='0-column']"); }
+    get uncategorizedSubjectColumn() { 
+        return cy.get("[data-qa=rent-comps-type-uncategorized] [data-qa=computed-panel] [data-qa='0-column']"); 
+    }
 
     get displaySquareFootageForCompsCheckbox() { return cy.get("[data-qa=showSFForComps] input"); }
 
@@ -168,20 +194,26 @@ class RentCompsPage extends BasePage{
 
     get rentPerSfCellsLocator() { return "[data-qa=col-rentPerSf]"; }
 
-    get uncategorizedDevForecast() { return cy.get("[data-qa=rent-comps-type-uncategorized] [data-qa=computed-panel] [data-qa='1-column']"); }
+    get uncategorizedDevForecast() { 
+        return cy.get("[data-qa=rent-comps-type-uncategorized] [data-qa=computed-panel] [data-qa='1-column']"); 
+    }
 
     get bathroomsCellsLocator() { return "[data-qa=col-bathrooms]"; }
 
-    getBedroomsTableHeader(bedroomsNumber: number) { return cy.get(`[data-qa='rent-comps-type-bedrooms_${bedroomsNumber}'] > p`); }
+    getBedroomsTableHeader(bedroomsNumber: number) { 
+        return cy.get(`[data-qa='rent-comps-type-bedrooms_${bedroomsNumber}'] > p`); 
+    }
 
     get uncategorizedTableHeader() { return cy.get("[data-qa=rent-comps-type-uncategorized] > p"); }
 
     getBedroomSubjectColumn(bedroomsNumber: number) {
-        return cy.get(`[data-qa=rent-comps-type-bedrooms_${bedroomsNumber}] [data-qa=computed-panel] [data-qa='0-column']`);
+        return cy.get(`[data-qa=rent-comps-type-bedrooms_${bedroomsNumber}] ` + 
+        `[data-qa=computed-panel] [data-qa='0-column']`);
     }
 
     getBedroomMarketRateSummary(bedroomsNumber: number) {
-        return cy.xpath(`//*[@data-qa='rent-comps-type-bedrooms_${bedroomsNumber}']//descendant::p[.='Rent Roll Market Rate Summary']`);
+        return cy.xpath(`//*[@data-qa='rent-comps-type-bedrooms_${bedroomsNumber}']` + 
+        `//descendant::p[.='Rent Roll Market Rate Summary']`);
     }
 
     get perBuildingFiltersButton() { return cy.xpath("//button[.='Filters']"); }
@@ -194,11 +226,17 @@ class RentCompsPage extends BasePage{
 
     get searchCancelButton() { return cy.get("[data-qa=search-cancel]"); }
 
-    getFilterArrowButton(filterName: string) { return cy.xpath(`//*[text()='${filterName}']//following-sibling::button`); }
+    getFilterArrowButton(filterName: string) { 
+        return cy.xpath(`//*[text()='${filterName}']//following-sibling::button`); 
+    }
 
-    getAddComparableFromSearchButtonByIndex(searchIndex: number) { return cy.get("[role=rowgroup] [role=presentation]").eq(searchIndex); }
+    getAddComparableFromSearchButtonByIndex(searchIndex: number) { 
+        return cy.get("[role=rowgroup] [role=presentation]").eq(searchIndex); 
+    }
 
-    getRemoveCompButtonByIndex(index: number) { return cy.get("[data-qa=selected-building-comps-table] [role=presentation]").eq(index); }
+    getRemoveCompButtonByIndex(index: number) { 
+        return cy.get("[data-qa=selected-building-comps-table] [role=presentation]").eq(index); 
+    }
 
     get removedBuildingCompsTable() { return cy.get("[data-qa=selected-building-comps-table]").eq(1); }
 
@@ -212,9 +250,13 @@ class RentCompsPage extends BasePage{
         return cy.get("[data-qa=selected-building-comps-table]").eq(1).contains(buttonName);
     }
 
-    getShowDetailsRowByIndex(index: number) { return cy.xpath(`//tr[@data-qa='row-${index}']/following-sibling::tr`); }
+    getShowDetailsRowByIndex(index: number) { 
+        return cy.xpath(`//tr[@data-qa='row-${index}']/following-sibling::tr`); 
+    }
 
-    getShowDetailsHeader(headerName: string) { return cy.xpath(`//tr[@data-qa='row-0']/following-sibling::tr//thead//th[.='${headerName}']`); }
+    getShowDetailsHeader(headerName: string) { 
+        return cy.xpath(`//tr[@data-qa='row-0']/following-sibling::tr//thead//th[.='${headerName}']`); 
+    }
 
     getShowDetailsButtonByIndex(index: number) {
         return cy.get("[data-qa=selected-building-comps-table]").eq(1).contains("SHOW DETAILS").eq(index);
@@ -225,7 +267,8 @@ class RentCompsPage extends BasePage{
     }
 
     getEditAddedBuildingCompButtonByAddress(address: string) {
-        return cy.xpath(`//*[contains(text(), '${address}')]//parent::tr//following-sibling::td//child::button[.='Edit']`);
+        return cy.xpath(`//*[contains(text(), '${address}')]//parent::tr` + 
+        `//following-sibling::td//child::button[.='Edit']`);
     }
 }
 
