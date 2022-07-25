@@ -22,9 +22,10 @@ describe("Save and Save & Continue buttons tests",
         });
 
         it("QA-4346 Save & Continue button test", () => {
+            cy.pause();
             Sales.ValueConclusion.clickSaveContinueButton();
-            Final._FinalValuesReconciliation.closeUserSurveyIfExist()
-                .goBackWithSave();
+
+            Final._FinalValuesReconciliation.goBackWithSave();
             Sales.ValueConclusion.verifyMatchIncomeApproachDeductionsChecked()
                 .verifySaleValueConclusion(testData.saleValueConclusion);
             deleteReport(testData.reportCreationData.reportNumber);
