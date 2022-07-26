@@ -2,9 +2,9 @@ import rentReconciliationPage from "../../../pages/income/residential/rentReconc
 import { numberWithCommas } from "../../../../utils/numbers.utils";
 import BaseActionsExt from "../../base/base.actions.ext";
 
-class RentReconciliationActions extends BaseActionsExt<typeof rentReconciliationPage>{
+class RentReconciliationActions extends BaseActionsExt<typeof rentReconciliationPage> {
 
-     verifyIntroCommentary(commToBe: string): RentReconciliationActions {
+    verifyIntroCommentary(commToBe: string): RentReconciliationActions {
         rentReconciliationPage.introCommentary.should("have.text", commToBe);
         return this;
     }
@@ -46,14 +46,15 @@ class RentReconciliationActions extends BaseActionsExt<typeof rentReconciliation
         return this;
     }
 
-    verifyBedroomMinCompByNumber(bedroomNumber: number, comparables: Array<{monthly: number}>): RentReconciliationActions {
+    verifyBedroomMinCompByNumber(bedroomNumber: number, 
+        comparables: Array<{monthly: number}>): RentReconciliationActions {
         const minValue = Math.min(...this.getRentsArray(comparables));
         const textToBe = `$${numberWithCommas(minValue.toFixed(2))}`;
         rentReconciliationPage.getBedMinCompByNum(bedroomNumber).should("have.text", textToBe);
         return this;
     }
 
-     private getRentsArray(comparables: Array<{monthly: number}>): Array<number> {
+    private getRentsArray(comparables: Array<{monthly: number}>): Array<number> {
         let rentsArray = [];
         comparables.forEach(comp => {
             rentsArray.push(comp.monthly);
@@ -61,7 +62,8 @@ class RentReconciliationActions extends BaseActionsExt<typeof rentReconciliation
         return rentsArray;
     }
 
-    verifyBedroomAvgCompByNumber(bedroomNumber: number, comparables: Array<{monthly: number}>): RentReconciliationActions {
+    verifyBedroomAvgCompByNumber(bedroomNumber: number, 
+        comparables: Array<{monthly: number}>): RentReconciliationActions {
         let comparableSum = 0;
         const rentsArray = this.getRentsArray(comparables);
         rentsArray.forEach(el => comparableSum += el);
@@ -71,7 +73,8 @@ class RentReconciliationActions extends BaseActionsExt<typeof rentReconciliation
         return this;
     }
 
-    verifyBedroomMaxCompByNumber(bedroomNumber: number, comparables: Array<{monthly: number}>): RentReconciliationActions {
+    verifyBedroomMaxCompByNumber(bedroomNumber: number, 
+        comparables: Array<{monthly: number}>): RentReconciliationActions {
         const maxValue = Math.max(...this.getRentsArray(comparables));
         const textToBe = `$${numberWithCommas(maxValue.toFixed(2))}`;
         rentReconciliationPage.getBedMaxCompByNum(bedroomNumber).should("have.text", textToBe);

@@ -52,10 +52,9 @@ class CommercialRentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
     }
 
     selectSortByOption(option: string): CommercialRentCompsActions {
-        if(option == "Newest"){
+        if (option == "Newest") {
             rentCompsPage.sortByDropdown.should("contain.text", option);
-        }
-        else{
+        } else {
             rentCompsPage.sortByDropdown.click();
             rentCompsPage.getDropdownOptionByValue(option).should("be.visible").click();
             rentCompsPage.sortByDropdown.should("contain.text", option);
@@ -102,7 +101,8 @@ class CommercialRentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
         return this;
     }
 
-    fillInRentCompFieldInput(fieldName: string, value: string | number, isRequired = false): CommercialRentCompsActions {
+    fillInRentCompFieldInput(fieldName: string, value: string | number, 
+        isRequired = false): CommercialRentCompsActions {
         const requiredAttrMatcher = isRequired ? "have.attr" : "not.have.attr";
         rentCompsPage.getRentCompInputField(fieldName).clear().type(`${value}{enter}`)
             .should(requiredAttrMatcher, "required");
@@ -144,7 +144,7 @@ class CommercialRentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
         return this;
     }
 
-    clickEditButtonByRowNumber(group = "unsorted", rowNumber = 0): CommercialRentCompsActions {
+    clickEditButtonByRowNumber(group = "Unsorted", rowNumber = 0): CommercialRentCompsActions {
         rentCompsPage.getEditButtonByRowNumberAndGroup(group, rowNumber).click();
         return this;
     }
@@ -154,13 +154,13 @@ class CommercialRentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
         return this;
     }
 
-    verifyRentPerSFCellValue(value: number, group = "unsorted", rowNumber = 0): CommercialRentCompsActions {
+    verifyRentPerSFCellValue(value: number, group = "Unsorted", rowNumber = 0): CommercialRentCompsActions {
         rentCompsPage.getRentPerSFCellByRowNumberAndGroup(group, rowNumber).should("have.text", `$${value}.00`);
         return this;
     }
 
     verifyAllItemsDragged(): CommercialRentCompsActions {
-        rentCompsPage.draggableUnsortedPlaceholder.should('be.visible');
+        rentCompsPage.draggableUnsortedPlaceholder.should('exist');
         return this;
     }
 
@@ -168,7 +168,7 @@ class CommercialRentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
      * Drags ALL elements (units) from unsorted group into <groupName>.
      * 
      * Verifies that after dragging all elements there is no units left in unsorted group
-    */
+     */
     dragAllCommercialUnitsIntoGroup(groupName: string, numberOfUnits = 1, index = 0): CommercialRentCompsActions {
         this.dragCommercialUnitsIntoGroup(groupName, numberOfUnits, index)
             .verifyAllItemsDragged();
@@ -183,41 +183,54 @@ class CommercialRentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
      * If there is no elements in a drop group we use default locator, in other case we use 1st row of a group.
      */
     dragCommercialUnitsIntoGroup(groupName: string, numberOfUnits = 1, index = 0): CommercialRentCompsActions {
-        let subject = rentCompsPage.getDragableElement(index); 
+        let subject = rentCompsPage.getDraggableElement(index); 
         let commercialUnit = cy.get(subject);
         let target: string;
 
         for (let i = 0; i < numberOfUnits; i++) {
-            target = i == 0 ? rentCompsPage.getDropableArea(groupName) : rentCompsPage.getDropableAreaDropped(groupName);
+            target = i == 0 
+                ? rentCompsPage.getDroppableArea(groupName) 
+                : rentCompsPage.getDroppableAreaDropped(groupName);
             commercialUnit.dragAndDrop(subject, target);
+            // VB: For more than 2 units Drag and drop is too slow and we need to wait a bit between dnd actions.
+            cy.wait(1500);
         }
         return this;
     }
 
-    verifyComputedSubjectMinCell(rentPSFs: number[], leaseStatuses: BoweryReports.LeaseStatus[]): CommercialRentCompsActions {
+    verifyComputedSubjectMinCell(rentPSFs: number[], 
+        leaseStatuses: BoweryReports.LeaseStatus[]): CommercialRentCompsActions {
         const handledArray = CommercialRentCompsActions.handleRentPSFsArray(rentPSFs, leaseStatuses);
-        const textToBe = handledArray.length === 0 ? "$0" : `$${Math.round(Math.min(...handledArray))}`;
+        const textToBe = handledArray.length === 0 
+            ? "$0" 
+            : `$${Math.round(Math.min(...handledArray))}`;
         rentCompsPage.computedSubjectMinCell.should("have.text", textToBe);
         return this;
     }
 
-    verifyComputedSubjectAvgCell(rentPSFs: number[], leaseStatuses: BoweryReports.LeaseStatus[]): CommercialRentCompsActions {
+    verifyComputedSubjectAvgCell(rentPSFs: number[], 
+        leaseStatuses: BoweryReports.LeaseStatus[]): CommercialRentCompsActions {
         const handledArray = CommercialRentCompsActions.handleRentPSFsArray(rentPSFs, leaseStatuses);
-        const avgValue = handledArray.length === 0 ? 0 :
-            handledArray.reduce((sum, current) => sum + current, 0) / handledArray.length;
+        const avgValue = handledArray.length === 0 
+            ? 0 
+            : handledArray.reduce((sum, current) => sum + current, 0) / handledArray.length;
         const textToBe = `$${Math.round(avgValue)}`;
         rentCompsPage.computedSubjectAvgCell.should("have.text", textToBe);
         return this;
     }
 
-    verifyComputedSubjectMaxCell(rentPSFs: number[], leaseStatuses: BoweryReports.LeaseStatus[]): CommercialRentCompsActions {
+    verifyComputedSubjectMaxCell(rentPSFs: number[], 
+        leaseStatuses: BoweryReports.LeaseStatus[]): CommercialRentCompsActions {
         const handledArray = CommercialRentCompsActions.handleRentPSFsArray(rentPSFs, leaseStatuses);
-        const textToBe = handledArray.length === 0 ? "$0" : `$${Math.round(Math.max(...handledArray))}`;
+        const textToBe = handledArray.length === 0 
+            ? "$0" 
+            : `$${Math.round(Math.max(...handledArray))}`;
         rentCompsPage.computedSubjectMaxCell.should("have.text", textToBe);
         return this;
     }
 
-    verifyComputedSubjectColumn(rentPSFs: number[], leaseStatuses: BoweryReports.LeaseStatus[]): CommercialRentCompsActions {
+    verifyComputedSubjectColumn(rentPSFs: number[], 
+        leaseStatuses: BoweryReports.LeaseStatus[]): CommercialRentCompsActions {
         this.verifyComputedSubjectMinCell(rentPSFs, leaseStatuses)
             .verifyComputedSubjectAvgCell(rentPSFs, leaseStatuses)
             .verifyComputedSubjectMaxCell(rentPSFs, leaseStatuses);
@@ -225,7 +238,7 @@ class CommercialRentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
     }
 
     private static handleRentPSFsArray(rentPSFs: number[], leaseStatuses: BoweryReports.LeaseStatus[]): number[] {
-        return rentPSFs.filter((value, index) => leaseStatuses[index] !== "Vacant");
+        return rentPSFs.filter((_, index) => leaseStatuses[index] !== "Vacant");
     }
 
     clickAddCompButtonByIndex(index = 0): CommercialRentCompsActions {
@@ -241,15 +254,16 @@ class CommercialRentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
         return this;
     }
 
-    saveCompPricePerSFPerYearToAliasByIndex(group = "unsorted", index = 0): CommercialRentCompsActions {
+    saveCompPricePerSFPerYearToAliasByIndex(group = "Unsorted", index = 0): CommercialRentCompsActions {
         rentCompsPage.getRentPerSFCellByRowNumberAndGroup(group, index).invoke("text").then(elText => {
             const numberPriceValue = getNumberFromDollarNumberWithCommas(elText.trim());
-            _map.set(`${index + 1}${mapKeysUtils.rent_per_sf}`, numberPriceValue);
+            _map.set(`${index + 1}${mapKeysUtils.rentPerSf}`, numberPriceValue);
         });
         return this;
     }
 
-    saveCompPricesPerSFPerYearToAliasNumberFirstComps(numberToSave: number, group = "unsorted"): CommercialRentCompsActions {
+    saveCompPricesPerSFPerYearToAliasNumberFirstComps(numberToSave: number, 
+        group = "Unsorted"): CommercialRentCompsActions {
         for (let i = 0; i < numberToSave; i++) {
             this.saveCompPricePerSFPerYearToAliasByIndex(group, i);
         }
@@ -257,21 +271,26 @@ class CommercialRentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
     }
 
     verifyComputedCompsMinValue(rentPSFs: number[]): CommercialRentCompsActions {
-        const textToBe = rentPSFs.length === 0 ? "$0" : `$${Math.round(Math.min(...rentPSFs))}`;
+        const textToBe = rentPSFs.length === 0 
+            ? "$0" 
+            : `$${Math.round(Math.min(...rentPSFs))}`;
         rentCompsPage.computedCompsMinCell.should("have.text", textToBe);
         return this;
     }
 
     verifyComputedCompsAvgValue(rentPSFs: number[]): CommercialRentCompsActions {
-        const avgValue = rentPSFs.length === 0 ? 0 :
-            rentPSFs.reduce((sum, current) => sum + current, 0) / rentPSFs.length;
+        const avgValue = rentPSFs.length === 0 
+            ? 0 
+            : rentPSFs.reduce((sum, current) => sum + current, 0) / rentPSFs.length;
         const textToBe = `$${Math.round(avgValue)}`;
         rentCompsPage.computedCompsAvgCell.should("have.text", textToBe);
         return this;
     }
 
     verifyComputedCompsMaxValue(rentPSFs: number[]): CommercialRentCompsActions {
-        const textToBe = rentPSFs.length === 0 ? "$0" : `$${Math.round(Math.max(...rentPSFs))}`;
+        const textToBe = rentPSFs.length === 0 
+            ? "$0" 
+            : `$${Math.round(Math.max(...rentPSFs))}`;
         rentCompsPage.computedCompsMaxCell.should("have.text", textToBe);
         return this;
     }
@@ -285,13 +304,13 @@ class CommercialRentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
 
     saveComputedCompsColumnValues(): CommercialRentCompsActions {
         rentCompsPage.computedCompsMinCell.invoke("text").then(value => {
-            _map.set(mapKeysUtils.computed_comps_min, getNumberFromDollarNumberWithCommas(value));
+            _map.set(mapKeysUtils.computedCompsMin, getNumberFromDollarNumberWithCommas(value));
         });
         rentCompsPage.computedCompsAvgCell.invoke("text").then(value => {
-            _map.set(mapKeysUtils.computed_comps_avg, getNumberFromDollarNumberWithCommas(value));
+            _map.set(mapKeysUtils.computedCompsAvg, getNumberFromDollarNumberWithCommas(value));
         });
         rentCompsPage.computedCompsMaxCell.invoke("text").then(value => {
-            _map.set(mapKeysUtils.computed_comps_max, getNumberFromDollarNumberWithCommas(value));
+            _map.set(mapKeysUtils.computedCompsMax, getNumberFromDollarNumberWithCommas(value));
         });
         return this;
     }
@@ -301,7 +320,8 @@ class CommercialRentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
         return this;
     }
 
-    verifyCommercialUnitDetailsUnitMeasureRadioChecked(measureValue: BoweryReports.UnitsOfMeasure): CommercialRentCompsActions {
+    verifyCommercialUnitDetailsUnitMeasureRadioChecked(measureValue: BoweryReports.UnitsOfMeasure): 
+    CommercialRentCompsActions {
         rentCompsPage.getUnitMeasureRadioByValue(measureValue).parent("[data-qa=checked]").should("exist");
         return this;
     }

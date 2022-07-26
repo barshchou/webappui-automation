@@ -13,12 +13,16 @@ export const gqlOperationNames = {
     findSingleSalesComp: "findSingleSalesComp",
     updateJob: "updateJob",
     findTransactionsByIdsAndVersions: "findTransactionsByIdsAndVersions"
-  };
+};
 
 export const Alias = {
+    loginRequest:_alias("loginRequest"),
     reportId: _alias("reportId"),
     salesEventId: _alias("salesEventId"),
-    salesComps_eventIds: _alias("salesComps_eventIds"),
+    salesCompsEventIds: _alias("salesCompsEventIds"),
+    salesComps:{
+        addressSelectedComps: "uiSelectedCompsAddresses"
+    },
     aliasXMLGeneration: _alias("aliasXMLGeneration"),
     aliasOpenXML: _alias("aliasOpenXML"),
     gql:{
@@ -30,10 +34,10 @@ export const Alias = {
         FindTransactionsByIdsAndVersions:_gqlAlias(gqlOperationNames.findTransactionsByIdsAndVersions)
     }, 
     pageElements:{
-        comp_plex:{
-            conditionDropdown:"comp_plex_conditionDropdown",
-            getDropdownOption:"comp_plex_getDropdownOption",
-            errorMessage:"comp_plex_errorMessage",
+        compPlex:{
+            conditionDropdown:"conditionDropdown",
+            getDropdownOption:"getDropdownOption",
+            errorMessage:"errorMessage",
             newCompContinueButton:"newCompContinueButton",
             createCompNumberCommercialUnits:"createCompNumberCommercialUnits",
             comparableTypeDropdown:"comparableTypeDropdown",
@@ -45,7 +49,7 @@ export const Alias = {
             appraiserCommentaryTextArea:"appraiserCommentaryTextArea"
         }
     },
-    expenceForecastAliases: {
+    expenseForecastAliases: {
         sumPerSFCustomCards: "sumPerSFCustomCards",
         sumPerSFCheckedDefaultCards: "sumPerSFCheckedDefaultCards",
         sumPerSF: "sumPerSF",
@@ -53,6 +57,10 @@ export const Alias = {
         sumPerUnitCheckedDefaultCards: "sumPerUnitCheckedDefaultCards",
         sumPerUnit: "sumPerUnit",
         expenseCard: "expenseCard",
-        basisValue: "basisValue"
+        basisValue: "basisValue",
+        sumPerSFInComment: "sumPerSFInComment",
+        sumPerUnitInComment: "sumPerUnitInComment",
+        sumPerUnitTOEAppraisersForecast: "sumPerUnitTOEAppraisersForecast",
+        sumPSFTOEAppraisersForecast: "sumPSFTOEAppraisersForecast",
     },
 };

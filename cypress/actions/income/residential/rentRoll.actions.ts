@@ -5,9 +5,9 @@ import {
     isHalfDecimalPart,
     numberWithCommas
 } from "../../../../utils/numbers.utils";
-import { isProdEnv } from "../../../../utils/env.utils";
 import ResidentialRentRollSharedActions from "../../shared_components/residentialRentRoll.shared.actions";
 import { BoweryReports } from "../../../types/boweryReports.type";
+import { isProdEnv } from "../../../integration/checkIsProd.utils";
 
 class InPlaceRentRollActions extends ResidentialRentRollSharedActions<typeof rentRollPage> {
 
@@ -80,9 +80,24 @@ class InPlaceRentRollActions extends ResidentialRentRollSharedActions<typeof ren
         return this;
     }
 
-    checkPerUnitSquareFootage(value = "true"):InPlaceRentRollActions {
-        rentRollPage.getPerUnitSFRadio(value).should("not.be.checked").scrollIntoView()
+    checkPerUnitSquareFootage(value = true):InPlaceRentRollActions {
+        rentRollPage.getPerUnitSFRadio(value).scrollIntoView()
             .click().should("be.checked");
+        return this;
+    }
+
+    clickPSFRadio(radioName: string): InPlaceRentRollActions {
+        rentRollPage.getPSFRadio(radioName).click();
+        return this;
+    }
+
+    verifyPerUnitSFRadioCheck(radio = true, isChecked = true): InPlaceRentRollActions {
+        const element = radio === true ? rentRollPage.getPerUnitSFRadio(radio) : rentRollPage.getPerUnitSFRadio(false);
+        if (isChecked === true) {
+            element.should("be.checked");
+        } else {
+            element.should("not.be.checked");
+        }
         return this;
     }
 
@@ -124,18 +139,18 @@ class InPlaceRentRollActions extends ResidentialRentRollSharedActions<typeof ren
     checkUncheckPerUnitSquareFootage(columnNames: Array<string>): InPlaceRentRollActions {
         this.checkPerUnitSquareFootage()
             .verifyListColumnExist(columnNames)
-            .checkPerUnitSquareFootage("false")
+            .checkPerUnitSquareFootage(false)
             .verifyListColumnNotExist(columnNames);
         return this;
     }
 
-     verifyCheckPerUnitSquareFootageColumns(columnNames: string[]): InPlaceRentRollActions {
+    verifyCheckPerUnitSquareFootageColumns(columnNames: string[]): InPlaceRentRollActions {
         this.checkPerUnitSquareFootage()
             .verifyListColumnExist(columnNames);
         return this;
     }
 
-    uploadFile(filePath: string, unitsToBe: number): InPlaceRentRollActions{
+    uploadFile(filePath: string, unitsToBe: number): InPlaceRentRollActions {
         rentRollPage.uploadFileButton.should("be.visible");
         rentRollPage.uploadFileInput.should("exist").attachFile(filePath);
         rentRollPage.importDataButton.should("exist").should("be.enabled").click();
@@ -426,7 +441,7 @@ class InPlaceRentRollActions extends ResidentialRentRollSharedActions<typeof ren
                 let totalToBe = 0;
                 const vacantLeaseStatusText: BoweryReports.LeaseStatus = "Vacant";
                 for (let i = 0; i < rentCells.length; i++) {
-                    if(!leaseStatusCells.eq(i).text().includes(vacantLeaseStatusText)) {
+                    if (!leaseStatusCells.eq(i).text().includes(vacantLeaseStatusText)) {
                         let cellNumber = getNumberFromDollarNumberWithCommas(rentCells.eq(i).text());
                         totalToBe += cellNumber;
                     }

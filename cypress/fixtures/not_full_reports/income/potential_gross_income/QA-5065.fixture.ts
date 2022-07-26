@@ -14,7 +14,7 @@ export default {
     }),
     buildingDescription: _buildingDescription,
     squareFeet: 100,
-    utiliesExpenseOption: "combinedAll" as BoweryReports.UtilityExpenses,
+    utilitiesExpenseOption: "combinedAll" as BoweryReports.UtilityExpenses,
     forecastItemBasis: "utilities" as BoweryReports.ForecastItemBasis,
     utilitiesExpenseForecast: 25,
     expenseType: Enums.PRO_FORMA_TYPES.utilities,
@@ -22,7 +22,9 @@ export default {
     expenseCellName: Enums.EXPENSE_CELL.utilities,
     reimbursementType: Enums.REIMBURSEMENT_TYPES.dollarAmount as BoweryReports.ReimbursementType,
     knownInformation: Enums.KNOWN_INFORMATION.annual as BoweryReports.KnownInformation,
+    columnsId: Enums.REIMBURSEMENT_COLUMN_ID.annual as BoweryReports.ReimbursementColumnsId,
     reimbursementValue: 500,
     vcLossPercentage: 10,
-    vcLossDiscussionCommentary: `We have applied a vacancy and collection loss of 10% to the utilities reimbursement, which has been added to our Pro Forma.`
+    vcLossDiscussionCommentary: `We have applied a vacancy and collection loss of 10% to ` + 
+    `the utilities reimbursement, which has been added to our Pro Forma.`
 };

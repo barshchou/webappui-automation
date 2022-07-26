@@ -9,10 +9,12 @@ class AppraiserActions extends BaseActionsExt<typeof appraiserPage> {
         return this;
     }
 
-    searchAppraiser(appraiserName: string): AppraiserActions {
+    searchAndAddAppraiser(appraiserName: string): AppraiserActions {
+        appraiserPage.btnAddAppraiserInspector.click();
         appraiserPage.searchAppraiserTextField.clear()
-            .type(appraiserName).should('have.value', appraiserName)
-            .type('{enter}');
+            .type(appraiserName).should('have.value', appraiserName);
+        this.Page.getAppraiserOptionFromList().click();
+        this.Page.formAddButton().click();
         return this;
     }
 

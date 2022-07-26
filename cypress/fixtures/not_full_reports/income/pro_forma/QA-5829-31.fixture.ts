@@ -29,8 +29,8 @@ const _repairAndMaintenanceUnitPerSf = _repairAndMaintenanceUnitTotal / _grossBu
 const _repairAndMaintenanceUnitPerUnit = _forecast;
 
 const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("5829-31", {
-        incomeValue: Enums.INCOME_TYPE.both
-    });
+    incomeValue: Enums.INCOME_TYPE.both
+});
 
 export default {
     reportCreationData: _reportCreationData,

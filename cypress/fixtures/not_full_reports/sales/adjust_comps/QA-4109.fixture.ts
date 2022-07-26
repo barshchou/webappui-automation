@@ -1,18 +1,18 @@
 import Enums from "../../../../enums/enums";
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 
-const comparableFixture = () => {
-    return {
-        address: "200 West 78 Street",
-        propertyRights: -70,
-        trendedPrice: "$432.35"
-    };
+const _compAdjustments = {
+    propertyRights: 10,
+    financingTerms: 2,
+    conditionsOfSale: -5,
+    marketConditions: 0,
 };
 
 export default {
     reportCreationData: ReportDataCreator.getReportData("4109", {
         conclusionValue: Enums.VALUE_CONCLUSION_TYPE.AS_STABILIZED
     }),
-    calculationUnits: "PSF",
-    comparable: Object.freeze(comparableFixture())
+    comparableAdjustment: _compAdjustments,
+    calculationUnits: Enums.CALCULATION_UNITS.psf,
+    basis:"Price per SF"
 };

@@ -8,7 +8,7 @@ const useTextFixture: BoweryReports.CommercialUnits.UseTexts[] = [ "Retail", "Of
 const leaseStatusesFixture: BoweryReports.LeaseStatus[] = [ "Vacant", "Occupied" ];
 const occupiedLeaseFixture: BoweryReports.LeaseStatus = "Occupied";
 const vacantLeaseFixture: BoweryReports.LeaseStatus = "Vacant";
-const _leaseDate = "01012022";
+const _leaseDate = "01-01-2022";
 const _monthly = "monthly" as BoweryReports.UnitsOfMeasure;
 const _compGroup = "QA_4576_78_Comp_Group";
 const _marketRentConclusion = 441;
@@ -44,8 +44,8 @@ const _rentCompFields: BoweryReports.RentCompField[] = [
 export default {
     snapshotNames:{
         stabilizedRRPanel:"StabilizedRentRoll_Panel",
-        stabilizedRRPanel_severalUnits:"StabilizedRentRoll_Panel_Several_Units",
-        stabilizedRRPanel_severalUnits_compGroups:"stabilizedRRPanel_severalUnits_compGroups"
+        stabilizedRRPanelSeveralUnits:"StabilizedRentRoll_Panel_Several_Units",
+        stabilizedRRPanelSeveralUnitsCompGroups:"stabilizedRRPanel_severalUnits_compGroups"
     },
     reportCreationData: ReportDataCreator.getReportData("4576_78", { incomeValue: Enums.INCOME_TYPE.both }),
     numberOfCommercialUnits: 2,

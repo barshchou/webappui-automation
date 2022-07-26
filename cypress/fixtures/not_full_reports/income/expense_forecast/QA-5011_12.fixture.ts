@@ -3,6 +3,7 @@ import proFormaTypes from "../../../../enums/proFormaTypes.enum";
 import Enums from "../../../../enums/enums";
 import { BoweryAutomation } from "../../../../types/boweryAutomation.type";
 import { BoweryReports } from "../../../../types/boweryReports.type";
+import expensesForecastCardNamesEnum from "../../../../enums/expense/expensesForecastCardNames.enum";
 
 const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("5011_12", {
     incomeValue: Enums.INCOME_TYPE.both,
@@ -26,11 +27,12 @@ const rentRollResidentialUnitFixture = (): BoweryReports.ResidentialUnit => {
 
 const commentariesFixture = () => {
     return {
-        generated: "Operating expenses, exclusive of real estate taxes, were forecasted at $0.00 per square foot and $0 per unit. " +
-            "Excluding real estate taxes, the comparables ranged from Comp totals map psf min to Comp totals map psf max per square foot and Comp totals map unit min to " +
-            "Comp totals map unit max per unit. Our forecast is near the comparable range on both a per square foot and per unit basis, " +
-            "as well as logically placed in relation to the historical performance of the asset. Thus, this forecast is " +
-            "reasonable and will be applied in our valuation analysis.",
+        generated: "Operating expenses, exclusive of real estate taxes, were forecasted at $0.00 " + 
+        "per square foot and $0 per unit. Excluding real estate taxes, the comparables ranged from " + 
+        "Comp totals map psf min to Comp totals map psf max per square foot and Comp totals map unit min to " +
+        "Comp totals map unit max per unit. Our forecast is near the comparable range on both a per " + 
+        "square foot and per unit basis, as well as logically placed in relation to the historical " + 
+        "performance of the asset. Thus, this forecast is reasonable and will be applied in our valuation analysis.",
     };
 };
 
@@ -49,6 +51,20 @@ const _expensesInProFormaByDefaultArray = [
     proFormaTypes.miscellaneous,
     proFormaTypes.managementFees,
     proFormaTypes.replacementsAndReserves,
+];
+
+const _expensesForecastCardNamesArray = [
+    expensesForecastCardNamesEnum.insurance,
+    expensesForecastCardNamesEnum.electricity,
+    expensesForecastCardNamesEnum.fuel,
+    expensesForecastCardNamesEnum.waterAndSewer,
+    expensesForecastCardNamesEnum.repairAndMaintenance,
+    expensesForecastCardNamesEnum.payrollBenefits,
+    expensesForecastCardNamesEnum.generalAndAdministrative,
+    expensesForecastCardNamesEnum.legalAndProfessional,
+    expensesForecastCardNamesEnum.miscellaneous,
+    expensesForecastCardNamesEnum.managementFees,
+    expensesForecastCardNamesEnum.replacementsAndReserves,
 ];
 
 const expenseForecastInsuranceFixture = (_basis: "unit" | "sf"): BoweryReports.ForecastItem => {
@@ -148,16 +164,16 @@ const expenseForecastTotalFixture = (_basis: "unit" | "sf"): BoweryReports.Forec
 
 const expenseForecastFixtureArray = (basis?: "unit" | "sf"): Array<BoweryReports.ForecastItem> => {
     return [ expenseForecastInsuranceFixture(basis),
-    expenseForecastElectricityFixture(basis),
-    expenseForecastFuelFixture(basis),
-    expenseForecastWaterAndSewerFixture(basis),
-    expenseForecastRepairsAndMaintenanceFixture(basis),
-    expenseForecastPayrollAndBenefitsFixture(basis),
-    expenseForecastGeneralAndAdministrativeFixture(basis),
-    expenseForecastLegalAndProfessionalFeesFixture(basis),
-    expenseForecastMiscellaneousFixture(basis),
-    expenseForecastManagementFixture(basis),
-    expenseForecastReservesFixture(basis) ];
+        expenseForecastElectricityFixture(basis),
+        expenseForecastFuelFixture(basis),
+        expenseForecastWaterAndSewerFixture(basis),
+        expenseForecastRepairsAndMaintenanceFixture(basis),
+        expenseForecastPayrollAndBenefitsFixture(basis),
+        expenseForecastGeneralAndAdministrativeFixture(basis),
+        expenseForecastLegalAndProfessionalFeesFixture(basis),
+        expenseForecastMiscellaneousFixture(basis),
+        expenseForecastManagementFixture(basis),
+        expenseForecastReservesFixture(basis) ];
 };
 
 export default {
@@ -174,4 +190,5 @@ export default {
     forecastPerUnitNotIncluded: _forecastPerUnitNotIncluded,
     rentRollResUnitFixture: rentRollResidentialUnitFixture(),
     perRoomAnalysis: "Include Per Room Analysis in Report",
+    expensesForecastCardNamesArray: _expensesForecastCardNamesArray
 };

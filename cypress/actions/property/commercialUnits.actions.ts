@@ -1,5 +1,7 @@
 import commercialUnitsPage from "../../pages/property/commercialUnits.page";
-import { cutDecimalPartToNumberOfDigits, isHasDecimalPartMoreNumberOfDigits, numberWithCommas } from "../../../utils/numbers.utils";
+import { cutDecimalPartToNumberOfDigits, 
+    isHasDecimalPartMoreNumberOfDigits, 
+    numberWithCommas } from "../../../utils/numbers.utils";
 import BaseActionsExt from "../base/base.actions.ext";
 import { BoweryReports } from "../../types/boweryReports.type";
 import { normalizeText } from "../../../utils/string.utils";
@@ -27,12 +29,13 @@ class CommercialUnitsActions extends BaseActionsExt<typeof commercialUnitsPage> 
     /**
      *NOTE: Rotates last image
      */
-    rotateImage(): CommercialUnitsActions{
+    rotateImage(): CommercialUnitsActions {
         commercialUnitsPage.iconRotateImage.last().click({ force: true });
         return this;
     }
 
-    uploadImages(imageType: BoweryReports.ImageType, pathToFile: string, inputMethod: "drag-n-drop" | "input"): CommercialUnitsActions {
+    uploadImages(imageType: BoweryReports.ImageType, pathToFile: string, 
+        inputMethod: "drag-n-drop" | "input"): CommercialUnitsActions {
         let aliasImageUpload = "aliasImageUpload";
         cy.intercept("POST", "/imageUpload").as(aliasImageUpload);
         cy.contains(imageType).next().find('input[type="file"]')
@@ -56,7 +59,7 @@ class CommercialUnitsActions extends BaseActionsExt<typeof commercialUnitsPage> 
     }
 
     clickRadioButtonByValueAndUnitIndex(group: BoweryReports.CommercialUnits.Groups,
-        value: BoweryReports.CommercialUnits.GroupsValues, index = 0): this {
+        value: BoweryReports.CommercialUnits.GroupsValues, index = 0): CommercialUnitsActions {
         this.clickRadioOrCheckbox(group, value, index)
             .verifyRadioIsChecked(group, value, index);
         if (value === "other") {
@@ -66,7 +69,8 @@ class CommercialUnitsActions extends BaseActionsExt<typeof commercialUnitsPage> 
         return this;
     }
 
-    clickCheckboxToUncheck(group: BoweryReports.CommercialUnits.Groups, value: BoweryReports.CommercialUnits.GroupsValues,
+    clickCheckboxToUncheck(group: BoweryReports.CommercialUnits.Groups, 
+        value: BoweryReports.CommercialUnits.GroupsValues,
         index = 0): CommercialUnitsActions {
         this.clickRadioOrCheckbox(group, value, index)
             .verifyRadioIsNotChecked(group, value, index);
@@ -76,12 +80,15 @@ class CommercialUnitsActions extends BaseActionsExt<typeof commercialUnitsPage> 
         return this;
     }
 
-    verifyRadioIsChecked(group: BoweryReports.CommercialUnits.Groups, value: BoweryReports.CommercialUnits.GroupsValues, index = 0): CommercialUnitsActions {
-        commercialUnitsPage.getRadioButtonByValueAndUnitIndex(group, value, index).parent().should("have.class", "Mui-checked");
+    verifyRadioIsChecked(group: BoweryReports.CommercialUnits.Groups, 
+        value: BoweryReports.CommercialUnits.GroupsValues, index = 0): CommercialUnitsActions {
+        commercialUnitsPage.getRadioButtonByValueAndUnitIndex(group, value, index).parent()
+            .should("have.class", "Mui-checked");
         return this;
     }
 
-    verifyRadioIsNotChecked(group: BoweryReports.CommercialUnits.Groups, value: BoweryReports.CommercialUnits.GroupsValues, index = 0): CommercialUnitsActions {
+    verifyRadioIsNotChecked(group: BoweryReports.CommercialUnits.Groups, 
+        value: BoweryReports.CommercialUnits.GroupsValues, index = 0): CommercialUnitsActions {
         commercialUnitsPage.getRadioButtonByValueAndUnitIndex(group, value, index).parent()
             .should("not.have.class", "Mui-checked");
         return this;
@@ -105,7 +112,8 @@ class CommercialUnitsActions extends BaseActionsExt<typeof commercialUnitsPage> 
         return this;
     }
 
-    verifyUnitSFInscribedByUnitIndex(squareFeetList: Array<number | string>, numberOfUnits: number): CommercialUnitsActions {
+    verifyUnitSFInscribedByUnitIndex(squareFeetList: Array<number | string>, 
+        numberOfUnits: number): CommercialUnitsActions {
         for (let i = 0; i < numberOfUnits; i++) {
             commercialUnitsPage.commercialUnitsSFInputs.eq(i).should("have.value", squareFeetList[i]);
         }
@@ -133,18 +141,21 @@ class CommercialUnitsActions extends BaseActionsExt<typeof commercialUnitsPage> 
         return this;
     }
 
-    verifyCommercialUnitSFDiscussionTextAreaNotContains(text: BoweryReports.CommercialUnits.UseValues): CommercialUnitsActions {
+    verifyCommercialUnitSFDiscussionTextAreaNotContains(text: BoweryReports.CommercialUnits.UseValues): 
+    CommercialUnitsActions {
         commercialUnitsPage.commercialUnitSFDiscussionTextArea.should("not.contain.text", text);
         return this;
     }
 
-    enterOtherValueByGroupName(groupName: BoweryReports.CommercialUnits.Groups, value: string, index = 0): CommercialUnitsActions {
+    enterOtherValueByGroupName(groupName: BoweryReports.CommercialUnits.Groups, value: string, index = 0): 
+    CommercialUnitsActions {
         commercialUnitsPage.getOtherFieldByGroup(groupName, index).clear().type(value);
         this.verifyOtherValueByGroupName(groupName, value);
         return this;
     }
 
-    verifyOtherValueByGroupName(groupName: BoweryReports.CommercialUnits.Groups, value: string, index = 0): CommercialUnitsActions {
+    verifyOtherValueByGroupName(groupName: BoweryReports.CommercialUnits.Groups, value: string, index = 0): 
+    CommercialUnitsActions {
         commercialUnitsPage.getOtherFieldByGroup(groupName, index).should("have.value", value);
         return this;
     }
@@ -161,13 +172,16 @@ class CommercialUnitsActions extends BaseActionsExt<typeof commercialUnitsPage> 
     }
 
     clickNarrativeSuggestions(verifyListValue: string): CommercialUnitsActions {
-        this.Page.narrativeSuggestionsList.first().contains(verifyListValue).should("have.text", verifyListValue).click({ force: true }); 
+        this.Page.narrativeSuggestionsList.first()
+            .contains(verifyListValue).should("have.text", verifyListValue).click({ force: true }); 
         this.Page.commentaryText.click();
         return this;
     }
 
     verifyCommentaryContainsText(verifyAreaValue: string | number): CommercialUnitsActions {
-        let expectedText = typeof verifyAreaValue ===  "number" ? `${numberWithCommas(verifyAreaValue)}`: verifyAreaValue;
+        let expectedText = typeof verifyAreaValue ===  "number" 
+            ? `${numberWithCommas(verifyAreaValue)}`
+            : verifyAreaValue;
         this.Page.commentaryText.should("include.text", `${expectedText}`);
         return this;
     }

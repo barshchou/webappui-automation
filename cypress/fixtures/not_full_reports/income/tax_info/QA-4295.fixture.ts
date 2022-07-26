@@ -4,8 +4,8 @@ import ReportDataCreator from "../../../data_creator/reportData.creator";
 export default {
     reportCreationData: ReportDataCreator.getReportData("4295"),
     title: "Tax Calculation Discussion",
-    commentary: "In July 2021, the City Council set the fiscal year 2021/22 (7/1/2021 – 6/30/2022) property tax rates. " +
-    "The new tax rates were not in place for the July 1, 2021 tax bills; as such, " +
+    commentary: "In July 2021, the City Council set the fiscal year 2021/22 (7/1/2021 – 6/30/2022) " + 
+    "property tax rates. The new tax rates were not in place for the July 1, 2021 tax bills; as such, " +
     "the previous year tax rate was initially applied to the July 2021 tax bills and adjustments were " +
     "then made to subsequent tax bills to reflect the change in rate for any overpayment or underpayment. " +
     "The new tax rates are reflected in the second half of tax year bills, " +

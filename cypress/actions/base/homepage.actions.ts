@@ -8,34 +8,33 @@ class HomepageActions extends BaseActionsExt<typeof homepagePage> {
 
     createReport(data: BoweryAutomation.ReportCreationData): HomepageActions {
         interceptReportId();
-        if(data?.state) {
+        if (data?.state) {
             this.clickNewReportButton()
-            .clickAdvancedSearchButton()
-            .clickSelectStateButton()
-            .selectStateByName(data.state)
-            .enterAddressToSearch(data.address)
-            .enterPropertyIdentifierType(data.identifierType)
-            .enterPropertyIdentifier(data.identifier)
-            .clickSubmitButton()
-            .pullExternalData(data.isSalesForcePull)
-            .enterReportNumber(data.reportNumber)
-            .checkTemplateType(data.templateValue)
-            .checkIncomeType(data.incomeValue)
-            .checkConclusionType(data.conclusionValue)
-            .clickCreateReportButton();
-        }
-        else {
+                .clickAdvancedSearchButton()
+                .clickSelectStateButton()
+                .selectStateByName(data.state)
+                .enterAddressToSearch(data.address)
+                .enterPropertyIdentifierType(data.identifierType)
+                .enterPropertyIdentifier(data.identifier)
+                .clickSubmitButton()
+                .pullExternalData(data.isSalesForcePull)
+                .enterReportNumber(data.reportNumber)
+                .checkTemplateType(data.templateValue)
+                .checkIncomeType(data.incomeValue)
+                .checkConclusionType(data.conclusionValue)
+                .clickCreateReportButton();
+        } else {
             this.clickNewReportButton()
-            .enterAddressToSearch(data.address)
-            .clickSubmitButton()
-            .clickToSearchResultRow()
-            .clickSubmitButton()
-            .pullExternalData(data.isSalesForcePull)
-            .enterReportNumber(data.reportNumber)
-            .checkTemplateType(data.templateValue)
-            .checkIncomeType(data.incomeValue)
-            .checkConclusionType(data.conclusionValue)
-            .clickCreateReportButton();
+                .enterAddressToSearch(data.address)
+                .clickSubmitButton()
+                .clickToSearchResultRow()
+                .clickSubmitButton()
+                .pullExternalData(data.isSalesForcePull)
+                .enterReportNumber(data.reportNumber)
+                .checkTemplateType(data.templateValue)
+                .checkIncomeType(data.incomeValue)
+                .checkConclusionType(data.conclusionValue)
+                .clickCreateReportButton();
         }
         setReportId();
         return this;
@@ -96,7 +95,7 @@ class HomepageActions extends BaseActionsExt<typeof homepagePage> {
 
     enterReportNumberToSearch(number: string): HomepageActions {
         homepagePage.reportNumberSearchField.scrollIntoView().should("be.visible")
-        .type(number).should("have.value", number);
+            .type(number).should("have.value", number);
         return this;
     }
 
@@ -127,9 +126,9 @@ class HomepageActions extends BaseActionsExt<typeof homepagePage> {
             .enterReportNumberToSearch(reportNumber);
         cy.intercept({ method: 'GET', url: '*report/currentUser?filters*' }).as('filtering');
         cy.wait(`@filtering`, { timeout: 10000 }).then(({ response }) => {
-                expect(response.statusCode).equal(200);
-                expect(response.body.totalCount).equal(1);
-            });
+            expect(response.statusCode).equal(200);
+            expect(response.body.totalCount).equal(1);
+        });
         return this;
     }
 
