@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import Enums from "../../../../enums/enums";
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 

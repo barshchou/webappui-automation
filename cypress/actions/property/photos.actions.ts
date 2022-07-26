@@ -2,9 +2,10 @@ import photosPage from "../../pages/property/photos.page";
 import { getUploadFixturesArrayFromFolder } from "../../../utils/fixtures.utils";
 import BaseActionsExt from "../base/base.actions.ext";
 
-class PhotosActions extends BaseActionsExt<typeof photosPage>{
+class PhotosActions extends BaseActionsExt<typeof photosPage> {
 
-    uploadPhotosBySectionName(photosData: Readonly<{section: string, photosFolder: string, photosFileNames: Array<string>}>): PhotosActions {
+    uploadPhotosBySectionName(photosData: Readonly<{section: string, 
+        photosFolder: string, photosFileNames: Array<string>}>): PhotosActions {
         photosPage.getUploadInputByName(photosData.section)
             .attachFile(getUploadFixturesArrayFromFolder(photosData.photosFolder, photosData.photosFileNames));
         this.verifyProgressBarNotExist();

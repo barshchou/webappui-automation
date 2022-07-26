@@ -1,7 +1,7 @@
 import BasePage from "../base/base.page";
 import { BoweryReports } from "../../types/boweryReports.type";
 
-class MarketPage extends BasePage{
+class MarketPage extends BasePage {
     get exposureTimeMin() { return cy.get("*[name='exposureTime.min']"); }
 
     get exposureTimeMax() { return cy.get("*[name='exposureTime.max']"); }
@@ -40,21 +40,46 @@ class MarketPage extends BasePage{
         return cy.get(`[data-qa=file-selection-${use}MarketAnalysis-input] input`);
     }
 
-    get exposureTimeDescription() { return cy.xpath("//*[.='Exposure Time Description']//following::div[@data-slate-editor]"); }
+    get exposureTimeDescription() { 
+        return cy.xpath("//*[.='Exposure Time Description']//following::div[@data-slate-editor]"); 
+    }
 
-    get marketTimeDescription() { return cy.xpath("//*[.='Marketing Time Description']//following::div[@data-slate-editor]"); }
+    get marketTimeDescription() { 
+        return cy.xpath("//*[.='Marketing Time Description']//following::div[@data-slate-editor]"); 
+    }
 
     get includeMarketTimeCheckbox() { return cy.get("[data-qa^='includeMarketingTime']"); }
 
-    getMarketAnalysisUseCheckbox(useValue: BoweryReports.MarketAnalysisUses) { return cy.get(`[data-qa^='marketAnalysisUses.${useValue}-checkbox'] input`); }
+    getMarketAnalysisUseCheckbox(useValue: string) { 
+        return cy.get(`[data-qa^='marketAnalysisUses.${useValue}-checkbox'] input`); 
+    }
 
     get areaEconomicAnalysisContainer() { return cy.get("[data-qa=file-selection-areaEconomicAnalysis-input]"); }
 
     get areaEconomicAnalysisFile() { return this.areaEconomicAnalysisContainer.find("input"); }
 
-    get neighborhoodDemographicFile() { return cy.get("[data-qa=file-selection-neighborhoodDemographicOverview-input] input"); }
+    get neighborhoodDemographicFile() { 
+        return cy.get("[data-qa=file-selection-neighborhoodDemographicOverview-input] input"); 
+    }
 
-    get rentStabilizationFile() { return cy.get("[data-qa=file-selection-summaryOfRentStabilizationLaws-input] input"); }
+    get rentStabilizationFile() {
+        return cy.get("[data-qa=file-selection-summaryOfRentStabilizationLaws-input] input");
+    }
+
+    get uploadRentStabilizationFileButton() {
+        return cy.get("[data-qa=file-selection-summaryOfRentStabilizationLaws-input] button");
+    }
+
+    get fileDropZone() { return cy.get("[data-qa=dropzone-container]"); }
+
+    getUploadFileButton(index = 0) { return cy.get("[data-qa=upload-btn]").eq(index); }
+
+    get insertFileButton() { return cy.get("[data-qa=insert-btn]"); }
+
+    getTrashCanButton(fileSelectionName: BoweryReports.FileSelection) {
+        return cy.xpath(`//div[@data-qa='file-${fileSelectionName}}-input']
+            /following::button[@variant='contained']`).eq(0);
+    }
 }
 
 export default new MarketPage();

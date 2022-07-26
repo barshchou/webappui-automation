@@ -1,29 +1,29 @@
 import BasePage from "../base/base.page";
 
 class FinalValuesReconciliationPage extends BasePage {
-    get perUnitCheckbox() {return cy.get("[data-qa^='unitOfComparison.perUnit-checkbox'] input");}
+    get perUnitCheckbox() { return cy.get("[data-qa^='unitOfComparison.perUnit-checkbox'] input"); }
 
-    get incomeStabilizedDate() {return cy.get("[data-qa=incomeApproachAsStablilized-date]");}
+    get incomeStabilizedDate() { return cy.get("[data-qa=incomeApproachAsStablilized-date]"); }
 
-    get incomeCompleteDate() {return cy.get("[data-qa=incomeApproachAsComplete-date]");}
+    get incomeCompleteDate() { return cy.get("[data-qa=incomeApproachAsComplete-date]"); }
 
-    get incomeMarketDate() {return cy.get("[data-qa=incomeApproachAsIs-date]");}
+    get incomeMarketDate() { return cy.get("[data-qa=incomeApproachAsIs-date]"); }
 
-    get salesStabilizedDate() {return cy.get("[data-qa=salesApproachAsStablilized-date]");}
+    get salesStabilizedDate() { return cy.get("[data-qa=salesApproachAsStablilized-date]"); }
 
-    get salesCompleteDate() {return cy.get("[data-qa=salesApproachAsComplete-date]");}
+    get salesCompleteDate() { return cy.get("[data-qa=salesApproachAsComplete-date]"); }
 
-    get salesMarketDate() {return cy.get("[data-qa=salesApproachAsIs-date]");}
+    get salesMarketDate() { return cy.get("[data-qa=salesApproachAsIs-date]"); }
 
-    get finalValueApproachRadio() {return cy.get("[name=approachSelected]");}
+    get finalValueApproachRadio() { return cy.get("[name=approachSelected]"); }
 
-    getElementToVerifyRadio(value) {return cy.get(`[data-qa=checked] input[value=${value}]`);}
+    getElementToVerifyRadio(value: string) { return cy.get(`[data-qa=checked] input[value=${value}]`); }
 
-    get finalValueAsStabDate() {return cy.get("[data-qa=asStablilized-date]");}
+    get finalValueAsStabDate() { return cy.get("[data-qa=asStablilized-date]"); }
 
-    get finalValueAsCompleteDate() {return cy.get("[data-qa=asComplete-date]");}
+    get finalValueAsCompleteDate() { return cy.get("[data-qa=asComplete-date]"); }
 
-    get finalValueAsIsDate() {return cy.get("[data-qa=asIs-date]");}
+    get finalValueAsIsDate() { return cy.get("[data-qa=asIs-date]"); }
 }
 
 export default new FinalValuesReconciliationPage();

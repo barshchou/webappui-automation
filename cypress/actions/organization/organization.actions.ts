@@ -2,7 +2,7 @@
 import organizationPage from "../../pages/organization/organization.page";
 import BaseActionsExt from "../base/base.actions.ext";
 
-class OrganizationActions extends BaseActionsExt<typeof organizationPage>{
+class OrganizationActions extends BaseActionsExt<typeof organizationPage> {
 
     openCreateNewClientPage(): OrganizationActions {
         this.Page.createNewClient.click();

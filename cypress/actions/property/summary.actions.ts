@@ -5,6 +5,7 @@ import {
     numberWithCommas
 } from "../../../utils/numbers.utils";
 import BaseActionsExt from "../base/base.actions.ext";
+import { BoweryReports } from "../../types/boweryReports.type";
 
 class SummaryActions extends BaseActionsExt<typeof summaryPage> {
 
@@ -156,17 +157,34 @@ class SummaryActions extends BaseActionsExt<typeof summaryPage> {
         return this;
     }
 
-    fillAsCompleteBuildingDescription(description: Readonly<{ grossArea: number; numberOfUnits: number; floorsNumber: number; }>): this {
+    fillAsCompleteBuildingDescription(description: Readonly<{ grossArea: number; numberOfUnits: number; 
+        floorsNumber: number; }>): this {
         this.enterGrossBuildingArea(description.grossArea)
             .enterNumberOfResUnits(description.numberOfUnits)
             .enterFloorsNumber(description.floorsNumber);
         return this;
     }
 
-    fillCurrentBuildDescription(description: Readonly<{ grossArea: number; numberOfUnits: number; floorsNumber: number; }>): this {
+    fillCurrentBuildDescription(description: Readonly<{ grossArea: number; numberOfUnits: number; 
+        floorsNumber: number; }>): this {
         this.enterCurrentGrossBuildingArea(description.grossArea)
             .enterCurrentNumberOfResUnits(description.numberOfUnits)
             .enterCurrentFloorsNumber(description.floorsNumber);
+        return this;
+    }
+
+    selectBasisSquareFootAnalysis(basisSquareFootAnalysis: BoweryReports.BasisSquareFootAnalysis): SummaryActions {
+        summaryPage.basisSquareFootAnalysis(basisSquareFootAnalysis)
+            .click()
+            .should('be.checked');
+        return this;
+    }
+
+    fillBasisSquareFootAnalysis(area: number): SummaryActions {
+        summaryPage.basisSquareFootAnalysisArea
+            .clear()
+            .type(`${area}`)
+            .should('have.value', `${numberWithCommas(area)}`);
         return this;
     }
 }

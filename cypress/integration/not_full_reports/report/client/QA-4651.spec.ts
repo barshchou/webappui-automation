@@ -7,16 +7,15 @@ const reportCreationData = ReportDataCreator.getReportData("4651");
 
 describe("Verify the Back button functionality on the Client page", 
     { tags: [ "@report", "@client" ] }, () => {
-        
-    before("Login, create report", () => {
-        createReport(reportCreationData);
-    });
+        before("Login, create report", () => {
+            createReport(reportCreationData);
+        });
 
-    it("Test body", () => {
-        NavigationSection.navigateToClientPage();
-        Report.Client.clickBackButton()
-            .clickYesButton();
-        Report.Appraiser.verifyPageOpened();
-        deleteReport(reportCreationData.reportNumber);
+        it("Test body", () => {
+            NavigationSection.navigateToClientPage();
+            Report.Client.clickBackButton()
+                .clickYesButton();
+            Report.Appraiser.verifyPageOpened();
+            deleteReport(reportCreationData.reportNumber);
+        });
     });
-});

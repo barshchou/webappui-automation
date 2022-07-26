@@ -21,8 +21,9 @@ describe("[QA-5771] Historical expense Payroll & Benefits Per SF is correctly ca
             cy.stepInfo("2. Go to Income > Expense History");
             _NavigationSection.Actions.navigateToExpenseHistory();
 
-            cy.stepInfo(`3. Add columns for all types of Expense Period: Actual, Actual T12, Annualized Historical and Projection + 
-                     Fill in Payroll & Benefits field for all added columns and save changes`);
+            cy.stepInfo(`3. Add columns for all types of Expense Period: 
+            Actual, Actual T12, Annualized Historical and Projection + 
+            Fill in Payroll & Benefits field for all added columns and save changes`);
             testData.periods.forEach((period) => {
                 Income._ExpenseHistory.Actions.selectExpensePeriod(period.expensePeriodType)
                     .enterExpenseYear(period.year)
@@ -38,15 +39,17 @@ describe("[QA-5771] Historical expense Payroll & Benefits Per SF is correctly ca
             });
             Income._ExpenseHistory.Actions.verifyAverageTable();
 
-            cy.stepInfo("4. Go to Expense Forecast and make sure that Per SF radiobutton is selected for Payroll & Benefits card");
+            cy.stepInfo(`4. Go to Expense Forecast and make sure that Per SF radio button 
+            is selected for Payroll & Benefits card`);
             _NavigationSection.Actions.navigateToExpenseForecast();
             Income._ExpenseForecastActions.chooseForecastItemBasis(testData.actualPayrollAndBenefitsItem)
                 .verifyForecastItemBasis(testData.actualPayrollAndBenefitsItem);
 
             cy.stepInfo(`5.1 Check historical expenses values for Payroll & Benefits card. They should be calculated 
                      for each expense type as: [Expense Period type]Payroll & Benefits / GBA`);
-            Income._ExpenseForecastActions.Actions.verifyForecastItemByExpensePeriodType(testData.actualPayrollAndBenefitsItem, 
-                testData.buildingDescription, "Actual")
+            Income._ExpenseForecastActions.Actions
+                .verifyForecastItemByExpensePeriodType(testData.actualPayrollAndBenefitsItem, 
+                    testData.buildingDescription, "Actual")
                 .verifyForecastItemByExpensePeriodType(testData.t12PayrollAndBenefitsItem, 
                     testData.buildingDescription, "Actual T12")
                 .verifyForecastItemByExpensePeriodType(testData.historicalPayrollAndBenefitsItem, 
@@ -57,10 +60,12 @@ describe("[QA-5771] Historical expense Payroll & Benefits Per SF is correctly ca
                 .clickSaveButton()
                 .verifyProgressBarNotExist();
 
-            cy.stepInfo("5.2 Check historical expenses values for Payroll & Benefits card. They should be correctly displayed on slidebars");
+            cy.stepInfo(`5.2 Check historical expenses values for Payroll & Benefits card. 
+            They should be correctly displayed on slide bars`);
             Income._ExpenseForecastActions.Actions.matchElementSnapshot(
                 Income._ExpenseForecastActions.Page.forecastItemCard(
                     Income._ExpenseForecastActions.getItemNameForAverage(
-                        testData.actualPayrollAndBenefitsItem.name)), testData.payrollAndBenefitsPerSfCardSnapshotName, { padding: [ 0, 100 ] });
+                        testData.actualPayrollAndBenefitsItem.name)), testData.payrollAndBenefitsPerSfCardSnapshotName, 
+                { padding: [ 0, 100 ] });
         });
     });

@@ -1,14 +1,15 @@
 import BasePage from "../../base/base.page";
 
 class ParkingPage extends BasePage {
+    get isParkingFreeCheckbox() { return cy.get("[data-qa=isParkingFree] input"); }
 
-    get isParkingFreeCheckbox() {return cy.get("[data-qa=isParkingFree] input");}
+    vcLossTypeCheckbox(type: string) { 
+        return cy.get(`[data-qa=parkingVCLossType-radio-group] input[value='${type}']`); 
+    }
 
-    vcLossTypeCheckbox(type: string) { return cy.get(`[data-qa=parkingVCLossType-radio-group] input[value='${type}']`); }
+    get parkingCommentary() { return cy.get("[data-qa^='parkingIncomeDiscussion.commentary']"); }
 
-    get parkingCommentary() {return cy.get("[data-qa^='parkingIncomeDiscussion.commentary']");}
-
-    parkingMonthlyRent(index = 0) {return cy.get(`[name='spaces[${index}].monthlyRent']`);}
+    parkingMonthlyRent(index = 0) { return cy.get(`[name='spaces[${index}].monthlyRent']`); }
 
     get parkingVCLossPercentage() { return cy.get("[name='parkingVCLossPercentage']"); }
 }

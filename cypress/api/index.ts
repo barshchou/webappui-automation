@@ -1,8 +1,15 @@
 /* eslint-disable no-console */
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import { agent as request } from "supertest";
 import io = require("socket.io-client");
 import { BoweryAutomation } from "../types/boweryAutomation.type";
+import axios, { AxiosResponse } from "axios";
+
+const throwErrorIfStatusNotOk = (response: AxiosResponse) => {
+    if (response.status != 200) {
+        throw new Error(`The request has failed, you've got ${response.status}` +
+            `status with text ${response.statusText}`);
+    }
+};
 
 export default {
     /**
@@ -10,16 +17,12 @@ export default {
      * @returns response from `/user/login` endpoint
      */
     _loginApi: async function(_envUrl: string, _username: string, _password: string) {
-        const response = await request(_envUrl)
-            .post('/user/login')
-            .send({
-                username:_username,
-                password:_password
-            })
-            .expect('Content-Type', /json/)
-            .expect(200);
-
-        return response;
+        const response = await axios.post(`${_envUrl}/user/login`, {
+            username:_username,
+            password:_password
+        });
+        throwErrorIfStatusNotOk(response);
+        return response.data;
     },
 
     /**
@@ -31,8 +34,9 @@ export default {
      * -> create promise, which we will wait to resolved
      * In this promise we do next:
      *  -> wait on `connect` event
-     *  -> when `connect` is emmited - wait on `init` event (we need to wait synchronously, exaclty after `connect` event)
-     *  -> when `init` is emmited - resolving callback with data from `init` event
+     *  -> when `connect` is emitted - wait on `init` event 
+     * (we need to wait synchronously, exactly after `connect` event)
+     *  -> when `init` is emitted - resolving callback with data from `init` event
      *  -> resolving promise with `resolve` fn and socketId param
      *
      * We "await" until our promise will be resolved with `socketId` value.
@@ -42,24 +46,28 @@ export default {
      * will be our report with necessary props (reportId and reportNumber)
      */
     _createReportApi: async (_reportCreationData: BoweryAutomation.ReportCreationData,
-                             _payload, _token: string, _envUrl: string): Promise<string> => {
+        _payload, _token: string, _envUrl: string): Promise<string> => {
         let reportId = "not report id";
         const socket = io.connect(_envUrl);
         const _connect = new Promise((res, rej) =>
-            // ernst: we have to chain sockets in order to have synchronous order of execution,
-            // without it - we will not be able to wait until socket id will be generated and resolved by promise
+            /*
+             * ernst: we have to chain sockets in order to have synchronous order of execution,
+             * without it - we will not be able to wait until socket id will be generated and resolved by promise
+             */
             socket.on('connect', () => console.log('Socket opened')).on('init', async socketId => {
 
                 console.log(socketId);
 
                 try {
-                    await request(_envUrl)
-                        .post('/report')
-                        .set('Accept', 'application/json')
-                        .send(_payload)
-                        .set('Authorization', `Bearer ${_token}`)
-                        .set('SocketId', `${socketId}`)
-                        .expect(200);
+                    await axios.post(`${_envUrl}/report`, _payload, {
+                        headers: {
+                            "Accept": "application/json",
+                            "Authorization": `Bearer ${_token}`,
+                            "SocketId": `${socketId}`
+                        }
+                    }).then(response => {
+                        throwErrorIfStatusNotOk(response);
+                    });
 
                     res(socketId);
                 } catch (error) {

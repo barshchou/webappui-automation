@@ -7,19 +7,19 @@ import { createReport, deleteReport } from "../../../../../actions/base/baseTest
 describe("Verify the Inspected checkbox functionality", 
     { tags:[ "@income", "@commercial", "@in_place_rent_roll" ] }, () => {
         
-    before("Login, create report", () => {
-        createReport(testData.reportCreationData);
-    });
+        before("Login, create report", () => {
+            createReport(testData.reportCreationData);
+        });
 
-    it("Test body", () => {
-       NavigationSection.navigateToCommercialInPlaceRentRoll();
-        Income.Commercial.InPlaceRentRoll.chooseLeaseStatusByRowNumber(testData.leaseStatus)
-            .checkIsInspectedCheckboxByRowNumber();
-        NavigationSection.navigateToStabilizedRentRollInCommercial()
-            .verifyProgressBarNotExist();
-        Income.Commercial.StabilizedRentRoll.verifyIsInspectedChecked();
-        NavigationSection.navigateToUnitInspection();
-        Final.UnitInspection.verifyNumberOfInspectedUnitsCommentary();
-        deleteReport(testData.reportCreationData.reportNumber);
+        it("Test body", () => {
+            NavigationSection.navigateToCommercialInPlaceRentRoll();
+            Income.Commercial.InPlaceRentRoll.chooseLeaseStatusByRowNumber(testData.leaseStatus)
+                .checkIsInspectedCheckboxByRowNumber();
+            NavigationSection.navigateToStabilizedRentRollInCommercial()
+                .verifyProgressBarNotExist();
+            Income.Commercial.StabilizedRentRoll.verifyIsInspectedChecked();
+            NavigationSection.navigateToUnitInspection();
+            Final.UnitInspection.verifyNumberOfInspectedUnitsCommentary();
+            deleteReport(testData.reportCreationData.reportNumber);
+        });
     });
-});
