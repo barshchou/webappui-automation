@@ -88,8 +88,11 @@ class OrganizationSettingsActions extends BaseActionsExt<typeof organizationSett
     updateComplianceParagraphDiscussion(text: string, clear = false): OrganizationSettingsActions {
         this.clickComplianceParagraphEditButton()
             .editComplianceParagraphDiscussionText(text, clear)
-            .saveComplianceParagraphDiscussion()
-            .saveOrganizationSettings();
+            .saveComplianceParagraphDiscussion();
+
+        // Get some time to not overlap comment saving with global save
+        cy.wait(1000);
+        this.saveOrganizationSettings();
         return this;
     }
 
@@ -113,6 +116,8 @@ class OrganizationSettingsActions extends BaseActionsExt<typeof organizationSett
 
     saveComplianceParagraphDiscussion(): OrganizationSettingsActions {
         organizationSettingsPage.complianceParagraphDiscussionSaveButton.click();
+        organizationSettingsPage.complianceParagraphDiscussionSaveButton.should('not.exist');
+        organizationSettingsPage.complianceParagraphModifiedLabel.should('be.visible');
         return this;
     }
 
@@ -126,8 +131,11 @@ class OrganizationSettingsActions extends BaseActionsExt<typeof organizationSett
     updateCertificationBulletPointDiscussion(text: string, clear = false, index = 1): OrganizationSettingsActions {
         this.clickCertificationBulletPointEditButton(index)
             .editCertificationBulletPointDiscussionText(text, clear)
-            .saveCertificationBulletPointDiscussion()
-            .saveOrganizationSettings();
+            .saveCertificationBulletPointDiscussion();
+        
+        // Get some time to not overlap comment saving with global save
+        cy.wait(1000);
+        this.saveOrganizationSettings();
         return this;
     }
 
