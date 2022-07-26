@@ -434,13 +434,17 @@ class TaxInfoActions extends BaseActionsExt<typeof taxInfoPage> {
         return this;
     }
 
-    verifyPSFTaxLiability(item: PropertySquareFootAnalysisKeys): TaxInfoActions {
+    verifyPSFTaxLiability(item: PropertySquareFootAnalysisKeys, isSummary = false): TaxInfoActions {
         taxInfoPage.getTaxLiabilityRowValue(item).invoke("text").then(PSFAnalysis => {
             const numberPSFAnalysis = getNumberFromDollarNumberWithCommas(PSFAnalysis);
             taxInfoPage.getTaxLiabilityRowValue("Tax Liability (Total)").invoke("text").then(taxLiabilityTotal => {
                 const numberTaxLiabilityTotal = getNumberFromDollarNumberWithCommas(taxLiabilityTotal);
                 const taxLiability = `$${numberWithCommas((numberTaxLiabilityTotal / numberPSFAnalysis).toFixed(2))}`;
                 taxInfoPage.getTaxLiabilityRowValue("Tax Liability (PSF)").should("have.text", taxLiability);
+                if (isSummary === true) {
+                    this.clickSummaryTab();
+                    taxInfoPage.getSummaryRowValue("taxLiabilityPerBasis").should("have.text", taxLiability);
+                }
             });
         });
         return this;
