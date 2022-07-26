@@ -4,11 +4,11 @@ class PropertyInfoFormActions {
 
     Page: typeof findCompsPage;
 
-    constructor(page: typeof findCompsPage){
+    constructor(page: typeof findCompsPage) {
         this.Page = page;
     }
 
-    setCommercialArea(area: string): PropertyInfoFormActions{
+    setCommercialArea(area: string): PropertyInfoFormActions {
         this.Page.commercialAreaNewComp.type(area, { force: true });
         return this;
     }

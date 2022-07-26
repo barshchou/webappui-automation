@@ -5,7 +5,7 @@ import { BoweryReports } from "../../../../types/boweryReports.type";
 const _buildingDescription: BoweryReports.BuildingDescription = {
     grossArea: 2500,
     numberOfUnits: 5,
-  };
+};
 
 const _electricityForecast = 9;
 const _fuelForecast = 21;

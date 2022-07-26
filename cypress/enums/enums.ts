@@ -59,6 +59,10 @@ import reimbursementColumnsIdEnum from "./reimbursementColumnsId.enum";
 import calculationUnitsEnum from "./adjustComps/calculationUnits.enum";
 import calculationTypesEnum from "./commercial/rent_reconciliation/calculationTypes.enum";
 import salePeriodValuesEnum from "./findComps/salePeriodValues.enum";
+import fileSelectionNamesEnum from "./property/fileSelectionNames.enum";
+import salesAdjustmentGridDiscussionsEnum from "./adjustComps/salesAdjustmentGridDiscussions.enum";
+import salesAdjustmentGridRowsEnum from "./adjustComps/salesAdjustmentGridRows.enum";
+import basisSquareFootAnalysisEnum from "./property/basisSquareFootAnalysis.enum";
 
 export default {
     TEMPLATE_TYPE: templateTypesEnum,
@@ -121,5 +125,9 @@ export default {
     REIMBURSEMENT_COLUMN_ID: reimbursementColumnsIdEnum,
     CALCULATION_UNITS: calculationUnitsEnum,
     CALCULATION_TYPE: calculationTypesEnum,
-    SALE_PERIOD_VALUES: salePeriodValuesEnum
+    SALE_PERIOD_VALUES: salePeriodValuesEnum,
+    FILE_SELECTION_NAMES: fileSelectionNamesEnum,
+    SALES_ADJUSTMENT_GRID_DISCUSSIONS: salesAdjustmentGridDiscussionsEnum,
+    SALES_ADJUSTMENT_GRID_ROWS: salesAdjustmentGridRowsEnum,
+    BASIS_SQUARE_FOOT_ANALYSIS: basisSquareFootAnalysisEnum
 };

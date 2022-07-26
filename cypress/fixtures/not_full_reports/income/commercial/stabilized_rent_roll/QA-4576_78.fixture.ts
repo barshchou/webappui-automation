@@ -44,8 +44,8 @@ const _rentCompFields: BoweryReports.RentCompField[] = [
 export default {
     snapshotNames:{
         stabilizedRRPanel:"StabilizedRentRoll_Panel",
-        stabilizedRRPanel_severalUnits:"StabilizedRentRoll_Panel_Several_Units",
-        stabilizedRRPanel_severalUnits_compGroups:"stabilizedRRPanel_severalUnits_compGroups"
+        stabilizedRRPanelSeveralUnits:"StabilizedRentRoll_Panel_Several_Units",
+        stabilizedRRPanelSeveralUnitsCompGroups:"stabilizedRRPanel_severalUnits_compGroups"
     },
     reportCreationData: ReportDataCreator.getReportData("4576_78", { incomeValue: Enums.INCOME_TYPE.both }),
     numberOfCommercialUnits: 2,

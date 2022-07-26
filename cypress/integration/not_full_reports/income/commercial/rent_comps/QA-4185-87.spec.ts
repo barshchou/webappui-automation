@@ -5,9 +5,9 @@ import { Income, Property } from "../../../../../actions";
 import { _IncomeRoutes } from "../../../../../enums/pages_routes";
 
 describe(`[QA-4186] Unit of Measure on Commercial Unit Details modal is defaulted to selection on in-Place RR page
-                [QA-4187] Rent/SF/Month is column name if Per Square Foot Per Month is selected on In-Place Rant Roll page
-                [QA-4185] Per Square Foot Per Month radiobutton is displayed on Commercial Unit Details modal`,
-    { tags: [ "@income", "@commercial", "@rent_comps" ] }, () => {
+        [QA-4187] Rent/SF/Month is column name if Per Square Foot Per Month is selected on In-Place Rant Roll page
+        [QA-4185] Per Square Foot Per Month radio button is displayed on Commercial Unit Details modal`,
+{ tags: [ "@income", "@commercial", "@rent_comps" ] }, () => {
 
     before("Create report, add commercial units, choose Per Square Foot Per Month as basis of rent", () => {
         createReport(testData.reportCreationData);
@@ -40,7 +40,8 @@ describe(`[QA-4186] Unit of Measure on Commercial Unit Details modal is defaulte
                 Income._CommercialManager.InPlaceRentRoll.clickBasisOfRentTabByUnitMeasure(measure);
                 _NavigationSection.navigateToCommercialRentComps();
             }
-            cy.stepInfo(`Open Commercial Unit Details modal with new comp, verify ${measure} Unit of Measure is default`);
+            cy.stepInfo(`Open Commercial Unit Details modal with new comp, 
+            verify ${measure} Unit of Measure is default`);
             Income._CommercialManager.RentComps.clickManuallyAddANewCompButton()
                 .searchNewCompByAddress(testData.reportCreationData.address)
                 .verifyCommercialUnitDetailsUnitMeasureRadioChecked(measure);

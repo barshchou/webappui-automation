@@ -16,10 +16,11 @@ const _suggestionsVerificationData = [
         value:"=S",
         // eslint-disable-next-line no-useless-escape
         suggestion: "Sherrif'\s Sale",
-        verifyAreaValue: `The above transaction reflects a Sheriff's sale of the property. Typically in a Sheriff’s ` +
-                        `sale, the buyer assumes all encumbrances on the site, including any outstanding mortgage amount and legal fees ` +
-                        `("upset costs"), delinquent taxes and water and sewer charges, Sheriff's sale fee, and realty transfer taxes. ` +
-                        `This information was requested from the owner; however, not provided.`
+        verifyAreaValue: `The above transaction reflects a Sheriff's sale of the property. ` + 
+        `Typically in a Sheriff’s sale, the buyer assumes all encumbrances on the site, ` + 
+        `including any outstanding mortgage amount and legal fees ("upset costs"), delinquent ` + 
+        `taxes and water and sewer charges, Sheriff's sale fee, and realty transfer taxes. ` +
+        `This information was requested from the owner; however, not provided.`
     }
 ];
 
@@ -163,7 +164,7 @@ export default {
         incomeValue: enums.INCOME_TYPE.both,
         conclusionValue: enums.VALUE_CONCLUSION_TYPE.AS_IS
     }),
-    reportCreationDataAsStablized: reportDataCreator.getReportData("4484_86_88-90", {
+    reportCreationDataAsStabilized: reportDataCreator.getReportData("4484_86_88-90", {
         incomeValue: enums.INCOME_TYPE.both,
         conclusionValue: enums.VALUE_CONCLUSION_TYPE.AS_STABILIZED
     }),
@@ -175,7 +176,7 @@ export default {
     suggestionsVerificationData: _suggestionsVerificationData,
     numberOfCommercialUnits: _numberOfCommercialUnits,
     numberOfResidentialUnits: _numberOfResidentialUnits,
-    asIschips: _asIsAsStabilizedChips,
+    asIsChips: _asIsAsStabilizedChips,
     asStabilizedChips: _asIsAsStabilizedChips,
     asCompletedChips: _asCompletedChips,
     currentNumberOfCommercialUnits: _currentNumberOfCommercialUnits,
