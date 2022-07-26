@@ -1,4 +1,5 @@
 import { BoweryReports } from "../../types/boweryReports.type";
+import Enums from "../../enums/enums";
 import BasePage from "../base/base.page";
 
 class PropertySummaryPage extends BasePage {
@@ -58,13 +59,24 @@ class PropertySummaryPage extends BasePage {
 
     get textBox() { return cy.get("*[role=textbox]"); }
 
-    get saveExportEditButton() { return cy.xpath("//button[.='Save'][not(@data-qa='form-save-btn')]"); }
-
     basisSquareFootAnalysis(basis: BoweryReports.BasisSquareFootAnalysis) { 
         return cy.get(`[name="basisForSFAnalysis"][value="${basis}"]`); 
     }
 
     get basisSquareFootAnalysisArea() { return cy.get('[name="basisForSFAnalysisValue"]'); }
+
+    get saveExportEditButton() { return cy.xpath("//button[.='Save'][not(@data-qa='form-save-btn')]"); }
+
+    getRadioSquareFootAnalysis(radio = Object.keys(Enums.PROPERTY_SQUARE_FOOT_ANALYSIS)[0]) {
+        return cy.get(`[data-qa='basisForSFAnalysis-radio-group'] [value='${radio}']`); 
+    }
+
+    getCheckedSquareFootAnalysis(number = 0) {
+        return cy.get("[data-qa='basisForSFAnalysis-radio-group'] label").eq(number).children().eq(0);
+    }
+
+    get basisForSFAnalysisInput() { return cy.get("[name='basisForSFAnalysisValue']"); }
+
 }
 
 export default new PropertySummaryPage();

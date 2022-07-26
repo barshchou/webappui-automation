@@ -123,8 +123,22 @@ class TaxInfoPage extends BasePage {
         return cy.get("[data-qa^='taxSummaryDiscussion.commentary'],[name='taxSummaryDiscussion.commentary']");
     }
 
-    getAddNewRowButton(name = "Add Additional Tax Rate") {
-        return cy.xpath(`//*[contains(text(), '${name}')]`);
+    getAddNewRowButton(name = "Add Additional Tax Rate") { return cy.xpath(`//button/*[contains(text(), '${name}')]`); }
+
+    getTaxLiabilityRowValue(name: string) { 
+        return cy.xpath(`//*[@role='presentation']//*[contains(text(), '${name}')]/following-sibling::*[1]`); 
+    }
+
+    getTaxLiabilityRowItem(name: string) { 
+        return cy.xpath(`//*[@role='presentation']//*[contains(text(), '${name}')]`); 
+    }
+
+    getTaxLiabilityRowAction(name: string) { 
+        return cy.xpath(`//*[@role='presentation']//*[contains(text(), '${name}')]/following-sibling::*[2]`); 
+    }
+
+    getSummaryRowValue(name: string, rowName = 0) { 
+        return cy.get(`[data-qa='Current-${name}-value-cell']`).eq(rowName); 
     }
 }
 

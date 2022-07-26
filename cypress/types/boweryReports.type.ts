@@ -214,6 +214,9 @@ export namespace BoweryReports {
     export type MarketAnalysisUses = keyof typeof Enums.MARKET_ANALYSIS_USES
 
     export type PropertyConditions = typeof Enums.PROPERTY_CONDITIONS[KeyInfo.PropertyConditions];
+    export type PropertySquareFootAnalysisType = typeof Enums.PROPERTY_SQUARE_FOOT_ANALYSIS[
+        KeyInfo.PropertySquareFootAnalysisKeys
+    ]
 
     export type PropertyConditionsRadios = keyof typeof Enums.PROPERTY_CONDITIONS_RADIOS;
     export type BondTickers = typeof Enums.BOND_TYPES[KeyInfo.BondTypes]
