@@ -81,7 +81,7 @@ class InPlaceRentRollActions extends ResidentialRentRollSharedActions<typeof ren
     }
 
     checkPerUnitSquareFootage(value = true):InPlaceRentRollActions {
-        rentRollPage.getPerUnitSFRadio(value).should("not.be.checked").scrollIntoView()
+        rentRollPage.getPerUnitSFRadio(value).scrollIntoView()
             .click().should("be.checked");
         return this;
     }

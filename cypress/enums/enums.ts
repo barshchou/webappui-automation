@@ -62,6 +62,7 @@ import fileSelectionNamesEnum from "./property/fileSelectionNames.enum";
 import discussionNamesEnum from "./property/discussionNames.enum";
 import salesAdjustmentGridDiscussionsEnum from "./adjustComps/salesAdjustmentGridDiscussions.enum";
 import salesAdjustmentGridRowsEnum from "./adjustComps/salesAdjustmentGridRows.enum";
+import basisSquareFootAnalysisEnum from "./property/basisSquareFootAnalysis.enum";
 
 export default {
     TEMPLATE_TYPE: templateTypesEnum,
@@ -127,5 +128,6 @@ export default {
     FILE_SELECTION_NAMES: fileSelectionNamesEnum,
     PROPERTY_DISCUSSION_NAMES: discussionNamesEnum,
     SALES_ADJUSTMENT_GRID_DISCUSSIONS: salesAdjustmentGridDiscussionsEnum,
-    SALES_ADJUSTMENT_GRID_ROWS: salesAdjustmentGridRowsEnum
+    SALES_ADJUSTMENT_GRID_ROWS: salesAdjustmentGridRowsEnum,
+    BASIS_SQUARE_FOOT_ANALYSIS: basisSquareFootAnalysisEnum
 };
