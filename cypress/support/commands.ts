@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { addMatchImageSnapshotCommand } from '@simonsmith/cypress-image-snapshot/command';
 import "cypress-file-upload";
 import "cypress-localstorage-commands";
@@ -71,9 +72,8 @@ Cypress.Commands.add("loginByApi", (envUrl, username, password) => {
             _username: username, 
             _password: password
         })
-        .then(_response => {
-            const response: any = _response;
-            const responseBody = JSON.parse(response.text);
+        .then(responseBody => {
+            // @ts-ignore
             const token = responseBody.token;
 
             // set bearer token also in localStorage in order to avoid unexpected behavior from old code
@@ -82,6 +82,7 @@ Cypress.Commands.add("loginByApi", (envUrl, username, password) => {
             // set bearer token so we could we use this in global after hook in `./index.ts`
             cy._mapSet(mapKeysUtils.bearerToken, token);
 
+            // @ts-ignore
             const userId = responseBody.user._id;
             cy.log(`User Id is: ${userId}`);
             cy._mapSet(mapKeysUtils.userId, userId);
