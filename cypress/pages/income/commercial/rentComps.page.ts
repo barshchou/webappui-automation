@@ -20,9 +20,9 @@ class CommercialRentCompsPage extends BasePage {
 
     get addCompButtonsLocator() { return "[data-qa=add-comp-btn]"; }
 
-    get removeCompButtonLocator() {return "[data-qa=remove-comp-btn]";}
+    get removeCompButtonLocator() { return "[data-qa=remove-comp-btn]"; }
 
-    getAddCompButtonByAddress(address: string) {return cy.contains(address).siblings(this.addCompButtonsLocator);}
+    getAddCompButtonByAddress(address: string) { return cy.contains(address).siblings(this.addCompButtonsLocator); }
 
     get addressCellsLocator() { return "[data-qa=address-cell]"; }
 
@@ -48,17 +48,25 @@ class CommercialRentCompsPage extends BasePage {
 
     get leaseDatePicker() { return cy.get("[data-qa=dateSigned-date-picker] input:not([type=hidden])"); }
 
-    // Removed from stage
-    // getEditButtonByRowNumber(rowNumber = 0) {return cy.xpath(`//tr[@data-qa='row-${rowNumber}']//button[.='Edit']`);}
+    /*
+     * Removed from stage
+     * getEditButtonByRowNumber(rowNumber = 0) {return cy.xpath(`//tr[@data-qa='row-${rowNumber}']//button[.='Edit']`);}
+     */
 
-    // getRemoveButtonByRowNumber(rowNumber = 0) {return cy.xpath(`//tr[@data-qa='row-${rowNumber}']//button[.='Remove']`);}
+    /* 
+     * getRemoveButtonByRowNumber(rowNumber = 0) {
+     *   return cy.xpath(`//tr[@data-qa='row-${rowNumber}']//button[.='Remove']`);
+     * }
+     */
     
-    get leaseDateInputToVerify() {return cy.get("[data-qa=dateSigned-date-picker] input[type=hidden]");}
+    get leaseDateInputToVerify() { return cy.get("[data-qa=dateSigned-date-picker] input[type=hidden]"); }
 
-    // Removed from stage
-    // getEditButtonByRowNumberAndGroup(group = "Unsorted", rowNumber = 0) {
-    //     return cy.xpath(`//*[@data-qa='${group}-group-panel']//child::button[.='Edit']`).eq(rowNumber);
-    // }
+    /*
+     * Removed from stage
+     * getEditButtonByRowNumberAndGroup(group = "Unsorted", rowNumber = 0) {
+     *     return cy.xpath(`//*[@data-qa='${group}-group-panel']//child::button[.='Edit']`).eq(rowNumber);
+     * }
+     */
 
     getRentPerSFCellByRowNumberAndGroup(group = "Unsorted", rowNumber = 0) {
         return cy.get(`[data-qa='${group}-group-panel'] [data-qa=rentPerSF-cell]`).eq(rowNumber);
@@ -76,15 +84,17 @@ class CommercialRentCompsPage extends BasePage {
         return cy.xpath(`//*[@data-qa="unsorted_group"]//td[contains(text(), 'Drop any rent roll unit here')]`); 
     }
 
-    get cancelModalButton() {return cy.get("[data-qa=cancel-link]");}
+    get cancelModalButton() { return cy.get("[data-qa=cancel-link]"); }
 
-    addRemovedCompByRowButton(rowNumber: number) {return cy.get(`[data-qa=row-${rowNumber}] [aria-label=Add]`);}
+    addRemovedCompByRowButton(rowNumber: number) { return cy.get(`[data-qa=row-${rowNumber}] [aria-label=Add]`); }
 
-    removeRemovedCompByRowButton(rowNumber: number) {return cy.get(`[data-qa=row-${rowNumber}] [aria-label=Remove]`);}
+    removeRemovedCompByRowButton(rowNumber: number) { return cy.get(`[data-qa=row-${rowNumber}] [aria-label=Remove]`); }
 
-    get clearAllButton() {return cy.get("button").contains("Clear All");}
+    get clearAllButton() { return cy.get("button").contains("Clear All"); }
 
-    getRemovedCompRows(title = "Comp") {return cy.xpath(`//*[contains(text(), 'Removed ${title}')]//following::tbody//tr`);}
+    getRemovedCompRows(title = "Comp") { 
+        return cy.xpath(`//*[contains(text(), 'Removed ${title}')]//following::tbody//tr`); 
+    }
 
     get computedPanel() { return cy.get("[data-qa=computed-panel]"); }
 
@@ -123,11 +133,11 @@ class CommercialRentCompsPage extends BasePage {
         return cy.get(`[data-qa^=${name}][data-qa$='-select-option']`);
     }
 
-    get componentErrorElement() {return cy.get("#component-error-text");}
+    get componentErrorElement() { return cy.get("#component-error-text"); }
 
-    getEditCompButton(rowNumber = 0) {return cy.get("[data-testid='EditIcon']").eq(rowNumber);}
+    getEditCompButton(rowNumber = 0) { return cy.get("[data-testid='EditIcon']").eq(rowNumber); }
     
-    getRemoveCompButton(rowNumber = 0) {return cy.get("[data-testid='CancelIcon']").eq(rowNumber);} 
+    getRemoveCompButton(rowNumber = 0) { return cy.get("[data-testid='CancelIcon']").eq(rowNumber); } 
   
 }
 

@@ -137,7 +137,8 @@ class CommercialRentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
     } 
 
     verifyRentPerMonthCellValue(value: number, group = "Unsorted", rowNumber = 0): CommercialRentCompsActions {
-        rentCompsPage.getRentPerSFCellByRowNumberAndGroup(group, rowNumber).should("have.text", `$${numberWithCommas(value.toFixed(2))}`);
+        rentCompsPage.getRentPerSFCellByRowNumberAndGroup(group, rowNumber)
+            .should("have.text", `$${numberWithCommas(value.toFixed(2))}`);
         return this;
     }
 
@@ -162,10 +163,11 @@ class CommercialRentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
             const baseRentNum = getNumberFromDollarNumberWithCommas(baseRent);
             squareFeet.then(squareFeet => {
                 const squareFeetNum = getNumberFromDollarNumberWithCommas(squareFeet);
-               const perSquareFootValue = (name === "monthly") ? `$${(baseRentNum / squareFeetNum).toFixed(2)}` 
+                const perSquareFootValue = (name === "monthly") ? `$${(baseRentNum / squareFeetNum).toFixed(2)}` 
                     : `$${(baseRentNum / 12 / squareFeetNum).toFixed(2)}`;
-               rentCompsPage.cancelModalButton.click();
-               rentCompsPage.getRentPerSFCellByRowNumberAndGroup(group, rowNumber).should("have.text", perSquareFootValue);
+                rentCompsPage.cancelModalButton.click();
+                rentCompsPage.getRentPerSFCellByRowNumberAndGroup(group, rowNumber)
+                    .should("have.text", perSquareFootValue);
             });
         });
         return this;
