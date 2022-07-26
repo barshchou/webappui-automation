@@ -28,7 +28,7 @@ describe(`[QA-4481] Check that generated text pulls in the first submarket`,
             });
 
             cy.stepInfo(`3. Navigate to Property > Site Description and check that 
-                    generated text pulls in the first submarket`);
+                        generated text pulls in the first submarket`);
             _NavigationSection.openSiteDescriptionInProperty();
             Property._SiteDescription.verifyGeneratedCommentary(testData.discussion, testData.commentary);
         
@@ -45,7 +45,7 @@ describe(`[QA-4481] Check that generated text pulls in the first submarket`,
                     cy.log(<string>file);
 
                     cy.stepInfo(`5. Proceed to Site Description and verify that 
-                            Location Description commentary has been exported correctly.`);
+                                Location Description commentary has been exported correctly.`);
                     cy.visit(<string>file);
                     cy.contains("Site Description").scrollIntoView().next("table").within(() => {
                         cy.get("tr").eq(0).find("td").eq(1).find("p")
