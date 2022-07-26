@@ -72,7 +72,7 @@ class SiteDescriptionActions extends BaseActionsExt<typeof siteDescriptionPage> 
     }
     
     verifyGeneratedCommentary(discussion: BoweryReports.PropertyDiscussion, textToBe: string): SiteDescriptionActions {
-        cy.get(`[data-qa='${discussion}Description.commentary-generated-text']`)
+        siteDescriptionPage.getGeneratedCommentary(discussion)
             .should("have.text", textToBe);
         return this;
     }

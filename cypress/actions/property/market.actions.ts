@@ -48,13 +48,13 @@ class MarketActions extends BaseActionsExt<typeof marketPage> {
         return this;
     }
 
-    enterNeighborhoodYear(yearToBe: string | number): MarketActions {
+    enterNeighborhoodYear(yearToBe: number): MarketActions {
         marketPage.neighborhoodYear.type(`${yearToBe}`);
         this.verifyNeighborhoodYear(yearToBe);
         return this;
     }
 
-    verifyNeighborhoodYear(yearToBe: string | number): MarketActions {
+    verifyNeighborhoodYear(yearToBe: number): MarketActions {
         marketPage.neighborhoodYear.should("have.value", yearToBe);
         return this;
     }
@@ -76,13 +76,13 @@ class MarketActions extends BaseActionsExt<typeof marketPage> {
         return this;
     }
 
-    enterMarketYear(yearToBe: string | number): MarketActions {
+    enterMarketYear(yearToBe: number): MarketActions {
         marketPage.marketYear.type(`${yearToBe}`);
         this.verifyMarketYear(yearToBe);
         return this;
     }
 
-    verifyMarketYear(yearToBe: string | number): MarketActions {
+    verifyMarketYear(yearToBe: number): MarketActions {
         marketPage.marketYear.should("have.value", yearToBe);
         return this;
     }
@@ -100,7 +100,7 @@ class MarketActions extends BaseActionsExt<typeof marketPage> {
         if (isEnterState) { this.enterMarketState(marketResearch.state); }
         this.verifyMarketState(marketResearch.state)
             .enterArea(marketResearch.marketArea)
-            .verifyNeighborhoodYear(getYearFromDate(marketResearch.marketDate))
+            .verifyNeighborhoodYear(parseInt(getYearFromDate(marketResearch.marketDate)))
             .enterMarket(marketResearch.macroMarket, marketAnalysisUse)
             .enterSubmarket(marketResearch.submarket, marketAnalysisUse);
         if (isEnterQuarter)  {
@@ -109,7 +109,7 @@ class MarketActions extends BaseActionsExt<typeof marketPage> {
         } else {
             this.verifyMarketQuarter(getQuarter(marketResearch.dateOfValuation));
         }
-        this.verifyMarketYear(getYearFromDate(marketResearch.dateOfValuation));
+        this.verifyMarketYear(parseInt(getYearFromDate(marketResearch.dateOfValuation)));
         return this;
     }
 
