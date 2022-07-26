@@ -17,9 +17,9 @@ for Property Rights Appraised and Definition of Market Value sections`,
 
         cy.stepInfo(`2. Enter the “=F“ and select the 'Foreclosure sale' then “=Sh“ and select 
         the 'Sheriff's sale' then “=Unc“ and select the 'Unchanged Renovation' option for both sections.`);
-        Report._KeyInfo.Page.formEditBtn().click();
-        Report._KeyInfo.Page.formEditBtn().click();
         testData.chips.forEach(chip => {
+            Report._KeyInfo.Page.formEditBtn().click();
+            Report._KeyInfo.Page.formEditBtn().click();
             Report._KeyInfo.enterPropertyRightsAppraisedComment(chip.enterValue, false, false, false);
             Report._KeyInfo.clickNarrativeSuggestions(chip.listValue);
             Report._KeyInfo.Page.textBoxPropertyRightsAppraised.should("include.text", chip.verifyTexValue);
@@ -28,8 +28,10 @@ for Property Rights Appraised and Definition of Market Value sections`,
             Report._KeyInfo.clickNarrativeSuggestions(chip.listValue, 1);
             Report._KeyInfo.Page.textBoxDefinitionOfMarketValue().should("include.text", chip.verifyTexValue);
             cy.wait(500);
-            Report._KeyInfo.clickSaveButton();
-            cy.reload();
+
+            //Restore page to default state
+            _NavigationSection.navigateToReportAppraiser()
+                .navigateToReportInformation();
         });
 
         cy.stepInfo(`3. Verify value after save and reload`);
