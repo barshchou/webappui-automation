@@ -34,9 +34,9 @@ after(() => {
 
 Cypress.on("fail", (err, runnable) => {
     const createCustomErrorMessage = (error, steps, runnableObj) => {
-        let lastSteps = "Last logged step:\n";
+        let lastStep = "Last logged step:\n";
         steps.forEach(step => {
-            lastSteps += `${step}\n`;
+            lastStep += `${step}\n`;
         });
 
         const messageArr = [
@@ -44,7 +44,7 @@ Cypress.on("fail", (err, runnable) => {
             `Test: ${runnableObj.title}`, // it('...')
             "----------",
             `${error.message}`,
-            `\n${lastSteps}`
+            `\n${lastStep}`
         ];
 
         return messageArr.join('\n');
@@ -68,22 +68,19 @@ Cypress.on("fail", (err, runnable) => {
 
     customError.message = customErrorMessage;
 
-    /*
-     * switch (customError.name) {
-     *   case "AssertionError":
-     *     if (includesErrorMessage("Expected to find element")) {
-     *       updatedError({ name: "Element not found" });
-     *     } else if (includesErrorMessage("to have")) {
-     *       updatedError({ name: "Validation error" });
-     *     }
-     *     break;
-     */
-      
-    /*
-     *   default: 
-     *      customError;
-     * }
-     */
+    
+    switch (customError.name) {
+        case "AssertionError":
+            if (includesErrorMessage("Expected to find element")) {
+                updatedError({ name: "Element not found" });
+            } else if (includesErrorMessage("to have")) {
+                updatedError({ name: "Validation error" });
+            }
+            break;
+    
+        default: 
+            customError;
+    }
     throw customError;
 });
 
