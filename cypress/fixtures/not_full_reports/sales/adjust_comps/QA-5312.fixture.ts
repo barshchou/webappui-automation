@@ -10,8 +10,8 @@ const _reportCreationData = ReportDataCreator.getReportData("5312", {
 
 const _numberOfSalesComps = [ 0, 1 ];
 
-const _adjustmentName: BoweryReports.SalesAdjustmentGrid.AdjustmentName = salesadjustmentgridEnum.market_adjustment;
-const _rowName: BoweryReports.SalesAdjustmentGrid.RowsMarketAdjustment = rowsMarketadjustmentEnum.property_description;
+const _adjustmentName: BoweryReports.SalesAdjustmentGrid.AdjustmentName = salesadjustmentgridEnum.marketAdjustment;
+const _rowName: BoweryReports.SalesAdjustmentGrid.RowsMarketAdjustment = rowsMarketadjustmentEnum.propertyDescription;
 
 export default {
     reportCreationData: _reportCreationData,

@@ -5,34 +5,34 @@ import { createReport, deleteReport } from "../../../../../actions/base/baseTest
 
 describe("Default selection on Stabilized Rent Roll table is the same selection made on In-Place RR page",
     { tags:[ "@income", "@residential", "@stabilized_rent_roll" ] }, () => {
-    before("Login, create report", () => {
-        createReport(testData.reportCreationData);
-    });
-
-    it("Test body", () => {
-        cy.stepInfo("Precondition: Fill all needed variables");
-        _NavigationSection.navigateToPropertySummary();
-        Property._Summary.enterNumberOfResUnits(testData.residentialUnits.length);
-
-        _NavigationSection.navigateToResInPlaceRentRoll();
-        Income._Residential.InPlaceRentRoll.verifyTotalAnnualRent()
-            .checkUncheckPerUnitSquareFootage(testData.columns)
-            .checkPerUnitSquareFootage();
-
-        testData.residentialUnits.forEach((unit, index) => {
-            Income._Residential.InPlaceRentRoll.enterMonthlyRentByRowNumber(unit.monthlyRent, index)
-                .enterSquareFootageByRow(unit.footage, index)
-                .enterLeaseStatusByRowNumber(unit.leaseStatus, index)
-                .verifyRentPSFValueByRow(true, index);
+        before("Login, create report", () => {
+            createReport(testData.reportCreationData);
         });
 
-        cy.stepInfo("1. Navigate to Income > Residential > Stabilized Rent Roll");
-        _NavigationSection.navigateToResidentialStabilizedRentRoll();
+        it("Test body", () => {
+            cy.stepInfo("Precondition: Fill all needed variables");
+            _NavigationSection.navigateToPropertySummary();
+            Property._Summary.enterNumberOfResUnits(testData.residentialUnits.length);
 
-        testData.residentialUnits.forEach((unit, index) => {
-            Income._Residential.InPlaceRentRoll.verifyRentPSFValueByRow(false, index, true);
+            _NavigationSection.navigateToResInPlaceRentRoll();
+            Income._Residential.InPlaceRentRoll.verifyTotalAnnualRent()
+                .checkUncheckPerUnitSquareFootage(testData.columns)
+                .checkPerUnitSquareFootage();
+
+            testData.residentialUnits.forEach((unit, index) => {
+                Income._Residential.InPlaceRentRoll.enterMonthlyRentByRowNumber(unit.monthlyRent, index)
+                    .enterSquareFootageByRow(unit.footage, index)
+                    .enterLeaseStatusByRowNumber(unit.leaseStatus, index)
+                    .verifyRentPSFValueByRow(false, index);
+            });
+
+            cy.stepInfo("1. Navigate to Income > Residential > Stabilized Rent Roll");
+            _NavigationSection.navigateToResidentialStabilizedRentRoll();
+
+            testData.residentialUnits.forEach((unit, index) => {
+                Income._Residential.InPlaceRentRoll.verifyRentPSFValueByRow(false, index, true);
+            });
+
+            deleteReport(testData.reportCreationData.reportNumber);
         });
-
-        deleteReport(testData.reportCreationData.reportNumber);
     });
-});

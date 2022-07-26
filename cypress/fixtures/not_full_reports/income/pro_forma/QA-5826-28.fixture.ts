@@ -29,8 +29,8 @@ const _waterAndSewerUnitPerSf = _waterAndSewerUnitTotal / _grossBuildingArea;
 const _waterAndSewerUnitPerUnit = _forecast;
 
 const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("5826-28", {
-        incomeValue: Enums.INCOME_TYPE.both
-    });
+    incomeValue: Enums.INCOME_TYPE.both
+});
 
 export default {
     reportCreationData: _reportCreationData,

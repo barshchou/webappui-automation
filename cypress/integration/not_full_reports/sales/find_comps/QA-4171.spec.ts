@@ -5,19 +5,18 @@ import { createReport, deleteReport } from "../../../../actions/base/baseTest.ac
 
 describe("Selected Comparables table. Verify the functionality of Remove button", 
     { tags:[ "@find_comps", "@sales" ] }, () => {
+        before("Login, create report", () => {
+            createReport(testData.reportCreationData);
+        });
 
-    before("Login, create report", () => {
-        createReport(testData.reportCreationData);
+        it("Test body", () => {
+            NavigationSection.navigateToFindComps();
+            Sales.FindComps.selectCompFromMapByAddress(testData.comparable.address)
+                .verifyAddedCompAddress(testData.comparable.address)
+                .removeCompByAddress(testData.comparable.address)
+                .verifyCompIsInRemovedSection(testData.comparable.address)
+                .verifyCompIsInMap(testData.comparable.address)
+                .removeDeletedCompByAddress(testData.comparable.address);
+            deleteReport(testData.reportCreationData.reportNumber);
+        });
     });
-
-    it("Test body", () => {
-        NavigationSection.navigateToFindComps();
-        Sales.FindComps.selectCompFromMapByAddress(testData.comparable.address)
-            .verifyAddedCompAddress(testData.comparable.address)
-            .removeCompByAddress(testData.comparable.address)
-            .verifyCompIsInRemovedSection(testData.comparable.address)
-            .verifyCompIsInMap(testData.comparable.address)
-            .removeDeletedCompByAddress(testData.comparable.address);
-        deleteReport(testData.reportCreationData.reportNumber);
-    });
-});

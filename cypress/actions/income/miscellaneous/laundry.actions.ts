@@ -3,11 +3,11 @@ import { numberWithCommas } from "../../../../utils/numbers.utils";
 import BaseActionsExt from "../../base/base.actions.ext";
 import { BoweryReports } from "../../../types/boweryReports.type";
 
-class LaundryActions extends BaseActionsExt<typeof laundryPage>{
+class LaundryActions extends BaseActionsExt<typeof laundryPage> {
 
 
     verifyThatPageIsOpened(): this {
-        laundryPage.laundryheaderSection.should("be.visible");
+        laundryPage.laundryHeaderSection.should("be.visible");
         cy.url().then(url => {
             let urlObj = new URL(url);
             cy.log("Check whether current URL ends with '/laundry-income'");

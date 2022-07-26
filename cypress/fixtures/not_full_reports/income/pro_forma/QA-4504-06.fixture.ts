@@ -25,12 +25,12 @@ const _annualRentTotal = () => {
     return total;
 };
 
-const _parkingincomePerSf = _annualRentTotal() / _grossBuildingArea;
-const _parkingincomePerUnit = _annualRentTotal() / _numberOfResidentialUnits;
+const _parkingIncomePerSf = _annualRentTotal() / _grossBuildingArea;
+const _parkingIncomePerUnit = _annualRentTotal() / _numberOfResidentialUnits;
 
 const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("4504-06", {
-        incomeValue: Enums.INCOME_TYPE.both
-    });
+    incomeValue: Enums.INCOME_TYPE.both
+});
 
 const _leaseStatuses: Array<BoweryReports.LeaseStatus> = [ "Occupied", "Occupied", "Occupied" ];
 
@@ -41,8 +41,8 @@ export default {
     numberOfCommercialUnits: _numberOfCommercialUnits,
     leaseStatuses: _leaseStatuses,
     annualRentTotal: _annualRentTotal(),
-    parkingincomePerSf: _parkingincomePerSf,
-    parkingincomePerUnit: _parkingincomePerUnit,
+    parkingIncomePerSf: _parkingIncomePerSf,
+    parkingIncomePerUnit: _parkingIncomePerUnit,
     numberOfParkingPlaces: _numberOfParkingPlaces,
     monthlyRents: _monthlyRents
 };

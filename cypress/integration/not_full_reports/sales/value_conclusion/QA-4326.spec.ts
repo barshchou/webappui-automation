@@ -5,17 +5,16 @@ import { createReport, deleteReport } from "../../../../actions/base/baseTest.ac
 
 describe("Sales Value Conclusion Discussion -> Generated Commentary is revertible", 
     { tags: [ "@sales", "@value_conclusion" ] }, () => {
+        before("Login, create report", () => {
+            createReport(testData.reportCreationData);
+        });
 
-    before("Login, create report", () => {
-       createReport(testData.reportCreationData);
+        it("Test body", () => {
+            NavigationSection.navigateToSalesValueConclusion();
+            Sales.ValueConclusion.verifyGeneratedCommentary(testData.commentaryData.generatedCommentary)
+                .enterNewCommentary(testData.commentaryData.newCommentary)
+                .clickRevertCommentaryButton()
+                .verifyGeneratedCommentary(testData.commentaryData.generatedCommentary);
+            deleteReport(testData.reportCreationData.reportNumber);
+        });
     });
-
-    it("Test body", () => {
-        NavigationSection.navigateToSalesValueConclusion();
-        Sales.ValueConclusion.verifyGeneratedCommentary(testData.commentaryData.generatedCommentary)
-            .enterNewCommentary(testData.commentaryData.newCommentary)
-            .clickRevertCommentaryButton()
-            .verifyGeneratedCommentary(testData.commentaryData.generatedCommentary);
-        deleteReport(testData.reportCreationData.reportNumber);
-    });
-});

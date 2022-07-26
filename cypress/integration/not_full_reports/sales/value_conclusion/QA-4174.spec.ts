@@ -5,15 +5,14 @@ import { createReport, deleteReport } from "../../../../actions/base/baseTest.ac
 
 describe("Prospective Market Value As Stabilized is calculated like Concluded Value per SF * GBA", 
     { tags: [ "@sales", "@value_conclusion" ] }, () => {
+        before("Login, create report", () => {
+            createReport(testData.reportCreationData);
+        });
 
-    before("Login, create report", () => {
-        createReport(testData.reportCreationData);
+        it("Test body", () => {
+            NavigationSection.navigateToSalesValueConclusion();
+            Sales.ValueConclusion.enterSaleValueConclusion(testData.valueConclusion)
+                .verifyAsIsMarketAmount(testData.asIsMarket);
+            deleteReport(testData.reportCreationData.reportNumber);
+        });
     });
-
-    it("Test body", () => {
-        NavigationSection.navigateToSalesValueConclusion();
-        Sales.ValueConclusion.enterSaleValueConclusion(testData.valueConclusion)
-            .verifyAsIsMarketAmount(testData.asIsMarket);
-        deleteReport(testData.reportCreationData.reportNumber);
-    });
-});

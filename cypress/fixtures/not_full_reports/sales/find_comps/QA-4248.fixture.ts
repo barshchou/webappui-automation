@@ -7,7 +7,7 @@ export default {
     setupInterceptions:salesInterceptions,
     reportCreationData: ReportDataCreator.getReportData("4248"),
     /**
-    * Selecting several sales comps for test
-    */
+     * Selecting several sales comps for test
+     */
     compsNumber: _compsNumber
 };

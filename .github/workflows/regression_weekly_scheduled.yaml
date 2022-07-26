@@ -23,8 +23,7 @@ jobs:
           github_token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
-          env: staging
-          url: https://bowery-staging.herokuapp.com
+          url: staging
           spec_file: cypress/integration/not_full_reports/**/*.spec.ts
           tags: grep=,grepTags=-@smoke,burn=
           record_key: ${{ secrets.CURRENTS_RECORD_KEY }}

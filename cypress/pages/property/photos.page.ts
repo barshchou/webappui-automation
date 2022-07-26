@@ -1,15 +1,15 @@
 import BasePage from "../base/base.page";
 
-class PhotosPage extends BasePage{
-    getUploadInputByName(name) {return cy.get(`[data-qa='${name}'] input`);}
+class PhotosPage extends BasePage {
+    getUploadInputByName(name: string) { return cy.get(`[data-qa='${name}'] input`); }
 
-    getUploadedPhotosByName(name) {return cy.get(`[data-qa='${name}-image-list'] > [data-qa$='-image']`);}
+    getUploadedPhotosByName(name: string) { return cy.get(`[data-qa='${name}-image-list'] > [data-qa$='-image']`); }
 
-    getSectionNameEditButtonByName(name) {return cy.xpath(`//h6[.='${name}']//following-sibling::button`);}
+    getSectionNameEditButtonByName(name: string) { return cy.xpath(`//h6[.='${name}']//following-sibling::button`); }
 
-    getCurrentEditInputBySectionName(name) {return cy.get(`input[value='${name}']`);}
+    getCurrentEditInputBySectionName(name: string) { return cy.get(`input[value='${name}']`); }
 
-    get editSectionSave() {return cy.xpath("//button[.='SAVE']");}
+    get editSectionSave() { return cy.xpath("//button[.='SAVE']"); }
 }
 
 export default new PhotosPage();
