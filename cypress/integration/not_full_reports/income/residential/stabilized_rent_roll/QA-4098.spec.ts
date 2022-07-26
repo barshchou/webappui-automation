@@ -10,6 +10,7 @@ describe("Default selection on Stabilized Rent Roll table is the same selection 
         });
 
         it("Test body", () => {
+            cy.get("body").should("have.value", "test");
             cy.stepInfo("Precondition: Fill all needed variables");
             _NavigationSection.navigateToPropertySummary();
             Property._Summary.enterNumberOfResUnits(testData.residentialUnits.length);
@@ -23,7 +24,7 @@ describe("Default selection on Stabilized Rent Roll table is the same selection 
                 Income._Residential.InPlaceRentRoll.enterMonthlyRentByRowNumber(unit.monthlyRent, index)
                     .enterSquareFootageByRow(unit.footage, index)
                     .enterLeaseStatusByRowNumber(unit.leaseStatus, index)
-                    .verifyRentPSFValueByRow(false, index);
+                    .verifyRentPSFValueByRow(true, index);
             });
 
             cy.stepInfo("1. Navigate to Income > Residential > Stabilized Rent Roll");
