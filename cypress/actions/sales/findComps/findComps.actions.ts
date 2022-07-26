@@ -1,3 +1,4 @@
+import { findCompsPage } from './../../../pages/sales/findComps.page';
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { findCompsPage } from "../../../pages/sales/findComps.page";
 import { getUploadFixture } from "../../../../utils/fixtures.utils";
@@ -12,6 +13,8 @@ import { _map, _mutateArrayInMap } from "../../../support/commands";
 import { recurse } from "cypress-recurse";
 import mapKeysUtils from "../../../utils/mapKeys.utils";
 import { BoweryReports } from "../../../types/boweryReports.type";
+import SALE_PERIOD_VALUES from "../../../enums/enums";
+import { isDateHasCorrectFormat } from "../../../../utils/date.utils";
 
 class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
     selectedCompsSetSort(sortType: BoweryReports.SalesComps.SelectedComparablesSortType) {
@@ -88,13 +91,28 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
     }
 
     verifyUploadCompsSucceded(): FindCompsActions {
-        findCompsPage.loadingModalCSV.should('exist');
+        findCompsPage.loadingModalCSV.should('exist'); // change ?
         findCompsPage.loadingModalCSV.should('not.exist');
         findCompsPage.salesCompsDateSold.should(($compsDateList) => {
             expect($compsDateList.length).to.be.above(1);
         });
         return this;
     }
+
+    selectfilterSalePeriodValue(periodValue: string): FindCompsActions { //as??
+        findCompsPage.filterSalePeriod.should('exist').click();
+        findCompsPage.filterSalePeriodValue(periodValue).should('exist').click();
+        findCompsPage.filterSalePeriod.children().should('contain', `${periodValue}`);
+        return this;
+    }
+
+    resetAllFilters(): FindCompsActions {       // change ?
+        findCompsPage.resetAllButton.click();
+        findCompsPage.loadingModalSpinner.should('exist');
+        findCompsPage.loadingModalSpinner.should('not.exist');
+        return this;
+    }
+
 
     verifyComparablesNumber(number: number): FindCompsActions {
         const numberToBe = number + 1;
@@ -107,11 +125,31 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
             () => _scrollAndSearchComp(address),
             () => _map.get(mapKeysUtils.search_result_sales_comp) != undefined, { delay: 2000, timeout: 60000 }
         );
+
+        cy.log(_map.size, _map.has(mapKeysUtils.search_result_sales_comp))
+
         findCompsPage.getSelectCompFromMapButtonByAddress(address).scrollIntoView().click({ force: true });
         this.checkFindSingleSalesComp();
+
+
+
+
+        //   _map.delete(mapKeysUtils.search_result_sales_comp);
+        //  cy.log(_map.has(mapKeysUtils.search_result_sales_comp))
+        cy.log(_map.get(mapKeysUtils.search_result_sales_comp))
+        cy.log(_map.size, _map.has(mapKeysUtils.search_result_sales_comp))
+
         // TODO: [QA-6233] Invstigate on ways we can click "Add" btn on Search Comps List safely
         // ernst: delay to not accidentaly dispatch click to "Remove" btn on SearchList
         cy.wait(1500);
+
+
+        _map.clear()
+        //  _map.set(mapKeysUtils.search_result_sales_comp, undefined);
+
+        cy.log(_map.size, _map.has(mapKeysUtils.search_result_sales_comp))
+        cy.log(_map.get(mapKeysUtils.search_result_sales_comp))
+
         return this;
     }
 
@@ -311,25 +349,24 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
 
     checkSalesCompSortedByDateSold() {
         this.Page.salesCompsDateSold.then(element => {
-            cy.log(element)
-
             for (let i = 1; i + 1 < element.length; i++) {
-
                 let firstDateSoldString = element[i].textContent;
                 let secondDateSoldString = element[(i + 1)].textContent;
-                cy.log(firstDateSoldString, secondDateSoldString)
-                if (firstDateSoldString === 'In-Contract') {
-                    cy.log('In-Contract')
-                    expect(secondDateSoldString).to.be.a('In-Contract' || 'Listing' || 'number');
-
-                } else if (firstDateSoldString === 'Listing') {
-                    cy.log('Listing')
-                    expect(secondDateSoldString).to.be.a('Listing' || 'number');
-
-                } else if (Date.parse(firstDateSoldString)) {
-                    cy.log('DATE')
-                    expect(Date.parse(secondDateSoldString)).to.be.a('number');
-                    expect(Date.parse(firstDateSoldString)).to.be.above(Date.parse(secondDateSoldString));
+                if (isDateHasCorrectFormat(secondDateSoldString, "/")) {
+                    if (firstDateSoldString === 'In-Contract') {
+                        expect(isDateHasCorrectFormat(secondDateSoldString, "/")).to.be.equal(true);
+                    } else if (firstDateSoldString === 'Listing') {
+                        expect(isDateHasCorrectFormat(secondDateSoldString, "/")).to.be.equal(true);
+                    } else if (isDateHasCorrectFormat(firstDateSoldString, "/")) {
+                        expect(isDateHasCorrectFormat(secondDateSoldString, "/")).to.be.equal(true);
+                        expect(Date.parse(firstDateSoldString)).to.be.above(Date.parse(secondDateSoldString));
+                    }
+                } else if (!isDateHasCorrectFormat(secondDateSoldString, "/")) {
+                    if (firstDateSoldString === 'In-Contract') {
+                        expect(secondDateSoldString).to.be.oneOf(['In-Contract', 'Listing']);
+                    } else if (firstDateSoldString === 'Listing') {
+                        expect(secondDateSoldString).to.be.equal('Listing');
+                    }
                 }
             }
         });
@@ -350,11 +387,24 @@ export default new FindCompsActions(findCompsPage);
 const _scrollAndSearchComp = (compAddress: string) => {
     return cy.get('[aria-label="grid"] > div > div', { includeShadowDom: true }).each((elem, index, list) => {
         if (elem.text().includes(compAddress)) {
+
+            cy.log(_map.get(mapKeysUtils.search_result_sales_comp))
+            cy.log(_map.size, _map.has(mapKeysUtils.search_result_sales_comp))
+
             cy.log(`Found SalesComps in next list ${list} with index ${index}`);
             _map.set(mapKeysUtils.search_result_sales_comp, elem);
+
+            cy.log(_map.get(mapKeysUtils.search_result_sales_comp))
+            cy.log(_map.size, _map.has(mapKeysUtils.search_result_sales_comp))
+
             return;
         }
         else if (list.length == index + 1) {
+
+            cy.log(_map.size, _map.has(mapKeysUtils.search_result_sales_comp), 'esleif')
+            cy.log(_map.get(mapKeysUtils.search_result_sales_comp))
+
+
             if (_map.get(mapKeysUtils.search_result_sales_comp) == undefined) {
                 cy.log("Scrolling to last comp in to continue search");
                 cy.wrap(elem).scrollIntoView();

@@ -38,6 +38,17 @@ export default class PropertyInformationForm {
         .as(comp_plex.createCompNumberResidentialUnits);
     }
 
+    get siteAreaNewComp() {
+        return cy.get('[data-qa="Site Area"]', { includeShadowDom:true })
+        .as(comp_plex.commercialAreaNewComp);
+    }
+
+    get floorNewComp() {
+        return cy.get('[data-qa="# Floors"]', { includeShadowDom:true })
+        .as(comp_plex.commercialAreaNewComp);
+    }
+    
+
     get commercialAreaNewComp() {
         return cy.get('[data-qa="Commercial Area"]', { includeShadowDom:true })
         .as(comp_plex.commercialAreaNewComp);
@@ -62,6 +73,11 @@ export default class PropertyInformationForm {
         return cy.get('[data-qa="Appraiser Commentary"] [data-qa="text-input"]', { includeShadowDom: true })
         .as(comp_plex.appraiserCommentaryTextArea);
     }
+
+    get saveAndCloseButton() {
+        return cy.get('[data-qa="Save & Close"]', { includeShadowDom:true });
+    }
+    
 
     get streetAdderssInput(){
         return cy.get('[data-qa="street-address"] input', { includeShadowDom:true });

@@ -214,6 +214,10 @@ export namespace BoweryReports {
     export namespace SalesComps {
         export type SelectedComparablesSortType = "Custom" | "Date Sold"
     }
+
+    export namespace FindComps {
+        export type SalePeriodValues = keyof typeof Enums.SALE_PERIOD_VALUES[KeyInfo.SalePeriodValues]
+    }
     
     export type CalculationType = typeof Enums.CALCULATION_TYPE[KeyInfo.CalculationType]
 }
