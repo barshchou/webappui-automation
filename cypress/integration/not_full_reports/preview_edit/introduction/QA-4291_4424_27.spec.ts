@@ -1,12 +1,12 @@
 import { _NavigationSection } from '../../../../actions/base/index';
 import { createReport } from '../../../../actions/base/baseTest.actions';
-import testData from "../../../../fixtures/not_full_reports/review_edit/introduction/QA-4291_4424.fixture";
+import testData from "../../../../fixtures/not_full_reports/review_edit/introduction/QA-4291_4424_27.fixture";
 import { PreviewEdit, Report } from '../../../../actions';
 import mapKeysUtils from '../../../../utils/mapKeys.utils';
 
-describe('[QA-4291] Check the Introduction page', 
-    { tags:[ "@preview_edit", "@introduction" ] }, () => {
-        
+describe('[QA-4291] Check the Introduction page',
+    { tags: ["@preview_edit", "@introduction"] }, () => {
+
         before("Login, create report", () => {
             cy.stepInfo(`1. Create a report`);
             createReport(testData.reportCreationData);
@@ -21,8 +21,8 @@ describe('[QA-4291] Check the Introduction page',
                 .Page.formSaveBtn().click();
             Report._Client.Page.formEditBtn().click();
             Report._Client.enterIntendedUserTextBox(testData.typeValue)
-                .Page.formCancelButton().click();
-           
+                .Page.formSaveBtn().click();
+
 
             cy.stepInfo("3. Proceed to the Introduction page and verify that page exist");
             _NavigationSection.navigateToIntroduction()
@@ -31,15 +31,17 @@ describe('[QA-4291] Check the Introduction page',
 
             cy.stepInfo("4. Verify 'Identification of the Client' exist and edited");
             PreviewEdit._Introduction.Page.SwitchEditBtn.click();
-            
+
             PreviewEdit._Introduction.Page.ChipModified.should("be.visible");
-            PreviewEdit._Introduction.Page.getBackLink(testData.backLinkName)
-                .should("be.visible")
-                .invoke("attr", "href")
-                .then(href => {
-                    cy._mapGet(mapKeysUtils.reportId).then(val => {
-                        expect(href).includes(val);
+            testData.backLinkNames.forEach(name => {
+                PreviewEdit._Introduction.Page.getBackLink(name)
+                    .should("be.visible")
+                    .invoke("attr", "href")
+                    .then(href => {
+                        cy._mapGet(mapKeysUtils.reportId).then(val => {
+                            expect(href).includes(val);
+                        });
                     });
-                });
+            });
         });
     });
