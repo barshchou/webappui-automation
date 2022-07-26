@@ -82,13 +82,15 @@ class ValueConclusionActions extends BaseActionsExt<typeof valueConclusionPage> 
         return this;
     }
 
-    verifyAsStabilizedAmount(amount: string): this {
-        valueConclusionPage.asStabilizedAmount.should("have.text", amount);
+    verifyAsStabilizedAmount(amount: string | number): this {
+        const textToBe = typeof amount === "string" ? amount : `$${numberWithCommas(amount)}`;
+        valueConclusionPage.asStabilizedAmount.should("have.text", textToBe);
         return this;
     }
 
-    verifyAsStabilizedFinalValue(value: string): this {
-        valueConclusionPage.asStabilizedFinalValue.should("have.text", value);
+    verifyAsStabilizedFinalValue(value: string | number): this {
+        const textToBe = typeof value === "string" ? value : `$${numberWithCommas(value)}`;
+        valueConclusionPage.asStabilizedFinalValue.should("have.text", textToBe);
         return this;
     }
 

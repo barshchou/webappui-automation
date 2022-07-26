@@ -1,16 +1,19 @@
 import Enums from "../../../../enums/enums";
 import ReportDataCreator from "../../../data_creator/reportData.creator";
+import { BoweryAutomation } from "../../../../types/boweryAutomation.type";
 
-const reportCreationFixture = () => {
-    return ReportDataCreator.getReportData("4174", {
-        templateValue: Enums.TEMPLATE_TYPE.freddieMac,
-        incomeValue: Enums.INCOME_TYPE.both,
-        conclusionValue: Enums.VALUE_CONCLUSION_TYPE.AS_COMPLETE
-    });
-};
+const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("4174", {
+    templateValue: Enums.TEMPLATE_TYPE.freddieMac,
+    incomeValue: Enums.INCOME_TYPE.both,
+    conclusionValue: Enums.VALUE_CONCLUSION_TYPE.AS_COMPLETE
+});
 
+const _finalValuesToBe = [ 1900000, 2000000, 800000, 3000000 ];
+
+const _basisSFAnalysisValues = [ 2500, 2600, 1100, 4000 ];
 export default {
-    reportCreationData: reportCreationFixture(),
+    reportCreationData: _reportCreationData,
+    basisSFAnalysisValues: _basisSFAnalysisValues,
     valueConclusion: 750,
-    asIsMarket: "$1,593,330,750"
+    finalValues: _finalValuesToBe
 };
