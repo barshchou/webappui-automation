@@ -95,3 +95,16 @@ export const getCurrentMonthName = (): string => {
 export const isCorrectQuarter = (quarter) => {
     return quarter === "Q1" || quarter === "Q2" || quarter === "Q3" || quarter === "Q4";
 };
+
+
+/**
+ * @description This function returns random date (from 01-01-1970 to now) in view 01-14-2020
+ */
+export const getRandomDate = (): string => {
+    let startDateLong = Date.parse('01-01-1970');
+    let todayDateLong = Date.parse(new Date().toDateString());
+    let randomDate = new Date(Math.random() * (todayDateLong - startDateLong));
+    let randomDateString = (`${("0" + (randomDate.getMonth() + 1)).slice(-2)}` + '-'
+        + `${("0" + randomDate.getDate()).slice(-2)}` + '-' + `${randomDate.getFullYear()}`);
+    return randomDateString;
+};
