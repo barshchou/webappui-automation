@@ -11,7 +11,7 @@ const reportCreationFixture = () => {
 export default {
     reportCreationData: reportCreationFixture(),
     commercialUnits: 2,
-    leaseStatuses: [ "Occupied", "Vacant" ] as  BoweryReports.LeaseStatus[],
+    leaseStatuses: [ Enums.LEASE_STATUS.occupied, Enums.LEASE_STATUS.vacant ] as  BoweryReports.LeaseStatus[],
     compAddress: "153 Clinton Street",
     radioButtonNames: [ 
         "per square foot per month", 

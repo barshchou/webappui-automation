@@ -25,16 +25,16 @@ describe("Verify Input in 'Use-Other*' free text works correctly",
 
             cy.stepInfo("4. Verify Input in 'Use-Other*' user can be fill several values");
             testData.verifyFillValues.forEach(val => {
-                Income._CommercialManager.RentComps.fillInRentCompFieldInput(testData.fieldName, val, true);
-                Income._CommercialManager.RentComps.Page.getRentCompInputField(testData.fieldName)
+                Income._CommercialManager.RentComps.fillInRentCompFieldInput(testData.fieldName, val, true)
+                    .Page.getRentCompInputField(testData.fieldName)
                     .should("have.value", val);
             });
 
             cy.stepInfo("5. Verify Input in 'Use-Other*' user delete entered text");
             testData.verifyDeleteValues.forEach(val => {
                 Income._CommercialManager.RentComps.fillInRentCompFieldInput(
-                    testData.fieldName, testData.verifyFillValues[0], true);
-                Income._CommercialManager.RentComps.Page.getRentCompInputField(testData.fieldName)
+                    testData.fieldName, testData.verifyFillValues[0], true)
+                    .Page.getRentCompInputField(testData.fieldName)
                     .type(val).should("have.value", "");
             });
 

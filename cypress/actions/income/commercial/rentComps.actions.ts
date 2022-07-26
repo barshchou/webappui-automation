@@ -247,8 +247,7 @@ class CommercialRentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
     }
 
     clickRemoveRemovedCompByRowButton(rowNumber = 0): CommercialRentCompsActions {
-        rentCompsPage.removeRemovedCompByRowButton(rowNumber).click();
-        rentCompsPage.removeRemovedCompByRowButton(rowNumber).should("not.exist");
+        rentCompsPage.removeRemovedCompByRowButton(rowNumber).click().should("not.exist");
         return this;
     }
 
