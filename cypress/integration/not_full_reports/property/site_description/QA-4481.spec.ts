@@ -40,7 +40,7 @@ describe(`[QA-4481] Check that generated text pulls in the first submarket`,
 
         it("Check export", () => {
             Cypress.config().baseUrl = null;
-            cy.task("getFilePath", { _reportName: testData.reportCreationData.reportNumber, _docx_html: "html" })
+            cy.task("getFilePath", { _reportName: testData.reportCreationData.reportNumber, _docxHtml: "html" })
                 .then(file => {
                     cy.log(<string>file);
 

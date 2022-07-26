@@ -9,9 +9,9 @@ const reportCreationFixture = () => {
 const _neighborhood = "Hannover";
 const _area = "Adams County";
 const _state = "PA";
-const _neighborhoodYear = "2022";
+const _neighborhoodYear = 2022;
 const _submarketAndMarketQuarter = "Q3";
-const _submarketAndMarketYear = "2022";
+const _submarketAndMarketYear = 2022;
 
 const _marketAnalysisUses: BoweryReports.MarketAnalysisUses[] = [
     enums.MARKET_ANALYSIS_USES.multifamily,
