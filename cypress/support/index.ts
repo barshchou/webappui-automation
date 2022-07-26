@@ -68,18 +68,18 @@ Cypress.on("fail", (err, runnable) => {
 
   customError.message = customErrorMessage;
 
-  switch (customError.name) {
-    case "AssertionError":
-      if (includesErrorMessage("Expected to find element")) {
-        updatedError({ name: "Element not found" });
-      } else if (includesErrorMessage("to have")) {
-        updatedError({ name: "Validation error" });
-      }
-      break;
+  // switch (customError.name) {
+  //   case "AssertionError":
+  //     if (includesErrorMessage("Expected to find element")) {
+  //       updatedError({ name: "Element not found" });
+  //     } else if (includesErrorMessage("to have")) {
+  //       updatedError({ name: "Validation error" });
+  //     }
+  //     break;
       
-    default: 
-       customError;
-  }
+  //   default: 
+  //      customError;
+  // }
   throw customError;
 });
 

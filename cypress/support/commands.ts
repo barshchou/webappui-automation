@@ -207,6 +207,10 @@ Cypress.Commands.add("dragAndDrop", (subject, target) => {
         });
 });
 
+/**
+ * Adds a command to add steps for tests. 
+ * If there is an error in the test, writes the last passed step to the array
+ */
 Cypress.Commands.add("stepInfo", (message:string) => {
     let arr = Cypress.env("stepInfo") || [];
     // Add only last step
@@ -220,12 +224,11 @@ Cypress.Commands.add("stepInfo", (message:string) => {
         consoleProps: () => {
             return {
                 Step: `${message}`
-            };
+           };
         }
     });
     Cypress.env("stepInfo", arr);
 });
-
 
 Cypress.Commands.add("_mapSet", (_key:any, _value:any) => {
     return _map.set(_key, _value);
