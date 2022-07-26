@@ -124,7 +124,7 @@ class TaxInfoPage extends BasePage {
     }
 
     getAddNewRowButton(name = "Add Additional Tax Rate") {
-        return cy.xpath(`//*[isStringContainSubstring(text(), '${name}')]`);
+        return cy.xpath(`//*[contains(text(), '${name}')]`);
     }
 }
 

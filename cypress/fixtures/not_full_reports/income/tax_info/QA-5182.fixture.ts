@@ -1,21 +1,32 @@
 import Enums from "../../../../enums/enums";
-import ReportDataCreator from "../../../data_creator/reportData.creator";
+import { BoweryAutomation } from "../../../../types/boweryAutomation.type";
 
-const _comment = "In July 2021, the City Council set the fiscal year 2021/22 (7/1/2021 – 6/30/2022) property tax rates. " +
-"The new tax rates were not in place for the July 1, 2021 tax bills; as such, " +
-"the previous year tax rate was initially applied to the July 2021 tax bills and adjustments were " +
-"then made to subsequent tax bills to reflect the change in rate for any overpayment or underpayment. " +
-"The new tax rates are reflected in the second half of tax year bills, " +
-"which represent a blend of the initial tax rate in place in July of 2021 and " +
-"second half of the fiscal year to achieve the actual 2021/22 tax rate. " +
-"For the subject, we have applied the appropriate 2021/22 fiscal year tax rate " +
-"to the most recent assessed value of the property to determine its current tax liability.";
+const reportCreationFixture = (): BoweryAutomation.ReportCreationData => {
+    return {
+        state: "Other",
+        address: "8524 South Oglesby Avenue",
+        identifierType: "PIN",
+        identifier: "20-36-420-020-0000",
+        reportNumber: "TestAutoReport-5182",
+        isSalesForcePull: false,
+        templateValue: Enums.TEMPLATE_TYPE.notFreddieMac,
+        incomeValue: Enums.INCOME_TYPE.residential,
+        conclusionValue: Enums.VALUE_CONCLUSION_TYPE.AS_COMPLETE
+    };
+};
+
+const _verifyExportValues = [
+    "Special Assessment Row",
+    "Tax Rate",
+    "Additional Tax Rate",
+    "Tax Liability"
+];
 
 export default {
-    reportCreationData: ReportDataCreator.getReportData("5183", { address: "" }),
+    reportCreationData: reportCreationFixture(),
     title: "Tax Calculation Discussion",
-    commentary: _comment,
     featureFlagKey: Enums.FEATURE_FLAG_KEYS.flexibleTaxes,
     onFeatureFlag: 0,
-    tooltip: "The following text will appear below the Tax Liability table in your export",
+    verifyExportValues: _verifyExportValues,
+    checkValue: Enums.PER_UNIT_PER_SF.perUnit
 };
