@@ -7,7 +7,7 @@ const reportCreationFixture = (): BoweryAutomation.ReportCreationData => {
         address: "8524 South Oglesby Avenue",
         identifierType: "PIN",
         identifier: "20-36-420-020-0000",
-        reportNumber: "TestAutoReport-5179_81_83",
+        reportNumber: "TestAutoReport-5179_81-83",
         isSalesForcePull: false,
         templateValue: Enums.TEMPLATE_TYPE.notFreddieMac,
         incomeValue: Enums.INCOME_TYPE.residential,
