@@ -86,10 +86,10 @@ describe(`Verify the Save and Save & Continue button functionality on the Report
             cy.stepInfo(`4. Try to proceed on any other page from the Key Info page and 
             verify that the Unsaved changes modal is displayed`);
             _NavigationSection.navigateToReportInformation();
-            Report._KeyInfo.enterPropertyRightsAppraisedComment(testData.enterSecondValue, false, false, false);
+            Report._KeyInfo.enterPropertyRightsAppraisedComment(testData.enterSecondValue, true, false, false);
             Report._KeyInfo.clickNarrativeSuggestions(testData.secondListValue)
                 .verifyTextBoxPropertyRightsAppraised(testData.verifySecondTaxValue);
-            Report._KeyInfo.enterDefinitionMarketValue(testData.enterSecondValue, false, false, false);
+            Report._KeyInfo.enterDefinitionMarketValue(testData.enterSecondValue, true, false, false);
             Report._KeyInfo.clickNarrativeSuggestions(testData.secondListValue, 1)
                 .verifyTextBoxDefinitionOfMarketValue(testData.verifySecondTaxValue);
 
