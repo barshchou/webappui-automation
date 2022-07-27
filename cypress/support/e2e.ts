@@ -52,8 +52,6 @@ Cypress.on("fail", (err, runnable) => {
         return messageArr.join('\n');
     };
 
-    let customError = err;
-
     const customErrorMessage = createCustomErrorMessage(
         err,
         Cypress.env("stepInfo") || [ "no steps provided..." ],
@@ -61,15 +59,15 @@ Cypress.on("fail", (err, runnable) => {
     );
 
     const updatedError = (changeValue: object) => {
-        return customError = { ...customError, ...changeValue };
+        return err = { ...err, ...changeValue };
     };
 
-    const includesErrorMessage = (text: string) => customError.message.includes(text);
+    const includesErrorMessage = (text: string) => err.message.includes(text);
 
-    customError.message = customErrorMessage;
+    err.message = customErrorMessage;
 
     
-    switch (customError.name) {
+    switch (err.name) {
         case "AssertionError":
             if (includesErrorMessage("Expected to find element")) {
                 updatedError({ name: "Element not found" });
@@ -79,12 +77,14 @@ Cypress.on("fail", (err, runnable) => {
             break;
     
         default: 
-            customError;
+            err;
     }
+
+    console.log("err", err);
     
     recordDOMSnapshot();
     recordProxiedRequests();
-    throw customError;
+    throw err;
 });
 
 declare global {
