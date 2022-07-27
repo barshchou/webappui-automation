@@ -131,6 +131,48 @@ class CommercialRentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
         return this;
     }
 
+    clickRemoveButtonByRowNumber(rowNumber = 0): CommercialRentCompsActions {
+        rentCompsPage.getRemoveCompButton(rowNumber).click();
+        return this;
+    } 
+
+    verifyRentPerMonthCellValue(value: number, group = "Unsorted", rowNumber = 0): CommercialRentCompsActions {
+        rentCompsPage.getRentPerSFCellByRowNumberAndGroup(group, rowNumber)
+            .should("have.text", `$${numberWithCommas(value.toFixed(2))}`);
+        return this;
+    }
+
+    verifyRentPerMonthCellPSFValue(group = "Unsorted", rowNumber = 0): CommercialRentCompsActions {
+        this.clickEditButtonByRowNumber(rowNumber);
+        const baseRent =  rentCompsPage.getRentCompInputField("baseRent").invoke("val");
+        baseRent.then(baseRent => {
+            const rentValue = getNumberFromDollarNumberWithCommas(baseRent);
+            const perSquareFootValue = `$${(rentValue / 12).toFixed(2)}`;
+            rentCompsPage.cancelModalButton.click();
+            rentCompsPage.getRentPerSFCellByRowNumberAndGroup(group, rowNumber).should("have.text", perSquareFootValue);
+        });
+        return this;
+    }
+
+    verifyRentPerMonthCellMonthlyOrAnnuallyValue(name: BoweryReports.UnitsOfMeasure = "monthly", 
+        group = "Unsorted", rowNumber = 0): CommercialRentCompsActions {
+        this.clickEditButtonByRowNumber(rowNumber);
+        const baseRent =  rentCompsPage.getRentCompInputField("baseRent").invoke("val");
+        const squareFeet =  rentCompsPage.getRentCompInputField("squareFeet").invoke("val");
+        baseRent.then(baseRent => {
+            const baseRentNum = getNumberFromDollarNumberWithCommas(baseRent);
+            squareFeet.then(squareFeet => {
+                const squareFeetNum = getNumberFromDollarNumberWithCommas(squareFeet);
+                const perSquareFootValue = (name === "monthly") ? `$${(baseRentNum / squareFeetNum).toFixed(2)}` 
+                    : `$${(baseRentNum / 12 / squareFeetNum).toFixed(2)}`;
+                rentCompsPage.cancelModalButton.click();
+                rentCompsPage.getRentPerSFCellByRowNumberAndGroup(group, rowNumber)
+                    .should("have.text", perSquareFootValue);
+            });
+        });
+        return this;
+    }
+
     verifyLeaseDate(date: string): CommercialRentCompsActions {
         const valueToBe = isDateHasCorrectFormat(date) ? date : "";
         rentCompsPage.leaseDateInputToVerify.should("have.value", valueToBe);
@@ -144,8 +186,8 @@ class CommercialRentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
         return this;
     }
 
-    clickEditButtonByRowNumber(group = "Unsorted", rowNumber = 0): CommercialRentCompsActions {
-        rentCompsPage.getEditButtonByRowNumberAndGroup(group, rowNumber).click();
+    clickEditButtonByRowNumber (rowNumber = 0): CommercialRentCompsActions {
+        rentCompsPage.getEditCompButton(rowNumber).click();
         return this;
     }
 
@@ -195,6 +237,23 @@ class CommercialRentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
             // VB: For more than 2 units Drag and drop is too slow and we need to wait a bit between dnd actions.
             cy.wait(1500);
         }
+        return this;
+    }
+
+    clickAddRemovedCompByRowButton(rowNumber = 0): CommercialRentCompsActions {
+        rentCompsPage.addRemovedCompByRowButton(rowNumber).click().should("not.exist");
+        rentCompsPage.getEditCompButton(rowNumber).should("exist");
+        return this;
+    }
+
+    clickRemoveRemovedCompByRowButton(rowNumber = 0): CommercialRentCompsActions {
+        rentCompsPage.removeRemovedCompByRowButton(rowNumber).click().should("not.exist");
+        return this;
+    }
+
+    clickClearAllButton(title?: string): CommercialRentCompsActions {
+        rentCompsPage.clearAllButton.click();
+        rentCompsPage.getRemovedCompRows(title).should('not.exist');
         return this;
     }
 
