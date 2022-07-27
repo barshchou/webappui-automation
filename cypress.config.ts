@@ -8,7 +8,7 @@ import { ENVS, evalUrl } from "./cypress/utils/env.utils";
 
 export default defineConfig({
     chromeWebSecurity: false,
-    defaultCommandTimeout: 5000,
+    defaultCommandTimeout: 100000,
     viewportWidth: 1920,
     viewportHeight: 1200,
     watchForFileChanges: false,
