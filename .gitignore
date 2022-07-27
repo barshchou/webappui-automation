@@ -139,3 +139,6 @@ cypress/spec_data/
 
 # spec for debug something
 test.spec.ts
+
+# Finder settings
+.DS_Store
