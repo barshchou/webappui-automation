@@ -36,6 +36,7 @@ describe('[QA-4291_4424_27] Check the Introduction page',
 
             testData.backLinkNames.forEach(name => {
                 PreviewEdit._Introduction.Page.getChipModified(name).should("be.visible");
+                PreviewEdit._Introduction.Page.getTextFromTextArea(name).should("include.text", testData.typeValue);
                 PreviewEdit._Introduction.Page.getBackLink(name)
                     .should("be.visible")
                     .invoke("attr", "href")
