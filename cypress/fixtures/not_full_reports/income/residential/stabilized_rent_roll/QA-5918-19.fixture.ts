@@ -26,22 +26,28 @@ const _squareFootAnalysisFixture = [
         name: "Gross Leasable Area",
         basis: enums.BASIS_SQUARE_FOOT_ANALYSIS.grossLeasableArea,
         area: 3000,
-        distributionSummaryNoSquareFootage: "The gross leasable area and average square footage per unit was provided by the owner.",
-        distributionSummaryYesSquareFootage: "The gross leasable area and square footage per unit was provided by the owner."
+        distributionSummaryNoSquareFootage: 
+        "The gross leasable area and average square footage per unit was provided by the owner.",
+        distributionSummaryYesSquareFootage: 
+        "The gross leasable area and square footage per unit was provided by the owner."
     },
     {
         name: "Net Rentable Area",
         basis: enums.BASIS_SQUARE_FOOT_ANALYSIS.netRentableArea,
         area: 3000,
-        distributionSummaryNoSquareFootage: "The net rentable area and average square footage per unit was provided by the owner.",
-        distributionSummaryYesSquareFootage: "The net rentable area and square footage per unit was provided by the owner."
+        distributionSummaryNoSquareFootage: 
+        "The net rentable area and average square footage per unit was provided by the owner.",
+        distributionSummaryYesSquareFootage: 
+        "The net rentable area and square footage per unit was provided by the owner."
     },
     {
         name: "Net Leasable Area",
         basis: enums.BASIS_SQUARE_FOOT_ANALYSIS.netLeasableArea,
         area: 3000,
-        distributionSummaryNoSquareFootage: "The net leasable area and average square footage per unit was provided by the owner.",
-        distributionSummaryYesSquareFootage: "The net leasable area and square footage per unit was provided by the owner."
+        distributionSummaryNoSquareFootage: 
+        "The net leasable area and average square footage per unit was provided by the owner.",
+        distributionSummaryYesSquareFootage: 
+        "The net leasable area and square footage per unit was provided by the owner."
     }
 ];
 

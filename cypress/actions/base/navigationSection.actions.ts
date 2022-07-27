@@ -168,7 +168,7 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         this.clickIncomeApproachButton()
             .clickResidentialMenuIfClosed()
             .clickInPlaceRentRollButton()
-            .submitSaveChangesModal();
+            .submitSaveChangesModal(saveChanges);
         return this;
     }
 
