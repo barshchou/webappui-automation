@@ -7,6 +7,12 @@ describe("Verify the functionality of the Upload Comps button",
     { tags:[ "@find_comps", "@sales" ] }, () => {
         before("Login and create report", () => {
             createReport(testData.reportCreationData);
+
+            cy.saveLocalStorage();
+        });
+
+        beforeEach('Restore local storage', () => {
+            cy.restoreLocalStorage();
         });
 
         it("Test body", () => {
