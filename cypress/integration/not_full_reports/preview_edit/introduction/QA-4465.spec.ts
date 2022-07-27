@@ -32,7 +32,7 @@ describe('Verify the "Property Rights Appraised" commentary on the Introduction 
                 _NavigationSection.navigateToIntroduction()
                     .verifyProgressBarNotExist();
     
-                PreviewEdit._Introduction.Page.TextPropertyRightsAppraised
+                PreviewEdit._Introduction.Page.getTextFromTextArea(testData.backLinkName)
                     .invoke("text")
                     .then(text => {
                         cy.wrap(normalizeText(text)).as(testData.aliases.PreviewEditText);

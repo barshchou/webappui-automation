@@ -5,9 +5,9 @@ class IntroductionPage extends BasePage {
         return cy.get('[data-qa="Edit-switch-button"]');
     }
 
-    get TextPropertyRightsAppraised() {
+    getTextFromTextArea(name: string) {
         return cy.xpath('//*[@id="previewAndEdit.introduction-final-form"]//h6')
-            .contains("Property Rights Appraised").next();
+            .contains(`${name}`).next();
     }
 
     getChipModified(name: string) {
