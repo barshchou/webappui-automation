@@ -4,8 +4,8 @@ import testData from "../../../../fixtures/not_full_reports/review_edit/introduc
 import { PreviewEdit, Report } from '../../../../actions';
 import mapKeysUtils from '../../../../utils/mapKeys.utils';
 
-describe('[QA-4291] Check the Introduction page',
-    { tags: ["@preview_edit", "@introduction"] }, () => {
+describe('[QA-4291_4424_27] Check the Introduction page',
+    { tags: [ "@preview_edit", "@introduction" ] }, () => {
 
         before("Login, create report", () => {
             cy.stepInfo(`1. Create a report`);
@@ -22,6 +22,8 @@ describe('[QA-4291] Check the Introduction page',
             Report._Client.Page.formEditBtn().click();
             Report._Client.enterIntendedUserTextBox(testData.typeValue)
                 .Page.formSaveBtn().click();
+            // Need wait for changes to take place.
+            cy.wait(1000)
 
 
             cy.stepInfo("3. Proceed to the Introduction page and verify that page exist");
@@ -32,8 +34,8 @@ describe('[QA-4291] Check the Introduction page',
             cy.stepInfo("4. Verify 'Identification of the Client' exist and edited");
             PreviewEdit._Introduction.Page.SwitchEditBtn.click();
 
-            PreviewEdit._Introduction.Page.ChipModified.should("be.visible");
             testData.backLinkNames.forEach(name => {
+                PreviewEdit._Introduction.Page.getChipModified(name).should("be.visible");
                 PreviewEdit._Introduction.Page.getBackLink(name)
                     .should("be.visible")
                     .invoke("attr", "href")
