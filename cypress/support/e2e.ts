@@ -39,8 +39,6 @@ Cypress.on("fail", (err, runnable) => {
             lastStep += `${step}\n`;
         });
 
-        console.log("err", err);
-        console.log("runnable", runnable);
         const messageArr = [
             `Test Suite: ${runnableObj.parent.title}`, // describe('...')
             `Test: ${runnableObj.title}`, // it('...')
@@ -58,13 +56,15 @@ Cypress.on("fail", (err, runnable) => {
         runnable,
     );
 
+    let customError = err;
+
     const updatedError = (changeValue: string) => {
         return err.name = changeValue;
     };
 
     const includesErrorMessage = (text: string) => err.message.includes(text);
 
-    err.message = customErrorMessage;
+    customError.message = customErrorMessage;
 
     
     switch (err.name) {
@@ -77,14 +77,12 @@ Cypress.on("fail", (err, runnable) => {
             break;
     
         default: 
-            err;
+            customError;
     }
-
-    console.log("err", err);
     
     recordDOMSnapshot();
     recordProxiedRequests();
-    throw err;
+    throw customError;
 });
 
 declare global {
