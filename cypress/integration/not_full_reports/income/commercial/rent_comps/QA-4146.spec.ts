@@ -4,7 +4,7 @@ import NavigationSection from "../../../../../actions/base/navigationSection.act
 import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
 
 describe("Check that map is closed by default", 
-    { tags:[ "@income", "@commercial", "@rent_comps" ] }, () => {
+    { tags:[ "@income", "@commercial", "@rent_comps", "@test" ] }, () => {
         
         before("Login, create report", () => {
             createReport(testData.reportCreationData);
