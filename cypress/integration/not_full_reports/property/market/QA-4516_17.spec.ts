@@ -31,17 +31,16 @@ describe(`[Property > Market] Summary of Rent Stabilization Laws`,
 
         it("[QA-4516] Check export", () => {
             Cypress.config().baseUrl = null;
-            cy.task("getFilePath", { _reportName: testData.reportCreationData.reportNumber, 
-                // eslint-disable-next-line camelcase
-                _docx_html: "html" }).then(file => {
-                cy.log(<string>file);
+            cy.task("getFilePath", { _reportName: testData.reportCreationData.reportNumber, _docxHtml: "html" })
+                .then(file => {
+                    cy.log(<string>file);
 
-                cy.stepInfo(`5. Verify that nothing shows up in the export in the Addenda 
+                    cy.stepInfo(`5. Verify that nothing shows up in the export in the Addenda 
                         after Comparable sales outline and before Qualifications sections.`);
-                cy.visit(<string>file);
-                cy.xpath(`//h2[.='${testData.sectionBeforeName}']/following-sibling::h2`)
-                    .eq(0).scrollIntoView().should("have.text", testData.sectionAfterName);
-            });
+                    cy.visit(<string>file);
+                    cy.xpath(`//h2[.='${testData.sectionBeforeName}']/following-sibling::h2`)
+                        .eq(0).scrollIntoView().should("have.text", testData.sectionAfterName);
+                });
         });
 
         it(`[QA-4517] Check that when "Summary of Rent Stabilization Laws" 
@@ -63,16 +62,15 @@ describe(`[Property > Market] Summary of Rent Stabilization Laws`,
 
         it("[QA-4517] Check export", () => {
             Cypress.config().baseUrl = null;
-            cy.task("getFilePath", { _reportName: testData.reportCreationData.reportNumber, 
-                // eslint-disable-next-line camelcase
-                _docx_html: "html" }).then(file => {
-                cy.log(<string>file);
+            cy.task("getFilePath", { _reportName: testData.reportCreationData.reportNumber, _docxHtml: "html" })
+                .then(file => {
+                    cy.log(<string>file);
 
-                cy.stepInfo(`4. Verify that nothing shows up in the export in the Addenda 
+                    cy.stepInfo(`4. Verify that nothing shows up in the export in the Addenda 
                         after Comparable sales outline and before Qualifications sections.`);
-                cy.visit(<string>file);
-                cy.xpath(`//h2[.='${testData.sectionBeforeName}']/following-sibling::h2`)
-                    .eq(0).scrollIntoView().should("have.text", testData.sectionAfterName);
-            });
+                    cy.visit(<string>file);
+                    cy.xpath(`//h2[.='${testData.sectionBeforeName}']/following-sibling::h2`)
+                        .eq(0).scrollIntoView().should("have.text", testData.sectionAfterName);
+                });
         });
     });
