@@ -30,11 +30,12 @@ const rentRollResidentialUnitFixture = (): BoweryReports.ResidentialUnit => {
 
 const commentariesFixture = (forecastPSFTotal: string, forecastPerUnitTotal: string) => {
     return {
-        generated: `Operating expenses, exclusive of real estate taxes, were forecasted at ${forecastPSFTotal} per square foot and ${forecastPerUnitTotal} per unit. ` +
-            `Excluding real estate taxes, the comparables ranged from Comp totals map psf min to Comp totals map psf max per square foot and Comp totals map unit min to ` +
-            `Comp totals map unit max per unit. Our forecast is near the comparable range on both a per square foot and per unit basis, ` +
-            `as well as logically placed in relation to the historical performance of the asset. Thus, this forecast is ` +
-            `reasonable and will be applied in our valuation analysis.`,
+        generated: `Operating expenses, exclusive of real estate taxes, were forecasted at ${forecastPSFTotal} `+
+        `per square foot and ${forecastPerUnitTotal} per unit. Excluding real estate taxes, the comparables ` + 
+        `ranged from Comp totals map psf min to Comp totals map psf max per square foot and Comp totals ` + 
+        `map unit min to Comp totals map unit max per unit. Our forecast is near the comparable range ` + 
+        `on both a per square foot and per unit basis, as well as logically placed in relation to the historical ` + 
+        `performance of the asset. Thus, this forecast is reasonable and will be applied in our valuation analysis.`
     };
 };
 
@@ -43,24 +44,26 @@ const forecastPerUnitTotal = (perUnitToBe: string) => { return `$${perUnitToBe}`
 
 function verifyTOEAppraisersValueLinePSF(grossBuildingArea: number, resUnits = 0, rooms = 0) {
     Income._ExpenseForecastActions.sumPSFTOEAppraisersForecast(grossBuildingArea, resUnits, rooms);
-    cy.get(`@${Alias.expenceForecastAliases.sumPSFTOEAppraisersForecast}`).then(sumPSFTOEAppraisersForecast => {
-        Income._ExpenseForecastActions.Page.toeAppraisersForecastValueLine.should('contain', forecastPSFTotal(String(sumPSFTOEAppraisersForecast)));
+    cy.get(`@${Alias.expenseForecastAliases.sumPSFTOEAppraisersForecast}`).then(sumPSFTOEAppraisersForecast => {
+        Income._ExpenseForecastActions.Page.toeAppraisersForecastValueLine
+            .should('contain', forecastPSFTotal(String(sumPSFTOEAppraisersForecast)));
     });
     return this;
 }
 
 function verifyTOEAppraisersValueLinePerUnit(grossBuildingArea: number, resUnits = 0, rooms = 0) {
     Income._ExpenseForecastActions.sumPerUnitTOEAppraisersForecast(grossBuildingArea, resUnits, rooms);
-    cy.get(`@${Alias.expenceForecastAliases.sumPerUnitTOEAppraisersForecast}`).then(sumPerUnitTOEAppraisersForecast => {
-        Income._ExpenseForecastActions.Page.toeAppraisersForecastValueLine.should('contain', forecastPerUnitTotal(String(sumPerUnitTOEAppraisersForecast)));
+    cy.get(`@${Alias.expenseForecastAliases.sumPerUnitTOEAppraisersForecast}`).then(sumPerUnitTOEAppraisersForecast => {
+        Income._ExpenseForecastActions.Page.toeAppraisersForecastValueLine
+            .should('contain', forecastPerUnitTotal(String(sumPerUnitTOEAppraisersForecast)));
     });
     return this;
 }
 
 function verifyTOECommentGenerated(grossBuildingArea: number, resUnits = 0, rooms = 0) {
     Income._ExpenseForecastActions.sumsInGeneratedComment(grossBuildingArea, resUnits, rooms);
-    cy.get(`@${Alias.expenceForecastAliases.sumPerSFInComment}`).then(sumPerSFInComment => {
-        cy.get(`@${Alias.expenceForecastAliases.sumPerUnitInComment}`).then(sumPerUnitInComment => {
+    cy.get(`@${Alias.expenseForecastAliases.sumPerSFInComment}`).then(sumPerSFInComment => {
+        cy.get(`@${Alias.expenseForecastAliases.sumPerUnitInComment}`).then(sumPerUnitInComment => {
             let textToBe = commentariesFixture(String(sumPerSFInComment), String(sumPerUnitInComment)).generated;
             Income._ExpenseForecastActions.verifyTOECommentary(textToBe);
         });
@@ -96,7 +99,8 @@ const expensesForecastCardNamesArray = [
     expensesForecastCardNamesEnum.replacementsAndReserves,
 ];
 
-const expenseForecastFixture = (_name: BoweryReports.ForecastItemBasis | string, basis: "unit" | "sf" | "room", forecast: number): BoweryReports.ForecastItem => {
+const expenseForecastFixture = (_name: BoweryReports.ForecastItemBasis | string, 
+    basis: "unit" | "sf" | "room", forecast: number): BoweryReports.ForecastItem => {
     return {
         name: _name,
         basis: basis as BoweryReports.UnitSF,
@@ -106,9 +110,9 @@ const expenseForecastFixture = (_name: BoweryReports.ForecastItemBasis | string,
 
 const expenseForecastFuelFixture = (basis: "unit" | "room" | "sf"): BoweryReports.ForecastItem => {
     return {
-    name: "fuel",
-    basis: basis as BoweryReports.UnitSF,
-    forecast: 150
+        name: "fuel",
+        basis: basis as BoweryReports.UnitSF,
+        forecast: 150
     };
 };
 

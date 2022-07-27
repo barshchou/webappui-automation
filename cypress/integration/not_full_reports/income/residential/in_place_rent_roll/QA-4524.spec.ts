@@ -6,7 +6,7 @@ import Income from "../../../../../actions/income/income.manager";
 
 describe(`Verify that if the Outdoor Space value is selected, the proper 
     group can be created on the Unit Groups and Rent Comps pages`, 
-    { tags:[ "@income", "@residential", "@in_place_rent_roll" ] }, () => {
+{ tags:[ "@income", "@residential", "@in_place_rent_roll" ] }, () => {
 
     before("Login, create report", () => {
         createReport(testData.reportCreationData);

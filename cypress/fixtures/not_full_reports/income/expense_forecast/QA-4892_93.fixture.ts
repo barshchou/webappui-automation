@@ -4,7 +4,9 @@ import ReportDataCreator from "../../../data_creator/reportData.creator";
 const _units = 3;
 const _basis = "unit";
 const _grossBuildingArea = 5000;
-const _buildingDescription: BoweryReports.BuildingDescription = { grossArea: _grossBuildingArea, numberOfUnits: _units };
+const _buildingDescription: BoweryReports.BuildingDescription = { 
+    grossArea: _grossBuildingArea, numberOfUnits: _units 
+};
 
 const expenseForecastElectricityFixture = (): BoweryReports.ForecastItem => {
     return {

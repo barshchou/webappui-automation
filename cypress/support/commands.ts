@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { addMatchImageSnapshotCommand } from '@simonsmith/cypress-image-snapshot/command';
 import "cypress-file-upload";
 import "cypress-localstorage-commands";
@@ -23,8 +24,7 @@ export const _mutateArrayInMap = (mapKey: string, value: any, message = "Unknown
     if (_map.get(mapKey) === undefined) {
         const arr = [ value ];
         _map.set(mapKey, arr);
-    }
-    else {
+    } else {
         cy._mapGet(mapKey).then(arr => {
             return arr.push(value);
         });
@@ -67,27 +67,26 @@ const _cyVisit = (url: string) => cy.visit(url, { timeout: Cypress.env("DEBUG") 
 Cypress.Commands.add("loginByApi", (envUrl, username, password) => {
     cy.log("Logging in by api");
     cy.task("loginApi",
-    {
-        _envUrl:envUrl,
-        _username: username, 
-        _password: password
+        {
+            _envUrl: envUrl,
+            _username: username, 
+            _password: password
+        })
+        .then(responseBody => {
+            // @ts-ignore
+            const token = responseBody.token;
 
-    })
-    .then(_response => {
-        const response: any = _response;
-        const responseBody = JSON.parse(response.text);
-        const token = responseBody.token;
+            // set bearer token also in localStorage in order to avoid unexpected behavior from old code
+            window.localStorage.setItem("jwToken", token);
 
-        // set bearer token also in localStorage in order to avoid unexpected behavior from old code
-        window.localStorage.setItem("jwToken", token);
+            // set bearer token so we could we use this in global after hook in `./index.ts`
+            cy._mapSet(mapKeysUtils.bearerToken, token);
 
-        // set bearer token so we could we use this in global after hook in `./e2e.ts`
-        cy._mapSet(mapKeysUtils.bearer_token, token);
-
-        const userId = responseBody.user._id;
-        cy.log(`User Id is: ${userId}`);
-        cy._mapSet(mapKeysUtils.user_id, userId);
-    });
+            // @ts-ignore
+            const userId = responseBody.user._id;
+            cy.log(`User Id is: ${userId}`);
+            cy._mapSet(mapKeysUtils.userId, userId);
+        });
 });
 
 Cypress.Commands.add("loginByUI", (url: string, username: string, password: string) => {
@@ -101,68 +100,67 @@ Cypress.Commands.add("loginByUI", (url: string, username: string, password: stri
     cy.get("*[name='password']").should("be.visible").type(password).type("{enter}");
     
     cy.wait(`@${Alias.loginRequest}`).then(({ response }) => {
-        cy._mapSet(mapKeysUtils.bearer_token, response.body.token);
-        cy._mapSet(mapKeysUtils.user_id, response.body.user._id);
+        cy._mapSet(mapKeysUtils.bearerToken, response.body.token);
+        cy._mapSet(mapKeysUtils.userId, response.body.user._id);
     });
 });
 
 Cypress.Commands.add("createApiReport", 
-(reportCreationData: BoweryAutomation.ReportCreationData, payload, token, envUrl) => {
-    cy.task("createReportApi", 
-    { 
-        _reportCreationData:reportCreationData, 
-        _payload:payload, 
-        _token:token,
-        _envUrl:envUrl
+    (reportCreationData: BoweryAutomation.ReportCreationData, payload, token, envUrl) => {
+        cy.task("createReportApi", 
+            { 
+                _reportCreationData:reportCreationData, 
+                _payload:payload, 
+                _token:token,
+                _envUrl:envUrl
 
-    }, { timeout:60000 })
-    .then(val => {
-        cy.log(`reportId is next: ${val}`);
-        cy._mapSet(mapKeysUtils.report_id, val);
-        _mutateArrayInMap(mapKeysUtils.report_id_arr, val, "Array of report_id");
+            }, { timeout:60000 })
+            .then(val => {
+                cy.log(`reportId is next: ${val}`);
+                cy._mapSet(mapKeysUtils.reportId, val);
+                _mutateArrayInMap(mapKeysUtils.reportIdArray, val, "Array of report_id");
+            });
+        cy.log("createApiReport");
     });
-    cy.log("createApiReport");
-});
 
 Cypress.Commands.add("deleteApiReport", () => {
     cy.log("Delete report");    
     cy.logNode("\nDelete report");
-        cy._mapGet(mapKeysUtils.report_id_arr).then(arr => {
-            if (arr === undefined) {
-                cy.log("No report_ids saved! Nothing to delete.");
-                return;
-            }
-            else {
-                arr.forEach(reportId => {
-                    cy.log(`Deleting report with id: ${reportId}`);
-                    cy.logNode(`Deleting report with id: ${reportId}`);
-                    // Deleting report
-                    cy.request({
-                        method:"DELETE",
-                        url:`${Cypress.config().baseUrl}/report/${reportId}`,
-                        auth:{
-                            'bearer': _map.get(mapKeysUtils.bearer_token)
-                        },
-                        timeout: 60000
-                    }).then((resp) => {
-                        expect(resp.status).to.eq(200);
-                    });
-    
-                    // Additional check whether report was deleted
-                    cy.request({
-                        failOnStatusCode: false,
-                        method:"GET",
-                        url:`${Cypress.config().baseUrl}/report/${reportId}`,
-                        auth:{
-                            'bearer': _map.get(mapKeysUtils.bearer_token)
-                        },
-                        timeout: 60000
-                    }).then((resp) => {
-                        expect(resp.status).to.eq(404);
-                    });
+    cy._mapGet(mapKeysUtils.reportIdArray).then(arr => {
+        if (arr === undefined) {
+            cy.log("No report_ids saved! Nothing to delete.");
+            return;
+        } else {
+            arr.forEach(reportId => {
+                cy.log(`Deleting report with id: ${reportId}`);
+                cy.logNode(`Deleting report with id: ${reportId}`);
+                // Deleting report
+                cy.request({
+                    method:"DELETE",
+                    url:`${Cypress.config().baseUrl}/report/${reportId}`,
+                    auth:{
+                        'bearer': _map.get(mapKeysUtils.bearerToken)
+                    },
+                    timeout: 60000
+                }).then((resp) => {
+                    expect(resp.status).to.eq(200);
                 });
-            }
-        });
+    
+                // Additional check whether report was deleted
+                cy.request({
+                    failOnStatusCode: false,
+                    method:"GET",
+                    url:`${Cypress.config().baseUrl}/report/${reportId}`,
+                    auth:{
+                        'bearer': _map.get(mapKeysUtils.bearerToken)
+                    },
+                    timeout: 60000
+                }).then((resp) => {
+                    expect(resp.status).to.eq(404);
+                });
+            });
+        }
+    });
 });
 
 Cypress.Commands.add("dragAndDrop", (subject, target) => {
@@ -222,7 +220,6 @@ Cypress.Commands.add("stepInfo", (message:string) => {
         }
     });
 });
-
 
 Cypress.Commands.add("_mapSet", (_key:any, _value:any) => {
     return _map.set(_key, _value);

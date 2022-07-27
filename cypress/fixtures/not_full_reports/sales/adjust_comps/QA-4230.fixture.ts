@@ -6,7 +6,7 @@ import ReportDataCreator from "../../../data_creator/reportData.creator";
 export const reportCreationData = conclusionValue => {
     return ReportDataCreator.getReportData("4230", {
         incomeValue: Enums.INCOME_TYPE.both,
-            conclusionValue: conclusionValue
+        conclusionValue: conclusionValue
     });
 };  
 

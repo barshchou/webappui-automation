@@ -9,7 +9,7 @@ const _monthlyRent= [ 60, 500, 450 ];
 
 const annualTotalRent = () => {
     let annualTotalRent = 0;
-    for (let i = 0; i < _monthlyRent.length; i++){
+    for (let i = 0; i < _monthlyRent.length; i++) {
         annualTotalRent += _monthlyRent[i] * 12;
     }
     return annualTotalRent;

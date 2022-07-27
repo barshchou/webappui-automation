@@ -31,17 +31,18 @@ describe("[QA-5179_81_83] Export column order both assessment psf and assessment
     it("Check export", () => {
         Cypress.config().baseUrl = null;
         cy.task("getFilePath",
-        { _reportName: testData.reportCreationData.reportNumber, _docx_html: "html" }
+            { _reportName: testData.reportCreationData.reportNumber, _docxHtml: "html" }
         ).then(file => {
             cy.log(<string>file);
-            cy.stepInfo(`6. Check the column order:
-                item (no heading), actual, actual per sf, actual per unit, transitional, transitional per sf, transitional per unit`);
-            
             cy.visit(<string>file);
+
+            cy.stepInfo(`6. Check the column order:
+                item (no heading), actual, actual per sf, actual per unit, transitional, 
+                transitional per sf, transitional per unit`);
             testData.verifyExportValues.forEach((val, index) => {
                 cy.xpath(`//*[contains(text(), 'Taxable Assessed Value')]/../../following-sibling::*[${index + 1}]`)
-                .scrollIntoView()
-                .should("include.text", val);
+                    .scrollIntoView()
+                    .should("include.text", val);
             });
         });
     });

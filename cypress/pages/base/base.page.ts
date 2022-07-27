@@ -26,7 +26,7 @@ export default class BasePage {
     /**
      * Same as `CloseIcon` but inside shadow-dom
      */
-    get CloseIconShadowDom(){
+    get CloseIconShadowDom() {
         return cy.get('[aria-label="Close"]', { includeShadowDom:true });
     }
 
@@ -38,9 +38,9 @@ export default class BasePage {
         return cy.get("[role=tooltip]");
     }
 
-    get modalWindow() {return cy.get("[role='dialog']");}
+    get modalWindow() { return cy.get("[role='dialog']"); }
 
-    get selectorDraggableElement(){
+    get selectorDraggableElement() {
         return '[data-react-beautiful-dnd-drag-handle="0"]';
     } 
 

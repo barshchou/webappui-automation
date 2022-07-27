@@ -4,7 +4,7 @@ class SaleInfoFromActions {
 
     Page: typeof findCompsPage;
 
-    constructor(page: typeof findCompsPage){
+    constructor(page: typeof findCompsPage) {
         this.Page = page;
     }
 

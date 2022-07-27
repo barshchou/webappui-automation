@@ -6,20 +6,20 @@ import { createReport, deleteReport } from "../../../../../actions/base/baseTest
 describe("Dropdown 'Filters'- 'Sort by' section", 
     { tags:[ "@income", "@commercial", "@rent_comps" ] }, () => {
 
-    before("Login, create report", () => {
-        createReport(testData.reportCreationData);
-    });
-
-    it("Test body", () => {
-        NavigationSection.navigateToCommercialRentComps();
-        Income.Commercial.RentComps.openMap()
-            .verifyProgressBarNotExist()
-            .verifyFiltersDropdownExist()
-            .clickFiltersDropdown()
-            .verifySortBySectionExist();
-        testData.sortByOptions.forEach(option => {
-            Income.Commercial.RentComps.selectSortByOption(option);
+        before("Login, create report", () => {
+            createReport(testData.reportCreationData);
         });
-        deleteReport(testData.reportCreationData.reportNumber);
+
+        it("Test body", () => {
+            NavigationSection.navigateToCommercialRentComps();
+            Income.Commercial.RentComps.openMap()
+                .verifyProgressBarNotExist()
+                .verifyFiltersDropdownExist()
+                .clickFiltersDropdown()
+                .verifySortBySectionExist();
+            testData.sortByOptions.forEach(option => {
+                Income.Commercial.RentComps.selectSortByOption(option);
+            });
+            deleteReport(testData.reportCreationData.reportNumber);
+        });
     });
-});

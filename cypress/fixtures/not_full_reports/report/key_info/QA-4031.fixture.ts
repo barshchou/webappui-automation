@@ -1,12 +1,12 @@
 import Enums from "../../../../enums/enums";
 import reportDataCreator from "../../../data_creator/reportData.creator";
 
-export const reportCreationData = jobNumvber => {
-    return reportDataCreator.getReportData(jobNumvber,
-    {
-        templateValue: Enums.TEMPLATE_TYPE.notFreddieMac,
-        incomeValue: Enums.INCOME_TYPE.both,
-    }, true);
+export const reportCreationData = (jobNumber: string) => {
+    return reportDataCreator.getReportData(jobNumber,
+        {
+            templateValue: Enums.TEMPLATE_TYPE.notFreddieMac,
+            incomeValue: Enums.INCOME_TYPE.both,
+        }, true);
 };
 
 export default {

@@ -19,7 +19,10 @@ const _compAddress = "626 1 Avenue";
 export default {
     reportCreationData: _reportCreationData,
     comparablesAdjustments: _compAdjustments,
-    calculationUnits: [ "Per Residential Units", "PSF", "Per Total Units" ] as BoweryReports.SalesAdjustmentGrid.CalculationUnits[], 
+    calculationUnits: [ 
+        "Per Residential Units", "PSF", 
+        "Per Total Units" 
+    ] as BoweryReports.SalesAdjustmentGrid.CalculationUnits[], 
     basis: "Price per Unit",
     cumulativePricePerUnit: _cumulativePricePerUnit,
     compAddress: _compAddress

@@ -29,8 +29,8 @@ const _replacementReservesUnitPerSf = _replacementReservesUnitTotal / _grossBuil
 const _replacementReservesUnitPerUnit = _forecast;
 
 const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("5851-53", {
-        incomeValue: Enums.INCOME_TYPE.both
-    });
+    incomeValue: Enums.INCOME_TYPE.both
+});
 
 export default {
     reportCreationData: _reportCreationData,

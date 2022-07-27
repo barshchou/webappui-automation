@@ -1,9 +1,9 @@
 import CompPlexBasePage from "../../pages/comp_plex/base.page";
 
-class CompPlexActions{
+class CompPlexActions {
     public Page: typeof CompPlexBasePage;
 
-    constructor(compplexPage: typeof CompPlexBasePage){
+    constructor(compplexPage: typeof CompPlexBasePage) {
         this.Page = compplexPage;
     }
 }

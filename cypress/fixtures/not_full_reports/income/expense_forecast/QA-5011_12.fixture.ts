@@ -27,11 +27,12 @@ const rentRollResidentialUnitFixture = (): BoweryReports.ResidentialUnit => {
 
 const commentariesFixture = () => {
     return {
-        generated: "Operating expenses, exclusive of real estate taxes, were forecasted at $0.00 per square foot and $0 per unit. " +
-            "Excluding real estate taxes, the comparables ranged from Comp totals map psf min to Comp totals map psf max per square foot and Comp totals map unit min to " +
-            "Comp totals map unit max per unit. Our forecast is near the comparable range on both a per square foot and per unit basis, " +
-            "as well as logically placed in relation to the historical performance of the asset. Thus, this forecast is " +
-            "reasonable and will be applied in our valuation analysis.",
+        generated: "Operating expenses, exclusive of real estate taxes, were forecasted at $0.00 " + 
+        "per square foot and $0 per unit. Excluding real estate taxes, the comparables ranged from " + 
+        "Comp totals map psf min to Comp totals map psf max per square foot and Comp totals map unit min to " +
+        "Comp totals map unit max per unit. Our forecast is near the comparable range on both a per " + 
+        "square foot and per unit basis, as well as logically placed in relation to the historical " + 
+        "performance of the asset. Thus, this forecast is reasonable and will be applied in our valuation analysis.",
     };
 };
 
@@ -163,16 +164,16 @@ const expenseForecastTotalFixture = (_basis: "unit" | "sf"): BoweryReports.Forec
 
 const expenseForecastFixtureArray = (basis?: "unit" | "sf"): Array<BoweryReports.ForecastItem> => {
     return [ expenseForecastInsuranceFixture(basis),
-    expenseForecastElectricityFixture(basis),
-    expenseForecastFuelFixture(basis),
-    expenseForecastWaterAndSewerFixture(basis),
-    expenseForecastRepairsAndMaintenanceFixture(basis),
-    expenseForecastPayrollAndBenefitsFixture(basis),
-    expenseForecastGeneralAndAdministrativeFixture(basis),
-    expenseForecastLegalAndProfessionalFeesFixture(basis),
-    expenseForecastMiscellaneousFixture(basis),
-    expenseForecastManagementFixture(basis),
-    expenseForecastReservesFixture(basis) ];
+        expenseForecastElectricityFixture(basis),
+        expenseForecastFuelFixture(basis),
+        expenseForecastWaterAndSewerFixture(basis),
+        expenseForecastRepairsAndMaintenanceFixture(basis),
+        expenseForecastPayrollAndBenefitsFixture(basis),
+        expenseForecastGeneralAndAdministrativeFixture(basis),
+        expenseForecastLegalAndProfessionalFeesFixture(basis),
+        expenseForecastMiscellaneousFixture(basis),
+        expenseForecastManagementFixture(basis),
+        expenseForecastReservesFixture(basis) ];
 };
 
 export default {

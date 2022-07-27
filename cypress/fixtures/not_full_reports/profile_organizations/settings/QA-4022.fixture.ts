@@ -7,8 +7,8 @@ const reportCreationFixture = () => {
     });
 };
 
-const _adminUsername = Cypress.env(`${Enums.USERS.webapp_admin_username}`);
-const _adminPassword = Cypress.env(`${Enums.USERS.webapp_admin_password}`);
+const _adminUsername = Cypress.env(`${Enums.USERS.webappAdminUsername}`);
+const _adminPassword = Cypress.env(`${Enums.USERS.webappAdminPassword}`);
 const _commentary = "A survey of active lenders in the subject property's influencing market "+
                     "indicates that 25-year and 30-year mortgage commitments are typically 175 "+
                     "to 450 basis points above 10-year treasuries.";
