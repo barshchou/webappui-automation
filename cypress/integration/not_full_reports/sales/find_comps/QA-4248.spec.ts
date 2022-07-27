@@ -5,7 +5,10 @@ import Sales from "../../../../actions/sales/sales.manager";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 import mapKeysUtils from "../../../../utils/mapKeys.utils";
 
-describe("Verify the Comps can be added by entering the existing Report ID in the modal", 
+/*
+ * Test is skipped as it's outdated. Import modal moved to another place.
+ */
+describe.skip("Verify the Comps can be added by entering the existing Report ID in the modal", 
     { tags:[ "@fix", "@comp_plex", "@sales", "@find_comps" ] }, () => {
         before("Login, create report", () => {
             createReport(fixture.reportCreationData);
