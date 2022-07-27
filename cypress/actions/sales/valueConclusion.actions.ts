@@ -1,6 +1,7 @@
 import valueConclusionPage from "../../pages/sales/valueConclusion.page";
 import { numberWithCommas } from "../../../utils/numbers.utils";
 import BaseActionsExt from "../base/base.actions.ext";
+import { BoweryReports } from "../../types/boweryReports.type";
 
 class ValueConclusionActions extends BaseActionsExt<typeof valueConclusionPage> {
 
@@ -199,9 +200,9 @@ class ValueConclusionActions extends BaseActionsExt<typeof valueConclusionPage> 
         return this;
     }
 
-    verifyGrossBuildingAreaAmount(gbaToBe: string | number): this {
-        const textToBe = typeof gbaToBe === "string" ? gbaToBe : numberWithCommas(gbaToBe);
-        valueConclusionPage.gbaAmount.should("contain.text", textToBe);
+    verifyBasisForAnalysisAmount(basisValueToBe: string | number): this {
+        const textToBe = typeof basisValueToBe === "string" ? basisValueToBe : numberWithCommas(basisValueToBe);
+        valueConclusionPage.basisForAnalysisAmount.should("contain.text", textToBe);
         return this;
     }
 
@@ -234,6 +235,11 @@ class ValueConclusionActions extends BaseActionsExt<typeof valueConclusionPage> 
     verifyNumberOfUnitsAmount(amountToBe: string | number): this {
         const valueToBe = typeof amountToBe === "string" ? amountToBe : `-$${numberWithCommas(amountToBe)}`;
         valueConclusionPage.numberOfUnitsAmount.should("have.text", valueToBe);
+        return this;
+    }
+
+    verifyBasisSFAnalysisTableCellText(basisSFAnalysisText: BoweryReports.BasisSquareFootAnalysisTexts): this {
+        valueConclusionPage.asIsAsStabilizedTable.find("td").contains(basisSFAnalysisText).should("exist");
         return this;
     }
 }

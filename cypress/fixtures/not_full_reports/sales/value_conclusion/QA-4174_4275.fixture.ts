@@ -2,7 +2,7 @@ import Enums from "../../../../enums/enums";
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 import { BoweryAutomation } from "../../../../types/boweryAutomation.type";
 
-const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("4174", {
+const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("4174_4275", {
     templateValue: Enums.TEMPLATE_TYPE.freddieMac,
     incomeValue: Enums.INCOME_TYPE.both,
     conclusionValue: Enums.VALUE_CONCLUSION_TYPE.AS_COMPLETE
