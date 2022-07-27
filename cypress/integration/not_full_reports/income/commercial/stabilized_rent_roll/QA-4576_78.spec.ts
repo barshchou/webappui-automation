@@ -85,7 +85,7 @@ describe("[QA-4576][QA-4578] Verify the display of the Stabilized Rent Roll page
 
             cy.stepInfo(`Drag all comps into created group`);
             /**
-             * Note: Do not change window focus while debugging in headed mode
+             * TODO: [QA-6378] AQA - Debug QA-4576-78 test drag-n-drop action Debug QA-4576-78 test drag-n-drop action
              */
             Income._CommercialManager.RentComps.dragAllCommercialUnitsIntoGroup(testData.compGroup);
 
