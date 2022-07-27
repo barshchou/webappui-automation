@@ -21,7 +21,7 @@ describe("Verify entered Use is displayed in Selected Rent Comps table",
             cy.stepInfo(`3. On the Income > Commercial > Rent Comps, comp has been added with Other -> 
                         Use-Other added text field`);
             _NavigationSection.clickCommercialRentComps()
-                .clickYesIfExist();
+                .submitSaveChangesModal();
             Income._CommercialManager.RentComps.clickManuallyAddANewCompButton().
                 searchNewCompByAddress(testData.address);
             testData.rentCompFields.forEach(field => {
@@ -39,7 +39,7 @@ describe("Verify entered Use is displayed in Selected Rent Comps table",
             cy.stepInfo(`4. Navigate to Comp Group Discussion page and verify the entered use appears 
                         under use Commercial Comp Groups Discussion page`);
             _NavigationSection.clickCommercialCompGroupsDiscussion()
-                .clickYesIfExist();
+                .submitSaveChangesModal();
             Income._CommercialManager.CompGroupsDiscussion.verifyCompGroupUnitValue(testData.compGroup, columns.use, 
                 testData.otherUse);
 
