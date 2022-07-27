@@ -6,6 +6,7 @@ import { createReport, deleteReport } from "../../../../actions/base/baseTest.ac
 import mapKeysUtils from "../../../../utils/mapKeys.utils";
 
 /*
+ * TODO: https://bowery.atlassian.net/browse/QA-6383 Update test spec after test case update
  * Test is skipped as it's outdated. Import modal moved to another place.
  */
 describe.skip("Verify the Comps can be added by entering the existing Report ID in the modal", 
