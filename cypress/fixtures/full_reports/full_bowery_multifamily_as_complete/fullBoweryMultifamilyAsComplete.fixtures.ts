@@ -21,7 +21,7 @@ const keyInfoPurposeFixture = () => {
     return {
         purposeValue: "Loan underwriting",
         interestAppraised: {
-            asStabilizedAmount: "Leased Fee Interest",
+            asIsMarket: "Leased Fee Interest",
             asComplete: "Leased Fee Interest",
             asStabilized: "Leased Fee Interest"
         }
@@ -811,18 +811,18 @@ const capRateConclusionFixture = () => {
         netOperatingIncome: "$51,557.28",
         asStabilizedPart: {
             period: "10/13/2022",
-            finalValues: "$520,000"
+            finalValue: "$520,000"
         },
         asCompletePart: {
             period: "10/13/2022",
             amount: "$515,573",
-            finalValues: "$520,000",
+            finalValue: "$520,000",
             lessEntrepreneurialProfit: 25
         },
         asIsMarketPart: {
             period: "10/13/2021",
             amount: "$383,073",
-            finalValues: "$380,000",
+            finalValue: "$380,000",
             perUnit: "$63,333",
             perSF: "$80.30"
         }
@@ -980,17 +980,17 @@ const valueConclusionFixture = () => {
         asStabilizedRow: {
             period: capRateConclusionFixture().asStabilizedPart.period,
             amount: "$540,000",
-            finalValues: "$540,000"
+            finalValue: "$540,000"
         },
         asCompleteRow: {
             period: capRateConclusionFixture().asCompletePart.period,
             amount: "$540,000",
-            finalValues: "$540,000"
+            finalValue: "$540,000"
         },
         asIsMarketRow: {
             period: capRateConclusionFixture().asIsMarketPart.period,
             amount: "$407,500",
-            finalValues: "$410,000"
+            finalValue: "$410,000"
         }
     };
 };
