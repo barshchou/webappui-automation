@@ -74,6 +74,7 @@ describe("Verify users roles permissions to change report status",
             cy.stepInfo('2. On a Review & Export page verify there is no change report status buttons');
             ReviewExport.Page.reportStatus.should('not.exist');
 
+            // TODO: [QA-6361] Inspector couldn't delete report in after hook
             deleteReport(testData.reportCreationData.reportNumber);
         });
     });

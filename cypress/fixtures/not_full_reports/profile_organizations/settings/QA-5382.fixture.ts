@@ -7,7 +7,7 @@ const reportCreationFixture = () => {
     });
 };
 
-const _textUpdate = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Bullets";
+const _textUpdate = "Lorem Ipsum is simply dummy text of the printing and typesetting industry.";
 
 export default {
     reportCreationData: reportCreationFixture(),

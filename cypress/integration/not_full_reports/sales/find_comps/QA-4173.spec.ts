@@ -3,7 +3,11 @@ import NavigationSection from "../../../../actions/base/navigationSection.action
 import Sales from "../../../../actions/sales/sales.manager";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 
-describe("Verify the Enter Report Unique ID modal is displayed on clicking the Import Comps button", 
+/*
+ * TODO: https://bowery.atlassian.net/browse/QA-6383 Update test spec after test case update
+ *Test is skipped as it's outdated. Import modal moved to another place.
+ */
+describe.skip("Verify the Enter Report Unique ID modal is displayed on clicking the Import Comps button", 
     { tags:[ "@find_comps", "@sales" ] }, () => {
         before("Login and create report", () => {
             createReport(testData.reportCreationData);
