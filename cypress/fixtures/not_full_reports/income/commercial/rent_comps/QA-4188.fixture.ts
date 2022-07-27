@@ -43,7 +43,7 @@ export default {
     reportCreationData: reportCreationFixture(),
     address: "462 1st Avenue, New York, USA",
     rentCompFields: _rentCompFields,
-    leaseDate: "01012022",
+    leaseDate: "01-01-2022",
     baseRent: 12,
     squareFeet: 100,
     numberOfMonthsInYear: 12,
