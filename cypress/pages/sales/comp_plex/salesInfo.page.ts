@@ -17,7 +17,7 @@ export default class SaleInformationForm {
         return cy.get('[class="ant-picker-today-btn"]', { includeShadowDom: true });
     }
 
-    get DropdownPicker() {
+    get DropdownDatePicker() {
         return cy.get('[class="ant-picker-dropdown ant-picker-dropdown-placement-bottomLeft "]',
             { includeShadowDom: true });
     }

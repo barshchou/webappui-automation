@@ -4,7 +4,7 @@ import { BoweryReports } from "../../../../types/boweryReports.type";
 import { BoweryAutomation } from "../../../../types/boweryAutomation.type";
 import { Sales } from '../../../../actions';
 
-const reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("5769-70", {
+const reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("5157_61", {
     incomeValue: Enums.INCOME_TYPE.both,
     conclusionValue: Enums.VALUE_CONCLUSION_TYPE.AS_COMPLETE
 });
@@ -14,7 +14,6 @@ const sortSalesCompsValue = 'Date Sold';
 
 const comparableFixture1 = {
     address: "116 Cooper Street"
-    // address: '173 Smith Street'
 };
 
 const comparableFixture2 = {
@@ -49,17 +48,17 @@ const comparableFixtureManual = {
         buyer: "Test and CO",
         seller: "Test inc"
     },
-    saleStatusListing: 'Listing', //as?,
+    saleStatusListing: 'Listing', 
     saleStatusUnderContract: 'Under Contract',
     saleStatusTransaction: 'Transaction',
 };
-
 
 function addCompWithStatus(address: string, saleStatus: string) {
     Sales._FindComps
         .openAddNewComparableFormSearchResult(address, -1)
         .selectDropdownOptionNewComp(Sales._FindComps.Page.conditionDropdown, comparableFixtureManual.condition)
-        .selectDropdownOptionNewComp(Sales._FindComps.Page.comparableTypeDropdown, comparableFixtureManual.comparableType);
+        .selectDropdownOptionNewComp(Sales._FindComps.Page.comparableTypeDropdown,
+            comparableFixtureManual.comparableType);
     Sales._FindComps
         .PropertyInfo.setResidentialUnits(`${comparableFixtureManual.units.numberOfUnits}`)
         .setSiteArea(`${comparableFixtureManual.siteArea}`)
@@ -75,8 +74,6 @@ function addCompWithStatus(address: string, saleStatus: string) {
     Sales._FindComps.Actions.Page.saveAndCloseButton.click();
     return this;
 }
-
-
 
 export default {
     comparableFixture1,

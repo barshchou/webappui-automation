@@ -9,6 +9,8 @@ describe("Verify the Enter Report Unique ID modal is displayed on clicking the I
             createReport(testData.reportCreationData);
         });
 
+
+        //TODO this test is non actual! reafactor + update test-case
         it("Test body", () => {
             NavigationSection.navigateToFindComps();
             Sales.FindComps.clickImportComparableButton()
