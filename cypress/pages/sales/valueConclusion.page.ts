@@ -59,7 +59,7 @@ class ValueConclusionPage extends BasePage {
         return cy.get("[data-qa*='asCompleteLossItems.entrepreneurialProfit'] input[inputmode]"); 
     }
 
-    get gbaAmount() { return cy.get("[data-qa=grossBuildingArea-amount-cell]"); }
+    get basisForAnalysisAmount() { return cy.get("[data-qa='basisForSFAnalysis-amount-cell']"); }
 
     get asStabilizedLaundryLossMonths() { 
         return cy.get("[data-qa='asStabilizedLossItems.laundryRentLoss.renovation-period-cell'] input[type=text]"); 

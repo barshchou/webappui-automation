@@ -199,7 +199,7 @@ class ValueConclusionActions extends BaseActionsExt<typeof valueConclusionPage> 
 
     verifyGrossBuildingAreaAmount(gbaToBe: string | number): this {
         const textToBe = typeof gbaToBe === "string" ? gbaToBe : numberWithCommas(gbaToBe);
-        valueConclusionPage.gbaAmount.should("contain.text", textToBe);
+        valueConclusionPage.basisForAnalysisAmount.should("contain.text", textToBe);
         return this;
     }
 

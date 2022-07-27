@@ -1,11 +1,11 @@
 import { Income, Property, ReviewExport } from '../../../../../actions/index';
 import { _NavigationSection } from '../../../../../actions/base/index';
+// eslint-disable-next-line max-len
 import testData from "../../../../../fixtures/not_full_reports/income/residential/stabilized_rent_roll/QA-6167-68.fixture";
 import { createReport } from "../../../../../actions/base/baseTest.actions";
 
 describe("Default selection on Stabilized Rent Roll table is the same selection made on In-Place RR page",
     { tags:[ "@income", "@residential", "@stabilized_rent_roll_summary" ] }, () => {
-
         it(`[QA-6167] Verify Rent-Controlled and Market Rate Increase values
         [QA-6168] Verify 'Rent Controlled Increases Discussion' generated commentary`, () => {
             cy.stepInfo(`Precondition: Select any option as Basis of Square Foot Analysis 
@@ -49,7 +49,7 @@ describe("Default selection on Stabilized Rent Roll table is the same selection 
         it("Check export", () => {
             Cypress.config().baseUrl = null;
             cy.task("getFilePath",
-                { _reportName: testData.reportCreationData.reportNumber, _docx_html: "html" }
+                { _reportName: testData.reportCreationData.reportNumber, _docxHtml: "html" }
             ).then(file => {
                 cy.log(<string>file);
                 cy.visit(<string>file);

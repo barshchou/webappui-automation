@@ -41,7 +41,7 @@ describe("Potential Gross Income",
             cy.stepInfo(`5. Go to Income → Reimbursement Summary and add Real Estate Taxes 
             Reimbursement for commercial units`); 
             _NavigationSection.clickCommercialReimbursementSummaryButton()
-                .clickYesIfExist();
+                .submitSaveChangesModal();
             Income._CommercialManager.ReimbursementSummary.addNewCommercialReimbursement(
                 testData.expenseType, testData.expenseTypeCellName, 
                 testData.reimbursementType, testData.knownInformation)
@@ -61,17 +61,17 @@ describe("Potential Gross Income",
 
             cy.stepInfo(`8. Go to Income → Miscellaneous → Laundry and fill in all necessary values`); 
             _NavigationSection.clickLaundryButton()
-                .clickYesIfExist();
+                .submitSaveChangesModal();
             Income._MiscellaneousManager.Laundry.enterLaundryIncome(testData.laundryIncome);
 
             cy.stepInfo(`9. Go to Income → Miscellaneous → Storage and fill in all necessary values`); 
             _NavigationSection.clickStorageButton()
-                .clickYesIfExist();
+                .submitSaveChangesModal();
             Income._MiscellaneousManager.Storage.addStorageIncome(testData.storageIncome);
 
             cy.stepInfo(`10. Go to Income → Miscellaneous → Other and fill in all necessary values`); 
             _NavigationSection.clickOtherButton()
-                .clickYesIfExist();
+                .submitSaveChangesModal();
             Income._MiscellaneousManager.Other.addOtherIncome(testData.otherIncomeItem);
 
             cy.saveLocalStorage();
