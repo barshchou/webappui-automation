@@ -48,7 +48,7 @@ describe('Verify the "Property Rights Appraised" commentary on the Introduction 
     
                 PreviewEdit._Introduction.Page.SwitchEditBtn.click();
             
-                PreviewEdit._Introduction.Page.ChipModified.should("be.visible");
+                PreviewEdit._Introduction.Page.getChipModified(testData.backLinkName).should("be.visible");
                 PreviewEdit._Introduction.Page.getBackLink(testData.backLinkName)
                     .should("be.visible")
                     .invoke("attr", "href")

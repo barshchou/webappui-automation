@@ -10,8 +10,8 @@ class IntroductionPage extends BasePage {
             .contains("Property Rights Appraised").next();
     }
 
-    get ChipModified() {
-        return cy.get('[ui="indicator"]');
+    getChipModified(name: string) {
+        return cy.xpath(`//*[contains(text(), '${name}')]//following::*[@ui='indicator'][1]`);
     }
     
     getBackLink(whereTo: string) {
