@@ -15,7 +15,7 @@ class ReviewExportPage extends BasePage {
         return cy.get('[data-qa="generate-xml-btn"]').should("be.visible");
     }
 
-    get statusBar() { return cy.get("[data-qa=status]"); }
+    get statusBar() { return cy.get("[data-qa=status]", { timeout: 40000 }); }
 
     get reportStatus() { return cy.get("[data-qa='report-status']"); }
 

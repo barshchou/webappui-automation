@@ -229,9 +229,5 @@ Cypress.Commands.add("logNode", (message: string) => {
     return cy.task("logNode", message);
 });
 
-Cypress.Commands.overwrite("get", (originalFn, selector, customTimeout = { timeout: 5000 }) => {
-    return originalFn(selector, customTimeout);
-});
-
 
 //#endregion
