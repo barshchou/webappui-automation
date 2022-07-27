@@ -5,7 +5,7 @@ class NavigationSection extends BasePage {
 
     get reportAppraiserButton() { return cy.get('#appraisers'); }
 
-    get incomeApproachButton() { return cy.get("#income-approach svg"); }
+    get incomeApproachButton() { return cy.get("#income-approach svg", { timeout: 30000 }); }
 
     get residentialIncomeArrow() { return cy.get("#residentialIncome"); }
 
@@ -25,7 +25,7 @@ class NavigationSection extends BasePage {
 
     get unitInspectionButton() { return cy.get("#unit-inspection"); }
 
-    get propertyButton() { return cy.get("#property-information svg"); }
+    get propertyButton() { return cy.get("#property-information svg", { timeout: 30000 }); }
 
     get commercialUnitsButton() { return cy.get("#commercial-units"); }
 
@@ -47,7 +47,7 @@ class NavigationSection extends BasePage {
 
     get insurableReplacementCostBookmark() { return cy.get("#insurable-replacement-cost > svg[data-icon=bookmark]"); }
 
-    get salesApproachButton() { return cy.get("#sales-approach svg"); }
+    get salesApproachButton() { return cy.get("#sales-approach svg", { timeout: 30000 }); }
 
     get valueConclusionButton() { return cy.get("#sale-value-conclusion"); }
 

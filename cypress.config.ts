@@ -25,7 +25,7 @@ export default defineConfig({
         taskTimeout: 60000,
 
         retries: {
-            runMode: 2,
+            runMode: 1,
             openMode: 0,
         },
 

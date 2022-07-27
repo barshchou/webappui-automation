@@ -4,7 +4,7 @@ class ReviewExportPage extends BasePage {
     get headerTitle() { return cy.get("[data-qa='reviewAndExport']"); }
 
     get downloadBtn() {
-        return cy.get('[data-qa="download-btn"]').should("be.visible");
+        return cy.get('[data-qa="download-btn"]', { timeout: 40000 }).should("be.visible");
     }
 
     get generateReportBtn() {
