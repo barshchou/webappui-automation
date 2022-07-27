@@ -58,8 +58,8 @@ Cypress.on("fail", (err, runnable) => {
         runnable,
     );
 
-    const updatedError = (changeValue: object) => {
-        return err = { ...err, ...changeValue };
+    const updatedError = (changeValue: string) => {
+        return err.name = changeValue;
     };
 
     const includesErrorMessage = (text: string) => err.message.includes(text);
@@ -70,9 +70,9 @@ Cypress.on("fail", (err, runnable) => {
     switch (err.name) {
         case "AssertionError":
             if (includesErrorMessage("Expected to find element")) {
-                updatedError({ name: "Element not found" });
+                updatedError( "Element not found" );
             } else if (includesErrorMessage("to have")) {
-                updatedError({ name: "Validation error" });
+                updatedError( "Validation error" );
             }
             break;
     
