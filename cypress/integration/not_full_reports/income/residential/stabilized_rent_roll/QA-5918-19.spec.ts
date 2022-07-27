@@ -1,7 +1,7 @@
 import { Income, Property } from '../../../../../actions/index';
 import { _NavigationSection } from '../../../../../actions/base/index';
-import testData from 
-    "../../../../../fixtures/not_full_reports/income/residential/stabilized_rent_roll/QA-5918-19.fixture";
+// eslint-disable-next-line max-len
+import testData from '../../../../../fixtures/not_full_reports/income/residential/stabilized_rent_roll/QA-5918-19.fixture';
 import { createReport } from "../../../../../actions/base/baseTest.actions";
 import enums from '../../../../../enums/enums';
 
@@ -44,8 +44,8 @@ describe("Default selection on Stabilized Rent Roll table is the same selection 
                 cy.stepInfo(`5. Verify comment is generated correctly based on selected 
                         Basis for Square Foot Analysis and template`);
                 Income._Residential.StabRentRollSummary
-                    .verifyDistributionSummary(testData.squareFootAnalysisFixture[index]
-                        .distributionSummaryNoSquareFootage);
+                    .verifyDistributionSummary(
+                        testData.squareFootAnalysisFixture[index].distributionSummaryNoSquareFootage);
             });
         });
 
@@ -78,8 +78,8 @@ describe("Default selection on Stabilized Rent Roll table is the same selection 
                 cy.stepInfo(`5. Verify comment is generated correctly based on selected 
                         Basis for Square Foot Analysis and template`);
                 Income._Residential.StabRentRollSummary
-                    .verifyDistributionSummary(testData.squareFootAnalysisFixture[index]
-                        .distributionSummaryYesSquareFootage);
+                    .verifyDistributionSummary(
+                        testData.squareFootAnalysisFixture[index].distributionSummaryYesSquareFootage);
             });
         });
     });
