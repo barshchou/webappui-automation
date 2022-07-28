@@ -15,7 +15,6 @@ class SaleInfoFromActions {
             this.Page.SaleDateToday.click();
         } else if (date === 'random') {
             this.Page.SaleDateCalendarNewComp.click();
-            this.Page.DropdownDatePicker.should('exist');
             this.Page.SaleDateCalendarNewComp.focus().clear().type(`${getRandomDate()}`).type('{enter}');
         } else {
             //TODO should edit this step for selecting data via date picker
