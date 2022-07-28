@@ -47,7 +47,6 @@ describe("Historical expense Insurance Per SF is correctly calculated and displa
 
             cy.stepInfo(`4. Go to Expense Forecast and make sure that Per SF radio button 
             is selected for Insurance card`);
-            testData.basis = "sf";
             _NavigationSection.Actions.navigateToExpenseForecast();
             Income._ExpenseForecastActions.chooseForecastItemBasis(testData.actualInsuranceItem)
                 .verifyForecastItemBasis(testData.actualInsuranceItem);

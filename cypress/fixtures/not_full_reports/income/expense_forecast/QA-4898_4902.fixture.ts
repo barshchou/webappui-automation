@@ -2,30 +2,36 @@ import ReportDataCreator from "../../../data_creator/reportData.creator";
 import { getCurrentMonthName, getYearFromDate } from "../../../../../utils/date.utils";
 import { BoweryReports } from "../../../../types/boweryReports.type";
 
-const _basis = "sf" as BoweryReports.UnitSF;
-
-const _actualWaterAndSewerItem: BoweryReports.ForecastItem =  {
-    name: "waterAndSewer",
-    basis: _basis,
-    projection: 10000
+const _actualWaterAndSewerItem = (_basis: 'sf' | 'unit' ): BoweryReports.ForecastItem => {
+    return {
+        name: "waterAndSewer",
+        basis: _basis,
+        projection: 10000
+    };
 }; 
 
-const _t12WaterAndSewerItem: BoweryReports.ForecastItem = {
-    name: "waterAndSewer",
-    basis: _basis,
-    projection: 13000
+const _t12WaterAndSewerItem= (_basis: 'sf' | 'unit'): BoweryReports.ForecastItem => {
+    return {
+        name: "waterAndSewer",
+        basis: _basis,
+        projection: 13000
+    };
 };
 
-const _historicalWaterAndSewerItem: BoweryReports.ForecastItem = {
-    name: "waterAndSewer",
-    basis: _basis,
-    projection: 15000
+const _historicalWaterAndSewerItem= (_basis: 'sf' | 'unit'): BoweryReports.ForecastItem => {
+    return {
+        name: "waterAndSewer",
+        basis: _basis,
+        projection: 15000
+    };
 };
 
-const _ownerProjectionWaterAndSewerItem: BoweryReports.ForecastItem = {
-    name: "waterAndSewer",
-    basis: _basis,
-    projection: 17000
+const _ownerProjectionWaterAndSewerItem = (_basis: 'sf' | 'unit'): BoweryReports.ForecastItem => {
+    return {
+        name: "waterAndSewer",
+        basis: _basis,
+        projection: 17000
+    };
 };
 
 const _buildingDescription: BoweryReports.BuildingDescription = {
@@ -69,5 +75,4 @@ export default {
 
     waterAndSewerPerSfCardSnapshotName: "WaterAndSewer_PerSF_Forecast_Item_Component",
     waterAndSewerPerUnitCardSnapshotName: "WaterAndSewer_PerUnit_Forecast_Item_Component",
-    basis: _basis
 };
