@@ -32,10 +32,57 @@ after(() => {
     }
 });
 
-Cypress.on("fail", (err) => {
+Cypress.on("fail", (err, runnable) => {
+    const createCustomErrorMessage = (error, steps, runnableObj) => {
+        let lastStep = "Last logged step:\n";
+        steps.forEach(step => {
+            lastStep += `${step}\n`;
+        });
+
+        const messageArr = [
+            `Test Suite: ${runnableObj.parent.title}`, // describe('...')
+            `Test: ${runnableObj.title}`, // it('...')
+            "----------",
+            `${error.message}`,
+            `\n${lastStep}`
+        ];
+
+        return messageArr.join('\n');
+    };
+
+    const customErrorMessage = createCustomErrorMessage(
+        err,
+        Cypress.env("stepInfo") || [ "no steps provided..." ],
+        runnable,
+    );
+
+    let customError = err;
+
+    const updatedError = (changeValue: string) => {
+        return err.name = changeValue;
+    };
+
+    const includesErrorMessage = (text: string) => err.message.includes(text);
+
+    customError.message = customErrorMessage;
+
+    
+    switch (err.name) {
+        case "AssertionError":
+            if (includesErrorMessage("Expected to find element")) {
+                updatedError( "Element not found" );
+            } else if (includesErrorMessage("to have")) {
+                updatedError( "Validation error" );
+            }
+            break;
+    
+        default: 
+            customError;
+    }
+    
     recordDOMSnapshot();
     recordProxiedRequests();
-    throw err;
+    throw customError;
 });
 
 declare global {

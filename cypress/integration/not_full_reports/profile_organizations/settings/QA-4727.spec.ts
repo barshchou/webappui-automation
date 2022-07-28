@@ -27,6 +27,10 @@ conditionalDescribe("[QA-4727] Verify possibility to edit static text in-app",
             _NavigationSection.navigateToLetterOfTransmittal();
             PreviewEdit._LetterOfTransmittal.verifyTextInFormContainer(testData.textUpdate);
 
+            /*
+             *  TODO: [QA-6362] Generated report doesn't have update Compliance Paragraph discussion, need to
+             * think about timeout.
+             */
             cy.stepInfo('4. Export report');
             _NavigationSection.openReviewAndExport();
             ReviewExport.generateDocxReport().waitForReportGenerated()

@@ -13,7 +13,7 @@ describe("Save and Save & Continue buttons tests",
                 .enterSaleValueConclusion(testData.saleValueConclusion);
         });
 
-        it("QA-4343: Save button test", () => {
+        it("[QA-4343]: Save button test", () => {
             Sales.ValueConclusion.clickSaveButton();
             cy.reload();
             Sales.ValueConclusion.verifyMatchIncomeApproachDeductionsChecked()
@@ -21,10 +21,9 @@ describe("Save and Save & Continue buttons tests",
             deleteReport(testData.reportCreationData.reportNumber);
         });
 
-        it("QA-4346 Save & Continue button test", () => {
+        it("[QA-4346]: Save & Continue button test", () => {
             Sales.ValueConclusion.clickSaveContinueButton();
-            Final._FinalValuesReconciliation.closeUserSurveyIfExist()
-                .goBackWithSave();
+            Final._FinalValuesReconciliation.goBack();
             Sales.ValueConclusion.verifyMatchIncomeApproachDeductionsChecked()
                 .verifySaleValueConclusion(testData.saleValueConclusion);
             deleteReport(testData.reportCreationData.reportNumber);

@@ -1,7 +1,7 @@
 import testData from "../../../../../fixtures/not_full_reports/income/commercial/rent_comps/QA-4188.fixture";
 import { Income } from "../../../../../actions";
 import { _NavigationSection } from "../../../../../actions/base";
-import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../../actions/base/baseTest.actions";
 
 describe("[Income>Commercial>Rent Comps] Rent/SF/Month is calculated with correct formula",
     { tags:[ "@income", "@commercial", "@rent_comps" ] }, () => {
@@ -24,7 +24,7 @@ describe("[Income>Commercial>Rent Comps] Rent/SF/Month is calculated with correc
                 searchNewCompByAddress(testData.address);
             testData.rentCompFields.forEach(field => {
                 if (field.type == "input") {
-                    Income._CommercialManager.RentComps.fillInRentCompFieldInput(field.name, field.value);
+                    Income._CommercialManager.RentComps.fillInRentCompFieldInput(field.name, field.value, true);
                 } else {
                     Income._CommercialManager.RentComps.chooseRentCompFieldDropdownOption(field.name, field.value);
                 }
@@ -57,9 +57,9 @@ describe("[Income>Commercial>Rent Comps] Rent/SF/Month is calculated with correc
         in selected rent comps table = Rent/SF, where Rent = base rent*12*SF and 12 = number of months in year`);
             rentPerSFValue = testData.baseRent * testData.numberOfMonthsInYear * 
                 testData.squareFeet / testData.squareFeet;
-            _NavigationSection.clickCommercialRentRollButton().clickYesIfExist();
+            _NavigationSection.clickCommercialRentRollButton().submitSaveChangesModal();
             Income._CommercialManager.InPlaceRentRoll.clickPerSquareFootButton(false);
-            _NavigationSection.clickCommercialRentComps().clickYesIfExist();
+            _NavigationSection.clickCommercialRentComps().submitSaveChangesModal();
             Income._CommercialManager.RentComps.clickEditButtonByRowNumber().
                 checkUnitOfMeasureRadioButton(testData.perMonth).
                 clickSubmitButton().
@@ -73,7 +73,5 @@ describe("[Income>Commercial>Rent Comps] Rent/SF/Month is calculated with correc
                 checkUnitOfMeasureRadioButton(testData.perYear).
                 clickSubmitButton().
                 verifyRentPerSFCellValue(rentPerSFValue);
-
-            deleteReport(testData.reportCreationData.reportNumber);
         });
     });
