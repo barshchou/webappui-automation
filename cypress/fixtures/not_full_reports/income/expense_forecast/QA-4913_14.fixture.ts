@@ -8,7 +8,7 @@ const _buildingDescription: BoweryReports.BuildingDescription = {
     grossArea: _grossBuildingArea, numberOfUnits: _units 
 };
 
-const expenseForecastElectricityFixture = (): BoweryReports.ForecastItem => {
+const expenseForecastElectricityFixture = (_basis: 'sf' | 'unit'): BoweryReports.ForecastItem => {
     return {
         name: "waterAndSewer",
         basis: _basis,
@@ -19,7 +19,7 @@ const expenseForecastElectricityFixture = (): BoweryReports.ForecastItem => {
 export default {
     reportCreationData: ReportDataCreator.getReportData("4913_14"),
     buildingDescription: _buildingDescription,
-    expenseForecastWaterAndSewer: expenseForecastElectricityFixture(),
+    expenseForecastWaterAndSewer: expenseForecastElectricityFixture,
     grossBuildingArea: _grossBuildingArea,
     basis: _basis,
     units: _units,
