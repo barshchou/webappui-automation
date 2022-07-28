@@ -77,7 +77,7 @@ export default class PropertyInformationForm {
         return cy.get('[data-qa="Save & Close"]', { includeShadowDom: true });
     }
 
-    get streetAdderssInput() {
+    get streetAddressInput() {
         return cy.get('[data-qa="street-address"] input', { includeShadowDom: true });
     }
 
