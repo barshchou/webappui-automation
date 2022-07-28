@@ -1,6 +1,6 @@
 import { _NavigationSection } from '../../../../actions/base/index';
 import { createReport } from '../../../../actions/base/baseTest.actions';
-import testData from "../../../../fixtures/not_full_reports/review_edit/introduction/QA-4291_4424_27.fixture";
+import testData from "../../../../fixtures/not_full_reports/review_edit/introduction/QA-4291_4424_27-28.fixture";
 import { PreviewEdit, Report } from '../../../../actions';
 import mapKeysUtils from '../../../../utils/mapKeys.utils';
 
@@ -13,7 +13,7 @@ describe('[QA-4291_4424_27] Check the Introduction page',
         });
 
         it("Test body", () => {
-            cy.stepInfo("2. Navigate to Report > Client and Edit Identification of the Client");
+            cy.stepInfo("2. Navigate to Report > Client and Edit Identification of the Client and Intended User Text");
             _NavigationSection.navigateToClientPage()
                 .Page.formEditBtn(1).click();
 
@@ -23,15 +23,21 @@ describe('[QA-4291_4424_27] Check the Introduction page',
             Report._Client.enterIntendedUserTextBox(testData.typeValue)
                 .Page.formSaveBtn().click();
             // Need wait for changes to take place.
-            cy.wait(1000)
+            cy.wait(1000);
+
+            cy.stepInfo("3. Navigate to Report > Key Info and Edit Definition of Market Value");
+            _NavigationSection.navigateToReportInformation();
+
+            Report._KeyInfo.enterDefinitionMarketValue(testData.typeValue);
+            cy.wait(1000);
 
 
-            cy.stepInfo("3. Proceed to the Introduction page and verify that page exist");
+            cy.stepInfo("4. Proceed to the Introduction page and verify that page exist");
             _NavigationSection.navigateToIntroduction()
                 .verifyProgressBarNotExist()
                 .Page.introduction.should("exist");
 
-            cy.stepInfo("4. Verify 'Identification of the Client' exist and edited");
+            cy.stepInfo("5. Verify 'Identification of the Client' exist and edited");
             PreviewEdit._Introduction.Page.SwitchEditBtn.click();
 
             testData.backLinkNames.forEach(name => {
