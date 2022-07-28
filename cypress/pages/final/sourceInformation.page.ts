@@ -35,6 +35,10 @@ class SourceInformationPage extends BasePage {
     get comparableSalesDataSources() { 
         return cy.get(`[data-qa='Comparable Sales Data-row'] ${this.sourceLabelLocator}`); 
     }
+
+    get dataSourcesDescriptionExportTextBox() {
+        return cy.xpath("//*[.='Data Sources Description Export']//following::*[@data-slate-editor][1]");
+    }
 }
 
 export default new SourceInformationPage();

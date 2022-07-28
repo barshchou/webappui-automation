@@ -87,6 +87,11 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         return this;
     }
 
+    clickSourceInformation(): NavigationSectionActions {
+        navigationSectionPage.sourceInformation.click();
+        return this;
+    }
+
     clickUnitInspectionButton(): NavigationSectionActions {
         navigationSectionPage.unitInspectionButton.click();
         return this;
@@ -151,6 +156,13 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         this.clickSaveButton();
         this.clickFinalButton()
             .clickUnitInspectionButton()
+            .verifyProgressBarNotExist();
+        return this;
+    }
+
+    navigateToSourceInformation(): NavigationSectionActions {
+        this.clickFinalButton()
+            .clickSourceInformation()
             .verifyProgressBarNotExist();
         return this;
     }
