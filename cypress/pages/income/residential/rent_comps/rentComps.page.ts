@@ -201,10 +201,10 @@ class RentCompsPage extends BasePage {
     get bathroomsCellsLocator() { return "[data-qa=col-bathrooms]"; }
 
     getBedroomsTableHeader(bedroomsNumber: number) { 
-        return cy.get(`[data-qa='rent-comps-type-bedrooms_${bedroomsNumber}'] > p`); 
+        return cy.get(`[data-qa='rent-comps-type-bedrooms_${bedroomsNumber}'] > h6`);
     }
 
-    get uncategorizedTableHeader() { return cy.get("[data-qa=rent-comps-type-uncategorized] > p"); }
+    get uncategorizedTableHeader() { return cy.get("[data-qa=rent-comps-type-uncategorized] > h6"); }
 
     getBedroomSubjectColumn(bedroomsNumber: number) {
         return cy.get(`[data-qa=rent-comps-type-bedrooms_${bedroomsNumber}] ` + 
@@ -235,7 +235,7 @@ class RentCompsPage extends BasePage {
     }
 
     getRemoveCompButtonByIndex(index: number) { 
-        return cy.get("[data-qa=selected-building-comps-table] [role=presentation]").eq(index); 
+        return cy.get("[data-qa=selected-building-comps-table] [data-testid='DisabledByDefaultIcon']").eq(index);
     }
 
     get removedBuildingCompsTable() { return cy.get("[data-qa=selected-building-comps-table]").eq(1); }

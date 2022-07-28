@@ -13,7 +13,7 @@ describe("Calculation of Market Condition adjustment",
         it("Test body", () => {
             cy.stepInfo(`1. Report > Key Info and fill the Date of Valuation`);
             NavigationSection.clickReportButton().navigateToReportInformation()
-                .clickYesIfExist();
+                .submitSaveChangesModal();
             Report._KeyInfo.enterDateByType(testData.dateFixture);
     
             cy.stepInfo(`2. Navigate to the Sales > Find Comps and add a few Sales Comp`);

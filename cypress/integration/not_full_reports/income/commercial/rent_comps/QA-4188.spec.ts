@@ -57,9 +57,9 @@ describe("[Income>Commercial>Rent Comps] Rent/SF/Month is calculated with correc
         in selected rent comps table = Rent/SF, where Rent = base rent*12*SF and 12 = number of months in year`);
             rentPerSFValue = testData.baseRent * testData.numberOfMonthsInYear * 
                 testData.squareFeet / testData.squareFeet;
-            _NavigationSection.clickCommercialRentRollButton().clickYesIfExist();
+            _NavigationSection.clickCommercialRentRollButton().submitSaveChangesModal();
             Income._CommercialManager.InPlaceRentRoll.clickPerSquareFootButton(false);
-            _NavigationSection.clickCommercialRentComps().clickYesIfExist();
+            _NavigationSection.clickCommercialRentComps().submitSaveChangesModal();
             Income._CommercialManager.RentComps.clickEditButtonByRowNumber().
                 checkUnitOfMeasureRadioButton(testData.perMonth).
                 clickSubmitButton().

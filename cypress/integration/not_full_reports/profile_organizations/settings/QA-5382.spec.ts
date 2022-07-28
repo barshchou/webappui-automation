@@ -24,6 +24,7 @@ conditionalDescribe("[QA-5382] Verify possibility to edit static text in-app",
             Organization._OrganizationActions.openOrganizationSettingsPage();
             Organization._OrganizationSettingsActions
                 .updateCertificationBulletPointDiscussion(testData.textUpdate, true);
+            cy.reload();
 
             cy.stepInfo('3. Open created report and verify certificate bullet points text');
             _NavigationSection.returnToHomePage();
