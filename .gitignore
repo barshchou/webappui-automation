@@ -141,4 +141,4 @@ cypress/spec_data/
 test.spec.ts
 
 # Finder settings
-.DS_Store
+**/.DS_Store
