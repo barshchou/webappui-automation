@@ -3,14 +3,14 @@ import { _NavigationSection } from '../../../../actions/base';
 import testData from "../../../../fixtures/not_full_reports/sales/find_comps/QA-5157_61.fixture";
 import { createReport } from "../../../../actions/base/baseTest.actions";
 import { salesInterceptions } from "../../../../actions/base/baseTest.actions";
+import { conditionalDescribe } from "../../../checkIsProd.utils";
 /*
  * import mapKeysUtils from "../../../../utils/mapKeys.utils";
  * import Homepage from "../../../../actions/base/homepage.actions";
  */
 
-
-describe(`[QA-5157] [QA-5161] [Sales > Find Comps] "Date Sold" sorting is selected by default for sales comps + 
-         sorting is applied correctly`,
+conditionalDescribe(`[QA-5157] [QA-5161] [Sales > Find Comps] "Date Sold" sorting is selected by default 
+                     for sales comps + sorting is applied correctly`,
 { tags: [ "@sales", "@find_comps", "@comp_plex" ] }, () => {
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
