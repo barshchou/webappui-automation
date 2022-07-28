@@ -254,7 +254,7 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
     }
 
     clickImportCompsFromReportButton(): FindCompsActions {
-        findCompsPage.importReportCompsButton.should("be.visible")
+        findCompsPage.addToReportCompsButton.should("be.visible")
             .should("be.enabled").click();
         return this;
     }

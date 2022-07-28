@@ -68,8 +68,8 @@ class FindCompsPage extends BasePage {
 
     get reportToSearchCompInput() { return cy.get("[data-qa='Report Unique ID']", { includeShadowDom: true }); }
 
-    get importReportCompsButton() {
-        return this.importCompModal.contains("Import");
+    get addToReportCompsButton() {
+        return this.importCompModal.contains("ADD TO REPORT");
     }
        
     get selectCompsIconOnMap() {
