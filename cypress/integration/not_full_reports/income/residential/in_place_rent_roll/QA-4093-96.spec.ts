@@ -35,8 +35,11 @@ describe(`[QA-4093-95] Verify if "Per Month" time period PSF Rent based on is se
                 .verifyColumnExist(testData.columnName)
                 .enterSquareFootageByRow(unit.footage)
                 .enterMonthlyRentByRowNumber(unit.monthlyRent)
-                .verifyRentPSFValueByRow(); 
-            cy.reload();
+                .verifyRentPSFValueByRow();
+            
+            // Restore page to default state
+            _NavigationSection.navigateToResidentialUnitGroups(false)
+                .navigateToResInPlaceRentRoll();
         });
     });
 
