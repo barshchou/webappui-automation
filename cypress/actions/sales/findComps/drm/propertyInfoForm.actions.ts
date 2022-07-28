@@ -13,12 +13,12 @@ class PropertyInfoFormActions {
         return this;
     }
 
-    setSiteArea(area: string): PropertyInfoFormActions{
+    setSiteArea(area: string): PropertyInfoFormActions {
         this.Page.siteAreaNewComp.type(area, { force: true });
         return this;
     }
     
-    setFloor(floors: string): PropertyInfoFormActions{
+    setFloor(floors: string): PropertyInfoFormActions {
         this.Page.floorNewComp.type(floors, { force: true });
         return this;
     }
@@ -32,10 +32,5 @@ class PropertyInfoFormActions {
         this.Page.createCompNumberResidentialUnits.type(units, { force: true });
         return this;
     }
-
-    // setComparableType (type: string): PropertyInfoFormActions {
-    //     this.Page.createCompNumberCommercialUnits.type(type, { force: true });
-    //     return this;
-    // }
 }
 export default new PropertyInfoFormActions(findCompsPage);

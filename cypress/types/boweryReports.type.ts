@@ -225,7 +225,7 @@ export namespace BoweryReports {
     }
 
     export namespace FindComps {
-        export type SalePeriodValues = keyof typeof Enums.SALE_PERIOD_VALUES[KeyInfo.SalePeriodValues]
+        export type SalePeriodValues = typeof Enums.SALE_PERIOD_VALUES[KeyInfo.SalePeriodValues]
     }
     
     export type CalculationType = typeof Enums.CALCULATION_TYPE[KeyInfo.CalculationType]

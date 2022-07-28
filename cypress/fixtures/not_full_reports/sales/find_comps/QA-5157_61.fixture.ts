@@ -11,6 +11,7 @@ const reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreato
 
 const filePath = "not_full_reports/CostarExport 5161.csv";
 const sortSalesCompsValue = 'Date Sold';
+const salePeriodValue = 'Last 3 Months' as BoweryReports.FindComps.SalePeriodValues;
 
 const comparableFixture1 = {
     address: "116 Cooper Street"
@@ -48,7 +49,7 @@ const comparableFixtureManual = {
         buyer: "Test and CO",
         seller: "Test inc"
     },
-    saleStatusListing: 'Listing', 
+    saleStatusListing: 'Listing',
     saleStatusUnderContract: 'Under Contract',
     saleStatusTransaction: 'Transaction',
 };
@@ -70,8 +71,8 @@ function addCompWithStatus(address: string, saleStatus: string) {
         .selectSaleDate('random');
     Sales._FindComps.Actions
         .selectDropdownOptionNewComp(Sales._FindComps.Page.SaleStatusDropdown, saleStatus);
-    Sales._FindComps.Actions.Page.newCompContinueButton.click();
-    Sales._FindComps.Actions.Page.saveAndCloseButton.click();
+    Sales._FindComps.Actions.Page.newCompContinueButton.should('exist').click();
+    Sales._FindComps.Actions.Page.saveAndCloseButton.should('exist').click();
     return this;
 }
 
@@ -84,5 +85,6 @@ export default {
     comparableFixtureManual,
     reportCreationData,
     sortSalesCompsValue,
+    salePeriodValue,
     filePath
 };

@@ -1,4 +1,3 @@
-import { findCompsPage } from './../../../pages/sales/findComps.page';
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { findCompsPage } from "../../../pages/sales/findComps.page";
 import { getUploadFixture } from "../../../../utils/fixtures.utils";
@@ -13,7 +12,6 @@ import { _map, _mutateArrayInMap } from "../../../support/commands";
 import { recurse } from "cypress-recurse";
 import mapKeysUtils from "../../../utils/mapKeys.utils";
 import { BoweryReports } from "../../../types/boweryReports.type";
-import SALE_PERIOD_VALUES from "../../../enums/enums";
 import { isDateHasCorrectFormat } from "../../../../utils/date.utils";
 
 class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
@@ -74,7 +72,6 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
         return this;
     }
 
-
     clickImportComparableButton(): FindCompsActions {
         findCompsPage.importCompsButton.click();
         return this;
@@ -91,7 +88,7 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
     }
 
     verifyUploadCompsSucceded(): FindCompsActions {
-        findCompsPage.loadingModalCSV.should('exist'); // change ?
+        findCompsPage.loadingModalCSV.should('exist'); 
         findCompsPage.loadingModalCSV.should('not.exist');
         findCompsPage.salesCompsDateSold.should(($compsDateList) => {
             expect($compsDateList.length).to.be.above(1);
@@ -99,14 +96,14 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
         return this;
     }
 
-    selectfilterSalePeriodValue(periodValue: string): FindCompsActions { //as??
+    selectfilterSalePeriodValue(periodValue: BoweryReports.FindComps.SalePeriodValues): FindCompsActions {
         findCompsPage.filterSalePeriod.should('exist').click();
         findCompsPage.filterSalePeriodValue(periodValue).should('exist').click();
         findCompsPage.filterSalePeriod.children().should('contain', `${periodValue}`);
         return this;
     }
 
-    resetAllFilters(): FindCompsActions {       // change ?
+    resetAllFilters(): FindCompsActions {
         findCompsPage.resetAllButton.click();
         findCompsPage.loadingModalSpinner.should('exist');
         findCompsPage.loadingModalSpinner.should('not.exist');
@@ -122,38 +119,19 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
 
     selectCompFromMapByAddress(address: string): FindCompsActions {
         recurse(
-            () => _scrollAndSearchComp(address), 
+            () => _scrollAndSearchComp(address),
             () => _map.get(mapKeysUtils.searchResultSalesComp) != undefined, { delay: 2000, timeout: 60000 }
         );
-
-        cy.log(_map.size, _map.has(mapKeysUtils.searchResultSalesComp));
-
         findCompsPage.getSelectCompFromMapButtonByAddress(address).scrollIntoView().click({ force: true });
         this.checkFindSingleSalesComp();
-
-
-
-
-        /*
-         *   _map.delete(mapKeysUtils.search_result_sales_comp);
-         *  cy.log(_map.has(mapKeysUtils.search_result_sales_comp))
-         */
-        cy.log(_map.get(mapKeysUtils.searchResultSalesComp));
-        cy.log(_map.size, _map.has(mapKeysUtils.searchResultSalesComp));
-
         /*
          * TODO: [QA-6233] Invstigate on ways we can click "Add" btn on Search Comps List safely
          * ernst: delay to not accidentaly dispatch click to "Remove" btn on SearchList
          */
         cy.wait(1500);
-
-
-        _map.clear();
-        //  _map.set(mapKeysUtils.search_result_sales_comp, undefined);
-
-        cy.log(_map.size, _map.has(mapKeysUtils.searchResultSalesComp));
-        cy.log(_map.get(mapKeysUtils.searchResultSalesComp));
-
+        /*
+         * TODO: find a way to clear mapKeysUtils.searchResultSalesComp keys
+         */
         return this;
     }
 
@@ -176,7 +154,7 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
      * and also retrieves some data (`id` and `address`) from request and writes into `_map`
      */
     checkFindSingleSalesComp(): FindCompsActions {
-        cy.wait(`@${Alias.gql.FindTransactionByIdAndVersion}`, { timeout:35000 }).then((interception) => {
+        cy.wait(`@${Alias.gql.FindTransactionByIdAndVersion}`, { timeout: 35000 }).then((interception) => {
             cy.log(interception.response.body.data.findTransactionByIdAndVersion.id);
             /**
              * Pushing comps ids upon their addition
@@ -196,7 +174,7 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
                 "Sales_Comps addresses array"
             );
             cy.wrap(interception.response.body.data.findTransactionByIdAndVersion.id)
-                .as(Alias.salesEventId);           
+                .as(Alias.salesEventId);
         });
         return this;
     }
@@ -212,7 +190,7 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
      * 
      * @param option If `reverse` true - checks whether list order changed comparing with default
      */
-    checkSalesCompAddedToList(option = { reverse : false }) {
+    checkSalesCompAddedToList(option = { reverse: false }) {
         this.Page.addressSalesComparablesTable.spread((...comps) => {
             /**
              * ernst: addresses from UI contains also city, state and postal code 
@@ -223,7 +201,7 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
             cy.wrap(comps).as(Alias.salesComps.addressSelectedComps);
 
             cy.get(`@${Alias.salesComps.addressSelectedComps}`).then(
-                uiAddresses => cy.log("Addresses from SelectedComps table: "+<any>uiAddresses)
+                uiAddresses => cy.log("Addresses from SelectedComps table: " + <any>uiAddresses)
             );
 
             cy._mapGet(mapKeysUtils.salesCompsAddresses).then(apiAddresses => {
@@ -259,20 +237,53 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
         return this;
     }
 
+    //TODO find a way to improve this action
     enterReportToSearchComp(reportID: string): FindCompsActions {
         cy.intercept("GET", `/salesComps/eventIds/${reportID}`)
             .as(Alias.salesCompsEventIds);
-        findCompsPage.reportToSearchCompInput.type(reportID).should("have.value", reportID);
+        findCompsPage.reportIdInput
+            .should('exist');
+        cy.wait(1500);
+        findCompsPage.reportIdInput.focus();
+        cy.wait(1500);
+        findCompsPage.reportIdInput.focus().focus().focus().should('be.focused');
+        findCompsPage.reportIdInput.focus().type('text').focus().clear();
+        findCompsPage.reportIdInput.focus().type(reportID);
+        findCompsPage.reportIdInput.should("have.value", reportID);
         return this;
     }
 
     clickImportCompsFromReportButton(): FindCompsActions {
-        findCompsPage.importReportCompsButton.should("be.visible").click();
+        findCompsPage.importReportCompsButton.should("be.visible")
+            .should("be.enabled").click();
+        return this;
+    }
+
+    clickSelectCompsIconOnMap(): FindCompsActions {
+        findCompsPage.selectCompsIconOnMap.should('exist');
+        cy.wait(1000);
+        findCompsPage.selectCompsIconOnMap.click();
+        findCompsPage.selectCompsButton.should('exist');
         return this;
     }
 
     clickSearchButton(): FindCompsActions {
-        findCompsPage.searchButton.click();
+        findCompsPage.searchButton.should('exist')
+            .should('be.enabled').click();
+        return this;
+    }
+
+    clickSelectCompsButton(): FindCompsActions {
+        findCompsPage.selectCompsButton.should('exist')
+            .should('be.enabled').click();
+        return this;
+    }
+
+    clickSelectAllButton(): FindCompsActions {
+        cy.wait(1000);
+        findCompsPage.selectAllButton.should('exist');
+        cy.wait(1000);  //
+        findCompsPage.selectAllButton.click();
         return this;
     }
 
@@ -334,7 +345,6 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
 
     enterNumericInputNewComp(elementAlias: string, numberOfUnits: number | string): FindCompsActions {
         this.clearNumericInputNewComp(elementAlias);
-        
         // ernst: little hack to work with commercialAreaNewComp input due its specific behavior
         if (elementAlias != Alias.pageElements.compPlex.commercialAreaNewComp) {
             cy.get(`@${elementAlias}`, { includeShadowDom: true }).realClick();
@@ -353,7 +363,10 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
         return this;
     }
 
-
+    /** 
+     * @describe function takes all copms and compare first and second values of column "Date Sold", 
+     * then second and third values and so on and so on (depends on amount of copms).
+     */
     checkSalesCompSortedByDateSold() {
         this.Page.salesCompsDateSold.then(element => {
             for (let i = 1; i + 1 < element.length; i++) {
@@ -366,7 +379,9 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
                         expect(isDateHasCorrectFormat(secondDateSoldString, "/")).to.be.equal(true);
                     } else if (isDateHasCorrectFormat(firstDateSoldString, "/")) {
                         expect(isDateHasCorrectFormat(secondDateSoldString, "/")).to.be.equal(true);
-                        expect(Date.parse(firstDateSoldString)).to.be.above(Date.parse(secondDateSoldString));
+                        let firstDateSoldNumber = (Date.parse(firstDateSoldString));
+                        let secondDateSoldNumber = (Date.parse(secondDateSoldString));
+                        expect(firstDateSoldNumber >= secondDateSoldNumber).to.be.true;
                     }
                 } else if (!isDateHasCorrectFormat(secondDateSoldString, "/")) {
                     if (firstDateSoldString === 'In-Contract') {
@@ -377,6 +392,23 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
                 }
             }
         });
+        return this;
+    }
+
+    addNewCompViaReportId(reportId: string): FindCompsActions {
+        this.openjobSearchTab()
+            .enterReportToSearchComp(reportId)
+            .clickSearchButton()
+            .clickSelectCompsIconOnMap()
+            .clickSelectCompsButton()
+            .clickSelectAllButton()
+            .clickImportCompsFromReportButton();
+        return this;
+    }
+
+    openjobSearchTab(): FindCompsActions {
+        findCompsPage.jobSearchTab.click();
+        findCompsPage.reportIdInput.should('exist');
         return this;
     }
 }
@@ -393,23 +425,10 @@ export default new FindCompsActions(findCompsPage);
 const _scrollAndSearchComp = (compAddress: string) => {
     return cy.get('[aria-label="grid"] > div > div', { includeShadowDom: true }).each((elem, index, list) => {
         if (elem.text().includes(compAddress)) {
-
-            cy.log(_map.get(mapKeysUtils.searchResultSalesComp));
-            cy.log(_map.size, _map.has(mapKeysUtils.searchResultSalesComp));
-
             cy.log(`Found SalesComps in next list ${list} with index ${index}`);
-            _map.set(mapKeysUtils.v, elem);
-
-            cy.log(_map.get(mapKeysUtils.searchResultSalesComp));
-            cy.log(_map.size, _map.has(mapKeysUtils.searchResultSalesComp));
-
+            _map.set(mapKeysUtils.searchResultSalesComp, elem);
             return;
         } else if (list.length == index + 1) {
-
-            cy.log(_map.size, _map.has(mapKeysUtils.searchResultSalesComp), 'esleif');
-            cy.log(_map.get(mapKeysUtils.searchResultSalesComp));
-
-
             if (_map.get(mapKeysUtils.searchResultSalesComp) == undefined) {
                 cy.log("Scrolling to last comp in to continue search");
                 cy.wrap(elem).scrollIntoView();
