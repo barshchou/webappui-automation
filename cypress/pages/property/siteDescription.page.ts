@@ -1,3 +1,4 @@
+import { BoweryReports } from "../../types/boweryReports.type";
 import BasePage from "../base/base.page";
 
 class SiteDescriptionPage extends BasePage {
@@ -26,6 +27,10 @@ class SiteDescriptionPage extends BasePage {
     get utilitiesItems() { return cy.get("*[name*=utilities][name*=name]"); }
 
     get utilitiesDescriptions() { return cy.get("*[name*=utilities][name*=description]"); }
+
+    getGeneratedCommentary(discussion: BoweryReports.PropertyDiscussion) {
+        return cy.get(`[data-qa='${discussion}Description.commentary-generated-text']`);
+    }
 }
 
 export default new SiteDescriptionPage();
