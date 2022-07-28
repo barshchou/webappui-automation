@@ -17,6 +17,8 @@ class NavigationSection extends BasePage {
 
     get commercialRentRollButton() { return cy.get("#commercial-rent-roll"); }
 
+    get residentialUnitGroups() { return cy.get('[id="residential-unit-groups"]'); }
+
     get commercialStabRentRollButton() { return cy.get("#commercial-projected-rent-roll"); }
 
     get finalButton() { return cy.get("#final svg"); }

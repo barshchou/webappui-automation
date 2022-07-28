@@ -1,7 +1,7 @@
 import { Income, Property } from '../../../../../actions/index';
 import { _NavigationSection } from '../../../../../actions/base/index';
-import testData
-    from "../../../../../fixtures/not_full_reports/income/residential/stabilized_rent_roll/QA-5918-19.fixture";
+// eslint-disable-next-line max-len
+import testData from '../../../../../fixtures/not_full_reports/income/residential/stabilized_rent_roll/QA-5918-19.fixture';
 import { createReport } from "../../../../../actions/base/baseTest.actions";
 import enums from '../../../../../enums/enums';
 
@@ -26,7 +26,7 @@ describe("Default selection on Stabilized Rent Roll table is the same selection 
                 Property._Summary.enterNumberOfResUnits(testData.residentialUnits.length)
                     .selectBasisSquareFootAnalysis(testData.squareFootAnalysisFixture[index].basis);
                 if (testData.squareFootAnalysisFixture[index].basis !== 
-                        enums.BASIS_SQUARE_FOOT_ANALYSIS.grossBuildingArea) {
+                    enums.BASIS_SQUARE_FOOT_ANALYSIS.grossBuildingArea) {
                     Property._Summary.fillBasisSquareFootAnalysis(testData.squareFootAnalysisFixture[index].area);
                 }
 
@@ -45,8 +45,7 @@ describe("Default selection on Stabilized Rent Roll table is the same selection 
                         Basis for Square Foot Analysis and template`);
                 Income._Residential.StabRentRollSummary
                     .verifyDistributionSummary(
-                        testData.squareFootAnalysisFixture[index].distributionSummaryNoSquareFootage
-                    );
+                        testData.squareFootAnalysisFixture[index].distributionSummaryNoSquareFootage);
             });
         });
 
@@ -60,7 +59,7 @@ describe("Default selection on Stabilized Rent Roll table is the same selection 
                 Property._Summary.enterNumberOfResUnits(testData.residentialUnits.length)
                     .selectBasisSquareFootAnalysis(testData.squareFootAnalysisFixture[index].basis);
                 if (testData.squareFootAnalysisFixture[index].basis !== 
-                        enums.BASIS_SQUARE_FOOT_ANALYSIS.grossBuildingArea) {
+                    enums.BASIS_SQUARE_FOOT_ANALYSIS.grossBuildingArea) {
                     Property._Summary.fillBasisSquareFootAnalysis(testData.squareFootAnalysisFixture[index].area);
                 }
 
@@ -80,8 +79,7 @@ describe("Default selection on Stabilized Rent Roll table is the same selection 
                         Basis for Square Foot Analysis and template`);
                 Income._Residential.StabRentRollSummary
                     .verifyDistributionSummary(
-                        testData.squareFootAnalysisFixture[index].distributionSummaryYesSquareFootage
-                    );
+                        testData.squareFootAnalysisFixture[index].distributionSummaryYesSquareFootage);
             });
         });
     });

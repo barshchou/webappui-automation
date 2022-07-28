@@ -1,9 +1,3 @@
-/*
- * export const isProdEnv = () => {
- *     return Cypress.config().baseUrl.includes(ENVS.prod);
- * };
- */
-
 export const ENVS = {
     dev: "https://bowery-development.herokuapp.com",
     staging: "https://bowery-staging.herokuapp.com",
@@ -58,9 +52,3 @@ const _validateCustomUrl = (customUrl: string): string => {
  * @param str Url string
  */
 const _trimSlash = (str: string) => new URL(str).origin;
-
-// /**
-//  * Skipping test suite from execution if current execution env is `prod`.
-//  * Necessary for tests where we manipulate with sensitive data
-//  */
-// export const conditionalDescribe = isProdEnv() ? describe.skip : describe;

@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { addMatchImageSnapshotCommand } from '@simonsmith/cypress-image-snapshot/command';
 import "cypress-file-upload";
 import "cypress-localstorage-commands";
@@ -71,9 +72,8 @@ Cypress.Commands.add("loginByApi", (envUrl, username, password) => {
             _username: username, 
             _password: password
         })
-        .then(_response => {
-            const response: any = _response;
-            const responseBody = JSON.parse(response.text);
+        .then(responseBody => {
+            // @ts-ignore
             const token = responseBody.token;
 
             // set bearer token also in localStorage in order to avoid unexpected behavior from old code
@@ -82,6 +82,7 @@ Cypress.Commands.add("loginByApi", (envUrl, username, password) => {
             // set bearer token so we could we use this in global after hook in `./index.ts`
             cy._mapSet(mapKeysUtils.bearerToken, token);
 
+            // @ts-ignore
             const userId = responseBody.user._id;
             cy.log(`User Id is: ${userId}`);
             cy._mapSet(mapKeysUtils.userId, userId);
@@ -208,7 +209,17 @@ Cypress.Commands.add("dragAndDrop", (subject, target) => {
         });
 });
 
+/**
+ * Adds a command to add steps for tests. 
+ * If there is an error in the test, writes the last passed step to the array
+ */
 Cypress.Commands.add("stepInfo", (message:string) => {
+    let arr = Cypress.env("stepInfo") || [];
+    // Add only last step
+    if (arr.length >= 1) {
+        arr = [];
+    }
+    arr.push(message);
     Cypress.log({
         displayName:"StepInfo",
         message:`${message}`,
@@ -218,6 +229,7 @@ Cypress.Commands.add("stepInfo", (message:string) => {
             };
         }
     });
+    Cypress.env("stepInfo", arr);
 });
 
 Cypress.Commands.add("_mapSet", (_key:any, _value:any) => {

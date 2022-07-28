@@ -16,7 +16,7 @@ conditionalDescribe("Comp summary tests", { tags: [ "@residential", "@rent_comps
         Income._Residential.RentComps.BaseActions.changeToBuildingSearch()
             .clickAddRemoveBuildingCompByAddress(testData.compAddress)
             .clickEditBuildingCompButtonByAddress(testData.compAddress);
-        _NavigationSection.clickYesIfExist();
+        _NavigationSection.submitSaveChangesModal();
         Income._Residential.RentComps.FullBuildingComps._CompSummary.openNavigationTab();
         cy.saveLocalStorage();
     });
