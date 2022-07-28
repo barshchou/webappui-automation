@@ -22,10 +22,11 @@ describe('[QA-4429] Check the Introduction page',
             cy.wait(1000);
 
             cy.stepInfo("3. Navigate to PreviewAndEdit > Introduction and verify exist and modified");
+            _NavigationSection.navigateToIntroduction();
             PreviewEdit._Introduction.Page.SwitchEditBtn.click();
 
-            PreviewEdit._Introduction.Page.getChipModified(testData.backLinkNames).should("be.visible");
-            PreviewEdit._Introduction.Page.getTextFromTextArea(testData.backLinkNames)
+            PreviewEdit._Introduction.Page.getChipModified(testData.title).should("be.visible");
+            PreviewEdit._Introduction.Page.getTextFromTextArea(testData.title)
                 .should("include.text", testData.typeValue);
             PreviewEdit._Introduction.Page.getBackLink(testData.backLinkNames)
                 .should("be.visible")
@@ -52,10 +53,11 @@ describe('[QA-4429] Check the Introduction page',
             cy.wait(1000);
 
             cy.stepInfo("3. Navigate to PreviewAndEdit > Introduction and verify exist and modified");
+            _NavigationSection.navigateToIntroduction();
             PreviewEdit._Introduction.Page.SwitchEditBtn.click();
 
-            PreviewEdit._Introduction.Page.getChipModified(testData.backLinkNames).should("be.visible");
-            PreviewEdit._Introduction.Page.getTextFromTextArea(testData.backLinkNames)
+            PreviewEdit._Introduction.Page.getChipModified(testData.title).should("be.visible");
+            PreviewEdit._Introduction.Page.getTextFromTextArea(testData.title)
                 .should("include.text", testData.typeValue);
             PreviewEdit._Introduction.Page.getBackLink(testData.backLinkNames)
                 .should("be.visible")

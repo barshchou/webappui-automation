@@ -160,9 +160,10 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         return this;
     }
 
-    navigateToSourceInformation(): NavigationSectionActions {
+    navigateToSourceInformation(saveChanges = true): NavigationSectionActions {
         this.clickFinalButton()
             .clickSourceInformation()
+            .submitSaveChangesModal(saveChanges)
             .verifyProgressBarNotExist();
         return this;
     }

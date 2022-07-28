@@ -20,5 +20,6 @@ export default {
     reportNYCCreationData: ReportDataCreator.getReportData("4429"),
     reportOtherCreationData: reportCreationFixture(),
     typeValue: "Test values",
-    backLinkNames:  "Definition of Market Value" 
+    title:  "Data Sources",
+    backLinkNames: "Data Sources Description Export"
 };
