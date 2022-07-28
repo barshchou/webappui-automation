@@ -2,7 +2,6 @@ import ReportDataCreator from "../../../data_creator/reportData.creator";
 import Enums from "../../../../enums/enums";
 import { BoweryReports } from "../../../../types/boweryReports.type";
 import { BoweryAutomation } from "../../../../types/boweryAutomation.type";
-import { Sales } from '../../../../actions';
 
 const reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("5157_61", {
     incomeValue: Enums.INCOME_TYPE.both,
@@ -29,7 +28,6 @@ const comparableFixture4 = {
     address: "1715 Lexington Avenue"
 };
 
-
 const comparableFixtureManual = {
     address1: "388 Greenwich Street, New York, NY, USA",
     address2: "388 Broome Street, New York, NY, USA",
@@ -54,37 +52,42 @@ const comparableFixtureManual = {
     saleStatusTransaction: 'Transaction',
 };
 
-function addCompWithStatus(address: string, saleStatus: string) {
-    Sales._FindComps
-        .openAddNewComparableFormSearchResult(address, -1)
-        .selectDropdownOptionNewComp(Sales._FindComps.Page.conditionDropdown, comparableFixtureManual.condition)
-        .selectDropdownOptionNewComp(Sales._FindComps.Page.comparableTypeDropdown,
-            comparableFixtureManual.comparableType);
-    Sales._FindComps
-        .PropertyInfo.setResidentialUnits(`${comparableFixtureManual.units.numberOfUnits}`)
-        .setSiteArea(`${comparableFixtureManual.siteArea}`)
-        .setFloor(`${comparableFixtureManual.floors}`);
-    Sales._FindComps.Page.newCompContinueButton.click();
-    Sales._FindComps
-        .SaleInfo.setBuyerGrantee(comparableFixtureManual.saleInfo.buyer)
-        .setSellerGarantor(comparableFixtureManual.saleInfo.seller)
-        .selectSaleDate('random');
-    Sales._FindComps.Actions
-        .selectDropdownOptionNewComp(Sales._FindComps.Page.SaleStatusDropdown, saleStatus);
-    Sales._FindComps.Actions.Page.newCompContinueButton.should('exist').click();
-    Sales._FindComps.Actions.Page.saveAndCloseButton.should('exist').click();
-    return this;
-}
+const arrayOfCompsforManualAddition = [
+    {
+        address: comparableFixtureManual.address1,
+        status: comparableFixtureManual.saleStatusListing
+    },
+    {
+        address: comparableFixtureManual.address2,
+        status: comparableFixtureManual.saleStatusListing
+    },
+    {
+        address: comparableFixtureManual.address3,
+        status: comparableFixtureManual.saleStatusUnderContract
+    },
+    {
+        address: comparableFixtureManual.address4,
+        status: comparableFixtureManual.saleStatusUnderContract
+    },
+    {
+        address: comparableFixtureManual.address5,
+        status: comparableFixtureManual.saleStatusTransaction
+    },
+    {
+        address: comparableFixtureManual.address6,
+        status: comparableFixtureManual.saleStatusTransaction
+    },
+];
 
 export default {
     comparableFixture1,
     comparableFixture2,
     comparableFixture3,
     comparableFixture4,
-    addCompWithStatus,
     comparableFixtureManual,
     reportCreationData,
     sortSalesCompsValue,
     salePeriodValue,
-    filePath
+    filePath,
+    arrayOfCompsforManualAddition
 };
