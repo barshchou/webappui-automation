@@ -88,7 +88,7 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
     }
 
     verifyUploadCompsSucceded(): FindCompsActions {
-        findCompsPage.loadingModalCSV.should('exist'); 
+        findCompsPage.loadingModalCSV.should('exist');
         findCompsPage.loadingModalCSV.should('not.exist');
         findCompsPage.salesCompsDateSold.should(($compsDateList) => {
             expect($compsDateList.length).to.be.above(1);
@@ -373,25 +373,35 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
                 let firstDateSoldString = element[i].textContent;
                 let secondDateSoldString = element[(i + 1)].textContent;
                 if (isDateHasCorrectFormat(secondDateSoldString, "/")) {
-                    if (firstDateSoldString === 'In-Contract') {
-                        expect(isDateHasCorrectFormat(secondDateSoldString, "/")).to.be.equal(true);
-                    } else if (firstDateSoldString === 'Listing') {
-                        expect(isDateHasCorrectFormat(secondDateSoldString, "/")).to.be.equal(true);
-                    } else if (isDateHasCorrectFormat(firstDateSoldString, "/")) {
-                        expect(isDateHasCorrectFormat(secondDateSoldString, "/")).to.be.equal(true);
-                        let firstDateSoldNumber = (Date.parse(firstDateSoldString));
-                        let secondDateSoldNumber = (Date.parse(secondDateSoldString));
-                        expect(firstDateSoldNumber >= secondDateSoldNumber).to.be.true;
-                    }
+                    this.compareIfSecondIsDate(firstDateSoldString, secondDateSoldString);
                 } else if (!isDateHasCorrectFormat(secondDateSoldString, "/")) {
-                    if (firstDateSoldString === 'In-Contract') {
-                        expect(secondDateSoldString).to.be.oneOf([ 'In-Contract', 'Listing' ]);
-                    } else if (firstDateSoldString === 'Listing') {
-                        expect(secondDateSoldString).to.be.equal('Listing');
-                    }
+                    this.compareIfSecondIsNotDate(firstDateSoldString, secondDateSoldString);
                 }
             }
         });
+        return this;
+    }
+
+    private compareIfSecondIsDate(firstDateSoldString: string, secondDateSoldString: string) {
+        if (firstDateSoldString === 'In-Contract') {
+            expect(isDateHasCorrectFormat(secondDateSoldString, "/")).to.be.equal(true);
+        } else if (firstDateSoldString === 'Listing') {
+            expect(isDateHasCorrectFormat(secondDateSoldString, "/")).to.be.equal(true);
+        } else if (isDateHasCorrectFormat(firstDateSoldString, "/")) {
+            expect(isDateHasCorrectFormat(secondDateSoldString, "/")).to.be.equal(true);
+            let firstDateSoldNumber = (Date.parse(firstDateSoldString));
+            let secondDateSoldNumber = (Date.parse(secondDateSoldString));
+            expect(firstDateSoldNumber >= secondDateSoldNumber).to.be.true;
+        }
+        return this;
+    }
+
+    private compareIfSecondIsNotDate(firstDateSoldString: string, secondDateSoldString: string) {
+        if (firstDateSoldString === 'In-Contract') {
+            expect(secondDateSoldString).to.be.oneOf([ 'In-Contract', 'Listing' ]);
+        } else if (firstDateSoldString === 'Listing') {
+            expect(secondDateSoldString).to.be.equal('Listing');
+        }
         return this;
     }
 
