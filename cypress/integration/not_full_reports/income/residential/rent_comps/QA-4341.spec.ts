@@ -6,7 +6,7 @@ import Income from "../../../../../actions/income/income.manager";
 describe(`Verify on checking the 'Display square footage for comps?' checkbox 2 columns appears in the grids 
                 of comparable unit groups on 'Rent Comps' page (Unit type of search is selected)`, () => {
 
-    before("Login, create report", () => {
+    beforeEach("Login, create report", () => {
         createReport(testData.reportCreationData);
     });
 

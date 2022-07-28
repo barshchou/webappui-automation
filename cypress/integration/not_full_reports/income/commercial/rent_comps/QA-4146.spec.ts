@@ -6,7 +6,7 @@ import { createReport, deleteReport } from "../../../../../actions/base/baseTest
 describe("Check that map is closed by default", 
     { tags:[ "@income", "@commercial", "@rent_comps" ] }, () => {
         
-        before("Login, create report", () => {
+        beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);
         });
 

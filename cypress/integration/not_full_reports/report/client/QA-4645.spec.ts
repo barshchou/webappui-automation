@@ -6,7 +6,7 @@ import { Report } from '../../../../actions';
 
 describe("Verify the Client Guidelines Discussion on the page", 
     { tags: [ "@report", "@client" ] }, () => {
-        before("Login, create report", () => {
+        beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);
         });
 

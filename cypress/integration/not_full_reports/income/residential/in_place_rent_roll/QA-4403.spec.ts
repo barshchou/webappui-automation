@@ -7,7 +7,7 @@ import { createReport, deleteReport } from "../../../../../actions/base/baseTest
 describe("Verify the Unsaved changes modal functionality", 
     { tags:[ "@income", "@residential", "@in_place_rent_roll" ] }, () => {
         
-        before("Login, create report", () => {
+        beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);
         });
 

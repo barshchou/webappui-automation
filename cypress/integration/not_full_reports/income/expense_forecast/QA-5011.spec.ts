@@ -5,7 +5,7 @@ import { createReport, deleteReport } from "../../../../actions/base/baseTest.ac
 
 describe(`[QA-5011] [Income>Expense forecast] Unselected existing expense card is not displayed in certain places `,
     { tags: [ "@income", "@expense_forecast" ] }, () => {
-        before("Login, create report", () => {
+        beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);
         });
 

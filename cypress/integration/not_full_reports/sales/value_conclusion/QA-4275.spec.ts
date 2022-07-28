@@ -6,7 +6,7 @@ import Property from "../../../../actions/property/property.manager";
 
 describe("Gross Building Area value pulled from Property -> Summary -> As Is Building Description", 
     { tags: [ "@sales", "@value_conclusion" ] }, () => {
-        before("Login, create report", () => {
+        beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);
         });
 

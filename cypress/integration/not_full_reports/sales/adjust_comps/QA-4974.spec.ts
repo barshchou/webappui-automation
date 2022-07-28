@@ -6,10 +6,11 @@ import { createReport } from "../../../../actions/base/baseTest.actions";
 describe("[QA-4974] Verify sections of Sales Adjustment Grid", 
     { tags: [ "@adjust_comps", "@sales" ] }, () => {
 
-        before("Login, create report", () => {
+        beforeEach("Login, create report", () => {
             cy.stepInfo("Login, create report with 'commercial only' income type");
             createReport(testData.reportCreationData);
         });
+
         it("Test body", () => {
             cy.stepInfo("1. Add several comps in the Sales > Find Comps page");
             NavigationSection.navigateToFindComps();

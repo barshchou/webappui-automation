@@ -5,7 +5,7 @@ import { createReport, deleteReport } from "../../../../actions/base/baseTest.ac
 
 describe("Prospective Market Value As Stabilized is calculated like Concluded Value per SF * GBA", 
     { tags: [ "@sales", "@value_conclusion" ] }, () => {
-        before("Login, create report", () => {
+        beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);
         });
 

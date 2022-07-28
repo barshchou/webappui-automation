@@ -7,7 +7,7 @@ import AddCompFormPage from "../../../../../pages/income/residential/rent_comps/
 describe(`Verify the UI elements of Add New Rent Comp overlay on Rent Comps page 
                 when Unit type of search is selected`, () => {
 
-    before("Login, create report", () => {
+    beforeEach("Login, create report", () => {
         createReport(testData.reportCreationData);
     });
 

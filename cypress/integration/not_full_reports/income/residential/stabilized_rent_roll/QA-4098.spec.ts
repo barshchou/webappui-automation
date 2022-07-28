@@ -5,7 +5,7 @@ import { createReport, deleteReport } from "../../../../../actions/base/baseTest
 
 describe("Default selection on Stabilized Rent Roll table is the same selection made on In-Place RR page",
     { tags:[ "@income", "@residential", "@stabilized_rent_roll" ] }, () => {
-        before("Login, create report", () => {
+        beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);
         });
 

@@ -4,7 +4,7 @@ import testData from "../../../../fixtures/comp_plex/sales/find_comps/QA-5272.fi
 
 describe("[QA-5272]", () => {
 
-    before(() => {
+    beforeEach(() => {
         /**
          * ernst: this tests should run only on standalone comp_plex 
          * (localhost or client's url whatever)

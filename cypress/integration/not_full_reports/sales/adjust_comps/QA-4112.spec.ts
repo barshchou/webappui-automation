@@ -5,7 +5,7 @@ import { Sales } from "../../../../actions";
 
 describe("Total Utility Adjustments in Sales Adjustment Grid is calculated with correct formula", 
     { tags:[ "@sales", "@adjust_comps", ] }, () => {
-        before("Login, create report", () => {
+        beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);
         });
 

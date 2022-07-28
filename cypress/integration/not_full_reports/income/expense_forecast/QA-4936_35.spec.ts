@@ -8,7 +8,7 @@ import Income from "../../../../actions/income/income.manager";
 describe("Historical expense Repairs & Maintenance Per SF is correctly calculated and displayed", 
     { tags: [ "@income", "@expense_forecast" ] }, () => {
         
-        before("Login, create report", () => {
+        beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);
             NavigationSection.navigateToPropertySummary();
             Property.Summary.enterGrossBuildingArea(testData.buildingDescription.grossArea)
