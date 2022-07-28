@@ -4,7 +4,7 @@ import testData from "../../../../fixtures/not_full_reports/review_edit/introduc
 import { PreviewEdit, Report } from '../../../../actions';
 import mapKeysUtils from '../../../../utils/mapKeys.utils';
 
-describe('[QA-4291_4424_27] Check the Introduction page',
+describe('[QA-4291_4424_27-28] Check the Introduction page',
     { tags: [ "@preview_edit", "@introduction" ] }, () => {
 
         before("Login, create report", () => {
