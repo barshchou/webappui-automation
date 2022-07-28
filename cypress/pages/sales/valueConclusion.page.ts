@@ -86,6 +86,8 @@ class ValueConclusionPage extends BasePage {
     get salesValueConclusionTableOfUnitsAmount() { 
         return cy.xpath("//tbody[@data-qa='as-is-as-stabilized']/tr[2]/td[1]"); 
     }
+
+    get asIsAsStabilizedTable() { return cy.get("[data-qa=as-is-as-stabilized]"); }
 }
 
 export default new ValueConclusionPage();
