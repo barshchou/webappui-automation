@@ -10,13 +10,15 @@ export const ENVS = {
  * If you want to get `baseUrl` during test run - call `Cypress.config().baseUrl`
  * @returns
  */
-export const evalUrl = (config: Cypress.PluginConfigOptions): string => {
-    if (config.env.url == "custom") {
-        return _validateCustomUrl(config.env.customUrl);
-    } else if (config.env.url == undefined) {
+export const evalUrl = (config: Cypress.PluginConfigOptions | Cypress.ObjectLike, isFromEnv = false): string => {
+    const valueToCheck = isFromEnv ? config : config.env;
+    if (valueToCheck.url == "custom") {
+        return _validateCustomUrl(valueToCheck.customUrl);
+    } else if (valueToCheck.url == undefined) {
+        config.env.url = "staging";
         return ENVS.staging;
     } else {
-        return _validateUrl(ENVS, config.env.url);
+        return _validateUrl(ENVS, valueToCheck.url);
     }
 };
 
