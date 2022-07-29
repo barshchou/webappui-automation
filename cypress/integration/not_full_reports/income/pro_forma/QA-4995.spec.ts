@@ -8,7 +8,7 @@ import { numberWithCommas } from "../../../../../utils/numbers.utils";
 describe("[QA-4995] Verify that combined utilities expenses is enabled on the Pro Forma page",
     { tags:[ "@income", "@pro_forma" ] }, () => {
 
-        before("Login, create report", () => {
+        beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);
 
             cy.stepInfo(`1. Pre-condition: Residential Units should be filled in on Property > Summary form`);

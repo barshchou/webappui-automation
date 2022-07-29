@@ -5,7 +5,7 @@ import Report from "../../../../actions/report/report.manager";
 
 describe("Verify the Client Guidelines Discussion on the page", 
     { tags: [ "@report", "@client" ] }, () => {
-        before("Login, create report", () => {
+        beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);
         });
 

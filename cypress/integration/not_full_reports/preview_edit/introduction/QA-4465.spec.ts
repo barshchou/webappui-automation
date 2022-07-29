@@ -11,7 +11,7 @@ const { createReport, deleteReport } = _BaseTest;
 describe('Verify the "Property Rights Appraised" commentary on the Introduction page', 
     { tags:[ "@preview_edit", "@introduction" ] }, () => {
         
-        before("Login, create report", () => {
+        beforeEach("Login, create report", () => {
             cy.stepInfo(`1. Create a report`);
             createReport(testData.reportCreationData);
 

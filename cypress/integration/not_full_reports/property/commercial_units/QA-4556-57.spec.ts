@@ -7,7 +7,7 @@ import { Property } from "../../../../actions";
 describe("Verify the functionality of the Image upload to the Interior and Exterior Images sections",
     { tags:[ "@property", "@commercial_units" ] },  () => {
         
-        before("Login, create report", () => {
+        beforeEach("Login, create report", () => {
             cy.stepInfo(`Preconditions: The mixed report is created and several commercial units are added.`);
             createReport(testData.reportCreationData);
             _NavigationSection.navigateToPropertySummary();

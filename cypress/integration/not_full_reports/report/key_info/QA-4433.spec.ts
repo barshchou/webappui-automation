@@ -7,7 +7,7 @@ import { conditionalDescribe } from "../../../checkIsProd.utils";
 
 conditionalDescribe("[QA-4433] Launch Darkly for Inspection Date & Date of Valuation (feature in OFF)",
     { tags: [ "@report", "@key_info", "@salesforce", "@feature_flag" ] }, () => {
-        before("Login, create report", () => {
+        beforeEach("Login, create report", () => {
             cy.stepInfo(`1. Create a new report on the WebApp 
             (Note: the JOB # of that report corresponds with the JOB # of an open 
             job on SalesForce).`);

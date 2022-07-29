@@ -6,7 +6,7 @@ import { createReport, deleteReport } from "../../../../actions/base/baseTest.ac
 
 describe(`[QA-5134] Check when "custom" dropdown is selected user can drag&drop comps`, 
     { tags: [ "@sales", "@find_comps", "@comp_plex" ] }, () => {
-        before("Login, create report", () => {
+        beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);
         });
 

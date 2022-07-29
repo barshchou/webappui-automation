@@ -8,7 +8,7 @@ const todayDate = getTodayDateString();
 const todayDay = Number(getTodayDay());
 
 describe("Verify Date of Value Range text fields when Unit type of search is selected", () => {
-    before("Login, create report", () => {
+    beforeEach("Login, create report", () => {
         createReport(testData.reportCreationData);
     });
 

@@ -9,7 +9,7 @@ describe(`User selects Per SF radio button for Repairs & Maintenance on Expense 
 form and historical expenses per SF are correctly calculated and displayed`, 
 { tags:[ "@income", "@expense_forecast", "@snapshot_tests" ] }, () => {
 
-    before("Login, create report", () => {
+    beforeEach("Login, create report", () => {
         createReport(testData.reportCreationData);
         NavigationSection.navigateToPropertySummary();
         Property.Summary.enterGrossBuildingArea(testData.buildingDescription.grossArea)

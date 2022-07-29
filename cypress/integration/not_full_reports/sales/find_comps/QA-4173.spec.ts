@@ -9,7 +9,7 @@ import { createReport, deleteReport } from "../../../../actions/base/baseTest.ac
  */
 describe.skip("Verify the Enter Report Unique ID modal is displayed on clicking the Import Comps button", 
     { tags:[ "@find_comps", "@sales" ] }, () => {
-        before("Login and create report", () => {
+        beforeEach("Login and create report", () => {
             createReport(testData.reportCreationData);
         });
 

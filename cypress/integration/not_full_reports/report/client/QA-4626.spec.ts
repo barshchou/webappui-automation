@@ -4,7 +4,7 @@ import { createReport, deleteReport } from "../../../../actions/base/baseTest.ac
 import testData from '../../../../fixtures/not_full_reports/report/client/QA-4626.fixture';
 
 describe("Verify the display of the Client page.", { tags:[ "@report", "@client" ] }, () => {
-    before("Login, create report", () => {
+    beforeEach("Login, create report", () => {
         createReport(testData.reportCreationData);
     });
 

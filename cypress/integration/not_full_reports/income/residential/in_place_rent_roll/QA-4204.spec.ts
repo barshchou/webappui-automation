@@ -7,7 +7,7 @@ import Income from "../../../../../actions/income/income.manager";
 describe(" Verify the Number of Residential Units section on the In-Place Rent Roll page", 
     { tags:[ "@income", "@residential", "@in_place_rent_roll" ] }, () => {
         
-        before("Login, create report", () => {
+        beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);
         });
 
