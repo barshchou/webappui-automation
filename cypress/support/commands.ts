@@ -239,6 +239,4 @@ Cypress.Commands.add("_mapGet", (_key: any) => {
 Cypress.Commands.add("logNode", (message: string) => {
     return cy.task("logNode", message);
 });
-
-
 //#endregion
