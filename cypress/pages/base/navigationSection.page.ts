@@ -114,6 +114,8 @@ class NavigationSection extends BasePage {
     get sourceInformation() { return cy.get("#source-info"); }
 
     get assumptionsConditions() { return cy.get("#assumptions-conditions"); }
+
+    get propertyHistory() { return cy.get("#property-history"); }
 }
 
 export default new NavigationSection();
