@@ -1,10 +1,11 @@
 import { _NavigationSection } from '../../../../actions/base/index';
 import { createReport } from '../../../../actions/base/baseTest.actions';
-import testData from "../../../../fixtures/not_full_reports/review_edit/introduction/QA-4291_4424_27-28_32_55.fixture";
+// eslint-disable-next-line max-len
+import testData from "../../../../fixtures/not_full_reports/review_edit/introduction/QA-4291_4424_27-28_32_55-56.fixture";
 import { PreviewEdit, Report } from '../../../../actions';
 import mapKeysUtils from '../../../../utils/mapKeys.utils';
 
-describe('[QA-4291_4424_27-28_32_55] Check the Introduction page',
+describe('[QA-4291_4424_27-28_32_55-56] Check the Introduction page',
     { tags: [ "@preview_edit", "@introduction" ] }, () => {
 
         before("Login, create report", () => {
@@ -47,8 +48,8 @@ describe('[QA-4291_4424_27-28_32_55] Check the Introduction page',
 
             cy.stepInfo("6. Navigate to Property > Property History and Edit Property Contract History Discussion");
             _NavigationSection.navigateToPropertyHistory()
-                .clickFormEditBtn()
-                .enterFormCommentTextBox(testData.textBoxNames.recentSalesHistoryDiscussion, testData.typeValue)
+                .clickFormEditBtn(1)
+                .enterFormCommentTextBox(testData.textBoxNames.propertyContractHistoryDiscussion, testData.typeValue)
                 .clickFormSaveBtn();
             cy.wait(1000);
 
@@ -62,6 +63,7 @@ describe('[QA-4291_4424_27-28_32_55] Check the Introduction page',
 
             testData.backLinkNames.forEach(name => {
                 PreviewEdit._Introduction.Page.getChipModified(name).should("be.visible");
+                PreviewEdit._Introduction.Page.formCommentTextBox(name).should("include.text", testData.typeValue);
                 PreviewEdit._Introduction.Page.getBackLink(name)
                     .should("be.visible")
                     .invoke("attr", "href")
@@ -70,10 +72,6 @@ describe('[QA-4291_4424_27-28_32_55] Check the Introduction page',
                             expect(href).includes(val);
                         });
                     });
-            });
-
-            testData.textBoxTitles.forEach(title => {
-                PreviewEdit._Introduction.Page.getTextFromTextArea(title).should("include.text", testData.typeValue);
             });
         });
     });
