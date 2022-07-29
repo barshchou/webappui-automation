@@ -1,7 +1,7 @@
 import { _NavigationSection } from '../../../../actions/base/index';
 import { createReport } from '../../../../actions/base/baseTest.actions';
 // eslint-disable-next-line max-len
-import testData from "../../../../fixtures/not_full_reports/review_edit/introduction/QA-4291_4424_27-28_32_55-56_59.fixture";
+import testData from "../../../../fixtures/not_full_reports/review_edit/introduction/QA-4291_4424_27-28_32_55-56_59-60.fixture";
 import { PreviewEdit, Report } from '../../../../actions';
 import mapKeysUtils from '../../../../utils/mapKeys.utils';
 
@@ -60,13 +60,20 @@ describe('[QA-4291_4424_27-28_32_55-56_59] Check the Introduction page',
                 .clickFormSaveBtn();
             cy.wait(1000);
 
+            cy.stepInfo("8. Navigate to Property > Market and Edit Exposure Time Description");
+            _NavigationSection.navigateToPropertyMarket()
+                .clickFormEditBtn(0)
+                .enterFormCommentTextBox(testData.textBoxNames.exposureTimeDescription, testData.typeValue)
+                .clickFormSaveBtn();
+            cy.wait(1000);
 
-            cy.stepInfo("8. Proceed to the Introduction page and verify that page exist");
+
+            cy.stepInfo("9. Proceed to the Introduction page and verify that page exist");
             _NavigationSection.navigateToIntroduction()
                 .verifyProgressBarNotExist()
                 .Page.introduction.should("exist");
 
-            cy.stepInfo("9. Verify 'Identification of the Client' exist and edited");
+            cy.stepInfo("10. Verify 'Identification of the Client' exist and edited");
             PreviewEdit._Introduction.Page.SwitchEditBtn.click();
 
             testData.backLinkNames.forEach(name => {
