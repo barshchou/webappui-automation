@@ -1,10 +1,10 @@
 import { _NavigationSection } from '../../../../actions/base/index';
 import { createReport } from '../../../../actions/base/baseTest.actions';
-import testData from "../../../../fixtures/not_full_reports/review_edit/introduction/QA-4291_4424_27-28_32.fixture";
+import testData from "../../../../fixtures/not_full_reports/review_edit/introduction/QA-4291_4424_27-28_32_55.fixture";
 import { PreviewEdit, Report } from '../../../../actions';
 import mapKeysUtils from '../../../../utils/mapKeys.utils';
 
-describe('[QA-4291_4424_27-28] Check the Introduction page',
+describe('[QA-4291_4424_27-28_32_55] Check the Introduction page',
     { tags: [ "@preview_edit", "@introduction" ] }, () => {
 
         before("Login, create report", () => {
@@ -35,6 +35,13 @@ describe('[QA-4291_4424_27-28] Check the Introduction page',
             _NavigationSection.navigateToAssumptionsConditions()
                 .clickFormEditBtn()
                 .enterFormCommentTextBox(testData.textBoxNames.generalAssumptionsDiscussion, testData.typeValue)
+                .clickFormSaveBtn();
+            cy.wait(1000);
+
+            cy.stepInfo("5. Navigate to Property > Property History and Edit Definition of Market Value");
+            _NavigationSection.navigateToPropertyHistory()
+                .clickFormEditBtn()
+                .enterFormCommentTextBox(testData.textBoxNames.recentSalesHistoryDiscussion, testData.typeValue)
                 .clickFormSaveBtn();
             cy.wait(1000);
 

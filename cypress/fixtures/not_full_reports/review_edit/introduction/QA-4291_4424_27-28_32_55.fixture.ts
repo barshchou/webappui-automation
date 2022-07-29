@@ -1,12 +1,13 @@
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 
 export default {
-    reportCreationData: ReportDataCreator.getReportData("4291_4424_27-28_32"),
+    reportCreationData: ReportDataCreator.getReportData("4291_4424_27-28_32_55"),
     typeValue: "Test values",
     textBoxNames: {
         identificationOfClient: "Identification of the Client",
         intendedUser: "Intended User",
-        generalAssumptionsDiscussion: "General Assumptions Discussion"
+        generalAssumptionsDiscussion: "General Assumptions Discussion",
+        recentSalesHistoryDiscussion: "Recent Sales History Discussion"
     },
     backLinkNames: [ 
         "Identification of the Client", 
@@ -18,6 +19,7 @@ export default {
         "Identification of the Client", 
         "Intended Use & User", 
         "Definition of Market Value",
-        "General Assumptions"
+        "General Assumptions",
+        "Property History"
     ]
 };

@@ -152,6 +152,11 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         return this;
     }
 
+    clickPropertyHistory(): NavigationSectionActions {
+        navigationSectionPage.propertyHistory.click();
+        return this;
+    }
+
     navigateToUnitInspection(): NavigationSectionActions {
         this.clickSaveButton();
         this.clickFinalButton()
@@ -189,6 +194,13 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         this.clickIncomeApproachButton()
             .clickResidentialMenuIfClosed()
             .clickRentCompsButton()
+            .submitSaveChangesModal();
+        return this;
+    }
+
+    navigateToPropertyHistory(): NavigationSectionActions {
+        this.clickPropertyButton()
+            .clickPropertyHistory()
             .submitSaveChangesModal();
         return this;
     }
