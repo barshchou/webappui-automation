@@ -1,5 +1,5 @@
 /// <reference types="cypress-grep" />
-import testData from "../../../../fixtures/not_full_reports/review_edit/introduction/QA-4465.fixture";
+import testData from "../../../../fixtures/not_full_reports/preview_edit/introduction/QA-4465.fixture";
 import { _BaseTest } from "../../../../actions/base";
 import { Report, PreviewEdit } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
