@@ -7,6 +7,7 @@ const _alias = (aliasName:string) => `${aliasName}_${Cypress._.random(0, 1e6)}`;
 export const _gqlAlias = (operationName:string) => `gql${operationName}Query`;
 
 export const Alias = {
+    searchUnits: _alias("searchUnits"),
     reportId: _alias("reportId"),
     salesEventId: _alias("salesEventId"),
     salesComps_eventIds: _alias("salesComps_eventIds"),
