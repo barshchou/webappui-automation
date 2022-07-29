@@ -10,7 +10,8 @@ export default {
         recentSalesHistoryDiscussion: "Recent Sales History Discussion",
         propertyContractHistoryDiscussion: "Property Contract History Discussion",
         purposeDateOfValueDiscussion: "Purpose & Date of Value Discussion",
-        exposureTimeDescription: "Exposure Time Description"
+        exposureTimeDescription: "Exposure Time Description",
+        marketingTimeDescription: "Marketing Time Description"
     },
     backLinkNames: [ 
         "Identification of the Client", 

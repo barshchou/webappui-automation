@@ -1,8 +1,8 @@
 import { _NavigationSection } from '../../../../actions/base/index';
 import { createReport } from '../../../../actions/base/baseTest.actions';
 // eslint-disable-next-line max-len
-import testData from "../../../../fixtures/not_full_reports/review_edit/introduction/QA-4291_4424_27-28_32_55-56_59-60.fixture";
-import { PreviewEdit, Report } from '../../../../actions';
+import testData from "../../../../fixtures/not_full_reports/review_edit/introduction/QA-4291_4424_27-28_32_55-56_59-60_66.fixture";
+import { PreviewEdit, Report, Property } from '../../../../actions';
 import mapKeysUtils from '../../../../utils/mapKeys.utils';
 
 describe('[QA-4291_4424_27-28_32_55-56_59] Check the Introduction page',
@@ -32,7 +32,7 @@ describe('[QA-4291_4424_27-28_32_55-56_59] Check the Introduction page',
             cy.wait(1000);
 
             cy.stepInfo(`4. Navigate to Final > Assumptions and Conditions page and 
-                Edit General Assumptions Discussion`);
+                        Edit General Assumptions Discussion`);
             _NavigationSection.navigateToAssumptionsConditions()
                 .clickFormEditBtn()
                 .enterFormCommentTextBox(testData.textBoxNames.generalAssumptionsDiscussion, testData.typeValue)
@@ -55,25 +55,35 @@ describe('[QA-4291_4424_27-28_32_55-56_59] Check the Introduction page',
 
             cy.stepInfo("7. Navigate to Income > Cap Rate Conclusion and Edit Purpose & Date of Value Discussion");
             _NavigationSection.navigateToCapRateConclusion()
-                .clickFormEditBtn(0)
+                .clickFormEditBtn()
                 .enterFormCommentTextBox(testData.textBoxNames.purposeDateOfValueDiscussion, testData.typeValue)
                 .clickFormSaveBtn();
             cy.wait(1000);
 
             cy.stepInfo("8. Navigate to Property > Market and Edit Exposure Time Description");
             _NavigationSection.navigateToPropertyMarket()
-                .clickFormEditBtn(0)
+                .clickFormEditBtn()
                 .enterFormCommentTextBox(testData.textBoxNames.exposureTimeDescription, testData.typeValue)
                 .clickFormSaveBtn();
             cy.wait(1000);
 
+            cy.stepInfo(`9. Navigate to Property > Market, check Include Marketing Time in the report
+                        and Edit Marketing Time Description`);
+            _NavigationSection.navigateToPropertyMarket();
 
-            cy.stepInfo("9. Proceed to the Introduction page and verify that page exist");
+            Property._Market.checkIncludeMarketingTimeDescription()
+                .clickFormEditBtn(1)
+                .enterFormCommentTextBox(testData.textBoxNames.marketingTimeDescription, testData.typeValue)
+                .clickFormSaveBtn();
+            cy.wait(1000);
+
+
+            cy.stepInfo("10. Proceed to the Introduction page and verify that page exist");
             _NavigationSection.navigateToIntroduction()
                 .verifyProgressBarNotExist()
                 .Page.introduction.should("exist");
 
-            cy.stepInfo("10. Verify 'Identification of the Client' exist and edited");
+            cy.stepInfo("11. Verify 'Identification of the Client' exist and edited");
             PreviewEdit._Introduction.Page.SwitchEditBtn.click();
 
             testData.backLinkNames.forEach(name => {
