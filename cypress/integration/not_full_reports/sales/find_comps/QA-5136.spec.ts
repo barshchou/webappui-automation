@@ -47,7 +47,7 @@ describe(`Check the order of comps in the export when 'custom' dropdown is chose
                 .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
         });
 
-        it("Check report", () => {
+        it("Check export", () => {
             cy.stepInfo(`5. [QA-5136] -> User open report`);
             cy.task("getFilePath", { _reportName: testData.reportCreationData.reportNumber, _docxHtml: "html" })
                 .then(file => {
