@@ -7,19 +7,22 @@ export default {
         identificationOfClient: "Identification of the Client",
         intendedUser: "Intended User",
         generalAssumptionsDiscussion: "General Assumptions Discussion",
-        recentSalesHistoryDiscussion: "Recent Sales History Discussion"
+        recentSalesHistoryDiscussion: "Recent Sales History Discussion",
+        propertyContractHistoryDiscussion: "Property Contract History Discussion"
     },
     backLinkNames: [ 
         "Identification of the Client", 
         "Intended Use & User", 
         "Definition of Market Value",
-        "General Assumptions Discussion" 
+        "General Assumptions Discussion",
+        "Property Contract History Discussion" 
     ],
     textBoxTitles: [
         "Identification of the Client", 
         "Intended Use & User", 
         "Definition of Market Value",
         "General Assumptions",
-        "Property History"
+        "Property History",
+        "Property Contract History Discussion"
     ]
 };
