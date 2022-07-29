@@ -8,7 +8,7 @@ describe(`Verify clicking Add Unit button on Add New Rent Comp overlay is adding
                 of comparable units on the Rent Comps page (Unit type of search is selected)`,
 { tags:[ "@income", "@residential", "@rent_comps" ] }, () => {
 
-    before("Login, create report", () => {
+    beforeEach("Login, create report", () => {
         createReport(testData.reportCreationData);
     });
 

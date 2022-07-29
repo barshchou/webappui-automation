@@ -10,7 +10,7 @@ const reportCreationData = ReportDataCreator.getReportData("4219");
 describe("Verify the # column in the grid", 
     { tags:[ "@income", "@residential", "@in_place_rent_roll" ] }, () => {
         
-        before("Login, create report", () => {
+        beforeEach("Login, create report", () => {
             createReport(reportCreationData);
         });
 

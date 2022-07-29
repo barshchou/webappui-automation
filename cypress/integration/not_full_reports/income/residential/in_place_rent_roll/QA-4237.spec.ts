@@ -8,7 +8,7 @@ import RentRollPage from "../../../../../pages/income/residential/rentRoll.page"
 describe("Verify the Outdoor Space column in the grid", 
     { tags:[ "@income", "@residential", "@in_place_rent_roll" ] }, () => {
         
-        before("Login, create report", () => {
+        beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);
         });
 

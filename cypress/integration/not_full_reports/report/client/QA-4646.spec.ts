@@ -6,7 +6,7 @@ import { replaceEntersWithSpaces } from "../../../../../utils/string.utils";
 
 describe("Verify the Appraiser Commentary field", 
     { tags: [ "@report", "@client" ] }, () => {
-        before("Login, create report", () => {
+        beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);
         });
 

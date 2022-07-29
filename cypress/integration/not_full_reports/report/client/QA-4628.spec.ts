@@ -5,7 +5,7 @@ import testData from '../../../../fixtures/not_full_reports/report/client/QA-462
 
 describe("Verify the functionality of the Client File Number field", 
     { tags:[ "@report", "@client" ] }, () => {
-        before("Login, create report", () => {
+        beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);
         });
 

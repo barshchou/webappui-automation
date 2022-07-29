@@ -8,7 +8,7 @@ import { createReport, deleteReport } from "../../../../actions/base/baseTest.ac
 describe(`Prospective Market Value As Stabilized -> Less Residential Rent Loss 
                 data is pulled from Cap Rate Conclusion`, 
 { tags:[ "@sales", "@value_conclusion" ] }, () => {
-    before("Login action", () => {
+    beforeEach("Login action", () => {
         createReport(testData.reportCreationData);
     });
 

@@ -10,7 +10,7 @@ import { conditionalDescribe } from "../../../../../checkIsProd.utils";
 
 conditionalDescribe("Property Conditions tests", { tags: [ "@residential", "@rent_comps",
     "@full_building_comps", "@property_conditions" ] }, () => {
-    before("Create report, navigate to Property Conditions", () => {
+    beforeEach("Create report, navigate to Property Conditions", () => {
         createReport(testData.reportCreationData);
         _NavigationSection.navigateToRentComps();
         cy.stepInfo("1. Add comparable, click edit button");

@@ -5,7 +5,7 @@ import { Property } from "../../../../actions";
 
 describe("[QA-4570] Verify the Back button functionality on the Commercial Units page",
     { tags:[ "@property", "@commercial_units" ] }, () => {
-        before("Login, create report", () => {
+        beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);
         });
 

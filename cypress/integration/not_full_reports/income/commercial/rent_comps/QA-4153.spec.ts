@@ -6,7 +6,7 @@ import { createReport, deleteReport } from "../../../../../actions/base/baseTest
 describe("Dropdown 'Filters'- 'Lease terms' section", 
     { tags:[ "@income", "@commercial", "@rent_comps" ] }, () => {
 
-        before("Login, create report", () => {
+        beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);
         });
 

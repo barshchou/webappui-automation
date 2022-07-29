@@ -6,7 +6,7 @@ import { createReport, deleteReport } from "../../../../actions/base/baseTest.ac
 describe(`Verify that Generated Commentary for Total Operating Expenses is updated on the Expense Forecast page`, 
     { tags: [ "@income", "@expense_forecast" ] }, () => {
 
-        before("Login, create report", () => {
+        beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);
         });
 

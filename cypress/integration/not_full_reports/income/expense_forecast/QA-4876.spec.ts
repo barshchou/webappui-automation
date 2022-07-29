@@ -8,7 +8,7 @@ import tableExpenseHistoryCellNames from "../../../../../cypress/enums/expense/e
 describe("Historical expense Electricity Per SF is correctly calculated and displayed",
     { tags: [ "@snapshot_tests", "@expense_forecast", "@income" ] }, () => {
 
-        before("Login, create report", () => {
+        beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);
         });
 

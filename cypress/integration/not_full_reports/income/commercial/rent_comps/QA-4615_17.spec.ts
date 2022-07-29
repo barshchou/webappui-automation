@@ -6,7 +6,7 @@ import { Income } from "../../../../../actions";
 describe("Verify Input in 'Use-Other*' free text works correctly", 
     { tags: [ "@income", "@commercial", "@rent_comps" ] }, () => {
         
-        before("Login, create report", () => {
+        beforeEach("Login, create report", () => {
             cy.stepInfo("1. The mixed report is created and several commercial units are added");
             createReport(testData.reportCreationData);
         });

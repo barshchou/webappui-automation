@@ -11,7 +11,7 @@ import stabilizedRentRollPage from "../../../../../pages/income/commercial/stabi
 describe("[QA-4576][QA-4578] Verify the display of the Stabilized Rent Roll page", 
     { tags: [ "@income", "@commercial", "@stabilized_rent_roll", "@snapshot_tests" ] }, () => {
         
-        before("Login, create report", () => {
+        beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);
         });
 
