@@ -112,6 +112,8 @@ class NavigationSection extends BasePage {
     get residentialStabilizedRentRollSummary() { return cy.get(`#residential-projected-rent-roll-summary`); }
 
     get sourceInformation() { return cy.get("#source-info"); }
+
+    get assumptionsConditions() { return cy.get("#assumptions-conditions"); }
 }
 
 export default new NavigationSection();

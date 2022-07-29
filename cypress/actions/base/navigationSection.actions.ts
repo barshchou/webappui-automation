@@ -331,6 +331,18 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         return this;
     }
 
+    clickAssumptionsConditions(): NavigationSectionActions {
+        navigationSectionPage.assumptionsConditions.click();
+        return this;
+    }
+
+    navigateToAssumptionsConditions(): NavigationSectionActions {
+        this.clickFinalButton()
+            .clickAssumptionsConditions()
+            .submitSaveChangesModal();
+        return this;
+    }
+
     clickCommercialRentComps(): NavigationSectionActions {
         navigationSectionPage.commercialRentCompsButton.click();
         return this;
