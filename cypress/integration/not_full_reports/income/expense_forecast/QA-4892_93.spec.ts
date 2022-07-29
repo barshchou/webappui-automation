@@ -1,5 +1,5 @@
 import testData from "../../../../fixtures/not_full_reports/income/expense_forecast/QA-4892_93.fixture";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 import { Income, Property } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
 
@@ -14,6 +14,7 @@ describe("Appraiser's Forecast value for Electricity is correctly converted to P
                 .clickSaveButton();
             cy.saveLocalStorage();
         });
+
         beforeEach(() => {
             cy.restoreLocalStorage();
         });
@@ -52,7 +53,5 @@ describe("Appraiser's Forecast value for Electricity is correctly converted to P
             PSF Appraiser's Forecast * GBA / # of Residential Units`);
             Income._ExpenseForecastActions
                 .verifyForecastItemBasisMoney(testData.expenseForecastElectricity, testData.buildingDescription);
-
-            deleteReport(testData.reportCreationData.reportNumber);
         });
     });

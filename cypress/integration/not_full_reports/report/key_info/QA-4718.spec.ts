@@ -1,7 +1,7 @@
-import { Property, ReviewExport } from '../../../../actions/index';
+import { Property, ReviewExport } from '../../../../actions';
 import { Report } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 import testData from '../../../../fixtures/not_full_reports/report/key_info/QA-4718.fixture';
 
 describe(`[QA-4718] Verify the "Linked" chips dropdown in the new narrative component for 
@@ -40,11 +40,9 @@ Property Rights Appraised and Definition of Market Value sections`,
         _NavigationSection.openReviewAndExport();
         ReviewExport.generateDocxReport().waitForReportGenerated()
             .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
-        deleteReport(testData.reportCreationData.reportNumber);
     });
     
     it("Check export", () => {
-        Cypress.config().baseUrl = null;
         cy.task("getFilePath", { _reportName: testData.reportCreationData.reportNumber, _docxHtml: "html" })
             .then(file => {
                 cy.log(<string>file);

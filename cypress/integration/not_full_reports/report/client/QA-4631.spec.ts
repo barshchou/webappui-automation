@@ -1,6 +1,6 @@
 import { Report } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 import testData from '../../../../fixtures/not_full_reports/report/client/QA-4631.fixture';
 
 describe("Verify the Cancel button functionality for Intended User and Identification of the Client sections",
@@ -27,7 +27,5 @@ describe("Verify the Cancel button functionality for Intended User and Identific
             Report._Client.Page.formCancelButton(1).should("be.visible");
             Report._Client.Page.formRevertToOriginalBtn().should("be.visible");
             Report._Client.Page.formRevertToOriginalBtn(1).should("be.visible");
-
-            deleteReport(testData.reportCreationData.reportNumber);
         });
     });

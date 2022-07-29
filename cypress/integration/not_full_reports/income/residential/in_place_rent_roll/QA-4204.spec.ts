@@ -1,5 +1,5 @@
 import testData from "../../../../../fixtures/not_full_reports/income/residential/in_place_rent_roll/QA-4204.fixture";
-import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../../actions/base/navigationSection.actions";
 import Property from "../../../../../actions/property/property.manager";
 import Income from "../../../../../actions/income/income.manager";
@@ -19,6 +19,5 @@ describe(" Verify the Number of Residential Units section on the In-Place Rent R
                 .verifyNumberOfResidentialUnits(testData.numberOfUnits)
                 .goToPropSummaryWithSaveLeavingFirst();
             Property.Summary.verifyThatPageIsOpened();
-            deleteReport(testData.reportCreationData.reportNumber);
         });
     });

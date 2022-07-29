@@ -2,7 +2,7 @@ import testData from "../../../../../fixtures/not_full_reports/income/commercial
 import NavigationSection from "../../../../../actions/base/navigationSection.actions";
 import Property from "../../../../../actions/property/property.manager";
 import Income from "../../../../../actions/income/income.manager";
-import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../../actions/base/baseTest.actions";
 
 describe("Verify the Rent PSF Total is calculated correctly in the grid", 
     { tags:[ "@income", "@commercial", "@in_place_rent_roll" ] }, () => {
@@ -22,6 +22,5 @@ describe("Verify the Rent PSF Total is calculated correctly in the grid",
                 .enterListPerSF(testData.leaseStatusesList, testData.general.perSFList)
                 .verifyPerSFAnnuallyTotal(testData.leaseStatusesList, testData.general.perSFList, 
                     testData.general.squareFeetList);
-            deleteReport(testData.reportCreationData.reportNumber);
         });
     });

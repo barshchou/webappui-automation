@@ -1,6 +1,6 @@
 import { Income, Property } from "../../../../../actions";
 import { _NavigationSection } from "../../../../../actions/base";
-import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../../actions/base/baseTest.actions";
 import testData from "../../../../../fixtures/not_full_reports/income/commercial/stabilized_rent_roll/QA-4588.fixture";
 
 describe(`Verify the Back button functionality on the Stabilized Rent Roll page`, 
@@ -44,8 +44,6 @@ describe(`Verify the Back button functionality on the Stabilized Rent Roll page`
             _NavigationSection.openCommercialStabilizedRentRollInCommercial();
             Income._CommercialManager.StabilizedRentRoll
                 .verifyStabilizedCommercialIncomeDiscussion(testData.commentaryAsIsVacant);
-
-            deleteReport(testData.reportCreationDataAsIs.reportNumber);
         });
 
         it("'As Stabilized' report", () => {
@@ -85,8 +83,6 @@ describe(`Verify the Back button functionality on the Stabilized Rent Roll page`
             _NavigationSection.openCommercialStabilizedRentRollInCommercial();
             Income._CommercialManager.StabilizedRentRoll
                 .verifyStabilizedCommercialIncomeDiscussion(testData.commentaryAsStabilizedVacant);
-
-            deleteReport(testData.reportCreationDataAsStabilized.reportNumber);
         });
 
         it("'As Complete' report", () => {
@@ -126,7 +122,5 @@ describe(`Verify the Back button functionality on the Stabilized Rent Roll page`
             _NavigationSection.openCommercialStabilizedRentRollInCommercial();
             Income._CommercialManager.StabilizedRentRoll
                 .verifyStabilizedCommercialIncomeDiscussion(testData.commentaryAsCompleteVacant);
-
-            deleteReport(testData.reportCreationDataAsComplete.reportNumber);
         });
     });

@@ -2,7 +2,7 @@
 
 import testData from 
     "../../../../../fixtures/not_full_reports/income/commercial/stabilized_rent_roll/QA-4576_78.fixture";
-import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../../actions/base/baseTest.actions";
 import { Base, Property, Income } from "../../../../../actions";
 import { _NavigationSection } from "../../../../../actions/base";
 import { getTodayDateString } from "../../../../../../utils/date.utils";
@@ -101,7 +101,5 @@ describe("[QA-4576][QA-4578] Verify the display of the Stabilized Rent Roll page
             Income._CommercialManager.StabilizedRentRoll.verifyCommercialCompGroupHeaderDisplayed()
                 .verifyCommercialCompGroupForecastRentDisplayed(testData.marketRentConclusion)
                 .verifyCommercialCompGroupDisplayed(testData.compGroup);
-
-            deleteReport(testData.reportCreationData.reportNumber);
         });
     });

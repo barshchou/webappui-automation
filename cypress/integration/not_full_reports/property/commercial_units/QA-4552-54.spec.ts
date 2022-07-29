@@ -1,13 +1,11 @@
 import { numberWithCommas } from "../../../../../utils/numbers.utils";
 import { Property, ReviewExport } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 import testData from "../../../../fixtures/not_full_reports/property/commercial_units/QA-4549-54.fixture";
 
 describe(`[QA-4552][QA-4553][QA-4554] Verify the "Linked" chips dropdown in the new narrative component`, 
     { tags: [ "@property", "@commercial_units", "@check_export" ] }, () => {
-
-        const url = `${Cypress.config().baseUrl}`;
 
         it("[QA-4552] As Is", () => {
             cy.stepInfo(`Preconditions: The mixed report is created and several commercial units are added.`);
@@ -38,11 +36,9 @@ describe(`[QA-4552][QA-4553][QA-4554] Verify the "Linked" chips dropdown in the 
             _NavigationSection.openReviewAndExport();
             ReviewExport.generateDocxReport().waitForReportGenerated()
                 .downloadAndConvertDocxReport(testData.reportCreationDataAsIs.reportNumber);
-            deleteReport(testData.reportCreationDataAsIs.reportNumber);
         });
 
         it("[QA-4552] Check export", () => {
-            Cypress.config().baseUrl = null;
             cy.task("getFilePath", { _reportName: testData.reportCreationDataAsIs.reportNumber, _docxHtml: "html" })
                 .then(file => {
                     cy.log(<string>file);
@@ -58,7 +54,6 @@ describe(`[QA-4552][QA-4553][QA-4554] Verify the "Linked" chips dropdown in the 
         });
 
         it("[QA-4553] As Stabilized", () => {
-            Cypress.config().baseUrl = url;
             cy.stepInfo(`Preconditions: The mixed report is created and several commercial units are added.`);
             createReport(testData.reportCreationDataAsIs);
 
@@ -87,11 +82,9 @@ describe(`[QA-4552][QA-4553][QA-4554] Verify the "Linked" chips dropdown in the 
             _NavigationSection.openReviewAndExport();
             ReviewExport.generateDocxReport().waitForReportGenerated()
                 .downloadAndConvertDocxReport(testData.reportCreationDataAsIs.reportNumber);
-            deleteReport(testData.reportCreationDataAsIs.reportNumber);
         });
 
         it("[QA-4553] Check export", () => {
-            Cypress.config().baseUrl = null;
             cy.task("getFilePath", { _reportName: testData.reportCreationDataAsIs.reportNumber, _docxHtml: "html" })
                 .then(file => {
                     cy.log(<string>file);
@@ -107,7 +100,6 @@ describe(`[QA-4552][QA-4553][QA-4554] Verify the "Linked" chips dropdown in the 
         });
 
         it("[QA-4554] As Completed", () => {
-            Cypress.config().baseUrl = url;
             cy.stepInfo(`Preconditions: The mixed report is created and several commercial units are added.`);
             createReport(testData.reportCreationDataAsIs);
 
@@ -136,11 +128,9 @@ describe(`[QA-4552][QA-4553][QA-4554] Verify the "Linked" chips dropdown in the 
             _NavigationSection.openReviewAndExport();
             ReviewExport.generateDocxReport().waitForReportGenerated()
                 .downloadAndConvertDocxReport(testData.reportCreationDataAsIs.reportNumber);
-            deleteReport(testData.reportCreationDataAsIs.reportNumber);
         });
 
         it("[QA-4554] Check export", () => {
-            Cypress.config().baseUrl = null;
             cy.task("getFilePath", { _reportName: testData.reportCreationDataAsIs.reportNumber, _docxHtml: "html" })
                 .then(file => {
                     cy.log(<string>file);

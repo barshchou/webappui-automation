@@ -1,5 +1,5 @@
 import testData from "../../../../fixtures/not_full_reports/income/expense_forecast/QA-4862.fixture";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Property from "../../../../actions/property/property.manager";
 import Income from "../../../../actions/income/income.manager";
@@ -30,6 +30,5 @@ describe("Per Unit Appraiser's Forecast value for Insurance is correctly convert
             Per Unit Appraiser’s Forecast * # of Residential Units / GBA`);
             Income.ExpenseForecast.Actions
                 .verifyForecastItemBasisMoney(testData.insuranceItem, testData.buildingDescription);
-            deleteReport(testData.reportCreationData.reportNumber);
         });
     });

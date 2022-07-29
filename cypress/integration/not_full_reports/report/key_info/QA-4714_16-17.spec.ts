@@ -1,6 +1,6 @@
 import { Report } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 import testData from '../../../../fixtures/not_full_reports/report/key_info/QA-4714_16-17.fixture';
 
 describe(`[QA-4714_16-17] Verify the suggested text dropdown in the new narrative component added through "=" 
@@ -39,7 +39,5 @@ for Property Rights Appraised and Definition of Market Value sections`,
             Report._KeyInfo.Page.textBoxPropertyRightsAppraised.should("include.text", chip.verifyTexValue);
             Report._KeyInfo.Page.textBoxDefinitionOfMarketValue().should("include.text", chip.verifyTexValue);
         });
-
-        deleteReport(testData.reportCreationData.reportNumber);
     });
 });

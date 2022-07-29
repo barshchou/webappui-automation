@@ -1,5 +1,5 @@
 import testData from "../../../../fixtures/not_full_reports/property/summary/QA-4087.fixture";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { Property } from "../../../../actions";
 
@@ -37,7 +37,5 @@ describe("[QA-4087] Verify validation of the Residential Units and Commercial Un
             Property._Summary.Page.numberOfCommercialUnitsInput.clear().invoke('val', '');
             Property._Summary.Page.resUnitsInputValidationText("Required").should("be.visible");
             Property._Summary.Page.commercialUnitsInputValidationText("Required").should("be.visible");
-        
-            deleteReport(testData.reportCreationData.reportNumber);
         });
     });

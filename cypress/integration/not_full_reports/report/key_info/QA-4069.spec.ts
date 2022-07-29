@@ -1,6 +1,6 @@
 import { ReviewExport } from '../../../../actions';
 import testData from "../../../../fixtures/not_full_reports/report/key_info/QA-4069.fixture";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { Report } from "../../../../actions";
 
@@ -17,11 +17,9 @@ describe("[QA-4069] Check the helper text for Provided Documents)",
             _NavigationSection.openReviewAndExport();
             ReviewExport.generateDocxReport().waitForReportGenerated()
                 .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
-            deleteReport(testData.reportCreationData.reportNumber);
         });
 
         it("Check export", () => {
-            Cypress.config().baseUrl = null;
             cy.task("getFilePath", { _reportName: testData.reportCreationData.reportNumber, _docxHtml: "html" })
                 .then(file => {
                     cy.log(<string>file);

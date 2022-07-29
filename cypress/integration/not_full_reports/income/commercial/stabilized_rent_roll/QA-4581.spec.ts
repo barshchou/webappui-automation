@@ -2,7 +2,7 @@
 
 import testData from "../../../../../fixtures/not_full_reports/income/commercial/stabilized_rent_roll/QA-4581.fixture";
 import { Base, Property, Income } from "../../../../../actions";
-import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../../actions/base/baseTest.actions";
 
 describe("Verify the Save & Continue button functionality on the Stabilized Rent Roll page:", 
     { tags: [ "@income", "@commercial", "@stabilized_rent_roll" ] }, () => {
@@ -41,6 +41,5 @@ describe("Verify the Save & Continue button functionality on the Stabilized Rent
                 .verifyListRentPsfAnnually(testData.leaseStatuses, testData.rentToBe);
 
             cy.stepInfo(` 4. Delete report`);
-            deleteReport(testData.reportCreationData.reportNumber);
         });
     });

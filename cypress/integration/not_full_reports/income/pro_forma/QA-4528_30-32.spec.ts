@@ -1,5 +1,5 @@
 import testData from "../../../../fixtures/not_full_reports/income/pro_forma/QA-4528_30-32.fixture";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Property from "../../../../actions/property/property.manager";
 import Income from "../../../../actions/income/income.manager";
@@ -39,6 +39,5 @@ describe("Residential V/C Loss @ X% row",
                 .verifyResidentialVCLossTotal(testData.residential, testData.resVCLossTotal)
                 .verifyResidentialVCLossPerSF(testData.residential, testData.grossBuildingArea)
                 .verifyResidentialVCLossPerUnit(testData.residential, testData.numberOfUnits);
-            deleteReport(testData.reportCreationData.reportNumber);
         });
     });

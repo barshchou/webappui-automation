@@ -1,6 +1,6 @@
 import testData from "../../../../fixtures/not_full_reports/property/commercial_units/QA-4559.fixture";
 import { Base, Property } from "../../../../actions";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 
 describe("Verify the functionality of the State radio button", 
@@ -41,7 +41,5 @@ describe("Verify the functionality of the State radio button",
                     Property._CommercialUnits.verifyOtherValueByGroupName(testData.groupName, testData.otherValue); 
                 }
             });
-
-            deleteReport(testData.reportCreationData.reportNumber);
         });
     });

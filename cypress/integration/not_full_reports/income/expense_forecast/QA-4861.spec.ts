@@ -1,5 +1,5 @@
 import testData from "../../../../fixtures/not_full_reports/income/expense_forecast/QA-4861.fixture";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Property from "../../../../actions/property/property.manager";
 import Income from "../../../../actions/income/income.manager";
@@ -30,7 +30,5 @@ describe("Per SF Appraiser's Forecast value for Insurance is correctly converted
             PSF Appraiser’s Forecast * GBA / # of Residential Units`);
             Income.ExpenseForecast.Actions
                 .verifyForecastItemBasisMoney(testData.insuranceItem, testData.buildingDescription);
-                
-            deleteReport(testData.reportCreationData.reportNumber);
         });
     });

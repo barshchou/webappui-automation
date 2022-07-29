@@ -1,6 +1,6 @@
 import testData from 
     "../../../../../fixtures/not_full_reports/income/commercial/rent_reconciliation/QA-4189_4712.fixture";
-import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../../actions/base";
 import { Income, Property } from "../../../../../actions";
 import { _map } from "../../../../../support/commands";
@@ -71,7 +71,5 @@ describe("Rent is displayed on the same basis that is selected on In-Place rent 
                         .verifyCompsRent(checkDecimalRent, index);
                 });
             }
-
-            deleteReport(testData.reportCreationData.reportNumber);
         });
     });

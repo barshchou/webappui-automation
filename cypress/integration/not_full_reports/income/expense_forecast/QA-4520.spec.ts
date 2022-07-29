@@ -1,5 +1,5 @@
 import testData from "../../../../fixtures/not_full_reports/income/expense_forecast/QA-4520.fixture";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Income from "../../../../actions/income/income.manager";
 
@@ -42,7 +42,5 @@ describe("Comparable Min, Max, Avg values for Insurance Per SF are correctly cal
             They should be correctly displayed on a slide bar`);
             Income.ExpenseForecast.Actions.matchElementSnapshot(
                 Income.ExpenseForecast.Page.insuranceCard, testData.insuranceCardSnapshotName, { padding: [ 0, 100 ] });
-
-            deleteReport(testData.reportCreationData.reportNumber);
         });
     });

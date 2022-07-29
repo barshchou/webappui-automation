@@ -1,6 +1,6 @@
 import testData from "../../../../fixtures/not_full_reports/sales/find_comps/QA-4169.fixture";
 import { _NavigationSection } from "../../../../actions/base";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 import { Sales } from "../../../../actions";
 
 /**
@@ -48,7 +48,5 @@ describe.skip("Verify the New Comp is created after clicking on 'Save&Close' but
 
             cy.stepInfo(`4. Verify New Comp is displayed in Search Results modal during the searching address`);
             // code
-
-            deleteReport(testData.reportCreationData.reportNumber);
         });
     });

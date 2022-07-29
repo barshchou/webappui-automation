@@ -1,5 +1,5 @@
 import testData from "../../../../fixtures/not_full_reports/income/pro_forma/QA-4995.fixture";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 import { Property, Income } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
 import proFormaTypesEnum from "../../../../enums/proFormaTypes.enum";
@@ -76,8 +76,5 @@ describe("[QA-4995] Verify that combined utilities expenses is enabled on the Pr
                     proFormaTypesEnum.fuel)
                 .verifyCategoryTotal(`$${numberWithCommas(Math.round(testData.totalWater))}`, 
                     proFormaTypesEnum.waterAndSewer);
-
-
-            deleteReport(testData.reportCreationData.reportNumber);
         });
     });

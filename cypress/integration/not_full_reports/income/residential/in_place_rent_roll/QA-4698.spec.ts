@@ -1,5 +1,5 @@
 import testData from "../../../../../fixtures/not_full_reports/income/residential/in_place_rent_roll/QA-4698.fixture";
-import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../../actions/base";
 import { Property, Income } from "../../../../../actions";
 
@@ -24,7 +24,5 @@ describe("Verify the Monthly Total row in the grid",
                 Income._Residential.InPlaceRentRoll.enterLeaseStatusByRowNumber(unit.leaseStatus, index);
             });
             Income._Residential.InPlaceRentRoll.verifyMonthlyTotalRentValue();
-        
-            deleteReport(testData.reportCreationData.reportNumber);
         });
     });

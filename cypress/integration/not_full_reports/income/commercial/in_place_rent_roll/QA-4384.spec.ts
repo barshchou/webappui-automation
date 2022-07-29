@@ -2,7 +2,7 @@ import testData from "../../../../../fixtures/not_full_reports/income/commercial
 import NavigationSection from "../../../../../actions/base/navigationSection.actions";
 import Income from "../../../../../actions/income/income.manager";
 import Property from "../../../../../actions/property/property.manager";
-import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../../actions/base/baseTest.actions";
 import { BoweryReports } from "../../../../../types/boweryReports.type";
 
 describe("Verify the Use column in the grid", 
@@ -34,7 +34,6 @@ describe("Verify the Use column in the grid",
                     .clickRadioButtonByValueAndUnitIndex(groupName, useRadios[index]);
                 NavigationSection.navigateToCommercialInPlaceRentRoll();
                 Income.Commercial.InPlaceRentRoll.verifyUseCellByRow(useText);
-                deleteReport(testData.reportCreationData.reportNumber);
             });
         });
     });

@@ -1,5 +1,5 @@
 import testData from "../../../../../fixtures/not_full_reports/income/residential/in_place_rent_roll/QA-4092.fixture";
-import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../../actions/base";
 import { Income, Property } from "../../../../../actions";
 
@@ -29,6 +29,5 @@ describe(`[QA-4092] Verify if "Per Year" time period PSF Rent based on is select
                 .verifyRentPSFValueByRow(false);
             cy.reload();
         });
-        deleteReport(testData.reportCreationData.reportNumber);
     });
 });

@@ -1,7 +1,7 @@
 import { Sales } from '../../../../actions';
 import { _NavigationSection } from '../../../../actions/base';
 import testData from "../../../../fixtures/not_full_reports/sales/find_comps/QA-4167.fixture";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 
 describe("[QA-4167] Verify the Appraiser Commentary field", { tags: [ "@sales", "@find_comps", "@comp_plex" ] }, () => {
     before("Login, create report", () => {
@@ -40,7 +40,5 @@ describe("[QA-4167] Verify the Appraiser Commentary field", { tags: [ "@sales", 
         Sales._FindComps.Actions.emulateCopyPaste(
             Sales._FindComps.Page.appraiserCommentaryTextArea, testData.verifyTextValue
         );
-
-        deleteReport(testData.reportCreationData.reportNumber);
     });
 });

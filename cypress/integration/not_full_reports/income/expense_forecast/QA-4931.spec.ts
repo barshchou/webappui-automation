@@ -1,5 +1,5 @@
 import testData from "../../../../fixtures/not_full_reports/income/expense_forecast/QA-4931.fixture";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Income from "../../../../actions/income/income.manager";
 import Property from "../../../../actions/property/property.manager";
@@ -67,7 +67,5 @@ describe("Historical expense Repairs & Maintenance Per Unit is correctly calcula
             Income.ExpenseForecast.Actions.matchElementSnapshot(
                 Income.ExpenseForecast.Page.repairsAndMaintenanceCard, testData.repairsCardSnapshotName, 
                 { padding: [ 10, 100 ] });
-  
-            deleteReport(testData.reportCreationData.reportNumber);
-        }); 
+        });
     });

@@ -2,7 +2,7 @@
 import { Sales } from '../../../../actions';
 import { _NavigationSection } from '../../../../actions/base';
 import testData from "../../../../fixtures/not_full_reports/sales/find_comps/QA-5134.fixture";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 
 describe(`[QA-5134] Check when "custom" dropdown is selected user can drag&drop comps`, 
     { tags: [ "@sales", "@find_comps", "@comp_plex" ] }, () => {
@@ -52,7 +52,5 @@ describe(`[QA-5134] Check when "custom" dropdown is selected user can drag&drop 
                     });
                 });
             });
-
-            deleteReport(testData.reportCreationData.reportNumber);
         });
     });

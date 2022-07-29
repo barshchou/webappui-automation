@@ -1,4 +1,4 @@
-import { createReport, deleteReport } from "../../actions/base/baseTest.actions";
+import { createReport } from "../../actions/base/baseTest.actions";
 import ReportDataCreator from "../../fixtures/data_creator/reportData.creator";
 import { Base, ReviewExport } from "../../actions";
 import { BoweryAutomation } from "../../types/boweryAutomation.type";
@@ -13,7 +13,5 @@ describe("Create new report, generate and open in XML format", { tags: [ "@smoke
         Base._NavigationSection.openReviewAndExport();
         ReviewExport.verifyXMLReportName(reportCreationData.reportNumber)
             .verifyXMLReportOpens(reportCreationData.reportNumber);
-
-        deleteReport(reportCreationData.reportNumber);
     });
 });

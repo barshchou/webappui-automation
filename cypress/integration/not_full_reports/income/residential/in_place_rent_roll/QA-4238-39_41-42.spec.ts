@@ -1,6 +1,6 @@
 import testData from 
     "../../../../../fixtures/not_full_reports/income/residential/in_place_rent_roll/QA-4238-39_41-42.fixture";
-import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../../actions/base";
 import { Income, Property } from "../../../../../actions";
 
@@ -57,7 +57,5 @@ describe("In-Place Rent Roll table tests",
 
             cy.stepInfo(`8. Copy / Paste selected value into the Rent Type cell`);
             Income._Residential.InPlaceRentRoll.pasteRentTypeByRowNumber(testData.residentialUnits[1].rentType);
-
-            deleteReport(testData.reportCreationData.reportNumber);
         });
     });

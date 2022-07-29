@@ -1,6 +1,6 @@
 import { Report } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 import testData from '../../../../fixtures/not_full_reports/report/client/QA-4637.fixture';
 
 describe(`Verify the suggested text dropdown in the new narrative component added through "=" 
@@ -29,7 +29,5 @@ and Identification of the Client sections.`,
         cy.stepInfo(`4. Verify that the following text appears in both sections.`);
         Report._Client.verifyIntendedUserTextBox(testData.verifyAreaValue)
             .verifyIdentificationOfTheClientTextBox(testData.verifyAreaValue);
-
-        deleteReport(testData.reportCreationData.reportNumber);
     });
 });

@@ -1,5 +1,5 @@
 import testData from "../../../../fixtures/not_full_reports/sales/value_conclusion/QA-4305.fixture";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Property from "../../../../actions/property/property.manager";
 import Income from "../../../../actions/income/income.manager";
@@ -21,6 +21,5 @@ describe("Prospective Market Value As Stabilized -> Less Commission Fee data is 
             NavigationSection.navigateToSalesValueConclusion()
                 .verifyProgressBarNotExist();
             Sales.ValueConclusion.verifyAsStabilizedCommissionFeeAmount(testData.commissionFee);
-            deleteReport(testData.reportCreationData.reportNumber);
         });
     });

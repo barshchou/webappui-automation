@@ -1,4 +1,4 @@
-import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../../actions/base/navigationSection.actions";
 import Income from "../../../../../actions/income/income.manager";
 import RentCompsPage from "../../../../../pages/income/residential/rent_comps/rentComps.page";
@@ -19,6 +19,5 @@ describe(`Verify the user can switch to 'Building' type of search on clicking 'S
             .changeToBuildingSearch()
             .verifyProgressBarNotExist();
         RentCompsPage.perBuildingFiltersButton.should("exist");
-        deleteReport(reportCreationData.reportNumber);
     });
 });

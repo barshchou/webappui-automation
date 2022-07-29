@@ -1,5 +1,5 @@
 import testData from "../../../../../fixtures/not_full_reports/income/commercial/rent_comps/QA-4135.fixture";
-import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../../actions/base";
 import { Income, Property } from "../../../../../actions";
 import { _IncomeRoutes } from "../../../../../enums/pages_routes";
@@ -93,9 +93,5 @@ describe("Subject column calculations", { tags: [ "@income", "@commercial", "@re
         for (let i = 0; i < testData.unitsNumber; i++) {
             Income._CommercialManager.InPlaceRentRoll.verifyLeaseStatusNeedsToBeFilled(i);
         }
-    });
-
-    after(() => {
-        deleteReport(testData.reportCreationData.reportNumber);
     });
 });

@@ -1,6 +1,6 @@
 import { Income, Property } from "../../../../../actions";
 import { _NavigationSection } from "../../../../../actions/base";
-import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../../actions/base/baseTest.actions";
 import testData from "../../../../../fixtures/not_full_reports/income/commercial/stabilized_rent_roll/QA-4597.fixture";
 
 describe(`Verify the suggested text dropdown in the new narrative component added through 
@@ -31,7 +31,5 @@ describe(`Verify the suggested text dropdown in the new narrative component adde
         cy.stepInfo(`4. Verify that the following text appears: Upon renovation, the subject unit 
           count and gross building area will remain unchanged.`);
         Income._CommercialManager.StabilizedRentRoll.verifyCommentaryContainsText(testData.verifyAreaValue);
-
-        deleteReport(testData.reportCreationData.reportNumber);
     });
 });

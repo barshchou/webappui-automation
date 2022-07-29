@@ -1,5 +1,5 @@
 import testData from "../../../../fixtures/not_full_reports/income/expense_forecast/QA-4898_4902.fixture";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 import { Property, Income } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
 import tableExpenseHistoryCellNames from "../../../../enums/expense/expenseHistoryTableRows.enum";
@@ -106,7 +106,5 @@ describe("Historical expense Water & Sewer Per SF/Unit is correctly calculated a
                     Income._ExpenseForecastActions.getItemNameForAverage(
                         testData.actualWaterAndSewerItem.name)), testData.waterAndSewerPerUnitCardSnapshotName, 
                 { padding: [ 10, 100 ] });
-        
-            deleteReport(testData.reportCreationData.reportNumber);
         });
     });

@@ -1,7 +1,7 @@
 import testData from "../../../../fixtures/not_full_reports/income/expense_forecast/QA-5011_12.fixture";
 import { _NavigationSection } from "../../../../actions/base";
 import { Income, Property } from "../../../../actions";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 
 describe(`[QA-5011] [Income>Expense forecast] Unselected existing expense card is not displayed in certain places `,
     { tags: [ "@income", "@expense_forecast" ] }, () => {
@@ -146,6 +146,5 @@ describe(`[QA-5011] [Income>Expense forecast] Unselected existing expense card i
             Income._ExpenseForecastActions.Page.toeAppraisersForecastValueLine
                 .should('contain', testData.forecastPerUnitNotIncluded);
             Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastTotalFixture('sf'));
-            deleteReport(testData.reportCreationData.reportNumber);
         });
     });

@@ -1,6 +1,6 @@
 import { Income, Property } from "../../../../../actions";
 import { _NavigationSection } from "../../../../../actions/base";
-import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../../actions/base/baseTest.actions";
 import testData from 
     "../../../../../fixtures/not_full_reports/income/commercial/stabilized_rent_roll/QA-4587_95_96.fixture";
 
@@ -50,7 +50,5 @@ component added through "=" for the 'Unchanged Renovation'
             .clickNarrativeSuggestions(testData.verifyForeclosureListValue)
             .clickSaveDiscussionButton()
             .verifyCommentaryContainsText(testData.verifyForeclosureAreaValue);
-
-        deleteReport(testData.reportCreationData.reportNumber);
     });
 });

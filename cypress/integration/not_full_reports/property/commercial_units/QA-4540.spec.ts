@@ -1,7 +1,6 @@
-/// <reference types="cypress-grep" />
 import testData from "../../../../fixtures/not_full_reports/property/commercial_units/QA-4540.fixture";
 import { Base, Property } from "../../../../actions";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 
 describe("Verify the functionality of the Ceiling Height radio button", 
@@ -27,7 +26,5 @@ describe("Verify the functionality of the Ceiling Height radio button",
             the calculated sum of the Commercial Unit SF above it.`);
             Property._CommercialUnits.enterListUnitSF(testData.squareFeetList, testData.numberOfCommercialUnits)
                 .verifyCommercialGrossLeasableAreaEqualSumUnitSF(testData.squareFeetList);
-
-            deleteReport(testData.reportCreationData.reportNumber);
         });
     });

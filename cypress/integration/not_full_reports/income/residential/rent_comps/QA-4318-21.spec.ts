@@ -1,5 +1,5 @@
 import testData from "../../../../../fixtures/not_full_reports/income/residential/rent_comps/QA-4318-21.fixture";
-import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../../actions/base/navigationSection.actions";
 import Income from "../../../../../actions/income/income.manager";
 import AddCompFormPage from "../../../../../pages/income/residential/rent_comps/addCompForm.page";
@@ -60,6 +60,5 @@ describe(`Verify the UI elements of Add New Rent Comp overlay on Rent Comps page
             .enterInternalNotes(testData.formData.internalNotes);
         AddCompFormPage.cancelButton.should("exist").and("have.text", "Back to Results");
         AddCompFormPage.submitCompButton.should("exist").and("have.text", "Add Unit");
-        deleteReport(testData.reportCreationData.reportNumber);
     });
 });

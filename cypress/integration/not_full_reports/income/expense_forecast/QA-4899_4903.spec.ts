@@ -1,7 +1,7 @@
 import testData from "../../../../fixtures/not_full_reports/income/expense_forecast/QA-4899_4903.fixture";
 import { _NavigationSection } from "../../../../actions/base";
 import { Income } from "../../../../actions";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 
 describe(`Comparable Min, Max, Avg values for Water & Sewer Per Unit are correctly calculated and displayed`,
     { tags:[ "@income", "@expense_forecast", "@snapshot_tests" ] }, () => {
@@ -77,7 +77,5 @@ describe(`Comparable Min, Max, Avg values for Water & Sewer Per Unit are correct
                         testData.waterAndSewerPerSfItem.name)), 
                 testData.waterAndSewerPerSfCardSnapshotName, { padding: [ 0, 100 ] }
             );
-
-            deleteReport(testData.reportCreationData.reportNumber);
         });
     });

@@ -1,5 +1,5 @@
 import testData from "../../../../../fixtures/not_full_reports/income/residential/rent_comps/QA-4315_17.fixture";
-import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../../actions/base/navigationSection.actions";
 import Income from "../../../../../actions/income/income.manager";
 import RentCompsPage from "../../../../../pages/income/residential/rent_comps/rentComps.page";
@@ -15,6 +15,5 @@ and Add New Rent Comp button`, () => {
         Income.Residential.RentComps.BaseActions.openAddNewComparableForm(testData.searchAddress);
         Income.Residential.RentComps.AddForm.clickCloseButton();
         RentCompsPage.newUnitForm.should("not.exist");
-        deleteReport(testData.reportCreationData.reportNumber);
     });
 });

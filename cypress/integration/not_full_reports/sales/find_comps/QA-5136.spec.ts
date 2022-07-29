@@ -8,7 +8,7 @@ import { pathSpecData } from '../../../../../utils/fixtures.utils';
 import { _saveDataInFile } from '../../../../support/commands';
 
 describe(`Check the order of comps in the export when 'custom' dropdown is chosen`, 
-    { tags: [ "@sales", "@find_comps", "@comp_plex" ] }, () => {
+    { tags: [ "@sales", "@find_comps", "@comp_plex", "@check_export" ] }, () => {
     
         it("Test body", () => {
             createReport(testData.reportCreationData);
@@ -49,7 +49,6 @@ describe(`Check the order of comps in the export when 'custom' dropdown is chose
 
         it("Check report", () => {
             cy.stepInfo(`5. [QA-5136] -> User open report`);
-            Cypress.config().baseUrl = null;
             cy.task("getFilePath", { _reportName: testData.reportCreationData.reportNumber, _docxHtml: "html" })
                 .then(file => {
                     cy.log(<string>file);

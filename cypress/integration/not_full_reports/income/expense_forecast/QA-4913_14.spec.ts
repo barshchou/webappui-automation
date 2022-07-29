@@ -1,5 +1,5 @@
 import testData from "../../../../fixtures/not_full_reports/income/expense_forecast/QA-4913_14.fixture";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { Property } from "../../../../actions";
 import { Income } from "../../../../actions";
@@ -15,6 +15,7 @@ describe("Appraiser's Forecast value for Water & Sewer is correctly converted to
                 .clickSaveButton();
             cy.saveLocalStorage();
         });
+
         beforeEach(() => {
             cy.restoreLocalStorage();
         });
@@ -51,7 +52,5 @@ describe("Appraiser's Forecast value for Water & Sewer is correctly converted to
             PSF Appraiser's Forecast * GBA / # of Residential Units`);
             Income._ExpenseForecastActions
                 .verifyForecastItemBasisMoney(testData.expenseForecastWaterAndSewer, testData.buildingDescription);
-
-            deleteReport(testData.reportCreationData.reportNumber);
         });
     });

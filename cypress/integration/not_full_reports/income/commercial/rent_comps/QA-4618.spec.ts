@@ -1,5 +1,5 @@
 import testData from "../../../../../fixtures/not_full_reports/income/commercial/rent_comps/QA-5395.fixture";
-import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../../actions/base";
 import { Income } from "../../../../../actions";
 import columns from "../../../../../enums/compGroupsColumns.enum";
@@ -42,7 +42,5 @@ describe("Verify entered Use is displayed in Selected Rent Comps table",
                 .submitSaveChangesModal();
             Income._CommercialManager.CompGroupsDiscussion.verifyCompGroupUnitValue(testData.compGroup, columns.use, 
                 testData.otherUse);
-
-            deleteReport(testData.reportCreationData.reportNumber);
         });
     });

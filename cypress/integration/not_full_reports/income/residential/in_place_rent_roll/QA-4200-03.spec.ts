@@ -1,6 +1,6 @@
 import testData from 
     "../../../../../fixtures/not_full_reports/income/residential/in_place_rent_roll/QA-4200-03.fixture";
-import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../../actions/base/navigationSection.actions";
 import Income from "../../../../../actions/income/income.manager";
 import Property from "../../../../../actions/property/property.manager";
@@ -40,6 +40,5 @@ describe("Verify the Import manager functionality",
             testData.checkboxLabels.forEach(val => {
                 Income.Residential.InPlaceRentRoll.Page.getCheckboxByLabel(val).should("exist");
             });
-            deleteReport(testData.reportCreationData.reportNumber);
         });
     });

@@ -1,6 +1,6 @@
 import testData from 
     "../../../../../fixtures/not_full_reports/income/residential/in_place_rent_roll/QA-4088-91.fixture";
-import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../../actions/base";
 import { Income } from "../../../../../actions";
 
@@ -49,7 +49,5 @@ radio buttons and label functionality`,
         Income._Residential.InPlaceRentRoll.checkPerUnitSquareFootage(false)
             .checkPerUnitSquareFootage()
             .verifyColumnExist(testData.columnName);
-            
-        deleteReport(testData.reportCreationData.reportNumber);
     });
 });

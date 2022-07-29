@@ -1,5 +1,5 @@
 import testData from "../../../../../fixtures/not_full_reports/income/commercial/rent_comps/QA-4185-87.fixture";
-import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../../actions/base";
 import { Income, Property } from "../../../../../actions";
 import { _IncomeRoutes } from "../../../../../enums/pages_routes";
@@ -46,9 +46,5 @@ describe(`[QA-4186] Unit of Measure on Commercial Unit Details modal is defaulte
                 .searchNewCompByAddress(testData.reportCreationData.address)
                 .verifyCommercialUnitDetailsUnitMeasureRadioChecked(measure);
         });
-    });
-
-    after(() => {
-        deleteReport(testData.reportCreationData.reportNumber);
     });
 });

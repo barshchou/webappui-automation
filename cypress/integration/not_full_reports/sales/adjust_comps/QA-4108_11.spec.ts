@@ -1,5 +1,5 @@
 import testData from "../../../../fixtures/not_full_reports/sales/adjust_comps/QA-4108_11.fixture";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { Sales } from "../../../../actions";
 
@@ -43,7 +43,5 @@ describe("Verify Grid is calculated with correct formula",
             cy.stepInfo(`2. Verify Net Market Adjustments = 
             Property Rights + Financing Terms + Conditions of Sale + Market Conditions (Time)`);
             Sales._AdjustComps.verifyTotalLocationAdjustmentsByCompIndex();
-
-            deleteReport(testData.reportCreationData.reportNumber);
         });
     });

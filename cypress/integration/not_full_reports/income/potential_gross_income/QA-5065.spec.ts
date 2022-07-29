@@ -1,6 +1,6 @@
 import { numberWithCommas } from '../../../../../utils/numbers.utils';
 import testData from "../../../../fixtures/not_full_reports/income/potential_gross_income/QA-5065.fixture";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { Property, Income } from "../../../../actions";
 
@@ -56,7 +56,5 @@ describe("[Income > Potential Gross Income]Support combined utility expense reim
                     `$${numberWithCommas(testData.reimbursementValue.toFixed(2))}`)
                 .verifyLessReimbursementVCLossValue(testData.expenseType, 
                     `-$${numberWithCommas(lessVCLossValue.toFixed(2))}`);
-
-            deleteReport(testData.reportCreationData.reportNumber);
         });
     });

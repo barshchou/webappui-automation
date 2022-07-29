@@ -1,7 +1,7 @@
 import { Sales } from '../../../../actions';
 import { _NavigationSection } from '../../../../actions/base';
 import testData from "../../../../fixtures/not_full_reports/sales/find_comps/QA-5135.fixture";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 
 describe(`[QA-5135] -> [Sales > Find Comps] Check the comps order when "custom" dropdown is chosen`, 
     { tags: [ "@sales", "@find_comps", "@comp_plex" ] }, () => {
@@ -31,7 +31,5 @@ describe(`[QA-5135] -> [Sales > Find Comps] Check the comps order when "custom" 
             re-ordered comps and after that selected “Date Sold” sorting -> comps get 
             reordered by sale date on the fly.`);
             Sales._FindComps.Actions.selectedCompsSetSort("Date Sold").checkSalesCompAddedToList();
-
-            deleteReport(testData.reportCreationData.reportNumber);
         });
     });

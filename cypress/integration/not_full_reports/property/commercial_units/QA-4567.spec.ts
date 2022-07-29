@@ -1,6 +1,6 @@
 import testData from "../../../../fixtures/not_full_reports/property/commercial_units/QA-4567.fixture";
 import { Property } from "../../../../actions";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 
 describe("Verify the Save button functionality on the Commercial Units page",
@@ -44,7 +44,5 @@ describe("Verify the Save button functionality on the Commercial Units page",
                     Property._CommercialUnits.verifyOtherValueByGroupName(groupName, testData.otherValue);
                 }
             });
-
-            deleteReport(testData.reportCreationData.reportNumber);
         });
     });

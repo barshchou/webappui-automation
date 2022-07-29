@@ -1,5 +1,4 @@
-
-import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../../actions/base/baseTest.actions";
 import { Property, Income } from "../../../../../actions";
 import { _NavigationSection } from "../../../../../actions/base";
 import testData from "../../../../../fixtures/not_full_reports/income/commercial/reimbursement_summary/QA-4993.fixture";
@@ -99,9 +98,5 @@ describe(`Verify that the user can reimburse based on a Utilities expense and th
 
         _NavigationSection.navigateToProForma();
         Income._ProFormaActions.verifyExpensesCombined(testData.utilitiesCombinedExpenseOption);
-    });
-
-    afterEach('Delete report', () => {
-        deleteReport(testData.reportCreationData.reportNumber);
     });
 });
