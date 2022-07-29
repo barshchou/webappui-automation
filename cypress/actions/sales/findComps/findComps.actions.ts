@@ -237,18 +237,22 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
         return this;
     }
 
-    //TODO find a way to improve this action
     enterReportToSearchComp(reportID: string): FindCompsActions {
         cy.intercept("GET", `/salesComps/eventIds/${reportID}`)
             .as(Alias.salesCompsEventIds);
         findCompsPage.reportIdInput
-            .should('exist');
-        cy.wait(1500);
-        findCompsPage.reportIdInput.focus();
-        cy.wait(1500);
-        findCompsPage.reportIdInput.focus().focus().focus().should('be.focused');
-        findCompsPage.reportIdInput.focus().type('text').focus().clear();
-        findCompsPage.reportIdInput.focus().type(reportID);
+            .should('exist')
+            .scrollIntoView()
+            .realClick()
+            .realClick()
+            .focus()
+            .type("something")
+            .realClick()
+            .realClick()
+            .focus()
+            .clear()
+            .should('be.focused')
+            .realType(`${reportID}{enter}`);
         findCompsPage.reportIdInput.should("have.value", reportID);
         return this;
     }
