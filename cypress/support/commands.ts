@@ -63,7 +63,7 @@ addMatchImageSnapshotCommand({
  * If we set env variable CYPRESS_DEBUG=1 - pageLoadTimeout will be 3 minutes instead of 1.
  * Useful when some environments loads really slow.
  */
-const _cyVisit = (url: string) => cy.visit(url, { timeout: Cypress.env("DEBUG") == 1 ? 180000 : 60000 });
+const _cyVisit = (url: string) => cy.visit(url, { timeout: Cypress.env("DEBUG") == 1 ? 180000 : 120000 });
 
 Cypress.Commands.add("loginByApi", (envUrl, username, password) => {
     cy.log("Logging in by api");
@@ -110,12 +110,11 @@ Cypress.Commands.add("createApiReport",
     (reportCreationData: BoweryAutomation.ReportCreationData, payload, token, envUrl) => {
         cy.task("createReportApi", 
             { 
-                _reportCreationData:reportCreationData, 
-                _payload:payload, 
-                _token:token,
-                _envUrl:envUrl
-
-            }, { timeout:60000 })
+                _reportCreationData: reportCreationData,
+                _payload: payload,
+                _token: token,
+                _envUrl: envUrl
+            }, { timeout: 120000 })
             .then(val => {
                 cy.log(`reportId is next: ${val}`);
                 cy._mapSet(mapKeysUtils.reportId, val);
@@ -125,7 +124,7 @@ Cypress.Commands.add("createApiReport",
     });
 
 Cypress.Commands.add("deleteApiReport", () => {
-    cy.log("Delete report");    
+    cy.log("Delete report");
     cy.logNode("\nDelete report");
     const url = evalUrl(Cypress.env(), true);
     cy._mapGet(mapKeysUtils.reportIdArray).then(arr => {
@@ -254,5 +253,4 @@ Cypress.Commands.add("_mapGet", (_key: any) => {
 Cypress.Commands.add("logNode", (message: string) => {
     return cy.task("logNode", message);
 });
-
 //#endregion

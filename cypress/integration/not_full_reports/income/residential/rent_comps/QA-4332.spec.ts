@@ -10,7 +10,7 @@ describe(`Verify that display of results in the Map section on Rent Comps page
                 when the Unit type of search is selected`, 
 { tags:[ "@income", "@rent_comps", "@residential", "@flaky" ] }, () => {
 
-    before("Login, create report", () => {
+    beforeEach("Login, create report", () => {
         createReport(reportCreationData);
     });
 

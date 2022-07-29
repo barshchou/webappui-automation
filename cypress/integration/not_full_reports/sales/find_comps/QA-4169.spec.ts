@@ -10,7 +10,7 @@ import { Sales } from "../../../../actions";
 
 describe.skip("Verify the New Comp is created after clicking on 'Save&Close' button on Property Description form", 
     { tags:[ "@comp_plex", "@find_comps", "@sales" ] }, () => {
-        before(`Click on the Create Comp button > Enter New Comparable Address > 
+        beforeEach(`Click on the Create Comp button > Enter New Comparable Address > 
         Select the Address from the Search Results 
         and click on the Create New button to proceed to the Enter Property Information form. 
         - Fill in all required fields and click on the Continue button 

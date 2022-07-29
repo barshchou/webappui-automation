@@ -6,7 +6,7 @@ import { Property, Income } from "../../../../../actions";
 describe("Verify the Monthly Total row in the grid", 
     { tags:[ "@income", "@residential", "@in_place_rent_roll" ] }, () => {
         
-        before("Login, create report", () => {
+        beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);
         });
 

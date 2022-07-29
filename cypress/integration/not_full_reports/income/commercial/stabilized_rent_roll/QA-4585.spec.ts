@@ -7,7 +7,7 @@ import { Income } from "../../../../../actions";
 describe("Verify the Commercial Stabilized Rent Roll table", 
     { tags: [ "@income", "@commercial", "@stabilized_rent_roll" ] }, () => {
         
-        before("Login, create report", () => {
+        beforeEach("Login, create report", () => {
             cy.stepInfo(`1. Create a mixed report with several Commercial Units (e.g. 2).`);
             createReport(testData.reportCreationData);
         });

@@ -5,7 +5,7 @@ import { Income, Property } from "../../../../actions";
 
 describe("[QA-4537] Verify the Commercial Unit # SF field functionality",
     { tags:[ "@property", "@commercial_units" ] }, () => {
-        before("Login, create report", () => {
+        beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);
         });
 

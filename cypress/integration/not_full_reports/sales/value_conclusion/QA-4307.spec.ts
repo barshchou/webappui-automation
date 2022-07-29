@@ -8,7 +8,7 @@ import { _NavigationSection } from "../../../../actions/base";
 describe(`As Is Market Value -> Time Period date is pulled from Report ->
     Key Info -> Date of validation (As is)`, 
 { tags: [ "@sales", "@value_conclusion" ] }, () => {
-    before("Login, create report", () => {
+    beforeEach("Login, create report", () => {
         createReport(testData.reportCreationData);
     });
 

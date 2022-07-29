@@ -6,7 +6,7 @@ import { _NavigationSection } from "../../../../actions/base";
 describe("Verify the functionality of the Ceiling Height radio button", 
     { tags: [ "@property", "@commercial_units" ] }, () => {
 
-        before("Login, create report", () => {
+        beforeEach("Login, create report", () => {
             cy.stepInfo(`1. Report creation and several commercial units addition`);
             createReport(testData.reportCreationData);
             Base._NavigationSection.navigateToPropertySummary();

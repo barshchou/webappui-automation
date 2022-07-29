@@ -7,7 +7,7 @@ describe(`Current Commercial Income Discussion > Verify the Revert to Original b
     'Changes will be lost' functionality`, 
 { tags:[ "@income", "@commercial", "@in_place_rent_roll" ] }, () => {
             
-    before("Login, create report", () => {
+    beforeEach("Login, create report", () => {
         createReport(testData.reportCreationData);
     });
 

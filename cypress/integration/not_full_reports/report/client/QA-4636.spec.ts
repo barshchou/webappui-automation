@@ -5,7 +5,7 @@ import testData from '../../../../fixtures/not_full_reports/report/client/QA-463
 
 describe(`Verify the Modified label functionality for Intended User and Identification of the Client sections`,
     { tags:[ "@report", "@client" ] }, () => {
-        before("Login, create report", () => {
+        beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);
         });
 

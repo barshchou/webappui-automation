@@ -8,7 +8,7 @@ import tableExpenseHistoryCellNames from "../../../../../cypress/enums/expense/e
 describe("Historical expense Repairs & Maintenance Per Unit is correctly calculated and displayed", 
     { tags:[ "@expense_forecast", "@income", "@snapshot_tests" ] }, () => {
     
-        before("Login, create report", () => {
+        beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);
         });
 

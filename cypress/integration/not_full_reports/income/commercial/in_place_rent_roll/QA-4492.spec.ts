@@ -6,7 +6,7 @@ import { getTodayDateString } from "../../../../../../utils/date.utils";
 
 describe("Verify the Save & Continue button functionality on the In-Place Rent Roll page",
     { tags: [ "@income", "@commercial", "@in_place_rent_roll" ] }, () => {
-        before("Login, create report", () => {
+        beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);
         });
 

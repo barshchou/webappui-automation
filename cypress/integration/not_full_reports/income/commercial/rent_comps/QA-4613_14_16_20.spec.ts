@@ -6,7 +6,7 @@ import { Income } from "../../../../../actions";
 describe("Commercial Unit Details Use Other value tests", 
     { tags: [ "@income", "@commercial", "@rent_comps", "@unit_details" ] }, () => {
 
-        before("Create report, open Commercial Unit Details", () => {
+        beforeEach("Create report, open Commercial Unit Details", () => {
             createReport(testData.reportCreationData);
         });
 

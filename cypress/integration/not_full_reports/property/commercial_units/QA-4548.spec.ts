@@ -6,7 +6,7 @@ import { _NavigationSection } from "../../../../actions/base";
 describe("Verify the Modified label functionality",
     { tags: [ "@property", "@commercial_units" ] }, () => {
 
-        before("Report creation and several commercial units addition", () => {
+        beforeEach("Report creation and several commercial units addition", () => {
             createReport(testData.reportCreationData);
             _NavigationSection.navigateToPropertySummary();
             Property._Summary.enterNumberOfCommercialUnits(testData.numberOfCommercialUnits);

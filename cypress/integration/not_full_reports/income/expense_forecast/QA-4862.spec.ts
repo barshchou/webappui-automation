@@ -7,7 +7,7 @@ import Income from "../../../../actions/income/income.manager";
 describe("Per Unit Appraiser's Forecast value for Insurance is correctly converted to Per SF value",
     { tags: [ "@income", "@expense_forecast" ] }, () => {
         
-        before("Login, create report", () => {
+        beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);
         });
 

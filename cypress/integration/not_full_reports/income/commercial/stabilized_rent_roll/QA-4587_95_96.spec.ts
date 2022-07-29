@@ -9,7 +9,7 @@ component added through "=" for the 'Unchanged Renovation'
   option in the Generated Commentary on the Stabilized Rent Roll page.`, 
 { tags:[ "@income", "@commercial", "@stabilized_rent_roll" ] }, () => {
         
-    before("Login, create report", () => {
+    beforeEach("Login, create report", () => {
         createReport(testData.reportCreationData);
     });
 

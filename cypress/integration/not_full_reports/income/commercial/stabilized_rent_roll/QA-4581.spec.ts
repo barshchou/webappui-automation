@@ -7,7 +7,7 @@ import { createReport } from "../../../../../actions/base/baseTest.actions";
 describe("Verify the Save & Continue button functionality on the Stabilized Rent Roll page:", 
     { tags: [ "@income", "@commercial", "@stabilized_rent_roll" ] }, () => {
         
-        before("Login, create report", () => {
+        beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);
         });
 

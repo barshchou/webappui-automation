@@ -5,7 +5,7 @@ import { createReport } from "../../../../actions/base/baseTest.actions";
 
 describe("Verify the functionality of the Upload Comps button", 
     { tags:[ "@find_comps", "@sales" ] }, () => {
-        before("Login and create report", () => {
+        beforeEach("Login and create report", () => {
             createReport(testData.reportCreationData);
         });
 

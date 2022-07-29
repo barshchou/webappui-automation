@@ -56,7 +56,7 @@ export default class BaseActions {
     }
 
     verifyProgressBarNotExist() {
-        cy.get("*[role='progressbar']").should("not.exist");
+        cy.get("*[role='progressbar']", { timeout: 30000 }).should("not.exist");
         return this;
     }
 

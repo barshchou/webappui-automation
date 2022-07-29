@@ -6,7 +6,7 @@ import { createReport } from "../../../../../actions/base/baseTest.actions";
 describe("Dropdown 'Filters'- 'Sort by' section", 
     { tags:[ "@income", "@commercial", "@rent_comps" ] }, () => {
 
-        before("Login, create report", () => {
+        beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);
         });
 

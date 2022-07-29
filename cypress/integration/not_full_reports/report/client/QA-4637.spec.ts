@@ -7,7 +7,7 @@ describe(`Verify the suggested text dropdown in the new narrative component adde
 for the 'Foreclosure sale' option on the Report > Client page for Intended User 
 and Identification of the Client sections.`, 
 { tags: [ "@report", "@client" ] }, () => {
-    before("Login, create report", () => {
+    beforeEach("Login, create report", () => {
         createReport(testData.reportCreationData);
     });
 

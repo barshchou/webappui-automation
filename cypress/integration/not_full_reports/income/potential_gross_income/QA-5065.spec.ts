@@ -7,7 +7,7 @@ import { Property, Income } from "../../../../actions";
 describe("[Income > Potential Gross Income]Support combined utility expense reimbursements", 
     { tags:[ "@income", "@potential_gross_income" ] }, () => {
         
-        before("Login, create report", () => {
+        beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);
         });
 

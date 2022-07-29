@@ -5,7 +5,7 @@ import Income from "../../../../actions/income/income.manager";
 
 describe("Comparable Min, Max, Avg values for Insurance Per SF are correctly calculated and displayed",
     { tags: [ "@income", "@expense_forecast", "@snapshot_tests" ] }, () => {
-        before("Login, create report", () => {
+        beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);
         });
 

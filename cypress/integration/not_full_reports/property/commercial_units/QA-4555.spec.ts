@@ -5,7 +5,7 @@ import { Property } from "../../../../actions";
 
 describe("[QA-4555] Verify the functionality of the Commercial Unit button",
     { tags:[ "@property", "@commercial_units" ] }, () => {
-        before("Login, create report", () => {
+        beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);
         });
 

@@ -7,7 +7,7 @@ import Enums from "../../../../enums/enums";
 
 describe("Verify area analysis pull from dropbox", { tags: [ "@property", "@market" ] }, () => {
 
-    before("Login, create report", () => {
+    beforeEach("Login, create report", () => {
         createReport(testData.reportCreationData);
     });
 

@@ -6,7 +6,7 @@ import { Report } from "../../../../actions";
 describe(`[QA-4703-07] Verify the Edit button functionality for Property Rights Appraised 
 and Definition of Market Value sections`,
 { tags: [ "@report", "@key_info" ] }, () => {
-    before("Login, create report", () => {
+    beforeEach("Login, create report", () => {
         cy.stepInfo("Create report");
         createReport(testData.reportCreationData);
     });

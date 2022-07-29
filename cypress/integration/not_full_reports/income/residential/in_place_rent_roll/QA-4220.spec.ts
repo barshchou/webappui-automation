@@ -6,7 +6,7 @@ import { createReport } from "../../../../../actions/base/baseTest.actions";
 describe("Verify the # column in the grid", 
     { tags:[ "@income", "@residential", "@in_place_rent_roll" ] }, () => {
         
-        before("Login, create report", () => {
+        beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);
             cy.stepInfo("Preconditions: Several Residential Units are added on the Property > Summary page");
             _NavigationSection.navigateToPropertySummary();

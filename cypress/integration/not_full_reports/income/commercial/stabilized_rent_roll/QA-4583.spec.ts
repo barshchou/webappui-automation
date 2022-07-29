@@ -6,7 +6,7 @@ import testData from "../../../../../fixtures/not_full_reports/income/commercial
 describe(`Verify the Back button functionality on the Stabilized Rent Roll page`, 
     { tags:[ "@income", "@commercial", "@stabilized_rent_roll" ] }, () => {
         
-        before("Login, create report", () => {
+        beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);
         });
 

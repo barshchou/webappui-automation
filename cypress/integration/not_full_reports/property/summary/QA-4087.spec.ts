@@ -5,7 +5,7 @@ import { Property } from "../../../../actions";
 
 describe("[QA-4087] Verify validation of the Residential Units and Commercial Units fields.",
     { tags: [ "@property", "@summary" ] }, () => {
-        before("Login, create report", () => {
+        beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);
         });
 

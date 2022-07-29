@@ -6,7 +6,7 @@ import Income from "../../../../actions/income/income.manager";
 describe("Comparable Min, Max, Avg values for Repairs & Maintenance Per SF are correctly calculated and displayed", 
     { tags:[ "@income", "@snapshot_tests", "@expense_forecast" ] }, () => {
 
-        before("Login, create report", () => {
+        beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);
         });
 

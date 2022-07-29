@@ -6,7 +6,7 @@ import Income from "../../../../../actions/income/income.manager";
 describe("Verify the functionality of the Optional Columns checkboxes", 
     { tags:[ "@income", "@residential", "@in_place_rent_roll" ] }, () => {
         
-        before("Login, create report", () => {
+        beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);
         });
 

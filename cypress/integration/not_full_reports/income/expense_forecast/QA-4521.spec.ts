@@ -6,7 +6,7 @@ import tableExpenseHistoryCellNames from "../../../../../cypress/enums/expense/e
 
 describe("Historical expense Insurance Per Unit is correctly calculated and displayed",
     { tags: [ "@snapshot_tests", "@income", "@expense_forecast" ] }, () => {
-        before("Login, create report", () => {
+        beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);
         });
 

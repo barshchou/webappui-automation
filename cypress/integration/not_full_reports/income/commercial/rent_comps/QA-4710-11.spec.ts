@@ -6,7 +6,7 @@ import { createReport } from "../../../../../actions/base/baseTest.actions";
 describe("Dropdown 'Filters' - 'Sort by' section display and count values", 
     { tags:[ "@income", "@commercial", "@rent_comps" ] }, () => {
 
-        before("Login, create report and add Commercial units", () => {
+        beforeEach("Login, create report and add Commercial units", () => {
             createReport(testData.reportCreationData);
             NavigationSection.navigateToPropertySummary();
             Property._Summary.enterNumberOfCommercialUnits(testData.commercialUnits);

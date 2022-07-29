@@ -7,7 +7,7 @@ import { Income, Sales, Property } from "../../../../actions";
 describe("Adjusted Price per Residential Unit in Sales Adjustment Grid is calculated with correct formula", 
     { tags: [ "@adjust_comps", "@sales", "@feature_flag" ] }, () => {
 
-        before("Login, create report", () => {
+        beforeEach("Login, create report", () => {
             cy.stepInfo(`1. Turn on “Enable flexible gba analysis” feature flag`);
             launchDarklyApi.setFeatureFlagForUser(testData.featureFlagKey, testData.onFeatureFlag);
             createReport(testData.reportCreationData);

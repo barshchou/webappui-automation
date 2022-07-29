@@ -8,7 +8,7 @@ import Sales from "../../../../actions/sales/sales.manager";
 describe("Prospective Market Value As Stabilized -> Less Laundry Rent Loss data is pulled from Cap Rate Conclusion",
     { tags:[ "@sales", "@value_conclusion" ] }, () => {
         
-        before("Login, create report", () => {
+        beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);
         });
 

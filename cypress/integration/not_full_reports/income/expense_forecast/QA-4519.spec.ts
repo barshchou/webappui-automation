@@ -7,7 +7,7 @@ import tableExpenseHistoryCellNames from "../../../../enums/expense/expenseHisto
 describe("Historical expense Insurance Per SF is correctly calculated and displayed",
     { tags:[ "@snapshot_tests", "@income", "@expense_forecast" ] }, () => {
 
-        before("Login, create report", () => {
+        beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);
 
             cy.stepInfo("1. Pre-condition: Residential Units should be filled in on Property > Summary form");
@@ -35,12 +35,6 @@ describe("Historical expense Insurance Per SF is correctly calculated and displa
                     .enterIssueByColIndex(per.insurance, tableExpenseHistoryCellNames.insurance, 0);
             });
             Income._ExpenseHistory.Actions.verifyAverageTable();
-
-            cy.saveLocalStorage();
-        });
-
-        beforeEach("RestoreLocalStorage", () => {
-            cy.restoreLocalStorage();
         });
 
         it("[QA-4519]", () => {

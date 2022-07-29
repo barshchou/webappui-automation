@@ -7,7 +7,7 @@ import Income from "../../../../../actions/income/income.manager";
 describe.skip(`Verify Search Results overlay with found results is displayed on clicking Back to Search button 
                     on the Add New Rent Comp overlay on Rent Comps page when Unit type of search is selected`, () => {
 
-    before("Login, create report", () => {
+    beforeEach("Login, create report", () => {
         createReport(testData.reportCreationData);
     });
 

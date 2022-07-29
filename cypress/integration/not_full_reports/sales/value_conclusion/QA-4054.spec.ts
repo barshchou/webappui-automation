@@ -6,7 +6,7 @@ import { createReport } from "../../../../actions/base/baseTest.actions";
 
 describe("The amount column of the # of Units shows the correct number of units", 
     { tags: [ "@sales", "@value_conclusion" ] }, () => {
-        before("Login action", () => {
+        beforeEach("Login action", () => {
             createReport(testData.reportCreationData);
         });
 

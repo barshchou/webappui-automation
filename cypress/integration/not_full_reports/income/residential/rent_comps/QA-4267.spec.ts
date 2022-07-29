@@ -6,7 +6,7 @@ import RentCompsPage from "../../../../../pages/income/residential/rent_comps/re
 import { uppercaseFirstLetterEachWord } from "../../../../../../utils/string.utils";
 
 describe("Verify the Unit Type drop-down field", () => {
-    before("login, create report", () => {
+    beforeEach("login, create report", () => {
         createReport(testData.reportCreationData);
     });
 

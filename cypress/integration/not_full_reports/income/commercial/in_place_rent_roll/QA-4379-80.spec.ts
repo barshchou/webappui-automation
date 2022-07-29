@@ -7,7 +7,7 @@ import { createReport } from "../../../../../actions/base/baseTest.actions";
 describe("Verify the Unit column in the grid and grid presence", 
     { tags:[ "@income", "@commercial", "@in_place_rent_roll" ] }, () => {
         
-        before("Login, create report", () => {
+        beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);
         });
 

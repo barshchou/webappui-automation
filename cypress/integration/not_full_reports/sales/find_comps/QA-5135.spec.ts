@@ -5,7 +5,7 @@ import { createReport } from "../../../../actions/base/baseTest.actions";
 
 describe(`[QA-5135] -> [Sales > Find Comps] Check the comps order when "custom" dropdown is chosen`, 
     { tags: [ "@sales", "@find_comps", "@comp_plex" ] }, () => {
-        before("Login, create report", () => {
+        beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);
         });
 

@@ -5,7 +5,7 @@ import { createReport } from "../../../../actions/base/baseTest.actions";
 
 describe("Sales Value Conclusion Discussion -> Appraiser Commentary", 
     { tags: [ "@sales", "@value_conclusion" ] }, () => {
-        before("Login", () => {
+        beforeEach("Login", () => {
             createReport(testData.reportCreationData);
         });
 

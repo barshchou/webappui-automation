@@ -7,7 +7,7 @@ import Income from "../../../../actions/income/income.manager";
 describe("Commercial V/C Loss Discussion Generated Commentary", 
     { tags:[ "@income", "@potential_gross_income" ] }, () => {
         
-        before("Login, create report", () => {
+        beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);
         });
 

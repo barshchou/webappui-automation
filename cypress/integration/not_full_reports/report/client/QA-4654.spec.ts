@@ -8,7 +8,7 @@ const reportCreationData = ReportDataCreator.getReportData("4654");
 
 describe("Verify the functionality of the ADD button on the Client page", 
     { tags: [ "@report", "@client" ] }, () => {
-        before("Login, create report", () => {
+        beforeEach("Login, create report", () => {
             createReport(reportCreationData);
         });
 

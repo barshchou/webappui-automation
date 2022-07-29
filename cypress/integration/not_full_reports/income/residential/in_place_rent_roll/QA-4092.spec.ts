@@ -7,7 +7,7 @@ describe(`[QA-4092] Verify if "Per Year" time period PSF Rent based on is select
     the calculation of "Rent PSF" should be Monthly Rent *12/Square Footage/`, 
 { tags:[ "@income", "@residential", "@in_place_rent_roll" ] }, () => {
         
-    before("Login, create report", () => {
+    beforeEach("Login, create report", () => {
         createReport(testData.reportCreationData);
     });
 
