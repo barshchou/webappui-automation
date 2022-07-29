@@ -6,19 +6,18 @@ import { Report } from '../../../../actions';
 
 describe("Verify the Client Guidelines Discussion on the page", 
     { tags: [ "@report", "@client" ] }, () => {
-        
-    before("Login, create report", () => {
-        createReport(testData.reportCreationData);
-    });
+        before("Login, create report", () => {
+            createReport(testData.reportCreationData);
+        });
 
-    it("Test body", () => {
-        NavigationSection.navigateToClientPage();
-        Report._Client.verifyGuidelineTooltip()
-            .verifyClientGuidelinesCommentary(testData.generatedCommentary)
-            .clickGuidelinesCommentaryEditButton()
-            .enterNewCommentary(testData.newCommentary)
-            .Page.revertToGeneratedButton.click();
+        it("Test body", () => {
+            NavigationSection.navigateToClientPage();
+            Report._Client.verifyGuidelineTooltip()
+                .verifyClientGuidelinesCommentary(testData.generatedCommentary)
+                .clickGuidelinesCommentaryEditButton()
+                .enterNewCommentary(testData.newCommentary)
+                .Page.revertToGeneratedButton.click();
             Report._Client.verifyClientGuidelinesCommentary(testData.generatedCommentary);
-        deleteReport(testData.reportCreationData.reportNumber);
+            deleteReport(testData.reportCreationData.reportNumber);
+        });
     });
-});

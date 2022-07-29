@@ -1,7 +1,9 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 /// <reference types="cypress" />
 
+import { _mutateArrayInMap } from "../cypress/support/commands";
 import { Alias } from "../cypress/utils/alias.utils";
+import mapKeysUtils from "../cypress/utils/mapKeys.utils";
 
 export const interceptGoogleScriptsLoad = () => {
     cy.intercept({
@@ -27,7 +29,9 @@ export const setReportId = () => {
     cy.url().then(url => {
         const reportID = url.split(`${Cypress.config().baseUrl}/report/`)[1].split("/")[0];
         cy.log(`Current report ID is ${reportID}`);
-        cy.wrap(reportID).as(Alias.reportId);
+        cy._mapSet(mapKeysUtils.reportId, reportID);
+
+        _mutateArrayInMap(mapKeysUtils.reportIdArray, reportID, "Array of reportId");
     });
 };
 export const getReportId = () => {
@@ -45,7 +49,7 @@ const pathToNetworkActivity = "./cypress/gh_artifacts/network_activity_records";
  */
 export const recordProxiedRequests = () => {
     // @ts-ignore
-    if(Cypress.state()?.error != undefined){
+    if (Cypress.state()?.error != undefined) {
         // @ts-ignore
         let networkActivity = Cypress.ProxyLogging.proxyRequests.map(proxReq => {
             return proxReq.consoleProps;

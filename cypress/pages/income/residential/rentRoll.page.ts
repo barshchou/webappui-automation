@@ -2,44 +2,45 @@ import ResidentialRentRollSharedPage from "../../shared_components/residentialRe
 
 class InPlaceRentRollPage extends ResidentialRentRollSharedPage {
 
-    get numberOfResidentialUnitsField() {return cy.get("*[data-qa='number-of-items-input'] input");}
+    get numberOfResidentialUnitsField() { return cy.get("*[data-qa='number-of-items-input'] input"); }
 
-    get goToPropSummaryButton() {return cy.get("[aria-label='Go To Property Summary'] [href$='/property-summary']");}
+    get goToPropSummaryButton() { return cy.get("[aria-label='Go To Property Summary'] [href$='/property-summary']"); }
 
-    getColumnHeader(columnName) {return cy.xpath(`//*[text()='${columnName}'][@class='colHeader']`);}
+    getColumnHeader(columnName: string) { return cy.xpath(`//*[text()='${columnName}'][@class='colHeader']`); }
 
-    getPerUnitSFRadio(value) {return cy.get(`*[name='perUnitSF'][value='${value}']`);}
+    getPerUnitSFRadio(value: boolean) { return cy.get(`*[name='perUnitSF'][value='${value}']`); }
 
-    getPSFRadio(value) {return cy.get(`*[name='unitRentPSFTimePeriod'][value='${value}']`);}
+    getPSFRadio(value: string) { return cy.get(`*[name='unitRentPSFTimePeriod'][value='${value}']`); }
 
-    getCheckboxByLabel(label) {return cy.get(`*[label="${label}"] input`);}
+    getCheckboxByLabel(label: string) { return cy.get(`*[label="${label}"] input`); }
 
-    radioButtonLabelByText(labelText) {return cy.xpath(`//label[text()="${labelText}"]`);}
+    radioButtonLabelByText(labelText: string) { return cy.xpath(`//label[text()="${labelText}"]`); }
 
-    get importViaCSVHeader() {return cy.xpath("//p[text()='Import Rent Roll via CSV']");}
+    get importViaCSVHeader() { return cy.xpath("//p[text()='Import Rent Roll via CSV']"); }
 
-    get skipManualRentEntryRow() {return cy.xpath("//p[text()='Skip manual rent roll entry.']");}
+    get skipManualRentEntryRow() { return cy.xpath("//p[text()='Skip manual rent roll entry.']"); }
 
-    get uploadCSVLink() {return cy.xpath("//a[text()='Upload a CSV file.']");}
+    get uploadCSVLink() { return cy.xpath("//a[text()='Upload a CSV file.']"); }
 
-    get uploadFileButton() {return cy.xpath("//*[@placeholder='Choose a File']//following::*[@role='presentation']");}
+    get uploadFileButton() { return cy.xpath("//*[@placeholder='Choose a File']//following::*[@role='presentation']"); }
 
-    get uploadFileInput() {return cy.get("*[data-qa='file-input']");}
+    get uploadFileInput() { return cy.get("*[data-qa='file-input']"); }
 
-    get importDataButton() {return cy.get("*[data-qa='import-data-btn']");}
+    get importDataButton() { return cy.get("*[data-qa='import-data-btn']"); }
 
-    get textAreaToInput() {return cy.get("div:not([class*='hidden']) > *[class='handsontableInput']");}
+    get textAreaToInput() { return cy.get("div:not([class*='hidden']) > *[class='handsontableInput']"); }
 
-    get rentRollCommentary() {return cy.get("[data-qa*='currentRentRollDiscussion.commentary']");}
+    get rentRollCommentary() { return cy.get("[data-qa*='currentRentRollDiscussion.commentary']"); }
 
-    get tableListboxOptions() {return cy.get("td.listbox");}
+    get tableListboxOptions() { return cy.get("td.listbox"); }
 
-    // TODO: Fix locator for this cells after https://bowery.atlassian.net/browse/WEB-5364 bug fix and move methods and elements, related to it to shared components
-    get rentSFCell() {return cy.xpath("//*[contains(@class, 'readOnly') and not(contains(@data-qa, 'cell'))]");}
+    get stabilizedRentSFCell() { return cy.get("[data-qa='rentPerSquareFootage-cell']"); }
 
-    get stabilizedRentSFCell() {return cy.get("[data-qa='rentPerSquareFootage-cell']");}
+    get rentRollAppraiserCommentary() { return cy.get("[name='currentRentRollDiscussion.additionalCommentary']"); }
 
-    get rentRollAppraiserCommentary() {return cy.get("[name='currentRentRollDiscussion.additionalCommentary']");}
+    infoIcon(index = 1) { 
+        return cy.xpath(`//*[text()='Current Rent Roll Discussion']//following::*[@role='presentation'][${index}]`); 
+    }
 
 }
 

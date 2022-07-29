@@ -12,8 +12,10 @@ class ComparableExpensesActions extends BaseActionsExt<typeof compExpensesPage> 
     enterAddressByColumnIndex(address: string, index = 0): ComparableExpensesActions {
         compExpensesPage.getUnifiedEditableAndTotalCells("address").eq(index).as("addressCell");
         cy.get("@addressCell").invoke('val', "some text placeholder")
-            .type(`{enter}`)
+            .realClick()
+            .realClick()
             .focus()
+            .type("something")
             .clear()
             .scrollIntoView()
             .realType(`${address}{enter}`);
@@ -21,42 +23,48 @@ class ComparableExpensesActions extends BaseActionsExt<typeof compExpensesPage> 
         return this;
     }
 
-    enterLocationByColumnIndex(location: string, index = 0): ComparableExpensesActions {
-        compExpensesPage.getUnifiedEditableAndTotalCells("location").eq(index).dblclick().scrollIntoView()
-            .focus().clear().realType(`${location}{enter}`);
-        compExpensesPage.getUnifiedEditableAndTotalCells("location").eq(index).children(compExpensesPage.elementToCheckCellTextSelector)
+    enterCityByColumnIndex(location: string, index = 0): ComparableExpensesActions {
+        compExpensesPage.getUnifiedEditableAndTotalCells("city").eq(index).realClick().realClick().scrollIntoView()
+            .focus().type("something").clear().realType(`${location}{enter}`);
+        compExpensesPage.getUnifiedEditableAndTotalCells("city").eq(index)
+            .children(compExpensesPage.elementToCheckCellTextSelector)
             .should("have.text", location);
         return this;
     }
 
     chooseExpensePeriodByColumnIndex(periodValue: string, index = 0): ComparableExpensesActions {
         compExpensesPage.getUnifiedEditableAndTotalCells("expensePeriod").eq(index).type("something")
-            .dblclick().focus().clear().type(`${periodValue}{enter}`);
+            .realClick().realClick().focus().type("something").clear().realType(`${periodValue}{enter}`);
         compExpensesPage.getUnifiedEditableAndTotalCells("expensePeriod").eq(index)
             .children(compExpensesPage.elementToCheckCellTextSelector).should("have.text", periodValue);
         return this;
     }
 
     enterSquareFeetByColumnIndex(value: number, index = 0): ComparableExpensesActions {
-        compExpensesPage.getUnifiedEditableAndTotalCells("squareFeet").eq(index).dblclick().scrollIntoView().focus()
-            .clear().realType(`${value}{enter}`);
         compExpensesPage.getUnifiedEditableAndTotalCells("squareFeet").eq(index)
-            .children(compExpensesPage.elementToCheckCellTextSelector).should("have.text", `${numberWithCommas(value)}`);
+            .realClick().realClick().scrollIntoView().focus()
+            .type("something").clear().realType(`${value}{enter}`);
+        compExpensesPage.getUnifiedEditableAndTotalCells("squareFeet").eq(index)
+            .children(compExpensesPage.elementToCheckCellTextSelector)
+            .should("have.text", `${numberWithCommas(value)}`);
         return this;
     }
 
     enterResidentialUnitsByColumnIndex(value: number, index = 0): ComparableExpensesActions {
-        compExpensesPage.getUnifiedEditableAndTotalCells("residentialUnits").eq(index).dblclick().scrollIntoView()
-            .focus().clear().realType(`${value}{enter}`);
+        compExpensesPage.getUnifiedEditableAndTotalCells("residentialUnits").eq(index)
+            .realClick().realClick().scrollIntoView()
+            .focus().type("something").clear().realType(`${value}{enter}`);
         compExpensesPage.getUnifiedEditableAndTotalCells("residentialUnits").eq(index)
             .children(compExpensesPage.elementToCheckCellTextSelector).should("have.text", value);
         return this;
     }
 
-    enterCellDollarValueByColumnIndex(cellsElements: Cypress.Chainable, value: number, index = 0): ComparableExpensesActions {
+    enterCellDollarValueByColumnIndex(cellsElements: Cypress.Chainable, value: number, index = 0): 
+    ComparableExpensesActions {
         const valueToBe = `$${numberWithCommas(value.toFixed(2))}`;
         cellsElements.eq(index).as("cell");
-        cy.get("@cell").dblclick().scrollIntoView().clear().realType(`${value}{enter}`);
+        cy.get("@cell").realClick().realClick().scrollIntoView().focus()
+            .type("something").clear().realType(`${value}{enter}`);
         cy.get("@cell").children(compExpensesPage.elementToCheckCellTextSelector)
             .should("have.text", valueToBe);
         return this;
@@ -69,13 +77,13 @@ class ComparableExpensesActions extends BaseActionsExt<typeof compExpensesPage> 
 
     verifyTOEPerSFByColumnIndex(index = 0): ComparableExpensesActions {
         compExpensesPage.getUnifiedEditableAndTotalCells("total").eq(index).then(el => {
-           const toeNumber = getNumberFromDollarNumberWithCommas(el.text());
-           compExpensesPage.getUnifiedEditableAndTotalCells("squareFeet").eq(index).invoke("text").then(sfVal => {
-              const sfNumber = getNumberFromDollarNumberWithCommas(sfVal);
-              const toePerSFTextToBe = `$${numberWithCommas((toeNumber / sfNumber).toFixed(2))}`;
-              compExpensesPage.getUnifiedEditableAndTotalCells("totalPerSF").eq(index)
-                  .should("have.text", toePerSFTextToBe);
-           });
+            const toeNumber = getNumberFromDollarNumberWithCommas(el.text());
+            compExpensesPage.getUnifiedEditableAndTotalCells("squareFeet").eq(index).invoke("text").then(sfVal => {
+                const sfNumber = getNumberFromDollarNumberWithCommas(sfVal);
+                const toePerSFTextToBe = `$${numberWithCommas((toeNumber / sfNumber).toFixed(2))}`;
+                compExpensesPage.getUnifiedEditableAndTotalCells("totalPerSF").eq(index)
+                    .should("have.text", toePerSFTextToBe);
+            });
         });
         return this;
     }
@@ -83,27 +91,32 @@ class ComparableExpensesActions extends BaseActionsExt<typeof compExpensesPage> 
     verifyToePerUnitByColumnIndex(index = 0): ComparableExpensesActions {
         compExpensesPage.getUnifiedEditableAndTotalCells("total").eq(index).invoke("text").then(toe => {
             const toeNumber = getNumberFromDollarNumberWithCommas(toe);
-            compExpensesPage.getUnifiedEditableAndTotalCells("residentialUnits").eq(index).invoke("text").then(units => {
-                const unitsNumber = getNumberFromDollarNumberWithCommas(units);
-                const toePerUnitTextToBe = `$${numberWithCommas((toeNumber / unitsNumber).toFixed(2))}`;
-                compExpensesPage.getUnifiedEditableAndTotalCells("totalPerUnit").eq(index)
-                    .should("have.text", toePerUnitTextToBe);
-            });
+            compExpensesPage.getUnifiedEditableAndTotalCells("residentialUnits").eq(index).invoke("text")
+                .then(units => {
+                    const unitsNumber = getNumberFromDollarNumberWithCommas(units);
+                    const toePerUnitTextToBe = `$${numberWithCommas((toeNumber / unitsNumber).toFixed(2))}`;
+                    compExpensesPage.getUnifiedEditableAndTotalCells("totalPerUnit").eq(index)
+                        .should("have.text", toePerUnitTextToBe);
+                });
         });
         return this;
     }
 
     verifySquareFeetAverage(): ComparableExpensesActions {
         compExpensesPage.getUnifiedEditableAndTotalCells("squareFeet").then(elements => {
-           const averageTextToBe = numberWithCommas(Math.round(ComparableExpensesActions.getAverageValueFromInputs(elements)));
-           compExpensesPage.getUnifiedAverageCell("squareFeet").should("have.text", averageTextToBe);
+            const averageTextToBe = numberWithCommas(Math.round(
+                ComparableExpensesActions.getAverageValueFromInputs(elements)
+            ));
+            compExpensesPage.getUnifiedAverageCell("squareFeet").should("have.text", averageTextToBe);
         });
         return this;
     }
 
     verifyUnitsNumberAverage(): ComparableExpensesActions {
         compExpensesPage.getUnifiedEditableAndTotalCells("residentialUnits").then(elements => {
-            const averageTextToBe = numberWithCommas(Math.round(ComparableExpensesActions.getAverageValueFromInputs(elements)));
+            const averageTextToBe = numberWithCommas(Math.round(
+                ComparableExpensesActions.getAverageValueFromInputs(elements)
+            ));
             compExpensesPage.getUnifiedAverageCell("residentialUnits").should("have.text", averageTextToBe);
         });
         return this;

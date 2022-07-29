@@ -6,7 +6,7 @@ import RentCompsPage from "../../../../../pages/income/residential/rent_comps/re
 
 describe(`[Income - Residential - Rent Comps] Verify tables with the unit 
         information and details are displayed on "Rent Comps" page`,
-        { tags: [ "@income", "@residential", "@rent_comps" ] }, () => {
+{ tags: [ "@income", "@residential", "@rent_comps" ] }, () => {
 
     before("Login, create report, prepare data", () => {
         cy.stepInfo(`1. Create new report or open the report which is already created.
@@ -14,7 +14,7 @@ describe(`[Income - Residential - Rent Comps] Verify tables with the unit
         createReport(testData.reportCreationData);
 
         cy.stepInfo(`2. Navigate to Income -> Residential -> Rent Comps
-                     and click "Bulding" button`);
+                     and click "Building" button`);
         _NavigationSection.navigateToRentComps();
         Income._Residential.RentComps.BaseActions
             .changeToBuildingSearch();

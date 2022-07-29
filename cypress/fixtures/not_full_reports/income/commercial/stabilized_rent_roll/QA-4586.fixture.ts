@@ -8,8 +8,8 @@ const useTextFixture: BoweryReports.CommercialUnits.UseTexts[] = [ "Retail", "Of
 const _leaseStatusesMixed: BoweryReports.LeaseStatus[] = [ "Vacant", "Occupied" ];
 const _leaseStatusesVacant: BoweryReports.LeaseStatus[] = [ "Vacant", "Vacant" ];
 const _leaseStatusesOccupied: BoweryReports.LeaseStatus[] = [ "Occupied", "Occupied" ];
-const _leaseDate = "01012022";
-const _compGroup = "QA_4576_Comp_Group";
+const _leaseDate = "01-01-2022";
+const _compGroup = "QA_4586_Comp_Group";
 const _monthly = "monthly" as BoweryReports.UnitsOfMeasure;
 const _marketRentConclusion = 333;
 
@@ -59,7 +59,7 @@ export default {
     compGroup: _compGroup,
     rentCompFields: _rentCompFields,
     leaseDate: _leaseDate,
-    unitMeasureMontly: _monthly,
+    unitMeasureMonthly: _monthly,
     comparableFirst: {
         address: "200 West 78 Street",
         sizeAdjustment: 20,

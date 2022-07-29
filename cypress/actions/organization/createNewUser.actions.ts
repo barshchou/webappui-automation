@@ -3,7 +3,7 @@ import { BoweryAutomation } from "../../types/boweryAutomation.type";
 import BaseActionsExt from "../base/base.actions.ext";
 import { BoweryReports } from "../../types/boweryReports.type";
 
-class CreateNewUserActions extends BaseActionsExt<typeof createNewUserPage>{
+class CreateNewUserActions extends BaseActionsExt<typeof createNewUserPage> {
     selectUserPrefix(prefix: BoweryReports.OrganizationAddresseePrefix): CreateNewUserActions {
         createNewUserPage.userPrefixField.click();
         createNewUserPage.prefixSelectOption(prefix).click();
@@ -20,7 +20,8 @@ class CreateNewUserActions extends BaseActionsExt<typeof createNewUserPage>{
     }
 
     enterUsername(username: string): CreateNewUserActions {
-        createNewUserPage.usernameField.type(username).should("have.value", username);
+        createNewUserPage.usernameField.type("some placeholder text").clear()
+            .type(username).should("have.value", username);
         return this;
     }
 

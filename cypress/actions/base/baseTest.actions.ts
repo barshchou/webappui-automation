@@ -4,6 +4,7 @@ import NavigationSection from "./navigationSection.actions";
 import { createPayload } from "../../api/report_payloads/462Avenue1NY.payload";
 import mapKeysUtils from "../../utils/mapKeys.utils";
 import { _HomePage } from ".";
+import { gqlOperationNames } from "../../utils/alias.utils";
 
 /**
  * Login action
@@ -21,28 +22,27 @@ export const loginAction = (username = Cypress.env("USERNAME"), password = Cypre
 };
 
 export const createReport = (reportCreationData: BoweryAutomation.ReportCreationData, 
-                            username = Cypress.env("USERNAME"), password = Cypress.env("PASSWORD"),
-                            payloadFunction = createPayload) => {
+    username = Cypress.env("USERNAME"), password = Cypress.env("PASSWORD"),
+    payloadFunction = createPayload) => {
 
     salesInterceptions();
 
     const envUrl = Cypress.config().baseUrl;
     loginAction(username, password);
-    cy._mapGet("user_id_api").then(_userId => {
+    cy._mapGet(mapKeysUtils.userId).then(_userId => {
         cy.log(`user id is: ${_userId}`);
         const _payload = payloadFunction(reportCreationData, _userId);
-        if(Cypress.env("report") == "api"){
-            cy._mapGet("token").then(_token => {
+        if (Cypress.env("report") == "api") {
+            cy._mapGet(mapKeysUtils.bearerToken).then(_token => {
                 cy.createApiReport(
                     reportCreationData, _payload, _token, envUrl
                 );
             });
-            cy._mapGet(mapKeysUtils.report_id).then(reportId => {
+            cy._mapGet(mapKeysUtils.reportId).then(reportId => {
                 cy.log("Report id: "+reportId);
                 cy.visit(`/report/${reportId}`);
             });
-        }
-        else {
+        } else {
             _HomePage.createReport(reportCreationData);
         }
     });
@@ -56,11 +56,11 @@ export const deleteReport = (reportNumber) => {
 
 export const salesInterceptions = () => {
     cy.intercept('POST', '/graphql', req => {
-        aliasQuery(req, "searchSalesTransactions");
-        aliasQuery(req, "findTransactionByIdAndVersion");
-        aliasQuery(req, "findSalesComps");
-        aliasQuery(req, "findSingleSalesComp");
-        aliasQuery(req, "updateJob");
-        aliasQuery(req, "findSalesCompsByEventIds");
+        aliasQuery(req, gqlOperationNames.searchSalesTransactions);
+        aliasQuery(req, gqlOperationNames.findTransactionByIdAndVersion);
+        aliasQuery(req, gqlOperationNames.findSalesComps);
+        aliasQuery(req, gqlOperationNames.findSingleSalesComp);
+        aliasQuery(req, gqlOperationNames.updateJob);
+        aliasQuery(req, gqlOperationNames.findTransactionsByIdsAndVersions);
     });
 };

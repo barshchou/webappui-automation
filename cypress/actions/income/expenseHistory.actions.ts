@@ -3,7 +3,7 @@ import { getNumberFromDollarNumberWithCommas, numberWithCommas } from "../../../
 import BaseActionsExt from "../base/base.actions.ext";
 import tableExpenseHistoryCellNames from "../../../cypress/enums/expense/expenseHistoryTableRows.enum";
 
-class ExpenseHistoryActions extends BaseActionsExt<typeof expenseHistoryPage>{
+class ExpenseHistoryActions extends BaseActionsExt<typeof expenseHistoryPage> {
 
     selectExpensePeriod(value: string): ExpenseHistoryActions {
         expenseHistoryPage.expensePeriodDropdown.click();
@@ -27,15 +27,20 @@ class ExpenseHistoryActions extends BaseActionsExt<typeof expenseHistoryPage>{
         return this;
     }
 
-    enterIssueByColIndex(issueValue: number | string, tableExpenseHistoryCellNames: string, index = 0,): ExpenseHistoryActions {
+    enterIssueByColIndex(issueValue: number | string, 
+        tableExpenseHistoryCellNames: string, index = 0,): ExpenseHistoryActions {
         if (issueValue === "clear") {
-            expenseHistoryPage.getUnifiedEditableAndTotalCells(tableExpenseHistoryCellNames).eq(index).scrollIntoView()
+            expenseHistoryPage.getUnifiedEditableAndTotalCells(tableExpenseHistoryCellNames).eq(index)
+                .scrollIntoView()
                 .realType("something nonsense");
-            expenseHistoryPage.getUnifiedEditableAndTotalCells(tableExpenseHistoryCellNames).eq(index).dblclick().clear();
+            expenseHistoryPage.getUnifiedEditableAndTotalCells(tableExpenseHistoryCellNames).eq(index)
+                .dblclick().clear();
         } else {
-            expenseHistoryPage.getUnifiedEditableAndTotalCells(tableExpenseHistoryCellNames).eq(index).scrollIntoView()
+            expenseHistoryPage.getUnifiedEditableAndTotalCells(tableExpenseHistoryCellNames).eq(index)
+                .scrollIntoView()
                 .realType("something nonsense");
-            expenseHistoryPage.getUnifiedEditableAndTotalCells(tableExpenseHistoryCellNames).eq(index).dblclick().clear()
+            expenseHistoryPage.getUnifiedEditableAndTotalCells(tableExpenseHistoryCellNames).eq(index)
+                .dblclick().clear()
                 .realType(`${issueValue}{enter}`);
             expenseHistoryPage.getUnifiedEditableAndTotalCells(tableExpenseHistoryCellNames).eq(index)
                 .should("have.text", `$${numberWithCommas((<number>issueValue).toFixed(2))}`);
@@ -44,25 +49,30 @@ class ExpenseHistoryActions extends BaseActionsExt<typeof expenseHistoryPage>{
     }
 
     verifyTotalOpExpensesByColIndex(textToBe: string, index = 0): ExpenseHistoryActions {
-        expenseHistoryPage.getUnifiedEditableAndTotalCells(tableExpenseHistoryCellNames.total).eq(index).should("have.text", textToBe);
+        expenseHistoryPage.getUnifiedEditableAndTotalCells(tableExpenseHistoryCellNames.total).eq(index)
+            .should("have.text", textToBe);
         return this;
     }
 
     verifyTOEExcludingRETByIndex(retValue: number, index = 0): ExpenseHistoryActions {
-        expenseHistoryPage.getUnifiedEditableAndTotalCells(tableExpenseHistoryCellNames.total).eq(index).invoke("text").then(toeTotalText => {
-            const toeTotalNumber = getNumberFromDollarNumberWithCommas(toeTotalText);
-            const excludingTextToBe = `$${numberWithCommas((toeTotalNumber - retValue).toFixed(2))}`;
-            expenseHistoryPage.getUnifiedEditableAndTotalCells(tableExpenseHistoryCellNames.totalExcludingTaxes).eq(index).should("have.text", excludingTextToBe);
-        });
+        expenseHistoryPage.getUnifiedEditableAndTotalCells(tableExpenseHistoryCellNames.total).eq(index)
+            .invoke("text").then(toeTotalText => {
+                const toeTotalNumber = getNumberFromDollarNumberWithCommas(toeTotalText);
+                const excludingTextToBe = `$${numberWithCommas((toeTotalNumber - retValue).toFixed(2))}`;
+                expenseHistoryPage.getUnifiedEditableAndTotalCells(tableExpenseHistoryCellNames.totalExcludingTaxes)
+                    .eq(index).should("have.text", excludingTextToBe);
+            });
         return this;
     }
 
     verifyNetOpIncomeByIndex(grossRevenue: number, index = 0): ExpenseHistoryActions {
-        expenseHistoryPage.getUnifiedEditableAndTotalCells(tableExpenseHistoryCellNames.total).eq(index).invoke("text").then(toeTotalText => {
-            const toeTotalNumber = getNumberFromDollarNumberWithCommas(toeTotalText);
-            const noeTextToBe = `$${numberWithCommas((grossRevenue - toeTotalNumber).toFixed(2))}`;
-            expenseHistoryPage.getUnifiedEditableAndTotalCells(tableExpenseHistoryCellNames.noi).eq(index).should("have.text", noeTextToBe);
-        });
+        expenseHistoryPage.getUnifiedEditableAndTotalCells(tableExpenseHistoryCellNames.total).eq(index)
+            .invoke("text").then(toeTotalText => {
+                const toeTotalNumber = getNumberFromDollarNumberWithCommas(toeTotalText);
+                const noeTextToBe = `$${numberWithCommas((grossRevenue - toeTotalNumber).toFixed(2))}`;
+                expenseHistoryPage.getUnifiedEditableAndTotalCells(tableExpenseHistoryCellNames.noi)
+                    .eq(index).should("have.text", noeTextToBe);
+            });
         return this;
     }
 
@@ -76,8 +86,8 @@ class ExpenseHistoryActions extends BaseActionsExt<typeof expenseHistoryPage>{
 
     verifyAverageByCellTotal(cellsName: string): ExpenseHistoryActions {
         expenseHistoryPage.getUnifiedEditableAndTotalCells(cellsName).then(elements => {
-            const toeAvrgToBe = ExpenseHistoryActions.getAverageTextFromCells(elements);
-            expenseHistoryPage.getUnifiedAverageCell(cellsName).should("have.text", toeAvrgToBe);
+            const toeAverageToBe = ExpenseHistoryActions.getAverageTextFromCells(elements);
+            expenseHistoryPage.getUnifiedAverageCell(cellsName).should("have.text", toeAverageToBe);
         });
         return this;
     }
@@ -132,16 +142,17 @@ class ExpenseHistoryActions extends BaseActionsExt<typeof expenseHistoryPage>{
     }
 
     enterExpenseMonth(month: string): ExpenseHistoryActions {
-        expenseHistoryPage.expenseMonth.clear().type(month);
+        expenseHistoryPage.expenseMonthDropdown.click();
+        expenseHistoryPage.expenseMonthDropdownValue(month).click();
         this.verifyExpenseMonth(month);
         return this;
     }
 
     verifyExpenseMonth(monthToBe: string, expensePeriodValue?: string): ExpenseHistoryActions {
         if (expensePeriodValue === "Projection" || expensePeriodValue === "Actual") {
-            expenseHistoryPage.expenseMonthProjection.should("be.disabled").and("have.value", monthToBe);
+            expenseHistoryPage.expenseMonthDropdown.should("be.disabled").and("have.value", monthToBe);
         } else {
-            expenseHistoryPage.expenseMonth.should("have.value", monthToBe);
+            expenseHistoryPage.expenseMonthDropdown.should("have.value", monthToBe);
         }
         return this;
     }

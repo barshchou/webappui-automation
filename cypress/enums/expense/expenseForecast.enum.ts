@@ -1,22 +1,18 @@
-const expensesCardsNames = {
-
+const expensesForecast = {
     expenseCardsIDArray: [ "insurance", "electricity", "fuel", "waterSewer", "repairsMaintenance", "payrollBenefits",
         "generalAdministrative", "legalProfessionalFees", "miscellaneous", "managementFees", "replacementReserves" ],
-
-    realEstateTaxes: "realEstateTaxes",
-    insurace: "insurance",
+    insurance: "insurance",
     electricity: "electricity",
     fuel: "fuel",
     waterAndSewer: "waterAndSewer",
-    utilities: "utilities",
     repairAndMaintenance: "repairsAndMaintenance",
     payrollBenefits: "payrollAndBenefits",
     generalAndAdministrative: "generalAndAdministrative",
     legalAndProfessional: "legalAndProfessionalFees",
-    miscelaneous: "miscellaneous",
+    miscellaneous: "miscellaneous",
     managementFees: "management",
-    replacementsAndReserves: "reserves"
+    replacementsAndReserves: "replacementReserves"
 };
 
 
-export default Object.freeze(expensesCardsNames);
+export default Object.freeze(expensesForecast);

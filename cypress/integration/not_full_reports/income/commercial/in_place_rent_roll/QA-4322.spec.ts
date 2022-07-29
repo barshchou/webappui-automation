@@ -6,13 +6,13 @@ import { createReport, deleteReport } from "../../../../../actions/base/baseTest
 describe("Verify the Basis of Rent tooltip", 
     { tags:[ "@income", "@commercial", "@in_place_rent_roll" ] }, () => {
         
-    before("Login, create report", () => {
-        createReport(testData.reportCreationData);
-    });
+        before("Login, create report", () => {
+            createReport(testData.reportCreationData);
+        });
 
-    it("Test body", () => {
-        NavigationSection.navigateToCommercialInPlaceRentRoll();
-        Income.Commercial.InPlaceRentRoll.verifyBasisOfRentTooltip();
-        deleteReport(testData.reportCreationData.reportNumber);
+        it("Test body", () => {
+            NavigationSection.navigateToCommercialInPlaceRentRoll();
+            Income.Commercial.InPlaceRentRoll.verifyBasisOfRentTooltip();
+            deleteReport(testData.reportCreationData.reportNumber);
+        });
     });
-});

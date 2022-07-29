@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/triple-slash-reference */
+// eslint-disable-next-line multiline-comment-style
 /// <reference types="cypress-xpath" />
 /// <reference types="cypress-image-snapshot" />
 
@@ -7,7 +8,7 @@ import { Options } from "cypress-image-snapshot";
 
 export default class BaseActions {
 
-    get Actions(){
+    get Actions() {
         return this;
     }
 
@@ -69,15 +70,26 @@ export default class BaseActions {
         return this;
     }
 
+    verifyTooltipExist(verifyValue?: string) {
+        cy.get("[role=tooltip]").should("not.exist");
+        if (verifyValue) {
+            cy.get("[role=tooltip]").should("include.text", verifyValue);
+        }
+        return this;
+    }
+
     /**
-     * Retrive DOM-element screenshot and compares it with baseline.
+     * Retrieve DOM-element screenshot and compares it with baseline.
      * @param element - PageElement to be snapshoted. 
-     * @param snapshotName - 
+     * @param snapshotName
+     * @param options
      * @see https://github.com/jaredpalmer/cypress-image-snapshot
      */
 
-    matchElementSnapshot(element:Cypress.Chainable, snapshotName: string, options: Options = { allowSizeMismatch: true } ){
-        if(Cypress.browser.isHeadless == true) {
+    matchElementSnapshot(element:Cypress.Chainable, snapshotName: string, 
+        options: Options = { allowSizeMismatch: true } ) {
+        if (Cypress.browser.isHeadless == true) {
+            element.should("be.visible");
             element.matchImageSnapshot(snapshotName, options);
             return this; 
         } 
@@ -92,7 +104,7 @@ export default class BaseActions {
         return this;
     }
 
-    pause(){
+    pause() {
         cy.pause();
         return this;
     }
@@ -101,11 +113,15 @@ export default class BaseActions {
         cy.get("body").then($body => {
             if ($body.find('form h6 [aria-label="Close"]').length > 0) {   
                 cy.get('form h6 [aria-label="Close"]').click();
-            } 
-            else {
+            } else {
                 return;
             }
         });
+        return this;
+    }
+
+    hideElement(element: Cypress.Chainable<JQuery<HTMLElement>>) {
+        element.then(el => el.hide());
         return this;
     }
 }

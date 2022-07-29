@@ -1,5 +1,6 @@
 import enums from "../../enums/enums";
 import { BoweryReports } from "../../types/boweryReports.type";
+import { numberWithCommas } from "../../../utils/numbers.utils";
 
 class Chips {
 
@@ -9,9 +10,9 @@ class Chips {
 
     private _buildingName: string;
 
-    private _grossBuildingArea: number;
+    private _grossBuildingArea: string | number;
 
-    private _siteArea: number;
+    private _siteArea: string | number;
 
     private _currentNumberOfCommercialUnits: number;
 
@@ -30,73 +31,101 @@ class Chips {
         return this;
     }
 
-    setNumberOfResidentialUnits(residentialUnits?: number){
+    setNumberOfResidentialUnits(residentialUnits?: number) {
         this._numberOfResidentialUnits = residentialUnits ?? 0;
         return this;
     }
 
-    setBuildingName(buildingName?: string){
+    setBuildingName(buildingName?: string) {
         this._buildingName = buildingName ?? "";
         return this;
     }
 
-    setGrossBuildingAre(grossBuildingArea?: number){
-        this._grossBuildingArea = grossBuildingArea ?? 2124441;
+    setGrossBuildingArea(grossBuildingArea?: number) {
+        const grossBuildingAreaValue = grossBuildingArea ?? "2,124,441";
+        this._grossBuildingArea = typeof grossBuildingAreaValue === "string" 
+            ? grossBuildingAreaValue 
+            : numberWithCommas(grossBuildingArea);
         return this;
     }
 
-    setSiteArea(siteArea?: number){
-        this._siteArea = siteArea ?? 753175;
+    setSiteArea(siteArea?: number) {
+        const siteAreaValue = siteArea ?? "753,175";
+        this._siteArea = typeof siteAreaValue === "string" ? siteAreaValue : numberWithCommas(siteArea);
         return this;
     }
 
-    setCurrentNumberOfCommercialUnits(currentCommercialUnit?: number){
+    setCurrentNumberOfCommercialUnits(currentCommercialUnit?: number) {
         this._currentNumberOfCommercialUnits = currentCommercialUnit ?? 5;
         return this;
     }
 
-    setCurrentNumberOfResidentialUnits(currentResidentialUnits?: number){
+    setCurrentNumberOfResidentialUnits(currentResidentialUnits?: number) {
         this._currentNumberOfResidentialUnits = currentResidentialUnits ?? 4;
         return this;
     }
 
-    setBlock(block?: string){
+    setBlock(block?: string) {
         this._block = block ?? "962";
         return this;
     }
 
-    setStreetAddress(streetAddress?: string){
+    setStreetAddress(streetAddress?: string) {
         this._streetAddress = streetAddress ?? "462 1st Avenue";
         return this;
     }
 
-    setLotValue(lot?: string){
+    setLotValue(lot?: string) {
         this._lotValue = lot ?? "100";
         return this;
     }
 
-    setStreetName(streetName?: string){
+    setStreetName(streetName?: string) {
         this._streetName = streetName ?? "1st Avenue";
         return this;
     }
 
     build(valueConclusion: BoweryReports.ConclusionValue = enums.VALUE_CONCLUSION_TYPE.AS_IS) {
-        return valueConclusion === enums.VALUE_CONCLUSION_TYPE.AS_COMPLETE ? this.asCompletedChips() : this.asIsAsStabilizedChips();
+        return valueConclusion === enums.VALUE_CONCLUSION_TYPE.AS_COMPLETE 
+            ? this.asCompletedChips() 
+            : this.asIsAsStabilizedChips();
     }
 
-    getChipsData(options?: BoweryReports.ChipsCreationOptions, valueConclusion?: BoweryReports.ConclusionValue){
+    getChipsData(options?: BoweryReports.ChipsCreationOptions, valueConclusion?: BoweryReports.ConclusionValue) {
                
-        options?.block == undefined ? this.setBlock() : this.setBlock(options.block);
-        options?.buildingName == undefined ? this.setBuildingName() : this.setBuildingName(options.buildingName);
-        options?.grossBuildingArea == undefined ? this.setGrossBuildingAre() : this.setGrossBuildingAre(options.grossBuildingArea);
-        options?.lotValue == undefined ? this.setLotValue() : this.setLotValue(options.lotValue);
-        options?.numberOfCommercialUnits == undefined ? this.setNumberOfCommercialUnits() : this.setNumberOfCommercialUnits(options.numberOfCommercialUnits);
-        options?.numberOfResidentialUnits == undefined ? this.setNumberOfResidentialUnits() : this.setNumberOfResidentialUnits(options.numberOfResidentialUnits);
-        options?.siteArea == undefined ? this.setSiteArea() : this.setSiteArea(options.siteArea);
-        options?.streetAddress == undefined ? this.setStreetAddress() : this.setStreetAddress(options.streetAddress);
-        options?.streetName == undefined ? this.setStreetName() : this.setStreetName(options.streetName);
-        options?.currentCommercialUnits == undefined ? this.setCurrentNumberOfCommercialUnits() : this.setCurrentNumberOfCommercialUnits(options.currentCommercialUnits);
-        options?.currentResidentialUnits == undefined ? this.setCurrentNumberOfResidentialUnits() : this.setCurrentNumberOfResidentialUnits(options.currentResidentialUnits);
+        options?.block == undefined 
+            ? this.setBlock() 
+            : this.setBlock(options.block);
+        options?.buildingName == undefined 
+            ? this.setBuildingName() 
+            : this.setBuildingName(options.buildingName);
+        options?.grossBuildingArea == undefined 
+            ? this.setGrossBuildingArea() 
+            : this.setGrossBuildingArea(options.grossBuildingArea);
+        options?.lotValue == undefined 
+            ? this.setLotValue() 
+            : this.setLotValue(options.lotValue);
+        options?.numberOfCommercialUnits == undefined 
+            ? this.setNumberOfCommercialUnits() 
+            : this.setNumberOfCommercialUnits(options.numberOfCommercialUnits);
+        options?.numberOfResidentialUnits == undefined 
+            ? this.setNumberOfResidentialUnits() 
+            : this.setNumberOfResidentialUnits(options.numberOfResidentialUnits);
+        options?.siteArea == undefined 
+            ? this.setSiteArea() 
+            : this.setSiteArea(options.siteArea);
+        options?.streetAddress == undefined 
+            ? this.setStreetAddress() 
+            : this.setStreetAddress(options.streetAddress);
+        options?.streetName == undefined 
+            ? this.setStreetName() 
+            : this.setStreetName(options.streetName);
+        options?.currentCommercialUnits == undefined 
+            ? this.setCurrentNumberOfCommercialUnits() 
+            : this.setCurrentNumberOfCommercialUnits(options.currentCommercialUnits);
+        options?.currentResidentialUnits == undefined 
+            ? this.setCurrentNumberOfResidentialUnits() 
+            : this.setCurrentNumberOfResidentialUnits(options.currentResidentialUnits);
         
         return this.build(valueConclusion);
     }
@@ -124,14 +153,26 @@ class Chips {
             {
                 suggestionName: 'Foreclosure Sale',
                 typeSuggestValue: 'Foreclosur',
-                verifySuggest: 'The above transaction reflects a foreclosure sale of the property. Typically in a foreclosure sale, the buyer assumes all encumbrances on the site, including any outstanding mortgage amount and legal fees ("upset costs"), delinquent taxes and water and sewer charges, foreclosure sale fee, and realty transfer taxes. This information was requested from the owner; however, not provided.',
+                verifySuggest: "The above transaction reflects a foreclosure sale of the property. " + 
+                "Typically in a foreclosure sale, the buyer assumes all encumbrances on the site, " + 
+                "including any outstanding mortgage amount and legal fees (\"upset costs\"), " + 
+                "delinquent taxes and water and sewer charges, foreclosure sale fee, and realty " + 
+                "transfer taxes. This information was requested from the owner; however, not provided.",
                 verifyExport: 'foreclosure sale'
             }, 
             {
                 suggestionName: 'Sherrif\'s Sale',
                 typeSuggestValue: 'Sherri',
-                verifySuggest: "The above transaction reflects a Sheriff's sale of the property. Typically in a Sheriff’s sale, the buyer assumes all encumbrances on the site, including any outstanding mortgage amount and legal fees (\"upset costs\"), delinquent taxes and water and sewer charges, Sheriff's sale fee, and realty transfer taxes. This information was requested from the owner; however, not provided.",
-                verifyExport: "The above transaction reflects a Sheriff's sale of the property. Typically in a Sheriff’s sale, the buyer assumes all encumbrances on the site, including any outstanding mortgage amount and legal fees (\"upset costs\"), delinquent taxes and water and sewer charges, Sheriff's sale fee, and realty transfer taxes. This information was requested from the owner; however, not provided."
+                verifySuggest: "The above transaction reflects a Sheriff's sale of the property. Typically in a " +
+                "Sheriff’s sale, the buyer assumes all encumbrances on the site, including any outstanding mortgage "+
+                "amount and legal fees (\"upset costs\"), delinquent taxes and water and sewer charges, " +
+                "Sheriff's sale fee, and realty transfer taxes. This information was requested from the " +
+                "owner; however, not provided.",
+                verifyExport: "The above transaction reflects a Sheriff's sale of the property. " +
+                "Typically in a Sheriff’s sale, the buyer assumes all encumbrances on the site, including any " +
+                "outstanding mortgage amount and legal fees (\"upset costs\"), delinquent taxes and water and " +
+                "sewer charges, Sheriff's sale fee, and realty transfer taxes. This information was " +
+                "requested from the owner; however, not provided."
             },
             {
                 suggestionName: 'Gross Building Area',

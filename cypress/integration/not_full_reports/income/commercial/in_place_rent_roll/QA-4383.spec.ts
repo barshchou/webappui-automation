@@ -6,17 +6,17 @@ import { createReport, deleteReport } from "../../../../../actions/base/baseTest
 describe("Verify the Tenant column in the grid", 
     { tags:[ "@income", "@commercial", "@in_place_rent_roll" ] }, () => {
         
-    before("Login, create report", () => {
-        createReport(testData.reportCreationData);
-    });
+        before("Login, create report", () => {
+            createReport(testData.reportCreationData);
+        });
 
-    it("Test body", () => {
-        NavigationSection.navigateToCommercialInPlaceRentRoll();
-        Income.Commercial.InPlaceRentRoll.chooseLeaseStatusByRowNumber(testData.leaseOccupied)
-            .enterTenantNameByRowNumber(testData.tenantName)
-            .verifyTenantNameByRow(testData.leaseOccupied, testData.tenantName)
-            .chooseLeaseStatusByRowNumber(testData.leaseVacant)
-            .verifyTenantNameByRow(testData.leaseVacant);
-        deleteReport(testData.reportCreationData.reportNumber);
+        it("Test body", () => {
+            NavigationSection.navigateToCommercialInPlaceRentRoll();
+            Income.Commercial.InPlaceRentRoll.chooseLeaseStatusByRowNumber(testData.leaseOccupied)
+                .enterTenantNameByRowNumber(testData.tenantName)
+                .verifyTenantNameByRow(testData.leaseOccupied, testData.tenantName)
+                .chooseLeaseStatusByRowNumber(testData.leaseVacant)
+                .verifyTenantNameByRow(testData.leaseVacant);
+            deleteReport(testData.reportCreationData.reportNumber);
+        });
     });
-});

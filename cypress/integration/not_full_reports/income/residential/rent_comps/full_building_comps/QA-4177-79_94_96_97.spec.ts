@@ -1,27 +1,27 @@
+// eslint-disable-next-line max-len
 import testData from "../../../../../../fixtures/not_full_reports/income/residential/rent_comps/full_building_comps/QA-4177-79_94_96_97.fixture";
 import { createReport, deleteReport } from "../../../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../../../actions/base";
 import { Income } from "../../../../../../actions";
-import { isProdEnv } from "../../../../../../../utils/env.utils";
+import { conditionalDescribe } from "../../../../../checkIsProd.utils";
 
 /**
  * On prod environment you cannot test editing of any comparables, so this test cannot be run on PROD env
  */
-const conditionalDescribe = isProdEnv() ? describe.skip : describe;
 
 conditionalDescribe("Base Itemized Unit Info table tests", { tags: [ "@residential", "@rent_comps",
-        "@full_building_comps", "@unit_mix" ] }, () => {
+    "@full_building_comps", "@unit_mix" ] }, () => {
 
     before("Create report, navigate to unit mix", () => {
-       createReport(testData.reportCreationData);
-       _NavigationSection.navigateToRentComps();
-       cy.stepInfo("1. Add comparable, open FullBuildingComps form, open UnitMix tab");
-       Income._Residential.RentComps.BaseActions.changeToBuildingSearch()
-           .clickAddRemoveBuildingCompByAddress(testData.compAddress)
-           .clickEditBuildingCompButtonByAddress(testData.compAddress);
-       _NavigationSection.clickYesIfExist();
-       Income._Residential.RentComps.FullBuildingComps._UnitMix.openNavigationTab();
-       cy.saveLocalStorage();
+        createReport(testData.reportCreationData);
+        _NavigationSection.navigateToRentComps();
+        cy.stepInfo("1. Add comparable, open FullBuildingComps form, open UnitMix tab");
+        Income._Residential.RentComps.BaseActions.changeToBuildingSearch()
+            .clickAddRemoveBuildingCompByAddress(testData.compAddress)
+            .clickEditBuildingCompButtonByAddress(testData.compAddress);
+        _NavigationSection.submitSaveChangesModal();
+        Income._Residential.RentComps.FullBuildingComps._UnitMix.openNavigationTab();
+        cy.saveLocalStorage();
     });
 
     beforeEach(() => {
@@ -41,7 +41,8 @@ conditionalDescribe("Base Itemized Unit Info table tests", { tags: [ "@residenti
             cy.contains("th", header).should("exist");
         });
         cy.xpath("//h6[.='Unit Mix']//following::th[.='Remove'][1]").should("exist");
-        Income._Residential.RentComps.FullBuildingComps._UnitMix.Page.isEstimatedUnitMixSFAverageCheckbox.should("exist");
+        Income._Residential.RentComps.FullBuildingComps._UnitMix.Page.isEstimatedUnitMixSFAverageCheckbox
+            .should("exist");
     });
 
     it("[QA-4178] Verify the # Residential Units text field on the Unit Mix page", () => {
@@ -74,7 +75,8 @@ conditionalDescribe("Base Itemized Unit Info table tests", { tags: [ "@residenti
     });
 
     it("[QA-4194] Verify the # column on the Unit Mix page", () => {
-        Income._Residential.RentComps.FullBuildingComps._UnitMix.enterResidentialUnitsNumber(testData.unitsQuantity4194);
+        Income._Residential.RentComps.FullBuildingComps._UnitMix
+            .enterResidentialUnitsNumber(testData.unitsQuantity4194);
         Income._Residential.RentComps.FullBuildingComps._UnitMix.Page.numberCells.each((cell, index) => {
             Income._Residential.RentComps.FullBuildingComps._UnitMix.verifyNumberCellValue(index + 1, index);
         });

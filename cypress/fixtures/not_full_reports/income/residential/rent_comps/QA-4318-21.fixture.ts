@@ -4,7 +4,8 @@ const formDataFixture = () => {
     return {
         address: "230 Park Avenue, New York, New York",
         unitNumber: "someTest196Numb",
-        unitTypes: [ "Typical", "Duplex", "Triplex", "Simplex", "Penthouse", "Loft", "Garden Style", "Basement", "Garage", "Townhome" ],
+        unitTypes: [ "Typical", "Duplex", "Triplex", "Simplex", "Penthouse", 
+            "Loft", "Garden Style", "Basement", "Garage", "Townhome" ],
         monthly: 30000,
         squareFootage: 9500,
         infoSources: [ "bowerySubject", "externalDatabase", "other" ],

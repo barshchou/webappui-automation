@@ -8,7 +8,7 @@ const expensesCellNames = {
     payrollBenefits: "payrollAndBenefits",
     generalAndAdministrative: "generalAndAdministrative",
     legalAndProfessional: "legalAndProfessionalFees",
-    miscelaneous: "miscellaneous",
+    miscellaneous: "miscellaneous",
     managementFees: "management",
     replacementsAndReserves: "reserves",
     total: "total",

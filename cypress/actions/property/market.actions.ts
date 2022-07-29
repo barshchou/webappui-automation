@@ -3,8 +3,10 @@ import { getQuarter, getYearFromDate, isCorrectQuarter } from "../../../utils/da
 import { BoweryReports } from "../../types/boweryReports.type";
 import { isStringContainSubstring } from "../../../utils/string.utils";
 import BaseActionsExt from "../base/base.actions.ext";
+import { _map } from "../../support/commands";
+import mapKeysUtils from "../../utils/mapKeys.utils";
 
-class MarketActions extends BaseActionsExt<typeof marketPage>{
+class MarketActions extends BaseActionsExt<typeof marketPage> {
     readonly errorRetrieveFileMessage = "Cannot retrieve file. Contact Research team.";
 
     readonly finalDocumentNamePart = "FINAL";
@@ -46,7 +48,13 @@ class MarketActions extends BaseActionsExt<typeof marketPage>{
         return this;
     }
 
-    verifyNeighborhoodYear(yearToBe: string | number): MarketActions {
+    enterNeighborhoodYear(yearToBe: number): MarketActions {
+        marketPage.neighborhoodYear.type(`${yearToBe}`);
+        this.verifyNeighborhoodYear(yearToBe);
+        return this;
+    }
+
+    verifyNeighborhoodYear(yearToBe: number): MarketActions {
         marketPage.neighborhoodYear.should("have.value", yearToBe);
         return this;
     }
@@ -68,7 +76,13 @@ class MarketActions extends BaseActionsExt<typeof marketPage>{
         return this;
     }
 
-    verifyMarketYear(yearToBe: string): MarketActions {
+    enterMarketYear(yearToBe: number): MarketActions {
+        marketPage.marketYear.type(`${yearToBe}`);
+        this.verifyMarketYear(yearToBe);
+        return this;
+    }
+
+    verifyMarketYear(yearToBe: number): MarketActions {
         marketPage.marketYear.should("have.value", yearToBe);
         return this;
     }
@@ -79,13 +93,14 @@ class MarketActions extends BaseActionsExt<typeof marketPage>{
         return this;
     }
 
-    fillMarketResearch(marketResearch: BoweryReports.MarketResearch, marketAnalysisUse: BoweryReports.MarketAnalysisUses,
-                       isEnterState = true, isEnterQuarter = false): MarketActions {
+    fillMarketResearch(marketResearch: BoweryReports.MarketResearch, 
+        marketAnalysisUse: BoweryReports.MarketAnalysisUses,
+        isEnterState = true, isEnterQuarter = false): MarketActions {
         this.enterNeighborhood(marketResearch.neighborhoodValue);
-        if (isEnterState) this.enterMarketState(marketResearch.state);
+        if (isEnterState) { this.enterMarketState(marketResearch.state); }
         this.verifyMarketState(marketResearch.state)
             .enterArea(marketResearch.marketArea)
-            .verifyNeighborhoodYear(getYearFromDate(marketResearch.marketDate))
+            .verifyNeighborhoodYear(parseInt(getYearFromDate(marketResearch.marketDate)))
             .enterMarket(marketResearch.macroMarket, marketAnalysisUse)
             .enterSubmarket(marketResearch.submarket, marketAnalysisUse);
         if (isEnterQuarter)  {
@@ -94,7 +109,7 @@ class MarketActions extends BaseActionsExt<typeof marketPage>{
         } else {
             this.verifyMarketQuarter(getQuarter(marketResearch.dateOfValuation));
         }
-        this.verifyMarketYear(getYearFromDate(marketResearch.dateOfValuation));
+        this.verifyMarketYear(parseInt(getYearFromDate(marketResearch.dateOfValuation)));
         return this;
     }
 
@@ -149,26 +164,28 @@ class MarketActions extends BaseActionsExt<typeof marketPage>{
     }
 
     verifyMarketAnalysisUseCheckboxState(use: BoweryReports.MarketAnalysisUses, isCheck = true): MarketActions {
-        marketPage.getMarketAnalysisUseCheckbox(use).should("have.value", `${isCheck}`);
+        const matcher = isCheck ? "be.checked" : "not.be.checked";
+        marketPage.getMarketAnalysisUseCheckbox(use).should(matcher);
         return this;
     }
 
-    checkUncheckMarketAnalysisUseCheckbox(use: BoweryReports.MarketAnalysisUses): MarketActions {
-        marketPage.getMarketAnalysisUseCheckbox(use).then(checkbox => {
-            if (checkbox.attr("value") === "false" || checkbox.attr("value") === "") {
-                cy.wrap(checkbox).check();
-                this.verifyMarketAnalysisUseCheckboxState(use, true);
-            } else {
-                cy.wrap(checkbox).uncheck();
-                this.verifyMarketAnalysisUseCheckboxState(use, false);
-            }
-        });
+    checkUncheckMarketAnalysisUseCheckbox(use: BoweryReports.MarketAnalysisUses, isCheck = true): MarketActions {
+        this.verifyMarketAnalysisUseCheckboxState(use, !isCheck);
+        marketPage.getMarketAnalysisUseCheckbox(use).click();
+        this.verifyMarketAnalysisUseCheckboxState(use, isCheck);
         return this;
     }
 
     verifyAreaEconomicAnalysisHasFile(textToContain = this.finalDocumentNamePart): MarketActions {
         marketPage.areaEconomicAnalysisFile.invoke("attr", "value").then(fileName => {
             expect(isStringContainSubstring(fileName, textToContain)).to.be.true;
+        });
+        return this;
+    }
+
+    setAreaEconomicAnalysisFileValueToMap(): MarketActions {
+        marketPage.areaEconomicAnalysisFile.invoke("attr", "value").then(fileName => {
+            _map.set(mapKeysUtils.areaEconomicAnalysisFile, fileName);
         });
         return this;
     }
@@ -180,22 +197,98 @@ class MarketActions extends BaseActionsExt<typeof marketPage>{
         return this;
     }
 
-    verifyMarketByAnalysisUseHasFile(use: BoweryReports.MarketAnalysisUses, textToContain = this.finalDocumentNamePart): MarketActions {
+    setNeighborhoodDemographicFileValueToMap(): MarketActions {
+        marketPage.neighborhoodDemographicFile.invoke("attr", "value").then(fileName => {
+            _map.set(mapKeysUtils.neighborhoodDemographicFile, fileName);
+        });
+        return this;
+    }
+
+    verifyMarketByAnalysisUseHasFile(use: BoweryReports.MarketAnalysisUses, 
+        textToContain = this.finalDocumentNamePart): MarketActions {
         marketPage.getMarketFileByAnalysisUse(use).invoke("attr", "value").then(fileName => {
             expect(isStringContainSubstring(fileName, textToContain)).to.be.true;
         });
         return this;
     }
 
-    verifySubmarketByAnalysisUseHasFile(use: BoweryReports.MarketAnalysisUses, textToContain = this.finalDocumentNamePart): MarketActions {
+    setMarketByAnalysisUseFileValueToMap(use: BoweryReports.MarketAnalysisUses): MarketActions {
+        marketPage.getMarketFileByAnalysisUse(use).invoke("attr", "value").then(fileName => {
+            _map.set(`${use}_${mapKeysUtils.marketAnalysisUseFile}`, fileName);
+        });
+        return this;
+    }
+
+    verifySubmarketByAnalysisUseHasFile(use: BoweryReports.MarketAnalysisUses, 
+        textToContain = this.finalDocumentNamePart): MarketActions {
         marketPage.getSubmarketFileByAnalysisUse(use).invoke("attr", "value").then(fileName => {
             expect(isStringContainSubstring(fileName, textToContain)).to.be.true;
         });
         return this;
     }
 
+    setSubmarketByAnalysisUseFileValueToMap(use: BoweryReports.MarketAnalysisUses): MarketActions {
+        marketPage.getSubmarketFileByAnalysisUse(use).invoke("attr", "value").then(fileName => {
+            _map.set(`${use}_${mapKeysUtils.submarketAnalysisUseFile}`, fileName);
+        });
+        return this;
+    }
+
+    setFilesValuesToMap(use: BoweryReports.MarketAnalysisUses): MarketActions {
+        this.setAreaEconomicAnalysisFileValueToMap()
+            .setNeighborhoodDemographicFileValueToMap()
+            .setMarketByAnalysisUseFileValueToMap(use)
+            .setSubmarketByAnalysisUseFileValueToMap(use);
+        return this;
+    }
+
     verifyAreaEconomicAnalysisInputErrorRetrieving(): MarketActions {
         marketPage.areaEconomicAnalysisContainer.contains(this.errorRetrieveFileMessage).should("exist");
+        return this;
+    }
+
+    verifyAnyFileInputHasFile(use: BoweryReports.MarketAnalysisUses, 
+        textToContain = this.finalDocumentNamePart): MarketActions {
+        cy.url().then(() => {
+            let isAnyHasFile = false;
+            const files: string[] = [ 
+                _map.get(mapKeysUtils.areaEconomicAnalysisFile),
+                _map.get(mapKeysUtils.neighborhoodDemographicFile),
+                _map.get(`${use}_${mapKeysUtils.marketAnalysisUseFile}`), 
+                _map.get(`${use}_${mapKeysUtils.submarketAnalysisUseFile}`) 
+            ];
+            for (let i = 0; i < files.length; i++) {
+                cy.log(`${files[i]} file value`);
+                if (files[i].includes(textToContain)) {
+                    isAnyHasFile = true;
+                    break;
+                }
+            }
+            cy.wrap(isAnyHasFile).should("be.true");
+        });
+        return this;
+    }
+
+    uploadRentStabilizationFile(fileName: string): MarketActions {
+        marketPage.uploadRentStabilizationFileButton.click();
+        marketPage.fileDropZone.attachFile(
+            `test_files/${fileName}`,
+            { subjectType: 'drag-n-drop' }
+        );
+        marketPage.getUploadFileButton().click();
+        marketPage.insertFileButton.click();
+        return this;
+    }
+
+    clickTrashCanButton(fileSelectionName: BoweryReports.FileSelection): MarketActions {
+        marketPage.getTrashCanButton(fileSelectionName).click();
+        return this;
+    }
+
+    verifyRentStabilizationFile(textToContain: string): MarketActions {
+        marketPage.rentStabilizationFile.invoke("attr", "value").then(fileName => {
+            expect(fileName).to.equal(textToContain);
+        });
         return this;
     }
 }

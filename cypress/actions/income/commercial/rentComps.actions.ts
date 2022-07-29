@@ -258,38 +258,38 @@ class CommercialRentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
         return this;
     }
 
-    verifyComputedSubjectMinCell(rentPSFs: number[],
+    verifyComputedSubjectMinCell(rentPSFs: number[], 
         leaseStatuses: BoweryReports.LeaseStatus[]): CommercialRentCompsActions {
         const handledArray = CommercialRentCompsActions.handleRentPSFsArray(rentPSFs, leaseStatuses);
-        const textToBe = handledArray.length === 0
-            ? "$0"
+        const textToBe = handledArray.length === 0 
+            ? "$0" 
             : `$${Math.round(Math.min(...handledArray))}`;
         rentCompsPage.computedSubjectMinCell.should("have.text", textToBe);
         return this;
     }
 
-    verifyComputedSubjectAvgCell(rentPSFs: number[],
+    verifyComputedSubjectAvgCell(rentPSFs: number[], 
         leaseStatuses: BoweryReports.LeaseStatus[]): CommercialRentCompsActions {
         const handledArray = CommercialRentCompsActions.handleRentPSFsArray(rentPSFs, leaseStatuses);
-        const avgValue = handledArray.length === 0
-            ? 0
+        const avgValue = handledArray.length === 0 
+            ? 0 
             : handledArray.reduce((sum, current) => sum + current, 0) / handledArray.length;
         const textToBe = `$${Math.round(avgValue)}`;
         rentCompsPage.computedSubjectAvgCell.should("have.text", textToBe);
         return this;
     }
 
-    verifyComputedSubjectMaxCell(rentPSFs: number[],
+    verifyComputedSubjectMaxCell(rentPSFs: number[], 
         leaseStatuses: BoweryReports.LeaseStatus[]): CommercialRentCompsActions {
         const handledArray = CommercialRentCompsActions.handleRentPSFsArray(rentPSFs, leaseStatuses);
-        const textToBe = handledArray.length === 0
-            ? "$0"
+        const textToBe = handledArray.length === 0 
+            ? "$0" 
             : `$${Math.round(Math.max(...handledArray))}`;
         rentCompsPage.computedSubjectMaxCell.should("have.text", textToBe);
         return this;
     }
 
-    verifyComputedSubjectColumn(rentPSFs: number[],
+    verifyComputedSubjectColumn(rentPSFs: number[], 
         leaseStatuses: BoweryReports.LeaseStatus[]): CommercialRentCompsActions {
         this.verifyComputedSubjectMinCell(rentPSFs, leaseStatuses)
             .verifyComputedSubjectAvgCell(rentPSFs, leaseStatuses)
