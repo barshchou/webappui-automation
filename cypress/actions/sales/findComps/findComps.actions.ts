@@ -241,21 +241,20 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
         cy.intercept("GET", `/salesComps/eventIds/${reportID}`)
             .as(Alias.salesCompsEventIds);
         findCompsPage.reportIdInput
-            .should('exist')
-            .scrollIntoView()
-            .realClick()
-            .realClick()
+            .should('exist')       
+            .realClick({ clickCount: 50 })
+            .type("textforclear", { force: true })
+            .realClick({ clickCount: 50 })
             .focus()
-            .type("something")
-            .realClick()
-            .realClick()
-            .focus()
-            .clear()
+            .clear( { force: true })
+            .realClick({ clickCount: 50 })
             .should('be.focused')
             .realType(`${reportID}{enter}`);
         findCompsPage.reportIdInput.should("have.value", reportID);
         return this;
     }
+
+
 
     clickImportCompsFromReportButton(): FindCompsActions {
         findCompsPage.addToReportCompsButton.should("be.visible")
@@ -284,9 +283,8 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
     }
 
     clickSelectAllButton(): FindCompsActions {
-        cy.wait(1000);
-        findCompsPage.selectAllButton.should('exist');
-        cy.wait(1000);  //
+        findCompsPage.selectAllButton.should('exist').should('be.enabled');
+        findCompsPage.selectedForReportTitle.should('exist');
         findCompsPage.selectAllButton.click();
         return this;
     }

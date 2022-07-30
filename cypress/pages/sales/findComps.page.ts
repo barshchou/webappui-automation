@@ -160,6 +160,10 @@ class FindCompsPage extends BasePage {
     get reportIdInput() {
         return cy.get('input[placeholder="Find a specific Report ID"]', { includeShadowDom: true });
     }
+    
+    get selectedForReportTitle() {
+        return this.importCompModal.contains("Selected for report");
+    }
 
 }
 
