@@ -1,5 +1,5 @@
 import { createReport } from './../../../../actions/base/baseTest.actions';
-import { ReviewExport } from '../../../../actions/index';
+import { PreviewEdit, ReviewExport } from '../../../../actions/index';
 import { _NavigationSection } from '../../../../actions/base/index';
 import testData from "../../../../fixtures/not_full_reports/preview_edit/introduction/QA-4477.fixture";
 
@@ -14,9 +14,7 @@ describe("[QA-4477] Check the Definition of Market Value list",
             cy.stepInfo(`2. Verify that directly underneath the Definition of Market Value section 
                         there is static list with a proper content and this list is uneditable.`);
             testData.definitionOfMarketValueList.forEach((item, index) => {
-                cy.xpath(`//h6[.='${testData.title}']/following::li`).eq(index)
-                    .should("have.text", item)
-                    .should("have.prop", "isContentEditable", false);
+                PreviewEdit._Introduction.verifyDefinitionOfMarketValueListItem(index, item);
             });
 
             cy.stepInfo(`3. Export the report.`);
