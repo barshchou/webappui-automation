@@ -1,34 +1,36 @@
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 import { getCurrentMonthName, getYearFromDate } from "../../../../../utils/date.utils";
 import { BoweryReports } from "../../../../types/boweryReports.type";
+import enums from "../../../../enums/enums";
 
-const _actualWaterAndSewerItem = (_basis: 'sf' | 'unit' ): BoweryReports.ForecastItem => {
+
+const _actualWaterAndSewerItem = (_basis: BoweryReports.UnitSF ): BoweryReports.ForecastItem => {
     return {
-        name: "waterAndSewer",
+        name: enums.EXPENSE_CELL.waterAndSewer,
         basis: _basis,
         projection: 10000
     };
 }; 
 
-const _t12WaterAndSewerItem= (_basis: 'sf' | 'unit'): BoweryReports.ForecastItem => {
+const _t12WaterAndSewerItem = (_basis: BoweryReports.UnitSF): BoweryReports.ForecastItem => {
     return {
-        name: "waterAndSewer",
+        name: enums.EXPENSE_CELL.waterAndSewer,
         basis: _basis,
         projection: 13000
     };
 };
 
-const _historicalWaterAndSewerItem= (_basis: 'sf' | 'unit'): BoweryReports.ForecastItem => {
+const _historicalWaterAndSewerItem= (_basis: BoweryReports.UnitSF): BoweryReports.ForecastItem => {
     return {
-        name: "waterAndSewer",
+        name: enums.EXPENSE_CELL.waterAndSewer,
         basis: _basis,
         projection: 15000
     };
 };
 
-const _ownerProjectionWaterAndSewerItem = (_basis: 'sf' | 'unit'): BoweryReports.ForecastItem => {
+const _ownerProjectionWaterAndSewerItem = (_basis: BoweryReports.UnitSF): BoweryReports.ForecastItem => {
     return {
-        name: "waterAndSewer",
+        name: enums.EXPENSE_CELL.waterAndSewer,
         basis: _basis,
         projection: 17000
     };
@@ -39,12 +41,17 @@ const _buildingDescription: BoweryReports.BuildingDescription = {
     numberOfUnits: 5,
 };
 
+const basisUnit: BoweryReports.UnitSF = enums.UNIT_SF.unit;
+const basisSF: BoweryReports.UnitSF = enums.UNIT_SF.sf;
+
 export default {
     reportCreationData: ReportDataCreator.getReportData("4898_4902"),
     actualWaterAndSewerItem: _actualWaterAndSewerItem,
     t12WaterAndSewerItem: _t12WaterAndSewerItem,
     historicalWaterAndSewerItem: _historicalWaterAndSewerItem,
     ownerProjectionWaterAndSewerItem: _ownerProjectionWaterAndSewerItem,
+    basisUnit,
+    basisSF,
     buildingDescription: _buildingDescription,
     periods: [
         {

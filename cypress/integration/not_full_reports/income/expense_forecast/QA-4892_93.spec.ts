@@ -23,16 +23,18 @@ describe("Appraiser's Forecast value for Electricity is correctly converted to P
             cy.stepInfo(`1. Go to Expense Forecast and make sure that Per Unit radio button 
             is selected for Electricity card`);
             _NavigationSection.navigateToExpenseForecast();
-            Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastElectricity('unit'))
-                .verifyForecastItemBasis(testData.expenseForecastElectricity('unit'));
+            Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastElectricity(
+                testData.basisUnit))
+                .verifyForecastItemBasis(testData.expenseForecastElectricity(testData.basisUnit));
     
             cy.stepInfo(`2. Fill in Appraiser's Forecast field for Electricity card`);
-            Income._ExpenseForecastActions.enterForecastItemForecast(testData.expenseForecastElectricity('unit'));
+            Income._ExpenseForecastActions.enterForecastItemForecast(testData.expenseForecastElectricity(
+                testData.basisUnit));
 
             cy.stepInfo(`3. Verify that Per SF value below this field is calculated as: 
             Per Unit Appraiser's Forecast * # of Residential Units / GBA`);
             Income._ExpenseForecastActions
-                .verifyForecastItemBasisMoney(testData.expenseForecastElectricity('unit'), 
+                .verifyForecastItemBasisMoney(testData.expenseForecastElectricity(testData.basisUnit), 
                     testData.buildingDescription);
         });
 
@@ -41,16 +43,19 @@ describe("Appraiser's Forecast value for Electricity is correctly converted to P
             cy.stepInfo(`1. Go to Expense Forecast and make sure that Per SF radio button 
             is selected for Electricity card`);
             _NavigationSection.Actions.navigateToExpenseForecast();
-            Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastElectricity('sf'))
-                .verifyForecastItemBasis(testData.expenseForecastElectricity('sf'));
+            Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastElectricity(
+                testData.basisSF))
+                .verifyForecastItemBasis(testData.expenseForecastElectricity(testData.basisSF));
     
             cy.stepInfo(`2. Fill in Appraiser's Forecast field for Electricity card`);
-            Income._ExpenseForecastActions.enterForecastItemForecast(testData.expenseForecastElectricity('sf'));
+            Income._ExpenseForecastActions.enterForecastItemForecast(testData.expenseForecastElectricity(
+                testData.basisSF));
 
             cy.stepInfo(`3. Verify that Per Unit value below this field is calculated as: 
             PSF Appraiser's Forecast * GBA / # of Residential Units`);
             Income._ExpenseForecastActions
-                .verifyForecastItemBasisMoney(testData.expenseForecastElectricity('sf'), testData.buildingDescription);
+                .verifyForecastItemBasisMoney(testData.expenseForecastElectricity(testData.basisSF), 
+                    testData.buildingDescription);
 
             deleteReport(testData.reportCreationData.reportNumber);
         });
