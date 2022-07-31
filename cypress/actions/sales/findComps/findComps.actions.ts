@@ -408,7 +408,7 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
     }
 
     addNewCompViaReportId(reportId: string): FindCompsActions {
-        this.openjobSearchTab()
+        this.openJobSearchTab()
             .enterReportToSearchComp(reportId)
             .clickSearchButton()
             .clickSelectCompsIconOnMap()
@@ -418,9 +418,15 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
         return this;
     }
 
-    openjobSearchTab(): FindCompsActions {
+    openJobSearchTab(): FindCompsActions {
         findCompsPage.jobSearchTab.click();
         findCompsPage.reportIdInput.should('exist');
+        return this;
+    }
+
+    openCompSearchTab(): FindCompsActions {
+        findCompsPage.compSearchTab.click();
+        findCompsPage.resetAllButton.should('exist');
         return this;
     }
 }
