@@ -116,7 +116,6 @@ conditionalDescribe(`[QA-5157] [QA-5161] [Sales > Find Comps] "Date Sold" sortin
         Sales._FindComps
             .addNewCompViaReportId('61892ce7044194001c6349c9')
             .openCompSearchTab()
-            .addNewCompViaReportId('622f89ef8aa15500214328e9')
             .checkSalesCompSortedByDateSold();
 
         cy.stepInfo(`1.Verify that when "Date Sold" option in Sort dropdown 

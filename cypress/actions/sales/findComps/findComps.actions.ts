@@ -237,6 +237,8 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
         return this;
     }
 
+
+    //TODO upgrade this method, cos it cant add two imports because of scrooll.
     enterReportToSearchComp(reportID: string): FindCompsActions {
         cy.intercept("GET", `/salesComps/eventIds/${reportID}`)
             .as(Alias.salesCompsEventIds);
@@ -366,44 +368,30 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
     }
 
     /** 
-     * @describe function takes all copms and compare first and second values of column "Date Sold", 
-     * then second and third values and so on and so on (depends on amount of copms).
+     * @describe function takes all copms and create an array from values of column "Date Sold" (focusArray), 
+     * then compare this array with array, that was created and sorted (arrayForCompare). 
      */
     checkSalesCompSortedByDateSold() {
         this.Page.salesCompsDateSold.then(element => {
-            for (let i = 1; i + 1 < element.length; i++) {
-                let firstDateSoldString = element[i].textContent;
-                let secondDateSoldString = element[(i + 1)].textContent;
-                if (isDateHasCorrectFormat(secondDateSoldString, "/")) {
-                    this.compareIfSecondIsDate(firstDateSoldString, secondDateSoldString);
-                } else if (!isDateHasCorrectFormat(secondDateSoldString, "/")) {
-                    this.compareIfSecondIsNotDate(firstDateSoldString, secondDateSoldString);
+            let focusArray =  [];
+            let wordsArray = [];
+            let numberArray = [];
+            for (let i = 1; i < element.length; i++) {
+                if (isDateHasCorrectFormat(element[i].textContent, "/")) {
+                    focusArray.push(Date.parse(element[i].textContent));
+                    numberArray.push(Date.parse(element[i].textContent));
+                }  else { 
+                    focusArray.push(element[i].textContent);
+                    wordsArray.push(element[i].textContent);
                 }
-            }
+            }            
+            numberArray.sort((firstEl, secondEl) => (firstEl < secondEl) ? 1 : -1);
+            wordsArray.sort((firstEl, secondEl) => (firstEl > secondEl) ? 1 : -1);
+            let arrayForCompare = wordsArray.concat(numberArray);
+            expect(focusArray.length === arrayForCompare.length && focusArray.every((value, index) => 
+                value === arrayForCompare[index])
+            ).to.be.equal(true);
         });
-        return this;
-    }
-
-    private compareIfSecondIsDate(firstDateSoldString: string, secondDateSoldString: string) {
-        if (firstDateSoldString === 'In-Contract') {
-            expect(isDateHasCorrectFormat(secondDateSoldString, "/")).to.be.equal(true);
-        } else if (firstDateSoldString === 'Listing') {
-            expect(isDateHasCorrectFormat(secondDateSoldString, "/")).to.be.equal(true);
-        } else if (isDateHasCorrectFormat(firstDateSoldString, "/")) {
-            expect(isDateHasCorrectFormat(secondDateSoldString, "/")).to.be.equal(true);
-            let firstDateSoldNumber = (Date.parse(firstDateSoldString));
-            let secondDateSoldNumber = (Date.parse(secondDateSoldString));
-            expect(firstDateSoldNumber >= secondDateSoldNumber).to.be.true;
-        }
-        return this;
-    }
-
-    private compareIfSecondIsNotDate(firstDateSoldString: string, secondDateSoldString: string) {
-        if (firstDateSoldString === 'In-Contract') {
-            expect(secondDateSoldString).to.be.oneOf([ 'In-Contract', 'Listing' ]);
-        } else if (firstDateSoldString === 'Listing') {
-            expect(secondDateSoldString).to.be.equal('Listing');
-        }
         return this;
     }
 
