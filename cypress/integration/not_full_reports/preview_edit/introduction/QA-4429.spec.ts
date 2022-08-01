@@ -1,5 +1,5 @@
 import { loginAction } from './../../../../actions/base/baseTest.actions';
-import { _HomePage, _NavigationSection } from '../../../../actions/base/index';
+import { _HomePage, _NavigationSection } from '../../../../actions/base';
 import { createReport } from '../../../../actions/base/baseTest.actions';
 import testData from "../../../../fixtures/not_full_reports/review_edit/introduction/QA-4429.fixture";
 import { Final, PreviewEdit } from '../../../../actions';

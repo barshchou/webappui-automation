@@ -1,4 +1,4 @@
-import { _NavigationSection } from '../../../../actions/base/index';
+import { _NavigationSection } from '../../../../actions/base';
 import { createReport } from '../../../../actions/base/baseTest.actions';
 // eslint-disable-next-line max-len
 import testData from "../../../../fixtures/not_full_reports/review_edit/introduction/QA-4291_4424_27-28_32_55-56_59-60_66.fixture";

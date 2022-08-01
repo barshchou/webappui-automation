@@ -21,5 +21,5 @@ export default {
     reportOtherCreationData: reportCreationFixture(),
     typeValue: "Test values",
     title:  "Data Sources",
-    backLinkNames: "Data Sources Description Export"
+    backLinkNames: Enums.PAGES_TEXTBOX_NAMES.dataSourcesDescriptionExport
 };
