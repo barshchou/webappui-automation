@@ -2,7 +2,7 @@ import testData from "../../../../fixtures/not_full_reports/sales/value_conclusi
 import { _NavigationSection } from "../../../../actions/base";
 import { Property } from "../../../../actions";
 import { Sales } from "../../../../actions";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 
 describe("The amount column of the # of Units shows the correct number of units", 
     { tags: [ "@sales", "@value_conclusion" ] }, () => {
@@ -29,7 +29,5 @@ describe("The amount column of the # of Units shows the correct number of units"
 
             cy.stepInfo(`4. Verify that the # of Units shows the correct number of units (residential + commercial).`);
             Sales._ValueConclusion.verifyNumberOfUnitsAmount(testData.data.totalNumberOfUnitsLabel);
-
-            deleteReport(testData.reportCreationData.reportNumber);
         });
     });

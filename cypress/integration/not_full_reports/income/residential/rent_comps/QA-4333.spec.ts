@@ -1,4 +1,4 @@
-import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../../actions/base/baseTest.actions";
 import ReportDataCreator from "../../../../../fixtures/data_creator/reportData.creator";
 import NavigationSection from "../../../../../actions/base/navigationSection.actions";
 import Income from "../../../../../actions/income/income.manager";
@@ -18,6 +18,5 @@ describe(`Verify Select button for the results displayed in the Map section is t
             .verifyUnitSelected()
             .clickAllSelectComparableButtons()
             .verifyUncategorizedCompsNumberAsSelected();
-        deleteReport(reportCreationData.reportNumber);
     });
 });

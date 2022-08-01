@@ -1,5 +1,5 @@
 import testData from "../../../../fixtures/not_full_reports/property/commercial_units/QA-4569.fixture";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { Property } from "../../../../actions";
 
@@ -31,8 +31,6 @@ describe("[QA-4569] Verify the Unsaved changes modal functionality on the Commer
                 Property._CommercialUnits.verifyRadioIsChecked(item.group, item.value);
             });
 
-            deleteReport(testData.reportCreationData.reportNumber);
-
             cy.stepInfo(`4. Repeat step 1, try to proceed on any other page from the Commercial Units 
             page and verify that the Unsaved changes modal is displayed.`);
             createReport(testData.reportCreationData);
@@ -53,7 +51,5 @@ describe("[QA-4569] Verify the Unsaved changes modal functionality on the Commer
             testData.arrayValuesAndGroup.forEach(item => {
                 Property._CommercialUnits.verifyRadioIsNotChecked(item.group, item.value);
             });
-        
-            deleteReport(testData.reportCreationData.reportNumber);
         });
     });

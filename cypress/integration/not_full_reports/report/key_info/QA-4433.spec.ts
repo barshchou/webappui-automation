@@ -1,5 +1,5 @@
 import testData from "../../../../fixtures/not_full_reports/report/key_info/QA-4433.fixture";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { Report } from "../../../../actions";
 import launchDarklyApi from "../../../../api/launchDarkly.api";
@@ -21,8 +21,6 @@ conditionalDescribe("[QA-4433] Launch Darkly for Inspection Date & Date of Valua
             is off, the Inspection Date & Date of Valuation fields are empty.`);
             _NavigationSection.navigateToReportInformation();
             Report._KeyInfo.Page.getDateInputByQA(testData.nameInputByQA).should("have.value", "");
-
-            deleteReport(testData.reportCreationData.reportNumber);
         });
 
         after("Delete user with feature flag", () => {

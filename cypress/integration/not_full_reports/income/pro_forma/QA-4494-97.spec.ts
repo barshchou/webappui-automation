@@ -1,5 +1,5 @@
 import testData from "../../../../fixtures/not_full_reports/income/pro_forma/QA-4494-97.fixture";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 import { Income, Property } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
 import Enums from "../../../../enums/income/incomeTypesCellNames.enum";
@@ -62,7 +62,5 @@ describe("[QA-4494] [QA-4495] [QA-4496] [QA-4497] [Income -> Pro Forma] Potentia
             Income._ProFormaActions.verifyCategoryPerUnitTotal(
                 `$${numberWithCommas(testData.totalPerUnit)}`,
                 proFormaTypes.potentialResIncome);
-
-            deleteReport(testData.reportCreationData.reportNumber);
         });
     });

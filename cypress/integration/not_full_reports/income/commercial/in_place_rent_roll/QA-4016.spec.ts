@@ -1,6 +1,6 @@
 import testData from "../../../../../fixtures/not_full_reports/income/commercial/in_place_rent_roll/QA-4016.fixture";
 import { _NavigationSection } from "../../../../../actions/base";
-import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../../actions/base/baseTest.actions";
 import { ReviewExport, Income, Property } from "../../../../../actions";
 
 describe("Verify that changes are displayed for Annual and Monthly Rent columns, # column in the export.", 
@@ -33,12 +33,9 @@ describe("Verify that changes are displayed for Annual and Monthly Rent columns,
             _NavigationSection.Actions.openReviewAndExport();
             ReviewExport.generateDocxReport().waitForReportGenerated()
                 .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
-
-            deleteReport(testData.reportCreationData.reportNumber);
         });
 
         it("Check export", () => {
-            Cypress.config().baseUrl = null;
             cy.task("getFilePath",
                 { _reportName: testData.reportCreationData.reportNumber, _docxHtml: "html" }
             ).then(file => {

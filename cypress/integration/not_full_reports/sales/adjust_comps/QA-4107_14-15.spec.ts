@@ -1,7 +1,7 @@
 import testData from "../../../../fixtures/not_full_reports/sales/adjust_comps/QA-4107_14-15.fixture";
 import { Sales } from "../../../../actions";
 import { _NavigationSection as NavigationSection } from "../../../../actions/base";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 
 describe("Adjusted Price per Residential Unit in Sales Adjustment Grid is calculated with correct formula", 
     { tags: [ "@adjust_comps", "@sales" ] }, () => {
@@ -27,8 +27,6 @@ describe("Adjusted Price per Residential Unit in Sales Adjustment Grid is calcul
                 .enterOtherAdjustmentByColumn(testData.comparable.otherAdjustment)
                 .enterPropertyRightsByColumn(testData.comparable.propertyRights)
                 .verifyAdjustedPriceByColumn();
-
-            deleteReport(testData.reportMixedCreationData.reportNumber);
         });
 
         it("[QA-4114]", () => {
@@ -52,8 +50,6 @@ describe("Adjusted Price per Residential Unit in Sales Adjustment Grid is calcul
                 .enterOtherAdjustmentByColumn(testData.comparable.otherAdjustment)
                 .enterPropertyRightsByColumn(testData.comparable.propertyRights)
                 .verifyAdjustedPriceByColumn();
-
-            deleteReport(testData.reportCreationData.reportNumber);
         });
 
         it("[QA-4115]", () => {
@@ -77,7 +73,5 @@ describe("Adjusted Price per Residential Unit in Sales Adjustment Grid is calcul
                 .enterOtherAdjustmentByColumn(testData.comparable.otherAdjustment)
                 .enterPropertyRightsByColumn(testData.comparable.propertyRights)
                 .verifyAdjustedPriceByColumn();
-
-            deleteReport(testData.reportCreationData.reportNumber);
         });
     });

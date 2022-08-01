@@ -1,5 +1,5 @@
 import testData from "../../../../fixtures/not_full_reports/income/expense_forecast/QA-4932.fixture";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Income from "../../../../actions/income/income.manager";
 
@@ -45,7 +45,5 @@ describe("Comparable Min, Max, Avg values for Repairs & Maintenance Per Unit are
             Income.ExpenseForecast.Actions.matchElementSnapshot(
                 Income.ExpenseForecast.Page.repairsAndMaintenanceCard, testData.repairsCardSnapshotName, 
                 { padding: [ 0, 100 ] });
-
-            deleteReport(testData.reportCreationData.reportNumber);
         });
     });

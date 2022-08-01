@@ -1,5 +1,5 @@
 import testData from "../../../../fixtures/not_full_reports/report/key_info/QA-4364.fixture";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { Report } from "../../../../actions";
 
@@ -16,7 +16,5 @@ describe("[QA-4364] Pre-fill Inspection Date from Salesforce - deletion of the D
             cy.stepInfo("2. Go to Report → Key Info → Engagement tab and delete the Date of Valuation");
             _NavigationSection.navigateToReportInformation();
             Report._KeyInfo.Page.getDateInputByQA(testData.nameInputByQA).clear().should("be.empty");
-
-            deleteReport(testData.reportCreationData.reportNumber);
         });
     });

@@ -2,7 +2,7 @@ import tesData from "../../../../../fixtures/not_full_reports/income/residential
 import NavigationSection from "../../../../../actions/base/navigationSection.actions";
 import Income from "../../../../../actions/income/income.manager";
 import Property from "../../../../../actions/property/property.manager";
-import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../../actions/base/baseTest.actions";
 
 describe("Verify the display of the Unit grid with the added comparable unit on the '$ Rent Comps' page", 
     { tags:[ "@income", "@residential", "@rent_comps" ] }, () => {
@@ -29,7 +29,6 @@ describe("Verify the display of the Unit grid with the added comparable unit on 
                 .verifyUncategorizedSubjectMaxExist()
                 .verifyUncategorizedSubjectColumnText(tesData.uncategorizedData.subjectColumnText)
                 .verifyUncategorizedSquareFootageCells(0, tesData.uncategorizedData.compData);
-            deleteReport(tesData.reportCreationData.reportNumber);
         });
 
         it("Developers forecast test", () => {
@@ -39,7 +38,6 @@ describe("Verify the display of the Unit grid with the added comparable unit on 
             Income.Residential.RentComps.BaseActions.verifyUnitSelected()
                 .selectComparableByAddress(tesData.uncategorizedData.compData.address)
                 .verifyUncategorizedSubjectDevForecast(tesData.uncategorizedData.devForecastText);
-            deleteReport(tesData.reportCreationData.reportNumber);
         });
 
         it("Bathrooms column test", () => {
@@ -49,7 +47,6 @@ describe("Verify the display of the Unit grid with the added comparable unit on 
             Income.Residential.RentComps.BaseActions.verifyUnitSelected()
                 .selectComparableByAddress(tesData.uncategorizedData.compData.address)
                 .verifyUncategorizedBathroomsRowCell(0, tesData.uncategorizedData.compData.bathrooms);
-            deleteReport(tesData.reportCreationData.reportNumber);
         });
 
         it("Bedrooms category, subject market rate test", () => {
@@ -69,6 +66,5 @@ describe("Verify the display of the Unit grid with the added comparable unit on 
                 .verifyBedroomSubjectColumnText(tesData.bedroomCategory.bedroomsNumber, 
                     tesData.bedroomCategory.subjectColumnText)
                 .verifyComparableBedroomTableByNumber(0, tesData.bedroomCategory.compData);
-            deleteReport(tesData.reportCreationData.reportNumber);
         });
     });

@@ -1,6 +1,6 @@
 import { numberWithCommas } from '../../../../../utils/numbers.utils';
 import testData from "../../../../fixtures/not_full_reports/income/pro_forma/QA-4722_23_28_29.fixture";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { Property } from '../../../../actions';
 import { Income } from "../../../../actions";
@@ -80,7 +80,5 @@ describe("Potential Real Estate Tax Reimbursement",
                     V/C Loss @ X% → Per Unit is calculated by the formula: Total / # of Residential Units`);
             Income._ProFormaActions.verifyResidentialVCLossPerUnit(
                 testData.expenseType, testData.numberOfResidentialUnits);
-
-            deleteReport(testData.reportCreationData.reportNumber);
         });
     });

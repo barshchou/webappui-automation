@@ -1,6 +1,6 @@
 // eslint-disable-next-line max-len
 import testData from "../../../../../../fixtures/not_full_reports/income/residential/rent_comps/full_building_comps/QA-4177-79_94_96_97.fixture";
-import { createReport, deleteReport } from "../../../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../../../actions/base";
 import { Income } from "../../../../../../actions";
 import { conditionalDescribe } from "../../../../../checkIsProd.utils";
@@ -90,9 +90,5 @@ conditionalDescribe("Base Itemized Unit Info table tests", { tags: [ "@residenti
         Income._Residential.RentComps.FullBuildingComps._UnitMix.enterBedroomsNumber(testData.decimalBedrooms)
             .enterBedroomsNumber(testData.stringBedrooms)
             .enterBedroomsNumber(testData.bedrooms);
-    });
-
-    after(() => {
-        deleteReport(testData.reportCreationData.reportNumber);
     });
 });

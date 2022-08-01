@@ -1,5 +1,5 @@
 import testData from "../../../../fixtures/not_full_reports/property/market/QA-4258_59.fixture";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { Property } from "../../../../actions";
 import Enums from "../../../../enums/enums";
@@ -28,7 +28,5 @@ describe("Verify area analysis pull from dropbox", { tags: [ "@property", "@mark
         Property._Market.enterMarketQuarter(testData.quarterToChange)
             .clickPullFromDropbox()
             .verifyAreaEconomicAnalysisHasFile(testData.quarterToVerify);
-
-        deleteReport(testData.reportCreationData.reportNumber);
     });
 });

@@ -1,6 +1,6 @@
 import testData from 
     "../../../../../../fixtures/not_full_reports/income/residential/rent_comps/full_building_comps/QA-4375_76.fixture";
-import { createReport, deleteReport } from "../../../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../../../actions/base";
 import { Income } from "../../../../../../actions";
 import { _IncomeTitles } from "../../../../../../enums/pages_titles";
@@ -34,9 +34,5 @@ conditionalDescribe("Comp summary tests", { tags: [ "@residential", "@rent_comps
         Income._Residential.RentComps.FullBuildingComps._CompSummary.clickUnitMixButton();
         Income._Residential.RentComps.FullBuildingComps._UnitMix.Page.pageTitle.should("exist")
             .and("have.text", _IncomeTitles._Residential.UNIT_MIX);
-    });
-
-    after(() => {
-        deleteReport(testData.reportCreationData.reportNumber);
     });
 });

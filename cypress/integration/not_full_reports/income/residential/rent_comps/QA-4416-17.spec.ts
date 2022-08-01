@@ -1,4 +1,4 @@
-import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../../actions/base";
 import { Income } from "../../../../../actions";
 import testData from "../../../../../fixtures/not_full_reports/income/residential/rent_comps/QA-4416-17.fixture";
@@ -62,9 +62,5 @@ describe(`[Income - Residential - Rent Comps] Verify tables with the unit
         testData.showDetailsColumnHeaders.forEach((headerName) => {
             Income._Residential.RentComps.BaseActions.verifyShowDetailsHeader(headerName);
         });
-    });
-
-    after("Delete report after test suite", () => {
-        deleteReport(testData.reportCreationData.reportNumber);
     });
 });

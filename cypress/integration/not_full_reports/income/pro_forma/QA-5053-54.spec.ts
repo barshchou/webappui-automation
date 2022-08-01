@@ -1,14 +1,17 @@
 import testData from "../../../../fixtures/not_full_reports/income/pro_forma/QA-5053-54.fixture";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 import { Income, Property } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
 import enums from "../../../../enums/enums";
 import { numberWithCommas } from "../../../../../utils/numbers.utils";
+import launchDarklyApi from "../../../../api/launchDarkly.api";
 
 describe("Pro Forma -> Expenses", 
-    { tags:[ "@income", "@pro_forma" ] }, () => {
+    { tags:[ "@income", "@pro_forma", "@feature_flag" ] }, () => {
 
         before("Login, create report", () => {
+            launchDarklyApi.setFeatureFlagForUser(testData.featureFlagKey, testData.onFeatureFlag);
+
             cy.stepInfo(`1. Create new report or open the report which is already created. 
                     Make sure that there is at least three commercial units.`);
             createReport(testData.reportCreationData);
@@ -75,7 +78,9 @@ describe("Pro Forma -> Expenses",
             Income._ProFormaActions.verifyCustomCategoryName(testData.customCategoryFirstCapital.name);
             Income._ProFormaActions.verifyCustomCategoryName(testData.customCategoryAllCapitals.name);
             Income._ProFormaActions.verifyCustomCategoryName(testData.customCategoryMix.name);
+        });
 
-            deleteReport(testData.reportCreationData.reportNumber);
+        after(() => {
+            launchDarklyApi.removeUserTarget(testData.featureFlagKey);
         });
     });

@@ -1,5 +1,5 @@
 import { _NavigationSection, _HomePage } from '../../../../actions/base';
-import { createReport, deleteReport } from '../../../../actions/base/baseTest.actions';
+import { createReport } from '../../../../actions/base/baseTest.actions';
 import { ReviewExport } from '../../../../actions';
 import testData from "../../../../fixtures/not_full_reports/profile_organizations/organizations/QA-5359-62.fixture";
 
@@ -24,8 +24,6 @@ describe("Verify users roles permissions to change report status",
             _NavigationSection.returnToHomePage();
             _HomePage.filterReportsByReportNumber(testData.reportCreationData.reportNumber)
                 .verifyReportStatus(testData.reviewStatus, testData.reportCreationData.reportNumber);
-        
-            deleteReport(testData.reportCreationData.reportNumber);
         });
 
         it('[QA-5360] Verify that Lead Appraiser is able to change a report status', () => {
@@ -43,8 +41,6 @@ describe("Verify users roles permissions to change report status",
             _NavigationSection.returnToHomePage();
             _HomePage.filterReportsByReportNumber(testData.reportCreationData.reportNumber)
                 .verifyReportStatus(testData.reviewStatus, testData.reportCreationData.reportNumber);
-        
-            deleteReport(testData.reportCreationData.reportNumber);
         });
 
         it('[QA-5361] Verify that Appraiser is able to change a report status', () => {
@@ -62,8 +58,6 @@ describe("Verify users roles permissions to change report status",
             _NavigationSection.returnToHomePage();
             _HomePage.filterReportsByReportNumber(testData.reportCreationData.reportNumber)
                 .verifyReportStatus(testData.reviewStatus, testData.reportCreationData.reportNumber);
-        
-            deleteReport(testData.reportCreationData.reportNumber);
         });
 
         it('[QA-5362] Verify that Inspector is NOT able to change a report status', () => {
@@ -73,8 +67,5 @@ describe("Verify users roles permissions to change report status",
 
             cy.stepInfo('2. On a Review & Export page verify there is no change report status buttons');
             ReviewExport.Page.reportStatus.should('not.exist');
-
-            // TODO: [QA-6361] Inspector couldn't delete report in after hook
-            deleteReport(testData.reportCreationData.reportNumber);
         });
     });
