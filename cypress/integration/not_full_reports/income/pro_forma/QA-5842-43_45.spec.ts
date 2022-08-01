@@ -1,6 +1,6 @@
 import { numberWithCommas } from '../../../../../utils/numbers.utils';
 import testData from "../../../../fixtures/not_full_reports/income/pro_forma/QA-5842-43_45.fixture";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { Income, Property } from "../../../../actions";
 import proFormaTypes from "../../../../enums/proFormaTypes.enum";
@@ -61,7 +61,5 @@ describe("Pro Forma Page validation Operating Expenses -> Miscellaneous",
             Income._ProFormaActions.verifyCategoryPSFTotal(
                 `$${numberWithCommas(testData.miscellaneousUnitPerSf.toFixed(2))}`, 
                 proFormaTypes.miscellaneous);
-
-            deleteReport(testData.reportCreationData.reportNumber);
         });
     });

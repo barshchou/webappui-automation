@@ -1,6 +1,6 @@
 import testData from "../../../../fixtures/not_full_reports/property/commercial_units/QA-4543-47.fixture";
 import { Property } from "../../../../actions";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 
 describe(`[QA-4543][QA-4544][QA-4545][QA-4546][QA-4547] 
@@ -79,9 +79,5 @@ Verify the buttons functionality on Property > Commercial Units page.`,
             .clickYesRevertButton()
             .verifyCommentaryFullText(testData.defaultText)
             .clickCancelDiscussionEditButton();         
-    });
-
-    after('Delete report', () => {
-        deleteReport(testData.reportCreationData.reportNumber);
     });
 });

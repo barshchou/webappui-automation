@@ -2,7 +2,7 @@ import testData from "../../../../../fixtures/not_full_reports/income/commercial
 import NavigationSection from "../../../../../actions/base/navigationSection.actions";
 import Income from "../../../../../actions/income/income.manager";
 import Final from "../../../../../actions/final/final.manager";
-import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../../actions/base/baseTest.actions";
 
 describe("Verify the Inspected checkbox functionality", 
     { tags:[ "@income", "@commercial", "@in_place_rent_roll" ] }, () => {
@@ -20,6 +20,5 @@ describe("Verify the Inspected checkbox functionality",
             Income.Commercial.StabilizedRentRoll.verifyIsInspectedChecked();
             NavigationSection.navigateToUnitInspection();
             Final.UnitInspection.verifyNumberOfInspectedUnitsCommentary();
-            deleteReport(testData.reportCreationData.reportNumber);
         });
     });

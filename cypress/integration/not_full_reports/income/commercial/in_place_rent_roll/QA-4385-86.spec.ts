@@ -1,6 +1,6 @@
 import testData from "../../../../../fixtures/not_full_reports/income/commercial/in_place_rent_roll/QA-4385-86.fixture";
 import { getTodayDateString } from "../../../../../../utils/date.utils";
-import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../../actions/base";
 import { Income } from "../../../../../actions";
 import { BoweryReports } from "../../../../../types/boweryReports.type";
@@ -25,7 +25,6 @@ describe("Verify the Dates columns in the grid",
                     .enterLeaseDateByRowNumber(cellName, testData.wrongFormatLeaseDate)
                     .verifyLeaseDateByRowNumber(cellName, testData.occupiedLease, "in-place", 
                         testData.wrongFormatLeaseDate);
-                deleteReport(testData.reportCreationData.reportNumber);
             });
         });
     });

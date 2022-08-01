@@ -1,5 +1,5 @@
 import testData from "../../../../fixtures/not_full_reports/income/expense_forecast/QA-5769-70.fixture";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { Property } from "../../../../actions";
 import { Income } from "../../../../actions";
@@ -58,7 +58,5 @@ is correctly converted to Per SF/Unit value`,
                          PSF Appraiser's Forecast * selected Basis for Square Foot Analysis / # of Residential Units`);
         Income._ExpenseForecastActions.verifyForecastItemBasisMoney(
             testData.expenseForecastReplacementsReservesFixture('sf'), testData.buildingDescription);
-
-        deleteReport(testData.reportCreationData.reportNumber);
     });
 });

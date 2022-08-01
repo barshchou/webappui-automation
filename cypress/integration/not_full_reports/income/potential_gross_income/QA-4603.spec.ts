@@ -1,5 +1,5 @@
 import testData from "../../../../fixtures/not_full_reports/income/potential_gross_income/QA-4603.fixture";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Property from "../../../../actions/property/property.manager";
 import Income from "../../../../actions/income/income.manager";
@@ -30,6 +30,5 @@ describe("Commercial V/C Loss Discussion Generated Commentary",
                 .enterSubjectAreaCommercialVacancy(testData.vacancyRate, testData.useValue)
                 .verifyCommercialVCLossCommentaryContain(testData.changedVCLossPercentage.toFixed(2))
                 .verifyCommercialVCLossCommentaryContain(testData.changedVacancyRate);
-            deleteReport(testData.reportCreationData.reportNumber);
         });
     });

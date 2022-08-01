@@ -1,5 +1,4 @@
-
-import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../../actions/base/baseTest.actions";
 import { Property, Income } from "../../../../../actions";
 import { _NavigationSection } from "../../../../../actions/base";
 import testData from 
@@ -87,9 +86,5 @@ Verify Gross and Annual values for added Utilities reimbursements`,
                     testData.commercialUnits.commercialUnitsNumber,
                     index);
         });
-    });
-    
-    after('Delete report', () => {
-        deleteReport(testData.reportCreationData.reportNumber);
     });
 });

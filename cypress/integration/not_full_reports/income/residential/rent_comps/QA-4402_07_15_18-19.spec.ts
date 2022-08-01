@@ -1,4 +1,4 @@
-import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../../actions/base";
 import { Income } from "../../../../../actions";
 import testData from 
@@ -288,9 +288,5 @@ describe(`[Income -> Residential -> Rent Comps -> Map] Saved filter values after
             Income._Residential.RentComps.BaseActions
                 .clickResetFiltersButton()
                 .clickSaveButton();
-        });
-
-        after("Delete report after test suite", () => {
-            deleteReport(testData.reportCreationData.reportNumber);
         });
     });

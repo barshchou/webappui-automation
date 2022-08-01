@@ -1,9 +1,7 @@
-import { loginAction } from './../../actions/base/baseTest.actions';
+import { loginAction } from '../../actions/base/baseTest.actions';
 import { Base, ReviewExport } from "../../actions";
 import testData from "../../fixtures/smoke/generateDownloadExistReport.fixture";
 import { createReport, deleteReport } from "../../actions/base/baseTest.actions";
-
-const _origBaseUrl = Cypress.config().baseUrl;
 
 describe("Open any existing report, generate report and download it", { tags: [ "@smoke" ] }, () => {
     it("Download, generate report", () => {
@@ -20,8 +18,7 @@ describe("Open any existing report, generate report and download it", { tags: [ 
             .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
     });
 
-    it("Verify exported report", () => {
-        Cypress.config().baseUrl = null;
+    it("Check export report", () => {
         cy.task("getFilePath", { _reportName: testData.reportCreationData.reportNumber, _docxHtml: "html" })
             .then(file => {
                 cy.visit(<string>file);
@@ -30,7 +27,6 @@ describe("Open any existing report, generate report and download it", { tags: [ 
     });
 
     it("Create new report for next tests", () => {
-        Cypress.config().baseUrl = _origBaseUrl;
         createReport(testData.reportCreationData);
         /*
          * ernst: remove second call after cypress 10 migration

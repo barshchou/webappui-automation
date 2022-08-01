@@ -1,5 +1,5 @@
 import testData from "../../../../fixtures/not_full_reports/income/expense_forecast/QA-4913_14.fixture";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { Property } from "../../../../actions";
 import { Income } from "../../../../actions";
@@ -15,6 +15,7 @@ describe("Appraiser's Forecast value for Water & Sewer is correctly converted to
                 .clickSaveButton();
             cy.saveLocalStorage();
         });
+
         beforeEach(() => {
             cy.restoreLocalStorage();
         });
@@ -34,7 +35,7 @@ describe("Appraiser's Forecast value for Water & Sewer is correctly converted to
             cy.stepInfo(`3. Verify that Per SF value below this field is calculated as: 
             Per Unit Appraiser's Forecast * # of Residential Units / GBA`);
             Income._ExpenseForecastActions
-                .verifyForecastItemBasisMoney(testData.expenseForecastWaterAndSewer(testData.basisUnit), 
+                .verifyForecastItemBasisMoney(testData.expenseForecastWaterAndSewer(testData.basisUnit),
                     testData.buildingDescription);
         });
 
@@ -53,9 +54,7 @@ describe("Appraiser's Forecast value for Water & Sewer is correctly converted to
             cy.stepInfo(`3. Verify that Per Unit value below this field is calculated as: 
             PSF Appraiser's Forecast * GBA / # of Residential Units`);
             Income._ExpenseForecastActions
-                .verifyForecastItemBasisMoney(testData.expenseForecastWaterAndSewer(testData.basisSF), 
+                .verifyForecastItemBasisMoney(testData.expenseForecastWaterAndSewer(testData.basisSF),
                     testData.buildingDescription);
-
-            deleteReport(testData.reportCreationData.reportNumber);
         });
     });

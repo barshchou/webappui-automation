@@ -1,5 +1,5 @@
 import testData from "../../../../../fixtures/not_full_reports/income/residential/in_place_rent_roll/QA-4237.fixture";
-import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../../actions/base/navigationSection.actions";
 import Property from "../../../../../actions/property/property.manager";
 import Income from "../../../../../actions/income/income.manager";
@@ -23,6 +23,5 @@ describe("Verify the Outdoor Space column in the grid",
             });
             RentRollPage.outdoorSpaceCells.eq(0).trigger("keydown", { keyCode: 46 })
                 .should("have.text", "▼");
-            deleteReport(testData.reportCreationData.reportNumber);
         });
     });

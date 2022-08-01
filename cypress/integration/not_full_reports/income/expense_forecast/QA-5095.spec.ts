@@ -2,13 +2,11 @@ import testData, { reportCreationFixture } from
     "../../../../fixtures/not_full_reports/income/expense_forecast/QA-5095.fixture";
 import { _NavigationSection } from "../../../../actions/base";
 import { ReviewExport, Income } from "../../../../actions";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 import { numberWithCommas } from "../../../../../utils/numbers.utils";
 
 describe(`[QA-5095] Selected expenses forecast is exported to Estimated Operating Expense section`,
     { tags:[ "@income", "@expense_forecast", "@check_export" ] }, () => {
-
-        const url = `${Cypress.config().baseUrl}`;
 
         it("Verify for each existing expense forecast and for Per SF as unit of measure", () => {
             createReport(reportCreationFixture("Per SF"));
@@ -30,12 +28,9 @@ describe(`[QA-5095] Selected expenses forecast is exported to Estimated Operatin
             _NavigationSection.openReviewAndExport();
             ReviewExport.generateDocxReport().waitForReportGenerated()
                 .downloadAndConvertDocxReport(reportCreationFixture("Per SF").reportNumber);
-
-            deleteReport(reportCreationFixture("Per SF").reportNumber);
         });
 
         it("Check export", () => {
-            Cypress.config().baseUrl = null;
             cy.task("getFilePath", { _reportName: reportCreationFixture("Per SF").reportNumber, _docxHtml: "html" })
                 .then(file => {
                     cy.log(<string>file);
@@ -58,7 +53,6 @@ describe(`[QA-5095] Selected expenses forecast is exported to Estimated Operatin
         });
 
         it("Verify for each existing expense forecast and for Per Unit as unit of measure", () => {
-            Cypress.config().baseUrl = url;
             createReport(reportCreationFixture("Per Unit"));
 
             cy.stepInfo("1. Go to Expense Forecast");
@@ -79,7 +73,6 @@ describe(`[QA-5095] Selected expenses forecast is exported to Estimated Operatin
             ReviewExport.generateDocxReport().waitForReportGenerated()
                 .downloadAndConvertDocxReport(reportCreationFixture("Per Unit").reportNumber);
 
-            deleteReport(reportCreationFixture("Per Unit").reportNumber);
         });
 
         it("Check export", () => {
@@ -105,7 +98,6 @@ describe(`[QA-5095] Selected expenses forecast is exported to Estimated Operatin
         });
 
         it("Verify for each existing expense forecast and for Per Room as unit of measure", () => {
-            Cypress.config().baseUrl = url;
             createReport(reportCreationFixture("Per Room"));
 
             cy.stepInfo("1. Go to Expense Forecast");
@@ -122,12 +114,9 @@ describe(`[QA-5095] Selected expenses forecast is exported to Estimated Operatin
             _NavigationSection.openReviewAndExport();
             ReviewExport.generateDocxReport().waitForReportGenerated()
                 .downloadAndConvertDocxReport(reportCreationFixture("Per Room").reportNumber);
-
-            deleteReport(reportCreationFixture("Per Room").reportNumber);
         });
 
         it("Check export", () => {
-            Cypress.config().baseUrl = null;
             cy.task("getFilePath", { _reportName: reportCreationFixture("Per Room").reportNumber, _docxHtml: "html" })
                 .then(file => {
                     cy.log(<string>file);

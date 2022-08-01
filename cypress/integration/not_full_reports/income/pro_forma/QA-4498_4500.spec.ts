@@ -1,6 +1,6 @@
 import { numberWithCommas } from '../../../../../utils/numbers.utils';
 import testData from "../../../../fixtures/not_full_reports/income/pro_forma/QA-4498_4500.fixture";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { Property } from '../../../../actions';
 import { Income } from "../../../../actions";
@@ -70,9 +70,5 @@ describe("Potential [USE(Property -> Commercial Units] Income -> PSF / Per Unit"
             _NavigationSection.navigateToPotentialGrossIncome();
             Income._PotentialGrossIncome.verifyIncomeTypeUnified(Enums.potentialGrossIncome, 
                 `$${numberWithCommas(testData.total.toFixed(2))}`);
-        });
-
-        after("Delete report after test suite", () => {
-            deleteReport(testData.reportCreationData.reportNumber);
         });
     });

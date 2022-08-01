@@ -1,5 +1,5 @@
 import testData from "../../../../fixtures/not_full_reports/property/commercial_units/QA-4537.fixture";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { Income, Property } from "../../../../actions";
 
@@ -50,7 +50,5 @@ describe("[QA-4537] Verify the Commercial Unit # SF field functionality",
             and verify that the value in the SF column is removed too.`);
             _NavigationSection.navigateToCommercialUnits();
             Income._CommercialManager.StabilizedRentRoll.verifySFCells([]);
-
-            deleteReport(testData.reportCreationData.reportNumber);
         });
     });

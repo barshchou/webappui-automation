@@ -1,5 +1,5 @@
 import ReportDataCreator from "../../../../../fixtures/data_creator/reportData.creator";
-import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../../actions/base/navigationSection.actions";
 import Income from "../../../../../actions/income/income.manager";
 import RentCompsPage from "../../../../../pages/income/residential/rent_comps/rentComps.page";
@@ -34,6 +34,5 @@ describe(`Verify that display of results in the Map section on Rent Comps page
             cy.wrap($propertyEl).should("exist").should("contain.text", "mi. away")
                 .should("contain.text", "SF").should("contain.text", "Valued:");
         });
-        deleteReport(reportCreationData.reportNumber);
     });
 });

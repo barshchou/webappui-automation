@@ -1,5 +1,5 @@
 import testData from "../../../../fixtures/not_full_reports/income/expense_forecast/QA-4892_93.fixture";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 import { Income, Property } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
 
@@ -14,6 +14,7 @@ describe("Appraiser's Forecast value for Electricity is correctly converted to P
                 .clickSaveButton();
             cy.saveLocalStorage();
         });
+
         beforeEach(() => {
             cy.restoreLocalStorage();
         });
@@ -34,7 +35,7 @@ describe("Appraiser's Forecast value for Electricity is correctly converted to P
             cy.stepInfo(`3. Verify that Per SF value below this field is calculated as: 
             Per Unit Appraiser's Forecast * # of Residential Units / GBA`);
             Income._ExpenseForecastActions
-                .verifyForecastItemBasisMoney(testData.expenseForecastElectricity(testData.basisUnit), 
+                .verifyForecastItemBasisMoney(testData.expenseForecastElectricity(testData.basisUnit),
                     testData.buildingDescription);
         });
 
@@ -54,9 +55,7 @@ describe("Appraiser's Forecast value for Electricity is correctly converted to P
             cy.stepInfo(`3. Verify that Per Unit value below this field is calculated as: 
             PSF Appraiser's Forecast * GBA / # of Residential Units`);
             Income._ExpenseForecastActions
-                .verifyForecastItemBasisMoney(testData.expenseForecastElectricity(testData.basisSF), 
+                .verifyForecastItemBasisMoney(testData.expenseForecastElectricity(testData.basisSF),
                     testData.buildingDescription);
-
-            deleteReport(testData.reportCreationData.reportNumber);
         });
     });

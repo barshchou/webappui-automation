@@ -1,5 +1,5 @@
 import testData from "../../../../fixtures/not_full_reports/income/pro_forma/QA-5053-54.fixture";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 import { Income, Property } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
 import enums from "../../../../enums/enums";
@@ -75,7 +75,5 @@ describe("Pro Forma -> Expenses",
             Income._ProFormaActions.verifyCustomCategoryName(testData.customCategoryFirstCapital.name);
             Income._ProFormaActions.verifyCustomCategoryName(testData.customCategoryAllCapitals.name);
             Income._ProFormaActions.verifyCustomCategoryName(testData.customCategoryMix.name);
-
-            deleteReport(testData.reportCreationData.reportNumber);
         });
     });

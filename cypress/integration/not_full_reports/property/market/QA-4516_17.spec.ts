@@ -6,8 +6,6 @@ import { Property, ReviewExport } from "../../../../actions";
 describe(`[Property > Market] Summary of Rent Stabilization Laws`,
     { tags: [ "@property", "@market", "@check_export" ] }, () => {
 
-        const url = `${Cypress.config().baseUrl}`;
-
         it(`[QA-4516] Check that "Summary of Rent Stabilization Laws" 
         docs can be deleted from report`, () => {
             cy.stepInfo(`1. Create a new report on the WebApp and navigate to Property > Market.`);
@@ -30,7 +28,6 @@ describe(`[Property > Market] Summary of Rent Stabilization Laws`,
         });
 
         it("[QA-4516] Check export", () => {
-            Cypress.config().baseUrl = null;
             cy.task("getFilePath", { _reportName: testData.reportCreationData.reportNumber, _docxHtml: "html" })
                 .then(file => {
                     cy.log(<string>file);
@@ -45,8 +42,7 @@ describe(`[Property > Market] Summary of Rent Stabilization Laws`,
 
         it(`[QA-4517] Check that when "Summary of Rent Stabilization Laws" 
         is empty in the report nothing shows up in export`, () => {
-            Cypress.config().baseUrl = url;
-        
+
             cy.stepInfo(`1. Create a new report on the WebApp and navigate to Property > Market.`);
             createReport(testData.reportCreationData);
             _NavigationSection.navigateToPropertyMarket();
@@ -61,7 +57,6 @@ describe(`[Property > Market] Summary of Rent Stabilization Laws`,
         });
 
         it("[QA-4517] Check export", () => {
-            Cypress.config().baseUrl = null;
             cy.task("getFilePath", { _reportName: testData.reportCreationData.reportNumber, _docxHtml: "html" })
                 .then(file => {
                     cy.log(<string>file);

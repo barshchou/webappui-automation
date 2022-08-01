@@ -1,4 +1,4 @@
-import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../../actions/base/baseTest.actions";
 import { Property, Income, ReviewExport } from "../../../../../actions";
 import { _NavigationSection } from "../../../../../actions/base";
 import testData from "../../../../../fixtures/not_full_reports/income/commercial/reimbursement_summary/QA-5087.fixture";
@@ -50,12 +50,9 @@ describe(`Verify exported report: Change export schemas and templates to enable 
             _NavigationSection.Actions.openReviewAndExport();
             ReviewExport.generateDocxReport().waitForReportGenerated()
                 .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
-
-            deleteReport(testData.reportCreationData.reportNumber);
         });
 
         it("Check export", () => {
-            Cypress.config().baseUrl = null;
             cy.task("getFilePath",
                 { _reportName: testData.reportCreationData.reportNumber, _docxHtml: "html" })
                 .then(file => {

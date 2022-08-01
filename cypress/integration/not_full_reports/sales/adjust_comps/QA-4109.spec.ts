@@ -1,7 +1,7 @@
 import testData from "../../../../fixtures/not_full_reports/sales/adjust_comps/QA-4109.fixture";
 import Sales from "../../../../actions/sales/sales.manager";
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 import { ReviewExport } from "../../../../actions";
 
 describe("Adjusted Price per Residential Unit in Sales Adjustment Grid is calculated with correct formula", 
@@ -26,12 +26,9 @@ describe("Adjusted Price per Residential Unit in Sales Adjustment Grid is calcul
             NavigationSection.Actions.openReviewAndExport();
             ReviewExport.Actions.generateDocxReport()
                 .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
-        
-            deleteReport(testData.reportCreationData.reportNumber);
         });
 
         it("Check export", () => {
-            Cypress.config().baseUrl = null;
             cy.task("getFilePath", { _reportName: testData.reportCreationData.reportNumber, _docxHtml: "html" })
                 .then(file => {
                     cy.log(<string>file);

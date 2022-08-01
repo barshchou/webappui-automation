@@ -1,7 +1,7 @@
 import testData from "../../../../../fixtures/not_full_reports/income/commercial/in_place_rent_roll/QA-4411-12.fixture";
 import Income from "../../../../../actions/income/income.manager";
 import NavigationSection from "../../../../../actions/base/navigationSection.actions";
-import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../../actions/base/baseTest.actions";
 
 describe(`Current Commercial Income Discussion > Verify the Revert to Original button and 
     'Changes will be lost' functionality`, 
@@ -25,6 +25,5 @@ describe(`Current Commercial Income Discussion > Verify the Revert to Original b
             .clickRevertToOriginalButton()
             .clickYesRevertButton()
             .verifyCommentaryTextBoxNotHaveText(testData.editedCommentary);
-        deleteReport(testData.reportCreationData.reportNumber);
     });
 });

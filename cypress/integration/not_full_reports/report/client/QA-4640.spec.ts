@@ -1,13 +1,13 @@
 import { Property, Report, ReviewExport } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 import testData from '../../../../fixtures/not_full_reports/report/client/QA-4640.fixture';
 
 describe(`[QA-4640] Verify the "Linked" chips dropdown in the new narrative component for As Is and As Stabilized 
     report for Intended User and Identification of the Client sections`,
-{ tags:[ "@report", "@client" ] }, () => {
+{ tags:[ "@report", "@client", "@check_export" ] }, () => {
 
-    it("Test body", { tags: "@check_export" }, () => {
+    it("Test body", () => {
         cy.stepInfo(`Login, create report`);
         createReport(testData.reportCreationData);
 
@@ -40,11 +40,9 @@ describe(`[QA-4640] Verify the "Linked" chips dropdown in the new narrative comp
         _NavigationSection.openReviewAndExport();
         ReviewExport.generateDocxReport().waitForReportGenerated()
             .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
-        deleteReport(testData.reportCreationData.reportNumber);
     });
 
     it("Check export", () => {
-        Cypress.config().baseUrl = null;
         cy.task("getFilePath", { _reportName: testData.reportCreationData.reportNumber, _docxHtml: "html" })
             .then(file => {
                 cy.log(<string>file);

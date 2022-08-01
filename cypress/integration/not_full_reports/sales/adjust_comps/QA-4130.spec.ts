@@ -1,4 +1,4 @@
-import { _NavigationSection } from './../../../../actions/base';
+import { _NavigationSection } from '../../../../actions/base';
 import testData from "../../../../fixtures/not_full_reports/sales/adjust_comps/QA-4130.fixture";
 import { createReport } from "../../../../actions/base/baseTest.actions";
 import launchDarklyApi from "../../../../api/launchDarkly.api";

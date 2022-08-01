@@ -1,5 +1,5 @@
 import testData, { reportCreationData } from "../../../../fixtures/not_full_reports/sales/adjust_comps/QA-4230.fixture";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { Sales } from "../../../../actions";
 
@@ -35,8 +35,6 @@ describe("Check Condition Discussion",
                         .verifyConditionDiscussionCommentary(val);
                     cy.reload();
                 });
-            
-                deleteReport(reportCreationData(val).reportNumber);
             });
         });
     });
