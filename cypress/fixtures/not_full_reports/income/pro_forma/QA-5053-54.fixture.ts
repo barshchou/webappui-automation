@@ -120,5 +120,7 @@ export default {
     waterAndSewerTotal: _totalWater, 
     landTaxAssessedValue: _landTaxAssessedValue,
     buildingTaxAssessedValue: _buildingTaxAssessedValue,
-    customCategories: _customCategories()
+    customCategories: _customCategories(),
+    featureFlagKey: Enums.FEATURE_FLAG_KEYS.flexibleTaxes,
+    onFeatureFlag: 0,
 };
