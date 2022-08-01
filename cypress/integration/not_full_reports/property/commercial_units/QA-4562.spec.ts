@@ -6,7 +6,7 @@ import { _NavigationSection } from "../../../../actions/base";
 describe("Verify the functionality of the Floor checkbox",
     { tags: [ "@property", "@commercial_units" ] }, () => {
 
-        before("Preconditions: The mixed report is created and several commercial units are added", () => {
+        beforeEach("Preconditions: The mixed report is created and several commercial units are added", () => {
             createReport(testData.reportCreationData);
             _NavigationSection.navigateToPropertySummary();
             Property._Summary.enterNumberOfCommercialUnits(testData.numberOfCommercialUnits);

@@ -6,7 +6,7 @@ import { createReport, deleteReport } from "../../../../../actions/base/baseTest
 describe("Verify the Tenant column in the grid", 
     { tags:[ "@income", "@commercial", "@in_place_rent_roll" ] }, () => {
         
-        before("Login, create report", () => {
+        beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);
         });
 

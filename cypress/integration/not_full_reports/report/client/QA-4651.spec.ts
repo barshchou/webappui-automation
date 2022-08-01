@@ -7,7 +7,7 @@ const reportCreationData = ReportDataCreator.getReportData("4651");
 
 describe("Verify the Back button functionality on the Client page", 
     { tags: [ "@report", "@client" ] }, () => {
-        before("Login, create report", () => {
+        beforeEach("Login, create report", () => {
             createReport(reportCreationData);
         });
 

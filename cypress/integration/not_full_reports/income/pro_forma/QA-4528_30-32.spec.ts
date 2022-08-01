@@ -7,7 +7,7 @@ import Income from "../../../../actions/income/income.manager";
 describe("Residential V/C Loss @ X% row", 
     { tags:[ "@income", "@pro_forma" ] }, () => {
         
-        before("Login, create report", () => {
+        beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);
         });
 

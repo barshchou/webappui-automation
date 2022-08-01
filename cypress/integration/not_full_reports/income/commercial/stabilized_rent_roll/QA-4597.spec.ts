@@ -8,7 +8,7 @@ describe(`Verify the suggested text dropdown in the new narrative component adde
   option in the Generated Commentary on the Stabilized Rent Roll page.`, 
 { tags: [ "@income", "@commercial", "@stabilized_rent_roll" ] }, () => {
       
-    before("Login, create report", () => {
+    beforeEach("Login, create report", () => {
         cy.stepInfo(`Preconditions: The mixed report is created and several commercial units are added.`);
         createReport(testData.reportCreationData);
         _NavigationSection.navigateToPropertySummary();

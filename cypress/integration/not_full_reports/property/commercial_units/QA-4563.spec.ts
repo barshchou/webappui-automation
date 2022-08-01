@@ -6,7 +6,7 @@ import { Property } from "../../../../actions";
 describe("Verify the functionality of the Grade checkbox", 
     { tags: [ "@property", "@commercial_units" ] }, () => {
 
-        before("Login, create report", () => {
+        beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);
         });
 

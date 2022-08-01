@@ -6,12 +6,8 @@ import { createReport, deleteReport } from "../../../../actions/base/baseTest.ac
 describe(`[QA-5052] Appraiser's Forecast of Custom Expense Forecast is included 
 in Total Operating Expenses calculation`,
 { tags:[ "@fix", "@income", "@expense_forecast", "@snapshot_tests" ] }, () => {
-    before("Login, create report", () => {
+    beforeEach("Login, create report", () => {
         createReport(testData.reportCreationData);
-        cy.saveLocalStorage();
-    });
-    beforeEach(() => {
-        cy.restoreLocalStorage();
     });
 
     it("Test body", () => {

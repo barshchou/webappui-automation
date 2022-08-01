@@ -20,7 +20,7 @@ class FindCompsPage extends BasePage {
         return cy.contains(address, { includeShadowDom: true }).siblings("td").find("a"); 
     }
 
-    get addressCells() { return cy.get("[data-qa=address]", { includeShadowDom: true }); }
+    get addressCells() { return cy.get("[data-qa=address]", { timeout: 120000, includeShadowDom: true }); }
 
     get capRateCells() { return cy.get("td[data-qa=cap-rate]", { includeShadowDom: true }); }
 

@@ -11,7 +11,7 @@ import mapKeysUtils from "../../../../utils/mapKeys.utils";
  */
 describe.skip("Verify the Comps can be added by entering the existing Report ID in the modal", 
     { tags:[ "@fix", "@comp_plex", "@sales", "@find_comps" ] }, () => {
-        before("Login, create report", () => {
+        beforeEach("Login, create report", () => {
             createReport(fixture.reportCreationData);
         });
 

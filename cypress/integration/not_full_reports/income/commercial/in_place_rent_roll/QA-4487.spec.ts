@@ -7,7 +7,7 @@ describe(`Verify the suggested text dropdown in the new narrative component adde
                 for the 'Unchanged Renovation' option`,
 { tags:[ "@income", "@commercial", "@in_place_rent_roll" ] }, () => {
             
-    before("Login, create report", () => {
+    beforeEach("Login, create report", () => {
         createReport(testData.reportCreationData);
     });
 
