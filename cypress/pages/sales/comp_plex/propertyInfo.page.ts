@@ -19,27 +19,27 @@ export default class PropertyInformationForm {
     }
 
     get newCompContinueButton() {
-        return cy.get('[data-qa="Continue"]', { includeShadowDom: true })
+        return cy.get('[data-qa="Continue"]')
             .as(compPlex.newCompContinueButton);
     }
 
     get comparableTypeDropdown() {
-        return cy.get('[data-qa="Comparable Type"]', { includeShadowDom: true })
+        return cy.get('[data-qa="Comparable Type"]')
             .as(compPlex.comparableTypeDropdown);
     }
 
     get createCompNumberCommercialUnits() {
-        return cy.get('[data-qa="# Commercial Units"]', { includeShadowDom: true })
+        return cy.get('[data-qa="# Commercial Units"]')
             .as(compPlex.createCompNumberCommercialUnits);
     }
 
     get createCompNumberResidentialUnits() {
-        return cy.get('[data-qa="# Residential Units"]', { includeShadowDom: true })
+        return cy.get('[data-qa="# Residential Units"]')
             .as(compPlex.createCompNumberResidentialUnits);
     }
 
     get siteAreaNewComp() {
-        return cy.get('[data-qa="Site Area"]', { includeShadowDom: true })
+        return cy.get('[data-qa="Site Area"]')
             .as(compPlex.commercialAreaNewComp);
     }
 

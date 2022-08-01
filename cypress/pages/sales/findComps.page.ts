@@ -6,34 +6,34 @@ import SalesCompsDetailsForm from "./comp_plex/salesCompDetails.page";
 import SaleInformationForm from "./comp_plex/salesInfo.page";
 
 class FindCompsPage extends BasePage {
-    get createCompButton() { return cy.get("[data-qa=create-sales-comps-btn]", { includeShadowDom: true }); }
+    get createCompButton() { return cy.get("[data-qa=create-sales-comps-btn]"); }
 
     get searchCompAddressInput() {
-        return cy.get("[data-qa='google-autocomplete-search.location-input'] input", { includeShadowDom: true });
+        return cy.get("[data-qa='google-autocomplete-search.location-input'] input");
     }
 
-    get findCompField() { return cy.contains("Enter New Comparable Address", { includeShadowDom: true }); }
+    get findCompField() { return cy.contains("Enter New Comparable Address"); }
 
-    get submitButton() { return cy.get("[data-qa=submit-button]", { includeShadowDom: true }); }
+    get submitButton() { return cy.get("[data-qa=submit-button]"); }
 
     getSelectCompButtonByAddress(address) {
-        return cy.contains(address, { includeShadowDom: true }).siblings("td").find("a");
+        return cy.contains(address).siblings("td").find("a");
     }
 
-    get addressCells() { return cy.get("[data-qa=address]", { includeShadowDom: true }); }
+    get addressCells() { return cy.get("[data-qa=address]"); }
 
-    get capRateCells() { return cy.get("td[data-qa=cap-rate]", { includeShadowDom: true }); }
+    get capRateCells() { return cy.get("td[data-qa=cap-rate]"); }
 
-    get importCompsButton() { return cy.get("[data-qa=import-btn]", { includeShadowDom: true }); }
+    get importCompsButton() { return cy.get("[data-qa=import-btn]"); }
 
-    get importCompModal() { return cy.get('[class="ant-modal-content"]', { includeShadowDom: true }); }
+    get importCompModal() { return cy.get('[class="ant-modal-content"]'); }
 
-    get csvInput() { return cy.get("[data-qa=file-input]", { includeShadowDom: true }); }
+    get csvInput() { return cy.get("[data-qa=file-input]"); }
 
     getSelectCompFromMapButtonByAddress(address) {
-        return cy.get('[data-qa="sales-comp-item"]', { includeShadowDom: true })
-            .contains(`${address}`, { includeShadowDom: true }).parent().parent()
-            .find('[data-qa="sales-comp-item-add-btn"]', { includeShadowDom: true });
+        return cy.get('[data-qa="sales-comp-item"]')
+            .contains(`${address}`).parent().parent()
+            .find('[data-qa="sales-comp-item-add-btn"]');
     }
 
     /**
@@ -41,8 +41,8 @@ class FindCompsPage extends BasePage {
      * @returns List of all rendered sales comps in search list
      */
     getSelectCompFromMapButton() {
-        return cy.get('[data-qa="sales-comp-item"]', { includeShadowDom: true })
-            .find('[data-qa="sales-comp-item-add-btn"]', { includeShadowDom: true });
+        return cy.get('[data-qa="sales-comp-item"]')
+            .find('[data-qa="sales-comp-item-add-btn"]');
     }
 
     /**
@@ -66,43 +66,43 @@ class FindCompsPage extends BasePage {
             .siblings("[class*=buttonsColumn]").find("span").contains("REMOVE").parent();
     }
 
-    get reportToSearchCompInput() { return cy.get("[data-qa='Report Unique ID']", { includeShadowDom: true }); }
+    get reportToSearchCompInput() { return cy.get("[data-qa='Report Unique ID']"); }
 
     get addToReportCompsButton() {
         return this.importCompModal.contains("ADD TO REPORT");
     }
        
     get selectCompsIconOnMap() {
-        return cy.get('[data-testid="ArticleIcon"]', { includeShadowDom: true });
+        return cy.get('[data-testid="ArticleIcon"]');
     }
 
     get searchButton() {
-        return cy.get("button", { includeShadowDom: true }).not('[role="tab"]')
-            .contains("SEARCH", { includeShadowDom: true });
+        return cy.get("button").not('[role="tab"]')
+            .contains("SEARCH");
     }
 
     get selectCompsButton() {
-        return cy.get("button", { includeShadowDom: true }).contains("Select Comps", { includeShadowDom: true });
+        return cy.get("button").contains("Select Comps");
     }
 
     get selectAllButton() {
         return this.importCompModal
-            .contains("SELECT ALL", { includeShadowDom: true });
+            .contains("SELECT ALL");
     }
 
     get importCompsSelectButtons() {
-        return cy.contains("Selected for report", { includeShadowDom: true })
+        return cy.contains("Selected for report")
             .siblings('div')
-            .find('[data-qa="sales-comp-item-add-btn"]', { includeShadowDom: true });
+            .find('[data-qa="sales-comp-item-add-btn"]');
     }
 
     get createCompSearchResults() {
-        return cy.get("[data-qa=search-result-form] tbody tr", { includeShadowDom: true });
+        return cy.get("[data-qa=search-result-form] tbody tr");
     }
 
-    get createNewCompButton() { return cy.contains("Create New", { includeShadowDom: true }); }
+    get createNewCompButton() { return cy.contains("Create New"); }
 
-    get newCompSaveAndCloseButton() { return cy.get('[data-qa="Save & Close"]', { includeShadowDom: true }); }
+    get newCompSaveAndCloseButton() { return cy.get('[data-qa="Save & Close"]'); }
 
     get addressSalesComparablesTable() {
         return cy.get('[data-qa="selected-sales-comps-table"] [data-qa="address"]');
@@ -129,36 +129,36 @@ class FindCompsPage extends BasePage {
     }
 
     get resetAllButton() {
-        return cy.contains('RESET ALL', { includeShadowDom: true });
+        return cy.contains('RESET ALL');
     }
 
     get loadingModalSpinner() {
-        return cy.get('[data-qa="loading-modal"] [data-icon="spinner"]', { includeShadowDom: true });
+        return cy.get('[data-qa="loading-modal"] [data-icon="spinner"]');
     }
 
     get filterSalePeriod() {
-        return cy.get('[data-qa="filter-sale-period"]', { includeShadowDom: true });
+        return cy.get('[data-qa="filter-sale-period"]');
     }
 
     filterSalePeriodValue(value: string) {
-        return cy.get('[role="option"]', { includeShadowDom: true })
-            .contains(`${value}`, { includeShadowDom: true });
+        return cy.get('[role="option"]')
+            .contains(`${value}`);
     }
 
     get compSearchTab() {
-        return cy.get('[data-qa="comp-tab"]', { includeShadowDom: true });
+        return cy.get('[data-qa="comp-tab"]');
     }
 
     get adressSearchTab() {
-        return cy.get('[data-qa="address-tab"]', { includeShadowDom: true });
+        return cy.get('[data-qa="address-tab"]');
     }
 
     get jobSearchTab() {
-        return cy.get('[data-qa="job-tab"]', { includeShadowDom: true });
+        return cy.get('[data-qa="job-tab"]');
     }
 
     get reportIdInput() {
-        return cy.get('input[placeholder="Find a specific Report ID"]', { includeShadowDom: true });
+        return cy.get('input[placeholder="Find a specific Report ID"]');
     }
     
     get selectedForReportTitle() {

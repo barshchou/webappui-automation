@@ -58,37 +58,35 @@ conditionalDescribe(`[QA-5157] [QA-5161] [Sales > Find Comps] "Date Sold" sortin
                     - Listing
                     - date sold from most to least recent 
                     (comps created by user)`);
-        // cy.reload();
+        cy.reload();
 
-        // eslint-disable-next-line multiline-comment-style
-        // function addCompWithStatus(address: string, saleStatus: string) {
-        //     Sales._FindComps
-        //         .openAddNewComparableFormSearchResult(address, -1)
-        //         .selectDropdownOptionNewComp(Sales._FindComps.Page.conditionDropdown,
-        //             testData.comparableFixtureManual.condition)
-        //         .selectDropdownOptionNewComp(Sales._FindComps.Page.comparableTypeDropdown,
-        //             testData.comparableFixtureManual.comparableType);
-        //     Sales._FindComps
-        //         .PropertyInfo.setResidentialUnits(`${testData.comparableFixtureManual.units.numberOfUnits}`)
-        //         .setSiteArea(`${testData.comparableFixtureManual.siteArea}`)
-        //         .setFloor(`${testData.comparableFixtureManual.floors}`);
-        //     Sales._FindComps.Page.newCompContinueButton.click();
-        //     Sales._FindComps
-        //         .SaleInfo.setBuyerGrantee(testData.comparableFixtureManual.saleInfo.buyer)
-        //         .setSellerGarantor(testData.comparableFixtureManual.saleInfo.seller)
-        //         .selectSaleDate('random');
-        //     Sales._FindComps
-        //         .selectDropdownOptionNewComp(Sales._FindComps.Page.SaleStatusDropdown, saleStatus);
-        //     Sales._FindComps.Page.newCompContinueButton.should('exist').click();
-        //     Sales._FindComps.Page.saveAndCloseButton.should('exist').click();
-        //     return this;
-        // }
+        function addCompWithStatus(address: string, saleStatus: string) {
+            Sales._FindComps
+                .openAddNewComparableFormSearchResult(address, -1)
+                .selectDropdownOptionNewComp(Sales._FindComps.Page.conditionDropdown,
+                    testData.comparableFixtureManual.condition)
+                .selectDropdownOptionNewComp(Sales._FindComps.Page.comparableTypeDropdown,
+                    testData.comparableFixtureManual.comparableType);
+            Sales._FindComps
+                .PropertyInfo.setResidentialUnits(`${testData.comparableFixtureManual.units.numberOfUnits}`)
+                .setSiteArea(`${testData.comparableFixtureManual.siteArea}`)
+                .setFloor(`${testData.comparableFixtureManual.floors}`);
+            Sales._FindComps.Page.newCompContinueButton.should('exist').click();
+            Sales._FindComps
+                .SaleInfo.setBuyerGrantee(testData.comparableFixtureManual.saleInfo.buyer)
+                .setSellerGarantor(testData.comparableFixtureManual.saleInfo.seller)
+                .selectSaleDate('random');
+            Sales._FindComps
+                .selectDropdownOptionNewComp(Sales._FindComps.Page.SaleStatusDropdown, saleStatus);
+            Sales._FindComps.Page.newCompContinueButton.should('exist').click();
+            Sales._FindComps.Page.saveAndCloseButton.should('exist').click();
+            return this;
+        }
 
-        // eslint-disable-next-line multiline-comment-style
-        // testData.arrayOfCompsforManualAddition.forEach(comp => {
-        //     addCompWithStatus(comp.address, comp.status);
-        // });
-        // Sales._FindComps.checkSalesCompSortedByDateSold();
+        testData.arrayOfCompsforManualAddition.forEach(comp => {
+            addCompWithStatus(comp.address, comp.status);
+        });
+        Sales._FindComps.checkSalesCompSortedByDateSold();
 
         cy.stepInfo(`3.Verify that when "Date Sold" option in Sort dropdown 
                     is selected comps are sorted in the next order:
@@ -109,10 +107,10 @@ conditionalDescribe(`[QA-5157] [QA-5161] [Sales > Find Comps] "Date Sold" sortin
          */
         //Sales._FindComps.addNewCompViaReportId(<any>reportId)
 
-        /*
-         * TODO this is hardcode! uncomment line above and delete these below after comp-plex import fixes!
-         *  cy.reload();
-         */
+        
+        // TODO this is hardcode! uncomment line above and delete these below after comp-plex import fixes!
+        cy.reload();
+         
         Sales._FindComps
             .addNewCompViaReportId('61892ce7044194001c6349c9')
             .openCompSearchTab()
@@ -124,10 +122,11 @@ conditionalDescribe(`[QA-5157] [QA-5161] [Sales > Find Comps] "Date Sold" sortin
                     - Listing
                     - date sold from most to least recent 
                     (comps added via uploaded from CSV )`);
-        // eslint-disable-next-line multiline-comment-style
-        // cy.reload(); // ?
-        // Sales._FindComps.uploadComps(testData.filePath)
-        //     .verifyUploadCompsSucceded()
-        //     .checkSalesCompSortedByDateSold();
+        // TODO add more useful csv
+
+        cy.reload();
+        Sales._FindComps.uploadComps(testData.filePath)
+            .verifyUploadCompsSucceded()
+            .checkSalesCompSortedByDateSold();
     });
 });

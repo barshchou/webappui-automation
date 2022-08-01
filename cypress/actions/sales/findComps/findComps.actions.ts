@@ -237,26 +237,23 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
         return this;
     }
 
-
     //TODO upgrade this method, cos it cant add two imports because of scrooll.
     enterReportToSearchComp(reportID: string): FindCompsActions {
         cy.intercept("GET", `/salesComps/eventIds/${reportID}`)
             .as(Alias.salesCompsEventIds);
         findCompsPage.reportIdInput
             .should('exist')       
-            .realClick({ clickCount: 50 })
+            .realClick({ clickCount: 10 })
             .type("textforclear", { force: true })
-            .realClick({ clickCount: 50 })
+            .realClick({ clickCount: 10 })
             .focus()
             .clear( { force: true })
-            .realClick({ clickCount: 50 })
+            .realClick({ clickCount: 10 })
             .should('be.focused')
             .realType(`${reportID}{enter}`);
         findCompsPage.reportIdInput.should("have.value", reportID);
         return this;
     }
-
-
 
     clickImportCompsFromReportButton(): FindCompsActions {
         findCompsPage.addToReportCompsButton.should("be.visible")
