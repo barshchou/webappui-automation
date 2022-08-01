@@ -22,8 +22,8 @@ class IntroductionPage extends BasePage {
         return cy.xpath('//h6[.="Definition of Market Value"]/following::li').eq(index);
     }
 
-    get scopeOfTheAppraisalListItem() {
-        return cy.xpath(`//h6[contains(text(), 'Scope of the appraisal')]/following::ul[1]`).children();
+    getUlTextListItem(title: string) {
+        return cy.xpath(`//*[contains(text(), '${title}')]/following::ul[1]`).children();
     }
 
 }
