@@ -46,21 +46,20 @@ describe("Historical expense Water & Sewer Per SF/Unit is correctly calculated a
         it("[QA-4898]", () => {
             cy.stepInfo(`4. Go to Expense Forecast and make sure that Per SF radio button 
             is selected for Water & Sewer  card`);
-            testData.basis = "sf";
             _NavigationSection.Actions.navigateToExpenseForecast();
-            Income._ExpenseForecastActions.chooseForecastItemBasis(testData.actualWaterAndSewerItem)
-                .verifyForecastItemBasis(testData.actualWaterAndSewerItem);
+            Income._ExpenseForecastActions.chooseForecastItemBasis(testData.actualWaterAndSewerItem(testData.basisSF))
+                .verifyForecastItemBasis(testData.actualWaterAndSewerItem(testData.basisSF));
 
             cy.stepInfo(`4.1 Check historical expenses values for Water & Sewer card. They should be calculated 
                     for each expense type as: [Expense Period type]Water & Sewer / GBA`);
             Income._ExpenseForecastActions.Actions
-                .verifyForecastItemByExpensePeriodType(testData.actualWaterAndSewerItem, 
+                .verifyForecastItemByExpensePeriodType(testData.actualWaterAndSewerItem(testData.basisSF), 
                     testData.buildingDescription, "Actual")
-                .verifyForecastItemByExpensePeriodType(testData.t12WaterAndSewerItem, 
+                .verifyForecastItemByExpensePeriodType(testData.t12WaterAndSewerItem(testData.basisSF), 
                     testData.buildingDescription, "Actual T12")
-                .verifyForecastItemByExpensePeriodType(testData.historicalWaterAndSewerItem, 
+                .verifyForecastItemByExpensePeriodType(testData.historicalWaterAndSewerItem(testData.basisSF), 
                     testData.buildingDescription, "Annualized Historical")
-                .verifyForecastItemByExpensePeriodType(testData.ownerProjectionWaterAndSewerItem, 
+                .verifyForecastItemByExpensePeriodType(testData.ownerProjectionWaterAndSewerItem(testData.basisSF), 
                     testData.buildingDescription, "Owner's Projection")
                 .hideHeader()
                 .clickSaveButton()
@@ -71,29 +70,28 @@ describe("Historical expense Water & Sewer Per SF/Unit is correctly calculated a
             Income._ExpenseForecastActions.Actions.matchElementSnapshot(
                 Income._ExpenseForecastActions.Page.forecastItemCard(
                     Income._ExpenseForecastActions.getItemNameForAverage(
-                        testData.actualWaterAndSewerItem.name)), testData.waterAndSewerPerSfCardSnapshotName, 
+                        testData.actualWaterAndSewerItem(testData.basisSF).name)), 
+                testData.waterAndSewerPerSfCardSnapshotName, 
                 { padding: [ 10, 100 ] });
-        
         });
 
         it("[QA-4902]", () => {
             cy.stepInfo(`4. Go to Expense Forecast and make sure that Per Unit radio button 
             is selected for Water & Sewer  card`);
-            testData.basis = "unit";
             _NavigationSection.Actions.navigateToExpenseForecast();
-            Income._ExpenseForecastActions.chooseForecastItemBasis(testData.actualWaterAndSewerItem)
-                .verifyForecastItemBasis(testData.actualWaterAndSewerItem);
+            Income._ExpenseForecastActions.chooseForecastItemBasis(testData.actualWaterAndSewerItem(testData.basisUnit))
+                .verifyForecastItemBasis(testData.actualWaterAndSewerItem(testData.basisUnit));
 
             cy.stepInfo(`4.1 Check historical expenses values for Water & Sewer card. They should be calculated 
                     for each expense type as: [Expense Period type]Water & Sewer / GBA`);
             Income._ExpenseForecastActions.Actions
-                .verifyForecastItemByExpensePeriodType(testData.actualWaterAndSewerItem, 
+                .verifyForecastItemByExpensePeriodType(testData.actualWaterAndSewerItem(testData.basisUnit), 
                     testData.buildingDescription, "Actual")
-                .verifyForecastItemByExpensePeriodType(testData.t12WaterAndSewerItem, 
+                .verifyForecastItemByExpensePeriodType(testData.t12WaterAndSewerItem(testData.basisUnit), 
                     testData.buildingDescription, "Actual T12")
-                .verifyForecastItemByExpensePeriodType(testData.historicalWaterAndSewerItem, 
+                .verifyForecastItemByExpensePeriodType(testData.historicalWaterAndSewerItem(testData.basisUnit), 
                     testData.buildingDescription, "Annualized Historical")
-                .verifyForecastItemByExpensePeriodType(testData.ownerProjectionWaterAndSewerItem, 
+                .verifyForecastItemByExpensePeriodType(testData.ownerProjectionWaterAndSewerItem(testData.basisUnit), 
                     testData.buildingDescription, "Owner's Projection")
                 .hideHeader()
                 .clickSaveButton()
@@ -104,7 +102,8 @@ describe("Historical expense Water & Sewer Per SF/Unit is correctly calculated a
             Income._ExpenseForecastActions.Actions.matchElementSnapshot(
                 Income._ExpenseForecastActions.Page.forecastItemCard(
                     Income._ExpenseForecastActions.getItemNameForAverage(
-                        testData.actualWaterAndSewerItem.name)), testData.waterAndSewerPerUnitCardSnapshotName, 
+                        testData.actualWaterAndSewerItem(testData.basisUnit).name)), 
+                testData.waterAndSewerPerUnitCardSnapshotName, 
                 { padding: [ 10, 100 ] });
         
             deleteReport(testData.reportCreationData.reportNumber);
