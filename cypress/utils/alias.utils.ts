@@ -46,7 +46,8 @@ export const Alias = {
             netRentableAreaNewComp:"netRentableAreaNewComp",
             averageUnitSizeNewComp:"averageUnitSizeNewComp",
             internalNotesTextArea:"internalNotesTextArea",
-            appraiserCommentaryTextArea:"appraiserCommentaryTextArea"
+            appraiserCommentaryTextArea:"appraiserCommentaryTextArea",
+            siteAreaNewComp:"siteAreaNewComp"
         }
     },
     expenseForecastAliases: {

@@ -63,6 +63,11 @@ export default class PropertyInformationForm {
             .as(compPlex.appraiserCommentaryTextArea);
     }
 
+    get siteAreaNewComp() {
+        return cy.get('[data-qa="Site Area"]', { includeShadowDom:true })
+            .as(compPlex.siteAreaNewComp);
+    }
+
     get streetAddressInput() {
         return cy.get('[data-qa="street-address"] input', { includeShadowDom:true });
     }
