@@ -2,11 +2,12 @@ import { Income } from '../../../../../actions/index';
 import testData from "../../../../../fixtures/not_full_reports/income/commercial/rent_comps/QA-4147-49_50-51.fixture";
 import NavigationSection from "../../../../../actions/base/navigationSection.actions";
 import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
+import { beforeEach } from 'mocha';
 
 describe("[QA-4147-48_50-51] Check that Commercial Rent Comps map has Filters dropdown", 
     { tags:[ "@income", "@commercial", "@rent_comps" ] }, () => {
         
-        before("Login, create report", () => {
+        beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);
         });
 
