@@ -1,5 +1,5 @@
-import { Income, Property } from '../../../../../actions/index';
-import { _NavigationSection } from '../../../../../actions/base/index';
+import { Income, Property } from '../../../../../actions';
+import { _NavigationSection } from '../../../../../actions/base';
 // eslint-disable-next-line max-len
 import testData from '../../../../../fixtures/not_full_reports/income/residential/stabilized_rent_roll/QA-5918-19.fixture';
 import { createReport } from "../../../../../actions/base/baseTest.actions";

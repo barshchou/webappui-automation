@@ -9,7 +9,7 @@ import mapKeysUtils from "../../../../../utils/mapKeys.utils";
 describe("Rent is displayed on the same basis that is selected on In-Place rent roll", 
     { tags: [ "@income", "@commercial", "@rent_reconciliation" ] }, () => {
 
-        before("Create report", () => {
+        beforeEach("Create report", () => {
             createReport(testData.reportCreationData);
             cy.stepInfo("Preconditions: Navigate to property summary, enter number of commercial units");
             _NavigationSection.navigateToPropertySummary();

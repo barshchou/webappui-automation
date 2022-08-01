@@ -5,7 +5,7 @@ import { createReport, deleteReport } from "../../../../actions/base/baseTest.ac
 
 describe("Selected Comparables table. Verify the functionality of Remove button", 
     { tags:[ "@find_comps", "@sales" ] }, () => {
-        before("Login, create report", () => {
+        beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);
         });
 

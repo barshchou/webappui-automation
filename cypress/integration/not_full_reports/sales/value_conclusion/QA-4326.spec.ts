@@ -5,7 +5,7 @@ import { createReport, deleteReport } from "../../../../actions/base/baseTest.ac
 
 describe("Sales Value Conclusion Discussion -> Generated Commentary is revertible", 
     { tags: [ "@sales", "@value_conclusion" ] }, () => {
-        before("Login, create report", () => {
+        beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);
         });
 

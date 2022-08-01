@@ -7,7 +7,7 @@ describe(`[QA-4714_16-17] Verify the suggested text dropdown in the new narrativ
 for the 'Foreclosure sale' then “=Sh“ and select the 'Sheriff's sale'  option on the Report > Key Info page 
 for Property Rights Appraised and Definition of Market Value sections`,
 { tags:[ "@report", "@key_info" ] }, () => {
-    before("Login, create report", () => {
+    beforeEach("Login, create report", () => {
         createReport(testData.reportCreationData);
     });
 

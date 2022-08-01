@@ -18,5 +18,9 @@ class IntroductionPage extends BasePage {
         return cy.xpath(`//div[.="${whereTo}"]//a`);
     }
 
+    getDefinitionOfMarketValueListItem(index: number) {
+        return cy.xpath('//h6[.="Definition of Market Value"]/following::li').eq(index);
+    }
+
 }
 export default new IntroductionPage();

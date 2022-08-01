@@ -4,7 +4,7 @@ import testData from "../../../../fixtures/not_full_reports/sales/find_comps/QA-
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
 
 describe("[QA-4167] Verify the Appraiser Commentary field", { tags: [ "@sales", "@find_comps", "@comp_plex" ] }, () => {
-    before("Login, create report", () => {
+    beforeEach("Login, create report", () => {
         createReport(testData.reportCreationData);
     });
 

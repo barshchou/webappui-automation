@@ -6,7 +6,7 @@ import { createReport, deleteReport } from "../../../../actions/base/baseTest.ac
 describe(`Comparable Min, Max, Avg values for Water & Sewer Per Unit are correctly calculated and displayed`,
     { tags:[ "@income", "@expense_forecast", "@snapshot_tests" ] }, () => {
 
-        before("Login, create report", () => {
+        beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);
         });
 

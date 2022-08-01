@@ -1,4 +1,4 @@
-import { _NavigationSection } from './../../../../actions/base/index';
+import { _NavigationSection } from './../../../../actions/base';
 import testData from "../../../../fixtures/not_full_reports/sales/adjust_comps/QA-4130.fixture";
 import { createReport } from "../../../../actions/base/baseTest.actions";
 import launchDarklyApi from "../../../../api/launchDarkly.api";
@@ -7,7 +7,7 @@ import { Income, Sales, Property } from "../../../../actions";
 describe("Adjusted Price per Residential Unit in Sales Adjustment Grid is calculated with correct formula", 
     { tags: [ "@adjust_comps", "@sales", "@feature_flag" ] }, () => {
 
-        before("Login, create report", () => {
+        beforeEach("Login, create report", () => {
             cy.stepInfo(`1. Turn on “Enable flexible gba analysis” feature flag`);
             launchDarklyApi.setFeatureFlagForUser(testData.featureFlagKey, testData.onFeatureFlag);
             createReport(testData.reportCreationData);

@@ -8,7 +8,7 @@ import { conditionalDescribe } from "../../../checkIsProd.utils";
 
 conditionalDescribe("[QA-4627] Verify the functionality of the Client field.", 
     { tags:[ "@report", "@client" ] }, () => {
-        before("Login, create report", () => {
+        beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);
         });
 

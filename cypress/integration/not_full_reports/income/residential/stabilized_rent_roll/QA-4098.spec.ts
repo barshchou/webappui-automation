@@ -1,11 +1,11 @@
-import { Income, Property } from './../../../../../actions/index';
-import { _NavigationSection } from './../../../../../actions/base/index';
+import { Income, Property } from './../../../../../actions';
+import { _NavigationSection } from './../../../../../actions/base';
 import testData from "../../../../../fixtures/not_full_reports/income/residential/stabilized_rent_roll/QA-4098.fixture";
 import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
 
 describe("Default selection on Stabilized Rent Roll table is the same selection made on In-Place RR page",
     { tags:[ "@income", "@residential", "@stabilized_rent_roll" ] }, () => {
-        before("Login, create report", () => {
+        beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);
         });
 

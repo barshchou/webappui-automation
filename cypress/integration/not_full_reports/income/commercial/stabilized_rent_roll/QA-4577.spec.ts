@@ -7,7 +7,7 @@ import { _IncomeTitles } from "../../../../../enums/pages_titles";
 describe("Verify the functionality of the Frontage radio button", 
     { tags: [ "@income", "@commercial", "@stabilized_rent_roll" ] }, () => {
         
-        before("Login, create report", () => {
+        beforeEach("Login, create report", () => {
             cy.stepInfo(`Preconditions: The mixed report is created and several commercial units are added.
                     Comp group is created.`);
             createReport(testData.reportCreationData);

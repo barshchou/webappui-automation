@@ -7,7 +7,7 @@ import tableExpenseHistoryCellNames from "../../../../enums/expense/expenseHisto
 describe("[QA-5773] Historical expense Legal & Professional Fees Per SF is correctly calculated and displayed",
     { tags: [ "@snapshot_tests", "@income", "@expense_forecast" ] }, () => {
 
-        before("Login, create report", () => {
+        beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);
         });
 

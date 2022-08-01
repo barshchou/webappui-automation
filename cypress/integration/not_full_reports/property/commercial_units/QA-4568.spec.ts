@@ -6,7 +6,7 @@ import { _PropertyTitles } from "../../../../enums/pages_titles";
 
 describe("[QA-4568] Verify the Save & Continue button functionality on the Commercial Units page",
     { tags:[ "@property", "@commercial_units" ] }, () => {
-        before("Login, create report", () => {
+        beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);
         });
 

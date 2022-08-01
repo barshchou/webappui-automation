@@ -40,10 +40,10 @@ Cypress.on("fail", (err, runnable) => {
         });
 
         const messageArr = [
+            `${error.message}`,
+            "----------",
             `Test Suite: ${runnableObj.parent.title}`, // describe('...')
             `Test: ${runnableObj.title}`, // it('...')
-            "----------",
-            `${error.message}`,
             `\n${lastStep}`
         ];
 

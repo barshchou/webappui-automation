@@ -3,8 +3,11 @@ import { _NavigationSection } from "../base";
 import BaseActionsExt from "../base/base.actions.ext";
 
 class IntroductionActions extends BaseActionsExt<typeof introductionPage> {
-    constructor() {
-        super(introductionPage);
+    verifyDefinitionOfMarketValueListItem(index: number, item: string): IntroductionActions {
+        introductionPage.getDefinitionOfMarketValueListItem(index)
+            .should("have.text", item)
+            .should("have.prop", "isContentEditable", false);
+        return this;
     }
 
     goToBackLink(whereTo: string, pageName: string): IntroductionActions {
@@ -15,4 +18,4 @@ class IntroductionActions extends BaseActionsExt<typeof introductionPage> {
         return this;
     }
 }
-export default new IntroductionActions();
+export default new IntroductionActions(introductionPage);

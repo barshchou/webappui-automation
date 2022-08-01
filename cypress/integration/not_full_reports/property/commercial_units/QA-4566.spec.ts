@@ -6,7 +6,7 @@ import Property from "../../../../actions/property/property.manager";
 describe("Verify the functionality of the Frontage radio button", 
     { tags: [ "@property", "@commercial_units" ] }, () => {
         
-        before("Login, create report", () => {
+        beforeEach("Login, create report", () => {
             cy.stepInfo(`Preconditions: The mixed report is created and several commercial units are added.`);
             createReport(testData.reportCreationData);
         });

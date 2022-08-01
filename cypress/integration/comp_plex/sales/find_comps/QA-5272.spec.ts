@@ -2,9 +2,14 @@ import { salesInterceptions } from "../../../../actions/base/baseTest.actions";
 import { Sales, CompPlex } from "../../../../actions";
 import testData from "../../../../fixtures/comp_plex/sales/find_comps/QA-5272.fixture";
 
-describe("[QA-5272]", () => {
+/*
+ * TODO: - Un-ignore test when standalone comp_plex will be ready 
+ *       - Exclude test from general regression 
+ *       - Include this test and probably other into comp_plex regression run on separate (standalone) environment
+ */
+describe.skip("[QA-5272]", () => {
 
-    before(() => {
+    beforeEach(() => {
         /**
          * ernst: this tests should run only on standalone comp_plex 
          * (localhost or client's url whatever)
