@@ -6,7 +6,8 @@ export const ENVS = {
 
 /**
  * Evaluates Cypress' `baseUrl` with validators.
- *
+ * @param config
+ * @param isFromEnv means whether config will be read from passed Cypress.env() value or Cypress.config()
  * If you want to get `baseUrl` during test run - call `Cypress.config().baseUrl`
  * @returns
  */
