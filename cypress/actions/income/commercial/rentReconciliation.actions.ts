@@ -1,7 +1,7 @@
 import enums from "../../../enums/enums";
 import rentReconciliationPage from "../../../pages/income/commercial/rentReconciliation.page";
 import { BoweryReports } from "../../../types/boweryReports.type";
-import { RentReconciliationKeys } from "../../../utils/index";
+import { RentReconciliationKeys } from "../../../utils";
 import BaseActionsExt from "../../base/base.actions.ext";
 
 class RentReconciliationActions extends BaseActionsExt<typeof rentReconciliationPage> {
