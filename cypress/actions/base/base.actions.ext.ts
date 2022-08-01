@@ -119,4 +119,9 @@ export default class BaseActionsExt<T extends BasePage> extends BaseActions {
         this.Page.formCommentTextBox(name).type(text);
         return this;
     }
+
+    verifyOpenedPage(pageName: string) {
+        this.Page.pageTitle.should("have.text", pageName);
+        return this;
+    }
 }
