@@ -116,6 +116,8 @@ class NavigationSection extends BasePage {
     get assumptionsConditions() { return cy.get("#assumptions-conditions"); }
 
     get propertyHistory() { return cy.get("#property-history"); }
+
+    get finalScope() { return cy.get('#appraisal-scope'); }
 }
 
 export default new NavigationSection();

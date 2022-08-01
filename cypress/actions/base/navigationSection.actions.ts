@@ -343,6 +343,18 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         return this;
     }
 
+    clickFinalScope(): NavigationSectionActions {
+        navigationSectionPage.finalScope.click();
+        return this;
+    }
+
+    navigateToFinalScope(): NavigationSectionActions {
+        this.clickFinalButton()
+            .clickFinalScope()
+            .submitSaveChangesModal();
+        return this;
+    }
+
     clickAssumptionsConditions(): NavigationSectionActions {
         navigationSectionPage.assumptionsConditions.click();
         return this;
