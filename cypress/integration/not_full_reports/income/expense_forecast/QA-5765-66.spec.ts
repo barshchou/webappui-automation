@@ -1,5 +1,5 @@
 import testData from "../../../../fixtures/not_full_reports/income/expense_forecast/QA-5765-66.fixture";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { Property } from "../../../../actions";
 import { Income } from "../../../../actions";
@@ -54,7 +54,5 @@ describe(`[QA-5765] [QA-5766] Appraiser's Forecast value for Miscellaneous is co
             PSF Appraiser's Forecast * selected Basis for Square Foot Analysis / # of Residential Units`);
             Income._ExpenseForecastActions.verifyForecastItemBasisMoney(
                 testData.expenseForecastMiscellaneousFixture('sf'), testData.buildingDescription);
-
-            deleteReport(testData.reportCreationData.reportNumber);
         });
     });

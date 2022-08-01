@@ -1,5 +1,5 @@
 import testData from "../../../../fixtures/not_full_reports/sales/adjust_comps/QA-5312.fixture";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { Sales } from "../../../../actions";
 
@@ -33,6 +33,5 @@ describe("Total Utility Adjustments in Sales Adjustment Grid is calculated with 
                 Sales._AdjustComps.Page.modalSalesCompInfo.should("be.visible");
                 Sales._AdjustComps.Page.CloseIconShadowDom.click();
             });
-            deleteReport(testData.reportCreationData.reportNumber);
         });
     });

@@ -1,6 +1,6 @@
 import testData from 
     "../../../../../fixtures/not_full_reports/income/residential/in_place_rent_roll/QA-4093-96.fixture";
-import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../../actions/base";
 import { Income, Property } from "../../../../../actions";
 
@@ -60,7 +60,5 @@ describe(`[QA-4093-95] Verify if "Per Month" time period PSF Rent based on is se
         Income._Residential.InPlaceRentRoll.verifyRentRollCommentary(testData.commentaryToBe)
             .checkPerUnitSquareFootage(false)
             .verifyRentRollCommentary(testData.commentaryToBe);
-        
-        deleteReport(testData.reportCreationData.reportNumber);
     });
 });

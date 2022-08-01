@@ -12,26 +12,46 @@ class TaxInfoActions extends BaseActionsExt<typeof taxInfoPage> {
     }
 
     enterTaxableAssessedLandValue(value: number): this {
-        const valueToBe = `$${numberWithCommas(value)}`;
-        taxInfoPage.landActualInput.clear().type(`${value}`).should("have.value", valueToBe);
+        const valueToBe = `$${numberWithCommas(value.toFixed(2))}`;
+        taxInfoPage.landActualInput.realClick().realClick()
+            .scrollIntoView()
+            .focus().type("something")
+            .clear()
+            .realType(`${value}{enter}`);
+        taxInfoPage.landActualInput.should('have.text', valueToBe);
         return this;
     }
 
-    enterTransitionalLandValue(value: number | string): TaxInfoActions {
-        const valueToBe = `$${numberWithCommas(value)}`;
-        taxInfoPage.landTransitional.clear().type(`${value}`).should("have.value", valueToBe);
+    enterTransitionalLandValue(value: number): TaxInfoActions {
+        const valueToBe = `$${numberWithCommas(value.toFixed(2))}`;
+        taxInfoPage.landTransitional.realClick().realClick()
+            .scrollIntoView()
+            .focus().type("something")
+            .clear()
+            .realType(`${value}{enter}`);
+        taxInfoPage.landTransitional.should('have.text', valueToBe);
         return this;
     }
 
     enterTaxableAssessedBuildingValue(value: number): this {
-        const valueToBe = `$${numberWithCommas(value)}`;
-        taxInfoPage.buildingActualInput.clear().type(`${value}`).should("have.value", valueToBe);
+        const valueToBe = `$${numberWithCommas(value.toFixed(2))}`;
+        taxInfoPage.buildingActualInput.realClick().realClick()
+            .scrollIntoView()
+            .focus().type("something")
+            .clear()
+            .realType(`${value}{enter}`);
+        taxInfoPage.buildingActualInput.should('have.text', valueToBe);
         return this;
     }
 
-    enterTransitionalBuildingValue(value: string | number): TaxInfoActions {
-        const valueToBe = `$${numberWithCommas(value)}`;
-        taxInfoPage.buildingTransitionalInput.clear().type(`${value}`).should("have.value", valueToBe);
+    enterTransitionalBuildingValue(value: number): TaxInfoActions {
+        const valueToBe = `$${numberWithCommas(value.toFixed(2))}`;
+        taxInfoPage.buildingTransitionalInput.realClick().realClick()
+            .scrollIntoView()
+            .focus().type("something")
+            .clear()
+            .realType(`${value}{enter}`);
+        taxInfoPage.buildingTransitionalInput.should('have.text', valueToBe);
         return this;
     }
 

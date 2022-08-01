@@ -149,7 +149,7 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
     }
 
     itemOriginalObj = {
-        waterAndSewer: "waterSewer",
+        waterAndSewer: "waterAndSewer",
         repairsAndMaintenance: "repairsMaintenance",
         payrollAndBenefits: "payrollBenefits",
         generalAndAdministrative: "generalAdministrative",

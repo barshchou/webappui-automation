@@ -1,6 +1,6 @@
 import testData from "../../../../fixtures/not_full_reports/report/key_info/QA-4621-24.fixture";
 import { reportCreationData } from "../../../../fixtures/not_full_reports/report/key_info/QA-4621-24.fixture";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 import { Report } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
 
@@ -16,8 +16,6 @@ describe("The Letter of Engagement pre-fill from Dropbox to LoE filed in WebApp 
                     is auto-filled from Dropbox`);
             _NavigationSection.navigateToReportInformation();
             Report._KeyInfo.Page.inputToCheckUpload.should("have.value", testData.verifyValue);
-
-            deleteReport(reportCreationData(testData.numbersJobId[0]).reportNumber);
         });
 
         it("[QA-4622]", () => {
@@ -30,8 +28,6 @@ describe("The Letter of Engagement pre-fill from Dropbox to LoE filed in WebApp 
                     is auto-filled from Dropbox`);
             _NavigationSection.navigateToReportInformation();
             Report._KeyInfo.Page.inputToCheckUpload.should("be.empty");
-
-            deleteReport(reportCreationData(testData.numbersJobId[1]).reportNumber);
         });
 
         it("[QA-4623]", () => {
@@ -44,8 +40,6 @@ describe("The Letter of Engagement pre-fill from Dropbox to LoE filed in WebApp 
                     is auto-filled from Dropbox`);
             _NavigationSection.navigateToReportInformation();
             Report._KeyInfo.Page.inputToCheckUpload.should("be.empty");
-
-            deleteReport(reportCreationData(testData.numbersJobId[2]).reportNumber);
         });
 
         it("[QA-4624]", () => {
@@ -58,7 +52,5 @@ describe("The Letter of Engagement pre-fill from Dropbox to LoE filed in WebApp 
                     is auto-filled from Dropbox`);
             _NavigationSection.navigateToReportInformation();
             Report._KeyInfo.Page.inputToCheckUpload.should("be.empty");
-
-            deleteReport(reportCreationData(testData.numbersJobId[3]).reportNumber);
         });
     });

@@ -1,14 +1,16 @@
 import { BoweryReports } from "../../../../types/boweryReports.type";
 import ReportDataCreator from "../../../data_creator/reportData.creator";
+import enums from "../../../../enums/enums";
 
 const _units = 3;
-const _basis = "unit";
+const basisUnit: BoweryReports.UnitSF = enums.UNIT_SF.unit;
+const basisSF: BoweryReports.UnitSF = enums.UNIT_SF.sf;
 const _grossBuildingArea = 5000;
 const _buildingDescription: BoweryReports.BuildingDescription = { 
     grossArea: _grossBuildingArea, numberOfUnits: _units 
 };
 
-const expenseForecastElectricityFixture = (): BoweryReports.ForecastItem => {
+const expenseForecastElectricityFixture = (_basis: BoweryReports.UnitSF): BoweryReports.ForecastItem => {
     return {
         name: "electricity",
         basis: _basis,
@@ -18,9 +20,10 @@ const expenseForecastElectricityFixture = (): BoweryReports.ForecastItem => {
 
 export default {
     reportCreationData: ReportDataCreator.getReportData("4892_93"),
-    expenseForecastElectricity: expenseForecastElectricityFixture(),
+    expenseForecastElectricity: expenseForecastElectricityFixture,
     grossBuildingArea: _grossBuildingArea,
-    basis: _basis,
+    basisUnit,
+    basisSF,
     units: _units,
     buildingDescription: _buildingDescription
 };

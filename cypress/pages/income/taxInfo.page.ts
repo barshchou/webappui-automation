@@ -7,13 +7,15 @@ class TaxInfoPage extends BasePage {
         return cy.get(`[data-qa='basis-radio-group'] [data-qa=checked] input[value='${value}']`); 
     }
 
-    get landActualInput() { return cy.get("[name=landActual]"); }
+    get landActualInput() { return cy.xpath('//*[.="Land"]//following::div[@col-id="actual"]').first(); }
 
-    get landTransitional() { return cy.get("[name=landTransitional]"); }
+    get landTransitional() { return cy.xpath('//*[.="Land"]//following::div[@col-id="transitional"]').first(); }
 
-    get buildingActualInput() { return cy.get("[name=buildingActual]"); }
+    get buildingActualInput() { return cy.xpath('//*[.="Building"]//following::div[@col-id="actual"]').first(); }
 
-    get buildingTransitionalInput() { return cy.get("[name=buildingTransitional]"); }
+    get buildingTransitionalInput() { 
+        return cy.xpath('//*[.="Building"]//preceding-sibling::div[@col-id="transitional"]').first(); 
+    }
 
     get includeTransitionalAssessedValueCheckbox() { return cy.get("[data-qa^='hasTransitionalAssessedValue'] input"); }
 

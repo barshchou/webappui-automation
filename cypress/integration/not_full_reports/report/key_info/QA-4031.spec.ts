@@ -1,5 +1,5 @@
 import testData from "../../../../fixtures/not_full_reports/report/key_info/QA-4031.fixture";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { Report } from "../../../../actions";
 import { reportCreationData } from "../../../../fixtures/not_full_reports/report/key_info/QA-4031.fixture";
@@ -23,8 +23,6 @@ describe("[QA-4031] Verify the export of the report with the Pre-filled Report D
                 - changed value`);
                 Report._KeyInfo.Page.getDateInputByQA(testData.dateType).should("have.value", value.yield);
                 Report._KeyInfo.enterDateByType({ type: testData.dateType, date: testData.verifyDate });
-        
-                deleteReport(reportCreationData(value.jobNumber).reportNumber);
             });
         });
     });

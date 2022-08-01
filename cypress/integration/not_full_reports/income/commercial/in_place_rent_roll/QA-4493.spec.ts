@@ -1,7 +1,7 @@
 import testData from "../../../../../fixtures/not_full_reports/income/commercial/in_place_rent_roll/QA-4493.fixture";
 import { _NavigationSection } from "../../../../../actions/base";
 import { Income } from "../../../../../actions";
-import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../../actions/base/baseTest.actions";
 
 describe("Verify the Unsaved changes modal functionality on the In-Place Rent Roll page",
     { tags:[ "@income", "@commercial", "@in_place_rent_roll" ] }, () => {
@@ -32,7 +32,5 @@ describe("Verify the Unsaved changes modal functionality on the In-Place Rent Ro
             cy.stepInfo('5. Navigate back to Commercial In Place Rent Roll and verify data');
             _NavigationSection.navigateToCommercialInPlaceRentRoll();
             Income._CommercialManager.InPlaceRentRoll.verifyLeaseStatusByRow(testData.occupiedLeaseStatus);
-        
-            deleteReport(testData.reportCreationData.reportNumber);
         });
     });

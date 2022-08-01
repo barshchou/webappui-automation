@@ -1,5 +1,5 @@
 import testData from "../../../../fixtures/not_full_reports/report/key_info/QA-4426.fixture";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { reportCreationFixture } from "../../../../fixtures/not_full_reports/report/key_info/QA-4426.fixture";
 import { Report, ReviewExport } from '../../../../actions';
@@ -30,12 +30,10 @@ describe("[QA-4426] Check the generated commentary for Property Rights Appraised
                 ReviewExport.generateDocxReport().waitForReportGenerated()
                     .downloadAndConvertDocxReport(
                         reportCreationFixture(item.reportConclusion, `_${index + 1}`).reportNumber);
-                deleteReport(reportCreationFixture(item.reportConclusion, `_${index + 1}`).reportNumber);
             });
         }); 
     
         it("Check export", () => {
-            Cypress.config().baseUrl = null;
             testData.reportConclusionAndTextValues.forEach((item, index) => {
                 cy.task("getFilePath", { 
                     _reportName: reportCreationFixture(item.reportConclusion, `_${index + 1}`).reportNumber, 

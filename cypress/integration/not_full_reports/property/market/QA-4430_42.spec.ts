@@ -1,6 +1,6 @@
 import testData from "../../../../fixtures/not_full_reports/property/market/QA-4430_42.fixture";
 import { Base, Property, ReviewExport } from "../../../../actions";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 
 
@@ -34,12 +34,10 @@ describe("Verify the functionality of the Ceiling Height radio button",
             ReviewExport.generateDocxReport()
                 .waitForReportGenerated()
                 .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
-            deleteReport(testData.reportCreationData.reportNumber);
 
         });
 
-        it("Check exported document other utilities values and commentaries", () => {
-            Cypress.config().baseUrl = null;
+        it("Check export document other utilities values and commentaries", () => {
             cy.task("getFilePath", { _reportName: testData.reportCreationData.reportNumber, _docxHtml: "html" })
                 .then(file => {
                     cy.log(<string>file);

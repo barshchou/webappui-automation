@@ -1,5 +1,5 @@
 import testData from "../../../../fixtures/not_full_reports/sales/find_comps/QA-4139_43_44_4482_83.fixture";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { Sales } from "../../../../actions";
 import { conditionalDescribe } from "../../../checkIsProd.utils";
@@ -40,8 +40,6 @@ conditionalDescribe("Group of tests for numeric inputs at create comp modal",
                 .clearNumericInputNewComp(pageElements.compPlex.createCompNumberResidentialUnits)
                 .selectDropdownOptionNewComp(Sales._FindComps.Page.conditionDropdown, testData.condition)
                 .Page.errorMessageNewComp.should("exist");
-  
-            deleteReport(testData.reportCreationData.reportNumber);
         });
 
         it(`QA-4143: Verify the #Commercial Units* field`, () => {        
@@ -65,8 +63,6 @@ conditionalDescribe("Group of tests for numeric inputs at create comp modal",
                 .clearNumericInputNewComp(pageElements.compPlex.createCompNumberCommercialUnits)
                 .selectDropdownOptionNewComp(Sales._FindComps.Page.conditionDropdown, testData.condition)
                 .Page.errorMessageNewComp.should("exist");
-
-            deleteReport(testData.reportCreationData.reportNumber);
         });
 
         /**
@@ -91,8 +87,6 @@ conditionalDescribe("Group of tests for numeric inputs at create comp modal",
                 .clearNumericInputNewComp(pageElements.compPlex.commercialAreaNewComp)
                 .selectDropdownOptionNewComp(Sales._FindComps.Page.conditionDropdown, testData.condition)
                 .Page.errorMessageNewComp.should("exist");
-
-            deleteReport(testData.reportCreationData.reportNumber);
         });
 
         it(`QA-4482: Verify the Net Rentable Area field`, () => {
@@ -122,8 +116,6 @@ conditionalDescribe("Group of tests for numeric inputs at create comp modal",
                 .clearNumericInputNewComp(pageElements.compPlex.netRentableAreaNewComp)
                 .selectDropdownOptionNewComp(Sales._FindComps.Page.conditionDropdown, testData.condition)
                 .Page.errorMessageNewComp.should("not.exist");
-
-            deleteReport(testData.reportCreationData.reportNumber);
         });
 
         it("QA-4483: Verify the Average Unit Size field", { tags:[ "@comp_plex" ] }, () => {
@@ -142,7 +134,5 @@ conditionalDescribe("Group of tests for numeric inputs at create comp modal",
                 .clearNumericInputNewComp(pageElements.compPlex.averageUnitSizeNewComp)
                 .selectDropdownOptionNewComp(Sales._FindComps.Page.conditionDropdown, testData.condition)
                 .Page.errorMessageNewComp.should("not.exist");
-            
-            deleteReport(testData.reportCreationData.reportNumber);
         });
     });

@@ -3,13 +3,11 @@ import testData from
     "../../../../../fixtures/not_full_reports/income/commercial/in_place_rent_roll/QA-4484_86_88-90.fixture";
 import { Income, Property, ReviewExport } from "../../../../../actions";
 import { _NavigationSection } from "../../../../../actions/base";
-import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../../actions/base/baseTest.actions";
 
 describe(`[Income > Commercial > In-Place Rent Roll > Generated Commentary]
         Verify the suggested text dropdown`,
 { tags:[ "@income", "@commercial", "@in_place_rent_roll", "@check_export" ] }, () => {
-
-    const url = `${Cypress.config().baseUrl}`;
 
     it("[QA-4484], [QA-4486]", () => {
         cy.stepInfo(`1. Login, create report and proceed to the 
@@ -30,8 +28,6 @@ describe(`[Income > Commercial > In-Place Rent Roll > Generated Commentary]
             Income._CommercialManager.InPlaceRentRoll
                 .verifyCommentaryContainsText(data.verifyAreaValue);
         });
-
-        deleteReport(testData.reportCreationDataAsIs.reportNumber);
     });
 
     it("[QA-4488] As Is", () => {
@@ -67,12 +63,9 @@ describe(`[Income > Commercial > In-Place Rent Roll > Generated Commentary]
         _NavigationSection.openReviewAndExport();
         ReviewExport.generateDocxReport().waitForReportGenerated()
             .downloadAndConvertDocxReport(testData.reportCreationDataAsIs.reportNumber);
-
-        deleteReport(testData.reportCreationDataAsIs.reportNumber);
     });
 
     it("[QA-4488] Check export", () => {
-        Cypress.config().baseUrl = null;
         cy.task("getFilePath", { _reportName: testData.reportCreationDataAsIs.reportNumber, _docxHtml: "html" })
             .then(file => {
                 cy.log(<string>file);
@@ -89,7 +82,6 @@ describe(`[Income > Commercial > In-Place Rent Roll > Generated Commentary]
     });
 
     it("[QA-4489] As Stabilized", () => {
-        Cypress.config().baseUrl = url;
         cy.stepInfo(`Preconditions: The mixed report is created and several commercial units are added.`);
         createReport(testData.reportCreationDataAsStabilized);
 
@@ -123,12 +115,9 @@ describe(`[Income > Commercial > In-Place Rent Roll > Generated Commentary]
         _NavigationSection.openReviewAndExport();
         ReviewExport.generateDocxReport().waitForReportGenerated()
             .downloadAndConvertDocxReport(testData.reportCreationDataAsStabilized.reportNumber);
-
-        deleteReport(testData.reportCreationDataAsStabilized.reportNumber);
     });
 
     it("[QA-4489] Check export", () => {
-        Cypress.config().baseUrl = null;
         cy.task("getFilePath", { _reportName: testData.reportCreationDataAsIs.reportNumber, _docxHtml: "html" })
             .then(file => {
                 cy.log(<string>file);
@@ -145,7 +134,6 @@ describe(`[Income > Commercial > In-Place Rent Roll > Generated Commentary]
     });
 
     it("[QA-4490] As Completed", () => {
-        Cypress.config().baseUrl = url;
         cy.stepInfo(`Preconditions: The mixed report is created and several commercial units are added.`);
         createReport(testData.reportCreationDataAsComplete);
 
@@ -181,12 +169,9 @@ describe(`[Income > Commercial > In-Place Rent Roll > Generated Commentary]
         _NavigationSection.openReviewAndExport();
         ReviewExport.generateDocxReport().waitForReportGenerated()
             .downloadAndConvertDocxReport(testData.reportCreationDataAsComplete.reportNumber);
-
-        deleteReport(testData.reportCreationDataAsComplete.reportNumber);
     });
 
     it("[QA-4490] Check export", () => {
-        Cypress.config().baseUrl = null;
         cy.task("getFilePath", { _reportName: testData.reportCreationDataAsIs.reportNumber, _docxHtml: "html" })
             .then(file => {
                 cy.log(<string>file);

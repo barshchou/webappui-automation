@@ -1,6 +1,6 @@
 import { Report } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 import testData from '../../../../fixtures/not_full_reports/report/client/QA-4634.fixture';
 
 describe(`Verify the 'Changes will be lost' modal functionality for Intended User 
@@ -76,7 +76,5 @@ and Identification of the Client sections`,
             custom changes made to the Current Commercial Income Discussion are deleted.`);
         Report._Client.verifyNotContainIntendedUserTextBox(testData.verifyAreaValue)
             .verifyNotContainIdentificationOfTheClientTextBox(testData.verifyAreaValue);
-
-        deleteReport(testData.reportCreationData.reportNumber);
     });
 });

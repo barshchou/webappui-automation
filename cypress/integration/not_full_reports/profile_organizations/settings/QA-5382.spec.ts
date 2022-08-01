@@ -1,5 +1,5 @@
 import { _HomePage } from '../../../../actions/base';
-import { createReport, deleteReport } from '../../../../actions/base/baseTest.actions';
+import { createReport } from '../../../../actions/base/baseTest.actions';
 import { Organization, PreviewEdit, ReviewExport } from '../../../../actions';
 import { _NavigationSection } from '../../../../actions/base';
 import testData from "../../../../fixtures/not_full_reports/profile_organizations/settings/QA-5382.fixture";
@@ -36,11 +36,9 @@ conditionalDescribe("[QA-5382] Verify possibility to edit static text in-app",
             _NavigationSection.openReviewAndExport();
             ReviewExport.generateDocxReport().waitForReportGenerated()
                 .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
-            deleteReport(testData.reportCreationData.reportNumber);
         });
 
         it('Check export', () => {
-            Cypress.config().baseUrl = null;
             cy.task("getFilePath", { _reportName: testData.reportCreationData.reportNumber, _docxHtml: "html" })
                 .then(file => {
                     cy.log(<string>file);
