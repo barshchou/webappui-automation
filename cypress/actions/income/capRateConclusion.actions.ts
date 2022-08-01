@@ -1,6 +1,11 @@
 import capRateConclusionPage from "../../pages/income/capRateConclusion.page";
-import { getNumberFromDollarNumberWithCommas, numberWithCommas } from "../../../utils/numbers.utils";
+import { 
+    getNumberFromDollarNumberWithCommas, 
+    getNumberFromMinusDollarNumberWithCommas, 
+    numberWithCommas 
+} from "../../../utils/numbers.utils";
 import BaseActionsExt from "../base/base.actions.ext";
+import capRateConclusionKeys from "../../utils/mapKeys/income/capRateConclusion/capRateConclusion.keys";
 
 class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPage> {
 
@@ -77,7 +82,10 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
         capRateConclusionPage.netOperatingIncomeCell.invoke("text").then(noiText => {
             const noiNumber = getNumberFromDollarNumberWithCommas(noiText);
             capRateConclusionPage.concludedCapRateCellInputToVerify.invoke("attr", "value").then(capRate => {
-                const textToBe = `$${numberWithCommas(Math.round(noiNumber / Number.parseInt(capRate) * 100))}`;
+                let stringNumber = numberWithCommas(Math.round(noiNumber / Number.parseInt(capRate) * 100));
+                const textToBe = noiNumber < 0 
+                    ? `-$${stringNumber.replace('-', '')}` 
+                    : `$${stringNumber}`;
                 capRateConclusionPage.asStabilizedAmountCell.should("have.text", textToBe);
             });
         });
@@ -203,6 +211,45 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
     enterAsStabilizedCommissionFeeAmount(amount: string | number): CapRateConclusionActions {
         const valueToBe = typeof amount === "string" ? amount : `-$${numberWithCommas(amount)}`;
         capRateConclusionPage.asStabilizedCommissionFeeAmount.clear().type(`${amount}`).should("have.value", valueToBe);
+        return this;
+    }
+
+    getRoundingFactorValue(): CapRateConclusionActions {
+        capRateConclusionPage.roundingFactorInput.invoke('attr', 'value').then(roundingFactor => {
+            cy._mapSet(capRateConclusionKeys.capRateRoundingFactor, roundingFactor);
+        });
+        return this;
+    }
+
+    getAsStabilizedAmountCell(): CapRateConclusionActions {
+        capRateConclusionPage.asStabilizedAmountCell.invoke('text').then(asStabilizedAmount => {
+            let asStabilizedAmountAdjusted = getNumberFromDollarNumberWithCommas(asStabilizedAmount);
+            cy._mapSet(capRateConclusionKeys.asStabilizedAmount, asStabilizedAmountAdjusted);
+        });
+        return this;
+    }
+
+    /**
+     * Gets cap rate rounding factor and As Stabilized amount.
+     * It verifies whether final value is rounded correctly.
+     * Formula: As Stabilized * Rounding Factor => round result => multiply by rounding factor
+     * @returns CapRateConclusionActions
+     */
+    verifyAsStabilizedFinalValueCalculated(): CapRateConclusionActions {
+        this.getRoundingFactorValue()
+            .getAsStabilizedAmountCell();
+        cy._mapGet(capRateConclusionKeys.capRateRoundingFactor).then(capRateRounding => {
+            cy._mapGet(capRateConclusionKeys.asStabilizedAmount).then(asStabilizedValue => {
+                cy.log(`ROUNDING: ${capRateRounding} VALUE:${asStabilizedValue}` );
+                cy.pause();
+                let expectedFinalValue = Math.round(asStabilizedValue / capRateRounding) * capRateRounding;
+                let expectedFinalValueText = expectedFinalValue < 0 
+                    ? `-$${numberWithCommas(getNumberFromMinusDollarNumberWithCommas(expectedFinalValue))}` 
+                    : `$${numberWithCommas(expectedFinalValue)}`;
+                capRateConclusionPage.asStabilizedFinalValueCell.should("have.text", expectedFinalValueText);
+            });
+        });
+        
         return this;
     }
 }

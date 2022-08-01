@@ -21,6 +21,8 @@ class CapRateConclusionPage extends BasePage {
 
     get roundingFactorDropdown() { return cy.get("[data-qa=roundingFactor-select-list] [data-qa=select-value]"); }
 
+    get roundingFactorInput() { return cy.get("[data-qa=roundingFactor-select-list] input"); }
+
     getDropdownOptionByValue(value: number) { return cy.get(`li[data-value='${value}']`); }
 
     get netOperatingIncomeCell() { return cy.get("[data-qa=noi-amount-cell]"); }

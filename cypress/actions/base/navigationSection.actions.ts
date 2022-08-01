@@ -673,6 +673,19 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         return this;
     }
 
+    navigateToRenovation(): NavigationSectionActions {
+        this.clickPropertyButton()
+            .clickRenovationButton()
+            .submitSaveChangesModal()
+            .verifyProgressBarNotExist();
+        return this;
+    }
+
+    clickRenovationButton(): NavigationSectionActions {
+        navigationSectionPage.renovationButton.click();
+        return this;
+    }
+
     private clickCommercialMenuIfClosed(): NavigationSectionActions {
         navigationSectionPage.commercialIncomeArrow.then(el => {
             if (!el.hasClass("expanded")) {

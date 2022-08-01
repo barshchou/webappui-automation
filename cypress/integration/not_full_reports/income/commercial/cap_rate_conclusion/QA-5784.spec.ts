@@ -12,7 +12,7 @@ describe("",
             cy.stepInfo("1. Set feature flag and create report");
             launchDarklyApi.setFeatureFlagForUser(testData.featureFlagKey, testData.onFeatureFlag);
             createReport(testData.reportCreationData);
-            
+
             cy.stepInfo("2. Set square foot analysis and value for it; set commercial and residential units");
             _NavigationSection.navigateToPropertySummary();
             Property._Summary.selectBasisSquareFootAnalysis(testData.basisForSquareFootAnalysis)
@@ -20,14 +20,20 @@ describe("",
                 .enterNumberOfCommercialUnits(testData.commercialUnits)
                 .enterNumberOfResUnits(testData.residentialUnits);
 
-            cy.stepInfo(`3. Fill commercial units with valid values`);
+            cy.stepInfo("3. Set Gut Renovation budget");
+            _NavigationSection.navigateToRenovation();
+            Property._Renovations.chooseRenovationByValue(testData.gutRenovation)
+                .clickTotalButton()
+                .fillTotalTable(testData.renovationPeriod, testData.renovationTotal);
+
+            cy.stepInfo(`4. Fill commercial units with valid values`);
             NavigationSection.navigateToCommercialInPlaceRentRoll();
             testData.commercialMonthlyRent.forEach((commercialUnitRent, index) => {
                 Income.Commercial.InPlaceRentRoll.chooseLeaseStatusByRowNumber(testData.leaseStatus, index)
                     .enterRentPerSFAnnuallyByRowNumber(commercialUnitRent, index);
             });
 
-            cy.stepInfo(`3. Fill residential units with valid values`);
+            cy.stepInfo(`5. Fill residential units with valid values`);
             NavigationSection.navigateToResInPlaceRentRoll();
             testData.residentialMonthlyRent.forEach((residentialUnitRent, index) => {
                 Income.Residential.InPlaceRentRoll.enterLeaseStatusByRowNumber(testData.leaseStatus, index)
@@ -36,10 +42,16 @@ describe("",
         });
 
         it("Test body", () => {
-            
-            cy.pause();
-            
+            cy.stepInfo(`6. Set Cap Rate value`);
+            NavigationSection.navigateToCapRateConclusion();
+            Income.CapRateConclusion.enterConclusionSectionConcludedCapRate(testData.capRate);
 
+            cy.stepInfo(`7. Make Sure Prospective Market Value As Stabilized (Amount) = NOI / Concluded Cap Rate`);
+            Income.CapRateConclusion.verifyAsStabilizedAmountCell();
+
+            cy.stepInfo(`8.Make Sure Prospective Market Value As Stabilized (Final Value) is Prospective Market Value 
+            As Stabilized (Amount) rounded according to “Round to nearest” value`);
+            Income.CapRateConclusion.verifyAsStabilizedFinalValueCalculated();
         });
 
         after(`Remove feature flag`, () => {

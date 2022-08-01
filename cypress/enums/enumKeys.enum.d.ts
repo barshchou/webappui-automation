@@ -46,3 +46,4 @@ export type SalesAdjustmentGridDiscussionsKeys = keyof typeof Enums.SALES_ADJUST
 export type SalesAdjustmentGridRowsKeys = keyof typeof Enums.SALES_ADJUSTMENT_GRID_ROWS
 export type BasisSquareFootAnalysis = keyof typeof Enums.BASIS_SQUARE_FOOT_ANALYSIS
 export type BasisSquareFootAnalysisTexts = keyof typeof Enums.BASIS_SQUARE_FOOT_ANALYSIS_TEXTS
+export type RenovationType = keyof typeof Enums.RENOVATION_TYPE

@@ -407,7 +407,7 @@ const zoningDescriptionParkingFixture = () => {
 
 const prospectiveRenovationsFixture = () => {
     return {
-        dropValue: "Renovation",
+        dropValue: Enums.RENOVATION_TYPE.renovation,
         period: 12,
         totalAmount: 106000,
         commentary: "The buyer reported a total prospective renovation budget of $106,000.00. " +

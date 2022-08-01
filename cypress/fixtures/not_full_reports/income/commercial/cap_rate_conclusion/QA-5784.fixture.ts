@@ -21,5 +21,9 @@ export default {
     residentialUnits: 2,
     commercialUnits: 3,
     commercialMonthlyRent: _commercialMonthlyRent,
-    residentialMonthlyRent: _residentialMonthlyRent
+    residentialMonthlyRent: _residentialMonthlyRent,
+    gutRenovation: Enums.RENOVATION_TYPE.gutRenovation,
+    renovationPeriod: 12,
+    renovationTotal: 1111,
+    capRate: 5
 };
