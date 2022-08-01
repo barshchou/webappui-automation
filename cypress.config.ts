@@ -14,6 +14,7 @@ export default defineConfig({
     watchForFileChanges: false,
     video: false,
     projectId: 'EDvaU4',
+    includeShadowDom: true,
     e2e: {
         // baseUrl is staging, but it will be reset down below
         baseUrl: ENVS.staging,
