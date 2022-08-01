@@ -2,14 +2,14 @@ const expensesCardsNames = {
     insurance: "insurance",
     electricity: "electricity",
     fuel: "fuel",
-    waterAndSewer: "waterSewer",
-    repairAndMaintenance: "repairsMaintenance",
-    payrollBenefits: "payrollBenefits",
-    generalAndAdministrative: "generalAdministrative",
-    legalAndProfessional: "legalProfessionalFees",
+    waterAndSewer: "waterAndSewer",
+    repairAndMaintenance: "repairsAndMaintenance",
+    payrollBenefits: "payrollAndBenefits",
+    generalAndAdministrative: "generalAndAdministrative",
+    legalAndProfessional: "legalAndProfessionalFees",
     miscellaneous: "miscellaneous",
-    managementFees: "managementFees",
-    replacementsAndReserves: "replacementReserves",
+    managementFees: "management",
+    replacementsAndReserves: "reserves",
     utilities: "utilities"
 } as const;
 

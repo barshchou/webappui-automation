@@ -149,13 +149,13 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
     }
 
     itemOriginalObj = {
-        waterAndSewer: "waterSewer",
-        repairsAndMaintenance: "repairsMaintenance",
-        payrollAndBenefits: "payrollBenefits",
-        generalAndAdministrative: "generalAdministrative",
-        legalAndProfessionalFees: "legalProfessionalFees",
-        management: "managementFees",
-        reserves: "replacementReserves"
+        waterAndSewer: "waterAndSewer",
+        repairsAndMaintenance: "repairsAndMaintenance",
+        payrollAndBenefits: "payrollAndBenefits",
+        generalAndAdministrative: "generalAndAdministrative",
+        legalAndProfessionalFees: "legalAndProfessionalFees",
+        management: "management",
+        reserves: "reserves"
     }
 
     changeStateOfPercentOfEGICheckbox(isToCheck = true): ExpenseForecastActions {

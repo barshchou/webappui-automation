@@ -4,7 +4,7 @@ import expensesForecastCardNamesEnum from "../../../../enums/expense/expensesFor
 
 
 const _customCategory: BoweryReports.ForecastItem = {
-    name: "customExpence"
+    name: "customExpenses[0]"
 };
 
 const _expensesForecastCardNamesArray = [
