@@ -6,7 +6,7 @@ import { PreviewEdit, Report, Property } from '../../../../actions';
 import mapKeysUtils from '../../../../utils/mapKeys.utils';
 
 describe('[QA-4291_4424_27-28_32_55-56_59] Check the Introduction page',
-    { tags: ["@preview_edit", "@introduction"] }, () => {
+    { tags: [ "@preview_edit", "@introduction" ] }, () => {
 
         beforeEach("Login, create report", () => {
             cy.stepInfo(`1. Create a report`);
