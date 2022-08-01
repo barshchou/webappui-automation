@@ -1,4 +1,4 @@
-import { Property, ReviewExport } from '../../../../actions/index';
+import { Property, ReviewExport } from '../../../../actions';
 import { Report } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
