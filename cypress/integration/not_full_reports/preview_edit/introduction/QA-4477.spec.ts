@@ -1,6 +1,6 @@
 import { createReport } from './../../../../actions/base/baseTest.actions';
-import { PreviewEdit, ReviewExport } from '../../../../actions/index';
-import { _NavigationSection } from '../../../../actions/base/index';
+import { PreviewEdit, ReviewExport } from '../../../../actions';
+import { _NavigationSection } from '../../../../actions/base';
 import testData from "../../../../fixtures/not_full_reports/preview_edit/introduction/QA-4477.fixture";
 
 describe("[QA-4477] Check the Definition of Market Value list", 
