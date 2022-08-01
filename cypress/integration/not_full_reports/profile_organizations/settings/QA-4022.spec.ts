@@ -1,7 +1,7 @@
-import { _HomePage } from './../../../../actions/base/index';
+import { _HomePage } from './../../../../actions/base';
 import { createReport, deleteReport } from './../../../../actions/base/baseTest.actions';
-import { Organization, ReviewExport } from '../../../../actions/index';
-import { _NavigationSection } from '../../../../actions/base/index';
+import { Organization, ReviewExport } from '../../../../actions';
+import { _NavigationSection } from '../../../../actions/base';
 import testData from "../../../../fixtures/not_full_reports/profile_organizations/settings/QA-4022.fixture";
 import enums from '../../../../enums/enums';
 
