@@ -219,13 +219,10 @@ export namespace BoweryReports {
     export type BondTickers = typeof Enums.BOND_TYPES[KeyInfo.BondTypes]
     export type BondTypes = keyof typeof  Enums.BOND_TYPES
 	export type ExpenseCardNames = typeof Enums.EXPENSES_CARD_NAMES[KeyInfo.ExpenseCardName]
-	
-    export namespace SalesComps {
-        export type SelectedComparablesSortType = "Custom" | "Date Sold"
-    }
 
     export namespace FindComps {
         export type SalePeriodValues = typeof Enums.SALE_PERIOD_VALUES[KeyInfo.SalePeriodValues]
+        export type SelectedComparablesSortType = typeof Enums.SORT_VALUES[KeyInfo.SortValues]
     }
     
     export type CalculationType = typeof Enums.CALCULATION_TYPE[KeyInfo.CalculationType]

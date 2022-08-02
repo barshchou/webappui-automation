@@ -112,7 +112,7 @@ class FindCompsPage extends BasePage {
         return cy.get('[data-qa="sortSalesComps-select-list"]');
     }
 
-    sortSalesCompsSelectListOption(sortType: BoweryReports.SalesComps.SelectedComparablesSortType) {
+    sortSalesCompsSelectListOption(sortType: BoweryReports.FindComps.SelectedComparablesSortType) {
         return cy.get(`[data-qa="sortSalesComps-${sortType}-select-option"]`);
     }
 

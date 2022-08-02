@@ -9,7 +9,7 @@ const reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreato
 });
 
 const filePath = "not_full_reports/CostarExport 5161.csv";
-const sortSalesCompsDateSold = 'Date Sold' as BoweryReports.SalesComps.SelectedComparablesSortType;
+const sortSalesCompsDateSold = 'Date Sold' as BoweryReports.FindComps.SelectedComparablesSortType;
 const salePeriodValue = 'Last 3 Months' as BoweryReports.FindComps.SalePeriodValues;
 
 const arrayOfCompsforAdditionFromMap1 = [

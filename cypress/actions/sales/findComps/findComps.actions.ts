@@ -15,7 +15,7 @@ import { BoweryReports } from "../../../types/boweryReports.type";
 import { isDateHasCorrectFormat } from "../../../../utils/date.utils";
 
 class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
-    selectedCompsSetSort(sortType: BoweryReports.SalesComps.SelectedComparablesSortType) {
+    selectedCompsSetSort(sortType: BoweryReports.FindComps.SelectedComparablesSortType) {
         this.Page.sortSalesCompsSelectList.click();
         this.Page.sortSalesCompsSelectListOption(sortType).click();
         return this;
