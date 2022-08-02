@@ -9,8 +9,7 @@ import "cypress-real-events/support";
 import { BoweryAutomation } from "../types/boweryAutomation.type";
 import { evalUrl } from "../utils/env.utils";
 import { Tag } from "../utils/tags.utils";
-import { _NavigationSection } from "../actions/base";
-import HomepageActions from "../actions/base/homepage.actions";
+import mapKeysUtils from "../utils/mapKeys.utils";
 
 require("cypress-xpath");
 require("cypress-iframe");
@@ -49,11 +48,14 @@ afterEach(() => {
     // @ts-ignore
     if (Cypress.mocha._mocha.suite.suites[0]._testConfig.tags.includes(Tag.check_export)) {
         if (!Cypress.currentTest.title.includes("Check export")) {
-            _NavigationSection.returnToHomePage();
-            HomepageActions.verifyThatPageIsOpened();
-            _NavigationSection.logout();
             cy.logNode(`Deleting report in check export spec`);
             cy.deleteApiReport();
+            /*
+             * We have to reset map, because we use different ways of creating report before checking export, our array
+             * of reportIds will always contain 1 id for check export specs in each afterHook. With this action we
+             * prevent cases, when we try to delete report, which is already deleted
+             */
+            cy._mapSet(mapKeysUtils.reportIdArray, undefined);
         }
     }
 });
