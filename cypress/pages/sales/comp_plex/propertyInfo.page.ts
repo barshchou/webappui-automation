@@ -3,6 +3,10 @@ import { Alias } from "../../../utils/alias.utils";
 const { compPlex } = Alias.pageElements;
 
 export default class PropertyInformationForm {
+    get gbaNewComp() {
+        return cy.get('[data-qa="GBA"]', { includeShadowDom: true })
+            .as(compPlex.gbaNewComp);
+    }
 
     get PropertyInfoCancelBtn() {
         return cy.get('[data-qa="property-info-cancel-btn"]', { includeShadowDom: true });
@@ -75,6 +79,28 @@ export default class PropertyInformationForm {
     get siteAreaNewComp() {
         return cy.get('[data-qa="Site Area"]', { includeShadowDom:true })
             .as(compPlex.siteAreaNewComp);
+    }
+
+    get yearBuiltNewComp() {
+        return cy.get('[data-qa="Year Built"]', { includeShadowDom: true })
+            .as(compPlex.yearBuiltNewComp);
+    }
+
+    get floorsNewComp() {
+        return cy.get('[data-qa="# Floors"]', { includeShadowDom: true })
+            .as(compPlex.floorsNewComp);
+    }
+
+    get elevatorInputNewComp() {
+        return cy.get('[value="elevator"]', { includeShadowDom:true });
+    }
+
+    get walkupInputNewComp() {
+        return cy.get('[value="walk-up"]', { includeShadowDom: true });
+    }
+
+    getBuildingType(buildingType: "elevator" | "walk-up") {
+        return cy.get(`[value="${buildingType}"]`, { includeShadowDom: true });
     }
 
     get streetAddressInput() {

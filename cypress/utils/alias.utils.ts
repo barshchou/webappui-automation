@@ -47,7 +47,10 @@ export const Alias = {
             averageUnitSizeNewComp:"averageUnitSizeNewComp",
             internalNotesTextArea:"internalNotesTextArea",
             appraiserCommentaryTextArea:"appraiserCommentaryTextArea",
-            siteAreaNewComp:"siteAreaNewComp"
+            siteAreaNewComp:"siteAreaNewComp",
+            yearBuiltNewComp:"yearBuiltNewComp",
+            floorsNewComp:"floorsNewComp",
+            gbaNewComp:"gbaNewComp",
         }
     },
     expenseForecastAliases: {
