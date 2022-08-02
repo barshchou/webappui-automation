@@ -47,7 +47,7 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
     }
 
     clickAddNewCompContinueButton(): FindCompsActions {
-        findCompsPage.newCompContinueButton.should('exist').should('be.enabled').focus().click();
+        findCompsPage.newCompContinueButton.should('exist').should('be.enabled').focus().trigger('mouseover').click();
         return this;
     }
 
@@ -97,7 +97,7 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
         return this;
     }
 
-    verifyUploadCompsSucceded(): FindCompsActions {
+    verifyUploadCompsSucceeded(): FindCompsActions {
         findCompsPage.loadingModalCSV.should('exist');
         findCompsPage.loadingModalCSV.should('not.exist');
         findCompsPage.salesCompsDateSold.should(($compsDateList) => {
@@ -106,7 +106,7 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
         return this;
     }
 
-    selectfilterSalePeriodValue(periodValue: BoweryReports.FindComps.SalePeriodValues): FindCompsActions {
+    selectFilterSalePeriodValue(periodValue: BoweryReports.FindComps.SalePeriodValues): FindCompsActions {
         findCompsPage.filterSalePeriod.should('exist').click();
         findCompsPage.filterSalePeriodValue(periodValue).should('exist').click();
         findCompsPage.filterSalePeriod.children().should('contain', `${periodValue}`);
@@ -119,7 +119,6 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
         findCompsPage.loadingModalSpinner.should('not.exist');
         return this;
     }
-
 
     verifyComparablesNumber(number: number): FindCompsActions {
         const numberToBe = number + 1;
@@ -139,9 +138,10 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
          * ernst: delay to not accidentaly dispatch click to "Remove" btn on SearchList
          */
         cy.wait(1500);
-        /*
-         * TODO: find a way to clear mapKeysUtils.searchResultSalesComp keys
-         */
+        cy.then(() => {
+            _map.delete(mapKeysUtils.searchResultSalesComp);
+            cy.log('Keys deleted'); 
+        });
         return this;
     }
 
