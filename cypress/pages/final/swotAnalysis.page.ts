@@ -12,7 +12,7 @@ class SwotAnalysisPage extends BasePage {
 
     get addThreatsButton() { return cy.get("[data-qa=threats-container] [data-qa=add-btn]"); }
 
-    get opportunitiesText() { return cy.get("[data-qa='opportunities'] textarea[name^=opportunities]"); }
+    getSectionTexts(sectionName: string) { return cy.get(`[data-qa='${sectionName}'] textarea[name^=${sectionName}]`); }
 }
 
 export default new SwotAnalysisPage();
