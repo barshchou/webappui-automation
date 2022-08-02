@@ -13,7 +13,7 @@ class ReviewExportActions extends BaseActionsExt<typeof reviewExportPage> {
 
     waitForReportGenerated(): ReviewExportActions {
         reviewExportPage.statusBar.as("statusBar").should("contain.text", "Pending");
-        cy.get("@statusBar", { timeout: 60000 }).should("contain.text", "Complete");
+        cy.get("@statusBar", { timeout: 80000 }).should("contain.text", "Complete");
         cy.get('[data-qa="download-btn"]', { timeout: 120000 }).should("be.visible");
         return this;
     }
