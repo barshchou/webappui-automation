@@ -9,24 +9,31 @@ const reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreato
 });
 
 const filePath = "not_full_reports/CostarExport 5161.csv";
-const sortSalesCompsValue = 'Date Sold';
+const sortSalesCompsDateSold = 'Date Sold' as BoweryReports.SalesComps.SelectedComparablesSortType;
 const salePeriodValue = 'Last 3 Months' as BoweryReports.FindComps.SalePeriodValues;
 
-const comparableFixture1 = {
-    address: "116 Cooper Street"
-};
-
-const comparableFixture2 = {
-    address: "866 United Nations Plaza"
-};
-
-const comparableFixture3 = {
-    address: "382 Second St."
-};
-
-const comparableFixture4 = {
-    address: "1715 Lexington Avenue"
-};
+const arrayOfCompsforAdditionFromMap1 = [
+    {
+        address: "116 Cooper Street"
+    },
+    {
+        address: "1715 Lexington Avenue"
+    },
+    {
+        address: "1074 Fulton Street"
+    },
+    {
+        address: "31-83 34 Street"
+    },
+];
+const arrayOfCompsforAdditionFromMap2 = [
+    {
+        address: "168 North 10 Street"
+    },
+    {
+        address: "151 Freeman Street"
+    }
+];
 
 const comparableFixtureManual = {
     address1: "388 Greenwich Street, New York, NY, USA",
@@ -80,13 +87,11 @@ const arrayOfCompsforManualAddition = [
 ];
 
 export default {
-    comparableFixture1,
-    comparableFixture2,
-    comparableFixture3,
-    comparableFixture4,
+    arrayOfCompsforAdditionFromMap1,
+    arrayOfCompsforAdditionFromMap2,
     comparableFixtureManual,
     reportCreationData,
-    sortSalesCompsValue,
+    sortSalesCompsDateSold,
     salePeriodValue,
     filePath,
     arrayOfCompsforManualAddition

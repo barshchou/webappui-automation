@@ -25,7 +25,7 @@ conditionalDescribe(`[QA-5157] [QA-5161] [Sales > Find Comps] "Date Sold" sortin
         _NavigationSection.navigateToFindComps();
 
         cy.stepInfo(`2. Verify "Date Sold" sorting is selected by default for sales comps`);
-        Sales._FindComps.Page.sortSalesCompsSelectValue.should('contain', testData.sortSalesCompsValue);
+        Sales._FindComps.Page.sortSalesCompsSelectValue.should('contain', testData.sortSalesCompsDateSold);
     });
 
     it("[QA-5161] [Sales > Find Comps] 'Date Sold' sorting is applied correctly to selected comps", () => {
@@ -38,13 +38,15 @@ conditionalDescribe(`[QA-5157] [QA-5161] [Sales > Find Comps] "Date Sold" sortin
         salesInterceptions();
 
         Sales._FindComps.resetAllFilters()
-            .selectfilterSalePeriodValue(testData.salePeriodValue);
-        Sales._FindComps.selectCompFromMapByAddress(testData.comparableFixture1.address)
-            .resetAllFilters()
-            .selectCompFromMap()
-            .selectCompFromMap()
-            .selectCompFromMap()
-            .checkSalesCompSortedByDateSold();
+            .selectFilterSalePeriodValue(testData.salePeriodValue);
+        testData.arrayOfCompsforAdditionFromMap1.forEach(comp => {
+            Sales._FindComps.selectCompFromMapByAddress(comp.address);
+        });    
+        Sales._FindComps.resetAllFilters();
+        testData.arrayOfCompsforAdditionFromMap2.forEach(comp => {
+            Sales._FindComps.selectCompFromMapByAddress(comp.address);
+        });
+        Sales._FindComps.checkSalesCompSortedByDateSold();
 
         cy.stepInfo(`2.Verify that when "Date Sold" option in Sort dropdown is selected 
                     comps are sorted in the next order:
@@ -103,14 +105,11 @@ conditionalDescribe(`[QA-5157] [QA-5161] [Sales > Find Comps] "Date Sold" sortin
         
         // TODO this is hardcode! uncomment line above and delete these below after comp-plex import fixes!
 
-        // TODO the code below doesn't work because of problems with import. Uncomment after comp-plex import fixes!
-        /*
-         *cy.reload();
-         * Sales._FindComps
-         *     .addNewCompViaReportId('61892ce7044194001c6349c9')
-         *     .openCompSearchTab()
-         *     .checkSalesCompSortedByDateSold();
-         */
+        cy.reload();
+        Sales._FindComps
+            .addNewCompViaReportId('61892ce7044194001c6349c9')
+            .openCompSearchTab()
+            .checkSalesCompSortedByDateSold();
 
         cy.stepInfo(`4.Verify that when "Date Sold" option in Sort dropdown 
                     is selected comps are sorted in the next order:
@@ -122,7 +121,7 @@ conditionalDescribe(`[QA-5157] [QA-5161] [Sales > Find Comps] "Date Sold" sortin
 
         cy.reload();
         Sales._FindComps.uploadComps(testData.filePath)
-            .verifyUploadCompsSucceded()
+            .verifyUploadCompsSucceeded()
             .checkSalesCompSortedByDateSold();
     });
 });
