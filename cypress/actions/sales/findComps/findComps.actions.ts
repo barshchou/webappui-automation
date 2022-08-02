@@ -13,6 +13,8 @@ import { recurse } from "cypress-recurse";
 import mapKeysUtils from "../../../utils/mapKeys.utils";
 import { BoweryReports } from "../../../types/boweryReports.type";
 
+const { compPlex } = Alias.pageElements;
+
 class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
     selectedCompsSetSort(sortType: BoweryReports.SalesComps.SelectedComparablesSortType) {
         this.Page.sortSalesCompsSelectList.click();
@@ -287,7 +289,7 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
         this.clearNumericInputNewComp(elementAlias);
         
         // ernst: little hack to work with commercialAreaNewComp input due its specific behavior
-        if (elementAlias != Alias.pageElements.compPlex.commercialAreaNewComp) {
+        if (elementAlias != compPlex.commercialAreaNewComp) {
             cy.get(`@${elementAlias}`, { includeShadowDom: true }).realClick();
         } else {
             cy.get(`@${elementAlias}`, { includeShadowDom: true }).focus();
