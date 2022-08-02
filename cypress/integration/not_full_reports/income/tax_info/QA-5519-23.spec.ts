@@ -4,7 +4,7 @@ import { _NavigationSection } from "../../../../actions/base";
 import { Income } from '../../../../actions/index';
 import launchDarklyApi from "../../../../api/launchDarkly.api";
 
-describe("[QA-5183] Export column order both assessment psf and assessment per unit", () => {
+describe("[QA-5119-23] Check that user can add, delete, update additional tax rate rows", () => {
 
     beforeEach("Login and create report", () => {
         cy.stepInfo("1. Set feature flag and create report");
@@ -12,7 +12,7 @@ describe("[QA-5183] Export column order both assessment psf and assessment per u
         createReport(testData.reportCreationData);
     });
 
-    it("Test body", { tags: [ "@check_export", "@income", "@tax_info" ] }, () => {
+    it("Test body", { tags: [ "@feature_flag", "@income", "@tax_info" ] }, () => {
         cy.stepInfo("2. Navigate to Income -> Tax Info");
         _NavigationSection.navigateToTaxInfo();
 
@@ -32,7 +32,6 @@ describe("[QA-5183] Export column order both assessment psf and assessment per u
             .enterRowTaxLiabilityValue(testData.rowNames.additional, testData.additionalTaxRateValue)
             .enterRowTaxLiabilityValue(testData.rowNames.special, testData.specialAssessmentRowValue)
             .verifyTotalTaxLiability();
-
 
         cy.stepInfo("6. Click 'Delete' from 'Action' column and verify row successfully deleted");
         Income._TaxInfo.deleteRowTaxLiability(testData.rowNames.additional)
