@@ -16,7 +16,8 @@ const generalDataFixture = () => {
         lessBuyoutCost: 500,
         appraiserConclusion: 6,
         lessEntrepreneurialProfit: 12,
-        lessEntrepreneurialProfitPopUp: "Entrepreneurial profit is equal to 12% of the sum of all of the line items above, " +
+        lessEntrepreneurialProfitPopUp: 
+            "Entrepreneurial profit is equal to 12% of the sum of all of the line items above, " +
             "$500.00, which totals to $60.00"
     };
 };

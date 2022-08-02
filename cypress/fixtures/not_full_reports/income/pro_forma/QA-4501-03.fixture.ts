@@ -35,8 +35,8 @@ const _reimbursementPerSf = _annualReimbursementTotal() / _grossBuildingArea;
 const _reimbursementPerUnit = _annualReimbursementTotal() / _numberOfResidentialUnits;
 
 const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("4501-03", {
-        incomeValue: Enums.INCOME_TYPE.both
-    });
+    incomeValue: Enums.INCOME_TYPE.both
+});
 
 const _leaseStatuses: Array<BoweryReports.LeaseStatus> = [ "Occupied", "Occupied", "Occupied" ];
 

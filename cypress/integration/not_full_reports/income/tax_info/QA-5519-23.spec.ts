@@ -1,12 +1,12 @@
 import testData from "../../../../fixtures/not_full_reports/income/tax_info/QA-5519-23.fixture";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { Income } from '../../../../actions/index';
 import launchDarklyApi from "../../../../api/launchDarkly.api";
 
 describe("[QA-5183] Export column order both assessment psf and assessment per unit", () => {
 
-    before("Login and create report", () => {
+    beforeEach("Login and create report", () => {
         cy.stepInfo("1. Set feature flag and create report");
         launchDarklyApi.setFeatureFlagForUser(testData.featureFlagKey, testData.onFeatureFlag);
         createReport(testData.reportCreationData);

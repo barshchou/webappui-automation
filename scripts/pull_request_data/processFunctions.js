@@ -34,12 +34,12 @@ exports.verifyArguments = () => {
 };
 
 /**
- * @description This function verifies --data flag value, only 'env' || 'url' || 'customEnv' are allowed
+ * @description This function verifies --data flag value, only 'url' || 'customUrl' are allowed
  */
 exports.verifyDataFlag = () => {
     const dataValue = _getFlagValue(_dataFlag);
-    const isCorrectValue = dataValue === "env" || dataValue === "url" || dataValue === "customEnv";
+    const isCorrectValue = dataValue === "url" || dataValue === "customUrl";
     if (!isCorrectValue) {
-        throw new Error(`You've entered incorrect data flag value, only 'env', 'url' or 'customEnv' values are acceptable`);
+        throw new Error(`You've entered incorrect data flag value, only 'url' or 'customUrl' values are acceptable`);
     }
 }

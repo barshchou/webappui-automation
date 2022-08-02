@@ -32,115 +32,115 @@ const setExpenseForecastFixture = (name: string, basis: BoweryReports.UnitSF,
 
 const _expensesForecast = () => { 
     return [ { 
-            expenseForecast: setExpenseForecastFixture(
-                expensesCellNames.waterAndSewer,
-                unitSFEnum.sf,
-                2,
-                expensesCardNames.waterAndSewer,
-                proFormaTypesEnum.waterAndSewer
-            ),
-            testCaseIds: 'QA-5971 & QA-5972' 
-        },
-        {
-            expenseForecast: setExpenseForecastFixture(
-                expensesCellNames.replacementsAndReserves,
-                unitSFEnum.sf,
-                7,
-                expensesCardNames.replacementsAndReserves,
-                proFormaTypesEnum.replacementsAndReserves
-            ),
-            testCaseIds: 'QA-5967 & QA-5968' 
-        },
-        {
-            expenseForecast: setExpenseForecastFixture(
-                expensesCellNames.insurance,
-                unitSFEnum.sf,
-                3,
-                expensesCardNames.insurance,
-                proFormaTypesEnum.insurance
-            ),
-            testCaseIds: 'QA-5969 & QA-5970' 
-        },
-        {
-            expenseForecast: setExpenseForecastFixture(
-                expensesCellNames.payrollBenefits,
-                unitSFEnum.sf,
-                4,
-                expensesCardNames.payrollBenefits,
-                proFormaTypesEnum.payrollBenefits
-            ),
-            testCaseIds: 'QA-5977 & QA-5978' 
-        },
-        {
-            expenseForecast: setExpenseForecastFixture(
-                expensesCellNames.repairAndMaintenance,
-                unitSFEnum.sf,
-                2.1,
-                expensesCardNames.repairAndMaintenance,
-                proFormaTypesEnum.repairAndMaintenance
-            ),
-            testCaseIds: 'QA-5964 & QA-5966' 
-        },
-        {
-            expenseForecast: setExpenseForecastFixture(
-                expensesCellNames.electricity,
-                unitSFEnum.sf,
-                5,
-                expensesCardNames.electricity,
-                proFormaTypesEnum.electricity
-            ),
-            testCaseIds: 'QA-5979 & QA-5980' 
-        },
-        {
-            expenseForecast: setExpenseForecastFixture(
-                expensesCellNames.generalAndAdministrative,
-                unitSFEnum.sf,
-                5,
-                expensesCardNames.generalAndAdministrative,
-                proFormaTypesEnum.generalAndAdministrative
-            ),
-            testCaseIds: 'QA-5983 & QA-5984' 
-        },
-        {
-            expenseForecast: setExpenseForecastFixture(
-                expensesCellNames.miscellaneous,
-                unitSFEnum.sf,
-                5,
-                expensesCardNames.miscellaneous,
-                proFormaTypesEnum.miscellaneous
-            ),
-            testCaseIds: 'QA-5981 & QA-5982' 
-        },
-        {
-            expenseForecast: setExpenseForecastFixture(
-                expensesCellNames.managementFees,
-                unitSFEnum.sf,
-                5,
-                expensesCardNames.managementFees,
-                proFormaTypesEnum.managementFees
-            ),
-            testCaseIds: 'QA-5975 & QA-5976' 
-        },
-        {
-            expenseForecast: setExpenseForecastFixture(
-                expensesCellNames.fuel,
-                unitSFEnum.sf,
-                5,
-                expensesCardNames.fuel,
-                proFormaTypesEnum.fuel
-            ),
-            testCaseIds: 'QA-5973 & QA-5974' 
-        },
-        {
-            expenseForecast: setExpenseForecastFixture(
-                expensesCellNames.legalAndProfessional,
-                unitSFEnum.sf,
-                6,
-                expensesCardNames.legalAndProfessional,
-                proFormaTypesEnum.legalAndProfessional
-            ),
-            testCaseIds: 'QA-5987 & QA-5988' 
-        }
+        expenseForecast: setExpenseForecastFixture(
+            expensesCellNames.waterAndSewer,
+            unitSFEnum.sf,
+            2,
+            expensesCardNames.waterAndSewer,
+            proFormaTypesEnum.waterAndSewer
+        ),
+        testCaseIds: 'QA-5971 & QA-5972' 
+    },
+    {
+        expenseForecast: setExpenseForecastFixture(
+            expensesCellNames.replacementsAndReserves,
+            unitSFEnum.sf,
+            7,
+            expensesCardNames.replacementsAndReserves,
+            proFormaTypesEnum.replacementsAndReserves
+        ),
+        testCaseIds: 'QA-5967 & QA-5968' 
+    },
+    {
+        expenseForecast: setExpenseForecastFixture(
+            expensesCellNames.insurance,
+            unitSFEnum.sf,
+            3,
+            expensesCardNames.insurance,
+            proFormaTypesEnum.insurance
+        ),
+        testCaseIds: 'QA-5969 & QA-5970' 
+    },
+    {
+        expenseForecast: setExpenseForecastFixture(
+            expensesCellNames.payrollBenefits,
+            unitSFEnum.sf,
+            4,
+            expensesCardNames.payrollBenefits,
+            proFormaTypesEnum.payrollBenefits
+        ),
+        testCaseIds: 'QA-5977 & QA-5978' 
+    },
+    {
+        expenseForecast: setExpenseForecastFixture(
+            expensesCellNames.repairAndMaintenance,
+            unitSFEnum.sf,
+            2.1,
+            expensesCardNames.repairAndMaintenance,
+            proFormaTypesEnum.repairAndMaintenance
+        ),
+        testCaseIds: 'QA-5964 & QA-5966' 
+    },
+    {
+        expenseForecast: setExpenseForecastFixture(
+            expensesCellNames.electricity,
+            unitSFEnum.sf,
+            5,
+            expensesCardNames.electricity,
+            proFormaTypesEnum.electricity
+        ),
+        testCaseIds: 'QA-5979 & QA-5980' 
+    },
+    {
+        expenseForecast: setExpenseForecastFixture(
+            expensesCellNames.generalAndAdministrative,
+            unitSFEnum.sf,
+            5,
+            expensesCardNames.generalAndAdministrative,
+            proFormaTypesEnum.generalAndAdministrative
+        ),
+        testCaseIds: 'QA-5983 & QA-5984' 
+    },
+    {
+        expenseForecast: setExpenseForecastFixture(
+            expensesCellNames.miscellaneous,
+            unitSFEnum.sf,
+            5,
+            expensesCardNames.miscellaneous,
+            proFormaTypesEnum.miscellaneous
+        ),
+        testCaseIds: 'QA-5981 & QA-5982' 
+    },
+    {
+        expenseForecast: setExpenseForecastFixture(
+            expensesCellNames.managementFees,
+            unitSFEnum.sf,
+            5,
+            expensesCardNames.managementFees,
+            proFormaTypesEnum.managementFees
+        ),
+        testCaseIds: 'QA-5975 & QA-5976' 
+    },
+    {
+        expenseForecast: setExpenseForecastFixture(
+            expensesCellNames.fuel,
+            unitSFEnum.sf,
+            5,
+            expensesCardNames.fuel,
+            proFormaTypesEnum.fuel
+        ),
+        testCaseIds: 'QA-5973 & QA-5974' 
+    },
+    {
+        expenseForecast: setExpenseForecastFixture(
+            expensesCellNames.legalAndProfessional,
+            unitSFEnum.sf,
+            6,
+            expensesCardNames.legalAndProfessional,
+            proFormaTypesEnum.legalAndProfessional
+        ),
+        testCaseIds: 'QA-5987 & QA-5988' 
+    }
     ];
 };
 

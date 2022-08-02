@@ -3,7 +3,7 @@ import organizationSettingsPage from "../../pages/organization/organizationSetti
 import { BoweryReports } from "../../types/boweryReports.type";
 import BaseActionsExt from "../base/base.actions.ext";
 
-class OrganizationSettingsActions extends BaseActionsExt<typeof organizationSettingsPage>{
+class OrganizationSettingsActions extends BaseActionsExt<typeof organizationSettingsPage> {
     
     getTreasuryBondRateFromAPI(url: string, date: string): OrganizationSettingsActions {
         cy.request(
@@ -11,14 +11,15 @@ class OrganizationSettingsActions extends BaseActionsExt<typeof organizationSett
                 method: 'GET',
                 url: `${url}${date}`
             }).then((response) => {
-                expect(response.status).to.eq(200);
-                let rate = new DOMParser().parseFromString(response.body, "text/xml").getElementsByTagName("observation")[0].getAttribute("value");
-                cy._mapSet("rate", rate);
-            });
+            expect(response.status).to.eq(200);
+            let rate = new DOMParser().parseFromString(response.body, "text/xml")
+                .getElementsByTagName("observation")[0].getAttribute("value");
+            cy._mapSet("rate", rate);
+        });
         return this;
     }
 
-    getLastUpdatedDateFromUI(bondType: BoweryReports.BondTypes): OrganizationSettingsActions{
+    getLastUpdatedDateFromUI(bondType: BoweryReports.BondTypes): OrganizationSettingsActions {
         organizationSettingsPage.bondsLastUpdated(bondType).invoke('attr', 'value').then(date => {
             let formattedDate = new Date(date);
             const offset = formattedDate.getTimezoneOffset();
@@ -87,8 +88,11 @@ class OrganizationSettingsActions extends BaseActionsExt<typeof organizationSett
     updateComplianceParagraphDiscussion(text: string, clear = false): OrganizationSettingsActions {
         this.clickComplianceParagraphEditButton()
             .editComplianceParagraphDiscussionText(text, clear)
-            .saveComplianceParagraphDiscussion()
-            .saveOrganizationSettings();
+            .saveComplianceParagraphDiscussion();
+
+        // Get some time to not overlap comment saving with global save
+        cy.wait(1000);
+        this.saveOrganizationSettings();
         return this;
     }
 
@@ -98,7 +102,7 @@ class OrganizationSettingsActions extends BaseActionsExt<typeof organizationSett
     }
 
     editComplianceParagraphDiscussionText(text: string, clear = false): OrganizationSettingsActions {
-        if (clear) organizationSettingsPage.complianceParagraphDiscussion.clear();
+        if (clear) { organizationSettingsPage.complianceParagraphDiscussion.clear(); }
         organizationSettingsPage.complianceParagraphDiscussion
             .type(text)
             .should('contain.text', text);
@@ -112,6 +116,8 @@ class OrganizationSettingsActions extends BaseActionsExt<typeof organizationSett
 
     saveComplianceParagraphDiscussion(): OrganizationSettingsActions {
         organizationSettingsPage.complianceParagraphDiscussionSaveButton.click();
+        organizationSettingsPage.complianceParagraphDiscussionSaveButton.should('not.exist');
+        organizationSettingsPage.complianceParagraphModifiedLabel.should('be.visible');
         return this;
     }
 
@@ -125,8 +131,11 @@ class OrganizationSettingsActions extends BaseActionsExt<typeof organizationSett
     updateCertificationBulletPointDiscussion(text: string, clear = false, index = 1): OrganizationSettingsActions {
         this.clickCertificationBulletPointEditButton(index)
             .editCertificationBulletPointDiscussionText(text, clear)
-            .saveCertificationBulletPointDiscussion()
-            .saveOrganizationSettings();
+            .saveCertificationBulletPointDiscussion();
+        
+        // Get some time to not overlap comment saving with global save
+        cy.wait(1000);
+        this.saveOrganizationSettings();
         return this;
     }
 
@@ -136,7 +145,7 @@ class OrganizationSettingsActions extends BaseActionsExt<typeof organizationSett
     }
 
     editCertificationBulletPointDiscussionText(text: string, clear = false, index = 1): OrganizationSettingsActions {
-        if (clear) organizationSettingsPage.certificationBulletPointDiscussion(index).clear();
+        if (clear) { organizationSettingsPage.certificationBulletPointDiscussion(index).clear(); }
         organizationSettingsPage.certificationBulletPointDiscussion(index)
             .type(text)
             .should('contain.text', text);

@@ -1,4 +1,4 @@
-import { loginAction } from './../../actions/base/baseTest.actions';
+import { loginAction } from '../../actions/base/baseTest.actions';
 import { Base, ReviewExport } from "../../actions";
 import testData from "../../fixtures/smoke/generateOpenXMLExistReport.fixture";
 import { createReport, deleteReport } from "../../actions/base/baseTest.actions";
@@ -15,7 +15,7 @@ describe("Open any existing report, generate and open in XML format", { tags: [ 
         Base._NavigationSection.openReviewAndExport(false)
             .verifyProgressBarNotExist();
         ReviewExport.verifyXMLReportName(testData.reportCreationData.reportNumber)
-        .verifyXMLReportOpens(testData.reportCreationData.reportNumber);
+            .verifyXMLReportOpens(testData.reportCreationData.reportNumber);
     });
 
     it("Create new report for next tests", () => {

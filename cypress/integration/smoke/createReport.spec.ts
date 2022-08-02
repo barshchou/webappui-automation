@@ -1,4 +1,4 @@
-import { createReport, deleteReport } from "../../actions/base/baseTest.actions";
+import { createReport } from "../../actions/base/baseTest.actions";
 import tesData from "../../fixtures/smoke/createReport.fixture";
 import { Base, Report, Sales } from "../../actions";
 import { _ReportTitles } from "../../enums/pages_titles";
@@ -23,6 +23,5 @@ describe("Create report test, open Find Comps, check if map is loaded", { tags: 
         Base._NavigationSection.navigateToFindComps()
             .verifyProgressBarNotExist();
         Sales._FindComps.selectCompFromMap();
-        deleteReport(tesData.reportCreationData.reportNumber);
     });
 });

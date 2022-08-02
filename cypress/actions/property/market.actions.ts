@@ -6,7 +6,7 @@ import BaseActionsExt from "../base/base.actions.ext";
 import { _map } from "../../support/commands";
 import mapKeysUtils from "../../utils/mapKeys.utils";
 
-class MarketActions extends BaseActionsExt<typeof marketPage>{
+class MarketActions extends BaseActionsExt<typeof marketPage> {
     readonly errorRetrieveFileMessage = "Cannot retrieve file. Contact Research team.";
 
     readonly finalDocumentNamePart = "FINAL";
@@ -48,7 +48,13 @@ class MarketActions extends BaseActionsExt<typeof marketPage>{
         return this;
     }
 
-    verifyNeighborhoodYear(yearToBe: string | number): MarketActions {
+    enterNeighborhoodYear(yearToBe: number): MarketActions {
+        marketPage.neighborhoodYear.type(`${yearToBe}`);
+        this.verifyNeighborhoodYear(yearToBe);
+        return this;
+    }
+
+    verifyNeighborhoodYear(yearToBe: number): MarketActions {
         marketPage.neighborhoodYear.should("have.value", yearToBe);
         return this;
     }
@@ -70,7 +76,13 @@ class MarketActions extends BaseActionsExt<typeof marketPage>{
         return this;
     }
 
-    verifyMarketYear(yearToBe: string): MarketActions {
+    enterMarketYear(yearToBe: number): MarketActions {
+        marketPage.marketYear.type(`${yearToBe}`);
+        this.verifyMarketYear(yearToBe);
+        return this;
+    }
+
+    verifyMarketYear(yearToBe: number): MarketActions {
         marketPage.marketYear.should("have.value", yearToBe);
         return this;
     }
@@ -81,13 +93,14 @@ class MarketActions extends BaseActionsExt<typeof marketPage>{
         return this;
     }
 
-    fillMarketResearch(marketResearch: BoweryReports.MarketResearch, marketAnalysisUse: BoweryReports.MarketAnalysisUses,
-                       isEnterState = true, isEnterQuarter = false): MarketActions {
+    fillMarketResearch(marketResearch: BoweryReports.MarketResearch, 
+        marketAnalysisUse: BoweryReports.MarketAnalysisUses,
+        isEnterState = true, isEnterQuarter = false): MarketActions {
         this.enterNeighborhood(marketResearch.neighborhoodValue);
-        if (isEnterState) this.enterMarketState(marketResearch.state);
+        if (isEnterState) { this.enterMarketState(marketResearch.state); }
         this.verifyMarketState(marketResearch.state)
             .enterArea(marketResearch.marketArea)
-            .verifyNeighborhoodYear(getYearFromDate(marketResearch.marketDate))
+            .verifyNeighborhoodYear(parseInt(getYearFromDate(marketResearch.marketDate)))
             .enterMarket(marketResearch.macroMarket, marketAnalysisUse)
             .enterSubmarket(marketResearch.submarket, marketAnalysisUse);
         if (isEnterQuarter)  {
@@ -96,7 +109,7 @@ class MarketActions extends BaseActionsExt<typeof marketPage>{
         } else {
             this.verifyMarketQuarter(getQuarter(marketResearch.dateOfValuation));
         }
-        this.verifyMarketYear(getYearFromDate(marketResearch.dateOfValuation));
+        this.verifyMarketYear(parseInt(getYearFromDate(marketResearch.dateOfValuation)));
         return this;
     }
 
@@ -172,7 +185,7 @@ class MarketActions extends BaseActionsExt<typeof marketPage>{
 
     setAreaEconomicAnalysisFileValueToMap(): MarketActions {
         marketPage.areaEconomicAnalysisFile.invoke("attr", "value").then(fileName => {
-            _map.set(mapKeysUtils.area_economic_analysis_file, fileName);
+            _map.set(mapKeysUtils.areaEconomicAnalysisFile, fileName);
         });
         return this;
     }
@@ -186,12 +199,13 @@ class MarketActions extends BaseActionsExt<typeof marketPage>{
 
     setNeighborhoodDemographicFileValueToMap(): MarketActions {
         marketPage.neighborhoodDemographicFile.invoke("attr", "value").then(fileName => {
-            _map.set(mapKeysUtils.neighborhood_demographic_file, fileName);
+            _map.set(mapKeysUtils.neighborhoodDemographicFile, fileName);
         });
         return this;
     }
 
-    verifyMarketByAnalysisUseHasFile(use: BoweryReports.MarketAnalysisUses, textToContain = this.finalDocumentNamePart): MarketActions {
+    verifyMarketByAnalysisUseHasFile(use: BoweryReports.MarketAnalysisUses, 
+        textToContain = this.finalDocumentNamePart): MarketActions {
         marketPage.getMarketFileByAnalysisUse(use).invoke("attr", "value").then(fileName => {
             expect(isStringContainSubstring(fileName, textToContain)).to.be.true;
         });
@@ -200,12 +214,13 @@ class MarketActions extends BaseActionsExt<typeof marketPage>{
 
     setMarketByAnalysisUseFileValueToMap(use: BoweryReports.MarketAnalysisUses): MarketActions {
         marketPage.getMarketFileByAnalysisUse(use).invoke("attr", "value").then(fileName => {
-            _map.set(`${use}_${mapKeysUtils.market_analysis_use_file}`, fileName);
+            _map.set(`${use}_${mapKeysUtils.marketAnalysisUseFile}`, fileName);
         });
         return this;
     }
 
-    verifySubmarketByAnalysisUseHasFile(use: BoweryReports.MarketAnalysisUses, textToContain = this.finalDocumentNamePart): MarketActions {
+    verifySubmarketByAnalysisUseHasFile(use: BoweryReports.MarketAnalysisUses, 
+        textToContain = this.finalDocumentNamePart): MarketActions {
         marketPage.getSubmarketFileByAnalysisUse(use).invoke("attr", "value").then(fileName => {
             expect(isStringContainSubstring(fileName, textToContain)).to.be.true;
         });
@@ -214,7 +229,7 @@ class MarketActions extends BaseActionsExt<typeof marketPage>{
 
     setSubmarketByAnalysisUseFileValueToMap(use: BoweryReports.MarketAnalysisUses): MarketActions {
         marketPage.getSubmarketFileByAnalysisUse(use).invoke("attr", "value").then(fileName => {
-            _map.set(`${use}_${mapKeysUtils.submarket_analysis_use_file}`, fileName);
+            _map.set(`${use}_${mapKeysUtils.submarketAnalysisUseFile}`, fileName);
         });
         return this;
     }
@@ -232,11 +247,16 @@ class MarketActions extends BaseActionsExt<typeof marketPage>{
         return this;
     }
 
-    verifyAnyFileInputHasFile(use: BoweryReports.MarketAnalysisUses, textToContain = this.finalDocumentNamePart): MarketActions {
+    verifyAnyFileInputHasFile(use: BoweryReports.MarketAnalysisUses, 
+        textToContain = this.finalDocumentNamePart): MarketActions {
         cy.url().then(() => {
             let isAnyHasFile = false;
-            const files: string[] = [ _map.get(mapKeysUtils.area_economic_analysis_file), _map.get(mapKeysUtils.neighborhood_demographic_file),
-            _map.get(`${use}_${mapKeysUtils.market_analysis_use_file}`), _map.get(`${use}_${mapKeysUtils.submarket_analysis_use_file}`) ];
+            const files: string[] = [ 
+                _map.get(mapKeysUtils.areaEconomicAnalysisFile),
+                _map.get(mapKeysUtils.neighborhoodDemographicFile),
+                _map.get(`${use}_${mapKeysUtils.marketAnalysisUseFile}`), 
+                _map.get(`${use}_${mapKeysUtils.submarketAnalysisUseFile}`) 
+            ];
             for (let i = 0; i < files.length; i++) {
                 cy.log(`${files[i]} file value`);
                 if (files[i].includes(textToContain)) {
@@ -245,6 +265,29 @@ class MarketActions extends BaseActionsExt<typeof marketPage>{
                 }
             }
             cy.wrap(isAnyHasFile).should("be.true");
+        });
+        return this;
+    }
+
+    uploadRentStabilizationFile(fileName: string): MarketActions {
+        marketPage.uploadRentStabilizationFileButton.click();
+        marketPage.fileDropZone.attachFile(
+            `test_files/${fileName}`,
+            { subjectType: 'drag-n-drop' }
+        );
+        marketPage.getUploadFileButton().click();
+        marketPage.insertFileButton.click();
+        return this;
+    }
+
+    clickTrashCanButton(fileSelectionName: BoweryReports.FileSelection): MarketActions {
+        marketPage.getTrashCanButton(fileSelectionName).click();
+        return this;
+    }
+
+    verifyRentStabilizationFile(textToContain: string): MarketActions {
+        marketPage.rentStabilizationFile.invoke("attr", "value").then(fileName => {
+            expect(fileName).to.equal(textToContain);
         });
         return this;
     }

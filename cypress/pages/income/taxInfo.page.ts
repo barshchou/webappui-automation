@@ -1,119 +1,145 @@
 import BasePage from "../base/base.page";
 
 class TaxInfoPage extends BasePage {
-    get basisRadio() {return cy.get("[name=basis]");}
+    get basisRadio() { return cy.get("[name=basis]"); }
 
-    getVerifyBasisRadioInput(value: string) {return cy.get(`[data-qa='basis-radio-group'] [data-qa=checked] input[value='${value}']`);}
+    getVerifyBasisRadioInput(value: string) { 
+        return cy.get(`[data-qa='basis-radio-group'] [data-qa=checked] input[value='${value}']`); 
+    }
 
-    get landActualInput() {return cy.get("[name=landActual]");}
+    get landActualInput() { return cy.xpath('//*[.="Land"]//following::div[@col-id="actual"]').first(); }
 
-    get landTransitional() {return cy.get("[name=landTransitional]");}
+    get landTransitional() { return cy.xpath('//*[.="Land"]//following::div[@col-id="transitional"]').first(); }
 
-    get buildingActualInput() {return cy.get("[name=buildingActual]");}
+    get buildingActualInput() { return cy.xpath('//*[.="Building"]//following::div[@col-id="actual"]').first(); }
 
-    get buildingTransitionalInput() {return cy.get("[name=buildingTransitional]");}
+    get buildingTransitionalInput() { 
+        return cy.xpath('//*[.="Building"]//preceding-sibling::div[@col-id="transitional"]').first(); 
+    }
 
-    get includeTransitionalAssessedValueCheckbox() {return cy.get("[data-qa^='hasTransitionalAssessedValue'] input");}
+    get includeTransitionalAssessedValueCheckbox() { return cy.get("[data-qa^='hasTransitionalAssessedValue'] input"); }
 
-    get totalTaxableAssessedValue() {return cy.get("[data-qa=totalActual-cell]");}
+    get totalTaxableAssessedValue() { return cy.get("[data-qa=totalActual-cell]"); }
 
-    get editTaxRatesButton() {return cy.get("[data-qa=edit-tax-rates_btn]");}
+    get editTaxRatesButton() { return cy.get("[data-qa=edit-tax-rates_btn]"); }
 
-    get taxClassNameInput() {return cy.get("[name=taxClassName]");}
+    get taxClassNameInput() { return cy.get("[name=taxClassName]"); }
 
-    get taxRateYearInputs() {return cy.get("[name^=taxRates][name$=effectiveDate]");}
+    get taxRateYearInputs() { return cy.get("[name^=taxRates][name$=effectiveDate]"); }
 
-    get taxRateValueInputs() {return cy.get("[name^=taxRates][name$=value]");}
+    get taxRateValueInputs() { return cy.get("[name^=taxRates][name$=value]"); }
 
-    get saveButton() {return cy.get("[data-qa=save-btn]");}
+    get saveButton() { return cy.get("[data-qa=save-btn]"); }
 
-    get taxClassDropdown() {return cy.get("#select-taxClass");}
+    get taxClassDropdown() { return cy.get("#select-taxClass"); }
 
-    get taxRateDropdown() {return cy.get("#select-taxRate");}
+    get taxRateDropdown() { return cy.get("#select-taxRate"); }
 
-    get taxableAssessedValue() {return cy.get("[data-qa=taxableAssessedValue-cell]");}
+    get taxableAssessedValue() { return cy.get("[data-qa=taxableAssessedValue-cell]"); }
 
-    get taxRateValueCell() {return cy.get("[data-qa=taxRate-value-cell]");}
+    get taxRateValueCell() { return cy.get("[data-qa=taxRate-value-cell]"); }
 
-    get taxLiabilityTotalCell() {return cy.get("[data-qa=taxLiability-cell]");}
+    get taxLiabilityTotalCell() { return cy.get("[data-qa=taxLiability-cell]"); }
 
-    get sfOrUnitsNumberCell() {return cy.get("[data-qa=grossBuildingArea-cell]");}
+    get sfOrUnitsNumberCell() { return cy.get("[data-qa=grossBuildingArea-cell]"); }
 
-    get perBasisCell() {return cy.get("[data-qa=perBasis-cell]");}
+    get perBasisCell() { return cy.get("[data-qa=perBasis-cell]"); }
 
-    get taxLiabilityCommentary() {return cy.get("[data-qa^='currentTaxLiabilityDiscussion.commentary']");}
+    get taxLiabilityCommentary() { return cy.get("[data-qa^='currentTaxLiabilityDiscussion.commentary']"); }
 
-    get projectedTab() {return cy.get("[data-qa=projected-tab]");}
+    get projectedTab() { return cy.get("[data-qa=projected-tab]"); }
 
-    get projectedIncludeInExportCheckbox() {return cy.get("[data-qa^='projected.includedInExport'] input");}
+    get projectedIncludeInExportCheckbox() { return cy.get("[data-qa^='projected.includedInExport'] input"); }
 
-    get projectedLiabilityCommentary() {return cy.get("[data-qa^='projected.projectedTaxLiabilityDiscussion.commentary']");}
+    get projectedLiabilityCommentary() { 
+        return cy.get("[data-qa^='projected.projectedTaxLiabilityDiscussion.commentary']"); 
+    }
 
-    get comparablesTab() {return cy.get("[data-qa=comparables-tab]");}
+    get comparablesTab() { return cy.get("[data-qa=comparables-tab]"); }
 
-    get addBlankRowButton() {return cy.get("[data-qa=add-blank-row-btn]");}
+    get addBlankRowButton() { return cy.get("[data-qa=add-blank-row-btn]"); }
 
-    get newTaxCompAddressInput() {return cy.get("[name='newTaxComp.address']");}
+    get newTaxCompAddressInput() { return cy.get("[name='newTaxComp.address']"); }
 
-    get newTaxCompYearBuiltInput() {return cy.get("[name='newTaxComp.yearBuilt']");}
+    get newTaxCompYearBuiltInput() { return cy.get("[name='newTaxComp.yearBuilt']"); }
 
-    get newTaxCompBasisInput() {return cy.get("[name='newTaxComp.basis']");}
+    get newTaxCompBasisInput() { return cy.get("[name='newTaxComp.basis']"); }
 
-    get newTaxCompTaxesPerBasisInput() {return cy.get("[name='newTaxComp.taxesPerBasis']");}
+    get newTaxCompTaxesPerBasisInput() { return cy.get("[name='newTaxComp.taxesPerBasis']"); }
 
-    get sourceOfInfoDropdown() {return cy.get("[data-qa^='newTaxComp.sourceOfInformation'] [data-qa=select-value]");}
+    get sourceOfInfoDropdown() { return cy.get("[data-qa^='newTaxComp.sourceOfInformation'] [data-qa=select-value]"); }
 
-    getDropdownOptionByValue(value) {return cy.get(`li[data-value='${value}']`);}
+    getDropdownOptionByValue(value: string) { return cy.get(`li[data-value='${value}']`); }
 
-    get newTaxCompTaxYearInput() {return cy.get("[name='newTaxComp.taxYear']");}
+    get newTaxCompTaxYearInput() { return cy.get("[name='newTaxComp.taxYear']"); }
 
-    get addButton() {return cy.get("[data-qa=add-btn]");}
+    get addButton() { return cy.get("[data-qa=add-btn]"); }
 
-    get taxCompsTableAddresses() {return cy.get("[name^=taxComps][name$=address]");}
+    get taxCompsTableAddresses() { return cy.get("[name^=taxComps][name$=address]"); }
 
-    get taxCompsTableYearsBuilt() {return cy.get("[name^=taxComps][name$=yearBuilt]");}
+    get taxCompsTableYearsBuilt() { return cy.get("[name^=taxComps][name$=yearBuilt]"); }
 
-    get taxCompsTableTaxYears() {return cy.get("[name^=taxComps][name$=taxYear]");}
+    get taxCompsTableTaxYears() { return cy.get("[name^=taxComps][name$=taxYear]"); }
 
-    get taxCompsTableBasis() {return cy.get("[name^=taxComps][name$=basis]");}
+    get taxCompsTableBasis() { return cy.get("[name^=taxComps][name$=basis]"); }
 
-    get taxCompsTableTaxesPerBasis() {return cy.get("[name^=taxComps][name$=taxesPerBasis]");}
+    get taxCompsTableTaxesPerBasis() { return cy.get("[name^=taxComps][name$=taxesPerBasis]"); }
 
-    get taxCompsTableSourcesOfInfo() {return cy.get("[data-qa='sourceOfInfo-cell'] > div");}
+    get taxCompsTableSourcesOfInfo() { return cy.get("[data-qa='sourceOfInfo-cell'] > div"); }
 
-    get taxCompsDiscussionComm() {return cy.get("[data-qa^='taxCompsDiscussion.commentary']");}
+    get taxCompsDiscussionComm() { return cy.get("[data-qa^='taxCompsDiscussion.commentary']"); }
 
-    get summaryTab() {return cy.get("[data-qa=summary-tab]");}
+    get summaryTab() { return cy.get("[data-qa=summary-tab]"); }
 
-    get concludedLiabilityTypeRadio() {return cy.get("[name='projected.concludedLiabilityType']");}
+    get concludedLiabilityTypeRadio() { return cy.get("[name='projected.concludedLiabilityType']"); }
 
-    getVerifyConcludedTaxLiabTypeInput(value) {return cy.get(`[data-qa^=projected] [data-qa="checked"] input[value='${value}']`);}
+    getVerifyConcludedTaxLiabilityTypeInput(value: string) { 
+        return cy.get(`[data-qa^=projected] [data-qa="checked"] input[value='${value}']`); 
+    }
 
-    get concludedLiabilityPerBasisInput() {return cy.get("[name='projected.concludedLiabilityPerBasis']");}
+    get concludedLiabilityPerBasisInput() { return cy.get("[name='projected.concludedLiabilityPerBasis']"); }
 
-    get appraiserOpTaxLiabilityTotal() {return cy.get(`[data-qa="Appraiser's Opinion-taxLiability-value-cell"]`);}
+    get appraiserOpTaxLiabilityTotal() { return cy.get(`[data-qa="Appraiser's Opinion-taxLiability-value-cell"]`); }
 
-    get appraiserOpTaxLiabilityPerBasis() {return cy.get(`[data-qa="Appraiser's Opinion-taxLiabilityPerBasis-value-cell"]`);}
+    get appraiserOpTaxLiabilityPerBasis() { 
+        return cy.get(`[data-qa="Appraiser's Opinion-taxLiabilityPerBasis-value-cell"]`); 
+    }
 
-    get appraiserOpTaxLiabTaxRateValueCell() {return cy.get(`[data-qa="Appraiser's Opinion-taxRate-value-cell"]`);}
+    get appraiserOpTaxLiabilityTaxRateValueCell() { 
+        return cy.get(`[data-qa="Appraiser's Opinion-taxRate-value-cell"]`); 
+    }
 
-    get appraiserOpTaxAssessedValueCell() {return cy.get(`[data-qa="Appraiser's Opinion-taxableAssessedValue-value-cell"]`);}
+    get appraiserOpTaxAssessedValueCell() { 
+        return cy.get(`[data-qa="Appraiser's Opinion-taxableAssessedValue-value-cell"]`); 
+    }
     
-    get taxCalculationDiscussionCommentary() {return cy.xpath("//*[.='Tax Calculation Discussion']//following::*[@data-slate-editor][1]");}
+    get taxCalculationDiscussionCommentary() { 
+        return cy.xpath("//*[.='Tax Calculation Discussion']//following::*[@data-slate-editor][1]"); 
+    }
     
-    get taxCalculationDiscussionTooltip() {return cy.get("svg[data-icon=info-circle]");}
+    get taxCalculationDiscussionTooltip() { return cy.get("svg[data-icon=info-circle]"); }
     
-    get taxCalculationDiscussionTitle() {return cy.xpath("//h6[contains(text(),'Tax Calculation Discussion')]");}
+    get taxCalculationDiscussionTitle() { return cy.xpath("//h6[contains(text(),'Tax Calculation Discussion')]"); }
 
-    get taxSummaryDiscussion() {return cy.get("[data-qa^='taxSummaryDiscussion.commentary'],[name='taxSummaryDiscussion.commentary']");}
+    get taxSummaryDiscussion() {
+        return cy.get("[data-qa^='taxSummaryDiscussion.commentary'],[name='taxSummaryDiscussion.commentary']");
+    }
 
-    getAddNewRowButton(name = "Add Additional Tax Rate") {return cy.xpath(`//button/*[contains(text(), '${name}')]`);}
+    getTaxLiabilityRowValue(name: string) {
+        return cy.xpath(`//*[@role='presentation']//*[contains(text(), '${name}')]/following-sibling::*[1]`);
+    }
 
-    getTaxLiabilityRowValue(name: string) {return cy.xpath(`//*[@role='presentation']//*[contains(text(), '${name}')]/following-sibling::*[1]`);}
+    getTaxLiabilityRowItem(name: string) { 
+        return cy.xpath(`//*[@role='presentation']//*[contains(text(), '${name}')]`);
+    }
 
-    getTaxLiabilityRowItem(name: string) {return cy.xpath(`//*[@role='presentation']//*[contains(text(), '${name}')]`);}
+    getTaxLiabilityRowAction(name: string) {
+        return cy.xpath(`//*[@role='presentation']//*[contains(text(), '${name}')]/following-sibling::*[2]`);
+    }
 
-    getTaxLiabilityRowAction(name: string) {return cy.xpath(`//*[@role='presentation']//*[contains(text(), '${name}')]/following-sibling::*[2]`);}
+    getAddNewRowButton(name = "Add Additional Tax Rate") {
+        return cy.xpath(`//button/span[contains(text(), '${name}')]`);
+    }
 }
 
 export default new TaxInfoPage();

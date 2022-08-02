@@ -1,8 +1,8 @@
 const salesAdjustmentGrid = {
-    location_adjustment: "location-adjustment",
-    market_adjustment: "market-adjustment",
-    utility_adjustment: "utility-adjustment",
-    other_adjustment: "other-adjustment"
+    locationAdjustment: "location-adjustment",
+    marketAdjustment: "market-adjustment",
+    utilityAdjustment: "utility-adjustment",
+    otherAdjustment: "other-adjustment"
 } as const;
 
 export default Object.freeze(salesAdjustmentGrid);

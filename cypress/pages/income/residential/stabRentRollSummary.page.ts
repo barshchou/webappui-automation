@@ -1,23 +1,29 @@
 import BasePage from "../../base/base.page";
 
-class StabilizedRentRollSummaryPage extends BasePage{
-    get annualRentCells() {return cy.get("[data-qa^='summaryTableData-annualRent']:not([data-qa*='total'])");}
+class StabilizedRentRollSummaryPage extends BasePage {
+    get annualRentCells() { return cy.get("[data-qa^='summaryTableData-annualRent']:not([data-qa*='total'])"); }
 
-    get totalAnnualRent() {return cy.get("[data-qa=summaryTableData-annualRent-total-cell]");}
+    get totalAnnualRent() { return cy.get("[data-qa=summaryTableData-annualRent-total-cell]"); }
 
-    get increaseCells() {return cy.get("[data-qa^='summaryTableData-increase'] input[name]");}
+    get increaseCells() { return cy.get("[data-qa^='summaryTableData-increase'] input[name]"); }
 
-    get pgiCells() {return cy.get("[data-qa^=summaryTableData-pgi]:not([data-qa*=total])");}
+    get pgiCells() { return cy.get("[data-qa^=summaryTableData-pgi]:not([data-qa*=total])"); }
 
-    get pgiTotal() {return cy.get("[data-qa=summaryTableData-pgi-total-cell]");}
+    get pgiTotal() { return cy.get("[data-qa=summaryTableData-pgi-total-cell]"); }
 
-    get summaryDiscussionTab() {return cy.get("[data-qa=summaryDiscussion-tab]");}
+    get summaryDiscussionTab() { return cy.get("[data-qa=summaryDiscussion-tab]"); }
 
-    get stabRRSummaryDiscussion() {return cy.get("[data-qa^='rentRollSummaryDiscussion.commentary']");}
+    get stabRRSummaryDiscussion() { return cy.get("[data-qa^='rentRollSummaryDiscussion.commentary']"); }
 
-    get grossIncomeDiscussion() {return cy.get("[data-qa^='potentialGrossResidentialIncomeDiscussion.commentary']");}
+    get grossIncomeDiscussion() { return cy.get("[data-qa^='potentialGrossResidentialIncomeDiscussion.commentary']"); }
 
-    get distributionSummary() {return cy.get("[data-qa^='rentRollUnitDistributionSummary.commentary']");}
+    get distributionSummary() { return cy.get("[data-qa^='rentRollUnitDistributionSummary.commentary']"); }
+
+    rentTypeIncrease(rentTypeIndex = 0)  { return cy.get(`[name="rentTypeSummary[${rentTypeIndex}].increase"]`); }
+
+    get rentControlledIncreaseDiscussion() { 
+        return cy.get(`[data-qa="rentControlledDiscussion.commentary-generated-text"]`); 
+    }
 }
 
 export default new StabilizedRentRollSummaryPage();

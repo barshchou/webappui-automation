@@ -1,11 +1,12 @@
-import testData from "../../../../../fixtures/not_full_reports/income/residential/in_place_rent_roll/QA-4093-96.fixture";
-import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
+import testData from 
+    "../../../../../fixtures/not_full_reports/income/residential/in_place_rent_roll/QA-4093-96.fixture";
+import { createReport } from "../../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../../actions/base";
 import { Income, Property } from "../../../../../actions";
 
 describe(`[QA-4093-95] Verify if "Per Month" time period PSF Rent based on is selected - > the calculation 
     of "Rent PSF/month" should be Monthly Rent/Square Footage`, 
-    { tags:[ "@income", "@residential", "@in_place_rent_roll" ] }, () => {
+{ tags:[ "@income", "@residential", "@in_place_rent_roll" ] }, () => {
         
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
@@ -34,14 +35,17 @@ describe(`[QA-4093-95] Verify if "Per Month" time period PSF Rent based on is se
                 .verifyColumnExist(testData.columnName)
                 .enterSquareFootageByRow(unit.footage)
                 .enterMonthlyRentByRowNumber(unit.monthlyRent)
-                .verifyRentPSFValueByRow(); 
-            cy.reload();
+                .verifyRentPSFValueByRow();
+            
+            // Restore page to default state
+            _NavigationSection.navigateToResidentialUnitGroups(false)
+                .navigateToResInPlaceRentRoll();
         });
     });
 
     it("[QA-4095-96]", () => {
-        cy.stepInfo(`1. Verify if selected time period PSF rent based on is changed -> Calculation of "Rent/SF"and "Rent PSF/month" column is 
-            dynamically recalculated according to newly selected time period`);
+        cy.stepInfo(`1. Verify if selected time period PSF rent based on is changed -> Calculation of 
+        "Rent/SF"and "Rent PSF/month" column is dynamically recalculated according to newly selected time period`);
         Income._Residential.InPlaceRentRoll.checkPerUnitSquareFootage()
             .clickPSFRadio(testData.psfRadioValuePerMonthly)
             .verifyColumnExist(testData.columnName)
@@ -51,12 +55,10 @@ describe(`[QA-4093-95] Verify if "Per Month" time period PSF Rent based on is se
             .clickPSFRadio(testData.psfRadioValuePerAnnually)
             .verifyRentPSFValueByRow(false);
         
-        cy.stepInfo(`2. Verify there is no change to Generated Commentary regardless user select "Yes" in "Do you know per unit square footage/" 
-            and selected time period`);
+        cy.stepInfo(`2. Verify there is no change to Generated Commentary regardless 
+        user select "Yes" in "Do you know per unit square footage/" and selected time period`);
         Income._Residential.InPlaceRentRoll.verifyRentRollCommentary(testData.commentaryToBe)
             .checkPerUnitSquareFootage(false)
             .verifyRentRollCommentary(testData.commentaryToBe);
-        
-        deleteReport(testData.reportCreationData.reportNumber);
     });
 });

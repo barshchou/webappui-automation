@@ -241,7 +241,7 @@ export default class ResidentialRentRollSharedActions<T extends ResidentialRentR
         return this;
     }
 
-    verifyRentRoomCellValues(monthlyRent = 0, rooms = 0, row = 0): this{
+    verifyRentRoomCellValues(monthlyRent = 0, rooms = 0, row = 0): this {
         let defaultValues = "$0";
         let textToBe = monthlyRent == 0 ? defaultValues : `$${numberWithCommas((monthlyRent / rooms).toFixed(0))}`;
         this.Page.rentPerRoomCells.eq(row).should('have.text', textToBe);
@@ -275,23 +275,25 @@ export default class ResidentialRentRollSharedActions<T extends ResidentialRentR
         const monthlyRentCellsToBe = (isStabilized === false) ? this.Page.monthlyRentCells.eq(rowNumber).invoke("text")
             : this.Page.stabilizedMonthlyRentCells.eq(rowNumber).invoke("val");  
         monthlyRentCellsToBe.then(monthlyRentText => {
-                const rentValue = getNumberFromDollarNumberWithCommas(monthlyRentText);
-                this.Page.squareFootageCells.eq(rowNumber).invoke("text").then(sfText => {
-                    const rentSFCellToBe = (isStabilized === false) ? rentRollPage.rentSFCell : rentRollPage.stabilizedRentSFCell;
-                    const footageValue = getNumberFromDollarNumberWithCommas(sfText);
-                    const rentPSFMonthly = `$${(rentValue / footageValue).toFixed(2)}`;
-                    const rentPSFAnnually = `$${((rentValue / footageValue) * 12).toFixed(2)}`;
-                    if (footageValue === 0) {
-                        rentSFCellToBe.eq(rowNumber).should("have.text", "$NaN");
+            const rentValue = getNumberFromDollarNumberWithCommas(monthlyRentText);
+            this.Page.squareFootageCells.eq(rowNumber).invoke("text").then(sfText => {
+                const rentSFCellToBe = (isStabilized === false) 
+                    ? rentRollPage.rentSFCell 
+                    : rentRollPage.stabilizedRentSFCell;
+                const footageValue = getNumberFromDollarNumberWithCommas(sfText);
+                const rentPSFMonthly = `$${(rentValue / footageValue).toFixed(2)}`;
+                const rentPSFAnnually = `$${((rentValue / footageValue) * 12).toFixed(2)}`;
+                if (footageValue === 0) {
+                    rentSFCellToBe.eq(rowNumber).should("have.text", "$NaN");
+                } else {
+                    if (isPerMonth) {
+                        rentSFCellToBe.eq(rowNumber).should("have.text", rentPSFMonthly);
                     } else {
-                        if (isPerMonth) {
-                            rentSFCellToBe.eq(rowNumber).should("have.text", rentPSFMonthly);
-                        } else {
-                            rentSFCellToBe.eq(rowNumber).should("have.text", rentPSFAnnually);
-                        }
+                        rentSFCellToBe.eq(rowNumber).should("have.text", rentPSFAnnually);
                     }
-                });
+                }
             });
+        });
         return this;
     }
 }
