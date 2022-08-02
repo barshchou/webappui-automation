@@ -9,6 +9,8 @@ import "cypress-real-events/support";
 import { BoweryAutomation } from "../types/boweryAutomation.type";
 import { evalUrl } from "../utils/env.utils";
 import { Tag } from "../utils/tags.utils";
+import { _NavigationSection } from "../actions/base";
+import HomepageActions from "../actions/base/homepage.actions";
 
 require("cypress-xpath");
 require("cypress-iframe");
@@ -47,6 +49,8 @@ afterEach(() => {
     // @ts-ignore
     if (Cypress.mocha._mocha.suite.suites[0]._testConfig.tags.includes(Tag.check_export)) {
         if (!Cypress.currentTest.title.includes("Check export")) {
+            _NavigationSection.returnToHomePage();
+            HomepageActions.verifyThatPageIsOpened();
             cy.logNode(`Deleting report in check export spec`);
             cy.deleteApiReport();
         }
