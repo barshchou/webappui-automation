@@ -80,6 +80,24 @@ class CommercialRentCompsPage extends BasePage {
 
     get computedPanel() { return cy.get("[data-qa=computed-panel]"); }
 
+    get mapStarZoomButton() { return cy.get(".leaflet-control svg[role='presentation']"); }
+
+    get mapDrawPolygonButton() { return cy.get("[title='Draw a polygon']"); }
+
+    get mapZoomInButton() { return cy.get("[title='Zoom in']"); }
+
+    get mapZoomOutButton() { return cy.get("[title='Zoom out']"); }
+
+    get mapContainer() { return cy.get(".leaflet-container"); }
+
+    getMapDialogButtons(title: string) { return cy.get(`[title='${title}']`); }
+
+    getModalDialogYesButtons() { return cy.get("[data-qa='yes.btn']"); }
+
+    getModalDialogNoButtons() { return cy.get("[data-qa='no-btn']"); }
+
+    get editingIcon() { return cy.get(".leaflet-editing-icon"); }
+    
     get computedSubjectColumn() { return this.computedPanel.find("[data-qa='0-column']"); }
 
     get computedSubjectMinCell() { return this.computedSubjectColumn.find("[data-qa='00-cell']"); }
