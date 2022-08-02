@@ -318,6 +318,18 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         return this;
     }
 
+    clickSwotAnalysis(): NavigationSectionActions {
+        navigationSectionPage.swotAnalysis.click();
+        return this;
+    }
+
+    navigateToFinalSwotAnalysis(): NavigationSectionActions {
+        this.clickFinalButton()
+            .clickSwotAnalysis()
+            .submitSaveChangesModal();
+        return this;
+    }
+
     clickCommercialRentComps(): NavigationSectionActions {
         navigationSectionPage.commercialRentCompsButton.click();
         return this;

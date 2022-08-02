@@ -110,6 +110,8 @@ class NavigationSection extends BasePage {
     get certification() { return cy.get('#certification'); }
 
     get residentialStabilizedRentRollSummary() { return cy.get(`#residential-projected-rent-roll-summary`); }
+
+    get swotAnalysis() { return cy.get("#swot-analysis"); }
 }
 
 export default new NavigationSection();
