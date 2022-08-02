@@ -1,5 +1,5 @@
 import testData from "../../../../fixtures/not_full_reports/sales/adjust_comps/QA-4112.fixture";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { Sales } from "../../../../actions";
 
@@ -25,7 +25,5 @@ describe("Total Utility Adjustments in Sales Adjustment Grid is calculated with 
                 .enterOtherUtilitiesAdjustmentByColumn(testData.comparableFirst.otherUtilityAdjustment, 0, 0)
                 .enterUtilitiesAdjustmentGroup(Object.keys(testData.compsAdj), Object.values(testData.compsAdj))
                 .verifyTotalUtilitiesAdjustmentsByCompIndex();
-
-            deleteReport(testData.reportCreationData.reportNumber);
         });
     });

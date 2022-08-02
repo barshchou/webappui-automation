@@ -1,15 +1,13 @@
 import { numberWithCommas } from "../../../../../../utils/numbers.utils";
 import { Income, Property, ReviewExport } from "../../../../../actions";
 import { _NavigationSection } from "../../../../../actions/base";
-import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../../actions/base/baseTest.actions";
 import testData from 
     "../../../../../fixtures/not_full_reports/income/commercial/stabilized_rent_roll/QA-4598-00.fixture";
 
 describe(`[QA-4598][QA-4599][QA-4600] Verify the suggested text dropdown in the 
 new narrative component added through "=" in the Generated Commentary on the Stabilized Rent Roll page.`, 
 { tags: [ "@income", "@commercial", "@stabilized_rent_roll", "@check_export" ] }, () => {
-
-    const url = `${Cypress.config().baseUrl}`;
 
     it("[QA-4598] As Is", () => {
         cy.stepInfo(`Preconditions: The mixed report is created and several commercial units are added.`);
@@ -40,11 +38,9 @@ new narrative component added through "=" in the Generated Commentary on the Sta
         _NavigationSection.openReviewAndExport();
         ReviewExport.generateDocxReport().waitForReportGenerated()
             .downloadAndConvertDocxReport(testData.reportCreationDataAsIs.reportNumber);
-        deleteReport(testData.reportCreationDataAsIs.reportNumber);
     });
 
     it("[QA-4598] Check export", () => {
-        Cypress.config().baseUrl = null;
         cy.task("getFilePath", { _reportName: testData.reportCreationDataAsIs.reportNumber, _docxHtml: "html" })
             .then(file => {
                 cy.log(<string>file);
@@ -61,7 +57,6 @@ new narrative component added through "=" in the Generated Commentary on the Sta
     });
 
     it("[QA-4599] As Stabilized", () => {
-        Cypress.config().baseUrl = url;
         cy.stepInfo(`Preconditions: The mixed report is created and several commercial units are added.`);
         createReport(testData.reportCreationDataAsStabilized);
 
@@ -90,11 +85,9 @@ new narrative component added through "=" in the Generated Commentary on the Sta
         _NavigationSection.openReviewAndExport();
         ReviewExport.generateDocxReport().waitForReportGenerated()
             .downloadAndConvertDocxReport(testData.reportCreationDataAsStabilized.reportNumber);
-        deleteReport(testData.reportCreationDataAsStabilized.reportNumber);
     });
 
     it("[QA-4599] Check export", () => {
-        Cypress.config().baseUrl = null;
         cy.task("getFilePath", { _reportName: testData.reportCreationDataAsIs.reportNumber, _docxHtml: "html" })
             .then(file => {
                 cy.log(<string>file);
@@ -111,7 +104,6 @@ new narrative component added through "=" in the Generated Commentary on the Sta
     });
 
     it("[QA-4600] As Completed", () => {
-        Cypress.config().baseUrl = url;
         cy.stepInfo(`Preconditions: The mixed report is created and several commercial units are added.`);
         createReport(testData.reportCreationDataAsComplete);
 
@@ -142,11 +134,9 @@ new narrative component added through "=" in the Generated Commentary on the Sta
         _NavigationSection.openReviewAndExport();
         ReviewExport.generateDocxReport().waitForReportGenerated()
             .downloadAndConvertDocxReport(testData.reportCreationDataAsComplete.reportNumber);
-        deleteReport(testData.reportCreationDataAsComplete.reportNumber);
     });
 
     it("[QA-4600] Check export", () => {
-        Cypress.config().baseUrl = null;
         cy.task("getFilePath", { _reportName: testData.reportCreationDataAsIs.reportNumber, _docxHtml: "html" })
             .then(file => {
                 cy.log(<string>file);

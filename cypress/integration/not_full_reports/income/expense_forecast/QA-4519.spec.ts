@@ -1,5 +1,5 @@
 import testData from "../../../../fixtures/not_full_reports/income/expense_forecast/QA-4519.fixture";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 import { Property, Income } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
 import tableExpenseHistoryCellNames from "../../../../enums/expense/expenseHistoryTableRows.enum";
@@ -41,7 +41,6 @@ describe("Historical expense Insurance Per SF is correctly calculated and displa
 
             cy.stepInfo(`4. Go to Expense Forecast and make sure that Per SF radio button 
             is selected for Insurance card`);
-            testData.basis = "sf";
             _NavigationSection.Actions.navigateToExpenseForecast();
             Income._ExpenseForecastActions.chooseForecastItemBasis(testData.actualInsuranceItem)
                 .verifyForecastItemBasis(testData.actualInsuranceItem);
@@ -69,7 +68,5 @@ describe("Historical expense Insurance Per SF is correctly calculated and displa
                         .getItemNameForAverage(testData.actualInsuranceItem.name)), 
                 testData.insurancePerSfCardSnapshotName, 
                 { padding: [ 10, 100 ] });
-                    
-            deleteReport(testData.reportCreationData.reportNumber);
         });
     });

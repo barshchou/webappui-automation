@@ -1,5 +1,5 @@
 import testData from "../../../../fixtures/not_full_reports/report/key_info/QA-4573.fixture";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { ReviewExport } from "../../../../actions";
 import { conditionalDescribe } from "../../../checkIsProd.utils";
@@ -13,12 +13,9 @@ conditionalDescribe("[QA-4573] Verify the Source text is correct in the Survey o
         
             ReviewExport.generateDocxReport().waitForReportGenerated()
                 .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
-
-            deleteReport(testData.reportCreationData.reportNumber);
         });
 
         it("Check export", () => {
-            Cypress.config().baseUrl = null;
             cy.task("getFilePath", { _reportName: testData.reportCreationData.reportNumber, _docxHtml: "html" })
                 .then(file => {
                     cy.log(<string>file);

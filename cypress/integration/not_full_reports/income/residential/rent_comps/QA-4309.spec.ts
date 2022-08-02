@@ -1,5 +1,5 @@
 import ReportDataCreator from "../../../../../fixtures/data_creator/reportData.creator";
-import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../../actions/base/navigationSection.actions";
 import Income from "../../../../../actions/income/income.manager";
 
@@ -16,6 +16,5 @@ describe("Verify Zoom in and Zoom out buttons for the map on Rent Comps page whe
         Income.Residential.RentComps.BaseActions.verifyUnitSelected()
             .clickZoomInButton()
             .clickZoomOutButton();
-        deleteReport(reportCreationData.reportNumber);
     });
 });

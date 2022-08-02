@@ -1,5 +1,5 @@
 import testData from "../../../../fixtures/not_full_reports/sales/adjust_comps/QA-4529.fixture";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { Sales, ReviewExport } from "../../../../actions";
 
@@ -7,6 +7,7 @@ import { Sales, ReviewExport } from "../../../../actions";
  * ernst: we need either select first two comparables or refactor method 
  * for sales comps selection by address
  */
+// TODO: Update this test case with new comps selection
 describe.skip("Check custom Utilities adjustment", 
     { tags:[ "@fix", "@sales", "@adjust_comps", "@check_export" ] }, () => {
         it("Verify custom utilities adjustments on UI and prepare report for export", () => {
@@ -68,18 +69,16 @@ describe.skip("Check custom Utilities adjustment",
                 .verifyAdjustedPriceByColumn(1)
                 .enterOtherUtilitiesAdjustmentByColumn(testData.comparableFirst.otherUtilityAdjustment, 0, 0)
                 .enterOtherUtilitiesAdjustmentByColumn(testData.comparableSecond.otherUtilityAdjustment, 0, 1)
-                .clickSaveButton;
+                .clickSaveButton();
 
             cy.stepInfo(`5. Prepare report for export validation`);
             _NavigationSection.openReviewAndExport();
             ReviewExport.generateDocxReport()
                 .waitForReportGenerated()
                 .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
-            deleteReport(testData.reportCreationData.reportNumber);
         });
 
-        it(`Check exported document other utilities values and commentaries`, () => {
-            Cypress.config().baseUrl = null;
+        it(`Check export document other utilities values and commentaries`, () => {
             cy.task("getFilePath", { _reportName: testData.reportCreationData.reportNumber, _docxHtml: "html" })
                 .then(file => {
                     cy.stepInfo(`6. Verify that other utilities adjustments are added to 

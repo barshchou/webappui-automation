@@ -1,6 +1,6 @@
 import testData from "../../../../fixtures/not_full_reports/property/commercial_units/QA-4560.fixture";
 import { Base, Property } from "../../../../actions";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 
 describe("Verify the functionality of the Location radio button", 
@@ -35,7 +35,5 @@ describe("Verify the functionality of the Location radio button",
                 cy.reload();
                 Property._CommercialUnits.verifyRadioIsChecked(testData.groupName, value);
             });
-
-            deleteReport(testData.reportCreationData.reportNumber);
         });
     });

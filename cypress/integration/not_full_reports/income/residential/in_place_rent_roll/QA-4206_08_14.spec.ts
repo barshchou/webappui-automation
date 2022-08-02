@@ -1,6 +1,6 @@
 import testData from 
     "../../../../../fixtures/not_full_reports/income/residential/in_place_rent_roll/QA-4206_08_14.fixture";
-import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../../actions/base/navigationSection.actions";
 import Income from "../../../../../actions/income/income.manager";
 import { reportCreationData } from 
@@ -27,7 +27,6 @@ describe("[QA-4206_08_14] Verify the Developer's Forecast checkbox on the In-Pla
                     .checkUncheckCheckboxForColumn(testData.column.bathrooms, testData.label.bathrooms)
                     .checkUncheckCheckboxForColumn(testData.column.outSpace, testData.label.outSpace)
                     .checkUncheckCheckboxForColumn(testData.column.unitType, testData.label.unitType);
-                deleteReport(reportCreationData(value).reportNumber);
             });
         });
     });

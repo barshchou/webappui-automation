@@ -1,7 +1,7 @@
 import { Sales, ReviewExport } from '../../../../actions';
 import testData from "../../../../fixtures/not_full_reports/sales/value_conclusion/QA-4053_86..fixture";
 import { _NavigationSection } from "../../../../actions/base";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _Summary } from "../../../../actions/property";
 
 describe(`[QA-4053] [QA-4086] The Concluded Value Per Unit is calculated correctly 
@@ -36,11 +36,9 @@ and includes both commercial and residential units.`,
         _NavigationSection.Actions.openReviewAndExport().closeUserSurveyIfExist();
         ReviewExport.generateDocxReport()
             .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
-        deleteReport(testData.reportCreationData.reportNumber);
     });
     
-    it("Check html report", () => {
-        Cypress.config().baseUrl = null;
+    it("Check export report", () => {
         cy.stepInfo(`Verify the export of the report`);
         cy.task("getFilePath",
             { _reportName: testData.reportCreationData.reportNumber, _docxHtml: "html" }

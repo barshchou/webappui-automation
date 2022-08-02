@@ -1,6 +1,6 @@
 import { Report } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 import testData from '../../../../fixtures/not_full_reports/report/client/QA-4626.fixture';
 
 describe("Verify the display of the Client page.", { tags:[ "@report", "@client" ] }, () => {
@@ -33,8 +33,5 @@ describe("Verify the display of the Client page.", { tags:[ "@report", "@client"
         Report._Client.Page.identificationOfClientTextBox.should("be.visible");
         Report._Client.Page.formEditBtn().should("be.visible");
         Report._Client.Page.clientGuidelinesCommentary.should("be.visible");
-            
-
-        deleteReport(testData.reportCreationData.reportNumber);
     });
 });

@@ -69,10 +69,11 @@ We don't have strict rules for our development flow. Everything is pretty standa
   1. You branching from master (**always push empty branch after its creation, it will be a signal that you at least started work on a ticket**)
   2. If you develop test / framework feature - name branch in next notation **feature/your_name/jira_ticket_id** (for example, feature/Ernst/QA-666)
   - If you developing hotfix -> **hotfix/your_name/ticket_name_OR_hotfix_name**
-  3. Assign at least 2 reviewers for your pull request. **Get at least 2 approvals.**. 
-  4. If you want to add improvements into someone's PR - branch from feature branch, make changes and create to PR into parents branch (naming: **feature/your_name/ticket_id__pr_changes**). *You can commit into someones branch*, **but you are allowed to do that in exceptional cases** (for example, PR almost merged and you need to run and apply ESLint changes) 
-  5. When you got approvals - merge branch by yourself or ping someone who was a reviewer.
-  6. Use the pull request template to create PR, it is **NECESSARY** to check only 1 environment checkbox to trigger pull_request_check workflow appropriately. If you choose to run your tests on custom env, paste the link to customEnvLink URL section. This will trigger to run tests from your PR to check, if they work.
+  3. Assign at least 2 reviewers for your pull request. **Get at least 2 approvals.**.
+  4. If you are implementing test case with export document verification, then 'it's title **HAVE TO** contain 'Check export' string in exact this state! 
+  5. If you want to add improvements into someone's PR - branch from feature branch, make changes and create to PR into parents branch (naming: **feature/your_name/ticket_id__pr_changes**). *You can commit into someones branch*, **but you are allowed to do that in exceptional cases** (for example, PR almost merged and you need to run and apply ESLint changes) 
+  6. When you got approvals - merge branch by yourself or ping someone who was a reviewer.
+  7. Use the pull request template to create PR, it is **NECESSARY** to check only 1 environment checkbox to trigger pull_request_check workflow appropriately. If you choose to run your tests on custom env, paste the link to customEnvLink URL section. This will trigger to run tests from your PR to check, if they work.
       Workflow for PR will run **ONLY** if you label it with **ready_for_review** label, it won't run even if you create pull request without this label
 
   **NOTE**: 

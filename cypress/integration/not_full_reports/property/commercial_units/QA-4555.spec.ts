@@ -1,5 +1,5 @@
 import testData from "../../../../fixtures/not_full_reports/property/commercial_units/QA-4555.fixture";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { Property } from "../../../../actions";
 
@@ -26,7 +26,5 @@ describe("[QA-4555] Verify the functionality of the Commercial Unit button",
                 Property._CommercialUnits.clickCommercialUnitTabByIndex(i);
                 Property._CommercialUnits.Page.commercialUnitsTabs.should("have.focus");
             }
-
-            deleteReport(testData.reportCreationData.reportNumber);
         });
     });

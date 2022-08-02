@@ -1,6 +1,6 @@
 import testData from 
     "../../../../../fixtures/not_full_reports/income/commercial/rent_reconciliation/QA-5295-97_99.fixture";
-import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../../actions/base";
 import { Income, Property } from "../../../../../actions";
 
@@ -104,9 +104,5 @@ describe("Verify the calculation field values",
             for (let index = 0; index < testData.numberOfComparables; index++) {
                 Income._CommercialManager.RentReconciliation.verifyTrendedRentSF(testData.calculationTypeSF, index);
             }
-        });
-
-        after('Cleanup', () => {
-            deleteReport(testData.reportCreationData.reportNumber);
         });
     });

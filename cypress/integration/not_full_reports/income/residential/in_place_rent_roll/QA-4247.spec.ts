@@ -1,9 +1,9 @@
 import { createReportData } from 
-    './../../../../../fixtures/not_full_reports/income/residential/in_place_rent_roll/QA-4247.fixture';
-import { Property, Income } from './../../../../../actions';
-import { _NavigationSection } from './../../../../../actions/base';
+    '../../../../../fixtures/not_full_reports/income/residential/in_place_rent_roll/QA-4247.fixture';
+import { Property, Income } from '../../../../../actions';
+import { _NavigationSection } from '../../../../../actions/base';
 import testData from "../../../../../fixtures/not_full_reports/income/residential/in_place_rent_roll/QA-4247.fixture";
-import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../../actions/base/baseTest.actions";
 
 describe("Verify the Square Footage column in the grid", 
     { tags:[ "@income", "@residential", "@in_place_rent_roll" ] }, () => {
@@ -55,9 +55,5 @@ describe("Verify the Square Footage column in the grid",
                 .clickSaveButton()
                 .verifyProgressBarNotExist()
                 .verifyRentRollCommentary(testData.textCommentaryData[2]);
-        
-            testData.conclusionValues.forEach(val => {
-                deleteReport(createReportData(val).reportNumber);
-            });
         });
     });
