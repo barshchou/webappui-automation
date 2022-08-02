@@ -1,6 +1,7 @@
 const expensesForecast = {
-    expenseCardsIDArray: [ "insurance", "electricity", "fuel", "waterSewer", "repairsMaintenance", "payrollBenefits",
-        "generalAdministrative", "legalProfessionalFees", "miscellaneous", "managementFees", "replacementReserves" ],
+    expenseCardsIDArray: [ "insurance", "electricity", "fuel", "waterAndSewer", "repairsAndMaintenance", 
+        "payrollAndBenefits", "generalAndAdministrative", "legalAndProfessionalFees", "miscellaneous", 
+        "management", "reserves" ],
     insurance: "insurance",
     electricity: "electricity",
     fuel: "fuel",
