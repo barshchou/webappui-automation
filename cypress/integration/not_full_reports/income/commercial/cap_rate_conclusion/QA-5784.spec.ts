@@ -9,18 +9,22 @@ import launchDarklyApi from '../../../../../api/launchDarkly.api';
 describe("", 
     { tags:[ "@income", "@commercial", "@in_place_rent_roll", "@feature_flag" ] }, () => {
         beforeEach("Login, create report", () => {
-            cy.stepInfo("1. Set feature flag and create report");
+            cy.stepInfo(`1. Set feature flag and create report`);
             launchDarklyApi.setFeatureFlagForUser(testData.featureFlagKey, testData.onFeatureFlag);
             createReport(testData.reportCreationData);
 
-            cy.stepInfo("2. Set square foot analysis and value for it; set commercial and residential units");
+            cy.stepInfo(`2. Set square foot analysis and value for it; 
+            set commercial and residential units; 
+            set commercial units SF`);
             _NavigationSection.navigateToPropertySummary();
             Property._Summary.selectBasisSquareFootAnalysis(testData.basisForSquareFootAnalysis)
                 .fillBasisSquareFootAnalysis(testData.squareFootAnalysisArea)
                 .enterNumberOfCommercialUnits(testData.commercialUnits)
                 .enterNumberOfResUnits(testData.residentialUnits);
+            NavigationSection.navigateToCommercialUnits();
+            Property._CommercialUnits.enterListUnitSF(testData.commercialUnitsSF, testData.commercialUnits);
 
-            cy.stepInfo("3. Set Gut Renovation budget");
+            cy.stepInfo(`3. Set Gut Renovation budget`);
             _NavigationSection.navigateToRenovation();
             Property._Renovations.chooseRenovationByValue(testData.gutRenovation)
                 .clickTotalButton()
@@ -52,6 +56,14 @@ describe("",
             cy.stepInfo(`8.Make Sure Prospective Market Value As Stabilized (Final Value) is Prospective Market Value 
             As Stabilized (Amount) rounded according to “Round to nearest” value`);
             Income.CapRateConclusion.verifyAsStabilizedFinalValueCalculated();
+
+            cy.stepInfo(`9. Add New Residential Rent Loss on As Stabilized tab and 
+            New Commercial Rent Loss on As Stabilized tab`);
+            Income.CapRateConclusion.addNewRentLoss(testData.residentialUnitType, testData.residentialUnits)
+                .enterAsStabResRentLossTimePeriodByRow(testData.rentLossTimePeriod);
+            Income.CapRateConclusion.addNewRentLoss(testData.commercialUnitType, testData.commercialUnits)
+                .enterAsStabResRentLossTimePeriodByRow(testData.rentLossTimePeriod);
+
         });
 
         after(`Remove feature flag`, () => {

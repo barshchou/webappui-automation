@@ -1,3 +1,5 @@
+import enums from "../../enums/enums";
+import { BoweryReports } from "../../types/boweryReports.type";
 import BasePage from "../base/base.page";
 
 class CapRateConclusionPage extends BasePage {
@@ -57,11 +59,15 @@ class CapRateConclusionPage extends BasePage {
 
     get asIsMarketValuePerSF() { return cy.xpath("//*[.='As Is Market Value Per SF']//following-sibling::td[3]"); }
 
-    get addResidentialRentLossButton() { return cy.xpath("//*[@data-qa='add-btn'][.='+ New Residential Rent Loss']"); }
+    addRentLossButton(incomeType: BoweryReports.UnitIncomeType) { 
+        return cy.xpath(`//*[@data-qa='add-btn'][.='+ New ${incomeType} Rent Loss']`); 
+    }
 
     get rentLossCheckboxes() { return cy.get("input[type=checkbox][id]"); }
 
-    get asStabilizedRentLossSwitch() { return cy.get("[data-qa='As Stabilized-switch-button']"); }
+    valueConclusionSwitcher(valueConclusion = enums.VALUE_CONCLUSION_NAME.asStabilized) { 
+        return cy.get(`[data-qa='${valueConclusion}-switch-button']`); 
+    }
 
     get addButton() { return cy.xpath("//button[.='Add']"); }
 

@@ -8,9 +8,6 @@ const reportCreationFixture = () => {
     });
 };
 
-const _commercialMonthlyRent = [ 123.45, 321.01, 44 ];
-const _residentialMonthlyRent = [ 64.19, 1234.76 ];
-
 export default {
     reportCreationData: reportCreationFixture(),
     leaseStatus: Enums.LEASE_STATUS.occupied,
@@ -20,10 +17,14 @@ export default {
     squareFootAnalysisArea: 1000, 
     residentialUnits: 2,
     commercialUnits: 3,
-    commercialMonthlyRent: _commercialMonthlyRent,
-    residentialMonthlyRent: _residentialMonthlyRent,
+    commercialMonthlyRent: [ 123.45, 321.01, 44 ],
+    residentialMonthlyRent: [ 64.19, 1234.76 ],
     gutRenovation: Enums.RENOVATION_TYPE.gutRenovation,
     renovationPeriod: 12,
     renovationTotal: 1111,
-    capRate: 5
+    capRate: 5,
+    commercialUnitsSF: [ 250, 350, 450 ],
+    rentLossTimePeriod: 12,
+    commercialUnitType: Enums.UNIT_INCOME_TYPE.commercial,
+    residentialUnitType: Enums.UNIT_INCOME_TYPE.residential
 };

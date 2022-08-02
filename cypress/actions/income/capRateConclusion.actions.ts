@@ -6,6 +6,8 @@ import {
 } from "../../../utils/numbers.utils";
 import BaseActionsExt from "../base/base.actions.ext";
 import capRateConclusionKeys from "../../utils/mapKeys/income/capRateConclusion/capRateConclusion.keys";
+import { BoweryReports } from "../../types/boweryReports.type";
+import enums from "../../enums/enums";
 
 class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPage> {
 
@@ -161,13 +163,13 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
         return this;
     }
 
-    clickAddResidentialRentLoss(): CapRateConclusionActions {
-        capRateConclusionPage.addResidentialRentLossButton.should("not.be.disabled").click();
+    clickAddRentLoss(unitIncomeType: BoweryReports.UnitIncomeType): CapRateConclusionActions {
+        capRateConclusionPage.addRentLossButton(unitIncomeType).should("not.be.disabled").click();
         return this;
     }
 
     clickAsStabilizedRentLossSwitch(): CapRateConclusionActions {
-        capRateConclusionPage.asStabilizedRentLossSwitch.click().should("have.attr", "aria-pressed", "true");
+        capRateConclusionPage.valueConclusionSwitcher().click().should("have.attr", "aria-pressed", "true");
         return this;
     }
 
@@ -250,6 +252,30 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
             });
         });
         
+        return this;
+    }
+
+    /**
+     * Adds new Residential/Commercial rent loss with provided value conclusion value, 
+     * unit income type and amount of unit required to be checked for rent loss.
+     * @param  unitIncomeType
+     * @param  unitsNumber
+     * @param  valueConclusion
+     * @returns CapRateConclusionActions
+     */
+    addNewRentLoss(unitIncomeType: BoweryReports.UnitIncomeType, unitsNumber: number, 
+        valueConclusion = enums.VALUE_CONCLUSION_NAME.asStabilized): CapRateConclusionActions {
+        this.clickAddRentLoss(unitIncomeType);
+        capRateConclusionPage
+            .valueConclusionSwitcher(valueConclusion)
+            .click()
+            .should("have.attr", "aria-pressed", "true");
+
+        for (let index = 0; index < unitsNumber; index++) {
+            this.checkRentLossCheckboxByRow(index);
+        }
+
+        this.clickAddButton();
         return this;
     }
 }
