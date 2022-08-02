@@ -14,7 +14,7 @@ class SaleInfoFromActions {
             this.Page.SaleDateCalendarNewComp.click();
             this.Page.SaleDateToday.click();
         } else if (date === 'random') {
-            this.Page.SaleDateCalendarNewComp.click();
+            this.Page.SaleDateCalendarNewComp.realClick({ clickCount: 5 });
             this.Page.SaleDateCalendarNewComp.focus().clear().type(`${getRandomDate()}`).type('{enter}');
         } else {
             //TODO should edit this step for selecting data via date picker
