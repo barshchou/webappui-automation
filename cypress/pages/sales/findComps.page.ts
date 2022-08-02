@@ -125,7 +125,7 @@ class FindCompsPage extends BasePage {
     }
 
     get loadingModalCSV() {
-        return cy.get('[data-qa="loading-modal"] [data-icon="file-upload"]', { timeout: 30000 });
+        return cy.get('[data-qa="loading-modal"] [data-icon="file-upload"]', { timeout: 60000 });
     }
 
     get resetAllButton() {
@@ -133,7 +133,7 @@ class FindCompsPage extends BasePage {
     }
 
     get loadingModalSpinner() {
-        return cy.get('[data-qa="loading-modal"] [data-icon="spinner"]', { timeout: 30000 });
+        return cy.get('[data-qa="loading-modal"] [data-icon="spinner"]', { timeout: 60000 });
     }
 
     get filterSalePeriod() {
