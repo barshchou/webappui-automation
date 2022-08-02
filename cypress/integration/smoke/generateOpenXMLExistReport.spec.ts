@@ -1,4 +1,4 @@
-import { loginAction } from './../../actions/base/baseTest.actions';
+import { loginAction } from '../../actions/base/baseTest.actions';
 import { Base, ReviewExport } from "../../actions";
 import testData from "../../fixtures/smoke/generateOpenXMLExistReport.fixture";
 import { createReport, deleteReport } from "../../actions/base/baseTest.actions";

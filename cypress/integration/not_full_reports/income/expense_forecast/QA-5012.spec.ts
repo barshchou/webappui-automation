@@ -1,7 +1,7 @@
 import testData from "../../../../fixtures/not_full_reports/income/expense_forecast/QA-5011_12.fixture";
 import { _NavigationSection } from "../../../../actions/base";
 import { Income, Property } from "../../../../actions";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 
 describe(`[QA-5012] [Income>Expense forecast] Unselected existing expense card is not included in calculation`,
     { tags: [ "@income", "@expense_forecast" ] }, () => {
@@ -155,7 +155,5 @@ describe(`[QA-5012] [Income>Expense forecast] Unselected existing expense card i
                     testData.numberOfResidentialUnits,
                     testData.rentRollResUnitFixture.rooms
                 );
-
-            deleteReport(testData.reportCreationData.reportNumber);
         });
     });

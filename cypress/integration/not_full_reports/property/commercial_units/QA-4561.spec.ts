@@ -1,6 +1,6 @@
 import testData from "../../../../fixtures/not_full_reports/property/commercial_units/QA-4561.fixture";
 import { Property } from "../../../../actions";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 
 describe("Verify the functionality of the Street Type radio button", 
@@ -33,7 +33,5 @@ describe("Verify the functionality of the Street Type radio button",
                 cy.reload();
                 Property._CommercialUnits.verifyRadioIsChecked(testData.groupName, value);
             });
-
-            deleteReport(testData.reportCreationData.reportNumber);
         });
     });

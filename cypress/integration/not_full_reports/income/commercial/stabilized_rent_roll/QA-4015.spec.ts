@@ -1,5 +1,5 @@
 import testData from "../../../../../fixtures/not_full_reports/income/commercial/stabilized_rent_roll/QA-4015.fixture";
-import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../../actions/base/navigationSection.actions";
 import Property from "../../../../../actions/property/property.manager";
 import Income from "../../../../../actions/income/income.manager";
@@ -41,11 +41,9 @@ describe("Verify the Commercial Stabilized Rent Roll table",
             NavigationSection.openReviewAndExport();
             ReviewExport.generateDocxReport().waitForReportGenerated()
                 .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
-            deleteReport(testData.reportCreationData.reportNumber);
         });
 
         it("Check export", () => {
-            Cypress.config().baseUrl = null;
             cy.task("getFilePath",
                 { _reportName: testData.reportCreationData.reportNumber, _docxHtml: "html" }
             ).then(file => {

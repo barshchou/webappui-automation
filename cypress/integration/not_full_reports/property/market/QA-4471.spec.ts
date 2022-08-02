@@ -1,4 +1,4 @@
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 import testData from "../../../../fixtures/not_full_reports/property/market/QA-4471.fixture";
 import { _NavigationSection } from "../../../../actions/base";
 import { Property } from "../../../../actions";
@@ -36,10 +36,6 @@ describe("'Pull from dropbox' clicked - needed files are uploaded", { tags: [ "@
                 .verifyAnyFileInputHasFile(researchUseObject.use)
                 .checkUncheckMarketAnalysisUseCheckbox(researchUseObject.use, false);
         });
-    });
-
-    it("Delete report", () => {
-        deleteReport(testData.reportCreationData.reportNumber);
     });
 
 });

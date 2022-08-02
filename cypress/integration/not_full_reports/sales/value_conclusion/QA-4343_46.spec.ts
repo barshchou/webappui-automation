@@ -2,7 +2,7 @@ import testData from "../../../../fixtures/not_full_reports/sales/value_conclusi
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Sales from "../../../../actions/sales/sales.manager";
 import { Final } from "../../../../actions";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 
 describe("Save and Save & Continue buttons tests", 
     { tags: [ "@sales", "@value_conclusion" ] }, () => {
@@ -18,7 +18,6 @@ describe("Save and Save & Continue buttons tests",
             cy.reload();
             Sales.ValueConclusion.verifyMatchIncomeApproachDeductionsChecked()
                 .verifySaleValueConclusion(testData.saleValueConclusion);
-            deleteReport(testData.reportCreationData.reportNumber);
         });
 
         it("[QA-4346]: Save & Continue button test", () => {
@@ -26,6 +25,5 @@ describe("Save and Save & Continue buttons tests",
             Final._FinalValuesReconciliation.goBack();
             Sales.ValueConclusion.verifyMatchIncomeApproachDeductionsChecked()
                 .verifySaleValueConclusion(testData.saleValueConclusion);
-            deleteReport(testData.reportCreationData.reportNumber);
         });
     });

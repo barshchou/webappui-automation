@@ -1,6 +1,6 @@
 import testData from 
     "../../../../../fixtures/not_full_reports/income/commercial/rent_reconciliation/QA-5304_06-08.fixture";
-import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../../actions/base";
 import { Income, Property, ReviewExport } from "../../../../../actions";
 
@@ -80,12 +80,9 @@ describe(`Verify the "Lease Terms Adjustment Sub-Total"`,
             _NavigationSection.Actions.openReviewAndExport();
             ReviewExport.generateDocxReport().waitForReportGenerated()
                 .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
-
-            deleteReport(testData.reportCreationData.reportNumber);
         });
 
-        it(`[QA-5308] Verify the "Lease Terms Adjustment Sub-Total" row is displayed in the exported report`, () => {
-            Cypress.config().baseUrl = null;
+        it(`[QA-5308] Check export`, () => {
             cy.task("getFilePath", { _reportName: testData.reportCreationData.reportNumber, _docxHtml: "html" })
                 .then(file => {
                     cy.log(<string>file);

@@ -2,7 +2,7 @@ import testData from "../../../../../fixtures/not_full_reports/income/commercial
 import NavigationSection from "../../../../../actions/base/navigationSection.actions";
 import Property from "../../../../../actions/property/property.manager";
 import Income from "../../../../../actions/income/income.manager";
-import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../../actions/base/baseTest.actions";
 
 describe("Verify the Rent PSF column in the grid", 
     { tags:[ "@income", "@commercial", "@in_place_rent_roll" ] }, () => {
@@ -18,7 +18,6 @@ describe("Verify the Rent PSF column in the grid",
             Income.Commercial.InPlaceRentRoll.clickAnnuallyBasisButton()
                 .enterAnnualRentByRowNumber(testData.general.annualRent)
                 .verifyRentPerSFAnnuallyAnnuallyCalcByRow(testData.general.annualRent, testData.general.squareFeet);
-            deleteReport(testData.reportCreationData.reportNumber);
         });
 
         it("Monthly", () => {
@@ -26,18 +25,15 @@ describe("Verify the Rent PSF column in the grid",
                 .enterMonthlyRentByRowNumber(testData.general.monthlyRent)
                 .verifyRentPerSFAnnuallyMonthlyCalcByRowNumber(testData.general.monthlyRent, 
                     testData.general.squareFeet);
-            deleteReport(testData.reportCreationData.reportNumber);
         });
 
         it("Per square foot", () => {
             Income.Commercial.InPlaceRentRoll.verifyRentPerSFAnnuallyCellTextByRow()
                 .enterRentPerSFAnnuallyByRowNumber(testData.general.rentPerSF);
-            deleteReport(testData.reportCreationData.reportNumber);
         });
 
         it("Per square foot per month", () => {
             Income.Commercial.InPlaceRentRoll.clickPerSquareFootPerMonthButton()
                 .enterRentPerSFMonthlyByRowNumber(testData.general.rentPerSF);
-            deleteReport(testData.reportCreationData.reportNumber);
         });
     });

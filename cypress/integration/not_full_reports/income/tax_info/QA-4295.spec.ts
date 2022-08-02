@@ -1,13 +1,13 @@
 import testData from "../../../../fixtures/not_full_reports/income/tax_info/QA-4295.fixture";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { _TaxInfo } from "../../../../actions/income";
 import { ReviewExport } from '../../../../actions';
 
 describe(`[Assessed Value & RE Taxes] Verify the 'Tax Calculation Discussion' generated commentary 
-is displayed on the Tax Info page.`, () => {
+is displayed on the Tax Info page.`, { tags: [ "@check_export", "@income", "@tax_info" ] }, () => {
 
-    it("Test body", { tags: [ "@check_export", "@income", "@tax_info" ] }, () => {
+    it("Test body", () => {
         createReport(testData.reportCreationData);
 
         cy.stepInfo("1. Navigate to Income -> Tax Info");
@@ -24,12 +24,9 @@ is displayed on the Tax Info page.`, () => {
         _NavigationSection.Actions.openReviewAndExport();
         ReviewExport.generateDocxReport().waitForReportGenerated()
             .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
-
-        deleteReport(testData.reportCreationData.reportNumber);
     });
 
     it("Check export", () => {
-        Cypress.config().baseUrl = null;
         cy.task("getFilePath",
             { _reportName: testData.reportCreationData.reportNumber, _docxHtml: "html" }
         ).then(file => {

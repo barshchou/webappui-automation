@@ -1,5 +1,5 @@
 import testData from "../../../../fixtures/not_full_reports/property/commercial_units/QA-4558.fixture";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { Income, Property } from "../../../../actions";
 
@@ -38,7 +38,6 @@ describe("Verify the functionality of the Use* radio button",
                         .verifyCommercialUnitSFDiscussionTextAreaNotContains(testData.useRadios[index - 1]);
                 }
             });
-            deleteReport(testData.reportCreationData.reportNumber);
         });
 
         it(`Verify radio buttons affect Income > Commercial > In Place RR page and 
@@ -60,7 +59,6 @@ describe("Verify the functionality of the Use* radio button",
                     .Page.formCancelButton().click();
                 _NavigationSection.navigateToCommercialUnits();
             });
-            deleteReport(testData.reportCreationData.reportNumber);
         });
 
         it("Verify that the radio button selection affects the Income > Potential Gross Income page", () => {
@@ -93,7 +91,6 @@ describe("Verify the functionality of the Use* radio button",
                 }
                 _NavigationSection.navigateToCommercialUnits();
             });
-            deleteReport(testData.reportCreationData.reportNumber);
         });
 
         it("Verify that the radio button selection affects the Income > Pro Forma page", () => {
@@ -110,6 +107,5 @@ describe("Verify the functionality of the Use* radio button",
                 Income._ProFormaActions.clickIncludeNOIComparisonCheckbox();
                 _NavigationSection.navigateToCommercialUnits();
             });
-            deleteReport(testData.reportCreationData.reportNumber);
         });
     });

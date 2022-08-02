@@ -1,7 +1,7 @@
 import { Income } from "../../../../../actions";
 import testData from "../../../../../fixtures/not_full_reports/income/commercial/rent_comps/QA-4147-49_50-51.fixture";
 import NavigationSection from "../../../../../actions/base/navigationSection.actions";
-import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../../actions/base/baseTest.actions";
 
 describe("[QA-4147-48_50-51] Check that Commercial Rent Comps map has Filters dropdown", 
     { tags:[ "@income", "@commercial", "@rent_comps" ] }, () => {
@@ -26,7 +26,5 @@ describe("[QA-4147-48_50-51] Check that Commercial Rent Comps map has Filters dr
 
             Income._CommercialManager.RentComps.drawPolygon(testData.coordinates)
                 .editDrewPolygon(testData.editCoordinates);
-
-            deleteReport(testData.reportCreationData.reportNumber);
         });
     });

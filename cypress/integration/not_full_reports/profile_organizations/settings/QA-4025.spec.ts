@@ -1,5 +1,5 @@
-import { Organization } from '../../../../actions/index';
-import { _NavigationSection } from '../../../../actions/base/index';
+import { Organization } from '../../../../actions';
+import { _NavigationSection } from '../../../../actions/base';
 import testData from "../../../../fixtures/not_full_reports/profile_organizations/settings/QA-4025.fixture";
 import enums from '../../../../enums/enums';
 import { loginAction } from '../../../../actions/base/baseTest.actions';

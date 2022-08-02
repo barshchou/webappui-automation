@@ -1,6 +1,6 @@
 import { numberWithCommas } from '../../../../../utils/numbers.utils';
 import testData from "../../../../fixtures/not_full_reports/income/pro_forma/QA-4759_63_65_79-81.fixture";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { Income, Property } from "../../../../actions";
 import proFormaTypes from "../../../../enums/proFormaTypes.enum";
@@ -84,7 +84,5 @@ describe("Pro Forma Page validation Operating Expenses -> Insurance",
             Income._ProFormaActions.verifyCategoryPerUnitTotal(
                 `$${numberWithCommas(Math.round(testData.insuranceUnitPerUnit))}`, 
                 proFormaTypes.insurance);
-
-            deleteReport(testData.reportCreationData.reportNumber);
         });
     });

@@ -3,7 +3,7 @@ import NavigationSection from "../../../../actions/base/navigationSection.action
 import Income from "../../../../actions/income/income.manager";
 import Property from "../../../../actions/property/property.manager";
 import Sales from "../../../../actions/sales/sales.manager";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 
 describe(`Prospective Market Value As Stabilized -> Less Residential Rent Loss 
                 data is pulled from Cap Rate Conclusion`, 
@@ -35,6 +35,5 @@ describe(`Prospective Market Value As Stabilized -> Less Residential Rent Loss
         NavigationSection.navigateToSalesValueConclusion()
             .verifyProgressBarNotExist();
         Sales.ValueConclusion.verifyAsStabResRentLossTimePeriodByRow(testData.data.rentLossTimePeriod);
-        deleteReport(testData.reportCreationData.reportNumber);
     });
 });

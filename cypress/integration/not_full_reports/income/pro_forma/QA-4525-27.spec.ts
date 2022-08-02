@@ -1,6 +1,6 @@
 import { numberWithCommas } from '../../../../../utils/numbers.utils';
 import testData from "../../../../fixtures/not_full_reports/income/pro_forma/QA-4525-27.fixture";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { Property } from '../../../../actions';
 import { Income } from "../../../../actions";
@@ -110,7 +110,5 @@ describe("Potential Gross Income",
             Income._ProFormaActions.verifyCategoryPerUnitTotal(
                 `$${numberWithCommas(Math.round(testData.potentialGrossIncomePerUnit))}`, 
                 proFormaTypes.potentialGrossIncome);
-
-            deleteReport(testData.reportCreationData.reportNumber);
         });
     });
