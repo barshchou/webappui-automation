@@ -1,5 +1,5 @@
 export default {
-    spec5394: {
+    values: {
         regularNumber: 850,
         regularNumOverThousand: 10000,
         decimalNum: -38.54,
