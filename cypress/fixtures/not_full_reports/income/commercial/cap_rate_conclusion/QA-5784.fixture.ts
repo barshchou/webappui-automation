@@ -26,5 +26,7 @@ export default {
     commercialUnitsSF: [ 250, 350, 450 ],
     rentLossTimePeriod: 12,
     commercialUnitType: Enums.UNIT_INCOME_TYPE.commercial,
-    residentialUnitType: Enums.UNIT_INCOME_TYPE.residential
+    residentialUnitType: Enums.UNIT_INCOME_TYPE.residential,
+    lessCommissionFee: 1234,
+    entrepreneurialProfit: 2
 };

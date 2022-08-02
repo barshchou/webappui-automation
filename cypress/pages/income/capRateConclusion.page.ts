@@ -49,6 +49,10 @@ class CapRateConclusionPage extends BasePage {
         return cy.get("[data-qa*='asCompleteLossItems.entrepreneurialProfit'] input[inputmode]"); 
     }
 
+    get asStabilizedLessEntrepreneurialProfit() { 
+        return cy.get("[data-qa*='asStabilizedLossItems.entrepreneurialProfit'] input[inputmode]"); 
+    }
+
     get asIsMarketPeriodCell() { return cy.get("[data-qa=as-is-market-period-cell]"); }
 
     get asIsMarketAmountCell() { return cy.get("[data-qa=as-is-market-amount-cell]"); }
@@ -71,7 +75,17 @@ class CapRateConclusionPage extends BasePage {
 
     get addButton() { return cy.xpath("//button[.='Add']"); }
 
-    get asStabResRentLossTimePeriodCells() { return cy.get("[name^=asStabilizedResRentLossItems][name$=months]"); }
+    asStabResRentLossTimePeriodCells(index = 0) { 
+        return cy.get(`[name="asStabilizedResRentLossItems[${index}].months"]`); 
+    }
+
+    asStabCommercialRentLossTimePeriodCells(index = 0) { 
+        return cy.get(`[name="asStabilizedCommercialRentLossItems[${index}].months"]`); 
+    }
+
+    asStabCommercialUndeterminedRentLossItemsTimePeriodCells(index = 0) { 
+        return cy.get(`[name="asStabilizedLossItems[${index}].months"]`); 
+    }
 
     get asCompleteLessBuyoutCost() { return cy.get("[data-qa*='asCompleteLossItems.buyoutCost'] input[inputmode]"); }
 
@@ -85,6 +99,18 @@ class CapRateConclusionPage extends BasePage {
 
     get asStabilizedCommissionFeeAmount() { 
         return cy.get("[data-qa^='asStabilizedLossItems.commissionFee.amount'] input:not([type=hidden])"); 
+    }
+
+    asStabilizedResRentLossItemsAmount(index = 0) {
+        return cy.get(`[name="asStabilizedResRentLossItems[${index}].amount"]`);
+    }
+
+    asStabilizedCommercialLossItemsAmount(index = 0) {
+        return cy.get(`[name="asStabilizedCommercialRentLossItems[${index}].amount"]`);
+    }
+
+    asStabilizedCommercialUndeterminedRentLossAmount(index = 0) {
+        return cy.get(`[name="asStabilizedLossItems[${index}].amount"]`);
     }
 }
 

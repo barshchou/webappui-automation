@@ -62,7 +62,23 @@ describe("",
             Income.CapRateConclusion.addNewRentLoss(testData.residentialUnitType, testData.residentialUnits)
                 .enterAsStabResRentLossTimePeriodByRow(testData.rentLossTimePeriod);
             Income.CapRateConclusion.addNewRentLoss(testData.commercialUnitType, testData.commercialUnits)
-                .enterAsStabResRentLossTimePeriodByRow(testData.rentLossTimePeriod);
+                .enterAsStabCommercialRentLossTimePeriodByRow(testData.rentLossTimePeriod);
+
+            cy.stepInfo(`10. Fill in with valid numeric values:
+            - Less Residential Rent Loss
+            - Less Commercial Rent Loss
+            - Less Undetermined Commercial Rent Loss
+            - Less Commission Fee
+            - Less Entrepreneurial Profit`);
+            Income.CapRateConclusion.enterAsStabilizedCommissionFeeAmount(testData.lessCommissionFee)
+                .enterAsStabilizedLessEntrepreneurialProfit(testData.entrepreneurialProfit)
+                .enterAsStabCommercialUndeterminedRentLossTimePeriodByRow(testData.rentLossTimePeriod);
+
+            cy.stepInfo(`11. Make sure Prospective Market Value As Complete (Amount) =  
+            Prospective Market Value As Stabilized (Amount) - Less Residential Rent Loss - 
+            Less Commercial Rent Loss - Less Undetermined Commercial Rent Loss - 
+            Less Commission Fee - Less Entrepreneurial Profit*`);
+            Income.CapRateConclusion.verifyProspectiveMarketValueAsComplete();
 
         });
 
