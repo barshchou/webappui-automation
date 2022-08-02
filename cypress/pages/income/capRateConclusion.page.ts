@@ -1,4 +1,3 @@
-import enums from "../../enums/enums";
 import { BoweryReports } from "../../types/boweryReports.type";
 import BasePage from "../base/base.page";
 
