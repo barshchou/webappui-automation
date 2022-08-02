@@ -40,8 +40,9 @@ describe("Verify the text in the Opportunities section on the SWOT Analysis page
                 { _reportName: testData.reportCreationData.reportNumber, _docxHtml: "html" }
             ).then(file => {
                 cy.log(<string>file);
-            
                 cy.visit(<string>file);
+                cy.stepInfo(`4. Verify that the same list of threats as in Step #2  is displayed 
+                            in the exported report “Threats” section`);
                 cy.xpath("//h4[.='Current Commercial Rent Roll']/following-sibling::table");
                 cy.pause();
             });
