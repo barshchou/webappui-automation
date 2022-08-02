@@ -339,7 +339,7 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
 
     clearNumericInputNewComp(elementAlias: string): FindCompsActions {
         // Number "4235" means something for this input
-        cy.get(`@${elementAlias}`, { includeShadowDom: true })
+        cy.get(`@${elementAlias}`)
             .realClick().type("4235", { force: true }).clear({ force: true });
         return this;
     }
@@ -348,11 +348,11 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
         this.clearNumericInputNewComp(elementAlias);
         // ernst: little hack to work with commercialAreaNewComp input due its specific behavior
         if (elementAlias != Alias.pageElements.compPlex.commercialAreaNewComp) {
-            cy.get(`@${elementAlias}`, { includeShadowDom: true }).realClick();
+            cy.get(`@${elementAlias}`).realClick();
         } else {
-            cy.get(`@${elementAlias}`, { includeShadowDom: true }).focus();
+            cy.get(`@${elementAlias}`).focus();
         }
-        cy.get(`@${elementAlias}`, { includeShadowDom: true })
+        cy.get(`@${elementAlias}`)
             .realType(`{enter}${numberOfUnits}`, { pressDelay: 45, delay: 50 });
         this.verifyNumericInputNewComp(elementAlias, numberOfUnits);
         return this;
@@ -360,7 +360,7 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
 
     verifyNumericInputNewComp(elementAlias: string, numberOfUnits: number | string): FindCompsActions {
         const valueToBe = isNumber(numberOfUnits) ? numberWithCommas(`${numberOfUnits}`.replace("-", "")) : "";
-        cy.get(`@${elementAlias}`, { includeShadowDom: true, timeout: 10000 }).should("have.value", valueToBe);
+        cy.get(`@${elementAlias}`, { timeout: 10000 }).should("have.value", valueToBe);
         return this;
     }
 
@@ -426,7 +426,7 @@ export default new FindCompsActions(findCompsPage);
  * Run this function using cypress-recurse 
  */
 const _scrollAndSearchComp = (compAddress: string) => {
-    return cy.get('[aria-label="grid"] > div > div', { includeShadowDom: true }).each((elem, index, list) => {
+    return cy.get('[aria-label="grid"] > div > div').each((elem, index, list) => {
         if (elem.text().includes(compAddress)) {
             cy.log(`Found SalesComps in next list ${list} with index ${index}`);
             _map.set(mapKeysUtils.searchResultSalesComp, elem);
