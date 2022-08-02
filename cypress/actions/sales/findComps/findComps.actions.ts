@@ -46,6 +46,16 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
         return this;
     }
 
+    clickAddNewCompContinueButton(): FindCompsActions {
+        findCompsPage.newCompContinueButton.should('exist').should('be.enabled').focus().click();
+        return this;
+    }
+
+    clickAddNewCompSaveAndCloseButton(): FindCompsActions {
+        findCompsPage.saveAndCloseButton.should('exist').should('be.enabled').focus().click();
+        return this;
+    }
+
     enterCompAddressToSearch(address: string): FindCompsActions {
         findCompsPage.searchCompAddressInput.type(address).type("{enter}");
         findCompsPage.findCompField.click();
@@ -414,6 +424,8 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
         findCompsPage.resetAllButton.should('exist');
         return this;
     }
+
+    
 }
 
 export default new FindCompsActions(findCompsPage);

@@ -65,15 +65,15 @@ conditionalDescribe(`[QA-5157] [QA-5161] [Sales > Find Comps] "Date Sold" sortin
                 .PropertyInfo.setResidentialUnits(`${testData.comparableFixtureManual.units.numberOfUnits}`)
                 .setSiteArea(`${testData.comparableFixtureManual.siteArea}`)
                 .setFloor(`${testData.comparableFixtureManual.floors}`);
-            Sales._FindComps.Page.newCompContinueButton.should('exist').should('be.enabled').focus().click();
+            Sales._FindComps.clickAddNewCompContinueButton;
             Sales._FindComps
                 .SaleInfo.setBuyerGrantee(testData.comparableFixtureManual.saleInfo.buyer)
                 .setSellerGarantor(testData.comparableFixtureManual.saleInfo.seller)
                 .selectSaleDate('random');
             Sales._FindComps
                 .selectDropdownOptionNewComp(Sales._FindComps.Page.SaleStatusDropdown, saleStatus);
-            Sales._FindComps.Page.newCompContinueButton.should('exist').should('be.enabled').focus().click();
-            Sales._FindComps.Page.saveAndCloseButton.should('exist').should('be.enabled').focus().click();
+            Sales._FindComps.clickAddNewCompContinueButton();
+            Sales._FindComps.clickAddNewCompSaveAndCloseButton();
             return this;
         }
 
