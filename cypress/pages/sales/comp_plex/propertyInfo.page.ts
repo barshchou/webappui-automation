@@ -3,6 +3,15 @@ import { Alias } from "../../../utils/alias.utils";
 const { compPlex } = Alias.pageElements;
 
 export default class PropertyInformationForm {
+
+    get PropertyInfoCancelBtn() {
+        return cy.get('[data-qa="property-info-cancel-btn"]', { includeShadowDom: true });
+    }
+
+    get PropertyInfoDoneBtn() {
+        return cy.get('[data-qa="property-info-done-btn"]', { includeShadowDom: true });
+    }
+
     get conditionDropdown() {
         return cy.get('[data-qa="Condition"]', { includeShadowDom: true })
             .as(compPlex.conditionDropdown);
