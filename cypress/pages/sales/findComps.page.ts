@@ -125,7 +125,7 @@ class FindCompsPage extends BasePage {
     }
 
     get loadingModalCSV() {
-        return cy.get('[data-qa="loading-modal"]').contains('Give us just a sec...');
+        return cy.get('[data-qa="loading-modal"]').find('[data-icon="file-upload"]');
     }
 
     get resetAllButton() {
