@@ -13,7 +13,7 @@ describe(`[QA-5394] -> [Sales > Find Comps > Create Comp >
 
     it("[QA-5394] -> Verify the Site Area* field", () => {
         cy.stepInfo(`1. Creating a new comp by clicking "Create comp" btn`);
-        CompPlex.Page.btnCreateComp.click();
+        CompPlex.Actions.createComp();
 
         cy.stepInfo(`1.1. Initializing page element for manipulation`);
         Sales._FindComps.Page.siteAreaNewComp;
