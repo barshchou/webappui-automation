@@ -12,8 +12,8 @@ describe(`[QA-5135] -> [Sales > Find Comps] Check the comps order when "custom" 
         it("Test body", () => {
             cy.stepInfo(`1. [QA-5135] -> User navigates to SalesComps Search page `);
             _NavigationSection.navigateToFindComps();
-            Sales._FindComps.Actions.selectedCompsSetSort("Custom")
-                .Page.sortSalesCompsSelectValue.should('contain', "Custom");
+            Sales._FindComps.Actions.selectedCompsSetSort(testData.sortSalesCompsCustom)
+                .Page.sortSalesCompsSelectValue.should('contain', testData.sortSalesCompsCustom);
         
             cy.stepInfo(`2. [QA-5135] -> User selects n-first comps from map`);
             testData.compsToAdd.forEach(() => {
@@ -33,7 +33,7 @@ describe(`[QA-5135] -> [Sales > Find Comps] Check the comps order when "custom" 
             re-ordered comps and after that selected “Date Sold” sorting -> comps get 
             reordered by sale date on the fly.`);
 
-            Sales._FindComps.Actions.selectedCompsSetSort("Date Sold")
+            Sales._FindComps.Actions.selectedCompsSetSort(testData.sortSalesCompsDateSold)
                 .checkSalesCompSortedByDateSold();
         });
     });
