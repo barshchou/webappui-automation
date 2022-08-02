@@ -2,12 +2,12 @@ import testData from "../../../../../fixtures/not_full_reports/income/commercial
 import NavigationSection from "../../../../../actions/base/navigationSection.actions";
 import Property from "../../../../../actions/property/property.manager";
 import Income from "../../../../../actions/income/income.manager";
-import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../../actions/base/baseTest.actions";
 
 describe("Verify the Annual Rent Total is calculated correctly in the grid.", 
     { tags:[ "@income", "@commercial", "@in_place_rent_roll" ] }, () => {
 
-        before("Login, create report", () => {
+        beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);
         });
 
@@ -22,6 +22,5 @@ describe("Verify the Annual Rent Total is calculated correctly in the grid.",
                 .clickAnnuallyBasisButton()
                 .enterListAnnuallyRent(testData.leaseStatusesList, testData.general.annualRents)
                 .verifyAnnuallyRentTotal(testData.leaseStatusesList, testData.general.annualRents);
-            deleteReport(testData.reportCreationData.reportNumber);
         });
     });

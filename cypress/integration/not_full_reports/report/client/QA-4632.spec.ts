@@ -1,11 +1,11 @@
 import { Report } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 import testData from '../../../../fixtures/not_full_reports/report/client/QA-4632.fixture';
 
 describe("Verify the Cancel button functionality for Intended User and Identification of the Client sections",
     { tags:[ "@report", "@client" ] }, () => {
-        before("Login, create report", () => {
+        beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);
         });
 
@@ -27,7 +27,5 @@ describe("Verify the Cancel button functionality for Intended User and Identific
             Report._Client.Page.formCancelButton().click();
             Report._Client.verifyIntendedUserTextBox(testData.verifyIntendedUserTextArea)
                 .verifyIdentificationOfTheClientTextBox(testData.verifyIdentificationOfTheClientTextArea);
-
-            deleteReport(testData.reportCreationData.reportNumber);
         });
     });

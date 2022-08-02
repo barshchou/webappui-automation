@@ -1,5 +1,5 @@
 import testData from "../../../../../fixtures/not_full_reports/income/residential/rent_comps/QA-4272-73.fixture";
-import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../../actions/base/navigationSection.actions";
 import Income from "../../../../../actions/income/income.manager";
 import { getTodayDateString, getTodayDay } from "../../../../../../utils/date.utils";
@@ -8,7 +8,7 @@ const todayDate = getTodayDateString();
 const todayDay = Number(getTodayDay());
 
 describe("Verify Date of Value Range text fields when Unit type of search is selected", () => {
-    before("Login, create report", () => {
+    beforeEach("Login, create report", () => {
         createReport(testData.reportCreationData);
     });
 
@@ -29,6 +29,5 @@ describe("Verify Date of Value Range text fields when Unit type of search is sel
             .verifyEnteredDate("max", todayDate)
             .clearDateInput("min")
             .clearDateInput("max");
-        deleteReport(testData.reportCreationData.reportNumber);
     });
 });

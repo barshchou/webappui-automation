@@ -1,6 +1,5 @@
-/// <reference types="cypress-grep" />
 import testData from "../../../../fixtures/not_full_reports/income/expense_forecast/QA-4936.fixture";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Property from "../../../../actions/property/property.manager";
 import Income from "../../../../actions/income/income.manager";
@@ -8,7 +7,7 @@ import Income from "../../../../actions/income/income.manager";
 describe("Historical expense Repairs & Maintenance Per SF is correctly calculated and displayed", 
     { tags: [ "@income", "@expense_forecast" ] }, () => {
         
-        before("Login, create report", () => {
+        beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);
             NavigationSection.navigateToPropertySummary();
             Property.Summary.enterGrossBuildingArea(testData.buildingDescription.grossArea)
@@ -43,7 +42,5 @@ describe("Historical expense Repairs & Maintenance Per SF is correctly calculate
                 testData.forecastItem,
                 testData.buildingDescription
             );
-
-            deleteReport(testData.reportCreationData.reportNumber);
         });
     });

@@ -1,5 +1,5 @@
 import testData from "../../../../../fixtures/not_full_reports/income/commercial/stabilized_rent_roll/QA-4586.fixture";
-import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../../actions/base";
 import { Property } from "../../../../../actions";
 import { Income } from "../../../../../actions";
@@ -7,7 +7,7 @@ import { Income } from "../../../../../actions";
 describe("[QA-4586] Verify the Commercial Stabilized Rent Roll table", 
     { tags: [ "@income", "@commercial", "@stabilized_rent_roll" ] }, () => {
         
-        before(`Login, create report, 
+        beforeEach(`Login, create report, 
             - add commercial units;
             - add comp groups and drag units into it;
             - add rent comps and drag units into comp group
@@ -131,7 +131,5 @@ describe("[QA-4586] Verify the Commercial Stabilized Rent Roll table",
                         .verifyRentPsfAnnuallyByRow(testData.rentsPsf[index], index);
                 }
             });
-
-            deleteReport(testData.reportCreationData.reportNumber);
         });
     });

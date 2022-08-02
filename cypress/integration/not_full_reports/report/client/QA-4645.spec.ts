@@ -1,12 +1,12 @@
 import testData from "../../../../fixtures/not_full_reports/report/client/QA-4645.fixture";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import { Report } from '../../../../actions';
 
 
 describe("Verify the Client Guidelines Discussion on the page", 
     { tags: [ "@report", "@client" ] }, () => {
-        before("Login, create report", () => {
+        beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);
         });
 
@@ -18,6 +18,5 @@ describe("Verify the Client Guidelines Discussion on the page",
                 .enterNewCommentary(testData.newCommentary)
                 .Page.revertToGeneratedButton.click();
             Report._Client.verifyClientGuidelinesCommentary(testData.generatedCommentary);
-            deleteReport(testData.reportCreationData.reportNumber);
         });
     });

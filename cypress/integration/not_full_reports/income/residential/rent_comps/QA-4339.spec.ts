@@ -1,5 +1,5 @@
 import testData from "../../../../../fixtures/not_full_reports/income/residential/rent_comps/QA-4339.fixture";
-import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../../actions/base/navigationSection.actions";
 import Income from "../../../../../actions/income/income.manager";
 import Property from "../../../../../actions/property/property.manager";
@@ -8,7 +8,7 @@ describe(`Verify clicking Add Unit button on Add New Rent Comp overlay is adding
                 of comparable units on the Rent Comps page (Unit type of search is selected)`,
 { tags:[ "@income", "@residential", "@rent_comps" ] }, () => {
 
-    before("Login, create report", () => {
+    beforeEach("Login, create report", () => {
         createReport(testData.reportCreationData);
     });
 
@@ -36,6 +36,5 @@ describe(`Verify clicking Add Unit button on Add New Rent Comp overlay is adding
             .clickUnitAmenitiesDropdown()
             .clickSubmitCompButton();
         Income.Residential.RentComps.BaseActions.verifyComparableBedroomTableByNumber(0, testData.formData);
-        deleteReport(testData.reportCreationData.reportNumber);
     });
 });

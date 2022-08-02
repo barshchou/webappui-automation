@@ -1,13 +1,13 @@
 import testData from 
     "../../../../../fixtures/not_full_reports/income/residential/in_place_rent_roll/QA-4212_43_46.fixture";
-import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../../actions/base";
 import { Income, Property } from "../../../../../actions";
 
 describe("[QA-4212] [QA-4243] [QA-4246] In-Place Rent Roll table tests", 
     { tags:[ "@income", "@residential", "@in_place_rent_roll" ] }, () => {
 
-        before("Login, create report", () => {
+        beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);
         });
 
@@ -38,7 +38,5 @@ describe("[QA-4212] [QA-4243] [QA-4246] In-Place Rent Roll table tests",
             cy.stepInfo(`4. [QA-4246] Verify the Annual Total row is calculated per formula = 
             (Monthly Rent ($) sum - vacant units' rent) * 12`);
             Income._Residential.InPlaceRentRoll.verifyTotalAnnualRent();
-
-            deleteReport(testData.reportCreationData.reportNumber);
         });
     });

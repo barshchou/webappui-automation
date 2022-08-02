@@ -1,6 +1,6 @@
 import { Property } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 import testData from "../../../../fixtures/not_full_reports/property/commercial_units/QA-4549-54.fixture";
 
 describe(`[QA-4549][QA-4550][QA-4551] Verify the "Linked" chips dropdown in the new narrative component`, 
@@ -69,9 +69,5 @@ describe(`[QA-4549][QA-4550][QA-4551] Verify the "Linked" chips dropdown in the 
 
             Property._CommercialUnits.clickSaveDiscussionButton()
                 .verifyProgressBarNotExist();
-        });
-
-        after('Delete report', () => {
-            deleteReport(testData.reportCreationDataAsIs.reportNumber);
         });
     });

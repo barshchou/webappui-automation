@@ -1,12 +1,12 @@
 import testData from "../../../../../fixtures/not_full_reports/income/residential/in_place_rent_roll/QA-4242.fixture";
-import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../../actions/base";
 import { Income, Property } from "../../../../../actions";
 
 describe("In-Place Rent Roll table tests", 
     { tags:[ "@income", "@residential", "@in_place_rent_roll" ] }, () => {
         
-        before("Login, create report", () => {
+        beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);
         });
 
@@ -32,7 +32,5 @@ describe("In-Place Rent Roll table tests",
                     .enterLeaseStatusByRowNumber(unit.leaseStatus, index)
                     .verifyRentRoomCellValues(unit.monthlyRent, unit.rooms, index);
             });
-
-            deleteReport(testData.reportCreationData.reportNumber);
         });
     });

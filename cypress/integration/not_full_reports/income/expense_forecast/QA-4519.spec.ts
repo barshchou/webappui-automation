@@ -1,5 +1,5 @@
 import testData from "../../../../fixtures/not_full_reports/income/expense_forecast/QA-4519.fixture";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 import { Property, Income } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
 import tableExpenseHistoryCellNames from "../../../../enums/expense/expenseHistoryTableRows.enum";
@@ -7,7 +7,7 @@ import tableExpenseHistoryCellNames from "../../../../enums/expense/expenseHisto
 describe("Historical expense Insurance Per SF is correctly calculated and displayed",
     { tags:[ "@snapshot_tests", "@income", "@expense_forecast" ] }, () => {
 
-        before("Login, create report", () => {
+        beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);
 
             cy.stepInfo("1. Pre-condition: Residential Units should be filled in on Property > Summary form");
@@ -35,19 +35,12 @@ describe("Historical expense Insurance Per SF is correctly calculated and displa
                     .enterIssueByColIndex(per.insurance, tableExpenseHistoryCellNames.insurance, 0);
             });
             Income._ExpenseHistory.Actions.verifyAverageTable();
-
-            cy.saveLocalStorage();
-        });
-
-        beforeEach("RestoreLocalStorage", () => {
-            cy.restoreLocalStorage();
         });
 
         it("[QA-4519]", () => {
 
             cy.stepInfo(`4. Go to Expense Forecast and make sure that Per SF radio button 
             is selected for Insurance card`);
-            testData.basis = "sf";
             _NavigationSection.Actions.navigateToExpenseForecast();
             Income._ExpenseForecastActions.chooseForecastItemBasis(testData.actualInsuranceItem)
                 .verifyForecastItemBasis(testData.actualInsuranceItem);
@@ -75,7 +68,5 @@ describe("Historical expense Insurance Per SF is correctly calculated and displa
                         .getItemNameForAverage(testData.actualInsuranceItem.name)), 
                 testData.insurancePerSfCardSnapshotName, 
                 { padding: [ 10, 100 ] });
-                    
-            deleteReport(testData.reportCreationData.reportNumber);
         });
     });

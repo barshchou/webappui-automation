@@ -1,5 +1,5 @@
 import testData from "../../../../fixtures/not_full_reports/income/pro_forma/QA-4995.fixture";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 import { Property, Income } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
 import proFormaTypesEnum from "../../../../enums/proFormaTypes.enum";
@@ -8,7 +8,7 @@ import { numberWithCommas } from "../../../../../utils/numbers.utils";
 describe("[QA-4995] Verify that combined utilities expenses is enabled on the Pro Forma page",
     { tags:[ "@income", "@pro_forma" ] }, () => {
 
-        before("Login, create report", () => {
+        beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);
 
             cy.stepInfo(`1. Pre-condition: Residential Units should be filled in on Property > Summary form`);
@@ -76,8 +76,5 @@ describe("[QA-4995] Verify that combined utilities expenses is enabled on the Pr
                     proFormaTypesEnum.fuel)
                 .verifyCategoryTotal(`$${numberWithCommas(Math.round(testData.totalWater))}`, 
                     proFormaTypesEnum.waterAndSewer);
-
-
-            deleteReport(testData.reportCreationData.reportNumber);
         });
     });

@@ -1,12 +1,12 @@
 import testData from "../../../../fixtures/not_full_reports/property/commercial_units/QA-4566.fixture";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Property from "../../../../actions/property/property.manager";
 
 describe("Verify the functionality of the Frontage radio button", 
     { tags: [ "@property", "@commercial_units" ] }, () => {
         
-        before("Login, create report", () => {
+        beforeEach("Login, create report", () => {
             cy.stepInfo(`Preconditions: The mixed report is created and several commercial units are added.`);
             createReport(testData.reportCreationData);
         });
@@ -31,6 +31,5 @@ describe("Verify the functionality of the Frontage radio button",
                 cy.stepInfo(`4. Verify that each radio button can be selected and saved.`);
                 Property.CommercialUnits.verifyRadioIsChecked(testData.groupName, radio);
             });
-            deleteReport(testData.reportCreationData.reportNumber);
         });
     });

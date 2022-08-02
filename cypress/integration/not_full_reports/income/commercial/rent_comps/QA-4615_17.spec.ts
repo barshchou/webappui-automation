@@ -1,12 +1,12 @@
 import testData from "../../../../../fixtures/not_full_reports/income/commercial/rent_comps/QA-4615_17.fixture";
-import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../../actions/base";
 import { Income } from "../../../../../actions";
 
 describe("Verify Input in 'Use-Other*' free text works correctly", 
     { tags: [ "@income", "@commercial", "@rent_comps" ] }, () => {
         
-        before("Login, create report", () => {
+        beforeEach("Login, create report", () => {
             cy.stepInfo("1. The mixed report is created and several commercial units are added");
             createReport(testData.reportCreationData);
         });
@@ -56,7 +56,5 @@ describe("Verify Input in 'Use-Other*' free text works correctly",
             cy.stepInfo("8. Verify if entered value is displayed in Use column in Selected Rent Comps table");
             Income._CommercialManager.RentComps.clickEditButtonByRowNumber()
                 .Page.getRentCompInputField(testData.fieldName).should("have.value", testData.verifyFillValues[0]);
-
-            deleteReport(testData.reportCreationData.reportNumber);
         });
     });

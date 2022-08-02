@@ -1,7 +1,7 @@
-import { ReviewExport } from './../../../../actions/index';
+import { ReviewExport } from '../../../../actions';
 import { Report } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 import testData from '../../../../fixtures/not_full_reports/report/key_info/QA-4721_24-26.fixture';
 
 describe(`Verify the Save and Save & Continue button functionality on the Report > Key Info page:`,
@@ -31,8 +31,6 @@ describe(`Verify the Save and Save & Continue button functionality on the Report
             cy.stepInfo(`3. Verify that the changes are saved`);
             Report._KeyInfo.verifyTextBoxPropertyRightsAppraised(testData.verifyTaxValue);
             Report._KeyInfo.verifyTextBoxDefinitionOfMarketValue(testData.verifyTaxValue);
-
-            deleteReport(testData.reportCreationData.reportNumber);
         });
 
         it("[QA-4724]", () => {
@@ -58,8 +56,6 @@ describe(`Verify the Save and Save & Continue button functionality on the Report
             Report._KeyInfo.clickYesButton();
             Report._KeyInfo.verifyTextBoxPropertyRightsAppraised(testData.verifyTaxValue)
                 .verifyTextBoxDefinitionOfMarketValue(testData.verifyTaxValue);
-
-            deleteReport(testData.reportCreationData.reportNumber);
         });
 
         it("[QA-4725]", () => {
@@ -101,8 +97,6 @@ describe(`Verify the Save and Save & Continue button functionality on the Report
             cy.go("back");
             Report._KeyInfo.verifyTextBoxPropertyRightsAppraised(testData.verifySecondTaxValue, "not.include.text")
                 .verifyTextBoxDefinitionOfMarketValue(testData.verifySecondTaxValue, "not.include.text");
-
-            deleteReport(testData.reportCreationData.reportNumber);
         });
 
         it("[QA-4726]", () => {
@@ -114,7 +108,5 @@ describe(`Verify the Save and Save & Continue button functionality on the Report
             Report._KeyInfo.clickBackButton()
                 .clickYesButton();
             ReviewExport.verifyPageIsOpened();
-
-            deleteReport(testData.reportCreationData.reportNumber);
         });
     });

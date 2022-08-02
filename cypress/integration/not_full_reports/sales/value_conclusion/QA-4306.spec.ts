@@ -3,12 +3,12 @@ import NavigationSection from "../../../../actions/base/navigationSection.action
 import Property from "../../../../actions/property/property.manager";
 import Income from "../../../../actions/income/income.manager";
 import Sales from "../../../../actions/sales/sales.manager";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 
 describe(`Prospective Market Value As Stabilized -> Less Entrepreneurial Profit 
                 data is pulled from Cap Rate Conclusion`, 
 { tags:[ "@sales", "@value_conclusion" ] }, () => {
-    before("Login, create report", () => {
+    beforeEach("Login, create report", () => {
         createReport(testData.reportCreationData);
     });
 
@@ -29,6 +29,5 @@ describe(`Prospective Market Value As Stabilized -> Less Entrepreneurial Profit
             .verifyProgressBarNotExist();
         Sales.ValueConclusion.verifyAsCompleteLessEntrepreneurialProfit(testData.generalData.lessEntrepreneurialProfit)
             .verifyPopUpWithTitleExists(testData.generalData.lessEntrepreneurialProfitPopUp);
-        deleteReport(testData.reportCreationData.reportNumber);
     });
 });

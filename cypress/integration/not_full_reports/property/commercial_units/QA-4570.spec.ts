@@ -1,11 +1,11 @@
 import testData from "../../../../fixtures/not_full_reports/property/commercial_units/QA-4570.fixture";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { Property } from "../../../../actions";
 
 describe("[QA-4570] Verify the Back button functionality on the Commercial Units page",
     { tags:[ "@property", "@commercial_units" ] }, () => {
-        before("Login, create report", () => {
+        beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);
         });
 
@@ -20,7 +20,5 @@ describe("[QA-4570] Verify the Back button functionality on the Commercial Units
             Property._CommercialUnits.clickBackButton()
                 .clickYesButton();
             Property._SiteDescription.Page.siteDescriptionTitle.should("be.visible");
-
-            deleteReport(testData.reportCreationData.reportNumber);
         });
     });

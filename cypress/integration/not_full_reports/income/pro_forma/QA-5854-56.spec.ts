@@ -1,6 +1,6 @@
 import { numberWithCommas } from '../../../../../utils/numbers.utils';
 import testData from "../../../../fixtures/not_full_reports/income/pro_forma/QA-5854-56.fixture";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { Income, Property } from "../../../../actions";
 import { BoweryReports } from '../../../../types/boweryReports.type';
@@ -61,7 +61,5 @@ describe("Pro Forma Page validation Operating Expenses -> Custom Expense",
             Income._ProFormaActions.verifyCategoryPSFTotal(
                 `$${numberWithCommas(testData.customUnitPerSf.toFixed(2))}`, 
                 testData.customExpenseName);
-
-            deleteReport(testData.reportCreationData.reportNumber);
         });
     });

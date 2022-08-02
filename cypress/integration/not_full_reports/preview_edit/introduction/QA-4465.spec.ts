@@ -1,17 +1,16 @@
-/// <reference types="cypress-grep" />
-import testData from "../../../../fixtures/not_full_reports/review_edit/introduction/QA-4465.fixture";
+import testData from "../../../../fixtures/not_full_reports/preview_edit/introduction/QA-4465.fixture";
 import { _BaseTest } from "../../../../actions/base";
 import { Report, PreviewEdit } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { normalizeText } from "../../../../../utils/string.utils";
 import mapKeysUtils from "../../../../utils/mapKeys.utils";
 
-const { createReport, deleteReport } = _BaseTest;
+const { createReport } = _BaseTest;
 
 describe('Verify the "Property Rights Appraised" commentary on the Introduction page', 
     { tags:[ "@preview_edit", "@introduction" ] }, () => {
         
-        before("Login, create report", () => {
+        beforeEach("Login, create report", () => {
             cy.stepInfo(`1. Create a report`);
             createReport(testData.reportCreationData);
 
@@ -60,7 +59,5 @@ describe('Verify the "Property Rights Appraised" commentary on the Introduction 
                 PreviewEdit._Introduction.Page.getBackLink(testData.backLinkName).click();
                 PreviewEdit._Introduction.Actions.clickYesButton().verifyProgressBarNotExist();
             });
-
-            deleteReport(testData.reportCreationData.reportNumber);
         });
     });

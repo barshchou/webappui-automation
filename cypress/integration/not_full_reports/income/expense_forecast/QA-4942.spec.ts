@@ -1,12 +1,12 @@
 import testData from "../../../../fixtures/not_full_reports/income/expense_forecast/QA-4942.fixture";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Income from "../../../../actions/income/income.manager";
 
 describe("Comparable Min, Max, Avg values for Fuel Per SF are correctly calculated and displayed", 
     { tags: [ "@income", "@expense_forecast", "@snapshot_tests" ] }, () => {
 
-        before("Login, create report",  () => {
+        beforeEach("Login, create report",  () => {
             createReport(testData.reportCreationData);
         });
 
@@ -50,6 +50,5 @@ describe("Comparable Min, Max, Avg values for Fuel Per SF are correctly calculat
             They should be correctly displayed on a slide bar`);
             Income.ExpenseForecast.Actions.matchElementSnapshot(
                 Income.ExpenseForecast.Page.fuelCard, testData.fuelCardSnapshotName, { padding: [ 10, 100 ] });
-            deleteReport(testData.reportCreationData.reportNumber);
         });
     });

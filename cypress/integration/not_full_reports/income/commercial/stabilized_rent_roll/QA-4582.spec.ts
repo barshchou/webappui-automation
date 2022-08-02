@@ -1,11 +1,11 @@
 import { Income, Property } from "../../../../../actions";
 import { _NavigationSection } from "../../../../../actions/base";
-import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../../actions/base/baseTest.actions";
 import testData from "../../../../../fixtures/not_full_reports/income/commercial/stabilized_rent_roll/QA-4582.fixture";
 
 describe(`Verify the Unsaved changes modal functionality on the Income > Commercial > Stabilized Rent Roll page:`,
     { tags: [ '@income', '@commercial', '@stabilized_rent_roll' ] }, () => {
-        before("Login, create report", () => {
+        beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);
         });
 
@@ -67,7 +67,5 @@ describe(`Verify the Unsaved changes modal functionality on the Income > Commerc
                 .verifyThatPageIsOpened()
                 .verifyListRentPsfAnnually(testData.leaseStatuses, testData.rentToBe)
                 .verifyCommentaryContainsText(testData.commentText);
-
-            deleteReport(testData.reportCreationData.reportNumber);
         });
     });

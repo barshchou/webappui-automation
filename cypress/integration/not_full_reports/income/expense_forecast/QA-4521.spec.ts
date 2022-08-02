@@ -1,12 +1,12 @@
 import testData from "../../../../fixtures/not_full_reports/income/expense_forecast/QA-4521.fixture";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 import { Property, Income } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
 import tableExpenseHistoryCellNames from "../../../../../cypress/enums/expense/expenseHistoryTableRows.enum";
 
 describe("Historical expense Insurance Per Unit is correctly calculated and displayed",
     { tags: [ "@snapshot_tests", "@income", "@expense_forecast" ] }, () => {
-        before("Login, create report", () => {
+        beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);
         });
 
@@ -63,8 +63,5 @@ describe("Historical expense Insurance Per Unit is correctly calculated and disp
             Income._ExpenseForecastActions.Actions.matchElementSnapshot(
                 Income._ExpenseForecastActions.Page.insuranceCard, testData.insuranceICardSnapshotName, 
                 { padding: [ 10, 100 ] });
-
-            deleteReport(testData.reportCreationData.reportNumber);
-
         });
     });

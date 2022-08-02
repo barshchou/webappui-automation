@@ -1,8 +1,8 @@
 import { reportCreationData } from 
     '../../../../../fixtures/not_full_reports/income/residential/in_place_rent_roll/QA-4210.fixture';
-import { _NavigationSection } from './../../../../../actions/base/index';
+import { _NavigationSection } from '../../../../../actions/base';
 import testData from "../../../../../fixtures/not_full_reports/income/residential/in_place_rent_roll/QA-4210.fixture";
-import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../../actions/base/baseTest.actions";
 import { Income, Property, ReviewExport } from "../../../../../actions";
 
 describe("Verify the Developer's Forecast checkbox on the In-Place Rent Roll page", 
@@ -26,13 +26,11 @@ describe("Verify the Developer's Forecast checkbox on the In-Place Rent Roll pag
                 _NavigationSection.openReviewAndExport();
                 ReviewExport.generateDocxReport().waitForReportGenerated()
                     .downloadAndConvertDocxReport(reportCreationData(i).reportNumber);
-                deleteReport(reportCreationData(i).reportNumber);
             });
         }
 
         for (let i = 0; i < 2; i++) {
-            it(`Export #${i + 1} Verify export report`, () => {
-                Cypress.config().baseUrl = null;
+            it(`Export #${i + 1} Check export report`, () => {
                 cy.task("getFilePath", { _reportName: reportCreationData(i).reportNumber, _docxHtml: "html" })
                     .then(file => {
                         cy.log(<string>file);

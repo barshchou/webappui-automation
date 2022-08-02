@@ -1,12 +1,12 @@
 import testData from "../../../../fixtures/not_full_reports/property/commercial_units/QA-4563.fixture";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { Property } from "../../../../actions";
 
 describe("Verify the functionality of the Grade checkbox", 
     { tags: [ "@property", "@commercial_units" ] }, () => {
 
-        before("Login, create report", () => {
+        beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);
         });
 
@@ -37,6 +37,5 @@ describe("Verify the functionality of the Grade checkbox",
             testData.gradeValues.forEach(value => {
                 Property._CommercialUnits.verifyRadioIsChecked(testData.groupName, value);
             });
-            deleteReport(testData.reportCreationData.reportNumber);
         });
     });

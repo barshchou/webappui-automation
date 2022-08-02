@@ -1,4 +1,4 @@
-import { Property, Income } from '../../../../../actions/index';
+import { Property, Income } from '../../../../../actions';
 import testData from "../../../../../fixtures/not_full_reports/income/commercial/rent_comps/QA-4710-11.fixture";
 import NavigationSection from "../../../../../actions/base/navigationSection.actions";
 import { createReport } from "../../../../../actions/base/baseTest.actions";
@@ -6,7 +6,7 @@ import { createReport } from "../../../../../actions/base/baseTest.actions";
 describe("Dropdown 'Filters' - 'Sort by' section display and count values", 
     { tags:[ "@income", "@commercial", "@rent_comps" ] }, () => {
 
-        before("Login, create report and add Commercial units", () => {
+        beforeEach("Login, create report and add Commercial units", () => {
             createReport(testData.reportCreationData);
             NavigationSection.navigateToPropertySummary();
             Property._Summary.enterNumberOfCommercialUnits(testData.commercialUnits);

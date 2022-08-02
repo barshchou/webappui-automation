@@ -1,5 +1,5 @@
 import testData from "../../../../fixtures/not_full_reports/income/expense_forecast/QA-4876.fixture";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Property from "../../../../actions/property/property.manager";
 import Income from "../../../../actions/income/income.manager";
@@ -8,7 +8,7 @@ import tableExpenseHistoryCellNames from "../../../../../cypress/enums/expense/e
 describe("Historical expense Electricity Per SF is correctly calculated and displayed",
     { tags: [ "@snapshot_tests", "@expense_forecast", "@income" ] }, () => {
 
-        before("Login, create report", () => {
+        beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);
         });
 
@@ -72,7 +72,5 @@ describe("Historical expense Electricity Per SF is correctly calculated and disp
                 Income.ExpenseForecast.Page.electricityCard, testData.electricityCardSnapshotName, 
                 { padding: [ 10, 100 ] }
             );
-
-            deleteReport(testData.reportCreationData.reportNumber);
         });
     });

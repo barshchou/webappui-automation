@@ -2,12 +2,12 @@ import testData from "../../../../../fixtures/not_full_reports/income/residentia
 import NavigationSection from "../../../../../actions/base/navigationSection.actions";
 import Income from "../../../../../actions/income/income.manager";
 import Property from "../../../../../actions/property/property.manager";
-import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../../actions/base/baseTest.actions";
 
 describe("Verify the Unsaved changes modal functionality", 
     { tags:[ "@income", "@residential", "@in_place_rent_roll" ] }, () => {
         
-        before("Login, create report", () => {
+        beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);
         });
 
@@ -23,6 +23,5 @@ describe("Verify the Unsaved changes modal functionality",
             Property.Summary.verifyThatPageIsOpened()
                 .goBackWithSave();
             Income.Residential.InPlaceRentRoll.verifyCheckboxIsChecked(testData.forecastLabel);
-            deleteReport(testData.reportCreationData.reportNumber);
         });
     });

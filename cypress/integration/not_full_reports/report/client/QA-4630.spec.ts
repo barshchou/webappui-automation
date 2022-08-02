@@ -1,11 +1,11 @@
 import { PreviewEdit, Report } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 import testData from '../../../../fixtures/not_full_reports/report/client/QA-4630.fixture';
 
 describe("Verify the functionality of the NYCB Application No. (optional) field",
     { tags:[ "@report", "@client" ] }, () => {
-        before("Login, create report", () => {
+        beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);
         });
 
@@ -27,7 +27,5 @@ describe("Verify the functionality of the NYCB Application No. (optional) field"
             from the previous step is displayed in the APPRAISAL REPORT section.`);
             _NavigationSection.navigateToCoverPage();
             PreviewEdit._CoverPage.verifyApplicationNumber(testData.clientFileNumber);
-      
-            deleteReport(testData.reportCreationData.reportNumber);
         });
     });

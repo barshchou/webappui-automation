@@ -1,7 +1,7 @@
 import testData from "../../../../fixtures/not_full_reports/income/expense_forecast/QA-5008-10.fixture";
 import { _NavigationSection } from "../../../../actions/base";
 import { Income } from "../../../../actions";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 
 describe(`[QA-5008] [QA-5009] [QA-5010] [Income>Expense forecast] “Include Expense on Pro Forma” 
 checkbox and tooltip functionality`,
@@ -44,7 +44,5 @@ checkbox and tooltip functionality`,
         testData.expensesForecastCardNamesArray.forEach(element => {
             Income._ExpenseForecastActions.verifyProFormaTooltip(element);
         });
-
-        deleteReport(testData.reportCreationData.reportNumber);
     });
 });

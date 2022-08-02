@@ -1,11 +1,11 @@
 import { Report } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 import testData from '../../../../fixtures/not_full_reports/report/key_info/QA-4695.fixture';
 
 describe("[QA-4695] Verify the Save button functionality on the Report > Client page",
     { tags:[ "@report", "@key_info" ] }, () => {
-        before("Login, create report", () => {
+        beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);
         });
 
@@ -27,7 +27,5 @@ describe("[QA-4695] Verify the Save button functionality on the Report > Client 
                 .verifyElementIsVisible(Report._KeyInfo.Page.jobNumberTextInput)
                 .verifyElementIsVisible(Report._KeyInfo.Page.uploadFilesButton)
                 .verifyElementIsVisible(Report._KeyInfo.Page.wrapperDefinitionOfMarketValue);
-
-            deleteReport(testData.reportCreationData.reportNumber);
         });
     });

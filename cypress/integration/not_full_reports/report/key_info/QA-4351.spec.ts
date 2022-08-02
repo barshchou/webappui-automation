@@ -1,11 +1,11 @@
 import testData from "../../../../fixtures/not_full_reports/report/key_info/QA-4351.fixture";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { Report } from "../../../../actions";
 
 describe("[QA-4351] Pre-fill Inspection Date from Salesforce (Inspection Date is the same as Date of Valuation)",
     { tags: [ "@report", "@key_info", "@salesforce" ] }, () => {
-        before("Login, create report", () => {
+        beforeEach("Login, create report", () => {
             cy.stepInfo(`1. Create report while creating set the same Job number 
             as report from SalesForce has (e.g. JOB-1764459005).
             Make sure that there is Inspection Date in the Salesforce job`);
@@ -24,7 +24,5 @@ describe("[QA-4351] Pre-fill Inspection Date from Salesforce (Inspection Date is
             cy.stepInfo(`3. Go to Report → Key Info → Engagement tab and verify that check-box "My Date of Valuation 
             (As Is) date is different from my Inspection Date" is unchecked`);
             Report._KeyInfo.Page.inputToCheckMyDateIsDifferent.should("not.be.checked");
-
-            deleteReport(testData.reportCreationData.reportNumber);
         });
     });

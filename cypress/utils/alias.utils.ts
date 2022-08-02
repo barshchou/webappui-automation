@@ -16,6 +16,7 @@ export const gqlOperationNames = {
 };
 
 export const Alias = {
+    searchUnits: _alias("searchUnits"),
     loginRequest:_alias("loginRequest"),
     reportId: _alias("reportId"),
     salesEventId: _alias("salesEventId"),

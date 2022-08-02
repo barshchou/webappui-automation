@@ -1,5 +1,5 @@
 import testData from "../../../../../fixtures/not_full_reports/income/commercial/rent_comps/QA-5395.fixture";
-import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../../actions/base";
 import { Income } from "../../../../../actions";
 import columns from "../../../../../enums/compGroupsColumns.enum";
@@ -7,7 +7,7 @@ import columns from "../../../../../enums/compGroupsColumns.enum";
 describe("Verify entered Use is displayed in Selected Rent Comps table", 
     { tags: [ "@income", "@commercial", "@rent_comps" ] }, () => {
         
-        before("Login, create report", () => {
+        beforeEach("Login, create report", () => {
             cy.stepInfo(`1. The mixed report is created and several commercial units are added`);
             createReport(testData.reportCreationData);
         });
@@ -42,7 +42,5 @@ describe("Verify entered Use is displayed in Selected Rent Comps table",
                 .submitSaveChangesModal();
             Income._CommercialManager.CompGroupsDiscussion.verifyCompGroupUnitValue(testData.compGroup, columns.use, 
                 testData.otherUse);
-
-            deleteReport(testData.reportCreationData.reportNumber);
         });
     });

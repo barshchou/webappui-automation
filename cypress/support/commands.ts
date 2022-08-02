@@ -7,6 +7,7 @@ import mapKeysUtils from '../utils/mapKeys.utils';
 import { BoweryAutomation } from '../types/boweryAutomation.type';
 import { Alias } from '../utils/alias.utils';
 import { pathSpecData } from '../../utils/fixtures.utils';
+import { evalUrl } from "../utils/env.utils";
 
 /**
  * You can use exporting of this map only in exceptional cases, as in QA-4136 spec
@@ -62,7 +63,7 @@ addMatchImageSnapshotCommand({
  * If we set env variable CYPRESS_DEBUG=1 - pageLoadTimeout will be 3 minutes instead of 1.
  * Useful when some environments loads really slow.
  */
-const _cyVisit = (url: string) => cy.visit(url, { timeout: Cypress.env("DEBUG") == 1 ? 180000 : 60000 });
+const _cyVisit = (url: string) => cy.visit(url, { timeout: Cypress.env("DEBUG") == 1 ? 180000 : 120000 });
 
 Cypress.Commands.add("loginByApi", (envUrl, username, password) => {
     cy.log("Logging in by api");
@@ -109,12 +110,11 @@ Cypress.Commands.add("createApiReport",
     (reportCreationData: BoweryAutomation.ReportCreationData, payload, token, envUrl) => {
         cy.task("createReportApi", 
             { 
-                _reportCreationData:reportCreationData, 
-                _payload:payload, 
-                _token:token,
-                _envUrl:envUrl
-
-            }, { timeout:60000 })
+                _reportCreationData: reportCreationData,
+                _payload: payload,
+                _token: token,
+                _envUrl: envUrl
+            }, { timeout: 120000 })
             .then(val => {
                 cy.log(`reportId is next: ${val}`);
                 cy._mapSet(mapKeysUtils.reportId, val);
@@ -124,39 +124,49 @@ Cypress.Commands.add("createApiReport",
     });
 
 Cypress.Commands.add("deleteApiReport", () => {
-    cy.log("Delete report");    
+    cy.log("Delete report");
     cy.logNode("\nDelete report");
+    const url = evalUrl(Cypress.env(), true);
     cy._mapGet(mapKeysUtils.reportIdArray).then(arr => {
         if (arr === undefined) {
             cy.log("No report_ids saved! Nothing to delete.");
             return;
         } else {
-            arr.forEach(reportId => {
-                cy.log(`Deleting report with id: ${reportId}`);
-                cy.logNode(`Deleting report with id: ${reportId}`);
-                // Deleting report
-                cy.request({
-                    method:"DELETE",
-                    url:`${Cypress.config().baseUrl}/report/${reportId}`,
-                    auth:{
-                        'bearer': _map.get(mapKeysUtils.bearerToken)
-                    },
-                    timeout: 60000
-                }).then((resp) => {
-                    expect(resp.status).to.eq(200);
-                });
-    
-                // Additional check whether report was deleted
-                cy.request({
-                    failOnStatusCode: false,
-                    method:"GET",
-                    url:`${Cypress.config().baseUrl}/report/${reportId}`,
-                    auth:{
-                        'bearer': _map.get(mapKeysUtils.bearerToken)
-                    },
-                    timeout: 60000
-                }).then((resp) => {
-                    expect(resp.status).to.eq(404);
+            cy.task("loginApi",
+                {
+                    _envUrl: url,
+                    _username: Cypress.env("USERNAME"),
+                    _password: Cypress.env("PASSWORD")
+                }).then(response => {
+                arr.forEach(reportId => {
+                    cy.log(`Deleting report with id: ${reportId}`);
+                    cy.logNode(`Deleting report with id: ${reportId}`);
+                    // Deleting report
+                    cy.request({
+                        method:"DELETE",
+                        url:`${url}/report/${reportId}`,
+                        auth:{
+                            // @ts-ignore
+                            'bearer': response.token
+                        },
+                        timeout: 60000
+                    }).then((resp) => {
+                        expect(resp.status).to.eq(200);
+                    });
+
+                    // Additional check whether report was deleted
+                    cy.request({
+                        failOnStatusCode: false,
+                        method:"GET",
+                        url:`${url}/report/${reportId}`,
+                        auth:{
+                            // @ts-ignore
+                            'bearer': response.token
+                        },
+                        timeout: 60000
+                    }).then((resp) => {
+                        expect(resp.status).to.eq(404);
+                    });
                 });
             });
         }
@@ -243,5 +253,4 @@ Cypress.Commands.add("_mapGet", (_key: any) => {
 Cypress.Commands.add("logNode", (message: string) => {
     return cy.task("logNode", message);
 });
-
 //#endregion

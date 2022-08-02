@@ -1,12 +1,12 @@
 import { Report } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 import testData from '../../../../fixtures/not_full_reports/report/client/QA-4633.fixture';
 
 describe(`Verify the Revert to Original button functionality for Intended User 
 and Identification of the Client sections`,
 { tags:[ "@report", "@client" ] }, () => {
-    before("Login, create report", () => {
+    beforeEach("Login, create report", () => {
         createReport(testData.reportCreationData);
     });
 
@@ -42,7 +42,5 @@ and Identification of the Client sections`,
         Report._Client.Page.formYesRevertBtn.click();
         Report._Client.verifyIntendedUserTextBox(testData.verifyIntendedUserTextArea)
             .verifyIdentificationOfTheClientTextBox(testData.verifyIdentificationOfTheClientTextArea);
-
-        deleteReport(testData.reportCreationData.reportNumber);
     });
 });

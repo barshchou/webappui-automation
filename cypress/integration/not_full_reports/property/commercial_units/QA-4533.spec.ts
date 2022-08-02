@@ -1,11 +1,11 @@
 import testData from "../../../../fixtures/not_full_reports/property/commercial_units/QA-4533.fixture";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { Property } from "../../../../actions";
 
 describe("[QA-4533] Verify the display of the Commercial Units page",
     { tags:[ "@property", "@commercial_units" ] }, () => {
-        before("Login, create report", () => {
+        beforeEach("Login, create report", () => {
             cy.stepInfo("Preconditions: The mixed report is created and several commercial units are added.");
             createReport(testData.reportCreationData);
             _NavigationSection.navigateToPropertySummary();
@@ -34,7 +34,5 @@ describe("[QA-4533] Verify the display of the Commercial Units page",
                 Property._CommercialUnits.Page.commercialUnitDescriptionTitle(i)
                     .should('be.visible');
             }
-
-            deleteReport(testData.reportCreationData.reportNumber);
         });
     });

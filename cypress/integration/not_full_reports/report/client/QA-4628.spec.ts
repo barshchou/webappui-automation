@@ -1,11 +1,11 @@
 import { PreviewEdit, Report } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 import testData from '../../../../fixtures/not_full_reports/report/client/QA-4628.fixture';
 
 describe("Verify the functionality of the Client File Number field", 
     { tags:[ "@report", "@client" ] }, () => {
-        before("Login, create report", () => {
+        beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);
         });
 
@@ -27,7 +27,5 @@ describe("Verify the functionality of the Client File Number field",
             from the previous step is displayed in the APPRAISAL REPORT section.`);
             _NavigationSection.navigateToLetterOfTransmittal();
             PreviewEdit._LetterOfTransmittal.verifyTextInFormContainer(testData.clientFileNumber);
-      
-            deleteReport(testData.reportCreationData.reportNumber);
         });
     });

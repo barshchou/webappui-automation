@@ -1,12 +1,12 @@
 import testData from "../../../../fixtures/not_full_reports/property/commercial_units/QA-4568.fixture";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { Property } from "../../../../actions";
 import { _PropertyTitles } from "../../../../enums/pages_titles";
 
 describe("[QA-4568] Verify the Save & Continue button functionality on the Commercial Units page",
     { tags:[ "@property", "@commercial_units" ] }, () => {
-        before("Login, create report", () => {
+        beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);
         });
 
@@ -29,7 +29,5 @@ describe("[QA-4568] Verify the Save & Continue button functionality on the Comme
             to the next page (Property > Utilities).`);
             Property._Utilities.Page.utilitiesPageTitle.should("have.text", _PropertyTitles.UTILITIES);
             _NavigationSection.navigateToCommercialUnits();
-        
-            deleteReport(testData.reportCreationData.reportNumber);
         });
     });

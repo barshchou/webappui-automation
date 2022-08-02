@@ -1,12 +1,12 @@
 import { Income, Property } from "../../../../../actions";
 import { _NavigationSection } from "../../../../../actions/base";
-import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../../actions/base/baseTest.actions";
 import testData from "../../../../../fixtures/not_full_reports/income/commercial/stabilized_rent_roll/QA-4583.fixture";
 
 describe(`Verify the Back button functionality on the Stabilized Rent Roll page`, 
     { tags:[ "@income", "@commercial", "@stabilized_rent_roll" ] }, () => {
         
-        before("Login, create report", () => {
+        beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);
         });
 
@@ -27,7 +27,5 @@ describe(`Verify the Back button functionality on the Stabilized Rent Roll page`
             the previous page (Income > Commercial > Comp Groups Discussion).`);
             Income._CommercialManager.StabilizedRentRoll.Actions.clickBackButton();
             Income._CommercialManager.CompGroups.verifyThatPageIsOpened();
-
-            deleteReport(testData.reportCreationData.reportNumber);
         });
     });

@@ -1,6 +1,6 @@
 import testData from 
     "../../../../../fixtures/not_full_reports/income/commercial/rent_reconciliation/QA-5397-98.fixture";
-import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../../actions/base";
 import { Income, Property, ReviewExport } from "../../../../../actions";
 
@@ -57,13 +57,9 @@ describe(`Verify "Trended Rent/SF" row in the "Rent Reconciliation Adjustment gr
             _NavigationSection.Actions.openReviewAndExport();
             ReviewExport.generateDocxReport().waitForReportGenerated()
                 .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
-
-            deleteReport(testData.reportCreationData.reportNumber);
         });
 
-        it(`[QA-5398] Verify that nothing is displayed in the exported "Rent Reconciliation Adjustment" grid 
-        in "Subject Base Unit" column - "Trended Rent/SF" row and "Adjusted Rent/SF" row`, () => {
-            Cypress.config().baseUrl = null;
+        it(`[QA-5398] Check export`, () => {
             cy.task("getFilePath", { _reportName: testData.reportCreationData.reportNumber, _docxHtml: "html" })
                 .then(file => {
                     cy.log(<string>file);

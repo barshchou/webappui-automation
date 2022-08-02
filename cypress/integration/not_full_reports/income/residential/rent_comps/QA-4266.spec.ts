@@ -1,11 +1,11 @@
 import testData from "../../../../../fixtures/not_full_reports/income/residential/rent_comps/QA-4266.fixture";
-import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../../actions/base/navigationSection.actions";
 import Income from "../../../../../actions/income/income.manager";
 import RentCompsPage from "../../../../../pages/income/residential/rent_comps/rentComps.page";
 
 describe("Verify the UI controls of the Map filter section when Unit type of search is selected", () => {
-    before("Login, create report", () => {
+    beforeEach("Login, create report", () => {
         createReport(testData.reportCreationData);
     });
 
@@ -31,6 +31,5 @@ describe("Verify the UI controls of the Map filter section when Unit type of sea
         RentCompsPage.numberOfFoundResults.should("exist").should("contain.text", "Results Found");
         RentCompsPage.sortByDropdown.should("exist");
         RentCompsPage.zoomInButton.should("exist");
-        deleteReport(testData.reportCreationData.reportNumber);
     });
 });

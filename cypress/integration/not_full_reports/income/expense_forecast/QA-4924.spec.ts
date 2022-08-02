@@ -1,6 +1,6 @@
 import testData from "../../../../fixtures/not_full_reports/income/expense_forecast/QA-4924.fixture";
 import Property from "../../../../actions/property/property.manager";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Income from "../../../../actions/income/income.manager";
 import tableExpenseHistoryCellNames from "../../../../../cypress/enums/expense/expenseHistoryTableRows.enum";
@@ -9,7 +9,7 @@ describe(`User selects Per SF radio button for Repairs & Maintenance on Expense 
 form and historical expenses per SF are correctly calculated and displayed`, 
 { tags:[ "@income", "@expense_forecast", "@snapshot_tests" ] }, () => {
 
-    before("Login, create report", () => {
+    beforeEach("Login, create report", () => {
         createReport(testData.reportCreationData);
         NavigationSection.navigateToPropertySummary();
         Property.Summary.enterGrossBuildingArea(testData.buildingDescription.grossArea)
@@ -75,7 +75,5 @@ form and historical expenses per SF are correctly calculated and displayed`,
         Income.ExpenseForecast.Actions.matchElementSnapshot(
             Income.ExpenseForecast.Page.repairsAndMaintenanceCard, testData.repairsAndMaintenanceCardSnapshotName,
             { padding: [ 0, 100 ] });
-
-        deleteReport(testData.reportCreationData.reportNumber);
     });
 });

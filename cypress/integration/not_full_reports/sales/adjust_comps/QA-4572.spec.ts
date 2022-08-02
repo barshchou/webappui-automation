@@ -11,7 +11,7 @@ import ReviewExport from "../../../../actions/reviewExport/reviewExport.actions"
 describe.skip("Check custom adjustment", 
     { tags: [ "@fix", "@adjust_comps", "@sales" ] }, () => {
         
-        before("Login, create report", () => {
+        beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);
         });
 

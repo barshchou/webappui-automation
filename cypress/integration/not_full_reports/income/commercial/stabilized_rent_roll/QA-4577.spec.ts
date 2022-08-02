@@ -1,13 +1,13 @@
 import { Income, Property } from "../../../../../actions";
 import { _NavigationSection } from "../../../../../actions/base";
-import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../../actions/base/baseTest.actions";
 import testData from "../../../../../fixtures/not_full_reports/income/commercial/stabilized_rent_roll/QA-4577.fixture";
 import { _IncomeTitles } from "../../../../../enums/pages_titles";
 
 describe("Verify the functionality of the Frontage radio button", 
     { tags: [ "@income", "@commercial", "@stabilized_rent_roll" ] }, () => {
         
-        before("Login, create report", () => {
+        beforeEach("Login, create report", () => {
             cy.stepInfo(`Preconditions: The mixed report is created and several commercial units are added.
                     Comp group is created.`);
             createReport(testData.reportCreationData);
@@ -47,7 +47,5 @@ describe("Verify the functionality of the Frontage radio button",
                 });
             Income._CommercialManager.RentReconciliation.Page.GeneratedCommentary
                 .should("be.visible");
-
-            deleteReport(testData.reportCreationData.reportNumber);
         });
     });

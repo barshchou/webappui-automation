@@ -8,7 +8,7 @@ import { ENVS, evalUrl } from "./cypress/utils/env.utils";
 
 export default defineConfig({
     chromeWebSecurity: false,
-    defaultCommandTimeout: 100000,
+    defaultCommandTimeout: 5000,
     viewportWidth: 1920,
     viewportHeight: 1200,
     watchForFileChanges: false,
@@ -18,6 +18,17 @@ export default defineConfig({
     e2e: {
         // baseUrl is staging, but it will be reset down below
         baseUrl: ENVS.staging,
+
+        defaultCommandTimeout: 15000,   // Timeout for default actions and assertions
+        pageLoadTimeout: 120000,        // Timeout for cy.visit, cy.go, cy.back
+        requestTimeout: 5000,
+        responseTimeout: 30000,
+        taskTimeout: 60000,
+
+        retries: {
+            runMode: 1,
+            openMode: 0,
+        },
 
         setupNodeEvents(on, config) {
             // setup and validate `baseUrl` in runtime

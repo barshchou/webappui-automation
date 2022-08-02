@@ -1,13 +1,12 @@
-/// <reference types="cypress-grep" />
 import testData from "../../../../fixtures/not_full_reports/income/expense_forecast/QA-4877.fixture";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Income from "../../../../actions/income/income.manager";
 
 describe("Comparable Min, Max, Avg values for Electricity Per SF are correctly calculated and displayed",
     { tags:[ "@snapshot_tests", "@income", "@expense_forecast" ] }, () => {
 
-        before("Login, create report", () => {
+        beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);
         });
 
@@ -48,7 +47,5 @@ describe("Comparable Min, Max, Avg values for Electricity Per SF are correctly c
                 Income.ExpenseForecast.Page.electricityCard, testData.electricityCardSnapshotName, 
                 { padding: [ 0, 100 ] }
             );
-
-            deleteReport(testData.reportCreationData.reportNumber);
         });
     });

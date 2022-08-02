@@ -2,7 +2,7 @@ import Homepage from "../../../../actions/base/homepage.actions";
 import fixture from "../../../../fixtures/not_full_reports/sales/find_comps/QA-4248.fixture";
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Sales from "../../../../actions/sales/sales.manager";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 import mapKeysUtils from "../../../../utils/mapKeys.utils";
 
 /*
@@ -11,7 +11,7 @@ import mapKeysUtils from "../../../../utils/mapKeys.utils";
  */
 describe.skip("Verify the Comps can be added by entering the existing Report ID in the modal", 
     { tags:[ "@fix", "@comp_plex", "@sales", "@find_comps" ] }, () => {
-        before("Login, create report", () => {
+        beforeEach("Login, create report", () => {
             createReport(fixture.reportCreationData);
         });
 
@@ -42,8 +42,5 @@ describe.skip("Verify the Comps can be added by entering the existing Report ID 
                 .selectAllCompsForImport()
                 .checkSelectedSingleSalesComps()
                 .clickImportCompsFromReportButton();
-            deleteReport(fixture.reportCreationData.reportNumber);
-            cy.reload();
-            Homepage.deleteReport(fixture.reportCreationData.reportNumber);
         });
     });

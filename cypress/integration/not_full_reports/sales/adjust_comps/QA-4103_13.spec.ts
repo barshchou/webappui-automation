@@ -1,4 +1,4 @@
-import { Sales } from '../../../../actions/index';
+import { Sales } from '../../../../actions';
 import testData from "../../../../fixtures/not_full_reports/sales/adjust_comps/QA-4103_13.fixture";
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import { createReport } from "../../../../actions/base/baseTest.actions";

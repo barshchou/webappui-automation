@@ -1,12 +1,12 @@
 import testData from "../../../../../fixtures/not_full_reports/income/commercial/rent_comps/QA-4613_14_16_20.fixture";
-import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../../actions/base";
 import { Income } from "../../../../../actions";
 
 describe("Commercial Unit Details Use Other value tests", 
     { tags: [ "@income", "@commercial", "@rent_comps", "@unit_details" ] }, () => {
 
-        before("Create report, open Commercial Unit Details", () => {
+        beforeEach("Create report, open Commercial Unit Details", () => {
             createReport(testData.reportCreationData);
         });
 
@@ -48,6 +48,5 @@ describe("Commercial Unit Details Use Other value tests",
             Income._CommercialManager.RentComps
                 .chooseRentCompFieldDropdownOption(testData.otherUse.name, testData.otherUse.value)
                 .verifyInputFieldValue(testData.otherUseInput.name, testData.otherUseInput.value, true);
-            deleteReport(testData.reportCreationData.reportNumber);
         });
     });

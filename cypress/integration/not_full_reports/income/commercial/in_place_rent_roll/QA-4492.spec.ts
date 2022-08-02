@@ -1,12 +1,12 @@
 import testData from "../../../../../fixtures/not_full_reports/income/commercial/in_place_rent_roll/QA-4492.fixture";
 import { _NavigationSection } from "../../../../../actions/base";
 import { Income } from "../../../../../actions";
-import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../../actions/base/baseTest.actions";
 import { getTodayDateString } from "../../../../../../utils/date.utils";
 
 describe("Verify the Save & Continue button functionality on the In-Place Rent Roll page",
     { tags: [ "@income", "@commercial", "@in_place_rent_roll" ] }, () => {
-        before("Login, create report", () => {
+        beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);
         });
 
@@ -50,7 +50,5 @@ describe("Verify the Save & Continue button functionality on the In-Place Rent R
                     testData.leaseStatus, "in-place", getTodayDateString("/"))
                 .verifyRentPsfAnnuallyByRow(testData.rentPerSF, 0)
                 .verifyCommentaryFullText(testData.newCommentary);
-
-            deleteReport(testData.reportCreationData.reportNumber);
         });
     });

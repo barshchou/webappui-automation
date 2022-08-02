@@ -1,6 +1,6 @@
 import { numberWithCommas } from '../../../../../utils/numbers.utils';
 import testData from "../../../../fixtures/not_full_reports/property/commercial_units/QA-4538_39_41.fixture";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { Property } from "../../../../actions";
 
@@ -86,7 +86,5 @@ describe("[Property > Commercial Units > Commercial Unit SF] Commercial Units pa
                 .invoke("text").then(text => {
                     expect(text).to.be.equal(testData.commercialUnitSFDiscussionTooltipText);
                 });
-
-            deleteReport(testData.reportCreationData.reportNumber);
         });
     });

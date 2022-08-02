@@ -1,5 +1,5 @@
 import testData from "../../../../fixtures/not_full_reports/income/expense_forecast/QA-4941.fixture";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Property from "../../../../actions/property/property.manager";
 import Income from "../../../../actions/income/income.manager";
@@ -8,7 +8,7 @@ import tableExpenseHistoryCellNames from "../../../../../cypress/enums/expense/e
 describe("Historical expense Fuel Per SF is correctly calculated and displayed",
     { tags: [ "@snapshot_tests", "@income", "@expense_forecast" ] }, () => {
         
-        before("Login, create report", () => {
+        beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);
         });
 
@@ -66,7 +66,5 @@ describe("Historical expense Fuel Per SF is correctly calculated and displayed",
             They should be correctly displayed on slide bars`);
             Income.ExpenseForecast.Actions.matchElementSnapshot(
                 Income.ExpenseForecast.Page.fuelCard, testData.fuelCardSnapshotName, { padding: [ 10, 100 ] });
-
-            deleteReport(testData.reportCreationData.reportNumber);
         });
     });

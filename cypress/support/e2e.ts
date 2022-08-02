@@ -6,6 +6,7 @@ import { recordDOMSnapshot } from "../utils/snapshot.utils";
 import "./commands";
 import "cypress-real-events/support";
 import { BoweryAutomation } from "../types/boweryAutomation.type";
+import { evalUrl } from "../utils/env.utils";
 
 require("cypress-xpath");
 require("cypress-iframe");
@@ -21,11 +22,19 @@ Cypress.on("uncaught:exception", () => {
     return false;
 });
 
+beforeEach(() => {
+    if (Cypress.currentTest.title.includes("Check export")) {
+        Cypress.config().baseUrl = null;
+    } else {
+        Cypress.config().baseUrl = evalUrl(Cypress.env(), true);
+    }
+});
+
 after(() => {
     // check whether test was from smoke suite by its relative path
-    if (Cypress.spec.relative.includes("smoke")) {
-        cy.log("Smoke test, does not deleting report");
-        cy.logNode("Smoke test, does not deleting report");
+    if (Cypress.spec.relative.includes("smoke") && Cypress.spec.name.includes("Exist")) {
+        cy.log("Smoke test, that needs to save report, do not delete report");
+        cy.logNode("Smoke test, that needs to save report, do not delete report");
         return;
     } else {
         cy.deleteApiReport();
@@ -40,10 +49,10 @@ Cypress.on("fail", (err, runnable) => {
         });
 
         const messageArr = [
+            `${error.message}`,
+            "----------",
             `Test Suite: ${runnableObj.parent.title}`, // describe('...')
             `Test: ${runnableObj.title}`, // it('...')
-            "----------",
-            `${error.message}`,
             `\n${lastStep}`
         ];
 

@@ -1,13 +1,12 @@
-/// <reference types="cypress-grep" />
 import testData from "../../../../fixtures/not_full_reports/income/expense_forecast/QA-4925.fixture";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Income from "../../../../actions/income/income.manager";
 
 describe("Comparable Min, Max, Avg values for Repairs & Maintenance Per SF are correctly calculated and displayed", 
     { tags:[ "@income", "@snapshot_tests", "@expense_forecast" ] }, () => {
 
-        before("Login, create report", () => {
+        beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);
         });
 
@@ -48,7 +47,5 @@ describe("Comparable Min, Max, Avg values for Repairs & Maintenance Per SF are c
             Income.ExpenseForecast.Actions.matchElementSnapshot(
                 Income.ExpenseForecast.Page.repairsAndMaintenanceCard, testData.repairsAndMaintenanceCardSnapshotName, 
                 { padding: [ 0, 100 ] });
-
-            deleteReport(testData.reportCreationData.reportNumber);
         });
     });

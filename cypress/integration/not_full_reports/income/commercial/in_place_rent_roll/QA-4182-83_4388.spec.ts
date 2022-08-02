@@ -3,7 +3,7 @@ import testData from
 import { _NavigationSection } from "../../../../../actions/base";
 import { Property } from "../../../../../actions";
 import { Income } from "../../../../../actions";
-import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../../actions/base/baseTest.actions";
 
 describe("Verify the Annual Rent column in the grid", 
     { tags:[ "@income", "@commercial", "@in_place_rent_roll" ] }, () => {
@@ -19,21 +19,18 @@ describe("Verify the Annual Rent column in the grid",
             Income._CommercialManager.InPlaceRentRoll.clickAnnuallyBasisButton()
                 .verifyAnnualRentCellTextByRow()
                 .enterAnnualRentByRowNumber(testData.general.annualRent);
-            deleteReport(testData.reportCreationData.reportNumber);
         });
 
         it("Monthly", () => {
             Income._CommercialManager.InPlaceRentRoll.clickMonthlyBasisButton()
                 .enterMonthlyRentByRowNumber(testData.general.monthlyRent)
                 .verifyAnnualRentMonthlyByRowNumber(testData.general.monthlyRent);
-            deleteReport(testData.reportCreationData.reportNumber);
         });
 
         it("Per square foot", () => {
             Income._CommercialManager.InPlaceRentRoll.enterRentPerSFAnnuallyByRowNumber(testData.general.rentPerSF)
                 .verifyAnnualRentCellPerSFBasisByRow(testData.general.rentPerSF, 
                     testData.general.squareFeet, testData.unitsOfMeasureAnnually);
-            deleteReport(testData.reportCreationData.reportNumber);
         });
 
         it("Per square foot per month, [QA-4183] Annual Rent is calculated with correct formula", () => {
@@ -41,6 +38,5 @@ describe("Verify the Annual Rent column in the grid",
                 .enterRentPerSFMonthlyByRowNumber(testData.general.rentPerSF)
                 .verifyAnnualRentCellPerSFBasisByRow(testData.general.rentPerSF, 
                     testData.general.squareFeet, testData.unitsOfMeasureMonthly);
-            deleteReport(testData.reportCreationData.reportNumber);
         });
     });
