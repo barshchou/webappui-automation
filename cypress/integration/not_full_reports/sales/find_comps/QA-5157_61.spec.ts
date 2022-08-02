@@ -65,7 +65,7 @@ conditionalDescribe(`[QA-5157] [QA-5161] [Sales > Find Comps] "Date Sold" sortin
                 .PropertyInfo.setResidentialUnits(`${testData.comparableFixtureManual.units.numberOfUnits}`)
                 .setSiteArea(`${testData.comparableFixtureManual.siteArea}`)
                 .setFloor(`${testData.comparableFixtureManual.floors}`);
-            Sales._FindComps.clickAddNewCompContinueButton;
+            Sales._FindComps.clickAddNewCompContinueButton();
             Sales._FindComps
                 .SaleInfo.setBuyerGrantee(testData.comparableFixtureManual.saleInfo.buyer)
                 .setSellerGarantor(testData.comparableFixtureManual.saleInfo.seller)
