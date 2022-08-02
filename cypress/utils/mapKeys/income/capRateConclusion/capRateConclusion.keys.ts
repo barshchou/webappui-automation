@@ -1,9 +1,19 @@
 export default {
     capRateRoundingFactor: 'capRateRoundingFactor',
     asStabilizedAmount: 'asStabilizedAmount',
+    asCompleteAmount: 'asCompleteAmount',
     asStabilizedResRentLossItem: 'asStabilizedRentLossItem',
     asStabilizedCommercialRentLossItem: 'asStabilizedCommercialRentLossItem',
     asStabilizedCommercialUndeterminedRentLossItem: 'asStabilizedCommercialUndeterminedRentLossItem',
     commissionFee: 'commissionFee',
-    entrepreneurialProfit: 'entrepreneurialProfit'
+    entrepreneurialStabilizedProfit: 'entrepreneurialProfit',
+    asCompleteResRentLossItem: 'asCompleteResRentLossItem',
+    asCompleteCommercialRentLossItem: 'asCompleteCommercialRentLossItem',
+    asCompleteCommercialUndeterminedRentLossItem: 'asCompleteCommercialUndeterminedRentLossItem',
+    buyoutCost: 'buyoutCost',
+    entrepreneurialCompleteProfit: 'entrepreneurialProfit',
+    asIsMarketAmount: 'asIsMarketAmount',
+    asIsMarketFinalAmount: 'asIsMarketFinalAmount',
+    renovationBudget: 'renovationBudget'
+
 };

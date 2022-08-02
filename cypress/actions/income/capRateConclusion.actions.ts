@@ -7,7 +7,6 @@ import {
 import BaseActionsExt from "../base/base.actions.ext";
 import capRateConclusionKeys from "../../utils/mapKeys/income/capRateConclusion/capRateConclusion.keys";
 import { BoweryReports } from "../../types/boweryReports.type";
-import enums from "../../enums/enums";
 
 class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPage> {
 
@@ -174,8 +173,9 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
         return this;
     }
 
-    clickAsStabilizedRentLossSwitch(): CapRateConclusionActions {
-        capRateConclusionPage.valueConclusionSwitcher().click().should("have.attr", "aria-pressed", "true");
+    clickAsStabilizedRentLossSwitch(valueConclusion: BoweryReports.ValueConclusionName): CapRateConclusionActions {
+        capRateConclusionPage.valueConclusionSwitcher(valueConclusion)
+            .click().should("have.attr", "aria-pressed", "true");
         return this;
     }
 
@@ -208,8 +208,27 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
         return this;
     }
 
+    enterAsCompleteResRentLossTimePeriodByRow(period: number | string, rowNumber = 0): CapRateConclusionActions {
+        capRateConclusionPage.asCompleteResRentLossTimePeriodCells(rowNumber).type(`${period}`)
+            .should("have.value", period);
+        return this;
+    }
+
+    enterAsCompleteCommercialRentLossTimePeriodByRow(period: number | string, rowNumber = 0): CapRateConclusionActions {
+        capRateConclusionPage.asCompleteCommercialRentLossTimePeriodCells(rowNumber).type(`${period}`)
+            .should("have.value", period);
+        return this;
+    }
+
+    enterAsCompleteCommercialUndeterminedRentLossTimePeriodByRow(period: number | string, rowNumber = 0): 
+    CapRateConclusionActions {
+        capRateConclusionPage.asCompleteCommercialUndeterminedRentLossItemsTimePeriodCells(rowNumber).type(`${period}`)
+            .should("have.value", period);
+        return this;
+    }
+
     enterAsCompleteLessBuyoutCost(cost: string | number): CapRateConclusionActions {
-        const costValue = typeof cost === "string" ? cost : `-$${cost}`;
+        const costValue = typeof cost === "string" ? cost : `-$${numberWithCommas(cost)}`;
         capRateConclusionPage.asCompleteLessBuyoutCost.clear().type(`${cost}`).should("have.value", costValue);
         return this;
     }
@@ -235,14 +254,14 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
         return this;
     }
 
-    setRoundingFactorValue(): CapRateConclusionActions {
+    setRoundingFactorValueAlias(): CapRateConclusionActions {
         capRateConclusionPage.roundingFactorInput.invoke('attr', 'value').then(roundingFactor => {
             cy._mapSet(capRateConclusionKeys.capRateRoundingFactor, roundingFactor);
         });
         return this;
     }
 
-    setAsStabilizedAmount(): CapRateConclusionActions {
+    setAsStabilizedAmountAlias(): CapRateConclusionActions {
         capRateConclusionPage.asStabilizedAmountCell.invoke('text').then(asStabilizedAmount => {
             let asStabilizedAmountAdjusted = getNumberFromDollarNumberWithCommas(asStabilizedAmount);
             cy._mapSet(capRateConclusionKeys.asStabilizedAmount, asStabilizedAmountAdjusted);
@@ -253,12 +272,12 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
     /**
      * Gets cap rate rounding factor and As Stabilized amount.
      * It verifies whether final value is rounded correctly.
-     * Formula: As Stabilized * Rounding Factor => round result => multiply by rounding factor
+     * Formula: As Stabilized Amount * Rounding Factor => round result => multiply by rounding factor
      * @returns CapRateConclusionActions
      */
     verifyAsStabilizedFinalValueCalculated(): CapRateConclusionActions {
-        this.setRoundingFactorValue()
-            .setAsStabilizedAmount();
+        this.setRoundingFactorValueAlias()
+            .setAsStabilizedAmountAlias();
         cy._mapGet(capRateConclusionKeys.capRateRoundingFactor).then(capRateRounding => {
             cy._mapGet(capRateConclusionKeys.asStabilizedAmount).then(asStabilizedValue => {
                 let expectedFinalValue = Math.round(asStabilizedValue / capRateRounding) * capRateRounding;
@@ -266,6 +285,48 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
                     ? `-$${numberWithCommas(getNumberFromMinusDollarNumberWithCommas(expectedFinalValue))}` 
                     : `$${numberWithCommas(expectedFinalValue)}`;
                 capRateConclusionPage.asStabilizedFinalValueCell.should("have.text", expectedFinalValueText);
+            });
+        });
+        return this;
+    }
+
+    /**
+     * Gets cap rate rounding factor and As Complete amount.
+     * It verifies whether final value is rounded correctly.
+     * Formula: As Complete AMount * Rounding Factor => round result => multiply by rounding factor
+     * @returns CapRateConclusionActions
+     */
+    verifyAsCompleteFinalValueCalculated(): CapRateConclusionActions {
+        this.setRoundingFactorValueAlias()
+            .setAsCompleteAmountAlias();
+        cy._mapGet(capRateConclusionKeys.capRateRoundingFactor).then(capRateRounding => {
+            cy._mapGet(capRateConclusionKeys.asCompleteAmount).then(asCompleteAmount => {
+                let expectedFinalValue = Math.round(asCompleteAmount / capRateRounding) * capRateRounding;
+                let expectedFinalValueText = expectedFinalValue < 0 
+                    ? `-$${numberWithCommas(getNumberFromMinusDollarNumberWithCommas(expectedFinalValue))}` 
+                    : `$${numberWithCommas(expectedFinalValue)}`;
+                capRateConclusionPage.asCompleteFinalValueCell.should("have.text", expectedFinalValueText);
+            });
+        });
+        return this;
+    }
+
+    /**
+     * Gets cap rate rounding factor and As Complete amount.
+     * It verifies whether final value is rounded correctly.
+     * Formula: As Is AMount * Rounding Factor => round result => multiply by rounding factor
+     * @returns CapRateConclusionActions
+     */
+    verifyAsIsFinalValueCalculated(): CapRateConclusionActions {
+        this.setRoundingFactorValueAlias()
+            .setAsIsAmountAlias();
+        cy._mapGet(capRateConclusionKeys.capRateRoundingFactor).then(capRateRounding => {
+            cy._mapGet(capRateConclusionKeys.asIsMarketAmount).then(asIsMarketAmount => {
+                let expectedFinalValue = Math.round(asIsMarketAmount / capRateRounding) * capRateRounding;
+                let expectedFinalValueText = expectedFinalValue < 0 
+                    ? `-$${numberWithCommas(getNumberFromMinusDollarNumberWithCommas(expectedFinalValue))}` 
+                    : `$${numberWithCommas(expectedFinalValue)}`;
+                capRateConclusionPage.asIsMarketFinalValueCell.should("have.text", expectedFinalValueText);
             });
         });
         return this;
@@ -280,7 +341,7 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
      * @returns CapRateConclusionActions
      */
     addNewRentLoss(unitIncomeType: BoweryReports.UnitIncomeType, unitsNumber: number, 
-        valueConclusion = enums.VALUE_CONCLUSION_NAME.asStabilized): CapRateConclusionActions {
+        valueConclusion: BoweryReports.ValueConclusionName): CapRateConclusionActions {
         this.clickAddRentLoss(unitIncomeType);
         capRateConclusionPage
             .valueConclusionSwitcher(valueConclusion)
@@ -297,42 +358,41 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
 
     /**
      * Verifies Prospective Market Value As Complete
-     * Sets all losses, commission, profits for As Stabilized conclusion to map.
-     * Gets all set losses and check As Complete value by formula:
+     * Gets all aliases that were set and check As Complete value by formula:
      *   [As Stabilized Amount] - [Sum of Rent Losses] - [Commission Fee] - 
      *   (([Sum of Rent Losses] + [Commission Fee]) * Entrepreneur Profit)
      * @returns CapRateConclusionActions
      */
-    verifyProspectiveMarketValueAsComplete(): CapRateConclusionActions {
-        this.setAllAsStabilizedLosses();
+    verifyProspectiveMarketValueAsCompleteCalculated(): CapRateConclusionActions {
         cy._mapGet(capRateConclusionKeys.asStabilizedResRentLossItem).then(residentialRentLoss => {
             cy._mapGet(capRateConclusionKeys.asStabilizedCommercialRentLossItem).then(commercialRentLoss => {
                 cy._mapGet(capRateConclusionKeys.asStabilizedCommercialUndeterminedRentLossItem)
                     .then(commercialUndRentLoss => {
                         cy._mapGet(capRateConclusionKeys.commissionFee).then(commissionFee => {
-                            cy._mapGet(capRateConclusionKeys.entrepreneurialProfit).then(entrepreneurProfit => {
-                                cy._mapGet(capRateConclusionKeys.asStabilizedAmount).then(asStabilizedAmount => {
-                                    cy.log(`As Stabilized AmountT: ${asStabilizedAmount}`);
+                            cy._mapGet(capRateConclusionKeys.entrepreneurialStabilizedProfit)
+                                .then(entrepreneurProfit => {
+                                    cy._mapGet(capRateConclusionKeys.asStabilizedAmount).then(asStabilizedAmount => {
+                                        cy.log(`As Stabilized AmountT: ${asStabilizedAmount}`);
                                     
-                                    let allRentLosses = residentialRentLoss  + commercialRentLoss + 
+                                        let allRentLosses = residentialRentLoss  + commercialRentLoss + 
                                         commercialUndRentLoss  + commissionFee;
-                                    cy.log(`All Losses: ${allRentLosses}`);
+                                        cy.log(`All Losses: ${allRentLosses}`);
 
-                                    let entrepreneurLoss = allRentLosses * entrepreneurProfit / 100;
-                                    cy.log(`Entrepreneur Profit: ${entrepreneurLoss}`);
+                                        let entrepreneurLoss = allRentLosses * entrepreneurProfit / 100;
+                                        cy.log(`Entrepreneur Profit: ${entrepreneurLoss}`);
 
-                                    let prospectiveValue = Math.round((asStabilizedAmount - allRentLosses - 
+                                        let prospectiveValue = Math.round((asStabilizedAmount - allRentLosses - 
                                         entrepreneurLoss) / 10) * 10;
-                                    cy.log(`Prospective Value As Complete: ${prospectiveValue}`);
+                                        cy.log(`Prospective Value As Complete: ${prospectiveValue}`);
 
-                                    let expectedProspectiveValueAsComplete = prospectiveValue < 0 
-                                        ? `-$${numberWithCommas(prospectiveValue.toFixed(0).replace('-', ''))}`
-                                        : `${numberWithCommas(prospectiveValue.toFixed(0))}`;
+                                        let expectedProspectiveValueAsComplete = prospectiveValue < 0 
+                                            ? `-$${numberWithCommas(prospectiveValue.toFixed(0).replace('-', ''))}`
+                                            : `${numberWithCommas(prospectiveValue.toFixed(0))}`;
 
-                                    capRateConclusionPage.asCompleteAmountCell
-                                        .should('have.text', expectedProspectiveValueAsComplete);
+                                        capRateConclusionPage.asCompleteAmountCell
+                                            .should('have.text', expectedProspectiveValueAsComplete);
+                                    });
                                 });
-                            });
                         });
                     });
             });
@@ -340,12 +400,77 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
         return this;
     }
 
-    setAllAsStabilizedLosses(): CapRateConclusionActions {
+    /**
+     * Verifies As Is Market Value
+     * Gets all aliases that were set and check As Is Market value by formula:
+     *   [As Complete Amount] - [Sum of Rent Losses] - [Buyout Cost] - [Renovation] -
+     *   (([Sum of Rent Losses] + [Less Buyout Cost]) * Entrepreneur Profit)
+     * @returns CapRateConclusionActions
+     */
+    verifyAsIsMarketValueCalculated(): CapRateConclusionActions {
+        cy._mapGet(capRateConclusionKeys.asCompleteResRentLossItem).then(residentialRentLoss => {
+            cy._mapGet(capRateConclusionKeys.asCompleteCommercialRentLossItem).then(commercialRentLoss => {
+                cy._mapGet(capRateConclusionKeys.asCompleteCommercialUndeterminedRentLossItem)
+                    .then(commercialUndRentLoss => {
+                        cy._mapGet(capRateConclusionKeys.buyoutCost).then(buyoutCost => {
+                            cy._mapGet(capRateConclusionKeys.entrepreneurialCompleteProfit)
+                                .then(entrepreneurProfit => {
+                                    cy._mapGet(capRateConclusionKeys.asCompleteAmount).then(asCompleteAmount => {
+                                        cy._mapGet(capRateConclusionKeys.renovationBudget).then(renovationBudget => {
+                                            cy.log(`As Complete AmountT: ${asCompleteAmount}`);
+                                    
+                                            let allRentLosses = residentialRentLoss  + commercialRentLoss + 
+                                            commercialUndRentLoss  + buyoutCost + renovationBudget;
+                                            cy.log(`All Losses: ${allRentLosses}`);
+    
+                                            let entrepreneurLoss = allRentLosses * entrepreneurProfit / 100;
+                                            cy.log(`Entrepreneur Profit: ${entrepreneurLoss}`);
+    
+                                            let marketValueAsIs = Math.round((asCompleteAmount - allRentLosses - 
+                                            entrepreneurLoss) / 10) * 10;
+                                            cy.log(`Prospective Value As Complete: ${marketValueAsIs}`);
+    
+                                            let expectedMarketValueAsIs = marketValueAsIs < 0 
+                                                ? `-$${numberWithCommas(marketValueAsIs.toFixed(0).replace('-', ''))}`
+                                                : `${numberWithCommas(marketValueAsIs.toFixed(0))}`;
+    
+                                            capRateConclusionPage.asIsMarketAmountCell
+                                                .should('have.text', expectedMarketValueAsIs);
+                                        });
+                                        
+                                    });
+                                });
+                        });
+                    });
+            });
+        });
+        return this;
+    }
+
+    /**
+     * Sets corresponding map aliases for Stabilized Losses
+     * @returns CapRateConclusionActions
+     */
+    setAllAsStabilizedLossesAliases(): CapRateConclusionActions {
         this.setAsStabilizedResRentLossItemsAmount()
             .setAsStabilizedCommercialRentLossItemsAmount()
             .setAsStabilizedCommercialUndeterminedLossAmount()
             .setCommissionFee()
-            .setEntrepreneurialProfit();
+            .setStabilizedEntrepreneurialProfit();
+        return this;
+    }
+
+    /**
+     * Sets corresponding map aliases for Complete Losses
+     * @returns CapRateConclusionActions
+     */
+    setAllAsCompleteLossesAliases(): CapRateConclusionActions {
+        this.setAsCompleteResRentLossItemsAmount()
+            .setAsCompleteCommercialRentLossItemsAmount()
+            .setAsCompleteCommercialUndeterminedLossAmount()
+            .setRenovationBudgetAlias()
+            .setLessBuyoutCost()
+            .setCompleteEntrepreneurialProfit();
         return this;
     }
 
@@ -382,12 +507,105 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
         return this;
     }
 
-    setEntrepreneurialProfit(): CapRateConclusionActions {
+    setStabilizedEntrepreneurialProfit(): CapRateConclusionActions {
         capRateConclusionPage.asStabilizedLessEntrepreneurialProfit.invoke('attr', 'value')
             .then(entrepreneurialProfit => {
                 let entrepreneurialProfitNumber = Number(entrepreneurialProfit.replace('%', ''));
-                cy._mapSet(capRateConclusionKeys.entrepreneurialProfit, entrepreneurialProfitNumber);
+                cy._mapSet(capRateConclusionKeys.entrepreneurialStabilizedProfit, entrepreneurialProfitNumber);
             });
+        return this;
+    }
+
+    setAsCompleteAmountAlias(): CapRateConclusionActions {
+        capRateConclusionPage.asCompleteAmountCell.invoke('text').then(asCompleteAmount => {
+            let asCompleteAmountAdjusted = getNumberFromDollarNumberWithCommas(asCompleteAmount);
+            cy._mapSet(capRateConclusionKeys.asCompleteAmount, asCompleteAmountAdjusted);
+        });
+        return this;
+    }
+
+    setAsCompleteResRentLossItemsAmount(): CapRateConclusionActions {
+        capRateConclusionPage.asCompleteResRentLossItemsAmount().invoke('attr', 'value').then(rentLoss => {
+            let rentLossNumber = getNumberFromMinusDollarNumberWithCommas(rentLoss);
+            cy._mapSet(capRateConclusionKeys.asCompleteResRentLossItem, rentLossNumber);
+        });
+        return this;
+    }
+
+    setAsCompleteCommercialRentLossItemsAmount(): CapRateConclusionActions {
+        capRateConclusionPage.asStabilizedCommercialLossItemsAmount().invoke('attr', 'value').then(rentLoss => {
+            let rentLossNumber = getNumberFromMinusDollarNumberWithCommas(rentLoss);
+            cy._mapSet(capRateConclusionKeys.asCompleteCommercialRentLossItem, rentLossNumber);
+        });
+        return this;
+    }
+
+    setAsCompleteCommercialUndeterminedLossAmount(): CapRateConclusionActions {
+        capRateConclusionPage.asStabilizedCommercialUndeterminedRentLossAmount()
+            .invoke('attr', 'value').then(rentLoss => {
+                let rentLossNumber = getNumberFromMinusDollarNumberWithCommas(rentLoss);
+                cy._mapSet(capRateConclusionKeys.asCompleteCommercialUndeterminedRentLossItem, rentLossNumber);
+            });
+        return this;
+    }
+
+    setRenovationBudgetAlias(): CapRateConclusionActions {
+        capRateConclusionPage.renovationBudgetAmount.invoke('attr', 'value').then(renovationBudget => {
+            let renovationBudgetAdjusted = getNumberFromMinusDollarNumberWithCommas(renovationBudget);
+            cy._mapSet(capRateConclusionKeys.renovationBudget, renovationBudgetAdjusted);
+        });
+        return this;
+    }
+
+    setLessBuyoutCost(): CapRateConclusionActions {
+        capRateConclusionPage.asCompleteLessBuyoutCost.invoke('attr', 'value').then(buyoutCost => {
+            let buyoutCostNumber = getNumberFromMinusDollarNumberWithCommas(buyoutCost);
+            cy._mapSet(capRateConclusionKeys.buyoutCost, buyoutCostNumber);
+        });
+        return this;
+    }
+
+    setCompleteEntrepreneurialProfit(): CapRateConclusionActions {
+        capRateConclusionPage.asCompleteLessEntrepreneurialProfit.invoke('attr', 'value')
+            .then(entrepreneurialProfit => {
+                let entrepreneurialProfitNumber = Number(entrepreneurialProfit.replace('%', ''));
+                cy._mapSet(capRateConclusionKeys.entrepreneurialCompleteProfit, entrepreneurialProfitNumber);
+            });
+        return this;
+    }
+
+    setAsIsAmountAlias(): CapRateConclusionActions {
+        capRateConclusionPage.asIsMarketAmountCell.invoke('text').then(asIsMarketAmount => {
+            let asIsMarketAmountAdjusted = getNumberFromDollarNumberWithCommas(asIsMarketAmount);
+            cy._mapSet(capRateConclusionKeys.asIsMarketAmount, asIsMarketAmountAdjusted);
+        });
+        return this;
+    }
+
+    setAsIsAmountFinalAlias(): CapRateConclusionActions {
+        capRateConclusionPage.asIsMarketFinalValueCell.invoke('text').then(asIsMarketFinalValue => {
+            let asIsMarketAmountAdjusted = getNumberFromDollarNumberWithCommas(asIsMarketFinalValue);
+            cy._mapSet(capRateConclusionKeys.asIsMarketFinalAmount, asIsMarketAmountAdjusted);
+        });
+        return this;
+    }
+
+    /**
+     * Verifies As Is Market value per SF by formula:
+     * [As Is Market Final Value] / [Square Foot Analysis Area]
+     * @param squareFootAnalysisArea Area for selected square foot analysis basis 
+     * @returns CapRateConclusionActions
+     */
+    verifyAsIsMarketPerSFCalculated(squareFootAnalysisArea: number): CapRateConclusionActions {
+        this.setAsIsAmountFinalAlias();
+        cy._mapGet(capRateConclusionKeys.asIsMarketFinalAmount).then(asIsMarketFinalAmount => {
+            let asIsMarketFinalSFAmount = asIsMarketFinalAmount / squareFootAnalysisArea;
+            let expectedAsIsMarketSFAmount = asIsMarketFinalSFAmount < 0 
+                ? `-$${asIsMarketFinalSFAmount}`
+                : `${asIsMarketFinalSFAmount}`;
+            capRateConclusionPage.asIsMarketValuePerSF.invoke('text', expectedAsIsMarketSFAmount);
+        });
+        
         return this;
     }
 }

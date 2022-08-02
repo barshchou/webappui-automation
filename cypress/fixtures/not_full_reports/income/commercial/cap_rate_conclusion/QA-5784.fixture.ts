@@ -28,5 +28,8 @@ export default {
     commercialUnitType: Enums.UNIT_INCOME_TYPE.commercial,
     residentialUnitType: Enums.UNIT_INCOME_TYPE.residential,
     lessCommissionFee: 1234,
-    entrepreneurialProfit: 2
+    entrepreneurialProfit: 2,
+    valueConclusionAsComplete: Enums.VALUE_CONCLUSION_NAME.asComplete,
+    valueConclusionAsStabilized: Enums.VALUE_CONCLUSION_NAME.asStabilized,
+    lessBuyoutCost: 153789
 };

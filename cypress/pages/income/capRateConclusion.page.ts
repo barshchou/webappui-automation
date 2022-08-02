@@ -69,7 +69,7 @@ class CapRateConclusionPage extends BasePage {
 
     get rentLossCheckboxes() { return cy.get("input[type=checkbox][id]"); }
 
-    valueConclusionSwitcher(valueConclusion = enums.VALUE_CONCLUSION_NAME.asStabilized) { 
+    valueConclusionSwitcher(valueConclusion: BoweryReports.ValueConclusionName) { 
         return cy.get(`[data-qa='${valueConclusion}-switch-button']`); 
     }
 
@@ -85,6 +85,18 @@ class CapRateConclusionPage extends BasePage {
 
     asStabCommercialUndeterminedRentLossItemsTimePeriodCells(index = 0) { 
         return cy.get(`[name="asStabilizedLossItems[${index}].months"]`); 
+    }
+
+    asCompleteResRentLossTimePeriodCells(index = 0) { 
+        return cy.get(`[name="asCompleteResRentLossItems[${index}].months"]`); 
+    }
+
+    asCompleteCommercialRentLossTimePeriodCells(index = 0) { 
+        return cy.get(`[name="asCompleteCommercialRentLossItems[${index}].months"]`); 
+    }
+
+    asCompleteCommercialUndeterminedRentLossItemsTimePeriodCells(index = 0) { 
+        return cy.get(`[name="asCompleteLossItems[${index}].months"]`); 
     }
 
     get asCompleteLessBuyoutCost() { return cy.get("[data-qa*='asCompleteLossItems.buyoutCost'] input[inputmode]"); }
@@ -111,6 +123,22 @@ class CapRateConclusionPage extends BasePage {
 
     asStabilizedCommercialUndeterminedRentLossAmount(index = 0) {
         return cy.get(`[name="asStabilizedLossItems[${index}].amount"]`);
+    }
+
+    asCompleteResRentLossItemsAmount(index = 0) {
+        return cy.get(`[name="asCompleteResRentLossItems[${index}].amount"]`);
+    }
+
+    asCompleteCommercialLossItemsAmount(index = 0) {
+        return cy.get(`[name="asCompleteCommercialRentLossItems[${index}].amount"]`);
+    }
+
+    asCompleteCommercialUndeterminedRentLossAmount(index = 0) {
+        return cy.get(`[name="asCompleteLossItems[${index}].amount"]`);
+    }
+
+    get renovationBudgetAmount() {
+        return cy.get(`[name="asCompleteLossItems[1].amount"]`);
     }
 }
 

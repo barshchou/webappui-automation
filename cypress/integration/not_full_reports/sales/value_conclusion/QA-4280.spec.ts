@@ -28,7 +28,7 @@ describe(`Prospective Market Value As Stabilized -> Less Residential Rent Loss
         Income.CapRateConclusion.enterConclusionSectionConcludedCapRate(testData.data.appraisersConclusion)
             .clickAddRentLoss(enums.UNIT_INCOME_TYPE.residential);
         if (testData.reportCreationData.conclusionValue === "AS_COMPLETE") {
-            Income.CapRateConclusion.clickAsStabilizedRentLossSwitch();
+            Income.CapRateConclusion.clickAsStabilizedRentLossSwitch(enums.VALUE_CONCLUSION_NAME.asStabilized);
         }
         Income.CapRateConclusion.checkRentLossCheckboxByRow()
             .clickAddButton()

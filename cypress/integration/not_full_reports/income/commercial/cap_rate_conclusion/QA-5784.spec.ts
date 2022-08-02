@@ -59,10 +59,11 @@ describe("",
 
             cy.stepInfo(`9. Add New Residential Rent Loss on As Stabilized tab and 
             New Commercial Rent Loss on As Stabilized tab`);
-            Income.CapRateConclusion.addNewRentLoss(testData.residentialUnitType, testData.residentialUnits)
-                .enterAsStabResRentLossTimePeriodByRow(testData.rentLossTimePeriod);
-            Income.CapRateConclusion.addNewRentLoss(testData.commercialUnitType, testData.commercialUnits)
-                .enterAsStabCommercialRentLossTimePeriodByRow(testData.rentLossTimePeriod);
+            Income.CapRateConclusion.addNewRentLoss(testData.residentialUnitType, testData.residentialUnits, 
+                testData.valueConclusionAsStabilized);
+            Income.CapRateConclusion.addNewRentLoss(testData.commercialUnitType, testData.commercialUnits, 
+                testData.valueConclusionAsStabilized);
+                
 
             cy.stepInfo(`10. Fill in with valid numeric values:
             - Less Residential Rent Loss
@@ -72,14 +73,55 @@ describe("",
             - Less Entrepreneurial Profit`);
             Income.CapRateConclusion.enterAsStabilizedCommissionFeeAmount(testData.lessCommissionFee)
                 .enterAsStabilizedLessEntrepreneurialProfit(testData.entrepreneurialProfit)
+                .enterAsStabResRentLossTimePeriodByRow(testData.rentLossTimePeriod)
+                .enterAsStabCommercialRentLossTimePeriodByRow(testData.rentLossTimePeriod)
                 .enterAsStabCommercialUndeterminedRentLossTimePeriodByRow(testData.rentLossTimePeriod);
 
             cy.stepInfo(`11. Make sure Prospective Market Value As Complete (Amount) =  
             Prospective Market Value As Stabilized (Amount) - Less Residential Rent Loss - 
             Less Commercial Rent Loss - Less Undetermined Commercial Rent Loss - 
             Less Commission Fee - Less Entrepreneurial Profit*`);
-            Income.CapRateConclusion.verifyProspectiveMarketValueAsComplete();
+            Income.CapRateConclusion.setAllAsStabilizedLossesAliases()
+                .verifyProspectiveMarketValueAsCompleteCalculated();
 
+            cy.stepInfo(`12. Make sure Prospective Market Value As Complete (Final Value) = 
+            Prospective Market Value As Complete (Amount) rounded according to “Round to nearest” value`);
+            Income.CapRateConclusion.verifyAsCompleteFinalValueCalculated();
+
+            cy.stepInfo(`13. Add New Residential Rent Loss on As Complete tab and New Commercial 
+            Rent Loss on As Complete tab `);
+            Income.CapRateConclusion.addNewRentLoss(testData.residentialUnitType, testData.residentialUnits, 
+                testData.valueConclusionAsComplete);
+            Income.CapRateConclusion.addNewRentLoss(testData.commercialUnitType, testData.commercialUnits, 
+                testData.valueConclusionAsComplete);
+
+            cy.stepInfo(`14. Fill in with valid numeric values:
+            - Less Residential Rent Loss
+            - Less Commercial Rent Loss
+            - Less Undetermined Commercial Rent Loss
+            - Renovation Budget ( on Property>Renovations page)
+            - Less Buyout Cost
+            - Less Entrepreneurial Profit*`);
+            Income.CapRateConclusion.enterAsCompleteResRentLossTimePeriodByRow(testData.rentLossTimePeriod)
+                .enterAsCompleteCommercialRentLossTimePeriodByRow(testData.rentLossTimePeriod)
+                .enterAsCompleteCommercialUndeterminedRentLossTimePeriodByRow(testData.rentLossTimePeriod)
+                .enterAsCompleteLessEntrepreneurialProfit(testData.entrepreneurialProfit)
+                .enterAsCompleteLessBuyoutCost(testData.lessBuyoutCost);
+
+            cy.stepInfo(`15. Make sure As Is Market Value (Amount) = Prospective Market Value As Complete Per SF - 
+            Less Residential Rent Loss - Less Commercial Rent Loss - Less Undetermined Commercial Rent Loss - 
+            Renovation Budget ( on Property>Renovations page) - Less Buyout Cost - Less Entrepreneurial Profit*`);
+            Income.CapRateConclusion.setAllAsCompleteLossesAliases()
+                .verifyAsIsMarketValueCalculated();
+
+            cy.stepInfo(`16. Make sure As Is Market Value (Final Value) =  As Is Market Value (Amount) 
+            rounded according to “Round to nearest” value`);
+            Income.CapRateConclusion.verifyAsIsFinalValueCalculated();
+
+            cy.stepInfo(`17. Verify if  As Is Market Value Per SF  is calculated with correct formula 
+            based on selected Basis for Square Foot Analysis`);
+            Income.CapRateConclusion.verifyAsIsMarketPerSFCalculated(testData.squareFootAnalysisArea);
+            
         });
 
         after(`Remove feature flag`, () => {
