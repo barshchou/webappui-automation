@@ -51,6 +51,7 @@ afterEach(() => {
         if (!Cypress.currentTest.title.includes("Check export")) {
             _NavigationSection.returnToHomePage();
             HomepageActions.verifyThatPageIsOpened();
+            cy.wait(3000);
             cy.logNode(`Deleting report in check export spec`);
             cy.deleteApiReport();
         }
