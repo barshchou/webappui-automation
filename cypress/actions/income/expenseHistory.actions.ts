@@ -2,6 +2,8 @@ import expenseHistoryPage from "../../pages/income/expenseHistory.page";
 import { getNumberFromDollarNumberWithCommas, numberWithCommas } from "../../../utils/numbers.utils";
 import BaseActionsExt from "../base/base.actions.ext";
 import tableExpenseHistoryCellNames from "../../../cypress/enums/expense/expenseHistoryTableRows.enum";
+import { _mutateArrayInMap } from "../../support/commands";
+import mapKeysUtils from "../../utils/mapKeys.utils";
 
 class ExpenseHistoryActions extends BaseActionsExt<typeof expenseHistoryPage> {
 
@@ -48,9 +50,33 @@ class ExpenseHistoryActions extends BaseActionsExt<typeof expenseHistoryPage> {
         return this;
     }
 
-    verifyTotalOpExpensesByColIndex(textToBe: string, index = 0): ExpenseHistoryActions {
+    verifyTotalOpExpensesTextByColIndex(textToBe: string, index = 0): ExpenseHistoryActions {
         expenseHistoryPage.getUnifiedEditableAndTotalCells(tableExpenseHistoryCellNames.total).eq(index)
             .should("have.text", textToBe);
+        return this;
+    }
+
+    verifyTotalOpExpensesByColIndex(index = 0): ExpenseHistoryActions {
+        this.setAllOperatingExpensesExceptGrossValuesToMap();
+        cy._mapGet(mapKeysUtils.allOperatingExpensesValues).then(valuesArray => {
+            const valuesSum = (<[]>valuesArray).reduce((sum, current) => sum + current, 0);
+            const textToBe = `$${numberWithCommas(valuesSum.toFixed(2))}`;
+            cy._mapSet(mapKeysUtils.allOperatingExpensesValues, undefined);
+            this.verifyTotalOpExpensesTextByColIndex(textToBe, index);
+        });
+        return this;
+    }
+
+    private setAllOperatingExpensesExceptGrossValuesToMap(index = 0): ExpenseHistoryActions {
+        for (let expense of tableExpenseHistoryCellNames.operatingExpensesCellsNamesArray) {
+            if (expense === tableExpenseHistoryCellNames.grossRevenue) {
+                continue;
+            }
+            expenseHistoryPage.getUnifiedEditableAndTotalCells(expense).eq(index).invoke("text").then(expenseText => {
+                const expenseValue = getNumberFromDollarNumberWithCommas(expenseText);
+                _mutateArrayInMap(mapKeysUtils.allOperatingExpensesValues, expenseValue, "Operating expenses");
+            });
+        }
         return this;
     }
 
@@ -69,7 +95,10 @@ class ExpenseHistoryActions extends BaseActionsExt<typeof expenseHistoryPage> {
         expenseHistoryPage.getUnifiedEditableAndTotalCells(tableExpenseHistoryCellNames.total).eq(index)
             .invoke("text").then(toeTotalText => {
                 const toeTotalNumber = getNumberFromDollarNumberWithCommas(toeTotalText);
-                const noeTextToBe = `$${numberWithCommas((grossRevenue - toeTotalNumber).toFixed(2))}`;
+                const noeNumberToBe = grossRevenue - toeTotalNumber;
+                const noeTextToBe = noeNumberToBe < 0 ?
+                    `-$${numberWithCommas(noeNumberToBe.toFixed(2)).replace("-", "")}` :
+                    `$${numberWithCommas(noeNumberToBe.toFixed(2))}`;
                 expenseHistoryPage.getUnifiedEditableAndTotalCells(tableExpenseHistoryCellNames.noi)
                     .eq(index).should("have.text", noeTextToBe);
             });
@@ -159,6 +188,11 @@ class ExpenseHistoryActions extends BaseActionsExt<typeof expenseHistoryPage> {
 
     checkUtilitiesExpensesOption(optionName: string): ExpenseHistoryActions {
         expenseHistoryPage.getUtilityExpensesOption(optionName).check().should("be.checked");
+        return this;
+    }
+
+    clickRemoveExpensePeriodButtonBuColIndex(index = 0): ExpenseHistoryActions {
+        expenseHistoryPage.removeExpensePeriodButtons.eq(index).click();
         return this;
     }
 }

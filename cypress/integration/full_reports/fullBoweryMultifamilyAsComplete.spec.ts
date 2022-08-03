@@ -12,7 +12,7 @@ import tableExpenseHistoryCellNames from "../../../cypress/enums/expense/expense
 import { loginAction } from "../../actions/base/baseTest.actions";
 import Enums from "../../enums/enums";
 
-describe("Full bowery way, multifamily as complete report", { tags: [ "@full_report" ] }, () => {
+describe.skip("Full bowery way, multifamily as complete report", { tags: [ "@full_report" ] }, () => {
     it("Test", () => {
         loginAction();
         Homepage.createReport(testData.reportCreationData);
@@ -295,7 +295,7 @@ describe("Full bowery way, multifamily as complete report", { tags: [ "@full_rep
             .enterIssueByColIndex(testData.expenseHistory.fuelExpense, tableExpenseHistoryCellNames.fuel)
             .enterIssueByColIndex(testData.expenseHistory.payrollBenefitsExpense, 
                 tableExpenseHistoryCellNames.payrollAndBenefits)
-            .verifyTotalOpExpensesByColIndex(testData.expenseHistory.toeToBe)
+            .verifyTotalOpExpensesTextByColIndex(testData.expenseHistory.toeToBe)
             .verifyTOEExcludingRETByIndex(testData.expenseHistory.realEstateTaxes)
             .verifyNetOpIncomeByIndex(testData.expenseHistory.grossRevenue)
             .verifyAverageTable()
