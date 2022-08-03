@@ -1,7 +1,12 @@
 import taxInfoPage from "../../pages/income/taxInfo.page";
-import { getNumberFromDollarNumberWithCommas, numberWithCommas } from "../../../utils/numbers.utils";
+import {
+    getNumberFromDollarNumberWithCommas, numberWithCommas,
+    getNumberWithDecimalPart, getNumberFromPercentNumberWithCommas
+} from "../../../utils/numbers.utils";
 import BaseActionsExt from "../base/base.actions.ext";
 import { BoweryReports } from "../../types/boweryReports.type";
+import mapKeysUtils from "../../utils/mapKeys.utils";
+import taxInfoKeys from "../../utils/mapKeys/income/tax_Info/taxInfoKeys";
 
 class TaxInfoActions extends BaseActionsExt<typeof taxInfoPage> {
 
@@ -301,7 +306,7 @@ class TaxInfoActions extends BaseActionsExt<typeof taxInfoPage> {
     clickAddNewRowButton(name = "Add Additional Tax Rate"): TaxInfoActions {
         taxInfoPage.getAddNewRowButton(name).click();
         return this;
-    } 
+    }
 
     verifyTaxCompsCommentary(commToBe: string): this {
         taxInfoPage.taxCompsDiscussionComm.should("have.text", commToBe);
@@ -368,6 +373,92 @@ class TaxInfoActions extends BaseActionsExt<typeof taxInfoPage> {
 
     verifyTaxSummaryDiscussion(textToBe: string): this {
         taxInfoPage.taxSummaryDiscussion.should("have.text", textToBe);
+        return this;
+    }
+
+    verifyRowTaxLiability(name: string, rowNumber = 0): TaxInfoActions {
+        taxInfoPage.getTaxLiabilityRowValue(name).eq(rowNumber).should("exist");
+        return this;
+    }
+
+    enterRowTaxLiabilityItem(rowName: string, enterName: string, rowNumber = 0): TaxInfoActions {
+        taxInfoPage.getTaxLiabilityRowItem(rowName).eq(rowNumber)
+            .realClick()
+            .realClick()
+            .type(`${enterName}{enter}`)
+            .should("have.text", enterName);
+        return this;
+    }
+
+    /**
+     * Enters values for the selected row. Depending on the name of the row, the rounding of values changes
+     * @param rowName The name of the row you want to change
+     * @param value Enter value 
+     * @param rowNumber Row number. Need if there is row with similar name 
+     * @returns `this`
+     */
+    enterRowTaxLiabilityValue(rowName: string, value: number, decimalCount = 9, rowNumber = 0): TaxInfoActions {
+        const initial = taxInfoPage.getTaxLiabilityRowValue(rowName).eq(rowNumber)
+            .realClick().realClick().type(`${value}{enter}`);
+        if (rowName === "Additional Tax Rate") {
+            initial.should("have.text", `${getNumberWithDecimalPart(value, decimalCount)}%`);
+        } else {
+            initial.should("have.text", `$${numberWithCommas(value.toFixed(2))}`);
+        }
+        return this;
+    }
+
+    deleteRowTaxLiability(rowName: string, rowNumber = 0): TaxInfoActions {
+        taxInfoPage.getTaxLiabilityRowAction(rowName).eq(rowNumber).click().should("not.exist");
+        return this;
+    }
+
+    /**
+     * Get all values from row and add in `Map`
+     * @param rowName Row name in Tax Liability table
+     * @param isPercent `true` if value contains `%`, `false` if value contains `$`
+     * @returns `this`
+     */
+    private getValuesFromRows(rowName: string, isPercent = true): TaxInfoActions {
+        taxInfoPage.getTaxLiabilityRowValue(rowName).then($el => {
+            const rowElements = [];
+            for (let i = 0; $el.length > i; i++) {
+                taxInfoPage.getTaxLiabilityRowValue(rowName).eq(i).invoke("text").then(rowElement => {
+                    let rowElementNumber = isPercent ? getNumberFromPercentNumberWithCommas(rowElement)
+                        : getNumberFromDollarNumberWithCommas(rowElement);
+                    rowElements.push(rowElementNumber);
+                });
+            }
+            const mapKey = rowName === "Tax Rate" ? taxInfoKeys.taxRates : taxInfoKeys.assessmentRows;
+            cy._mapSet(mapKey, rowElements);
+        });
+        return this;
+    }
+
+    /**
+     * Get all "Tax Rate" and "Assessment Row" values and verify "Tax Liability (Total)" using this formula:
+     * sum of all tax rates * sum of all assessments = tax liability (total)
+     * @returns `this`
+     */
+    verifyTotalTaxLiability(): TaxInfoActions {
+        this.getValuesFromRows("Tax Rate");
+        cy._mapGet(taxInfoKeys.taxRates).then(taxRates => {
+            const sumTaxRates = taxRates.reduce((a, b) => a + b);
+            const taxRatesPercent = sumTaxRates / 100;
+            this.getValuesFromRows("Assessment Row", false);
+            cy._mapGet(taxInfoKeys.assessmentRows).then(assessments => {
+                const sumAssessments = assessments.reduce((a, b) => a + b);
+                taxInfoPage.getTaxLiabilityRowValue("Taxable Assessed Value").invoke("text")
+                    .then(taxAssessedText => {
+                        const allTaxAssessedNumber = sumAssessments +
+                            getNumberFromDollarNumberWithCommas(taxAssessedText);
+                        const taxLiabilityTotalToBe =
+                            `$${numberWithCommas((allTaxAssessedNumber * taxRatesPercent).toFixed(2))}`;
+                        taxInfoPage.getTaxLiabilityRowValue("Tax Liability (Total)")
+                            .should("have.text", taxLiabilityTotalToBe);
+                    });
+            });
+        });
         return this;
     }
 }

@@ -1,12 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable @typescript-eslint/no-namespace */
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { recordProxiedRequests } from "../../utils/intercept.utils";
 import { recordDOMSnapshot } from "../utils/snapshot.utils";
 import "./commands";
 import "cypress-real-events/support";
 import { BoweryAutomation } from "../types/boweryAutomation.type";
 import { evalUrl } from "../utils/env.utils";
+import { Tag } from "../utils/tags.utils";
+import mapKeysUtils from "../utils/mapKeys.utils";
 
 require("cypress-xpath");
 require("cypress-iframe");
@@ -38,6 +41,24 @@ after(() => {
         return;
     } else {
         cy.deleteApiReport();
+    }
+});
+
+afterEach(() => {
+    // @ts-ignore
+    
+    // ernst: internal command of Cypress, you can access to `Cypress.mocha._mocha.suite` in browser's console
+    if (Cypress.mocha._mocha.suite.suites[0]._testConfig.tags.includes(Tag.check_export)) {
+        if (!Cypress.currentTest.title.includes("Check export")) {
+            cy.logNode(`Deleting report in check export spec`);
+            cy.deleteApiReport();
+            /*
+             * We have to reset map, because we use different ways of creating report before checking export, our array
+             * of reportIds will always contain 1 id for check export specs in each afterHook. With this action we
+             * prevent cases, when we try to delete report, which is already deleted
+             */
+            cy._mapSet(mapKeysUtils.reportIdArray, undefined);
+        }
     }
 });
 
