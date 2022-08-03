@@ -18,6 +18,7 @@ conditionalDescribe(`[QA-5157] [QA-5161] [Sales > Find Comps] "Date Sold" sortin
     });
     beforeEach(() => {
         cy.restoreLocalStorage();
+        salesInterceptions();
     });
 
     it("[QA-5157] [Sales > Find Comps] 'Date Sold' sorting is selected by default for sales comps", () => {
@@ -35,8 +36,6 @@ conditionalDescribe(`[QA-5157] [QA-5161] [Sales > Find Comps] "Date Sold" sortin
                     - Listing
                     - date sold from most to least recent 
                     (comps added via map search )`);
-        salesInterceptions();
-
         Sales._FindComps.resetAllFilters()
             .selectFilterSalePeriodValue(testData.salePeriodValue);
         testData.arrayOfCompsForAdditionFromMap1.forEach(comp => {
