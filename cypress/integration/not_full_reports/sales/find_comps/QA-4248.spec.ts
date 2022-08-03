@@ -30,7 +30,7 @@ describe.skip("Verify the Comps can be added by entering the existing Report ID 
                     .verifyProgressBarNotExist();
                 Homepage.createReport(fixture.reportCreationData);
                 NavigationSection.navigateToFindComps(true);
-                Sales.FindComps.clickImportComparableButton()  
+                Sales.FindComps.clickImportComparableButton()
                 // eslint-disable-next-line @typescript-eslint/no-explicit-any
                     .enterReportToSearchComp(<any>reportId);
             });
