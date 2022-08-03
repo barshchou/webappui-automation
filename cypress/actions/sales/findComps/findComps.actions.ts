@@ -116,6 +116,10 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
     resetAllFilters(): FindCompsActions {
         findCompsPage.resetAllButton.click();
         findCompsPage.loadingModalSpinner.should('exist');
+        /*
+         * TODO add cy.wait(@${Alias.gql.SearchSalesTransactions}, { timeout: 180000 }) but with option, when this alias
+         * is clearable (for multiply action using)
+         */
         findCompsPage.loadingModalSpinner.should('not.exist');
         return this;
     }
@@ -138,10 +142,16 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
          * ernst: delay to not accidentaly dispatch click to "Remove" btn on SearchList
          */
         cy.wait(1500);
+        /*
+         * We should delete 'mapKeysUtils.searchResultSalesComp' every time after comp addition
+         * because for proper _scrollAndSearchComp and recurse methods work 
+         * 'mapKeysUtils.searchResultSalesComp' must be undefined
+         */
         cy.then(() => {
             _map.delete(mapKeysUtils.searchResultSalesComp);
             cy.log('Keys deleted'); 
         });
+        //TODO add action for list scrolling up, after every comp addition
         return this;
     }
 
@@ -247,7 +257,7 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
         return this;
     }
 
-    //TODO upgrade this method, cos it cant add two imports because of scrooll.
+    //TODO upgrade this method, cos it cant add two imports because of scroll.
     enterReportToSearchComp(reportID: string): FindCompsActions {
         cy.intercept("GET", `/salesComps/eventIds/${reportID}`)
             .as(Alias.salesCompsEventIds);
@@ -375,7 +385,7 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
     }
 
     /** 
-     * @describe function takes all copms and create an array from values of column "Date Sold" (focusArray), 
+     * Function takes all comps and create an array from values of column "Date Sold" (focusArray), 
      * then compare this array with array, that was created and sorted (arrayForCompare). 
      */
     checkSalesCompSortedByDateSold() {
@@ -395,6 +405,8 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
             numberArray.sort((firstEl, secondEl) => (firstEl < secondEl) ? 1 : -1);
             wordsArray.sort((firstEl, secondEl) => (firstEl > secondEl) ? 1 : -1);
             let arrayForCompare = wordsArray.concat(numberArray);
+            cy.log(<any>focusArray); 
+            cy.log(<any>arrayForCompare); 
             expect(focusArray.length === arrayForCompare.length && focusArray.every((value, index) => 
                 value === arrayForCompare[index])
             ).to.be.equal(true);
