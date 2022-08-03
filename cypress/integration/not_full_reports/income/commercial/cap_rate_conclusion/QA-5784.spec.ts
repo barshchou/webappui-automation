@@ -81,8 +81,7 @@ describe("",
             Prospective Market Value As Stabilized (Amount) - Less Residential Rent Loss - 
             Less Commercial Rent Loss - Less Undetermined Commercial Rent Loss - 
             Less Commission Fee - Less Entrepreneurial Profit*`);
-            Income.CapRateConclusion.setAllAsStabilizedLossesAliases()
-                .verifyProspectiveMarketValueAsCompleteCalculated();
+            Income.CapRateConclusion.verifyProspectiveMarketValueAsCompleteCalculated();
 
             cy.stepInfo(`12. Make sure Prospective Market Value As Complete (Final Value) = 
             Prospective Market Value As Complete (Amount) rounded according to “Round to nearest” value`);
@@ -111,8 +110,7 @@ describe("",
             cy.stepInfo(`15. Make sure As Is Market Value (Amount) = Prospective Market Value As Complete Per SF - 
             Less Residential Rent Loss - Less Commercial Rent Loss - Less Undetermined Commercial Rent Loss - 
             Renovation Budget ( on Property>Renovations page) - Less Buyout Cost - Less Entrepreneurial Profit*`);
-            Income.CapRateConclusion.setAllAsCompleteLossesAliases()
-                .verifyAsIsMarketValueCalculated();
+            Income.CapRateConclusion.verifyAsIsMarketValueCalculated();
 
             cy.stepInfo(`16. Make sure As Is Market Value (Final Value) =  As Is Market Value (Amount) 
             rounded according to “Round to nearest” value`);

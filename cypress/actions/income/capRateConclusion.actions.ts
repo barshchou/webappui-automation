@@ -358,12 +358,14 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
 
     /**
      * Verifies Prospective Market Value As Complete
+     * Sets all aliases for As Stablilized rent losses, commission, entrepreneur profit.
      * Gets all aliases that were set and check As Complete value by formula:
      *   [As Stabilized Amount] - [Sum of Rent Losses] - [Commission Fee] - 
      *   (([Sum of Rent Losses] + [Commission Fee]) * Entrepreneur Profit)
      * @returns CapRateConclusionActions
      */
     verifyProspectiveMarketValueAsCompleteCalculated(): CapRateConclusionActions {
+        this.setAllAsStabilizedLossesAliases(); 
         cy._mapGet(capRateConclusionKeys.asStabilizedResRentLossItem).then(residentialRentLoss => {
             cy._mapGet(capRateConclusionKeys.asStabilizedCommercialRentLossItem).then(commercialRentLoss => {
                 cy._mapGet(capRateConclusionKeys.asStabilizedCommercialUndeterminedRentLossItem)
@@ -381,6 +383,7 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
                                         let entrepreneurLoss = allRentLosses * entrepreneurProfit / 100;
                                         cy.log(`Entrepreneur Profit: ${entrepreneurLoss}`);
 
+                                        // Round calculated value
                                         let prospectiveValue = Math.round((asStabilizedAmount - allRentLosses - 
                                         entrepreneurLoss) / 10) * 10;
                                         cy.log(`Prospective Value As Complete: ${prospectiveValue}`);
@@ -402,12 +405,14 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
 
     /**
      * Verifies As Is Market Value
+     * Sets all aliases for As Complete rent losses, buyout cost, renovation, entrepreneur profit.
      * Gets all aliases that were set and check As Is Market value by formula:
      *   [As Complete Amount] - [Sum of Rent Losses] - [Buyout Cost] - [Renovation] -
      *   (([Sum of Rent Losses] + [Less Buyout Cost]) * Entrepreneur Profit)
      * @returns CapRateConclusionActions
      */
     verifyAsIsMarketValueCalculated(): CapRateConclusionActions {
+        this.setAllAsCompleteLossesAliases();
         cy._mapGet(capRateConclusionKeys.asCompleteResRentLossItem).then(residentialRentLoss => {
             cy._mapGet(capRateConclusionKeys.asCompleteCommercialRentLossItem).then(commercialRentLoss => {
                 cy._mapGet(capRateConclusionKeys.asCompleteCommercialUndeterminedRentLossItem)
@@ -426,9 +431,10 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
                                             let entrepreneurLoss = allRentLosses * entrepreneurProfit / 100;
                                             cy.log(`Entrepreneur Profit: ${entrepreneurLoss}`);
     
+                                            // Round calculated value
                                             let marketValueAsIs = Math.round((asCompleteAmount - allRentLosses - 
                                             entrepreneurLoss) / 10) * 10;
-                                            cy.log(`Prospective Value As Complete: ${marketValueAsIs}`);
+                                            cy.log(`Market Value As Is: ${marketValueAsIs}`);
     
                                             let expectedMarketValueAsIs = marketValueAsIs < 0 
                                                 ? `-$${numberWithCommas(marketValueAsIs.toFixed(0).replace('-', ''))}`
@@ -475,23 +481,25 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
     }
 
     setAsStabilizedResRentLossItemsAmount(): CapRateConclusionActions {
-        capRateConclusionPage.asStabilizedResRentLossItemsAmount().invoke('attr', 'value').then(rentLoss => {
-            let rentLossNumber = getNumberFromMinusDollarNumberWithCommas(rentLoss);
-            cy._mapSet(capRateConclusionKeys.asStabilizedResRentLossItem, rentLossNumber);
-        });
+        capRateConclusionPage.asStabilizedResRentLossItemsAmount().should('exist')
+            .invoke('attr', 'value').then(rentLoss => {
+                let rentLossNumber = getNumberFromMinusDollarNumberWithCommas(rentLoss);
+                cy._mapSet(capRateConclusionKeys.asStabilizedResRentLossItem, rentLossNumber);
+            });
         return this;
     }
 
     setAsStabilizedCommercialRentLossItemsAmount(): CapRateConclusionActions {
-        capRateConclusionPage.asStabilizedCommercialLossItemsAmount().invoke('attr', 'value').then(rentLoss => {
-            let rentLossNumber = getNumberFromMinusDollarNumberWithCommas(rentLoss);
-            cy._mapSet(capRateConclusionKeys.asStabilizedCommercialRentLossItem, rentLossNumber);
-        });
+        capRateConclusionPage.asStabilizedCommercialLossItemsAmount().should('exist')
+            .invoke('attr', 'value').then(rentLoss => {
+                let rentLossNumber = getNumberFromMinusDollarNumberWithCommas(rentLoss);
+                cy._mapSet(capRateConclusionKeys.asStabilizedCommercialRentLossItem, rentLossNumber);
+            });
         return this;
     }
 
     setAsStabilizedCommercialUndeterminedLossAmount(): CapRateConclusionActions {
-        capRateConclusionPage.asStabilizedCommercialUndeterminedRentLossAmount()
+        capRateConclusionPage.asStabilizedCommercialUndeterminedRentLossAmount().should('exist')
             .invoke('attr', 'value').then(rentLoss => {
                 let rentLossNumber = getNumberFromMinusDollarNumberWithCommas(rentLoss);
                 cy._mapSet(capRateConclusionKeys.asStabilizedCommercialUndeterminedRentLossItem, rentLossNumber);
@@ -500,16 +508,17 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
     }
 
     setCommissionFee(): CapRateConclusionActions {
-        capRateConclusionPage.asStabilizedCommissionFeeAmount.invoke('attr', 'value').then(commissionFee => {
-            let commissionFeeNumber = getNumberFromMinusDollarNumberWithCommas(commissionFee);
-            cy._mapSet(capRateConclusionKeys.commissionFee, commissionFeeNumber);
-        });
+        capRateConclusionPage.asStabilizedCommissionFeeAmount.should('exist')
+            .invoke('attr', 'value').then(commissionFee => {
+                let commissionFeeNumber = getNumberFromMinusDollarNumberWithCommas(commissionFee);
+                cy._mapSet(capRateConclusionKeys.commissionFee, commissionFeeNumber);
+            });
         return this;
     }
 
     setStabilizedEntrepreneurialProfit(): CapRateConclusionActions {
-        capRateConclusionPage.asStabilizedLessEntrepreneurialProfit.invoke('attr', 'value')
-            .then(entrepreneurialProfit => {
+        capRateConclusionPage.asStabilizedLessEntrepreneurialProfit.should('exist')
+            .invoke('attr', 'value').then(entrepreneurialProfit => {
                 let entrepreneurialProfitNumber = Number(entrepreneurialProfit.replace('%', ''));
                 cy._mapSet(capRateConclusionKeys.entrepreneurialStabilizedProfit, entrepreneurialProfitNumber);
             });
@@ -517,31 +526,34 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
     }
 
     setAsCompleteAmountAlias(): CapRateConclusionActions {
-        capRateConclusionPage.asCompleteAmountCell.invoke('text').then(asCompleteAmount => {
-            let asCompleteAmountAdjusted = getNumberFromDollarNumberWithCommas(asCompleteAmount);
-            cy._mapSet(capRateConclusionKeys.asCompleteAmount, asCompleteAmountAdjusted);
-        });
+        capRateConclusionPage.asCompleteAmountCell.should('exist')
+            .invoke('text').then(asCompleteAmount => {
+                let asCompleteAmountAdjusted = getNumberFromDollarNumberWithCommas(asCompleteAmount);
+                cy._mapSet(capRateConclusionKeys.asCompleteAmount, asCompleteAmountAdjusted);
+            });
         return this;
     }
 
     setAsCompleteResRentLossItemsAmount(): CapRateConclusionActions {
-        capRateConclusionPage.asCompleteResRentLossItemsAmount().invoke('attr', 'value').then(rentLoss => {
-            let rentLossNumber = getNumberFromMinusDollarNumberWithCommas(rentLoss);
-            cy._mapSet(capRateConclusionKeys.asCompleteResRentLossItem, rentLossNumber);
-        });
+        capRateConclusionPage.asCompleteResRentLossItemsAmount().should('exist')
+            .invoke('attr', 'value').then(rentLoss => {
+                let rentLossNumber = getNumberFromMinusDollarNumberWithCommas(rentLoss);
+                cy._mapSet(capRateConclusionKeys.asCompleteResRentLossItem, rentLossNumber);
+            });
         return this;
     }
 
     setAsCompleteCommercialRentLossItemsAmount(): CapRateConclusionActions {
-        capRateConclusionPage.asStabilizedCommercialLossItemsAmount().invoke('attr', 'value').then(rentLoss => {
-            let rentLossNumber = getNumberFromMinusDollarNumberWithCommas(rentLoss);
-            cy._mapSet(capRateConclusionKeys.asCompleteCommercialRentLossItem, rentLossNumber);
-        });
+        capRateConclusionPage.asStabilizedCommercialLossItemsAmount().should('exist')
+            .invoke('attr', 'value').then(rentLoss => {
+                let rentLossNumber = getNumberFromMinusDollarNumberWithCommas(rentLoss);
+                cy._mapSet(capRateConclusionKeys.asCompleteCommercialRentLossItem, rentLossNumber);
+            });
         return this;
     }
 
     setAsCompleteCommercialUndeterminedLossAmount(): CapRateConclusionActions {
-        capRateConclusionPage.asStabilizedCommercialUndeterminedRentLossAmount()
+        capRateConclusionPage.asStabilizedCommercialUndeterminedRentLossAmount().should('exist')
             .invoke('attr', 'value').then(rentLoss => {
                 let rentLossNumber = getNumberFromMinusDollarNumberWithCommas(rentLoss);
                 cy._mapSet(capRateConclusionKeys.asCompleteCommercialUndeterminedRentLossItem, rentLossNumber);
@@ -550,24 +562,26 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
     }
 
     setRenovationBudgetAlias(): CapRateConclusionActions {
-        capRateConclusionPage.renovationBudgetAmount.invoke('attr', 'value').then(renovationBudget => {
-            let renovationBudgetAdjusted = getNumberFromMinusDollarNumberWithCommas(renovationBudget);
-            cy._mapSet(capRateConclusionKeys.renovationBudget, renovationBudgetAdjusted);
-        });
+        capRateConclusionPage.renovationBudgetAmount.should('exist')
+            .invoke('attr', 'value').then(renovationBudget => {
+                let renovationBudgetAdjusted = getNumberFromMinusDollarNumberWithCommas(renovationBudget);
+                cy._mapSet(capRateConclusionKeys.renovationBudget, renovationBudgetAdjusted);
+            });
         return this;
     }
 
     setLessBuyoutCost(): CapRateConclusionActions {
-        capRateConclusionPage.asCompleteLessBuyoutCost.invoke('attr', 'value').then(buyoutCost => {
-            let buyoutCostNumber = getNumberFromMinusDollarNumberWithCommas(buyoutCost);
-            cy._mapSet(capRateConclusionKeys.buyoutCost, buyoutCostNumber);
-        });
+        capRateConclusionPage.asCompleteLessBuyoutCost.should('exist')
+            .invoke('attr', 'value').then(buyoutCost => {
+                let buyoutCostNumber = getNumberFromMinusDollarNumberWithCommas(buyoutCost);
+                cy._mapSet(capRateConclusionKeys.buyoutCost, buyoutCostNumber);
+            });
         return this;
     }
 
     setCompleteEntrepreneurialProfit(): CapRateConclusionActions {
-        capRateConclusionPage.asCompleteLessEntrepreneurialProfit.invoke('attr', 'value')
-            .then(entrepreneurialProfit => {
+        capRateConclusionPage.asCompleteLessEntrepreneurialProfit.should('exist')
+            .invoke('attr', 'value').then(entrepreneurialProfit => {
                 let entrepreneurialProfitNumber = Number(entrepreneurialProfit.replace('%', ''));
                 cy._mapSet(capRateConclusionKeys.entrepreneurialCompleteProfit, entrepreneurialProfitNumber);
             });
@@ -575,18 +589,20 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
     }
 
     setAsIsAmountAlias(): CapRateConclusionActions {
-        capRateConclusionPage.asIsMarketAmountCell.invoke('text').then(asIsMarketAmount => {
-            let asIsMarketAmountAdjusted = getNumberFromDollarNumberWithCommas(asIsMarketAmount);
-            cy._mapSet(capRateConclusionKeys.asIsMarketAmount, asIsMarketAmountAdjusted);
-        });
+        capRateConclusionPage.asIsMarketAmountCell.should('exist')
+            .invoke('text').then(asIsMarketAmount => {
+                let asIsMarketAmountAdjusted = getNumberFromDollarNumberWithCommas(asIsMarketAmount);
+                cy._mapSet(capRateConclusionKeys.asIsMarketAmount, asIsMarketAmountAdjusted);
+            });
         return this;
     }
 
     setAsIsAmountFinalAlias(): CapRateConclusionActions {
-        capRateConclusionPage.asIsMarketFinalValueCell.invoke('text').then(asIsMarketFinalValue => {
-            let asIsMarketAmountAdjusted = getNumberFromDollarNumberWithCommas(asIsMarketFinalValue);
-            cy._mapSet(capRateConclusionKeys.asIsMarketFinalAmount, asIsMarketAmountAdjusted);
-        });
+        capRateConclusionPage.asIsMarketFinalValueCell.should('exist')
+            .invoke('text').then(asIsMarketFinalValue => {
+                let asIsMarketAmountAdjusted = getNumberFromDollarNumberWithCommas(asIsMarketFinalValue);
+                cy._mapSet(capRateConclusionKeys.asIsMarketFinalAmount, asIsMarketAmountAdjusted);
+            });
         return this;
     }
 
