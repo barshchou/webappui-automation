@@ -9,6 +9,10 @@ class SaleInfoFromActions {
         this.Page = page;
     }
 
+    /*
+     * Method for selecting date in calendar on 'Sale Information' 
+     * modal (when the comp is added manually)
+     */
     selectSaleDate(date = 'today'): SaleInfoFromActions {
         if (date === 'today') {
             this.Page.SaleDateCalendarNewComp.click();
