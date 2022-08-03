@@ -676,7 +676,7 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
             let expectedAsStabilizedFinalSFAmount = asStabilizedFinalSFAmount < 0 
                 ? `-$${asStabilizedFinalSFAmount}`
                 : `${asStabilizedFinalSFAmount}`;
-            capRateConclusionPage.prospectiveMarketValueAsCompletePerSF
+            capRateConclusionPage.prospectiveMarketValueAsStabilizedPerSF
                 .invoke('text', expectedAsStabilizedFinalSFAmount);
         });
         
