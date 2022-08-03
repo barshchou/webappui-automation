@@ -103,7 +103,7 @@ export const isCorrectQuarter = (quarter) => {
 
 
 /**
- * @description This function returns random date (from 01-01-1970 to now) in view 01-14-2020
+ * @description This function returns random date (from 01-01-1970 to now) in view MM-DD-YYYY
  */
 export const getRandomDate = (): string => {
     let startDateLong = Date.parse('01-01-1970');
