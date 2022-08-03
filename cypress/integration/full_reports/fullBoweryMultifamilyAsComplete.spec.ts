@@ -12,7 +12,7 @@ import tableExpenseHistoryCellNames from "../../../cypress/enums/expense/expense
 import { loginAction } from "../../actions/base/baseTest.actions";
 import Enums from "../../enums/enums";
 
-describe("Full bowery way, multifamily as complete report", { tags: [ "@full_report" ] }, () => {
+describe.skip("Full bowery way, multifamily as complete report", { tags: [ "@full_report" ] }, () => {
     it("Test", () => {
         loginAction();
         Homepage.createReport(testData.reportCreationData);
