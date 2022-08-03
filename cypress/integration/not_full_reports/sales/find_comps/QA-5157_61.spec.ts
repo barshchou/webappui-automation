@@ -39,11 +39,11 @@ conditionalDescribe(`[QA-5157] [QA-5161] [Sales > Find Comps] "Date Sold" sortin
 
         Sales._FindComps.resetAllFilters()
             .selectFilterSalePeriodValue(testData.salePeriodValue);
-        testData.arrayOfCompsforAdditionFromMap1.forEach(comp => {
+        testData.arrayOfCompsForAdditionFromMap1.forEach(comp => {
             Sales._FindComps.selectCompFromMapByAddress(comp.address);
         });    
         Sales._FindComps.resetAllFilters();
-        testData.arrayOfCompsforAdditionFromMap2.forEach(comp => {
+        testData.arrayOfCompsForAdditionFromMap2.forEach(comp => {
             Sales._FindComps.selectCompFromMapByAddress(comp.address);
         });
         Sales._FindComps.checkSalesCompSortedByDateSold();
@@ -70,7 +70,7 @@ conditionalDescribe(`[QA-5157] [QA-5161] [Sales > Find Comps] "Date Sold" sortin
             Sales._FindComps.clickAddNewCompContinueButton();
             Sales._FindComps
                 .SaleInfo.setBuyerGrantee(testData.comparableFixtureManual.saleInfo.buyer)
-                .setSellerGarantor(testData.comparableFixtureManual.saleInfo.seller)
+                .setSellerGrantor(testData.comparableFixtureManual.saleInfo.seller)
                 .selectSaleDate('random');
             Sales._FindComps
                 .selectDropdownOptionNewComp(Sales._FindComps.Page.SaleStatusDropdown, saleStatus);
@@ -79,7 +79,7 @@ conditionalDescribe(`[QA-5157] [QA-5161] [Sales > Find Comps] "Date Sold" sortin
             return this;
         }
 
-        testData.arrayOfCompsforManualAddition.forEach(comp => {
+        testData.arrayOfCompsForManualAddition.forEach(comp => {
             addCompWithStatus(comp.address, comp.status);
         });
         Sales._FindComps.checkSalesCompSortedByDateSold();

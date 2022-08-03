@@ -12,7 +12,7 @@ const filePath = "not_full_reports/CostarExport 5161.csv";
 const sortSalesCompsDateSold = 'Date Sold' as BoweryReports.FindComps.SelectedComparablesSortType;
 const salePeriodValue = 'Last 3 Months' as BoweryReports.FindComps.SalePeriodValues;
 
-const arrayOfCompsforAdditionFromMap1 = [
+const arrayOfCompsForAdditionFromMap1 = [
     {
         address: "116 Cooper Street"
     },
@@ -26,7 +26,7 @@ const arrayOfCompsforAdditionFromMap1 = [
         address: "31-83 34 Street"
     },
 ];
-const arrayOfCompsforAdditionFromMap2 = [
+const arrayOfCompsForAdditionFromMap2 = [
     {
         address: "168 North 10 Street"
     },
@@ -59,7 +59,7 @@ const comparableFixtureManual = {
     saleStatusTransaction: 'Transaction' as BoweryReports.FindComps.SaleStatusType,
 };
 
-const arrayOfCompsforManualAddition = [
+const arrayOfCompsForManualAddition = [
     {
         address: comparableFixtureManual.address1,
         status: comparableFixtureManual.saleStatusListing
@@ -87,12 +87,12 @@ const arrayOfCompsforManualAddition = [
 ];
 
 export default {
-    arrayOfCompsforAdditionFromMap1,
-    arrayOfCompsforAdditionFromMap2,
+    arrayOfCompsForAdditionFromMap1,
+    arrayOfCompsForAdditionFromMap2,
     comparableFixtureManual,
     reportCreationData,
     sortSalesCompsDateSold,
     salePeriodValue,
     filePath,
-    arrayOfCompsforManualAddition
+    arrayOfCompsForManualAddition
 };

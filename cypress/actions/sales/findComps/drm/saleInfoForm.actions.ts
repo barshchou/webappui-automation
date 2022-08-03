@@ -28,7 +28,7 @@ class SaleInfoFromActions {
         return this;
     }
 
-    setSellerGarantor(seller: string): SaleInfoFromActions {
+    setSellerGrantor(seller: string): SaleInfoFromActions {
         this.Page.SellerGrantor.type(seller, { force: true });
         return this;
     }
