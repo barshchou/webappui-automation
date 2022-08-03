@@ -1,8 +1,9 @@
-import testData from "../../../../fixtures/not_full_reports/final/swotAnalysis/QA-4959.fixture";
+import testData from "../../../../fixtures/not_full_reports/final/swot_analysis/QA-4959.fixture";
 import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { Final, ReviewExport } from "../../../../actions";
-
+import { _saveDataInFile } from "../../../../support/commands";
+import { pathSpecData } from "../../../../../utils/fixtures.utils";
 
 describe("Verify the text in the Opportunities section on the SWOT Analysis page", 
     { tags:[ "@final", "@swot_analysis", "@check_export" ] }, () => {
@@ -26,7 +27,7 @@ describe("Verify the text in the Opportunities section on the SWOT Analysis page
             Final._SWOTAnalysis.Page.getSectionTexts(testData.threats).then($textarea => {
                 const threatsText = $textarea.toArray().map(el => el.innerHTML);
                 expect(testData.threatsTexts).to.deep.eq(threatsText);
-                // cy._mapSet(testData.threats, threatsText);
+                _saveDataInFile(threatsText, testData.memoTestDataFile);
             });
 
             cy.stepInfo("3. Export the report");
@@ -41,10 +42,17 @@ describe("Verify the text in the Opportunities section on the SWOT Analysis page
             ).then(file => {
                 cy.log(<string>file);
                 cy.visit(<string>file);
-                cy.stepInfo(`4. Verify that the same list of threats as in Step #2  is displayed 
-                            in the exported report “Threats” section`);
-                cy.xpath("//h4[.='Current Commercial Rent Roll']/following-sibling::table");
-                cy.pause();
+            
+                cy.readFile(`${pathSpecData()}${testData.memoTestDataFile}`).then(data => {
+                    cy.stepInfo(`4. Verify that the same list of threats as in Step #2  is displayed 
+                                in the exported report “Threats” section`);
+                    const dataArray = JSON.parse(data);
+                   
+                    cy.contains("Threats").scrollIntoView().next().find("li").then($li => {
+                        const reportTreatsText = $li.toArray().map(li => li.innerHTML);
+                        expect(dataArray).to.deep.eq(reportTreatsText); 
+                    });
+                });
             });
         });
     });

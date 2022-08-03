@@ -2,6 +2,7 @@ import ReportDataCreator from "../../../data_creator/reportData.creator";
 
 export default {
     reportCreationData: ReportDataCreator.getReportData("4959"),
+    memoTestDataFile: "threats.txt",
     threats: "threats",
     threatsTexts: [
         "Rent growth is limited by local rent control laws. ",

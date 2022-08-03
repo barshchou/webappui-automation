@@ -1,4 +1,4 @@
-import testData from "../../../../fixtures/not_full_reports/final/swotAnalysis/QA-4281_83.fixture";
+import testData from "../../../../fixtures/not_full_reports/final/swot_analysis/QA-4281_83.fixture";
 import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { Final } from "../../../../actions";
