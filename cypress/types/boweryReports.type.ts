@@ -223,6 +223,9 @@ export namespace BoweryReports {
     export namespace FindComps {
         export type SalePeriodValues = typeof Enums.SALE_PERIOD_VALUES[KeyInfo.SalePeriodValues]
         export type SelectedComparablesSortType = typeof Enums.SORT_VALUES[KeyInfo.SortValues]
+        export type ConditionValueType = typeof Enums.CONDITION_VALUES[KeyInfo.ConditionValues]
+        export type ComparableTypes = typeof Enums.COMPARABLE_TYPES[KeyInfo.ComparableTypes]
+        export type SaleStatusType = typeof Enums.SALE_STATUSES[KeyInfo.SaleStatuses]
     }
     
     export type CalculationType = typeof Enums.CALCULATION_TYPE[KeyInfo.CalculationType]

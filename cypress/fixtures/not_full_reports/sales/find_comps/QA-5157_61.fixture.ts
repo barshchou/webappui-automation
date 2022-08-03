@@ -42,8 +42,8 @@ const comparableFixtureManual = {
     address4: "383 Madison Avenue, New York, NY, USA",
     address5: "345 Park Avenue, New York, NY, USA",
     address6: "225 Liberty Street, New York, NY, USA",
-    condition: "Shell",
-    comparableType: "Multifamily",
+    condition: "Shell" as BoweryReports.FindComps.ConditionValueType,
+    comparableType: "Multifamily" as BoweryReports.FindComps.ComparableTypes,
     units: {
         grossArea: 2700,
         numberOfUnits: 3,
@@ -54,9 +54,9 @@ const comparableFixtureManual = {
         buyer: "Test and CO",
         seller: "Test inc"
     },
-    saleStatusListing: 'Listing',
-    saleStatusUnderContract: 'Under Contract',
-    saleStatusTransaction: 'Transaction',
+    saleStatusListing: 'Listing' as BoweryReports.FindComps.SaleStatusType,
+    saleStatusUnderContract: 'Under Contract' as BoweryReports.FindComps.SaleStatusType,
+    saleStatusTransaction: 'Transaction' as BoweryReports.FindComps.SaleStatusType,
 };
 
 const arrayOfCompsforManualAddition = [
