@@ -14,5 +14,8 @@ describe(`Verify that the Client field is pre-filled on the WebApp with the date
     it("[QA-4035]", () => {
         cy.stepInfo("2. Navigate to the Report > Client page.");
         _NavigationSection.navigateToClientPage();
+
+        cy.stepInfo("3. Verify name in the Client field");
+        Report._Client.Page.clientNameField.should("have.value", testData.clientName);
     });
 });

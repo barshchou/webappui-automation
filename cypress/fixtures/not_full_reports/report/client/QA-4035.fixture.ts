@@ -6,4 +6,5 @@ export default {
         templateValue: Enums.TEMPLATE_TYPE.notFreddieMac,
         incomeValue: Enums.INCOME_TYPE.both,
     }, true),
+    clientName: "Moshe Sitorsky"
 };
