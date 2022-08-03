@@ -149,7 +149,7 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
          */
         cy.then(() => {
             _map.delete(mapKeysUtils.searchResultSalesComp);
-            cy.log('Keys deleted'); 
+            cy.log('Key mapKeysUtils.searchResultSalesComp deleted'); 
         });
         //TODO add action for list scrolling up, after every comp addition
         return this;
