@@ -62,12 +62,8 @@ class CapRateConclusionPage extends BasePage {
 
     get asIsMarketValuePerSF() { return cy.xpath("//*[.='As Is Market Value Per SF']//following-sibling::td[3]"); }
 
-    get prospectiveMarketValueAsCompletePerSF() { 
-        return cy.xpath("//*[.='Prospective Market Value As Complete Per SF']//following-sibling::td[3]"); 
-    }
-
-    get prospectiveMarketValueAsStabilizedPerSF() { 
-        return cy.xpath("//*[.='Prospective Market Value As Stabilized Per SF']//following-sibling::td[3]"); 
+    prospectiveMarketValuePerSF(valueConclusionValue: BoweryReports.ValueConclusionName) { 
+        return cy.xpath(`//*[.='Prospective Market Value ${valueConclusionValue} Per SF']//following-sibling::td[3]`); 
     }
 
     addRentLossButton(incomeType: BoweryReports.UnitIncomeType) { 
@@ -82,29 +78,19 @@ class CapRateConclusionPage extends BasePage {
 
     get addButton() { return cy.xpath("//button[.='Add']"); }
 
-    asStabResRentLossTimePeriodCells(index = 0) { 
-        return cy.get(`[name="asStabilizedResRentLossItems[${index}].months"]`); 
+    residentialRentLossTimePeriodCells(valueConclusionKey: BoweryReports.ValueConclusionKeys, index = 0) { 
+        return cy.get(`[name="${valueConclusionKey}ResRentLossItems[${index}].months"]`); 
     }
 
-    asStabCommercialRentLossTimePeriodCells(index = 0) { 
-        return cy.get(`[name="asStabilizedCommercialRentLossItems[${index}].months"]`); 
+    commercialRentLossTimePeriodCells(valueConclusionKey: BoweryReports.ValueConclusionKeys, index = 0) { 
+        return cy.get(`[name="${valueConclusionKey}CommercialRentLossItems[${index}].months"]`); 
     }
 
-    asStabCommercialUndeterminedRentLossItemsTimePeriodCells(index = 0) { 
-        return cy.get(`[name="asStabilizedLossItems[${index}].months"]`); 
+    commercialUndeterminedRentLossItemsTimePeriodCells(valueConclusionKey: BoweryReports.ValueConclusionKeys, 
+        index = 0) { 
+        return cy.get(`[name="${valueConclusionKey}LossItems[${index}].months"]`); 
     }
 
-    asCompleteResRentLossTimePeriodCells(index = 0) { 
-        return cy.get(`[name="asCompleteResRentLossItems[${index}].months"]`); 
-    }
-
-    asCompleteCommercialRentLossTimePeriodCells(index = 0) { 
-        return cy.get(`[name="asCompleteCommercialRentLossItems[${index}].months"]`); 
-    }
-
-    asCompleteCommercialUndeterminedRentLossItemsTimePeriodCells(index = 0) { 
-        return cy.get(`[name="asCompleteLossItems[${index}].months"]`); 
-    }
 
     get asCompleteLessBuyoutCost() { return cy.get("[data-qa*='asCompleteLossItems.buyoutCost'] input[inputmode]"); }
 
@@ -120,28 +106,16 @@ class CapRateConclusionPage extends BasePage {
         return cy.get("[data-qa^='asStabilizedLossItems.commissionFee.amount'] input:not([type=hidden])"); 
     }
 
-    asStabilizedResRentLossItemsAmount(index = 0) {
-        return cy.get(`[name="asStabilizedResRentLossItems[${index}].amount"]`);
+    residentialRentLossItemsAmount(valueConclusionKey: BoweryReports.ValueConclusionKeys, index = 0) {
+        return cy.get(`[name="${valueConclusionKey}ResRentLossItems[${index}].amount"]`);
     }
 
-    asStabilizedCommercialLossItemsAmount(index = 0) {
-        return cy.get(`[name="asStabilizedCommercialRentLossItems[${index}].amount"]`);
+    commercialLossItemsAmount(valueConclusionKey: BoweryReports.ValueConclusionKeys, index = 0) {
+        return cy.get(`[name="${valueConclusionKey}CommercialRentLossItems[${index}].amount"]`);
     }
 
-    asStabilizedCommercialUndeterminedRentLossAmount(index = 0) {
-        return cy.get(`[name="asStabilizedLossItems[${index}].amount"]`);
-    }
-
-    asCompleteResRentLossItemsAmount(index = 0) {
-        return cy.get(`[name="asCompleteResRentLossItems[${index}].amount"]`);
-    }
-
-    asCompleteCommercialLossItemsAmount(index = 0) {
-        return cy.get(`[name="asCompleteCommercialRentLossItems[${index}].amount"]`);
-    }
-
-    asCompleteCommercialUndeterminedRentLossAmount(index = 0) {
-        return cy.get(`[name="asCompleteLossItems[${index}].amount"]`);
+    commercialUndeterminedRentLossAmount(valueConclusionKey: BoweryReports.ValueConclusionKeys, index = 0) {
+        return cy.get(`[name="${valueConclusionKey}LossItems[${index}].amount"]`);
     }
 
     get renovationBudgetAmount() {

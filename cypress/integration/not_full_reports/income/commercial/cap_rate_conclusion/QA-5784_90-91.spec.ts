@@ -1,14 +1,12 @@
-import { Property } from '../../../../../actions/index';
-import { _NavigationSection } from '../../../../../actions/base/index';
+import { _NavigationSection } from '../../../../../actions/base';
 import testData from 
     "../../../../../fixtures/not_full_reports/income/commercial/cap_rate_conclusion/QA-5784_90-91.fixture";
-import NavigationSection from "../../../../../actions/base/navigationSection.actions";
-import Income from "../../../../../actions/income/income.manager";
+import { Income, Property } from "../../../../../actions";
 import { createReport } from "../../../../../actions/base/baseTest.actions";
 import launchDarklyApi from '../../../../../api/launchDarkly.api';
 
 describe("Validation of Market Values Per SF for ACAS reports", 
-    { tags:[ "@income", "@commercial", "@in_place_rent_roll", "@feature_flag" ] }, () => {
+    { tags:[ "@income", "@commercial", "@cap_rate_conclusion", "@feature_flag" ] }, () => {
         beforeEach("Login, create report", () => {
             cy.stepInfo(`1. Set feature flag and create report`);
             launchDarklyApi.setFeatureFlagForUser(testData.featureFlagKey, testData.onFeatureFlag);
@@ -22,7 +20,7 @@ describe("Validation of Market Values Per SF for ACAS reports",
                 .fillBasisSquareFootAnalysis(testData.squareFootAnalysisArea)
                 .enterNumberOfCommercialUnits(testData.commercialUnits)
                 .enterNumberOfResUnits(testData.residentialUnits);
-            NavigationSection.navigateToCommercialUnits();
+            _NavigationSection.navigateToCommercialUnits();
             Property._CommercialUnits.enterListUnitSF(testData.commercialUnitsSF, testData.commercialUnits);
 
             cy.stepInfo(`3. Set Gut Renovation budget`);
@@ -32,41 +30,42 @@ describe("Validation of Market Values Per SF for ACAS reports",
                 .fillTotalTable(testData.renovationPeriod, testData.renovationTotal);
 
             cy.stepInfo(`4. Fill commercial units with valid values`);
-            NavigationSection.navigateToCommercialInPlaceRentRoll();
+            _NavigationSection.navigateToCommercialInPlaceRentRoll();
             testData.commercialMonthlyRent.forEach((commercialUnitRent, index) => {
-                Income.Commercial.InPlaceRentRoll.chooseLeaseStatusByRowNumber(testData.leaseStatus, index)
+                Income._CommercialManager.InPlaceRentRoll.chooseLeaseStatusByRowNumber(testData.leaseStatus, index)
                     .enterRentPerSFAnnuallyByRowNumber(commercialUnitRent, index);
             });
 
             cy.stepInfo(`5. Fill residential units with valid values`);
-            NavigationSection.navigateToResInPlaceRentRoll();
+            _NavigationSection.navigateToResInPlaceRentRoll();
             testData.residentialMonthlyRent.forEach((residentialUnitRent, index) => {
-                Income.Residential.InPlaceRentRoll.enterLeaseStatusByRowNumber(testData.leaseStatus, index)
+                Income._Residential.InPlaceRentRoll.enterLeaseStatusByRowNumber(testData.leaseStatus, index)
                     .enterMonthlyRentByRowNumber(residentialUnitRent, index);
             });
         });
 
         it("[QA-5784][QA-5790][QA-5791]", () => {
             cy.stepInfo(`6. Set Cap Rate value`);
-            NavigationSection.navigateToCapRateConclusion();
-            Income.CapRateConclusion.enterConclusionSectionConcludedCapRate(testData.capRate);
+            _NavigationSection.navigateToCapRateConclusion();
+            Income._CapRateConclusion.enterConclusionSectionConcludedCapRate(testData.capRate);
 
             cy.stepInfo(`7. Make Sure Prospective Market Value As Stabilized (Amount) = NOI / Concluded Cap Rate`);
-            Income.CapRateConclusion.verifyAsStabilizedAmountCell();
+            Income._CapRateConclusion.verifyAsStabilizedAmountCell();
 
             cy.stepInfo(`8.Make Sure Prospective Market Value As Stabilized (Final Value) is Prospective Market Value 
             As Stabilized (Amount) rounded according to “Round to nearest” value`);
-            Income.CapRateConclusion.verifyAsStabilizedFinalValueCalculated();
+            Income._CapRateConclusion.verifyAsStabilizedFinalValueCalculated();
 
             cy.stepInfo(`[QA-5790] 9. Verify if Prospective Market Value As Stabilized Per SF is calculated with 
             correct formula based on selected Basis for Square Foot Analysis`);
-            Income.CapRateConclusion.verifyAsStabilizedFinalPerSFCalculated(testData.squareFootAnalysisArea);
+            Income._CapRateConclusion.verifyAsStabilizedFinalPerSFCalculated(testData.valueConclusionAsStabilized, 
+                testData.squareFootAnalysisArea);
 
             cy.stepInfo(`10. Add New Residential Rent Loss on As Stabilized tab and 
             New Commercial Rent Loss on As Stabilized tab`);
-            Income.CapRateConclusion.addNewRentLoss(testData.residentialUnitType, testData.residentialUnits, 
+            Income._CapRateConclusion.addNewRentLoss(testData.residentialUnitType, testData.residentialUnits, 
                 testData.valueConclusionAsStabilized);
-            Income.CapRateConclusion.addNewRentLoss(testData.commercialUnitType, testData.commercialUnits, 
+            Income._CapRateConclusion.addNewRentLoss(testData.commercialUnitType, testData.commercialUnits, 
                 testData.valueConclusionAsStabilized);
                 
             cy.stepInfo(`11. Fill in with valid numeric values:
@@ -75,31 +74,36 @@ describe("Validation of Market Values Per SF for ACAS reports",
             - Less Undetermined Commercial Rent Loss
             - Less Commission Fee
             - Less Entrepreneurial Profit`);
-            Income.CapRateConclusion.enterAsStabilizedCommissionFeeAmount(testData.lessCommissionFee)
+            Income._CapRateConclusion.enterAsStabilizedCommissionFeeAmount(testData.lessCommissionFee)
                 .enterAsStabilizedLessEntrepreneurialProfit(testData.entrepreneurialProfit)
-                .enterAsStabResRentLossTimePeriodByRow(testData.rentLossTimePeriod)
-                .enterAsStabCommercialRentLossTimePeriodByRow(testData.rentLossTimePeriod)
-                .enterAsStabCommercialUndeterminedRentLossTimePeriodByRow(testData.rentLossTimePeriod);
+                .enterAsStabResRentLossTimePeriodByRow(testData.rentLossTimePeriod, 
+                    testData.valueConclusionKeyAsStabilized)
+                .enterAsStabCommercialRentLossTimePeriodByRow(testData.rentLossTimePeriod, 
+                    testData.valueConclusionKeyAsStabilized)
+                .enterAsStabCommercialUndeterminedRentLossTimePeriodByRow(testData.rentLossTimePeriod, 
+                    testData.valueConclusionKeyAsStabilized);
 
             cy.stepInfo(`12. Make sure Prospective Market Value As Complete (Amount) =  
             Prospective Market Value As Stabilized (Amount) - Less Residential Rent Loss - 
             Less Commercial Rent Loss - Less Undetermined Commercial Rent Loss - 
             Less Commission Fee - Less Entrepreneurial Profit*`);
-            Income.CapRateConclusion.verifyProspectiveMarketValueAsCompleteCalculated();
+            Income._CapRateConclusion
+                .verifyProspectiveMarketValueAsCompleteCalculated(testData.valueConclusionKeyAsStabilized);
 
             cy.stepInfo(`13. Make sure Prospective Market Value As Complete (Final Value) = 
             Prospective Market Value As Complete (Amount) rounded according to “Round to nearest” value`);
-            Income.CapRateConclusion.verifyAsCompleteFinalValueCalculated();
+            Income._CapRateConclusion.verifyAsCompleteFinalValueCalculated();
 
             cy.stepInfo(`[QA-5791] 14. Verify if Prospective Market Value As Complete Per SF is calculated 
             with correct formula based on selected Basis for Square Foot Analysis`);
-            Income.CapRateConclusion.verifyAsCompleteFinalPerSFCalculated(testData.squareFootAnalysisArea);
+            Income._CapRateConclusion.verifyAsCompleteFinalPerSFCalculated(testData.valueConclusionAsComplete, 
+                testData.squareFootAnalysisArea);
 
             cy.stepInfo(`15. Add New Residential Rent Loss on As Complete tab and New Commercial 
             Rent Loss on As Complete tab `);
-            Income.CapRateConclusion.addNewRentLoss(testData.residentialUnitType, testData.residentialUnits, 
+            Income._CapRateConclusion.addNewRentLoss(testData.residentialUnitType, testData.residentialUnits, 
                 testData.valueConclusionAsComplete);
-            Income.CapRateConclusion.addNewRentLoss(testData.commercialUnitType, testData.commercialUnits, 
+            Income._CapRateConclusion.addNewRentLoss(testData.commercialUnitType, testData.commercialUnits, 
                 testData.valueConclusionAsComplete);
 
             cy.stepInfo(`16. Fill in with valid numeric values:
@@ -109,24 +113,27 @@ describe("Validation of Market Values Per SF for ACAS reports",
             - Renovation Budget ( on Property>Renovations page)
             - Less Buyout Cost
             - Less Entrepreneurial Profit*`);
-            Income.CapRateConclusion.enterAsCompleteResRentLossTimePeriodByRow(testData.rentLossTimePeriod)
-                .enterAsCompleteCommercialRentLossTimePeriodByRow(testData.rentLossTimePeriod)
-                .enterAsCompleteCommercialUndeterminedRentLossTimePeriodByRow(testData.rentLossTimePeriod)
+            Income._CapRateConclusion.enterAsCompleteResRentLossTimePeriodByRow(testData.rentLossTimePeriod, 
+                testData.valueConclusionKeyAsComplete)
+                .enterAsCompleteCommercialRentLossTimePeriodByRow(testData.rentLossTimePeriod, 
+                    testData.valueConclusionKeyAsComplete)
+                .enterAsCompleteCommercialUndeterminedRentLossTimePeriodByRow(testData.rentLossTimePeriod, 
+                    testData.valueConclusionKeyAsComplete)
                 .enterAsCompleteLessEntrepreneurialProfit(testData.entrepreneurialProfit)
                 .enterAsCompleteLessBuyoutCost(testData.lessBuyoutCost);
 
             cy.stepInfo(`17. Make sure As Is Market Value (Amount) = Prospective Market Value As Complete Per SF - 
             Less Residential Rent Loss - Less Commercial Rent Loss - Less Undetermined Commercial Rent Loss - 
             Renovation Budget ( on Property>Renovations page) - Less Buyout Cost - Less Entrepreneurial Profit*`);
-            Income.CapRateConclusion.verifyAsIsMarketValueCalculated();
+            Income._CapRateConclusion.verifyAsIsMarketValueCalculated(testData.valueConclusionKeyAsComplete);
 
             cy.stepInfo(`18. Make sure As Is Market Value (Final Value) =  As Is Market Value (Amount) 
             rounded according to “Round to nearest” value`);
-            Income.CapRateConclusion.verifyAsIsFinalValueCalculated();
+            Income._CapRateConclusion.verifyAsIsFinalValueCalculated();
 
             cy.stepInfo(`[QA-5784] 19. Verify if  As Is Market Value Per SF  is calculated with correct formula 
             based on selected Basis for Square Foot Analysis`);
-            Income.CapRateConclusion.verifyAsIsMarketPerSFCalculated(testData.squareFootAnalysisArea);
+            Income._CapRateConclusion.verifyAsIsMarketPerSFCalculated(testData.squareFootAnalysisArea);
         });
 
         after(`Remove feature flag`, () => {
