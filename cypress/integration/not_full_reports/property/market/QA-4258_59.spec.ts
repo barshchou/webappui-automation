@@ -1,5 +1,5 @@
 import testData from "../../../../fixtures/not_full_reports/property/market/QA-4258_59.fixture";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { Property } from "../../../../actions";
 import Enums from "../../../../enums/enums";
@@ -7,13 +7,14 @@ import Enums from "../../../../enums/enums";
 
 describe("Verify area analysis pull from dropbox", { tags: [ "@property", "@market" ] }, () => {
 
-    before("Login, create report", () => {
+    beforeEach("Login, create report", () => {
         createReport(testData.reportCreationData);
     });
 
-    it(`[QA-4259] Verify if there is no area analysis to be pulled in for the input quarter/year - error that the 
-             file does not exist appears
-             [QA-4258] Check if there is no area analysis pulled in, the most recent quarter/year is pulled from DropBox`, () => {
+    it(`[QA-4259] Verify if there is no area analysis to be pulled in for the input quarter/year - 
+    error that the file does not exist appears
+    [QA-4258] Check if there is no area analysis pulled in, the most recent 
+    quarter/year is pulled from DropBox`, () => {
 
         cy.stepInfo("1. Navigate to Property -> Market");
         _NavigationSection.navigateToPropertyMarket();
@@ -27,7 +28,5 @@ describe("Verify area analysis pull from dropbox", { tags: [ "@property", "@mark
         Property._Market.enterMarketQuarter(testData.quarterToChange)
             .clickPullFromDropbox()
             .verifyAreaEconomicAnalysisHasFile(testData.quarterToVerify);
-
-        deleteReport(testData.reportCreationData.reportNumber);
     });
 });

@@ -8,7 +8,8 @@ const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreat
     conclusionValue: Enums.VALUE_CONCLUSION_TYPE.AS_COMPLETE
 });
 
-const _ceilingHeightValues: Array<BoweryReports.CommercialUnits.CeilingHeightValues> = [ "low", "normal", "high", "other" ];
+const _ceilingHeightValues: Array<BoweryReports.CommercialUnits.CeilingHeightValues> = 
+    [ "low", "normal", "high", "other" ];
 const _groupName: BoweryReports.CommercialUnits.Groups = "Ceiling Height";
 
 export default {

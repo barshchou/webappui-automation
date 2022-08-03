@@ -80,7 +80,7 @@ class RentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
     }
 
     changeStateOfCheckboxByQaAttr(attribute: string | number, isToCheck = true): RentCompsActions {
-        if(isToCheck) {
+        if (isToCheck) {
             rentCompsPage.getCheckboxByDataQaAttr(attribute)
                 .should("have.value", "false").check({ force: true }).should("have.value", "true");
         } else {
@@ -160,6 +160,10 @@ class RentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
             case "maxSF":
                 inputField = rentCompsPage.maxSquareFeet;
                 placeholder = "5,000";
+                break;
+            default:
+                cy.log('Incorrect field name was provided');
+                break;
         }
         inputField.scrollIntoView().should("be.visible").should("have.attr", "placeholder", placeholder)
             .type(value);
@@ -191,6 +195,10 @@ class RentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
                 break;
             case "maxSF":
                 inputField = rentCompsPage.maxSquareFeet;
+                break;
+            default:
+                cy.log('Incorrect field name was provided');
+                break;
         }
         inputField.should("have.value", valueToBe);
         return this;
@@ -209,6 +217,10 @@ class RentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
                 break;
             case "maxSF":
                 rentCompsPage.maxSquareFeet.clear();
+                break;
+            default:
+                cy.log('Incorrect field name was provided');
+                break;
         }
         return this;
     }
@@ -302,20 +314,20 @@ class RentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
     }
 
     selectSortByOptionByValue(value: string): RentCompsActions {
-        this.verifyLoadingDoesntExist();
+        this.verifyLoadingDoesNotExist();
         rentCompsPage.sortByDropdown.should("be.visible").click({ force: true });
         rentCompsPage.getSortDropdownOptionByValue(value).click();
         rentCompsPage.sortByDropdown.should("have.text", value);
         return this;
     }
 
-    verifyLoadingDoesntExist(): RentCompsActions {
+    verifyLoadingDoesNotExist(): RentCompsActions {
         rentCompsPage.loadingModal.should("not.exist");
         return this;
     }
 
     verifyPhotosExistAndNavigateByPhotos(comparableIndex: number): RentCompsActions {
-        this.verifyLoadingDoesntExist();
+        this.verifyLoadingDoesNotExist();
         rentCompsPage.comparableItems.eq(comparableIndex).then($item => {
             cy.wrap($item).find(rentCompsPage.photoElementLocator).then($photos => {
                 this.navigateThroughAllPhotosInComparable($photos, comparableIndex)
@@ -326,7 +338,7 @@ class RentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
     }
 
     navigateThroughAllPhotosInComparable(jQueryPhotoElements: JQuery<HTMLElement>, comparableIndex: number,
-                                         direction = "forward"): RentCompsActions {
+        direction = "forward"): RentCompsActions {
         let numberOfPhotos = jQueryPhotoElements.length;
         let style = "";
         for (let i = 0; i < numberOfPhotos; i++) {
@@ -339,7 +351,7 @@ class RentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
             } else {
                 rentCompsPage.prevPhotoButtons.eq(comparableIndex).realClick();
             }
-            this.verifyLoadingDoesntExist();
+            this.verifyLoadingDoesNotExist();
             style = currentStyle;
         }
         return this;
@@ -353,14 +365,14 @@ class RentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
     clickZoomInButton(): RentCompsActions {
         rentCompsPage.zoomInButton.click();
         this.verifyLoadingModalExist()
-            .verifyLoadingDoesntExist();
+            .verifyLoadingDoesNotExist();
         return this;
     }
 
     clickZoomOutButton(): RentCompsActions {
         rentCompsPage.zoomOutButton.click();
         this.verifyLoadingModalExist()
-            .verifyLoadingDoesntExist();
+            .verifyLoadingDoesNotExist();
         return this;
     }
 
@@ -412,7 +424,7 @@ class RentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
     }
 
     openAddNewComparableForm(address: string, searchResIndex = 0): RentCompsActions {
-        this.verifyLoadingDoesntExist();
+        this.verifyLoadingDoesNotExist();
         rentCompsPage.addNewRentCompButton.scrollIntoView().should("be.enabled").click();
         rentCompsPage.findRentCompSection.should("be.visible");
         rentCompsPage.submitButton.should("be.disabled");
@@ -426,8 +438,9 @@ class RentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
         return this;
     }
 
-    openAddNewComparableFormAdvanced(comparableData: Readonly<{ state: string, address: string, id: string | number }>): RentCompsActions {
-        this.verifyLoadingDoesntExist();
+    openAddNewComparableFormAdvanced(comparableData: Readonly<{ state: string, address: string, 
+        id: string | number }>): RentCompsActions {
+        this.verifyLoadingDoesNotExist();
         rentCompsPage.addNewRentCompButton.scrollIntoView().click();
         rentCompsPage.advancedSearchButton.click();
         rentCompsPage.selectStateButton.click();
@@ -440,7 +453,8 @@ class RentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
         return this;
     }
 
-    private verifyCellText(rowJQueryEl: JQuery<HTMLElement>, cellLocator: string, textToBe: string | number): RentCompsActions {
+    private verifyCellText(rowJQueryEl: JQuery<HTMLElement>, cellLocator: string, 
+        textToBe: string | number): RentCompsActions {
         cy.wrap(rowJQueryEl).find(cellLocator).should("have.text", textToBe);
         return this;
     }
@@ -450,9 +464,11 @@ class RentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
         return this;
     }
 
-    verifyComparableBedroomTableByNumber(index: number, rentCompData: Readonly<{ bedrooms: number | string, rooms: number | string,
-                                        monthly: string | number, sourceInfoCheck: string, address: string }>): RentCompsActions {
-        rentCompsPage.getBedroomTableByNumber(rentCompData.bedrooms).find(rentCompsPage.getCategoryRowByIndexLocator(index))
+    verifyComparableBedroomTableByNumber(index: number, rentCompData: Readonly<{ bedrooms: number | string, 
+        rooms: number | string, monthly: string | number, sourceInfoCheck: string, 
+        address: string }>): RentCompsActions {
+        rentCompsPage.getBedroomTableByNumber(rentCompData.bedrooms)
+            .find(rentCompsPage.getCategoryRowByIndexLocator(index))
             .then(row => {
                 this.verifyCompRowDefaultCells(row, rentCompData, index);
             });
@@ -460,7 +476,7 @@ class RentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
     }
 
     verifyComparableUncategorizedDefaultCellsByRow(rowIndex: number, rentCompData: Readonly<{bedrooms: number | string,
-                    rooms: number | string, monthly: string | number, sourceInfoCheck: string, address: string}>): RentCompsActions {
+    rooms: number | string, monthly: string | number, sourceInfoCheck: string, address: string}>): RentCompsActions {
         rentCompsPage.uncategorizedTable.find(rentCompsPage.getCategoryRowByIndexLocator(rowIndex)).then(row => {
             this.verifyCompRowDefaultCells(row, rentCompData, rowIndex);
         });
@@ -524,7 +540,7 @@ class RentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
     }
 
     private verifyRentPsfSfCompRowCells(JQueryRowElement: JQuery<HTMLElement>,
-                                        rentCompData: Readonly<{squareFootage: number | string, rentPSF: number | string}>): RentCompsActions {
+        rentCompData: Readonly<{squareFootage: number | string, rentPSF: number | string}>): RentCompsActions {
         const sfText = typeof rentCompData.squareFootage === "string" ? rentCompData.squareFootage :
             numberWithCommas(rentCompData.squareFootage);
         this.verifyCellText(JQueryRowElement, rentCompsPage.squareFootageCellsLocator, sfText);
@@ -534,9 +550,9 @@ class RentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
         return this;
     }
 
-    private verifyCompRowDefaultCells(JQueryRowElement: JQuery<HTMLElement>, rentCompData: Readonly<{bedrooms: number | string,
-        rooms: number | string, monthly: string | number, sourceInfoCheck: string, address: string}>, rowIndex: number): RentCompsActions {
-
+    private verifyCompRowDefaultCells(JQueryRowElement: JQuery<HTMLElement>, 
+        rentCompData: Readonly<{bedrooms: number | string, rooms: number | string, monthly: string | number, 
+        sourceInfoCheck: string, address: string}>, rowIndex: number): RentCompsActions {
         this.verifyCellExist(JQueryRowElement, rentCompsPage.moveCellLocator);
         this.verifyCellText(JQueryRowElement, rentCompsPage.indexCellLocator, `${rowIndex + 1}`);
         this.verifyCellText(JQueryRowElement, rentCompsPage.unitAddressLocator, rentCompData.address);
@@ -560,7 +576,8 @@ class RentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
         return this;
     }
 
-    private verifyBathroomsCompRowCell(JQueryRowElement: JQuery<HTMLElement>, bathroomsNumber: string | number): RentCompsActions {
+    private verifyBathroomsCompRowCell(JQueryRowElement: JQuery<HTMLElement>, 
+        bathroomsNumber: string | number): RentCompsActions {
         this.verifyCellText(JQueryRowElement, rentCompsPage.bathroomsCellsLocator, bathroomsNumber);
         return this;
     }

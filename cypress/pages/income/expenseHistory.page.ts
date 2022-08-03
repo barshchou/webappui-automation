@@ -2,7 +2,7 @@ import BasePage from "../base/base.page";
 
 class ExpenseHistoryPage extends BasePage {
 
-    get expensePeriodDropdown() { return cy.get("[data-qa=expensePeriod-select-list] [data-qa=select-value]"); }
+    get expensePeriodDropdown() { return cy.get("#expensePeriod"); }
 
     getDropdownOptionByValue(value: string) { return cy.get(`li[data-value='${value}']`); }
 
@@ -12,12 +12,13 @@ class ExpenseHistoryPage extends BasePage {
 
     get expenseHistoryCommentary() { return cy.get("[data-qa^='expenseHistoryDiscussion.commentary']"); }
 
-    get expenseMonth() { return cy.get("[data-qa=expenseMonth-form-control] input"); }
+    get expenseMonthDropdown() { return cy.get("#expenseMonth"); }
 
-    get expenseMonthProjection() { return cy.get("[data-qa='autosuggest-text-input-field'] input"); }
+    expenseMonthDropdownValue(month: string) { return  cy.xpath(`//li[.='${month}']`); }
 
     getUnifiedEditableAndTotalCells(cellName: string) {
-        return cy.get(`[row-id=${cellName}] [role=gridcell]:not([col-id=average]):not([col-id=name]):not([col-id=row-action])`);
+        return cy.get(`[row-id=${cellName}] [role=gridcell]:not([col-id=average])` + 
+        `:not([col-id=name]):not([col-id=row-action])`);
     }
 
     getUnifiedAverageCell(cellName: string) { return cy.get(`[row-id=${cellName}] [col-id=average]`); }

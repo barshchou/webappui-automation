@@ -1,12 +1,11 @@
-
-import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../../actions/base/baseTest.actions";
 import { Property, Income } from "../../../../../actions";
 import { _NavigationSection } from "../../../../../actions/base";
 import testData from "../../../../../fixtures/not_full_reports/income/commercial/reimbursement_summary/QA-4993.fixture";
 
 describe(`Verify that the user can reimburse based on a Utilities expense and the reimbursement 
         settings structure mirrors that of existing utilities expenses`,
-    { tags: [ "@income", "@expense_forecast", "@reimbursement_summary" ] }, () => {
+{ tags: [ "@income", "@expense_forecast", "@reimbursement_summary" ] }, () => {
 
     beforeEach('Create and setup report', () => {
         cy.stepInfo(`Preconditions: 1. Create a mixed-use report and add commercial units`);
@@ -15,18 +14,21 @@ describe(`Verify that the user can reimburse based on a Utilities expense and th
         Property._Summary.enterGrossBuildingArea(testData.grossBuildingArea)
             .enterNumberOfCommercialUnits(testData.numberOfCommercialUnits);
         _NavigationSection.navigateToCommercialUnits();
-        Property._CommercialUnits.enterListUnitSF(testData.commercialUnits.unitsSF, testData.commercialUnits.commercialUnitsNumber);
+        Property._CommercialUnits.enterListUnitSF(testData.commercialUnits.unitsSF, 
+            testData.commercialUnits.commercialUnitsNumber);
     });
     
     it(`[QA-4993] User changes to Broken Out utilities -> verify expense reimbursements non existence`, () => {
-        cy.stepInfo(`Steps: 1. Go to Income > Expense History page and select Combined Electricity, Fuel, Water & Sewer radio button`);
+        cy.stepInfo(`Steps: 1. Go to Income > Expense History page and 
+        select Combined Electricity, Fuel, Water & Sewer radio button`);
         _NavigationSection.navigateToExpenseHistory();
         Income._ExpenseHistory.checkUtilitiesExpensesOption(testData.utilitiesCombinedExpenseOption);
 
         cy.stepInfo(`2. Go to Income > Expense Forecast page and check “Include Expense 
                     on Pro Forma” checkbox for all Expense Forecasts.`);
         _NavigationSection.navigateToExpenseForecast();
-        Income._ExpenseForecastActions.setIncludeInProformaCheckbox(testData.expenseForecastUtilitiesFixture.cardName, true)
+        Income._ExpenseForecastActions
+            .setIncludeInProformaCheckbox(testData.expenseForecastUtilitiesFixture.cardName, true)
             .enterForecastItemForecast(testData.expenseForecastUtilitiesFixture);
 
         cy.stepInfo(`3. Go to Income > Commercial > Reimbursement Summary`);
@@ -91,14 +93,10 @@ describe(`Verify that the user can reimburse based on a Utilities expense and th
         _NavigationSection.navigateToCommercialReimbursementSummary();
         testData.brokenOutExpensesFixture.forEach(expense => {
             Income._CommercialManager.ReimbursementSummary
-            .verifyReimbursementItemExistence(expense.expenseForecast.expenseUIName, false);
+                .verifyReimbursementItemExistence(expense.expenseForecast.expenseUIName, false);
         });
 
         _NavigationSection.navigateToProForma();
         Income._ProFormaActions.verifyExpensesCombined(testData.utilitiesCombinedExpenseOption);
-    });
-
-    afterEach('Delete report', () => {
-        deleteReport(testData.reportCreationData.reportNumber);
     });
 });

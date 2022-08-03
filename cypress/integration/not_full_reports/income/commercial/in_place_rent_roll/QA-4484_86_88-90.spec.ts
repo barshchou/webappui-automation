@@ -1,14 +1,13 @@
 import { numberWithCommas } from "../../../../../../utils/numbers.utils";
-import testData from "../../../../../fixtures/not_full_reports/income/commercial/in_place_rent_roll/QA-4484_86_88-90.fixture";
+import testData from 
+    "../../../../../fixtures/not_full_reports/income/commercial/in_place_rent_roll/QA-4484_86_88-90.fixture";
 import { Income, Property, ReviewExport } from "../../../../../actions";
 import { _NavigationSection } from "../../../../../actions/base";
-import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../../actions/base/baseTest.actions";
 
 describe(`[Income > Commercial > In-Place Rent Roll > Generated Commentary]
         Verify the suggested text dropdown`,
-        { tags:[ "@income", "@commercial", "@in_place_rent_roll", "@check_export" ] }, () => {
-
-    const url = `${Cypress.config().baseUrl}`;            
+{ tags:[ "@income", "@commercial", "@in_place_rent_roll", "@check_export" ] }, () => {
 
     it("[QA-4484], [QA-4486]", () => {
         cy.stepInfo(`1. Login, create report and proceed to the 
@@ -29,14 +28,11 @@ describe(`[Income > Commercial > In-Place Rent Roll > Generated Commentary]
             Income._CommercialManager.InPlaceRentRoll
                 .verifyCommentaryContainsText(data.verifyAreaValue);
         });
-
-        deleteReport(testData.reportCreationDataAsIs.reportNumber);
     });
 
     it("[QA-4488] As Is", () => {
         cy.stepInfo(`Preconditions: The mixed report is created and several commercial units are added.`);
         createReport(testData.reportCreationDataAsIs);
-
         _NavigationSection.navigateToPropertySummary();
         Property._Summary.enterNumberOfCommercialUnits(testData.numberOfCommercialUnits)
             .enterNumberOfResUnits(testData.numberOfResidentialUnits)
@@ -46,7 +42,7 @@ describe(`[Income > Commercial > In-Place Rent Roll > Generated Commentary]
 
         cy.stepInfo("1. Proceed to the Income > Commercial > In-Place Rent Roll page.");
         _NavigationSection.navigateToCommercialInPlaceRentRoll();
-        for(let i=0; i < testData.numberOfCommercialUnits; i++) {
+        for (let i = 0; i < testData.numberOfCommercialUnits; i++) {
             Income._CommercialManager.InPlaceRentRoll
                 .chooseLeaseStatusByRowNumber(testData.leaseStatus, i);
         }
@@ -56,10 +52,10 @@ describe(`[Income > Commercial > In-Place Rent Roll > Generated Commentary]
             .clickEditDiscussionButton();
 
         cy.stepInfo("3. Enter the “=“ and select the an option. Verify each option.");
-        testData.asIschips.forEach((chip) => {
+        testData.asIsChips.forEach((chip) => {
             Income._CommercialManager.InPlaceRentRoll.editDiscussionTextArea(`=${chip.typeSuggestValue}`, false)
-            .clickNarrativeSuggestions(chip.suggestionName)
-            .verifyCommentaryContainsText(chip.verifySuggest);
+                .clickNarrativeSuggestions(chip.suggestionName)
+                .verifyCommentaryContainsText(chip.verifySuggest);
         });
         Income._CommercialManager.InPlaceRentRoll.clickSaveDiscussionButton()
             .verifyProgressBarNotExist();
@@ -67,27 +63,27 @@ describe(`[Income > Commercial > In-Place Rent Roll > Generated Commentary]
         _NavigationSection.openReviewAndExport();
         ReviewExport.generateDocxReport().waitForReportGenerated()
             .downloadAndConvertDocxReport(testData.reportCreationDataAsIs.reportNumber);
-
-        deleteReport(testData.reportCreationDataAsIs.reportNumber);
     });
 
     it("[QA-4488] Check export", () => {
-        Cypress.config().baseUrl = null;
-        cy.task("getFilePath", { _reportName: testData.reportCreationDataAsIs.reportNumber, _docx_html: "html" }).then(file => {
-            cy.log(<string>file);
-            cy.stepInfo("4. Verify the linked chips on export");
-            cy.visit(<string>file);
-            testData.asIschips.forEach(chip => {
-                let expectedText = typeof chip.verifyExport ===  "number" ? `${numberWithCommas(chip.verifyExport)}`: chip.verifyExport;
-                cy.contains("Current Commercial Rent Roll").next().scrollIntoView().should("include.text", expectedText);
-            });
-        }); 
+        cy.task("getFilePath", { _reportName: testData.reportCreationDataAsIs.reportNumber, _docxHtml: "html" })
+            .then(file => {
+                cy.log(<string>file);
+                cy.stepInfo("4. Verify the linked chips on export");
+                cy.visit(<string>file);
+                testData.asIsChips.forEach(chip => {
+                    let expectedText = typeof chip.verifyExport ===  "number" 
+                        ? `${numberWithCommas(chip.verifyExport)}`
+                        : chip.verifyExport;
+                    cy.contains("Current Commercial Rent Roll")
+                        .next().scrollIntoView().should("include.text", expectedText);
+                });
+            }); 
     });
 
     it("[QA-4489] As Stabilized", () => {
-        Cypress.config().baseUrl = url;
         cy.stepInfo(`Preconditions: The mixed report is created and several commercial units are added.`);
-        createReport(testData.reportCreationDataAsStablized);
+        createReport(testData.reportCreationDataAsStabilized);
 
         _NavigationSection.navigateToPropertySummary();
         Property._Summary.enterNumberOfCommercialUnits(testData.numberOfCommercialUnits)
@@ -98,7 +94,7 @@ describe(`[Income > Commercial > In-Place Rent Roll > Generated Commentary]
 
         cy.stepInfo("1. Proceed to the Income > Commercial > In-Place Roll page.");
         _NavigationSection.navigateToCommercialInPlaceRentRoll();
-        for(let i=0; i < testData.numberOfCommercialUnits; i++) {
+        for (let i=0; i < testData.numberOfCommercialUnits; i++) {
             Income._CommercialManager.InPlaceRentRoll
                 .chooseLeaseStatusByRowNumber(testData.leaseStatus, i);
         }
@@ -110,34 +106,34 @@ describe(`[Income > Commercial > In-Place Rent Roll > Generated Commentary]
         cy.stepInfo("3. Enter the “=“ and select the an option. Verify each option.");
         testData.asStabilizedChips.forEach((chip) => {
             Income._CommercialManager.InPlaceRentRoll.editDiscussionTextArea(`=${chip.typeSuggestValue}`, false)
-            .clickNarrativeSuggestions(chip.suggestionName)
-            .verifyCommentaryContainsText(chip.verifySuggest);
+                .clickNarrativeSuggestions(chip.suggestionName)
+                .verifyCommentaryContainsText(chip.verifySuggest);
         });
         Income._CommercialManager.InPlaceRentRoll.clickSaveDiscussionButton()
             .verifyProgressBarNotExist();
 
         _NavigationSection.openReviewAndExport();
         ReviewExport.generateDocxReport().waitForReportGenerated()
-            .downloadAndConvertDocxReport(testData.reportCreationDataAsStablized.reportNumber);
-
-        deleteReport(testData.reportCreationDataAsStablized.reportNumber);
+            .downloadAndConvertDocxReport(testData.reportCreationDataAsStabilized.reportNumber);
     });
 
     it("[QA-4489] Check export", () => {
-        Cypress.config().baseUrl = null;
-        cy.task("getFilePath", { _reportName: testData.reportCreationDataAsIs.reportNumber, _docx_html: "html" }).then(file => {
-            cy.log(<string>file);
-            cy.stepInfo("4. Verify the linked chips on export");
-            cy.visit(<string>file);
-            testData.asStabilizedChips.forEach(chip => {
-                let expectedText = typeof chip.verifyExport ===  "number" ? `${numberWithCommas(chip.verifyExport)}`: chip.verifyExport;
-                cy.contains("Current Commercial Rent Roll").next().scrollIntoView().should("include.text", expectedText);
-            });
-        }); 
+        cy.task("getFilePath", { _reportName: testData.reportCreationDataAsIs.reportNumber, _docxHtml: "html" })
+            .then(file => {
+                cy.log(<string>file);
+                cy.stepInfo("4. Verify the linked chips on export");
+                cy.visit(<string>file);
+                testData.asStabilizedChips.forEach(chip => {
+                    let expectedText = typeof chip.verifyExport ===  "number" 
+                        ? `${numberWithCommas(chip.verifyExport)}`
+                        : chip.verifyExport;
+                    cy.contains("Current Commercial Rent Roll").next().scrollIntoView()
+                        .should("include.text", expectedText);
+                });
+            }); 
     });
 
     it("[QA-4490] As Completed", () => {
-        Cypress.config().baseUrl = url;
         cy.stepInfo(`Preconditions: The mixed report is created and several commercial units are added.`);
         createReport(testData.reportCreationDataAsComplete);
 
@@ -152,7 +148,7 @@ describe(`[Income > Commercial > In-Place Rent Roll > Generated Commentary]
 
         cy.stepInfo("1. Proceed to the Income > Commercial > In-Place Rent Roll page.");
         _NavigationSection.navigateToCommercialInPlaceRentRoll();
-        for(let i=0; i < testData.numberOfCommercialUnits; i++) {
+        for (let i=0; i < testData.numberOfCommercialUnits; i++) {
             Income._CommercialManager.InPlaceRentRoll
                 .chooseLeaseStatusByRowNumber(testData.leaseStatus, i);
         }
@@ -164,8 +160,8 @@ describe(`[Income > Commercial > In-Place Rent Roll > Generated Commentary]
         cy.stepInfo("3. Enter the “=“ and select the an option. Verify each option.");
         testData.asCompletedChips.forEach((chip) => {
             Income._CommercialManager.InPlaceRentRoll.editDiscussionTextArea(`=${chip.typeSuggestValue}`, false)
-            .clickNarrativeSuggestions(chip.suggestionName)
-            .verifyCommentaryContainsText(chip.verifySuggest);
+                .clickNarrativeSuggestions(chip.suggestionName)
+                .verifyCommentaryContainsText(chip.verifySuggest);
         });
         Income._CommercialManager.InPlaceRentRoll.clickSaveDiscussionButton()
             .verifyProgressBarNotExist();
@@ -173,21 +169,22 @@ describe(`[Income > Commercial > In-Place Rent Roll > Generated Commentary]
         _NavigationSection.openReviewAndExport();
         ReviewExport.generateDocxReport().waitForReportGenerated()
             .downloadAndConvertDocxReport(testData.reportCreationDataAsComplete.reportNumber);
-
-        deleteReport(testData.reportCreationDataAsComplete.reportNumber);
     });
 
     it("[QA-4490] Check export", () => {
-        Cypress.config().baseUrl = null;
-        cy.task("getFilePath", { _reportName: testData.reportCreationDataAsIs.reportNumber, _docx_html: "html" }).then(file => {
-            cy.log(<string>file);
-            cy.stepInfo("4. Verify the linked chips on export");
-            cy.visit(<string>file);
-            testData.asCompletedChips.forEach(chip => {
-                let expectedText = typeof chip.verifyExport ===  "number" ? `${numberWithCommas(chip.verifyExport)}`: chip.verifyExport;
-                cy.contains("Current Commercial Rent Roll").next().scrollIntoView().should("include.text", expectedText);
-            });
-        }); 
+        cy.task("getFilePath", { _reportName: testData.reportCreationDataAsIs.reportNumber, _docxHtml: "html" })
+            .then(file => {
+                cy.log(<string>file);
+                cy.stepInfo("4. Verify the linked chips on export");
+                cy.visit(<string>file);
+                testData.asCompletedChips.forEach(chip => {
+                    let expectedText = typeof chip.verifyExport ===  "number" 
+                        ? `${numberWithCommas(chip.verifyExport)}`
+                        : chip.verifyExport;
+                    cy.contains("Current Commercial Rent Roll").next().scrollIntoView()
+                        .should("include.text", expectedText);
+                });
+            }); 
     });
 
 });

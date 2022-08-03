@@ -1,8 +1,8 @@
 import Enums from "../../../../enums/enums";
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 
-const _comment = "In July 2021, the City Council set the fiscal year 2021/22 (7/1/2021 – 6/30/2022) property tax rates. " +
-"The new tax rates were not in place for the July 1, 2021 tax bills; as such, " +
+const _comment = "In July 2021, the City Council set the fiscal year 2021/22 (7/1/2021 – 6/30/2022)" + 
+" property tax rates. The new tax rates were not in place for the July 1, 2021 tax bills; as such, " +
 "the previous year tax rate was initially applied to the July 2021 tax bills and adjustments were " +
 "then made to subsequent tax bills to reflect the change in rate for any overpayment or underpayment. " +
 "The new tax rates are reflected in the second half of tax year bills, " +
@@ -12,7 +12,7 @@ const _comment = "In July 2021, the City Council set the fiscal year 2021/22 (7/
 "to the most recent assessed value of the property to determine its current tax liability.";
 
 export default {
-    reportCreationData: ReportDataCreator.getReportData("5183", { address: "" }),
+    reportCreationData: ReportDataCreator.getReportData("5182", { address: "" }),
     title: "Tax Calculation Discussion",
     commentary: _comment,
     featureFlagKey: Enums.FEATURE_FLAG_KEYS.flexibleTaxes,

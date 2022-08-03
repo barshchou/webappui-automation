@@ -1,25 +1,25 @@
 import testData from "../../../../fixtures/not_full_reports/income/expense_forecast/QA-4876.fixture";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Property from "../../../../actions/property/property.manager";
 import Income from "../../../../actions/income/income.manager";
 import tableExpenseHistoryCellNames from "../../../../../cypress/enums/expense/expenseHistoryTableRows.enum";
 
 describe("Historical expense Electricity Per SF is correctly calculated and displayed",
-        { tags: [ "@snapshot_tests", "@expense_forecast", "@income" ] }, () => {
+    { tags: [ "@snapshot_tests", "@expense_forecast", "@income" ] }, () => {
 
-        before("Login, create report", () => {
+        beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);
         });
 
         it("Test body", () => {
-            cy.stepInfo("1. Navigate to Property -> Summary and enter gross building area");
+            cy.stepInfo(`1. Navigate to Property -> Summary and enter gross building area`);
             NavigationSection.navigateToPropertySummary();
             Property.Summary.enterGrossBuildingArea(testData.buildingDescription.grossArea)
                 .enterNumberOfResUnits(testData.buildingDescription.numberOfUnits);
 
-            cy.stepInfo(
-                "2. Add columns for all types of Expense Period: Actual, Actual T12, Annualized Historical and Projection");
+            cy.stepInfo(`2. Add columns for all types of Expense Period: 
+            Actual, Actual T12, Annualized Historical and Projection`);
             NavigationSection.navigateToExpenseHistory();
             Income.ExpenseHistory.selectExpensePeriod(testData.actual.periodValue)
                 .verifyExpenseMonth(testData.actual.month, testData.actual.periodValue)
@@ -38,33 +38,39 @@ describe("Historical expense Electricity Per SF is correctly calculated and disp
                 .verifyExpenseYear(testData.projection.expenseYear)
                 .clickAddExpenseYearButton();
 
-            cy.stepInfo("3. Fill in Electricity field for all added columns and save changes");
-            Income.ExpenseHistory.enterIssueByColIndex(testData.actual.electricityExpense, tableExpenseHistoryCellNames.electricity, 3)
+            cy.stepInfo(`3. Fill in Electricity field for all added columns and save changes`);
+            Income.ExpenseHistory
+                .enterIssueByColIndex(testData.actual.electricityExpense, tableExpenseHistoryCellNames.electricity, 3)
                 .enterIssueByColIndex(testData.t12.electricityExpense, tableExpenseHistoryCellNames.electricity, 2)
-                .enterIssueByColIndex(testData.historical.electricityExpense, tableExpenseHistoryCellNames.electricity, 1)
-                .enterIssueByColIndex(testData.projection.electricityExpense, tableExpenseHistoryCellNames.electricity, 0);
+                .enterIssueByColIndex(testData.historical.electricityExpense, 
+                    tableExpenseHistoryCellNames.electricity, 1)
+                .enterIssueByColIndex(testData.projection.electricityExpense, 
+                    tableExpenseHistoryCellNames.electricity, 0);
             NavigationSection.navigateToExpenseForecast();
 
-            cy.stepInfo("4. Go to Expense Forecast and make sure that Per SF radiobutton is selected for Electricity card");
-            Income.ExpenseForecast.Actions.verifyForecastItemBasis(testData.actualElectricityItem)
-                .verifyForecastItemByExpensePeriodType(testData.actualElectricityItem, testData.buildingDescription, "Actual")
-                .verifyForecastItemByExpensePeriodType(testData.t12ElectricityItem, testData.buildingDescription, "Actual T12")
-                .verifyForecastItemByExpensePeriodType(testData.historicalElectricityItem, testData.buildingDescription, "Annualized Historical")
-                .verifyForecastItemByExpensePeriodType(testData.ownerProjectionElectricityItem, testData.buildingDescription, "Owner's Projection")
+            cy.stepInfo(`4. Go to Expense Forecast and make sure that Per SF radio 
+            button is selected for Electricity card`);
+            Income.ExpenseForecast.Actions
+                .verifyForecastItemBasis(testData.actualElectricityItem)
+                .verifyForecastItemByExpensePeriodType(testData.actualElectricityItem, 
+                    testData.buildingDescription, "Actual")
+                .verifyForecastItemByExpensePeriodType(testData.t12ElectricityItem, 
+                    testData.buildingDescription, "Actual T12")
+                .verifyForecastItemByExpensePeriodType(testData.historicalElectricityItem, 
+                    testData.buildingDescription, "Annualized Historical")
+                .verifyForecastItemByExpensePeriodType(testData.ownerProjectionElectricityItem, 
+                    testData.buildingDescription, "Owner's Projection")
                 .hideHeader()
                 .clickSaveButton()
                 .verifyProgressBarNotExist();
 
 
-            cy.stepInfo(`
-        5. Check historical expenses values for Electricity card. They should be:
+            cy.stepInfo(`5. Check historical expenses values for Electricity card. They should be:
             5.1 calculated for each expense type as: [Expense Period type]Electricity / GBA
-            5.2 correctly displayed on slidebars
-        `);
+            5.2 correctly displayed on slide bars`);
             Income.ExpenseForecast.Actions.matchElementSnapshot(
-                Income.ExpenseForecast.Page.electricityCard, testData.electricityCardSnapshotName, { padding: [ 0, 100 ] }
+                Income.ExpenseForecast.Page.electricityCard, testData.electricityCardSnapshotName, 
+                { padding: [ 10, 100 ] }
             );
-
-            deleteReport(testData.reportCreationData.reportNumber);
         });
     });

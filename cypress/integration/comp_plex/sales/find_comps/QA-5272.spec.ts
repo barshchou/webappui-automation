@@ -2,9 +2,14 @@ import { salesInterceptions } from "../../../../actions/base/baseTest.actions";
 import { Sales, CompPlex } from "../../../../actions";
 import testData from "../../../../fixtures/comp_plex/sales/find_comps/QA-5272.fixture";
 
-describe("[QA-5272]", () => {
+/*
+ * TODO: - Un-ignore test when standalone comp_plex will be ready 
+ *       - Exclude test from general regression 
+ *       - Include this test and probably other into comp_plex regression run on separate (standalone) environment
+ */
+describe.skip("[QA-5272]", () => {
 
-    before(() => {
+    beforeEach(() => {
         /**
          * ernst: this tests should run only on standalone comp_plex 
          * (localhost or client's url whatever)
@@ -18,14 +23,14 @@ describe("[QA-5272]", () => {
     Check that following fields are disabled in the edit mode `,
     { tags: "@comp-plex-standalone" }, () => {
         Sales._FindComps.selectCompFromMapByAddress(testData.address);
-        CompPlex.Page.getsalesCompDetails(testData.address).click();
+        CompPlex.Page.getSalesCompDetails(testData.address).click();
         
         Sales._FindComps.Page.propertyInfoEditBtn.should("be.visible").click();
-        Sales._FindComps.Page.streetAdderssInput.should("be.disabled");
+        Sales._FindComps.Page.streetAddressInput.should("be.disabled");
         Sales._FindComps.Page.cityInput.should("be.disabled");
         Sales._FindComps.Page.stateInput.should("be.disabled");
         Sales._FindComps.Page.postalCodeInput.should("be.disabled");
         Sales._FindComps.Page.propertyIdInput.should("be.disabled");
-        Sales._FindComps.Page.propertyIdTypeInput.should("be.disabled");        
+        Sales._FindComps.Page.propertyIdTypeInput.should("be.disabled");
     });
 });

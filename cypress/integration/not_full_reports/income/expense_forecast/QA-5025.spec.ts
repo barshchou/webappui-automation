@@ -1,7 +1,7 @@
 import testData from "../../../../fixtures/not_full_reports/income/expense_forecast/QA-5013_25.fixture";
 import { _NavigationSection } from "../../../../actions/base";
 import { Income, Property } from "../../../../actions";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 
 describe(`[QA-5025] [Income>Expense forecast] Selected existing expense card is included in calculation`,
     { tags: [ "@income", "@expense_forecast" ] }, () => {
@@ -18,7 +18,7 @@ describe(`[QA-5025] [Income>Expense forecast] Selected existing expense card is 
 
         it("Precondition", () => {
 
-            cy.stepInfo(`1. Go to Property > Summary and add residential and commertial units`);
+            cy.stepInfo(`1. Go to Property > Summary and add residential and commercial units`);
             _NavigationSection.navigateToPropertySummary();
             Property._Summary.enterNumberOfResUnits(testData.numberOfResidentialUnits)
                 .enterNumberOfCommercialUnits(testData.numberOfCommercialUnits)
@@ -119,42 +119,42 @@ describe(`[QA-5025] [Income>Expense forecast] Selected existing expense card is 
                 data left in the forecast, this data is included in calculations on Pro forma and Expense forecast page 
                 (Per Room measure for Fuel + Full Appraiser's forecasts)`, () => {
 
-            //TODO: Uncomment this code + code below, after bug fix https://bowery.atlassian.net/browse/WEB-5881
-            //
-            //Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastFuelFixture("room"));
-            // Income._ExpenseForecastActions.totalSumForecastPSFAllCards(
-            //     testData.buildingDescription.grossArea,
-            //     testData.numberOfResidentialUnits,
-            //     testData.rentRollResUnitFixture.rooms
-            // )
-            //     .totalSumForecastPerUnitAllCards(
-            //         testData.buildingDescription.grossArea,
-            //         testData.numberOfResidentialUnits,
-            //         testData.rentRollResUnitFixture.rooms
-            //     );
-            // _NavigationSection.navigateToProForma();
-            // Income._ProFormaActions.verifyTotalTOEexTaxesIncludeForecasts(testData.buildingDescription.grossArea)
-            //     .verifyPsfTOEexTaxesIncludeForecasts()
-            //     .verifyPerUnitTOEexTaxesIncludeForecasts()
-            //     .verifyTotalTOEIncludeForecasts(testData.buildingDescription.grossArea)
-            //     .verifyPsfTOEIncludeForecasts()
-            //     .verifyPerUnitTOEIncludeForecasts()
-            //     .verifyTotalNOIIncludeForecasts(testData.buildingDescription.grossArea)
-            //     .verifyPsfNOIIncludeForecasts()
-            //     .verifyPerUnitNOIIncludeForecasts();
-            // _NavigationSection.navigateToExpenseForecast();
-            // Income._ExpenseForecastActions.verifyTotalForecastPSF(
-            //     testData.buildingDescription.grossArea,
-            //     testData.numberOfResidentialUnits,
-            //     testData.rentRollResUnitFixture.rooms
-            // )
-            //     .chooseForecastItemBasis(testData.expenseForecastTotalFixture('unit'))
-            //     .verifyTotalForecastPerUnit(
-            //         testData.buildingDescription.grossArea,
-            //         testData.numberOfResidentialUnits,
-            //         testData.rentRollResUnitFixture.rooms
-            //     );
-
-            deleteReport(testData.reportCreationData.reportNumber);
+            /*
+             * TODO: Uncomment this code + code below, after bug fix https://bowery.atlassian.net/browse/WEB-5881
+             * 
+             * Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastFuelFixture("room"));
+             *  Income._ExpenseForecastActions.totalSumForecastPSFAllCards(
+             *      testData.buildingDescription.grossArea,
+             *      testData.numberOfResidentialUnits,
+             *      testData.rentRollResUnitFixture.rooms
+             *  )
+             *      .totalSumForecastPerUnitAllCards(
+             *          testData.buildingDescription.grossArea,
+             *          testData.numberOfResidentialUnits,
+             *          testData.rentRollResUnitFixture.rooms
+             *      );
+             *  _NavigationSection.navigateToProForma();
+             *  Income._ProFormaActions.verifyTotalTOEexTaxesIncludeForecasts(testData.buildingDescription.grossArea)
+             *      .verifyPsfTOEexTaxesIncludeForecasts()
+             *      .verifyPerUnitTOEexTaxesIncludeForecasts()
+             *      .verifyTotalTOEIncludeForecasts(testData.buildingDescription.grossArea)
+             *      .verifyPsfTOEIncludeForecasts()
+             *      .verifyPerUnitTOEIncludeForecasts()
+             *      .verifyTotalNOIIncludeForecasts(testData.buildingDescription.grossArea)
+             *      .verifyPsfNOIIncludeForecasts()
+             *      .verifyPerUnitNOIIncludeForecasts();
+             *  _NavigationSection.navigateToExpenseForecast();
+             *  Income._ExpenseForecastActions.verifyTotalForecastPSF(
+             *      testData.buildingDescription.grossArea,
+             *      testData.numberOfResidentialUnits,
+             *      testData.rentRollResUnitFixture.rooms
+             *  )
+             *      .chooseForecastItemBasis(testData.expenseForecastTotalFixture('unit'))
+             *      .verifyTotalForecastPerUnit(
+             *          testData.buildingDescription.grossArea,
+             *          testData.numberOfResidentialUnits,
+             *          testData.rentRollResUnitFixture.rooms
+             *      );
+             */
         });
     });

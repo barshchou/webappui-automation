@@ -13,8 +13,8 @@ const _storageIncomePerSf = _storageIncome / _grossBuildingArea;
 const _storageIncomePerUnit = _storageIncome / _numberOfResidentialUnits;
 
 const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("4510-12", {
-        incomeValue: Enums.INCOME_TYPE.both
-    });
+    incomeValue: Enums.INCOME_TYPE.both
+});
 
 const _leaseStatuses: Array<BoweryReports.LeaseStatus> = [ "Occupied", "Occupied", "Occupied" ];
 

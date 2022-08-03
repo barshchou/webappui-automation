@@ -1,11 +1,10 @@
 import testData from "../../../../fixtures/not_full_reports/income/expense_forecast/QA-5011_12.fixture";
 import { _NavigationSection } from "../../../../actions/base";
 import { Income, Property } from "../../../../actions";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 
 describe(`[QA-5012] [Income>Expense forecast] Unselected existing expense card is not included in calculation`,
     { tags: [ "@income", "@expense_forecast" ] }, () => {
-
         before("Login, create report", () => {
             Cypress.config('numTestsKeptInMemory', 0);
             createReport(testData.reportCreationData);
@@ -18,7 +17,7 @@ describe(`[QA-5012] [Income>Expense forecast] Unselected existing expense card i
 
         it("Preconditions", () => {
 
-            cy.stepInfo(`1. Go to Property > Summary and add residential and commertial units`);
+            cy.stepInfo(`1. Go to Property > Summary and add residential and commercial units`);
             _NavigationSection.navigateToPropertySummary();
             Property._Summary.enterNumberOfResUnits(testData.numberOfResidentialUnits)
                 .enterNumberOfCommercialUnits(testData.numberOfCommercialUnits)
@@ -79,8 +78,8 @@ describe(`[QA-5012] [Income>Expense forecast] Unselected existing expense card i
         });
 
         it(`Verify If “Include Expense on Pro Forma” checkbox is unselected but there is 
-                data left in the forecast, this data is not included in calculations on Pro forma and Expense forecast page 
-                (Per Unit measure + Full Appraiser's forecasts)`, () => {
+        data left in the forecast, this data is not included in calculations on Pro forma and Expense forecast page 
+        (Per Unit measure + Full Appraiser's forecasts)`, () => {
 
             testData.expenseForecastFixtureArray("unit").forEach(element => {
                 Income._ExpenseForecastActions.chooseForecastItemBasis(element);
@@ -120,8 +119,8 @@ describe(`[QA-5012] [Income>Expense forecast] Unselected existing expense card i
         });
 
         it(`Verify If “Include Expense on Pro Forma”  checkbox is unselected but there is 
-                data left in the forecast, this data is not included in calculations on Pro forma and Expense forecast page 
-                (Per Room measure for Fuel + Full Appraiser's forecasts)`, () => {
+        data left in the forecast, this data is not included in calculations on Pro forma and Expense forecast page 
+        (Per Room measure for Fuel + Full Appraiser's forecasts)`, () => {
 
             Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastFuelFixture('room'));
             Income._ExpenseForecastActions.totalSumForecastPSFAllCards(
@@ -156,7 +155,5 @@ describe(`[QA-5012] [Income>Expense forecast] Unselected existing expense card i
                     testData.numberOfResidentialUnits,
                     testData.rentRollResUnitFixture.rooms
                 );
-
-            deleteReport(testData.reportCreationData.reportNumber);
         });
     });

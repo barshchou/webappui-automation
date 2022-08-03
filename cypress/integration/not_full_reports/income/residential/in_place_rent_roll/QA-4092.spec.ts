@@ -1,13 +1,13 @@
 import testData from "../../../../../fixtures/not_full_reports/income/residential/in_place_rent_roll/QA-4092.fixture";
-import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../../actions/base";
 import { Income, Property } from "../../../../../actions";
 
 describe(`[QA-4092] Verify if "Per Year" time period PSF Rent based on is selected - > 
     the calculation of "Rent PSF" should be Monthly Rent *12/Square Footage/`, 
-    { tags:[ "@income", "@residential", "@in_place_rent_roll" ] }, () => {
+{ tags:[ "@income", "@residential", "@in_place_rent_roll" ] }, () => {
         
-    before("Login, create report", () => {
+    beforeEach("Login, create report", () => {
         createReport(testData.reportCreationData);
     });
 
@@ -24,11 +24,10 @@ describe(`[QA-4092] Verify if "Per Year" time period PSF Rent based on is select
             Monthly rent is not filled`);
         testData.cases.forEach(el => {
             Income._Residential.InPlaceRentRoll.checkPerUnitSquareFootage()
-            .enterSquareFootageByRow(el.squareFootage)
-            .enterMonthlyRentByRowNumber(el.monthlyRent)
-            .verifyRentPSFValueByRow(false);
+                .enterSquareFootageByRow(el.squareFootage)
+                .enterMonthlyRentByRowNumber(el.monthlyRent)
+                .verifyRentPSFValueByRow(false);
             cy.reload();
         });
-        deleteReport(testData.reportCreationData.reportNumber);
     });
 });

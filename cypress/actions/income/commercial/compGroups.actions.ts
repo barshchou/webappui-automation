@@ -49,14 +49,14 @@ class CompGroupsActions extends BaseActionsExt<typeof compGroupsPage> {
      * If there is no elements in a drop group we use default locator, in other case we use 1st row of a group.
      * 
      * Verifies that after dragging all elements there is no units left in unsorted group
-    */
+     */
     dragAllCommercialUnitsIntoGroup(groupName: string, numberOfUnits = 1, index = 0): CompGroupsActions {
         let subject = compGroupsPage.getDraggableElement(index); //always selects 1st element in group
         let commercialUnit = cy.get(subject);
         let target: string;
 
         for (let i = 0; i < numberOfUnits; i++) {
-            if (i == 0){
+            if (i == 0) {
                 target = compGroupsPage.getDroppableArea(groupName);
             } else {
                 target = compGroupsPage.getDroppableAreaDropped(groupName);

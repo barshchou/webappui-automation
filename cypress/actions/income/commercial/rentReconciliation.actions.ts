@@ -1,11 +1,11 @@
 import enums from "../../../enums/enums";
 import rentReconciliationPage from "../../../pages/income/commercial/rentReconciliation.page";
 import { BoweryReports } from "../../../types/boweryReports.type";
-import { RentReconciliationKeys } from "../../../utils/index";
+import { RentReconciliationKeys } from "../../../utils";
 import BaseActionsExt from "../../base/base.actions.ext";
 
 class RentReconciliationActions extends BaseActionsExt<typeof rentReconciliationPage> {
-    addMarketRentConclusion(value: number | string, index = 0): RentReconciliationActions{
+    addMarketRentConclusion(value: number | string, index = 0): RentReconciliationActions {
         rentReconciliationPage.getMarketRentConclusion(index)
             .clear()
             .type(`${value}`)
@@ -24,7 +24,8 @@ class RentReconciliationActions extends BaseActionsExt<typeof rentReconciliation
     }
 
     verifySubjectUnitRent(expectedRent: number, unit = 0): RentReconciliationActions {
-        rentReconciliationPage.subjectUnitRentSfMonth(unit).invoke('text').should('deep.equal', `$${expectedRent.toFixed(2)}`);
+        rentReconciliationPage.subjectUnitRentSfMonth(unit).invoke('text')
+            .should('deep.equal', `$${expectedRent.toFixed(2)}`);
         return this;
     }
 
@@ -55,14 +56,17 @@ class RentReconciliationActions extends BaseActionsExt<typeof rentReconciliation
         return this;
     }
 
-    setLeaseTermsAdjustment(adjustment: number, calculationType: BoweryReports.CalculationType, compIndex = 0): RentReconciliationActions {
+    setLeaseTermsAdjustment(adjustment: number, calculationType: BoweryReports.CalculationType, 
+        compIndex = 0): RentReconciliationActions {
         let expectedAdjustmentValue = calculationType === enums.CALCULATION_TYPE.percent 
             ? adjustment 
             : adjustment < 0 ? `-$${Math.abs(adjustment).toFixed(2)}` : `$${adjustment.toFixed(2)}`;
         rentReconciliationPage.leaseTermsAdjustments(compIndex)
             .clear()
             .type(`{del}`)
-            .type(adjustment < 0 && calculationType === enums.CALCULATION_TYPE.dollarPerSF ? `${adjustment}-` : `${adjustment}`)
+            .type(adjustment < 0 && calculationType === enums.CALCULATION_TYPE.dollarPerSF 
+                ? `${adjustment}-` 
+                : `${adjustment}`)
             .blur()
             .should('have.value', expectedAdjustmentValue);
         return this;
@@ -74,7 +78,8 @@ class RentReconciliationActions extends BaseActionsExt<typeof rentReconciliation
         return this;
     }
 
-    getLeaseTermsAdjustment(rentSf: number, calculationType: BoweryReports.CalculationType, compIndex = 0): RentReconciliationActions {
+    getLeaseTermsAdjustment(rentSf: number, calculationType: BoweryReports.CalculationType, 
+        compIndex = 0): RentReconciliationActions {
         rentReconciliationPage.leaseTermsAdjustments(compIndex).invoke('attr', 'value').then(leaseTermAdj => {
             let leaseTermsAdjustmentSubTotal = calculationType === enums.CALCULATION_TYPE.percent 
                 ? (rentSf * (100 + Number(leaseTermAdj))) / 100 
@@ -85,9 +90,10 @@ class RentReconciliationActions extends BaseActionsExt<typeof rentReconciliation
     }
 
     getMarketConditionAdjustment(compIndex = 0): RentReconciliationActions {
-        rentReconciliationPage.marketConditionsAdjustments(compIndex).invoke('attr', 'value').then(marketConditionAdj => {
-            cy._mapSet(RentReconciliationKeys.marketConditionAdj, marketConditionAdj);
-        });
+        rentReconciliationPage.marketConditionsAdjustments(compIndex).invoke('attr', 'value')
+            .then(marketConditionAdj => {
+                cy._mapSet(RentReconciliationKeys.marketConditionAdj, marketConditionAdj);
+            });
         return this;
     }
 
@@ -111,7 +117,8 @@ class RentReconciliationActions extends BaseActionsExt<typeof rentReconciliation
                 .getMarketConditionAdjustment(compIndex);
             cy._mapGet(RentReconciliationKeys.leaseTermsAdj).then(leaseTermsAdjustmentSubTotal => {
                 cy._mapGet(RentReconciliationKeys.marketConditionAdj).then(marketConditionAdjustment => {
-                    let expectedTrendedRentSF = ((Number(leaseTermsAdjustmentSubTotal) * (100 + Number(marketConditionAdjustment))) / 100);
+                    let expectedTrendedRentSF = ((Number(leaseTermsAdjustmentSubTotal) * 
+                    (100 + Number(marketConditionAdjustment))) / 100);
                     let expectedTrendedRentSFRounded = Math.round(expectedTrendedRentSF * 1000) / 1000;
                     rentReconciliationPage.getTrendedRentSF(compIndex)
                         .should('have.text', expectedTrendedRentSFRounded < 0 
@@ -123,7 +130,8 @@ class RentReconciliationActions extends BaseActionsExt<typeof rentReconciliation
         return this;
     }
 
-    verifyLeaseTermsAdjustment(calculationType: BoweryReports.CalculationType, compIndex = 0): RentReconciliationActions {
+    verifyLeaseTermsAdjustment(calculationType: BoweryReports.CalculationType, 
+        compIndex = 0): RentReconciliationActions {
         this.getCompRent(compIndex);
         cy._mapGet(RentReconciliationKeys.compRentSF).then(compRent => {
             this.getLeaseTermsAdjustment(compRent, calculationType, compIndex);
@@ -137,8 +145,10 @@ class RentReconciliationActions extends BaseActionsExt<typeof rentReconciliation
         return this;
     }
 
-    verifyLeaseTermsAdjustmentDefault(calculationType: BoweryReports.CalculationType, compIndex = 0): RentReconciliationActions {
-        rentReconciliationPage.leaseTermsAdjustmentsPlaceholder(compIndex).invoke('text').should('deep.equal', calculationType);
+    verifyLeaseTermsAdjustmentDefault(calculationType: BoweryReports.CalculationType, 
+        compIndex = 0): RentReconciliationActions {
+        rentReconciliationPage.leaseTermsAdjustmentsPlaceholder(compIndex).invoke('text')
+            .should('deep.equal', calculationType);
         return this;
     }
 }

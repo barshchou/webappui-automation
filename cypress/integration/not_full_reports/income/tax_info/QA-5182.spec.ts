@@ -1,12 +1,12 @@
 import testData from "../../../../fixtures/not_full_reports/income/tax_info/QA-5182.fixture";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { ReviewExport, Income } from './../../../../actions/index';
 import launchDarklyApi from "../../../../api/launchDarkly.api";
 
-describe("[QA-5183] Export column order both assessment psf and assessment per unit", () => {
+describe("[QA-5182] Export column order both assessment psf and assessment per unit", () => {
 
-    it("Test body", { tags: [ "@check_export", "@income", "@tax_info" ] }, () => {
+    it("Test body", { tags: [ "@check_export", "@income", "@tax_info", "@feature_flag" ] }, () => {
         cy.stepInfo("1. Set feature flag and create report");
         launchDarklyApi.setFeatureFlagForUser(testData.featureFlagKey, testData.onFeatureFlag);
         createReport(testData.reportCreationData);
@@ -22,18 +22,16 @@ describe("[QA-5183] Export column order both assessment psf and assessment per u
         _NavigationSection.Actions.openReviewAndExport();
         ReviewExport.generateDocxReport().waitForReportGenerated()
             .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
-
-        deleteReport(testData.reportCreationData.reportNumber);
     });
 
     it("Check export", () => {
-        Cypress.config().baseUrl = null;
         cy.task("getFilePath",
-        { _reportName: testData.reportCreationData.reportNumber, _docx_html: "html" }
+            { _reportName: testData.reportCreationData.reportNumber, _docxHtml: "html" }
         ).then(file => {
             cy.log(<string>file);
             
-            cy.stepInfo("Check that Tax Calculation Discussion commentary exports in the 'Assessed Value & RE Taxes' section of the report.");
+            cy.stepInfo(`Check that Tax Calculation Discussion commentary exports in the 
+                        'Assessed Value & RE Taxes' section of the report.`);
             
             cy.visit(<string>file);
             cy.contains("Assessed Value & Real Estate Taxes").scrollIntoView().next().next()

@@ -111,6 +111,9 @@ dist
 # Stores VSCode versions used for testing VSCode extensions
 .vscode-test
 
+# VS code settings
+.vscode/settings.json
+
 # yarn v2
 .yarn/cache
 .yarn/unplugged
@@ -127,6 +130,7 @@ cypress/screenshots/
 cypress/downloads
 cypress/snapshots/**/__diff_output__
 cypress/gh_artifacts/
+# data which we should share between specs
 cypress/spec_data/
 
 # act (tool for local GH Actions)
@@ -135,3 +139,6 @@ cypress/spec_data/
 
 # spec for debug something
 test.spec.ts
+
+# Finder settings
+**/.DS_Store

@@ -1,7 +1,3 @@
-// export const isProdEnv = () => {
-//     return Cypress.config().baseUrl.includes(ENVS.prod);
-// };
-
 export const ENVS = {
     dev: "https://bowery-development.herokuapp.com",
     staging: "https://bowery-staging.herokuapp.com",
@@ -10,19 +6,20 @@ export const ENVS = {
 
 /**
  * Evaluates Cypress' `baseUrl` with validators.
- *
+ * @param config
+ * @param isFromEnv means whether config will be read from passed Cypress.env() value or Cypress.config()
  * If you want to get `baseUrl` during test run - call `Cypress.config().baseUrl`
  * @returns
  */
-export const evalUrl = (config: Cypress.PluginConfigOptions): string => {
-    if(config.env.url == "custom"){
-        return _validateCustomUrl(config.env.customUrl);
-    }
-    else if (config.env.url == undefined){
+export const evalUrl = (config: Cypress.PluginConfigOptions | Cypress.ObjectLike, isFromEnv = false): string => {
+    const valueToCheck = isFromEnv ? config : config.env;
+    if (valueToCheck.url == "custom") {
+        return _validateCustomUrl(valueToCheck.customUrl);
+    } else if (valueToCheck.url == undefined) {
+        config.env.url = "staging";
         return ENVS.staging;
-    }
-    else{
-        return _validateUrl(ENVS, config.env.url);
+    } else {
+        return _validateUrl(ENVS, valueToCheck.url);
     }
 };
 
@@ -30,10 +27,9 @@ export const evalUrl = (config: Cypress.PluginConfigOptions): string => {
  * Validates url according to available properties in ENVS object.
  */
 const _validateUrl = (obj: object, key: string): string => {
-    if(Object.keys(obj).includes(key)){
+    if (Object.keys(obj).includes(key)) {
         return _trimSlash(obj[key]);
-    }
-    else {
+    } else {
         throw new Error(`Key "${key}" in not defined in ENVS.`);
     }
 };
@@ -42,12 +38,11 @@ const _validateUrl = (obj: object, key: string): string => {
  * Validates customUrl when `config.env.url` is `custom`.
  */
 const _validateCustomUrl = (customUrl: string): string => {
-    if(customUrl != undefined && (customUrl.indexOf("http://") == 0 || customUrl.indexOf("https://") == 0)){
+    if (customUrl != undefined && (customUrl.indexOf("http://") == 0 || customUrl.indexOf("https://") == 0)) {
         return _trimSlash(customUrl);
-    }
-    else {
+    } else {
         throw new Error(
-            `Your customUrl ("${customUrl}") is invaild (or undefined). 
+            `Your customUrl ("${customUrl}") is invalid (or undefined). 
             Set 'customUrl' correctly (with 'http://' or 'https://') and re-run Cypress.`
         );
     }
@@ -60,9 +55,3 @@ const _validateCustomUrl = (customUrl: string): string => {
  * @param str Url string
  */
 const _trimSlash = (str: string) => new URL(str).origin;
-
-// /**
-//  * Skipping test suite from execution if current execution env is `prod`.
-//  * Necessary for tests where we manipulate with sensetive data
-//  */
-// export const conditionalDescribe = isProdEnv() ? describe.skip : describe;

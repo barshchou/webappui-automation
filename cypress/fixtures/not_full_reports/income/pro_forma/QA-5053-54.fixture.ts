@@ -21,18 +21,19 @@ const _fuelForecast = 34;
 const _customCategoriesAmount = 3; //pay attention to custom categories amount added below
 
 //#region Formulas
-/* Formulas for calculation Pro Forma table.
-    Expenses:
-    Real Estate Taxes = (landTaxAssessed + buildingAssesed) * tax / 100
-    Water And Reserves = water forecast * GBA
-    Fuel = fuel forecast * GBA
-    Custom expense = custom forecast * GBA
-
-    Totals:
-    Total Operating Expenses = Total of all expenses(included custom) + Real Estate Taxes total
-    Total Operating Expenses ex Taxed = Total Operating Expenses - Real Estate Taxes total
-    Total Operating Income = Effective Gross Income - Total Operating Expenses
-*/
+/*
+ * Formulas for calculation Pro Forma table.
+ *  Expenses:
+ *  Real Estate Taxes = (landTaxAssessed + buildingAssessed) * tax / 100
+ *  Water And Reserves = water forecast * GBA
+ *  Fuel = fuel forecast * GBA
+ *  Custom expense = custom forecast * GBA
+ * 
+ *  Totals:
+ *  Total Operating Expenses = Total of all expenses(included custom) + Real Estate Taxes total
+ *  Total Operating Expenses ex Taxed = Total Operating Expenses - Real Estate Taxes total
+ *  Total Operating Income = Effective Gross Income - Total Operating Expenses
+ */
 const _totalRealEstateTax = ((_landTaxAssessedValue + _buildingTaxAssessedValue) * _taxPercent) / 100;
 const _totalWater = _waterForecast * _grossBuildingArea;
 const _totalReserves = _reservesForecast * _grossBuildingArea;
@@ -114,10 +115,12 @@ export default {
     totalCustomCategory: _totalCustomCategory,
     customTotal: _totalCustoms,
     netOperationIncome: _totalNetOperatingIncome,
-    reserverstotal: _totalReserves,
+    reserversTotal: _totalReserves,
     fuelTotal: _totalFuel,
     waterAndSewerTotal: _totalWater, 
     landTaxAssessedValue: _landTaxAssessedValue,
     buildingTaxAssessedValue: _buildingTaxAssessedValue,
-    customCategories: _customCategories()
+    customCategories: _customCategories(),
+    featureFlagKey: Enums.FEATURE_FLAG_KEYS.flexibleTaxes,
+    onFeatureFlag: 0,
 };

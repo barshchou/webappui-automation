@@ -98,11 +98,14 @@ class ZoningActions extends BaseActionsExt<typeof zoningPage> {
         return textToBe;
     }
 
-    verifyConformingUseCommentary(zoningUsesData: Readonly<{zonesNames: Array<string>, isConformable: boolean, permittedUses: Array<string>,
+    verifyConformingUseCommentary(zoningUsesData: Readonly<{zonesNames: Array<string>, 
+        isConformable: boolean, permittedUses: Array<string>,
         currentUses: Array<string>, streetAddress: string}>): ZoningActions {
         const zonesTextToBe = this.getTextForCommentaryFromNamesArray(zoningUsesData.zonesNames, "zone");
         const conformableEnding = zoningUsesData.zonesNames.length === 1 ? "s" : "";
-        const conformableText = zoningUsesData.isConformable ? `, which permit${conformableEnding} ` : ` include${conformableEnding} `;
+        const conformableText = zoningUsesData.isConformable 
+            ? `, which permit${conformableEnding} ` 
+            : ` include${conformableEnding} `;
         const permittedUsesText = this.getTextForCommentaryFromNamesArray(zoningUsesData.permittedUses, "use");
         const currentUsesText = this.getTextForCommentaryFromNamesArray(zoningUsesData.currentUses, "property");
         const conformingText = zoningUsesData.isConformable ? "conforming" : "non-conforming";
@@ -112,10 +115,11 @@ class ZoningActions extends BaseActionsExt<typeof zoningPage> {
         return this;
     }
 
-     private getConformingUseCommentary(commentaryObject): string {
+    private getConformingUseCommentary(commentaryObject): string {
         return `The land uses in the${commentaryObject.zones}${commentaryObject.conformable}` +
-            `${commentaryObject.permittedUses} as of right. ${commentaryObject.address} is a${commentaryObject.currentUses}, ` +
-            `and upon completion of the renovations will be ${commentaryObject.conforming} with regards to the allowable uses.`;
+            `${commentaryObject.permittedUses} as of right. ${commentaryObject.address} `+
+            `is a${commentaryObject.currentUses}, and upon completion of the renovations ` +
+            `will be ${commentaryObject.conforming} with regards to the allowable uses.`;
     }
 
     clickBulkTab(): ZoningActions {
@@ -190,7 +194,7 @@ class ZoningActions extends BaseActionsExt<typeof zoningPage> {
     }
 
     verifyParkingResidentialUnits(unitsNumber: number | string): ZoningActions {
-        zoningPage.parkingResidentalUnits.should("have.text", unitsNumber);
+        zoningPage.parkingResidentialUnits.should("have.text", unitsNumber);
         return this;
     }
 
@@ -216,9 +220,15 @@ class ZoningActions extends BaseActionsExt<typeof zoningPage> {
 
     verifyParkingConformityCommentary(zoningParkingData: Readonly<{requiredParkingPlaces: number, 
         numberOfParkingPlaces: number, isConforming: string}>): ZoningActions {
-        const requiredText = zoningParkingData.requiredParkingPlaces === 0 ? "no" : `${zoningParkingData.requiredParkingPlaces}`;
-        const availableText = zoningParkingData.numberOfParkingPlaces === 0 ? "no" : `${zoningParkingData.numberOfParkingPlaces}`;
-        const conformingText = zoningParkingData.isConforming === "true" ? "complying" : "non-complying";
+        const requiredText = zoningParkingData.requiredParkingPlaces === 0 
+            ? "no" 
+            : `${zoningParkingData.requiredParkingPlaces}`;
+        const availableText = zoningParkingData.numberOfParkingPlaces === 0 
+            ? "no" 
+            : `${zoningParkingData.numberOfParkingPlaces}`;
+        const conformingText = zoningParkingData.isConforming === "true" 
+            ? "complying" 
+            : "non-complying";
         zoningPage.parkingConformityCommentary.should("have.text",
             this.getParkingConformityCommentary(requiredText, availableText, conformingText));
         return this;

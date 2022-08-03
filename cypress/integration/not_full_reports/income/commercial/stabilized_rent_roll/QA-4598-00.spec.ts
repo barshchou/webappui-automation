@@ -1,14 +1,13 @@
 import { numberWithCommas } from "../../../../../../utils/numbers.utils";
 import { Income, Property, ReviewExport } from "../../../../../actions";
 import { _NavigationSection } from "../../../../../actions/base";
-import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
-import testData from "../../../../../fixtures/not_full_reports/income/commercial/stabilized_rent_roll/QA-4598-00.fixture";
+import { createReport } from "../../../../../actions/base/baseTest.actions";
+import testData from 
+    "../../../../../fixtures/not_full_reports/income/commercial/stabilized_rent_roll/QA-4598-00.fixture";
 
-describe(`[QA-4598][QA-4599][QA-4600] Verify the suggested text dropdown in the new narrative component added through "=" 
-        in the Generated Commentary on the Stabilized Rent Roll page.`, 
-    { tags: [ "@income", "@commercial", "@stabilized_rent_roll", "@check_export" ] }, () => {
-
-    const url = `${Cypress.config().baseUrl}`;
+describe(`[QA-4598][QA-4599][QA-4600] Verify the suggested text dropdown in the 
+new narrative component added through "=" in the Generated Commentary on the Stabilized Rent Roll page.`, 
+{ tags: [ "@income", "@commercial", "@stabilized_rent_roll", "@check_export" ] }, () => {
 
     it("[QA-4598] As Is", () => {
         cy.stepInfo(`Preconditions: The mixed report is created and several commercial units are added.`);
@@ -30,8 +29,8 @@ describe(`[QA-4598][QA-4599][QA-4600] Verify the suggested text dropdown in the 
         cy.stepInfo("3. Enter the “=“ and select the an option. Verify each option.");
         testData.asIsChips.forEach((chip) => {
             Income._CommercialManager.StabilizedRentRoll.editDiscussionTextArea(`=${chip.typeSuggestValue}`, false)
-            .clickNarrativeSuggestions(chip.suggestionName)
-            .verifyCommentaryContainsText(chip.verifySuggest);
+                .clickNarrativeSuggestions(chip.suggestionName)
+                .verifyCommentaryContainsText(chip.verifySuggest);
         });
         Income._CommercialManager.StabilizedRentRoll.clickSaveDiscussionButton()
             .verifyProgressBarNotExist();
@@ -39,24 +38,25 @@ describe(`[QA-4598][QA-4599][QA-4600] Verify the suggested text dropdown in the 
         _NavigationSection.openReviewAndExport();
         ReviewExport.generateDocxReport().waitForReportGenerated()
             .downloadAndConvertDocxReport(testData.reportCreationDataAsIs.reportNumber);
-        deleteReport(testData.reportCreationDataAsIs.reportNumber);
     });
 
     it("[QA-4598] Check export", () => {
-        Cypress.config().baseUrl = null;
-        cy.task("getFilePath", { _reportName: testData.reportCreationDataAsIs.reportNumber, _docx_html: "html" }).then(file => {
-            cy.log(<string>file);
-            cy.stepInfo("4. Verify the linked chips on export");
-            cy.visit(<string>file);
-            testData.asIsChips.forEach(chip => {
-                let expectedText = typeof chip.verifyExport ===  "number" ? `${numberWithCommas(chip.verifyExport)}`: chip.verifyExport;
-                cy.contains("Commercial Stabilized Rent Roll").next().scrollIntoView().should("include.text", expectedText);
-            });
-        }); 
+        cy.task("getFilePath", { _reportName: testData.reportCreationDataAsIs.reportNumber, _docxHtml: "html" })
+            .then(file => {
+                cy.log(<string>file);
+                cy.stepInfo("4. Verify the linked chips on export");
+                cy.visit(<string>file);
+                testData.asIsChips.forEach(chip => {
+                    let expectedText = typeof chip.verifyExport ===  "number" 
+                        ? `${numberWithCommas(chip.verifyExport)}`
+                        : chip.verifyExport;
+                    cy.contains("Commercial Stabilized Rent Roll").next().scrollIntoView()
+                        .should("include.text", expectedText);
+                });
+            }); 
     });
 
     it("[QA-4599] As Stabilized", () => {
-        Cypress.config().baseUrl = url;
         cy.stepInfo(`Preconditions: The mixed report is created and several commercial units are added.`);
         createReport(testData.reportCreationDataAsStabilized);
 
@@ -76,8 +76,8 @@ describe(`[QA-4598][QA-4599][QA-4600] Verify the suggested text dropdown in the 
         cy.stepInfo("3. Enter the “=“ and select the an option. Verify each option.");
         testData.asStabilizedChips.forEach((chip) => {
             Income._CommercialManager.StabilizedRentRoll.editDiscussionTextArea(`=${chip.typeSuggestValue}`, false)
-            .clickNarrativeSuggestions(chip.suggestionName)
-            .verifyCommentaryContainsText(chip.verifySuggest);
+                .clickNarrativeSuggestions(chip.suggestionName)
+                .verifyCommentaryContainsText(chip.verifySuggest);
         });
         Income._CommercialManager.StabilizedRentRoll.clickSaveDiscussionButton()
             .verifyProgressBarNotExist();
@@ -85,24 +85,25 @@ describe(`[QA-4598][QA-4599][QA-4600] Verify the suggested text dropdown in the 
         _NavigationSection.openReviewAndExport();
         ReviewExport.generateDocxReport().waitForReportGenerated()
             .downloadAndConvertDocxReport(testData.reportCreationDataAsStabilized.reportNumber);
-        deleteReport(testData.reportCreationDataAsStabilized.reportNumber);
     });
 
     it("[QA-4599] Check export", () => {
-        Cypress.config().baseUrl = null;
-        cy.task("getFilePath", { _reportName: testData.reportCreationDataAsIs.reportNumber, _docx_html: "html" }).then(file => {
-            cy.log(<string>file);
-            cy.stepInfo("4. Verify the linked chips on export");
-            cy.visit(<string>file);
-            testData.asStabilizedChips.forEach(chip => {
-                let expectedText = typeof chip.verifyExport ===  "number" ? `${numberWithCommas(chip.verifyExport)}`: chip.verifyExport;
-                cy.contains("Commercial Stabilized Rent Roll").next().scrollIntoView().should("include.text", expectedText);
-            });
-        }); 
+        cy.task("getFilePath", { _reportName: testData.reportCreationDataAsIs.reportNumber, _docxHtml: "html" })
+            .then(file => {
+                cy.log(<string>file);
+                cy.stepInfo("4. Verify the linked chips on export");
+                cy.visit(<string>file);
+                testData.asStabilizedChips.forEach(chip => {
+                    let expectedText = typeof chip.verifyExport ===  "number" 
+                        ? `${numberWithCommas(chip.verifyExport)}`
+                        : chip.verifyExport;
+                    cy.contains("Commercial Stabilized Rent Roll").next().scrollIntoView()
+                        .should("include.text", expectedText);
+                });
+            }); 
     });
 
     it("[QA-4600] As Completed", () => {
-        Cypress.config().baseUrl = url;
         cy.stepInfo(`Preconditions: The mixed report is created and several commercial units are added.`);
         createReport(testData.reportCreationDataAsComplete);
 
@@ -124,8 +125,8 @@ describe(`[QA-4598][QA-4599][QA-4600] Verify the suggested text dropdown in the 
         cy.stepInfo("3. Enter the “=“ and select the an option. Verify each option.");
         testData.asCompletedChips.forEach((chip) => {
             Income._CommercialManager.StabilizedRentRoll.editDiscussionTextArea(`=${chip.typeSuggestValue}`, false)
-            .clickNarrativeSuggestions(chip.suggestionName)
-            .verifyCommentaryContainsText(chip.verifySuggest);
+                .clickNarrativeSuggestions(chip.suggestionName)
+                .verifyCommentaryContainsText(chip.verifySuggest);
         });
         Income._CommercialManager.StabilizedRentRoll.clickSaveDiscussionButton()
             .verifyProgressBarNotExist();
@@ -133,19 +134,21 @@ describe(`[QA-4598][QA-4599][QA-4600] Verify the suggested text dropdown in the 
         _NavigationSection.openReviewAndExport();
         ReviewExport.generateDocxReport().waitForReportGenerated()
             .downloadAndConvertDocxReport(testData.reportCreationDataAsComplete.reportNumber);
-        deleteReport(testData.reportCreationDataAsComplete.reportNumber);
     });
 
     it("[QA-4600] Check export", () => {
-        Cypress.config().baseUrl = null;
-        cy.task("getFilePath", { _reportName: testData.reportCreationDataAsIs.reportNumber, _docx_html: "html" }).then(file => {
-            cy.log(<string>file);
-            cy.stepInfo("4. Verify the linked chips on export");
-            cy.visit(<string>file);
-            testData.asCompletedChips.forEach(chip => {
-                let expectedText = typeof chip.verifyExport ===  "number" ? `${numberWithCommas(chip.verifyExport)}`: chip.verifyExport;
-                cy.contains("Commercial Stabilized Rent Roll").next().scrollIntoView().should("include.text", expectedText);
-            });
-        }); 
+        cy.task("getFilePath", { _reportName: testData.reportCreationDataAsIs.reportNumber, _docxHtml: "html" })
+            .then(file => {
+                cy.log(<string>file);
+                cy.stepInfo("4. Verify the linked chips on export");
+                cy.visit(<string>file);
+                testData.asCompletedChips.forEach(chip => {
+                    let expectedText = typeof chip.verifyExport ===  "number" 
+                        ? `${numberWithCommas(chip.verifyExport)}`
+                        : chip.verifyExport;
+                    cy.contains("Commercial Stabilized Rent Roll").next().scrollIntoView()
+                        .should("include.text", expectedText);
+                });
+            }); 
     });
 });

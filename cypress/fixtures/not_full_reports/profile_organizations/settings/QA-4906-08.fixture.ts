@@ -1,7 +1,7 @@
 import Enums from "../../../../enums/enums";
 
-const _adminUsername = Cypress.env(`${Enums.USERS.webapp_admin_username}`);
-const _adminPassword = Cypress.env(`${Enums.USERS.webapp_admin_password}`);
+const _adminUsername = Cypress.env(`${Enums.USERS.webappAdminUsername}`);
+const _adminPassword = Cypress.env(`${Enums.USERS.webappAdminPassword}`);
 
 const _tooltipText = "This info has been automatically updated from the Federal Reserve Bank of St. Louis";
 const _textColor = "rgb(6, 116, 97)";
