@@ -46,7 +46,7 @@ describe("Validation of Market Values Per SF for ACAS reports",
             });
         });
 
-        it("[QA-5784][QA-5791]", () => {
+        it("[QA-5784][QA-5790][QA-5791]", () => {
             cy.stepInfo(`6. Set Cap Rate value`);
             NavigationSection.navigateToCapRateConclusion();
             Income.CapRateConclusion.enterConclusionSectionConcludedCapRate(testData.capRate);
@@ -58,14 +58,18 @@ describe("Validation of Market Values Per SF for ACAS reports",
             As Stabilized (Amount) rounded according to “Round to nearest” value`);
             Income.CapRateConclusion.verifyAsStabilizedFinalValueCalculated();
 
-            cy.stepInfo(`9. Add New Residential Rent Loss on As Stabilized tab and 
+            cy.stepInfo(`[QA-5790] 9. Verify if Prospective Market Value As Stabilized Per SF is calculated with 
+            correct formula based on selected Basis for Square Foot Analysis`);
+            Income.CapRateConclusion.verifyAsStabilizedFinalPerSFCalculated(testData.squareFootAnalysisArea);
+
+            cy.stepInfo(`10. Add New Residential Rent Loss on As Stabilized tab and 
             New Commercial Rent Loss on As Stabilized tab`);
             Income.CapRateConclusion.addNewRentLoss(testData.residentialUnitType, testData.residentialUnits, 
                 testData.valueConclusionAsStabilized);
             Income.CapRateConclusion.addNewRentLoss(testData.commercialUnitType, testData.commercialUnits, 
                 testData.valueConclusionAsStabilized);
                 
-            cy.stepInfo(`10. Fill in with valid numeric values:
+            cy.stepInfo(`11. Fill in with valid numeric values:
             - Less Residential Rent Loss
             - Less Commercial Rent Loss
             - Less Undetermined Commercial Rent Loss
@@ -77,28 +81,28 @@ describe("Validation of Market Values Per SF for ACAS reports",
                 .enterAsStabCommercialRentLossTimePeriodByRow(testData.rentLossTimePeriod)
                 .enterAsStabCommercialUndeterminedRentLossTimePeriodByRow(testData.rentLossTimePeriod);
 
-            cy.stepInfo(`11. Make sure Prospective Market Value As Complete (Amount) =  
+            cy.stepInfo(`12. Make sure Prospective Market Value As Complete (Amount) =  
             Prospective Market Value As Stabilized (Amount) - Less Residential Rent Loss - 
             Less Commercial Rent Loss - Less Undetermined Commercial Rent Loss - 
             Less Commission Fee - Less Entrepreneurial Profit*`);
             Income.CapRateConclusion.verifyProspectiveMarketValueAsCompleteCalculated();
 
-            cy.stepInfo(`12. Make sure Prospective Market Value As Complete (Final Value) = 
+            cy.stepInfo(`13. Make sure Prospective Market Value As Complete (Final Value) = 
             Prospective Market Value As Complete (Amount) rounded according to “Round to nearest” value`);
             Income.CapRateConclusion.verifyAsCompleteFinalValueCalculated();
 
-            cy.stepInfo(`[QA-5791] 13. Verify if Prospective Market Value As Complete Per SF is calculated 
+            cy.stepInfo(`[QA-5791] 14. Verify if Prospective Market Value As Complete Per SF is calculated 
             with correct formula based on selected Basis for Square Foot Analysis`);
             Income.CapRateConclusion.verifyAsCompleteFinalPerSFCalculated(testData.squareFootAnalysisArea);
 
-            cy.stepInfo(`14. Add New Residential Rent Loss on As Complete tab and New Commercial 
+            cy.stepInfo(`15. Add New Residential Rent Loss on As Complete tab and New Commercial 
             Rent Loss on As Complete tab `);
             Income.CapRateConclusion.addNewRentLoss(testData.residentialUnitType, testData.residentialUnits, 
                 testData.valueConclusionAsComplete);
             Income.CapRateConclusion.addNewRentLoss(testData.commercialUnitType, testData.commercialUnits, 
                 testData.valueConclusionAsComplete);
 
-            cy.stepInfo(`15. Fill in with valid numeric values:
+            cy.stepInfo(`16. Fill in with valid numeric values:
             - Less Residential Rent Loss
             - Less Commercial Rent Loss
             - Less Undetermined Commercial Rent Loss
@@ -111,16 +115,16 @@ describe("Validation of Market Values Per SF for ACAS reports",
                 .enterAsCompleteLessEntrepreneurialProfit(testData.entrepreneurialProfit)
                 .enterAsCompleteLessBuyoutCost(testData.lessBuyoutCost);
 
-            cy.stepInfo(`16. Make sure As Is Market Value (Amount) = Prospective Market Value As Complete Per SF - 
+            cy.stepInfo(`17. Make sure As Is Market Value (Amount) = Prospective Market Value As Complete Per SF - 
             Less Residential Rent Loss - Less Commercial Rent Loss - Less Undetermined Commercial Rent Loss - 
             Renovation Budget ( on Property>Renovations page) - Less Buyout Cost - Less Entrepreneurial Profit*`);
             Income.CapRateConclusion.verifyAsIsMarketValueCalculated();
 
-            cy.stepInfo(`17. Make sure As Is Market Value (Final Value) =  As Is Market Value (Amount) 
+            cy.stepInfo(`18. Make sure As Is Market Value (Final Value) =  As Is Market Value (Amount) 
             rounded according to “Round to nearest” value`);
             Income.CapRateConclusion.verifyAsIsFinalValueCalculated();
 
-            cy.stepInfo(`[QA-5784] 18. Verify if  As Is Market Value Per SF  is calculated with correct formula 
+            cy.stepInfo(`[QA-5784] 19. Verify if  As Is Market Value Per SF  is calculated with correct formula 
             based on selected Basis for Square Foot Analysis`);
             Income.CapRateConclusion.verifyAsIsMarketPerSFCalculated(testData.squareFootAnalysisArea);
         });

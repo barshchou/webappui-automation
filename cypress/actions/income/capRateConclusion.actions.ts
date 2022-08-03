@@ -615,6 +615,15 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
         return this;
     }
 
+    asStabilizedFinalAmount(): CapRateConclusionActions {
+        capRateConclusionPage.asStabilizedFinalValueCell.should('exist')
+            .invoke('text').then(asStabilizedFinalAmount => {
+                let asStabilizedFinalAmountAdjusted = getNumberFromDollarNumberWithCommas(asStabilizedFinalAmount);
+                cy._mapSet(capRateConclusionKeys.asStabilizedFinalAmount, asStabilizedFinalAmountAdjusted);
+            });
+        return this;
+    }
+
     /**
      * Verifies As Is Market value per SF by formula:
      * [As Is Market Final Value] / [Square Foot Analysis Area]
@@ -649,6 +658,26 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
                 : `${asCompleteFinalSFAmount}`;
             capRateConclusionPage.prospectiveMarketValueAsCompletePerSF
                 .invoke('text', expectedAsCompleteMarketSFAmount);
+        });
+        
+        return this;
+    }
+
+    /**
+     * Verifies Prospective Market value As Stabilized per SF by formula:
+     * [Prospective As Market Value As Stabilized (Final Value)] / [Square Foot Analysis Area]
+     * @param squareFootAnalysisArea Area for selected square foot analysis basis 
+     * @returns CapRateConclusionActions
+     */
+    verifyAsStabilizedFinalPerSFCalculated(squareFootAnalysisArea: number): CapRateConclusionActions {
+        this.asStabilizedFinalAmount();
+        cy._mapGet(capRateConclusionKeys.asStabilizedFinalAmount).then(asStabilizedFinalAmount => {
+            let asStabilizedFinalSFAmount = asStabilizedFinalAmount / squareFootAnalysisArea;
+            let expectedAsStabilizedFinalSFAmount = asStabilizedFinalSFAmount < 0 
+                ? `-$${asStabilizedFinalSFAmount}`
+                : `${asStabilizedFinalSFAmount}`;
+            capRateConclusionPage.prospectiveMarketValueAsCompletePerSF
+                .invoke('text', expectedAsStabilizedFinalSFAmount);
         });
         
         return this;
