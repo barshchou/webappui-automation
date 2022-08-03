@@ -25,7 +25,7 @@ describe("[QA-4168] Verify the Internal Notes field", { tags: [ "@sales", "@find
             .setCommercialArea(`${testData.units.grossArea}`)
             .Page.newCompContinueButton.click();
         Sales._FindComps.Actions.SaleInfo.selectSaleDate().setBuyerGrantee(testData.saleInfo.buyer)
-            .setSellerGarantor(testData.saleInfo.seller);
+            .setSellerGrantor(testData.saleInfo.seller);
         Sales._FindComps
             .Actions.Page.newCompContinueButton.click();
 

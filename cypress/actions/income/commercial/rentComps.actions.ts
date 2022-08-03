@@ -9,6 +9,7 @@ import {
 import { _map } from "../../../support/commands";
 import mapKeysUtils from "../../../utils/mapKeys.utils";
 import { getTodayDateString, isDateHasCorrectFormat } from "../../../../utils/date.utils";
+import { Alias } from "../../../utils/alias.utils";
 
 class CommercialRentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
 
@@ -59,7 +60,7 @@ class CommercialRentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
             rentCompsPage.getDropdownOptionByValue(option).should("be.visible").click();
             rentCompsPage.sortByDropdown.should("contain.text", option);
         }
-        
+
         return this;
     }
 
@@ -101,7 +102,7 @@ class CommercialRentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
         return this;
     }
 
-    fillInRentCompFieldInput(fieldName: string, value: string | number, 
+    fillInRentCompFieldInput(fieldName: string, value: string | number,
         isRequired = false): CommercialRentCompsActions {
         const requiredAttrMatcher = isRequired ? "have.attr" : "not.have.attr";
         rentCompsPage.getRentCompInputField(fieldName).clear().type(`${value}{enter}`)
@@ -134,7 +135,7 @@ class CommercialRentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
     clickRemoveButtonByRowNumber(rowNumber = 0): CommercialRentCompsActions {
         rentCompsPage.getRemoveCompButton(rowNumber).click();
         return this;
-    } 
+    }
 
     verifyRentPerMonthCellValue(value: number, group = "Unsorted", rowNumber = 0): CommercialRentCompsActions {
         rentCompsPage.getRentPerSFCellByRowNumberAndGroup(group, rowNumber)
@@ -144,7 +145,7 @@ class CommercialRentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
 
     verifyRentPerMonthCellPSFValue(group = "Unsorted", rowNumber = 0): CommercialRentCompsActions {
         this.clickEditButtonByRowNumber(rowNumber);
-        const baseRent =  rentCompsPage.getRentCompInputField("baseRent").invoke("val");
+        const baseRent = rentCompsPage.getRentCompInputField("baseRent").invoke("val");
         baseRent.then(baseRent => {
             const rentValue = getNumberFromDollarNumberWithCommas(baseRent);
             const perSquareFootValue = `$${(rentValue / 12).toFixed(2)}`;
@@ -154,16 +155,16 @@ class CommercialRentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
         return this;
     }
 
-    verifyRentPerMonthCellMonthlyOrAnnuallyValue(name: BoweryReports.UnitsOfMeasure = "monthly", 
+    verifyRentPerMonthCellMonthlyOrAnnuallyValue(name: BoweryReports.UnitsOfMeasure = "monthly",
         group = "Unsorted", rowNumber = 0): CommercialRentCompsActions {
         this.clickEditButtonByRowNumber(rowNumber);
-        const baseRent =  rentCompsPage.getRentCompInputField("baseRent").invoke("val");
-        const squareFeet =  rentCompsPage.getRentCompInputField("squareFeet").invoke("val");
+        const baseRent = rentCompsPage.getRentCompInputField("baseRent").invoke("val");
+        const squareFeet = rentCompsPage.getRentCompInputField("squareFeet").invoke("val");
         baseRent.then(baseRent => {
             const baseRentNum = getNumberFromDollarNumberWithCommas(baseRent);
             squareFeet.then(squareFeet => {
                 const squareFeetNum = getNumberFromDollarNumberWithCommas(squareFeet);
-                const perSquareFootValue = (name === "monthly") ? `$${(baseRentNum / squareFeetNum).toFixed(2)}` 
+                const perSquareFootValue = (name === "monthly") ? `$${(baseRentNum / squareFeetNum).toFixed(2)}`
                     : `$${(baseRentNum / 12 / squareFeetNum).toFixed(2)}`;
                 rentCompsPage.cancelModalButton.click();
                 rentCompsPage.getRentPerSFCellByRowNumberAndGroup(group, rowNumber)
@@ -186,7 +187,7 @@ class CommercialRentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
         return this;
     }
 
-    clickEditButtonByRowNumber (rowNumber = 0): CommercialRentCompsActions {
+    clickEditButtonByRowNumber(rowNumber = 0): CommercialRentCompsActions {
         rentCompsPage.getEditCompButton(rowNumber).click();
         return this;
     }
@@ -225,13 +226,13 @@ class CommercialRentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
      * If there is no elements in a drop group we use default locator, in other case we use 1st row of a group.
      */
     dragCommercialUnitsIntoGroup(groupName: string, numberOfUnits = 1, index = 0): CommercialRentCompsActions {
-        let subject = rentCompsPage.getDraggableElement(index); 
+        let subject = rentCompsPage.getDraggableElement(index);
         let commercialUnit = cy.get(subject);
         let target: string;
 
         for (let i = 0; i < numberOfUnits; i++) {
-            target = i == 0 
-                ? rentCompsPage.getDroppableArea(groupName) 
+            target = i == 0
+                ? rentCompsPage.getDroppableArea(groupName)
                 : rentCompsPage.getDroppableAreaDropped(groupName);
             commercialUnit.dragAndDrop(subject, target);
             // VB: For more than 2 units Drag and drop is too slow and we need to wait a bit between dnd actions.
@@ -321,7 +322,19 @@ class CommercialRentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
         return this;
     }
 
-    saveCompPricesPerSFPerYearToAliasNumberFirstComps(numberToSave: number, 
+    clickYesNoIfModalExist(yes = true): CommercialRentCompsActions {
+        cy.get("body").then($body => {
+            if ($body.text().includes("Would you like to select them?")) {
+                const button = yes ? rentCompsPage.getModalDialogYesButtons()
+                    : rentCompsPage.getModalDialogNoButtons();
+                button.click();
+                this.verifyProgressBarNotExist();
+            }
+        });
+        return this;
+    }
+
+    saveCompPricesPerSFPerYearToAliasNumberFirstComps(numberToSave: number,
         group = "Unsorted"): CommercialRentCompsActions {
         for (let i = 0; i < numberToSave; i++) {
             this.saveCompPricePerSFPerYearToAliasByIndex(group, i);
@@ -330,16 +343,16 @@ class CommercialRentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
     }
 
     verifyComputedCompsMinValue(rentPSFs: number[]): CommercialRentCompsActions {
-        const textToBe = rentPSFs.length === 0 
-            ? "$0" 
+        const textToBe = rentPSFs.length === 0
+            ? "$0"
             : `$${Math.round(Math.min(...rentPSFs))}`;
         rentCompsPage.computedCompsMinCell.should("have.text", textToBe);
         return this;
     }
 
     verifyComputedCompsAvgValue(rentPSFs: number[]): CommercialRentCompsActions {
-        const avgValue = rentPSFs.length === 0 
-            ? 0 
+        const avgValue = rentPSFs.length === 0
+            ? 0
             : rentPSFs.reduce((sum, current) => sum + current, 0) / rentPSFs.length;
         const textToBe = `$${Math.round(avgValue)}`;
         rentCompsPage.computedCompsAvgCell.should("have.text", textToBe);
@@ -347,8 +360,8 @@ class CommercialRentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
     }
 
     verifyComputedCompsMaxValue(rentPSFs: number[]): CommercialRentCompsActions {
-        const textToBe = rentPSFs.length === 0 
-            ? "$0" 
+        const textToBe = rentPSFs.length === 0
+            ? "$0"
             : `$${Math.round(Math.max(...rentPSFs))}`;
         rentCompsPage.computedCompsMaxCell.should("have.text", textToBe);
         return this;
@@ -379,8 +392,8 @@ class CommercialRentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
         return this;
     }
 
-    verifyCommercialUnitDetailsUnitMeasureRadioChecked(measureValue: BoweryReports.UnitsOfMeasure): 
-    CommercialRentCompsActions {
+    verifyCommercialUnitDetailsUnitMeasureRadioChecked(measureValue: BoweryReports.UnitsOfMeasure):
+        CommercialRentCompsActions {
         rentCompsPage.getUnitMeasureRadioByValue(measureValue).parent("[data-qa=checked]").should("exist");
         return this;
     }
@@ -434,6 +447,129 @@ class CommercialRentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
             .and(matcher, "required");
         return this;
     }
+
+    private verifyIncludesPolygon(value: string | number): CommercialRentCompsActions {
+        cy.contains("This polygon includes").should("include.text", `${value}`);
+        return this;
+    }
+
+    /**
+     * Draw polygon using coordinates. Need wait to render polygon 
+     * @param coordinates Starts from map top left
+     * @param verifyPolygons Count unit in render polygon
+     * @param dialogTitle Dialog title to click
+     * @param isSelect Apply changes or not
+     */
+    drawPolygon(
+        coordinates = [ { x: 0, y: 0 } ],
+        dialogTitle = "Finish drawing",
+        isSelect = true): CommercialRentCompsActions {
+        cy.intercept('POST', '/commercialRentComps/search-units').as(Alias.searchUnits);
+        rentCompsPage.mapDrawPolygonButton.click();
+        coordinates.forEach(coord => {
+            rentCompsPage.mapContainer.click(coord.x, coord.y);
+            cy.wait(1000);
+        });
+        rentCompsPage.getMapDialogButtons(dialogTitle).click();
+        cy.wait(`@${Alias.searchUnits}`, { timeout: 10000 }).then(({ response }) => {
+            let countUnits = response.body.length;
+            cy.log("countUnits", countUnits);
+            this.verifyProgressBarNotExist()
+                .verifyIncludesPolygon(countUnits)
+                .clickYesNoIfModalExist(isSelect);
+        });
+
+        return this;
+    }
+
+
+    /**
+     * Nikita: Edit only first element in changeable polygon
+     * TODO: Need to figure out a way to change all the elements in edit polygon
+     * @param coordinates Starts from map top left
+     * @param verifyPolygons Count unit in render polygon
+     * @param dialogTitle Dialog title to click
+     * @param isSelect Apply changes or not
+     */
+
+    editDrewPolygon(
+        coordinates = [ { x: 0, y: 0 } ],
+        dialogTitle = "Save changes",
+        isSelect = true): CommercialRentCompsActions {
+        cy.intercept('POST', '/commercialRentComps/search-units').as(Alias.searchUnits);
+        rentCompsPage.getMapDialogButtons("Edit layers").click();
+        coordinates.forEach((coord, index) => {
+            rentCompsPage.editingIcon.then($el => {
+                let canvas = $el.get(index);
+                let rect = canvas.getBoundingClientRect();
+
+                let center = {
+                    x: rect.left + rect.width / 2,
+                    y: rect.top + rect.height / 2
+                };
+
+                cy.log('mousedown', {
+                    clientX: center.x,
+                    clientY: center.y
+                });
+                canvas.dispatchEvent(
+                    new MouseEvent('mousedown', {
+                        clientX: center.x,
+                        clientY: center.y
+                    })
+                );
+
+                cy.log('mousemove', {
+                    clientX: center.x,
+                    clientY: center.y + 5
+                });
+                canvas.dispatchEvent(
+                    new MouseEvent('mousemove', {
+                        clientX: center.x,
+                        clientY: center.y + 5,
+                        bubbles: true
+                    })
+                );
+
+                cy.log('mousemove', {
+                    clientX: center.x - coord.x,
+                    clientY: center.y - coord.y,
+                });
+                canvas.dispatchEvent(
+                    new MouseEvent('mousemove', {
+                        clientX: center.x - coord.x,
+                        clientY: center.y - coord.y,
+                        bubbles: true
+                    })
+                );
+
+                cy.log('mouseup', {
+                    clientX: center.x - coord.x,
+                    clientY: center.y - coord.y,
+                });
+                requestAnimationFrame(() => {
+                    canvas.dispatchEvent(
+                        new MouseEvent('mouseup', {
+                            clientX: center.x - coord.x,
+                            clientY: center.y - coord.y,
+                            bubbles: true
+                        })
+                    );
+                });
+            });
+        });
+        rentCompsPage.getMapDialogButtons(dialogTitle).click();
+        cy.wait(`@${Alias.searchUnits}`, { timeout: 10000 }).then(({ response }) => {
+            let countUnits = response.body.length;
+            cy.log("countUnits", countUnits);
+            this.verifyProgressBarNotExist()
+                .verifyIncludesPolygon(countUnits)
+                .clickYesNoIfModalExist(isSelect);
+        });
+
+        return this;
+    }
+
 }
 
 export default new CommercialRentCompsActions(rentCompsPage);

@@ -26,7 +26,7 @@ describe("[QA-4167] Verify the Appraiser Commentary field", { tags: [ "@sales", 
             .Page.newCompContinueButton.click();
         Sales._FindComps.Actions.SaleInfo.selectSaleDate()
             .setBuyerGrantee(testData.saleInfo.buyer)
-            .setSellerGarantor(testData.saleInfo.seller);
+            .setSellerGrantor(testData.saleInfo.seller);
         Sales._FindComps
             .Actions.Page.newCompContinueButton.click();
 
