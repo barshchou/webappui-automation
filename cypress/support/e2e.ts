@@ -46,6 +46,8 @@ after(() => {
 
 afterEach(() => {
     // @ts-ignore
+    
+    // ernst: internal command of Cypress, you can access to `Cypress.mocha._mocha.suite` in browser's console
     if (Cypress.mocha._mocha.suite.suites[0]._testConfig.tags.includes(Tag.check_export)) {
         if (!Cypress.currentTest.title.includes("Check export")) {
             cy.logNode(`Deleting report in check export spec`);
