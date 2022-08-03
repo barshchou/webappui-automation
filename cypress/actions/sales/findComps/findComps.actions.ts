@@ -258,6 +258,9 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
     }
 
     //TODO upgrade this method, cos it cant add two imports because of scroll.
+    /**
+     * Action enters report id into field 'Report ID' on 'JOB SEARCH' tab
+     */
     enterReportToSearchComp(reportID: string): FindCompsActions {
         cy.intercept("GET", `/salesComps/eventIds/${reportID}`)
             .as(Alias.salesCompsEventIds);
@@ -414,6 +417,10 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
         return this;
     }
 
+    /**
+     * Action opens 'JOB SEARCH' tab, enters report id, finds comp on map
+     * and imports comps to existing report
+     */
     addNewCompViaReportId(reportId: string): FindCompsActions {
         this.openJobSearchTab()
             .enterReportToSearchComp(reportId)
