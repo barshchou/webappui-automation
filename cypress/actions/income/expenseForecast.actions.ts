@@ -3,6 +3,7 @@ import { getNumberFromDollarNumberWithCommas, numberWithCommas } from "../../../
 import BaseActionsExt from "../base/base.actions.ext";
 import { Alias } from "../../utils/alias.utils";
 import { BoweryReports } from "../../types/boweryReports.type";
+import enums from "../../enums/enums";
 
 type ForecastItem = BoweryReports.ForecastItem;
 type BuildingDescription = BoweryReports.BuildingDescription;
@@ -149,13 +150,13 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
     }
 
     itemOriginalObj = {
-        waterAndSewer: "waterAndSewer",
-        repairsAndMaintenance: "repairsAndMaintenance",
-        payrollAndBenefits: "payrollAndBenefits",
-        generalAndAdministrative: "generalAndAdministrative",
-        legalAndProfessionalFees: "legalAndProfessionalFees",
-        management: "management",
-        reserves: "reserves"
+        waterAndSewer: enums.EXPENSE_CELL.waterAndSewer,
+        repairsAndMaintenance: enums.EXPENSE_CELL.repairAndMaintenance,
+        payrollAndBenefits: enums.EXPENSE_CELL.payrollBenefits,
+        generalAndAdministrative: enums.EXPENSE_CELL.generalAndAdministrative,
+        legalAndProfessionalFees: enums.EXPENSE_CELL.legalAndProfessional,
+        management: enums.EXPENSE_CELL.managementFees,
+        reserves: enums.EXPENSE_CELL.replacementsAndReserves
     }
 
     changeStateOfPercentOfEGICheckbox(isToCheck = true): ExpenseForecastActions {
