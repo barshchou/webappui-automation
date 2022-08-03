@@ -5,6 +5,8 @@ import {
 } from "../../../utils/numbers.utils";
 import BaseActionsExt from "../base/base.actions.ext";
 import { BoweryReports } from "../../types/boweryReports.type";
+import mapKeysUtils from "../../utils/mapKeys.utils";
+import taxInfoKeys from "../../utils/mapKeys/income/tax_Info/taxInfoKeys";
 
 class TaxInfoActions extends BaseActionsExt<typeof taxInfoPage> {
 
@@ -427,7 +429,8 @@ class TaxInfoActions extends BaseActionsExt<typeof taxInfoPage> {
                     rowElements.push(rowElementNumber);
                 });
             }
-            cy._mapSet(rowName, rowElements);
+            const mapKey = rowName === "Tax Rate" ? taxInfoKeys.taxRates : taxInfoKeys.assessmentRows;
+            cy._mapSet(mapKey, rowElements);
         });
         return this;
     }
@@ -439,12 +442,11 @@ class TaxInfoActions extends BaseActionsExt<typeof taxInfoPage> {
      */
     verifyTotalTaxLiability(): TaxInfoActions {
         this.getValuesFromRows("Tax Rate");
-        cy._mapGet("Tax Rate").then(taxRates => {
+        cy._mapGet(taxInfoKeys.taxRates).then(taxRates => {
             const sumTaxRates = taxRates.reduce((a, b) => a + b);
-            const toPercent = 0.01;
-            const taxRatesPercent = sumTaxRates * toPercent;
+            const taxRatesPercent = sumTaxRates / 100;
             this.getValuesFromRows("Assessment Row", false);
-            cy._mapGet("Assessment Row").then(assessments => {
+            cy._mapGet(taxInfoKeys.assessmentRows).then(assessments => {
                 const sumAssessments = assessments.reduce((a, b) => a + b);
                 taxInfoPage.getTaxLiabilityRowValue("Taxable Assessed Value").invoke("text")
                     .then(taxAssessedText => {
