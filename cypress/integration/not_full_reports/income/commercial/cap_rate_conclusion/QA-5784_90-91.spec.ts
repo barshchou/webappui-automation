@@ -1,7 +1,7 @@
 import { Property } from '../../../../../actions/index';
 import { _NavigationSection } from '../../../../../actions/base/index';
 import testData from 
-    "../../../../../fixtures/not_full_reports/income/commercial/cap_rate_conclusion/QA-5784_91.fixture";
+    "../../../../../fixtures/not_full_reports/income/commercial/cap_rate_conclusion/QA-5784_90-91.fixture";
 import NavigationSection from "../../../../../actions/base/navigationSection.actions";
 import Income from "../../../../../actions/income/income.manager";
 import { createReport } from "../../../../../actions/base/baseTest.actions";
