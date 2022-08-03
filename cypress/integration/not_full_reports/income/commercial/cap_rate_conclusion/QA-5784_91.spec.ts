@@ -1,12 +1,13 @@
-import { Property } from './../../../../../actions/index';
-import { _NavigationSection } from './../../../../../actions/base/index';
-import testData from "../../../../../fixtures/not_full_reports/income/commercial/cap_rate_conclusion/QA-5784.fixture";
+import { Property } from '../../../../../actions/index';
+import { _NavigationSection } from '../../../../../actions/base/index';
+import testData from 
+    "../../../../../fixtures/not_full_reports/income/commercial/cap_rate_conclusion/QA-5784_91.fixture";
 import NavigationSection from "../../../../../actions/base/navigationSection.actions";
 import Income from "../../../../../actions/income/income.manager";
 import { createReport } from "../../../../../actions/base/baseTest.actions";
 import launchDarklyApi from '../../../../../api/launchDarkly.api';
 
-describe("", 
+describe("Validation of Market Values Per SF for ACAS reports", 
     { tags:[ "@income", "@commercial", "@in_place_rent_roll", "@feature_flag" ] }, () => {
         beforeEach("Login, create report", () => {
             cy.stepInfo(`1. Set feature flag and create report`);
@@ -45,7 +46,7 @@ describe("",
             });
         });
 
-        it("Test body", () => {
+        it("[QA-5784][QA-5791]", () => {
             cy.stepInfo(`6. Set Cap Rate value`);
             NavigationSection.navigateToCapRateConclusion();
             Income.CapRateConclusion.enterConclusionSectionConcludedCapRate(testData.capRate);
@@ -64,7 +65,6 @@ describe("",
             Income.CapRateConclusion.addNewRentLoss(testData.commercialUnitType, testData.commercialUnits, 
                 testData.valueConclusionAsStabilized);
                 
-
             cy.stepInfo(`10. Fill in with valid numeric values:
             - Less Residential Rent Loss
             - Less Commercial Rent Loss
@@ -87,14 +87,18 @@ describe("",
             Prospective Market Value As Complete (Amount) rounded according to “Round to nearest” value`);
             Income.CapRateConclusion.verifyAsCompleteFinalValueCalculated();
 
-            cy.stepInfo(`13. Add New Residential Rent Loss on As Complete tab and New Commercial 
+            cy.stepInfo(`[QA-5791] 13. Verify if Prospective Market Value As Complete Per SF is calculated 
+            with correct formula based on selected Basis for Square Foot Analysis`);
+            Income.CapRateConclusion.verifyAsCompleteFinalPerSFCalculated(testData.squareFootAnalysisArea);
+
+            cy.stepInfo(`14. Add New Residential Rent Loss on As Complete tab and New Commercial 
             Rent Loss on As Complete tab `);
             Income.CapRateConclusion.addNewRentLoss(testData.residentialUnitType, testData.residentialUnits, 
                 testData.valueConclusionAsComplete);
             Income.CapRateConclusion.addNewRentLoss(testData.commercialUnitType, testData.commercialUnits, 
                 testData.valueConclusionAsComplete);
 
-            cy.stepInfo(`14. Fill in with valid numeric values:
+            cy.stepInfo(`15. Fill in with valid numeric values:
             - Less Residential Rent Loss
             - Less Commercial Rent Loss
             - Less Undetermined Commercial Rent Loss
@@ -107,19 +111,18 @@ describe("",
                 .enterAsCompleteLessEntrepreneurialProfit(testData.entrepreneurialProfit)
                 .enterAsCompleteLessBuyoutCost(testData.lessBuyoutCost);
 
-            cy.stepInfo(`15. Make sure As Is Market Value (Amount) = Prospective Market Value As Complete Per SF - 
+            cy.stepInfo(`16. Make sure As Is Market Value (Amount) = Prospective Market Value As Complete Per SF - 
             Less Residential Rent Loss - Less Commercial Rent Loss - Less Undetermined Commercial Rent Loss - 
             Renovation Budget ( on Property>Renovations page) - Less Buyout Cost - Less Entrepreneurial Profit*`);
             Income.CapRateConclusion.verifyAsIsMarketValueCalculated();
 
-            cy.stepInfo(`16. Make sure As Is Market Value (Final Value) =  As Is Market Value (Amount) 
+            cy.stepInfo(`17. Make sure As Is Market Value (Final Value) =  As Is Market Value (Amount) 
             rounded according to “Round to nearest” value`);
             Income.CapRateConclusion.verifyAsIsFinalValueCalculated();
 
-            cy.stepInfo(`17. Verify if  As Is Market Value Per SF  is calculated with correct formula 
+            cy.stepInfo(`[QA-5784] 18. Verify if  As Is Market Value Per SF  is calculated with correct formula 
             based on selected Basis for Square Foot Analysis`);
             Income.CapRateConclusion.verifyAsIsMarketPerSFCalculated(testData.squareFootAnalysisArea);
-            
         });
 
         after(`Remove feature flag`, () => {

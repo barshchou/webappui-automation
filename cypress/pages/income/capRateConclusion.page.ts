@@ -62,6 +62,10 @@ class CapRateConclusionPage extends BasePage {
 
     get asIsMarketValuePerSF() { return cy.xpath("//*[.='As Is Market Value Per SF']//following-sibling::td[3]"); }
 
+    get prospectiveMarketValueAsCompletePerSF() { 
+        return cy.xpath("//*[.='Prospective Market Value As Complete Per SF']//following-sibling::td[3]"); 
+    }
+
     addRentLossButton(incomeType: BoweryReports.UnitIncomeType) { 
         return cy.xpath(`//*[@data-qa='add-btn'][.='+ New ${incomeType} Rent Loss']`); 
     }

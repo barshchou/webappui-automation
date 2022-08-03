@@ -14,6 +14,7 @@ export default {
     entrepreneurialCompleteProfit: 'entrepreneurialProfit',
     asIsMarketAmount: 'asIsMarketAmount',
     asIsMarketFinalAmount: 'asIsMarketFinalAmount',
-    renovationBudget: 'renovationBudget'
+    renovationBudget: 'renovationBudget',
+    asCompleteFinalAmount: 'asCompleteFinalAmount'
 
 };

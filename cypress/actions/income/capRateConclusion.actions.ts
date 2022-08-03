@@ -606,6 +606,15 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
         return this;
     }
 
+    setAsCompleteFinalAmount(): CapRateConclusionActions {
+        capRateConclusionPage.asCompleteFinalValueCell.should('exist')
+            .invoke('text').then(asCompleteFinalAmount => {
+                let asCompleteFinalAmountAdjusted = getNumberFromDollarNumberWithCommas(asCompleteFinalAmount);
+                cy._mapSet(capRateConclusionKeys.asCompleteFinalAmount, asCompleteFinalAmountAdjusted);
+            });
+        return this;
+    }
+
     /**
      * Verifies As Is Market value per SF by formula:
      * [As Is Market Final Value] / [Square Foot Analysis Area]
@@ -620,6 +629,26 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
                 ? `-$${asIsMarketFinalSFAmount}`
                 : `${asIsMarketFinalSFAmount}`;
             capRateConclusionPage.asIsMarketValuePerSF.invoke('text', expectedAsIsMarketSFAmount);
+        });
+        
+        return this;
+    }
+
+    /**
+     * Verifies Prospective Market value As Complete per SF by formula:
+     * [Prospective Market Value As Complete (Final Value)] / [Square Foot Analysis Area]
+     * @param squareFootAnalysisArea Area for selected square foot analysis basis 
+     * @returns CapRateConclusionActions
+     */
+    verifyAsCompleteFinalPerSFCalculated(squareFootAnalysisArea: number): CapRateConclusionActions {
+        this.setAsCompleteFinalAmount();
+        cy._mapGet(capRateConclusionKeys.asCompleteFinalAmount).then(asCompleteFinalAmount => {
+            let asCompleteFinalSFAmount = asCompleteFinalAmount / squareFootAnalysisArea;
+            let expectedAsCompleteMarketSFAmount = asCompleteFinalSFAmount < 0 
+                ? `-$${asCompleteFinalSFAmount}`
+                : `${asCompleteFinalSFAmount}`;
+            capRateConclusionPage.prospectiveMarketValueAsCompletePerSF
+                .invoke('text', expectedAsCompleteMarketSFAmount);
         });
         
         return this;
