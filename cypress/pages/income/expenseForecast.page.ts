@@ -13,6 +13,7 @@ class ExpenseForecastPage extends BasePage {
 
     get repairsAndMaintenanceCard() { return cy.get("[data-qa=repairsAndMaintenance-forecast-item] > div").last(); }
 
+    // TODO: ask developers to restore old locators with expense names instead of hardcoded "customExpenses[0,1,2...]"
     /**
      * If card is default - locator gets forecast card name 
      * (default names are contained in expensesForecastCardNames.enum.ts) for qa-data attribute. 
