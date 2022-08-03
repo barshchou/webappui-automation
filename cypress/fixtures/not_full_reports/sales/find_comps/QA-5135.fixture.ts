@@ -1,9 +1,8 @@
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 import Enums from "../../../../enums/enums";
-import { BoweryReports } from "../../../../types/boweryReports.type";
 
-const sortSalesCompsDateSold = 'Date Sold' as BoweryReports.FindComps.SelectedComparablesSortType;
-const sortSalesCompsCustom = "Custom" as BoweryReports.FindComps.SelectedComparablesSortType;
+const sortSalesCompsDateSold = Enums.SORT_VALUES.dateSold;
+const sortSalesCompsCustom = Enums.SORT_VALUES.custom;
 
 export default {
     reportCreationData: ReportDataCreator.getReportData("5135", {

@@ -9,8 +9,8 @@ const reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreato
 });
 
 const filePath = "not_full_reports/CostarExport 5161.csv";
-const sortSalesCompsDateSold = 'Date Sold' as BoweryReports.FindComps.SelectedComparablesSortType;
-const salePeriodValue = 'Last 3 Months' as BoweryReports.FindComps.SalePeriodValues;
+const sortSalesCompsDateSold = Enums.SORT_VALUES.dateSold;
+const salePeriodValue = Enums.SALE_PERIOD_VALUES.lastThreeMonths;
 
 const arrayOfCompsForAdditionFromMap1 = [
     {
@@ -42,8 +42,8 @@ const comparableFixtureManual = {
     address4: "383 Madison Avenue, New York, NY, USA",
     address5: "345 Park Avenue, New York, NY, USA",
     address6: "225 Liberty Street, New York, NY, USA",
-    condition: "Shell" as BoweryReports.FindComps.ConditionValueType,
-    comparableType: "Multifamily" as BoweryReports.FindComps.ComparableTypes,
+    condition: Enums.CONDITION_VALUES.shell,
+    comparableType: Enums.COMPARABLE_TYPES.multifamily,
     units: {
         grossArea: 2700,
         numberOfUnits: 3,
@@ -54,9 +54,9 @@ const comparableFixtureManual = {
         buyer: "Test and CO",
         seller: "Test inc"
     },
-    saleStatusListing: 'Listing' as BoweryReports.FindComps.SaleStatusType,
-    saleStatusUnderContract: 'Under Contract' as BoweryReports.FindComps.SaleStatusType,
-    saleStatusTransaction: 'Transaction' as BoweryReports.FindComps.SaleStatusType,
+    saleStatusListing: Enums.SALE_STATUSES.listing,
+    saleStatusUnderContract: Enums.SALE_STATUSES.underContract,
+    saleStatusTransaction: Enums.SALE_STATUSES.transaction,
 };
 
 const arrayOfCompsForManualAddition = [
