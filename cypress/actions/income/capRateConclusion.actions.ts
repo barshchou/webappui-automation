@@ -701,8 +701,8 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
         cy._mapGet(capRateConclusionKeys.asStabilizedFinalAmount).then(asStabilizedFinalAmount => {
             let asStabilizedFinalSFAmount = asStabilizedFinalAmount / squareFootAnalysisArea;
             let expectedAsStabilizedFinalSFAmount = asStabilizedFinalSFAmount < 0 
-                ? `-$${asStabilizedFinalSFAmount}`
-                : `${asStabilizedFinalSFAmount}`;
+                ? `-$${numberWithCommas(Math.abs(asStabilizedFinalSFAmount).toFixed(2))}`
+                : `${numberWithCommas(asStabilizedFinalSFAmount.toFixed(2))}`;
             capRateConclusionPage.prospectiveMarketValuePerSF(valueConclusionName)
                 .invoke('text', expectedAsStabilizedFinalSFAmount);
         });
