@@ -7,6 +7,7 @@ import {
 import BaseActionsExt from "../base/base.actions.ext";
 import capRateConclusionKeys from "../../utils/mapKeys/income/capRateConclusion/capRateConclusion.keys";
 import { BoweryReports } from "../../types/boweryReports.type";
+import enums from "../../enums/enums";
 
 class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPage> {
 
@@ -343,16 +344,23 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
      * unit income type and amount of unit required to be checked for rent loss.
      * @param  unitIncomeType
      * @param  unitsNumber
-     * @param  valueConclusion
+     * @param  conclusionValue report type (AS_IS, AS_STABILIZED, AS_COMPLETE)
+     * @param  valueConclusionName conclusion value name (asIs, asStabilized, asComplete)
      * @returns CapRateConclusionActions
      */
-    addNewRentLoss(unitIncomeType: BoweryReports.UnitIncomeType, unitsNumber: number, 
-        valueConclusion: BoweryReports.ValueConclusionName): CapRateConclusionActions {
+    addNewRentLoss(
+        unitIncomeType: BoweryReports.UnitIncomeType, 
+        unitsNumber: number, 
+        conclusionValue: BoweryReports.ConclusionValue, 
+        valueConclusionName?: BoweryReports.ValueConclusionName): CapRateConclusionActions {
         this.clickAddRentLoss(unitIncomeType);
-        capRateConclusionPage
-            .valueConclusionSwitcher(valueConclusion)
-            .click()
-            .should("have.attr", "aria-pressed", "true");
+
+        if (conclusionValue == enums.VALUE_CONCLUSION_TYPE.AS_COMPLETE) {
+            capRateConclusionPage
+                .valueConclusionSwitcher(valueConclusionName)
+                .click()
+                .should("have.attr", "aria-pressed", "true");
+        }
 
         for (let index = 0; index < unitsNumber; index++) {
             this.checkRentLossCheckboxByRow(index);
@@ -363,15 +371,15 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
     }
 
     /**
-     * Verifies Prospective Market Value As Complete
+     * Verifies Market Value As Complete or As Is based on report type (As Complete or As Stabilized)
      * Sets all aliases for As Stablilized rent losses, commission, entrepreneur profit.
      * Gets all aliases that were set and check As Complete value by formula:
      *   [As Stabilized Amount] - [Sum of Rent Losses] - [Commission Fee] - 
      *   (([Sum of Rent Losses] + [Commission Fee]) * Entrepreneur Profit)
      * @returns CapRateConclusionActions
      */
-    verifyProspectiveMarketValueAsCompleteCalculated(valueConclusionKey: BoweryReports.ValueConclusionKeys): 
-    CapRateConclusionActions {
+    verifyMarketValueAsIsAsCompleteCalculated(conclusionValueType: BoweryReports.ConclusionValue, 
+        valueConclusionKey: BoweryReports.ValueConclusionKeys): CapRateConclusionActions {
         this.setAllAsStabilizedLossesAliases(valueConclusionKey); 
         cy._mapGet(capRateConclusionKeys.asStabilizedResRentLossItem).then(residentialRentLoss => {
             cy._mapGet(capRateConclusionKeys.asStabilizedCommercialRentLossItem).then(commercialRentLoss => {
@@ -381,7 +389,7 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
                             cy._mapGet(capRateConclusionKeys.entrepreneurialStabilizedProfit)
                                 .then(entrepreneurProfit => {
                                     cy._mapGet(capRateConclusionKeys.asStabilizedAmount).then(asStabilizedAmount => {
-                                        cy.log(`As Stabilized AmountT: ${asStabilizedAmount}`);
+                                        cy.log(`As Stabilized Amount: ${asStabilizedAmount}`);
                                     
                                         let allRentLosses = residentialRentLoss  + commercialRentLoss + 
                                         commercialUndRentLoss  + commissionFee;
@@ -395,12 +403,15 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
                                         entrepreneurLoss) / 10) * 10;
                                         cy.log(`Prospective Value As Complete: ${prospectiveValue}`);
 
-                                        let expectedProspectiveValueAsComplete = prospectiveValue < 0 
+                                        let expectedValue = prospectiveValue < 0 
                                             ? `-$${numberWithCommas(prospectiveValue.toFixed(0).replace('-', ''))}`
                                             : `${numberWithCommas(prospectiveValue.toFixed(0))}`;
 
-                                        capRateConclusionPage.asCompleteAmountCell
-                                            .should('have.text', expectedProspectiveValueAsComplete);
+                                        conclusionValueType == enums.VALUE_CONCLUSION_TYPE.AS_COMPLETE 
+                                            ? capRateConclusionPage.asCompleteAmountCell
+                                                .should('have.text', expectedValue) 
+                                            : capRateConclusionPage.asIsMarketAmountCell
+                                                .should('have.text', expectedValue);
                                     });
                                 });
                         });
@@ -411,14 +422,15 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
     }
 
     /**
-     * Verifies As Is Market Value
+     * Verifies As Is Market Value for ACAS report type
      * Sets all aliases for As Complete rent losses, buyout cost, renovation, entrepreneur profit.
      * Gets all aliases that were set and check As Is Market value by formula:
      *   [As Complete Amount] - [Sum of Rent Losses] - [Buyout Cost] - [Renovation] -
      *   (([Sum of Rent Losses] + [Less Buyout Cost]) * Entrepreneur Profit)
      * @returns CapRateConclusionActions
      */
-    verifyAsIsMarketValueCalculated(valueConclusionKey: BoweryReports.ValueConclusionKeys): CapRateConclusionActions {
+    verifyAsIsMarketValueACASCalculated(valueConclusionKey: BoweryReports.ValueConclusionKeys): 
+    CapRateConclusionActions {
         this.setAllAsCompleteLossesAliases(valueConclusionKey);
         cy._mapGet(capRateConclusionKeys.asCompleteResRentLossItem).then(residentialRentLoss => {
             cy._mapGet(capRateConclusionKeys.asCompleteCommercialRentLossItem).then(commercialRentLoss => {
@@ -648,9 +660,9 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
         cy._mapGet(capRateConclusionKeys.asIsMarketFinalAmount).then(asIsMarketFinalAmount => {
             let asIsMarketFinalSFAmount = asIsMarketFinalAmount / squareFootAnalysisArea;
             let expectedAsIsMarketSFAmount = asIsMarketFinalSFAmount < 0 
-                ? `-$${asIsMarketFinalSFAmount}`
-                : `${asIsMarketFinalSFAmount}`;
-            capRateConclusionPage.asIsMarketValuePerSF.invoke('text', expectedAsIsMarketSFAmount);
+                ? `-$${numberWithCommas(Math.abs(asIsMarketFinalSFAmount).toFixed(2))}`
+                : `${numberWithCommas(asIsMarketFinalSFAmount.toFixed(2))}`;
+            capRateConclusionPage.asIsMarketValuePerSF.should('have.text', expectedAsIsMarketSFAmount);
         });
         
         return this;
@@ -668,10 +680,10 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
         cy._mapGet(capRateConclusionKeys.asCompleteFinalAmount).then(asCompleteFinalAmount => {
             let asCompleteFinalSFAmount = asCompleteFinalAmount / squareFootAnalysisArea;
             let expectedAsCompleteMarketSFAmount = asCompleteFinalSFAmount < 0 
-                ? `-$${asCompleteFinalSFAmount}`
-                : `${asCompleteFinalSFAmount}`;
+                ? `-$${numberWithCommas(Math.abs(asCompleteFinalSFAmount).toFixed(2))}`
+                : `${numberWithCommas(asCompleteFinalSFAmount.toFixed(2))}`;
             capRateConclusionPage.prospectiveMarketValuePerSF(valueConclusionName)
-                .invoke('text', expectedAsCompleteMarketSFAmount);
+                .should('have.text', expectedAsCompleteMarketSFAmount);
         });
         
         return this;
