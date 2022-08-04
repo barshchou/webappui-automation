@@ -279,7 +279,6 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
      * Gets cap rate rounding factor and As Stabilized amount.
      * It verifies whether final value is rounded correctly.
      * Formula: As Stabilized Amount * Rounding Factor => round result => multiply by rounding factor
-     * @returns CapRateConclusionActions
      */
     verifyAsStabilizedFinalValueCalculated(): CapRateConclusionActions {
         this.setRoundingFactorValueAlias()
@@ -300,7 +299,6 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
      * Gets cap rate rounding factor and As Complete amount.
      * It verifies whether final value is rounded correctly.
      * Formula: As Complete AMount * Rounding Factor => round result => multiply by rounding factor
-     * @returns CapRateConclusionActions
      */
     verifyAsCompleteFinalValueCalculated(): CapRateConclusionActions {
         this.setRoundingFactorValueAlias()
@@ -321,7 +319,6 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
      * Gets cap rate rounding factor and As Complete amount.
      * It verifies whether final value is rounded correctly.
      * Formula: As Is AMount * Rounding Factor => round result => multiply by rounding factor
-     * @returns CapRateConclusionActions
      */
     verifyAsIsFinalValueCalculated(): CapRateConclusionActions {
         this.setRoundingFactorValueAlias()
@@ -341,10 +338,6 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
     /**
      * Adds new Residential/Commercial rent loss with provided value conclusion value, 
      * unit income type and amount of unit required to be checked for rent loss.
-     * @param  unitIncomeType
-     * @param  unitsNumber
-     * @param  valueConclusion
-     * @returns CapRateConclusionActions
      */
     addNewRentLoss(unitIncomeType: BoweryReports.UnitIncomeType, unitsNumber: number, 
         valueConclusion: BoweryReports.ValueConclusionName): CapRateConclusionActions {
@@ -368,7 +361,6 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
      * Gets all aliases that were set and check As Complete value by formula:
      *   [As Stabilized Amount] - [Sum of Rent Losses] - [Commission Fee] - 
      *   (([Sum of Rent Losses] + [Commission Fee]) * Entrepreneur Profit)
-     * @returns CapRateConclusionActions
      */
     verifyProspectiveMarketValueAsCompleteCalculated(valueConclusionKey: BoweryReports.ValueConclusionKeys): 
     CapRateConclusionActions {
@@ -405,7 +397,6 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
      * Gets all aliases that were set and check As Is Market value by formula:
      *   [As Complete Amount] - [Sum of Rent Losses] - [Buyout Cost] - [Renovation] -
      *   (([Sum of Rent Losses] + [Less Buyout Cost]) * Entrepreneur Profit)
-     * @returns CapRateConclusionActions
      */
     verifyAsIsMarketValueCalculated(valueConclusionKey: BoweryReports.ValueConclusionKeys): CapRateConclusionActions {
         this.getAllAsCompleteLossesAliases(valueConclusionKey);
@@ -438,7 +429,6 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
 
     /**
      * Sets corresponding map aliases for Stabilized Losses
-     * @returns CapRateConclusionActions
      */
     setAllAsStabilizedLossesAliases(valueConclusionKey: BoweryReports.ValueConclusionKeys): CapRateConclusionActions {
         this.setAsStabilizedResRentLossItemsAmount(valueConclusionKey)
@@ -482,7 +472,6 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
 
     /**
      * Sets corresponding map aliases for Complete Losses
-     * @returns CapRateConclusionActions
      */
     setAllAsCompleteLossesAliases(valueConclusionKey: BoweryReports.ValueConclusionKeys): CapRateConclusionActions {
         this.setAsCompleteResRentLossItemsAmount(valueConclusionKey)
@@ -669,7 +658,7 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
         return this;
     }
 
-    asStabilizedFinalAmount(): CapRateConclusionActions {
+    setAsStabilizedFinalAmount(): CapRateConclusionActions {
         capRateConclusionPage.asStabilizedFinalValueCell.should('exist')
             .invoke('text').then(asStabilizedFinalAmount => {
                 let asStabilizedFinalAmountAdjusted = getNumberFromDollarNumberWithCommas(asStabilizedFinalAmount);
@@ -682,7 +671,6 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
      * Verifies As Is Market value per SF by formula:
      * [As Is Market Final Value] / [Square Foot Analysis Area]
      * @param squareFootAnalysisArea Area for selected square foot analysis basis 
-     * @returns CapRateConclusionActions
      */
     verifyAsIsMarketPerSFCalculated(squareFootAnalysisArea: number): CapRateConclusionActions {
         this.setAsIsAmountFinalAlias();
@@ -701,7 +689,6 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
      * Verifies Prospective Market value As Complete per SF by formula:
      * [Prospective Market Value As Complete (Final Value)] / [Square Foot Analysis Area]
      * @param squareFootAnalysisArea Area for selected square foot analysis basis 
-     * @returns CapRateConclusionActions
      */
     verifyAsCompleteFinalPerSFCalculated(valueConclusionName: BoweryReports.ValueConclusionName, 
         squareFootAnalysisArea: number): CapRateConclusionActions {
@@ -722,11 +709,10 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
      * Verifies Prospective Market value As Stabilized per SF by formula:
      * [Prospective As Market Value As Stabilized (Final Value)] / [Square Foot Analysis Area]
      * @param squareFootAnalysisArea Area for selected square foot analysis basis 
-     * @returns CapRateConclusionActions
      */
     verifyAsStabilizedFinalPerSFCalculated(valueConclusionName: BoweryReports.ValueConclusionName, 
         squareFootAnalysisArea: number): CapRateConclusionActions {
-        this.asStabilizedFinalAmount();
+        this.setAsStabilizedFinalAmount();
         cy._mapGet(capRateConclusionKeys.asStabilizedFinalAmount).then(asStabilizedFinalAmount => {
             let asStabilizedFinalSFAmount = asStabilizedFinalAmount / squareFootAnalysisArea;
             let expectedAsStabilizedFinalSFAmount = asStabilizedFinalSFAmount < 0 
