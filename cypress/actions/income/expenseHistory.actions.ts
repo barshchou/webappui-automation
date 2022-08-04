@@ -85,6 +85,11 @@ class ExpenseHistoryActions extends BaseActionsExt<typeof expenseHistoryPage> {
     }
 
     verifyAverageByCellTotal(cellsName: string): ExpenseHistoryActions {
+        
+        for (let i = 0; i < Cypress.$(expenseHistoryPage.getUnifiedEditableAndTotalCells(cellsName)).length; i++) {
+            expenseHistoryPage.getUnifiedEditableAndTotalCells(cellsName)
+                .eq(i).should("not.have.text", "");
+        }
         expenseHistoryPage.getUnifiedEditableAndTotalCells(cellsName).then(elements => {
             const toeAverageToBe = ExpenseHistoryActions.getAverageTextFromCells(elements);
             expenseHistoryPage.getUnifiedAverageCell(cellsName).should("have.text", toeAverageToBe);

@@ -56,6 +56,7 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
         return this;
     }
 
+    // TODO: refactor this method (in case we have one or several comps found)
     openAddNewComparableFormSearchResult(address: string, searchResultIndex = 0): FindCompsActions {
         this.clickCreateCompButton()
             .enterCompAddressToSearch(address)
