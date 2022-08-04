@@ -59,7 +59,7 @@ conditionalDescribe(`[QA-5157] [QA-5161] [Sales > Find Comps] "Date Sold" sortin
 
         function addCompWithStatus(address: string, saleStatus: string) {
             Sales._FindComps
-                .openAddNewComparableFormSearchResult(address, -1)
+                .openAddNewComparableFormSearchResult(address)
                 .selectDropdownOptionNewComp(Sales._FindComps.Page.conditionDropdown,
                     testData.comparableFixtureManual.condition)
                 .selectDropdownOptionNewComp(Sales._FindComps.Page.comparableTypeDropdown,

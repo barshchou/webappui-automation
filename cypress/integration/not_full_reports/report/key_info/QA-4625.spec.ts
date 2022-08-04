@@ -7,14 +7,16 @@ describe("Verify the report export with a pre-filled Letter of Engagement from D
     { tags: [ "@report", "@key_info", "@salesforce", "@check_export" ] }, () => {
         it("Test body", () => {
             cy.stepInfo(`1. Create a new report on the WebApp (Note: the JOB # of that report 
-            corresponds with the JOB # of an open job on SalesForce)`);
+                        corresponds with the JOB # of an open job on SalesForce)`);
             createReport(testData.reportCreationData);
         
             cy.stepInfo(`2. Navigate to the Report > Key Info > Engagement and Verify that 
-            the Letter Of Engagement field is auto-filled from Dropbox`);
+                        the Letter Of Engagement field is auto-filled from Dropbox`);
             _NavigationSection.navigateToReportInformation();
             Report._KeyInfo.Page.inputToCheckUpload.should("have.value", testData.verifyValue);
-        
+            
+            // TODO: Create method for unchecking redundant checkboxes for export
+
             cy.stepInfo(`3. Export the report`);
             _NavigationSection.openReviewAndExport();
             ReviewExport.generateDocxReport().waitForReportGenerated()
