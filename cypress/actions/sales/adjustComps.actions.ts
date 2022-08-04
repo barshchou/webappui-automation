@@ -142,7 +142,7 @@ class AdjustCompsActions extends BaseActionsExt<typeof adjustCompsPage> {
         return this;
     }
 
-    verifyAdjustedPriceByColumn(index = 0): AdjustCompsActions {
+    verifyAdjustedPriceByColumn(index = 0, isEmpty = false): AdjustCompsActions {
         adjustCompsPage.cellCumulativePriceValue.eq(index).invoke("text").then(trendedText => {
             const trendedNumber = getNumberFromDollarNumberWithCommas(trendedText);
             adjustCompsPage.netPropertyAdjustmentsCells.eq(index).invoke("text").then(netAdjText => {
@@ -155,7 +155,7 @@ class AdjustCompsActions extends BaseActionsExt<typeof adjustCompsPage> {
                 } else {
                     adjustedPriceText = `$${numberWithCommas(adjustedPriceToBe.toFixed(2))}`;
                 }
-                adjustCompsPage.adjustedPriceCells.eq(index).should("have.text", adjustedPriceText);
+                adjustCompsPage.adjustedPriceCells.eq(index).should("have.text", isEmpty ? "" : adjustedPriceText);
             });
         });
         return this;
@@ -175,7 +175,9 @@ class AdjustCompsActions extends BaseActionsExt<typeof adjustCompsPage> {
      * Verify that Trended Price per selected @param {string} basis adjusted based on
      *Net Market adjustment total value
      */
-    verifyTrendedPricePerBasis(comparablesAdjustments: number[], basis: string, index = 0): AdjustCompsActions {
+    verifyTrendedPricePerBasis(
+        comparablesAdjustments: number[], basis: string, index = 0, isEmpty = false
+    ): AdjustCompsActions {
         adjustCompsPage.viewMarketDetails.click();
         adjustCompsPage.getPricePerBasisValue(basis).should("be.visible");
         adjustCompsPage.getPricePerBasisValue(basis).invoke("text").then(pricePerUnitText => {
@@ -195,7 +197,8 @@ class AdjustCompsActions extends BaseActionsExt<typeof adjustCompsPage> {
             }
             cy.log("Cumulative Price Per Unit is: " + adjustedTrendedPriceText);
             _saveDataInFile(`$${numberWithCommas(Math.round(pricePerBasisNumber))}`, `${Cypress.spec.name}.txt`);
-            adjustCompsPage.cellCumulativePriceValue.eq(index).should("have.text", adjustedTrendedPriceText);
+            adjustCompsPage.cellCumulativePriceValue.eq(index)
+                .should("have.text", isEmpty ? "" : adjustedTrendedPriceText);
         });
             
         return this;

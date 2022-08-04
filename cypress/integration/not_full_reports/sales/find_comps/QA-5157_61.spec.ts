@@ -57,7 +57,7 @@ conditionalDescribe(`[QA-5157] [QA-5161] [Sales > Find Comps] "Date Sold" sortin
 
         function addCompWithStatus(address: string, saleStatus: string) {
             Sales._FindComps
-                .openAddNewComparableFormSearchResult(address, -1)
+                .openAddNewComparableFormSearchResult(address)
                 .selectDropdownOptionNewComp(Sales._FindComps.Page.conditionDropdown,
                     testData.comparableFixtureManual.condition)
                 .selectDropdownOptionNewComp(Sales._FindComps.Page.comparableTypeDropdown,
@@ -116,7 +116,7 @@ conditionalDescribe(`[QA-5157] [QA-5161] [Sales > Find Comps] "Date Sold" sortin
                     - Listing
                     - date sold from most to least recent 
                     (comps added via uploaded from CSV )`);
-        // TODO add more complexs csv
+        // TODO add more complex csv
 
         cy.reload();
         Sales._FindComps.uploadComps(testData.filePath)

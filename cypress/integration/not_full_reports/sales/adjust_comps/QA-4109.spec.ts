@@ -17,7 +17,7 @@ describe("Adjusted Price per Residential Unit in Sales Adjustment Grid is calcul
             Sales.AdjustComps.checkCalculationUnitsRadio(testData.calculationUnits)
                 .enterMarketAdjustmentsGroup(Object.keys(testData.comparableAdjustment), 
                     Object.values(testData.comparableAdjustment))
-                .verifyTrendedPricePerBasis(Object.values(testData.comparableAdjustment), testData.basis);
+                .verifyTrendedPricePerBasis(Object.values(testData.comparableAdjustment), testData.basis, 0, true);
 
             cy.stepInfo(`[QA-4109] -> 'Cumulative Price Per SF' is displayed in bold`);
             Sales.AdjustComps.Actions.checkCumulativePriceName("SF");
