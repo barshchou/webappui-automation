@@ -272,14 +272,15 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
         return this;
     }
 
-    setRoundingFactorValueAlias(): CapRateConclusionActions {
+    private setRoundingFactorValueAlias(): CapRateConclusionActions {
         capRateConclusionPage.roundingFactorInput.invoke('attr', 'value').then(roundingFactor => {
             cy._mapSet(capRateConclusionKeys.capRateRoundingFactor, roundingFactor);
         });
         return this;
     }
 
-    setAsStabilizedAmountAlias(conclusionValueName: BoweryReports.ValueConclusionName): CapRateConclusionActions {
+    private setAsStabilizedAmountAlias(conclusionValueName: BoweryReports.ValueConclusionName): 
+    CapRateConclusionActions {
         capRateConclusionPage.amountCell(conclusionValueName).invoke('text').then(asStabilizedAmount => {
             let asStabilizedAmountAdjusted = getNumberFromDollarNumberWithCommas(asStabilizedAmount);
             cy._mapSet(capRateConclusionKeys.asStabilizedAmount, asStabilizedAmountAdjusted);
@@ -423,7 +424,8 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
     /**
      * Sets corresponding map aliases for Stabilized Losses
      */
-    setAllAsStabilizedLossesAliases(valueConclusionKey: BoweryReports.ValueConclusionKeys): CapRateConclusionActions {
+    private setAllAsStabilizedLossesAliases(valueConclusionKey: BoweryReports.ValueConclusionKeys): 
+    CapRateConclusionActions {
         this.setAsStabilizedResRentLossItemsAmount(valueConclusionKey)
             .setAsStabilizedCommercialRentLossItemsAmount(valueConclusionKey)
             .setAsStabilizedCommercialUndeterminedLossAmount(valueConclusionKey)
@@ -466,7 +468,8 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
     /**
      * Sets corresponding map aliases for Complete Losses
      */
-    setAllAsCompleteLossesAliases(valueConclusionKey: BoweryReports.ValueConclusionKeys): CapRateConclusionActions {
+    private setAllAsCompleteLossesAliases(valueConclusionKey: BoweryReports.ValueConclusionKeys): 
+    CapRateConclusionActions {
         this.setAsCompleteResRentLossItemsAmount(valueConclusionKey)
             .setAsCompleteCommercialRentLossItemsAmount(valueConclusionKey)
             .setAsCompleteCommercialUndeterminedLossAmount(valueConclusionKey)
@@ -510,7 +513,7 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
         return this;
     }
 
-    setAsStabilizedResRentLossItemsAmount(valueConclusionKey: BoweryReports.ValueConclusionKeys): 
+    private setAsStabilizedResRentLossItemsAmount(valueConclusionKey: BoweryReports.ValueConclusionKeys): 
     CapRateConclusionActions {
         capRateConclusionPage.residentialRentLossItemsAmount(valueConclusionKey).should('exist')
             .invoke('attr', 'value').then(rentLoss => {
@@ -520,7 +523,7 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
         return this;
     }
 
-    setAsStabilizedCommercialRentLossItemsAmount(valueConclusionKey: BoweryReports.ValueConclusionKeys): 
+    private setAsStabilizedCommercialRentLossItemsAmount(valueConclusionKey: BoweryReports.ValueConclusionKeys): 
     CapRateConclusionActions {
         capRateConclusionPage.commercialLossItemsAmount(valueConclusionKey).should('exist')
             .invoke('attr', 'value').then(rentLoss => {
@@ -530,7 +533,7 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
         return this;
     }
 
-    setAsStabilizedCommercialUndeterminedLossAmount(valueConclusionKey: BoweryReports.ValueConclusionKeys): 
+    private setAsStabilizedCommercialUndeterminedLossAmount(valueConclusionKey: BoweryReports.ValueConclusionKeys): 
     CapRateConclusionActions {
         capRateConclusionPage.commercialUndeterminedRentLossAmount(valueConclusionKey).should('exist')
             .invoke('attr', 'value').then(rentLoss => {
@@ -540,7 +543,7 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
         return this;
     }
 
-    setCommissionFee(): CapRateConclusionActions {
+    private setCommissionFee(): CapRateConclusionActions {
         capRateConclusionPage.asStabilizedCommissionFeeAmount.should('exist')
             .invoke('attr', 'value').then(commissionFee => {
                 let commissionFeeNumber = getNumberFromMinusDollarNumberWithCommas(commissionFee);
@@ -549,7 +552,7 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
         return this;
     }
 
-    setStabilizedEntrepreneurialProfit(): CapRateConclusionActions {
+    private setStabilizedEntrepreneurialProfit(): CapRateConclusionActions {
         capRateConclusionPage.asStabilizedLessEntrepreneurialProfit.should('exist')
             .invoke('attr', 'value').then(entrepreneurialProfit => {
                 let entrepreneurialProfitNumber = Number(entrepreneurialProfit.replace('%', ''));
@@ -558,7 +561,7 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
         return this;
     }
 
-    setAsCompleteAmountAlias(conclusionValueName: BoweryReports.ValueConclusionName): CapRateConclusionActions {
+    private setAsCompleteAmountAlias(conclusionValueName: BoweryReports.ValueConclusionName): CapRateConclusionActions {
         capRateConclusionPage.amountCell(conclusionValueName).should('exist')
             .invoke('text').then(asCompleteAmount => {
                 let asCompleteAmountAdjusted = getNumberFromDollarNumberWithCommas(asCompleteAmount);
@@ -567,7 +570,7 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
         return this;
     }
 
-    setAsCompleteResRentLossItemsAmount(valueConclusionKey: BoweryReports.ValueConclusionKeys): 
+    private setAsCompleteResRentLossItemsAmount(valueConclusionKey: BoweryReports.ValueConclusionKeys): 
     CapRateConclusionActions {
         capRateConclusionPage.residentialRentLossItemsAmount(valueConclusionKey).should('exist')
             .invoke('attr', 'value').then(rentLoss => {
@@ -577,7 +580,7 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
         return this;
     }
 
-    setAsCompleteCommercialRentLossItemsAmount(valueConclusionKey: BoweryReports.ValueConclusionKeys): 
+    private setAsCompleteCommercialRentLossItemsAmount(valueConclusionKey: BoweryReports.ValueConclusionKeys): 
     CapRateConclusionActions {
         capRateConclusionPage.commercialLossItemsAmount(valueConclusionKey).should('exist')
             .invoke('attr', 'value').then(rentLoss => {
@@ -587,7 +590,7 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
         return this;
     }
 
-    setAsCompleteCommercialUndeterminedLossAmount(valueConclusionKey: BoweryReports.ValueConclusionKeys): 
+    private setAsCompleteCommercialUndeterminedLossAmount(valueConclusionKey: BoweryReports.ValueConclusionKeys): 
     CapRateConclusionActions {
         capRateConclusionPage.commercialUndeterminedRentLossAmount(valueConclusionKey).should('exist')
             .invoke('attr', 'value').then(rentLoss => {
@@ -597,7 +600,7 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
         return this;
     }
 
-    setRenovationBudgetAlias(): CapRateConclusionActions {
+    private setRenovationBudgetAlias(): CapRateConclusionActions {
         capRateConclusionPage.renovationBudgetAmount.should('exist')
             .invoke('attr', 'value').then(renovationBudget => {
                 let renovationBudgetAdjusted = getNumberFromMinusDollarNumberWithCommas(renovationBudget);
@@ -606,7 +609,7 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
         return this;
     }
 
-    setLessBuyoutCost(): CapRateConclusionActions {
+    private setLessBuyoutCost(): CapRateConclusionActions {
         capRateConclusionPage.asCompleteLessBuyoutCost.should('exist')
             .invoke('attr', 'value').then(buyoutCost => {
                 let buyoutCostNumber = getNumberFromMinusDollarNumberWithCommas(buyoutCost);
@@ -615,7 +618,7 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
         return this;
     }
 
-    setCompleteEntrepreneurialProfit(): CapRateConclusionActions {
+    private setCompleteEntrepreneurialProfit(): CapRateConclusionActions {
         capRateConclusionPage.asCompleteLessEntrepreneurialProfit.should('exist')
             .invoke('attr', 'value').then(entrepreneurialProfit => {
                 let entrepreneurialProfitNumber = Number(entrepreneurialProfit.replace('%', ''));
@@ -624,7 +627,7 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
         return this;
     }
 
-    setAsIsAmountAlias(conclusionValueName: BoweryReports.ValueConclusionName): CapRateConclusionActions {
+    private setAsIsAmountAlias(conclusionValueName: BoweryReports.ValueConclusionName): CapRateConclusionActions {
         capRateConclusionPage.amountCell(conclusionValueName).should('exist')
             .invoke('text').then(asIsMarketAmount => {
                 let asIsMarketAmountAdjusted = getNumberFromDollarNumberWithCommas(asIsMarketAmount);
@@ -633,7 +636,7 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
         return this;
     }
 
-    setAsIsAmountFinalAlias(conclusionValueName: BoweryReports.ValueConclusionName): CapRateConclusionActions {
+    private setAsIsAmountFinalAlias(conclusionValueName: BoweryReports.ValueConclusionName): CapRateConclusionActions {
         capRateConclusionPage.finalValueCell(conclusionValueName).should('exist')
             .invoke('text').then(asIsMarketFinalValue => {
                 let asIsMarketAmountAdjusted = getNumberFromDollarNumberWithCommas(asIsMarketFinalValue);
@@ -642,7 +645,7 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
         return this;
     }
 
-    setAsCompleteFinalAmount(conclusionValueName: BoweryReports.ValueConclusionName): CapRateConclusionActions {
+    private setAsCompleteFinalAmount(conclusionValueName: BoweryReports.ValueConclusionName): CapRateConclusionActions {
         capRateConclusionPage.finalValueCell(conclusionValueName).should('exist')
             .invoke('text').then(asCompleteFinalAmount => {
                 let asCompleteFinalAmountAdjusted = getNumberFromDollarNumberWithCommas(asCompleteFinalAmount);
@@ -651,7 +654,7 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
         return this;
     }
 
-    setFinalAmountAlias(conclusionValueName: BoweryReports.ValueConclusionName): CapRateConclusionActions {
+    private setFinalAmountAlias(conclusionValueName: BoweryReports.ValueConclusionName): CapRateConclusionActions {
         capRateConclusionPage.finalValueCell(conclusionValueName).should('exist')
             .invoke('text').then(asStabilizedFinalAmount => {
                 let asStabilizedFinalAmountAdjusted = getNumberFromDollarNumberWithCommas(asStabilizedFinalAmount);
