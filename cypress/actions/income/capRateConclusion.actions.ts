@@ -434,6 +434,10 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
         return this;
     }
 
+    /**
+     * Sets all losses for value conclusion type and generates an object to be
+     * stored in map key, to avoid multiple chains from cy._mapGet
+     */
     getAllAsStabilizedLossesAliases(valueConclusionKey: BoweryReports.ValueConclusionKeys): CapRateConclusionActions {
         this.setAllAsStabilizedLossesAliases(valueConclusionKey);
         interface IAllAsStabilizedLossesAliases {
@@ -479,6 +483,10 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
         return this;
     }
 
+    /**
+     * Sets all losses for value conclusion type and generates an object to be
+     * stored in map key, to avoid multiple chains from cy._mapGet
+     */
     getAllAsCompleteLossesAliases(valueConclusionKey: BoweryReports.ValueConclusionKeys): CapRateConclusionActions {
         this.setAllAsCompleteLossesAliases(valueConclusionKey);
         interface IAllAsCompleteLossesAliases {
