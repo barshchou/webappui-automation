@@ -280,20 +280,19 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
      */
     verifyFinalValueCalculated(conclusionValueName: BoweryReports.ValueConclusionName): 
     CapRateConclusionActions {
-        this.setRoundingFactorValueAlias();
+        this.setRoundingFactorValueAlias()
+            .setAmountAlias(conclusionValueName);
         let key = capRateConclusionKeys.asStabilizedAmount;
-
+        
         switch (conclusionValueName) {
             case enums.VALUE_CONCLUSION_NAME.asIs:
-                this.setAsIsAmountAlias(conclusionValueName);
                 key = capRateConclusionKeys.asIsMarketAmount;
                 break;
             case enums.VALUE_CONCLUSION_NAME.asStabilized:
-                this.setAsStabilizedAmountAlias(conclusionValueName);
+
                 key = capRateConclusionKeys.asStabilizedAmount;
                 break;
             case enums.VALUE_CONCLUSION_NAME.asComplete:
-                this.setAsCompleteAmountAlias(conclusionValueName);
                 key = capRateConclusionKeys.asCompleteAmount;
                 break;
             default:
@@ -548,15 +547,6 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
         return this;
     }
 
-    private setCommissionFee(): CapRateConclusionActions {
-        capRateConclusionPage.asStabilizedCommissionFeeAmount.should('exist')
-            .invoke('attr', 'value').then(commissionFee => {
-                let commissionFeeNumber = getNumberFromMinusDollarNumberWithCommas(commissionFee);
-                cy._mapSet(capRateConclusionKeys.commissionFee, commissionFeeNumber);
-            });
-        return this;
-    }
-
     private setEntrepreneurialProfit(conclusionValueName: BoweryReports.ValueConclusionName): 
     CapRateConclusionActions {
         let key = conclusionValueName == enums.VALUE_CONCLUSION_NAME.asStabilized 
@@ -570,36 +560,30 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
         return this;
     }
 
-    private setRoundingFactorValueAlias(): CapRateConclusionActions {
-        capRateConclusionPage.roundingFactorInput.invoke('attr', 'value').then(roundingFactor => {
-            cy._mapSet(capRateConclusionKeys.capRateRoundingFactor, roundingFactor);
-        });
-        return this;
-    }
-
-    private setAsStabilizedAmountAlias(conclusionValueName: BoweryReports.ValueConclusionName): 
+    private setAmountAlias(conclusionValueName: BoweryReports.ValueConclusionName): 
     CapRateConclusionActions {
+        let key = conclusionValueName != enums.VALUE_CONCLUSION_NAME.asIs 
+            ? conclusionValueName == enums.VALUE_CONCLUSION_NAME.asStabilized 
+                ? capRateConclusionKeys.asStabilizedAmount
+                : capRateConclusionKeys.asCompleteAmount
+            : capRateConclusionKeys.asIsMarketAmount;
         capRateConclusionPage.amountCell(conclusionValueName).invoke('text').then(asStabilizedAmount => {
             let asStabilizedAmountAdjusted = getNumberFromDollarNumberWithCommas(asStabilizedAmount);
-            cy._mapSet(capRateConclusionKeys.asStabilizedAmount, asStabilizedAmountAdjusted);
+            cy._mapSet(key, asStabilizedAmountAdjusted);
         });
         return this;
     }
 
-    private setAsCompleteAmountAlias(conclusionValueName: BoweryReports.ValueConclusionName): CapRateConclusionActions {
-        capRateConclusionPage.amountCell(conclusionValueName).should('exist')
-            .invoke('text').then(asCompleteAmount => {
-                let asCompleteAmountAdjusted = getNumberFromDollarNumberWithCommas(asCompleteAmount);
-                cy._mapSet(capRateConclusionKeys.asCompleteAmount, asCompleteAmountAdjusted);
-            });
-        return this;
-    }
-
-    private setAsIsAmountAlias(conclusionValueName: BoweryReports.ValueConclusionName): CapRateConclusionActions {
-        capRateConclusionPage.amountCell(conclusionValueName).should('exist')
-            .invoke('text').then(asIsMarketAmount => {
-                let asIsMarketAmountAdjusted = getNumberFromDollarNumberWithCommas(asIsMarketAmount);
-                cy._mapSet(capRateConclusionKeys.asIsMarketAmount, asIsMarketAmountAdjusted);
+    private setAmountFinalAlias(conclusionValueName: BoweryReports.ValueConclusionName): CapRateConclusionActions {
+        let key = conclusionValueName != enums.VALUE_CONCLUSION_NAME.asIs 
+            ? conclusionValueName == enums.VALUE_CONCLUSION_NAME.asStabilized 
+                ? capRateConclusionKeys.asStabilizedFinalAmount
+                : capRateConclusionKeys.asCompleteFinalAmount
+            : capRateConclusionKeys.asIsMarketFinalAmount;
+        capRateConclusionPage.finalValueCell(conclusionValueName).should('exist')
+            .invoke('text').then(asIsMarketFinalValue => {
+                let asIsMarketAmountAdjusted = getNumberFromDollarNumberWithCommas(asIsMarketFinalValue);
+                cy._mapSet(key, asIsMarketAmountAdjusted);
             });
         return this;
     }
@@ -622,16 +606,18 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
         return this;
     }
 
-    private setAmountFinalAlias(conclusionValueName: BoweryReports.ValueConclusionName): CapRateConclusionActions {
-        let key = conclusionValueName != enums.VALUE_CONCLUSION_NAME.asIs 
-            ? conclusionValueName == enums.VALUE_CONCLUSION_NAME.asStabilized 
-                ? capRateConclusionKeys.asStabilizedFinalAmount
-                : capRateConclusionKeys.asCompleteFinalAmount
-            : capRateConclusionKeys.asIsMarketFinalAmount;
-        capRateConclusionPage.finalValueCell(conclusionValueName).should('exist')
-            .invoke('text').then(asIsMarketFinalValue => {
-                let asIsMarketAmountAdjusted = getNumberFromDollarNumberWithCommas(asIsMarketFinalValue);
-                cy._mapSet(key, asIsMarketAmountAdjusted);
+    private setRoundingFactorValueAlias(): CapRateConclusionActions {
+        capRateConclusionPage.roundingFactorInput.invoke('attr', 'value').then(roundingFactor => {
+            cy._mapSet(capRateConclusionKeys.capRateRoundingFactor, roundingFactor);
+        });
+        return this;
+    }
+
+    private setCommissionFee(): CapRateConclusionActions {
+        capRateConclusionPage.asStabilizedCommissionFeeAmount.should('exist')
+            .invoke('attr', 'value').then(commissionFee => {
+                let commissionFeeNumber = getNumberFromMinusDollarNumberWithCommas(commissionFee);
+                cy._mapSet(capRateConclusionKeys.commissionFee, commissionFeeNumber);
             });
         return this;
     }
