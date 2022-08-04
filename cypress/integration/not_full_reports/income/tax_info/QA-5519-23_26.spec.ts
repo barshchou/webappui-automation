@@ -15,8 +15,8 @@ describe("[QA-5519-23_26] Check that rows added in the app are displayed in Tax 
         _NavigationSection.navigateToTaxInfo();
 
         cy.stepInfo("3. Click Add button on the Taxable Assessed Value card and verify added rows");
-        Income._TaxInfo.clickAddNewRowButton()
-            .clickAddNewRowButton(testData.buttonName)
+        Income._TaxInfo.clickAddAdditionalTaxRate()
+            .clickAddSpecialAssessmentRate()
             .verifyRowTaxLiability(testData.rowNames.additional)
             .verifyRowTaxLiability(testData.rowNames.special);
 
@@ -25,8 +25,8 @@ describe("[QA-5519-23_26] Check that rows added in the app are displayed in Tax 
             .enterRowTaxLiabilityItem(testData.rowNames.special, testData.enterName);
 
         cy.stepInfo("5. Enter row TaxLiability value");
-        Income._TaxInfo.clickAddNewRowButton()
-            .clickAddNewRowButton(testData.buttonName)
+        Income._TaxInfo.clickAddAdditionalTaxRate()
+            .clickAddSpecialAssessmentRate()
             .enterRowTaxLiabilityValue(testData.rowNames.additional, testData.additionalTaxRateValue)
             .enterRowTaxLiabilityValue(testData.rowNames.special, testData.specialAssessmentRowValue)
             .verifyTotalTaxLiability();

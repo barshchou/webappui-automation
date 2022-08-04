@@ -61,7 +61,7 @@ class PropertySummaryPage extends BasePage {
 
     get saveExportEditButton() { return cy.xpath("//button[.='Save'][not(@data-qa='form-save-btn')]"); }
 
-    getRadioSquareFootAnalysis(radio = Object.keys(Enums.PROPERTY_SQUARE_FOOT_ANALYSIS)[0]) {
+    getRadioSquareFootAnalysis(radio = Object.keys(Enums.BASIS_SQUARE_FOOT_ANALYSIS_TEXTS)[0]) {
         return cy.get(`[data-qa='basisForSFAnalysis-radio-group'] [value='${radio}']`);
     }
 
@@ -75,8 +75,6 @@ class PropertySummaryPage extends BasePage {
     basisSquareFootAnalysis(basis: BoweryReports.BasisSquareFootAnalysis) { 
         return cy.get(`[name="basisForSFAnalysis"][value="${basis}"]`); 
     }
-
-    get basisSquareFootAnalysisArea() { return cy.get('[name="basisForSFAnalysisValue"]'); }
 }
 
 export default new PropertySummaryPage();

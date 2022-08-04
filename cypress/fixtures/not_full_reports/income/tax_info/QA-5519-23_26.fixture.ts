@@ -9,7 +9,6 @@ export default {
         additional: "Additional Tax Rate", 
         special: "Special Assessment Row"
     },
-    buttonName: "Add Special Assessment",
     onFeatureFlag: 0,
     additionalTaxRateValue: 10.1234567890,
     specialAssessmentRowValue: 42.45

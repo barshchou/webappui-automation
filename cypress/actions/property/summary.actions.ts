@@ -1,4 +1,3 @@
-import { PropertySquareFootAnalysisKeys } from './../../enums/enumKeys.enum.d';
 import summaryPage from "../../pages/property/summary.page";
 import {
     cutDecimalPartToNumberOfDigits,
@@ -174,7 +173,7 @@ class SummaryActions extends BaseActionsExt<typeof summaryPage> {
         return this;
     }
 
-    checkSquareFootAnalysis(radio: PropertySquareFootAnalysisKeys, number: number): SummaryActions {
+    checkSquareFootAnalysis(radio: BoweryReports.BasisSquareFootAnalysis, number: number): SummaryActions {
         summaryPage.getRadioSquareFootAnalysis(radio).check();
         summaryPage.getCheckedSquareFootAnalysis(number).invoke("attr", "data-qa").should("eq", "checked");
         return this;
@@ -193,7 +192,7 @@ class SummaryActions extends BaseActionsExt<typeof summaryPage> {
     }
 
     fillBasisSquareFootAnalysis(area: number): SummaryActions {
-        summaryPage.basisSquareFootAnalysisArea
+        summaryPage.basisForSFAnalysisInput
             .clear()
             .type(`${area}`)
             .should('have.value', `${numberWithCommas(area)}`);
