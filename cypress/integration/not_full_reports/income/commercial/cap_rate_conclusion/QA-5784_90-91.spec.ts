@@ -58,8 +58,8 @@ describe("Validation of Market Values Per SF for ACAS reports",
 
             cy.stepInfo(`[QA-5790] 9. Verify if Prospective Market Value As Stabilized Per SF is calculated with 
             correct formula based on selected Basis for Square Foot Analysis`);
-            Income._CapRateConclusion.verifyAsStabilizedFinalPerSFCalculated(testData.valueConclusionAsStabilized, 
-                testData.squareFootAnalysisArea);
+            Income._CapRateConclusion.verifyMarketValuePerSFCalculated(testData.squareFootAnalysisArea, 
+                testData.valueConclusionAsStabilized);
 
             cy.stepInfo(`10. Add New Residential Rent Loss on As Stabilized tab and 
             New Commercial Rent Loss on As Stabilized tab`);
@@ -97,8 +97,8 @@ describe("Validation of Market Values Per SF for ACAS reports",
 
             cy.stepInfo(`[QA-5791] 14. Verify if Prospective Market Value As Complete Per SF is calculated 
             with correct formula based on selected Basis for Square Foot Analysis`);
-            Income._CapRateConclusion.verifyAsCompleteFinalPerSFCalculated(testData.valueConclusionAsComplete, 
-                testData.squareFootAnalysisArea);
+            Income._CapRateConclusion.verifyMarketValuePerSFCalculated(testData.squareFootAnalysisArea, 
+                testData.valueConclusionAsComplete);
 
             cy.stepInfo(`15. Add New Residential Rent Loss on As Complete tab and New Commercial 
             Rent Loss on As Complete tab `);
@@ -135,7 +135,7 @@ describe("Validation of Market Values Per SF for ACAS reports",
 
             cy.stepInfo(`[QA-5784] 19. Verify if  As Is Market Value Per SF  is calculated with correct formula 
             based on selected Basis for Square Foot Analysis`);
-            Income._CapRateConclusion.verifyAsIsMarketPerSFCalculated(testData.squareFootAnalysisArea, 
+            Income._CapRateConclusion.verifyMarketValuePerSFCalculated(testData.squareFootAnalysisArea, 
                 testData.valueConclusionAsIs);
         });
 

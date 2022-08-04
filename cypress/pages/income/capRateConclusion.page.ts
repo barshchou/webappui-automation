@@ -1,3 +1,4 @@
+import enums from "../../enums/enums";
 import { BoweryReports } from "../../types/boweryReports.type";
 import BasePage from "../base/base.page";
 
@@ -57,10 +58,10 @@ class CapRateConclusionPage extends BasePage {
 
     get asIsMarketValuePerUnit() { return cy.xpath("//*[.='As Is Market Value Per Unit']//following-sibling::td[3]"); }
 
-    get asIsMarketValuePerSF() { return cy.xpath("//*[.='As Is Market Value Per SF']//following-sibling::td[3]"); }
-
-    prospectiveMarketValuePerSF(valueConclusionValue: BoweryReports.ValueConclusionName) { 
-        return cy.xpath(`//*[.='Prospective Market Value ${valueConclusionValue} Per SF']//following-sibling::td[3]`); 
+    marketValuePerSF(valueConclusionValue: BoweryReports.ValueConclusionName) { 
+        return valueConclusionValue != enums.VALUE_CONCLUSION_NAME.asIs 
+            ? cy.xpath(`//*[.='Prospective Market Value ${valueConclusionValue} Per SF']//following-sibling::td[3]`)
+            : cy.xpath("//*[.='As Is Market Value Per SF']//following-sibling::td[3]"); 
     }
 
     addRentLossButton(incomeType: BoweryReports.UnitIncomeType) { 

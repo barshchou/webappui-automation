@@ -136,7 +136,7 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
             .verifyAsIsMarketAmountCell(partData.amount, valueConclusionName)
             .verifyAsIsMarketFinalValueCell(partData.finalValue, valueConclusionName)
             .verifyAsIsMarketPerUnit(partData.perUnit)
-            .verifyAsIsMarketPerSF(partData.perSF);
+            .verifyAsIsMarketPerSF(partData.perSF, valueConclusionName);
         return this;
     }
 
@@ -175,8 +175,9 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
         return this;
     }
 
-    verifyAsIsMarketPerSF(value: string): CapRateConclusionActions {
-        capRateConclusionPage.asIsMarketValuePerSF.should("have.text", value);
+    verifyAsIsMarketPerSF(value: string, valueConclusionName: BoweryReports.ValueConclusionName): 
+    CapRateConclusionActions {
+        capRateConclusionPage.marketValuePerSF(valueConclusionName).should("have.text", value);
         return this;
     }
 
@@ -272,22 +273,6 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
         return this;
     }
 
-    private setRoundingFactorValueAlias(): CapRateConclusionActions {
-        capRateConclusionPage.roundingFactorInput.invoke('attr', 'value').then(roundingFactor => {
-            cy._mapSet(capRateConclusionKeys.capRateRoundingFactor, roundingFactor);
-        });
-        return this;
-    }
-
-    private setAsStabilizedAmountAlias(conclusionValueName: BoweryReports.ValueConclusionName): 
-    CapRateConclusionActions {
-        capRateConclusionPage.amountCell(conclusionValueName).invoke('text').then(asStabilizedAmount => {
-            let asStabilizedAmountAdjusted = getNumberFromDollarNumberWithCommas(asStabilizedAmount);
-            cy._mapSet(capRateConclusionKeys.asStabilizedAmount, asStabilizedAmountAdjusted);
-        });
-        return this;
-    }
-
     /**
      * Gets cap rate rounding factor and As Stabilized amount.
      * It verifies whether final value is rounded correctly.
@@ -357,7 +342,7 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
      */
     verifyProspectiveMarketValueAsCompleteCalculated(valueConclusionKey: BoweryReports.ValueConclusionKeys, 
         conclusionValueName: BoweryReports.ValueConclusionName): CapRateConclusionActions {
-        this.getAllAsStabilizedLossesAliases(valueConclusionKey);
+        this.getAllAsStabilizedLossesAliases(valueConclusionKey, enums.VALUE_CONCLUSION_NAME.asStabilized);
         cy._mapGet(capRateConclusionKeys.allAsStabilizedLossesAliases).then(allAsStabilizedLossesAliases => {
             cy.log(`As Stabilized AmountT: ${allAsStabilizedLossesAliases.asStabilizedAmount}`);
 
@@ -393,7 +378,7 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
      */
     verifyAsIsMarketValueCalculated(valueConclusionKey: BoweryReports.ValueConclusionKeys, 
         conclusionValueName: BoweryReports.ValueConclusionName): CapRateConclusionActions {
-        this.getAllAsCompleteLossesAliases(valueConclusionKey);
+        this.getAllAsCompleteLossesAliases(valueConclusionKey, enums.VALUE_CONCLUSION_NAME.asComplete);
         cy._mapGet(capRateConclusionKeys.allAsCompleteLossesAliases).then(allAsCompleteLossesAliases => {
             cy.log(`As Complete AmountT: ${allAsCompleteLossesAliases.asCompleteAmount}`);
 
@@ -424,13 +409,14 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
     /**
      * Sets corresponding map aliases for Stabilized Losses
      */
-    private setAllAsStabilizedLossesAliases(valueConclusionKey: BoweryReports.ValueConclusionKeys): 
+    private setAllAsStabilizedLossesAliases(valueConclusionKey: BoweryReports.ValueConclusionKeys, 
+        conclusionValueName: BoweryReports.ValueConclusionName): 
     CapRateConclusionActions {
-        this.setAsStabilizedResRentLossItemsAmount(valueConclusionKey)
-            .setAsStabilizedCommercialRentLossItemsAmount(valueConclusionKey)
-            .setAsStabilizedCommercialUndeterminedLossAmount(valueConclusionKey)
+        this.setResRentLossItemsAmount(valueConclusionKey, conclusionValueName)
+            .setCommercialRentLossItemsAmount(valueConclusionKey, conclusionValueName)
+            .setCommercialUndeterminedLossAmount(valueConclusionKey, conclusionValueName)
             .setCommissionFee()
-            .setStabilizedEntrepreneurialProfit();
+            .setEntrepreneurialProfit(conclusionValueName);
         return this;
     }
 
@@ -438,8 +424,9 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
      * Sets all losses for value conclusion type and generates an object to be
      * stored in map key, to avoid multiple chains from cy._mapGet
      */
-    getAllAsStabilizedLossesAliases(valueConclusionKey: BoweryReports.ValueConclusionKeys): CapRateConclusionActions {
-        this.setAllAsStabilizedLossesAliases(valueConclusionKey);
+    getAllAsStabilizedLossesAliases(valueConclusionKey: BoweryReports.ValueConclusionKeys, 
+        conclusionValueName: BoweryReports.ValueConclusionName): CapRateConclusionActions {
+        this.setAllAsStabilizedLossesAliases(valueConclusionKey, conclusionValueName);
         interface IAllAsStabilizedLossesAliases {
             residentialRentLoss?: number
             commercialRentLoss?: number
@@ -472,14 +459,14 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
     /**
      * Sets corresponding map aliases for Complete Losses
      */
-    private setAllAsCompleteLossesAliases(valueConclusionKey: BoweryReports.ValueConclusionKeys): 
-    CapRateConclusionActions {
-        this.setAsCompleteResRentLossItemsAmount(valueConclusionKey)
-            .setAsCompleteCommercialRentLossItemsAmount(valueConclusionKey)
-            .setAsCompleteCommercialUndeterminedLossAmount(valueConclusionKey)
+    private setAllAsCompleteLossesAliases(valueConclusionKey: BoweryReports.ValueConclusionKeys, 
+        conclusionValueName: BoweryReports.ValueConclusionName): CapRateConclusionActions {
+        this.setResRentLossItemsAmount(valueConclusionKey, conclusionValueName)
+            .setCommercialRentLossItemsAmount(valueConclusionKey, conclusionValueName)
+            .setCommercialUndeterminedLossAmount(valueConclusionKey, conclusionValueName)
             .setRenovationBudgetAlias()
             .setLessBuyoutCost()
-            .setCompleteEntrepreneurialProfit();
+            .setEntrepreneurialProfit(conclusionValueName);
         return this;
     }
 
@@ -487,8 +474,9 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
      * Sets all losses for value conclusion type and generates an object to be
      * stored in map key, to avoid multiple chains from cy._mapGet
      */
-    getAllAsCompleteLossesAliases(valueConclusionKey: BoweryReports.ValueConclusionKeys): CapRateConclusionActions {
-        this.setAllAsCompleteLossesAliases(valueConclusionKey);
+    getAllAsCompleteLossesAliases(valueConclusionKey: BoweryReports.ValueConclusionKeys, 
+        conclusionValueName: BoweryReports.ValueConclusionName): CapRateConclusionActions {
+        this.setAllAsCompleteLossesAliases(valueConclusionKey, conclusionValueName);
         interface IAllAsCompleteLossesAliases {
             residentialRentLoss?: number
             commercialRentLoss?: number
@@ -521,32 +509,41 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
         return this;
     }
 
-    private setAsStabilizedResRentLossItemsAmount(valueConclusionKey: BoweryReports.ValueConclusionKeys): 
-    CapRateConclusionActions {
+    private setResRentLossItemsAmount(valueConclusionKey: BoweryReports.ValueConclusionKeys, 
+        conclusionValueName: BoweryReports.ValueConclusionName): CapRateConclusionActions {
+        let key = conclusionValueName == enums.VALUE_CONCLUSION_NAME.asStabilized 
+            ? capRateConclusionKeys.asStabilizedResRentLossItem
+            : capRateConclusionKeys.asCompleteResRentLossItem;
         capRateConclusionPage.residentialRentLossItemsAmount(valueConclusionKey).should('exist')
             .invoke('attr', 'value').then(rentLoss => {
                 let rentLossNumber = getNumberFromMinusDollarNumberWithCommas(rentLoss);
-                cy._mapSet(capRateConclusionKeys.asStabilizedResRentLossItem, rentLossNumber);
+                cy._mapSet(key, rentLossNumber);
             });
         return this;
     }
 
-    private setAsStabilizedCommercialRentLossItemsAmount(valueConclusionKey: BoweryReports.ValueConclusionKeys): 
-    CapRateConclusionActions {
+    private setCommercialRentLossItemsAmount(valueConclusionKey: BoweryReports.ValueConclusionKeys, 
+        conclusionValueName: BoweryReports.ValueConclusionName): CapRateConclusionActions {
+        let key = conclusionValueName == enums.VALUE_CONCLUSION_NAME.asStabilized 
+            ? capRateConclusionKeys.asStabilizedCommercialRentLossItem
+            : capRateConclusionKeys.asCompleteCommercialRentLossItem;
         capRateConclusionPage.commercialLossItemsAmount(valueConclusionKey).should('exist')
             .invoke('attr', 'value').then(rentLoss => {
                 let rentLossNumber = getNumberFromMinusDollarNumberWithCommas(rentLoss);
-                cy._mapSet(capRateConclusionKeys.asStabilizedCommercialRentLossItem, rentLossNumber);
+                cy._mapSet(key, rentLossNumber);
             });
         return this;
     }
 
-    private setAsStabilizedCommercialUndeterminedLossAmount(valueConclusionKey: BoweryReports.ValueConclusionKeys): 
-    CapRateConclusionActions {
+    private setCommercialUndeterminedLossAmount(valueConclusionKey: BoweryReports.ValueConclusionKeys, 
+        conclusionValueName: BoweryReports.ValueConclusionName): CapRateConclusionActions {
+        let key = conclusionValueName == enums.VALUE_CONCLUSION_NAME.asStabilized 
+            ? capRateConclusionKeys.asStabilizedCommercialUndeterminedRentLossItem
+            : capRateConclusionKeys.asCompleteCommercialUndeterminedRentLossItem;
         capRateConclusionPage.commercialUndeterminedRentLossAmount(valueConclusionKey).should('exist')
             .invoke('attr', 'value').then(rentLoss => {
                 let rentLossNumber = getNumberFromMinusDollarNumberWithCommas(rentLoss);
-                cy._mapSet(capRateConclusionKeys.asStabilizedCommercialUndeterminedRentLossItem, rentLossNumber);
+                cy._mapSet(key, rentLossNumber);
             });
         return this;
     }
@@ -560,12 +557,32 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
         return this;
     }
 
-    private setStabilizedEntrepreneurialProfit(): CapRateConclusionActions {
+    private setEntrepreneurialProfit(conclusionValueName: BoweryReports.ValueConclusionName): 
+    CapRateConclusionActions {
+        let key = conclusionValueName == enums.VALUE_CONCLUSION_NAME.asStabilized 
+            ? capRateConclusionKeys.entrepreneurialStabilizedProfit
+            : capRateConclusionKeys.entrepreneurialCompleteProfit;
         capRateConclusionPage.asStabilizedLessEntrepreneurialProfit.should('exist')
             .invoke('attr', 'value').then(entrepreneurialProfit => {
                 let entrepreneurialProfitNumber = Number(entrepreneurialProfit.replace('%', ''));
-                cy._mapSet(capRateConclusionKeys.entrepreneurialStabilizedProfit, entrepreneurialProfitNumber);
+                cy._mapSet(key, entrepreneurialProfitNumber);
             });
+        return this;
+    }
+
+    private setRoundingFactorValueAlias(): CapRateConclusionActions {
+        capRateConclusionPage.roundingFactorInput.invoke('attr', 'value').then(roundingFactor => {
+            cy._mapSet(capRateConclusionKeys.capRateRoundingFactor, roundingFactor);
+        });
+        return this;
+    }
+
+    private setAsStabilizedAmountAlias(conclusionValueName: BoweryReports.ValueConclusionName): 
+    CapRateConclusionActions {
+        capRateConclusionPage.amountCell(conclusionValueName).invoke('text').then(asStabilizedAmount => {
+            let asStabilizedAmountAdjusted = getNumberFromDollarNumberWithCommas(asStabilizedAmount);
+            cy._mapSet(capRateConclusionKeys.asStabilizedAmount, asStabilizedAmountAdjusted);
+        });
         return this;
     }
 
@@ -578,32 +595,11 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
         return this;
     }
 
-    private setAsCompleteResRentLossItemsAmount(valueConclusionKey: BoweryReports.ValueConclusionKeys): 
-    CapRateConclusionActions {
-        capRateConclusionPage.residentialRentLossItemsAmount(valueConclusionKey).should('exist')
-            .invoke('attr', 'value').then(rentLoss => {
-                let rentLossNumber = getNumberFromMinusDollarNumberWithCommas(rentLoss);
-                cy._mapSet(capRateConclusionKeys.asCompleteResRentLossItem, rentLossNumber);
-            });
-        return this;
-    }
-
-    private setAsCompleteCommercialRentLossItemsAmount(valueConclusionKey: BoweryReports.ValueConclusionKeys): 
-    CapRateConclusionActions {
-        capRateConclusionPage.commercialLossItemsAmount(valueConclusionKey).should('exist')
-            .invoke('attr', 'value').then(rentLoss => {
-                let rentLossNumber = getNumberFromMinusDollarNumberWithCommas(rentLoss);
-                cy._mapSet(capRateConclusionKeys.asCompleteCommercialRentLossItem, rentLossNumber);
-            });
-        return this;
-    }
-
-    private setAsCompleteCommercialUndeterminedLossAmount(valueConclusionKey: BoweryReports.ValueConclusionKeys): 
-    CapRateConclusionActions {
-        capRateConclusionPage.commercialUndeterminedRentLossAmount(valueConclusionKey).should('exist')
-            .invoke('attr', 'value').then(rentLoss => {
-                let rentLossNumber = getNumberFromMinusDollarNumberWithCommas(rentLoss);
-                cy._mapSet(capRateConclusionKeys.asCompleteCommercialUndeterminedRentLossItem, rentLossNumber);
+    private setAsIsAmountAlias(conclusionValueName: BoweryReports.ValueConclusionName): CapRateConclusionActions {
+        capRateConclusionPage.amountCell(conclusionValueName).should('exist')
+            .invoke('text').then(asIsMarketAmount => {
+                let asIsMarketAmountAdjusted = getNumberFromDollarNumberWithCommas(asIsMarketAmount);
+                cy._mapSet(capRateConclusionKeys.asIsMarketAmount, asIsMarketAmountAdjusted);
             });
         return this;
     }
@@ -626,47 +622,16 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
         return this;
     }
 
-    private setCompleteEntrepreneurialProfit(): CapRateConclusionActions {
-        capRateConclusionPage.asCompleteLessEntrepreneurialProfit.should('exist')
-            .invoke('attr', 'value').then(entrepreneurialProfit => {
-                let entrepreneurialProfitNumber = Number(entrepreneurialProfit.replace('%', ''));
-                cy._mapSet(capRateConclusionKeys.entrepreneurialCompleteProfit, entrepreneurialProfitNumber);
-            });
-        return this;
-    }
-
-    private setAsIsAmountAlias(conclusionValueName: BoweryReports.ValueConclusionName): CapRateConclusionActions {
-        capRateConclusionPage.amountCell(conclusionValueName).should('exist')
-            .invoke('text').then(asIsMarketAmount => {
-                let asIsMarketAmountAdjusted = getNumberFromDollarNumberWithCommas(asIsMarketAmount);
-                cy._mapSet(capRateConclusionKeys.asIsMarketAmount, asIsMarketAmountAdjusted);
-            });
-        return this;
-    }
-
-    private setAsIsAmountFinalAlias(conclusionValueName: BoweryReports.ValueConclusionName): CapRateConclusionActions {
+    private setAmountFinalAlias(conclusionValueName: BoweryReports.ValueConclusionName): CapRateConclusionActions {
+        let key = conclusionValueName != enums.VALUE_CONCLUSION_NAME.asIs 
+            ? conclusionValueName == enums.VALUE_CONCLUSION_NAME.asStabilized 
+                ? capRateConclusionKeys.asStabilizedFinalAmount
+                : capRateConclusionKeys.asCompleteFinalAmount
+            : capRateConclusionKeys.asIsMarketFinalAmount;
         capRateConclusionPage.finalValueCell(conclusionValueName).should('exist')
             .invoke('text').then(asIsMarketFinalValue => {
                 let asIsMarketAmountAdjusted = getNumberFromDollarNumberWithCommas(asIsMarketFinalValue);
-                cy._mapSet(capRateConclusionKeys.asIsMarketFinalAmount, asIsMarketAmountAdjusted);
-            });
-        return this;
-    }
-
-    private setAsCompleteFinalAmount(conclusionValueName: BoweryReports.ValueConclusionName): CapRateConclusionActions {
-        capRateConclusionPage.finalValueCell(conclusionValueName).should('exist')
-            .invoke('text').then(asCompleteFinalAmount => {
-                let asCompleteFinalAmountAdjusted = getNumberFromDollarNumberWithCommas(asCompleteFinalAmount);
-                cy._mapSet(capRateConclusionKeys.asCompleteFinalAmount, asCompleteFinalAmountAdjusted);
-            });
-        return this;
-    }
-
-    private setFinalAmountAlias(conclusionValueName: BoweryReports.ValueConclusionName): CapRateConclusionActions {
-        capRateConclusionPage.finalValueCell(conclusionValueName).should('exist')
-            .invoke('text').then(asStabilizedFinalAmount => {
-                let asStabilizedFinalAmountAdjusted = getNumberFromDollarNumberWithCommas(asStabilizedFinalAmount);
-                cy._mapSet(capRateConclusionKeys.asStabilizedFinalAmount, asStabilizedFinalAmountAdjusted);
+                cy._mapSet(key, asIsMarketAmountAdjusted);
             });
         return this;
     }
@@ -676,56 +641,33 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
      * [As Is Market Final Value] / [Square Foot Analysis Area]
      * @param squareFootAnalysisArea Area for selected square foot analysis basis 
      */
-    verifyAsIsMarketPerSFCalculated(
+    verifyMarketValuePerSFCalculated(
         squareFootAnalysisArea: number, 
         conclusionValueName: BoweryReports.ValueConclusionName): CapRateConclusionActions {
-        this.setAsIsAmountFinalAlias(conclusionValueName);
-        cy._mapGet(capRateConclusionKeys.asIsMarketFinalAmount).then(asIsMarketFinalAmount => {
-            let asIsMarketFinalSFAmount = asIsMarketFinalAmount / squareFootAnalysisArea;
-            let expectedAsIsMarketSFAmount = asIsMarketFinalSFAmount < 0 
-                ? `-$${numberWithCommas(Math.abs(asIsMarketFinalSFAmount).toFixed(2))}`
-                : `${numberWithCommas(asIsMarketFinalSFAmount.toFixed(2))}`;
-            capRateConclusionPage.asIsMarketValuePerSF.should('have.text', expectedAsIsMarketSFAmount);
-        });
-        
-        return this;
-    }
+        this.setAmountFinalAlias(conclusionValueName);
+        let key = capRateConclusionKeys.asIsMarketFinalAmount;
 
-    /**
-     * Verifies Prospective Market value As Complete per SF by formula:
-     * [Prospective Market Value As Complete (Final Value)] / [Square Foot Analysis Area]
-     * @param squareFootAnalysisArea Area for selected square foot analysis basis 
-     */
-    verifyAsCompleteFinalPerSFCalculated(valueConclusionName: BoweryReports.ValueConclusionName, 
-        squareFootAnalysisArea: number): CapRateConclusionActions {
-        this.setAsCompleteFinalAmount(valueConclusionName);
-        cy._mapGet(capRateConclusionKeys.asCompleteFinalAmount).then(asCompleteFinalAmount => {
-            let asCompleteFinalSFAmount = asCompleteFinalAmount / squareFootAnalysisArea;
-            let expectedAsCompleteMarketSFAmount = asCompleteFinalSFAmount < 0 
-                ? `-$${numberWithCommas(Math.abs(asCompleteFinalSFAmount).toFixed(2))}`
-                : `${numberWithCommas(asCompleteFinalSFAmount.toFixed(2))}`;
-            capRateConclusionPage.prospectiveMarketValuePerSF(valueConclusionName)
-                .invoke('text', expectedAsCompleteMarketSFAmount);
-        });
-        
-        return this;
-    }
+        switch (conclusionValueName) {
+            case enums.VALUE_CONCLUSION_NAME.asIs:
+                key = capRateConclusionKeys.asIsMarketFinalAmount;
+                break;
+            case enums.VALUE_CONCLUSION_NAME.asStabilized:
+                key = capRateConclusionKeys.asStabilizedFinalAmount;
+                break;
+            case enums.VALUE_CONCLUSION_NAME.asComplete:
+                key = capRateConclusionKeys.asCompleteFinalAmount;
+                break;
+            default:
+                cy.log(`Value Conclusion type is not supported!`);
+                break;
+        }
 
-    /**
-     * Verifies Prospective Market value As Stabilized per SF by formula:
-     * [Prospective As Market Value As Stabilized (Final Value)] / [Square Foot Analysis Area]
-     * @param squareFootAnalysisArea Area for selected square foot analysis basis 
-     */
-    verifyAsStabilizedFinalPerSFCalculated(valueConclusionName: BoweryReports.ValueConclusionName, 
-        squareFootAnalysisArea: number): CapRateConclusionActions {
-        this.setFinalAmountAlias(valueConclusionName);
-        cy._mapGet(capRateConclusionKeys.asStabilizedFinalAmount).then(asStabilizedFinalAmount => {
-            let asStabilizedFinalSFAmount = asStabilizedFinalAmount / squareFootAnalysisArea;
-            let expectedAsStabilizedFinalSFAmount = asStabilizedFinalSFAmount < 0 
-                ? `-$${numberWithCommas(Math.abs(asStabilizedFinalSFAmount).toFixed(2))}`
-                : `${numberWithCommas(asStabilizedFinalSFAmount.toFixed(2))}`;
-            capRateConclusionPage.prospectiveMarketValuePerSF(valueConclusionName)
-                .invoke('text', expectedAsStabilizedFinalSFAmount);
+        cy._mapGet(key).then(marketFinalAmount => {
+            let marketFinalSFAmount = marketFinalAmount / squareFootAnalysisArea;
+            let expectedMarketSFAmount = marketFinalSFAmount < 0 
+                ? `-$${numberWithCommas(Math.abs(marketFinalSFAmount).toFixed(2))}`
+                : `${numberWithCommas(marketFinalSFAmount.toFixed(2))}`;
+            capRateConclusionPage.marketValuePerSF(conclusionValueName).should('have.text', expectedMarketSFAmount);
         });
         
         return this;
