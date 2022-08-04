@@ -3,8 +3,8 @@ import { navigateToCompplex } from "../../../../actions/base/baseTest.actions";
 import { Alias } from "../../../../utils/alias.utils";
 import testData from "../../../../fixtures/comp_plex/sales/find_comps/QA-5394.fixture";
 
-
-describe(`[QA-5394] -> [Sales > Find Comps > Create Comp > 
+// ernst: skipped until whole regression suite will be ready
+describe.skip(`[QA-5394] -> [Sales > Find Comps > Create Comp > 
     Enter Property Information form] Verify the Site Area* field`, { tags:[ "@comp_plex_standalone" ] },  () => {
 
     beforeEach(() => {

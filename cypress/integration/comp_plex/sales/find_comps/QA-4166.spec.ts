@@ -2,7 +2,9 @@ import { navigateToCompplex } from "../../../../actions/base/baseTest.actions";
 import { CompPlex, Sales } from "../../../../actions";
 import testData from "../../../../fixtures/comp_plex/sales/find_comps/QA-4166.fixture";
 
-describe(`[Sales > Find Comps > Create Comp > Review Property Description form] Verify the Generated Commentary field`, 
+// ernst: skipped due to unpredictable behavior of `Generated Commentary field`
+describe.skip(
+    `[Sales > Find Comps > Create Comp > Review Property Description form] Verify the Generated Commentary field`, 
     { tags:[ "@comp_plex_standalone" ] }, () => {
 
         beforeEach(() => {
