@@ -4,6 +4,8 @@ import BaseActionsExt from "../base/base.actions.ext";
 import tableExpenseHistoryCellNames from "../../../cypress/enums/expense/expenseHistoryTableRows.enum";
 import { _mutateArrayInMap } from "../../support/commands";
 import mapKeysUtils from "../../utils/mapKeys.utils";
+import { BoweryReports } from "../../types/boweryReports.type";
+import Enums from "../../enums/enums";
 
 class ExpenseHistoryActions extends BaseActionsExt<typeof expenseHistoryPage> {
 
@@ -31,12 +33,13 @@ class ExpenseHistoryActions extends BaseActionsExt<typeof expenseHistoryPage> {
 
     enterIssueByColIndex(issueValue: number | string, 
         tableExpenseHistoryCellNames: string, index = 0,): ExpenseHistoryActions {
-        if (issueValue === "clear") {
+        if (issueValue === "clear" || issueValue === 0) {
             expenseHistoryPage.getUnifiedEditableAndTotalCells(tableExpenseHistoryCellNames).eq(index)
                 .scrollIntoView()
                 .realType("something nonsense");
             expenseHistoryPage.getUnifiedEditableAndTotalCells(tableExpenseHistoryCellNames).eq(index)
                 .dblclick().clear();
+            this.verifyIssueTextByColIndex(issueValue, tableExpenseHistoryCellNames, index);
         } else {
             expenseHistoryPage.getUnifiedEditableAndTotalCells(tableExpenseHistoryCellNames).eq(index)
                 .scrollIntoView()
@@ -44,9 +47,15 @@ class ExpenseHistoryActions extends BaseActionsExt<typeof expenseHistoryPage> {
             expenseHistoryPage.getUnifiedEditableAndTotalCells(tableExpenseHistoryCellNames).eq(index)
                 .dblclick().clear()
                 .realType(`${issueValue}{enter}`);
-            expenseHistoryPage.getUnifiedEditableAndTotalCells(tableExpenseHistoryCellNames).eq(index)
-                .should("have.text", `$${numberWithCommas((<number>issueValue).toFixed(2))}`);
+            this.verifyIssueTextByColIndex(issueValue, tableExpenseHistoryCellNames, index);
         }
+        return this;
+    }
+
+    verifyIssueTextByColIndex(issueValue: number | string, cellName: string, index = 0): ExpenseHistoryActions {
+        const textToBe = issueValue === "clear" || issueValue === 0 ? "" :
+            `$${numberWithCommas((<number>issueValue).toFixed(2))}`;
+        expenseHistoryPage.getUnifiedEditableAndTotalCells(cellName).eq(index).should("have.text", textToBe);
         return this;
     }
 
@@ -187,7 +196,30 @@ class ExpenseHistoryActions extends BaseActionsExt<typeof expenseHistoryPage> {
     }
 
     checkUtilitiesExpensesOption(optionName: string): ExpenseHistoryActions {
-        expenseHistoryPage.getUtilityExpensesOption(optionName).check().should("be.checked");
+        expenseHistoryPage.getUtilityExpensesOption(optionName).click().parent("[data-qa=checked]").should("exist");
+        return this;
+    }
+
+    verifyTableStateByUtilityExpensesRadio(checkedOption: BoweryReports.UtilityExpenses): ExpenseHistoryActions {
+        switch (checkedOption) {
+            case Enums.UTILITY_EXPENSES.combinedElectricityAndFuel:
+                expenseHistoryPage.getExpenseRowByName(tableExpenseHistoryCellNames.utilities).should("exist");
+                expenseHistoryPage.getExpenseRowByName(tableExpenseHistoryCellNames.electricity).should("not.exist");
+                expenseHistoryPage.getExpenseRowByName(tableExpenseHistoryCellNames.fuel).should("not.exist");
+                expenseHistoryPage.getExpenseRowByName(tableExpenseHistoryCellNames.waterAndSewer).should("exist");
+                break;
+            case Enums.UTILITY_EXPENSES.combinedAll:
+                expenseHistoryPage.getExpenseRowByName(tableExpenseHistoryCellNames.utilities).should("exist");
+                expenseHistoryPage.getExpenseRowByName(tableExpenseHistoryCellNames.electricity).should("not.exist");
+                expenseHistoryPage.getExpenseRowByName(tableExpenseHistoryCellNames.fuel).should("not.exist");
+                expenseHistoryPage.getExpenseRowByName(tableExpenseHistoryCellNames.waterAndSewer).should("not.exist");
+                break;
+            default:
+                expenseHistoryPage.getExpenseRowByName(tableExpenseHistoryCellNames.utilities).should("not.exist");
+                expenseHistoryPage.getExpenseRowByName(tableExpenseHistoryCellNames.electricity).should("exist");
+                expenseHistoryPage.getExpenseRowByName(tableExpenseHistoryCellNames.fuel).should("exist");
+                expenseHistoryPage.getExpenseRowByName(tableExpenseHistoryCellNames.waterAndSewer).should("exist");
+        }
         return this;
     }
 

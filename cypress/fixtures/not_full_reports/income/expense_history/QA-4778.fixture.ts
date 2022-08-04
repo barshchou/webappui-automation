@@ -1,6 +1,7 @@
 import { BoweryAutomation } from "../../../../types/boweryAutomation.type";
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 import { getYearFromDate } from "../../../../../utils/date.utils";
+import Enums from "../../../../enums/enums";
 
 const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("4778");
 
@@ -8,7 +9,7 @@ export default {
     reportCreationData: _reportCreationData,
     periods: [
         {
-            expensePeriodType: "Actual",
+            expensePeriodType: Enums.EXPENSE_PERIOD_TYPE.actual,
             year: Number(getYearFromDate()) - 1,
             grossRevenue: 60000,
             realEstateTaxes: 10000,
@@ -25,7 +26,7 @@ export default {
             reserves: 155.85
         },
         {
-            expensePeriodType: "Actual T12",
+            expensePeriodType: Enums.EXPENSE_PERIOD_TYPE.actualT12,
             year: Number(getYearFromDate()) - 1,
             month: "April",
             grossRevenue: 10000,
@@ -43,7 +44,7 @@ export default {
             reserves: 155.85
         },
         {
-            expensePeriodType: "Annualized Historical",
+            expensePeriodType: Enums.EXPENSE_PERIOD_TYPE.annualizedHistorical,
             year: Number(getYearFromDate()) - 1,
             month: "November",
             grossRevenue: 48000,
@@ -61,7 +62,7 @@ export default {
             reserves: 155.85
         },
         {
-            expensePeriodType: "Projection",
+            expensePeriodType: Enums.EXPENSE_PERIOD_TYPE.projection,
             year: Number(getYearFromDate()) + 1,
             grossRevenue: 100000,
             realEstateTaxes: 7777.92,

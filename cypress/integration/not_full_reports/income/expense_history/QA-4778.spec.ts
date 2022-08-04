@@ -27,5 +27,6 @@ describe("Verify the calculation on the Expense History page", { tags: [ "@incom
                 .verifyNetOpIncomeByIndex(period.grossRevenue)
                 .clickRemoveExpensePeriodButtonBuColIndex();
         });
+        // TODO: Add stepInfos for test
     });
 });

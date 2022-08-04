@@ -26,6 +26,8 @@ class ExpenseHistoryPage extends BasePage {
     getUtilityExpensesOption(optionName: string) { return cy.get(`[name=utilitiesExpensesMode][value=${optionName}]`); }
 
     get removeExpensePeriodButtons() { return cy.get("button [data-icon=close]"); }
+
+    getExpenseRowByName(cellName: string) { return cy.get(`[row-id='${cellName}'] [col-id=name]`); }
 }
 
 export default new ExpenseHistoryPage();
