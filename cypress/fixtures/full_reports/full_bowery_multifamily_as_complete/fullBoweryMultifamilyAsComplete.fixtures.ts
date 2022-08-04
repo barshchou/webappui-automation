@@ -1441,5 +1441,8 @@ export default {
     highestBestUse: highestBestUseData(),
     unitInspection: unitInspectionData(),
     capRateDiscussion: capRateDiscussionData(),
-    insurableReplacementCost: insurableReplacementCostData()
+    insurableReplacementCost: insurableReplacementCostData(),
+    valueConclusionAsComplete: Enums.VALUE_CONCLUSION_NAME.asComplete,
+    valueConclusionAsStabilized: Enums.VALUE_CONCLUSION_NAME.asStabilized,
+    valueConclusionAsIs: Enums.VALUE_CONCLUSION_NAME.asIs,
 };

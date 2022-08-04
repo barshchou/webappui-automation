@@ -454,11 +454,14 @@ describe.skip("Full bowery way, multifamily as complete report", { tags: [ "@ful
             .selectRoundingFactor(testData.capRateConclusion.roundingFactorValue)
             .verifyNetOperatingIncome(testData.capRateConclusion.netOperatingIncome)
             .verifyConcludedCapRateCell(testData.capRateConclusion.concludedCapRate)
-            .verifyAsStabilizedTablePart(testData.capRateConclusion.asStabilizedPart)
-            .verifyAsCompleteTablePart(testData.capRateConclusion.asCompletePart)
+            .verifyAsStabilizedTablePart(testData.capRateConclusion.asStabilizedPart, 
+                testData.valueConclusionAsStabilized)
+            .verifyAsCompleteTablePart(testData.capRateConclusion.asCompletePart, 
+                testData.valueConclusionAsStabilized)
             .enterAsCompleteLessEntrepreneurialProfit(
                 testData.capRateConclusion.asCompletePart.lessEntrepreneurialProfit)
-            .verifyAsIsMarketTablePart(testData.capRateConclusion.asIsMarketPart)
+            .verifyAsIsMarketTablePart(testData.capRateConclusion.asIsMarketPart, 
+                testData.valueConclusionAsStabilized)
             .clickSaveContinueButton();
         testData.findComps.comparables.forEach((comp) => {
             Sales.FindComps.addExistingComparable(comp.address)

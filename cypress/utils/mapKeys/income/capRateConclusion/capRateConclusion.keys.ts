@@ -17,5 +17,8 @@ export default {
     renovationBudget: 'renovationBudget',
     asCompleteFinalAmount: 'asCompleteFinalAmount',
     asStabilizedFinalAmount: 'asStabilizedFinalAmount',
+    allAsStabilizedLossesAliases: 'allAsStabilizedLossesAliases',
+    allAsCompleteLossesAliases: 'allAsCompleteLossesAliases'
+
 
 };

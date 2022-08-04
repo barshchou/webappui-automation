@@ -1,3 +1,4 @@
+import enums from "../../enums/enums";
 import { BoweryReports } from "../../types/boweryReports.type";
 import BasePage from "../base/base.page";
 
@@ -32,17 +33,20 @@ class CapRateConclusionPage extends BasePage {
         return cy.get("[data-qa=concludedCapRate-amount-cell] input:first-child"); 
     }
 
-    get asStabilizedPeriodCell() { return cy.get("[data-qa=as-stabilized-period-cell]"); }
+    periodCell(conclusionValue: BoweryReports.ValueConclusionName) { 
+        let conclusionValueAdjusted = conclusionValue.toLocaleLowerCase().replace(' ', '-');
+        return cy.get(`[data-qa^="${conclusionValueAdjusted}"][data-qa$="-period-cell"]`); 
+    }
 
-    get asStabilizedAmountCell() { return cy.get("[data-qa=as-stabilized-amount-cell]"); }
+    amountCell(conclusionValue: BoweryReports.ValueConclusionName) { 
+        let conclusionValueAdjusted = conclusionValue.toLocaleLowerCase().replace(' ', '-');
+        return cy.get(`[data-qa^="${conclusionValueAdjusted}"][data-qa$="-amount-cell"]`); 
+    }
 
-    get asStabilizedFinalValueCell() { return cy.get("[data-qa=as-stabilized-final-value-cell]"); }
-
-    get asCompletePeriodCell() { return cy.get("[data-qa=as-complete-period-cell]"); }
-
-    get asCompleteAmountCell() { return cy.get("[data-qa=as-complete-amount-cell]"); }
-
-    get asCompleteFinalValueCell() { return cy.get("[data-qa=as-complete-final-value-cell]"); }
+    finalValueCell(conclusionValue: BoweryReports.ValueConclusionName) { 
+        let conclusionValueAdjusted = conclusionValue.toLocaleLowerCase().replace(' ', '-');
+        return cy.get(`[data-qa^="${conclusionValueAdjusted}"][data-qa$="-final-value-cell"]`); 
+    }
 
     get asCompleteLessEntrepreneurialProfit() { 
         return cy.get("[data-qa*='asCompleteLossItems.entrepreneurialProfit'] input[inputmode]"); 
@@ -52,18 +56,12 @@ class CapRateConclusionPage extends BasePage {
         return cy.get("[data-qa*='asStabilizedLossItems.entrepreneurialProfit'] input[inputmode]"); 
     }
 
-    get asIsMarketPeriodCell() { return cy.get("[data-qa=as-is-market-period-cell]"); }
-
-    get asIsMarketAmountCell() { return cy.get("[data-qa=as-is-market-amount-cell]"); }
-
-    get asIsMarketFinalValueCell() { return cy.get("[data-qa=as-is-market-final-value-cell]"); }
-
     get asIsMarketValuePerUnit() { return cy.xpath("//*[.='As Is Market Value Per Unit']//following-sibling::td[3]"); }
 
-    get asIsMarketValuePerSF() { return cy.xpath("//*[.='As Is Market Value Per SF']//following-sibling::td[3]"); }
-
-    prospectiveMarketValuePerSF(valueConclusionValue: BoweryReports.ValueConclusionName) { 
-        return cy.xpath(`//*[.='Prospective Market Value ${valueConclusionValue} Per SF']//following-sibling::td[3]`); 
+    marketValuePerSF(valueConclusionValue: BoweryReports.ValueConclusionName) { 
+        return valueConclusionValue != enums.VALUE_CONCLUSION_NAME.asIs 
+            ? cy.xpath(`//*[.='Prospective Market Value ${valueConclusionValue} Per SF']//following-sibling::td[3]`)
+            : cy.xpath("//*[.='As Is Market Value Per SF']//following-sibling::td[3]"); 
     }
 
     addRentLossButton(incomeType: BoweryReports.UnitIncomeType) { 
@@ -90,7 +88,6 @@ class CapRateConclusionPage extends BasePage {
         index = 0) { 
         return cy.get(`[name="${valueConclusionKey}LossItems[${index}].months"]`); 
     }
-
 
     get asCompleteLessBuyoutCost() { return cy.get("[data-qa*='asCompleteLossItems.buyoutCost'] input[inputmode]"); }
 
