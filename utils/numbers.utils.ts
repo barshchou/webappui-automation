@@ -30,6 +30,11 @@ export const isHasDecimalPartMoreNumberOfDigits = (number: number | string, digi
     return numberDigits[1].length > digitsNumber;
 };
 
+export const getNumberFromPercentNumberWithCommas = stringNumber => {
+    return typeof stringNumber === "string" ? Number(stringNumber.replace("%", "")
+        .replaceAll(",", "")) : stringNumber;
+};
+
 export const getNumberFromDollarNumberWithCommas = (stringNumber) => {
     return typeof stringNumber === "string" ? Number(stringNumber.replace("$", "")
         .replaceAll(",", "")) : stringNumber;

@@ -184,7 +184,8 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         this.clickIncomeApproachButton()
             .clickCommercialMenuIfClosed()
             .clickCommercialCompGroups()
-            .submitSaveChangesModal();
+            .submitSaveChangesModal()
+            .verifyProgressBarNotExist();
         return this;
     }
 
