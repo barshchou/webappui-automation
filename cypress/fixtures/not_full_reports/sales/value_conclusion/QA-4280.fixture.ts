@@ -1,4 +1,5 @@
 import Enums from "../../../../enums/enums";
+import { BoweryReports } from "../../../../types/boweryReports.type";
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 
 const reportCreationFixture = () => {
@@ -23,5 +24,6 @@ const dataFixture = () => {
 
 export default {
     reportCreationData: reportCreationFixture(),
-    data: Object.freeze(dataFixture())
+    data: Object.freeze(dataFixture()),
+    valueConclusionKeyAsStabilized: Object.keys(Enums.VALUE_CONCLUSION_NAME)[1] as BoweryReports.ValueConclusionKeys
 };
