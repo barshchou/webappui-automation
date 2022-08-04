@@ -21,5 +21,15 @@ class PropertyDescriptionFormActions {
         this.Page.appraiserCommentaryTextArea.should("have.text", value);
         return this;
     }
+
+    // TODO: return back to this method later since it's hard to get what is going with this textarea
+    enterGeneratedCommentary(value: string): PropertyDescriptionFormActions {
+        cy.get('[data-qa="reading-btn"]').click({ force:true });
+        this.Page.generatedCommentaryTextArea.should("be.enabled");
+        cy.pause();
+        this.Page.generatedCommentaryTextArea.type(`{enter}${value}`, { force: true });
+        this.Page.generatedCommentaryTextArea.should("have.text", value);
+        return this;
+    }
 }
 export default new PropertyDescriptionFormActions(findCompsPage);

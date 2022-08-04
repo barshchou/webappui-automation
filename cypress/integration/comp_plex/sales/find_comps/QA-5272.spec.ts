@@ -20,7 +20,7 @@ describe(`[QA-5272] ->
             
             cy.stepInfo(`1. Verify that the following fields are disabled in the edit mode: 
             Property Information section`);
-            Sales._FindComps.Page.PropertyInfoEditBtn.should("be.visible").click();
+            Sales._FindComps.Page.propertyInfoEditBtn.should("be.visible").click();
             Sales._FindComps.PropertyInfo.Page.streetAddressInput.should("be.disabled");
             Sales._FindComps.PropertyInfo.Page.cityInput.should("be.disabled");
             Sales._FindComps.PropertyInfo.Page.stateInput.should("be.disabled");

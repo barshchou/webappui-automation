@@ -2,7 +2,6 @@ import { getRandomDate } from './../../../../../utils/date.utils';
 import { findCompsPage } from "../../../../pages/sales/findComps.page";
 
 class SaleInfoFromActions {
-
     Page: typeof findCompsPage;
 
     constructor(page: typeof findCompsPage) {
@@ -31,6 +30,16 @@ class SaleInfoFromActions {
     setSellerGrantor(seller: string): SaleInfoFromActions {
         this.Page.SellerGrantor.type(seller, { force: true });
         return this;
+    }
+
+    setDeedSalePrice(price: string) {
+        this.Page.DeedSalePriceInput.type(price, { force:true });
+        return this;
+    }
+
+    setSaleStatus(status: "Transaction" | "Under Contract" | "Listing") {
+        this.Page.SaleStatusDropdown.click();
+        this.Page.getSaleStatus(status).click();
     }
 }
 export default new SaleInfoFromActions(findCompsPage);

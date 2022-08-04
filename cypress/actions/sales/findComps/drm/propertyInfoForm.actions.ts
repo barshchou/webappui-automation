@@ -16,14 +16,9 @@ class PropertyInfoFormActions {
         this.Page.commercialAreaNewComp.type(area, { force: true });
         return this;
     }
-
-    setSiteArea(area: string): PropertyInfoFormActions {
-        this.Page.siteAreaNewComp.type(area, { force: true });
-        return this;
-    }
     
     setFloor(floors: string): PropertyInfoFormActions {
-        this.Page.floorNewComp.type(floors, { force: true });
+        this.Page.floorsNewComp.type(floors, { force: true });
         return this;
     }
             
@@ -54,11 +49,6 @@ class PropertyInfoFormActions {
 
     setYearBuild(year: string): PropertyInfoFormActions {
         this.Page.yearBuiltNewComp.type(year, { force: true });
-        return this;
-    }
-
-    setResidentialUnits(units: string): PropertyInfoFormActions {
-        this.Page.createCompNumberResidentialUnits.type(units, { force: true });
         return this;
     }
 }
