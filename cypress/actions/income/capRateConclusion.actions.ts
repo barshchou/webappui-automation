@@ -7,6 +7,7 @@ import {
 import BaseActionsExt from "../base/base.actions.ext";
 import capRateConclusionKeys from "../../utils/mapKeys/income/capRateConclusion/capRateConclusion.keys";
 import { BoweryReports } from "../../types/boweryReports.type";
+import enums from "../../enums/enums";
 
 class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPage> {
 
@@ -67,19 +68,22 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
         return this;
     }
 
-    verifyAsStabilizedTablePart(partData: Readonly<{period: string, finalValue: string}>): CapRateConclusionActions {
-        this.verifyAsStabilizedPeriodCell(partData.period)
-            .verifyAsStabilizedAmountCell()
-            .verifyAsStabilizedFinalValueCell(partData.finalValue);
+    verifyAsStabilizedTablePart(
+        partData: Readonly<{period: string, finalValue: string}>, 
+        valueConclusionName: BoweryReports.ValueConclusionName): CapRateConclusionActions {
+        this.verifyAsStabilizedPeriodCell(partData.period, valueConclusionName)
+            .verifyAsStabilizedAmountCell(valueConclusionName)
+            .verifyAsStabilizedFinalValueCell(partData.finalValue, valueConclusionName);
         return this;
     }
 
-    verifyAsStabilizedPeriodCell(period: string): CapRateConclusionActions {
-        capRateConclusionPage.asStabilizedPeriodCell.should("have.text", period);
+    verifyAsStabilizedPeriodCell(period: string, conclusionValueName: BoweryReports.ValueConclusionName): 
+    CapRateConclusionActions {
+        capRateConclusionPage.periodCell(conclusionValueName).should("have.text", period);
         return this;
     }
 
-    verifyAsStabilizedAmountCell() {
+    verifyAsStabilizedAmountCell(conclusionValueName: BoweryReports.ValueConclusionName) {
         capRateConclusionPage.netOperatingIncomeCell.invoke("text").then(noiText => {
             const noiNumber = getNumberFromDollarNumberWithCommas(noiText);
             capRateConclusionPage.concludedCapRateCellInputToVerify.invoke("attr", "value").then(capRate => {
@@ -87,52 +91,58 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
                 const textToBe = noiNumber < 0 
                     ? `-$${stringNumber.replace('-', '')}` 
                     : `$${stringNumber}`;
-                capRateConclusionPage.asStabilizedAmountCell.should("have.text", textToBe);
+                capRateConclusionPage.amountCell(conclusionValueName).should("have.text", textToBe);
             });
         });
         return this;
     }
 
-    verifyAsStabilizedFinalValueCell(finalValue: string): CapRateConclusionActions {
-        capRateConclusionPage.asStabilizedFinalValueCell.should("have.text", finalValue);
-        return this;
-    }
-
-    verifyAsCompleteTablePart(partData: Readonly<{period: string, amount: string, finalValue: string}>): 
+    verifyAsStabilizedFinalValueCell(finalValue: string, valueConclusionName: BoweryReports.ValueConclusionName): 
     CapRateConclusionActions {
-        this.verifyAsCompletePeriodCell(partData.period)
-            .verifyAsCompleteAmountCell(partData.amount)
-            .verifyAsCompleteFinalValueCell(partData.finalValue);
+        capRateConclusionPage.finalValueCell(valueConclusionName).should("have.text", finalValue);
         return this;
     }
 
-    verifyAsCompletePeriodCell(period: string): CapRateConclusionActions {
-        capRateConclusionPage.asCompletePeriodCell.should("have.text", period);
+    verifyAsCompleteTablePart(partData: Readonly<{period: string, amount: string, finalValue: string}>, 
+        valueConclusionName: BoweryReports.ValueConclusionName): CapRateConclusionActions {
+        this.verifyAsCompletePeriodCell(partData.period, valueConclusionName)
+            .verifyAsCompleteAmountCell(partData.amount, valueConclusionName)
+            .verifyAsCompleteFinalValueCell(partData.finalValue, valueConclusionName);
         return this;
     }
 
-    verifyAsCompleteAmountCell(amount: string): CapRateConclusionActions {
-        capRateConclusionPage.asCompleteAmountCell.should("have.text", amount);
+    verifyAsCompletePeriodCell(period: string, conclusionValueName: BoweryReports.ValueConclusionName): 
+    CapRateConclusionActions {
+        capRateConclusionPage.periodCell(conclusionValueName).should("have.text", period);
         return this;
     }
 
-    verifyAsCompleteFinalValueCell(finalValue: string): CapRateConclusionActions {
-        capRateConclusionPage.asCompleteFinalValueCell.should("have.text", finalValue);
+    verifyAsCompleteAmountCell(amount: string, conclusionValueName: BoweryReports.ValueConclusionName): 
+    CapRateConclusionActions {
+        capRateConclusionPage.amountCell(conclusionValueName).should("have.text", amount);
+        return this;
+    }
+
+    verifyAsCompleteFinalValueCell(finalValue: string, valueConclusionName: BoweryReports.ValueConclusionName): 
+    CapRateConclusionActions {
+        capRateConclusionPage.finalValueCell(valueConclusionName).should("have.text", finalValue);
         return this;
     }
 
     verifyAsIsMarketTablePart(partData: Readonly<{period: string, amount: string, 
-        finalValue: string, perUnit: string, perSF: string}>): CapRateConclusionActions {
-        this.verifyAsIsMarketPeriodCell(partData.period)
-            .verifyAsIsMarketAmountCell(partData.amount)
-            .verifyAsIsMarketFinalValueCell(partData.finalValue)
+        finalValue: string, perUnit: string, perSF: string}>, valueConclusionName: BoweryReports.ValueConclusionName): 
+        CapRateConclusionActions {
+        this.verifyAsIsMarketPeriodCell(partData.period, valueConclusionName)
+            .verifyAsIsMarketAmountCell(partData.amount, valueConclusionName)
+            .verifyAsIsMarketFinalValueCell(partData.finalValue, valueConclusionName)
             .verifyAsIsMarketPerUnit(partData.perUnit)
             .verifyAsIsMarketPerSF(partData.perSF);
         return this;
     }
 
-    verifyAsIsMarketPeriodCell(period: string): CapRateConclusionActions {
-        capRateConclusionPage.asIsMarketPeriodCell.should("have.text", period);
+    verifyAsIsMarketPeriodCell(period: string, conclusionValueName: BoweryReports.ValueConclusionName): 
+    CapRateConclusionActions {
+        capRateConclusionPage.periodCell(conclusionValueName).should("have.text", period);
         return this;
     }
 
@@ -148,13 +158,15 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
         return this;
     }
 
-    verifyAsIsMarketAmountCell(amount: string): CapRateConclusionActions {
-        capRateConclusionPage.asIsMarketAmountCell.should("have.text", amount);
+    verifyAsIsMarketAmountCell(amount: string, conclusionValueName: BoweryReports.ValueConclusionName): 
+    CapRateConclusionActions {
+        capRateConclusionPage.amountCell(conclusionValueName).should("have.text", amount);
         return this;
     }
 
-    verifyAsIsMarketFinalValueCell(finalValue: string): CapRateConclusionActions {
-        capRateConclusionPage.asIsMarketFinalValueCell.should("have.text", finalValue);
+    verifyAsIsMarketFinalValueCell(finalValue: string, valueConclusionName: BoweryReports.ValueConclusionName): 
+    CapRateConclusionActions {
+        capRateConclusionPage.finalValueCell(valueConclusionName).should("have.text", finalValue);
         return this;
     }
 
@@ -267,8 +279,8 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
         return this;
     }
 
-    setAsStabilizedAmountAlias(): CapRateConclusionActions {
-        capRateConclusionPage.asStabilizedAmountCell.invoke('text').then(asStabilizedAmount => {
+    setAsStabilizedAmountAlias(conclusionValueName: BoweryReports.ValueConclusionName): CapRateConclusionActions {
+        capRateConclusionPage.amountCell(conclusionValueName).invoke('text').then(asStabilizedAmount => {
             let asStabilizedAmountAdjusted = getNumberFromDollarNumberWithCommas(asStabilizedAmount);
             cy._mapSet(capRateConclusionKeys.asStabilizedAmount, asStabilizedAmountAdjusted);
         });
@@ -280,56 +292,36 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
      * It verifies whether final value is rounded correctly.
      * Formula: As Stabilized Amount * Rounding Factor => round result => multiply by rounding factor
      */
-    verifyAsStabilizedFinalValueCalculated(): CapRateConclusionActions {
-        this.setRoundingFactorValueAlias()
-            .setAsStabilizedAmountAlias();
-        cy._mapGet(capRateConclusionKeys.capRateRoundingFactor).then(capRateRounding => {
-            cy._mapGet(capRateConclusionKeys.asStabilizedAmount).then(asStabilizedValue => {
-                let expectedFinalValue = Math.round(asStabilizedValue / capRateRounding) * capRateRounding;
-                let expectedFinalValueText = expectedFinalValue < 0 
-                    ? `-$${numberWithCommas(getNumberFromMinusDollarNumberWithCommas(expectedFinalValue))}` 
-                    : `$${numberWithCommas(expectedFinalValue)}`;
-                capRateConclusionPage.asStabilizedFinalValueCell.should("have.text", expectedFinalValueText);
-            });
-        });
-        return this;
-    }
+    verifyFinalValueCalculated(conclusionValueName: BoweryReports.ValueConclusionName): 
+    CapRateConclusionActions {
+        this.setRoundingFactorValueAlias();
+        let key = capRateConclusionKeys.asStabilizedAmount;
 
-    /**
-     * Gets cap rate rounding factor and As Complete amount.
-     * It verifies whether final value is rounded correctly.
-     * Formula: As Complete AMount * Rounding Factor => round result => multiply by rounding factor
-     */
-    verifyAsCompleteFinalValueCalculated(): CapRateConclusionActions {
-        this.setRoundingFactorValueAlias()
-            .setAsCompleteAmountAlias();
+        switch (conclusionValueName) {
+            case enums.VALUE_CONCLUSION_NAME.asIs:
+                this.setAsIsAmountAlias(conclusionValueName);
+                key = capRateConclusionKeys.asIsMarketAmount;
+                break;
+            case enums.VALUE_CONCLUSION_NAME.asStabilized:
+                this.setAsStabilizedAmountAlias(conclusionValueName);
+                key = capRateConclusionKeys.asStabilizedAmount;
+                break;
+            case enums.VALUE_CONCLUSION_NAME.asComplete:
+                this.setAsCompleteAmountAlias(conclusionValueName);
+                key = capRateConclusionKeys.asCompleteAmount;
+                break;
+            default:
+                cy.log(`Value Conclusion type is not supported!`);
+                break;
+        }
+        
         cy._mapGet(capRateConclusionKeys.capRateRoundingFactor).then(capRateRounding => {
-            cy._mapGet(capRateConclusionKeys.asCompleteAmount).then(asCompleteAmount => {
-                let expectedFinalValue = Math.round(asCompleteAmount / capRateRounding) * capRateRounding;
+            cy._mapGet(key).then(marketValue => {
+                let expectedFinalValue = Math.round(marketValue / capRateRounding) * capRateRounding;
                 let expectedFinalValueText = expectedFinalValue < 0 
                     ? `-$${numberWithCommas(getNumberFromMinusDollarNumberWithCommas(expectedFinalValue))}` 
                     : `$${numberWithCommas(expectedFinalValue)}`;
-                capRateConclusionPage.asCompleteFinalValueCell.should("have.text", expectedFinalValueText);
-            });
-        });
-        return this;
-    }
-
-    /**
-     * Gets cap rate rounding factor and As Complete amount.
-     * It verifies whether final value is rounded correctly.
-     * Formula: As Is AMount * Rounding Factor => round result => multiply by rounding factor
-     */
-    verifyAsIsFinalValueCalculated(): CapRateConclusionActions {
-        this.setRoundingFactorValueAlias()
-            .setAsIsAmountAlias();
-        cy._mapGet(capRateConclusionKeys.capRateRoundingFactor).then(capRateRounding => {
-            cy._mapGet(capRateConclusionKeys.asIsMarketAmount).then(asIsMarketAmount => {
-                let expectedFinalValue = Math.round(asIsMarketAmount / capRateRounding) * capRateRounding;
-                let expectedFinalValueText = expectedFinalValue < 0 
-                    ? `-$${numberWithCommas(getNumberFromMinusDollarNumberWithCommas(expectedFinalValue))}` 
-                    : `$${numberWithCommas(expectedFinalValue)}`;
-                capRateConclusionPage.asIsMarketFinalValueCell.should("have.text", expectedFinalValueText);
+                capRateConclusionPage.finalValueCell(conclusionValueName).should("have.text", expectedFinalValueText);
             });
         });
         return this;
@@ -362,8 +354,8 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
      *   [As Stabilized Amount] - [Sum of Rent Losses] - [Commission Fee] - 
      *   (([Sum of Rent Losses] + [Commission Fee]) * Entrepreneur Profit)
      */
-    verifyProspectiveMarketValueAsCompleteCalculated(valueConclusionKey: BoweryReports.ValueConclusionKeys): 
-    CapRateConclusionActions {
+    verifyProspectiveMarketValueAsCompleteCalculated(valueConclusionKey: BoweryReports.ValueConclusionKeys, 
+        conclusionValueName: BoweryReports.ValueConclusionName): CapRateConclusionActions {
         this.getAllAsStabilizedLossesAliases(valueConclusionKey);
         cy._mapGet(capRateConclusionKeys.allAsStabilizedLossesAliases).then(allAsStabilizedLossesAliases => {
             cy.log(`As Stabilized AmountT: ${allAsStabilizedLossesAliases.asStabilizedAmount}`);
@@ -385,7 +377,7 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
                 ? `-$${numberWithCommas(prospectiveValue.toFixed(0).replace('-', ''))}`
                 : `${numberWithCommas(prospectiveValue.toFixed(0))}`;
 
-            capRateConclusionPage.asCompleteAmountCell
+            capRateConclusionPage.amountCell(conclusionValueName)
                 .should('have.text', expectedProspectiveValueAsComplete);
         });
         return this;
@@ -398,7 +390,8 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
      *   [As Complete Amount] - [Sum of Rent Losses] - [Buyout Cost] - [Renovation] -
      *   (([Sum of Rent Losses] + [Less Buyout Cost]) * Entrepreneur Profit)
      */
-    verifyAsIsMarketValueCalculated(valueConclusionKey: BoweryReports.ValueConclusionKeys): CapRateConclusionActions {
+    verifyAsIsMarketValueCalculated(valueConclusionKey: BoweryReports.ValueConclusionKeys, 
+        conclusionValueName: BoweryReports.ValueConclusionName): CapRateConclusionActions {
         this.getAllAsCompleteLossesAliases(valueConclusionKey);
         cy._mapGet(capRateConclusionKeys.allAsCompleteLossesAliases).then(allAsCompleteLossesAliases => {
             cy.log(`As Complete AmountT: ${allAsCompleteLossesAliases.asCompleteAmount}`);
@@ -421,7 +414,7 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
                 ? `-$${numberWithCommas(marketValueAsIs.toFixed(0).replace('-', ''))}`
                 : `${numberWithCommas(marketValueAsIs.toFixed(0))}`;
 
-            capRateConclusionPage.asIsMarketAmountCell
+            capRateConclusionPage.amountCell(conclusionValueName)
                 .should('have.text', expectedMarketValueAsIs);
         });
         return this;
@@ -565,8 +558,8 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
         return this;
     }
 
-    setAsCompleteAmountAlias(): CapRateConclusionActions {
-        capRateConclusionPage.asCompleteAmountCell.should('exist')
+    setAsCompleteAmountAlias(conclusionValueName: BoweryReports.ValueConclusionName): CapRateConclusionActions {
+        capRateConclusionPage.amountCell(conclusionValueName).should('exist')
             .invoke('text').then(asCompleteAmount => {
                 let asCompleteAmountAdjusted = getNumberFromDollarNumberWithCommas(asCompleteAmount);
                 cy._mapSet(capRateConclusionKeys.asCompleteAmount, asCompleteAmountAdjusted);
@@ -631,8 +624,8 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
         return this;
     }
 
-    setAsIsAmountAlias(): CapRateConclusionActions {
-        capRateConclusionPage.asIsMarketAmountCell.should('exist')
+    setAsIsAmountAlias(conclusionValueName: BoweryReports.ValueConclusionName): CapRateConclusionActions {
+        capRateConclusionPage.amountCell(conclusionValueName).should('exist')
             .invoke('text').then(asIsMarketAmount => {
                 let asIsMarketAmountAdjusted = getNumberFromDollarNumberWithCommas(asIsMarketAmount);
                 cy._mapSet(capRateConclusionKeys.asIsMarketAmount, asIsMarketAmountAdjusted);
@@ -640,8 +633,8 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
         return this;
     }
 
-    setAsIsAmountFinalAlias(): CapRateConclusionActions {
-        capRateConclusionPage.asIsMarketFinalValueCell.should('exist')
+    setAsIsAmountFinalAlias(conclusionValueName: BoweryReports.ValueConclusionName): CapRateConclusionActions {
+        capRateConclusionPage.finalValueCell(conclusionValueName).should('exist')
             .invoke('text').then(asIsMarketFinalValue => {
                 let asIsMarketAmountAdjusted = getNumberFromDollarNumberWithCommas(asIsMarketFinalValue);
                 cy._mapSet(capRateConclusionKeys.asIsMarketFinalAmount, asIsMarketAmountAdjusted);
@@ -649,8 +642,8 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
         return this;
     }
 
-    setAsCompleteFinalAmount(): CapRateConclusionActions {
-        capRateConclusionPage.asCompleteFinalValueCell.should('exist')
+    setAsCompleteFinalAmount(conclusionValueName: BoweryReports.ValueConclusionName): CapRateConclusionActions {
+        capRateConclusionPage.finalValueCell(conclusionValueName).should('exist')
             .invoke('text').then(asCompleteFinalAmount => {
                 let asCompleteFinalAmountAdjusted = getNumberFromDollarNumberWithCommas(asCompleteFinalAmount);
                 cy._mapSet(capRateConclusionKeys.asCompleteFinalAmount, asCompleteFinalAmountAdjusted);
@@ -658,8 +651,8 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
         return this;
     }
 
-    setAsStabilizedFinalAmount(): CapRateConclusionActions {
-        capRateConclusionPage.asStabilizedFinalValueCell.should('exist')
+    setFinalAmountAlias(conclusionValueName: BoweryReports.ValueConclusionName): CapRateConclusionActions {
+        capRateConclusionPage.finalValueCell(conclusionValueName).should('exist')
             .invoke('text').then(asStabilizedFinalAmount => {
                 let asStabilizedFinalAmountAdjusted = getNumberFromDollarNumberWithCommas(asStabilizedFinalAmount);
                 cy._mapSet(capRateConclusionKeys.asStabilizedFinalAmount, asStabilizedFinalAmountAdjusted);
@@ -672,8 +665,10 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
      * [As Is Market Final Value] / [Square Foot Analysis Area]
      * @param squareFootAnalysisArea Area for selected square foot analysis basis 
      */
-    verifyAsIsMarketPerSFCalculated(squareFootAnalysisArea: number): CapRateConclusionActions {
-        this.setAsIsAmountFinalAlias();
+    verifyAsIsMarketPerSFCalculated(
+        squareFootAnalysisArea: number, 
+        conclusionValueName: BoweryReports.ValueConclusionName): CapRateConclusionActions {
+        this.setAsIsAmountFinalAlias(conclusionValueName);
         cy._mapGet(capRateConclusionKeys.asIsMarketFinalAmount).then(asIsMarketFinalAmount => {
             let asIsMarketFinalSFAmount = asIsMarketFinalAmount / squareFootAnalysisArea;
             let expectedAsIsMarketSFAmount = asIsMarketFinalSFAmount < 0 
@@ -692,7 +687,7 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
      */
     verifyAsCompleteFinalPerSFCalculated(valueConclusionName: BoweryReports.ValueConclusionName, 
         squareFootAnalysisArea: number): CapRateConclusionActions {
-        this.setAsCompleteFinalAmount();
+        this.setAsCompleteFinalAmount(valueConclusionName);
         cy._mapGet(capRateConclusionKeys.asCompleteFinalAmount).then(asCompleteFinalAmount => {
             let asCompleteFinalSFAmount = asCompleteFinalAmount / squareFootAnalysisArea;
             let expectedAsCompleteMarketSFAmount = asCompleteFinalSFAmount < 0 
@@ -712,7 +707,7 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
      */
     verifyAsStabilizedFinalPerSFCalculated(valueConclusionName: BoweryReports.ValueConclusionName, 
         squareFootAnalysisArea: number): CapRateConclusionActions {
-        this.setAsStabilizedFinalAmount();
+        this.setFinalAmountAlias(valueConclusionName);
         cy._mapGet(capRateConclusionKeys.asStabilizedFinalAmount).then(asStabilizedFinalAmount => {
             let asStabilizedFinalSFAmount = asStabilizedFinalAmount / squareFootAnalysisArea;
             let expectedAsStabilizedFinalSFAmount = asStabilizedFinalSFAmount < 0 
