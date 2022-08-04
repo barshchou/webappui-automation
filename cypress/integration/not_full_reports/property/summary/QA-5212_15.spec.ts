@@ -1,4 +1,4 @@
-import testData from "../../../../fixtures/not_full_reports/property/summary/QA-5212.fixture";
+import testData from "../../../../fixtures/not_full_reports/property/summary/QA-5212_15.fixture";
 import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { Property } from "../../../../actions";
@@ -16,6 +16,9 @@ describe("[QA-5212] Verify validation of the Residential Units and Commercial Un
 
             cy.stepInfo("3. Verify what is displayed in the Building Name field");
             Property._Summary.Page.buildingNameInput.should("have.value", testData.buildingName);
+
+            cy.stepInfo("4. Verify what is displayed in the Year Built field");
+            Property._Summary.Page.yearBuilt.should("have.value", testData.yearBuilt);
     
         });
     });

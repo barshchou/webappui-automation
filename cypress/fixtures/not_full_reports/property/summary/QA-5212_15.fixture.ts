@@ -2,11 +2,12 @@ import Enums from "../../../../enums/enums";
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 
 const reportCreationFixture = () => {
-    return ReportDataCreator.getReportData("2100014394", { 
+    return ReportDataCreator.getReportData("2200015859", { 
         conclusionValue: Enums.VALUE_CONCLUSION_TYPE.AS_IS }, true);
 };
 
 export default {
     reportCreationData: reportCreationFixture(),
-    buildingName: "testname"
+    buildingName: "testname",
+    yearBuilt: "1910"
 };
