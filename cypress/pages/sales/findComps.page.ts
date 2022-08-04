@@ -54,11 +54,13 @@ class FindCompsPage extends BasePage {
     }
 
     getRemoveSelectedCompButtonByAddress(address: string) {
-        return cy.contains(address).parent().find('[data-qa="selected-comp-remove-btn"]');
+        return this.salesComparablesTable.contains(address).parent('tr').find('[data-qa="selected-comp-remove-btn"]');
     }
 
+    //TODO change after data-qa addition
     getRemoveDeletedCompButtonByAddress(address: string) {
-        return cy.contains(address).parent().find('[data-qa="removed-comp-remove-btn"]');
+        return cy.contains('Removed Comps').parent().parent().contains(address)
+            .parent().find('[data-qa="removed-comp-remove-btn"]');
     }
 
     getRemoveCompFromMapButtonByAddress(address: string) {
@@ -104,8 +106,12 @@ class FindCompsPage extends BasePage {
 
     get newCompSaveAndCloseButton() { return cy.get('[data-qa="Save & Close"]'); }
 
+    get salesComparablesTable() {
+        return cy.get('[data-qa="selected-sales-comps-table"]');
+    }
+
     get addressSalesComparablesTable() {
-        return cy.get('[data-qa="selected-sales-comps-table"] [data-qa="address"]');
+        return this.salesComparablesTable.get('[data-qa="address"]');
     }
 
     get sortSalesCompsSelectList() {

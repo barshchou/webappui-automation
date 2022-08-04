@@ -39,11 +39,13 @@ conditionalDescribe(`[QA-5157] [QA-5161] [Sales > Find Comps] "Date Sold" sortin
         Sales._FindComps.resetAllFilters()
             .selectFilterSalePeriodValue(testData.salePeriodValue);
         testData.arrayOfCompsForAdditionFromMap1.forEach(comp => {
-            Sales._FindComps.selectCompFromMapByAddress(comp.address);
+            Sales._FindComps.selectCompFromMapByAddress(comp.address)
+                .verifyAddedCompAddress(comp.address);
         });    
         Sales._FindComps.resetAllFilters();
         testData.arrayOfCompsForAdditionFromMap2.forEach(comp => {
-            Sales._FindComps.selectCompFromMapByAddress(comp.address);
+            Sales._FindComps.selectCompFromMapByAddress(comp.address)
+                .verifyAddedCompAddress(comp.address);
         });
         Sales._FindComps.checkSalesCompSortedByDateSold();
 
@@ -80,6 +82,7 @@ conditionalDescribe(`[QA-5157] [QA-5161] [Sales > Find Comps] "Date Sold" sortin
 
         testData.arrayOfCompsForManualAddition.forEach(comp => {
             addCompWithStatus(comp.address, comp.status);
+            Sales._FindComps.verifyAddedCompAddress(comp.address);
         });
         Sales._FindComps.checkSalesCompSortedByDateSold();
 
