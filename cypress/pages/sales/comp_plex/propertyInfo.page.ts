@@ -71,11 +71,6 @@ export default class PropertyInformationForm {
             .as(compPlex.internalNotesTextArea);
     }
 
-    get appraiserCommentaryTextArea() {
-        return cy.get('[data-qa="Appraiser Commentary"] [data-qa="text-input"]')
-            .as(compPlex.appraiserCommentaryTextArea);
-    }
-
     get siteAreaNewComp() {
         return cy.get('[data-qa="Site Area"]')
             .as(compPlex.siteAreaNewComp);
@@ -86,7 +81,7 @@ export default class PropertyInformationForm {
             .as(compPlex.yearBuiltNewComp);
     }
 
-    get floorNewComp() {
+    get floorsNewComp() {
         return cy.get('[data-qa="# Floors"]')
             .as(compPlex.floorsNewComp);
     }

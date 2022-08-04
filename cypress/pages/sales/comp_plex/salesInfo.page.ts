@@ -48,4 +48,8 @@ export default class SaleInformationForm {
     get SaleStatusDropdown() {
         return cy.get('[data-qa="Sale Status"]');
     }
+
+    get DeedSalePriceInput() {
+        return cy.get('[data-qa="Deed Sale Price"]'); 
+    }
 }
