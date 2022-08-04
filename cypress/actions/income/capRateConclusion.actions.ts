@@ -648,9 +648,9 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
         cy._mapGet(capRateConclusionKeys.asIsMarketFinalAmount).then(asIsMarketFinalAmount => {
             let asIsMarketFinalSFAmount = asIsMarketFinalAmount / squareFootAnalysisArea;
             let expectedAsIsMarketSFAmount = asIsMarketFinalSFAmount < 0 
-                ? `-$${asIsMarketFinalSFAmount}`
-                : `${asIsMarketFinalSFAmount}`;
-            capRateConclusionPage.asIsMarketValuePerSF.invoke('text', expectedAsIsMarketSFAmount);
+                ? `-$${numberWithCommas(Math.abs(asIsMarketFinalSFAmount).toFixed(2))}`
+                : `${numberWithCommas(asIsMarketFinalSFAmount.toFixed(2))}`;
+            capRateConclusionPage.asIsMarketValuePerSF.should('have.text', expectedAsIsMarketSFAmount);
         });
         
         return this;
@@ -668,8 +668,8 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
         cy._mapGet(capRateConclusionKeys.asCompleteFinalAmount).then(asCompleteFinalAmount => {
             let asCompleteFinalSFAmount = asCompleteFinalAmount / squareFootAnalysisArea;
             let expectedAsCompleteMarketSFAmount = asCompleteFinalSFAmount < 0 
-                ? `-$${asCompleteFinalSFAmount}`
-                : `${asCompleteFinalSFAmount}`;
+                ? `-$${numberWithCommas(Math.abs(asCompleteFinalSFAmount).toFixed(2))}`
+                : `${numberWithCommas(asCompleteFinalSFAmount.toFixed(2))}`;
             capRateConclusionPage.prospectiveMarketValuePerSF(valueConclusionName)
                 .invoke('text', expectedAsCompleteMarketSFAmount);
         });
@@ -689,8 +689,8 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
         cy._mapGet(capRateConclusionKeys.asStabilizedFinalAmount).then(asStabilizedFinalAmount => {
             let asStabilizedFinalSFAmount = asStabilizedFinalAmount / squareFootAnalysisArea;
             let expectedAsStabilizedFinalSFAmount = asStabilizedFinalSFAmount < 0 
-                ? `-$${asStabilizedFinalSFAmount}`
-                : `${asStabilizedFinalSFAmount}`;
+                ? `-$${numberWithCommas(Math.abs(asStabilizedFinalSFAmount).toFixed(2))}`
+                : `${numberWithCommas(asStabilizedFinalSFAmount.toFixed(2))}`;
             capRateConclusionPage.prospectiveMarketValuePerSF(valueConclusionName)
                 .invoke('text', expectedAsStabilizedFinalSFAmount);
         });
