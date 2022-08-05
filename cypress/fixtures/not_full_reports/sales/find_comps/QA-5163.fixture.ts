@@ -46,36 +46,24 @@ const arrayOfCompsForManualAddition = [
         address: comparableFixtureManual.address2,
         status: comparableFixtureManual.saleStatusListing
     },
-    /*
-     * {
-     *     address: comparableFixtureManual.address3,
-     *     status: comparableFixtureManual.saleStatusUnderContract
-     * },
-     * {
-     *     address: comparableFixtureManual.address4,
-     *     status: comparableFixtureManual.saleStatusUnderContract
-     * },
-     * {
-     *     address: comparableFixtureManual.address5,
-     *     status: comparableFixtureManual.saleStatusTransaction
-     * },
-     * {
-     *     address: comparableFixtureManual.address6,
-     *     status: comparableFixtureManual.saleStatusTransaction
-     * },
-     */
-];
-
-const arrayOfCompsForStatusChanging = [
+    
     {
-        address: comparableFixtureManual.address1,
+        address: comparableFixtureManual.address3,
         status: comparableFixtureManual.saleStatusUnderContract
     },
     {
-        address: comparableFixtureManual.address3,
+        address: comparableFixtureManual.address4,
+        status: comparableFixtureManual.saleStatusUnderContract
+    },
+    {
+        address: comparableFixtureManual.address5,
         status: comparableFixtureManual.saleStatusTransaction
     },
-
+    {
+        address: comparableFixtureManual.address6,
+        status: comparableFixtureManual.saleStatusTransaction
+    },
+     
 ];
 
 export default {
@@ -85,6 +73,5 @@ export default {
     salePeriodValue,
     arrayOfCompsForManualAddition,
     radioButtonSaleConditionArms,
-    radioButtonSaleConditionNonArms,
-    arrayOfCompsForStatusChanging
+    radioButtonSaleConditionNonArms
 };
