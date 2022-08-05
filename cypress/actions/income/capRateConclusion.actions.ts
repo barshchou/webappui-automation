@@ -345,7 +345,7 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
      *   [As Stabilized Amount] - [Sum of Rent Losses] - [Commission Fee] - 
      *   (([Sum of Rent Losses] + [Commission Fee]) * Entrepreneur Profit)
      */
-    verifyProspectiveMarketValueAsCompleteCalculated(valueConclusionKey: BoweryReports.ValueConclusionKeys, 
+    verifyProspectiveMarketValueAsIsAsCompleteCalculated(valueConclusionKey: BoweryReports.ValueConclusionKeys, 
         conclusionValueName: BoweryReports.ValueConclusionName): CapRateConclusionActions {
         this.getAllAsStabilizedLossesAliases(valueConclusionKey, enums.VALUE_CONCLUSION_NAME.asStabilized);
         cy._mapGet(capRateConclusionKeys.allAsStabilizedLossesAliases).then(allAsStabilizedLossesAliases => {

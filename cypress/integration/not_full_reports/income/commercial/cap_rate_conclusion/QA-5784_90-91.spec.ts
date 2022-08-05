@@ -88,7 +88,7 @@ describe("Validation of Market Values Per SF for ACAS reports",
             Less Commercial Rent Loss - Less Undetermined Commercial Rent Loss - 
             Less Commission Fee - Less Entrepreneurial Profit*`);
             Income._CapRateConclusion
-                .verifyProspectiveMarketValueAsCompleteCalculated(testData.valueConclusionKeyAsStabilized, 
+                .verifyProspectiveMarketValueAsIsAsCompleteCalculated(testData.valueConclusionKeyAsStabilized, 
                     testData.valueConclusionAsComplete);
 
             cy.stepInfo(`13. Make sure Prospective Market Value As Complete (Final Value) = 

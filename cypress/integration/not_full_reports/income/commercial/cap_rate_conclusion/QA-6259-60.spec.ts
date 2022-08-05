@@ -5,7 +5,7 @@ import { Income, Property } from "../../../../../actions";
 import { createReport } from "../../../../../actions/base/baseTest.actions";
 import launchDarklyApi from '../../../../../api/launchDarkly.api';
 
-describe("Validation of Market Values Per SF for AS IS reports", 
+describe("Validation of Market Values Amount and Per SF for AS IS reports", 
     { tags:[ "@income", "@commercial", "@cap_rate_conclusion", "@feature_flag" ] }, () => {
         beforeEach("Login, create report", () => {
             cy.stepInfo(`1. Set feature flag and create report`);
