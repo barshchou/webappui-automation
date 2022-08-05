@@ -31,9 +31,8 @@ class FindCompsPage extends BasePage {
     get csvInput() { return cy.get("[data-qa=file-input]"); }
 
     getSelectCompFromMapButtonByAddress(address) {
-        return cy.get('[data-qa="sales-comp-item"]')
-            .contains(`${address}`).parent().parent()
-            .find('[data-qa="sales-comp-item-add-btn"]');
+        return cy.get('[data-qa="sales-comp-item"]').contains(`${address}`).parent()
+            .parent().find('[data-qa="sales-comp-item-add-btn"]');
     }
 
     /**
@@ -57,10 +56,22 @@ class FindCompsPage extends BasePage {
         return this.salesComparablesTable.contains(address).parent('tr').find('[data-qa="selected-comp-remove-btn"]');
     }
 
+    //TODO Add data-qa attr for details button
+    detailsButtonByAddress(address: string) {
+        return this.salesComparablesTable.contains(address).parent('tr').find('[data-qa="selected-comp-actions"]')
+            .contains('button', 'Details');
+    }
+
     //TODO change after data-qa addition
     getRemoveDeletedCompButtonByAddress(address: string) {
         return cy.contains('Removed Comps').parent().parent().contains(address)
             .parent().find('[data-qa="removed-comp-remove-btn"]');
+    }
+
+    //TODO change after data-qa addition
+    addRemovedCompButtonByAddress(address: string) {
+        return cy.contains('Removed Comps').parent().parent().contains(address)
+            .parent().find('[data-testid="AddCircleIcon"]');
     }
 
     getRemoveCompFromMapButtonByAddress(address: string) {
@@ -99,7 +110,7 @@ class FindCompsPage extends BasePage {
     }
 
     get createCompSearchResults() {
-        return cy.get("[data-qa=search-result-form] tbody tr");
+        return cy.get("[data-qa=search-result-form] tbody tr", { timeout: 60000 });
     }
 
     get createNewCompButton() { return cy.contains("Create New"); }
@@ -127,7 +138,7 @@ class FindCompsPage extends BasePage {
     }
 
     get salesCompsDateSold() {
-        return cy.get('[data-qa="sale-date"]');
+        return cy.get('[data-qa="selected-sales-comps-table"]').find('[data-qa="sale-date"]');
     }
 
     get loadingModalCSV() {
@@ -155,7 +166,7 @@ class FindCompsPage extends BasePage {
         return cy.get('[data-qa="comp-tab"]');
     }
 
-    get adressSearchTab() {
+    get addressSearchTab() {
         return cy.get('[data-qa="address-tab"]');
     }
 

@@ -28,4 +28,13 @@ export default class SaleInformationForm {
     get SaleStatusDropdown() {
         return cy.get('[data-qa="Sale Status"]');
     }
+
+    get doneButton() {
+        return cy.contains('button', 'DONE');
+    }
+
+    saleCondition(radioName: string) {
+        return cy.get(`input[class="ant-radio-input"][value="${radioName}"]`);
+    }
+    
 }

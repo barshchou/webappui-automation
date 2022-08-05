@@ -28,13 +28,25 @@ class SaleInfoFromActions {
     }
 
     setBuyerGrantee(name: string): SaleInfoFromActions {
-        this.Page.BuyerGranteeNewComp.type(name, { force: true });
+        this.Page.BuyerGranteeNewComp.focus().type(name, { force: true });
         return this;
     }
 
     setSellerGrantor(seller: string): SaleInfoFromActions {
-        this.Page.SellerGrantor.type(seller, { force: true });
+        this.Page.SellerGrantor.focus().type(seller, { force: true });
         return this;
     }
+    
+    saveChangesOnDone(): SaleInfoFromActions {
+        this.Page.doneButton.should('be.enabled').focus().click();
+        return this;
+    }
+
+    checkRadioButtonSaleCondition(radioName: string): SaleInfoFromActions {
+        this.Page.saleCondition(radioName).should('exist').focus().check({ force: true })
+            .should('be.checked');
+        return this;
+    }
+
 }
 export default new SaleInfoFromActions(findCompsPage);
