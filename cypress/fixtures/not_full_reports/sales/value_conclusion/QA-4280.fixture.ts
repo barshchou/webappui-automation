@@ -25,5 +25,6 @@ const dataFixture = () => {
 export default {
     reportCreationData: reportCreationFixture(),
     data: Object.freeze(dataFixture()),
-    valueConclusionKeyAsStabilized: Object.keys(Enums.VALUE_CONCLUSION_NAME)[1] as BoweryReports.ValueConclusionKeys
+    valueConclusionKeyAsStabilized: Object.keys(Enums.VALUE_CONCLUSION_NAME)[1] as BoweryReports.ValueConclusionKeys,
+    rentLossTypeResidential: Enums.RENT_LOSS_TYPE.resRentLossItems,
 };

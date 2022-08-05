@@ -72,6 +72,7 @@ import basisSquareFootAnalysisTextsEnum from "./sales/value_conclusion/basisSqua
 import renovationTypeEnum from "./property/renovationType.enum";
 import valueConclusionEnum from "./property/valueConclusion.enum";
 import unitIncomeTypeEnum from "./unit/unitIncomeType.enum";
+import rentLossTypeEnum from "./rentLossType.enum";
 
 export default {
     TEMPLATE_TYPE: templateTypesEnum,
@@ -147,5 +148,6 @@ export default {
     BASIS_SQUARE_FOOT_ANALYSIS_TEXTS: basisSquareFootAnalysisTextsEnum,
     RENOVATION_TYPE: renovationTypeEnum,
     VALUE_CONCLUSION_NAME: valueConclusionEnum,
-    UNIT_INCOME_TYPE: unitIncomeTypeEnum
+    UNIT_INCOME_TYPE: unitIncomeTypeEnum,
+    RENT_LOSS_TYPE: rentLossTypeEnum
 };

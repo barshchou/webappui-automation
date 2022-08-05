@@ -449,8 +449,10 @@ describe.skip("Full bowery way, multifamily as complete report", { tags: [ "@ful
         NavigationSection.navigateToCapRateConclusion();
         Income.CapRateConclusion.verifyCompCapRatesCell(minCapRate, maxCapRate)
             .enterConclusionSectionConcludedCapRate(testData.capRateConclusion.concludedCapRate)
-            .enterAsCompleteMonthsOfRentLoss(testData.capRateConclusion.asCompleteMonthsOfRentLoss)
-            .enterASStabilizedMonthsOfRentLoss(testData.capRateConclusion.asStabilizedMonthsOfRentLoss)
+            .enterMonthsOfRentLoss(testData.capRateConclusion.asCompleteMonthsOfRentLoss, 
+                testData.valueConclusionKeyAsComplete)
+            .enterMonthsOfRentLoss(testData.capRateConclusion.asStabilizedMonthsOfRentLoss, 
+                testData.valueConclusionKeyAsStabilized)
             .selectRoundingFactor(testData.capRateConclusion.roundingFactorValue)
             .verifyNetOperatingIncome(testData.capRateConclusion.netOperatingIncome)
             .verifyConcludedCapRateCell(testData.capRateConclusion.concludedCapRate)
@@ -458,8 +460,9 @@ describe.skip("Full bowery way, multifamily as complete report", { tags: [ "@ful
                 testData.valueConclusionAsStabilized)
             .verifyAsCompleteTablePart(testData.capRateConclusion.asCompletePart, 
                 testData.valueConclusionAsStabilized)
-            .enterAsCompleteLessEntrepreneurialProfit(
-                testData.capRateConclusion.asCompletePart.lessEntrepreneurialProfit)
+            .enterLessEntrepreneurialProfit(
+                testData.capRateConclusion.asCompletePart.lessEntrepreneurialProfit, 
+                testData.valueConclusionKeyAsStabilized)
             .verifyAsIsMarketTablePart(testData.capRateConclusion.asIsMarketPart, 
                 testData.valueConclusionAsStabilized)
             .clickSaveContinueButton();
