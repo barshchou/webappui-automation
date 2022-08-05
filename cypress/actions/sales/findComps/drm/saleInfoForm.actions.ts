@@ -1,5 +1,6 @@
 import { getRandomDate } from './../../../../../utils/date.utils';
 import { findCompsPage } from "../../../../pages/sales/findComps.page";
+import { CompPlex } from '../../../../types/compplex.type';
 
 class SaleInfoFromActions {
     Page: typeof findCompsPage;
@@ -41,7 +42,7 @@ class SaleInfoFromActions {
         return this;
     }
 
-    setSaleStatus(status: "Transaction" | "Under Contract" | "Listing") {
+    setSaleStatus(status: CompPlex.SaleInfo.SaleStatus) {
         this.Page.SaleStatusDropdown.click();
         this.Page.getSaleStatus(status).click();
     }
