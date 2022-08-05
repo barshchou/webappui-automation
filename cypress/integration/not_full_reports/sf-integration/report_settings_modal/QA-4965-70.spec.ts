@@ -1,6 +1,7 @@
-import testData from "../../../../fixtures/not_full_reports/sf_integration/report_settings_modal/QA-4965-69.fixture";
+import testData from "../../../../fixtures/not_full_reports/sf_integration/report_settings_modal/QA-4965-70.fixture";
 import { loginAction } from "../../../../actions/base/baseTest.actions";
 import { _HomePage } from "../../../../actions/base";
+import launchDarklyApi from "../../../../api/launchDarkly.api";
 
 
 describe("Verify pre-fill radios from SF", 
@@ -19,10 +20,13 @@ describe("Verify pre-fill radios from SF",
         });
 
         it("[QA-4965]", () => {
-            cy.stepInfo("3. Proceed to the WebApp and paste the number or enter manually in the Bowery Job # field");
+            cy.stepInfo("3. Set feature flag");
+            launchDarklyApi.setFeatureFlagForUser(testData.featureFlagKey, testData.onFeatureFlag);
+
+            cy.stepInfo("4. Proceed to the WebApp and paste the number or enter manually in the Bowery Job # field");
             _HomePage.enterReportNumber(testData.sfJobs.withFreddieMac);
             
-            cy.stepInfo(`4. “Freddie Mac” section has the radio button automatically enabled for 
+            cy.stepInfo(`5. “Freddie Mac” section has the radio button automatically enabled for 
                         ‘This report must adhere to Freddie Mac specifications.’`);
             _HomePage.Page.templateTypesRadios.eq(0).should("be.checked");
         });
@@ -58,7 +62,21 @@ describe("Verify pre-fill radios from SF",
             _HomePage.enterReportNumber(testData.sfJobs.mixedUse);
             
             cy.stepInfo(`4. Verify the Income Type section has the radio button automatically enabled for 
-                        ‘The subject Property has only residential income.’.`);
+                        ‘The subject property has both residential and commercial income.’.`);
             _HomePage.Page.incomeTypesRadios.eq(1).should("be.checked");
+        });
+
+        it("[QA-4970]", () => {
+            cy.stepInfo("3. Proceed to the WebApp and paste the number or enter manually in the Bowery Job # field");
+            _HomePage.enterReportNumber(testData.sfJobs.retail);
+            
+            cy.stepInfo(`4. Verify the Income Type section has the radio button automatically enabled for 
+                        ‘The subject Property has only commercial income.’.`);
+            _HomePage.Page.incomeTypesRadios.eq(2).should("be.checked");
+        });
+
+        after(() => {
+            cy.stepInfo("Remove feature flag");
+            launchDarklyApi.removeUserTarget(testData.featureFlagKey);
         });
     });

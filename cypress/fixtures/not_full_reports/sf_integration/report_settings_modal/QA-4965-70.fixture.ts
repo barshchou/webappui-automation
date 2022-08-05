@@ -1,3 +1,5 @@
+import Enums from "../../../../enums/enums";
+
 export default {
     address: "462 1st Avenue",
     sfJobs: {
@@ -5,6 +7,9 @@ export default {
         withoutFreddieMac: "1764459005",
         noneFreddieMac: "1764459119",
         multifamily: "2200015959",
-        mixedUse: "1907151453"
+        mixedUse: "1907151453",
+        retail: "2008055387"
     },
+    featureFlagKey: Enums.FEATURE_FLAG_KEYS.retailReports,
+    onFeatureFlag: 0
 };
