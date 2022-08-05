@@ -44,11 +44,12 @@ describe("Validation of Market Values Per SF for AS IS reports",
             Income._CapRateConclusion.enterConclusionSectionConcludedCapRate(testData.capRate);
 
             cy.stepInfo(`6. Verify  As Is Market Value (Amount) = NOI / Concluded Cap Rate`);
-            Income._CapRateConclusion.verifyAsIsFinalValueCalculated();
+            Income._CapRateConclusion.verifyFinalValueCalculated(testData.valueConclusionAsIs);
 
             cy.stepInfo(`7. Verify if  As Is Market Value Per SF  is calculated with correct formula 
             based on selected Basis for Square Foot Analysis`);
-            Income._CapRateConclusion.verifyAsIsMarketPerSFCalculated(testData.squareFootAnalysisArea);
+            Income._CapRateConclusion.verifyMarketValuePerSFCalculated(testData.squareFootAnalysisArea, 
+                testData.valueConclusionAsIs);
         });
 
         after(`Remove feature flag`, () => {

@@ -32,6 +32,7 @@ export default {
     entrepreneurialProfit: 2,
     valueConclusionAsComplete: Enums.VALUE_CONCLUSION_NAME.asComplete,
     valueConclusionAsStabilized: Enums.VALUE_CONCLUSION_NAME.asStabilized,
+    valueConclusionAsIs: Enums.VALUE_CONCLUSION_NAME.asIs,
     lessBuyoutCost: 153789,
     valueConclusionKeyAsComplete: Object.keys(Enums.VALUE_CONCLUSION_NAME)[2] as BoweryReports.ValueConclusionKeys,
     valueConclusionKeyAsStabilized: Object.keys(Enums.VALUE_CONCLUSION_NAME)[1] as BoweryReports.ValueConclusionKeys,
