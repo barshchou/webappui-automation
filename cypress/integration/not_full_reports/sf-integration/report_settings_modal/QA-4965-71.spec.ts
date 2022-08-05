@@ -1,4 +1,4 @@
-import testData from "../../../../fixtures/not_full_reports/sf_integration/report_settings_modal/QA-4965-70.fixture";
+import testData from "../../../../fixtures/not_full_reports/sf_integration/report_settings_modal/QA-4965-71.fixture";
 import { loginAction } from "../../../../actions/base/baseTest.actions";
 import { _HomePage } from "../../../../actions/base";
 import launchDarklyApi from "../../../../api/launchDarkly.api";
@@ -73,6 +73,15 @@ describe("Verify pre-fill radios from SF",
             cy.stepInfo(`4. Verify the Income Type section has the radio button automatically enabled for 
                         ‘The subject Property has only commercial income.’.`);
             _HomePage.Page.incomeTypesRadios.eq(2).should("be.checked");
+        });
+
+        it("[QA-4971]", () => {
+            cy.stepInfo("3. Proceed to the WebApp and paste the number or enter manually in the Bowery Job # field");
+            _HomePage.enterReportNumber(testData.sfJobs.nonePropertyType);
+            
+            cy.stepInfo(`4. Verify the Income Type section has the radio button automatically enabled for 
+                        ‘The subject Property has only commercial income.’.`);
+            _HomePage.Page.incomeTypesRadios.should("not.be.checked");
         });
 
         after(() => {

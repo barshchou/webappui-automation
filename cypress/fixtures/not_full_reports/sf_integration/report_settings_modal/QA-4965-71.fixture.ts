@@ -8,7 +8,8 @@ export default {
         noneFreddieMac: "1764459119",
         multifamily: "2200015959",
         mixedUse: "1907151453",
-        retail: "2008055387"
+        retail: "2008055387",
+        nonePropertyType: "1764459119"
     },
     featureFlagKey: Enums.FEATURE_FLAG_KEYS.retailReports,
     onFeatureFlag: 0
