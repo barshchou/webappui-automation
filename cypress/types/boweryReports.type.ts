@@ -214,17 +214,18 @@ export namespace BoweryReports {
     export type MarketAnalysisUses = keyof typeof Enums.MARKET_ANALYSIS_USES
 
     export type PropertyConditions = typeof Enums.PROPERTY_CONDITIONS[KeyInfo.PropertyConditions];
-    export type PropertySquareFootAnalysisType = typeof Enums.PROPERTY_SQUARE_FOOT_ANALYSIS[
-        KeyInfo.PropertySquareFootAnalysisKeys
-    ]
 
     export type PropertyConditionsRadios = keyof typeof Enums.PROPERTY_CONDITIONS_RADIOS;
     export type BondTickers = typeof Enums.BOND_TYPES[KeyInfo.BondTypes]
     export type BondTypes = keyof typeof  Enums.BOND_TYPES
 	export type ExpenseCardNames = typeof Enums.EXPENSES_CARD_NAMES[KeyInfo.ExpenseCardName]
-	
-    export namespace SalesComps {
-        export type SelectedComparablesSortType = "Custom" | "Date Sold"
+
+    export namespace FindComps {
+        export type SalePeriodValues = typeof Enums.SALE_PERIOD_VALUES[KeyInfo.SalePeriodValues]
+        export type SelectedComparablesSortType = typeof Enums.SORT_VALUES[KeyInfo.SortValues]
+        export type ConditionValueType = typeof Enums.CONDITION_VALUES[KeyInfo.ConditionValues]
+        export type ComparableTypes = typeof Enums.COMPARABLE_TYPES[KeyInfo.ComparableTypes]
+        export type SaleStatusType = typeof Enums.SALE_STATUSES[KeyInfo.SaleStatuses]
     }
     
     export type CalculationType = typeof Enums.CALCULATION_TYPE[KeyInfo.CalculationType]

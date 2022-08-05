@@ -13,9 +13,9 @@ const _commentaryAsIsMixed = "The subject contains 3 commercial units. Commercia
 "The forecasted lease term is summarized below.";
 
 const _commentaryAsIsVacant = "The subject contains 3 commercial units. Commercial units 1, 2, and 3 " + 
-"are currently vacant. We have forecasted market rent and market lease terms for the vacant unit " + 
+"are currently vacant. We have forecasted market rent and market lease terms for the vacant units " + 
 "based on the occupied unit leases, the comparables above, and our research of the subject's market. " + 
-"The forecasted lease term is summarized below.";
+"The forecasted lease terms are summarized below.";
 
 const _commentaryAsIsOccupied = "The subject contains 3 commercial units. The terms are summarized below.";
 
@@ -26,8 +26,8 @@ const _commentaryAsStabilizedMixed = "Upon completion of the renovations, the su
 
 const _commentaryAsStabilizedVacant = "Upon completion of the renovations, the subject  will contain 3 " + 
 "commercial units. Commercial units 1, 2, and 3 are currently vacant. We have forecasted market rent and " + 
-"market lease terms for the vacant unit based on the occupied unit leases, the comparables above, and " + 
-"our research of the subject's market. The forecasted lease term is summarized below.";
+"market lease terms for the vacant units based on the occupied unit leases, the comparables above, and " + 
+"our research of the subject's market. The forecasted lease terms are summarized below.";
 
 const _commentaryAsStabilizedOccupied = "Upon completion of the renovations, the subject  will contain 3 " + 
 "commercial units. The terms are summarized below.";
@@ -39,9 +39,9 @@ const _commentaryAsCompleteMixed = "Upon completion of the renovations, the subj
 
 const _commentaryAsCompleteVacant = "Upon completion of the renovations, the subject  will contain 3 " + 
 "commercial units. Commercial units 1, 2, and 3 are currently vacant. We have forecasted market rent " + 
-"and market lease terms for the vacant unit based on the occupied unit leases, "+
+"and market lease terms for the vacant units based on the occupied unit leases, "+
 "the comparables above, and our research of the subject's market. " + 
-"The forecasted lease term is summarized below.";
+"The forecasted lease terms are summarized below.";
 
 const _commentaryAsCompleteOccupied = "Upon completion of the renovations, the subject  will " + 
 "contain 3 commercial units. The terms are summarized below.";

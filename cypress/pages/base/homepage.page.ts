@@ -21,7 +21,7 @@ class Homepage extends BasePage {
 
     get reportNumberInput() { return cy.get("*[name='reportNumber']"); }
 
-    get createReportButton() { return cy.get("*[data-qa='create-report-btn']").last(); }
+    get createReportButton() { return cy.get("*[data-qa='create-report-btn']", { timeout: 60000 }).last(); }
 
     get reportNumberSearchField() { return cy.get("*[name='number']"); }
 

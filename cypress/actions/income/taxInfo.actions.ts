@@ -1,4 +1,4 @@
-import { PropertySquareFootAnalysisKeys } from './../../enums/enumKeys.enum.d';
+import { BasisSquareFootAnalysisTexts } from './../../enums/enumKeys.enum.d';
 import taxInfoPage from "../../pages/income/taxInfo.page";
 import {
     getNumberFromDollarNumberWithCommas, numberWithCommas,
@@ -303,8 +303,13 @@ class TaxInfoActions extends BaseActionsExt<typeof taxInfoPage> {
         return this;
     }
 
-    clickAddNewRowButton(name = "Add Additional Tax Rate"): TaxInfoActions {
-        taxInfoPage.getAddNewRowButton(name).click();
+    clickAddAdditionalTaxRate(): TaxInfoActions {
+        taxInfoPage.addAdditionalTaxRate.click();
+        return this;
+    }
+
+    clickAddSpecialAssessmentRate(): TaxInfoActions {
+        taxInfoPage.addSpecialAssessment.click();
         return this;
     }
 
@@ -468,8 +473,8 @@ class TaxInfoActions extends BaseActionsExt<typeof taxInfoPage> {
         return this;
     }
 
-    verifyPSFTaxLiability(item: PropertySquareFootAnalysisKeys, isSummary = false): TaxInfoActions {
-        taxInfoPage.getTaxLiabilityRowValue(item).invoke("text").then(PSFAnalysis => {
+    verifyPSFTaxLiability(item: BoweryReports.BasisSquareFootAnalysis, isSummary = false): TaxInfoActions {
+        taxInfoPage.getTaxLiabilityRowValue(`${item}`).invoke("text").then(PSFAnalysis => {
             const numberPSFAnalysis = getNumberFromDollarNumberWithCommas(PSFAnalysis);
             taxInfoPage.getTaxLiabilityRowValue("Tax Liability (Total)").invoke("text").then(taxLiabilityTotal => {
                 const numberTaxLiabilityTotal = getNumberFromDollarNumberWithCommas(taxLiabilityTotal);

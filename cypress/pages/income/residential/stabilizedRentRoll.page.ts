@@ -9,7 +9,7 @@ class StabilizedRentRollPage extends ResidentialRentRollSharedPage {
     }
     
     getLabelInGridTable(label: string) { 
-        return cy.xpath(`//*[@data-qa='residential-rent-roll-table']//th[contains(text(), '${label}')]`); 
+        return cy.xpath(`//*[@data-qa='residential-rent-roll-table']//td[contains(text(), '${label}')]`); 
     }
 
     get monthlyRentCellsInputs() { return cy.get("[data-qa=rent-cell] input:not([type=hidden])"); }

@@ -32,7 +32,7 @@ checkbox and tooltip functionality`,
 
     it("[QA-5009]", () => {
         cy.stepInfo(`1. Verify “Include Expense on Pro Forma” checkbox is selected by default 
-        for each existing expense card`);
+                    for each existing expense card`);
         testData.expensesForecastCardNamesArray.forEach(element => {
             Income._ExpenseForecastActions.verifyIncludeInProFormaCheckboxIsChecked(element);
         });
@@ -40,7 +40,8 @@ checkbox and tooltip functionality`,
 
     it("[QA-5010]", () => {
         cy.stepInfo(`1. Verify user hover on icon right to the "Include Expense on Pro Forma" checkbox - tooltip
-        with the following text "Unchecking this box will hide the expense from showing up on the Pro Forma." appears`);
+                    with the following text "Unchecking this box will hide the expense from showing up on the 
+                    Pro Forma." appears`);
         testData.expensesForecastCardNamesArray.forEach(element => {
             Income._ExpenseForecastActions.verifyProFormaTooltip(element);
         });

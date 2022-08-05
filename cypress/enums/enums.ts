@@ -58,7 +58,11 @@ import expensesForecastCardNamesEnum from "./expense/expensesForecastCardNames.e
 import reimbursementColumnsIdEnum from "./reimbursementColumnsId.enum";
 import calculationUnitsEnum from "./adjustComps/calculationUnits.enum";
 import calculationTypesEnum from "./commercial/rent_reconciliation/calculationTypes.enum";
-import propertySquareFootAnalysisEnum from "./property/propertySquareFootAnalysis.enum";
+import salePeriodValuesEnum from "./findComps/salePeriodValues.enum";
+import sortValues from "./findComps/sortValues.enum";
+import conditionValues from "./findComps/propertyInformation/conditionValues.enum";
+import comparableTypes from "./findComps/propertyInformation/comparableType.enum";
+import saleStatuses from "./findComps/saleInformation/saleStatuses.enum";
 import fileSelectionNamesEnum from "./property/fileSelectionNames.enum";
 import discussionNamesEnum from "./property/discussionNames.enum";
 import salesAdjustmentGridDiscussionsEnum from "./adjustComps/salesAdjustmentGridDiscussions.enum";
@@ -127,7 +131,11 @@ export default {
     REIMBURSEMENT_COLUMN_ID: reimbursementColumnsIdEnum,
     CALCULATION_UNITS: calculationUnitsEnum,
     CALCULATION_TYPE: calculationTypesEnum,
-    PROPERTY_SQUARE_FOOT_ANALYSIS: propertySquareFootAnalysisEnum,
+    SALE_PERIOD_VALUES: salePeriodValuesEnum,
+    SORT_VALUES: sortValues,
+    CONDITION_VALUES: conditionValues,
+    COMPARABLE_TYPES: comparableTypes,
+    SALE_STATUSES: saleStatuses,
     FILE_SELECTION_NAMES: fileSelectionNamesEnum,
     PROPERTY_DISCUSSION_NAMES: discussionNamesEnum,
     SALES_ADJUSTMENT_GRID_DISCUSSIONS: salesAdjustmentGridDiscussionsEnum,
