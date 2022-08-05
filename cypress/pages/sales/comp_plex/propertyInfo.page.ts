@@ -1,3 +1,4 @@
+import { CompPlex } from "../../../types/compplex.type";
 import { Alias } from "../../../utils/alias.utils";
 
 const { compPlex } = Alias.pageElements;
@@ -86,15 +87,7 @@ export default class PropertyInformationForm {
             .as(compPlex.floorsNewComp);
     }
 
-    get elevatorInputNewComp() {
-        return cy.get('[value="elevator"]');
-    }
-
-    get walkupInputNewComp() {
-        return cy.get('[value="walk-up"]');
-    }
-
-    getBuildingType(buildingType: "elevator" | "walk-up") {
+    getBuildingType(buildingType: CompPlex.PropertyInfo.BuildingType) {
         return cy.get(`[value="${buildingType}"]`);
     }
 

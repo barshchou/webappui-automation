@@ -6,10 +6,6 @@ import SalesCompsDetailsForm from "./comp_plex/salesCompDetails.page";
 import SaleInformationForm from "./comp_plex/salesInfo.page";
 
 class FindCompsPage extends BasePage {
-    getSaleStatus(status: "Transaction" | "Under Contract" | "Listing") {
-        return cy.get(`[label="${status}"]`);
-    }
-
     get createCompButton() { return cy.get("[data-qa=create-sales-comps-btn]"); }
 
     get searchCompAddressInput() {

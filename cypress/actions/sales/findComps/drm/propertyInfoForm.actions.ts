@@ -1,7 +1,8 @@
 import { findCompsPage } from "../../../../pages/sales/findComps.page";
+import { CompPlex } from "../../../../types/compplex.type";
 
 class PropertyInfoFormActions {
-    checkBuildingType(value: "elevator" | "walk-up"): PropertyInfoFormActions {
+    checkBuildingType(value: CompPlex.PropertyInfo.BuildingType): PropertyInfoFormActions {
         this.Page.getBuildingType(value).check();
         return this;
     }

@@ -1,3 +1,5 @@
+import { CompPlex } from "../../../types/compplex.type";
+
 export default class SaleInformationForm {
     get SaleInfoCancelBtn() {
         return cy.get('[data-qa="sale-info-cancel-btn"]', { includeShadowDom:true });
@@ -51,5 +53,9 @@ export default class SaleInformationForm {
 
     get DeedSalePriceInput() {
         return cy.get('[data-qa="Deed Sale Price"]'); 
+    }
+
+    getSaleStatus(status: CompPlex.SaleInfo.SaleStatus) {
+        return cy.get(`[label="${status}"]`);
     }
 }
