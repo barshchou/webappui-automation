@@ -76,12 +76,12 @@ describe("Validation of Market Values Per SF for ACAS reports",
             - Less Entrepreneurial Profit`);
             Income._CapRateConclusion.enterAsStabilizedCommissionFeeAmount(testData.lessCommissionFee)
                 .enterLessEntrepreneurialProfit(testData.entrepreneurialProfit, testData.valueConclusionKeyAsStabilized)
-                .enterResidentialRentLossTimePeriodByRow(testData.rentLossTimePeriod, 
-                    testData.valueConclusionKeyAsStabilized)
-                .enterCommercialRentLossTimePeriodByRow(testData.rentLossTimePeriod, 
-                    testData.valueConclusionKeyAsStabilized)
-                .enterCommercialUndeterminedRentLossTimePeriodByRow(testData.rentLossTimePeriod, 
-                    testData.valueConclusionKeyAsStabilized);
+                .enterLossTimePeriodByRow(testData.rentLossTimePeriod, 
+                    testData.valueConclusionKeyAsStabilized, testData.rentLossTypeResidential)
+                .enterLossTimePeriodByRow(testData.rentLossTimePeriod, 
+                    testData.valueConclusionKeyAsStabilized, testData.rentLossTypeCommercial)
+                .enterLossTimePeriodByRow(testData.rentLossTimePeriod, 
+                    testData.valueConclusionKeyAsStabilized, testData.rentLossTypeUndetermined);
 
             cy.stepInfo(`12. Make sure Prospective Market Value As Complete (Amount) =  
             Prospective Market Value As Stabilized (Amount) - Less Residential Rent Loss - 
@@ -114,12 +114,12 @@ describe("Validation of Market Values Per SF for ACAS reports",
             - Renovation Budget ( on Property>Renovations page)
             - Less Buyout Cost
             - Less Entrepreneurial Profit*`);
-            Income._CapRateConclusion.enterResidentialRentLossTimePeriodByRow(testData.rentLossTimePeriod, 
-                testData.valueConclusionKeyAsComplete)
-                .enterCommercialRentLossTimePeriodByRow(testData.rentLossTimePeriod, 
-                    testData.valueConclusionKeyAsComplete)
-                .enterCommercialUndeterminedRentLossTimePeriodByRow(testData.rentLossTimePeriod, 
-                    testData.valueConclusionKeyAsComplete)
+            Income._CapRateConclusion.enterLossTimePeriodByRow(testData.rentLossTimePeriod, 
+                testData.valueConclusionKeyAsComplete, testData.rentLossTypeResidential)
+                .enterLossTimePeriodByRow(testData.rentLossTimePeriod, 
+                    testData.valueConclusionKeyAsComplete, testData.rentLossTypeCommercial)
+                .enterLossTimePeriodByRow(testData.rentLossTimePeriod, 
+                    testData.valueConclusionKeyAsComplete, testData.rentLossTypeUndetermined)
                 .enterLessEntrepreneurialProfit(testData.entrepreneurialProfit, testData.valueConclusionKeyAsComplete)
                 .enterAsCompleteLessBuyoutCost(testData.lessBuyoutCost);
 

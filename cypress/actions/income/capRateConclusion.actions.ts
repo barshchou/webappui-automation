@@ -193,24 +193,10 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
         return this;
     }
 
-    enterResidentialRentLossTimePeriodByRow(period: number | string, 
-        valueConclusionKey: BoweryReports.ValueConclusionKeys, rowNumber = 0): CapRateConclusionActions {
-        capRateConclusionPage.residentialRentLossTimePeriodCells(valueConclusionKey, rowNumber).type(`${period}`)
-            .should("have.value", period);
-        return this;
-    }
-
-    enterCommercialRentLossTimePeriodByRow(period: number | string, 
-        valueConclusionKey: BoweryReports.ValueConclusionKeys, rowNumber = 0): CapRateConclusionActions {
-        capRateConclusionPage.commercialRentLossTimePeriodCells(valueConclusionKey, rowNumber).type(`${period}`)
-            .should("have.value", period);
-        return this;
-    }
-
-    enterCommercialUndeterminedRentLossTimePeriodByRow(period: number | string, 
-        valueConclusionKey: BoweryReports.ValueConclusionKeys, rowNumber = 0): CapRateConclusionActions {
-        capRateConclusionPage.commercialUndeterminedRentLossItemsTimePeriodCells(valueConclusionKey, rowNumber)
-            .type(`${period}`)
+    enterLossTimePeriodByRow(period: number | string, 
+        valueConclusionKey: BoweryReports.ValueConclusionKeys, rentLostType: BoweryReports.RentLossType, 
+        rowNumber = 0): CapRateConclusionActions {
+        capRateConclusionPage.lossTimePeriodCells(valueConclusionKey, rentLostType, rowNumber).type(`${period}`)
             .should("have.value", period);
         return this;
     }

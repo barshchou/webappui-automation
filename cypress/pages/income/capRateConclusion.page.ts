@@ -72,17 +72,9 @@ class CapRateConclusionPage extends BasePage {
 
     get addButton() { return cy.xpath("//button[.='Add']"); }
 
-    residentialRentLossTimePeriodCells(valueConclusionKey: BoweryReports.ValueConclusionKeys, index = 0) { 
-        return cy.get(`[name="${valueConclusionKey}ResRentLossItems[${index}].months"]`); 
-    }
-
-    commercialRentLossTimePeriodCells(valueConclusionKey: BoweryReports.ValueConclusionKeys, index = 0) { 
-        return cy.get(`[name="${valueConclusionKey}CommercialRentLossItems[${index}].months"]`); 
-    }
-
-    commercialUndeterminedRentLossItemsTimePeriodCells(valueConclusionKey: BoweryReports.ValueConclusionKeys, 
-        index = 0) { 
-        return cy.get(`[name="${valueConclusionKey}LossItems[${index}].months"]`); 
+    lossTimePeriodCells(valueConclusionKey: BoweryReports.ValueConclusionKeys, 
+        lossType: BoweryReports.RentLossType, index = 0) { 
+        return cy.get(`[name="${valueConclusionKey}${lossType}[${index}].months"]`); 
     }
 
     get asCompleteLessBuyoutCost() { return cy.get("[data-qa*='asCompleteLossItems.buyoutCost'] input[inputmode]"); }
