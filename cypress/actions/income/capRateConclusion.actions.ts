@@ -664,6 +664,11 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
         
         return this;
     }
+
+    verifyGeneratedPurposeCommentary(expectedText: string): CapRateConclusionActions {
+        capRateConclusionPage.purposeDateOfValueDiscussion.invoke('text').should('deep.equal', expectedText);
+        return this;
+    }
 }
 
 export default new CapRateConclusionActions(capRateConclusionPage);

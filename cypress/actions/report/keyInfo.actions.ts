@@ -62,7 +62,11 @@ class KeyInfoActions extends BaseActionsExt<typeof keyInfoPage> {
         return this;
     }
 
-    enterDateByType(date: Readonly<{type: string, date: string}>): KeyInfoActions {
+    enterDateByType(date: Readonly<{type: string, date: string}>, sameInspectionDate = true): KeyInfoActions {
+        if (!sameInspectionDate) {
+            keyInfoPage.inputToCheckMyDateIsDifferent.click();
+        }
+
         keyInfoPage.getDateInputByQA(date.type).clear();
         if (isDateHasCorrectFormat(date.date)) {
             keyInfoPage.getDateInputByQA(date.type).type(date.date).should("have.value", date.date);
