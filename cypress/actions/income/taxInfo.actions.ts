@@ -1,4 +1,3 @@
-import { BasisSquareFootAnalysisTexts } from './../../enums/enumKeys.enum.d';
 import taxInfoPage from "../../pages/income/taxInfo.page";
 import {
     getNumberFromDollarNumberWithCommas, numberWithCommas,
