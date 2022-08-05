@@ -40,13 +40,9 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
         return this;
     }
 
-    enterAsCompleteMonthsOfRentLoss(number: number | string): CapRateConclusionActions {
-        capRateConclusionPage.asCompleteMonthsOfRentLoss.type(`${number}`).should("have.value", `${number}`);
-        return this;
-    }
-
-    enterASStabilizedMonthsOfRentLoss(number: string | number): CapRateConclusionActions {
-        capRateConclusionPage.asStabilizedMonthsOfRentLoss.type(`${number}`).should("have.value", `${number}`);
+    enterMonthsOfRentLoss(number: number | string, valueConclusionKey: BoweryReports.ValueConclusionKeys): 
+    CapRateConclusionActions {
+        capRateConclusionPage.monthsOfRentLoss(valueConclusionKey).type(`${number}`).should("have.value", `${number}`);
         return this;
     }
 
@@ -146,14 +142,9 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
         return this;
     }
 
-    enterAsCompleteLessEntrepreneurialProfit(profit: string | number): CapRateConclusionActions {
-        capRateConclusionPage.asCompleteLessEntrepreneurialProfit.clear().type(`${profit}`)
-            .should("have.value", `${profit}%`);
-        return this;
-    }
-
-    enterAsStabilizedLessEntrepreneurialProfit(profit: string | number): CapRateConclusionActions {
-        capRateConclusionPage.asStabilizedLessEntrepreneurialProfit.clear().type(`${profit}`)
+    enterLessEntrepreneurialProfit(profit: string | number, 
+        valueConclusionKey: BoweryReports.ValueConclusionKeys): CapRateConclusionActions {
+        capRateConclusionPage.lessEntrepreneurialProfit(valueConclusionKey).clear().type(`${profit}`)
             .should("have.value", `${profit}%`);
         return this;
     }
@@ -202,43 +193,21 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
         return this;
     }
 
-    enterAsStabResRentLossTimePeriodByRow(period: number | string, 
+    enterResidentialRentLossTimePeriodByRow(period: number | string, 
         valueConclusionKey: BoweryReports.ValueConclusionKeys, rowNumber = 0): CapRateConclusionActions {
         capRateConclusionPage.residentialRentLossTimePeriodCells(valueConclusionKey, rowNumber).type(`${period}`)
             .should("have.value", period);
         return this;
     }
 
-    enterAsStabCommercialRentLossTimePeriodByRow(period: number | string, 
+    enterCommercialRentLossTimePeriodByRow(period: number | string, 
         valueConclusionKey: BoweryReports.ValueConclusionKeys, rowNumber = 0): CapRateConclusionActions {
         capRateConclusionPage.commercialRentLossTimePeriodCells(valueConclusionKey, rowNumber).type(`${period}`)
             .should("have.value", period);
         return this;
     }
 
-    enterAsStabCommercialUndeterminedRentLossTimePeriodByRow(period: number | string, 
-        valueConclusionKey: BoweryReports.ValueConclusionKeys, rowNumber = 0): CapRateConclusionActions {
-        capRateConclusionPage.commercialUndeterminedRentLossItemsTimePeriodCells(valueConclusionKey, rowNumber)
-            .type(`${period}`)
-            .should("have.value", period);
-        return this;
-    }
-
-    enterAsCompleteResRentLossTimePeriodByRow(period: number | string, 
-        valueConclusionKey: BoweryReports.ValueConclusionKeys, rowNumber = 0): CapRateConclusionActions {
-        capRateConclusionPage.residentialRentLossTimePeriodCells(valueConclusionKey, rowNumber).type(`${period}`)
-            .should("have.value", period);
-        return this;
-    }
-
-    enterAsCompleteCommercialRentLossTimePeriodByRow(period: number | string, 
-        valueConclusionKey: BoweryReports.ValueConclusionKeys, rowNumber = 0): CapRateConclusionActions {
-        capRateConclusionPage.commercialRentLossTimePeriodCells(valueConclusionKey, rowNumber).type(`${period}`)
-            .should("have.value", period);
-        return this;
-    }
-
-    enterAsCompleteCommercialUndeterminedRentLossTimePeriodByRow(period: number | string, 
+    enterCommercialUndeterminedRentLossTimePeriodByRow(period: number | string, 
         valueConclusionKey: BoweryReports.ValueConclusionKeys, rowNumber = 0): CapRateConclusionActions {
         capRateConclusionPage.commercialUndeterminedRentLossItemsTimePeriodCells(valueConclusionKey, rowNumber)
             .type(`${period}`)
@@ -415,7 +384,7 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
             .setCommercialRentLossItemsAmount(valueConclusionKey, conclusionValueName)
             .setCommercialUndeterminedLossAmount(valueConclusionKey, conclusionValueName)
             .setCommissionFee()
-            .setEntrepreneurialProfit(conclusionValueName);
+            .setEntrepreneurialProfit(conclusionValueName, valueConclusionKey);
         return this;
     }
 
@@ -465,7 +434,7 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
             .setCommercialUndeterminedLossAmount(valueConclusionKey, conclusionValueName)
             .setRenovationBudgetAlias()
             .setLessBuyoutCost()
-            .setEntrepreneurialProfit(conclusionValueName);
+            .setEntrepreneurialProfit(conclusionValueName, valueConclusionKey);
         return this;
     }
 
@@ -547,12 +516,12 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
         return this;
     }
 
-    private setEntrepreneurialProfit(conclusionValueName: BoweryReports.ValueConclusionName): 
-    CapRateConclusionActions {
+    private setEntrepreneurialProfit(conclusionValueName: BoweryReports.ValueConclusionName, 
+        valueConclusionKey: BoweryReports.ValueConclusionKeys): CapRateConclusionActions {
         let key = conclusionValueName == enums.VALUE_CONCLUSION_NAME.asStabilized 
             ? capRateConclusionKeys.entrepreneurialStabilizedProfit
             : capRateConclusionKeys.entrepreneurialCompleteProfit;
-        capRateConclusionPage.asStabilizedLessEntrepreneurialProfit.should('exist')
+        capRateConclusionPage.lessEntrepreneurialProfit(valueConclusionKey).should('exist')
             .invoke('attr', 'value').then(entrepreneurialProfit => {
                 let entrepreneurialProfitNumber = Number(entrepreneurialProfit.replace('%', ''));
                 cy._mapSet(key, entrepreneurialProfitNumber);

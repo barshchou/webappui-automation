@@ -75,12 +75,12 @@ describe("Validation of Market Values Per SF for ACAS reports",
             - Less Commission Fee
             - Less Entrepreneurial Profit`);
             Income._CapRateConclusion.enterAsStabilizedCommissionFeeAmount(testData.lessCommissionFee)
-                .enterAsStabilizedLessEntrepreneurialProfit(testData.entrepreneurialProfit)
-                .enterAsStabResRentLossTimePeriodByRow(testData.rentLossTimePeriod, 
+                .enterLessEntrepreneurialProfit(testData.entrepreneurialProfit, testData.valueConclusionKeyAsStabilized)
+                .enterResidentialRentLossTimePeriodByRow(testData.rentLossTimePeriod, 
                     testData.valueConclusionKeyAsStabilized)
-                .enterAsStabCommercialRentLossTimePeriodByRow(testData.rentLossTimePeriod, 
+                .enterCommercialRentLossTimePeriodByRow(testData.rentLossTimePeriod, 
                     testData.valueConclusionKeyAsStabilized)
-                .enterAsStabCommercialUndeterminedRentLossTimePeriodByRow(testData.rentLossTimePeriod, 
+                .enterCommercialUndeterminedRentLossTimePeriodByRow(testData.rentLossTimePeriod, 
                     testData.valueConclusionKeyAsStabilized);
 
             cy.stepInfo(`12. Make sure Prospective Market Value As Complete (Amount) =  
@@ -114,13 +114,13 @@ describe("Validation of Market Values Per SF for ACAS reports",
             - Renovation Budget ( on Property>Renovations page)
             - Less Buyout Cost
             - Less Entrepreneurial Profit*`);
-            Income._CapRateConclusion.enterAsCompleteResRentLossTimePeriodByRow(testData.rentLossTimePeriod, 
+            Income._CapRateConclusion.enterResidentialRentLossTimePeriodByRow(testData.rentLossTimePeriod, 
                 testData.valueConclusionKeyAsComplete)
-                .enterAsCompleteCommercialRentLossTimePeriodByRow(testData.rentLossTimePeriod, 
+                .enterCommercialRentLossTimePeriodByRow(testData.rentLossTimePeriod, 
                     testData.valueConclusionKeyAsComplete)
-                .enterAsCompleteCommercialUndeterminedRentLossTimePeriodByRow(testData.rentLossTimePeriod, 
+                .enterCommercialUndeterminedRentLossTimePeriodByRow(testData.rentLossTimePeriod, 
                     testData.valueConclusionKeyAsComplete)
-                .enterAsCompleteLessEntrepreneurialProfit(testData.entrepreneurialProfit)
+                .enterLessEntrepreneurialProfit(testData.entrepreneurialProfit, testData.valueConclusionKeyAsComplete)
                 .enterAsCompleteLessBuyoutCost(testData.lessBuyoutCost);
 
             cy.stepInfo(`17. Make sure As Is Market Value (Amount) = Prospective Market Value As Complete Per SF - 

@@ -32,7 +32,7 @@ describe(`Prospective Market Value As Stabilized -> Less Residential Rent Loss
         }
         Income.CapRateConclusion.checkRentLossCheckboxByRow()
             .clickAddButton()
-            .enterAsStabResRentLossTimePeriodByRow(testData.data.rentLossTimePeriod,
+            .enterResidentialRentLossTimePeriodByRow(testData.data.rentLossTimePeriod,
                 testData.valueConclusionKeyAsStabilized);
         NavigationSection.navigateToSalesValueConclusion()
             .verifyProgressBarNotExist();
