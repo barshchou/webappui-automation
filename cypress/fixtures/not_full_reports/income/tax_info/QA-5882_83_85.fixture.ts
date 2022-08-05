@@ -12,5 +12,4 @@ export default {
     enterValue: "1,000",
     onFeatureFlag: 0,
     tooltip: "The following text will appear below the Tax Liability table in your export",
-    buttonName: "Add Special Assessment",
 };
