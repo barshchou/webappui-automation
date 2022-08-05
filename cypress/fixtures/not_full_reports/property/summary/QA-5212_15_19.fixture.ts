@@ -1,14 +1,23 @@
 import Enums from "../../../../enums/enums";
-import ReportDataCreator from "../../../data_creator/reportData.creator";
+import { BoweryAutomation } from "../../../../types/boweryAutomation.type";
 
-const reportCreationFixture = () => {
-    return ReportDataCreator.getReportData("2100015331", { 
-        conclusionValue: Enums.VALUE_CONCLUSION_TYPE.AS_IS }, true);
+const reportCreationFixture = (): BoweryAutomation.ReportCreationData => {
+    return {
+        state: "Other",
+        address: "2454 Lafayette Road | Portsmouth, NH 03801",
+        identifierType: "PIN",
+        identifier: "PRSM-000273-000003-000010",
+        reportNumber: "2100011795",
+        isSalesForcePull: true,
+        templateValue: Enums.TEMPLATE_TYPE.notFreddieMac,
+        incomeValue: Enums.INCOME_TYPE.residential,
+        conclusionValue: Enums.VALUE_CONCLUSION_TYPE.AS_COMPLETE
+    };
 };
 
 export default {
     reportCreationData: reportCreationFixture(),
-    buildingName: "testname",
-    yearBuilt: "1910",
-    gba: "2,124,441"
+    buildingName: "Portsmouth, NH",
+    yearBuilt: "2017",
+    gba: "138,226"
 };

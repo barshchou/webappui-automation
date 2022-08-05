@@ -1,13 +1,14 @@
 import testData from "../../../../fixtures/not_full_reports/property/summary/QA-5212_15_19.fixture";
-import { createReport } from "../../../../actions/base/baseTest.actions";
-import { _NavigationSection } from "../../../../actions/base";
+import { _HomePage, _NavigationSection } from "../../../../actions/base";
 import { Property } from "../../../../actions";
+import { loginAction } from "../../../../actions/base/baseTest.actions";
 
 describe("[QA-5212] Verify validation of the Residential Units and Commercial Units fields",
     { tags: [ "@property", "@summary", "@salesforce" ] }, () => {
         beforeEach("Login, create report", () => {
             cy.stepInfo("1. Create a new report NOT in NYC on the WebApp");
-            createReport(testData.reportCreationData);
+            loginAction();
+            _HomePage.createReport(testData.reportCreationData);
         });
 
         it("Test body", () => {
