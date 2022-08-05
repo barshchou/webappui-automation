@@ -54,6 +54,10 @@ export const deleteReport = (reportNumber) => {
     _HomePage.deleteReport(reportNumber);
 };
 
+/**
+ * Set up interceptions for GraphQL requests 
+ * which we wait when interacting with Comp-plex
+ */
 export const salesInterceptions = () => {
     cy.intercept('POST', '/graphql', req => {
         aliasQuery(req, gqlOperationNames.searchSalesTransactions);
@@ -65,6 +69,9 @@ export const salesInterceptions = () => {
     });
 };
 
+/**
+ * Navigating to Comp-plex client
+ */
 export const navigateToCompplex = () => {
     salesInterceptions();
     cy.stepInfo(`Navigating to standalone Comp-plex.`);

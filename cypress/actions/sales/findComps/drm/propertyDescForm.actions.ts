@@ -22,7 +22,10 @@ class PropertyDescriptionFormActions {
         return this;
     }
 
-    // TODO: return back to this method later since it's hard to get what is going with this textarea
+    /*
+     * ernst: return back to this method later since it's hard to get what is going with this textarea
+     * it's unstable
+     */
     enterGeneratedCommentary(value: string): PropertyDescriptionFormActions {
         cy.get('[data-qa="reading-btn"]').click({ force:true });
         this.Page.generatedCommentaryTextArea.should("be.enabled");
