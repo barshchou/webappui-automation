@@ -58,5 +58,4 @@ describe(`Verify the "Purpose & Date of Value Discussion" generated commentary o
             _NavigationSection.navigateToCapRateConclusion();
             Income._CapRateConclusion.verifyGeneratedPurposeCommentary(testData.asIsCommentary);
         });
-
     });
