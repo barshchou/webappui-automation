@@ -165,6 +165,10 @@ class FindCompsPage extends BasePage {
         return this.importCompModal.contains("Selected for report");
     }
 
+    get sfNewComp() {
+        return cy.get('[title="SF"]');
+    }
+
 }
 
 /**
