@@ -57,13 +57,11 @@ const _asCompleteCommentary = "The purpose of the appraisal is to provide an opi
 "the Leasehold Interest as of August 1, 2020﻿.";
 
 const _asStabilizedCommentary = "The purpose of the appraisal is to provide an opinion of As Is Market Value of " + 
-"the Fee Simple Interest as of August 1, 2020﻿﻿, and the Prospective Market Value Upon Stabilization of the " + 
-"[As Stabilized Interest Appraised] as of August 1, 2020﻿.";
+"the Fee Simple Interest as of August 1, 2020﻿﻿, and the Prospective Market Value Upon Stabilization of " + 
+"the Fee Simple Interest as of August 1, 2020﻿.";
 
 const _asIsCommentary = "The purpose of the appraisal is to provide an opinion of As Is Market Value of " + 
-"the Leasehold Interest as of August 1, 2020﻿, the Prospective Market Value Upon Completion of the Leasehold " + 
-"Interest as of August 1, 2020﻿﻿, and the Prospective Market Value Upon Stabilization of " + 
-"the Leasehold Interest as of August 1, 2020﻿.";
+"the Leased Fee Interest as of August 1, 2020﻿﻿.";
 
 export default {
     reportCreationDataAsIs: reportCreationFixtureAsIs(),
@@ -74,5 +72,7 @@ export default {
     valuationDateType: "dateOfValuation",
     verifyValuationDate: "08-01-2020",
     verifyInspectionDate: "08-30-2020",
-    asCompleteCommentary: _asCompleteCommentary
+    asCompleteCommentary: _asCompleteCommentary,
+    asStabilizedCommentary: _asStabilizedCommentary,
+    asIsCommentary: _asIsCommentary
 };

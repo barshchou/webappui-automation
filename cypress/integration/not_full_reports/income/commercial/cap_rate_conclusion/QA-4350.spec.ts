@@ -23,7 +23,7 @@ describe(`Verify the "Purpose & Date of Value Discussion" generated commentary o
             Income._CapRateConclusion.verifyGeneratedPurposeCommentary(testData.asCompleteCommentary);
         });
 
-        it.only("[QA-4350] Verify Purpose & Date of Value Discussion with AS STABILIZED report", () => {
+        it("[QA-4350] Verify Purpose & Date of Value Discussion with AS STABILIZED report", () => {
             cy.stepInfo(`1. Create report`);
             createReport(testData.reportCreationDataAsStabilized);
 
@@ -31,14 +31,15 @@ describe(`Verify the "Purpose & Date of Value Discussion" generated commentary o
             _NavigationSection.navigateToReportInformation();
             Report._KeyInfo.Actions
                 .checkAsIsMarketInterestByValue(testData.keyInfoPurposeData.interestAppraisedFeeSimple.asIsMarket)
-                .checkAsIsMarketInterestByValue(testData.keyInfoPurposeData.interestAppraisedFeeSimple.asStabilized);
+                .checkAsStabilizedInterestByValue(testData.keyInfoPurposeData.interestAppraisedFeeSimple.asStabilized);
+
             Report._KeyInfo.enterDateByType({ type: testData.valuationDateType, date: testData.verifyValuationDate })
                 .enterDateByType({ type: testData.inspectionDateType, date: testData.verifyInspectionDate }, false);
 
             cy.stepInfo(`3. Navigate to Cap Rate Conclusion and verify the "Purpose & Date of Value Discussion" 
             generated commentary`);
             _NavigationSection.navigateToCapRateConclusion();
-            Income._CapRateConclusion.verifyGeneratedPurposeCommentary(testData.asCompleteCommentary);
+            Income._CapRateConclusion.verifyGeneratedPurposeCommentary(testData.asStabilizedCommentary);
         });
 
         it("[QA-4350] Verify Purpose & Date of Value Discussion with AS IS report", () => {
@@ -55,7 +56,7 @@ describe(`Verify the "Purpose & Date of Value Discussion" generated commentary o
             cy.stepInfo(`3. Navigate to Cap Rate Conclusion and verify the "Purpose & Date of Value Discussion" 
             generated commentary`);
             _NavigationSection.navigateToCapRateConclusion();
-            Income._CapRateConclusion.verifyGeneratedPurposeCommentary(testData.asCompleteCommentary);
+            Income._CapRateConclusion.verifyGeneratedPurposeCommentary(testData.asIsCommentary);
         });
 
     });
