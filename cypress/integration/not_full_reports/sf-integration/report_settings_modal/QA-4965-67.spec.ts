@@ -1,4 +1,4 @@
-import testData from "../../../../fixtures/not_full_reports/sf_integration/report_settings_modal/QA-4965-66.fixture";
+import testData from "../../../../fixtures/not_full_reports/sf_integration/report_settings_modal/QA-4965-67.fixture";
 import { loginAction } from "../../../../actions/base/baseTest.actions";
 import { _HomePage } from "../../../../actions/base";
 
@@ -37,5 +37,18 @@ describe("Verify Freddie Mac pre-fill with the Agency Client Type from SF",
             cy.stepInfo(`3. “Freddie Mac” section has the radio button automatically enabled for 
                         ‘This report does not need to adhere to Freddie Mac specifications.’`);
             _HomePage.Page.templateTypesRadios.eq(1).should("be.checked");
+        });
+
+        it("[QA-4967]", () => {
+            cy.stepInfo("2. Proceed to the WebApp and paste the number or enter manually in the Bowery Job # field");
+            _HomePage.clickNewReportButton()
+                .enterAddressToSearch(testData.address)
+                .clickSubmitButton()
+                .clickToSearchResultRow()
+                .clickSubmitButton()
+                .enterReportNumber(testData.sfJobs.noneFreddieMac);
+            
+            cy.stepInfo("3. Verify the “Freddie Mac” section has the radio button enabled but deselected.");
+            _HomePage.Page.templateTypesRadios.should("not.be.checked");
         });
     });
