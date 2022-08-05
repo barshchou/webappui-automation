@@ -212,13 +212,10 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
         return this;
     }
 
-    enterAsStabilizedLaundryLossMonths(months: number): CapRateConclusionActions {
-        capRateConclusionPage.asStabilizedLessLaundryLossMonths.clear().type(`${months}`).should("have.value", months);
-        return this;
-    }
-
-    enterAsCompleteLaundryLossMonths(months: number): CapRateConclusionActions {
-        capRateConclusionPage.asCompleteLessLaundryLossMonths.clear().type(`${months}`).should("have.value", months);
+    enterLaundryLossMonths(months: number, valueConclusionKey: BoweryReports.ValueConclusionKeys): 
+    CapRateConclusionActions {
+        capRateConclusionPage.lessLaundryLossMonths(valueConclusionKey).clear()
+            .type(`${months}`).should("have.value", months);
         return this;
     }
 

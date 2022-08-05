@@ -79,12 +79,9 @@ class CapRateConclusionPage extends BasePage {
 
     get asCompleteLessBuyoutCost() { return cy.get("[data-qa*='asCompleteLossItems.buyoutCost'] input[inputmode]"); }
 
-    get asStabilizedLessLaundryLossMonths() { 
-        return cy.get("[data-qa='asStabilizedLossItems.laundryRentLoss.renovation-period-cell'] input[type=text]"); 
-    }
-
-    get asCompleteLessLaundryLossMonths() { 
-        return cy.get("[data-qa='asCompleteLossItems.laundryRentLoss.renovation-period-cell'] input[type=text]"); 
+    lessLaundryLossMonths(valueConclusionKey: BoweryReports.ValueConclusionKeys) { 
+        return cy.get(`[data-qa='${valueConclusionKey}LossItems.laundryRentLoss.renovation-period-cell'] ` + 
+        `input[type=text]`); 
     }
 
     get asStabilizedCommissionFeeAmount() { 
