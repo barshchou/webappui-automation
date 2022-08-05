@@ -64,13 +64,13 @@ describe("Validation of Market Values Amount and Per SF for AS STABILIZED report
             - Less Commission Fee
             - Less Entrepreneurial Profit`);
             Income._CapRateConclusion.enterAsStabilizedCommissionFeeAmount(testData.lessCommissionFee)
-                .enterAsStabilizedLessEntrepreneurialProfit(testData.entrepreneurialProfit)
-                .enterAsStabResRentLossTimePeriodByRow(testData.rentLossTimePeriod, 
-                    testData.valueConclusionKeyAsStabilized)
-                .enterAsStabCommercialRentLossTimePeriodByRow(testData.rentLossTimePeriod, 
-                    testData.valueConclusionKeyAsStabilized)
-                .enterAsStabCommercialUndeterminedRentLossTimePeriodByRow(testData.rentLossTimePeriod, 
-                    testData.valueConclusionKeyAsStabilized);
+                .enterLessEntrepreneurialProfit(testData.entrepreneurialProfit, testData.valueConclusionKeyAsStabilized)
+                .enterLossTimePeriodByRow(testData.rentLossTimePeriod, 
+                    testData.valueConclusionKeyAsStabilized, testData.rentLossTypeResidential)
+                .enterLossTimePeriodByRow(testData.rentLossTimePeriod, 
+                    testData.valueConclusionKeyAsStabilized, testData.rentLossTypeCommercial)
+                .enterLossTimePeriodByRow(testData.rentLossTimePeriod, 
+                    testData.valueConclusionKeyAsStabilized, testData.rentLossTypeUndetermined);
 
             cy.stepInfo(`10. Make sure Prospective Market Value As Is (Amount) =  
             Prospective Market Value As Stabilized (Amount) - Less Residential Rent Loss - 

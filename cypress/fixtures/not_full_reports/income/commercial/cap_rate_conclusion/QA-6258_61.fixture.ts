@@ -36,5 +36,8 @@ export default {
     lessBuyoutCost: 153789,
     valueConclusionKeyAsComplete: Object.keys(Enums.VALUE_CONCLUSION_NAME)[2] as BoweryReports.ValueConclusionKeys,
     valueConclusionKeyAsStabilized: Object.keys(Enums.VALUE_CONCLUSION_NAME)[1] as BoweryReports.ValueConclusionKeys,
-    conclusionValueAsStabilized: Enums.VALUE_CONCLUSION_TYPE.AS_STABILIZED
+    conclusionValueAsStabilized: Enums.VALUE_CONCLUSION_TYPE.AS_STABILIZED,
+    rentLossTypeResidential: Enums.RENT_LOSS_TYPE.resRentLossItems,
+    rentLossTypeCommercial: Enums.RENT_LOSS_TYPE.commercialRentLossItems,
+    rentLossTypeUndetermined: Enums.RENT_LOSS_TYPE.lossItems,
 };
