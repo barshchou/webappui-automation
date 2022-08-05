@@ -17,9 +17,9 @@ class CapRateConclusionPage extends BasePage {
         return cy.get("[data-qa=capRateConclusion-section] [name=concludedCapRate]"); 
     }
 
-    get asCompleteMonthsOfRentLoss() { return cy.get("[name=asCompleteMonthsOfRentLoss]"); }
-
-    get asStabilizedMonthsOfRentLoss() { return cy.get("[name=asStabilizedMonthsOfRentLoss]"); }
+    monthsOfRentLoss(valueConclusionKey: BoweryReports.ValueConclusionKeys) { 
+        return cy.get(`[name=${valueConclusionKey}MonthsOfRentLoss]`); 
+    }
 
     get roundingFactorDropdown() { return cy.get("[data-qa=roundingFactor-select-list] [data-qa=select-value]"); }
 
@@ -48,12 +48,8 @@ class CapRateConclusionPage extends BasePage {
         return cy.get(`[data-qa^="${conclusionValueAdjusted}"][data-qa$="-final-value-cell"]`); 
     }
 
-    get asCompleteLessEntrepreneurialProfit() { 
-        return cy.get("[data-qa*='asCompleteLossItems.entrepreneurialProfit'] input[inputmode]"); 
-    }
-
-    get asStabilizedLessEntrepreneurialProfit() { 
-        return cy.get("[data-qa*='asStabilizedLossItems.entrepreneurialProfit'] input[inputmode]"); 
+    lessEntrepreneurialProfit(valueConclusionKey: BoweryReports.ValueConclusionKeys) { 
+        return cy.get(`[data-qa*='${valueConclusionKey}LossItems.entrepreneurialProfit'] input[inputmode]`); 
     }
 
     get asIsMarketValuePerUnit() { return cy.xpath("//*[.='As Is Market Value Per Unit']//following-sibling::td[3]"); }
