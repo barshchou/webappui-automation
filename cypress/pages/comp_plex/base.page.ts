@@ -1,9 +1,4 @@
 class CompPlexBasePage {
-
-    getCancelBtn(index = 0) {
-        return cy.contains("CANCEL", { includeShadowDom: true }).eq(index);
-    }
-
     /**
      * Get `Details` btn by selected comps's address
      */

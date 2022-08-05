@@ -8,7 +8,7 @@ export default class SalesCompsDetailsForm {
     }
 
     get SaleInfoEditBtn() {
-        return cy.get('[data-qa="sale-info-edit-btn"]', { includeShadowDom: true });
+        return cy.get('[data-qa="sale-info-edit-btn"]');
     }
 
     get generatedCommentaryTextArea() {
