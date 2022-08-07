@@ -68,7 +68,7 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
     }
 
     clickSearchCompButton(): FindCompsActions {
-        findCompsPage.submitButton.click();
+        findCompsPage.submitButton.should('exist').should('be.enabled').click();
         return this;
     }
 
