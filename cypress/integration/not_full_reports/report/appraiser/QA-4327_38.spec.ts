@@ -22,7 +22,12 @@ describe(`Verify the Inspector's name is pre-filled in the Appraisers section on
             Report._Appraiser.verifyPersonallyInspectedCheckbox(appraiser.name, appraiser.isPersonallyInspected);
         });
 
-        cy.stepInfo("4. Export the report");
+        cy.stepInfo(`4. not null with checked ‘Personally Inspected' and 'Sign Report’ checkboxes; 
+                        not null with unchecked ‘Personally Inspected' and 'Sign Report’ checkboxes;`);
+        Report._Appraiser.checkPersonallyInspected(testData.appraisers[0].name)
+            .checkSignReport(testData.appraisers[1].name, false);
+
+        cy.stepInfo("5. Export the report");
         _NavigationSection.Actions.openReviewAndExport();
         ReviewExport.generateDocxReport().waitForReportGenerated()
             .downloadAndConvertDocxReport(`JOB-${testData.reportCreationData.reportNumber}`);
@@ -35,8 +40,15 @@ describe(`Verify the Inspector's name is pre-filled in the Appraisers section on
             cy.log(<string>file);
             cy.visit(<string>file);
 
-            cy.stepInfo("5. Verify the export of the report with the pre-filled Inspector's name from SalesForce");
-            cy.xpath("//h4[.='Current Commercial Rent Roll']/following-sibling::table");
+            cy.stepInfo("6. Verify the export of the report with the pre-filled Inspector's name from SalesForce");
+            testData.appraisers.forEach(appraiser => {
+                cy.xpath(`//*[contains(text(), 'Prepared By')]` +
+                        `//following::*[contains(text(), '${appraiser.name}')][1]`).should("exist");
+
+                cy.xpath(`//h1[contains(text(), 'Certification')]` +
+                        `//following::*[contains(text(), '${appraiser.name}')][1]`)
+                    .should("exist");
+            });
         });
     });
 });
