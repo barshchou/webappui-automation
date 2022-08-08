@@ -1,13 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-
-/**
- * ernst:
- * maybe we should separate namespaces for specific domain?
- * for example, we could have specific BoweryReports.ExpenseForecast
- * where we can have ForecastItem type.
- */
-
 import Enums from "../enums/enums";
 import * as KeyInfo from '../enums/enumKeys.enum';
 
@@ -23,4 +15,11 @@ export namespace Utils {
     export type EnvLaunchDarklyType = keyof typeof Enums.ENV_LAUNCH_DARKLY
     
     export type GraphQLRequest = Partial<_GraphQLRequest>;
+
+    export type ReportFile = {
+        name: string
+        path: string
+        extension: "docx" | "html",
+        fullPath?: string
+    }
 }

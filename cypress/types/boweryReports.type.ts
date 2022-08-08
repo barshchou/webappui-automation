@@ -1,7 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-
-
 import * as KeyInfo from '../enums/enumKeys.enum';
 import { CommercialUnits as _CommercialUnits } from './commercial-units.type';
 import { SalesAdjustmentGrid as _SalesAdjustmentGrid } from './sales-adjustment-grid.type';
@@ -9,12 +7,11 @@ import { FindComps as _FindComps } from './find-comps.type';
 import Enums from "../enums/enums";
 
 export namespace BoweryReports {
-    export type ReportFile = {
-        name: string
-        path: string
-        extension: "docx" | "html",
-        fullPath?: string
-    }
+    export import CommercialUnits = _CommercialUnits
+
+    export import SalesAdjustmentGrid = _SalesAdjustmentGrid
+
+    export import FindComps = _FindComps
 
     export type ReportStatus = typeof Enums.REPORT_STATUS[KeyInfo.ReportStatus]
     export type ConclusionValue = keyof typeof Enums.VALUE_CONCLUSION_TYPE 
@@ -51,10 +48,6 @@ export namespace BoweryReports {
     export type UnitSF = keyof typeof Enums.UNIT_SF
     export type PerUnitPerSF = typeof Enums.PER_UNIT_PER_SF[KeyInfo.PerUnitPerSFKeys]
     export type ForecastItemBasis = keyof typeof Enums.EXPENSE_CELL
-
-    export import CommercialUnits = _CommercialUnits
-
-    export import SalesAdjustmentGrid = _SalesAdjustmentGrid
 
     export type ProFormaAnyIncome = {
         total: string,
@@ -197,8 +190,6 @@ export namespace BoweryReports {
     export type BondTickers = typeof Enums.BOND_TYPES[KeyInfo.BondTypes]
     export type BondTypes = keyof typeof  Enums.BOND_TYPES
 	export type ExpenseCardNames = typeof Enums.EXPENSES_CARD_NAMES[KeyInfo.ExpenseCardName]
-
-    export import FindComps = _FindComps
     
     export type CalculationType = typeof Enums.CALCULATION_TYPE[KeyInfo.CalculationType]
     export type FileSelection = typeof Enums.FILE_SELECTION_NAMES[KeyInfo.FileSelection]
