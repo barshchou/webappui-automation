@@ -1,5 +1,6 @@
 import Enums from "../../../../enums/enums";
 import { BoweryReports } from "../../../../types/boweryReports.type";
+import { SalesAdjustmentGrid } from "../../../../types/sales-adjustment-grid.type";
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 
 export const createReportData = conclusion => {
@@ -22,5 +23,5 @@ export default {
     calculationUnits: [ 
         Enums.CALCULATION_UNITS.psf, 
         Enums.CALCULATION_UNITS.perResidentialUnits 
-    ] as BoweryReports.SalesAdjustmentGrid.CalculationUnits[],
+    ] as SalesAdjustmentGrid.CalculationUnits[],
 };

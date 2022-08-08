@@ -1,5 +1,5 @@
 import Enums from "../../../../enums/enums";
-import { BoweryReports } from "../../../../types/boweryReports.type";
+import { SalesAdjustmentGrid } from "../../../../types/sales-adjustment-grid.type";
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 
 const comparableFixture = () => {
@@ -18,6 +18,6 @@ export default {
     calculationUnits: [ 
         Enums.CALCULATION_UNITS.perResidentialUnits, 
         Enums.CALCULATION_UNITS.perTotalUnits 
-    ] as BoweryReports.SalesAdjustmentGrid.CalculationUnits[],
+    ] as SalesAdjustmentGrid.CalculationUnits[],
     existColumns: [ "Cumulative Price Per Unit", "Adjusted Price Per Unit" ]
 };

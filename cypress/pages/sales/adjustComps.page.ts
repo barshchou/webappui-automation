@@ -1,9 +1,11 @@
-import { BoweryReports } from "../../types/boweryReports.type";
+import { SalesAdjustmentGrid } from "../../types/sales-adjustment-grid.type";
 import BasePage from "../base/base.page";
 
-type AdjustmentName = BoweryReports.SalesAdjustmentGrid.AdjustmentName;
-type RowsMarketAdjustment = BoweryReports.SalesAdjustmentGrid.RowsMarketAdjustment;
-type CumulativePrice = BoweryReports.SalesAdjustmentGrid.CumulativePrice
+
+
+type AdjustmentName = SalesAdjustmentGrid.AdjustmentName;
+type RowsMarketAdjustment = SalesAdjustmentGrid.RowsMarketAdjustment;
+type CumulativePrice = SalesAdjustmentGrid.CumulativePrice
 
 class AdjustCompsPage extends BasePage {
     get calculationUnitsRadio() { return cy.get("[name=basisOfComparison]"); }

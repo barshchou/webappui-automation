@@ -7,17 +7,18 @@ import BaseActionsExt from "../base/base.actions.ext";
 import { BoweryReports } from "../../types/boweryReports.type";
 import { _saveDataInFile } from "../../support/commands";
 import Enums from "../../enums/enums";
+import { SalesAdjustmentGrid } from "../../types/sales-adjustment-grid.type";
 
 class AdjustCompsActions extends BaseActionsExt<typeof adjustCompsPage> {
     /**
      * Checks whether name string in cell Cumulative Price Per *basis* is bold   
      */
-    checkCumulativePriceName(basis: BoweryReports.SalesAdjustmentGrid.CumulativePrice) {
+    checkCumulativePriceName(basis: SalesAdjustmentGrid.CumulativePrice) {
         this.Page.cellCumulativePriceName(basis).should("have.css", "font-weight", "500");
         return this;
     }
 
-    checkCalculationUnitsRadio(value: BoweryReports.SalesAdjustmentGrid.CalculationUnits = 
+    checkCalculationUnitsRadio(value: SalesAdjustmentGrid.CalculationUnits = 
     Enums.CALCULATION_UNITS.perResidentialUnits): AdjustCompsActions {
         adjustCompsPage.calculationUnitsRadio.check(value).should("be.checked");
         return this;
@@ -300,7 +301,7 @@ class AdjustCompsActions extends BaseActionsExt<typeof adjustCompsPage> {
      * @param units Count Residential or/and Commercial units
      * @returns `this`
      */
-    verifyExpandMarketAdjustmentPricePerUnit(calculationUnit: BoweryReports.SalesAdjustmentGrid.CalculationUnits, 
+    verifyExpandMarketAdjustmentPricePerUnit(calculationUnit: SalesAdjustmentGrid.CalculationUnits, 
         units: number): AdjustCompsActions {
         this.checkCalculationUnitsRadio(calculationUnit);
         adjustCompsPage.getExpandMarketAdjustmentSubjectRow("Sale Price").invoke("text").then(salePrice => {
