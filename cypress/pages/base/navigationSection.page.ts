@@ -112,6 +112,8 @@ class NavigationSection extends BasePage {
     get residentialStabilizedRentRollSummary() { return cy.get(`#residential-projected-rent-roll-summary`); }
 
     get renovationButton() { return cy.get(`#renovations`); }
+
+    get contentManagementSystemButton() { return cy.get(`[data-qa="linkToCms"] div`); }
 }
 
 export default new NavigationSection();

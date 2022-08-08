@@ -12,7 +12,9 @@ const users = {
     webappRoleTestUsername: "WEBAPP_ROLE_TEST_USERNAME",
     webappRoleTestPassword: "WEBAPP_ROLE_TEST_PASSWORD",
     webappTestUsername: "WEBAPP_TEST_USERNAME",
-    webappTestPassword: "WEBAPP_TEST_PASSWORD"
+    webappTestPassword: "WEBAPP_TEST_PASSWORD",
+    webappContentEditorUsername: "WEBAPP_CONTENT_EDITOR_USERNAME",
+    webappContentEditorPassword: "WEBAPP_CONTENT_EDITOR_PASSWORD"
 
 } as const;
 
