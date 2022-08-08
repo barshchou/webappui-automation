@@ -70,6 +70,10 @@ import salesAdjustmentGridDiscussionsEnum from "./adjustComps/salesAdjustmentGri
 import salesAdjustmentGridRowsEnum from "./adjustComps/salesAdjustmentGridRows.enum";
 import basisSquareFootAnalysisEnum from "./property/basisSquareFootAnalysis.enum";
 import basisSquareFootAnalysisTextsEnum from "./sales/value_conclusion/basisSquareFootAnalysisTexts.enum";
+import renovationTypeEnum from "./property/renovationType.enum";
+import valueConclusionEnum from "./property/valueConclusion.enum";
+import unitIncomeTypeEnum from "./unit/unitIncomeType.enum";
+import rentLossTypeEnum from "./rentLossType.enum";
 
 export default {
     TEMPLATE_TYPE: templateTypesEnum,
@@ -143,5 +147,9 @@ export default {
     SALES_ADJUSTMENT_GRID_ROWS: salesAdjustmentGridRowsEnum,
     BASIS_SQUARE_FOOT_ANALYSIS: basisSquareFootAnalysisEnum,
     BASIS_SQUARE_FOOT_ANALYSIS_TEXTS: basisSquareFootAnalysisTextsEnum,
-    COMPPLEX_ENUM: compplex
+    COMPPLEX_ENUM: compplex,
+    RENOVATION_TYPE: renovationTypeEnum,
+    VALUE_CONCLUSION_NAME: valueConclusionEnum,
+    UNIT_INCOME_TYPE: unitIncomeTypeEnum,
+    RENT_LOSS_TYPE: rentLossTypeEnum
 };

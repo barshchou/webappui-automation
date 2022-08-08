@@ -1,7 +1,7 @@
 import testData from "../../../../fixtures/not_full_reports/income/tax_info/QA-5182.fixture";
 import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
-import { ReviewExport, Income } from './../../../../actions/index';
+import { ReviewExport, Income } from '../../../../actions';
 import launchDarklyApi from "../../../../api/launchDarkly.api";
 
 describe("[QA-5182] Export column order both assessment psf and assessment per unit", () => {
