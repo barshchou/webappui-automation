@@ -5,6 +5,7 @@
 import * as KeyInfo from '../enums/enumKeys.enum';
 import { CommercialUnits as _CommercialUnits } from './commercial-units.type';
 import { SalesAdjustmentGrid as _SalesAdjustmentGrid } from './sales-adjustment-grid.type';
+import { FindComps as _FindComps } from './find-comps.type';
 import Enums from "../enums/enums";
 
 export namespace BoweryReports {
@@ -17,6 +18,7 @@ export namespace BoweryReports {
 
     export type ReportStatus = typeof Enums.REPORT_STATUS[KeyInfo.ReportStatus]
     export type ConclusionValue = keyof typeof Enums.VALUE_CONCLUSION_TYPE 
+
     export type isSalesForcePull = boolean
     export type ReportCreationOptions = {
         incomeValue?: typeof Enums.INCOME_TYPE[KeyInfo.IncomeTypeKeys],
@@ -26,8 +28,10 @@ export namespace BoweryReports {
         isSalesForcePull?: isSalesForcePull
     }
     export type RentType = typeof Enums.RENT_TYPE[KeyInfo.RentTypeKeys]
+    
     export type RentRollOptionsCheckboxesType = 
         typeof Enums.RENT_ROLL_OPTIONS_CHECKBOXES[KeyInfo.RentRollOptionsCheckboxesKeys]
+
     export type ChipsCreationOptions = {
         block?: string,
         buildingName?: string,
@@ -195,13 +199,7 @@ export namespace BoweryReports {
     export type BondTypes = keyof typeof  Enums.BOND_TYPES
 	export type ExpenseCardNames = typeof Enums.EXPENSES_CARD_NAMES[KeyInfo.ExpenseCardName]
 
-    export namespace FindComps {
-        export type SalePeriodValues = typeof Enums.SALE_PERIOD_VALUES[KeyInfo.SalePeriodValues]
-        export type SelectedComparablesSortType = typeof Enums.SORT_VALUES[KeyInfo.SortValues]
-        export type ConditionValueType = typeof Enums.CONDITION_VALUES[KeyInfo.ConditionValues]
-        export type ComparableTypes = typeof Enums.COMPARABLE_TYPES[KeyInfo.ComparableTypes]
-        export type SaleStatusType = typeof Enums.SALE_STATUSES[KeyInfo.SaleStatuses]
-    }
+    export import FindComps = _FindComps
     
     export type CalculationType = typeof Enums.CALCULATION_TYPE[KeyInfo.CalculationType]
     export type FileSelection = typeof Enums.FILE_SELECTION_NAMES[KeyInfo.FileSelection]
