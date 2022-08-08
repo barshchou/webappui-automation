@@ -1,3 +1,21 @@
+import enums from "../../../../enums/enums";
+
+const _newCompPropertyInfoData = {
+    gba: "100",
+    yearBuild:"2000",
+    floors: "2",
+    siteArea: "100",
+    residentialUnits: "2",
+    buildingType: enums.COMPPLEX_ENUM._propertyInfoEnum.buildingType.elevator
+};
+
+const _newCompSaleInfoData = {
+    buyerGrantee: "Test and CO",
+    sellerGrantor: "Test inc",
+    saleStatus: enums.SALE_STATUSES.transaction
+    deedSalePrice: "10000"
+};
+
 const _textValues = [
     `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the ` + 
     `industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type ` + 
@@ -11,7 +29,9 @@ const _textValues = [
 ];
 
 export default {
-    condition: "Shell",
-    comparableType: "Multifamily",
-    _textValues
+    condition: enums.CONDITION_VALUES.shell,
+    comparableType: enums.COMPARABLE_TYPES.multifamily,
+    _textValues,
+    _newCompPropertyInfoData,
+    _newCompSaleInfoData
 };

@@ -2,6 +2,9 @@ import { navigateToCompplex } from "../../../../actions/base/baseTest.actions";
 import { CompPlex, Sales } from "../../../../actions";
 import testData from "../../../../fixtures/comp_plex/sales/find_comps/QA-4166.fixture";
 
+const propertyInfoData = testData._newCompPropertyInfoData;
+const saleInfoData = testData._newCompSaleInfoData;
+
 /*
  * ernst: skipped due to unpredictable behavior of `Generated Commentary field`
  * probably will be moved to Component tests later
@@ -24,23 +27,28 @@ describe.skip(
                 Sales._FindComps
                     .Actions.selectDropdownOptionNewComp(
                         Sales._FindComps.Page.conditionDropdown, testData.condition)
-                    .PropertyInfo.setGBA("100").setYearBuild("2000")
-                    .setFloors("2").setSiteArea("100").setResidentialUnits("2").checkBuildingType("elevator");
+                    .PropertyInfo.setGBA(propertyInfoData.gba)
+                    .setYearBuild(propertyInfoData.yearBuild)
+                    .setFloors(propertyInfoData.floors)
+                    .setSiteArea(propertyInfoData.siteArea)
+                    .setResidentialUnits(propertyInfoData.residentialUnits)
+                    .checkBuildingType(propertyInfoData.buildingType);
                 Sales._FindComps.PropertyInfo.Page.newCompContinueButton.click();
 
                 Sales._FindComps.SaleInfo
-                    .setBuyerGrantee("Test and CO")
-                    .setSellerGrantor("Test inc")
+                    .setBuyerGrantee(saleInfoData.buyerGrantee)
+                    .setSellerGrantor(saleInfoData.sellerGrantor)
                     .selectSaleDate();
                 Sales._FindComps
-                    .selectDropdownOptionNewComp(Sales._FindComps.Page.SaleStatusDropdown, "Transaction");
+                    .selectDropdownOptionNewComp(Sales._FindComps.Page.SaleStatusDropdown, saleInfoData.saleStatus);
                 Sales._FindComps.SaleInfo
-                    .setDeedSalePrice("10000");
+                    .setDeedSalePrice(saleInfoData.deedSalePrice);
                 Sales._FindComps.PropertyInfo.Page.newCompContinueButton.click();
 
                 Sales._FindComps.PropertyDesc.Page.generatedCommentaryTextArea.should("be.empty");
                 testData._textValues.forEach(val => {
                     Sales._FindComps.PropertyDesc.enterGeneratedCommentary(val);
+                    Sales._FindComps.PropertyDesc.Page.propertyDescRevertToGenerateBtn.click();
                     cy.get('[data-qa="revert-to-generated-btn"]').click();
                 });
 

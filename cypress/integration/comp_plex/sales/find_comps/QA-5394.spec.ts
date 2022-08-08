@@ -26,7 +26,7 @@ describe.skip(`[QA-5394] -> [Sales > Find Comps > Create Comp >
         
         cy.stepInfo(`3. Switching Site Area* field to Acre option`);
         Sales._FindComps.Actions
-            .selectDropdownOptionNewComp(Sales._FindComps.Page.sfNewComp, "Acre");
+            .selectDropdownOptionNewComp(Sales._FindComps.Page.sfNewComp, testData.siteArea);
         
         cy.stepInfo(`4. Verifying Site Area* field with Acre option`);
         Object.values(testData.values).forEach(n => {

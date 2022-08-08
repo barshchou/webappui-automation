@@ -1,3 +1,5 @@
+const _siteArea = "Acre";
+
 export default {
     values: {
         regularNumber: 850,
@@ -6,4 +8,5 @@ export default {
         nonNumberValue: "Some not number",
         longValue: 55555555555555528
     },
+    siteArea:_siteArea
 };

@@ -2,7 +2,7 @@ import { findCompsPage } from "../../../../pages/sales/findComps.page";
 
 class PropertyDescriptionFormActions {
     Page: typeof findCompsPage;
-
+    
     constructor(page: typeof findCompsPage) {
         this.Page = page;
     }
@@ -27,9 +27,8 @@ class PropertyDescriptionFormActions {
      * it's unstable
      */
     enterGeneratedCommentary(value: string): PropertyDescriptionFormActions {
-        cy.get('[data-qa="reading-btn"]').click({ force:true });
+        this.Page.propertyDescReadingBtn.click({ force: true });
         this.Page.generatedCommentaryTextArea.should("be.enabled");
-        cy.pause();
         this.Page.generatedCommentaryTextArea.type(`{enter}${value}`, { force: true });
         this.Page.generatedCommentaryTextArea.should("have.text", value);
         return this;

@@ -16,7 +16,7 @@ import enums from "../enums/enums";
  */
 namespace Keys {
     export type BuildingType = keyof typeof enums.COMPPLEX_ENUM._propertyInfoEnum.buildingType
-    export type SaleStatus = keyof typeof enums.COMPPLEX_ENUM._saleInfoEnum.saleStatus
+    export type SaleStatus = keyof typeof enums.COMPPLEX_ENUM._saleInfoEnum
 }
 
 export namespace CompPlex {
@@ -26,6 +26,6 @@ export namespace CompPlex {
     }
     export namespace SaleInfo {
         export type SaleStatus = typeof enums.COMPPLEX_ENUM
-        ._saleInfoEnum.saleStatus[Keys.SaleStatus]  
+        ._saleInfoEnum[Keys.SaleStatus]  
     }
 }

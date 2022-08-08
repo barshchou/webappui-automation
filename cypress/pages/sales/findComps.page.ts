@@ -6,6 +6,14 @@ import SalesCompsDetailsForm from "./comp_plex/salesCompDetails.page";
 import SaleInformationForm from "./comp_plex/salesInfo.page";
 
 class FindCompsPage extends BasePage {
+    get propertyDescReadingBtn() {
+        return cy.get('[data-qa="reading-btn"]');
+    }
+
+    get propertyDescRevertToGenerateBtn() {
+        return cy.get('[data-qa="revert-to-generated-btn"]');
+    }
+
     get createCompButton() { return cy.get("[data-qa=create-sales-comps-btn]"); }
 
     get searchCompAddressInput() {
@@ -168,7 +176,6 @@ class FindCompsPage extends BasePage {
     get sfNewComp() {
         return cy.get('[title="SF"]');
     }
-
 }
 
 /**
