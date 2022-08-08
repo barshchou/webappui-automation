@@ -8,7 +8,7 @@ const reportCreationFixture = () => {
     });
 };
 
-const _leaseDates: BoweryReports.leaseDate[] = [
+const _leaseDates: BoweryReports.LeaseDate[] = [
     {
         name: "Start",
         value: "01012022"

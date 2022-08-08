@@ -28,10 +28,9 @@ export namespace BoweryReports {
         isSalesForcePull?: isSalesForcePull
     }
     export type RentType = typeof Enums.RENT_TYPE[KeyInfo.RentTypeKeys]
-    
     export type RentRollOptionsCheckboxesType = 
         typeof Enums.RENT_ROLL_OPTIONS_CHECKBOXES[KeyInfo.RentRollOptionsCheckboxesKeys]
-
+        
     export type ChipsCreationOptions = {
         block?: string,
         buildingName?: string,
@@ -141,7 +140,7 @@ export namespace BoweryReports {
 
     export type CompGroupsColumns = typeof Enums.COMP_GROUP_COLUMNS[KeyInfo.CompGroupsColumnsKeys]
 
-    export type leaseDate = {
+    export type LeaseDate = {
         name: LeaseDateName,
         value: string
     }
