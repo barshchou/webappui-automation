@@ -22,7 +22,8 @@ describe(`Prospective Market Value As Stabilized -> Less Entrepreneurial Profit
             .enterMonthlyRentByRowNumber(testData.rentRollData.monthlyRent);
         NavigationSection.navigateToCapRateConclusion();
         Income.CapRateConclusion.enterConclusionSectionConcludedCapRate(testData.generalData.appraiserConclusion)
-            .enterAsCompleteLessEntrepreneurialProfit(testData.generalData.lessEntrepreneurialProfit)
+            .enterLessEntrepreneurialProfit(testData.generalData.lessEntrepreneurialProfit, 
+                testData.valueConclusionKeyAsComplete)
             .enterAsCompleteLessBuyoutCost(testData.generalData.lessBuyoutCost)
             .verifyPopUpWithTitleExists(testData.generalData.lessEntrepreneurialProfitPopUp);
         NavigationSection.navigateToSalesValueConclusion()
