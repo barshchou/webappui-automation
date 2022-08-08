@@ -18,7 +18,7 @@ describe(`Verify the "Purpose & Date of Value Discussion" generated commentary o
                 .enterDateByType({ type: testData.inspectionDateType, date: testData.verifyInspectionDate }, false);
 
             cy.stepInfo(`3. Navigate to Cap Rate Conclusion and verify the "Purpose & Date of Value Discussion" 
-            generated commentary`);
+                        generated commentary`);
             _NavigationSection.navigateToCapRateConclusion();
             Income._CapRateConclusion.verifyGeneratedPurposeCommentary(testData.asCompleteCommentary);
         });
@@ -37,7 +37,7 @@ describe(`Verify the "Purpose & Date of Value Discussion" generated commentary o
                 .enterDateByType({ type: testData.inspectionDateType, date: testData.verifyInspectionDate }, false);
 
             cy.stepInfo(`3. Navigate to Cap Rate Conclusion and verify the "Purpose & Date of Value Discussion" 
-            generated commentary`);
+                        generated commentary`);
             _NavigationSection.navigateToCapRateConclusion();
             Income._CapRateConclusion.verifyGeneratedPurposeCommentary(testData.asStabilizedCommentary);
         });
@@ -54,7 +54,7 @@ describe(`Verify the "Purpose & Date of Value Discussion" generated commentary o
                 .enterDateByType({ type: testData.inspectionDateType, date: testData.verifyInspectionDate }, false);
 
             cy.stepInfo(`3. Navigate to Cap Rate Conclusion and verify the "Purpose & Date of Value Discussion" 
-            generated commentary`);
+                        generated commentary`);
             _NavigationSection.navigateToCapRateConclusion();
             Income._CapRateConclusion.verifyGeneratedPurposeCommentary(testData.asIsCommentary);
         });

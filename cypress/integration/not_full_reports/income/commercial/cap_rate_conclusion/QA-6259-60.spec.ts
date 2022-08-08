@@ -13,8 +13,8 @@ describe("Validation of Market Values Amount and Per SF for AS IS reports",
             createReport(testData.reportCreationData);
 
             cy.stepInfo(`2. Set square foot analysis and value for it; 
-            set commercial and residential units; 
-            set commercial units SF`);
+                        set commercial and residential units; 
+                        set commercial units SF`);
             _NavigationSection.navigateToPropertySummary();
             Property._Summary.selectBasisSquareFootAnalysis(testData.basisForSquareFootAnalysis)
                 .fillBasisSquareFootAnalysis(testData.squareFootAnalysisArea)
@@ -47,7 +47,7 @@ describe("Validation of Market Values Amount and Per SF for AS IS reports",
             Income._CapRateConclusion.verifyFinalValueCalculated(testData.valueConclusionAsIs);
 
             cy.stepInfo(`7. Verify if  As Is Market Value Per SF  is calculated with correct formula 
-            based on selected Basis for Square Foot Analysis`);
+                        based on selected Basis for Square Foot Analysis`);
             Income._CapRateConclusion.verifyMarketValuePerSFCalculated(testData.squareFootAnalysisArea, 
                 testData.valueConclusionAsIs);
         });
