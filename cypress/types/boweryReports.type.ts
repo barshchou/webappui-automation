@@ -3,6 +3,8 @@
 
 
 import * as KeyInfo from '../enums/enumKeys.enum';
+import { CommercialUnits as _CommercialUnits } from './commercial-units.type';
+import { SalesAdjustmentGrid as _SalesAdjustmentGrid } from './sales-adjustment-grid.type';
 import Enums from "../enums/enums";
 
 export namespace BoweryReports {
@@ -47,36 +49,9 @@ export namespace BoweryReports {
     export type PerUnitPerSF = typeof Enums.PER_UNIT_PER_SF[KeyInfo.PerUnitPerSFKeys]
     export type ForecastItemBasis = keyof typeof Enums.EXPENSE_CELL
 
-    export namespace CommercialUnits {
-        export type UseValues = keyof typeof Enums.COMMERCIAL_UNITS_USE_VALUES
-        export type UseTexts = typeof Enums.COMMERCIAL_UNITS_USE_TEXTS[KeyInfo.CommercialUnitsUseTextsKeys]
-        export type Groups = typeof Enums.COMMERCIAL_UNITS_GROUPS[KeyInfo.CommercialUnitsGroupsKeys]
-        export type GradeValues = keyof typeof Enums.COMMERCIAL_UNITS_GRADE_VALUES
-        export type FacadeValues = typeof Enums.COMMERCIAL_UNITS_FACADE_VALUES[KeyInfo.CommercialUnitsFacadeKeys]
-        export type StateValues = typeof Enums.COMMERCIAL_UNITS_STATE_VALUES[KeyInfo.CommercialUnitsStateKeys]
-        export type CeilingHeightValues = keyof typeof Enums.COMMERCIAL_UNITS_CEILING_HEIGHT_VALUES
-        export type LocationValues = typeof Enums.COMMERCIAL_UNITS_LOCATION_VALUES[KeyInfo.CommercialUnitsLocationKeys]
-        export type StreetTypeValues =  
-            typeof Enums.COMMERCIAL_UNITS_STREET_TYPE_VALUES[KeyInfo.CommercialUnitsStreetTypeKeys]
-        export type FloorValues = keyof typeof Enums.COMMERCIAL_UNITS_FLOOR_VALUES
-        export type FrontageValues = keyof typeof Enums.COMMERCIAL_UNITS_FRONTAGE_VALUES
+    export import CommercialUnits = _CommercialUnits
 
-        export type GroupsValues = UseValues | GradeValues | FacadeValues | StateValues
-        | CeilingHeightValues | LocationValues | StreetTypeValues | FrontageValues | FloorValues;
-    }
-
-    export namespace SalesAdjustmentGrid {
-        export type AdjustmentName = typeof Enums.SALES_ADJUSTMENT_GRID[KeyInfo.SalesAdjustmentGridKeys]
-        export type RowsMarketAdjustment = typeof Enums.ROWS_MARKET_ADJUSTMENT[KeyInfo.RowsMarketAdjustmentKeys]
-        export type CumulativePrice = 
-            typeof Enums.SALES_ADJUSTMENT_GRID_CUMULATIVE_PRICE[KeyInfo.SalesAdjustmentGridCumulativePrice]
-        export type CalculationUnits = typeof Enums.CALCULATION_UNITS[KeyInfo.CalculationUnitsKeys]
-        export type SalesAdjustmentGridDiscussions = 
-            typeof Enums.SALES_ADJUSTMENT_GRID_DISCUSSIONS[KeyInfo.SalesAdjustmentGridDiscussionsKeys]
-        export type SalesAdjustmentGridRows = 
-            typeof Enums.SALES_ADJUSTMENT_GRID_ROWS[KeyInfo.SalesAdjustmentGridRowsKeys]
-
-    }
+    export import SalesAdjustmentGrid = _SalesAdjustmentGrid
 
     export type ProFormaAnyIncome = {
         total: string,
