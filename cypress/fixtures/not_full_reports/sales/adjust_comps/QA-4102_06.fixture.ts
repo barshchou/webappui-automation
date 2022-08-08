@@ -1,6 +1,6 @@
 import Enums from "../../../../enums/enums";
 import ReportDataCreator from "../../../data_creator/reportData.creator";
-import { SalesAdjustmentGrid } from "../../../../types/sales-adjustment-grid.type";
+import { BoweryReports } from "../../../../types/boweryReports.type";
 
 const _reportCreationData = ReportDataCreator.getReportData("4102_06", {
     incomeValue: Enums.INCOME_TYPE.both
@@ -22,7 +22,7 @@ export default {
     calculationUnits: [ 
         "Per Residential Units", "PSF", 
         "Per Total Units" 
-    ] as SalesAdjustmentGrid.CalculationUnits[], 
+    ] as BoweryReports.SalesAdjustmentGrid.CalculationUnits[], 
     basis: "Price per Unit",
     cumulativePricePerUnit: _cumulativePricePerUnit,
     compAddress: _compAddress
