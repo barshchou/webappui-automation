@@ -181,7 +181,7 @@ class SummaryActions extends BaseActionsExt<typeof summaryPage> {
     }
 
     fillBasisSquareFootAnalysis(area: number): SummaryActions {
-        summaryPage.basisForSFAnalysisInput
+        summaryPage.basisSquareFootAnalysisArea
             .clear()
             .type(`${area}`)
             .should('have.value', `${numberWithCommas(area)}`);
