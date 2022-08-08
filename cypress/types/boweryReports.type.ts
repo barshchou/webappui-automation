@@ -235,4 +235,9 @@ export namespace BoweryReports {
     export type BasisSquareFootAnalysis = typeof Enums.BASIS_SQUARE_FOOT_ANALYSIS[KeyInfo.BasisSquareFootAnalysis]
     export type BasisSquareFootAnalysisTexts =
         typeof Enums.BASIS_SQUARE_FOOT_ANALYSIS_TEXTS[KeyInfo.BasisSquareFootAnalysisTexts]
+    export type RenovationType = typeof Enums.RENOVATION_TYPE[KeyInfo.RenovationType]
+    export type ValueConclusionName = typeof Enums.VALUE_CONCLUSION_NAME[KeyInfo.ValueConclusionName]
+    export type ValueConclusionKeys = keyof typeof Enums.VALUE_CONCLUSION_NAME
+    export type UnitIncomeType = typeof Enums.UNIT_INCOME_TYPE[KeyInfo.UnitIncomeType]
+    export type RentLossType = typeof  Enums.RENT_LOSS_TYPE[KeyInfo.RentLossType]
 }

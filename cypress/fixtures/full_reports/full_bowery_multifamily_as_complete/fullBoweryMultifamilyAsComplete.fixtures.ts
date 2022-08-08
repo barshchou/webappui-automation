@@ -407,7 +407,7 @@ const zoningDescriptionParkingFixture = () => {
 
 const prospectiveRenovationsFixture = () => {
     return {
-        dropValue: "Renovation",
+        dropValue: Enums.RENOVATION_TYPE.renovation,
         period: 12,
         totalAmount: 106000,
         commentary: "The buyer reported a total prospective renovation budget of $106,000.00. " +
@@ -1441,5 +1441,10 @@ export default {
     highestBestUse: highestBestUseData(),
     unitInspection: unitInspectionData(),
     capRateDiscussion: capRateDiscussionData(),
-    insurableReplacementCost: insurableReplacementCostData()
+    insurableReplacementCost: insurableReplacementCostData(),
+    valueConclusionAsComplete: Enums.VALUE_CONCLUSION_NAME.asComplete,
+    valueConclusionAsStabilized: Enums.VALUE_CONCLUSION_NAME.asStabilized,
+    valueConclusionAsIs: Enums.VALUE_CONCLUSION_NAME.asIs,
+    valueConclusionKeyAsComplete: Object.keys(Enums.VALUE_CONCLUSION_NAME)[2] as BoweryReports.ValueConclusionKeys,
+    valueConclusionKeyAsStabilized: Object.keys(Enums.VALUE_CONCLUSION_NAME)[1] as BoweryReports.ValueConclusionKeys,
 };
