@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-var-requires */
-/* eslint-disable @typescript-eslint/no-namespace */
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import { recordProxiedRequests } from "../../utils/intercept.utils";
 import { recordDOMSnapshot } from "../utils/snapshot.utils";

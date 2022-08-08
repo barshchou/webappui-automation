@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-namespace */
-
 /**
  * TASK: [QA-6470] Refactor types with keys
  */

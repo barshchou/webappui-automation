@@ -39,6 +39,7 @@
       "curly": "warn",
       "default-case":"warn",
       "max-len": ["warn", { "code": 120 }],
-      "multiline-comment-style": "warn"
+      "multiline-comment-style": "warn",
+      "@typescript-eslint/no-namespace":"off"
     }
 }
