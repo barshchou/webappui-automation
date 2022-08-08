@@ -10,8 +10,8 @@ const reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreato
 
 const sortSalesCompsDateSold = Enums.SORT_VALUES.dateSold;
 const salePeriodValue = Enums.SALE_PERIOD_VALUES.lastThreeMonths;
-const radioButtonSaleConditionArms = 'armsLength';
-const radioButtonSaleConditionNonArms = 'nonArmsLength';
+const radioButtonSaleConditionArms = Enums.SALE_CONDITION.armsLength;
+const radioButtonSaleConditionNonArms = Enums.SALE_CONDITION.nonArmsLength;
 
 const comparableFixtureManual = {
     address1: "388 Greenwich Street, New York, NY",
