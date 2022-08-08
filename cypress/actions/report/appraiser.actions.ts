@@ -27,6 +27,18 @@ class AppraiserActions extends BaseActionsExt<typeof appraiserPage> {
         appraiserPage.personallyInspectedCheckbox(appraiserName).should('have.value', `${enabled}`);
         return this;
     }
+
+    checkPersonallyInspected(appraiserName: string, isCheck = true): AppraiserActions {
+        const locator =  appraiserPage.personallyInspectedCheckbox(appraiserName);
+        isCheck ? locator.check().should("have.value", "true") : locator.uncheck().should("have.value", "false");
+        return this;
+    }
+
+    checkSignReport(appraiserName: string, isCheck = true): AppraiserActions {
+        const locator = appraiserPage.appraiserSignCheckbox(appraiserName);
+        isCheck ? locator.check().should("have.value", "true") : locator.uncheck().should("have.value", "false");
+        return this;
+    }
 }
 
 export default new AppraiserActions(appraiserPage);
