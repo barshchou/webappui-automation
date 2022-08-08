@@ -12,7 +12,7 @@ const _newCompPropertyInfoData = {
 const _newCompSaleInfoData = {
     buyerGrantee: "Test and CO",
     sellerGrantor: "Test inc",
-    saleStatus: enums.SALE_STATUSES.transaction
+    saleStatus: enums.SALE_STATUSES.transaction,
     deedSalePrice: "10000"
 };
 
