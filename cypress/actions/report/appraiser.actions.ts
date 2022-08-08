@@ -22,6 +22,11 @@ class AppraiserActions extends BaseActionsExt<typeof appraiserPage> {
         appraiserPage.appraiserSignCheckbox(appraiserFullName).should('have.value', `${enabled}`);
         return this;
     }
+
+    verifyPersonallyInspectedCheckbox(appraiserName: string, enabled: boolean): AppraiserActions {
+        appraiserPage.personallyInspectedCheckbox(appraiserName).should('have.value', `${enabled}`);
+        return this;
+    }
 }
 
 export default new AppraiserActions(appraiserPage);

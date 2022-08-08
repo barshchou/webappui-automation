@@ -17,6 +17,11 @@ class AppraiserPage extends BasePage {
         return cy.xpath(`//*[@data-qa='fullName'][.='${appraiserName}']` + 
         `/following::*[@data-qa='signReport-checkbox']//input`);
     }
+
+    personallyInspectedCheckbox(appraiserName: string) {
+        return cy.xpath(`//*[@data-qa='fullName'][.='${appraiserName}']` +
+        `/following::*[@data-qa='inspected-checkbox']//input`);
+    }
 }
 
 export default new AppraiserPage();
