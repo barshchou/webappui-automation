@@ -53,7 +53,7 @@ conditionalDescribe(`[QA-5163] [QA-5164] [Sales > Find Comps] "Date Sold" sortin
         Sales._FindComps.Page.sortSalesCompsSelectValue.should('contain', testData.sortSalesCompsDateSold);
         Sales._FindComps.checkSalesCompSortedByDateSold();
 
-        cy.stepInfo(`3. Check comps order when user changes 'Sale status' `);
+        cy.stepInfo(`3. Check comps order when user changes 'Sale status'`);
         Sales._FindComps.openDetailsModal(testData.comparableFixtureManual.address1)
             .SalesCompDetails.openSaleInformationForm();
         Sales._FindComps.selectDropdownOptionNewComp(Sales._FindComps.Page.SaleStatusDropdown, 

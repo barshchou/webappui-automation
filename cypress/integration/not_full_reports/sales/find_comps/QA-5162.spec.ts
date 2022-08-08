@@ -54,7 +54,7 @@ conditionalDescribe(`[QA-5162] [Sales > Find Comps] "Date Sold" sorting is updat
             });
 
             cy.stepInfo(`6. Selects Custom sorting, rearranges comps and selects Date Sold sorting again + Verify that 
-                         "Date Sold" option in Sort dropdown is correctly applied after each comp removing`);
+                         "Date Sold" option in Sort dropdown is correctly applied after each comp rearranging`);
             Sales._FindComps.selectedCompsSetSort(testData.sortSalesCompsCustom)
                 .Page.sortSalesCompsSelectValue.should('contain', testData.sortSalesCompsCustom);
             Sales._FindComps.moveComparableByDnD(Sales._FindComps.Page.selectorDraggableElement, 2, "down", 4)
