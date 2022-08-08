@@ -39,6 +39,11 @@ class AppraiserActions extends BaseActionsExt<typeof appraiserPage> {
         isCheck ? locator.check().should("have.value", "true") : locator.uncheck().should("have.value", "false");
         return this;
     }
+
+    removeAppraiser(appraiserName: string): AppraiserActions {
+        appraiserPage.removeAppraiserBtn(appraiserName).click().should("not.exist");
+        return this;
+    }
 }
 
 export default new AppraiserActions(appraiserPage);
