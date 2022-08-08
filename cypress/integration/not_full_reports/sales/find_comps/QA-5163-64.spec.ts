@@ -58,7 +58,6 @@ conditionalDescribe(`[QA-5163] [QA-5164] [Sales > Find Comps] "Date Sold" sortin
             .SalesCompDetails.openSaleInformationForm();
         Sales._FindComps.selectDropdownOptionNewComp(Sales._FindComps.Page.SaleStatusDropdown, 
             testData.comparableFixtureManual.saleStatusUnderContract)
-        //TODO explore, does step below we need because of bug with Sale Condition
             .SaleInfo.checkRadioButtonSaleCondition(testData.radioButtonSaleConditionNonArms)
             .saveChangesOnDone();
         Sales._FindComps.SalesCompDetails.saveCompChanges();
@@ -68,9 +67,7 @@ conditionalDescribe(`[QA-5163] [QA-5164] [Sales > Find Comps] "Date Sold" sortin
             .SalesCompDetails.openSaleInformationForm();
         Sales._FindComps.selectDropdownOptionNewComp(Sales._FindComps.Page.SaleStatusDropdown, 
             testData.comparableFixtureManual.saleStatusTransaction)
-        //TODO explore, does step below we need because of bug with Sale Condition
-            .SaleInfo.checkRadioButtonSaleCondition(testData.radioButtonSaleConditionNonArms)
-            .saveChangesOnDone();
+            .SaleInfo.saveChangesOnDone();
         Sales._FindComps.SalesCompDetails.saveCompChanges();
         Sales._FindComps.checkSalesCompSortedByDateSold();
 
