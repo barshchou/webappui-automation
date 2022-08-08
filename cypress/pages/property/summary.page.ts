@@ -60,10 +60,6 @@ class PropertySummaryPage extends BasePage {
 
     get saveExportEditButton() { return cy.xpath("//button[.='Save'][not(@data-qa='form-save-btn')]"); }
 
-    getCheckedSquareFootAnalysis(number = 0) {
-        return cy.get("[data-qa='basisForSFAnalysis-radio-group'] label").eq(number).children().eq(0);
-    }
-
     get basisForSFAnalysisInput() { return cy.get("[name='basisForSFAnalysisValue']"); }
 
     basisSquareFootAnalysis(basis: BoweryReports.BasisSquareFootAnalysis) { 

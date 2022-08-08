@@ -15,8 +15,8 @@ describe(`[QA-5882_83_85] Square Foot row in Tax Liability grid is displayed acc
             let normalIndex = index + 1;
             cy.stepInfo(`2.${normalIndex}. Navigate to  Property -> Summary form`);
             _NavigationSection.navigateToPropertySummary();
-            Property._Summary.checkSquareFootAnalysis(radio, index);
-            if (radio !== "GBA") { Property._Summary.enterBasisForSFAnalysisInput(testData.enterValue); }
+            Property._Summary.selectBasisSquareFootAnalysis(radio);
+            if (radio !== "GBA") { Property._Summary.fillBasisSquareFootAnalysis(testData.enterValue); }
            
             cy.stepInfo(`3.${normalIndex}. Navigate to Income -> Tax Info`);
             _NavigationSection.navigateToTaxInfo();

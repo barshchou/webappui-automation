@@ -9,7 +9,7 @@ export default {
         Object.values(Enums.BASIS_SQUARE_FOOT_ANALYSIS) as BoweryReports.BasisSquareFootAnalysis[],
     featureFlagKey: Enums.FEATURE_FLAG_KEYS.flexibleTaxes,
     commonValue: "2,124,441",
-    enterValue: "1,000",
+    enterValue: 1000,
     onFeatureFlag: 0,
     tooltip: "The following text will appear below the Tax Liability table in your export",
 };

@@ -466,9 +466,10 @@ class TaxInfoActions extends BaseActionsExt<typeof taxInfoPage> {
         return this;
     }
 
-    verifyTaxLiabilityItemAndValue(item: string, value: string): TaxInfoActions {
+    verifyTaxLiabilityItemAndValue(item: string, value: string | number): TaxInfoActions {
+        const convertValue = numberWithCommas(value);
         taxInfoPage.getTaxLiabilityRowItem(item).should("exist");
-        taxInfoPage.getTaxLiabilityRowItem(value).should("have.text", value);
+        taxInfoPage.getTaxLiabilityRowItem(convertValue).should("have.text", convertValue);
         return this;
     }
 

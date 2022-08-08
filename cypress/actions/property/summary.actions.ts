@@ -173,17 +173,6 @@ class SummaryActions extends BaseActionsExt<typeof summaryPage> {
         return this;
     }
 
-    checkSquareFootAnalysis(radio: BoweryReports.BasisSquareFootAnalysis, number: number): SummaryActions {
-        summaryPage.basisSquareFootAnalysis(radio).check();
-        summaryPage.getCheckedSquareFootAnalysis(number).invoke("attr", "data-qa").should("eq", "checked");
-        return this;
-    }
-
-    enterBasisForSFAnalysisInput(value: string): SummaryActions {
-        summaryPage.basisForSFAnalysisInput.type(value).should("have.value", numberWithCommas(value));
-        return this;
-    }
-
     selectBasisSquareFootAnalysis(basisSquareFootAnalysis: BoweryReports.BasisSquareFootAnalysis): SummaryActions {
         summaryPage.basisSquareFootAnalysis(basisSquareFootAnalysis)
             .click()
