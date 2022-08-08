@@ -184,7 +184,8 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         this.clickIncomeApproachButton()
             .clickCommercialMenuIfClosed()
             .clickCommercialCompGroups()
-            .submitSaveChangesModal();
+            .submitSaveChangesModal()
+            .verifyProgressBarNotExist();
         return this;
     }
 
@@ -670,6 +671,19 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
 
     clickAppraiserButton(): NavigationSectionActions {
         navigationSectionPage.reportAppraiserButton.click();
+        return this;
+    }
+
+    navigateToRenovation(): NavigationSectionActions {
+        this.clickPropertyButton()
+            .clickRenovationButton()
+            .submitSaveChangesModal()
+            .verifyProgressBarNotExist();
+        return this;
+    }
+
+    clickRenovationButton(): NavigationSectionActions {
+        navigationSectionPage.renovationButton.click();
         return this;
     }
 
