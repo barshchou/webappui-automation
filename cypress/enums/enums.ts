@@ -4,18 +4,7 @@ import leaseStatus from "./lease/leaseStatus.enum";
 import imageType from "./elements/imageType.enum";
 import inputType from "./elements/inputType.enum";
 import unitSF from "./unit/unitSF.enum";
-import commercialUnitsUseValues from "./commercial/commercialUnitsUseValues.enum";
 import perUnitPerSF from "./inputValues/perUnitPerSF.enum";
-import commercialUnitsUseTexts from "./commercial/commercialUnitsUseTexts.enum";
-import commercialUnitsGroups from "./commercial/commercialUnitsGroups.enum";
-import commercialUnitsGradeValues from "./commercial/commercialUnitsGradeValues.enum";
-import commercialUnitsFacadeValues from "./commercial/commercialUnitsFacadeValues.enum";
-import commercialUnitsStateValues from "./commercial/commercialUnitsStateValues.enum";
-import commercialUnitsCeilingHeightValues from "./commercial/commercialUnitsCeilingHeightValues.enum";
-import commercialUnitsLocationValues from "./commercial/commercialUnitsLocationValues.enum";
-import commercialUnitsStreetTypeValues from "./commercial/commercialUnitsStreetTypeValues.enum";
-import commercialUnitsFloorValues from "./commercial/commercialUnitsFloorValues.enum";
-import commercialUnitsFrontageValues from "./commercial/commercialUnitsFrontageValues.enum";
 import organizationAddresseePrefix from "./organization/organizationAddresseePrefix.enum";
 import organizationState from "./organization/organizationState.enum";
 import expensePeriodType from "./expense/expensePeriodType.enum";
@@ -74,6 +63,7 @@ import renovationTypeEnum from "./property/renovationType.enum";
 import valueConclusionEnum from "./property/valueConclusion.enum";
 import unitIncomeTypeEnum from "./unit/unitIncomeType.enum";
 import rentLossTypeEnum from "./rentLossType.enum";
+import commercialUnits from "./commercial/commercial-units";
 
 export default {
     TEMPLATE_TYPE: templateTypesEnum,
@@ -97,17 +87,7 @@ export default {
     INPUT_TYPE: inputType,
     UNIT_SF: unitSF,
     PER_UNIT_PER_SF: perUnitPerSF,
-    COMMERCIAL_UNITS_USE_VALUES: commercialUnitsUseValues,
-    COMMERCIAL_UNITS_USE_TEXTS:  commercialUnitsUseTexts,
-    COMMERCIAL_UNITS_GROUPS: commercialUnitsGroups,
-    COMMERCIAL_UNITS_GRADE_VALUES: commercialUnitsGradeValues,
-    COMMERCIAL_UNITS_FACADE_VALUES: commercialUnitsFacadeValues,
-    COMMERCIAL_UNITS_STATE_VALUES: commercialUnitsStateValues,
-    COMMERCIAL_UNITS_CEILING_HEIGHT_VALUES: commercialUnitsCeilingHeightValues,
-    COMMERCIAL_UNITS_LOCATION_VALUES: commercialUnitsLocationValues,
-    COMMERCIAL_UNITS_STREET_TYPE_VALUES: commercialUnitsStreetTypeValues,
-    COMMERCIAL_UNITS_FLOOR_VALUES: commercialUnitsFloorValues,
-    COMMERCIAL_UNITS_FRONTAGE_VALUES: commercialUnitsFrontageValues,
+    ...commercialUnits,
     ORGANIZATION_ADDRESSEE_PREFIX: organizationAddresseePrefix,
     ORGANIZATION_STATE: organizationState,
     EXPENSE_PERIOD_TYPE: expensePeriodType,
