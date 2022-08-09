@@ -10,6 +10,8 @@ const reportCreationFixture = () => {
 export default {
     reportCreationData: reportCreationFixture(),
     cmsNavigationFlagKey: Enums.FEATURE_FLAG_KEYS.cmsNavigation,
+    reportTextEditorFlagKey: Enums.FEATURE_FLAG_KEYS.reportTextEdit,
+    swotAnalysisFlagKey: Enums.FEATURE_FLAG_KEYS.swotAnalysis,
     featureFlagEnable: 0,
     webContentEditorUsername: Cypress.env(`${Enums.USERS.webappContentEditorUsername}`),
     webContentEditorPassword: Cypress.env(`${Enums.USERS.webappContentEditorPassword}`)
