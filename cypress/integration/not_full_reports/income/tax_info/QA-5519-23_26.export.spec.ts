@@ -1,7 +1,7 @@
 import testData from "../../../../fixtures/not_full_reports/income/tax_info/QA-5519-23_26.fixture";
 import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
-import { Income, ReviewExport } from '../../../../actions/index';
+import { Income, ReviewExport } from '../../../../actions';
 import launchDarklyApi from "../../../../api/launchDarkly.api";
 
 describe("[QA-5519-23_26] Check that rows added in the app are displayed in Tax Info --> Tax Liability", () => {
