@@ -33,7 +33,7 @@ on:
         required: false
       threads:
         type: string
-        description: Number between 1 and 15
+        description: Thread number(between 1 and 15)
         required: false
         default: 15
 
