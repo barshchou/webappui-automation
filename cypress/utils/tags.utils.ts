@@ -48,5 +48,6 @@ export enum Tag {
     rent_reconciliation = "@rent_reconciliation",
     site_description = "@site_description",
     stabilized_rent_roll_summary = "@stabilized_rent_roll_summary",
-    expense_history = "@expense_history"
+    expense_history = "@expense_history",
+    cms = "@cms"
 }
