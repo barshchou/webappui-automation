@@ -61,6 +61,8 @@ import commercialUnits from "./commercial/commercial-units";
 import adjustComps from "./adjustComps";
 
 export default {
+    ...adjustComps,
+    ...commercialUnits,
     TEMPLATE_TYPE: templateTypesEnum,
     INCOME_TYPE: incomeTypesEnum,
     VALUE_CONCLUSION_TYPE: valueConclusionTypesEnum,
@@ -82,7 +84,6 @@ export default {
     INPUT_TYPE: inputType,
     UNIT_SF: unitSF,
     PER_UNIT_PER_SF: perUnitPerSF,
-    ...commercialUnits,
     ORGANIZATION_ADDRESSEE_PREFIX: organizationAddresseePrefix,
     ORGANIZATION_STATE: organizationState,
     EXPENSE_PERIOD_TYPE: expensePeriodType,
@@ -101,14 +102,11 @@ export default {
     ENV_LAUNCH_DARKLY: envLaunchDarkly,
     MENU_LINKS: menuLinksNamesEnum,
     USER_ROLES: rolesEnum,
-    ...adjustComps,
     BOWERY_OFFICES: boweryOfficesEnum,
-
     REPORT_STATUS: reportStatusEnum,
     BOND_TYPES: bondTypesEnum,
     EXPENSES_CARD_NAMES: expensesForecastCardNamesEnum,
     REIMBURSEMENT_COLUMN_ID: reimbursementColumnsIdEnum,
-
     CALCULATION_TYPE: calculationTypesEnum,
     SALE_PERIOD_VALUES: salePeriodValuesEnum,
     SORT_VALUES: sortValues,
@@ -117,8 +115,6 @@ export default {
     SALE_STATUSES: saleStatuses,
     FILE_SELECTION_NAMES: fileSelectionNamesEnum,
     PROPERTY_DISCUSSION_NAMES: discussionNamesEnum,
-
-    
     BASIS_SQUARE_FOOT_ANALYSIS: basisSquareFootAnalysisEnum,
     BASIS_SQUARE_FOOT_ANALYSIS_TEXTS: basisSquareFootAnalysisTextsEnum,
     COMPPLEX_ENUM: compplex,
