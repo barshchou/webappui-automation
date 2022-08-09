@@ -17,11 +17,11 @@ describe("Default selection on Stabilized Rent Roll table is the same selection 
         });
 
         it(`[QA-5918] Residential Unit Distribution Summary is generated according to selected 
-        Basis for Square Foot Analysis if Per Unit Square Footage is unknown`, () => {
+            Basis for Square Foot Analysis if Per Unit Square Footage is unknown`, () => {
             testData.squareFootAnalysisFixture.forEach((_, index) => {
                 cy.stepInfo(`Precondition: Select any option as Basis of Square Foot Analysis 
-                        and fill in square foot field with valid numeric value.
-                        1. Make sure there is at least one residential unit`);
+                            and fill in square foot field with valid numeric value.
+                            1. Make sure there is at least one residential unit`);
                 _NavigationSection.navigateToPropertySummary();
                 Property._Summary.enterNumberOfResUnits(testData.residentialUnits.length)
                     .selectBasisSquareFootAnalysis(testData.squareFootAnalysisFixture[index].basis);
@@ -37,12 +37,12 @@ describe("Default selection on Stabilized Rent Roll table is the same selection 
                 Income._Residential.InPlaceRentRoll.verifyPerUnitSFRadioCheck(false, true);
 
                 cy.stepInfo(`4. Go to Income > Residential > Stabilized Rent Roll Summary > 
-                        Discussion tab > Residential Unit Distribution Summary comment`);
+                            Discussion tab > Residential Unit Distribution Summary comment`);
                 _NavigationSection.navigateToResidentialStabilizedRentRollSummary();
                 Income._Residential.StabRentRollSummary.openDiscussionTab();
 
                 cy.stepInfo(`5. Verify comment is generated correctly based on selected 
-                        Basis for Square Foot Analysis and template`);
+                            Basis for Square Foot Analysis and template`);
                 Income._Residential.StabRentRollSummary
                     .verifyDistributionSummary(
                         testData.squareFootAnalysisFixture[index].distributionSummaryNoSquareFootage);
@@ -50,11 +50,11 @@ describe("Default selection on Stabilized Rent Roll table is the same selection 
         });
 
         it(`[QA-5919] Residential Unit Distribution Summary is generated according to selected Basis for Square 
-        Foot Analysis if Per Unit Square Footage is known`, () => {
+            Foot Analysis if Per Unit Square Footage is known`, () => {
             testData.squareFootAnalysisFixture.forEach((_, index) => {
                 cy.stepInfo(`Precondition: Select any option as Basis of Square Foot Analysis 
-                        and fill in square foot field with valid numeric value.
-                        1. Make sure there is at least one residential unit`);
+                            and fill in square foot field with valid numeric value.
+                            1. Make sure there is at least one residential unit`);
                 _NavigationSection.navigateToPropertySummary();
                 Property._Summary.enterNumberOfResUnits(testData.residentialUnits.length)
                     .selectBasisSquareFootAnalysis(testData.squareFootAnalysisFixture[index].basis);
@@ -71,12 +71,12 @@ describe("Default selection on Stabilized Rent Roll table is the same selection 
                     .verifyPerUnitSFRadioCheck(true, true);
 
                 cy.stepInfo(`4. Go to Income > Residential > Stabilized Rent Roll Summary > 
-                        Discussion tab > Residential Unit Distribution Summary comment`);
+                            Discussion tab > Residential Unit Distribution Summary comment`);
                 _NavigationSection.navigateToResidentialStabilizedRentRollSummary();
                 Income._Residential.StabRentRollSummary.openDiscussionTab();
 
                 cy.stepInfo(`5. Verify comment is generated correctly based on selected 
-                        Basis for Square Foot Analysis and template`);
+                            Basis for Square Foot Analysis and template`);
                 Income._Residential.StabRentRollSummary
                     .verifyDistributionSummary(
                         testData.squareFootAnalysisFixture[index].distributionSummaryYesSquareFootage);
