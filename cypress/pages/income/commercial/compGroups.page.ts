@@ -21,6 +21,15 @@ class CompGroupsPage extends BasePage {
     get draggablePlaceholder() { 
         return cy.xpath(`//*[@data-qa="unsorted_group"]//td[contains(text(), 'Drop any rent roll unit here')]`); 
     }
+
+    rentPerSFMonthLabel(compGroupName: string) { 
+        return cy.xpath(`//*[@data-qa="${compGroupName}-comp-group"]//th[.='Rent Per SF/Month']`); 
+    }
+
+    rentCell(compGroupName = "Unsorted", index = 0) { 
+        return cy.xpath(`//*[@data-qa="${compGroupName}-comp-group"]` + 
+        `//tr[@data-qa="row-${index}"]/td[@data-qa="rent-cell"]`);
+    }
 }
 
 export default new CompGroupsPage();

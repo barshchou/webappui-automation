@@ -49,5 +49,6 @@ export enum Tag {
     site_description = "@site_description",
     stabilized_rent_roll_summary = "@stabilized_rent_roll_summary",
     final = "@final",
-    swot_analysis = "@swot_analysis"
+    swot_analysis = "@swot_analysis",
+    cms = "@cms"
 }

@@ -11,8 +11,9 @@ class ExpenseForecastPage extends BasePage {
 
     get fuelCard() { return cy.get("[data-qa=fuel-forecast-item] > div").last(); }
 
-    get repairsAndMaintenanceCard() { return cy.get("[data-qa=repairsMaintenance-forecast-item] > div").last(); }
+    get repairsAndMaintenanceCard() { return cy.get("[data-qa=repairsAndMaintenance-forecast-item] > div").last(); }
 
+    // TODO: ask developers to restore old locators with expense names instead of hardcoded "customExpenses[0,1,2...]"
     /**
      * If card is default - locator gets forecast card name 
      * (default names are contained in expensesForecastCardNames.enum.ts) for qa-data attribute. 
@@ -20,7 +21,7 @@ class ExpenseForecastPage extends BasePage {
      * changes it (according to the rule from webapp) for qa-data attribute 
      */
     forecastItemCardFull(forecastItem: string, custom = false) {
-        return !custom ? cy.get(`[data-qa=${forecastItem}-forecast-item]`) :
+        return !custom ? cy.get(`[data-qa='${forecastItem}-forecast-item']`) :
             cy.get(`[data-qa=${Cypress._.camelCase(Cypress._.toLower(Cypress._
                 .replace(forecastItem, "&", "And")))}-forecast-item]`);
     }

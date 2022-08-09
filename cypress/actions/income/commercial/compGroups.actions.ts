@@ -1,3 +1,4 @@
+import { numberWithCommas } from './../../../../utils/numbers.utils';
 import compGroupsPage from "../../../pages/income/commercial/compGroups.page";
 import BaseActionsExt from "../../base/base.actions.ext";
 
@@ -73,6 +74,16 @@ class CompGroupsActions extends BaseActionsExt<typeof compGroupsPage> {
 
     verifyAllItemsDragged(): CompGroupsActions {
         compGroupsPage.draggablePlaceholder.should('exist');
+        return this;
+    }
+
+    verifyCompGroupRentLabel(compGroupName = "Unsorted"): CompGroupsActions {
+        compGroupsPage.rentPerSFMonthLabel(compGroupName).should('exist');
+        return this;
+    }
+
+    verifyRentBasisDisplayedWithDecimals(unitRent: number, index = 0, compGroupName = "Unsorted"): CompGroupsActions {
+        compGroupsPage.rentCell(compGroupName, index).should('have.text', `$${numberWithCommas(unitRent.toFixed(2))}`);
         return this;
     }
 }

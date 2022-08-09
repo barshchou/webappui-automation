@@ -72,6 +72,6 @@ describe("Adjusted Price per Residential Unit in Sales Adjustment Grid is calcul
                 .clickAddOtherAdjustmentButton()
                 .enterOtherAdjustmentByColumn(testData.comparable.otherAdjustment)
                 .enterPropertyRightsByColumn(testData.comparable.propertyRights)
-                .verifyAdjustedPriceByColumn();
+                .verifyAdjustedPriceByColumn(0, true);
         });
     });

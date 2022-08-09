@@ -17,8 +17,8 @@ describe("[QA-5179_81_83] Export column order both assessment psf and assessment
             _NavigationSection.navigateToTaxInfo();
 
             cy.stepInfo("3. Click Add button on the Taxable Assessed Value card");
-            Income._TaxInfo.clickAddNewRowButton()
-                .clickAddNewRowButton("Add Special Assessment");
+            Income._TaxInfo.clickAddAdditionalTaxRate()
+                .clickAddSpecialAssessmentRate();
 
             cy.stepInfo("4. Check Per Unit");
             Income._TaxInfo.checkBasisByValue(testData.checkValue);
