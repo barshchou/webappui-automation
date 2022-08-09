@@ -86,5 +86,5 @@ const _valuationDateFixture: BoweryReports.KeyInfoDateType = {
 export default {
     reportCreationDataFixture: reportCreationDataFixture(),
     inspectionDate: _inspectionDateFixture,
-    valuationDate: _valuationDateFixture,
+    valuationDate: _valuationDateFixture
 };
