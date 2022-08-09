@@ -32,6 +32,11 @@ class ExpenseHistoryPage extends BasePage {
     get addExpenseCategoryButton() { return cy.get("[data-qa=add-category-btn]"); }
 
     get newCategoryNameInput() { return cy.get("[data-qa=expenseName-form-control] input"); }
+
+    getDeleteExpenseButton(cellName?: string) {
+        const lookFor = cellName ? `=${cellName}` : "";
+        return cy.get(`[row-id${lookFor}] button`);
+    }
 }
 
 export default new ExpenseHistoryPage();

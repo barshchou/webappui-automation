@@ -282,7 +282,40 @@ class ExpenseHistoryActions extends BaseActionsExt<typeof expenseHistoryPage> {
             .enterNewCategoryName(categoryName)
             .verifyNewCategoryEnteredName(categoryName)
             .Page.formAddButton().click();
-        this.verifyCategoryExists(toCamelCase(categoryName));
+        this.verifyCategoryExists(toCamelCase(categoryName))
+            .verifyDeleteButtonExists(toCamelCase(categoryName));
+        return this;
+    }
+
+    /**
+     * @param category If this parameter passed, will delete specific expense, if not - will delete all deletable
+     * expenses
+     */
+    deleteOperatingExpense(category?: string): ExpenseHistoryActions {
+        if (category) {
+            expenseHistoryPage.getDeleteExpenseButton(category).click();
+            expenseHistoryPage.getExpenseRowByName(category).should("not.exist");
+        } else {
+            expenseHistoryPage.getDeleteExpenseButton().as("deleteButtons");
+            cy.get("@deleteButtons").then(deleteButtons => {
+                for (let i = 0; i < deleteButtons.length; i++) {
+                    cy.get("@deleteButtons").eq(0).then(currentButton => {
+                        cy.wrap(currentButton).parents("[row-id]").then(el => {
+                            const rowId = el.attr("row-id");
+                            cy.wrap(currentButton).click();
+                            expenseHistoryPage.getExpenseRowByName(rowId).should("not.exist");
+                        });
+                    });
+                }
+            });
+        }
+
+        return this;
+    }
+
+    verifyDeleteButtonExists(category, isExists = true): ExpenseHistoryActions {
+        const matcher = isExists ? "exist" : "not.exist";
+        expenseHistoryPage.getDeleteExpenseButton(category).should(matcher);
         return this;
     }
 }
