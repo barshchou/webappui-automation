@@ -160,13 +160,20 @@ class CommercialUnitsActions extends BaseActionsExt<typeof commercialUnitsPage> 
         return this;
     }
 
+    //Action is not relevant anymore
     clickEditDiscussionButton(): CommercialUnitsActions {
         this.Page.formEditBtn().click({ force: true });
         return this;
     }
 
+    activateTextAreaInput(): CommercialUnitsActions {
+        this.Page.commentaryText.focus().realClick({ clickCount: 2, position: "bottomRight" }).should("be.focused");
+        return this;
+    }
+
     editDiscussionTextArea(value: string, clearText = true): CommercialUnitsActions {
-        clearText ? this.Page.commentaryText.clear().type(value) :
+        clearText ? this.Page.commentaryText.focus().clear({ force: true })
+            .realClick({ clickCount: 2, position: "bottomRight" }).focus().clear({ force: true }).focus().type(value) :
             this.Page.commentaryText.type(value);
         return this;
     }
