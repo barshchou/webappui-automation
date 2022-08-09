@@ -28,7 +28,8 @@ describe(`Verify the commentary functionality`,
             cy.restoreLocalStorage();
         });
 
-        it("[QA-4589]", () => {
+        //TODO test-case must be updated
+        it.skip("[QA-4589]", () => {
             cy.stepInfo("1. Click on the Edit button and modify commentary and save changes.");
             Income._CommercialManager.StabilizedRentRoll.clickEditDiscussionButton()
                 .editDiscussionTextArea(testData.textUpdateValue)
@@ -36,14 +37,18 @@ describe(`Verify the commentary functionality`,
                 .clickSaveDiscussionButton();
         });
 
+        //TODO test-case must be updated
         it("[QA-4594]", () => {
             cy.stepInfo("1. Verify that commentary 'Modified' label appears");
-            Income._CommercialManager.StabilizedRentRoll.verifyModifiedLabelExist();
+            Income._CommercialManager.StabilizedRentRoll.activateTextAreaInput()
+                .editDiscussionTextArea(testData.textUpdateValue)
+                .verifyModifiedLabelExist();
         });
 
         it("[QA-4591]", () => {
             cy.stepInfo("1. Verify commentary revert to original");
-            Income._CommercialManager.StabilizedRentRoll.revertToOriginalCommentary()
+            Income._CommercialManager.StabilizedRentRoll.activateTextAreaInput()
+                .revertToOriginalCommentary()
                 .verifyCommentaryFullText(testData.defaultText);
         });
 

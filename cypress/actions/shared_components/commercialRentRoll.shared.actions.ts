@@ -271,6 +271,8 @@ class CommercialRentRollSharedComponent<T extends CommercialRentRollSharedCompon
     }
 
     clickRevertToOriginalButton(): this {
+        //      this.Page.formRevertToOriginalBtn();
+        cy.pause();
         this.Page.formRevertToOriginalBtn().click();
         this.Page.changesLostModalHeader.should("exist");
         return this;
@@ -314,14 +316,30 @@ class CommercialRentRollSharedComponent<T extends CommercialRentRollSharedCompon
         return this;
     }
 
+    activateTextAreaInput(): this {
+        this.Page.commentaryText.focus().realClick({ clickCount: 2, position: "bottomRight" }).should("be.focused");
+        return this;
+    }
+
     revertToOriginalCommentary(): this {
-        this.clickEditDiscussionButton()
+        this.activateTextAreaInput()
             .clickRevertToOriginalButton()
             .verifyProgressBarNotExist()
             .clickYesRevertButton()
             .clickSaveDiscussionButton();
         return this;
     }
+
+    /*
+     * revertToOriginalCommentary(): this {
+     *     this.clickEditDiscussionButton()
+     *         .clickRevertToOriginalButton()
+     *         .verifyProgressBarNotExist()
+     *         .clickYesRevertButton()
+     *         .clickSaveDiscussionButton();
+     *     return this;
+     * }
+     */
 
     verifyModifiedLabelExist(): this {
         this.Page.modifiedLabel().should('exist');

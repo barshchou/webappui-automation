@@ -61,6 +61,8 @@ class StabilizedRentRollActions extends CommercialRentRollSharedComponent<typeof
         return this;
     }
 
+    
+
 }
 
 export default new StabilizedRentRollActions(stabRentRollPage);
