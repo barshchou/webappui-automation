@@ -268,13 +268,19 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
      * Adds new Residential/Commercial rent loss with provided value conclusion value, 
      * unit income type and amount of unit required to be checked for rent loss.
      */
-    addNewRentLoss(unitIncomeType: BoweryReports.UnitIncomeType, unitsNumber: number, 
-        valueConclusion: BoweryReports.ValueConclusionName): CapRateConclusionActions {
+    addNewRentLoss(
+        unitIncomeType: BoweryReports.UnitIncomeType, 
+        unitsNumber: number, 
+        conclusionValue: BoweryReports.ConclusionValue, 
+        valueConclusionName?: BoweryReports.ValueConclusionName): CapRateConclusionActions {
         this.clickAddRentLoss(unitIncomeType);
-        capRateConclusionPage
-            .valueConclusionSwitcher(valueConclusion)
-            .click()
-            .should("have.attr", "aria-pressed", "true");
+
+        if (conclusionValue == enums.VALUE_CONCLUSION_TYPE.AS_COMPLETE) {
+            capRateConclusionPage
+                .valueConclusionSwitcher(valueConclusionName)
+                .click()
+                .should("have.attr", "aria-pressed", "true");
+        }
 
         for (let index = 0; index < unitsNumber; index++) {
             this.checkRentLossCheckboxByRow(index);
@@ -285,13 +291,13 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
     }
 
     /**
-     * Verifies Prospective Market Value As Complete
+     * Verifies Market Value As Complete or As Is based on report type (As Complete or As Stabilized)
      * Sets all aliases for As Stablilized rent losses, commission, entrepreneur profit.
      * Gets all aliases that were set and check As Complete value by formula:
      *   [As Stabilized Amount] - [Sum of Rent Losses] - [Commission Fee] - 
      *   (([Sum of Rent Losses] + [Commission Fee]) * Entrepreneur Profit)
      */
-    verifyProspectiveMarketValueAsCompleteCalculated(valueConclusionKey: BoweryReports.ValueConclusionKeys, 
+    verifyProspectiveMarketValueAsIsAsCompleteCalculated(valueConclusionKey: BoweryReports.ValueConclusionKeys, 
         conclusionValueName: BoweryReports.ValueConclusionName): CapRateConclusionActions {
         this.getAllAsStabilizedLossesAliases(valueConclusionKey, enums.VALUE_CONCLUSION_NAME.asStabilized);
         cy._mapGet(capRateConclusionKeys.allAsStabilizedLossesAliases).then(allAsStabilizedLossesAliases => {
@@ -321,7 +327,7 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
     }
 
     /**
-     * Verifies As Is Market Value
+     * Verifies As Is Market Value for ACAS report type
      * Sets all aliases for As Complete rent losses, buyout cost, renovation, entrepreneur profit.
      * Gets all aliases that were set and check As Is Market value by formula:
      *   [As Complete Amount] - [Sum of Rent Losses] - [Buyout Cost] - [Renovation] -
@@ -608,6 +614,11 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
             capRateConclusionPage.marketValuePerSF(conclusionValueName).should('have.text', expectedMarketSFAmount);
         });
         
+        return this;
+    }
+
+    verifyGeneratedPurposeCommentary(expectedText: string): CapRateConclusionActions {
+        capRateConclusionPage.purposeDateOfValueDiscussion.invoke('text').should('deep.equal', expectedText);
         return this;
     }
 }

@@ -24,7 +24,7 @@ jobs:
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
           url: staging
-          spec_file: cypress/integration/not_full_reports/**/*.spec.ts
+          spec_file: cypress/integration/not_full_reports/**
           tags: grep=,grepTags=-@smoke,burn=
           record_key: ${{ secrets.CURRENTS_RECORD_KEY }}
         env:
