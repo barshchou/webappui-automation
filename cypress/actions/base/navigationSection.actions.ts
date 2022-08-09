@@ -732,6 +732,38 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         navigationSectionPage.contentManagementSystemButton.click();
         return this;
     }
+
+    hoverOverContentManagementSystemIcon(): NavigationSectionActions {
+        navigationSectionPage.contentManagementSystemButton.realHover();
+        return this;
+    }
+
+    hoverOverGlobalIcon(): NavigationSectionActions {
+        navigationSectionPage.cmsGlobalIcon.realHover();
+        return this;
+    }
+
+    verifyCmsIconTooltip(): NavigationSectionActions {
+        this.hoverOverContentManagementSystemIcon();
+        navigationSectionPage.cmsTooltip.should('have.text', 'Content Management System');
+        return this;
+    }
+
+    verifyGlobalIconTooltip(): NavigationSectionActions {
+        this.hoverOverGlobalIcon();
+        navigationSectionPage.cmsTooltip.should('have.text', 'Global');
+        return this;
+    }
+
+    verifyBottomPanelButtonsRemoved(): NavigationSectionActions {
+        navigationSectionPage.contentManagementSystemButton.should('not.exist');
+        navigationSectionPage.mapMakerButton.should('not.exist');
+        navigationSectionPage.photoGridExportButton.should('not.exist');
+        navigationSectionPage.dataExtractionToolButton.should('not.exist');
+        navigationSectionPage.whatsNewButton.should('not.exist');
+        navigationSectionPage.helpAndResourcesButton.should('not.exist');
+        return this;
+    }
 }
 
 export default new NavigationSectionActions(navigationSectionPage);
