@@ -57,14 +57,23 @@ Verify the buttons functionality on Property > Commercial Units page.`,
     });
 
     //TODO test-case must be updated
-    it.skip("[QA-4545]", () => {
+    it("[QA-4545]", () => {
         cy.stepInfo(`1. Edit comment and verify that the Revert to Original button becomes enabled.`);
         _NavigationSection.navigateToCommercialUnits();
         Property._CommercialUnits.verifyThatPageIsOpened();
         Property._CommercialUnits.activateTextAreaInput()
             .editDiscussionTextArea(testData.textUpdateValue);
-        Property._CommercialUnits.Page.formRevertToOriginalBtn(0).should('be.enabled')
-            .click(); 
+        //        .Page.commentaryText.scrollIntoView();
+        Property._CommercialUnits.Page.formRevertToOriginalBtn(0).should('be.enabled');
+        /*
+         *  cy.wait(5000);
+         *  Property._CommercialUnits        .Page.commercialUnitsDiscussionTitle.scrollIntoView();
+         *  cy.wait(5000);
+         */
+        Property._CommercialUnits.Page.formRevertToOriginalBtn(0).click(); 
+
+
+
         Property._CommercialUnits.Page.modalWindow.should('be.visible');
         Property._CommercialUnits.Page.formYesRevertBtn.click();
         Property._CommercialUnits.Page.formSaveBtn().click();
