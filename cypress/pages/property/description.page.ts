@@ -37,5 +37,5 @@ class DescriptionPage extends BasePage {
 
     get effectiveAge() { return cy.get("*[name=effectiveAge]"); }
 }
-
+ 
 export default new DescriptionPage();
