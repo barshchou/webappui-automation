@@ -44,6 +44,20 @@ class AppraiserActions extends BaseActionsExt<typeof appraiserPage> {
         appraiserPage.removeAppraiserBtn(appraiserName).click().should("not.exist");
         return this;
     }
+
+    verifyCertificationAssistanceCommentary(): AppraiserActions {
+        appraiserPage.getAllNamesWithCheckSignReportCheckboxes(false).each(item => {
+            appraiserPage.certificationAssistanceText.should("include.text", item.text());
+        });
+        return this;
+    }
+
+    verifyCertificationInspectionCommentary(): AppraiserActions {
+        appraiserPage.getAllNamesWithCheckPersonallyInspectedReportCheckboxes(true).each(item => {
+            appraiserPage.certificationInspectionText.should("include.text", item.text());
+        });
+        return this;
+    }
 }
 
 export default new AppraiserActions(appraiserPage);

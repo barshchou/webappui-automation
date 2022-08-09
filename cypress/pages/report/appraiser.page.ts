@@ -26,6 +26,24 @@ class AppraiserPage extends BasePage {
     removeAppraiserBtn(appraiserName: string) {
         return cy.xpath(`//*[contains(text(), '${appraiserName}')]/following::*[@data-qa='remove-btn']`).eq(0);
     }
+
+    get certificationAssistanceText() { 
+        return cy.get("[data-qa='certificationAssistance.commentary-generated-text']"); 
+    }
+
+    get certificationInspectionText() {
+        return cy.get("[data-qa='certificationInspection.commentary-generated-text']");
+    }
+
+    getAllNamesWithCheckSignReportCheckboxes(isCheck = true) { 
+        return cy.xpath(`//*[@data-qa="signReport-checkbox"]//*[@value='${isCheck}']` + 
+        `/../../../*[@data-qa="fullName"]`); 
+    }
+
+    getAllNamesWithCheckPersonallyInspectedReportCheckboxes(isCheck = true) { 
+        return cy.xpath(`//*[@data-qa="inspected-checkbox"]//*[@value='${isCheck}']` + 
+        `/../../../*[@data-qa="fullName"]`); 
+    }
 }
 
 export default new AppraiserPage();
