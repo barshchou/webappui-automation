@@ -103,6 +103,10 @@ class CapRateConclusionPage extends BasePage {
     get renovationBudgetAmount() {
         return cy.get(`[name="asCompleteLossItems[1].amount"]`);
     }
+
+    get purposeDateOfValueDiscussion() {
+        return cy.xpath(`//h6[.='Purpose & Date of Value Discussion']//following::div[@data-slate-editor][1]`);
+    }
 }
 
 export default new CapRateConclusionPage();
