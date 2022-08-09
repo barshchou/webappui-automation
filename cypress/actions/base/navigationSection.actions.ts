@@ -453,6 +453,13 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         return this;
     }
 
+    navigateToContentManagementSystem(): NavigationSectionActions {
+        this.clickContentManagementSystem()
+            .submitSaveChangesModal()
+            .verifyProgressBarNotExist();
+        return this;
+    }
+
     navigateToLaundry(): NavigationSectionActions {
         this.clickIncomeApproachButton()
             .clickMiscellaneousIncome()
@@ -718,6 +725,11 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
             cy.visit(`${baseUrl}/report/${reportId}/${pageRoute}`);
         });
 
+        return this;
+    }
+
+    clickContentManagementSystem(): NavigationSectionActions {
+        navigationSectionPage.contentManagementSystemButton.click();
         return this;
     }
 }
