@@ -3,6 +3,7 @@ import { isDateHasCorrectFormat } from "../../../utils/date.utils";
 import { getUploadFixture } from "../../../utils/fixtures.utils";
 import BaseActionsExt from "../base/base.actions.ext";
 import { numberWithCommas } from "../../../utils/numbers.utils";
+import { BoweryReports } from "../../types/boweryReports.type";
 
 class KeyInfoActions extends BaseActionsExt<typeof keyInfoPage> {
     enterPropertyRightsAppraisedComment(textToType: string = null, edit = true, save = true, revert = false) {
@@ -62,7 +63,7 @@ class KeyInfoActions extends BaseActionsExt<typeof keyInfoPage> {
         return this;
     }
 
-    enterDateByType(date: Readonly<{type: string, date: string}>, sameInspectionDate = true): KeyInfoActions {
+    enterDateByType(date: BoweryReports.KeyInfoDateType, sameInspectionDate = true): KeyInfoActions { 
         if (!sameInspectionDate) {
             keyInfoPage.inputToCheckMyDateIsDifferent.click();
         }

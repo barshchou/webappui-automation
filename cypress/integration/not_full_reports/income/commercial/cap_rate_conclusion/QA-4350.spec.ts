@@ -14,8 +14,8 @@ describe(`Verify the "Purpose & Date of Value Discussion" generated commentary o
             _NavigationSection.navigateToReportInformation();
             Report._KeyInfo.Actions
                 .checkAllInterestAppraisedByValues(testData.keyInfoPurposeData.interestAppraisedLeaseHold);
-            Report._KeyInfo.enterDateByType({ type: testData.valuationDateType, date: testData.verifyValuationDate })
-                .enterDateByType({ type: testData.inspectionDateType, date: testData.verifyInspectionDate }, false);
+            Report._KeyInfo.enterDateByType(testData.valuationDate)
+                .enterDateByType(testData.inspectionDate, false);
 
             cy.stepInfo(`3. Navigate to Cap Rate Conclusion and verify the "Purpose & Date of Value Discussion" 
                         generated commentary`);
@@ -33,8 +33,8 @@ describe(`Verify the "Purpose & Date of Value Discussion" generated commentary o
                 .checkAsIsMarketInterestByValue(testData.keyInfoPurposeData.interestAppraisedFeeSimple.asIsMarket)
                 .checkAsStabilizedInterestByValue(testData.keyInfoPurposeData.interestAppraisedFeeSimple.asStabilized);
 
-            Report._KeyInfo.enterDateByType({ type: testData.valuationDateType, date: testData.verifyValuationDate })
-                .enterDateByType({ type: testData.inspectionDateType, date: testData.verifyInspectionDate }, false);
+            Report._KeyInfo.enterDateByType(testData.valuationDate)
+                .enterDateByType(testData.inspectionDate, false);
 
             cy.stepInfo(`3. Navigate to Cap Rate Conclusion and verify the "Purpose & Date of Value Discussion" 
                         generated commentary`);
@@ -50,8 +50,8 @@ describe(`Verify the "Purpose & Date of Value Discussion" generated commentary o
             _NavigationSection.navigateToReportInformation();
             Report._KeyInfo.Actions
                 .checkAsIsMarketInterestByValue(testData.keyInfoPurposeData.interestAppraisedLeasedFee.asIsMarket);
-            Report._KeyInfo.enterDateByType({ type: testData.valuationDateType, date: testData.verifyValuationDate })
-                .enterDateByType({ type: testData.inspectionDateType, date: testData.verifyInspectionDate }, false);
+            Report._KeyInfo.enterDateByType(testData.valuationDate)
+                .enterDateByType(testData.inspectionDate, false);
 
             cy.stepInfo(`3. Navigate to Cap Rate Conclusion and verify the "Purpose & Date of Value Discussion" 
                         generated commentary`);
