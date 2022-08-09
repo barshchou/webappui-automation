@@ -3,9 +3,9 @@ import { BoweryReports } from "../../../../../types/boweryReports.type";
 import ReportDataCreator from "../../../../data_creator/reportData.creator";
 
 const reportCreationFixture = () => {
-    return ReportDataCreator.getReportData("5784_90-91", {
+    return ReportDataCreator.getReportData("6259-60", {
         incomeValue: Enums.INCOME_TYPE.both,
-        conclusionValue: Enums.VALUE_CONCLUSION_TYPE.AS_COMPLETE
+        conclusionValue: Enums.VALUE_CONCLUSION_TYPE.AS_IS
     });
 };
 
@@ -36,8 +36,4 @@ export default {
     lessBuyoutCost: 153789,
     valueConclusionKeyAsComplete: Object.keys(Enums.VALUE_CONCLUSION_NAME)[2] as BoweryReports.ValueConclusionKeys,
     valueConclusionKeyAsStabilized: Object.keys(Enums.VALUE_CONCLUSION_NAME)[1] as BoweryReports.ValueConclusionKeys,
-    rentLossTypeResidential: Enums.RENT_LOSS_TYPE.resRentLossItems,
-    rentLossTypeCommercial: Enums.RENT_LOSS_TYPE.commercialRentLossItems,
-    rentLossTypeUndetermined: Enums.RENT_LOSS_TYPE.lossItems,
-    conclusionValueAsComplete: Enums.VALUE_CONCLUSION_TYPE.AS_COMPLETE
 };

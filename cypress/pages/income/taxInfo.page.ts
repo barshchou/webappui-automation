@@ -137,8 +137,16 @@ class TaxInfoPage extends BasePage {
         return cy.xpath(`//*[@role='presentation']//*[contains(text(), '${name}')]/following-sibling::*[2]`);
     }
 
-    getAddNewRowButton(name = "Add Additional Tax Rate") {
-        return cy.xpath(`//button/span[contains(text(), '${name}')]`);
+    getSummaryRowValue(name: string, rowNumber = 0) { 
+        return cy.get(`[data-qa='Current-${name}-value-cell']`).eq(rowNumber); 
+    }
+
+    get addAdditionalTaxRate() {
+        return cy.xpath("//button/span[contains(text(), 'Add Additional Tax Rate')]");
+    }
+
+    get addSpecialAssessment() {
+        return cy.xpath("//button/span[contains(text(), 'Add Special Assessment')]");
     }
 }
 
