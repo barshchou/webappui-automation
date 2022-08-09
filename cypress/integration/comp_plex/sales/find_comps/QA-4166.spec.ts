@@ -49,7 +49,6 @@ describe.skip(
                 testData._textValues.forEach(val => {
                     Sales._FindComps.PropertyDesc.enterGeneratedCommentary(val);
                     Sales._FindComps.PropertyDesc.Page.propertyDescRevertToGenerateBtn.click();
-                    cy.get('[data-qa="revert-to-generated-btn"]').click();
                 });
 
                 Sales._FindComps.PropertyDesc
