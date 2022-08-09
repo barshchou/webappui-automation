@@ -38,19 +38,6 @@ const _interestAppraisedLeaseHold = {
     asStabilized: Enums.INTEREST_APPRAISED.leasehold
 };
 
-const keyInfoPurposeFixture = () => {
-    return {
-        purposeValue: "Loan underwriting",
-        interestAppraisedLeasedFee: _interestAppraisedLeasedFee,
-        interestAppraisedFeeSimple: _interestAppraisedFeeSimple,
-        interestAppraisedLeaseHold: _interestAppraisedLeaseHold
-    };
-};
-
-export const keyInfoPurposeData = () => {
-    return Object.freeze(keyInfoPurposeFixture());
-};
-
 const _asCompleteCommentary = "The purpose of the appraisal is to provide an opinion of As Is Market Value of " + 
 "the Leasehold Interest as of August 22, 2022﻿, the Prospective Market Value Upon Completion of the Leasehold " + 
 "Interest as of August 22, 2022﻿﻿, and the Prospective Market Value Upon Stabilization of " + 
@@ -63,6 +50,29 @@ const _asStabilizedCommentary = "The purpose of the appraisal is to provide an o
 const _asIsCommentary = "The purpose of the appraisal is to provide an opinion of As Is Market Value of " + 
 "the Leased Fee Interest as of August 22, 2022﻿﻿.";
 
+const reportCreationDataFixture = () => {
+    return [
+        { 
+            reportType: reportCreationFixtureAsIs(),
+            valueConclusion: Enums.VALUE_CONCLUSION_NAME.asIs,
+            interestAppraised: _interestAppraisedLeasedFee,
+            commentary: _asIsCommentary
+        },
+        {
+            reportType: reportCreationFixtureAsStabilized(),
+            valueConclusion: Enums.VALUE_CONCLUSION_NAME.asStabilized,
+            interestAppraised: _interestAppraisedFeeSimple,
+            commentary: _asStabilizedCommentary
+        },
+        {
+            reportType: reportCreationFixtureAsComplete(),
+            valueConclusion: Enums.VALUE_CONCLUSION_NAME.asComplete,
+            interestAppraised:  _interestAppraisedLeaseHold,
+            commentary: _asCompleteCommentary
+        }
+    ];
+};
+
 const _inspectionDateFixture: BoweryReports.KeyInfoDateType = {
     type: Enums.DATE_TYPE.inspectionDate,
     date: "08-30-2022"
@@ -74,13 +84,7 @@ const _valuationDateFixture: BoweryReports.KeyInfoDateType = {
 };
 
 export default {
-    reportCreationDataAsIs: reportCreationFixtureAsIs(),
-    reportCreationDataAsStabilized: reportCreationFixtureAsStabilized(),
-    reportCreationDataAsComplete: reportCreationFixtureAsComplete(),
-    keyInfoPurposeData: keyInfoPurposeData(),
+    reportCreationDataFixture: reportCreationDataFixture(),
     inspectionDate: _inspectionDateFixture,
     valuationDate: _valuationDateFixture,
-    asCompleteCommentary: _asCompleteCommentary,
-    asStabilizedCommentary: _asStabilizedCommentary,
-    asIsCommentary: _asIsCommentary
 };
