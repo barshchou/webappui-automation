@@ -51,7 +51,7 @@ jobs:
   Not-full-reports-run:
     runs-on: ubuntu-latest
     container: cypress/browsers:node16.13.2-chrome100-ff98
-    needs: configure-concurrency
+    needs: concurrency
     permissions:
       id-token: write
       contents: read
