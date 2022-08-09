@@ -10,6 +10,14 @@ class ComparableExpensesPage extends BasePage {
     getUnifiedAverageCell(cellName: string) { return cy.get(`[row-id=${cellName}] [col-id=average]`); }
 
     get elementToCheckCellTextSelector() { return "[class=ag-react-container]"; }
+
+    get addCustomExpenseCategoryButton() { return cy.get("[data-qa=add-category-btn]"); }
+
+    getUnifiedRow(rowName: string) {
+        return cy.get(`[row-id=${rowName}] [col-id=name]`);
+    }
+
+    get newCategoryNameInput() { return cy.get("[data-qa=expenseName-form-control] input"); }
 }
 
 export default new ComparableExpensesPage();

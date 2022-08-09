@@ -28,6 +28,10 @@ class ExpenseHistoryPage extends BasePage {
     get removeExpensePeriodButtons() { return cy.get("button [data-icon=close]"); }
 
     getExpenseRowByName(cellName: string) { return cy.get(`[row-id='${cellName}'] [col-id=name]`); }
+
+    get addExpenseCategoryButton() { return cy.get("[data-qa=add-category-btn]"); }
+
+    get newCategoryNameInput() { return cy.get("[data-qa=expenseName-form-control] input"); }
 }
 
 export default new ExpenseHistoryPage();

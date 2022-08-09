@@ -21,3 +21,8 @@ export const isStringContainSubstring = (originString: string, stringToFind: str
 export const normalizeText = (textToNormalize: string): string => {
     return textToNormalize.replaceAll('﻿', '').trim();
 };
+
+export const toCamelCase = (stringToChange: string): string => {
+    const capitalizedAll = uppercaseFirstLetterEachWord(stringToChange).trim().replaceAll(" ", "").replaceAll(",", "");
+    return capitalizedAll.charAt(0).toLowerCase() + capitalizedAll.slice(1);
+};

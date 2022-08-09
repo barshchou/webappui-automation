@@ -6,6 +6,7 @@ import { _mutateArrayInMap } from "../../support/commands";
 import mapKeysUtils from "../../utils/mapKeys.utils";
 import { BoweryReports } from "../../types/boweryReports.type";
 import Enums from "../../enums/enums";
+import { toCamelCase } from "../../../utils/string.utils";
 
 class ExpenseHistoryActions extends BaseActionsExt<typeof expenseHistoryPage> {
 
@@ -65,10 +66,13 @@ class ExpenseHistoryActions extends BaseActionsExt<typeof expenseHistoryPage> {
         return this;
     }
 
-    verifyTotalOpExpensesByColIndex(index = 0): ExpenseHistoryActions {
-        this.setAllOperatingExpensesExceptGrossValuesToMap();
+    verifyTotalOpExpensesByColIndex(index = 0, customExpenses?: string[] | string): ExpenseHistoryActions {
+        this.setOperatingExpensesExceptGrossValuesToMap(index);
+        if (customExpenses) {
+            this.setOperatingExpensesExceptGrossValuesToMap(index, customExpenses);
+        }
         cy._mapGet(mapKeysUtils.allOperatingExpensesValues).then(valuesArray => {
-            const valuesSum = (<[]>valuesArray).reduce((sum, current) => sum + current, 0);
+            const valuesSum = (<number[]>valuesArray).reduce((sum, current) => sum + current, 0);
             const textToBe = `$${numberWithCommas(valuesSum.toFixed(2))}`;
             cy._mapSet(mapKeysUtils.allOperatingExpensesValues, undefined);
             this.verifyTotalOpExpensesTextByColIndex(textToBe, index);
@@ -76,16 +80,30 @@ class ExpenseHistoryActions extends BaseActionsExt<typeof expenseHistoryPage> {
         return this;
     }
 
-    private setAllOperatingExpensesExceptGrossValuesToMap(index = 0): ExpenseHistoryActions {
-        for (let expense of tableExpenseHistoryCellNames.operatingExpensesCellsNamesArray) {
-            if (expense === tableExpenseHistoryCellNames.grossRevenue) {
-                continue;
+    private setOperatingExpensesExceptGrossValuesToMap(index = 0,
+        expensesArray: string[] | string = tableExpenseHistoryCellNames.operatingExpensesCellsNamesArray
+    ): ExpenseHistoryActions {
+        if (Array.isArray(expensesArray)) {
+            for (let expense of expensesArray) {
+                if (expense === tableExpenseHistoryCellNames.grossRevenue) {
+                    continue;
+                }
+                this.setOperatingExpenseValueToMap(expense, index);
             }
-            expenseHistoryPage.getUnifiedEditableAndTotalCells(expense).eq(index).invoke("text").then(expenseText => {
-                const expenseValue = getNumberFromDollarNumberWithCommas(expenseText);
-                _mutateArrayInMap(mapKeysUtils.allOperatingExpensesValues, expenseValue, "Operating expenses");
-            });
+        } else {
+            this.setOperatingExpenseValueToMap(expensesArray, index);
         }
+        return this;
+    }
+
+    private setOperatingExpenseValueToMap(expense, index = 0): ExpenseHistoryActions {
+        expenseHistoryPage.getUnifiedEditableAndTotalCells(expense).eq(index).invoke("text").then(expenseText => {
+            if (expenseText === "") {
+                return;
+            }
+            const expenseValue = getNumberFromDollarNumberWithCommas(expenseText);
+            _mutateArrayInMap(mapKeysUtils.allOperatingExpensesValues, expenseValue, "Operating expenses");
+        });
         return this;
     }
 
@@ -230,6 +248,41 @@ class ExpenseHistoryActions extends BaseActionsExt<typeof expenseHistoryPage> {
 
     clickRemoveExpensePeriodButtonBuColIndex(index = 0): ExpenseHistoryActions {
         expenseHistoryPage.removeExpensePeriodButtons.eq(index).click();
+        return this;
+    }
+
+    clickAddExpenseCategoryButton(): ExpenseHistoryActions {
+        expenseHistoryPage.addExpenseCategoryButton.click();
+        return this;
+    }
+
+    enterNewCategoryName(name: string, isFirstEnter = true): ExpenseHistoryActions {
+        expenseHistoryPage.newCategoryNameInput.should("have.attr", "placeholder", "Enter Custom Expense...")
+            .and("have.attr", "required");
+        expenseHistoryPage.newCategoryNameInput.type(`${name}`);
+        if (isFirstEnter) {
+            cy.get("[role=menuitem]").should("contain.text", `Create "${name}"`);
+        }
+        expenseHistoryPage.newCategoryNameInput.type("{enter}");
+        return this;
+    }
+
+    verifyNewCategoryEnteredName(nameToBe: string): ExpenseHistoryActions {
+        expenseHistoryPage.newCategoryNameInput.should("have.value", nameToBe);
+        return this;
+    }
+
+    verifyCategoryExists(name: string): ExpenseHistoryActions {
+        expenseHistoryPage.getExpenseRowByName(name).should("exist");
+        return this;
+    }
+
+    addNewCategoryAndVerify(categoryName: string): ExpenseHistoryActions {
+        this.clickAddExpenseCategoryButton()
+            .enterNewCategoryName(categoryName)
+            .verifyNewCategoryEnteredName(categoryName)
+            .Page.formAddButton().click();
+        this.verifyCategoryExists(toCamelCase(categoryName));
         return this;
     }
 }
