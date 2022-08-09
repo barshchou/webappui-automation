@@ -271,8 +271,6 @@ class CommercialRentRollSharedComponent<T extends CommercialRentRollSharedCompon
     }
 
     clickRevertToOriginalButton(): this {
-        //      this.Page.formRevertToOriginalBtn();
-        cy.pause();
         this.Page.formRevertToOriginalBtn().click();
         this.Page.changesLostModalHeader.should("exist");
         return this;
