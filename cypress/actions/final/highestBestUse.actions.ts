@@ -183,12 +183,6 @@ class HighestBestUseActions extends BaseActionsExt<typeof highestBestUsePage> {
         return this;
     }
 
-    enterInSelectPropertyType(enterValue: string, elemIndex = 0): HighestBestUseActions {
-        highestBestUsePage.getSelectPropertyType(elemIndex).type(`${enterValue}{enter}`);
-        cy.get(`[data-qa='${enterValue}']`).should("exist");
-        return this;
-    }
-
 }
 
 export default new HighestBestUseActions(highestBestUsePage);

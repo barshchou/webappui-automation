@@ -75,8 +75,6 @@ class HighestBestUsePage extends BasePage {
     get localCheckbox() { return cy.get("[data-qa^=local-checkbox] input"); }
 
     get regionalCheckbox() { return cy.get("[data-qa^=regional-checkbox] input"); }
-
-    getSelectPropertyType(index = 0) { return cy.get("[data-qa='chips-wrapper']").eq(index); }
 }
 
 export default new HighestBestUsePage();

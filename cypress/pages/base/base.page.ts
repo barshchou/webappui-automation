@@ -76,4 +76,6 @@ export default class BasePage {
             return cy.xpath("//span[contains(text(), 'Modified')]");
         }
     }
+
+    getSelectChipsWrapper(index = 0) { return cy.get("[data-qa='chips-wrapper']").eq(index); }
 }
