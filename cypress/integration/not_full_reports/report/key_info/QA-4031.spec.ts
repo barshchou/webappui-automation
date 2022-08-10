@@ -21,8 +21,8 @@ describe("[QA-4031] Verify the export of the report with the Pre-filled Report D
                             - not null
                             - not matching
                             - changed value`);
-                Report._KeyInfo.Page.getDateInputByQA(testData.dateType).should("have.value", value.yield);
-                Report._KeyInfo.enterDateByType({ type: testData.dateType, date: testData.verifyDate });
+                Report._KeyInfo.Page.getDateInputByQA(testData.dueDateFixture.type).should("have.value", value.yield);
+                Report._KeyInfo.enterDateByType(testData.dueDateFixture);
             });
         });
     });

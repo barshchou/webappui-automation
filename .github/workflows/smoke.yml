@@ -21,7 +21,7 @@ on:
         type: string
         description: Spec(s) to be executed
         required: false
-        default: cypress/integration/**/**/*.spec.ts
+        default: cypress/integration/**
       tags:
         type: string
         description: Run test with specific tags (via grep,grepTags,burn)

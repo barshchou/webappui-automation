@@ -240,4 +240,10 @@ export namespace BoweryReports {
     export type ValueConclusionKeys = keyof typeof Enums.VALUE_CONCLUSION_NAME
     export type UnitIncomeType = typeof Enums.UNIT_INCOME_TYPE[KeyInfo.UnitIncomeType]
     export type RentLossType = typeof  Enums.RENT_LOSS_TYPE[KeyInfo.RentLossType]
+    export type DateType = typeof Enums.DATE_TYPE[KeyInfo.DateType]
+
+    export type KeyInfoDateType = {
+        type: BoweryReports.DateType,
+        date: string
+    }
 }

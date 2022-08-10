@@ -30,14 +30,8 @@ const keyInfoPurposeFixture = () => {
 
 const keyInfoEngagementFixture = () => {
     return {
-        dueDate: {
-            type: "dueDate",
-            date: "10-18-2021"
-        },
-        dateOfValuation: {
-            type: "dateOfValuation",
-            date: "10-13-2021"
-        },
+        _dueDateFixture,
+        _valuationDateFixture,
         engagementFileName: "full_reports/full_bowery_multifamily_as_complete/test_engagement.pdf",
     };
 };
@@ -92,7 +86,7 @@ const marketResearchFixture = () => {
         state: "IL",
         macroMarket: "IL-Chicago",
         submarket: "IL-South Chicago",
-        dateOfValuation: keyInfoEngagementFixture().dateOfValuation.date,
+        dateOfValuation: keyInfoEngagementFixture()._dueDateFixture.date,
         marketDate: getTodayDateString(),
         quarter: "Q4"
     };
@@ -1054,6 +1048,21 @@ const capRateDiscussionFixture = () => {
     };
 };
 
+const _inspectionDateFixture: BoweryReports.KeyInfoDateType = {
+    type: Enums.DATE_TYPE.inspectionDate,
+    date: "08-30-2022"
+};
+
+const _valuationDateFixture: BoweryReports.KeyInfoDateType = {
+    type: Enums.DATE_TYPE.dateOfValuation,
+    date: "10-13-2021"
+};
+
+const _dueDateFixture: BoweryReports.KeyInfoDateType = {
+    type: Enums.DATE_TYPE.dueDate,
+    date: "10-18-2021"
+};
+
 const insurableReplacementCostFixture = () => {
     return {
         subjectState: "Illinois",
@@ -1447,4 +1456,7 @@ export default {
     valueConclusionAsIs: Enums.VALUE_CONCLUSION_NAME.asIs,
     valueConclusionKeyAsComplete: Object.keys(Enums.VALUE_CONCLUSION_NAME)[2] as BoweryReports.ValueConclusionKeys,
     valueConclusionKeyAsStabilized: Object.keys(Enums.VALUE_CONCLUSION_NAME)[1] as BoweryReports.ValueConclusionKeys,
+    dueDate: _dueDateFixture,
+    inspectionDate: _inspectionDateFixture,
+    valuationDate: _valuationDateFixture
 };
