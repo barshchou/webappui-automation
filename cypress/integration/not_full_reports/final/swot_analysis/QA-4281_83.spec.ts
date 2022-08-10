@@ -19,24 +19,9 @@ describe("Verify the text in the Opportunities section on the SWOT Analysis page
                         - There has been increased demand for similar assets as investors from prime New York 
                         Metro submarkets seek higher returns increasing pricing for similar assets.
             `);
-            Final._SWOTAnalysis.Page.getSectionTexts(testData.opportunities).then($textarea => {
-                const opportunitiesText = $textarea.toArray().map(el => el.innerHTML);
-                expect(testData.opportunitiesTexts).to.deep.eq(opportunitiesText);
-            });
+            Final._SWOTAnalysis.verifyTextSection(testData.opportunities, testData.opportunitiesTexts);
 
             cy.stepInfo("3. Verify that the text can be changed and saved in the Opportunities section.");
-            Final._SWOTAnalysis.Page.getSectionTexts(testData.opportunities).then($textarea => {
-                $textarea.toArray().forEach(el => {
-                    cy.wrap(el).type(testData.typeValue);
-                });
-                Final._SWOTAnalysis.clickSaveButton();
-            });
-
-            Final._SWOTAnalysis.Page.getSectionTexts(testData.opportunities).then($textarea => {
-                const opportunitiesText = $textarea.toArray().map(el => el.innerHTML);
-                opportunitiesText.forEach(el => {
-                    expect(el).to.contain(testData.typeValue);
-                });
-            });
+            Final._SWOTAnalysis.verifyTextCanBeChanged(testData.opportunities, testData.typeValue);
         });
     });

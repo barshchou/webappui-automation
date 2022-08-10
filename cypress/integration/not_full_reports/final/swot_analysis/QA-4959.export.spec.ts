@@ -24,11 +24,7 @@ describe("Verify the text in the Opportunities section on the SWOT Analysis page
                         uncertainty related to the speed and consistency of the recovery.
                         - Economic uncertainty and potential market instability related to the war in Ukraine.
                         `);
-            Final._SWOTAnalysis.Page.getSectionTexts(testData.threats).then($textarea => {
-                const threatsText = $textarea.toArray().map(el => el.innerHTML);
-                expect(testData.threatsTexts).to.deep.eq(threatsText);
-                _saveDataInFile(threatsText, testData.memoTestDataFile);
-            });
+            Final._SWOTAnalysis.verifyTextSection(testData.threats, testData.threatsTexts, testData.memoTestDataFile);
 
             cy.stepInfo("3. Export the report");
             _NavigationSection.openReviewAndExport();
