@@ -246,4 +246,6 @@ export namespace BoweryReports {
         type: BoweryReports.DateType,
         date: string
     }
+
+    export type ExpenseDataProvider = typeof Enums.EXPENSE_DATA_PROVIDER[KeyInfo.ExpenseDataProvider]
 }

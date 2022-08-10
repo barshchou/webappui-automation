@@ -318,6 +318,16 @@ class ExpenseHistoryActions extends BaseActionsExt<typeof expenseHistoryPage> {
         expenseHistoryPage.getDeleteExpenseButton(category).should(matcher);
         return this;
     }
+
+    checkDataProviderOption(option: BoweryReports.ExpenseDataProvider): ExpenseHistoryActions {
+        expenseHistoryPage.getDataProviderOption(option).click().parent("[data-qa=checked]").should("exist");
+        return this;
+    }
+
+    verifyExpenseHistoryDiscussionText(textToBe: string, isTextArea = false): ExpenseHistoryActions {
+        expenseHistoryPage.getExpenseHistoryDiscussion(isTextArea).should("have.text", textToBe);
+        return this;
+    }
 }
 
 export default new ExpenseHistoryActions(expenseHistoryPage);

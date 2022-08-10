@@ -57,3 +57,4 @@ export type UnitIncomeType = keyof typeof Enums.UNIT_INCOME_TYPE
 export type RentLossType = keyof typeof Enums.RENT_LOSS_TYPE
 export type DateType = keyof typeof Enums.DATE_TYPE
 export type InterestAppraised = keyof typeof Enums.INTEREST_APPRAISED
+export type ExpenseDataProvider = keyof typeof Enums.EXPENSE_DATA_PROVIDER

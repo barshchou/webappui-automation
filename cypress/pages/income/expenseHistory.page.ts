@@ -1,4 +1,5 @@
 import BasePage from "../base/base.page";
+import { BoweryReports } from "../../types/boweryReports.type";
 
 class ExpenseHistoryPage extends BasePage {
 
@@ -36,6 +37,15 @@ class ExpenseHistoryPage extends BasePage {
     getDeleteExpenseButton(cellName?: string) {
         const lookFor = cellName ? `=${cellName}` : "";
         return cy.get(`[row-id${lookFor}] button`);
+    }
+
+    getDataProviderOption(option: BoweryReports.ExpenseDataProvider) {
+        return cy.get(`[name=expenseDataSource][value='${option}']`);
+    }
+
+    getExpenseHistoryDiscussion(isTextArea = false) {
+        const attr = isTextArea ? "name" : "data-qa";
+        return cy.get(`[${attr}^='expenseHistoryDiscussion.commentary']`);
     }
 }
 
