@@ -171,6 +171,12 @@ class CommercialUnitsActions extends BaseActionsExt<typeof commercialUnitsPage> 
         return this;
     }
 
+    inactivateTextAreaInput(): this {
+        this.Page.Header.realClick();
+        this.Page.commentaryText.should('not.be.focused');
+        return this;
+    }
+
     editDiscussionTextArea(value: string, clearText = true): CommercialUnitsActions {
         clearText ? this.Page.commentaryText.focus().clear({ force: true })
             .realClick({ clickCount: 2, position: "bottomRight" }).focus().clear({ force: true }).focus().type(value) :
@@ -193,6 +199,7 @@ class CommercialUnitsActions extends BaseActionsExt<typeof commercialUnitsPage> 
         return this;
     }
 
+    //non actual 
     clickSaveDiscussionButton(): CommercialUnitsActions {
         this.Page.formSaveBtn().click();
         return this;

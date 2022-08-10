@@ -266,7 +266,7 @@ class CommercialRentRollActions extends CommercialRentRollSharedComponent<typeof
     }
 
     inactivateTextAreaInput(): this {
-        this.Page.pageHeader.realClick();
+        this.Page.Header.realClick();
         this.Page.commentaryText.should('not.be.focused');
         return this;
     }
