@@ -19,7 +19,6 @@ class SwotAnalysisActions extends BaseActionsExt<typeof swotAnalysisPage> {
      * @param sectionName Name section with text
      * @param textToBe String array with initial text
      * @param fileName File name to write file
-     * @returns `SwotAnalysisActions`
      */
     verifyTextSection(
         sectionName: string, 
@@ -37,7 +36,6 @@ class SwotAnalysisActions extends BaseActionsExt<typeof swotAnalysisPage> {
      * Type some value in text section then verify that changes apply
      * @param sectionName Name section with text
      * @param typeValue Value to type
-     * @returns `SwotAnalysisActions`
      */
     verifyTextCanBeChanged(sectionName: string, typeValue: string): SwotAnalysisActions {
         swotAnalysisPage.getSectionTexts(sectionName).then($textarea => {
