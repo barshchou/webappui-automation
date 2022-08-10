@@ -272,6 +272,7 @@ class CommercialRentRollSharedComponent<T extends CommercialRentRollSharedCompon
         return this;
     }
 
+    //TODO edit this method
     clickRevertToOriginalButton(): this {
         this.Page.formRevertToOriginalBtn().click();
         this.Page.changesLostModalHeader.should("exist");
@@ -318,12 +319,6 @@ class CommercialRentRollSharedComponent<T extends CommercialRentRollSharedCompon
 
     activateTextAreaInput(): this {
         this.Page.commentaryText.focus().realClick({ clickCount: 2, position: "bottomRight" }).should("be.focused");
-        return this;
-    }
-    
-    inactivateTextAreaInput(): this {
-        this.Page.Header.realClick();
-        this.Page.commentaryText.should('not.be.focused');
         return this;
     }
 

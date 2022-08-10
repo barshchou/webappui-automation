@@ -33,12 +33,6 @@ class KeyInfoActions extends BaseActionsExt<typeof keyInfoPage> {
         return this;
     }
 
-    inactivateTextAreaInput(): KeyInfoActions {
-        this.Page.Header.realClick();
-        this.Page.textBoxPropertyRightsAppraised.should('not.be.focused');
-        this.Page.textBoxDefinitionOfMarketValue().should('not.be.focused');
-        return this;
-    }
 
     enterDefinitionMarketValue(textToType: string = null, edit = true, save = true, revert = false) {
         if (edit === true) { keyInfoPage.definitionOfMarketValueFormEditButton.click(); }

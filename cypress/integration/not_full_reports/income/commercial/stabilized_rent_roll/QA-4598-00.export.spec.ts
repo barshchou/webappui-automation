@@ -33,8 +33,8 @@ new narrative component added through "=" in the Generated Commentary on the Sta
                 .clickNarrativeSuggestions(chip.suggestionName)
                 .verifyCommentaryContainsText(chip.verifySuggest);
         });
-        Income._CommercialManager.StabilizedRentRoll.inactivateTextAreaInput();
-        Income._CommercialManager.StabilizedRentRoll.clickSaveButton()
+        Income._CommercialManager.StabilizedRentRoll.inactivateTextAreaInput()
+            .clickSaveButton()
             .verifyProgressBarNotExist();
 
         _NavigationSection.openReviewAndExport();
@@ -82,8 +82,8 @@ new narrative component added through "=" in the Generated Commentary on the Sta
                 .clickNarrativeSuggestions(chip.suggestionName)
                 .verifyCommentaryContainsText(chip.verifySuggest);
         });
-        Income._CommercialManager.StabilizedRentRoll.inactivateTextAreaInput();
-        Income._CommercialManager.StabilizedRentRoll.clickSaveButton()
+        Income._CommercialManager.StabilizedRentRoll.inactivateTextAreaInput()
+            .clickSaveButton()
             .verifyProgressBarNotExist();
 
 
@@ -134,8 +134,8 @@ new narrative component added through "=" in the Generated Commentary on the Sta
                 .clickNarrativeSuggestions(chip.suggestionName)
                 .verifyCommentaryContainsText(chip.verifySuggest);
         });
-        Income._CommercialManager.StabilizedRentRoll.inactivateTextAreaInput();
-        Income._CommercialManager.StabilizedRentRoll.clickSaveButton()
+        Income._CommercialManager.StabilizedRentRoll.inactivateTextAreaInput()
+            .clickSaveButton()
             .verifyProgressBarNotExist();
 
         _NavigationSection.openReviewAndExport();

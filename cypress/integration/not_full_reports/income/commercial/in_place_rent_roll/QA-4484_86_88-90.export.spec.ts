@@ -59,8 +59,8 @@ describe(`[Income > Commercial > In-Place Rent Roll > Generated Commentary]
                 .clickNarrativeSuggestions(chip.suggestionName)
                 .verifyCommentaryContainsText(chip.verifySuggest);
         });
-        Income._CommercialManager.InPlaceRentRoll.inactivateTextAreaInput();
-        Income._CommercialManager.InPlaceRentRoll.clickSaveButton()
+        Income._CommercialManager.InPlaceRentRoll.inactivateTextAreaInput()
+            .clickSaveButton()
             .verifyProgressBarNotExist();
         
         _NavigationSection.openReviewAndExport();
@@ -113,8 +113,8 @@ describe(`[Income > Commercial > In-Place Rent Roll > Generated Commentary]
                 .clickNarrativeSuggestions(chip.suggestionName)
                 .verifyCommentaryContainsText(chip.verifySuggest);
         });
-        Income._CommercialManager.InPlaceRentRoll.inactivateTextAreaInput();
-        Income._CommercialManager.InPlaceRentRoll.clickSaveButton()
+        Income._CommercialManager.InPlaceRentRoll.inactivateTextAreaInput()
+            .clickSaveButton()
             .verifyProgressBarNotExist();
 
         _NavigationSection.openReviewAndExport();
@@ -169,8 +169,8 @@ describe(`[Income > Commercial > In-Place Rent Roll > Generated Commentary]
                 .clickNarrativeSuggestions(chip.suggestionName)
                 .verifyCommentaryContainsText(chip.verifySuggest);
         });
-        Income._CommercialManager.InPlaceRentRoll.inactivateTextAreaInput();
-        Income._CommercialManager.InPlaceRentRoll.clickSaveButton()
+        Income._CommercialManager.InPlaceRentRoll.inactivateTextAreaInput()
+            .clickSaveButton()
             .verifyProgressBarNotExist();
 
         _NavigationSection.openReviewAndExport();

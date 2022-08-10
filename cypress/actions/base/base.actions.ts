@@ -124,4 +124,9 @@ export default class BaseActions {
         element.then(el => el.hide());
         return this;
     }
+
+    inactivateTextAreaInput() {
+        cy.xpath("//header").realClick();
+        return this;
+    }
 }

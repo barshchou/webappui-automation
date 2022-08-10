@@ -265,11 +265,6 @@ class CommercialRentRollActions extends CommercialRentRollSharedComponent<typeof
         return this;
     }
 
-    inactivateTextAreaInput(): this {
-        this.Page.Header.realClick();
-        this.Page.commentaryText.should('not.be.focused');
-        return this;
-    }
 }
 
 export default new CommercialRentRollActions(rentRollPage);
