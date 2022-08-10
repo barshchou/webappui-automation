@@ -3,7 +3,7 @@ import Income from "../../../../../actions/income/income.manager";
 import NavigationSection from "../../../../../actions/base/navigationSection.actions";
 import { createReport } from "../../../../../actions/base/baseTest.actions";
 
-describe.skip(`Current Commercial Income Discussion > Verify the Revert to Original button and 
+describe(`Current Commercial Income Discussion > Verify the Revert to Original button and 
     'Changes will be lost' functionality`, 
 { tags:[ "@income", "@commercial", "@in_place_rent_roll" ] }, () => {
             
@@ -16,12 +16,15 @@ describe.skip(`Current Commercial Income Discussion > Verify the Revert to Origi
         NavigationSection.navigateToCommercialInPlaceRentRoll()
             .verifyProgressBarNotExist();
         Income.Commercial.InPlaceRentRoll.editDiscussion(testData.editedCommentary)
+            .activateTextAreaInput()
             .clickRevertToOriginalButton()
             .clickCloseButton()
             .verifyCommentaryFullText(testData.editedCommentary)
+            .activateTextAreaInput()
             .clickRevertToOriginalButton()
             .clickCancelRevertButton()
             .verifyCommentaryFullText(testData.editedCommentary)
+            .activateTextAreaInput()
             .clickRevertToOriginalButton()
             .clickYesRevertButton()
             .verifyCommentaryTextBoxNotHaveText(testData.editedCommentary);
