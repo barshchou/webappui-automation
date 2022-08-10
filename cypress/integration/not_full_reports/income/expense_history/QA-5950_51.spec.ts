@@ -13,13 +13,20 @@ selected Basis for Square Foot Analysis`, { tags: [ "@income", "@expense_history
             const isCommercial = incomeType === Enums.INCOME_TYPE.commercial;
             const basisTexts = Object.values(Enums.BASIS_SQUARE_FOOT_ANALYSIS_TEXTS);
             Object.values(Enums.BASIS_SQUARE_FOOT_ANALYSIS).forEach((basis, index) => {
+                
+                cy.stepInfo(`Navigate to Property -> Summary and select ${basis} basis square foot analysis`);
                 _NavigationSection.navigateToPropertySummary();
                 Property._Summary.selectBasisSquareFootAnalysis(basis);
                 if (basis !== Enums.BASIS_SQUARE_FOOT_ANALYSIS.grossBuildingArea) {
                     Property._Summary.fillBasisSquareFootAnalysis(testData.basisArea);
                 }
+                
+                cy.stepInfo("Navigate to Expense history page");
                 _NavigationSection.navigateToExpenseHistory();
+
                 Object.values(Enums.EXPENSE_DATA_PROVIDER).forEach(provider => {
+
+                    cy.stepInfo(`Verify Expense history discussion with ${provider} expense data provider`);
                     Income._ExpenseHistory.checkDataProviderOption(provider);
                     const textToBe = provider !== Enums.EXPENSE_DATA_PROVIDER.notProvided ?
                         testData.getDataProvidedComm(provider, basisTexts[index], isCommercial) :
