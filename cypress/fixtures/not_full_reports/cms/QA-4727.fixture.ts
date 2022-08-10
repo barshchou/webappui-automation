@@ -11,6 +11,7 @@ const _textUpdate = "Lorem Ipsum is simply dummy text of the printing and typese
 
 export default {
     reportCreationData: reportCreationFixture(),
+    sectionName: Enums.LETTER_SECTIONS.complianceParagraph,
     cmsNavigationFlagKey: Enums.FEATURE_FLAG_KEYS.cmsNavigation,
     reportTextEditorFlagKey: Enums.FEATURE_FLAG_KEYS.reportTextEdit,
     swotAnalysisFlagKey: Enums.FEATURE_FLAG_KEYS.swotAnalysis,
