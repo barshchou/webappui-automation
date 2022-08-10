@@ -114,6 +114,8 @@ class NavigationSection extends BasePage {
     get renovationButton() { return cy.get(`#renovations`); }
 
     get contentManagementSystemButton() { return cy.get(`[data-qa="linkToCms"] div`); }
+
+    get highestAndBestUseButton() { return cy.get("#highest-and-best-use"); }
 }
 
 export default new NavigationSection();

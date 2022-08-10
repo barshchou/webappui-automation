@@ -82,8 +82,20 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         return this;
     }
 
+    navigateToHighestAndBestUse(): NavigationSectionActions {
+        this.clickFinalButton()
+            .clickHighestAndBestUseButton()
+            .submitSaveChangesModal();
+        return this;
+    }
+
     clickFinalButton(): NavigationSectionActions {
         navigationSectionPage.finalButton.click();
+        return this;
+    }
+
+    clickHighestAndBestUseButton(): NavigationSectionActions {
+        navigationSectionPage.highestAndBestUseButton.click();
         return this;
     }
 
