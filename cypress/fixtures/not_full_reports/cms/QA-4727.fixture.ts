@@ -1,5 +1,5 @@
-import Enums from "../../../../enums/enums";
-import ReportDataCreator from "../../../data_creator/reportData.creator";
+import Enums from "../../../enums/enums";
+import ReportDataCreator from "../../data_creator/reportData.creator";
 
 const reportCreationFixture = () => {
     return ReportDataCreator.getReportData('4727', {
@@ -11,6 +11,7 @@ const _textUpdate = "Lorem Ipsum is simply dummy text of the printing and typese
 
 export default {
     reportCreationData: reportCreationFixture(),
+    cmsNavigationFlagKey: Enums.FEATURE_FLAG_KEYS.cmsNavigation,
     reportTextEditorFlagKey: Enums.FEATURE_FLAG_KEYS.reportTextEdit,
     swotAnalysisFlagKey: Enums.FEATURE_FLAG_KEYS.swotAnalysis,
     featureFlagEnable: 0,
