@@ -40,7 +40,8 @@ class CommercialUnitsPage extends BasePage {
     }
 
     get commercialUnitSFDiscussionTextArea() {
-        return cy.xpath("//*[.='Commercial Unit SF Discussion']//following-sibling::div//child::*[@data-slate-editor]");
+        return cy.xpath("//*[.='Commercial Unit SF Discussion']//parent::div//following-sibling" + 
+        "::div//child::*[@data-slate-editor]");
     }
 
     commercialUnitSFDiscussionText(text: string) {
