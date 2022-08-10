@@ -59,9 +59,7 @@ describe(`[Income > Commercial > In-Place Rent Roll > Generated Commentary]
                 .clickNarrativeSuggestions(chip.suggestionName)
                 .verifyCommentaryContainsText(chip.verifySuggest);
         });
-        
-        //This is workaround to prevent cypress crashing
-        Income._CommercialManager.InPlaceRentRoll.Page.pageHeader.realClick();
+        Income._CommercialManager.InPlaceRentRoll.inactivateTextAreaInput();
         Income._CommercialManager.InPlaceRentRoll.clickSaveButton()
             .verifyProgressBarNotExist();
         
@@ -115,8 +113,7 @@ describe(`[Income > Commercial > In-Place Rent Roll > Generated Commentary]
                 .clickNarrativeSuggestions(chip.suggestionName)
                 .verifyCommentaryContainsText(chip.verifySuggest);
         });
-        //This is workaround to prevent cypress crashing
-        Income._CommercialManager.InPlaceRentRoll.Page.pageHeader.realClick();
+        Income._CommercialManager.InPlaceRentRoll.inactivateTextAreaInput();
         Income._CommercialManager.InPlaceRentRoll.clickSaveButton()
             .verifyProgressBarNotExist();
 
@@ -172,8 +169,7 @@ describe(`[Income > Commercial > In-Place Rent Roll > Generated Commentary]
                 .clickNarrativeSuggestions(chip.suggestionName)
                 .verifyCommentaryContainsText(chip.verifySuggest);
         });
-        //This is workaround to prevent cypress crashing
-        Income._CommercialManager.InPlaceRentRoll.Page.pageHeader.realClick();
+        Income._CommercialManager.InPlaceRentRoll.inactivateTextAreaInput();
         Income._CommercialManager.InPlaceRentRoll.clickSaveButton()
             .verifyProgressBarNotExist();
 
