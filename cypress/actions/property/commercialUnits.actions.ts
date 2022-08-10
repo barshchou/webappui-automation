@@ -171,7 +171,7 @@ class CommercialUnitsActions extends BaseActionsExt<typeof commercialUnitsPage> 
         return this;
     }
 
-    inactivateTextAreaInput(): this {
+    inactivateTextAreaInput(): CommercialUnitsActions {
         this.Page.Header.realClick();
         this.Page.commentaryText.should('not.be.focused');
         return this;

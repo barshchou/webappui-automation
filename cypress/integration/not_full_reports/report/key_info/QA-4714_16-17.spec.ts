@@ -18,15 +18,17 @@ for Property Rights Appraised and Definition of Market Value sections`,
         cy.stepInfo(`2. Enter the “=F“ and select the 'Foreclosure sale' then “=Sh“ and select 
         the 'Sheriff's sale' then “=Unc“ and select the 'Unchanged Renovation' option for both sections.`);
         testData.chips.forEach(chip => {
-            Report._KeyInfo.Page.formEditBtn().click();
-            Report._KeyInfo.Page.formEditBtn().click();
-            Report._KeyInfo.enterPropertyRightsAppraisedComment(chip.enterValue, false, false, false);
-            Report._KeyInfo.clickNarrativeSuggestions(chip.listValue);
-            Report._KeyInfo.Page.textBoxPropertyRightsAppraised.should("include.text", chip.verifyTexValue);
+            Report._KeyInfo.activatePropertyRightsAppraisedTextAreaInput()
+                .enterPropertyRightsAppraisedComment(chip.enterValue, false, false, false);
+            Report._KeyInfo.clickNarrativeSuggestions(chip.listValue)
+                .inactivateTextAreaInput()
+                .Page.textBoxPropertyRightsAppraised.should("include.text", chip.verifyTexValue);
 
-            Report._KeyInfo.enterDefinitionMarketValue(chip.enterValue, false, false, false);
-            Report._KeyInfo.clickNarrativeSuggestions(chip.listValue, 1);
-            Report._KeyInfo.Page.textBoxDefinitionOfMarketValue().should("include.text", chip.verifyTexValue);
+            Report._KeyInfo.activateDefinitionOfMarketValueTextAreaInput()
+                .enterDefinitionMarketValue(chip.enterValue, false, false, false);
+            Report._KeyInfo.clickNarrativeSuggestions(chip.listValue)
+                .inactivateTextAreaInput()
+                .Page.textBoxDefinitionOfMarketValue().should("include.text", chip.verifyTexValue);
             cy.wait(500);
 
             //Restore page to default state

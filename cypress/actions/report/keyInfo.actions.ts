@@ -5,9 +5,10 @@ import BaseActionsExt from "../base/base.actions.ext";
 import { numberWithCommas } from "../../../utils/numbers.utils";
 
 class KeyInfoActions extends BaseActionsExt<typeof keyInfoPage> {
+    //TODO edit this method
     enterPropertyRightsAppraisedComment(textToType: string = null, edit = true, save = true, revert = false) {
         if (edit === true) { keyInfoPage.propertyRightsAppraisedFormEditButton.click(); }
-        keyInfoPage.textBoxPropertyRightsAppraised.invoke("text")
+        keyInfoPage.textBoxPropertyRightsAppraised.scrollIntoView().invoke("text")
             .then(text => {
                 keyInfoPage.textBoxPropertyRightsAppraised.focus().type(textToType ?? text);
             });
@@ -18,10 +19,29 @@ class KeyInfoActions extends BaseActionsExt<typeof keyInfoPage> {
         }
         return keyInfoPage.textBoxPropertyRightsAppraised.invoke("text");
     }
+    
+    activatePropertyRightsAppraisedTextAreaInput(): KeyInfoActions {
+        this.Page.textBoxPropertyRightsAppraised.focus().realClick({ clickCount: 2, position: "bottomRight" })
+            .should("be.focused");
+        return this;
+    }
+
+    activateDefinitionOfMarketValueTextAreaInput(): KeyInfoActions {
+        this.Page.textBoxDefinitionOfMarketValue().focus().realClick({ clickCount: 2, position: "bottomRight" })
+            .should("be.focused");
+        return this;
+    }
+
+    inactivateTextAreaInput(): KeyInfoActions {
+        this.Page.Header.realClick();
+        this.Page.textBoxPropertyRightsAppraised.should('not.be.focused');
+        this.Page.textBoxDefinitionOfMarketValue().should('not.be.focused');
+        return this;
+    }
 
     enterDefinitionMarketValue(textToType: string = null, edit = true, save = true, revert = false) {
         if (edit === true) { keyInfoPage.definitionOfMarketValueFormEditButton.click(); }
-        keyInfoPage.textBoxDefinitionOfMarketValue().invoke("text").then(text => {
+        keyInfoPage.textBoxDefinitionOfMarketValue().scrollIntoView().invoke("text").then(text => {
             keyInfoPage.textBoxDefinitionOfMarketValue().focus().type(textToType ?? text);
         });
         if (save === true) { keyInfoPage.formSaveBtn().click(); }
