@@ -26,7 +26,7 @@ class LetterOfTransmittalActions extends BaseActionsExt<typeof letterOfTransmitt
 
     clickSectionForEdit(sectionName: BoweryReports.LetterOfTransmittalSections): 
     LetterOfTransmittalActions {
-        letterOfTransmittalPage.letterOfTransmittalDiscussionSection(sectionName).realClick();
+        letterOfTransmittalPage.letterOfTransmittalDiscussionSection(sectionName).scrollIntoView().realClick();
         return this;
     }
 
@@ -61,7 +61,7 @@ class LetterOfTransmittalActions extends BaseActionsExt<typeof letterOfTransmitt
         letterOfTransmittalPage.letterOfTransmittalDiscussionSection(sectionName).type(`{ESC}`);
         letterOfTransmittalPage.letterOfTransmittalDiscussionSection(sectionName).focus();
         this.Page.formRevertToOriginalBtn().realClick();
-        this.Page.formYesRevertBtn.click();
+        this.Page.formYesRevertBtn.realClick();
         this.saveCmsSettings();
         return this;
     }
