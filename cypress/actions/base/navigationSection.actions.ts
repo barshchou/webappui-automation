@@ -154,6 +154,18 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         return this;
     }
 
+    clickZoningButton(): NavigationSectionActions {
+        navigationSectionPage.zoningButton.click();
+        return this;
+    }
+
+    navigateToPropertyZoning(): NavigationSectionActions {
+        this.clickPropertyButton()
+            .clickZoningButton()
+            .submitSaveChangesModal();
+        return this;
+    }
+
     clickResidentialStabilizedRentRoll(): NavigationSectionActions {
         navigationSectionPage.residentialStabilizedRentRoll.click();
         return this;
