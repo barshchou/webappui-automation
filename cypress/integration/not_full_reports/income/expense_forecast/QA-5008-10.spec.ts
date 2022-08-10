@@ -1,7 +1,7 @@
 import testData from "../../../../fixtures/not_full_reports/income/expense_forecast/QA-5008-10.fixture";
 import { _NavigationSection } from "../../../../actions/base";
 import { Income } from "../../../../actions";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 
 describe(`[QA-5008] [QA-5009] [QA-5010] [Income>Expense forecast] “Include Expense on Pro Forma” 
 checkbox and tooltip functionality`,
@@ -32,7 +32,7 @@ checkbox and tooltip functionality`,
 
     it("[QA-5009]", () => {
         cy.stepInfo(`1. Verify “Include Expense on Pro Forma” checkbox is selected by default 
-        for each existing expense card`);
+                    for each existing expense card`);
         testData.expensesForecastCardNamesArray.forEach(element => {
             Income._ExpenseForecastActions.verifyIncludeInProFormaCheckboxIsChecked(element);
         });
@@ -40,11 +40,10 @@ checkbox and tooltip functionality`,
 
     it("[QA-5010]", () => {
         cy.stepInfo(`1. Verify user hover on icon right to the "Include Expense on Pro Forma" checkbox - tooltip
-        with the following text "Unchecking this box will hide the expense from showing up on the Pro Forma." appears`);
+                    with the following text "Unchecking this box will hide the expense from showing up on the 
+                    Pro Forma." appears`);
         testData.expensesForecastCardNamesArray.forEach(element => {
             Income._ExpenseForecastActions.verifyProFormaTooltip(element);
         });
-
-        deleteReport(testData.reportCreationData.reportNumber);
     });
 });

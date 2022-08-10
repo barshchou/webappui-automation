@@ -1,5 +1,5 @@
 import testData from "../../../../fixtures/not_full_reports/income/expense_forecast/QA-4888.fixture";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 import { Property, Income } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
 import tableExpenseHistoryCellNames from "../../../../../cypress/enums/expense/expenseHistoryTableRows.enum";
@@ -64,7 +64,5 @@ describe("Historical expense Electricity Per Unit is correctly calculated and di
             Income._ExpenseForecastActions.Actions.matchElementSnapshot(
                 Income._ExpenseForecastActions.Page.electricityCard, testData.electricityCardSnapshotName, 
                 { padding: [ 10, 100 ] });
-
-            deleteReport(testData.reportCreationData.reportNumber);
         });
     });

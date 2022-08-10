@@ -1,5 +1,5 @@
 import testData from "../../../../fixtures/not_full_reports/sales/value_conclusion/QA-4301.fixture";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Property from "../../../../actions/property/property.manager";
 import Income from "../../../../actions/income/income.manager";
@@ -26,14 +26,13 @@ describe("Prospective Market Value As Stabilized -> Less Laundry Rent Loss data 
                 .enterLaundryVCLossPercentage(testData.vcLossPercentage, testData.vcLossValue);
             NavigationSection.navigateToCapRateConclusion();
             Income.CapRateConclusion.enterConclusionSectionConcludedCapRate(testData.concludedCapRate)
-                .enterAsStabilizedLaundryLossMonths(testData.lossMonths)
-                .enterAsCompleteLaundryLossMonths(testData.lossMonths);
+                .enterLaundryLossMonths(testData.lossMonths, testData.valueConclusionKeyAsStabilized)
+                .enterLaundryLossMonths(testData.lossMonths, testData.valueConclusionKeyAsComplete);
             NavigationSection.navigateToSalesValueConclusion()
                 .verifyProgressBarNotExist();
             Sales.ValueConclusion.verifyAsStabilizedLaundryLossMonths(testData.lossMonths)
                 .verifyAsCompleteLaundryLossMonths(testData.lossMonths)
                 .verifyAsStabilizedLaundryLossAmount(testData.laundryLossesAmount)
                 .verifyAsCompleteLaundryLossAmount(testData.laundryLossesAmount);
-            deleteReport(testData.reportCreationData.reportNumber);
         });
     });

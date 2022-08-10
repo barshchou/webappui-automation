@@ -1,5 +1,5 @@
 import testData from "../../../../../fixtures/not_full_reports/income/commercial/stabilized_rent_roll/QA-4585.fixture";
-import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../../actions/base";
 import { Property } from "../../../../../actions";
 import { Income } from "../../../../../actions";
@@ -84,6 +84,5 @@ describe("Verify the Commercial Stabilized Rent Roll table",
             Income._CommercialManager.StabilizedRentRoll.verifyTenantNameByRow(testData.leaseStatuses[1], "", 1);
         
             cy.stepInfo(`11. Proceed to the Income > Commercial > Stabilized Rent Roll page.`);
-            deleteReport(testData.reportCreationData.reportNumber);
         });
     });

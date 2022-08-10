@@ -1,11 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable @typescript-eslint/no-namespace */
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { recordProxiedRequests } from "../../utils/intercept.utils";
 import { recordDOMSnapshot } from "../utils/snapshot.utils";
 import "./commands";
 import "cypress-real-events/support";
 import { BoweryAutomation } from "../types/boweryAutomation.type";
+import { evalUrl } from "../utils/env.utils";
+import mapKeysUtils from "../utils/mapKeys.utils";
 
 require("cypress-xpath");
 require("cypress-iframe");
@@ -21,14 +24,37 @@ Cypress.on("uncaught:exception", () => {
     return false;
 });
 
+beforeEach(() => {
+    if (Cypress.currentTest.title.includes("Check export")) {
+        Cypress.config().baseUrl = null;
+    } else {
+        Cypress.config().baseUrl = evalUrl(Cypress.env(), true);
+    }
+});
+
 after(() => {
     // check whether test was from smoke suite by its relative path
-    if (Cypress.spec.relative.includes("smoke")) {
-        cy.log("Smoke test, does not deleting report");
-        cy.logNode("Smoke test, does not deleting report");
+    if (Cypress.spec.relative.includes("smoke") && Cypress.spec.name.includes("Exist")) {
+        cy.log("Smoke test, that needs to save report, do not delete report");
+        cy.logNode("Smoke test, that needs to save report, do not delete report");
         return;
     } else {
         cy.deleteApiReport();
+    }
+});
+
+afterEach(() => {
+    if (Cypress.spec.name.includes("export")) {
+        if (!Cypress.currentTest.title.includes("Check export")) {
+            cy.logNode(`Deleting report in check export spec`);
+            cy.deleteApiReport();
+            /*
+             * We have to reset map, because we use different ways of creating report before checking export, our array
+             * of reportIds will always contain 1 id for check export specs in each afterHook. With this action we
+             * prevent cases, when we try to delete report, which is already deleted
+             */
+            cy._mapSet(mapKeysUtils.reportIdArray, undefined);
+        }
     }
 });
 

@@ -2,7 +2,7 @@ import { Property } from '../../../../actions';
 import testData from "../../../../fixtures/not_full_reports/income/expense_forecast/QA-4040-49_51_68.fixture";
 import { _NavigationSection } from "../../../../actions/base";
 import { Income } from "../../../../actions";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 
 describe(`Verify that Generated Commentary are updated on the Expense Forecast page`,
     { tags: [ "@income", "@expense_forecast" ] }, () => {
@@ -307,7 +307,5 @@ describe(`Verify that Generated Commentary are updated on the Expense Forecast p
                     testData.expenseForecastReplacementReserve)
                 .editExpenseForecastCommentary(testData.editedCommentary, testData.expenseForecastReplacementReserve)
                 .verifyForecastCommentary(testData.editedCommentary, testData.expenseForecastReplacementReserve);
-
-            deleteReport(testData.reportCreationData.reportNumber);
         });
     });

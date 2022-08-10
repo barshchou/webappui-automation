@@ -1,6 +1,6 @@
 import testData from 
     "../../../../../fixtures/not_full_reports/income/residential/in_place_rent_roll/QA-4245_88.fixture";
-import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../../actions/base";
 import { Property, Income } from "../../../../../actions";
 
@@ -49,7 +49,5 @@ describe("Verify the Monthly Total row in the grid",
                 Income._Residential.InPlaceRentRoll.enterAppraiserCommentary(text);
             });
             Income._Residential.InPlaceRentRoll.Page.rentRollAppraiserCommentary.invoke("val", testData.textValues[0]);
-        
-            deleteReport(testData.reportCreationData.reportNumber);
         });
     });

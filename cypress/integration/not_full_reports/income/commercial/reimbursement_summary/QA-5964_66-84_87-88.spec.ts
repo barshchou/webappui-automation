@@ -1,5 +1,4 @@
-
-import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../../actions/base/baseTest.actions";
 import { Property, Income } from "../../../../../actions";
 import { _NavigationSection } from "../../../../../actions/base";
 import testData from 
@@ -81,9 +80,5 @@ describe("Income > Commercial > Reimbursement Summary - Verify Gross and Annual 
                         testData.commercialUnits.commercialUnitsNumber,
                         index);
             });
-        });
-    
-        after('Delete report', () => {
-            deleteReport(testData.reportCreationData.reportNumber);
         });
     });

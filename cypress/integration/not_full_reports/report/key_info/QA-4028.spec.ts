@@ -1,6 +1,6 @@
 import { reportCreationData } from "../../../../fixtures/not_full_reports/report/key_info/QA-4028.fixture";
 import testData from "../../../../fixtures/not_full_reports/report/key_info/QA-4028.fixture";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { Report } from "../../../../actions";
 
@@ -19,8 +19,6 @@ the date corresponding to the Current Due Date value for that job in SalesForce`
         
             cy.stepInfo(`3. Verify what is displayed in the Due Date field`);
             Report._KeyInfo.Page.getDateInputByQA(testData.dateType).should("have.value", testData.verifyValue);
-
-            deleteReport(reportCreationData(value).reportNumber);
         });
     });
 });

@@ -1,7 +1,7 @@
 import testData from "../../../../fixtures/not_full_reports/income/expense_forecast/QA-5042_44-45_47-48.fixture";
 import { _NavigationSection } from "../../../../actions/base";
 import { Income } from "../../../../actions";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 import Enums from "../../../../enums/enums";
 
 describe(`[QA-5042] [QA-5044] [QA-5045] [QA-5047] [QA-5048] 
@@ -175,6 +175,5 @@ describe(`[QA-5042] [QA-5044] [QA-5045] [QA-5047] [QA-5048]
         Income._ExpenseForecastActions.Page.addCustomExpenseCategoryCancelButton.click();
         Income._ExpenseForecastActions.Page.createNewCategoryButton.click();
         Income._ExpenseForecastActions.Page.addCustomExpenseCategoryInput.invoke('val').should('be.empty');
-        deleteReport(testData.reportCreationData.reportNumber);
     });
 });

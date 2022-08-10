@@ -1,5 +1,5 @@
 import testData from "../../../../fixtures/not_full_reports/income/expense_forecast/QA-5763-64.fixture";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { Property } from "../../../../actions";
 import { Income } from "../../../../actions";
@@ -55,7 +55,5 @@ Fees is correctly converted to Per SF/Unit value`,
                          PSF Appraiser's Forecast * selected Basis for Square Foot Analysis / # of Residential Units`);
         Income._ExpenseForecastActions.verifyForecastItemBasisMoney(
             testData.expenseForecastLegalProfessionalFixture('sf'), testData.buildingDescription);
-
-        deleteReport(testData.reportCreationData.reportNumber);
     });
 });

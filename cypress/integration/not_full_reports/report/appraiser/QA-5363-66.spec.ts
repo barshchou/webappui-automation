@@ -1,5 +1,5 @@
 import { _NavigationSection } from '../../../../actions/base';
-import { createReport, deleteReport } from '../../../../actions/base/baseTest.actions';
+import { createReport } from '../../../../actions/base/baseTest.actions';
 import { Report } from '../../../../actions';
 import testData from "../../../../fixtures/not_full_reports/report/appraiser/QA-5363-66.fixture";
 import { conditionalDescribe } from "../../../checkIsProd.utils";
@@ -31,9 +31,8 @@ conditionalDescribe("Verify that 'Sign Report' checkbox for different user roles
             });
         });
 
-        after('Delete report', () => {
+        after('Restore storage', () => {
             cy.restoreLocalStorage();
-            deleteReport(testData.reportCreationData.reportNumber);
         });
     
     });

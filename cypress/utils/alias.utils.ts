@@ -16,6 +16,7 @@ export const gqlOperationNames = {
 };
 
 export const Alias = {
+    searchUnits: _alias("searchUnits"),
     loginRequest:_alias("loginRequest"),
     reportId: _alias("reportId"),
     salesEventId: _alias("salesEventId"),
@@ -46,7 +47,11 @@ export const Alias = {
             netRentableAreaNewComp:"netRentableAreaNewComp",
             averageUnitSizeNewComp:"averageUnitSizeNewComp",
             internalNotesTextArea:"internalNotesTextArea",
-            appraiserCommentaryTextArea:"appraiserCommentaryTextArea"
+            appraiserCommentaryTextArea:"appraiserCommentaryTextArea",
+            siteAreaNewComp:"siteAreaNewComp",
+            yearBuiltNewComp:"yearBuiltNewComp",
+            floorsNewComp:"floorsNewComp",
+            gbaNewComp:"gbaNewComp",
         }
     },
     expenseForecastAliases: {

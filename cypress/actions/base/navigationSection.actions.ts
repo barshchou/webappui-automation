@@ -209,7 +209,8 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         this.clickIncomeApproachButton()
             .clickCommercialMenuIfClosed()
             .clickCommercialCompGroups()
-            .submitSaveChangesModal();
+            .submitSaveChangesModal()
+            .verifyProgressBarNotExist();
         return this;
     }
 
@@ -362,7 +363,18 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
 
     navigateToAssumptionsConditions(): NavigationSectionActions {
         this.clickFinalButton()
-            .clickAssumptionsConditions()
+            .clickAssumptionsConditions();
+        return this;
+    }
+
+    clickSWOTAnalysis(): NavigationSectionActions {
+        navigationSectionPage.swotAnalysis.click();
+        return this;
+    }
+
+    navigateToFinalSWOTAnalysis(): NavigationSectionActions {
+        this.clickFinalButton()
+            .clickSWOTAnalysis()
             .submitSaveChangesModal();
         return this;
     }
@@ -498,6 +510,13 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
     navigateToProfileOrganization(nameLink: string): NavigationSectionActions {
         this.clickProfileOrganization()
             .selectLink(nameLink);
+        return this;
+    }
+
+    navigateToContentManagementSystem(): NavigationSectionActions {
+        this.clickContentManagementSystem()
+            .submitSaveChangesModal()
+            .verifyProgressBarNotExist();
         return this;
     }
 
@@ -722,6 +741,19 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         return this;
     }
 
+    navigateToRenovation(): NavigationSectionActions {
+        this.clickPropertyButton()
+            .clickRenovationButton()
+            .submitSaveChangesModal()
+            .verifyProgressBarNotExist();
+        return this;
+    }
+
+    clickRenovationButton(): NavigationSectionActions {
+        navigationSectionPage.renovationButton.click();
+        return this;
+    }
+
     private clickCommercialMenuIfClosed(): NavigationSectionActions {
         navigationSectionPage.commercialIncomeArrow.then(el => {
             if (!el.hasClass("expanded")) {
@@ -753,6 +785,11 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
             cy.visit(`${baseUrl}/report/${reportId}/${pageRoute}`);
         });
 
+        return this;
+    }
+
+    clickContentManagementSystem(): NavigationSectionActions {
+        navigationSectionPage.contentManagementSystemButton.click();
         return this;
     }
 }

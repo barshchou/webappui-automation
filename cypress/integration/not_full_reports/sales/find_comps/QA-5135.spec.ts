@@ -1,7 +1,7 @@
 import { Sales } from '../../../../actions';
 import { _NavigationSection } from '../../../../actions/base';
 import testData from "../../../../fixtures/not_full_reports/sales/find_comps/QA-5135.fixture";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 
 describe(`[QA-5135] -> [Sales > Find Comps] Check the comps order when "custom" dropdown is chosen`, 
     { tags: [ "@sales", "@find_comps", "@comp_plex" ] }, () => {
@@ -12,6 +12,8 @@ describe(`[QA-5135] -> [Sales > Find Comps] Check the comps order when "custom" 
         it("Test body", () => {
             cy.stepInfo(`1. [QA-5135] -> User navigates to SalesComps Search page `);
             _NavigationSection.navigateToFindComps();
+            Sales._FindComps.Actions.selectedCompsSetSort(testData.sortSalesCompsCustom)
+                .Page.sortSalesCompsSelectValue.should('contain', testData.sortSalesCompsCustom);
         
             cy.stepInfo(`2. [QA-5135] -> User selects n-first comps from map`);
             testData.compsToAdd.forEach(() => {
@@ -23,15 +25,15 @@ describe(`[QA-5135] -> [Sales > Find Comps] Check the comps order when "custom" 
         
             cy.stepInfo(`4. [QA-5135] -> Order doesn't change upon selection of “custom“ choice, 
                     until the appraiser manually moves comps around`);
-            Sales._FindComps.Actions.selectedCompsSetSort("Custom").checkSalesCompAddedToList()
+            Sales._FindComps.Actions.checkSalesCompAddedToList()
                 .moveComparableByDnD(Sales._FindComps.Page.selectorDraggableElement, 0, "down", 2)
                 .checkSalesCompAddedToList({ reverse: true });
 
             cy.stepInfo(`5. [QA-5135] -> If user selected custom order at first, 
             re-ordered comps and after that selected “Date Sold” sorting -> comps get 
             reordered by sale date on the fly.`);
-            Sales._FindComps.Actions.selectedCompsSetSort("Date Sold").checkSalesCompAddedToList();
 
-            deleteReport(testData.reportCreationData.reportNumber);
+            Sales._FindComps.Actions.selectedCompsSetSort(testData.sortSalesCompsDateSold)
+                .checkSalesCompSortedByDateSold();
         });
     });

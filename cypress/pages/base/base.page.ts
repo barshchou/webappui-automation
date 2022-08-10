@@ -27,7 +27,7 @@ export default class BasePage {
      * Same as `CloseIcon` but inside shadow-dom
      */
     get CloseIconShadowDom() {
-        return cy.get('[aria-label="Close"]', { includeShadowDom:true });
+        return cy.get('[aria-label="Close"]');
     }
 
     get formYesRevertBtn() {

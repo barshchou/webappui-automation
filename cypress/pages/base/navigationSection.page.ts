@@ -118,6 +118,12 @@ class NavigationSection extends BasePage {
     get propertyHistory() { return cy.get("#property-history"); }
 
     get finalScope() { return cy.get('#appraisal-scope'); }
+
+    get swotAnalysis() { return cy.get("#swot-analysis"); }
+
+    get renovationButton() { return cy.get(`#renovations`); }
+
+    get contentManagementSystemButton() { return cy.get(`[data-qa="linkToCms"] div`); }
 }
 
 export default new NavigationSection();

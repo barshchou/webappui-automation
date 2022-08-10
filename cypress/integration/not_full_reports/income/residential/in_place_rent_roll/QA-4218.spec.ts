@@ -1,5 +1,5 @@
 import testData from "../../../../../fixtures/not_full_reports/income/residential/in_place_rent_roll/QA-4218.fixture";
-import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../../actions/base/navigationSection.actions";
 import Enums from "../../../../../enums/enums";
 import { Income } from "../../../../../actions";
@@ -39,7 +39,6 @@ describe("Verify the grid is present",
                 Property.Summary.enterNumberOfResUnits(testData.numberOfUnits);
                 NavigationSection.navigateToResInPlaceRentRoll();
                 Income._Residential.InPlaceRentRoll.verifyNumberOfUnitsNumberCells(testData.numberOfUnits);
-                deleteReport(reportCreationData.reportNumber);
             });
         });
     });

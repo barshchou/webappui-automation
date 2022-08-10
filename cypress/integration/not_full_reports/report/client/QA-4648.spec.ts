@@ -1,6 +1,6 @@
 import { Report } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 import testData from '../../../../fixtures/not_full_reports/report/client/QA-4648.fixture';
 
 describe("[QA-4648] Verify the Save button functionality on the Report > Client page", 
@@ -34,7 +34,5 @@ describe("[QA-4648] Verify the Save button functionality on the Report > Client 
             cy.reload();
             Report._Client.verifyIntendedUserTextBox(testData.verifyAreaValue)
                 .verifyIdentificationOfTheClientTextBox(testData.verifyAreaValue);
-
-            deleteReport(testData.reportCreationData.reportNumber);
         });
     });

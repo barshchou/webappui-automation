@@ -1,4 +1,4 @@
-import { createReportData } from './../../../../fixtures/not_full_reports/sales/adjust_comps/QA-4606.fixture';
+import { createReportData } from '../../../../fixtures/not_full_reports/sales/adjust_comps/QA-4606.fixture';
 import testData from "../../../../fixtures/not_full_reports/sales/adjust_comps/QA-4606.fixture";
 import { Property, Sales } from "../../../../actions";
 import { _NavigationSection as NavigationSection } from "../../../../actions/base";
