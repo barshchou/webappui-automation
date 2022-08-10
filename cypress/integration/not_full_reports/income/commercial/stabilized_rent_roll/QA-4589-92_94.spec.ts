@@ -28,7 +28,7 @@ describe(`Verify the commentary functionality`,
             cy.restoreLocalStorage();
         });
 
-        //TODO test-case must be updated
+        //TODO update test after test-cases updates QA-6543
         it.skip("[QA-4589]", () => {
             cy.stepInfo("1. Click on the Edit button and modify commentary and save changes.");
             Income._CommercialManager.StabilizedRentRoll.clickEditDiscussionButton()
@@ -37,7 +37,7 @@ describe(`Verify the commentary functionality`,
                 .clickSaveDiscussionButton();
         });
 
-        //TODO test-case must be updated
+        //TODO update test after test-cases updates QA-6543
         it("[QA-4594]", () => {
             cy.stepInfo("1. Verify that commentary 'Modified' label appears");
             Income._CommercialManager.StabilizedRentRoll.activateTextAreaInput()
@@ -45,15 +45,15 @@ describe(`Verify the commentary functionality`,
                 .verifyModifiedLabelExist();
         });
 
-        //TODO test-case must be updated
-        it.skip("[QA-4591]", () => {
+        //TODO update test after test-cases updates QA-6543
+        it("[QA-4591]", () => {
             cy.stepInfo("1. Verify commentary revert to original");
             Income._CommercialManager.StabilizedRentRoll.activateTextAreaInput()
                 .revertToOriginalCommentary()
                 .verifyCommentaryFullText(testData.defaultText);
         });
 
-        //TODO test-case must be updated
+        //TODO update test after test-cases updates QA-6543
         it.skip("[QA-4592]", () => {
             cy.stepInfo("1. Verify the 'Changes will be lost' modal functionality");
             Income._CommercialManager.StabilizedRentRoll.clickEditDiscussionButton()
@@ -70,7 +70,7 @@ describe(`Verify the commentary functionality`,
                 .clickCancelDiscussionEditButton();
         });
 
-        //TODO test-case must be updated
+        //TODO update test after test-cases updates QA-6543
         it.skip("[QA-4590]", () => {
             cy.stepInfo("1. Modify commentary and check 'Cancel' button functionality");
             Income._CommercialManager.StabilizedRentRoll.clickEditDiscussionButton()

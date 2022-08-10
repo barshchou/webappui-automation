@@ -11,7 +11,7 @@ describe.skip(`Current Commercial Income Discussion > Verify the Revert to Origi
         createReport(testData.reportCreationData);
     });
 
-    //TODO test-case must be updated
+    //TODO update test after test-cases updates QA-6543
     it("Test body", () => {
         NavigationSection.navigateToCommercialInPlaceRentRoll()
             .verifyProgressBarNotExist();

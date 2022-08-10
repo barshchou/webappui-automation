@@ -18,7 +18,7 @@ Verify the buttons functionality on Property > Commercial Units page.`,
         cy.restoreLocalStorage();
     });
 
-    //TODO test-case must be updated
+    //TODO update test after test-cases updates QA-6543
     it.skip("[QA-4543]", () => {
         cy.stepInfo(`1. Verify that the Edit button is displayed on the Property > Commercial Units page.`);
         _NavigationSection.navigateToCommercialUnits();
@@ -36,7 +36,7 @@ Verify the buttons functionality on Property > Commercial Units page.`,
         Property._CommercialUnits.Page.formSaveBtn(0).should('exist');
     });
 
-    //TODO test-case must be updated
+    //TODO update test after test-cases updates QA-6543
     it.skip("[QA-4544]", () => {
         cy.stepInfo(`1. Click on the Cancel button and verify that the form closes form 
         without saving changes with no warning message.`);
@@ -45,7 +45,7 @@ Verify the buttons functionality on Property > Commercial Units page.`,
         Property._CommercialUnits.Page.commercialUnitSFDiscussionText(testData.textUpdateValue).should('not.exist');
     });
 
-    //TODO test-case must be updated
+    //TODO update test after test-cases updates QA-6543
     it.skip("[QA-4547]", () => {
         cy.stepInfo(`1. Edit comment and click on the Save button.`);
         Property._CommercialUnits.clickEditDiscussionButton();
@@ -56,26 +56,22 @@ Verify the buttons functionality on Property > Commercial Units page.`,
         Property._CommercialUnits.Page.commercialUnitSFDiscussionText(testData.textUpdateValue).should('exist');
     });
 
-    //TODO test-case must be updated
-    it.skip("[QA-4545]", () => {
+    //TODO update test after test-cases updates QA-6543
+    it("[QA-4545]", () => {
         cy.stepInfo(`1. Edit comment and verify that the Revert to Original button becomes enabled.`);
         _NavigationSection.navigateToCommercialUnits();
         Property._CommercialUnits.verifyThatPageIsOpened();
         Property._CommercialUnits.activateTextAreaInput()
             .editDiscussionTextArea(testData.textUpdateValue);
-
-
-        Property._CommercialUnits.Page.formRevertToOriginalBtn(0).should('be.enabled');       
-        Property._CommercialUnits.Page.formRevertToOriginalBtn(0).click(); 
-
-
+        Property._CommercialUnits.Page.formRevertToOriginalBtn(0).should('be.enabled')   
+            .click(); 
         Property._CommercialUnits.Page.modalWindow.should('be.visible');
         Property._CommercialUnits.Page.formYesRevertBtn.click();
         Property._CommercialUnits.Page.formSaveBtn().click();
     });
 
-    //TODO test-case must be updated
-    it.skip("[QA-4546]", () => {
+    //TODO update test after test-cases updates QA-6543
+    it("[QA-4546]", () => {
         cy.stepInfo(`1. Verify the 'Changes will be lost' modal functionality`);
         _NavigationSection.navigateToCommercialUnits();
         Property._CommercialUnits.verifyThatPageIsOpened();

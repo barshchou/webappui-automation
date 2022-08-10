@@ -7,7 +7,7 @@ import testData from "../../../../fixtures/not_full_reports/property/commercial_
 describe(`[QA-4552][QA-4553][QA-4554] Verify the "Linked" chips dropdown in the new narrative component`, 
     { tags: [ "@property", "@commercial_units", "@check_export" ] }, () => {
 
-        //TODO test-case must be updated
+        //TODO update test after test-cases updates QA-6543
         it("[QA-4552] As Is", () => {
             cy.stepInfo(`Preconditions: The mixed report is created and several commercial units are added.`);
             createReport(testData.reportCreationDataAsIs);
@@ -55,7 +55,7 @@ describe(`[QA-4552][QA-4553][QA-4554] Verify the "Linked" chips dropdown in the 
                 }); 
         });
 
-        //TODO test-case must be updated
+        //TODO update test after test-cases updates QA-6543
         it("[QA-4553] As Stabilized", () => {
             cy.stepInfo(`Preconditions: The mixed report is created and several commercial units are added.`);
             createReport(testData.reportCreationDataAsIs);
@@ -103,7 +103,7 @@ describe(`[QA-4552][QA-4553][QA-4554] Verify the "Linked" chips dropdown in the 
                 }); 
         });
 
-        //TODO test-case must be updated
+        //TODO update test after test-cases updates QA-6543
         it("[QA-4554] As Completed", () => {
             cy.stepInfo(`Preconditions: The mixed report is created and several commercial units are added.`);
             createReport(testData.reportCreationDataAsIs);

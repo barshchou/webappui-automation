@@ -26,7 +26,7 @@ describe(`[QA-4549][QA-4550][QA-4551] Verify the "Linked" chips dropdown in the 
             cy.restoreLocalStorage();
         });
 
-        //TODO test-case must be updated
+        //TODO update test after test-cases updates QA-6543
         it(`[QA-4549] Verify the suggested text dropdown in the new narrative component added through "=" 
         for the 'Foreclosure sale' option`, () => {
             cy.stepInfo("2. Activate text area in the Commercial Unit SF Discussion section.");
@@ -41,7 +41,7 @@ describe(`[QA-4549][QA-4550][QA-4551] Verify the "Linked" chips dropdown in the 
             Property._CommercialUnits.inactivateTextAreaInput();
         });
     
-        //TODO test-case must be updated
+        //TODO update test after test-cases updates QA-6543
         it(`[QA-4550] Verify the suggested text dropdown in the new narrative component added through "=" 
         for the 'Sheriff's sale' option`, () => {
             cy.stepInfo("2. Activate text area in the Commercial Unit SF Discussion section.");
@@ -56,7 +56,7 @@ describe(`[QA-4549][QA-4550][QA-4551] Verify the "Linked" chips dropdown in the 
             Property._CommercialUnits.inactivateTextAreaInput();
         });
 
-        //TODO test-case must be updated
+        //TODO update test after test-cases updates QA-6543
         it(`[QA-4551] Verify the suggested text dropdown in the new narrative component added through "=" 
         for the 'Unchanged Renovation' option`, () => {
             cy.stepInfo("2. Activate text area in the Commercial Unit SF Discussion section.");

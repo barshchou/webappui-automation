@@ -9,7 +9,7 @@ describe(`[QA-4598][QA-4599][QA-4600] Verify the suggested text dropdown in the
 new narrative component added through "=" in the Generated Commentary on the Stabilized Rent Roll page.`, 
 { tags: [ "@income", "@commercial", "@stabilized_rent_roll", "@check_export" ] }, () => {
 
-    //TODO test-case must be updated
+    //TODO update test after test-cases updates QA-6543
     it("[QA-4598] As Is", () => {
         cy.stepInfo(`Preconditions: The mixed report is created and several commercial units are added.`);
         createReport(testData.reportCreationDataAsIs);
@@ -58,7 +58,7 @@ new narrative component added through "=" in the Generated Commentary on the Sta
             }); 
     });
 
-    //TODO test-case must be updated
+    //TODO update test after test-cases updates QA-6543
     it("[QA-4599] As Stabilized", () => {
         cy.stepInfo(`Preconditions: The mixed report is created and several commercial units are added.`);
         createReport(testData.reportCreationDataAsStabilized);
@@ -108,7 +108,7 @@ new narrative component added through "=" in the Generated Commentary on the Sta
             }); 
     });
 
-    //TODO test-case must be updated
+    //TODO update test after test-cases updates QA-6543
     it("[QA-4600] As Completed", () => {
         cy.stepInfo(`Preconditions: The mixed report is created and several commercial units are added.`);
         createReport(testData.reportCreationDataAsComplete);
