@@ -3,6 +3,7 @@ import testData from "../../../../fixtures/not_full_reports/sales/value_conclusi
 import { _NavigationSection } from "../../../../actions/base";
 import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _Summary } from "../../../../actions/property";
+import { numberWithCommas } from '../../../../../utils/numbers.utils';
 
 describe(`[QA-4053] [QA-4086] The Concluded Value Per Unit is calculated correctly 
 and includes both commercial and residential units.`, 
@@ -25,8 +26,8 @@ and includes both commercial and residential units.`,
         _NavigationSection.navigateToSalesValueConclusion();
 
         cy.stepInfo(`4. Verify that the Concluded Value Per Unit is calculated correctly`);
-        let totalValue = '$' + ((testData.general.commercialUnits + testData.general.residentialUnits) * 
-        testData.general.valueConclusion).toLocaleString();
+        let totalValue = '$' + numberWithCommas((testData.general.commercialUnits + 
+            testData.general.residentialUnits) * testData.general.valueConclusion);
         Sales._ValueConclusion.enterSaleValueConclusion(testData.general.valueConclusion)
             .verifySaleValueConclusion(testData.general.valueConclusion)
             .verifyAsStabilizedAmount(totalValue)

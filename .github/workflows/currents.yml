@@ -31,18 +31,34 @@ on:
         type: string
         description: Select branch, tag, commit ref
         required: false
+      threads:
+        type: string
+        description: Thread number(between 1 and 15)
+        required: false
+        default: 15
 
 jobs:
+  concurrency:
+    runs-on: ubuntu-latest
+    outputs:
+      threads: ${{ steps.concurrency.outputs.threads }}
+    steps:
+      - name: Prepare concurrency config
+        id: concurrency
+        run: |
+          echo ::set-output name=threads::$(jq '.[0:${{github.event.inputs.threads}}]' <<< "[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]")
+
   Not-full-reports-run:
     runs-on: ubuntu-latest
     container: cypress/browsers:node16.13.2-chrome100-ff98
+    needs: concurrency
     permissions:
       id-token: write
       contents: read
     strategy:
       fail-fast: false
       matrix:
-        containers: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+        containers: ${{ fromJSON(needs.concurrency.outputs.threads) }}
 
     steps:
       - name: Run end-to-end tests with Currents dev
