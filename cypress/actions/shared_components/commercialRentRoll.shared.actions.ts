@@ -260,9 +260,9 @@ class CommercialRentRollSharedComponent<T extends CommercialRentRollSharedCompon
 
     editDiscussion(newCommentary: string, clearText = true, isFullTextVerification = true): this {
         this.Page.modifiedLabel(false).should("not.exist");
-        this.clickEditDiscussionButton()
+        this.activateTextAreaInput()
             .editDiscussionTextArea(newCommentary, clearText)
-            .clickSaveDiscussionButton();
+            .inactivateTextAreaInput();
         if (isFullTextVerification) {
             this.verifyCommentaryFullText(newCommentary);
         } else {
@@ -320,6 +320,12 @@ class CommercialRentRollSharedComponent<T extends CommercialRentRollSharedCompon
         this.Page.commentaryText.focus().realClick({ clickCount: 2, position: "bottomRight" }).should("be.focused");
         return this;
     }
+    
+    inactivateTextAreaInput(): this {
+        this.Page.Header.realClick();
+        this.Page.commentaryText.should('not.be.focused');
+        return this;
+    }
 
     revertToOriginalCommentary(): this {
         this.activateTextAreaInput()
@@ -329,17 +335,6 @@ class CommercialRentRollSharedComponent<T extends CommercialRentRollSharedCompon
             .clickSaveDiscussionButton();
         return this;
     }
-
-    /*
-     * revertToOriginalCommentary(): this {
-     *     this.clickEditDiscussionButton()
-     *         .clickRevertToOriginalButton()
-     *         .verifyProgressBarNotExist()
-     *         .clickYesRevertButton()
-     *         .clickSaveDiscussionButton();
-     *     return this;
-     * }
-     */
 
     verifyModifiedLabelExist(): this {
         this.Page.modifiedLabel().should('exist');
