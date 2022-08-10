@@ -54,20 +54,22 @@ describe(`Verify the commentary functionality`,
         });
 
         //TODO update test after test-cases updates QA-6543
-        it.skip("[QA-4592]", () => {
+        it("[QA-4592]", () => {
             cy.stepInfo("1. Verify the 'Changes will be lost' modal functionality");
-            Income._CommercialManager.StabilizedRentRoll.clickEditDiscussionButton()
+            Income._CommercialManager.StabilizedRentRoll.verifyProgressBarNotExist()
+                .activateTextAreaInput()
                 .editDiscussionTextArea(testData.textUpdateValue)
                 .clickRevertToOriginalButton()
                 .clickCloseButton()
                 .verifyCommentaryContainsText(testData.textUpdateValue)
+                .activateTextAreaInput()
                 .clickRevertToOriginalButton()
                 .clickCancelRevertButton()
                 .verifyCommentaryContainsText(testData.textUpdateValue)
+                .activateTextAreaInput()
                 .clickRevertToOriginalButton()
                 .clickYesRevertButton()
-                .verifyCommentaryFullText(testData.defaultText)
-                .clickCancelDiscussionEditButton();
+                .verifyCommentaryFullText(testData.defaultText);
         });
 
         //TODO update test after test-cases updates QA-6543
