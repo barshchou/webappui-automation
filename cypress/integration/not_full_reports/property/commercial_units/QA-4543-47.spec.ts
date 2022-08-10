@@ -57,21 +57,16 @@ Verify the buttons functionality on Property > Commercial Units page.`,
     });
 
     //TODO test-case must be updated
-    it("[QA-4545]", () => {
+    it.skip("[QA-4545]", () => {
         cy.stepInfo(`1. Edit comment and verify that the Revert to Original button becomes enabled.`);
         _NavigationSection.navigateToCommercialUnits();
         Property._CommercialUnits.verifyThatPageIsOpened();
         Property._CommercialUnits.activateTextAreaInput()
             .editDiscussionTextArea(testData.textUpdateValue);
-        //        .Page.commentaryText.scrollIntoView();
-        Property._CommercialUnits.Page.formRevertToOriginalBtn(0).should('be.enabled');
-        /*
-         *  cy.wait(5000);
-         *  Property._CommercialUnits        .Page.commercialUnitsDiscussionTitle.scrollIntoView();
-         *  cy.wait(5000);
-         */
-        Property._CommercialUnits.Page.formRevertToOriginalBtn(0).click(); 
 
+
+        Property._CommercialUnits.Page.formRevertToOriginalBtn(0).should('be.enabled');       
+        Property._CommercialUnits.Page.formRevertToOriginalBtn(0).click(); 
 
 
         Property._CommercialUnits.Page.modalWindow.should('be.visible');
@@ -80,7 +75,7 @@ Verify the buttons functionality on Property > Commercial Units page.`,
     });
 
     //TODO test-case must be updated
-    it("[QA-4546]", () => {
+    it.skip("[QA-4546]", () => {
         cy.stepInfo(`1. Verify the 'Changes will be lost' modal functionality`);
         _NavigationSection.navigateToCommercialUnits();
         Property._CommercialUnits.verifyThatPageIsOpened();
