@@ -2,7 +2,6 @@ import testData from "../../../../fixtures/not_full_reports/final/swot_analysis/
 import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { Final, ReviewExport } from "../../../../actions";
-import { _saveDataInFile } from "../../../../support/commands";
 import { pathSpecData } from "../../../../../utils/fixtures.utils";
 
 describe("Verify the text in the Opportunities section on the SWOT Analysis page", 
