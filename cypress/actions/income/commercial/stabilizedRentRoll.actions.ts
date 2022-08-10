@@ -61,7 +61,11 @@ class StabilizedRentRollActions extends CommercialRentRollSharedComponent<typeof
         return this;
     }
 
-    
+    inactivateTextAreaInput(): this {
+        this.Page.pageHeader.realClick();
+        this.Page.commentaryText.should('not.be.focused');
+        return this;
+    }
 
 }
 

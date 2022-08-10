@@ -45,6 +45,7 @@ describe(`Verify the commentary functionality`,
                 .verifyModifiedLabelExist();
         });
 
+        //TODO test-case must be updated
         it("[QA-4591]", () => {
             cy.stepInfo("1. Verify commentary revert to original");
             Income._CommercialManager.StabilizedRentRoll.activateTextAreaInput()
@@ -52,6 +53,7 @@ describe(`Verify the commentary functionality`,
                 .verifyCommentaryFullText(testData.defaultText);
         });
 
+        //TODO test-case must be updated
         it("[QA-4592]", () => {
             cy.stepInfo("1. Verify the 'Changes will be lost' modal functionality");
             Income._CommercialManager.StabilizedRentRoll.clickEditDiscussionButton()
@@ -68,7 +70,7 @@ describe(`Verify the commentary functionality`,
                 .clickCancelDiscussionEditButton();
         });
 
-        it("[QA-4590]", () => {
+        it.skip("[QA-4590]", () => {
             cy.stepInfo("1. Modify commentary and check 'Cancel' button functionality");
             Income._CommercialManager.StabilizedRentRoll.clickEditDiscussionButton()
                 .editDiscussionTextArea(testData.textUpdateValue)

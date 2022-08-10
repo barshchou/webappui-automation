@@ -225,6 +225,7 @@ class CommercialRentRollSharedComponent<T extends CommercialRentRollSharedCompon
         return this;
     }
 
+    //action non actual
     clickEditDiscussionButton(): this {
         this.Page.formEditBtn().click({ force: true });
         return this;
@@ -236,6 +237,7 @@ class CommercialRentRollSharedComponent<T extends CommercialRentRollSharedCompon
         return this;
     }
 
+    //action non actual
     clickSaveDiscussionButton(): this {
         this.Page.formSaveBtn().click();
         return this;

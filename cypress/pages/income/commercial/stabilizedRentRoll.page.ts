@@ -2,6 +2,8 @@ import CommercialRentRollSharedComponentPage from "../../shared_components/comme
 
 class StabilizedRentRollPage extends CommercialRentRollSharedComponentPage {
 
+    get pageHeader() { return cy.xpath("//h5[text()='Stabilized Rent Roll']"); }
+
     get stabilizedRRPanel() { return cy.get('[id="STICKY_FORM_PANEL_WRAPPER_ID"] + div'); }
 
     get stabilizedRentRollHeaderSection() { return cy.get("*[data-qa='stabilizedRentRoll']"); }
