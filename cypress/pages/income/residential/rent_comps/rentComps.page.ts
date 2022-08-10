@@ -231,7 +231,7 @@ class RentCompsPage extends BasePage {
     }
 
     getAddComparableFromSearchButtonByIndex(searchIndex: number) { 
-        return cy.get("[role=rowgroup] [role=presentation]").eq(searchIndex); 
+        return cy.get("[role=rowgroup] [data-testid=AddIcon]").eq(searchIndex); 
     }
 
     getRemoveCompButtonByIndex(index: number) { 
@@ -255,7 +255,7 @@ class RentCompsPage extends BasePage {
     }
 
     getShowDetailsHeader(headerName: string) { 
-        return cy.xpath(`//tr[@data-qa='row-0']/following-sibling::tr//thead//th[.='${headerName}']`); 
+        return cy.xpath(`//tr[@data-qa='row-0']/following-sibling::tr//thead//td[.='${headerName}']`); 
     }
 
     getShowDetailsButtonByIndex(index: number) {
