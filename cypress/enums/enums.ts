@@ -75,6 +75,7 @@ import unitIncomeTypeEnum from "./unit/unitIncomeType.enum";
 import rentLossTypeEnum from "./rentLossType.enum";
 import dateTypeEnum from "./keyInfo/dateType.enum";
 import interestAppraisedEnum from "./keyInfo/interestAppraised.enum";
+import feasiblePropertyTypesEnum from "./property/feasiblePropertyTypes.enum";
 
 export default {
     TEMPLATE_TYPE: templateTypesEnum,
@@ -153,5 +154,6 @@ export default {
     UNIT_INCOME_TYPE: unitIncomeTypeEnum,
     RENT_LOSS_TYPE: rentLossTypeEnum,
     DATE_TYPE: dateTypeEnum,
-    INTEREST_APPRAISED: interestAppraisedEnum
+    INTEREST_APPRAISED: interestAppraisedEnum,
+    FEASIBLE_PROPERTY_TYPES: feasiblePropertyTypesEnum
 };
