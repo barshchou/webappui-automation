@@ -17,6 +17,7 @@ const backLinkNames = {
 const textBoxNames = {
     identificationOfClient: Enums.PAGES_TEXTBOX_NAMES.identificationOfTheClient,
     intendedUser: Enums.PAGES_TEXTBOX_NAMES.intendedUser,
+    definitionOfMarketValue: Enums.PAGES_TEXTBOX_NAMES.definitionOfMarketValue,
     generalAssumptionsDiscussion: Enums.PAGES_TEXTBOX_NAMES.generalAssumptionsDiscussion,
     recentSalesHistoryDiscussion: Enums.PAGES_TEXTBOX_NAMES.recentSalesHistoryDiscussion,
     propertyContractHistoryDiscussion: Enums.PAGES_TEXTBOX_NAMES.propertyContractHistoryDiscussion,

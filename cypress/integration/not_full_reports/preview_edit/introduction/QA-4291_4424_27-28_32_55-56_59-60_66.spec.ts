@@ -26,12 +26,10 @@ describe('[QA-4291_4424_27-28_32_55-56_59] Check the Introduction page',
         it("[QA-4424]", () => {
             cy.stepInfo("2. Navigate to Report > Client and Edit Identification of the Client and Intended User Text");
             _NavigationSection.navigateToClientPage()
-                .clickFormEditBtn(1)
-                .enterFormCommentTextBox(testData.textBoxNames.identificationOfClient, testData.typeValue)
-                .clickFormSaveBtn();
+                .enterFormCommentTextBox(testData.textBoxNames.identificationOfClient, testData.typeValue);
             // Need wait for changes to take place.
             cy.wait(1000);
-
+        
             cy.stepInfo("3. Proceed to the Introduction page and verify that page exist");
             _NavigationSection.navigateToIntroduction()
                 .verifyProgressBarNotExist()
@@ -59,10 +57,7 @@ describe('[QA-4291_4424_27-28_32_55-56_59] Check the Introduction page',
         it("[QA-4427]", () => {
             cy.stepInfo("2. Navigate to Report > Client and Edit Intended User");
             _NavigationSection.navigateToClientPage()
-                .clickFormEditBtn()
-                .enterFormCommentTextBox(testData.textBoxNames.intendedUser, testData.typeValue)
-                .clickFormSaveBtn();
-            // Need wait for changes to take place.
+                .enterFormCommentTextBox(testData.textBoxNames.intendedUser, testData.typeValue);
             cy.wait(1000);
 
             cy.stepInfo("3. Proceed to the Introduction page and verify that page exist");
@@ -93,7 +88,7 @@ describe('[QA-4291_4424_27-28_32_55-56_59] Check the Introduction page',
             cy.stepInfo("2. Navigate to Report > Key Info and Edit Definition of Market Value");
             _NavigationSection.navigateToReportInformation();
 
-            Report._KeyInfo.enterDefinitionMarketValue(testData.typeValue);
+            Report._KeyInfo.enterFormCommentTextBox(testData.textBoxNames.definitionOfMarketValue, testData.typeValue);
             cy.wait(1000);
 
             cy.stepInfo("3. Proceed to the Introduction page and verify that page exist");
@@ -124,9 +119,7 @@ describe('[QA-4291_4424_27-28_32_55-56_59] Check the Introduction page',
             cy.stepInfo(`2. Navigate to Final > Assumptions and Conditions page and 
                         Edit General Assumptions Discussion`);
             _NavigationSection.navigateToAssumptionsConditions()
-                .clickFormEditBtn()
-                .enterFormCommentTextBox(testData.textBoxNames.generalAssumptionsDiscussion, testData.typeValue)
-                .clickFormSaveBtn();
+                .enterFormCommentTextBox(testData.textBoxNames.generalAssumptionsDiscussion, testData.typeValue);
             cy.wait(1000);
 
             cy.stepInfo("3. Proceed to the Introduction page and verify that page exist");
@@ -156,9 +149,7 @@ describe('[QA-4291_4424_27-28_32_55-56_59] Check the Introduction page',
         it("[QA-4455]", () => {
             cy.stepInfo("2. Navigate to Property > Property History and Edit Recent Sales History Discussion");
             _NavigationSection.navigateToPropertyHistory()
-                .clickFormEditBtn()
-                .enterFormCommentTextBox(testData.textBoxNames.recentSalesHistoryDiscussion, testData.typeValue)
-                .clickFormSaveBtn();
+                .enterFormCommentTextBox(testData.textBoxNames.recentSalesHistoryDiscussion, testData.typeValue);
             cy.wait(1000);
 
             cy.stepInfo("3. Proceed to the Introduction page and verify that page exist");
@@ -188,9 +179,7 @@ describe('[QA-4291_4424_27-28_32_55-56_59] Check the Introduction page',
         it("[QA-4456]", () => {
             cy.stepInfo("2. Navigate to Property > Property History and Edit Property Contract History Discussion");
             _NavigationSection.navigateToPropertyHistory()
-                .clickFormEditBtn(1)
-                .enterFormCommentTextBox(testData.textBoxNames.propertyContractHistoryDiscussion, testData.typeValue)
-                .clickFormSaveBtn();
+                .enterFormCommentTextBox(testData.textBoxNames.propertyContractHistoryDiscussion, testData.typeValue);
             cy.wait(1000);
 
             cy.stepInfo("3. Proceed to the Introduction page and verify that page exist");
@@ -220,9 +209,7 @@ describe('[QA-4291_4424_27-28_32_55-56_59] Check the Introduction page',
         it("[QA-4459]", () => {
             cy.stepInfo("2. Navigate to Income > Cap Rate Conclusion and Edit Purpose & Date of Value Discussion");
             _NavigationSection.navigateToCapRateConclusion()
-                .clickFormEditBtn()
-                .enterFormCommentTextBox(testData.textBoxNames.purposeDateOfValueDiscussion, testData.typeValue)
-                .clickFormSaveBtn();
+                .enterFormCommentTextBox(testData.textBoxNames.purposeDateOfValueDiscussion, testData.typeValue);
             cy.wait(1000);
 
             cy.stepInfo("3. Proceed to the Introduction page and verify that page exist");
@@ -252,9 +239,7 @@ describe('[QA-4291_4424_27-28_32_55-56_59] Check the Introduction page',
         it("[QA-4460]", () => {
             cy.stepInfo("2. Navigate to Property > Market and Edit Exposure Time Description");
             _NavigationSection.navigateToPropertyMarket()
-                .clickFormEditBtn()
-                .enterFormCommentTextBox(testData.textBoxNames.exposureTimeDescription, testData.typeValue)
-                .clickFormSaveBtn();
+                .enterFormCommentTextBox(testData.textBoxNames.exposureTimeDescription, testData.typeValue);
             cy.wait(1000);
 
             cy.stepInfo("3. Proceed to the Introduction page and verify that page exist");
@@ -287,9 +272,7 @@ describe('[QA-4291_4424_27-28_32_55-56_59] Check the Introduction page',
             _NavigationSection.navigateToPropertyMarket();
 
             Property._Market.checkIncludeMarketingTimeDescription()
-                .clickFormEditBtn(1)
-                .enterFormCommentTextBox(testData.textBoxNames.marketingTimeDescription, testData.typeValue)
-                .clickFormSaveBtn();
+                .enterFormCommentTextBox(testData.textBoxNames.marketingTimeDescription, testData.typeValue);
             cy.wait(1000);
 
             cy.stepInfo("3. Proceed to the Introduction page and verify that page exist");
