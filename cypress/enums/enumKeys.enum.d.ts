@@ -55,3 +55,5 @@ export type RenovationType = keyof typeof Enums.RENOVATION_TYPE
 export type ValueConclusionName = keyof typeof Enums.VALUE_CONCLUSION_NAME
 export type UnitIncomeType = keyof typeof Enums.UNIT_INCOME_TYPE
 export type RentLossType = keyof typeof Enums.RENT_LOSS_TYPE
+export type DateType = keyof typeof Enums.DATE_TYPE
+export type InterestAppraised = keyof typeof Enums.INTEREST_APPRAISED

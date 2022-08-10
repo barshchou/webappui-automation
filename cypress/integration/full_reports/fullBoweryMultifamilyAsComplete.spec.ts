@@ -18,8 +18,8 @@ describe.skip("Full bowery way, multifamily as complete report", { tags: [ "@ful
         Homepage.createReport(testData.reportCreationData);
         Report.KeyInfo.choosePurpose(testData.keyInfoPurposeData.purposeValue)
             .checkAllInterestAppraisedByValues(testData.keyInfoPurposeData.interestAppraised)
-            .enterDateByType(testData.keyInfoEngagementData.dueDate)
-            .enterDateByType(testData.keyInfoEngagementData.dateOfValuation)
+            .enterDateByType(testData.keyInfoEngagementData._dueDateFixture)
+            .enterDateByType(testData.keyInfoEngagementData._valuationDateFixture)
             .uploadFile(testData.keyInfoEngagementData.engagementFileName);
         NavigationSection.navigateToClientPage();
         Report.Client.enterClientName(testData.clientData.clientName);

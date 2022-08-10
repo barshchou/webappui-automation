@@ -64,9 +64,9 @@ describe("Validation of Market Values Per SF for ACAS reports",
             cy.stepInfo(`10. Add New Residential Rent Loss on As Stabilized tab and 
             New Commercial Rent Loss on As Stabilized tab`);
             Income._CapRateConclusion.addNewRentLoss(testData.residentialUnitType, testData.residentialUnits, 
-                testData.valueConclusionAsStabilized);
+                testData.conclusionValueAsComplete, testData.valueConclusionAsStabilized);
             Income._CapRateConclusion.addNewRentLoss(testData.commercialUnitType, testData.commercialUnits, 
-                testData.valueConclusionAsStabilized);
+                testData.conclusionValueAsComplete, testData.valueConclusionAsStabilized);
                 
             cy.stepInfo(`11. Fill in with valid numeric values:
             - Less Residential Rent Loss
@@ -88,7 +88,7 @@ describe("Validation of Market Values Per SF for ACAS reports",
             Less Commercial Rent Loss - Less Undetermined Commercial Rent Loss - 
             Less Commission Fee - Less Entrepreneurial Profit*`);
             Income._CapRateConclusion
-                .verifyProspectiveMarketValueAsCompleteCalculated(testData.valueConclusionKeyAsStabilized, 
+                .verifyProspectiveMarketValueAsIsAsCompleteCalculated(testData.valueConclusionKeyAsStabilized, 
                     testData.valueConclusionAsComplete);
 
             cy.stepInfo(`13. Make sure Prospective Market Value As Complete (Final Value) = 
@@ -103,9 +103,9 @@ describe("Validation of Market Values Per SF for ACAS reports",
             cy.stepInfo(`15. Add New Residential Rent Loss on As Complete tab and New Commercial 
             Rent Loss on As Complete tab `);
             Income._CapRateConclusion.addNewRentLoss(testData.residentialUnitType, testData.residentialUnits, 
-                testData.valueConclusionAsComplete);
+                testData.conclusionValueAsComplete, testData.valueConclusionAsComplete);
             Income._CapRateConclusion.addNewRentLoss(testData.commercialUnitType, testData.commercialUnits, 
-                testData.valueConclusionAsComplete);
+                testData.conclusionValueAsComplete, testData.valueConclusionAsComplete);
 
             cy.stepInfo(`16. Fill in with valid numeric values:
             - Less Residential Rent Loss

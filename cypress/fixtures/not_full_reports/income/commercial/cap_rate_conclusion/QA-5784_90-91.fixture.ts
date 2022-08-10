@@ -38,5 +38,6 @@ export default {
     valueConclusionKeyAsStabilized: Object.keys(Enums.VALUE_CONCLUSION_NAME)[1] as BoweryReports.ValueConclusionKeys,
     rentLossTypeResidential: Enums.RENT_LOSS_TYPE.resRentLossItems,
     rentLossTypeCommercial: Enums.RENT_LOSS_TYPE.commercialRentLossItems,
-    rentLossTypeUndetermined: Enums.RENT_LOSS_TYPE.lossItems
+    rentLossTypeUndetermined: Enums.RENT_LOSS_TYPE.lossItems,
+    conclusionValueAsComplete: Enums.VALUE_CONCLUSION_TYPE.AS_COMPLETE
 };

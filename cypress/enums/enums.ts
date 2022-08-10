@@ -1,3 +1,4 @@
+import * as compplex from "./compplex";
 import leaseDateName from "./lease/leaseDateName.enum";
 import leaseStatus from "./lease/leaseStatus.enum";
 import imageType from "./elements/imageType.enum";
@@ -73,6 +74,8 @@ import renovationTypeEnum from "./property/renovationType.enum";
 import valueConclusionEnum from "./property/valueConclusion.enum";
 import unitIncomeTypeEnum from "./unit/unitIncomeType.enum";
 import rentLossTypeEnum from "./rentLossType.enum";
+import dateTypeEnum from "./keyInfo/dateType.enum";
+import interestAppraisedEnum from "./keyInfo/interestAppraised.enum";
 
 export default {
     TEMPLATE_TYPE: templateTypesEnum,
@@ -146,8 +149,11 @@ export default {
     SALES_ADJUSTMENT_GRID_ROWS: salesAdjustmentGridRowsEnum,
     BASIS_SQUARE_FOOT_ANALYSIS: basisSquareFootAnalysisEnum,
     BASIS_SQUARE_FOOT_ANALYSIS_TEXTS: basisSquareFootAnalysisTextsEnum,
+    COMPPLEX_ENUM: compplex,
     RENOVATION_TYPE: renovationTypeEnum,
     VALUE_CONCLUSION_NAME: valueConclusionEnum,
     UNIT_INCOME_TYPE: unitIncomeTypeEnum,
-    RENT_LOSS_TYPE: rentLossTypeEnum
+    RENT_LOSS_TYPE: rentLossTypeEnum,
+    DATE_TYPE: dateTypeEnum,
+    INTEREST_APPRAISED: interestAppraisedEnum
 };
