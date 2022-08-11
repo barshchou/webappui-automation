@@ -161,7 +161,7 @@ class CommercialUnitsActions extends BaseActionsExt<typeof commercialUnitsPage> 
     }
 
     /**
-     * @deprecated since comments field has new features
+     * @deprecated since comments field has new features (don't use it anymore)
      */
     clickEditDiscussionButton(): CommercialUnitsActions {
         this.Page.formEditBtn().click({ force: true });
@@ -190,7 +190,7 @@ class CommercialUnitsActions extends BaseActionsExt<typeof commercialUnitsPage> 
     }
 
     /**
-     * @deprecated since comments field has new features
+     * @deprecated since comments field has new features (don't use it anymore)
      */
     clickSaveDiscussionButton(): CommercialUnitsActions {
         this.Page.formSaveBtn().click();

@@ -226,7 +226,7 @@ class CommercialRentRollSharedComponent<T extends CommercialRentRollSharedCompon
     }
 
     /**
-     * @deprecated since comments field has new features
+     * @deprecated since comments field has new features (don't use it anymore)
      */
     clickEditDiscussionButton(): this {
         this.Page.formEditBtn().click({ force: true });
@@ -240,7 +240,7 @@ class CommercialRentRollSharedComponent<T extends CommercialRentRollSharedCompon
     }
 
     /**
-     * @deprecated since comments field has new features
+     * @deprecated since comments field has new features (don't use it anymore)
      */
     clickSaveDiscussionButton(): this {
         this.Page.formSaveBtn().click();
@@ -277,7 +277,7 @@ class CommercialRentRollSharedComponent<T extends CommercialRentRollSharedCompon
     }
 
     /**
-     * @deprecated since comments field has new features
+     * @deprecated since comments field has new features (don't use it anymore)
      */
     clickRevertToOriginalButton(): this {
         this.Page.formRevertToOriginalBtn().click();
