@@ -103,7 +103,7 @@ class KeyInfoActions extends BaseActionsExt<typeof keyInfoPage> {
 
     clickNarrativeSuggestions(verifyListValue: string, numberLists = 0): KeyInfoActions {
         keyInfoPage.narrativeSuggestionsList.eq(numberLists)
-            .contains(verifyListValue).should("have.text", verifyListValue).click();
+            .contains(verifyListValue).should("have.text", verifyListValue).click({ force: true });
         return this;
     }
 
