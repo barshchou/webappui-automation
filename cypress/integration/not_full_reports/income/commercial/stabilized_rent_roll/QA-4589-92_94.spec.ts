@@ -40,7 +40,8 @@ describe(`Verify the commentary functionality`,
         //TODO update test after test-cases updates QA-6543
         it("[QA-4594]", () => {
             cy.stepInfo("1. Verify that commentary 'Modified' label appears");
-            Income._CommercialManager.StabilizedRentRoll.activateTextAreaInput()
+            Income._CommercialManager.StabilizedRentRoll.activateTextAreaInput(
+                Income._CommercialManager.StabilizedRentRoll.Page.commentaryText)
                 .editDiscussionTextArea(testData.textUpdateValue)
                 .verifyModifiedLabelExist();
         });
