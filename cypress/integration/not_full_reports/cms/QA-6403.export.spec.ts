@@ -1,6 +1,6 @@
 import { _HomePage } from '../../../actions/base';
 import { createReport } from '../../../actions/base/baseTest.actions';
-import { Final, ReviewExport } from '../../../actions';
+import { ReviewExport } from '../../../actions';
 import { _NavigationSection } from '../../../actions/base';
 import testData from "../../../fixtures/not_full_reports/cms/QA-6403.fixture";
 import launchDarklyApi from '../../../api/launchDarkly.api';
