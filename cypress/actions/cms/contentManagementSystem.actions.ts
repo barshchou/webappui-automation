@@ -2,11 +2,6 @@ import BaseActionsExt from "../base/base.actions.ext";
 import contentManagementSystemPage from "../../pages/cms/contentManagementSystem.page";
 
 class ContentManagementSystemActions extends BaseActionsExt<typeof contentManagementSystemPage> {
-    verifyPageIsOpened(): ContentManagementSystemActions {
-        contentManagementSystemPage.Header.should('contain.text', 'Content Management System');
-        return this;
-    }
-
     verifyCmsSubHeaderDisplayed(): ContentManagementSystemActions {
         contentManagementSystemPage.cmsGlobalHeader.should('exist');
         return this;
