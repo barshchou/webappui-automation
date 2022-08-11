@@ -8,7 +8,7 @@ describe(`Verify the Inspector's name is pre-filled in the Appraisers section on
         corresponding to the Inspector value for that job in SalesForce.`,
 { tags: [ "@check_export", "@report", "@appraiser", "@salesforce" ] }, () => {
     
-    it("[QA-4327]", () => {
+    it("[QA-4327_48-49]", () => {
         cy.stepInfo('1. Create a report with SF job');
         createReport(testData.reportCreationData);
 
@@ -22,28 +22,24 @@ describe(`Verify the Inspector's name is pre-filled in the Appraisers section on
             Report._Appraiser.verifyPersonallyInspectedCheckbox(appraiser.name, appraiser.isPersonallyInspected);
         });
 
-        cy.stepInfo("4. Export the report");
-        _NavigationSection.Actions.openReviewAndExport();
-        ReviewExport.generateDocxReport().waitForReportGenerated()
-            .downloadAndConvertDocxReport(`JOB-${testData.reportCreationData.reportNumber}`);
-    });
-
-    it("[QA-4348]", () => {
-        cy.stepInfo(`1. not null with checked ‘Personally Inspected' and 'Sign Report’ checkboxes; 
+        cy.stepInfo(`4. not null with checked ‘Personally Inspected' and 'Sign Report’ checkboxes; 
                     not null with unchecked ‘Personally Inspected' and 'Sign Report’ checkboxes;`);
         Report._Appraiser.checkPersonallyInspected(testData.appraisers[0].name)
             .checkSignReport(testData.appraisers[1].name, false);
 
-        cy.stepInfo(`2. Remove appraisers, save changes and add the same Inspector by entering his/her name in 
+        cy.stepInfo(`5. Remove appraisers, save changes and add the same Inspector by entering his/her name in 
                     the Search Appraisers field.`);
         Report._Appraiser.removeAppraiser(testData.appraisers[2].name)
-            .searchAndAddAppraiser(testData.appraisers[2].name);    
-    });
-
-    it("[QA-4349]", () => {
-        cy.stepInfo("1. Verify Certification Assistance commentary");
+            .searchAndAddAppraiser(testData.appraisers[2].name);
+            
+        cy.stepInfo("6. Verify Certification Assistance commentary");
         Report._Appraiser.verifyCertificationAssistanceCommentary()
             .verifyCertificationInspectionCommentary();
+
+        cy.stepInfo("7. Export the report");
+        _NavigationSection.Actions.openReviewAndExport();
+        ReviewExport.generateDocxReport().waitForReportGenerated()
+            .downloadAndConvertDocxReport(`JOB-${testData.reportCreationData.reportNumber}`);
     });
 
     it("Check export, [QA-4338]", () => {
@@ -53,7 +49,7 @@ describe(`Verify the Inspector's name is pre-filled in the Appraisers section on
             cy.log(<string>file);
             cy.visit(<string>file);
 
-            cy.stepInfo("7. Verify the export of the report with the pre-filled Inspector's name from SalesForce");
+            cy.stepInfo("8. Verify the export of the report with the pre-filled Inspector's name from SalesForce");
             testData.appraisers.forEach(appraiser => {
                 cy.xpath(`//*[contains(text(), 'Prepared By')]` +
                         `//following::*[contains(text(), '${appraiser.name}')][1]`).should("exist");
