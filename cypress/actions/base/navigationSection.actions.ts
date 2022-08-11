@@ -363,7 +363,8 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
 
     navigateToAssumptionsConditions(): NavigationSectionActions {
         this.clickFinalButton()
-            .clickAssumptionsConditions();
+            .clickAssumptionsConditions()
+            .submitSaveChangesModal();
         return this;
     }
 
