@@ -76,6 +76,7 @@ import rentLossTypeEnum from "./rentLossType.enum";
 import dateTypeEnum from "./keyInfo/dateType.enum";
 import interestAppraisedEnum from "./keyInfo/interestAppraised.enum";
 import expenseHistoryDataProviderEnum from "./expense/expenseHistoryDataProvider.enum";
+import expenseItemBasisOfComparisonEnum from "./expense/expenseItemBasisOfComparison.enum";
 
 export default {
     TEMPLATE_TYPE: templateTypesEnum,
@@ -155,5 +156,6 @@ export default {
     RENT_LOSS_TYPE: rentLossTypeEnum,
     DATE_TYPE: dateTypeEnum,
     INTEREST_APPRAISED: interestAppraisedEnum,
-    EXPENSE_DATA_PROVIDER: expenseHistoryDataProviderEnum
+    EXPENSE_DATA_PROVIDER: expenseHistoryDataProviderEnum,
+    EXPENSE_ITEM_BASIS_OF_COMPARISON: expenseItemBasisOfComparisonEnum
 };

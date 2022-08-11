@@ -53,10 +53,12 @@ class ExpenseHistoryActions extends BaseActionsExt<typeof expenseHistoryPage> {
         return this;
     }
 
-    verifyIssueTextByColIndex(issueValue: number | string, cellName: string, index = 0): ExpenseHistoryActions {
-        const textToBe = issueValue === "clear" || issueValue === 0 ? "" :
+    verifyIssueTextByColIndex(issueValue: number | string, cellName: string, index = 0, notHaveText?: boolean
+    ): ExpenseHistoryActions {
+        const matcher = notHaveText ? "not.have.text" : "have.text";
+        const textToBe = issueValue === "clear" || issueValue === 0 ? "" : issueValue === "-" ? issueValue :
             `$${numberWithCommas((<number>issueValue).toFixed(2))}`;
-        expenseHistoryPage.getUnifiedEditableAndTotalCells(cellName).eq(index).should("have.text", textToBe);
+        expenseHistoryPage.getUnifiedEditableAndTotalCells(cellName).eq(index).should(matcher, textToBe);
         return this;
     }
 
@@ -326,6 +328,55 @@ class ExpenseHistoryActions extends BaseActionsExt<typeof expenseHistoryPage> {
 
     verifyExpenseHistoryDiscussionText(textToBe: string, isTextArea = false): ExpenseHistoryActions {
         expenseHistoryPage.getExpenseHistoryDiscussion(isTextArea).should("have.text", textToBe);
+        return this;
+    }
+
+    clickTableSettingsButton(): ExpenseHistoryActions {
+        expenseHistoryPage.tableSettingsButton.click();
+        return this;
+    }
+
+    clickExpenseItemBasisOfComparisonDropdown(): ExpenseHistoryActions {
+        expenseHistoryPage.expenseItemBasisOfComparisonDropdown.click();
+        return this;
+    }
+
+    chooseDropdownOption(option: string): ExpenseHistoryActions {
+        expenseHistoryPage.getDropdownOption(option).click();
+        return this;
+    }
+
+    verifyExpenseItemBasisOfComparisonDropdownOption(optionToBe: BoweryReports.ExpenseItemBasisOfComparison
+    ): ExpenseHistoryActions {
+        expenseHistoryPage.expenseItemBasisOfComparisonDropdown.should("have.text", optionToBe);
+        return this;
+    }
+
+    clickTableSettingsSaveButton(): ExpenseHistoryActions {
+        expenseHistoryPage.tableSettingsSaveButton.click();
+        return this;
+    }
+
+    changeTableExpenseItemBasisOfComparison(basis: BoweryReports.ExpenseItemBasisOfComparison): ExpenseHistoryActions {
+        this.clickTableSettingsButton()
+            .clickExpenseItemBasisOfComparisonDropdown()
+            .chooseDropdownOption(basis)
+            .verifyExpenseItemBasisOfComparisonDropdownOption(basis)
+            .clickTableSettingsSaveButton();
+        return this;
+    }
+
+    setCellValueToMap(cellName: string, index = 0): ExpenseHistoryActions {
+        expenseHistoryPage.getUnifiedEditableAndTotalCells(cellName).eq(index).invoke("text").then(cellText => {
+            const numberValue = getNumberFromDollarNumberWithCommas(cellText);
+            cy._mapSet(cellName, numberValue);
+        });
+        return this;
+    }
+
+    verifyCellIsReadonly(cellName: string, index = 0): ExpenseHistoryActions {
+        expenseHistoryPage.getUnifiedEditableAndTotalCells(cellName).eq(index)
+            .should("have.class", "readOnlyColumn-6-1-3");
         return this;
     }
 }

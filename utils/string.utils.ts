@@ -22,7 +22,11 @@ export const normalizeText = (textToNormalize: string): string => {
     return textToNormalize.replaceAll('﻿', '').trim();
 };
 
+export const toLowerCaseFirstLetterInString = (string: string): string => {
+    return string.charAt(0).toLowerCase() + string.slice(1);
+};
+
 export const toCamelCase = (stringToChange: string): string => {
     const capitalizedAll = uppercaseFirstLetterEachWord(stringToChange).trim().replaceAll(" ", "").replaceAll(",", "");
-    return capitalizedAll.charAt(0).toLowerCase() + capitalizedAll.slice(1);
+    return toLowerCaseFirstLetterInString(capitalizedAll);
 };

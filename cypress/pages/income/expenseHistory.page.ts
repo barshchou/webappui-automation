@@ -47,6 +47,14 @@ class ExpenseHistoryPage extends BasePage {
         const attr = isTextArea ? "name" : "data-qa";
         return cy.get(`[${attr}^='expenseHistoryDiscussion.commentary']`);
     }
+
+    get tableSettingsButton() { return cy.get("button[aria-label=menu]"); }
+
+    get tableSettingsSaveButton() { return cy.get("[data-qa=expense-details-submit-btn]"); }
+
+    get expenseItemBasisOfComparisonDropdown() { return cy.get("[aria-labelledby='expense-select-label select']"); }
+
+    getDropdownOption(option) { return cy.get(`li[role=option][data-value='${option}']`); }
 }
 
 export default new ExpenseHistoryPage();
