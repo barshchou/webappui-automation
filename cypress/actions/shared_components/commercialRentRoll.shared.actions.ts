@@ -264,7 +264,7 @@ class CommercialRentRollSharedComponent<T extends CommercialRentRollSharedCompon
 
     editDiscussion(newCommentary: string, clearText = true, isFullTextVerification = true): this {
         this.Page.modifiedLabel(false).should("not.exist");
-        this.activateTextAreaInput()
+        this.activateTextAreaInput(this.Page.commentaryText)
             .editDiscussionTextArea(newCommentary, clearText)
             .inactivateTextAreaInput();
         if (isFullTextVerification) {
@@ -323,13 +323,8 @@ class CommercialRentRollSharedComponent<T extends CommercialRentRollSharedCompon
         return this;
     }
 
-    activateTextAreaInput(): this {
-        this.Page.commentaryText.focus().realClick({ clickCount: 2, position: "bottomRight" }).should("be.focused");
-        return this;
-    }
-
     revertToOriginalCommentary(): this {
-        this.activateTextAreaInput()
+        this.activateTextAreaInput(this.Page.commentaryText)
             .clickRevertToOriginalButton()
             .verifyProgressBarNotExist()
             .clickYesRevertButton()

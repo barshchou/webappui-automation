@@ -20,19 +20,6 @@ class KeyInfoActions extends BaseActionsExt<typeof keyInfoPage> {
         }
         return keyInfoPage.textBoxPropertyRightsAppraised.invoke("text");
     }
-    
-    activatePropertyRightsAppraisedTextAreaInput(): KeyInfoActions {
-        this.Page.textBoxPropertyRightsAppraised.focus().realClick({ clickCount: 2, position: "bottomRight" })
-            .should("be.focused");
-        return this;
-    }
-
-    activateDefinitionOfMarketValueTextAreaInput(): KeyInfoActions {
-        this.Page.textBoxDefinitionOfMarketValue().focus().realClick({ clickCount: 2, position: "bottomRight" })
-            .should("be.focused");
-        return this;
-    }
-
 
     enterDefinitionMarketValue(textToType: string = null, edit = true, save = true, revert = false) {
         if (edit === true) { keyInfoPage.definitionOfMarketValueFormEditButton.click(); }

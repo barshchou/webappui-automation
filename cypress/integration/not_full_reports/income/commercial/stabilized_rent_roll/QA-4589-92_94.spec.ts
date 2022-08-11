@@ -48,7 +48,8 @@ describe(`Verify the commentary functionality`,
         //TODO update test after test-cases updates QA-6543
         it("[QA-4591]", () => {
             cy.stepInfo("1. Verify commentary revert to original");
-            Income._CommercialManager.StabilizedRentRoll.activateTextAreaInput()
+            Income._CommercialManager.StabilizedRentRoll.activateTextAreaInput(
+                Income._CommercialManager.StabilizedRentRoll.Page.commentaryText)
                 .revertToOriginalCommentary()
                 .verifyCommentaryFullText(testData.defaultText);
         });
@@ -57,16 +58,19 @@ describe(`Verify the commentary functionality`,
         it("[QA-4592]", () => {
             cy.stepInfo("1. Verify the 'Changes will be lost' modal functionality");
             Income._CommercialManager.StabilizedRentRoll.verifyProgressBarNotExist()
-                .activateTextAreaInput()
+                .activateTextAreaInput(
+                    Income._CommercialManager.StabilizedRentRoll.Page.commentaryText)
                 .editDiscussionTextArea(testData.textUpdateValue)
                 .clickRevertToOriginalButton()
                 .clickCloseButton()
                 .verifyCommentaryContainsText(testData.textUpdateValue)
-                .activateTextAreaInput()
+                .activateTextAreaInput(
+                    Income._CommercialManager.StabilizedRentRoll.Page.commentaryText)
                 .clickRevertToOriginalButton()
                 .clickCancelRevertButton()
                 .verifyCommentaryContainsText(testData.textUpdateValue)
-                .activateTextAreaInput()
+                .activateTextAreaInput(
+                    Income._CommercialManager.StabilizedRentRoll.Page.commentaryText)
                 .clickRevertToOriginalButton()
                 .clickYesRevertButton()
                 .verifyCommentaryFullText(testData.defaultText);

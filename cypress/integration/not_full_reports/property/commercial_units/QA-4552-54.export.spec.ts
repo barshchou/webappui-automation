@@ -23,7 +23,7 @@ describe(`[QA-4552][QA-4553][QA-4554] Verify the "Linked" chips dropdown in the 
             _NavigationSection.navigateToCommercialUnits();
 
             cy.stepInfo("2. Activate text area in the Commercial Unit SF Discussion section.");
-            Property._CommercialUnits.activateTextAreaInput();
+            Property._CommercialUnits.activateTextAreaInput(Property._CommercialUnits.Page.commentaryText);
 
             cy.stepInfo("3. Enter the “=“ and select the an option. Verify each option.");
             testData.asIsChips.forEach((chip) => {
@@ -71,7 +71,7 @@ describe(`[QA-4552][QA-4553][QA-4554] Verify the "Linked" chips dropdown in the 
             _NavigationSection.navigateToCommercialUnits();
 
             cy.stepInfo("2. Activate text area in the Commercial Unit SF Discussion section.");
-            Property._CommercialUnits.activateTextAreaInput();
+            Property._CommercialUnits.activateTextAreaInput(Property._CommercialUnits.Page.commentaryText);
 
             cy.stepInfo("3. Enter the “=“ and select the an option. Verify each option.");
             testData.asIsChips.forEach((chip) => {
@@ -119,7 +119,7 @@ describe(`[QA-4552][QA-4553][QA-4554] Verify the "Linked" chips dropdown in the 
             _NavigationSection.navigateToCommercialUnits();
 
             cy.stepInfo("2. Activate text area in the Commercial Unit SF Discussion section.");
-            Property._CommercialUnits.activateTextAreaInput();
+            Property._CommercialUnits.activateTextAreaInput(Property._CommercialUnits.Page.commentaryText);
 
             cy.stepInfo("3. Enter the “=“ and select the an option. Verify each option.");
             testData.asIsChips.forEach((chip) => {

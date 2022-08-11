@@ -18,7 +18,7 @@ describe(`Verify the suggested text dropdown in the new narrative component adde
 
         cy.stepInfo("2. Edit discussion and enter '=un' value; click 'Unchanged Renovation' suggested value");
         Income._CommercialManager.InPlaceRentRoll
-            .activateTextAreaInput()
+            .activateTextAreaInput(Income._CommercialManager.InPlaceRentRoll.Page.commentaryText)
             .editDiscussionTextArea(testData.value)
             .clickNarrativeSuggestions(testData.unchangeRenovation);
 

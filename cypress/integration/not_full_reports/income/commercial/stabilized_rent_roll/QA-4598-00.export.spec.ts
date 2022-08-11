@@ -25,7 +25,8 @@ new narrative component added through "=" in the Generated Commentary on the Sta
         _NavigationSection.navigateToCommercialStabilizedRentRoll();
 
         cy.stepInfo("2. Activate text area in the Stabilized Commercial Income Discussion section.");
-        Income._CommercialManager.StabilizedRentRoll.activateTextAreaInput();
+        Income._CommercialManager.StabilizedRentRoll.activateTextAreaInput(
+            Income._CommercialManager.StabilizedRentRoll.Page.commentaryText);
 
         cy.stepInfo("3. Enter the “=“ and select the an option. Verify each option.");
         testData.asIsChips.forEach((chip) => {
@@ -74,7 +75,8 @@ new narrative component added through "=" in the Generated Commentary on the Sta
         _NavigationSection.navigateToCommercialStabilizedRentRoll();
 
         cy.stepInfo("2. Activate text area in the Stabilized Commercial Income Discussion section.");
-        Income._CommercialManager.StabilizedRentRoll.activateTextAreaInput();
+        Income._CommercialManager.StabilizedRentRoll.activateTextAreaInput(
+            Income._CommercialManager.StabilizedRentRoll.Page.commentaryText);
 
         cy.stepInfo("3. Enter the “=“ and select the an option. Verify each option.");
         testData.asStabilizedChips.forEach((chip) => {
@@ -126,7 +128,8 @@ new narrative component added through "=" in the Generated Commentary on the Sta
         _NavigationSection.navigateToCommercialStabilizedRentRoll();
 
         cy.stepInfo("2. Activate text area in the Stabilized Commercial Income Discussion section.");
-        Income._CommercialManager.StabilizedRentRoll.activateTextAreaInput();
+        Income._CommercialManager.StabilizedRentRoll.activateTextAreaInput(
+            Income._CommercialManager.StabilizedRentRoll.Page.commentaryText);
 
         cy.stepInfo("3. Enter the “=“ and select the an option. Verify each option.");
         testData.asCompletedChips.forEach((chip) => {

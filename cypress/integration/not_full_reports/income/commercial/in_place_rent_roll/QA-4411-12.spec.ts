@@ -16,15 +16,15 @@ describe(`Current Commercial Income Discussion > Verify the Revert to Original b
         NavigationSection.navigateToCommercialInPlaceRentRoll()
             .verifyProgressBarNotExist();
         Income.Commercial.InPlaceRentRoll.editDiscussion(testData.editedCommentary)
-            .activateTextAreaInput()
+            .activateTextAreaInput(Income.Commercial.InPlaceRentRoll.Page.commentaryText)
             .clickRevertToOriginalButton()
             .clickCloseButton()
             .verifyCommentaryFullText(testData.editedCommentary)
-            .activateTextAreaInput()
+            .activateTextAreaInput(Income.Commercial.InPlaceRentRoll.Page.commentaryText)
             .clickRevertToOriginalButton()
             .clickCancelRevertButton()
             .verifyCommentaryFullText(testData.editedCommentary)
-            .activateTextAreaInput()
+            .activateTextAreaInput(Income.Commercial.InPlaceRentRoll.Page.commentaryText)
             .clickRevertToOriginalButton()
             .clickYesRevertButton()
             .verifyCommentaryTextBoxNotHaveText(testData.editedCommentary);

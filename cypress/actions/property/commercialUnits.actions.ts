@@ -168,12 +168,6 @@ class CommercialUnitsActions extends BaseActionsExt<typeof commercialUnitsPage> 
         return this;
     }
 
-    activateTextAreaInput(): CommercialUnitsActions {
-        this.Page.commentaryText.scrollIntoView().realClick({ clickCount: 5, position: "bottomRight" })
-            .should("be.focused");
-        return this;
-    }
-
     editDiscussionTextArea(value: string, clearText = true): CommercialUnitsActions {
         clearText ? this.Page.commentaryText.dblclick().clear({ force: true }).type(value) :
             this.Page.commentaryText.type(value);

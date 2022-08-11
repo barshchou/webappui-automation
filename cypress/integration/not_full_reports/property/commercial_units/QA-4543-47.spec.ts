@@ -61,7 +61,7 @@ Verify the buttons functionality on Property > Commercial Units page.`,
         cy.stepInfo(`1. Edit comment and verify that the Revert to Original button becomes enabled.`);
         _NavigationSection.navigateToCommercialUnits();
         Property._CommercialUnits.verifyThatPageIsOpened();
-        Property._CommercialUnits.activateTextAreaInput()
+        Property._CommercialUnits.activateTextAreaInput(Property._CommercialUnits.Page.commentaryText)
             .editDiscussionTextArea(testData.textUpdateValue);
         Property._CommercialUnits.Page.formRevertToOriginalBtn(0).should('be.enabled')   
             .click(); 
@@ -75,16 +75,16 @@ Verify the buttons functionality on Property > Commercial Units page.`,
         cy.stepInfo(`1. Verify the 'Changes will be lost' modal functionality`);
         _NavigationSection.navigateToCommercialUnits();
         Property._CommercialUnits.verifyThatPageIsOpened();
-        Property._CommercialUnits.activateTextAreaInput()
+        Property._CommercialUnits.activateTextAreaInput(Property._CommercialUnits.Page.commentaryText)
             .editDiscussionTextArea(testData.textUpdateValue)
             .clickRevertToOriginalButton()
             .clickCloseButton()
             .verifyCommentaryContainsText(testData.textUpdateValue)
-            .activateTextAreaInput()
+            .activateTextAreaInput(Property._CommercialUnits.Page.commentaryText)
             .clickRevertToOriginalButton()
             .clickCancelRevertButton()
             .verifyCommentaryContainsText(testData.textUpdateValue)
-            .activateTextAreaInput()
+            .activateTextAreaInput(Property._CommercialUnits.Page.commentaryText)
             .clickRevertToOriginalButton()
             .clickYesRevertButton()
             .verifyCommentaryFullText(testData.defaultText);       

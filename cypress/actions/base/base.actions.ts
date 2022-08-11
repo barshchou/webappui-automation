@@ -129,4 +129,10 @@ export default class BaseActions {
         cy.xpath("//header").realClick();
         return this;
     }
+
+    activateTextAreaInput(textAreaInput: Cypress.Chainable<JQuery<HTMLElement>>) {
+        textAreaInput.scrollIntoView().realClick({ clickCount: 5, position: "bottomRight" })
+            .should("be.focused");
+        return this;
+    }
 }

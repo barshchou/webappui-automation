@@ -17,7 +17,7 @@ describe(`[Income > Commercial > In-Place Rent Roll > Generated Commentary]
         _NavigationSection.navigateToCommercialInPlaceRentRoll()
             .verifyProgressBarNotExist();
         Income._CommercialManager.InPlaceRentRoll
-            .activateTextAreaInput();
+            .activateTextAreaInput(Income._CommercialManager.InPlaceRentRoll.Page.commentaryText);
 
         testData.suggestionsVerificationData.forEach((data) => {
             cy.stepInfo(`2. Edit discussion and enter '${data.value}'
@@ -51,7 +51,7 @@ describe(`[Income > Commercial > In-Place Rent Roll > Generated Commentary]
 
         cy.stepInfo("2. Activate text area in the Current Commercial Income Discussion section.");
         Income._CommercialManager.InPlaceRentRoll
-            .activateTextAreaInput();
+            .activateTextAreaInput(Income._CommercialManager.InPlaceRentRoll.Page.commentaryText);
 
         cy.stepInfo("3. Enter the “=“ and select the an option. Verify each option.");
         testData.asIsChips.forEach((chip) => {
@@ -105,7 +105,7 @@ describe(`[Income > Commercial > In-Place Rent Roll > Generated Commentary]
 
         cy.stepInfo("2. Activate text area in the Current Commercial Income Discussion section.");
         Income._CommercialManager.InPlaceRentRoll
-            .activateTextAreaInput();
+            .activateTextAreaInput(Income._CommercialManager.InPlaceRentRoll.Page.commentaryText);
 
         cy.stepInfo("3. Enter the “=“ and select the an option. Verify each option.");
         testData.asStabilizedChips.forEach((chip) => {
@@ -161,7 +161,7 @@ describe(`[Income > Commercial > In-Place Rent Roll > Generated Commentary]
 
         cy.stepInfo("2. Activate text area in the Current Commercial Income Discussion section.");
         Income._CommercialManager.InPlaceRentRoll
-            .activateTextAreaInput();
+            .activateTextAreaInput(Income._CommercialManager.InPlaceRentRoll.Page.commentaryText);
 
         cy.stepInfo("3. Enter the “=“ and select the an option. Verify each option.");
         testData.asCompletedChips.forEach((chip) => {
