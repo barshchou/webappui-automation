@@ -3,13 +3,19 @@ import BaseActionsExt from "../base/base.actions.ext";
 import swotAnalysisPage from "../../pages/cms/swotAnalysis.page";
 
 class SWOTAnalysisActions extends BaseActionsExt<typeof swotAnalysisPage> {
-    verifySWOTInputsText(sectionName: BoweryReports.SWOTAnalysisSections, 
-        expectedText: string[]): SWOTAnalysisActions {
+    verifySWOTInputsArrayText(sectionName: BoweryReports.SWOTAnalysisSections, expectedText: string[]): 
+    SWOTAnalysisActions {
         expectedText.forEach((language, index) => {
-            swotAnalysisPage.swotAnalysisSectionTextArea(sectionName, index).invoke('text')
-                .should('deep.equal', language);
+            this.verifySWOTInputText(sectionName, language, index);
         });
         
+        return this;
+    }
+
+    verifySWOTInputText(sectionName: BoweryReports.SWOTAnalysisSections, expectedText: string, index = 0): 
+    SWOTAnalysisActions {
+        swotAnalysisPage.swotAnalysisSectionTextArea(sectionName, index).invoke('text')
+            .should('deep.equal', expectedText);
         return this;
     }
 

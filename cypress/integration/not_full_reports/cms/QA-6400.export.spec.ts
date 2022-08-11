@@ -22,7 +22,7 @@ conditionalDescribe("Verify page and possibility to edit text",
 
             cy.stepInfo(`2. Verify languages of sections`);
             testData.swotTextsFixture.forEach(section => {
-                _SWOTAnalysis.verifySWOTInputsText(section.sectionName, section.languages);
+                _SWOTAnalysis.verifySWOTInputsArrayText(section.sectionName, section.languages);
             });
 
             cy.stepInfo(`3. Open any report Final > SWOT Analysis page`);
