@@ -1,4 +1,4 @@
-import testData from "../../../../fixtures/not_full_reports/property/summary/QA-5212_15_19.fixture";
+import testData from "../../../../fixtures/sf_integration/property/summary/QA-5212_15_19.fixture";
 import { _HomePage, _NavigationSection } from "../../../../actions/base";
 import { Property } from "../../../../actions";
 import { loginAction } from "../../../../actions/base/baseTest.actions";
