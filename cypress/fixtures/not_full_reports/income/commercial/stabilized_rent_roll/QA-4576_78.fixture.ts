@@ -1,16 +1,16 @@
 import ReportDataCreator from "../../../../data_creator/reportData.creator";
 import Enums from "../../../../../enums/enums";
-import { BoweryReports } from "../../../../../types";
+import { BoweryReports } from "../../../../../types/boweryReports.type";
 
-const groupNameFixture: BoweryReports.CommercialUnitsGroups = "Use";
-const useRadiosFixture: BoweryReports.CommercialUnitsUseValues[] = [ "retail", "office" ];
-const useTextFixture: BoweryReports.CommercialUnitsUseTexts[] = [ "Retail", "Office" ];
+const groupNameFixture: BoweryReports.CommercialUnits.Groups = "Use";
+const useRadiosFixture: BoweryReports.CommercialUnits.UseValues[] = [ "retail", "office" ];
+const useTextFixture: BoweryReports.CommercialUnits.UseTexts[] = [ "Retail", "Office" ];
 const leaseStatusesFixture: BoweryReports.LeaseStatus[] = [ "Vacant", "Occupied" ];
 const occupiedLeaseFixture: BoweryReports.LeaseStatus = "Occupied";
 const vacantLeaseFixture: BoweryReports.LeaseStatus = "Vacant";
-const _leaseDate = "01012022";
+const _leaseDate = "01-01-2022";
 const _monthly = "monthly" as BoweryReports.UnitsOfMeasure;
-const _compGroup = "QA_4576_Comp_Group";
+const _compGroup = "QA_4576_78_Comp_Group";
 const _marketRentConclusion = 441;
 
 const _rentCompFields: BoweryReports.RentCompField[] = [
@@ -31,7 +31,7 @@ const _rentCompFields: BoweryReports.RentCompField[] = [
     },
     {
         name: "use",
-        value: "office" as BoweryReports.CommercialUnitsUseValues,
+        value: "office" as BoweryReports.CommercialUnits.UseValues,
         type: "dropdown"
     },
     {
@@ -44,10 +44,10 @@ const _rentCompFields: BoweryReports.RentCompField[] = [
 export default {
     snapshotNames:{
         stabilizedRRPanel:"StabilizedRentRoll_Panel",
-        stabilizedRRPanel_severalUnits:"StabilizedRentRoll_Panel_Several_Units",
-        stabilizedRRPanel_severalUnits_compGroups:"stabilizedRRPanel_severalUnits_compGroups"
+        stabilizedRRPanelSeveralUnits:"StabilizedRentRoll_Panel_Several_Units",
+        stabilizedRRPanelSeveralUnitsCompGroups:"stabilizedRRPanel_severalUnits_compGroups"
     },
-    reportCreationData: ReportDataCreator.getReportData("4576_78", { incomeValue: Enums.INCOME_TYPE.BOTH }),
+    reportCreationData: ReportDataCreator.getReportData("4576_78", { incomeValue: Enums.INCOME_TYPE.both }),
     numberOfCommercialUnits: 2,
     listOfUnitsSF: [ 1000, 2000 ],
     groupName: groupNameFixture,
@@ -78,7 +78,7 @@ export default {
     vacantLease: vacantLeaseFixture,
     compGroupName: [ "Group1", "Group2" ],
     leaseDate: _leaseDate,
-    unitMeasureMontly: _monthly,
+    unitMeasureMonthly: _monthly,
     compGroup: _compGroup,
     rentCompFields: _rentCompFields,
     marketRentConclusion: _marketRentConclusion

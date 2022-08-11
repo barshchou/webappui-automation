@@ -1,15 +1,15 @@
 import ReportDataCreator from "../../../../data_creator/reportData.creator";
 import Enums from "../../../../../enums/enums";
-import { BoweryReports } from "../../../../../types";
+import { BoweryReports } from "../../../../../types/boweryReports.type";
 
-const groupNameFixture: BoweryReports.CommercialUnitsGroups = "Use";
-const useRadiosFixture: BoweryReports.CommercialUnitsUseValues[] = [ "retail", "office" ];
-const useTextFixture: BoweryReports.CommercialUnitsUseTexts[] = [ "Retail", "Office" ];
+const groupNameFixture: BoweryReports.CommercialUnits.Groups = "Use";
+const useRadiosFixture: BoweryReports.CommercialUnits.UseValues[] = [ "retail", "office" ];
+const useTextFixture: BoweryReports.CommercialUnits.UseTexts[] = [ "Retail", "Office" ];
 const _leaseStatusesMixed: BoweryReports.LeaseStatus[] = [ "Vacant", "Occupied" ];
 const _leaseStatusesVacant: BoweryReports.LeaseStatus[] = [ "Vacant", "Vacant" ];
 const _leaseStatusesOccupied: BoweryReports.LeaseStatus[] = [ "Occupied", "Occupied" ];
-const _leaseDate = "01012022";
-const _compGroup = "QA_4576_Comp_Group";
+const _leaseDate = "01-01-2022";
+const _compGroup = "QA_4586_Comp_Group";
 const _monthly = "monthly" as BoweryReports.UnitsOfMeasure;
 const _marketRentConclusion = 333;
 
@@ -31,7 +31,7 @@ const _rentCompFields: BoweryReports.RentCompField[] = [
     },
     {
         name: "use",
-        value: "office" as BoweryReports.CommercialUnitsUseValues,
+        value: "office" as BoweryReports.CommercialUnits.UseValues,
         type: "dropdown"
     },
     {
@@ -44,7 +44,7 @@ const _rentCompFields: BoweryReports.RentCompField[] = [
 
 export default {
     reportCreationData: ReportDataCreator.getReportData("4586", {
-        incomeValue: Enums.INCOME_TYPE.BOTH
+        incomeValue: Enums.INCOME_TYPE.both
     }),
     numberOfCommercialUnits: 2,
     listOfUnitsSF: [ 1000, 2000 ],
@@ -59,7 +59,7 @@ export default {
     compGroup: _compGroup,
     rentCompFields: _rentCompFields,
     leaseDate: _leaseDate,
-    unitMeasureMontly: _monthly,
+    unitMeasureMonthly: _monthly,
     comparableFirst: {
         address: "200 West 78 Street",
         sizeAdjustment: 20,

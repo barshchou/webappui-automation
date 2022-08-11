@@ -1,108 +1,181 @@
+import { BoweryReports } from "../../types/boweryReports.type";
 import { applyMixins } from "../../utils/object.utils";
 import BasePage from "../base/base.page";
-import PropertyInformationForm from "./drm/propertyInfo.page";
-import SaleInformationForm from "./drm/salesInfo.page";
+import PropertyInformationForm from "./comp_plex/propertyInfo.page";
+import SalesCompsDetailsForm from "./comp_plex/salesCompDetails.page";
+import SaleInformationForm from "./comp_plex/salesInfo.page";
 
 class FindCompsPage extends BasePage {
-    get createCompButton() {return cy.get("[data-qa=create-sales-comps-btn]", { includeShadowDom: true });}
+    get propertyDescReadingBtn() {
+        return cy.get('[data-qa="reading-btn"]');
+    }
 
-    get searchCompAddressInput() {return cy.get("[data-qa='google-autocomplete-search.location-input'] input", { includeShadowDom: true });}
+    get propertyDescRevertToGenerateBtn() {
+        return cy.get('[data-qa="revert-to-generated-btn"]');
+    }
 
-    get findCompField() {return cy.contains("Enter New Comparable Address", { includeShadowDom: true });}
+    get createCompButton() { return cy.get("[data-qa=create-sales-comps-btn]"); }
 
-    get submitButton() {return cy.get("[data-qa=submit-button]", { includeShadowDom: true });}
+    get searchCompAddressInput() {
+        return cy.get("[data-qa='google-autocomplete-search.location-input'] input");
+    }
 
-    //getSelectCompButtonByAddress(address) {return cy.xpath(`//*[text()='${address}']//following-sibling::td/a`);}
+    get findCompField() { return cy.contains("Enter New Comparable Address"); }
 
-    getSelectCompButtonByAddress(address) {return cy.contains(address, { includeShadowDom: true }).siblings("td").find("a");}
+    get submitButton() { return cy.get("[data-qa=submit-button]"); }
 
-    get addressCells() {return cy.get("[data-qa=address]", { includeShadowDom: true });}
+    getSelectCompButtonByAddress(address) {
+        return cy.contains(address).siblings("td").find("a");
+    }
 
-    get capRateCells() {return cy.get("td[data-qa=cap-rate]", { includeShadowDom: true });}
+    get addressCells() { return cy.get("[data-qa=address]", { timeout: 120000 }); }
 
-    get importCompsButton() {return cy.get("[data-qa=import-btn]", { includeShadowDom: true });}
+    get capRateCells() { return cy.get("td[data-qa=cap-rate]"); }
 
-    get importCompModal() {return cy.get("[data-qa*=import][data-qa*=modal]", { includeShadowDom: true });}
+    get importCompsButton() { return cy.get("[data-qa=import-btn]"); }
 
-    get csvInput() {return cy.get("[data-qa=file-input]", { includeShadowDom: true });}
+    get importCompModal() { return cy.get('[class="ant-modal-content"]'); }
+
+    get csvInput() { return cy.get("[data-qa=file-input]"); }
 
     getSelectCompFromMapButtonByAddress(address) {
-        return cy.get("[class*=salesCompItemWrapper]", { includeShadowDom: true }).contains(`${address}`).parent()
-        .siblings("[class*=buttonsColumn]").find("span").contains("ADD").parent();
+        return cy.get('[data-qa="sales-comp-item"]')
+            .contains(`${address}`).parent().parent()
+            .find('[data-qa="sales-comp-item-add-btn"]');
     }
 
-    // getRemoveSelectedCompButtonByAddress(address) {
-    //     return cy.xpath(`//*[contains(text(), '${address}')]//parent::td//following-sibling::td` +
-    //         "//descendant::button[@aria-label='Remove']");
-    // }
-
-    getRemoveSelectedCompButtonByAddress(address) {
-        return cy.contains(address, { includeShadowDom: true }).parent("td").siblings("td").children("button[@aria-label='Remove']");
+    /**
+     * Get all sales comps from search list
+     * @returns List of all rendered sales comps in search list
+     */
+    getSelectCompFromMapButton() {
+        return cy.get('[data-qa="sales-comp-item"]')
+            .find('[data-qa="sales-comp-item-add-btn"]');
     }
 
-    // getRemoveDeletedCompButtonByAddress(address) {
-    //     return cy.xpath(`//*[contains(text(), '${address}')]//parent::td//following-sibling::td` +
-    //         "//descendant::button[@aria-label='Add']//following::button[@aria-label='Remove'][1]");
-    // }
-
-    getRemoveDeletedCompButtonByAddress(address) {
-        return cy.contains(address, { includeShadowDom: true }).parent("td").siblings("td").children("button[@aria-label='Add']")
-            .next("button[@aria-label='Add'");
+    /**
+     * Sales Comp row in Selected Comparable table
+     * @param index number of selected comparables (default - 0)
+     */
+    getSelectedComparable(index = 0) {
+        return cy.get(`[data-qa="row-${index}"]`);
     }
 
-    getRemoveCompFromMapButtonByAddress(address) {
+    getRemoveSelectedCompButtonByAddress(address: string) {
+        return cy.contains(address).parent().find('[data-qa="selected-comp-remove-btn"]');
+    }
+
+    getRemoveDeletedCompButtonByAddress(address: string) {
+        return cy.contains(address).parent().find('[data-qa="removed-comp-remove-btn"]');
+    }
+
+    getRemoveCompFromMapButtonByAddress(address: string) {
         return cy.get("comp-plex").shadow().find("[class*=salesCompItemWrapper]").contains(`${address}`).parent()
-        .siblings("[class*=buttonsColumn]").find("span").contains("REMOVE").parent();
+            .siblings("[class*=buttonsColumn]").find("span").contains("REMOVE").parent();
     }
 
-    get reportToSearchCompInput() {return cy.get("[name^=report]", { includeShadowDom: true });}
+    get reportToSearchCompInput() { return cy.get("[data-qa='Report Unique ID']"); }
 
-    get importReportCompsButton() {return this.importCompModal.find("span").contains("Import")
-        .parent("button");}
+    get addToReportCompsButton() {
+        return this.importCompModal.contains("ADD TO REPORT");
+    }
+       
+    get selectCompsIconOnMap() {
+        return cy.get('[data-testid="ArticleIcon"]');
+    }
 
-    // get searchButton() {return cy.xpath("//button[.='Search']");}
+    get searchButton() {
+        return cy.get("button").not('[role="tab"]')
+            .contains("SEARCH");
+    }
 
-    get searchButton() {return cy.get("button[.='Search']", { includeShadowDom: true });}
+    get selectCompsButton() {
+        return cy.get("button").contains("Select Comps");
+    }
 
-    // get importCompsSelectButtons() {return cy.xpath("//*[.='Selected for report']//following::button[.='Select']");}
+    get selectAllButton() {
+        return this.importCompModal
+            .contains("SELECT ALL");
+    }
 
-    get importCompsSelectButtons() {return cy.contains("Selected for report", { includeShadowDom: true }).siblings("button[.='Select']");}
+    get importCompsSelectButtons() {
+        return cy.contains("Selected for report")
+            .siblings('div')
+            .find('[data-qa="sales-comp-item-add-btn"]');
+    }
 
-    get createCompSearchResults() {return cy.get("[data-qa=search-result-form] tbody tr", { includeShadowDom: true });}
+    get createCompSearchResults() {
+        return cy.get("[data-qa=search-result-form] tbody tr");
+    }
 
-    // get createNewCompButton() {return cy.xpath("//button[.='Create New']");}
+    get createNewCompButton() { return cy.contains("Create New"); }
 
-    get createNewCompButton() {return cy.contains("Create New", { includeShadowDom: true });}
+    get newCompSaveAndCloseButton() { return cy.get('[data-qa="Save & Close"]'); }
 
-    // get createCompNumberResidentialUnits() {return cy.xpath("//*[.='# Residential Units*']//child::input");}
+    get addressSalesComparablesTable() {
+        return cy.get('[data-qa="selected-sales-comps-table"] [data-qa="address"]');
+    }
 
-    get createCompNumberResidentialUnits() {return cy.get("comp-plex").shadow().contains("Residential Units").children("input");}
+    get sortSalesCompsSelectList() {
+        return cy.get('[data-qa="sortSalesComps-select-list"]');
+    }
 
-    // get conditionDropdown() {return cy.xpath("//*[text()='Condition']//following::*[@class='ant-select-selector'][1]");}
+    sortSalesCompsSelectListOption(sortType: BoweryReports.FindComps.SelectedComparablesSortType) {
+        return cy.get(`[data-qa="sortSalesComps-${sortType}-select-option"]`);
+    }
 
-    get conditionDropdown() {return cy.contains("Condition", { includeShadowDom: true }).next(".ant-select");}
+    get sortSalesCompsSelectValue() {
+        return this.sortSalesCompsSelectList.find('[data-qa="select-value"]');
+    }
 
-    getDropdownOption(title: string) {return cy.get(`.ant-select-item-option[title='${title}']`, { includeShadowDom: true });}
+    get salesCompsDateSold() {
+        return cy.get('[data-qa="sale-date"]');
+    }
 
-    // get errorMessageNewComp() {return cy.xpath("//*[text()='Required'][contains(@class, 'errorText')]");}
+    get loadingModalCSV() {
+        return cy.get('[data-qa="loading-modal"] [data-icon="file-upload"]', { timeout: 60000 });
+    }
 
-    get errorMessageNewComp() {return cy.contains("Required", { includeShadowDom: true });}
+    get resetAllButton() {
+        return cy.contains('RESET ALL');
+    }
 
-    // get newCompContinueButton() {return cy.xpath("//button[.='Continue']");}
+    get loadingModalSpinner() {
+        return cy.get('[data-qa="loading-modal"] [data-icon="spinner"]', { timeout: 60000 });
+    }
 
-    get newCompContinueButton() {return cy.get("button.Continue", { includeShadowDom: true });}
+    get filterSalePeriod() {
+        return cy.get('[data-qa="filter-sale-period"]');
+    }
 
-    // get netRentableAreaNewComp() {return cy.xpath("//*[.='Net Rentable Area']//child::input");}
+    filterSalePeriodValue(value: string) {
+        return cy.get('[role="option"]')
+            .contains(`${value}`);
+    }
 
-    get netRentableAreaNewComp() {return cy.contains("Net Rentable Area", { includeShadowDom: true }).children("input");}
+    get compSearchTab() {
+        return cy.get('[data-qa="comp-tab"]');
+    }
 
-    // get averageUnitSizeNewComp() {return cy.xpath("//*[.='Average Unit Size']//child::input");}
+    get adressSearchTab() {
+        return cy.get('[data-qa="address-tab"]');
+    }
 
-    get averageUnitSizeNewComp() {return cy.contains("Average Unit Size", { includeShadowDom: true }).children("input");}
+    get jobSearchTab() {
+        return cy.get('[data-qa="job-tab"]');
+    }
 
-    // get newCompSaveAndCloseButton() {return cy.xpath("//button[.='Save & Close']");}
+    get reportIdInput() {
+        return cy.get('input[placeholder="Find a specific Report ID"]');
+    }
+    
+    get selectedForReportTitle() {
+        return this.importCompModal.contains("Selected for report");
+    }
 
-    get newCompSaveAndCloseButton() {return cy.contains("Save & Close", { includeShadowDom: true });}
+    get sfNewComp() {
+        return cy.get('[title="SF"]');
+    }
 }
 
 /**
@@ -110,7 +183,7 @@ class FindCompsPage extends BasePage {
  * the expected mixins with the same name as your base
  */
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
-interface FindCompsPage extends PropertyInformationForm, SaleInformationForm {}
-applyMixins(FindCompsPage, [ PropertyInformationForm, SaleInformationForm ]);
+interface FindCompsPage extends PropertyInformationForm, SaleInformationForm, SalesCompsDetailsForm { }
+applyMixins(FindCompsPage, [ PropertyInformationForm, SaleInformationForm, SalesCompsDetailsForm ]);
 
 export const findCompsPage = new FindCompsPage();

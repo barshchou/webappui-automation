@@ -1,14 +1,16 @@
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 import Enums from "../../../../enums/enums";
-import { BoweryAutomation, BoweryReports } from "../../../../types";
+import { BoweryReports } from "../../../../types/boweryReports.type";
+import { BoweryAutomation } from "../../../../types/boweryAutomation.type";
 
 const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("4565", {
-    incomeValue: Enums.INCOME_TYPE.BOTH,
+    incomeValue: Enums.INCOME_TYPE.both,
     conclusionValue: Enums.VALUE_CONCLUSION_TYPE.AS_COMPLETE
 });
 
-const _ceilingHeightValues: Array<BoweryReports.CommercialUnitsCeilingHeightValues> = [ "low", "normal", "high", "other" ];
-const _groupName: BoweryReports.CommercialUnitsGroups = "Ceiling Height";
+const _ceilingHeightValues: Array<BoweryReports.CommercialUnits.CeilingHeightValues> = 
+    [ "low", "normal", "high", "other" ];
+const _groupName: BoweryReports.CommercialUnits.Groups = "Ceiling Height";
 
 export default {
     reportCreationData: _reportCreationData,

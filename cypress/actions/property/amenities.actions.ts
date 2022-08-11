@@ -2,15 +2,15 @@ import amenitiesPage from "../../pages/property/amenities.page";
 import { cutDecimalPartToNumberOfDigits, isDecimal } from "../../../utils/numbers.utils";
 import BaseActionsExt from "../base/base.actions.ext";
 
-class AmenitiesActions extends BaseActionsExt<typeof amenitiesPage>{
+class AmenitiesActions extends BaseActionsExt<typeof amenitiesPage> {
 
     addParkingPlaces(numberOfPlaces: number): AmenitiesActions {
         amenitiesPage.hasParkingCheckbox.check().should("have.value", "true");
         amenitiesPage.parkingSpacesNumberField.clear().type(`${numberOfPlaces}`);
-        if(isDecimal(numberOfPlaces)) {
+        if (isDecimal(numberOfPlaces)) {
             numberOfPlaces = cutDecimalPartToNumberOfDigits(numberOfPlaces, 0);
         }
-        if(numberOfPlaces > 2500) {
+        if (numberOfPlaces > 2500) {
             amenitiesPage.parkingErrorMessage.should("exist");
         }
         amenitiesPage.parkingSpacesNumberField.should("have.value", numberOfPlaces);

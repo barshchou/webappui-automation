@@ -1,7 +1,11 @@
 import taxInfoPage from "../../pages/income/taxInfo.page";
-import { getNumberFromDollarNumberWithCommas, numberWithCommas } from "../../../utils/numbers.utils";
+import {
+    getNumberFromDollarNumberWithCommas, numberWithCommas,
+    getNumberWithDecimalPart, getNumberFromPercentNumberWithCommas
+} from "../../../utils/numbers.utils";
 import BaseActionsExt from "../base/base.actions.ext";
-import { BoweryReports } from "../../types";
+import { BoweryReports } from "../../types/boweryReports.type";
+import taxInfoKeys from "../../utils/mapKeys/income/tax_Info/taxInfoKeys";
 
 class TaxInfoActions extends BaseActionsExt<typeof taxInfoPage> {
 
@@ -12,37 +16,57 @@ class TaxInfoActions extends BaseActionsExt<typeof taxInfoPage> {
     }
 
     enterTaxableAssessedLandValue(value: number): this {
-        const valueToBe = `$${numberWithCommas(value)}`;
-        taxInfoPage.landActualInput.clear().type(`${value}`).should("have.value", valueToBe);
+        const valueToBe = `$${numberWithCommas(value.toFixed(2))}`;
+        taxInfoPage.landActualInput.realClick().realClick()
+            .scrollIntoView()
+            .focus().type("something")
+            .clear()
+            .realType(`${value}{enter}`);
+        taxInfoPage.landActualInput.should('have.text', valueToBe);
         return this;
     }
 
-    enterTransitionalLandValue(value: number | string): TaxInfoActions {
-        const valueToBe = `$${numberWithCommas(value)}`;
-        taxInfoPage.landTransitional.clear().type(`${value}`).should("have.value", valueToBe);
+    enterTransitionalLandValue(value: number): TaxInfoActions {
+        const valueToBe = `$${numberWithCommas(value.toFixed(2))}`;
+        taxInfoPage.landTransitional.realClick().realClick()
+            .scrollIntoView()
+            .focus().type("something")
+            .clear()
+            .realType(`${value}{enter}`);
+        taxInfoPage.landTransitional.should('have.text', valueToBe);
         return this;
     }
 
     enterTaxableAssessedBuildingValue(value: number): this {
-        const valueToBe = `$${numberWithCommas(value)}`;
-        taxInfoPage.buildingActualInput.clear().type(`${value}`).should("have.value", valueToBe);
+        const valueToBe = `$${numberWithCommas(value.toFixed(2))}`;
+        taxInfoPage.buildingActualInput.realClick().realClick()
+            .scrollIntoView()
+            .focus().type("something")
+            .clear()
+            .realType(`${value}{enter}`);
+        taxInfoPage.buildingActualInput.should('have.text', valueToBe);
         return this;
     }
 
-    enterTransitionalBuildingValue(value: string | number): TaxInfoActions {
-        const valueToBe = `$${numberWithCommas(value)}`;
-        taxInfoPage.buildingTransitionalInput.clear().type(`${value}`).should("have.value", valueToBe);
+    enterTransitionalBuildingValue(value: number): TaxInfoActions {
+        const valueToBe = `$${numberWithCommas(value.toFixed(2))}`;
+        taxInfoPage.buildingTransitionalInput.realClick().realClick()
+            .scrollIntoView()
+            .focus().type("something")
+            .clear()
+            .realType(`${value}{enter}`);
+        taxInfoPage.buildingTransitionalInput.should('have.text', valueToBe);
         return this;
     }
 
     switchIncludeTransitionalCheckbox(value = false): TaxInfoActions {
         taxInfoPage.includeTransitionalAssessedValueCheckbox
             .invoke('attr', 'value').then(attr => {
-            cy.log(`${attr}`);
-            if (attr == `${!value}`){
-                taxInfoPage.includeTransitionalAssessedValueCheckbox.click().should('have.value', `${value}`);
-            }
-        });
+                cy.log(`${attr}`);
+                if (attr == `${!value}`) {
+                    taxInfoPage.includeTransitionalAssessedValueCheckbox.click().should('have.value', `${value}`);
+                }
+            });
         return this;
     }
 
@@ -237,8 +261,8 @@ class TaxInfoActions extends BaseActionsExt<typeof taxInfoPage> {
         return this;
     }
 
-    addListTaxComparablesWithoutSourceInfoData(taxCompDatas: BoweryReports.TaxCompData[]): this {
-        taxCompDatas.forEach(data => {
+    addListTaxComparablesWithoutSourceInfoData(taxCompData: BoweryReports.TaxCompData[]): this {
+        taxCompData.forEach(data => {
             this.addTaxComparableWithoutSourceInfoData(data);
         });
         return this;
@@ -263,15 +287,28 @@ class TaxInfoActions extends BaseActionsExt<typeof taxInfoPage> {
                 return "Bowery Subject";
             case "other":
                 return "Other";
+            default:
+                cy.log('Provided source of information is not valid');
+                return null;
         }
     }
 
-    verifyListAddedComparables(taxCompDatas: BoweryReports.TaxCompData[]): this {
-        let rowIndex = taxCompDatas.length - 1;
-        for (let i = 0; i < taxCompDatas.length; i++) {
-            this.verifyAddedComparableByRowNumber(taxCompDatas[i], rowIndex);
+    verifyListAddedComparables(taxCompData: BoweryReports.TaxCompData[]): this {
+        let rowIndex = taxCompData.length - 1;
+        for (let i = 0; i < taxCompData.length; i++) {
+            this.verifyAddedComparableByRowNumber(taxCompData[i], rowIndex);
             rowIndex--;
         }
+        return this;
+    }
+
+    clickAddAdditionalTaxRate(): TaxInfoActions {
+        taxInfoPage.addAdditionalTaxRate.click();
+        return this;
+    }
+
+    clickAddSpecialAssessmentRate(): TaxInfoActions {
+        taxInfoPage.addSpecialAssessment.click();
         return this;
     }
 
@@ -287,7 +324,7 @@ class TaxInfoActions extends BaseActionsExt<typeof taxInfoPage> {
 
     checkConcludedLiabilityTypeByValue(value: string): this {
         taxInfoPage.concludedLiabilityTypeRadio.check(value);
-        taxInfoPage.getVerifyConcludedTaxLiabTypeInput(value).should("exist");
+        taxInfoPage.getVerifyConcludedTaxLiabilityTypeInput(value).should("exist");
         return this;
     }
 
@@ -310,7 +347,7 @@ class TaxInfoActions extends BaseActionsExt<typeof taxInfoPage> {
     }
 
     verifyAppraiserOpinionTaxRateCell(taxRate: number): this {
-        taxInfoPage.appraiserOpTaxLiabTaxRateValueCell.should("have.text", `${taxRate}%`);
+        taxInfoPage.appraiserOpTaxLiabilityTaxRateValueCell.should("have.text", `${taxRate}%`);
         return this;
     }
 
@@ -340,6 +377,115 @@ class TaxInfoActions extends BaseActionsExt<typeof taxInfoPage> {
 
     verifyTaxSummaryDiscussion(textToBe: string): this {
         taxInfoPage.taxSummaryDiscussion.should("have.text", textToBe);
+        return this;
+    }
+
+    verifyRowTaxLiability(name: string, rowNumber = 0): TaxInfoActions {
+        taxInfoPage.getTaxLiabilityRowValue(name).eq(rowNumber).should("exist");
+        return this;
+    }
+
+    enterRowTaxLiabilityItem(rowName: string, enterName: string, rowNumber = 0): TaxInfoActions {
+        taxInfoPage.getTaxLiabilityRowItem(rowName).eq(rowNumber)
+            .realClick()
+            .realClick()
+            .type(`${enterName}{enter}`)
+            .should("have.text", enterName);
+        return this;
+    }
+
+    /**
+     * Enters values for the selected row. Depending on the name of the row, the rounding of values changes
+     * @param rowName The name of the row you want to change
+     * @param value Enter value 
+     * @param rowNumber Row number. Need if there is row with similar name 
+     * @returns `this`
+     */
+    enterRowTaxLiabilityValue(rowName: string, value: number, decimalCount = 9, rowNumber = 0): TaxInfoActions {
+        const initial = taxInfoPage.getTaxLiabilityRowValue(rowName).eq(rowNumber)
+            .realClick().realClick().type(`${value}{enter}`);
+        if (rowName === "Additional Tax Rate") {
+            initial.should("have.text", `${getNumberWithDecimalPart(value, decimalCount)}%`);
+        } else {
+            initial.should("have.text", `$${numberWithCommas(value.toFixed(2))}`);
+        }
+        return this;
+    }
+
+    deleteRowTaxLiability(rowName: string, rowNumber = 0): TaxInfoActions {
+        taxInfoPage.getTaxLiabilityRowAction(rowName).eq(rowNumber).click().should("not.exist");
+        return this;
+    }
+
+    /**
+     * Get all values from row and add in `Map`
+     * @param rowName Row name in Tax Liability table
+     * @param isPercent `true` if value contains `%`, `false` if value contains `$`
+     * @returns `this`
+     */
+    private getValuesFromRows(rowName: string, isPercent = true): TaxInfoActions {
+        taxInfoPage.getTaxLiabilityRowValue(rowName).then($el => {
+            const rowElements = [];
+            for (let i = 0; $el.length > i; i++) {
+                taxInfoPage.getTaxLiabilityRowValue(rowName).eq(i).invoke("text").then(rowElement => {
+                    let rowElementNumber = isPercent ? getNumberFromPercentNumberWithCommas(rowElement)
+                        : getNumberFromDollarNumberWithCommas(rowElement);
+                    rowElements.push(rowElementNumber);
+                });
+            }
+            const mapKey = rowName === "Tax Rate" ? taxInfoKeys.taxRates : taxInfoKeys.assessmentRows;
+            cy._mapSet(mapKey, rowElements);
+        });
+        return this;
+    }
+
+    /**
+     * Get all "Tax Rate" and "Assessment Row" values and verify "Tax Liability (Total)" using this formula:
+     * sum of all tax rates * sum of all assessments = tax liability (total)
+     * @returns `this`
+     */
+    verifyTotalTaxLiability(): TaxInfoActions {
+        this.getValuesFromRows("Tax Rate");
+        cy._mapGet(taxInfoKeys.taxRates).then(taxRates => {
+            const sumTaxRates = taxRates.reduce((a, b) => a + b);
+            const taxRatesPercent = sumTaxRates / 100;
+            this.getValuesFromRows("Assessment Row", false);
+            cy._mapGet(taxInfoKeys.assessmentRows).then(assessments => {
+                const sumAssessments = assessments.reduce((a, b) => a + b);
+                taxInfoPage.getTaxLiabilityRowValue("Taxable Assessed Value").invoke("text")
+                    .then(taxAssessedText => {
+                        const allTaxAssessedNumber = sumAssessments +
+                            getNumberFromDollarNumberWithCommas(taxAssessedText);
+                        const taxLiabilityTotalToBe =
+                            `$${numberWithCommas((allTaxAssessedNumber * taxRatesPercent).toFixed(2))}`;
+                        taxInfoPage.getTaxLiabilityRowValue("Tax Liability (Total)")
+                            .should("have.text", taxLiabilityTotalToBe);
+                    });
+            });
+        });
+        return this;
+    }
+
+    verifyTaxLiabilityItemAndValue(item: string, value: string | number): TaxInfoActions {
+        const convertValue = numberWithCommas(value);
+        taxInfoPage.getTaxLiabilityRowItem(item).should("exist");
+        taxInfoPage.getTaxLiabilityRowItem(convertValue).should("have.text", convertValue);
+        return this;
+    }
+
+    verifyPSFTaxLiability(item: BoweryReports.BasisSquareFootAnalysis, isSummary = false): TaxInfoActions {
+        taxInfoPage.getTaxLiabilityRowValue(`${item}`).invoke("text").then(PSFAnalysis => {
+            const numberPSFAnalysis = getNumberFromDollarNumberWithCommas(PSFAnalysis);
+            taxInfoPage.getTaxLiabilityRowValue("Tax Liability (Total)").invoke("text").then(taxLiabilityTotal => {
+                const numberTaxLiabilityTotal = getNumberFromDollarNumberWithCommas(taxLiabilityTotal);
+                const taxLiability = `$${numberWithCommas((numberTaxLiabilityTotal / numberPSFAnalysis).toFixed(2))}`;
+                taxInfoPage.getTaxLiabilityRowValue("Tax Liability (PSF)").should("have.text", taxLiability);
+                if (isSummary === true) {
+                    this.clickSummaryTab();
+                    taxInfoPage.getSummaryRowValue("taxLiabilityPerBasis").should("have.text", taxLiability);
+                }
+            });
+        });
         return this;
     }
 }

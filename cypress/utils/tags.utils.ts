@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 export enum Tag {
     property = "@property",
     income = "@income",
@@ -5,6 +6,7 @@ export enum Tag {
     stabilized_rent_roll = "@stabilized_rent_roll",
     in_place_rent_roll = "@in_place_rent_roll",
     comp_plex = "@comp_plex",
+    comp_plex_standalone = "@comp_plex_standalone",
     snapshot_tests = "@snapshot_tests",
     expense_forecast = "@expense_forecast",
     fix = "@fix",
@@ -28,5 +30,25 @@ export enum Tag {
     market = "@market",
     smoke = "@smoke",
     salesforce = "@salesforce",
-    summary= "@summary"
+    flaky = "@flaky",
+    summary = "@summary",
+    full_building_comps = "@full_building_comps",
+    unit_mix = "@unit_mix",
+    organizations = "@organizations",
+    permissions_roles = "@permissions_roles",
+    propertyConditions = "@property_conditions",
+    comp_summary = "@comp_summary",
+    users = "@users",
+    feature_flag= "@feature_flag",
+    report_status = "@report_status",
+    appraiser = "@appraiser",
+    settings = "@settings",
+    unit_details = "@unit_details",
+    reimbursement_summary = "@reimbursement_summary",
+    rent_reconciliation = "@rent_reconciliation",
+    site_description = "@site_description",
+    stabilized_rent_roll_summary = "@stabilized_rent_roll_summary",
+    final = "@final",
+    swot_analysis = "@swot_analysis",
+    cms = "@cms"
 }

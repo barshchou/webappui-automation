@@ -1,14 +1,14 @@
 import Enums from "../../../../enums/enums";
-import { BoweryReports } from "../../../../types";
+import { BoweryReports } from "../../../../types/boweryReports.type";
 import reportDataCreator from "../../../data_creator/reportData.creator";
 
 export const reportCreationData = conclusionValue => {
     return reportDataCreator.getReportData("1764459100",
-    {
-        templateValue: Enums.TEMPLATE_TYPE.NOT_FREDDIE_MAC,
-        incomeValue: Enums.INCOME_TYPE.BOTH,
-        conclusionValue: conclusionValue
-    }, true);
+        {
+            templateValue: Enums.TEMPLATE_TYPE.notFreddieMac,
+            incomeValue: Enums.INCOME_TYPE.both,
+            conclusionValue: conclusionValue
+        }, true);
 };
 
 export default {

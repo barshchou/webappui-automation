@@ -1,7 +1,7 @@
 import { numberWithCommas } from './../../../../utils/numbers.utils';
 import otherPage from "../../../pages/income/miscellaneous/other.page";
 import BaseActionsExt from "../../base/base.actions.ext";
-import { BoweryReports } from '../../../types';
+import { BoweryReports } from '../../../types/boweryReports.type';
 
 class OtherActions extends BaseActionsExt<typeof otherPage> {
 
@@ -12,7 +12,7 @@ class OtherActions extends BaseActionsExt<typeof otherPage> {
 
     addOtherIncome(otherIncomeItem: BoweryReports.OtherIncomeItem): OtherActions {
         this.clickAddOtherIncome()
-            .eneterAnnualAmount(otherIncomeItem.annualAmount)
+            .enterAnnualAmount(otherIncomeItem.annualAmount)
             .selectLossType(otherIncomeItem.vcLossType)
             .addVCPercentAmount(otherIncomeItem.vcPercent)
             .enterIncomeCategory(otherIncomeItem.incomeCategory);
@@ -20,11 +20,11 @@ class OtherActions extends BaseActionsExt<typeof otherPage> {
     }
 
     clickAddOtherIncome(): OtherActions {
-        otherPage.addOtherincomeButton.click();
+        otherPage.addOtherIncomeButton.click();
         return this;
     }
 
-    eneterAnnualAmount(value: number, index = 0): OtherActions {
+    enterAnnualAmount(value: number, index = 0): OtherActions {
         otherPage.otherIncomeAnnualAmount(index).clear().type(`${value}`)
             .should('have.value', numberWithCommas(value.toFixed(2)));
         return this;

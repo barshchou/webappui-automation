@@ -1,10 +1,10 @@
 import testData from "../../../../fixtures/not_full_reports/property/summary/QA-4084.fixture";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { Property } from "../../../../actions";
 
 describe("[QA-4084] Check the Census Tract field", { tags: [ "@property", "@summary" ] }, () => {
-    before("Login, create report", () => {
+    beforeEach("Login, create report", () => {
         createReport(testData.reportCreationData);
     });
 
@@ -35,7 +35,5 @@ describe("[QA-4084] Check the Census Tract field", { tags: [ "@property", "@summ
         Property._Summary.Page.censusTractField.clear().type(testData.incorrectValue);
         Property._Summary.clickSaveButton();
         Property._Summary.Page.censusTractFieldValidationText(testData.validationText).should("be.visible");
-
-        deleteReport(testData.reportCreationData.reportNumber);
     });
 });

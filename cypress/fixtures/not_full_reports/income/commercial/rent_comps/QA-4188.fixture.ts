@@ -1,10 +1,10 @@
 import Enums from "../../../../../enums/enums";
-import { BoweryReports } from "../../../../../types";
+import { BoweryReports } from "../../../../../types/boweryReports.type";
 import ReportDataCreator from "../../../../data_creator/reportData.creator";
 
 const reportCreationFixture = () => {
     return ReportDataCreator.getReportData("4188", {
-        incomeValue: Enums.INCOME_TYPE.BOTH
+        incomeValue: Enums.INCOME_TYPE.both
     });
 };
 
@@ -26,7 +26,7 @@ const _rentCompFields: BoweryReports.RentCompField[] = [
     },
     {
         name: "use",
-        value: "office" as BoweryReports.CommercialUnitsUseValues,
+        value: "office" as BoweryReports.CommercialUnits.UseValues,
         type: "dropdown"
     },
     {
@@ -43,7 +43,7 @@ export default {
     reportCreationData: reportCreationFixture(),
     address: "462 1st Avenue, New York, USA",
     rentCompFields: _rentCompFields,
-    leaseDate: "01012022",
+    leaseDate: "01-01-2022",
     baseRent: 12,
     squareFeet: 100,
     numberOfMonthsInYear: 12,

@@ -1,3 +1,4 @@
+import { numberWithCommas } from './../../../../utils/numbers.utils';
 import compGroupsPage from "../../../pages/income/commercial/compGroups.page";
 import BaseActionsExt from "../../base/base.actions.ext";
 
@@ -49,20 +50,22 @@ class CompGroupsActions extends BaseActionsExt<typeof compGroupsPage> {
      * If there is no elements in a drop group we use default locator, in other case we use 1st row of a group.
      * 
      * Verifies that after dragging all elements there is no units left in unsorted group
-    */
+     */
     dragAllCommercialUnitsIntoGroup(groupName: string, numberOfUnits = 1, index = 0): CompGroupsActions {
-        let subject = compGroupsPage.getDragableElement(index); //always selects 1st element in group
+        let subject = compGroupsPage.getDraggableElement(index); //always selects 1st element in group
         let commercialUnit = cy.get(subject);
         let target: string;
 
         for (let i = 0; i < numberOfUnits; i++) {
-            if (i == 0){
-                target = compGroupsPage.getDropableArea(groupName);
+            if (i == 0) {
+                target = compGroupsPage.getDroppableArea(groupName);
             } else {
-                target = compGroupsPage.getDropableAreaDropped(groupName);
+                target = compGroupsPage.getDroppableAreaDropped(groupName);
             }
             
             commercialUnit.dragAndDrop(subject, target);
+            // VB: For more than 2 units Drag and drop is too slow and we need to wait a bit between dnd actions.
+            cy.wait(1500);
         }
 
         this.verifyAllItemsDragged();
@@ -70,7 +73,17 @@ class CompGroupsActions extends BaseActionsExt<typeof compGroupsPage> {
     }
 
     verifyAllItemsDragged(): CompGroupsActions {
-        compGroupsPage.draggablePlaceholder.should('be.visible');
+        compGroupsPage.draggablePlaceholder.should('exist');
+        return this;
+    }
+
+    verifyCompGroupRentLabel(compGroupName = "Unsorted"): CompGroupsActions {
+        compGroupsPage.rentPerSFMonthLabel(compGroupName).should('exist');
+        return this;
+    }
+
+    verifyRentBasisDisplayedWithDecimals(unitRent: number, index = 0, compGroupName = "Unsorted"): CompGroupsActions {
+        compGroupsPage.rentCell(compGroupName, index).should('have.text', `$${numberWithCommas(unitRent.toFixed(2))}`);
         return this;
     }
 }

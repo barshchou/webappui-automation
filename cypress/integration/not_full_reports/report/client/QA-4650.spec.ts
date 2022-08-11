@@ -1,37 +1,38 @@
 import testData from "../../../../fixtures/not_full_reports/report/client/QA-4650.fixture";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Report from "../../../../actions/report/report.manager";
 
 describe("Verify the Client Guidelines Discussion on the page", 
     { tags: [ "@report", "@client" ] }, () => {
-        
-    before("Login, create report", () => {
-        createReport(testData.reportCreationData);
-    });
+        beforeEach("Login, create report", () => {
+            createReport(testData.reportCreationData);
+        });
 
-    it("Test body", () => {
-        cy.stepInfo(`1. Fill in the editable fields with values and do NOT click on the Save button.`);
-        NavigationSection.navigateToClientPage();
-        Report.Client.enterClientName(testData.clientName).
-        enterClientFileNumber(testData.clientFileNumber);
+        it("Test body", () => {
+            cy.stepInfo(`1. Fill in the editable fields with values and do NOT click on the Save button.`);
+            NavigationSection.navigateToClientPage();
+            Report.Client.enterClientName(testData.clientName).
+                enterClientFileNumber(testData.clientFileNumber);
 
-        cy.stepInfo(`2. Try to proceed on any other page and verify that the Unsaved changes modal is displayed.`);
-        NavigationSection.navigateToReportInformation().verifyUnsavedChangesModal();
+            cy.stepInfo(`2. Try to proceed on any other page and verify that the Unsaved changes modal is displayed.`);
+            NavigationSection.clickReportButton()
+                .clickReportInfoButton()
+                .verifyUnsavedChangesModal();
 
-        cy.stepInfo(`3. Click on the Yes button and verify that the changes are saved on the Client page.`);
-        NavigationSection.clickYesButton().navigateToClientPage();
+            cy.stepInfo(`3. Click on the Yes button and verify that the changes are saved on the Client page.`);
+            NavigationSection.clickYesButton().navigateToClientPage();
 
-        cy.stepInfo(`4. Repeat step 1, try to proceed on any other page from the Client page 
+            cy.stepInfo(`4. Repeat step 1, try to proceed on any other page from the Client page 
         and verify that the Unsaved changes modal is displayed.`);
-        Report.Client.enterClientName(testData.clientName).
-        enterClientFileNumber(testData.clientFileNumber+"_UNSAVED");
-        NavigationSection.navigateToReportInformation().verifyUnsavedChangesModal();
+            Report.Client.enterClientName(testData.clientName).
+                enterClientFileNumber(testData.clientFileNumber+"_UNSAVED");
+            NavigationSection.clickReportButton()
+                .clickReportInfoButton()
+                .verifyUnsavedChangesModal();
 
-        cy.stepInfo(`5. Click on the No button and verify that the changes are NOT saved on the Client page.`);
-        NavigationSection.clickNoButton().navigateToClientPage();
-        Report.Client.verifyInputChangesToBeUnsaved(testData.clientFileNumber);
-        
-        deleteReport(testData.reportCreationData.reportNumber);
+            cy.stepInfo(`5. Click on the No button and verify that the changes are NOT saved on the Client page.`);
+            NavigationSection.clickNoButton().navigateToClientPage();
+            Report.Client.verifyInputChangesToBeUnsaved(testData.clientFileNumber);
+        });
     });
-});

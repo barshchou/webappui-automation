@@ -1,7 +1,7 @@
-import { BoweryReports } from "../../../../types";
+import { BoweryReports } from "../../../../types/boweryReports.type";
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 
-const _forecasItem: BoweryReports.ForecastItem = {
+const _forecastItem: BoweryReports.ForecastItem = {
     name: "repairsAndMaintenance", basis: "unit", forecast: 27460
 };
 const _buildingDescription: BoweryReports.BuildingDescription = {
@@ -12,5 +12,5 @@ const _buildingDescription: BoweryReports.BuildingDescription = {
 export default {
     reportCreationData: ReportDataCreator.getReportData("4936"),
     buildingDescription: _buildingDescription,
-    forecastItem: _forecasItem,
+    forecastItem: _forecastItem,
 };

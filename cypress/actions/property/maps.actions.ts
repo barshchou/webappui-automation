@@ -1,71 +1,42 @@
-import BaseActions from "../base/base.actions";
 import mapsPage from "../../pages/property/maps.page";
 import { cutDecimalPartToNumberOfDigits, isHasDecimalPartMoreNumberOfDigits } from "../../../utils/numbers.utils";
 import { getUploadFixture } from "../../../utils/fixtures.utils";
+import BaseActionsExt from "../base/base.actions.ext";
 
-class MapsActions extends BaseActions{
+class MapsActions extends BaseActionsExt<typeof mapsPage> {
 
-    /**
-     *
-     * @param {number} frontage
-     * @return {MapsActions}
-     */
-    enterPropertyFrontage(frontage) {
+    enterPropertyFrontage(frontage: number): MapsActions {
         if (isHasDecimalPartMoreNumberOfDigits(frontage, 2)) {
             frontage = cutDecimalPartToNumberOfDigits(frontage, 2);
         }
-        mapsPage.propertyFrontage.clear().type(frontage).should("have.value", frontage);
+        mapsPage.propertyFrontage.clear().type(`${frontage}`).should("have.value", frontage);
         return this;
     }
 
-    /**
-     *
-     * @param {string} fileName
-     * @returns {MapsActions}
-     */
-    uploadZoningMap(fileName) {
+    uploadZoningMap(fileName: string): MapsActions {
         mapsPage.zoningMapUploadInput.should("exist").attachFile(getUploadFixture(fileName));
         mapsPage.zoningMapImageToCheck.should("have.attr", "title");
         return this;
     }
 
-    /**
-     *
-     * @param {string} fileName
-     * @returns {MapsActions}
-     */
-    uploadFloodMap(fileName) {
+    uploadFloodMap(fileName: string): MapsActions {
         mapsPage.floodMapUploadInput.should("exist").attachFile(getUploadFixture(fileName));
         mapsPage.floodMapImageToCheck.should("have.attr", "title");
         return this;
     }
 
-    /**
-     *
-     * @param {string} value
-     * @returns {MapsActions}
-     */
-    chooseCornerByValue(value) {
+    chooseCornerByValue(value: string): MapsActions {
         mapsPage.cornerRadios.check(value).should("be.checked");
         return this;
     }
 
-    /**
-     *
-     * @param {string} fileName
-     * @returns {MapsActions}
-     */
-    uploadTaxMap(fileName) {
+    uploadTaxMap(fileName: string): MapsActions  {
         mapsPage.taxMapUploadInput.should("exist").attachFile(getUploadFixture(fileName));
         mapsPage.taxMapImageToCheck.should("have.attr", "title");
         return this;
     }
 
-    /**
-     *
-     * @returns {MapsActions}
-     */
-    captureSubjectMap() {
+    captureSubjectMap(): MapsActions {
         mapsPage.subjectMapOpenWizardButton.click();
         mapsPage.subjectMapImage.should("exist");
         mapsPage.subjectMapCaptureScreenButton.click();
@@ -76,4 +47,4 @@ class MapsActions extends BaseActions{
     }
 }
 
-export default new MapsActions();
+export default new MapsActions(mapsPage);

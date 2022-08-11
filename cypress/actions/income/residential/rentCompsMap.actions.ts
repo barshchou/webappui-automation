@@ -1,19 +1,14 @@
-import BaseActions from "../../base/base.actions";
 import rentCompsMapPage from "../../../pages/income/residential/rentCompsMap.page";
 import { getUploadFixture } from "../../../../utils/fixtures.utils";
+import BaseActionsExt from "../../base/base.actions.ext";
 
-class RentCompsMapActions extends BaseActions{
+class RentCompsMapActions extends BaseActionsExt<typeof rentCompsMapPage> {
 
-    /**
-     *
-     * @param {string} filePath
-     * @returns {RentCompsMapActions}
-     */
-    uploadCompMap(filePath) {
+    uploadCompMap(filePath: string): RentCompsMapActions {
         rentCompsMapPage.mapImageInput.attachFile(getUploadFixture(filePath));
         rentCompsMapPage.mapImage.should("have.attr", "title");
         return this;
     }
 }
 
-export default new RentCompsMapActions();
+export default new RentCompsMapActions(rentCompsMapPage);

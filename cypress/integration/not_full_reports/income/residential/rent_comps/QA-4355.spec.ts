@@ -1,4 +1,4 @@
-import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../../actions/base/navigationSection.actions";
 import Income from "../../../../../actions/income/income.manager";
 import RentCompsPage from "../../../../../pages/income/residential/rent_comps/rentComps.page";
@@ -9,7 +9,7 @@ const reportCreationData = ReportDataCreator.getReportData("4355");
 describe(`Verify the user can switch to 'Building' type of search on clicking 'Search Per Building' button on 
                 'Are you sure you want to search Per Building?' waring overlay`, () => {
 
-    before("Login, create report", () => {
+    beforeEach("Login, create report", () => {
         createReport(reportCreationData);
     });
 
@@ -19,6 +19,5 @@ describe(`Verify the user can switch to 'Building' type of search on clicking 'S
             .changeToBuildingSearch()
             .verifyProgressBarNotExist();
         RentCompsPage.perBuildingFiltersButton.should("exist");
-        deleteReport(reportCreationData.reportNumber);
     });
 });

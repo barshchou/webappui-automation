@@ -1,6 +1,6 @@
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 import Enums from "../../../../enums/enums";
-import { BoweryAutomation, BoweryReports } from "../../../../types";
+import { BoweryReports } from "../../../../types/boweryReports.type";
 
 const _grossBuildingArea = 5000;
 const _numberOfCommercialUnits = 3;
@@ -10,8 +10,8 @@ const _name = Enums.EXPENSE_CELL.fuel;
 const _basis = "sf" as BoweryReports.UnitSF;
 const _projection = 567.89;
 const _forecast = 322;
-const _perRoomAnalysis = "Include Per Room Analysis in Report";
-const _residentialRooms =Array(_numberOfResidentialUnits).fill(_numberOfRooms);
+const _perRoomAnalysis = Enums.RENT_ROLL_OPTIONS_CHECKBOXES.include;
+const _residentialRooms = Array(_numberOfResidentialUnits).fill(_numberOfRooms);
 
 const _forecastItem = (): BoweryReports.ForecastItem => {
     return {
@@ -35,9 +35,9 @@ const _fuelRoomPerSf = _fuelRoomTotal / _grossBuildingArea;
 const _fuelRoomPerUnit = _forecast * _numberOfRooms;
 
 
-const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("QA-4854_55_58_4864-66_4921-23", {
-        incomeValue: Enums.INCOME_TYPE.BOTH
-    });
+const _reportCreationData = ReportDataCreator.getReportData("QA-4854_55_58_4864-66_4921-23", {
+    incomeValue: Enums.INCOME_TYPE.both
+});
 
 export default {
     reportCreationData: _reportCreationData,

@@ -8,7 +8,7 @@ import { _gqlAlias } from "./alias.utils";
 export const hasOperationName = (req: CyHttpMessages.IncomingHttpRequest, operationName: string) => {
     const { body } = req;
     return (
-      body.hasOwnProperty('operationName') && body.operationName === operationName
+        body.hasOwnProperty('operationName') && body.operationName === operationName
     );
 };
   
@@ -17,6 +17,6 @@ export const hasOperationName = (req: CyHttpMessages.IncomingHttpRequest, operat
  */
 export const aliasQuery = (req: CyHttpMessages.IncomingHttpRequest, operationName: string) => {
     if (hasOperationName(req, operationName)) {
-      req.alias = _gqlAlias(operationName);
+        req.alias = _gqlAlias(operationName);
     }
 };

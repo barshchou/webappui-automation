@@ -1,9 +1,9 @@
 import addCompFormPage from "../../../../pages/income/residential/rent_comps/addCompForm.page";
 import { getTodayDateString, getTodayDay, isDateHasCorrectFormat } from "../../../../../utils/date.utils";
 import { isDecimal, isHalfDecimalPart, numberWithCommas } from "../../../../../utils/numbers.utils";
-import BaseActions from "../../../base/base.actions";
+import BaseActionsExt from "../../../base/base.actions.ext";
 
-class AddCompFormActions extends BaseActions {
+class AddCompFormActions extends BaseActionsExt<typeof addCompFormPage> {
 
     clickCloseButton(): AddCompFormActions {
         addCompFormPage.closeButton.should("be.enabled").click();
@@ -39,7 +39,7 @@ class AddCompFormActions extends BaseActions {
 
     selectListUnitTypes(values: string[]): AddCompFormActions {
         values.forEach(value => {
-           this.selectUnitTypeAndVerify(value);
+            this.selectUnitTypeAndVerify(value);
         });
         return this;
     }
@@ -60,14 +60,14 @@ class AddCompFormActions extends BaseActions {
         this.clearDateInput();
         date = date ?? getTodayDateString();
         addCompFormPage.dateOfValueInput.type(date);
-        if (!isDateHasCorrectFormat(date)) addCompFormPage.errorMessage.should("exist");
+        if (!isDateHasCorrectFormat(date)) { addCompFormPage.errorMessage.should("exist"); }
         this.verifyEnteredDate(date);
         return this;
     }
 
     verifyEnteredDate(dateToBe?: string): AddCompFormActions {
         dateToBe = dateToBe ?? getTodayDateString();
-        if (!isDateHasCorrectFormat(dateToBe)) dateToBe = "";
+        if (!isDateHasCorrectFormat(dateToBe)) { dateToBe = ""; }
         addCompFormPage.dateInputValue.should("have.value", dateToBe);
         return this;
     }
@@ -161,14 +161,16 @@ class AddCompFormActions extends BaseActions {
             let numberOfBath: string;
             numberOfBath = number.toFixed(1);
             numberOfBath = `${number}`;
-            addCompFormPage.numberOfBathInput.clear().type(numberOfBath).type("{enter}").should("have.value", numberOfBath);
+            addCompFormPage.numberOfBathInput.clear().type(numberOfBath)
+                .type("{enter}").should("have.value", numberOfBath);
             if (!isHalfDecimalPart(number)) {
                 addCompFormPage.numberOfRoomsInput.click();
                 addCompFormPage.numberOfBathInput.click();
                 addCompFormPage.bathNumbErrorMessage.should("exist");
             }
         } else {
-            addCompFormPage.numberOfBathInput.clear().type(number.toString()).type("{enter}").should("have.value", number);
+            addCompFormPage.numberOfBathInput.clear().type(number.toString())
+                .type("{enter}").should("have.value", number);
         }
         return this;
     }
@@ -247,4 +249,4 @@ class AddCompFormActions extends BaseActions {
     }
 }
 
-export default new AddCompFormActions();
+export default new AddCompFormActions(addCompFormPage);

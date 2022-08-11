@@ -1,11 +1,11 @@
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 import enums from "../../../../enums/enums";
-import { BoweryReports } from "../../../../types";
+import { BoweryReports } from "../../../../types/boweryReports.type";
 
 const _buildingDescription: BoweryReports.BuildingDescription = {
     grossArea: 2500,
     numberOfUnits: 5,
-  };
+};
 
 const _electricityForecast = 9;
 const _fuelForecast = 21;
@@ -57,9 +57,9 @@ export default {
     reportCreationData: ReportDataCreator.getReportData("4995"),
     buildingDescription: _buildingDescription,
     basis: _basis,
-    expenseModeElectricityFuelWater: enums.UTILITIES_EXPENSES_MODE.combinedElectricityFuelWater,
-    expenseModeBrokenOut: enums.UTILITIES_EXPENSES_MODE.brokenOut,
-    expenseModeElectricityFuel: enums.UTILITIES_EXPENSES_MODE.combinedElectricityAndFuel,
+    expenseModeElectricityFuelWater: enums.UTILITY_EXPENSES.combinedAll,
+    expenseModeBrokenOut: enums.UTILITY_EXPENSES.brokenOut,
+    expenseModeElectricityFuel: enums.UTILITY_EXPENSES.combinedElectricityAndFuel,
     forecastItems: _forecastItems(),
     totalElectricity: _totalElectricity,
     totalFuel: _totalFuel,

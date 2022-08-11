@@ -1,6 +1,6 @@
 import ReportDataCreator from "../../../../../fixtures/data_creator/reportData.creator";
 import Enums from "../../../../../enums/enums";
-import { createReport, deleteReport } from "../../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../../actions/base/navigationSection.actions";
 import Income from "../../../../../actions/income/income.manager";
 
@@ -16,7 +16,6 @@ describe("Verify the wording of Generated Commentary section on Rent Comps page 
             NavigationSection.navigateToRentComps()
                 .verifyProgressBarNotExist();
             Income.Residential.RentComps.BaseActions.verifyGCText(data.conclusionValue);
-            deleteReport(data.reportNumber);
         });
     });
 });

@@ -4,22 +4,22 @@ export const numberWithCommas = (number: number | string) => {
 };
 
 export const cutDecimalPartToNumberOfDigits = (number: number | string, numberToCut = 2) => {
-  if (!(typeof number === "number") || !(`${number}`.includes("."))) {
-      throw new Error(`Parameter ${number} is not a number or is not decimal`);
-  }
-  let numberDigits = number.toString().split(".");
-  let decimalPart = "";
-  if (numberToCut === 0) {
-      return Number(numberDigits[0]);
-  }
-  for (let i = 0; i < numberToCut; i++) {
-      decimalPart += numberDigits[1].charAt(i);
-  }
-  return Number(`${numberDigits[0]}.${decimalPart}`);
+    if (!(typeof number === "number") || !(`${number}`.includes("."))) {
+        throw new Error(`Parameter ${number} is not a number or is not decimal`);
+    }
+    let numberDigits = number.toString().split(".");
+    let decimalPart = "";
+    if (numberToCut === 0) {
+        return Number(numberDigits[0]);
+    }
+    for (let i = 0; i < numberToCut; i++) {
+        decimalPart += numberDigits[1].charAt(i);
+    }
+    return Number(`${numberDigits[0]}.${decimalPart}`);
 };
 
 export const isDecimal = (number): boolean => {
-  return number.toString().includes(".");
+    return number.toString().includes(".");
 };
 
 export const isHasDecimalPartMoreNumberOfDigits = (number: number | string, digitsNumber = 2) => {
@@ -30,9 +30,14 @@ export const isHasDecimalPartMoreNumberOfDigits = (number: number | string, digi
     return numberDigits[1].length > digitsNumber;
 };
 
+export const getNumberFromPercentNumberWithCommas = stringNumber => {
+    return typeof stringNumber === "string" ? Number(stringNumber.replace("%", "")
+        .replaceAll(",", "")) : stringNumber;
+};
+
 export const getNumberFromDollarNumberWithCommas = (stringNumber) => {
-  return typeof stringNumber === "string" ? Number(stringNumber.replace("$", "")
-      .replaceAll(",", "")) : stringNumber;
+    return typeof stringNumber === "string" ? Number(stringNumber.replace("$", "")
+        .replaceAll(",", "")) : stringNumber;
 };
 
 export const getNumberFromMinusDollarNumberWithCommas = (stringNumber) => {
@@ -65,4 +70,28 @@ export const isHalfDecimalPart = (number) => {
 
 export const isNumber = (value) => {
     return typeof value === "number";
+};
+
+export const cutDotFromNumber = (number: number) => {
+    return Number(`${number}`.replace(".", ""));
+};
+
+export const getValueNotDecimalNotCommasInput = (number: number | string): string => {
+    return isNumber(number) ? Number.isInteger(number) ? `${number}` : `${cutDotFromNumber(<number>number)}` : "";
+};
+
+export const getValueDecimalCommasInput = (number: number | string): string => {
+    if (isNumber(number)) {
+        if (Number.isInteger(number)) {
+            return numberWithCommas(number);
+        } else {
+            if (isHasDecimalPartMoreNumberOfDigits(number)) {
+                return `${numberWithCommas(`${cutDecimalPartToNumberOfDigits(number)}`)}`;
+            } else {
+                return numberWithCommas(number);
+            }
+        }
+    } else {
+        return "";
+    }
 };

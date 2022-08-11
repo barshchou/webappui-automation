@@ -3,13 +3,13 @@ import NavigationSection from "../../../../actions/base/navigationSection.action
 import Income from "../../../../actions/income/income.manager";
 import Property from "../../../../actions/property/property.manager";
 import Sales from "../../../../actions/sales/sales.manager";
-import { createReport, deleteReport } from "../../../../actions/base/baseTest.actions";
+import { createReport } from "../../../../actions/base/baseTest.actions";
+import enums from "../../../../enums/enums";
 
 describe(`Prospective Market Value As Stabilized -> Less Residential Rent Loss 
                 data is pulled from Cap Rate Conclusion`, 
-    { tags:[ "@sales", "@value_conclusion" ] }, () => {
-        
-    before("Login action", () => {
+{ tags:[ "@sales", "@value_conclusion" ] }, () => {
+    beforeEach("Login action", () => {
         createReport(testData.reportCreationData);
     });
 
@@ -26,16 +26,16 @@ describe(`Prospective Market Value As Stabilized -> Less Residential Rent Loss
             .enterMonthlyRentByRowNumber(testData.data.monthlyRent);
         NavigationSection.navigateToCapRateConclusion();
         Income.CapRateConclusion.enterConclusionSectionConcludedCapRate(testData.data.appraisersConclusion)
-            .clickAddResidentialRentLoss();
+            .clickAddRentLoss(enums.UNIT_INCOME_TYPE.residential);
         if (testData.reportCreationData.conclusionValue === "AS_COMPLETE") {
-            Income.CapRateConclusion.clickAsStabilizedRentLossSwitch();
+            Income.CapRateConclusion.clickAsStabilizedRentLossSwitch(enums.VALUE_CONCLUSION_NAME.asStabilized);
         }
         Income.CapRateConclusion.checkRentLossCheckboxByRow()
             .clickAddButton()
-            .enterAsStabResRentLossTimePeriodByRow(testData.data.rentLossTimePeriod);
+            .enterLossTimePeriodByRow(testData.data.rentLossTimePeriod,
+                testData.valueConclusionKeyAsStabilized, testData.rentLossTypeResidential);
         NavigationSection.navigateToSalesValueConclusion()
             .verifyProgressBarNotExist();
         Sales.ValueConclusion.verifyAsStabResRentLossTimePeriodByRow(testData.data.rentLossTimePeriod);
-        deleteReport(testData.reportCreationData.reportNumber);
     });
 });

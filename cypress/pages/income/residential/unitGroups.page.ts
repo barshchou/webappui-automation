@@ -1,26 +1,30 @@
-class UnitGroupsPage {
-    get pageHeaderSection() {return cy.get("*[data-qa='unitGroups']");}
+import BasePage from "../../base/base.page";
 
-    getBedroomEqualTableRowsNoneComp(bedroomsNumber) {return cy.get(`[data-qa='bedrooms_${bedroomsNumber}'] [data-qa^=row]`);}
+class UnitGroupsPage extends BasePage {
+    get pageHeaderSection() { return cy.get("*[data-qa='unitGroups']"); }
 
-    get glaPercentage() {return cy.get("[name=grossLeasableAreaPercentage]");}
+    getBedroomEqualTableRowsNoneComp(bedroomsNumber: string | number) { 
+        return cy.get(`[data-qa='bedrooms_${bedroomsNumber}'] [data-qa^=row]`); 
+    }
 
-    get roomSize() {return cy.get("[name=roomSizeDelta]");}
+    get glaPercentage() { return cy.get("[name=grossLeasableAreaPercentage]"); }
 
-    get glaValue() {return cy.get("[name=grossLeasableArea]");}
+    get roomSize() { return cy.get("[name=roomSizeDelta]"); }
 
-    getAvgSFInputByUnitTypeValue(value) {
+    get glaValue() { return cy.get("[name=grossLeasableArea]"); }
+
+    getAvgSFInputByUnitTypeValue(value: string) {
         return cy.xpath(`//*[.='${value}'][contains(@data-qa, 'Table')]` +
             "//following-sibling::td[contains(@data-qa, 'Sqft')]//descendant::input[not(@type='hidden')]");
     }
 
-    get glaCell() {return cy.get("[data-qa*=grossLeasableArea-cell]");}
+    get glaCell() { return cy.get("[data-qa*=grossLeasableArea-cell]"); }
 
-    get totalAverageSqftCell() {return cy.get("[data-qa$='averageSqft-total-cell']");}
+    get totalAverageSqftCell() { return cy.get("[data-qa$='averageSqft-total-cell']"); }
 
-    get getSelectCompGroupRadio() {return cy.get("[data-qa=groupingType-radio-group] input");}
+    get getSelectCompGroupRadio() { return cy.get("[data-qa=groupingType-radio-group] input"); }
 
-    get changeButton() {return cy.xpath("//button[.='Change']");}
+    get changeButton() { return cy.xpath("//button[.='Change']"); }
 }
 
 export default new UnitGroupsPage();

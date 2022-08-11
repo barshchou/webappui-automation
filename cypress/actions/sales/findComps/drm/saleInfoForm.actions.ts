@@ -1,27 +1,50 @@
+import { getRandomDate } from './../../../../../utils/date.utils';
 import { findCompsPage } from "../../../../pages/sales/findComps.page";
+import { CompPlex } from '../../../../types/compplex.type';
 
 class SaleInfoFromActions {
-
     Page: typeof findCompsPage;
 
-    constructor(page: typeof findCompsPage){
+    constructor(page: typeof findCompsPage) {
         this.Page = page;
     }
 
-    selectSaleDate(): this {
-        this.Page.SaleDateCalendarNewComp.click();
-        this.Page.SaleDateToday.click();
+    /*
+     * Method for selecting date in calendar on 'Sale Information' 
+     * modal (when the comp is added manually)
+     */
+    selectSaleDate(date = 'today'): SaleInfoFromActions {
+        if (date === 'today') {
+            this.Page.SaleDateCalendarNewComp.click();
+            this.Page.SaleDateToday.click();
+        } else if (date === 'random') {
+            this.Page.SaleDateCalendarNewComp.realClick({ clickCount: 5 });
+            this.Page.SaleDateCalendarNewComp.focus().clear().type(`${getRandomDate()}`).type('{enter}');
+        } else {
+            //TODO should edit this step for selecting data via date picker
+            this.Page.SaleDateCalendarNewComp.focus().clear().type(`${date}`).type('{enter}'); 
+        }
         return this;
     }
 
-    setBuyerGrantee(name: string): this {
-        this.Page.BuyerGranteeNewComp.type(name);
+    setBuyerGrantee(name: string): SaleInfoFromActions {
+        this.Page.BuyerGranteeNewComp.type(name, { force: true });
         return this;
     }
 
-    setSellerGarantor(seller: string): this {
-        this.Page.SellerGrantor.type(seller);   
+    setSellerGrantor(seller: string): SaleInfoFromActions {
+        this.Page.SellerGrantor.type(seller, { force: true });
         return this;
-    }    
+    }
+
+    setDeedSalePrice(price: string) {
+        this.Page.DeedSalePriceInput.type(price, { force:true });
+        return this;
+    }
+
+    setSaleStatus(status: CompPlex.SaleInfo.SaleStatus) {
+        this.Page.SaleStatusDropdown.click();
+        this.Page.getSaleStatus(status).click();
+    }
 }
 export default new SaleInfoFromActions(findCompsPage);

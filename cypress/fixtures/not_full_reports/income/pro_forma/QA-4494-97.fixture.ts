@@ -1,4 +1,4 @@
-import { BoweryAutomation } from "../../../../types";
+import { BoweryAutomation } from "../../../../types/boweryAutomation.type";
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 
 const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("4494-97");
@@ -9,7 +9,7 @@ const _monthlyRent= [ 60, 500, 450 ];
 
 const annualTotalRent = () => {
     let annualTotalRent = 0;
-    for (let i = 0; i < _monthlyRent.length; i++){
+    for (let i = 0; i < _monthlyRent.length; i++) {
         annualTotalRent += _monthlyRent[i] * 12;
     }
     return annualTotalRent;

@@ -1,6 +1,7 @@
 import { getTodayDateString, getYearFromDate } from "../../../../utils/date.utils";
 import Enums from "../../../enums/enums";
-import { BoweryAutomation, BoweryReports } from "../../../types";
+import { BoweryAutomation } from "../../../types/boweryAutomation.type";
+import { BoweryReports } from "../../../types/boweryReports.type";
 
 const reportCreationFixture = (): BoweryAutomation.ReportCreationData => {
     return {
@@ -10,8 +11,8 @@ const reportCreationFixture = (): BoweryAutomation.ReportCreationData => {
         identifier: "20-36-420-020-0000",
         reportNumber: "Full Report Test Automation",
         isSalesForcePull: false,
-        templateValue: Enums.TEMPLATE_TYPE.NOT_FREDDIE_MAC,
-        incomeValue: Enums.INCOME_TYPE.RESIDENTIAL,
+        templateValue: Enums.TEMPLATE_TYPE.notFreddieMac,
+        incomeValue: Enums.INCOME_TYPE.residential,
         conclusionValue: Enums.VALUE_CONCLUSION_TYPE.AS_COMPLETE
     };
 };
@@ -29,14 +30,8 @@ const keyInfoPurposeFixture = () => {
 
 const keyInfoEngagementFixture = () => {
     return {
-        dueDate: {
-            type: "dueDate",
-            date: "10-18-2021"
-        },
-        dateOfValuation: {
-            type: "dateOfValuation",
-            date: "10-13-2021"
-        },
+        _dueDateFixture,
+        _valuationDateFixture,
         engagementFileName: "full_reports/full_bowery_multifamily_as_complete/test_engagement.pdf",
     };
 };
@@ -91,10 +86,9 @@ const marketResearchFixture = () => {
         state: "IL",
         macroMarket: "IL-Chicago",
         submarket: "IL-South Chicago",
-        dateOfValuation: keyInfoEngagementFixture().dateOfValuation.date,
-        marketYear: getTodayDateString(),
-        quarter: "Q4",
-        multifamilySubmarketDocument: "2021 Q4 IL - South Chicago - Multifamily Submarket_FINAL"
+        dateOfValuation: keyInfoEngagementFixture()._dueDateFixture.date,
+        marketDate: getTodayDateString(),
+        quarter: "Q4"
     };
 };
 
@@ -147,11 +141,12 @@ const remainingEconomicLifeFixture = () => {
 
 const transportationSiteDescriptionFixture = () => {
     return {
-        commentary: "The South Chicago & Crandon bus stop is 0.2 miles away, a 3-minute walk. It is served by CTA bus " +
-            "line #30.\nThe 87th St. Metra commuter rail station is 1.1 miles away, a 4-minute drive. It is served by " +
-            "the Metra Electric District Line.\nThe 83rd St. Metra commuter rail station is 1.2 miles away, a 4-minute " +
-            "drive. It is served by the Metra Electric District Line.\nChicago Midway International Airport is 13 miles " +
-            "away, about a 25-minute drive.\nChicago-O'Hare International Airport is 29 miles away, about a 45-minute drive."
+        commentary: "The South Chicago & Crandon bus stop is 0.2 miles away, a 3-minute walk. " + 
+        "It is served by CTA bus line #30.\nThe 87th St. Metra commuter rail station is 1.1 miles " + 
+        "away, a 4-minute drive. It is served by the Metra Electric District Line.\nThe 83rd St. " + 
+        "Metra commuter rail station is 1.2 miles away, a 4-minute drive. It is served by the Metra " + 
+        "Electric District Line.\nChicago Midway International Airport is 13 miles away, about a " + 
+        "25-minute drive.\nChicago-O'Hare International Airport is 29 miles away, about a 45-minute drive."
     };
 };
 
@@ -162,10 +157,10 @@ const siteDescriptorsFixture = () => {
         propertyFrontage: 50,
         siteDescriptionItems: [ "Access", "Topography", "Drainage", "Paving", "Street Lighting", "Hazardous Substances",
             "Easements, Encroachments, and Restrictions" ],
-        floodHazardCommentary: "According to National Flood Insurance Program Rate Map dated August 19, 2008 Community " +
-            "Panel #17031C0655J, the subject is located within a Zone X flood zone. Zone X is an area of minimal flooding." +
-            " These areas are determined to be outside the 500-year floodplain and are determined to be outside the 1% " +
-            "and 0.2% annual chance floodplains."
+        floodHazardCommentary: "According to National Flood Insurance Program Rate Map dated " + 
+        "August 19, 2008 Community Panel #17031C0655J, the subject is located within a Zone X flood zone. " + 
+        "Zone X is an area of minimal flooding. These areas are determined to be outside the 500-year " + 
+        "floodplain and are determined to be outside the 1% and 0.2% annual chance floodplains."
     };
 };
 
@@ -270,8 +265,14 @@ const kitchenPhotosFixture = () => {
     return {
         section: "Typical Kitchen",
         photosFolder: "full_reports/full_bowery_multifamily_as_complete/typical_kitchen_photos",
-        photosFileNames: [ "typical_kitchen_1.png", "typical_kitchen_2.png", "typical_kitchen_3.png", "typical_kitchen_4.png",
-            "typical_kitchen_5.png" ]
+        photosFileNames: 
+        [ 
+            "typical_kitchen_1.png", 
+            "typical_kitchen_2.png", 
+            "typical_kitchen_3.png", 
+            "typical_kitchen_4.png",
+            "typical_kitchen_5.png" 
+        ]
     };
 };
 
@@ -287,7 +288,8 @@ const bedroomPhotosFixture = () => {
     return {
         section: "Typical Bedroom",
         photosFolder: "full_reports/full_bowery_multifamily_as_complete/typical_bedroom_photos",
-        photosFileNames: [ "typical_bedroom_1.png", "typical_bedroom_2.png", "typical_bedroom_3.png", "typical_bedroom_4.png" ]
+        photosFileNames: [ "typical_bedroom_1.png", "typical_bedroom_2.png", "typical_bedroom_3.png", 
+            "typical_bedroom_4.png" ]
     };
 };
 
@@ -358,8 +360,8 @@ const zoningDescriptionUsesFixture = () => {
 
 const zoningDescriptionBulkFixture = () => {
     return {
-        regulationValuesDelete: [ "Maximum Density", "Permitted Units", "Minimum Lot Width", "Minimum Setback (Both Sides)",
-            "Minimum Rear Yard", "Maximum Building Coverage" ],
+        regulationValuesDelete: [ "Maximum Density", "Permitted Units", "Minimum Lot Width", 
+            "Minimum Setback (Both Sides)", "Minimum Rear Yard", "Maximum Building Coverage" ],
         regulationNew: {
             name: "Maximum FAR",
             actualValue: "0.76",
@@ -399,7 +401,7 @@ const zoningDescriptionParkingFixture = () => {
 
 const prospectiveRenovationsFixture = () => {
     return {
-        dropValue: "Renovation",
+        dropValue: Enums.RENOVATION_TYPE.renovation,
         period: 12,
         totalAmount: 106000,
         commentary: "The buyer reported a total prospective renovation budget of $106,000.00. " +
@@ -449,7 +451,8 @@ const stairsFixture = () => {
         numberOfStairs: 2,
         stairsStart: "Basement",
         stairsEnd: "2nd floor",
-        commentary: "There are 2 staircases that run from the basement to the 2nd floor, one interior and one exterior.",
+        commentary: "There are 2 staircases that run from the basement to the 2nd floor, " + 
+        "one interior and one exterior.",
     };
 };
 
@@ -510,20 +513,22 @@ const rentComparablesFixture = () => {
     };
 };
 
-const resRentReconcilFixture = () => {
+const resRentReconciliationFixture = () => {
     return {
-        reconcilIntroComm: "Important considerations in determining potential rental value include location, access to " +
-            "transportation and neighborhood amenities, and building design and condition. The subject is in a primarily" +
-            " residential section of Lakeview, a neighborhood that has seen significant investment in the past 5 to 10 " +
-            "years. The site has good access to  transportation, and the block is appealing. The comparables are similar " +
-            "in their physical and locational appeal and are good indicators of value. Thus, our analysis of the forecast " +
-            "of market rents is presented:",
+        reconciliationIntroComm: "Important considerations in determining potential rental value " + 
+        "include location, access to transportation and neighborhood amenities, and building design " + 
+        "and condition. The subject is in a primarily residential section of Lakeview, a neighborhood " + 
+        "that has seen significant investment in the past 5 to 10 years. The site has good access to  " + 
+        "transportation, and the block is appealing. The comparables are similar in their physical and " + 
+        "locational appeal and are good indicators of value. Thus, our analysis " + 
+        "of the forecast of market rents is presented:",
         marketConclusion: 1100,
         marketBreakdown: "all market oriented",
-        reconcilCommentary: "The comparable two-bedroom units range from $1,000 to $1,200 per month with an average of " +
-            "$1,080 per month. Based on the subject's market rate rents and the range of the comparables, we forecast a " +
-            "market rent for the subject's two-bedroom units of $1,100 per month. Considering the range of the comparables " +
-            "and our market rent forecasts for the subject units, the subject's market rate units are all currently market oriented."
+        reconciliationCommentary: "The comparable two-bedroom units range from $1,000 to $1,200 per " + 
+        "month with an average of $1,080 per month. Based on the subject's market rate rents and the " + 
+        "range of the comparables, we forecast a market rent for the subject's two-bedroom units of $1,100 " + 
+        "per month. Considering the range of the comparables and our market rent forecasts for the subject " + 
+        "units, the subject's market rate units are all currently market oriented."
     };
 };
 
@@ -540,9 +545,10 @@ const stabRentRollSummaryFixture = () => {
     return {
         marketAnnualRent: "$79,200.00",
         stabRRSummary: "The average forecasted monthly rent is $1,100.",
-        grossIncomeDiscussion: "Based on our market rent conclusions, the residential rent roll is projected at 100% of market.",
+        grossIncomeDiscussion: "Based on our market rent conclusions, the residential rent roll is " + 
+        "projected at 100% of market.",
         distributionSummary: "We estimated the total leasable area and resulting average square footage per unit " +
-            "based on a loss factor of 10% applied to the GBA."
+        "based on a loss factor of 10% applied to the GBA."
     };
 };
 
@@ -566,9 +572,9 @@ const grossIncomeFixture = () => {
         resVacancyCollLoss: 5,
         coStarRate: 94,
         commentary: "CoStar reports the submarket rate near 94% and metro area rate near 94%. Based on 8524 " +
-            "South Oglesby Avenue's current and historical operating results, macro market conditions, and investor " +
-            "expectations, a 5.00% residential vacancy and collection loss has been applied. We note that the subject " +
-            "will contain 6 market rate residential units."
+        "South Oglesby Avenue's current and historical operating results, macro market conditions, and investor " +
+        "expectations, a 5.00% residential vacancy and collection loss has been applied. We note that the subject " +
+        "will contain 6 market rate residential units."
     };
 };
 
@@ -580,16 +586,17 @@ const currentTaxInfoFixture = () => {
         className: "Cook County Class 2-11",
         rateYear: 2020,
         rateValue: 6.911,
-        liabilityCommentary: "8524 S Oglesby Ave. is located in Chicago, Cook County, IL. It is designated on the tax " +
-            "maps as PIN 20-36-420-020-0000. We have applied the 2020 tax rate of 6.911% to the most recent assessed " +
-            "value of the property to determine its current tax liability."
+        liabilityCommentary: "8524 S Oglesby Ave. is located in Chicago, Cook County, IL. " + 
+        "It is designated on the tax maps as PIN 20-36-420-020-0000. We have applied the 2020 " + 
+        "tax rate of 6.911% to the most recent assessed value of the property to determine " + 
+        "its current tax liability."
     };
 };
 
 const projectedTaxInfoFixture = () => {
     return {
-        liabilityComm: "In order to determine the projected tax liability, we have applied a tax rate of 6.911% to our " +
-            "projection of the assessed value."
+        liabilityComm: "In order to determine the projected tax liability, we have applied " + 
+        "a tax rate of 6.911% to our projection of the assessed value."
     };
 };
 
@@ -643,9 +650,9 @@ const expenseHistoryFixture = () => {
         payrollBenefitsExpense: 1464,
         toeToBe: "$12,134.06",
         commentary: "We were provided with the owner's pro forma for the subject property. Therefore, " +
-            "we analyzed the subject's operating expense projections, as well as expense reports of comparable " +
-            "properties, in developing our forecast of operating expenses. The data, analyzed in terms of residential " +
-            "units and gross square footage, is presented below."
+        "we analyzed the subject's operating expense projections, as well as expense reports of comparable " +
+        "properties, in developing our forecast of operating expenses. The data, analyzed in terms of residential " +
+        "units and gross square footage, is presented below."
     };
 };
 
@@ -653,27 +660,27 @@ const comparableExpensesFixture = () => {
     return {
         comparables: [
             {
-                address: "6001 S Sacramento Ave", location: "Chicago", period: "Projection",
+                address: "6001 S Sacramento Ave", city: "Chicago", period: "Projection",
                 squareFeet: 6608, resUnits: 13, insurance: 3900, electricity: 12675, repairsAndMaintenance: 5850,
                 payrollAndBenefits: 3900, generalAndAdministrative: 2925, management: 4899, toe: "$34,149.00"
             },
             {
-                address: "7955 S Emerald Ave", location: "Chicago", period: "Projection",
+                address: "7955 S Emerald Ave", city: "Chicago", period: "Projection",
                 squareFeet: 9000, resUnits: 12, insurance: 4525, electricity: 6754, repairsAndMaintenance: 6000,
                 payrollAndBenefits: 3104, generalAndAdministrative: 2640, management: 5383, toe: "$28,406.00"
             },
             {
-                address: "7613 S Kingston Ave", location: "Chicago", period: "Projection",
+                address: "7613 S Kingston Ave", city: "Chicago", period: "Projection",
                 squareFeet: 9750, resUnits: 13, insurance: 4200, electricity: 15917, repairsAndMaintenance: 5200,
                 payrollAndBenefits: 3357, generalAndAdministrative: 2275, management: 5902, toe: "$36,851.00"
             },
             {
-                address: "7655 S Coles Ave", location: "Chicago", period: "Projection",
+                address: "7655 S Coles Ave", city: "Chicago", period: "Projection",
                 squareFeet: 12771, resUnits: 13, insurance: 5161, electricity: 6151, repairsAndMaintenance: 5850,
                 payrollAndBenefits: 6248, generalAndAdministrative: 2300, management: 6529, toe: "$32,239.00"
             },
             {
-                address: "2320 E 70th Street", location: "Chicago", period: "Projection",
+                address: "2320 E 70th Street", city: "Chicago", period: "Projection",
                 squareFeet: 7250, "resUnits": 8, insurance: 3200, electricity: 3800, repairsAndMaintenance: 3200,
                 payrollAndBenefits: 5000, generalAndAdministrative: 1880, management: 5464.8, toe: "$22,544.80"
             },
@@ -712,7 +719,8 @@ const expenseForecastFixture = (): {insuranceItem: BoweryReports.ForecastItem,
             name: "repairsAndMaintenance", basis: "unit", forecast: 450
         },
         payrollBenefits: {
-            name: "payrollAndBenefits", basis: "unit", forecast: 350, projection: expenseHistoryFixture().payrollBenefitsExpense
+            name: "payrollAndBenefits", basis: "unit", forecast: 350, 
+            projection: expenseHistoryFixture().payrollBenefitsExpense
         },
         general: {
             name: "generalAndAdministrative", basis: "unit", forecast: 200
@@ -767,18 +775,20 @@ const supportingCapRatesFixture = () => {
             amortizationTerm: 30, paymentsPerYear: 12, loanToValueConstant: 1, loanToValueRatio: 75, mortgageRate: 4,
             mortgageConstant: 0.0573,
             commentary: "After surveying several commercial mortgage lenders, it is our opinion that a " +
-                "typical creditworthy purchaser could obtain financing from a lending source in an amount equal to 75% of " +
-                "value at an annual interest rate of 4% and a 30-year payout. Therefore, the mortgage constant is 0.0573."
+            "typical creditworthy purchaser could obtain financing from a lending source in an " + 
+            "amount equal to 75% of value at an annual interest rate of 4% and a 30-year payout. " + 
+            "Therefore, the mortgage constant is 0.0573."
         },
         bandInvestmentSection: {
             loanRatio: 75, mortgageConstant: 0.0573, equityDividendRate: 20, equityRatio: 25,
             commentary: "We believe an investor in the subject property would accept an initial annual return " +
-                "of 20% in anticipation of a stable income flow and property appreciation over time. It should be emphasized " +
-                "that the equity dividend rate is not necessarily the same as an equity yield rate or true rate of return " +
-                "on equity capital. The equity dividend rate is an equity capitalization that reflects all benefits that can " +
-                "be recognized by the equity investor as of the date of purchase. We selected this rate based on the " +
-                "subject's location in a good residential area, and its good access and visibility. We summarize the " +
-                "mortgage and equity parameters utilized in our derivation of an overall capitalization rate."
+            "of 20% in anticipation of a stable income flow and property appreciation over time. " + 
+            "It should be emphasized that the equity dividend rate is not necessarily the same as " + 
+            "an equity yield rate or true rate of return on equity capital. The equity dividend rate " + 
+            "is an equity capitalization that reflects all benefits that can be recognized by the equity " + 
+            "investor as of the date of purchase. We selected this rate based on the subject's location in " + 
+            "a good residential area, and its good access and visibility. We summarize the " +
+            "mortgage and equity parameters utilized in our derivation of an overall capitalization rate."
         },
     };
 };
@@ -925,7 +935,7 @@ const findCompsFixture = () => {
 
 const adjustCompsFixture = () => {
     return {
-        calculationUnitsRadioValue: "Per Residential Units",
+        calculationUnitsRadioValue: Enums.CALCULATION_UNITS.perResidentialUnits,
         incomeAdjustmentType: "None",
         comparables: [
             {
@@ -1036,6 +1046,21 @@ const capRateDiscussionFixture = () => {
             flowRisk: "Moderate Risk"
         }
     };
+};
+
+const _inspectionDateFixture: BoweryReports.KeyInfoDateType = {
+    type: Enums.DATE_TYPE.inspectionDate,
+    date: "08-30-2022"
+};
+
+const _valuationDateFixture: BoweryReports.KeyInfoDateType = {
+    type: Enums.DATE_TYPE.dateOfValuation,
+    date: "10-13-2021"
+};
+
+const _dueDateFixture: BoweryReports.KeyInfoDateType = {
+    type: Enums.DATE_TYPE.dueDate,
+    date: "10-18-2021"
 };
 
 const insurableReplacementCostFixture = () => {
@@ -1241,8 +1266,8 @@ export const rentComparablesData = () => {
     return Object.freeze(rentComparablesFixture());
 };
 
-export const resRentReconcilData = () => {
-    return Object.freeze(resRentReconcilFixture());
+export const resRentReconciliationData = () => {
+    return Object.freeze(resRentReconciliationFixture());
 };
 
 export const stabRentRollData = () => {
@@ -1399,7 +1424,7 @@ export default {
     inPLaceRentRoll: inPLaceRentRollData(),
     unitGroups: unitGroupsData(),
     rentComparables: rentComparablesData(),
-    resRentReconcil: resRentReconcilData(),
+    residentialRentReconciliation: resRentReconciliationData(),
     stabRentRoll: stabRentRollData(),
     stabRentRollSummary: stabRentRollSummaryData(),
     expenseStructure: expenseStructureData(),
@@ -1425,5 +1450,13 @@ export default {
     highestBestUse: highestBestUseData(),
     unitInspection: unitInspectionData(),
     capRateDiscussion: capRateDiscussionData(),
-    insurableReplacementCost: insurableReplacementCostData()
+    insurableReplacementCost: insurableReplacementCostData(),
+    valueConclusionAsComplete: Enums.VALUE_CONCLUSION_NAME.asComplete,
+    valueConclusionAsStabilized: Enums.VALUE_CONCLUSION_NAME.asStabilized,
+    valueConclusionAsIs: Enums.VALUE_CONCLUSION_NAME.asIs,
+    valueConclusionKeyAsComplete: Object.keys(Enums.VALUE_CONCLUSION_NAME)[2] as BoweryReports.ValueConclusionKeys,
+    valueConclusionKeyAsStabilized: Object.keys(Enums.VALUE_CONCLUSION_NAME)[1] as BoweryReports.ValueConclusionKeys,
+    dueDate: _dueDateFixture,
+    inspectionDate: _inspectionDateFixture,
+    valuationDate: _valuationDateFixture
 };
