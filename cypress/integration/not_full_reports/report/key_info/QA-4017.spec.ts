@@ -18,7 +18,7 @@ describe('Verify that "Date of the Report" row is displayed on the Salient Facts
 
     it("Check export", () => {
         cy.task("getFilePath",
-        { _reportName: testData.reportCreationData.reportNumber, _docx_html: "html" }
+            { _reportName: testData.reportCreationData.reportNumber, _docxHtml: "html" }
         ).then(file => {
             cy.log(<string>file);
             
@@ -27,13 +27,13 @@ describe('Verify that "Date of the Report" row is displayed on the Salient Facts
             cy.xpath("//h1[.='Summary of Salient Facts & Conclusions']/following-sibling::table")
                 .eq(1).scrollIntoView().within(() => {
                     
-                cy.stepInfo("3. Verify that Date of the Report row is displayed below Date of Inspection row");
-                cy.get("tr").eq(4).find("td").eq(2).should("have.text", testData.dateOfInspectionRowName);
-                cy.get("tr").eq(5).find("td").eq(2).should("have.text", testData.dateOfTheReportRowName);
+                    cy.stepInfo("3. Verify that Date of the Report row is displayed below Date of Inspection row");
+                    cy.get("tr").eq(4).find("td").eq(2).should("have.text", testData.dateOfInspectionRowName);
+                    cy.get("tr").eq(5).find("td").eq(2).should("have.text", testData.dateOfTheReportRowName);
 
-                cy.stepInfo("4. Verify that the date is updated to today’s date when the document is opened");
-                cy.get("tr").eq(5).find("td").eq(3).should("have.text", testData.currentDate);
-            });
+                    cy.stepInfo("4. Verify that the date is updated to today’s date when the document is opened");
+                    cy.get("tr").eq(5).find("td").eq(3).should("have.text", testData.currentDate);
+                });
         });
     });
 });
