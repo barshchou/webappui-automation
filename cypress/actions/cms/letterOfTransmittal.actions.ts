@@ -42,13 +42,6 @@ class LetterOfTransmittalActions extends BaseActionsExt<typeof letterOfTransmitt
         return this;
     }
 
-    saveCmsSettings(): LetterOfTransmittalActions {
-        letterOfTransmittalPage.saveButtonGlobal.click();
-        letterOfTransmittalPage.successModal.should('be.visible');
-        letterOfTransmittalPage.successModal.should('not.be.visible');
-        return this;
-    }
-
     verifyLetterOfTransmittalText(sectionName: BoweryReports.LetterOfTransmittalSections, 
         expectedText: string): LetterOfTransmittalActions {
         letterOfTransmittalPage.letterOfTransmittalDiscussionSection(sectionName).invoke('text')

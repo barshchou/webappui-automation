@@ -89,4 +89,11 @@ export default class BaseActionsExt<T extends BasePage> extends BaseActions {
         
         return this;
     };
+
+    saveCmsSettings(): BaseActions {
+        this.Page.saveButtonGlobal.click();
+        this.Page.successModal.should('be.visible');
+        this.Page.successModal.should('not.be.visible');
+        return this;
+    }
 }

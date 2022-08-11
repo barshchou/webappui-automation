@@ -1,9 +1,10 @@
+import enums from "../../../../enums/enums";
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 
 export default {
     reportCreationData: ReportDataCreator.getReportData("4959"),
     memoTestDataFile: "threats.txt",
-    threats: "threats",
+    threats: enums.SWOT_SECTIONS.threats,
     threatsTexts: [
         "Rent growth is limited by local rent control laws. ",
         "In 2022, the Federal Reserve Board increased their benchmark rate by 25 basis points in March" + 

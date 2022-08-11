@@ -44,6 +44,10 @@ export default class BasePage {
         return '[data-react-beautiful-dnd-drag-handle="0"]';
     } 
 
+    get saveButtonGlobal() { return cy.xpath("//button[@type='submit']"); }
+
+    get successModal() { return cy.xpath("//*[contains(text(), 'Success')]"); }
+
     formEditBtn(index = 0) {
         return cy.xpath('//*[@data-icon="pencil"]//ancestor::button')
             .eq((index !== 0) ? index : 0);

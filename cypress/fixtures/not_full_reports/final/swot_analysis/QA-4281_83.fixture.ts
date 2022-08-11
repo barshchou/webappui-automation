@@ -1,8 +1,9 @@
+import enums from "../../../../enums/enums";
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 
 export default {
     reportCreationData: ReportDataCreator.getReportData("4281_83"),
-    opportunities: "opportunities",
+    opportunities: enums.SWOT_SECTIONS.opportunities,
     typeValue: "test value",
     opportunitiesTexts: [
         "All units are rent stabilized, and there is potential upside upon tenant turnover. ",

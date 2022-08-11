@@ -58,3 +58,4 @@ export type RentLossType = keyof typeof Enums.RENT_LOSS_TYPE
 export type DateType = keyof typeof Enums.DATE_TYPE
 export type InterestAppraised = keyof typeof Enums.INTEREST_APPRAISED
 export type LetterOfTransmittalSections = keyof typeof Enums.LETTER_SECTIONS
+export type SWOTAnalysisSections = keyof typeof Enums.SWOT_SECTIONS
