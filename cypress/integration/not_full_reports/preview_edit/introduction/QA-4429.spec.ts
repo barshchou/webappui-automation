@@ -12,7 +12,7 @@ describe('[QA-4429] Check the Introduction page',
             cy.stepInfo("1. Create a report");
             createReport(testData.reportNYCCreationData);
 
-            cy.stepInfo("2. Navigate to Report > Client and Edit Identification of the Client and Intended User Text");
+            cy.stepInfo("2. Navigate to Report > Client and edit Identification of the Client and Intended User Text");
             _NavigationSection.navigateToSourceInformation();
 
             Final._SourceInformation.enterFormCommentTextBox(testData.backLinkNames, testData.typeValue);
@@ -41,7 +41,7 @@ describe('[QA-4429] Check the Introduction page',
             loginAction();
             _HomePage.createReport(testData.reportOtherCreationData);
 
-            cy.stepInfo("2. Navigate to Report > Client and Edit Identification of the Client and Intended User Text");
+            cy.stepInfo("2. Navigate to Report > Client and edit Identification of the Client and Intended User Text");
             _NavigationSection.navigateToSourceInformation();
 
             Final._SourceInformation.enterFormCommentTextBox(testData.backLinkNames, testData.typeValue);
