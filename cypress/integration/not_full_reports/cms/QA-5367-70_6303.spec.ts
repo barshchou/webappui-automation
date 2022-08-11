@@ -4,6 +4,7 @@ import testData from "../../../fixtures/not_full_reports/cms/QA-5367-70_6303.fix
 import launchDarklyApi from '../../../api/launchDarkly.api';
 import { conditionalDescribe } from "../../checkIsProd.utils";
 import { _CmsBaseActions } from '../../../actions/cms';
+import { _CmsTitle } from '../../../enums/pages_titles';
 
 conditionalDescribe("Verify that CMS section visibility for users", 
     { tags:[ "@cms", "@feature_flag" ] }, () => {
@@ -23,7 +24,8 @@ conditionalDescribe("Verify that CMS section visibility for users",
                 if (navigationToCms) {
                     cy.stepInfo(`3. Click on the CMS icon and verify Content Management System page is opened`);
                     _NavigationSection.navigateToContentManagementSystem();
-                    _CmsBaseActions.verifyPageIsOpened();
+                    _CmsBaseActions.Page.Header.should("exist")
+                        .and("contain.text", _CmsTitle.CONTENT_MANAGEMENT_SYSTEM);
                 }
 
                 cy.stepInfo(`4. Remove feature flag and log out`);

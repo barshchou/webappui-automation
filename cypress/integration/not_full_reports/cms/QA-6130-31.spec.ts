@@ -4,6 +4,7 @@ import testData from "../../../fixtures/not_full_reports/cms/QA-6130-31.fixture"
 import launchDarklyApi from '../../../api/launchDarkly.api';
 import { conditionalDescribe } from "../../checkIsProd.utils";
 import { _CmsBaseActions } from '../../../actions/cms';
+import { _CmsTitle } from '../../../enums/pages_titles';
 
 conditionalDescribe("Verify navigation to CMS page and common elements on the page", 
     { tags:[ "@cms", "@feature_flag" ] }, () => {
@@ -26,8 +27,9 @@ conditionalDescribe("Verify navigation to CMS page and common elements on the pa
                         - Globe icon on the far left
                         - 'Global' sub-header in the nav
                         - The bottom panel is removed except the profile photo in the sidebar`);
-            _CmsBaseActions.verifyPageIsOpened()
-                .verifyCmsSubHeaderDisplayed()
+            _CmsBaseActions.Page.Header.should("exist")
+                .and("contain.text", _CmsTitle.CONTENT_MANAGEMENT_SYSTEM);
+            _CmsBaseActions.verifyCmsSubHeaderDisplayed()
                 .verifyGlobalIconDisplayed();
             _NavigationSection.verifyGlobalIconTooltip();
             _NavigationSection.verifyBottomPanelButtonsRemoved();
