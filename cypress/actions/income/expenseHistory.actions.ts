@@ -98,7 +98,7 @@ class ExpenseHistoryActions extends BaseActionsExt<typeof expenseHistoryPage> {
         return this;
     }
 
-    private setOperatingExpenseValueToMap(expense, index = 0): ExpenseHistoryActions {
+    private setOperatingExpenseValueToMap(expense: string, index = 0): ExpenseHistoryActions {
         expenseHistoryPage.getUnifiedEditableAndTotalCells(expense).eq(index).invoke("text").then(expenseText => {
             if (expenseText === "") {
                 return;
@@ -263,7 +263,7 @@ class ExpenseHistoryActions extends BaseActionsExt<typeof expenseHistoryPage> {
             .and("have.attr", "required");
         expenseHistoryPage.newCategoryNameInput.type(`${name}`);
         if (isFirstEnter) {
-            cy.get("[role=menuitem]").should("contain.text", `Create "${name}"`);
+            expenseHistoryPage.newCategoryInputSuggestionDropdown.should("contain.text", `Create "${name}"`);
         }
         expenseHistoryPage.newCategoryNameInput.type("{enter}");
         return this;

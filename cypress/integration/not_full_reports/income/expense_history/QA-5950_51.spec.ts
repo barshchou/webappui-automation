@@ -5,7 +5,7 @@ import Enums from "../../../../enums/enums";
 import { Income, Property } from "../../../../actions";
 
 describe(`Expense History Discussion for reports is generated correctly according to 
-selected Basis for Square Foot Analysis`, { tags: [ "@income", "@expense_history" ] }, () => {
+               selected Basis for Square Foot Analysis`, { tags: [ "@income", "@expense_history" ] }, () => {
 
     Object.values(Enums.INCOME_TYPE).forEach(incomeType => {
         it(`Test with ${incomeType} income type report`, () => {

@@ -191,7 +191,7 @@ class ComparableExpensesActions extends BaseActionsExt<typeof compExpensesPage> 
             .and("have.attr", "required");
         compExpensesPage.newCategoryNameInput.type(`${name}`);
         if (isFirstEnter) {
-            cy.get("[role=menuitem]").should("contain.text", `Create "${name}"`);
+            compExpensesPage.newCategoryInputSuggestionDropdown.should("contain.text", `Create "${name}"`);
         }
         compExpensesPage.newCategoryNameInput.type("{enter}");
         return this;

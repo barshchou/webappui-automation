@@ -18,6 +18,8 @@ class ComparableExpensesPage extends BasePage {
     }
 
     get newCategoryNameInput() { return cy.get("[data-qa=expenseName-form-control] input"); }
+
+    get newCategoryInputSuggestionDropdown() { return cy.get("[role=menuitem]"); }
 }
 
 export default new ComparableExpensesPage();

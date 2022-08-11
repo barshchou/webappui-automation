@@ -46,11 +46,10 @@ the same info as on the WebApp`, { tags: [ "@income", "@expense_history", "@chec
         it(`Check export with ${expense} utility expense`, () => {
             cy.task("getFilePath", { _reportName: reportCreationData.reportNumber, _docxHtml: "html" })
                 .then(file => {
-                    const tableLocator = "//*[.='Operating Expense Analysis']//following-sibling::table[1]";
-                    const electricityCell = tableLocator + "//descendant::p[text()='Electricity']";
-                    const fuelCell = tableLocator + "//descendant::p[text()='Fuel']";
-                    const waterSewerCell = tableLocator + "//descendant::p[text()='Water & Sewer']";
-                    const utilitiesCell = tableLocator + "//descendant::p[text()='Utilities']";
+                    const electricityCell = getCellLocator(Enums.PRO_FORMA_TYPES.electricity);
+                    const fuelCell = getCellLocator(Enums.PRO_FORMA_TYPES.fuel);
+                    const waterSewerCell = getCellLocator(Enums.PRO_FORMA_TYPES.waterAndSewer);
+                    const utilitiesCell = getCellLocator("Utilities");
 
                     cy.stepInfo("Verify exported document");
                     cy.visit(<string>file);
@@ -80,3 +79,7 @@ the same info as on the WebApp`, { tags: [ "@income", "@expense_history", "@chec
         });
     });
 });
+
+const getCellLocator = cellName => {
+    return `//*[.='Operating Expense Analysis']//following-sibling::table[1]//descendant::p[text()='${cellName}']`;
+};
