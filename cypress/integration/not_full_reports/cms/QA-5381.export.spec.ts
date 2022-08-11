@@ -1,6 +1,6 @@
 import { _HomePage } from '../../../actions/base';
 import { createReport } from '../../../actions/base/baseTest.actions';
-import { ReviewExport } from '../../../actions';
+import { PreviewEdit, ReviewExport } from '../../../actions';
 import { _NavigationSection } from '../../../actions/base';
 import testData from "../../../fixtures/not_full_reports/cms/QA-5381.fixture";
 import launchDarklyApi from '../../../api/launchDarkly.api';
@@ -25,9 +25,15 @@ conditionalDescribe("Verify the page and fields available on it",
                 _Certification.verifyCertificationBulletsText(section.sectionName, section.languages);
             });
 
-            cy.stepInfo(`3. Export report`);
+            cy.stepInfo(`3. Verify the same text on Preview & Edit > Certification page`);
             _NavigationSection.returnToHomePage();
             _HomePage.openReportByName(testData.reportCreationData.reportNumber);
+            _NavigationSection.navigateToCertification();
+            testData.certificationTextsFixture.forEach((section, index) => {
+                PreviewEdit._Certification.verifyTextInFormContainer(section.languages, index);
+            });
+
+            cy.stepInfo(`4. Export report`);
             _NavigationSection.openReviewAndExport();
             ReviewExport.generateDocxReport().waitForReportGenerated()
                 .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
@@ -39,7 +45,7 @@ conditionalDescribe("Verify the page and fields available on it",
                     cy.log(<string>file);
                     cy.visit(<string>file);
 
-                    cy.stepInfo(`4. Verify commentary text in exported report`);
+                    cy.stepInfo(`5. Verify commentary text in exported report`);
                     cy.xpath(`//h1[.='Certification']`).scrollIntoView().next().next().find("li").then($li => {
                         const reportSectionText = $li.toArray().map(li => li.innerHTML)
                             .slice(0, testData.textsArray.length);
