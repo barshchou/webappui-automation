@@ -6,7 +6,7 @@ import { numberWithCommas } from "../../../utils/numbers.utils";
 import { BoweryReports } from "../../types/boweryReports.type";
 
 class KeyInfoActions extends BaseActionsExt<typeof keyInfoPage> {
-    //TODO edit this method
+    //TODO edit this method, because (save === true) condition is not relevant anymore QA-6543
     enterPropertyRightsAppraisedComment(textToType: string = null, edit = true, save = true, revert = false) {
         if (edit === true) { keyInfoPage.propertyRightsAppraisedFormEditButton.click(); }
         keyInfoPage.textBoxPropertyRightsAppraised.scrollIntoView().invoke("text")

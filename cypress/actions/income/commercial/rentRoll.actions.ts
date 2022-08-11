@@ -264,7 +264,6 @@ class CommercialRentRollActions extends CommercialRentRollSharedComponent<typeof
         }
         return this;
     }
-
 }
 
 export default new CommercialRentRollActions(rentRollPage);

@@ -225,7 +225,9 @@ class CommercialRentRollSharedComponent<T extends CommercialRentRollSharedCompon
         return this;
     }
 
-    //action non actual
+    /**
+     * @deprecated since comments field has new features
+     */
     clickEditDiscussionButton(): this {
         this.Page.formEditBtn().click({ force: true });
         return this;
@@ -237,7 +239,9 @@ class CommercialRentRollSharedComponent<T extends CommercialRentRollSharedCompon
         return this;
     }
 
-    //action non actual
+    /**
+     * @deprecated since comments field has new features
+     */
     clickSaveDiscussionButton(): this {
         this.Page.formSaveBtn().click();
         return this;
@@ -272,7 +276,9 @@ class CommercialRentRollSharedComponent<T extends CommercialRentRollSharedCompon
         return this;
     }
 
-    //TODO edit this method
+    /**
+     * @deprecated since comments field has new features
+     */
     clickRevertToOriginalButton(): this {
         this.Page.formRevertToOriginalBtn().click();
         this.Page.changesLostModalHeader.should("exist");

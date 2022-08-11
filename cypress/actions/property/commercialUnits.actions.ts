@@ -160,20 +160,22 @@ class CommercialUnitsActions extends BaseActionsExt<typeof commercialUnitsPage> 
         return this;
     }
 
-    //Action is not relevant anymore
+    /**
+     * @deprecated since comments field has new features
+     */
     clickEditDiscussionButton(): CommercialUnitsActions {
         this.Page.formEditBtn().click({ force: true });
         return this;
     }
 
     activateTextAreaInput(): CommercialUnitsActions {
-        this.Page.commentaryText.focus().realClick({ clickCount: 2, position: "bottomRight" }).should("be.focused");
+        this.Page.commentaryText.scrollIntoView().realClick({ clickCount: 5, position: "bottomRight" })
+            .should("be.focused");
         return this;
     }
 
     editDiscussionTextArea(value: string, clearText = true): CommercialUnitsActions {
-        clearText ? this.Page.commentaryText.focus().clear({ force: true })
-            .realClick({ clickCount: 2, position: "bottomRight" }).focus().clear({ force: true }).focus().type(value) :
+        clearText ? this.Page.commentaryText.dblclick().clear({ force: true }).type(value) :
             this.Page.commentaryText.type(value);
         return this;
     }
@@ -193,7 +195,9 @@ class CommercialUnitsActions extends BaseActionsExt<typeof commercialUnitsPage> 
         return this;
     }
 
-    //non actual 
+    /**
+     * @deprecated since comments field has new features
+     */
     clickSaveDiscussionButton(): CommercialUnitsActions {
         this.Page.formSaveBtn().click();
         return this;
