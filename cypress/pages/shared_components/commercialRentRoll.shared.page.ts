@@ -60,7 +60,6 @@ class CommercialRentRollSharedComponentPage extends BasePage {
             "span", "The following generated text will appear in the Income Approach section of your report."); 
     }
 
-    // get discussionTooltip() { return cy.get("[data-icon=info-circle]"); }
 }
 
 export default CommercialRentRollSharedComponentPage;
