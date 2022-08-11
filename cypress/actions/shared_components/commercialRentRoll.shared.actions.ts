@@ -260,9 +260,6 @@ class CommercialRentRollSharedComponent<T extends CommercialRentRollSharedCompon
         return this;
     }
 
-    /**
-     * @deprecated since comments field has new features (don't use it anymore)
-     */
     clickRevertToOriginalButton(): this {
         this.Page.formRevertToOriginalBtn().click();
         this.Page.changesLostModalHeader.should("exist");
