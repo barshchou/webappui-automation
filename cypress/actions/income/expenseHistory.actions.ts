@@ -279,13 +279,17 @@ class ExpenseHistoryActions extends BaseActionsExt<typeof expenseHistoryPage> {
         return this;
     }
 
-    addNewCategoryAndVerify(categoryName: string): ExpenseHistoryActions {
+    addNewCategoryAndVerify(categoryName: string, isClickSave = false): ExpenseHistoryActions {
         this.clickAddExpenseCategoryButton()
             .enterNewCategoryName(categoryName)
             .verifyNewCategoryEnteredName(categoryName)
-            .Page.formAddButton().click();
+            .Page.formAddButton().should("not.be.disabled").click();
         this.verifyCategoryExists(toCamelCase(categoryName))
             .verifyDeleteButtonExists(toCamelCase(categoryName));
+        if (isClickSave) {
+            this.clickSaveButton()
+                .verifyProgressBarNotExist();
+        }
         return this;
     }
 

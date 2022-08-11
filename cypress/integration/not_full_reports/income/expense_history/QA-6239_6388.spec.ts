@@ -30,7 +30,7 @@ describe("Verify that the user can display historical expense values on a PSF ba
                 .clickAddExpenseYearButton();
 
             cy.stepInfo("3. Prepare data, enter expenses and it's values, verify total values");
-            Income._ExpenseHistory.addNewCategoryAndVerify(testData.customCategory)
+            Income._ExpenseHistory.addNewCategoryAndVerify(testData.customCategory, true)
                 .enterIssueByColIndex(testData.electricityValue, Enums.EXPENSE_HISTORY_TABLE_ROWS.electricity)
                 .enterIssueByColIndex(testData.grossRevenue, Enums.EXPENSE_HISTORY_TABLE_ROWS.grossRevenue)
                 .enterIssueByColIndex(testData.customCategoryValue, customExpenseLocator)

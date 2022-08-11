@@ -8,13 +8,12 @@ describe("Verify the calculation on the Expense History page", { tags: [ "@incom
 
     beforeEach("Create report", () => {
         createReport(testData.reportCreationData);
-    });
-
-    it("Test body", () => {
         cy.stepInfo("Navigate to Income -> Expense History page");
         _NavigationSection.navigateToExpenseHistory();
+    });
 
-        testData.periods.forEach(period => {
+    testData.periods.forEach(period => {
+        it(`Test with ${period.expensePeriodType} expense period`, () => {
             cy.stepInfo(`Add '${period.expensePeriodType}' expense period`);
             Income._ExpenseHistory.selectExpensePeriod(period.expensePeriodType)
                 .enterExpenseYear(period.year);
