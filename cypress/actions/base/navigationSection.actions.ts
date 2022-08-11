@@ -757,13 +757,13 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
 
     verifyCmsIconTooltip(): NavigationSectionActions {
         this.hoverOverContentManagementSystemIcon();
-        navigationSectionPage.cmsTooltip.should('have.text', 'Content Management System');
+        this.Page.tooltip.should('have.text', 'Content Management System');
         return this;
     }
 
     verifyGlobalIconTooltip(): NavigationSectionActions {
         this.hoverOverGlobalIcon();
-        navigationSectionPage.cmsTooltip.should('have.text', 'Global');
+        this.Page.tooltip.should('have.text', 'Global');
         return this;
     }
 

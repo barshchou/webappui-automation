@@ -119,8 +119,6 @@ class NavigationSection extends BasePage {
 
     get cmsGlobalIcon() { return cy.get('[aria-label="Global"]'); }
 
-    get cmsTooltip() { return cy.get(`*[role='tooltip']`); }
-
     get mapMakerButton() { return cy.get(`[data-qa="openMapMakerBtn"]`); }
 
     get photoGridExportButton() { return cy.get(`[data-qa="openPhotoGridExportBtn"]`); }
