@@ -3,11 +3,6 @@ import BaseActionsExt from "../base/base.actions.ext";
 import swotAnalysisPage from "../../pages/cms/swotAnalysis.page";
 
 class SWOTAnalysisActions extends BaseActionsExt<typeof swotAnalysisPage> {
-    verifyPageTitle(): SWOTAnalysisActions {
-        swotAnalysisPage.pageTitle.should('have.text', 'SWOT Analysis');
-        return this;
-    }
-
     verifySWOTInputsText(sectionName: BoweryReports.SWOTAnalysisSections, 
         expectedText: string[]): SWOTAnalysisActions {
         expectedText.forEach((language, index) => {

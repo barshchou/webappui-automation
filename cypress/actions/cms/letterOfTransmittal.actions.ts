@@ -3,11 +3,6 @@ import letterOfTransmittalPage from "../../pages/cms/letterOfTransmittal.page";
 import { BoweryReports } from "../../types/boweryReports.type";
 
 class LetterOfTransmittalActions extends BaseActionsExt<typeof letterOfTransmittalPage> {
-    verifyPageTitle(): LetterOfTransmittalActions {
-        letterOfTransmittalPage.pageTitle.should('have.text', 'Letter of Transmittal');
-        return this;
-    }
-
     updateSectionDiscussion(sectionName: BoweryReports.LetterOfTransmittalSections, 
         text: string, clear = false): LetterOfTransmittalActions {
         this.clickSectionForEdit(sectionName)
