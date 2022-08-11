@@ -1,6 +1,6 @@
 import BaseActionsExt from "../base/base.actions.ext";
 import incomeCapitalizationApproachPage from "../../pages/cms/incomeCapitalizationApproach.page";
-import { BoweryReports } from '../../types/boweryReports.type';
+import { ContentManagementSystem } from '../../types/boweryReports.type';
 
 class IncomeCapitalizationApproachActions extends BaseActionsExt<typeof incomeCapitalizationApproachPage> {
     verifyPageTitle(): IncomeCapitalizationApproachActions {
@@ -8,14 +8,15 @@ class IncomeCapitalizationApproachActions extends BaseActionsExt<typeof incomeCa
         return this;
     }
 
-    verifyIncomeCapitalizationText(sectionName: BoweryReports.IncomeCapitalizationApproachSections, 
-        expectedText: string): IncomeCapitalizationApproachActions {
+    verifyIncomeCapitalizationText(sectionName: 
+        ContentManagementSystem.IncomeCapitalizationApproachSections, expectedText: string): 
+        IncomeCapitalizationApproachActions {
         incomeCapitalizationApproachPage.incomeCapitalizationDiscussionSection(sectionName).invoke('text')
             .should('deep.equal', expectedText);
         return this;
     }
 
-    updateSectionDiscussion(sectionName: BoweryReports.IncomeCapitalizationApproachSections, 
+    updateSectionDiscussion(sectionName: ContentManagementSystem.IncomeCapitalizationApproachSections, 
         text: string, clear = false): IncomeCapitalizationApproachActions {
         this.clickSectionForEdit(sectionName)
             .editSectionDiscussionText(sectionName, text, clear);
@@ -26,7 +27,7 @@ class IncomeCapitalizationApproachActions extends BaseActionsExt<typeof incomeCa
         return this;
     }
 
-    editSectionDiscussionText(sectionName: BoweryReports.IncomeCapitalizationApproachSections, 
+    editSectionDiscussionText(sectionName: ContentManagementSystem.IncomeCapitalizationApproachSections, 
         text: string, clear = false): IncomeCapitalizationApproachActions {
         if (clear) { 
             this.clickSectionForEdit(sectionName);
@@ -38,20 +39,20 @@ class IncomeCapitalizationApproachActions extends BaseActionsExt<typeof incomeCa
         return this;
     }
 
-    clickSectionForEdit(sectionName: BoweryReports.IncomeCapitalizationApproachSections): 
+    clickSectionForEdit(sectionName: ContentManagementSystem.IncomeCapitalizationApproachSections): 
     IncomeCapitalizationApproachActions {
         incomeCapitalizationApproachPage.incomeCapitalizationDiscussionSection(sectionName)
             .scrollIntoView().realClick();
         return this;
     }
 
-    verifyModifiedLabel(sectionName: BoweryReports.IncomeCapitalizationApproachSections): 
+    verifyModifiedLabel(sectionName: ContentManagementSystem.IncomeCapitalizationApproachSections): 
     IncomeCapitalizationApproachActions {
         incomeCapitalizationApproachPage.incomeCapitalizationModifiedLabel(sectionName).should('be.visible');
         return this;
     }
 
-    revertSectionToOriginal(sectionName: BoweryReports.IncomeCapitalizationApproachSections): 
+    revertSectionToOriginal(sectionName: ContentManagementSystem.IncomeCapitalizationApproachSections): 
     IncomeCapitalizationApproachActions {
         this.clickSectionForEdit(sectionName);
         incomeCapitalizationApproachPage.incomeCapitalizationDiscussionSection(sectionName).type(`{ESC}`);

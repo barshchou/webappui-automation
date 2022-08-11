@@ -1,39 +1,33 @@
 import { _HomePage } from '../../../actions/base';
 import { createReport } from '../../../actions/base/baseTest.actions';
-import { Final, ReviewExport } from '../../../actions';
+import { ReviewExport } from '../../../actions';
 import { _NavigationSection } from '../../../actions/base';
-import testData from "../../../fixtures/not_full_reports/cms/QA-6400.fixture";
+import testData from "../../../fixtures/not_full_reports/cms/QA-5381.fixture";
 import launchDarklyApi from '../../../api/launchDarkly.api';
 import { conditionalDescribe } from "../../checkIsProd.utils";
-import { _CmsBaseActions, _SWOTAnalysis } from '../../../actions/cms';
+import { _Certification, _CmsBaseActions } from '../../../actions/cms';
 
-conditionalDescribe("Verify page and possibility to edit text", 
+conditionalDescribe("Verify the page and fields available on it", 
     { tags:[ "@cms", "@check_export", "@feature_flag" ] }, () => {
-        it('[QA-6400]', () => {
+        it('[QA-5381]', () => {
             cy.stepInfo(`Preconditions: Set Launch Darkly flag to see Report Copy Editor section. Create a report`);
             launchDarklyApi.setFeatureFlagForUser(testData.cmsNavigationFlagKey, testData.featureFlagEnable)
                 .setFeatureFlagForUser(testData.reportTextEditorFlagKey, testData.featureFlagEnable)
                 .setFeatureFlagForUser(testData.swotAnalysisFlagKey, testData.featureFlagEnable);
             createReport(testData.reportCreationData);
 
-            cy.stepInfo(`1. Open CMS > SWOT Analysis page`);
+            cy.stepInfo(`1. Open CMS > Certification page page`);
             _NavigationSection.navigateToContentManagementSystem();
-            _CmsBaseActions.openSWOTAnalysisPage();
+            _CmsBaseActions.openCertificationPage();
 
-            cy.stepInfo(`2. Verify languages of sections`);
-            testData.swotTextsFixture.forEach(section => {
-                _SWOTAnalysis.verifySWOTInputsText(section.sectionName, section.languages);
+            cy.stepInfo(`2. Verify fields are listed in the section`);
+            testData.certificationTextsFixture.forEach(section => {
+                _Certification.verifyCertificationBulletsText(section.sectionName, section.languages);
             });
 
-            cy.stepInfo(`3. Open any report Final > SWOT Analysis page`);
+            cy.stepInfo(`3. Export report`);
             _NavigationSection.returnToHomePage();
             _HomePage.openReportByName(testData.reportCreationData.reportNumber);
-            _NavigationSection.navigateToFinalSWOTAnalysis();
-            testData.swotTextsFixture.forEach(section => {
-                Final._SWOTAnalysis.verifyTextSection(section.sectionName, section.languages);
-            });
-
-            cy.stepInfo(`4. Export report`);
             _NavigationSection.openReviewAndExport();
             ReviewExport.generateDocxReport().waitForReportGenerated()
                 .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
@@ -44,14 +38,12 @@ conditionalDescribe("Verify page and possibility to edit text",
                 .then(file => {
                     cy.log(<string>file);
                     cy.visit(<string>file);
-                    cy.stepInfo(`5. Verify commentary text in exported report`);
-                    testData.swotTextsFixture.forEach((section) => {
-                        let sectionName = section.sectionName.charAt(0).toUpperCase() + section.sectionName.slice(1);
-                        cy.contains(sectionName).scrollIntoView().next().find("li").then($li => {
-                            const reportSectionText = $li.toArray().map(li => li.innerHTML);
-                            expect(section.languages).to.deep.eq(reportSectionText);
-                        });
-                    
+
+                    cy.stepInfo(`4. Verify commentary text in exported report`);
+                    cy.xpath(`//h1[.='Certification']`).scrollIntoView().next().next().find("li").then($li => {
+                        const reportSectionText = $li.toArray().map(li => li.innerHTML)
+                            .slice(0, testData.textsArray.length);
+                        expect(testData.textsArray).to.deep.eq(reportSectionText); 
                     });
                 });
         });

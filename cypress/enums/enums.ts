@@ -79,6 +79,7 @@ import interestAppraisedEnum from "./keyInfo/interestAppraised.enum";
 import letterOfTransmittalEnum from "./cms/letterOfTransmittal.enum";
 import swotAnalysisEnum from "./cms/swotAnalysis.enum";
 import incomeCapitalizationApproachEnum from "./cms/incomeCapitalizationApproach.enum";
+import certificationEnum from "./cms/certification.enum";
 
 export default {
     TEMPLATE_TYPE: templateTypesEnum,
@@ -161,5 +162,6 @@ export default {
     INTEREST_APPRAISED: interestAppraisedEnum,
     LETTER_SECTIONS: letterOfTransmittalEnum,
     SWOT_SECTIONS: swotAnalysisEnum,
-    INCOME_CAPITALIZATION_APPROACH_SECTIONS: incomeCapitalizationApproachEnum
+    INCOME_CAPITALIZATION_APPROACH_SECTIONS: incomeCapitalizationApproachEnum,
+    CERTIFICATION_SECTIONS: certificationEnum
 };

@@ -1,12 +1,12 @@
-import { BoweryReports } from "../../types/boweryReports.type";
+import { ContentManagementSystem } from "../../types/boweryReports.type";
 import BasePage from "../base/base.page";
 
 class IncomeCapitalizationApproachPage extends BasePage {
-    incomeCapitalizationDiscussionSection(sectionName: BoweryReports.IncomeCapitalizationApproachSections) {
+    incomeCapitalizationDiscussionSection(sectionName: ContentManagementSystem.IncomeCapitalizationApproachSections) {
         return cy.xpath(`//h6[.='${sectionName}']//following::div[@data-slate-editor][1]`);
     }
 
-    incomeCapitalizationModifiedLabel(sectionName: BoweryReports.IncomeCapitalizationApproachSections) {
+    incomeCapitalizationModifiedLabel(sectionName: ContentManagementSystem.IncomeCapitalizationApproachSections) {
         return cy.xpath(`//h6[.='${sectionName}']/following::*[@ui='indicator'][1]`);
     }
 }
