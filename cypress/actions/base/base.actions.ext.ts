@@ -116,7 +116,7 @@ export default class BaseActionsExt<T extends BasePage> extends BaseActions {
     }
 
     enterFormCommentTextBox(name: string, text: string) {
-        this.Page.formCommentTextBox(name).realClick().type(text);
+        this.Page.formCommentTextBox(name).realClick({ position: "top" }).type(text);
         this.Page.Header.realClick();
         return this;
     }

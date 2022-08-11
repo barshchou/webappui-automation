@@ -136,11 +136,6 @@ class SourceInformationActions extends BaseActionsExt<typeof sourceInformationPa
         });
         return this;
     }
-
-    enterDataSourcesDescriptionExportTextBox(textToType: string): SourceInformationActions {
-        sourceInformationPage.dataSourcesDescriptionExportTextBox.type(textToType);
-        return this;
-    }
 }
 
 export default new SourceInformationActions(sourceInformationPage);

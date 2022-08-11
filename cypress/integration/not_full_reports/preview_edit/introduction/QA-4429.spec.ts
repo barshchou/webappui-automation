@@ -13,11 +13,9 @@ describe('[QA-4429] Check the Introduction page',
             createReport(testData.reportNYCCreationData);
 
             cy.stepInfo("2. Navigate to Report > Client and Edit Identification of the Client and Intended User Text");
-            _NavigationSection.navigateToSourceInformation()
-                .Page.formEditBtn().click();
+            _NavigationSection.navigateToSourceInformation();
 
-            Final._SourceInformation.enterDataSourcesDescriptionExportTextBox(testData.typeValue)
-                .Page.formSaveBtn().click();
+            Final._SourceInformation.enterFormCommentTextBox(testData.backLinkNames, testData.typeValue);
             // Need wait for changes to take place.
             cy.wait(1000);
 
@@ -44,11 +42,9 @@ describe('[QA-4429] Check the Introduction page',
             _HomePage.createReport(testData.reportOtherCreationData);
 
             cy.stepInfo("2. Navigate to Report > Client and Edit Identification of the Client and Intended User Text");
-            _NavigationSection.navigateToSourceInformation()
-                .Page.formEditBtn().click();
+            _NavigationSection.navigateToSourceInformation();
 
-            Final._SourceInformation.enterDataSourcesDescriptionExportTextBox(testData.typeValue)
-                .Page.formSaveBtn().click();
+            Final._SourceInformation.enterFormCommentTextBox(testData.backLinkNames, testData.typeValue);
             // Need wait for changes to take place.
             cy.wait(1000);
 
