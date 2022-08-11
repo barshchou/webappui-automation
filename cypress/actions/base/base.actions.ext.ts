@@ -90,38 +90,23 @@ export default class BaseActionsExt<T extends BasePage> extends BaseActions {
         return this;
     };
 
-    clickFormEditBtn(index = 0) {
-        this.Page.formEditBtn(index).click();
-        return this;
-    }
-
-    clickFormSaveBtn(index = 0) {
-        this.Page.formSaveBtn(index).click();
-        return this;
-    }
-
     clickFormRevertToOriginalBtn(index = 0) {
         this.Page.formRevertToOriginalBtn(index).click();
         return this;
     }
 
-    clickFormCancelBtn(index = 0) {
-        this.Page.formCancelButton(index).click();
-        return this;
-    }
-
-    clickFormAddBtn(index = 0) {
+    clickFormAddBtn(index = 0): this {
         this.Page.formAddButton(index).click();
         return this;
     }
 
-    enterFormCommentTextBox(name: string, text: string) {
+    enterFormCommentTextBox(name: string, text: string): this {
         this.Page.formCommentTextBox(name).realClick({ position: "bottom" }).type(text);
         this.Page.Header.realClick();
         return this;
     }
 
-    verifyOpenedPage(pageName: string) {
+    verifyOpenedPage(pageName: string): this {
         this.Page.pageTitle.should("have.text", pageName);
         return this;
     }

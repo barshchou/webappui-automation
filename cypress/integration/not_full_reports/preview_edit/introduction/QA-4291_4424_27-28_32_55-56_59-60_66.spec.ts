@@ -19,12 +19,12 @@ describe('[QA-4291_4424_27-28_32_55-56_59] Check the Introduction page',
                 .verifyProgressBarNotExist()
                 .Page.introduction.should("exist");
 
-            cy.stepInfo("3. Verify 'Edit' button exist");
+            cy.stepInfo("3. Verify 'edit' button exist");
             PreviewEdit._Introduction.Page.SwitchEditBtn.click();
         });
 
         it("[QA-4424]", () => {
-            cy.stepInfo("2. Navigate to Report > Client and Edit Identification of the Client and Intended User Text");
+            cy.stepInfo("2. Navigate to Report > Client and edit Identification of the Client and Intended User Text");
             _NavigationSection.navigateToClientPage()
                 .enterFormCommentTextBox(testData.textBoxNames.identificationOfClient, testData.typeValue);
             // Need wait for changes to take place.
@@ -35,7 +35,7 @@ describe('[QA-4291_4424_27-28_32_55-56_59] Check the Introduction page',
                 .verifyProgressBarNotExist()
                 .Page.introduction.should("exist");
 
-            cy.stepInfo("4. Verify 'Edit' button exist");
+            cy.stepInfo("4. Verify 'edit' button exist");
             PreviewEdit._Introduction.Page.SwitchEditBtn.click();
 
             cy.stepInfo("5. Verify Modified textBox");
@@ -55,7 +55,7 @@ describe('[QA-4291_4424_27-28_32_55-56_59] Check the Introduction page',
         });
 
         it("[QA-4427]", () => {
-            cy.stepInfo("2. Navigate to Report > Client and Edit Intended User");
+            cy.stepInfo("2. Navigate to Report > Client and edit Intended User");
             _NavigationSection.navigateToClientPage()
                 .enterFormCommentTextBox(testData.textBoxNames.intendedUser, testData.typeValue);
             cy.wait(1000);
@@ -65,7 +65,7 @@ describe('[QA-4291_4424_27-28_32_55-56_59] Check the Introduction page',
                 .verifyProgressBarNotExist()
                 .Page.introduction.should("exist");
 
-            cy.stepInfo("4. Verify 'Edit' button exist");
+            cy.stepInfo("4. Verify 'edit' button exist");
             PreviewEdit._Introduction.Page.SwitchEditBtn.click();
 
             cy.stepInfo("5. Verify Modified textBox");
@@ -85,7 +85,7 @@ describe('[QA-4291_4424_27-28_32_55-56_59] Check the Introduction page',
         });
 
         it("[QA-4428]", () => {
-            cy.stepInfo("2. Navigate to Report > Key Info and Edit Definition of Market Value");
+            cy.stepInfo("2. Navigate to Report > Key Info and edit Definition of Market Value");
             _NavigationSection.navigateToReportInformation();
 
             Report._KeyInfo.enterFormCommentTextBox(testData.textBoxNames.definitionOfMarketValue, testData.typeValue);
@@ -96,7 +96,7 @@ describe('[QA-4291_4424_27-28_32_55-56_59] Check the Introduction page',
                 .verifyProgressBarNotExist()
                 .Page.introduction.should("exist");
 
-            cy.stepInfo("4. Verify 'Edit' button exist");
+            cy.stepInfo("4. Verify 'edit' button exist");
             PreviewEdit._Introduction.Page.SwitchEditBtn.click();
 
             cy.stepInfo("5. Verify Modified textBox");
@@ -117,7 +117,7 @@ describe('[QA-4291_4424_27-28_32_55-56_59] Check the Introduction page',
 
         it("[QA-4432]", () => {
             cy.stepInfo(`2. Navigate to Final > Assumptions and Conditions page and 
-                        Edit General Assumptions Discussion`);
+                        edit General Assumptions Discussion`);
             _NavigationSection.navigateToAssumptionsConditions()
                 .enterFormCommentTextBox(testData.textBoxNames.generalAssumptionsDiscussion, testData.typeValue);
             cy.wait(1000);
@@ -127,7 +127,7 @@ describe('[QA-4291_4424_27-28_32_55-56_59] Check the Introduction page',
                 .verifyProgressBarNotExist()
                 .Page.introduction.should("exist");
 
-            cy.stepInfo("4. Verify 'Edit' button exist");
+            cy.stepInfo("4. Verify 'edit' button exist");
             PreviewEdit._Introduction.Page.SwitchEditBtn.click();
 
             cy.stepInfo("5. Verify Modified textBox");
@@ -147,7 +147,7 @@ describe('[QA-4291_4424_27-28_32_55-56_59] Check the Introduction page',
         });
 
         it("[QA-4455]", () => {
-            cy.stepInfo("2. Navigate to Property > Property History and Edit Recent Sales History Discussion");
+            cy.stepInfo("2. Navigate to Property > Property History and edit Recent Sales History Discussion");
             _NavigationSection.navigateToPropertyHistory()
                 .enterFormCommentTextBox(testData.textBoxNames.recentSalesHistoryDiscussion, testData.typeValue);
             cy.wait(1000);
@@ -157,7 +157,7 @@ describe('[QA-4291_4424_27-28_32_55-56_59] Check the Introduction page',
                 .verifyProgressBarNotExist()
                 .Page.introduction.should("exist");
 
-            cy.stepInfo("4. Verify 'Edit' button exist");
+            cy.stepInfo("4. Verify 'edit' button exist");
             PreviewEdit._Introduction.Page.SwitchEditBtn.click();
 
             cy.stepInfo("5. Verify Modified textBox");
@@ -177,7 +177,7 @@ describe('[QA-4291_4424_27-28_32_55-56_59] Check the Introduction page',
         });
 
         it("[QA-4456]", () => {
-            cy.stepInfo("2. Navigate to Property > Property History and Edit Property Contract History Discussion");
+            cy.stepInfo("2. Navigate to Property > Property History and edit Property Contract History Discussion");
             _NavigationSection.navigateToPropertyHistory()
                 .enterFormCommentTextBox(testData.textBoxNames.propertyContractHistoryDiscussion, testData.typeValue);
             cy.wait(1000);
@@ -187,7 +187,7 @@ describe('[QA-4291_4424_27-28_32_55-56_59] Check the Introduction page',
                 .verifyProgressBarNotExist()
                 .Page.introduction.should("exist");
 
-            cy.stepInfo("4. Verify 'Edit' button exist");
+            cy.stepInfo("4. Verify 'edit' button exist");
             PreviewEdit._Introduction.Page.SwitchEditBtn.click();
 
             cy.stepInfo("5. Verify Modified textBox");
@@ -207,7 +207,7 @@ describe('[QA-4291_4424_27-28_32_55-56_59] Check the Introduction page',
         });
 
         it("[QA-4459]", () => {
-            cy.stepInfo("2. Navigate to Income > Cap Rate Conclusion and Edit Purpose & Date of Value Discussion");
+            cy.stepInfo("2. Navigate to Income > Cap Rate Conclusion and edit Purpose & Date of Value Discussion");
             _NavigationSection.navigateToCapRateConclusion()
                 .enterFormCommentTextBox(testData.textBoxNames.purposeDateOfValueDiscussion, testData.typeValue);
             cy.wait(1000);
@@ -217,7 +217,7 @@ describe('[QA-4291_4424_27-28_32_55-56_59] Check the Introduction page',
                 .verifyProgressBarNotExist()
                 .Page.introduction.should("exist");
 
-            cy.stepInfo("4. Verify 'Edit' button exist");
+            cy.stepInfo("4. Verify 'edit' button exist");
             PreviewEdit._Introduction.Page.SwitchEditBtn.click();
 
             cy.stepInfo("5. Verify Modified textBox");
@@ -237,7 +237,7 @@ describe('[QA-4291_4424_27-28_32_55-56_59] Check the Introduction page',
         });
 
         it("[QA-4460]", () => {
-            cy.stepInfo("2. Navigate to Property > Market and Edit Exposure Time Description");
+            cy.stepInfo("2. Navigate to Property > Market and edit Exposure Time Description");
             _NavigationSection.navigateToPropertyMarket()
                 .enterFormCommentTextBox(testData.textBoxNames.exposureTimeDescription, testData.typeValue);
             cy.wait(1000);
@@ -247,7 +247,7 @@ describe('[QA-4291_4424_27-28_32_55-56_59] Check the Introduction page',
                 .verifyProgressBarNotExist()
                 .Page.introduction.should("exist");
 
-            cy.stepInfo("4. Verify 'Edit' button exist");
+            cy.stepInfo("4. Verify 'edit' button exist");
             PreviewEdit._Introduction.Page.SwitchEditBtn.click();
 
             cy.stepInfo("5. Verify Modified textBox");
@@ -268,7 +268,7 @@ describe('[QA-4291_4424_27-28_32_55-56_59] Check the Introduction page',
 
         it("[QA-4466]", () => {
             cy.stepInfo(`2. Navigate to Property > Market, check Include Marketing Time in the report
-            and Edit Marketing Time Description`);
+                        and edit Marketing Time Description`);
             _NavigationSection.navigateToPropertyMarket();
 
             Property._Market.checkIncludeMarketingTimeDescription()
@@ -280,7 +280,7 @@ describe('[QA-4291_4424_27-28_32_55-56_59] Check the Introduction page',
                 .verifyProgressBarNotExist()
                 .Page.introduction.should("exist");
 
-            cy.stepInfo("4. Verify 'Edit' button exist");
+            cy.stepInfo("4. Verify 'edit' button exist");
             PreviewEdit._Introduction.Page.SwitchEditBtn.click();
 
             cy.stepInfo("5. Verify Modified textBox");
@@ -310,7 +310,7 @@ describe('[QA-4291_4424_27-28_32_55-56_59] Check the Introduction page',
                     .verifyProgressBarNotExist()
                     .Page.introduction.should("exist");
 
-                cy.stepInfo("3. Verify 'Edit' button exist");
+                cy.stepInfo("3. Verify 'edit' button exist");
                 PreviewEdit._Introduction.Page.SwitchEditBtn.click();
 
                 cy.stepInfo(`4.${index} Go to back page and verify that opened page`);
