@@ -24,10 +24,9 @@ describe(`Verify the Unsaved changes modal functionality on the Income > Commerc
                 .Page.rentPerSFAnnuallyTotal.scrollIntoView();
             Income._CommercialManager.StabilizedRentRoll
                 .enterListPerSFAnnually(testData.leaseStatuses, testData.rentToBe)
-                .clickEditDiscussionButton()
+                .activateTextAreaInput( Income._CommercialManager.StabilizedRentRoll.Page.commentaryText)
                 .editDiscussionTextArea(testData.commentText)
-                .verifyEditDiscussionButtonsDisplayed()
-                .clickSaveDiscussionButton()
+                .inactivateTextAreaInput()
                 .verifyCommentaryContainsText(testData.commentText);
 
             cy.stepInfo(`2. Try to proceed on any other page and verify that the Unsaved changes modal is displayed.`);
@@ -50,10 +49,9 @@ describe(`Verify the Unsaved changes modal functionality on the Income > Commerc
                 .Page.rentPerSFAnnuallyTotal.scrollIntoView();
             Income._CommercialManager.StabilizedRentRoll
                 .enterListPerSFAnnually(testData.leaseStatuses, testData.rentToBe2)
-                .clickEditDiscussionButton()
+                .activateTextAreaInput( Income._CommercialManager.StabilizedRentRoll.Page.commentaryText)
                 .editDiscussionTextArea(testData.commentText2)
-                .verifyEditDiscussionButtonsDisplayed()
-                .clickSaveDiscussionButton()
+                .inactivateTextAreaInput()
                 .verifyCommentaryContainsText(testData.commentText2);
             _NavigationSection.clickPropertyButton().clickSummaryButton().verifyUnsavedChangesModal();
 

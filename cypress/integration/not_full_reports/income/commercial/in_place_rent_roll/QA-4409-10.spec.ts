@@ -14,8 +14,7 @@ describe.skip("Verify the functionality of Edit and Cancel commentary buttons",
         it("Test body", () => {
             NavigationSection.navigateToCommercialInPlaceRentRoll()
                 .verifyProgressBarNotExist();
-            Income.Commercial.InPlaceRentRoll.clickEditDiscussionButton()
-                .verifyEditDiscussionButtonsDisplayed()
+            Income.Commercial.InPlaceRentRoll
                 .editDiscussionTextArea(testData.newCommentary);
             Income.Commercial.InPlaceRentRoll.clickCancelDiscussionEditButton()
                 .verifyCommentaryTextNotContains(testData.newCommentary);

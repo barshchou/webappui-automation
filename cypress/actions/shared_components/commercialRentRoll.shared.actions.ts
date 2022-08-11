@@ -225,25 +225,9 @@ class CommercialRentRollSharedComponent<T extends CommercialRentRollSharedCompon
         return this;
     }
 
-    /**
-     * @deprecated since comments field has new features (don't use it anymore)
-     */
-    clickEditDiscussionButton(): this {
-        this.Page.formEditBtn().click({ force: true });
-        return this;
-    }
-
     editDiscussionTextArea(value: string, clearText = true): this {
         clearText ? this.Page.commentaryText.clear().type(value) :
             this.Page.commentaryText.type(value);
-        return this;
-    }
-
-    /**
-     * @deprecated since comments field has new features (don't use it anymore)
-     */
-    clickSaveDiscussionButton(): this {
-        this.Page.formSaveBtn().click();
         return this;
     }
 
@@ -310,14 +294,6 @@ class CommercialRentRollSharedComponent<T extends CommercialRentRollSharedCompon
         return this;
     }
 
-    verifyEditDiscussionButtonsDisplayed(): this {
-        this.Page.formCancelButton().should("be.visible");
-        this.Page.editDiscussionButton.should("not.exist");
-        this.Page.formRevertToOriginalBtn().should("be.visible");
-        this.Page.formSaveBtn().should("be.visible");
-        return this;
-    }
-
     clickCancelDiscussionEditButton(): this {
         this.Page.formCancelButton().click();
         return this;
@@ -327,8 +303,7 @@ class CommercialRentRollSharedComponent<T extends CommercialRentRollSharedCompon
         this.activateTextAreaInput(this.Page.commentaryText)
             .clickRevertToOriginalButton()
             .verifyProgressBarNotExist()
-            .clickYesRevertButton()
-            .clickSaveDiscussionButton();
+            .clickYesRevertButton();
         return this;
     }
 
