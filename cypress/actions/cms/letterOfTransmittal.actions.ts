@@ -27,13 +27,9 @@ class LetterOfTransmittalActions extends BaseActionsExt<typeof letterOfTransmitt
 
     editSectionDiscussionText(sectionName: BoweryReports.LetterOfTransmittalSections, 
         text: string, clear = false): LetterOfTransmittalActions {
-        if (clear) { 
-            this.clickSectionForEdit(sectionName);
-            letterOfTransmittalPage.letterOfTransmittalDiscussionSection(sectionName).clear(); 
-        }
-        letterOfTransmittalPage.letterOfTransmittalDiscussionSection(sectionName)
-            .type(text)
-            .should('contain.text', text);
+        if (clear) { this.clearSectionDiscussionText(sectionName); }
+        letterOfTransmittalPage.letterOfTransmittalDiscussionSection(sectionName).type(text);
+        this.verifyLetterOfTransmittalText(sectionName, text);
         return this;
     }
 
@@ -51,6 +47,12 @@ class LetterOfTransmittalActions extends BaseActionsExt<typeof letterOfTransmitt
         this.Page.formRevertToOriginalBtn().realClick();
         this.Page.formYesRevertBtn.realClick();
         this.saveCmsSettings();
+        return this;
+    }
+
+    clearSectionDiscussionText(sectionName: BoweryReports.LetterOfTransmittalSections): LetterOfTransmittalActions {
+        this.clickSectionForEdit(sectionName);
+        letterOfTransmittalPage.letterOfTransmittalDiscussionSection(sectionName).clear();
         return this;
     }
 }
