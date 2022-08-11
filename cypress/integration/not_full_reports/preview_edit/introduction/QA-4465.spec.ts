@@ -25,9 +25,11 @@ describe('Verify the "Property Rights Appraised" commentary on the Introduction 
             - a back link is displayed, when clicked, 
             takes the user back to the original location of this component on the Report > Key Info page`);
             testData.textToVerify.forEach(value => {
-                Report._KeyInfo.enterPropertyRightsAppraisedComment(value).then(text => {
-                    cy.wrap(normalizeText(text)).as(testData.aliases.PropertyRightsAppraised);
-                });
+                Report._KeyInfo.enterFormCommentTextBox(testData.backLinkName, value)
+                    .Page.formCommentTextBox(testData.backLinkName).invoke("text").then(text => {
+                        cy.wrap(normalizeText(text)).as(testData.aliases.PropertyRightsAppraised);
+                        cy.wait(1000);
+                    });
                 _NavigationSection.navigateToIntroduction()
                     .verifyProgressBarNotExist();
     
