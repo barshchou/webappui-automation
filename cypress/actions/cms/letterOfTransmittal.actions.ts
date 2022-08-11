@@ -1,6 +1,6 @@
 import BaseActionsExt from "../base/base.actions.ext";
 import letterOfTransmittalPage from "../../pages/cms/letterOfTransmittal.page";
-import { BoweryReports } from "../../types/boweryReports.type";
+import { ContentManagementSystem } from "../../types/boweryReports.type";
 
 class LetterOfTransmittalActions extends BaseActionsExt<typeof letterOfTransmittalPage> {
     verifyPageTitle(): LetterOfTransmittalActions {
@@ -8,7 +8,7 @@ class LetterOfTransmittalActions extends BaseActionsExt<typeof letterOfTransmitt
         return this;
     }
 
-    updateSectionDiscussion(sectionName: BoweryReports.LetterOfTransmittalSections, 
+    updateSectionDiscussion(sectionName: ContentManagementSystem.LetterOfTransmittalSections, 
         text: string, clear = false): LetterOfTransmittalActions {
         this.clickSectionForEdit(sectionName)
             .editSectionDiscussionText(sectionName, text, clear);
@@ -19,18 +19,18 @@ class LetterOfTransmittalActions extends BaseActionsExt<typeof letterOfTransmitt
         return this;
     }
 
-    verifyModifiedLabel(sectionName: BoweryReports.LetterOfTransmittalSections): LetterOfTransmittalActions {
+    verifyModifiedLabel(sectionName: ContentManagementSystem.LetterOfTransmittalSections): LetterOfTransmittalActions {
         letterOfTransmittalPage.letterOfTransmittalModifiedLabel(sectionName).should('be.visible');
         return this;
     }
 
-    clickSectionForEdit(sectionName: BoweryReports.LetterOfTransmittalSections): 
+    clickSectionForEdit(sectionName: ContentManagementSystem.LetterOfTransmittalSections): 
     LetterOfTransmittalActions {
         letterOfTransmittalPage.letterOfTransmittalDiscussionSection(sectionName).scrollIntoView().realClick();
         return this;
     }
 
-    editSectionDiscussionText(sectionName: BoweryReports.LetterOfTransmittalSections, 
+    editSectionDiscussionText(sectionName: ContentManagementSystem.LetterOfTransmittalSections, 
         text: string, clear = false): LetterOfTransmittalActions {
         if (clear) { 
             this.clickSectionForEdit(sectionName);
@@ -42,14 +42,15 @@ class LetterOfTransmittalActions extends BaseActionsExt<typeof letterOfTransmitt
         return this;
     }
 
-    verifyLetterOfTransmittalText(sectionName: BoweryReports.LetterOfTransmittalSections, 
+    verifyLetterOfTransmittalText(sectionName: ContentManagementSystem.LetterOfTransmittalSections, 
         expectedText: string): LetterOfTransmittalActions {
         letterOfTransmittalPage.letterOfTransmittalDiscussionSection(sectionName).invoke('text')
             .should('deep.equal', expectedText);
         return this;
     }
 
-    revertSectionToOriginal(sectionName: BoweryReports.LetterOfTransmittalSections): LetterOfTransmittalActions {
+    revertSectionToOriginal(sectionName: ContentManagementSystem.LetterOfTransmittalSections): 
+    LetterOfTransmittalActions {
         this.clickSectionForEdit(sectionName);
         letterOfTransmittalPage.letterOfTransmittalDiscussionSection(sectionName).type(`{ESC}`);
         letterOfTransmittalPage.letterOfTransmittalDiscussionSection(sectionName).focus();

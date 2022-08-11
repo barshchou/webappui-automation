@@ -1,12 +1,12 @@
-import { BoweryReports } from "../../types/boweryReports.type";
+import { ContentManagementSystem } from "../../types/boweryReports.type";
 import BasePage from "../base/base.page";
 
 class LetterOfTransmittalPage extends BasePage {
-    letterOfTransmittalDiscussionSection(sectionName: BoweryReports.LetterOfTransmittalSections) {
+    letterOfTransmittalDiscussionSection(sectionName: ContentManagementSystem.LetterOfTransmittalSections) {
         return cy.xpath(`//h6[.='${sectionName}']//following::div[@data-slate-editor][1]`);
     }
 
-    letterOfTransmittalModifiedLabel(sectionName: BoweryReports.LetterOfTransmittalSections) {
+    letterOfTransmittalModifiedLabel(sectionName: ContentManagementSystem.LetterOfTransmittalSections) {
         return cy.xpath(`//h6[.='${sectionName}']/following::*[@ui='indicator'][1]`);
     }
 }

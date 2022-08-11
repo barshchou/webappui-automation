@@ -1,4 +1,4 @@
-import { BoweryReports } from './../../types/boweryReports.type';
+import { ContentManagementSystem } from './../../types/boweryReports.type';
 import BaseActionsExt from "../base/base.actions.ext";
 import swotAnalysisPage from "../../pages/cms/swotAnalysis.page";
 
@@ -8,7 +8,7 @@ class SWOTAnalysisActions extends BaseActionsExt<typeof swotAnalysisPage> {
         return this;
     }
 
-    verifySWOTInputsText(sectionName: BoweryReports.SWOTAnalysisSections, 
+    verifySWOTInputsText(sectionName: ContentManagementSystem.SWOTAnalysisSections, 
         expectedText: string[]): SWOTAnalysisActions {
         expectedText.forEach((language, index) => {
             swotAnalysisPage.swotAnalysisSectionTextArea(sectionName, index).invoke('text')
@@ -19,7 +19,7 @@ class SWOTAnalysisActions extends BaseActionsExt<typeof swotAnalysisPage> {
     }
 
     updateSectionDiscussion(
-        sectionName: BoweryReports.SWOTAnalysisSections, 
+        sectionName: ContentManagementSystem.SWOTAnalysisSections, 
         index: number, 
         text: string, 
         clear = false): SWOTAnalysisActions {
@@ -29,7 +29,7 @@ class SWOTAnalysisActions extends BaseActionsExt<typeof swotAnalysisPage> {
     }
 
     editSectionDiscussionText(
-        sectionName: BoweryReports.SWOTAnalysisSections, 
+        sectionName: ContentManagementSystem.SWOTAnalysisSections, 
         index: number, 
         text: string, 
         clear = false): SWOTAnalysisActions {
