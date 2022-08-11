@@ -1,8 +1,22 @@
+import { CompPlex } from "../../../types/compplex.type";
 import { Alias } from "../../../utils/alias.utils";
 
 const { compPlex } = Alias.pageElements;
 
 export default class PropertyInformationForm {
+    get gbaNewComp() {
+        return cy.get('[data-qa="GBA"]')
+            .as(compPlex.gbaNewComp);
+    }
+
+    get PropertyInfoCancelBtn() {
+        return cy.get('[data-qa="property-info-cancel-btn"]');
+    }
+
+    get PropertyInfoDoneBtn() {
+        return cy.get('[data-qa="property-info-done-btn"]');
+    }
+
     get conditionDropdown() {
         return cy.get('[data-qa="Condition"]')
             .as(compPlex.conditionDropdown);
@@ -38,16 +52,6 @@ export default class PropertyInformationForm {
             .as(compPlex.createCompNumberResidentialUnits);
     }
 
-    get siteAreaNewComp() {
-        return cy.get('[data-qa="Site Area"]')
-            .as(compPlex.commercialAreaNewComp);
-    }
-
-    get floorNewComp() {
-        return cy.get('[data-qa="# Floors"]')
-            .as(compPlex.commercialAreaNewComp);
-    }
-
     get commercialAreaNewComp() {
         return cy.get('[data-qa="Commercial Area"]')
             .as(compPlex.commercialAreaNewComp);
@@ -68,9 +72,23 @@ export default class PropertyInformationForm {
             .as(compPlex.internalNotesTextArea);
     }
 
-    get appraiserCommentaryTextArea() {
-        return cy.get('[data-qa="Appraiser Commentary"] [data-qa="text-input"]')
-            .as(compPlex.appraiserCommentaryTextArea);
+    get siteAreaNewComp() {
+        return cy.get('[data-qa="Site Area"]')
+            .as(compPlex.siteAreaNewComp);
+    }
+
+    get yearBuiltNewComp() {
+        return cy.get('[data-qa="Year Built"]')
+            .as(compPlex.yearBuiltNewComp);
+    }
+
+    get floorsNewComp() {
+        return cy.get('[data-qa="# Floors"]')
+            .as(compPlex.floorsNewComp);
+    }
+
+    getBuildingType(buildingType: CompPlex.PropertyInfo.BuildingType) {
+        return cy.get(`[value="${buildingType}"]`);
     }
 
     get saveAndCloseButton() {

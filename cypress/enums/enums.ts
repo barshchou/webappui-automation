@@ -1,3 +1,4 @@
+import * as compplex from "./compplex";
 import leaseDateName from "./lease/leaseDateName.enum";
 import leaseStatus from "./lease/leaseStatus.enum";
 import imageType from "./elements/imageType.enum";
@@ -150,6 +151,7 @@ export default {
     SALES_ADJUSTMENT_GRID_ROWS: salesAdjustmentGridRowsEnum,
     BASIS_SQUARE_FOOT_ANALYSIS: basisSquareFootAnalysisEnum,
     BASIS_SQUARE_FOOT_ANALYSIS_TEXTS: basisSquareFootAnalysisTextsEnum,
+    COMPPLEX_ENUM: compplex,
     RENOVATION_TYPE: renovationTypeEnum,
     VALUE_CONCLUSION_NAME: valueConclusionEnum,
     UNIT_INCOME_TYPE: unitIncomeTypeEnum,
