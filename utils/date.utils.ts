@@ -113,3 +113,14 @@ export const getRandomDate = (): string => {
         + `${("0" + randomDate.getDate()).slice(-2)}` + '-' + `${randomDate.getFullYear()}`);
     return randomDateString;
 };
+
+export const getFullDate = (): string => {
+    return Intl.DateTimeFormat(
+        'eng',
+        {
+            day: 'numeric',
+            month: 'long',
+            year: 'numeric'
+        }
+    ).format(new Date());
+};
