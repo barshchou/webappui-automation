@@ -160,14 +160,6 @@ class CommercialUnitsActions extends BaseActionsExt<typeof commercialUnitsPage> 
         return this;
     }
 
-    /**
-     * @deprecated since comments field has new features (don't use it anymore)
-     */
-    clickEditDiscussionButton(): CommercialUnitsActions {
-        this.Page.formEditBtn().click({ force: true });
-        return this;
-    }
-
     editDiscussionTextArea(value: string, clearText = true): CommercialUnitsActions {
         clearText ? this.Page.commentaryText.dblclick().clear({ force: true }).type(value) :
             this.Page.commentaryText.type(value);
@@ -186,14 +178,6 @@ class CommercialUnitsActions extends BaseActionsExt<typeof commercialUnitsPage> 
             ? `${numberWithCommas(verifyAreaValue)}`
             : verifyAreaValue;
         this.Page.commentaryText.should("include.text", `${expectedText}`);
-        return this;
-    }
-
-    /**
-     * @deprecated since comments field has new features (don't use it anymore)
-     */
-    clickSaveDiscussionButton(): CommercialUnitsActions {
-        this.Page.formSaveBtn().click();
         return this;
     }
 

@@ -26,7 +26,7 @@ Verify the buttons functionality on Property > Commercial Units page.`,
         Property._CommercialUnits.Page.formEditBtn(0).should('exist');
 
         cy.stepInfo(`2. Click on the Edit button.`);
-        Property._CommercialUnits.clickEditDiscussionButton();
+        Property._CommercialUnits.activateTextAreaInput(Property._CommercialUnits.Page.commentaryText);
 
         cy.stepInfo(`3. Verify that the commentary form opens and buttons Cancel, 
         Revert to Original and Save are displayed.`);
@@ -48,7 +48,7 @@ Verify the buttons functionality on Property > Commercial Units page.`,
     //TODO update test after test-cases updates QA-6543
     it.skip("[QA-4547]", () => {
         cy.stepInfo(`1. Edit comment and click on the Save button.`);
-        Property._CommercialUnits.clickEditDiscussionButton();
+        Property._CommercialUnits.activateTextAreaInput(Property._CommercialUnits.Page.commentaryText);
         Property._CommercialUnits.Page.commercialUnitSFDiscussionTextArea.clear().type(testData.textUpdateValue);
         Property._CommercialUnits.Page.formSaveBtn(0).first().click(); 
             
