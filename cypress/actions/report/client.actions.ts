@@ -106,7 +106,7 @@ class ClientActions extends BaseActionsExt<typeof clientPage> {
     }
 
     clickNarrativeSuggestions(verifyListValue: string, numberLists = 0): ClientActions {
-        clientPage.narrativeSuggestionsList.eq(numberLists).contains(verifyListValue).click({ force: true });
+        clientPage.narrativeSuggestionsList.eq(numberLists).contains(verifyListValue).dblclick({ force: true });
         return this;
     }
 
