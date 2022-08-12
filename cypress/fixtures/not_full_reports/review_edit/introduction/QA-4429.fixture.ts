@@ -16,9 +16,19 @@ const reportCreationFixture = (): BoweryAutomation.ReportCreationData => {
     };
 };
 
+const reportsData = [
+    {
+        reportFixture: ReportDataCreator.getReportData("4429"),
+        state: "NYC"
+    },
+    {
+        reportFixture: reportCreationFixture(),
+        state: "Other"
+    },
+];
+
 export default {
-    reportNYCCreationData: ReportDataCreator.getReportData("4429"),
-    reportOtherCreationData: reportCreationFixture(),
+    reportsData,
     typeValue: "Test values",
     title:  "Data Sources",
     backLinkNames: Enums.PAGES_TEXTBOX_NAMES.dataSourcesDescriptionExport
