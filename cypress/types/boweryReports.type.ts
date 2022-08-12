@@ -247,4 +247,8 @@ export namespace BoweryReports {
         type: BoweryReports.DateType,
         date: string
     }
+
+    export type FinanciallyFeasibleComments = typeof Enums.FINANCIALLY_FEASIBLE_COMMENTS_TYPE[
+        KeyInfo.FinanciallyFeasibleCommentsKeys
+    ]
 }
