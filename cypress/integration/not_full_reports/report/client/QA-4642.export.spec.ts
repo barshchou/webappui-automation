@@ -32,6 +32,8 @@ describe("Verify the Client Guidelines Discussion on the page",
                     .clickNarrativeSuggestions(chip.suggestionName, 1)
                     .verifyIdentificationOfTheClientTextBox(chip.verifySuggest);
             });
+            Report._Client.inactivateTextAreaInput();
+            cy.wait(1000);
     
             cy.stepInfo(`3. Download report`);
             _NavigationSection.openReviewAndExport(true);
