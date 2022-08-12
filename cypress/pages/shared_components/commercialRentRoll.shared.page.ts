@@ -55,7 +55,11 @@ class CommercialRentRollSharedComponentPage extends BasePage {
 
     get narrativeSuggestionsList() { return cy.get("[data-qa='narrative-suggestions-list'] > ul"); }
 
-    get discussionTooltip() { return cy.get("[data-icon=info-circle]"); }
+    get userPrompt() {
+        return cy.contains(
+            "span", "The following generated text will appear in the Income Approach section of your report."); 
+    }
+
 }
 
 export default CommercialRentRollSharedComponentPage;

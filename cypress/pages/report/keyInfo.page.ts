@@ -80,6 +80,10 @@ class KeyInfoPage extends BasePage {
     commentaryText(commentaryTitle: string) { 
         return cy.xpath(`//h6[.='${commentaryTitle}']//following::div[@data-slate-editor][1]`); 
     }
+
+    userPrompt () {
+        return cy.xpath(`//span[.='Type = to quick select report data.']`);
+    }
 }
 
 export default new KeyInfoPage();
