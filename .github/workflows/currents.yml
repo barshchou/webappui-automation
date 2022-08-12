@@ -50,6 +50,7 @@ jobs:
 
   Not-full-reports-run:
     runs-on: ubuntu-latest
+    timeout-minutes: 180
     container: cypress/browsers:node16.13.2-chrome100-ff98
     needs: concurrency
     permissions:

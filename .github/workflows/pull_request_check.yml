@@ -23,6 +23,7 @@ jobs:
 
   Run-smoke-tests:
     needs: Run-tsc-check
+    timeout-minutes: 20
     runs-on: ubuntu-latest
     container: cypress/browsers:node16.13.2-chrome100-ff98
     permissions:
@@ -72,6 +73,7 @@ jobs:
 
   Run-included-tests:
     needs: [Run-tsc-check, Run-smoke-tests]
+    timeout-minutes: 90
     runs-on: ubuntu-latest
     container: cypress/browsers:node16.13.2-chrome100-ff98
     permissions:

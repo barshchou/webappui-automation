@@ -7,6 +7,7 @@ on:
 jobs:
   Regression-run-on-staging:
     runs-on: ubuntu-latest
+    timeout-minutes: 120
     container: cypress/browsers:node16.13.2-chrome100-ff98
     permissions:
       id-token: write
