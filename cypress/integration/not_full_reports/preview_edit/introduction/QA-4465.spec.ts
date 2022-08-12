@@ -28,7 +28,6 @@ describe('Verify the "Property Rights Appraised" commentary on the Introduction 
                 Report._KeyInfo.enterFormCommentTextBox(testData.backLinkName, value)
                     .Page.formCommentTextBox(testData.backLinkName).invoke("text").then(text => {
                         cy.wrap(normalizeText(text)).as(testData.aliases.PropertyRightsAppraised);
-                        cy.wait(1000);
                     });
                 _NavigationSection.navigateToIntroduction()
                     .verifyProgressBarNotExist();

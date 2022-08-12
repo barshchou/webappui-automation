@@ -27,8 +27,8 @@ describe('[QA-4291_4424_27-28_32_55-56_59] Check the Introduction page',
             cy.stepInfo("2. Navigate to Report > Client and edit Identification of the Client and Intended User Text");
             _NavigationSection.navigateToClientPage()
                 .enterFormCommentTextBox(testData.textBoxNames.identificationOfClient, testData.typeValue);
-            // Need wait for changes to take place.
-            cy.wait(1000);
+          
+           
         
             cy.stepInfo("3. Proceed to the Introduction page and verify that page exist");
             _NavigationSection.navigateToIntroduction()
@@ -58,7 +58,7 @@ describe('[QA-4291_4424_27-28_32_55-56_59] Check the Introduction page',
             cy.stepInfo("2. Navigate to Report > Client and edit Intended User");
             _NavigationSection.navigateToClientPage()
                 .enterFormCommentTextBox(testData.textBoxNames.intendedUser, testData.typeValue);
-            cy.wait(1000);
+            
 
             cy.stepInfo("3. Proceed to the Introduction page and verify that page exist");
             _NavigationSection.navigateToIntroduction()
@@ -89,7 +89,7 @@ describe('[QA-4291_4424_27-28_32_55-56_59] Check the Introduction page',
             _NavigationSection.navigateToReportInformation();
 
             Report._KeyInfo.enterFormCommentTextBox(testData.textBoxNames.definitionOfMarketValue, testData.typeValue);
-            cy.wait(1000);
+         
 
             cy.stepInfo("3. Proceed to the Introduction page and verify that page exist");
             _NavigationSection.navigateToIntroduction()
@@ -120,7 +120,7 @@ describe('[QA-4291_4424_27-28_32_55-56_59] Check the Introduction page',
                         edit General Assumptions Discussion`);
             _NavigationSection.navigateToAssumptionsConditions()
                 .enterFormCommentTextBox(testData.textBoxNames.generalAssumptionsDiscussion, testData.typeValue);
-            cy.wait(1000);
+       
 
             cy.stepInfo("3. Proceed to the Introduction page and verify that page exist");
             _NavigationSection.navigateToIntroduction()
@@ -150,7 +150,7 @@ describe('[QA-4291_4424_27-28_32_55-56_59] Check the Introduction page',
             cy.stepInfo("2. Navigate to Property > Property History and edit Recent Sales History Discussion");
             _NavigationSection.navigateToPropertyHistory()
                 .enterFormCommentTextBox(testData.textBoxNames.recentSalesHistoryDiscussion, testData.typeValue);
-            cy.wait(1000);
+      
 
             cy.stepInfo("3. Proceed to the Introduction page and verify that page exist");
             _NavigationSection.navigateToIntroduction()
@@ -180,7 +180,7 @@ describe('[QA-4291_4424_27-28_32_55-56_59] Check the Introduction page',
             cy.stepInfo("2. Navigate to Property > Property History and edit Property Contract History Discussion");
             _NavigationSection.navigateToPropertyHistory()
                 .enterFormCommentTextBox(testData.textBoxNames.propertyContractHistoryDiscussion, testData.typeValue);
-            cy.wait(1000);
+       
 
             cy.stepInfo("3. Proceed to the Introduction page and verify that page exist");
             _NavigationSection.navigateToIntroduction()
@@ -210,7 +210,7 @@ describe('[QA-4291_4424_27-28_32_55-56_59] Check the Introduction page',
             cy.stepInfo("2. Navigate to Income > Cap Rate Conclusion and edit Purpose & Date of Value Discussion");
             _NavigationSection.navigateToCapRateConclusion()
                 .enterFormCommentTextBox(testData.textBoxNames.purposeDateOfValueDiscussion, testData.typeValue);
-            cy.wait(1000);
+       
 
             cy.stepInfo("3. Proceed to the Introduction page and verify that page exist");
             _NavigationSection.navigateToIntroduction()
@@ -240,7 +240,7 @@ describe('[QA-4291_4424_27-28_32_55-56_59] Check the Introduction page',
             cy.stepInfo("2. Navigate to Property > Market and edit Exposure Time Description");
             _NavigationSection.navigateToPropertyMarket()
                 .enterFormCommentTextBox(testData.textBoxNames.exposureTimeDescription, testData.typeValue);
-            cy.wait(1000);
+           
 
             cy.stepInfo("3. Proceed to the Introduction page and verify that page exist");
             _NavigationSection.navigateToIntroduction()
@@ -273,7 +273,7 @@ describe('[QA-4291_4424_27-28_32_55-56_59] Check the Introduction page',
 
             Property._Market.checkIncludeMarketingTimeDescription()
                 .enterFormCommentTextBox(testData.textBoxNames.marketingTimeDescription, testData.typeValue);
-            cy.wait(1000);
+        
 
             cy.stepInfo("3. Proceed to the Introduction page and verify that page exist");
             _NavigationSection.navigateToIntroduction()

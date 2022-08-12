@@ -16,8 +16,6 @@ describe('[QA-4429] Check the Introduction page',
             _NavigationSection.navigateToSourceInformation();
 
             Final._SourceInformation.enterFormCommentTextBox(testData.backLinkNames, testData.typeValue);
-            // Need wait for changes to take place.
-            cy.wait(1000);
 
             cy.stepInfo("3. Navigate to PreviewAndEdit > Introduction and verify exist and modified");
             _NavigationSection.navigateToIntroduction();
@@ -45,8 +43,6 @@ describe('[QA-4429] Check the Introduction page',
             _NavigationSection.navigateToSourceInformation();
 
             Final._SourceInformation.enterFormCommentTextBox(testData.backLinkNames, testData.typeValue);
-            // Need wait for changes to take place.
-            cy.wait(1000);
 
             cy.stepInfo("3. Navigate to PreviewAndEdit > Introduction and verify exist and modified");
             _NavigationSection.navigateToIntroduction();
