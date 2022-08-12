@@ -1,3 +1,4 @@
+import { uppercaseFirstLetterEachWord } from "../../../../../utils/string.utils";
 import { Final, Property, ReviewExport } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { createReport } from "../../../../actions/base/baseTest.actions";
@@ -41,6 +42,7 @@ describe("Verify and change to support custom types on the Highest & Best Use pa
 
             cy.stepInfo("5. Export the report");
             _NavigationSection.Actions.openReviewAndExport();
+
             ReviewExport.generateDocxReport().waitForReportGenerated()
                 .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
         });
@@ -54,7 +56,12 @@ describe("Verify and change to support custom types on the Highest & Best Use pa
 
                 cy.stepInfo(`6. Proceed to the Highest & Best Use and Zoning section in the exported report 
                             and check that entered data is displayed`);
-                cy.contains("Proceed").should("exist");
+                cy.contains("Summary of Use and Bulk Regulations").next().next()
+                    .invoke("text").should("include", testData.textToType);
+                cy.xpath("//h2[contains(text(), 'As Vacant')]").next()
+                    .invoke("text").should("include", testData.textToType);
+                cy.xpath("//h2[contains(text(), 'As Improved')]").next()
+                    .invoke("text").should("include", testData.textToType);
             });
         });
     });

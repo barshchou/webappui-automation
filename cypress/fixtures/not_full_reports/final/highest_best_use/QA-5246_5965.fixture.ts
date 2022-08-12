@@ -17,6 +17,6 @@ const typesAs = [
 
 export default {
     reportCreationData: ReportDataCreator.getReportData("5246"),
-    textToType: "test value",
+    textToType: "test chip",
     typesAs,
 };
