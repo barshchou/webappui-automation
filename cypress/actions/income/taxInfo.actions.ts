@@ -302,8 +302,13 @@ class TaxInfoActions extends BaseActionsExt<typeof taxInfoPage> {
         return this;
     }
 
-    clickAddNewRowButton(name = "Add Additional Tax Rate"): TaxInfoActions {
-        taxInfoPage.getAddNewRowButton(name).click();
+    clickAddAdditionalTaxRate(): TaxInfoActions {
+        taxInfoPage.addAdditionalTaxRate.click();
+        return this;
+    }
+
+    clickAddSpecialAssessmentRate(): TaxInfoActions {
+        taxInfoPage.addSpecialAssessment.click();
         return this;
     }
 
@@ -456,6 +461,29 @@ class TaxInfoActions extends BaseActionsExt<typeof taxInfoPage> {
                         taxInfoPage.getTaxLiabilityRowValue("Tax Liability (Total)")
                             .should("have.text", taxLiabilityTotalToBe);
                     });
+            });
+        });
+        return this;
+    }
+
+    verifyTaxLiabilityItemAndValue(item: string, value: string | number): TaxInfoActions {
+        const convertValue = numberWithCommas(value);
+        taxInfoPage.getTaxLiabilityRowItem(item).should("exist");
+        taxInfoPage.getTaxLiabilityRowItem(convertValue).should("have.text", convertValue);
+        return this;
+    }
+
+    verifyPSFTaxLiability(item: BoweryReports.BasisSquareFootAnalysis, isSummary = false): TaxInfoActions {
+        taxInfoPage.getTaxLiabilityRowValue(`${item}`).invoke("text").then(PSFAnalysis => {
+            const numberPSFAnalysis = getNumberFromDollarNumberWithCommas(PSFAnalysis);
+            taxInfoPage.getTaxLiabilityRowValue("Tax Liability (Total)").invoke("text").then(taxLiabilityTotal => {
+                const numberTaxLiabilityTotal = getNumberFromDollarNumberWithCommas(taxLiabilityTotal);
+                const taxLiability = `$${numberWithCommas((numberTaxLiabilityTotal / numberPSFAnalysis).toFixed(2))}`;
+                taxInfoPage.getTaxLiabilityRowValue("Tax Liability (PSF)").should("have.text", taxLiability);
+                if (isSummary === true) {
+                    this.clickSummaryTab();
+                    taxInfoPage.getSummaryRowValue("taxLiabilityPerBasis").should("have.text", taxLiability);
+                }
             });
         });
         return this;

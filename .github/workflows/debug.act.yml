@@ -31,7 +31,7 @@ on:
         type: string
         description: Spec(s) to be executed
         required: false
-        default: cypress/integration/not_full_reports/**/*.spec.ts
+        default: cypress/integration/not_full_reports/**
       tags:
         type: string
         description: Run tests with specific tags

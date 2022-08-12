@@ -7,6 +7,7 @@ on:
 jobs:
   Smoke-tests-run-daily:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     container: cypress/browsers:node16.13.2-chrome100-ff98
     permissions:
       id-token: write
@@ -24,7 +25,7 @@ jobs:
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
           url: prod
-          spec_file: cypress/integration/**/**/*.spec.ts
+          spec_file: cypress/integration/**
           tags: grep=,grepTags=@smoke,burn=
           record_key: ${{ secrets.CURRENTS_RECORD_KEY }}
         env:

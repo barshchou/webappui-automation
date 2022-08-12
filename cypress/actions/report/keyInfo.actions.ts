@@ -3,6 +3,7 @@ import { isDateHasCorrectFormat } from "../../../utils/date.utils";
 import { getUploadFixture } from "../../../utils/fixtures.utils";
 import BaseActionsExt from "../base/base.actions.ext";
 import { numberWithCommas } from "../../../utils/numbers.utils";
+import { BoweryReports } from "../../types/boweryReports.type";
 
 class KeyInfoActions extends BaseActionsExt<typeof keyInfoPage> {
     enterPropertyRightsAppraisedComment(textToType: string = null, edit = true, save = true, revert = false) {
@@ -55,14 +56,24 @@ class KeyInfoActions extends BaseActionsExt<typeof keyInfoPage> {
     }
 
     checkAllInterestAppraisedByValues(interestAppraisedData: Readonly<{asIsMarket: string, 
-        asComplete: string, asStabilized: string}>): KeyInfoActions {
-        this.checkAsIsMarketInterestByValue(interestAppraisedData.asIsMarket)
-            .checkAsCompleteInterestByValue(interestAppraisedData.asComplete)
-            .checkAsStabilizedInterestByValue(interestAppraisedData.asStabilized);
+    asComplete?: string, asStabilized?: string}>): KeyInfoActions {
+        this.checkAsIsMarketInterestByValue(interestAppraisedData.asIsMarket);
+
+        if (interestAppraisedData.asStabilized != undefined ) { 
+            this.checkAsStabilizedInterestByValue(interestAppraisedData.asStabilized); 
+        }
+
+        if (interestAppraisedData.asComplete != undefined) {
+            this.checkAsCompleteInterestByValue(interestAppraisedData.asComplete);
+        }
         return this;
     }
 
-    enterDateByType(date: Readonly<{type: string, date: string}>): KeyInfoActions {
+    enterDateByType(date: BoweryReports.KeyInfoDateType, sameInspectionDate = true): KeyInfoActions { 
+        if (!sameInspectionDate) {
+            keyInfoPage.inputToCheckMyDateIsDifferent.click();
+        }
+
         keyInfoPage.getDateInputByQA(date.type).clear();
         if (isDateHasCorrectFormat(date.date)) {
             keyInfoPage.getDateInputByQA(date.type).type(date.date).should("have.value", date.date);
