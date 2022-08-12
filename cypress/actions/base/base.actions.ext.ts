@@ -89,4 +89,27 @@ export default class BaseActionsExt<T extends BasePage> extends BaseActions {
         
         return this;
     };
+
+    clickFormRevertToOriginalBtn(index = 0): this {
+        this.Page.formRevertToOriginalBtn(index).click();
+        return this;
+    }
+
+    clickFormAddBtn(index = 0): this {
+        this.Page.formAddButton(index).click();
+        return this;
+    }
+
+    // TODO: QA-6548 Removed cy.wait() when we determine how to save changes after editing
+    enterFormCommentTextBox(name: string, text: string): this {
+        this.Page.formCommentTextBox(name).realClick({ position: "bottom" }).type(text);
+        this.Page.Header.realClick();
+        cy.wait(1000);
+        return this;
+    }
+
+    verifyOpenedPage(pageName: string): this {
+        this.Page.pageTitle.should("have.text", pageName);
+        return this;
+    }
 }
