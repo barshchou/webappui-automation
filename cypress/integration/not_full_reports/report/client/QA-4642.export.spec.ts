@@ -33,6 +33,7 @@ describe("Verify the Client Guidelines Discussion on the page",
                     .verifyIdentificationOfTheClientTextBox(chip.verifySuggest);
             });
             Report._Client.inactivateTextAreaInput();
+            // [doc-server issue] ernst: this wait is necessary in order to update data on doc-server
             cy.wait(1000);
     
             cy.stepInfo(`3. Download report`);
