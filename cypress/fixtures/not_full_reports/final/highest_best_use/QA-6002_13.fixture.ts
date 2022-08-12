@@ -12,7 +12,10 @@ const commentNames = {
 };
 
 export default {
-    reportCreationData: ReportDataCreator.getReportData("6002"),
+    reportCreationData: ReportDataCreator.getReportData("6002_13", {
+        incomeValue: Enums.INCOME_TYPE.both,
+        conclusionValue: Enums.VALUE_CONCLUSION_TYPE.AS_COMPLETE
+    }),
     typeAs:  Enums.FEASIBLE_PROPERTY_TYPES.multiFamily,
     checkValues,
     commentNames

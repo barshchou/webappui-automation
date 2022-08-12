@@ -1,7 +1,7 @@
 import { Final } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { createReport } from "../../../../actions/base/baseTest.actions";
-import testData from '../../../../fixtures/not_full_reports/final/highest_best_use/QA-6002.fixture';
+import testData from '../../../../fixtures/not_full_reports/final/highest_best_use/QA-6002_13.fixture';
 
 describe("Verify 'As Vacant Discussion' Generated Commentary",
     { tags: [ "@final", "@highest_best_use" ] }, () => {
