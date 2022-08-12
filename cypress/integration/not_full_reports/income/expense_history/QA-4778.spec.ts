@@ -14,7 +14,7 @@ describe("Verify the calculation on the Expense History page", { tags: [ "@incom
 
     testData.periods.forEach(period => {
         it(`Test with ${period.expensePeriodType} expense period`, () => {
-            cy.stepInfo(`Add '${period.expensePeriodType}' expense period`);
+            cy.stepInfo(`1. Add '${period.expensePeriodType}' expense period`);
             Income._ExpenseHistory.selectExpensePeriod(period.expensePeriodType)
                 .enterExpenseYear(period.year);
             if (period.month) {
@@ -22,12 +22,12 @@ describe("Verify the calculation on the Expense History page", { tags: [ "@incom
             }
             Income._ExpenseHistory.clickAddExpenseYearButton();
 
-            cy.stepInfo("Fill table with data");
+            cy.stepInfo("2. Fill table with data");
             ExpenseHistoryCells.operatingExpensesCellsNamesArray.forEach(cell => {
                 Income._ExpenseHistory.enterIssueByColIndex(period[cell], cell);
             });
 
-            cy.stepInfo(`Verify calculations for Total OP Expenses, TOE excl RET and NET OP Income 
+            cy.stepInfo(`3. Verify calculations for Total OP Expenses, TOE excl RET and NET OP Income 
             for ${period.expensePeriodType} expense period`);
             Income._ExpenseHistory.verifyTotalOpExpensesByColIndex()
                 .verifyTOEExcludingRETByIndex(period.realEstateTaxes, )

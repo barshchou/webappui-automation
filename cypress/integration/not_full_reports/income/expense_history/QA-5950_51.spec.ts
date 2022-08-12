@@ -14,19 +14,19 @@ describe(`Expense History Discussion for reports is generated correctly accordin
             const basisTexts = Object.values(Enums.BASIS_SQUARE_FOOT_ANALYSIS_TEXTS);
             Object.values(Enums.BASIS_SQUARE_FOOT_ANALYSIS).forEach((basis, index) => {
                 
-                cy.stepInfo(`Navigate to Property -> Summary and select ${basis} basis square foot analysis`);
+                cy.stepInfo(`1. Navigate to Property -> Summary and select ${basis} basis square foot analysis`);
                 _NavigationSection.navigateToPropertySummary();
                 Property._Summary.selectBasisSquareFootAnalysis(basis);
                 if (basis !== Enums.BASIS_SQUARE_FOOT_ANALYSIS.grossBuildingArea) {
                     Property._Summary.fillBasisSquareFootAnalysis(testData.basisArea);
                 }
                 
-                cy.stepInfo("Navigate to Expense history page");
+                cy.stepInfo("2. Navigate to Expense history page");
                 _NavigationSection.navigateToExpenseHistory();
 
                 Object.values(Enums.EXPENSE_DATA_PROVIDER).forEach(provider => {
 
-                    cy.stepInfo(`Verify Expense history discussion with ${provider} expense data provider`);
+                    cy.stepInfo(`3. Verify Expense history discussion with ${provider} expense data provider`);
                     Income._ExpenseHistory.checkDataProviderOption(provider);
                     const textToBe = provider !== Enums.EXPENSE_DATA_PROVIDER.notProvided ?
                         testData.getDataProvidedComm(provider, basisTexts[index], isCommercial) :

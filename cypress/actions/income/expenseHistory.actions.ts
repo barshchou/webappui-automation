@@ -35,21 +35,30 @@ class ExpenseHistoryActions extends BaseActionsExt<typeof expenseHistoryPage> {
     enterIssueByColIndex(issueValue: number | string, 
         tableExpenseHistoryCellNames: string, index = 0,): ExpenseHistoryActions {
         if (issueValue === "clear" || issueValue === 0) {
-            expenseHistoryPage.getUnifiedEditableAndTotalCells(tableExpenseHistoryCellNames).eq(index)
-                .scrollIntoView()
-                .realType("something nonsense");
-            expenseHistoryPage.getUnifiedEditableAndTotalCells(tableExpenseHistoryCellNames).eq(index)
-                .dblclick().clear();
-            this.verifyIssueTextByColIndex(issueValue, tableExpenseHistoryCellNames, index);
+            this.typeToCellByColIndex("something nonsense", tableExpenseHistoryCellNames, index)
+                .clearCellByColIndex(tableExpenseHistoryCellNames, index)
+                .verifyIssueTextByColIndex(issueValue, tableExpenseHistoryCellNames, index);
         } else {
-            expenseHistoryPage.getUnifiedEditableAndTotalCells(tableExpenseHistoryCellNames).eq(index)
-                .scrollIntoView()
-                .realType("something nonsense");
-            expenseHistoryPage.getUnifiedEditableAndTotalCells(tableExpenseHistoryCellNames).eq(index)
-                .dblclick().clear()
-                .realType(`${issueValue}{enter}`);
-            this.verifyIssueTextByColIndex(issueValue, tableExpenseHistoryCellNames, index);
+            this.typeToCellByColIndex("something nonsense", tableExpenseHistoryCellNames, index)
+                .typeToCellByColIndex(`${issueValue}{enter}`, tableExpenseHistoryCellNames, index, true)
+                .verifyIssueTextByColIndex(issueValue, tableExpenseHistoryCellNames, index);
         }
+        return this;
+    }
+
+    clearCellByColIndex(cellName: string, index = 0): ExpenseHistoryActions {
+        expenseHistoryPage.getUnifiedEditableAndTotalCells(cellName).eq(index).dblclick().clear();
+        return this;
+    }
+    
+    private typeToCellByColIndex(valueToType: string | number, cellName: string, index = 0, isWithClear = false
+    ): ExpenseHistoryActions {
+        expenseHistoryPage.getUnifiedEditableAndTotalCells(cellName).eq(index)
+            .scrollIntoView();
+        if (isWithClear) {
+            this.clearCellByColIndex(cellName, index);
+        }
+        expenseHistoryPage.getUnifiedEditableAndTotalCells(cellName).realType(`${valueToType}`);
         return this;
     }
 
@@ -258,6 +267,12 @@ class ExpenseHistoryActions extends BaseActionsExt<typeof expenseHistoryPage> {
         return this;
     }
 
+    /**
+     * @param name
+     * @param isFirstEnter If this parameter is passed, it means that we enter this new category for the first time
+     * in this report, we create it, in this case the function will check, that suggestion dropdown will contain
+     * 'Create' word
+     */
     enterNewCategoryName(name: string, isFirstEnter = true): ExpenseHistoryActions {
         expenseHistoryPage.newCategoryNameInput.should("have.attr", "placeholder", "Enter Custom Expense...")
             .and("have.attr", "required");
@@ -292,34 +307,24 @@ class ExpenseHistoryActions extends BaseActionsExt<typeof expenseHistoryPage> {
         }
         return this;
     }
-
-    /**
-     * @param category If this parameter passed, will delete specific expense, if not - will delete all deletable
-     * expenses
-     */
-    deleteOperatingExpense(category?: string): ExpenseHistoryActions {
-        if (category) {
-            expenseHistoryPage.getDeleteExpenseButton(category).click();
-            expenseHistoryPage.getExpenseRowByName(category).should("not.exist");
-        } else {
-            expenseHistoryPage.getDeleteExpenseButton().as("deleteButtons");
-            cy.get("@deleteButtons").then(deleteButtons => {
-                for (let i = 0; i < deleteButtons.length; i++) {
-                    cy.get("@deleteButtons").eq(0).then(currentButton => {
-                        cy.wrap(currentButton).parents("[row-id]").then(el => {
-                            const rowId = el.attr("row-id");
-                            cy.wrap(currentButton).click();
-                            expenseHistoryPage.getExpenseRowByName(rowId).should("not.exist");
-                        });
+    
+    deleteAllDeletableOperatingExpenses(): ExpenseHistoryActions {
+        expenseHistoryPage.getDeleteExpenseButton().as("deleteButtons");
+        cy.get("@deleteButtons").then(deleteButtons => {
+            for (let i = 0; i < deleteButtons.length; i++) {
+                cy.get("@deleteButtons").eq(0).then(currentButton => {
+                    cy.wrap(currentButton).parents("[row-id]").then(el => {
+                        const rowId = el.attr("row-id");
+                        cy.wrap(currentButton).click();
+                        expenseHistoryPage.getExpenseRowByName(rowId).should("not.exist");
                     });
-                }
-            });
-        }
-
+                });
+            }
+        });
         return this;
     }
 
-    verifyDeleteButtonExists(category, isExists = true): ExpenseHistoryActions {
+    verifyDeleteButtonExists(category: string, isExists = true): ExpenseHistoryActions {
         const matcher = isExists ? "exist" : "not.exist";
         expenseHistoryPage.getDeleteExpenseButton(category).should(matcher);
         return this;
@@ -379,8 +384,10 @@ class ExpenseHistoryActions extends BaseActionsExt<typeof expenseHistoryPage> {
     }
 
     verifyCellIsReadonly(cellName: string, index = 0): ExpenseHistoryActions {
-        expenseHistoryPage.getUnifiedEditableAndTotalCells(cellName).eq(index)
-            .should("have.class", "readOnlyColumn-6-1-3");
+        expenseHistoryPage.getUnifiedEditableAndTotalCells(cellName).eq(index).then(cell => {
+            const isIncludeReadOnly = cell.attr("class").includes("readOnlyColumn");
+            expect(isIncludeReadOnly).to.be.true;
+        });
         return this;
     }
 }

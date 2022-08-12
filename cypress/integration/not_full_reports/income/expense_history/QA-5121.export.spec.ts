@@ -21,7 +21,7 @@ describe("Verify that the user can delete expense category on the Expense Histor
                 .clickAddExpenseYearButton()
                 .enterIssueByColIndex(testData.grossRevenue, Enums.EXPENSE_HISTORY_TABLE_ROWS.grossRevenue)
                 .addNewCategoryAndVerify(testData.customCategory)
-                .deleteOperatingExpense()
+                .deleteAllDeletableOperatingExpenses()
                 .verifyCategoryExists(Enums.EXPENSE_HISTORY_TABLE_ROWS.grossRevenue);
 
             cy.stepInfo("3. Generate and download report");

@@ -202,6 +202,12 @@ class ComparableExpensesActions extends BaseActionsExt<typeof compExpensesPage> 
         return this;
     }
 
+    /**
+     * @param categoryName
+     * @param isFirstTime If this parameter is passed, it means that we enter this new category for the first time
+     * in this report, we create it, in this case the function will check, that suggestion dropdown will contain
+     * 'Create' word
+     */
     addNewCategoryAndVerify(categoryName: string, isFirstTime = true): ComparableExpensesActions {
         this.clickAddCustomExpenseCategoryButton()
             .enterNewCategoryName(categoryName, isFirstTime)

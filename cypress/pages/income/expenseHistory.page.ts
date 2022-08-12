@@ -54,7 +54,7 @@ class ExpenseHistoryPage extends BasePage {
 
     get expenseItemBasisOfComparisonDropdown() { return cy.get("[aria-labelledby='expense-select-label select']"); }
 
-    getDropdownOption(option) { return cy.get(`li[role=option][data-value='${option}']`); }
+    getDropdownOption(option: string) { return cy.get(`li[role=option][data-value='${option}']`); }
 
     get newCategoryInputSuggestionDropdown() { return cy.get("[role=menuitem]"); }
 }

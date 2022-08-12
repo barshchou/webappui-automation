@@ -16,14 +16,14 @@ the same info as on the WebApp`, { tags: [ "@income", "@expense_history", "@chec
 
         it(`Download report with ${expense} utility expense`, () => {
             createReport(reportCreationData);
-            cy.stepInfo("Navigate to expense history, add expense period and utility expenses");
+            cy.stepInfo("1. Navigate to expense history, add expense period and utility expenses");
             _NavigationSection.navigateToExpenseHistory();
             Income._ExpenseHistory.selectExpensePeriod(testData.expensePeriodType)
                 .enterExpenseYear(testData.expenseYear)
                 .clickAddExpenseYearButton()
                 .checkUtilitiesExpensesOption(expense);
 
-            cy.stepInfo("Enter issues values, depending on expense value");
+            cy.stepInfo("2. Enter issues values, depending on expense value");
             if (expense === Enums.UTILITY_EXPENSES.brokenOut) {
                 Income._ExpenseHistory.enterIssueByColIndex(testData.electricity,
                     Enums.EXPENSE_HISTORY_TABLE_ROWS.electricity)
@@ -37,7 +37,7 @@ the same info as on the WebApp`, { tags: [ "@income", "@expense_history", "@chec
                 Income._ExpenseHistory.enterIssueByColIndex(combinedAll, Enums.EXPENSE_HISTORY_TABLE_ROWS.utilities);
             }
 
-            cy.stepInfo("Generate and download report");
+            cy.stepInfo("3. Generate and download report");
             _NavigationSection.openReviewAndExport();
             ReviewExport.generateDocxReport().waitForReportGenerated()
                 .downloadAndConvertDocxReport(reportCreationData.reportNumber);
@@ -51,7 +51,7 @@ the same info as on the WebApp`, { tags: [ "@income", "@expense_history", "@chec
                     const waterSewerCell = getCellLocator(Enums.PRO_FORMA_TYPES.waterAndSewer);
                     const utilitiesCell = getCellLocator("Utilities");
 
-                    cy.stepInfo("Verify exported document");
+                    cy.stepInfo("4. Verify exported document");
                     cy.visit(<string>file);
                     if (expense === Enums.UTILITY_EXPENSES.brokenOut) {
                         cy.xpath(electricityCell).parent("td").siblings("td").first()
