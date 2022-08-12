@@ -1,7 +1,7 @@
 import { Report, ReviewExport } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { createReport } from "../../../../actions/base/baseTest.actions";
-import testData from '../../../../fixtures/sf-integration/report/client/QA-4035_38.fixture';
+import testData from '../../../../fixtures/sf_integration/report/client/QA-4035_38.fixture';
 
 describe(`Verify that the Client field is pre-filled on the WebApp with the date corresponding to the 
         Client Contact for that job in SalesForce.`, {

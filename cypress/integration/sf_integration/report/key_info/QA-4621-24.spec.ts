@@ -1,5 +1,5 @@
-import testData from "../../../../fixtures/sf-integration/report/key_info/QA-4621-24.fixture";
-import { reportCreationData } from "../../../../fixtures/sf-integration/report/key_info/QA-4621-24.fixture";
+import testData from "../../../../fixtures/sf_integration/report/key_info/QA-4621-24.fixture";
+import { reportCreationData } from "../../../../fixtures/sf_integration/report/key_info/QA-4621-24.fixture";
 import { createReport } from "../../../../actions/base/baseTest.actions";
 import { Report } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
