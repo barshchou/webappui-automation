@@ -69,6 +69,8 @@ import discussionNamesEnum from "./property/discussionNames.enum";
 import salesAdjustmentGridDiscussionsEnum from "./adjustComps/salesAdjustmentGridDiscussions.enum";
 import salesAdjustmentGridRowsEnum from "./adjustComps/salesAdjustmentGridRows.enum";
 import basisSquareFootAnalysisEnum from "./property/basisSquareFootAnalysis.enum";
+import introductionTextboxNamesEnum from "./textboxNames/introductionTextboxNames.enum";
+import pagesTextboxNamesEnum from "./textboxNames/pagesTextboxNames.enum";
 import basisSquareFootAnalysisTextsEnum from "./sales/value_conclusion/basisSquareFootAnalysisTexts.enum";
 import renovationTypeEnum from "./property/renovationType.enum";
 import valueConclusionEnum from "./property/valueConclusion.enum";
@@ -148,6 +150,8 @@ export default {
     SALES_ADJUSTMENT_GRID_DISCUSSIONS: salesAdjustmentGridDiscussionsEnum,
     SALES_ADJUSTMENT_GRID_ROWS: salesAdjustmentGridRowsEnum,
     BASIS_SQUARE_FOOT_ANALYSIS: basisSquareFootAnalysisEnum,
+    INTRODUCTION_TEXTBOX_NAMES: introductionTextboxNamesEnum,
+    PAGES_TEXTBOX_NAMES: pagesTextboxNamesEnum,
     BASIS_SQUARE_FOOT_ANALYSIS_TEXTS: basisSquareFootAnalysisTextsEnum,
     COMPPLEX_ENUM: compplex,
     RENOVATION_TYPE: renovationTypeEnum,
