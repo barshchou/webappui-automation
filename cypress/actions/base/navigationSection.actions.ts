@@ -2,7 +2,6 @@ import navigationSectionPage from "../../pages/base/navigationSection.page";
 import { Alias } from "../../utils/alias.utils";
 import BaseActionsExt from "./base.actions.ext";
 import mapKeysUtils from "../../utils/mapKeys.utils";
-import routesUtils from "../../utils/routes.utils";
 
 class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPage> {
     submitSaveChangesModal(saveChanges = true): NavigationSectionActions {
@@ -225,7 +224,6 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
             .clickCommercialMenuIfClosed()
             .clickCommercialRentRollButton()
             .submitSaveChangesModal();
-        // cy.url().should("include", routesUtils.commercial.inPlaceRentRoll);
         return this;
     }
 
