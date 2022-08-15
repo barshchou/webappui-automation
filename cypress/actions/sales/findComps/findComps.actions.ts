@@ -15,6 +15,8 @@ import mapKeysUtils from "../../../utils/mapKeys.utils";
 import { BoweryReports } from "../../../types/boweryReports.type";
 import { isDateHasCorrectFormat } from "../../../../utils/date.utils";
 
+const { compPlex } = Alias.pageElements;
+
 class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
     selectedCompsSetSort(sortType: BoweryReports.FindComps.SelectedComparablesSortType) {
         this.Page.sortSalesCompsSelectList.click();
@@ -380,7 +382,7 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
     enterNumericInputNewComp(elementAlias: string, numberOfUnits: number | string): FindCompsActions {
         this.clearNumericInputNewComp(elementAlias);
         // ernst: little hack to work with commercialAreaNewComp input due its specific behavior
-        if (elementAlias != Alias.pageElements.compPlex.commercialAreaNewComp) {
+        if (elementAlias != compPlex.commercialAreaNewComp) {
             cy.get(`@${elementAlias}`).realClick();
         } else {
             cy.get(`@${elementAlias}`).focus();

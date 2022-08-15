@@ -22,7 +22,7 @@ on:
         type: string
         description: Spec(s) to be executed
         required: false
-        default: cypress/integration/not_full_reports/**/*.spec.ts
+        default: cypress/integration/not_full_reports/**
       tags:
         type: string
         description: Run tests with specific tags
@@ -36,6 +36,7 @@ on:
 jobs:
   Not-full-reports-run-DEBUG:
     runs-on: ubuntu-latest
+    timeout-minutes: 100
     container: cypress/browsers:node16.13.2-chrome100-ff98
     permissions:
       id-token: write

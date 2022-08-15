@@ -5,10 +5,11 @@ import {
     numberWithCommas
 } from "../../../utils/numbers.utils";
 import BaseActionsExt from "../base/base.actions.ext";
+import { BoweryReports } from "../../types/boweryReports.type";
 
 class RenovationsActions extends BaseActionsExt<typeof renovationsPage> {
 
-    chooseRenovationByValue(value: string): RenovationsActions {
+    chooseRenovationByValue(value: BoweryReports.RenovationType): RenovationsActions {
         renovationsPage.prospectiveRenovationsDropdown.click();
         renovationsPage.getDropdownOptionByValue(value).click();
         renovationsPage.prospectiveRenovationsDropdown.should("have.text", value);

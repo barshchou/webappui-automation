@@ -9,6 +9,7 @@ describe(`Verify that Generated Commentary are updated on the Expense Forecast p
 
         before("Login, create report", () => {
             createReport(testData.reportCreationData);
+            Cypress.config('numTestsKeptInMemory', 0);
             _NavigationSection.navigateToPropertySummary();
             Property._Summary.enterNumberOfResUnits(testData.residentialUnits)
                 .clickSaveButton();

@@ -43,6 +43,7 @@ export default class BaseActions {
 
     clickSaveButton() {
         cy.get("*[data-qa='form-save-btn']").click();
+        cy.get("*[role='progressbar']", { timeout: 30000 }).should("exist");
         return this;
     }
 
@@ -53,6 +54,7 @@ export default class BaseActions {
 
     clickSaveContinueButton() {
         cy.get("*[data-qa='form-submit-btn']").scrollIntoView().click();
+        cy.get("*[role='progressbar']", { timeout: 30000 }).should("exist");
     }
 
     verifyProgressBarNotExist() {
@@ -122,6 +124,18 @@ export default class BaseActions {
 
     hideElement(element: Cypress.Chainable<JQuery<HTMLElement>>) {
         element.then(el => el.hide());
+        return this;
+    }
+
+    inactivateTextAreaInput() {
+        cy.xpath("//header").realClick();
+        cy.wait(1000);
+        return this;
+    }
+
+    activateTextAreaInput(textAreaInput: Cypress.Chainable<JQuery<HTMLElement>>) {
+        textAreaInput.scrollIntoView().realClick({ clickCount: 5, position: "bottomRight" })
+            .should("be.focused");
         return this;
     }
 }

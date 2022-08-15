@@ -11,70 +11,96 @@ and Identification of the Client sections`,
     });
 
     it("Test body", () => {
-        cy.stepInfo(`1. Click on the Edit button on the Report > Client page for Intended User 
-        and Identification of the Client sections.`);
+        cy.stepInfo(`1. Activate text field on the Report > Client page for Intended User 
+        section.`);
         _NavigationSection.navigateToClientPage();
 
         Report._Client.verifyProgressBarNotExist()
-            .Page.formEditBtn().click();
-        Report._Client.Page.formEditBtn().click();
+            .activateTextAreaInput(Report._Client.Page.intendedUserTextBox);
 
-        cy.stepInfo(`2. Edit comment and click on the Revert to Original button for both sections.`);
+        cy.stepInfo(`2. Edit comment and click on the Revert to Original button.`);
         Report._Client.enterIntendedUserTextBox(testData.textToType)
-            .clickNarrativeSuggestions(testData.verifyListValue)
-            .enterIdentificationOfTheClientTextBox(testData.textToType)
-            .clickNarrativeSuggestions(testData.verifyListValue, 1);
+            .clickNarrativeSuggestions(testData.verifyListValue);
 
-        cy.stepInfo(`3. Verify the 'Changes will be lost modal' is displayed for both sections.`);
+        cy.stepInfo(`3. Verify the 'Changes will be lost modal' is displayed.`);
         Report._Client.Page.formRevertToOriginalBtn().click();
-        Report._Client.Page.modalWindow.should('be.visible');
-        Report._Client.Page.formYesRevertBtn.click();
-        Report._Client.Page.formRevertToOriginalBtn(1).click();
         Report._Client.Page.modalWindow.should('be.visible');
         Report._Client.Page.formYesRevertBtn.click();
 
         cy.stepInfo(`4. Click on the Revert to Original button again.`);
-        Report._Client.enterIntendedUserTextBox(testData.textToType)
+        Report._Client.activateTextAreaInput(Report._Client.Page.intendedUserTextBox)
+            .enterIntendedUserTextBox(testData.textToType)
             .clickNarrativeSuggestions(testData.verifyListValue)
-            .enterIdentificationOfTheClientTextBox(testData.textToType)
-            .clickNarrativeSuggestions(testData.verifyListValue, 1)
             .Page.formRevertToOriginalBtn().click();
-        Report._Client.Page.CloseIcon.click();
-        Report._Client.Page.formRevertToOriginalBtn(1).click();
         Report._Client.Page.CloseIcon.click();
 
         cy.stepInfo(`5. Click on the X icon and verify that the modal is closed and no changes are applied.`);
-        Report._Client.verifyIntendedUserTextBox(testData.verifyAreaValue)
-            .verifyIdentificationOfTheClientTextBox(testData.verifyAreaValue);
+        Report._Client.verifyIntendedUserTextBox(testData.verifyAreaValue);
 
         cy.stepInfo(`6. Click on the Revert to Original button again.`);
-        Report._Client.enterIntendedUserTextBox(testData.textToType)
+        Report._Client.activateTextAreaInput(Report._Client.Page.intendedUserTextBox)
+            .enterIntendedUserTextBox(testData.textToType)
             .clickNarrativeSuggestions(testData.verifyListValue)
-            .enterIdentificationOfTheClientTextBox(testData.textToType)
-            .clickNarrativeSuggestions(testData.verifyListValue, 1)
             .Page.formRevertToOriginalBtn().click();
-        Report._Client.Page.CloseIcon.click();
-        Report._Client.Page.formRevertToOriginalBtn(1).click();
         Report._Client.Page.CloseIcon.click();
 
         cy.stepInfo(`7. Click on the Cancel button in the modal and verify that 
         the modal is closed and no changes are applied.`);
-        Report._Client.verifyIntendedUserTextBox(testData.verifyAreaValue)
-            .verifyIdentificationOfTheClientTextBox(testData.verifyAreaValue);
-
+        Report._Client.verifyIntendedUserTextBox(testData.verifyAreaValue);
+            
         cy.stepInfo(`8. Click on the Revert to Original button again.`);
-        Report._Client.enterIntendedUserTextBox(testData.textToType)
+        Report._Client.activateTextAreaInput(Report._Client.Page.intendedUserTextBox)
+            .enterIntendedUserTextBox(testData.textToType)
             .clickNarrativeSuggestions(testData.verifyListValue)
-            .enterIdentificationOfTheClientTextBox(testData.textToType)
-            .clickNarrativeSuggestions(testData.verifyListValue, 1)
             .Page.formRevertToOriginalBtn().click();
-        Report._Client.Page.formYesRevertBtn.click();
-        Report._Client.Page.formRevertToOriginalBtn(1).click();
         Report._Client.Page.formYesRevertBtn.click();
 
         cy.stepInfo(`9.Click on the 'Yes, revert' button in the modal and verify that the modal is closed and all 
             custom changes made to the Current Commercial Income Discussion are deleted.`);
-        Report._Client.verifyNotContainIntendedUserTextBox(testData.verifyAreaValue)
-            .verifyNotContainIdentificationOfTheClientTextBox(testData.verifyAreaValue);
+        Report._Client.verifyNotContainIntendedUserTextBox(testData.verifyAreaValue);
+
+        cy.stepInfo(`10. Activate text field on the Report > Client page for Identification of the Client section`);
+        Report._Client.activateTextAreaInput(Report._Client.Page.identificationOfClientTextBox);
+
+        cy.stepInfo(`11. Edit comment and click on the Revert to Original button.`);
+        Report._Client.enterIdentificationOfTheClientTextBox(testData.textToType)
+            .clickNarrativeSuggestions(testData.verifyListValue, 1);
+
+        cy.stepInfo(`12. Verify the 'Changes will be lost modal' is displayed.`);
+        Report._Client.Page.formRevertToOriginalBtn(1).click();
+        Report._Client.Page.modalWindow.should('be.visible');
+        Report._Client.Page.formYesRevertBtn.click();
+
+        cy.stepInfo(`13. Click on the Revert to Original button again.`);
+        Report._Client.activateTextAreaInput(Report._Client.Page.identificationOfClientTextBox)
+            .enterIdentificationOfTheClientTextBox(testData.textToType)
+            .clickNarrativeSuggestions(testData.verifyListValue, 1)
+            .Page.formRevertToOriginalBtn(1).click();
+        Report._Client.Page.CloseIcon.click();
+
+        cy.stepInfo(`14. Click on the X icon and verify that the modal is closed and no changes are applied.`);
+        Report._Client.verifyIdentificationOfTheClientTextBox(testData.verifyAreaValue);
+
+        cy.stepInfo(`15. Click on the Revert to Original button again.`);
+        Report._Client.activateTextAreaInput(Report._Client.Page.identificationOfClientTextBox)
+            .enterIdentificationOfTheClientTextBox(testData.textToType)
+            .clickNarrativeSuggestions(testData.verifyListValue, 1)
+            .Page.formRevertToOriginalBtn(1).click();
+        Report._Client.Page.CloseIcon.click();
+
+        cy.stepInfo(`16. Click on the Cancel button in the modal and verify that 
+        the modal is closed and no changes are applied.`);
+        Report._Client.verifyIdentificationOfTheClientTextBox(testData.verifyAreaValue);
+            
+        cy.stepInfo(`17. Click on the Revert to Original button again.`);
+        Report._Client.activateTextAreaInput(Report._Client.Page.identificationOfClientTextBox)
+            .enterIdentificationOfTheClientTextBox(testData.textToType)
+            .clickNarrativeSuggestions(testData.verifyListValue, 1)
+            .Page.formRevertToOriginalBtn(1).click();
+        Report._Client.Page.formYesRevertBtn.click();
+
+        cy.stepInfo(`18.Click on the 'Yes, revert' button in the modal and verify that the modal is closed and all 
+            custom changes made to the Current Commercial Income Discussion are deleted.`);
+        Report._Client.verifyNotContainIdentificationOfTheClientTextBox(testData.verifyAreaValue);
     });
 });
