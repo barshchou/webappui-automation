@@ -1,4 +1,5 @@
 import Enums from "../../../enums/enums";
+import { ContentManagementSystem } from "../../../types/boweryReports.type";
 import ReportDataCreator from "../../data_creator/reportData.creator";
 
 const reportCreationFixture = () => {
@@ -7,21 +8,41 @@ const reportCreationFixture = () => {
     });
 };
 
+const _complianceParagraph: ContentManagementSystem.DiscussionSectionName = {
+    sectionName: Enums.LETTER_SECTIONS.complianceParagraph
+};
+
+const _valuationPrefix: ContentManagementSystem.DiscussionSectionName = {
+    sectionName: Enums.LETTER_SECTIONS.valuationPrefix
+};
+
+const _opinionOfValue: ContentManagementSystem.DiscussionSectionName = {
+    sectionName: Enums.LETTER_SECTIONS.opinionOfValue
+};
+
+const _covidLanguage: ContentManagementSystem.DiscussionSectionName = {
+    sectionName: Enums.LETTER_SECTIONS.covidLanguage
+};
+
+const _thankYou: ContentManagementSystem.DiscussionSectionName = {
+    sectionName: Enums.LETTER_SECTIONS.thankYou
+};
+
 const _letterTextsFixture = () => {
     return [
         {
-            sectionName: Enums.LETTER_SECTIONS.complianceParagraph,
+            sectionName: _complianceParagraph,
             language: "This appraisal is also prepared in compliance with Title XI (with amendments) of the " + 
             "Financial Institutions Reform, Recovery and Enforcement Act of 1989 (FIRREA), as well as the " + 
             "Interagency Appraisal and Evaluation Guidelines dated December 2, 2010."
         },
         {
-            sectionName: Enums.LETTER_SECTIONS.valuationPrefix,
+            sectionName: _valuationPrefix,
             language: "After carefully considering all available information and " + 
             "factors affecting value, our opinion is:"
         },
         {
-            sectionName: Enums.LETTER_SECTIONS.covidLanguage,
+            sectionName: _covidLanguage,
             language: "The global outbreak of the “novel coronavirus,” which has resulted in the COVID-19 " + 
             "pandemic, is presently affecting the US population and economy. The extent and magnitude of the direct " + 
             "or indirect effects of this event on the national and local economy or real estate markets, vary " + 
@@ -35,12 +56,12 @@ const _letterTextsFixture = () => {
             "and value over a relatively short period of time."
         },
         {
-            sectionName: Enums.LETTER_SECTIONS.opinionOfValue,
+            sectionName: _opinionOfValue,
             language: "The opinion of value expressed herein is subject to the certification, assumptions and " + 
             "limiting conditions, and all other information contained in the following written appraisal report."
         },
         {
-            sectionName: Enums.LETTER_SECTIONS.thankYou,
+            sectionName: _thankYou,
             language: "Thank you for the opportunity to serve you."
         },
     ];

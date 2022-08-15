@@ -5,14 +5,14 @@ import { ContentManagementSystem } from '../../types/boweryReports.type';
 class IncomeCapitalizationApproachActions extends BaseActionsExt<typeof incomeCapitalizationApproachPage> {
 
     verifyIncomeCapitalizationText(sectionName: 
-        ContentManagementSystem.IncomeCapitalizationApproachSections, expectedText: string): 
+        ContentManagementSystem.DiscussionSectionName, expectedText: string): 
         IncomeCapitalizationApproachActions {
         incomeCapitalizationApproachPage.incomeCapitalizationDiscussionSection(sectionName).invoke('text')
             .should('deep.equal', expectedText);
         return this;
     }
 
-    updateSectionDiscussion(sectionName: ContentManagementSystem.IncomeCapitalizationApproachSections, 
+    updateSectionDiscussion(sectionName: ContentManagementSystem.DiscussionSectionName, 
         text: string, clear = false): IncomeCapitalizationApproachActions {
         this.clickSectionForEdit(sectionName)
             .editSectionDiscussionText(sectionName, text, clear);
@@ -23,7 +23,7 @@ class IncomeCapitalizationApproachActions extends BaseActionsExt<typeof incomeCa
         return this;
     }
 
-    editSectionDiscussionText(sectionName: ContentManagementSystem.IncomeCapitalizationApproachSections, 
+    editSectionDiscussionText(sectionName: ContentManagementSystem.DiscussionSectionName, 
         text: string, clear = false): IncomeCapitalizationApproachActions {
         if (clear) { 
             this.clickSectionForEdit(sectionName);
@@ -35,14 +35,14 @@ class IncomeCapitalizationApproachActions extends BaseActionsExt<typeof incomeCa
         return this;
     }
 
-    clickSectionForEdit(sectionName: ContentManagementSystem.IncomeCapitalizationApproachSections): 
+    clickSectionForEdit(sectionName: ContentManagementSystem.DiscussionSectionName): 
     IncomeCapitalizationApproachActions {
         incomeCapitalizationApproachPage.incomeCapitalizationDiscussionSection(sectionName)
             .scrollIntoView().realClick();
         return this;
     }
 
-    verifyModifiedLabel(sectionName: ContentManagementSystem.IncomeCapitalizationApproachSections): 
+    verifyModifiedLabel(sectionName: ContentManagementSystem.DiscussionSectionName): 
     IncomeCapitalizationApproachActions {
         incomeCapitalizationApproachPage.incomeCapitalizationModifiedLabel(sectionName).should('be.visible');
         return this;

@@ -8,7 +8,7 @@ import { conditionalDescribe } from "../../checkIsProd.utils";
 import { _CmsBaseActions, _IncomeCapitalizationApproach } from '../../../actions/cms';
 
 conditionalDescribe("Verify the page and fields available on it", 
-    { tags:[ "@cms", "@check_export", "@feature_flag"] }, () => {
+    { tags:[ "@cms", "@check_export", "@feature_flag" ] }, () => {
         it('[QA-6403]', () => {
             cy.stepInfo(`Preconditions: Set Launch Darkly flag to see Report Copy Editor section. Create a report`);
             launchDarklyApi.setFeatureFlagForUser(testData.reportTextEditorFlagKey, testData.featureFlagEnable)

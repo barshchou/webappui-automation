@@ -1,7 +1,6 @@
 import { loginAction } from '../../../actions/base/baseTest.actions';
 import { _NavigationSection } from '../../../actions/base';
 import testData from "../../../fixtures/not_full_reports/cms/QA-6130-31.fixture";
-import launchDarklyApi from '../../../api/launchDarkly.api';
 import { conditionalDescribe } from "../../checkIsProd.utils";
 import { _CmsBaseActions } from '../../../actions/cms';
 import { _CmsTitle } from '../../../enums/pages_titles';

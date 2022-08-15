@@ -2,11 +2,11 @@ import { ContentManagementSystem } from "../../types/boweryReports.type";
 import BasePage from "../base/base.page";
 
 class LetterOfTransmittalPage extends BasePage {
-    letterOfTransmittalDiscussionSection(sectionName: ContentManagementSystem.LetterOfTransmittalSections) {
+    letterOfTransmittalDiscussionSection(sectionName: ContentManagementSystem.DiscussionSectionName) {
         return cy.xpath(`//h6[.='${sectionName}']//following::div[@data-slate-editor][1]`);
     }
 
-    letterOfTransmittalModifiedLabel(sectionName: ContentManagementSystem.LetterOfTransmittalSections) {
+    letterOfTransmittalModifiedLabel(sectionName: ContentManagementSystem.DiscussionSectionName) {
         return cy.xpath(`//h6[.='${sectionName}']/following::*[@ui='indicator'][1]`);
     }
 }

@@ -1,4 +1,5 @@
 import Enums from "../../../enums/enums";
+import { ContentManagementSystem } from "../../../types/boweryReports.type";
 import ReportDataCreator from "../../data_creator/reportData.creator";
 
 const reportCreationFixture = () => {
@@ -7,47 +8,73 @@ const reportCreationFixture = () => {
     });
 };
 
+const _certification1: ContentManagementSystem.DiscussionSectionName = {
+    sectionName: Enums.CERTIFICATION_SECTIONS.certification1
+};
+const _certification2: ContentManagementSystem.DiscussionSectionName = {
+    sectionName: Enums.CERTIFICATION_SECTIONS.certification2
+};
+const _certification3: ContentManagementSystem.DiscussionSectionName = {
+    sectionName: Enums.CERTIFICATION_SECTIONS.certification3
+};
+const _certification4: ContentManagementSystem.DiscussionSectionName = {
+    sectionName: Enums.CERTIFICATION_SECTIONS.certification4
+};
+const _certification5: ContentManagementSystem.DiscussionSectionName = {
+    sectionName: Enums.CERTIFICATION_SECTIONS.certification5
+};
+const _certification6: ContentManagementSystem.DiscussionSectionName = {
+    sectionName: Enums.CERTIFICATION_SECTIONS.certification6
+};
+const _certification7: ContentManagementSystem.DiscussionSectionName = {
+    sectionName: Enums.CERTIFICATION_SECTIONS.certification7
+};
+const _certification8: ContentManagementSystem.DiscussionSectionName = {
+    sectionName: Enums.CERTIFICATION_SECTIONS.certification8
+};
+
+
 const _certificationTextsFixture = () => {
     return [
         {
-            sectionName: Enums.CERTIFICATION_SECTIONS.certification1,
+            sectionName: _certification1,
             languages: 
                 "The statements of fact contained in this report are true and correct."
         },
         {
-            sectionName: Enums.CERTIFICATION_SECTIONS.certification2,
+            sectionName: _certification2,
             languages: 
                 "The reported analyses, opinions, and conclusions are limited only by the reported assumptions " + 
                 "and limiting conditions and are our personal, impartial, and unbiased professional analyses, " + 
                 "opinions, and conclusions."
         },
         {
-            sectionName: Enums.CERTIFICATION_SECTIONS.certification3,
+            sectionName: _certification3,
             languages: 
                 "We have no present or prospective interest in the property that is the subject of this report " + 
                 "and no personal interest with respect to the parties involved."
         },
         {
-            sectionName: Enums.CERTIFICATION_SECTIONS.certification4,
+            sectionName: _certification4,
             languages: 
                 "We have performed no services, as an appraiser or in any other capacity, regarding the property " + 
                 "that is the subject of this report within the three-year period immediately preceding " + 
                 "the agreement to perform this assignment."
         },
         {
-            sectionName: Enums.CERTIFICATION_SECTIONS.certification5,
+            sectionName: _certification5,
             languages: 
                 "We have no bias with respect to the property that is the subject of this report or to the " + 
                 "parties involved with this assignment."
         },
         {
-            sectionName: Enums.CERTIFICATION_SECTIONS.certification6,
+            sectionName: _certification6,
             languages: 
                 "Our engagement in this assignment was not contingent upon developing or " + 
                 "reporting predetermined results."
         },
         {
-            sectionName: Enums.CERTIFICATION_SECTIONS.certification7,
+            sectionName: _certification7,
             languages: 
                 "Our compensation for completing this assignment is not contingent upon the development or " + 
                 "reporting of a predetermined value or direction in value that favors the cause of the client, " + 
@@ -55,7 +82,7 @@ const _certificationTextsFixture = () => {
                 "subsequent event directly related to the intended use of this appraisal."
         },
         {
-            sectionName: Enums.CERTIFICATION_SECTIONS.certification8,
+            sectionName: _certification8,
             languages: 
                 "Our analyses, opinions, and conclusions were developed, and this report has been prepared, in " + 
                 "conformity with the requirements of the Code of Professional Ethics and Standard of Professional " + 

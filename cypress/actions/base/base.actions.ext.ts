@@ -121,7 +121,7 @@ export default class BaseActionsExt<T extends BasePage> extends BaseActions {
         return this;
     }
 
-    revertSectionToOriginal(sectionName: string | ContentManagementSystem.DiscussionSectionName): this {
+    revertSectionToOriginal(sectionName: ContentManagementSystem.DiscussionSectionName): this {
         this.Page.formCommentTextBox(sectionName).scrollIntoView().realClick();
         this.Page.formCommentTextBox(sectionName).type(`{ESC}`);
         this.Page.formCommentTextBox(sectionName).focus();
