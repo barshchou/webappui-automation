@@ -1,7 +1,7 @@
 import testData from "../../../../fixtures/not_full_reports/property/commercial_units/QA-4556-57.fixture";
 import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
-import { Property } from "../../../../actions";
+import { Property } from "../../../../actions"; 
 
 describe("Verify the functionality of the Image upload to the Interior and Exterior Images sections",
     { tags:[ "@property", "@commercial_units" ] },  () => {

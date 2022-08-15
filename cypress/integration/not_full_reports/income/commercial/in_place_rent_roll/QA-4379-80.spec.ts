@@ -1,6 +1,6 @@
 import testData from "../../../../../fixtures/not_full_reports/income/commercial/in_place_rent_roll/QA-4379-80.fixture";
 import NavigationSection from "../../../../../actions/base/navigationSection.actions";
-import Income from "../../../../../actions/income/income.manager";
+import Income from "../../../../../actions/income/income.manager"; 
 import Property from "../../../../../actions/property/property.manager";
 import { createReport } from "../../../../../actions/base/baseTest.actions";
 

@@ -1,4 +1,4 @@
-import { Income, Property } from "../../../../../actions";
+import { Income, Property } from "../../../../../actions"; 
 import { _NavigationSection } from "../../../../../actions/base";
 import { createReport } from "../../../../../actions/base/baseTest.actions";
 import testData from "../../../../../fixtures/not_full_reports/income/commercial/stabilized_rent_roll/QA-4588.fixture";

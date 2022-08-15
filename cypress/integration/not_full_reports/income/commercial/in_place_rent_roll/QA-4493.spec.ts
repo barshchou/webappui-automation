@@ -1,6 +1,6 @@
 import testData from "../../../../../fixtures/not_full_reports/income/commercial/in_place_rent_roll/QA-4493.fixture";
 import { _NavigationSection } from "../../../../../actions/base";
-import { Income } from "../../../../../actions";
+import { Income } from "../../../../../actions"; 
 import { createReport } from "../../../../../actions/base/baseTest.actions";
 
 describe("Verify the Unsaved changes modal functionality on the In-Place Rent Roll page",
