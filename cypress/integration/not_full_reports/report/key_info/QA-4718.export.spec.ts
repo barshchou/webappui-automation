@@ -18,7 +18,8 @@ Property Rights Appraised and Definition of Market Value sections`,
         cy.stepInfo(`1. Proceed to the Report > Key Info page.`);
         _NavigationSection.navigateToReportInformation();
 
-        cy.stepInfo(`2.Enter the “=“ and verify the "Linked" chips dropdown for both sections: 
+        cy.stepInfo(`2.Enter the “=“ and verify the "Linked" chips dropdown for for 
+        Property Rights Appraised and Definition of Market Value sections sections: 
         options 'Gross Building Area', 'Building Name', 'Property Type', 'Residential Unit Count', 
         'Commercial Unit Count', 'Street Address', 'Street Name', 'Site Area', 'Year Built', 
         'Block', 'Lot', 'Concluded Cap Rate', 'Zones', 'Condition'.`);
@@ -36,7 +37,7 @@ Property Rights Appraised and Definition of Market Value sections`,
             Report._KeyInfo.verifyCommentaryContainsText(chip.verifySuggest, 
                 testData.definitionOfMarketValueCommentaryTitle);
         });
-        Report._KeyInfo.clickSaveButton();
+        Report._KeyInfo.inactivateTextAreaInput();
 
         _NavigationSection.openReviewAndExport();
         ReviewExport.generateDocxReport().waitForReportGenerated()

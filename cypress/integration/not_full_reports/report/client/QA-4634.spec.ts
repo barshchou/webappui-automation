@@ -28,7 +28,6 @@ and Identification of the Client sections`,
         Report._Client.Page.formYesRevertBtn.click();
 
         cy.stepInfo(`4. Click on the Revert to Original button again.`);
-        
         Report._Client.activateTextAreaInput(Report._Client.Page.intendedUserTextBox)
             .enterIntendedUserTextBox(testData.textToType)
             .clickNarrativeSuggestions(testData.verifyListValue)
