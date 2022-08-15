@@ -8,7 +8,7 @@ class SalesCompDetailsFormActions {
     }
 
     openSaleInformationForm(): SalesCompDetailsFormActions {
-        this.Page.saleInfoEditBtn.should("exist").click();
+        this.Page.SaleInfoEditBtn.should("exist").click();
         this.Page.SaleStatusDropdown.should("exist");
         return this;
     }
