@@ -13,24 +13,25 @@ describe("[QA-4648] Verify the Save button functionality on the Report > Client 
             cy.stepInfo(`1. The Save button is displayed on the Client page.`);
             _NavigationSection.navigateToClientPage();
             Report._Client.verifyProgressBarNotExist()
-                .Page.formEditBtn().click().should('be.visible');
-            Report._Client.Page.formEditBtn().click().should('be.visible');
-            Report._Client.Page.formSaveBtn().should('be.visible');
-            Report._Client.Page.formSaveBtn(1).should('be.visible');
+                .Page.formSaveBtn().should('be.visible');
 
             cy.stepInfo(`2. Fill in the editable fields with values and click on the Save button.`);
-            Report._Client.enterIntendedUserTextBox(testData.textToType)
+            Report._Client.activateTextAreaInput(Report._Client.Page.intendedUserTextBox)
+                .enterIntendedUserTextBox(testData.textToType)
                 .clickNarrativeSuggestions(testData.verifyListValue)
+                .activateTextAreaInput(Report._Client.Page.identificationOfClientTextBox)
                 .enterIdentificationOfTheClientTextBox(testData.textToType)
                 .clickNarrativeSuggestions(testData.verifyListValue, 1)
-                .Page.formSaveBtn().click();
-            Report._Client.Page.formSaveBtn().click();
-            Report._Client.verifyIntendedUserTextBox(testData.verifyAreaValue)
+                .inactivateTextAreaInput()
+                .verifyIntendedUserTextBox(testData.verifyAreaValue)
                 .verifyIdentificationOfTheClientTextBox(testData.verifyAreaValue);
+            //Saving without cy.wait() impossible, because cypress interaction with buttons is to fast
+            cy.wait(500);           
 
             cy.stepInfo(`3. Refresh the page / or re-enter the page and verify that 
-            the changes from step 2 are still applied.`);
-            Report._Client.clickSaveButton().verifyProgressBarNotExist();
+                         the changes from step 2 are still applied.`);
+            Report._Client.clickSaveButton()
+                .verifyProgressBarNotExist();
             cy.reload();
             Report._Client.verifyIntendedUserTextBox(testData.verifyAreaValue)
                 .verifyIdentificationOfTheClientTextBox(testData.verifyAreaValue);

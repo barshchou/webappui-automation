@@ -5,6 +5,7 @@ class AssumptionsConditionsPage extends BasePage {
 
     get extraordinaryAssumptionsInputs() { return cy.get("[name^=extraordinaryAssumptions]"); }
 
+    get itemsGeneralAssumptionsTextarea() { return cy.get("[name^=generalAssumptions]"); }
 }
 
 export default new AssumptionsConditionsPage();

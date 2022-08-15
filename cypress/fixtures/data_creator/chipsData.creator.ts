@@ -161,7 +161,7 @@ class Chips {
                 verifyExport: 'foreclosure sale'
             }, 
             {
-                suggestionName: 'Sherrif\'s Sale',
+                suggestionName: 'Sheriff\'s Sale',
                 typeSuggestValue: 'Sherri',
                 verifySuggest: "The above transaction reflects a Sheriff's sale of the property. Typically in a " +
                 "Sheriff’s sale, the buyer assumes all encumbrances on the site, including any outstanding mortgage "+

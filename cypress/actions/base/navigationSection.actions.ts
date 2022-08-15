@@ -87,6 +87,11 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         return this;
     }
 
+    clickSourceInformation(): NavigationSectionActions {
+        navigationSectionPage.sourceInformation.click();
+        return this;
+    }
+
     clickUnitInspectionButton(): NavigationSectionActions {
         navigationSectionPage.unitInspectionButton.click();
         return this;
@@ -147,10 +152,23 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         return this;
     }
 
+    clickPropertyHistory(): NavigationSectionActions {
+        navigationSectionPage.propertyHistory.click();
+        return this;
+    }
+
     navigateToUnitInspection(): NavigationSectionActions {
         this.clickSaveButton();
         this.clickFinalButton()
             .clickUnitInspectionButton()
+            .verifyProgressBarNotExist();
+        return this;
+    }
+
+    navigateToSourceInformation(saveChanges = true): NavigationSectionActions {
+        this.clickFinalButton()
+            .clickSourceInformation()
+            .submitSaveChangesModal(saveChanges)
             .verifyProgressBarNotExist();
         return this;
     }
@@ -176,6 +194,13 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         this.clickIncomeApproachButton()
             .clickResidentialMenuIfClosed()
             .clickRentCompsButton()
+            .submitSaveChangesModal();
+        return this;
+    }
+
+    navigateToPropertyHistory(): NavigationSectionActions {
+        this.clickPropertyButton()
+            .clickPropertyHistory()
             .submitSaveChangesModal();
         return this;
     }
@@ -315,6 +340,30 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
     navigateToAdjustComps(): NavigationSectionActions {
         this.clickSalesButton()
             .clickAdjustCompsButton()
+            .submitSaveChangesModal();
+        return this;
+    }
+
+    clickFinalScope(): NavigationSectionActions {
+        navigationSectionPage.finalScope.click();
+        return this;
+    }
+
+    navigateToFinalScope(): NavigationSectionActions {
+        this.clickFinalButton()
+            .clickFinalScope()
+            .submitSaveChangesModal();
+        return this;
+    }
+
+    clickAssumptionsConditions(): NavigationSectionActions {
+        navigationSectionPage.assumptionsConditions.click();
+        return this;
+    }
+
+    navigateToAssumptionsConditions(): NavigationSectionActions {
+        this.clickFinalButton()
+            .clickAssumptionsConditions()
             .submitSaveChangesModal();
         return this;
     }

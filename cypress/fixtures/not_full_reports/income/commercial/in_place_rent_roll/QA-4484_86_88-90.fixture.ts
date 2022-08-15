@@ -13,9 +13,9 @@ const _suggestionsVerificationData = [
                         `This information was requested from the owner; however, not provided.`
     },
     {
-        value:"=S",
+        value:"=Sh",
         // eslint-disable-next-line no-useless-escape
-        suggestion: "Sherrif'\s Sale",
+        suggestion: "Sheriff'\s Sale",
         verifyAreaValue: `The above transaction reflects a Sheriff's sale of the property. ` + 
         `Typically in a Sheriff’s sale, the buyer assumes all encumbrances on the site, ` + 
         `including any outstanding mortgage amount and legal fees ("upset costs"), delinquent ` + 
