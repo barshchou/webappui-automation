@@ -129,6 +129,7 @@ export default class BaseActions {
 
     inactivateTextAreaInput() {
         cy.xpath("//header").realClick();
+        cy.wait(1000);
         return this;
     }
 
