@@ -76,7 +76,7 @@ import rentLossTypeEnum from "./rentLossType.enum";
 import dateTypeEnum from "./keyInfo/dateType.enum";
 import interestAppraisedEnum from "./keyInfo/interestAppraised.enum";
 import feasiblePropertyTypesEnum from "./property/feasiblePropertyTypes.enum";
-import financiallyFeasibleCommentEnum from "./financiallyFeasibleComments.enum";
+import highestAndBestUseCommentsEnum from "./highestAndBestUseComments.enum";
 
 export default {
     TEMPLATE_TYPE: templateTypesEnum,
@@ -157,5 +157,5 @@ export default {
     DATE_TYPE: dateTypeEnum,
     INTEREST_APPRAISED: interestAppraisedEnum,
     FEASIBLE_PROPERTY_TYPES: feasiblePropertyTypesEnum,
-    FINANCIALLY_FEASIBLE_COMMENTS_TYPE: financiallyFeasibleCommentEnum
+    HIGHEST_AND_BEST_USE_COMMENTS_ENUM: highestAndBestUseCommentsEnum
 };

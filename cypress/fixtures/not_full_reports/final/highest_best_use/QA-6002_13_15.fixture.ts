@@ -7,8 +7,8 @@ const checkValues = {
 };
 
 const commentNames = {
-    improved: Enums.FINANCIALLY_FEASIBLE_COMMENTS_TYPE.improved,
-    vacant: Enums.FINANCIALLY_FEASIBLE_COMMENTS_TYPE.vacant
+    improved: Enums.HIGHEST_AND_BEST_USE_COMMENTS_ENUM.financiallyFeasibleAsImproved,
+    vacant: Enums.HIGHEST_AND_BEST_USE_COMMENTS_ENUM.financiallyFeasibleAsVacant
 };
 
 export default {

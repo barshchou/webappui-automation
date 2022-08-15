@@ -1,12 +1,12 @@
 import { Final } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { createReport } from "../../../../actions/base/baseTest.actions";
-import testData from '../../../../fixtures/not_full_reports/final/highest_best_use/QA-6002_13.fixture';
+import testData from '../../../../fixtures/not_full_reports/final/highest_best_use/QA-6002_13_15.fixture';
 
-describe("Verify 'As Vacant Discussion' Generated Commentary",
+describe("Verify 'As Vacant Discussion' and 'As Improved' Generated Commentary",
     { tags: [ "@final", "@highest_best_use" ] }, () => {
 
-        it("[QA-5965]", () => {
+        it("[QA-6002_13_15]", () => {
             cy.stepInfo("1. Login, create report");
             createReport(testData.reportCreationData);
 
@@ -14,19 +14,24 @@ describe("Verify 'As Vacant Discussion' Generated Commentary",
             _NavigationSection.navigateToHighestAndBestUse();
             Final._HighestBestUse.clickFinanciallyTab();
 
-            cy.stepInfo(`3 Select any options in the "What are the most financially feasible property 
+            cy.stepInfo(`3. Select any options in the "What are the most financially feasible property 
                         types for as vacant?" drop-down`);
             Final._HighestBestUse.checkSubjectMarketRadioValue(testData.checkValues.commercial)
                 .checkAsVacantBestUsePropTypeRadioValue(testData.checkValues.residential)
                 .addFinanciallyFeasiblePropertyTypesAsVacant(testData.typeAs)
-                .verifyFinanciallyCommentary("Vacant", Object.values(testData.checkValues))
-                .verifyFinanciallyCommentary("Vacant", Cypress._.kebabCase(testData.typeAs));
+                .verifyFinanciallyCommentary(testData.commentNames.improved, Object.values(testData.checkValues))
+                .verifyFinanciallyCommentary(testData.commentNames.vacant, Cypress._.kebabCase(testData.typeAs));
 
-            cy.stepInfo(`4 Select any options in the "What are the most financially feasible property 
+            cy.stepInfo(`4. Select any options in the "What are the most financially feasible property 
                         types for as improved?" drop-down`);
             Final._HighestBestUse.checkAsImprovedBestUseRadioValue(testData.checkValues.residential)
-                .verifyFinanciallyCommentary("Improved", Object.values(testData.checkValues))
+                .verifyFinanciallyCommentary(testData.commentNames.improved, Object.values(testData.checkValues))
                 .addFinanciallyFeasiblePropertyTypesAsImproved(testData.typeAs)
-                .verifyFinanciallyCommentary("Improved", Cypress._.kebabCase(testData.typeAs));
+                .verifyFinanciallyCommentary(testData.commentNames.vacant, Cypress._.kebabCase(testData.typeAs));
+
+            cy.stepInfo(`5. Open Highest & Best Use tab and Verify 'As Vacant Maximally Productive Discussion'
+                        Generated Commentary`);
+            Final._HighestBestUse.clickHighestUseTab();
+
         });
     });

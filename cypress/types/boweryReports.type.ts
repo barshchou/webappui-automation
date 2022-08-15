@@ -248,7 +248,7 @@ export namespace BoweryReports {
         date: string
     }
 
-    export type FinanciallyFeasibleComments = typeof Enums.FINANCIALLY_FEASIBLE_COMMENTS_TYPE[
-        KeyInfo.FinanciallyFeasibleCommentsKeys
+    export type HighestAndBestUseComments = typeof Enums.HIGHEST_AND_BEST_USE_COMMENTS_ENUM[
+        KeyInfo.HighestAndBestUseCommentsKeys
     ]
 }

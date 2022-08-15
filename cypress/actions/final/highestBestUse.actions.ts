@@ -184,7 +184,7 @@ class HighestBestUseActions extends BaseActionsExt<typeof highestBestUsePage> {
         return this;
     }
 
-    verifyFinanciallyCommentary(typeAs: BoweryReports.FinanciallyFeasibleComments, 
+    verifyFinanciallyCommentary(typeAs: BoweryReports.HighestAndBestUseComments, 
         values: string | Array<string>): HighestBestUseActions {
         if (Array.isArray(values)) {
             values.forEach(value => {
