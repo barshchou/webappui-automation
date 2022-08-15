@@ -80,4 +80,8 @@ export default class BasePage {
             return cy.xpath("//span[contains(text(), 'Modified')]");
         }
     }
+
+    formCommentTextBox(name: string) {
+        return cy.xpath(`//*[.='${name}']//following::*[@data-slate-editor][1]`);
+    }
 }

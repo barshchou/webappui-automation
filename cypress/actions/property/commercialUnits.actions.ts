@@ -99,7 +99,6 @@ class CommercialUnitsActions extends BaseActionsExt<typeof commercialUnitsPage> 
         if (isHasDecimalPartMoreNumberOfDigits(squareFeet)) {
             squareFeetToBe = cutDecimalPartToNumberOfDigits(squareFeet);
         }
-        squareFeetToBe = numberWithCommas(squareFeetToBe);
         commercialUnitsPage.commercialUnitsSFInputs.eq(index).clear().type(`${squareFeet}`)
             .should("have.value", squareFeetToBe);
         return this;
@@ -160,13 +159,8 @@ class CommercialUnitsActions extends BaseActionsExt<typeof commercialUnitsPage> 
         return this;
     }
 
-    clickEditDiscussionButton(): CommercialUnitsActions {
-        this.Page.formEditBtn().click({ force: true });
-        return this;
-    }
-
     editDiscussionTextArea(value: string, clearText = true): CommercialUnitsActions {
-        clearText ? this.Page.commentaryText.clear().type(value) :
+        clearText ? this.Page.commentaryText.dblclick().clear({ force: true }).type(value) :
             this.Page.commentaryText.type(value);
         return this;
     }
@@ -183,11 +177,6 @@ class CommercialUnitsActions extends BaseActionsExt<typeof commercialUnitsPage> 
             ? `${numberWithCommas(verifyAreaValue)}`
             : verifyAreaValue;
         this.Page.commentaryText.should("include.text", `${expectedText}`);
-        return this;
-    }
-
-    clickSaveDiscussionButton(): CommercialUnitsActions {
-        this.Page.formSaveBtn().click();
         return this;
     }
 

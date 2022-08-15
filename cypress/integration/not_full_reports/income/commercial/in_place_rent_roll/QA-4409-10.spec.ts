@@ -3,8 +3,8 @@ import NavigationSection from "../../../../../actions/base/navigationSection.act
 import Income from "../../../../../actions/income/income.manager";
 import { createReport } from "../../../../../actions/base/baseTest.actions";
 
-
-describe("Verify the functionality of Edit and Cancel commentary buttons", 
+//TODO update test after test-cases updates QA-6543
+describe.skip("Verify the functionality of Edit and Cancel commentary buttons", 
     { tags:[ "@income", "@commercial", "@in_place_rent_roll" ] }, () => {
         
         beforeEach("Login, create report", () => {
@@ -14,8 +14,7 @@ describe("Verify the functionality of Edit and Cancel commentary buttons",
         it("Test body", () => {
             NavigationSection.navigateToCommercialInPlaceRentRoll()
                 .verifyProgressBarNotExist();
-            Income.Commercial.InPlaceRentRoll.clickEditDiscussionButton()
-                .verifyEditDiscussionButtonsDisplayed()
+            Income.Commercial.InPlaceRentRoll
                 .editDiscussionTextArea(testData.newCommentary);
             Income.Commercial.InPlaceRentRoll.clickCancelDiscussionEditButton()
                 .verifyCommentaryTextNotContains(testData.newCommentary);

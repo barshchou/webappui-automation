@@ -3,6 +3,7 @@ import testData from "../../../../fixtures/not_full_reports/report/client/QA-464
 import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from '../../../../actions/base';
 
+//TODO update test after test-cases updates QA-6543
 describe("Verify the Client Guidelines Discussion on the page", 
     { tags: [ "@report", "@client", "@check_export" ] }, () => {
         it("[QA-4642]",  () => {
@@ -12,26 +13,30 @@ describe("Verify the Client Guidelines Discussion on the page",
             Property._Summary.enterBuildingName(testData.buildingName);
             _NavigationSection.navigateToClientPage().verifyProgressBarNotExist();
 
-            cy.stepInfo(`2. Click on the Edit button for Intended User and Identification of the Client sections`);
-            Report._Client.Page.formEditBtn().click();
-            Report._Client.Page.formEditBtn().click();
-
-            cy.stepInfo(`3. Enter the “=“ and verify the "Linked" chips dropdown for both sections: 
+            cy.stepInfo(`2. Enter the “=“ and verify the "Linked" chips dropdown for both sections: 
         options 'Gross Building Area', 'Building Name', 'Property Type', 'Current Residential Unit Count', 
         'As Complete Residential Unit Count', 'Current Commercial Unit Count', 'As Complete Commercial Unit Count', 
         'Street Address', 'Street Name', 'Site Area', 'Year Built', 'Block', 'Lot', 'Concluded Cap Rate', 
         'Zones', 'CurrentCondition', 'As Stabilized Condition'`);
+            Report._Client.activateTextAreaInput(Report._Client.Page.intendedUserTextBox);
             testData.chips.forEach(chip => {
-                Report._Client.enterIntendedUserTextBox(`=${chip.typeSuggestValue}`)
+                Report._Client
+                    .enterIntendedUserTextBox(`=${chip.typeSuggestValue}`)
                     .clickNarrativeSuggestions(chip.suggestionName)
                     .verifyIntendedUserTextBox(chip.verifySuggest);
-
-                Report._Client.enterIdentificationOfTheClientTextBox(`=${chip.typeSuggestValue}`)
+            });
+            Report._Client.activateTextAreaInput(Report._Client.Page.identificationOfClientTextBox);
+            testData.chips.forEach(chip => {
+                Report._Client
+                    .enterIdentificationOfTheClientTextBox(`=${chip.typeSuggestValue}`)
                     .clickNarrativeSuggestions(chip.suggestionName, 1)
                     .verifyIdentificationOfTheClientTextBox(chip.verifySuggest);
             });
-
-            cy.stepInfo(`4. Download report`);
+            Report._Client.inactivateTextAreaInput();
+            // [doc-server issue] ernst: this wait is necessary in order to update data on doc-server
+            cy.wait(1000);
+    
+            cy.stepInfo(`3. Download report`);
             _NavigationSection.openReviewAndExport(true);
             ReviewExport.generateDocxReport().waitForReportGenerated()
                 .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);

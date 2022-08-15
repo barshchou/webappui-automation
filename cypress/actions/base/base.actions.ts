@@ -124,4 +124,15 @@ export default class BaseActions {
         element.then(el => el.hide());
         return this;
     }
+
+    inactivateTextAreaInput() {
+        cy.xpath("//header").realClick();
+        return this;
+    }
+
+    activateTextAreaInput(textAreaInput: Cypress.Chainable<JQuery<HTMLElement>>) {
+        textAreaInput.scrollIntoView().realClick({ clickCount: 5, position: "bottomRight" })
+            .should("be.focused");
+        return this;
+    }
 }

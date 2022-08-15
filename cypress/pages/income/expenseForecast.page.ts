@@ -81,10 +81,6 @@ class ExpenseForecastPage extends BasePage {
         return cy.xpath(`//*[@data-qa="${forecastItem}-forecast-item"]//following::div[@data-slate-editor][${index}]`);
     }
 
-    getExpenseCommentaryEditButton(forecastItem: string, index = 1) {
-        return cy.xpath(`//*[@data-qa="${forecastItem}-forecast-item"]//following::button[.='Edit'][${index}]`);
-    }
-
     getExpenseCommentarySaveButton(forecastItem: string, index = 1) {
         return cy.xpath(`//*[@data-qa="${forecastItem}-forecast-item"]//following::button[.='Save'][${index}]`);
     }

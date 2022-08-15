@@ -11,18 +11,37 @@ and Definition of Market Value sections`,
         createReport(testData.reportCreationData);
     });
 
-    it("Test body", () => {
-        cy.stepInfo(`1. Verify that the Edit buttons are displayed on the Report > Key Info page for Property
-            Rights Appraised and Definition of Market Value sections`);
+    it(`[QA-4703][Report > Key Info] Verify the Property Rights Appraised and Definition 
+         of Market Value sections can be edited`, () => {
+        cy.stepInfo(`1. On the Report > Key Info page click inside the Property Rights Appraised section.`);
         _NavigationSection.navigateToReportInformation();
-        Report._KeyInfo.Page.formEditBtn().should("be.visible");
-        Report._KeyInfo.Page.formEditBtn(1).should("be.visible");
+        Report._KeyInfo.activateTextAreaInput( Report._KeyInfo.Page.textBoxPropertyRightsAppraised);
 
-        cy.stepInfo(`2. Click on the Edit button for both sections`);
-        Report._KeyInfo.Page.formEditBtn().click();
-        Report._KeyInfo.Page.formEditBtn().click();
+        cy.stepInfo(`2. Verify that the Revert to Original buttons and the info message are displayed`);
+        Report._KeyInfo.Page.formRevertToOriginalBtn().should("be.visible");
+        Report._KeyInfo.Page.userPrompt().should("be.visible");
 
-        cy.stepInfo(`4. Verify that the commentary form opens and buttons Cancel, Revert to Original 
+        cy.stepInfo(`3. Enter any values (numbers, letters, special symbols) - no validation, can be edited.`);
+        Report._KeyInfo.enterPropertyRightsAppraisedComment(testData.enterValue, false, false, false);
+        Report._KeyInfo.verifyCommentaryContainsText(testData.enterValue, 
+            testData.propertyRightsAppraisedCommentaryTitle);
+            
+        cy.stepInfo(`4. On the Report > Key Info page click inside the Definition of Market Value section.`);
+        Report._KeyInfo.activateTextAreaInput(Report._KeyInfo.Page.textBoxDefinitionOfMarketValue());
+
+        cy.stepInfo(`5. Verify that the Revert to Original buttons and the info message are displayed`);
+        Report._KeyInfo.Page.formRevertToOriginalBtn(1).should("be.visible");
+        Report._KeyInfo.Page.userPrompt().should("be.visible");
+
+        cy.stepInfo(`6. Enter any values (numbers, letters, special symbols) - no validation, can be edited.`);
+        Report._KeyInfo.enterDefinitionMarketValue(testData.enterValue, false, false, false);
+        Report._KeyInfo.verifyCommentaryContainsText(testData.enterValue, 
+            testData.definitionOfMarketValueCommentaryTitle);
+    });
+
+    //TODO update test after test-cases updates QA-6543
+    it.skip(`Test body`, () => {
+        cy.stepInfo(`1. Verify that the commentary form opens and buttons Cancel, Revert to Original 
             and Save are displayed for both sections`);
         Report._KeyInfo.Page.formCancelButton().should("be.visible");
         Report._KeyInfo.Page.formCancelButton(1).should("be.visible");

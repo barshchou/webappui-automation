@@ -313,12 +313,12 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
     editExpenseForecastCommentary(newText: string, forecastItem: BoweryReports.ForecastItem, 
         isWithClear = false, index = 1): ExpenseForecastActions {
         let item = this.getItemNameForAverage(forecastItem.name);
-        expenseForecastPage.getExpenseCommentaryEditButton(item, index).click();
+        this.activateTextAreaInput((this.Page.getExpenseCommentary(item,  index)));
         if (isWithClear) {
             expenseForecastPage.getExpenseCommentary(item, index).clear();
         }
         expenseForecastPage.getExpenseCommentary(item, index).type(newText);
-        expenseForecastPage.getExpenseCommentarySaveButton(item, index).click();
+        this.inactivateTextAreaInput();
         expenseForecastPage.getExpenseCommentaryModified(item).should("exist");
         return this;
     }
@@ -326,8 +326,8 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
     revertToOriginalExpenseForecastCommentary(forecastItem: BoweryReports.ForecastItem, 
         index = 1): ExpenseForecastActions {
         let item = this.getItemNameForAverage(forecastItem.name);
-        expenseForecastPage.getExpenseCommentaryEditButton(item, index).click();
-        expenseForecastPage.getExpenseCommentaryRevertToOriginal(item).click();
+        this.activateTextAreaInput((this.Page.getExpenseCommentary(item,  index)));
+        this.Page.getExpenseCommentaryRevertToOriginal(item).click();
         this.verifyProgressBarNotExist();
         expenseForecastPage.formYesRevertBtn.click();
         expenseForecastPage.getExpenseCommentarySaveButton(item, index).click();
