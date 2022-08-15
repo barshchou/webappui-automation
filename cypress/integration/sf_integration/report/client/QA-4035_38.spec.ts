@@ -9,7 +9,7 @@ describe(`Verify that the Client field is pre-filled on the WebApp with the date
 }, () => {
     it("[QA-4035_38]", () => {
         cy.stepInfo(`1. Create a new report on the WebApp (Note: the JOB # of that report corresponds
-            with the JOB # of an open job on SalesForce)`);
+                    with the JOB # of an open job on SalesForce)`);
         createReport(testData.reportCreationData);
 
         cy.stepInfo("2. Navigate to the Report > Client page.");
@@ -33,7 +33,8 @@ describe(`Verify that the Client field is pre-filled on the WebApp with the date
 
             cy.stepInfo("5. Verify export name");
             cy.contains("Requested By").next().should("have.text", testData.clientName);
-            cy.contains("December 20, 2021").next().should("include.text", testData.clientName);
+            cy.contains("In accordance with your request").prev()
+                .prev().prev().should("include.text", testData.clientName);
         });
     });
 

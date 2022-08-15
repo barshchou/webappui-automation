@@ -21,7 +21,7 @@ describe("[QA-5212] Verify validation of the Residential Units and Commercial Un
             cy.stepInfo("4. Verify what is displayed in the Year Built field");
             Property._Summary.Page.yearBuilt.should("have.value", testData.yearBuilt);
 
-            cy.stepInfo("4. Verify what is displayed in the GBA field");
+            cy.stepInfo("5. Verify what is displayed in the GBA field");
             Property._Summary.Page.grossBuildingArea.should("have.value", testData.gba);
         });
     });
