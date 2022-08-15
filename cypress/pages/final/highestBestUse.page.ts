@@ -77,8 +77,8 @@ class HighestBestUsePage extends BasePage {
 
     get regionalCheckbox() { return cy.get("[data-qa^=regional-checkbox] input"); }
 
-    getFinanciallyFeasibleComment(typeAs: BoweryReports.HighestAndBestUseComments) { 
-        return cy.get(`[data-qa$='financiallyFeasibleAs${typeAs}.commentary-generated-text']`); 
+    getHighestAndBestUseComment(typeAs: BoweryReports.HighestAndBestUseComments) { 
+        return cy.get(`[data-qa$='${typeAs}.commentary-generated-text']`); 
     }
 }
 

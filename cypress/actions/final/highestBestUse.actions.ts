@@ -184,16 +184,16 @@ class HighestBestUseActions extends BaseActionsExt<typeof highestBestUsePage> {
         return this;
     }
 
-    verifyFinanciallyCommentary(typeAs: BoweryReports.HighestAndBestUseComments, 
+    verifyHighestAndBestUseCommentary(typeAs: BoweryReports.HighestAndBestUseComments, 
         values: string | Array<string>): HighestBestUseActions {
         if (Array.isArray(values)) {
             values.forEach(value => {
-                highestBestUsePage.getFinanciallyFeasibleComment(typeAs)
-                    .should("include.text", value.toLowerCase());
+                highestBestUsePage.getHighestAndBestUseComment(typeAs)
+                    .should("include.text", value);
             });
         } else {
-            highestBestUsePage.getFinanciallyFeasibleComment(typeAs)
-                .should("include.text", values.toLowerCase());
+            highestBestUsePage.getHighestAndBestUseComment(typeAs)
+                .should("include.text", values);
         }
         return this;
     }
