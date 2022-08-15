@@ -9,7 +9,8 @@ const checkValues = {
 const commentNames = {
     financiallyFeasibleAsImproved: Enums.HIGHEST_AND_BEST_USE_COMMENTS_ENUM.financiallyFeasibleAsImproved,
     financiallyFeasibleAsVacant: Enums.HIGHEST_AND_BEST_USE_COMMENTS_ENUM.financiallyFeasibleAsVacant,
-    maximallyProductiveAsVacant:  Enums.HIGHEST_AND_BEST_USE_COMMENTS_ENUM.maximallyProductiveAsVacant
+    maximallyProductiveAsVacant:  Enums.HIGHEST_AND_BEST_USE_COMMENTS_ENUM.maximallyProductiveAsVacant,
+    conclusionAsVacant: Enums.HIGHEST_AND_BEST_USE_COMMENTS_ENUM.conclusionAsVacant
 };
 
 const asVacantDiscussionText = `The subject is located within a primarily ${checkValues.commercial.toLowerCase()}` +
@@ -41,8 +42,14 @@ const asVacantMaximallyProductiveDiscussionText = "There does not appear to be a
 " for development of multi-family use. Based on the normal market density" + 
 " level permitted by zoning, this is considered the maximally productive use of the site.";
 
+const asVacantConclusionDiscussionText = "Based on the subject property's zoning, physical" + 
+" characteristics, location, and forecasted economic conditions, it is our opinion that the highest and best" + 
+" use of the site as vacant is to hold for development of a multi-family building to the highest density permitted" + 
+" by zoning and supported within the market.";
+
+
 export default {
-    reportCreationData: ReportDataCreator.getReportData("6002_13", {
+    reportCreationData: ReportDataCreator.getReportData("6002_13_15_20", {
         incomeValue: Enums.INCOME_TYPE.both,
         conclusionValue: Enums.VALUE_CONCLUSION_TYPE.AS_COMPLETE
     }),
@@ -53,5 +60,6 @@ export default {
     asImprovedDiscussionText,
     initialAsImprovedDiscussionText,
     initialAsVacantMaximallyProductiveDiscussionText,
-    asVacantMaximallyProductiveDiscussionText
+    asVacantMaximallyProductiveDiscussionText,
+    asVacantConclusionDiscussionText
 };
