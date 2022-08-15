@@ -14,23 +14,36 @@ describe("Verify 'As Vacant Discussion' and 'As Improved' Generated Commentary",
             _NavigationSection.navigateToHighestAndBestUse();
             Final._HighestBestUse.clickFinanciallyTab();
 
-            cy.stepInfo(`3. Select any options in the "What are the most financially feasible property 
-                        types for as vacant?" drop-down`);
+            cy.stepInfo("3. Check Subject Market Characteristics and Highest and Best Use Property Type for As Vacant");
             Final._HighestBestUse.checkSubjectMarketRadioValue(testData.checkValues.commercial)
-                .checkAsVacantBestUsePropTypeRadioValue(testData.checkValues.residential)
-                .addFinanciallyFeasiblePropertyTypesAsVacant(testData.typeAs)
-                .verifyHighestAndBestUseCommentary(testData.commentNames.vacant, testData.asVacantDiscussionText);
+                .checkAsVacantBestUsePropTypeRadioValue(testData.checkValues.residential);
 
-            cy.stepInfo(`4. Select any options in the "What are the most financially feasible property 
+            cy.stepInfo(`4. Open Highest & Best Use tab and Verify 'As Vacant Maximally Productive Discussion'
+                initial commentary`);
+            Final._HighestBestUse.clickHighestUseTab()
+                .verifyHighestAndBestUseCommentary(testData.commentNames.maximallyProductiveAsVacant,
+                    testData.initialAsVacantMaximallyProductiveDiscussionText);
+
+            cy.stepInfo(`5. Select any options in the "What are the most financially feasible property 
+                        types for as vacant?" drop-down`);
+            Final._HighestBestUse.clickFinanciallyTab()
+                .addFinanciallyFeasiblePropertyTypesAsVacant(testData.typeAs)
+                .verifyHighestAndBestUseCommentary(testData.commentNames.financiallyFeasibleAsVacant, 
+                    testData.asVacantDiscussionText);
+
+            cy.stepInfo(`6. Select any options in the "What are the most financially feasible property 
                         types for as improved?" drop-down`);
             Final._HighestBestUse.checkAsImprovedBestUseRadioValue(testData.checkValues.residential)
-                .verifyHighestAndBestUseCommentary(testData.commentNames.improved, 
+                .verifyHighestAndBestUseCommentary(testData.commentNames.financiallyFeasibleAsImproved, 
                     testData.initialAsImprovedDiscussionText)
                 .addFinanciallyFeasiblePropertyTypesAsImproved(testData.typeAs)
-                .verifyHighestAndBestUseCommentary(testData.commentNames.improved, testData.asImprovedDiscussionText);
+                .verifyHighestAndBestUseCommentary(testData.commentNames.financiallyFeasibleAsImproved, 
+                    testData.asImprovedDiscussionText);
 
-            cy.stepInfo(`5. Open Highest & Best Use tab and Verify 'As Vacant Maximally Productive Discussion'
+            cy.stepInfo(`7. Open Highest & Best Use tab and Verify 'As Vacant Maximally Productive Discussion'
                         Generated Commentary`);
-            Final._HighestBestUse.clickHighestUseTab();
+            Final._HighestBestUse.clickHighestUseTab()
+                .verifyHighestAndBestUseCommentary(testData.commentNames.maximallyProductiveAsVacant,
+                    testData.asVacantMaximallyProductiveDiscussionText);
         });
     });

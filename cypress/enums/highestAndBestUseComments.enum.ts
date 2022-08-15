@@ -1,7 +1,7 @@
 const highestAndBestUseComments = {
     financiallyFeasibleAsVacant: "financiallyFeasibleAsVacant",
     financiallyFeasibleAsImproved: "financiallyFeasibleAsImproved",
-    maximallyAsVacant: "maximallyAsVacant",
+    maximallyProductiveAsVacant: "maximallyProductiveAsVacant",
     maximallyProductiveAsImproved: "maximallyProductiveAsImproved",
     conclusionAsVacant: "conclusionAsVacant",
     conclusionAsImproved: "conclusionAsImproved"

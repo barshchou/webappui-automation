@@ -7,8 +7,9 @@ const checkValues = {
 };
 
 const commentNames = {
-    improved: Enums.HIGHEST_AND_BEST_USE_COMMENTS_ENUM.financiallyFeasibleAsImproved,
-    vacant: Enums.HIGHEST_AND_BEST_USE_COMMENTS_ENUM.financiallyFeasibleAsVacant
+    financiallyFeasibleAsImproved: Enums.HIGHEST_AND_BEST_USE_COMMENTS_ENUM.financiallyFeasibleAsImproved,
+    financiallyFeasibleAsVacant: Enums.HIGHEST_AND_BEST_USE_COMMENTS_ENUM.financiallyFeasibleAsVacant,
+    maximallyProductiveAsVacant:  Enums.HIGHEST_AND_BEST_USE_COMMENTS_ENUM.maximallyProductiveAsVacant
 };
 
 const asVacantDiscussionText = `The subject is located within a primarily ${checkValues.commercial.toLowerCase()}` +
@@ -30,6 +31,16 @@ const asImprovedDiscussionText = "The subject property is located within a" +
 " Therefore, use as a multi-family property is financially feasible." + 
 " Also, demolition is not an option.";
 
+const initialAsVacantMaximallyProductiveDiscussionText = "There does not appear to be any reasonably probable use of" + 
+" the site that would generate a higher residual land value than to hold" + 
+` for development of ${checkValues.residential.toLowerCase()} use. Based on the normal market density` + 
+" level permitted by zoning, this is considered the maximally productive use of the site.";
+
+const asVacantMaximallyProductiveDiscussionText = "There does not appear to be any reasonably probable use of the" +
+" site that would generate a higher residual land value than to hold" + 
+" for development of multi-family use. Based on the normal market density" + 
+" level permitted by zoning, this is considered the maximally productive use of the site.";
+
 export default {
     reportCreationData: ReportDataCreator.getReportData("6002_13", {
         incomeValue: Enums.INCOME_TYPE.both,
@@ -40,5 +51,7 @@ export default {
     commentNames,
     asVacantDiscussionText,
     asImprovedDiscussionText,
-    initialAsImprovedDiscussionText
+    initialAsImprovedDiscussionText,
+    initialAsVacantMaximallyProductiveDiscussionText,
+    asVacantMaximallyProductiveDiscussionText
 };
