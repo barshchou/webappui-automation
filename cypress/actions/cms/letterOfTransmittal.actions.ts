@@ -48,17 +48,6 @@ class LetterOfTransmittalActions extends BaseActionsExt<typeof letterOfTransmitt
             .should('deep.equal', expectedText);
         return this;
     }
-
-    revertSectionToOriginal(sectionName: ContentManagementSystem.LetterOfTransmittalSections): 
-    LetterOfTransmittalActions {
-        this.clickSectionForEdit(sectionName);
-        letterOfTransmittalPage.letterOfTransmittalDiscussionSection(sectionName).type(`{ESC}`);
-        letterOfTransmittalPage.letterOfTransmittalDiscussionSection(sectionName).focus();
-        this.Page.formRevertToOriginalBtn().realClick();
-        this.Page.formYesRevertBtn.realClick();
-        this.saveCmsSettings();
-        return this;
-    }
 }
 
 export default new LetterOfTransmittalActions(letterOfTransmittalPage);

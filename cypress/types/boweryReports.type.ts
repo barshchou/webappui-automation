@@ -255,4 +255,8 @@ export namespace ContentManagementSystem {
         typeof Enums.INCOME_CAPITALIZATION_APPROACH_SECTIONS[KeyInfo.IncomeCapitalizationApproachSections]
     
     export type CertificationSections = typeof Enums.CERTIFICATION_SECTIONS[KeyInfo.CertificationSections]
+    export type DiscussionSectionName = {
+        sectionName: LetterOfTransmittalSections | SWOTAnalysisSections 
+        | IncomeCapitalizationApproachSections | CertificationSections
+    }
 }

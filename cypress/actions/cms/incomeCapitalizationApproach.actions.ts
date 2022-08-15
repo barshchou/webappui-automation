@@ -51,17 +51,6 @@ class IncomeCapitalizationApproachActions extends BaseActionsExt<typeof incomeCa
         incomeCapitalizationApproachPage.incomeCapitalizationModifiedLabel(sectionName).should('be.visible');
         return this;
     }
-
-    revertSectionToOriginal(sectionName: ContentManagementSystem.IncomeCapitalizationApproachSections): 
-    IncomeCapitalizationApproachActions {
-        this.clickSectionForEdit(sectionName);
-        incomeCapitalizationApproachPage.incomeCapitalizationDiscussionSection(sectionName).type(`{ESC}`);
-        incomeCapitalizationApproachPage.incomeCapitalizationDiscussionSection(sectionName).focus();
-        this.Page.formRevertToOriginalBtn().realClick();
-        this.Page.formYesRevertBtn.realClick();
-        this.saveCmsSettings();
-        return this;
-    }
 }
 
 export default new IncomeCapitalizationApproachActions(incomeCapitalizationApproachPage);

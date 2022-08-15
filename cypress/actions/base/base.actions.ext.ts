@@ -7,6 +7,7 @@
  * Use this class for QA-5043
  */
 import BasePage from "../../pages/base/base.page";
+import { ContentManagementSystem } from "../../types/boweryReports.type";
 import BaseActions from "./base.actions";
 
 export default class BaseActionsExt<T extends BasePage> extends BaseActions {
@@ -117,6 +118,16 @@ export default class BaseActionsExt<T extends BasePage> extends BaseActions {
         this.Page.saveButtonGlobal.click();
         this.Page.successModal.should('be.visible');
         this.Page.successModal.should('not.be.visible');
+        return this;
+    }
+
+    revertSectionToOriginal(sectionName: string | ContentManagementSystem.DiscussionSectionName): this {
+        this.Page.formCommentTextBox(sectionName).scrollIntoView().realClick();
+        this.Page.formCommentTextBox(sectionName).type(`{ESC}`);
+        this.Page.formCommentTextBox(sectionName).focus();
+        this.Page.formRevertToOriginalBtn().click();
+        this.Page.formYesRevertBtn.click();
+        this.saveCmsSettings();
         return this;
     }
 }

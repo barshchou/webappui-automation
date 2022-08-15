@@ -46,17 +46,6 @@ class CertificationActions extends BaseActionsExt<typeof certificationPage> {
         this.verifyCertificationBulletsText(sectionName, text);
         return this;
     }
-
-    revertSectionToOriginal(sectionName: ContentManagementSystem.CertificationSections): 
-    CertificationActions {
-        this.clickSectionForEdit(sectionName);
-        certificationPage.certificationDiscussionSection(sectionName).type(`{ESC}`);
-        certificationPage.certificationDiscussionSection(sectionName).focus();
-        this.Page.formRevertToOriginalBtn().click();
-        this.Page.formYesRevertBtn.click();
-        this.saveCmsSettings();
-        return this;
-    }
 }
 
 export default new CertificationActions(certificationPage);
