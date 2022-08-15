@@ -8,11 +8,10 @@ import { conditionalDescribe } from "../../checkIsProd.utils";
 import { _CmsBaseActions, _IncomeCapitalizationApproach } from '../../../actions/cms';
 
 conditionalDescribe("Verify the page and fields available on it", 
-    { tags:[ "@cms", "@check_export", "@feature_flag" ] }, () => {
+    { tags:[ "@cms", "@check_export", "@feature_flag"] }, () => {
         it('[QA-6403]', () => {
             cy.stepInfo(`Preconditions: Set Launch Darkly flag to see Report Copy Editor section. Create a report`);
-            launchDarklyApi.setFeatureFlagForUser(testData.cmsNavigationFlagKey, testData.featureFlagEnable)
-                .setFeatureFlagForUser(testData.reportTextEditorFlagKey, testData.featureFlagEnable)
+            launchDarklyApi.setFeatureFlagForUser(testData.reportTextEditorFlagKey, testData.featureFlagEnable)
                 .setFeatureFlagForUser(testData.swotAnalysisFlagKey, testData.featureFlagEnable);
             createReport(testData.reportCreationData);
 
@@ -49,6 +48,5 @@ conditionalDescribe("Verify the page and fields available on it",
         after('Remove feature flag', () => {
             launchDarklyApi.removeUserTarget(testData.reportTextEditorFlagKey);
             launchDarklyApi.removeUserTarget(testData.swotAnalysisFlagKey);
-            launchDarklyApi.removeUserTarget(testData.cmsNavigationFlagKey);
         });
     });

@@ -11,8 +11,7 @@ conditionalDescribe("Verify page and possibility to edit text",
     { tags:[ "@cms", "@check_export", "@feature_flag" ] }, () => {
         it('[QA-6400]', () => {
             cy.stepInfo(`Preconditions: Set Launch Darkly flag to see Report Copy Editor section. Create a report`);
-            launchDarklyApi.setFeatureFlagForUser(testData.cmsNavigationFlagKey, testData.featureFlagEnable)
-                .setFeatureFlagForUser(testData.reportTextEditorFlagKey, testData.featureFlagEnable)
+            launchDarklyApi.setFeatureFlagForUser(testData.reportTextEditorFlagKey, testData.featureFlagEnable)
                 .setFeatureFlagForUser(testData.swotAnalysisFlagKey, testData.featureFlagEnable);
             createReport(testData.reportCreationData);
 
@@ -59,6 +58,5 @@ conditionalDescribe("Verify page and possibility to edit text",
         after('Remove feature flag', () => {
             launchDarklyApi.removeUserTarget(testData.reportTextEditorFlagKey);
             launchDarklyApi.removeUserTarget(testData.swotAnalysisFlagKey);
-            launchDarklyApi.removeUserTarget(testData.cmsNavigationFlagKey);
         });
     });

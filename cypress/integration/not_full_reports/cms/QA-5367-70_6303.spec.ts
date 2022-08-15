@@ -15,8 +15,6 @@ conditionalDescribe("Verify that CMS section visibility for users",
 
                 cy.stepInfo(`1. Make sure that this feature flag is ON: cms-navigation`);
                 loginAction(user.username, user.password);
-                launchDarklyApi.setFeatureFlagForUser(testData.cmsNavigationFlagKey, testData.featureFlagEnable);
-                cy.reload();
 
                 cy.stepInfo(`2. Verify that CMS icon in the sidebar`);
                 _NavigationSection.Page.contentManagementSystemButton.should(assertion);
@@ -28,8 +26,7 @@ conditionalDescribe("Verify that CMS section visibility for users",
                         .and("contain.text", _CmsTitle.CONTENT_MANAGEMENT_SYSTEM);
                 }
 
-                cy.stepInfo(`4. Remove feature flag and log out`);
-                launchDarklyApi.removeUserTarget(testData.cmsNavigationFlagKey);
+                cy.stepInfo(`4. Log out`);
                 _NavigationSection.logout();
             });
         });

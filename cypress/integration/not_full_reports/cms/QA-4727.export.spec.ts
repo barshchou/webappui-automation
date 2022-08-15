@@ -12,8 +12,7 @@ conditionalDescribe("[QA-4727] Verify possibility to edit text",
 
         it('Update static text in Settings and verify changes on a corresponding pages', () => {
             cy.stepInfo('Preconditions: Set Launch Darkly flag to see Report Copy Editor section. Create a report');
-            launchDarklyApi.setFeatureFlagForUser(testData.cmsNavigationFlagKey, testData.featureFlagEnable)
-                .setFeatureFlagForUser(testData.reportTextEditorFlagKey, testData.featureFlagEnable)
+            launchDarklyApi.setFeatureFlagForUser(testData.reportTextEditorFlagKey, testData.featureFlagEnable)
                 .setFeatureFlagForUser(testData.swotAnalysisFlagKey, testData.featureFlagEnable);
             createReport(testData.reportCreationData);
 
@@ -61,6 +60,5 @@ conditionalDescribe("[QA-4727] Verify possibility to edit text",
 
             launchDarklyApi.removeUserTarget(testData.reportTextEditorFlagKey);
             launchDarklyApi.removeUserTarget(testData.swotAnalysisFlagKey);
-            launchDarklyApi.removeUserTarget(testData.cmsNavigationFlagKey);
         });
     });

@@ -12,8 +12,6 @@ conditionalDescribe("Verify navigation to CMS page and common elements on the pa
                 Verify navigation to the CMS page`, () => {
             cy.stepInfo(`1. Make sure that this feature flag is ON: cms-navigation`);
             loginAction(testData.webContentEditorUsername, testData.webContentEditorPassword);
-            launchDarklyApi.setFeatureFlagForUser(testData.cmsNavigationFlagKey, testData.featureFlagEnable);
-            cy.reload();
 
             cy.stepInfo(`2. Verify that CMS icon in the sidebar`);
             _NavigationSection.Page.contentManagementSystemButton.should('exist');
@@ -34,9 +32,5 @@ conditionalDescribe("Verify navigation to CMS page and common elements on the pa
             _NavigationSection.verifyGlobalIconTooltip();
             _NavigationSection.verifyBottomPanelButtonsRemoved();
             _NavigationSection.Page.profileOrganization.should('exist');
-
-            cy.stepInfo(`4. Remove feature flag and log out`);
-            launchDarklyApi.removeUserTarget(testData.cmsNavigationFlagKey);
-            _NavigationSection.logout();
         });
     });
