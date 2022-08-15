@@ -3,7 +3,8 @@ import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { Property } from "../../../../actions"; 
 
-describe("Verify the functionality of the Image upload to the Interior and Exterior Images sections",
+// skipped until data-qa attributes will be added
+describe.skip("Verify the functionality of the Image upload to the Interior and Exterior Images sections",
     { tags:[ "@property", "@commercial_units" ] },  () => {
         
         beforeEach("Login, create report", () => {
