@@ -68,7 +68,6 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
 
     clickCommercialRentRollButton(): NavigationSectionActions {
         navigationSectionPage.commercialRentRollButton.click();
-        this.submitSaveChangesModal();
         return this;
     }
 
@@ -224,8 +223,9 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
     navigateToCommercialInPlaceRentRoll(): NavigationSectionActions {
         this.clickIncomeApproachButton()
             .clickCommercialMenuIfClosed()
-            .clickCommercialRentRollButton();
-        cy.url().should("include", routesUtils.commercial.inPlaceRentRoll);
+            .clickCommercialRentRollButton()
+            .submitSaveChangesModal();
+        // cy.url().should("include", routesUtils.commercial.inPlaceRentRoll);
         return this;
     }
 
