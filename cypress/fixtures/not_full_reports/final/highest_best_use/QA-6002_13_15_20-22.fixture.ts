@@ -1,5 +1,16 @@
 import Enums from "../../../../enums/enums";
+import { BoweryReports } from "../../../../types/boweryReports.type";
 import ReportDataCreator from "../../../data_creator/reportData.creator";
+
+const convertTypeAsInCommentary = (typeAs: BoweryReports.feasiblePropertyType) => {
+    if (typeAs === "multiFamily") {
+        return Cypress._.kebabCase(typeAs);
+    } else {
+        return Cypress._.startCase(typeAs).toLowerCase();
+    }
+};
+
+const typeAs = Enums.FEASIBLE_PROPERTY_TYPES.multiFamily;
 
 const checkValues = {
     residential: "Residential",
@@ -16,11 +27,12 @@ const commentNames = {
 };
 
 const asVacantDiscussionText = `The subject is located within a primarily ${checkValues.commercial.toLowerCase()}` +
-" neighborhood. Based on our analysis of the market, there is sufficient demand for multi-family properties." + 
-" Market conditions, though, are such that new multi-family construction is not feasible, as the value" + 
-" would not sufficiently exceed the cost plus developer's profit. New construction in the neighborhood is" + 
-` currently underway but limited, an indication that developing new ${checkValues.residential.toLowerCase()}` + 
-" buildings is not feasible.";
+" neighborhood. Based on our analysis of the market, there is sufficient demand for" + 
+` ${convertTypeAsInCommentary(typeAs)} properties. Market conditions, though, are such that new` + 
+` ${convertTypeAsInCommentary(typeAs)} construction is not` +
+" feasible, as the value would not sufficiently exceed the cost plus developer's profit. New construction" + 
+" in the neighborhood is currently underway but limited, an indication that developing" + 
+` new ${checkValues.residential.toLowerCase()} buildings is not feasible.`;
 
 const initialAsImprovedDiscussionText = "The subject property is located within a" + 
 ` primarily ${checkValues.commercial.toLowerCase()} neighborhood exhibiting low vacancy rates and increasing` +
@@ -31,7 +43,7 @@ const initialAsImprovedDiscussionText = "The subject property is located within 
 const asImprovedDiscussionText = "The subject property is located within a" + 
 ` primarily ${checkValues.commercial.toLowerCase()} neighborhood exhibiting low vacancy rates and increasing` +
 " rental rates. Upon renovation, the subject will reflect 100% occupancy and will generate a positive net cash flow." + 
-" Therefore, use as a multi-family property is financially feasible." + 
+` Therefore, use as a ${convertTypeAsInCommentary(typeAs)} property is financially feasible.` + 
 " Also, demolition is not an option.";
 
 const initialAsVacantMaximallyProductiveDiscussionText = "There does not appear to be any reasonably probable use of" + 
@@ -41,22 +53,22 @@ const initialAsVacantMaximallyProductiveDiscussionText = "There does not appear 
 
 const asVacantMaximallyProductiveDiscussionText = "There does not appear to be any reasonably probable use of the" +
 " site that would generate a higher residual land value than to hold" + 
-" for development of multi-family use. Based on the normal market density" + 
+` for development of ${convertTypeAsInCommentary(typeAs)} use. Based on the normal market density` + 
 " level permitted by zoning, this is considered the maximally productive use of the site.";
 
 const asVacantConclusionDiscussionText = "Based on the subject property's zoning, physical" + 
 " characteristics, location, and forecasted economic conditions, it is our opinion that the highest and best" + 
-" use of the site as vacant is to hold for development of a multi-family building to the highest density permitted" + 
-" by zoning and supported within the market.";
+` use of the site as vacant is to hold for development of a ${convertTypeAsInCommentary(typeAs)}` + 
+" building to the highest density permitted by zoning and supported within the market.";
 
 const asImprovedMaximallyProductiveDiscussionText = "There does not appear to be any alternative use that could" + 
 " reasonably be expected to provide a higher present value than the current use, and the existing use exceeds the" + 
-" value of the site as vacant. Continued multi-family use upon completion of the proposed construction and" +
-" renovations is concluded to be maximally productive.";
+` value of the site as vacant. Continued ${convertTypeAsInCommentary(typeAs)} use upon` + 
+" completion of the proposed construction and renovations is concluded to be maximally productive.";
 
 const asImprovedConclusionDiscussionText = "Based on the subject property's zoning, physical characteristics," + 
-" location, and forecasted economic conditions, continued multi-family use is concluded to be the highest" +
-" and best use as improved.";
+` location, and forecasted economic conditions, continued ${convertTypeAsInCommentary(typeAs)} use is` + 
+" concluded to be the highest and best use as improved.";
 
 
 
@@ -65,7 +77,7 @@ export default {
         incomeValue: Enums.INCOME_TYPE.both,
         conclusionValue: Enums.VALUE_CONCLUSION_TYPE.AS_COMPLETE
     }),
-    typeAs:  Enums.FEASIBLE_PROPERTY_TYPES.multiFamily,
+    typeAs,
     checkValues,
     commentNames,
     asVacantDiscussionText,
