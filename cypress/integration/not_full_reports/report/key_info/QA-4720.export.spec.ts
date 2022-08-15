@@ -36,7 +36,9 @@ ACAS reports for Property Rights Appraised and Definition
             Report._KeyInfo.verifyCommentaryContainsText(chip.verifySuggest, 
                 testData.definitionOfMarketValueCommentaryTitle);
         });
-        Report._KeyInfo.clickSaveButton();
+        Report._KeyInfo.inactivateTextAreaInput()
+            .clickSaveButton();
+
         _NavigationSection.openReviewAndExport();
         ReviewExport.generateDocxReport().waitForReportGenerated()
             .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);

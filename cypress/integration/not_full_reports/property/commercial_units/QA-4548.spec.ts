@@ -18,11 +18,12 @@ describe("Verify the Modified label functionality",
             _NavigationSection.navigateToCommercialUnits();
             Property._CommercialUnits.verifyThatPageIsOpened();
             Property._CommercialUnits.Page.modifiedLabel(false).should('not.exist');
-            Property._CommercialUnits.Page.formEditBtn().scrollIntoView().click();
+            Property._CommercialUnits.activateTextAreaInput(
+                Property._CommercialUnits.Page.commercialUnitSFDiscussionTextArea);
 
             cy.stepInfo("2. Edit comment and click on the Save button.");
             Property._CommercialUnits.Page.commercialUnitSFDiscussionTextArea.clear().type(testData.text);
-            Property._CommercialUnits.Page.formSaveBtn().click();
+            Property._CommercialUnits.clickSaveButton();
 
             cy.stepInfo("3.  Verify that the Modified label appears after saving changes made to commentary.");
             Property._CommercialUnits.Page.modifiedLabel().should('exist');

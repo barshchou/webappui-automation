@@ -37,6 +37,7 @@ describe(`[QA-4640] Verify the "Linked" chips dropdown in the new narrative comp
             Report._Client.verifyCommentaryContainsText(chip.verifySuggest, 
                 testData.identificationOfTheClientCommentaryTitle);
         });
+        Report._Client.inactivateTextAreaInput();
 
         cy.stepInfo("3. Download report");
         _NavigationSection.openReviewAndExport();

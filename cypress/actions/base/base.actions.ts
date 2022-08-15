@@ -43,6 +43,7 @@ export default class BaseActions {
 
     clickSaveButton() {
         cy.get("*[data-qa='form-save-btn']").click();
+        cy.get("*[role='progressbar']", { timeout: 30000 }).should("exist");
         return this;
     }
 
@@ -53,6 +54,7 @@ export default class BaseActions {
 
     clickSaveContinueButton() {
         cy.get("*[data-qa='form-submit-btn']").scrollIntoView().click();
+        cy.get("*[role='progressbar']", { timeout: 30000 }).should("exist");
     }
 
     verifyProgressBarNotExist() {
@@ -127,6 +129,7 @@ export default class BaseActions {
 
     inactivateTextAreaInput() {
         cy.xpath("//header").realClick();
+        cy.wait(1000);
         return this;
     }
 
