@@ -3,11 +3,6 @@ import letterOfTransmittalPage from "../../pages/cms/letterOfTransmittal.page";
 import { ContentManagementSystem } from "../../types/boweryReports.type";
 
 class LetterOfTransmittalActions extends BaseActionsExt<typeof letterOfTransmittalPage> {
-    verifyPageTitle(): LetterOfTransmittalActions {
-        letterOfTransmittalPage.pageTitle.should('have.text', 'Letter of Transmittal');
-        return this;
-    }
-
     updateSectionDiscussion(sectionName: ContentManagementSystem.LetterOfTransmittalSections, 
         text: string, clear = false): LetterOfTransmittalActions {
         this.clickSectionForEdit(sectionName)
@@ -32,13 +27,9 @@ class LetterOfTransmittalActions extends BaseActionsExt<typeof letterOfTransmitt
 
     editSectionDiscussionText(sectionName: ContentManagementSystem.LetterOfTransmittalSections, 
         text: string, clear = false): LetterOfTransmittalActions {
-        if (clear) { 
-            this.clickSectionForEdit(sectionName);
-            letterOfTransmittalPage.letterOfTransmittalDiscussionSection(sectionName).clear(); 
-        }
-        letterOfTransmittalPage.letterOfTransmittalDiscussionSection(sectionName)
-            .type(text)
-            .should('contain.text', text);
+        if (clear) { this.clearSectionDiscussionText(sectionName); }
+        letterOfTransmittalPage.letterOfTransmittalDiscussionSection(sectionName).type(text);
+        this.verifyLetterOfTransmittalText(sectionName, text);
         return this;
     }
 
@@ -46,6 +37,13 @@ class LetterOfTransmittalActions extends BaseActionsExt<typeof letterOfTransmitt
         expectedText: string): LetterOfTransmittalActions {
         letterOfTransmittalPage.letterOfTransmittalDiscussionSection(sectionName).invoke('text')
             .should('deep.equal', expectedText);
+        return this;
+    }
+
+    clearSectionDiscussionText(sectionName: ContentManagementSystem.LetterOfTransmittalSections): 
+    LetterOfTransmittalActions {
+        this.clickSectionForEdit(sectionName);
+        letterOfTransmittalPage.letterOfTransmittalDiscussionSection(sectionName).clear();
         return this;
     }
 }
