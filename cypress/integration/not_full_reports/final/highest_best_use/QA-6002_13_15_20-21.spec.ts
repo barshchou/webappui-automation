@@ -1,7 +1,7 @@
 import { Final } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { createReport } from "../../../../actions/base/baseTest.actions";
-import testData from '../../../../fixtures/not_full_reports/final/highest_best_use/QA-6002_13_15_20.fixture';
+import testData from '../../../../fixtures/not_full_reports/final/highest_best_use/QA-6002_13_15_20-21.fixture';
 
 describe("Verify 'As Vacant Discussion' and 'As Improved' Generated Commentary",
     { tags: [ "@final", "@highest_best_use" ] }, () => {
@@ -46,9 +46,12 @@ describe("Verify 'As Vacant Discussion' and 'As Improved' Generated Commentary",
                 .verifyHighestAndBestUseCommentary(testData.commentNames.maximallyProductiveAsVacant,
                     testData.asVacantMaximallyProductiveDiscussionText);
 
-            cy.stepInfo(`8. Verify 'As Vacant Conclusion Discussion'
-                    Generated Commentary`);   
+            cy.stepInfo("8. Verify 'As Vacant Conclusion Discussion' Generated Commentary");   
             Final._HighestBestUse.verifyHighestAndBestUseCommentary(testData.commentNames.conclusionAsVacant,
                 testData.asVacantConclusionDiscussionText);
+
+            cy.stepInfo("9. Verify 'As Improved Maximally Productive Discussion' Generated Commentary");   
+            Final._HighestBestUse.verifyHighestAndBestUseCommentary(testData.commentNames.maximallyProductiveAsImproved,
+                testData.asImprovedMaximallyProductiveDiscussionText);
         });
     });
