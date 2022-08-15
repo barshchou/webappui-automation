@@ -19,6 +19,8 @@ describe(`[QA-4093-95] Verify if "Per Month" time period PSF Rent based on is se
     beforeEach(() => {
         cy.restoreLocalStorage();
         _NavigationSection.navigateToResInPlaceRentRoll();
+        // necessary to have clear UI state on page for test
+        cy.reload();
     });
 
     it("[QA-4093-94]", () => {
