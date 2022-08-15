@@ -3,8 +3,15 @@ import { Alias } from "../../utils/alias.utils";
 import BaseActionsExt from "./base.actions.ext";
 import mapKeysUtils from "../../utils/mapKeys.utils";
 import routesUtils from "../../utils/routes.utils";
+import { Utils } from "../../types/utils.type";
 
 class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPage> {
+    
+    waitForUrl(route: Utils.Routes) {
+        cy.url().should("include", route);
+        return this;
+    }
+
     submitSaveChangesModal(saveChanges = true): NavigationSectionActions {
         cy.get("body").then($body => {
             if ($body.text().includes("You have unsaved changes")) {
@@ -224,8 +231,8 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         this.clickIncomeApproachButton()
             .clickCommercialMenuIfClosed()
             .clickCommercialRentRollButton()
-            .submitSaveChangesModal();
-        // cy.url().should("include", routesUtils.commercial.inPlaceRentRoll);
+            .submitSaveChangesModal()
+            .waitForUrl(routesUtils.commercialInPlaceRentRoll);
         return this;
     }
 
@@ -238,7 +245,8 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
     navigateToPropertySummary(): NavigationSectionActions {
         this.clickPropertyButton()
             .clickSummaryButton()
-            .submitSaveChangesModal();
+            .submitSaveChangesModal()
+            .waitForUrl(routesUtils.propertySummary);
         return this;
     }
 
@@ -414,7 +422,8 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
     navigateToCommercialUnits(): NavigationSectionActions {
         this.clickPropertyButton()
             .clickCommercialUnits()
-            .submitSaveChangesModal();
+            .submitSaveChangesModal()
+            .waitForUrl(routesUtils.propertyCommercialUnits);
         return this;
     }
 

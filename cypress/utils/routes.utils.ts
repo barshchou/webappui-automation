@@ -1,5 +1,7 @@
-export default {
-    commercial:{
-        inPlaceRentRoll:"/commercial-rent-roll"
-    }
-};
+const routes =  {
+    commercialInPlaceRentRoll:"/commercial-rent-roll",
+    propertySummary: "/property-summary",
+    propertyCommercialUnits:"/commercial-units"
+} as const;
+
+export default routes;
