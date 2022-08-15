@@ -154,7 +154,7 @@ class FindCompsPage extends BasePage {
     }
 
     get resetAllButton() {
-        return cy.contains('RESET ALL');
+        return cy.get('[data-qa="reset-all-btn"]');
     }
 
     get loadingModalSpinner() {
