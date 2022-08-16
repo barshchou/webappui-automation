@@ -246,7 +246,4 @@ export namespace BoweryReports {
         type: BoweryReports.DateType,
         date: string
     }
-
-    export type LetterOfTransmittalSections = typeof Enums.LETTER_SECTIONS[KeyInfo.LetterOfTransmittalSections]
-    export type SWOTAnalysisSections = typeof Enums.SWOT_SECTIONS[KeyInfo.SWOTAnalysisSections]
 }

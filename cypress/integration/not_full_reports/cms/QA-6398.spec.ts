@@ -15,8 +15,7 @@ conditionalDescribe("Verify sidebar navigation in the CMS page",
                         - edit-default-swot-analysis
                         - report-text-edit`);
             loginAction(testData.webContentEditorUsername, testData.webContentEditorPassword);
-            launchDarklyApi.setFeatureFlagForUser(testData.cmsNavigationFlagKey, testData.featureFlagEnable)
-                .setFeatureFlagForUser(testData.reportTextEditorFlagKey, testData.featureFlagEnable)
+            launchDarklyApi.setFeatureFlagForUser(testData.reportTextEditorFlagKey, testData.featureFlagEnable)
                 .setFeatureFlagForUser(testData.swotAnalysisFlagKey, testData.featureFlagEnable);
             cy.reload();
                 
@@ -38,7 +37,6 @@ conditionalDescribe("Verify sidebar navigation in the CMS page",
                 .and("have.text", _CmsTitle.INCOME_CAPITALIZATION_APPROACH);
 
             cy.stepInfo(`4. Remove feature flag and log out`);
-            launchDarklyApi.removeUserTarget(testData.cmsNavigationFlagKey);
             launchDarklyApi.removeUserTarget(testData.reportTextEditorFlagKey);
             launchDarklyApi.removeUserTarget(testData.swotAnalysisFlagKey);
             _NavigationSection.logout();
