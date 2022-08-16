@@ -3,7 +3,10 @@ import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { Property } from "../../../../actions"; 
 
-// skipped until data-qa attributes will be added
+/*
+ *  [QA-6587] Add data-qa to Property -> Commercial Units -> Upload Image section
+ *  Skipped until data-qa attributes will be added
+ */
 describe.skip("Verify the functionality of the Image upload to the Interior and Exterior Images sections",
     { tags:[ "@property", "@commercial_units" ] },  () => {
         
@@ -25,6 +28,7 @@ describe.skip("Verify the functionality of the Image upload to the Interior and 
             # Verify that several images can be uploaded to the Exterior Images.
             # Verify the uploaded image can be rotated.
         `);
+            cy.pause();
             testData.imagesType.forEach((images, index) => {
                 cy.stepInfo(`# Verify that several images can be uploaded to the ${images}.`);
                 testData.inputType.forEach(inputMethod => {

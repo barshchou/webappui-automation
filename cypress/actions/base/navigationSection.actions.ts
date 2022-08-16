@@ -737,7 +737,7 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         this.clickCommercialMenuIfClosed();
         this.clickCommercialStabRentRollButton()
             .submitSaveChangesModal()
-            .waitForUrl(routesUtils.сommercialStabilizedRentRoll);
+            .waitForUrl(routesUtils.commercialStabilizedRentRoll);
         
         /*
          * since we're working in same forms of final form component
