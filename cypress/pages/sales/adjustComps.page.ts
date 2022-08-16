@@ -160,6 +160,10 @@ class AdjustCompsPage extends BasePage {
     get cellCompHeader() {
         return cy.get('[data-qa="sales-adjustment-grid-header-row"] [data-qa="comp-header-cell"]', { timeout: 60000 });
     }
+
+    get getOtherAdjustmentSF() {
+        return cy.get(`[data-qa='SF']`);
+    }
 }
 
 export default new AdjustCompsPage();
