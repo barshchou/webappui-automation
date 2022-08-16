@@ -11,7 +11,7 @@ describe("Validation of Market Values Amount and Per SF for AS IS reports",
             cy.stepInfo(`1. Set feature flag and create report`);
             launchDarklyApi.setFeatureFlagForUser(testData.featureFlagKey, testData.onFeatureFlag);
             createReport(testData.reportCreationData);
-
+ 
             cy.stepInfo(`2. Set square foot analysis and value for it; 
                         set commercial and residential units; 
                         set commercial units SF`);

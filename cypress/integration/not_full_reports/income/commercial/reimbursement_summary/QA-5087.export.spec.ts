@@ -5,7 +5,7 @@ import testData from "../../../../../fixtures/not_full_reports/income/commercial
 
 describe(`Verify exported report: Change export schemas and templates to enable combined utilities expenses`,
     { tags: [ "@income", "@expense_forecast", "@reimbursement_summary", "@check_export" ] }, () => {
-
+ 
         it(`[QA-5087] User changes to Broken Out utilities -> verify expense reimbursements non existence`, () => {
             cy.stepInfo(`Preconditions: 1. Create a mixed-use report and add commercial units`);
             createReport(testData.reportCreationData);

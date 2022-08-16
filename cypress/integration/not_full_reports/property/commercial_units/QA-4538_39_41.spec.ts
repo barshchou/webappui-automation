@@ -8,7 +8,7 @@ describe("[Property > Commercial Units > Commercial Unit SF] Commercial Units pa
     { tags:[ "@property", "@commercial_units" ] }, () => {
         before("Login, create report", () => {
             createReport(testData.reportCreationData);
-
+ 
             cy.stepInfo("1. Proceed to the Property > Commercial Units page.");
             _NavigationSection.navigateToPropertySummary();
             Property._Summary.enterNumberOfCommercialUnits(testData.numberOfCommercialUnits);
