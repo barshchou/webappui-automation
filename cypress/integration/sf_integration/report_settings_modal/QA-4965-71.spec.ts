@@ -7,22 +7,29 @@ import launchDarklyApi from "../../../api/launchDarkly.api";
 describe("Verify pre-fill radios from SF", 
     { tags: [ "@report_settings_modal", "@salesforce" ] }, () => {
 
-        beforeEach(() => {
-            cy.stepInfo("1. Login in app");
+        before(() => {
+            cy.log("1 Set feature flag");
+            launchDarklyApi.setFeatureFlagForUser(testData.featureFlagKey, testData.onFeatureFlag);
+
+            cy.stepInfo("2. Login in app");
             loginAction();
 
-            cy.stepInfo("2. Fill basic inputs");
+            cy.stepInfo("3. Fill basic inputs");
             _HomePage.clickNewReportButton()
                 .enterAddressToSearch(testData.address)
                 .clickSubmitButton()
                 .clickToSearchResultRow()
                 .clickSubmitButton();
+
+            cy.saveLocalStorage();
+        });
+
+        beforeEach(() => {
+            cy.restoreLocalStorage();
+            _HomePage.Page.reportNumberInput.clear();
         });
 
         it("[QA-4965]", () => {
-            cy.stepInfo("3. Set feature flag");
-            launchDarklyApi.setFeatureFlagForUser(testData.featureFlagKey, testData.onFeatureFlag);
-
             cy.stepInfo("4. Proceed to the WebApp and paste the number or enter manually in the Bowery Job # field");
             _HomePage.enterReportNumber(testData.sfJobs.withFreddieMac);
             
