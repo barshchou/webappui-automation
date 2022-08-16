@@ -50,5 +50,6 @@ export enum Tag {
     stabilized_rent_roll_summary = "@stabilized_rent_roll_summary",
     final = "@final",
     swot_analysis = "@swot_analysis",
-    cms = "@cms"
+    cms = "@cms",
+    unit_inspection= "@unit_inspection"
 }
