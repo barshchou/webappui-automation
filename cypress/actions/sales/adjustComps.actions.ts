@@ -316,6 +316,19 @@ class AdjustCompsActions extends BaseActionsExt<typeof adjustCompsPage> {
         });
         return this;
     }
+
+    verifyExpandMarketAdjustmentPricePerSF(calculationUnit: BoweryReports.SalesAdjustmentGrid.CalculationUnits, 
+        area: number): AdjustCompsActions {
+        this.checkCalculationUnitsRadio(calculationUnit);
+        adjustCompsPage.getExpandMarketAdjustmentSubjectRow("Sale Price").invoke("text").then(salePrice => {
+            const salePriceNumber = getNumberFromDollarNumberWithCommas(salePrice);
+            const pricePerSf = salePriceNumber / area;
+            const pricePerSfAdjusted = (Math.round(pricePerSf * 1000)) / 1000;
+            const pricePerSfToBe = `$${numberWithCommas(pricePerSfAdjusted.toFixed(2))}`;
+            adjustCompsPage.getExpandMarketAdjustmentSubjectRow("Price per SF").should("have.text", pricePerSfToBe);
+        });
+        return this;
+    }
 }
 
 export default new AdjustCompsActions(adjustCompsPage);
