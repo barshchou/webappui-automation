@@ -1,13 +1,7 @@
 import BasePage from "../base/base.page";
 
 class LetterOfTransmittalPage extends BasePage {
-    letterOfTransmittalDiscussionSection(sectionName: string) {
-        return cy.xpath(`//h6[.='${sectionName}']//following::div[@data-slate-editor][1]`);
-    }
 
-    letterOfTransmittalModifiedLabel(sectionName: string) {
-        return cy.xpath(`//h6[.='${sectionName}']/following::*[@ui='indicator'][1]`);
-    }
 }
 
 export default new LetterOfTransmittalPage();

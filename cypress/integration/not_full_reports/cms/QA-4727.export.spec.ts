@@ -5,7 +5,7 @@ import { _NavigationSection } from '../../../actions/base';
 import testData from "../../../fixtures/not_full_reports/cms/QA-4727.fixture";
 import launchDarklyApi from '../../../api/launchDarkly.api';
 import { conditionalDescribe } from "../../checkIsProd.utils";
-import { _CmsBaseActions, _LetterOfTransmittal } from '../../../actions/cms';
+import { _CmsBaseActions } from '../../../actions/cms';
 
 conditionalDescribe("[QA-4727] Verify possibility to edit text", 
     { tags:[ "@cms", "@check_export", "@feature_flag" ] }, () => {
@@ -21,7 +21,7 @@ conditionalDescribe("[QA-4727] Verify possibility to edit text",
             _CmsBaseActions.openLetterOfTransmittalPage();
 
             cy.stepInfo(`2. Make some changes with any text item → 'Modified' tag is shown above field`);
-            _LetterOfTransmittal.updateSectionDiscussion(testData.sectionName, 
+            _CmsBaseActions.updateSectionDiscussion(testData.sectionName, 
                 testData.textUpdate, true)
                 .verifyModifiedLabel(testData.sectionName);
 
@@ -42,8 +42,8 @@ conditionalDescribe("[QA-4727] Verify possibility to edit text",
 
             cy.stepInfo('5. Revert commentary to original');
             _NavigationSection.navigateToContentManagementSystem();
-            _CmsBaseActions.openLetterOfTransmittalPage();
-            _LetterOfTransmittal.revertSectionToOriginal(testData.sectionName);
+            _CmsBaseActions.openLetterOfTransmittalPage()
+                .revertSectionToOriginal(testData.sectionName);
         });
 
         it('Check export', () => {

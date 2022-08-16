@@ -5,7 +5,7 @@ import { _NavigationSection } from '../../../actions/base';
 import testData from "../../../fixtures/not_full_reports/cms/QA-5381.fixture";
 import launchDarklyApi from '../../../api/launchDarkly.api';
 import { conditionalDescribe } from "../../checkIsProd.utils";
-import { _Certification, _CmsBaseActions } from '../../../actions/cms';
+import { _CmsBaseActions } from '../../../actions/cms';
 
 conditionalDescribe("Verify the page and fields available on it", 
     { tags:[ "@cms", "@check_export", "@feature_flag" ] }, () => {
@@ -21,7 +21,7 @@ conditionalDescribe("Verify the page and fields available on it",
 
             cy.stepInfo(`2. Verify fields are listed in the section`);
             testData.certificationTextsFixture.forEach(section => {
-                _Certification.verifyCertificationBulletsText(section.sectionName, section.languages);
+                _CmsBaseActions.verifyDiscussionText(section.sectionName, section.languages);
             });
 
             cy.stepInfo(`3. Verify the same text on Preview & Edit > Certification page`);

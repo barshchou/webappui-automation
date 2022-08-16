@@ -1,6 +1,5 @@
 import swotAnalysisPage from "../../pages/final/swotAnalysis.page";
 import { _saveDataInFile } from "../../support/commands";
-import { ContentManagementSystem } from "../../types/boweryReports.type";
 import BaseActionsExt from "../base/base.actions.ext";
 
 class SwotAnalysisActions extends BaseActionsExt<typeof swotAnalysisPage> {
@@ -22,7 +21,7 @@ class SwotAnalysisActions extends BaseActionsExt<typeof swotAnalysisPage> {
      * @param fileName File name to write file
      */
     verifyTextSection(
-        sectionName: ContentManagementSystem.SWOTAnalysisSections, 
+        sectionName: string, 
         textToBe: Array<string>, 
         fileName = "section-text.txt"): SwotAnalysisActions {
         swotAnalysisPage.getSectionTexts(sectionName).then($textarea => {

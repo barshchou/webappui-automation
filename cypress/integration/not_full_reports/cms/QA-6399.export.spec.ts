@@ -5,7 +5,7 @@ import { _NavigationSection } from '../../../actions/base';
 import testData from "../../../fixtures/not_full_reports/cms/QA-6399.fixture";
 import launchDarklyApi from '../../../api/launchDarkly.api';
 import { conditionalDescribe } from "../../checkIsProd.utils";
-import { _CmsBaseActions, _LetterOfTransmittal } from '../../../actions/cms';
+import { _CmsBaseActions } from '../../../actions/cms';
 
 conditionalDescribe("Verify page and possibility to edit text", 
     { tags:[ "@cms", "@check_export", "@feature_flag" ] }, () => {
@@ -21,7 +21,7 @@ conditionalDescribe("Verify page and possibility to edit text",
 
             cy.stepInfo(`2. Verify languages of sections`);
             testData.letterTextsFixture.forEach(section => {
-                _LetterOfTransmittal.verifyLetterOfTransmittalText(section.sectionName, section.language);
+                _CmsBaseActions.verifyDiscussionText(section.sectionName, section.language);
             });
 
             cy.stepInfo(`3. Open any report > Letter of Transmittal page`);

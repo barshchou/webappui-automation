@@ -5,7 +5,7 @@ import { _NavigationSection } from '../../../actions/base';
 import testData from "../../../fixtures/not_full_reports/cms/QA-5382.fixture";
 import launchDarklyApi from '../../../api/launchDarkly.api';
 import { conditionalDescribe } from "../../checkIsProd.utils";
-import { _Certification, _CmsBaseActions } from '../../../actions/cms';
+import { _CmsBaseActions } from '../../../actions/cms';
 
 conditionalDescribe("Verify possibility to edit text", 
     { tags:[ "@cms", "@check_export", "@feature_flag" ] }, () => {
@@ -20,7 +20,7 @@ conditionalDescribe("Verify possibility to edit text",
             _CmsBaseActions.openCertificationPage();
 
             cy.stepInfo(`2.  Make some changes with any text item → 'Modified' tag is shown above field`);
-            _Certification.updateSectionDiscussion(testData.sectionName, 
+            _CmsBaseActions.updateSectionDiscussion(testData.sectionName, 
                 testData.textUpdate, true);
 
             cy.stepInfo(`3. Verify the same text on Preview & Edit > Certification page`);
@@ -36,8 +36,8 @@ conditionalDescribe("Verify possibility to edit text",
 
             cy.stepInfo('5. Revert commentary to original');
             _NavigationSection.navigateToContentManagementSystem();
-            _CmsBaseActions.openCertificationPage();
-            _Certification.revertSectionToOriginal(testData.sectionName);
+            _CmsBaseActions.openCertificationPage()
+                .revertSectionToOriginal(testData.sectionName);
         });
 
         it(`Check export`, () => {
