@@ -1,7 +1,7 @@
 import testData from "../../../../fixtures/not_full_reports/final/unit_inspection/QA-4067.fixture";
 import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
-import { Income, ReviewExport } from "../../../../actions";
+import { Final, Income, ReviewExport } from "../../../../actions";
 
 
 describe("The default status is 'Average' on the Condition column on the Unit Inspection table", 
@@ -20,7 +20,11 @@ describe("The default status is 'Average' on the Condition column on the Unit In
             Income._CommercialManager.InPlaceRentRoll.checkIsInspectedCheckboxByRowNumber()
                 .chooseLeaseStatusByRowNumber(testData.leaseStatus);
 
-            cy.stepInfo("3. Export report");
+            cy.stepInfo("3. Verify default condition in Final > Unit Inspection");
+            _NavigationSection.navigateToUnitInspection();
+            Final._UnitInspection.Page.getConditionValue().should("include.text", testData.defaultValue);
+
+            cy.stepInfo("4. Export report");
             _NavigationSection.openReviewAndExport();
             ReviewExport.generateDocxReport().waitForReportGenerated()
                 .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
@@ -31,7 +35,7 @@ describe("The default status is 'Average' on the Condition column on the Unit In
                 .then(file => {
                     cy.log(<string>file);
                     cy.visit(<string>file);
-                    cy.stepInfo(`4.  proceed to the Inspected Units Summary table > check that the default status 
+                    cy.stepInfo(`5.  proceed to the Inspected Units Summary table > check that the default status 
                                 is "Average" on the Condition column.`);
                   
                     cy.xpath("//*[contains(text(), 'Inspected Units Summary')]/following::table[1]").children()
