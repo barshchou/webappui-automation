@@ -7,7 +7,7 @@ import { BoweryReports } from "../../../../types/boweryReports.type";
 describe("Calculation of Market Condition adjustment", 
     { tags: [ "@adjust_comps", "@sales" ] }, () => {
         testData.reportFixture.forEach(reportType => {
-            it(`${reportType.testId}`, () => {
+            it(`${reportType.testId} ${reportType.reportCreationData.incomeValue}`, () => {
                 cy.stepInfo(`Precondition: Create a report`);
                 createReport(reportType.reportCreationData);
     
