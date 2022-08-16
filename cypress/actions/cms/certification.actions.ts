@@ -1,17 +1,15 @@
 import BaseActionsExt from "../base/base.actions.ext";
 import certificationPage from "../../pages/cms/certification.page";
-import { ContentManagementSystem } from '../../types/boweryReports.type';
 
 class CertificationActions extends BaseActionsExt<typeof certificationPage> {
-    verifyCertificationBulletsText(sectionName: ContentManagementSystem.DiscussionSectionName, expectedText: string): 
+    verifyCertificationBulletsText(sectionName: string, expectedText: string): 
     CertificationActions {
         certificationPage.certificationDiscussionSection(sectionName).invoke('text')
             .should('deep.equal', expectedText);
         return this;
     }
 
-    updateSectionDiscussion(sectionName: ContentManagementSystem.DiscussionSectionName, 
-        text: string, clear = false): CertificationActions {
+    updateSectionDiscussion(sectionName: string, text: string, clear = false): CertificationActions {
         this.clickSectionForEdit(sectionName)
             .editSectionDiscussionText(sectionName, text, clear);
 
@@ -23,15 +21,13 @@ class CertificationActions extends BaseActionsExt<typeof certificationPage> {
         return this;
     }
 
-    clickSectionForEdit(sectionName: ContentManagementSystem.DiscussionSectionName): 
-    CertificationActions {
+    clickSectionForEdit(sectionName: string): CertificationActions {
         certificationPage.certificationDiscussionSection(sectionName)
             .scrollIntoView().realClick();
         return this;
     }
 
-    editSectionDiscussionText(sectionName: ContentManagementSystem.DiscussionSectionName, 
-        text: string, clear = false): CertificationActions {
+    editSectionDiscussionText(sectionName: string, text: string, clear = false): CertificationActions {
         if (clear) { 
             this.clickSectionForEdit(sectionName);
             certificationPage.certificationDiscussionSection(sectionName).clear(); 

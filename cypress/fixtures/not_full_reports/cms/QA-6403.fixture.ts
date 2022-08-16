@@ -1,5 +1,4 @@
 import Enums from "../../../enums/enums";
-import { ContentManagementSystem } from "../../../types/boweryReports.type";
 import ReportDataCreator from "../../data_creator/reportData.creator";
 
 const reportCreationFixture = () => {
@@ -8,18 +7,10 @@ const reportCreationFixture = () => {
     });
 };
 
-const _description1: ContentManagementSystem.DiscussionSectionName = {
-    sectionName: Enums.INCOME_CAPITALIZATION_APPROACH_SECTIONS.description1
-};
-
-const _description2: ContentManagementSystem.DiscussionSectionName = {
-    sectionName: Enums.INCOME_CAPITALIZATION_APPROACH_SECTIONS.description2
-};
-
 const _incomeCapitalizationApproachTextsFixture = () => {
     return [
         {
-            sectionName: _description1,
+            sectionName: Enums.INCOME_CAPITALIZATION_APPROACH_SECTIONS.description1,
             languages: 
                 "In the Income Capitalization Approach, a property's capacity to generate future benefits is " + 
                 "analyzed; the forecasted income is capitalized into an indication of present value. Definitions " + 
@@ -27,7 +18,7 @@ const _incomeCapitalizationApproachTextsFixture = () => {
                 "Glossary of Terms within the Addenda."
         },
         {
-            sectionName: _description2,
+            sectionName: Enums.INCOME_CAPITALIZATION_APPROACH_SECTIONS.description2,
             languages: 
                 "The Income Capitalization Approach supports two methodologies: direct and yield capitalization. " + 
                 "Investors in the local market typically utilize a direct capitalization when making investment " + 

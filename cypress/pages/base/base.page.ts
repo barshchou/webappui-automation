@@ -1,5 +1,3 @@
-import { ContentManagementSystem } from "../../types/boweryReports.type";
-
 export default class BasePage {
     open(url = "/") {
         cy.visit(url);
@@ -83,7 +81,7 @@ export default class BasePage {
         }
     }
 
-    formCommentTextBox(name: string | ContentManagementSystem.DiscussionSectionName) {
+    formCommentTextBox(name: string) {
         return cy.xpath(`//*[.='${name}']//following::*[@data-slate-editor][1]`);
     }
 }

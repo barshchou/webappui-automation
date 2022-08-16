@@ -247,16 +247,3 @@ export namespace BoweryReports {
         date: string
     }
 }
-
-export namespace ContentManagementSystem {
-    export type LetterOfTransmittalSections = typeof Enums.LETTER_SECTIONS[KeyInfo.LetterOfTransmittalSections]
-    export type SWOTAnalysisSections = typeof Enums.SWOT_SECTIONS[KeyInfo.SWOTAnalysisSections]
-    export type IncomeCapitalizationApproachSections = 
-        typeof Enums.INCOME_CAPITALIZATION_APPROACH_SECTIONS[KeyInfo.IncomeCapitalizationApproachSections]
-    
-    export type CertificationSections = typeof Enums.CERTIFICATION_SECTIONS[KeyInfo.CertificationSections]
-    export type DiscussionSectionName = {
-        sectionName: LetterOfTransmittalSections | SWOTAnalysisSections 
-        | IncomeCapitalizationApproachSections | CertificationSections
-    }
-}

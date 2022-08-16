@@ -7,7 +7,6 @@
  * Use this class for QA-5043
  */
 import BasePage from "../../pages/base/base.page";
-import { ContentManagementSystem } from "../../types/boweryReports.type";
 import BaseActions from "./base.actions";
 
 export default class BaseActionsExt<T extends BasePage> extends BaseActions {
@@ -121,7 +120,7 @@ export default class BaseActionsExt<T extends BasePage> extends BaseActions {
         return this;
     }
 
-    revertSectionToOriginal(sectionName: ContentManagementSystem.DiscussionSectionName): this {
+    revertSectionToOriginal(sectionName: string): this {
         this.Page.formCommentTextBox(sectionName).scrollIntoView().realClick();
         this.Page.formCommentTextBox(sectionName).type(`{ESC}`);
         this.Page.formCommentTextBox(sectionName).focus();

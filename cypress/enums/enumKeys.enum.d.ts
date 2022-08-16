@@ -59,5 +59,5 @@ export type DateType = keyof typeof Enums.DATE_TYPE
 export type InterestAppraised = keyof typeof Enums.INTEREST_APPRAISED
 export type LetterOfTransmittalSections = keyof typeof Enums.LETTER_SECTIONS
 export type SWOTAnalysisSections = keyof typeof Enums.SWOT_SECTIONS
-export type IncomeCapitalizationApproachSections = keyof typeof Enums.INCOME_CAPITALIZATION_APPROACH_SECTIONS
-export type CertificationSections = keyof typeof Enums.CERTIFICATION_SECTIONS
+export type IncomeCapitalizationApproachSectionsKeys = keyof typeof Enums.INCOME_CAPITALIZATION_APPROACH_SECTIONS
+export type CertificationSectionsKeys = keyof typeof Enums.CERTIFICATION_SECTIONS
