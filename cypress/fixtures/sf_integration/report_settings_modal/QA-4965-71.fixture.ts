@@ -1,4 +1,4 @@
-import Enums from "../../../../enums/enums";
+import Enums from "../../../enums/enums";
 
 export default {
     address: "462 1st Avenue",

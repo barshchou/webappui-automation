@@ -1,7 +1,7 @@
-import testData from "../../../../fixtures/not_full_reports/sf_integration/report_settings_modal/QA-4965-71.fixture";
-import { loginAction } from "../../../../actions/base/baseTest.actions";
-import { _HomePage } from "../../../../actions/base";
-import launchDarklyApi from "../../../../api/launchDarkly.api";
+import testData from "../../../fixtures/sf_integration/report_settings_modal/QA-4965-71.fixture";
+import { loginAction } from "../../../actions/base/baseTest.actions";
+import { _HomePage } from "../../../actions/base";
+import launchDarklyApi from "../../../api/launchDarkly.api";
 
 
 describe("Verify pre-fill radios from SF", 
