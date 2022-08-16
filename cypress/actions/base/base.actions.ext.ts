@@ -119,4 +119,14 @@ export default class BaseActionsExt<T extends BasePage> extends BaseActions {
         this.Page.successModal.should('not.be.visible');
         return this;
     }
+
+    revertSectionToOriginal(sectionName: string): this {
+        this.Page.formCommentTextBox(sectionName).scrollIntoView().realClick();
+        this.Page.formCommentTextBox(sectionName).type(`{ESC}`);
+        this.Page.formCommentTextBox(sectionName).focus();
+        this.Page.formRevertToOriginalBtn().click();
+        this.Page.formYesRevertBtn.click();
+        this.saveCmsSettings();
+        return this;
+    }
 }
