@@ -51,5 +51,6 @@ export enum Tag {
     final = "@final",
     swot_analysis = "@swot_analysis",
     cms = "@cms",
-    unit_inspection= "@unit_inspection"
+    unit_inspection = "@unit_inspection",
+    source_information = "@source_information"
 }
