@@ -7,6 +7,7 @@ on:
 jobs:
   Regression-run-on-staging:
     runs-on: ubuntu-latest
+    timeout-minutes: 180
     container: cypress/browsers:node16.13.2-chrome100-ff98
     permissions:
       id-token: write
@@ -24,7 +25,7 @@ jobs:
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
           url: staging
-          spec_file: cypress/integration/not_full_reports/**/*.spec.ts
+          spec_file: cypress/integration/not_full_reports/**
           tags: grep=,grepTags=-@smoke,burn=
           record_key: ${{ secrets.CURRENTS_RECORD_KEY }}
         env:

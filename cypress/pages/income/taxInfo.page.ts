@@ -125,8 +125,28 @@ class TaxInfoPage extends BasePage {
         return cy.get("[data-qa^='taxSummaryDiscussion.commentary'],[name='taxSummaryDiscussion.commentary']");
     }
 
-    getAddNewRowButton(name = "Add Additional Tax Rate") {
-        return cy.xpath(`//button/span[contains(text(), '${name}')]`);
+    getTaxLiabilityRowValue(name: string) {
+        return cy.xpath(`//*[@role='presentation']//*[contains(text(), '${name}')]/following-sibling::*[1]`);
+    }
+
+    getTaxLiabilityRowItem(name: string) { 
+        return cy.xpath(`//*[@role='presentation']//*[contains(text(), '${name}')]`);
+    }
+
+    getTaxLiabilityRowAction(name: string) {
+        return cy.xpath(`//*[@role='presentation']//*[contains(text(), '${name}')]/following-sibling::*[2]`);
+    }
+
+    getSummaryRowValue(name: string, rowNumber = 0) { 
+        return cy.get(`[data-qa='Current-${name}-value-cell']`).eq(rowNumber); 
+    }
+
+    get addAdditionalTaxRate() {
+        return cy.xpath("//button/span[contains(text(), 'Add Additional Tax Rate')]");
+    }
+
+    get addSpecialAssessment() {
+        return cy.xpath("//button/span[contains(text(), 'Add Special Assessment')]");
     }
 }
 

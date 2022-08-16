@@ -27,7 +27,7 @@ export default class BasePage {
      * Same as `CloseIcon` but inside shadow-dom
      */
     get CloseIconShadowDom() {
-        return cy.get('[aria-label="Close"]', { includeShadowDom:true });
+        return cy.get('[aria-label="Close"]');
     }
 
     get formYesRevertBtn() {
@@ -43,6 +43,10 @@ export default class BasePage {
     get selectorDraggableElement() {
         return '[data-react-beautiful-dnd-drag-handle="0"]';
     } 
+
+    get saveButtonGlobal() { return cy.xpath("//button[@type='submit']"); }
+
+    get successModal() { return cy.xpath("//*[contains(text(), 'Success')]"); }
 
     formEditBtn(index = 0) {
         return cy.xpath('//*[@data-icon="pencil"]//ancestor::button')
@@ -75,5 +79,9 @@ export default class BasePage {
         } else {
             return cy.xpath("//span[contains(text(), 'Modified')]");
         }
+    }
+
+    formCommentTextBox(name: string) {
+        return cy.xpath(`//*[.='${name}']//following::*[@data-slate-editor][1]`);
     }
 }

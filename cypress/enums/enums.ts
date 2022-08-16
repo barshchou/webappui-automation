@@ -1,3 +1,4 @@
+import * as compplex from "./compplex";
 import leaseDateName from "./lease/leaseDateName.enum";
 import leaseStatus from "./lease/leaseStatus.enum";
 import imageType from "./elements/imageType.enum";
@@ -58,12 +59,30 @@ import expensesForecastCardNamesEnum from "./expense/expensesForecastCardNames.e
 import reimbursementColumnsIdEnum from "./reimbursementColumnsId.enum";
 import calculationUnitsEnum from "./adjustComps/calculationUnits.enum";
 import calculationTypesEnum from "./commercial/rent_reconciliation/calculationTypes.enum";
+import salePeriodValuesEnum from "./findComps/salePeriodValues.enum";
+import sortValues from "./findComps/sortValues.enum";
+import conditionValues from "./findComps/propertyInformation/conditionValues.enum";
+import comparableTypes from "./findComps/propertyInformation/comparableType.enum";
+import saleStatuses from "./findComps/saleInformation/saleStatuses.enum";
 import fileSelectionNamesEnum from "./property/fileSelectionNames.enum";
 import discussionNamesEnum from "./property/discussionNames.enum";
 import salesAdjustmentGridDiscussionsEnum from "./adjustComps/salesAdjustmentGridDiscussions.enum";
 import salesAdjustmentGridRowsEnum from "./adjustComps/salesAdjustmentGridRows.enum";
 import basisSquareFootAnalysisEnum from "./property/basisSquareFootAnalysis.enum";
+import introductionTextboxNamesEnum from "./textboxNames/introductionTextboxNames.enum";
+import pagesTextboxNamesEnum from "./textboxNames/pagesTextboxNames.enum";
 import basisSquareFootAnalysisTextsEnum from "./sales/value_conclusion/basisSquareFootAnalysisTexts.enum";
+import renovationTypeEnum from "./property/renovationType.enum";
+import valueConclusionEnum from "./property/valueConclusion.enum";
+import unitIncomeTypeEnum from "./unit/unitIncomeType.enum";
+import rentLossTypeEnum from "./rentLossType.enum";
+import dateTypeEnum from "./keyInfo/dateType.enum";
+import interestAppraisedEnum from "./keyInfo/interestAppraised.enum";
+import letterOfTransmittalEnum from "./cms/letterOfTransmittal.enum";
+import swotAnalysisEnum from "./cms/swotAnalysis.enum";
+import salesforceJobsEnum from "./salesforceJobs.enum";
+import incomeCapitalizationApproachEnum from "./cms/incomeCapitalizationApproach.enum";
+import certificationEnum from "./cms/certification.enum";
 
 export default {
     TEMPLATE_TYPE: templateTypesEnum,
@@ -126,10 +145,29 @@ export default {
     REIMBURSEMENT_COLUMN_ID: reimbursementColumnsIdEnum,
     CALCULATION_UNITS: calculationUnitsEnum,
     CALCULATION_TYPE: calculationTypesEnum,
+    SALE_PERIOD_VALUES: salePeriodValuesEnum,
+    SORT_VALUES: sortValues,
+    CONDITION_VALUES: conditionValues,
+    COMPARABLE_TYPES: comparableTypes,
+    SALE_STATUSES: saleStatuses,
     FILE_SELECTION_NAMES: fileSelectionNamesEnum,
     PROPERTY_DISCUSSION_NAMES: discussionNamesEnum,
     SALES_ADJUSTMENT_GRID_DISCUSSIONS: salesAdjustmentGridDiscussionsEnum,
     SALES_ADJUSTMENT_GRID_ROWS: salesAdjustmentGridRowsEnum,
     BASIS_SQUARE_FOOT_ANALYSIS: basisSquareFootAnalysisEnum,
-    BASIS_SQUARE_FOOT_ANALYSIS_TEXTS: basisSquareFootAnalysisTextsEnum
+    INTRODUCTION_TEXTBOX_NAMES: introductionTextboxNamesEnum,
+    PAGES_TEXTBOX_NAMES: pagesTextboxNamesEnum,
+    BASIS_SQUARE_FOOT_ANALYSIS_TEXTS: basisSquareFootAnalysisTextsEnum,
+    COMPPLEX_ENUM: compplex,
+    RENOVATION_TYPE: renovationTypeEnum,
+    VALUE_CONCLUSION_NAME: valueConclusionEnum,
+    UNIT_INCOME_TYPE: unitIncomeTypeEnum,
+    RENT_LOSS_TYPE: rentLossTypeEnum,
+    DATE_TYPE: dateTypeEnum,
+    INTEREST_APPRAISED: interestAppraisedEnum,
+    LETTER_SECTIONS: letterOfTransmittalEnum,
+    SWOT_SECTIONS: swotAnalysisEnum,
+    SALESFORCE_JOBS: salesforceJobsEnum,
+    INCOME_CAPITALIZATION_APPROACH_SECTIONS: incomeCapitalizationApproachEnum,
+    CERTIFICATION_SECTIONS: certificationEnum
 };

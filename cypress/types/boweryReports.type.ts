@@ -219,9 +219,13 @@ export namespace BoweryReports {
     export type BondTickers = typeof Enums.BOND_TYPES[KeyInfo.BondTypes]
     export type BondTypes = keyof typeof  Enums.BOND_TYPES
 	export type ExpenseCardNames = typeof Enums.EXPENSES_CARD_NAMES[KeyInfo.ExpenseCardName]
-	
-    export namespace SalesComps {
-        export type SelectedComparablesSortType = "Custom" | "Date Sold"
+
+    export namespace FindComps {
+        export type SalePeriodValues = typeof Enums.SALE_PERIOD_VALUES[KeyInfo.SalePeriodValues]
+        export type SelectedComparablesSortType = typeof Enums.SORT_VALUES[KeyInfo.SortValues]
+        export type ConditionValueType = typeof Enums.CONDITION_VALUES[KeyInfo.ConditionValues]
+        export type ComparableTypes = typeof Enums.COMPARABLE_TYPES[KeyInfo.ComparableTypes]
+        export type SaleStatusType = typeof Enums.SALE_STATUSES[KeyInfo.SaleStatuses]
     }
     
     export type CalculationType = typeof Enums.CALCULATION_TYPE[KeyInfo.CalculationType]
@@ -231,4 +235,15 @@ export namespace BoweryReports {
     export type BasisSquareFootAnalysis = typeof Enums.BASIS_SQUARE_FOOT_ANALYSIS[KeyInfo.BasisSquareFootAnalysis]
     export type BasisSquareFootAnalysisTexts =
         typeof Enums.BASIS_SQUARE_FOOT_ANALYSIS_TEXTS[KeyInfo.BasisSquareFootAnalysisTexts]
+    export type RenovationType = typeof Enums.RENOVATION_TYPE[KeyInfo.RenovationType]
+    export type ValueConclusionName = typeof Enums.VALUE_CONCLUSION_NAME[KeyInfo.ValueConclusionName]
+    export type ValueConclusionKeys = keyof typeof Enums.VALUE_CONCLUSION_NAME
+    export type UnitIncomeType = typeof Enums.UNIT_INCOME_TYPE[KeyInfo.UnitIncomeType]
+    export type RentLossType = typeof  Enums.RENT_LOSS_TYPE[KeyInfo.RentLossType]
+    export type DateType = typeof Enums.DATE_TYPE[KeyInfo.DateType]
+
+    export type KeyInfoDateType = {
+        type: BoweryReports.DateType,
+        date: string
+    }
 }

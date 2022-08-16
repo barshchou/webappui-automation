@@ -3,6 +3,7 @@ import { getNumberFromDollarNumberWithCommas, numberWithCommas } from "../../../
 import BaseActionsExt from "../base/base.actions.ext";
 import { Alias } from "../../utils/alias.utils";
 import { BoweryReports } from "../../types/boweryReports.type";
+import enums from "../../enums/enums";
 
 type ForecastItem = BoweryReports.ForecastItem;
 type BuildingDescription = BoweryReports.BuildingDescription;
@@ -149,13 +150,13 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
     }
 
     itemOriginalObj = {
-        waterAndSewer: "waterAndSewer",
-        repairsAndMaintenance: "repairsMaintenance",
-        payrollAndBenefits: "payrollBenefits",
-        generalAndAdministrative: "generalAdministrative",
-        legalAndProfessionalFees: "legalProfessionalFees",
-        management: "managementFees",
-        reserves: "replacementReserves"
+        waterAndSewer: enums.EXPENSE_CELL.waterAndSewer,
+        repairsAndMaintenance: enums.EXPENSE_CELL.repairAndMaintenance,
+        payrollAndBenefits: enums.EXPENSE_CELL.payrollBenefits,
+        generalAndAdministrative: enums.EXPENSE_CELL.generalAndAdministrative,
+        legalAndProfessionalFees: enums.EXPENSE_CELL.legalAndProfessional,
+        management: enums.EXPENSE_CELL.managementFees,
+        reserves: enums.EXPENSE_CELL.replacementsAndReserves
     }
 
     changeStateOfPercentOfEGICheckbox(isToCheck = true): ExpenseForecastActions {
@@ -312,12 +313,12 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
     editExpenseForecastCommentary(newText: string, forecastItem: BoweryReports.ForecastItem, 
         isWithClear = false, index = 1): ExpenseForecastActions {
         let item = this.getItemNameForAverage(forecastItem.name);
-        expenseForecastPage.getExpenseCommentaryEditButton(item, index).click();
+        this.activateTextAreaInput((this.Page.getExpenseCommentary(item,  index)));
         if (isWithClear) {
             expenseForecastPage.getExpenseCommentary(item, index).clear();
         }
         expenseForecastPage.getExpenseCommentary(item, index).type(newText);
-        expenseForecastPage.getExpenseCommentarySaveButton(item, index).click();
+        this.inactivateTextAreaInput();
         expenseForecastPage.getExpenseCommentaryModified(item).should("exist");
         return this;
     }
@@ -325,8 +326,8 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
     revertToOriginalExpenseForecastCommentary(forecastItem: BoweryReports.ForecastItem, 
         index = 1): ExpenseForecastActions {
         let item = this.getItemNameForAverage(forecastItem.name);
-        expenseForecastPage.getExpenseCommentaryEditButton(item, index).click();
-        expenseForecastPage.getExpenseCommentaryRevertToOriginal(item).click();
+        this.activateTextAreaInput((this.Page.getExpenseCommentary(item,  index)));
+        this.Page.getExpenseCommentaryRevertToOriginal(item).click();
         this.verifyProgressBarNotExist();
         expenseForecastPage.formYesRevertBtn.click();
         expenseForecastPage.getExpenseCommentarySaveButton(item, index).click();
