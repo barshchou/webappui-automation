@@ -8,7 +8,6 @@ import "./commands";
 import "cypress-real-events/support";
 import { BoweryAutomation } from "../types/boweryAutomation.type";
 import { evalUrl } from "../utils/env.utils";
-import { Tag } from "../utils/tags.utils";
 import mapKeysUtils from "../utils/mapKeys.utils";
 
 require("cypress-xpath");
@@ -45,10 +44,7 @@ after(() => {
 });
 
 afterEach(() => {
-    // @ts-ignore
-    
-    // ernst: internal command of Cypress, you can access to `Cypress.mocha._mocha.suite` in browser's console
-    if (Cypress.mocha._mocha.suite.suites[0]._testConfig.tags.includes(Tag.check_export)) {
+    if (Cypress.spec.name.includes("export")) {
         if (!Cypress.currentTest.title.includes("Check export")) {
             cy.logNode(`Deleting report in check export spec`);
             cy.deleteApiReport();

@@ -8,7 +8,7 @@ export default {
     numberOfCommercialUnits: 2,
     sherifsTypeValue: "=S",
     foreclosureTypeValue: "=F",
-    verifySherifsListValue: "Sherrif's Sale",
+    verifySherifsListValue: "Sheriff's Sale",
     verifySherifsAreaValue: "The above transaction reflects a Sheriff's sale of the property. " + 
     "Typically in a Sheriff’s sale, the buyer assumes all encumbrances on the site, including any " + 
     "outstanding mortgage amount and legal fees (\"upset costs\"), delinquent taxes and water and " + 

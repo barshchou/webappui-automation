@@ -87,6 +87,11 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         return this;
     }
 
+    clickSourceInformation(): NavigationSectionActions {
+        navigationSectionPage.sourceInformation.click();
+        return this;
+    }
+
     clickUnitInspectionButton(): NavigationSectionActions {
         navigationSectionPage.unitInspectionButton.click();
         return this;
@@ -147,10 +152,23 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         return this;
     }
 
+    clickPropertyHistory(): NavigationSectionActions {
+        navigationSectionPage.propertyHistory.click();
+        return this;
+    }
+
     navigateToUnitInspection(): NavigationSectionActions {
         this.clickSaveButton();
         this.clickFinalButton()
             .clickUnitInspectionButton()
+            .verifyProgressBarNotExist();
+        return this;
+    }
+
+    navigateToSourceInformation(saveChanges = true): NavigationSectionActions {
+        this.clickFinalButton()
+            .clickSourceInformation()
+            .submitSaveChangesModal(saveChanges)
             .verifyProgressBarNotExist();
         return this;
     }
@@ -176,6 +194,13 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         this.clickIncomeApproachButton()
             .clickResidentialMenuIfClosed()
             .clickRentCompsButton()
+            .submitSaveChangesModal();
+        return this;
+    }
+
+    navigateToPropertyHistory(): NavigationSectionActions {
+        this.clickPropertyButton()
+            .clickPropertyHistory()
             .submitSaveChangesModal();
         return this;
     }
@@ -319,6 +344,42 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         return this;
     }
 
+    clickFinalScope(): NavigationSectionActions {
+        navigationSectionPage.finalScope.click();
+        return this;
+    }
+
+    navigateToFinalScope(): NavigationSectionActions {
+        this.clickFinalButton()
+            .clickFinalScope()
+            .submitSaveChangesModal();
+        return this;
+    }
+
+    clickAssumptionsConditions(): NavigationSectionActions {
+        navigationSectionPage.assumptionsConditions.click();
+        return this;
+    }
+
+    navigateToAssumptionsConditions(): NavigationSectionActions {
+        this.clickFinalButton()
+            .clickAssumptionsConditions()
+            .submitSaveChangesModal();
+        return this;
+    }
+
+    clickSWOTAnalysis(): NavigationSectionActions {
+        navigationSectionPage.swotAnalysis.click();
+        return this;
+    }
+
+    navigateToFinalSWOTAnalysis(): NavigationSectionActions {
+        this.clickFinalButton()
+            .clickSWOTAnalysis()
+            .submitSaveChangesModal();
+        return this;
+    }
+
     clickCommercialRentComps(): NavigationSectionActions {
         navigationSectionPage.commercialRentCompsButton.click();
         return this;
@@ -450,6 +511,13 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
     navigateToProfileOrganization(nameLink: string): NavigationSectionActions {
         this.clickProfileOrganization()
             .selectLink(nameLink);
+        return this;
+    }
+
+    navigateToContentManagementSystem(): NavigationSectionActions {
+        this.clickContentManagementSystem()
+            .submitSaveChangesModal()
+            .verifyProgressBarNotExist();
         return this;
     }
 
@@ -674,6 +742,19 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         return this;
     }
 
+    navigateToRenovation(): NavigationSectionActions {
+        this.clickPropertyButton()
+            .clickRenovationButton()
+            .submitSaveChangesModal()
+            .verifyProgressBarNotExist();
+        return this;
+    }
+
+    clickRenovationButton(): NavigationSectionActions {
+        navigationSectionPage.renovationButton.click();
+        return this;
+    }
+
     private clickCommercialMenuIfClosed(): NavigationSectionActions {
         navigationSectionPage.commercialIncomeArrow.then(el => {
             if (!el.hasClass("expanded")) {
@@ -705,6 +786,43 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
             cy.visit(`${baseUrl}/report/${reportId}/${pageRoute}`);
         });
 
+        return this;
+    }
+
+    clickContentManagementSystem(): NavigationSectionActions {
+        navigationSectionPage.contentManagementSystemButton.click();
+        return this;
+    }
+
+    hoverOverContentManagementSystemIcon(): NavigationSectionActions {
+        navigationSectionPage.contentManagementSystemButton.realHover();
+        return this;
+    }
+
+    hoverOverGlobalIcon(): NavigationSectionActions {
+        navigationSectionPage.cmsGlobalIcon.realHover();
+        return this;
+    }
+
+    verifyCmsIconTooltip(): NavigationSectionActions {
+        this.hoverOverContentManagementSystemIcon();
+        this.Page.tooltip.should('have.text', 'Content Management System');
+        return this;
+    }
+
+    verifyGlobalIconTooltip(): NavigationSectionActions {
+        this.hoverOverGlobalIcon();
+        this.Page.tooltip.should('have.text', 'Global');
+        return this;
+    }
+
+    verifyBottomPanelButtonsRemoved(): NavigationSectionActions {
+        navigationSectionPage.contentManagementSystemButton.should('not.exist');
+        navigationSectionPage.mapMakerButton.should('not.exist');
+        navigationSectionPage.photoGridExportButton.should('not.exist');
+        navigationSectionPage.dataExtractionToolButton.should('not.exist');
+        navigationSectionPage.whatsNewButton.should('not.exist');
+        navigationSectionPage.helpAndResourcesButton.should('not.exist');
         return this;
     }
 }

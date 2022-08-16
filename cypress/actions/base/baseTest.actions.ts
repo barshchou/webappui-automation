@@ -4,7 +4,7 @@ import NavigationSection from "./navigationSection.actions";
 import { createPayload } from "../../api/report_payloads/462Avenue1NY.payload";
 import mapKeysUtils from "../../utils/mapKeys.utils";
 import { _HomePage } from ".";
-import { gqlOperationNames } from "../../utils/alias.utils";
+import { Alias, gqlOperationNames } from "../../utils/alias.utils";
 
 /**
  * Login action
@@ -54,6 +54,10 @@ export const deleteReport = (reportNumber) => {
     _HomePage.deleteReport(reportNumber);
 };
 
+/**
+ * Set up interceptions for GraphQL requests 
+ * which we wait when interacting with Comp-plex
+ */
 export const salesInterceptions = () => {
     cy.intercept('POST', '/graphql', req => {
         aliasQuery(req, gqlOperationNames.searchSalesTransactions);
@@ -63,4 +67,14 @@ export const salesInterceptions = () => {
         aliasQuery(req, gqlOperationNames.updateJob);
         aliasQuery(req, gqlOperationNames.findTransactionsByIdsAndVersions);
     });
+};
+
+/**
+ * Navigating to Comp-plex client
+ */
+export const navigateToCompplex = () => {
+    salesInterceptions();
+    cy.stepInfo(`Navigating to standalone Comp-plex.`);
+    cy.visit("/index.html");
+    cy.wait(`@${Alias.gql.SearchSalesTransactions}`);
 };

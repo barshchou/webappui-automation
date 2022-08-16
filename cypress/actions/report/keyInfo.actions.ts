@@ -3,11 +3,13 @@ import { isDateHasCorrectFormat } from "../../../utils/date.utils";
 import { getUploadFixture } from "../../../utils/fixtures.utils";
 import BaseActionsExt from "../base/base.actions.ext";
 import { numberWithCommas } from "../../../utils/numbers.utils";
+import { BoweryReports } from "../../types/boweryReports.type";
 
 class KeyInfoActions extends BaseActionsExt<typeof keyInfoPage> {
+    //TODO edit this method, because (save === true) condition is not relevant anymore QA-6543
     enterPropertyRightsAppraisedComment(textToType: string = null, edit = true, save = true, revert = false) {
         if (edit === true) { keyInfoPage.propertyRightsAppraisedFormEditButton.click(); }
-        keyInfoPage.textBoxPropertyRightsAppraised.invoke("text")
+        keyInfoPage.textBoxPropertyRightsAppraised.scrollIntoView().invoke("text")
             .then(text => {
                 keyInfoPage.textBoxPropertyRightsAppraised.focus().type(textToType ?? text);
             });
@@ -21,7 +23,7 @@ class KeyInfoActions extends BaseActionsExt<typeof keyInfoPage> {
 
     enterDefinitionMarketValue(textToType: string = null, edit = true, save = true, revert = false) {
         if (edit === true) { keyInfoPage.definitionOfMarketValueFormEditButton.click(); }
-        keyInfoPage.textBoxDefinitionOfMarketValue().invoke("text").then(text => {
+        keyInfoPage.textBoxDefinitionOfMarketValue().scrollIntoView().invoke("text").then(text => {
             keyInfoPage.textBoxDefinitionOfMarketValue().focus().type(textToType ?? text);
         });
         if (save === true) { keyInfoPage.formSaveBtn().click(); }
@@ -55,14 +57,24 @@ class KeyInfoActions extends BaseActionsExt<typeof keyInfoPage> {
     }
 
     checkAllInterestAppraisedByValues(interestAppraisedData: Readonly<{asIsMarket: string, 
-        asComplete: string, asStabilized: string}>): KeyInfoActions {
-        this.checkAsIsMarketInterestByValue(interestAppraisedData.asIsMarket)
-            .checkAsCompleteInterestByValue(interestAppraisedData.asComplete)
-            .checkAsStabilizedInterestByValue(interestAppraisedData.asStabilized);
+    asComplete?: string, asStabilized?: string}>): KeyInfoActions {
+        this.checkAsIsMarketInterestByValue(interestAppraisedData.asIsMarket);
+
+        if (interestAppraisedData.asStabilized != undefined ) { 
+            this.checkAsStabilizedInterestByValue(interestAppraisedData.asStabilized); 
+        }
+
+        if (interestAppraisedData.asComplete != undefined) {
+            this.checkAsCompleteInterestByValue(interestAppraisedData.asComplete);
+        }
         return this;
     }
 
-    enterDateByType(date: Readonly<{type: string, date: string}>): KeyInfoActions {
+    enterDateByType(date: BoweryReports.KeyInfoDateType, sameInspectionDate = true): KeyInfoActions { 
+        if (!sameInspectionDate) {
+            keyInfoPage.inputToCheckMyDateIsDifferent.click();
+        }
+
         keyInfoPage.getDateInputByQA(date.type).clear();
         if (isDateHasCorrectFormat(date.date)) {
             keyInfoPage.getDateInputByQA(date.type).type(date.date).should("have.value", date.date);
@@ -91,7 +103,7 @@ class KeyInfoActions extends BaseActionsExt<typeof keyInfoPage> {
 
     clickNarrativeSuggestions(verifyListValue: string, numberLists = 0): KeyInfoActions {
         keyInfoPage.narrativeSuggestionsList.eq(numberLists)
-            .contains(verifyListValue).should("have.text", verifyListValue).click();
+            .contains(verifyListValue).should("have.text", verifyListValue).click({ force: true });
         return this;
     }
 

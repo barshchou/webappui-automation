@@ -4,7 +4,8 @@ const featureFlagKeys = {
     reportTextEdit: "report-text-edit",
     swotAnalysis: "edit-default-swot-analysis",
     enableFlexibleGbaAnalysis: "enable-flexible-gba-analysis",
-    retailReports: "retail-reports"
+    retailReports: "retail-reports",
+    cmsNavigation: "cms-navigation"
 } as const;
 
 export default Object.freeze(featureFlagKeys);
