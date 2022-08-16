@@ -9,17 +9,29 @@ class AppraiserActions extends BaseActionsExt<typeof appraiserPage> {
         return this;
     }
 
-    searchAndAddAppraiser(appraiserName: string): AppraiserActions {
+    searchAndAddAppraiser(appraiserName: string, isExternal = false): AppraiserActions {
         appraiserPage.btnAddAppraiserInspector.click();
-        appraiserPage.searchAppraiserTextField.clear()
-            .type(appraiserName).should('have.value', appraiserName);
-        this.Page.getAppraiserOptionFromList().click();
-        this.Page.formAddButton().click();
+        if (isExternal) {
+            appraiserPage.modalExternalInspectorRadio.check().should("be.checked");
+            appraiserPage.searchAppraiserTextField.clear()
+                .type(appraiserName).should('have.value', appraiserName);
+            this.Page.formAddButton().click();
+        } else {
+            appraiserPage.searchAppraiserTextField.clear()
+                .type(appraiserName).should('have.value', appraiserName);
+            this.Page.getAppraiserOptionFromList().click();
+            this.Page.formAddButton().click();
+        }
         return this;
     }
 
     verifySignCheckbox(appraiserFullName: string, enabled: boolean): AppraiserActions {
         appraiserPage.appraiserSignCheckbox(appraiserFullName).should('have.value', `${enabled}`);
+        return this;
+    }
+
+    verifyPersonallyInspectedCheckbox(appraiserName: string, enabled: boolean): AppraiserActions {
+        appraiserPage.personallyInspectedCheckbox(appraiserName).should('have.value', `${enabled}`);
         return this;
     }
 }

@@ -42,7 +42,7 @@ describe("[QA-4431] Verify that the generated commentary for Data Sources Descri
                 cy.log(<string>file);
                 cy.visit(<string>file);
             
-                cy.contains("Data Sources").next().should("have.text", testData.nycComment);
+                cy.contains("Data Sources").next().scrollIntoView().should("have.text", testData.nycComment);
             });
         });
 
@@ -81,7 +81,7 @@ describe("[QA-4431] Verify that the generated commentary for Data Sources Descri
                 cy.log(<string>file);
                 cy.visit(<string>file);
             
-                cy.contains("Data Sources").next().should("have.text", testData.nycComment);
+                cy.contains("Data Sources").next().scrollIntoView().should("have.text", testData.nycComment);
             });
         });
     });
