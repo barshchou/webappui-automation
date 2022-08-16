@@ -80,6 +80,7 @@ import dateTypeEnum from "./keyInfo/dateType.enum";
 import interestAppraisedEnum from "./keyInfo/interestAppraised.enum";
 import letterOfTransmittalEnum from "./cms/letterOfTransmittal.enum";
 import swotAnalysisEnum from "./cms/swotAnalysis.enum";
+import salesforceJobsEnum from "./salesforceJobs.enum";
 
 export default {
     TEMPLATE_TYPE: templateTypesEnum,
@@ -163,5 +164,6 @@ export default {
     DATE_TYPE: dateTypeEnum,
     INTEREST_APPRAISED: interestAppraisedEnum,
     LETTER_SECTIONS: letterOfTransmittalEnum,
-    SWOT_SECTIONS: swotAnalysisEnum
+    SWOT_SECTIONS: swotAnalysisEnum,
+    SALESFORCE_JOBS: salesforceJobsEnum
 };

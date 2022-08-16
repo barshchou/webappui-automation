@@ -3,13 +3,13 @@ import Enums from "../../../enums/enums";
 export default {
     address: "462 1st Avenue",
     sfJobs: {
-        withFreddieMac: "2200015959",
-        withoutFreddieMac: "1764459005",
-        noneFreddieMac: "1764459119",
-        multifamily: "2200015959",
-        mixedUse: "1907151453",
-        retail: "2008055387",
-        nonePropertyType: "1764459119"
+        withFreddieMac: Enums.SALESFORCE_JOBS.withFreddieMac,
+        withoutFreddieMac: Enums.SALESFORCE_JOBS.withoutFreddieMac,
+        noneFreddieMac: Enums.SALESFORCE_JOBS.noneFreddieMac,
+        multifamily: Enums.SALESFORCE_JOBS.multifamily,
+        mixedUse: Enums.SALESFORCE_JOBS.mixedUse,
+        retail: Enums.SALESFORCE_JOBS.retail,
+        nonePropertyType: Enums.SALESFORCE_JOBS.nonePropertyType
     },
     featureFlagKey: Enums.FEATURE_FLAG_KEYS.retailReports,
     onFeatureFlag: 0
