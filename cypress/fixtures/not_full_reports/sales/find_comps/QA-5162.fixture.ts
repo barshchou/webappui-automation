@@ -10,60 +10,47 @@ const reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreato
 const sortSalesCompsDateSold = Enums.SORT_VALUES.dateSold;
 const sortSalesCompsCustom = Enums.SORT_VALUES.custom;
 const salePeriodValue = Enums.SALE_PERIOD_VALUES.lastThreeMonths;
+const filePath = "not_full_reports/CostarExport_3Contract_3Listing_3Date.csv";
 
 const comparableFixture1 = {
-    address: "116 Cooper Street"
+    address: "Sanford Avenue, Queens"
 };
 const comparableFixture2 = {
-    address: "1715 Lexington Avenue"
+    address: "121 East 69 Street"
 };
 const comparableFixture3 = {
-    address: "1074 Fulton Street"
+    address: "176 Waverly Place"
 };
 const comparableFixture4 = {
-    address: "31-83 34 Street"
+    address: "303 Park Ave."
 };
 const comparableFixture5 = {
-    address: "96 East Broadway"
+    address: "116 Cooper Street"
 };
 const comparableFixture6 = {
-    address: "95 East Broadway"
+    address: "1074 Fulton Street"
 };
 const comparableFixture7 = {
-    address: "168 North 10 Street"
+    address: "20 Bordi Ln."
 };
 const comparableFixture8 = {
-    address: "151 Freeman Street"
+    address: "264 Jefferson Street"
 };
 const comparableFixture9 = {
-    address: "125 North 1 Street"
+    address: "108 East 30 Street"
 };
 
-const arrayOfCompsForAdditionFromMap1 = [
-    comparableFixture1,
-    comparableFixture2,
-    comparableFixture3,
-    comparableFixture4,
-    comparableFixture5,
-    comparableFixture6,
-];
-const arrayOfCompsForAdditionFromMap2 = [
-    comparableFixture7,
-    comparableFixture8,
-    comparableFixture9,
-];
 const arrayOfCompsForRemovingFromMap = [
-    comparableFixture5,
+    comparableFixture3,
     comparableFixture6,
     comparableFixture9
 ];
 
 export default {
-    arrayOfCompsForAdditionFromMap1,
-    arrayOfCompsForAdditionFromMap2,
     arrayOfCompsForRemovingFromMap,
     reportCreationData,
     sortSalesCompsCustom,
     sortSalesCompsDateSold,
     salePeriodValue,
+    filePath
 };
