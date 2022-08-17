@@ -36,17 +36,19 @@ conditionalDescribe(`[QA-5157] [QA-5161] [Sales > Find Comps] "Date Sold" sortin
                     - Listing
                     - date sold from most to least recent 
                     (comps added via map search )`);
+
+        //TODO find a way to add comps from map more precisely
         Sales._FindComps.resetAllFilters()
-            .selectFilterSalePeriodValue(testData.salePeriodValue);
-        testData.arrayOfCompsForAdditionFromMap1.forEach(comp => {
-            Sales._FindComps.selectCompFromMapByAddress(comp.address)
-                .verifyAddedCompAddress(comp.address);
-        });    
-        Sales._FindComps.resetAllFilters();
-        testData.arrayOfCompsForAdditionFromMap2.forEach(comp => {
-            Sales._FindComps.selectCompFromMapByAddress(comp.address)
-                .verifyAddedCompAddress(comp.address);
-        });
+            .selectFilterSalePeriodValue(testData.salePeriodValue)
+            .selectCompFromMap()
+            .selectCompFromMap()
+            .selectCompFromMap()
+            .selectCompFromMap();
+       
+        Sales._FindComps.resetAllFilters()
+            .selectCompFromMap()
+            .selectCompFromMap();
+       
         Sales._FindComps.checkSalesCompSortedByDateSold();
 
         cy.stepInfo(`2.Verify that when "Date Sold" option in Sort dropdown is selected 

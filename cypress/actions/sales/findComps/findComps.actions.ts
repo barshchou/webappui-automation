@@ -54,7 +54,8 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
     }
 
     clickAddNewCompContinueButton(): FindCompsActions {
-        findCompsPage.newCompContinueButton.should('exist').should('be.enabled').focus().realClick({ clickCount: 15 });
+        findCompsPage.newCompContinueButton.scrollIntoView().should('exist').should('be.enabled')
+            .realClick({ clickCount: 20 });
         return this;
     }
 
