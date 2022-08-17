@@ -9,7 +9,7 @@ import Enums from "../../../../enums/income/incomeTypesCellNames.enum";
 
 describe("Pro Forma page table Effective Gross Income validation", 
     { tags:[ "@fix", "@income", "@pro_forma" ] }, () => {
-     
+    
         before("Login, create report, prepare data", () => {
             cy.stepInfo(`1. Create new report or open the report which is already created. 
                     Make sure that there is at least three commercial units.`);
