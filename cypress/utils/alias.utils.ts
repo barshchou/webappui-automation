@@ -12,7 +12,8 @@ export const gqlOperationNames = {
     findTransactionByIdAndVersion: "findTransactionByIdAndVersion",
     findSingleSalesComp: "findSingleSalesComp",
     updateJob: "updateJob",
-    findTransactionsByIdsAndVersions: "findTransactionsByIdsAndVersions"
+    findTransactionsByIdsAndVersions: "findTransactionsByIdsAndVersions",
+    searchJobs:"searchJobs"
 };
 
 export const Alias = {
@@ -32,7 +33,8 @@ export const Alias = {
         FindSalesComps:_gqlAlias(gqlOperationNames.findSalesComps),
         FindSingleSalesComp:_gqlAlias(gqlOperationNames.findSingleSalesComp),
         UpdateJob:_gqlAlias(gqlOperationNames.updateJob),
-        FindTransactionsByIdsAndVersions:_gqlAlias(gqlOperationNames.findTransactionsByIdsAndVersions)
+        FindTransactionsByIdsAndVersions:_gqlAlias(gqlOperationNames.findTransactionsByIdsAndVersions),
+        SearchJobs:_gqlAlias(gqlOperationNames.searchJobs)
     }, 
     pageElements:{
         compPlex:{
@@ -68,4 +70,8 @@ export const Alias = {
         sumPerUnitTOEAppraisersForecast: "sumPerUnitTOEAppraisersForecast",
         sumPSFTOEAppraisersForecast: "sumPSFTOEAppraisersForecast",
     },
+    jobSearch:{
+        selectedCompData:"jobSearchSelectedCompData",
+        jobCardComp:"jobSearchCompCard"
+    }
 };

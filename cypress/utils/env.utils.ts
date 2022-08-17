@@ -1,7 +1,9 @@
 export const ENVS = {
     dev: "https://bowery-development.herokuapp.com",
     staging: "https://bowery-staging.herokuapp.com",
-    prod: "https://app.boweryvaluation.com"
+    prod: "https://app.boweryvaluation.com",
+    compDev:"https://compplex-client.development.bowery.link",
+    compStage:"https://compplex-client.staging.bowery.link"
 };
 
 /**
