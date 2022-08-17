@@ -329,6 +329,19 @@ class AdjustCompsActions extends BaseActionsExt<typeof adjustCompsPage> {
         });
         return this;
     }
+
+    verifyCommercialAreaSf(incomeValue: BoweryReports.IncomeTypes, squareFootAnalysis: number,
+        areaSf: number[], index = 1): AdjustCompsActions {
+        this.Page.getAdjustmentExpansionCellValue(Enums.UTILITIES_ADJUSTMENTS_EXPANSION_ROWS.commercialAreaSf, index)
+            .invoke('text').then(commercialAreaSf => {
+                let commercialArea = areaSf.reduce((prev, next) => prev + next);
+                let calculatedPercent = incomeValue === Enums.INCOME_TYPE.residential 
+                    ? '0%'
+                    : `${commercialArea / squareFootAnalysis * 100}%`;
+                expect(commercialAreaSf).to.be.eq(`${calculatedPercent}`);
+            });
+        return this;
+    }
 }
 
 export default new AdjustCompsActions(adjustCompsPage);
