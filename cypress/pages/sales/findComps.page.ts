@@ -163,7 +163,7 @@ class FindCompsPage extends BasePage {
     }
 
     get filterSalePeriod() {
-        return cy.get('[data-qa="filter-completedInPeriod"]');
+        return cy.get('[data-qa="filter-sale-period"]');
     }
 
     filterSalePeriodValue(value: string) {
