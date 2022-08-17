@@ -56,7 +56,7 @@ class CommercialUnitsPage extends BasePage {
         return cy.get('[data-testid="InfoOutlinedIcon"]'); 
     }
 
-    get commercialUnitSfDiscussionTooltip() { 
+    get commercialUnitSfDiscussionTipText() { 
         return cy.xpath(`//h6[.= "Commercial Unit SF Discussion"]//..//following-sibling::span`); 
     }
 

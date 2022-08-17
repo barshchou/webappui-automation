@@ -74,15 +74,11 @@ describe("[Property > Commercial Units > Commercial Unit SF] Commercial Units pa
         });
 
         it('[QA-4541] Verify the Commercial Unit SF Discussion tooltip', () => {
-            cy.stepInfo(`2. Hover the Commercial Unit SF Discussion tooltip.`);
-            Property._CommercialUnits.Page.commercialUnitSfDiscussionTooltip
-                .trigger('mouseover');
-        
-            cy.stepInfo(`3. Verify the following text is displayed: 
+            cy.stepInfo(`Verify the following text is displayed: 
                     "The following generated text will appear in the Description of Improvements of your report.`);
-            Property._CommercialUnits.Page.tooltip
+            Property._CommercialUnits.Page.commercialUnitSfDiscussionTipText
                 .invoke("text").then(text => {
-                    expect(text).to.be.equal(testData.commercialUnitSFDiscussionTooltipText);
+                    expect(text).to.be.equal(testData.commercialUnitSFDiscussionTipText);
                 });
         });
     });
