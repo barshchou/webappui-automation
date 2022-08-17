@@ -22,72 +22,57 @@ conditionalDescribe(`[QA-5163] [QA-5164] [Sales > Find Comps] "Date Sold" sortin
         cy.stepInfo(`1.Navigate to Sales > Find Comps page `);
         _NavigationSection.navigateToFindComps();
 
-        cy.stepInfo(`2. Add sales comps manually`);
-        function addCompWithStatus(address: string, saleStatus: string) {
-            Sales._FindComps
-                .openAddNewComparableFormSearchResult(address)
-                .selectDropdownOptionNewComp(Sales._FindComps.Page.conditionDropdown,
-                    testData.comparableFixtureManual.condition)
-                .selectDropdownOptionNewComp(Sales._FindComps.Page.comparableTypeDropdown,
-                    testData.comparableFixtureManual.comparableType);
-            Sales._FindComps
-                .PropertyInfo.setResidentialUnits(`${testData.comparableFixtureManual.units.numberOfUnits}`)
-                .setSiteArea(`${testData.comparableFixtureManual.siteArea}`)
-                .setFloor(`${testData.comparableFixtureManual.floors}`);
-            Sales._FindComps.clickAddNewCompContinueButton();
-            Sales._FindComps
-                .SaleInfo.setBuyerGrantee(testData.comparableFixtureManual.saleInfo.buyer)
-                .setSellerGrantor(testData.comparableFixtureManual.saleInfo.seller)
-                .selectSaleDate('random');
-            Sales._FindComps
-                .selectDropdownOptionNewComp(Sales._FindComps.Page.SaleStatusDropdown, saleStatus);
-            Sales._FindComps.clickAddNewCompContinueButton();
-            Sales._FindComps.clickAddNewCompSaveAndCloseButton();
-            return this;
-        }
-
-        testData.arrayOfCompsForManualAddition.forEach(comp => {
-            addCompWithStatus(comp.address, comp.status);
-            Sales._FindComps.verifyAddedCompAddress(comp.address);
-        });
+        cy.stepInfo(`2. Add sales comps via .CSV`);
+        Sales._FindComps.uploadComps(testData.filePath)
+        .verifyUploadCompsSucceeded()
         Sales._FindComps.Page.sortSalesCompsSelectValue.should('contain', testData.sortSalesCompsDateSold);
         Sales._FindComps.checkSalesCompSortedByDateSold();
 
         cy.stepInfo(`3. Check comps order when user changes 'Sale status'`);
-        Sales._FindComps.openDetailsModal(testData.comparableFixtureManual.address1)
+        Sales._FindComps.openDetailsModal(testData.comparableFixture.address1)
             .SalesCompDetails.openSaleInformationForm();
         Sales._FindComps.selectDropdownOptionNewComp(Sales._FindComps.Page.SaleStatusDropdown, 
-            testData.comparableFixtureManual.saleStatusUnderContract)
-            .SaleInfo.checkRadioButtonSaleCondition(testData.radioButtonSaleConditionNonArms)
+            testData.comparableFixture.saleStatusListing)
+            .SaleInfo.saveChangesOnDone();
+        Sales._FindComps.SalesCompDetails.saveCompChanges();
+        Sales._FindComps.checkSalesCompSortedByDateSold();
+
+        Sales._FindComps.openDetailsModal(testData.comparableFixture.address4)
+            .SalesCompDetails.openSaleInformationForm();
+        Sales._FindComps.selectDropdownOptionNewComp(Sales._FindComps.Page.SaleStatusDropdown, 
+            testData.comparableFixture.saleStatusTransaction)
+            .SaleInfo.setBuyerGrantee(testData.comparableFixture.saleInfo.buyer)
+            .setSellerGrantor(testData.comparableFixture.saleInfo.seller)
+            .checkRadioButtonSaleCondition(testData.radioButtonSaleConditionNonArms)
             .saveChangesOnDone();
         Sales._FindComps.SalesCompDetails.saveCompChanges();
         Sales._FindComps.checkSalesCompSortedByDateSold();
 
-        Sales._FindComps.openDetailsModal(testData.comparableFixtureManual.address3)
+        Sales._FindComps.openDetailsModal(testData.comparableFixture.address7)
             .SalesCompDetails.openSaleInformationForm();
         Sales._FindComps.selectDropdownOptionNewComp(Sales._FindComps.Page.SaleStatusDropdown, 
-            testData.comparableFixtureManual.saleStatusTransaction)
-            .SaleInfo.saveChangesOnDone();
-        Sales._FindComps.SalesCompDetails.saveCompChanges();
-        Sales._FindComps.checkSalesCompSortedByDateSold();
-
-        Sales._FindComps.openDetailsModal(testData.comparableFixtureManual.address5)
-            .SalesCompDetails.openSaleInformationForm();
-        Sales._FindComps.selectDropdownOptionNewComp(Sales._FindComps.Page.SaleStatusDropdown, 
-            testData.comparableFixtureManual.saleStatusListing)
-            .SaleInfo.saveChangesOnDone();
+            testData.comparableFixture.saleStatusUnderContract)
+            .SaleInfo.checkRadioButtonSaleCondition(testData.radioButtonSaleConditionNonArms)
+            .saveChangesOnDone();
         Sales._FindComps.SalesCompDetails.saveCompChanges();
         Sales._FindComps.checkSalesCompSortedByDateSold();
         
         cy.stepInfo(`4. Check comps order when user changes 'Contract Date' (with Transaction set as Sale Status)`);
-        Sales._FindComps.openDetailsModal(testData.comparableFixtureManual.address3)
+        Sales._FindComps.openDetailsModal(testData.comparableFixture.address4)
             .SalesCompDetails.openSaleInformationForm();
         Sales._FindComps.SaleInfo.selectSaleDate('random')
             .saveChangesOnDone();
         Sales._FindComps.SalesCompDetails.saveCompChanges();
         Sales._FindComps.checkSalesCompSortedByDateSold();
 
-        Sales._FindComps.openDetailsModal(testData.comparableFixtureManual.address6)
+        Sales._FindComps.openDetailsModal(testData.comparableFixture.address8)
+            .SalesCompDetails.openSaleInformationForm();
+        Sales._FindComps.SaleInfo.selectSaleDate('random')
+            .saveChangesOnDone();
+        Sales._FindComps.SalesCompDetails.saveCompChanges();
+        Sales._FindComps.checkSalesCompSortedByDateSold();
+
+        Sales._FindComps.openDetailsModal(testData.comparableFixture.address9)
             .SalesCompDetails.openSaleInformationForm();
         Sales._FindComps.SaleInfo.selectSaleDate('random')
             .saveChangesOnDone();
@@ -96,7 +81,7 @@ conditionalDescribe(`[QA-5163] [QA-5164] [Sales > Find Comps] "Date Sold" sortin
     });
 
     it(`[QA-5164] [Sales > Find Comps] The drag and drop functionality is disabled 
-             when 'Date Sold' sorting is selected`, () => {
+         when 'Date Sold' sorting is selected`, () => {
         cy.stepInfo(`1. Verify "Date Sold" sorting is selected for sales comps + a comps exist in table`);
         Sales._FindComps.Page.sortSalesCompsSelectValue.should('contain', testData.sortSalesCompsDateSold);
         Sales._FindComps.Page.salesCompsDateSold.should(($compsDateList) => {
@@ -104,7 +89,7 @@ conditionalDescribe(`[QA-5163] [QA-5164] [Sales > Find Comps] "Date Sold" sortin
         });
 
         cy.stepInfo(`2. Verify that the drag and drop functionality is disabled when 
-                         "Date Sold" sorting is selected for sales comps`);
+                     "Date Sold" sorting is selected for sales comps`);
         cy.get(Sales._FindComps.Page.selectorDraggableElement).should("not.exist");
     });
 });

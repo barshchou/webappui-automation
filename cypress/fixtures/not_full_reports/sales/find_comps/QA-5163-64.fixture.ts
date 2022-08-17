@@ -12,22 +12,18 @@ const sortSalesCompsDateSold = Enums.SORT_VALUES.dateSold;
 const salePeriodValue = Enums.SALE_PERIOD_VALUES.lastThreeMonths;
 const radioButtonSaleConditionArms = Enums.SALE_CONDITION.armsLength;
 const radioButtonSaleConditionNonArms = Enums.SALE_CONDITION.nonArmsLength;
+const filePath = "not_full_reports/CostarExport_3Contract_3Listing_3Date.csv";
 
-const comparableFixtureManual = {
-    address1: "388 Greenwich Street, New York, NY",
-    address2: "388 Broome Street, New York, NY",
-    address3: "30 Hudson Yards, New York, NY",
-    address4: "383 Madison Avenue, New York, NY",
-    address5: "345 Park Avenue, New York, NY",
-    address6: "225 Liberty Street, New York, NY",
-    condition: Enums.CONDITION_VALUES.shell,
-    comparableType: Enums.COMPARABLE_TYPES.multifamily,
-    units: {
-        grossArea: 2700,
-        numberOfUnits: 3,
-    } as BoweryReports.BuildingDescription,
-    siteArea: 3500,
-    floors: 7,
+const comparableFixture = {
+    address1: "Sanford Avenue, Queens",
+    address2: "121 East 69 Street",
+    address3: "176 Waverly Place",
+    address4: "303 Park Ave.",
+    address5: "116 Cooper Street",
+    address6: "1074 Fulton Street",
+    address7: "264 Jefferson Street",
+    address8: "20 Bordi Ln.",
+    address9: "108 East 30 Street",
     saleInfo: {
         buyer: "Test and CO",
         seller: "Test inc"
@@ -37,41 +33,12 @@ const comparableFixtureManual = {
     saleStatusTransaction: Enums.SALE_STATUSES.transaction,
 };
 
-const arrayOfCompsForManualAddition = [
-    {
-        address: comparableFixtureManual.address1,
-        status: comparableFixtureManual.saleStatusListing
-    },
-    {
-        address: comparableFixtureManual.address2,
-        status: comparableFixtureManual.saleStatusListing
-    },
-    
-    {
-        address: comparableFixtureManual.address3,
-        status: comparableFixtureManual.saleStatusUnderContract
-    },
-    {
-        address: comparableFixtureManual.address4,
-        status: comparableFixtureManual.saleStatusUnderContract
-    },
-    {
-        address: comparableFixtureManual.address5,
-        status: comparableFixtureManual.saleStatusTransaction
-    },
-    {
-        address: comparableFixtureManual.address6,
-        status: comparableFixtureManual.saleStatusTransaction
-    },
-     
-];
-
 export default {
-    comparableFixtureManual,
+    comparableFixture,
     reportCreationData,
     sortSalesCompsDateSold,
     salePeriodValue,
-    arrayOfCompsForManualAddition,
     radioButtonSaleConditionArms,
-    radioButtonSaleConditionNonArms
+    radioButtonSaleConditionNonArms,
+    filePath
 };
