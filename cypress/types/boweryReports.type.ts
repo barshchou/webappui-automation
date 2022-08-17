@@ -75,7 +75,10 @@ export namespace BoweryReports {
             typeof Enums.SALES_ADJUSTMENT_GRID_DISCUSSIONS[KeyInfo.SalesAdjustmentGridDiscussionsKeys]
         export type SalesAdjustmentGridRows = 
             typeof Enums.SALES_ADJUSTMENT_GRID_ROWS[KeyInfo.SalesAdjustmentGridRowsKeys]
-
+        export type OtherAdjustmentsRows = 
+            typeof Enums.OTHER_ADJUSTMENTS_EXPANSION_ROWS[KeyInfo.OtherAdjustmentsExpansionRowsKeys]
+        export type UtilitiesAdjustmentsRows = 
+            typeof Enums.UTILITIES_ADJUSTMENTS_EXPANSION_ROWS[KeyInfo.UtilitiesAdjustmentsExpansionRowsKeys]
     }
 
     export type ProFormaAnyIncome = {

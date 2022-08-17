@@ -1,12 +1,12 @@
-import testData from "../../../../fixtures/not_full_reports/sales/adjust_comps/QA-6191-92.fixture";
+import testData from "../../../../fixtures/not_full_reports/sales/adjust_comps/QA-6193.fixture";
 import { createReport } from "../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { Property, Sales } from "../../../../actions";
 
-describe(`Other Adjustment section cell values validation`, 
+describe(`Commercial Area/SF is row name in expanded Utilities Adjustment section`, 
     { tags: [ "@adjust_comps", "@sales" ] }, () => {
-        it(`[QA-6191][QA-6192]`, () => {
+        it(`[QA-6193]`, () => {
             cy.stepInfo(`Precondition: Create a report`);
             createReport(testData.reportCreationData);
 
@@ -15,14 +15,12 @@ describe(`Other Adjustment section cell values validation`,
             Property._Summary.selectBasisSquareFootAnalysis(testData.squareFootAnalysisBasis)
                 .fillBasisSquareFootAnalysis(testData.squareFootAnalysisArea);
 
-            cy.stepInfo(`2. Go to Sales>Adjust Comps and expand Other Adjustment`);
+            cy.stepInfo(`2. Go to Sales > Adjust Comps and expand Utilities Adjustment`);
             NavigationSection.navigateToAdjustComps();
 
-            cy.stepInfo(`3. Verify that SF is static name of first row`);
+            cy.stepInfo(`3. Verify that Commercial Area/SF is static name of the last row in`);
             Sales._AdjustComps.Page.getAdjustmentArrow(testData.adjustmentName).click();
-            Sales._AdjustComps.Page.getAdjustmentExpansionCellValue(testData.otherAdjustmentRowLabel, 0)
-                .should('have.text', "SF");
-            Sales._AdjustComps.Page.getAdjustmentExpansionCellValue(testData.otherAdjustmentRowLabel, 1)
-                .should('have.text', `${testData.squareFootAnalysisArea}`);
+            Sales._AdjustComps.Page.getAdjustmentExpansionCellValue(testData.utilitiesAdjustmentRowLabel)
+                .should('have.text', "Commercial Area/SF");
         });
     });
