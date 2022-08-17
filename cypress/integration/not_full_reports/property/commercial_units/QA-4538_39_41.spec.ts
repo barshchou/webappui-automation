@@ -43,9 +43,8 @@ describe("[Property > Commercial Units > Commercial Unit SF] Commercial Units pa
                 .should('have.value', testData.copyPasteValue);
 
             cy.stepInfo(`5. Verify the long values and save - the page shouldn't crush.`);
-            Property._CommercialUnits.enterUnitSFByUnitIndex(testData.longValue);
-            Property._CommercialUnits.Page.commercialUnitsSFInputs
-                .should('have.value', `${testData.longValue}`);
+            Property._CommercialUnits.enterUnitSFByUnitIndex(testData.longValue)
+                .Page.commercialUnitsSFInputs.should('have.value', `${testData.longValue}`);
 
             cy.stepInfo(`6. Try to leave an empty Commercial Unit # SF field - no validation, the page can be saved.`);
             Property._CommercialUnits.Page.commercialUnitsSFInputs.first()
