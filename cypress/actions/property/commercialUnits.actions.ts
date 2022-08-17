@@ -99,8 +99,13 @@ class CommercialUnitsActions extends BaseActionsExt<typeof commercialUnitsPage> 
         if (isHasDecimalPartMoreNumberOfDigits(squareFeet)) {
             squareFeetToBe = cutDecimalPartToNumberOfDigits(squareFeet);
         }
-        commercialUnitsPage.commercialUnitsSFInputs.eq(index).clear().type(`${squareFeet}`)
-            .should("have.value", squareFeetToBe);
+
+        commercialUnitsPage.commercialUnitsSFInputs.eq(index).clear();
+        (""+squareFeet).split("").forEach(n => {
+            commercialUnitsPage.commercialUnitsSFInputs.eq(index).type(`${n}`);
+        });
+        
+        commercialUnitsPage.commercialUnitsSFInputs.eq(index).should("have.value", squareFeetToBe);
         return this;
     }
 
