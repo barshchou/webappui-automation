@@ -50,11 +50,11 @@ import envLaunchDarkly from "./featureFlags/envLaunchDarkly.enum";
 import menuLinksNamesEnum from "./menuLinksNames.enum";
 import rolesEnum from "./users/roles.enum";
 import boweryOfficesEnum from "./organization/boweryOffices.enum";
-import salesAdjustmentGridEnum from "./adjustComps/salesadjustment.enum";
+import salesAdjustmentGridEnum from "./adjustComps/salesAdjustment.enum";
 import reportStatusEnum from "./reportParams/reportStatus.enum";
 import bondTypesEnum from "./organization/bondTypes.enum";
-import rowsMarketAdjustmentEnum from "./adjustComps/marketadjustment.enum";
-import cumulativepriceSalesadjustEnum from "./adjustComps/cumulativeprice.salesadjust.enum";
+import rowsMarketAdjustmentEnum from "./adjustComps/marketAdjustment.enum";
+import cumulativePriceSalesAdjustEnum from "./adjustComps/cumulativePriceSalesAdjust.enum";
 import expensesForecastCardNamesEnum from "./expense/expensesForecastCardNames.enum";
 import reimbursementColumnsIdEnum from "./reimbursementColumnsId.enum";
 import calculationUnitsEnum from "./adjustComps/calculationUnits.enum";
@@ -137,7 +137,7 @@ export default {
     USER_ROLES: rolesEnum,
     BOWERY_OFFICES: boweryOfficesEnum,
     SALES_ADJUSTMENT_GRID: salesAdjustmentGridEnum,
-    SALES_ADJUSTMENT_GRID_CUMULATIVE_PRICE: cumulativepriceSalesadjustEnum,
+    SALES_ADJUSTMENT_GRID_CUMULATIVE_PRICE: cumulativePriceSalesAdjustEnum,
     ROWS_MARKET_ADJUSTMENT: rowsMarketAdjustmentEnum,
     REPORT_STATUS: reportStatusEnum,
     BOND_TYPES: bondTypesEnum,
