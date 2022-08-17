@@ -54,7 +54,7 @@ class CommercialUnitsActions extends BaseActionsExt<typeof commercialUnitsPage> 
 
     private clickRadioOrCheckbox(group: BoweryReports.CommercialUnits.Groups,
         value: BoweryReports.CommercialUnits.GroupsValues, index = 0): CommercialUnitsActions {
-        commercialUnitsPage.getRadioButtonByValueAndUnitIndex(group, value, index).click();
+        commercialUnitsPage.getRadioButtonByValueAndUnitIndex(group, value).click();
         return this;
     }
 
@@ -82,14 +82,14 @@ class CommercialUnitsActions extends BaseActionsExt<typeof commercialUnitsPage> 
 
     verifyRadioIsChecked(group: BoweryReports.CommercialUnits.Groups, 
         value: BoweryReports.CommercialUnits.GroupsValues, index = 0): CommercialUnitsActions {
-        commercialUnitsPage.getRadioButtonByValueAndUnitIndex(group, value, index).parent()
+        commercialUnitsPage.getRadioButtonByValueAndUnitIndex(group, value).parent()
             .should("have.class", "Mui-checked");
         return this;
     }
 
     verifyRadioIsNotChecked(group: BoweryReports.CommercialUnits.Groups, 
         value: BoweryReports.CommercialUnits.GroupsValues, index = 0): CommercialUnitsActions {
-        commercialUnitsPage.getRadioButtonByValueAndUnitIndex(group, value, index).parent()
+        commercialUnitsPage.getRadioButtonByValueAndUnitIndex(group, value).parent()
             .should("not.have.class", "Mui-checked");
         return this;
     }

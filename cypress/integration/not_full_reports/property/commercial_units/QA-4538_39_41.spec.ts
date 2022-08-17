@@ -1,8 +1,9 @@
-import { numberWithCommas } from '../../../../../utils/numbers.utils';
 import testData from "../../../../fixtures/not_full_reports/property/commercial_units/QA-4538_39_41.fixture";
 import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { Property } from "../../../../actions";
+
+Cypress.config('numTestsKeptInMemory', 0);
 
 describe("[Property > Commercial Units > Commercial Unit SF] Commercial Units page validation tests",
     { tags:[ "@fix", "@property", "@commercial_units" ] }, () => {
@@ -26,9 +27,7 @@ describe("[Property > Commercial Units > Commercial Unit SF] Commercial Units pa
                     any value (text field, whole numbers, but numbers greater than 999 
                     are automatically separated by a comma).`);
             testData.sfValues.forEach((value, index) => {
-                Property._CommercialUnits.Page.commercialUnitsSFInputs.eq(index)
-                    .type(`${value}`)
-                    .should('have.value', `${numberWithCommas(value)}`);
+                Property._CommercialUnits.enterUnitSFByUnitIndex(value, index);
             });
 
             cy.stepInfo(`3. Try to enter text / special symbols  -it's not allowed.`);
@@ -44,10 +43,9 @@ describe("[Property > Commercial Units > Commercial Unit SF] Commercial Units pa
                 .should('have.value', testData.copyPasteValue);
 
             cy.stepInfo(`5. Verify the long values and save - the page shouldn't crush.`);
-            Property._CommercialUnits.Page.commercialUnitsSFInputs.first()
-                .clear()
-                .type(testData.longValue)
-                .should('have.value', `${numberWithCommas(testData.longValue)}`);
+            Property._CommercialUnits.enterUnitSFByUnitIndex(testData.longValue);
+            Property._CommercialUnits.Page.commercialUnitsSFInputs
+                .should('have.value', `${testData.longValue}`);
 
             cy.stepInfo(`6. Try to leave an empty Commercial Unit # SF field - no validation, the page can be saved.`);
             Property._CommercialUnits.Page.commercialUnitsSFInputs.first()
