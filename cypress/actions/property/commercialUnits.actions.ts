@@ -100,11 +100,12 @@ class CommercialUnitsActions extends BaseActionsExt<typeof commercialUnitsPage> 
             squareFeetToBe = cutDecimalPartToNumberOfDigits(squareFeet);
         }
 
-        commercialUnitsPage.commercialUnitsSFInputs.eq(index).clear();
+        commercialUnitsPage.commercialUnitsSFInputs.eq(index).should("be.enabled").clear();
         (""+squareFeet).split("").forEach(n => {
             commercialUnitsPage.commercialUnitsSFInputs.eq(index).type(`${n}`);
+            cy.wait(100);
         });
-        
+
         commercialUnitsPage.commercialUnitsSFInputs.eq(index).should("have.value", squareFeetToBe);
         return this;
     }
