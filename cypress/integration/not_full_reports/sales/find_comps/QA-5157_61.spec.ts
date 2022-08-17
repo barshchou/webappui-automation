@@ -13,6 +13,7 @@ conditionalDescribe(`[QA-5157] [QA-5161] [Sales > Find Comps] "Date Sold" sortin
                      for sales comps + sorting is applied correctly`,
 { tags: [ "@sales", "@find_comps", "@comp_plex" ] }, () => {
     before("Login, create report", () => {
+        Cypress.config('numTestsKeptInMemory', 0);
         createReport(testData.reportCreationData);
         cy.saveLocalStorage();
     });
