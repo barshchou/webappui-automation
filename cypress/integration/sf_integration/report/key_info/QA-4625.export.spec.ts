@@ -1,4 +1,4 @@
-import testData from "../../../../fixtures/not_full_reports/report/key_info/QA-4625.fixture";
+import testData from "../../../../fixtures/sf_integration/report/key_info/QA-4625.fixture";
 import { createReport } from "../../../../actions/base/baseTest.actions";
 import { Report, ReviewExport } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";

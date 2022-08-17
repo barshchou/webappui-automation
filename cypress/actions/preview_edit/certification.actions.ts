@@ -3,7 +3,7 @@ import BaseActionsExt from "../base/base.actions.ext";
 
 class CertificationActions extends BaseActionsExt<typeof certificationPage> {
 
-    verifyTextInFormContainer(value: string, index = 1): CertificationActions {
+    verifyTextInFormContainer(value: string, index = 0): CertificationActions {
         certificationPage.certificateBulletsPoint(index).should("include.text", value);
         return this;
     }

@@ -2,8 +2,18 @@ import navigationSectionPage from "../../pages/base/navigationSection.page";
 import { Alias } from "../../utils/alias.utils";
 import BaseActionsExt from "./base.actions.ext";
 import mapKeysUtils from "../../utils/mapKeys.utils";
+import routesUtils from "../../utils/routes.utils";
+import { Utils } from "../../types/utils.type";
+import stabilizedRentRollPage from "../../pages/income/commercial/stabilizedRentRoll.page";
+import rentRollPage from "../../pages/income/commercial/rentRoll.page";
 
 class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPage> {
+    
+    waitForUrl(route: Utils.Routes) {
+        cy.url().should("include", route);
+        return this;
+    }
+
     submitSaveChangesModal(saveChanges = true): NavigationSectionActions {
         cy.get("body").then($body => {
             if ($body.text().includes("You have unsaved changes")) {
@@ -67,7 +77,6 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
 
     clickCommercialRentRollButton(): NavigationSectionActions {
         navigationSectionPage.commercialRentRollButton.click();
-        this.submitSaveChangesModal();
         return this;
     }
 
@@ -186,7 +195,8 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         this.clickIncomeApproachButton()
             .clickResidentialMenuIfClosed()
             .clickInPlaceRentRollButton()
-            .submitSaveChangesModal(saveChanges);
+            .submitSaveChangesModal(saveChanges)
+            .waitForUrl(routesUtils.residentialInPlaceRentRoll);
         return this;
     }
 
@@ -224,7 +234,11 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         this.clickIncomeApproachButton()
             .clickCommercialMenuIfClosed()
             .clickCommercialRentRollButton()
-            .submitSaveChangesModal();
+            .submitSaveChangesModal()
+            .waitForUrl(routesUtils.commercialInPlaceRentRoll);
+        
+        // see comment to `navigateToCommercialStabilizedRentRoll` method
+        rentRollPage.commercialInPlaceRentRollForm.should("be.visible");
         return this;
     }
 
@@ -237,7 +251,8 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
     navigateToPropertySummary(): NavigationSectionActions {
         this.clickPropertyButton()
             .clickSummaryButton()
-            .submitSaveChangesModal();
+            .submitSaveChangesModal()
+            .waitForUrl(routesUtils.propertySummary);
         return this;
     }
 
@@ -413,7 +428,8 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
     navigateToCommercialUnits(): NavigationSectionActions {
         this.clickPropertyButton()
             .clickCommercialUnits()
-            .submitSaveChangesModal();
+            .submitSaveChangesModal()
+            .waitForUrl(routesUtils.propertyCommercialUnits);
         return this;
     }
 
@@ -720,7 +736,16 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         this.clickIncomeApproachButton();
         this.clickCommercialMenuIfClosed();
         this.clickCommercialStabRentRollButton()
-            .submitSaveChangesModal();
+            .submitSaveChangesModal()
+            .waitForUrl(routesUtils.commercialStabilizedRentRoll);
+        
+        /*
+         * since we're working in same forms of final form component
+         * we need to wait until this specific form will be rendered,
+         * so we'll be sure that we're not at the old form
+         * useful for such tests where we switching between Commercial -> InPlaceRentRoll and Commercial -> StabRentRoll
+         */
+        stabilizedRentRollPage.commercialStabRentRollForm.should("be.visible");
         return this;
     }
 

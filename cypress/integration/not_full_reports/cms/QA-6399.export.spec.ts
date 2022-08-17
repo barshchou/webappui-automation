@@ -5,14 +5,13 @@ import { _NavigationSection } from '../../../actions/base';
 import testData from "../../../fixtures/not_full_reports/cms/QA-6399.fixture";
 import launchDarklyApi from '../../../api/launchDarkly.api';
 import { conditionalDescribe } from "../../checkIsProd.utils";
-import { _CmsBaseActions, _LetterOfTransmittal } from '../../../actions/cms';
+import { _CmsBaseActions } from '../../../actions/cms';
 
 conditionalDescribe("Verify page and possibility to edit text", 
     { tags:[ "@cms", "@check_export", "@feature_flag" ] }, () => {
         it('[QA-6399]', () => {
             cy.stepInfo(`Preconditions: Set Launch Darkly flag to see Report Copy Editor section. Create a report`);
-            launchDarklyApi.setFeatureFlagForUser(testData.cmsNavigationFlagKey, testData.featureFlagEnable)
-                .setFeatureFlagForUser(testData.reportTextEditorFlagKey, testData.featureFlagEnable)
+            launchDarklyApi.setFeatureFlagForUser(testData.reportTextEditorFlagKey, testData.featureFlagEnable)
                 .setFeatureFlagForUser(testData.swotAnalysisFlagKey, testData.featureFlagEnable);
             createReport(testData.reportCreationData);
 
@@ -22,7 +21,7 @@ conditionalDescribe("Verify page and possibility to edit text",
 
             cy.stepInfo(`2. Verify languages of sections`);
             testData.letterTextsFixture.forEach(section => {
-                _LetterOfTransmittal.verifyLetterOfTransmittalText(section.sectionName, section.language);
+                _CmsBaseActions.verifyDiscussionText(section.sectionName, section.language);
             });
 
             cy.stepInfo(`3. Open any report > Letter of Transmittal page`);
@@ -55,6 +54,5 @@ conditionalDescribe("Verify page and possibility to edit text",
         after('Remove feature flag', () => {
             launchDarklyApi.removeUserTarget(testData.reportTextEditorFlagKey);
             launchDarklyApi.removeUserTarget(testData.swotAnalysisFlagKey);
-            launchDarklyApi.removeUserTarget(testData.cmsNavigationFlagKey);
         });
     });
