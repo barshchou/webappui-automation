@@ -22,9 +22,9 @@ conditionalDescribe(`[QA-5162] [Sales > Find Comps] "Date Sold" sorting is updat
 
             cy.stepInfo(`3. Add comps to Selected Comps table + Verify that "Date Sold" option in 
                      Sort dropdown is correctly applied after each comp addition`);
-                     Sales._FindComps.uploadComps(testData.filePath)
-                     .verifyUploadCompsSucceeded()
-                     .checkSalesCompSortedByDateSold();
+            Sales._FindComps.uploadComps(testData.filePath)
+                .verifyUploadCompsSucceeded()
+                .checkSalesCompSortedByDateSold();
 
             cy.stepInfo(`4. Remove a few comps + Verify that "Date Sold" option in 
                      Sort dropdown is correctly applied after each comp removing`);

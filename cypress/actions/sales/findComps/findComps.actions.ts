@@ -60,8 +60,8 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
     }
 
     clickAddNewCompContinueButton(): FindCompsActions {
-        findCompsPage.newCompContinueButton.scrollIntoView().should('exist').should('be.enabled')
-            .realClick({ clickCount: 20 });
+        findCompsPage.newCompContinueButton.scrollIntoView().should('exist').should('be.enabled').focus()
+            .realClick({ clickCount: 40 });
         return this;
     }
 
@@ -123,7 +123,7 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
     selectFilterSalePeriodValue(periodValue: BoweryReports.FindComps.SalePeriodValues): FindCompsActions {
         findCompsPage.filterSalePeriod.should('exist').click();
         findCompsPage.filterSalePeriodValue(periodValue).should('exist').click();
-        findCompsPage.filterSalePeriod.children().should('contain', `${periodValue}`);
+        findCompsPage.filterSalePeriod.find('input').should('have.value', `${periodValue}`);
         return this;
     }
 
@@ -442,8 +442,10 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
     addNewCompViaReportId(reportId: string): FindCompsActions {
         this.openJobSearchTab()
             .enterReportToSearchComp(reportId)
-            .clickSearchButton()
-            .clickSelectCompsIconOnMap()
+            .clickSearchButton();
+        findCompsPage.loadingModalSpinner.should('exist');
+        findCompsPage.loadingModalSpinner.should('not.exist');
+        this.clickSelectCompsIconOnMap()
             .clickSelectCompsButton()
             .clickSelectAllButton()
             .clickImportCompsFromReportButton();

@@ -40,6 +40,18 @@ const comparableFixture9 = {
     address: "108 East 30 Street"
 };
 
+const arrayOfAllComps = [
+    comparableFixture1,
+    comparableFixture2,
+    comparableFixture3,
+    comparableFixture4,
+    comparableFixture5,
+    comparableFixture6,
+    comparableFixture7,
+    comparableFixture8,
+    comparableFixture9,
+];
+
 const arrayOfCompsForRemovingFromMap = [
     comparableFixture3,
     comparableFixture6,
@@ -47,6 +59,7 @@ const arrayOfCompsForRemovingFromMap = [
 ];
 
 export default {
+    arrayOfAllComps,
     arrayOfCompsForRemovingFromMap,
     reportCreationData,
     sortSalesCompsCustom,

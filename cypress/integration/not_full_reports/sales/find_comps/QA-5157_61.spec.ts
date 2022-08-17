@@ -44,7 +44,6 @@ conditionalDescribe(`[QA-5157] [QA-5161] [Sales > Find Comps] "Date Sold" sortin
             .selectCompFromMap()
             .selectCompFromMap()
             .selectCompFromMap();
-       
         Sales._FindComps.resetAllFilters()
             .selectCompFromMap()
             .selectCompFromMap();
@@ -70,15 +69,14 @@ conditionalDescribe(`[QA-5157] [QA-5161] [Sales > Find Comps] "Date Sold" sortin
                 .PropertyInfo.setResidentialUnits(`${testData.comparableFixtureManual.units.numberOfUnits}`)
                 .setSiteArea(`${testData.comparableFixtureManual.siteArea}`)
                 .setFloor(`${testData.comparableFixtureManual.floors}`);
-            Sales._FindComps.clickAddNewCompContinueButton();
-            Sales._FindComps
+            Sales._FindComps.clickAddNewCompContinueButton()
                 .SaleInfo.setBuyerGrantee(testData.comparableFixtureManual.saleInfo.buyer)
                 .setSellerGrantor(testData.comparableFixtureManual.saleInfo.seller)
                 .selectSaleDate('random');
             Sales._FindComps
-                .selectDropdownOptionNewComp(Sales._FindComps.Page.SaleStatusDropdown, saleStatus);
-            Sales._FindComps.clickAddNewCompContinueButton();
-            Sales._FindComps.clickAddNewCompSaveAndCloseButton();
+                .selectDropdownOptionNewComp(Sales._FindComps.Page.SaleStatusDropdown, saleStatus)
+                .clickAddNewCompContinueButton()
+                .clickAddNewCompSaveAndCloseButton();
             return this;
         }
 

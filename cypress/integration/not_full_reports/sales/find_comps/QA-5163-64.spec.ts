@@ -24,7 +24,7 @@ conditionalDescribe(`[QA-5163] [QA-5164] [Sales > Find Comps] "Date Sold" sortin
 
         cy.stepInfo(`2. Add sales comps via .CSV`);
         Sales._FindComps.uploadComps(testData.filePath)
-        .verifyUploadCompsSucceeded()
+            .verifyUploadCompsSucceeded();
         Sales._FindComps.Page.sortSalesCompsSelectValue.should('contain', testData.sortSalesCompsDateSold);
         Sales._FindComps.checkSalesCompSortedByDateSold();
 
