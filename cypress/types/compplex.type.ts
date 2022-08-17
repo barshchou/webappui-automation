@@ -22,10 +22,10 @@ namespace Keys {
 export namespace CompPlex {
     export namespace PropertyInfo {
         export type BuildingType = typeof enums.COMPPLEX_ENUM
-        ._propertyInfoEnum.buildingType[Keys.BuildingType] 
+            ._propertyInfoEnum.buildingType[Keys.BuildingType] 
     }
     export namespace SaleInfo {
         export type SaleStatus = typeof enums.COMPPLEX_ENUM
-        ._saleInfoEnum[Keys.SaleStatus]  
+            ._saleInfoEnum[Keys.SaleStatus]  
     }
 }
