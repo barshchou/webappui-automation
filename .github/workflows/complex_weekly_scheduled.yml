@@ -1,0 +1,35 @@
+name: Complex run on staging
+
+on: 
+  schedule:
+    - cron: 00 05 * * MON #Run complex tests on staging env every Monday at 5 AM UT
+  
+jobs:
+  Complex-run-on-staging:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    container: cypress/browsers:node16.13.2-chrome100-ff98
+    permissions:
+      id-token: write
+      contents: read
+    strategy:
+      fail-fast: false
+      matrix:
+        containers: [1, 2, 3, 4, 5]
+
+    steps:
+      - name: Run weekly complex end-to-end tests with Currents dev
+        uses: Bowery-RES/action-run-e2e-tests@latest
+        with:
+           github_token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
+           username: ${{ secrets.USERNAME }}
+           password: ${{ secrets.PASSWORD }}
+           url: staging
+           spec_file: cypress/integration/comp_plex/**
+           record_key: ${{ secrets.CURRENTS_RECORD_KEY }}
+        env:
+          DD_CIVISIBILITY_AGENTLESS_ENABLED: true
+          DD_API_KEY: ${{ secrets.DD_API_KEY }}
+          DD_ENV: 'staging'
+          DD_SERVICE: 'webapp'
+          
