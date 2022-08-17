@@ -5,7 +5,7 @@ import { _NavigationSection } from "../../../../actions/base";
 import { Property } from "../../../../actions";
 
 describe("[Property > Commercial Units > Commercial Unit SF] Commercial Units page validation tests",
-    { tags:[ "@property", "@commercial_units" ] }, () => {
+    { tags:[ "@fix", "@property", "@commercial_units" ] }, () => {
         before("Login, create report", () => {
             createReport(testData.reportCreationData);
  
