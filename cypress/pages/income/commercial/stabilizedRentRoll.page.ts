@@ -20,6 +20,10 @@ class StabilizedRentRollPage extends CommercialRentRollSharedComponentPage {
     commercialCompGroupForecastRent(forecast: string) { 
         return cy.xpath(`//table[@class = 'htCore']//td[text()='$${forecast}']`); 
     }
+
+    get commercialStabRentRollForm() {
+        return cy.get('[id="incomeApproach.commercialIncome.commercialProjectedRentRoll-final-form"]');
+    }
 }
 
 export default new StabilizedRentRollPage();
