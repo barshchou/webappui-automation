@@ -15,15 +15,15 @@ describe(`Verify the Inspector's name is pre-filled in the Appraisers section on
         cy.stepInfo('2. Navigate to Report -> Appraiser page');
         _NavigationSection.navigateToReportAppraiser();
 
-        cy.stepInfo(`3. Verify the internal Inspector appears in the table with the ‘Personally Inspected’ checkbox 
+        cy.stepInfo(`3. Verify the internal Inspector appears in the table with the 'Personally Inspected' checkbox 
                     checked along with any other information (suffix, state cert, etc.) and 
-                    corresponds to the Inspector’s name in SF.`);
+                    corresponds to the Inspector's name in SF.`);
         testData.appraisers.forEach(appraiser => {
             Report._Appraiser.verifyPersonallyInspectedCheckbox(appraiser.name, appraiser.isPersonallyInspected);
         });
 
-        cy.stepInfo(`4. not null with checked ‘Personally Inspected' and 'Sign Report’ checkboxes; 
-                    not null with unchecked ‘Personally Inspected' and 'Sign Report’ checkboxes;`);
+        cy.stepInfo(`4. not null with checked 'Personally Inspected' and 'Sign Report' checkboxes; 
+                    not null with unchecked 'Personally Inspected' and 'Sign Report' checkboxes;`);
         Report._Appraiser.checkPersonallyInspected(testData.appraisers[0].name)
             .checkSignReport(testData.appraisers[1].name, false);
 

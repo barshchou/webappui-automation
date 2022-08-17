@@ -35,13 +35,13 @@ class AppraiserPage extends BasePage {
         return cy.get("[data-qa='certificationInspection.commentary-generated-text']");
     }
 
-    getAllNamesWithCheckSignReportCheckboxes(isCheck = true) { 
-        return cy.xpath(`//*[@data-qa="signReport-checkbox"]//*[@value='${isCheck}']` + 
+    getAllNamesWithCheckSignReportCheckboxes(isChecked = true) { 
+        return cy.xpath(`//*[@data-qa="signReport-checkbox"]//*[@value='${isChecked}']` + 
         `/../../../*[@data-qa="fullName"]`); 
     }
 
-    getAllNamesWithCheckPersonallyInspectedReportCheckboxes(isCheck = true) { 
-        return cy.xpath(`//*[@data-qa="inspected-checkbox"]//*[@value='${isCheck}']` + 
+    getAllNamesWithCheckPersonallyInspectedReportCheckboxes(isChecked = true) { 
+        return cy.xpath(`//*[@data-qa="inspected-checkbox"]//*[@value='${isChecked}']` + 
         `/../../../*[@data-qa="fullName"]`); 
     }
 }
