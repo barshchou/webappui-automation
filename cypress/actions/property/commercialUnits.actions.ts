@@ -5,6 +5,9 @@ import { cutDecimalPartToNumberOfDigits,
 import BaseActionsExt from "../base/base.actions.ext";
 import { BoweryReports } from "../../types/boweryReports.type";
 import { normalizeText } from "../../../utils/string.utils";
+import { Alias } from "../../utils/alias.utils";
+
+const { commercialUnitsSFInputs } = Alias.pageElements.commercialUnits;
 
 class CommercialUnitsActions extends BaseActionsExt<typeof commercialUnitsPage> {
 
@@ -100,15 +103,13 @@ class CommercialUnitsActions extends BaseActionsExt<typeof commercialUnitsPage> 
             squareFeetToBe = cutDecimalPartToNumberOfDigits(squareFeet);
         }
 
-        commercialUnitsPage.commercialUnitsSFInputs.eq(index).should("be.enabled").clear();
-        (""+squareFeet).split("").forEach(n => {
-            commercialUnitsPage.commercialUnitsSFInputs.eq(index).type(`${n}`);
-            cy.wait(100);
-        });
+        this.Actions.setValueIntoNumberInput(commercialUnitsSFInputs, squareFeet, index);
 
         commercialUnitsPage.commercialUnitsSFInputs.eq(index).should("have.value", squareFeetToBe);
         return this;
     }
+
+
 
     enterListUnitSF(squareFeetList: Array<number | string>, numberOfUnits: number): CommercialUnitsActions {
         for (let i = 0; i < numberOfUnits; i++) {

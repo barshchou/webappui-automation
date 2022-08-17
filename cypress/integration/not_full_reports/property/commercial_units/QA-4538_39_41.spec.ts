@@ -2,6 +2,10 @@ import testData from "../../../../fixtures/not_full_reports/property/commercial_
 import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { Property } from "../../../../actions";
+import { numberWithCommas } from "../../../../../utils/numbers.utils";
+import { Alias } from "../../../../utils/alias.utils";
+
+const { commercialUnitsSFInputs } = Alias.pageElements.commercialUnits;
 
 Cypress.config('numTestsKeptInMemory', 0);
 
@@ -26,8 +30,18 @@ describe("[Property > Commercial Units > Commercial Unit SF] Commercial Units pa
             cy.stepInfo(`2. Verify the Commercial Unit # SF field is editable by entering 
                     any value (text field, whole numbers, but numbers greater than 999 
                     are automatically separated by a comma).`);
+
+            Property._CommercialUnits.Page.commercialUnitsSFInputs.as(commercialUnitsSFInputs);
+
             testData.sfValues.forEach((value, index) => {
-                Property._CommercialUnits.enterUnitSFByUnitIndex(value, index);
+                Property._CommercialUnits.Actions.setValueIntoNumberInput(
+                    commercialUnitsSFInputs,
+                    value, 
+                    index
+                );
+                    
+                Property._CommercialUnits.Page.commercialUnitsSFInputs
+                    .eq(index).should('have.value', `${numberWithCommas(value)}`);
             });
 
             cy.stepInfo(`3. Try to enter text / special symbols  -it's not allowed.`);
@@ -43,8 +57,13 @@ describe("[Property > Commercial Units > Commercial Unit SF] Commercial Units pa
                 .should('have.value', testData.copyPasteValue);
 
             cy.stepInfo(`5. Verify the long values and save - the page shouldn't crush.`);
-            Property._CommercialUnits.enterUnitSFByUnitIndex(testData.longValue)
-                .Page.commercialUnitsSFInputs.should('have.value', `${testData.longValue}`);
+            Property._CommercialUnits.Actions.setValueIntoNumberInput(
+                commercialUnitsSFInputs,
+                testData.longValue
+            );
+
+            Property._CommercialUnits.Page
+                .commercialUnitsSFInputs.first().should('have.value', `${numberWithCommas(testData.longValue)}`);
 
             cy.stepInfo(`6. Try to leave an empty Commercial Unit # SF field - no validation, the page can be saved.`);
             Property._CommercialUnits.Page.commercialUnitsSFInputs.first()
