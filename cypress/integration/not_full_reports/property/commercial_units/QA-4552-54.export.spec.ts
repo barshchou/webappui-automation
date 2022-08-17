@@ -1,4 +1,4 @@
-import { numberWithCommas } from "../../../../../utils/numbers.utils";
+import { numberWithCommas } from "../../../../../utils/numbers.utils"; 
 import { Property, ReviewExport } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { createReport } from "../../../../actions/base/baseTest.actions";

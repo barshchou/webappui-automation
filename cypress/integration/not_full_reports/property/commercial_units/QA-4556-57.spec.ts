@@ -28,7 +28,6 @@ describe.skip("Verify the functionality of the Image upload to the Interior and 
             # Verify that several images can be uploaded to the Exterior Images.
             # Verify the uploaded image can be rotated.
         `);
-            cy.pause();
             testData.imagesType.forEach((images, index) => {
                 cy.stepInfo(`# Verify that several images can be uploaded to the ${images}.`);
                 testData.inputType.forEach(inputMethod => {

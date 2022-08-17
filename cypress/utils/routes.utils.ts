@@ -3,7 +3,8 @@ const routes =  {
     residentialInPlaceRentRoll: "/residential-rent-roll",
     propertySummary: "/property-summary",
     propertyCommercialUnits: "/commercial-units",
-    commercialStabilizedRentRoll: "/commercial-projected-rent-roll"
+    commercialStabilizedRentRoll: "/commercial-projected-rent-roll",
+    expenseForecast: "/expense-forecast"
 } as const;
 
 export default routes;
