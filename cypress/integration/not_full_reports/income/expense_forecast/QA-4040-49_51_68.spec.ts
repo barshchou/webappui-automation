@@ -107,7 +107,8 @@ describe(`Verify that Generated Commentary are updated on the Expense Forecast p
 
             cy.stepInfo(`[QA-4043] => 3. Revert commentary value, switch to unit basis 
             and fill Forecast value and verify commentary`);
-            Income._ExpenseForecastActions.revertToOriginalExpenseForecastCommentary(testData.expenseForecastInsurance);
+            Income._ExpenseForecastActions.revertToOriginalExpenseForecastCommentary(
+                testData.expenseForecastPayrollAndBenefits);
             testData.expenseForecastPayrollAndBenefits.basis = "unit";
             Income._ExpenseForecastActions.switchExpenseForecastBasis(testData.expenseForecastPayrollAndBenefits)
                 .enterForecastItemForecast(testData.expenseForecastPayrollAndBenefits)
