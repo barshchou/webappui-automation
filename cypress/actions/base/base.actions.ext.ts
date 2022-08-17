@@ -135,9 +135,9 @@ export default class BaseActionsExt<T extends BasePage> extends BaseActions {
      * Can be useful for such inputs as `commercialUnitsPage.commercialUnitsSFInputs`
      */
     setValueIntoNumberInput(elemAlias: string, value: string | number, index = 0) {
-        cy.get(`@${elemAlias}`).eq(index).should("be.enabled").clear();
+        cy.get(`@${elemAlias}`).eq(index).should("be.enabled").focus().clear();
         (""+value).split("").forEach(n => {
-            cy.get(`@${elemAlias}`).eq(index).type(`${n}`);
+            cy.get(`@${elemAlias}`).eq(index).focus().type(`${n}`);
             cy.wait(100);
         });
         return this;

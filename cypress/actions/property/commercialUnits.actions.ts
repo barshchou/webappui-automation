@@ -102,14 +102,13 @@ class CommercialUnitsActions extends BaseActionsExt<typeof commercialUnitsPage> 
         if (isHasDecimalPartMoreNumberOfDigits(squareFeet)) {
             squareFeetToBe = cutDecimalPartToNumberOfDigits(squareFeet);
         }
+        commercialUnitsPage.commercialUnitsSFInputs.as(commercialUnitsSFInputs);
 
         this.Actions.setValueIntoNumberInput(commercialUnitsSFInputs, squareFeet, index);
 
-        commercialUnitsPage.commercialUnitsSFInputs.eq(index).should("have.value", squareFeetToBe);
+        commercialUnitsPage.commercialUnitsSFInputs.eq(index).should("have.value", numberWithCommas(squareFeetToBe));
         return this;
     }
-
-
 
     enterListUnitSF(squareFeetList: Array<number | string>, numberOfUnits: number): CommercialUnitsActions {
         for (let i = 0; i < numberOfUnits; i++) {
