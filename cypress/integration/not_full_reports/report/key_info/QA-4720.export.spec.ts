@@ -22,20 +22,23 @@ ACAS reports for Property Rights Appraised and Definition
         options 'Gross Building Area', 'Building Name', 'Property Type', 'Residential Unit Count', 
         'Commercial Unit Count', 'Street Address', 'Street Name', 'Site Area', 'Year Built', 'Block', 
         'Lot', 'Concluded Cap Rate', 'Zones', 'Condition'.`);
-        Report._KeyInfo.Page.formEditBtn().click();
-        Report._KeyInfo.Page.formEditBtn().click();
+        Report._KeyInfo.activateTextAreaInput(Report._KeyInfo.Page.textBoxPropertyRightsAppraised);
         testData.chips.forEach(chip => {
             Report._KeyInfo.enterPropertyRightsAppraisedComment(`=${chip.typeSuggestValue}`, false, false, false);
             Report._KeyInfo.clickNarrativeSuggestions(chip.suggestionName);
             Report._KeyInfo.verifyCommentaryContainsText(chip.verifySuggest, 
                 testData.propertyRightsAppraisedCommentaryTitle);
+        });
+        Report._KeyInfo.activateTextAreaInput(Report._KeyInfo.Page.textBoxDefinitionOfMarketValue());
+        testData.chips.forEach(chip => {
             Report._KeyInfo.enterDefinitionMarketValue(`=${chip.typeSuggestValue}`, false, false, false);
             Report._KeyInfo.clickNarrativeSuggestions(chip.suggestionName, 1);
             Report._KeyInfo.verifyCommentaryContainsText(chip.verifySuggest, 
                 testData.definitionOfMarketValueCommentaryTitle);
         });
-        Report._KeyInfo.Page.formSaveBtn().click();
-        Report._KeyInfo.Page.formSaveBtn(1).click();
+        Report._KeyInfo.inactivateTextAreaInput()
+            .clickSaveButton();
+
         _NavigationSection.openReviewAndExport();
         ReviewExport.generateDocxReport().waitForReportGenerated()
             .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);

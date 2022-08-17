@@ -54,9 +54,7 @@ describe("Verify the functionality of the Use* radio button",
                     .chooseLeaseStatusByRowNumber("Occupied");
                 _NavigationSection.navigateToStabilizedRentRollInCommercial();
                 Income._CommercialManager.StabilizedRentRoll.verifyUseCellByRow(testData.useTexts[index])
-                    .verifyProgressBarNotExist()
-                    .clickEditDiscussionButton()
-                    .Page.formCancelButton().click();
+                    .verifyProgressBarNotExist();
                 _NavigationSection.navigateToCommercialUnits();
             });
         });

@@ -7,6 +7,7 @@ import testData from "../../../../fixtures/not_full_reports/property/commercial_
 describe(`[QA-4552][QA-4553][QA-4554] Verify the "Linked" chips dropdown in the new narrative component`, 
     { tags: [ "@property", "@commercial_units", "@check_export" ] }, () => {
 
+        //TODO update test after test-cases updates QA-6543
         it("[QA-4552] As Is", () => {
             cy.stepInfo(`Preconditions: The mixed report is created and several commercial units are added.`);
             createReport(testData.reportCreationDataAsIs);
@@ -21,8 +22,8 @@ describe(`[QA-4552][QA-4553][QA-4554] Verify the "Linked" chips dropdown in the 
             cy.stepInfo("1. Proceed to the Property -> Commercial Units");
             _NavigationSection.navigateToCommercialUnits();
 
-            cy.stepInfo("2. Click on the Edit button in the Commercial Unit SF Discussion section.");
-            Property._CommercialUnits.clickEditDiscussionButton();
+            cy.stepInfo("2. Activate text area in the Commercial Unit SF Discussion section.");
+            Property._CommercialUnits.activateTextAreaInput(Property._CommercialUnits.Page.commentaryText);
 
             cy.stepInfo("3. Enter the “=“ and select the an option. Verify each option.");
             testData.asIsChips.forEach((chip) => {
@@ -30,9 +31,10 @@ describe(`[QA-4552][QA-4553][QA-4554] Verify the "Linked" chips dropdown in the 
                     .clickNarrativeSuggestions(chip.suggestionName)
                     .verifyCommentaryContainsText(chip.verifySuggest);
             });
-            Property._CommercialUnits.clickSaveDiscussionButton()
+            Property._CommercialUnits.inactivateTextAreaInput()
+                .clickSaveButton()
                 .verifyProgressBarNotExist();
-
+    
             _NavigationSection.openReviewAndExport();
             ReviewExport.generateDocxReport().waitForReportGenerated()
                 .downloadAndConvertDocxReport(testData.reportCreationDataAsIs.reportNumber);
@@ -53,6 +55,7 @@ describe(`[QA-4552][QA-4553][QA-4554] Verify the "Linked" chips dropdown in the 
                 }); 
         });
 
+        //TODO update test after test-cases updates QA-6543
         it("[QA-4553] As Stabilized", () => {
             cy.stepInfo(`Preconditions: The mixed report is created and several commercial units are added.`);
             createReport(testData.reportCreationDataAsIs);
@@ -67,8 +70,8 @@ describe(`[QA-4552][QA-4553][QA-4554] Verify the "Linked" chips dropdown in the 
             cy.stepInfo("1. Proceed to the Property -> Commercial Units");
             _NavigationSection.navigateToCommercialUnits();
 
-            cy.stepInfo("2. Click on the Edit button in the Commercial Unit SF Discussion section.");
-            Property._CommercialUnits.clickEditDiscussionButton();
+            cy.stepInfo("2. Activate text area in the Commercial Unit SF Discussion section.");
+            Property._CommercialUnits.activateTextAreaInput(Property._CommercialUnits.Page.commentaryText);
 
             cy.stepInfo("3. Enter the “=“ and select the an option. Verify each option.");
             testData.asIsChips.forEach((chip) => {
@@ -76,7 +79,8 @@ describe(`[QA-4552][QA-4553][QA-4554] Verify the "Linked" chips dropdown in the 
                     .clickNarrativeSuggestions(chip.suggestionName)
                     .verifyCommentaryContainsText(chip.verifySuggest);
             });
-            Property._CommercialUnits.clickSaveDiscussionButton()
+            Property._CommercialUnits.inactivateTextAreaInput()
+                .clickSaveButton()
                 .verifyProgressBarNotExist();
 
             _NavigationSection.openReviewAndExport();
@@ -99,6 +103,7 @@ describe(`[QA-4552][QA-4553][QA-4554] Verify the "Linked" chips dropdown in the 
                 }); 
         });
 
+        //TODO update test after test-cases updates QA-6543
         it("[QA-4554] As Completed", () => {
             cy.stepInfo(`Preconditions: The mixed report is created and several commercial units are added.`);
             createReport(testData.reportCreationDataAsIs);
@@ -113,8 +118,8 @@ describe(`[QA-4552][QA-4553][QA-4554] Verify the "Linked" chips dropdown in the 
             cy.stepInfo("1. Proceed to the Property -> Commercial Units");
             _NavigationSection.navigateToCommercialUnits();
 
-            cy.stepInfo("2. Click on the Edit button in the Commercial Unit SF Discussion section.");
-            Property._CommercialUnits.clickEditDiscussionButton();
+            cy.stepInfo("2. Activate text area in the Commercial Unit SF Discussion section.");
+            Property._CommercialUnits.activateTextAreaInput(Property._CommercialUnits.Page.commentaryText);
 
             cy.stepInfo("3. Enter the “=“ and select the an option. Verify each option.");
             testData.asIsChips.forEach((chip) => {
@@ -122,7 +127,8 @@ describe(`[QA-4552][QA-4553][QA-4554] Verify the "Linked" chips dropdown in the 
                     .clickNarrativeSuggestions(chip.suggestionName)
                     .verifyCommentaryContainsText(chip.verifySuggest);
             });
-            Property._CommercialUnits.clickSaveDiscussionButton()
+            Property._CommercialUnits.inactivateTextAreaInput()
+                .clickSaveButton()
                 .verifyProgressBarNotExist();
 
             _NavigationSection.openReviewAndExport();

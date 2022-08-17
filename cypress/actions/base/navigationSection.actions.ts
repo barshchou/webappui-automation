@@ -2,8 +2,18 @@ import navigationSectionPage from "../../pages/base/navigationSection.page";
 import { Alias } from "../../utils/alias.utils";
 import BaseActionsExt from "./base.actions.ext";
 import mapKeysUtils from "../../utils/mapKeys.utils";
+import routesUtils from "../../utils/routes.utils";
+import { Utils } from "../../types/utils.type";
+import stabilizedRentRollPage from "../../pages/income/commercial/stabilizedRentRoll.page";
+import rentRollPage from "../../pages/income/commercial/rentRoll.page";
 
 class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPage> {
+    
+    waitForUrl(route: Utils.Routes) {
+        cy.url().should("include", route);
+        return this;
+    }
+
     submitSaveChangesModal(saveChanges = true): NavigationSectionActions {
         cy.get("body").then($body => {
             if ($body.text().includes("You have unsaved changes")) {
@@ -67,7 +77,6 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
 
     clickCommercialRentRollButton(): NavigationSectionActions {
         navigationSectionPage.commercialRentRollButton.click();
-        this.submitSaveChangesModal();
         return this;
     }
 
@@ -84,6 +93,11 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
 
     clickFinalButton(): NavigationSectionActions {
         navigationSectionPage.finalButton.click();
+        return this;
+    }
+
+    clickSourceInformation(): NavigationSectionActions {
+        navigationSectionPage.sourceInformation.click();
         return this;
     }
 
@@ -147,10 +161,23 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         return this;
     }
 
+    clickPropertyHistory(): NavigationSectionActions {
+        navigationSectionPage.propertyHistory.click();
+        return this;
+    }
+
     navigateToUnitInspection(): NavigationSectionActions {
         this.clickSaveButton();
         this.clickFinalButton()
             .clickUnitInspectionButton()
+            .verifyProgressBarNotExist();
+        return this;
+    }
+
+    navigateToSourceInformation(saveChanges = true): NavigationSectionActions {
+        this.clickFinalButton()
+            .clickSourceInformation()
+            .submitSaveChangesModal(saveChanges)
             .verifyProgressBarNotExist();
         return this;
     }
@@ -168,7 +195,8 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         this.clickIncomeApproachButton()
             .clickResidentialMenuIfClosed()
             .clickInPlaceRentRollButton()
-            .submitSaveChangesModal(saveChanges);
+            .submitSaveChangesModal(saveChanges)
+            .waitForUrl(routesUtils.residentialInPlaceRentRoll);
         return this;
     }
 
@@ -176,6 +204,13 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         this.clickIncomeApproachButton()
             .clickResidentialMenuIfClosed()
             .clickRentCompsButton()
+            .submitSaveChangesModal();
+        return this;
+    }
+
+    navigateToPropertyHistory(): NavigationSectionActions {
+        this.clickPropertyButton()
+            .clickPropertyHistory()
             .submitSaveChangesModal();
         return this;
     }
@@ -199,7 +234,11 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         this.clickIncomeApproachButton()
             .clickCommercialMenuIfClosed()
             .clickCommercialRentRollButton()
-            .submitSaveChangesModal();
+            .submitSaveChangesModal()
+            .waitForUrl(routesUtils.commercialInPlaceRentRoll);
+        
+        // see comment to `navigateToCommercialStabilizedRentRoll` method
+        rentRollPage.commercialInPlaceRentRollForm.should("be.visible");
         return this;
     }
 
@@ -212,7 +251,8 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
     navigateToPropertySummary(): NavigationSectionActions {
         this.clickPropertyButton()
             .clickSummaryButton()
-            .submitSaveChangesModal();
+            .submitSaveChangesModal()
+            .waitForUrl(routesUtils.propertySummary);
         return this;
     }
 
@@ -319,6 +359,42 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         return this;
     }
 
+    clickFinalScope(): NavigationSectionActions {
+        navigationSectionPage.finalScope.click();
+        return this;
+    }
+
+    navigateToFinalScope(): NavigationSectionActions {
+        this.clickFinalButton()
+            .clickFinalScope()
+            .submitSaveChangesModal();
+        return this;
+    }
+
+    clickAssumptionsConditions(): NavigationSectionActions {
+        navigationSectionPage.assumptionsConditions.click();
+        return this;
+    }
+
+    navigateToAssumptionsConditions(): NavigationSectionActions {
+        this.clickFinalButton()
+            .clickAssumptionsConditions()
+            .submitSaveChangesModal();
+        return this;
+    }
+
+    clickSWOTAnalysis(): NavigationSectionActions {
+        navigationSectionPage.swotAnalysis.click();
+        return this;
+    }
+
+    navigateToFinalSWOTAnalysis(): NavigationSectionActions {
+        this.clickFinalButton()
+            .clickSWOTAnalysis()
+            .submitSaveChangesModal();
+        return this;
+    }
+
     clickCommercialRentComps(): NavigationSectionActions {
         navigationSectionPage.commercialRentCompsButton.click();
         return this;
@@ -352,7 +428,8 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
     navigateToCommercialUnits(): NavigationSectionActions {
         this.clickPropertyButton()
             .clickCommercialUnits()
-            .submitSaveChangesModal();
+            .submitSaveChangesModal()
+            .waitForUrl(routesUtils.propertyCommercialUnits);
         return this;
     }
 
@@ -659,7 +736,16 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         this.clickIncomeApproachButton();
         this.clickCommercialMenuIfClosed();
         this.clickCommercialStabRentRollButton()
-            .submitSaveChangesModal();
+            .submitSaveChangesModal()
+            .waitForUrl(routesUtils.commercialStabilizedRentRoll);
+        
+        /*
+         * since we're working in same forms of final form component
+         * we need to wait until this specific form will be rendered,
+         * so we'll be sure that we're not at the old form
+         * useful for such tests where we switching between Commercial -> InPlaceRentRoll and Commercial -> StabRentRoll
+         */
+        stabilizedRentRollPage.commercialStabRentRollForm.should("be.visible");
         return this;
     }
 
@@ -730,6 +816,38 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
 
     clickContentManagementSystem(): NavigationSectionActions {
         navigationSectionPage.contentManagementSystemButton.click();
+        return this;
+    }
+
+    hoverOverContentManagementSystemIcon(): NavigationSectionActions {
+        navigationSectionPage.contentManagementSystemButton.realHover();
+        return this;
+    }
+
+    hoverOverGlobalIcon(): NavigationSectionActions {
+        navigationSectionPage.cmsGlobalIcon.realHover();
+        return this;
+    }
+
+    verifyCmsIconTooltip(): NavigationSectionActions {
+        this.hoverOverContentManagementSystemIcon();
+        this.Page.tooltip.should('have.text', 'Content Management System');
+        return this;
+    }
+
+    verifyGlobalIconTooltip(): NavigationSectionActions {
+        this.hoverOverGlobalIcon();
+        this.Page.tooltip.should('have.text', 'Global');
+        return this;
+    }
+
+    verifyBottomPanelButtonsRemoved(): NavigationSectionActions {
+        navigationSectionPage.contentManagementSystemButton.should('not.exist');
+        navigationSectionPage.mapMakerButton.should('not.exist');
+        navigationSectionPage.photoGridExportButton.should('not.exist');
+        navigationSectionPage.dataExtractionToolButton.should('not.exist');
+        navigationSectionPage.whatsNewButton.should('not.exist');
+        navigationSectionPage.helpAndResourcesButton.should('not.exist');
         return this;
     }
 }

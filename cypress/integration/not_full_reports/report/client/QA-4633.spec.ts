@@ -11,36 +11,41 @@ and Identification of the Client sections`,
     });
 
     it("Test body", () => {
-        cy.stepInfo(`1. Click on the Edit button on the Report > Client page for Intended User 
-        and Identification of the Client sections.`);
+        cy.stepInfo(`1. Click on the Edit button on the Report > Client page for Intended User section.`);
         _NavigationSection.navigateToClientPage();
         Report._Client.verifyProgressBarNotExist()
-            .Page.formEditBtn().click();
-        Report._Client.Page.formEditBtn().click();
+            .activateTextAreaInput(Report._Client.Page.intendedUserTextBox);
 
-        cy.stepInfo(`2. Verify that the Revert to Original button is displayed instead of the 
-        Edit button for both sections.`);
-        Report._Client.Page.formCancelButton().should("be.visible");
-        Report._Client.Page.formCancelButton(1).should("be.visible");
+        cy.stepInfo(`2. Verify that the Revert to Original button is displayed`);
         Report._Client.Page.formRevertToOriginalBtn().should("be.visible");
-        Report._Client.Page.formRevertToOriginalBtn(1).should("be.visible");
 
-        cy.stepInfo(`3. Edit comment and verify that the Revert to Original button becomes enabled for both sections.`);
+        cy.stepInfo(`3. Edit comment and verify that the Revert to Original button becomes enabled`);
         Report._Client.enterIntendedUserTextBox(testData.textToType)
-            .clickNarrativeSuggestions(testData.verifySuggestion)
-            .enterIdentificationOfTheClientTextBox(testData.textToType)
-            .clickNarrativeSuggestions(testData.verifySuggestion, 1);
-
+            .clickNarrativeSuggestions(testData.verifySuggestion);
         Report._Client.Page.formRevertToOriginalBtn().should("be.enabled");
-        Report._Client.Page.formRevertToOriginalBtn(1).should("be.enabled");
 
         cy.stepInfo(`4. Click on the Revert to Original button and verify the 'Changes will be lost modal' 
-        is displayed for both sections.`);
+        is displayed`);
         Report._Client.Page.formRevertToOriginalBtn().click();
         Report._Client.Page.formYesRevertBtn.click();
+        Report._Client.verifyIntendedUserTextBox(testData.verifyIntendedUserTextArea);
+           
+        cy.stepInfo(`5. Click on the Edit button on the Report > Client page for 
+                     Identification of the Client section.`);
+        Report._Client.activateTextAreaInput(Report._Client.Page.identificationOfClientTextBox);
+
+        cy.stepInfo(`6. Verify that the Revert to Original button is displayed`);
+        Report._Client.Page.formRevertToOriginalBtn(1).should("be.visible");
+
+        cy.stepInfo(`7. Edit comment and verify that the Revert to Original button becomes enabled`);
+        Report._Client.enterIdentificationOfTheClientTextBox(testData.textToType)
+            .clickNarrativeSuggestions(testData.verifySuggestion, 1);
+        Report._Client.Page.formRevertToOriginalBtn(1).should("be.enabled");
+
+        cy.stepInfo(`8. Click on the Revert to Original button and verify the 'Changes will be lost modal' 
+        is displayed`);
         Report._Client.Page.formRevertToOriginalBtn(1).click();
         Report._Client.Page.formYesRevertBtn.click();
-        Report._Client.verifyIntendedUserTextBox(testData.verifyIntendedUserTextArea)
-            .verifyIdentificationOfTheClientTextBox(testData.verifyIdentificationOfTheClientTextArea);
+        Report._Client.verifyIdentificationOfTheClientTextBox(testData.verifyIdentificationOfTheClientTextArea);  
     });
 });

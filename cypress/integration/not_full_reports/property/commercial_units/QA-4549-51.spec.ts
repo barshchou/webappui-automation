@@ -26,10 +26,11 @@ describe(`[QA-4549][QA-4550][QA-4551] Verify the "Linked" chips dropdown in the 
             cy.restoreLocalStorage();
         });
 
+        //TODO update test after test-cases updates QA-6543
         it(`[QA-4549] Verify the suggested text dropdown in the new narrative component added through "=" 
         for the 'Foreclosure sale' option`, () => {
-            cy.stepInfo("2. Click on the Edit button in the Commercial Unit SF Discussion section.");
-            Property._CommercialUnits.clickEditDiscussionButton();
+            cy.stepInfo("2. Activate text area in the Commercial Unit SF Discussion section.");
+            Property._CommercialUnits.activateTextAreaInput(Property._CommercialUnits.Page.commentaryText);
 
             cy.stepInfo("3. Enter the “=“ and select the an option. Verify each option.");
             let chip = testData.asIsChips.filter(chip => { return chip.suggestionName == 'Foreclosure Sale'; });
@@ -37,29 +38,29 @@ describe(`[QA-4549][QA-4550][QA-4551] Verify the "Linked" chips dropdown in the 
                 .clickNarrativeSuggestions(chip[0].suggestionName)
                 .verifyCommentaryContainsText(chip[0].verifySuggest);
 
-            Property._CommercialUnits.clickSaveDiscussionButton()
-                .verifyProgressBarNotExist();
+            Property._CommercialUnits.inactivateTextAreaInput();
         });
     
+        //TODO update test after test-cases updates QA-6543
         it(`[QA-4550] Verify the suggested text dropdown in the new narrative component added through "=" 
         for the 'Sheriff's sale' option`, () => {
-            cy.stepInfo("2. Click on the Edit button in the Commercial Unit SF Discussion section.");
-            Property._CommercialUnits.clickEditDiscussionButton();
+            cy.stepInfo("2. Activate text area in the Commercial Unit SF Discussion section.");
+            Property._CommercialUnits.activateTextAreaInput(Property._CommercialUnits.Page.commentaryText);
 
             cy.stepInfo("3. Enter the “=“ and select the an option. Verify each option.");
-            let chip = testData.asIsChips.filter(chip => { return chip.suggestionName == 'Sherrif\'s Sale'; });
+            let chip = testData.asIsChips.filter(chip => { return chip.suggestionName == 'Sheriff\'s Sale'; });
             Property._CommercialUnits.editDiscussionTextArea(`=${chip[0].typeSuggestValue}`, false)
                 .clickNarrativeSuggestions(chip[0].suggestionName)
                 .verifyCommentaryContainsText(chip[0].verifySuggest);
 
-            Property._CommercialUnits.clickSaveDiscussionButton()
-                .verifyProgressBarNotExist();
+            Property._CommercialUnits.inactivateTextAreaInput();
         });
 
+        //TODO update test after test-cases updates QA-6543
         it(`[QA-4551] Verify the suggested text dropdown in the new narrative component added through "=" 
         for the 'Unchanged Renovation' option`, () => {
-            cy.stepInfo("2. Click on the Edit button in the Commercial Unit SF Discussion section.");
-            Property._CommercialUnits.clickEditDiscussionButton();
+            cy.stepInfo("2. Activate text area in the Commercial Unit SF Discussion section.");
+            Property._CommercialUnits.activateTextAreaInput(Property._CommercialUnits.Page.commentaryText);
 
             cy.stepInfo("3. Enter the “=“ and select the an option. Verify each option.");
             let chip = testData.asIsChips.filter(chip => { return chip.suggestionName == 'Unchanged Renovations'; });
@@ -67,7 +68,6 @@ describe(`[QA-4549][QA-4550][QA-4551] Verify the "Linked" chips dropdown in the 
                 .clickNarrativeSuggestions(chip[0].suggestionName)
                 .verifyCommentaryContainsText(chip[0].verifySuggest);
 
-            Property._CommercialUnits.clickSaveDiscussionButton()
-                .verifyProgressBarNotExist();
+            Property._CommercialUnits.inactivateTextAreaInput();
         });
     });
