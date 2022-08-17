@@ -1,3 +1,4 @@
+import { BoweryReports } from "../../types/boweryReports.type";
 import BasePage from "../base/base.page";
 
 class CommercialUnitsPage extends BasePage {
@@ -9,18 +10,18 @@ class CommercialUnitsPage extends BasePage {
         return cy.xpath("//*[.='No. of Commercial Units']//following::*[@inputmode][1]"); 
     }
 
-    get iconDeleteImage() {
-        return cy.get('[data-icon="trash-alt"]');
+    getIconDeleteImage(category: BoweryReports.ImageType, index = 0) {
+        return cy.get(`[data-qa="${category}-image-delete-${index}"]`);
     }
 
     get commercialUnitHeaderSection() { return cy.get("*[data-qa='propertyCommercialUnitDescription']"); }
 
-    get iconRotateImage() {
-        return cy.get('[data-icon="retweet"]');
+    getIconRotateImage(category: BoweryReports.ImageType, index = 0) {
+        return cy.get(`[data-qa="${category}-image-rotate-${index}"]`);
     }
 
-    get commercialUnitImage() {
-        return cy.get('h6 + div > [role="img"]');
+    getCommercialUnitImage(category: BoweryReports.ImageType, index = 0) {
+        return cy.xpath(`//*[@data-qa="${category}-image-preview-${index}"]//ancestor::*[@role="img"]`);
     }
 
     get commercialUnitsTabs() { return cy.get("button[role='tab']"); }

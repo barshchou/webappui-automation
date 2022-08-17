@@ -18,9 +18,9 @@ class CommercialUnitsActions extends BaseActionsExt<typeof commercialUnitsPage> 
         return this;
     }
 
-    verifyImageHasRotated(rotateIndex: number): CommercialUnitsActions {
-        commercialUnitsPage.commercialUnitImage
-            .last().invoke("attr", "style").then(style => {
+    verifyImageHasRotated(category: BoweryReports.ImageType, rotateIndex: number): CommercialUnitsActions {
+        commercialUnitsPage.getCommercialUnitImage(category)
+            .invoke("attr", "style").then(style => {
                 expect(style).includes(`w_256,a_${90 * rotateIndex}`);
             });
         return this;
@@ -29,17 +29,19 @@ class CommercialUnitsActions extends BaseActionsExt<typeof commercialUnitsPage> 
     /**
      *NOTE: Rotates last image
      */
-    rotateImage(): CommercialUnitsActions {
-        commercialUnitsPage.iconRotateImage.last().click({ force: true });
+    rotateImage(category: BoweryReports.ImageType, index = 0): CommercialUnitsActions {
+        commercialUnitsPage.getIconRotateImage(category, index).click({ force: true });
         return this;
     }
 
-    uploadImages(imageType: BoweryReports.ImageType, pathToFile: string, 
+    uploadImages(category: BoweryReports.ImageType, pathToFile: string, 
         inputMethod: "drag-n-drop" | "input"): CommercialUnitsActions {
         let aliasImageUpload = "aliasImageUpload";
         cy.intercept("POST", "/imageUpload").as(aliasImageUpload);
-        cy.contains(imageType).next().find('input[type="file"]')
+
+        cy.get(`[data-qa=${category}-image-upload]`).find('input[type="file"]')
             .attachFile(pathToFile, { subjectType: inputMethod });
+
         cy.wait(`@${aliasImageUpload}`).then(({ response }) => {
             expect(response.statusCode).equal(200);
             cy.log("imageUpload resolved");
