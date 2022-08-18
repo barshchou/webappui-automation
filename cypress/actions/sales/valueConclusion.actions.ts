@@ -1,3 +1,4 @@
+import { isHasDecimalPartMoreNumberOfDigits } from './../../../utils/numbers.utils';
 import valueConclusionPage from "../../pages/sales/valueConclusion.page";
 import { numberWithCommas } from "../../../utils/numbers.utils";
 import BaseActionsExt from "../base/base.actions.ext";
@@ -206,23 +207,24 @@ class ValueConclusionActions extends BaseActionsExt<typeof valueConclusionPage> 
         return this;
     }
 
-    verifyAsStabilizedLaundryLossMonths(monthsToBe: number): this {
-        valueConclusionPage.asStabilizedLaundryLossMonths.should("have.value", monthsToBe);
+    verifyMiscellaneousLossMonths(monthsToBe: number, valueConclusionKey: BoweryReports.ValueConclusionKeys, 
+        miscellaneousType: BoweryReports.RentLossType): this {
+        valueConclusionPage.miscellaneousLossMonths(valueConclusionKey, miscellaneousType)
+            .should("have.value", monthsToBe);
         return this;
     }
 
-    verifyAsCompleteLaundryLossMonths(monthsToBe: number): this {
-        valueConclusionPage.asCompleteLessLaundryLossMonths.should("have.value", monthsToBe);
-        return this;
-    }
+    verifyMiscellaneousLossAmount(amountToBe: number, valueConclusionKey: BoweryReports.ValueConclusionKeys, 
+        miscellaneousType: BoweryReports.RentLossType): this {
+        let numberToDecimal = isHasDecimalPartMoreNumberOfDigits(amountToBe) 
+            ? amountToBe.toFixed(2) 
+            : amountToBe.toString();
 
-    verifyAsStabilizedLaundryLossAmount(amountToBe: string): this {
-        valueConclusionPage.asStabilizedLaundryLossAmount.should("have.value", amountToBe);
-        return this;
-    }
-
-    verifyAsCompleteLaundryLossAmount(amountToBe: string): this {
-        valueConclusionPage.asCompleteLaundryLossAmount.should("have.value", amountToBe);
+        let amountToBeAdjusted = amountToBe < 0 
+            ? `-$${numberWithCommas(numberToDecimal.replace('-', ''))}`
+            : `$${numberWithCommas(numberToDecimal)}`;
+        valueConclusionPage.miscellaneousLossAmount(valueConclusionKey, miscellaneousType)
+            .should("have.value", amountToBeAdjusted);
         return this;
     }
 

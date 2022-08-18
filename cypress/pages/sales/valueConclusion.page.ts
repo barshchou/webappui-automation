@@ -1,3 +1,4 @@
+import { BoweryReports } from "../../types/boweryReports.type";
 import BasePage from "../base/base.page";
 
 class ValueConclusionPage extends BasePage {
@@ -61,20 +62,16 @@ class ValueConclusionPage extends BasePage {
 
     get basisForAnalysisAmount() { return cy.get("[data-qa='basisForSFAnalysis-amount-cell']"); }
 
-    get asStabilizedLaundryLossMonths() { 
-        return cy.get("[data-qa='asStabilizedLossItems.laundryRentLoss.renovation-period-cell'] input[type=text]"); 
+    miscellaneousLossMonths(valueConclusionKey: BoweryReports.ValueConclusionKeys, 
+        miscellaneousType: BoweryReports.RentLossType) { 
+        return cy.get(`[data-qa='${valueConclusionKey}LossItems.` + 
+        `${miscellaneousType}.renovation-period-cell'] input[type=text]`); 
     }
 
-    get asCompleteLessLaundryLossMonths() { 
-        return cy.get("[data-qa='asCompleteLossItems.laundryRentLoss.renovation-period-cell'] input[type=text]"); 
-    }
-
-    get asStabilizedLaundryLossAmount() { 
-        return cy.get("[data-qa*='asStabilizedLossItems.laundryRentLoss.amount'] input:not([type=hidden])"); 
-    }
-
-    get asCompleteLaundryLossAmount() { 
-        return cy.get("[data-qa*='asCompleteLossItems.laundryRentLoss.amount'] input:not([type=hidden])"); 
+    miscellaneousLossAmount(valueConclusionKey: BoweryReports.ValueConclusionKeys, 
+        miscellaneousType: BoweryReports.RentLossType) { 
+        return cy.get(`[data-qa='${valueConclusionKey}LossItems.` + 
+        `${miscellaneousType}.amount-cell'] input:not([type=hidden])`); 
     }
 
     get asStabilizedCommissionFeeAmount() { 
