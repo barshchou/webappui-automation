@@ -33,9 +33,6 @@ describe("Generated Commentary is dynamically updated with relevant information 
                 expect(normalText).to.eq(testData.generatedComment);
             });
 
-            Final._SourceInformation.clickSaveButton();
-            cy.wait(30000);
-
             cy.stepInfo("6. Export the report");
             _NavigationSection.openReviewAndExport();
             ReviewExport.generateDocxReport().waitForReportGenerated()
