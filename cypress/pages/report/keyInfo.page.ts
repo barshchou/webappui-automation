@@ -62,9 +62,9 @@ class KeyInfoPage extends BasePage {
 
     get narrativeSuggestionsList() { return cy.get("[data-qa='narrative-suggestions-list'] > ul"); }
 
-    iconDefinitionOfMarketValue(index = 1) { 
-        return cy.xpath(`//*[contains(@data-qa, 'definition-of-market-value-tile')]` + 
-        `//following::*[@data-icon='info-circle'][${index}]`); 
+    get definitionOfMarketValue() { 
+        return cy.xpath("//*[contains(@data-qa, 'definition-of-market-value-tile')]" + 
+            "//*[contains(text(), 'The following')]"); 
     }
 
     get inputToCheckMyDateIsDifferent() { return cy.get("*[data-qa='isDifferentDateOfValuation']"); }
