@@ -14,7 +14,7 @@ Check that ID cards show correct data based on chosen filters`, {
     it("[QA-6356] Check whether setup in Filters matches the data in Job Card", () => {
         cy.wait(`@${Alias.gql.SearchSalesTransactions}`);
         cy.stepInfo(`1. Go to Sales > Find Comps > Job Search`);
-        Sales._FindComps.openJobSearchTab();
+        Sales._FindComps.JobSearch.openJobSearchTab();
 
         cy.stepInfo(`2. Filters are located to the left of the map`);
         Sales._FindComps.Actions.JobSearch.checkFiltersAreExist();
