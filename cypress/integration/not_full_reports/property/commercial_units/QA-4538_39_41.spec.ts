@@ -10,7 +10,7 @@ const { commercialUnitsSFInputs } = Alias.pageElements.commercialUnits;
 Cypress.config('numTestsKeptInMemory', 0);
 
 describe("[Property > Commercial Units > Commercial Unit SF] Commercial Units page validation tests",
-    { tags:[ "@fix", "@property", "@commercial_units" ] }, () => {
+    { tags:[ "@property", "@commercial_units" ] }, () => {
         before("Login, create report", () => {
             createReport(testData.reportCreationData);
 
