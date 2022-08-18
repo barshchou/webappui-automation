@@ -35,15 +35,37 @@ class JobSearchActions {
         return this;
     }
 
-    checkFiltersAreEnabled() {
-        this.Page.jobSearchFilterCompletedIn.should("be.enabled");
-        this.Page.jobSearchFilterCapRate.should("be.enabled");
-        this.Page.jobSearchFilterCommercialUnits.should("be.enabled");
-        this.Page.jobSearchFilterPricePerSF.should("be.enabled");
-        this.Page.jobSearchFilterPricePerUnit.should("be.enabled");
-        this.Page.jobSearchFilterPropertyType.should("be.enabled");
-        this.Page.jobSearchFilterResidentialUnits.should("be.enabled");
+    checkAllFiltersAreEnabled() {
+        this.Page.jobSearchFilterInputCompletedIn.should("be.enabled");
+        this.Page.jobSearchFilterInputCapRateMin.should("be.enabled");
+        this.Page.jobSearchFilterInputCapRateMax.should("be.enabled");
+        this.Page.jobSearchFilterInputCommercialUnitsMin.should("be.enabled");
+        this.Page.jobSearchFilterInputCommercialUnitsMax.should("be.enabled");
+        this.Page.jobSearchFilterInputMinPricePerSF.should("be.enabled");
+        this.Page.jobSearchFilterInputMaxPricePerSF.should("be.enabled");
+        this.Page.jobSearchFilterInputPricePerUnitMin.should("be.enabled");
+        this.Page.jobSearchFilterInputPricePerUnitMax.should("be.enabled");
+        this.Page.jobSearchFilterInputPropertyType.should("be.enabled");
+        this.Page.jobSearchFilterInputResidentialUnitsMin.should("be.enabled");
+        this.Page.jobSearchFilterInputResidentialUnitsMax.should("be.enabled");
         this.Page.jobSearchOnAppJobCheckbox.should("be.enabled");
+        return this;
+    }
+
+    checkAllFiltersAreDisabled() {
+        this.Page.jobSearchFilterInputCompletedIn.should("be.disabled");
+        this.Page.jobSearchFilterInputCapRateMin.should("be.disabled");
+        this.Page.jobSearchFilterInputCapRateMax.should("be.disabled");
+        this.Page.jobSearchFilterInputCommercialUnitsMin.should("be.disabled");
+        this.Page.jobSearchFilterInputCommercialUnitsMax.should("be.disabled");
+        this.Page.jobSearchFilterInputMinPricePerSF.should("be.disabled");
+        this.Page.jobSearchFilterInputMaxPricePerSF.should("be.disabled");
+        this.Page.jobSearchFilterInputPricePerUnitMin.should("be.disabled");
+        this.Page.jobSearchFilterInputPricePerUnitMax.should("be.disabled");
+        this.Page.jobSearchFilterInputPropertyType.should("be.disabled");
+        this.Page.jobSearchFilterInputResidentialUnitsMin.should("be.disabled");
+        this.Page.jobSearchFilterInputResidentialUnitsMax.should("be.disabled");
+        this.Page.jobSearchOnAppJobCheckbox.should("be.disabled");
         return this;
     }
 
@@ -332,6 +354,13 @@ class JobSearchActions {
     clickImportCompsFromReportButton() {
         findCompsPage.addToReportCompsButton.should("be.visible")
             .should("be.enabled").click();
+        return this;
+    }
+
+    clearReportIdField() {
+        findCompsPage.reportIdClearButton.should('exist')
+            .click();
+        findCompsPage.reportIdInput.should("be.empty");
         return this;
     }
 }
