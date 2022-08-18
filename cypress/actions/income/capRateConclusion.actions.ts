@@ -585,7 +585,7 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
         lossType: BoweryReports.RentLossType): CapRateConclusionActions {
         capRateConclusionPage.miscellaneousRentLossAmount(valueConclusionKey, lossType).should('exist')
             .invoke('attr', 'value').then(miscellaneousLoss => {
-                let key = lossType;
+                let key = valueConclusionKey + lossType;
                 let miscellaneousLossNumber = getNumberFromDollarNumberWithCommas(miscellaneousLoss);
                 cy._mapSet(key, miscellaneousLossNumber);
             });

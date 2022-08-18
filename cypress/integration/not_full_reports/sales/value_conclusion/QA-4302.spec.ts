@@ -49,11 +49,17 @@ describe("Prospective Market Value As Stabilized -> Less Storage Rent Loss data 
                 testData.valueConclusionKeyAsStabilized, testData.rentLossTypeStorage)
                 .verifyMiscellaneousLossMonths(testData.lossMonths, 
                     testData.valueConclusionKeyAsComplete, testData.rentLossTypeStorage);
-            cy._mapGet(testData.rentLossTypeStorage).then(storageLoss => {
-                Sales.ValueConclusion.verifyMiscellaneousLossAmount(storageLoss, 
-                    testData.valueConclusionKeyAsStabilized, testData.rentLossTypeStorage)
-                    .verifyMiscellaneousLossAmount(storageLoss, 
+
+            cy._mapGet(testData.valueConclusionKeyAsStabilized + testData.rentLossTypeStorage)
+                .then(storageLoss => {
+                    cy.log(`${storageLoss}`);
+                    Sales.ValueConclusion.verifyMiscellaneousLossAmount(storageLoss, 
+                        testData.valueConclusionKeyAsStabilized, testData.rentLossTypeStorage);
+                });
+            cy._mapGet(testData.valueConclusionKeyAsComplete + testData.rentLossTypeStorage)
+                .then(storageLoss => {
+                    Sales.ValueConclusion.verifyMiscellaneousLossAmount(storageLoss, 
                         testData.valueConclusionKeyAsComplete, testData.rentLossTypeStorage);
-            });
+                });
         });
     });
