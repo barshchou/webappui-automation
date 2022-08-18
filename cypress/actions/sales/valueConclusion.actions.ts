@@ -67,13 +67,13 @@ class ValueConclusionActions extends BaseActionsExt<typeof valueConclusionPage> 
     }
 
     enterSaleValueConclusion(value: string | number): this {
-        const valueToBe = typeof value === "string" ? value : `$${numberWithCommas(value)}`;
+        const valueToBe = typeof value === "string" ? value : `$${numberWithCommas(value.toFixed(2))}`;
         valueConclusionPage.saleValueConclusion.clear().type(`${value}`).should("have.value", valueToBe);
         return this;
     }
 
     verifySaleValueConclusion(value: string | number): this {
-        const valueToBe = typeof value === "string" ? value : `$${numberWithCommas(value)}`;
+        const valueToBe = typeof value === "string" ? value : `$${numberWithCommas(value.toFixed(2))}`;
         valueConclusionPage.saleValueConclusion.should("have.value", valueToBe);
         return this;
     }
