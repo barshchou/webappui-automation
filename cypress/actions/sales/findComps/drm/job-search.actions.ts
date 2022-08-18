@@ -13,6 +13,13 @@ class JobSearchActions {
         this.Page = page;
     }
 
+    openJobSearchTab() {
+        findCompsPage.jobSearchTab.click();
+        cy.wait(`@${Alias.gql.SearchJobs}`, { timeout: 120000 });
+        findCompsPage.reportIdInput.should('exist');
+        return this;
+    }
+
     /**
      * Checks whether filters in JobSearch screen exists
      */
@@ -25,6 +32,18 @@ class JobSearchActions {
         this.Page.jobSearchFilterPropertyType.should("exist");
         this.Page.jobSearchFilterResidentialUnits.should("exist");
         this.Page.jobSearchOnAppJobCheckbox.should("exist");
+        return this;
+    }
+
+    checkFiltersAreEnabled() {
+        this.Page.jobSearchFilterCompletedIn.should("be.enabled");
+        this.Page.jobSearchFilterCapRate.should("be.enabled");
+        this.Page.jobSearchFilterCommercialUnits.should("be.enabled");
+        this.Page.jobSearchFilterPricePerSF.should("be.enabled");
+        this.Page.jobSearchFilterPricePerUnit.should("be.enabled");
+        this.Page.jobSearchFilterPropertyType.should("be.enabled");
+        this.Page.jobSearchFilterResidentialUnits.should("be.enabled");
+        this.Page.jobSearchOnAppJobCheckbox.should("be.enabled");
         return this;
     }
 
@@ -246,6 +265,73 @@ class JobSearchActions {
                 .verifyJobCardOnAppJob(comp.jobInformation.onApp, filterObject)
                 .verifyJobCardPropertyType(comp.propertyInformation.propertyType, filterObject);
         });
+        return this;
+    }
+    
+    /**
+     * Action opens 'JOB SEARCH' tab, enters report id, finds comp on map
+     * and imports comps to existing report
+     */
+    addNewCompViaReportId(reportId: string) {
+        this.enterReportToSearchComp(reportId)
+            .clickSearchButton()
+            .clickSelectCompsIconOnMap()
+            .clickSelectCompsButton()
+            .clickSelectAllButton()
+            .clickImportCompsFromReportButton();
+        return this;
+    }
+
+    //TODO upgrade this method, cos it cant add two imports because of scroll.
+    /**
+     * Action enters report id into field 'Report ID' on 'JOB SEARCH' tab
+     */
+    enterReportToSearchComp(reportID: string) {
+        cy.intercept("GET", `/salesComps/eventIds/${reportID}`)
+            .as(Alias.salesCompsEventIds);
+        findCompsPage.reportIdInput
+            .should('exist')       
+            .realClick({ clickCount: 10 })
+            .type("textforclear", { force: true })
+            .realClick({ clickCount: 10 })
+            .focus()
+            .clear( { force: true })
+            .realClick({ clickCount: 10 })
+            .should('be.focused')
+            .realType(`${reportID}{enter}`);
+        findCompsPage.reportIdInput.should("have.value", reportID);
+        return this;
+    }
+
+    clickSearchButton() {
+        findCompsPage.searchButton.should('exist')
+            .should('be.enabled').click();
+        return this;
+    }
+    
+    clickSelectCompsIconOnMap(index = 0) {
+        findCompsPage.selectCompsIconOnMap.should('exist');
+        findCompsPage.selectCompsIconOnMap.eq(index).click();
+        findCompsPage.selectCompsButton.should('exist');
+        return this;
+    }
+
+    clickSelectCompsButton() {
+        findCompsPage.selectCompsButton.should('exist')
+            .should('be.enabled').click();
+        return this;
+    }
+    
+    clickSelectAllButton() {
+        findCompsPage.selectAllButton.should('exist').should('be.enabled');
+        findCompsPage.selectedForReportTitle.should('exist');
+        findCompsPage.selectAllButton.click();
+        return this;
+    }
+
+    clickImportCompsFromReportButton() {
+        findCompsPage.addToReportCompsButton.should("be.visible")
+            .should("be.enabled").click();
         return this;
     }
 }
