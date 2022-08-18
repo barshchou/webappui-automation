@@ -137,9 +137,11 @@ class JobSearchActions {
      * Setup Job-Search filters based on sending filter setup
      * @param filter Filter data we usually setup in test fixture
      */
-    jobSearchSetupFilter(filter: CompPlex.JobSearch.JobFilter) {
-        this.jobSearchSetSalePeriod(filter.salePeriod)
-            .jobSearchSetPropertyTypes(filter.propertyType).jobSearchSetOnAppJobs(filter.isShowOnlyOnAppJobs);
+    jobSearchSetupFilter(filter: CompPlex.JobSearch.JobFilter, setSalePeriod = true, setPropertyTypes= true, 
+        setOnAppJobs = true) {
+        if (setSalePeriod === true)  { this.jobSearchSetSalePeriod(filter.salePeriod); }
+        if (setPropertyTypes === true)  { this.jobSearchSetPropertyTypes(filter.propertyType); }
+        if (setOnAppJobs === true)  { this.jobSearchSetOnAppJobs(filter.isShowOnlyOnAppJobs); }
         // iterating over existing filters and setting the value
         Object.values(numberFilters).forEach(element => {
             this.jobSearchFilterSetMinMax(element, filter[element]);
@@ -158,12 +160,22 @@ class JobSearchActions {
     /**
      * Focuses on first available job icon on map and opens its job-card
      */
-    focusOnJobIcon() {
-        this.Page.selectCompsIconOnMap.first().dblclick({ force:true });
+    focusOnJobIcon(iconIndex = 0) {
+        this.Page.selectCompsIconOnMap.eq(iconIndex).dblclick({ force:true });// cy.pause();
         cy.wait(`@${Alias.gql.SearchJobs}`, { timeout: 120000 }).as(Alias.jobSearch.jobCardComp);
-        this.Page.selectCompsIconOnMap.first().click();
+        /**
+         * We need cy.wait here, because after gql response spinner sometimes exists, sometimes not
+         */
+        cy.wait(1000);
+        findCompsPage.loadingModalSpinner.should('not.exist');
+        /** 
+         * We need cy.wait here, because after spinner some of the comp 
+         * icons still in process of rendering their position on the map
+         */
+        cy.wait(1000);
+        this.Page.selectCompsIconOnMap.eq(iconIndex).click();
         this.Page.jobCard.should("be.visible");
-
+        findCompsPage.loadingModalSpinner.should('not.exist');
         // ernst: after job-card became visible - we need retrieve all necessary comp data for further manipulations
         this.retrieveJobCardData(Alias.jobSearch.jobCardComp, Alias.jobSearch.selectedCompData);
         return this;
