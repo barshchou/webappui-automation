@@ -25,8 +25,8 @@ class CommercialUnitsPage extends BasePage {
 
     get commercialUnitsTabs() { return cy.get("button[role='tab']"); }
 
-    getRadioButtonByValueAndUnitIndex(group: string, value: string, index = 0): Cypress.Chainable<JQuery<HTMLElement>> {
-        return cy.xpath(`//label[contains(text(), '${group}')]//following::input[@value='${value}'][1]`).eq(index);
+    getRadioButtonByValueAndUnitIndex(group: string, value: string): Cypress.Chainable<JQuery<HTMLElement>> {
+        return cy.xpath(`//label[contains(text(), '${group}')]//following::input[@value='${value}'][1]`);
     }
 
     get commercialUnitsSFInputs() { return cy.get("*[name*='.squareFeet']"); }
@@ -53,11 +53,11 @@ class CommercialUnitsPage extends BasePage {
     }
 
     get commercialGrossLeasableAreaTooltip() { 
-        return cy.xpath(`//label[text() = "Commercial Gross Leasable Area"]/span[1]`); 
+        return cy.get('[data-testid="InfoOutlinedIcon"]'); 
     }
 
-    get commercialUnitSfDiscussionTooltip() { 
-        return cy.xpath(`//h6[.= "Commercial Unit SF Discussion"]//following-sibling::*[@data-icon="info-circle"]`); 
+    get commercialUnitSfDiscussionTipText() { 
+        return cy.xpath(`//h6[.= "Commercial Unit SF Discussion"]//..//following-sibling::span`); 
     }
 
     get commentaryText() { return cy.get("div[data-slate-editor]"); }
