@@ -3,6 +3,7 @@ import { createReport } from "../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { Property, Sales } from "../../../../actions";
+import Enums from "../../../../enums/enums";
 
 describe(`Commercial Area/SF is row name in expanded Utilities Adjustment section`, 
     { tags: [ "@adjust_comps", "@sales" ] }, () => {
@@ -20,7 +21,7 @@ describe(`Commercial Area/SF is row name in expanded Utilities Adjustment sectio
 
             cy.stepInfo(`3. Verify that Commercial Area/SF is static name of the last row in`);
             Sales._AdjustComps.Page.getAdjustmentArrow(testData.adjustmentName).click();
-            Sales._AdjustComps.Page.getAdjustmentExpansionCellValue(testData.utilitiesAdjustmentRowLabel)
-                .should('have.text', "Commercial Area/SF");
+            Sales._AdjustComps.Page.getAdjustmentExpansionCellLabel(testData.utilitiesAdjustmentRowLabel)
+                .should('have.text', Enums.UTILITIES_ADJUSTMENTS_EXPANSION_ROWS.commercialAreaSf);
         });
     });

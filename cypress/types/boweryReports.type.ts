@@ -249,4 +249,7 @@ export namespace BoweryReports {
         type: BoweryReports.DateType,
         date: string
     }
+
+    export type AdjustmentExpansionLabels = 
+        typeof Enums.ADJUSTMENT_EXPANSION_LABELS[KeyInfo.AdjustmentExpansionLabelsKeys]
 }

@@ -3,6 +3,7 @@ import { createReport } from "../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { Property, Sales } from "../../../../actions";
+import Enums from "../../../../enums/enums";
 
 describe(`Other Adjustment section cell values validation`, 
     { tags: [ "@adjust_comps", "@sales" ] }, () => {
@@ -20,9 +21,9 @@ describe(`Other Adjustment section cell values validation`,
 
             cy.stepInfo(`3. Verify that SF is static name of first row`);
             Sales._AdjustComps.Page.getAdjustmentArrow(testData.adjustmentName).click();
-            Sales._AdjustComps.Page.getAdjustmentExpansionCellValue(testData.otherAdjustmentRowLabel, 0)
-                .should('have.text', "SF");
-            Sales._AdjustComps.Page.getAdjustmentExpansionCellValue(testData.otherAdjustmentRowLabel, 1)
+            Sales._AdjustComps.Page.getAdjustmentExpansionCellLabel(testData.otherAdjustmentRowLabel)
+                .should('have.text', Enums.OTHER_ADJUSTMENTS_EXPANSION_ROWS.sf);
+            Sales._AdjustComps.Page.getAdjustmentExpansionCellValue(testData.otherAdjustmentRowLabel)
                 .should('have.text', `${testData.squareFootAnalysisArea}`);
         });
     });

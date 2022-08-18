@@ -331,8 +331,8 @@ class AdjustCompsActions extends BaseActionsExt<typeof adjustCompsPage> {
     }
 
     verifyCommercialAreaSf(incomeValue: BoweryReports.IncomeTypes, squareFootAnalysis: number,
-        areaSf: number[], index = 1): AdjustCompsActions {
-        this.Page.getAdjustmentExpansionCellValue(Enums.UTILITIES_ADJUSTMENTS_EXPANSION_ROWS.commercialAreaSf, index)
+        areaSf: number[], index = 0): AdjustCompsActions {
+        this.Page.getAdjustmentExpansionCellValue(Enums.ADJUSTMENT_EXPANSION_LABELS.commercialAreaRatio, index)
             .invoke('text').then(commercialAreaSf => {
                 let commercialArea = areaSf.reduce((prev, next) => prev + next);
                 let calculatedPercent = incomeValue === Enums.INCOME_TYPE.residential 

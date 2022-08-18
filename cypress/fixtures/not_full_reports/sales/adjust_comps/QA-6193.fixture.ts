@@ -8,5 +8,5 @@ export default {
     squareFootAnalysisBasis: Enums.BASIS_SQUARE_FOOT_ANALYSIS.grossLeasableArea,
     squareFootAnalysisArea: 1000,
     adjustmentName: Enums.SALES_ADJUSTMENT_GRID.utilityAdjustment,
-    utilitiesAdjustmentRowLabel: Enums.UTILITIES_ADJUSTMENTS_EXPANSION_ROWS.commercialAreaSf
+    utilitiesAdjustmentRowLabel: Enums.ADJUSTMENT_EXPANSION_LABELS.commercialAreaRatio
 };

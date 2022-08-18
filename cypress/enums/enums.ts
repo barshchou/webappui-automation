@@ -85,6 +85,7 @@ import incomeCapitalizationApproachEnum from "./cms/incomeCapitalizationApproach
 import certificationEnum from "./cms/certification.enum";
 import otherAdjustmentsExpansionRowsEnum from "./adjustComps/otherAdjustmentsExpansionRows.enum";
 import utilitiesAdjustmentsExpansionRowsEnum from "./adjustComps/utilitiesAdjustmentsExpansionRows.enum";
+import adjustmentExpansionLabelsEnum from "./sales/adjustComps/adjustmentExpansionLabels.enum";
 
 export default {
     TEMPLATE_TYPE: templateTypesEnum,
@@ -173,5 +174,6 @@ export default {
     INCOME_CAPITALIZATION_APPROACH_SECTIONS: incomeCapitalizationApproachEnum,
     CERTIFICATION_SECTIONS: certificationEnum,
     OTHER_ADJUSTMENTS_EXPANSION_ROWS: otherAdjustmentsExpansionRowsEnum,
-    UTILITIES_ADJUSTMENTS_EXPANSION_ROWS: utilitiesAdjustmentsExpansionRowsEnum
+    UTILITIES_ADJUSTMENTS_EXPANSION_ROWS: utilitiesAdjustmentsExpansionRowsEnum,
+    ADJUSTMENT_EXPANSION_LABELS: adjustmentExpansionLabelsEnum
 };
