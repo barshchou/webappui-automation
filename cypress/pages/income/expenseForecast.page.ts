@@ -89,8 +89,9 @@ class ExpenseForecastPage extends BasePage {
         return cy.xpath(`//*[@data-qa="${forecastItem}-forecast-item"]//following::*[.='Modified'][2]`); 
     }
 
-    getExpenseCommentaryRevertToOriginal(forecastItem: string) {
-        return cy.xpath(`//*[@data-qa="${forecastItem}-forecast-item"]//following::button[.='Revert to Original'][1]`);
+    getExpenseCommentaryRevertToOriginal(forecastItem: string, index = 1) {
+        return cy.xpath(
+            `//*[@data-qa="${forecastItem}-forecast-item"]//following::button[.='Revert to Original'][${index}]`);
     }
 
     getCheckboxIncludeInProForma(forecastItem: string) { 

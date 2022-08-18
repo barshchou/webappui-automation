@@ -669,7 +669,8 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
     navigateToExpenseForecast(): NavigationSectionActions {
         this.clickIncomeApproachButton()
             .clickExpenseForecastButton()
-            .submitSaveChangesModal();
+            .submitSaveChangesModal()
+            .waitForUrl(routesUtils.expenseForecast);
         return this;
     }
 
