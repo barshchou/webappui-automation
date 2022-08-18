@@ -5,7 +5,7 @@ import { Final, Report, ReviewExport } from "../../../../actions";
 import { normalizeText } from "../../../../../utils/string.utils";
 
 
-describe("Verify that the generated commentary for Data Sources Description is a next-gen component", 
+describe("Generated Commentary is dynamically updated with relevant information (not-Freddie Mac report)", 
     { tags:[ "@final", "@source_information", "@check_export" ] }, () => {
 
         it("[QA-6036]", () => {
@@ -32,6 +32,9 @@ describe("Verify that the generated commentary for Data Sources Description is a
                 cy.log(normalText);
                 expect(normalText).to.eq(testData.generatedComment);
             });
+
+            Final._SourceInformation.clickSaveButton();
+            cy.wait(30000);
 
             cy.stepInfo("6. Export the report");
             _NavigationSection.openReviewAndExport();
