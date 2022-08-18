@@ -5,7 +5,7 @@ import { Income } from "../../../../actions";
 import { createReport } from "../../../../actions/base/baseTest.actions";
 
 describe(`Verify that Generated Commentary are updated on the Expense Forecast page`,
-    { tags: [ "@income", "@expense_forecast", "@fix" ] }, () => {
+    { tags: [ "@income", "@expense_forecast" ] }, () => {
 
         before("Login, create report", () => {
             createReport(testData.reportCreationData);
