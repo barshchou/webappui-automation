@@ -16,8 +16,6 @@ describe(`Verify the commentary functionality`,
 
             cy.stepInfo("Precondition: Proceed to the Income > Commercial > Stabilized Rent Roll page.");
             _NavigationSection.navigateToCommercialUnits()
-                .clickIncomeApproachButton()
-                .clickCommercialArrow()
                 .navigateToCommercialStabilizedRentRoll()
                 .verifyProgressBarNotExist();
 
