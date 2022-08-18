@@ -191,8 +191,9 @@ describe(`Verify that Generated Commentary are updated on the Expense Forecast p
 
             cy.stepInfo(`[QA-4047] [QA-4068] => 3. Revert commentary value, switch to unit basis 
             and fill Forecast value and verify commentary`);
-            Income._ExpenseForecastActions.revertToOriginalExpenseForecastCommentary(testData.expenseForecastFuel)
-                .revertToOriginalExpenseForecastCommentary(testData.expenseForecastFuel, 2);
+            Income._ExpenseForecastActions.revertToOriginalExpenseForecastCommentary(testData.expenseForecastFuel);
+            cy.wait(2500);
+            Income._ExpenseForecastActions.revertToOriginalExpenseForecastCommentary(testData.expenseForecastFuel, 2);
             testData.expenseForecastFuel.basis = "unit";
             Income._ExpenseForecastActions.switchExpenseForecastBasis(testData.expenseForecastFuel);
             Income._ExpenseForecastActions.enterForecastItemForecast(testData.expenseForecastFuel)
@@ -207,8 +208,9 @@ describe(`Verify that Generated Commentary are updated on the Expense Forecast p
         
             cy.stepInfo(`[QA-4047] [QA-4068] => 4. Revert commentary value, switch to room basis 
             and fill Forecast value and verify commentary`);
-            Income._ExpenseForecastActions.revertToOriginalExpenseForecastCommentary(testData.expenseForecastFuel)
-                .revertToOriginalExpenseForecastCommentary(testData.expenseForecastFuel, 2);
+            Income._ExpenseForecastActions.revertToOriginalExpenseForecastCommentary(testData.expenseForecastFuel);
+            cy.wait(2500);
+            Income._ExpenseForecastActions.revertToOriginalExpenseForecastCommentary(testData.expenseForecastFuel, 2);
             testData.expenseForecastFuel.basis = "room";
             Income._ExpenseForecastActions.switchExpenseForecastBasis(testData.expenseForecastFuel);
             Income._ExpenseForecastActions.enterForecastItemForecast(testData.expenseForecastFuel)
