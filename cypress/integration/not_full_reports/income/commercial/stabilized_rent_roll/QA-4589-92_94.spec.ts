@@ -18,7 +18,7 @@ describe(`Verify the commentary functionality`,
             _NavigationSection.navigateToCommercialUnits()
                 .clickIncomeApproachButton()
                 .clickCommercialArrow()
-                .navigateToStabilizedRentRollInCommercial()
+                .navigateToCommercialStabilizedRentRoll()
                 .verifyProgressBarNotExist();
 
             cy.saveLocalStorage();
