@@ -1,4 +1,4 @@
-name: Complex run on staging
+name: Complex scheduled run on staging
 
 on: 
   schedule:
