@@ -55,6 +55,5 @@ describe("Prospective Market Value As Stabilized -> Less Storage Rent Loss data 
                     .verifyMiscellaneousLossAmount(storageLoss, 
                         testData.valueConclusionKeyAsComplete, testData.rentLossTypeStorage);
             });
-            
         });
     });
