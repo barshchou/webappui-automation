@@ -80,9 +80,10 @@ import dateTypeEnum from "./keyInfo/dateType.enum";
 import interestAppraisedEnum from "./keyInfo/interestAppraised.enum";
 import letterOfTransmittalEnum from "./cms/letterOfTransmittal.enum";
 import swotAnalysisEnum from "./cms/swotAnalysis.enum";
-import salesforceJobsEnum from "./salesforceJobs.enum";
+import reportTypesEnum from "./salesforceJobs/reportTypes.enum";
 import incomeCapitalizationApproachEnum from "./cms/incomeCapitalizationApproach.enum";
 import certificationEnum from "./cms/certification.enum";
+import appraiserSFEnum from "./salesforceJobs/appraiserSF.enum";
 
 export default {
     TEMPLATE_TYPE: templateTypesEnum,
@@ -167,7 +168,8 @@ export default {
     INTEREST_APPRAISED: interestAppraisedEnum,
     LETTER_SECTIONS: letterOfTransmittalEnum,
     SWOT_SECTIONS: swotAnalysisEnum,
-    SALESFORCE_JOBS: salesforceJobsEnum,
+    REPORT_TYPES_SF: reportTypesEnum,
     INCOME_CAPITALIZATION_APPROACH_SECTIONS: incomeCapitalizationApproachEnum,
-    CERTIFICATION_SECTIONS: certificationEnum
+    CERTIFICATION_SECTIONS: certificationEnum,
+    APPRAISER_SF: appraiserSFEnum
 };
