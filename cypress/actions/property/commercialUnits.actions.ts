@@ -39,8 +39,7 @@ class CommercialUnitsActions extends BaseActionsExt<typeof commercialUnitsPage> 
         let aliasImageUpload = "aliasImageUpload";
         cy.intercept("POST", "/imageUpload").as(aliasImageUpload);
 
-        cy.get(`[data-qa=${category}-image-upload]`).find('input[type="file"]')
-            .attachFile(pathToFile, { subjectType: inputMethod });
+        this.Page.getImageCategoryImageUpload(category).attachFile(pathToFile, { subjectType: inputMethod });
 
         cy.wait(`@${aliasImageUpload}`).then(({ response }) => {
             expect(response.statusCode).equal(200);

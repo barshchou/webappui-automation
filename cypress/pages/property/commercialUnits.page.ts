@@ -1,6 +1,5 @@
 import { BoweryReports } from "../../types/boweryReports.type";
 import BasePage from "../base/base.page";
-
 class CommercialUnitsPage extends BasePage {
     get iconExchangeComUnits() { return cy.get("[data-icon=exchange]"); }
 
@@ -82,6 +81,10 @@ class CommercialUnitsPage extends BasePage {
     commercialUnitsTab(unitNumber = 1) { 
         return cy.xpath(`//div[@role='tablist']/button[.="Commercial Unit ${unitNumber}"]`); 
     } 
+
+    getImageCategoryImageUpload(category: BoweryReports.ImageType) {
+        return cy.get(`[data-qa=${category}-image-upload]`).find('input[type="file"]');
+    }
 }
 
 export default new CommercialUnitsPage();
