@@ -15,7 +15,7 @@ describe("Verify the text in the Opportunities section on the SWOT Analysis page
 
             cy.stepInfo(`2. Verify the following list of threats is displayed:
                         - Rent growth is limited by local rent control laws.
-                        - In 2022, the Federal Reserve Board increased their benchmark rate by 25 basis 
+                        - On July 27th, 2022, the Federal Reserve Board increased their benchmark rate by 25 basis 
                         points in March and again by 50 basis points at their May meeting in an effort to curb 
                         inflation. The Fed announced that more rate hikes are expected this year.
                         - As the economy continues its recovery from the global pandemic, there remains 
@@ -41,7 +41,7 @@ describe("Verify the text in the Opportunities section on the SWOT Analysis page
                                 in the exported report “Threats” section`);
                 cy.contains("Threats").scrollIntoView().next().find("li").then($li => {
                     const reportTreatsText = $li.toArray().map(li => li.innerHTML);
-                    expect(testData.exportThreatsTexts).to.deep.eq(reportTreatsText); 
+                    expect(testData.threatsTexts).to.deep.eq(reportTreatsText); 
                 });
                
             });
