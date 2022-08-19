@@ -1,3 +1,4 @@
+import { SaleCondition } from './../enums/enumKeys.enum.d';
 /* eslint-disable @typescript-eslint/no-namespace */
 
 import enums from "../enums/enums";
@@ -8,6 +9,7 @@ const { _jobSearch, _propertyInfoEnum, _saleInfoEnum } = enums.COMPPLEX_ENUM;
 namespace Keys {
     export type BuildingType = keyof typeof _propertyInfoEnum.buildingType
     export type SaleStatus = keyof typeof _saleInfoEnum
+    export type SaleCondition = keyof typeof enums.SALE_CONDITION
 }
 
 export namespace CompPlex {
@@ -17,6 +19,7 @@ export namespace CompPlex {
     export namespace SaleInfo {
         export type SaleStatus = typeof enums.COMPPLEX_ENUM
         ._saleInfoEnum[Keys.SaleStatus]  
+        export type SaleCondition = typeof enums.SALE_CONDITION[Keys.SaleCondition]
     }
 
     export namespace JobSearch {

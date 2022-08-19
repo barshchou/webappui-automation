@@ -45,6 +45,7 @@ export type SortValues = keyof typeof Enums.SORT_VALUES
 export type ConditionValues = keyof typeof Enums.CONDITION_VALUES
 export type ComparableTypes = keyof typeof Enums.COMPARABLE_TYPES
 export type SaleStatuses = keyof typeof Enums.SALE_STATUSES
+export type SaleCondition = keyof typeof Enums.SALE_CONDITION
 export type FileSelection = keyof typeof Enums.FILE_SELECTION_NAMES
 export type PropertyDiscussion = keyof typeof Enums.PROPERTY_DISCUSSION_NAMES
 export type SalesAdjustmentGridDiscussionsKeys = keyof typeof Enums.SALES_ADJUSTMENT_GRID_DISCUSSIONS

@@ -52,7 +52,7 @@ class SaleInfoFromActions {
         return this;
     }
 
-    checkRadioButtonSaleCondition(radioName: string): SaleInfoFromActions {
+    checkRadioButtonSaleCondition(radioName: CompPlex.SaleInfo.SaleCondition): SaleInfoFromActions {
         this.Page.saleCondition(radioName).should('exist').focus().check({ force: true })
             .should('be.checked');
         return this;
