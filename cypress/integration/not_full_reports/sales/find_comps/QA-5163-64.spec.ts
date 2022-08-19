@@ -9,17 +9,14 @@ import { conditionalDescribe } from "../../../checkIsProd.utils";
 conditionalDescribe(`[QA-5163] [QA-5164] [Sales > Find Comps] "Date Sold" sorting is applied correctly + 
                      drag and drop functionality`,
 { tags: [ "@sales", "@find_comps", "@comp_plex" ] }, () => {
-    before("Login, create report", () => {
-        createReport(testData.reportCreationData);
-        cy.saveLocalStorage();
-    });
+
     beforeEach(() => {
-        cy.restoreLocalStorage();
         salesInterceptions();
     });
 
     it("[QA-5163] [Sales > Find Comps] 'Date Sold' sorting is updated if user changes Date Sold for a comp", () => {
-        cy.stepInfo(`1.Navigate to Sales > Find Comps page `);
+        cy.stepInfo(`1. Login, create report + Navigate to Sales > Find Comps page `);
+        createReport(testData.reportCreationData5163);
         _NavigationSection.navigateToFindComps();
 
         cy.stepInfo(`2. Add sales comps via .CSV`);
@@ -82,13 +79,22 @@ conditionalDescribe(`[QA-5163] [QA-5164] [Sales > Find Comps] "Date Sold" sortin
 
     it(`[QA-5164] [Sales > Find Comps] The drag and drop functionality is disabled 
          when 'Date Sold' sorting is selected`, () => {
-        cy.stepInfo(`1. Verify "Date Sold" sorting is selected for sales comps + a comps exist in table`);
+        cy.stepInfo(`1. Login, create report + Navigate to Sales > Find Comps page `);
+        createReport(testData.reportCreationData5164);
+        _NavigationSection.navigateToFindComps();
+            
+        cy.stepInfo(`2. Add comps via CSV `);
+        Sales._FindComps.uploadComps(testData.filePath2Comps)
+            .verifyUploadCompsSucceeded()
+            .checkSalesCompSortedByDateSold();
+            
+        cy.stepInfo(`2. Verify "Date Sold" sorting is selected for sales comps + a comps exist in table`);
         Sales._FindComps.Page.sortSalesCompsSelectValue.should('contain', testData.sortSalesCompsDateSold);
         Sales._FindComps.Page.salesCompsDateSold.should(($compsDateList) => {
             expect($compsDateList.length).to.be.above(1);
         });
 
-        cy.stepInfo(`2. Verify that the drag and drop functionality is disabled when 
+        cy.stepInfo(`3. Verify that the drag and drop functionality is disabled when 
                      "Date Sold" sorting is selected for sales comps`);
         cy.get(Sales._FindComps.Page.selectorDraggableElement).should("not.exist");
     });

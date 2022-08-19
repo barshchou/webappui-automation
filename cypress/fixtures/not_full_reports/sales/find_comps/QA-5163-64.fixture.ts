@@ -2,7 +2,12 @@ import ReportDataCreator from "../../../data_creator/reportData.creator";
 import Enums from "../../../../enums/enums";
 import { BoweryAutomation } from "../../../../types/boweryAutomation.type";
 
-const reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("5163-64", {
+const reportCreationData5163: BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("5163", {
+    incomeValue: Enums.INCOME_TYPE.both,
+    conclusionValue: Enums.VALUE_CONCLUSION_TYPE.AS_COMPLETE
+});
+
+const reportCreationData5164: BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("5164", {
     incomeValue: Enums.INCOME_TYPE.both,
     conclusionValue: Enums.VALUE_CONCLUSION_TYPE.AS_COMPLETE
 });
@@ -12,6 +17,7 @@ const salePeriodValue = Enums.SALE_PERIOD_VALUES.lastThreeMonths;
 const radioButtonSaleConditionArms = Enums.SALE_CONDITION.armsLength;
 const radioButtonSaleConditionNonArms = Enums.SALE_CONDITION.nonArmsLength;
 const filePath = "not_full_reports/CostarExport_3Contract_3Listing_3Date.csv";
+const filePath2Comps = "not_full_reports/CostarExport 3Comps.csv";
 
 const comparableFixture = {
     address1: "Sanford Avenue, Queens",
@@ -34,10 +40,12 @@ const comparableFixture = {
 
 export default {
     comparableFixture,
-    reportCreationData,
+    reportCreationData5163,
+    reportCreationData5164,
     sortSalesCompsDateSold,
     salePeriodValue,
     radioButtonSaleConditionArms,
     radioButtonSaleConditionNonArms,
-    filePath
+    filePath,
+    filePath2Comps
 };
