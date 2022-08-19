@@ -4,6 +4,7 @@ import { _NavigationSection } from "../../../../actions/base";
 import { createReport } from "../../../../actions/base/baseTest.actions";
 import testData from '../../../../fixtures/not_full_reports/report/key_info/QA-4719.fixture';
 
+// TODO: [QA-6607] After clicking in the Definition of Market Value textarea, the chip is not displayed
 describe(`[QA-4719] Verify the "Linked" chips dropdown in the new narrative component 
 for As Is and As Stabilized report for Property Rights Appraised and Definition of Market Value sections`,
 { tags:[ "@report", "@key_info", "@check_export" ] }, () => {
