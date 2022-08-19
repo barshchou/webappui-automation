@@ -2,8 +2,15 @@ import ReportDataCreator from "../../../data_creator/reportData.creator";
 import Enums from "../../../../enums/enums";
 import { BoweryReports } from "../../../../types/boweryReports.type";
 
+const _otherIncomeItem: BoweryReports.OtherIncomeItem = {
+    vcLossType: "Other",
+    vcPercent: 2,
+    incomeCategory: "Billboard",
+    annualAmount: 4422.79
+};
+
 export default {
-    reportCreationData: ReportDataCreator.getReportData("4303", {
+    reportCreationData: ReportDataCreator.getReportData("4304", {
         conclusionValue: Enums.VALUE_CONCLUSION_TYPE.AS_COMPLETE
     }),
     numberOfUnits: 1,
@@ -14,8 +21,6 @@ export default {
     lossMonths: 2,
     valueConclusionKeyAsComplete: Object.keys(Enums.VALUE_CONCLUSION_NAME)[2] as BoweryReports.ValueConclusionKeys,
     valueConclusionKeyAsStabilized: Object.keys(Enums.VALUE_CONCLUSION_NAME)[1] as BoweryReports.ValueConclusionKeys,
-    rentLossTypeParking: Enums.RENT_LOSS_TYPE.parking,
-    monthlyRents: [ 450, 231, 350 ],
-    parkingVcLossTypeRadio: Enums.PARKING_VC_LOSS_TYPE.parking as BoweryReports.ParkingVcLossType,
-    parkingVCLoss: 3
+    rentLossTypeOther: Enums.RENT_LOSS_TYPE.other,
+    otherIncomeItem: _otherIncomeItem
 };

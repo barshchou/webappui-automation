@@ -45,6 +45,7 @@ describe("Prospective Market Value As Stabilized -> Less Storage Rent Loss data 
             Less Storage Rent Loss raw and compare the values from Time Period and Amount columns with the 
             Time Period and Amount values from Income → Cap Rate Conclusion page → 
             Cap Rate Conclusion Summary Table → Less Storage Rent Loss raw`);
+            NavigationSection.navigateToSalesValueConclusion();
             Sales.ValueConclusion.verifyMiscellaneousLossMonths(testData.lossMonths, 
                 testData.valueConclusionKeyAsStabilized, testData.rentLossTypeStorage)
                 .verifyMiscellaneousLossMonths(testData.lossMonths, 

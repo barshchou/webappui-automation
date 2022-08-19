@@ -32,6 +32,11 @@ class AmenitiesActions extends BaseActionsExt<typeof amenitiesPage> {
         return this;
     }
 
+    checkOtherCheckbox(): AmenitiesActions {
+        amenitiesPage.otherUnitAmenitiesCheckbox.should("have.value", "false").check().should("have.value", "true");
+        return this;
+    }
+
     addStorageUnits(units: number): AmenitiesActions {
         this.checkStorageCheckbox();
         amenitiesPage.storageUnitsTextField.clear().type(`${units}`);
