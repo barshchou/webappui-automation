@@ -151,7 +151,7 @@ class FindCompsPage extends BasePage {
     }
 
     get loadingModalCSV() {
-        return cy.get('[data-qa="loading-modal"] [data-icon="file-upload"]', { timeout: 60000 });
+        return cy.get('[data-qa="loading-modal"] [data-icon="file-upload"]', { timeout: 120000 });
     }
 
     get resetAllButton() {
