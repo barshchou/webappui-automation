@@ -4,7 +4,7 @@ name: Comp-plex scheduled run on dev
 
 on:
   schedule:
-    - cron: '*/5 * * * *' #Run regession tests on staging env every Monday at 5 AM UTC
+    - cron: 0/5 * * * * #Run regession tests on staging env every Monday at 5 AM UTC
 
 jobs:
   Comp_plex-cy-e2e-run-on-dev:
