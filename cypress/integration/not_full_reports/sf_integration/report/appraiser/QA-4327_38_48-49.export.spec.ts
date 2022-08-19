@@ -2,7 +2,8 @@ import { ReviewExport } from '../../../../../actions/index';
 import { _NavigationSection } from '../../../../../actions/base';
 import { createReport } from '../../../../../actions/base/baseTest.actions';
 import { Report } from '../../../../../actions';
-import testData from "../../../../../fixtures/not_full_reports/sf_integration/report/appraiser/QA-4327_38_48-49.fixture";
+import testData from
+    "../../../../../fixtures/not_full_reports/sf_integration/report/appraiser/QA-4327_38_48-49.fixture";
 
 describe(`Verify the Inspector's name is pre-filled in the Appraisers section on WebApp with the name 
         corresponding to the Inspector value for that job in SalesForce.`,
