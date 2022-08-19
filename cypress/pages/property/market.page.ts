@@ -40,6 +40,14 @@ class MarketPage extends BasePage {
         return cy.get(`[data-qa=file-selection-${use}MarketAnalysis-input] input`);
     }
 
+    getSubmarketByAnalysisUseFileUploadButton(use: BoweryReports.MarketAnalysisUses) {
+        return cy.get(`[data-qa=file-selection-${use}SubmarketAnalysis-input] button`);
+    }
+
+    getMarketByAnalysisUseFileUploadButton(use: BoweryReports.MarketAnalysisUses) {
+        return cy.get(`[data-qa=file-selection-${use}MarketAnalysis-input] button`);
+    }
+
     get exposureTimeDescription() { 
         return cy.xpath("//*[.='Exposure Time Description']//following::div[@data-slate-editor]"); 
     }

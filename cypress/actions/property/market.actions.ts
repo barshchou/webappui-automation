@@ -280,6 +280,30 @@ class MarketActions extends BaseActionsExt<typeof marketPage> {
         return this;
     }
 
+    uploadMarketByAnalysisUseFile(use: BoweryReports.MarketAnalysisUses, 
+        fileName: string): MarketActions {
+        marketPage.getMarketByAnalysisUseFileUploadButton(use).click();
+        marketPage.fileDropZone.attachFile(
+            `test_files/${fileName}`,
+            { subjectType: 'drag-n-drop' }
+        );
+        marketPage.getUploadFileButton().click();
+        marketPage.insertFileButton.click();
+        return this;
+    }
+
+    uploadSubmarketByAnalysisUseFile(use: BoweryReports.MarketAnalysisUses, 
+        fileName: string): MarketActions {
+        marketPage.getSubmarketByAnalysisUseFileUploadButton(use).click();
+        marketPage.fileDropZone.attachFile(
+            `test_files/${fileName}`,
+            { subjectType: 'drag-n-drop' }
+        );
+        marketPage.getUploadFileButton().click();
+        marketPage.insertFileButton.click();
+        return this;
+    }
+
     clickTrashCanButton(fileSelectionName: BoweryReports.FileSelection): MarketActions {
         marketPage.getTrashCanButton(fileSelectionName).click();
         return this;
