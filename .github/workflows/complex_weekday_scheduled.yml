@@ -63,15 +63,15 @@ jobs:
       - name: Run every weekday Comp-plex end-to-end tests with Currents dev
         uses: Bowery-RES/action-run-e2e-tests@latest
         with:
-           github_token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
-           username: ${{ secrets.USERNAME }}
-           password: ${{ secrets.PASSWORD }}
-           url: ${{ github.event.inputs.url }}
-           customUrl: ${{ github.event.inputs.customUrl }}
-           spec_file: ${{ github.event.inputs.spec_file }}
-           tags: ${{ github.event.inputs.tags }}
-           record_key: ${{ secrets.CURRENTS_RECORD_KEY }}
-           ref: ${{ github.event.inputs.ref }}
+          github_token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          url: ${{ github.event.inputs.url }}
+          customUrl: ${{ github.event.inputs.customUrl }}
+          spec_file: ${{ github.event.inputs.spec_file }}
+          tags: ${{ github.event.inputs.tags }}
+          record_key: ${{ secrets.CURRENTS_RECORD_KEY }}
+          ref: ${{ github.event.inputs.ref }}
         env:
           DD_CIVISIBILITY_AGENTLESS_ENABLED: true
           DD_API_KEY: ${{ secrets.DD_API_KEY }}
