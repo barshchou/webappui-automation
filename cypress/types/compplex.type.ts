@@ -1,4 +1,3 @@
-import { SaleCondition } from './../enums/enumKeys.enum.d';
 /* eslint-disable @typescript-eslint/no-namespace */
 
 import enums from "../enums/enums";

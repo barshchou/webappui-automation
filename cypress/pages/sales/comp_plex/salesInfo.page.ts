@@ -67,7 +67,7 @@ export default class SaleInformationForm {
         return cy.contains('button', 'DONE');
     }
 
-    saleCondition(radioName: string) {
+    saleCondition(radioName: CompPlex.SaleInfo.SaleCondition) {
         return cy.get(`input[class="ant-radio-input"][value="${radioName}"]`);
     }
     
