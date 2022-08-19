@@ -3,7 +3,7 @@ import { salesInterceptions } from "../../../../actions/base/baseTest.actions";
 import { Alias } from "../../../../utils/alias.utils";
 import testData from "../../../../fixtures/comp_plex/sales/find_comps/QA-6356.fixture";
 
-describe.skip(`[QA-6356] [Sales > Find Comps > Job Search > Filters] 
+describe(`[QA-6356] [Sales > Find Comps > Job Search > Filters] 
 Check that ID cards show correct data based on chosen filters`, {
     tags: [ "@comp_plex_standalone" ] }, () => {
     beforeEach(() => {
