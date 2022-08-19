@@ -426,8 +426,7 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
             numberArray.sort((firstEl, secondEl) => (firstEl < secondEl) ? 1 : -1);
             wordsArray.sort((firstEl, secondEl) => (firstEl > secondEl) ? 1 : -1);
             let arrayForCompare = wordsArray.concat(numberArray);
-            cy.log(<any>focusArray); 
-            cy.log(<any>arrayForCompare); 
+            cy.log(`Array ${<any>focusArray} is compared with array ${<any>arrayForCompare}`); 
             expect(focusArray.length === arrayForCompare.length && focusArray.every((value, index) => 
                 value === arrayForCompare[index])
             ).to.be.equal(true);
