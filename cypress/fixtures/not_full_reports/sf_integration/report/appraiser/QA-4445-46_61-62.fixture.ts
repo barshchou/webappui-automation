@@ -9,7 +9,7 @@ const appraisers = [
     },
     {
         specName: "[QA-4446_61]",
-        reportData: ReportDataCreator.getReportData(Enums.APPRAISER_SF.reviewerReviewer2, {}, true),
+        reportData: ReportDataCreator.getReportData(Enums.APPRAISER_SF.appraiserLeadReviewerReviewer2, {}, true),
         leadAppraiser: "James Dunne",
     },
     {

@@ -3,10 +3,10 @@ import BasePage from "../base/base.page";
 class AppraiserPage extends BasePage {
     get pageHeader() { return cy.get("[data-qa=appraisers]"); }
 
-    get searchAppraiserTextField() { return cy.get("data-qa='addAppraiserInspector'"); }
+    get searchAppraiserTextField() { return cy.get("[data-qa='inspectorNameInput'] input"); }
 
     get btnAddAppraiserInspector() {
-        return cy.contains("Add appraiser / inspector");
+        return cy.get("[data-qa='addAppraiserInspector']");
     }
 
     get leadAppraiser() {
@@ -18,12 +18,12 @@ class AppraiserPage extends BasePage {
     }
 
     appraiserSignCheckbox(appraiserName: string) { 
-        return cy.xpath(`//*[@data-qa='fullName'][.='${appraiserName}']` + 
+        return cy.xpath(`//*[.='${appraiserName}']` + 
         `/following::*[@data-qa='signReport-checkbox']//input`).eq(0);
     }
 
     personallyInspectedCheckbox(appraiserName: string) {
-        return cy.xpath(`//*[@data-qa='fullName'][.='${appraiserName}']` +
+        return cy.xpath(`//*[.='${appraiserName}']` +
         `/following::*[@data-qa='inspected-checkbox']//input`).eq(0);
     }
 
