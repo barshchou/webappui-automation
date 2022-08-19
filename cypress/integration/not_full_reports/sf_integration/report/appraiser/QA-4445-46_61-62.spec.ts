@@ -1,7 +1,8 @@
 import { _NavigationSection } from '../../../../../actions/base';
 import { createReport } from '../../../../../actions/base/baseTest.actions';
 import { Report } from '../../../../../actions';
-import testData from "../../../../../fixtures/not_full_reports/sf_integration/report/appraiser/QA-4445-46_61.fixture";
+import testData from 
+    "../../../../../fixtures/not_full_reports/sf_integration/report/appraiser/QA-4445-46_61-62.fixture";
 
 describe("Prefill Reviewer from Salesforce into the Lead Appraiser Row",
     { tags: [ "@report", "@appraiser", "@salesforce" ] }, () => {
