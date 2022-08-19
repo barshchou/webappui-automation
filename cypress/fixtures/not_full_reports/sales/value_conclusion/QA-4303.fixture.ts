@@ -15,6 +15,7 @@ export default {
     valueConclusionKeyAsComplete: Object.keys(Enums.VALUE_CONCLUSION_NAME)[2] as BoweryReports.ValueConclusionKeys,
     valueConclusionKeyAsStabilized: Object.keys(Enums.VALUE_CONCLUSION_NAME)[1] as BoweryReports.ValueConclusionKeys,
     rentLossTypeParking: Enums.RENT_LOSS_TYPE.parking,
+    parkingPlaces: 3,
     monthlyRents: [ 450, 231, 350 ],
     parkingVcLossTypeRadio: Enums.PARKING_VC_LOSS_TYPE.parking as BoweryReports.ParkingVcLossType,
     parkingVCLoss: 3
