@@ -7,7 +7,7 @@
   "scripts": {
     "act:debug": "act -e ./.act/debug.json --secret-file ./.act/.secrets -j Not-full-reports-run-DEBUG-ACT",
     "cy:open": "npx cypress open --config-file cypress.config.ts",
-    "cy:open:comp_plex":"npm run cy:open -- --env url=compDev",
+    "cy:open:comp_plex": "npm run cy:open -- --env url=compDev",
     "cy:run": "npx cypress run --config-file cypress.config.ts",
     "cy:chrome:snapshot_tests": "npm run cy:run -- --env grepTags=@snapshot_tests,grepFilterSpecs=true --browser=chrome",
     "cy:chrome:update_snapshots": "npm run cy:run -- --env grepTags=@snapshot_tests,grepFilterSpecs=true,updateSnapshots=true --browser=chrome",
@@ -58,6 +58,7 @@
     "eslint-plugin-cypress": "^2.12.1",
     "glob": "^8.0.1",
     "mammoth": "^1.4.21",
+    "mongodb": "^4.9.0",
     "socket.io": "^4.5.1",
     "socket.io-client": "^4.5.1",
     "typescript": "^4.5.5"
