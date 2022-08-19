@@ -29,5 +29,6 @@ const appraisers = [
 
 export default {
     reportCreationData: reportCreationFixture(),
+    leadAppraiser: "Andrew Babienco",
     appraisers
 };

@@ -3,10 +3,14 @@ import BasePage from "../base/base.page";
 class AppraiserPage extends BasePage {
     get pageHeader() { return cy.get("[data-qa=appraisers]"); }
 
-    get searchAppraiserTextField() { return cy.get('[role="dialog"] [type="text"]'); }
+    get searchAppraiserTextField() { return cy.get("data-qa='addAppraiserInspector'"); }
 
     get btnAddAppraiserInspector() {
         return cy.contains("Add appraiser / inspector");
+    }
+
+    get leadAppraiser() {
+        return cy.xpath(`//*[@data-qa='fullName']//*[@data-qa='select-value']`);
     }
 
     getAppraiserOptionFromList(index = 0) {
