@@ -1,52 +1,12 @@
 name: Comp-plex scheduled run on dev
 
+# return back after debug - 00 05 * * 1-5
+
 on:
-  workflow_dispatch:
-    inputs:
-      url:
-        type: choice
-        description: Select the environment
-        options:
-          - compDev
-          - compStage
-          - custom
-        required: true
-        default: compDev
-      customUrl:
-        type: string
-        description: Add custom environment url if needed
-        required: false
-      spec_file:
-        type: string
-        description: Spec(s) to be executed
-        required: false
-        default: cypress/integration/comp_plex/**
-      tags:
-        type: string
-        description: Run test with specific tags (via grep,grepTags,burn)
-        required: false
-        default: grep=,grepTags=-@smoke,burn=
-      ref:
-        type: string
-        description: Select branch, tag, commit ref
-        required: false
-      threads:
-        type: string
-        description: Thread number(between 1 and 3)
-        required: false
-        default: 3
+  schedule:
+    - cron: "*/5 * * * *" #Run regession tests on staging env every Monday at 5 AM UTC
 
 jobs:
-  concurrency:
-    runs-on: ubuntu-latest
-    outputs:
-      threads: ${{ steps.concurrency.outputs.threads }}
-    steps:
-      - name: Prepare concurrency config
-        id: concurrency
-        run: |
-          echo ::set-output name=threads::$(jq '.[0:${{github.event.inputs.threads}}]' <<< "[1, 2, 3]")
-
   Comp_plex-cy-e2e-run-on-dev:
     runs-on: ubuntu-latest
     timeout-minutes: 25
@@ -57,24 +17,22 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        containers: ${{ fromJSON(needs.concurrency.outputs.threads) }}
+        containers: [1, 2, 3]
 
     steps:
       - name: Run every weekday Comp-plex end-to-end tests with Currents dev
         uses: Bowery-RES/action-run-e2e-tests@latest
         with:
-           github_token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
-           username: ${{ secrets.USERNAME }}
-           password: ${{ secrets.PASSWORD }}
-           url: ${{ github.event.inputs.url }}
-           customUrl: ${{ github.event.inputs.customUrl }}
-           spec_file: ${{ github.event.inputs.spec_file }}
-           tags: ${{ github.event.inputs.tags }}
-           record_key: ${{ secrets.CURRENTS_RECORD_KEY }}
-           ref: ${{ github.event.inputs.ref }}
+          github_token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          url: compDev
+          spec_file: cypress/integration/comp_plex/**
+          tags: grep=,grepTags=-@smoke,burn=
+          record_key: ${{ secrets.CURRENTS_RECORD_KEY }}
         env:
           DD_CIVISIBILITY_AGENTLESS_ENABLED: true
           DD_API_KEY: ${{ secrets.DD_API_KEY }}
-          DD_ENV: ${{ github.event.inputs.url }}
+          DD_ENV: 'compDev'
           DD_SERVICE: 'comp_plex'
           
