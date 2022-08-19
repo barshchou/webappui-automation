@@ -2,8 +2,8 @@ import testData from "../../../../../fixtures/not_full_reports/sf_integration/re
 import { createReport } from "../../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../../actions/base";
 import { Report } from "../../../../../actions";
-// eslint-disable-next-line max-len
-import { reportCreationData } from "../../../../../fixtures/not_full_reports/sf_integration/report/key_info/QA-4031.fixture";
+import { reportCreationData } from
+    "../../../../../fixtures/not_full_reports/sf_integration/report/key_info/QA-4031.fixture";
 
 describe("[QA-4031] Verify the export of the report with the Pre-filled Report Due Date from SalesForce",
     { tags: [ "@report", "@key_info", "@salesforce" ] }, () => {

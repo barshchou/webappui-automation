@@ -1,6 +1,6 @@
 import testData from "../../../../../fixtures/not_full_reports/sf_integration/report/key_info/QA-4621-24.fixture";
-// eslint-disable-next-line max-len
-import { reportCreationData } from "../../../../../fixtures/not_full_reports/sf_integration/report/key_info/QA-4621-24.fixture";
+import { reportCreationData } from
+    "../../../../../fixtures/not_full_reports/sf_integration/report/key_info/QA-4621-24.fixture";
 import { createReport } from "../../../../../actions/base/baseTest.actions";
 import { Report } from "../../../../../actions";
 import { _NavigationSection } from "../../../../../actions/base";

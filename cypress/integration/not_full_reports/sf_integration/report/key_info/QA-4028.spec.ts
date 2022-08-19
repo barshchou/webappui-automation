@@ -1,5 +1,5 @@
-// eslint-disable-next-line max-len
-import { reportCreationData } from "../../../../../fixtures/not_full_reports/sf_integration/report/key_info/QA-4028.fixture";
+import { reportCreationData } from
+    "../../../../../fixtures/not_full_reports/sf_integration/report/key_info/QA-4028.fixture";
 import testData from "../../../../../fixtures/not_full_reports/sf_integration/report/key_info/QA-4028.fixture";
 import { createReport } from "../../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../../actions/base";
