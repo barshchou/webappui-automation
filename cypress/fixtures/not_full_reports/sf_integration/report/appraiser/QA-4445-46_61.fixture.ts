@@ -8,7 +8,7 @@ const appraisers = [
         leadAppraiser: "Andrew Babienco",
     },
     {
-        specName: "[QA-4446]",
+        specName: "[QA-4446_61]",
         reportData: ReportDataCreator.getReportData(Enums.SALESFORCE_JOBS.retail, {}, true),
         leadAppraiser: "James Dunne",
     },
