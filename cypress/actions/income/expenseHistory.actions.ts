@@ -65,7 +65,7 @@ class ExpenseHistoryActions extends BaseActionsExt<typeof expenseHistoryPage> {
     verifyIssueTextByColIndex(issueValue: number | string, cellName: string, index = 0, notHaveText?: boolean
     ): ExpenseHistoryActions {
         const matcher = notHaveText ? "not.have.text" : "have.text";
-        const textToBe = issueValue === "clear" || issueValue === 0 ? "" : issueValue === "-" ? issueValue :
+        const textToBe = issueValue === 0 ? "" : issueValue === "-" ? issueValue :
             `$${numberWithCommas((<number>issueValue).toFixed(2))}`;
         expenseHistoryPage.getUnifiedEditableAndTotalCells(cellName).eq(index).should(matcher, textToBe);
         return this;
@@ -274,13 +274,12 @@ class ExpenseHistoryActions extends BaseActionsExt<typeof expenseHistoryPage> {
      * 'Create' word
      */
     enterNewCategoryName(name: string, isFirstEnter = true): ExpenseHistoryActions {
-        expenseHistoryPage.newCategoryNameInput.should("have.attr", "placeholder", "Enter Custom Expense...")
-            .and("have.attr", "required");
+        expenseHistoryPage.newCategoryNameInput.should("have.attr", "placeholder", "Enter Custom Expense...");
         expenseHistoryPage.newCategoryNameInput.type(`${name}`);
         if (isFirstEnter) {
-            expenseHistoryPage.newCategoryInputSuggestionDropdown.should("contain.text", `Create "${name}"`);
+            cy.contains(`${name} will be created`).should("exist");
         }
-        expenseHistoryPage.newCategoryNameInput.type("{enter}");
+        expenseHistoryPage.newCategoryNameInput.type("{downArrow}{enter}");
         return this;
     }
 
