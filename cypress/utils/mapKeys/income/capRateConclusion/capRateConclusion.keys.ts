@@ -18,5 +18,6 @@ export default {
     asCompleteFinalAmount: 'asCompleteFinalAmount',
     asStabilizedFinalAmount: 'asStabilizedFinalAmount',
     allAsStabilizedLossesAliases: 'allAsStabilizedLossesAliases',
-    allAsCompleteLossesAliases: 'allAsCompleteLossesAliases'
+    allAsCompleteLossesAliases: 'allAsCompleteLossesAliases',
+    valueConclusionLossesFileName: 'valueConclusionLossesFileName'
 };
