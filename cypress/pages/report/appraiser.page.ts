@@ -48,6 +48,8 @@ class AppraiserPage extends BasePage {
         return cy.xpath(`//*[@data-qa="inspected-checkbox"]//*[@value='${isChecked}']` + 
         `/../../../*[@data-qa="fullName"]`); 
     }
+
+    get externalInspectorRadio () { return cy.get("[data-qa='externalInspectorRadio'] input"); }
 }
 
 export default new AppraiserPage();

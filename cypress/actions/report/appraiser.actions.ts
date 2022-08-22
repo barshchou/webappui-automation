@@ -18,6 +18,15 @@ class AppraiserActions extends BaseActionsExt<typeof appraiserPage> {
         return this;
     }
 
+    searchAndAddExternalInspector(inspectorName: string): AppraiserActions {
+        appraiserPage.btnAddAppraiserInspector.click();
+        appraiserPage.searchAppraiserTextField.clear()
+            .type(inspectorName).should('have.value', inspectorName);
+        appraiserPage.externalInspectorRadio.click();
+        appraiserPage.formAddButton().click();
+        return this;
+    }
+ 
     verifySignCheckbox(appraiserFullName: string, enabled: boolean): AppraiserActions {
         appraiserPage.appraiserSignCheckbox(appraiserFullName).should('have.value', `${enabled}`);
         return this;
