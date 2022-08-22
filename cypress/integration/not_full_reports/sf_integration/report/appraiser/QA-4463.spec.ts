@@ -6,7 +6,7 @@ import testData from "../../../../../fixtures/not_full_reports/sf_integration/re
 describe(`Prefill Reviewer from Salesforce into the Lead Appraiser Row (Reviewer 2 == Inspector)`,
     { tags: [ "@report", "@appraiser", "@salesforce" ] }, () => {
     
-        it("[QA-4327_48-49]", () => {
+        it("[QA-4463]", () => {
             cy.stepInfo('1. Create a report with SF job');
             createReport(testData.reportData);
 
