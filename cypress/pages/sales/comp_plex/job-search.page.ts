@@ -114,4 +114,8 @@ export default class JobSearchPage {
     get reportIdClearButton() {
         return cy.get('[data-testid="ClearIcon"]');
     }
+
+    get filtersResetAllButton() {
+        return cy.get('[data-qa="filter-reset-all-btn"]');
+    }
 }

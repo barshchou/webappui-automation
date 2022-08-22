@@ -69,6 +69,23 @@ class JobSearchActions {
         return this;
     }
 
+    checkAllFiltersAreEmpty() {
+        this.Page.jobSearchFilterInputCompletedIn.should("not.have.value");
+        this.Page.jobSearchFilterInputCapRateMin.should("be.empty");
+        this.Page.jobSearchFilterInputCapRateMax.should("be.empty");
+        this.Page.jobSearchFilterInputCommercialUnitsMin.should("be.empty");
+        this.Page.jobSearchFilterInputCommercialUnitsMax.should("be.empty");
+        this.Page.jobSearchFilterInputMinPricePerSF.should("be.empty");
+        this.Page.jobSearchFilterInputMaxPricePerSF.should("be.empty");
+        this.Page.jobSearchFilterInputPricePerUnitMin.should("be.empty");
+        this.Page.jobSearchFilterInputPricePerUnitMax.should("be.empty");
+        this.Page.jobSearchFilterInputPropertyType.should("not.have.value");
+        this.Page.jobSearchFilterInputResidentialUnitsMin.should("be.empty");
+        this.Page.jobSearchFilterInputResidentialUnitsMax.should("be.empty");
+        this.Page.jobSearchOnAppJobCheckbox.should("not.be.checked");
+        return this;
+    }
+
     /**
      * Sets min or/and max value to the filter 
      * @param filterName name of the filter which takes **only** number input
@@ -363,5 +380,13 @@ class JobSearchActions {
         findCompsPage.reportIdInput.should("be.empty");
         return this;
     }
+
+    clearAllFiltersViaReset() {
+        this.Page.filtersResetAllButton.should('exist')
+            .click();
+        this.checkAllFiltersAreEmpty();
+        return this;
+    }
+    
 }
 export default new JobSearchActions(findCompsPage);
