@@ -15,19 +15,25 @@ and Identification of the Client sections.`,
         cy.stepInfo(`1. Proceed to the Report > Client page.`);
         _NavigationSection.navigateToClientPage();
 
-        cy.stepInfo(`2. Click on the Edit button for Intended User and Identification of the Client sections.`);
+        cy.stepInfo(`2. Activate text area for Intended User section.`);
         Report._Client.verifyProgressBarNotExist()
-            .Page.formEditBtn().click();
-        Report._Client.Page.formEditBtn().click();
+            .activateTextAreaInput( Report._Client.Page.intendedUserTextBox);
 
-        cy.stepInfo(`3. Enter the “=F“ and select the 'Foreclosure sale' option for both sections.`);
+        cy.stepInfo(`3. Enter the “=F“ and select the 'Foreclosure sale' option`);
         Report._Client.enterIntendedUserTextBox(testData.textToType)
-            .clickNarrativeSuggestions(testData.verifyListValue)
-            .enterIdentificationOfTheClientTextBox(testData.textToType)
+            .clickNarrativeSuggestions(testData.verifyListValue);
+
+        cy.stepInfo(`4. Verify that the following text appears`);
+        Report._Client.verifyIntendedUserTextBox(testData.verifyAreaValue);
+            
+        cy.stepInfo(`5. Activate text area for Identification of the Client section.`);
+        Report._Client.activateTextAreaInput( Report._Client.Page.identificationOfClientTextBox);
+
+        cy.stepInfo(`6. Enter the “=F“ and select the 'Foreclosure sale' option`);
+        Report._Client.enterIdentificationOfTheClientTextBox(testData.textToType)
             .clickNarrativeSuggestions(testData.verifyListValue, 1);
 
-        cy.stepInfo(`4. Verify that the following text appears in both sections.`);
-        Report._Client.verifyIntendedUserTextBox(testData.verifyAreaValue)
-            .verifyIdentificationOfTheClientTextBox(testData.verifyAreaValue);
+        cy.stepInfo(`7. Verify that the following text appears`);
+        Report._Client.verifyIdentificationOfTheClientTextBox(testData.verifyAreaValue);
     });
 });

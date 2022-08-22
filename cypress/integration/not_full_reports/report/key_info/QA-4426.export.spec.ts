@@ -20,8 +20,8 @@ describe("[QA-4426] Check the generated commentary for Property Rights Appraised
 
                 cy.stepInfo(`3. Verify that the interest appraised elements of the generated commentary 
                 (highlighted in red) are chips`);
-                Report._KeyInfo.Page.textBoxPropertyRightsAppraised.contains(item.check).trigger("mouseover");
-                Report._KeyInfo.verifyTooltipNotExist();
+                Report._KeyInfo.Page.textBoxPropertyRightsAppraised.contains(item.check)
+                    .should("have.css", "color", testData.color);
 
                 cy.stepInfo(`4. Verify that the Property Rights Appraised  discussion appears below 
                 the h2 Introduction > Property Rights 

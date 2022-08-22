@@ -75,7 +75,10 @@ export namespace BoweryReports {
             typeof Enums.SALES_ADJUSTMENT_GRID_DISCUSSIONS[KeyInfo.SalesAdjustmentGridDiscussionsKeys]
         export type SalesAdjustmentGridRows = 
             typeof Enums.SALES_ADJUSTMENT_GRID_ROWS[KeyInfo.SalesAdjustmentGridRowsKeys]
-
+        export type OtherAdjustmentsRows = 
+            typeof Enums.OTHER_ADJUSTMENTS_EXPANSION_ROWS[KeyInfo.OtherAdjustmentsExpansionRowsKeys]
+        export type UtilitiesAdjustmentsRows = 
+            typeof Enums.UTILITIES_ADJUSTMENTS_EXPANSION_ROWS[KeyInfo.UtilitiesAdjustmentsExpansionRowsKeys]
     }
 
     export type ProFormaAnyIncome = {
@@ -218,7 +221,7 @@ export namespace BoweryReports {
     export type PropertyConditionsRadios = keyof typeof Enums.PROPERTY_CONDITIONS_RADIOS;
     export type BondTickers = typeof Enums.BOND_TYPES[KeyInfo.BondTypes]
     export type BondTypes = keyof typeof  Enums.BOND_TYPES
-	export type ExpenseCardNames = typeof Enums.EXPENSES_CARD_NAMES[KeyInfo.ExpenseCardName]
+    export type ExpenseCardNames = typeof Enums.EXPENSES_CARD_NAMES[KeyInfo.ExpenseCardName]
 
     export namespace FindComps {
         export type SalePeriodValues = typeof Enums.SALE_PERIOD_VALUES[KeyInfo.SalePeriodValues]
@@ -251,4 +254,6 @@ export namespace BoweryReports {
     export type HighestAndBestUseComments = typeof Enums.HIGHEST_AND_BEST_USE_COMMENTS_ENUM[
         KeyInfo.HighestAndBestUseCommentsKeys
     ]
+    export type AdjustmentExpansionLabels = 
+        typeof Enums.ADJUSTMENT_EXPANSION_LABELS[KeyInfo.AdjustmentExpansionLabelsKeys]
 }

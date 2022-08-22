@@ -10,6 +10,7 @@
 
 import Enums from "../enums/enums";
 import * as KeyInfo from '../enums/enumKeys.enum';
+import routesUtils from "../utils/routes.utils";
 
 export namespace Utils {
     type _GraphQLRequest = {
@@ -23,4 +24,8 @@ export namespace Utils {
     export type EnvLaunchDarklyType = keyof typeof Enums.ENV_LAUNCH_DARKLY
     
     export type GraphQLRequest = Partial<_GraphQLRequest>;
+
+    type _Routes = keyof typeof routesUtils
+
+    export type Routes = typeof routesUtils[_Routes]
 }

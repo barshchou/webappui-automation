@@ -1,11 +1,20 @@
 import { BoweryReports } from "../../types/boweryReports.type";
 import { applyMixins } from "../../utils/object.utils";
 import BasePage from "../base/base.page";
+import JobSearchPage from "./comp_plex/job-search.page";
 import PropertyInformationForm from "./comp_plex/propertyInfo.page";
 import SalesCompsDetailsForm from "./comp_plex/salesCompDetails.page";
 import SaleInformationForm from "./comp_plex/salesInfo.page";
 
 class FindCompsPage extends BasePage {
+    get propertyDescReadingBtn() {
+        return cy.get('[data-qa="reading-btn"]');
+    }
+
+    get propertyDescRevertToGenerateBtn() {
+        return cy.get('[data-qa="revert-to-generated-btn"]');
+    }
+
     get createCompButton() { return cy.get("[data-qa=create-sales-comps-btn]"); }
 
     get searchCompAddressInput() {
@@ -137,12 +146,15 @@ class FindCompsPage extends BasePage {
     }
 
     get filterSalePeriod() {
-        return cy.get('[data-qa="filter-sale-period"]');
+        return cy.get('[data-qa="filter-completedInPeriod"]');
     }
 
     filterSalePeriodValue(value: string) {
-        return cy.get('[role="option"]')
-            .contains(`${value}`);
+        return cy.get(`[role="option"][data-value="${value}"]`);
+    }
+
+    filterPropertyTypeValue(value: string) {
+        return cy.get(`[data-value="${value}"]`);
     }
 
     get compSearchTab() {
@@ -165,6 +177,9 @@ class FindCompsPage extends BasePage {
         return this.importCompModal.contains("Selected for report");
     }
 
+    get sfNewComp() {
+        return cy.get('[title="SF"]');
+    }
 }
 
 /**
@@ -172,7 +187,7 @@ class FindCompsPage extends BasePage {
  * the expected mixins with the same name as your base
  */
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
-interface FindCompsPage extends PropertyInformationForm, SaleInformationForm, SalesCompsDetailsForm { }
-applyMixins(FindCompsPage, [ PropertyInformationForm, SaleInformationForm, SalesCompsDetailsForm ]);
+interface FindCompsPage extends PropertyInformationForm, SaleInformationForm, SalesCompsDetailsForm, JobSearchPage { }
+applyMixins(FindCompsPage, [ PropertyInformationForm, SaleInformationForm, SalesCompsDetailsForm, JobSearchPage ]);
 
 export const findCompsPage = new FindCompsPage();

@@ -9,6 +9,7 @@ describe(`[QA-4598][QA-4599][QA-4600] Verify the suggested text dropdown in the
 new narrative component added through "=" in the Generated Commentary on the Stabilized Rent Roll page.`, 
 { tags: [ "@income", "@commercial", "@stabilized_rent_roll", "@check_export" ] }, () => {
 
+    //TODO update test after test-cases updates QA-6543
     it("[QA-4598] As Is", () => {
         cy.stepInfo(`Preconditions: The mixed report is created and several commercial units are added.`);
         createReport(testData.reportCreationDataAsIs);
@@ -23,8 +24,9 @@ new narrative component added through "=" in the Generated Commentary on the Sta
         cy.stepInfo("1. Proceed to the Income > Commercial > Stabilized Rent Roll page.");
         _NavigationSection.navigateToCommercialStabilizedRentRoll();
 
-        cy.stepInfo("2. Click on the Edit button in the Stabilized Commercial Income Discussion section.");
-        Income._CommercialManager.StabilizedRentRoll.clickEditDiscussionButton();
+        cy.stepInfo("2. Activate text area in the Stabilized Commercial Income Discussion section.");
+        Income._CommercialManager.StabilizedRentRoll.activateTextAreaInput(
+            Income._CommercialManager.StabilizedRentRoll.Page.commentaryText);
 
         cy.stepInfo("3. Enter the “=“ and select the an option. Verify each option.");
         testData.asIsChips.forEach((chip) => {
@@ -32,7 +34,8 @@ new narrative component added through "=" in the Generated Commentary on the Sta
                 .clickNarrativeSuggestions(chip.suggestionName)
                 .verifyCommentaryContainsText(chip.verifySuggest);
         });
-        Income._CommercialManager.StabilizedRentRoll.clickSaveDiscussionButton()
+        Income._CommercialManager.StabilizedRentRoll.inactivateTextAreaInput()
+            .clickSaveButton()
             .verifyProgressBarNotExist();
 
         _NavigationSection.openReviewAndExport();
@@ -56,6 +59,7 @@ new narrative component added through "=" in the Generated Commentary on the Sta
             }); 
     });
 
+    //TODO update test after test-cases updates QA-6543
     it("[QA-4599] As Stabilized", () => {
         cy.stepInfo(`Preconditions: The mixed report is created and several commercial units are added.`);
         createReport(testData.reportCreationDataAsStabilized);
@@ -70,8 +74,9 @@ new narrative component added through "=" in the Generated Commentary on the Sta
         cy.stepInfo("1. Proceed to the Income > Commercial > Stabilized Rent Roll page.");
         _NavigationSection.navigateToCommercialStabilizedRentRoll();
 
-        cy.stepInfo("2. Click on the Edit button in the Stabilized Commercial Income Discussion section.");
-        Income._CommercialManager.StabilizedRentRoll.clickEditDiscussionButton();
+        cy.stepInfo("2. Activate text area in the Stabilized Commercial Income Discussion section.");
+        Income._CommercialManager.StabilizedRentRoll.activateTextAreaInput(
+            Income._CommercialManager.StabilizedRentRoll.Page.commentaryText);
 
         cy.stepInfo("3. Enter the “=“ and select the an option. Verify each option.");
         testData.asStabilizedChips.forEach((chip) => {
@@ -79,8 +84,10 @@ new narrative component added through "=" in the Generated Commentary on the Sta
                 .clickNarrativeSuggestions(chip.suggestionName)
                 .verifyCommentaryContainsText(chip.verifySuggest);
         });
-        Income._CommercialManager.StabilizedRentRoll.clickSaveDiscussionButton()
+        Income._CommercialManager.StabilizedRentRoll.inactivateTextAreaInput()
+            .clickSaveButton()
             .verifyProgressBarNotExist();
+
 
         _NavigationSection.openReviewAndExport();
         ReviewExport.generateDocxReport().waitForReportGenerated()
@@ -103,6 +110,7 @@ new narrative component added through "=" in the Generated Commentary on the Sta
             }); 
     });
 
+    //TODO update test after test-cases updates QA-6543
     it("[QA-4600] As Completed", () => {
         cy.stepInfo(`Preconditions: The mixed report is created and several commercial units are added.`);
         createReport(testData.reportCreationDataAsComplete);
@@ -119,8 +127,9 @@ new narrative component added through "=" in the Generated Commentary on the Sta
         cy.stepInfo("1. Proceed to the Income > Commercial > Stabilized Rent Roll page.");
         _NavigationSection.navigateToCommercialStabilizedRentRoll();
 
-        cy.stepInfo("2. Click on the Edit button in the Stabilized Commercial Income Discussion section.");
-        Income._CommercialManager.StabilizedRentRoll.clickEditDiscussionButton();
+        cy.stepInfo("2. Activate text area in the Stabilized Commercial Income Discussion section.");
+        Income._CommercialManager.StabilizedRentRoll.activateTextAreaInput(
+            Income._CommercialManager.StabilizedRentRoll.Page.commentaryText);
 
         cy.stepInfo("3. Enter the “=“ and select the an option. Verify each option.");
         testData.asCompletedChips.forEach((chip) => {
@@ -128,7 +137,8 @@ new narrative component added through "=" in the Generated Commentary on the Sta
                 .clickNarrativeSuggestions(chip.suggestionName)
                 .verifyCommentaryContainsText(chip.verifySuggest);
         });
-        Income._CommercialManager.StabilizedRentRoll.clickSaveDiscussionButton()
+        Income._CommercialManager.StabilizedRentRoll.inactivateTextAreaInput()
+            .clickSaveButton()
             .verifyProgressBarNotExist();
 
         _NavigationSection.openReviewAndExport();

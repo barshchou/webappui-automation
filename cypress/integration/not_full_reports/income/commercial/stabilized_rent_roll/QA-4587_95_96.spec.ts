@@ -23,32 +23,30 @@ component added through "=" for the 'Unchanged Renovation'
         _NavigationSection.clickIncomeApproachButton()
             .clickCommercialArrow().navigateToStabilizedRentRollInCommercial().verifyProgressBarNotExist();
 
-        cy.stepInfo(`2. Hover the arrows.`);
-        Income._CommercialManager.StabilizedRentRoll.Page.discussionTooltip
-            .trigger("mouseover").invoke("show");
-    
-        cy.stepInfo(`3. [QA-4587] Verify the following text is displayed: 
+        cy.stepInfo(`2. [QA-4587] Verify the following text is displayed: 
         "The following generated text will appear in the Income Approach section of your report.".`);
-        cy.get('[role="tooltip"]').invoke("text").then(text => {
+        Income._CommercialManager.StabilizedRentRoll.Page.userPrompt.invoke("text").then(text => {
             cy.log(text);
             expect(text).to.be.equal(testData.tooltipText);
         });
 
-        cy.stepInfo("4. [QA-4596] Click Edit and enter the “=S“ and select the 'Sheriff's sale' option. Verify text");
-        Income._CommercialManager.StabilizedRentRoll.clickEditDiscussionButton()
+        cy.stepInfo("3. [QA-4596] Click Edit and enter the “=S“ and select the 'Sheriff's sale' option. Verify text");
+        Income._CommercialManager.StabilizedRentRoll.activateTextAreaInput(
+            Income._CommercialManager.StabilizedRentRoll.Page.commentaryText)
             .editDiscussionTextArea(testData.sherifsTypeValue, false)
             .clickNarrativeSuggestions(testData.verifySherifsListValue)
-            .clickSaveDiscussionButton()
+            .inactivateTextAreaInput()
             .verifyCommentaryContainsText(testData.verifySherifsAreaValue);
 
-        cy.stepInfo("5. Revert to original");
+        cy.stepInfo("4. Revert to original");
         Income._CommercialManager.StabilizedRentRoll.revertToOriginalCommentary();
 
-        cy.stepInfo("6. [QA-4595] Click the Edit and enter the “=F“ and select the 'Foreclosure Sale' option.");
-        Income._CommercialManager.StabilizedRentRoll.clickEditDiscussionButton()
+        cy.stepInfo("5. [QA-4595] Click the Edit and enter the “=F“ and select the 'Foreclosure Sale' option.");
+        Income._CommercialManager.StabilizedRentRoll.activateTextAreaInput(
+            Income._CommercialManager.StabilizedRentRoll.Page.commentaryText)
             .editDiscussionTextArea(testData.foreclosureTypeValue, false)
             .clickNarrativeSuggestions(testData.verifyForeclosureListValue)
-            .clickSaveDiscussionButton()
+            .inactivateTextAreaInput()
             .verifyCommentaryContainsText(testData.verifyForeclosureAreaValue);
     });
 });

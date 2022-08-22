@@ -225,19 +225,9 @@ class CommercialRentRollSharedComponent<T extends CommercialRentRollSharedCompon
         return this;
     }
 
-    clickEditDiscussionButton(): this {
-        this.Page.formEditBtn().click({ force: true });
-        return this;
-    }
-
     editDiscussionTextArea(value: string, clearText = true): this {
         clearText ? this.Page.commentaryText.clear().type(value) :
             this.Page.commentaryText.type(value);
-        return this;
-    }
-
-    clickSaveDiscussionButton(): this {
-        this.Page.formSaveBtn().click();
         return this;
     }
 
@@ -258,9 +248,9 @@ class CommercialRentRollSharedComponent<T extends CommercialRentRollSharedCompon
 
     editDiscussion(newCommentary: string, clearText = true, isFullTextVerification = true): this {
         this.Page.modifiedLabel(false).should("not.exist");
-        this.clickEditDiscussionButton()
+        this.activateTextAreaInput(this.Page.commentaryText)
             .editDiscussionTextArea(newCommentary, clearText)
-            .clickSaveDiscussionButton();
+            .inactivateTextAreaInput();
         if (isFullTextVerification) {
             this.verifyCommentaryFullText(newCommentary);
         } else {
@@ -301,25 +291,16 @@ class CommercialRentRollSharedComponent<T extends CommercialRentRollSharedCompon
         return this;
     }
 
-    verifyEditDiscussionButtonsDisplayed(): this {
-        this.Page.formCancelButton().should("be.visible");
-        this.Page.editDiscussionButton.should("not.exist");
-        this.Page.formRevertToOriginalBtn().should("be.visible");
-        this.Page.formSaveBtn().should("be.visible");
-        return this;
-    }
-
     clickCancelDiscussionEditButton(): this {
         this.Page.formCancelButton().click();
         return this;
     }
 
     revertToOriginalCommentary(): this {
-        this.clickEditDiscussionButton()
+        this.activateTextAreaInput(this.Page.commentaryText)
             .clickRevertToOriginalButton()
             .verifyProgressBarNotExist()
-            .clickYesRevertButton()
-            .clickSaveDiscussionButton();
+            .clickYesRevertButton();
         return this;
     }
 

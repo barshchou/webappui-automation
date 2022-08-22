@@ -6,5 +6,9 @@ class CompPlexBasePage {
         return cy.get('[id="selectedComps"]').find("tr")
             .contains(address).parent().find("a");
     }
+
+    get btnCreateComp() {
+        return cy.get('[id="createComp"]');
+    }
 }
 export default new CompPlexBasePage();

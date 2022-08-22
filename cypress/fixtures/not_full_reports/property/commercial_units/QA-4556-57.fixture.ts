@@ -3,7 +3,7 @@ import { BoweryReports } from "../../../../types/boweryReports.type";
 import reportDataCreator from "../../../data_creator/reportData.creator";
 
 const imagesTypesFixture = (): BoweryReports.ImageType[] => {
-    return [ "Interior Images", "Exterior Images" ];
+    return Object.values(enums.IMAGE_TYPE);
 };
 
 const inputTypesFixture = (): BoweryReports.InputType[] => {

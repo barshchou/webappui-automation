@@ -13,8 +13,12 @@ import { recurse } from "cypress-recurse";
 import mapKeysUtils from "../../../utils/mapKeys.utils";
 import { BoweryReports } from "../../../types/boweryReports.type";
 import { isDateHasCorrectFormat } from "../../../../utils/date.utils";
+import jobSearchActions from "./drm/job-search.actions";
+
+const { compPlex } = Alias.pageElements;
 
 class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
+    
     selectedCompsSetSort(sortType: BoweryReports.FindComps.SelectedComparablesSortType) {
         this.Page.sortSalesCompsSelectList.click();
         this.Page.sortSalesCompsSelectListOption(sortType).click();
@@ -31,6 +35,10 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
 
     get PropertyInfo() {
         return propertyInfoFormActions;
+    }
+
+    get JobSearch() {
+        return jobSearchActions;
     }
 
     addExistingComparable(address: string): FindCompsActions {
@@ -284,10 +292,9 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
         return this;
     }
 
-    clickSelectCompsIconOnMap(): FindCompsActions {
+    clickSelectCompsIconOnMap(index = 0): FindCompsActions {
         findCompsPage.selectCompsIconOnMap.should('exist');
-        cy.wait(1000);
-        findCompsPage.selectCompsIconOnMap.click();
+        findCompsPage.selectCompsIconOnMap.eq(index).click();
         findCompsPage.selectCompsButton.should('exist');
         return this;
     }
@@ -370,7 +377,7 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
     enterNumericInputNewComp(elementAlias: string, numberOfUnits: number | string): FindCompsActions {
         this.clearNumericInputNewComp(elementAlias);
         // ernst: little hack to work with commercialAreaNewComp input due its specific behavior
-        if (elementAlias != Alias.pageElements.compPlex.commercialAreaNewComp) {
+        if (elementAlias != compPlex.commercialAreaNewComp) {
             cy.get(`@${elementAlias}`).realClick();
         } else {
             cy.get(`@${elementAlias}`).focus();
@@ -434,6 +441,7 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
 
     openJobSearchTab(): FindCompsActions {
         findCompsPage.jobSearchTab.click();
+        cy.wait(`@${Alias.gql.SearchJobs}`, { timeout: 120000 });
         findCompsPage.reportIdInput.should('exist');
         return this;
     }

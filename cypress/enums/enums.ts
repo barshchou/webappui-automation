@@ -1,3 +1,4 @@
+import * as compplex from "./compplex";
 import leaseDateName from "./lease/leaseDateName.enum";
 import leaseStatus from "./lease/leaseStatus.enum";
 import imageType from "./elements/imageType.enum";
@@ -68,6 +69,8 @@ import discussionNamesEnum from "./property/discussionNames.enum";
 import salesAdjustmentGridDiscussionsEnum from "./adjustComps/salesAdjustmentGridDiscussions.enum";
 import salesAdjustmentGridRowsEnum from "./adjustComps/salesAdjustmentGridRows.enum";
 import basisSquareFootAnalysisEnum from "./property/basisSquareFootAnalysis.enum";
+import introductionTextboxNamesEnum from "./textboxNames/introductionTextboxNames.enum";
+import pagesTextboxNamesEnum from "./textboxNames/pagesTextboxNames.enum";
 import basisSquareFootAnalysisTextsEnum from "./sales/value_conclusion/basisSquareFootAnalysisTexts.enum";
 import renovationTypeEnum from "./property/renovationType.enum";
 import valueConclusionEnum from "./property/valueConclusion.enum";
@@ -77,6 +80,14 @@ import dateTypeEnum from "./keyInfo/dateType.enum";
 import interestAppraisedEnum from "./keyInfo/interestAppraised.enum";
 import feasiblePropertyTypesEnum from "./property/feasiblePropertyTypes.enum";
 import highestAndBestUseCommentsEnum from "./highestAndBestUseComments.enum";
+import letterOfTransmittalEnum from "./cms/letterOfTransmittal.enum";
+import swotAnalysisEnum from "./cms/swotAnalysis.enum";
+import salesforceJobsEnum from "./salesforceJobs.enum";
+import incomeCapitalizationApproachEnum from "./cms/incomeCapitalizationApproach.enum";
+import certificationEnum from "./cms/certification.enum";
+import otherAdjustmentsExpansionRowsEnum from "./adjustComps/otherAdjustmentsExpansionRows.enum";
+import utilitiesAdjustmentsExpansionRowsEnum from "./adjustComps/utilitiesAdjustmentsExpansionRows.enum";
+import adjustmentExpansionLabelsEnum from "./sales/adjustComps/adjustmentExpansionLabels.enum";
 
 export default {
     TEMPLATE_TYPE: templateTypesEnum,
@@ -149,7 +160,10 @@ export default {
     SALES_ADJUSTMENT_GRID_DISCUSSIONS: salesAdjustmentGridDiscussionsEnum,
     SALES_ADJUSTMENT_GRID_ROWS: salesAdjustmentGridRowsEnum,
     BASIS_SQUARE_FOOT_ANALYSIS: basisSquareFootAnalysisEnum,
+    INTRODUCTION_TEXTBOX_NAMES: introductionTextboxNamesEnum,
+    PAGES_TEXTBOX_NAMES: pagesTextboxNamesEnum,
     BASIS_SQUARE_FOOT_ANALYSIS_TEXTS: basisSquareFootAnalysisTextsEnum,
+    COMPPLEX_ENUM: compplex,
     RENOVATION_TYPE: renovationTypeEnum,
     VALUE_CONCLUSION_NAME: valueConclusionEnum,
     UNIT_INCOME_TYPE: unitIncomeTypeEnum,
@@ -157,5 +171,13 @@ export default {
     DATE_TYPE: dateTypeEnum,
     INTEREST_APPRAISED: interestAppraisedEnum,
     FEASIBLE_PROPERTY_TYPES: feasiblePropertyTypesEnum,
-    HIGHEST_AND_BEST_USE_COMMENTS_ENUM: highestAndBestUseCommentsEnum
+    HIGHEST_AND_BEST_USE_COMMENTS_ENUM: highestAndBestUseCommentsEnum,
+    LETTER_SECTIONS: letterOfTransmittalEnum,
+    SWOT_SECTIONS: swotAnalysisEnum,
+    SALESFORCE_JOBS: salesforceJobsEnum,
+    INCOME_CAPITALIZATION_APPROACH_SECTIONS: incomeCapitalizationApproachEnum,
+    CERTIFICATION_SECTIONS: certificationEnum,
+    OTHER_ADJUSTMENTS_EXPANSION_ROWS: otherAdjustmentsExpansionRowsEnum,
+    UTILITIES_ADJUSTMENTS_EXPANSION_ROWS: utilitiesAdjustmentsExpansionRowsEnum,
+    ADJUSTMENT_EXPANSION_LABELS: adjustmentExpansionLabelsEnum
 };

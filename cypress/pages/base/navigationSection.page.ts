@@ -111,6 +111,16 @@ class NavigationSection extends BasePage {
 
     get residentialStabilizedRentRollSummary() { return cy.get(`#residential-projected-rent-roll-summary`); }
 
+    get sourceInformation() { return cy.get("#source-info"); }
+
+    get assumptionsConditions() { return cy.get("#assumptions-conditions"); }
+
+    get propertyHistory() { return cy.get("#property-history"); }
+
+    get finalScope() { return cy.get('#appraisal-scope'); }
+
+    get swotAnalysis() { return cy.get("#swot-analysis"); }
+
     get renovationButton() { return cy.get(`#renovations`); }
 
     get contentManagementSystemButton() { return cy.get(`[data-qa="linkToCms"] div`); }
@@ -118,6 +128,18 @@ class NavigationSection extends BasePage {
     get highestAndBestUseButton() { return cy.get("#highest-and-best-use"); }
 
     get zoningButton() { return cy.get("#zoning"); }
+    
+    get cmsGlobalIcon() { return cy.get('[aria-label="Global"]'); }
+
+    get mapMakerButton() { return cy.get(`[data-qa="openMapMakerBtn"]`); }
+
+    get photoGridExportButton() { return cy.get(`[data-qa="openPhotoGridExportBtn"]`); }
+
+    get dataExtractionToolButton() { return cy.get(`[data-qa="openDataExtractionToolBtn"]`); }
+
+    get whatsNewButton() { return cy.get(`[aria-label="What's New"]`); }
+
+    get helpAndResourcesButton() { return cy.get(`[aria-label="Help & Resources"]`); }
 }
 
 export default new NavigationSection();

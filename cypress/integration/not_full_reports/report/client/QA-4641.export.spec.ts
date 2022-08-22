@@ -19,25 +19,27 @@ describe(`[QA-4641] Verify the "Linked" chips dropdown in the new narrative comp
         _NavigationSection.navigateToClientPage()
             .verifyProgressBarNotExist();
 
-        cy.stepInfo(`2. Click on the Edit button for Intended User and Identification of the Client sections.`);
-        Report._Client.Page.formEditBtn().click();
-        Report._Client.Page.formEditBtn().click();
-
-        cy.stepInfo(`3. Enter the “=“ and verify the "Linked" chips dropdown for both sections: 
+        cy.stepInfo(`2. Enter the “=“ and verify the "Linked" chips dropdown for Intended User 
+        and Identification of the Client sections: 
         options 'Gross Building Area', 'Building Name', 'Property Type', 'Residential Unit Count', 
         'Commercial Unit Count', 'Street Address', 'Street Name', 'Site Area', 'Year Built', 
         'Block', 'Lot', 'Concluded Cap Rate', 'Zones', 'Condition'.`); 
+        Report._Client.activateTextAreaInput( Report._Client.Page.intendedUserTextBox);
         testData.chips.forEach(chip => {
             Report._Client.enterIntendedUser(`=${chip.typeSuggestValue}`, false, false, false)
                 .clickNarrativeSuggestions(chip.suggestionName);
             Report._Client.verifyCommentaryContainsText(chip.verifySuggest, testData.intendedUserCommentaryTitle);
+        });
+        Report._Client.activateTextAreaInput( Report._Client.Page.identificationOfClientTextBox);
+        testData.chips.forEach(chip => {
             Report._Client.enterIdentificationOfTheClient(`=${chip.typeSuggestValue}`, false, false, false)
                 .clickNarrativeSuggestions(chip.suggestionName, 1);
             Report._Client.verifyCommentaryContainsText(chip.verifySuggest, 
                 testData.identificationOfTheClientCommentaryTitle);
         });
+        Report._Client.inactivateTextAreaInput();
 
-        cy.stepInfo(`4. Download report`);
+        cy.stepInfo(`3. Download report`);
         _NavigationSection.openReviewAndExport();
         ReviewExport.generateDocxReport().waitForReportGenerated()
             .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);

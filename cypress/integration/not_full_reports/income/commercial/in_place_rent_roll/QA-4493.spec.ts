@@ -1,6 +1,6 @@
 import testData from "../../../../../fixtures/not_full_reports/income/commercial/in_place_rent_roll/QA-4493.fixture";
 import { _NavigationSection } from "../../../../../actions/base";
-import { Income } from "../../../../../actions";
+import { Income } from "../../../../../actions"; 
 import { createReport } from "../../../../../actions/base/baseTest.actions";
 
 describe("Verify the Unsaved changes modal functionality on the In-Place Rent Roll page",
@@ -16,8 +16,7 @@ describe("Verify the Unsaved changes modal functionality on the In-Place Rent Ro
             Income._CommercialManager.InPlaceRentRoll.chooseLeaseStatusByRowNumber(testData.occupiedLeaseStatus);
 
             cy.stepInfo('2. Navigate to another page saving data');
-            _NavigationSection.clickPropertyButton().clickSummaryButton().verifyUnsavedChangesModal();
-            _NavigationSection.clickYesButton(); 
+            _NavigationSection.navigateToPropertySummary();
 
             cy.stepInfo('3. Navigate back to Commercial In Place Rent Roll, verify set data and set again any field');
             _NavigationSection.navigateToCommercialInPlaceRentRoll();

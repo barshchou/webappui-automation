@@ -95,4 +95,57 @@ export default class BaseActionsExt<T extends BasePage> extends BaseActions {
         cy.get(`[data-qa='${enterValue}']`).eq(elemIndex).should("exist");
         return this;
     }
+
+    clickFormRevertToOriginalBtn(index = 0): this {
+        this.Page.formRevertToOriginalBtn(index).click();
+        return this;
+    }
+
+    clickFormAddBtn(index = 0): this {
+        this.Page.formAddButton(index).click();
+        return this;
+    }
+
+    // TODO: QA-6548 Removed cy.wait() when we determine how to save changes after editing
+    enterFormCommentTextBox(name: string, text: string): this {
+        this.Page.formCommentTextBox(name).realClick({ position: "bottom" }).type(text);
+        this.Page.Header.realClick();
+        cy.wait(1000);
+        return this;
+    }
+
+    verifyOpenedPage(pageName: string): this {
+        this.Page.pageTitle.should("have.text", pageName);
+        return this;
+    }
+
+    saveCmsSettings(): BaseActions {
+        this.Page.saveButtonGlobal.click();
+        this.Page.successModal.should('be.visible');
+        this.Page.successModal.should('not.be.visible');
+        return this;
+    }
+
+    revertSectionToOriginal(sectionName: string): this {
+        this.Page.formCommentTextBox(sectionName).scrollIntoView().realClick();
+        this.Page.formCommentTextBox(sectionName).type(`{ESC}`);
+        this.Page.formCommentTextBox(sectionName).focus();
+        this.Page.formRevertToOriginalBtn().click();
+        this.Page.formYesRevertBtn.click();
+        this.saveCmsSettings();
+        return this;
+    }
+
+    /**
+     * Method for typing values into input which re-renders on every char typed into there.
+     * Can be useful for such inputs as `commercialUnitsPage.commercialUnitsSFInputs`
+     */
+    setValueIntoNumberInput(elemAlias: string, value: string | number, index = 0) {
+        cy.get(`@${elemAlias}`).eq(index).should("be.enabled").focus().clear();
+        (""+value).split("").forEach(n => {
+            cy.get(`@${elemAlias}`).eq(index).focus().type(`${n}`);
+            cy.wait(100);
+        });
+        return this;
+    }
 }
