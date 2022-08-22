@@ -33,6 +33,7 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
     }
 
     openReviewAndExport(isNewReport = true): NavigationSectionActions {
+        this.clickSaveButton();
         let reportAlias = "docxReportAsync";
         cy.intercept({
             method: 'GET',
@@ -463,7 +464,6 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
     }
 
     navigateToPropertyAmenities(): NavigationSectionActions {
-        
         this.clickSaveButton()
             .clickPropertyButton()
             .clickAmenitiesButton()
@@ -546,8 +546,7 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
 
     navigateToLaundry(): NavigationSectionActions {
         this.clickSaveButton()
-            .clickIncomeApproachButton()
-            .clickMiscellaneousIncome()
+            .clickMiscellaneousMenuIfClosed()
             .clickLaundryButton()
             .submitSaveChangesModal();
         return this;
@@ -555,8 +554,7 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
 
     navigateToStorage(): NavigationSectionActions {
         this.clickSaveButton()
-            .clickIncomeApproachButton()
-            .clickMiscellaneousIncome()
+            .clickMiscellaneousMenuIfClosed()
             .clickStorageButton()
             .submitSaveChangesModal();
         return this;
@@ -564,16 +562,15 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
 
     navigateToOther(): NavigationSectionActions {
         this.clickSaveButton()
-            .clickIncomeApproachButton()
-            .clickMiscellaneousIncome()
+            .clickMiscellaneousMenuIfClosed()
             .clickOtherButton()
             .submitSaveChangesModal();
         return this;
     }
 
     navigateToParking(): NavigationSectionActions {
-        this.clickIncomeApproachButton()
-            .clickMiscellaneousIncome()
+        this.clickSaveButton()
+            .clickMiscellaneousMenuIfClosed()
             .clickParkingButton()
             .submitSaveChangesModal();
         return this;
@@ -805,6 +802,16 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         navigationSectionPage.residentialIncomeArrow.then(el => {
             if (!el.hasClass("expanded")) {
                 this.clickResidentialIncomeArrow();
+            }
+        });
+
+        return this;
+    }
+
+    private clickMiscellaneousMenuIfClosed(): NavigationSectionActions {
+        navigationSectionPage.miscellaneousIncome.then(el => {
+            if (!el.hasClass("expanded")) {
+                this.clickMiscellaneousIncome();
             }
         });
 

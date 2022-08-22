@@ -2,6 +2,7 @@ import ReportDataCreator from "../../../data_creator/reportData.creator";
 import Enums from "../../../../enums/enums";
 import { BoweryReports } from "../../../../types/boweryReports.type";
 import mapKeysUtils from "../../../../utils/mapKeys/income/capRateConclusion/capRateConclusion.keys";
+import miscellaneousTitles from "../../../../enums/pages_titles/income/miscellaneousTitles.enum";
 
 const _otherIncomeItem: BoweryReports.OtherIncomeItem = {
     vcLossType: "Other",
@@ -20,7 +21,8 @@ const _rentLossTypeLaundry = Enums.RENT_LOSS_TYPE.laundry;
 const _rentLossTypeOther = Enums.RENT_LOSS_TYPE.other;
 const _rentLossTypeParking = Enums.RENT_LOSS_TYPE.parking;
 
-const _memoTestDataFile = `${mapKeysUtils.valueConclusionLossesFileName}.txt`;
+const _asStabilizedLossesFileName = `${mapKeysUtils.valueConclusionLossesAsStabilizedFileName}.txt`;
+const _asCompleteLossesFileName = `${mapKeysUtils.valueConclusionLossesAsStabilizedFileName}.txt`;
 
 export default {
     reportCreationData: ReportDataCreator.getReportData("4316", {
@@ -30,6 +32,7 @@ export default {
     numberOfUnits: 1,
     commercialUnits: 1,
     bedrooms: 1,
+    residentialMonthlyRent: 999.99,
     rentType: Enums.RENT_TYPE.marketRate,
     leaseStatus: Enums.LEASE_STATUS.occupied,
     concludedCapRate: 6,
@@ -46,19 +49,28 @@ export default {
     storageVCLoss: 5,
     vcLossPercentage: 5,
     parkingVCLoss: 3,
-    rentLossTypes: [ 
-        _rentLossTypeStorage, 
-        _rentLossTypeLaundry,
-        _rentLossTypeOther,
-        _rentLossTypeParking
-    ],
-    rentLossTypeStorage: _rentLossTypeStorage,
-    rentLossTypeLaundry: _rentLossTypeLaundry,
-    rentLossTypeOther: _rentLossTypeOther,
-    rentLossTypeParking: _rentLossTypeParking,
     vcLossValue: Enums.LAUNDRY_VC_LOSS_TYPE.laundryVC as BoweryReports.LaundryVcLossType,
     parkingVcLossTypeRadio: Enums.PARKING_VC_LOSS_TYPE.parking as BoweryReports.ParkingVcLossType,
     storageVcLossTypeRadio: Enums.STORAGE_VC_LOSS_TYPE.storageVC as BoweryReports.StorageVcLossType,
-    concludedValuePerSf: 1600,
-    memoTestDataFile: _memoTestDataFile
+    concludedValuePerSf: 1600.25,
+    asStabilizedLossesFileName: _asStabilizedLossesFileName,
+    asCompleteLossesFileName: _asCompleteLossesFileName,
+    miscRentLosses: [
+        {
+            rentLossType: _rentLossTypeLaundry,
+            rentLossName: miscellaneousTitles.LAUNDRY
+        },
+        {
+            rentLossType: _rentLossTypeStorage,
+            rentLossName: miscellaneousTitles.STORAGE
+        },
+        {
+            rentLossType: _rentLossTypeParking,
+            rentLossName: miscellaneousTitles.PARKING
+        },
+        {
+            rentLossType: _rentLossTypeOther,
+            rentLossName: miscellaneousTitles.OTHER
+        }
+    ]
 };

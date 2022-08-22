@@ -1,3 +1,4 @@
+import { numberWithCommas } from './../../../../../utils/numbers.utils';
 import testData from "../../../../fixtures/not_full_reports/sales/value_conclusion/QA-4316.fixture";
 import { createReport } from "../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
@@ -37,7 +38,8 @@ describe(`Prospective Market Value As Stabilized -> Less Other Rent Loss data is
             NavigationSection.navigateToResInPlaceRentRoll();
             Income.Residential.InPlaceRentRoll.enterBedroomsNumberByRowNumber(testData.bedrooms)
                 .enterRentTypeCellByRowNumber(testData.rentType)
-                .enterLeaseStatusByRowNumber(testData.leaseStatus);
+                .enterLeaseStatusByRowNumber(testData.leaseStatus)
+                .enterMonthlyRentByRowNumber(testData.residentialMonthlyRent);
 
             cy.stepInfo(`6. Go to Income → Laundry and fill in Laundry Income and Laundry V/C Loss (%) values`);
             NavigationSection.navigateToLaundry();
@@ -64,24 +66,32 @@ describe(`Prospective Market Value As Stabilized -> Less Other Rent Loss data is
                         for Lesses, click Save button`);
             NavigationSection.navigateToCapRateConclusion();
             Income.CapRateConclusion.enterConclusionSectionConcludedCapRate(testData.concludedCapRate);
-            let rentLossArray = [];
-            testData.rentLossTypes.forEach(rentLoss => {
-                
+            let rentLossAsStabilizedArray = [];
+            let rentLossAsCompleteArray = [];
+            testData.miscRentLosses.forEach(rentLoss => {
                 Income.CapRateConclusion
                     .enterMiscellaneousLossMonths(testData.lossMonths, testData.valueConclusionKeyAsStabilized, 
-                        rentLoss)
+                        rentLoss.rentLossType)
                     .enterMiscellaneousLossMonths(testData.lossMonths, testData.valueConclusionKeyAsComplete, 
-                        rentLoss);
-                cy._mapGet(testData.valueConclusionKeyAsStabilized + rentLoss).then(loss => {
-                    rentLossArray.push(loss);
+                        rentLoss.rentLossType);
+
+                cy._mapGet(testData.valueConclusionKeyAsStabilized + rentLoss.rentLossType).then(loss => {
+                    let lossValue = loss < 0 
+                        ? `($${numberWithCommas(Math.round(loss))})`
+                        : `$${numberWithCommas(Math.round(loss))}`;
+                    rentLossAsStabilizedArray.push(lossValue);
                 });
-                cy._mapGet(testData.valueConclusionKeyAsComplete + rentLoss).then(loss => {
-                    rentLossArray.push(loss);
+                cy._mapGet(testData.valueConclusionKeyAsComplete + rentLoss.rentLossType).then(loss => {
+                    let lossValue = loss < 0 
+                        ? `($${numberWithCommas(Math.round(loss)).replace('-', '')})`
+                        : `$${numberWithCommas(Math.round(loss))}`;
+                    rentLossAsCompleteArray.push(lossValue);
                 });
             });
 
-            cy.log(`${rentLossArray.toString()}`);
-            _saveDataInFile(rentLossArray, testData.memoTestDataFile);
+            // Save rent losses to file to compare against exported report
+            _saveDataInFile(rentLossAsStabilizedArray, testData.asStabilizedLossesFileName);
+            _saveDataInFile(rentLossAsCompleteArray, testData.asCompleteLossesFileName);
 
             cy.stepInfo(`11. Go to Sales → Value Conclusion and fill in the value into Sales Value Conclusion Table → 
                         Concluded Value Per SF raw → Amount column`);
@@ -95,7 +105,7 @@ describe(`Prospective Market Value As Stabilized -> Less Other Rent Loss data is
                 .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
         });
 
-        it("Check export", () => {
+        it("[QA-4316] Check export", () => {
             cy.stepInfo(`13. In the report go to the Sales Comparison Approach chapter and find the Value Opinion via 
                         the Sales Comparison Approach table. Compare values in the Value Opinion via the Sales 
                         Comparison Approach table with the values in the Sales → Value Conclusion → 
@@ -104,15 +114,21 @@ describe(`Prospective Market Value As Stabilized -> Less Other Rent Loss data is
                 .then(file => {
                     cy.log(<string>file);
                     cy.visit(<string>file);
-         
-                    cy.readFile(`${pathSpecData()}${testData.memoTestDataFile}`).then(data => {
-                        cy.stepInfo(`5. [QA-5136] -> User see that the order of Selected Comps
-                    in 'Comparable Sales Outline' section are the same as the order on Sales Adjustment Grid`);
-                    
-                        // testData.compsToAdd.forEach(index => {
-                        //     cy.contains(`Comparable Sale ${index+1}`).scrollIntoView().next()
-                        //         .contains(JSON.parse(data)[index]).should("exist");
-                        // });
+                    cy.readFile(`${pathSpecData()}${testData.asStabilizedLossesFileName}`).then(data => {
+                        testData.miscRentLosses.forEach((rentLoss, index) => {
+                            cy.xpath(`//p[.='Value Opinion via the Sales Comparison Approach']` + 
+                            `//following::td[.='${rentLoss.rentLossName} Rent Loss (${testData.lossMonths} months)']` + 
+                            `//following-sibling::td[2]`).eq(0)
+                                .should('have.text', JSON.parse(data)[index]);
+                        });
+                    });
+                    cy.readFile(`${pathSpecData()}${testData.asCompleteLossesFileName}`).then(data => {
+                        testData.miscRentLosses.forEach((rentLoss, index) => {
+                            cy.xpath(`//p[.='Value Opinion via the Sales Comparison Approach']` + 
+                            `//following::td[.='${rentLoss.rentLossName} Rent Loss (${testData.lossMonths} months)']` + 
+                            `//following-sibling::td[2]`).eq(1)
+                                .should('have.text', JSON.parse(data)[index]);
+                        });
                     });
                 });
         });
