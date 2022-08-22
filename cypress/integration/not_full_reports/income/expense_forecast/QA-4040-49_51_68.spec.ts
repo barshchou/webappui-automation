@@ -9,6 +9,7 @@ describe(`Verify that Generated Commentary are updated on the Expense Forecast p
 
         before("Login, create report", () => {
             createReport(testData.reportCreationData);
+            Cypress.config('numTestsKeptInMemory', 0);
             _NavigationSection.navigateToPropertySummary();
             Property._Summary.enterNumberOfResUnits(testData.residentialUnits)
                 .clickSaveButton();
@@ -49,6 +50,7 @@ describe(`Verify that Generated Commentary are updated on the Expense Forecast p
             Income._ExpenseForecastActions.enterForecastItemForecast(testData.expenseForecastInsurance)
                 .verifyForecastCommentary(testData.commentariesInsurance.generatedPerSF, 
                     testData.expenseForecastInsurance)
+                .verifyProgressBarNotExist()
                 .editExpenseForecastCommentary(testData.editedCommentary, testData.expenseForecastInsurance)
                 .verifyForecastCommentary(testData.editedCommentary, testData.expenseForecastInsurance);
 
@@ -73,6 +75,7 @@ describe(`Verify that Generated Commentary are updated on the Expense Forecast p
             Income._ExpenseForecastActions.enterForecastItemForecast(testData.expenseForecastElectricity)
                 .verifyForecastCommentary(testData.commentariesElectricity.generatedPerSF, 
                     testData.expenseForecastElectricity)
+                .verifyProgressBarNotExist()
                 .editExpenseForecastCommentary(testData.editedCommentary, testData.expenseForecastElectricity)
                 .verifyForecastCommentary(testData.editedCommentary, testData.expenseForecastElectricity);
 
@@ -98,15 +101,17 @@ describe(`Verify that Generated Commentary are updated on the Expense Forecast p
             Income._ExpenseForecastActions.enterForecastItemForecast(testData.expenseForecastPayrollAndBenefits)
                 .verifyForecastCommentary(testData.commentariesPayrollAndBenefits.generatedPerSF, 
                     testData.expenseForecastPayrollAndBenefits)
+                .verifyProgressBarNotExist()
                 .editExpenseForecastCommentary(testData.editedCommentary, testData.expenseForecastPayrollAndBenefits)
                 .verifyForecastCommentary(testData.editedCommentary, testData.expenseForecastPayrollAndBenefits);
 
             cy.stepInfo(`[QA-4043] => 3. Revert commentary value, switch to unit basis 
             and fill Forecast value and verify commentary`);
-            Income._ExpenseForecastActions.revertToOriginalExpenseForecastCommentary(testData.expenseForecastInsurance);
+            Income._ExpenseForecastActions.revertToOriginalExpenseForecastCommentary(
+                testData.expenseForecastPayrollAndBenefits);
             testData.expenseForecastPayrollAndBenefits.basis = "unit";
-            Income._ExpenseForecastActions.switchExpenseForecastBasis(testData.expenseForecastPayrollAndBenefits);
-            Income._ExpenseForecastActions.enterForecastItemForecast(testData.expenseForecastPayrollAndBenefits)
+            Income._ExpenseForecastActions.switchExpenseForecastBasis(testData.expenseForecastPayrollAndBenefits)
+                .enterForecastItemForecast(testData.expenseForecastPayrollAndBenefits)
                 .verifyForecastCommentary(testData.commentariesPayrollAndBenefits.generatedPerUnit, 
                     testData.expenseForecastPayrollAndBenefits)
                 .editExpenseForecastCommentary(testData.editedCommentary, testData.expenseForecastPayrollAndBenefits)
@@ -122,6 +127,7 @@ describe(`Verify that Generated Commentary are updated on the Expense Forecast p
             Income._ExpenseForecastActions.enterForecastItemForecast(testData.expenseForecastGeneralAndAdministrative)
                 .verifyForecastCommentary(testData.commentariesGeneralAndAdministrative.generatedPerSF, 
                     testData.expenseForecastGeneralAndAdministrative)
+                .verifyProgressBarNotExist()
                 .editExpenseForecastCommentary(testData.editedCommentary, 
                     testData.expenseForecastGeneralAndAdministrative)
                 .verifyForecastCommentary(testData.editedCommentary, testData.expenseForecastGeneralAndAdministrative);
@@ -135,6 +141,7 @@ describe(`Verify that Generated Commentary are updated on the Expense Forecast p
             Income._ExpenseForecastActions.enterForecastItemForecast(testData.expenseForecastGeneralAndAdministrative)
                 .verifyForecastCommentary(testData.commentariesGeneralAndAdministrative.generatedPerUnit, 
                     testData.expenseForecastGeneralAndAdministrative)
+                .verifyProgressBarNotExist()
                 .editExpenseForecastCommentary(testData.editedCommentary, 
                     testData.expenseForecastGeneralAndAdministrative)
                 .verifyForecastCommentary(testData.editedCommentary, testData.expenseForecastGeneralAndAdministrative);
@@ -149,6 +156,7 @@ describe(`Verify that Generated Commentary are updated on the Expense Forecast p
             Income._ExpenseForecastActions.enterForecastItemForecast(testData.expenseForecastMiscellaneous)
                 .verifyForecastCommentary(testData.commentariesMiscellaneous.generatedPerSF, 
                     testData.expenseForecastMiscellaneous)
+                .verifyProgressBarNotExist()
                 .editExpenseForecastCommentary(testData.editedCommentary, testData.expenseForecastMiscellaneous)
                 .verifyForecastCommentary(testData.editedCommentary, testData.expenseForecastMiscellaneous);
 
@@ -173,6 +181,7 @@ describe(`Verify that Generated Commentary are updated on the Expense Forecast p
             cy.stepInfo(`[QA-4047] [QA-4068] => 2. Fill Forecast value for SF basis and verify commentary`);
             Income._ExpenseForecastActions.enterForecastItemForecast(testData.expenseForecastFuel)
                 .verifyForecastCommentary(testData.commentariesFuel.generatedPerSF, testData.expenseForecastFuel)
+                .verifyProgressBarNotExist()
                 .editExpenseForecastCommentary(testData.editedCommentary, testData.expenseForecastFuel)
                 .verifyForecastCommentary(testData.editedCommentary, testData.expenseForecastFuel)
                 .verifyForecastCommentary(testData.commentariesFuel.generatedElectricityAndFuelPerSf, 
@@ -182,12 +191,14 @@ describe(`Verify that Generated Commentary are updated on the Expense Forecast p
 
             cy.stepInfo(`[QA-4047] [QA-4068] => 3. Revert commentary value, switch to unit basis 
             and fill Forecast value and verify commentary`);
-            Income._ExpenseForecastActions.revertToOriginalExpenseForecastCommentary(testData.expenseForecastFuel)
-                .revertToOriginalExpenseForecastCommentary(testData.expenseForecastFuel, 2);
+            Income._ExpenseForecastActions.revertToOriginalExpenseForecastCommentary(testData.expenseForecastFuel);
+            cy.wait(2500);
+            Income._ExpenseForecastActions.revertToOriginalExpenseForecastCommentary(testData.expenseForecastFuel, 2);
             testData.expenseForecastFuel.basis = "unit";
             Income._ExpenseForecastActions.switchExpenseForecastBasis(testData.expenseForecastFuel);
             Income._ExpenseForecastActions.enterForecastItemForecast(testData.expenseForecastFuel)
                 .verifyForecastCommentary(testData.commentariesFuel.generatedPerUnit, testData.expenseForecastFuel)
+                .verifyProgressBarNotExist()
                 .editExpenseForecastCommentary(testData.editedCommentary, testData.expenseForecastFuel)
                 .verifyForecastCommentary(testData.editedCommentary, testData.expenseForecastFuel)
                 .verifyForecastCommentary(testData.commentariesFuel.generatedElectricityAndFuelPerUnit, 
@@ -197,12 +208,14 @@ describe(`Verify that Generated Commentary are updated on the Expense Forecast p
         
             cy.stepInfo(`[QA-4047] [QA-4068] => 4. Revert commentary value, switch to room basis 
             and fill Forecast value and verify commentary`);
-            Income._ExpenseForecastActions.revertToOriginalExpenseForecastCommentary(testData.expenseForecastFuel)
-                .revertToOriginalExpenseForecastCommentary(testData.expenseForecastFuel, 2);
+            Income._ExpenseForecastActions.revertToOriginalExpenseForecastCommentary(testData.expenseForecastFuel);
+            cy.wait(2500);
+            Income._ExpenseForecastActions.revertToOriginalExpenseForecastCommentary(testData.expenseForecastFuel, 2);
             testData.expenseForecastFuel.basis = "room";
             Income._ExpenseForecastActions.switchExpenseForecastBasis(testData.expenseForecastFuel);
             Income._ExpenseForecastActions.enterForecastItemForecast(testData.expenseForecastFuel)
                 .verifyForecastCommentary(testData.commentariesFuel.generatedPerRoom, testData.expenseForecastFuel)
+                .verifyProgressBarNotExist()
                 .editExpenseForecastCommentary(testData.editedCommentary, testData.expenseForecastFuel)
                 .verifyForecastCommentary(testData.editedCommentary, testData.expenseForecastFuel)
                 .verifyForecastCommentary(testData.commentariesFuel.generatedElectricityAndFuelPerRoom, 
@@ -220,6 +233,7 @@ describe(`Verify that Generated Commentary are updated on the Expense Forecast p
             Income._ExpenseForecastActions.enterForecastItemForecast(testData.expenseForecastLegalAndProfessional)
                 .verifyForecastCommentary(testData.commentariesLegalAndProfessional.generatedPerSF, 
                     testData.expenseForecastLegalAndProfessional)
+                .verifyProgressBarNotExist()
                 .editExpenseForecastCommentary(testData.editedCommentary, testData.expenseForecastLegalAndProfessional)
                 .verifyForecastCommentary(testData.editedCommentary, testData.expenseForecastLegalAndProfessional);
 
@@ -244,6 +258,7 @@ describe(`Verify that Generated Commentary are updated on the Expense Forecast p
             Income._ExpenseForecastActions.enterForecastItemForecast(testData.expenseForecastManagement)
                 .verifyForecastCommentary(testData.commentariesManagement.generatedPerSF, 
                     testData.expenseForecastManagement)
+                .verifyProgressBarNotExist()
                 .editExpenseForecastCommentary(testData.editedCommentary, testData.expenseForecastManagement)
                 .verifyForecastCommentary(testData.editedCommentary, testData.expenseForecastManagement);
             cy.stepInfo(`[QA-4049] => 3. Revert commentary value, switch to unit basis 
@@ -268,6 +283,7 @@ describe(`Verify that Generated Commentary are updated on the Expense Forecast p
             Income._ExpenseForecastActions.enterForecastItemForecast(testData.expenseForecastRepairAndMaintenance)
                 .verifyForecastCommentary(testData.commentariesRepairAndMaintenance.generatedPerSF, 
                     testData.expenseForecastRepairAndMaintenance)
+                .verifyProgressBarNotExist()
                 .editExpenseForecastCommentary(testData.editedCommentary, testData.expenseForecastRepairAndMaintenance)
                 .verifyForecastCommentary(testData.editedCommentary, testData.expenseForecastRepairAndMaintenance);
 
@@ -293,6 +309,7 @@ describe(`Verify that Generated Commentary are updated on the Expense Forecast p
             Income._ExpenseForecastActions.enterForecastItemForecast(testData.expenseForecastReplacementReserve)
                 .verifyForecastCommentary(testData.commentariesReplacementReserve.generatedPerSF, 
                     testData.expenseForecastReplacementReserve)
+                .verifyProgressBarNotExist()
                 .editExpenseForecastCommentary(testData.editedCommentary, testData.expenseForecastReplacementReserve)
                 .verifyForecastCommentary(testData.editedCommentary, testData.expenseForecastReplacementReserve);
 

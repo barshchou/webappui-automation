@@ -11,7 +11,7 @@ describe("Verify the Save & Continue button functionality on the Stabilized Rent
             createReport(testData.reportCreationData);
         });
 
-        it("Test body", () => {
+        it("Test body", () => { 
             cy.stepInfo(` 1. Report creation and several commercial units addition `);
             Base._NavigationSection.navigateToPropertySummary();
             Property._Summary.enterNumberOfCommercialUnits(testData.buildingDescription.numberOfUnits);

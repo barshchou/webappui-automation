@@ -18,11 +18,11 @@ describe(`Verify the suggested text dropdown in the new narrative component adde
 
     it("Test body", () => {
         cy.stepInfo("1. Proceed to the Income > Commercial > Stabilized Rent Roll page.");
-        _NavigationSection.clickIncomeApproachButton()
-            .clickCommercialArrow().navigateToStabilizedRentRollInCommercial().verifyProgressBarNotExist();
+        _NavigationSection.navigateToCommercialStabilizedRentRoll().verifyProgressBarNotExist();
 
-        cy.stepInfo("2. Click on the Edit button in the Stabilized Commercial Income Discussion section.");
-        Income._CommercialManager.StabilizedRentRoll.clickEditDiscussionButton();
+        cy.stepInfo("2. Activate text area in the Stabilized Commercial Income Discussion section.");
+        Income._CommercialManager.StabilizedRentRoll.activateTextAreaInput( 
+            Income._CommercialManager.StabilizedRentRoll.Page.commentaryText);
 
         cy.stepInfo("3. Enter the “=Un“ and select the 'Unchanged Renovation' option.");
         Income._CommercialManager.StabilizedRentRoll.editDiscussionTextArea(testData.value, false)

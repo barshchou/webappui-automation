@@ -1,7 +1,7 @@
 import testData from "../../../../fixtures/not_full_reports/property/commercial_units/QA-4556-57.fixture";
 import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
-import { Property } from "../../../../actions";
+import { Property } from "../../../../actions"; 
 
 describe("Verify the functionality of the Image upload to the Interior and Exterior Images sections",
     { tags:[ "@property", "@commercial_units" ] },  () => {
@@ -24,26 +24,30 @@ describe("Verify the functionality of the Image upload to the Interior and Exter
             # Verify that several images can be uploaded to the Exterior Images.
             # Verify the uploaded image can be rotated.
         `);
-            testData.imagesType.forEach((images, index) => {
+            testData.imagesType.forEach((images) => {
                 cy.stepInfo(`# Verify that several images can be uploaded to the ${images}.`);
                 testData.inputType.forEach(inputMethod => {
                     cy.stepInfo(`2. Verify the image can be uploaded by ${inputMethod} in ${images}.`);
                     Property._CommercialUnits.Actions
                         .uploadImages(images, testData.imageFile, inputMethod)
                         .verifyProgressBarNotExist();
-
+    
                     cy.stepInfo(`# Verify the uploaded image can be rotated.`);
                     testData.imageRotations.forEach(rotateIndex => {
                         Property._CommercialUnits
-                            .Actions.rotateImage()
+                            .Actions.rotateImage(images)
                             .verifyProgressBarNotExist()
-                            .verifyImageHasRotated(rotateIndex);
+                            .verifyImageHasRotated(images, rotateIndex);
                     });
                 });
+    
+                cy.stepInfo(`Deleting last image in Category (${images})`);
                 Property._CommercialUnits
-                    .Page.iconDeleteImage.last().click({ force:true });
+                    .Page.getIconDeleteImage(images, 1).click({ force:true });
+                
+                cy.stepInfo(`Verifying removal of last image in Category (${images})`);
                 Property._CommercialUnits
-                    .Page.commercialUnitImage.should("have.length", index + 1);
+                    .Page.getCommercialUnitImage(images, 1).should("not.exist");
             });
         });
     });

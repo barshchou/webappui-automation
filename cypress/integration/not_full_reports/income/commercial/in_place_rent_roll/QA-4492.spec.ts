@@ -1,6 +1,6 @@
 import testData from "../../../../../fixtures/not_full_reports/income/commercial/in_place_rent_roll/QA-4492.fixture";
 import { _NavigationSection } from "../../../../../actions/base";
-import { Income } from "../../../../../actions";
+import { Income } from "../../../../../actions"; 
 import { createReport } from "../../../../../actions/base/baseTest.actions";
 import { getTodayDateString } from "../../../../../../utils/date.utils";
 

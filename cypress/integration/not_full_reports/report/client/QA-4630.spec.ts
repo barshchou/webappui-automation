@@ -13,8 +13,7 @@ describe("Verify the functionality of the NYCB Application No. (optional) field"
             cy.stepInfo(`1. Proceed to the Report > Client page.`);
             _NavigationSection.navigateToClientPage();
             Report._Client.verifyProgressBarNotExist()
-                .Page.formEditBtn().click();
-            Report._Client.Page.formEditBtn().click();
+                .activateTextAreaInput(Report._Client.Page.nycbApplicationNumber);
 
             cy.stepInfo(`2. Try to enter any num. value / non-integer / non-num. / long value 
             in the Client File Number field (NO validation).`);

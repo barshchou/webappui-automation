@@ -6,9 +6,10 @@ import { numberWithCommas } from "../../../utils/numbers.utils";
 import { BoweryReports } from "../../types/boweryReports.type";
 
 class KeyInfoActions extends BaseActionsExt<typeof keyInfoPage> {
+    //TODO edit this method, because (save === true) condition is not relevant anymore QA-6543
     enterPropertyRightsAppraisedComment(textToType: string = null, edit = true, save = true, revert = false) {
         if (edit === true) { keyInfoPage.propertyRightsAppraisedFormEditButton.click(); }
-        keyInfoPage.textBoxPropertyRightsAppraised.invoke("text")
+        keyInfoPage.textBoxPropertyRightsAppraised.scrollIntoView().invoke("text")
             .then(text => {
                 keyInfoPage.textBoxPropertyRightsAppraised.focus().type(textToType ?? text);
             });
@@ -22,7 +23,7 @@ class KeyInfoActions extends BaseActionsExt<typeof keyInfoPage> {
 
     enterDefinitionMarketValue(textToType: string = null, edit = true, save = true, revert = false) {
         if (edit === true) { keyInfoPage.definitionOfMarketValueFormEditButton.click(); }
-        keyInfoPage.textBoxDefinitionOfMarketValue().invoke("text").then(text => {
+        keyInfoPage.textBoxDefinitionOfMarketValue().scrollIntoView().invoke("text").then(text => {
             keyInfoPage.textBoxDefinitionOfMarketValue().focus().type(textToType ?? text);
         });
         if (save === true) { keyInfoPage.formSaveBtn().click(); }
@@ -56,7 +57,7 @@ class KeyInfoActions extends BaseActionsExt<typeof keyInfoPage> {
     }
 
     checkAllInterestAppraisedByValues(interestAppraisedData: Readonly<{asIsMarket: string, 
-    asComplete?: string, asStabilized?: string}>): KeyInfoActions {
+        asComplete?: string, asStabilized?: string}>): KeyInfoActions {
         this.checkAsIsMarketInterestByValue(interestAppraisedData.asIsMarket);
 
         if (interestAppraisedData.asStabilized != undefined ) { 
@@ -102,7 +103,7 @@ class KeyInfoActions extends BaseActionsExt<typeof keyInfoPage> {
 
     clickNarrativeSuggestions(verifyListValue: string, numberLists = 0): KeyInfoActions {
         keyInfoPage.narrativeSuggestionsList.eq(numberLists)
-            .contains(verifyListValue).should("have.text", verifyListValue).click();
+            .contains(verifyListValue).should("have.text", verifyListValue).click({ force: true });
         return this;
     }
 
