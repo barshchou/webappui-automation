@@ -19,7 +19,7 @@ describe("Verify 'As Vacant Discussion' and 'As Improved' Generated Commentary",
                 .checkAsVacantBestUsePropTypeRadioValue(testData.checkValues.residential);
 
             cy.stepInfo(`4. Open Highest & Best Use tab and Verify 'As Vacant Maximally Productive Discussion'
-                initial commentary`);
+                        initial commentary`);
             Final._HighestBestUse.clickHighestUseTab()
                 .verifyHighestAndBestUseCommentary(testData.commentNames.maximallyProductiveAsVacant,
                     testData.initialAsVacantMaximallyProductiveDiscussionText);
