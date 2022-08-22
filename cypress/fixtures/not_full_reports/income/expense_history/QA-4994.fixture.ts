@@ -4,8 +4,8 @@ import Enums from "../../../../enums/enums";
 import { getYearFromDate } from "../../../../../utils/date.utils";
 import { BoweryReports } from "../../../../types/boweryReports.type";
 
-const _getReportCreationData = (utilityExpenses: BoweryReports.UtilityExpenses):
-    BoweryAutomation.ReportCreationData => {
+const _getReportCreationData = (utilityExpenses: BoweryReports.UtilityExpenses
+): BoweryAutomation.ReportCreationData => {
     return ReportDataCreator.getReportData(`4994-${utilityExpenses}`);
 };
 

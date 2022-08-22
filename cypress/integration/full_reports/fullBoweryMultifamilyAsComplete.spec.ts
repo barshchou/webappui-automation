@@ -290,9 +290,9 @@ describe.skip("Full bowery way, multifamily as complete report", { tags: [ "@ful
             .clickAddExpenseYearButton()
             .enterIssueByColIndex(testData.expenseHistory.grossRevenue, tableExpenseHistoryCellNames.grossRevenue)
             .enterIssueByColIndex(testData.expenseHistory.realEstateTaxes, tableExpenseHistoryCellNames.realEstateTaxes)
-            .enterIssueByColIndex(testData.expenseHistory.insuranceExpense, tableExpenseHistoryCellNames.insurance)
+            .clearCellWithTypeFirst(tableExpenseHistoryCellNames.insurance)
             .enterIssueByColIndex(testData.expenseHistory.electricityExpense, tableExpenseHistoryCellNames.electricity)
-            .enterIssueByColIndex(testData.expenseHistory.fuelExpense, tableExpenseHistoryCellNames.fuel)
+            .clearCellWithTypeFirst(tableExpenseHistoryCellNames.fuel)
             .enterIssueByColIndex(testData.expenseHistory.payrollBenefitsExpense, 
                 tableExpenseHistoryCellNames.payrollAndBenefits)
             .verifyTotalOpExpensesTextByColIndex(testData.expenseHistory.toeToBe)

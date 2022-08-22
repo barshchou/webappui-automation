@@ -33,16 +33,16 @@ class ExpenseHistoryActions extends BaseActionsExt<typeof expenseHistoryPage> {
     }
 
     enterIssueByColIndex(issueValue: number | string, 
-        tableExpenseHistoryCellNames: string, index = 0,): ExpenseHistoryActions {
-        if (issueValue === "clear" || issueValue === 0) {
-            this.typeToCellByColIndex("something nonsense", tableExpenseHistoryCellNames, index)
-                .clearCellByColIndex(tableExpenseHistoryCellNames, index)
-                .verifyIssueTextByColIndex(issueValue, tableExpenseHistoryCellNames, index);
-        } else {
-            this.typeToCellByColIndex("something nonsense", tableExpenseHistoryCellNames, index)
-                .typeToCellByColIndex(`${issueValue}{enter}`, tableExpenseHistoryCellNames, index, true)
-                .verifyIssueTextByColIndex(issueValue, tableExpenseHistoryCellNames, index);
-        }
+        tableExpenseHistoryCellNames: string, index = 0): ExpenseHistoryActions {
+        this.typeToCellByColIndex("something nonsense", tableExpenseHistoryCellNames, index)
+            .typeToCellByColIndex(`${issueValue}{enter}`, tableExpenseHistoryCellNames, index, true)
+            .verifyIssueTextByColIndex(issueValue, tableExpenseHistoryCellNames, index);
+        return this;
+    }
+
+    clearCellWithTypeFirst(cellName: string, index = 0): ExpenseHistoryActions {
+        this.typeToCellByColIndex("something nonsense", cellName, index)
+            .clearCellByColIndex(cellName, index);
         return this;
     }
 
