@@ -4,6 +4,8 @@ import { _NavigationSection } from "../../../../actions/base";
 import { Income } from "../../../../actions";
 import ExpenseHistoryCells from "../../../../enums/expense/expenseHistoryTableRows.enum";
 
+Cypress.config().numTestsKeptInMemory = 0;
+
 describe("Verify the calculation on the Expense History page", { tags: [ "@income", "@expense_history" ] }, () => {
 
     beforeEach("Create report", () => {
