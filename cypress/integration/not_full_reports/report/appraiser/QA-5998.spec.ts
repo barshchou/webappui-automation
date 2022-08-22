@@ -17,10 +17,10 @@ conditionalDescribe("Verify that 'Sign Report' checkbox for different user roles
             _NavigationSection.navigateToReportAppraiser();
 
             cy.stepInfo("2. Add External Inspector");
-            Report._Appraiser.searchAndAddExternalInspector(testData.inspectorName);
+            Report._Appraiser.searchAndAddAppraiser(testData.appraiserName);
             
             cy.stepInfo("3. Verify that Bowery Appraiser/Inspector was added to Appraisers table");
-            Report._Appraiser.verifySignCheckbox(testData.inspectorName, false);
+            Report._Appraiser.verifySignCheckbox(testData.appraiserName, true);
         });
     
     });

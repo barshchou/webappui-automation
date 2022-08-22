@@ -8,5 +8,5 @@ const reportCreationFixture = () => {
 
 export default {
     reportCreationData: reportCreationFixture(),
-    inspectorName: "Robocop Inspector"
+    appraiserName: "Matt Roman"
 };
