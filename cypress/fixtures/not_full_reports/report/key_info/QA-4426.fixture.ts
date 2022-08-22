@@ -34,5 +34,6 @@ const _reportConclusionAndTextValues:Array<reportConclusionAndTextValues> = [
 ]; 
 
 export default {
-    reportConclusionAndTextValues: _reportConclusionAndTextValues
+    reportConclusionAndTextValues: _reportConclusionAndTextValues,
+    color: "rgb(210, 65, 65)"
 };
