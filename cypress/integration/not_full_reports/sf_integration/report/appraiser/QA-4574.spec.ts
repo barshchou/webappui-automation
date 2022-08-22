@@ -15,7 +15,10 @@ describe(`Prefill Reviewer from Salesforce and verify that data`,
                 _NavigationSection.navigateToReportAppraiser();
     
                 cy.stepInfo('3. Check that each team member is in a specific place in the table');
-                Report._Appraiser.verifyPersonallyInspectedCheckbox(testData.reviewer2, true);
+                Report._Appraiser.Page.leadAppraiser.should("have.text", data.leadAppraiser);
+                data.appraisers.forEach(appraiser => {
+                    Report._Appraiser.verifySignCheckbox(appraiser, true);
+                });
             });
         });
     });

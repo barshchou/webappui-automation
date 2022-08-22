@@ -4,8 +4,9 @@ import Enums from "../../../../../enums/enums";
 const appraisers = [
     {   
         specName: "[QA-4445]",
-        reportData: ReportDataCreator.getReportData(Enums.APPRAISER_SF.appraiserLeadReviewer, {}, true),
-        leadAppraiser: "Andrew Babienco",
+        reportData: ReportDataCreator.getReportData(Enums.APPRAISER_SF.leadReviewerReviewer2, {}, true),
+        leadAppraiser: "Scott  Powell",
+        appraisers: [ "Carolyn Yates", "Harry  Newstreet" ]
     }
 ];
 
