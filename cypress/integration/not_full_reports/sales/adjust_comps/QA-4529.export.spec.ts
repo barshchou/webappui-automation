@@ -9,7 +9,7 @@ import { Sales, ReviewExport } from "../../../../actions";
  */
 // TODO: Update this test case with new comps selection
 describe.skip("Check custom Utilities adjustment", 
-    { tags:[ "@fix", "@sales", "@adjust_comps", "@check_export" ] }, () => {
+    { tags:[ "@sales", "@adjust_comps", "@check_export" ] }, () => {
         it("Verify custom utilities adjustments on UI and prepare report for export", () => {
             createReport(testData.reportCreationData);
 

@@ -4,7 +4,7 @@ import { _NavigationSection } from "../../../../actions/base";
 import { Final, ReviewExport } from "../../../../actions";
 
 describe("Verify the text in the Opportunities section on the SWOT Analysis page", 
-    { tags:[ "@final", "@swot_analysis", "@check_export", "@fix" ] }, () => {
+    { tags:[ "@final", "@swot_analysis", "@check_export" ] }, () => {
 
         it("[QA-4959]", () => {
             cy.stepInfo("Login, create report");
