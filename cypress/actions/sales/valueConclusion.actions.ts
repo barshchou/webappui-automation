@@ -1,3 +1,4 @@
+import { isHasDecimalPartMoreNumberOfDigits } from './../../../utils/numbers.utils';
 import valueConclusionPage from "../../pages/sales/valueConclusion.page";
 import { numberWithCommas } from "../../../utils/numbers.utils";
 import BaseActionsExt from "../base/base.actions.ext";
@@ -67,13 +68,13 @@ class ValueConclusionActions extends BaseActionsExt<typeof valueConclusionPage> 
     }
 
     enterSaleValueConclusion(value: string | number): this {
-        const valueToBe = typeof value === "string" ? value : `$${numberWithCommas(value)}`;
+        const valueToBe = typeof value === "string" ? value : `$${numberWithCommas(value.toFixed(2))}`;
         valueConclusionPage.saleValueConclusion.clear().type(`${value}`).should("have.value", valueToBe);
         return this;
     }
 
     verifySaleValueConclusion(value: string | number): this {
-        const valueToBe = typeof value === "string" ? value : `$${numberWithCommas(value)}`;
+        const valueToBe = typeof value === "string" ? value : `$${numberWithCommas(value.toFixed(2))}`;
         valueConclusionPage.saleValueConclusion.should("have.value", valueToBe);
         return this;
     }
@@ -206,23 +207,24 @@ class ValueConclusionActions extends BaseActionsExt<typeof valueConclusionPage> 
         return this;
     }
 
-    verifyAsStabilizedLaundryLossMonths(monthsToBe: number): this {
-        valueConclusionPage.asStabilizedLaundryLossMonths.should("have.value", monthsToBe);
+    verifyMiscellaneousLossMonths(monthsToBe: number, valueConclusionKey: BoweryReports.ValueConclusionKeys, 
+        miscellaneousType: BoweryReports.RentLossType): this {
+        valueConclusionPage.getMiscellaneousLossMonths(valueConclusionKey, miscellaneousType)
+            .should("have.value", monthsToBe);
         return this;
     }
 
-    verifyAsCompleteLaundryLossMonths(monthsToBe: number): this {
-        valueConclusionPage.asCompleteLessLaundryLossMonths.should("have.value", monthsToBe);
-        return this;
-    }
+    verifyMiscellaneousLossAmount(amountToBe: number, valueConclusionKey: BoweryReports.ValueConclusionKeys, 
+        miscellaneousType: BoweryReports.RentLossType): this {
+        let numberToDecimal = isHasDecimalPartMoreNumberOfDigits(amountToBe) 
+            ? amountToBe.toFixed(2) 
+            : amountToBe.toString();
 
-    verifyAsStabilizedLaundryLossAmount(amountToBe: string): this {
-        valueConclusionPage.asStabilizedLaundryLossAmount.should("have.value", amountToBe);
-        return this;
-    }
-
-    verifyAsCompleteLaundryLossAmount(amountToBe: string): this {
-        valueConclusionPage.asCompleteLaundryLossAmount.should("have.value", amountToBe);
+        let amountToBeAdjusted = amountToBe < 0 
+            ? `-$${numberWithCommas(numberToDecimal.replace('-', ''))}`
+            : `$${numberWithCommas(numberToDecimal)}`;
+        valueConclusionPage.getMiscellaneousLossAmount(valueConclusionKey, miscellaneousType)
+            .should("have.value", amountToBeAdjusted);
         return this;
     }
 

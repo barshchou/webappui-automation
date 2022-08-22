@@ -324,7 +324,8 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
     navigateToSalesValueConclusion(): NavigationSectionActions {
         this.clickSalesButton()
             .clickValueConclusionButton()
-            .submitSaveChangesModal();
+            .submitSaveChangesModal()
+            .verifyProgressBarNotExist();
         return this;
     }
 
