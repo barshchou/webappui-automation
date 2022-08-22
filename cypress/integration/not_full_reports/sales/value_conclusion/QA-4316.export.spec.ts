@@ -18,7 +18,6 @@ describe(`Prospective Market Value As Stabilized -> Less Other Rent Loss data is
             cy.stepInfo(`2. Go to Key Info page, fill in the Date of Valuation (As Is) and click Save button`);
             NavigationSection.navigateToReportInformation();
             Report._KeyInfo.enterDateByType(testData.valuationDateFixture);
-            cy.pause();
 
             cy.stepInfo(`3. Go to Property → Summary and set the number of Residential and Commercial Units`);
             NavigationSection.navigateToPropertySummary();
@@ -94,17 +93,6 @@ describe(`Prospective Market Value As Stabilized -> Less Other Rent Loss data is
             ReviewExport.Actions.generateDocxReport()
                 .waitForReportGenerated()
                 .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
-
-            cy._mapGet(testData.valueConclusionKeyAsStabilized + testData.rentLossTypeOther)
-                .then(parkingLoss => {
-                    Sales.ValueConclusion.verifyMiscellaneousLossAmount(parkingLoss, 
-                        testData.valueConclusionKeyAsStabilized, testData.rentLossTypeOther);
-                });
-            cy._mapGet(testData.valueConclusionKeyAsComplete + testData.rentLossTypeOther)
-                .then(parkingLoss => {
-                    Sales.ValueConclusion.verifyMiscellaneousLossAmount(parkingLoss, 
-                        testData.valueConclusionKeyAsComplete, testData.rentLossTypeOther);
-                });
         });
 
         it("Check export", () => {

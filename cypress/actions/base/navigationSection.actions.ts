@@ -192,7 +192,8 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
     }
 
     navigateToResInPlaceRentRoll(saveChanges = true): NavigationSectionActions {
-        this.clickIncomeApproachButton()
+        this.clickSaveButton()
+            .clickIncomeApproachButton()
             .clickResidentialMenuIfClosed()
             .clickInPlaceRentRollButton()
             .submitSaveChangesModal(saveChanges)
@@ -249,7 +250,8 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
     }
 
     navigateToPropertySummary(): NavigationSectionActions {
-        this.clickPropertyButton()
+        this.clickSaveButton()
+            .clickPropertyButton()
             .clickSummaryButton()
             .submitSaveChangesModal()
             .waitForUrl(routesUtils.propertySummary);
@@ -300,7 +302,8 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
     }
 
     navigateToCapRateConclusion(): NavigationSectionActions {
-        this.clickIncomeApproachButton()
+        this.clickSaveButton()
+            .clickIncomeApproachButton()
             .clickCapRateConclusion()
             .submitSaveChangesModal();
         return this;
@@ -322,7 +325,8 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
     }
 
     navigateToSalesValueConclusion(): NavigationSectionActions {
-        this.clickSalesButton()
+        this.clickSaveButton()
+            .clickSalesButton()
             .clickValueConclusionButton()
             .submitSaveChangesModal()
             .verifyProgressBarNotExist();
@@ -459,7 +463,9 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
     }
 
     navigateToPropertyAmenities(): NavigationSectionActions {
-        this.clickPropertyButton()
+        
+        this.clickSaveButton()
+            .clickPropertyButton()
             .clickAmenitiesButton()
             .submitSaveChangesModal();
         return this;
@@ -539,7 +545,8 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
     }
 
     navigateToLaundry(): NavigationSectionActions {
-        this.clickIncomeApproachButton()
+        this.clickSaveButton()
+            .clickIncomeApproachButton()
             .clickMiscellaneousIncome()
             .clickLaundryButton()
             .submitSaveChangesModal();
@@ -547,7 +554,8 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
     }
 
     navigateToStorage(): NavigationSectionActions {
-        this.clickIncomeApproachButton()
+        this.clickSaveButton()
+            .clickIncomeApproachButton()
             .clickMiscellaneousIncome()
             .clickStorageButton()
             .submitSaveChangesModal();
@@ -555,7 +563,8 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
     }
 
     navigateToOther(): NavigationSectionActions {
-        this.clickIncomeApproachButton()
+        this.clickSaveButton()
+            .clickIncomeApproachButton()
             .clickMiscellaneousIncome()
             .clickOtherButton()
             .submitSaveChangesModal();
