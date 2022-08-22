@@ -212,16 +212,16 @@ class JobSearchActions {
      * Focuses on first available job icon on map and opens its job-card
      */
     focusOnJobIcon(iconIndex = 0) {
-        this.Page.selectCompsIconOnMap.eq(iconIndex).dblclick({ force:true });// cy.pause();
+        this.Page.selectCompsIconOnMap.eq(iconIndex).dblclick({ force:true });
         cy.wait(`@${Alias.gql.SearchJobs}`, { timeout: 120000 }).as(Alias.jobSearch.jobCardComp);
         /**
-         * We need cy.wait here, because after gql response spinner sometimes exists, sometimes not
+         * We need cy.wait here, because after gql response spinner sometimes may appear later
          */
         cy.wait(1000);
         findCompsPage.loadingModalSpinner.should('not.exist');
         /** 
          * We need cy.wait here, because after spinner some of the comp 
-         * icons still in process of rendering their position on the map
+         * icons still in process of rendering their position on the map (so are non-clickable)
          */
         cy.wait(1000);
         this.Page.selectCompsIconOnMap.eq(iconIndex).click();
