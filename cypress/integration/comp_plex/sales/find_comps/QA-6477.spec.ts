@@ -3,15 +3,15 @@ import { salesInterceptions } from "../../../../actions/base/baseTest.actions";
 import { Alias } from "../../../../utils/alias.utils";
 import testData from "../../../../fixtures/comp_plex/sales/find_comps/QA-6477.fixture";
 
-describe(`[QA-6477] [Sales > Find Comps > Job Search > Filters] Check when Report Search field is 
-being interacted with, filters become disabled`, {
+describe(`[QA-6477]`, {
     tags: [ "@comp_plex_standalone" ] }, () => {
     beforeEach(() => {
         salesInterceptions();
         cy.visit("/index.html");
     });
 
-    it("Test body", () => {
+    it(`[QA-6477] [Sales > Find Comps > Job Search > Filters] Check when Report Search field is 
+    being interacted with, filters become disabled`, () => {
         cy.wait(`@${Alias.gql.SearchSalesTransactions}`);
         cy.stepInfo(`1. Go to Sales > Find Comps > Job Search`);
         Sales._FindComps.openJobSearchTab();

@@ -3,14 +3,14 @@ import { salesInterceptions } from "../../../../actions/base/baseTest.actions";
 import { Alias } from "../../../../utils/alias.utils";
 import testData from "../../../../fixtures/comp_plex/sales/find_comps/QA-6357.fixture";
 
-describe(`[QA-6357] [Sales > Find Comps > Job Search > Filters] Check checkbox 'Show only On-App Jobs'`, {
+describe(`[QA-6357]`, {
     tags: [ "@comp_plex_standalone" ] }, () => {
     beforeEach(() => {
         salesInterceptions();
         cy.visit("/index.html");
     });
 
-    it("Test body", () => {
+    it("[QA-6357] [Sales > Find Comps > Job Search > Filters] Check checkbox 'Show only On-App Jobs'", () => {
         cy.wait(`@${Alias.gql.SearchSalesTransactions}`);
         cy.stepInfo(`1. Go to Sales > Find Comps > Job Search`);
         Sales._FindComps.openJobSearchTab();
