@@ -82,7 +82,7 @@ class CapRateConclusionPage extends BasePage {
     lessMiscellaneousLossMonths(valueConclusionKey: BoweryReports.ValueConclusionKeys, 
         lossType: BoweryReports.RentLossType) { 
         return cy.get(`[data-qa='${valueConclusionKey}LossItems.${lossType}.renovation-period-cell'] ` + 
-        `input[type=text]`);
+            `input[type=text]`);
     }
 
     get asStabilizedCommissionFeeAmount() { 

@@ -209,7 +209,7 @@ class ValueConclusionActions extends BaseActionsExt<typeof valueConclusionPage> 
 
     verifyMiscellaneousLossMonths(monthsToBe: number, valueConclusionKey: BoweryReports.ValueConclusionKeys, 
         miscellaneousType: BoweryReports.RentLossType): this {
-        valueConclusionPage.miscellaneousLossMonths(valueConclusionKey, miscellaneousType)
+        valueConclusionPage.getMiscellaneousLossMonths(valueConclusionKey, miscellaneousType)
             .should("have.value", monthsToBe);
         return this;
     }
@@ -223,7 +223,7 @@ class ValueConclusionActions extends BaseActionsExt<typeof valueConclusionPage> 
         let amountToBeAdjusted = amountToBe < 0 
             ? `-$${numberWithCommas(numberToDecimal.replace('-', ''))}`
             : `$${numberWithCommas(numberToDecimal)}`;
-        valueConclusionPage.miscellaneousLossAmount(valueConclusionKey, miscellaneousType)
+        valueConclusionPage.getMiscellaneousLossAmount(valueConclusionKey, miscellaneousType)
             .should("have.value", amountToBeAdjusted);
         return this;
     }

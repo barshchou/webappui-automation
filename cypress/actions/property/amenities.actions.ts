@@ -22,18 +22,30 @@ class AmenitiesActions extends BaseActionsExt<typeof amenitiesPage> {
         return this;
     }
 
-    checkLaundryRoomCheckbox(): AmenitiesActions {
-        amenitiesPage.laundryCheckbox.should("have.value", "false").check().should("have.value", "true");
+    checkLaundryRoomCheckbox(check = true): AmenitiesActions {
+        amenitiesPage.laundryCheckbox.invoke('attr', 'value').then(status => {
+            status != `${check}` 
+                ? amenitiesPage.laundryCheckbox.click().should('have.value', `${check}`) 
+                : null;
+        });
         return this;
     }
 
-    checkStorageCheckbox(): AmenitiesActions {
-        amenitiesPage.storageCheckbox.should("have.value", "false").check().should("have.value", "true");
+    checkStorageCheckbox(check = true): AmenitiesActions {
+        amenitiesPage.storageCheckbox.invoke('attr', 'value').then(status => {
+            status != `${check}` 
+                ? amenitiesPage.storageCheckbox.click().should('have.value', `${check}`) 
+                : null;
+        });
         return this;
     }
 
-    checkOtherCheckbox(): AmenitiesActions {
-        amenitiesPage.otherUnitAmenitiesCheckbox.should("have.value", "false").check().should("have.value", "true");
+    checkOtherCheckbox(check = true): AmenitiesActions {
+        amenitiesPage.otherUnitAmenitiesCheckbox.invoke('attr', 'value').then(status => {
+            status != `${check}` 
+                ? amenitiesPage.otherUnitAmenitiesCheckbox.click().should('have.value', `${check}`) 
+                : null;
+        });
         return this;
     }
 

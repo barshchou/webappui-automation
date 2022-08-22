@@ -62,13 +62,13 @@ class ValueConclusionPage extends BasePage {
 
     get basisForAnalysisAmount() { return cy.get("[data-qa='basisForSFAnalysis-amount-cell']"); }
 
-    miscellaneousLossMonths(valueConclusionKey: BoweryReports.ValueConclusionKeys, 
+    getMiscellaneousLossMonths(valueConclusionKey: BoweryReports.ValueConclusionKeys, 
         miscellaneousType: BoweryReports.RentLossType) { 
         return cy.get(`[data-qa='${valueConclusionKey}LossItems.` + 
         `${miscellaneousType}.renovation-period-cell'] input[type=text]`); 
     }
 
-    miscellaneousLossAmount(valueConclusionKey: BoweryReports.ValueConclusionKeys, 
+    getMiscellaneousLossAmount(valueConclusionKey: BoweryReports.ValueConclusionKeys, 
         miscellaneousType: BoweryReports.RentLossType) { 
         return cy.get(`[data-qa='${valueConclusionKey}LossItems.` + 
         `${miscellaneousType}.amount-cell'] input:not([type=hidden])`); 

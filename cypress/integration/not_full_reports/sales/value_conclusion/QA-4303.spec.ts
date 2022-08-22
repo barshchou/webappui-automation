@@ -15,7 +15,7 @@ describe(`Prospective Market Value As Stabilized -> Less Parking Rent Loss data 
             Property.Summary.enterNumberOfResUnits(testData.numberOfUnits);
 
             cy.stepInfo(`2. Go to Property → Amenities page and check Parking Units check-box 
-            and put in the number of Parking Units`);
+                        and put in the number of Parking Units`);
             NavigationSection.navigateToPropertyAmenities();
             Property.Amenities.addParkingPlaces(testData.parkingPlaces);
 
@@ -35,16 +35,16 @@ describe(`Prospective Market Value As Stabilized -> Less Parking Rent Loss data 
             Income.CapRateConclusion.enterConclusionSectionConcludedCapRate(testData.concludedCapRate);
 
             cy.stepInfo(`6. Input the number of months in the Cap Rate Conclusion Summary Table → 
-            Less Parking Rent Loss raw → Time Period column. Click Save button.`);
+                        Less Parking Rent Loss raw → Time Period column. Click Save button.`);
             Income.CapRateConclusion.enterMiscellaneousLossMonths(testData.lossMonths, 
                 testData.valueConclusionKeyAsStabilized, testData.rentLossTypeParking)
                 .enterMiscellaneousLossMonths(testData.lossMonths, testData.valueConclusionKeyAsComplete, 
                     testData.rentLossTypeParking);
 
             cy.stepInfo(`7. Go to Sales → Value Conclusion page → Sales Value Conclusion Table → 
-            Less Parking Rent Loss raw and compare the values from Time Period and Amount columns 
-            with the Time Period and Amount values from Income → Cap Rate Conclusion page → 
-            Cap Rate Conclusion Summary Table → Less Parking Rent Loss raw`);
+                        Less Parking Rent Loss raw and compare the values from Time Period and Amount columns 
+                        with the Time Period and Amount values from Income → Cap Rate Conclusion page → 
+                        Cap Rate Conclusion Summary Table → Less Parking Rent Loss raw`);
             NavigationSection.navigateToSalesValueConclusion();
             Sales.ValueConclusion.verifyMiscellaneousLossMonths(testData.lossMonths, 
                 testData.valueConclusionKeyAsStabilized, testData.rentLossTypeParking)
