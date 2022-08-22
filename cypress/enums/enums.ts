@@ -64,7 +64,6 @@ import sortValues from "./findComps/sortValues.enum";
 import conditionValues from "./findComps/propertyInformation/conditionValues.enum";
 import comparableTypes from "./findComps/propertyInformation/comparableType.enum";
 import saleStatuses from "./findComps/saleInformation/saleStatuses.enum";
-import saleCondition from "./findComps/saleInformation/saleCondition.enum";
 import fileSelectionNamesEnum from "./property/fileSelectionNames.enum";
 import discussionNamesEnum from "./property/discussionNames.enum";
 import salesAdjustmentGridDiscussionsEnum from "./adjustComps/salesAdjustmentGridDiscussions.enum";
@@ -152,7 +151,6 @@ export default {
     SALE_PERIOD_VALUES: salePeriodValuesEnum,
     SORT_VALUES: sortValues,
     CONDITION_VALUES: conditionValues,
-    SALE_CONDITION: saleCondition,
     COMPARABLE_TYPES: comparableTypes,
     SALE_STATUSES: saleStatuses,
     FILE_SELECTION_NAMES: fileSelectionNamesEnum,

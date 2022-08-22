@@ -5,7 +5,6 @@ import { isNumber, numberWithCommas } from "../../../../utils/numbers.utils";
 import BaseActionsExt from "../../base/base.actions.ext";
 import saleInfoFormActions from "./drm/saleInfoForm.actions";
 import propertyDescActions from "./drm/propertyDescForm.actions";
-import salesCompDetailsActions from "./drm/salesCompDetails.actions";
 import propertyInfoFormActions from "./drm/propertyInfoForm.actions";
 import { Alias, gqlOperationNames } from "../../../utils/alias.utils";
 import { Utils } from "../../../types/utils.type";
@@ -38,10 +37,6 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
         return propertyInfoFormActions;
     }
 
-    get SalesCompDetails() {
-        return salesCompDetailsActions;
-    }
-
     get JobSearch() {
         return jobSearchActions;
     }
@@ -60,8 +55,7 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
     }
 
     clickAddNewCompContinueButton(): FindCompsActions {
-        findCompsPage.newCompContinueButton.scrollIntoView().should('exist').should('be.enabled').focus()
-            .realClick({ clickCount: 40 });
+        findCompsPage.newCompContinueButton.should('exist').should('be.enabled').focus().trigger('mouseover').click();
         return this;
     }
 
@@ -77,7 +71,7 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
     }
 
     clickSearchCompButton(): FindCompsActions {
-        findCompsPage.submitButton.should('exist').should('be.enabled').click();
+        findCompsPage.submitButton.click();
         return this;
     }
 
@@ -123,7 +117,7 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
     selectFilterSalePeriodValue(periodValue: BoweryReports.FindComps.SalePeriodValues): FindCompsActions {
         findCompsPage.filterSalePeriod.should('exist').click();
         findCompsPage.filterSalePeriodValue(periodValue).should('exist').click();
-        findCompsPage.filterSalePeriod.find('input').should('have.value', `${periodValue}`);
+        findCompsPage.filterSalePeriod.children().should('contain', `${periodValue}`);
         return this;
     }
 
@@ -268,11 +262,6 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
 
     removeDeletedCompByAddress(address: string): FindCompsActions {
         findCompsPage.getRemoveDeletedCompButtonByAddress(address).click();
-        return this;
-    }
-
-    addDeletedCompByAddress(address: string): FindCompsActions {
-        findCompsPage.addRemovedCompButtonByAddress(address).should("exist").click();
         return this;
     }
 
@@ -442,10 +431,8 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
     addNewCompViaReportId(reportId: string): FindCompsActions {
         this.openJobSearchTab()
             .enterReportToSearchComp(reportId)
-            .clickSearchButton();
-        findCompsPage.loadingModalSpinner.should('exist');
-        findCompsPage.loadingModalSpinner.should('not.exist');
-        this.clickSelectCompsIconOnMap()
+            .clickSearchButton()
+            .clickSelectCompsIconOnMap()
             .clickSelectCompsButton()
             .clickSelectAllButton()
             .clickImportCompsFromReportButton();
@@ -464,13 +451,6 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
         findCompsPage.resetAllButton.should('exist');
         return this;
     }
-
-    openDetailsModal(address: string): FindCompsActions {
-        this.Page.detailsButtonByAddress(address).should('exist').click();
-        this.Page.propertyInfoEditBtn.should('exist');
-        return this;
-    }
-    
 
     
 }

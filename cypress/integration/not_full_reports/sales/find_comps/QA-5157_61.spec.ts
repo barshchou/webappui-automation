@@ -13,7 +13,6 @@ conditionalDescribe(`[QA-5157] [QA-5161] [Sales > Find Comps] "Date Sold" sortin
                      for sales comps + sorting is applied correctly`,
 { tags: [ "@sales", "@find_comps", "@comp_plex" ] }, () => {
     before("Login, create report", () => {
-        Cypress.config('numTestsKeptInMemory', 0);
         createReport(testData.reportCreationData);
         cy.saveLocalStorage();
     });
@@ -37,18 +36,15 @@ conditionalDescribe(`[QA-5157] [QA-5161] [Sales > Find Comps] "Date Sold" sortin
                     - Listing
                     - date sold from most to least recent 
                     (comps added via map search )`);
-
-        //TODO find a way to add comps from map more precisely
         Sales._FindComps.resetAllFilters()
-            .selectFilterSalePeriodValue(testData.salePeriodValue)
-            .selectCompFromMap()
-            .selectCompFromMap()
-            .selectCompFromMap()
-            .selectCompFromMap();
-        Sales._FindComps.resetAllFilters()
-            .selectCompFromMap()
-            .selectCompFromMap();
-       
+            .selectFilterSalePeriodValue(testData.salePeriodValue);
+        testData.arrayOfCompsForAdditionFromMap1.forEach(comp => {
+            Sales._FindComps.selectCompFromMapByAddress(comp.address);
+        });    
+        Sales._FindComps.resetAllFilters();
+        testData.arrayOfCompsForAdditionFromMap2.forEach(comp => {
+            Sales._FindComps.selectCompFromMapByAddress(comp.address);
+        });
         Sales._FindComps.checkSalesCompSortedByDateSold();
 
         cy.stepInfo(`2.Verify that when "Date Sold" option in Sort dropdown is selected 
@@ -70,20 +66,20 @@ conditionalDescribe(`[QA-5157] [QA-5161] [Sales > Find Comps] "Date Sold" sortin
                 .PropertyInfo.setResidentialUnits(`${testData.comparableFixtureManual.units.numberOfUnits}`)
                 .setSiteArea(`${testData.comparableFixtureManual.siteArea}`)
                 .setFloor(`${testData.comparableFixtureManual.floors}`);
-            Sales._FindComps.clickAddNewCompContinueButton()
+            Sales._FindComps.clickAddNewCompContinueButton();
+            Sales._FindComps
                 .SaleInfo.setBuyerGrantee(testData.comparableFixtureManual.saleInfo.buyer)
                 .setSellerGrantor(testData.comparableFixtureManual.saleInfo.seller)
                 .selectSaleDate('random');
             Sales._FindComps
-                .selectDropdownOptionNewComp(Sales._FindComps.Page.SaleStatusDropdown, saleStatus)
-                .clickAddNewCompContinueButton()
-                .clickAddNewCompSaveAndCloseButton();
+                .selectDropdownOptionNewComp(Sales._FindComps.Page.SaleStatusDropdown, saleStatus);
+            Sales._FindComps.clickAddNewCompContinueButton();
+            Sales._FindComps.clickAddNewCompSaveAndCloseButton();
             return this;
         }
 
         testData.arrayOfCompsForManualAddition.forEach(comp => {
             addCompWithStatus(comp.address, comp.status);
-            Sales._FindComps.verifyAddedCompAddress(comp.address);
         });
         Sales._FindComps.checkSalesCompSortedByDateSold();
 
@@ -120,6 +116,8 @@ conditionalDescribe(`[QA-5157] [QA-5161] [Sales > Find Comps] "Date Sold" sortin
                     - Listing
                     - date sold from most to least recent 
                     (comps added via uploaded from CSV )`);
+        // TODO add more complex csv
+
         cy.reload();
         Sales._FindComps.uploadComps(testData.filePath)
             .verifyUploadCompsSucceeded()
