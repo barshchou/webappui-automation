@@ -31,6 +31,11 @@ const appraisers = [
         specName: "[QA-4476]",
         reportData: ReportDataCreator.getReportData(Enums.APPRAISER_SF.reviewer2, {}, true),
         leadAppraiser: "Cynthia Xu",
+    },
+    {
+        specName: "[QA-4479]",
+        reportData: ReportDataCreator.getReportData(Enums.APPRAISER_SF.emptyTeam, {}, true),
+        leadAppraiser: "Brandon Gollotti",
     }
 ];
 
