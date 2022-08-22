@@ -14,7 +14,7 @@ Report Search field becomes disabled`, {
     it("Test body", () => {
         cy.wait(`@${Alias.gql.SearchSalesTransactions}`);
         cy.stepInfo(`1. Go to Sales > Find Comps > Job Search`);
-        Sales._FindComps.JobSearch.openJobSearchTab();
+        Sales._FindComps.openJobSearchTab();
 
         cy.stepInfo(`2. Fill in the filters with values -> check Report Search field becomes disabled`);
         Sales._FindComps.Actions.JobSearch.checkFiltersAreExist();

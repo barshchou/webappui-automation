@@ -376,6 +376,13 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
         findCompsPage.resetAllButton.should('exist');
         return this;
     }
+
+    openJobSearchTab() {
+        findCompsPage.jobSearchTab.click();
+        cy.wait(`@${Alias.gql.SearchJobs}`, { timeout: 120000 });
+        findCompsPage.reportIdInput.should('exist');
+        return this;
+    }
 }
 
 export default new FindCompsActions(findCompsPage);

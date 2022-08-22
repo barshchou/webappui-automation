@@ -13,7 +13,7 @@ describe(`[QA-6357] [Sales > Find Comps > Job Search > Filters] Check checkbox '
     it("Test body", () => {
         cy.wait(`@${Alias.gql.SearchSalesTransactions}`);
         cy.stepInfo(`1. Go to Sales > Find Comps > Job Search`);
-        Sales._FindComps.JobSearch.openJobSearchTab();
+        Sales._FindComps.openJobSearchTab();
 
         cy.stepInfo(`2. Checkbox “Show only On-App Jobs” is located to the left of the map under the filters`);
         Sales._FindComps.Actions.JobSearch.checkFiltersAreExist();

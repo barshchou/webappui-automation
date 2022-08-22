@@ -13,13 +13,6 @@ class JobSearchActions {
         this.Page = page;
     }
 
-    openJobSearchTab() {
-        findCompsPage.jobSearchTab.click();
-        cy.wait(`@${Alias.gql.SearchJobs}`, { timeout: 120000 });
-        findCompsPage.reportIdInput.should('exist');
-        return this;
-    }
-
     /**
      * Checks whether filters in JobSearch screen exists
      */

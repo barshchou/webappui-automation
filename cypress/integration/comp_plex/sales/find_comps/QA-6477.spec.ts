@@ -14,7 +14,7 @@ being interacted with, filters become disabled`, {
     it("Test body", () => {
         cy.wait(`@${Alias.gql.SearchSalesTransactions}`);
         cy.stepInfo(`1. Go to Sales > Find Comps > Job Search`);
-        Sales._FindComps.JobSearch.openJobSearchTab();
+        Sales._FindComps.openJobSearchTab();
 
         cy.stepInfo(`2. Fill in Report Search field -> check that filters become disabled`);
         Sales._FindComps.Actions.JobSearch.checkFiltersAreExist();
