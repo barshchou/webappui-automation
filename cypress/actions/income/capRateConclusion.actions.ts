@@ -368,7 +368,7 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
      */
     private setAllAsStabilizedLossesAliases(valueConclusionKey: BoweryReports.ValueConclusionKeys, 
         conclusionValueName: BoweryReports.ValueConclusionName): 
-    CapRateConclusionActions {
+        CapRateConclusionActions {
         this.setResRentLossItemsAmount(valueConclusionKey, conclusionValueName)
             .setCommercialRentLossItemsAmount(valueConclusionKey, conclusionValueName)
             .setCommercialUndeterminedLossAmount(valueConclusionKey, conclusionValueName)

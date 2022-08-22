@@ -61,3 +61,6 @@ export type LetterOfTransmittalSections = keyof typeof Enums.LETTER_SECTIONS
 export type SWOTAnalysisSections = keyof typeof Enums.SWOT_SECTIONS
 export type IncomeCapitalizationApproachSectionsKeys = keyof typeof Enums.INCOME_CAPITALIZATION_APPROACH_SECTIONS
 export type CertificationSectionsKeys = keyof typeof Enums.CERTIFICATION_SECTIONS
+export type OtherAdjustmentsExpansionRowsKeys = keyof typeof Enums.OTHER_ADJUSTMENTS_EXPANSION_ROWS
+export type UtilitiesAdjustmentsExpansionRowsKeys = keyof typeof Enums.UTILITIES_ADJUSTMENTS_EXPANSION_ROWS
+export type AdjustmentExpansionLabelsKeys = keyof typeof Enums.ADJUSTMENT_EXPANSION_LABELS
