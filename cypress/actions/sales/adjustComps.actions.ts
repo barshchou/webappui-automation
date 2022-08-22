@@ -173,7 +173,7 @@ class AdjustCompsActions extends BaseActionsExt<typeof adjustCompsPage> {
 
     /**
      * Verify that Trended Price per selected @param {string} basis adjusted based on
-     *Net Market adjustment total value
+     * Net Market adjustment total value
      */
     verifyTrendedPricePerBasis(
         comparablesAdjustments: number[], basis: string, index = 0, isEmpty = false
@@ -198,7 +198,7 @@ class AdjustCompsActions extends BaseActionsExt<typeof adjustCompsPage> {
             cy.log("Cumulative Price Per Unit is: " + adjustedTrendedPriceText);
             _saveDataInFile(`$${numberWithCommas(Math.round(pricePerBasisNumber))}`, `${Cypress.spec.name}.txt`);
             adjustCompsPage.cellCumulativePriceValue.eq(index)
-                .should("have.text", isEmpty ? "" : adjustedTrendedPriceText);
+                .should("have.text", isEmpty ? "$0.00" : adjustedTrendedPriceText);
         });
             
         return this;

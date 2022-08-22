@@ -5,7 +5,7 @@ import { createReport } from "../../../../actions/base/baseTest.actions";
 import { ReviewExport } from "../../../../actions";
 
 describe("Adjusted Price per Residential Unit in Sales Adjustment Grid is calculated with correct formula", 
-    { tags: [ "@adjust_comps", "@sales", "@check_export" ] }, () => {
+    { tags: [ "@adjust_comps", "@sales", "@check_export", "@fix" ] }, () => {
 
         it("Test body", () => {
             createReport(testData.reportCreationData);

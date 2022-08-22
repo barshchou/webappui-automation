@@ -2,10 +2,9 @@ import testData from "../../../../fixtures/not_full_reports/final/swot_analysis/
 import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { Final, ReviewExport } from "../../../../actions";
-import { pathSpecData } from "../../../../../utils/fixtures.utils";
 
 describe("Verify the text in the Opportunities section on the SWOT Analysis page", 
-    { tags:[ "@final", "@swot_analysis", "@check_export" ] }, () => {
+    { tags:[ "@final", "@swot_analysis", "@check_export", "@fix" ] }, () => {
 
         it("[QA-4959]", () => {
             cy.stepInfo("Login, create report");
@@ -16,14 +15,14 @@ describe("Verify the text in the Opportunities section on the SWOT Analysis page
 
             cy.stepInfo(`2. Verify the following list of threats is displayed:
                         - Rent growth is limited by local rent control laws.
-                        - In 2022, the Federal Reserve Board increased their benchmark rate by 25 basis 
+                        - On July 27th, 2022, the Federal Reserve Board increased their benchmark rate by 25 basis 
                         points in March and again by 50 basis points at their May meeting in an effort to curb 
                         inflation. The Fed announced that more rate hikes are expected this year.
                         - As the economy continues its recovery from the global pandemic, there remains 
                         uncertainty related to the speed and consistency of the recovery.
                         - Economic uncertainty and potential market instability related to the war in Ukraine.
                         `);
-            Final._SWOTAnalysis.verifyTextSection(testData.threats, testData.threatsTexts, testData.memoTestDataFile);
+            Final._SWOTAnalysis.verifyTextSection(testData.threats, testData.threatsTexts);
 
             cy.stepInfo("3. Export the report");
             _NavigationSection.openReviewAndExport();
@@ -38,16 +37,13 @@ describe("Verify the text in the Opportunities section on the SWOT Analysis page
                 cy.log(<string>file);
                 cy.visit(<string>file);
             
-                cy.readFile(`${pathSpecData()}${testData.memoTestDataFile}`).then(data => {
-                    cy.stepInfo(`4. Verify that the same list of threats as in Step #2  is displayed 
+                cy.stepInfo(`4. Verify that the same list of threats as in Step #2  is displayed 
                                 in the exported report “Threats” section`);
-                    const dataArray = JSON.parse(data);
-                   
-                    cy.contains("Threats").scrollIntoView().next().find("li").then($li => {
-                        const reportTreatsText = $li.toArray().map(li => li.innerHTML);
-                        expect(dataArray).to.deep.eq(reportTreatsText); 
-                    });
+                cy.contains("Threats").scrollIntoView().next().find("li").then($li => {
+                    const reportTreatsText = $li.toArray().map(li => li.innerHTML);
+                    expect(testData.threatsTexts).to.deep.eq(reportTreatsText); 
                 });
+               
             });
         });
     });
