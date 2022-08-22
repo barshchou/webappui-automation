@@ -202,8 +202,8 @@ class JobSearchActions {
      * Focuses on first available job icon on map and opens its job-card
      */
     focusOnJobIcon(iconIndex = 0) {
-        this.Page.selectCompsIconOnMap.eq(iconIndex).dblclick({ force:true });// cy.pause();
-        cy.wait(`@${Alias.gql.SearchJobs}`, { timeout: 120000 }).as(Alias.jobSearch.jobCardComp);
+        this.Page.selectCompsIconOnMap.eq(iconIndex).dblclick({ force:true });
+        cy.wait(`@${Alias.gql.SearchJobs}`, { timeout: 120000 });
         /**
          * We need cy.wait here, because after gql response spinner sometimes exists, sometimes not
          */
@@ -214,7 +214,8 @@ class JobSearchActions {
          * icons still in process of rendering their position on the map
          */
         cy.wait(1000);
-        this.Page.selectCompsIconOnMap.eq(iconIndex).click();
+        this.Page.selectCompsIconOnMap.eq(iconIndex).click(); 
+        cy.wait(`@${Alias.gql.SearchJobs}`, { timeout: 120000 }).as(Alias.jobSearch.jobCardComp);
         this.Page.jobCard.should("be.visible");
         findCompsPage.loadingModalSpinner.should('not.exist');
         // ernst: after job-card became visible - we need retrieve all necessary comp data for further manipulations
@@ -237,6 +238,7 @@ class JobSearchActions {
                 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                 // @ts-ignore
                 let comp = val.response.body.data.searchJobs.find(c => c.address.streetAddress == address);
+                cy.log(comp);
                 cy.wrap(comp).as(selectedCompDataAlias);
             });
         });
