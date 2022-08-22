@@ -94,15 +94,12 @@ class ExpenseHistoryActions extends BaseActionsExt<typeof expenseHistoryPage> {
     private setOperatingExpensesExceptGrossValuesToMap(index = 0,
         expensesArray: string[] | string = tableExpenseHistoryCellNames.operatingExpensesCellsNamesArray
     ): ExpenseHistoryActions {
-        if (Array.isArray(expensesArray)) {
-            for (let expense of expensesArray) {
-                if (expense === tableExpenseHistoryCellNames.grossRevenue) {
-                    continue;
-                }
-                this.setOperatingExpenseValueToMap(expense, index);
+        const expensesInnerArray = Array.isArray(expensesArray) ? expensesArray : [ expensesArray ];
+        for (let expense of expensesInnerArray) {
+            if (expense === tableExpenseHistoryCellNames.grossRevenue) {
+                continue;
             }
-        } else {
-            this.setOperatingExpenseValueToMap(expensesArray, index);
+            this.setOperatingExpenseValueToMap(expense, index);
         }
         return this;
     }
