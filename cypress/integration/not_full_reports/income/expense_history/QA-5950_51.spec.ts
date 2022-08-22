@@ -8,7 +8,7 @@ describe(`Expense History Discussion for reports is generated correctly accordin
                selected Basis for Square Foot Analysis`, { tags: [ "@income", "@expense_history" ] }, () => {
 
     Object.values(Enums.INCOME_TYPE).forEach(incomeType => {
-        it(`Test with ${incomeType} income type report`, () => {
+        it(`[QA-5950_51] Test with ${incomeType} income type report`, () => {
             createReport(testData.reportCreationData(incomeType));
             const isCommercial = incomeType === Enums.INCOME_TYPE.commercial;
             const basisTexts = Object.values(Enums.BASIS_SQUARE_FOOT_ANALYSIS_TEXTS);

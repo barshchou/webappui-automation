@@ -10,7 +10,7 @@ describe("Verify that combined utilities expenses is enabled", { tags: [ "@incom
         createReport(testData.reportCreationData);
     });
 
-    it("Test body", () => {
+    it("[QA-4846] Test body", () => {
         const combinedElectricityFuel = testData.electricity + testData.fuel;
         const combinedAll = testData.electricity + testData.fuel + testData.waterAndSewer;
         cy.stepInfo("1. Navigate to Expense History, add any Expense Period");

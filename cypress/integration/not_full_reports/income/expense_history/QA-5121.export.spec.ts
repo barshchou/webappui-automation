@@ -8,7 +8,7 @@ import { numberWithCommas } from "../../../../../utils/numbers.utils";
 describe("Verify that the user can delete expense category on the Expense History page", 
     { tags: [ "@income", "@expense_history", "@check_export" ] }, () => {
     
-        it("Test body", () => {
+        it("[QA-5121] Test body", () => {
             createReport(testData.reportCreationData);
 
             cy.stepInfo("1. Navigate to Expense History page");
@@ -31,7 +31,7 @@ describe("Verify that the user can delete expense category on the Expense Histor
                 .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
         });
 
-        it("Check export", () => {
+        it("[QA-5121] Check export", () => {
             cy.task("getFilePath", { _reportName: testData.reportCreationData.reportNumber, _docxHtml: "html" })
                 .then(file => {
                     cy.stepInfo("4. Check exported document, verify expenses are deleted");

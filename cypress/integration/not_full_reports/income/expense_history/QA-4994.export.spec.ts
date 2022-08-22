@@ -14,7 +14,7 @@ the same info as on the WebApp`, { tags: [ "@income", "@expense_history", "@chec
         const combinedElectricityFuel = testData.electricity + testData.fuel;
         const combinedAll = testData.electricity + testData.fuel + testData.waterAndSewer;
 
-        it(`Download report with ${expense} utility expense`, () => {
+        it(`[QA-4994] Download report with ${expense} utility expense`, () => {
             createReport(reportCreationData);
             cy.stepInfo("1. Navigate to expense history, add expense period and utility expenses");
             _NavigationSection.navigateToExpenseHistory();
@@ -43,7 +43,7 @@ the same info as on the WebApp`, { tags: [ "@income", "@expense_history", "@chec
                 .downloadAndConvertDocxReport(reportCreationData.reportNumber);
         });
 
-        it(`Check export with ${expense} utility expense`, () => {
+        it(`[QA-4994] Check export with ${expense} utility expense`, () => {
             cy.task("getFilePath", { _reportName: reportCreationData.reportNumber, _docxHtml: "html" })
                 .then(file => {
                     const electricityCell = getCellLocator(Enums.PRO_FORMA_TYPES.electricity);

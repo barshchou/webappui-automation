@@ -13,7 +13,7 @@ describe("Verify the calculation on the Expense History page", { tags: [ "@incom
     });
 
     testData.periods.forEach(period => {
-        it(`Test with ${period.expensePeriodType} expense period`, () => {
+        it(`[QA-4778] Test with ${period.expensePeriodType} expense period`, () => {
             cy.stepInfo(`1. Add '${period.expensePeriodType}' expense period`);
             Income._ExpenseHistory.selectExpensePeriod(period.expensePeriodType)
                 .enterExpenseYear(period.year);

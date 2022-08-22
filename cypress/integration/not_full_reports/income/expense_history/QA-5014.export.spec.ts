@@ -9,7 +9,7 @@ import { numberWithCommas } from "../../../../../utils/numbers.utils";
 describe("Verify the 'Add expense category' button is displayed on the Expense History page",
     { tags: [ "@income", "@expense_history", "@check_export" ] }, () => {
 
-        it("Test body", () => {
+        it("[QA-5014] Test body", () => {
             const newCategoryLocator = toCamelCase(testData.expenseCategory);
             createReport(testData.reportCreationData);
             cy.stepInfo("1. Navigate to expense history page");
@@ -54,7 +54,7 @@ describe("Verify the 'Add expense category' button is displayed on the Expense H
                 .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
         });
 
-        it("Check export", () => {
+        it("[QA-5014] Check export", () => {
             cy.task("getFilePath", { _reportName: testData.reportCreationData.reportNumber, _docxHtml: "html" })
                 .then(file => {
                     cy.stepInfo("7. Verify custom expense is exported");
