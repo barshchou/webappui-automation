@@ -4,7 +4,8 @@ const appraisersSF = {
     noMatches: "2200019374",
     appraiserLead: "2100013420",
     appraiser: "2100014529",
-    reviewer2: "2200019374"
+    reviewer2: "2200019374",
+    emptyTeam: "2200019013"
 } as const;
 
 export default Object.freeze(appraisersSF);
