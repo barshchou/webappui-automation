@@ -14,7 +14,7 @@ describe("Verify that the user can display historical expense values on a PSF ba
             Property._Summary.enterGrossBuildingArea(testData.gba);
         });
 
-        it("Test body", () => {
+        it("[QA-6239_6388] Test body", () => {
             const perSFBasisText = toLowerCaseFirstLetterInString(Enums.EXPENSE_ITEM_BASIS_OF_COMPARISON.perSF);
             const customExpenseLocator = toCamelCase(testData.customCategory);
             const grossRevenuePSFValue = testData.grossRevenue / testData.gba;
