@@ -6,7 +6,7 @@ import testData from "../../../../fixtures/not_full_reports/profile_organization
 import enums from '../../../../enums/enums';
 
 describe("[QA-4022] A hard coded sentence is updated on the Organization page", 
-    { tags:[ "@organizations", "@settings", "@check_export", "@fix" ] }, () => {
+    { tags:[ "@organizations", "@settings", "@check_export" ] }, () => {
 
         it('Create a report and verify sentence on UI. Export report', () => {
             cy.stepInfo('1. Create a report');
