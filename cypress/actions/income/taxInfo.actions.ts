@@ -366,7 +366,7 @@ class TaxInfoActions extends BaseActionsExt<typeof taxInfoPage> {
     }
 
     verifyTaxCalculationTooltip(tooltipToBe: string): this {
-        taxInfoPage.taxCalculationDiscussionTooltip.should("exist").should("have.attr", "aria-label", tooltipToBe);
+        taxInfoPage.taxCalculationDiscussionTooltip.should("have.text", tooltipToBe);
         return this;
     }
 

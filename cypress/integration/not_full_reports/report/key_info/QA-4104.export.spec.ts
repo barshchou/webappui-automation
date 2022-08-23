@@ -18,9 +18,8 @@ describe("[QA-4104] Verify the Market Value generated commentary",
             replacing the boilerplate sentence currently exported there`);
             Report._KeyInfo.Page.textBoxDefinitionOfMarketValue().should("include.text", testData.verifyText);
 
-            cy.stepInfo(`4. Check that there is a tooltip letting know where the text exports.`);
-            Report._KeyInfo.Page.iconDefinitionOfMarketValue().trigger("mouseover");
-            Report._KeyInfo.Page.tooltipDefinitionOfMarketValue.should("include.text", testData.tooltipText);
+            cy.stepInfo(`4. Verify text letting know where the text exports.`);
+            Report._KeyInfo.Page.definitionOfMarketValue.should("include.text", testData.tooltipText);
 
             _NavigationSection.openReviewAndExport();
             ReviewExport.generateDocxReport().waitForReportGenerated()

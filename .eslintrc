@@ -27,7 +27,7 @@
       "block-spacing": "warn",
       "brace-style":["warn", "1tbs", { "allowSingleLine": true }],
       "camelcase":"warn",
-      "indent": ["warn", 4, { 
+      "@typescript-eslint/indent": ["warn", 4, { 
         "SwitchCase": 1, 
         "MemberExpression": 1, 
         "ArrayExpression": 1, 

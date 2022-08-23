@@ -212,16 +212,17 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
         return this;
     }
 
-    enterLaundryLossMonths(months: number, valueConclusionKey: BoweryReports.ValueConclusionKeys): 
-    CapRateConclusionActions {
-        capRateConclusionPage.lessLaundryLossMonths(valueConclusionKey).clear()
-            .type(`${months}`).should("have.value", months);
-        return this;
-    }
-
     enterAsStabilizedCommissionFeeAmount(amount: string | number): CapRateConclusionActions {
         const valueToBe = typeof amount === "string" ? amount : `-$${numberWithCommas(amount)}`;
         capRateConclusionPage.asStabilizedCommissionFeeAmount.clear().type(`${amount}`).should("have.value", valueToBe);
+        return this;
+    }
+
+    enterMiscellaneousLossMonths(months: number, valueConclusionKey: BoweryReports.ValueConclusionKeys, 
+        lossType: BoweryReports.RentLossType): CapRateConclusionActions {
+        capRateConclusionPage.lessMiscellaneousLossMonths(valueConclusionKey, lossType).clear()
+            .type(`${months}`).should("have.value", months);
+        this.setMiscellaneousLossAmountAlias(valueConclusionKey, lossType);
         return this;
     }
 
@@ -368,7 +369,7 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
      */
     private setAllAsStabilizedLossesAliases(valueConclusionKey: BoweryReports.ValueConclusionKeys, 
         conclusionValueName: BoweryReports.ValueConclusionName): 
-    CapRateConclusionActions {
+        CapRateConclusionActions {
         this.setResRentLossItemsAmount(valueConclusionKey, conclusionValueName)
             .setCommercialRentLossItemsAmount(valueConclusionKey, conclusionValueName)
             .setCommercialUndeterminedLossAmount(valueConclusionKey, conclusionValueName)
@@ -576,6 +577,17 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
             .invoke('attr', 'value').then(commissionFee => {
                 let commissionFeeNumber = getNumberFromMinusDollarNumberWithCommas(commissionFee);
                 cy._mapSet(capRateConclusionKeys.commissionFee, commissionFeeNumber);
+            });
+        return this;
+    }
+
+    private setMiscellaneousLossAmountAlias(valueConclusionKey: BoweryReports.ValueConclusionKeys, 
+        lossType: BoweryReports.RentLossType): CapRateConclusionActions {
+        capRateConclusionPage.miscellaneousRentLossAmount(valueConclusionKey, lossType).should('exist')
+            .invoke('attr', 'value').then(miscellaneousLoss => {
+                let key = valueConclusionKey + lossType;
+                let miscellaneousLossNumber = getNumberFromDollarNumberWithCommas(miscellaneousLoss);
+                cy._mapSet(key, miscellaneousLossNumber);
             });
         return this;
     }
