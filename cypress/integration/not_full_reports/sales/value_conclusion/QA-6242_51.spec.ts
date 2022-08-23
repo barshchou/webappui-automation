@@ -8,7 +8,7 @@ import { Income } from "../../../../actions";
 describe(`As Is Market Value is calculated with correct formula`,
     { tags:[ "@sales", "@value_conclusion" ] }, () => {
 
-        it("[QA-6242]", () => {
+        it("[QA-6242][QA-6251]", () => {
             cy.stepInfo(`1. Login, create report. Fill summary data.`);
             createReport(testData.reportCreationData);
             //Remove after save changes modal fix
@@ -39,5 +39,10 @@ describe(`As Is Market Value is calculated with correct formula`,
             cy.stepInfo(`6. Verify that Prospective Market Value As Is (Final Value) rounded correctly 
                         according to selection in “Round to nearest” on Income > Cap Rate Conclusion page`);
             Sales.ValueConclusion.verifyFinalValueCalculated(testData.valueConclusionAsIs);
+
+            cy.stepInfo(`[QA-6251] 7. Verify Sales Value in Header is displayed based on selected Basis for 
+                        Square Foot Analysis and pulled from Sales > Value Conclusion page`);
+            Sales.ValueConclusion.clickSaveButton().verifyProgressBarNotExist();
+            Sales.ValueConclusion.verifyHeaderSalesValue(testData.valueConclusionAsIs);
         });
     });

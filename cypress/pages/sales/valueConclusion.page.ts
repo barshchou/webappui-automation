@@ -105,6 +105,8 @@ class ValueConclusionPage extends BasePage {
     }
 
     get asCompleteLessBuyoutCost() { return cy.get("[data-qa*='asCompleteLossItems.buyoutCost'] input[inputmode]"); }
+
+    get headerSalesValue() { return cy.xpath("//p[contains(text(), 'Sales Value ')]"); }
 }
 
 export default new ValueConclusionPage();

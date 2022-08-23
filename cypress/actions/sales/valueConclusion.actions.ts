@@ -529,6 +529,14 @@ class ValueConclusionActions extends BaseActionsExt<typeof valueConclusionPage> 
             });
         return this;
     }
+
+    verifyHeaderSalesValue(conclusionValueName: BoweryReports.ValueConclusionName): ValueConclusionActions {
+        valueConclusionPage.finalValueCell(conclusionValueName).invoke('text').then(finalValue => {
+            valueConclusionPage.headerSalesValue.invoke('text').should('include', finalValue);
+        });
+        
+        return this;
+    }
 }
 
 export default new ValueConclusionActions(valueConclusionPage);
