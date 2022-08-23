@@ -233,7 +233,8 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
     }
 
     navigateToCommercialInPlaceRentRoll(): NavigationSectionActions {
-        this.clickIncomeApproachButton()
+        this.clickSaveButton()
+            .clickIncomeApproachButton()
             .clickCommercialMenuIfClosed()
             .clickCommercialRentRollButton()
             .submitSaveChangesModal()
@@ -776,7 +777,8 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
     }
 
     navigateToRenovation(): NavigationSectionActions {
-        this.clickPropertyButton()
+        this.clickSaveButton()
+            .clickPropertyButton()
             .clickRenovationButton()
             .submitSaveChangesModal()
             .verifyProgressBarNotExist();

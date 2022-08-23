@@ -83,6 +83,22 @@ class ValueConclusionPage extends BasePage {
     }
 
     get asIsAsStabilizedTable() { return cy.get("[data-qa=as-is-as-stabilized]"); }
+
+    residentialRentLossItemsAmount(valueConclusionKey: BoweryReports.ValueConclusionKeys, index = 0) {
+        return cy.get(`[name="${valueConclusionKey}ResRentLossItems[${index}].amount"]`);
+    }
+
+    commercialLossItemsAmount(valueConclusionKey: BoweryReports.ValueConclusionKeys, index = 0) {
+        return cy.get(`[name="${valueConclusionKey}CommercialRentLossItems[${index}].amount"]`);
+    }
+
+    commercialUndeterminedRentLossAmount(valueConclusionKey: BoweryReports.ValueConclusionKeys, index = 0) {
+        return cy.get(`[name="${valueConclusionKey}LossItems[${index}].amount"]`);
+    }
+
+    lessEntrepreneurialProfit(valueConclusionKey: BoweryReports.ValueConclusionKeys) { 
+        return cy.get(`[data-qa*='${valueConclusionKey}LossItems.entrepreneurialProfit'] input[inputmode]`); 
+    }
 }
 
 export default new ValueConclusionPage();
