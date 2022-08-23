@@ -33,6 +33,8 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
     }
 
     openReviewAndExport(isNewReport = true): NavigationSectionActions {
+        this.clickSaveButton()
+            .verifyProgressBarNotExist();
         let reportAlias = "docxReportAsync";
         cy.intercept({
             method: 'GET',
@@ -41,8 +43,6 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         cy.get('[id="review-and-export"]').click();
         // this.submitSaveChangesModal();
         // this.verifyProgressBarNotExist();
-        this.clickSaveButton()
-            .verifyProgressBarNotExist();
         if (isNewReport) { cy.wait(`@${reportAlias}`, { timeout:20000 }); }
         return this;
     }
