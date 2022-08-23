@@ -1,12 +1,12 @@
 import { _NavigationSection } from '../../../../actions/base';
 import { createReport } from '../../../../actions/base/baseTest.actions';
 import { Report, ReviewExport } from '../../../../actions';
-import testData from "../../../../fixtures/not_full_reports/report/appraiser/QA-6126.fixture";
+import testData from "../../../../fixtures/not_full_reports/report/appraiser/QA-6126-27.fixture";
 
 describe("Generated Commentary is dynamically updated with relevant information (Freddie Mac report)", 
     { tags:[ "@report", "@appraiser", "@check_export" ] }, () => {
 
-        it("[QA-6126]", () => {
+        it("[QA-6126-27]", () => {
             cy.stepInfo("Precondition: Create report");
             createReport(testData.reportCreationData);
 
@@ -24,7 +24,11 @@ describe("Generated Commentary is dynamically updated with relevant information 
             Report._Appraiser.Page.certificationInspectionText
                 .should("have.text", testData.certificationInspectionComment);
 
-            cy.stepInfo("6. Export report");
+            cy.stepInfo("6. Verify generated Certification Inspection comment");
+            Report._Appraiser.Page.certificationAssistanceText
+                .should("have.text", testData.certificationAssistanceComment);
+            
+            cy.stepInfo("7. Export report");
             _NavigationSection.openReviewAndExport();
             ReviewExport.generateDocxReport().waitForReportGenerated()
                 .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
@@ -37,7 +41,8 @@ describe("Generated Commentary is dynamically updated with relevant information 
                     cy.visit(<string>file);
                     cy.stepInfo("7. Verify commentary text in exported report");
                     cy.xpath("//h1[contains(text(), 'Certification')]").next().next()
-                        .should("include.text", testData.certificationInspectionComment);
+                        .should("include.text", testData.certificationInspectionComment)
+                        .and("include.text", testData.certificationAssistanceComment);
                 });
         });
     
