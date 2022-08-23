@@ -99,6 +99,12 @@ class ValueConclusionPage extends BasePage {
     lessEntrepreneurialProfit(valueConclusionKey: BoweryReports.ValueConclusionKeys) { 
         return cy.get(`[data-qa*='${valueConclusionKey}LossItems.entrepreneurialProfit'] input[inputmode]`); 
     }
+
+    get renovationBudgetAmount() {
+        return cy.get(`[name="asCompleteLossItems[1].amount"]`);
+    }
+
+    get asCompleteLessBuyoutCost() { return cy.get("[data-qa*='asCompleteLossItems.buyoutCost'] input[inputmode]"); }
 }
 
 export default new ValueConclusionPage();

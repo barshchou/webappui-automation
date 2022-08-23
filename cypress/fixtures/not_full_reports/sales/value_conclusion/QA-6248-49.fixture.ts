@@ -3,7 +3,7 @@ import Enums from "../../../../enums/enums";
 import { BoweryReports } from "../../../../types/boweryReports.type";
 
 const reportCreationFixture = () => {
-    return ReportDataCreator.getReportData("5784_90-91", {
+    return ReportDataCreator.getReportData("6248-49", {
         incomeValue: Enums.INCOME_TYPE.both,
         conclusionValue: Enums.VALUE_CONCLUSION_TYPE.AS_COMPLETE
     });

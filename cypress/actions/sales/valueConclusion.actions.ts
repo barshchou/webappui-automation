@@ -420,6 +420,115 @@ class ValueConclusionActions extends BaseActionsExt<typeof valueConclusionPage> 
             });
         return this;
     }
+
+    /**
+     * Verifies As Is Market Value for ACAS report type
+     * Sets all aliases for As Complete rent losses, buyout cost, renovation, entrepreneur profit.
+     * Gets all aliases that were set and check As Is Market value by formula:
+     *   [As Complete Amount] - [Sum of Rent Losses] - [Buyout Cost] - [Renovation] -
+     *   (([Sum of Rent Losses] + [Less Buyout Cost]) * Entrepreneur Profit)
+     */
+    verifyAsIsMarketValueCalculated(valueConclusionKey: BoweryReports.ValueConclusionKeys, 
+        conclusionValueName: BoweryReports.ValueConclusionName): ValueConclusionActions {
+        this.getAllAsCompleteLossesAliases(valueConclusionKey, Enums.VALUE_CONCLUSION_NAME.asComplete);
+        cy._mapGet(capRateConclusionKeys.allAsCompleteLossesAliases).then(allAsCompleteLossesAliases => {
+            cy.log(`As Complete AmountT: ${allAsCompleteLossesAliases.asCompleteAmount}`);
+
+            let allRentLosses = allAsCompleteLossesAliases.residentialRentLoss + 
+                allAsCompleteLossesAliases.commercialRentLoss +
+                allAsCompleteLossesAliases.commercialUndRentLoss + 
+                allAsCompleteLossesAliases.buyoutCost + allAsCompleteLossesAliases.renovationBudget;
+            cy.log(`All Losses: ${allRentLosses}`);
+
+            let entrepreneurLoss = allRentLosses * allAsCompleteLossesAliases.entrepreneurProfit / 100;
+            cy.log(`Entrepreneur Profit: ${entrepreneurLoss}`);
+
+            // Round calculated value
+            let marketValueAsIs = Math.round((allAsCompleteLossesAliases.asCompleteAmount - allRentLosses -
+                entrepreneurLoss) / 10) * 10;
+            cy.log(`Market Value As Is: ${marketValueAsIs}`);
+
+            let expectedMarketValueAsIs = marketValueAsIs < 0
+                ? `-$${numberWithCommas(marketValueAsIs.toFixed(0).replace('-', ''))}`
+                : `$${numberWithCommas(marketValueAsIs.toFixed(0))}`;
+
+            valueConclusionPage.amountCell(conclusionValueName)
+                .should('have.text', expectedMarketValueAsIs);
+        });
+        return this;
+    }
+
+    /**
+     * Sets all losses for value conclusion type and generates an object to be
+     * stored in map key, to avoid multiple chains from cy._mapGet
+     */
+    getAllAsCompleteLossesAliases(valueConclusionKey: BoweryReports.ValueConclusionKeys, 
+        conclusionValueName: BoweryReports.ValueConclusionName): ValueConclusionActions {
+        this.setAllAsCompleteLossesAliases(valueConclusionKey, conclusionValueName);
+        interface IAllAsCompleteLossesAliases {
+            residentialRentLoss?: number
+            commercialRentLoss?: number
+            commercialUndRentLoss?: number
+            buyoutCost?: number
+            entrepreneurProfit?: number
+            asCompleteAmount?: number,
+            renovationBudget?: number,
+        }
+
+        let allAsCompleteLossesAliases: IAllAsCompleteLossesAliases = {};
+
+        cy._mapGet(capRateConclusionKeys.asCompleteResRentLossItem)
+            .then(residentialRentLoss => allAsCompleteLossesAliases.residentialRentLoss = residentialRentLoss);
+        cy._mapGet(capRateConclusionKeys.asCompleteCommercialRentLossItem)
+            .then(commercialRentLoss => allAsCompleteLossesAliases.commercialRentLoss = commercialRentLoss);
+        cy._mapGet(capRateConclusionKeys.asCompleteCommercialUndeterminedRentLossItem)
+            .then(commercialUndRentLoss => allAsCompleteLossesAliases.commercialUndRentLoss = commercialUndRentLoss);
+        cy._mapGet(capRateConclusionKeys.buyoutCost)
+            .then(buyoutCost => allAsCompleteLossesAliases.buyoutCost = buyoutCost);
+        cy._mapGet(capRateConclusionKeys.entrepreneurialCompleteProfit)
+            .then(entrepreneurProfit => allAsCompleteLossesAliases.entrepreneurProfit = entrepreneurProfit);
+        cy._mapGet(capRateConclusionKeys.asCompleteAmount)
+            .then(asCompleteAmount => allAsCompleteLossesAliases.asCompleteAmount = asCompleteAmount);
+        cy._mapGet(capRateConclusionKeys.renovationBudget)
+            .then(renovationBudget => allAsCompleteLossesAliases.renovationBudget = renovationBudget);
+
+        cy._mapSet(capRateConclusionKeys.allAsCompleteLossesAliases, allAsCompleteLossesAliases);
+
+        return this;
+    }
+
+    /**
+     * Sets corresponding map aliases for Complete Losses
+     */
+    private setAllAsCompleteLossesAliases(valueConclusionKey: BoweryReports.ValueConclusionKeys, 
+        conclusionValueName: BoweryReports.ValueConclusionName): ValueConclusionActions {
+        this.setResRentLossItemsAmount(valueConclusionKey, conclusionValueName)
+            .setCommercialRentLossItemsAmount(valueConclusionKey, conclusionValueName)
+            .setCommercialUndeterminedLossAmount(valueConclusionKey, conclusionValueName)
+            .setRenovationBudgetAlias()
+            .setLessBuyoutCost()
+            .setEntrepreneurialProfit(conclusionValueName, valueConclusionKey)
+            .setAmountAlias(conclusionValueName);
+        return this;
+    }
+
+    private setRenovationBudgetAlias(): ValueConclusionActions {
+        valueConclusionPage.renovationBudgetAmount.should('exist')
+            .invoke('attr', 'value').then(renovationBudget => {
+                let renovationBudgetAdjusted = getNumberFromMinusDollarNumberWithCommas(renovationBudget);
+                cy._mapSet(capRateConclusionKeys.renovationBudget, renovationBudgetAdjusted);
+            });
+        return this;
+    }
+
+    private setLessBuyoutCost(): ValueConclusionActions {
+        valueConclusionPage.asCompleteLessBuyoutCost.should('exist')
+            .invoke('attr', 'value').then(buyoutCost => {
+                let buyoutCostNumber = getNumberFromMinusDollarNumberWithCommas(buyoutCost);
+                cy._mapSet(capRateConclusionKeys.buyoutCost, buyoutCostNumber);
+            });
+        return this;
+    }
 }
 
 export default new ValueConclusionActions(valueConclusionPage);
