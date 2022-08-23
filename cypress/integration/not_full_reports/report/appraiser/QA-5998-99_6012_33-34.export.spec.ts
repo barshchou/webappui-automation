@@ -1,12 +1,12 @@
 import { _NavigationSection } from '../../../../actions/base';
 import { createReport } from '../../../../actions/base/baseTest.actions';
 import { Report, ReviewExport } from '../../../../actions';
-import testData from "../../../../fixtures/not_full_reports/report/appraiser/QA-5998-99_6012_33.fixture";
+import testData from "../../../../fixtures/not_full_reports/report/appraiser/QA-5998-99_6012_33-34.fixture";
 
 describe("Add Appraiser / Inspector button functionality", 
     { tags:[ "@report", "@appraiser", "@check_export" ] }, () => {
 
-        it("[QA-5998-99_6012]", () => {
+        it("[QA-5998-99_6012_33-34]", () => {
             cy.stepInfo("Precondition: Create report");
             createReport(testData.reportCreationData);
 
@@ -34,7 +34,11 @@ describe("Add Appraiser / Inspector button functionality",
             Report._Appraiser.Page.certificationInspectionText
                 .should("have.text", testData.certificationInspectionComment);
 
-            cy.stepInfo("6. Export report");
+            cy.stepInfo("6. Verify generated Certification Assistance comment");
+            Report._Appraiser.Page.certificationAssistanceText
+                .should("have.text", testData.certificationAssistanceComment);
+
+            cy.stepInfo("7. Export report");
             _NavigationSection.openReviewAndExport();
             ReviewExport.generateDocxReport().waitForReportGenerated()
                 .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
@@ -45,9 +49,10 @@ describe("Add Appraiser / Inspector button functionality",
                 .then(file => {
                     cy.log(<string>file);
                     cy.visit(<string>file);
-                    cy.stepInfo("6. Verify commentary text in exported report");
+                    cy.stepInfo("8. Verify commentary text in exported report");
                     cy.xpath("//h1[contains(text(), 'Certification')]").next().next()
-                        .should("include.text", testData.certificationInspectionComment);
+                        .should("include.text", testData.certificationInspectionComment)
+                        .and("include.text", testData.certificationAssistanceComment);
                 });
         });
     
