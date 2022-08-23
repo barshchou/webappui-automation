@@ -6,12 +6,14 @@ import { Property, ReviewExport } from "../../../../actions";
 describe(`[QA-4472] [Property > Market] Summary of Rent Stabilization Laws`,
     { tags: [ "@property", "@market", "@check_export" ] }, () => {
 
-        it(`[QA-4472]`, () => {
+        it(`[QA0]`, () => {
             cy.stepInfo(`1. Create a new report on the WebApp and navigate to Property > Market.`);
             createReport(testData.reportCreationData);
             _NavigationSection.navigateToPropertyMarket();
 
             cy.stepInfo(`2. Check all Market Analysis Use checkboxes.`);
+            Property._Market.checkUncheckMarketAnalysisUseCheckbox(testData.marketAnalysisUses[0], false);
+
             testData.marketAnalysisUses.forEach((use) => {
                 Property._Market.checkUncheckMarketAnalysisUseCheckbox(use, true)
                     .verifyMarketAnalysisUseCheckboxState(use, true);
