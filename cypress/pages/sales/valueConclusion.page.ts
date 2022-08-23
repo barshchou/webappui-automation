@@ -24,21 +24,19 @@ class ValueConclusionPage extends BasePage {
 
     get asStabilizedPeriod() { return cy.get("[data-qa=as-stabilized-period-cell]"); }
 
-    get asStabilizedAmount() { return cy.get("[data-qa=as-stabilized-amount-cell]"); }
+    amountCell(conclusionValue: BoweryReports.ValueConclusionName) { 
+        let conclusionValueAdjusted = conclusionValue.toLocaleLowerCase().replace(' ', '-');
+        return cy.get(`[data-qa^="${conclusionValueAdjusted}"][data-qa$="-amount-cell"]`); 
+    }
 
-    get asStabilizedFinalValue() { return cy.get("[data-qa=as-stabilized-final-value-cell]"); }
+    finalValueCell(conclusionValue: BoweryReports.ValueConclusionName) { 
+        let conclusionValueAdjusted = conclusionValue.toLocaleLowerCase().replace(' ', '-');
+        return cy.get(`[data-qa^="${conclusionValueAdjusted}"][data-qa$="-final-value-cell"]`); 
+    }
 
     get asCompletePeriod() { return cy.get("[data-qa=as-complete-period-cell]"); }
 
-    get asCompleteAmount() { return cy.get("[data-qa=as-complete-amount-cell]"); }
-
-    get asCompleteFinalValue() { return cy.get("[data-qa=as-complete-final-value-cell]"); }
-
     get asIsMarketPeriod() { return cy.get("[data-qa=as-is-market-period-cell]"); }
-
-    get asIsMarketAmount() { return cy.get("[data-qa=as-is-market-amount-cell]"); }
-
-    get asIsMarketFinalValue() { return cy.get("[data-qa=as-is-market-final-value-cell]"); }
 
     get matchIncomeApproachDeductionsCheckbox() { return cy.get("[data-qa^=matchIncomeApproachDeductions] input"); }
 

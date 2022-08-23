@@ -242,7 +242,6 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
                 key = capRateConclusionKeys.asIsMarketAmount;
                 break;
             case enums.VALUE_CONCLUSION_NAME.asStabilized:
-
                 key = capRateConclusionKeys.asStabilizedAmount;
                 break;
             case enums.VALUE_CONCLUSION_NAME.asComplete:
@@ -565,7 +564,7 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
         return this;
     }
 
-    private setRoundingFactorValueAlias(): CapRateConclusionActions {
+    setRoundingFactorValueAlias(): CapRateConclusionActions {
         capRateConclusionPage.roundingFactorInput.invoke('attr', 'value').then(roundingFactor => {
             cy._mapSet(capRateConclusionKeys.capRateRoundingFactor, roundingFactor);
         });

@@ -1,8 +1,10 @@
-import { isHasDecimalPartMoreNumberOfDigits } from './../../../utils/numbers.utils';
+import { getNumberFromDollarNumberWithCommas, isHasDecimalPartMoreNumberOfDigits } 
+    from './../../../utils/numbers.utils';
 import valueConclusionPage from "../../pages/sales/valueConclusion.page";
 import { numberWithCommas } from "../../../utils/numbers.utils";
 import BaseActionsExt from "../base/base.actions.ext";
 import { BoweryReports } from "../../types/boweryReports.type";
+import capRateConclusionKeys from '../../utils/mapKeys/income/capRateConclusion/capRateConclusion.keys';
 
 class ValueConclusionActions extends BaseActionsExt<typeof valueConclusionPage> {
 
@@ -84,22 +86,25 @@ class ValueConclusionActions extends BaseActionsExt<typeof valueConclusionPage> 
         return this;
     }
 
-    verifyAsStabilizedAmount(amount: string | number): this {
+    verifyProspectiveMarketValueAmount(conclusionValueName: BoweryReports.ValueConclusionName, 
+        amount: string | number): this {
         const textToBe = typeof amount === "string" ? amount : `$${numberWithCommas(amount)}`;
-        valueConclusionPage.asStabilizedAmount.should("have.text", textToBe);
+        valueConclusionPage.amountCell(conclusionValueName).should("have.text", textToBe);
         return this;
     }
 
-    verifyAsStabilizedFinalValue(value: string | number): this {
+    verifyProspectiveMarketValueFinal(conclusionValueName: BoweryReports.ValueConclusionName, 
+        value: string | number): this {
         const textToBe = typeof value === "string" ? value : `$${numberWithCommas(value)}`;
-        valueConclusionPage.asStabilizedFinalValue.should("have.text", textToBe);
+        valueConclusionPage.finalValueCell(conclusionValueName).should("have.text", textToBe);
         return this;
     }
 
-    verifyAsStabilizedRow(rowData: Readonly<{period: string, amount: string, finalValue: string}>): this {
+    verifyAsStabilizedRow(conclusionValueName: BoweryReports.ValueConclusionName, 
+        rowData: Readonly<{period: string, amount: string, finalValue: string}>): this {
         this.verifyAsStabilizedPeriod(rowData.period)
-            .verifyAsStabilizedAmount(rowData.amount)
-            .verifyAsStabilizedFinalValue(rowData.finalValue);
+            .verifyProspectiveMarketValueAmount(conclusionValueName, rowData.amount)
+            .verifyProspectiveMarketValueFinal(conclusionValueName, rowData.finalValue);
         return this;
     }
 
@@ -108,20 +113,11 @@ class ValueConclusionActions extends BaseActionsExt<typeof valueConclusionPage> 
         return this;
     }
 
-    verifyAsCompleteAmount(amount: string): this {
-        valueConclusionPage.asCompleteAmount.should("have.text", amount);
-        return this;
-    }
-
-    verifyAsCompleteFinalValue(value: string): this {
-        valueConclusionPage.asCompleteFinalValue.should("have.text", value);
-        return this;
-    }
-
-    verifyAsCompleteRow(rowData: Readonly<{period: string, amount: string, finalValue: string}>): this {
+    verifyAsCompleteRow(conclusionValueName: BoweryReports.ValueConclusionName, 
+        rowData: Readonly<{period: string, amount: string, finalValue: string}>): this {
         this.verifyAsCompletePeriod(rowData.period)
-            .verifyAsCompleteAmount(rowData.amount)
-            .verifyAsCompleteFinalValue(rowData.finalValue);
+            .verifyProspectiveMarketValueAmount(conclusionValueName, rowData.amount)
+            .verifyProspectiveMarketValueFinal(conclusionValueName, rowData.finalValue);
         return this;
     }
 
@@ -131,20 +127,11 @@ class ValueConclusionActions extends BaseActionsExt<typeof valueConclusionPage> 
         return this;
     }
 
-    verifyAsIsMarketAmount(amount: string): this {
-        valueConclusionPage.asIsMarketAmount.should("have.text", amount);
-        return this;
-    }
-
-    verifyAsIsMarketFinalValue(value: string): this {
-        valueConclusionPage.asIsMarketFinalValue.should("have.text", value);
-        return this;
-    }
-
-    verifyAsIsMarketRow(rowData: Readonly<{period: string, amount: string, finalValue: string}>): this {
+    verifyAsIsMarketRow(conclusionValueName: BoweryReports.ValueConclusionName, 
+        rowData: Readonly<{period: string, amount: string, finalValue: string}>): this {
         this.verifyAsIsMarketPeriod(rowData.period)
-            .verifyAsIsMarketAmount(rowData.amount)
-            .verifyAsIsMarketFinalValue(rowData.finalValue);
+            .verifyProspectiveMarketValueAmount(conclusionValueName, rowData.amount)
+            .verifyProspectiveMarketValueFinal(conclusionValueName, rowData.finalValue);
         return this;
     }
 
@@ -242,6 +229,37 @@ class ValueConclusionActions extends BaseActionsExt<typeof valueConclusionPage> 
 
     verifyBasisSFAnalysisTableCellText(basisSFAnalysisText: BoweryReports.BasisSquareFootAnalysisTexts): this {
         valueConclusionPage.asIsAsStabilizedTable.find("td").contains(basisSFAnalysisText).should("exist");
+        return this;
+    }
+
+    verifyAsStabilizedAmountCell(conclusionValueName: BoweryReports.ValueConclusionName): ValueConclusionActions {
+        valueConclusionPage.saleValueConclusion.invoke('attr', 'value').then(concludedValue => {
+            const concludedNumber = getNumberFromDollarNumberWithCommas(concludedValue);
+            valueConclusionPage.basisForAnalysisAmount.invoke('text').then(areaSf => {
+                let areaSfNumber = Number(areaSf.split(' ')[0].replaceAll(',', ''));
+                let stringNumber = `$${numberWithCommas(Math.round(concludedNumber * areaSfNumber))}`;
+                valueConclusionPage.amountCell(conclusionValueName).should("have.text", stringNumber);
+            });
+        });
+        return this;
+    }
+
+    /**
+     * Note: Cap rate rounding factor key map should value should be set.
+     * It verifies whether final value is rounded correctly.
+     * Formula: Prospective Market Value {conclusionValueName} Amount * Rounding Factor => 
+     * round result => multiply by rounding factor
+     */
+    verifyFinalValueCalculated(conclusionValueName: BoweryReports.ValueConclusionName): 
+    ValueConclusionActions {
+        cy._mapGet(capRateConclusionKeys.capRateRoundingFactor).then(capRateRounding => {
+            valueConclusionPage.amountCell(conclusionValueName).invoke('text').then(marketValue => {
+                let marketValueNumber = getNumberFromDollarNumberWithCommas(marketValue);
+                let expectedFinalValue = `$${numberWithCommas(Math.round(marketValueNumber / capRateRounding) * 
+                    capRateRounding)}`;
+                valueConclusionPage.finalValueCell(conclusionValueName).should("have.text", expectedFinalValue);
+            });
+        });
         return this;
     }
 }

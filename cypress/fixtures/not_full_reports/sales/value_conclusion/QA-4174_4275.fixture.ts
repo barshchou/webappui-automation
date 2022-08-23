@@ -15,5 +15,6 @@ export default {
     reportCreationData: _reportCreationData,
     basisSFAnalysisValues: _basisSFAnalysisValues,
     valueConclusion: 750,
-    finalValues: _finalValuesToBe
+    finalValues: _finalValuesToBe,
+    valueConclusionAsStabilized: Enums.VALUE_CONCLUSION_NAME.asStabilized
 };
