@@ -3,11 +3,10 @@ import enums from "../../../../enums/enums";
 import { BoweryReports } from "../../../../types/boweryReports.type";
 
 const reportCreationFixture = () => {
-    return ReportDataCreator.setReportNumber("4472")
-        .setAddress()
-        .setTemplateValue(enums.TEMPLATE_TYPE.notFreddieMac)
-        .setIncomeValue(enums.INCOME_TYPE.both)
-        .setConclusionValue(enums.VALUE_CONCLUSION_TYPE.AS_COMPLETE).build();
+    return ReportDataCreator.getReportData("4472", {
+        templateValue: enums.TEMPLATE_TYPE.notFreddieMac,
+        incomeValue: enums.INCOME_TYPE.both,
+        conclusionValue: enums.VALUE_CONCLUSION_TYPE.AS_COMPLETE });
 };
 
 const _marketAnalysisUses: BoweryReports.MarketAnalysisUses[] = [
