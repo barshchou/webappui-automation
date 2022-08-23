@@ -589,11 +589,9 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
     }
 
     navigateToContentManagementSystem(): NavigationSectionActions {
-        this.clickSaveButton()
-            .verifyProgressBarNotExist();
         this.clickContentManagementSystem()
-            // .submitSaveChangesModal()
-            // .verifyProgressBarNotExist();
+            .submitSaveChangesModal()
+            .verifyProgressBarNotExist();
         return this;
     }
 
