@@ -1,9 +1,10 @@
-export const getTodayDateString = (delimiter = "-") => {
+export const getTodayDateString = (delimiter = "-", fullYear = true) => {
     let today = new Date();
     let dd = String(today.getDate()).padStart(2, "0");
     let mm = String(today.getMonth() + 1).padStart(2, "0");
     let yyyy = today.getFullYear();
-    return `${mm}${delimiter}${dd}${delimiter}${yyyy}`;
+    let year = fullYear ? yyyy : `${yyyy}`.substring(2, 4);
+    return `${mm}${delimiter}${dd}${delimiter}${year}`;
 };
 
 export const getTodayDay = (delimiter = "-") => {
