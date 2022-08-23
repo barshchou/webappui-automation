@@ -1,14 +1,14 @@
-import testData from "../../../../fixtures/not_full_reports/sales/value_conclusion/QA-6240.fixture";
+import testData from "../../../../fixtures/not_full_reports/sales/value_conclusion/QA-6242.fixture";
 import { createReport } from "../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Property from "../../../../actions/property/property.manager";
 import Sales from "../../../../actions/sales/sales.manager";
 import { Income } from "../../../../actions";
 
-describe(`Prospective Market Value As Stabilized is calculated with correct formula`,
+describe(`As Is Market Value is calculated with correct formula`,
     { tags:[ "@sales", "@value_conclusion" ] }, () => {
 
-        it("[QA-6240]", () => {
+        it("[QA-6242]", () => {
             cy.stepInfo(`1. Login, create report. Fill summary data.`);
             createReport(testData.reportCreationData);
             //Remove after save changes modal fix
@@ -32,12 +32,12 @@ describe(`Prospective Market Value As Stabilized is calculated with correct form
             NavigationSection.navigateToSalesValueConclusion();
             Sales.ValueConclusion.enterSaleValueConclusion(testData.concludedValuePerSf);
 
-            cy.stepInfo(`5. Verify that Prospective Market Value As Stabilized (Amount) = 
+            cy.stepInfo(`5. Verify that Prospective Market Value As Is (Amount) = 
                         Concluded Value per SF * selected Basis for Square Foot Analysis`);
-            Sales.ValueConclusion.verifyAsIsAsStabilizedAmountCell(testData.valueConclusionAsStabilized);
+            Sales.ValueConclusion.verifyAsIsAsStabilizedAmountCell(testData.valueConclusionAsIs);
 
-            cy.stepInfo(`6. Verify that Prospective Market Value As Stabilized (Final Value) rounded correctly 
-                        according to selection in “Round to nearest” on Income>Cap Rate Conclusion page`);
-            Sales.ValueConclusion.verifyFinalValueCalculated(testData.valueConclusionAsStabilized);
+            cy.stepInfo(`6. Verify that Prospective Market Value As Is (Final Value) rounded correctly 
+                        according to selection in “Round to nearest” on Income > Cap Rate Conclusion page`);
+            Sales.ValueConclusion.verifyFinalValueCalculated(testData.valueConclusionAsIs);
         });
     });

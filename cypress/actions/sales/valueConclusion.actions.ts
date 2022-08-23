@@ -235,7 +235,7 @@ class ValueConclusionActions extends BaseActionsExt<typeof valueConclusionPage> 
         return this;
     }
 
-    verifyAsStabilizedAmountCell(conclusionValueName: BoweryReports.ValueConclusionName): ValueConclusionActions {
+    verifyAsIsAsStabilizedAmountCell(conclusionValueName: BoweryReports.ValueConclusionName): ValueConclusionActions {
         valueConclusionPage.saleValueConclusion.invoke('attr', 'value').then(concludedValue => {
             const concludedNumber = getNumberFromDollarNumberWithCommas(concludedValue);
             valueConclusionPage.basisForAnalysisAmount.invoke('text').then(areaSf => {
