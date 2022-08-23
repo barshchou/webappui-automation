@@ -39,8 +39,22 @@ describe(`[QA-4472] [Property > Market] Summary of Rent Stabilization Laws`,
                     cy.stepInfo(`5. Verify that when user saves the page and exports, those 
                                 files appear in my Word doc in the corresponding locations.`);
                     cy.visit(<string>file);
-                    cy.xpath(`//h2[.='${testData.sectionBeforeName}']/following-sibling::h2`)
-                        .eq(0).scrollIntoView().should("have.text", testData.sectionAfterName);
+                    for (let i = 0; i < testData.marketAnalysisUses.length; i++) {
+                        cy.xpath(`//h1[.='${testData.sectionBeforeSubmarketFiles}']/following-sibling::p`)
+                            .eq(i).scrollIntoView().should("have.text", testData.fileContent);
+                    }
+
+                    cy.xpath(`//h1[.='${testData.sectionBeforeSubmarketFiles}']/following-sibling::p`)
+                        .eq(testData.marketAnalysisUses.length - 1)
+                        .next().should("have.text", testData.sectionAfterSubmarketFiles);
+
+                    for (let i = 0; i < testData.marketAnalysisUses.length; i++) {
+                        cy.xpath(`//h2[.='${testData.sectionBeforeMarketFiles}']/following-sibling::p`)
+                            .eq(i).scrollIntoView().should("have.text", testData.fileContent);
+                    }
+
+                    cy.xpath(`//h2[.='${testData.sectionBeforeMarketFiles}']/following-sibling::h2`)
+                        .eq(0).should("have.text", testData.sectionAfterMarketFiles);
                 });
         });
 
