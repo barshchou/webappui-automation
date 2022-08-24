@@ -6,7 +6,7 @@ import { Property, ReviewExport } from "../../../../actions";
 describe(`[QA-4472] [Property > Market] Summary of Rent Stabilization Laws`,
     { tags: [ "@property", "@market", "@check_export" ] }, () => {
 
-        it(`[QA0]`, () => {
+        it(`[QA-4472]`, () => {
             cy.stepInfo(`1. Create a new report on the WebApp and navigate to Property > Market.`);
             createReport(testData.reportCreationData);
             _NavigationSection.navigateToPropertyMarket();

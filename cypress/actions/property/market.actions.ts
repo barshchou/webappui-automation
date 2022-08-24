@@ -272,7 +272,7 @@ class MarketActions extends BaseActionsExt<typeof marketPage> {
     uploadRentStabilizationFile(fileName: string): MarketActions {
         marketPage.uploadRentStabilizationFileButton.click();
         marketPage.fileDropZone.attachFile(
-            `test_files/${fileName}`,
+            `test_files/docx/${fileName}`,
             { subjectType: 'drag-n-drop' }
         );
         marketPage.getUploadFileButton().click();
@@ -284,7 +284,7 @@ class MarketActions extends BaseActionsExt<typeof marketPage> {
         fileName: string): MarketActions {
         marketPage.getMarketByAnalysisUseFileUploadButton(use).click();
         marketPage.fileDropZone.attachFile(
-            `test_files/${fileName}`,
+            `test_files/docx/${fileName}`,
             { subjectType: 'drag-n-drop' }
         );
         marketPage.getUploadFileButton().click();
@@ -296,7 +296,7 @@ class MarketActions extends BaseActionsExt<typeof marketPage> {
         fileName: string): MarketActions {
         marketPage.getSubmarketByAnalysisUseFileUploadButton(use).click();
         marketPage.fileDropZone.attachFile(
-            `test_files/${fileName}`,
+            `test_files/docx/${fileName}`,
             { subjectType: 'drag-n-drop' }
         );
         marketPage.getUploadFileButton().click();
