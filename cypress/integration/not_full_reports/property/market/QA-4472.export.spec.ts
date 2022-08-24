@@ -45,8 +45,8 @@ describe(`[QA-4472] [Property > Market] Summary of Rent Stabilization Laws`,
                     }
 
                     cy.xpath(`//h1[.='${testData.sectionBeforeSubmarketFiles}']/following-sibling::p`)
-                        .eq(testData.marketAnalysisUses.length - 1)
-                        .next().should("have.text", testData.sectionAfterSubmarketFiles);
+                        .eq(testData.marketAnalysisUses.length - 1).next().scrollIntoView()
+                        .should("have.text", testData.sectionAfterSubmarketFiles);
 
                     for (let i = 0; i < testData.marketAnalysisUses.length; i++) {
                         cy.xpath(`//h2[.='${testData.sectionBeforeMarketFiles}']/following-sibling::p`)
@@ -54,7 +54,7 @@ describe(`[QA-4472] [Property > Market] Summary of Rent Stabilization Laws`,
                     }
 
                     cy.xpath(`//h2[.='${testData.sectionBeforeMarketFiles}']/following-sibling::h2`)
-                        .eq(0).should("have.text", testData.sectionAfterMarketFiles);
+                        .eq(0).scrollIntoView().should("have.text", testData.sectionAfterMarketFiles);
                 });
         });
 
