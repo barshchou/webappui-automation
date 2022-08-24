@@ -6,5 +6,5 @@ const reportCreationFixture = () => {
 
 export default {
     reportCreationData: reportCreationFixture(),
-    pdfFileName: "not_full_reports/Upload_PDF_File.pdf",
+    pdfFileName: "test_files/Upload_PDF_File.pdf",
 };
