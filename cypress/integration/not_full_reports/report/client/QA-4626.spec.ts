@@ -1,7 +1,7 @@
 import { Report } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { createReport } from "../../../../actions/base/baseTest.actions";
-import testData from '../../../../fixtures/not_full_reports/report/client/QA-4626.fixture';
+import testData from '../../../../fixtures/not_full_reports/property/amenities/QA-4626-64.fixture';
 
 describe("Verify the display of the Client page.", { tags:[ "@report", "@client" ] }, () => {
     beforeEach("Login, create report", () => {
