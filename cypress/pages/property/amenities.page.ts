@@ -1,3 +1,4 @@
+import { BoweryReports } from "../../types/boweryReports.type";
 import BasePage from "../base/base.page";
 
 class AmenitiesPage extends BasePage {
@@ -16,6 +17,8 @@ class AmenitiesPage extends BasePage {
     get otherUnitAmenitiesCheckbox() { return cy.get("[data-qa^='unit.hasOtherUnitAmenity'] input"); }
 
     get storageUnitsTextField() { return cy.get("[name='building.storageUnitCount']"); }
+
+    getElementCheckbox(name: BoweryReports.AmenitiesCheckboxes) { return cy.get(`[data-qa$=${name}] input`); }
 }
 
 export default new AmenitiesPage();
