@@ -70,6 +70,24 @@ class AmenitiesActions extends BaseActionsExt<typeof amenitiesPage> {
         });
         return this;
     }
+
+    uploadLaundryRoomImage(filePath: string): AmenitiesActions {
+        amenitiesPage.laundryRoomUpload.attachFile(filePath);
+        return this;
+    }
+
+    rotateLaundryRoomImage(index = 0): AmenitiesActions {
+        amenitiesPage.getLaundryUploadedImageBtn("rotate", index).click({ force: true });
+        amenitiesPage.getLaundryUploadedImage(index).invoke("css", "background-image").then(text => {
+            expect(text).to.include("vikas-real-estate/image/upload/w_300,a_90");
+        });
+        return this;
+    }
+
+    deleteLaundryRoomImage(index = 0): AmenitiesActions {
+        amenitiesPage.getLaundryUploadedImageBtn("remove", index).click({ force: true }).should("not.exist");
+        return this;
+    }
 }
 
 export default new AmenitiesActions(amenitiesPage);
