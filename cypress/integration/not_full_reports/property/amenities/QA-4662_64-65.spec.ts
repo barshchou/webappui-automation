@@ -2,11 +2,16 @@ import { Property } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { createReport } from "../../../../actions/base/baseTest.actions";
 import Enums from "../../../../enums/enums";
-import testData from '../../../../fixtures/not_full_reports/property/amenities/QA-4662_64.fixture';
+import testData from '../../../../fixtures/not_full_reports/property/amenities/QA-4662_64-65.fixture';
 
 describe("Verify the display of the Amenities page", { tags:[ "@property", "@amenities" ] }, () => {
-    beforeEach("Login, create report", () => {
+    before("Login, create report", () => {
         createReport(testData.reportCreationData);
+        cy.saveLocalStorage();
+    });
+
+    beforeEach("Restore local storage", () => {
+        cy.restoreLocalStorage();
     });
 
     it("[QA-4662-64]", () => {
@@ -40,5 +45,12 @@ describe("Verify the display of the Amenities page", { tags:[ "@property", "@ame
             .checkCheckboxByName(Enums.AMENITIES_CHECKBOXES.hasLaundryRoom);
 
         cy.stepInfo("3. Upload photo");
+        Property._Amenities.uploadLaundryRoomImage(testData.imagePath);
+
+        cy.stepInfo("4. Verify functionality of the Rotate button on the uploaded photo");
+        Property._Amenities.rotateLaundryRoomImage();
+
+        cy.stepInfo("5. Verify functionality of the Delete button on the uploaded photo");
+        Property._Amenities.deleteLaundryRoomImage();
     });
 });
