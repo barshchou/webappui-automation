@@ -15,8 +15,8 @@ describe(`Prospective Market Value As Complete is calculated with correct formul
             createReport(testData.reportCreationData);
 
             cy.stepInfo(`2. Set square foot analysis and value for it; 
-            set commercial and residential units; 
-            set commercial units SF`);
+                        set commercial and residential units; 
+                        set commercial units SF`);
             NavigationSection.navigateToPropertySummary();
             Property.Summary.selectBasisSquareFootAnalysis(testData.basisForSquareFootAnalysis)
                 .fillBasisSquareFootAnalysis(testData.squareFootAnalysisArea)
@@ -45,7 +45,7 @@ describe(`Prospective Market Value As Complete is calculated with correct formul
                 .setRoundingFactorValueAlias();
 
             cy.stepInfo(`6. Add New Residential Rent Loss on As Stabilized tab and 
-            New Commercial Rent Loss on As Stabilized tab`);
+                        New Commercial Rent Loss on As Stabilized tab`);
             Income._CapRateConclusion.addNewRentLoss(testData.residentialUnitType, testData.residentialUnits, 
                 testData.conclusionValueAsStabilized);
             Income._CapRateConclusion.addNewRentLoss(testData.commercialUnitType, testData.commercialUnits, 

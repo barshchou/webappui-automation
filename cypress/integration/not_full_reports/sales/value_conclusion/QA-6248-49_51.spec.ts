@@ -15,8 +15,8 @@ describe(`Prospective Market Value As Complete is calculated with correct formul
             createReport(testData.reportCreationData);
 
             cy.stepInfo(`2. Set square foot analysis and value for it; 
-            set commercial and residential units; 
-            set commercial units SF`);
+                        set commercial and residential units; 
+                        set commercial units SF`);
             NavigationSection.navigateToPropertySummary();
             Property.Summary.selectBasisSquareFootAnalysis(testData.basisForSquareFootAnalysis)
                 .fillBasisSquareFootAnalysis(testData.squareFootAnalysisArea)
@@ -51,7 +51,7 @@ describe(`Prospective Market Value As Complete is calculated with correct formul
                 .setRoundingFactorValueAlias();
 
             cy.stepInfo(`7. Add New Residential Rent Loss on As Stabilized tab and 
-            New Commercial Rent Loss on As Stabilized tab`);
+                        New Commercial Rent Loss on As Stabilized tab`);
             Income._CapRateConclusion.addNewRentLoss(testData.residentialUnitType, testData.residentialUnits, 
                 testData.conclusionValueAsComplete, testData.valueConclusionAsStabilized);
             Income._CapRateConclusion.addNewRentLoss(testData.commercialUnitType, testData.commercialUnits, 
@@ -80,12 +80,12 @@ describe(`Prospective Market Value As Complete is calculated with correct formul
                 testData.conclusionValueAsComplete, testData.valueConclusionAsComplete);
         
             cy.stepInfo(`10. Fill in with valid numeric values:
-                    - Less Residential Rent Loss
-                    - Less Commercial Rent Loss
-                    - Less Undetermined Commercial Rent Loss
-                    - Renovation Budget ( on Property>Renovations page)
-                    - Less Buyout Cost
-                    - Less Entrepreneurial Profit*`);
+                        - Less Residential Rent Loss
+                        - Less Commercial Rent Loss
+                        - Less Undetermined Commercial Rent Loss
+                        - Renovation Budget ( on Property>Renovations page)
+                        - Less Buyout Cost
+                        - Less Entrepreneurial Profit*`);
             Income._CapRateConclusion.enterLossTimePeriodByRow(testData.rentLossTimePeriod, 
                 testData.valueConclusionKeyAsComplete, testData.rentLossTypeResidential)
                 .enterLossTimePeriodByRow(testData.rentLossTimePeriod, 
