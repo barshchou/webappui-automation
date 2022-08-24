@@ -59,7 +59,11 @@ class MarketPage extends BasePage {
     get includeMarketTimeCheckbox() { return cy.get("[data-qa^='includeMarketingTime']"); }
 
     getMarketAnalysisUseCheckbox(useValue: string) { 
-        return cy.get(`[data-qa^='marketAnalysisUses.${useValue}-checkbox'] input`); 
+        return this.getMarketAnalysisUseCheckboxArea(useValue).find(`input`); 
+    }
+
+    getMarketAnalysisUseCheckboxArea(useValue: string) {
+        return cy.get(`[data-qa^='marketAnalysisUses.${useValue}-checkbox']`); 
     }
 
     get areaEconomicAnalysisContainer() { return cy.get("[data-qa=file-selection-areaEconomicAnalysis-input]"); }
