@@ -51,5 +51,6 @@ export enum Tag {
     report_settings_modal = "@report_settings_modal",
     final = "@final",
     swot_analysis = "@swot_analysis",
-    cms = "@cms"
+    cms = "@cms",
+    amenities = "@amenities"
 }
