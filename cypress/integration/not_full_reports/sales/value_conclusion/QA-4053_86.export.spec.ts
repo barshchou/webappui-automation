@@ -38,6 +38,9 @@ and includes both commercial and residential units.`,
             .verifyProspectiveMarketValueAmount(testData.valueConclusionAsIs, totalValue)
             .verifyProspectiveMarketValueAmount(testData.valueConclusionAsComplete, totalValue);
 
+        // TODO: [QA-6670] Remove after save changes modal fix
+        Sales._ValueConclusion.clickSaveButton().verifyProgressBarNotExist();
+
         _NavigationSection.Actions.openReviewAndExport().closeUserSurveyIfExist();
         ReviewExport.generateDocxReport()
             .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
