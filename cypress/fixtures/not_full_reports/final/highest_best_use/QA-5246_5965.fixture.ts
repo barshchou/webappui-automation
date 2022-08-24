@@ -3,14 +3,14 @@ import { BoweryReports } from "../../../../types/boweryReports.type";
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 
 const typesAs: BoweryReports.FeasiblePropertyType[] = [
-    Enums.FEASIBLE_PROPERTY_TYPES.MultiFamily,
-    Enums.FEASIBLE_PROPERTY_TYPES.ResidentialCondo,
-    Enums.FEASIBLE_PROPERTY_TYPES.IndustrialCondo,
-    Enums.FEASIBLE_PROPERTY_TYPES.OfficeCondo,
-    Enums.FEASIBLE_PROPERTY_TYPES.MixedUseCommercialApartment,
-    Enums.FEASIBLE_PROPERTY_TYPES.RetailSpace,
-    Enums.FEASIBLE_PROPERTY_TYPES.OfficeSpace,
-    Enums.FEASIBLE_PROPERTY_TYPES.IndustrialSpace
+    Enums.FEASIBLE_PROPERTY_TYPES.multiFamily,
+    Enums.FEASIBLE_PROPERTY_TYPES.residentialCondo,
+    Enums.FEASIBLE_PROPERTY_TYPES.industrialCondo,
+    Enums.FEASIBLE_PROPERTY_TYPES.officeCondo,
+    Enums.FEASIBLE_PROPERTY_TYPES.mixedUseCommercialApartment,
+    Enums.FEASIBLE_PROPERTY_TYPES.retailSpace,
+    Enums.FEASIBLE_PROPERTY_TYPES.officeSpace,
+    Enums.FEASIBLE_PROPERTY_TYPES.industrialSpace
 ];
 
 export default {

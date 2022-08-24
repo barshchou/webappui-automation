@@ -1,12 +1,12 @@
 const feasiblePropertyTypes = {
-    MultiFamily: "multiFamily",
-    ResidentialCondo: "residentialCondo",
-    IndustrialCondo: "industrialCondo",
-    OfficeCondo: "officeCondo",
-    MixedUseCommercialApartment: "mixedUseCommercialApartment",
-    RetailSpace: "retailSpace",
-    OfficeSpace: "officeSpace",
-    IndustrialSpace: "industrialSpace"
+    multiFamily: "multiFamily",
+    residentialCondo: "residentialCondo",
+    industrialCondo: "industrialCondo",
+    officeCondo: "officeCondo",
+    mixedUseCommercialApartment: "mixedUseCommercialApartment",
+    retailSpace: "retailSpace",
+    officeSpace: "officeSpace",
+    industrialSpace: "industrialSpace"
 } as const;
 
 export default Object.freeze(feasiblePropertyTypes);
