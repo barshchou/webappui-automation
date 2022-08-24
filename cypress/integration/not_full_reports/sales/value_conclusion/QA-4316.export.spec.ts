@@ -98,9 +98,6 @@ describe(`Prospective Market Value As Stabilized -> Less Other Rent Loss data is
             NavigationSection.navigateToSalesValueConclusion();
             Sales.ValueConclusion.enterSaleValueConclusion(testData.concludedValuePerSf);
 
-            // TODO: [QA-6670] Remove after save changes modal fix
-            NavigationSection.navigateToReportInformation();
-
             cy.stepInfo(`12. Go to Settings&Report, generate report and download it`);
             NavigationSection.Actions.openReviewAndExport();
             ReviewExport.Actions.generateDocxReport()

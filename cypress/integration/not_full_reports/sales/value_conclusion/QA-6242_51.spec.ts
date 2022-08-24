@@ -11,9 +11,6 @@ describe(`As Is Market Value is calculated with correct formula`,
         it("[QA-6242][QA-6251]", () => {
             cy.stepInfo(`1. Login, create report. Fill summary data.`);
             createReport(testData.reportCreationData);
-            // TODO: [QA-6670] Remove after save changes modal fix
-            NavigationSection.navigateToReportInformation();
-
             NavigationSection.navigateToPropertySummary();
             Property.Summary.enterNumberOfResUnits(testData.numberOfUnits)
                 .selectBasisSquareFootAnalysis(testData.squareFootBasis)

@@ -12,10 +12,6 @@ and includes both commercial and residential units.`,
     it("Test body", () => {
         createReport(testData.reportCreationData);
         cy.stepInfo(`Precondition: Navigate to report summary and specify amount of residential and commercial units`);
-        
-        // TODO: [QA-6670] Remove after save changes modal fix
-        _NavigationSection.navigateToReportInformation();
-
         _NavigationSection.navigateToPropertySummary();
         _Summary.enterNumberOfResUnits(testData.general.residentialUnits).
             enterNumberOfCommercialUnits(testData.general.commercialUnits);
@@ -37,9 +33,6 @@ and includes both commercial and residential units.`,
             .verifyProspectiveMarketValueAmount(testData.valueConclusionAsStabilized, totalValue)
             .verifyProspectiveMarketValueAmount(testData.valueConclusionAsIs, totalValue)
             .verifyProspectiveMarketValueAmount(testData.valueConclusionAsComplete, totalValue);
-
-        // TODO: [QA-6670] Remove after save changes modal fix
-        Sales._ValueConclusion.clickSaveButton().verifyProgressBarNotExist();
 
         _NavigationSection.Actions.openReviewAndExport().closeUserSurveyIfExist();
         ReviewExport.generateDocxReport()

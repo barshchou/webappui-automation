@@ -14,9 +14,6 @@ describe(`Prospective Market Value As Complete is calculated with correct formul
             launchDarklyApi.setFeatureFlagForUser(testData.featureFlagKey, testData.onFeatureFlag);
             createReport(testData.reportCreationData);
 
-            // TODO: [QA-6670] Remove after save changes modal fix
-            NavigationSection.navigateToReportInformation();
-
             cy.stepInfo(`2. Set square foot analysis and value for it; 
             set commercial and residential units; 
             set commercial units SF`);
