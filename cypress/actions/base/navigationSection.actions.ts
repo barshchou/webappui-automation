@@ -167,7 +167,6 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
     }
 
     navigateToUnitInspection(): NavigationSectionActions {
-        this.clickSaveButton();
         this.clickFinalButton()
             .clickUnitInspectionButton()
             .verifyProgressBarNotExist();
@@ -192,8 +191,7 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
     }
 
     navigateToResInPlaceRentRoll(saveChanges = true): NavigationSectionActions {
-        this.clickSaveButton()
-            .clickIncomeApproachButton()
+        this.clickIncomeApproachButton()
             .clickResidentialMenuIfClosed()
             .clickInPlaceRentRollButton()
             .submitSaveChangesModal(saveChanges)
@@ -232,8 +230,7 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
     }
 
     navigateToCommercialInPlaceRentRoll(): NavigationSectionActions {
-        this.clickSaveButton()
-            .clickIncomeApproachButton()
+        this.clickIncomeApproachButton()
             .clickCommercialMenuIfClosed()
             .clickCommercialRentRollButton()
             .submitSaveChangesModal()
@@ -251,8 +248,7 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
     }
 
     navigateToPropertySummary(): NavigationSectionActions {
-        this.clickSaveButton()
-            .clickPropertyButton()
+        this.clickPropertyButton()
             .clickSummaryButton()
             .submitSaveChangesModal()
             .waitForUrl(routesUtils.propertySummary);
@@ -303,8 +299,7 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
     }
 
     navigateToCapRateConclusion(): NavigationSectionActions {
-        this.clickSaveButton()
-            .clickIncomeApproachButton()
+        this.clickIncomeApproachButton()
             .clickCapRateConclusion()
             .submitSaveChangesModal();
         return this;
@@ -326,8 +321,7 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
     }
 
     navigateToSalesValueConclusion(): NavigationSectionActions {
-        this.clickSaveButton()
-            .clickSalesButton()
+        this.clickSalesButton()
             .clickValueConclusionButton()
             .submitSaveChangesModal()
             .verifyProgressBarNotExist();
@@ -464,8 +458,7 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
     }
 
     navigateToPropertyAmenities(): NavigationSectionActions {
-        this.clickSaveButton()
-            .clickPropertyButton()
+        this.clickPropertyButton()
             .clickAmenitiesButton()
             .submitSaveChangesModal();
         return this;
@@ -545,32 +538,28 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
     }
 
     navigateToLaundry(): NavigationSectionActions {
-        this.clickSaveButton()
-            .clickMiscellaneousMenuIfClosed()
+        this.clickMiscellaneousMenuIfClosed()
             .clickLaundryButton()
             .submitSaveChangesModal();
         return this;
     }
 
     navigateToStorage(): NavigationSectionActions {
-        this.clickSaveButton()
-            .clickMiscellaneousMenuIfClosed()
+        this.clickMiscellaneousMenuIfClosed()
             .clickStorageButton()
             .submitSaveChangesModal();
         return this;
     }
 
     navigateToOther(): NavigationSectionActions {
-        this.clickSaveButton()
-            .clickMiscellaneousMenuIfClosed()
+        this.clickMiscellaneousMenuIfClosed()
             .clickOtherButton()
             .submitSaveChangesModal();
         return this;
     }
 
     navigateToParking(): NavigationSectionActions {
-        this.clickSaveButton()
-            .clickMiscellaneousMenuIfClosed()
+        this.clickMiscellaneousMenuIfClosed()
             .clickParkingButton()
             .submitSaveChangesModal();
         return this;
@@ -776,8 +765,7 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
     }
 
     navigateToRenovation(): NavigationSectionActions {
-        this.clickSaveButton()
-            .clickPropertyButton()
+        this.clickPropertyButton()
             .clickRenovationButton()
             .submitSaveChangesModal()
             .verifyProgressBarNotExist();
