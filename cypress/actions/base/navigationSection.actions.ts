@@ -33,7 +33,6 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
     }
 
     openReviewAndExport(isNewReport = true): NavigationSectionActions {
-        this.clickSaveButton();
         let reportAlias = "docxReportAsync";
         cy.intercept({
             method: 'GET',
