@@ -42,7 +42,7 @@ export default class BaseActions {
     }
 
     clickSaveButton() {
-        cy.get("*[data-qa='form-sasve-btn']").click();
+        cy.get("*[data-qa='form-save-btn']").click();
         cy.get("*[role='progressbar']", { timeout: 30000 }).should("exist");
         return this;
     }
