@@ -10,6 +10,8 @@ class AmenitiesPage extends BasePage {
 
     get hasNoUnitAmenitiesCheckbox() { return cy.get("*[data-qa='hasNoUnitAmenities'] input"); }
 
+    get hasNoBuildingAmenitiesCheckbox() { return cy.get("*[data-qa='hasNoAmenities'] input"); }
+
     get laundryCheckbox() { return cy.get("[data-qa^='building.hasLaundryRoom'] input"); }
 
     get storageCheckbox() { return cy.get("[data-qa^='building.hasStorageUnits'] input"); }
@@ -18,7 +20,7 @@ class AmenitiesPage extends BasePage {
 
     get storageUnitsTextField() { return cy.get("[name='building.storageUnitCount']"); }
 
-    getElementCheckbox(name: BoweryReports.AmenitiesCheckboxes) { return cy.get(`[data-qa$=${name}] input`); }
+    getElementCheckbox(name: BoweryReports.AmenitiesCheckboxes) { return cy.get(`[data-qa$='${name}'] input`); }
 }
 
 export default new AmenitiesPage();

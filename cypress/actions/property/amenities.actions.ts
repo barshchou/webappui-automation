@@ -22,6 +22,11 @@ class AmenitiesActions extends BaseActionsExt<typeof amenitiesPage> {
         return this;
     }
 
+    checkHasNoBuildingAmenities(): AmenitiesActions {
+        amenitiesPage.hasNoBuildingAmenitiesCheckbox.check().should("have.value", "true");
+        return this;
+    }
+
     checkLaundryRoomCheckbox(check = true): AmenitiesActions {
         amenitiesPage.laundryCheckbox.invoke('attr', 'value').then(status => {
             status != `${check}` 
