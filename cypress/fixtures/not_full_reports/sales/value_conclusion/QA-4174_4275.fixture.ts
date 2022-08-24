@@ -14,7 +14,7 @@ const _basisSFAnalysisValues = [ 2500, 2600, 1100, 4000 ];
 export default {
     reportCreationData: _reportCreationData,
     basisSFAnalysisValues: _basisSFAnalysisValues,
-    valueConclusion: 750,
+    valueConclusion: 750.25,
     finalValues: _finalValuesToBe,
     valueConclusionAsStabilized: Enums.VALUE_CONCLUSION_NAME.asStabilized
 };

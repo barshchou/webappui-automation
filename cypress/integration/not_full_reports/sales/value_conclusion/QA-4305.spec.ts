@@ -12,6 +12,9 @@ describe("Prospective Market Value As Stabilized -> Less Commission Fee data is 
         });
 
         it("Test body", () => {
+            // TODO: [QA-6670] Remove after save changes modal fix
+            NavigationSection.navigateToReportInformation();
+
             NavigationSection.navigateToPropertySummary();
             Property.Summary.enterNumberOfResUnits(testData.numberOfUnits);
             NavigationSection.navigateToResInPlaceRentRoll();

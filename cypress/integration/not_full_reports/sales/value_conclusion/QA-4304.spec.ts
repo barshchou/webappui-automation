@@ -11,6 +11,10 @@ describe(`Prospective Market Value As Stabilized -> Less Other Rent Loss data is
         it(`[QA-4304]`, () => {
             cy.stepInfo(`1. Login, create report. Add residential units.`);
             createReport(testData.reportCreationData);
+
+            // TODO: [QA-6670] Remove after save changes modal fix
+            NavigationSection.navigateToReportInformation();
+
             NavigationSection.navigateToPropertySummary();
             Property.Summary.enterNumberOfResUnits(testData.numberOfUnits);
 

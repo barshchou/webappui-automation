@@ -11,7 +11,7 @@ describe(`Prospective Market Value As Stabilized is calculated with correct form
         it("[QA-6240]", () => {
             cy.stepInfo(`1. Login, create report. Fill summary data.`);
             createReport(testData.reportCreationData);
-            //Remove after save changes modal fix
+            // TODO: [QA-6670] Remove after save changes modal fix
             NavigationSection.navigateToReportInformation();
 
             NavigationSection.navigateToPropertySummary();
