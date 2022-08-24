@@ -19,8 +19,8 @@ describe(`[QA-4472] [Property > Market] Summary of Rent Stabilization Laws`,
 
             cy.stepInfo(`3. Upload files to Market/Submarket Analysis uses.`);
             testData.marketAnalysisUses.forEach((use) => {
-                Property._Market.uploadMarketByAnalysisUseFile(use, testData.fileName)
-                    .uploadSubmarketByAnalysisUseFile(use, testData.fileName);
+                Property._Market.uploadMarketSubmarketByAnalysisUseFile(use, testData.fileName)
+                    .uploadMarketSubmarketByAnalysisUseFile(use, testData.fileName, false);
             });
 
             cy.stepInfo(`4. Export the report.`);
