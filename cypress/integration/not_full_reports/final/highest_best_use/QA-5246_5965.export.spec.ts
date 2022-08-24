@@ -55,11 +55,11 @@ describe("Verify and change to support custom types on the Highest & Best Use pa
 
                 cy.stepInfo(`6. Proceed to the Highest & Best Use and Zoning section in the exported report 
                             and check that entered data is displayed`);
-                cy.contains("Summary of Use and Bulk Regulations").next().next()
+                cy.contains("Summary of Use and Bulk Regulations").next().next().scrollIntoView()
                     .invoke("text").should("include", testData.textToType);
-                cy.xpath("//h2[contains(text(), 'As Vacant')]").next()
+                cy.xpath("//h2[contains(text(), 'As Vacant')]").next().scrollIntoView()
                     .invoke("text").should("include", testData.textToType);
-                cy.xpath("//h2[contains(text(), 'As Improved')]").next()
+                cy.xpath("//h2[contains(text(), 'As Improved')]").next().scrollIntoView()
                     .invoke("text").should("include", testData.textToType);
             });
         });
