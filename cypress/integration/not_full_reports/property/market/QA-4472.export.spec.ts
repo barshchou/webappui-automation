@@ -12,8 +12,6 @@ describe(`[QA-4472] [Property > Market] Summary of Rent Stabilization Laws`,
             _NavigationSection.navigateToPropertyMarket();
 
             cy.stepInfo(`2. Check all Market Analysis Use checkboxes.`);
-            Property._Market.checkUncheckMarketAnalysisUseCheckbox(testData.marketAnalysisUses[0], false);
-
             testData.marketAnalysisUses.forEach((use) => {
                 Property._Market.checkUncheckMarketAnalysisUseCheckbox(use, true)
                     .verifyMarketAnalysisUseCheckboxState(use, true);

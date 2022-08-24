@@ -15,8 +15,6 @@ describe(`[QA-4470] [Property > Market > Market reports] Check unselecting check
         cy.stepInfo(`2. Verify that with every use checkbox user unselects, its 
                     corresponding Submarket & Market type-ahead dropdowns disappear.`);
 
-        Property._Market.checkUncheckMarketAnalysisUseCheckbox(testData.marketAnalysisUses[0], false);
-
         testData.marketAnalysisUses.forEach((use) => {
             Property._Market.checkUncheckMarketAnalysisUseCheckbox(use, true)
                 .verifyMarketAnalysisUseCheckboxState(use, true)

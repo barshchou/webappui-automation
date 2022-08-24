@@ -21,8 +21,6 @@ describe(`[QA-4481] Check that generated text pulls in the first submarket`,
                 .enterMarketQuarter(testData.submarketAndMarketQuarter)
                 .enterMarketYear(testData.submarketAndMarketYear);
 
-            Property._Market.checkUncheckMarketAnalysisUseCheckbox(testData.marketAnalysisUses[0], false);
-
             testData.marketAnalysisUses.forEach((use, index) => {
                 Property._Market.checkUncheckMarketAnalysisUseCheckbox(use, true)
                     .enterMarket(testData.marketValues[index], use)
