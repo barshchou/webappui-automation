@@ -10,7 +10,7 @@ import taxInfoKeys from "../../utils/mapKeys/income/tax_Info/taxInfoKeys";
 class TaxInfoActions extends BaseActionsExt<typeof taxInfoPage> {
 
     checkBasisByValue(value: string): this {
-        taxInfoPage.basisRadio.check(value);
+        taxInfoPage.basisRadioButton(value).click();
         taxInfoPage.getVerifyBasisRadioInput(value).should("exist");
         return this;
     }
@@ -193,8 +193,21 @@ class TaxInfoActions extends BaseActionsExt<typeof taxInfoPage> {
         return this;
     }
 
-    checkProjectedIncludeCheckbox(): this {
-        taxInfoPage.projectedIncludeInExportCheckbox.check().should("have.value", "true");
+    checkProjectedIncludeCheckbox(check = true): this {
+        taxInfoPage.projectedIncludeInExportCheckbox.invoke('attr', 'value').then(status => {
+            status !== `${check}`
+                ? taxInfoPage.projectedIncludeInExportCheckbox.click().should('have.value', `${check}`)
+                : null;
+        });
+        return this;
+    }
+
+    checkProjectedOpinionProvidedCheckbox(check = true): this {
+        taxInfoPage.projectedOpinionProvidedCheckbox.invoke('attr', 'value').then(status => {
+            status !== `${check}`
+                ? taxInfoPage.projectedOpinionProvidedCheckbox.click().should('have.value', `${check}`)
+                : null;
+        });
         return this;
     }
 
@@ -485,6 +498,26 @@ class TaxInfoActions extends BaseActionsExt<typeof taxInfoPage> {
                     taxInfoPage.getSummaryRowValue("taxLiabilityPerBasis").should("have.text", taxLiability);
                 }
             });
+        });
+        return this;
+    }
+
+    enterTaxAssessedValueProvided(value: number): TaxInfoActions {
+        taxInfoPage.taxableAssessedValueProvided
+            .realClick().realClick()
+            .scrollIntoView()
+            .focus().type("123456")
+            .clear()
+            .realType(`${value}{enter}`);
+        taxInfoPage.taxableAssessedValueProvided.should("have.text", `$${numberWithCommas(value)}`);
+        return this;
+    }
+
+    verifyTaxLiabilityProvided(squareFootAnalysisArea: number): TaxInfoActions {
+        taxInfoPage.taxLiabilityTotal.invoke('text').then(taxTotal => {
+            let taxTotalPerSfAdjusted = getNumberFromDollarNumberWithCommas(taxTotal) / squareFootAnalysisArea;
+            taxInfoPage.taxLiabilityTotalPerSf
+                .should('have.text', `$${numberWithCommas(taxTotalPerSfAdjusted.toFixed(2))}`);
         });
         return this;
     }

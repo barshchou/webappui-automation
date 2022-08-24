@@ -1,7 +1,7 @@
 import BasePage from "../base/base.page";
 
 class TaxInfoPage extends BasePage {
-    get basisRadio() { return cy.get("[name=basis]"); }
+    basisRadioButton(value: string) { return cy.get(`[data-qa='basis-radio-group'] input[value='${value}']`); }
 
     getVerifyBasisRadioInput(value: string) { 
         return cy.get(`[data-qa='basis-radio-group'] [data-qa=checked] input[value='${value}']`); 
@@ -50,6 +50,8 @@ class TaxInfoPage extends BasePage {
     get projectedTab() { return cy.get("[data-qa=projected-tab]"); }
 
     get projectedIncludeInExportCheckbox() { return cy.get("[data-qa^='projected.includedInExport'] input"); }
+
+    get projectedOpinionProvidedCheckbox() { return cy.get("[data-qa^='projected.opinion.includedInExport'] input"); }
 
     get projectedLiabilityCommentary() { 
         return cy.get("[data-qa^='projected.projectedTaxLiabilityDiscussion.commentary']"); 
@@ -149,6 +151,18 @@ class TaxInfoPage extends BasePage {
 
     get addSpecialAssessment() {
         return cy.xpath("//button/span[contains(text(), 'Add Special Assessment')]");
+    }
+
+    get taxableAssessedValueProvided() {
+        return cy.xpath(`//*[@row-id='taxableAssessedValueId']/div[@col-id='value']`);
+    }
+
+    get taxLiabilityTotal() {
+        return cy.xpath(`//*[@row-id='taxLiabilityTotal']/div[@col-id='value']`);
+    }
+
+    get taxLiabilityTotalPerSf() {
+        return cy.xpath(`//*[@row-id='taxesPerBasis']/div[@col-id='value']`);
     }
 }
 
