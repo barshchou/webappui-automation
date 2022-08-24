@@ -1,7 +1,8 @@
 import { Property } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { createReport } from "../../../../actions/base/baseTest.actions";
-import testData from '../../../../fixtures/not_full_reports/property/amenities/QA-4626-64.fixture';
+import Enums from "../../../../enums/enums";
+import testData from '../../../../fixtures/not_full_reports/property/amenities/QA-4662_64.fixture';
 
 describe("Verify the display of the Amenities page", { tags:[ "@property", "@amenities" ] }, () => {
     beforeEach("Login, create report", () => {
@@ -28,5 +29,16 @@ describe("Verify the display of the Amenities page", { tags:[ "@property", "@ame
         testData.unitCheckboxes.forEach(name => {
             Property._Amenities.Page.getElementCheckbox(name).should("not.exist");
         });
+    });
+
+    it("[QA-4665]", () => {
+        cy.stepInfo("1. Proceed to the Property > Amenities page.");
+        _NavigationSection.navigateToPropertyAmenities();
+
+        cy.stepInfo("2. Check Laundry Room checkbox");
+        Property._Amenities.checkHasNoUnitAmenities()
+            .checkCheckboxByName(Enums.AMENITIES_CHECKBOXES.hasLaundryRoom);
+
+        cy.stepInfo("3. Upload photo");
     });
 });

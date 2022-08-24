@@ -1,6 +1,7 @@
 import amenitiesPage from "../../pages/property/amenities.page";
 import { cutDecimalPartToNumberOfDigits, isDecimal } from "../../../utils/numbers.utils";
 import BaseActionsExt from "../base/base.actions.ext";
+import { BoweryReports } from "../../types/boweryReports.type";
 
 class AmenitiesActions extends BaseActionsExt<typeof amenitiesPage> {
 
@@ -58,6 +59,15 @@ class AmenitiesActions extends BaseActionsExt<typeof amenitiesPage> {
         this.checkStorageCheckbox();
         amenitiesPage.storageUnitsTextField.clear().type(`${units}`);
         amenitiesPage.storageUnitsTextField.should("have.value", units);
+        return this;
+    }
+
+    checkCheckboxByName(name: BoweryReports.AmenitiesCheckboxes, check = true): AmenitiesActions {
+        amenitiesPage.getElementCheckbox(name).invoke('attr', 'value').then(status => {
+            status != `${check}` 
+                ? amenitiesPage.getElementCheckbox(name).click().should('have.value', `${check}`) 
+                : null;
+        });
         return this;
     }
 }
