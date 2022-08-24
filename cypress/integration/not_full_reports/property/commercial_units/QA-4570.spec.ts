@@ -17,8 +17,7 @@ describe("[QA-4570] Verify the Back button functionality on the Commercial Units
             cy.stepInfo(`2. Click on the Back button and verify the user is redirected 
             to the previous page (Property > Site Description).`);
             _NavigationSection.navigateToCommercialUnits();
-            Property._CommercialUnits.clickBackButton()
-                .clickYesButton();
+            Property._CommercialUnits.clickBackButton();
             Property._SiteDescription.Page.siteDescriptionTitle.should("be.visible");
         });
     });
