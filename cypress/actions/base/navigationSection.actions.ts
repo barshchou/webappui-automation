@@ -94,7 +94,8 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
     navigateToHighestAndBestUse(): NavigationSectionActions {
         this.clickFinalButton()
             .clickHighestAndBestUseButton()
-            .submitSaveChangesModal();
+            .submitSaveChangesModal()
+            .waitForUrl(routesUtils.highestAndBestUse);
         return this;
     }
 
@@ -176,7 +177,8 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
     navigateToPropertyZoning(): NavigationSectionActions {
         this.clickPropertyButton()
             .clickZoningButton()
-            .submitSaveChangesModal();
+            .submitSaveChangesModal()
+            .waitForUrl(routesUtils.zoning);
         return this;
     }
 
