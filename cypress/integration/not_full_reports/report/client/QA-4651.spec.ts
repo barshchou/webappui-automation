@@ -13,8 +13,7 @@ describe("Verify the Back button functionality on the Client page",
 
         it("Test body", () => {
             NavigationSection.navigateToClientPage();
-            Report.Client.clickBackButton()
-                .clickYesButton();
+            Report.Client.clickBackButton();
             Report.Appraiser.verifyPageOpened();
         });
     });
