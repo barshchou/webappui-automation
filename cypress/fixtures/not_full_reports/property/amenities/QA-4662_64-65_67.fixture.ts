@@ -7,6 +7,10 @@ const buildingCheckboxes = allCheckboxes.filter(unit => unit.startsWith("buildin
 
 const unitCheckboxes = allCheckboxes.filter(unit => unit.startsWith("unit"));
 
+const generatedCommentName = {
+    storageIncomeDiscussion: "storageIncomeDiscussion"
+};
+
 export default {
     reportCreationData: ReportDataCreator.getReportData("4626-64-65_67"),
     allCheckboxes,
@@ -15,5 +19,6 @@ export default {
     imagePath: "not_full_reports/Laundry_Room.png",
     storageValue: 1000,
     storageValueMore: 1001,
-    testValue: "some value"
+    testValue: "some value",
+    generatedCommentName
 };

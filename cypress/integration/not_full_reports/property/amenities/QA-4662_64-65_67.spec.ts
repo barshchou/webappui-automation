@@ -1,4 +1,4 @@
-import { Property } from "../../../../actions";
+import { Income, Property } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { createReport } from "../../../../actions/base/baseTest.actions";
 import Enums from "../../../../enums/enums";
@@ -58,12 +58,22 @@ describe("Verify the display of the Amenities page", { tags:[ "@property", "@ame
         Property._Amenities.checkCheckboxByName(Enums.AMENITIES_CHECKBOXES.hasStorageUnits)
             .verifyProgressBarNotExist();
 
-        cy.stepInfo("3. Verify that only numeric values can be entered in the Number of Storage Units field");
+        cy.stepInfo("3. Verify not valid of Storage Units field");
         Property._Amenities.enterStoreInput(testData.storageValue)
             .enterStoreInput(testData.testValue);
 
-        cy.stepInfo("4. Verify that only numeric values can be entered in the Number of Storage Units field");
-        Property._Amenities.enterStoreInput(testData.storageValueMore)
-            .checkCheckboxByName(Enums.AMENITIES_CHECKBOXES.hasStorageUnits, false);
+        cy.stepInfo("4. Verify valid value entered in the Number of Storage Units field");
+        Property._Amenities.enterStoreInput(testData.storageValue)
+            .verifyProgressBarNotExist();
+
+        cy.stepInfo("5. Proceed to the Property > Amenities page and verify generated comment");
+        _NavigationSection.navigateToStorage();
+        Income._MiscellaneousManager.Storage.Page.generatedCommentaryText(
+            testData.generatedCommentName.storageIncomeDiscussion)
+            .should("include.text", `${testData.storageValue} storage units`);
+
+        cy.stepInfo("6. Proceed to the Property > Amenities page and uncheck Storage Units");
+        _NavigationSection.navigateToPropertyAmenities();
+        Property._Amenities.checkCheckboxByName(Enums.AMENITIES_CHECKBOXES.hasStorageUnits, false);
     });
 });
