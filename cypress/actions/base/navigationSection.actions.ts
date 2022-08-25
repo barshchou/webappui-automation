@@ -193,7 +193,6 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
     }
 
     navigateToUnitInspection(): NavigationSectionActions {
-        this.clickSaveButton();
         this.clickFinalButton()
             .clickUnitInspectionButton()
             .verifyProgressBarNotExist();
@@ -565,32 +564,28 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
     }
 
     navigateToLaundry(): NavigationSectionActions {
-        this.clickIncomeApproachButton()
-            .clickMiscellaneousIncome()
+        this.clickMiscellaneousMenuIfClosed()
             .clickLaundryButton()
             .submitSaveChangesModal();
         return this;
     }
 
     navigateToStorage(): NavigationSectionActions {
-        this.clickIncomeApproachButton()
-            .clickMiscellaneousIncome()
+        this.clickMiscellaneousMenuIfClosed()
             .clickStorageButton()
             .submitSaveChangesModal();
         return this;
     }
 
     navigateToOther(): NavigationSectionActions {
-        this.clickIncomeApproachButton()
-            .clickMiscellaneousIncome()
+        this.clickMiscellaneousMenuIfClosed()
             .clickOtherButton()
             .submitSaveChangesModal();
         return this;
     }
 
     navigateToParking(): NavigationSectionActions {
-        this.clickIncomeApproachButton()
-            .clickMiscellaneousIncome()
+        this.clickMiscellaneousMenuIfClosed()
             .clickParkingButton()
             .submitSaveChangesModal();
         return this;
@@ -822,6 +817,16 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         navigationSectionPage.residentialIncomeArrow.then(el => {
             if (!el.hasClass("expanded")) {
                 this.clickResidentialIncomeArrow();
+            }
+        });
+
+        return this;
+    }
+
+    private clickMiscellaneousMenuIfClosed(): NavigationSectionActions {
+        navigationSectionPage.miscellaneousIncome.then(el => {
+            if (!el.hasClass("expanded")) {
+                this.clickMiscellaneousIncome();
             }
         });
 
