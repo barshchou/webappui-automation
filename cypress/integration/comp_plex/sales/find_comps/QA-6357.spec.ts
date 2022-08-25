@@ -10,7 +10,6 @@ describe(`[QA-6357] Checkbox 'Show only On-App Jobs' functionality`, {
     });
 
     it("[QA-6357] [Sales > Find Comps > Job Search > Filters] Check checkbox 'Show only On-App Jobs'", () => {
-        cy.wait(`@${Alias.gql.SearchSalesTransactions}`);
         cy.stepInfo(`1. Go to Sales > Find Comps > Job Search`);
         Sales._FindComps.openJobSearchTab();
 

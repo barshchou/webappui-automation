@@ -11,7 +11,6 @@ describe(`[QA-6476] Filters functionality`, {
 
     it(`[QA-6476] [Sales > Find Comps > Job Search > Filters] Check when filters are being interacted with, 
          Report Search field becomes disabled`, () => {
-        cy.wait(`@${Alias.gql.SearchSalesTransactions}`);
         cy.stepInfo(`1. Go to Sales > Find Comps > Job Search`);
         Sales._FindComps.openJobSearchTab();
 
