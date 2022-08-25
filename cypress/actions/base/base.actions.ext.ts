@@ -90,6 +90,12 @@ export default class BaseActionsExt<T extends BasePage> extends BaseActions {
         return this;
     };
 
+    enterInSelectChipsWrapper(enterValue: string, elemIndex = 0) {
+        this.Page.getSelectChipsWrapper(elemIndex).type(`${enterValue}{enter}`);
+        cy.get(`[data-qa='${enterValue}']`).eq(elemIndex).should("exist");
+        return this;
+    }
+
     clickFormRevertToOriginalBtn(index = 0): this {
         this.Page.formRevertToOriginalBtn(index).click();
         return this;

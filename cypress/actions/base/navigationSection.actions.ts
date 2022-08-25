@@ -91,11 +91,24 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         return this;
     }
 
+    navigateToHighestAndBestUse(): NavigationSectionActions {
+        this.clickFinalButton()
+            .clickHighestAndBestUseButton()
+            .submitSaveChangesModal()
+            .waitForUrl(routesUtils.highestAndBestUse);
+        return this;
+    }
+
     clickFinalButton(): NavigationSectionActions {
         navigationSectionPage.finalButton.click();
         return this;
     }
 
+    clickHighestAndBestUseButton(): NavigationSectionActions {
+        navigationSectionPage.highestAndBestUseButton.click();
+        return this;
+    }
+    
     clickSourceInformation(): NavigationSectionActions {
         navigationSectionPage.sourceInformation.click();
         return this;
@@ -156,6 +169,19 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         return this;
     }
 
+    clickZoningButton(): NavigationSectionActions {
+        navigationSectionPage.zoningButton.click();
+        return this;
+    }
+
+    navigateToPropertyZoning(): NavigationSectionActions {
+        this.clickPropertyButton()
+            .clickZoningButton()
+            .submitSaveChangesModal()
+            .waitForUrl(routesUtils.zoning);
+        return this;
+    }
+
     clickResidentialStabilizedRentRoll(): NavigationSectionActions {
         navigationSectionPage.residentialStabilizedRentRoll.click();
         return this;
@@ -167,7 +193,6 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
     }
 
     navigateToUnitInspection(): NavigationSectionActions {
-        this.clickSaveButton();
         this.clickFinalButton()
             .clickUnitInspectionButton()
             .verifyProgressBarNotExist();
@@ -539,32 +564,28 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
     }
 
     navigateToLaundry(): NavigationSectionActions {
-        this.clickIncomeApproachButton()
-            .clickMiscellaneousIncome()
+        this.clickMiscellaneousMenuIfClosed()
             .clickLaundryButton()
             .submitSaveChangesModal();
         return this;
     }
 
     navigateToStorage(): NavigationSectionActions {
-        this.clickIncomeApproachButton()
-            .clickMiscellaneousIncome()
+        this.clickMiscellaneousMenuIfClosed()
             .clickStorageButton()
             .submitSaveChangesModal();
         return this;
     }
 
     navigateToOther(): NavigationSectionActions {
-        this.clickIncomeApproachButton()
-            .clickMiscellaneousIncome()
+        this.clickMiscellaneousMenuIfClosed()
             .clickOtherButton()
             .submitSaveChangesModal();
         return this;
     }
 
     navigateToParking(): NavigationSectionActions {
-        this.clickIncomeApproachButton()
-            .clickMiscellaneousIncome()
+        this.clickMiscellaneousMenuIfClosed()
             .clickParkingButton()
             .submitSaveChangesModal();
         return this;
@@ -796,6 +817,16 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         navigationSectionPage.residentialIncomeArrow.then(el => {
             if (!el.hasClass("expanded")) {
                 this.clickResidentialIncomeArrow();
+            }
+        });
+
+        return this;
+    }
+
+    private clickMiscellaneousMenuIfClosed(): NavigationSectionActions {
+        navigationSectionPage.miscellaneousIncome.then(el => {
+            if (!el.hasClass("expanded")) {
+                this.clickMiscellaneousIncome();
             }
         });
 
