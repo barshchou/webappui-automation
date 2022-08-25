@@ -84,4 +84,8 @@ export default class BasePage {
     formCommentTextBox(name: string) {
         return cy.xpath(`//*[.='${name}']//following::*[@data-slate-editor][1]`);
     }
+
+    generatedCommentaryText(name: string) {
+        return cy.get(`[data-qa='${name}.commentary-generated-text']`);
+    }
 }
