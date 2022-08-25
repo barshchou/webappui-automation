@@ -6,7 +6,7 @@ import { _Summary } from "../../../../actions/property";
 import { numberWithCommas } from '../../../../../utils/numbers.utils';
 
 describe(`[QA-4053] [QA-4086] The Concluded Value Per Unit is calculated correctly 
-and includes both commercial and residential units.`, 
+        and includes both commercial and residential units.`, 
 { tags: [ "@check_export", "@sales", "@value_conclusion" ] }, () => {
 
     it("Test body", () => {
@@ -48,11 +48,11 @@ and includes both commercial and residential units.`,
             cy.visit(<string>file);
 
             cy.stepInfo(`Proceed to the Sales Comparison Approach > Value Opinion via the 
-            Sales Comparison Approach and verify the value.`);
-            cy.contains("Value Opinion via the Sales Comparison Approach").next("table")
+                        Sales Comparison Approach and verify the value.`);
+            cy.contains(testData.valueOpinionSection).next("table")
                 .scrollIntoView()
                 .within(() => {
-                    cy.contains("Concluded Value Per Unit").should("exist")
+                    cy.contains(testData.concludedValueSection).should("exist")
                         .parents("tr").within(() => {
                             cy.contains(`${testData.general.valueConclusion}`).should("exist");
                         });

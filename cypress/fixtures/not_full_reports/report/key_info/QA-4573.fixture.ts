@@ -1,3 +1,4 @@
+import Enums from "../../../../enums/enums";
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 
 const reportCreationFixture = () => {
@@ -6,5 +7,6 @@ const reportCreationFixture = () => {
 
 export default {
     reportCreationData: reportCreationFixture(),
-    sourceText: "Source: Federal Reserve Economic Data (FRED)"
+    sourceText: "Source: Federal Reserve Economic Data (FRED)",
+    exportSectionName: Enums.EXPORT_TITLES.mortgageComponent
 };

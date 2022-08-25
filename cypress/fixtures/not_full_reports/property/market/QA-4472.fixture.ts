@@ -21,8 +21,8 @@ export default {
     marketAnalysisUses: _marketAnalysisUses,
     fileName: "QA-4472.docx",
     fileContent: "abcdefghijklmnopqrstuvwxyz1234567890",
-    sectionBeforeSubmarketFiles: "Submarket Analyses",
-    sectionAfterSubmarketFiles: "Highest & Best Use",
-    sectionBeforeMarketFiles: "Comparable Sales Outline",
-    sectionAfterMarketFiles: "Qualifications"
+    sectionBeforeSubmarketFiles: enums.EXPORT_TITLES.submarketAnalyses,
+    sectionAfterSubmarketFiles: enums.EXPORT_TITLES.highestAndBestUse,
+    sectionBeforeMarketFiles: enums.EXPORT_TITLES.comparableSalesOutline,
+    sectionAfterMarketFiles: enums.EXPORT_TITLES.qualifications
 };

@@ -17,5 +17,7 @@ const generalFixture = () => {
 
 export default {
     reportCreationData: _reportCreationData,
-    general: Object.freeze(generalFixture())
+    general: Object.freeze(generalFixture()),
+    valueOpinionSection: Enums.EXPORT_TITLES.valueOpinionViaTheSalesComparisonApproach,
+    concludedValueSection: Enums.EXPORT_TITLES.concludedValuePerUnit
 };

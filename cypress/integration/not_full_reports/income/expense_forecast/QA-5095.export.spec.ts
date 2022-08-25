@@ -35,9 +35,9 @@ describe(`[QA-5095] Selected expenses forecast is exported to Estimated Operatin
                 .then(file => {
                     cy.log(<string>file);
                     cy.stepInfo(`4. Verify if selected Expense Forecast is displayed in 
-                    Estimated Operating Expense section`);
+                                Estimated Operating Expense section`);
                     cy.visit(<string>file);
-                    cy.contains(`Estimated Operating Expenses`).scrollIntoView();
+                    cy.contains(testData.exportSectionName).scrollIntoView();
                     testData.forecastNames.forEach((forecastName, index) => {
                         cy.xpath(`//h3[text()='Estimated Operating Expenses']` + 
                         `/following-sibling::*[text()='${forecastName}']`)
@@ -81,9 +81,9 @@ describe(`[QA-5095] Selected expenses forecast is exported to Estimated Operatin
                 .then(file => {
                     cy.log(<string>file);
                     cy.stepInfo(`4. Verify if selected Expense Forecast is displayed 
-                    in Estimated Operating Expense section`);
+                                in Estimated Operating Expense section`);
                     cy.visit(<string>file);
-                    cy.contains(`Estimated Operating Expenses`).scrollIntoView();
+                    cy.contains(testData.exportSectionName).scrollIntoView();
                     testData.forecastNames.forEach((forecastName, index) => {
                         cy.xpath(`//h3[text()='Estimated Operating Expenses']` + 
                         `/following-sibling::*[text()='${forecastName}']`)
@@ -121,9 +121,9 @@ describe(`[QA-5095] Selected expenses forecast is exported to Estimated Operatin
                 .then(file => {
                     cy.log(<string>file);
                     cy.stepInfo(`4. Verify if selected Expense Forecast is displayed 
-                    in Estimated Operating Expense section`);
+                                in Estimated Operating Expense section`);
                     cy.visit(<string>file);
-                    cy.contains(`Estimated Operating Expenses`).scrollIntoView();
+                    cy.contains(testData.exportSectionName).scrollIntoView();
                     cy.xpath(`//h4[text()='${testData.fuelForecastName}']/following-sibling::p`)
                         .should("include.text", 
                             `$${numberWithCommas(testData.fuelForecastPerRoom.forecast.toFixed(2))}`)
