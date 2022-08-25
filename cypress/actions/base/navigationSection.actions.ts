@@ -433,11 +433,9 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
     }
 
     navigateToFinalSWOTAnalysis(): NavigationSectionActions {
-        this.clickSaveButton()
-            .verifyProgressBarNotExist();
         this.clickFinalButton()
             .clickSWOTAnalysis()
-            // .submitSaveChangesModal();
+            .submitSaveChangesModal();
         return this;
     }
 
@@ -654,20 +652,16 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
     }
 
     navigateToLetterOfTransmittal(): NavigationSectionActions {
-        this.clickSaveButton()
-            .verifyProgressBarNotExist();
         this.clickPreviewEditButton()
             .clickLetterOfTransmittal()
-            // .submitSaveChangesModal();
+            .submitSaveChangesModal();
         return this;
     }
 
     navigateToCertification(): NavigationSectionActions {
-        this.clickSaveButton()
-            .verifyProgressBarNotExist();
         this.clickPreviewEditButton()
             .clickCertification()
-            // .submitSaveChangesModal();
+            .submitSaveChangesModal();
         return this;
     }
 

@@ -13,8 +13,7 @@ class SWOTAnalysisActions extends BaseActionsExt<typeof swotAnalysisPage> {
 
     verifySWOTInputText(sectionName: string, expectedText: string, index = 0): 
     SWOTAnalysisActions {
-        swotAnalysisPage.swotAnalysisSectionTextArea(sectionName, index).invoke('text')
-            .should('deep.equal', expectedText);
+        swotAnalysisPage.swotAnalysisSectionTextArea(sectionName, index).should("contain.text", expectedText);
         return this;
     }
 
