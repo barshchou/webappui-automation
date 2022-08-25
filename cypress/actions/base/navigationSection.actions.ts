@@ -91,11 +91,24 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         return this;
     }
 
+    navigateToHighestAndBestUse(): NavigationSectionActions {
+        this.clickFinalButton()
+            .clickHighestAndBestUseButton()
+            .submitSaveChangesModal()
+            .waitForUrl(routesUtils.highestAndBestUse);
+        return this;
+    }
+
     clickFinalButton(): NavigationSectionActions {
         navigationSectionPage.finalButton.click();
         return this;
     }
 
+    clickHighestAndBestUseButton(): NavigationSectionActions {
+        navigationSectionPage.highestAndBestUseButton.click();
+        return this;
+    }
+    
     clickSourceInformation(): NavigationSectionActions {
         navigationSectionPage.sourceInformation.click();
         return this;
@@ -153,6 +166,19 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
 
     clickMapsButton(): NavigationSectionActions {
         navigationSectionPage.propertyMaps.click();
+        return this;
+    }
+
+    clickZoningButton(): NavigationSectionActions {
+        navigationSectionPage.zoningButton.click();
+        return this;
+    }
+
+    navigateToPropertyZoning(): NavigationSectionActions {
+        this.clickPropertyButton()
+            .clickZoningButton()
+            .submitSaveChangesModal()
+            .waitForUrl(routesUtils.zoning);
         return this;
     }
 
