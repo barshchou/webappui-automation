@@ -81,6 +81,9 @@ describe(`Prospective Market Value As Complete is calculated with correct formul
                         in “Round to nearest” on Income>Cap Rate Conclusion page`);
             Sales.ValueConclusion.verifyFinalValueCalculated(testData.valueConclusionAsIs);
 
+            /*
+             * Please refer to 6242, 6248 tests for other parts of QA-6251 test
+             */
             cy.stepInfo(`[QA-6251] 10. Verify Sales Value in Header is displayed based on selected Basis for 
                         Square Foot Analysis and pulled from Sales > Value Conclusion page`);
             Sales.ValueConclusion.clickSaveButton().verifyProgressBarNotExist();

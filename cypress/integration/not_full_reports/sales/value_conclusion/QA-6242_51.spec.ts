@@ -37,6 +37,9 @@ describe(`As Is Market Value is calculated with correct formula`,
                         according to selection in “Round to nearest” on Income > Cap Rate Conclusion page`);
             Sales.ValueConclusion.verifyFinalValueCalculated(testData.valueConclusionAsIs);
 
+            /*
+             * Please refer to 6245, 6248 tests for other parts of QA-6251 test
+             */
             cy.stepInfo(`[QA-6251] 7. Verify Sales Value in Header is displayed based on selected Basis for 
                         Square Foot Analysis and pulled from Sales > Value Conclusion page`);
             Sales.ValueConclusion.clickSaveButton().verifyProgressBarNotExist();
