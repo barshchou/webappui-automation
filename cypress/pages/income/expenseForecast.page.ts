@@ -137,8 +137,6 @@ class ExpenseForecastPage extends BasePage {
         return cy.get('[role=dialog]').contains('Add Custom Expense Category'); 
     }
 
-    get addCustomExpenseCategoryInput() { return cy.get('input[placeholder="Enter Custom Expense..."]'); }
-
     get addCustomExpenseCategoryFieldset() { 
         return cy.get('[data-qa="autosuggest-text-input-field"]').find('fieldset'); 
     }
