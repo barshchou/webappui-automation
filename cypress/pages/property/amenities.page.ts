@@ -20,7 +20,7 @@ class AmenitiesPage extends BasePage {
 
     get storageUnitsTextField() { return cy.get("[name='building.storageUnitCount']"); }
 
-    getElementCheckbox(name: BoweryReports.AmenitiesCheckboxes) { return cy.get(`[data-qa$='${name}'] input`); }
+    getElementCheckbox(name: BoweryReports.AmenitiesCheckboxes) { return cy.get(`[data-qa^='${name}'] input`); }
 
     get laundryRoomUpload() { return cy.get("[data-qa='laundryRoom-image-list'] input"); } 
 
