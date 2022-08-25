@@ -33,8 +33,7 @@ const exportTitles = {
     summaryOfSalientFactsAndConclusions: "Summary of Salient Facts & Conclusions",
     taxableAssessedValue: "Taxable Assessed Value",
     threats: "Threats",
-    valueOpinionViaTheSalesComparisonApproach: "Value Opinion via the Sales Comparison Approach",
-    
+    valueOpinionViaTheSalesComparisonApproach: "Value Opinion via the Sales Comparison Approach"
 } as const;
 
 export default Object.freeze(exportTitles);

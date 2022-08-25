@@ -289,12 +289,22 @@ class MarketActions extends BaseActionsExt<typeof marketPage> {
         fileName: string, isMarket = true): MarketActions {
         isMarket ? marketPage.getMarketByAnalysisUseFileUploadButton(use).click()
             : marketPage.getSubmarketByAnalysisUseFileUploadButton(use).click();
+
+        let aliasFileUpload = "aliasFileUpload";
+        cy.intercept('POST', '/api/files/upload**').as(aliasFileUpload);
+
         marketPage.fileDropZone.attachFile(
             `test_files/${fileName}`,
             { subjectType: 'drag-n-drop' }
         );
-        
+
         marketPage.getUploadFileButton().click();
+
+        cy.wait(`@${aliasFileUpload}`).then(({ response }) => {
+            expect(response.statusCode).equal(201);
+            cy.log("fileUpload resolved");
+        });
+
         marketPage.insertFileButton.click();
         return this;
     }
