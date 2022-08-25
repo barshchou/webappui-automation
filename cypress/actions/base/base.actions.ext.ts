@@ -141,7 +141,7 @@ export default class BaseActionsExt<T extends BasePage> extends BaseActions {
         this.Page.formCommentTextBox(sectionName).scrollIntoView().realClick();
         this.Page.formCommentTextBox(sectionName).type(`{ESC}`);
         this.Page.formCommentTextBox(sectionName).focus();
-        this.Page.formRevertToOriginalBtn().click();
+        this.Page.formRevertToOriginalBtnBySectionName(sectionName).click({ force: true });
         this.clickFormYesRevertButton();
         this.saveCmsSettings();
         return this;
