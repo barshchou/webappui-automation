@@ -189,6 +189,9 @@ export namespace BoweryReports {
         taxYear: number
     }
 
+    export type ProjectedTaxesSectionsKeys = keyof typeof Enums.PROJECTED_TAXES_SECTIONS
+    export type ProjectedTaxesSectionsValues = typeof Enums.PROJECTED_TAXES_SECTIONS[KeyInfo.ProjectedTaxesSectionsKeys]
+
     export type UnitType = keyof typeof Enums.UNIT_TYPE
     export type SourceOfInformation = typeof Enums.SOURCE_OF_INFORMATION[KeyInfo.SourceOfInformationKeys]
     export type Amenities = keyof typeof Enums.AMENITIES

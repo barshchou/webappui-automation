@@ -202,10 +202,10 @@ class TaxInfoActions extends BaseActionsExt<typeof taxInfoPage> {
         return this;
     }
 
-    checkProjectedOpinionProvidedCheckbox(check = true): this {
-        taxInfoPage.projectedOpinionProvidedCheckbox.invoke('attr', 'value').then(status => {
+    checkProjectedSectionCheckbox(sectionName: BoweryReports.ProjectedTaxesSectionsKeys, check = true): this {
+        taxInfoPage.projectedIncludeSectionCheckbox(sectionName).invoke('attr', 'value').then(status => {
             status !== `${check}`
-                ? taxInfoPage.projectedOpinionProvidedCheckbox.click().should('have.value', `${check}`)
+                ? taxInfoPage.projectedIncludeSectionCheckbox(sectionName).click().should('have.value', `${check}`)
                 : null;
         });
         return this;
@@ -503,22 +503,45 @@ class TaxInfoActions extends BaseActionsExt<typeof taxInfoPage> {
     }
 
     enterTaxAssessedValueProvided(value: number): TaxInfoActions {
-        taxInfoPage.taxableAssessedValueProvided
+        taxInfoPage.taxableAssessedValueProvidedInput
             .realClick().realClick()
             .scrollIntoView()
             .focus().type("123456")
             .clear()
             .realType(`${value}{enter}`);
-        taxInfoPage.taxableAssessedValueProvided.should("have.text", `$${numberWithCommas(value)}`);
+        taxInfoPage.taxableAssessedValueProvidedInput.should("have.text", `$${numberWithCommas(value)}`);
         return this;
     }
 
-    verifyTaxLiabilityProvided(squareFootAnalysisArea: number): TaxInfoActions {
+    verifyTaxLiabilityProjectedTab(squareFootAnalysisArea: number, 
+        sectionName: BoweryReports.ProjectedTaxesSectionsValues): TaxInfoActions {
         taxInfoPage.taxLiabilityTotal.invoke('text').then(taxTotal => {
             let taxTotalPerSfAdjusted = getNumberFromDollarNumberWithCommas(taxTotal) / squareFootAnalysisArea;
-            taxInfoPage.taxLiabilityTotalPerSf
+            taxInfoPage.projectedSectionsTaxLiabilityTotalPerSf(sectionName)
                 .should('have.text', `$${numberWithCommas(taxTotalPerSfAdjusted.toFixed(2))}`);
         });
+        return this;
+    }
+
+    enterNetRenovation(value: number): TaxInfoActions {
+        taxInfoPage.netRenovationInput
+            .realClick().realClick()
+            .scrollIntoView()
+            .focus().type("123456")
+            .clear()
+            .realType(`${value}{enter}`);
+        taxInfoPage.netRenovationInput.should("have.text", `$${numberWithCommas(value)}`);
+        return this;
+    }
+
+    enterAssessmentRation(value: number): TaxInfoActions {
+        taxInfoPage.assessmentRatioInput
+            .realClick().realClick()
+            .scrollIntoView()
+            .focus().type("123456")
+            .clear()
+            .realType(`${value}{enter}`);
+        taxInfoPage.assessmentRatioInput.should("have.text", `${value.toFixed(2)}%`);
         return this;
     }
 }

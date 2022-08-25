@@ -1,3 +1,4 @@
+import { BoweryReports } from "../../types/boweryReports.type";
 import BasePage from "../base/base.page";
 
 class TaxInfoPage extends BasePage {
@@ -51,7 +52,9 @@ class TaxInfoPage extends BasePage {
 
     get projectedIncludeInExportCheckbox() { return cy.get("[data-qa^='projected.includedInExport'] input"); }
 
-    get projectedOpinionProvidedCheckbox() { return cy.get("[data-qa^='projected.opinion.includedInExport'] input"); }
+    projectedIncludeSectionCheckbox(sectionName: BoweryReports.ProjectedTaxesSectionsKeys) { 
+        return cy.get(`[data-qa^='projected.${sectionName}.includedInExport'] input`); 
+    }
 
     get projectedLiabilityCommentary() { 
         return cy.get("[data-qa^='projected.projectedTaxLiabilityDiscussion.commentary']"); 
@@ -153,7 +156,7 @@ class TaxInfoPage extends BasePage {
         return cy.xpath("//button/span[contains(text(), 'Add Special Assessment')]");
     }
 
-    get taxableAssessedValueProvided() {
+    get taxableAssessedValueProvidedInput() {
         return cy.xpath(`//*[@row-id='taxableAssessedValueId']/div[@col-id='value']`);
     }
 
@@ -161,8 +164,16 @@ class TaxInfoPage extends BasePage {
         return cy.xpath(`//*[@row-id='taxLiabilityTotal']/div[@col-id='value']`);
     }
 
-    get taxLiabilityTotalPerSf() {
-        return cy.xpath(`//*[@row-id='taxesPerBasis']/div[@col-id='value']`);
+    projectedSectionsTaxLiabilityTotalPerSf(sectionName: BoweryReports.ProjectedTaxesSectionsValues) {
+        return cy.xpath(`//div[h6[.='${sectionName}']]//div[@row-id='taxesPerBasis']/div[@col-id='value']`);
+    }
+
+    get netRenovationInput() {
+        return cy.xpath(`//*[@row-id='netRenovationCost']/div[@col-id='value']`);
+    }
+
+    get assessmentRatioInput() {
+        return cy.xpath(`//*[@row-id='assessmentRatio']/div[@col-id='value']`);
     }
 }
 

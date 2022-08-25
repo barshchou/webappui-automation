@@ -64,3 +64,4 @@ export type CertificationSectionsKeys = keyof typeof Enums.CERTIFICATION_SECTION
 export type OtherAdjustmentsExpansionRowsKeys = keyof typeof Enums.OTHER_ADJUSTMENTS_EXPANSION_ROWS
 export type UtilitiesAdjustmentsExpansionRowsKeys = keyof typeof Enums.UTILITIES_ADJUSTMENTS_EXPANSION_ROWS
 export type AdjustmentExpansionLabelsKeys = keyof typeof Enums.ADJUSTMENT_EXPANSION_LABELS
+export type ProjectedTaxesSectionsKeys = keyof typeof Enums.PROJECTED_TAXES_SECTIONS
