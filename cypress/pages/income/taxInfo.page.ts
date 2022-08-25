@@ -117,7 +117,9 @@ class TaxInfoPage extends BasePage {
         return cy.xpath("//*[.='Tax Calculation Discussion']//following::*[@data-slate-editor][1]"); 
     }
     
-    get taxCalculationDiscussionTooltip() { return cy.get("svg[data-icon=info-circle]"); }
+    get taxCalculationDiscussionTooltip() { 
+        return cy.xpath("//*[.='Tax Calculation Discussion']//following::*[contains(text(), 'The following')]"); 
+    }
     
     get taxCalculationDiscussionTitle() { return cy.xpath("//h6[contains(text(),'Tax Calculation Discussion')]"); }
 

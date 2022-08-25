@@ -12,6 +12,10 @@ class ContentManagementSystemPage extends BasePage {
     get incomeCapitalizationApproachNav() { return cy.xpath(`//div[.='Income Capitalization Approach']`); }
 
     get certificationNav() { return cy.xpath(`//div[.='Certification']`); }
+
+    discussionModifiedLabel(sectionName: string) {
+        return cy.xpath(`//h6[.='${sectionName}']/following::*[@ui='indicator'][1]`);
+    }
 }
 
 export default new ContentManagementSystemPage();

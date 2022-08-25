@@ -2,8 +2,18 @@ import navigationSectionPage from "../../pages/base/navigationSection.page";
 import { Alias } from "../../utils/alias.utils";
 import BaseActionsExt from "./base.actions.ext";
 import mapKeysUtils from "../../utils/mapKeys.utils";
+import routesUtils from "../../utils/routes.utils";
+import { Utils } from "../../types/utils.type";
+import stabilizedRentRollPage from "../../pages/income/commercial/stabilizedRentRoll.page";
+import rentRollPage from "../../pages/income/commercial/rentRoll.page";
 
 class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPage> {
+    
+    waitForUrl(route: Utils.Routes) {
+        cy.url().should("include", route);
+        return this;
+    }
+
     submitSaveChangesModal(saveChanges = true): NavigationSectionActions {
         cy.get("body").then($body => {
             if ($body.text().includes("You have unsaved changes")) {
@@ -67,7 +77,6 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
 
     clickCommercialRentRollButton(): NavigationSectionActions {
         navigationSectionPage.commercialRentRollButton.click();
-        this.submitSaveChangesModal();
         return this;
     }
 
@@ -82,11 +91,24 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         return this;
     }
 
+    navigateToHighestAndBestUse(): NavigationSectionActions {
+        this.clickFinalButton()
+            .clickHighestAndBestUseButton()
+            .submitSaveChangesModal()
+            .waitForUrl(routesUtils.highestAndBestUse);
+        return this;
+    }
+
     clickFinalButton(): NavigationSectionActions {
         navigationSectionPage.finalButton.click();
         return this;
     }
 
+    clickHighestAndBestUseButton(): NavigationSectionActions {
+        navigationSectionPage.highestAndBestUseButton.click();
+        return this;
+    }
+    
     clickSourceInformation(): NavigationSectionActions {
         navigationSectionPage.sourceInformation.click();
         return this;
@@ -147,6 +169,19 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         return this;
     }
 
+    clickZoningButton(): NavigationSectionActions {
+        navigationSectionPage.zoningButton.click();
+        return this;
+    }
+
+    navigateToPropertyZoning(): NavigationSectionActions {
+        this.clickPropertyButton()
+            .clickZoningButton()
+            .submitSaveChangesModal()
+            .waitForUrl(routesUtils.zoning);
+        return this;
+    }
+
     clickResidentialStabilizedRentRoll(): NavigationSectionActions {
         navigationSectionPage.residentialStabilizedRentRoll.click();
         return this;
@@ -158,7 +193,6 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
     }
 
     navigateToUnitInspection(): NavigationSectionActions {
-        this.clickSaveButton();
         this.clickFinalButton()
             .clickUnitInspectionButton()
             .verifyProgressBarNotExist();
@@ -186,7 +220,8 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         this.clickIncomeApproachButton()
             .clickResidentialMenuIfClosed()
             .clickInPlaceRentRollButton()
-            .submitSaveChangesModal(saveChanges);
+            .submitSaveChangesModal(saveChanges)
+            .waitForUrl(routesUtils.residentialInPlaceRentRoll);
         return this;
     }
 
@@ -224,7 +259,11 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         this.clickIncomeApproachButton()
             .clickCommercialMenuIfClosed()
             .clickCommercialRentRollButton()
-            .submitSaveChangesModal();
+            .submitSaveChangesModal()
+            .waitForUrl(routesUtils.commercialInPlaceRentRoll);
+        
+        // see comment to `navigateToCommercialStabilizedRentRoll` method
+        rentRollPage.commercialInPlaceRentRollForm.should("be.visible");
         return this;
     }
 
@@ -237,7 +276,8 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
     navigateToPropertySummary(): NavigationSectionActions {
         this.clickPropertyButton()
             .clickSummaryButton()
-            .submitSaveChangesModal();
+            .submitSaveChangesModal()
+            .waitForUrl(routesUtils.propertySummary);
         return this;
     }
 
@@ -309,7 +349,8 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
     navigateToSalesValueConclusion(): NavigationSectionActions {
         this.clickSalesButton()
             .clickValueConclusionButton()
-            .submitSaveChangesModal();
+            .submitSaveChangesModal()
+            .verifyProgressBarNotExist();
         return this;
     }
 
@@ -413,7 +454,8 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
     navigateToCommercialUnits(): NavigationSectionActions {
         this.clickPropertyButton()
             .clickCommercialUnits()
-            .submitSaveChangesModal();
+            .submitSaveChangesModal()
+            .waitForUrl(routesUtils.propertyCommercialUnits);
         return this;
     }
 
@@ -522,32 +564,28 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
     }
 
     navigateToLaundry(): NavigationSectionActions {
-        this.clickIncomeApproachButton()
-            .clickMiscellaneousIncome()
+        this.clickMiscellaneousMenuIfClosed()
             .clickLaundryButton()
             .submitSaveChangesModal();
         return this;
     }
 
     navigateToStorage(): NavigationSectionActions {
-        this.clickIncomeApproachButton()
-            .clickMiscellaneousIncome()
+        this.clickMiscellaneousMenuIfClosed()
             .clickStorageButton()
             .submitSaveChangesModal();
         return this;
     }
 
     navigateToOther(): NavigationSectionActions {
-        this.clickIncomeApproachButton()
-            .clickMiscellaneousIncome()
+        this.clickMiscellaneousMenuIfClosed()
             .clickOtherButton()
             .submitSaveChangesModal();
         return this;
     }
 
     navigateToParking(): NavigationSectionActions {
-        this.clickIncomeApproachButton()
-            .clickMiscellaneousIncome()
+        this.clickMiscellaneousMenuIfClosed()
             .clickParkingButton()
             .submitSaveChangesModal();
         return this;
@@ -653,7 +691,8 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
     navigateToExpenseForecast(): NavigationSectionActions {
         this.clickIncomeApproachButton()
             .clickExpenseForecastButton()
-            .submitSaveChangesModal();
+            .submitSaveChangesModal()
+            .waitForUrl(routesUtils.expenseForecast);
         return this;
     }
 
@@ -720,7 +759,16 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         this.clickIncomeApproachButton();
         this.clickCommercialMenuIfClosed();
         this.clickCommercialStabRentRollButton()
-            .submitSaveChangesModal();
+            .submitSaveChangesModal()
+            .waitForUrl(routesUtils.commercialStabilizedRentRoll);
+        
+        /*
+         * since we're working in same forms of final form component
+         * we need to wait until this specific form will be rendered,
+         * so we'll be sure that we're not at the old form
+         * useful for such tests where we switching between Commercial -> InPlaceRentRoll and Commercial -> StabRentRoll
+         */
+        stabilizedRentRollPage.commercialStabRentRollForm.should("be.visible");
         return this;
     }
 
@@ -769,6 +817,16 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         navigationSectionPage.residentialIncomeArrow.then(el => {
             if (!el.hasClass("expanded")) {
                 this.clickResidentialIncomeArrow();
+            }
+        });
+
+        return this;
+    }
+
+    private clickMiscellaneousMenuIfClosed(): NavigationSectionActions {
+        navigationSectionPage.miscellaneousIncome.then(el => {
+            if (!el.hasClass("expanded")) {
+                this.clickMiscellaneousIncome();
             }
         });
 

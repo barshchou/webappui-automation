@@ -1,4 +1,4 @@
-import { numberWithCommas } from "../../../../../../utils/numbers.utils";
+import { numberWithCommas } from "../../../../../../utils/numbers.utils"; 
 import testData from 
     "../../../../../fixtures/not_full_reports/income/commercial/in_place_rent_roll/QA-4484_86_88-90.fixture";
 import { Income, Property, ReviewExport } from "../../../../../actions";

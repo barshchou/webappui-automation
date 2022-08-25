@@ -57,7 +57,7 @@ class KeyInfoActions extends BaseActionsExt<typeof keyInfoPage> {
     }
 
     checkAllInterestAppraisedByValues(interestAppraisedData: Readonly<{asIsMarket: string, 
-    asComplete?: string, asStabilized?: string}>): KeyInfoActions {
+        asComplete?: string, asStabilized?: string}>): KeyInfoActions {
         this.checkAsIsMarketInterestByValue(interestAppraisedData.asIsMarket);
 
         if (interestAppraisedData.asStabilized != undefined ) { 

@@ -22,6 +22,10 @@ class CommercialRentRollPage extends CommercialRentRollSharedComponentPage {
 
     getLeaseStatusToChooseByValue(status: string) { return cy.xpath(`//li[.='${status}']`); }
 
+    get commercialInPlaceRentRollForm() {
+        return cy.get('[id="incomeApproach.commercialIncome.commercialRentRoll-final-form"]');
+    }
+
 }
 
 export default new CommercialRentRollPage();

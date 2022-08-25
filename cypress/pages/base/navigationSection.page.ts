@@ -125,6 +125,10 @@ class NavigationSection extends BasePage {
 
     get contentManagementSystemButton() { return cy.get(`[data-qa="linkToCms"] div`); }
 
+    get highestAndBestUseButton() { return cy.get("#highest-and-best-use"); }
+
+    get zoningButton() { return cy.get("#zoning"); }
+    
     get cmsGlobalIcon() { return cy.get('[aria-label="Global"]'); }
 
     get mapMakerButton() { return cy.get(`[data-qa="openMapMakerBtn"]`); }
