@@ -1,17 +1,16 @@
 import { Sales } from "../../../../actions";
-import { salesInterceptions } from "../../../../actions/base/baseTest.actions";
+import { navigateToCompplex } from "../../../../actions/base/baseTest.actions";
 import { Alias } from "../../../../utils/alias.utils";
 import testData from "../../../../fixtures/comp_plex/sales/find_comps/QA-6476.fixture";
 
-describe(`[QA-6476]`, {
+describe(`[QA-6476] Filters functionality`, {
     tags: [ "@comp_plex_standalone" ] }, () => {
     beforeEach(() => {
-        salesInterceptions();
-        cy.visit("/index.html");
+        navigateToCompplex();
     });
 
     it(`[QA-6476] [Sales > Find Comps > Job Search > Filters] Check when filters are being interacted with, 
-    Report Search field becomes disabled`, () => {
+         Report Search field becomes disabled`, () => {
         cy.wait(`@${Alias.gql.SearchSalesTransactions}`);
         cy.stepInfo(`1. Go to Sales > Find Comps > Job Search`);
         Sales._FindComps.openJobSearchTab();
@@ -25,7 +24,7 @@ describe(`[QA-6476]`, {
             .Page.reportIdInput.should('be.disabled');
            
         cy.stepInfo(`3. Clear all the filters -> 
-        check Report Search field becomes enabled`);     
+                     check Report Search field becomes enabled`);     
         Sales._FindComps.JobSearch.clearAllFiltersViaReset()
             .Page.reportIdInput.should('be.enabled');
     });

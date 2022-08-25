@@ -1,13 +1,12 @@
 import { Sales } from "../../../../actions";
-import { salesInterceptions } from "../../../../actions/base/baseTest.actions";
+import { navigateToCompplex } from "../../../../actions/base/baseTest.actions";
 import { Alias } from "../../../../utils/alias.utils";
 import testData from "../../../../fixtures/comp_plex/sales/find_comps/QA-6357.fixture";
 
-describe(`[QA-6357]`, {
+describe(`[QA-6357] Checkbox 'Show only On-App Jobs' functionality`, {
     tags: [ "@comp_plex_standalone" ] }, () => {
     beforeEach(() => {
-        salesInterceptions();
-        cy.visit("/index.html");
+        navigateToCompplex();
     });
 
     it("[QA-6357] [Sales > Find Comps > Job Search > Filters] Check checkbox 'Show only On-App Jobs'", () => {
@@ -20,9 +19,9 @@ describe(`[QA-6357]`, {
         Sales._FindComps.JobSearch.Page.jobSearchFiltersForm.should("be.visible");
         
         cy.stepInfo(`3. Click checkbox “Show only On-App Jobs” + 
-        Check, on the map only on-App ID cards should show up`);                 
-        Sales._FindComps.JobSearch.jobSearchSetupFilter(testData.jobSearchFilter, false, false);
-        Sales._FindComps.JobSearch.focusOnJobIcon()
+                     Check, on the map only on-App ID cards should show up`);                 
+        Sales._FindComps.JobSearch.jobSearchSetupFilter(testData.jobSearchFilter)
+            .focusOnJobIcon()
             .verifyJobCardDataAndFilters(testData.jobSearchFilter);
     });
 });
