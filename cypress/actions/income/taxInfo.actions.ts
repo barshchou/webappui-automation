@@ -515,7 +515,7 @@ class TaxInfoActions extends BaseActionsExt<typeof taxInfoPage> {
 
     verifyTaxLiabilityOnProjectedTab(squareFootAnalysisArea: number, 
         sectionName: BoweryReports.ProjectedTaxesSectionsValues): TaxInfoActions {
-        taxInfoPage.taxLiabilityTotal.invoke('text').then(taxTotal => {
+        taxInfoPage.taxLiabilityTotal(sectionName).invoke('text').then(taxTotal => {
             let taxTotalPerSfAdjusted = getNumberFromDollarNumberWithCommas(taxTotal) / squareFootAnalysisArea;
             taxInfoPage.projectedSectionsTaxLiabilityTotalPerSf(sectionName)
                 .should('have.text', `$${numberWithCommas(taxTotalPerSfAdjusted.toFixed(2))}`);
@@ -564,6 +564,28 @@ class TaxInfoActions extends BaseActionsExt<typeof taxInfoPage> {
             .clear()
             .realType(`${value}{enter}`);
         taxInfoPage.taxLiabilityRatioInput.should("have.text", `${value}%`);
+        return this;
+    }
+
+    enterEqualizationValueOnProjectedTab(value: number): TaxInfoActions {
+        taxInfoPage.equalizationValueInput
+            .realClick().realClick()
+            .scrollIntoView()
+            .focus().type("123456")
+            .clear()
+            .realType(`${value}{enter}`);
+        taxInfoPage.equalizationValueInput.should("have.text", `$${numberWithCommas(value)}`);
+        return this;
+    }
+
+    enterEqualizationRatiOnProjectedTab(value: number): TaxInfoActions {
+        taxInfoPage.equalizationRatioInput
+            .realClick().realClick()
+            .scrollIntoView()
+            .focus().type("123456")
+            .clear()
+            .realType(`${value}{enter}`);
+        taxInfoPage.equalizationRatioInput.should("have.text", `${value.toFixed(2)}%`);
         return this;
     }
 }

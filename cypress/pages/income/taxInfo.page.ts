@@ -160,8 +160,8 @@ class TaxInfoPage extends BasePage {
         return cy.xpath(`//*[@row-id='taxableAssessedValueId']/div[@col-id='value']`);
     }
 
-    get taxLiabilityTotal() {
-        return cy.xpath(`//*[@row-id='taxLiabilityTotal']/div[@col-id='value']`);
+    taxLiabilityTotal(sectionName: BoweryReports.ProjectedTaxesSectionsValues) {
+        return cy.xpath(`//div[h6[.='${sectionName}']]//div[@row-id='taxLiabilityTotal']/div[@col-id='value']`);
     }
 
     projectedSectionsTaxLiabilityTotalPerSf(sectionName: BoweryReports.ProjectedTaxesSectionsValues) {
@@ -182,6 +182,14 @@ class TaxInfoPage extends BasePage {
 
     get taxLiabilityRatioInput() {
         return cy.xpath(`//*[@row-id='liabilityRatio']/div[@col-id='value']`);
+    }
+
+    get equalizationValueInput() {
+        return cy.xpath(`//*[@row-id='marketValue']/div[@col-id='value']`);
+    }
+
+    get equalizationRatioInput() {
+        return cy.xpath(`//*[@row-id='equalizationRatio']/div[@col-id='value']`);
     }
 }
 
