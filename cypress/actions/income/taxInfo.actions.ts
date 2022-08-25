@@ -502,7 +502,7 @@ class TaxInfoActions extends BaseActionsExt<typeof taxInfoPage> {
         return this;
     }
 
-    enterTaxAssessedValueProvided(value: number): TaxInfoActions {
+    enterTaxAssessedValueProvidedProjectedTab(value: number): TaxInfoActions {
         taxInfoPage.taxableAssessedValueProvidedInput
             .realClick().realClick()
             .scrollIntoView()
@@ -513,7 +513,7 @@ class TaxInfoActions extends BaseActionsExt<typeof taxInfoPage> {
         return this;
     }
 
-    verifyTaxLiabilityProjectedTab(squareFootAnalysisArea: number, 
+    verifyTaxLiabilityOnProjectedTab(squareFootAnalysisArea: number, 
         sectionName: BoweryReports.ProjectedTaxesSectionsValues): TaxInfoActions {
         taxInfoPage.taxLiabilityTotal.invoke('text').then(taxTotal => {
             let taxTotalPerSfAdjusted = getNumberFromDollarNumberWithCommas(taxTotal) / squareFootAnalysisArea;
@@ -523,7 +523,7 @@ class TaxInfoActions extends BaseActionsExt<typeof taxInfoPage> {
         return this;
     }
 
-    enterNetRenovation(value: number): TaxInfoActions {
+    enterNetRenovationOnProjectedTab(value: number): TaxInfoActions {
         taxInfoPage.netRenovationInput
             .realClick().realClick()
             .scrollIntoView()
@@ -534,7 +534,7 @@ class TaxInfoActions extends BaseActionsExt<typeof taxInfoPage> {
         return this;
     }
 
-    enterAssessmentRation(value: number): TaxInfoActions {
+    enterAssessmentRationOnProjectedTab(value: number): TaxInfoActions {
         taxInfoPage.assessmentRatioInput
             .realClick().realClick()
             .scrollIntoView()
@@ -542,6 +542,28 @@ class TaxInfoActions extends BaseActionsExt<typeof taxInfoPage> {
             .clear()
             .realType(`${value}{enter}`);
         taxInfoPage.assessmentRatioInput.should("have.text", `${value.toFixed(2)}%`);
+        return this;
+    }
+
+    enterIncomeOnProjectedTab(value: number): TaxInfoActions {
+        taxInfoPage.incomeInput
+            .realClick().realClick()
+            .scrollIntoView()
+            .focus().type("123456")
+            .clear()
+            .realType(`${value}{enter}`);
+        taxInfoPage.incomeInput.should("have.text", `$${numberWithCommas(value)}`);
+        return this;
+    }
+
+    enterTaxLiabilityRatiOnProjectedTab(value: number): TaxInfoActions {
+        taxInfoPage.taxLiabilityRatioInput
+            .realClick().realClick()
+            .scrollIntoView()
+            .focus().type("123456")
+            .clear()
+            .realType(`${value}{enter}`);
+        taxInfoPage.taxLiabilityRatioInput.should("have.text", `${value}%`);
         return this;
     }
 }

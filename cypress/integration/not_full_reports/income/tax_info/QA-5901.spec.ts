@@ -36,11 +36,11 @@ for Square Foot Analysis`, { tags: [ "@income", "@tax_info" ] }, () => {
         Income._TaxInfo.checkProjectedSectionCheckbox(testData.opinionProvidedSectionCheckbox);
 
         cy.stepInfo(`7. Fill in Taxable Assessed Value (Provided) field with valid numeric value`);
-        Income._TaxInfo.enterTaxAssessedValueProvided(testData.assessedValueProvided);
+        Income._TaxInfo.enterTaxAssessedValueProvidedProjectedTab(testData.assessedValueProvided);
 
         cy.stepInfo(`8. Verify Tax Liability (PSF) in Opinion Provided grid is calculated with formula = 
                     Tax Liability (Total) / selected Basis for Square Foot Analysis`);
-        Income._TaxInfo.verifyTaxLiabilityProjectedTab(testData.squareFootAnalysisArea, testData.opinionProvided);
+        Income._TaxInfo.verifyTaxLiabilityOnProjectedTab(testData.squareFootAnalysisArea, testData.opinionProvided);
     });
 
     after(() => {

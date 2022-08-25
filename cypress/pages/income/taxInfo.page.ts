@@ -175,6 +175,14 @@ class TaxInfoPage extends BasePage {
     get assessmentRatioInput() {
         return cy.xpath(`//*[@row-id='assessmentRatio']/div[@col-id='value']`);
     }
+
+    get incomeInput() {
+        return cy.xpath(`//*[@row-id='income']/div[@col-id='value']`);
+    } 
+
+    get taxLiabilityRatioInput() {
+        return cy.xpath(`//*[@row-id='liabilityRatio']/div[@col-id='value']`);
+    }
 }
 
 export default new TaxInfoPage();
