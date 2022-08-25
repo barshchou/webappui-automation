@@ -31,7 +31,6 @@ describe(`Generated Commentary is dynamically updated with relevant information
             cy.stepInfo("5. Verify generated commentary");
             Final._SourceInformation.Page.formCommentTextBox(testData.textBoxName).invoke("text").then(text => {
                 const normalText = normalizeText(text);
-                cy.log(normalText);
                 expect(normalText).to.eq(report.comment);
             });
     
