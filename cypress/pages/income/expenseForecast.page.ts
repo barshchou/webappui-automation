@@ -118,16 +118,6 @@ class ExpenseForecastPage extends BasePage {
 
     get appraisersTotalForecast() { return cy.get("[data-qa=appraisers-total-conclusion]"); }
 
-    get toeCommentary() { return cy.xpath("//*[.='TOTAL OPERATING EXPENSES']//following::div[@data-slate-editor]"); }
-
-    get toeCommentaryEditButton() { return cy.xpath("//*[.='TOTAL OPERATING EXPENSES']//following::button[.='Edit']"); }
-
-    get toeCommentarySaveButton() { 
-        return cy.xpath("//*[.='TOTAL OPERATING EXPENSES']//following::button[.='Save'][1]"); 
-    }
-
-    get toeCommentaryModified() { return cy.xpath("//*[.='TOTAL OPERATING EXPENSES']//following::*[.='Modified']"); }
-
     get toeAppraisersForecastValueLine() {
         return cy.xpath("//*[.='TOTAL OPERATING EXPENSES']" + 
         "//following::div[@data-qa='appraisers-forecast-values-line']");

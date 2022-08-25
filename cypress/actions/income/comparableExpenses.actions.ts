@@ -42,7 +42,7 @@ class ComparableExpensesActions extends BaseActionsExt<typeof compExpensesPage> 
 
     enterSquareFeetByColumnIndex(value: number, index = 0): ComparableExpensesActions {
         compExpensesPage.getUnifiedEditableAndTotalCells("squareFeet").eq(index)
-            .realClick().realClick().scrollIntoView().focus()
+            .dblclick().scrollIntoView().focus()
             .type("something").clear().realType(`${value}{enter}`);
         compExpensesPage.getUnifiedEditableAndTotalCells("squareFeet").eq(index)
             .children(compExpensesPage.elementToCheckCellTextSelector)

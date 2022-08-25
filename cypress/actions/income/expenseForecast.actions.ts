@@ -287,26 +287,10 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
         return this;
     }
 
-    verifyTOECommentary(textToBe: string): ExpenseForecastActions {
-        expenseForecastPage.toeCommentary.should("contain.text", textToBe);
-        return this;
-    }
-
     verifyForecastCommentary(textToBe: string, forecastItem: BoweryReports.ForecastItem, 
         index = 1): ExpenseForecastActions {
         expenseForecastPage.getExpenseCommentary(this.getItemNameForAverage(forecastItem.name), index)
             .should("contain.text", textToBe);
-        return this;
-    }
-
-    editTOECommentary(newText: string, isWithClear = false): ExpenseForecastActions {
-        expenseForecastPage.toeCommentaryEditButton.click();
-        if (isWithClear) {
-            expenseForecastPage.toeCommentary.clear();
-        }
-        expenseForecastPage.toeCommentary.type(newText);
-        expenseForecastPage.toeCommentarySaveButton.click();
-        expenseForecastPage.toeCommentaryModified.should("exist");
         return this;
     }
 
