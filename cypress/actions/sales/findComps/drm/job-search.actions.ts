@@ -197,12 +197,25 @@ class JobSearchActions {
         return this;
     }
 
+
+
+
     /**
      * Focuses on first available job icon on map and opens its job-card
      */
     focusOnJobIcon(iconIndex = 0) {
         this.Page.selectCompsIconOnMap.eq(iconIndex).dblclick({ force:true });
-        cy.wait(`@${Alias.gql.SearchJobs}`, { timeout: 120000 }).as(Alias.jobSearch.jobCardComp);
+        //    cy.wait(`@${Alias.gql.SearchJobs}`, { timeout: 120000 }).as(Alias.jobSearch.jobCardComp);
+
+
+        /*
+         * cy.get(`@${Alias.jobSearch.jobCardComp}`).then(val => {
+         *     cy.log('1!!!!');
+         *     cy.log(val);
+         * });
+         */
+            
+
         /**
          * We need cy.wait here, because after gql response spinner sometimes may appear later
          */
@@ -214,12 +227,22 @@ class JobSearchActions {
          */
         cy.wait(1000);
         this.Page.selectCompsIconOnMap.eq(iconIndex).click();
+        cy.wait(3000);
         this.Page.jobCard.should("be.visible");
         findCompsPage.loadingModalSpinner.should('not.exist');
+        cy.get(`@${Alias.gql.SearchJobs}`, { timeout: 120000 }).as(Alias.jobSearch.jobCardComp);
+        cy.get(`@${Alias.jobSearch.jobCardComp}`).then(val => {
+            cy.log('2!!!!');
+            cy.log(val);
+        });
         // ernst: after job-card became visible - we need retrieve all necessary comp data for further manipulations
         this.retrieveJobCardData(Alias.jobSearch.jobCardComp, Alias.jobSearch.selectedCompData);
         return this;
     }
+
+
+
+
 
     /**
      * Parse data from intercepted request `searchJobs` when we zoom in to JobCard
