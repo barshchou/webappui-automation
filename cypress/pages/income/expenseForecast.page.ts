@@ -161,7 +161,7 @@ class ExpenseForecastPage extends BasePage {
         return this.forecastItemCardFull(forecastItem, custom).find('[data-testid="EditIcon"]');
     }
 
-    get newCategoryExpenseName() { return cy.get('[data-qa="expenseName-form-control"] input'); }
+    get newCategoryExpenseName() { return cy.get('[name=expenseName]'); }
 
     get electricityCardText() { 
         return cy.xpath("//span[@data-qa='electricity.includeInProForma-checked']/following-sibling::span"); 

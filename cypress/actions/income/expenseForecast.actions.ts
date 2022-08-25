@@ -326,7 +326,7 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
 
     addCustomExpenseCategory(categoryName: string): ExpenseForecastActions {
         expenseForecastPage.createNewCategoryButton.click();
-        expenseForecastPage.newCategoryExpenseName.clear().type(categoryName);
+        expenseForecastPage.newCategoryExpenseName.clear().type(`${categoryName}{downArrow}{enter}`);
         this.Page.formSaveBtn(1).click();
         this.verifyProgressBarNotExist();
         return this;
