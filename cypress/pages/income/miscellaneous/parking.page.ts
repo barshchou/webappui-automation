@@ -12,6 +12,8 @@ class ParkingPage extends BasePage {
     parkingMonthlyRent(index = 0) { return cy.get(`[name='spaces[${index}].monthlyRent']`); }
 
     get parkingVCLossPercentage() { return cy.get("[name='parkingVCLossPercentage']"); }
+
+    get parkingTable() { return cy.get("[data-qa='parking-spaces-table-body']"); }
 }
 
 export default new ParkingPage();

@@ -22,13 +22,21 @@ class AmenitiesPage extends BasePage {
 
     getElementCheckbox(name: BoweryReports.AmenitiesCheckboxes) { return cy.get(`[data-qa^='${name}'] input`); }
 
-    get laundryRoomUpload() { return cy.get("[data-qa='laundryRoom-image-list'] input"); } 
+    getUploadImageByName(name: string) { return cy.get(`[data-qa='${name}-image-list'] input`); } 
 
-    getLaundryUploadedImageBtn(name = "rotate", index = 0) { return cy.get(`[data-qa='${index}-image-${name}-btn']`); }
+    getRotateUploadedImageBtnByName(name: string, index = 0) {
+        return cy.get(`[data-qa="${name}-image-list"] [data-qa='${index}-image-rotate-btn']`); 
+    }
 
-    getLaundryUploadedImage(index = 0) { return cy.get(`[data-qa='${index}-image'] div div`).eq(0); }
+    getRemoveUploadedImageBtnByName(name: string, index = 0) {
+        return cy.get(`[data-qa="${name}-image-list"] [data-qa='${index}-image-remove-btn']`); 
+    }
 
-    get storageInput() { return cy.get("[name$='storageUnitCount']"); }
+    getUploadedImageByName(name: string, index = 0) { 
+        return cy.get(`[data-qa="${name}-image-list"] [data-qa='${index}-image'] div div`).eq(0); 
+    }
+
+    getAmenitiesInput(name: string) { return cy.get(`[name$='${name}']`); }
 }
 
 export default new AmenitiesPage();

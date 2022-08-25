@@ -71,37 +71,36 @@ class AmenitiesActions extends BaseActionsExt<typeof amenitiesPage> {
     }
 
     checkCheckboxByName(name: BoweryReports.AmenitiesCheckboxes, check = true): AmenitiesActions {
-        amenitiesPage.getElementCheckbox(name).invoke('attr', 'value').then(status => {
-            status != `${check}` 
-                ? amenitiesPage.getElementCheckbox(name).click().should('have.value', `${check}`) 
-                : null;
-        });
+        const action = check ? amenitiesPage.getElementCheckbox(name).check() 
+            : amenitiesPage.getElementCheckbox(name).uncheck();
+        action.should("have.value", `${check}`);
+        action;
         return this;
     }
 
-    uploadLaundryRoomImage(filePath: string): AmenitiesActions {
-        amenitiesPage.laundryRoomUpload.attachFile(filePath);
+    uploadImageByName(name: string, filePath: string): AmenitiesActions {
+        amenitiesPage.getUploadImageByName(name).attachFile(filePath);
         return this;
     }
 
-    rotateLaundryRoomImage(index = 0): AmenitiesActions {
-        amenitiesPage.getLaundryUploadedImageBtn("rotate", index).click({ force: true });
-        amenitiesPage.getLaundryUploadedImage(index).invoke("css", "background-image").then(text => {
+    rotateImageByName(name: string, index = 0): AmenitiesActions {
+        amenitiesPage.getRotateUploadedImageBtnByName(name, index).click({ force: true });
+        amenitiesPage.getUploadedImageByName(name, index).invoke("css", "background-image").then(text => {
             expect(text).to.include("vikas-real-estate/image/upload/w_300,a_90");
         });
         return this;
     }
 
-    deleteLaundryRoomImage(index = 0): AmenitiesActions {
-        amenitiesPage.getLaundryUploadedImageBtn("remove", index).click({ force: true }).should("not.exist");
+    removeImageByName(name: string, index = 0): AmenitiesActions {
+        amenitiesPage.getRemoveUploadedImageBtnByName(name, index).click({ force: true }).should("not.exist");
         return this;
     }
 
-    enterStoreInput(value: number | string): AmenitiesActions {
+    enterAmenitiesInput(name: string, maxValue: number, value: number | string): AmenitiesActions {
         const verifyParam = /^\d+$/.test(`${value}`) ? "have.value" : "not.have.value";
-        amenitiesPage.storageInput.clear().type(`${value}{enter}`).should(verifyParam, value);
-        if (value > 1000) {
-            cy.contains("Max value is 1000").should("exist");
+        amenitiesPage.getAmenitiesInput(name).clear().type(`${value}`).blur().should(verifyParam, value);
+        if (value > maxValue) {
+            cy.contains(`Max value is ${maxValue}`).should("exist");
         }
         return this;
     }
