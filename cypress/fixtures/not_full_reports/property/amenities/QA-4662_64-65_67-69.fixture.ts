@@ -3,9 +3,15 @@ import ReportDataCreator from "../../../data_creator/reportData.creator";
 
 const allCheckboxes = Object.values(Enums.AMENITIES_CHECKBOXES);
 
-const buildingCheckboxes = allCheckboxes.filter(unit => unit.startsWith("building"));
+const withoutAdditionalCheckboxes = allCheckboxes.filter(unit => !unit.startsWith("building.outdoorSpace"));
+
+const buildingCheckboxes = allCheckboxes.filter(unit => {
+    unit.startsWith("building") && !unit.includes("building.outdoorSpace");
+});
 
 const unitCheckboxes = allCheckboxes.filter(unit => unit.startsWith("unit"));
+
+const sharedOutdoorSpaceCheckboxes  = allCheckboxes.filter(unit => unit.startsWith("building.outdoorSpace"));
 
 const generatedCommentName = {
     storageIncomeDiscussion: "storageIncomeDiscussion",
@@ -14,7 +20,7 @@ const generatedCommentName = {
 
 export default {
     reportCreationData: ReportDataCreator.getReportData("4626-64-65_67-68"),
-    allCheckboxes,
+    withoutAdditionalCheckboxes,
     buildingCheckboxes,
     unitCheckboxes,
     imagePath: "not_full_reports/Laundry_Room.png",
@@ -25,5 +31,8 @@ export default {
     testValue: "some value",
     generatedCommentName,
     laundryRoom: "laundryRoom",
-    parking: "parking"
+    parking: "parking",
+    outdoorSpace: "outdoorSpace",
+    other: "building.otherOutdoorSpace",
+    sharedOutdoorSpaceCheckboxes
 };

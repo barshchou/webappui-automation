@@ -2,7 +2,7 @@ import { Income, Property } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { createReport } from "../../../../actions/base/baseTest.actions";
 import Enums from "../../../../enums/enums";
-import testData from '../../../../fixtures/not_full_reports/property/amenities/QA-4662_64-65_67-68.fixture';
+import testData from '../../../../fixtures/not_full_reports/property/amenities/QA-4662_64-65_67-69.fixture';
 
 describe("Verify the display of the Amenities page", { tags:[ "@property", "@amenities" ] }, () => {
     before("Login, create report", () => {
@@ -19,7 +19,7 @@ describe("Verify the display of the Amenities page", { tags:[ "@property", "@ame
 
     it("[QA-4662-64]", () => {
         cy.stepInfo("2. Verify the following elements are displayed on the page by default");
-        testData.allCheckboxes.forEach(name => {
+        testData.withoutAdditionalCheckboxes.forEach(name => {
             Property._Amenities.Page.getElementCheckbox(name).should("exist");
         });
 
@@ -101,5 +101,29 @@ describe("Verify the display of the Amenities page", { tags:[ "@property", "@ame
         Income._MiscellaneousManager.Parking.Page.generatedCommentaryText(
             testData.generatedCommentName.parkingIncomeDiscussion)
             .should("include.text", `${testData.parkingValue} parking spaces`);
+    });
+
+    it("[QA-4669]", () => {
+        cy.stepInfo("2. Check Shared Outdoor Space checkbox");
+        Property._Amenities.checkCheckboxByName(Enums.AMENITIES_CHECKBOXES.hasOutdoorSpace);
+
+        cy.stepInfo("3. Upload photo");
+        Property._Amenities.uploadImageByName(testData.outdoorSpace, testData.imagePath);
+
+        cy.stepInfo("4. Verify functionality of the Rotate button on the uploaded photo");
+        Property._Amenities.rotateImageByName(testData.outdoorSpace);
+
+        cy.stepInfo("5. Verify functionality of the Delete button on the uploaded photo");
+        Property._Amenities.removeImageByName(testData.outdoorSpace);
+
+        cy.stepInfo(`6. Check the Tennis Courts, Shared Garden, 
+                    Shared Roof Deck, Shared Terrace, Shared Backyard checkboxes`);
+        testData.sharedOutdoorSpaceCheckboxes.forEach(name => {
+            Property._Amenities.checkCheckboxByName(name);
+        });
+
+        cy.stepInfo("7. Verify not valid of Shared Outdoor Space field");
+        Property._Amenities.Page.getAmenitiesInput(testData.other).clear().blur();
+        cy.contains("Required").should("exist");
     });
 });
