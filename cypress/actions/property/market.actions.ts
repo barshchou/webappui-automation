@@ -172,8 +172,6 @@ class MarketActions extends BaseActionsExt<typeof marketPage> {
     checkUncheckMarketAnalysisUseCheckbox(use: BoweryReports.MarketAnalysisUses, isCheck = true): MarketActions {
         marketPage.getMarketAnalysisUseCheckboxArea(use).invoke('attr', 'data-qa').then(dataQA => {
             let isChecked = dataQA.includes("checked") ? true : false;
-            cy.log(dataQA);
-            cy.log(`${isCheck}, ${isChecked}`);
             if (isCheck != isChecked) {
                 this.verifyMarketAnalysisUseCheckboxState(use, !isCheck);
                 marketPage.getMarketAnalysisUseCheckbox(use).click();
@@ -181,7 +179,6 @@ class MarketActions extends BaseActionsExt<typeof marketPage> {
             }
         });
         return this;
-        
     }
 
     verifyAreaEconomicAnalysisHasFile(textToContain = this.finalDocumentNamePart): MarketActions {
@@ -296,6 +293,7 @@ class MarketActions extends BaseActionsExt<typeof marketPage> {
             `test_files/${fileName}`,
             { subjectType: 'drag-n-drop' }
         );
+        
         marketPage.getUploadFileButton().click();
         marketPage.insertFileButton.click();
         return this;
