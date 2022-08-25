@@ -1,6 +1,5 @@
 import { Sales } from "../../../../actions";
 import { navigateToCompplex } from "../../../../actions/base/baseTest.actions";
-import { Alias } from "../../../../utils/alias.utils";
 import testData from "../../../../fixtures/comp_plex/sales/find_comps/QA-6476.fixture";
 
 describe(`[QA-6476] Filters functionality`, {

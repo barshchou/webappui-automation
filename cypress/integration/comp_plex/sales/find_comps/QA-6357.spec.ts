@@ -1,6 +1,5 @@
 import { Sales } from "../../../../actions";
 import { navigateToCompplex } from "../../../../actions/base/baseTest.actions";
-import { Alias } from "../../../../utils/alias.utils";
 import testData from "../../../../fixtures/comp_plex/sales/find_comps/QA-6357.fixture";
 
 describe(`[QA-6357] Checkbox 'Show only On-App Jobs' functionality`, {
