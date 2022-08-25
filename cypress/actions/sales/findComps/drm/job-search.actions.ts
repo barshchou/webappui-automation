@@ -3,7 +3,7 @@ import { findCompsPage } from "../../../../pages/sales/findComps.page";
 import { CompPlex } from "../../../../types/compplex.type";
 import { Alias } from "../../../../utils/alias.utils";
 
-const { numberFilters, salePeriod, propertyType } = enums.COMPPLEX_ENUM._jobSearch;
+const { numberFilters, salePeriod, propertyType, minMaxInputs } = enums.COMPPLEX_ENUM._jobSearch;
 
 
 class JobSearchActions {
@@ -30,52 +30,37 @@ class JobSearchActions {
 
     checkAllFiltersAreEnabled() {
         this.Page.jobSearchFilterInputCompletedIn.should("be.enabled");
-        this.Page.jobSearchFilterInputCapRateMin.should("be.enabled");
-        this.Page.jobSearchFilterInputCapRateMax.should("be.enabled");
-        this.Page.jobSearchFilterInputCommercialUnitsMin.should("be.enabled");
-        this.Page.jobSearchFilterInputCommercialUnitsMax.should("be.enabled");
-        this.Page.jobSearchFilterInputMinPricePerSF.should("be.enabled");
-        this.Page.jobSearchFilterInputMaxPricePerSF.should("be.enabled");
-        this.Page.jobSearchFilterInputPricePerUnitMin.should("be.enabled");
-        this.Page.jobSearchFilterInputPricePerUnitMax.should("be.enabled");
         this.Page.jobSearchFilterInputPropertyType.should("be.enabled");
-        this.Page.jobSearchFilterInputResidentialUnitsMin.should("be.enabled");
-        this.Page.jobSearchFilterInputResidentialUnitsMax.should("be.enabled");
         this.Page.jobSearchOnAppJobCheckbox.should("be.enabled");
+        Object.values(numberFilters).forEach(element => {
+            for (const [ key ] of Object.entries(minMaxInputs)) {
+                this.Page.jobSearchGetFilterInput(key, element).should("be.enabled");
+            }
+        });
         return this;
     }
 
     checkAllFiltersAreDisabled() {
         this.Page.jobSearchFilterInputCompletedIn.should("be.disabled");
-        this.Page.jobSearchFilterInputCapRateMin.should("be.disabled");
-        this.Page.jobSearchFilterInputCapRateMax.should("be.disabled");
-        this.Page.jobSearchFilterInputCommercialUnitsMin.should("be.disabled");
-        this.Page.jobSearchFilterInputCommercialUnitsMax.should("be.disabled");
-        this.Page.jobSearchFilterInputMinPricePerSF.should("be.disabled");
-        this.Page.jobSearchFilterInputMaxPricePerSF.should("be.disabled");
-        this.Page.jobSearchFilterInputPricePerUnitMin.should("be.disabled");
-        this.Page.jobSearchFilterInputPricePerUnitMax.should("be.disabled");
         this.Page.jobSearchFilterInputPropertyType.should("be.disabled");
-        this.Page.jobSearchFilterInputResidentialUnitsMin.should("be.disabled");
-        this.Page.jobSearchFilterInputResidentialUnitsMax.should("be.disabled");
         this.Page.jobSearchOnAppJobCheckbox.should("be.disabled");
+        Object.values(numberFilters).forEach(element => {
+            for (const [ key ] of Object.entries(minMaxInputs)) {
+                this.Page.jobSearchGetFilterInput(key, element).should("be.disabled");
+            }
+        });
         return this;
     }
 
     checkAllFiltersAreEmpty() {
-        this.Page.jobSearchFilterInputCompletedIn.should("not.have.value");
-        this.Page.jobSearchFilterInputCapRateMin.should("be.empty");
-        this.Page.jobSearchFilterInputCapRateMax.should("be.empty");
-        this.Page.jobSearchFilterInputCommercialUnitsMin.should("be.empty");
-        this.Page.jobSearchFilterInputCommercialUnitsMax.should("be.empty");
-        this.Page.jobSearchFilterInputMinPricePerSF.should("be.empty");
-        this.Page.jobSearchFilterInputMaxPricePerSF.should("be.empty");
-        this.Page.jobSearchFilterInputPricePerUnitMin.should("be.empty");
-        this.Page.jobSearchFilterInputPricePerUnitMax.should("be.empty");
-        this.Page.jobSearchFilterInputPropertyType.should("not.have.value");
-        this.Page.jobSearchFilterInputResidentialUnitsMin.should("be.empty");
-        this.Page.jobSearchFilterInputResidentialUnitsMax.should("be.empty");
+        this.Page.jobSearchFilterInputCompletedIn.should("have.value", "");
+        this.Page.jobSearchFilterInputPropertyType.should("have.value", "");
         this.Page.jobSearchOnAppJobCheckbox.should("not.be.checked");
+        Object.values(numberFilters).forEach(element => {
+            for (const [ key ] of Object.entries(minMaxInputs)) {
+                this.Page.jobSearchGetFilterInput(key, element).should("be.empty");
+            }
+        });
         return this;
     }
 
@@ -101,7 +86,7 @@ class JobSearchActions {
                          * composing selector from key (min or max) and filterName,
                          * accessing to data (`minmax["min"]`) and casting `number` to `string`
                          */
-                        this.Page.jobSearchGetFilterInput(key, filterName).type(minmax[key].toString());
+                        this.Page.jobSearchGetFilter(key, filterName).type(minmax[key].toString());
                         // waiting map to be updated since every enter to filter triggers gql query
                         cy.wait(`@${Alias.gql.SearchJobs}`, { timeout: 120000 });
                     }   
@@ -178,9 +163,14 @@ class JobSearchActions {
      * @param type Type(s) of property in JobSearch (can select one or more)
      */
     jobSearchSetPropertyTypes(type: CompPlex.JobSearch.PropertyType) {
-        this.Page.jobSearchFilterPropertyType.click();
-        this.Page.filterPropertyTypeValue(propertyType[type]).type(`{esc}`, { force:true });
-        cy.wait(`@${Alias.gql.SearchJobs}`, { timeout: 120000 });
+        if (!Cypress._.isNil(type)) {
+            cy.log(`Property Type for JobFilter: ${propertyType[type]}`);
+            this.Page.jobSearchFilterPropertyType.click();
+            this.Page.filterPropertyTypeValue(propertyType[type]).type(`{esc}`, { force:true });
+            cy.wait(`@${Alias.gql.SearchJobs}`, { timeout: 120000 });
+        } else {
+            cy.log("No Property Type was sent to filter");
+        }
         return this;
     }
 
@@ -188,11 +178,10 @@ class JobSearchActions {
      * Setup Job-Search filters based on sending filter setup
      * @param filter Filter data we usually setup in test fixture
      */
-    jobSearchSetupFilter(filter: CompPlex.JobSearch.JobFilter, setSalePeriod = true, setPropertyTypes= true, 
-        setOnAppJobs = true) {
-        if (setSalePeriod === true)  { this.jobSearchSetSalePeriod(filter.salePeriod); }
-        if (setPropertyTypes === true)  { this.jobSearchSetPropertyTypes(filter.propertyType); }
-        if (setOnAppJobs === true)  { this.jobSearchSetOnAppJobs(filter.isShowOnlyOnAppJobs); }
+    jobSearchSetupFilter(filter: CompPlex.JobSearch.JobFilter) {
+        this.jobSearchSetSalePeriod(filter.salePeriod)
+            .jobSearchSetPropertyTypes(filter.propertyType)
+            .jobSearchSetOnAppJobs(filter.isShowOnlyOnAppJobs); 
         // iterating over existing filters and setting the value
         Object.values(numberFilters).forEach(element => {
             this.jobSearchFilterSetMinMax(element, filter[element]);
@@ -314,7 +303,7 @@ class JobSearchActions {
         return this;
     }
 
-    //TODO upgrade this method, cos it cant add two imports because of scroll.
+    //If it needs, we can upgrade this method, cos it cant add two imports because of scroll.
     /**
      * Action enters report id into field 'Report ID' on 'JOB SEARCH' tab
      */
