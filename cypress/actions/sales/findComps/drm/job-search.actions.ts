@@ -205,17 +205,7 @@ class JobSearchActions {
      */
     focusOnJobIcon(iconIndex = 0) {
         this.Page.selectCompsIconOnMap.eq(iconIndex).dblclick({ force:true });
-        //    cy.wait(`@${Alias.gql.SearchJobs}`, { timeout: 120000 }).as(Alias.jobSearch.jobCardComp);
-
-
-        /*
-         * cy.get(`@${Alias.jobSearch.jobCardComp}`).then(val => {
-         *     cy.log('1!!!!');
-         *     cy.log(val);
-         * });
-         */
-            
-
+        cy.wait(`@${Alias.gql.SearchJobs}`, { timeout: 120000 });
         /**
          * We need cy.wait here, because after gql response spinner sometimes may appear later
          */
@@ -227,14 +217,14 @@ class JobSearchActions {
          */
         cy.wait(1000);
         this.Page.selectCompsIconOnMap.eq(iconIndex).click();
-        cy.wait(3000);
         this.Page.jobCard.should("be.visible");
+        /**
+         * We need cy.wait + loadingModalSpinner.should('not.exist') here, because after 
+         * selectCompsIconOnMap.eq(iconIndex).click() gql response may be executed, may be not.
+         */
+        cy.wait(1000);
         findCompsPage.loadingModalSpinner.should('not.exist');
-        cy.get(`@${Alias.gql.SearchJobs}`, { timeout: 120000 }).as(Alias.jobSearch.jobCardComp);
-        cy.get(`@${Alias.jobSearch.jobCardComp}`).then(val => {
-            cy.log('2!!!!');
-            cy.log(val);
-        });
+        cy.get(`@${Alias.gql.SearchJobs}`).as(Alias.jobSearch.jobCardComp);
         // ernst: after job-card became visible - we need retrieve all necessary comp data for further manipulations
         this.retrieveJobCardData(Alias.jobSearch.jobCardComp, Alias.jobSearch.selectedCompData);
         return this;
