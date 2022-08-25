@@ -8,9 +8,9 @@ class AmenitiesPage extends BasePage {
 
     get parkingErrorMessage() { return cy.contains("Max value is 2500"); }
 
-    get hasNoUnitAmenitiesCheckbox() { return cy.get("*[data-qa='hasNoUnitAmenities'] input"); }
+    get hasNoUnitAmenitiesCheckbox() { return cy.get("*[data-qa^='hasNoUnitAmenities'] input"); }
 
-    get hasNoBuildingAmenitiesCheckbox() { return cy.get("*[data-qa='hasNoAmenities'] input"); }
+    get hasNoBuildingAmenitiesCheckbox() { return cy.get("*[data-qa^='hasNoAmenities'] input"); }
 
     get laundryCheckbox() { return cy.get("[data-qa^='building.hasLaundryRoom'] input"); }
 
@@ -27,6 +27,8 @@ class AmenitiesPage extends BasePage {
     getLaundryUploadedImageBtn(name = "rotate", index = 0) { return cy.get(`[data-qa='${index}-image-${name}-btn']`); }
 
     getLaundryUploadedImage(index = 0) { return cy.get(`[data-qa='${index}-image'] div div`).eq(0); }
+
+    get storageInput() { return cy.get("[name$='storageUnitCount']"); }
 }
 
 export default new AmenitiesPage();

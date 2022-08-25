@@ -18,13 +18,21 @@ class AmenitiesActions extends BaseActionsExt<typeof amenitiesPage> {
         return this;
     }
 
-    checkHasNoUnitAmenities(): AmenitiesActions {
-        amenitiesPage.hasNoUnitAmenitiesCheckbox.check().should("have.value", "true");
+    checkHasNoUnitAmenities(check = true): AmenitiesActions {
+        amenitiesPage.hasNoUnitAmenitiesCheckbox.invoke('attr', 'value').then(status => {
+            status != `${check}` 
+                ? amenitiesPage.hasNoUnitAmenitiesCheckbox.click().should('have.value', `${check}`) 
+                : null;
+        });
         return this;
     }
 
-    checkHasNoBuildingAmenities(): AmenitiesActions {
-        amenitiesPage.hasNoBuildingAmenitiesCheckbox.check().should("have.value", "true");
+    checkHasNoBuildingAmenities(check= true): AmenitiesActions {
+        amenitiesPage.hasNoBuildingAmenitiesCheckbox.invoke('attr', 'value').then(status => {
+            status != `${check}` 
+                ? amenitiesPage.hasNoBuildingAmenitiesCheckbox.click().should('have.value', `${check}`) 
+                : null;
+        });
         return this;
     }
 
@@ -86,6 +94,15 @@ class AmenitiesActions extends BaseActionsExt<typeof amenitiesPage> {
 
     deleteLaundryRoomImage(index = 0): AmenitiesActions {
         amenitiesPage.getLaundryUploadedImageBtn("remove", index).click({ force: true }).should("not.exist");
+        return this;
+    }
+
+    enterStoreInput(value: number | string): AmenitiesActions {
+        const verifyParam = /^\d+$/.test(`${value}`) ? "have.value" : "not.have.value";
+        amenitiesPage.storageInput.clear().type(`${value}{enter}`).should(verifyParam, value);
+        if (value > 1000) {
+            cy.contains("Max value is 1000").should("exist");
+        }
         return this;
     }
 }
