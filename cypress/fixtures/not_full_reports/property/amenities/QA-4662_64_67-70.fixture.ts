@@ -26,7 +26,7 @@ const doormanRadios = [
 ];
 
 export default {
-    reportCreationData: ReportDataCreator.getReportData("4626-64-65_67-71_73_76_81-82"),
+    reportCreationData: ReportDataCreator.getReportData("4662_64_67-70"),
     withoutAdditionalCheckboxes,
     buildingCheckboxes,
     unitCheckboxes,
@@ -37,14 +37,8 @@ export default {
     parkingValue: 5,
     testValue: "some value",
     generatedCommentName,
-    laundryRoom: "laundryRoom",
-    parking: "parking",
-    outdoorSpace: "outdoorSpace",
-    bikeRoom: "bikeRoom",
-    gym: "gym",
-    pool: "pool",
-    recreationRoom: "recreationRoom",
-    commonLoungeSpace: "commonLoungeSpace",
+    parking: Enums.AMENITIES_UPLOADS.parking,
+    outdoorSpace: Enums.AMENITIES_UPLOADS.outdoorSpace,
     otherOutdoorSpace: "building.otherOutdoorSpace",
     otherDoorman: "building.otherDoorman",
     sharedOutdoorSpaceCheckboxes,

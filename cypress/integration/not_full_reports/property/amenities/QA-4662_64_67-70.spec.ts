@@ -2,7 +2,7 @@ import { Income, Property } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { createReport } from "../../../../actions/base/baseTest.actions";
 import Enums from "../../../../enums/enums";
-import testData from '../../../../fixtures/not_full_reports/property/amenities/QA-4662_64-65_67-71_73_76_81-82.fixture';
+import testData from '../../../../fixtures/not_full_reports/property/amenities/QA-4662_64_67-70.fixture';
 
 describe("Verify the display of the Amenities page", { tags:[ "@property", "@amenities" ] }, () => {
 
@@ -33,20 +33,6 @@ describe("Verify the display of the Amenities page", { tags:[ "@property", "@ame
             Property._Amenities.Page.getElementCheckbox(name).should("not.exist");
         });
         Property._Amenities.checkHasNoUnitAmenities(false);
-    });
-
-    it("[QA-4665]", () => {
-        cy.stepInfo("2. Check Laundry Room checkbox");
-        Property._Amenities.checkCheckboxByName(Enums.AMENITIES_CHECKBOXES.hasLaundryRoom);
-
-        cy.stepInfo("3. Upload photo");
-        Property._Amenities.uploadImageByName(testData.laundryRoom, testData.imagePath);
-
-        cy.stepInfo("4. Verify functionality of the Rotate button on the uploaded photo");
-        Property._Amenities.rotateImageByName(testData.laundryRoom);
-
-        cy.stepInfo("5. Verify functionality of the Delete button on the uploaded photo");
-        Property._Amenities.removeImageByName(testData.laundryRoom);
     });
 
     it("[QA-4667]", () => {
@@ -137,75 +123,5 @@ describe("Verify the display of the Amenities page", { tags:[ "@property", "@ame
         cy.contains("Required").should("exist");
         Property._Amenities.Page.getAmenitiesInput(testData.otherDoorman).type(testData.testValue)
             .should("have.value", testData.testValue);
-    });
-
-    it("[QA-4671]", () => {
-        cy.stepInfo("2. Check Bike Room checkbox");
-        Property._Amenities.checkCheckboxByName(Enums.AMENITIES_CHECKBOXES.hasBikeRoom);
-
-        cy.stepInfo("3. Upload photo");
-        Property._Amenities.uploadImageByName(testData.bikeRoom, testData.imagePath);
-
-        cy.stepInfo("4. Verify functionality of the Rotate button on the uploaded photo");
-        Property._Amenities.rotateImageByName(testData.bikeRoom);
-
-        cy.stepInfo("5. Verify functionality of the Delete button on the uploaded photo");
-        Property._Amenities.removeImageByName(testData.bikeRoom);
-    });
-
-    it("[QA-4673]", () => {
-        cy.stepInfo("2. Check Fitness Center checkbox");
-        Property._Amenities.checkCheckboxByName(Enums.AMENITIES_CHECKBOXES.hasGym);
-
-        cy.stepInfo("3. Upload photo");
-        Property._Amenities.uploadImageByName(testData.gym, testData.imagePath);
-
-        cy.stepInfo("4. Verify functionality of the Rotate button on the uploaded photo");
-        Property._Amenities.rotateImageByName(testData.gym);
-
-        cy.stepInfo("5. Verify functionality of the Delete button on the uploaded photo");
-        Property._Amenities.removeImageByName(testData.gym);
-    });
-
-    it("[QA-4676]", () => {
-        cy.stepInfo("2. Check Pool checkbox");
-        Property._Amenities.checkCheckboxByName(Enums.AMENITIES_CHECKBOXES.hasPool);
-
-        cy.stepInfo("3. Upload photo");
-        Property._Amenities.uploadImageByName(testData.pool, testData.imagePath);
-
-        cy.stepInfo("4. Verify functionality of the Rotate button on the uploaded photo");
-        Property._Amenities.rotateImageByName(testData.pool);
-
-        cy.stepInfo("5. Verify functionality of the Delete button on the uploaded photo");
-        Property._Amenities.removeImageByName(testData.pool);
-    });
-
-    it("[QA-4681]", () => {
-        cy.stepInfo("2. Check Shared Recreation Room checkbox");
-        Property._Amenities.checkCheckboxByName(Enums.AMENITIES_CHECKBOXES.hasRecreationRoom);
-
-        cy.stepInfo("3. Upload photo");
-        Property._Amenities.uploadImageByName(testData.recreationRoom, testData.imagePath);
-
-        cy.stepInfo("4. Verify functionality of the Rotate button on the uploaded photo");
-        Property._Amenities.rotateImageByName(testData.recreationRoom);
-
-        cy.stepInfo("5. Verify functionality of the Delete button on the uploaded photo");
-        Property._Amenities.removeImageByName(testData.recreationRoom);
-    });
-
-    it("[QA-4682]", () => {
-        cy.stepInfo("2. Check Shared Recreation Room checkbox");
-        Property._Amenities.checkCheckboxByName(Enums.AMENITIES_CHECKBOXES.hasCommonLoungeSpace);
-
-        cy.stepInfo("3. Upload photo");
-        Property._Amenities.uploadImageByName(testData.commonLoungeSpace, testData.imagePath);
-
-        cy.stepInfo("4. Verify functionality of the Rotate button on the uploaded photo");
-        Property._Amenities.rotateImageByName(testData.commonLoungeSpace);
-
-        cy.stepInfo("5. Verify functionality of the Delete button on the uploaded photo");
-        Property._Amenities.removeImageByName(testData.commonLoungeSpace);
     });
 });
