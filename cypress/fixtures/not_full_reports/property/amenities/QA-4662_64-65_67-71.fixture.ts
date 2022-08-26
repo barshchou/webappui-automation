@@ -26,7 +26,7 @@ const doormanRadios = [
 ];
 
 export default {
-    reportCreationData: ReportDataCreator.getReportData("4626-64-65_67-70"),
+    reportCreationData: ReportDataCreator.getReportData("4626-64-65_67-71"),
     withoutAdditionalCheckboxes,
     buildingCheckboxes,
     unitCheckboxes,
@@ -40,6 +40,7 @@ export default {
     laundryRoom: "laundryRoom",
     parking: "parking",
     outdoorSpace: "outdoorSpace",
+    bikeRoom: "bikeRoom",
     otherOutdoorSpace: "building.otherOutdoorSpace",
     otherDoorman: "building.otherDoorman",
     sharedOutdoorSpaceCheckboxes,
