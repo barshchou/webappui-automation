@@ -503,12 +503,7 @@ class TaxInfoActions extends BaseActionsExt<typeof taxInfoPage> {
     }
 
     enterTaxAssessedValueProvidedProjectedTab(value: number): TaxInfoActions {
-        taxInfoPage.taxableAssessedValueProvidedInput
-            .realClick().realClick()
-            .scrollIntoView()
-            .focus().type("123456")
-            .clear()
-            .realType(`${value}{enter}`);
+        this.typeInAgTable(taxInfoPage.taxableAssessedValueProvidedInput, value);
         taxInfoPage.taxableAssessedValueProvidedInput.should("have.text", `$${numberWithCommas(value)}`);
         return this;
     }
