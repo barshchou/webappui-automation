@@ -515,9 +515,19 @@ class TaxInfoActions extends BaseActionsExt<typeof taxInfoPage> {
 
     verifyTaxLiabilityOnProjectedTab(squareFootAnalysisArea: number, 
         sectionName: BoweryReports.ProjectedTaxesSectionsValues): TaxInfoActions {
-        taxInfoPage.taxLiabilityTotal(sectionName).invoke('text').then(taxTotal => {
+        taxInfoPage.taxLiabilityTotalOnProjectedTab(sectionName).invoke('text').then(taxTotal => {
             let taxTotalPerSfAdjusted = getNumberFromDollarNumberWithCommas(taxTotal) / squareFootAnalysisArea;
-            taxInfoPage.projectedSectionsTaxLiabilityTotalPerSf(sectionName)
+            taxInfoPage.taxLiabilityTotalPerSfOnProjectedTab(sectionName)
+                .should('have.text', `$${numberWithCommas(taxTotalPerSfAdjusted.toFixed(2))}`);
+        });
+        return this;
+    }
+
+    verifyTaxLiabilityOnSummaryTab(squareFootAnalysisArea: number, 
+        sectionName: BoweryReports.ProjectedTaxesSectionsValues): TaxInfoActions {
+        taxInfoPage.taxLiabilityTotalOnSummaryTab(sectionName).invoke('text').then(taxTotal => {
+            let taxTotalPerSfAdjusted = getNumberFromDollarNumberWithCommas(taxTotal) / squareFootAnalysisArea;
+            taxInfoPage.taxLiabilityTotalPerSfOnSummaryTab(sectionName)
                 .should('have.text', `$${numberWithCommas(taxTotalPerSfAdjusted.toFixed(2))}`);
         });
         return this;

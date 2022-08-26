@@ -1,13 +1,13 @@
 import { Property } from '../../../../actions/index';
-import testData from "../../../../fixtures/not_full_reports/income/tax_info/QA-5901-04.fixture";
+import testData from "../../../../fixtures/not_full_reports/income/tax_info/QA-5905-08.fixture";
 import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { Income } from '../../../../actions';
 import launchDarklyApi from "../../../../api/launchDarkly.api";
 
-describe(`Tax Liability (PSF) for Projected tab sections is calculated correctly according to selected Basis 
+describe(`Tax Liability (PSF) for Summary tab sections is calculated correctly according to selected Basis 
 for Square Foot Analysis`, { tags: [ "@income", "@tax_info" ] }, () => {
-    before('Login, create report, navigate to Tax Info Projected tab', () => {
+    beforeEach('Login, create report, navigate to Tax Info Projected tab', () => {
         cy.stepInfo(`1. Set feature flag and create report`);
         launchDarklyApi.setFeatureFlagForUser(testData.flexibleTaxesKey, testData.onFeatureFlag)
             .setFeatureFlagForUser(testData.flexibleGbaAnalysisKey, testData.onFeatureFlag);
@@ -31,67 +31,57 @@ for Square Foot Analysis`, { tags: [ "@income", "@tax_info" ] }, () => {
         cy.stepInfo(`5. Click on the checkbox “Include in report” on Projected Tax Liability card, so it is checked`);
         Income._TaxInfo.checkProjectedIncludeCheckbox();
 
-        cy.saveLocalStorage();
-    });
-
-    it("[QA-5901]", () => {
-        cy.restoreLocalStorage();
-
         cy.stepInfo(`6. Click on the checkbox “Include in report” on Opinion Provided card, so it is checked`);
         Income._TaxInfo.checkProjectedSectionCheckbox(testData.opinionProvidedSectionCheckbox);
 
         cy.stepInfo(`7. Fill in Taxable Assessed Value (Provided) field with valid numeric value`);
         Income._TaxInfo.enterTaxAssessedValueProvidedProjectedTab(testData.assessedValueProvided);
 
-        cy.stepInfo(`8. Verify Tax Liability (PSF) in Opinion Provided grid is calculated with formula = 
-                    Tax Liability (Total) / selected Basis for Square Foot Analysis`);
-        Income._TaxInfo.verifyTaxLiabilityOnProjectedTab(testData.squareFootAnalysisArea, testData.opinionProvided);
-    });
-
-    it("[QA-5902]", () => {
-        cy.restoreLocalStorage();
-        
-        cy.stepInfo(`6. Click on the checkbox "Include in report" on Percent of Renovations card, so it is checked`);
+        cy.stepInfo(`8. Click on the checkbox "Include in report" on Percent of Renovations card, so it is checked`);
         Income._TaxInfo.checkProjectedSectionCheckbox(testData.renovationSectionCheckbox);
 
-        cy.stepInfo(`7. Fill in Net Renovations and Assessment Ratio fields with valid numeric value`);
+        cy.stepInfo(`9. Fill in Net Renovations and Assessment Ratio fields with valid numeric value`);
         Income._TaxInfo.enterNetRenovationOnProjectedTab(testData.netRenovation)
             .enterAssessmentRationOnProjectedTab(testData.assessmentRation);
 
-        cy.stepInfo(`8. Verify Tax Liability (PSF) in  Percent of Renovations grid is calculated with formula = 
-                    Tax Liability (Total) / selected Basis for Square Foot Analysis`);
-        Income._TaxInfo.verifyTaxLiabilityOnProjectedTab(testData.squareFootAnalysisArea, testData.renovationSection);
-    });
-
-    it("[QA-5903]", () => {
-        cy.restoreLocalStorage();
-        
-        cy.stepInfo(`6. Click on the checkbox "Include in report" on Percent of Income card, so it is checked`);
+        cy.stepInfo(`10. Click on the checkbox "Include in report" on Percent of Income card, so it is checked`);
         Income._TaxInfo.checkProjectedSectionCheckbox(testData.percentOfIncomeSectionCheckbox);
-
-        cy.stepInfo(`7. Fill in Income and Tax Liability Ratio fields with valid numeric value`);
+    
+        cy.stepInfo(`11. Fill in Income and Tax Liability Ratio fields with valid numeric value`);
         Income._TaxInfo.enterIncomeOnProjectedTab(testData.income)
             .enterTaxLiabilityRatiOnProjectedTab(testData.taxLiabilityRatio);
 
-        cy.stepInfo(`8. Verify Tax Liability (PSF) in  Percent of Income grid is calculated with formula = 
-                    Tax Liability (Total) / selected Basis for Square Foot Analysis`);
-        Income._TaxInfo.verifyTaxLiabilityOnProjectedTab(testData.squareFootAnalysisArea, testData.percentOfIncome);
-    });
-
-    it("[QA-5904]", () => {
-        cy.restoreLocalStorage();
-        
-        cy.stepInfo(`6. Click on the checkbox "Include in report" on Equalized Market Value card, so it is checked`);
+        cy.stepInfo(`12. Click on the checkbox "Include in report" on Equalized Market Value card, so it is checked`);
         Income._TaxInfo.checkProjectedSectionCheckbox(testData.equalizedMarketValueCheckbox);
 
-        cy.stepInfo(`7. Fill in Estimated Market Value and Equalization Ratio fields with valid numeric value`);
+        cy.stepInfo(`13. Fill in Estimated Market Value and Equalization Ratio fields with valid numeric value`);
         Income._TaxInfo.enterEqualizationValueOnProjectedTab(testData.estimatedMarketValue)
             .enterEqualizationRatiOnProjectedTab(testData.equalizationRatio);
+    });
 
-        cy.stepInfo(`8. Verify Tax Liability (PSF) in Equalized Market Value grid is calculated with formula = 
+    it("[QA-5905][QA-5906][QA-5907][QA-5908]", () => {
+        cy.stepInfo(`14. Go to Income > Tax Info>Summary tab`);
+        Income._TaxInfo.clickSummaryTab();
+
+        cy.stepInfo(`15. Verify Tax Liability (PSF) for Equalized Market Value is calculated with formula = 
                     Tax Liability (Total) / selected Basis for Square Foot Analysis`);
-        Income._TaxInfo.verifyTaxLiabilityOnProjectedTab(testData.squareFootAnalysisArea, 
+        Income._TaxInfo.verifyTaxLiabilityOnSummaryTab(testData.squareFootAnalysisArea, 
             testData.equalizedMarketValue);
+
+        cy.stepInfo(`16. Verify Tax Liability (PSF) in  Percent of Income grid is calculated with formula = 
+                    Tax Liability (Total) / selected Basis for Square Foot Analysis`);
+        Income._TaxInfo.verifyTaxLiabilityOnSummaryTab(testData.squareFootAnalysisArea, 
+            testData.percentOfIncome);
+
+        cy.stepInfo(`17. Verify Tax Liability (PSF) in  Percent of Renovations grid is calculated with formula = 
+                    Tax Liability (Total) / selected Basis for Square Foot Analysis`);
+        Income._TaxInfo.verifyTaxLiabilityOnSummaryTab(testData.squareFootAnalysisArea, 
+            testData.renovationSection);
+
+        cy.stepInfo(`18. Verify Tax Liability (PSF) in Opinion Provided grid is calculated with formula = 
+                    Tax Liability (Total) / selected Basis for Square Foot Analysis`);
+        Income._TaxInfo.verifyTaxLiabilityOnSummaryTab(testData.squareFootAnalysisArea, 
+            testData.opinionProvided);
     });
 
     after(() => {

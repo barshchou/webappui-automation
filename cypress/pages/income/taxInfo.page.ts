@@ -160,11 +160,11 @@ class TaxInfoPage extends BasePage {
         return cy.xpath(`//*[@row-id='taxableAssessedValueId']/div[@col-id='value']`);
     }
 
-    taxLiabilityTotal(sectionName: BoweryReports.ProjectedTaxesSectionsValues) {
+    taxLiabilityTotalOnProjectedTab(sectionName: BoweryReports.ProjectedTaxesSectionsValues) {
         return cy.xpath(`//div[h6[.='${sectionName}']]//div[@row-id='taxLiabilityTotal']/div[@col-id='value']`);
     }
 
-    projectedSectionsTaxLiabilityTotalPerSf(sectionName: BoweryReports.ProjectedTaxesSectionsValues) {
+    taxLiabilityTotalPerSfOnProjectedTab(sectionName: BoweryReports.ProjectedTaxesSectionsValues) {
         return cy.xpath(`//div[h6[.='${sectionName}']]//div[@row-id='taxesPerBasis']/div[@col-id='value']`);
     }
 
@@ -190,6 +190,14 @@ class TaxInfoPage extends BasePage {
 
     get equalizationRatioInput() {
         return cy.xpath(`//*[@row-id='equalizationRatio']/div[@col-id='value']`);
+    }
+
+    taxLiabilityTotalOnSummaryTab(sectionName: BoweryReports.ProjectedTaxesSectionsValues) {
+        return cy.get(`[data-qa^='${sectionName}'][data-qa$='-taxLiability-value-cell']`);
+    }
+
+    taxLiabilityTotalPerSfOnSummaryTab(sectionName: BoweryReports.ProjectedTaxesSectionsValues) {
+        return cy.get(`[data-qa^='${sectionName}'][data-qa$='-taxLiabilityPerBasis-value-cell']`);
     }
 }
 
