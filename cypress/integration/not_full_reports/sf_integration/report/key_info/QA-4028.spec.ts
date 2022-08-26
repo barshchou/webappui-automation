@@ -16,7 +16,7 @@ the date corresponding to the Current Due Date value for that job in SalesForce`
             createReport(reportCreationData(value));
     
             cy.stepInfo(`2. Navigate to the Report > Key Info page`);
-            _NavigationSection.navigateToReportInformation();
+            _NavigationSection.navigateToReportKeyInfo();
         
             cy.stepInfo(`3. Verify what is displayed in the Due Date field`);
             Report._KeyInfo.Page.getDateInputByQA(testData.dateType).should("have.value", testData.verifyValue);

@@ -17,7 +17,7 @@ for As Is and As Stabilized report for Property Rights Appraised and Definition 
         Property._Summary.enterBuildingName(testData.buildingName);
 
         cy.stepInfo(`1. Proceed to the Report > Key Info page.`);
-        _NavigationSection.navigateToReportInformation();
+        _NavigationSection.navigateToReportKeyInfo();
 
         cy.stepInfo(`2.Enter the “=“ and verify the "Linked" chips dropdown for for 
         Property Rights Appraised and Definition of Market Value sections sections: 

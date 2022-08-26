@@ -12,7 +12,7 @@ describe(`Verify the Save and Save & Continue button functionality on the Report
 
         it("[QA-4721]", () => {
             cy.stepInfo(`1. Proceed to the Report > Key Info page`);
-            _NavigationSection.navigateToReportInformation();
+            _NavigationSection.navigateToReportKeyInfo();
 
             cy.stepInfo(`2. Fill in the editable fields with values and click on the Save button then reload page`);
             Report._KeyInfo.enterPropertyRightsAppraisedComment(testData.enterValue, true, false, false);
@@ -35,7 +35,7 @@ describe(`Verify the Save and Save & Continue button functionality on the Report
 
         it("[QA-4724]", () => {
             cy.stepInfo(`1. Proceed to the Report > Key Info page`);
-            _NavigationSection.navigateToReportInformation();
+            _NavigationSection.navigateToReportKeyInfo();
 
             cy.stepInfo(`2. Fill in the editable fields with values and click on the Save & Continue button`);
             Report._KeyInfo.enterPropertyRightsAppraisedComment(testData.enterValue, true, false, false);
@@ -60,7 +60,7 @@ describe(`Verify the Save and Save & Continue button functionality on the Report
 
         it("[QA-4725]", () => {
             cy.stepInfo(`1. Proceed to the Report > Key Info page`);
-            _NavigationSection.navigateToReportInformation();
+            _NavigationSection.navigateToReportKeyInfo();
 
             cy.stepInfo(`2. Fill in the editable fields with values and do NOT click on the Save button`);
             Report._KeyInfo.enterPropertyRightsAppraisedComment(testData.enterValue, true, false, false);
@@ -75,13 +75,13 @@ describe(`Verify the Save and Save & Continue button functionality on the Report
                 .clickLetterOfTransmittal()
                 .verifyUnsavedChangesModal()
                 .clickYesButton()
-                .navigateToReportInformation();
+                .navigateToReportKeyInfo();
             Report._KeyInfo.verifyTextBoxPropertyRightsAppraised(testData.verifyTaxValue)
                 .verifyTextBoxDefinitionOfMarketValue(testData.verifyTaxValue);
 
             cy.stepInfo(`4. Try to proceed on any other page from the Key Info page and 
             verify that the Unsaved changes modal is displayed`);
-            _NavigationSection.navigateToReportInformation();
+            _NavigationSection.navigateToReportKeyInfo();
             Report._KeyInfo.enterPropertyRightsAppraisedComment(testData.enterSecondValue, true, false, false);
             Report._KeyInfo.clickNarrativeSuggestions(testData.secondListValue)
                 .verifyTextBoxPropertyRightsAppraised(testData.verifySecondTaxValue);
@@ -101,7 +101,7 @@ describe(`Verify the Save and Save & Continue button functionality on the Report
 
         it("[QA-4726]", () => {
             cy.stepInfo(`1. Proceed to the Report > Key Info page`);
-            _NavigationSection.navigateToReportInformation();
+            _NavigationSection.navigateToReportKeyInfo();
        
             cy.stepInfo(`2. Click on the Back button and verify the user is redirected 
             to another page (Settings & Export > Review and Export).`);

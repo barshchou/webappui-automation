@@ -31,7 +31,7 @@ describe(`Verify that if the Outdoor Space value is selected, the proper
             cy.contains(getOutdoorSpaceGroupByOption(option)).should("exist");
             Income.Residential.RentComps.BaseActions.clickSaveButton()
                 .verifyProgressBarNotExist();
-            NavigationSection.openInPlaceRentRollInResidential();
+            NavigationSection.navigateToResInPlaceRentRoll();
         });
     });
 });

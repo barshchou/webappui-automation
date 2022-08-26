@@ -14,7 +14,7 @@ and Definition of Market Value sections`,
     it(`[QA-4703][Report > Key Info] Verify the Property Rights Appraised and Definition 
          of Market Value sections can be edited`, () => {
         cy.stepInfo(`1. On the Report > Key Info page click inside the Property Rights Appraised section.`);
-        _NavigationSection.navigateToReportInformation();
+        _NavigationSection.navigateToReportKeyInfo();
         Report._KeyInfo.activateTextAreaInput( Report._KeyInfo.Page.textBoxPropertyRightsAppraised);
 
         cy.stepInfo(`2. Verify that the Revert to Original buttons and the info message are displayed`);

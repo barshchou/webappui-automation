@@ -32,7 +32,7 @@ describe("[QA-4537] Verify the Commercial Unit # SF field functionality",
             cy.stepInfo(`4. Proceed to the Income > Commercial > Stabilized Rent Roll 
             and verify that the value from step 2 
             is displayed in the SF column of the Commercial Stabilized Rent Roll Table.`);
-            _NavigationSection.openCommercialStabilizedRentRollInCommercial();
+            _NavigationSection.navigateToCommercialStabilizedRentRoll();
             Income._CommercialManager.StabilizedRentRoll.verifySFCells(testData.sfValues);
 
             cy.stepInfo(`5. Move back to the Property > Commercial Units page, remove the value 
