@@ -21,8 +21,6 @@ describe(`[QA-4481] Check that generated text pulls in the first submarket`,
                 .enterMarketQuarter(testData.submarketAndMarketQuarter)
                 .enterMarketYear(testData.submarketAndMarketYear);
 
-            Property._Market.checkUncheckMarketAnalysisUseCheckbox(testData.marketAnalysisUses[0], false);
-
             testData.marketAnalysisUses.forEach((use, index) => {
                 Property._Market.checkUncheckMarketAnalysisUseCheckbox(use, true)
                     .enterMarket(testData.marketValues[index], use)
@@ -48,7 +46,7 @@ describe(`[QA-4481] Check that generated text pulls in the first submarket`,
                     cy.stepInfo(`5. Proceed to Site Description and verify that 
                                 Location Description commentary has been exported correctly.`);
                     cy.visit(<string>file);
-                    cy.contains("Site Description").scrollIntoView().next("table").within(() => {
+                    cy.contains(testData.exportSectionName).scrollIntoView().next("table").within(() => {
                         cy.get("tr").eq(0).find("td").eq(1).find("p")
                             .should("have.text", testData.commentary);
                     }); 

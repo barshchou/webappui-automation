@@ -2,7 +2,6 @@ import { createReport } from "../../../../actions/base/baseTest.actions";
 import testData from "../../../../fixtures/not_full_reports/property/market/QA-4471.fixture";
 import { _NavigationSection } from "../../../../actions/base";
 import { Property } from "../../../../actions";
-import Enums from "../../../../enums/enums";
 
 
 describe("'Pull from dropbox' clicked - needed files are uploaded", { tags: [ "@property", "@market" ] }, () => {
@@ -21,11 +20,7 @@ describe("'Pull from dropbox' clicked - needed files are uploaded", { tags: [ "@
         it(`Test with ${researchUseObject.use} market analysis use`, () => {
 
             cy.stepInfo(`1. Check ${researchUseObject.use} use checkbox`);
-            if (researchUseObject.use === Enums.MARKET_ANALYSIS_USES.multifamily) {
-                Property._Market.verifyMarketAnalysisUseCheckboxState(researchUseObject.use);
-            } else {
-                Property._Market.checkUncheckMarketAnalysisUseCheckbox(researchUseObject.use, true);
-            }
+            Property._Market.checkUncheckMarketAnalysisUseCheckbox(researchUseObject.use, true);
 
             cy.stepInfo("2. Fill market research data");
             Property._Market.fillMarketResearch(researchUseObject.research, researchUseObject.use);
