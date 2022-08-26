@@ -2,7 +2,7 @@ import { Income, Property } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { createReport } from "../../../../actions/base/baseTest.actions";
 import Enums from "../../../../enums/enums";
-import testData from '../../../../fixtures/not_full_reports/property/amenities/QA-4662_64-65_67-71.fixture';
+import testData from '../../../../fixtures/not_full_reports/property/amenities/QA-4662_64-65_67-71_73.fixture';
 
 describe("Verify the display of the Amenities page", { tags:[ "@property", "@amenities" ] }, () => {
 
@@ -140,7 +140,7 @@ describe("Verify the display of the Amenities page", { tags:[ "@property", "@ame
     });
 
     it("[QA-4671]", () => {
-        cy.stepInfo("2. Check SBike Room checkbox");
+        cy.stepInfo("2. Check Bike Room checkbox");
         Property._Amenities.checkCheckboxByName(Enums.AMENITIES_CHECKBOXES.hasBikeRoom);
 
         cy.stepInfo("3. Upload photo");
@@ -151,5 +151,19 @@ describe("Verify the display of the Amenities page", { tags:[ "@property", "@ame
 
         cy.stepInfo("5. Verify functionality of the Delete button on the uploaded photo");
         Property._Amenities.removeImageByName(testData.bikeRoom);
+    });
+
+    it("[QA-4673]", () => {
+        cy.stepInfo("2. Check Fitness Center checkbox");
+        Property._Amenities.checkCheckboxByName(Enums.AMENITIES_CHECKBOXES.hasGym);
+
+        cy.stepInfo("3. Upload photo");
+        Property._Amenities.uploadImageByName(testData.gym, testData.imagePath);
+
+        cy.stepInfo("4. Verify functionality of the Rotate button on the uploaded photo");
+        Property._Amenities.rotateImageByName(testData.gym);
+
+        cy.stepInfo("5. Verify functionality of the Delete button on the uploaded photo");
+        Property._Amenities.removeImageByName(testData.gym);
     });
 });
