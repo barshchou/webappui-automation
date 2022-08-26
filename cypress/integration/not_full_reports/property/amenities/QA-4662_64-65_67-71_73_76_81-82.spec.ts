@@ -2,7 +2,7 @@ import { Income, Property } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { createReport } from "../../../../actions/base/baseTest.actions";
 import Enums from "../../../../enums/enums";
-import testData from '../../../../fixtures/not_full_reports/property/amenities/QA-4662_64-65_67-71_73_76_81.fixture';
+import testData from '../../../../fixtures/not_full_reports/property/amenities/QA-4662_64-65_67-71_73_76_81-82.fixture';
 
 describe("Verify the display of the Amenities page", { tags:[ "@property", "@amenities" ] }, () => {
 
@@ -193,5 +193,19 @@ describe("Verify the display of the Amenities page", { tags:[ "@property", "@ame
 
         cy.stepInfo("5. Verify functionality of the Delete button on the uploaded photo");
         Property._Amenities.removeImageByName(testData.recreationRoom);
+    });
+
+    it("[QA-4682]", () => {
+        cy.stepInfo("2. Check Shared Recreation Room checkbox");
+        Property._Amenities.checkCheckboxByName(Enums.AMENITIES_CHECKBOXES.hasCommonLoungeSpace);
+
+        cy.stepInfo("3. Upload photo");
+        Property._Amenities.uploadImageByName(testData.commonLoungeSpace, testData.imagePath);
+
+        cy.stepInfo("4. Verify functionality of the Rotate button on the uploaded photo");
+        Property._Amenities.rotateImageByName(testData.commonLoungeSpace);
+
+        cy.stepInfo("5. Verify functionality of the Delete button on the uploaded photo");
+        Property._Amenities.removeImageByName(testData.commonLoungeSpace);
     });
 });
