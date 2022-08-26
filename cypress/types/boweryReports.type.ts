@@ -256,4 +256,6 @@ export namespace BoweryReports {
     ]
     export type AdjustmentExpansionLabels = 
         typeof Enums.ADJUSTMENT_EXPANSION_LABELS[KeyInfo.AdjustmentExpansionLabelsKeys]
+
+    export type ChipsType = typeof Enums.CHIPS[KeyInfo.ChipsKeys]
 }
