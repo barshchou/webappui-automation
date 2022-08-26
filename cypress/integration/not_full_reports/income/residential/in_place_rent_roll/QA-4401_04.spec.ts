@@ -24,7 +24,7 @@ describe("Verify the Save and Save&Continue buttons functionality",
         it("QA-4404 Save&Continue button", () => {
             Income.Residential.InPlaceRentRoll.clickSaveContinueButton();
             Income.Residential.UnitGroups.verifyThatPageIsOpened()
-                .goBack();
+                .goBackWithSave();
             Income.Residential.InPlaceRentRoll.verifyCheckboxIsChecked(testData.forecastLabel);
         });
     });
