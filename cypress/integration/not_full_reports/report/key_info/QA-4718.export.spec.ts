@@ -5,7 +5,7 @@ import { createReport } from "../../../../actions/base/baseTest.actions";
 import testData from '../../../../fixtures/not_full_reports/report/key_info/QA-4718.fixture';
 
 describe(`[QA-4718] Verify the "Linked" chips dropdown in the new narrative component for 
-Property Rights Appraised and Definition of Market Value sections`,
+        Property Rights Appraised and Definition of Market Value sections`,
 { tags:[ "@report", "@key_info", "@check_export" ] }, () => {
     it("Test body", () => {
         cy.stepInfo("Login, create report");
@@ -53,9 +53,9 @@ Property Rights Appraised and Definition of Market Value sections`,
                 cy.stepInfo(`3. Verify the linked chips on export for both sections`);
                 cy.visit(<string>file);
                 testData.chips.forEach(chip => {
-                    cy.contains("Property Rights Appraised").next().scrollIntoView()
+                    cy.contains(testData.propertyRightsSection).next().scrollIntoView()
                         .should("include.text", chip.verifyExport);
-                    cy.contains("Definition of Market Value").next().next().scrollIntoView()
+                    cy.contains(testData.definitionOfMarketValueSection).next().next().scrollIntoView()
                         .should("include.text", chip.verifySuggest);
                 });
             }); 

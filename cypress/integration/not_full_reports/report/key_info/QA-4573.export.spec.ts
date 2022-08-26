@@ -22,11 +22,9 @@ conditionalDescribe("[QA-4573] Verify the Source text is correct in the Survey o
                     cy.visit(<string>file);
 
                     cy.stepInfo(`2. Proceed to the Income Capitalization Approach > Income Capitalization > 
-                        Mortgage Component > Survey of Competitive Rates and verify Source text`);
-                    cy.xpath(`//h1[.='Income Capitalization Approach']/following-sibling
-                    ::h2[.='Income Capitalization']/following-sibling
-                    ::h4[.='Mortgage Component']/following-sibling
-                    ::p[.='Survey of Competitive Rates']`).scrollIntoView()
+                                Mortgage Component > Survey of Competitive Rates and verify Source text`);
+                    cy.xpath(`//h4[.='${testData.exportSectionName}']/following-sibling
+                            ::p[.='Survey of Competitive Rates']`).scrollIntoView()
                         .next().next("p").should("have.text", testData.sourceText);
                 });
         });

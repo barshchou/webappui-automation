@@ -26,8 +26,8 @@ describe("[QA-4426] Check the generated commentary for Property Rights Appraised
                     .contains(item.check).should("have.css", "color", testData.color);
 
                 cy.stepInfo(`4. Verify that the Property Rights Appraised  discussion appears below 
-                the h2 Introduction > Property Rights 
-                Appraised section in the exported report.`);
+                            the h2 Introduction > Property Rights 
+                            Appraised section in the exported report.`);
                 _NavigationSection.openReviewAndExport();
                 ReviewExport.generateDocxReport().waitForReportGenerated()
                     .downloadAndConvertDocxReport(
@@ -43,7 +43,7 @@ describe("[QA-4426] Check the generated commentary for Property Rights Appraised
                 }).then(file => {
                     cy.log(<string>file);
                     cy.visit(<string>file);
-                    cy.contains("Property Rights Appraised").next().scrollIntoView().should("include.text", item.check);
+                    cy.contains(testData.exportSectionName).next().scrollIntoView().should("include.text", item.check);
                 });
             });
         });

@@ -40,9 +40,9 @@ describe("Verify the text in the Opportunities section on the SWOT Analysis page
             
                 cy.stepInfo(`4. Verify that the same list of threats as in Step #2  is displayed 
                                 in the exported report “Threats” section`);
-                cy.contains("Threats").scrollIntoView().next().find("li").then($li => {
+                cy.contains(testData.exportSectionName).scrollIntoView().next().find("li").then($li => {
                     const reportTreatsText = $li.toArray().map(li => normalizeText(li.innerHTML));
-                    expect(testData.threatsTexts).to.deep.eq(reportTreatsText); 
+                    expect(testData.threatsTexts).to.deep.eq(reportTreatsText);
                 });
                
             });

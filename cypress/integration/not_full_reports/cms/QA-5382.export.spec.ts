@@ -47,7 +47,7 @@ conditionalDescribe("Verify possibility to edit text",
                     cy.visit(<string>file);
 
                     cy.stepInfo(`6. Verify commentary text in exported report`);
-                    cy.xpath(`//h1[.='Certification']`).scrollIntoView().next().next().find("li").eq(0)
+                    cy.xpath(`//h1[.='${testData.exportSectionName}']`).scrollIntoView().next().next().find("li").eq(0)
                         .should('contain.text', testData.textUpdate);
                 });
         });
