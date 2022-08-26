@@ -78,7 +78,7 @@ describe(`[Income > Commercial > In-Place Rent Roll > Generated Commentary]
                     let expectedText = typeof chip.verifyExport ===  "number" 
                         ? `${numberWithCommas(chip.verifyExport)}`
                         : chip.verifyExport;
-                    cy.contains("Current Commercial Rent Roll")
+                    cy.contains(testData.exportSectionName)
                         .next().scrollIntoView().should("include.text", expectedText);
                 });
             }); 
@@ -132,7 +132,7 @@ describe(`[Income > Commercial > In-Place Rent Roll > Generated Commentary]
                     let expectedText = typeof chip.verifyExport ===  "number" 
                         ? `${numberWithCommas(chip.verifyExport)}`
                         : chip.verifyExport;
-                    cy.contains("Current Commercial Rent Roll").next().scrollIntoView()
+                    cy.contains(testData.exportSectionName).next().scrollIntoView()
                         .should("include.text", expectedText);
                 });
             }); 
@@ -188,7 +188,7 @@ describe(`[Income > Commercial > In-Place Rent Roll > Generated Commentary]
                     let expectedText = typeof chip.verifyExport ===  "number" 
                         ? `${numberWithCommas(chip.verifyExport)}`
                         : chip.verifyExport;
-                    cy.contains("Current Commercial Rent Roll").next().scrollIntoView()
+                    cy.contains(testData.exportSectionName).next().scrollIntoView()
                         .should("include.text", expectedText);
                 });
             }); 

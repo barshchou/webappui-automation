@@ -90,6 +90,7 @@ import utilitiesAdjustmentsExpansionRowsEnum from "./adjustComps/utilitiesAdjust
 import adjustmentExpansionLabelsEnum from "./sales/adjustComps/adjustmentExpansionLabels.enum";
 import expenseHistoryDataProviderEnum from "./expense/expenseHistoryDataProvider.enum";
 import expenseItemBasisOfComparisonEnum from "./expense/expenseItemBasisOfComparison.enum";
+import exportTitlesEnum from "./exportTitles.enum";
 
 export default {
     TEMPLATE_TYPE: templateTypesEnum,
@@ -183,5 +184,6 @@ export default {
     UTILITIES_ADJUSTMENTS_EXPANSION_ROWS: utilitiesAdjustmentsExpansionRowsEnum,
     ADJUSTMENT_EXPANSION_LABELS: adjustmentExpansionLabelsEnum,
     EXPENSE_DATA_PROVIDER: expenseHistoryDataProviderEnum,
-    EXPENSE_ITEM_BASIS_OF_COMPARISON: expenseItemBasisOfComparisonEnum
+    EXPENSE_ITEM_BASIS_OF_COMPARISON: expenseItemBasisOfComparisonEnum,
+    EXPORT_TITLES: exportTitlesEnum
 };

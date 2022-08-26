@@ -14,8 +14,8 @@ describe(`Check the order of comps in the export when 'custom' dropdown is chose
             createReport(testData.reportCreationData);
 
             cy.stepInfo(`[QA-5136] -> Verify that the order the comps are in by page save 
-                    will inform their order from left to right in the report webapp 
-                    on the adjustment page (Sale > Adjust Comps)`);
+                        will inform their order from left to right in the report webapp 
+                        on the adjustment page (Sale > Adjust Comps)`);
 
             cy.stepInfo(`1. [QA-5136] -> User navigates to SalesComps Search page `);
             _NavigationSection.navigateToFindComps();
@@ -29,7 +29,7 @@ describe(`Check the order of comps in the export when 'custom' dropdown is chose
             _NavigationSection.Actions.clickSaveButton().navigateToAdjustComps();
 
             cy.stepInfo(`4. [QA-5136] -> User see that the order of comps from left to right
-                    is the same as the order of Sales Comps in Selected Comparables Table`);
+                        is the same as the order of Sales Comps in Selected Comparables Table`);
             Sales._AdjustComps.Page.cellCompHeader.spread((...comps) => {
                 comps = comps.map(comp => comp.innerText);
 
@@ -56,7 +56,8 @@ describe(`Check the order of comps in the export when 'custom' dropdown is chose
          
                     cy.readFile(`${pathSpecData()}${testData.memoTestDataFile}`).then(data => {
                         cy.stepInfo(`5. [QA-5136] -> User see that the order of Selected Comps
-                    in 'Comparable Sales Outline' section are the same as the order on Sales Adjustment Grid`);
+                                    in 'Comparable Sales Outline' section are the same as 
+                                    the order on Sales Adjustment Grid`);
                     
                         testData.compsToAdd.forEach(index => {
                             cy.contains(`Comparable Sale ${index+1}`).scrollIntoView().next()
