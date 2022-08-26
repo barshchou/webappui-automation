@@ -2,7 +2,7 @@ import { Income, Property } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { createReport } from "../../../../actions/base/baseTest.actions";
 import Enums from "../../../../enums/enums";
-import testData from '../../../../fixtures/not_full_reports/property/amenities/QA-4662_64_67-70.fixture';
+import testData from '../../../../fixtures/not_full_reports/property/amenities/QA-4662_64_67-70_84.fixture';
 
 describe("Verify the display of the Amenities page", { tags:[ "@property", "@amenities" ] }, () => {
 
@@ -14,7 +14,7 @@ describe("Verify the display of the Amenities page", { tags:[ "@property", "@ame
         _NavigationSection.navigateToPropertyAmenities();
     });
 
-    it("[QA-4662-64]", () => {
+    it("[QA-4662-64-84]", () => {
         cy.stepInfo("2. Verify the following elements are displayed on the page by default");
         testData.withoutAdditionalCheckboxes.forEach(name => {
             Property._Amenities.Page.getElementCheckbox(name).should("exist");

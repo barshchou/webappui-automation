@@ -26,7 +26,7 @@ const doormanRadios = [
 ];
 
 export default {
-    reportCreationData: ReportDataCreator.getReportData("4662_64_67-70"),
+    reportCreationData: ReportDataCreator.getReportData("4662_64_67-70_84"),
     withoutAdditionalCheckboxes,
     buildingCheckboxes,
     unitCheckboxes,
