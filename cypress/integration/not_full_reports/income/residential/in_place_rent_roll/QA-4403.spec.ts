@@ -16,12 +16,12 @@ describe("Verify the Unsaved changes modal functionality",
             Income.Residential.InPlaceRentRoll.checkCheckboxByLabel(testData.forecastLabel)
                 .goToPropSummaryWithSaveSaveClickFirst();
             Property.Summary.verifyThatPageIsOpened()
-                .goBack();
+                .goBackWithSave();
             Income.Residential.InPlaceRentRoll.verifyCheckboxIsChecked(testData.forecastLabel)
                 .uncheckCheckboxByLabel(testData.forecastLabel)
                 .goToPropSummaryWithoutSave();
             Property.Summary.verifyThatPageIsOpened()
-                .goBack();
+                .goBackWithSave();
             Income.Residential.InPlaceRentRoll.verifyCheckboxIsChecked(testData.forecastLabel);
         });
     });
