@@ -66,3 +66,4 @@ export type UtilitiesAdjustmentsExpansionRowsKeys = keyof typeof Enums.UTILITIES
 export type AdjustmentExpansionLabelsKeys = keyof typeof Enums.ADJUSTMENT_EXPANSION_LABELS
 export type AmenitiesCheckboxesKeys = keyof typeof Enums.AMENITIES_CHECKBOXES
 export type AmenitiesUploadsKeys = keyof typeof Enums.AMENITIES_UPLOADS
+export type AmenitiesInputsKeys = keyof typeof Enums.AMENITIES_INPUTS
