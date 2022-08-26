@@ -17,10 +17,7 @@ describe("Verify the display of the Amenities page", { tags:[ "@property", "@ame
 
     testData.uploadValues.forEach(val => {
         it(`${val.specName}`, () => {
-            cy.stepInfo("1. Proceed to the Property > Amenities page.");
-            _NavigationSection.navigateToPropertyAmenities();
-
-            cy.stepInfo("2. Check Shared Recreation Room checkbox");
+            cy.stepInfo(`2. Check ${val.checkboxName} checkbox`);
             Property._Amenities.checkCheckboxByName(val.checkboxName);
     
             cy.stepInfo("3. Upload photo");
@@ -32,7 +29,7 @@ describe("Verify the display of the Amenities page", { tags:[ "@property", "@ame
             cy.stepInfo("5. Verify functionality of the Delete button on the uploaded photo");
             Property._Amenities.removeImageByName(val.uploadName);
 
-            cy.stepInfo("2. Uncheck Shared Recreation Room checkbox");
+            cy.stepInfo(`6. Uncheck ${val.checkboxName} checkbox`);
             Property._Amenities.checkCheckboxByName(val.checkboxName, false);
         });
     });

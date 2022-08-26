@@ -68,11 +68,11 @@ describe("Verify the display of the Amenities page", { tags:[ "@property", "@ame
         Property._Amenities.removeImageByName(testData.parking);
         
         cy.stepInfo("6. Verify not valid of Parking Spaces field");
-        Property._Amenities.enterAmenitiesInput("parkingSpaceCount", 2500, testData.parkingValueMore)
-            .enterAmenitiesInput("parkingSpaceCount", 2500, testData.testValue);
+        Property._Amenities.enterAmenitiesValidationInput("parkingSpaceCount", 2500, testData.parkingValueMore)
+            .enterAmenitiesValidationInput("parkingSpaceCount", 2500, testData.testValue);
 
         cy.stepInfo("7. Verify valid value entered in the Number of Storage Units field");
-        Property._Amenities.enterAmenitiesInput("parkingSpaceCount", 2500, testData.parkingValue)
+        Property._Amenities.enterAmenitiesValidationInput("parkingSpaceCount", 2500, testData.parkingValue)
             .verifyProgressBarNotExist();
 
         cy.stepInfo("8. Proceed to the Property > Parking page and verify that the value entered");
