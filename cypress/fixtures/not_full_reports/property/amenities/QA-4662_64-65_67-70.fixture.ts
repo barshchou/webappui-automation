@@ -18,8 +18,15 @@ const generatedCommentName = {
     parkingIncomeDiscussion: "parkingIncomeDiscussion"
 };
 
+const doormanRadios = [
+    "Virtual",
+    "Part-Time",
+    "24/7",
+    "Other"
+];
+
 export default {
-    reportCreationData: ReportDataCreator.getReportData("4626-64-65_67-68"),
+    reportCreationData: ReportDataCreator.getReportData("4626-64-65_67-70"),
     withoutAdditionalCheckboxes,
     buildingCheckboxes,
     unitCheckboxes,
@@ -33,6 +40,8 @@ export default {
     laundryRoom: "laundryRoom",
     parking: "parking",
     outdoorSpace: "outdoorSpace",
-    other: "building.otherOutdoorSpace",
-    sharedOutdoorSpaceCheckboxes
+    otherOutdoorSpace: "building.otherOutdoorSpace",
+    otherDoorman: "building.otherDoorman",
+    sharedOutdoorSpaceCheckboxes,
+    doormanRadios
 };

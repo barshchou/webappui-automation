@@ -2,16 +2,13 @@ import { Income, Property } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { createReport } from "../../../../actions/base/baseTest.actions";
 import Enums from "../../../../enums/enums";
-import testData from '../../../../fixtures/not_full_reports/property/amenities/QA-4662_64-65_67-69.fixture';
+import testData from '../../../../fixtures/not_full_reports/property/amenities/QA-4662_64-65_67-70.fixture';
 
 describe("Verify the display of the Amenities page", { tags:[ "@property", "@amenities" ] }, () => {
-    before("Login, create report", () => {
-        createReport(testData.reportCreationData);
-        cy.saveLocalStorage();
-    });
 
     beforeEach("Restore local storage", () => {
-        cy.restoreLocalStorage();
+        cy.stepInfo("Login, create report");
+        createReport(testData.reportCreationData);
 
         cy.stepInfo("1. Proceed to the Property > Amenities page.");
         _NavigationSection.navigateToPropertyAmenities();
@@ -49,8 +46,7 @@ describe("Verify the display of the Amenities page", { tags:[ "@property", "@ame
         Property._Amenities.rotateImageByName(testData.laundryRoom);
 
         cy.stepInfo("5. Verify functionality of the Delete button on the uploaded photo");
-        Property._Amenities.removeImageByName(testData.laundryRoom)
-            .checkCheckboxByName(Enums.AMENITIES_CHECKBOXES.hasLaundryRoom, false);
+        Property._Amenities.removeImageByName(testData.laundryRoom);
     });
 
     it("[QA-4667]", () => {
@@ -123,7 +119,23 @@ describe("Verify the display of the Amenities page", { tags:[ "@property", "@ame
         });
 
         cy.stepInfo("7. Verify not valid of Shared Outdoor Space field");
-        Property._Amenities.Page.getAmenitiesInput(testData.other).clear().blur();
+        Property._Amenities.Page.getAmenitiesInput(testData.otherOutdoorSpace).clear().blur();
         cy.contains("Required").should("exist");
+    });
+
+    it("[QA-4670]", () => {
+        cy.stepInfo("2. Check Shared Outdoor Space checkbox");
+        Property._Amenities.checkCheckboxByName(Enums.AMENITIES_CHECKBOXES.hasDoorman);
+
+        cy.stepInfo("3. Check the Virtual, Part-Time, 24/7, Other radio buttons");
+        testData.doormanRadios.forEach(radio => {
+            Property._Amenities.Page.getDoormanRadio(radio).click().should("be.checked");
+        });
+
+        cy.stepInfo("4. Verify not valid of Shared Outdoor Space field");
+        Property._Amenities.Page.getAmenitiesInput(testData.otherDoorman).clear().blur();
+        cy.contains("Required").should("exist");
+        Property._Amenities.Page.getAmenitiesInput(testData.otherDoorman).type(testData.testValue)
+            .should("have.value", testData.testValue);
     });
 });
