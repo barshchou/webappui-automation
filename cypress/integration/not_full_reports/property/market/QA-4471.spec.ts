@@ -2,7 +2,6 @@ import { createReport } from "../../../../actions/base/baseTest.actions";
 import testData from "../../../../fixtures/not_full_reports/property/market/QA-4471.fixture";
 import { _NavigationSection } from "../../../../actions/base";
 import { Property } from "../../../../actions";
-import Enums from "../../../../enums/enums";
 
 
 describe("'Pull from dropbox' clicked - needed files are uploaded", { tags: [ "@property", "@market" ] }, () => {

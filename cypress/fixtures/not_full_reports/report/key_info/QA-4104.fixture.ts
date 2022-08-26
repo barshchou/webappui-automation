@@ -18,5 +18,5 @@ export default {
     "a sale as of a specified date and the passing of title from seller to buyer under conditions whereby:",
     tooltipText: "The following text will appear in the Definition of Market Value in your export; " + 
     "the numbered list of definitions below this paragraph is not able to be edited here",
-    exportSectionName: Enums.EXPORT_TITLES.definitionofMarketValue
+    exportSectionName: Enums.EXPORT_TITLES.definitionOfMarketValue
 };

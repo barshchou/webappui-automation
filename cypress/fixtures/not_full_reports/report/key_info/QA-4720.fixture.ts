@@ -25,5 +25,5 @@ export default {
     propertyRightsAppraisedCommentaryTitle: "Property Rights Appraised",
     definitionOfMarketValueCommentaryTitle: "Definition of Market Value",
     propertyRightsSection: Enums.EXPORT_TITLES.propertyRightsAppraised,
-    definitionOfMarketValueSection: Enums.EXPORT_TITLES.definitionofMarketValue
+    definitionOfMarketValueSection: Enums.EXPORT_TITLES.definitionOfMarketValue
 };
