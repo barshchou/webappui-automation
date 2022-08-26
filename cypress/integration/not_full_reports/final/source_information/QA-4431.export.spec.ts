@@ -4,11 +4,10 @@ import { _HomePage, _NavigationSection } from "../../../../actions/base";
 import { Final, ReviewExport } from "../../../../actions";
 import { normalizeText } from "../../../../../utils/string.utils";
 
-
-describe("[QA-4431] Verify that the generated commentary for Data Sources Description is a next-gen component", 
+describe("Verify that the generated commentary for Data Sources Description is a next-gen component", 
     { tags:[ "@final", "@source_information", "@check_export" ] }, () => {
 
-        it("NYC Report", () => {
+        it("[QA-4431] NYC Report", () => {
             cy.stepInfo("Login, create report");
             createReport(testData.nycReport);
 
@@ -46,7 +45,7 @@ describe("[QA-4431] Verify that the generated commentary for Data Sources Descri
             });
         });
 
-        it("Other report", () => {
+        it("[QA-4431] Other report", () => {
             cy.stepInfo("Login, create report");
             loginAction();
             _HomePage.createReport(testData.otherReport);

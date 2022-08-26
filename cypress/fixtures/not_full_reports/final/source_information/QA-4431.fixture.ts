@@ -16,24 +16,24 @@ const otherReport = (): BoweryAutomation.ReportCreationData => {
     };
 };
 
+const chipNames = [
+    "Report Inspectors",
+    "Inspection Date"
+];
+
 const nycComment = "The data contained within this appraisal was compiled from market analysis utilizing" + 
 " the following sources (unless otherwise noted): NYC Department of Finance, NYC Department of Buildings," +
 " NYC Department of Planning Zoning & Land Use, Claritas, CoStar, Federal Reserve, and FEMA. The subject" + 
-" photos were taken by Report Inspectors on Inspection Date, while those used for the comparable rentals" + 
+` photos were taken by ${chipNames[0]} on ${chipNames[1]}, while those used for the comparable rentals` + 
 " and sales were sourced from the public domain. When possible, we have confirmed the reported data with" + 
 " parties to the transactions or those who are intimately familiar with their critical details.";
 
 const otherComment = "The data contained within this appraisal was compiled from market analysis utilizing" + 
 " the following sources (unless otherwise noted): the City Tax Assessor, state and county tax records, the" + 
-" Zoning Board, Claritas, CoStar, Federal Reserve, and FEMA. The subject photos were taken by Report" + 
-" Inspectors on Inspection Date, while those used for the comparable rentals and sales were sourced from" + 
+" Zoning Board, Claritas, CoStar, Federal Reserve, and FEMA. The subject photos were taken by" +
+` ${chipNames[0]} on ${chipNames[1]}, while those used for the comparable rentals and sales were sourced from` + 
 " the public domain. When possible, we have confirmed the reported data with parties to the transactions" + 
 " or those who are intimately familiar with their critical details.";
-
-const chipNames = [
-    "Report Inspectors",
-    "Inspection Date"
-];
 
 export default {
     nycReport: ReportDataCreator.getReportData("4431"),

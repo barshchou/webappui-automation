@@ -4,7 +4,6 @@ import { _NavigationSection } from "../../../../actions/base";
 import { Final, Report, ReviewExport } from "../../../../actions";
 import { normalizeText } from "../../../../../utils/string.utils";
 
-
 describe(`Generated Commentary is dynamically updated with relevant information 
         with (Freddie Mac and not-Freddie Mac report)`,
 { tags: [ "@final", "@source_information", "@check_export" ] }, () => {

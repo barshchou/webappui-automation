@@ -3,7 +3,6 @@ import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { Final, Income, ReviewExport } from "../../../../actions";
 
-
 describe("The default status is 'Average' on the Condition column on the Unit Inspection table", 
     { tags:[ "@final", "@unit_inspection", "@check_export" ] }, () => {
 
