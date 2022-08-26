@@ -17,5 +17,5 @@ export default {
     reportCreationData: _reportCreationData,
     title: _title,
     definitionOfMarketValueList: _definitionOfMarketValueList,
-    exportSectionName: Enums.EXPORT_TITLES.definitionofMarketValue
+    exportSectionName: Enums.EXPORT_TITLES.definitionOfMarketValue
 };

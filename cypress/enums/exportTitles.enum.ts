@@ -11,7 +11,7 @@ const exportTitles = {
     currentCommercialRentRoll: "Current Commercial Rent Roll",
     cumulativePricePerUnit: "Cumulative Price Per Unit",
     currentResidentialRentRoll: "Current Residential Rent Roll",
-    definitionofMarketValue: "Definition of Market Value",
+    definitionOfMarketValue: "Definition of Market Value",
     estimatedOperatingExpenses: "Estimated Operating Expenses",
     exposureTime: "Exposure Time",
     highestAndBestUse: "Highest & Best Use",
