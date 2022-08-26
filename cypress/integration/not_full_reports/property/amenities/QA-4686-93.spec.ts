@@ -22,6 +22,9 @@ describe("Verify the fields of the Amenities page", { tags:[ "@property", "@amen
     
             cy.stepInfo("3. Verify enter value in input");
             Property._Amenities.enterAmenitiesInput(val.inputName, testData.enterValue);
+
+            cy.stepInfo(`4. Uncheck ${val.checkboxName} checkbox`);
+            Property._Amenities.checkCheckboxByName(val.checkboxName, false);
         });
     });
 });
