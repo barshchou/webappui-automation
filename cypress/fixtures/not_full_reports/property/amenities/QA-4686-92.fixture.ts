@@ -32,10 +32,15 @@ const inputs = [
         checkboxName: Enums.AMENITIES_CHECKBOXES.hasPrivateDeck,
         inputName: Enums.AMENITIES_INPUTS.privateDeckUnits
     },
+    {
+        specName: "[QA-4692]",
+        checkboxName: Enums.AMENITIES_CHECKBOXES.hasPrivateBackyard,
+        inputName: Enums.AMENITIES_INPUTS.privateBackyardUnits
+    },
 ];
 
 export default {
-    reportCreationData: ReportDataCreator.getReportData("4686-91"),
+    reportCreationData: ReportDataCreator.getReportData("4686-92"),
     enterValue: "Lorem Ipsum is simply dummy text he leap into. 1234567890:?;№!@#$%^&*(){}<>",
     inputs
 };
