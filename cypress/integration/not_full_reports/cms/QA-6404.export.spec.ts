@@ -1,5 +1,5 @@
 import { _HomePage } from '../../../actions/base';
-import { createReport } from '../../../actions/base/baseTest.actions';
+import { createReport, loginAction } from '../../../actions/base/baseTest.actions';
 import { ReviewExport } from '../../../actions';
 import { _NavigationSection } from '../../../actions/base';
 import testData from "../../../fixtures/not_full_reports/cms/QA-6404.fixture";
@@ -34,11 +34,6 @@ conditionalDescribe("[QA-6404] Verify possibility to edit text",
             _NavigationSection.openReviewAndExport();
             ReviewExport.generateDocxReport().waitForReportGenerated()
                 .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
-
-            cy.stepInfo('4. Revert commentary to original');
-            _NavigationSection.navigateToContentManagementSystem();
-            _CmsBaseActions.openIncomeCapitalizationApproachPage()
-                .revertSectionToOriginal(testData.sectionName);
         });
 
         it('Check export', () => {
@@ -50,6 +45,15 @@ conditionalDescribe("[QA-6404] Verify possibility to edit text",
                     cy.xpath(`//h1[.='Income Capitalization Approach']`).scrollIntoView().next()
                         .should('have.text', testData.textUpdate);
                 });
+        });
+
+        afterEach('Revert commentary to original', () => {
+            if (!Cypress.currentTest.title.includes("Check export")) {
+                loginAction();
+                _NavigationSection.navigateToContentManagementSystem();
+                _CmsBaseActions.openIncomeCapitalizationApproachPage()
+                    .revertSectionToOriginal(testData.sectionName);
+            }
         });
 
         after('Remove feature flag', () => {

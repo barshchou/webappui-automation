@@ -1,5 +1,5 @@
 import { _HomePage } from '../../../actions/base';
-import { createReport } from '../../../actions/base/baseTest.actions';
+import { createReport, loginAction } from '../../../actions/base/baseTest.actions';
 import { PreviewEdit, ReviewExport } from '../../../actions';
 import { _NavigationSection } from '../../../actions/base';
 import testData from "../../../fixtures/not_full_reports/cms/QA-5382.fixture";
@@ -33,11 +33,6 @@ conditionalDescribe("Verify possibility to edit text",
             _NavigationSection.openReviewAndExport();
             ReviewExport.generateDocxReport().waitForReportGenerated()
                 .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
-
-            cy.stepInfo('5. Revert commentary to original');
-            _NavigationSection.navigateToContentManagementSystem();
-            _CmsBaseActions.openCertificationPage()
-                .revertSectionToOriginal(testData.sectionName);
         });
 
         it(`Check export`, () => {
@@ -50,6 +45,15 @@ conditionalDescribe("Verify possibility to edit text",
                     cy.xpath(`//h1[.='Certification']`).scrollIntoView().next().next().find("li").eq(0)
                         .should('contain.text', testData.textUpdate);
                 });
+        });
+
+        afterEach('Revert commentary to original', () => {
+            if (!Cypress.currentTest.title.includes("Check export")) {
+                loginAction();
+                _NavigationSection.navigateToContentManagementSystem();
+                _CmsBaseActions.openCertificationPage()
+                    .revertSectionToOriginal(testData.sectionName);
+            }
         });
 
         after('Remove feature flag', () => {
