@@ -364,8 +364,6 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
      * @param ignoreGqlWait ignore gql request for comps to be resolved
      */
     navigateToFindComps(ignoreGqlWait = false): NavigationSectionActions {
-        this.clickSaveButton()
-            .verifyProgressBarNotExist();
         this.clickSalesButton()
             .clickFindCompsButton()
             .submitSaveChangesModal();
@@ -665,7 +663,9 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
     navigateToReportInformation(): NavigationSectionActions {
         this.clickReportButton()
             .clickReportInfoButton()
-            .submitSaveChangesModal();
+            .submitSaveChangesModal()
+            .verifyProgressBarNotExist()
+            .waitForUrl(routesUtils.keyInfo);
         return this;
     }
 

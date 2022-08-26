@@ -6,7 +6,9 @@ const routes =  {
     commercialStabilizedRentRoll: "/commercial-projected-rent-roll",
     expenseForecast: "/expense-forecast",
     highestAndBestUse: "/highest-and-best-use",
-    zoning: "/zoning"
+    zoning: "/zoning",
+    keyInfo: "/report-information",
+    letterOfTransmittal: "/letter-of-transmittal"
 } as const;
 
 export default routes;

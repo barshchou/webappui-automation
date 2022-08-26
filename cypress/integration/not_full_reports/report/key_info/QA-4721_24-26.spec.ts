@@ -4,6 +4,7 @@ import { _NavigationSection } from "../../../../actions/base";
 import { createReport } from "../../../../actions/base/baseTest.actions";
 import testData from '../../../../fixtures/not_full_reports/report/key_info/QA-4721_24-26.fixture';
 import { _ReportTitles } from "../../../../enums/pages_titles";
+import routesUtils from "../../../../utils/routes.utils";
 
 describe(`Verify the Save and Save & Continue button functionality on the Report > Key Info page:`,
     { tags:[ "@report", "@key_info" ] }, () => {
@@ -59,7 +60,7 @@ describe(`Verify the Save and Save & Continue button functionality on the Report
             cy.stepInfo(`3. Verify that the changes are saved and the user is redirected 
             to the next page (Report > Appraiser)`);
             Report._Appraiser.verifyPageOpened();
-            cy.go("back");
+            _NavigationSection.goBackWithSave();
             Report._KeyInfo.verifyOpenedPage(_ReportTitles.KEY_INFO)
                 .verifyFormCommentTextBoxText(testData.propertyRightsAppraisedTitle, testData.verifyTaxValue)
                 .verifyFormCommentTextBoxText(testData.definitionOfMarketValueTitle, testData.verifyTaxValue);
@@ -76,6 +77,7 @@ describe(`Verify the Save and Save & Continue button functionality on the Report
                 .enterFormCommentTextBox(testData.definitionOfMarketValueTitle, testData.enterValue, false)
                 .clickNarrativeSuggestions(testData.listValue, 2)
                 .verifyFormCommentTextBoxText(testData.definitionOfMarketValueTitle, testData.verifyTaxValue);
+            cy.wait(1000);
 
             cy.stepInfo(`3. Try to proceed on any other page and verify that the Unsaved changes modal is displayed`);
             _NavigationSection.clickPreviewEditButton()
@@ -83,16 +85,19 @@ describe(`Verify the Save and Save & Continue button functionality on the Report
                 .verifyUnsavedChangesModal()
                 .clickYesButton()
                 .verifyProgressBarNotExist()
+                .waitForUrl(routesUtils.letterOfTransmittal)
                 .navigateToReportInformation();
             Report._KeyInfo.verifyFormCommentTextBoxText(testData.propertyRightsAppraisedTitle, testData.verifyTaxValue)
                 .verifyFormCommentTextBoxText(testData.definitionOfMarketValueTitle, testData.verifyTaxValue);
 
             cy.stepInfo(`4. Try to proceed on any other page from the Key Info page and 
             verify that the Unsaved changes modal is displayed`);
-            Report._KeyInfo.enterFormCommentTextBox(testData.propertyRightsAppraisedTitle, testData.enterSecondValue,
-                false)
+            Report._KeyInfo
+                .clearFormCommentTextBox(testData.propertyRightsAppraisedTitle)
+                .enterFormCommentTextBox(testData.propertyRightsAppraisedTitle, testData.enterSecondValue, false)
                 .clickNarrativeSuggestions(testData.secondListValue)
                 .verifyFormCommentTextBoxText(testData.propertyRightsAppraisedTitle, testData.verifySecondTaxValue)
+                .clearFormCommentTextBox(testData.definitionOfMarketValueTitle)
                 .enterFormCommentTextBox(testData.definitionOfMarketValueTitle, testData.enterSecondValue, false)
                 .clickNarrativeSuggestions(testData.secondListValue, 2)
                 .verifyFormCommentTextBoxText(testData.definitionOfMarketValueTitle, testData.verifySecondTaxValue);
