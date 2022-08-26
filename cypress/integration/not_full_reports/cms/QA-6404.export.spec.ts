@@ -42,7 +42,7 @@ conditionalDescribe("[QA-6404] Verify possibility to edit text",
                     cy.log(<string>file);
                     cy.visit(<string>file);
                     cy.stepInfo("5. Verify commentary text in exported report");
-                    cy.xpath(`//h1[.='Income Capitalization Approach']`).scrollIntoView().next()
+                    cy.xpath(`//h1[.='${testData.exportSectionName}']`).scrollIntoView().next()
                         .should('have.text', testData.textUpdate);
                 });
         });

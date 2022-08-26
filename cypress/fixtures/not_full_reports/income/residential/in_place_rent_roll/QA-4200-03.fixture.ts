@@ -9,8 +9,8 @@ export default {
     },
     numberOfUnits: 0,
     numberOfUnitsToChange: 1,
-    csvFileName: "not_full_reports/Rent_Roll_CSV.csv",
+    csvFileName: "test_files/Rent_Roll_CSV.csv",
     csvNumberOfUnits: 23,
-    xlsxFileName: "not_full_reports/Rent_Roll_XLSX.xlsx",
+    xlsxFileName: "test_files/Rent_Roll_XLSX.xlsx",
     checkboxLabels: [ "Include Per Room Analysis in Report", "Developer's Forecast" ]
 };

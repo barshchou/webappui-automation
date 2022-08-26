@@ -8,7 +8,7 @@ const reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreato
     conclusionValue: Enums.VALUE_CONCLUSION_TYPE.AS_COMPLETE
 });
 
-const filePath = "not_full_reports/CostarExport 5161.csv";
+const filePath = "test_files/CostarExport 5161.csv";
 const sortSalesCompsDateSold = Enums.SORT_VALUES.dateSold;
 const salePeriodValue = Enums.SALE_PERIOD_VALUES.lastThreeMonths;
 

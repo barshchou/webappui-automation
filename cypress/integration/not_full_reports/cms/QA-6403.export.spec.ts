@@ -38,9 +38,9 @@ conditionalDescribe("Verify the page and fields available on it",
                     cy.log(<string>file);
                     cy.visit(<string>file);
                     cy.stepInfo(`4. Verify commentary text in exported report`);
-                    cy.xpath(`//h1[.='Income Capitalization Approach']`).scrollIntoView().next()
+                    cy.xpath(`//h1[.='${testData.exportSectionName}']`).scrollIntoView().next()
                         .should('have.text', testData.incomeCapitalizationApproachTextsFixture[0].languages);
-                    cy.xpath(`//h1[.='Income Capitalization Approach']`).scrollIntoView().next().next()
+                    cy.xpath(`//h1[.='${testData.exportSectionName}']`).scrollIntoView().next().next()
                         .should('have.text', testData.incomeCapitalizationApproachTextsFixture[1].languages);
                 });
         });

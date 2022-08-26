@@ -24,5 +24,6 @@ const _LOESourceStrings: string[] = [
 export default {
     reportCreationData: reportCreationFixture(),
     verifyValue: "78-80 Saint Marks Place__New York, NY 10003 - Bowery EL - signed.pdf",
-    LOESourceStrings: _LOESourceStrings
+    LOESourceStrings: _LOESourceStrings,
+    exportSectionName: Enums.EXPORT_TITLES.letterOfEngagement
 };
