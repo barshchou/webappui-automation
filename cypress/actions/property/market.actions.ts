@@ -173,7 +173,6 @@ class MarketActions extends BaseActionsExt<typeof marketPage> {
         marketPage.getMarketAnalysisUseCheckboxArea(use).invoke('attr', 'data-qa').then(dataQA => {
             let isChecked = dataQA.includes("checked") ? true : false;
             if (isCheck != isChecked) {
-                this.verifyMarketAnalysisUseCheckboxState(use, !isCheck);
                 marketPage.getMarketAnalysisUseCheckbox(use).click();
                 this.verifyMarketAnalysisUseCheckboxState(use, isCheck);
             }
