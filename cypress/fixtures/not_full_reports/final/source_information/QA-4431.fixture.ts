@@ -17,8 +17,8 @@ const otherReport = (): BoweryAutomation.ReportCreationData => {
 };
 
 const chipNames = [
-    "Report Inspectors",
-    "Inspection Date"
+    Enums.CHIPS.reportInspectors,
+    Enums.CHIPS.inspectionDate
 ];
 
 const nycComment = "The data contained within this appraisal was compiled from market analysis utilizing" + 
