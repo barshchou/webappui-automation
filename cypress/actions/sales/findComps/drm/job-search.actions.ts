@@ -316,9 +316,13 @@ class JobSearchActions {
         return this;
     }
 
-    //If it needs, we can upgrade this method, cos it cant add two imports because of scroll.
+    
     /**
      * Action enters report id into field 'Report ID' on 'JOB SEARCH' tab
+     * 
+     * NOTES: 
+     * 1. If it needs, we can upgrade this method, cos it cant add two imports because of scroll.
+     * 2. All these actions with input is because reportIdInput is hard to interact
      */
     enterReportToSearchComp(reportID: string) {
         cy.intercept("GET", `/salesComps/eventIds/${reportID}`)
