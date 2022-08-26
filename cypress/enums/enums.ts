@@ -88,6 +88,8 @@ import certificationEnum from "./cms/certification.enum";
 import otherAdjustmentsExpansionRowsEnum from "./adjustComps/otherAdjustmentsExpansionRows.enum";
 import utilitiesAdjustmentsExpansionRowsEnum from "./adjustComps/utilitiesAdjustmentsExpansionRows.enum";
 import adjustmentExpansionLabelsEnum from "./sales/adjustComps/adjustmentExpansionLabels.enum";
+import expenseHistoryDataProviderEnum from "./expense/expenseHistoryDataProvider.enum";
+import expenseItemBasisOfComparisonEnum from "./expense/expenseItemBasisOfComparison.enum";
 
 export default {
     TEMPLATE_TYPE: templateTypesEnum,
@@ -179,5 +181,7 @@ export default {
     CERTIFICATION_SECTIONS: certificationEnum,
     OTHER_ADJUSTMENTS_EXPANSION_ROWS: otherAdjustmentsExpansionRowsEnum,
     UTILITIES_ADJUSTMENTS_EXPANSION_ROWS: utilitiesAdjustmentsExpansionRowsEnum,
-    ADJUSTMENT_EXPANSION_LABELS: adjustmentExpansionLabelsEnum
+    ADJUSTMENT_EXPANSION_LABELS: adjustmentExpansionLabelsEnum,
+    EXPENSE_DATA_PROVIDER: expenseHistoryDataProviderEnum,
+    EXPENSE_ITEM_BASIS_OF_COMPARISON: expenseItemBasisOfComparisonEnum
 };
