@@ -37,6 +37,8 @@ class AmenitiesPage extends BasePage {
     }
 
     getAmenitiesInput(name: string) { return cy.get(`[name$='${name}']`); }
+
+    getDoormanRadio(name: string) { return cy.get(`[value='${name}']`); }
 }
 
 export default new AmenitiesPage();
