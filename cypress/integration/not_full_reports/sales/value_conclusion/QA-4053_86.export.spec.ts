@@ -30,9 +30,9 @@ and includes both commercial and residential units.`,
             testData.general.residentialUnits) * testData.general.valueConclusion);
         Sales._ValueConclusion.enterSaleValueConclusion(testData.general.valueConclusion)
             .verifySaleValueConclusion(testData.general.valueConclusion)
-            .verifyAsStabilizedAmount(totalValue)
-            .verifyAsIsMarketAmount(totalValue)
-            .verifyAsCompleteAmount(totalValue);
+            .verifyProspectiveMarketValueAmount(testData.valueConclusionAsStabilized, totalValue)
+            .verifyProspectiveMarketValueAmount(testData.valueConclusionAsIs, totalValue)
+            .verifyProspectiveMarketValueAmount(testData.valueConclusionAsComplete, totalValue);
 
         _NavigationSection.Actions.openReviewAndExport().closeUserSurveyIfExist();
         ReviewExport.generateDocxReport()

@@ -95,8 +95,21 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         return this;
     }
 
+    navigateToHighestAndBestUse(): NavigationSectionActions {
+        this.clickFinalButton()
+            .clickHighestAndBestUseButton()
+            .submitSaveChangesModal()
+            .waitForUrl(routesUtils.highestAndBestUse);
+        return this;
+    }
+
     clickFinalButton(): NavigationSectionActions {
         navigationSectionPage.finalButton.click();
+        return this;
+    }
+
+    clickHighestAndBestUseButton(): NavigationSectionActions {
+        navigationSectionPage.highestAndBestUseButton.click();
         return this;
     }
 
@@ -157,6 +170,19 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
 
     clickMapsButton(): NavigationSectionActions {
         navigationSectionPage.propertyMaps.click();
+        return this;
+    }
+
+    clickZoningButton(): NavigationSectionActions {
+        navigationSectionPage.zoningButton.click();
+        return this;
+    }
+
+    navigateToPropertyZoning(): NavigationSectionActions {
+        this.clickPropertyButton()
+            .clickZoningButton()
+            .submitSaveChangesModal()
+            .waitForUrl(routesUtils.zoning);
         return this;
     }
 
@@ -361,6 +387,7 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         this.clickSalesButton()
             .clickValueConclusionButton()
             // .submitSaveChangesModal();
+            // .verifyProgressBarNotExist();
         return this;
     }
 
@@ -594,42 +621,30 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
     }
 
     navigateToLaundry(): NavigationSectionActions {
-        this.clickSaveButton()
-            .verifyProgressBarNotExist();
-        this.clickIncomeApproachButton()
-            .clickMiscellaneousIncome()
+        this.clickMiscellaneousMenuIfClosed()
             .clickLaundryButton()
-            // .submitSaveChangesModal();
+            .submitSaveChangesModal();
         return this;
     }
 
     navigateToStorage(): NavigationSectionActions {
-        this.clickSaveButton()
-            .verifyProgressBarNotExist();
-        this.clickIncomeApproachButton()
-            .clickMiscellaneousIncome()
+        this.clickMiscellaneousMenuIfClosed()
             .clickStorageButton()
-            // .submitSaveChangesModal();
+            .submitSaveChangesModal();
         return this;
     }
 
     navigateToOther(): NavigationSectionActions {
-        this.clickSaveButton()
-            .verifyProgressBarNotExist();
-        this.clickIncomeApproachButton()
-            .clickMiscellaneousIncome()
+        this.clickMiscellaneousMenuIfClosed()
             .clickOtherButton()
-            // .submitSaveChangesModal();
+            .submitSaveChangesModal();
         return this;
     }
 
     navigateToParking(): NavigationSectionActions {
-        this.clickSaveButton()
-            .verifyProgressBarNotExist();
-        this.clickIncomeApproachButton()
-            .clickMiscellaneousIncome()
+        this.clickMiscellaneousMenuIfClosed()
             .clickParkingButton()
-            // .submitSaveChangesModal();
+            .submitSaveChangesModal();
         return this;
     }
 
@@ -893,6 +908,16 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         navigationSectionPage.residentialIncomeArrow.then(el => {
             if (!el.hasClass("expanded")) {
                 this.clickResidentialIncomeArrow();
+            }
+        });
+
+        return this;
+    }
+
+    private clickMiscellaneousMenuIfClosed(): NavigationSectionActions {
+        navigationSectionPage.miscellaneousIncome.then(el => {
+            if (!el.hasClass("expanded")) {
+                this.clickMiscellaneousIncome();
             }
         });
 
