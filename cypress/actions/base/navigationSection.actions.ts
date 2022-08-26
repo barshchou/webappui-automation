@@ -33,16 +33,14 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
     }
 
     openReviewAndExport(isNewReport = true): NavigationSectionActions {
-        this.clickSaveButton()
-            .verifyProgressBarNotExist();
         let reportAlias = "docxReportAsync";
         cy.intercept({
             method: 'GET',
             url: '/api/docx-report-async/get-report-hierarchy*'
         }).as(reportAlias);
         cy.get('[id="review-and-export"]').click();
-        // this.submitSaveChangesModal();
-        // this.verifyProgressBarNotExist();
+        this.submitSaveChangesModal()
+            .verifyProgressBarNotExist();
         if (isNewReport) { cy.wait(`@${reportAlias}`, { timeout:20000 }); }
         return this;
     }
@@ -88,10 +86,8 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
     }
 
     navigateToStabilizedRentRollInCommercial(): NavigationSectionActions {
-        this.clickSaveButton()
-            .verifyProgressBarNotExist();
         this.clickCommercialStabRentRollButton()
-            // .submitSaveChangesModal();
+            .submitSaveChangesModal();
         return this;
     }
 
@@ -197,22 +193,18 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
     }
 
     navigateToUnitInspection(): NavigationSectionActions {
-        // this.clickSaveButton();
-        this.clickSaveButton()
-            .verifyProgressBarNotExist();
         this.clickFinalButton()
             .clickUnitInspectionButton()
+            .submitSaveChangesModal()
             .verifyProgressBarNotExist();
         return this;
     }
 
     navigateToSourceInformation(saveChanges = true): NavigationSectionActions {
-        this.clickSaveButton()
-            .verifyProgressBarNotExist();
         this.clickFinalButton()
             .clickSourceInformation()
-            // .submitSaveChangesModal(saveChanges)
-            // .verifyProgressBarNotExist();
+            .submitSaveChangesModal(saveChanges)
+            .verifyProgressBarNotExist();
         return this;
     }
 
@@ -226,23 +218,19 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
     }
 
     navigateToResInPlaceRentRoll(saveChanges = true): NavigationSectionActions {
-        this.clickSaveButton()
-            .verifyProgressBarNotExist();
         this.clickIncomeApproachButton()
             .clickResidentialMenuIfClosed()
             .clickInPlaceRentRollButton()
-            // .submitSaveChangesModal(saveChanges)
+            .submitSaveChangesModal(saveChanges)
             .waitForUrl(routesUtils.residentialInPlaceRentRoll);
         return this;
     }
 
     navigateToRentComps(): NavigationSectionActions {
-        this.clickSaveButton()
-            .verifyProgressBarNotExist();
         this.clickIncomeApproachButton()
             .clickResidentialMenuIfClosed()
             .clickRentCompsButton()
-            // .submitSaveChangesModal();
+            .submitSaveChangesModal();
         return this;
     }
 
@@ -254,31 +242,25 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
     }
 
     navigateToCompGroups(): NavigationSectionActions {
-        this.clickSaveButton()
-            .verifyProgressBarNotExist();
         this.clickIncomeApproachButton()
             .clickCommercialMenuIfClosed()
             .clickCommercialCompGroups()
-            // .submitSaveChangesModal()
-            // .verifyProgressBarNotExist();
+            .submitSaveChangesModal()
+            .verifyProgressBarNotExist();
         return this;
     }
 
     openRentCompsInResidential(): NavigationSectionActions {
-        this.clickSaveButton()
-            .verifyProgressBarNotExist();
         this.clickRentCompsButton()
-            // .submitSaveChangesModal();
+            .submitSaveChangesModal();
         return this;
     }
 
     navigateToCommercialInPlaceRentRoll(): NavigationSectionActions {
-        this.clickSaveButton()
-            .verifyProgressBarNotExist();
         this.clickIncomeApproachButton()
             .clickCommercialMenuIfClosed()
             .clickCommercialRentRollButton()
-            // .submitSaveChangesModal()
+            .submitSaveChangesModal()
             .waitForUrl(routesUtils.commercialInPlaceRentRoll);
         
         // see comment to `navigateToCommercialStabilizedRentRoll` method
@@ -287,63 +269,49 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
     }
 
     openInPlaceRentRollInCommercial(): NavigationSectionActions {
-        this.clickSaveButton()
-            .verifyProgressBarNotExist();
         this.clickCommercialRentRollButton()
-            // .submitSaveChangesModal();
+            .submitSaveChangesModal();
         return this;
     }
 
     navigateToPropertySummary(): NavigationSectionActions {
-        this.clickSaveButton()
-            .verifyProgressBarNotExist();
         this.clickPropertyButton()
             .clickSummaryButton()
-            // .submitSaveChangesModal()
+            .submitSaveChangesModal()
             .waitForUrl(routesUtils.propertySummary);
         return this;
     }
 
     navigateToPropertyMarket(): NavigationSectionActions {
-        this.clickSaveButton()
-            .verifyProgressBarNotExist();
         this.clickPropertyButton()
             .clickMarketButton()
-            // .submitSaveChangesModal();
+            .submitSaveChangesModal();
         return this;
     }
 
     navigateToPropertyDescription() {
-        this.clickSaveButton()
-            .verifyProgressBarNotExist();
         this.clickPropertyButton()
             .clickPropertyDescription()
-            // .submitSaveChangesModal();
+            .submitSaveChangesModal();
         return this;
     }
 
     navigateToClientPage(): NavigationSectionActions {
-        this.clickSaveButton()
-            .verifyProgressBarNotExist();
         this.clickReportButton()
             .clickClientButton()
-            // .submitSaveChangesModal();
+            .submitSaveChangesModal();
         return this;
     }
 
     openSiteDescriptionInProperty(): NavigationSectionActions {
-        this.clickSaveButton()
-            .verifyProgressBarNotExist();
         this.clickSiteDescriptionButton()
-            // .submitSaveChangesModal();
+            .submitSaveChangesModal();
         return this;
     }
 
     openMapsInProperty(): NavigationSectionActions {
-        this.clickSaveButton()
-            .verifyProgressBarNotExist();
         this.clickMapsButton()
-            // .submitSaveChangesModal();
+            .submitSaveChangesModal();
         return this;
     }
 
@@ -358,11 +326,9 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
     }
 
     navigateToCapRateConclusion(): NavigationSectionActions {
-        this.clickSaveButton()
-            .verifyProgressBarNotExist();
         this.clickIncomeApproachButton()
             .clickCapRateConclusion()
-            // .submitSaveChangesModal();
+            .submitSaveChangesModal();
         return this;
     }
 
@@ -382,12 +348,10 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
     }
 
     navigateToSalesValueConclusion(): NavigationSectionActions {
-        this.clickSaveButton()
-            .verifyProgressBarNotExist();
         this.clickSalesButton()
             .clickValueConclusionButton()
-            // .submitSaveChangesModal();
-            // .verifyProgressBarNotExist();
+            .submitSaveChangesModal()
+            .verifyProgressBarNotExist();
         return this;
     }
 
@@ -404,7 +368,7 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
             .verifyProgressBarNotExist();
         this.clickSalesButton()
             .clickFindCompsButton()
-            // .submitSaveChangesModal();
+            .submitSaveChangesModal();
             
         ignoreGqlWait ? cy.log("Ignore wait for sales comps fetch") 
             : cy.wait(`@${Alias.gql.SearchSalesTransactions}`, { timeout:120000 }); 
@@ -418,11 +382,9 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
     }
 
     navigateToAdjustComps(): NavigationSectionActions {
-        this.clickSaveButton()
-            .verifyProgressBarNotExist();
         this.clickSalesButton()
             .clickAdjustCompsButton()
-            // .submitSaveChangesModal();
+            .submitSaveChangesModal();
         return this;
     }
 
@@ -432,11 +394,9 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
     }
 
     navigateToFinalScope(): NavigationSectionActions {
-        this.clickSaveButton()
-            .verifyProgressBarNotExist();
         this.clickFinalButton()
             .clickFinalScope()
-            // .submitSaveChangesModal();
+            .submitSaveChangesModal();
         return this;
     }
 
@@ -446,11 +406,9 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
     }
 
     navigateToAssumptionsConditions(): NavigationSectionActions {
-        this.clickSaveButton()
-            .verifyProgressBarNotExist();
         this.clickFinalButton()
             .clickAssumptionsConditions()
-            // .submitSaveChangesModal();
+            .submitSaveChangesModal();
         return this;
     }
 
@@ -477,12 +435,10 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
     }
 
     navigateToCommercialRentComps(): NavigationSectionActions {
-        this.clickSaveButton()
-            .verifyProgressBarNotExist();
         this.clickIncomeApproachButton()
             .clickCommercialMenuIfClosed()
             .clickCommercialRentComps()
-            // .submitSaveChangesModal();
+            .submitSaveChangesModal();
         return this;
     }
 
@@ -492,39 +448,31 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
     }
 
     navigateToComparableExpenses(): NavigationSectionActions {
-        this.clickSaveButton()
-            .verifyProgressBarNotExist();
         this.clickIncomeApproachButton()
             .clickComparableExpenses()
-            // .submitSaveChangesModal();
+            .submitSaveChangesModal();
         return this;
     }
 
     navigateToCommercialUnits(): NavigationSectionActions {
-        this.clickSaveButton()
-            .verifyProgressBarNotExist();
         this.clickPropertyButton()
             .clickCommercialUnits()
-            // .submitSaveChangesModal()
+            .submitSaveChangesModal()
             .waitForUrl(routesUtils.propertyCommercialUnits);
         return this;
     }
 
     openInPlaceRentRollInResidential(): NavigationSectionActions {
-        this.clickSaveButton()
-            .verifyProgressBarNotExist();
         this.clickInPlaceRentRollButton()
-            // .submitSaveChangesModal();
+            .submitSaveChangesModal();
         return this;
     }
 
     navigateToRentReconciliation(): NavigationSectionActions {
-        this.clickSaveButton()
-            .verifyProgressBarNotExist();
         this.clickIncomeApproachButton()
             .clickCommercialMenuIfClosed()
             .clickRentReconciliationButton()
-            // .submitSaveChangesModal();
+            .submitSaveChangesModal();
         return this;
     }
 
@@ -539,11 +487,9 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
     }
 
     navigateToPropertyAmenities(): NavigationSectionActions {
-        this.clickSaveButton()
-            .verifyProgressBarNotExist();
         this.clickPropertyButton()
             .clickAmenitiesButton()
-            // .submitSaveChangesModal();
+            .submitSaveChangesModal();
         return this;
     }
 
@@ -649,20 +595,16 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
     }
 
     navigateToCoverPage(): NavigationSectionActions {
-        this.clickSaveButton()
-            .verifyProgressBarNotExist();
         this.clickPreviewEditButton()
             .clickCoverPage()
-            // .submitSaveChangesModal();
+            .submitSaveChangesModal();
         return this;
     }
 
     navigateToIntroduction(): NavigationSectionActions {
-        this.clickSaveButton()
-            .verifyProgressBarNotExist();
         this.clickPreviewEditButton()
             .clickIntroduction()
-            // .submitSaveChangesModal();
+            .submitSaveChangesModal();
         return this;
     }
 
@@ -691,11 +633,9 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
     }
 
     navigateToPotentialGrossIncome(): NavigationSectionActions {
-        this.clickSaveButton()
-            .verifyProgressBarNotExist();
         this.clickIncomeApproachButton()
             .clickPotentialGrossIncome()
-            // .submitSaveChangesModal();
+            .submitSaveChangesModal();
         return this;
     }
 
@@ -705,11 +645,9 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
     }
   
     navigateToProForma(): NavigationSectionActions {
-        this.clickSaveButton()
-            .verifyProgressBarNotExist();
         this.clickIncomeApproachButton()
-            .clickProForma();
-        // this.submitSaveChangesModal();
+            .clickProForma()
+            .submitSaveChangesModal();
         return this;
     }
 
@@ -719,19 +657,15 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
     }
 
     openCompGroupsInCommercial(): NavigationSectionActions {
-        this.clickSaveButton()
-            .verifyProgressBarNotExist();
         this.clickCommercialCompGroups()
-            // .submitSaveChangesModal();
+            .submitSaveChangesModal();
         return this;
     }
 
     navigateToReportInformation(): NavigationSectionActions {
-        this.clickSaveButton()
-            .verifyProgressBarNotExist();
         this.clickReportButton()
             .clickReportInfoButton()
-            // .submitSaveChangesModal();
+            .submitSaveChangesModal();
         return this;
     }
 
@@ -746,11 +680,9 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
     }
 
     navigateToExpenseHistory(): NavigationSectionActions {
-        this.clickSaveButton()
-            .verifyProgressBarNotExist();
         this.clickIncomeApproachButton()
             .clickExpenseHistoryButton()
-            // .submitSaveChangesModal();
+            .submitSaveChangesModal();
         return this;
     }
 
@@ -760,11 +692,9 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
     }
 
     navigateToExpenseForecast(): NavigationSectionActions {
-        this.clickSaveButton()
-            .verifyProgressBarNotExist();
         this.clickIncomeApproachButton()
             .clickExpenseForecastButton()
-            // .submitSaveChangesModal()
+            .submitSaveChangesModal()
             .waitForUrl(routesUtils.expenseForecast);
         return this;
     }
@@ -775,11 +705,9 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
     }
 
     navigateToSupportingCapRates(): NavigationSectionActions {
-        this.clickSaveButton()
-            .verifyProgressBarNotExist();
         this.clickIncomeApproachButton()
             .clickSupportingCapRates()
-            // .submitSaveChangesModal();
+            .submitSaveChangesModal();
         return this;
     }
 
@@ -788,25 +716,21 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
             .verifyProgressBarNotExist();
         this.clickIncomeApproachButton()
             .clickTaxInfo()
-            // .submitSaveChangesModal();
+            .submitSaveChangesModal();
         return this;
     }
 
     openCommercialStabilizedRentRollInCommercial(): NavigationSectionActions {
-        this.clickSaveButton()
-            .verifyProgressBarNotExist();
         this.clickCommercialStabRentRollButton()
-            // .submitSaveChangesModal();
+            .submitSaveChangesModal();
         return this;
     }
 
     navigateToCommercialReimbursementSummary(): NavigationSectionActions {
-        this.clickSaveButton()
-            .verifyProgressBarNotExist();
         this.clickIncomeApproachButton()
             .clickCommercialMenuIfClosed()
             .clickCommercialReimbursementSummaryButton()
-            // .submitSaveChangesModal();
+            .submitSaveChangesModal();
         return this;
     }
 
@@ -816,22 +740,18 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
     }
     
     navigateToResidentialStabilizedRentRoll(): this {
-        this.clickSaveButton()
-            .verifyProgressBarNotExist();
         this.clickIncomeApproachButton();
         this.clickResidentialMenuIfClosed();
         this.clickResidentialStabilizedRentRoll()
-            // .submitSaveChangesModal();
+            .submitSaveChangesModal();
         return this;
     }
 
     navigateToResidentialStabilizedRentRollSummary(): this {
-        this.clickSaveButton()
-            .verifyProgressBarNotExist();
         this.clickIncomeApproachButton();
         this.clickResidentialMenuIfClosed();
         this.clickResidentialStabilizedRentRollSummary()
-            // .submitSaveChangesModal();
+            .submitSaveChangesModal();
         return this;
     }
 
@@ -841,12 +761,10 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
     }
 
     navigateToCommercialStabilizedRentRoll(): this {
-        this.clickSaveButton()
-            .verifyProgressBarNotExist();
         this.clickIncomeApproachButton();
         this.clickCommercialMenuIfClosed();
         this.clickCommercialStabRentRollButton()
-            // .submitSaveChangesModal()
+            .submitSaveChangesModal()
             .waitForUrl(routesUtils.commercialStabilizedRentRoll);
         
         /*
@@ -866,11 +784,9 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
     }
 
     navigateToReportAppraiser(): NavigationSectionActions {
-        this.clickSaveButton()
-            .verifyProgressBarNotExist();
         this.clickReportButton()
             .clickAppraiserButton()
-            // .submitSaveChangesModal();
+            .submitSaveChangesModal();
         return this;
     }
 
@@ -880,12 +796,10 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
     }
 
     navigateToRenovation(): NavigationSectionActions {
-        this.clickSaveButton()
-            .verifyProgressBarNotExist();
         this.clickPropertyButton()
             .clickRenovationButton()
-            // .submitSaveChangesModal()
-            // .verifyProgressBarNotExist();
+            .submitSaveChangesModal()
+            .verifyProgressBarNotExist();
         return this;
     }
 
