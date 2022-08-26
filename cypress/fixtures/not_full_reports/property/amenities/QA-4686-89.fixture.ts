@@ -17,6 +17,11 @@ const inputs = [
         checkboxName: Enums.AMENITIES_CHECKBOXES.hasPrivateBalcony,
         inputName: Enums.AMENITIES_INPUTS.privateBalconyUnits
     },
+    {
+        specName: "[QA-4689]",
+        checkboxName: Enums.AMENITIES_CHECKBOXES.hasPrivateTerrace,
+        inputName: Enums.AMENITIES_INPUTS.privateTerraceUnits
+    },
 ];
 
 export default {
