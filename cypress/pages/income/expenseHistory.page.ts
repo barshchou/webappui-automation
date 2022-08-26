@@ -3,7 +3,7 @@ import { BoweryReports } from "../../types/boweryReports.type";
 
 class ExpenseHistoryPage extends BasePage {
 
-    get expensePeriodDropdown() { return cy.get("#expensePeriod"); }
+    get expensePeriodDropdown() { return cy.get("[id*=expensePeriod]"); }
 
     getDropdownOptionByValue(value: string) { return cy.get(`li[data-value='${value}']`); }
 
@@ -13,7 +13,7 @@ class ExpenseHistoryPage extends BasePage {
 
     get expenseHistoryCommentary() { return cy.get("[data-qa^='expenseHistoryDiscussion.commentary']"); }
 
-    get expenseMonthDropdown() { return cy.get("#expenseMonth"); }
+    get expenseMonthDropdown() { return cy.get("[name=expenseMonth]"); }
 
     expenseMonthDropdownValue(month: string) { return  cy.xpath(`//li[.='${month}']`); }
 
