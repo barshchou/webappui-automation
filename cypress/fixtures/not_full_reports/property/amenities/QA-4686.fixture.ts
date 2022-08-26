@@ -5,7 +5,7 @@ const inputs = [
     {
         specName: "[QA-4686]",
         checkboxName: Enums.AMENITIES_CHECKBOXES.hasWasherDryer,
-        uploadName: Enums.AMENITIES_INPUTS.washerDryerUnits
+        inputName: Enums.AMENITIES_INPUTS.washerDryerUnits
     },
 ];
 

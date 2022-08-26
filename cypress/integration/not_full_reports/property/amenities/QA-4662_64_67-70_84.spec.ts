@@ -40,11 +40,11 @@ describe("Verify the display of the Amenities page", { tags:[ "@property", "@ame
         Property._Amenities.checkCheckboxByName(Enums.AMENITIES_CHECKBOXES.hasStorageUnits);
 
         cy.stepInfo("3. Verify not valid of Storage Units field");
-        Property._Amenities.enterAmenitiesInput("storageUnitCount", 1000, testData.storageValueMore)
-            .enterAmenitiesInput("storageUnitCount", 1000, testData.testValue);
+        Property._Amenities.enterAmenitiesValidationInput("storageUnitCount", 1000, testData.storageValueMore)
+            .enterAmenitiesValidationInput("storageUnitCount", 1000, testData.testValue);
 
         cy.stepInfo("4. Verify valid value entered in the Number of Storage Units field");
-        Property._Amenities.enterAmenitiesInput("storageUnitCount", 1000, testData.storageValue)
+        Property._Amenities.enterAmenitiesValidationInput("storageUnitCount", 1000, testData.storageValue)
             .verifyProgressBarNotExist();
 
         cy.stepInfo("5. Proceed to the Property > Amenities page and verify generated comment");
