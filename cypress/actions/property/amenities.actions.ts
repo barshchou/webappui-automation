@@ -96,12 +96,17 @@ class AmenitiesActions extends BaseActionsExt<typeof amenitiesPage> {
         return this;
     }
 
-    enterAmenitiesInput(name: string, maxValue: number, value: number | string): AmenitiesActions {
+    enterAmenitiesValidationInput(name: string, maxValue: number, value: number | string): AmenitiesActions {
         const verifyParam = /^\d+$/.test(`${value}`) ? "have.value" : "not.have.value";
         amenitiesPage.getAmenitiesInput(name).clear().type(`${value}`).blur().should(verifyParam, value);
         if (value > maxValue) {
             cy.contains(`Max value is ${maxValue}`).should("exist");
         }
+        return this;
+    }
+
+    enterAmenitiesInput(name: string, value: string | number): AmenitiesActions {
+        amenitiesPage.getAmenitiesInput(name).clear().type(`${value}`).should("have.value", value);
         return this;
     }
 }
