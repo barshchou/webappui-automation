@@ -86,7 +86,8 @@ import certificationEnum from "./cms/certification.enum";
 import otherAdjustmentsExpansionRowsEnum from "./adjustComps/otherAdjustmentsExpansionRows.enum";
 import utilitiesAdjustmentsExpansionRowsEnum from "./adjustComps/utilitiesAdjustmentsExpansionRows.enum";
 import adjustmentExpansionLabelsEnum from "./sales/adjustComps/adjustmentExpansionLabels.enum";
-import amenitiesCheckboxesEnum from "./property/amenitiesCheckboxes.enum";
+import amenitiesCheckboxesEnum from "./property/amenities/amenitiesCheckboxes.enum";
+import amenitiesUploadsEnum from "./property/amenities/amenitiesUploads.enum";
 
 export default {
     TEMPLATE_TYPE: templateTypesEnum,
@@ -177,5 +178,6 @@ export default {
     OTHER_ADJUSTMENTS_EXPANSION_ROWS: otherAdjustmentsExpansionRowsEnum,
     UTILITIES_ADJUSTMENTS_EXPANSION_ROWS: utilitiesAdjustmentsExpansionRowsEnum,
     ADJUSTMENT_EXPANSION_LABELS: adjustmentExpansionLabelsEnum,
-    AMENITIES_CHECKBOXES: amenitiesCheckboxesEnum
+    AMENITIES_CHECKBOXES: amenitiesCheckboxesEnum,
+    AMENITIES_UPLOADS: amenitiesUploadsEnum
 };
