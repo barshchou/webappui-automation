@@ -26,7 +26,7 @@ const doormanRadios = [
 ];
 
 export default {
-    reportCreationData: ReportDataCreator.getReportData("4626-64-65_67-71_73_76"),
+    reportCreationData: ReportDataCreator.getReportData("4626-64-65_67-71_73_76_81"),
     withoutAdditionalCheckboxes,
     buildingCheckboxes,
     unitCheckboxes,
@@ -43,6 +43,7 @@ export default {
     bikeRoom: "bikeRoom",
     gym: "gym",
     pool: "pool",
+    recreationRoom: "recreationRoom",
     otherOutdoorSpace: "building.otherOutdoorSpace",
     otherDoorman: "building.otherDoorman",
     sharedOutdoorSpaceCheckboxes,
