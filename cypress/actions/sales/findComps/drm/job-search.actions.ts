@@ -33,9 +33,9 @@ class JobSearchActions {
         this.Page.jobSearchFilterInputPropertyType.should("be.enabled");
         this.Page.jobSearchOnAppJobCheckbox.should("be.enabled");
         Object.values(numberFilters).forEach(element => {
-            for (const [ key ] of Object.entries(minMaxInputs)) {
+            Object.values(minMaxInputs).forEach(key => {
                 this.Page.jobSearchGetFilterInput(key, element).should("be.enabled");
-            }
+            });
         });
         return this;
     }
@@ -45,9 +45,9 @@ class JobSearchActions {
         this.Page.jobSearchFilterInputPropertyType.should("be.disabled");
         this.Page.jobSearchOnAppJobCheckbox.should("be.disabled");
         Object.values(numberFilters).forEach(element => {
-            for (const [ key ] of Object.entries(minMaxInputs)) {
+            Object.values(minMaxInputs).forEach(key => {
                 this.Page.jobSearchGetFilterInput(key, element).should("be.disabled");
-            }
+            });
         });
         return this;
     }
@@ -57,9 +57,9 @@ class JobSearchActions {
         this.Page.jobSearchFilterInputPropertyType.should("have.value", "");
         this.Page.jobSearchOnAppJobCheckbox.should("not.be.checked");
         Object.values(numberFilters).forEach(element => {
-            for (const [ key ] of Object.entries(minMaxInputs)) {
+            Object.values(minMaxInputs).forEach(key => {
                 this.Page.jobSearchGetFilterInput(key, element).should("be.empty");
-            }
+            });
         });
         return this;
     }
