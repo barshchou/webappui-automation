@@ -234,6 +234,7 @@ export namespace BoweryReports {
     export type CalculationType = typeof Enums.CALCULATION_TYPE[KeyInfo.CalculationType]
     export type FileSelection = typeof Enums.FILE_SELECTION_NAMES[KeyInfo.FileSelection]
 
+    export type FeasiblePropertyType = keyof typeof Enums.FEASIBLE_PROPERTY_TYPES
     export type PropertyDiscussion = typeof Enums.PROPERTY_DISCUSSION_NAMES[KeyInfo.PropertyDiscussion]
     export type BasisSquareFootAnalysis = typeof Enums.BASIS_SQUARE_FOOT_ANALYSIS[KeyInfo.BasisSquareFootAnalysis]
     export type BasisSquareFootAnalysisTexts =
@@ -250,6 +251,9 @@ export namespace BoweryReports {
         date: string
     }
 
+    export type HighestAndBestUseComments = typeof Enums.HIGHEST_AND_BEST_USE_COMMENTS_ENUM[
+        KeyInfo.HighestAndBestUseCommentsKeys
+    ]
     export type AdjustmentExpansionLabels =
         typeof Enums.ADJUSTMENT_EXPANSION_LABELS[KeyInfo.AdjustmentExpansionLabelsKeys]
 

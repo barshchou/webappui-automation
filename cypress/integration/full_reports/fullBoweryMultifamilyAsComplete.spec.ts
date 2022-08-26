@@ -491,9 +491,9 @@ describe.skip("Full bowery way, multifamily as complete report", { tags: [ "@ful
             .verifyAdjustedPrices(testData.valueConclusion.adjustedPrices)
             .verifyIncomeApproachConclusion(testData.valueConclusion.incomeApproachConclusion)
             .enterSaleValueConclusion(testData.valueConclusion.saleValueConclusion)
-            .verifyAsStabilizedRow(testData.valueConclusion.asStabilizedRow)
-            .verifyAsCompleteRow(testData.valueConclusion.asCompleteRow)
-            .verifyAsIsMarketRow(testData.valueConclusion.asIsMarketRow)
+            .verifyAsStabilizedRow(testData.valueConclusionAsStabilized, testData.valueConclusion.asStabilizedRow)
+            .verifyAsCompleteRow(testData.valueConclusionAsComplete, testData.valueConclusion.asCompleteRow)
+            .verifyAsIsMarketRow(testData.valueConclusionAsIs, testData.valueConclusion.asIsMarketRow)
             .clickSaveContinueButton();
         Final.FinalValuesReconciliation.closeUserSurveyIfExist()
             .checkPerUnitCheckbox()

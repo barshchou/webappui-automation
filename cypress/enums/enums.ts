@@ -78,6 +78,8 @@ import unitIncomeTypeEnum from "./unit/unitIncomeType.enum";
 import rentLossTypeEnum from "./rentLossType.enum";
 import dateTypeEnum from "./keyInfo/dateType.enum";
 import interestAppraisedEnum from "./keyInfo/interestAppraised.enum";
+import feasiblePropertyTypesEnum from "./property/feasiblePropertyTypes.enum";
+import highestAndBestUseCommentsEnum from "./highestAndBestUseComments.enum";
 import letterOfTransmittalEnum from "./cms/letterOfTransmittal.enum";
 import swotAnalysisEnum from "./cms/swotAnalysis.enum";
 import salesforceJobsEnum from "./salesforceJobs.enum";
@@ -170,6 +172,8 @@ export default {
     RENT_LOSS_TYPE: rentLossTypeEnum,
     DATE_TYPE: dateTypeEnum,
     INTEREST_APPRAISED: interestAppraisedEnum,
+    FEASIBLE_PROPERTY_TYPES: feasiblePropertyTypesEnum,
+    HIGHEST_AND_BEST_USE_COMMENTS_ENUM: highestAndBestUseCommentsEnum,
     LETTER_SECTIONS: letterOfTransmittalEnum,
     SWOT_SECTIONS: swotAnalysisEnum,
     SALESFORCE_JOBS: salesforceJobsEnum,
