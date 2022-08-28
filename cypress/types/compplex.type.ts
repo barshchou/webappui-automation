@@ -31,7 +31,7 @@ export namespace CompPlex {
 
         export type JobFilter = Partial<_JobFilter>
         export type JobFilterKeys = keyof JobFilter
-        export type FilterMinMax = Partial<{min: number, max: number}> 
+        export type FilterMinMax = Partial< keyof typeof _jobSearch.minMaxInputs>
         export type SalePeriod = keyof typeof _jobSearch.salePeriod 
         export type PropertyType = keyof typeof _jobSearch.propertyType
         export type NumberFilters = keyof typeof _jobSearch.numberFilters
