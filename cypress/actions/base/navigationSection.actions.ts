@@ -885,6 +885,7 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
     }
 
     //#endregion
+    
 }
 
 export default new NavigationSectionActions(navigationSectionPage);
