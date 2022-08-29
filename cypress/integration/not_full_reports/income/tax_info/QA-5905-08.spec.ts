@@ -4,6 +4,7 @@ import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { Income } from '../../../../actions';
 import launchDarklyApi from "../../../../api/launchDarkly.api";
+import { numberWithCommas } from '../../../../../utils/numbers.utils';
 
 describe(`Tax Liability (PSF) for Summary tab sections is calculated correctly according to selected Basis 
         for Square Foot Analysis`, { tags: [ "@income", "@tax_info" ] }, () => {
@@ -35,28 +36,31 @@ describe(`Tax Liability (PSF) for Summary tab sections is calculated correctly a
         Income._TaxInfo.checkProjectedSectionCheckbox(testData.opinionProvidedSectionCheckbox);
 
         cy.stepInfo(`7. Fill in Taxable Assessed Value (Provided) field with valid numeric value`);
-        Income._TaxInfo.enterTaxAssessedValueProvidedProjectedTab(testData.assessedValueProvided);
+        Income._TaxInfo.enterItemValueOnProjectedTab(testData.taxableAssessedValueIdInput, 
+            `$${numberWithCommas(testData.assessedValueProvided)}`);
 
         cy.stepInfo(`8. Click on the checkbox "Include in report" on Percent of Renovations card, so it is checked`);
         Income._TaxInfo.checkProjectedSectionCheckbox(testData.renovationSectionCheckbox);
 
         cy.stepInfo(`9. Fill in Net Renovations and Assessment Ratio fields with valid numeric value`);
-        Income._TaxInfo.enterNetRenovationOnProjectedTab(testData.netRenovation)
-            .enterAssessmentRatioOnProjectedTab(testData.assessmentRation);
+        Income._TaxInfo.enterItemValueOnProjectedTab(testData.netRenovationInput, 
+            `$${numberWithCommas(testData.netRenovation)}`)
+            .enterItemValueOnProjectedTab(testData.assessmentRationInput, `${testData.assessmentRation.toFixed(2)}%`);
 
         cy.stepInfo(`10. Click on the checkbox "Include in report" on Percent of Income card, so it is checked`);
         Income._TaxInfo.checkProjectedSectionCheckbox(testData.percentOfIncomeSectionCheckbox);
     
         cy.stepInfo(`11. Fill in Income and Tax Liability Ratio fields with valid numeric value`);
-        Income._TaxInfo.enterIncomeOnProjectedTab(testData.income)
-            .enterTaxLiabilityRatioOnProjectedTab(testData.taxLiabilityRatio);
+        Income._TaxInfo.enterItemValueOnProjectedTab(testData.incomeInput, `$${numberWithCommas(testData.income)}`)
+            .enterItemValueOnProjectedTab(testData.taxLiabilityRatioInput, `${testData.taxLiabilityRatio}%`);
 
         cy.stepInfo(`12. Click on the checkbox "Include in report" on Equalized Market Value card, so it is checked`);
         Income._TaxInfo.checkProjectedSectionCheckbox(testData.equalizedMarketValueCheckbox);
 
         cy.stepInfo(`13. Fill in Estimated Market Value and Equalization Ratio fields with valid numeric value`);
-        Income._TaxInfo.enterEqualizationValueOnProjectedTab(testData.estimatedMarketValue)
-            .enterEqualizationRatiOnProjectedTab(testData.equalizationRatio);
+        Income._TaxInfo.enterItemValueOnProjectedTab(testData.estimatedMarketValueInput, 
+            `$${numberWithCommas(testData.estimatedMarketValue)}`)
+            .enterItemValueOnProjectedTab(testData.equalizationRatioInput, `${testData.equalizationRatio.toFixed(2)}%`);
     });
 
     it("[QA-5905][QA-5906][QA-5907][QA-5908]", () => {

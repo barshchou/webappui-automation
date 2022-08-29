@@ -139,7 +139,7 @@ export default class BaseActions {
         return this;
     }
 
-    typeInAgTable(textAreaInput: Cypress.Chainable<JQuery<HTMLElement>>, value: number) {
+    typeInAgTable(textAreaInput: Cypress.Chainable<JQuery<HTMLElement>>, value: string) {
         textAreaInput.realClick().realClick()
             .scrollIntoView()
             .focus().type("123456")

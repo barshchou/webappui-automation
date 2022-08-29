@@ -17,28 +17,28 @@ class TaxInfoActions extends BaseActionsExt<typeof taxInfoPage> {
 
     enterTaxableAssessedLandValue(value: number): this {
         const valueToBe = `$${numberWithCommas(value.toFixed(2))}`;
-        this.typeInAgTable(taxInfoPage.landActualInput, value);
+        this.typeInAgTable(taxInfoPage.landActualInput, `${value}`);
         taxInfoPage.landActualInput.should('have.text', valueToBe);
         return this;
     }
 
     enterTransitionalLandValue(value: number): TaxInfoActions {
         const valueToBe = `$${numberWithCommas(value.toFixed(2))}`;
-        this.typeInAgTable(taxInfoPage.landTransitional, value);
+        this.typeInAgTable(taxInfoPage.landTransitional, `${value}`);
         taxInfoPage.landTransitional.should('have.text', valueToBe);
         return this;
     }
 
     enterTaxableAssessedBuildingValue(value: number): this {
         const valueToBe = `$${numberWithCommas(value.toFixed(2))}`;
-        this.typeInAgTable(taxInfoPage.buildingActualInput, value);
+        this.typeInAgTable(taxInfoPage.buildingActualInput, `${value}`);
         taxInfoPage.buildingActualInput.should('have.text', valueToBe);
         return this;
     }
 
     enterTransitionalBuildingValue(value: number): TaxInfoActions {
         const valueToBe = `$${numberWithCommas(value.toFixed(2))}`;
-        this.typeInAgTable(taxInfoPage.buildingTransitionalInput, value);
+        this.typeInAgTable(taxInfoPage.buildingTransitionalInput, `${value}`);
         taxInfoPage.buildingTransitionalInput.should('have.text', valueToBe);
         return this;
     }
@@ -486,12 +486,6 @@ class TaxInfoActions extends BaseActionsExt<typeof taxInfoPage> {
         return this;
     }
 
-    enterTaxAssessedValueProvidedProjectedTab(value: number): TaxInfoActions {
-        this.typeInAgTable(taxInfoPage.taxableAssessedValueProvidedInput, value);
-        taxInfoPage.taxableAssessedValueProvidedInput.should("have.text", `$${numberWithCommas(value)}`);
-        return this;
-    }
-
     verifyTaxLiabilityOnProjectedTab(squareFootAnalysisArea: number, 
         sectionName: BoweryReports.ProjectedTaxesSectionsValues): TaxInfoActions {
         taxInfoPage.taxLiabilityTotalOnProjectedTab(sectionName).invoke('text').then(taxTotal => {
@@ -512,39 +506,16 @@ class TaxInfoActions extends BaseActionsExt<typeof taxInfoPage> {
         return this;
     }
 
-    enterNetRenovationOnProjectedTab(value: number): TaxInfoActions {
-        this.typeInAgTable(taxInfoPage.netRenovationInput, value);
-        taxInfoPage.netRenovationInput.should("have.text", `$${numberWithCommas(value)}`);
+
+    enterItemValueOnProjectedTab(inputName: BoweryReports.ProjectedTaxesInputsNamesValues, value: string ): 
+    TaxInfoActions {
+        this.typeInAgTable(taxInfoPage.projectedTaxesIncludedInputs(inputName), value);
+        this.verifyProjectInputs(value, inputName);
         return this;
     }
 
-    enterAssessmentRatioOnProjectedTab(value: number): TaxInfoActions {
-        this.typeInAgTable(taxInfoPage.assessmentRatioInput, value);
-        taxInfoPage.assessmentRatioInput.should("have.text", `${value.toFixed(2)}%`);
-        return this;
-    }
-
-    enterIncomeOnProjectedTab(value: number): TaxInfoActions {
-        this.typeInAgTable(taxInfoPage.incomeInput, value);
-        taxInfoPage.incomeInput.should("have.text", `$${numberWithCommas(value)}`);
-        return this;
-    }
-
-    enterTaxLiabilityRatioOnProjectedTab(value: number): TaxInfoActions {
-        this.typeInAgTable(taxInfoPage.taxLiabilityRatioInput, value);
-        taxInfoPage.taxLiabilityRatioInput.should("have.text", `${value}%`);
-        return this;
-    }
-
-    enterEqualizationValueOnProjectedTab(value: number): TaxInfoActions {
-        this.typeInAgTable(taxInfoPage.equalizationValueInput, value);
-        taxInfoPage.equalizationValueInput.should("have.text", `$${numberWithCommas(value)}`);
-        return this;
-    }
-
-    enterEqualizationRatiOnProjectedTab(value: number): TaxInfoActions {
-        this.typeInAgTable(taxInfoPage.equalizationRatioInput, value);
-        taxInfoPage.equalizationRatioInput.should("have.text", `${value.toFixed(2)}%`);
+    verifyProjectInputs(valueToBe: string, inputName: BoweryReports.ProjectedTaxesInputsNamesValues): TaxInfoActions {
+        taxInfoPage.projectedTaxesIncludedInputs(inputName).should("have.text", valueToBe);
         return this;
     }
 }

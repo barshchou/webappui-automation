@@ -191,6 +191,8 @@ export namespace BoweryReports {
 
     export type ProjectedTaxesSectionsKeys = keyof typeof Enums.PROJECTED_TAXES_SECTIONS
     export type ProjectedTaxesSectionsValues = typeof Enums.PROJECTED_TAXES_SECTIONS[KeyInfo.ProjectedTaxesSectionsKeys]
+    export type ProjectedTaxesInputsNamesValues = 
+        typeof Enums.PROJECTED_TAXES_INPUTS[KeyInfo.ProjectedTaxesInputsNamesKeys]
 
     export type UnitType = keyof typeof Enums.UNIT_TYPE
     export type SourceOfInformation = typeof Enums.SOURCE_OF_INFORMATION[KeyInfo.SourceOfInformationKeys]

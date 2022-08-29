@@ -89,6 +89,7 @@ import otherAdjustmentsExpansionRowsEnum from "./adjustComps/otherAdjustmentsExp
 import utilitiesAdjustmentsExpansionRowsEnum from "./adjustComps/utilitiesAdjustmentsExpansionRows.enum";
 import adjustmentExpansionLabelsEnum from "./sales/adjustComps/adjustmentExpansionLabels.enum";
 import projectedTaxesSectionsEnum from "./income/taxInfo/projectedTaxesSections.enum";
+import projectedTaxesInputsNamesEnum from "./income/taxInfo/projectedTaxesInputsNames.enum";
 
 export default {
     TEMPLATE_TYPE: templateTypesEnum,
@@ -181,5 +182,6 @@ export default {
     OTHER_ADJUSTMENTS_EXPANSION_ROWS: otherAdjustmentsExpansionRowsEnum,
     UTILITIES_ADJUSTMENTS_EXPANSION_ROWS: utilitiesAdjustmentsExpansionRowsEnum,
     ADJUSTMENT_EXPANSION_LABELS: adjustmentExpansionLabelsEnum,
-    PROJECTED_TAXES_SECTIONS: projectedTaxesSectionsEnum
+    PROJECTED_TAXES_SECTIONS: projectedTaxesSectionsEnum,
+    PROJECTED_TAXES_INPUTS: projectedTaxesInputsNamesEnum
 };

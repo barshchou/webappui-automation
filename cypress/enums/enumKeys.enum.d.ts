@@ -66,3 +66,4 @@ export type OtherAdjustmentsExpansionRowsKeys = keyof typeof Enums.OTHER_ADJUSTM
 export type UtilitiesAdjustmentsExpansionRowsKeys = keyof typeof Enums.UTILITIES_ADJUSTMENTS_EXPANSION_ROWS
 export type AdjustmentExpansionLabelsKeys = keyof typeof Enums.ADJUSTMENT_EXPANSION_LABELS
 export type ProjectedTaxesSectionsKeys = keyof typeof Enums.PROJECTED_TAXES_SECTIONS
+export type ProjectedTaxesInputsNamesKeys = keyof typeof Enums.PROJECTED_TAXES_INPUTS

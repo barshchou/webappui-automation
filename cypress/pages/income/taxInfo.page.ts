@@ -168,28 +168,8 @@ class TaxInfoPage extends BasePage {
         return cy.xpath(`//div[h6[.='${sectionName}']]//div[@row-id='taxesPerBasis']/div[@col-id='value']`);
     }
 
-    get netRenovationInput() {
-        return cy.xpath(`//*[@row-id='netRenovationCost']/div[@col-id='value']`);
-    }
-
-    get assessmentRatioInput() {
-        return cy.xpath(`//*[@row-id='assessmentRatio']/div[@col-id='value']`);
-    }
-
-    get incomeInput() {
-        return cy.xpath(`//*[@row-id='income']/div[@col-id='value']`);
-    } 
-
-    get taxLiabilityRatioInput() {
-        return cy.xpath(`//*[@row-id='liabilityRatio']/div[@col-id='value']`);
-    }
-
-    get equalizationValueInput() {
-        return cy.xpath(`//*[@row-id='marketValue']/div[@col-id='value']`);
-    }
-
-    get equalizationRatioInput() {
-        return cy.xpath(`//*[@row-id='equalizationRatio']/div[@col-id='value']`);
+    projectedTaxesIncludedInputs(inputName: BoweryReports.ProjectedTaxesInputsNamesValues) {
+        return cy.xpath(`//*[@row-id='${inputName}']/div[@col-id='value']`);
     }
 
     taxLiabilityTotalOnSummaryTab(sectionName: BoweryReports.ProjectedTaxesSectionsValues) {
