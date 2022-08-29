@@ -32,9 +32,9 @@ and Identification of the Client sections`,
             .enterIntendedUserTextBox(testData.textToType)
             .clickNarrativeSuggestions(testData.verifyListValue)
             .Page.formRevertToOriginalBtn().click();
-        Report._Client.Page.CloseIcon.click();
 
         cy.stepInfo(`5. Click on the X icon and verify that the modal is closed and no changes are applied.`);
+        Report._Client.Page.CloseIcon.click();
         Report._Client.verifyIntendedUserTextBox(testData.verifyAreaValue);
 
         cy.stepInfo(`6. Click on the Revert to Original button again.`);
@@ -76,9 +76,9 @@ and Identification of the Client sections`,
             .enterIdentificationOfTheClientTextBox(testData.textToType)
             .clickNarrativeSuggestions(testData.verifyListValue, 1)
             .Page.formRevertToOriginalBtn(1).click();
-        Report._Client.Page.CloseIcon.click();
 
         cy.stepInfo(`14. Click on the X icon and verify that the modal is closed and no changes are applied.`);
+        Report._Client.Page.CloseIcon.click();
         Report._Client.verifyIdentificationOfTheClientTextBox(testData.verifyAreaValue);
 
         cy.stepInfo(`15. Click on the Revert to Original button again.`);
