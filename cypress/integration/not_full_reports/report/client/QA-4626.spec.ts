@@ -21,8 +21,8 @@ describe("Verify the display of the Client page.", { tags:[ "@report", "@client"
             Client Guidelines Discussion section`);
         Report._Client.verifyProgressBarNotExist()
             .Page.clientTitle.should("be.visible");
-
-        Report._Client.Page.warningMessage.should("be.visible");
+        Report._Client.Page.warningMessage.should("include.text", testData.warningMessage);
+        Report._Client.Page.warningAddBtn.should("be.visible");
         Report._Client.Page.clientNameField.should("be.visible");
         Report._Client.Page.clientFileNumberField.should("be.visible");
         Report._Client.Page.nycbApplicationNumber.should("be.visible");
