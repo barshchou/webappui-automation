@@ -40,7 +40,7 @@ export const createReport = (reportCreationData: BoweryAutomation.ReportCreation
             });
             cy._mapGet(mapKeysUtils.reportId).then(reportId => {
                 cy.log("Report id: "+reportId);
-                cy.visit(`/report/${reportId}`);
+                cy.visit(`/report/${reportId}/report-information`);
             });
         } else {
             _HomePage.createReport(reportCreationData);

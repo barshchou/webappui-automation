@@ -9,7 +9,8 @@ const pagesTextboxNames = {
     marketingTimeDescription: "Marketing Time Description",
     generalAssumptionsDiscussion: "General Assumptions Discussion",
     definitionOfMarketValue: "Definition of Market Value",
-    dataSourcesDescriptionExport: "Data Sources Description Export"
+    dataSourcesDescriptionExport: "Data Sources Description Export",
+    totalOperatingExpenses: "TOTAL OPERATING EXPENSES"
 } as const;
 
 export default Object.freeze(pagesTextboxNames);

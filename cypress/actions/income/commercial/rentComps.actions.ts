@@ -188,7 +188,7 @@ class CommercialRentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
     }
 
     clickEditButtonByRowNumber(rowNumber = 0): CommercialRentCompsActions {
-        rentCompsPage.getEditCompButton(rowNumber).click();
+        rentCompsPage.getEditCompButton(rowNumber).scrollIntoView().click();
         return this;
     }
 

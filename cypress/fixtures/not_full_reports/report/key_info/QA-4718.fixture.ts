@@ -22,8 +22,8 @@ export default {
     reportCreationData: reportCreationFixture(),
     chips: chipsDataCreator.getChipsData(_chipsOptions, enums.VALUE_CONCLUSION_TYPE.AS_STABILIZED),
     buildingName: _buildingName,
-    propertyRightsAppraisedCommentaryTitle: "Property Rights Appraised",
-    definitionOfMarketValueCommentaryTitle: "Definition of Market Value",
+    propertyRightsAppraisedTitle: Enums.PAGES_TEXTBOX_NAMES.propertyRightsAppraised,
+    definitionOfMarketValueTitle: Enums.PAGES_TEXTBOX_NAMES.definitionOfMarketValue,
     propertyRightsSection: Enums.EXPORT_TITLES.propertyRightsAppraised,
     definitionOfMarketValueSection: Enums.EXPORT_TITLES.definitionOfMarketValue
 };

@@ -39,8 +39,8 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
             url: '/api/docx-report-async/get-report-hierarchy*'
         }).as(reportAlias);
         cy.get('[id="review-and-export"]').click();
-        this.submitSaveChangesModal();
-        this.verifyProgressBarNotExist();
+        this.submitSaveChangesModal()
+            .verifyProgressBarNotExist();
         if (isNewReport) { cy.wait(`@${reportAlias}`, { timeout:20000 }); }
         return this;
     }
@@ -69,6 +69,7 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
     navigateToUnitInspection(): NavigationSectionActions {
         this.clickFinalButton()
             .clickUnitInspectionButton()
+            .submitSaveChangesModal()
             .verifyProgressBarNotExist()
             .waitForUrl(routesUtils.unitInspection);
         return this;
@@ -607,7 +608,7 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         navigationSectionPage.highestAndBestUseButton.click();
         return this;
     }
-    
+
     clickSourceInformation(): NavigationSectionActions {
         navigationSectionPage.sourceInformation.click();
         return this;

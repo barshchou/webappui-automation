@@ -63,6 +63,14 @@ export default class BasePage {
             .eq((index !== 0) ? index : 0);
     }
 
+    formRevertToOriginalBtnBySectionName(name: string) {
+        return cy.xpath(`//*[.='${name}']//following::button[.='Revert to Original'][1]`);
+    }
+
+    commentaryUserPromptBySectionName(name: string) {
+        return cy.xpath(`//*[.='${name}']//following::span[.='Type = to quick select report data.'][1]`);
+    }
+
     formCancelButton(index = 0) {
         return cy.xpath("//button[.='Cancel']")
             .eq((index !== 0) ? index : 0);

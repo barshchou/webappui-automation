@@ -6,8 +6,8 @@ export default {
     opportunities: Enums.SWOT_SECTIONS.opportunities,
     typeValue: "test value",
     opportunitiesTexts: [
-        "All units are rent stabilized, and there is potential upside upon tenant turnover. ",
+        "All units are rent stabilized, and there is potential upside upon tenant turnover.",
         "There has been increased demand for similar assets as investors from prime New York" + 
-        " Metro submarkets seek higher returns increasing pricing for similar assets. "
+        " Metro submarkets seek higher returns increasing pricing for similar assets."
     ],
 };

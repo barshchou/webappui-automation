@@ -2,6 +2,7 @@ import testData from "../../../../fixtures/not_full_reports/property/commercial_
 import { createReport } from "../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Property from "../../../../actions/property/property.manager";
+import Enums from "../../../../enums/enums";
 
 describe("Verify the functionality of the Frontage radio button", 
     { tags: [ "@property", "@commercial_units" ] }, () => {
@@ -20,8 +21,11 @@ describe("Verify the functionality of the Frontage radio button",
             cy.stepInfo(`2. Verify the Frontage contains the following radio buttons: Small, Medium, Large, Other.`);
             cy.contains("Frontage").should("exist");
             testData.useRadios.forEach((radio, index) => {
-                Property.CommercialUnits.clickRadioButtonByValueAndUnitIndex(testData.groupName, radio)
-                    .clickSaveContinueButton();
+                Property.CommercialUnits.clickRadioButtonByValueAndUnitIndex(testData.groupName, radio);
+                if (radio === Enums.COMMERCIAL_UNITS_FRONTAGE_VALUES.other) {
+                    Property.CommercialUnits.enterOtherValueByGroupName(testData.groupName, testData.otherValue);
+                }
+                Property.CommercialUnits.clickSaveContinueButton();
                 NavigationSection.verifyProgressBarNotExist();
                 if (index === 0) {
                     NavigationSection.goBackWithSave();
