@@ -6,7 +6,7 @@ import { Income } from '../../../../actions';
 import launchDarklyApi from "../../../../api/launchDarkly.api";
 
 describe(`Tax Liability (PSF) for Projected tab sections is calculated correctly according to selected Basis 
-for Square Foot Analysis`, { tags: [ "@income", "@tax_info" ] }, () => {
+        for Square Foot Analysis`, { tags: [ "@income", "@tax_info" ] }, () => {
     before('Login, create report, navigate to Tax Info Projected tab', () => {
         cy.stepInfo(`1. Set feature flag and create report`);
         launchDarklyApi.setFeatureFlagForUser(testData.flexibleTaxesKey, testData.onFeatureFlag)
