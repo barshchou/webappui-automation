@@ -506,7 +506,6 @@ class TaxInfoActions extends BaseActionsExt<typeof taxInfoPage> {
         return this;
     }
 
-
     enterItemValueOnProjectedTab(inputName: BoweryReports.ProjectedTaxesInputsNamesValues, value: string ): 
     TaxInfoActions {
         this.typeInAgTable(taxInfoPage.projectedTaxesIncludedInputs(inputName), value);

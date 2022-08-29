@@ -14,9 +14,6 @@ describe(`Tax Liability (PSF) for Projected tab sections is calculated correctly
             .setFeatureFlagForUser(testData.flexibleGbaAnalysisKey, testData.onFeatureFlag);
         createReport(testData.reportCreationData);
 
-        //Remove after tests passes
-        _NavigationSection.navigateToReportInformation();
-
         cy.stepInfo(`2. Basis for Square Foot Analysis should be selected and filled on Property > Summary form`);
         _NavigationSection.navigateToPropertySummary();
         Property._Summary.selectBasisSquareFootAnalysis(testData.gbaAnalysisBasis)
