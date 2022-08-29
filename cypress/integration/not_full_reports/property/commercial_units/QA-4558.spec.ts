@@ -52,7 +52,7 @@ describe("Verify the functionality of the Use* radio button",
                 _NavigationSection.navigateToCommercialInPlaceRentRoll();
                 Income._CommercialManager.InPlaceRentRoll.verifyUseCellByRow(testData.useTexts[index])
                     .chooseLeaseStatusByRowNumber("Occupied");
-                _NavigationSection.navigateToStabilizedRentRollInCommercial();
+                _NavigationSection.navigateToCommercialStabilizedRentRoll();
                 Income._CommercialManager.StabilizedRentRoll.verifyUseCellByRow(testData.useTexts[index])
                     .verifyProgressBarNotExist();
                 _NavigationSection.navigateToCommercialUnits();

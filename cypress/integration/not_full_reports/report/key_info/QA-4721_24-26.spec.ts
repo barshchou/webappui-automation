@@ -14,7 +14,7 @@ describe(`Verify the Save and Save & Continue button functionality on the Report
 
         it("[QA-4721]", () => {
             cy.stepInfo(`1. Proceed to the Report > Key Info page`);
-            _NavigationSection.navigateToReportInformation();
+            _NavigationSection.navigateToReportKeyInfo();
 
             cy.stepInfo(`2. Fill in the editable fields with values and click on the Save button then reload page`);
             Report._KeyInfo
@@ -41,7 +41,7 @@ describe(`Verify the Save and Save & Continue button functionality on the Report
 
         it("[QA-4724]", () => {
             cy.stepInfo(`1. Proceed to the Report > Key Info page`);
-            _NavigationSection.navigateToReportInformation();
+            _NavigationSection.navigateToReportKeyInfo();
 
             cy.stepInfo(`2. Fill in the editable fields with values and click on the Save & Continue button`);
             Report._KeyInfo.enterFormCommentTextBox(testData.propertyRightsAppraisedTitle, testData.enterValue, false)
@@ -68,7 +68,7 @@ describe(`Verify the Save and Save & Continue button functionality on the Report
 
         it("[QA-4725]", () => {
             cy.stepInfo(`1. Proceed to the Report > Key Info page`);
-            _NavigationSection.navigateToReportInformation();
+            _NavigationSection.navigateToReportKeyInfo();
 
             cy.stepInfo(`2. Fill in the editable fields with values and do NOT click on the Save button`);
             Report._KeyInfo.enterFormCommentTextBox(testData.propertyRightsAppraisedTitle, testData.enterValue, false)
@@ -86,7 +86,7 @@ describe(`Verify the Save and Save & Continue button functionality on the Report
                 .clickYesButton()
                 .verifyProgressBarNotExist()
                 .waitForUrl(routesUtils.letterOfTransmittal)
-                .navigateToReportInformation();
+                .navigateToReportKeyInfo();
             Report._KeyInfo.verifyFormCommentTextBoxText(testData.propertyRightsAppraisedTitle, testData.verifyTaxValue)
                 .verifyFormCommentTextBoxText(testData.definitionOfMarketValueTitle, testData.verifyTaxValue);
 
@@ -117,7 +117,7 @@ describe(`Verify the Save and Save & Continue button functionality on the Report
         it("[QA-4726]", () => {
             cy.stepInfo(`1. Proceed to the Report > Key Info page`);
             _NavigationSection.openReviewAndExport()
-                .navigateToReportInformation();
+                .navigateToReportKeyInfo();
        
             cy.stepInfo(`2. Click on the Back button and verify the user is redirected 
             to another page (Settings & Export > Review and Export).`);

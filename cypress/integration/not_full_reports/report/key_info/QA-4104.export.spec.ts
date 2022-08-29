@@ -13,7 +13,7 @@ describe("[QA-4104] Verify the Market Value generated commentary",
             createReport(testData.reportCreationData);
 
             cy.stepInfo(`2. Go to Report > Key Info > Definition of Market Value`);
-            _NavigationSection.navigateToReportInformation();
+            _NavigationSection.navigateToReportKeyInfo();
         
             cy.stepInfo(`3. Check that this sentence exports in the Introduction, 
             replacing the boilerplate sentence currently exported there`);

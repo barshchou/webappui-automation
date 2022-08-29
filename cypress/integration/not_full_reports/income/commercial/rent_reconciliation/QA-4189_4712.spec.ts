@@ -28,7 +28,7 @@ describe("Rent is displayed on the same basis that is selected on In-Place rent 
  
             cy.stepInfo('2. Add any Comp Group (Income > Commercial > Comp Groups)');
             cy.stepInfo('3. Move tenants to created Comp Group (Income > Commercial > Comp Groups)');
-            _NavigationSection.openCompGroupsInCommercial();
+            _NavigationSection.navigateToCommercialCompGroups();
             Income._CommercialManager.CompGroups
                 .addCompGroup(testData.compGroupName)
                 .dragAllCommercialUnitsIntoGroup(testData.compGroupName, testData.unitsNumber);

@@ -15,7 +15,7 @@ describe('Verify the "Property Rights Appraised" commentary on the Introduction 
             createReport(testData.reportCreationData);
 
             cy.stepInfo(`2. Proceed to the Introduction page`);
-            _NavigationSection.navigateToReportInformation();
+            _NavigationSection.navigateToReportKeyInfo();
         });
 
         it("Test body", () => {
