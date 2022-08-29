@@ -31,11 +31,6 @@ conditionalDescribe("[6401] Verify possibility to edit text",
             _NavigationSection.openReviewAndExport();
             ReviewExport.generateDocxReport().waitForReportGenerated()
                 .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
-
-            cy.stepInfo('5. Revert commentary to original');
-            _NavigationSection.navigateToContentManagementSystem();
-            _CmsBaseActions.openSWOTAnalysisPage();
-            _SWOTAnalysis.updateSectionDiscussion(testData.sectionName, 0, testData.defaultText[0], true);
         });
 
         it('Check export', () => {
@@ -52,8 +47,16 @@ conditionalDescribe("[6401] Verify possibility to edit text",
                 });
         });
 
-        after('Remove feature flag', () => {
+        afterEach('Revert commentary to original and remove feature flags', () => {
+            cy.stepInfo('Revert commentary to original');
+            if (!Cypress.currentTest.title.includes("Check export")) {
+                loginAction();
+                _NavigationSection.navigateToContentManagementSystem();
+                _CmsBaseActions.openLetterOfTransmittalPage()
+                    .revertSectionToOriginal(testData.sectionName);
+            }
 
+            cy.stepInfo('Remove feature flags');
             launchDarklyApi.removeUserTarget(testData.reportTextEditorFlagKey);
             launchDarklyApi.removeUserTarget(testData.swotAnalysisFlagKey);
         });
