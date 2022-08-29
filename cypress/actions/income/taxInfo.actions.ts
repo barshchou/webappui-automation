@@ -17,44 +17,28 @@ class TaxInfoActions extends BaseActionsExt<typeof taxInfoPage> {
 
     enterTaxableAssessedLandValue(value: number): this {
         const valueToBe = `$${numberWithCommas(value.toFixed(2))}`;
-        taxInfoPage.landActualInput.realClick().realClick()
-            .scrollIntoView()
-            .focus().type("something")
-            .clear()
-            .realType(`${value}{enter}`);
+        this.typeInAgTable(taxInfoPage.landActualInput, value);
         taxInfoPage.landActualInput.should('have.text', valueToBe);
         return this;
     }
 
     enterTransitionalLandValue(value: number): TaxInfoActions {
         const valueToBe = `$${numberWithCommas(value.toFixed(2))}`;
-        taxInfoPage.landTransitional.realClick().realClick()
-            .scrollIntoView()
-            .focus().type("something")
-            .clear()
-            .realType(`${value}{enter}`);
+        this.typeInAgTable(taxInfoPage.landTransitional, value);
         taxInfoPage.landTransitional.should('have.text', valueToBe);
         return this;
     }
 
     enterTaxableAssessedBuildingValue(value: number): this {
         const valueToBe = `$${numberWithCommas(value.toFixed(2))}`;
-        taxInfoPage.buildingActualInput.realClick().realClick()
-            .scrollIntoView()
-            .focus().type("something")
-            .clear()
-            .realType(`${value}{enter}`);
+        this.typeInAgTable(taxInfoPage.buildingActualInput, value);
         taxInfoPage.buildingActualInput.should('have.text', valueToBe);
         return this;
     }
 
     enterTransitionalBuildingValue(value: number): TaxInfoActions {
         const valueToBe = `$${numberWithCommas(value.toFixed(2))}`;
-        taxInfoPage.buildingTransitionalInput.realClick().realClick()
-            .scrollIntoView()
-            .focus().type("something")
-            .clear()
-            .realType(`${value}{enter}`);
+        this.typeInAgTable(taxInfoPage.buildingTransitionalInput, value);
         taxInfoPage.buildingTransitionalInput.should('have.text', valueToBe);
         return this;
     }
@@ -195,18 +179,18 @@ class TaxInfoActions extends BaseActionsExt<typeof taxInfoPage> {
 
     checkProjectedIncludeCheckbox(check = true): this {
         taxInfoPage.projectedIncludeInExportCheckbox.invoke('attr', 'value').then(status => {
-            status !== `${check}`
-                ? taxInfoPage.projectedIncludeInExportCheckbox.click().should('have.value', `${check}`)
-                : null;
+            if (status !== `${check}`) {
+                taxInfoPage.projectedIncludeInExportCheckbox.click().should('have.value', `${check}`);
+            }
         });
         return this;
     }
 
     checkProjectedSectionCheckbox(sectionName: BoweryReports.ProjectedTaxesSectionsKeys, check = true): this {
         taxInfoPage.projectedIncludeSectionCheckbox(sectionName).invoke('attr', 'value').then(status => {
-            status !== `${check}`
-                ? taxInfoPage.projectedIncludeSectionCheckbox(sectionName).click().should('have.value', `${check}`)
-                : null;
+            if (status !== `${check}`) {
+                taxInfoPage.projectedIncludeSectionCheckbox(sectionName).click().should('have.value', `${check}`);
+            }
         });
         return this;
     }
