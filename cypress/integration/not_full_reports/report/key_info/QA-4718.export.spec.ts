@@ -6,7 +6,7 @@ import testData from '../../../../fixtures/not_full_reports/report/key_info/QA-4
 
 // TODO: [QA-6607] After clicking in the Definition of Market Value textarea, the chip is not displayed
 describe(`[QA-4718] Verify the "Linked" chips dropdown in the new narrative component for 
-Property Rights Appraised and Definition of Market Value sections`,
+        Property Rights Appraised and Definition of Market Value sections`,
 { tags:[ "@report", "@key_info", "@check_export" ] }, () => {
     it("Test body", () => {
         cy.stepInfo("Login, create report");
@@ -20,10 +20,10 @@ Property Rights Appraised and Definition of Market Value sections`,
         _NavigationSection.navigateToReportInformation();
 
         cy.stepInfo(`2.Enter the “=“ and verify the "Linked" chips dropdown for for 
-        Property Rights Appraised and Definition of Market Value sections sections: 
-        options 'Gross Building Area', 'Building Name', 'Property Type', 'Residential Unit Count', 
-        'Commercial Unit Count', 'Street Address', 'Street Name', 'Site Area', 'Year Built', 
-        'Block', 'Lot', 'Concluded Cap Rate', 'Zones', 'Condition'.`);
+                    Property Rights Appraised and Definition of Market Value sections sections: 
+                    options 'Gross Building Area', 'Building Name', 'Property Type', 'Residential Unit Count', 
+                    'Commercial Unit Count', 'Street Address', 'Street Name', 'Site Area', 'Year Built', 
+                    'Block', 'Lot', 'Concluded Cap Rate', 'Zones', 'Condition'.`);
         Report._KeyInfo.activateTextAreaInput( Report._KeyInfo.Page.textBoxPropertyRightsAppraised);
         testData.chips.forEach(chip => {
             Report._KeyInfo.enterPropertyRightsAppraisedComment(`=${chip.typeSuggestValue}`, false, false, false);
@@ -52,9 +52,9 @@ Property Rights Appraised and Definition of Market Value sections`,
                 cy.stepInfo(`3. Verify the linked chips on export for both sections`);
                 cy.visit(<string>file);
                 testData.chips.forEach(chip => {
-                    cy.contains("Property Rights Appraised").next().scrollIntoView()
+                    cy.contains(testData.propertyRightsSection).next().scrollIntoView()
                         .should("include.text", chip.verifyExport);
-                    cy.contains("Definition of Market Value").next().next().scrollIntoView()
+                    cy.contains(testData.definitionOfMarketValueSection).next().next().scrollIntoView()
                         .should("include.text", chip.verifySuggest);
                 });
             }); 
