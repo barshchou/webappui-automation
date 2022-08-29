@@ -57,7 +57,7 @@ and Identification of the Client sections`,
 
         cy.stepInfo(`9.Click on the 'Yes, revert' button in the modal and verify that the modal is closed and all 
             custom changes made to the Current Commercial Income Discussion are deleted.`);
-        Report._Client.verifyNotContainIntendedUserTextBox(testData.verifyAreaValue);
+        Report._Client.verifyIntendedUserTextBox(testData.verifyAreaValue, false);
 
         cy.stepInfo(`10. Activate text field on the Report > Client page for Identification of the Client section`);
         Report._Client.activateTextAreaInput(Report._Client.Page.identificationOfClientTextBox);
@@ -101,6 +101,6 @@ and Identification of the Client sections`,
 
         cy.stepInfo(`18.Click on the 'Yes, revert' button in the modal and verify that the modal is closed and all 
             custom changes made to the Current Commercial Income Discussion are deleted.`);
-        Report._Client.verifyNotContainIdentificationOfTheClientTextBox(testData.verifyAreaValue);
+        Report._Client.verifyIdentificationOfTheClientTextBox(testData.verifyAreaValue, false);
     });
 });
