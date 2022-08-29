@@ -25,7 +25,7 @@ on:
 jobs:
   Full-reports-run:
     runs-on: ubuntu-latest
-    container: cypress/browsers:node16.13.2-chrome100-ff98
+    container: cypress/included:10.3.1
     permissions:
       id-token: write
       contents: read
