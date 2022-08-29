@@ -322,7 +322,10 @@ class JobSearchActions {
      * 
      * NOTES: 
      * 1. If it needs, we can upgrade this method, cos it cant add two imports because of scroll.
-     * 2. All these actions with input is because reportIdInput is hard to interact
+     * 2. All these actions with input is because reportIdInput is hard to interact. For example 
+     * .realClick({ clickCount: 10 }) activate reportIdInput field stable. Without .focus() action clear() doesn't 
+     * work. Also .type("textforclear", { force: true }) + .clear( { force: true }) we need if input is prefilled.
+     * Stable performance of this method has been provided experimentally. 
      */
     enterReportToSearchComp(reportID: string) {
         cy.intercept("GET", `/salesComps/eventIds/${reportID}`)
