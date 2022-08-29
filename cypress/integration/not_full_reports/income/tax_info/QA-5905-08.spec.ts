@@ -42,14 +42,14 @@ describe(`Tax Liability (PSF) for Summary tab sections is calculated correctly a
 
         cy.stepInfo(`9. Fill in Net Renovations and Assessment Ratio fields with valid numeric value`);
         Income._TaxInfo.enterNetRenovationOnProjectedTab(testData.netRenovation)
-            .enterAssessmentRationOnProjectedTab(testData.assessmentRation);
+            .enterAssessmentRatioOnProjectedTab(testData.assessmentRation);
 
         cy.stepInfo(`10. Click on the checkbox "Include in report" on Percent of Income card, so it is checked`);
         Income._TaxInfo.checkProjectedSectionCheckbox(testData.percentOfIncomeSectionCheckbox);
     
         cy.stepInfo(`11. Fill in Income and Tax Liability Ratio fields with valid numeric value`);
         Income._TaxInfo.enterIncomeOnProjectedTab(testData.income)
-            .enterTaxLiabilityRatiOnProjectedTab(testData.taxLiabilityRatio);
+            .enterTaxLiabilityRatioOnProjectedTab(testData.taxLiabilityRatio);
 
         cy.stepInfo(`12. Click on the checkbox "Include in report" on Equalized Market Value card, so it is checked`);
         Income._TaxInfo.checkProjectedSectionCheckbox(testData.equalizedMarketValueCheckbox);

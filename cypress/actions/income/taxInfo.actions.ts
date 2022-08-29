@@ -518,7 +518,7 @@ class TaxInfoActions extends BaseActionsExt<typeof taxInfoPage> {
         return this;
     }
 
-    enterAssessmentRationOnProjectedTab(value: number): TaxInfoActions {
+    enterAssessmentRatioOnProjectedTab(value: number): TaxInfoActions {
         this.typeInAgTable(taxInfoPage.assessmentRatioInput, value);
         taxInfoPage.assessmentRatioInput.should("have.text", `${value.toFixed(2)}%`);
         return this;
@@ -530,7 +530,7 @@ class TaxInfoActions extends BaseActionsExt<typeof taxInfoPage> {
         return this;
     }
 
-    enterTaxLiabilityRatiOnProjectedTab(value: number): TaxInfoActions {
+    enterTaxLiabilityRatioOnProjectedTab(value: number): TaxInfoActions {
         this.typeInAgTable(taxInfoPage.taxLiabilityRatioInput, value);
         taxInfoPage.taxLiabilityRatioInput.should("have.text", `${value}%`);
         return this;

@@ -56,7 +56,7 @@ describe(`Tax Liability (PSF) for Projected tab sections is calculated correctly
 
         cy.stepInfo(`7. Fill in Net Renovations and Assessment Ratio fields with valid numeric value`);
         Income._TaxInfo.enterNetRenovationOnProjectedTab(testData.netRenovation)
-            .enterAssessmentRationOnProjectedTab(testData.assessmentRation);
+            .enterAssessmentRatioOnProjectedTab(testData.assessmentRation);
 
         cy.stepInfo(`8. Verify Tax Liability (PSF) in  Percent of Renovations grid is calculated with formula = 
                     Tax Liability (Total) / selected Basis for Square Foot Analysis`);
@@ -71,7 +71,7 @@ describe(`Tax Liability (PSF) for Projected tab sections is calculated correctly
 
         cy.stepInfo(`7. Fill in Income and Tax Liability Ratio fields with valid numeric value`);
         Income._TaxInfo.enterIncomeOnProjectedTab(testData.income)
-            .enterTaxLiabilityRatiOnProjectedTab(testData.taxLiabilityRatio);
+            .enterTaxLiabilityRatioOnProjectedTab(testData.taxLiabilityRatio);
 
         cy.stepInfo(`8. Verify Tax Liability (PSF) in  Percent of Income grid is calculated with formula = 
                     Tax Liability (Total) / selected Basis for Square Foot Analysis`);
