@@ -11,7 +11,7 @@ describe("[QA-4695] Verify the Save button functionality on the Report > Client 
 
         it("Test body", () => {
             cy.stepInfo("1. Proceed to the Report > Key Info page.");
-            _NavigationSection.navigateToReportInformation();
+            _NavigationSection.navigateToReportKeyInfo();
 
             cy.stepInfo("2. Verify the following elements are displayed on the page.");
             Report._KeyInfo.verifyElementIsVisible(Report._KeyInfo.Page.keyInfoTitle)
