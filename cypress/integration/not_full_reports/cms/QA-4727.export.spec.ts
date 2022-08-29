@@ -52,16 +52,16 @@ conditionalDescribe("[QA-4727] Verify possibility to edit text",
                 });
         });
 
-        afterEach('Revert commentary to original', () => {
+        afterEach('Revert commentary to original and remove feature flags', () => {
+            cy.stepInfo('Revert commentary to original');
             if (!Cypress.currentTest.title.includes("Check export")) {
                 loginAction();
                 _NavigationSection.navigateToContentManagementSystem();
                 _CmsBaseActions.openLetterOfTransmittalPage()
                     .revertSectionToOriginal(testData.sectionName);
             }
-        });
 
-        afterEach('Remove feature flag', () => {
+            cy.stepInfo('Remove feature flags');
             launchDarklyApi.removeUserTarget(testData.reportTextEditorFlagKey);
             launchDarklyApi.removeUserTarget(testData.swotAnalysisFlagKey);
         });
