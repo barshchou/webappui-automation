@@ -52,8 +52,8 @@ conditionalDescribe("[6401] Verify possibility to edit text",
             if (!Cypress.currentTest.title.includes("Check export")) {
                 loginAction();
                 _NavigationSection.navigateToContentManagementSystem();
-                _CmsBaseActions.openLetterOfTransmittalPage()
-                    .revertSectionToOriginal(testData.sectionName);
+                _CmsBaseActions.openSWOTAnalysisPage();
+                _SWOTAnalysis.updateSectionDiscussion(testData.sectionName, 0, testData.defaultText[0], true);
             }
 
             cy.stepInfo('Remove feature flags');
