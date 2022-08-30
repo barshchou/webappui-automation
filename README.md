@@ -10,12 +10,13 @@
   - [Setup](#setup)
 - [Contributing](#contributing)
   - [Development flow](#development_flow)
+  - [Complex TODO]
   - [GH Actions debug](#gh_actions_debug)
   - [Validation of export](#export_validation)
 - [Usage](#usage)
   - [CLI_flags](#cli_flags)
   - [Tags and tagged test run](#tagged_run)
-  - [PR deploy / localhost test run](#run_tests_in_custom_env)
+  - [Run tests on PR deploy / localhost](#run_tests_in_custom_env)
   - [Triggering GH Actions pipeline](#trigger_gh_actions)
   - [Exploring test results](#explore_test_results)
 - [NPM Scripts](#npm_scripts)
@@ -23,27 +24,29 @@
 
 ## Quick summary <a id="tl_dr"></a>
 - If you want to use/develop tests from your machine - make sure everything is ready from "[Getting Started](#getting_started)".
-- If you would like to figure out how to use these tests in your developement flow - go to "[PR deploy / localhost test run](#run_tests_in_custom_env)" section. 
+- If you would like to figure out how to use these tests in your developement flow - go to "[Run tests on PR deploy / localhost](#run_tests_in_custom_env)" section. 
 - If you need to run specific test spec or set of tests related to specific domain - go to "[Tags and tagged test run](#tagged_run)" section. 
 -  If you need to use GH Actions pipeline with these tests - go to [Triggering GH Actions pipeline](#trigger_gh_actions).
 - If you need to check test results from triggered GH Actions pipeline or just see the stats / insights for end-to-end tests - go to "[Exploring test results](#explore_test_results)" section 
 ## About <a id="about"></a>
-This repository contains the code of end-to-end tests, written in  Cypress framework (https://docs.cypress.io/guides/getting-started/writing-your-first-test). Main pattern used for this project - is Page Object. We describe elements of pages and the way they can behave (*pages* folder). We describe actions, which we use to interact with pages (*actions* folder). And describe test specs (*integration* folder) - things/flows we want to test and verify on our pages, using actions to put the app in a required state.
+This repository contains the code of end-to-end tests, written in  [Cypress framework](https://docs.cypress.io/guides/getting-started/writing-your-first-test). Main pattern used for this project - is [Page Object](https://martinfowler.com/bliki/PageObject.html). We describe elements of pages and the way they can behave (*./cypress/pages* folder). We describe actions, which we use to interact with pages (*./cypress/actions* folder). And describe test specs (*./cypress/integration* folder) - things/flows we want to test and verify on our pages, using actions to put the app in a required state.
 
 There are several main folders of these project:
 
-* .github - contains GitHub actions workflows files
-* cypress - base folder, that contains the following:
-  * actions - contains classes with methods which describe the interaction with pages. Contains subfolders, named by application's tabs.
-  * fixtures - contains test data, named by test spec names. Data is stored in js files for convenient exporting and autocompletion.
-  * integration - contains test specs
-  * pages - contains classes, which describe what elements different pages have and how pages can behave. Contains subfolders, named by application's tabs. Also contains manager files for each folder, that accumulates files of folder to one manager file to prevent big amount of imports in specs.
-  * plugins - contains **index.js** file, that can be used to tap into plugins, modify, or extend the internal behavior of Cypress.
-  * support - contains three files:
-    * **commands.js** - contains custom cypress commands.
-    * **index.d.ts** - contains types definitions for custom cypress commands.
-    * **index.js** - used for enabling additional modules for cypress
-* utils - folder for helper functions. Contains useful functions validating format of data, working with uploading fixtures, acquiring baseUrl for current environment of test run.
+* *.github* - contains GitHub actions workflows files and PR template
+* *cypress* - base folder, that contains the following:
+  * *actions* - contains classes with methods which describe the interaction with pages. Contains subfolders, named by application's tabs. All action are separated in their own "domains" with `index.ts` as an entrypoint.
+  * *api* - contains specific logic for interactions with different APIs (WebApp, LaunchDarkly, (TBA) SalesForce)
+  * *enums* - contains some static data objects, which describes different parts of applications. Separated by different domains and app's flows. Needs to refactored for proper management and extensions (just look at `enums.ts` and `enumKeys.enum.d.ts`)  
+  * *fixtures* - contains test data, named by test spec names. Data is stored in `ts` files for convenient exporting and autocompletion.
+  * *integration* - contains test specs.
+  * *pages* - contains classes, which describe what elements different pages have and how pages can behave. Contains subfolders, named by application's tabs. Also contains manager files for each folder, that accumulates files of folder to one manager file to prevent big amount of imports in specs.
+  * *snapshots* - contains artifacts from [snapshot testing](https://github.com/jaredpalmer/cypress-image-snapshot)
+  * *support* - contains several files:
+    * `e2e.ts` - [Cypress's support file](https://docs.cypress.io/guides/core-concepts/writing-and-organizing-tests#Support-file). Contains type definitions of custom Cypress commands, "hacks" for testing (custom error handling and DOM snapshot recording), plugins imports, global hooks and event bindings.
+    * `commands.ts` - contains implementations of [custom Cypress commands](https://docs.cypress.io/api/cypress-api/custom-commands), some plugin configurations and explicit custom commands (such as `_mutateArrayInMap` or `_saveDataInFile`)   
+* *types* - contains type definitions for this project. We're trying to stick to single-responsibility principle by not putting all the types into one `index.ts` file, but they still need to refactored.  
+* *utils* - folder for helper functions. Contains useful functions validating format of data, working with uploading fixtures, acquiring baseUrl for current environment of test run. P.s. Don't pay attention to `index.ts` there, this will be refactored soon.
 
 ## Getting started <a id="getting_started"></a>
 
