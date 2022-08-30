@@ -277,7 +277,7 @@ class AdjustCompsActions extends BaseActionsExt<typeof adjustCompsPage> {
     }
 
     enterMarketConditionAdjustment(value: string | number): AdjustCompsActions {
-        adjustCompsPage.marketConditionAdjustmentInput.type(`${value}`).should("have.value", value);
+        adjustCompsPage.marketConditionAdjustmentInput.type(`${value}`).should('have.attr', 'value', value);
         adjustCompsPage.applyMarketConditionAdjustmentButton.click();
         return this;
     }
