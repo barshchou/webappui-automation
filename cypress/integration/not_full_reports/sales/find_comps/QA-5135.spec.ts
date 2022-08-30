@@ -2,6 +2,7 @@ import { Sales } from '../../../../actions';
 import { _NavigationSection } from '../../../../actions/base';
 import testData from "../../../../fixtures/not_full_reports/sales/find_comps/QA-5135.fixture";
 import { createReport } from "../../../../actions/base/baseTest.actions";
+import mapKeysUtils from "../../../../utils/mapKeys.utils";
 
 describe(`[QA-5135] -> [Sales > Find Comps] Check the comps order when "custom" dropdown is chosen`, 
     { tags: [ "@sales", "@find_comps", "@comp_plex" ] }, () => {
@@ -26,7 +27,7 @@ describe(`[QA-5135] -> [Sales > Find Comps] Check the comps order when "custom" 
             cy.stepInfo(`4. [QA-5135] -> Order doesn't change upon selection of “custom“ choice, 
                     until the appraiser manually moves comps around`);
             Sales._FindComps.Actions.checkSalesCompAddedToList()
-                .moveComparableByDnD(Sales._FindComps.Page.selectorDraggableElement, 0, "down", 2)
+                .moveComparableByDnD(Sales._FindComps.Page.selectorDraggableElement(1), 0, "down", 2)
                 .checkSalesCompAddedToList({ reverse: true });
 
             cy.stepInfo(`5. [QA-5135] -> If user selected custom order at first, 
@@ -35,5 +36,10 @@ describe(`[QA-5135] -> [Sales > Find Comps] Check the comps order when "custom" 
 
             Sales._FindComps.Actions.selectedCompsSetSort(testData.sortSalesCompsDateSold)
                 .checkSalesCompSortedByDateSold();
+        });
+
+        afterEach("Clear sales comps map", () => {
+            cy._mapSet(mapKeysUtils.salesCompsIds, undefined);
+            cy._mapSet(mapKeysUtils.salesCompsAddresses, undefined);
         });
     });
