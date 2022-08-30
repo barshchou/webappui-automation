@@ -2,6 +2,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable @typescript-eslint/no-namespace */
 /* eslint-disable @typescript-eslint/ban-ts-comment */
+
 import { recordProxiedRequests } from "../../utils/intercept.utils";
 import { recordDOMSnapshot } from "../utils/snapshot.utils";
 import "./commands";
@@ -9,6 +10,7 @@ import "cypress-real-events/support";
 import { BoweryAutomation } from "../types/boweryAutomation.type";
 import { evalUrl } from "../utils/env.utils";
 import mapKeysUtils from "../utils/mapKeys.utils";
+import { Tag } from "../utils/tags.utils";
 
 require("cypress-xpath");
 require("cypress-iframe");
@@ -22,6 +24,13 @@ Cypress.on("uncaught:exception", () => {
      * failing the test
      */
     return false;
+});
+
+before(() => {
+    // @ts-ignore
+    if (Cypress.mocha._mocha.suite.suites[0]._testConfig.tags.includes(Tag.comp_plex_standalone)) {
+        Cypress.config('numTestsKeptInMemory', 0);
+    }
 });
 
 beforeEach(() => {
