@@ -47,7 +47,8 @@ const routes =  {
     residentialStabilizedRentRoll: "/residential-projected-rent-roll",
     residentialStabilizedRentRollSummary: "/residential-projected-rent-roll-summary",
     reportAppraiser: "/appraisers",
-    renovation: "/renovations"
+    renovation: "/renovations",
+    organizationInfo: "/organization-info"
 } as const;
 
 export default routes;

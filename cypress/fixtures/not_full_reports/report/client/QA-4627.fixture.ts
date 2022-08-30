@@ -7,4 +7,6 @@ export default {
     shortTextToType: "Harl",
     textToType: "Harley Young",
     companyName: "Test Company & CO",
+    identificationOfTheClient: "Identification of the Client",
+    intendedUseAndUser: "Intended Use & User"
 };
