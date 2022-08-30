@@ -39,13 +39,7 @@ class KeyInfoPage extends BasePage {
 
     get modalUploadButton() { return cy.get("*[data-qa='upload-btn']"); }
 
-    get wrapperLetterOfTransmittalPurpose() { 
-        return cy.get("*[data-qa='letterOfTransmittalPurpose-generated-comment-wrapper']"); 
-    }
-
     get jobNumberTextInput() { return cy.get("*[data-qa='job-number-text-input'] input"); }
-
-    get wrapperDefinitionOfMarketValue() { return cy.get("*[data-qa='definition-of-market-value-tile']"); }
 
     get uploadFilesButton() { return cy.xpath("//button[text() = 'Upload Files']"); }
 

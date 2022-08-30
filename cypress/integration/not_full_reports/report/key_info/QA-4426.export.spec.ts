@@ -13,7 +13,7 @@ describe("[QA-4426] Check the generated commentary for Property Rights Appraised
                 createReport(reportCreationFixture(item.reportConclusion, `_${index + 1}`));
 
                 cy.stepInfo(`1. Report > Key Info`);
-                _NavigationSection.navigateToReportInformation();
+                _NavigationSection.navigateToReportKeyInfo();
 
                 cy.stepInfo(`2. Verify that the generated commentary for Property Rights Appraised 
                 discussion is a next-gen component`);

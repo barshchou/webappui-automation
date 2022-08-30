@@ -10,7 +10,8 @@ const pagesTextboxNames = {
     generalAssumptionsDiscussion: "General Assumptions Discussion",
     definitionOfMarketValue: "Definition of Market Value",
     dataSourcesDescriptionExport: "Data Sources Description Export",
-    totalOperatingExpenses: "TOTAL OPERATING EXPENSES"
+    totalOperatingExpenses: "TOTAL OPERATING EXPENSES",
+    letterOfTransmittalPurpose: "Letter of Transmittal Purpose"
 } as const;
 
 export default Object.freeze(pagesTextboxNames);

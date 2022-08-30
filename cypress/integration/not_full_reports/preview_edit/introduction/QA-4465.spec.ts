@@ -4,6 +4,7 @@ import { Report, PreviewEdit } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { normalizeText } from "../../../../../utils/string.utils";
 import mapKeysUtils from "../../../../utils/mapKeys.utils";
+import routesUtils from "../../../../utils/routes.utils";
 
 const { createReport } = _BaseTest;
 
@@ -15,7 +16,8 @@ describe('Verify the "Property Rights Appraised" commentary on the Introduction 
             createReport(testData.reportCreationData);
 
             cy.stepInfo(`2. Proceed to the Introduction page`);
-            _NavigationSection.navigateToReportInformation();
+            _NavigationSection.navigateToPropertySummary()
+                .navigateToReportKeyInfo();
         });
 
         it("Test body", () => {
@@ -58,7 +60,9 @@ describe('Verify the "Property Rights Appraised" commentary on the Introduction 
                         });
                     });
                 PreviewEdit._Introduction.Page.getBackLink(testData.backLinkName).click();
-                PreviewEdit._Introduction.Actions.clickYesButton().verifyProgressBarNotExist();
+                _NavigationSection.submitSaveChangesModal()
+                    .verifyProgressBarNotExist()
+                    .waitForUrl(routesUtils.keyInfo);
             });
         });
     });

@@ -16,7 +16,7 @@ ACAS reports for Property Rights Appraised and Definition
         Property._Summary.enterBuildingName(testData.buildingName);
 
         cy.stepInfo("1. Proceed to the Report > Key Info page.");
-        _NavigationSection.navigateToReportInformation();
+        _NavigationSection.navigateToReportKeyInfo();
 
         cy.stepInfo(`2.Enter the “=“ and verify the "Linked" chips dropdown for both sections: 
         options 'Gross Building Area', 'Building Name', 'Property Type', 'Residential Unit Count', 

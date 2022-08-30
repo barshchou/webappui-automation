@@ -13,7 +13,7 @@ describe('[QA-4429] Check the Introduction page',
     
             cy.stepInfo(`2. Navigate to Report > Client and edit Identification of the Client 
                             and Intended User Text`);
-            _NavigationSection.navigateToSourceInformation();
+            _NavigationSection.navigateSourceInformation();
     
             Final._SourceInformation.enterFormCommentTextBox(testData.backLinkNames, testData.typeValue);
     
@@ -41,7 +41,7 @@ describe('[QA-4429] Check the Introduction page',
     
             cy.stepInfo(`2. Navigate to Report > Client and edit Identification of the Client 
                             and Intended User Text`);
-            _NavigationSection.navigateToSourceInformation();
+            _NavigationSection.navigateSourceInformation();
     
             Final._SourceInformation.enterFormCommentTextBox(testData.backLinkNames, testData.typeValue);
     
