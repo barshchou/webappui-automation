@@ -12,7 +12,7 @@ const _swotTextsFixture = () => {
         {
             sectionName: Enums.SWOT_SECTIONS.strengths,
             languages: [
-                "The building is 100% occupied. ",
+                "The building is 100% occupied.",
 
                 "The subject property has good freeway access and is in close proximity to schools, parks, " + 
                 "shopping centers, and employment. "
@@ -62,4 +62,5 @@ export default {
     reportTextEditorFlagKey: Enums.FEATURE_FLAG_KEYS.reportTextEdit,
     swotAnalysisFlagKey: Enums.FEATURE_FLAG_KEYS.swotAnalysis,
     featureFlagEnable: 0,
+    sectionToExport: Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.summaryOfSalientFactsAndConclusions
 };
