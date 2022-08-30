@@ -8,10 +8,9 @@ import Sales from "../../../../actions/sales/sales.manager";
 describe(`Prospective Market Value As Stabilized -> Less Parking Rent Loss data is pulled from Cap Rate Conclusion`,
     { tags:[ "@sales", "@value_conclusion" ] }, () => {
 
-        it(`[QA-4303]`, () => {
+        it(`[QA-4103]`, () => {
             cy.stepInfo(`1. Login, create report. Add residential units.`);
             createReport(testData.reportCreationData);
-
             NavigationSection.navigateToPropertySummary();
             Property.Summary.enterNumberOfResUnits(testData.numberOfUnits);
 
@@ -54,6 +53,7 @@ describe(`Prospective Market Value As Stabilized -> Less Parking Rent Loss data 
 
             cy._mapGet(testData.valueConclusionKeyAsStabilized + testData.rentLossTypeParking)
                 .then(parkingLoss => {
+                    cy.log(`${parkingLoss}`);
                     Sales.ValueConclusion.verifyMiscellaneousLossAmount(parkingLoss, 
                         testData.valueConclusionKeyAsStabilized, testData.rentLossTypeParking);
                 });

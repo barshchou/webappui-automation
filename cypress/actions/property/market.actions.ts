@@ -170,13 +170,9 @@ class MarketActions extends BaseActionsExt<typeof marketPage> {
     }
 
     checkUncheckMarketAnalysisUseCheckbox(use: BoweryReports.MarketAnalysisUses, isCheck = true): MarketActions {
-        marketPage.getMarketAnalysisUseCheckboxArea(use).invoke('attr', 'data-qa').then(dataQA => {
-            let isChecked = dataQA.includes("checked") ? true : false;
-            if (isCheck != isChecked) {
-                marketPage.getMarketAnalysisUseCheckbox(use).click();
-                this.verifyMarketAnalysisUseCheckboxState(use, isCheck);
-            }
-        });
+        this.verifyMarketAnalysisUseCheckboxState(use, !isCheck);
+        marketPage.getMarketAnalysisUseCheckbox(use).click();
+        this.verifyMarketAnalysisUseCheckboxState(use, isCheck);
         return this;
     }
 
@@ -276,34 +272,10 @@ class MarketActions extends BaseActionsExt<typeof marketPage> {
     uploadRentStabilizationFile(fileName: string): MarketActions {
         marketPage.uploadRentStabilizationFileButton.click();
         marketPage.fileDropZone.attachFile(
-            `test_files/docx/${fileName}`,
-            { subjectType: 'drag-n-drop' }
-        );
-        marketPage.getUploadFileButton().click();
-        marketPage.insertFileButton.click();
-        return this;
-    }
-
-    uploadMarketSubmarketByAnalysisUseFile(use: BoweryReports.MarketAnalysisUses, 
-        fileName: string, isMarket = true): MarketActions {
-        isMarket ? marketPage.getMarketByAnalysisUseFileUploadButton(use).click()
-            : marketPage.getSubmarketByAnalysisUseFileUploadButton(use).click();
-
-        let aliasFileUpload = "aliasFileUpload";
-        cy.intercept('POST', '/api/files/upload**').as(aliasFileUpload);
-
-        marketPage.fileDropZone.attachFile(
             `test_files/${fileName}`,
             { subjectType: 'drag-n-drop' }
         );
-
         marketPage.getUploadFileButton().click();
-
-        cy.wait(`@${aliasFileUpload}`).then(({ response }) => {
-            expect(response.statusCode).equal(201);
-            cy.log("fileUpload resolved");
-        });
-
         marketPage.insertFileButton.click();
         return this;
     }

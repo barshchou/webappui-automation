@@ -31,7 +31,7 @@ describe("[QA-4477] Check the Definition of Market Value list",
                     cy.stepInfo(`4. Verify that this section continues to export 
                                 in the same place in the Introduction.`);
                     cy.visit(<string>file);
-                    cy.contains(testData.exportSectionName).scrollIntoView()
+                    cy.contains(testData.title).scrollIntoView()
                         .next().next().next("ol").within(() => {
                             testData.definitionOfMarketValueList.forEach((item, index) => {
                                 cy.get("li").eq(index).should("have.text", item);

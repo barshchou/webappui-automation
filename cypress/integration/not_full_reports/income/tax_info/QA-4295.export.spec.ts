@@ -5,7 +5,7 @@ import { _TaxInfo } from "../../../../actions/income";
 import { ReviewExport } from '../../../../actions';
 
 describe(`[Assessed Value & RE Taxes] Verify the 'Tax Calculation Discussion' generated commentary 
-        is displayed on the Tax Info page.`, { tags: [ "@check_export", "@income", "@tax_info" ] }, () => {
+is displayed on the Tax Info page.`, { tags: [ "@check_export", "@income", "@tax_info" ] }, () => {
 
     it("Test body", () => {
         createReport(testData.reportCreationData);
@@ -34,8 +34,8 @@ describe(`[Assessed Value & RE Taxes] Verify the 'Tax Calculation Discussion' ge
             cy.visit(<string>file);
 
             cy.stepInfo(`Check that Tax Calculation Discussion commentary exports 
-                        in the 'Assessed Value & RE Taxes' section of the report.`);
-            cy.contains(testData.exportSectionName).scrollIntoView().next().next()
+            in the 'Assessed Value & RE Taxes' section of the report.`);
+            cy.contains(`Assessed Value & Real Estate Taxes`).scrollIntoView().next().next()
                 .next().next().next().next().next().should("have.text", testData.commentary);
         });
     });

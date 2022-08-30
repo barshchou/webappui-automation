@@ -81,6 +81,5 @@ export default {
     reportTextEditorFlagKey: Enums.FEATURE_FLAG_KEYS.reportTextEdit,
     swotAnalysisFlagKey: Enums.FEATURE_FLAG_KEYS.swotAnalysis,
     featureFlagEnable: 0,
-    textsArray: _textsArray(),
-    exportSection: Enums.EXPORT_TITLES.certification
+    textsArray: _textsArray()
 };

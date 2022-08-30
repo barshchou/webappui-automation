@@ -14,11 +14,10 @@ describe("Verify the Client Guidelines Discussion on the page",
             _NavigationSection.navigateToClientPage().verifyProgressBarNotExist();
 
             cy.stepInfo(`2. Enter the “=“ and verify the "Linked" chips dropdown for both sections: 
-                        options 'Gross Building Area', 'Building Name', 'Property Type', 
-                        'Current Residential Unit Count', 'As Complete Residential Unit Count', 
-                        'Current Commercial Unit Count', 'As Complete Commercial Unit Count', 
-                        'Street Address', 'Street Name', 'Site Area', 'Year Built', 'Block', 
-                        'Lot', 'Concluded Cap Rate', 'Zones', 'CurrentCondition', 'As Stabilized Condition'`);
+        options 'Gross Building Area', 'Building Name', 'Property Type', 'Current Residential Unit Count', 
+        'As Complete Residential Unit Count', 'Current Commercial Unit Count', 'As Complete Commercial Unit Count', 
+        'Street Address', 'Street Name', 'Site Area', 'Year Built', 'Block', 'Lot', 'Concluded Cap Rate', 
+        'Zones', 'CurrentCondition', 'As Stabilized Condition'`);
             Report._Client.activateTextAreaInput(Report._Client.Page.intendedUserTextBox);
             testData.chips.forEach(chip => {
                 Report._Client
@@ -49,9 +48,9 @@ describe("Verify the Client Guidelines Discussion on the page",
                     cy.visit(<string>file);
 
                     testData.chips.forEach(item => {
-                        cy.contains(testData.identificationOfTheClientSection).next().scrollIntoView()
+                        cy.contains("Identification of the Client").next().scrollIntoView()
                             .should("include.text", item.verifyExport);
-                        cy.contains(testData.intendedUseSection).next().next().scrollIntoView()
+                        cy.contains("Intended Use & User").next().next().scrollIntoView()
                             .should("include.text", item.verifyExport);
                     });
                 }); 

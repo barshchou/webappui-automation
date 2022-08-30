@@ -5,6 +5,6 @@ export default {
     reportCreationData: ReportDataCreator.getReportData("4172", {
         incomeValue: Enums.INCOME_TYPE.both
     }),
-    filePath: "test_files/CostarExport.csv",
+    filePath: "not_full_reports/CostarExport.csv",
     compsNumber: 6
 };

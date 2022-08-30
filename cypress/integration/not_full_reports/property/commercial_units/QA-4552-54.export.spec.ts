@@ -50,10 +50,9 @@ describe(`[QA-4552][QA-4553][QA-4554] Verify the "Linked" chips dropdown in the 
                         let expectedText = typeof chip.verifyExport ===  "number" 
                             ? `${numberWithCommas(chip.verifyExport)}`
                             : chip.verifyExport;
-                        cy.contains(testData.exportSectionName).next()
-                            .scrollIntoView().should("include.text", expectedText);
+                        cy.contains("Commercial Space").next().scrollIntoView().should("include.text", expectedText);
                     });
-                });
+                }); 
         });
 
         //TODO update test after test-cases updates QA-6543
@@ -99,10 +98,9 @@ describe(`[QA-4552][QA-4553][QA-4554] Verify the "Linked" chips dropdown in the 
                         let expectedText = typeof chip.verifyExport ===  "number" 
                             ? `${numberWithCommas(chip.verifyExport)}`
                             : chip.verifyExport;
-                        cy.contains(testData.exportSectionName).next()
-                            .scrollIntoView().should("include.text", expectedText);
+                        cy.contains("Commercial Space").next().scrollIntoView().should("include.text", expectedText);
                     });
-                });
+                }); 
         });
 
         //TODO update test after test-cases updates QA-6543
@@ -148,9 +146,8 @@ describe(`[QA-4552][QA-4553][QA-4554] Verify the "Linked" chips dropdown in the 
                         let expectedText = typeof chip.verifyExport ===  "number" 
                             ? `${numberWithCommas(chip.verifyExport)}`
                             : chip.verifyExport;
-                        cy.contains(testData.exportSectionName).next()
-                            .scrollIntoView().should("include.text", expectedText);
+                        cy.contains("Commercial Space").next().scrollIntoView().should("include.text", expectedText);
                     });
-                });
+                }); 
         });
     });

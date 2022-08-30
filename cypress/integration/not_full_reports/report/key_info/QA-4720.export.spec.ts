@@ -51,9 +51,9 @@ ACAS reports for Property Rights Appraised and Definition
                 cy.stepInfo("3. Verify the linked chips on export for both sections");
                 cy.visit(<string>file);
                 testData.chips.forEach(chip => {
-                    cy.contains(testData.propertyRightsSection).next().scrollIntoView()
+                    cy.contains("Property Rights Appraised").next().scrollIntoView()
                         .should("include.text", chip.verifyExport);
-                    cy.contains(testData.definitionOfMarketValueSection).next().next().scrollIntoView()
+                    cy.contains("Definition of Market Value").next().next().scrollIntoView()
                         .should("include.text", chip.verifySuggest);
                 });
             }); 

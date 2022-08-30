@@ -81,8 +81,6 @@ export default class BasePage {
         }
     }
 
-    getSelectChipsWrapper(index = 0) { return cy.get("[data-qa='chips-wrapper']").eq(index); }
-    
     formCommentTextBox(name: string) {
         return cy.xpath(`//*[.='${name}']//following::*[@data-slate-editor][1]`);
     }

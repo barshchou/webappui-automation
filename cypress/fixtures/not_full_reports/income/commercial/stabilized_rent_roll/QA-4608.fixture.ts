@@ -121,6 +121,5 @@ export default {
     compsAmount: 1,
     exportTableValues: _exportTableValues,
     totalRowName: _totalRowName,
-    exportedTableColumnNames: _exportedTableColumnNames,
-    exportSectionName: Enums.EXPORT_TITLES.commercialStabilizedRentRoll
+    exportedTableColumnNames: _exportedTableColumnNames
 };

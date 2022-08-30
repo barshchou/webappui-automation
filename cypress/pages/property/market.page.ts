@@ -40,14 +40,6 @@ class MarketPage extends BasePage {
         return cy.get(`[data-qa=file-selection-${use}MarketAnalysis-input] input`);
     }
 
-    getSubmarketByAnalysisUseFileUploadButton(use: BoweryReports.MarketAnalysisUses) {
-        return cy.get(`[data-qa=file-selection-${use}SubmarketAnalysis-input] button`);
-    }
-
-    getMarketByAnalysisUseFileUploadButton(use: BoweryReports.MarketAnalysisUses) {
-        return cy.get(`[data-qa=file-selection-${use}MarketAnalysis-input] button`);
-    }
-
     get exposureTimeDescription() { 
         return cy.xpath("//*[.='Exposure Time Description']//following::div[@data-slate-editor]"); 
     }
@@ -58,12 +50,8 @@ class MarketPage extends BasePage {
 
     get includeMarketTimeCheckbox() { return cy.get("[data-qa^='includeMarketingTime']"); }
 
-    getMarketAnalysisUseCheckbox(marketAnalysisUse: BoweryReports.MarketAnalysisUses) { 
-        return this.getMarketAnalysisUseCheckboxArea(marketAnalysisUse).find(`input`); 
-    }
-
-    getMarketAnalysisUseCheckboxArea(marketAnalysisUse: BoweryReports.MarketAnalysisUses) {
-        return cy.get(`[data-qa^='marketAnalysisUses.${marketAnalysisUse}-checkbox']`); 
+    getMarketAnalysisUseCheckbox(useValue: string) { 
+        return cy.get(`[data-qa^='marketAnalysisUses.${useValue}-checkbox'] input`); 
     }
 
     get areaEconomicAnalysisContainer() { return cy.get("[data-qa=file-selection-areaEconomicAnalysis-input]"); }

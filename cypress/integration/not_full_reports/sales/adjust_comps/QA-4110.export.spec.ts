@@ -14,11 +14,10 @@ describe("Total Utility Adjustments in Sales Adjustment Grid is calculated with 
 
 
             cy.stepInfo(`2. Verify if Per Total Units is selected as Sales Comparables Setup then
-                        Trended Price per Unit in Total Footer = Price  per Unit + Price  per Unit * Property Rights + 
-                        Price  per Unit * Financing Terms + Price  per Unit * 
-                        Conditions of Sale + per Unit * Market Conditions (Time)) 
-                        or Trended Price per Unit = [Unadjusted Price] * (1 + (SUM[Unadjusted Adjustments]))/ # 
-                        of total units`);
+            Trended Price per Unit in Total Footer = Price  per Unit + Price  per Unit * Property Rights + 
+            Price  per Unit * Financing Terms + Price  per Unit * 
+            Conditions of Sale + per Unit * Market Conditions (Time)) 
+            or Trended Price per Unit = [Unadjusted Price] * (1 + (SUM[Unadjusted Adjustments]))/ # of total units`);
             _NavigationSection.navigateToAdjustComps();
             Sales._AdjustComps.checkCalculationUnitsRadio(testData.calculationUnits)
                 .enterMarketAdjustmentsGroup(Object.keys(testData.comparablesAdjustments),
@@ -40,8 +39,8 @@ describe("Total Utility Adjustments in Sales Adjustment Grid is calculated with 
                     cy.log(<string>file);
                     cy.visit(<string>file);
                     cy.stepInfo(`[QA-4110] → open Sales Adjustment Grid → verify the 'Cumulative Price Per Unit:' 
-                                label and the same calculations`);
-                    cy.contains(testData.exportSectionName)
+                    label and the same calculations`);
+                    cy.contains("Cumulative Price Per Unit")
                         .parent().parent().parent()
                         .scrollIntoView().find("td").last().should("have.text", testData.cumulativePricePerUnit);
                 }); 

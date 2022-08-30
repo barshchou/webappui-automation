@@ -21,6 +21,5 @@ export default {
     rentsPsf: [ 100, 120 ],
     annualRent: "$240,000.00",
     monthlyRent: "$20,000.00",
-    newTenantName: "new test name",
-    exportSectionName: Enums.EXPORT_TITLES.leaseStructure
+    newTenantName: "new test name"
 };

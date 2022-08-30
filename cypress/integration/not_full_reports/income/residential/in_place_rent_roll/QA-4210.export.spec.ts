@@ -38,10 +38,10 @@ describe("Verify the Developer's Forecast checkbox on the In-Place Rent Roll pag
                         cy.visit(<string>file);
     
                         if (i === 0) {
-                            cy.contains(testData.exportSectionName).scrollIntoView().next().next()
+                            cy.contains("Current Residential Rent Roll").scrollIntoView().next().next()
                                 .should("not.have.text", testData.verifyText);
                         } else {
-                            cy.contains(testData.exportSectionName).scrollIntoView().next().next()
+                            cy.contains("Current Residential Rent Roll").scrollIntoView().next().next()
                                 .should("have.text", testData.verifyText);
                         }
                     });

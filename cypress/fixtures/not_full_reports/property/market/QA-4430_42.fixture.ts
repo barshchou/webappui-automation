@@ -1,4 +1,3 @@
-import Enums from "../../../../enums/enums";
 import { BoweryAutomation } from "../../../../types/boweryAutomation.type";
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 
@@ -35,7 +34,5 @@ export default {
     "a marketing time for the subject property is between "+ _minMarketingCustom +" months and " + 
     _maxMarketingCustom +" months. This conclusion considers the property’s relative market position, " + 
     "as well as our market value conclusion and it is predicated on interviews with brokers, other real " + 
-    "estate industry sources and on information obtained in the verification process.",
-    exposureTimeSection: Enums.EXPORT_TITLES.exposureTime,
-    marketingTimeSection: Enums.EXPORT_TITLES.marketingTime
+    "estate industry sources and on information obtained in the verification process."
 };

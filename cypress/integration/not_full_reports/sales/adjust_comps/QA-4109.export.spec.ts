@@ -34,9 +34,9 @@ describe("Adjusted Price per Residential Unit in Sales Adjustment Grid is calcul
                     cy.log(<string>file);
                     cy.visit(<string>file);
                     cy.stepInfo(`[QA-4109] → open Sales Adjustment Grid → 
-                                verify the 'Cumulative Price Per SF:' label and the same calculations`);
+                    verify the 'Cumulative Price Per SF:' label and the same calculations`);
                     cy.readFile(`./cypress/spec_data/${Cypress.spec.name}/${Cypress.spec.name}.txt`).then(text => {
-                        cy.contains(testData.exportSectionName)
+                        cy.contains("Cumulative Price Per SF")
                             .parent().parent().parent()
                             .scrollIntoView().find("td").last()
                             .should("have.text", text);

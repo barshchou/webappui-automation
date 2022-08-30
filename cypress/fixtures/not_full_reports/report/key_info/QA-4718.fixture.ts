@@ -23,7 +23,5 @@ export default {
     chips: chipsDataCreator.getChipsData(_chipsOptions, enums.VALUE_CONCLUSION_TYPE.AS_STABILIZED),
     buildingName: _buildingName,
     propertyRightsAppraisedCommentaryTitle: "Property Rights Appraised",
-    definitionOfMarketValueCommentaryTitle: "Definition of Market Value",
-    propertyRightsSection: Enums.EXPORT_TITLES.propertyRightsAppraised,
-    definitionOfMarketValueSection: Enums.EXPORT_TITLES.definitionOfMarketValue
+    definitionOfMarketValueCommentaryTitle: "Definition of Market Value"
 };

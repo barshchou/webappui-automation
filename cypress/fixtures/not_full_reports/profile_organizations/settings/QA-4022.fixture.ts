@@ -17,6 +17,5 @@ export default {
     reportCreationData: reportCreationFixture(),
     adminUsername: _adminUsername,
     adminPassword: _adminPassword,
-    commentary: _commentary,
-    exportSectionName: Enums.EXPORT_TITLES.mortgageComponent
+    commentary: _commentary
 };

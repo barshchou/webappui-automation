@@ -25,7 +25,5 @@ export default {
     rentControlledDiscussion: "The maximum rent increases for rent-controlled tenants will be set at the average "+
         "of the five most recent Rent Guidelines Board annual rent increases for one-year rent-stabilized renewals, "+
         "which is currently 1.4%.",
-    rentTypeIncrease: [ 1.014, 1 ], //1st rent controlled, 2nd market rent
-    potentialGrossSection: enums.EXPORT_TITLES.potentialGrossResidentialIncome,
-    rentControlledSection: enums.EXPORT_TITLES.rentControlledIncreases 
+    rentTypeIncrease: [ 1.014, 1 ] //1st rent controlled, 2nd market rent
 };

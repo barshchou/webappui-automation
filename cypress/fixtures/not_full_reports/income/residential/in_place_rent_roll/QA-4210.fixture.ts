@@ -30,6 +30,5 @@ export default {
     sumCurrent: Enums.RENT_ROLL_OPTIONS_CHECKBOXES.summarize, 
     verifyExport: "test",
     residentialUnits: rentRollResidentialUnitsFixture(),
-    verifyText: "Rent Roll Summary by Unit Type",
-    exportSectionName: Enums.EXPORT_TITLES.currentResidentialRentRoll
+    verifyText: "Rent Roll Summary by Unit Type"
 };

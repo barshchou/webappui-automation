@@ -60,6 +60,5 @@ export default {
     marketValues: _marketValues,
     submarketValues: _submarketValues,
     discussion: _discussion,
-    commentary: _commentary,
-    exportSectionName: enums.EXPORT_TITLES.siteDescription
+    commentary: _commentary
 };

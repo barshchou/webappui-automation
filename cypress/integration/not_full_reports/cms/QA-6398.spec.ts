@@ -35,10 +35,10 @@ conditionalDescribe("Verify sidebar navigation in the CMS page",
             _CmsBaseActions.openIncomeCapitalizationApproachPage();
             _IncomeCapitalizationApproach.Page.pageTitle.should("exist")
                 .and("have.text", _CmsTitle.INCOME_CAPITALIZATION_APPROACH);
-        });
 
-        after('Remove feature flag', () => {
+            cy.stepInfo(`4. Remove feature flag and log out`);
             launchDarklyApi.removeUserTarget(testData.reportTextEditorFlagKey);
             launchDarklyApi.removeUserTarget(testData.swotAnalysisFlagKey);
+            _NavigationSection.logout();
         });
     });

@@ -20,8 +20,7 @@ const tableExpenseHistoryCellNames = {
     reserves: "reserves",
     total: "total",
     totalExcludingTaxes: "totalExcludingTaxes",
-    noi: "noi",
-    utilities: "utilities"
+    noi: "noi"
 
 };
 

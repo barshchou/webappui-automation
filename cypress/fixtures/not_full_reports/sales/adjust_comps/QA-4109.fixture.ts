@@ -14,6 +14,5 @@ export default {
     }),
     comparableAdjustment: _compAdjustments,
     calculationUnits: Enums.CALCULATION_UNITS.psf,
-    basis:"Price per SF",
-    exportSectionName: Enums.EXPORT_TITLES.cumulativePricePerUnit
+    basis:"Price per SF"
 };
