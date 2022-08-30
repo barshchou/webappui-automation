@@ -289,7 +289,8 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
 
     navigateToProfileOrganization(nameLink: string): NavigationSectionActions {
         this.clickProfileOrganization()
-            .selectLink(nameLink);
+            .selectLink(nameLink)
+            .submitSaveChangesModal();
         return this;
     }
 
