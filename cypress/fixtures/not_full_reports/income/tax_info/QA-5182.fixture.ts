@@ -18,5 +18,6 @@ export default {
     featureFlagKey: Enums.FEATURE_FLAG_KEYS.flexibleTaxes,
     onFeatureFlag: 0,
     tooltip: "The following text will appear below the Tax Liability table in your export",
-    exportSectionName: Enums.EXPORT_TITLES.assessedValueAndRealEstateTaxes
+    exportSectionName: Enums.EXPORT_TITLES.assessedValueAndRealEstateTaxes,
+    sectionToExport: Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.assessedValueAndRealEstateTaxes
 };

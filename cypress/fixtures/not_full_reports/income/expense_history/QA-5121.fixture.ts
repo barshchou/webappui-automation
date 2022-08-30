@@ -16,5 +16,6 @@ export default {
     expensesToCheck: [ proFormaTypes.realEstateTaxes, proFormaTypes.insurance, proFormaTypes.electricity,
         proFormaTypes.fuel, proFormaTypes.waterAndSewer, proFormaTypes.repairAndMaintenance,
         proFormaTypes.payrollBenefits, proFormaTypes.generalAndAdministrative, proFormaTypes.legalAndProfessional,
-        proFormaTypes.miscellaneous, proFormaTypes.managementFees, proFormaTypes.replacementsAndReserves, "Custom" ]
+        proFormaTypes.miscellaneous, proFormaTypes.managementFees, proFormaTypes.replacementsAndReserves, "Custom" ],
+    sectionToExport: Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.incomeCapitalizationApproach
 };

@@ -24,7 +24,8 @@ describe("Verify the Developer's Forecast checkbox on the In-Place Rent Roll pag
                 }
                     
                 _NavigationSection.openReviewAndExport();
-                ReviewExport.generateDocxReport().waitForReportGenerated()
+                ReviewExport.selectSectionsToIncludeInExport(testData.sectionToExport)
+                    .generateDocxReport().waitForReportGenerated()
                     .downloadAndConvertDocxReport(reportCreationData(i).reportNumber);
             });
         }

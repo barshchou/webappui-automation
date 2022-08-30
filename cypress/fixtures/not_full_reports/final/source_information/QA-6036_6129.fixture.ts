@@ -39,5 +39,6 @@ const dataReportFixtures = [
 export default {
     dataReportFixtures,
     textBoxName: Enums.PAGES_TEXTBOX_NAMES.dataSourcesDescriptionExport,
-    inspectorName
+    inspectorName,
+    sectionToExport: Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.introduction
 };

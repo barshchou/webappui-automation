@@ -15,5 +15,6 @@ export default {
     "For the subject, we have applied the appropriate 2021/22 fiscal year tax rate " +
     "to the most recent assessed value of the property to determine its current tax liability.",
     tooltip: "The following text will appear below the Tax Liability table in your export",
-    exportSectionName: Enums.EXPORT_TITLES.assessedValueAndRealEstateTaxes
+    exportSectionName: Enums.EXPORT_TITLES.assessedValueAndRealEstateTaxes,
+    sectionToExport: Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.assessedValueAndRealEstateTaxes
 };

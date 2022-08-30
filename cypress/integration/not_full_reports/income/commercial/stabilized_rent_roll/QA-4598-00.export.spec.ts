@@ -39,7 +39,8 @@ new narrative component added through "=" in the Generated Commentary on the Sta
             .verifyProgressBarNotExist();
 
         _NavigationSection.openReviewAndExport();
-        ReviewExport.generateDocxReport().waitForReportGenerated()
+        ReviewExport.selectSectionsToIncludeInExport(testData.sectionToExport)
+            .generateDocxReport().waitForReportGenerated()
             .downloadAndConvertDocxReport(testData.reportCreationDataAsIs.reportNumber);
     });
 
@@ -90,7 +91,8 @@ new narrative component added through "=" in the Generated Commentary on the Sta
 
 
         _NavigationSection.openReviewAndExport();
-        ReviewExport.generateDocxReport().waitForReportGenerated()
+        ReviewExport.selectSectionsToIncludeInExport(testData.sectionToExport)
+            .generateDocxReport().waitForReportGenerated()
             .downloadAndConvertDocxReport(testData.reportCreationDataAsStabilized.reportNumber);
     });
 
@@ -142,7 +144,8 @@ new narrative component added through "=" in the Generated Commentary on the Sta
             .verifyProgressBarNotExist();
 
         _NavigationSection.openReviewAndExport();
-        ReviewExport.generateDocxReport().waitForReportGenerated()
+        ReviewExport.selectSectionsToIncludeInExport(testData.sectionToExport)
+            .generateDocxReport().waitForReportGenerated()
             .downloadAndConvertDocxReport(testData.reportCreationDataAsComplete.reportNumber);
     });
 

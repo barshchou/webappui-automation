@@ -1,4 +1,4 @@
-import enums from "../../../../../enums/enums";
+import Enums from "../../../../../enums/enums";
 import { BoweryReports } from "../../../../../types/boweryReports.type";
 import reportDataCreator from "../../../../data_creator/reportData.creator";
 
@@ -161,16 +161,16 @@ const _leaseStatus: BoweryReports.LeaseStatus = "Occupied";
 
 export default {
     reportCreationDataAsIs: reportDataCreator.getReportData("4484_86_88-90", {
-        incomeValue: enums.INCOME_TYPE.both,
-        conclusionValue: enums.VALUE_CONCLUSION_TYPE.AS_IS
+        incomeValue: Enums.INCOME_TYPE.both,
+        conclusionValue: Enums.VALUE_CONCLUSION_TYPE.AS_IS
     }),
     reportCreationDataAsStabilized: reportDataCreator.getReportData("4484_86_88-90", {
-        incomeValue: enums.INCOME_TYPE.both,
-        conclusionValue: enums.VALUE_CONCLUSION_TYPE.AS_STABILIZED
+        incomeValue: Enums.INCOME_TYPE.both,
+        conclusionValue: Enums.VALUE_CONCLUSION_TYPE.AS_STABILIZED
     }),
     reportCreationDataAsComplete: reportDataCreator.getReportData("4484_86_88-90", {
-        incomeValue: enums.INCOME_TYPE.both,
-        conclusionValue: enums.VALUE_CONCLUSION_TYPE.AS_COMPLETE
+        incomeValue: Enums.INCOME_TYPE.both,
+        conclusionValue: Enums.VALUE_CONCLUSION_TYPE.AS_COMPLETE
     }),
     leaseStatus: _leaseStatus,
     suggestionsVerificationData: _suggestionsVerificationData,
@@ -184,5 +184,6 @@ export default {
     grossBuildingArea: _grossBuildingArea,
     siteArea: _siteArea,
     buildingName: _buildingName,
-    exportSectionName: enums.EXPORT_TITLES.currentCommercialRentRoll
+    exportSectionName: Enums.EXPORT_TITLES.currentCommercialRentRoll,
+    sectionToExport: Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.incomeCapitalizationApproach
 };

@@ -26,7 +26,8 @@ describe(`[QA-5095] Selected expenses forecast is exported to Estimated Operatin
             cy.stepInfo("3. Save the page and generate a report");
             Income._ExpenseForecastActions.clickSaveButton();
             _NavigationSection.openReviewAndExport();
-            ReviewExport.generateDocxReport().waitForReportGenerated()
+            ReviewExport.selectSectionsToIncludeInExport(testData.sectionToExport)
+                .generateDocxReport().waitForReportGenerated()
                 .downloadAndConvertDocxReport(reportCreationFixture("Per SF").reportNumber);
         });
 
@@ -70,7 +71,8 @@ describe(`[QA-5095] Selected expenses forecast is exported to Estimated Operatin
             cy.stepInfo("3. Save the page and generate a report");
             Income._ExpenseForecastActions.clickSaveButton();
             _NavigationSection.openReviewAndExport();
-            ReviewExport.generateDocxReport().waitForReportGenerated()
+            ReviewExport.selectSectionsToIncludeInExport(testData.sectionToExport)
+                .generateDocxReport().waitForReportGenerated()
                 .downloadAndConvertDocxReport(reportCreationFixture("Per Unit").reportNumber);
 
         });
@@ -112,7 +114,8 @@ describe(`[QA-5095] Selected expenses forecast is exported to Estimated Operatin
             cy.stepInfo("3. Save the page and generate a report");
             Income._ExpenseForecastActions.clickSaveButton();
             _NavigationSection.openReviewAndExport();
-            ReviewExport.generateDocxReport().waitForReportGenerated()
+            ReviewExport.selectSectionsToIncludeInExport(testData.sectionToExport)
+                .generateDocxReport().waitForReportGenerated()
                 .downloadAndConvertDocxReport(reportCreationFixture("Per Room").reportNumber);
         });
 

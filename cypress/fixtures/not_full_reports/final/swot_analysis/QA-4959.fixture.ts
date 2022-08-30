@@ -1,9 +1,9 @@
-import enums from "../../../../enums/enums";
+import Enums from "../../../../enums/enums";
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 
 export default {
     reportCreationData: ReportDataCreator.getReportData("4959"),
-    threats: enums.SWOT_SECTIONS.threats,
+    threats: Enums.SWOT_SECTIONS.threats,
     threatsTexts: [
         "Rent growth is limited by local rent control laws.",
         "On July 27th, 2022, the Federal Reserve Board increased their benchmark rate by 75 basis points," + 
@@ -14,5 +14,6 @@ export default {
         " related to the speed and consistency of the recovery.",
         "Economic uncertainty and potential market instability related to the war in Ukraine.",
     ],
-    exportSectionName: enums.EXPORT_TITLES.threats
+    exportSectionName: Enums.EXPORT_TITLES.threats,
+    sectionToExport: Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.summaryOfSalientFactsAndConclusions
 };

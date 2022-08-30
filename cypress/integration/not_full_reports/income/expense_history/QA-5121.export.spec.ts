@@ -26,7 +26,8 @@ describe("Verify that the user can delete expense category on the Expense Histor
 
             cy.stepInfo("3. Generate and download report");
             _NavigationSection.openReviewAndExport();
-            ReviewExport.generateDocxReport()
+            ReviewExport.selectSectionsToIncludeInExport(testData.sectionToExport)
+                .generateDocxReport()
                 .waitForReportGenerated()
                 .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
         });

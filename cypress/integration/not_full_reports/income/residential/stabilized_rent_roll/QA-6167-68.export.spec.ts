@@ -42,7 +42,8 @@ describe("Default selection on Stabilized Rent Roll table is the same selection 
 
             cy.stepInfo("[QA-6167][QA-6168]. 6. Export the report");
             _NavigationSection.Actions.openReviewAndExport();
-            ReviewExport.generateDocxReport().waitForReportGenerated()
+            ReviewExport.selectSectionsToIncludeInExport(testData.sectionToExport)
+                .generateDocxReport().waitForReportGenerated()
                 .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
         });
 

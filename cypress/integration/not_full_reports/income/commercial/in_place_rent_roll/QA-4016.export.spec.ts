@@ -31,7 +31,8 @@ describe("Verify that changes are displayed for Annual and Monthly Rent columns,
 
             cy.stepInfo("3. Export the report");
             _NavigationSection.Actions.openReviewAndExport();
-            ReviewExport.generateDocxReport().waitForReportGenerated()
+            ReviewExport.selectSectionsToIncludeInExport(testData.sectionToExport)
+                .generateDocxReport().waitForReportGenerated()
                 .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
         });
 

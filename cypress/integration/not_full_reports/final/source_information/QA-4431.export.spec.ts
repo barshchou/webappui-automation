@@ -30,7 +30,8 @@ describe("Verify that the generated commentary for Data Sources Description is a
 
             cy.stepInfo("4. Export the report");
             _NavigationSection.openReviewAndExport();
-            ReviewExport.generateDocxReport().waitForReportGenerated()
+            ReviewExport.selectSectionsToIncludeInExport(testData.sectionToExport)
+                .generateDocxReport().waitForReportGenerated()
                 .downloadAndConvertDocxReport(testData.nycReport.reportNumber);
         });
 
@@ -69,7 +70,8 @@ describe("Verify that the generated commentary for Data Sources Description is a
 
             cy.stepInfo("4. Export the report");
             _NavigationSection.openReviewAndExport();
-            ReviewExport.generateDocxReport().waitForReportGenerated()
+            ReviewExport.selectSectionsToIncludeInExport(testData.sectionToExport)
+                .generateDocxReport().waitForReportGenerated()
                 .downloadAndConvertDocxReport(testData.otherReport.reportNumber);
         });
 

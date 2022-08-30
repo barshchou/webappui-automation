@@ -39,7 +39,8 @@ describe("Verify the Commercial Stabilized Rent Roll table",
                 .verifyProgressBarNotExist();
 
             NavigationSection.openReviewAndExport();
-            ReviewExport.generateDocxReport().waitForReportGenerated()
+            ReviewExport.selectSectionsToIncludeInExport(testData.sectionToExport)
+                .generateDocxReport().waitForReportGenerated()
                 .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
         });
 

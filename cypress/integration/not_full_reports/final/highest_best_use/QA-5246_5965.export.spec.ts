@@ -42,7 +42,8 @@ describe("Verify and change to support custom types on the Highest & Best Use pa
             cy.stepInfo("5. Export the report");
             _NavigationSection.Actions.openReviewAndExport();
 
-            ReviewExport.generateDocxReport().waitForReportGenerated()
+            ReviewExport.selectSectionsToIncludeInExport(testData.sectionsToExport)
+                .generateDocxReport().waitForReportGenerated()
                 .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
         });
 
