@@ -13,7 +13,6 @@ describe(`Verify the "Purpose & Date of Value Discussion" generated commentary o
                 createReport(report.reportType);
 
                 cy.stepInfo(`2. Navigate to Key Info page and set Interest Appraised and Inspection Date`);
-                _NavigationSection.navigateToReportKeyInfo();
                 Report._KeyInfo.Actions
                     .checkAllInterestAppraisedByValues(report.interestAppraised);
                 Report._KeyInfo.enterDateByType(testData.valuationDate)
