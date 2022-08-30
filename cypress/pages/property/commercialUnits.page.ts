@@ -76,7 +76,7 @@ class CommercialUnitsPage extends BasePage {
     get commercialUnitsDiscussionTitle() { return cy.xpath("//h6[.='Commercial Unit SF Discussion']"); }
 
     commercialUnitDescriptionTitle(unitNumber = 1) { 
-        return cy.xpath(`//div[.='Commercial Unit ${unitNumber} Description']`); 
+        return cy.xpath(`//h6[.='Commercial Unit ${unitNumber} Description']`);
     }
 
     commercialUnitsTab(unitNumber = 1) { 
