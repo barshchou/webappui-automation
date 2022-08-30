@@ -19,5 +19,6 @@ export default {
     submarketAnalysisUseFile: "submarketAnalysisUseFile",
     searchResultSalesComp:"searchResultSalesComp",
     salesCompsAddresses: "salesCompsAddresses",
-    salesCompsIds:"salesCompsIds"
+    salesCompsIds:"salesCompsIds",
+    allOperatingExpensesValues: "allOperatingExpensesValues"
 };

@@ -15,5 +15,7 @@ export default {
         incomeValue: Enums.INCOME_TYPE.both
     }),
     chips: chipsDataCreator.getChipsData(_chipsOptions, Enums.VALUE_CONCLUSION_TYPE.AS_COMPLETE),
-    buildingName: _buildingName
+    buildingName: _buildingName,
+    identificationOfTheClientSection: Enums.EXPORT_TITLES.identificationOfTheClient,
+    intendedUseSection: Enums.EXPORT_TITLES.intendedUseAndUser
 };

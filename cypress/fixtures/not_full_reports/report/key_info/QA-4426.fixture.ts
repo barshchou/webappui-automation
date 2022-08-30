@@ -35,5 +35,6 @@ const _reportConclusionAndTextValues:Array<reportConclusionAndTextValues> = [
 
 export default {
     reportConclusionAndTextValues: _reportConclusionAndTextValues,
-    color: "rgb(210, 65, 65)"
+    color: "rgb(210, 65, 65)",
+    exportSectionName: Enums.EXPORT_TITLES.propertyRightsAppraised
 };

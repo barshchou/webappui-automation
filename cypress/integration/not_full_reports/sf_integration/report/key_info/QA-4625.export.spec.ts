@@ -31,9 +31,9 @@ describe("Verify the report export with a pre-filled Letter of Engagement from D
                     cy.visit(<string>file);
                     
                     cy.stepInfo(`4. Proceed to the Addenda > Letter of Engagement section.
-                    Verify the correct Letter Of Engagement is displayed.`);
+                                Verify the correct Letter Of Engagement is displayed.`);
                     testData.LOESourceStrings.forEach((sourceString, index) => {
-                        cy.contains("Letter of Engagement").nextUntil("h2").eq(index).children()
+                        cy.contains(testData.exportSectionName).nextUntil("h2").eq(index).children()
                             .should("have.attr", "src").and("include", sourceString);
                     });
                 });

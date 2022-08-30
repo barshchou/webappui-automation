@@ -34,7 +34,7 @@ describe("[QA-5182] Export column order both assessment psf and assessment per u
                         'Assessed Value & RE Taxes' section of the report.`);
             
             cy.visit(<string>file);
-            cy.contains("Assessed Value & Real Estate Taxes").scrollIntoView().next().next()
+            cy.contains(testData.exportSectionName).scrollIntoView().next().next()
                 .next().next().next().next().next().should("have.text", testData.commentary);
         });
     });

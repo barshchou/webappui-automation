@@ -265,59 +265,6 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
         return this;
     }
 
-    //TODO upgrade this method, cos it cant add two imports because of scroll.
-    /**
-     * Action enters report id into field 'Report ID' on 'JOB SEARCH' tab
-     */
-    enterReportToSearchComp(reportID: string): FindCompsActions {
-        cy.intercept("GET", `/salesComps/eventIds/${reportID}`)
-            .as(Alias.salesCompsEventIds);
-        findCompsPage.reportIdInput
-            .should('exist')       
-            .realClick({ clickCount: 10 })
-            .type("textforclear", { force: true })
-            .realClick({ clickCount: 10 })
-            .focus()
-            .clear( { force: true })
-            .realClick({ clickCount: 10 })
-            .should('be.focused')
-            .realType(`${reportID}{enter}`);
-        findCompsPage.reportIdInput.should("have.value", reportID);
-        return this;
-    }
-
-    clickImportCompsFromReportButton(): FindCompsActions {
-        findCompsPage.addToReportCompsButton.should("be.visible")
-            .should("be.enabled").click();
-        return this;
-    }
-
-    clickSelectCompsIconOnMap(index = 0): FindCompsActions {
-        findCompsPage.selectCompsIconOnMap.should('exist');
-        findCompsPage.selectCompsIconOnMap.eq(index).click();
-        findCompsPage.selectCompsButton.should('exist');
-        return this;
-    }
-
-    clickSearchButton(): FindCompsActions {
-        findCompsPage.searchButton.should('exist')
-            .should('be.enabled').click();
-        return this;
-    }
-
-    clickSelectCompsButton(): FindCompsActions {
-        findCompsPage.selectCompsButton.should('exist')
-            .should('be.enabled').click();
-        return this;
-    }
-
-    clickSelectAllButton(): FindCompsActions {
-        findCompsPage.selectAllButton.should('exist').should('be.enabled');
-        findCompsPage.selectedForReportTitle.should('exist');
-        findCompsPage.selectAllButton.click();
-        return this;
-    }
-
     /**
      * Checks WebApp REST request /salesComps/eventIds/:report_id
      * which returns salesEventId which in its turn will be passed to DRM's GraphQL API
@@ -424,35 +371,18 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
         return this;
     }
 
-    /**
-     * Action opens 'JOB SEARCH' tab, enters report id, finds comp on map
-     * and imports comps to existing report
-     */
-    addNewCompViaReportId(reportId: string): FindCompsActions {
-        this.openJobSearchTab()
-            .enterReportToSearchComp(reportId)
-            .clickSearchButton()
-            .clickSelectCompsIconOnMap()
-            .clickSelectCompsButton()
-            .clickSelectAllButton()
-            .clickImportCompsFromReportButton();
-        return this;
-    }
-
-    openJobSearchTab(): FindCompsActions {
-        findCompsPage.jobSearchTab.click();
-        cy.wait(`@${Alias.gql.SearchJobs}`, { timeout: 120000 });
-        findCompsPage.reportIdInput.should('exist');
-        return this;
-    }
-
     openCompSearchTab(): FindCompsActions {
         findCompsPage.compSearchTab.click();
         findCompsPage.resetAllButton.should('exist');
         return this;
     }
 
-    
+    openJobSearchTab() {
+        findCompsPage.jobSearchTab.click();
+        cy.wait(`@${Alias.gql.SearchJobs}`, { timeout: 120000 });
+        findCompsPage.reportIdInput.should('exist');
+        return this;
+    }
 }
 
 export default new FindCompsActions(findCompsPage);

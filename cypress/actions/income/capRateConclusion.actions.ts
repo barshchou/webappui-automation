@@ -242,7 +242,6 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
                 key = capRateConclusionKeys.asIsMarketAmount;
                 break;
             case enums.VALUE_CONCLUSION_NAME.asStabilized:
-
                 key = capRateConclusionKeys.asStabilizedAmount;
                 break;
             case enums.VALUE_CONCLUSION_NAME.asComplete:
@@ -302,7 +301,7 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
         conclusionValueName: BoweryReports.ValueConclusionName): CapRateConclusionActions {
         this.getAllAsStabilizedLossesAliases(valueConclusionKey, enums.VALUE_CONCLUSION_NAME.asStabilized);
         cy._mapGet(capRateConclusionKeys.allAsStabilizedLossesAliases).then(allAsStabilizedLossesAliases => {
-            cy.log(`As Stabilized AmountT: ${allAsStabilizedLossesAliases.asStabilizedAmount}`);
+            cy.log(`As Stabilized Amount: ${allAsStabilizedLossesAliases.asStabilizedAmount}`);
 
             let allRentLosses = allAsStabilizedLossesAliases.residentialRentLoss
                 + allAsStabilizedLossesAliases.commercialRentLoss +
@@ -319,7 +318,7 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
 
             let expectedProspectiveValueAsComplete = prospectiveValue < 0
                 ? `-$${numberWithCommas(prospectiveValue.toFixed(0).replace('-', ''))}`
-                : `${numberWithCommas(prospectiveValue.toFixed(0))}`;
+                : `$${numberWithCommas(prospectiveValue.toFixed(0))}`;
 
             capRateConclusionPage.amountCell(conclusionValueName)
                 .should('have.text', expectedProspectiveValueAsComplete);
@@ -356,7 +355,7 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
 
             let expectedMarketValueAsIs = marketValueAsIs < 0
                 ? `-$${numberWithCommas(marketValueAsIs.toFixed(0).replace('-', ''))}`
-                : `${numberWithCommas(marketValueAsIs.toFixed(0))}`;
+                : `$${numberWithCommas(marketValueAsIs.toFixed(0))}`;
 
             capRateConclusionPage.amountCell(conclusionValueName)
                 .should('have.text', expectedMarketValueAsIs);
@@ -565,7 +564,7 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
         return this;
     }
 
-    private setRoundingFactorValueAlias(): CapRateConclusionActions {
+    setRoundingFactorValueAlias(): CapRateConclusionActions {
         capRateConclusionPage.roundingFactorInput.invoke('attr', 'value').then(roundingFactor => {
             cy._mapSet(capRateConclusionKeys.capRateRoundingFactor, roundingFactor);
         });
