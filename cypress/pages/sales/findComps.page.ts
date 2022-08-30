@@ -63,11 +63,13 @@ class FindCompsPage extends BasePage {
     }
 
     getRemoveSelectedCompButtonByAddress(address: string) {
-        return cy.contains(address).parent().find('[data-qa="selected-comp-remove-btn"]');
+        return cy.contains("td", address).siblings("td[data-qa=selected-comp-actions]")
+            .find('[data-qa="selected-comp-remove-btn"]');
     }
 
     getRemoveDeletedCompButtonByAddress(address: string) {
-        return cy.contains(address).parent().find('[data-qa="removed-comp-remove-btn"]');
+        return cy.contains("td", address).siblings("td[data-qa=removed-comp-actions]")
+            .find('[data-qa="removed-comp-remove-btn"]');
     }
 
     getRemoveCompFromMapButtonByAddress(address: string) {
