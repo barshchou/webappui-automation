@@ -11,6 +11,10 @@ export default class JobSearchPage {
         return cy.get('[data-qa="filter-completedInPeriod"]');
     }
 
+    get jobSearchFilterInputCompletedIn() {
+        return this.jobSearchFilterCompletedIn.find('input');
+    }
+
     get jobSearchFilterPricePerUnit() {
         return cy.get('[data-qa="filter-pricePerUnit"]');
     }
@@ -29,6 +33,10 @@ export default class JobSearchPage {
 
     get jobSearchFilterPropertyType() {
         return cy.get('[data-qa="filter-propertyTypes"]');
+    }
+
+    get jobSearchFilterInputPropertyType() {
+        return this.jobSearchFilterPropertyType.find('input');
     }
 
     get jobSearchFilterResidentialUnits() {
@@ -55,7 +63,23 @@ export default class JobSearchPage {
         return cy.get('[data-qa="price-per-basis-cap-rate"]');
     }
 
-    jobSearchGetFilterInput(isMinOrMax:string, filterName: string) {
+    jobSearchGetFilter(isMinOrMax:string, filterName: string) {
         return cy.get(`[data-qa="${filterName}-${isMinOrMax}-input"]`);
+    }
+
+    jobSearchGetFilterInput(isMinOrMax:string, filterName: string) {
+        return this.jobSearchGetFilter(isMinOrMax, filterName).find('input');
+    }
+
+    get reportIdInput() {
+        return cy.get('input[placeholder="Find a specific Report ID"]');
+    }
+
+    get reportIdClearButton() {
+        return cy.get('[data-testid="ClearIcon"]');
+    }
+
+    get filtersResetAllButton() {
+        return cy.get('[data-qa="filter-reset-all-btn"]');
     }
 }

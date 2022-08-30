@@ -25,7 +25,7 @@ describe("Verify the 'Add expense category' button is displayed on the Expense H
             cy.stepInfo("3. Verify user can add new category, 'X' button erases entered value");
             Income._ExpenseHistory.enterNewCategoryName(testData.expenseCategory)
                 .verifyNewCategoryEnteredName(testData.expenseCategory);
-            cy.get("[data-icon=times]").click();
+            cy.get("[data-testid='CloseIcon']").click();
             Income._ExpenseHistory.verifyNewCategoryEnteredName("")
                 .Page.formCancelButton().click();
 

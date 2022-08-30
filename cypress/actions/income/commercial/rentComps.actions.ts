@@ -464,15 +464,16 @@ class CommercialRentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
         coordinates = [ { x: 0, y: 0 } ],
         dialogTitle = "Finish drawing",
         isSelect = true): CommercialRentCompsActions {
-        cy.intercept('POST', '/commercialRentComps/search-units').as(Alias.searchUnits);
         rentCompsPage.mapDrawPolygonButton.click();
         coordinates.forEach(coord => {
             rentCompsPage.mapContainer.click(coord.x, coord.y);
             cy.wait(1000);
         });
+        cy.intercept('POST', '/commercialRentComps/search-units').as(Alias.searchUnits);
         rentCompsPage.getMapDialogButtons(dialogTitle).click();
         cy.wait(`@${Alias.searchUnits}`, { timeout: 10000 }).then(({ response }) => {
-            let countUnits = response.body.length;
+    
+            let countUnits = JSON.parse(response.body).length;
             cy.log("countUnits", countUnits);
             this.verifyProgressBarNotExist()
                 .verifyIncludesPolygon(countUnits)
@@ -560,7 +561,7 @@ class CommercialRentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
         });
         rentCompsPage.getMapDialogButtons(dialogTitle).click();
         cy.wait(`@${Alias.searchUnits}`, { timeout: 10000 }).then(({ response }) => {
-            let countUnits = response.body.length;
+            let countUnits = JSON.parse(response.body).length;
             cy.log("countUnits", countUnits);
             this.verifyProgressBarNotExist()
                 .verifyIncludesPolygon(countUnits)

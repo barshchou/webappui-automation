@@ -80,7 +80,7 @@ class CommercialRentCompsPage extends BasePage {
 
     get computedPanel() { return cy.get("[data-qa=computed-panel]"); }
 
-    get mapStarZoomButton() { return cy.get(".leaflet-control svg[role='presentation']"); }
+    get mapStarZoomButton() { return cy.get("[data-testid='StarRoundedIcon']"); }
 
     get mapDrawPolygonButton() { return cy.get("[title='Draw a polygon']"); }
 

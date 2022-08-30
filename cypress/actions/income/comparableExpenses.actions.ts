@@ -209,7 +209,9 @@ class ComparableExpensesActions extends BaseActionsExt<typeof compExpensesPage> 
      * 'Create' word
      */
     addNewCategoryAndVerify(categoryName: string, isFirstTime = true): ComparableExpensesActions {
-        this.clickAddCustomExpenseCategoryButton()
+        this.clickAddCustomExpenseCategoryButton();
+        cy.get('[role="dialog"]').should("exist", { timeout: 10000 });
+        this.verifyProgressBarNotExist()
             .enterNewCategoryName(categoryName, isFirstTime)
             .verifyNewCategoryEnteredName(categoryName)
             .Page.formAddButton().click();
