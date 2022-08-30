@@ -3,6 +3,7 @@ import { createReport } from '../../../../actions/base/baseTest.actions';
 import { Report, ReviewExport } from '../../../../actions';
 import testData from "../../../../fixtures/not_full_reports/report/appraiser/QA-6126-27.fixture";
 import Enums from '../../../../enums/enums';
+import { normalizeText } from '../../../../../utils/string.utils';
 
 describe("Generated Commentary is dynamically updated with relevant information (Freddie Mac report)", 
     { tags:[ "@report", "@appraiser", "@check_export" ] }, () => {
@@ -26,9 +27,11 @@ describe("Generated Commentary is dynamically updated with relevant information 
                 .should("have.text", testData.certificationInspectionComment);
 
             cy.stepInfo("6. Verify generated Certification Inspection comment");
-            Report._Appraiser.Page.formCommentTextBox(Enums.PAGES_TEXTBOX_NAMES.certificationAssistance)
-                .should("have.text", testData.certificationAssistanceComment);
-            
+            Report._Appraiser.Page.formCommentTextBox(Enums.PAGES_TEXTBOX_NAMES.certificationAssistance).invoke("text")
+                .then(text => {
+                    expect(normalizeText(text)).to.eq(testData.certificationAssistanceComment);
+                });
+
             cy.stepInfo("7. Export report");
             _NavigationSection.openReviewAndExport();
             ReviewExport.generateDocxReport().waitForReportGenerated()
