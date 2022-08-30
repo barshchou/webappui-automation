@@ -1,3 +1,4 @@
+import { BoweryReports } from "../../types/boweryReports.type";
 import BasePage from "../base/base.page";
 
 class ReviewExportPage extends BasePage {
@@ -29,6 +30,18 @@ class ReviewExportPage extends BasePage {
     resultModalCloseButton(result = true) {
         let message = result ? "Success" : "Error";
         return cy.xpath(`//*[contains(text(), "${message}")]//following::button[1]`);
+    }
+
+    get selectAllButton() { return cy.get("[data-qa=select-all-all-btn]"); }
+
+    get deselectAllButton() { return cy.get("[data-qa=deselect-all-all-btn]"); }
+
+    getIncludeSectionCheckbox(sectionName: BoweryReports.SectionsToIncludeInExport) {
+        return cy.get(`[data-qa='${sectionName}'] input`);
+    }
+
+    get loadingSectionsForm() {
+        return cy.xpath("//form[@id='reviewAndExport-final-form']//hr/following-sibling::div");
     }
 }
 export default new ReviewExportPage();

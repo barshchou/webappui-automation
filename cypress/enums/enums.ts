@@ -92,6 +92,7 @@ import chipsEnum from "./chips.enum";
 import expenseHistoryDataProviderEnum from "./expense/expenseHistoryDataProvider.enum";
 import expenseItemBasisOfComparisonEnum from "./expense/expenseItemBasisOfComparison.enum";
 import exportTitlesEnum from "./exportTitles.enum";
+import sectionsToIncludeInExport from "./sectionsToIncludeInExport.enum";
 
 export default {
     TEMPLATE_TYPE: templateTypesEnum,
@@ -187,5 +188,6 @@ export default {
     CHIPS: chipsEnum,
     EXPENSE_DATA_PROVIDER: expenseHistoryDataProviderEnum,
     EXPENSE_ITEM_BASIS_OF_COMPARISON: expenseItemBasisOfComparisonEnum,
-    EXPORT_TITLES: exportTitlesEnum
+    EXPORT_TITLES: exportTitlesEnum,
+    SECTIONS_TO_INCLUDE_IN_EXPORT: sectionsToIncludeInExport
 };

@@ -69,3 +69,4 @@ export type ChipsKeys = keyof typeof Enums.CHIPS
 export type ExpenseDataProvider = keyof typeof Enums.EXPENSE_DATA_PROVIDER
 export type ExpenseItemBasisOfComparison = keyof typeof Enums.EXPENSE_ITEM_BASIS_OF_COMPARISON
 export type ExportTitlesKeys = keyof typeof Enums.EXPORT_TITLES
+export type SectionsToIncludeInExportKeys = keyof typeof Enums.SECTIONS_TO_INCLUDE_IN_EXPORT

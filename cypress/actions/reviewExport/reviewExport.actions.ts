@@ -137,5 +137,48 @@ class ReviewExportActions extends BaseActionsExt<typeof reviewExportPage> {
         reviewExportPage.resultModalCloseButton(success).click();
         return this;
     }
+
+    selectDeselectAllSectionsForExport(select = true): ReviewExportActions {
+        reviewExportPage.loadingSectionsForm.should("not.exist");
+        select ? 
+            reviewExportPage.selectAllButton.click() 
+            : reviewExportPage.deselectAllButton.click();
+        return this;
+    }
+
+    checkUncheckSectionToIncludeInExport(
+        sectionName: BoweryReports.SectionsToIncludeInExport, isCheck = true): ReviewExportActions {
+        reviewExportPage.getIncludeSectionCheckbox(sectionName).invoke('attr', 'class').then(classAttr => {
+            const checked = classAttr.includes("checked");
+            checked != isCheck ? isCheck ?
+                reviewExportPage.getIncludeSectionCheckbox(sectionName).check()
+                : reviewExportPage.getIncludeSectionCheckbox(sectionName).uncheck()
+                : null;
+        });
+        return this;
+    }
+
+    verifySectionToIncludeInExportCheckboxState(
+        sectionName: BoweryReports.SectionsToIncludeInExport, state = true): ReviewExportActions {
+        const assertion = state ? "be.checked" : "not.be.checked";
+        reviewExportPage.getIncludeSectionCheckbox(sectionName).should(assertion);
+        return this;
+    }
+
+    selectSectionsToIncludeInExport(
+        sectionNames: BoweryReports.SectionsToIncludeInExport | 
+        Array<BoweryReports.SectionsToIncludeInExport>): ReviewExportActions {
+        this.selectDeselectAllSectionsForExport(false);
+        if (Array.isArray(sectionNames)) {
+            sectionNames.forEach(sectionName => {
+                this.checkUncheckSectionToIncludeInExport(sectionName)
+                    .verifySectionToIncludeInExportCheckboxState(sectionName);
+            });
+        } else {
+            this.checkUncheckSectionToIncludeInExport(sectionNames)
+                .verifySectionToIncludeInExportCheckboxState(sectionNames);
+        }
+        return this;
+    }
 }
 export default new ReviewExportActions(reviewExportPage);

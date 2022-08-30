@@ -218,6 +218,9 @@ export namespace BoweryReports {
 
     export type ExportTitles = typeof Enums.EXPORT_TITLES[KeyInfo.ExportTitlesKeys];
 
+    export type SectionsToIncludeInExport = typeof 
+        Enums.SECTIONS_TO_INCLUDE_IN_EXPORT[KeyInfo.SectionsToIncludeInExportKeys];
+
     export type PropertyConditions = typeof Enums.PROPERTY_CONDITIONS[KeyInfo.PropertyConditions];
 
     export type PropertyConditionsRadios = keyof typeof Enums.PROPERTY_CONDITIONS_RADIOS;
