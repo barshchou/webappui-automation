@@ -149,7 +149,11 @@ class FindCompsPage extends BasePage {
         return cy.get('[data-qa="filter-completedInPeriod"]');
     }
 
-    filterSalePeriodValue(value: string) {
+    get compStatusFilter() {
+        return cy.get("[data-qa=filter-statuses]");
+    }
+
+    filterOptionValue(value: string) {
         return cy.get(`[role="option"][data-value="${value}"]`);
     }
 

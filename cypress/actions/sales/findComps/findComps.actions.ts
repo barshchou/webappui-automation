@@ -116,8 +116,22 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
 
     selectFilterSalePeriodValue(periodValue: BoweryReports.FindComps.SalePeriodValues): FindCompsActions {
         findCompsPage.filterSalePeriod.should('exist').click();
-        findCompsPage.filterSalePeriodValue(periodValue).should('exist').click();
+        findCompsPage.filterOptionValue(periodValue).should('exist').click();
         findCompsPage.filterSalePeriod.children().should('contain', `${periodValue}`);
+        return this;
+    }
+
+    selectFilterCompStatusValue(compStatus: BoweryReports.FindComps.CompStatusValues | 
+    BoweryReports.FindComps.CompStatusValues[]): FindCompsActions {
+        const statuses = Array.isArray(compStatus) ? compStatus : [ compStatus ];
+        findCompsPage.compStatusFilter.click();
+        statuses.forEach(status => {
+            findCompsPage.filterOptionValue(status).click();
+            findCompsPage.loadingModalSpinner.should("exist");
+            findCompsPage.loadingModalSpinner.should("not.exist");
+            findCompsPage.compStatusFilter.children("input").should("contain.value", status);
+        });
+        findCompsPage.compStatusFilter.realClick();
         return this;
     }
 
@@ -203,6 +217,20 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
             );
             cy.wrap(interception.response.body.data.findTransactionByIdAndVersion.id)
                 .as(Alias.salesEventId);
+        });
+        return this;
+    }
+
+    saveAddedCompsAddressesToMap(): FindCompsActions {
+        cy._mapSet(mapKeysUtils.salesCompsAddresses, undefined);
+        findCompsPage.addressCells.each((cell, index) => {
+            if (index != 0) {
+                const valueToAdd = cell.text().split(",")[0];
+                _mutateArrayInMap(mapKeysUtils.salesCompsAddresses, valueToAdd);
+            }
+        });
+        cy._mapGet(mapKeysUtils.salesCompsAddresses).then(addresses => {
+            cy.log(`Current addresses in map: ${addresses.toString()}`);
         });
         return this;
     }
