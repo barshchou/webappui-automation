@@ -322,21 +322,26 @@ class JobSearchActions {
      * 
      * NOTES: 
      * 1. If it needs, we can upgrade this method, cos it cant add two imports because of scroll.
-     * 2. All these actions with input is because reportIdInput is hard to interact. For example 
-     * .realClick({ clickCount: 10 }) activate reportIdInput field stable. Without .focus() action clear() doesn't 
-     * work. Also .type("textforclear", { force: true }) + .clear( { force: true }) we need if input is prefilled.
-     * Stable performance of this method has been provided experimentally. 
      */
     enterReportToSearchComp(reportID: string) {
         cy.intercept("GET", `/salesComps/eventIds/${reportID}`)
             .as(Alias.salesCompsEventIds);
+            
+        /*
+         * method chain below is necessary to interact with input correctly 
+         * this is the stable implementation we could provide    
+         */
         findCompsPage.reportIdInput
-            .should('exist')       
+            .should('exist')
+            // making `reportIdInput` interactable to Cypress' `type` method  
             .realClick({ clickCount: 10 })
+            // append some text to clear input further since we need need clear input to type some new data
             .type("textforclear", { force: true })
             .realClick({ clickCount: 10 })
+            // focusing on input to make Cypress' `clear` method work
             .focus()
             .clear( { force: true })
+            // making `reportIdInput` interactable to Cypress' `type` method once more
             .realClick({ clickCount: 10 })
             .should('be.focused')
             .realType(`${reportID}{enter}`);
