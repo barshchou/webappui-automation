@@ -20,7 +20,7 @@ describe(`Commercial Area/SF is row name in expanded Utilities Adjustment sectio
             NavigationSection.navigateToAdjustComps();
 
             cy.stepInfo(`3. Verify that Commercial Area/SF is static name of the last row in`);
-            Sales._AdjustComps.Page.getAdjustmentArrow(testData.adjustmentName).click();
+            Sales._AdjustComps.expandAdjustmentDetails(testData.adjustmentName);
             Sales._AdjustComps.Page.getAdjustmentExpansionCellLabel(testData.utilitiesAdjustmentRowLabel)
                 .should('have.text', Enums.UTILITIES_ADJUSTMENTS_EXPANSION_ROWS.commercialAreaSf);
         });

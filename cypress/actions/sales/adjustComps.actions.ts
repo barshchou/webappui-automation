@@ -8,6 +8,8 @@ import { BoweryReports } from "../../types/boweryReports.type";
 import { _saveDataInFile } from "../../support/commands";
 import Enums from "../../enums/enums";
 
+type AdjustmentName = BoweryReports.SalesAdjustmentGrid.AdjustmentName;
+
 class AdjustCompsActions extends BaseActionsExt<typeof adjustCompsPage> {
     /**
      * Checks whether name string in cell Cumulative Price Per *basis* is bold   
@@ -249,8 +251,8 @@ class AdjustCompsActions extends BaseActionsExt<typeof adjustCompsPage> {
         return this;
     }
 
-    clickViewAdjustmentDetails(): AdjustCompsActions {
-        adjustCompsPage.viewAdjustmentDetails.click();
+    expandAdjustmentDetails(adjustmentName: AdjustmentName): AdjustCompsActions {
+        adjustCompsPage.getAdjustmentArrow(adjustmentName).click();
         return this;
     }
 
