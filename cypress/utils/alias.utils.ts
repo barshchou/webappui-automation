@@ -37,6 +37,9 @@ export const Alias = {
         SearchJobs:_gqlAlias(gqlOperationNames.searchJobs)
     }, 
     pageElements:{
+        commercialUnits:{
+            commercialUnitsSFInputs:"commercialUnits.commercialUnitsSFInputs"
+        },
         compPlex:{
             conditionDropdown:"conditionDropdown",
             getDropdownOption:"getDropdownOption",

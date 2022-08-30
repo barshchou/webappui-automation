@@ -7,20 +7,19 @@ describe("[QA-4104] Verify the Market Value generated commentary",
     { tags: [ "@report", "@key_info", "@check_export" ] }, () => {
         it("Test body", () => {
             cy.stepInfo(`1. Create report while creating set the same Job number 
-            as report from SalesForce has (e.g. JOB-1764459005) 
-            Make sure that there is no Inspection Date in the Salesforce job`);
+                        as report from SalesForce has (e.g. JOB-1764459005) 
+                        Make sure that there is no Inspection Date in the Salesforce job`);
             createReport(testData.reportCreationData);
 
             cy.stepInfo(`2. Go to Report > Key Info > Definition of Market Value`);
             _NavigationSection.navigateToReportInformation();
         
             cy.stepInfo(`3. Check that this sentence exports in the Introduction, 
-            replacing the boilerplate sentence currently exported there`);
+                        replacing the boilerplate sentence currently exported there`);
             Report._KeyInfo.Page.textBoxDefinitionOfMarketValue().should("include.text", testData.verifyText);
 
-            cy.stepInfo(`4. Check that there is a tooltip letting know where the text exports.`);
-            Report._KeyInfo.Page.iconDefinitionOfMarketValue().trigger("mouseover");
-            Report._KeyInfo.Page.tooltipDefinitionOfMarketValue.should("include.text", testData.tooltipText);
+            cy.stepInfo(`4. Verify text letting know where the text exports.`);
+            Report._KeyInfo.Page.definitionOfMarketValue.should("include.text", testData.tooltipText);
 
             _NavigationSection.openReviewAndExport();
             ReviewExport.generateDocxReport().waitForReportGenerated()
@@ -35,9 +34,9 @@ describe("[QA-4104] Verify the Market Value generated commentary",
                     cy.visit(<string>file);
 
                     cy.stepInfo(`5. Check that this sentence exports in the Introduction, 
-                    replacing the boilerplate sentence currently exported there`);
-                    cy.contains("Definition of Market Value").next().next().scrollIntoView()
+                                replacing the boilerplate sentence currently exported there`);
+                    cy.contains(testData.exportSectionName).next().next().scrollIntoView()
                         .should("have.text", testData.verifyText);
                 });
-        }); 
+        });
     });

@@ -15,7 +15,7 @@ describe("Verify that changes are displayed for Annual and Monthly Rent columns,
             Property._CommercialUnits.enterUnitSFByUnitIndex(testData.squareFootage);
 
             cy.stepInfo(`2. Navigate to Income -> Commercial -> In-Place Rent Roll 
-                    and fill in all necessary data`);
+                        and fill in all necessary data`);
             _NavigationSection.navigateToCommercialInPlaceRentRoll();
             Income._CommercialManager.InPlaceRentRoll
                 .clickAnnuallyBasisButton()
@@ -40,13 +40,13 @@ describe("Verify that changes are displayed for Annual and Monthly Rent columns,
                 { _reportName: testData.reportCreationData.reportNumber, _docxHtml: "html" }
             ).then(file => {
                 cy.log(<string>file);
-            
+
                 cy.visit(<string>file);
-                cy.xpath("//h4[.='Current Commercial Rent Roll']/following-sibling::table")
+                cy.xpath(`//h4[.='${testData.exportSectionName}']/following-sibling::table`)
                     .eq(0).scrollIntoView().within(() => {
                         cy.stepInfo("Check that the leading # column removed");
                         cy.get("td>p").eq(0).should("not.contain.text", "#");
-                        
+
                         cy.stepInfo("Check that Annual Rent represents a whole number");
                         cy.get("tr").eq(1).find("p").eq(6).should("have.text", `$${testData.annualRent}`);
 

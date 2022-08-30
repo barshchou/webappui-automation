@@ -1,5 +1,5 @@
+import { BoweryReports } from "../../types/boweryReports.type";
 import BasePage from "../base/base.page";
-
 class CommercialUnitsPage extends BasePage {
     get iconExchangeComUnits() { return cy.get("[data-icon=exchange]"); }
 
@@ -9,24 +9,24 @@ class CommercialUnitsPage extends BasePage {
         return cy.xpath("//*[.='No. of Commercial Units']//following::*[@inputmode][1]"); 
     }
 
-    get iconDeleteImage() {
-        return cy.get('[data-icon="trash-alt"]');
+    getIconDeleteImage(category: BoweryReports.ImageType, index = 0) {
+        return cy.get(`[data-qa="${category}-image-delete-${index}"]`);
     }
 
     get commercialUnitHeaderSection() { return cy.get("*[data-qa='propertyCommercialUnitDescription']"); }
 
-    get iconRotateImage() {
-        return cy.get('[data-icon="retweet"]');
+    getIconRotateImage(category: BoweryReports.ImageType, index = 0) {
+        return cy.get(`[data-qa="${category}-image-rotate-${index}"]`);
     }
 
-    get commercialUnitImage() {
-        return cy.get('h6 + div > [role="img"]');
+    getCommercialUnitImage(category: BoweryReports.ImageType, index = 0) {
+        return cy.xpath(`//*[@data-qa="${category}-image-preview-${index}"]//ancestor::*[@role="img"]`);
     }
 
     get commercialUnitsTabs() { return cy.get("button[role='tab']"); }
 
-    getRadioButtonByValueAndUnitIndex(group: string, value: string, index = 0): Cypress.Chainable<JQuery<HTMLElement>> {
-        return cy.xpath(`//label[contains(text(), '${group}')]//following::input[@value='${value}'][1]`).eq(index);
+    getRadioButtonByValueAndUnitIndex(group: string, value: string): Cypress.Chainable<JQuery<HTMLElement>> {
+        return cy.xpath(`//label[contains(text(), '${group}')]//following::input[@value='${value}'][1]`);
     }
 
     get commercialUnitsSFInputs() { return cy.get("*[name*='.squareFeet']"); }
@@ -53,11 +53,11 @@ class CommercialUnitsPage extends BasePage {
     }
 
     get commercialGrossLeasableAreaTooltip() { 
-        return cy.xpath(`//label[text() = "Commercial Gross Leasable Area"]/span[1]`); 
+        return cy.get('[data-testid="InfoOutlinedIcon"]'); 
     }
 
-    get commercialUnitSfDiscussionTooltip() { 
-        return cy.xpath(`//h6[.= "Commercial Unit SF Discussion"]//following-sibling::*[@data-icon="info-circle"]`); 
+    get commercialUnitSfDiscussionTipText() { 
+        return cy.xpath(`//h6[.= "Commercial Unit SF Discussion"]//..//following-sibling::span`); 
     }
 
     get commentaryText() { return cy.get("div[data-slate-editor]"); }
@@ -81,6 +81,10 @@ class CommercialUnitsPage extends BasePage {
     commercialUnitsTab(unitNumber = 1) { 
         return cy.xpath(`//div[@role='tablist']/button[.="Commercial Unit ${unitNumber}"]`); 
     } 
+
+    getImageCategoryImageUpload(category: BoweryReports.ImageType) {
+        return cy.get(`[data-qa=${category}-image-upload]`).find('input[type="file"]');
+    }
 }
 
 export default new CommercialUnitsPage();

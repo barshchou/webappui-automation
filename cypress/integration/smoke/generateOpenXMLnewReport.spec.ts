@@ -4,7 +4,7 @@ import { Base, ReviewExport } from "../../actions";
 import { BoweryAutomation } from "../../types/boweryAutomation.type";
 
 const reportCreationData: 
-    BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("generateOpenXMLNewReport");
+BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("generateOpenXMLNewReport");
 
 describe("Create new report, generate and open in XML format", { tags: [ "@smoke" ] }, () => {
 

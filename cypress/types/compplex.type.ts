@@ -16,7 +16,7 @@ export namespace CompPlex {
     }
     export namespace SaleInfo {
         export type SaleStatus = typeof enums.COMPPLEX_ENUM
-        ._saleInfoEnum[Keys.SaleStatus]  
+            ._saleInfoEnum[Keys.SaleStatus]  
     }
 
     export namespace JobSearch {

@@ -13,6 +13,8 @@ class AmenitiesPage extends BasePage {
 
     get storageCheckbox() { return cy.get("[data-qa^='building.hasStorageUnits'] input"); }
 
+    get otherUnitAmenitiesCheckbox() { return cy.get("[data-qa^='unit.hasOtherUnitAmenity'] input"); }
+
     get storageUnitsTextField() { return cy.get("[name='building.storageUnitCount']"); }
 }
 

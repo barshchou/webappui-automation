@@ -78,11 +78,20 @@ import unitIncomeTypeEnum from "./unit/unitIncomeType.enum";
 import rentLossTypeEnum from "./rentLossType.enum";
 import dateTypeEnum from "./keyInfo/dateType.enum";
 import interestAppraisedEnum from "./keyInfo/interestAppraised.enum";
+import feasiblePropertyTypesEnum from "./property/feasiblePropertyTypes.enum";
+import highestAndBestUseCommentsEnum from "./highestAndBestUseComments.enum";
 import letterOfTransmittalEnum from "./cms/letterOfTransmittal.enum";
 import swotAnalysisEnum from "./cms/swotAnalysis.enum";
 import salesforceJobsEnum from "./salesforceJobs.enum";
 import incomeCapitalizationApproachEnum from "./cms/incomeCapitalizationApproach.enum";
 import certificationEnum from "./cms/certification.enum";
+import otherAdjustmentsExpansionRowsEnum from "./adjustComps/otherAdjustmentsExpansionRows.enum";
+import utilitiesAdjustmentsExpansionRowsEnum from "./adjustComps/utilitiesAdjustmentsExpansionRows.enum";
+import adjustmentExpansionLabelsEnum from "./sales/adjustComps/adjustmentExpansionLabels.enum";
+import chipsEnum from "./chips.enum";
+import expenseHistoryDataProviderEnum from "./expense/expenseHistoryDataProvider.enum";
+import expenseItemBasisOfComparisonEnum from "./expense/expenseItemBasisOfComparison.enum";
+import exportTitlesEnum from "./exportTitles.enum";
 
 export default {
     TEMPLATE_TYPE: templateTypesEnum,
@@ -165,9 +174,18 @@ export default {
     RENT_LOSS_TYPE: rentLossTypeEnum,
     DATE_TYPE: dateTypeEnum,
     INTEREST_APPRAISED: interestAppraisedEnum,
+    FEASIBLE_PROPERTY_TYPES: feasiblePropertyTypesEnum,
+    HIGHEST_AND_BEST_USE_COMMENTS_ENUM: highestAndBestUseCommentsEnum,
     LETTER_SECTIONS: letterOfTransmittalEnum,
     SWOT_SECTIONS: swotAnalysisEnum,
     SALESFORCE_JOBS: salesforceJobsEnum,
     INCOME_CAPITALIZATION_APPROACH_SECTIONS: incomeCapitalizationApproachEnum,
-    CERTIFICATION_SECTIONS: certificationEnum
+    CERTIFICATION_SECTIONS: certificationEnum,
+    OTHER_ADJUSTMENTS_EXPANSION_ROWS: otherAdjustmentsExpansionRowsEnum,
+    UTILITIES_ADJUSTMENTS_EXPANSION_ROWS: utilitiesAdjustmentsExpansionRowsEnum,
+    ADJUSTMENT_EXPANSION_LABELS: adjustmentExpansionLabelsEnum,
+    CHIPS: chipsEnum,
+    EXPENSE_DATA_PROVIDER: expenseHistoryDataProviderEnum,
+    EXPENSE_ITEM_BASIS_OF_COMPARISON: expenseItemBasisOfComparisonEnum,
+    EXPORT_TITLES: exportTitlesEnum
 };

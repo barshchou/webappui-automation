@@ -27,13 +27,13 @@ describe("[QA-4102_06] -> Total Utility Adjustments in Sales Adjustment Grid is 
             });
 
             cy.stepInfo(`5. Precondition: Per Residential Units is selected as 
-            Calculation Units in Sales Comparables Setup`);
+                        Calculation Units in Sales Comparables Setup`);
             Sales._AdjustComps.checkCalculationUnitsRadio()
                 .enterMarketAdjustmentsGroup(Object.keys(testData.comparablesAdjustments), 
                     Object.values(testData.comparablesAdjustments));
             
             cy.stepInfo(`6. Verify the row below Net Market Adjustments row in 
-            Total Footer of the Sales Adjustment Grid`);
+                        Total Footer of the Sales Adjustment Grid`);
             /**
              * note: If we want position assert - we better add data-qa first 
              * since it's completely impossible to access cells elements
@@ -60,8 +60,8 @@ describe("[QA-4102_06] -> Total Utility Adjustments in Sales Adjustment Grid is 
                     cy.visit(<string>file);
             
                     cy.stepInfo(`10. Open Sales Adjustment Grid → verify the 'Cumulative Price Per Unit:' 
-                    label and the same calculations`);
-                    cy.contains("Cumulative Price Per Unit")
+                                label and the same calculations`);
+                    cy.contains(testData.exportSectionName)
                         .parent().parent().parent()
                         .scrollIntoView().find("td").last().should("have.text", testData.cumulativePricePerUnit);
                 }); 

@@ -90,6 +90,12 @@ export default class BaseActionsExt<T extends BasePage> extends BaseActions {
         return this;
     };
 
+    enterInSelectChipsWrapper(enterValue: string, elemIndex = 0) {
+        this.Page.getSelectChipsWrapper(elemIndex).type(`${enterValue}{enter}`);
+        cy.get(`[data-qa='${enterValue}']`).eq(elemIndex).should("exist");
+        return this;
+    }
+
     clickFormRevertToOriginalBtn(index = 0): this {
         this.Page.formRevertToOriginalBtn(index).click();
         return this;
@@ -127,6 +133,19 @@ export default class BaseActionsExt<T extends BasePage> extends BaseActions {
         this.Page.formRevertToOriginalBtn().click();
         this.Page.formYesRevertBtn.click();
         this.saveCmsSettings();
+        return this;
+    }
+
+    /**
+     * Method for typing values into input which re-renders on every char typed into there.
+     * Can be useful for such inputs as `commercialUnitsPage.commercialUnitsSFInputs`
+     */
+    setValueIntoNumberInput(elemAlias: string, value: string | number, index = 0) {
+        cy.get(`@${elemAlias}`).eq(index).should("be.enabled").focus().clear();
+        (""+value).split("").forEach(n => {
+            cy.get(`@${elemAlias}`).eq(index).focus().type(`${n}`);
+            cy.wait(100);
+        });
         return this;
     }
 }
