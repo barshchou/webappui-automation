@@ -76,5 +76,8 @@ export const Alias = {
     jobSearch:{
         selectedCompData:"jobSearchSelectedCompData",
         jobCardComp:"jobSearchCompCard"
+    },
+    findComps: {
+        arrayOfCompsFromDB: "arrayOfCompsFromDB"
     }
 };
