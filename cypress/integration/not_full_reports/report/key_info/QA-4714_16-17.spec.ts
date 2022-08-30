@@ -13,7 +13,8 @@ for Property Rights Appraised and Definition of Market Value sections`,
 
     it("Test body", () => {
         cy.stepInfo(`1. Proceed to the Report > Key Info page.`);
-        _NavigationSection.navigateToReportKeyInfo();
+        _NavigationSection.navigateToPropertySummary()
+            .navigateToReportKeyInfo();
 
         cy.stepInfo(`2. Enter the “=F“ and select the 'Foreclosure sale' then “=Sh“ and select 
         the 'Sheriff's sale' then “=Unc“ and select the 'Unchanged Renovation' option for both sections.`);
