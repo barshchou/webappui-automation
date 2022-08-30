@@ -14,7 +14,8 @@ describe(`Verify the Save and Save & Continue button functionality on the Report
 
         it("[QA-4721]", () => {
             cy.stepInfo(`1. Proceed to the Report > Key Info page`);
-            _NavigationSection.navigateToReportKeyInfo();
+            _NavigationSection.navigateToPropertySummary()
+                .navigateToReportKeyInfo();
 
             cy.stepInfo(`2. Fill in the editable fields with values and click on the Save button then reload page`);
             Report._KeyInfo
@@ -41,7 +42,8 @@ describe(`Verify the Save and Save & Continue button functionality on the Report
 
         it("[QA-4724]", () => {
             cy.stepInfo(`1. Proceed to the Report > Key Info page`);
-            _NavigationSection.navigateToReportKeyInfo();
+            _NavigationSection.navigateToPropertySummary()
+                .navigateToReportKeyInfo();
 
             cy.stepInfo(`2. Fill in the editable fields with values and click on the Save & Continue button`);
             Report._KeyInfo.enterFormCommentTextBox(testData.propertyRightsAppraisedTitle, testData.enterValue, false)
@@ -68,7 +70,8 @@ describe(`Verify the Save and Save & Continue button functionality on the Report
 
         it("[QA-4725]", () => {
             cy.stepInfo(`1. Proceed to the Report > Key Info page`);
-            _NavigationSection.navigateToReportKeyInfo();
+            _NavigationSection.navigateToPropertySummary()
+                .navigateToReportKeyInfo();
 
             cy.stepInfo(`2. Fill in the editable fields with values and do NOT click on the Save button`);
             Report._KeyInfo.enterFormCommentTextBox(testData.propertyRightsAppraisedTitle, testData.enterValue, false)
