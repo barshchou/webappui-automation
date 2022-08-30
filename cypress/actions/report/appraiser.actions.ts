@@ -1,6 +1,7 @@
 import appraiserPage from "../../pages/report/appraiser.page";
 import { _ReportTitles } from "../../enums/pages_titles";
 import BaseActionsExt from "../base/base.actions.ext";
+import Enums from "../../enums/enums";
 
 class AppraiserActions extends BaseActionsExt<typeof appraiserPage> {
 
@@ -9,12 +10,19 @@ class AppraiserActions extends BaseActionsExt<typeof appraiserPage> {
         return this;
     }
 
-    searchAndAddAppraiser(appraiserName: string): AppraiserActions {
+    searchAndAddAppraiser(appraiserName: string, isExternal = false): AppraiserActions {
         appraiserPage.btnAddAppraiserInspector.click();
-        appraiserPage.searchAppraiserTextField.clear()
-            .type(appraiserName).should('have.value', appraiserName);
-        this.Page.getAppraiserOptionFromList().click();
-        this.Page.formAddButton().click();
+        if (isExternal) {
+            appraiserPage.modalExternalInspectorRadio.check().should("be.checked");
+            appraiserPage.searchAppraiserTextField.clear()
+                .type(appraiserName).should('have.value', appraiserName);
+            this.Page.formAddButton().click();
+        } else {
+            appraiserPage.searchAppraiserTextField.clear()
+                .type(appraiserName).should('have.value', appraiserName);
+            this.Page.getAppraiserOptionFromList().click();
+            this.Page.formAddButton().click();
+        }
         return this;
     }
 
@@ -22,7 +30,7 @@ class AppraiserActions extends BaseActionsExt<typeof appraiserPage> {
         appraiserPage.btnAddAppraiserInspector.click();
         appraiserPage.searchAppraiserTextField.clear()
             .type(inspectorName).should('have.value', inspectorName);
-        appraiserPage.externalInspectorRadio.click();
+        appraiserPage.modalExternalInspectorRadio.click();
         appraiserPage.formAddButton().click();
         return this;
     }
@@ -58,7 +66,8 @@ class AppraiserActions extends BaseActionsExt<typeof appraiserPage> {
 
     verifyCertificationAssistanceCommentary(): AppraiserActions {
         appraiserPage.getAllNamesWithCheckSignReportCheckboxes(false).each(item => {
-            appraiserPage.certificationAssistanceText.should("include.text", item.text());
+            appraiserPage.formCommentTextBox(Enums.PAGES_TEXTBOX_NAMES.certificationAssistance)
+                .should("include.text", item.text());
         });
         return this;
     }

@@ -5,7 +5,7 @@ import { createReport } from "../../../../actions/base/baseTest.actions";
 
 describe(`[QA-5052] Appraiser's Forecast of Custom Expense Forecast is included 
 in Total Operating Expenses calculation`,
-{ tags:[ "@fix", "@income", "@expense_forecast", "@snapshot_tests" ] }, () => {
+{ tags:[ "@income", "@expense_forecast", "@snapshot_tests" ] }, () => {
     beforeEach("Login, create report", () => {
         createReport(testData.reportCreationData);
     });

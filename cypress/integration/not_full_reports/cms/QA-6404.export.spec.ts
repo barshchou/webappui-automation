@@ -1,5 +1,5 @@
 import { _HomePage } from '../../../actions/base';
-import { createReport } from '../../../actions/base/baseTest.actions';
+import { createReport, loginAction } from '../../../actions/base/baseTest.actions';
 import { ReviewExport } from '../../../actions';
 import { _NavigationSection } from '../../../actions/base';
 import testData from "../../../fixtures/not_full_reports/cms/QA-6404.fixture";
@@ -34,11 +34,6 @@ conditionalDescribe("[QA-6404] Verify possibility to edit text",
             _NavigationSection.openReviewAndExport();
             ReviewExport.generateDocxReport().waitForReportGenerated()
                 .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
-
-            cy.stepInfo('4. Revert commentary to original');
-            _NavigationSection.navigateToContentManagementSystem();
-            _CmsBaseActions.openIncomeCapitalizationApproachPage()
-                .revertSectionToOriginal(testData.sectionName);
         });
 
         it('Check export', () => {
@@ -47,12 +42,21 @@ conditionalDescribe("[QA-6404] Verify possibility to edit text",
                     cy.log(<string>file);
                     cy.visit(<string>file);
                     cy.stepInfo("5. Verify commentary text in exported report");
-                    cy.xpath(`//h1[.='Income Capitalization Approach']`).scrollIntoView().next()
+                    cy.xpath(`//h1[.='${testData.exportSectionName}']`).scrollIntoView().next()
                         .should('have.text', testData.textUpdate);
                 });
         });
 
-        after('Remove feature flag', () => {
+        afterEach('Revert commentary to original and remove feature flags', () => {
+            cy.stepInfo('Revert commentary to original');
+            if (!Cypress.currentTest.title.includes("Check export")) {
+                loginAction();
+                _NavigationSection.navigateToContentManagementSystem();
+                _CmsBaseActions.openLetterOfTransmittalPage()
+                    .revertSectionToOriginal(testData.sectionName);
+            }
+
+            cy.stepInfo('Remove feature flags');
             launchDarklyApi.removeUserTarget(testData.reportTextEditorFlagKey);
             launchDarklyApi.removeUserTarget(testData.swotAnalysisFlagKey);
         });

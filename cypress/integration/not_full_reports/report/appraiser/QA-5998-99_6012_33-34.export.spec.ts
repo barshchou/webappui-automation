@@ -2,6 +2,7 @@ import { _NavigationSection } from '../../../../actions/base';
 import { createReport } from '../../../../actions/base/baseTest.actions';
 import { Report, ReviewExport } from '../../../../actions';
 import testData from "../../../../fixtures/not_full_reports/report/appraiser/QA-5998-99_6012_33-34.fixture";
+import Enums from '../../../../enums/enums';
 
 describe("Add Appraiser / Inspector button functionality", 
     { tags:[ "@report", "@appraiser", "@check_export" ] }, () => {
@@ -35,7 +36,7 @@ describe("Add Appraiser / Inspector button functionality",
                 .should("have.text", testData.certificationInspectionComment);
 
             cy.stepInfo("6. Verify generated Certification Assistance comment");
-            Report._Appraiser.Page.certificationAssistanceText
+            Report._Appraiser.Page.formCommentTextBox(Enums.PAGES_TEXTBOX_NAMES.certificationAssistance)
                 .should("have.text", testData.certificationAssistanceComment);
 
             cy.stepInfo("7. Export report");

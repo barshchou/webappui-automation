@@ -1,6 +1,7 @@
 import highestBestUsePage from "../../pages/final/highestBestUse.page";
 import { numberWithCommas } from "../../../utils/numbers.utils";
 import BaseActionsExt from "../base/base.actions.ext";
+import { BoweryReports } from "../../types/boweryReports.type";
 
 class HighestBestUseActions extends BaseActionsExt<typeof highestBestUsePage> {
 
@@ -180,6 +181,20 @@ class HighestBestUseActions extends BaseActionsExt<typeof highestBestUsePage> {
 
     checkRegionalCheckbox(): HighestBestUseActions {
         highestBestUsePage.regionalCheckbox.check().should("have.value", "true");
+        return this;
+    }
+
+    verifyHighestAndBestUseCommentary(typeAs: BoweryReports.HighestAndBestUseComments, 
+        values: string | Array<string>): HighestBestUseActions {
+        if (Array.isArray(values)) {
+            values.forEach(value => {
+                highestBestUsePage.getHighestAndBestUseComment(typeAs)
+                    .should("include.text", value);
+            });
+        } else {
+            highestBestUsePage.getHighestAndBestUseComment(typeAs)
+                .should("include.text", values);
+        }
         return this;
     }
 
