@@ -105,9 +105,9 @@ conditionalDescribe(`[QA-5157] [QA-5161] [Sales > Find Comps] "Date Sold" sortin
         // TODO this is hardcode! uncomment line above and delete these below after comp-plex import fixes!
 
         cy.reload();
-        Sales._FindComps
-            .addNewCompViaReportId('61892ce7044194001c6349c9')
-            .openCompSearchTab()
+        Sales._FindComps.openJobSearchTab()
+            .JobSearch.addNewCompViaReportId('61892ce7044194001c6349c9');
+        Sales._FindComps.openCompSearchTab()
             .checkSalesCompSortedByDateSold();
 
         cy.stepInfo(`4.Verify that when "Date Sold" option in Sort dropdown 

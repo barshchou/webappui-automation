@@ -1,3 +1,4 @@
+import Enums from "../../../../enums/enums";
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 
 export default {
@@ -15,5 +16,6 @@ export default {
     customUtilitiesAdjustmentDefaultName: "Other Utilities Adjustment",
     newCustomUtilitiesAdjustmentName: "new custom utilities adj name",
     otherUtilitiesCommentaries: "Other Utilities Adjustment:  Comparable 1 required a 40% " + 
-    "upward adjustment. Comparable 2 required a 50% downward adjustment."
+    "upward adjustment. Comparable 2 required a 50% downward adjustment.",
+    exportSectionName: Enums.EXPORT_TITLES.comparableSalesAdjustmentGrid
 };

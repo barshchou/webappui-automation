@@ -1,8 +1,13 @@
-import { isHasDecimalPartMoreNumberOfDigits } from './../../../utils/numbers.utils';
+import { getNumberFromDollarNumberWithCommas, 
+    getNumberFromMinusDollarNumberWithCommas, 
+    isHasDecimalPartMoreNumberOfDigits } 
+    from './../../../utils/numbers.utils';
 import valueConclusionPage from "../../pages/sales/valueConclusion.page";
 import { numberWithCommas } from "../../../utils/numbers.utils";
 import BaseActionsExt from "../base/base.actions.ext";
 import { BoweryReports } from "../../types/boweryReports.type";
+import capRateConclusionKeys from '../../utils/mapKeys/income/capRateConclusion/capRateConclusion.keys';
+import Enums from "../../enums/enums";
 
 class ValueConclusionActions extends BaseActionsExt<typeof valueConclusionPage> {
 
@@ -68,13 +73,13 @@ class ValueConclusionActions extends BaseActionsExt<typeof valueConclusionPage> 
     }
 
     enterSaleValueConclusion(value: string | number): this {
-        const valueToBe = typeof value === "string" ? value : `$${numberWithCommas(value.toFixed(2))}`;
+        const valueToBe = typeof value === "string" ? value : `$${numberWithCommas(value)}`;
         valueConclusionPage.saleValueConclusion.clear().type(`${value}`).should("have.value", valueToBe);
         return this;
     }
 
     verifySaleValueConclusion(value: string | number): this {
-        const valueToBe = typeof value === "string" ? value : `$${numberWithCommas(value.toFixed(2))}`;
+        const valueToBe = typeof value === "string" ? value : `$${numberWithCommas(value)}`;
         valueConclusionPage.saleValueConclusion.should("have.value", valueToBe);
         return this;
     }
@@ -84,22 +89,25 @@ class ValueConclusionActions extends BaseActionsExt<typeof valueConclusionPage> 
         return this;
     }
 
-    verifyAsStabilizedAmount(amount: string | number): this {
+    verifyProspectiveMarketValueAmount(conclusionValueName: BoweryReports.ValueConclusionName, 
+        amount: string | number): this {
         const textToBe = typeof amount === "string" ? amount : `$${numberWithCommas(amount)}`;
-        valueConclusionPage.asStabilizedAmount.should("have.text", textToBe);
+        valueConclusionPage.amountCell(conclusionValueName).should("have.text", textToBe);
         return this;
     }
 
-    verifyAsStabilizedFinalValue(value: string | number): this {
+    verifyProspectiveMarketValueFinal(conclusionValueName: BoweryReports.ValueConclusionName, 
+        value: string | number): this {
         const textToBe = typeof value === "string" ? value : `$${numberWithCommas(value)}`;
-        valueConclusionPage.asStabilizedFinalValue.should("have.text", textToBe);
+        valueConclusionPage.finalValueCell(conclusionValueName).should("have.text", textToBe);
         return this;
     }
 
-    verifyAsStabilizedRow(rowData: Readonly<{period: string, amount: string, finalValue: string}>): this {
+    verifyAsStabilizedRow(conclusionValueName: BoweryReports.ValueConclusionName, 
+        rowData: Readonly<{period: string, amount: string, finalValue: string}>): this {
         this.verifyAsStabilizedPeriod(rowData.period)
-            .verifyAsStabilizedAmount(rowData.amount)
-            .verifyAsStabilizedFinalValue(rowData.finalValue);
+            .verifyProspectiveMarketValueAmount(conclusionValueName, rowData.amount)
+            .verifyProspectiveMarketValueFinal(conclusionValueName, rowData.finalValue);
         return this;
     }
 
@@ -108,20 +116,11 @@ class ValueConclusionActions extends BaseActionsExt<typeof valueConclusionPage> 
         return this;
     }
 
-    verifyAsCompleteAmount(amount: string): this {
-        valueConclusionPage.asCompleteAmount.should("have.text", amount);
-        return this;
-    }
-
-    verifyAsCompleteFinalValue(value: string): this {
-        valueConclusionPage.asCompleteFinalValue.should("have.text", value);
-        return this;
-    }
-
-    verifyAsCompleteRow(rowData: Readonly<{period: string, amount: string, finalValue: string}>): this {
+    verifyAsCompleteRow(conclusionValueName: BoweryReports.ValueConclusionName, 
+        rowData: Readonly<{period: string, amount: string, finalValue: string}>): this {
         this.verifyAsCompletePeriod(rowData.period)
-            .verifyAsCompleteAmount(rowData.amount)
-            .verifyAsCompleteFinalValue(rowData.finalValue);
+            .verifyProspectiveMarketValueAmount(conclusionValueName, rowData.amount)
+            .verifyProspectiveMarketValueFinal(conclusionValueName, rowData.finalValue);
         return this;
     }
 
@@ -131,20 +130,11 @@ class ValueConclusionActions extends BaseActionsExt<typeof valueConclusionPage> 
         return this;
     }
 
-    verifyAsIsMarketAmount(amount: string): this {
-        valueConclusionPage.asIsMarketAmount.should("have.text", amount);
-        return this;
-    }
-
-    verifyAsIsMarketFinalValue(value: string): this {
-        valueConclusionPage.asIsMarketFinalValue.should("have.text", value);
-        return this;
-    }
-
-    verifyAsIsMarketRow(rowData: Readonly<{period: string, amount: string, finalValue: string}>): this {
+    verifyAsIsMarketRow(conclusionValueName: BoweryReports.ValueConclusionName, 
+        rowData: Readonly<{period: string, amount: string, finalValue: string}>): this {
         this.verifyAsIsMarketPeriod(rowData.period)
-            .verifyAsIsMarketAmount(rowData.amount)
-            .verifyAsIsMarketFinalValue(rowData.finalValue);
+            .verifyProspectiveMarketValueAmount(conclusionValueName, rowData.amount)
+            .verifyProspectiveMarketValueFinal(conclusionValueName, rowData.finalValue);
         return this;
     }
 
@@ -242,6 +232,309 @@ class ValueConclusionActions extends BaseActionsExt<typeof valueConclusionPage> 
 
     verifyBasisSFAnalysisTableCellText(basisSFAnalysisText: BoweryReports.BasisSquareFootAnalysisTexts): this {
         valueConclusionPage.asIsAsStabilizedTable.find("td").contains(basisSFAnalysisText).should("exist");
+        return this;
+    }
+
+    verifyAsIsAsStabilizedAmountCell(conclusionValueName: BoweryReports.ValueConclusionName): ValueConclusionActions {
+        valueConclusionPage.saleValueConclusion.invoke('attr', 'value').then(concludedValue => {
+            const concludedNumber = getNumberFromDollarNumberWithCommas(concludedValue);
+            valueConclusionPage.basisForAnalysisAmount.invoke('text').then(areaSf => {
+                let areaSfNumber = Number(areaSf.split(' ')[0].replaceAll(',', ''));
+                let stringNumber = `$${numberWithCommas(Math.round(concludedNumber * areaSfNumber))}`;
+                valueConclusionPage.amountCell(conclusionValueName).should("have.text", stringNumber);
+            });
+        });
+        return this;
+    }
+
+    /**
+     * Note: Cap rate rounding factor key map should value should be set.
+     * It verifies whether final value is rounded correctly.
+     * Formula: Prospective Market Value {conclusionValueName} Amount * Rounding Factor => 
+     * round result => multiply by rounding factor
+     */
+    verifyFinalValueCalculated(conclusionValueName: BoweryReports.ValueConclusionName): 
+    ValueConclusionActions {
+        cy._mapGet(capRateConclusionKeys.capRateRoundingFactor).then(capRateRounding => {
+            valueConclusionPage.amountCell(conclusionValueName).invoke('text').then(marketValue => {
+                let marketValueNumber = getNumberFromDollarNumberWithCommas(marketValue);
+                let expectedFinalValue = `$${numberWithCommas(Math.round(marketValueNumber / capRateRounding) * 
+                    capRateRounding)}`;
+                valueConclusionPage.finalValueCell(conclusionValueName).should("have.text", expectedFinalValue);
+            });
+        });
+        return this;
+    }
+
+    verifyProspectiveMarketValueAsIsAsCompleteCalculated(valueConclusionKey: BoweryReports.ValueConclusionKeys, 
+        conclusionValueName: BoweryReports.ValueConclusionName): ValueConclusionActions {
+        this.getAllAsStabilizedLossesAliases(valueConclusionKey, Enums.VALUE_CONCLUSION_NAME.asStabilized);
+        cy._mapGet(capRateConclusionKeys.allAsStabilizedLossesAliases).then(allAsStabilizedLossesAliases => {
+            cy.log(`As Stabilized Amount: ${allAsStabilizedLossesAliases.asStabilizedAmount}`);
+
+            let allRentLosses = allAsStabilizedLossesAliases.residentialRentLoss
+                + allAsStabilizedLossesAliases.commercialRentLoss +
+                allAsStabilizedLossesAliases.commercialUndRentLoss + allAsStabilizedLossesAliases.commissionFee;
+            cy.log(`All Losses: ${allRentLosses}`);
+
+            let entrepreneurLoss = allRentLosses * allAsStabilizedLossesAliases.entrepreneurProfit / 100;
+            cy.log(`Entrepreneur Profit: ${entrepreneurLoss}`);
+
+            // Round calculated value
+            let prospectiveValue = Math.round((allAsStabilizedLossesAliases.asStabilizedAmount - allRentLosses -
+                entrepreneurLoss) / 10) * 10;
+            cy.log(`Prospective Value As Complete: ${prospectiveValue}`);
+
+            let expectedProspectiveValueAsComplete = prospectiveValue < 0
+                ? `-$${numberWithCommas(prospectiveValue.toFixed(0).replace('-', ''))}`
+                : `$${numberWithCommas(prospectiveValue.toFixed(0))}`;
+
+            valueConclusionPage.amountCell(conclusionValueName)
+                .should('have.text', expectedProspectiveValueAsComplete);
+        });
+        return this;
+    }
+
+    /**
+     * Sets all losses for value conclusion type and generates an object to be
+     * stored in map key, to avoid multiple chains from cy._mapGet
+     */
+    getAllAsStabilizedLossesAliases(valueConclusionKey: BoweryReports.ValueConclusionKeys, 
+        conclusionValueName: BoweryReports.ValueConclusionName): ValueConclusionActions {
+        this.setAllAsStabilizedLossesAliases(valueConclusionKey, conclusionValueName);
+        interface IAllAsStabilizedLossesAliases {
+            residentialRentLoss?: number
+            commercialRentLoss?: number
+            commercialUndRentLoss?: number
+            commissionFee?: number
+            entrepreneurProfit?: number
+            asStabilizedAmount?: number
+        }
+
+        let allAsStabilizedLossesAliases: IAllAsStabilizedLossesAliases = {};
+
+        cy._mapGet(capRateConclusionKeys.asStabilizedResRentLossItem)
+            .then(residentialRentLoss => allAsStabilizedLossesAliases.residentialRentLoss = residentialRentLoss);
+        cy._mapGet(capRateConclusionKeys.asStabilizedCommercialRentLossItem)
+            .then(commercialRentLoss => allAsStabilizedLossesAliases.commercialRentLoss = commercialRentLoss);
+        cy._mapGet(capRateConclusionKeys.asStabilizedCommercialUndeterminedRentLossItem)
+            .then(commercialUndRentLoss => allAsStabilizedLossesAliases.commercialUndRentLoss = commercialUndRentLoss);
+        cy._mapGet(capRateConclusionKeys.commissionFee)
+            .then(commissionFee => allAsStabilizedLossesAliases.commissionFee = commissionFee);
+        cy._mapGet(capRateConclusionKeys.entrepreneurialStabilizedProfit)
+            .then(entrepreneurProfit => allAsStabilizedLossesAliases.entrepreneurProfit = entrepreneurProfit);
+        cy._mapGet(capRateConclusionKeys.asStabilizedAmount)
+            .then(asStabilizedAmount => allAsStabilizedLossesAliases.asStabilizedAmount = asStabilizedAmount);
+
+        cy._mapSet(capRateConclusionKeys.allAsStabilizedLossesAliases, allAsStabilizedLossesAliases);
+
+        return this;
+    }
+
+    /**
+     * Sets corresponding map aliases for Stabilized Losses
+     */
+    private setAllAsStabilizedLossesAliases(valueConclusionKey: BoweryReports.ValueConclusionKeys, 
+        conclusionValueName: BoweryReports.ValueConclusionName): 
+        ValueConclusionActions {
+        this.setResRentLossItemsAmount(valueConclusionKey, conclusionValueName)
+            .setCommercialRentLossItemsAmount(valueConclusionKey, conclusionValueName)
+            .setCommercialUndeterminedLossAmount(valueConclusionKey, conclusionValueName)
+            .setCommissionFee()
+            .setEntrepreneurialProfit(conclusionValueName, valueConclusionKey)
+            .setAmountAlias(conclusionValueName);
+        return this;
+    }
+
+    private setAmountAlias(conclusionValueName: BoweryReports.ValueConclusionName): 
+    ValueConclusionActions {
+        let key = conclusionValueName != Enums.VALUE_CONCLUSION_NAME.asIs 
+            ? conclusionValueName == Enums.VALUE_CONCLUSION_NAME.asStabilized 
+                ? capRateConclusionKeys.asStabilizedAmount
+                : capRateConclusionKeys.asCompleteAmount
+            : capRateConclusionKeys.asIsMarketAmount;
+        valueConclusionPage.amountCell(conclusionValueName).invoke('text').then(asStabilizedAmount => {
+            let asStabilizedAmountAdjusted = getNumberFromDollarNumberWithCommas(asStabilizedAmount);
+            cy._mapSet(key, asStabilizedAmountAdjusted);
+        });
+        return this;
+    }
+
+    private setResRentLossItemsAmount(valueConclusionKey: BoweryReports.ValueConclusionKeys, 
+        conclusionValueName: BoweryReports.ValueConclusionName): ValueConclusionActions {
+        let key = conclusionValueName == Enums.VALUE_CONCLUSION_NAME.asStabilized 
+            ? capRateConclusionKeys.asStabilizedResRentLossItem
+            : capRateConclusionKeys.asCompleteResRentLossItem;
+        valueConclusionPage.residentialRentLossItemsAmount(valueConclusionKey).should('exist')
+            .invoke('attr', 'value').then(rentLoss => {
+                let rentLossNumber = getNumberFromMinusDollarNumberWithCommas(rentLoss);
+                cy._mapSet(key, rentLossNumber);
+            });
+        return this;
+    }
+
+    private setCommercialRentLossItemsAmount(valueConclusionKey: BoweryReports.ValueConclusionKeys, 
+        conclusionValueName: BoweryReports.ValueConclusionName): ValueConclusionActions {
+        let key = conclusionValueName == Enums.VALUE_CONCLUSION_NAME.asStabilized 
+            ? capRateConclusionKeys.asStabilizedCommercialRentLossItem
+            : capRateConclusionKeys.asCompleteCommercialRentLossItem;
+        valueConclusionPage.commercialLossItemsAmount(valueConclusionKey).should('exist')
+            .invoke('attr', 'value').then(rentLoss => {
+                let rentLossNumber = getNumberFromMinusDollarNumberWithCommas(rentLoss);
+                cy._mapSet(key, rentLossNumber);
+            });
+        return this;
+    }
+
+    private setCommercialUndeterminedLossAmount(valueConclusionKey: BoweryReports.ValueConclusionKeys, 
+        conclusionValueName: BoweryReports.ValueConclusionName): ValueConclusionActions {
+        let key = conclusionValueName == Enums.VALUE_CONCLUSION_NAME.asStabilized 
+            ? capRateConclusionKeys.asStabilizedCommercialUndeterminedRentLossItem
+            : capRateConclusionKeys.asCompleteCommercialUndeterminedRentLossItem;
+        valueConclusionPage.commercialUndeterminedRentLossAmount(valueConclusionKey).should('exist')
+            .invoke('attr', 'value').then(rentLoss => {
+                let rentLossNumber = getNumberFromMinusDollarNumberWithCommas(rentLoss);
+                cy._mapSet(key, rentLossNumber);
+            });
+        return this;
+    }
+
+    private setCommissionFee(): ValueConclusionActions {
+        valueConclusionPage.asStabilizedCommissionFeeAmount.should('exist')
+            .invoke('attr', 'value').then(commissionFee => {
+                let commissionFeeNumber = getNumberFromMinusDollarNumberWithCommas(commissionFee);
+                cy._mapSet(capRateConclusionKeys.commissionFee, commissionFeeNumber);
+            });
+        return this;
+    }
+
+    private setEntrepreneurialProfit(conclusionValueName: BoweryReports.ValueConclusionName, 
+        valueConclusionKey: BoweryReports.ValueConclusionKeys): ValueConclusionActions {
+        let key = conclusionValueName == Enums.VALUE_CONCLUSION_NAME.asStabilized 
+            ? capRateConclusionKeys.entrepreneurialStabilizedProfit
+            : capRateConclusionKeys.entrepreneurialCompleteProfit;
+        valueConclusionPage.lessEntrepreneurialProfit(valueConclusionKey).should('exist')
+            .invoke('attr', 'value').then(entrepreneurialProfit => {
+                let entrepreneurialProfitNumber = Number(entrepreneurialProfit.replace('%', ''));
+                cy._mapSet(key, entrepreneurialProfitNumber);
+            });
+        return this;
+    }
+
+    /**
+     * Verifies As Is Market Value for ACAS report type
+     * Sets all aliases for As Complete rent losses, buyout cost, renovation, entrepreneur profit.
+     * Gets all aliases that were set and check As Is Market value by formula:
+     *   [As Complete Amount] - [Sum of Rent Losses] - [Buyout Cost] - [Renovation] -
+     *   (([Sum of Rent Losses] + [Less Buyout Cost]) * Entrepreneur Profit)
+     */
+    verifyAsIsMarketValueCalculated(valueConclusionKey: BoweryReports.ValueConclusionKeys, 
+        conclusionValueName: BoweryReports.ValueConclusionName): ValueConclusionActions {
+        this.getAllAsCompleteLossesAliases(valueConclusionKey, Enums.VALUE_CONCLUSION_NAME.asComplete);
+        cy._mapGet(capRateConclusionKeys.allAsCompleteLossesAliases).then(allAsCompleteLossesAliases => {
+            cy.log(`As Complete AmountT: ${allAsCompleteLossesAliases.asCompleteAmount}`);
+
+            let allRentLosses = allAsCompleteLossesAliases.residentialRentLoss + 
+                allAsCompleteLossesAliases.commercialRentLoss +
+                allAsCompleteLossesAliases.commercialUndRentLoss + 
+                allAsCompleteLossesAliases.buyoutCost + allAsCompleteLossesAliases.renovationBudget;
+            cy.log(`All Losses: ${allRentLosses}`);
+
+            let entrepreneurLoss = allRentLosses * allAsCompleteLossesAliases.entrepreneurProfit / 100;
+            cy.log(`Entrepreneur Profit: ${entrepreneurLoss}`);
+
+            // Round calculated value
+            let marketValueAsIs = Math.round((allAsCompleteLossesAliases.asCompleteAmount - allRentLosses -
+                entrepreneurLoss) / 10) * 10;
+            cy.log(`Market Value As Is: ${marketValueAsIs}`);
+
+            let expectedMarketValueAsIs = marketValueAsIs < 0
+                ? `-$${numberWithCommas(marketValueAsIs.toFixed(0).replace('-', ''))}`
+                : `$${numberWithCommas(marketValueAsIs.toFixed(0))}`;
+
+            valueConclusionPage.amountCell(conclusionValueName)
+                .should('have.text', expectedMarketValueAsIs);
+        });
+        return this;
+    }
+
+    /**
+     * Sets all losses for value conclusion type and generates an object to be
+     * stored in map key, to avoid multiple chains from cy._mapGet
+     */
+    getAllAsCompleteLossesAliases(valueConclusionKey: BoweryReports.ValueConclusionKeys, 
+        conclusionValueName: BoweryReports.ValueConclusionName): ValueConclusionActions {
+        this.setAllAsCompleteLossesAliases(valueConclusionKey, conclusionValueName);
+        interface IAllAsCompleteLossesAliases {
+            residentialRentLoss?: number
+            commercialRentLoss?: number
+            commercialUndRentLoss?: number
+            buyoutCost?: number
+            entrepreneurProfit?: number
+            asCompleteAmount?: number,
+            renovationBudget?: number,
+        }
+
+        let allAsCompleteLossesAliases: IAllAsCompleteLossesAliases = {};
+
+        cy._mapGet(capRateConclusionKeys.asCompleteResRentLossItem)
+            .then(residentialRentLoss => allAsCompleteLossesAliases.residentialRentLoss = residentialRentLoss);
+        cy._mapGet(capRateConclusionKeys.asCompleteCommercialRentLossItem)
+            .then(commercialRentLoss => allAsCompleteLossesAliases.commercialRentLoss = commercialRentLoss);
+        cy._mapGet(capRateConclusionKeys.asCompleteCommercialUndeterminedRentLossItem)
+            .then(commercialUndRentLoss => allAsCompleteLossesAliases.commercialUndRentLoss = commercialUndRentLoss);
+        cy._mapGet(capRateConclusionKeys.buyoutCost)
+            .then(buyoutCost => allAsCompleteLossesAliases.buyoutCost = buyoutCost);
+        cy._mapGet(capRateConclusionKeys.entrepreneurialCompleteProfit)
+            .then(entrepreneurProfit => allAsCompleteLossesAliases.entrepreneurProfit = entrepreneurProfit);
+        cy._mapGet(capRateConclusionKeys.asCompleteAmount)
+            .then(asCompleteAmount => allAsCompleteLossesAliases.asCompleteAmount = asCompleteAmount);
+        cy._mapGet(capRateConclusionKeys.renovationBudget)
+            .then(renovationBudget => allAsCompleteLossesAliases.renovationBudget = renovationBudget);
+
+        cy._mapSet(capRateConclusionKeys.allAsCompleteLossesAliases, allAsCompleteLossesAliases);
+
+        return this;
+    }
+
+    /**
+     * Sets corresponding map aliases for Complete Losses
+     */
+    private setAllAsCompleteLossesAliases(valueConclusionKey: BoweryReports.ValueConclusionKeys, 
+        conclusionValueName: BoweryReports.ValueConclusionName): ValueConclusionActions {
+        this.setResRentLossItemsAmount(valueConclusionKey, conclusionValueName)
+            .setCommercialRentLossItemsAmount(valueConclusionKey, conclusionValueName)
+            .setCommercialUndeterminedLossAmount(valueConclusionKey, conclusionValueName)
+            .setRenovationBudgetAlias()
+            .setLessBuyoutCost()
+            .setEntrepreneurialProfit(conclusionValueName, valueConclusionKey)
+            .setAmountAlias(conclusionValueName);
+        return this;
+    }
+
+    private setRenovationBudgetAlias(): ValueConclusionActions {
+        valueConclusionPage.renovationBudgetAmount.should('exist')
+            .invoke('attr', 'value').then(renovationBudget => {
+                let renovationBudgetAdjusted = getNumberFromMinusDollarNumberWithCommas(renovationBudget);
+                cy._mapSet(capRateConclusionKeys.renovationBudget, renovationBudgetAdjusted);
+            });
+        return this;
+    }
+
+    private setLessBuyoutCost(): ValueConclusionActions {
+        valueConclusionPage.asCompleteLessBuyoutCost.should('exist')
+            .invoke('attr', 'value').then(buyoutCost => {
+                let buyoutCostNumber = getNumberFromMinusDollarNumberWithCommas(buyoutCost);
+                cy._mapSet(capRateConclusionKeys.buyoutCost, buyoutCostNumber);
+            });
+        return this;
+    }
+
+    verifyHeaderSalesValue(conclusionValueName: BoweryReports.ValueConclusionName): ValueConclusionActions {
+        valueConclusionPage.finalValueCell(conclusionValueName).invoke('text').then(finalValue => {
+            valueConclusionPage.headerSalesValue.invoke('text').should('include', finalValue);
+        });
+        
         return this;
     }
 }

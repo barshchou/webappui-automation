@@ -60,19 +60,19 @@ describe(`Verify exported report: Change export schemas and templates to enable 
                     cy.visit(<string>file);
 
                     cy.stepInfo('Verify combined Utilities expense is mentioned in exported report');
-                    cy.contains('Commercial Expense Reimbursement').next().scrollIntoView()
+                    cy.contains(`${testData.commercialExpenseSection}`).next().scrollIntoView()
                         .should('have.text', testData.expenseForecastUtilitiesFixture.expenseUIName + 
                     " (% of Appraiser Forecast)");
-                    cy.xpath("//h4[.='Potential Gross Commercial Rent']" + 
+                    cy.xpath(`//h4[.='${testData.potentialGrossSection}']` + 
                     "//following-sibling::table[1]//p[.='Commercial Expense Reimbursement']")
                         .scrollIntoView().should('exist');
-                    cy.xpath("//h3[.='Commercial Vacancy & Collection Loss']" + 
+                    cy.xpath(`//h3[.='${testData.commercialVacancySection}']` + 
                     "//following-sibling::table[1]//p[.='Potential Utilities Reimbursement']")
                         .scrollIntoView().should('exist');
-                    cy.xpath("//h3[.='Commercial Vacancy & Collection Loss']" + 
+                    cy.xpath(`//h3[.='${testData.commercialVacancySection}']` + 
                     "//following-sibling::p[3]")
                         .scrollIntoView().should('contain.text', 'utilities');
-                    cy.xpath("//h2[.='Stabilized Income & Expenses ']" + 
+                    cy.xpath(`//h2[.='${testData.stabilizedIncomeSection}']` + 
                     "//following-sibling::table[1]//p[.='Potential Utilities Reimbursement']")
                         .scrollIntoView().should('exist');
                 });

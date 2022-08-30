@@ -37,8 +37,8 @@ describe("[QA-5179_81_83] Export column order both assessment psf and assessment
                 cy.visit(<string>file);
 
                 cy.stepInfo(`6. Check the column order:
-                item (no heading), actual, actual per sf, actual per unit, transitional, 
-                transitional per sf, transitional per unit`);
+                            item (no heading), actual, actual per sf, actual per unit, transitional, 
+                            transitional per sf, transitional per unit`);
                 testData.verifyExportValues.forEach((val, index) => {
                     cy.xpath(`//*[contains(text(), 'Taxable Assessed Value')]/../../following-sibling::*[${index + 1}]`)
                         .scrollIntoView()

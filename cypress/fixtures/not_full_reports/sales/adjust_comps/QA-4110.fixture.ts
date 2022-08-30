@@ -22,5 +22,6 @@ export default {
     calculationUnits: Enums.CALCULATION_UNITS.perTotalUnits,
     basis: "Price per Unit",
     cumulativePricePerUnit: _cumulativePricePerUnit,
-    compAddress
+    compAddress,
+    exportSectionName: Enums.EXPORT_TITLES.cumulativePricePerUnit
 };

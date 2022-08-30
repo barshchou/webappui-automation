@@ -42,7 +42,7 @@ describe("Verify that changes are displayed for Annual and Monthly Rent columns,
                 cy.log(<string>file);
 
                 cy.visit(<string>file);
-                cy.xpath("//h4[.='Current Commercial Rent Roll']/following-sibling::table")
+                cy.xpath(`//h4[.='${testData.exportSectionName}']/following-sibling::table`)
                     .eq(0).scrollIntoView().within(() => {
                         cy.stepInfo("Check that the leading # column removed");
                         cy.get("td>p").eq(0).should("not.contain.text", "#");
