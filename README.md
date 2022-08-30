@@ -10,13 +10,14 @@
   - [Setup](#setup)
 - [Contributing](#contributing)
   - [Development flow](#development_flow)
-  - [Complex TODO]
+  - [Comp-plex end-to-end tests development](#compplex-e2e-flow)
+  - [Secrets update](#secrets-update)
   - [GH Actions debug](#gh_actions_debug)
   - [Validation of export](#export_validation)
 - [Usage](#usage)
   - [CLI_flags](#cli_flags)
   - [Tags and tagged test run](#tagged_run)
-  - [Run tests on PR deploy / localhost](#run_tests_in_custom_env)
+  - [Run tests on custom env / localhost](#run_tests_in_custom_env)
   - [Triggering GH Actions pipeline](#trigger_gh_actions)
   - [Exploring test results](#explore_test_results)
 - [NPM Scripts](#npm_scripts)
@@ -24,7 +25,7 @@
 
 ## Quick summary <a id="tl_dr"></a>
 - If you want to use/develop tests from your machine - make sure everything is ready from "[Getting Started](#getting_started)".
-- If you would like to figure out how to use these tests in your developement flow - go to "[Run tests on PR deploy / localhost](#run_tests_in_custom_env)" section. 
+- If you would like to figure out how to use these tests in your developement flow - go to "[Run tests on custom env / localhost](#run_tests_in_custom_env)" section. 
 - If you need to run specific test spec or set of tests related to specific domain - go to "[Tags and tagged test run](#tagged_run)" section. 
 -  If you need to use GH Actions pipeline with these tests - go to [Triggering GH Actions pipeline](#trigger_gh_actions).
 - If you need to check test results from triggered GH Actions pipeline or just see the stats / insights for end-to-end tests - go to "[Exploring test results](#explore_test_results)" section 
@@ -74,16 +75,47 @@ There are several main folders of these project:
 
 We don't have strict rules for our development flow. Everything is pretty standard: 
   1. You branching from master (**always push empty branch after its creation, it will be a signal that you at least started work on a ticket**)
-  2. If you develop test / framework feature - name branch in next notation **feature/your_name/jira_ticket_id** (for example, feature/Ernst/QA-666)
-  - If you developing hotfix -> **hotfix/your_name/ticket_name_OR_hotfix_name**
-  3. Assign Ernst and Vlad as a reviewers (for now, later review can do anyone else). **Get all approvals.** (for the start, it is important for us to check all new code since we want to follow already declared codestyle rules and structure). 
-  4. If you want to add improvements into someone's PR - branch from feature branch, make changes and create to PR into parents branch (naming: **feature/your_name/ticket_id__pr_changes**). *You can commit into someones branch*, **but you are allowed to do that in exceptional cases** (for example, PR almost merged and you need to run and apply ESLint changes) 
-  5. When you got approvals - merge branch by yourself or ping someone who was a reviewer.
+  2. If you develop:
+  -  task - name branch in next notation `task/your_name/jira_ticket_id` (for example, `task/your_name/QA-666`)
+  - story - name branch in next notation `feature/your_name/jira_ticket_id` (for example, `feature/your_name/QA-666`)
+  - hotfix -> `hotfix/your_name/ticket_name_OR_hotfix_name`
+  
+  3. If you are implementing test case with export document verification, then 'it's title HAVE TO contain 'Check export' string in exact this state! And spec name **HAS TO** contain .export. in it's name, for example: `QA-4667.export.spec.ts`   
+  
+  4. Use the pull request template to create PR, it is NECESSARY to check only 1 environment checkbox to trigger pull_request_check workflow appropriately. If you choose to run your tests on custom env, paste the link to customEnvLink URL section. This will trigger to run tests from your PR to check, if they work. Workflow for PR will run ONLY if you label it with ready_for_review label, it won't run even if you create pull request without this label
+  
+  5. Assign at least 2 reviewers for your pull request. **Get at least 2 approvals**. 
+
+  6. If you want to add improvements into someone's PR - branch from feature branch, make changes and create to PR into parents branch (naming: feature/your_name/ticket_id__pr_changes). *You can commit into someones branch*, but this is allowed in exceptional cases (for example, PR almost merged and you need to run and apply ESLint changes or make some minor fixes for typos or comments).
+  
+  7. When you got approvals - merge branch by yourself or ping someone who was a reviewer.
 
   **NOTE**: 
   - **please, while developing anything** - run `npm run tsc:watch` command in separate terminal instance (or split terminal into two). This will make TypeScript compilier keep an eye on your files changes and alert you when you forget, for example, update methods names after merge.
-  - please, when writing commit message - add something meaningful, rather than "added some code". Good commit message: "[QA-something] added new actions into module_name" / "[misc] linter fixes". Bad commit message: "upd" / "fix" 
-  - (ernst): I do not force to use small commits instead of big ones, but when commit something - think what you would do with the big one if you have to revert / reset or cherry-pick it.### GH Actions debug <a id="gh_actions_debug"></a>
+  - please, when writing commit message - add something meaningful, rather than "added some code". Good commit message: "[QA-something] added new actions into module_name" / "[misc] linter fixes". Bad commit message: "upd" / "fix"
+  
+  ### Comp-plex end-to-end tests development <a id="compplex-e2e-flow"></a>
+
+TODO: add flow regarding comp-plex development later
+
+### Secrets update <a id="#secrets-update"></a>
+
+We have tests which requires login as specific user (Lead Appraiser, Appraiser user, Admin and etc), you can find them by `@permissions_roles` tag. 
+
+Or we want store some secret data which is too complex and big to store in GH Actions secrets (any json-like structure).
+
+We could've store these secrets in GH Actions secrets, but in that case we won't have an option to edit them (especially, if we store a pretty big `json`).
+
+That's why we need AWS Secret Manager. We set there secret `Github/Cypress/User_Roles` which store data about User Roles (their usernames and passwords). 
+If you want to edit/add secrets: 
+
+TODO: better add link to Notion page with images
+1. Go to the AWS (use AWS SSO, which you can find in `Google apps` in your Bowery Gmail account).
+2. Select `GoogleSAMLPowerUserRole` in `bowery-prod` section.
+3. Find AWS Secret Manager in Search and navigate there.
+4. Paste secret name you want to edit or create your own (**IMPORTANT:** Naming convention for such secrets should be next - Github/Cypress/**, like `Github/Cypress/User_Roles`).
+
+  ### GH Actions debug <a id="gh_actions_debug"></a>
 
 If your task will be connected with GH Actions changes or you would like to check how your newly implemnted test can behave in GH Actions - you should use [act](https://github.com/nektos/act), rather then commit a lot of times into the repo and trigger the real pipeline.
 
@@ -91,18 +123,19 @@ Main flow of how we use act for this repo - described in txt file in [these note
 
 ### Validation of export <a id="export_validation"></a>
 
-Since we have a lot of test cases which has validation of Report Export (it will `*.docx` file) - we had to find the way we could automate these checks somehow. 
-
-We found a way we can somehow automate it - **we convert `docx` file into html and then open it in Cypress**. 
-
-You can refer to [QA-4053 spec](./cypress/integration/not_full_reports/sales/value_conclusion/QA-4053.spec.ts) to see the code of such tests.
-
-**Flow for ReportExport checks**
-
 1. (1st `it` in `describe`) Your test creates report.
 2. (1st `it` in `describe`) Your test downloads report. Report has `job_id.docx` name and stored in `cypress/download`. Inside method `downloadAndConvertDocxReport()` we call several tasks (code which executes in nodejs): wait until file showed up in filesystem -> we convert docx into html -> we rename docx file from `job_id.docx` to `QA-test_case_number.docx` -> we rename html file from `job_id.html` to `QA-test_case_number.html`
-3. (2nd `it` in `describe`) Your test opens generated html report in Cypress (Cypress *can't* (well, until [release 9.6.0](https://github.com/cypress-io/cypress/releases/tag/v9.6.0)) [visit other origin url](https://docs.cypress.io/guides/guides/web-security#Same-superdomain-per-test))
-4. (2nd `it` in `describe`) Your test makes traverse and assert on generated html report. 
+3. (2nd `it` in `describe`) **important** Before calling `cy.task("getFilePath")` to get the path of your html report - you will need explicitly change `baseUrl` in `cypress.json` by adding next line:
+
+```ts
+Cypress.config().baseUrl = null;
+```
+
+This will set baseUrl of `cypress.json` to `null` and reload browser's window, which eventually made possible to navigate to static html page in filesystem. Without it - Cypress will consider relative path of html report as path to web resource (will navigate to `http://baseUrl.com/
+cypress/downloads/TestAutoReport-QA-4719 - 462 1st Avenue, Manhattan, NY 10016.docx.html`, for example).
+
+4. (2nd `it` in `describe`) Your test opens generated html report in Cypress (Cypress *can't* (well, until [release 9.6.0](https://github.com/cypress-io/cypress/releases/tag/v9.6.0)) [visit other origin url](https://docs.cypress.io/guides/guides/web-security#Same-superdomain-per-test))
+5. (2nd `it` in `describe`) Your test makes traverse and assert on generated html report.  
 
 ## Usage <a id="usage"></a>
 
@@ -132,17 +165,44 @@ Example of combining previous variables: `npx cypress run --env url=dev,loginMet
 
 Sometimes there could be a case when we need to run 
 
-### PR deploy / localhost test run (or any custom env) <a id="run_tests_in_custom_env"></a>
+### Run tests on custom env / localhost <a id="run_tests_in_custom_env"></a>
 
-Sometimes there could be a case when we need to run 
+For dynamic [`baseUrl`](https://docs.cypress.io/guides/references/configuration#e2e) set we use [Cypress env variables](https://docs.cypress.io/guides/guides/environment-variables) 
+and access to `config` from [`setupNodeEvents`](https://docs.cypress.io/guides/references/configuration#setupNodeEvents) (yeah, since Cypress 10 released - a lot of changed).
+
+Basically what we do - we reassign `baseUrl` during runtime here:
+```ts
+config.baseUrl = evalUrl(config);
+```
+If want more details on hot it works - dive into `evalUrl` function.
+
+**How to use:**
+
+Pass `--env url=key_of_the_env` (urls and their **keys** defined in [ENVS](./cypress/utils/env.utils.ts)
+
+Opens Cypress GUI with dev url:
+```shell
+npm run cy:open -- --env url=dev
+```
+
+Opens Cypress GUI with custom url:
+```shell
+npm run cy:open -- --env url=custom,customUrl='https://playwright.dev'
+```
+
+**The same approach** remains for `npx cypress run` and CI runs.
+
+In CI we have check whether `url==custom` and in that case assign `customUrl`.
+
+Previously, we were selecting specific url to run the tests with help of [Cypress environmental variables](https://docs.cypress.io/guides/guides/environment-variables), but our `baseUrl` in `cypress.json` wasn't set. It [wasn't a good approach](https://docs.cypress.io/guides/references/best-practices#Setting-a-global-baseUrl), but it allowed us dynamically set the url to visit and url for api requests. **BUT ALSO** our `before/beforeEach` **hooks were executing two time** (two time of login through api). And if we would try to create report - we would create two report and were working in the second one. 
 
 ### Triggering GH Actions pipeline <a id="trigger_gh_actions"></a>
 
-SomethingSomethingSomethingSomethingSomethingSomethingSomething
+Please, refer to [Notion](https://www.notion.so/boweryvaluation/webapp-ui-automation-Triggering-GH-Actions-workflows-261e3dc066fb48d7adf5011cc6900d44) page
 
 ### Exploring test results <a id="explore_test_results"></a>
 
-SomethingSomethingSomethingSomethingSomethingSomethingSomething
+Please, refer to [Notion](https://www.notion.so/boweryvaluation/webapp-ui-automation-Test-results-investigation-b57201ce3e61486584fe3c4d4638084a) page
 
 ## NPM Scripts <a id="npm_scripts"></a>
 
