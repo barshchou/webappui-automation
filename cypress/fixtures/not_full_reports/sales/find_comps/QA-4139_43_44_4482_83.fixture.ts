@@ -10,7 +10,7 @@ export default {
     condition: "Shell",
     comparableType: "Mixed-Use",
     spec4139: {
-        numberOfUnitsDefault: 4,
+        numberOfUnitsDefault: 44,
         regularNum: 10000,
         decimalNum: -38.54,
         nonNumberValue: "Some not number",
