@@ -14,7 +14,8 @@ and Definition of Market Value sections`,
     it(`[QA-4703][Report > Key Info] Verify the Property Rights Appraised and Definition 
          of Market Value sections can be edited`, () => {
         cy.stepInfo(`1. On the Report > Key Info page click inside the Property Rights Appraised section.`);
-        _NavigationSection.navigateToReportKeyInfo();
+        _NavigationSection.navigateToPropertySummary()
+            .navigateToReportKeyInfo();
         Report._KeyInfo.activateTextAreaInput( Report._KeyInfo.Page
             .formCommentTextBox(testData.propertyRightsAppraisedTitle));
 
@@ -54,8 +55,9 @@ and Definition of Market Value sections`,
 
         cy.stepInfo(`2. Click on the Revert to Original button and verify the 'Changes will be lost modal' 
             is displayed for both sections`);
-        Report._KeyInfo.Page.formCommentTextBox(testData.propertyRightsAppraisedTitle).realClick();
-        Report._KeyInfo.revertToOriginalCommentarySectionByName(testData.propertyRightsAppraisedTitle)
+        Report._KeyInfo.activateTextAreaInput(Report._KeyInfo.Page
+            .formCommentTextBox(testData.propertyRightsAppraisedTitle))
+            .revertToOriginalCommentarySectionByName(testData.propertyRightsAppraisedTitle)
             .verifyFormCommentTextBoxText(testData.propertyRightsAppraisedTitle,
                 testData.enterValue, "not.contain.text")
             .revertToOriginalCommentarySectionByName(testData.definitionOfMarketValueTitle)
@@ -64,17 +66,19 @@ and Definition of Market Value sections`,
 
         cy.stepInfo(`3. CLick on the Revert ot Original button and Click on the X icon and verify that 
             the modal is closed and no changes are applied`);
-        Report._KeyInfo.enterFormCommentTextBox(testData.propertyRightsAppraisedTitle, testData.enterValue)
+        Report._KeyInfo.enterFormCommentTextBox(testData.propertyRightsAppraisedTitle, testData.enterValue, false)
             .clickRevertToOriginalButtonBySection(testData.propertyRightsAppraisedTitle)
             .Page.CloseIcon.click();
         Report._KeyInfo.verifyFormCommentTextBoxText(testData.propertyRightsAppraisedTitle, testData.enterValue)
+            .activateTextAreaInput(Report._KeyInfo.Page.formCommentTextBox(testData.propertyRightsAppraisedTitle))
             .clickRevertToOriginalButtonBySection(testData.propertyRightsAppraisedTitle)
             .Page.formCancelButton().click();
         Report._KeyInfo.verifyFormCommentTextBoxText(testData.propertyRightsAppraisedTitle, testData.enterValue)
-            .enterFormCommentTextBox(testData.definitionOfMarketValueTitle, testData.enterValue)
+            .enterFormCommentTextBox(testData.definitionOfMarketValueTitle, testData.enterValue, false)
             .clickRevertToOriginalButtonBySection(testData.definitionOfMarketValueTitle)
             .Page.CloseIcon.click();
         Report._KeyInfo.verifyFormCommentTextBoxText(testData.definitionOfMarketValueTitle, testData.enterValue)
+            .activateTextAreaInput(Report._KeyInfo.Page.formCommentTextBox(testData.definitionOfMarketValueTitle))
             .clickRevertToOriginalButtonBySection(testData.definitionOfMarketValueTitle)
             .Page.formCancelButton().click();
         Report._KeyInfo.verifyFormCommentTextBoxText(testData.definitionOfMarketValueTitle, testData.enterValue);
