@@ -171,7 +171,7 @@ class MarketActions extends BaseActionsExt<typeof marketPage> {
 
     checkUncheckMarketAnalysisUseCheckbox(use: BoweryReports.MarketAnalysisUses, isCheck = true): MarketActions {
         marketPage.getMarketAnalysisUseCheckboxArea(use).invoke('attr', 'data-qa').then(dataQA => {
-            let isChecked = dataQA.includes("checked") ? true : false;
+            let isChecked = dataQA.includes("checked");
             if (isCheck != isChecked) {
                 marketPage.getMarketAnalysisUseCheckbox(use).click();
                 this.verifyMarketAnalysisUseCheckboxState(use, isCheck);
@@ -276,7 +276,7 @@ class MarketActions extends BaseActionsExt<typeof marketPage> {
     uploadRentStabilizationFile(fileName: string): MarketActions {
         marketPage.uploadRentStabilizationFileButton.click();
         marketPage.fileDropZone.attachFile(
-            `test_files/docx/${fileName}`,
+            `test_files/${fileName}`,
             { subjectType: 'drag-n-drop' }
         );
         marketPage.getUploadFileButton().click();

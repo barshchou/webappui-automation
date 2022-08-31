@@ -12,7 +12,7 @@ describe("Verify that the generated commentary for Data Sources Description is a
             createReport(testData.nycReport);
 
             cy.stepInfo("1. Navigate to Final > Source Information page");
-            _NavigationSection.navigateSourceInformation();
+            _NavigationSection.navigateToSourceInformation();
 
             cy.stepInfo("2. Verify NYC properties commentary");
             Final._SourceInformation.Page.formCommentTextBox(testData.textBoxName).invoke("text").then(text => {
@@ -51,7 +51,7 @@ describe("Verify that the generated commentary for Data Sources Description is a
             _HomePage.createReport(testData.otherReport);
 
             cy.stepInfo("1. Navigate to Final > Source Information page");
-            _NavigationSection.navigateSourceInformation();
+            _NavigationSection.navigateToSourceInformation();
 
             cy.stepInfo("2. Verify Other properties commentary");
             Final._SourceInformation.Page.formCommentTextBox(testData.textBoxName).invoke("text").then(text => {

@@ -25,7 +25,7 @@ describe(`Generated Commentary is dynamically updated with relevant information
             Report._Appraiser.verifyPersonallyInspectedCheckbox(testData.inspectorName, true);
     
             cy.stepInfo("4. Navigate to Final > Source Information page");
-            _NavigationSection.navigateSourceInformation();
+            _NavigationSection.navigateToSourceInformation();
             
             cy.stepInfo("5. Verify generated commentary");
             Final._SourceInformation.Page.formCommentTextBox(testData.textBoxName).invoke("text").then(text => {

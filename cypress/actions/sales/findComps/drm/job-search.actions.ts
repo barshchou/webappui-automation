@@ -147,7 +147,7 @@ class JobSearchActions {
         if (!Cypress._.isNil(period)) {
             cy.log(`Sale Period for JobFilter: ${salePeriod[period]}`);
             this.Page.filterSalePeriod.click();
-            this.Page.filterSalePeriodValue(salePeriod[period]).click();
+            this.Page.filterOptionValue(salePeriod[period]).click();
             cy.wait(`@${Alias.gql.SearchJobs}`, { timeout: 120000 });
         } else {
             cy.log("No Sale Period was sent to filter");

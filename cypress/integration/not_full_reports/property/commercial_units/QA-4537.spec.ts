@@ -17,7 +17,7 @@ describe("[QA-4537] Verify the Commercial Unit # SF field functionality",
             cy.stepInfo(`2. Enter any value in the Commercial Unit # SF field (e.g. 300) and save the changes.`);
             _NavigationSection.navigateToCommercialUnits();
             testData.sfValues.forEach((value, index) => {
-                Property._CommercialUnits.Page.commercialUnitsSFInputs.eq(index).type(`${value}`);
+                Property._CommercialUnits.enterUnitSFByUnitIndex(value, index);
             });
     
             cy.stepInfo(`3. Proceed to the Income > Commercial > In-Place Rent Roll page and 
