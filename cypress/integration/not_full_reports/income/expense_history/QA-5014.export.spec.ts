@@ -22,16 +22,30 @@ describe("Verify the 'Add expense category' button is displayed on the Expense H
             Income._ExpenseHistory.Page.formAddButton().should("exist")
                 .should("be.disabled");
 
-            cy.stepInfo("3. Verify user can add new category, 'X' button erases entered value");
-            Income._ExpenseHistory.enterNewCategoryName(testData.expenseCategory)
-                .verifyNewCategoryEnteredName(testData.expenseCategory);
-            cy.get("[data-icon=times]").click();
+            cy.stepInfo("3. Select value in add new category input");
+            Income._ExpenseHistory.enterNewCategoryName(testData.existCategory, false)
+                .verifyNewCategoryEnteredName(testData.existCategory)
+                .Page.formCancelButton().click();
+
+            cy.stepInfo("4. Verify user can add new category, 'X' button erases entered value");
+            Income._ExpenseHistory.clickAddExpenseCategoryButton()
+                .enterNewCategoryName(testData.expenseCategory)
+                .verifyNewCategoryEnteredName(testData.expenseCategory)
+                .clickCloseIcon();
             Income._ExpenseHistory.verifyNewCategoryEnteredName("")
                 .Page.formCancelButton().click();
 
-            cy.stepInfo("4. Check custom-created expense categories should behave the same as default");
-            Income._ExpenseHistory.addNewCategoryAndVerify(testData.expenseCategory)
-                .selectExpensePeriod(testData.expensePeriodType)
+            cy.stepInfo("5. Try to add the same category");
+            Income._ExpenseHistory.addNewCategoryAndVerify(testData.expenseCategory, true)
+                .clickAddExpenseCategoryButton()
+                .enterNewCategoryName(testData.expenseCategory, true);
+
+            cy.contains("Expense category already exists").should("exist");
+
+            Income._ExpenseHistory.Page.formCancelButton().click();
+
+            cy.stepInfo("6. Check custom-created expense categories should behave the same as default");
+            Income._ExpenseHistory.selectExpensePeriod(testData.expensePeriodType)
                 .enterExpenseYear(testData.expenseYear)
                 .clickAddExpenseYearButton()
                 .enterIssueByColIndex(testData.grossRevenue, Enums.EXPENSE_HISTORY_TABLE_ROWS.grossRevenue)
@@ -43,11 +57,15 @@ describe("Verify the 'Add expense category' button is displayed on the Expense H
                 .verifyTOEExcludingRETByIndex(testData.taxes)
                 .verifyNetOpIncomeByIndex(testData.grossRevenue);
 
-            cy.stepInfo("5. Check that user can add the same category to the comparable expenses page upon page page");
+            cy.stepInfo("6. Check that user can add the same category to the comparable expenses page upon page page");
             _NavigationSection.navigateToComparableExpenses();
             Income._ComparableExpenses.addNewCategoryAndVerify(testData.expenseCategory, false);
 
-            cy.stepInfo("6. Generate and download report");
+            cy.stepInfo("7. Check that user can add the same category to the comparable expenses page upon page page");
+            _NavigationSection.navigateToExpenseForecast();
+            Income._ExpenseForecastActions.addCustomExpenseCategory(testData.expenseCategory);
+
+            cy.stepInfo("8. Generate and download report");
             _NavigationSection.openReviewAndExport();
             ReviewExport.generateDocxReport()
                 .waitForReportGenerated()
@@ -57,7 +75,7 @@ describe("Verify the 'Add expense category' button is displayed on the Expense H
         it("[QA-5014] Check export", () => {
             cy.task("getFilePath", { _reportName: testData.reportCreationData.reportNumber, _docxHtml: "html" })
                 .then(file => {
-                    cy.stepInfo("7. Verify custom expense is exported");
+                    cy.stepInfo("9. Verify custom expense is exported");
                     cy.visit(<string>file);
                     const tableLocator = "//*[.='Operating Expense Analysis']//following-sibling::table[1]";
                     const customExpenseCell = tableLocator + `//descendant::p[text()='${testData.expenseCategory}']`;

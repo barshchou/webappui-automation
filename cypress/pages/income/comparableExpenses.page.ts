@@ -18,7 +18,7 @@ class ComparableExpensesPage extends BasePage {
         return cy.get(`[row-id=${rowName}] [col-id=name]`);
     }
 
-    get newCategoryNameInput() { return cy.get("[data-qa=expenseName-form-control] input"); }
+    get newCategoryNameInput() { return cy.get("[name='expenseName']"); }
 
     get newCategoryInputSuggestionDropdown() { return cy.get("[role=menuitem]"); }
 }
