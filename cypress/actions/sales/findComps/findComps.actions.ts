@@ -423,7 +423,7 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
         this.clearNumericInputNewComp(compPlex.yearBuiltNewComp);
         cy.get(`@${compPlex.yearBuiltNewComp}`).realClick();
         cy.get(`@${compPlex.yearBuiltNewComp}`).realType(`{enter}${yearBuilt}`, { pressDelay: 45, delay: 50 });
-        findCompsPage.propertyDoneButton.click();
+        findCompsPage.PropertyInfoDoneBtn.click();
         
         return this;
     }
@@ -434,7 +434,7 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
         this.clearNumericInputNewComp(compPlex.contractPrice);
         cy.get(`@${compPlex.contractPrice}`).focus();
         cy.get(`@${compPlex.contractPrice}`).realType(`{enter}${price}`, { pressDelay: 45, delay: 50 });
-        findCompsPage.saleInformationDone.click();
+        findCompsPage.SaleInfoDoneBtn.click();
 
         return this;
     }
@@ -450,12 +450,12 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
     }
 
     openCompPropertyInfoForEdit(): FindCompsActions {
-        findCompsPage.compModalEditButton.click();
+        findCompsPage.propertyInfoEditBtn.click();
         return this;
     }
 
     openCompSaleInfoForEdit(): FindCompsActions {
-        findCompsPage.saleInformationEditButton.click();
+        findCompsPage.SaleInfoEditBtn.click();
         return this;
     }
 }
