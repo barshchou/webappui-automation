@@ -23,7 +23,6 @@ class SWOTAnalysisActions extends BaseActionsExt<typeof swotAnalysisPage> {
         text: string, 
         clear = false): SWOTAnalysisActions {
         this.editSectionDiscussionText(sectionName, index, text, clear);
-        this.saveCmsSettings();
         return this;
     }
 
