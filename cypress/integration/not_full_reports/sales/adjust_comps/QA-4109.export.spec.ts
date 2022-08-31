@@ -1,13 +1,14 @@
+import { conditionalDescribe } from './../../../checkIsProd.utils';
 import testData from "../../../../fixtures/not_full_reports/sales/adjust_comps/QA-4109.fixture";
 import Sales from "../../../../actions/sales/sales.manager";
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import { createReport } from "../../../../actions/base/baseTest.actions";
 import { ReviewExport } from "../../../../actions";
 
-describe("Adjusted Price per SF in Sales Adjustment Grid is calculated with correct formula", 
+conditionalDescribe("Adjusted Price per SF in Sales Adjustment Grid is calculated with correct formula", 
     { tags: [ "@adjust_comps", "@sales", "@check_export" ] }, () => {
 
-        it("Test body", () => {
+        it("[QA-4109]", () => {
             createReport(testData.reportCreationData);
 
             NavigationSection.navigateToFindComps();
