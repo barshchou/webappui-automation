@@ -68,3 +68,4 @@ export type AdjustmentExpansionLabelsKeys = keyof typeof Enums.ADJUSTMENT_EXPANS
 export type ExpenseDataProvider = keyof typeof Enums.EXPENSE_DATA_PROVIDER
 export type ExpenseItemBasisOfComparison = keyof typeof Enums.EXPENSE_ITEM_BASIS_OF_COMPARISON
 export type ExportTitlesKeys = keyof typeof Enums.EXPORT_TITLES
+export type CompStatusValues = keyof typeof Enums.COMP_STATUS_VALUES

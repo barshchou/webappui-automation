@@ -19,11 +19,18 @@ describe(`Check the order of comps in the export when 'custom' dropdown is chose
 
             cy.stepInfo(`1. [QA-5136] -> User navigates to SalesComps Search page `);
             _NavigationSection.navigateToFindComps();
-        
+
+            Sales._FindComps.resetAllFilters()
+                .selectFilterCompStatusValue(testData.statusesToCheck)
+                .verifyProgressBarNotExist();
+
             cy.stepInfo(`2. [QA-5136] -> User selects n-first comps from map`);
             testData.compsToAdd.forEach(() => {
                 Sales._FindComps.Actions.selectCompFromMap();
             });
+
+            Sales._FindComps.verifyComparablesNumber(testData.compsToAdd.length)
+                .saveAddedCompsAddressesToMap();
 
             cy.stepInfo(`3. [QA-5136] -> User navigates to the Sales Adjustment Grid`);
             _NavigationSection.Actions.clickSaveButton().navigateToAdjustComps();

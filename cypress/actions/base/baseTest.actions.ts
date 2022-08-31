@@ -3,8 +3,9 @@ import { aliasQuery } from "../../utils/graphql.utils";
 import NavigationSection from "./navigationSection.actions";
 import { createPayload } from "../../api/report_payloads/462Avenue1NY.payload";
 import mapKeysUtils from "../../utils/mapKeys.utils";
-import { _HomePage } from ".";
+import { _HomePage, _NavigationSection } from ".";
 import { Alias, gqlOperationNames } from "../../utils/alias.utils";
+import routesUtils from "../../utils/routes.utils";
 
 /**
  * Login action
@@ -41,6 +42,7 @@ export const createReport = (reportCreationData: BoweryAutomation.ReportCreation
             cy._mapGet(mapKeysUtils.reportId).then(reportId => {
                 cy.log("Report id: "+reportId);
                 cy.visit(`/report/${reportId}/report-information`);
+                _NavigationSection.waitForUrl(routesUtils.keyInfo);
             });
         } else {
             _HomePage.createReport(reportCreationData);

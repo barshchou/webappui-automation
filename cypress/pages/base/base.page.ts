@@ -40,8 +40,8 @@ export default class BasePage {
 
     get modalWindow() { return cy.get("[role='dialog']"); }
 
-    get selectorDraggableElement() {
-        return '[data-react-beautiful-dnd-drag-handle="0"]';
+    selectorDraggableElement(draggableIndex = 0) {
+        return `[data-react-beautiful-dnd-drag-handle="${draggableIndex}"]`;
     } 
 
     get saveButtonGlobal() { return cy.xpath("//button[@type='submit']"); }
