@@ -1,5 +1,6 @@
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 import ClientCreationData from "../../../data_creator/clientData.creator";
+import Enums from "../../../../enums/enums";
 
 export default {
     reportCreationData: ReportDataCreator.getReportData("4627"),
@@ -7,6 +8,6 @@ export default {
     shortTextToType: "Harl",
     textToType: "Harley Young",
     companyName: "Test Company & CO",
-    identificationOfTheClient: "Identification of the Client",
-    intendedUseAndUser: "Intended Use & User"
+    identificationOfTheClient: Enums.INTRODUCTION_TEXTBOX_NAMES.identificationOfTheClient, 
+    intendedUseAndUser: Enums.INTRODUCTION_TEXTBOX_NAMES.intendedUseAndUser
 };
