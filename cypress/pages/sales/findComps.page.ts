@@ -174,10 +174,6 @@ class FindCompsPage extends BasePage {
     get jobSearchTab() {
         return cy.get('[data-qa="job-tab"]');
     }
-
-    get reportIdInput() {
-        return cy.get('input[placeholder="Find a specific Report ID"]');
-    }
     
     get selectedForReportTitle() {
         return this.importCompModal.contains("Selected for report");

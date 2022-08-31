@@ -35,6 +35,8 @@ class SourceInformationPage extends BasePage {
     get comparableSalesDataSources() { 
         return cy.get(`[data-qa='Comparable Sales Data-row'] ${this.sourceLabelLocator}`); 
     }
+
+    getCommentChip(chipName: string) { return cy.get(`[aria-label='${chipName}']`); }
 }
 
 export default new SourceInformationPage();
