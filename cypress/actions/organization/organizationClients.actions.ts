@@ -8,6 +8,7 @@ class OrganizationClientsActions extends BaseActionsExt<typeof organizationClien
     }
 
     deleteClientIfExists(fullName: string): boolean {
+        this.Page.pageTitle.should("have.text", "Organization Clients");
         let result = false;
         cy.get('body').then($body => {
             if ($body.text().includes(fullName)) {
