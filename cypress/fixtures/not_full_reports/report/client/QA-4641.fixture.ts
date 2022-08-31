@@ -1,6 +1,5 @@
 import Enums from "../../../../enums/enums";
 import ReportDataCreator from "../../../data_creator/reportData.creator";
-import enums from '../../../../enums/enums';
 import chipsDataCreator from '../../../data_creator/chipsData.creator';
 import { BoweryReports } from "../../../../types/boweryReports.type";
 
@@ -19,10 +18,11 @@ const _chipsOptions: BoweryReports.ChipsCreationOptions = {
 export default {
     reportCreationData: reportCreationFixture(),
     textToType: "=",
-    chips: chipsDataCreator.getChipsData(_chipsOptions, enums.VALUE_CONCLUSION_TYPE.AS_STABILIZED),
+    chips: chipsDataCreator.getChipsData(_chipsOptions, Enums.VALUE_CONCLUSION_TYPE.AS_STABILIZED),
     buildingName: _buildingName,
     intendedUserCommentaryTitle: "Intended User",
     identificationOfTheClientCommentaryTitle: "Identification of the Client",
-    identificationOfTheClientSection: enums.EXPORT_TITLES.identificationOfTheClient,
-    intendedUseSection: enums.EXPORT_TITLES.intendedUseAndUser
+    identificationOfTheClientSection: Enums.EXPORT_TITLES.identificationOfTheClient,
+    intendedUseSection: Enums.EXPORT_TITLES.intendedUseAndUser,
+    sectionToExport: Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.introduction
 };

@@ -22,11 +22,11 @@ describe(`Check the order of comps in the export when 'custom' dropdown is chose
         
             cy.stepInfo(`2. [QA-5136] -> User selects n-first comps from map`);
             testData.compsToAdd.forEach(() => {
-                Sales._FindComps.Actions.selectCompFromMap();
+                Sales._FindComps.selectCompFromMap();
             });
 
             cy.stepInfo(`3. [QA-5136] -> User navigates to the Sales Adjustment Grid`);
-            _NavigationSection.Actions.clickSaveButton().navigateToAdjustComps();
+            _NavigationSection.clickSaveButton().navigateToAdjustComps();
 
             cy.stepInfo(`4. [QA-5136] -> User see that the order of comps from left to right
                         is the same as the order of Sales Comps in Selected Comparables Table`);
@@ -41,9 +41,9 @@ describe(`Check the order of comps in the export when 'custom' dropdown is chose
             });
 
             cy.stepInfo(`5. [QA-5136] -> User navigates to Review&Export and downloads report`);
-            _NavigationSection.Actions.openReviewAndExport();
-            ReviewExport.Actions.generateDocxReport()
-                .waitForReportGenerated()
+            _NavigationSection.openReviewAndExport();
+            ReviewExport.selectSectionsToIncludeInExport(testData.sectionToExport)
+                .generateDocxReport().waitForReportGenerated()
                 .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
         });
 

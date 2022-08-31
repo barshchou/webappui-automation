@@ -17,5 +17,6 @@ export default {
     chips: chipsDataCreator.getChipsData(_chipsOptions, Enums.VALUE_CONCLUSION_TYPE.AS_COMPLETE),
     buildingName: _buildingName,
     identificationOfTheClientSection: Enums.EXPORT_TITLES.identificationOfTheClient,
-    intendedUseSection: Enums.EXPORT_TITLES.intendedUseAndUser
+    intendedUseSection: Enums.EXPORT_TITLES.intendedUseAndUser,
+    sectionToExport: Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.introduction
 };

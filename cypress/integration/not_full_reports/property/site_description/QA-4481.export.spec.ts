@@ -34,7 +34,8 @@ describe(`[QA-4481] Check that generated text pulls in the first submarket`,
         
             cy.stepInfo(`4. Export the report`);
             _NavigationSection.openReviewAndExport();
-            ReviewExport.generateDocxReport().waitForReportGenerated()
+            ReviewExport.selectSectionsToIncludeInExport(testData.sectionToExport)
+                .generateDocxReport().waitForReportGenerated()
                 .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
         });
 

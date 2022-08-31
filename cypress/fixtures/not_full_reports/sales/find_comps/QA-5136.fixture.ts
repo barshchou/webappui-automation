@@ -20,5 +20,6 @@ export default {
      */
     compsToAdd: [ 0, 1 ],
     aliasCompsBefore,
-    memoTestDataFile
+    memoTestDataFile,
+    sectionToExport: Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.salesComparisonApproach
 };

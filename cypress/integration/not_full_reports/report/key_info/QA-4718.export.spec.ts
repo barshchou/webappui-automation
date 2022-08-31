@@ -41,7 +41,8 @@ describe(`[QA-4718] Verify the "Linked" chips dropdown in the new narrative comp
         Report._KeyInfo.inactivateTextAreaInput();
 
         _NavigationSection.openReviewAndExport();
-        ReviewExport.generateDocxReport().waitForReportGenerated()
+        ReviewExport.selectSectionsToIncludeInExport(testData.sectionToExport)
+            .generateDocxReport().waitForReportGenerated()
             .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
     });
     

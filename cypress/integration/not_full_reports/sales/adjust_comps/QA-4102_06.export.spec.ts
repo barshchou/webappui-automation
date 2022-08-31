@@ -48,8 +48,9 @@ describe("[QA-4102_06] -> Total Utility Adjustments in Sales Adjustment Grid is 
             Sales._AdjustComps.Actions.checkCumulativePriceName("Unit");
 
             cy.stepInfo("9. Generate and download this report");
-            _NavigationSection.Actions.openReviewAndExport();
-            ReviewExport.Actions.generateDocxReport()
+            _NavigationSection.openReviewAndExport();
+            ReviewExport.selectSectionsToIncludeInExport(testData.sectionToExport)
+                .generateDocxReport().waitForReportGenerated()
                 .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
         });
 

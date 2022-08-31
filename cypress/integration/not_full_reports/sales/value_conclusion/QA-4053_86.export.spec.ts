@@ -34,8 +34,9 @@ describe(`[QA-4053] [QA-4086] The Concluded Value Per Unit is calculated correct
             .verifyProspectiveMarketValueAmount(testData.valueConclusionAsIs, totalValue)
             .verifyProspectiveMarketValueAmount(testData.valueConclusionAsComplete, totalValue);
 
-        _NavigationSection.Actions.openReviewAndExport().closeUserSurveyIfExist();
-        ReviewExport.generateDocxReport()
+        _NavigationSection.openReviewAndExport().closeUserSurveyIfExist();
+        ReviewExport.selectSectionsToIncludeInExport(testData.sectionToExport)
+            .generateDocxReport().waitForReportGenerated()
             .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
     });
     

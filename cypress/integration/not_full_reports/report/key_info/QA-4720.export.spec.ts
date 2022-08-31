@@ -40,7 +40,8 @@ ACAS reports for Property Rights Appraised and Definition
             .clickSaveButton();
 
         _NavigationSection.openReviewAndExport();
-        ReviewExport.generateDocxReport().waitForReportGenerated()
+        ReviewExport.selectSectionsToIncludeInExport(testData.sectionToExport)
+            .generateDocxReport().waitForReportGenerated()
             .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
     });
     

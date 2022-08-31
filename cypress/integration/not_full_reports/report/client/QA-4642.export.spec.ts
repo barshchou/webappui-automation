@@ -37,7 +37,8 @@ describe("Verify the Client Guidelines Discussion on the page",
     
             cy.stepInfo(`3. Download report`);
             _NavigationSection.openReviewAndExport(true);
-            ReviewExport.generateDocxReport().waitForReportGenerated()
+            ReviewExport.selectSectionsToIncludeInExport(testData.sectionToExport)
+                .generateDocxReport().waitForReportGenerated()
                 .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
         });
 

@@ -22,7 +22,8 @@ describe("[QA-4104] Verify the Market Value generated commentary",
             Report._KeyInfo.Page.definitionOfMarketValue.should("include.text", testData.tooltipText);
 
             _NavigationSection.openReviewAndExport();
-            ReviewExport.generateDocxReport().waitForReportGenerated()
+            ReviewExport.selectSectionsToIncludeInExport(testData.sectionToExport)
+                .generateDocxReport().waitForReportGenerated()
                 .downloadAndConvertDocxReport(`JOB-${testData.reportCreationData.reportNumber}_462`);
         });
 

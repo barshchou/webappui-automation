@@ -11,7 +11,8 @@ conditionalDescribe("[QA-4573] Verify the Source text is correct in the Survey o
             createReport(testData.reportCreationData);
             _NavigationSection.openReviewAndExport();
         
-            ReviewExport.generateDocxReport().waitForReportGenerated()
+            ReviewExport.selectSectionsToIncludeInExport(testData.sectionToExport)
+                .generateDocxReport().waitForReportGenerated()
                 .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
         });
 

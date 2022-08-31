@@ -20,11 +20,12 @@ describe("Adjusted Price per Residential Unit in Sales Adjustment Grid is calcul
                 .verifyTrendedPricePerBasis(Object.values(testData.comparableAdjustment), testData.basis, 0, true);
 
             cy.stepInfo(`[QA-4109] -> 'Cumulative Price Per SF' is displayed in bold`);
-            Sales.AdjustComps.Actions.checkCumulativePriceName("SF");
+            Sales.AdjustComps.checkCumulativePriceName("SF");
 
             cy.stepInfo(`[QA-4109] -> Generate and download this report `);
-            NavigationSection.Actions.openReviewAndExport();
-            ReviewExport.Actions.generateDocxReport()
+            NavigationSection.openReviewAndExport();
+            ReviewExport.selectSectionsToIncludeInExport(testData.sectionToExport)
+                .generateDocxReport().waitForReportGenerated()
                 .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
         });
 

@@ -276,7 +276,7 @@ class MarketActions extends BaseActionsExt<typeof marketPage> {
     uploadRentStabilizationFile(fileName: string): MarketActions {
         marketPage.uploadRentStabilizationFileButton.click();
         marketPage.fileDropZone.attachFile(
-            `test_files/docx/${fileName}`,
+            `test_files/${fileName}`,
             { subjectType: 'drag-n-drop' }
         );
         marketPage.getUploadFileButton().click();
