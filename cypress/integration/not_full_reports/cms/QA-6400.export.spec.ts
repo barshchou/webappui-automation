@@ -22,7 +22,12 @@ conditionalDescribe("Verify page and possibility to edit text",
                 _CmsBaseActions.openSWOTAnalysisPage();
                 testData.swotTextsFixture.forEach(section => {
                     section.languages.forEach((language, index) => {
-                        _SWOTAnalysis.updateSectionDiscussion(section.sectionName, index, language, true);
+                        _SWOTAnalysis.Page.swotAnalysisSectionTextArea(section.sectionName).invoke('text')
+                            .then(text => {
+                                if (text !== language) {
+                                    _SWOTAnalysis.updateSectionDiscussion(section.sectionName, index, language, true);
+                                }
+                            });
                     });
                 });
                 _SWOTAnalysis.saveCmsSettings();
