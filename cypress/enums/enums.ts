@@ -88,6 +88,8 @@ import certificationEnum from "./cms/certification.enum";
 import otherAdjustmentsExpansionRowsEnum from "./adjustComps/otherAdjustmentsExpansionRows.enum";
 import utilitiesAdjustmentsExpansionRowsEnum from "./adjustComps/utilitiesAdjustmentsExpansionRows.enum";
 import adjustmentExpansionLabelsEnum from "./sales/adjustComps/adjustmentExpansionLabels.enum";
+import projectedTaxesSectionsEnum from "./income/taxInfo/projectedTaxesSections.enum";
+import projectedTaxesInputsNamesEnum from "./income/taxInfo/projectedTaxesInputsNames.enum";
 import chipsEnum from "./chips.enum";
 import expenseHistoryDataProviderEnum from "./expense/expenseHistoryDataProvider.enum";
 import expenseItemBasisOfComparisonEnum from "./expense/expenseItemBasisOfComparison.enum";
@@ -184,6 +186,8 @@ export default {
     OTHER_ADJUSTMENTS_EXPANSION_ROWS: otherAdjustmentsExpansionRowsEnum,
     UTILITIES_ADJUSTMENTS_EXPANSION_ROWS: utilitiesAdjustmentsExpansionRowsEnum,
     ADJUSTMENT_EXPANSION_LABELS: adjustmentExpansionLabelsEnum,
+    PROJECTED_TAXES_SECTIONS: projectedTaxesSectionsEnum,
+    PROJECTED_TAXES_INPUTS: projectedTaxesInputsNamesEnum,
     CHIPS: chipsEnum,
     EXPENSE_DATA_PROVIDER: expenseHistoryDataProviderEnum,
     EXPENSE_ITEM_BASIS_OF_COMPARISON: expenseItemBasisOfComparisonEnum,
