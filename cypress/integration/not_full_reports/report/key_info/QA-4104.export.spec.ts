@@ -2,6 +2,7 @@ import testData from "../../../../fixtures/not_full_reports/report/key_info/QA-4
 import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { Report, ReviewExport } from "../../../../actions";
+import Enums from "../../../../enums/enums";
 
 describe("[QA-4104] Verify the Market Value generated commentary", 
     { tags: [ "@report", "@key_info", "@check_export" ] }, () => {
@@ -12,11 +13,12 @@ describe("[QA-4104] Verify the Market Value generated commentary",
             createReport(testData.reportCreationData);
 
             cy.stepInfo(`2. Go to Report > Key Info > Definition of Market Value`);
-            _NavigationSection.navigateToReportInformation();
+            _NavigationSection.navigateToReportKeyInfo();
         
             cy.stepInfo(`3. Check that this sentence exports in the Introduction, 
-                        replacing the boilerplate sentence currently exported there`);
-            Report._KeyInfo.Page.textBoxDefinitionOfMarketValue().should("include.text", testData.verifyText);
+            replacing the boilerplate sentence currently exported there`);
+            Report._KeyInfo.Page.formCommentTextBox(Enums.PAGES_TEXTBOX_NAMES.definitionOfMarketValue)
+                .should("include.text", testData.verifyText);
 
             cy.stepInfo(`4. Verify text letting know where the text exports.`);
             Report._KeyInfo.Page.definitionOfMarketValue.should("include.text", testData.tooltipText);

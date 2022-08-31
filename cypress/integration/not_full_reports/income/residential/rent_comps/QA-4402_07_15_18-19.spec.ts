@@ -40,7 +40,8 @@ describe(`[Income -> Residential -> Rent Comps -> Map] Saved filter values after
 
             cy.stepInfo(`3. Click 'Save' button, refresh the page
                      and verify filters values`);
-            Income._Residential.RentComps.BaseActions.clickSaveButton();
+            Income._Residential.RentComps.BaseActions.clickSaveButton()
+                .verifyProgressBarNotExist();
             cy.reload();
             testData.filters.forEach((filter) => {
                 Income._Residential
@@ -79,7 +80,8 @@ describe(`[Income -> Residential -> Rent Comps -> Map] Saved filter values after
 
             cy.stepInfo(`3. Click 'Save' button, refresh the page
                     and verify filters values`);
-            Income._Residential.RentComps.BaseActions.clickSaveButton();
+            Income._Residential.RentComps.BaseActions.clickSaveButton()
+                .verifyProgressBarNotExist();
             cy.reload();
 
             cy.stepInfo(`4. Verify that all filter values which were set are saved on the page`);
@@ -121,7 +123,8 @@ describe(`[Income -> Residential -> Rent Comps -> Map] Saved filter values after
 
             cy.stepInfo(`3. Click 'Save' button, refresh the page
                      and verify filters values`);
-            Income._Residential.RentComps.BaseActions.clickSaveButton();
+            Income._Residential.RentComps.BaseActions.clickSaveButton()
+                .verifyProgressBarNotExist();
             cy.reload();
             testData.filters.forEach((filter) => {
                 Income._Residential
@@ -157,7 +160,8 @@ describe(`[Income -> Residential -> Rent Comps -> Map] Saved filter values after
                     .clearDateInput(filter.name);
             });
             Income._Residential.RentComps.BaseActions
-                .clickSaveButton();
+                .clickSaveButton()
+                .verifyProgressBarNotExist();
 
             cy.stepInfo("5. Refresh the page and verify filters values");
             cy.reload();
@@ -198,7 +202,8 @@ describe(`[Income -> Residential -> Rent Comps -> Map] Saved filter values after
 
             cy.stepInfo(`3. Click 'Save' button, refresh the page
                      and verify filters values`);
-            Income._Residential.RentComps.BaseActions.clickSaveButton();
+            Income._Residential.RentComps.BaseActions.clickSaveButton()
+                .verifyProgressBarNotExist();
             cy.reload();
             testData.filters.forEach((filter) => {
                 Income._Residential
@@ -220,7 +225,8 @@ describe(`[Income -> Residential -> Rent Comps -> Map] Saved filter values after
                      refresh the page and verify filters values`);
             Income._Residential.RentComps.BaseActions
                 .clickResetFiltersButton()
-                .clickSaveButton();
+                .clickSaveButton()
+                .verifyProgressBarNotExist();
             cy.reload();
             testData.filters.forEach((filter) => {
                 Income._Residential
@@ -287,6 +293,7 @@ describe(`[Income -> Residential -> Rent Comps -> Map] Saved filter values after
         afterEach("Clear all filters", () => {
             Income._Residential.RentComps.BaseActions
                 .clickResetFiltersButton()
-                .clickSaveButton();
+                .clickSaveButton()
+                .verifyProgressBarNotExist();
         });
     });

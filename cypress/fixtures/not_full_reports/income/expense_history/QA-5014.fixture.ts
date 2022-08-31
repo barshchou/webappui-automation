@@ -7,6 +7,7 @@ const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreat
 
 export default {
     reportCreationData: _reportCreationData,
+    existCategory: "Groundskeeping",
     expenseCategory: "Test name",
     categoryValue: 3000,
     expensePeriodType: Enums.EXPENSE_PERIOD_TYPE.actual,

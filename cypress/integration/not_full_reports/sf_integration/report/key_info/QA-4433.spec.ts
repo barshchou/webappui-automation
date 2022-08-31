@@ -19,7 +19,7 @@ conditionalDescribe("[QA-4433] Launch Darkly for Inspection Date & Date of Valua
             cy.stepInfo(`2. Go to Report → Key Info → Engagement tab and Verify that 
             when the feature (Pre-fill inspection date from salesforce) 
             is off, the Inspection Date & Date of Valuation fields are empty.`);
-            _NavigationSection.navigateToReportInformation();
+            _NavigationSection.navigateToReportKeyInfo();
             Report._KeyInfo.Page.getDateInputByQA(testData.nameInputByQA).should("have.value", "");
         });
 

@@ -20,10 +20,8 @@ describe("[QA-4576][QA-4578] Verify the display of the Stabilized Rent Roll page
                     are > 0 Commercial Units with Comp Groups.`);
 
             Base._NavigationSection.navigateToPropertySummary();
-            Property._Summary.enterNumberOfCommercialUnits(0).clickSaveButton();
-            Base._NavigationSection.clickIncomeApproachButton()
-                .clickCommercialArrow().clickCommercialStabRentRollButton().clickYesButton()
-                .verifyProgressBarNotExist();
+            Property._Summary.enterNumberOfCommercialUnits(0);
+            _NavigationSection.navigateToCommercialStabilizedRentRoll();
 
             Income._CommercialManager.StabilizedRentRoll.Actions.matchElementSnapshot(
                 stabilizedRentRollPage.stabilizedRRPanel,
@@ -66,7 +64,7 @@ describe("[QA-4576][QA-4578] Verify the display of the Stabilized Rent Roll page
             );
 
             cy.stepInfo(`[QA-4576][QA-4578] Add comp group and a new comp`);
-            _NavigationSection.openCompGroupsInCommercial();
+            _NavigationSection.navigateToCommercialCompGroups();
             Income._CommercialManager.CompGroups.Actions.addCompGroup(testData.compGroup);
             _NavigationSection.clickCommercialRentComps()
                 .submitSaveChangesModal();

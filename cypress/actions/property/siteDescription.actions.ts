@@ -1,7 +1,7 @@
 import siteDescriptionPage from "../../pages/property/siteDescription.page";
 import { numberWithCommas } from "../../../utils/numbers.utils";
 import BaseActionsExt from "../base/base.actions.ext";
-import { BoweryReports } from "../../types/boweryReports.type";
+import Enums from "../../enums/enums";
 
 class SiteDescriptionActions extends BaseActionsExt<typeof siteDescriptionPage> {
 
@@ -71,8 +71,8 @@ class SiteDescriptionActions extends BaseActionsExt<typeof siteDescriptionPage> 
         return this;
     }
     
-    verifyGeneratedCommentary(discussion: BoweryReports.PropertyDiscussion, textToBe: string): SiteDescriptionActions {
-        siteDescriptionPage.getGeneratedCommentary(discussion)
+    verifyGeneratedCommentary(textToBe: string): SiteDescriptionActions {
+        siteDescriptionPage.formCommentTextBox(Enums.PAGES_TEXTBOX_NAMES.locationDescriptionExport)
             .should("have.text", textToBe);
         return this;
     }

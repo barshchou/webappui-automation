@@ -14,7 +14,7 @@ describe("Verify the display of the Unit grid with the added comparable unit on 
         it("Uncategorized table with default columns", () => {
             NavigationSection.navigateToResInPlaceRentRoll();
             Income.Residential.InPlaceRentRoll.checkCheckboxByLabel(tesData.includePerRoomCheckbox);
-            NavigationSection.openRentCompsInResidential();
+            NavigationSection.navigateToCommercialCompGroups();
             Income.Residential.RentComps.BaseActions.verifyUnitSelected()
                 .selectComparableByAddress(tesData.uncategorizedData.compData.address)
                 .checkDisplaySquareFootageForCompsCheckbox()
@@ -34,7 +34,7 @@ describe("Verify the display of the Unit grid with the added comparable unit on 
         it("Developers forecast test", () => {
             NavigationSection.navigateToResInPlaceRentRoll();
             Income.Residential.InPlaceRentRoll.checkCheckboxByLabel(tesData.uncategorizedData.devForecastLabel);
-            NavigationSection.openRentCompsInResidential();
+            NavigationSection.navigateToCommercialCompGroups();
             Income.Residential.RentComps.BaseActions.verifyUnitSelected()
                 .selectComparableByAddress(tesData.uncategorizedData.compData.address)
                 .verifyUncategorizedSubjectDevForecast(tesData.uncategorizedData.devForecastText);
@@ -43,7 +43,7 @@ describe("Verify the display of the Unit grid with the added comparable unit on 
         it("Bathrooms column test", () => {
             NavigationSection.navigateToResInPlaceRentRoll();
             Income.Residential.InPlaceRentRoll.checkCheckboxByLabel(tesData.uncategorizedData.bathroomsLabel);
-            NavigationSection.openRentCompsInResidential();
+            NavigationSection.navigateToCommercialCompGroups();
             Income.Residential.RentComps.BaseActions.verifyUnitSelected()
                 .selectComparableByAddress(tesData.uncategorizedData.compData.address)
                 .verifyUncategorizedBathroomsRowCell(0, tesData.uncategorizedData.compData.bathrooms);
@@ -57,7 +57,7 @@ describe("Verify the display of the Unit grid with the added comparable unit on 
             Income.Residential.InPlaceRentRoll.enterBedroomsNumberByRowNumber(tesData.bedroomCategory.bedroomsNumber)
                 .enterRentTypeCellByRowNumber(tesData.bedroomCategory.rentType)
                 .checkCheckboxByLabel(tesData.includePerRoomCheckbox);
-            NavigationSection.openRentCompsInResidential();
+            NavigationSection.navigateToCommercialCompGroups();
             Income.Residential.RentComps.BaseActions.verifyUnitSelected()
                 .verifyProgressBarNotExist()
                 .selectComparableByAddress(tesData.bedroomCategory.compData.address)

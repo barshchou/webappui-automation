@@ -15,7 +15,7 @@ describe("The Letter of Engagement pre-fill from Dropbox to LoE filed in WebApp 
             cy.stepInfo(`2. Navigate to the Report > Key Info > Engagement and Verify that 
             the Letter Of Engagement field is empty and nothing 
                     is auto-filled from Dropbox`);
-            _NavigationSection.navigateToReportInformation();
+            _NavigationSection.navigateToReportKeyInfo();
             Report._KeyInfo.Page.inputToCheckUpload.should("have.value", testData.verifyValue);
         });
 
@@ -27,7 +27,7 @@ describe("The Letter of Engagement pre-fill from Dropbox to LoE filed in WebApp 
             cy.stepInfo(`2. Navigate to the Report > Key Info > Engagement and Verify that 
             the Letter Of Engagement field is empty and nothing 
                     is auto-filled from Dropbox`);
-            _NavigationSection.navigateToReportInformation();
+            _NavigationSection.navigateToReportKeyInfo();
             Report._KeyInfo.Page.inputToCheckUpload.should("be.empty");
         });
 
@@ -39,7 +39,7 @@ describe("The Letter of Engagement pre-fill from Dropbox to LoE filed in WebApp 
             cy.stepInfo(`2. Navigate to the Report > Key Info > Engagement and Verify that 
             the Letter Of Engagement field is empty and nothing 
                     is auto-filled from Dropbox`);
-            _NavigationSection.navigateToReportInformation();
+            _NavigationSection.navigateToReportKeyInfo();
             Report._KeyInfo.Page.inputToCheckUpload.should("be.empty");
         });
 
@@ -51,7 +51,7 @@ describe("The Letter of Engagement pre-fill from Dropbox to LoE filed in WebApp 
             cy.stepInfo(`2. Navigate to the Report > Key Info > Engagement and Verify that 
             the Letter Of Engagement field is empty and nothing 
                     is auto-filled from Dropbox`);
-            _NavigationSection.navigateToReportInformation();
+            _NavigationSection.navigateToReportKeyInfo();
             Report._KeyInfo.Page.inputToCheckUpload.should("be.empty");
         });
     });

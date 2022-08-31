@@ -5,6 +5,7 @@ import testData from "../../../fixtures/not_full_reports/cms/QA-6401.fixture";
 import launchDarklyApi from '../../../api/launchDarkly.api';
 import { conditionalDescribe } from "../../checkIsProd.utils";
 import { _CmsBaseActions, _SWOTAnalysis } from '../../../actions/cms';
+import { normalizeText } from "../../../../utils/string.utils";
 
 conditionalDescribe("[6401] Verify possibility to edit text", 
     { tags:[ "@cms", "@check_export", "@feature_flag" ] }, () => {
@@ -40,7 +41,7 @@ conditionalDescribe("[6401] Verify possibility to edit text",
                     cy.stepInfo("5. Verify commentary text in exported report");
                     let sectionName = testData.sectionName.charAt(0).toUpperCase() + testData.sectionName.slice(1);
                     cy.contains(sectionName).scrollIntoView().next().find("li").then($li => {
-                        const reportSectionText = $li.toArray().map(li => li.innerHTML);
+                        const reportSectionText = $li.toArray().map(li => normalizeText(li.innerHTML));
                         expect(testData.textUpdate).to.deep.eq(reportSectionText);
                     });
                 });

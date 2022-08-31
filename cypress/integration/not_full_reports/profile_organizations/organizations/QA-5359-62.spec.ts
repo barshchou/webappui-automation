@@ -15,6 +15,7 @@ describe("Verify users roles permissions to change report status",
             createReport(testData.reportCreationData, testData.adminUsername, testData.adminPassword);
 
             cy.stepInfo('2. On a Review & Export page change report status');
+            _NavigationSection.openReviewAndExport();
             ReviewExport.changeReportStatus(testData.reviewStatus);
 
             cy.stepInfo('3. Verify report status is changed');
@@ -32,6 +33,7 @@ describe("Verify users roles permissions to change report status",
             createReport(testData.reportCreationData, testData.leadAppraiserUsername, testData.leadAppraiserPassword);
 
             cy.stepInfo('2. On a Review & Export page change report status');
+            _NavigationSection.openReviewAndExport();
             ReviewExport.changeReportStatus(testData.reviewStatus);
 
             cy.stepInfo('3. Verify report status is changed');
@@ -49,6 +51,7 @@ describe("Verify users roles permissions to change report status",
             createReport(testData.reportCreationData, testData.appraiserUsername, testData.appraiserPassword);
 
             cy.stepInfo('2. On a Review & Export page change report status');
+            _NavigationSection.openReviewAndExport();
             ReviewExport.changeReportStatus(testData.reviewStatus);
 
             cy.stepInfo('3. Verify report status is changed');
@@ -66,6 +69,8 @@ describe("Verify users roles permissions to change report status",
             createReport(testData.reportCreationData, testData.inspectorUsername, testData.inspectorPassword);
 
             cy.stepInfo('2. On a Review & Export page verify there is no change report status buttons');
-            ReviewExport.Page.reportStatus.should('not.exist');
+            _NavigationSection.openReviewAndExport();
+            ReviewExport.verifyReportStatusChanged(testData.draftStatus)
+                .Page.changeReportStatusButton(testData.reviewStatus).should("not.exist");
         });
     });

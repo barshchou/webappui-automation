@@ -43,7 +43,7 @@ class ComparableExpensesActions extends BaseActionsExt<typeof compExpensesPage> 
 
     enterSquareFeetByColumnIndex(value: number, index = 0): ComparableExpensesActions {
         compExpensesPage.getUnifiedEditableAndTotalCells("squareFeet").eq(index)
-            .realClick().realClick().scrollIntoView().focus()
+            .dblclick().scrollIntoView().focus()
             .type("something").clear().realType(`${value}{enter}`);
         compExpensesPage.getUnifiedEditableAndTotalCells("squareFeet").eq(index)
             .children(compExpensesPage.elementToCheckCellTextSelector)
@@ -187,8 +187,7 @@ class ComparableExpensesActions extends BaseActionsExt<typeof compExpensesPage> 
     }
 
     enterNewCategoryName(name: string, isFirstEnter = true): ComparableExpensesActions {
-        compExpensesPage.newCategoryNameInput.should("have.attr", "placeholder", "Enter Custom Expense...")
-            .and("have.attr", "required");
+        compExpensesPage.newCategoryNameInput.should("have.attr", "placeholder", "Enter Custom Expense...");
         compExpensesPage.newCategoryNameInput.type(`${name}`);
         if (isFirstEnter) {
             compExpensesPage.newCategoryInputSuggestionDropdown.should("contain.text", `Create "${name}"`);
@@ -209,7 +208,9 @@ class ComparableExpensesActions extends BaseActionsExt<typeof compExpensesPage> 
      * 'Create' word
      */
     addNewCategoryAndVerify(categoryName: string, isFirstTime = true): ComparableExpensesActions {
-        this.clickAddCustomExpenseCategoryButton()
+        this.clickAddCustomExpenseCategoryButton();
+        cy.get('[role="dialog"]').should("exist", { timeout: 10000 });
+        this.verifyProgressBarNotExist()
             .enterNewCategoryName(categoryName, isFirstTime)
             .verifyNewCategoryEnteredName(categoryName)
             .Page.formAddButton().click();

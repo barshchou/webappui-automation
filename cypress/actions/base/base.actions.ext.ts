@@ -8,6 +8,7 @@
  */
 import BasePage from "../../pages/base/base.page";
 import BaseActions from "./base.actions";
+import { numberWithCommas } from "../../../utils/numbers.utils";
 
 export default class BaseActionsExt<T extends BasePage> extends BaseActions {
     Page: T;
@@ -107,10 +108,26 @@ export default class BaseActionsExt<T extends BasePage> extends BaseActions {
     }
 
     // TODO: QA-6548 Removed cy.wait() when we determine how to save changes after editing
-    enterFormCommentTextBox(name: string, text: string): this {
-        this.Page.formCommentTextBox(name).realClick({ position: "bottom" }).type(text);
-        this.Page.Header.realClick();
+    enterFormCommentTextBox(name: string, text: string, isClickHeader = true): this {
+        this.Page.formCommentTextBox(name).realClick({ position: "bottomRight" }).type(text);
+        if (isClickHeader) {
+            this.Page.Header.realClick();
+        }
         cy.wait(1000);
+        return this;
+    }
+
+    clearFormCommentTextBox(name: string): this {
+        this.Page.formCommentTextBox(name).realClick().realPress([ "Control", "A" ])
+            .realPress("Backspace");
+        return this;
+    }
+
+    verifyFormCommentTextBoxText(name: string, textToBe: string | number, matcher = "contain.text"): this {
+        let expectedText = typeof textToBe ===  "number"
+            ? `${numberWithCommas(textToBe)}`
+            : textToBe;
+        this.Page.formCommentTextBox(name).should(matcher, expectedText);
         return this;
     }
 
@@ -130,9 +147,26 @@ export default class BaseActionsExt<T extends BasePage> extends BaseActions {
         this.Page.formCommentTextBox(sectionName).scrollIntoView().realClick();
         this.Page.formCommentTextBox(sectionName).type(`{ESC}`);
         this.Page.formCommentTextBox(sectionName).focus();
-        this.Page.formRevertToOriginalBtn().click();
-        this.Page.formYesRevertBtn.click();
+        this.Page.formRevertToOriginalBtnBySectionName(sectionName).click({ force: true });
+        this.clickFormYesRevertButton();
         this.saveCmsSettings();
+        return this;
+    }
+
+    revertToOriginalCommentarySectionByName(name: string): this {
+        this.Page.formCommentTextBox(name).realClick();
+        this.clickRevertToOriginalButtonBySection(name)
+            .clickFormYesRevertButton();
+        return this;
+    }
+
+    clickFormYesRevertButton(): this {
+        this.Page.formYesRevertBtn.click();
+        return this;
+    }
+
+    clickRevertToOriginalButtonBySection(name: string): this {
+        this.Page.formRevertToOriginalBtnBySectionName(name).click();
         return this;
     }
 

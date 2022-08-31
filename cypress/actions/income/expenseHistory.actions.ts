@@ -273,9 +273,8 @@ class ExpenseHistoryActions extends BaseActionsExt<typeof expenseHistoryPage> {
     enterNewCategoryName(name: string, isFirstEnter = true): ExpenseHistoryActions {
         expenseHistoryPage.newCategoryNameInput.should("have.attr", "placeholder", "Enter Custom Expense...");
         expenseHistoryPage.newCategoryNameInput.type(`${name}`);
-        if (isFirstEnter) {
-            cy.contains(`${name} will be created`).should("exist");
-        }
+        const textHelper = isFirstEnter ? `${name} will be created` : `${name} selected from existed`;
+        cy.contains(textHelper).should("exist");
         expenseHistoryPage.newCategoryNameInput.type("{downArrow}{enter}");
         return this;
     }
@@ -290,9 +289,9 @@ class ExpenseHistoryActions extends BaseActionsExt<typeof expenseHistoryPage> {
         return this;
     }
 
-    addNewCategoryAndVerify(categoryName: string, isClickSave = false): ExpenseHistoryActions {
+    addNewCategoryAndVerify(categoryName: string, isClickSave = false, isFirstEnter = true): ExpenseHistoryActions {
         this.clickAddExpenseCategoryButton()
-            .enterNewCategoryName(categoryName)
+            .enterNewCategoryName(categoryName, isFirstEnter)
             .verifyNewCategoryEnteredName(categoryName)
             .Page.formAddButton().should("not.be.disabled").click();
         this.verifyCategoryExists(toCamelCase(categoryName))

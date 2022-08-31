@@ -17,7 +17,7 @@ describe(`Prospective Market Value As Stabilized -> Less Other Rent Loss data is
             createReport(testData.reportCreationData);
 
             cy.stepInfo(`2. Go to Key Info page, fill in the Date of Valuation (As Is) and click Save button`);
-            NavigationSection.navigateToReportInformation();
+            NavigationSection.navigateToReportKeyInfo();
             Report._KeyInfo.enterDateByType(testData.valuationDateFixture);
 
             cy.stepInfo(`3. Go to Property → Summary and set the number of Residential and Commercial Units`);

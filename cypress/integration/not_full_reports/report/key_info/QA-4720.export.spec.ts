@@ -16,25 +16,27 @@ ACAS reports for Property Rights Appraised and Definition
         Property._Summary.enterBuildingName(testData.buildingName);
 
         cy.stepInfo("1. Proceed to the Report > Key Info page.");
-        _NavigationSection.navigateToReportInformation();
+        _NavigationSection.navigateToReportKeyInfo();
 
         cy.stepInfo(`2.Enter the “=“ and verify the "Linked" chips dropdown for both sections: 
         options 'Gross Building Area', 'Building Name', 'Property Type', 'Residential Unit Count', 
         'Commercial Unit Count', 'Street Address', 'Street Name', 'Site Area', 'Year Built', 'Block', 
         'Lot', 'Concluded Cap Rate', 'Zones', 'Condition'.`);
-        Report._KeyInfo.activateTextAreaInput(Report._KeyInfo.Page.textBoxPropertyRightsAppraised);
+        Report._KeyInfo.activateTextAreaInput(Report._KeyInfo.Page
+            .formCommentTextBox(testData.propertyRightsAppraisedTitle));
         testData.chips.forEach(chip => {
-            Report._KeyInfo.enterPropertyRightsAppraisedComment(`=${chip.typeSuggestValue}`, false, false, false);
-            Report._KeyInfo.clickNarrativeSuggestions(chip.suggestionName);
-            Report._KeyInfo.verifyCommentaryContainsText(chip.verifySuggest, 
-                testData.propertyRightsAppraisedCommentaryTitle);
+            Report._KeyInfo.enterFormCommentTextBox(testData.propertyRightsAppraisedTitle,
+                `=${chip.typeSuggestValue}`, false)
+                .clickNarrativeSuggestions(chip.suggestionName)
+                .verifyFormCommentTextBoxText(testData.propertyRightsAppraisedTitle, chip.verifySuggest);
         });
-        Report._KeyInfo.activateTextAreaInput(Report._KeyInfo.Page.textBoxDefinitionOfMarketValue());
+        Report._KeyInfo.activateTextAreaInput(Report._KeyInfo.Page
+            .formCommentTextBox(testData.definitionOfMarketValueTitle));
         testData.chips.forEach(chip => {
-            Report._KeyInfo.enterDefinitionMarketValue(`=${chip.typeSuggestValue}`, false, false, false);
-            Report._KeyInfo.clickNarrativeSuggestions(chip.suggestionName, 1);
-            Report._KeyInfo.verifyCommentaryContainsText(chip.verifySuggest, 
-                testData.definitionOfMarketValueCommentaryTitle);
+            Report._KeyInfo.enterFormCommentTextBox(testData.definitionOfMarketValueTitle,
+                `=${chip.typeSuggestValue}`, false)
+                .clickNarrativeSuggestions(chip.suggestionName, 2)
+                .verifyFormCommentTextBoxText(testData.definitionOfMarketValueTitle, chip.verifySuggest);
         });
         Report._KeyInfo.inactivateTextAreaInput()
             .clickSaveButton();
