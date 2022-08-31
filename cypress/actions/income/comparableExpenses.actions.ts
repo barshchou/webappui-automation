@@ -25,7 +25,7 @@ class ComparableExpensesActions extends BaseActionsExt<typeof compExpensesPage> 
     }
 
     enterCityByColumnIndex(location: string, index = 0): ComparableExpensesActions {
-        compExpensesPage.getUnifiedEditableAndTotalCells("city").eq(index).realClick().realClick().scrollIntoView()
+        compExpensesPage.getUnifiedEditableAndTotalCells("city").eq(index).dblclick().scrollIntoView()
             .focus().type("something").clear().realType(`${location}{enter}`);
         compExpensesPage.getUnifiedEditableAndTotalCells("city").eq(index)
             .children(compExpensesPage.elementToCheckCellTextSelector)
@@ -53,7 +53,7 @@ class ComparableExpensesActions extends BaseActionsExt<typeof compExpensesPage> 
 
     enterResidentialUnitsByColumnIndex(value: number, index = 0): ComparableExpensesActions {
         compExpensesPage.getUnifiedEditableAndTotalCells("residentialUnits").eq(index)
-            .realClick().realClick().scrollIntoView()
+            .dblclick().scrollIntoView()
             .focus().type("something").clear().realType(`${value}{enter}`);
         compExpensesPage.getUnifiedEditableAndTotalCells("residentialUnits").eq(index)
             .children(compExpensesPage.elementToCheckCellTextSelector).should("have.text", value);
@@ -64,7 +64,7 @@ class ComparableExpensesActions extends BaseActionsExt<typeof compExpensesPage> 
     ComparableExpensesActions {
         const valueToBe = `$${numberWithCommas(value.toFixed(2))}`;
         cellsElements.eq(index).as("cell");
-        cy.get("@cell").realClick().realClick().scrollIntoView().focus()
+        cy.get("@cell").dblclick().scrollIntoView().focus()
             .type("something").clear().realType(`${value}{enter}`);
         cy.get("@cell").children(compExpensesPage.elementToCheckCellTextSelector)
             .should("have.text", valueToBe);
