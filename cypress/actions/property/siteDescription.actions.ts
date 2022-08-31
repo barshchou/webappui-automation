@@ -68,14 +68,6 @@ class SiteDescriptionActions extends BaseActionsExt<typeof siteDescriptionPage> 
         });
         return this;
     }
-    
-    /*
-     * verifyGeneratedCommentary(textToBe: string): SiteDescriptionActions {
-     *     siteDescriptionPage.formCommentTextBox(Enums.PAGES_TEXTBOX_NAMES.locationDescriptionExport)
-     *         .should("have.text", textToBe);
-     *     return this;
-     * }
-     */
 }
 
 export default new SiteDescriptionActions(siteDescriptionPage);
