@@ -452,7 +452,52 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
         return this;
     }
 
-    
+    updateCompGba(gbaValue: number, yearBuilt = "1970"): FindCompsActions {
+        this.openCompPropertyInfoForEdit();
+        findCompsPage.gbaNewComp.as(compPlex.gbaNewComp);
+        findCompsPage.yearBuiltNewComp.as(compPlex.yearBuiltNewComp);
+
+        this.clearNumericInputNewComp(compPlex.gbaNewComp);
+        cy.get(`@${compPlex.gbaNewComp}`).focus();
+        cy.get(`@${compPlex.gbaNewComp}`).realType(`{enter}${gbaValue}`, { pressDelay: 45, delay: 50 });
+        this.clearNumericInputNewComp(compPlex.yearBuiltNewComp);
+        cy.get(`@${compPlex.yearBuiltNewComp}`).realClick();
+        cy.get(`@${compPlex.yearBuiltNewComp}`).realType(`{enter}${yearBuilt}`, { pressDelay: 45, delay: 50 });
+        findCompsPage.propertyDoneButton.click();
+        
+        return this;
+    }
+
+    updateContractPrice(price: number): FindCompsActions {
+        this.openCompSaleInfoForEdit();
+        findCompsPage.contractPriceInput.as(compPlex.contractPrice);
+        this.clearNumericInputNewComp(compPlex.contractPrice);
+        cy.get(`@${compPlex.contractPrice}`).focus();
+        cy.get(`@${compPlex.contractPrice}`).realType(`{enter}${price}`, { pressDelay: 45, delay: 50 });
+        findCompsPage.saleInformationDone.click();
+
+        return this;
+    }
+
+    openCompForEdit(index = 0): FindCompsActions {
+        findCompsPage.compEditButton(index).click();
+        return this;
+    }
+
+    saveCompChanges(): FindCompsActions {
+        findCompsPage.saveCompProperty.realClick();
+        return this;
+    }
+
+    openCompPropertyInfoForEdit(): FindCompsActions {
+        findCompsPage.compModalEditButton.click();
+        return this;
+    }
+
+    openCompSaleInfoForEdit(): FindCompsActions {
+        findCompsPage.saleInformationEditButton.click();
+        return this;
+    }
 }
 
 export default new FindCompsActions(findCompsPage);

@@ -4,20 +4,24 @@ import NavigationSection from "../../../../actions/base/navigationSection.action
 import { createReport } from "../../../../actions/base/baseTest.actions";
 import { ReviewExport } from "../../../../actions";
 
-describe("Adjusted Price per Residential Unit in Sales Adjustment Grid is calculated with correct formula", 
+describe("Adjusted Price per SF in Sales Adjustment Grid is calculated with correct formula", 
     { tags: [ "@adjust_comps", "@sales", "@check_export" ] }, () => {
 
         it("Test body", () => {
             createReport(testData.reportCreationData);
 
             NavigationSection.navigateToFindComps();
-            Sales.FindComps.selectCompFromMap();
+            Sales.FindComps.selectCompFromMap()
+                .openCompForEdit()
+                .updateCompGba(testData.compGbaInput)
+                .updateContractPrice(testData.contractPrice)
+                .saveCompChanges();
         
             NavigationSection.navigateToAdjustComps();
             Sales.AdjustComps.checkCalculationUnitsRadio(testData.calculationUnits)
                 .enterMarketAdjustmentsGroup(Object.keys(testData.comparableAdjustment), 
                     Object.values(testData.comparableAdjustment))
-                .verifyTrendedPricePerBasis(Object.values(testData.comparableAdjustment), testData.basis, 0, true);
+                .verifyTrendedPricePerBasis(Object.values(testData.comparableAdjustment), testData.basis);
 
             cy.stepInfo(`[QA-4109] -> 'Cumulative Price Per SF' is displayed in bold`);
             Sales.AdjustComps.Actions.checkCumulativePriceName("SF");

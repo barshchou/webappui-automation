@@ -177,9 +177,8 @@ class AdjustCompsActions extends BaseActionsExt<typeof adjustCompsPage> {
      * Verify that Trended Price per selected @param {string} basis adjusted based on
      * Net Market adjustment total value
      */
-    verifyTrendedPricePerBasis(
-        comparablesAdjustments: number[], basis: string, index = 0, isEmpty = false
-    ): AdjustCompsActions {
+    verifyTrendedPricePerBasis(comparablesAdjustments: number[], basis: string, index = 0, isEmpty = false): 
+    AdjustCompsActions {
         adjustCompsPage.viewMarketDetails.click();
         adjustCompsPage.getPricePerBasisValue(basis).should("be.visible");
         adjustCompsPage.getPricePerBasisValue(basis).invoke("text").then(pricePerUnitText => {

@@ -180,6 +180,34 @@ class FindCompsPage extends BasePage {
     get sfNewComp() {
         return cy.get('[title="SF"]');
     }
+
+    compEditButton(index = 0) {
+        return this.getSelectedComparable(index).xpath(`//button[.='Details']`);
+    }
+
+    get compModalEditButton() {
+        return cy.get(`[data-qa="property-info-edit-btn"]`);
+    }
+
+    get propertyDoneButton() {
+        return cy.get(`[data-qa="property-info-done-btn"]`);
+    }
+
+    get saveCompProperty() {
+        return cy.get(`[class="ant-modal-footer"]`, { includeShadowDom: true }).find("button").eq(1);
+    }
+
+    get saleInformationEditButton() {
+        return cy.get(`[data-qa="sale-info-edit-btn"]`);
+    }
+
+    get contractPriceInput() {
+        return cy.get(`[data-qa="Contract Price"]`);
+    }
+
+    get saleInformationDone() {
+        return cy.get(`[data-qa="sale-info-done-btn"]`);
+    }
 }
 
 /**
