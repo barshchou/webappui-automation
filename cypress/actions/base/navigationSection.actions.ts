@@ -406,7 +406,8 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         this.clickIncomeApproachButton()
             .clickExpenseForecastButton()
             .submitSaveChangesModal()
-            .waitForUrl(routesUtils.expenseForecast);
+            .waitForUrl(routesUtils.expenseForecast)
+            .verifyProgressBarNotExist();
         return this;
     }
 
