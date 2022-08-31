@@ -5,11 +5,11 @@ class ClientPage extends BasePage {
 
     get warningMessage() { return cy.xpath("//*[contains(@data-qa, 'callout-btn')]/parent::*"); }
 
-    get clientNameField() { return cy.get("*[name=client]"); }
+    getClientNameField(index = 0) { return cy.get("[name=client]").eq(index); }
 
-    get clientFileNumberField() { return cy.get('[name="clientFileNumber"]'); }
+    getClientFileNumberField(index = 0) { return cy.get(`[name='reportClients[${index}].clientFileNumber']`); }
 
-    get nycbApplicationNumber() { return cy.get("[name=applicationNumber]"); }
+    getNYCBApplicationNumber(index = 0) { return cy.get(`[name='reportClients[${index}].applicationNumber']`); }
 
     get addClientButton() { return cy.xpath("//a[.='Add']"); }
 

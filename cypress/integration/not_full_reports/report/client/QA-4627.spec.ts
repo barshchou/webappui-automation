@@ -30,12 +30,12 @@ conditionalDescribe("[QA-4627] Verify the functionality of the Client field.",
             cy.go("back");
             Report._Client.verifyProgressBarNotExist()
                 .enterClientName(testData.shortTextToType);
-            Report._Client.Page.clientNameField.should("have.value", testData.textToType);
+            Report._Client.Page.getClientNameField().should("have.value", testData.textToType);
 
             cy.stepInfo(`5. Verify that the Client can be selected by entering manually 
             the full First and Last name, save it.`);
             Report._Client.enterClientName(testData.textToType);
-            Report._Client.Page.clientNameField.should("have.value", testData.textToType);
+            Report._Client.Page.getClientNameField().should("have.value", testData.textToType);
 
             cy.stepInfo(`6. Verify the Client Company is displayed in the Intended User and 
             Identification of the Client section as a chip and to the Client Guidelines Discussion - 
