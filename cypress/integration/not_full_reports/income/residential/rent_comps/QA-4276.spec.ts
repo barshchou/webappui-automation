@@ -10,7 +10,7 @@ describe(`Verify Sort By drop-down field for results sorting on Map filter secti
         createReport(testData.reportCreationData);
     });
 
-    it("Test body", () => {
+    it("[QA-4276]", () => {
         NavigationSection.navigateToRentComps()
             .verifyProgressBarNotExist();
         testData.sortByOptions.forEach(option => {
