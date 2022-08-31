@@ -10,17 +10,17 @@ describe('[QA-4429] Check the Introduction page',
         it("Test for NYC properties", () => {
             cy.stepInfo("1. Create a report");
             createReport(testData.nycReport);
-    
+
             cy.stepInfo(`2. Navigate to Report > Client and edit Identification of the Client 
                             and Intended User Text`);
             _NavigationSection.navigateToSourceInformation();
     
             Final._SourceInformation.enterFormCommentTextBox(testData.backLinkNames, testData.typeValue);
-    
+
             cy.stepInfo("3. Navigate to PreviewAndEdit > Introduction and verify exist and modified");
             _NavigationSection.navigateToIntroduction();
             PreviewEdit._Introduction.Page.SwitchEditBtn.click();
-    
+
             PreviewEdit._Introduction.Page.getChipModified(testData.title).should("be.visible");
             PreviewEdit._Introduction.Page.getTextFromTextArea(testData.title)
                 .should("include.text", testData.typeValue);
@@ -41,7 +41,7 @@ describe('[QA-4429] Check the Introduction page',
     
             cy.stepInfo(`2. Navigate to Report > Client and edit Identification of the Client 
                             and Intended User Text`);
-            _NavigationSection.navigateToSourceInformation();
+            _NavigationSection.navigateSourceInformation();
     
             Final._SourceInformation.enterFormCommentTextBox(testData.backLinkNames, testData.typeValue);
     
