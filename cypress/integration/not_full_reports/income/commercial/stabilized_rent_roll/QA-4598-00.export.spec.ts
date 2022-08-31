@@ -53,7 +53,7 @@ new narrative component added through "=" in the Generated Commentary on the Sta
                     let expectedText = typeof chip.verifyExport ===  "number" 
                         ? `${numberWithCommas(chip.verifyExport)}`
                         : chip.verifyExport;
-                    cy.contains("Commercial Stabilized Rent Roll").next().scrollIntoView()
+                    cy.contains(testData.exportSectionName).next().scrollIntoView()
                         .should("include.text", expectedText);
                 });
             }); 
@@ -104,7 +104,7 @@ new narrative component added through "=" in the Generated Commentary on the Sta
                     let expectedText = typeof chip.verifyExport ===  "number" 
                         ? `${numberWithCommas(chip.verifyExport)}`
                         : chip.verifyExport;
-                    cy.contains("Commercial Stabilized Rent Roll").next().scrollIntoView()
+                    cy.contains(testData.exportSectionName).next().scrollIntoView()
                         .should("include.text", expectedText);
                 });
             }); 
@@ -156,7 +156,7 @@ new narrative component added through "=" in the Generated Commentary on the Sta
                     let expectedText = typeof chip.verifyExport ===  "number" 
                         ? `${numberWithCommas(chip.verifyExport)}`
                         : chip.verifyExport;
-                    cy.contains("Commercial Stabilized Rent Roll").next().scrollIntoView()
+                    cy.contains(testData.exportSectionName).next().scrollIntoView()
                         .should("include.text", expectedText);
                 });
             }); 

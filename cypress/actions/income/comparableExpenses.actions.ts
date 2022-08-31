@@ -1,6 +1,7 @@
 import compExpensesPage from "../../pages/income/comparableExpenses.page";
 import { getNumberFromDollarNumberWithCommas, numberWithCommas } from "../../../utils/numbers.utils";
 import BaseActionsExt from "../base/base.actions.ext";
+import { toCamelCase } from "../../../utils/string.utils";
 
 class ComparableExpensesActions extends BaseActionsExt<typeof compExpensesPage> {
 
@@ -177,6 +178,47 @@ class ComparableExpensesActions extends BaseActionsExt<typeof compExpensesPage> 
             .verifyDollarCellsAverage("miscellaneous")
             .verifyDollarCellsAverage("management")
             .verifyDollarCellsAverage("reserves");
+        return this;
+    }
+
+    clickAddCustomExpenseCategoryButton(): ComparableExpensesActions {
+        compExpensesPage.addCustomExpenseCategoryButton.click();
+        return this;
+    }
+
+    enterNewCategoryName(name: string, isFirstEnter = true): ComparableExpensesActions {
+        compExpensesPage.newCategoryNameInput.should("have.attr", "placeholder", "Enter Custom Expense...")
+            .and("have.attr", "required");
+        compExpensesPage.newCategoryNameInput.type(`${name}`);
+        if (isFirstEnter) {
+            compExpensesPage.newCategoryInputSuggestionDropdown.should("contain.text", `Create "${name}"`);
+        }
+        compExpensesPage.newCategoryNameInput.type("{enter}");
+        return this;
+    }
+
+    verifyNewCategoryEnteredName(nameToBe: string): ComparableExpensesActions {
+        compExpensesPage.newCategoryNameInput.should("have.value", nameToBe);
+        return this;
+    }
+
+    /**
+     * @param categoryName
+     * @param isFirstTime If this parameter is passed, it means that we enter this new category for the first time
+     * in this report, we create it, in this case the function will check, that suggestion dropdown will contain
+     * 'Create' word
+     */
+    addNewCategoryAndVerify(categoryName: string, isFirstTime = true): ComparableExpensesActions {
+        this.clickAddCustomExpenseCategoryButton()
+            .enterNewCategoryName(categoryName, isFirstTime)
+            .verifyNewCategoryEnteredName(categoryName)
+            .Page.formAddButton().click();
+        this.verifyRowExists(toCamelCase(categoryName));
+        return this;
+    }
+
+    verifyRowExists(rowName: string): ComparableExpensesActions {
+        compExpensesPage.getUnifiedRow(rowName).should("exist");
         return this;
     }
 }

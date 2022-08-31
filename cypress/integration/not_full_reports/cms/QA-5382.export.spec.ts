@@ -1,5 +1,5 @@
 import { _HomePage } from '../../../actions/base';
-import { createReport } from '../../../actions/base/baseTest.actions';
+import { createReport, loginAction } from '../../../actions/base/baseTest.actions';
 import { PreviewEdit, ReviewExport } from '../../../actions';
 import { _NavigationSection } from '../../../actions/base';
 import testData from "../../../fixtures/not_full_reports/cms/QA-5382.fixture";
@@ -33,11 +33,6 @@ conditionalDescribe("Verify possibility to edit text",
             _NavigationSection.openReviewAndExport();
             ReviewExport.generateDocxReport().waitForReportGenerated()
                 .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
-
-            cy.stepInfo('5. Revert commentary to original');
-            _NavigationSection.navigateToContentManagementSystem();
-            _CmsBaseActions.openCertificationPage()
-                .revertSectionToOriginal(testData.sectionName);
         });
 
         it(`Check export`, () => {
@@ -47,12 +42,21 @@ conditionalDescribe("Verify possibility to edit text",
                     cy.visit(<string>file);
 
                     cy.stepInfo(`6. Verify commentary text in exported report`);
-                    cy.xpath(`//h1[.='Certification']`).scrollIntoView().next().next().find("li").eq(0)
+                    cy.xpath(`//h1[.='${testData.exportSectionName}']`).scrollIntoView().next().next().find("li").eq(0)
                         .should('contain.text', testData.textUpdate);
                 });
         });
 
-        after('Remove feature flag', () => {
+        afterEach('Revert commentary to original and remove feature flags', () => {
+            cy.stepInfo('Revert commentary to original');
+            if (!Cypress.currentTest.title.includes("Check export")) {
+                loginAction();
+                _NavigationSection.navigateToContentManagementSystem();
+                _CmsBaseActions.openLetterOfTransmittalPage()
+                    .revertSectionToOriginal(testData.sectionName);
+            }
+
+            cy.stepInfo('Remove feature flags');
             launchDarklyApi.removeUserTarget(testData.reportTextEditorFlagKey);
             launchDarklyApi.removeUserTarget(testData.swotAnalysisFlagKey);
         });

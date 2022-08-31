@@ -20,5 +20,7 @@ export default {
     valueConclusionAsStabilized: Enums.VALUE_CONCLUSION_NAME.asStabilized,
     valueConclusionAsComplete: Enums.VALUE_CONCLUSION_NAME.asStabilized,
     valueConclusionAsIs: Enums.VALUE_CONCLUSION_NAME.asStabilized,
-    general: Object.freeze(generalFixture())
+    valueOpinionSection: Enums.EXPORT_TITLES.valueOpinionViaTheSalesComparisonApproach,
+    concludedValueSection: Enums.EXPORT_TITLES.concludedValuePerUnit,
+    general: Object.freeze(generalFixture()),
 };

@@ -26,7 +26,7 @@ describe("[QA-4069] Check the helper text for Provided Documents)",
                     cy.visit(<string>file);
                     
                     cy.stepInfo(`3. Verify uploaded file in following the Rent Roll & Financial Statements`);
-                    cy.contains("Letter of Engagement").next().scrollIntoView().should("be.visible");
+                    cy.contains(testData.exportSectionName).next().scrollIntoView().should("be.visible");
                 }); 
         });
     });

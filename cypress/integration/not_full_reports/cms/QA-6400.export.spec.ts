@@ -50,7 +50,6 @@ conditionalDescribe("Verify page and possibility to edit text",
                             const reportSectionText = $li.toArray().map(li => li.innerHTML);
                             expect(section.languages).to.deep.eq(reportSectionText);
                         });
-                    
                     });
                 });
         });

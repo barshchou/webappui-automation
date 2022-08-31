@@ -4,7 +4,7 @@ import { createReport } from "../../../../actions/base/baseTest.actions";
 import testData from '../../../../fixtures/not_full_reports/report/client/QA-4641.fixture';
 
 describe(`[QA-4641] Verify the "Linked" chips dropdown in the new narrative component for As Is and As Stabilized 
-    report for Intended User and Identification of the Client sections`,
+        report for Intended User and Identification of the Client sections`,
 { tags:[ "@report", "@client", "@check_export" ] }, () => {
 
     it("Test body",  () => {
@@ -20,10 +20,10 @@ describe(`[QA-4641] Verify the "Linked" chips dropdown in the new narrative comp
             .verifyProgressBarNotExist();
 
         cy.stepInfo(`2. Enter the “=“ and verify the "Linked" chips dropdown for Intended User 
-        and Identification of the Client sections: 
-        options 'Gross Building Area', 'Building Name', 'Property Type', 'Residential Unit Count', 
-        'Commercial Unit Count', 'Street Address', 'Street Name', 'Site Area', 'Year Built', 
-        'Block', 'Lot', 'Concluded Cap Rate', 'Zones', 'Condition'.`); 
+                    and Identification of the Client sections: 
+                    options 'Gross Building Area', 'Building Name', 'Property Type', 'Residential Unit Count', 
+                    'Commercial Unit Count', 'Street Address', 'Street Name', 'Site Area', 'Year Built', 
+                    'Block', 'Lot', 'Concluded Cap Rate', 'Zones', 'Condition'.`); 
         Report._Client.activateTextAreaInput( Report._Client.Page.intendedUserTextBox);
         testData.chips.forEach(chip => {
             Report._Client.enterIntendedUser(`=${chip.typeSuggestValue}`, false, false, false)
@@ -53,9 +53,9 @@ describe(`[QA-4641] Verify the "Linked" chips dropdown in the new narrative comp
                 cy.visit(<string>file);
 
                 testData.chips.forEach(item => {
-                    cy.contains("Identification of the Client").next().scrollIntoView()
+                    cy.contains(testData.identificationOfTheClientSection).next().scrollIntoView()
                         .should("include.text", item.verifyExport);
-                    cy.contains("Intended Use & User").next().next().scrollIntoView()
+                    cy.contains(testData.intendedUseSection).next().next().scrollIntoView()
                         .should("include.text", item.verifyExport);
                 });
             });

@@ -44,13 +44,13 @@ describe("Verify the functionality of the Ceiling Height radio button",
                     cy.visit(<string>file);
 
                     cy.stepInfo(`6. [QA-4430] Verify that the commentary exports in the Introduction 
-                    as a sentence in the Introduction > Exposure Time section `);
-                    cy.xpath("//h2[text() = 'Exposure Time']/following-sibling::p").eq(0)
+                                as a sentence in the Introduction > Exposure Time section `);
+                    cy.xpath(`//h2[text() = '${testData.exposureTimeSection}']/following-sibling::p`).eq(0)
                         .should("have.text", testData.exposureTimeDescriptionCustom);
 
                     cy.stepInfo(`7. [QA-4442] Verify that the commentary exports in the Introduction 
-                    as a sentence in the Introduction > Exposure Time section `);
-                    cy.xpath("//h2[text() = 'Marketing Time']/following-sibling::p").eq(0)
+                                as a sentence in the Introduction > Exposure Time section `);
+                    cy.xpath(`//h2[text() = '${testData.marketingTimeSection}']/following-sibling::p`).eq(0)
                         .should("have.text", testData.marketingTimeDescriptionCustom);
                 });
         });
