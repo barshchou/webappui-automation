@@ -454,10 +454,9 @@ class TaxInfoActions extends BaseActionsExt<typeof taxInfoPage> {
                 const sumAssessments = assessments.reduce((a, b) => a + b);
                 taxInfoPage.getTaxLiabilityRowValue("Taxable Assessed Value").invoke("text")
                     .then(taxAssessedText => {
-                        const allTaxAssessedNumber = sumAssessments +
-                            getNumberFromDollarNumberWithCommas(taxAssessedText);
                         const taxLiabilityTotalToBe =
-                            `$${numberWithCommas((allTaxAssessedNumber * taxRatesPercent).toFixed(2))}`;
+                            `$${numberWithCommas((getNumberFromDollarNumberWithCommas(taxAssessedText) 
+                                * taxRatesPercent + sumAssessments).toFixed(2))}`;
                         taxInfoPage.getTaxLiabilityRowValue("Tax Liability (Total)")
                             .should("have.text", taxLiabilityTotalToBe);
                     });
