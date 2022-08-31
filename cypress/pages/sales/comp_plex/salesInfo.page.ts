@@ -58,4 +58,8 @@ export default class SaleInformationForm {
     getSaleStatus(status: CompPlex.SaleInfo.SaleStatus) {
         return cy.get(`[label="${status}"]`);
     }
+
+    get contractPriceInput() {
+        return cy.get(`[data-qa="Contract Price"]`);
+    }
 }

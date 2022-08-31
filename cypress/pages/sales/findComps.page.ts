@@ -182,6 +182,14 @@ class FindCompsPage extends BasePage {
     get sfNewComp() {
         return cy.get('[title="SF"]');
     }
+
+    compEditButton(index = 0) {
+        return this.getSelectedComparable(index).xpath(`//button[.='Details']`);
+    }
+
+    get saveCompProperty() {
+        return cy.get(`[class="ant-modal-footer"]`, { includeShadowDom: true }).find("button").eq(1);
+    }
 }
 
 /**

@@ -14,6 +14,7 @@ and Definition of Market Value sections`,
     it(`[QA-4703][Report > Key Info] Verify the Property Rights Appraised and Definition 
          of Market Value sections can be edited`, () => {
         cy.stepInfo(`1. On the Report > Key Info page click inside the Property Rights Appraised section.`);
+        // TODO: [QA-6759] AQA - Remove duplicate navigation to KeyInfo page
         _NavigationSection.navigateToPropertySummary()
             .navigateToReportKeyInfo();
         Report._KeyInfo.activateTextAreaInput( Report._KeyInfo.Page

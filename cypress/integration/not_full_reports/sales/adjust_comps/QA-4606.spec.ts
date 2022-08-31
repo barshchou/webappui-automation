@@ -30,7 +30,7 @@ describe("[QA-4606] Check the reference 'Condition' line in the Sales Adjustment
 
                 cy.stepInfo(`5. Verify that the subject column displays the subject 
                 property condition as set in Property > Property Description > Site Description`);
-                Sales._AdjustComps.clickViewAdjustmentDetails()
+                Sales._AdjustComps.expandAdjustmentDetails(testData.adjustmentName)
                     .verifyExistValueInOtherAdjustmentDetails(testData.propertyCondition);
             }); 
         });

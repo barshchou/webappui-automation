@@ -14,6 +14,7 @@ describe("[QA-4364] Pre-fill Inspection Date from Salesforce - deletion of the D
 
         it("Test body", () => {
             cy.stepInfo("2. Go to Report → Key Info → Engagement tab and delete the Date of Valuation");
+            // TODO: [QA-6759] AQA - Remove duplicate navigation to KeyInfo page
             _NavigationSection.navigateToReportKeyInfo();
             Report._KeyInfo.Page.getDateInputByQA(testData.nameInputByQA).clear().should("be.empty");
         });

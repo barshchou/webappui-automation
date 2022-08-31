@@ -12,6 +12,7 @@ describe("[QA-4426] Check the generated commentary for Property Rights Appraised
                 cy.stepInfo(`${index + 1}. Login, create report`);
                 createReport(reportCreationFixture(item.reportConclusion, `_${index + 1}`));
 
+                // TODO: [QA-6759] AQA - Remove duplicate navigation to KeyInfo page
                 cy.stepInfo(`1. Report > Key Info`);
                 _NavigationSection.navigateToReportKeyInfo();
 

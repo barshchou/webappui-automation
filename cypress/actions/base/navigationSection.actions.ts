@@ -290,7 +290,8 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
     navigateToProfileOrganization(nameLink: string): NavigationSectionActions {
         this.clickProfileOrganization()
             .selectLink(nameLink)
-            .submitSaveChangesModal();
+            .submitSaveChangesModal()
+            .waitForUrl(routesUtils.organizationInfo);
         return this;
     }
 
@@ -302,7 +303,8 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
     }
 
     navigateToLaundry(): NavigationSectionActions {
-        this.clickMiscellaneousMenuIfClosed()
+        this.clickIncomeApproachButton()
+            .clickMiscellaneousMenuIfClosed()
             .clickLaundryButton()
             .submitSaveChangesModal()
             .waitForUrl(routesUtils.laundryIncome);
@@ -310,7 +312,8 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
     }
 
     navigateToStorage(): NavigationSectionActions {
-        this.clickMiscellaneousMenuIfClosed()
+        this.clickIncomeApproachButton()
+            .clickMiscellaneousMenuIfClosed()
             .clickStorageButton()
             .submitSaveChangesModal()
             .waitForUrl(routesUtils.storageIncome);
@@ -318,7 +321,8 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
     }
 
     navigateToOther(): NavigationSectionActions {
-        this.clickMiscellaneousMenuIfClosed()
+        this.clickIncomeApproachButton()
+            .clickMiscellaneousMenuIfClosed()
             .clickOtherButton()
             .submitSaveChangesModal()
             .waitForUrl(routesUtils.otherIncome);
@@ -326,7 +330,8 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
     }
 
     navigateToParking(): NavigationSectionActions {
-        this.clickMiscellaneousMenuIfClosed()
+        this.clickIncomeApproachButton()
+            .clickMiscellaneousMenuIfClosed()
             .clickParkingButton()
             .submitSaveChangesModal()
             .waitForUrl(routesUtils.parkingIncome);

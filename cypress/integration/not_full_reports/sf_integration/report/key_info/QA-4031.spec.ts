@@ -14,6 +14,7 @@ describe("[QA-4031] Verify the export of the report with the Pre-filled Report D
                             the JOB # of an open job on SalesForce)`);
                 createReport(reportCreationData(value.jobNumber));
     
+                // TODO: [QA-6759] AQA - Remove duplicate navigation to KeyInfo page
                 cy.stepInfo("2. Navigate to the Report > Key Info page");
                 _NavigationSection.navigateToReportKeyInfo();
         

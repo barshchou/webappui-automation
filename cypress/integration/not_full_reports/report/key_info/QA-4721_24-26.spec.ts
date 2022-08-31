@@ -13,6 +13,7 @@ describe(`Verify the Save and Save & Continue button functionality on the Report
         });
 
         it("[QA-4721]", () => {
+            // TODO: [QA-6759] AQA - Remove duplicate navigation to KeyInfo page
             cy.stepInfo(`1. Proceed to the Report > Key Info page`);
             _NavigationSection.navigateToPropertySummary()
                 .navigateToReportKeyInfo();
@@ -41,6 +42,7 @@ describe(`Verify the Save and Save & Continue button functionality on the Report
         });
 
         it("[QA-4724]", () => {
+            // TODO: [QA-6759] AQA - Remove duplicate navigation to KeyInfo page
             cy.stepInfo(`1. Proceed to the Report > Key Info page`);
             _NavigationSection.navigateToPropertySummary()
                 .navigateToReportKeyInfo();
@@ -69,6 +71,7 @@ describe(`Verify the Save and Save & Continue button functionality on the Report
         });
 
         it("[QA-4725]", () => {
+            // TODO: [QA-6759] AQA - Remove duplicate navigation to KeyInfo page
             cy.stepInfo(`1. Proceed to the Report > Key Info page`);
             _NavigationSection.navigateToPropertySummary()
                 .navigateToReportKeyInfo();
@@ -118,6 +121,7 @@ describe(`Verify the Save and Save & Continue button functionality on the Report
         });
 
         it("[QA-4726]", () => {
+            // TODO: [QA-6759] AQA - Remove duplicate navigation to KeyInfo page
             cy.stepInfo(`1. Proceed to the Report > Key Info page`);
             _NavigationSection.openReviewAndExport()
                 .navigateToReportKeyInfo();

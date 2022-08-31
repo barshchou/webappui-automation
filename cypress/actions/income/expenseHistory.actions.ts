@@ -212,7 +212,7 @@ class ExpenseHistoryActions extends BaseActionsExt<typeof expenseHistoryPage> {
 
     enterExpenseMonth(month: string): ExpenseHistoryActions {
         expenseHistoryPage.expenseMonthDropdown.click();
-        expenseHistoryPage.expenseMonthDropdownValue(month).click();
+        expenseHistoryPage.expenseMonthDropdown.type(`${month}{enter}`);
         this.verifyExpenseMonth(month);
         return this;
     }

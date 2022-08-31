@@ -48,7 +48,8 @@ const routes =  {
     residentialStabilizedRentRollSummary: "/residential-projected-rent-roll-summary",
     reportAppraiser: "/appraisers",
     renovation: "/renovations",
-    reviewExport: "/review-and-export"
+    reviewExport: "/review-and-export",
+    organizationInfo: "/organization-info"
 } as const;
 
 export default routes;

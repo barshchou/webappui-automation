@@ -12,7 +12,6 @@ describe("Verify the report export with a pre-filled Letter of Engagement from D
         
             cy.stepInfo(`2. Navigate to the Report > Key Info > Engagement and Verify that 
                         the Letter Of Engagement field is auto-filled from Dropbox`);
-            _NavigationSection.navigateToReportKeyInfo();
             Report._KeyInfo.Page.inputToCheckUpload.should("have.value", testData.verifyValue);
             
             // TODO: Create method for unchecking redundant checkboxes for export

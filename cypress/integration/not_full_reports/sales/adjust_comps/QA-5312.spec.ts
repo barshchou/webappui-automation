@@ -22,7 +22,7 @@ describe("Total Utility Adjustments in Sales Adjustment Grid is calculated with 
             _NavigationSection.navigateToAdjustComps();
         
             cy.stepInfo(`3. In the Sales adjustment grid click on the dropdown icon next to the Market Adjustment`);
-            Sales._AdjustComps.Page.getAdjustmentArrow(testData.adjustmentName).click();
+            Sales._AdjustComps.expandAdjustmentDetails(testData.adjustmentName);
         
             testData.numberOfSalesComps.forEach((index) => {
                 cy.stepInfo(`4. Click on the “View“ of any address`);

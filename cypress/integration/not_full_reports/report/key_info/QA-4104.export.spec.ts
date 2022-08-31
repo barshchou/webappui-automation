@@ -12,6 +12,7 @@ describe("[QA-4104] Verify the Market Value generated commentary",
                         Make sure that there is no Inspection Date in the Salesforce job`);
             createReport(testData.reportCreationData);
 
+            // TODO: [QA-6759] AQA - Remove duplicate navigation to KeyInfo page
             cy.stepInfo(`2. Go to Report > Key Info > Definition of Market Value`);
             _NavigationSection.navigateToReportKeyInfo();
         

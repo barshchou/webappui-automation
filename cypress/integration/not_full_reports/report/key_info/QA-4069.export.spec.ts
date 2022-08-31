@@ -10,6 +10,7 @@ describe("[QA-4069] Check the helper text for Provided Documents)",
             cy.stepInfo(`1. Create report`);
             createReport(testData.reportCreationData);
 
+            // TODO: [QA-6759] AQA - Remove duplicate navigation to KeyInfo page
             cy.stepInfo(`2. Go to Report → Key Info → Engagement tab and upload files`);
             _NavigationSection.navigateToReportKeyInfo();
             Report._KeyInfo.uploadFile(testData.pdfFileName);
