@@ -78,6 +78,17 @@ class AppraiserActions extends BaseActionsExt<typeof appraiserPage> {
         });
         return this;
     }
+
+    tryToAddWrongAppraiser(inspectorName: string): AppraiserActions {
+        appraiserPage.btnAddAppraiserInspector.click();
+        appraiserPage.searchAppraiserTextField.clear()
+            .type(inspectorName).should('have.value', inspectorName);
+        appraiserPage.hintText
+            .should("have.text", "This appraiser / inspector isn't in the system. Please select 'External Inspector' ");
+        appraiserPage.searchAppraiserTextField.clear().blur();
+        appraiserPage.formCancelButton().click();
+        return this;
+    }
 }
 
 export default new AppraiserActions(appraiserPage);

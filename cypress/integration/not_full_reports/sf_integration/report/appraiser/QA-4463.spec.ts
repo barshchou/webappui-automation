@@ -14,8 +14,8 @@ describe(`Prefill Reviewer from Salesforce into the Lead Appraiser Row (Reviewer
             _NavigationSection.navigateToReportAppraiser();
 
             cy.stepInfo(`3. Verify the internal Inspector appears in the table with the 'Personally Inspected' checkbox 
-                    checked along with any other information (suffix, state cert, etc.) and 
-                    corresponds to the Inspector's name in SF.`);
+                        checked along with any other information (suffix, state cert, etc.) and 
+                        corresponds to the Inspector's name in SF.`);
             Report._Appraiser.verifyPersonallyInspectedCheckbox(testData.reviewer2, true);
         });
     });

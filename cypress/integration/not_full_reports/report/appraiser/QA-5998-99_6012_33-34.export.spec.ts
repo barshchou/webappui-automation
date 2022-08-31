@@ -16,12 +16,7 @@ describe("Add Appraiser / Inspector button functionality",
             _NavigationSection.navigateToReportAppraiser();
 
             cy.stepInfo("2. Try to add wrong Bowery Appraiser / Inspector");
-            Report._Appraiser.Page.btnAddAppraiserInspector.click();
-            Report._Appraiser.Page.searchAppraiserTextField.clear()
-                .type(testData.inspectorName).should('have.value', testData.inspectorName);
-            Report._Appraiser.Page.hintText.should("have.text", testData.validationText);
-            Report._Appraiser.Page.searchAppraiserTextField.clear().blur();
-            Report._Appraiser.Page.formCancelButton().click();
+            Report._Appraiser.tryToAddWrongAppraiser(testData.inspectorName);
 
             cy.stepInfo("3. Add Appraiser and External Inspector");
             Report._Appraiser.searchAndAddAppraiser(testData.appraiserName)
