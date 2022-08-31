@@ -76,7 +76,7 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         return this;
     }
 
-    navigateSourceInformation(saveChanges = true): NavigationSectionActions {
+    navigateToSourceInformation(saveChanges = true): NavigationSectionActions {
         this.clickFinalButton()
             .clickSourceInformation()
             .submitSaveChangesModal(saveChanges)
