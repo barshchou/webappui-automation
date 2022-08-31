@@ -15,6 +15,7 @@ the date corresponding to the Current Due Date value for that job in SalesForce`
             (Note: the JOB # of that report corresponds with the JOB # of an open job on SalesForce)`);
             createReport(reportCreationData(value));
     
+            // TODO: [QA-6759] AQA - Remove duplicate navigation to KeyInfo page
             cy.stepInfo(`2. Navigate to the Report > Key Info page`);
             _NavigationSection.navigateToReportKeyInfo();
         

@@ -12,6 +12,7 @@ for Property Rights Appraised and Definition of Market Value sections`,
     });
 
     it("Test body", () => {
+        // TODO: [QA-6759] AQA - Remove duplicate navigation to KeyInfo page
         cy.stepInfo(`1. Proceed to the Report > Key Info page.`);
         _NavigationSection.navigateToPropertySummary()
             .navigateToReportKeyInfo();

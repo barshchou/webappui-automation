@@ -16,6 +16,7 @@ describe("[QA-4351] Pre-fill Inspection Date from Salesforce (Inspection Date is
             cy.stepInfo(`2. Go to Report → Key Info → Engagement tab and compare the 
             values in the Inspection Date and the Date of Valuation
             with the value in the SalesForce job page → Inspection section → Inspection Date raw`);
+            // TODO: [QA-6759] AQA - Remove duplicate navigation to KeyInfo page
             _NavigationSection.navigateToReportKeyInfo();
             testData.namesInputByQA.forEach(name => {
                 Report._KeyInfo.Page.getDateInputByQA(name).should("have.value", testData.verifyDate);

@@ -15,6 +15,7 @@ describe('Verify the "Property Rights Appraised" commentary on the Introduction 
             cy.stepInfo(`1. Create a report`);
             createReport(testData.reportCreationData);
 
+            // TODO: [QA-6759] AQA - Remove duplicate navigation to KeyInfo page
             cy.stepInfo(`2. Proceed to the Introduction page`);
             _NavigationSection.navigateToPropertySummary()
                 .navigateToReportKeyInfo();

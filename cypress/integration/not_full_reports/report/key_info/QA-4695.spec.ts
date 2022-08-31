@@ -11,6 +11,7 @@ describe("[QA-4695] Verify the Save button functionality on the Report > Client 
         });
 
         it("Test body", () => {
+            // TODO: [QA-6759] AQA - Remove duplicate navigation to KeyInfo page
             cy.stepInfo("1. Proceed to the Report > Key Info page.");
             _NavigationSection.navigateToReportKeyInfo();
 
