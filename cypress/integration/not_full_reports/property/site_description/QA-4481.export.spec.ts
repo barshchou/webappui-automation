@@ -30,7 +30,7 @@ describe(`[QA-4481] Check that generated text pulls in the first submarket`,
             cy.stepInfo(`3. Navigate to Property > Site Description and check that 
                         generated text pulls in the first submarket`);
             _NavigationSection.openSiteDescriptionInProperty();
-            Property._SiteDescription.verifyGeneratedCommentary(testData.commentary);
+            Property._SiteDescription.verifyFormCommentTextBoxText(testData.commentName, testData.commentary);
         
             cy.stepInfo(`4. Export the report`);
             _NavigationSection.openReviewAndExport();

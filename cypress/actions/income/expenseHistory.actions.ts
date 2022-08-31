@@ -385,6 +385,11 @@ class ExpenseHistoryActions extends BaseActionsExt<typeof expenseHistoryPage> {
         });
         return this;
     }
+
+    clickCloseIcon(): ExpenseHistoryActions {
+        expenseHistoryPage.closeIcon.click();
+        return this;
+    }
 }
 
 export default new ExpenseHistoryActions(expenseHistoryPage);

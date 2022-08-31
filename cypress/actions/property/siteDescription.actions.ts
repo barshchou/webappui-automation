@@ -1,8 +1,6 @@
 import siteDescriptionPage from "../../pages/property/siteDescription.page";
 import { numberWithCommas } from "../../../utils/numbers.utils";
 import BaseActionsExt from "../base/base.actions.ext";
-import Enums from "../../enums/enums";
-
 class SiteDescriptionActions extends BaseActionsExt<typeof siteDescriptionPage> {
 
     editTransportationDiscussionCommentary(newCommentary: string): SiteDescriptionActions {
@@ -71,11 +69,13 @@ class SiteDescriptionActions extends BaseActionsExt<typeof siteDescriptionPage> 
         return this;
     }
     
-    verifyGeneratedCommentary(textToBe: string): SiteDescriptionActions {
-        siteDescriptionPage.formCommentTextBox(Enums.PAGES_TEXTBOX_NAMES.locationDescriptionExport)
-            .should("have.text", textToBe);
-        return this;
-    }
+    /*
+     * verifyGeneratedCommentary(textToBe: string): SiteDescriptionActions {
+     *     siteDescriptionPage.formCommentTextBox(Enums.PAGES_TEXTBOX_NAMES.locationDescriptionExport)
+     *         .should("have.text", textToBe);
+     *     return this;
+     * }
+     */
 }
 
 export default new SiteDescriptionActions(siteDescriptionPage);

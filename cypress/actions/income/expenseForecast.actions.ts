@@ -329,7 +329,7 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
         expenseForecastPage.newCategoryExpenseName.clear().type(`${categoryName}{downArrow}{enter}`);
         this.Page.formSaveBtn(1).click();
         this.verifyProgressBarNotExist();
-        cy.get(`[data-qa='${categoryName}-forecast-item']`).should("exist");
+        expenseForecastPage.forecastItemCardFull(categoryName).should("exist");
         return this;
     }
 

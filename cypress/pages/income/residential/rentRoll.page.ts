@@ -38,7 +38,9 @@ class InPlaceRentRollPage extends ResidentialRentRollSharedPage {
 
     get rentRollAppraiserCommentary() { return cy.get("[name='currentRentRollDiscussion.additionalCommentary']"); }
 
-    getInfoIcon(index = 0) { return cy.get("[data-testid='InfoOutlinedIcon']").eq(index); }
+    get infoIcon() { 
+        return cy.xpath("//*[text()='Current Rent Roll Discussion']/following::*[@data-testid='InfoOutlinedIcon']"); 
+    }
 
 }
 
