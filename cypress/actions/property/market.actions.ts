@@ -180,9 +180,9 @@ class MarketActions extends BaseActionsExt<typeof marketPage> {
         return this;
     }
 
-    verifyAreaEconomicAnalysisHasFile(textToContain = this.finalDocumentNamePart): MarketActions {
+    verifyAreaEconomicAnalysisHasFile(textToContain = this.finalDocumentNamePart, isExist = false): MarketActions {
         marketPage.areaEconomicAnalysisFile.invoke("attr", "value").then(fileName => {
-            expect(isStringContainSubstring(fileName, textToContain)).to.be.true;
+            expect(isStringContainSubstring(fileName, textToContain)).to.be.eq(isExist);
         });
         return this;
     }
