@@ -11,7 +11,7 @@ and Add New Rent Comp button`, () => {
     });
 
     it("Test body", () => {
-        NavigationSection.navigateToRentComps();
+        NavigationSection.navigateToResidentialRentComps();
         Income.Residential.RentComps.BaseActions.openAddNewComparableForm(testData.searchAddress);
         Income.Residential.RentComps.AddForm.clickCloseButton();
         RentCompsPage.newUnitForm.should("not.exist");

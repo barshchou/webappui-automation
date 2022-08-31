@@ -14,7 +14,7 @@ describe(`Verify the user can switch to 'Building' type of search on clicking 'S
     });
 
     it("Test body", () => {
-        NavigationSection.navigateToRentComps();
+        NavigationSection.navigateToResidentialRentComps();
         Income.Residential.RentComps.BaseActions.verifyUnitSelected()
             .changeToBuildingSearch()
             .verifyProgressBarNotExist();

@@ -10,7 +10,7 @@ describe("Verify the UI controls of the Map filter section when Unit type of sea
     });
 
     it("Test body", () => {
-        NavigationSection.navigateToRentComps()
+        NavigationSection.navigateToResidentialRentComps()
             .verifyProgressBarNotExist();
         Income.Residential.RentComps.BaseActions.verifyUnitSelected();
         RentCompsPage.unitTypesWrapper.should("exist");

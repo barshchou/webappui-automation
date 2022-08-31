@@ -12,7 +12,7 @@ describe(`Verify the UI elements of Add New Rent Comp overlay on Rent Comps page
     });
 
     it("Test body", () => {
-        NavigationSection.navigateToRentComps();
+        NavigationSection.navigateToResidentialRentComps();
         Income.Residential.RentComps.BaseActions.openAddNewComparableForm(testData.formData.address);
         AddCompFormPage.formHeader.should("exist");
         AddCompFormPage.propAddressField.should("have.text", testData.formData.address);

@@ -12,7 +12,7 @@ describe.skip(`Verify Search Results overlay with found results is displayed on 
     });
 
     it("Test body", () => {
-        NavigationSection.navigateToRentComps()
+        NavigationSection.navigateToResidentialRentComps()
             .verifyProgressBarNotExist();
         Income.Residential.RentComps.BaseActions.openAddNewComparableForm(testData.searchAddress);
         Income.Residential.RentComps.AddForm.clickCancelButton();

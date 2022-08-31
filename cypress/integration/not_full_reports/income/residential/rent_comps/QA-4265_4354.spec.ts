@@ -11,7 +11,7 @@ describe("Verify the popups with appropriate wording appears on switching from U
     });
 
     it("Test body", () => {
-        NavigationSection.navigateToRentComps();
+        NavigationSection.navigateToResidentialRentComps();
         Income.Residential.RentComps.BaseActions.verifyUnitSelected()
             .changeToBuildingSearch()
             .changeToUnitSearch();

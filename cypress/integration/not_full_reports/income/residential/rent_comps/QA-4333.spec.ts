@@ -13,7 +13,7 @@ describe(`Verify Select button for the results displayed in the Map section is t
     });
 
     it("Test body", () => {
-        NavigationSection.navigateToRentComps();
+        NavigationSection.navigateToResidentialRentComps();
         Income.Residential.RentComps.BaseActions.verifyLoadingDoesNotExist()
             .verifyUnitSelected()
             .clickAllSelectComparableButtons()

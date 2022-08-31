@@ -15,7 +15,7 @@ describe(`Verify that display of results in the Map section on Rent Comps page
     });
 
     it("Test body", () => {
-        NavigationSection.navigateToRentComps()
+        NavigationSection.navigateToResidentialRentComps()
             .verifyProgressBarNotExist();
         Income.Residential.RentComps.BaseActions.verifyLoadingDoesNotExist()
             .verifyPhotosExistAndNavigateByPhotos(1);

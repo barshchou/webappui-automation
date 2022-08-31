@@ -11,7 +11,7 @@ describe(`Verify Sort By drop-down field for results sorting on Map filter secti
     });
 
     it("[QA-4276]", () => {
-        NavigationSection.navigateToRentComps()
+        NavigationSection.navigateToResidentialRentComps()
             .verifyProgressBarNotExist();
         testData.sortByOptions.forEach(option => {
             Income.Residential.RentComps.BaseActions.selectSortByOptionByValue(option);

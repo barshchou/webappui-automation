@@ -104,7 +104,7 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         return this;
     }
 
-    navigateToRentComps(): NavigationSectionActions {
+    navigateToResidentialRentComps(): NavigationSectionActions {
         this.clickIncomeApproachButton()
             .clickResidentialMenuIfClosed()
             .clickRentCompsButton()

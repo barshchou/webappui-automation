@@ -9,7 +9,7 @@ describe(" Verify Bedrooms drop-down field in the Map filter section", () => {
     });
 
     it("Test body", () => {
-        NavigationSection.navigateToRentComps()
+        NavigationSection.navigateToResidentialRentComps()
             .verifyProgressBarNotExist();
         Income.Residential.RentComps.BaseActions.clickNumberOfBedroomsArrow()
             .checkListOfCheckboxesByQa(testData.numberOfBedroomsQaAttr)

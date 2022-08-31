@@ -9,7 +9,7 @@ describe("Verify the Source of Information drop-down field in the when Unit type
     });
 
     it("Test body", () => {
-        NavigationSection.navigateToRentComps()
+        NavigationSection.navigateToResidentialRentComps()
             .verifyProgressBarNotExist();
         Income.Residential.RentComps.BaseActions.clickSourceOfInfoButton()
             .checkListOfCheckboxesByQa(testData.sourceOfInfoQaAttr)

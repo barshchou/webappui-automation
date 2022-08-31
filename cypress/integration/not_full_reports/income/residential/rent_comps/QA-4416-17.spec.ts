@@ -15,7 +15,7 @@ describe(`[Income - Residential - Rent Comps] Verify tables with the unit
 
         cy.stepInfo(`2. Navigate to Income -> Residential -> Rent Comps
                      and click "Building" button`);
-        _NavigationSection.navigateToRentComps();
+        _NavigationSection.navigateToResidentialRentComps();
         Income._Residential.RentComps.BaseActions
             .changeToBuildingSearch();
 

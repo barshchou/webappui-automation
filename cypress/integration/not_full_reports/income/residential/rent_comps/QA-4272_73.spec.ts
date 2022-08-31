@@ -13,7 +13,7 @@ describe("Verify Date of Value Range text fields when Unit type of search is sel
     });
 
     it("Test body", () => {
-        NavigationSection.navigateToRentComps()
+        NavigationSection.navigateToResidentialRentComps()
             .verifyProgressBarNotExist();
         Income.Residential.RentComps.BaseActions.enterDateInput(todayDate, "min")
             .enterDateInput(todayDate, "max")

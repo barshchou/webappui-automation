@@ -11,7 +11,7 @@ describe(`Verify on checking the 'Display square footage for comps?' checkbox 2 
     });
 
     it("Test body", () => {
-        NavigationSection.navigateToRentComps();
+        NavigationSection.navigateToResidentialRentComps();
         Income.Residential.RentComps.BaseActions.verifyUnitSelected()
             .selectComparableByIndex()
             .verifyColumnNotExist(testData.sfColumn)

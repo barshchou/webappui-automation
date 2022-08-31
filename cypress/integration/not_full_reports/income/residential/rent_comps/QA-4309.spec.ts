@@ -11,7 +11,7 @@ describe("Verify Zoom in and Zoom out buttons for the map on Rent Comps page whe
     });
 
     it("Test body", () => {
-        NavigationSection.navigateToRentComps()
+        NavigationSection.navigateToResidentialRentComps()
             .verifyProgressBarNotExist();
         Income.Residential.RentComps.BaseActions.verifyUnitSelected()
             .clickZoomInButton()

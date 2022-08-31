@@ -9,7 +9,7 @@ describe("Verify Min Rent and Max Rent text fields", () => {
     });
 
     it("Test body", () => {
-        NavigationSection.navigateToRentComps()
+        NavigationSection.navigateToResidentialRentComps()
             .verifyProgressBarNotExist();
         Income.Residential.RentComps.BaseActions.verifyUnitSelected()
             .enterValueToInput("minRent", testData.minRentOk)
