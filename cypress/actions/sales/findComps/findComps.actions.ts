@@ -14,6 +14,8 @@ import mapKeysUtils from "../../../utils/mapKeys.utils";
 import { BoweryReports } from "../../../types/boweryReports.type";
 import { isDateHasCorrectFormat } from "../../../../utils/date.utils";
 import jobSearchActions from "./drm/job-search.actions";
+import addressSearchActions from "./drm/address-search.actions";
+
 
 const { compPlex } = Alias.pageElements;
 
@@ -39,6 +41,10 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
 
     get JobSearch() {
         return jobSearchActions;
+    }
+
+    get AddressSearch() {
+        return addressSearchActions;
     }
 
     addExistingComparable(address: string): FindCompsActions {
