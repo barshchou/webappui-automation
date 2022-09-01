@@ -20,7 +20,8 @@ conditionalDescribe("[6401] Verify possibility to edit text",
             _CmsBaseActions.openSWOTAnalysisPage();
 
             cy.stepInfo(`2. Make some changes with any text item`);
-            _SWOTAnalysis.updateSectionDiscussion(testData.sectionName, 0, testData.textUpdate[0], true);
+            _SWOTAnalysis.updateSectionDiscussion(testData.sectionName, 0, testData.textUpdate[0], true)
+                .saveCmsSettings();
 
             cy.stepInfo('3. Create a new report and open it. Navigate to Final > SWOT Analysis ');
             createReport(testData.reportCreationData);
@@ -53,7 +54,8 @@ conditionalDescribe("[6401] Verify possibility to edit text",
                 loginAction();
                 _NavigationSection.navigateToContentManagementSystem();
                 _CmsBaseActions.openSWOTAnalysisPage();
-                _SWOTAnalysis.updateSectionDiscussion(testData.sectionName, 0, testData.defaultText[0], true);
+                _SWOTAnalysis.updateSectionDiscussion(testData.sectionName, 0, testData.defaultText[0], true)
+                    .saveCmsSettings();
             }
 
             cy.stepInfo('Remove feature flags');

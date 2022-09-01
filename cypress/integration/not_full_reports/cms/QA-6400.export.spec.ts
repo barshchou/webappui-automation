@@ -10,12 +10,32 @@ import { normalizeText } from "../../../../utils/string.utils";
 
 conditionalDescribe("Verify page and possibility to edit text", 
     { tags:[ "@cms", "@check_export", "@feature_flag" ] }, () => {
-        it('[QA-6400]', () => {
-            cy.stepInfo(`Preconditions: Set Launch Darkly flag to see Report Copy Editor section. Create a report`);
-            launchDarklyApi.setFeatureFlagForUser(testData.reportTextEditorFlagKey, testData.featureFlagEnable)
-                .setFeatureFlagForUser(testData.swotAnalysisFlagKey, testData.featureFlagEnable);
-            createReport(testData.reportCreationData);
+        beforeEach('Create report. Restore to default state', () => {
+            if (!Cypress.currentTest.title.includes("Check export")) {
+                cy.stepInfo(`Preconditions: Set Launch Darkly flag to see Report Copy Editor section. Create a report`);
+                launchDarklyApi.setFeatureFlagForUser(testData.reportTextEditorFlagKey, testData.featureFlagEnable)
+                    .setFeatureFlagForUser(testData.swotAnalysisFlagKey, testData.featureFlagEnable);
+                createReport(testData.reportCreationData);
 
+                cy.stepInfo(`Preconditions: Restore SWOT default state`);
+                _NavigationSection.navigateToContentManagementSystem();
+                _CmsBaseActions.openSWOTAnalysisPage();
+                testData.swotTextsFixture.forEach(section => {
+                    section.languages.forEach((language, index) => {
+                        _SWOTAnalysis.Page.swotAnalysisSectionTextArea(section.sectionName).invoke('text')
+                            .then(text => {
+                                if (text !== language) {
+                                    _SWOTAnalysis.updateSectionDiscussion(section.sectionName, index, language, true);
+                                }
+                            });
+                    });
+                });
+                _SWOTAnalysis.saveCmsSettings();
+                cy.visit('/');
+            }
+        });
+
+        it('[QA-6400]', () => {
             cy.stepInfo(`1. Open CMS > SWOT Analysis page`);
             _NavigationSection.navigateToContentManagementSystem();
             _CmsBaseActions.openSWOTAnalysisPage();
