@@ -22,7 +22,5 @@ export default {
     identificationOfTheClientCommentaryTitle: "Identification of the Client",
     identificationOfTheClientSection: enums.EXPORT_TITLES.identificationOfTheClient,
     intendedUseSection: enums.EXPORT_TITLES.intendedUseAndUser,
-    chipNames,
-    color: "rgb(210, 65, 65)",
-    backgroundColor: "rgb(255, 233, 233)"
+    chipNames
 };

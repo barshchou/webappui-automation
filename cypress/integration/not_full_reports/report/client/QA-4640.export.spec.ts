@@ -41,8 +41,7 @@ describe(`Verify the "Linked" chips dropdown in the new narrative component for 
 
         cy.stepInfo("3. Verify chip style");
         testData.chipNames.forEach(chip => {
-            Report._Client.Page.getCommentChip(chip).should("have.css", "color", testData.color)
-                .and("have.css", "background-color", testData.backgroundColor);
+            Report._Client.verifyStyleInDefaultChip(chip);
         });
 
         cy.stepInfo("4. Download report");

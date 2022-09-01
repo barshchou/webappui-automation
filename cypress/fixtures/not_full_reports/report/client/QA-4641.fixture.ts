@@ -10,19 +10,22 @@ const reportCreationFixture = () => {
         conclusionValue: Enums.VALUE_CONCLUSION_TYPE.AS_STABILIZED });
 };
 
-const _buildingName = 'Test Building Name QA-4641';
+const buildingName = 'Test Building Name QA-4641';
 
-const _chipsOptions: BoweryReports.ChipsCreationOptions = {
-    buildingName: _buildingName,
+const chipsOptions: BoweryReports.ChipsCreationOptions = {
+    buildingName: buildingName,
 };
+
+const chipNames = [ "Client Organization", "Client Company" ];
 
 export default {
     reportCreationData: reportCreationFixture(),
     textToType: "=",
-    chips: chipsDataCreator.getChipsData(_chipsOptions, enums.VALUE_CONCLUSION_TYPE.AS_STABILIZED),
-    buildingName: _buildingName,
+    chips: chipsDataCreator.getChipsData(chipsOptions, enums.VALUE_CONCLUSION_TYPE.AS_STABILIZED),
+    buildingName: buildingName,
     intendedUserCommentaryTitle: "Intended User",
     identificationOfTheClientCommentaryTitle: "Identification of the Client",
     identificationOfTheClientSection: enums.EXPORT_TITLES.identificationOfTheClient,
-    intendedUseSection: enums.EXPORT_TITLES.intendedUseAndUser
+    intendedUseSection: enums.EXPORT_TITLES.intendedUseAndUser,
+    chipNames
 };

@@ -39,7 +39,12 @@ describe(`Verify the "Linked" chips dropdown in the new narrative component for 
         });
         Report._Client.inactivateTextAreaInput();
 
-        cy.stepInfo(`3. Download report`);
+        cy.stepInfo("3. Verify chip style");
+        testData.chipNames.forEach(chip => {
+            Report._Client.verifyStyleInDefaultChip(chip);
+        });
+
+        cy.stepInfo(`4. Download report`);
         _NavigationSection.openReviewAndExport();
         ReviewExport.generateDocxReport().waitForReportGenerated()
             .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
