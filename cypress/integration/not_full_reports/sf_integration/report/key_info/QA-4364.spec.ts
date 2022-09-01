@@ -1,6 +1,5 @@
 import testData from "../../../../../fixtures/not_full_reports/sf_integration/report/key_info/QA-4364.fixture";
 import { createReport } from "../../../../../actions/base/baseTest.actions";
-import { _NavigationSection } from "../../../../../actions/base";
 import { Report } from "../../../../../actions";
 
 describe("Pre-fill Inspection Date from Salesforce - deletion of the Date of Valuation",
@@ -14,8 +13,6 @@ describe("Pre-fill Inspection Date from Salesforce - deletion of the Date of Val
 
         it("[QA-4364]", () => {
             cy.stepInfo("2. Go to Report → Key Info → Engagement tab and delete the Date of Valuation");
-            // TODO: [QA-6759] AQA - Remove duplicate navigation to KeyInfo page
-            _NavigationSection.navigateToReportKeyInfo();
             Report._KeyInfo.Page.getDateInputByQA(testData.nameInputByQA).clear().should("be.empty");
         });
     });
