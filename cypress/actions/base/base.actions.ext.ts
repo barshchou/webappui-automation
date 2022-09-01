@@ -118,8 +118,8 @@ export default class BaseActionsExt<T extends BasePage> extends BaseActions {
     }
 
     clearFormCommentTextBox(name: string): this {
-        this.Page.formCommentTextBox(name).realClick().realPress([ "Control", "A" ])
-            .realPress("Backspace");
+        this.Page.formCommentTextBox(name).realClick().realPress([ "Control", "A" ]);
+        this.Page.formCommentTextBox(name).realPress("Backspace");
         return this;
     }
 
