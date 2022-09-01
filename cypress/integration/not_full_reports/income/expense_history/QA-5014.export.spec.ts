@@ -57,15 +57,15 @@ describe("Verify the 'Add expense category' button is displayed on the Expense H
                 .verifyTOEExcludingRETByIndex(testData.taxes)
                 .verifyNetOpIncomeByIndex(testData.grossRevenue);
 
-            cy.stepInfo("6. Check that user can add the same category to the comparable expenses page upon page page");
+            cy.stepInfo("7. Check that user can add the same category to the comparable expenses page upon page page");
             _NavigationSection.navigateToComparableExpenses();
             Income._ComparableExpenses.addNewCategoryAndVerify(testData.expenseCategory, false);
 
-            cy.stepInfo("7. Check that user can add the same category to the comparable expenses page upon page page");
+            cy.stepInfo("8. Check that user can add the same category to the comparable expenses page upon page page");
             _NavigationSection.navigateToExpenseForecast();
             Income._ExpenseForecastActions.addCustomExpenseCategory(testData.expenseCategory);
 
-            cy.stepInfo("8. Generate and download report");
+            cy.stepInfo("9. Generate and download report");
             _NavigationSection.openReviewAndExport();
             ReviewExport.generateDocxReport()
                 .waitForReportGenerated()
