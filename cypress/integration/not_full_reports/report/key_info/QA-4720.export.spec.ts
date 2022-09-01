@@ -22,16 +22,12 @@ ACAS reports for Property Rights Appraised and Definition
         options 'Gross Building Area', 'Building Name', 'Property Type', 'Residential Unit Count', 
         'Commercial Unit Count', 'Street Address', 'Street Name', 'Site Area', 'Year Built', 'Block', 
         'Lot', 'Concluded Cap Rate', 'Zones', 'Condition'.`);
-        Report._KeyInfo.activateTextAreaInput(Report._KeyInfo.Page
-            .formCommentTextBox(testData.propertyRightsAppraisedTitle));
         testData.chips.forEach(chip => {
             Report._KeyInfo.enterFormCommentTextBox(testData.propertyRightsAppraisedTitle,
                 `=${chip.typeSuggestValue}`, false)
                 .clickNarrativeSuggestions(chip.suggestionName)
                 .verifyFormCommentTextBoxText(testData.propertyRightsAppraisedTitle, chip.verifySuggest);
         });
-        Report._KeyInfo.activateTextAreaInput(Report._KeyInfo.Page
-            .formCommentTextBox(testData.definitionOfMarketValueTitle));
         testData.chips.forEach(chip => {
             Report._KeyInfo.enterFormCommentTextBox(testData.definitionOfMarketValueTitle,
                 `=${chip.typeSuggestValue}`, false)
