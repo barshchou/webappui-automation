@@ -7,7 +7,7 @@ const chips = {
     grossBuildingArea: "Gross Building Area",
     siteArea: "Site Area",
     streetAddress: "Street Address",
-    lot: "lot",
+    lot: "Lot",
     streetName: "Street Name",
     unchangedRenovations: "Unchanged Renovations",
     zone: "Zone(s)",

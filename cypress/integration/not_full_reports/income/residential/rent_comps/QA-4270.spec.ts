@@ -8,8 +8,8 @@ describe(" Verify Bedrooms drop-down field in the Map filter section", () => {
         createReport(testData.reportCreationData);
     });
 
-    it("Test body", () => {
-        NavigationSection.navigateToRentComps()
+    it("[QA-4270]", () => {
+        NavigationSection.navigateToResidentialRentComps()
             .verifyProgressBarNotExist();
         Income.Residential.RentComps.BaseActions.clickNumberOfBedroomsArrow()
             .checkListOfCheckboxesByQa(testData.numberOfBedroomsQaAttr)

@@ -5,6 +5,7 @@ import { _NavigationSection } from "../../../../actions/base";
 import { Property } from '../../../../actions';
 import { Income } from "../../../../actions";
 
+// TODO: Fix and update this spec after https://bowery.atlassian.net/browse/WEB-6720 bug fix
 describe("Potential Real Estate Tax Reimbursement", 
     { tags:[ "@income", "@pro_forma" ] }, () => {
     

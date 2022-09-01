@@ -13,7 +13,7 @@ describe("Verify the wording of Generated Commentary section on Rent Comps page 
     reportDatas.forEach(data => {
         it(`Test for ${data.conclusionValue} report type`, () => {
             createReport(data);
-            NavigationSection.navigateToRentComps()
+            NavigationSection.navigateToResidentialRentComps()
                 .verifyProgressBarNotExist();
             Income.Residential.RentComps.BaseActions.verifyGCText(data.conclusionValue);
         });

@@ -5,14 +5,13 @@ import { _NavigationSection } from "../../../../../actions/base";
 
 describe("Verify the report export with a pre-filled Letter of Engagement from Dropbox",
     { tags: [ "@report", "@key_info", "@salesforce", "@check_export" ] }, () => {
-        it("Test body", () => {
+        it("[QA-4625]", () => {
             cy.stepInfo(`1. Create a new report on the WebApp (Note: the JOB # of that report 
                         corresponds with the JOB # of an open job on SalesForce)`);
             createReport(testData.reportCreationData);
         
             cy.stepInfo(`2. Navigate to the Report > Key Info > Engagement and Verify that 
                         the Letter Of Engagement field is auto-filled from Dropbox`);
-            _NavigationSection.navigateToReportInformation();
             Report._KeyInfo.Page.inputToCheckUpload.should("have.value", testData.verifyValue);
             
             // TODO: Create method for unchecking redundant checkboxes for export

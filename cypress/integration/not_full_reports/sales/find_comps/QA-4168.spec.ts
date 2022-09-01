@@ -19,7 +19,7 @@ describe("[QA-4168] Verify the Internal Notes field", { tags: [ "@sales", "@find
         _NavigationSection.navigateToFindComps();
 
         Sales._FindComps.Actions
-            .openAddNewComparableFormSearchResult(testData.compAddress, 1)
+            .openAddNewComparableFormSearchResult(testData.compAddress)
             .selectDropdownOptionNewComp(Sales._FindComps.Page.conditionDropdown, testData.condition);
         Sales._FindComps.Actions.PropertyInfo.setCommercialUnits(`${testData.units.numberOfUnits}`)
             .setCommercialArea(`${testData.units.grossArea}`)

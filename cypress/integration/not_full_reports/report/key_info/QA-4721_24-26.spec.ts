@@ -3,6 +3,8 @@ import { Report } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { createReport } from "../../../../actions/base/baseTest.actions";
 import testData from '../../../../fixtures/not_full_reports/report/key_info/QA-4721_24-26.fixture';
+import { _ReportTitles } from "../../../../enums/pages_titles";
+import routesUtils from "../../../../utils/routes.utils";
 
 describe(`Verify the Save and Save & Continue button functionality on the Report > Key Info page:`,
     { tags:[ "@report", "@key_info" ] }, () => {
@@ -11,83 +13,100 @@ describe(`Verify the Save and Save & Continue button functionality on the Report
         });
 
         it("[QA-4721]", () => {
+            // TODO: [QA-6759] AQA - Remove duplicate navigation to KeyInfo page
             cy.stepInfo(`1. Proceed to the Report > Key Info page`);
-            _NavigationSection.navigateToReportInformation();
+            _NavigationSection.navigateToPropertySummary()
+                .navigateToReportKeyInfo();
 
             cy.stepInfo(`2. Fill in the editable fields with values and click on the Save button then reload page`);
-            Report._KeyInfo.enterPropertyRightsAppraisedComment(testData.enterValue, true, false, false);
-            Report._KeyInfo.clickNarrativeSuggestions(testData.listValue)
-                .verifyTextBoxPropertyRightsAppraised(testData.verifyTaxValue);
-            Report._KeyInfo.enterDefinitionMarketValue(testData.enterValue, true, false, false);
-            Report._KeyInfo.clickNarrativeSuggestions(testData.listValue, 1)
-                .verifyTextBoxPropertyRightsAppraised(testData.verifyTaxValue)
-                .renterTextBoxPropertyRightsAppraised(testData.enterValue)
+            Report._KeyInfo
+                .enterFormCommentTextBox(testData.propertyRightsAppraisedTitle, testData.enterValue, false)
                 .clickNarrativeSuggestions(testData.listValue)
-                .verifyTextBoxPropertyRightsAppraised(testData.verifyTaxValue)
-                .clickSaveButton();
+                .verifyFormCommentTextBoxText(testData.propertyRightsAppraisedTitle, testData.verifyTaxValue)
+                .enterFormCommentTextBox(testData.definitionOfMarketValueTitle, testData.enterValue, false)
+                .clickNarrativeSuggestions(testData.listValue, 2)
+                .verifyFormCommentTextBoxText(testData.definitionOfMarketValueTitle, testData.verifyTaxValue)
+                .clearFormCommentTextBox(testData.propertyRightsAppraisedTitle)
+                .enterFormCommentTextBox(testData.propertyRightsAppraisedTitle, testData.enterValue, false)
+                .clickNarrativeSuggestions(testData.listValue)
+                .verifyFormCommentTextBoxText(testData.propertyRightsAppraisedTitle, testData.verifyTaxValue);
+            cy.wait(1000);
+            Report._KeyInfo.clickSaveButton()
+                .verifyProgressBarNotExist();
             cy.reload();
        
 
             cy.stepInfo(`3. Verify that the changes are saved`);
-            Report._KeyInfo.verifyTextBoxPropertyRightsAppraised(testData.verifyTaxValue);
-            Report._KeyInfo.verifyTextBoxDefinitionOfMarketValue(testData.verifyTaxValue);
+            Report._KeyInfo.verifyFormCommentTextBoxText(testData.propertyRightsAppraisedTitle, testData.verifyTaxValue)
+                .verifyFormCommentTextBoxText(testData.definitionOfMarketValueTitle, testData.verifyTaxValue);
         });
 
         it("[QA-4724]", () => {
+            // TODO: [QA-6759] AQA - Remove duplicate navigation to KeyInfo page
             cy.stepInfo(`1. Proceed to the Report > Key Info page`);
-            _NavigationSection.navigateToReportInformation();
+            _NavigationSection.navigateToPropertySummary()
+                .navigateToReportKeyInfo();
 
             cy.stepInfo(`2. Fill in the editable fields with values and click on the Save & Continue button`);
-            Report._KeyInfo.enterPropertyRightsAppraisedComment(testData.enterValue, true, false, false);
-            Report._KeyInfo.clickNarrativeSuggestions(testData.listValue)
-                .verifyTextBoxPropertyRightsAppraised(testData.verifyTaxValue);
-            Report._KeyInfo.enterDefinitionMarketValue(testData.enterValue, true, false, false);
-            Report._KeyInfo.clickNarrativeSuggestions(testData.listValue, 1)
-                .verifyTextBoxPropertyRightsAppraised(testData.verifyTaxValue)
-                .renterTextBoxPropertyRightsAppraised(testData.enterValue)
+            Report._KeyInfo.enterFormCommentTextBox(testData.propertyRightsAppraisedTitle, testData.enterValue, false)
                 .clickNarrativeSuggestions(testData.listValue)
-                .verifyTextBoxPropertyRightsAppraised(testData.verifyTaxValue)
-                .clickSaveContinueButton();
+                .verifyFormCommentTextBoxText(testData.propertyRightsAppraisedTitle, testData.verifyTaxValue)
+                .enterFormCommentTextBox(testData.definitionOfMarketValueTitle, testData.enterValue, false)
+                .clickNarrativeSuggestions(testData.listValue, 2)
+                .verifyFormCommentTextBoxText(testData.propertyRightsAppraisedTitle, testData.verifyTaxValue)
+                .clearFormCommentTextBox(testData.propertyRightsAppraisedTitle)
+                .enterFormCommentTextBox(testData.propertyRightsAppraisedTitle, testData.enterValue, false)
+                .clickNarrativeSuggestions(testData.listValue)
+                .verifyFormCommentTextBoxText(testData.propertyRightsAppraisedTitle, testData.verifyTaxValue);
+            cy.wait(1000);
+            Report._KeyInfo.clickSaveContinueButton();
 
             cy.stepInfo(`3. Verify that the changes are saved and the user is redirected 
             to the next page (Report > Appraiser)`);
             Report._Appraiser.verifyPageOpened();
-            cy.go("back");
-            Report._KeyInfo.clickYesButton();
-            Report._KeyInfo.verifyTextBoxPropertyRightsAppraised(testData.verifyTaxValue)
-                .verifyTextBoxDefinitionOfMarketValue(testData.verifyTaxValue);
+            _NavigationSection.goBackWithSave();
+            Report._KeyInfo.verifyOpenedPage(_ReportTitles.KEY_INFO)
+                .verifyFormCommentTextBoxText(testData.propertyRightsAppraisedTitle, testData.verifyTaxValue)
+                .verifyFormCommentTextBoxText(testData.definitionOfMarketValueTitle, testData.verifyTaxValue);
         });
 
         it("[QA-4725]", () => {
+            // TODO: [QA-6759] AQA - Remove duplicate navigation to KeyInfo page
             cy.stepInfo(`1. Proceed to the Report > Key Info page`);
-            _NavigationSection.navigateToReportInformation();
+            _NavigationSection.navigateToPropertySummary()
+                .navigateToReportKeyInfo();
 
             cy.stepInfo(`2. Fill in the editable fields with values and do NOT click on the Save button`);
-            Report._KeyInfo.enterPropertyRightsAppraisedComment(testData.enterValue, true, false, false);
-            Report._KeyInfo.clickNarrativeSuggestions(testData.listValue)
-                .verifyTextBoxPropertyRightsAppraised(testData.verifyTaxValue);
-            Report._KeyInfo.enterDefinitionMarketValue(testData.enterValue, true, false, false);
-            Report._KeyInfo.clickNarrativeSuggestions(testData.listValue, 1)
-                .verifyTextBoxDefinitionOfMarketValue(testData.verifyTaxValue);
+            Report._KeyInfo.enterFormCommentTextBox(testData.propertyRightsAppraisedTitle, testData.enterValue, false)
+                .clickNarrativeSuggestions(testData.listValue)
+                .verifyFormCommentTextBoxText(testData.propertyRightsAppraisedTitle, testData.verifyTaxValue)
+                .enterFormCommentTextBox(testData.definitionOfMarketValueTitle, testData.enterValue, false)
+                .clickNarrativeSuggestions(testData.listValue, 2)
+                .verifyFormCommentTextBoxText(testData.definitionOfMarketValueTitle, testData.verifyTaxValue);
+            cy.wait(1000);
 
             cy.stepInfo(`3. Try to proceed on any other page and verify that the Unsaved changes modal is displayed`);
             _NavigationSection.clickPreviewEditButton()
                 .clickLetterOfTransmittal()
                 .verifyUnsavedChangesModal()
                 .clickYesButton()
-                .navigateToReportInformation();
-            Report._KeyInfo.verifyTextBoxPropertyRightsAppraised(testData.verifyTaxValue)
-                .verifyTextBoxDefinitionOfMarketValue(testData.verifyTaxValue);
+                .verifyProgressBarNotExist()
+                .waitForUrl(routesUtils.letterOfTransmittal)
+                .navigateToReportKeyInfo();
+            Report._KeyInfo.verifyFormCommentTextBoxText(testData.propertyRightsAppraisedTitle, testData.verifyTaxValue)
+                .verifyFormCommentTextBoxText(testData.definitionOfMarketValueTitle, testData.verifyTaxValue);
 
             cy.stepInfo(`4. Try to proceed on any other page from the Key Info page and 
             verify that the Unsaved changes modal is displayed`);
-            _NavigationSection.navigateToReportInformation();
-            Report._KeyInfo.enterPropertyRightsAppraisedComment(testData.enterSecondValue, true, false, false);
-            Report._KeyInfo.clickNarrativeSuggestions(testData.secondListValue)
-                .verifyTextBoxPropertyRightsAppraised(testData.verifySecondTaxValue);
-            Report._KeyInfo.enterDefinitionMarketValue(testData.enterSecondValue, true, false, false);
-            Report._KeyInfo.clickNarrativeSuggestions(testData.secondListValue, 1)
-                .verifyTextBoxDefinitionOfMarketValue(testData.verifySecondTaxValue);
+            Report._KeyInfo
+                .clearFormCommentTextBox(testData.propertyRightsAppraisedTitle)
+                .enterFormCommentTextBox(testData.propertyRightsAppraisedTitle, testData.enterSecondValue, false)
+                .clickNarrativeSuggestions(testData.secondListValue)
+                .verifyFormCommentTextBoxText(testData.propertyRightsAppraisedTitle, testData.verifySecondTaxValue)
+                .clearFormCommentTextBox(testData.definitionOfMarketValueTitle)
+                .enterFormCommentTextBox(testData.definitionOfMarketValueTitle, testData.enterSecondValue, false)
+                .clickNarrativeSuggestions(testData.secondListValue, 2)
+                .verifyFormCommentTextBoxText(testData.definitionOfMarketValueTitle, testData.verifySecondTaxValue);
 
             cy.stepInfo(`5 Verify that the changes are NOT saved on the Key Info page`);
             _NavigationSection.clickPreviewEditButton()
@@ -95,18 +114,22 @@ describe(`Verify the Save and Save & Continue button functionality on the Report
                 .verifyUnsavedChangesModal()
                 .clickNoButton();
             cy.go("back");
-            Report._KeyInfo.verifyTextBoxPropertyRightsAppraised(testData.verifySecondTaxValue, "not.include.text")
-                .verifyTextBoxDefinitionOfMarketValue(testData.verifySecondTaxValue, "not.include.text");
+            Report._KeyInfo.verifyFormCommentTextBoxText(testData.propertyRightsAppraisedTitle,
+                testData.verifySecondTaxValue, "not.contain.text")
+                .verifyFormCommentTextBoxText(testData.definitionOfMarketValueTitle, testData.verifySecondTaxValue,
+                    "not.contain.text");
         });
 
         it("[QA-4726]", () => {
+            // TODO: [QA-6759] AQA - Remove duplicate navigation to KeyInfo page
             cy.stepInfo(`1. Proceed to the Report > Key Info page`);
-            _NavigationSection.navigateToReportInformation();
+            _NavigationSection.openReviewAndExport()
+                .navigateToReportKeyInfo();
        
             cy.stepInfo(`2. Click on the Back button and verify the user is redirected 
             to another page (Settings & Export > Review and Export).`);
-            Report._KeyInfo.clickBackButton()
-                .clickYesButton();
+            Report._KeyInfo.clickBackButton();
+            _NavigationSection.submitSaveChangesModal();
             ReviewExport.verifyPageIsOpened();
         });
     });
