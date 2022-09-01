@@ -22,21 +22,19 @@ ACAS reports for Property Rights Appraised and Definition
         options 'Gross Building Area', 'Building Name', 'Property Type', 'Residential Unit Count', 
         'Commercial Unit Count', 'Street Address', 'Street Name', 'Site Area', 'Year Built', 'Block', 
         'Lot', 'Concluded Cap Rate', 'Zones', 'Condition'.`);
+        Report._KeyInfo.clearFormCommentTextBox(testData.propertyRightsAppraisedTitle);
         testData.chips.forEach(chip => {
-            Report._KeyInfo.Page.formCommentTextBox(testData.propertyRightsAppraisedTitle).dblclick();
             Report._KeyInfo.enterFormCommentTextBox(testData.propertyRightsAppraisedTitle,
                 `=${chip.typeSuggestValue}`, false)
                 .clickNarrativeSuggestions(chip.suggestionName)
                 .verifyFormCommentTextBoxText(testData.propertyRightsAppraisedTitle, chip.verifySuggest);
-            cy.wait(1000);
         });
+        Report._KeyInfo.clearFormCommentTextBox(testData.definitionOfMarketValueTitle);
         testData.chips.forEach(chip => {
-            Report._KeyInfo.Page.formCommentTextBox(testData.definitionOfMarketValueTitle).dblclick();
             Report._KeyInfo.enterFormCommentTextBox(testData.definitionOfMarketValueTitle,
                 `=${chip.typeSuggestValue}`, false)
                 .clickNarrativeSuggestions(chip.suggestionName, 2)
                 .verifyFormCommentTextBoxText(testData.definitionOfMarketValueTitle, chip.verifySuggest);
-            cy.wait(1000);
         });
         Report._KeyInfo.inactivateTextAreaInput()
             .clickSaveButton();
@@ -53,9 +51,9 @@ ACAS reports for Property Rights Appraised and Definition
                 cy.stepInfo("3. Verify the linked chips on export for both sections");
                 cy.visit(<string>file);
                 testData.chips.forEach(chip => {
-                    cy.contains(testData.propertyRightsSection).next().scrollIntoView()
+                    cy.contains(testData.propertyRightsAppraisedTitle).next().scrollIntoView()
                         .should("include.text", chip.verifyExport);
-                    cy.contains(testData.definitionOfMarketValueSection).next().next().scrollIntoView()
+                    cy.contains(testData.definitionOfMarketValueTitle).next().next().scrollIntoView()
                         .should("include.text", chip.verifySuggest);
                 });
             }); 
