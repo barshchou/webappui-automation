@@ -2,6 +2,8 @@ import appraiserPage from "../../pages/report/appraiser.page";
 import { _ReportTitles } from "../../enums/pages_titles";
 import BaseActionsExt from "../base/base.actions.ext";
 import Enums from "../../enums/enums";
+import mapKeysUtils from "../../utils/mapKeys.utils";
+import { Alias } from "../../utils/alias.utils";
 
 class AppraiserActions extends BaseActionsExt<typeof appraiserPage> {
 
@@ -87,6 +89,22 @@ class AppraiserActions extends BaseActionsExt<typeof appraiserPage> {
             .should("have.text", "This appraiser / inspector isn't in the system. Please select 'External Inspector' ");
         appraiserPage.searchAppraiserTextField.clear().blur();
         appraiserPage.formCancelButton().click();
+        return this;
+    }
+
+    interceptAppraisersRequest() {
+        cy._mapGet(mapKeysUtils.reportId).then(reportId => {
+            cy.intercept("GET", `/report/${reportId}`).as(Alias.reportId);
+        });
+    }
+
+    verifyAppraisersFromRequest() {
+        cy.wait(`@${Alias.reportId}`, { timeout: 10000 }).then(( { response } ) => {
+            const appraisersArray = response.body.new.previewAndEdit.certification.appraisers;
+            appraisersArray.forEach(({ fullName }) => {
+                appraiserPage.appraiserSignCheckbox(fullName).should('exist');
+            });
+        });
         return this;
     }
 }

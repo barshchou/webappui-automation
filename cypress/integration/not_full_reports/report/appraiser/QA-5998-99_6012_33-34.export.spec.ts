@@ -44,7 +44,7 @@ describe("Add Appraiser / Inspector button functionality",
             ReviewExport.generateDocxReport().waitForReportGenerated()
                 .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
         });
-
+        // Export error WEB-6739
         it('Check export', () => {
             cy.task("getFilePath", { _reportName: testData.reportCreationData.reportNumber, _docxHtml: "html" })
                 .then(file => {
