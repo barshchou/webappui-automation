@@ -17,7 +17,7 @@ and Identification of the Client sections`,
             .activateTextAreaInput(Report._Client.Page.intendedUserTextBox);
 
         cy.stepInfo(`2. Verify that the Revert to Original button is displayed`);
-        Report._Client.Page.formRevertToOriginalBtn().should("be.visible");
+        Report._Client.Page.formRevertToOriginalBtn().should("be.disabled");
 
         cy.stepInfo(`3. Edit comment and verify that the Revert to Original button becomes enabled`);
         Report._Client.enterIntendedUserTextBox(testData.textToType)
@@ -35,7 +35,7 @@ and Identification of the Client sections`,
         Report._Client.activateTextAreaInput(Report._Client.Page.identificationOfClientTextBox);
 
         cy.stepInfo(`6. Verify that the Revert to Original button is displayed`);
-        Report._Client.Page.formRevertToOriginalBtn(1).should("be.visible");
+        Report._Client.Page.formRevertToOriginalBtn(1).should("be.disabled");
 
         cy.stepInfo(`7. Edit comment and verify that the Revert to Original button becomes enabled`);
         Report._Client.enterIdentificationOfTheClientTextBox(testData.textToType)

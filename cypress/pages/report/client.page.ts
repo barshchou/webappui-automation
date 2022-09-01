@@ -3,7 +3,9 @@ import BasePage from "../base/base.page";
 class ClientPage extends BasePage {
     get clientTitle() { return cy.get("[data-qa=client]"); }
 
-    get warningMessage() { return cy.xpath("//*[contains(@data-qa, 'callout-btn')]/parent::*"); }
+    get warningMessage() { return cy.xpath("//*[contains(@data-qa, 'callout-btn')]/parent::*/parent::*"); }
+
+    get warningAddBtn() { return cy.xpath("//*[contains(@data-qa, 'callout-btn')]"); }
 
     get clientNameField() { return cy.get("*[name=client]"); }
 

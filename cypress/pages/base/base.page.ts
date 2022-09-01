@@ -94,4 +94,6 @@ export default class BasePage {
     formCommentTextBox(name: string) {
         return cy.xpath(`//*[.='${name}']//following::*[@data-slate-editor][1]`);
     }
+
+    getDefaultCommentChip(chipName: string) { return cy.get(`[aria-label='${chipName}']`); }
 }
