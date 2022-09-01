@@ -138,4 +138,13 @@ export default class BaseActions {
             .should("be.focused");
         return this;
     }
+
+    typeInAgTable(textAreaInput: Cypress.Chainable<JQuery<HTMLElement>>, value: string) {
+        textAreaInput.realClick().realClick()
+            .scrollIntoView()
+            .focus().type("123456")
+            .clear()
+            .realType(`${value}{enter}`);
+        return this;
+    }
 }
