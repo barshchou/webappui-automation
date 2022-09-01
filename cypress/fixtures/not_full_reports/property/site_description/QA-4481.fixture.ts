@@ -62,5 +62,6 @@ export default {
     discussion: _discussion,
     commentary: _commentary,
     exportSectionName: Enums.EXPORT_TITLES.siteDescription,
-    sectionToExport: Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.siteDescription
+    sectionToExport: Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.siteDescription,
+    commentName: Enums.PAGES_TEXTBOX_NAMES.locationDescriptionExport
 };
