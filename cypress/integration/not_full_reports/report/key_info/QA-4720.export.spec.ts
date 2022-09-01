@@ -26,13 +26,15 @@ ACAS reports for Property Rights Appraised and Definition
             Report._KeyInfo.enterFormCommentTextBox(testData.propertyRightsAppraisedTitle,
                 `=${chip.typeSuggestValue}`, false)
                 .clickNarrativeSuggestions(chip.suggestionName)
-                .verifyFormCommentTextBoxText(testData.propertyRightsAppraisedTitle, chip.verifySuggest);
+                .verifyFormCommentTextBoxText(testData.propertyRightsAppraisedTitle, chip.verifySuggest)
+                .activateTextAreaInput(Report._KeyInfo.Page.formCommentTextBox(testData.propertyRightsAppraisedTitle));
         });
         testData.chips.forEach(chip => {
             Report._KeyInfo.enterFormCommentTextBox(testData.definitionOfMarketValueTitle,
                 `=${chip.typeSuggestValue}`, false)
                 .clickNarrativeSuggestions(chip.suggestionName, 2)
-                .verifyFormCommentTextBoxText(testData.definitionOfMarketValueTitle, chip.verifySuggest);
+                .verifyFormCommentTextBoxText(testData.definitionOfMarketValueTitle, chip.verifySuggest)
+                .activateTextAreaInput(Report._KeyInfo.Page.formCommentTextBox(testData.definitionOfMarketValueTitle));
         });
         Report._KeyInfo.inactivateTextAreaInput()
             .clickSaveButton();
