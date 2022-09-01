@@ -12,21 +12,17 @@ describe("Check the generated commentary for Property Rights Appraised Discussio
                 cy.stepInfo(`${index + 1}. Login, create report`);
                 createReport(reportCreationFixture(item.reportConclusion, `_${index + 1}`));
 
-                // TODO: [QA-6759] AQA - Remove duplicate navigation to KeyInfo page
-                cy.stepInfo(`1. Report > Key Info`);
-                _NavigationSection.navigateToReportKeyInfo();
-
-                cy.stepInfo(`2. Verify that the generated commentary for Property Rights Appraised 
+                cy.stepInfo(`1. Verify that the generated commentary for Property Rights Appraised 
                 discussion is a next-gen component`);
                 Report._KeyInfo.Page.formCommentTextBox(Enums.PAGES_TEXTBOX_NAMES.propertyRightsAppraised)
                     .should("include.text", item.reportConclusionText);
 
-                cy.stepInfo(`3. Verify that the interest appraised elements of the generated commentary 
+                cy.stepInfo(`2. Verify that the interest appraised elements of the generated commentary 
                 (highlighted in red) are chips`);
                 Report._KeyInfo.Page.formCommentTextBox(Enums.PAGES_TEXTBOX_NAMES.propertyRightsAppraised)
                     .contains(item.check).should("have.css", "color", testData.color);
 
-                cy.stepInfo(`4. Verify that the Property Rights Appraised  discussion appears below 
+                cy.stepInfo(`3. Verify that the Property Rights Appraised  discussion appears below 
                             the h2 Introduction > Property Rights 
                             Appraised section in the exported report.`);
                 _NavigationSection.openReviewAndExport();
