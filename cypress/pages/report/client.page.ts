@@ -49,6 +49,8 @@ class ClientPage extends BasePage {
     commentaryText(commentaryTitle: string) { 
         return cy.xpath(`//h6[.='${commentaryTitle}']//following::div[@data-slate-editor][1]`); 
     }
+
+    getCommentChip(chipName: string) { return cy.get(`[aria-label='${chipName}']`); }
 }
 
 export default new ClientPage();

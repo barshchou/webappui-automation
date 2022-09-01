@@ -39,7 +39,13 @@ describe(`Verify the "Linked" chips dropdown in the new narrative component for 
         });
         Report._Client.inactivateTextAreaInput();
 
-        cy.stepInfo("3. Download report");
+        cy.stepInfo("3. Verify chip style");
+        testData.chipNames.forEach(chip => {
+            Report._Client.Page.getCommentChip(chip).should("have.css", "color", testData.color)
+                .and("have.css", "background-color", testData.backgroundColor);
+        });
+
+        cy.stepInfo("4. Download report");
         _NavigationSection.openReviewAndExport();
         ReviewExport.generateDocxReport().waitForReportGenerated()
             .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
@@ -49,7 +55,7 @@ describe(`Verify the "Linked" chips dropdown in the new narrative component for 
         cy.task("getFilePath", { _reportName: testData.reportCreationData.reportNumber, _docxHtml: "html" })
             .then(file => {
                 cy.log(<string>file);
-                cy.stepInfo("6. Verify the linked chips on export for both sections:");
+                cy.stepInfo("5. Verify the linked chips on export for both sections:");
                 cy.visit(<string>file);
 
                 testData.chips.forEach(item => {
