@@ -7,5 +7,5 @@ const reportCreationFixture = () => {
 export default {
     reportCreationData: reportCreationFixture(),
     concludedValue: 1573423.98,
-    concludedValueUpdated: 9843543.153
+    concludedValueUpdated: 9843543.15
 };

@@ -10,6 +10,7 @@ const exportTitles = {
     concludedValuePerUnit: "Concluded Value Per Unit",
     currentCommercialRentRoll: "Current Commercial Rent Roll",
     cumulativePricePerUnit: "Cumulative Price Per Unit",
+    cumulativePricePerSf: "Cumulative Price Per SF",
     currentResidentialRentRoll: "Current Residential Rent Roll",
     definitionOfMarketValue: "Definition of Market Value",
     estimatedOperatingExpenses: "Estimated Operating Expenses",

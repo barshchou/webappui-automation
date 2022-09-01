@@ -3,11 +3,9 @@ import BasePage from "../base/base.page";
 class AppraiserPage extends BasePage {
     get pageHeader() { return cy.get("[data-qa=appraisers]"); }
 
-    get searchAppraiserTextField() { return cy.get('[role="dialog"] [type="text"]'); }
+    get searchAppraiserTextField() { return cy.get("[data-qa='inspectorNameInput'] input"); }
 
-    get btnAddAppraiserInspector() {
-        return cy.contains("Add appraiser / inspector");
-    }
+    get btnAddAppraiserInspector() { return cy.get("[data-qa='addAppraiserInspector']"); }
 
     getAppraiserOptionFromList(index = 0) {
         return cy.get(`[data-option-index="${index}"]`).should("be.visible");
@@ -27,10 +25,6 @@ class AppraiserPage extends BasePage {
         return cy.xpath(`//*[contains(text(), '${appraiserName}')]/following::*[@data-qa='remove-btn']`).eq(0);
     }
 
-    get certificationAssistanceText() { 
-        return cy.get("[data-qa='certificationAssistance.commentary-generated-text']"); 
-    }
-
     get certificationInspectionText() {
         return cy.get("[data-qa='certificationInspection.commentary-generated-text']");
     }
@@ -44,6 +38,8 @@ class AppraiserPage extends BasePage {
         return cy.xpath(`//*[@data-qa="inspected-checkbox"]//*[@value='${isChecked}']` + 
         `/../../../*[@data-qa="fullName"]`); 
     }
+
+    get modalExternalInspectorRadio() { return cy.get("[data-qa='externalInspectorRadio'] input"); }
 }
 
 export default new AppraiserPage();

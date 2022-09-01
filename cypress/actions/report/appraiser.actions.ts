@@ -9,12 +9,19 @@ class AppraiserActions extends BaseActionsExt<typeof appraiserPage> {
         return this;
     }
 
-    searchAndAddAppraiser(appraiserName: string): AppraiserActions {
+    searchAndAddAppraiser(appraiserName: string, isExternal = false): AppraiserActions {
         appraiserPage.btnAddAppraiserInspector.click();
-        appraiserPage.searchAppraiserTextField.clear()
-            .type(appraiserName).should('have.value', appraiserName);
-        this.Page.getAppraiserOptionFromList().click();
-        this.Page.formAddButton().click();
+        if (isExternal) {
+            appraiserPage.modalExternalInspectorRadio.check().should("be.checked");
+            appraiserPage.searchAppraiserTextField.clear()
+                .type(appraiserName).should('have.value', appraiserName);
+            this.Page.formAddButton().click();
+        } else {
+            appraiserPage.searchAppraiserTextField.clear()
+                .type(appraiserName).should('have.value', appraiserName);
+            this.Page.getAppraiserOptionFromList().click();
+            this.Page.formAddButton().click();
+        }
         return this;
     }
 
@@ -49,7 +56,7 @@ class AppraiserActions extends BaseActionsExt<typeof appraiserPage> {
 
     verifyCertificationAssistanceCommentary(): AppraiserActions {
         appraiserPage.getAllNamesWithCheckSignReportCheckboxes(false).each(item => {
-            appraiserPage.certificationAssistanceText.should("include.text", item.text());
+            this.verifyFormCommentTextBoxText("Certification Assistance", item.text());
         });
         return this;
     }
