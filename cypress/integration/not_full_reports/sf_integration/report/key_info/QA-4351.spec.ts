@@ -1,6 +1,5 @@
 import testData from "../../../../../fixtures/not_full_reports/sf_integration/report/key_info/QA-4351.fixture";
 import { createReport } from "../../../../../actions/base/baseTest.actions";
-import { _NavigationSection } from "../../../../../actions/base";
 import { Report } from "../../../../../actions";
 
 describe("Pre-fill Inspection Date from Salesforce (Inspection Date is the same as Date of Valuation)",
@@ -16,8 +15,6 @@ describe("Pre-fill Inspection Date from Salesforce (Inspection Date is the same 
             cy.stepInfo(`2. Go to Report → Key Info → Engagement tab and compare the 
             values in the Inspection Date and the Date of Valuation
             with the value in the SalesForce job page → Inspection section → Inspection Date raw`);
-            // TODO: [QA-6759] AQA - Remove duplicate navigation to KeyInfo page
-            _NavigationSection.navigateToReportKeyInfo();
             testData.namesInputByQA.forEach(name => {
                 Report._KeyInfo.Page.getDateInputByQA(name).should("have.value", testData.verifyDate);
             });

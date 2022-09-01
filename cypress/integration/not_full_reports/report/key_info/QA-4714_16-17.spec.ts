@@ -12,12 +12,7 @@ for Property Rights Appraised and Definition of Market Value sections`,
     });
 
     it("[QA-4714_16-17]", () => {
-        // TODO: [QA-6759] AQA - Remove duplicate navigation to KeyInfo page
-        cy.stepInfo(`1. Proceed to the Report > Key Info page.`);
-        _NavigationSection.navigateToPropertySummary()
-            .navigateToReportKeyInfo();
-
-        cy.stepInfo(`2. Enter the “=F“ and select the 'Foreclosure sale' then “=Sh“ and select 
+        cy.stepInfo(`1. Enter the “=F“ and select the 'Foreclosure sale' then “=Sh“ and select 
         the 'Sheriff's sale' then “=Unc“ and select the 'Unchanged Renovation' option for both sections.`);
         testData.chips.forEach(chip => {
             Report._KeyInfo.activateTextAreaInput(
@@ -40,7 +35,7 @@ for Property Rights Appraised and Definition of Market Value sections`,
                 .navigateToReportKeyInfo();
         });
 
-        cy.stepInfo(`3. Verify value after save and reload`);
+        cy.stepInfo(`2. Verify value after save and reload`);
         testData.chips.forEach(chip => {
             Report._KeyInfo.verifyFormCommentTextBoxText(testData.propertyRightsAppraisedTitle, chip.verifyTexValue)
                 .verifyFormCommentTextBoxText(testData.definitionOfMarketValueTitle, chip.verifyTexValue);
