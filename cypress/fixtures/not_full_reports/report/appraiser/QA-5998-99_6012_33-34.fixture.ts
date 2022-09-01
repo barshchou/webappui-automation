@@ -26,6 +26,5 @@ export default {
     appraiserName,
     inspectorName,
     certificationInspectionComment,
-    certificationAssistanceComment,
-    test
+    certificationAssistanceComment
 };
