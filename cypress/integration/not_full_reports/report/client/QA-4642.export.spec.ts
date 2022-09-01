@@ -33,8 +33,13 @@ describe("Verify the Client Guidelines Discussion on the page",
                     .verifyIdentificationOfTheClientTextBox(chip.verifySuggest);
             });
             Report._Client.inactivateTextAreaInput();
+
+            cy.stepInfo("3. Verify chip style");
+            testData.chipNames.forEach(chip => {
+                Report._Client.verifyStyleInDefaultChip(chip);
+            });
     
-            cy.stepInfo(`3. Download report`);
+            cy.stepInfo(`4. Download report`);
             _NavigationSection.openReviewAndExport(true);
             ReviewExport.generateDocxReport().waitForReportGenerated()
                 .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
