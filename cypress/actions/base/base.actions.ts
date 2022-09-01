@@ -41,9 +41,13 @@ export default class BaseActions {
         cy.go("back");
     }
 
-    clickSaveButton() {
+    clickSaveButton(isProgressBarExist = true) {
         cy.get("*[data-qa='form-save-btn']").click();
-        cy.get("*[role='progressbar']", { timeout: 30000 }).should("exist");
+        if (isProgressBarExist) {
+            cy.get("*[role='progressbar']", { timeout: 30000 }).should("exist");
+        } else {
+            this.verifyProgressBarNotExist();
+        }
         return this;
     }
 
@@ -136,6 +140,15 @@ export default class BaseActions {
     activateTextAreaInput(textAreaInput: Cypress.Chainable<JQuery<HTMLElement>>) {
         textAreaInput.scrollIntoView().realClick({ clickCount: 5, position: "bottomRight" })
             .should("be.focused");
+        return this;
+    }
+
+    typeInAgTable(textAreaInput: Cypress.Chainable<JQuery<HTMLElement>>, value: string) {
+        textAreaInput.realClick().realClick()
+            .scrollIntoView()
+            .focus().type("123456")
+            .clear()
+            .realType(`${value}{enter}`);
         return this;
     }
 }

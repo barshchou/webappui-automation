@@ -7,6 +7,7 @@ import { Income } from "../../../../actions";
 import proFormaTypes from "../../../../enums/proFormaTypes.enum";
 import Enums from "../../../../enums/income/incomeTypesCellNames.enum";
 
+// TODO: Fix this test after https://bowery.atlassian.net/browse/WEB-6720 bug fix
 describe("Potential Real Estate Tax Reimbursement", 
     { tags:[ "@income", "@pro_forma" ] }, () => {
      

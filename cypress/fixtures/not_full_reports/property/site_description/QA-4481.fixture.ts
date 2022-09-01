@@ -7,7 +7,7 @@ const reportCreationFixture = () => {
 };
 
 const _neighborhood = "Hannover";
-const _area = "Adams County";
+const _area = "Bronx County";
 const _state = "PA";
 const _neighborhoodYear = 2022;
 const _submarketAndMarketQuarter = "Q3";
@@ -32,8 +32,8 @@ const _marketValues: string[] = [
     _industrialMarket
 ];
 
-const _multifamilySubmarket = "PA-Adams County";
-const _retailSubmarket = "PA-Adams County";
+const _multifamilySubmarket = "PA-Bronx County";
+const _retailSubmarket = "PA-Bronx County";
 const _officeSubmarket = "PA-York County";
 const _industrialSubmarket = "PA-York County";
 
@@ -61,5 +61,6 @@ export default {
     submarketValues: _submarketValues,
     discussion: _discussion,
     commentary: _commentary,
-    exportSectionName: enums.EXPORT_TITLES.siteDescription
+    exportSectionName: enums.EXPORT_TITLES.siteDescription,
+    commentName: enums.PAGES_TEXTBOX_NAMES.locationDescriptionExport
 };

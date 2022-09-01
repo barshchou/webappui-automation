@@ -8,8 +8,8 @@ describe("Verify Min Rent and Max Rent text fields", () => {
         createReport(testData.reportCreationData);
     });
 
-    it("Test body", () => {
-        NavigationSection.navigateToRentComps()
+    it("[QA-4268]", () => {
+        NavigationSection.navigateToResidentialRentComps()
             .verifyProgressBarNotExist();
         Income.Residential.RentComps.BaseActions.verifyUnitSelected()
             .enterValueToInput("minRent", testData.minRentOk)

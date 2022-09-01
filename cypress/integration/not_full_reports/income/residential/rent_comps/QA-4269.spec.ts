@@ -8,8 +8,8 @@ describe("Verify Min SF and Max SF text fields", () => {
         createReport(testData.reportCreationData);
     });
 
-    it("Test body", () => {
-        NavigationSection.navigateToRentComps()
+    it("[QA-4269]", () => {
+        NavigationSection.navigateToResidentialRentComps()
             .verifyProgressBarNotExist();
         Income.Residential.RentComps.BaseActions.verifyUnitSelected()
             .enterValueToInput("minSF", testData.minSquareFeetOk)

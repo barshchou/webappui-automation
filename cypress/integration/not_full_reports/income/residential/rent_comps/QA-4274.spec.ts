@@ -8,8 +8,8 @@ describe("Verify Amenities drop-down field in the Map filter section on Rent Com
         createReport(testData.reportCreationData);
     });
 
-    it("Test body", () => {
-        NavigationSection.navigateToRentComps();
+    it("[QA-4274]", () => {
+        NavigationSection.navigateToResidentialRentComps();
         Income.Residential.RentComps.BaseActions.clickAmenitiesArrow()
             .checkListOfCheckboxesByQa(testData.amenitiesQaAttr)
             .clickUnitTypesArrowButton()

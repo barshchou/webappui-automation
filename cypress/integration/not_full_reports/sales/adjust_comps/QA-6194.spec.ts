@@ -28,7 +28,7 @@ describe(`Commercial Area/SF for Subject is calculated with correct formula in U
     
                 cy.stepInfo(`1. Go to Sales > Adjust Comps and expand Utility Adjustment section`);
                 NavigationSection.navigateToAdjustComps();
-                Sales._AdjustComps.Page.getAdjustmentArrow(testData.adjustmentName).click();
+                Sales._AdjustComps.expandAdjustmentDetails(testData.adjustmentName);
     
                 cy.stepInfo(`2. Verify Commercial Area/SF row for Subject column 
                 in Utility Adjustment section is calculate`);
