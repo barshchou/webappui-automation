@@ -12,18 +12,25 @@ export const reportCreationFixture = () => {
     });
 };
 
-const _buildingName = 'Test Building Name QA-4718';
+const buildingName = 'Test Building Name QA-4718';
 
-const _chipsOptions: BoweryReports.ChipsCreationOptions = {
-    buildingName: _buildingName,
+const chipsOptions: BoweryReports.ChipsCreationOptions = {
+    buildingName,
 };
+
+const chipNames = [ 
+    "Interest Appraised As Is Market Value Selection", 
+    "Interest Appraised As Stabilized selection",
+    "Interest Appraised" 
+];
 
 export default {
     reportCreationData: reportCreationFixture(),
-    chips: chipsDataCreator.getChipsData(_chipsOptions, enums.VALUE_CONCLUSION_TYPE.AS_STABILIZED),
-    buildingName: _buildingName,
+    chips: chipsDataCreator.getChipsData(chipsOptions, enums.VALUE_CONCLUSION_TYPE.AS_STABILIZED),
+    buildingName,
     propertyRightsAppraisedTitle: Enums.PAGES_TEXTBOX_NAMES.propertyRightsAppraised,
     definitionOfMarketValueTitle: Enums.PAGES_TEXTBOX_NAMES.definitionOfMarketValue,
     propertyRightsSection: Enums.EXPORT_TITLES.propertyRightsAppraised,
-    definitionOfMarketValueSection: Enums.EXPORT_TITLES.definitionOfMarketValue
+    definitionOfMarketValueSection: Enums.EXPORT_TITLES.definitionOfMarketValue,
+    chipNames
 };
