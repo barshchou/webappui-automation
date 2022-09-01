@@ -3,6 +3,6 @@ const statuses = {
     confirmed: "confirmed",
     verified: "verified",
     any: "any"
-};
+} as const;
 
 export default Object.freeze(statuses);
