@@ -56,7 +56,7 @@ class AppraiserActions extends BaseActionsExt<typeof appraiserPage> {
 
     verifyCertificationAssistanceCommentary(): AppraiserActions {
         appraiserPage.getAllNamesWithCheckSignReportCheckboxes(false).each(item => {
-            appraiserPage.certificationAssistanceText.should("include.text", item.text());
+            this.verifyFormCommentTextBoxText("Certification Assistance", item.text());
         });
         return this;
     }

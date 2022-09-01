@@ -27,7 +27,7 @@ describe(`Verify the "Lease Terms Adjustment Sub-Total"`,
 
             cy.stepInfo(`Preconditions: Add any Comp Group (Income > Commercial > Comp Groups). 
                     Move tenants to created Comp Group (Income > Commercial > Comp Groups)`);
-            _NavigationSection.openCompGroupsInCommercial();
+            _NavigationSection.navigateToCommercialCompGroups();
             Income._CommercialManager.CompGroups
                 .addCompGroup(testData.compGroupName)
                 .dragAllCommercialUnitsIntoGroup(testData.compGroupName, testData.unitsNumber);

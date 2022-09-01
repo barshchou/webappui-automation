@@ -53,7 +53,7 @@ conditionalDescribe("[QA-6404] Verify possibility to edit text",
             if (!Cypress.currentTest.title.includes("Check export")) {
                 loginAction();
                 _NavigationSection.navigateToContentManagementSystem();
-                _CmsBaseActions.openLetterOfTransmittalPage()
+                _CmsBaseActions.openIncomeCapitalizationApproachPage()
                     .revertSectionToOriginal(testData.sectionName);
             }
 

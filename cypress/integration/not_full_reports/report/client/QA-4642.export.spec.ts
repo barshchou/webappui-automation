@@ -3,8 +3,7 @@ import testData from "../../../../fixtures/not_full_reports/report/client/QA-464
 import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from '../../../../actions/base';
 
-//TODO update test after test-cases updates QA-6543
-describe("Verify the Client Guidelines Discussion on the page", 
+describe("Verify the Client Guidelines Discussion on the page",
     { tags: [ "@report", "@client", "@check_export" ] }, () => {
         it("[QA-4642]",  () => {
             cy.stepInfo(`1. Proceed to the Report > Client page`);
@@ -52,7 +51,7 @@ describe("Verify the Client Guidelines Discussion on the page",
                     testData.chips.forEach(item => {
                         cy.contains(testData.identificationOfTheClientSection).next().scrollIntoView()
                             .should("include.text", item.verifyExport);
-                        cy.contains(testData.intendedUseSection).next().next().scrollIntoView()
+                        cy.contains(testData.intendedUseSection).next().scrollIntoView()
                             .should("include.text", item.verifyExport);
                     });
                 }); 

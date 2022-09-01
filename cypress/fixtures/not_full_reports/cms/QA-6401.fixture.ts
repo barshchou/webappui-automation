@@ -8,17 +8,17 @@ const reportCreationFixture = () => {
 };
 
 const _languagesDefault = [
-    "The building is 100% occupied. ",
+    "The building is 100% occupied.",
 
     "The subject property has good freeway access and is in close proximity to schools, parks, " + 
-    "shopping centers, and employment. "
+    "shopping centers, and employment."
 ];
 
 const _languagesUpdated = [
     "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
 
     "The subject property has good freeway access and is in close proximity to schools, parks, " + 
-    "shopping centers, and employment. "
+    "shopping centers, and employment."
 ];
 
 export default {

@@ -4,14 +4,15 @@ import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { Report } from "../../../../actions";
 
-describe("[QA-4069] Check the helper text for Provided Documents)",
+describe("Check the helper text for Provided Documents)",
     { tags: [ "@report", "@key_info", "@check_export" ] }, () => {
-        it("Test body", () => {
+        it("[QA-4069]", () => {
             cy.stepInfo(`1. Create report`);
             createReport(testData.reportCreationData);
 
+            // TODO: [QA-6759] AQA - Remove duplicate navigation to KeyInfo page
             cy.stepInfo(`2. Go to Report → Key Info → Engagement tab and upload files`);
-            _NavigationSection.navigateToReportInformation();
+            _NavigationSection.navigateToReportKeyInfo();
             Report._KeyInfo.uploadFile(testData.pdfFileName);
 
             _NavigationSection.openReviewAndExport();

@@ -9,8 +9,8 @@ describe("Verify the UI controls of the Map filter section when Unit type of sea
         createReport(testData.reportCreationData);
     });
 
-    it("Test body", () => {
-        NavigationSection.navigateToRentComps()
+    it("[QA-4266]", () => {
+        NavigationSection.navigateToResidentialRentComps()
             .verifyProgressBarNotExist();
         Income.Residential.RentComps.BaseActions.verifyUnitSelected();
         RentCompsPage.unitTypesWrapper.should("exist");

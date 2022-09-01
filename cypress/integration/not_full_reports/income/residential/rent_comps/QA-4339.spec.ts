@@ -12,14 +12,14 @@ describe(`Verify clicking Add Unit button on Add New Rent Comp overlay is adding
         createReport(testData.reportCreationData);
     });
 
-    it("Test body", () => {
+    it("[QA-4339]", () => {
         NavigationSection.navigateToPropertySummary();
         Property.Summary.enterNumberOfResUnits(testData.numberOfUnits);
         NavigationSection.navigateToResInPlaceRentRoll();
         Income.Residential.InPlaceRentRoll.enterAllEqualRentTypeCells(testData.rentType)
             .enterBedroomsNumberByRowNumber(testData.numberOfBedrooms)
             .checkCheckboxByLabel(testData.includePerRoomCheckbox);
-        NavigationSection.openRentCompsInResidential();
+        NavigationSection.navigateToResidentialRentComps();
         Income.Residential.RentComps.BaseActions.verifyUnitSelected()
             .openAddNewComparableForm(testData.formData.address);
         Income.Residential.RentComps.AddForm.enterUnitNumber(testData.formData.unitNumber)

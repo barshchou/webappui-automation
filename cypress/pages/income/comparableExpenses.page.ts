@@ -4,7 +4,8 @@ class ComparableExpensesPage extends BasePage {
     get addBlankColumnButton() { return cy.get("[data-qa=comparable-exp-add-blank-btn]"); }
 
     getUnifiedEditableAndTotalCells(cellName: string) {
-        return cy.get(`[row-id=${cellName}] [role=gridcell]:not([col-id=average]):not([col-id=name])`);
+        return cy.get(`[row-id=${cellName}] [role=gridcell]:not([col-id=average]):not([col-id=name])` +
+            `:not([col-id=row-action])`);
     }
 
     getUnifiedAverageCell(cellName: string) { return cy.get(`[row-id=${cellName}] [col-id=average]`); }
@@ -17,7 +18,7 @@ class ComparableExpensesPage extends BasePage {
         return cy.get(`[row-id=${rowName}] [col-id=name]`);
     }
 
-    get newCategoryNameInput() { return cy.get("[data-qa=expenseName-form-control] input"); }
+    get newCategoryNameInput() { return cy.get("[name='expenseName']"); }
 
     get newCategoryInputSuggestionDropdown() { return cy.get("[role=menuitem]"); }
 }

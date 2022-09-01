@@ -15,6 +15,8 @@ export default {
     comparableAdjustment: _compAdjustments,
     calculationUnits: Enums.CALCULATION_UNITS.psf,
     basis:"Price per SF",
-    exportSectionName: Enums.EXPORT_TITLES.cumulativePricePerUnit,
+    exportSectionName: Enums.EXPORT_TITLES.cumulativePricePerSf,
+    compGbaInput: 300,
+    contractPrice: 150000,
     sectionToExport: Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.salesComparisonApproach
 };
