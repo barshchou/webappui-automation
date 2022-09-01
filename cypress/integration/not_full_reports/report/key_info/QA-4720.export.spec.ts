@@ -23,18 +23,20 @@ ACAS reports for Property Rights Appraised and Definition
         'Commercial Unit Count', 'Street Address', 'Street Name', 'Site Area', 'Year Built', 'Block', 
         'Lot', 'Concluded Cap Rate', 'Zones', 'Condition'.`);
         testData.chips.forEach(chip => {
+            Report._KeyInfo.Page.formCommentTextBox(testData.propertyRightsAppraisedTitle).dblclick();
             Report._KeyInfo.enterFormCommentTextBox(testData.propertyRightsAppraisedTitle,
                 `=${chip.typeSuggestValue}`, false)
                 .clickNarrativeSuggestions(chip.suggestionName)
-                .verifyFormCommentTextBoxText(testData.propertyRightsAppraisedTitle, chip.verifySuggest)
-                .activateTextAreaInput(Report._KeyInfo.Page.formCommentTextBox(testData.propertyRightsAppraisedTitle));
+                .verifyFormCommentTextBoxText(testData.propertyRightsAppraisedTitle, chip.verifySuggest);
+            cy.wait(1000);
         });
         testData.chips.forEach(chip => {
+            Report._KeyInfo.Page.formCommentTextBox(testData.definitionOfMarketValueTitle).dblclick();
             Report._KeyInfo.enterFormCommentTextBox(testData.definitionOfMarketValueTitle,
                 `=${chip.typeSuggestValue}`, false)
                 .clickNarrativeSuggestions(chip.suggestionName, 2)
-                .verifyFormCommentTextBoxText(testData.definitionOfMarketValueTitle, chip.verifySuggest)
-                .activateTextAreaInput(Report._KeyInfo.Page.formCommentTextBox(testData.definitionOfMarketValueTitle));
+                .verifyFormCommentTextBoxText(testData.definitionOfMarketValueTitle, chip.verifySuggest);
+            cy.wait(1000);
         });
         Report._KeyInfo.inactivateTextAreaInput()
             .clickSaveButton();
