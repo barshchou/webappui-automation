@@ -2,7 +2,7 @@ import { createReport } from "../../actions/base/baseTest.actions";
 import ReportDataCreator from "../../fixtures/data_creator/reportData.creator";
 import { ReviewExport } from "../../actions";
 import { BoweryAutomation } from "../../types/boweryAutomation.type";
-import { _NavigationSection } from "../../actions/base"; 
+import { _NavigationSection } from "../../actions/base";
 
 const reportCreationData: BoweryAutomation.ReportCreationData = 
     ReportDataCreator.getReportData("generateDownloadNewReport");
