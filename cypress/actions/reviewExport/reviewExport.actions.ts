@@ -168,16 +168,12 @@ class ReviewExportActions extends BaseActionsExt<typeof reviewExportPage> {
     selectSectionsToIncludeInExport(
         sectionNames: BoweryReports.SectionsToIncludeInExport | 
         Array<BoweryReports.SectionsToIncludeInExport>): ReviewExportActions {
+        let sections = Array.isArray(sectionNames) ? sectionNames : [ sectionNames ];
         this.selectDeselectAllSectionsForExport(false);
-        if (Array.isArray(sectionNames)) {
-            sectionNames.forEach(sectionName => {
-                this.checkUncheckSectionToIncludeInExport(sectionName)
-                    .verifySectionToIncludeInExportCheckboxState(sectionName);
-            });
-        } else {
-            this.checkUncheckSectionToIncludeInExport(sectionNames)
-                .verifySectionToIncludeInExportCheckboxState(sectionNames);
-        }
+        sections.forEach(section => {
+            this.checkUncheckSectionToIncludeInExport(section)
+                .verifySectionToIncludeInExportCheckboxState(section);
+        });
         return this;
     }
 }
