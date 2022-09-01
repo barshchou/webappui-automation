@@ -8,7 +8,7 @@ import testData from '../../../../fixtures/not_full_reports/report/client/QA-462
 import { conditionalDescribe } from "../../../checkIsProd.utils";
 
 // TODO: Test fails on Cover Page. [QA-6751] Check test after WEB-5721 implementation
-conditionalDescribe("[QA-4627] Verify the functionality of the Client field.", 
+conditionalDescribe("Verify the functionality of the Client field.", 
     { tags:[ "@report", "@client" ] }, () => {
         beforeEach("Restore state. Create report", () => {
             loginAction();
@@ -21,7 +21,7 @@ conditionalDescribe("[QA-4627] Verify the functionality of the Client field.",
             createReport(testData.reportCreationData);
         });
 
-        it("Test body", () => {
+        it("[QA-4627]", () => {
             cy.stepInfo(`1. Proceed to the Report > Client page.`);
             _NavigationSection.navigateToClientPage();
 

@@ -3,7 +3,7 @@ import { createReport } from "../../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../../actions/base";
 import { Report } from "../../../../../actions";
 
-describe("[QA-4351] Pre-fill Inspection Date from Salesforce (Inspection Date is the same as Date of Valuation)",
+describe("Pre-fill Inspection Date from Salesforce (Inspection Date is the same as Date of Valuation)",
     { tags: [ "@report", "@key_info", "@salesforce" ] }, () => {
         beforeEach("Login, create report", () => {
             cy.stepInfo(`1. Create report while creating set the same Job number 
@@ -12,7 +12,7 @@ describe("[QA-4351] Pre-fill Inspection Date from Salesforce (Inspection Date is
             createReport(testData.reportCreationData);
         });
 
-        it("Test body", () => {
+        it("[QA-4351]", () => {
             cy.stepInfo(`2. Go to Report → Key Info → Engagement tab and compare the 
             values in the Inspection Date and the Date of Valuation
             with the value in the SalesForce job page → Inspection section → Inspection Date raw`);

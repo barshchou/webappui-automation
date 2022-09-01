@@ -4,9 +4,9 @@ import { _NavigationSection } from "../../../../actions/base";
 import { Report, ReviewExport } from "../../../../actions";
 import Enums from "../../../../enums/enums";
 
-describe("[QA-4104] Verify the Market Value generated commentary", 
+describe("Verify the Market Value generated commentary", 
     { tags: [ "@report", "@key_info", "@check_export" ] }, () => {
-        it("Test body", () => {
+        it("[QA-4104]", () => {
             cy.stepInfo(`1. Create report while creating set the same Job number 
                         as report from SalesForce has (e.g. JOB-1764459005) 
                         Make sure that there is no Inspection Date in the Salesforce job`);

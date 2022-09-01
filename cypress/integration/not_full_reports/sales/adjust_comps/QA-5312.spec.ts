@@ -10,7 +10,7 @@ describe("Total Utility Adjustments in Sales Adjustment Grid is calculated with 
             createReport(testData.reportCreationData);
         });
 
-        it("Test body", () => {
+        it("[QA-5312]", () => {
             cy.stepInfo("1. Navigate to Find comps page and add a sales comps");
             _NavigationSection.navigateToFindComps();
             testData.numberOfSalesComps.forEach((index) => {

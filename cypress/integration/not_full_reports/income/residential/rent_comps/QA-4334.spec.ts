@@ -11,7 +11,7 @@ describe.skip(`Verify Search Results overlay with found results is displayed on 
         createReport(testData.reportCreationData);
     });
 
-    it("Test body", () => {
+    it("[QA-4334]", () => {
         NavigationSection.navigateToResidentialRentComps()
             .verifyProgressBarNotExist();
         Income.Residential.RentComps.BaseActions.openAddNewComparableForm(testData.searchAddress);

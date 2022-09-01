@@ -3,7 +3,7 @@ import { _NavigationSection } from "../../../../actions/base";
 import { createReport } from "../../../../actions/base/baseTest.actions";
 import testData from '../../../../fixtures/not_full_reports/report/key_info/QA-4714_16-17.fixture';
 
-describe(`[QA-4714_16-17] Verify the suggested text dropdown in the new narrative component added through "=" 
+describe(`Verify the suggested text dropdown in the new narrative component added through "=" 
 for the 'Foreclosure sale' then “=Sh“ and select the 'Sheriff's sale'  option on the Report > Key Info page 
 for Property Rights Appraised and Definition of Market Value sections`,
 { tags:[ "@report", "@key_info" ] }, () => {
@@ -11,7 +11,7 @@ for Property Rights Appraised and Definition of Market Value sections`,
         createReport(testData.reportCreationData);
     });
 
-    it("Test body", () => {
+    it("[QA-4714_16-17]", () => {
         // TODO: [QA-6759] AQA - Remove duplicate navigation to KeyInfo page
         cy.stepInfo(`1. Proceed to the Report > Key Info page.`);
         _NavigationSection.navigateToPropertySummary()

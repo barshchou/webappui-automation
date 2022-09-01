@@ -5,9 +5,9 @@ import { Report } from "../../../../../actions";
 import { reportCreationData } from
     "../../../../../fixtures/not_full_reports/sf_integration/report/key_info/QA-4031.fixture";
 
-describe("[QA-4031] Verify the export of the report with the Pre-filled Report Due Date from SalesForce",
+describe("Verify the export of the report with the Pre-filled Report Due Date from SalesForce",
     { tags: [ "@report", "@key_info", "@salesforce" ] }, () => {
-        it("Test body", () => {
+        it("[QA-4031]", () => {
             testData.jobNumbersAndValues.forEach((value, index) => {
                 cy.stepInfo(`[REPORT #${index + 1}] 
                             1. Create a new report on the WebApp (Note: the JOB # of that report corresponds with 

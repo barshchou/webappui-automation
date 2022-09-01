@@ -4,13 +4,13 @@ import { createReport } from "../../../../actions/base/baseTest.actions";
 import testData from '../../../../fixtures/not_full_reports/report/key_info/QA-4695.fixture';
 import Enums from "../../../../enums/enums";
 
-describe("[QA-4695] Verify the Save button functionality on the Report > Client page",
+describe("Verify the Save button functionality on the Report > Client page",
     { tags:[ "@report", "@key_info" ] }, () => {
         beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);
         });
 
-        it("Test body", () => {
+        it("[QA-4695]", () => {
             // TODO: [QA-6759] AQA - Remove duplicate navigation to KeyInfo page
             cy.stepInfo("1. Proceed to the Report > Key Info page.");
             _NavigationSection.navigateToReportKeyInfo();

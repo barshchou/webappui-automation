@@ -3,13 +3,13 @@ import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { Income, Property } from "../../../../actions";
 
-describe("[QA-4537] Verify the Commercial Unit # SF field functionality",
+describe("Verify the Commercial Unit # SF field functionality",
     { tags:[ "@property", "@commercial_units" ] }, () => {
         beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);
         });
 
-        it("Test body", () => {
+        it("[QA-4537]", () => {
             cy.stepInfo(`1. Proceed to the Property > Commercial Units page.`);
             _NavigationSection.navigateToPropertySummary();
             Property._Summary.enterNumberOfCommercialUnits(testData.numberOfCommercialUnits);

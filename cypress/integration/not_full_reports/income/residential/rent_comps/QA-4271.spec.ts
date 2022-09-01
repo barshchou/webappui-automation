@@ -8,7 +8,7 @@ describe("Verify the Source of Information drop-down field in the when Unit type
         createReport(testData.reportCreationData);
     });
 
-    it("Test body", () => {
+    it("[QA-4271]", () => {
         NavigationSection.navigateToResidentialRentComps()
             .verifyProgressBarNotExist();
         Income.Residential.RentComps.BaseActions.clickSourceOfInfoButton()

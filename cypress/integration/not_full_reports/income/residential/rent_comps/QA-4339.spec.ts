@@ -12,7 +12,7 @@ describe(`Verify clicking Add Unit button on Add New Rent Comp overlay is adding
         createReport(testData.reportCreationData);
     });
 
-    it("Test body", () => {
+    it("[QA-4339]", () => {
         NavigationSection.navigateToPropertySummary();
         Property.Summary.enterNumberOfResUnits(testData.numberOfUnits);
         NavigationSection.navigateToResInPlaceRentRoll();

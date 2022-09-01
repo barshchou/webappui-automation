@@ -3,13 +3,13 @@ import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { Property } from "../../../../actions";
 
-describe("[QA-4570] Verify the Back button functionality on the Commercial Units page",
+describe("Verify the Back button functionality on the Commercial Units page",
     { tags:[ "@property", "@commercial_units" ] }, () => {
         beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);
         });
 
-        it("Test body", () => {
+        it("[QA-4570]", () => {
             cy.stepInfo(`1. The < Back button is displayed on the Commercial Units page.`);
             _NavigationSection.navigateToPropertySummary();
             Property._Summary.enterNumberOfCommercialUnits(testData.numberOfCommercialUnits);

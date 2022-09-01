@@ -11,7 +11,7 @@ describe(`As Is Market Value -> Time Period date is pulled from Report ->
         createReport(testData.reportCreationData);
     });
 
-    it("Test body", () => {
+    it("[QA-4307]", () => {
         Report.KeyInfo.enterDateByType(testData.dateOfValuation);
         NavigationSection.navigateToSalesValueConclusion();
         Sales.ValueConclusion.verifyAsIsMarketPeriod(testData.dateOfValuation.date);

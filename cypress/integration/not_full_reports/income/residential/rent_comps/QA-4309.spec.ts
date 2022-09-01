@@ -10,7 +10,7 @@ describe("Verify Zoom in and Zoom out buttons for the map on Rent Comps page whe
         createReport(reportCreationData);
     });
 
-    it("Test body", () => {
+    it("[QA-4309]", () => {
         NavigationSection.navigateToResidentialRentComps()
             .verifyProgressBarNotExist();
         Income.Residential.RentComps.BaseActions.verifyUnitSelected()

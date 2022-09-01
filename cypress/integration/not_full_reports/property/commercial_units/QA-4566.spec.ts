@@ -12,7 +12,7 @@ describe("Verify the functionality of the Frontage radio button",
             createReport(testData.reportCreationData);
         });
 
-        it("Test body", () => {
+        it("[QA-4566] ", () => {
             cy.stepInfo(`1. Proceed to the Property > Commercial Units page.`);
             NavigationSection.navigateToPropertySummary();
             Property.Summary.enterNumberOfCommercialUnits(testData.numberOfCommercialUnits);

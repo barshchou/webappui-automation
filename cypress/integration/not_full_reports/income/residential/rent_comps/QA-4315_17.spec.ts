@@ -10,7 +10,7 @@ and Add New Rent Comp button`, () => {
         createReport(testData.reportCreationData);
     });
 
-    it("Test body", () => {
+    it("[QA-4315_17]", () => {
         NavigationSection.navigateToResidentialRentComps();
         Income.Residential.RentComps.BaseActions.openAddNewComparableForm(testData.searchAddress);
         Income.Residential.RentComps.AddForm.clickCloseButton();

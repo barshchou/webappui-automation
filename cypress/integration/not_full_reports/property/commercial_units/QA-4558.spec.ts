@@ -15,7 +15,7 @@ describe("Verify the functionality of the Use* radio button",
             _NavigationSection.navigateToCommercialUnits();
         });
 
-        it("Commercial Unit SF Discussion text", () => {
+        it("[QA-4558] Commercial Unit SF Discussion text", () => {
             cy.stepInfo("3. Verify each Use* radio affects commercialUnitSFDiscussion");
             Property._CommercialUnits.verifyRadioIsChecked(testData.groupName, testData.defaultUse);
             testData.useRadios.forEach((value, index) => {
@@ -40,7 +40,7 @@ describe("Verify the functionality of the Use* radio button",
             });
         });
 
-        it(`Verify radio buttons affect Income > Commercial > In Place RR page and 
+        it(`[QA-4558] Verify radio buttons affect Income > Commercial > In Place RR page and 
         Income > Commercial > Stabilized Rent Roll pages`, () => {
             cy.stepInfo(`3. Verify radio buttons affect Income > Commercial > In Place RR page and 
             Income > Commercial > Stabilized Rent Roll pages`);
@@ -59,7 +59,7 @@ describe("Verify the functionality of the Use* radio button",
             });
         });
 
-        it("Verify that the radio button selection affects the Income > Potential Gross Income page", () => {
+        it("[QA-4558] Verify that the radio button selection affects the Income > Potential Gross Income page", () => {
             testData.useRadios.forEach((radio, index) => {
                 Property._CommercialUnits.clickRadioButtonByValueAndUnitIndex(testData.groupName, radio);
                 if (radio === "other") { 
@@ -91,7 +91,7 @@ describe("Verify the functionality of the Use* radio button",
             });
         });
 
-        it("Verify that the radio button selection affects the Income > Pro Forma page", () => {
+        it("[QA-4558] Verify that the radio button selection affects the Income > Pro Forma page", () => {
             testData.useRadios.forEach((radio, index) => {
                 Property._CommercialUnits.clickRadioButtonByValueAndUnitIndex(testData.groupName, radio);
                 if (radio === "other") { 

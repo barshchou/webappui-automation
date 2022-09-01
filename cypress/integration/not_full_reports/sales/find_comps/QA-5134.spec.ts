@@ -5,33 +5,33 @@ import testData from "../../../../fixtures/not_full_reports/sales/find_comps/QA-
 import { createReport } from "../../../../actions/base/baseTest.actions";
 import mapKeysUtils from "../../../../utils/mapKeys.utils";
 
-describe(`[QA-5134] Check when "custom" dropdown is selected user can drag&drop comps`, 
+describe(`Check when "custom" dropdown is selected user can drag&drop comps`, 
     { tags: [ "@sales", "@find_comps", "@comp_plex" ] }, () => {
         beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);
         });
 
-        it("Test body", () => {
-            cy.stepInfo(`[QA-5134] -> Verify when “custom” is selected, the user can drag and drop 
+        it("[QA-5134]", () => {
+            cy.stepInfo(`Verify when “custom” is selected, the user can drag and drop 
             Selected comps up and down in the list. NOTE: The drag and drop functionality 
             is disabled when Sort: Sale Date is selected`);
 
-            cy.stepInfo(`1. [QA-5134] -> User navigates to SalesComps Search page `);
+            cy.stepInfo(`1. User navigates to SalesComps Search page `);
             _NavigationSection.navigateToFindComps();
         
-            cy.stepInfo(`2. [QA-5134] -> User selects n-first comps from map`);
+            cy.stepInfo(`2. User selects n-first comps from map`);
             testData.compsToAdd.forEach(() => {
                 Sales._FindComps.Actions.selectCompFromMap();
             });
 
-            cy.stepInfo(`3. [QA-5134] -> When sort for Selected Comparables set to "Sale Date",
+            cy.stepInfo(`3. When sort for Selected Comparables set to "Sale Date",
                     then user unable to sort selected comparables by drag-and-drop`);
             cy.get(Sales._FindComps.Page.selectorDraggableElement(1)).should("not.exist");
 
-            cy.stepInfo(`4. [QA-5134] -> User set "Custom" sort for Selected Comparables`);
+            cy.stepInfo(`4. User set "Custom" sort for Selected Comparables`);
             Sales._FindComps.Actions.selectedCompsSetSort("Custom");
 
-            cy.stepInfo(`5.1. [QA-5134] -> User can move selected comparable down the list by drag-and-drop`);
+            cy.stepInfo(`5.1. User can move selected comparable down the list by drag-and-drop`);
             Sales._FindComps.Page.addressSalesComparablesTable.spread((...comps) => {
                 comps = comps.slice(1).map(elem => elem.innerText);
                 cy.wrap(comps).as(testData.aliasCompsBefore);
@@ -39,7 +39,7 @@ describe(`[QA-5134] Check when "custom" dropdown is selected user can drag&drop 
                 Sales._FindComps.moveComparableByDnD(Sales._FindComps.Page.selectorDraggableElement(1), 0, "down", 2);
             });
 
-            cy.stepInfo(`5.2. [QA-5134] -> User see that order of comps changed`);
+            cy.stepInfo(`5.2. User see that order of comps changed`);
             Sales._FindComps.Page.addressSalesComparablesTable.spread((...comps) => {
                 comps = comps.slice(1).map(elem => elem.innerText);
                 cy.wrap(comps).as(testData.aliasCompsAfter);

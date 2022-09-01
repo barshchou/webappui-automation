@@ -4,10 +4,10 @@ import { _NavigationSection } from "../../../../actions/base";
 import { createReport } from "../../../../actions/base/baseTest.actions";
 import testData from '../../../../fixtures/not_full_reports/report/key_info/QA-4720.fixture';
 
-describe(`[QA-4720] Verify the "Linked" chips dropdown in the new narrative component for 
+describe(`Verify the "Linked" chips dropdown in the new narrative component for 
 ACAS reports for Property Rights Appraised and Definition 
     of Market Value sections`, { tags:[ "@report", "@key_info", "@check_export" ] }, () => {
-    it("Test body", () => {
+    it("[QA-4720]", () => {
         cy.stepInfo("Login, create report");
         createReport(testData.reportCreationData);
 

@@ -10,7 +10,7 @@ describe("Verify the Client Guidelines Discussion on the page",
             createReport(testData.reportCreationData);
         });
 
-        it("Test body", () => {
+        it("[QA-4650]", () => {
             cy.stepInfo(`1. Fill in the editable fields with values and do NOT click on the Save button.`);
             NavigationSection.navigateToClientPage();
             Report.Client.enterClientName(testData.clientName).

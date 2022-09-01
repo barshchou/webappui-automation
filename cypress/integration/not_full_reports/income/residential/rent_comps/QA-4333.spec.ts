@@ -12,7 +12,7 @@ describe(`Verify Select button for the results displayed in the Map section is t
         createReport(reportCreationData);
     });
 
-    it("Test body", () => {
+    it("[QA-4333]", () => {
         NavigationSection.navigateToResidentialRentComps();
         Income.Residential.RentComps.BaseActions.verifyLoadingDoesNotExist()
             .verifyUnitSelected()

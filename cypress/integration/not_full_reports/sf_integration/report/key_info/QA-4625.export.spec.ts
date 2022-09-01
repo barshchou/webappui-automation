@@ -5,7 +5,7 @@ import { _NavigationSection } from "../../../../../actions/base";
 
 describe("Verify the report export with a pre-filled Letter of Engagement from Dropbox",
     { tags: [ "@report", "@key_info", "@salesforce", "@check_export" ] }, () => {
-        it("Test body", () => {
+        it("[QA-4625]", () => {
             cy.stepInfo(`1. Create a new report on the WebApp (Note: the JOB # of that report 
                         corresponds with the JOB # of an open job on SalesForce)`);
             createReport(testData.reportCreationData);

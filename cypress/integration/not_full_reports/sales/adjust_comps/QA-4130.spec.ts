@@ -13,7 +13,7 @@ describe("Adjusted Price per Residential Unit in Sales Adjustment Grid is calcul
             createReport(testData.reportCreationData);
         });
 
-        it("Test body", () => {
+        it("[QA-4130]", () => {
             cy.stepInfo(`2. Navigate to Property > Summary page and fill Residential Units and Commercial Units`);
             _NavigationSection.navigateToPropertySummary();
 

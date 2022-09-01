@@ -11,7 +11,7 @@ describe("Calculation of Market Condition adjustment",
             createReport(testData.reportCreationData);
         });
 
-        it("Test body", () => {
+        it("[QA-5350_5706]", () => {
             cy.stepInfo(`1. Report > Key Info and fill the Date of Valuation`);
             Report._KeyInfo.enterDateByType(testData.valuationDateFixture);
     

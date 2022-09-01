@@ -4,9 +4,9 @@ import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { Report } from "../../../../actions";
 
-describe("[QA-4069] Check the helper text for Provided Documents)",
+describe("Check the helper text for Provided Documents)",
     { tags: [ "@report", "@key_info", "@check_export" ] }, () => {
-        it("Test body", () => {
+        it("[QA-4069]", () => {
             cy.stepInfo(`1. Create report`);
             createReport(testData.reportCreationData);
 
