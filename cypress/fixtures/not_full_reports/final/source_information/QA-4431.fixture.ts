@@ -44,5 +44,5 @@ export default {
     chipNames,
     color: "rgb(210, 65, 65)",
     backgroundColor: "rgb(255, 233, 233)",
-    sectionToExport: Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.introduction
+    sectionToExport: [ Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.introduction ]
 };

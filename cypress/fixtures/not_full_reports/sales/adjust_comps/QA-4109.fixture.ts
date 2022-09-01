@@ -18,5 +18,5 @@ export default {
     exportSectionName: Enums.EXPORT_TITLES.cumulativePricePerSf,
     compGbaInput: 300,
     contractPrice: 150000,
-    sectionToExport: Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.salesComparisonApproach
+    sectionToExport: [ Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.salesComparisonApproach ]
 };

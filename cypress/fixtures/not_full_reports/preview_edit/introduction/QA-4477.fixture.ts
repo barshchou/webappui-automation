@@ -18,5 +18,5 @@ export default {
     title: _title,
     definitionOfMarketValueList: _definitionOfMarketValueList,
     exportSectionName: Enums.EXPORT_TITLES.definitionOfMarketValue,
-    sectionToExport: Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.introduction
+    sectionToExport: [ Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.introduction ]
 };

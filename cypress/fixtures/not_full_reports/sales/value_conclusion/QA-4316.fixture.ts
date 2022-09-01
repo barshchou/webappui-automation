@@ -73,5 +73,5 @@ export default {
             rentLossName: miscellaneousTitles.OTHER
         }
     ],
-    sectionToExport: Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.salesComparisonApproach
+    sectionToExport: [ Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.salesComparisonApproach ]
 };

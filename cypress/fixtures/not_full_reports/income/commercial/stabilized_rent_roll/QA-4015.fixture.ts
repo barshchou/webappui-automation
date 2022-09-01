@@ -23,5 +23,5 @@ export default {
     monthlyRent: "$20,000.00",
     newTenantName: "new test name",
     exportSectionName: Enums.EXPORT_TITLES.leaseStructure,
-    sectionToExport: Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.incomeCapitalizationApproach
+    sectionToExport: [ Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.incomeCapitalizationApproach ]
 };

@@ -30,5 +30,5 @@ export default {
     featureFlagEnable: 0,
     textUpdate: _languagesUpdated,
     defaultText: _languagesDefault,
-    sectionToExport: Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.summaryOfSalientFactsAndConclusions
+    sectionToExport: [ Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.summaryOfSalientFactsAndConclusions ]
 };

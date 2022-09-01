@@ -26,5 +26,5 @@ export default {
     verifyValue: "78-80 Saint Marks Place__New York, NY 10003 - Bowery EL - signed.pdf",
     LOESourceStrings: _LOESourceStrings,
     exportSectionName: Enums.EXPORT_TITLES.letterOfEngagement,
-    sectionToExport: Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.addenda
+    sectionToExport: [ Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.addenda ]
 };

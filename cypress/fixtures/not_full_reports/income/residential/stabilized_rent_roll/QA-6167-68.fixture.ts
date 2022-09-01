@@ -28,5 +28,5 @@ export default {
     rentTypeIncrease: [ 1.014, 1 ], //1st rent controlled, 2nd market rent
     potentialGrossSection: Enums.EXPORT_TITLES.potentialGrossResidentialIncome,
     rentControlledSection: Enums.EXPORT_TITLES.rentControlledIncreases,
-    sectionToExport: Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.incomeCapitalizationApproach
+    sectionToExport: [ Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.incomeCapitalizationApproach ]
 };

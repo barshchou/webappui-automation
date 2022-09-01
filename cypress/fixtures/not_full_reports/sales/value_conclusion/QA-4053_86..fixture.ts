@@ -23,5 +23,5 @@ export default {
     valueOpinionSection: Enums.EXPORT_TITLES.valueOpinionViaTheSalesComparisonApproach,
     concludedValueSection: Enums.EXPORT_TITLES.concludedValuePerUnit,
     general: Object.freeze(generalFixture()),
-    sectionToExport: Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.salesComparisonApproach
+    sectionToExport: [ Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.salesComparisonApproach ]
 };

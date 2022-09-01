@@ -17,5 +17,5 @@ export default {
     taxes: 1250,
     grossRevenue: 10000,
     toeExportValue: "$7,826",
-    sectionToExport: Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.incomeCapitalizationApproach
+    sectionToExport: [ Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.incomeCapitalizationApproach ]
 };

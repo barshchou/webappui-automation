@@ -8,5 +8,5 @@ export default {
     }),
     leaseStatus: Enums.LEASE_STATUS.occupied,
     defaultValue: "Average",
-    sectionToExport: Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.descriptionOfImprovements
+    sectionToExport: [ Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.descriptionOfImprovements ]
 };

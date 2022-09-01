@@ -22,5 +22,5 @@ export default {
     aliasCompsBefore,
     memoTestDataFile,
     statusesToCheck: [ Enums.COMP_STATUS_VALUES.confirmed, Enums.COMP_STATUS_VALUES.verified ],
-    sectionToExport: Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.salesComparisonApproach
+    sectionToExport: [ Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.salesComparisonApproach ]
 };

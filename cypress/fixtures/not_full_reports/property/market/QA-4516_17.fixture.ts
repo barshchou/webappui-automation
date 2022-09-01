@@ -11,5 +11,5 @@ export default {
     fileSelectionName: Enums.FILE_SELECTION_NAMES.summaryOfRentStabilizationLaws,
     sectionBeforeName: Enums.EXPORT_TITLES.comparableSalesOutline,
     sectionAfterName: Enums.EXPORT_TITLES.qualifications,
-    sectionToExport: Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.addenda
+    sectionToExport: [ Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.addenda ]
 };

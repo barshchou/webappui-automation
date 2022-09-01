@@ -12,5 +12,5 @@ export default {
     onFeatureFlag: 0,
     additionalTaxRateValue: 10.1234567890,
     specialAssessmentRowValue: 42.45,
-    sectionToExport: Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.assessedValueAndRealEstateTaxes
+    sectionToExport: [ Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.assessedValueAndRealEstateTaxes ]
 };

@@ -53,5 +53,5 @@ export default {
     reportTextEditorFlagKey: Enums.FEATURE_FLAG_KEYS.reportTextEdit,
     swotAnalysisFlagKey: Enums.FEATURE_FLAG_KEYS.swotAnalysis,
     featureFlagEnable: 0,
-    sectionToExport: Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.letterOfTransmittal
+    sectionToExport: [ Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.letterOfTransmittal ]
 };

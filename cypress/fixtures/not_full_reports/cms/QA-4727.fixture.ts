@@ -17,5 +17,5 @@ export default {
     swotAnalysisFlagKey: Enums.FEATURE_FLAG_KEYS.swotAnalysis,
     featureFlagEnable: 0,
     textUpdate: _textUpdate,
-    sectionToExport: Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.letterOfTransmittal
+    sectionToExport: [ Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.letterOfTransmittal ]
 };

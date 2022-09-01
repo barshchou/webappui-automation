@@ -19,5 +19,5 @@ export default {
     tooltipText: "The following text will appear in the Definition of Market Value in your export; " + 
     "the numbered list of definitions below this paragraph is not able to be edited here",
     exportSectionName: Enums.EXPORT_TITLES.definitionOfMarketValue,
-    sectionToExport: Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.introduction
+    sectionToExport: [ Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.introduction ]
 };

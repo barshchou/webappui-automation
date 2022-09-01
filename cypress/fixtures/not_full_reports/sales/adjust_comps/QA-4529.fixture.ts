@@ -18,5 +18,5 @@ export default {
     otherUtilitiesCommentaries: "Other Utilities Adjustment:  Comparable 1 required a 40% " + 
     "upward adjustment. Comparable 2 required a 50% downward adjustment.",
     exportSectionName: Enums.EXPORT_TITLES.comparableSalesAdjustmentGrid,
-    sectionToExport: Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.salesComparisonApproach
+    sectionToExport: [ Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.salesComparisonApproach ]
 };

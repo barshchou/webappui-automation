@@ -18,5 +18,5 @@ export default {
     buildingName: _buildingName,
     identificationOfTheClientSection: Enums.EXPORT_TITLES.identificationOfTheClient,
     intendedUseSection: Enums.EXPORT_TITLES.intendedUseAndUser,
-    sectionToExport: Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.introduction
+    sectionToExport: [ Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.introduction ]
 };

@@ -83,5 +83,5 @@ export default {
     featureFlagEnable: 0,
     textsArray: _textsArray(),
     exportSection: Enums.EXPORT_TITLES.certification,
-    sectionToExport: Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.certificationSection
+    sectionToExport: [ Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.certificationSection ]
 };

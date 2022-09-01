@@ -17,5 +17,5 @@ export default {
         proFormaTypes.fuel, proFormaTypes.waterAndSewer, proFormaTypes.repairAndMaintenance,
         proFormaTypes.payrollBenefits, proFormaTypes.generalAndAdministrative, proFormaTypes.legalAndProfessional,
         proFormaTypes.miscellaneous, proFormaTypes.managementFees, proFormaTypes.replacementsAndReserves, "Custom" ],
-    sectionToExport: Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.incomeCapitalizationApproach
+    sectionToExport: [ Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.incomeCapitalizationApproach ]
 };

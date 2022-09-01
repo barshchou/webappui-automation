@@ -185,5 +185,5 @@ export default {
     siteArea: _siteArea,
     buildingName: _buildingName,
     exportSectionName: Enums.EXPORT_TITLES.currentCommercialRentRoll,
-    sectionToExport: Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.incomeCapitalizationApproach
+    sectionToExport: [ Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.incomeCapitalizationApproach ]
 };

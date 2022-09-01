@@ -27,5 +27,5 @@ export default {
     cumulativePricePerUnit: _cumulativePricePerUnit,
     compAddress: _compAddress,
     exportSectionName: Enums.EXPORT_TITLES.cumulativePricePerUnit,
-    sectionToExport: Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.salesComparisonApproach
+    sectionToExport: [ Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.salesComparisonApproach ]
 };

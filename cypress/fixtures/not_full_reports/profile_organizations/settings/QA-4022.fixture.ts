@@ -18,5 +18,5 @@ export default {
     adminPassword: _adminPassword,
     commentary: _commentary,
     exportSectionName: Enums.EXPORT_TITLES.mortgageComponent,
-    sectionToExport: Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.incomeCapitalizationApproach
+    sectionToExport: [ Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.incomeCapitalizationApproach ]
 };

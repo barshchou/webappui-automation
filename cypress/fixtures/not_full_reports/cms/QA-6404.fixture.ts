@@ -18,5 +18,5 @@ export default {
     featureFlagEnable: 0,
     textUpdate: _textUpdate,
     exportSectionName: Enums.EXPORT_TITLES.incomeCapitalizationApproach,
-    sectionToExport: Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.incomeCapitalizationApproach
+    sectionToExport: [ Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.incomeCapitalizationApproach ]
 };

@@ -38,5 +38,5 @@ export default {
     "estate industry sources and on information obtained in the verification process.",
     exposureTimeSection: Enums.EXPORT_TITLES.exposureTime,
     marketingTimeSection: Enums.EXPORT_TITLES.marketingTime,
-    sectionToExport: Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.introduction
+    sectionToExport: [ Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.introduction ]
 };

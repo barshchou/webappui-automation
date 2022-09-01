@@ -29,5 +29,5 @@ export default {
     onFeatureFlag: 0,
     verifyExportValues: _verifyExportValues,
     checkValue: Enums.PER_UNIT_PER_SF.perUnit,
-    sectionToExport: Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.assessedValueAndRealEstateTaxes
+    sectionToExport: [ Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.assessedValueAndRealEstateTaxes ]
 };

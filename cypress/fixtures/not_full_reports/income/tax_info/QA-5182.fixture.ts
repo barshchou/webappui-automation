@@ -19,5 +19,5 @@ export default {
     onFeatureFlag: 0,
     tooltip: "The following text will appear below the Tax Liability table in your export",
     exportSectionName: Enums.EXPORT_TITLES.assessedValueAndRealEstateTaxes,
-    sectionToExport: Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.assessedValueAndRealEstateTaxes
+    sectionToExport: [ Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.assessedValueAndRealEstateTaxes ]
 };

@@ -98,5 +98,5 @@ export default {
     perUnitTitle: _perUnitTitle,
     perRoomTitle: _perRoomTitle,
     exportSectionName: Enums.EXPORT_TITLES.estimatedOperatingExpenses,
-    sectionToExport: Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.incomeCapitalizationApproach
+    sectionToExport: [ Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.incomeCapitalizationApproach ]
 };

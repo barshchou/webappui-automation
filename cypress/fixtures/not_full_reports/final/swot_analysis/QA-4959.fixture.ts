@@ -15,5 +15,5 @@ export default {
         "Economic uncertainty and potential market instability related to the war in Ukraine.",
     ],
     exportSectionName: Enums.EXPORT_TITLES.threats,
-    sectionToExport: Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.summaryOfSalientFactsAndConclusions
+    sectionToExport: [ Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.summaryOfSalientFactsAndConclusions ]
 };

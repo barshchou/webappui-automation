@@ -16,5 +16,5 @@ export default {
     electricity: 2000,
     fuel: 999.55,
     waterAndSewer: 5555,
-    sectionToExport: Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.incomeCapitalizationApproach
+    sectionToExport: [ Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.incomeCapitalizationApproach ]
 };

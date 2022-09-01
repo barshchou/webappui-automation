@@ -52,5 +52,5 @@ export default {
     potentialGrossSection: Enums.EXPORT_TITLES.potentialGrossCommercialRent,
     commercialVacancySection: Enums.EXPORT_TITLES.commercialVacancyAndCollectionLoss,
     stabilizedIncomeSection: Enums.EXPORT_TITLES.stabilizedIncomeAndExpenses,
-    sectionToExport: Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.incomeCapitalizationApproach
+    sectionToExport: [ Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.incomeCapitalizationApproach ]
 };
