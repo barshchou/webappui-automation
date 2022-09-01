@@ -43,7 +43,7 @@ describe(`Verify the "Linked" chips dropdown in the new narrative component
 
         cy.stepInfo("3. Verify chip style");
         testData.chipNames.forEach(chip => {
-            Report._Client.verifyStyleInDefaultChip(chip);
+            Report._KeyInfo.verifyStyleInDefaultChip(chip);
         });
 
         _NavigationSection.openReviewAndExport();
