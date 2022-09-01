@@ -82,9 +82,10 @@ import feasiblePropertyTypesEnum from "./property/feasiblePropertyTypes.enum";
 import highestAndBestUseCommentsEnum from "./highestAndBestUseComments.enum";
 import letterOfTransmittalEnum from "./cms/letterOfTransmittal.enum";
 import swotAnalysisEnum from "./cms/swotAnalysis.enum";
-import salesforceJobsEnum from "./salesforceJobs.enum";
+import reportTypesEnum from "./salesforceJobs/reportTypes.enum";
 import incomeCapitalizationApproachEnum from "./cms/incomeCapitalizationApproach.enum";
 import certificationEnum from "./cms/certification.enum";
+import appraiserSFEnum from "./salesforceJobs/appraiserSF.enum";
 import otherAdjustmentsExpansionRowsEnum from "./adjustComps/otherAdjustmentsExpansionRows.enum";
 import utilitiesAdjustmentsExpansionRowsEnum from "./adjustComps/utilitiesAdjustmentsExpansionRows.enum";
 import adjustmentExpansionLabelsEnum from "./sales/adjustComps/adjustmentExpansionLabels.enum";
@@ -181,9 +182,10 @@ export default {
     HIGHEST_AND_BEST_USE_COMMENTS_ENUM: highestAndBestUseCommentsEnum,
     LETTER_SECTIONS: letterOfTransmittalEnum,
     SWOT_SECTIONS: swotAnalysisEnum,
-    SALESFORCE_JOBS: salesforceJobsEnum,
+    REPORT_TYPES_SF: reportTypesEnum,
     INCOME_CAPITALIZATION_APPROACH_SECTIONS: incomeCapitalizationApproachEnum,
     CERTIFICATION_SECTIONS: certificationEnum,
+    APPRAISER_SF: appraiserSFEnum,
     OTHER_ADJUSTMENTS_EXPANSION_ROWS: otherAdjustmentsExpansionRowsEnum,
     UTILITIES_ADJUSTMENTS_EXPANSION_ROWS: utilitiesAdjustmentsExpansionRowsEnum,
     ADJUSTMENT_EXPANSION_LABELS: adjustmentExpansionLabelsEnum,

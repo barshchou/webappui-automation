@@ -10,6 +10,7 @@ const pagesTextboxNames = {
     generalAssumptionsDiscussion: "General Assumptions Discussion",
     definitionOfMarketValue: "Definition of Market Value",
     dataSourcesDescriptionExport: "Data Sources Description Export",
+    certificationAssistance: "Certification Assistance",
     totalOperatingExpenses: "TOTAL OPERATING EXPENSES",
     letterOfTransmittalPurpose: "Letter of Transmittal Purpose",
     locationDescriptionExport: "Location Description Export"

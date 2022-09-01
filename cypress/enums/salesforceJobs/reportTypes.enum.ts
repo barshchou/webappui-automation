@@ -1,4 +1,4 @@
-const salesforceJobs = {
+const reportTypes = {
     withFreddieMac: "2200015959",
     withoutFreddieMac: "1764459005",
     noneFreddieMac: "1764459119",
@@ -8,4 +8,4 @@ const salesforceJobs = {
     nonePropertyType: "1764459119"
 } as const;
 
-export default Object.freeze(salesforceJobs);
+export default Object.freeze(reportTypes);
