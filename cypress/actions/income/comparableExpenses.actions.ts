@@ -35,7 +35,7 @@ class ComparableExpensesActions extends BaseActionsExt<typeof compExpensesPage> 
 
     chooseExpensePeriodByColumnIndex(periodValue: string, index = 0): ComparableExpensesActions {
         compExpensesPage.getUnifiedEditableAndTotalCells("expensePeriod").eq(index).type("something")
-            .realClick().realClick().focus().type("something").clear().realType(`${periodValue}{enter}`);
+            .dblclick().focus().type("something").clear().realType(`${periodValue}{enter}`);
         compExpensesPage.getUnifiedEditableAndTotalCells("expensePeriod").eq(index)
             .children(compExpensesPage.elementToCheckCellTextSelector).should("have.text", periodValue);
         return this;
