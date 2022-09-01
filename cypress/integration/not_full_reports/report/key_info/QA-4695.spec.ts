@@ -1,5 +1,4 @@
 import { Report } from "../../../../actions";
-import { _NavigationSection } from "../../../../actions/base";
 import { createReport } from "../../../../actions/base/baseTest.actions";
 import testData from '../../../../fixtures/not_full_reports/report/key_info/QA-4695.fixture';
 import Enums from "../../../../enums/enums";
@@ -11,11 +10,7 @@ describe("Verify the Save button functionality on the Report > Client page",
         });
 
         it("[QA-4695]", () => {
-            // TODO: [QA-6759] AQA - Remove duplicate navigation to KeyInfo page
-            cy.stepInfo("1. Proceed to the Report > Key Info page.");
-            _NavigationSection.navigateToReportKeyInfo();
-
-            cy.stepInfo("2. Verify the following elements are displayed on the page.");
+            cy.stepInfo("1. Verify the following elements are displayed on the page.");
             Report._KeyInfo.verifyElementIsVisible(Report._KeyInfo.Page.keyInfoTitle)
                 .verifyElementIsVisible(Report._KeyInfo.Page.purposeDropdown)
                 .verifyElementIsVisible(Report._KeyInfo.Page.asIsMarketInterestsGroup)
