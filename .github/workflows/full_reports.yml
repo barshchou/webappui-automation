@@ -30,18 +30,23 @@ jobs:
       id-token: write
       contents: read
     steps:
+      - name: Configure secrets
+        if: ${{ !env.ACT }} 
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+            role-to-assume: arn:aws:iam::814827541967:role/GithubOIDC-Role-QMKR3DR5WV3B
+            aws-region: 'us-east-1'
+
       - name: Run full-report end-to-end test with Currents dev
         uses: Bowery-RES/action-run-e2e-tests@latest
         with:
           github_token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
-          username: ${{ secrets.USERNAME }}
-          password: ${{ secrets.PASSWORD }}
           customUrl: ${{ github.event.inputs.customUrl }}
           url: ${{ github.event.inputs.url }}
           spec_file: cypress/integration/full_reports/*.spec.ts'
           tags: ${{ github.event.inputs.tags }}
-          record_key: ${{ secrets.CURRENTS_RECORD_KEY }}
           ref: ${{ github.event.inputs.ref }}
+          secret_name: 'Github/Cypress/webapp-e2e-secrets'
 
 
       - name: Archive DOM snapshots from failed tests

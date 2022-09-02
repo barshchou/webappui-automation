@@ -18,19 +18,23 @@ jobs:
         containers: [1, 2, 3]
 
     steps:
+      - name: Configure secrets
+        if: ${{ !env.ACT }} 
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+            role-to-assume: arn:aws:iam::814827541967:role/GithubOIDC-Role-QMKR3DR5WV3B
+            aws-region: 'us-east-1'
+
       - name: Run every weekday Comp-plex end-to-end tests with Currents dev
         uses: Bowery-RES/action-run-e2e-tests@latest
         with:
           github_token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
-          username: ${{ secrets.USERNAME }}
-          password: ${{ secrets.PASSWORD }}
           url: compDev
           spec_file: cypress/integration/comp_plex/**
           tags: grep=,grepTags=-@smoke,burn=
-          record_key: ${{ secrets.CURRENTS_RECORD_KEY }}
+          secret_name: 'Github/Cypress/webapp-e2e-secrets'
         env:
           DD_CIVISIBILITY_AGENTLESS_ENABLED: true
-          DD_API_KEY: ${{ secrets.DD_API_KEY }}
           DD_ENV: 'compDev'
           DD_SERVICE: 'comp_plex'
           
