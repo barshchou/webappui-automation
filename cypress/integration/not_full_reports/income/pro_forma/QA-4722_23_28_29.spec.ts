@@ -34,8 +34,7 @@ describe("Potential Real Estate Tax Reimbursement",
         
             cy.stepInfo(`3. Go to Income → Reimbursement Summary and add Real Estate Taxes 
             Reimbursement for commercial units`); 
-            _NavigationSection.clickCommercialReimbursementSummaryButton()
-                .submitSaveChangesModal();
+            _NavigationSection.navigateToCommercialReimbursementSummary();
             Income._CommercialManager.ReimbursementSummary.addNewCommercialReimbursement(
                 testData.expenseType, testData.expenseTypeCellName, 
                 testData.reimbursementType, testData.knownInformation)
