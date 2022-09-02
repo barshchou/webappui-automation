@@ -10,8 +10,8 @@ describe("Verify the popups with appropriate wording appears on switching from U
         createReport(reportCreationData);
     });
 
-    it("Test body", () => {
-        NavigationSection.navigateToRentComps();
+    it("[QA-4265][QA-4354]", () => {
+        NavigationSection.navigateToResidentialRentComps();
         Income.Residential.RentComps.BaseActions.verifyUnitSelected()
             .changeToBuildingSearch()
             .changeToUnitSearch();

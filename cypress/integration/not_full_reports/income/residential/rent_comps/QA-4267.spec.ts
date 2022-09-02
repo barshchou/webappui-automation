@@ -10,8 +10,8 @@ describe("Verify the Unit Type drop-down field", () => {
         createReport(testData.reportCreationData);
     });
 
-    it("Test body", () => {
-        NavigationSection.navigateToRentComps()
+    it("[QA-4267]", () => {
+        NavigationSection.navigateToResidentialRentComps()
             .verifyProgressBarNotExist();
         RentCompsPage.unitTypesWrapper.should("have.text", "Select Unit Types");
         Income.Residential.RentComps.BaseActions.verifyUnitSelected()

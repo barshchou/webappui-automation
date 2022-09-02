@@ -57,6 +57,8 @@ class ExpenseHistoryPage extends BasePage {
     getDropdownOption(option: string) { return cy.get(`li[role=option][data-value='${option}']`); }
 
     get newCategoryInputSuggestionDropdown() { return cy.get("[role=menuitem]"); }
+
+    get closeIcon() { return cy.get("[data-testid='CloseIcon']"); }
 }
 
 export default new ExpenseHistoryPage();

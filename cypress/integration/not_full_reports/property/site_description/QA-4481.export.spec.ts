@@ -5,10 +5,10 @@ import { Property, ReviewExport } from "../../../../actions";
 
 
 // TODO: [QA-6605] Error pulling 'neighborhood' data into a comment 'Location Within Market'
-describe(`[QA-4481] Check that generated text pulls in the first submarket`,
+describe(`Check that generated text pulls in the first submarket`,
     { tags: [ "@property", "@site_description", "@check_export" ] }, () => {
         
-        it("Test body", () => {
+        it("[QA-4481]", () => {
             cy.stepInfo(`1. Create a new report on the WebApp and navigate to Property > Market.`);
             createReport(testData.reportCreationData);
             _NavigationSection.navigateToPropertyMarket();
@@ -30,7 +30,7 @@ describe(`[QA-4481] Check that generated text pulls in the first submarket`,
             cy.stepInfo(`3. Navigate to Property > Site Description and check that 
                         generated text pulls in the first submarket`);
             _NavigationSection.openSiteDescriptionInProperty();
-            Property._SiteDescription.verifyGeneratedCommentary(testData.discussion, testData.commentary);
+            Property._SiteDescription.verifyFormCommentTextBoxText(testData.commentName, testData.commentary);
         
             cy.stepInfo(`4. Export the report`);
             _NavigationSection.openReviewAndExport();

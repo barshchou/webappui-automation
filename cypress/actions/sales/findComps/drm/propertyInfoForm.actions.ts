@@ -24,7 +24,7 @@ class PropertyInfoFormActions {
     }
             
     setCommercialUnits(units: string): PropertyInfoFormActions {
-        this.Page.createCompNumberResidentialUnits.type(units, { force: true });
+        this.Page.createCompNumberCommercialUnits.type(units, { force: true });
         return this;
     }
 

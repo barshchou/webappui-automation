@@ -13,8 +13,8 @@ describe(`Verify the user can switch to 'Building' type of search on clicking 'S
         createReport(reportCreationData);
     });
 
-    it("Test body", () => {
-        NavigationSection.navigateToRentComps();
+    it("[QA-4355] ", () => {
+        NavigationSection.navigateToResidentialRentComps();
         Income.Residential.RentComps.BaseActions.verifyUnitSelected()
             .changeToBuildingSearch()
             .verifyProgressBarNotExist();

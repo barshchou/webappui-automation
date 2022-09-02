@@ -10,8 +10,8 @@ describe(`Verify on checking the 'Display square footage for comps?' checkbox 2 
         createReport(testData.reportCreationData);
     });
 
-    it("Test body", () => {
-        NavigationSection.navigateToRentComps();
+    it("[QA-4341]", () => {
+        NavigationSection.navigateToResidentialRentComps();
         Income.Residential.RentComps.BaseActions.verifyUnitSelected()
             .selectComparableByIndex()
             .verifyColumnNotExist(testData.sfColumn)

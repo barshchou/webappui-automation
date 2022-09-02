@@ -43,9 +43,9 @@ describe("Adjusted Price Per SF in Sales Adjustment Grid is calculated with corr
             cy.stepInfo(`7. Verify Price per SF for Subject in expanded Market Adjustment section 
             is calculated based on the selected basis of comparison: 
             [Sale Price / selected Basis for Square Foot Analysis]`);
-            Sales._AdjustComps.Page.getAdjustmentArrow(testData.adjustmentName).click();
-            Sales._AdjustComps.verifyExpandMarketAdjustmentPricePerSF(testData.calculationUnits, 
-                testData.squareFootAnalysisArea);
+            Sales._AdjustComps.expandAdjustmentDetails(testData.adjustmentName)
+                .verifyExpandMarketAdjustmentPricePerSF(testData.calculationUnits, 
+                    testData.squareFootAnalysisArea);
         });
 
         after("Remove feature flag", () => {

@@ -3,11 +3,11 @@ import { _NavigationSection } from "../../../../actions/base";
 import { createReport } from "../../../../actions/base/baseTest.actions";
 import testData from '../../../../fixtures/not_full_reports/report/client/QA-4641.fixture';
 
-describe(`[QA-4641] Verify the "Linked" chips dropdown in the new narrative component for As Is and As Stabilized 
+describe(`Verify the "Linked" chips dropdown in the new narrative component for As Is and As Stabilized 
         report for Intended User and Identification of the Client sections`,
 { tags:[ "@report", "@client", "@check_export" ] }, () => {
 
-    it("Test body",  () => {
+    it("[QA-4641]",  () => {
         cy.stepInfo(`Login, create report`);
         createReport(testData.reportCreationData);
 
@@ -55,7 +55,7 @@ describe(`[QA-4641] Verify the "Linked" chips dropdown in the new narrative comp
                 testData.chips.forEach(item => {
                     cy.contains(testData.identificationOfTheClientSection).next().scrollIntoView()
                         .should("include.text", item.verifyExport);
-                    cy.contains(testData.intendedUseSection).next().next().scrollIntoView()
+                    cy.contains(testData.intendedUseSection).next().scrollIntoView()
                         .should("include.text", item.verifyExport);
                 });
             });

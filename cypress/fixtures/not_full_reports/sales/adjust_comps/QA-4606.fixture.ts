@@ -23,4 +23,5 @@ export default {
         Enums.CALCULATION_UNITS.psf, 
         Enums.CALCULATION_UNITS.perResidentialUnits 
     ] as BoweryReports.SalesAdjustmentGrid.CalculationUnits[],
+    adjustmentName: Enums.SALES_ADJUSTMENT_GRID.otherAdjustment,
 };

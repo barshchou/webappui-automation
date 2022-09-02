@@ -10,8 +10,8 @@ describe(`Verify Sort By drop-down field for results sorting on Map filter secti
         createReport(testData.reportCreationData);
     });
 
-    it("Test body", () => {
-        NavigationSection.navigateToRentComps()
+    it("[QA-4276]", () => {
+        NavigationSection.navigateToResidentialRentComps()
             .verifyProgressBarNotExist();
         testData.sortByOptions.forEach(option => {
             Income.Residential.RentComps.BaseActions.selectSortByOptionByValue(option);

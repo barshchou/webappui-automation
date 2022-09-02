@@ -122,8 +122,22 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
 
     selectFilterSalePeriodValue(periodValue: BoweryReports.FindComps.SalePeriodValues): FindCompsActions {
         findCompsPage.filterSalePeriod.should('exist').click();
-        findCompsPage.filterSalePeriodValue(periodValue).should('exist').click();
+        findCompsPage.filterOptionValue(periodValue).should('exist').click();
         findCompsPage.filterSalePeriod.children().should('contain', `${periodValue}`);
+        return this;
+    }
+
+    selectFilterCompStatusValue(compStatus: BoweryReports.FindComps.CompStatusValues | 
+    BoweryReports.FindComps.CompStatusValues[]): FindCompsActions {
+        const statuses = Array.isArray(compStatus) ? compStatus : [ compStatus ];
+        findCompsPage.compStatusFilter.click();
+        statuses.forEach(status => {
+            findCompsPage.filterOptionValue(status).click();
+            findCompsPage.loadingModalSpinner.should("exist");
+            findCompsPage.loadingModalSpinner.should("not.exist");
+            findCompsPage.compStatusFilter.children("input").should("contain.value", status);
+        });
+        findCompsPage.compStatusFilter.realClick();
         return this;
     }
 
@@ -209,6 +223,20 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
             );
             cy.wrap(interception.response.body.data.findTransactionByIdAndVersion.id)
                 .as(Alias.salesEventId);
+        });
+        return this;
+    }
+
+    saveAddedCompsAddressesToMap(): FindCompsActions {
+        cy._mapSet(mapKeysUtils.salesCompsAddresses, undefined);
+        findCompsPage.addressCells.each((cell, index) => {
+            if (index != 0) {
+                const valueToAdd = cell.text().split(",")[0];
+                _mutateArrayInMap(mapKeysUtils.salesCompsAddresses, valueToAdd);
+            }
+        });
+        cy._mapGet(mapKeysUtils.salesCompsAddresses).then(addresses => {
+            cy.log(`Current addresses in map: ${addresses.toString()}`);
         });
         return this;
     }
@@ -387,6 +415,53 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
         findCompsPage.jobSearchTab.click();
         cy.wait(`@${Alias.gql.SearchJobs}`, { timeout: 120000 });
         findCompsPage.reportIdInput.should('exist');
+        return this;
+    }
+    
+    updateCompGba(gbaValue: number, yearBuilt = "1970"): FindCompsActions {
+        this.openCompPropertyInfoForEdit();
+        findCompsPage.gbaNewComp.as(compPlex.gbaNewComp);
+        findCompsPage.yearBuiltNewComp.as(compPlex.yearBuiltNewComp);
+
+        this.clearNumericInputNewComp(compPlex.gbaNewComp);
+        cy.get(`@${compPlex.gbaNewComp}`).focus();
+        cy.get(`@${compPlex.gbaNewComp}`).realType(`{enter}${gbaValue}`, { pressDelay: 45, delay: 50 });
+        this.clearNumericInputNewComp(compPlex.yearBuiltNewComp);
+        cy.get(`@${compPlex.yearBuiltNewComp}`).realClick();
+        cy.get(`@${compPlex.yearBuiltNewComp}`).realType(`{enter}${yearBuilt}`, { pressDelay: 45, delay: 50 });
+        findCompsPage.PropertyInfoDoneBtn.click();
+        
+        return this;
+    }
+
+    updateContractPrice(price: number): FindCompsActions {
+        this.openCompSaleInfoForEdit();
+        findCompsPage.contractPriceInput.as(compPlex.contractPrice);
+        this.clearNumericInputNewComp(compPlex.contractPrice);
+        cy.get(`@${compPlex.contractPrice}`).focus();
+        cy.get(`@${compPlex.contractPrice}`).realType(`{enter}${price}`, { pressDelay: 45, delay: 50 });
+        findCompsPage.SaleInfoDoneBtn.click();
+
+        return this;
+    }
+
+    openCompForEdit(index = 0): FindCompsActions {
+        findCompsPage.compEditButton(index).click();
+        return this;
+    }
+
+    saveCompChanges(): FindCompsActions {
+        findCompsPage.saveCompProperty.realClick();
+        return this;
+    }
+
+    openCompPropertyInfoForEdit(): FindCompsActions {
+        findCompsPage.propertyInfoEditBtn.click();
+        return this;
+    }
+
+    openCompSaleInfoForEdit(): FindCompsActions {
+        findCompsPage.SaleInfoEditBtn.click();
         return this;
     }
 }

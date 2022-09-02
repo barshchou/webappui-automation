@@ -25,7 +25,7 @@ class ComparableExpensesActions extends BaseActionsExt<typeof compExpensesPage> 
     }
 
     enterCityByColumnIndex(location: string, index = 0): ComparableExpensesActions {
-        compExpensesPage.getUnifiedEditableAndTotalCells("city").eq(index).realClick().realClick().scrollIntoView()
+        compExpensesPage.getUnifiedEditableAndTotalCells("city").eq(index).dblclick().scrollIntoView()
             .focus().type("something").clear().realType(`${location}{enter}`);
         compExpensesPage.getUnifiedEditableAndTotalCells("city").eq(index)
             .children(compExpensesPage.elementToCheckCellTextSelector)
@@ -35,7 +35,7 @@ class ComparableExpensesActions extends BaseActionsExt<typeof compExpensesPage> 
 
     chooseExpensePeriodByColumnIndex(periodValue: string, index = 0): ComparableExpensesActions {
         compExpensesPage.getUnifiedEditableAndTotalCells("expensePeriod").eq(index).type("something")
-            .realClick().realClick().focus().type("something").clear().realType(`${periodValue}{enter}`);
+            .dblclick().focus().type("something").clear().realType(`${periodValue}{enter}`);
         compExpensesPage.getUnifiedEditableAndTotalCells("expensePeriod").eq(index)
             .children(compExpensesPage.elementToCheckCellTextSelector).should("have.text", periodValue);
         return this;
@@ -43,7 +43,7 @@ class ComparableExpensesActions extends BaseActionsExt<typeof compExpensesPage> 
 
     enterSquareFeetByColumnIndex(value: number, index = 0): ComparableExpensesActions {
         compExpensesPage.getUnifiedEditableAndTotalCells("squareFeet").eq(index)
-            .realClick().realClick().scrollIntoView().focus()
+            .dblclick().scrollIntoView().focus()
             .type("something").clear().realType(`${value}{enter}`);
         compExpensesPage.getUnifiedEditableAndTotalCells("squareFeet").eq(index)
             .children(compExpensesPage.elementToCheckCellTextSelector)
@@ -53,7 +53,7 @@ class ComparableExpensesActions extends BaseActionsExt<typeof compExpensesPage> 
 
     enterResidentialUnitsByColumnIndex(value: number, index = 0): ComparableExpensesActions {
         compExpensesPage.getUnifiedEditableAndTotalCells("residentialUnits").eq(index)
-            .realClick().realClick().scrollIntoView()
+            .dblclick().scrollIntoView()
             .focus().type("something").clear().realType(`${value}{enter}`);
         compExpensesPage.getUnifiedEditableAndTotalCells("residentialUnits").eq(index)
             .children(compExpensesPage.elementToCheckCellTextSelector).should("have.text", value);
@@ -64,7 +64,7 @@ class ComparableExpensesActions extends BaseActionsExt<typeof compExpensesPage> 
     ComparableExpensesActions {
         const valueToBe = `$${numberWithCommas(value.toFixed(2))}`;
         cellsElements.eq(index).as("cell");
-        cy.get("@cell").realClick().realClick().scrollIntoView().focus()
+        cy.get("@cell").dblclick().scrollIntoView().focus()
             .type("something").clear().realType(`${value}{enter}`);
         cy.get("@cell").children(compExpensesPage.elementToCheckCellTextSelector)
             .should("have.text", valueToBe);
@@ -187,8 +187,7 @@ class ComparableExpensesActions extends BaseActionsExt<typeof compExpensesPage> 
     }
 
     enterNewCategoryName(name: string, isFirstEnter = true): ComparableExpensesActions {
-        compExpensesPage.newCategoryNameInput.should("have.attr", "placeholder", "Enter Custom Expense...")
-            .and("have.attr", "required");
+        compExpensesPage.newCategoryNameInput.should("have.attr", "placeholder", "Enter Custom Expense...");
         compExpensesPage.newCategoryNameInput.type(`${name}`);
         if (isFirstEnter) {
             compExpensesPage.newCategoryInputSuggestionDropdown.should("contain.text", `Create "${name}"`);
@@ -209,7 +208,9 @@ class ComparableExpensesActions extends BaseActionsExt<typeof compExpensesPage> 
      * 'Create' word
      */
     addNewCategoryAndVerify(categoryName: string, isFirstTime = true): ComparableExpensesActions {
-        this.clickAddCustomExpenseCategoryButton()
+        this.clickAddCustomExpenseCategoryButton();
+        cy.get('[role="dialog"]').should("exist", { timeout: 10000 });
+        this.verifyProgressBarNotExist()
             .enterNewCategoryName(categoryName, isFirstTime)
             .verifyNewCategoryEnteredName(categoryName)
             .Page.formAddButton().click();
