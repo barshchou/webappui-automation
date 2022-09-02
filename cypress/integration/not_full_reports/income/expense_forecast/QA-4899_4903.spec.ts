@@ -4,7 +4,7 @@ import { Income } from "../../../../actions";
 import { createReport } from "../../../../actions/base/baseTest.actions";
 
 // [QA-6552] skipped until we figure out why it stale in CI/CD
-describe.skip(`Comparable Min, Max, Avg values for Water & Sewer Per Unit are correctly calculated and displayed`,
+describe(`Comparable Min, Max, Avg values for Water & Sewer Per Unit are correctly calculated and displayed`,
     { tags:[ "@income", "@expense_forecast", "@snapshot_tests" ] }, () => {
 
         beforeEach("Login, create report", () => {
