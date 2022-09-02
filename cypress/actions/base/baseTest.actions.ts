@@ -67,6 +67,7 @@ export const salesInterceptions = () => {
         aliasQuery(req, gqlOperationNames.updateJob);
         aliasQuery(req, gqlOperationNames.findTransactionsByIdsAndVersions);
         aliasQuery(req, gqlOperationNames.searchJobs);
+        aliasQuery(req, gqlOperationNames.searchTransactionsByAddresses);
     });
 };
 

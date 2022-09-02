@@ -19,7 +19,11 @@ class AddressSearchActions {
         this
             .enterAddressToCompAddress(address)
             .clickSearchCompAddressButton();
-        //   cy.wait(`@${Alias.gql.SearchTransactionsByAddresses}`, { timeout:10000 }); 
+        findCompsPage.loadingModalSpinner.should('exist');
+        cy.wait(`@${Alias.gql.SearchTransactionsByAddresses}`, { timeout:10000 }).then(({ response }) => {
+            expect(response.statusCode).equal(200);
+            expect(response.body.id).equal(1);
+        });
         findCompsPage.loadingModalSpinner.should('not.exist');
         this.Page.selectCompButton(index).click();
         return this;
@@ -54,7 +58,7 @@ class AddressSearchActions {
             let compAddress = flatValue;
             let compId = id;
             cy.log(compAddress, compId);
-
+            this.addCompViaAddressSearch(compAddress, 0);
         } ); 
         return this;
     }
