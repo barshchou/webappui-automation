@@ -8,7 +8,7 @@ jobs:
   Comp_plex-cy-e2e-run-on-dev:
     runs-on: ubuntu-latest
     timeout-minutes: 25
-    container: cypress/browsers:node16.14.2-slim-chrome103-ff102
+    container: cypress/included:10.3.1
     permissions:
       id-token: write
       contents: read
