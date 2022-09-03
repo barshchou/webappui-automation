@@ -14,7 +14,7 @@ export default class AddressSearchPage {
     }
 
     selectCompButton(index: number) {
-        return this.compSearchResults.contains('Select Comp').eq(index);
+        return this.compSearchResults.eq(index).contains('Select Comp');
     }
 
 }

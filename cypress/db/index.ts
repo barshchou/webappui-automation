@@ -13,7 +13,7 @@ export  function  getDataFromDb (filterPath: string, filterValue: string)  {
     
     cy.task('retrieveDataFromDb', { url: url, dbName: dbName, 
         filterPath: filterPath, filterValue: filterValue }).then(data => {
-        cy.log(data);
+        cy.log(<string>data);
         cy.wrap(data).as('compAlias');
     });
     return getDataFromDb;

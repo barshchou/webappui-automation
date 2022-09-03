@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { findCompsPage } from "../../../../pages/sales/findComps.page";
 import { Alias } from '../../../../utils/alias.utils';
 import { getDataFromDb } from "../../../../../cypress/db/index";
@@ -12,20 +13,6 @@ class AddressSearchActions {
     openAddressSearchTab() {
         findCompsPage.addressSearchTab.click();
         this.Page.compAddressInput.should('exist');
-        return this;
-    }
-
-    addCompViaAddressSearch(address: string, index: number) {
-        this
-            .enterAddressToCompAddress(address)
-            .clickSearchCompAddressButton();
-        findCompsPage.loadingModalSpinner.should('exist');
-        cy.wait(`@${Alias.gql.SearchTransactionsByAddresses}`, { timeout:10000 }).then(({ response }) => {
-            expect(response.statusCode).equal(200);
-            expect(response.body.id).equal(1);
-        });
-        findCompsPage.loadingModalSpinner.should('not.exist');
-        this.Page.selectCompButton(index).click();
         return this;
     }
 
@@ -49,16 +36,31 @@ class AddressSearchActions {
         return this;
     }
     
-    addCompByParameter (compIndex: number) { 
-        getDataFromDb("latestVersion.saleInformation.saleStatus", "transaction");
+    addCompViaAddressSearchById(address: string, compId: string) {
+        this
+            .enterAddressToCompAddress(address)
+            .clickSearchCompAddressButton();
+        cy.wait(`@${Alias.gql.SearchTransactionsByAddresses}`, { timeout:10000 }).then(({ response }) => {
+            expect(response.statusCode).equal(200);
+            let compsArrayList = response.body.data.searchTransactionsByAddresses;
+            let focusCompIndex = compsArrayList.findIndex(i => i.id === compId);
+            cy.log(compsArrayList, focusCompIndex);
+            findCompsPage.loadingModalSpinner.should('not.exist');
+            this.Page.selectCompButton(focusCompIndex).click();
+        });
+        return this;
+    }
+
+    addCompByParameter (compIndex: number, compPropertyKey: string, compPropertyValue: string) { 
+        getDataFromDb(compPropertyKey, compPropertyValue);
         cy.get('@compAlias').then(dataArray => {
-            cy.log(dataArray);
+            cy.log(<any>dataArray);
             let comp = dataArray[compIndex];
-            let { address: { flatValue }, latestVersion: { id }  } = comp;
+            let { address: { flatValue }, id } = <any>comp;
             let compAddress = flatValue;
             let compId = id;
             cy.log(compAddress, compId);
-            this.addCompViaAddressSearch(compAddress, 0);
+            this.addCompViaAddressSearchById(compAddress, compId);
         } ); 
         return this;
     }
