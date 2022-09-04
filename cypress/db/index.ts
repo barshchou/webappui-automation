@@ -2,6 +2,10 @@ import { MongoClient } from 'mongodb';
 import mapKeysUtils from '../utils/mapKeys.utils';
 
 
+/**
+ * Function determines url and name of comp-plex database, then  connects to database and retrieve 
+ * the array (max = 10) of comps with necessary property (@param filterPath) value (@param filterValue)
+ */
 export  function  getDataFromDb (filterPath: string, filterValue: string)  {
     //  Connection URL
     const url =  determinePassedEnv().passedEnv; 
@@ -10,16 +14,20 @@ export  function  getDataFromDb (filterPath: string, filterValue: string)  {
     // Database Name
     const dbName = determinePassedEnv().passedDbName;
     cy.log(dbName);
+
     cy.task('retrieveDataFromDb', { dbUrl: url, dbName: dbName, 
         filterPath: filterPath, filterValue: filterValue }).then(data => {
         cy.log(<string>data);
         cy._mapSet(mapKeysUtils.arrayOfCompsFromDB, data);
-        // cy.wrap(data).as(Alias.findComps.arrayOfCompsFromDB);
     });
     return getDataFromDb;
 }
 
 
+/**
+ * Function connects to Comp-plex database and retrieve the array (max = 10) of comps with 
+ * necessary property (@param filterPath) value (@param filterValue)
+ */
 const retrieveDataFromDb = async (url: string, dbName: string, filterPath: string, filterValue: string) => {
     const client = new MongoClient(url);
     const collectionName = "sales-transactions";
@@ -34,6 +42,9 @@ const retrieveDataFromDb = async (url: string, dbName: string, filterPath: strin
     return data;
 };
 
+/**
+ * Function determines what environment was passed when test was started
+ */
 export function determinePassedEnv () {
     let passedEnv: string;
     let passedDbName: string;
@@ -50,7 +61,7 @@ export function determinePassedEnv () {
             break;
         case "custom":
             cy.log("dev");
-            //Keys may be different
+            //Keys may be different in future
             passedEnv = Cypress.env("COMP_PLEX_DEV_DATABASE"); 
             passedDbName = Cypress.env("COMP_PLEX_DB_DEV_NAME"); 
             break;
@@ -77,8 +88,6 @@ export function determinePassedEnv () {
     }
     return { passedEnv, passedDbName };
 }
-
-
 
 export default {
     getDataFromDb,

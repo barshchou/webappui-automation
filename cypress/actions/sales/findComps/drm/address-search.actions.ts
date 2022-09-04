@@ -37,9 +37,12 @@ class AddressSearchActions {
         return this;
     }
     
+    /**
+     * Action adds a comp with certain address (@param address) by its id (@param compId) 
+     * from the list of comps on address search modal
+     */
     addCompViaAddressSearchById(address: string, compId: string) {
-        this
-            .enterAddressToCompAddress(address)
+        this.enterAddressToCompAddress(address)
             .clickSearchCompAddressButton();
         cy.wait(`@${Alias.gql.SearchTransactionsByAddresses}`, { timeout:10000 }).then(({ response }) => {
             expect(response.statusCode).equal(200);
@@ -52,6 +55,10 @@ class AddressSearchActions {
         return this;
     }
 
+    /**
+     * Action adds a comp by index (@param compIndex) 
+     * with necessary property (@param compPropertyKey) value (@param compPropertyValue)
+     */
     addCompByParameter (compIndex: number, compPropertyKey: string, compPropertyValue: string) { 
         getDataFromDb(compPropertyKey, compPropertyValue);
         cy._mapGet(mapKeysUtils.arrayOfCompsFromDB).then(dataArray => {
