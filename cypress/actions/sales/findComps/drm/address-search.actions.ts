@@ -2,6 +2,7 @@
 import { findCompsPage } from "../../../../pages/sales/findComps.page";
 import { Alias } from '../../../../utils/alias.utils';
 import { getDataFromDb } from "../../../../../cypress/db/index";
+import mapKeysUtils from "../../../../utils/mapKeys.utils";
 
 class AddressSearchActions {
     Page: typeof findCompsPage;
@@ -53,7 +54,7 @@ class AddressSearchActions {
 
     addCompByParameter (compIndex: number, compPropertyKey: string, compPropertyValue: string) { 
         getDataFromDb(compPropertyKey, compPropertyValue);
-        cy.get('@compAlias').then(dataArray => {
+        cy._mapGet(mapKeysUtils.arrayOfCompsFromDB).then(dataArray => {
             cy.log(<any>dataArray);
             let comp = dataArray[compIndex];
             let { address: { flatValue }, id } = <any>comp;

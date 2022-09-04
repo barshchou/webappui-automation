@@ -1,5 +1,5 @@
-import { Alias } from './../utils/alias.utils';
 import { MongoClient } from 'mongodb';
+import mapKeysUtils from '../utils/mapKeys.utils';
 
 
 export  function  getDataFromDb (filterPath: string, filterValue: string)  {
@@ -10,11 +10,11 @@ export  function  getDataFromDb (filterPath: string, filterValue: string)  {
     // Database Name
     const dbName = determinePassedEnv().passedDbName;
     cy.log(dbName);
-    
-    cy.task('retrieveDataFromDb', { url: url, dbName: dbName, 
+    cy.task('retrieveDataFromDb', { dbUrl: url, dbName: dbName, 
         filterPath: filterPath, filterValue: filterValue }).then(data => {
         cy.log(<string>data);
-        cy.wrap(data).as('compAlias');
+        cy._mapSet(mapKeysUtils.arrayOfCompsFromDB, data);
+        // cy.wrap(data).as(Alias.findComps.arrayOfCompsFromDB);
     });
     return getDataFromDb;
 }

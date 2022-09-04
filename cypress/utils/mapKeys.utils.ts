@@ -20,5 +20,6 @@ export default {
     searchResultSalesComp:"searchResultSalesComp",
     salesCompsAddresses: "salesCompsAddresses",
     salesCompsIds:"salesCompsIds",
-    allOperatingExpensesValues: "allOperatingExpensesValues"
+    allOperatingExpensesValues: "allOperatingExpensesValues",
+    arrayOfCompsFromDB: "arrayOfCompsFromDB"
 };
