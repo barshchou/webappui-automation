@@ -1,8 +1,9 @@
+import { CompPropertiesPathsInDatabase } from './../enums/enumKeys.enum.d';
 /* eslint-disable @typescript-eslint/no-namespace */
 
 import enums from "../enums/enums";
 
-const { _jobSearch, _propertyInfoEnum, _saleInfoEnum } = enums.COMPPLEX_ENUM;
+const { _jobSearch, _propertyInfoEnum, _saleInfoEnum, _addressSearch } = enums.COMPPLEX_ENUM;
 
 // Keys lies here due to QA-6470. It is not done yet.
 namespace Keys {
@@ -37,5 +38,11 @@ export namespace CompPlex {
         export type SalePeriod = keyof typeof _jobSearch.salePeriod 
         export type PropertyType = keyof typeof _jobSearch.propertyType
         export type NumberFilters = keyof typeof _jobSearch.numberFilters
+    }
+
+    export namespace AddressSearch {
+        export type CompProperty = typeof _addressSearch.compPropertyPathsInDB[CompPropertiesPathsInDatabase]  
+
+
     }
 }

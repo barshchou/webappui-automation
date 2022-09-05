@@ -3,6 +3,7 @@ import { findCompsPage } from "../../../../pages/sales/findComps.page";
 import { Alias } from '../../../../utils/alias.utils';
 import { getDataFromDb } from "../../../../../cypress/db/index";
 import mapKeysUtils from "../../../../utils/mapKeys.utils";
+import { CompPlex } from "../../../../types/compplex.type";
 
 class AddressSearchActions {
     Page: typeof findCompsPage;
@@ -59,7 +60,8 @@ class AddressSearchActions {
      * Action adds a comp by index (@param compIndex) 
      * with necessary property (@param compPropertyKey) value (@param compPropertyValue)
      */
-    addCompByParameter (compIndex: number, compPropertyKey: string, compPropertyValue: string) { 
+    addCompByParameter (compIndex: number, compPropertyKey: CompPlex.AddressSearch.CompProperty,
+        compPropertyValue: string) { 
         getDataFromDb(compPropertyKey, compPropertyValue);
         cy._mapGet(mapKeysUtils.arrayOfCompsFromDB).then(dataArray => {
             cy.log(<any>dataArray);
