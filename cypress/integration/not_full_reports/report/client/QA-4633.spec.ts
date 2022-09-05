@@ -49,6 +49,6 @@ and Identification of the Client sections`,
         Report._Client.Page.formRevertToOriginalBtn(1).click();
         Report._Client.Page.formYesRevertBtn.click();
         Report._Client.verifyFormCommentTextBoxText(Enums.PAGES_TEXTBOX_NAMES.identificationOfTheClient,
-            testData.verifyIdentificationOfTheClientTextArea);;  
+            testData.verifyIdentificationOfTheClientTextArea);
     });
 });
