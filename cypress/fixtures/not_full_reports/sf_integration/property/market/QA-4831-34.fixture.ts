@@ -22,6 +22,13 @@ const reportFixtures = [
             Enums.MARKET_RESEARCH_TYPES.withNeighborhood, {}, true),
         neighborhood: "Red Hook",
         area: ""
+    },
+    {
+        specName: "[QA-4834]",
+        reportData: ReportDataCreator.getReportData(
+            Enums.MARKET_RESEARCH_TYPES.withArea, {}, true),
+        neighborhood: "",
+        area: "Broward County"
     }
 ];
 
