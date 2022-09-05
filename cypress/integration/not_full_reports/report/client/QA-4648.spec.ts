@@ -1,6 +1,7 @@
 import { Report } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { createReport } from "../../../../actions/base/baseTest.actions";
+import Enums from "../../../../enums/enums";
 import testData from '../../../../fixtures/not_full_reports/report/client/QA-4648.fixture';
 
 describe("[QA-4648] Verify the Save button functionality on the Report > Client page", 
@@ -23,8 +24,9 @@ describe("[QA-4648] Verify the Save button functionality on the Report > Client 
                 .enterIdentificationOfTheClientTextBox(testData.textToType)
                 .clickNarrativeSuggestions(testData.verifyListValue, 1)
                 .inactivateTextAreaInput()
-                .verifyIntendedUserTextBox(testData.verifyAreaValue)
-                .verifyIdentificationOfTheClientTextBox(testData.verifyAreaValue);
+                .verifyFormCommentTextBoxText(Enums.PAGES_TEXTBOX_NAMES.intendedUser, testData.verifyAreaValue)
+                .verifyFormCommentTextBoxText(Enums.PAGES_TEXTBOX_NAMES.identificationOfTheClient,
+                    testData.verifyAreaValue);
             //Saving without cy.wait() impossible, because cypress interaction with buttons is to fast
             cy.wait(500);           
 
@@ -33,7 +35,9 @@ describe("[QA-4648] Verify the Save button functionality on the Report > Client 
             Report._Client.clickSaveButton()
                 .verifyProgressBarNotExist();
             cy.reload();
-            Report._Client.verifyIntendedUserTextBox(testData.verifyAreaValue)
-                .verifyIdentificationOfTheClientTextBox(testData.verifyAreaValue);
+            Report._Client.verifyFormCommentTextBoxText(Enums.PAGES_TEXTBOX_NAMES.intendedUser,
+                testData.verifyAreaValue)
+                .verifyFormCommentTextBoxText(Enums.PAGES_TEXTBOX_NAMES.identificationOfTheClient,
+                    testData.verifyAreaValue);
         });
     });

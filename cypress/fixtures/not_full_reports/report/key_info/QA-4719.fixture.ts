@@ -1,7 +1,6 @@
 import Enums from "../../../../enums/enums";
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 import chipsDataCreator from '../../../data_creator/chipsData.creator';
-import enums from '../../../../enums/enums';
 import { BoweryReports } from "../../../../types/boweryReports.type";
 
 export const reportCreationFixture = () => {
@@ -26,7 +25,7 @@ const chipNames = [
 
 export default {
     reportCreationData: reportCreationFixture(),
-    chips: chipsDataCreator.getChipsData(chipsOptions, enums.VALUE_CONCLUSION_TYPE.AS_STABILIZED),
+    chips: chipsDataCreator.getChipsData(chipsOptions, Enums.VALUE_CONCLUSION_TYPE.AS_STABILIZED),
     buildingName,
     propertyRightsAppraisedTitle: Enums.PAGES_TEXTBOX_NAMES.propertyRightsAppraised,
     definitionOfMarketValueTitle: Enums.PAGES_TEXTBOX_NAMES.definitionOfMarketValue,

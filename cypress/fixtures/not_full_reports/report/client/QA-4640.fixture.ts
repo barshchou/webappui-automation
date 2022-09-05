@@ -1,4 +1,4 @@
-import enums from "../../../../enums/enums";
+import Enums from "../../../../enums/enums";
 import { BoweryReports } from "../../../../types/boweryReports.type";
 import chipsDataCreator from "../../../data_creator/chipsData.creator";
 import ReportDataCreator from "../../../data_creator/reportData.creator";
@@ -13,14 +13,14 @@ const chipNames = [ "Client Organization", "Client Company" ];
 
 export default {
     reportCreationData: ReportDataCreator.getReportData("4640", {
-        incomeValue: enums.INCOME_TYPE.both
+        incomeValue: Enums.INCOME_TYPE.both
     }),
     textToType: "=",
-    chips: chipsDataCreator.getChipsData(chipsOptions, enums.VALUE_CONCLUSION_TYPE.AS_STABILIZED),
+    chips: chipsDataCreator.getChipsData(chipsOptions, Enums.VALUE_CONCLUSION_TYPE.AS_STABILIZED),
     buildingName,
     intendedUserCommentaryTitle: "Intended User",
     identificationOfTheClientCommentaryTitle: "Identification of the Client",
-    identificationOfTheClientSection: enums.EXPORT_TITLES.identificationOfTheClient,
-    intendedUseSection: enums.EXPORT_TITLES.intendedUseAndUser,
+    identificationOfTheClientSection: Enums.EXPORT_TITLES.identificationOfTheClient,
+    intendedUseSection: Enums.EXPORT_TITLES.intendedUseAndUser,
     chipNames
 };

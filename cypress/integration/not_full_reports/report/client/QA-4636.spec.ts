@@ -1,6 +1,7 @@
 import { Report } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { createReport } from "../../../../actions/base/baseTest.actions";
+import Enums from "../../../../enums/enums";
 import testData from '../../../../fixtures/not_full_reports/report/client/QA-4636.fixture';
 
 describe(`Verify the Modified label functionality for Intended User and Identification of the Client sections`,
@@ -22,10 +23,8 @@ describe(`Verify the Modified label functionality for Intended User and Identifi
                 .Page.modifiedLabel(true, 0).should("be.visible");
                
             cy.stepInfo(`3. Revert commentary and verify label not exist`);
-            Report._Client.activateTextAreaInput(Report._Client.Page.intendedUserTextBox)
-                .Page.formRevertToOriginalBtn().click();
-            Report._Client.Page.formYesRevertBtn.click();
-            Report._Client.Page.modifiedLabel(false).should("not.exist");
+            Report._Client.revertToOriginalCommentarySectionByName(Enums.PAGES_TEXTBOX_NAMES.intendedUser)
+                .Page.modifiedLabel(false).should("not.exist");
 
             cy.stepInfo(`4. Activate text field on the Report > Client page for Identification of the Client section`);
             Report._Client.verifyProgressBarNotExist()
@@ -37,9 +36,7 @@ describe(`Verify the Modified label functionality for Intended User and Identifi
                
             cy.stepInfo(`6. Verify that the Modified label appears after saving changes made to commentary`);
             Report._Client.Page.modifiedLabel(true, 0).should("be.visible");
-            Report._Client.activateTextAreaInput(Report._Client.Page.identificationOfClientTextBox)
-                .Page.formRevertToOriginalBtn(1).click();
-            Report._Client.Page.formYesRevertBtn.click();
-            Report._Client.Page.modifiedLabel(false).should("not.exist");
+            Report._Client.revertToOriginalCommentarySectionByName(Enums.PAGES_TEXTBOX_NAMES.identificationOfTheClient)
+                .Page.modifiedLabel(false).should("not.exist");
         });
     });

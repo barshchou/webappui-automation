@@ -1,6 +1,7 @@
 import { Report } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { createReport } from "../../../../actions/base/baseTest.actions";
+import Enums from "../../../../enums/enums";
 import testData from '../../../../fixtures/not_full_reports/report/client/QA-4633.fixture';
 
 describe(`Verify the Revert to Original button functionality for Intended User 
@@ -10,14 +11,14 @@ and Identification of the Client sections`,
         createReport(testData.reportCreationData);
     });
 
-    it("Test body", () => {
+    it("[QA-4633]", () => {
         cy.stepInfo(`1. Click on the Edit button on the Report > Client page for Intended User section.`);
         _NavigationSection.navigateToClientPage();
         Report._Client.verifyProgressBarNotExist()
             .activateTextAreaInput(Report._Client.Page.intendedUserTextBox);
 
-        cy.stepInfo(`2. Verify that the Revert to Original button is displayed`);
-        Report._Client.Page.formRevertToOriginalBtn().should("be.disabled");
+        cy.stepInfo(`2. Verify that the Revert to Original button is displayed, but it's disabled`);
+        Report._Client.Page.formRevertToOriginalBtn().should("be.visible").and("be.disabled");
 
         cy.stepInfo(`3. Edit comment and verify that the Revert to Original button becomes enabled`);
         Report._Client.enterIntendedUserTextBox(testData.textToType)
@@ -28,14 +29,15 @@ and Identification of the Client sections`,
         is displayed`);
         Report._Client.Page.formRevertToOriginalBtn().click();
         Report._Client.Page.formYesRevertBtn.click();
-        Report._Client.verifyIntendedUserTextBox(testData.verifyIntendedUserTextArea);
+        Report._Client.verifyFormCommentTextBoxText(Enums.PAGES_TEXTBOX_NAMES.intendedUser, 
+            testData.verifyIntendedUserTextArea);
            
         cy.stepInfo(`5. Click on the Edit button on the Report > Client page for 
                      Identification of the Client section.`);
         Report._Client.activateTextAreaInput(Report._Client.Page.identificationOfClientTextBox);
 
-        cy.stepInfo(`6. Verify that the Revert to Original button is displayed`);
-        Report._Client.Page.formRevertToOriginalBtn(1).should("be.disabled");
+        cy.stepInfo(`6. Verify that the Revert to Original button is displayed, but it's disabled`);
+        Report._Client.Page.formRevertToOriginalBtn(1).should("be.visible").and("be.disabled");
 
         cy.stepInfo(`7. Edit comment and verify that the Revert to Original button becomes enabled`);
         Report._Client.enterIdentificationOfTheClientTextBox(testData.textToType)
@@ -46,6 +48,7 @@ and Identification of the Client sections`,
         is displayed`);
         Report._Client.Page.formRevertToOriginalBtn(1).click();
         Report._Client.Page.formYesRevertBtn.click();
-        Report._Client.verifyIdentificationOfTheClientTextBox(testData.verifyIdentificationOfTheClientTextArea);  
+        Report._Client.verifyFormCommentTextBoxText(Enums.PAGES_TEXTBOX_NAMES.identificationOfTheClient,
+            testData.verifyIdentificationOfTheClientTextArea);;  
     });
 });

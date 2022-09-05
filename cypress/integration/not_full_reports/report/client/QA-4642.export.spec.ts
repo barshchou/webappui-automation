@@ -2,6 +2,7 @@ import { Property, Report, ReviewExport } from '../../../../actions';
 import testData from "../../../../fixtures/not_full_reports/report/client/QA-4642.fixture";
 import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from '../../../../actions/base';
+import Enums from '../../../../enums/enums';
 
 describe("Verify the Client Guidelines Discussion on the page",
     { tags: [ "@report", "@client", "@check_export" ] }, () => {
@@ -23,14 +24,15 @@ describe("Verify the Client Guidelines Discussion on the page",
                 Report._Client
                     .enterIntendedUserTextBox(`=${chip.typeSuggestValue}`)
                     .clickNarrativeSuggestions(chip.suggestionName)
-                    .verifyIntendedUserTextBox(chip.verifySuggest);
+                    .verifyFormCommentTextBoxText(Enums.PAGES_TEXTBOX_NAMES.intendedUser, chip.verifySuggest);
             });
             Report._Client.activateTextAreaInput(Report._Client.Page.identificationOfClientTextBox);
             testData.chips.forEach(chip => {
                 Report._Client
                     .enterIdentificationOfTheClientTextBox(`=${chip.typeSuggestValue}`)
                     .clickNarrativeSuggestions(chip.suggestionName, 1)
-                    .verifyIdentificationOfTheClientTextBox(chip.verifySuggest);
+                    .verifyFormCommentTextBoxText(Enums.PAGES_TEXTBOX_NAMES.identificationOfTheClient,
+                        chip.verifySuggest);
             });
             Report._Client.inactivateTextAreaInput();
 

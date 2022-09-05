@@ -116,18 +116,6 @@ class ClientActions extends BaseActionsExt<typeof clientPage> {
         return this;
     }
 
-    verifyIntendedUserTextBox(verifyAreaValue: string | number, isContain = true): ClientActions {
-        const assert = isContain ? "contain.text" : "not.contain.text";
-        clientPage.intendedUserTextBox.should(assert, `${verifyAreaValue}`);
-        return this;
-    }
-
-    verifyIdentificationOfTheClientTextBox(verifyAreaValue: string | number, isContain = true): ClientActions {
-        const assert = isContain ? "contain.text" : "not.contain.text";
-        clientPage.identificationOfClientTextBox.should(assert, `${verifyAreaValue}`);
-        return this;
-    }
-
     verifyCommentaryContainsText(verifyAreaValue: string | number, commentaryTitle: string): ClientActions { 
         let expectedText = typeof verifyAreaValue ===  "number" 
             ? `${numberWithCommas(verifyAreaValue)}`

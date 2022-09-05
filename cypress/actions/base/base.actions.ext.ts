@@ -183,9 +183,14 @@ export default class BaseActionsExt<T extends BasePage> extends BaseActions {
         return this;
     }
 
-    verifyStyleInDefaultChip(chip: string): this {
-        this.Page.getDefaultCommentChip(chip).should("have.css", "color", "rgb(210, 65, 65)")
-            .and("have.css", "background-color", "rgb(255, 233, 233)");
+    verifyStyleInDefaultChip(chip: string, color = "rgb(210, 65, 65)", backgroundColor = "rgb(255, 233, 233)"): this {
+        this.Page.getDefaultCommentChip(chip).should("have.css", "color", color)
+            .and("have.css", "background-color", backgroundColor);
+        return this;
+    }
+
+    clickCloseIcon(): this {
+        this.Page.CloseIcon.click();
         return this;
     }
 }

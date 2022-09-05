@@ -1,6 +1,7 @@
 import { Report } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { createReport } from "../../../../actions/base/baseTest.actions";
+import Enums from "../../../../enums/enums";
 import testData from '../../../../fixtures/not_full_reports/report/client/QA-4639.fixture';
 
 describe(`Verify the Modified label functionality for Intended User and Identification of the Client sections`,
@@ -23,7 +24,8 @@ describe(`Verify the Modified label functionality for Intended User and Identifi
                 .clickNarrativeSuggestions(testData.verifySuggestion);
                
             cy.stepInfo(`4. Verify that the following text appears for both sections.`);
-            Report._Client.verifyIntendedUserTextBox(testData.verifyTextArea);
+            Report._Client.verifyFormCommentTextBoxText(Enums.PAGES_TEXTBOX_NAMES.intendedUser, 
+                testData.verifyTextArea);
  
             cy.stepInfo(`5. Activate text area for Identification of the Client section.`);
             Report._Client.activateTextAreaInput( Report._Client.Page.identificationOfClientTextBox);
@@ -33,7 +35,8 @@ describe(`Verify the Modified label functionality for Intended User and Identifi
                 .clickNarrativeSuggestions(testData.verifySuggestion, 1);
                
             cy.stepInfo(`7. Verify that the following text appears for both sections.`);
-            Report._Client.verifyIdentificationOfTheClientTextBox(testData.verifyTextArea);
+            Report._Client.verifyFormCommentTextBoxText(Enums.PAGES_TEXTBOX_NAMES.identificationOfTheClient,
+                testData.verifyTextArea);
                
         });
     });

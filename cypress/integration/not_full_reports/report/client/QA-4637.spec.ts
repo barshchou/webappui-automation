@@ -1,6 +1,7 @@
 import { Report } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { createReport } from "../../../../actions/base/baseTest.actions";
+import Enums from "../../../../enums/enums";
 import testData from '../../../../fixtures/not_full_reports/report/client/QA-4637.fixture';
 
 describe(`Verify the suggested text dropdown in the new narrative component added through "=" 
@@ -24,7 +25,7 @@ and Identification of the Client sections.`,
             .clickNarrativeSuggestions(testData.verifyListValue);
 
         cy.stepInfo(`4. Verify that the following text appears`);
-        Report._Client.verifyIntendedUserTextBox(testData.verifyAreaValue);
+        Report._Client.verifyFormCommentTextBoxText(Enums.PAGES_TEXTBOX_NAMES.intendedUser, testData.verifyAreaValue);
             
         cy.stepInfo(`5. Activate text area for Identification of the Client section.`);
         Report._Client.activateTextAreaInput( Report._Client.Page.identificationOfClientTextBox);
@@ -34,6 +35,7 @@ and Identification of the Client sections.`,
             .clickNarrativeSuggestions(testData.verifyListValue, 1);
 
         cy.stepInfo(`7. Verify that the following text appears`);
-        Report._Client.verifyIdentificationOfTheClientTextBox(testData.verifyAreaValue);
+        Report._Client.verifyFormCommentTextBoxText(Enums.PAGES_TEXTBOX_NAMES.identificationOfTheClient,
+            testData.verifyAreaValue);
     });
 });
