@@ -1,4 +1,4 @@
-import testData from "../../../../../fixtures/not_full_reports/sf_integration/property/market/QA-4831-32.fixture";
+import testData from "../../../../../fixtures/not_full_reports/sf_integration/property/market/QA-4831-33.fixture";
 import { _NavigationSection } from "../../../../../actions/base";
 import { Property } from "../../../../../actions";
 import { createReport } from "../../../../../actions/base/baseTest.actions";
@@ -16,8 +16,8 @@ describe("Neighborhood and Area fields are NOT prefilled (analysis are not selec
     
                 cy.stepInfo(`3. Verify Neighborhood and Area fields are NOT prefilled (analysis are not selected 
                             in the Salesforce)`);
-                Property._Market.Page.neighborhood.should("have.value", "");
-                Property._Market.Page.area.should("have.value", "");
+                Property._Market.Page.neighborhood.should("have.value", report.neighborhood);
+                Property._Market.Page.area.should("have.value", report.area);
             });
         });
     });
