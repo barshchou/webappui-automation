@@ -14,7 +14,8 @@ const pagesTextboxNames = {
     totalOperatingExpenses: "TOTAL OPERATING EXPENSES",
     letterOfTransmittalPurpose: "Letter of Transmittal Purpose",
     locationDescriptionExport: "Location Description Export",
-    certificationInspection: "Certification Inspection"
+    certificationInspection: "Certification Inspection",
+    clientGuidelinesDiscussion: "Client Guidelines Discussion"
 } as const;
 
 export default Object.freeze(pagesTextboxNames);
