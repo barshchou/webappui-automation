@@ -3,7 +3,6 @@ import { reportCreationData } from
     "../../../../../fixtures/not_full_reports/sf_integration/report/key_info/QA-4621-24.fixture";
 import { createReport } from "../../../../../actions/base/baseTest.actions";
 import { Report } from "../../../../../actions";
-import { _NavigationSection } from "../../../../../actions/base";
 
 describe("The Letter of Engagement pre-fill from Dropbox to LoE filed in WebApp - 1 LoE PDF file",
     { tags: [ "@report", "@key_info", "@salesforce" ] }, () => {
@@ -15,8 +14,6 @@ describe("The Letter of Engagement pre-fill from Dropbox to LoE filed in WebApp 
             cy.stepInfo(`2. Navigate to the Report > Key Info > Engagement and Verify that 
             the Letter Of Engagement field is empty and nothing 
                     is auto-filled from Dropbox`);
-            // TODO: [QA-6759] AQA - Remove duplicate navigation to KeyInfo page
-            _NavigationSection.navigateToReportKeyInfo();
             Report._KeyInfo.Page.inputToCheckUpload.should("have.value", testData.verifyValue);
         });
 
@@ -28,8 +25,6 @@ describe("The Letter of Engagement pre-fill from Dropbox to LoE filed in WebApp 
             cy.stepInfo(`2. Navigate to the Report > Key Info > Engagement and Verify that 
             the Letter Of Engagement field is empty and nothing 
                     is auto-filled from Dropbox`);
-            // TODO: [QA-6759] AQA - Remove duplicate navigation to KeyInfo page
-            _NavigationSection.navigateToReportKeyInfo();
             Report._KeyInfo.Page.inputToCheckUpload.should("be.empty");
         });
 
@@ -41,8 +36,6 @@ describe("The Letter of Engagement pre-fill from Dropbox to LoE filed in WebApp 
             cy.stepInfo(`2. Navigate to the Report > Key Info > Engagement and Verify that 
             the Letter Of Engagement field is empty and nothing 
                     is auto-filled from Dropbox`);
-            // TODO: [QA-6759] AQA - Remove duplicate navigation to KeyInfo page
-            _NavigationSection.navigateToReportKeyInfo();
             Report._KeyInfo.Page.inputToCheckUpload.should("be.empty");
         });
 
@@ -54,8 +47,6 @@ describe("The Letter of Engagement pre-fill from Dropbox to LoE filed in WebApp 
             cy.stepInfo(`2. Navigate to the Report > Key Info > Engagement and Verify that 
             the Letter Of Engagement field is empty and nothing 
                     is auto-filled from Dropbox`);
-            // TODO: [QA-6759] AQA - Remove duplicate navigation to KeyInfo page
-            _NavigationSection.navigateToReportKeyInfo();
             Report._KeyInfo.Page.inputToCheckUpload.should("be.empty");
         });
     });

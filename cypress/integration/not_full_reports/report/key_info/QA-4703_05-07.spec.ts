@@ -1,6 +1,5 @@
 import testData from "../../../../fixtures/not_full_reports/report/key_info/QA-4703_05-07.fixture";
 import { createReport } from "../../../../actions/base/baseTest.actions";
-import { _NavigationSection } from "../../../../actions/base";
 import { Report } from "../../../../actions";
 
 describe(`[QA-4703_05-07] Verify the revert commentary functionality for Property Rights Appraised 
@@ -14,9 +13,6 @@ and Definition of Market Value sections`,
     it(`[QA-4703][Report > Key Info] Verify the Property Rights Appraised and Definition 
          of Market Value sections can be edited`, () => {
         cy.stepInfo(`1. On the Report > Key Info page click inside the Property Rights Appraised section.`);
-        // TODO: [QA-6759] AQA - Remove duplicate navigation to KeyInfo page
-        _NavigationSection.navigateToPropertySummary()
-            .navigateToReportKeyInfo();
         Report._KeyInfo.activateTextAreaInput( Report._KeyInfo.Page
             .formCommentTextBox(testData.propertyRightsAppraisedTitle));
 

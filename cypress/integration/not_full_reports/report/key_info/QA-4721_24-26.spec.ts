@@ -13,12 +13,7 @@ describe(`Verify the Save and Save & Continue button functionality on the Report
         });
 
         it("[QA-4721]", () => {
-            // TODO: [QA-6759] AQA - Remove duplicate navigation to KeyInfo page
-            cy.stepInfo(`1. Proceed to the Report > Key Info page`);
-            _NavigationSection.navigateToPropertySummary()
-                .navigateToReportKeyInfo();
-
-            cy.stepInfo(`2. Fill in the editable fields with values and click on the Save button then reload page`);
+            cy.stepInfo(`1. Fill in the editable fields with values and click on the Save button then reload page`);
             Report._KeyInfo
                 .enterFormCommentTextBox(testData.propertyRightsAppraisedTitle, testData.enterValue, false)
                 .clickNarrativeSuggestions(testData.listValue)
@@ -35,19 +30,13 @@ describe(`Verify the Save and Save & Continue button functionality on the Report
                 .verifyProgressBarNotExist();
             cy.reload();
        
-
-            cy.stepInfo(`3. Verify that the changes are saved`);
+            cy.stepInfo(`2. Verify that the changes are saved`);
             Report._KeyInfo.verifyFormCommentTextBoxText(testData.propertyRightsAppraisedTitle, testData.verifyTaxValue)
                 .verifyFormCommentTextBoxText(testData.definitionOfMarketValueTitle, testData.verifyTaxValue);
         });
 
         it("[QA-4724]", () => {
-            // TODO: [QA-6759] AQA - Remove duplicate navigation to KeyInfo page
-            cy.stepInfo(`1. Proceed to the Report > Key Info page`);
-            _NavigationSection.navigateToPropertySummary()
-                .navigateToReportKeyInfo();
-
-            cy.stepInfo(`2. Fill in the editable fields with values and click on the Save & Continue button`);
+            cy.stepInfo(`1. Fill in the editable fields with values and click on the Save & Continue button`);
             Report._KeyInfo.enterFormCommentTextBox(testData.propertyRightsAppraisedTitle, testData.enterValue, false)
                 .clickNarrativeSuggestions(testData.listValue)
                 .verifyFormCommentTextBoxText(testData.propertyRightsAppraisedTitle, testData.verifyTaxValue)
@@ -61,7 +50,7 @@ describe(`Verify the Save and Save & Continue button functionality on the Report
             cy.wait(1000);
             Report._KeyInfo.clickSaveContinueButton();
 
-            cy.stepInfo(`3. Verify that the changes are saved and the user is redirected 
+            cy.stepInfo(`2. Verify that the changes are saved and the user is redirected 
             to the next page (Report > Appraiser)`);
             Report._Appraiser.verifyPageOpened();
             _NavigationSection.goBackWithSave();
@@ -71,12 +60,7 @@ describe(`Verify the Save and Save & Continue button functionality on the Report
         });
 
         it("[QA-4725]", () => {
-            // TODO: [QA-6759] AQA - Remove duplicate navigation to KeyInfo page
-            cy.stepInfo(`1. Proceed to the Report > Key Info page`);
-            _NavigationSection.navigateToPropertySummary()
-                .navigateToReportKeyInfo();
-
-            cy.stepInfo(`2. Fill in the editable fields with values and do NOT click on the Save button`);
+            cy.stepInfo(`1. Fill in the editable fields with values and do NOT click on the Save button`);
             Report._KeyInfo.enterFormCommentTextBox(testData.propertyRightsAppraisedTitle, testData.enterValue, false)
                 .clickNarrativeSuggestions(testData.listValue)
                 .verifyFormCommentTextBoxText(testData.propertyRightsAppraisedTitle, testData.verifyTaxValue)
@@ -85,7 +69,7 @@ describe(`Verify the Save and Save & Continue button functionality on the Report
                 .verifyFormCommentTextBoxText(testData.definitionOfMarketValueTitle, testData.verifyTaxValue);
             cy.wait(1000);
 
-            cy.stepInfo(`3. Try to proceed on any other page and verify that the Unsaved changes modal is displayed`);
+            cy.stepInfo(`2. Try to proceed on any other page and verify that the Unsaved changes modal is displayed`);
             _NavigationSection.clickPreviewEditButton()
                 .clickLetterOfTransmittal()
                 .verifyUnsavedChangesModal()
@@ -96,7 +80,7 @@ describe(`Verify the Save and Save & Continue button functionality on the Report
             Report._KeyInfo.verifyFormCommentTextBoxText(testData.propertyRightsAppraisedTitle, testData.verifyTaxValue)
                 .verifyFormCommentTextBoxText(testData.definitionOfMarketValueTitle, testData.verifyTaxValue);
 
-            cy.stepInfo(`4. Try to proceed on any other page from the Key Info page and 
+            cy.stepInfo(`3. Try to proceed on any other page from the Key Info page and 
             verify that the Unsaved changes modal is displayed`);
             Report._KeyInfo
                 .clearFormCommentTextBox(testData.propertyRightsAppraisedTitle)
@@ -108,7 +92,7 @@ describe(`Verify the Save and Save & Continue button functionality on the Report
                 .clickNarrativeSuggestions(testData.secondListValue, 2)
                 .verifyFormCommentTextBoxText(testData.definitionOfMarketValueTitle, testData.verifySecondTaxValue);
 
-            cy.stepInfo(`5 Verify that the changes are NOT saved on the Key Info page`);
+            cy.stepInfo(`4 Verify that the changes are NOT saved on the Key Info page`);
             _NavigationSection.clickPreviewEditButton()
                 .clickLetterOfTransmittal()
                 .verifyUnsavedChangesModal()
@@ -121,12 +105,7 @@ describe(`Verify the Save and Save & Continue button functionality on the Report
         });
 
         it("[QA-4726]", () => {
-            // TODO: [QA-6759] AQA - Remove duplicate navigation to KeyInfo page
-            cy.stepInfo(`1. Proceed to the Report > Key Info page`);
-            _NavigationSection.openReviewAndExport()
-                .navigateToReportKeyInfo();
-       
-            cy.stepInfo(`2. Click on the Back button and verify the user is redirected 
+            cy.stepInfo(`1. Click on the Back button and verify the user is redirected 
             to another page (Settings & Export > Review and Export).`);
             Report._KeyInfo.clickBackButton();
             _NavigationSection.submitSaveChangesModal();
