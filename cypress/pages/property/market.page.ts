@@ -19,11 +19,11 @@ class MarketPage extends BasePage {
     get neighborhoodYear() { return cy.get("*[name=neighborhoodYear]"); }
 
     getMarketInputByAnalysisUse(marketAnalysisUse: BoweryReports.MarketAnalysisUses) {
-        return cy.get(`[data-qa=${marketAnalysisUse}Market-form-control] input`);
+        return cy.get(`[name="${marketAnalysisUse}Market"]`);
     }
 
     getSubmarketInputByAnalysisUse(marketAnalysisUse: BoweryReports.MarketAnalysisUses) {
-        return cy.get(`[data-qa=${marketAnalysisUse}Submarket-form-control] input`);
+        return cy.get(`[name="${marketAnalysisUse}Submarket"]`);
     }
 
     get marketQuarter() { return cy.get("[data-qa=marketQuarter-form-control] input"); }
