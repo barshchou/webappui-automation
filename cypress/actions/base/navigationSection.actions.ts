@@ -6,6 +6,8 @@ import routesUtils from "../../utils/routes.utils";
 import { Utils } from "../../types/utils.type";
 import stabilizedRentRollPage from "../../pages/income/commercial/stabilizedRentRoll.page";
 import rentRollPage from "../../pages/income/commercial/rentRoll.page";
+import { BoweryReports } from "../../types/boweryReports.type";
+import Enums from "../../enums/enums";
 
 class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPage> {
     
@@ -494,6 +496,17 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         return this;
     }
 
+    navigateToSubjectPropertyData(section = Enums.SUBJECT_PROPERTY_DATA_SECTIONS.siteDetails, isSubmitChanges = true
+    ): NavigationSectionActions {
+        this.clickDataCollectionsIcon()
+            .clickSubjectPropertyDataMenuIfClosed()
+            .clickSubjectPropertyDataSectionAnchor(section)
+            .submitSaveChangesModal(isSubmitChanges)
+            .verifyProgressBarNotExist()
+            .waitForUrl(routesUtils.subjectPropertyData);
+        return this;
+    }
+
     private clickCommercialMenuIfClosed(): NavigationSectionActions {
         navigationSectionPage.commercialIncomeArrow.then(el => {
             if (!el.hasClass("expanded")) {
@@ -521,6 +534,15 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
             }
         });
 
+        return this;
+    }
+
+    clickSubjectPropertyDataMenuIfClosed(): NavigationSectionActions {
+        navigationSectionPage.subjectPropertyDataDropdown.then(el => {
+            if (!el.hasClass("expanded")) {
+                navigationSectionPage.subjectPropertyDataDropdown.click();
+            }
+        });
         return this;
     }
 
@@ -889,6 +911,17 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
 
     clickContentManagementSystem(): NavigationSectionActions {
         navigationSectionPage.contentManagementSystemButton.click();
+        return this;
+    }
+
+    clickDataCollectionsIcon(): NavigationSectionActions {
+        navigationSectionPage.dataCollectionsIcon.click();
+        return this;
+    }
+
+    clickSubjectPropertyDataSectionAnchor(section: BoweryReports.SubjectPropertyDataSections
+    ): NavigationSectionActions {
+        navigationSectionPage.getSubjectPropertyDataSectionAnchor(section).click();
         return this;
     }
 
