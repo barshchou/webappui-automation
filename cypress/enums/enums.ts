@@ -97,6 +97,8 @@ import expenseItemBasisOfComparisonEnum from "./expense/expenseItemBasisOfCompar
 import exportTitlesEnum from "./exportTitles.enum";
 import compStatusValuesEnum from "./findComps/compStatusValues.enum";
 import compPropertyPathsInDB from "./compplex/compPropertiesAndValues.enum";
+import saleStatusValuesInDB from "./compplex/compPropertiesAndValues.enum";
+import saleConditionValuesInDB from "./compplex/compPropertiesAndValues.enum";
 
 export default {
     TEMPLATE_TYPE: templateTypesEnum,
@@ -198,4 +200,6 @@ export default {
     EXPORT_TITLES: exportTitlesEnum,
     COMP_STATUS_VALUES: compStatusValuesEnum,
     COMP_PROPERTIES_PATHS_DB: compPropertyPathsInDB,
+    COMP_SALE_STATUS_DB: saleStatusValuesInDB,
+    COMP_SALE_CONDITION_DB: saleConditionValuesInDB
 };

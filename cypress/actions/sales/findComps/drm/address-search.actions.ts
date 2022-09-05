@@ -60,8 +60,8 @@ class AddressSearchActions {
      * Action adds a comp by index (@param compIndex) 
      * with necessary property (@param compPropertyKey) value (@param compPropertyValue)
      */
-    addCompByParameter (compIndex: number, compPropertyKey: CompPlex.AddressSearch.CompProperty,
-        compPropertyValue: string) { 
+    addCompByParameter (compIndex: number, compPropertyKey: CompPlex.AddressSearch.CompPropertyInDB,
+        compPropertyValue: CompPlex.AddressSearch.CompPropertyValuesInDB) { 
         getDataFromDb(compPropertyKey, compPropertyValue);
         cy._mapGet(mapKeysUtils.arrayOfCompsFromDB).then(dataArray => {
             cy.log(<any>dataArray);

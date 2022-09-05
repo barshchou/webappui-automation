@@ -1,6 +1,6 @@
 const compPropertyPathsInDB = {
     saleStatus: "latestVersion.saleInformation.saleStatus",
-    sellerName: "latestVersion.saleInformation.seller",
+    saleCondition: "latestVersion.saleInformation.saleCondition",
     city: "address.city" 
 } as const;
 
@@ -10,8 +10,14 @@ const saleStatusValuesInDB = {
     listing: "listing"
 } as const;
 
+const saleConditionValuesInDB = {
+    armsLength: "armsLength",
+    nonArmsLength: "nonArmsLength"
+} as const;
+
 export default {
+    compPropertyPathsInDB,
     saleStatusValuesInDB,
-    compPropertyPathsInDB
+    saleConditionValuesInDB
 };
    

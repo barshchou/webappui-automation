@@ -1,3 +1,5 @@
+//THIS TEST IS FOR EXAMPLE ONLY
+
 import Sales from "../../../../actions/sales/sales.manager";
 import { conditionalDescribe } from "../../../checkIsProd.utils";
 import { createReport } from "../../../../actions/base/baseTest.actions";
@@ -7,7 +9,8 @@ import { _NavigationSection } from '../../../../actions/base';
 import Enums from "../../../../enums/enums";
 
 Cypress.env("report", "ui");
-const compProperty = Enums.COMP_PROPERTIES_PATHS_DB.compPropertyPathsInDB.saleStatus;
+const compProperty = Enums.COMP_PROPERTIES_PATHS_DB.compPropertyPathsInDB;
+const compStatus = Enums.COMP_PROPERTIES_PATHS_DB.saleStatusValuesInDB.date;
 
 conditionalDescribe('describe', {
     tags: [ "@comp_plex_standalone1" ] },  () => {
@@ -22,7 +25,7 @@ conditionalDescribe('describe', {
         _NavigationSection.navigateToFindComps()
             .verifyProgressBarNotExist();
         Sales.FindComps.AddressSearch.openAddressSearchTab()
-            .addCompByParameter(2, compProperty, 'transaction');
+            .addCompByParameter(2, "saleStatus", "transaction");
          
 
     });

@@ -1,12 +1,13 @@
 import { MongoClient } from 'mongodb';
 import mapKeysUtils from '../utils/mapKeys.utils';
-
+import { CompPlex } from "../types/compplex.type";
 
 /**
  * Function determines url and name of comp-plex database, then  connects to database and retrieve 
  * the array (max = 10) of comps with necessary property (@param filterPath) value (@param filterValue)
  */
-export  function  getDataFromDb (filterPath: string, filterValue: string)  {
+export  function  getDataFromDb (filterPath: CompPlex.AddressSearch.CompPropertyInDB, 
+    filterValue: CompPlex.AddressSearch.CompPropertyValuesInDB)  {
     //  Connection URL
     const url =  determinePassedEnv().passedEnv; 
     cy.log(url);

@@ -9,6 +9,7 @@ const { _jobSearch, _propertyInfoEnum, _saleInfoEnum, _addressSearch } = enums.C
 namespace Keys {
     export type BuildingType = keyof typeof _propertyInfoEnum.buildingType
     export type SaleStatus = keyof typeof _saleInfoEnum
+
 }
 
 export namespace CompPlex {
@@ -41,8 +42,13 @@ export namespace CompPlex {
     }
 
     export namespace AddressSearch {
-        export type CompProperty = typeof _addressSearch.compPropertyPathsInDB[CompPropertiesPathsInDatabase]  
-
+        export type CompPropertyInDB = keyof typeof _addressSearch.compPropertyPathsInDB
+        export type CompSaleStatusInDB = keyof typeof _addressSearch.saleStatusValuesInDB
+        export type CompSaleConditionInDB = keyof typeof _addressSearch.saleConditionValuesInDB
+        export type CompPropertyValuesInDB = Partial<{
+            SaleStatus: AddressSearch.CompSaleStatusInDB, //
+            SaleCondition: AddressSearch.CompSaleConditionInDB
+        }> 
 
     }
 }
