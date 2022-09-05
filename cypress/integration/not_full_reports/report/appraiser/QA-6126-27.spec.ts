@@ -5,6 +5,7 @@ import testData from "../../../../fixtures/not_full_reports/report/appraiser/QA-
 import Enums from '../../../../enums/enums';
 import { normalizeText } from '../../../../../utils/string.utils';
 
+// TODO: Export fails due to https://bowery.atlassian.net/browse/WEB-6739
 describe("Generated Commentary is dynamically updated with relevant information (Freddie Mac report)", 
     { tags:[ "@report", "@appraiser", "@check_export" ] }, () => {
 
@@ -23,10 +24,12 @@ describe("Generated Commentary is dynamically updated with relevant information 
             Report._Appraiser.verifySignCheckbox(testData.inspectorName, false);
 
             cy.stepInfo("5. Verify generated Certification Inspection comment");
-            Report._Appraiser.Page.certificationInspectionText
-                .should("have.text", testData.certificationInspectionComment);
+            Report._Appraiser.Page.formCommentTextBox(Enums.PAGES_TEXTBOX_NAMES.certificationInspection).invoke('text')
+                .then(text => {
+                    expect(normalizeText(text)).to.be.eq(testData.certificationInspectionComment);
+                });
 
-            cy.stepInfo("6. Verify generated Certification Inspection comment");
+            cy.stepInfo("6. Verify generated Certification Assistance comment");
             Report._Appraiser.Page.formCommentTextBox(Enums.PAGES_TEXTBOX_NAMES.certificationAssistance).invoke("text")
                 .then(text => {
                     expect(normalizeText(text)).to.eq(testData.certificationAssistanceComment);
