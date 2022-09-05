@@ -94,7 +94,7 @@ class AppraiserActions extends BaseActionsExt<typeof appraiserPage> {
 
     interceptAppraisersRequest() {
         cy._mapGet(mapKeysUtils.reportId).then(reportId => {
-            cy.intercept("GET", `/report/${reportId}`).as(Alias.reportId);
+            cy.intercept("PATCH", `/report/${reportId}`).as(Alias.reportId);
         });
     }
 
