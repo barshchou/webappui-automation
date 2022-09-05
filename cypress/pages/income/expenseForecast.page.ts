@@ -21,9 +21,13 @@ class ExpenseForecastPage extends BasePage {
      * changes it (according to the rule from webapp) for qa-data attribute 
      */
     forecastItemCardFull(forecastItem: string, custom = false) {
-        return !custom ? cy.get(`[data-qa='${forecastItem}-forecast-item']`) :
-            cy.get(`[data-qa=${Cypress._.camelCase(Cypress._.toLower(Cypress._
-                .replace(forecastItem, "&", "And")))}-forecast-item]`);
+        return cy.get(`[data-qa='${forecastItem}-forecast-item']`);
+        /*
+         * TODO: Replace with current approach when we get proper custom categories names data-qa attr
+         * return !custom ? cy.get(`[data-qa='${forecastItem}-forecast-item']`) :
+         *     cy.get(`[data-qa=${Cypress._.camelCase(Cypress._.toLower(Cypress._
+         *         .replace(forecastItem, "&", "And")))}-forecast-item]`);
+         */
     }
 
     forecastItemCard(item: string, custom = false) {
