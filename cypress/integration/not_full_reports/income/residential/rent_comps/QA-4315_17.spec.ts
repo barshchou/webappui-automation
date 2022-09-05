@@ -5,7 +5,8 @@ import Income from "../../../../../actions/income/income.manager";
 import RentCompsPage from "../../../../../pages/income/residential/rent_comps/rentComps.page";
 
 describe(`Verify the UI elements of Find Rent Comparable overlay on Rent Comps page 
-and Add New Rent Comp button`, () => {
+and Add New Rent Comp button`, 
+{ tags:[ "@income", "@commercial", "@in_place_rent_roll" ] }, () => {
     beforeEach("Login, create report", () => {
         createReport(testData.reportCreationData);
     });

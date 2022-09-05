@@ -5,9 +5,8 @@ import Income from "../../../../../actions/income/income.manager";
 import Property from "../../../../../actions/property/property.manager";
 
 describe(`Verify clicking Add Unit button on Add New Rent Comp overlay is adding the unit to the appropriate group 
-                of comparable units on the Rent Comps page (Unit type of search is selected)`,
+of comparable units on the Rent Comps page (Unit type of search is selected)`,
 { tags:[ "@income", "@residential", "@rent_comps" ] }, () => {
-
     beforeEach("Login, create report", () => {
         createReport(testData.reportCreationData);
     });
