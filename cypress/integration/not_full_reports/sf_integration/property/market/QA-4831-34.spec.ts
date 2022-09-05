@@ -3,7 +3,7 @@ import { _NavigationSection } from "../../../../../actions/base";
 import { Property } from "../../../../../actions";
 import { createReport } from "../../../../../actions/base/baseTest.actions";
 
-describe("Neighborhood and Area fields are NOT prefilled (analysis are not selected in the Salesforce)",
+describe("Neighborhood and Area fields are prefilled from Salesforce",
     { tags: [ "@property", "@market", "@salesforce" ] }, () => {
 
         testData.reportFixtures.forEach(report => {
