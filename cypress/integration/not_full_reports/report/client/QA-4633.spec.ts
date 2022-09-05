@@ -18,16 +18,18 @@ and Identification of the Client sections`,
             .activateTextAreaInput(Report._Client.Page.intendedUserTextBox);
 
         cy.stepInfo(`2. Verify that the Revert to Original button is displayed, but it's disabled`);
-        Report._Client.Page.formRevertToOriginalBtn().should("be.visible").and("be.disabled");
+        Report._Client.Page.formRevertToOriginalBtnBySectionName(Enums.PAGES_TEXTBOX_NAMES.intendedUser)
+            .should("be.visible").and("be.disabled");
 
         cy.stepInfo(`3. Edit comment and verify that the Revert to Original button becomes enabled`);
         Report._Client.enterIntendedUserTextBox(testData.textToType)
             .clickNarrativeSuggestions(testData.verifySuggestion);
-        Report._Client.Page.formRevertToOriginalBtn().should("be.enabled");
+        Report._Client.Page.formRevertToOriginalBtnBySectionName(Enums.PAGES_TEXTBOX_NAMES.intendedUser)
+            .should("be.enabled");
 
         cy.stepInfo(`4. Click on the Revert to Original button and verify the 'Changes will be lost modal' 
         is displayed`);
-        Report._Client.Page.formRevertToOriginalBtn().click();
+        Report._Client.Page.formRevertToOriginalBtnBySectionName(Enums.PAGES_TEXTBOX_NAMES.intendedUser).click();
         Report._Client.Page.formYesRevertBtn.click();
         Report._Client.verifyFormCommentTextBoxText(Enums.PAGES_TEXTBOX_NAMES.intendedUser, 
             testData.verifyIntendedUserTextArea);
@@ -37,16 +39,19 @@ and Identification of the Client sections`,
         Report._Client.activateTextAreaInput(Report._Client.Page.identificationOfClientTextBox);
 
         cy.stepInfo(`6. Verify that the Revert to Original button is displayed, but it's disabled`);
-        Report._Client.Page.formRevertToOriginalBtn(1).should("be.visible").and("be.disabled");
+        Report._Client.Page.formRevertToOriginalBtnBySectionName(Enums.PAGES_TEXTBOX_NAMES.identificationOfTheClient)
+            .should("be.visible").and("be.disabled");
 
         cy.stepInfo(`7. Edit comment and verify that the Revert to Original button becomes enabled`);
         Report._Client.enterIdentificationOfTheClientTextBox(testData.textToType)
             .clickNarrativeSuggestions(testData.verifySuggestion, 1);
-        Report._Client.Page.formRevertToOriginalBtn(1).should("be.enabled");
+        Report._Client.Page.formRevertToOriginalBtnBySectionName(Enums.PAGES_TEXTBOX_NAMES.identificationOfTheClient)
+            .should("be.enabled");
 
         cy.stepInfo(`8. Click on the Revert to Original button and verify the 'Changes will be lost modal' 
         is displayed`);
-        Report._Client.Page.formRevertToOriginalBtn(1).click();
+        Report._Client.Page.formRevertToOriginalBtnBySectionName(Enums.PAGES_TEXTBOX_NAMES.identificationOfTheClient)
+            .click();
         Report._Client.Page.formYesRevertBtn.click();
         Report._Client.verifyFormCommentTextBoxText(Enums.PAGES_TEXTBOX_NAMES.identificationOfTheClient,
             testData.verifyIdentificationOfTheClientTextArea);

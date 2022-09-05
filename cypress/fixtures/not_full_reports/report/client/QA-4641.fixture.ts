@@ -22,8 +22,8 @@ export default {
     textToType: "=",
     chips: chipsDataCreator.getChipsData(chipsOptions, Enums.VALUE_CONCLUSION_TYPE.AS_STABILIZED),
     buildingName: buildingName,
-    intendedUserCommentaryTitle: "Intended User",
-    identificationOfTheClientCommentaryTitle: "Identification of the Client",
+    intendedUserCommentaryTitle: Enums.PAGES_TEXTBOX_NAMES.intendedUser,
+    identificationOfTheClientCommentaryTitle:  Enums.PAGES_TEXTBOX_NAMES.identificationOfTheClient,
     identificationOfTheClientSection: Enums.EXPORT_TITLES.identificationOfTheClient,
     intendedUseSection: Enums.EXPORT_TITLES.intendedUseAndUser,
     chipNames

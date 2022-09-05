@@ -4,8 +4,8 @@ import { createReport } from "../../../../actions/base/baseTest.actions";
 import Enums from "../../../../enums/enums";
 import testData from '../../../../fixtures/not_full_reports/report/client/QA-4634.fixture';
 
-describe(`Verify the 'Changes will be lost' modal functionality for Intended User 
-and Identification of the Client sections`, 
+describe(`Verify the 'Changes will be lost' modal functionality for Intended User
+        and Identification of the Client sections`,
 { tags: [ "@report", "@client" ] }, () => {
     beforeEach("Login, create report", () => {
         createReport(testData.reportCreationData);
@@ -100,8 +100,7 @@ and Identification of the Client sections`,
         Report._Client.activateTextAreaInput(Report._Client.Page.identificationOfClientTextBox)
             .enterIdentificationOfTheClientTextBox(testData.textToType)
             .clickNarrativeSuggestions(testData.verifyListValue, 1)
-            .Page.formRevertToOriginalBtn(1).click();
-        Report._Client.Page.formYesRevertBtn.click();
+            .revertToOriginalCommentarySectionByName(Enums.PAGES_TEXTBOX_NAMES.identificationOfTheClient);
 
         cy.stepInfo(`18.Click on the 'Yes, revert' button in the modal and verify that the modal is closed and all 
             custom changes made to the Current Commercial Income Discussion are deleted.`);

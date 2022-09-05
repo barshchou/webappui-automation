@@ -43,10 +43,6 @@ class ClientPage extends BasePage {
     chipModified(index?: number) { return cy.get('[ui="indicator"]').eq((index !== 0) ? index : 0); }
 
     get addNewClient() { return cy.xpath("//*[@data-qa='callout-btn']//child::*[@target='_self']"); }
-
-    commentaryText(commentaryTitle: string) { 
-        return cy.xpath(`//h6[.='${commentaryTitle}']//following::div[@data-slate-editor][1]`); 
-    }
 }
 
 export default new ClientPage();

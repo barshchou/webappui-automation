@@ -17,10 +17,10 @@ const chipsOptions: BoweryReports.ChipsCreationOptions = {
     buildingName,
 };
 
-const chipNames = [ 
-    "Interest Appraised As Is Market Value Selection", 
-    "Interest Appraised As Stabilized selection",
-    "Interest Appraised" 
+const chipNames = [
+    "Interest Appraised As Is Market Value Selection",
+    "Interest Appraised As Stabilized Selection",
+    "Interest Appraised"
 ];
 
 export default {
