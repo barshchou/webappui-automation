@@ -4,4 +4,5 @@ import Enums from "../../../../../enums/enums";
 export default {
     reportData: ReportDataCreator.getReportData("2200016060", {}, true),
     neighborhood: "James Dunne",
+    area: "Kings County"
 };
