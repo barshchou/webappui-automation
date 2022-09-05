@@ -1,6 +1,5 @@
-import { CompPropertiesPathsInDatabase } from './../enums/enumKeys.enum.d';
 /* eslint-disable @typescript-eslint/no-namespace */
-
+import * as KeyInfo from './../enums/enumKeys.enum.d';
 import enums from "../enums/enums";
 
 const { _jobSearch, _propertyInfoEnum, _saleInfoEnum, _addressSearch } = enums.COMPPLEX_ENUM;
@@ -42,13 +41,9 @@ export namespace CompPlex {
     }
 
     export namespace AddressSearch {
-        export type CompPropertyInDB = keyof typeof _addressSearch.compPropertyPathsInDB
-        export type CompSaleStatusInDB = keyof typeof _addressSearch.saleStatusValuesInDB
-        export type CompSaleConditionInDB = keyof typeof _addressSearch.saleConditionValuesInDB
-        export type CompPropertyValuesInDB = Partial<{
-            SaleStatus: AddressSearch.CompSaleStatusInDB, //
-            SaleCondition: AddressSearch.CompSaleConditionInDB
-        }> 
-
+        export type CompPropertyInDB = typeof _addressSearch.
+            compPropertyPathsInDB[KeyInfo.CompPropertiesPathsInDatabase]
+        export type CompSaleStatusInDB =  typeof _addressSearch.saleStatusValuesInDB
+        export type CompSaleConditionInDB = typeof _addressSearch.saleConditionValuesInDB
     }
 }

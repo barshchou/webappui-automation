@@ -8,25 +8,21 @@ import testData from "../../../../fixtures/not_full_reports/sales/find_comps/QA-
 import { _NavigationSection } from '../../../../actions/base';
 import Enums from "../../../../enums/enums";
 
-Cypress.env("report", "ui");
-const compProperty = Enums.COMP_PROPERTIES_PATHS_DB.compPropertyPathsInDB;
-const compStatus = Enums.COMP_PROPERTIES_PATHS_DB.saleStatusValuesInDB.date;
+const compProperty = Enums.COMP_PROPERTIES_PATHS_DB.compPropertyPathsInDB.saleStatus;
+const compStatusContract = Enums.COMP_PROPERTIES_PATHS_DB.saleStatusValuesInDB.inContract;
 
 conditionalDescribe('describe', {
-    tags: [ "@comp_plex_standalone1" ] },  () => {
+    tags: [ "@test" ] },  () => {
     before(() => {
         createReport(testData.reportCreationData);
         salesInterceptions();
     });
 
-    it('it', () => {
-        
+    it('Test body', () => {  
         cy.log('test start');
         _NavigationSection.navigateToFindComps()
             .verifyProgressBarNotExist();
         Sales.FindComps.AddressSearch.openAddressSearchTab()
-            .addCompByParameter(2, "saleStatus", "transaction");
-         
-
+            .addCompByParameter(0, compProperty, compStatusContract);
     });
 });

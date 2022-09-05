@@ -7,7 +7,7 @@ import { CompPlex } from "../types/compplex.type";
  * the array (max = 10) of comps with necessary property (@param filterPath) value (@param filterValue)
  */
 export  function  getDataFromDb (filterPath: CompPlex.AddressSearch.CompPropertyInDB, 
-    filterValue: CompPlex.AddressSearch.CompPropertyValuesInDB)  {
+    filterValue: string)  {
     //  Connection URL
     const url =  determinePassedEnv().passedEnv; 
     cy.log(url);
