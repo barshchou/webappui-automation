@@ -48,11 +48,11 @@ class ProFormaPage extends BasePage {
     }
 
     getCategoryElementByType(categoryName: string, colId: string) {
-        return cy.get(`[row-id^='${uppercaseFirstLetterEachWord(categoryName)}'] [role=gridcell][col-id=${colId}]`);
+        return cy.get(`[row-id^='${categoryName}'] [role=gridcell][col-id=${colId}]`);
     }
 
     getCustomCategoryIncomeCell(categoryName: string) {
-        return cy.get(`[row-id^='${uppercaseFirstLetterEachWord(categoryName)}'] div`);
+        return cy.get(`[row-id^='${categoryName}'] div`);
     }
 }
 

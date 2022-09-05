@@ -96,8 +96,8 @@ class ProFormaActions extends BaseActionsExt<typeof proFormaPage> {
     }
 
     verifyCustomCategoryName(categoryName: string): ProFormaActions {
-        let textToBe = uppercaseFirstLetterEachWord(categoryName).toString();
-        proFormaPage.getCustomCategoryIncomeCell(categoryName).first().invoke('text').should('deep.include', textToBe);
+        proFormaPage.getCustomCategoryIncomeCell(categoryName).first().invoke('text')
+            .should('deep.include', categoryName);
         return this;
     }
 
