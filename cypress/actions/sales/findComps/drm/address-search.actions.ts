@@ -4,6 +4,8 @@ import { Alias } from '../../../../utils/alias.utils';
 import { getDataFromDb } from "../../../../../cypress/db/index";
 import mapKeysUtils from "../../../../utils/mapKeys.utils";
 import { CompPlex } from "../../../../types/compplex.type";
+import { aliasQuery } from "../../../../utils/graphql.utils";
+import {  gqlOperationNames } from "../../../../utils/alias.utils";
 
 class AddressSearchActions {
     Page: typeof findCompsPage;
@@ -42,17 +44,22 @@ class AddressSearchActions {
      * Action adds a comp with certain address (@param address) by its id (@param compId) 
      * from the list of comps on address search modal
      */
+    
     addCompViaAddressSearchById(address: string, compId: string) {
+        cy.intercept('POST', '/graphql', req => {
+            aliasQuery(req, gqlOperationNames.searchTransactionsByAddresses);
+        }).as(Alias.gql.SearchTransactionsByAddresses);
         this.enterAddressToCompAddress(address)
             .clickSearchCompAddressButton();
-        //We will compare comp id's with element attr in future
-        cy.wait(`@${Alias.gql.SearchTransactionsByAddresses}`, { timeout:10000 }).then(({ response }) => {
+        //We should compare comp's id with element attr in future, not with id in response 
+        cy.wait(`@${Alias.gql.SearchTransactionsByAddresses}`, { timeout:30000 }).then(({ response }) => {
             expect(response.statusCode).equal(200);
             let compsArrayList = response.body.data.searchTransactionsByAddresses;
             let focusCompIndex = compsArrayList.findIndex(i => i.id === compId);
             cy.log(compsArrayList, focusCompIndex);
+            expect(focusCompIndex).to.be.above(-1);
             findCompsPage.loadingModalSpinner.should('not.exist');
-            this.Page.selectCompButton(focusCompIndex).click();
+            this.Page.selectCompButton(focusCompIndex).click();  
         });
         return this;
     }
