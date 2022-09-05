@@ -48,7 +48,7 @@ class AddressSearchActions {
     addCompViaAddressSearchById(address: string, compId: string) {
         cy.intercept('POST', '/graphql', req => {
             aliasQuery(req, gqlOperationNames.searchTransactionsByAddresses);
-        }).as(Alias.gql.SearchTransactionsByAddresses);
+        });
         this.enterAddressToCompAddress(address)
             .clickSearchCompAddressButton();
         //We should compare comp's id with element attr in future, not with id in response 
