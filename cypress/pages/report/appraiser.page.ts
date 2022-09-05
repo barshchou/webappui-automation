@@ -30,7 +30,7 @@ class AppraiserPage extends BasePage {
     }
 
     get certificationInspectionText() {
-        return cy.get("[data-qa='certificationInspection.commentary-generated-text']");
+        return cy.xpath("//*[h6[.='Certification Inspection']]//following::div[@data-slate-editor][1]");
     }
 
     getAllNamesWithCheckSignReportCheckboxes(isChecked = true) { 
