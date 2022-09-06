@@ -4,6 +4,7 @@ import NavigationSection from "../../../../actions/base/navigationSection.action
 import { Report, PreviewEdit, Base } from "../../../../actions";
 import { replaceEntersWithSpaces } from "../../../../../utils/string.utils";
 
+// TODO: Test fails. Recheck after bug fix. Letter of transmittal doesn't update.
 describe("Verify the Appraiser Commentary field", 
     { tags: [ "@report", "@client" ] }, () => {
         beforeEach("Login, create report", () => {
@@ -12,7 +13,8 @@ describe("Verify the Appraiser Commentary field",
 
         it("Test body", () => {
             NavigationSection.navigateToClientPage();
-            Report._Client.enterAppraiserCommentary(testData.textToType);
+            Report._Client
+                .enterFormCommentTextBox(testData.textBoxName, testData.textToType, true, { position: "center" });
             Base._NavigationSection.navigateToLetterOfTransmittal();
             PreviewEdit._LetterOfTransmittal.verifyPreviewButtonSelected();
             cy.contains(replaceEntersWithSpaces(testData.textToType)).should("exist");
