@@ -2,7 +2,7 @@ import ReportDataCreator from "../../../data_creator/reportData.creator";
 
 export default {
     reportCreationData: ReportDataCreator.getReportData("4626"),
-    warningMessage: "Add new clients on the Organization Settings page.",
+    alertMessage: "Add new clients on the Organization Settings page.",
     textToType: "=F",
     verifyListValue: "Foreclosure Sale",
     verifyAreaValue: "The above transaction reflects a foreclosure sale of the property. Typically in a " + 
