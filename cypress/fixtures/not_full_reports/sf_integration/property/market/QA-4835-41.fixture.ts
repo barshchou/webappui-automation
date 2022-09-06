@@ -42,6 +42,14 @@ const reportFixtures = [
         market: "OH-Springfield",
         submarket: ""
     },
+    {
+        specName: "[QA-4841]",
+        reportData: ReportDataCreator.getReportData(
+            Enums.MARKET_RESEARCH_TYPES.withEmptyMarketAndSubmarket, {}, true),
+        marketAnalysisUses: Enums.MARKET_ANALYSIS_USES.multifamily,
+        market: "",
+        submarket: ""
+    }
 ];
 
 export default {
