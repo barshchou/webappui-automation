@@ -15,7 +15,8 @@ const pagesTextboxNames = {
     letterOfTransmittalPurpose: "Letter of Transmittal Purpose",
     locationDescriptionExport: "Location Description Export",
     siteDetails: "Site Details",
-    asIsBuildingDescription: "As Is Building Description"
+    asIsBuildingDescription: "As Is Building Description",
+    propertyHistoricalInformation: "Property Historical Information"
 
 } as const;
 

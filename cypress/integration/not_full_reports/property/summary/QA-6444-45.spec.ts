@@ -4,7 +4,7 @@ import { _NavigationSection } from "../../../../actions/base";
 import { Property } from "../../../../actions";
 import launchDarklyApi from "../../../../api/launchDarkly.api";
 
-describe("Edit Data button in Site Details section redirects to Data Collection>Subject Property Data>Site Details",
+describe("Edit Data button and redirects to Data Collection>Subject Property Data",
     { tags: [ "@property", "@market" ] }, () => {
     
         before("Login, create report", () => {
@@ -24,8 +24,7 @@ describe("Edit Data button in Site Details section redirects to Data Collection>
                 Property._Summary.clickEditDataBySectionName(section.sectionName);
                 _NavigationSection.submitSaveChangesModal();
     
-                cy.stepInfo(`3. Verify user redirects to Data Collection > Subject Property Data 
-                    > Site Details section`);
+                cy.stepInfo(`3. Verify user redirects to ${section.route}`);
                 _NavigationSection.waitForUrl(section.route);
             });
         });
