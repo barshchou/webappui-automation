@@ -6,7 +6,7 @@ import { CompPlex } from "../types/compplex.type";
  * Function determines url and name of comp-plex database, then  connects to database and retrieve 
  * the array (max = 10) of comps with necessary property (@param filterPath) value (@param filterValue)
  */
-export function  getDataFromDb (filterPath: CompPlex.AddressSearch.CompPropertyInDB, 
+export  function  getDataFromDb (filterPath: CompPlex.AddressSearch.CompPropertyInDB, 
     filterValue: string)  {
     //  Connection URL
     const url =  determinePassedEnv().passedEnv; 
@@ -16,13 +16,14 @@ export function  getDataFromDb (filterPath: CompPlex.AddressSearch.CompPropertyI
     const dbName = determinePassedEnv().passedDbName;
     cy.log(dbName);
 
-    cy.task('retrieveDataFromDb', { dbUrl: determinePassedEnv().passedEnv, dbName: determinePassedEnv().passedDbName, 
+    cy.task('retrieveDataFromDb', { dbUrl: url, dbName: dbName, 
         filterPath: filterPath, filterValue: filterValue }).then(data => {
         cy.log(<string>data);
         cy._mapSet(mapKeysUtils.arrayOfCompsFromDB, data);
     });
     return getDataFromDb;
 }
+
 
 /**
  * Function connects to Comp-plex database and retrieve the array (max = 10) of comps with 
