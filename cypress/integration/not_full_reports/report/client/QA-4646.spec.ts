@@ -4,7 +4,7 @@ import NavigationSection from "../../../../actions/base/navigationSection.action
 import { Report, PreviewEdit, Base } from "../../../../actions";
 import { replaceEntersWithSpaces } from "../../../../../utils/string.utils";
 
-// TODO: Test fails. Recheck after bug fix. Letter of transmittal doesn't update.
+// TODO: Test fails. Recheck after bug fix https://bowery.atlassian.net/browse/WEB-6821
 describe("Verify the Appraiser Commentary field", 
     { tags: [ "@report", "@client" ] }, () => {
         beforeEach("Login, create report", () => {
