@@ -12,18 +12,17 @@ const compStatusContract = Enums.COMP_PROPERTIES_PATHS_DB.saleStatusValuesInDB.i
 const compStatusDate = Enums.COMP_PROPERTIES_PATHS_DB.saleStatusValuesInDB.date;
 
 conditionalDescribe('describe', {
-    tags: [ "@test" ] },  () => {
+    tags: [ "@comp_plex_standalone" ] },  () => {
     before(() => {
         createReport(testData.reportCreationData);
+        _NavigationSection.navigateToFindComps()
+            .verifyProgressBarNotExist();
     });
 
     it('Test body', () => {  
         cy.log('test start');
-        _NavigationSection.navigateToFindComps()
-            .verifyProgressBarNotExist();
         Sales.FindComps.AddressSearch.openAddressSearchTab()
             .addCompByParameter(2, compProperty, compStatusContract)
             .addCompByParameter(1, compProperty, compStatusDate);
-            
     });
 });
