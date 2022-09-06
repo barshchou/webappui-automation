@@ -34,12 +34,11 @@ describe("Potential Real Estate Tax Reimbursement",
                 Income._CommercialManager.InPlaceRentRoll.enterRentPerSFAnnuallyByRowNumber(rent, index);
             });
         
-            cy.stepInfo(`3. Go to Income → Commercial → In-Place Rent Roll and fill 
+            cy.stepInfo(`4. Go to Income → Commercial → In-Place Rent Roll and fill 
             in all necessary values to the table`); 
-            _NavigationSection.clickCommercialReimbursementSummaryButton()
-                .submitSaveChangesModal();
+            _NavigationSection.navigateToCommercialReimbursementSummary();
         
-            cy.stepInfo(`4. Go to Income → Reimbursement Summary and add Real Estate Taxes 
+            cy.stepInfo(`5. Go to Income → Reimbursement Summary and add Real Estate Taxes 
             Reimbursement for commercial units`); 
             Income._CommercialManager.ReimbursementSummary.addNewCommercialReimbursement(
                 testData.expenseType, testData.expenseTypeCellName, 
@@ -77,7 +76,7 @@ describe("Potential Real Estate Tax Reimbursement",
         });
 
         it("[QA-4503]", () => {
-            cy.stepInfo(`5. Verify that Pro Forma table contains Taxes Reimbursement Per Unit value`);
+            cy.stepInfo(`5.1. Verify that Pro Forma table contains Taxes Reimbursement Per Unit value`);
             Income._ProFormaActions.verifyCategoryPerUnitTotal(
                 `$${numberWithCommas(Math.round(testData.reimbursementPerUnit))}`, 
                 proFormaTypes.potentialRealEstateTaxesReimbursement);
