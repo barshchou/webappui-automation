@@ -188,7 +188,7 @@ class SummaryActions extends BaseActionsExt<typeof summaryPage> {
         return this;
     }
 
-    clickEditDataBySectionName(name): SummaryActions {
+    clickEditDataBySectionName(name: string): SummaryActions {
         summaryPage.getEditIconBySectionName(name).click();
         return this;
     }
