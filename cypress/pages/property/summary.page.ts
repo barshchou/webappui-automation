@@ -66,9 +66,6 @@ class PropertySummaryPage extends BasePage {
 
     get basisSquareFootAnalysisArea() { return cy.get('[name="basisForSFAnalysisValue"]'); }
 
-    getEditIconBySectionName(name: string) { 
-        return cy.xpath(`//*[contains(text(), '${name}')]/following::*[@data-testid='LaunchIcon'][1]`); 
-    }
 }
 
 export default new PropertySummaryPage();
