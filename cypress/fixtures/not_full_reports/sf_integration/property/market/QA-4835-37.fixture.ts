@@ -17,6 +17,14 @@ const reportFixtures = [
         marketAnalysisUses: Enums.MARKET_ANALYSIS_USES.retail,
         market: "NY-New York",
         submarket: "NY-South Brooklyn"
+    },
+    {
+        specName: "[QA-4837]",
+        reportData: ReportDataCreator.getReportData(
+            Enums.MARKET_RESEARCH_TYPES.withFullMarketAndSubmarket, {}, true),
+        marketAnalysisUses: Enums.MARKET_ANALYSIS_USES.retail,
+        market: "NY-New York",
+        submarket: "NY-South Brooklyn"
     }
 ];
 

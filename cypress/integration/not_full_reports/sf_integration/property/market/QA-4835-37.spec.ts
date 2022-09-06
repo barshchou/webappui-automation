@@ -1,4 +1,4 @@
-import testData from "../../../../../fixtures/not_full_reports/sf_integration/property/market/QA-4835-36.fixture";
+import testData from "../../../../../fixtures/not_full_reports/sf_integration/property/market/QA-4835-37.fixture";
 import { _NavigationSection } from "../../../../../actions/base";
 import { Property } from "../../../../../actions";
 import { createReport } from "../../../../../actions/base/baseTest.actions";
