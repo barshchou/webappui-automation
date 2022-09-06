@@ -22,18 +22,18 @@ const reportFixtures = [
         specName: "[QA-4837]",
         reportData: ReportDataCreator.getReportData(
             Enums.MARKET_RESEARCH_TYPES.withFullMarketAndSubmarket, {}, true),
-        marketAnalysisUses: Enums.MARKET_ANALYSIS_USES.retail,
+        marketAnalysisUses: Enums.MARKET_ANALYSIS_USES.office,
         market: "NY-New York",
         submarket: "NY-South Brooklyn"
     },
     {
-        specName: "[QA-4838]",
+        specName: "[QA-4838-39]",
         reportData: ReportDataCreator.getReportData(
             Enums.MARKET_RESEARCH_TYPES.withFullMarketAndSubmarket, {}, true),
-        marketAnalysisUses: Enums.MARKET_ANALYSIS_USES.retail,
+        marketAnalysisUses: Enums.MARKET_ANALYSIS_USES.industrial,
         market: "NY-New York",
         submarket: "NY-South Brooklyn"
-    }
+    },
 ];
 
 export default {
