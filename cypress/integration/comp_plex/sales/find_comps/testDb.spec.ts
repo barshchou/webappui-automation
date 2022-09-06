@@ -16,7 +16,6 @@ conditionalDescribe('describe', {
     tags: [ "@test" ] },  () => {
     before(() => {
         createReport(testData.reportCreationData);
-        salesInterceptions();
     });
 
     it('Test body', () => {  
