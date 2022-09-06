@@ -1,35 +1,9 @@
 import clientPage from "../../pages/report/client.page";
 import { replaceEntersWithLineBreak } from "../../../utils/string.utils";
 import BaseActionsExt from "../base/base.actions.ext";
+import Enums from "../../enums/enums";
 
 class ClientActions extends BaseActionsExt<typeof clientPage> {
-    enterIntendedUser(textToType: string = null, edit = true, save = true, revert = false) {
-        if (edit === true) { clientPage.formEditBtn().click(); }
-        clientPage.intendedUserTextBox.invoke("text")
-            .then(text => {
-                clientPage.intendedUserTextBox.focus().type(textToType ?? text);
-            });
-        if (save === true) { clientPage.formSaveBtn().click(); }
-        if (revert === true) {
-            clientPage.formRevertToOriginalBtn().click();
-            clientPage.formYesRevertBtn.click();
-        }
-        return this;
-    }
-
-    enterIdentificationOfTheClient(textToType: string = null, edit = true, save = true, revert = false) {
-        if (edit === true) { clientPage.formEditBtn().click(); }
-        clientPage.identificationOfClientTextBox.invoke("text").then(text => {
-            clientPage.identificationOfClientTextBox.focus().type(textToType ?? text);
-        });
-        if (save === true) { clientPage.formSaveBtn().click(); }
-        if (revert === true) {
-            clientPage.formRevertToOriginalBtn().click();
-            clientPage.formYesRevertBtn.click();
-        }
-        return this;
-    }
-
     verifyInputChangesToBeUnsaved(clientFileNumber: string): ClientActions {
         clientPage.clientFileNumberField.should("have.value", clientFileNumber);
         return this;
@@ -95,12 +69,12 @@ class ClientActions extends BaseActionsExt<typeof clientPage> {
     } 
 
     enterIntendedUserTextBox(textToType: string): ClientActions {
-        clientPage.intendedUserTextBox.type(textToType);
+        clientPage.formCommentTextBox(Enums.PAGES_TEXTBOX_NAMES.intendedUser).type(textToType);
         return this;
     }
 
     enterIdentificationOfTheClientTextBox(textToType: string): ClientActions {
-        clientPage.identificationOfClientTextBox.type(textToType);
+        clientPage.formCommentTextBox(Enums.PAGES_TEXTBOX_NAMES.identificationOfTheClient).type(textToType);
         return this;
     }
 

@@ -20,5 +20,7 @@ export default {
     buildingName,
     identificationOfTheClientSection: Enums.EXPORT_TITLES.identificationOfTheClient,
     intendedUseSection: Enums.EXPORT_TITLES.intendedUseAndUser,
+    intendedUser: Enums.PAGES_TEXTBOX_NAMES.intendedUser,
+    identificationOfTheClient: Enums.PAGES_TEXTBOX_NAMES.identificationOfTheClient,
     chipNames
 };

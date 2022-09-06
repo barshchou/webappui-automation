@@ -24,18 +24,19 @@ describe(`Verify the "Linked" chips dropdown in the new narrative component for 
                     options 'Gross Building Area', 'Building Name', 'Property Type', 'Residential Unit Count', 
                     'Commercial Unit Count', 'Street Address', 'Street Name', 'Site Area', 'Year Built', 'Block', 
                     'Lot', 'Concluded Cap Rate', 'Zones', 'Condition'.`);
-        Report._Client.activateTextAreaInput(Report._Client.Page.intendedUserTextBox);
+        Report._Client.activateTextAreaInput(
+            Report._Client.Page.formCommentTextBox(testData.intendedUserCommentaryTitle));
         testData.chips.forEach(chip => {
-            Report._Client.enterIntendedUser(`=${chip.typeSuggestValue}`, false, false, false)
-                .clickNarrativeSuggestions(chip.suggestionName);
-            Report._Client.verifyFormCommentTextBoxText(testData.intendedUserCommentaryTitle, chip.verifySuggest);
+            Report._Client.enterIntendedUserTextBox(`=${chip.typeSuggestValue}`)
+                .clickNarrativeSuggestions(chip.suggestionName)
+                .verifyFormCommentTextBoxText(testData.intendedUserCommentaryTitle, chip.verifySuggest);
         });
-        Report._Client.activateTextAreaInput(Report._Client.Page.identificationOfClientTextBox);
+        Report._Client.activateTextAreaInput(
+            Report._Client.Page.formCommentTextBox(testData.identificationOfTheClientCommentaryTitle));
         testData.chips.forEach(chip => {
-            Report._Client.enterIdentificationOfTheClient(`=${chip.typeSuggestValue}`, false, false, false)
-                .clickNarrativeSuggestions(chip.suggestionName, 1);
-            Report._Client.verifyFormCommentTextBoxText(testData.identificationOfTheClientCommentaryTitle,
-                chip.verifySuggest);
+            Report._Client.enterIdentificationOfTheClientTextBox(`=${chip.typeSuggestValue}`)
+                .clickNarrativeSuggestions(chip.suggestionName, 1)
+                .verifyFormCommentTextBoxText(testData.identificationOfTheClientCommentaryTitle, chip.verifySuggest);
         });
         Report._Client.inactivateTextAreaInput();
 

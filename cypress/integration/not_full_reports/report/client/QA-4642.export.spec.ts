@@ -2,7 +2,6 @@ import { Property, Report, ReviewExport } from '../../../../actions';
 import testData from "../../../../fixtures/not_full_reports/report/client/QA-4642.fixture";
 import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from '../../../../actions/base';
-import Enums from '../../../../enums/enums';
 
 describe("Verify the Client Guidelines Discussion on the page",
     { tags: [ "@report", "@client", "@check_export" ] }, () => {
@@ -19,19 +18,20 @@ describe("Verify the Client Guidelines Discussion on the page",
                         'Current Commercial Unit Count', 'As Complete Commercial Unit Count', 
                         'Street Address', 'Street Name', 'Site Area', 'Year Built', 'Block', 
                         'Lot', 'Concluded Cap Rate', 'Zones', 'CurrentCondition', 'As Stabilized Condition'`);
-            Report._Client.activateTextAreaInput(Report._Client.Page.intendedUserTextBox);
+            Report._Client.activateTextAreaInput(Report._Client.Page.formCommentTextBox(testData.intendedUser));
             testData.chips.forEach(chip => {
                 Report._Client
                     .enterIntendedUserTextBox(`=${chip.typeSuggestValue}`)
                     .clickNarrativeSuggestions(chip.suggestionName)
-                    .verifyFormCommentTextBoxText(Enums.PAGES_TEXTBOX_NAMES.intendedUser, chip.verifySuggest);
+                    .verifyFormCommentTextBoxText(testData.intendedUser, chip.verifySuggest);
             });
-            Report._Client.activateTextAreaInput(Report._Client.Page.identificationOfClientTextBox);
+            Report._Client.activateTextAreaInput(Report._Client.Page
+                .formCommentTextBox(testData.identificationOfTheClient));
             testData.chips.forEach(chip => {
                 Report._Client
                     .enterIdentificationOfTheClientTextBox(`=${chip.typeSuggestValue}`)
                     .clickNarrativeSuggestions(chip.suggestionName, 1)
-                    .verifyFormCommentTextBoxText(Enums.PAGES_TEXTBOX_NAMES.identificationOfTheClient,
+                    .verifyFormCommentTextBoxText(testData.identificationOfTheClient,
                         chip.verifySuggest);
             });
             Report._Client.inactivateTextAreaInput();

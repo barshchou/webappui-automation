@@ -31,14 +31,6 @@ class ClientPage extends BasePage {
     get guidelinesCommentaryInput() { return cy.get("[name='clientGuidelinesDiscussion.commentary']"); }
 
     get revertToGeneratedButton() { return cy.get("[data-qa=generated-commentary-revert-btn]"); }
-
-    get intendedUserTextBox() {
-        return cy.xpath("//*[.='Intended User']//following::*[@data-slate-editor][1]");
-    }
-
-    get identificationOfClientTextBox() {
-        return cy.xpath("//*[.='Identification of the Client']//following::*[@data-slate-editor][1]");
-    }
     
     get narrativeSuggestionsList() { return cy.get("[data-qa='narrative-suggestions-list'] > ul"); }
 

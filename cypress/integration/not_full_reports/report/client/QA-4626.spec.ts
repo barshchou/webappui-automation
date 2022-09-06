@@ -27,8 +27,9 @@ describe("Verify the display of the Client page.", { tags:[ "@report", "@client"
         Report._Client.Page.clientNameField.should("be.visible");
         Report._Client.Page.clientFileNumberField.should("be.visible");
         Report._Client.Page.nycbApplicationNumber.should("be.visible");
-        Report._Client.Page.intendedUserTextBox.should("be.visible");
-        Report._Client.Page.identificationOfClientTextBox.should("be.visible");
+        Report._Client.Page.formCommentTextBox(Enums.PAGES_TEXTBOX_NAMES.intendedUser).should("be.visible");
+        Report._Client.Page.formCommentTextBox(Enums.PAGES_TEXTBOX_NAMES.identificationOfTheClient)
+            .should("be.visible");
         Report._Client.Page.formCommentTextBox(Enums.PAGES_TEXTBOX_NAMES.clientGuidelinesDiscussion)
             .should("be.visible");
     });
