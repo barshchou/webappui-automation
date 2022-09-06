@@ -4,6 +4,7 @@ import Income from "../../../../actions/income/income.manager";
 import { createReport } from "../../../../actions/base/baseTest.actions";
 import Enums from "../../../../enums/enums";
 
+// TODO: Test fails due to bug: https://bowery.atlassian.net/browse/WEB-6818
 describe(`Verify that Generated Commentary for Total Operating Expenses is updated on the Expense Forecast page`, 
     { tags: [ "@income", "@expense_forecast", "@fix" ] }, () => {
 
